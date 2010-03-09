@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-18 04:24+0000\n"
-"Last-Translator: Proezas <Unknown>\n"
+"POT-Creation-Date: 2010-03-04 10:36+0000\n"
+"PO-Revision-Date: 2010-03-08 12:56+0000\n"
+"Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-19 04:34+0000\n"
+"X-Launchpad-Export-Date: 2010-03-09 04:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:24
@@ -517,6 +517,8 @@ msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way, than occupying the land of your enemies."
 msgstr ""
+"Outro estranho teste dos Deuses. Para alcançar o outro lado, parece que não "
+"há outro caminho, além de ocupar os territórios de nossos inimigos."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The pass through the mountains"
@@ -527,6 +529,8 @@ msgid ""
 "In this mountainous region two princes have settled. Now they are expanding "
 "their territories unaware of the fact that they are not alone!"
 msgstr ""
+"Nesta montanhosa região, dois príncipes se afixaram. Agora, eles estão "
+"expandindo seus territórios desavisados do fato que eles não estão sozinhos!"
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
@@ -556,6 +560,7 @@ msgstr "Duas Fronteiras"
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
 msgstr ""
+"Um mapa de batalha multiplayer em uma pequena ilha em formato circular."
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
@@ -570,7 +575,7 @@ msgstr ""
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
-msgstr ""
+msgstr "Vale dos Bisontes"
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -579,3 +584,7 @@ msgid ""
 "offers enough space for a peaceful life. But can you tribe live in peace "
 "with your neighbours?"
 msgstr ""
+"É como se este vale mágico fosse habitado por bisontes desde o início dos "
+"tempos. Quando sua tribo veio para este lugar, você estava certo que ele "
+"oferecia espaço suficiente para uma vida pacífica. Mas pode sua tribo viver "
+"em paz com seus vizinhos?"

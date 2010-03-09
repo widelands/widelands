@@ -1,23 +1,21 @@
-# Widelands po/it_IT/tribes/barbarians.po
-# Copyright (C) 2005-2009 Widelands Development Team
-# Gabriel Rota <gabriel.rota@gmail.com>, 2009.
+# Japanese translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4530\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-04 10:36+0000\n"
-"PO-Revision-Date: 2010-03-08 15:46+0000\n"
-"Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
-"Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2010-03-08 19:19+0000\n"
+"Last-Translator: alms21 <alms21@gmail.com>\n"
+"Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-03-09 04:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-"X-Poedit-Country: ITALY\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
@@ -25,24 +23,22 @@ msgid ""
 "are equipped with this basic weapon, but also the lumberjack is using the "
 "same model."
 msgstr ""
-"L'ascia per i barbari è un'arma base ed uno strumento. Tutti i giovani "
-"soldati l'hanno come equipaggiamento, ma anche il boscaiolo la usa."
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/metalworks/conf:33
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr "Produce ascia"
+msgstr ""
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce sharpaxe"
-msgstr "Produce ascia affilata"
+msgstr ""
 
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce broadaxe"
-msgstr "Produce ascia larga"
+msgstr ""
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/bakery/conf:21
@@ -81,46 +77,40 @@ msgstr "Produce ascia larga"
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
-msgstr "Lavoro"
+msgstr "仕事"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Cuoce al forno pane per i lavoratori."
+msgstr ""
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "in the metal works like all tools."
 msgstr ""
-"La pala è lo strumento del fornaio, ogni fornaio ne deve avere una. È "
-"prodotta dal fabbro, come ogni altro strumento."
 
 #: ../../tribes/barbarians/battlearena/conf:25
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
-msgstr "Dormire"
+msgstr "眠る"
 
 #: ../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
-msgstr "Avanza la ritirata del soldato 0"
+msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:27
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Avanza la ritirata del soldato 0 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/barbarians/battlearena/conf:28
 msgid "Upgrade soldier evade 1"
-msgstr "Avanza la ritirata del soldato 1"
+msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:29
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Avanza la ritirata del soldato 1 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -128,57 +118,50 @@ msgid ""
 "produce. Only trained warriors are able to yield such a weapon. It is "
 "produce in the axe factory."
 msgstr ""
-"Questa è la seconda arma più pericolosa che i barbari producono. Solo "
-"guerrieri ben addestrati la maneggiano. È prodotta nella fabbrica di asce."
 
 #: ../../tribes/barbarians/beer/conf:1
 msgid ""
 "Young warriors need some encouragement. This drink makes a man fearless and "
 "strong."
 msgstr ""
-"I giovani soldati hanno bisogno di incoraggiamento. Questa birra li aiuterà."
 
 #: ../../tribes/barbarians/big_inn/conf:24
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr "Produce una razione"
+msgstr ""
 
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr "Produce spuntino"
+msgstr ""
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr "Produce un pasto"
+msgstr ""
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr "Produce armi per i soldati e strumenti per i lavoratori."
+msgstr ""
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
 "Fire-hardened wood, hard as iron and can not burn, used for military "
 "buildings."
 msgstr ""
-"Il legno indurito al fuoco, duro come il ferro e incomustibile, è usato per "
-"gli edifici militari."
 
 #: ../../tribes/barbarians/brewer/conf:1
 #: ../../tribes/barbarians/master-brewer/conf:1
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
-msgstr "Produce le migliori birre per guerrieri forti e felici."
+msgstr ""
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
 "Warriors with a fundamental fighting knowledge gain a broad axe. It is "
 "produced in the axe factory."
 msgstr ""
-"Guerrieri con una conoscenza fondamentale del combattimento ottengono un "
-"ascia larga. Viene prodotta nella ascieria."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -186,489 +169,482 @@ msgid ""
 "damage, but it's durability is not the best. Only skilled warriors can use "
 "this. Produced in the axe factory."
 msgstr ""
-"L'ascia di bronzo è considerata difficile da maneggiare: produce molti danni "
-"ma non è molto robusta. Solo guerrieri abili la possono maneggiare.  Viene "
-"prodotta nella ascieria."
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr "Lavori nei cantieri per creare un nuovo edificio."
+msgstr ""
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr "Brucia il carbone."
+msgstr "石炭を燃える。"
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr "Porta gli oggetti lungo le strade."
+msgstr ""
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr "Alleva i forti buoi che aiutano nel trasporto delle merci."
+msgstr ""
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
 msgstr ""
-"Lavora in profondità nelle miniere per ottenere carbone, ferro od oro."
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-msgstr "I tessuti sono usati per le navi barbare. Sono prodotti con il lino."
+msgstr ""
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
 "The fires of the barbarians are usually fed with wood, but sometimes, wood "
 "just does not burn hot enough. Then, coal is used."
 msgstr ""
-"I fuochi dei barbari sono normalmente alimentato dal legno, ma qualche "
-"volta, il legno soltanto non brucia caldo abbastanza. In questi casi, viene "
-"usato il carbone."
 
 #: ../../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
-msgstr "Gruppo di Sviluppo di Widelands"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:19
 msgid "Barbarians"
-msgstr "Barbari"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:20
 msgid "The mighty tribes of the east-lands!"
-msgstr "Le potenti tribù delle terre dell'est!"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:39
 msgid "Ashes"
-msgstr "Ceneri"
+msgstr "灰"
 
 #: ../../tribes/barbarians/conf:40
 msgid "Destroyed building"
-msgstr "Distruggi l'edificio"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:41
 msgid "Field medium"
-msgstr "Campo medio"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:42
 msgid "Field small"
-msgstr "Campo piccolo"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field tiny"
-msgstr "Campo minuscolo"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field ripe"
-msgstr "Campo maturo"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:45
 msgid "Field harvested"
-msgstr "Campo di granoturco"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:46
 msgid "Flax medium"
-msgstr "Lino medio"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:47
 msgid "Flax small"
-msgstr "Lino piccolo"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:48
 msgid "Flax tiny"
-msgstr "Lino minuscolo"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:49
 msgid "Flax ripe"
-msgstr "Lino maturo"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:50
 msgid "Reed medium"
-msgstr "Canne medie"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:51
 msgid "Reed small"
-msgstr "Canne piccole"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:52
 msgid "Reed tiny"
-msgstr "Canne minuscole"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:53
 msgid "Reed ripe"
-msgstr "Canne mature"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:54
 msgid "Resource indicator coal little"
-msgstr "L'indicatore di risorse segna poco carbone"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator coal much"
-msgstr "L'indicatore di risorse segna tanto carbone"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator gold little"
-msgstr "L'indicatore di risorse segna poco oro"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator gold much"
-msgstr "L'indicatore di risorse segna tanto oro"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:58
 msgid "Resource indicator granit little"
-msgstr "L'indicatore di risorse segna poco granito"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator granit much"
-msgstr "L'indicatore di risorse segna tanto granito"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator iron little"
-msgstr "L'indicatore di risorse segna poco ferro"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:61
 msgid "Resource indicator iron much"
-msgstr "L'indicatore di risorse segna tanto ferro"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:62
 msgid "Resource indicator no resource"
-msgstr "L'indicatore di risorse segna nessuna risorsa"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:63
 msgid "Resource indicator water"
-msgstr "L'indicatore di risorse segna acqua"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:66
 msgid "Deer"
-msgstr "Cervo"
+msgstr "鹿"
 
 #: ../../tribes/barbarians/conf:67
 msgid "Wildboar"
-msgstr "Cinghiale"
+msgstr "猪"
 
 #: ../../tribes/barbarians/conf:70
 msgid "Axe"
-msgstr "Ascia"
+msgstr "斧"
 
 #: ../../tribes/barbarians/conf:71
 msgid "Peel"
-msgstr "Pala del fornaio"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:72
 msgid "Battle Axe"
-msgstr "Ascia da battaglia"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:73
 msgid "Beer"
-msgstr "Birra"
+msgstr "ビール"
 
 #: ../../tribes/barbarians/conf:74
 msgid "Blackwood"
-msgstr "Legno trattato"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:75
 msgid "Broad Axe"
-msgstr "Ascia larga"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:76
 msgid "Bronze Axe"
-msgstr "Ascia di bronzo"
+msgstr "青銅の斧"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Cloth"
-msgstr "Stoffa"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:78
 msgid "Coal"
-msgstr "Carbone"
+msgstr "石炭"
 
 #: ../../tribes/barbarians/conf:79
 msgid "Fire Tongs"
-msgstr "Molle per il fuoco"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:80
 msgid "Fish"
-msgstr "Pesce"
+msgstr "魚"
 
 #: ../../tribes/barbarians/conf:81
 msgid "Fishing Rod"
-msgstr "Canna da pesca"
+msgstr "釣り竿"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Flax"
-msgstr "Lino"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:83
 msgid "Gold"
-msgstr "Oro"
+msgstr "金"
 
 #: ../../tribes/barbarians/conf:84
 msgid "Goldstone"
-msgstr "Pepita d'oro"
+msgstr "砂金石"
 
 #: ../../tribes/barbarians/conf:85
 msgid "Grout"
-msgstr "Calce"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:86
 msgid "Hammer"
-msgstr "Martello"
+msgstr "ハンマー"
 
 #: ../../tribes/barbarians/conf:87
 msgid "Helmet"
-msgstr "Elmetto"
+msgstr "兜"
 
 #: ../../tribes/barbarians/conf:88
 msgid "Hunting Spear"
-msgstr "Lancia da Caccia"
+msgstr "狩り槍"
 
 #: ../../tribes/barbarians/conf:89
 msgid "Iron"
-msgstr "Ferro"
+msgstr "鉄"
 
 #: ../../tribes/barbarians/conf:90
 msgid "Iron Ore"
-msgstr "Minerale di ferro"
+msgstr "鉄鉱石"
 
 #: ../../tribes/barbarians/conf:91
 msgid "Kitchen Tools"
-msgstr "Strumenti da Cucina"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:92
 msgid "Mask"
-msgstr "Maschera"
+msgstr "マスク"
 
 #: ../../tribes/barbarians/conf:93
 msgid "Meal"
-msgstr "Pasto"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:94
 msgid "Meat"
-msgstr "Carne"
+msgstr "肉"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Pick"
-msgstr "Piccone"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:96
 msgid "Pitta Bread"
-msgstr "Pane azzimo"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:97
 msgid "Ration"
-msgstr "Razione"
+msgstr "定額"
 
 #: ../../tribes/barbarians/conf:98
 msgid "Raw Stone"
-msgstr "Pietra grezza"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:99
 msgid "Scythe"
-msgstr "Falce"
+msgstr "大鎌"
 
 #: ../../tribes/barbarians/conf:100
 msgid "Sharp Axe"
-msgstr "Ascia affilata"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:101
 msgid "Shovel"
-msgstr "Pala"
+msgstr "ショベル"
 
 #: ../../tribes/barbarians/conf:102
 msgid "Snack"
-msgstr "Spuntino"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:103
 msgid "Strong Beer"
-msgstr "Birra forte"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:104
 msgid "Thatch Reed"
-msgstr "Paglia di canne"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:105
 msgid "Trunk"
-msgstr "Tronco"
+msgstr "幹"
 
 #: ../../tribes/barbarians/conf:106
 msgid "War Helmet"
-msgstr "Elmetto da guerra"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:107
 msgid "Warriors Axe"
-msgstr "Ascia dei guerrieri"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:108
 msgid "Water"
-msgstr "Acqua"
+msgstr "水"
 
 #: ../../tribes/barbarians/conf:109
 msgid "Wheat"
-msgstr "Grano"
+msgstr "小麦"
 
 #: ../../tribes/barbarians/conf:112
 msgid "Carrier"
-msgstr "Portatore"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:113
 msgid "Ox"
-msgstr "Bue"
+msgstr "牛"
 
 #: ../../tribes/barbarians/conf:116
 msgid "Soldier"
-msgstr "Soldato"
+msgstr "兵士"
 
 #: ../../tribes/barbarians/conf:119
 msgid "Baker"
-msgstr "Fornaio"
+msgstr "ベーカー"
 
 #: ../../tribes/barbarians/conf:120
 msgid "Master Blacksmith"
-msgstr "Mastro fabbro ferraio"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:121
 msgid "Blacksmith"
-msgstr "Fabbro ferraio"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:122
 msgid "Master Brewer"
-msgstr "Mastro birraio"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:123
 msgid "Brewer"
-msgstr "Birraio"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:124
 msgid "Builder"
-msgstr "Costruttore"
+msgstr "ビルダー"
 
 #: ../../tribes/barbarians/conf:125
 msgid "Burner"
-msgstr "Bruciatore"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:126
 msgid "Master Miner"
-msgstr "Mastro Minatore"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:127
 msgid "Chief Miner"
-msgstr "Capo minatore"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:128
 msgid "Farmer"
-msgstr "Coltivatore"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:129
 msgid "Ferner"
-msgstr "Coltivatore di felci"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:130
 msgid "Fisher"
-msgstr "Pescatore"
+msgstr "百姓"
 
 #: ../../tribes/barbarians/conf:131
 msgid "Gamekeeper"
-msgstr "Guardiacaccia"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:132
 msgid "Geologist"
-msgstr "Geologo"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:133
 msgid "Helmsmith"
-msgstr "Fabbro d'elmi"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:134
 msgid "Hunter"
-msgstr "Cacciatore"
+msgstr "猟人"
 
 #: ../../tribes/barbarians/conf:135
 msgid "Innkeeper"
-msgstr "Locandiere"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:136
 msgid "Lime-Burner"
-msgstr "Operaio alla fornace della calce"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:137
 msgid "Lumberjack"
-msgstr "Taglialegna"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:138
 msgid "Miner"
-msgstr "Minatore"
+msgstr "鉱夫"
 
 #: ../../tribes/barbarians/conf:139
 msgid "Ranger"
-msgstr "Guardia forestale"
+msgstr "特殊部隊"
 
 #: ../../tribes/barbarians/conf:140
 msgid "Smelter"
-msgstr "Fonditore"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:141
 msgid "Stonemason"
-msgstr "Tagliapietre"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:142
 msgid "Trainer"
-msgstr "Istruttore"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:143
 msgid "Weaver"
-msgstr "Tessitore"
+msgstr "機屋"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Scout"
-msgstr "Esploratore"
+msgstr "偵察隊"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
-msgstr "Allevatore di bovini"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:148
 msgid "Construction Site"
-msgstr "Luogo della costruzione"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:151
 msgid "Battle Arena"
-msgstr "Arena di battaglia"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:152
 msgid "Trainingscamp"
-msgstr "Campo di addestramento"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:155
 #: ../../tribes/barbarians/conf:171
 msgid "Barrier"
-msgstr "Fortino"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:156
 msgid "Citadel"
-msgstr "Cittadella"
+msgstr "根城"
 
 #: ../../tribes/barbarians/conf:157
 msgid "Donjon"
-msgstr "Dongione"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:158
 #: ../../tribes/barbarians/conf:173
 msgid "Fortress"
-msgstr "Fortezza"
+msgstr "フォートレス"
 
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:169
 msgid "Sentry"
-msgstr "Guardiola"
+msgstr "哨兵"
 
 #: ../../tribes/barbarians/conf:160
 msgid "Stronghold"
-msgstr "Roccaforte"
+msgstr "牙城"
 
 #: ../../tribes/barbarians/conf:163
 #: ../../tribes/barbarians/conf:172
 msgid "Castle"
-msgstr "Castello"
+msgstr "城"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Guardhall"
@@ -676,281 +652,270 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:165
 msgid "Guardhouse"
-msgstr "Guardiola"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:166
 msgid "High Tower"
-msgstr "Torre alta"
+msgstr "高い塔"
 
 #: ../../tribes/barbarians/conf:167
 msgid "Small Tower"
-msgstr "Torre piccola"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:168
 #: ../../tribes/barbarians/conf:175
 msgid "Tower"
-msgstr "Torre"
+msgstr "タワー"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Barracks"
-msgstr "Caserma"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:174
 msgid "Outpost"
-msgstr "Avamposto"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:178
 #: ../../tribes/barbarians/conf:179
 msgid "Headquarters"
-msgstr "Quartier generale"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:180
 msgid "Warehouse"
-msgstr "Magazzino"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:183
 msgid "War Mill"
-msgstr "Fucina da guerra"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:184
 msgid "Axefactory"
-msgstr "Fabbrica di ascie"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:185
 msgid "Bakery"
-msgstr "Forno"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:186
 msgid "Big Inn"
-msgstr "Grande Locanda"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:187
 msgid "Brewery"
-msgstr "Birreria"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:188
 msgid "Charcoal Burner's House"
-msgstr "Casa del carbonaio"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:189
 msgid "Deeper Coal Mine"
-msgstr "Miniera di carbone molto profonda"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:190
 msgid "Deep Coal Mine"
-msgstr "Miniera di carbone profonda"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:191
 msgid "Coal mine"
-msgstr "Miniera di carbone"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:192
 msgid "Deeper Gold Mine"
-msgstr "Profonda miniera d'oro molto profonda"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:193
 msgid "Deeper Iron Ore Mine"
-msgstr "Miniera di ferro molto profonda"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:194
 msgid "Deep Gold Mine"
-msgstr "Profonda miniera d'oro"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:195
 msgid "Deep Iron Ore Mine"
-msgstr "Miniera di ferro profonda"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:196
 msgid "Farm"
-msgstr "Fattoria"
+msgstr "農場"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Fernery"
-msgstr "Serra per le felci"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:198
 msgid "Fisher's Hut"
-msgstr "Capanna del pescatore"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:199
 msgid "Gamekeeper's Hut"
-msgstr "Capanna del guardiacaccia"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:200
 msgid "Gold Mine"
-msgstr "Miniera d'oro"
+msgstr "金鉱"
 
 #: ../../tribes/barbarians/conf:201
 msgid "Granite Mine"
-msgstr "Miniera di granito"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:202
 msgid "Wood Hardener"
-msgstr "Trattamento del legno"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:203
 msgid "Helmsmithy"
-msgstr "Fucina di elmi"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:204
 msgid "Hunter's Hut"
-msgstr "Capanna del cacciatore"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:205
 msgid "Inn"
-msgstr "Locanda"
+msgstr "旅館"
 
 #: ../../tribes/barbarians/conf:206
 msgid "Lime Kiln"
-msgstr "Fornace della calce"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:207
 msgid "Lumberjack's Hut"
-msgstr "Capanna del taglialegna"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:208
 msgid "Metalwork Shop"
-msgstr "Negozio di carpenteria metallica"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:209
 msgid "Micro Brewery"
-msgstr "Mircobirreria"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:210
 msgid "Iron Ore Mine"
-msgstr "Miniera di ferro"
+msgstr "鉄鉱石鉱山"
 
 #: ../../tribes/barbarians/conf:211
 msgid "Quarry"
-msgstr "Cava"
+msgstr "採石場"
 
 #: ../../tribes/barbarians/conf:212
 msgid "Ranger's Hut"
-msgstr "Capanna della guardia forestale"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:213
 msgid "Smelting Works"
-msgstr "Fonderia"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:214
 msgid "Tavern"
-msgstr "Taverna"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:215
 msgid "Weaving-Mill"
-msgstr "Mulino di tessitura"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:216
 msgid "Well"
-msgstr "Pozzo"
+msgstr "鉱泉"
 
 #: ../../tribes/barbarians/conf:217
 msgid "Scout's Hut"
-msgstr "Capanna dell'esploratore"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:218
 msgid "Cattle Farm"
-msgstr "Allevamento di bovini"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:221
 msgid "Headquarters medium"
-msgstr "Quartier generale medio"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:222
 msgid "Citadel village"
-msgstr "Roccaforte del villaggio"
+msgstr ""
 
 #: ../../tribes/barbarians/farm/conf:14
 msgid "Plant wheat"
-msgstr "Pianta di grano"
+msgstr ""
 
 #: ../../tribes/barbarians/farm/conf:16
 msgid "Harvest wheat"
-msgstr "Raccolto di grano"
+msgstr ""
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr "Pianta campi."
+msgstr ""
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
-msgstr "Cresci lino e canne di paglia."
+msgstr ""
 
 #: ../../tribes/barbarians/fernery/conf:13
 msgid "Plant flax"
-msgstr "Pianta lino"
+msgstr ""
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
-msgstr "Pianta canne"
+msgstr ""
 
 #: ../../tribes/barbarians/fernery/conf:17
 msgid "Harvest flax"
-msgstr "Raccolto di lino"
+msgstr ""
 
 #: ../../tribes/barbarians/fernery/conf:19
 msgid "Harvest reed"
-msgstr "Raccolto di canne"
+msgstr ""
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "Produced in the metal works."
 msgstr ""
-"Le pinze per il fuoco sono gli strumenti del fonditore, lavorando in "
-"fonderia. Sono prodotte dal lavoratore di metalli."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
 msgstr ""
-"Inoltre pane e carne, pesce è anche un genere alimentare per i barbari."
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr "Pesca pesce dal mare."
+msgstr ""
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid "Fishing rods are needed by barbarian fishers, to catch fish."
 msgstr ""
-"Le verghe per il pesce sono necessarie per il pescatore barbaro, per "
-"prendere il pesce. Sono prodotte dal fabbro degli strumenti."
 
 #: ../../tribes/barbarians/flax/conf:1
 msgid "Flax is a beautiful flower, which are used to make cloth."
-msgstr "Il lino è un bellissimo fiore, che è utilizzato per fare tessuti."
+msgstr ""
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
-"Il guardiacaccia si assicura che la popolazione naturale di animali non "
-"scenda mai troppo."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "Scopre le risorse del sottosuolo."
+msgstr ""
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
-"L'oro è il più pregiato di tutti i metalli; solo i più importanti oggetti "
-"sono decorati con questo."
 
 #: ../../tribes/barbarians/goldstone/conf:1
 msgid "This is the yellow goldstone."
-msgstr "Questo è il giallo minerale d'oro."
+msgstr ""
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be enhanced to grout which delivers solid, non burning build "
 "material."
 msgstr ""
-"Pietra grezza può essere migliorata dalla calce che rende le più solide "
-"rispetto ai materiali da costruzione non cotti."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -958,75 +923,68 @@ msgid ""
 "the blacksmiths and the helmsmiths. Make sure you always got some in "
 "reserve! Build at the metal works."
 msgstr ""
-"Il martello è uno strumento essenziale. E' necessario al geologo, "
-"all'operaio, al fabro ferraio e al fabro d'elmi. Assicurati di averne sempre "
-"qualche riserva! Costriuito dal lavoratore di metalli."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid "Basic defence of a warrior."
-msgstr "Difesa di base di un guerriero"
+msgstr ""
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr "Forgia elmi per i soldati"
+msgstr ""
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr "Produce un'elmo"
+msgstr ""
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr "Produce una maschera"
+msgstr ""
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
-msgstr "Produce un'elmo da guerra"
+msgstr ""
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr "Il cacciatore porta buona carne ai coloni."
+msgstr ""
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters. Produced in the metal works."
 msgstr ""
-"Questa lancia è leggera abbastanza da essere lanciata, ma pesante abbastanza "
-"da uccidere ogni animale in un colpo. Costriuito dal lavoratore di metalli."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr "Produce cibo per i minatori."
+msgstr ""
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr "Armi e strumenti sono fatti di ferro."
+msgstr ""
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
-msgstr "Questo è il rosso minerale di ferro."
+msgstr ""
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 msgstr ""
-"Come creare una pietanza, spuntino o razione, se là non ci sono strumenti da "
-"cucina?"
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kilm."
-msgstr "Brucia la calce nella fornace della calce."
+msgstr ""
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
-msgstr "Abbatte alberi."
+msgstr ""
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid "An enhanced version of the helmet."
-msgstr "Una versione avanzata dell'elmetto."
+msgstr ""
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
-msgstr "Una vera pietanza che soddisfa tutte le necessità del minatori."
+msgstr ""
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -1034,90 +992,79 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
-"La carne contiene una gran quantità di energia. E' usata nelle osterie e "
-"nelle taverne per preparare il pranzo per i minatori e nei campi di "
-"allenamento dei soldati per tenere i guerrieri forti."
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
-msgstr "Produce una pala da fornaio"
+msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr "Produce molle per il fuoco"
+msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
-msgstr "Produce canna da pesca"
+msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr "Produce un martello"
+msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr "Produce strumenti da cucina"
+msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr "Produce piccone"
+msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr "Produce una falce"
+msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
-msgstr "Produce vanga"
+msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr "Produce lancia da caccia"
+msgstr ""
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr "Aiuta a trasportare oggetti pesanti sulle strade usate."
+msgstr ""
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metal works."
 msgstr ""
-"Questo piccone è usato dai taglia pietre e dai minatori. E' prodotto dal "
-"lavoratore di metalli."
 
 #: ../../tribes/barbarians/pittabread/conf:1
 msgid ""
 "The barbarian bakers are best in making this flat and tasty pitta bread."
 msgstr ""
-"I panettieri barbari sono i migliori nella preparazione di questo piatto e "
-"gustoso pane azzimo."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
-msgstr "Pianta alberi."
+msgstr ""
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid "A small bite to keep miners strong and working."
-msgstr "Una piccolo morso per tenere i minatori forti e al lavoro."
+msgstr ""
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid "Raw Stones are the secondary build material of the barbarians."
 msgstr ""
-"Le pietre grezze sono il materiale da costruzione secondario dei barbari."
 
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
-"Esploratori come Scotty l'esploratore esplorano le aree non esplorate alla "
-"maniera degli esploratori."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
 "The scythe is the tool of the farmers. It is produced in the metal works."
 msgstr ""
-"La falce è lo strumento dei fattori. È prodotta dal lavoratore di metalli."
 
 #: ../../tribes/barbarians/sharpaxe/conf:1
 msgid ""
@@ -1125,178 +1072,150 @@ msgid ""
 "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
 "than the ordinary axe. Build in the axe factory."
 msgstr ""
-"I veri guerrieri considerano l'ascia affilata la prima vera arma, dopo aver "
-"imparato a gestire un'ascia ordinaria, quest'arma è incontrastabile. E 'più "
-"pesante e più tagliente di un'ascia ordinaria. Costruita nella fabbrica "
-"d'asce."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
 "the ranger use it. Build at the metal works."
 msgstr ""
-"La pala è necessaria per la corretta cura delle piante. Per questo il "
-"coltivatore di felci e la guardia forestale la usano. Costruita dal "
-"lavoratore di metalli."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr "Odore di ferro."
+msgstr ""
 
 #: ../../tribes/barbarians/smelting_works/conf:24
 msgid "Smelt iron"
-msgstr "Fondere ferro"
+msgstr ""
 
 #: ../../tribes/barbarians/smelting_works/conf:25
 msgid "Smelt gold"
-msgstr "Fondere oro"
+msgstr ""
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
 msgstr ""
-"Un po' più grandi, per i minatori avanzati. Avranno bisogno di un grosso "
-"boccone."
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "Difendi e conquista!"
+msgstr ""
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granit out of laying stones."
-msgstr "Taglia pezzi grezzi di granito dalle pietre da posare."
+msgstr ""
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
 "Only this beer is acceptable for the old warriors. Some say, the whole power "
 "of the barbarians is in this ale."
 msgstr ""
-"Solo questa birra è accettabile per i vecchi guerrieri. Alcuni dicono, tutta "
-"la potenza dei barbari è in questa ale."
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid "Thatch reed is used to make the roofs of buildings waterproof."
 msgstr ""
-"La paglia di canne è usata per fare impermeabili i tetti degli edifici."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr "Allena i soldati."
+msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
-msgstr "Avanza l'attacco del soldato 0"
+msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:38
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Avanza l'attacco del soldato 0 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
-msgstr "Avanza l'attacco del soldato 1"
+msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:40
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Avanza l'attacco del soldato 1 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
-msgstr "Avanza l'attacco del soldato 2"
+msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:42
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Avanza l'attacco del soldato 2 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
-msgstr "Avanza l'attacco del soldato 3"
+msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Avanza l'attacco del soldato 3 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr "Avanza l'attacco del soldato 4"
+msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Avanza l'attacco del soldato 4 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Avanza i punti ferita del soldato 0"
+msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Avanza i punti ferita del soldato 0 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Avanza i punti ferita del soldato 1"
+msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Avanza i punti ferita del soldato 1 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Avanza i punti ferita del soldato 2"
+msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Avanza i punti ferita del soldato 2 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid "Trunks are the primary build material of the barbarians."
-msgstr "I tronchi sono il materiale da costruzione primario dei barbari."
+msgstr ""
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid "An enhanced mask for barbarian warriors."
-msgstr "Una versione avanzata della maschera per i guerrieri barbari."
+msgstr ""
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr "Produce ascia di bronzo"
+msgstr ""
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"
-msgstr "Produce ascia da battaglia"
+msgstr ""
 
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce warriorsaxe"
-msgstr "Produce ascia da guerriero"
+msgstr ""
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -1304,29 +1223,19 @@ msgid ""
 "ever were able to handle those huge and powerful axes. Build at the axe "
 "factory."
 msgstr ""
-"L'ascia guerrieri è la più pericolosa di tutte le armi. Solo pochi guerrieri "
-"sono in grado di gestire tali asce enormi e potenti. Costruite nella "
-"fabbrica delle ascie."
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer or to produce grout."
 msgstr ""
-"L'acqua è la più importante essenza della vita! Quest'acqua è usata in molti "
-"posti, per fare il pane o la birra o produrre calce."
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr "Produce stoffa per navi e soldati."
+msgstr ""
 
 #: ../../tribes/barbarians/wheat/conf:1
 msgid ""
 "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
 "be made of this wheat."
 msgstr ""
-"Il frumento è essenziale per sopravvivere. Pane squisito e birra ale forte "
-"possono essere fatte con questo frumento."
-
-#~ msgid "Works deep in the mines to produce coal, iron or gold."
-#~ msgstr "I lavoratori nelle profonde miniere producono carbone, ferro e oro."
