@@ -598,6 +598,9 @@ def generate_configh_content(env):
 	if env.HAS_PARAGUI==True:
 		data+="#define HAS_PARAGUI\n\n"
 
+	#scons is only supported where gcc is used for compiling.
+	data +="#define HAVE_VARARRAY\n\n"
+
 	return data
 
 def generate_configh_file(env, target, source):
