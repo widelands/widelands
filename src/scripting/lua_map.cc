@@ -1052,6 +1052,7 @@ const MethodType<L_ProductionSite> L_ProductionSite::Methods[] = {
 };
 const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
 	PROP_RO(L_ProductionSite, valid_workers),
+	PROP_RO(L_ProductionSite, valid_wares),
 	PROP_RO(L_ProductionSite, workers),
 	{0, 0, 0},
 };
@@ -1084,6 +1085,27 @@ int L_ProductionSite::get_valid_workers(lua_State * L) {
 			lua_pushstring(L, name);
 			lua_rawset(L, -3);
 		}
+	}
+	return 1;
+}
+
+/* RST
+	.. attribute:: valid_wares
+
+		(RO) An array of (name,count) pairs. This describes what wares and how
+		many of them can be stored inside the building.
+*/
+int L_ProductionSite::get_valid_wares(lua_State * L) {
+	Game & g = get_game(L);
+	ProductionSite * ps = get(g, L);
+
+	Tribe_Descr const & tribe = ps->owner().tribe();
+
+	lua_newtable(L);
+	container_iterate_const(Ware_Types, ps->descr().inputs(), i) {
+		lua_pushstring(L, tribe.get_ware_descr(i.current->first)->name());
+		lua_pushuint32(L, i.current->second);
+		lua_rawset(L, -3);
 	}
 	return 1;
 }

@@ -278,6 +278,7 @@ public:
 	 */
 	int get_workers(lua_State * L);
 	int get_valid_workers(lua_State * L);
+	int get_valid_wares(lua_State * L);
 
 	/*
 	 * Lua Methods
@@ -359,7 +360,6 @@ public:
 	int set_resource(lua_State *);
 	int get_resource_amount(lua_State *);
 	int set_resource_amount(lua_State *);
-
 
 	/*
 	 * Lua methods
