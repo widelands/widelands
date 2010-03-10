@@ -118,7 +118,7 @@ public:
 	char const * type_name() const throw () {return "trainingsite";}
 	virtual std::string get_statistics_string();
 
-	virtual void init(Editor_Game_Base &);
+	virtual void init(Editor_Game_Base &, bool loading);
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 

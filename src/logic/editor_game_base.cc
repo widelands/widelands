@@ -326,10 +326,16 @@ idx is the building type index.
 ===============
 */
 Building & Editor_Game_Base::warp_building
-	(Coords const c, Player_Number const owner, Building_Index const i)
+	(Coords const c, Player_Number const owner, Building_Index const idx)
 {
 	Player & plr = player(owner);
-	return plr.tribe().get_building_descr(i)->create(*this, plr, c, false);
+	Tribe_Descr const & tribe = plr.tribe();
+	return 
+		tribe.get_building_descr(idx)->create
+			(*this, plr, c,
+			 false,
+			 0, 0, 0, 0,
+			 true);
 }
 
 
@@ -342,7 +348,7 @@ if oldi != -1 this is a constructionsite coming from an enhancing action
 */
 Building & Editor_Game_Base::warp_constructionsite
 	(Coords const c, Player_Number const owner,
-	 Building_Index idx, Building_Index old_id)
+	 Building_Index idx, Building_Index old_id, bool loading)
 {
 	Player            & plr   = player(owner);
 	Tribe_Descr const & tribe = plr.tribe();
@@ -351,7 +357,8 @@ Building & Editor_Game_Base::warp_constructionsite
 			(*this, plr, c,
 			 true,
 			 0, 0, 0,
-			 old_id ? tribe.get_building_descr(old_id) : 0);
+			 old_id ? tribe.get_building_descr(old_id) : 0,
+			 loading);
 }
 
 
