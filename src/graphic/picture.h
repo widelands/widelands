@@ -32,7 +32,7 @@
 
 
 struct RenderTarget;
-struct Surface;
+class Surface;
 
 /// picture module flags
 enum PicMod {

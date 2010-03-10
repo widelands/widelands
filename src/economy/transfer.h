@@ -26,8 +26,8 @@ namespace Widelands {
 struct Game;
 struct PlayerImmovable;
 struct Request;
-struct WareInstance;
-struct Worker;
+class WareInstance;
+class Worker;
 
 /**
  * Whenever an item or worker is transferred to fulfill a Request,

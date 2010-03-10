@@ -31,7 +31,7 @@
 namespace Widelands {
 
 struct ProductionSite;
-struct MilitarySite;
+class MilitarySite;
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player * const pl, uint8_t const mc, bool const oe)

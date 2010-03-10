@@ -37,8 +37,8 @@ struct Economy;
 struct Path;
 struct PlayerImmovable;
 class Soldier;
-struct TrainingSite;
-class Flag;
+class TrainingSite;
+struct Flag;
 struct Tribe_Descr;
 struct AttackController;
 

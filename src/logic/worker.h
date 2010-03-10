@@ -26,7 +26,7 @@
 #include "productionsite.h"
 
 namespace Widelands {
-struct Building;
+class Building;
 
 /**
  * Worker is the base class for all humans (and actually potential non-humans,

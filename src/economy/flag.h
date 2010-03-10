@@ -27,10 +27,10 @@
 #include "routing_node.h"
 
 namespace Widelands {
-struct Building;
+class Building;
 struct Request;
 struct Road;
-struct WareInstance;
+class WareInstance;
 
 
 

@@ -30,7 +30,7 @@ namespace Widelands {
 
 struct Economy;
 struct Editor_Game_Base;
-class Flag;
+struct Flag;
 struct Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
@@ -40,10 +40,10 @@ struct Requirements;
 struct Supply;
 struct Transfer;
 class Worker;
-struct Building;
-struct ProductionSite;
-struct Warehouse;
-struct ConstructionSite;
+class Building;
+class ProductionSite;
+class Warehouse;
+class ConstructionSite;
 
 /**
  * A Request is issued whenever some object (road or building) needs a ware.
@@ -57,7 +57,7 @@ struct ConstructionSite;
  * The required time has no meaning for idle requests.
  */
 struct Request : public Trackable {
-	friend class Economy;
+	friend struct Economy;
 	friend class RequestList;
 
 	typedef void (*callback_t)

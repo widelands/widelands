@@ -20,6 +20,9 @@
 #ifndef WIDELANDS_H
 #define WIDELANDS_H
 
+#ifdef _MSC_VER
+#define __attribute__(x) 
+#endif
 #include <cassert>
 #include <cstddef>
 #include <stdint.h>

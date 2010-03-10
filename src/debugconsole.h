@@ -25,7 +25,7 @@
 
 #include <boost/function.hpp>
 
-class ChatProvider;
+struct ChatProvider;
 
 /**
  * The debug console is a tool to allow ad-hoc commands that inspect

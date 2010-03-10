@@ -37,7 +37,7 @@ struct Panel;
 struct Radiobutton;
 
 struct Radiogroup {
-	friend class Radiobutton;
+	friend struct Radiobutton;
 
 	Radiogroup();
 	~Radiogroup();

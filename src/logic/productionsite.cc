@@ -254,14 +254,7 @@ void ProductionSite::prefill
 	{ //  init input ware queues
 		Ware_Types const & inputs = descr().inputs();
 		m_input_queues.resize(inputs.size());
-		for
-			(struct {
-			 	Ware_Types::const_iterator       current;
-			 	Ware_Types::const_iterator const end;
-			 	uint8_t                          i;
-			 } i = {inputs.begin(), inputs.end(), 0};
-			 i.current < i.end;
-			 ++i.current, ++i.i)
+		for (ware_range i(inputs);i;++i)
 			m_input_queues[i.i] =
 				new WaresQueue
 					(*this,
@@ -310,7 +303,7 @@ void ProductionSite::calc_statistics()
 	uint32_t const lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	const std::string trend =
-		lastPercOk > percOk ? _("UP") : lastPercOk < percOk ? _("DOWN") : "=";
+		lastPercOk > percOk ? "+" : lastPercOk < percOk ? "-" : "=";
 
 	if (0 < percOk and percOk < 100)
 		snprintf
@@ -330,9 +323,11 @@ void ProductionSite::calc_statistics()
 /**
  * Initialize the production site.
  */
-void ProductionSite::init(Editor_Game_Base & egbase)
+void ProductionSite::init(Editor_Game_Base & egbase, bool loading)
 {
-	Building::init(egbase);
+	Building::init(egbase, loading);
+	if(loading)
+		return;
 
 	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 

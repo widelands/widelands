@@ -34,6 +34,7 @@
 #include "upcast.h"
 #include "wexception.h"
 #include "logic/worker.h"
+#include "container_iterate.h"
 
 namespace Widelands {
 
@@ -76,14 +77,9 @@ Flag::~Flag()
 
 void Flag::load_finish(Editor_Game_Base & egbase) {
 	CapacityWaitQueue & queue = m_capacity_wait;
-	for
-		(struct {
-		 	CapacityWaitQueue::iterator       current;
-		 	CapacityWaitQueue::const_iterator end;
-		 } i = {queue.begin(), queue.end()};
-		 i .current != i .end;)
+	for (wl_range<CapacityWaitQueue > r(queue);r;)
 	{
-		Worker & worker = *i.current->get(egbase);
+		Worker & worker = *r->get(egbase);
 		Bob::State const * const state =
 			worker.get_state(Worker::taskWaitforcapacity);
 		if (not state)
@@ -98,11 +94,10 @@ void Flag::load_finish(Editor_Game_Base & egbase) {
 				 "queue.\n",
 				 worker.serial(), serial(), state->objvar1.serial());
 		else {
-			++i.current;
+			++r;
 			continue;
 		}
-		i.current = queue.erase(i.current);
-		i.end     = queue.end  ();
+		r = wl_erase(queue, r.current);
 	}
 }
 

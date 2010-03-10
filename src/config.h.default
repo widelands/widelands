@@ -3,6 +3,7 @@
 
 #define HAS_GETENV
 #define NEW_SDL_MIXER 1
+#define HAVE_VARARRAY
 
 #define INSTALL_PREFIX "/mingw"
 #define INSTALL_BINDIR "/l/WiLa/Setup"

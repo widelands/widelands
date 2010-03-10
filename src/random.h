@@ -24,8 +24,8 @@
 
 extern const uint32_t rng_sbox[256];
 
-class StreamRead;
-class StreamWrite;
+struct StreamRead;
+struct StreamWrite;
 
 struct RNG {
 	RNG ();

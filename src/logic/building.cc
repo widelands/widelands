@@ -183,16 +183,18 @@ Building & Building_Descr::create
 	 uint32_t       const * const ware_counts,
 	 uint32_t       const * const worker_counts,
 	 Soldier_Counts const * const soldier_counts,
-	 Building_Descr const * const old)
+	 Building_Descr const * const old,
+	 bool                         loading)
 	const
 {
 	Building & b = construct ? create_constructionsite(old) : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
+
 	b.prefill
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 ware_counts, worker_counts, soldier_counts);
-	b.init(egbase);
+	b.init(egbase, loading);
 	b.postfill
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 ware_counts, worker_counts, soldier_counts);
@@ -284,14 +286,9 @@ Building::~Building()
 
 void Building::load_finish(Editor_Game_Base & egbase) {
 	Leave_Queue & queue = m_leave_queue;
-	for
-		(struct {
-		 	Leave_Queue::iterator       current;
-		 	Leave_Queue::const_iterator end;
-		 } i = {queue.begin(), queue.end()};
-		 i .current != i .end;)
+	for (wl_range<Leave_Queue> i(queue);i;)
 	{
-		Worker & worker = *i.current->get(egbase);
+		Worker & worker = *i->get(egbase);
 		{
 			OPtr<PlayerImmovable> const worker_location = worker.get_location();
 			if
@@ -316,11 +313,10 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 				 "leavebuilding task is for map object %u! Removing from queue.\n",
 				 worker.serial(), serial(), state->objvar1.serial());
 		else {
-			++i.current;
+			++i;
 			continue;
 		}
-		i.current = queue.erase(i.current);
-		i.end     = queue.end  ();
+		i = wl_erase(queue, i.current);
 	}
 }
 
@@ -368,7 +364,7 @@ Common building initialization code. You must call this from
 derived class' init.
 ===============
 */
-void Building::init(Editor_Game_Base & egbase)
+void Building::init(Editor_Game_Base & egbase, bool loading)
 {
 	PlayerImmovable::init(egbase);
 
@@ -495,7 +491,7 @@ std::string Building::info_string(std::string const & format) {
 	std::ostringstream result;
 	container_iterate_const(std::string, format, i)
 		if (*i.current == '%') {
-			if (++i.current == i.end) { //  unterminated format sequence
+			if (i.advance().empty()) { //  unterminated format sequence
 				result << '%';
 				break;
 			}

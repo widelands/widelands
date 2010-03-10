@@ -260,15 +260,14 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 
 			try {
 				uint16_t const size = fr.Unsigned16();
-				if (constructionsite.m_wares.size() < size)
-					throw game_data_error("constructionsite.m_wares.size() < size");
-				for (uint16_t i = size; i < constructionsite.m_wares.size(); ++i) {
-					constructionsite.m_wares[i]->cleanup();
-					delete constructionsite.m_wares[i];
-				}
 				constructionsite.m_wares.resize(size);
 				for (uint16_t i = 0; i < constructionsite.m_wares.size(); ++i)
+				{
+					constructionsite.m_wares[i] =
+						new WaresQueue
+							(constructionsite, Ware_Index::Null(), 0, 0);
 					constructionsite.m_wares[i]->Read(fr, game, mol);
+				}
 			} catch (_wexception const & e) {
 				throw game_data_error(_("wares: %s"), e.what());
 			}
@@ -300,30 +299,17 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			(1 <= packet_version and
 			 packet_version <= CURRENT_WAREHOUSE_PACKET_VERSION)
 		{
-			log("Reading warehouse stuff for %p\n", &warehouse);
+			//log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
 			Tribe_Descr const & tribe = warehouse.tribe();
 			while (fr.Unsigned8()) {
 				Ware_Index const id = tribe.safe_ware_index(fr.CString());
-				warehouse.remove_wares(id, warehouse.m_supply->stock_wares(id));
 				warehouse.insert_wares(id, fr.Unsigned16());
 			}
 			while (fr.Unsigned8()) {
 				Ware_Index const id = tribe.safe_worker_index(fr.CString());
-				warehouse.remove_workers
-					(id, warehouse.m_supply->stock_workers(id));
 				warehouse.insert_workers(id, fr.Unsigned16());
 			}
-
-			//  FIXME The reason for this code is that Warehouse::init is called
-			//  FIXME when a warehouse is allocated during savegame loading. That
-			//  FIXME is a bug. That code must only be executed when a warehouse
-			//  FIXME is created in the game. Requests are created there.
-			//  FIXME Therefore this code here undoes what Warehouse::init just
-			//  FIXME did.
-			container_iterate_const
-				(std::vector<Request *>, warehouse.m_requests, i)
-				delete *i.current;
 
 			warehouse.m_requests.resize(fr.Unsigned16());
 			for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i) {
@@ -336,6 +322,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				req.Read(fr, game, mol);
 				warehouse.m_requests[i] = &req;
 			}
+			warehouse.m_target_supply.resize(warehouse.m_requests.size());
 
 			assert(warehouse.m_incorporated_workers.empty());
 			{
@@ -362,14 +349,6 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 
 			std::vector<Ware_Index> const & worker_types_without_cost =
 				tribe.worker_types_without_cost();
-
-			//  FIXME Mighty ugly kludge to undo what Warehouse::init did, so that
-			//  FIXME we have a fresh object when starting to fill in the values
-			//  FIXME read from file. To get rid of this, make sure that init is
-			//  FIXME not called on a Warehouse object that has been allocated
-			//  FIXME during savegame loading.
-			for (uint8_t i = worker_types_without_cost.size(); i;)
-				warehouse.m_next_worker_without_cost_spawn[--i] = Never();
 
 			if (1 == packet_version) { //  a single next_spawn time for "carrier"
 				uint32_t const next_spawn = fr.Unsigned32();
@@ -591,17 +570,6 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			(1 <= packet_version and
 			 packet_version <= CURRENT_PRODUCTIONSITE_PACKET_VERSION)
 		{
-			//  FIXME The reason for this code is that ProductionSite::init is
-			//  FIXME called when a productionsite is allocated during savegame
-			//  FIXME loading. That is a bug. That code must only be executed when
-			//  FIXME a productionsite is created in the game. Requests are
-			//  FIXME created there. Therefore this code here undoes what
-			//  FIXME ProductionSite::init just did.
-			for (uint32_t i = productionsite.descr().nr_working_positions(); i;) {
-				delete productionsite.m_working_positions[--i].worker_request;
-				productionsite.m_working_positions[i].worker_request = 0;
-			}
-
 			ProductionSite::Working_Position & wp_begin =
 				*productionsite.m_working_positions;
 			ProductionSite_Descr const & descr = productionsite.descr();
@@ -621,21 +589,19 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				//  Find a working position that matches this request.
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
-					(struct {
-					 	Ware_Types::const_iterator       current;
-					 	Ware_Types::const_iterator const end;
-					 } j = {working_positions.begin(), working_positions.end()};;
-					 ++j.current)
+					(wl_const_range<Ware_Types>
+					 j(working_positions);;
+					 ++j)
 				{
-					if (j.current == j.end)
+					if (j.empty())
 						throw game_data_error
 							("site has request for %s, for which there is no working "
 							 "position",
 							 productionsite.tribe()
 							 .get_worker_descr(req.get_index())->name().c_str());
-					uint32_t count = j.current->second;
+					uint32_t count = j->second;
 					assert(count);
-					if (worker_index == j.current->first) {
+					if (worker_index == j->first) {
 						while (wp->worker_request)
 							if (--count)
 								++wp;
@@ -661,20 +627,17 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				//  Find a working position that matches this worker.
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
-					(struct {
-					 	Ware_Types::const_iterator       current;
-					 	Ware_Types::const_iterator const end;
-					 } j = {working_positions.begin(), working_positions.end()};;
-					 ++j.current)
+					(wl_const_range<Ware_Types> j(working_positions);;
+					 ++j)
 				{
-					if (j.current == j.end)
+					if (j.empty())
 						throw game_data_error
 							("site has %s, for which there is no free working "
 							 "position",
 							 worker_descr.name().c_str());
-					uint32_t count = j.current->second;
+					uint32_t count = j->second;
 					assert(count);
-					if (worker_descr.can_act_as(j.current->first)) {
+					if (worker_descr.can_act_as(j->first)) {
 						while (wp->worker or wp->worker_request) {
 							++wp;
 							if (not --count)
@@ -1120,7 +1083,8 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 
 	//  Incorporated workers, write sorted after file-serial.
 	fw.Unsigned16(warehouse.m_incorporated_workers.size());
-	std::map<uint32_t, const Worker *> workermap;
+	typedef std::map<uint32_t, const Worker *> TWorkerMap;
+	TWorkerMap workermap;
 	container_iterate_const
 		(std::vector<OPtr<Worker> >, warehouse.m_incorporated_workers, i)
 	{
@@ -1130,14 +1094,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 			(std::pair<uint32_t, const Worker *>
 			 	(mos.get_object_file_index(w), &w));
 	}
-
-	for
-		(struct {
-		 	std::map<uint32_t, Worker const *>::const_iterator       current;
-		 	std::map<uint32_t, Worker const *>::const_iterator const end;
-		 } i = {workermap.begin(), workermap.end()};
-		 i.current != i.end;
-		 ++i.current)
+	container_iterate_const(TWorkerMap, workermap, i)
 	{
 		Worker const & obj = *i.current->second;
 		assert(mos.is_object_known(obj));

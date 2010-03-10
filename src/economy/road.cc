@@ -36,7 +36,12 @@
 namespace Widelands {
 
 // dummy instance because Map_Object needs a description
-Map_Object_Descr g_road_descr("road", "Road");
+const Map_Object_Descr g_road_descr("road", "Road");
+
+bool Road::IsRoadDescr(Map_Object_Descr const * const descr) 
+{
+	return descr == &g_road_descr;
+}
 
 /**
  * Most of the actual work is done in init.

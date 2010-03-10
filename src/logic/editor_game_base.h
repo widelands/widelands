@@ -39,7 +39,7 @@ namespace Widelands {
 
 struct AreaWatcher;
 struct Battle;
-class Bob;
+struct Bob;
 struct Building_Descr;
 class Immovable;
 struct Map;
@@ -47,7 +47,7 @@ struct Object_Manager;
 struct Player;
 struct PlayerImmovable;
 struct Tribe_Descr;
-class Flag;
+struct Flag;
 struct AttackController;
 
 struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
@@ -101,7 +101,8 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	Building & warp_building(Coords, Player_Number, Building_Index);
 	Building & warp_constructionsite
 		(Coords, Player_Number, Building_Index,
-		 Building_Index oldid = Building_Index::Null());
+		 Building_Index oldid = Building_Index::Null(),
+		 bool loading = false);
 	Bob & create_bob(Coords, Bob::Descr::Index, Tribe_Descr const * const = 0);
 	Immovable & create_immovable(Coords, int32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable
