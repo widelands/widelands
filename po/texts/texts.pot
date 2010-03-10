@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-04 10:36+0000\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -356,22 +356,22 @@ msgid "Elders"
 msgstr ""
 
 #: ../../txts/developers:19
-#: ../../txts/developers:316
+#: ../../txts/developers:317
 msgid "Graphics"
 msgstr ""
 
 #: ../../txts/developers:24
-#: ../../txts/developers:309
+#: ../../txts/developers:310
 msgid "Homepage"
 msgstr ""
 
 #: ../../txts/developers:29
-#: ../../txts/developers:321
+#: ../../txts/developers:322
 msgid "Sound"
 msgstr ""
 
 #: ../../txts/developers:34
-#: ../../txts/developers:326
+#: ../../txts/developers:327
 msgid "Translation"
 msgstr ""
 
@@ -379,127 +379,127 @@ msgstr ""
 msgid "Coders"
 msgstr ""
 
-#: ../../txts/developers:74
+#: ../../txts/developers:75
 msgid "Graphicians"
 msgstr ""
 
-#: ../../txts/developers:99
+#: ../../txts/developers:100
 msgid "Musicians"
 msgstr ""
 
-#: ../../txts/developers:110
+#: ../../txts/developers:111
 msgid "Sound Effects"
 msgstr ""
 
-#: ../../txts/developers:119
+#: ../../txts/developers:120
 msgid "Maps and Missions"
 msgstr ""
 
-#: ../../txts/developers:132
+#: ../../txts/developers:133
 msgid "Campaign Story"
 msgstr ""
 
-#: ../../txts/developers:135
+#: ../../txts/developers:136
 msgid "Barbarian"
 msgstr ""
 
-#: ../../txts/developers:141
+#: ../../txts/developers:142
 msgid "Empire"
 msgstr ""
 
-#: ../../txts/developers:147
+#: ../../txts/developers:148
 msgid "Translators"
 msgstr ""
 
-#: ../../txts/developers:151
+#: ../../txts/developers:152
 msgid "Czech"
 msgstr ""
 
-#: ../../txts/developers:158
+#: ../../txts/developers:159
 msgid "Dansk"
 msgstr ""
 
-#: ../../txts/developers:164
+#: ../../txts/developers:165
 msgid "Dutch"
 msgstr ""
 
-#: ../../txts/developers:171
+#: ../../txts/developers:172
 msgid "Finnish"
 msgstr ""
 
-#: ../../txts/developers:177
+#: ../../txts/developers:178
 msgid "French"
 msgstr ""
 
-#: ../../txts/developers:184
+#: ../../txts/developers:185
 msgid "Galician"
 msgstr ""
 
-#: ../../txts/developers:189
+#: ../../txts/developers:190
 msgid "German"
 msgstr ""
 
-#: ../../txts/developers:201
+#: ../../txts/developers:202
 msgid "Hebrew"
 msgstr ""
 
-#: ../../txts/developers:206
+#: ../../txts/developers:207
 msgid "Hungarian"
 msgstr ""
 
-#: ../../txts/developers:211
+#: ../../txts/developers:212
 msgid "Italian"
 msgstr ""
 
-#: ../../txts/developers:216
+#: ../../txts/developers:217
 msgid "Polish"
 msgstr ""
 
-#: ../../txts/developers:224
+#: ../../txts/developers:225
 msgid "Russian"
 msgstr ""
 
-#: ../../txts/developers:229
+#: ../../txts/developers:230
 msgid "Slovak"
 msgstr ""
 
-#: ../../txts/developers:234
+#: ../../txts/developers:235
 msgid "Spanish"
 msgstr ""
 
-#: ../../txts/developers:239
+#: ../../txts/developers:240
 msgid "Swedish"
 msgstr ""
 
-#: ../../txts/developers:247
+#: ../../txts/developers:248
 msgid "Packagers"
 msgstr ""
 
-#: ../../txts/developers:251
+#: ../../txts/developers:252
 msgid "Linux Distributions"
 msgstr ""
 
-#: ../../txts/developers:262
+#: ../../txts/developers:263
 msgid "Other Unix Distributions"
 msgstr ""
 
-#: ../../txts/developers:271
+#: ../../txts/developers:272
 msgid "Non Unix Distributions"
 msgstr ""
 
-#: ../../txts/developers:282
+#: ../../txts/developers:283
 msgid "Homepage Coders"
 msgstr ""
 
-#: ../../txts/developers:291
+#: ../../txts/developers:292
 msgid "Documentation, Help and Wiki"
 msgstr ""
 
-#: ../../txts/developers:305
+#: ../../txts/developers:306
 msgid "Former elders"
 msgstr ""
 
-#: ../../txts/developers:332
+#: ../../txts/developers:333
 msgid "Other"
 msgstr ""
 
