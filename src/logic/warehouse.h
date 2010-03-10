@@ -91,7 +91,7 @@ public:
 	/// * Sees the area (since a warehouse is considered to be always occupied).
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
-	virtual void init(Editor_Game_Base &);
+	virtual void init(Editor_Game_Base &, bool loading);
 
 	virtual void cleanup(Editor_Game_Base &);
 

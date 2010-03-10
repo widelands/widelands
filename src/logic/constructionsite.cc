@@ -262,9 +262,11 @@ void ConstructionSite::set_economy(Economy * const e)
 Initialize the construction site by starting orders
 ===============
 */
-void ConstructionSite::init(Editor_Game_Base & egbase)
+void ConstructionSite::init(Editor_Game_Base & egbase, bool loading)
 {
-	Building::init(egbase);
+	Building::init(egbase, loading);
+	if(loading)
+		return;
 
 	//  TODO figure out whether planing is necessary
 
@@ -273,6 +275,7 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 	size_t const buildcost_size = buildcost.size();
 	m_wares.resize(buildcost_size);
 	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
 		WaresQueue & wq =
 			*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
