@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-22 18:36+0000\n"
-"Last-Translator: schulz3000 <Unknown>\n"
+"POT-Creation-Date: 2010-03-04 10:36+0000\n"
+"PO-Revision-Date: 2010-03-09 17:39+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-23 05:01+0000\n"
+"X-Launchpad-Export-Date: 2010-03-10 04:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/elemental:7
@@ -26,8 +26,8 @@ msgid ""
 "handling of military and training site buildings and will finally introduce "
 "fighting."
 msgstr ""
-"Dritte Mission des Tutorials der Barbaren. Diese Karte erklärt das handhaben "
-"von Millitär und Trainingseinrichtungen und schlussendlich gibt es eine "
+"Dritte Mission des Tutorials der Barbaren. Hier wird der Umgang mit  "
+"Millitär- und Trainingseinrichtungen erklärt und schlussendlich gibt es eine "
 "Einführung in das Kampfgeschehen."
 
 #: ../../campaigns/t03.wmf/event:316
@@ -42,10 +42,11 @@ msgid ""
 "rest at the borders of the old forest and prepare for the coming days.\" "
 msgstr ""
 " \"Die letzten Tage kamen wir unserer Hauptstadt immer näher. Viele Menschen "
-"schlossen sich auf unserem Marsch an und setzten ihre Hoffnung in mich. "
-"Jedoch fürchte ich, dass wir nicht stark genug sind, um den Kampf mit meinen "
-"Brüdern aufzunehmen.<br>Fürs erste ruhen wir uns an den Grenzen des alten "
-"Waldes aus und bereiten uns auf die kommenden Tage vor.\" "
+"haben sich unserem Marsch schon angeschlossen und setzten ihre Hoffnung in "
+"mich. Jedoch fürchte ich, dass wir nicht stark genug sind, um zusammen mit "
+"unseren Brüdern in die Schlacht zu ziehen.<br>Fürs erste ruhen wir uns an "
+"den Grenzen des alten Waldes aus und bereiten uns auf die kommenden Tage "
+"vor.\" "
 
 #: ../../campaigns/t03.wmf/event:320
 msgid "Close to home"
@@ -63,19 +64,19 @@ msgid ""
 "firmly under control. We should put food in our storage to survive the long, "
 "cold winter!\" "
 msgstr ""
-" \"Diesen Morgen fand ich Thron aufgewühlt. Spät in der letzten Nacht kam er "
-"zurück von seiner Patrouille und lehnte sich gegen einen Baum, der über das "
-"Lager wacht. Die Zahl der Auseinandersetzungen und Streitereien wächst "
-"stetig und der Winter hat uns fest in der Hand. Wir sollten Nahrung in "
-"unserem Lager lagern um den langen, kalten Winter zu überstehen!\" "
+" \"Diesen morgen fand ich Thron aufgewühlt. Spät in der letzte Nacht "
+"erreichte er uns von seiner Patrouille und lehnte sich gegen einen Baum der "
+"über das Lager wacht. Die Zahl an auseinandersetzungen und Streitereien "
+"wächst stätig und der Winter hat uns fest in der Hand. Wir sollten Nahrung "
+"in unserem Lager lagern um den langen, kalten Winter zu überstehen!\" "
 
 #: ../../campaigns/t03.wmf/event:335
 msgid "Winter ahead"
-msgstr "Winter zuvor"
+msgstr "Winter voraus"
 
 #: ../../campaigns/t03.wmf/event:346
 msgid "Khantrukh nods"
-msgstr "Khantrukh nickte"
+msgstr "Khantrukh nickt"
 
 #: ../../campaigns/t03.wmf/event:348
 msgid ""
@@ -89,8 +90,8 @@ msgstr ""
 "Winter zu überstehen. Wir sollten mit dem Bau von Brunnen, Fischer- und "
 "Jägerhütten beginnen. Und sollten wir genug Platz finden, sollten wir so "
 "schnell wie möglich einen Bauernhof und eine Bäckerei bauen! Einer unserer "
-"Landwirte scheint sehr klug zu sein, er hat es bereits geschafft, einige "
-"Getreide in diesem kalten Boden wachsen zu lassen.\" "
+"Landwirte scheint sehr klug zu sein, er hat es bereits geschafft, Getreide "
+"in diesem kalten Boden wachsen zu lassen.\" "
 
 #: ../../campaigns/t03.wmf/event:350
 #: ../../campaigns/t03.wmf/event:428
@@ -207,7 +208,7 @@ msgid ""
 msgstr ""
 "* Erweitere dein Reich bis hin zu den Bergen, sende Geologen aus um Erze und "
 "Kohle zu suchen und errichte eine Bergwerkswirtschaft aus Minen, Tavernen, "
-"verarbeitender Verhüttung und Metallbearbeitung."
+"Schmelzen und Metallwerkstätten."
 
 #: ../../campaigns/t03.wmf/event:525
 msgid "Mountains found"
@@ -219,7 +220,7 @@ msgid ""
 "brought a smile on my face - even if the hardest part is still waiting to be "
 "done, now our smiths will give their best to further ease our lives.\" "
 msgstr ""
-" \"Ich habe soeben erfahren, dass unsere Montanwirtschaft anläuft. Diese "
+" \"Ich habe soeben erfahren, dass unsere Minenwirtschaft anläuft. Diese "
 "Nachricht hat mich lächeln lassen - obwohl uns der härteste Teil noch "
 "bevorsteht, werden unsere Schmiede nun alles geben, uns das Leben zu "
 "erleichtern.\" "
@@ -319,8 +320,8 @@ msgid ""
 "another metalworks to ensure the production of tools."
 msgstr ""
 "* Baue deine Schmiede zu einer Axtfabrik oder sogar zu einer Waffenschmiede "
-"um, sobald der Schmied die Nächste Stufe (Meisterschmied) erreicht hat und "
-"baue eine andere Schmiede auf, um die Produktion von Werkzeugen zu sichern."
+"um, sobald der Schmied die Nächste Stufe (Meisterschmied) erreicht hat, und "
+"errichte eine neue Schmiede, um die Produktion von Werkzeugen zu sichern."
 
 #: ../../campaigns/t03.wmf/event:629
 #: ../../campaigns/t03.wmf/objective:75
@@ -402,7 +403,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/event:726
 #: ../../campaigns/t03.wmf/event:760
 msgid "The story continues"
-msgstr "Die Geschichte hält an"
+msgstr "Die Geschichte geht weiter..."
 
 #: ../../campaigns/t03.wmf/event:743
 msgid "Thron speaks confidently."
@@ -619,7 +620,7 @@ msgstr "Baue eine Festung"
 
 #: ../../campaigns/t03.wmf/objective:45
 msgid "Build a warehouse"
-msgstr "Baue ein Wahrenlager"
+msgstr "Baue ein Warenlager"
 
 #: ../../campaigns/t03.wmf/objective:49
 msgid ""
@@ -629,7 +630,7 @@ msgid ""
 "and longer."
 msgstr ""
 "-> Warenlager sind ähnlich wie das Hauptquartier, mit dem Unterschied, dass "
-"Soldaten es nicht verteidigen werden. Es ist von Vorteil ein Warenhaus zu "
+"keine Soldaten darin stationiert sind. Es ist von Vorteil ein Warenhaus zu "
 "errichten, wenn dein Gebiet wächst und die Wege zum Hauptquartier immer "
 "länger und länger werden."
 
