@@ -95,7 +95,8 @@ struct Building_Descr : public Map_Object_Descr {
 		 uint32_t       const * ware_counts    = 0,
 		 uint32_t       const * worker_counts  = 0,
 		 Soldier_Counts const * soldier_counts = 0,
-		 Building_Descr const * old = 0)
+		 Building_Descr const * old = 0,
+		 bool                   loading = false)
 		const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTML(::FileWrite &) const;
@@ -250,7 +251,7 @@ public:
 protected:
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
-	virtual void init(Editor_Game_Base &);
+	virtual void init(Editor_Game_Base &, bool loading);
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 

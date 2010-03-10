@@ -183,16 +183,18 @@ Building & Building_Descr::create
 	 uint32_t       const * const ware_counts,
 	 uint32_t       const * const worker_counts,
 	 Soldier_Counts const * const soldier_counts,
-	 Building_Descr const * const old)
+	 Building_Descr const * const old,
+	 bool                         loading)
 	const
 {
 	Building & b = construct ? create_constructionsite(old) : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
+
 	b.prefill
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 ware_counts, worker_counts, soldier_counts);
-	b.init(egbase);
+	b.init(egbase, loading);
 	b.postfill
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 ware_counts, worker_counts, soldier_counts);
@@ -362,7 +364,7 @@ Common building initialization code. You must call this from
 derived class' init.
 ===============
 */
-void Building::init(Editor_Game_Base & egbase)
+void Building::init(Editor_Game_Base & egbase, bool loading)
 {
 	PlayerImmovable::init(egbase);
 

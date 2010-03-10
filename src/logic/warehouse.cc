@@ -414,14 +414,27 @@ void Warehouse::set_needed(Ware_Index const ware_index, uint32_t const value)
 }
 
 
-void Warehouse::init(Editor_Game_Base & egbase)
+void Warehouse::init(Editor_Game_Base & egbase, bool loading)
 {
-	Building::init(egbase);
+	Building::init(egbase, loading);
 
 	Ware_Index const nr_wares   = tribe().get_nrwares  ();
 	Ware_Index const nr_workers = tribe().get_nrworkers();
 	m_supply->set_nrwares  (nr_wares);
 	m_supply->set_nrworkers(nr_workers);
+
+	// Even though technically, a warehouse might be completely empty,
+	// we let warehouse see always for simplicity's sake (since there's
+	// almost always going to be a carrier inside, that shouldn't hurt).
+	Player & player = owner();
+	player.see_area
+		(Area<FCoords>
+		 (egbase.map().get_fcoords(get_position()), vision_range()));
+
+	// All code below here is only needed if created during game
+	// so return here if we are loading a game
+	if(loading)
+		return;
 
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares;   ++i) {
 		Request & req =
@@ -456,18 +469,13 @@ void Warehouse::init(Editor_Game_Base & egbase)
 				 	(worker_types_without_cost.at(i.current)))
 				m_next_worker_without_cost_spawn[i.current] = act_time;
 	}
+	// m_next_military_act is not touched in the loading code. Is only needed if there
+	// warehous is created in the game?
+	// I assume it's for the conquer_radius thing
 	m_next_military_act =
 		schedule_act
 			(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
 	m_target_supply.resize(m_requests.size());
-
-	// Even though technically, a warehouse might be completely empty,
-	// we let warehouse see always for simplicity's sake (since there's
-	// almost always going to be a carrier inside, that shouldn't hurt).
-	Player & player = owner();
-	player.see_area
-		(Area<FCoords>
-		 	(egbase.map().get_fcoords(get_position()), vision_range()));
 
 	if (uint32_t const conquer_radius = get_conquers())
 		ref_cast<Game, Editor_Game_Base>(egbase).conquer_area
