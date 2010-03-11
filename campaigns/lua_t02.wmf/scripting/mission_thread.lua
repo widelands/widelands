@@ -11,7 +11,7 @@ enhance_buildings_done = false
 build_materials_done = false
 
 function send_msg(t)
-   p:send_message( t.title, t.body, t)
+   p:message_box(t.title, t.body, t)
 end
 
 function add_obj(t)
@@ -102,17 +102,18 @@ function mines_and_food_thread()
       "bakery",
    }
 
-   while not (obj_bf.done and ob_farming.done) do
+   while not (obj_bf.done and obj_farming.done) do
       sleep(6231)
    end
 
    -- Ready to build refiner stuff
    send_msg(order_msg_14_refine_ore)
-   p:allow_buildings("smelting_works")
-   add_obj(obj_refine_ores)
+   p:allow_buildings{"smelting_works"}
+   o = add_obj(obj_refine_ores)
    while #p:get_buildings("smelting_works") < 1 do
       sleep(6223)
    end
+   o.done = true
 
    -- Information about making mines deeper
    send_msg(order_msg_15_mines_exhausted)
@@ -138,7 +139,7 @@ function build_materials_thread()
    end
 
    send_msg(order_msg_16_blackwood)
-   p:allow_buildings("hardener")
+   p:allow_buildings{"hardener"}
    local o = add_obj(obj_better_material_1)
    while #p:get_buildings("hardener") < 1 do sleep(5421) end
    o.done = true
@@ -148,10 +149,10 @@ function build_materials_thread()
    o = add_obj(obj_better_material_2)
    -- Wait for the buildings to be build
    while true do
-      local rv = p:get_buildings{"grinder", "well",
+      local rv = p:get_buildings{"lime_kiln", "well",
          "coalmine", "deep_coalmine", "burners_house"}
-      if (#rv.grinder > 0 and #rv.well > 0) and
-         (#rv.coalmine + #rv.deep_coalmine + #burners_house > 0) then
+      if (#rv.lime_kiln > 0 and #rv.well > 0) and
+         (#rv.coalmine + #rv.deep_coalmine + #rv.burners_house > 0) then
          break
       end
       sleep(5421)
@@ -163,7 +164,8 @@ function build_materials_thread()
    o = add_obj(obj_better_material_3)
    while #p:get_buildings("fernery") < 1 do sleep(5421) end
 
-   p:send_msg(order_msg_19_all_material)
+   send_msg(order_msg_19_all_material)
+   o.done = true
 
    build_materials_done = true
 end
@@ -186,7 +188,7 @@ function mission_complete_thread()
    end
 
    send_msg(msg_mission_complete)
-   p:reveal_scenario("barbariantut01")
+   p:reveal_scenario("barbariantut02")
 end
 
 -- ==============
@@ -335,10 +337,10 @@ function reveal_village()
    connected_road(p, wl.map.Field(56, 17).immovable, "sw,se")
 end
 
--- run(introduction_thread)
--- run(mines_and_food_thread)
--- run(build_materials_thread)
--- run(story_messages_thread)
+run(introduction_thread)
+run(mines_and_food_thread)
+run(build_materials_thread)
+run(story_messages_thread)
 run(village_thread)
 
 run(mission_complete_thread)

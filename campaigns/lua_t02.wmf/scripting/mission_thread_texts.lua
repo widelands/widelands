@@ -223,7 +223,7 @@ _[[ "Wonderful! Our roofs are not dripping anymore, and we have all the material
 "</p></rt>"
 }
 
-msg_complete_msg = {
+msg_mission_complete = {
    title=_"Mission Complete",
    body="<rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _[[ "The other day Boldreth asked me to accompany him to the new inn. It would cheer me up, he said.<br> When I looked around, I saw faithful faces, trusting that I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br> The news he brought changed everything..."<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]] .. 
@@ -324,6 +324,7 @@ check = function(obj)
       if #rv.well >= 1 and #rv.bakery >= 1 and #rv.farm >= 1 then
          break
       end
+      sleep(4234)
    end
    send_msg(order_msg_12_farming_began)
    obj.done = true
