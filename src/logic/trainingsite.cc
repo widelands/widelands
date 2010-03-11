@@ -207,11 +207,9 @@ void TrainingSite::prefill
 /**
  * Setup the building and request soldiers
  */
-void TrainingSite::init(Editor_Game_Base & egbase, bool loading)
+void TrainingSite::init(Editor_Game_Base & egbase)
 {
-	ProductionSite::init(egbase, loading);
-	if(loading)
-		return;
+	ProductionSite::init(egbase);
 
 	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {

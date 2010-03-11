@@ -414,11 +414,9 @@ void Warehouse::set_needed(Ware_Index const ware_index, uint32_t const value)
 }
 
 
-void Warehouse::init(Editor_Game_Base & egbase, bool loading)
+void Warehouse::init(Editor_Game_Base & egbase)
 {
-	Building::init(egbase, loading);
-	if(loading)
-		return;
+	Building::init(egbase);
 
 	Ware_Index const nr_wares   = tribe().get_nrwares  ();
 	Ware_Index const nr_workers = tribe().get_nrworkers();
