@@ -299,6 +299,10 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			(1 <= packet_version and
 			 packet_version <= CURRENT_WAREHOUSE_PACKET_VERSION)
 		{
+			Ware_Index const nr_wares   = warehouse.tribe().get_nrwares  ();
+			Ware_Index const nr_workers = warehouse.tribe().get_nrworkers();
+			warehouse.m_supply->set_nrwares  (nr_wares);
+			warehouse.m_supply->set_nrworkers(nr_workers);
 			//log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
 			Tribe_Descr const & tribe = warehouse.tribe();
@@ -441,8 +445,28 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				//  The checks that the warehouse has a next_spawn time for each
 				//  worker type that the player is allowed to spawn, is in
 				//  Warehouse::load_finish.
-
-			log("Read warehouse stuff for %p\n", &warehouse);
+			
+			if (uint32_t const conquer_radius = warehouse.get_conquers()) {
+				//  Add to map of military influence.
+				Map const & map = game.map();
+				Area<FCoords> a
+					(map.get_fcoords(warehouse.get_position()),
+					  conquer_radius);
+				Field const & first_map_field = map[0];
+				Player::Field * const player_fields =
+					warehouse.owner().m_fields;
+				MapRegion<Area<FCoords> > mr(map, a);
+				do
+					player_fields[mr.location().field - &first_map_field]
+					.military_influence
+						+= map.calc_influence(mr.location(), Area<>(a, a.radius));
+				while (mr.advance(map));
+			}
+			warehouse.owner().see_area
+				(Area<FCoords>
+				 (game.map().get_fcoords(warehouse.get_position()),
+				  warehouse.vision_range()));
+			//log("Read warehouse stuff for %p\n", &warehouse);
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
