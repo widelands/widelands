@@ -763,7 +763,7 @@ int L_Player::place_road(lua_State * L) {
 	Path path(current);
 
 	bool force_road = false;
-	if(lua_isboolean(L, -1)) {
+	if (lua_isboolean(L, -1)) {
 		force_road = luaL_checkboolean(L, -1);
 		lua_pop(L, 1);
 	}

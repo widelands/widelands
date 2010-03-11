@@ -284,6 +284,8 @@ public:
 	 * Lua Methods
 	 */
 	int warp_workers(lua_State * L);
+	int set_wares(lua_State * L);
+	int get_wares(lua_State * L);
 
 	/*
 	 * C Methods

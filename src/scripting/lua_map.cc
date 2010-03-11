@@ -20,6 +20,7 @@
 #include <lua.hpp>
 
 #include "container_iterate.h"
+#include "economy/wares_queue.h"
 #include "log.h"
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
@@ -1048,6 +1049,8 @@ ProductionSite
 const char L_ProductionSite::className[] = "ProductionSite";
 const MethodType<L_ProductionSite> L_ProductionSite::Methods[] = {
 	METHOD(L_ProductionSite, warp_workers),
+	METHOD(L_ProductionSite, set_wares),
+	METHOD(L_ProductionSite, get_wares),
 	{0, 0},
 };
 const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
@@ -1181,6 +1184,108 @@ int L_ProductionSite::warp_workers(lua_State * L) {
 	}
 
 	return 0;
+}
+
+/* RST
+	.. method:: set_wares(which[, amount])
+
+		The function is similar to :meth:`Warehouse.set_wares`.  Only valid wares
+		and only amounts that do not overfill the house are allowed.
+*/
+static Ware_Index m_check_ware_is_valid
+	(lua_State * L, ProductionSite * ps, const std::string & ware_name)
+{
+	Tribe_Descr const & tribe = ps->owner().tribe();
+
+	Ware_Index ware_type = Ware_Index::Null();
+	container_iterate_const(Ware_Types, ps->descr().inputs(), i)
+		if (tribe.get_ware_descr(i.current->first)->name() == ware_name) {
+			ware_type = i.current->first;
+			break;
+		}
+	if (!ware_type)
+			report_error
+				(L, "<%s> is an illegal ware for this productionsite!",
+				 ware_name.c_str());
+
+	return ware_type;
+}
+static int m_set_ware
+	(lua_State * L, ProductionSite * ps,
+	 const std::string & ware_name, uint32_t count)
+{
+	Ware_Index ware_type = m_check_ware_is_valid(L, ps, ware_name);
+	WaresQueue & wq = ps->waresqueue(ware_type);
+	if (count > wq.get_size())
+		return
+			report_error
+				(L, "Not enough space for %u items, only for %i",
+				 count, wq.get_size());
+
+	wq.set_filled(count);
+	wq.update();
+
+	return 0;
+}
+int L_ProductionSite::set_wares(lua_State * L) {
+	ProductionSite * ps = get(get_game(L), L);
+
+	if (lua_gettop(L) == 3) {
+		// string value
+		return m_set_ware(L, ps, luaL_checkstring(L, 2), luaL_checkuint32(L, 3));
+	} else {
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			m_set_ware(L, ps, luaL_checkstring(L, -2), luaL_checkuint32(L, -1));
+			lua_pop(L, 1);
+		}
+	}
+
+	return 0;
+}
+
+/* RST
+	.. method:: get_wares(which)
+
+		Similar to :meth:`Warehouse.get_wares`. Which can also be :const:`all`
+		which will return a :class:`table` with all wares and their count.
+
+		:returns: :class:`integer` or :class:`table`
+*/
+int L_ProductionSite::get_wares(lua_State * L) {
+	ProductionSite * ps = get(get_game(L), L);
+
+	if (lua_isstring(L, 2)) {
+		// string value
+		std::string name = luaL_checkstring(L, 2);
+		if (name == "all") {
+			Tribe_Descr const & tribe = ps->owner().tribe();
+			lua_newtable(L);
+			container_iterate_const(Ware_Types, ps->descr().inputs(), i) {
+				lua_pushstring(L, tribe.get_ware_descr(i.current->first)->name());
+				lua_pushuint32(L, ps->waresqueue(i.current->first).get_filled());
+				lua_rawset(L, -3);
+			}
+		} else {
+			lua_pushuint32
+				(L, ps->waresqueue(m_check_ware_is_valid(L, ps, name)).get_filled()
+			);
+		}
+	} else {
+		// table
+		lua_newtable(L);
+		int rv_idx = lua_gettop(L);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			uint32_t count = ps->waresqueue
+				(m_check_ware_is_valid(L, ps, luaL_checkstring(L, -1)))
+					.get_filled();
+
+			lua_pushuint32(L, count);
+			lua_rawset(L, rv_idx); // pops value and count
+		}
+	}
+	return 1;
 }
 
 /*
