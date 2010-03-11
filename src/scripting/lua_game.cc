@@ -95,6 +95,7 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, reveal_fields),
 	METHOD(L_Player, hide_fields),
 	METHOD(L_Player, reveal_scenario),
+	METHOD(L_Player, reveal_campaign),
 	METHOD(L_Player, place_road),
 	METHOD(L_Player, get_buildings),
 	{0, 0},
@@ -105,6 +106,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, objectives),
 	PROP_RW(L_Player, viewpoint_x),
 	PROP_RW(L_Player, viewpoint_y),
+	PROP_RO(L_Player, defeated),
 	{0, 0, 0},
 };
 
@@ -229,6 +231,21 @@ int L_Player::set_viewpoint_y(lua_State * L) {
 	return 0;
 }
 
+/* RST
+	.. attribute:: defeated
+
+		(RO) :const:`true` if this player was defeated, :const:`false` otherwise
+*/
+int L_Player::get_defeated(lua_State * L) {
+	const std::vector<uint32_t> & nr_workers =
+		get_game(L).get_general_statistics()[m_pl - 1].nr_workers;
+
+	if (not nr_workers.empty() and *nr_workers.rbegin() == 0)
+		lua_pushboolean(L, true);
+	else
+		lua_pushboolean(L, false);
+	return 1;
+}
 
 /*
  ==========================================================
@@ -732,6 +749,26 @@ int L_Player::reveal_scenario(lua_State * L) {
 
 	Campaign_visibility_save cvs;
 	cvs.set_map_visibility(luaL_checkstring(L, 2), true);
+
+	return 0;
+}
+
+/* RST
+	.. method:: reveal_campaign(name)
+
+		This reveals a campaign. This only works for the
+		interactive player and most likely also only in single player games.
+
+		:arg name: name of the campaign to reveal
+		:type name: :class:`string`
+*/
+// UNTESTED
+int L_Player::reveal_campaign(lua_State * L) {
+	if (get_game(L).get_ipl()->player_number() != m_pl)
+		return report_error(L, "Can only be called for interactive player!");
+
+	Campaign_visibility_save cvs;
+	cvs.set_campaign_visibility(luaL_checkstring(L, 2), true);
 
 	return 0;
 }

@@ -65,6 +65,7 @@ public:
 	int set_viewpoint_x(lua_State * L);
 	int get_viewpoint_y(lua_State * L);
 	int set_viewpoint_y(lua_State * L);
+	int get_defeated(lua_State * L);
 
 	/*
 	 * Lua methods
@@ -83,6 +84,7 @@ public:
 	int reveal_fields(lua_State * L);
 	int hide_fields(lua_State * L);
 	int reveal_scenario(lua_State * L);
+	int reveal_campaign(lua_State * L);
 	int place_road(lua_State * L);
 	int get_buildings(lua_State * L);
 
