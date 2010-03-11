@@ -54,22 +54,23 @@ function connected_road(p, start, cmd, g_create_carriers)
 end
 
 -- RST
--- .. function:: prefilled_buildings(plr, buildings_descr)
+-- .. function:: prefilled_buildings(plr, b1_descr[, b2_descr, ...])
 --
---    Create pre-filled buildings. The description consists of arrays which
---    contain building type, location and pre-filled wares. A sample usage:
+--    Create pre-filled buildings. Each description is a arrays which
+--    contain building type, location and pre-fill information. A sample usage:
 --
 --    .. code-block:: lua
 --
 --       prefilled_buildings(wl.game.Player(1),
 --          {"sentry", 57, 9}, -- Sentry completely full with soldiers
+--          {"sentry", 57, 9, soldier={[{0,0,0,0}]=1}}, -- Sentry with one soldier
 --          {"bakery", 55, 20, wares = {wheat=6, water=6}}, -- bakery with wares and workers
 --          {"well", 52, 30}, -- a well with workers
 --       )
 --
 --    :arg plr: The player for which the road is created
 --    :type plr: :class:`wl.game.Player`
---    :arg buildings_descr: An array of tables. Each table must contain at 
+--    :arg b1_descr: An array of tables. Each table must contain at 
 --       least the name of the building, and the x and y positions of the field
 --       where the building should be created. Optional entries are:
 --
@@ -78,7 +79,10 @@ end
 --          :meth:`wl.map.ProductionSite.set_wares`. This is valid for
 --          :class:`wl.map.ProductionSite` and :class:`wl.map.Warehouse` and
 --          ignored otherwise. 
---    :type buildings_descr: :class:`array`
+--       soldiers
+--          A table of (soldier_descr,count) as expected by :meth:`wl.map.MilitarySite.warp_soldiers`.
+--          If this is nil, the site will be filled with {0,0,0,0} soldiers.
+--    :type b1_descr: :class:`array`
 function prefilled_buildings(p, ...)
    for idx,bdescr in ipairs({...}) do
       b = p:place_building(bdescr[1], wl.map.Field(bdescr[2],bdescr[3]))
@@ -88,7 +92,11 @@ function prefilled_buildings(p, ...)
       end
       -- Fill with soldiers
       if b.max_soldiers and b.warp_soldiers then
-         b:warp_soldiers{[{0,0,0,0}] = b.max_soldiers}
+         if bdescr.soldiers then
+            b:warp_soldiers(bdescr.soldiers)
+         else
+            b:warp_soldiers{[{0,0,0,0}] = b.max_soldiers}
+         end
       end
       -- Fill with wares if this is requested
       if bdescr.wares then b:set_wares(bdescr.wares) end

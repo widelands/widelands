@@ -75,12 +75,7 @@ function mines_and_food_thread()
    }
 
    -- Wait for completion
-   local fields = array_combine(
-      wl.map.Field(32,16):region(8),
-      wl.map.Field(37,8):region(8)
-   )
-
-   while not check_for_buildings(fields, {coalmine = 1, oremine = 1}) do
+   while not check_for_buildings(p, {coalmine = 1, oremine = 1}) do
       sleep(5000)
    end
    o.done = true

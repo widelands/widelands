@@ -265,7 +265,7 @@ obj_claim_northeastern_rocks = {
    title =_"Expand north-east and build a quarry",
    check = function(obj)
       local f = wl.map.Field(27,48):region(6)
-      while not check_for_buildings(f, { quarry = 1 }) do 
+      while not check_for_buildings(wl.game.Player(1), { quarry = 1 }, f) do 
          sleep(5000)
       end
 

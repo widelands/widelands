@@ -833,9 +833,19 @@ int L_Player::place_road(lua_State * L) {
 	return to_lua<L_Road>(L, new L_Road(*r));
 }
 
-/*
- * TODO: docu
- */
+/* RST
+	.. method:: get_buildings(which)
+
+		which can be either a single name or an array of names. In the first
+		case, the method returns an array of all Buildings that the player has of
+		this kind. If which is an array, the function returns a table of
+		(name,array of buildings) pairs.
+
+		:type which: name of building or array of building names
+		:rtype which: :class:`string` or :class:`array`
+		:returns: information about the players buildings
+		:rtype: :class:`array` or :class:`table`
+*/
 int L_Player::get_buildings(lua_State * L) {
 	Game & g = get_game(L);
 	Map * map = g.get_map();

@@ -6,14 +6,16 @@ use("map", "texts")
 use("aux", "objective_utils")
 
 function check_quarries() 
-   while not check_for_buildings(wl.map.Field(8,13):region(3), {quarry = 2}) do
+   while not check_for_buildings(p, {quarry = 2},
+      wl.map.Field(8,13):region(3)) do
          coroutine.yield(wl.game.get_time() + 5000)
    end
    p.objectives.quarries.done = true
 end
 
 function check_ranger() 
-   while not check_for_buildings(wl.map.Field(17,11):region(3), {rangers_hut = 1}) do
+   while not check_for_buildings(p, {rangers_hut = 1},
+      wl.map.Field(17,11):region(3)) do
          coroutine.yield(wl.game.get_time() + 5000)
    end
    p.objectives.ranger.done = true
@@ -24,16 +26,15 @@ function tutorial_thread()
    show_story_box(_"The advisor", khantrukh_2, nil, 80, 80)
    o = start_lumberjack_01(p)
    -- Wait till the hut is build.
-   while not check_for_buildings(
-      wl.map.Field(15,11):region(2), {constructionsite = 1})
-      do sleep(5000) end
+   while not check_for_buildings(p, {constructionsite = 1},
+      wl.map.Field(15,11):region(2)) do sleep(5000) end
 
    show_story_box(_"The advisor", khantrukh_3, nil, 80, 80)
 
    -- Wait till the hut is build.
-   while not check_for_buildings(
-      wl.map.Field(15,11):region(2), {lumberjacks_hut = 1}) do
-      coroutine.yield(wl.game.get_time() + 5000)
+   while not check_for_buildings(p, {lumberjacks_hut = 1},
+      wl.map.Field(15,11):region(2)) do
+         coroutine.yield(wl.game.get_time() + 5000)
    end
    o.done = true
 
@@ -42,8 +43,8 @@ function tutorial_thread()
    o = start_lumberjack_02(p)
 
    -- Wait till the hut is build.
-   while not check_for_buildings(
-      wl.map.Field(12,13):region(2), {lumberjacks_hut = 1}) do
+   while not check_for_buildings({lumberjacks_hut = 1},
+         wl.map.Field(12,13):region(2)) do
       coroutine.yield(wl.game.get_time() + 5000)
    end
    o.done = true
