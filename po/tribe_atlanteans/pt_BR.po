@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-26 19:51+0000\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-10 16:56+0000\n"
 "Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-27 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-03-11 04:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -82,6 +82,8 @@ msgid ""
 "The bakingtray is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"A Pá de Forno é a ferramenta do padeiro, cada padeiro precisa de sua "
+"própria. É produzida na ferraria."
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -121,7 +123,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Trabalha nas áreas de cosntrução para criar um novo edifício."
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
@@ -129,7 +131,7 @@ msgstr "Queima carvão."
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Carrega itens por suas estradas."
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -185,11 +187,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Cornfield medium"
-msgstr ""
+msgstr "Campo de Milho Médio"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Cornfield small"
-msgstr ""
+msgstr "Campo de Milho Pequeno"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Cornfield tiny"
@@ -201,43 +203,43 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Indicador de recursos pouco carvão"
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Indicador de recursos muito carvão"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Indicador de recursos pouco ouro"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Indicador de recursos muito ouro"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Resource indicator granit little"
-msgstr ""
+msgstr "Indicador de recursos pouco granito"
 
 #: ../../tribes/atlanteans/conf:56
 msgid "Resource indicator granit much"
-msgstr ""
+msgstr "Indicador de recursos muito granito"
 
 #: ../../tribes/atlanteans/conf:57
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Indicador de recursos pouco ferro"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Indicador de recursos muito ferro"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Indicador de recursos sem recurso"
 
 #: ../../tribes/atlanteans/conf:60
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Indicador de recursos água"
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Advanced Shield"
@@ -245,7 +247,7 @@ msgstr "Escudo Avançado"
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Bakingtray"
-msgstr ""
+msgstr "Pá-de-Forno"
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Blackroot Flour"
@@ -261,7 +263,7 @@ msgstr "Pão"
 
 #: ../../tribes/atlanteans/conf:68
 msgid "Buckets"
-msgstr ""
+msgstr "Baldes"
 
 #: ../../tribes/atlanteans/conf:69
 msgid "Coal"
@@ -269,7 +271,7 @@ msgstr "Carvão"
 
 #: ../../tribes/atlanteans/conf:70
 msgid "Cornflour"
-msgstr ""
+msgstr "Farinha de Milho"
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Corn"
@@ -285,7 +287,7 @@ msgstr "Tridente Duplo"
 
 #: ../../tribes/atlanteans/conf:74
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Tenazes"
 
 #: ../../tribes/atlanteans/conf:75
 msgid "Fishing Net"
@@ -301,7 +303,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Gold Ore"
-msgstr ""
+msgstr "Minério de Ouro"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Gold"
@@ -329,7 +331,7 @@ msgstr "Arco de Caça"
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Iron Ore"
-msgstr ""
+msgstr "Minério de Ferro"
 
 #: ../../tribes/atlanteans/conf:86
 msgid "Iron"
@@ -337,11 +339,11 @@ msgstr "Ferro"
 
 #: ../../tribes/atlanteans/conf:87
 msgid "Light trident"
-msgstr ""
+msgstr "Tridente Leve"
 
 #: ../../tribes/atlanteans/conf:88
 msgid "Long Trident"
-msgstr ""
+msgstr "Tridente Longo"
 
 #: ../../tribes/atlanteans/conf:89
 msgid "Meat"
@@ -357,7 +359,7 @@ msgstr "Quartzo"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Pick"
-msgstr ""
+msgstr "Picareta"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Planks"
@@ -365,7 +367,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:94
 msgid "Saw"
-msgstr ""
+msgstr "Serra"
 
 #: ../../tribes/atlanteans/conf:95
 msgid "Scythe"
@@ -377,7 +379,7 @@ msgstr "Pá"
 
 #: ../../tribes/atlanteans/conf:97
 msgid "Smoked fish"
-msgstr ""
+msgstr "Peixe Defumado"
 
 #: ../../tribes/atlanteans/conf:98
 msgid "Smoked meat"
@@ -409,7 +411,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:105
 msgid "Trunk"
-msgstr ""
+msgstr "Tronco"
 
 #: ../../tribes/atlanteans/conf:106
 msgid "Water"
@@ -445,7 +447,7 @@ msgstr "Construtor"
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Burner"
-msgstr ""
+msgstr "Queimador"
 
 #: ../../tribes/atlanteans/conf:121
 msgid "Farmer"
@@ -485,11 +487,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:130
 msgid "Smelter"
-msgstr ""
+msgstr "Fundidor"
 
 #: ../../tribes/atlanteans/conf:131
 msgid "Smoker"
-msgstr ""
+msgstr "Fumaceiro"
 
 #: ../../tribes/atlanteans/conf:132
 msgid "Spiderbreeder"
@@ -497,7 +499,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:133
 msgid "Stonecutter"
-msgstr ""
+msgstr "Lapidador"
 
 #: ../../tribes/atlanteans/conf:134
 msgid "Toolsmith"
@@ -513,7 +515,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:137
 msgid "Weaver"
-msgstr ""
+msgstr "Tecelão"
 
 #: ../../tribes/atlanteans/conf:138
 msgid "Woodcutter"
@@ -525,11 +527,11 @@ msgstr "Batedor"
 
 #: ../../tribes/atlanteans/conf:140
 msgid "Horse Breeder"
-msgstr ""
+msgstr "Tratador de Cavalo"
 
 #: ../../tribes/atlanteans/conf:143
 msgid "Construction Site"
-msgstr ""
+msgstr "Área de Construção"
 
 #: ../../tribes/atlanteans/conf:146
 msgid "Dungeon"
@@ -546,11 +548,11 @@ msgstr "Castelo"
 
 #: ../../tribes/atlanteans/conf:151
 msgid "Guardhall"
-msgstr ""
+msgstr "Sala da Guarda"
 
 #: ../../tribes/atlanteans/conf:152
 msgid "Guardhouse"
-msgstr ""
+msgstr "Casa-da-Guarda"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "High Tower"
@@ -576,7 +578,7 @@ msgstr "Cidadela"
 
 #: ../../tribes/atlanteans/conf:160
 msgid "Donjon"
-msgstr ""
+msgstr "Torre de menagem"
 
 #: ../../tribes/atlanteans/conf:161
 #: ../../tribes/atlanteans/conf:168
@@ -586,15 +588,15 @@ msgstr "Fortaleza"
 #: ../../tribes/atlanteans/conf:162
 #: ../../tribes/atlanteans/conf:164
 msgid "Sentry"
-msgstr ""
+msgstr "Sentinela"
 
 #: ../../tribes/atlanteans/conf:163
 msgid "Stronghold"
-msgstr ""
+msgstr "Baluarte"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Barracks"
-msgstr ""
+msgstr "Quartel"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Outpost"
@@ -638,7 +640,7 @@ msgstr "Fazenda"
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Fish Breeder's House"
-msgstr ""
+msgstr "Casa do Criador de Peixes"
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Fisher's House"
@@ -658,7 +660,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Hunter's House"
-msgstr ""
+msgstr "Casa do Caçador"
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Iron Mine"
@@ -682,7 +684,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:195
 msgid "Smokery"
-msgstr ""
+msgstr "Defumaderia"
 
 #: ../../tribes/atlanteans/conf:196
 msgid "Spiderfarm"
@@ -690,7 +692,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:197
 msgid "Toolsmithy"
-msgstr ""
+msgstr "Ferraria"
 
 #: ../../tribes/atlanteans/conf:198
 msgid "Weapon Smithy"
@@ -722,7 +724,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:207
 msgid "Castle village"
-msgstr ""
+msgstr "Vila Castelã"
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
@@ -766,17 +768,19 @@ msgstr "Dormir"
 
 #: ../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Aprimora o ataque do soldado 0"
 
 #: ../../tribes/atlanteans/dungeon/conf:33
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Aprimora o ataque do soldado 0 (somente para compatibilidade com velhos "
+"savegames (build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:34
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Aprimora o ataque do soldado 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:35
 msgid ""
@@ -786,7 +790,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:36
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Aprimora o ataque do soldado 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:37
 msgid ""
@@ -796,7 +800,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:38
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Aprimora o ataque do soldado 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 msgid ""
@@ -810,11 +814,11 @@ msgstr "Plantar milho"
 
 #: ../../tribes/atlanteans/farm/conf:21
 msgid "Harvest corn"
-msgstr ""
+msgstr "Colher Milho"
 
 #: ../../tribes/atlanteans/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Planta campos."
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""
@@ -897,7 +901,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid "This bow is used by the atlantian hunter."
-msgstr ""
+msgstr "Este arco é usado pelos caçadores Atlantes."
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid "Weapons and Tools are made of iron."
@@ -905,7 +909,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid "This is red iron ore."
-msgstr ""
+msgstr "Este é o minério de ferro vermelho."
 
 #: ../../tribes/atlanteans/labyrinth/conf:37
 msgid "Upgrade soldier defense 0"
@@ -929,31 +933,37 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:41
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Aprimora os pontos de vida do soldado 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:42
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Aprimora os pontos de vida do soldado 0 (somente para compatibilidade com "
+"velhos savegames (build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:43
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Aprimorar a evasão do soldado 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:44
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Aprimorar a evasão do soldado 0 (somente para compatibilidade com velhos "
+"savegames (build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Aprimorar a evasão do soldado 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Aprimorar a evasão do soldado 1 (somente para compatibilidade com velhos "
+"savegames (build13))"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid "This is the basic weapon for atlantian soldiers."
@@ -1032,15 +1042,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "Funde ferro."
 
 #: ../../tribes/atlanteans/smelting_works/conf:23
 msgid "Smelt iron"
-msgstr ""
+msgstr "Fundir ferro"
 
 #: ../../tribes/atlanteans/smelting_works/conf:24
 msgid "Smelt gold"
-msgstr ""
+msgstr "Fundir ouro"
 
 #: ../../tribes/atlanteans/smoked_fish/conf:1
 msgid ""
@@ -1056,19 +1066,19 @@ msgstr ""
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "Defuma carne e peixe."
 
 #: ../../tribes/atlanteans/smokery/conf:25
 msgid "Smoke meat"
-msgstr ""
+msgstr "Defumar carne"
 
 #: ../../tribes/atlanteans/smokery/conf:26
 msgid "Smoke fish"
-msgstr ""
+msgstr "Defumar peixe"
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Defender e Conquistar!"
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
@@ -1114,11 +1124,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:34
 msgid "Produce bucket"
-msgstr ""
+msgstr "Produzir balde"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:35
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Produzir tenazes"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce fishing net"
@@ -1126,7 +1136,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:37
 msgid "Produce hammer"
-msgstr ""
+msgstr "Produzir martelo"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce hook pole"
@@ -1142,23 +1152,23 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce pick"
-msgstr ""
+msgstr "Produzir picareta"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:42
 msgid "Produce saw"
-msgstr ""
+msgstr "Produzir serra"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:43
 msgid "Produce scythe"
-msgstr ""
+msgstr "Produzir foice"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:44
 msgid "Produce shovel"
-msgstr ""
+msgstr "Produzir pá"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Treina os soldados"
 
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""
@@ -1178,15 +1188,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
-msgstr ""
+msgstr "Produzir tridente leve"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:31
 msgid "Produce long trident"
-msgstr ""
+msgstr "Produzir tridente longo"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:32
 msgid "Produce steel trident"
-msgstr ""
+msgstr "Produzir tridente de aço"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:33
 msgid "Produce double trident"
@@ -1214,4 +1224,4 @@ msgstr ""
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "Derruba árvores."
