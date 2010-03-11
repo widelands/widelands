@@ -262,11 +262,9 @@ void ConstructionSite::set_economy(Economy * const e)
 Initialize the construction site by starting orders
 ===============
 */
-void ConstructionSite::init(Editor_Game_Base & egbase, bool loading)
+void ConstructionSite::init(Editor_Game_Base & egbase)
 {
-	Building::init(egbase, loading);
-	if(loading)
-		return;
+	Building::init(egbase);
 
 	//  TODO figure out whether planing is necessary
 

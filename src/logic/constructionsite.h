@@ -78,7 +78,7 @@ public:
 	void set_previous_building(const Building_Descr * const);
 	const Building_Descr & building() const throw () {return *m_building;}
 
-	virtual void init   (Editor_Game_Base &, bool loading);
+	virtual void init   (Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
 	virtual bool burn_on_destroy();
