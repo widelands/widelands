@@ -1,5 +1,5 @@
 -- =======================================================================
---                            Main Mission Thread                           
+--                            Main Mission Thread
 -- =======================================================================
 
 use("map", "mission_thread_texts")
@@ -10,7 +10,7 @@ quarry_done = false
 enhance_buildings_done = false
 build_materials_done = false
 
-function send_msg(t) 
+function send_msg(t)
    p:send_message( t.title, t.body, t)
 end
 
@@ -22,32 +22,13 @@ function add_obj(t)
    return o
 end
 
--- TODO: this function was also used in mission 01, make it public someplace
-function exist_buildings(region, t) 
-   carr = {}
-   for idx,f in ipairs(region) do
-      if f.immovable then
-         if carr[f.immovable.name] == nil then
-            carr[f.immovable.name] = 1
-         else
-            carr[f.immovable.name] = carr[f.immovable.name] + 1
-         end
-      end
-   end
-   for house,count in pairs(t) do
-      if carr[house] == nil or carr[house] < count then
-         return false
-      end
-   end
-   return true
-end
 
 -- ==============================================
--- First messages player at beginning of mission 
+-- First messages player at beginning of mission
 -- ==============================================
 function introduction_thread()
    sleep(2000)
-   
+
    send_msg(briefing_msg_1)
    send_msg(briefing_msg_2)
    send_msg(briefing_msg_3)
@@ -72,7 +53,7 @@ function introduction_thread()
 end
 
 -- ==================================
--- How to mine & Produce food thread 
+-- How to mine & Produce food thread
 -- ==================================
 function mines_and_food_thread()
    local f1 = wl.map.Field(30, 15)
@@ -87,19 +68,19 @@ function mines_and_food_thread()
    send_msg(order_msg_6_geologist)
    o = add_obj(obj_build_mines)
    p:allow_buildings{
-      "coalmine", 
-      "oremine", 
-      "goldmine", 
+      "coalmine",
+      "oremine",
+      "goldmine",
       "granitemine"
    }
-      
-   -- Wait for completion 
+
+   -- Wait for completion
    local fields = array_combine(
       wl.map.Field(32,16):region(8),
       wl.map.Field(37,8):region(8)
    )
 
-   while not exist_buildings(fields, {coalmine = 1, oremine = 1}) do
+   while not check_for_buildings(fields, {coalmine = 1, oremine = 1}) do
       sleep(5000)
    end
    o.done = true
@@ -132,7 +113,7 @@ function mines_and_food_thread()
    while #p:get_buildings("smelting_works") < 1 do
       sleep(6223)
    end
-   
+
    -- Information about making mines deeper
    send_msg(order_msg_15_mines_exhausted)
    p:allow_buildings{ "deep_coalmine", "inn" }
@@ -142,7 +123,7 @@ function mines_and_food_thread()
 end
 
 -- ==============================
--- Better build materials thread 
+-- Better build materials thread
 -- ==============================
 function build_materials_thread()
    local p = wl.game.Player(1)
@@ -155,20 +136,20 @@ function build_materials_thread()
       end
       sleep(5421)
    end
-   
+
    send_msg(order_msg_16_blackwood)
-   p:enable_buildings("hardener")
+   p:allow_buildings("hardener")
    local o = add_obj(obj_better_material_1)
    while #p:get_buildings("hardener") < 1 do sleep(5421) end
    o.done = true
 
    send_msg(order_msg_17_grindstone)
-   p:enable_buildings{"lime_kiln", "well", "burners_house"}
+   p:allow_buildings{"lime_kiln", "well", "burners_house"}
    o = add_obj(obj_better_material_2)
    -- Wait for the buildings to be build
    while true do
       local rv = p:get_buildings{"grinder", "well",
-         "coalmine", "deep_coalmine", "burners_house"} 
+         "coalmine", "deep_coalmine", "burners_house"}
       if (#rv.grinder > 0 and #rv.well > 0) and
          (#rv.coalmine + #rv.deep_coalmine + #burners_house > 0) then
          break
@@ -178,7 +159,7 @@ function build_materials_thread()
    o.done = true
 
    send_msg(order_msg_18_fernery)
-   p:enable_buildings{"fernery"}
+   p:allow_buildings{"fernery"}
    o = add_obj(obj_better_material_3)
    while #p:get_buildings("fernery") < 1 do sleep(5421) end
 
@@ -188,7 +169,7 @@ function build_materials_thread()
 end
 
 -- ======================
--- Throns story messages 
+-- Throns story messages
 -- ======================
 function story_messages_thread()
    wake_me(180 * 1000)
@@ -209,7 +190,7 @@ function mission_complete_thread()
 end
 
 -- ==============
--- Village thread 
+-- Village thread
 -- ==============
 function village_thread()
    local p = wl.game.Player(1)
@@ -228,7 +209,7 @@ function village_thread()
    timed_move(array_reverse(pts), p, 10)
    sleep(1500)
 end
-      
+
 
 --[[
    This is a village of poor but friendly people who have settled in a safe
@@ -249,7 +230,7 @@ end
    village owns all land between the glaciers.
 --]]
 function reveal_village()
-   function force_map_immovables(list) 
+   function force_map_immovables(list)
       for idx, id in ipairs(list) do
          local f = wl.map.Field(id[2], id[3])
          if f.immovable then
@@ -258,7 +239,7 @@ function reveal_village()
          wl.map.create_immovable(id[1], f, id[4])
       end
    end
-   
+
    force_map_immovables{
       { "tree3", 55, 19 },
       { "tree7_s", 58, 19 },
@@ -298,32 +279,32 @@ function reveal_village()
       { "field2", 56, 34, "barbarians" },
       { "field2", 53, 35, "barbarians" },
       { "field2", 55, 35, "barbarians" },
-   } 
+   }
 
    local p = wl.game.Player(1)
-   place_buildings_with_workers(p,
-      {"sentry", 57, 9}, 
-      {"sentry", 52, 39}, 
-      {"hunters_hut", 56, 10}, 
-      {"gamekeepers_hut", 56, 12}, 
-      {"farm", 56, 16}, 
-      {"well", 54, 18}, 
-      {"bakery", 55, 20},  -- TODO: wheat 6, water =6
-      {"lumberjacks_hut", 56, 21}, 
-      {"lumberjacks_hut", 55, 22}, 
-      {"lumberjacks_hut", 54, 24}, 
-      {"rangers_hut", 57, 24}, 
-      {"rangers_hut", 55, 25}, 
-      {"hardener", 54, 26},  -- TODO: trunk 8
+   prefilled_buildings(p,
+      {"sentry", 57, 9},
+      {"sentry", 52, 39},
+      {"hunters_hut", 56, 10},
+      {"gamekeepers_hut", 56, 12},
+      {"farm", 56, 16},
+      {"well", 54, 18},
+      {"bakery", 55, 20, wares = {wheat=6, water=6}},
+      {"lumberjacks_hut", 56, 21},
+      {"lumberjacks_hut", 55, 22},
+      {"lumberjacks_hut", 54, 24},
+      {"rangers_hut", 57, 24},
+      {"rangers_hut", 55, 25},
+      {"hardener", 54, 26, wares = {trunk = 8}},
       {"warehouse", 53, 28},
-      {"inn", 55, 28}, -- TODO: pittabread 4, meat 4
-      {"tavern", 57, 28}, -- TODO: pittabread 4, meat 4
-      {"well", 52, 30}, 
+      {"inn", 55, 28, wares = {pittabread = 4, meat = 4}},
+      {"tavern", 57, 28, wares = {pittabread=4, meat = 4}},
+      {"well", 52, 30},
       {"farm", 54, 33},
-      {"bakery", 51, 35}, -- TODO: wheat 6, water 6
-      {"well", 52, 37} -- TODO: wheat 6, water 6
+      {"bakery", 51, 35, wares = {wheat = 6, water = 6}},
+      {"well", 52, 37}
    )
-   
+
    -- Adjust the borders so that the village owns everything green
    p:conquer(wl.map.Field(59, 16), 2)
    p:conquer(wl.map.Field(57, 18), 2)
@@ -345,7 +326,7 @@ function reveal_village()
    connected_road(p, wl.map.Field(58, 10).immovable,
       "w,sw|se,sw|e,se|se,se|sw,sw|sw,w|sw,sw|se,sw|sw,sw|se,sw|" ..
       "sw,sw|sw,sw|sw,sw|se,se,sw|e,e|sw,sw|se,sw|")
-   
+
    connected_road(p, wl.map.Field(57, 25).immovable, "sw,w|sw,w")
    connected_road(p, wl.map.Field(57, 29).immovable, "w,w|w,w")
    connected_road(p, wl.map.Field(55, 34).immovable, "sw,sw")
@@ -354,10 +335,10 @@ function reveal_village()
    connected_road(p, wl.map.Field(56, 17).immovable, "sw,se")
 end
 
-run(introduction_thread)
-run(mines_and_food_thread)
-run(build_materials_thread)
-run(story_messages_thread)
+-- run(introduction_thread)
+-- run(mines_and_food_thread)
+-- run(build_materials_thread)
+-- run(story_messages_thread)
 run(village_thread)
 
 run(mission_complete_thread)

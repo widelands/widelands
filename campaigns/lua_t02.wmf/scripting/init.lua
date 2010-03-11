@@ -5,6 +5,8 @@
 set_textdomain("campaigns/t02.wmf")
 
 use("aux", "coroutine")
+use("aux", "objective_utils")
+use("aux", "infrastructure")
 
 -- ===============
 -- Initialization 
@@ -69,44 +71,11 @@ hq:set_soldiers({0,0,0,0}, 45)
 -- ============
 -- Build roads 
 -- ============
-function connected_road(p, start, cmd, g_create_carriers)
-   create_carriers = g_create_carriers or true
-
-   if cmd:sub(-1) ~= "|" then
-      cmd = cmd .. "|"
-   end
-
-   moves = {}
-   for m in cmd:gmatch("%a+[,|]") do 
-      moves[#moves+1] = m:sub(1,-2)
-      if(m:sub(-1) == '|') then
-         moves[#moves+1] = true -- Force the road
-         r = p:place_road(start, unpack(moves))
-         start = r.end_flag
-         if create_carriers then
-            r:warp_workers{"carrier"}
-         end
-         moves = {}
-      end
-   end
-end
-
-function place_buildings_with_workers(p, ...)
-   for idx,bdescr in ipairs({...}) do
-      b = p:place_building(bdescr[1], wl.map.Field(bdescr[2],bdescr[3]))
-      if b.valid_workers and b.warp_workers then
-         b:warp_workers(b.valid_workers)
-      end
-      if b.max_soldiers and b.warp_soldiers then
-         b:warp_soldiers{[{0,0,0,0}] = b.max_soldiers}
-      end
-   end
-end
 connected_road(p, hq_pos.brn.immovable, "r,r|br,r|r,r")
 connected_road(p, hq_pos.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
 
 -- Place some buildings from the last map
-place_buildings_with_workers(p,
+prefilled_buildings(p,
    {"lumberjacks_hut", 15, 11},
    {"lumberjacks_hut", 12, 13},
    {"quarry", 8, 12},

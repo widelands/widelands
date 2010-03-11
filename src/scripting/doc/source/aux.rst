@@ -13,6 +13,7 @@ otherwise stated. All auxiliary scripts are documented in this section.
    :maxdepth: 2
 
    aux_coroutine
+   aux_infrastructure
+   aux_objective_utils
    aux_smooth_move
    aux_table
-
