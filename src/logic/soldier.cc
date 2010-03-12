@@ -1051,10 +1051,10 @@ void Soldier::defense_update(Game & game, State & state)
 		  get_current_hitpoints() < state.ui32var3))
 	{
 
-		if (soldiers.empty())
-			molog("[defense] no enemy soldiers found, ending task\n");
-		else
+		if (get_current_hitpoints() < state.ui32var3)
 			molog("[defense] I am heavily injured!\n");
+		else
+			molog("[defense] no enemy soldiers found, ending task\n");
 
 		// If no enemy was found, return home
 		if (!location) {
@@ -1062,11 +1062,13 @@ void Soldier::defense_update(Game & game, State & state)
 			return pop_task(game);
 		}
 
+		// Soldier is inside of building
 		if (position == location) {
 			molog("[defense] returned home\n");
 			return pop_task(game);
 		}
 
+		// Soldier is on base flag
 		if (position == &baseflag) {
 			return
 				start_task_move
@@ -1100,7 +1102,7 @@ void Soldier::defense_update(Game & game, State & state)
 			Field const f = game.map().operator[](soldier->get_position());
 
 			//  Check soldier, be sure that we can fight against soldier.
-			// Only pursuers can go over enemy land when defending.
+			// Soldiers can not go over enemy land when defending.
 			if
 				((soldier->canBeChallenged()) and
 				 (f.get_owned_by() == get_owner()->player_number()))
