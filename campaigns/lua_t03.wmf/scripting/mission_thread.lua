@@ -8,12 +8,10 @@ fr1 = wl.map.Field(81,108)
 fr2 = wl.map.Field(85,1)
 fr3 = wl.map.Field(85,11)
 
-function mission_started()
+function initial_message_and_small_food_economy()
    wake_me(2000)
    send_msg(story_msg_1)
-end
 
-function small_food_economy()
    wake_me(120000)
    send_msg(briefing_msg_1)
    send_msg(order_msg_1_small_food_economy)
@@ -291,8 +289,7 @@ function mission_complete()
    p1:reveal_campaign("campsect1")
 end
 
-run(mission_started)
-run(small_food_economy)
+run(initial_message_and_small_food_economy)
 run(foottracks)
 run(fortress)
 run(expansion)
