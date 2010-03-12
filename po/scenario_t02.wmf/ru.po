@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:39+0000\n"
-"Last-Translator: Alexander Bikmeyev <Unknown>\n"
+"POT-Creation-Date: 2010-02-27 16:15+0000\n"
+"PO-Revision-Date: 2010-03-02 14:41+0000\n"
+"Last-Translator: Victor Birkmanis <Unknown>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-03-03 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "Tutorial2 - A Place to call Home"
-msgstr ""
+msgstr "Обучение II - Место названое Домом"
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -28,10 +28,13 @@ msgid ""
 "higher production buildings, including mining and the military expansions "
 "will be introduced."
 msgstr ""
+"Вторая миссия в обучающей кампании Варваров. Здесь будет рассказано как "
+"строить расширенные здания, включая горную промышленность и военные "
+"постройки."
 
 #: ../../campaigns/t02.wmf/event:134
 msgid "Thron shakes his head..."
-msgstr ""
+msgstr "Трон качает головой..."
 
 #: ../../campaigns/t02.wmf/event:136
 msgid ""
@@ -43,12 +46,20 @@ msgid ""
 "throne between the trees, the symbol of unity and peace among our kin became "
 "the wedge that drives us apart.\" "
 msgstr ""
+" \"Война продолжается. Все больше наших братьев и сестер бежит от зверской "
+"войны, бушующей в столице за лесом.<br> Истории, которые они рассказывают о "
+"делах нашей семьи, грустно слышать. Я провожу ночи, лежа с открытыми "
+"глазами, беспокойный, уставший больше, чем я когда-либо полагал. Все же "
+"всякий раз, когда я закрываю свои глаза, я вижу крепость, построенную моим "
+"отцом полностью поглощенную огнем. Трон между деревьями, который был "
+"символом единства и мира среди нашей семьи стал клином, разрушившим наше "
+"узы.\" "
 
 #: ../../campaigns/t02.wmf/event:138
 #: ../../campaigns/t02.wmf/event:149
 #: ../../campaigns/t02.wmf/event:160
 msgid "The story continues"
-msgstr ""
+msgstr "История продолжается"
 
 #: ../../campaigns/t02.wmf/event:141
 #: ../../campaigns/t02.wmf/event:152
@@ -76,7 +87,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:487
 #: ../../campaigns/t02.wmf/event:1165
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../../campaigns/t02.wmf/event:147
 msgid ""
@@ -148,7 +159,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:438
 #: ../../campaigns/t02.wmf/event:451
 msgid "The advisor"
-msgstr ""
+msgstr "Советник"
 
 #: ../../campaigns/t02.wmf/event:239
 msgid "Boldreth jumps up..."

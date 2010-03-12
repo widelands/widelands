@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:22+0000\n"
+"POT-Creation-Date: 2010-03-04 10:36+0000\n"
+"PO-Revision-Date: 2010-03-08 15:46+0000\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-03-09 04:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -25,8 +25,8 @@ msgid ""
 "are equipped with this basic weapon, but also the lumberjack is using the "
 "same model."
 msgstr ""
-"L'ascia è arma e strumento per i barbari. Tutti i giovani soldati la hanno "
-"come equipaggiamento, ma anche il boscaiolo la usa."
+"L'ascia per i barbari è un'arma base ed uno strumento. Tutti i giovani "
+"soldati l'hanno come equipaggiamento, ma anche il boscaiolo la usa."
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/metalworks/conf:33
@@ -85,7 +85,7 @@ msgstr "Lavoro"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Cuoce al forno pane per i lavoratori."
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -156,7 +156,7 @@ msgstr "Produce un pasto"
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Produce armi per i soldati e strumenti per i lavoratori."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
@@ -204,13 +204,14 @@ msgstr "Porta gli oggetti lungo le strade."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr ""
+msgstr "Alleva i forti buoi che aiutano nel trasporto delle merci."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
 msgstr ""
+"Lavora in profondità nelle miniere per ottenere carbone, ferro od oro."
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
@@ -511,7 +512,7 @@ msgstr "Portatore"
 
 #: ../../tribes/barbarians/conf:113
 msgid "Ox"
-msgstr ""
+msgstr "Bue"
 
 #: ../../tribes/barbarians/conf:116
 msgid "Soldier"
@@ -619,11 +620,11 @@ msgstr "Tessitore"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Scout"
-msgstr ""
+msgstr "Esploratore"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Allevatore di bovini"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Construction Site"
@@ -667,7 +668,7 @@ msgstr "Roccaforte"
 #: ../../tribes/barbarians/conf:163
 #: ../../tribes/barbarians/conf:172
 msgid "Castle"
-msgstr ""
+msgstr "Castello"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Guardhall"
@@ -675,28 +676,28 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:165
 msgid "Guardhouse"
-msgstr ""
+msgstr "Guardiola"
 
 #: ../../tribes/barbarians/conf:166
 msgid "High Tower"
-msgstr ""
+msgstr "Torre alta"
 
 #: ../../tribes/barbarians/conf:167
 msgid "Small Tower"
-msgstr ""
+msgstr "Torre piccola"
 
 #: ../../tribes/barbarians/conf:168
 #: ../../tribes/barbarians/conf:175
 msgid "Tower"
-msgstr ""
+msgstr "Torre"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Barracks"
-msgstr ""
+msgstr "Caserma"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Outpost"
-msgstr ""
+msgstr "Avamposto"
 
 #: ../../tribes/barbarians/conf:178
 #: ../../tribes/barbarians/conf:179
@@ -845,11 +846,11 @@ msgstr "Pozzo"
 
 #: ../../tribes/barbarians/conf:217
 msgid "Scout's Hut"
-msgstr ""
+msgstr "Capanna dell'esploratore"
 
 #: ../../tribes/barbarians/conf:218
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Allevamento di bovini"
 
 #: ../../tribes/barbarians/conf:221
 msgid "Headquarters medium"
@@ -967,7 +968,7 @@ msgstr "Difesa di base di un guerriero"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr ""
+msgstr "Forgia elmi per i soldati"
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
@@ -1075,7 +1076,7 @@ msgstr "Produce lancia da caccia"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Aiuta a trasportare oggetti pesanti sulle strade usate."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1109,6 +1110,8 @@ msgstr ""
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Esploratori come Scotty l'esploratore esplorano le aree non esplorate alla "
+"maniera degli esploratori."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1177,7 +1180,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Allena i soldati."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"

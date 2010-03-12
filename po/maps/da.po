@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:22+0000\n"
-"Last-Translator: Joe Hansen <Unknown>\n"
+"POT-Creation-Date: 2010-02-27 16:15+0000\n"
+"PO-Revision-Date: 2010-03-02 09:19+0000\n"
+"Last-Translator: beer <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-03-03 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:24
@@ -77,7 +77,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:36
 msgid "Atlanteans - the new rise"
-msgstr ""
+msgstr "Atlanten - den nye opstigning"
 
 #: ../../campaigns/cconfig:39
 msgid "Some descriptive texts..."
@@ -105,15 +105,15 @@ msgstr "Imperium prøvespil2 - En forpost for eksil"
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
-msgstr ""
+msgstr "01 - fra nemesis  til tilbliveelse"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
-msgstr ""
+msgstr "Koralø"
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Hvem vil være den virkelige konge af den store  koralø"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -202,6 +202,8 @@ msgid ""
 "These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
 "forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
+"Dette er den smukke Finske land, med de mange floder, årer og gamle skove og "
+"bjærge. Det er op til dig at finde en vej gennem dette land"
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -242,6 +244,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Hver landsby er omringet af 4 store bjerge.  Hvem er den første til at "
+"overtage dem og udvinde dets ressource for vedkommens landsbyg? Hint 1: vand "
+"kan blive fundet langs en flod: Hint 2: Snemænd mærke yderligere vand "
+"ressource. Hint 3: hver bjerg har kun en resource"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"

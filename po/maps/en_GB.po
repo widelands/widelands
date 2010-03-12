@@ -1,0 +1,602 @@
+# English (United Kingdom) translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-02-15 16:30+0000\n"
+"PO-Revision-Date: 2010-02-19 14:54+0000\n"
+"Last-Translator: ColdFFF <coldfff@blueyonder.co.uk>\n"
+"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-02-20 04:38+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../campaigns/cconfig:24
+msgid "(Tutorial) Barbarians - The second Empire"
+msgstr "(Tutorial) Barbarians - The second Empire"
+
+#: ../../campaigns/cconfig:27
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons and warlord to an army that could match any enemy willing to "
+"rise against the ancient forests. Though his glorious reign, Chat’Karuth "
+"left his eldest son Thron in the due to succeed him as the tribes warlord – "
+"a decision that left his two brothers unsatisfied. The old warlord knew "
+"that. As his father told him, Thron left the capital of Al’thunran, the home "
+"of the throne among the trees and redrew his forces to the high hills where "
+"he buried the corpse of his father and swore to the gods and his spirit, "
+"that he’d return to re-established order. While his brothers raged in blind "
+"war against Thron and the few forces he left to secure the borders of "
+"Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
+"force the tribes to march once again under a common banner."
+msgstr ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons and warlord to an army that could match any enemy willing to "
+"rise against the ancient forests. Though his glorious reign, Chat’Karuth "
+"left his eldest son Thron in the due to succeed him as the tribes warlord – "
+"a decision that left his two brothers unsatisfied. The old warlord knew "
+"that. As his father told him, Thron left the capital of Al’thunran, the home "
+"of the throne among the trees and redrew his forces to the high hills where "
+"he buried the corpse of his father and swore to the gods and his spirit, "
+"that he’d return to re-established order. While his brothers raged in blind "
+"war against Thron and the few forces he left to secure the borders of "
+"Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
+"force the tribes to march once again under a common banner."
+
+#: ../../campaigns/cconfig:30
+msgid "Empire - The months of exile"
+msgstr "Empire - The months of exile"
+
+#: ../../campaigns/cconfig:33
+msgid ""
+"Six month ago, Lutius - a young general of the Empire - was send with 150 "
+"soldiers at the frontier among the northern forests, where Barbarian-tribes "
+"and official Empire-land are crossing. His task was to defend the Empire-"
+"land. First everything was calm, he even talked to few barbarian children "
+"and thought about a peaceful life - side by side with this archaic folk. He "
+"began to feel saver and his army begun to draw off the attention on they "
+"potential enemy - That was their fault. At one night in march his unprepared "
+"army was attacked by 100 barbarian footmen and was totally scattered. Only "
+"with pure life he and a handful of soldiers survived."
+msgstr ""
+"Six month ago, Lutius - a young general of the Empire - was sent with 150 "
+"soldiers at the frontier among the northern forests, where Barbarian-tribes "
+"and official Empire-land are crossing. His task was to defend the Empire-"
+"land. First everything was calm, he even talked to few barbarian children "
+"and thought about a peaceful life - side by side with this archaic folk. He "
+"began to feel safer and his army begun to draw off the attention on they "
+"potential enemy - That was their fault. At one night in march his unprepared "
+"army was attacked by 100 barbarian footmen and was totally scattered. Only "
+"with pure life he and a handful of soldiers survived."
+
+#: ../../campaigns/cconfig:36
+msgid "Atlanteans - the new rise"
+msgstr "Atlanteans - the new rise"
+
+#: ../../campaigns/cconfig:39
+msgid "Some descriptive texts..."
+msgstr "Some descriptive texts..."
+
+#: ../../campaigns/cconfig:57
+msgid "Tutorial1 - Eyes in the Dark"
+msgstr "Tutorial1 - Eyes in the Dark"
+
+#: ../../campaigns/cconfig:62
+msgid "Tutorial2 - A Place to call Home"
+msgstr "Tutorial2 - A Place to call Home"
+
+#: ../../campaigns/cconfig:67
+msgid "Tutorial3 - This land is our land"
+msgstr "Tutorial3 - This land is our land"
+
+#: ../../campaigns/cconfig:74
+msgid "Empire Tutorial1 - The strands of Malac' Mor"
+msgstr "Empire Tutorial1 - The strands of Malac' Mor"
+
+#: ../../campaigns/cconfig:79
+msgid "Empire Tutorial2 - An outpost for exile"
+msgstr "Empire Tutorial2 - An outpost for exile"
+
+#: ../../campaigns/cconfig:84
+msgid "01 - From nemesis to genesis"
+msgstr "01 - From nemesis to genesis"
+
+#: ../../maps/Atoll.wmf/elemental:7
+msgid "Atoll"
+msgstr "Atoll"
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Who will be the real King of the big atoll?"
+msgstr "Who will be the real King of the big atoll?"
+
+#: ../../maps/Checkmate.wmf/elemental:7
+msgid "Checkmate"
+msgstr "Checkmate"
+
+#: ../../maps/Checkmate.wmf/elemental:9
+msgid ""
+"Whether just one of nature's strangest features or the creation of a mad "
+"(and game-hungry) god, this weird battleground awaits two opponents for "
+"another confrontation."
+msgstr ""
+"Whether just one of nature's strangest features or the creation of a mad "
+"(and game-hungry) god, this weird battleground awaits two opponents for "
+"another confrontation."
+
+#: ../../maps/Comet Island.wmf/elemental:7
+msgid "Comet Island"
+msgstr "Comet Island"
+
+#: ../../maps/Comet Island.wmf/elemental:9
+msgid ""
+"A few miles in front of Gerion Coast lies a small unnamed island. Until now, "
+"you have not seen any reason, to ship there, but yesterday a big fireball "
+"came from the sky and touched down in it's middle. Is this a sign of the "
+"Gods? You believe it is and you hope, that your tribe will find the treasure "
+"of this island, before other tribes will follow."
+msgstr ""
+"A few miles in front of Gerion Coast lies a small unnamed island. Until now, "
+"you have not seen any reason, to ship there, but yesterday a big fireball "
+"came from the sky and touched down in it's middle. Is this a sign of the "
+"Gods? You believe it is and you hope, that your tribe will find the treasure "
+"of this island, before other tribes will follow."
+
+#: ../../maps/Crater.wmf/elemental:9
+msgid "Crater"
+msgstr "Crater"
+
+#: ../../maps/Crater.wmf/elemental:11
+msgid ""
+"Long after a meteor crashed into a couple of mountains life blossoms in the "
+"crater. Two tribes are now fighting about the rich resources."
+msgstr ""
+"Long after a meteor crashed into a couple of mountains life blossoms in the "
+"crater. Two tribes are now fighting about the rich resources."
+
+#: ../../maps/Dry Riverbed.wmf/elemental:7
+msgid "Dry Riverbed"
+msgstr "Dry Riverbed"
+
+#: ../../maps/Dry Riverbed.wmf/elemental:9
+msgid ""
+"It is a long time ago, since the last rain drop touched these grounds. No "
+"wonder, that here is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last water."
+msgstr ""
+"It is a long time ago, since the last rain drop touched these grounds. No "
+"wonder, that here is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last water."
+
+#: ../../maps/Elven Forests.wmf/elemental:7
+msgid "Elven Forests"
+msgstr "Elven Forests"
+
+#: ../../maps/Elven Forests.wmf/elemental:9
+msgid ""
+"The breath-taking beauty of these emerald lands has lured many a tribe into "
+"the attempt of taking them for itself."
+msgstr ""
+"The breath-taking beauty of these emerald lands has lured many a tribe into "
+"the attempt of taking them for itself."
+
+#: ../../maps/Enemy in sight.wmf/elemental:7
+msgid "Enemy in sight"
+msgstr "Enemy in sight"
+
+#: ../../maps/Enemy in sight.wmf/elemental:9
+msgid "A Multiplayer-battle-map on a X-Shaped island."
+msgstr "A Multiplayer-battle-map on a X-Shaped island."
+
+#: ../../maps/Finlakes.wmf/elemental:9
+msgid "Finnish Lakes"
+msgstr "Finnish Lakes"
+
+#: ../../maps/Finlakes.wmf/elemental:11
+msgid ""
+"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
+"forests and mountains. It is up to you, to find a way through these lands."
+msgstr ""
+"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
+"forests and mountains. It is up to you, to find a way through these lands."
+
+#: ../../maps/Firegames.wmf/elemental:7
+msgid "Firegames"
+msgstr "Firegames"
+
+#: ../../maps/Firegames.wmf/elemental:9
+msgid ""
+"Is this a test by the Gods or an evil plan by someone else, that you and "
+"your tribe woke up on this island among fire and lava? Until now it seems as "
+"if you are alone, but no-one knows, what might happen if you meet an "
+"opponent tribe?"
+msgstr ""
+"Is this a test by the Gods or an evil plan by someone else, that you and "
+"your tribe woke up on this island among fire and lava? Until now it seems as "
+"if you are alone, but no-one knows, what might happen if you meet an "
+"opponent tribe?"
+
+#: ../../maps/Four Castles.wmf/elemental:7
+msgid "Four Castles"
+msgstr "Four Castles"
+
+#: ../../maps/Four Castles.wmf/elemental:9
+msgid ""
+"Well protected in their mighty fortresses, four power-hungry warlords are "
+"completing their schemes to dominate these lands..."
+msgstr ""
+"Well protected in their mighty fortresses, four power-hungry warlords are "
+"completing their schemes to dominate these lands..."
+
+#: ../../maps/Four Mountains.wmf/elemental:9
+msgid "Four Mountains"
+msgstr "Four Mountains"
+
+#: ../../maps/Four Mountains.wmf/elemental:11
+msgid ""
+"Each tribe is surrounded by four mighty mountains. Who will first conquer "
+"them and claim the resources for his own tribe? Hint I: Water can be found "
+"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"Each mountain contains only one resource."
+msgstr ""
+"Each tribe is surrounded by four mighty mountains. Who will first conquer "
+"them and claim the resources for his own tribe? Hint I: Water can be found "
+"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"Each mountain contains only one resource."
+
+#: ../../maps/Glacier Lake.wmf/elemental:7
+msgid "Glacier Lake"
+msgstr "Glacier Lake"
+
+#: ../../maps/Glacier Lake.wmf/elemental:9
+msgid ""
+"A long time your tribe dwelled on this beautiful and lonely glacier lake. "
+"Noone disturbed you and the resources were enough for your whole tribe, but "
+"a few month ago another tribe came over the mountains and settled down. And "
+"you are sure, that there is only place enough for one tribe."
+msgstr ""
+"A long time your tribe dwelled on this beautiful and lonely glacier lake. No-"
+"one disturbed you and the resources were enough for your whole tribe, but a "
+"few month ago another tribe came over the mountains and settled down. And "
+"you are sure, that there is only place enough for one tribe."
+
+#: ../../maps/Golden Peninsula.wmf/elemental:7
+msgid "Golden Peninsula"
+msgstr "Golden Peninsula"
+
+#: ../../maps/Golden Peninsula.wmf/elemental:9
+msgid "Two empires race for the treasures of a legendary peninsula..."
+msgstr "Two empires race for the treasures of a legendary peninsula..."
+
+#: ../../maps/Impact.wmf/elemental:7
+msgid "Impact"
+msgstr "Impact"
+
+#: ../../maps/Impact.wmf/elemental:9
+msgid ""
+"After an impact of an asteroid and the following harsh winter, three isles "
+"are connected by ice and stone, setting an end to the peaceful coexistence "
+"of three tribes."
+msgstr ""
+"After an impact of an asteroid and the following harsh winter, three isles "
+"are connected by ice and stone, setting an end to the peaceful coexistence "
+"of three tribes."
+
+#: ../../maps/Islands at war.wmf/elemental:9
+msgid "Islands at war"
+msgstr "Islands at war"
+
+#: ../../maps/Islands at war.wmf/elemental:11
+msgid ""
+"For centuries you lived peaceful together with the other tribe on the "
+"neighboured island. This peace seems to end now. - Your neighbour begins to "
+"expand."
+msgstr ""
+"For centuries you lived peaceful together with the other tribe on the "
+"neighbouring island. This peace seems to end now - your neighbour begins to "
+"expand."
+
+#: ../../maps/Lake of tranquility.wmf/elemental:7
+msgid "Lake of Tranquility"
+msgstr "Lake of Tranquility"
+
+#: ../../maps/Lake of tranquility.wmf/elemental:9
+msgid ""
+"This lake, deep in the most ancient forests, has long been known for its "
+"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
+"hostile tribes arrive at its shores..."
+msgstr ""
+"This lake, deep in the most ancient forests, has long been known for its "
+"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
+"hostile tribes arrive at its shores..."
+
+#: ../../maps/Last Bastion.wmf/elemental:9
+msgid "Last Bastion"
+msgstr "Last Bastion"
+
+#: ../../maps/Last Bastion.wmf/elemental:11
+msgid ""
+"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
+"Sun heated up the Earth and melted glaciers and people plunged into the "
+"deep. But now - high in the majestic mountains, on the last scrap of land - "
+"two surviving tribes are sheltering. Even though the Gods showed mercy and "
+"the climate thus turned cooler again the water is still rising and rising. "
+"Onto the last secure place - the highest mountain range where the amount of "
+"gold and the space to live merely suffice for one tribe - only two opposite "
+"paths lead. But remember, be careful... this last living space is also a "
+"hard and small place to live. Don't forget to take care about your timber "
+"supplies, you'll need them."
+msgstr ""
+"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
+"Sun heated up the Earth and melted glaciers and people plunged into the "
+"deep. But now - high in the majestic mountains, on the last scrap of land - "
+"two surviving tribes are sheltering. Even though the Gods showed mercy and "
+"the climate thus turned cooler again the water is still rising and rising. "
+"Onto the last secure place - the highest mountain range where the amount of "
+"gold and the space to live merely suffice for one tribe - only two opposite "
+"paths lead. But remember, be careful... this last living space is also a "
+"hard and small place to live. Don't forget to take care about your timber "
+"supplies, you'll need them."
+
+#: ../../maps/Mystical Maze.wmf/elemental:9
+msgid "Mystical Maze"
+msgstr "Mystical Maze"
+
+#: ../../maps/Mystical Maze.wmf/elemental:11
+msgid ""
+"There are two big questions around: Who created this unbelievable big maze "
+"and what can be found inside?"
+msgstr ""
+"There are two big questions around: Who created this unbelievable big maze "
+"and what can be found inside?"
+
+#: ../../maps/Plateau.wmf/elemental:7
+msgid "The Green Plateau"
+msgstr "The Green Plateau"
+
+#: ../../maps/Plateau.wmf/elemental:9
+msgid ""
+"You are standing on an island, crowned by mighty mountains, which keep a "
+"wonderful and mighty treasure in their middle - The Green Plateau, which is "
+"hard to get, but easy to lose, so if you want it, be aware of the other "
+"clans."
+msgstr ""
+"You are standing on an island, crowned by mighty mountains, which keep a "
+"wonderful and mighty treasure in their middle - The Green Plateau, which is "
+"hard to get, but easy to lose, so if you want it, be aware of the other "
+"clans."
+
+#: ../../maps/Rendez-Vous.wmf/elemental:9
+msgid "Rendez-Vous"
+msgstr "Rendez-Vous"
+
+#: ../../maps/Rendez-Vous.wmf/elemental:11
+msgid ""
+"Only a small hill in the centre of the map connects these four competing "
+"tribes. Lead your army right away to this hill and build a giant stronghold "
+"as a sign of your superiority! Hint: In the centre is only space for one "
+"stronghold. Water can be found everywhere, so there is no need to send out "
+"geologists."
+msgstr ""
+"Only a small hill in the centre of the map connects these four competing "
+"tribes. Lead your army right away to this hill and build a giant stronghold "
+"as a sign of your superiority! Hint: In the centre is only space for one "
+"stronghold. Water can be found everywhere, so there is no need to send out "
+"geologists."
+
+#: ../../maps/Riverlands.wmf/elemental:7
+msgid "Riverlands"
+msgstr "Riverlands"
+
+#: ../../maps/Riverlands.wmf/elemental:9
+msgid ""
+"A mystical land, full of different landscapes, which are all crossed by a "
+"handful of big rivers."
+msgstr ""
+"A mystical land, full of different landscapes, which are all crossed by a "
+"handful of big rivers."
+
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The ancient sun of fire"
+msgstr "The ancient sun of fire"
+
+#: ../../maps/Sun of fire.wmf/elemental:11
+msgid ""
+"For hundreds of years this island was kept as sanctuary of the Gods. No "
+"human ever ventured to set a foot on it. But now, that a tribe was finally "
+"barefaced enough to settle on the coast of that island, a lot other followed "
+"afterwards."
+msgstr ""
+"For hundreds of years this island was kept as sanctuary of the Gods. No "
+"human ever ventured to set a foot on it. But now, that a tribe was finally "
+"barefaced enough to settle on the coast of that island, a lot other followed "
+"afterwards."
+
+#: ../../maps/Swamp Island.wmf/elemental:9
+msgid "Swamp Island"
+msgstr "Swamp Island"
+
+#: ../../maps/Swamp Island.wmf/elemental:11
+msgid ""
+"It smells like swamp, it looks like swamp and it is swamp. But it is the "
+"place you were born and you lived your whole life. If you don't want to "
+"loose it, defend it! "
+msgstr ""
+"It smells like swamp, it looks like swamp and it is swamp. But it is the "
+"place you were born and you lived your whole life. If you don't want to "
+"loose it, defend it! "
+
+#: ../../maps/The Far North.wmf/elemental:9
+msgid "The Far North"
+msgstr "The Far North"
+
+#: ../../maps/The Far North.wmf/elemental:11
+msgid ""
+"Some say that impenetrable lands to the far north scared away even the most "
+"courageous settlers and the bravest of the brave warriors. Big and old "
+"forests, full of big and predatory game, cut across by wetlands and hills "
+"were shrouded in mystery. The ones who had managed to come back mentioned "
+"tremendous buildings, decorated with carvings and gold from majestic "
+"mountain ranges somewhere amongst the wilderness. Dozens of years after only "
+"some crumbly ruins remain of these good old times, covered with moss and "
+"trees. Their shapes give only an idea about the craftsmanship of ancient "
+"constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
+"People say that now nothing is blocking the road to wealth. But many will "
+"die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
+msgstr ""
+"Some say that impenetrable lands to the far north scared away even the most "
+"courageous settlers and the bravest of the brave warriors. Big and old "
+"forests, full of big and predatory game, cut across by wetlands and hills "
+"were shrouded in mystery. The ones who had managed to come back mentioned "
+"tremendous buildings, decorated with carvings and gold from majestic "
+"mountain ranges somewhere amongst the wilderness. Dozens of years after only "
+"some crumbly ruins remain of these good old times, covered with moss and "
+"trees. Their shapes give only an idea about the craftsmanship of ancient "
+"constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
+"People say that now nothing is blocking the road to wealth. But many will "
+"die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
+
+#: ../../maps/The Oasis Triangle.wmf/elemental:7
+msgid "The Oasis Triangle"
+msgstr "The Oasis Triangle"
+
+#: ../../maps/The Oasis Triangle.wmf/elemental:9
+msgid ""
+"There is something mystical, like a grey atmosphere, about this three Oasis, "
+"which noone found out, yet. Perhaps you will be the one, but be aware of the "
+"others, who are searching, too!"
+msgstr ""
+"There is something mystical, like a grey atmosphere, about this three Oasis, "
+"which no-one found out, yet. Perhaps you will be the one, but be aware of "
+"the others, who are searching, too!"
+
+#: ../../maps/The Thaw.wmf/elemental:9
+msgid "The Thaw"
+msgstr "The Thaw"
+
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid ""
+"Another thaw set in. Three tribes were sheltering form severe winter among "
+"majestic mountains. While solstice they listened to the oracle and went on "
+"war. Only survivor will sacrifice his enemies treasures on the ancient "
+"altar, build there a splendid castle and gain goodwill and the respect of "
+"the Gods."
+msgstr ""
+"Another thaw set in. Three tribes were sheltering form severe winter among "
+"majestic mountains. While solstice they listened to the oracle and went on "
+"war. Only one survivor will sacrifice his enemies treasures on the ancient "
+"altar, build there a splendid castle and gain goodwill and the respect of "
+"the Gods."
+
+#: ../../maps/The big lake.wmf/elemental:7
+msgid "The big lake"
+msgstr "The big lake"
+
+#: ../../maps/The big lake.wmf/elemental:9
+msgid ""
+"This island once came out of the deepest grounds of the sea. In those days, "
+"fire rose out of the salty seawater and brought ash, stones and earth to "
+"daylight. And the fire came nearer and nearer to the sun, while the mountain "
+"grew and grew. Until one day, when the whole firemountain exploded. Nowadays "
+"only this ring is left from that mighty firemountain. Do you think, that it "
+"is big enough for more than one tribe?"
+msgstr ""
+"This island once came out of the deepest grounds of the sea. In those days, "
+"fire rose out of the salty seawater and brought ash, stones and earth to "
+"daylight. And the fire came nearer and nearer to the sun, while the mountain "
+"grew and grew. Until one day, when the whole fire mountain exploded. "
+"Nowadays only this ring is left from that mighty fire mountain. Do you "
+"think, that it is big enough for more than one tribe?"
+
+#: ../../maps/The long way.wmf/elemental:7
+msgid "The long way"
+msgstr "The long way"
+
+#: ../../maps/The long way.wmf/elemental:9
+msgid ""
+"Another strange test by the Gods. To reach the other side, there seems to be "
+"no other way, than occupying the land of your enemies."
+msgstr ""
+"Another strange test by the Gods. To reach the other side, there seems to be "
+"no other way, than occupying the land of your enemies."
+
+#: ../../maps/The pass through the mountains.wmf/elemental:9
+msgid "The pass through the mountains"
+msgstr "The pass through the mountains"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:11
+msgid ""
+"In this mountainous region two princes have settled. Now they are expanding "
+"their territories unaware of the fact that they are not alone!"
+msgstr ""
+"In this mountainous region two princes have settled. Now they are expanding "
+"their territories unaware of the fact that they are not alone!"
+
+#: ../../maps/Three Warriors.wmf/elemental:9
+msgid "Three Warriors"
+msgstr "Three Warriors"
+
+#: ../../maps/Three Warriors.wmf/elemental:11
+msgid ""
+"Mighty mountains divide this land into three fertile valleys. But a path "
+"connects the valleys and thus seems a fight inescapable! Hint: Water can be "
+"found around the lakes."
+msgstr ""
+"Mighty mountains divide this land into three fertile valleys. But a path "
+"connects the valleys and thus seems a fight inescapable! Hint: Water can be "
+"found around the lakes."
+
+#: ../../maps/Twinkling Waves.wmf/elemental:9
+msgid "Twinkling Waves"
+msgstr "Twinkling Waves"
+
+#: ../../maps/Twinkling Waves.wmf/elemental:11
+msgid ""
+"Many beautiful, green islands await the ones brave enough to pass the "
+"thousand waves, twinkling in the sun."
+msgstr ""
+"Many beautiful, green islands await the ones brave enough to pass the "
+"thousand waves, twinkling in the sun."
+
+#: ../../maps/Two frontiers.wmf/elemental:7
+msgid "Two Frontiers"
+msgstr "Two Frontiers"
+
+#: ../../maps/Two frontiers.wmf/elemental:9
+msgid "A multiplayer-battle-map on a small circle-shaped island."
+msgstr "A multiplayer-battle-map on a small circle-shaped island."
+
+#: ../../maps/War of the Valleys.wmf/elemental:7
+msgid "War of the Valleys"
+msgstr "War of the Valleys"
+
+#: ../../maps/War of the Valleys.wmf/elemental:9
+msgid ""
+"It is said that even sun and moon must find their way between the spires of "
+"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
+"Geologists elsewhere."
+msgstr ""
+"It is said that even sun and moon must find their way between the spires of "
+"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
+"Geologists elsewhere."
+
+#: ../../maps/Wisent Valley.wmf/elemental:9
+msgid "Wisent Valley"
+msgstr "Wisent Valley"
+
+#: ../../maps/Wisent Valley.wmf/elemental:11
+msgid ""
+"It seems as if this magical valley was inhabitated by wisents since the "
+"beginning of days. When your tribe came to this place, you were sure that it "
+"offers enough space for a peaceful life. But can you tribe live in peace "
+"with your neighbours?"
+msgstr ""
+"It seems as if this magical valley was inhabited by wisents since the "
+"beginning of days. When your tribe came to this place, you were sure that it "
+"offers enough space for a peaceful life. But can you tribe live in peace "
+"with your neighbours?"

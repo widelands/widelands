@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-11 15:44+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2010-02-15 16:30+0000\n"
+"PO-Revision-Date: 2010-02-22 13:54+0000\n"
+"Last-Translator: meru <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-02-23 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: German\n"
 
@@ -96,7 +96,7 @@ msgid ""
 "taste and use its flour for making bread."
 msgstr ""
 "Schwarzwurzeln sind eine spezielle Wurzelart. Die Atlanter mögen den starken "
-"Geschmack und benutzen gemahlene Schwarzwurzeln beim backen ihrer Brote."
+"Geschmack und benutzen gemahlene Schwarzwurzeln beim Backen ihrer Brote."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:16
 msgid "Plant blackroot"
@@ -108,7 +108,7 @@ msgstr "Schwarzwurzelernte"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr "Planzt und erntet Schwarzwurzeln."
+msgstr "Pflanzt und erntet Schwarzwurzeln."
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
@@ -153,7 +153,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:18
 msgid "The Widelands Development Team"
-msgstr "Das Widelands Entwickler Team"
+msgstr "Das Widelands-Entwicklerteam"
 
 #: ../../tribes/atlanteans/conf:19
 msgid "Atlanteans"
@@ -1029,8 +1029,8 @@ msgid ""
 "Milking tongs are used by the spider breeder, to milk the spiders. They are "
 "produced by the toolsmith."
 msgstr ""
-"Die Melkzange wird vom Spinnenzüchter, zum melken der Spinnen, verwendet. "
-"Sie werden vom Werkzeugmacher hergestellt."
+"Die Melkzange wird vom Spinnenzüchter, zum Melken der Spinnen, verwendet. "
+"Sie wird vom Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
@@ -1083,8 +1083,8 @@ msgstr "Sägt Holz um Bretter herzustellen."
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
-"Erkunder wie Erkundigunde, der erkundliche Erkunder erkundete das Gebiet auf "
-"erkundliche Weise."
+"Erkunder wie Erkundigunde, der erkundliche Erkunder, das Gebiet auf "
+"erkundliche Weise erkundete."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
@@ -1119,7 +1119,7 @@ msgid ""
 "This is smoked fish - As no Atlantid likes raw fish, smoking is the most "
 "common way to make it eatable."
 msgstr ""
-"Dieser Fisch ist geräuchert - da die Atlanter kein rohen Fisch mögen, ist "
+"Dieser Fisch ist geräuchert - da die Atlanter keinen rohen Fisch mögen, ist "
 "dies ein beliebter Weg um den Fisch genießbar zu machen."
 
 #: ../../tribes/atlanteans/smoked_meat/conf:1

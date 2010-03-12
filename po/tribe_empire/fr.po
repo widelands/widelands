@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-12 17:52+0000\n"
-"Last-Translator: Immunoman <Unknown>\n"
+"POT-Creation-Date: 2010-02-15 16:30+0000\n"
+"PO-Revision-Date: 2010-02-21 20:36+0000\n"
+"Last-Translator: clark17 <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-02-22 04:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/advanced_lance/conf:1
@@ -279,7 +279,7 @@ msgstr "Vin très petit"
 
 #: ../../tribes/empire/conf:59
 msgid "Vine ripe"
-msgstr ""
+msgstr "vigne mûre"
 
 #: ../../tribes/empire/conf:62
 msgid "Advanced Lance"
@@ -579,7 +579,7 @@ msgstr "Site de Construction"
 
 #: ../../tribes/empire/conf:146
 msgid "Colosseum"
-msgstr "Colosse"
+msgstr "Colisée"
 
 #: ../../tribes/empire/conf:147
 msgid "Arena"
@@ -804,7 +804,7 @@ msgstr "Quartier Général Moyen"
 
 #: ../../tribes/empire/conf:216
 msgid "Castle village"
-msgstr ""
+msgstr "Village fortifié"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
@@ -824,7 +824,7 @@ msgstr "Moissonne le blé"
 
 #: ../../tribes/empire/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Plante des champs"
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""
