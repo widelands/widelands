@@ -27,5 +27,3 @@ function add_obj(t)
 end
 
 use("map", "mission_thread")
-
--- wl.debug.set_see_all(true)

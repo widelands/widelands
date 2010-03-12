@@ -52,6 +52,7 @@ hq:set_workers{
    miner=4,
    ranger=1,
    stonemason=2,
+   ox = 40,
 }
 hq:set_soldiers({0,0,0,0}, 45)
 
