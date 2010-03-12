@@ -124,19 +124,24 @@ UI::Callback_Button<AttackBox> & AttackBox::add_button
 void AttackBox::update_attack() {
 	assert(m_slider_soldiers);
 	assert(m_text_soldiers);
-
+	assert(m_less_soldiers);
+	assert(m_add_soldiers);
+log("  	AttackBox::supdate_attack\n");
 	char buf[20];
 	int32_t max_attackers = get_max_attackers();
 
 	if (m_slider_soldiers->get_max_value() != max_attackers)
 		m_slider_soldiers->set_max_value(max_attackers);
 
+	m_slider_soldiers->set_enabled(max_attackers > 0);
+	m_add_soldiers   ->set_enabled(max_attackers > m_slider_soldiers->get_value());
+	m_less_soldiers  ->set_enabled(m_slider_soldiers->get_value() > 0);
+
 	sprintf(buf, "%u / %u", m_slider_soldiers->get_value(), max_attackers);
 	m_text_soldiers->set_text(buf);
 
 	sprintf(buf, "%u", max_attackers);
 	m_add_soldiers->set_title(buf);
-
 
 	if (m_pl->is_retreat_change_allowed()) {
 		assert(m_slider_retreat);
@@ -152,17 +157,19 @@ void AttackBox::init() {
 
 	uint32_t max_attackers = get_max_attackers();
 
+log("AttackBox::init\n");
 
 	{ //  Soldiers line
 		UI::Box & linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		add(&linebox, UI::Box::AlignTop);
 		add_text(linebox, _("Soldiers:"));
 
-		add_button
-			(linebox,
-			 "0",
-			 &AttackBox::send_less_soldiers,
-			 _("Send less soldiers"));
+		m_less_soldiers =
+			&add_button
+				(linebox,
+				 "0",
+				 &AttackBox::send_less_soldiers,
+				 _("Send less soldiers"));
 
 		//  Spliter of soldiers
 		UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
@@ -190,6 +197,10 @@ void AttackBox::init() {
 				 buf,
 				 &AttackBox::send_more_soldiers,
 				 _("Send more soldiers"));
+
+		m_slider_soldiers->set_enabled(max_attackers > 0);
+		m_add_soldiers   ->set_enabled(max_attackers > 0);
+		m_less_soldiers  ->set_enabled(max_attackers > 0);
 	}
 
 	{ //  Retreat line
