@@ -1117,15 +1117,17 @@ void Soldier::defense_update(Game & game, State & state)
 	}
 
 	targets.sort();
-	targets.reverse();
 	
 	while (targets.size() > 0) {
 		SoldierDistance * target = 0;
 
 		target = targets.front();
 
-		if (position == location)
+		if (position == location) {
+			targets.clear();
+			targets.~list();
 			return start_task_leavebuilding(game, false);
+		}
 
 		if (target->dist <= 1) {
 			molog("[defense] starting battle with %u!\n", (target->s)->serial());
