@@ -126,7 +126,7 @@ void AttackBox::update_attack() {
 	assert(m_text_soldiers);
 	assert(m_less_soldiers);
 	assert(m_add_soldiers);
-log("  	AttackBox::supdate_attack\n");
+
 	char buf[20];
 	int32_t max_attackers = get_max_attackers();
 
@@ -156,8 +156,6 @@ void AttackBox::init() {
 	assert(m_node);
 
 	uint32_t max_attackers = get_max_attackers();
-
-log("AttackBox::init\n");
 
 	{ //  Soldiers line
 		UI::Box & linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
