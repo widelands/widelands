@@ -38,6 +38,8 @@
 // TODO:   LuaFunction, Testsuite and it's running.
 // TODO: make pickling independent of OS by using widelands Stream*
 // TODO: check SirVer, Lua TODOs!
+// TODO: port the Platea scenario to Lua too
+// TODO: port the campaigns to Lua
 
 // FUTURE: access to player stock via Player.get_wares and get_workers
 // FUTURE: access to constructionsites via Player.get_buildings
