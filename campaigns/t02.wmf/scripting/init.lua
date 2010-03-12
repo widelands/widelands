@@ -2,7 +2,7 @@
 --                       Barbarians Campaign Mission 2                      
 -- =======================================================================
 
-set_textdomain("campaigns/t02.wmf")
+set_textdomain("scenario_t02.wmf")
 
 use("aux", "coroutine")
 use("aux", "objective_utils")

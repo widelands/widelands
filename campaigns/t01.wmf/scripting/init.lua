@@ -2,7 +2,7 @@
 --                       Barbarians Campaign Mission 1
 -- =======================================================================
 
-set_textdomain("campaigns/t01.wmf")
+set_textdomain("scenario_t01.wmf")
 
 -- ===============
 -- Initialization
