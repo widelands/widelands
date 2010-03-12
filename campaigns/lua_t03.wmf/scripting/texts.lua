@@ -75,6 +75,7 @@ _"-> To attack an enemy you must click on the door of an advarse military buildi
 }
 
 order_msg_7_renegade_fortification = {
+   posy = 1,
    title=_"Renegade fortification",
    body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Thron speaks:" ..
@@ -214,6 +215,7 @@ _"You have completed this mission. You may continue playing if you wish, otherwi
 }
 
 order_msg_7_free_althunran = {
+   posy = 1,
    title=_"Military assault",
    body= "<rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _[[ "So be it, the generals are out to set up my troops and Boldreth himself will lead the first strike. I will ride by his side, to free Al’thunran of this war and bring peace back in our capital. When the young sun rises above the trees tomorrow morning, I will order the assault. By dusk, I will celebrate my victory in the wooden halls of the warlord and sacrifice a newborn lamb in the honour of my father whose eyes lie upon me today.<br>So be it!" ]] ..

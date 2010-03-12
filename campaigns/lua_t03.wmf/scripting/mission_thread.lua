@@ -26,7 +26,7 @@ function small_food_economy()
       "well",
       "bakery",
    }
-   o = p1:add_objective(obj_build_small_food_economy)
+   local o = add_obj(obj_build_small_food_economy)
    while not check_for_buildings(p1, {
          fishers_hut = 1,
          hunters_hut = 1,
@@ -41,7 +41,7 @@ end
 function foottracks() 
    -- Hunter build and some time passed or expanded east
    while true do
-      if (wl.game.get_time() > 240000 and #p1.get_buildings("hunters_hut") >0)
+      if (wl.game.get_time() > 240000 and #p1:get_buildings("hunters_hut") >0)
          or p1:seen_field(wl.map.Field(65, 28)) 
       then break end
       sleep(4239)
@@ -57,7 +57,7 @@ function foottracks()
    local pts = smooth_move(wl.map.Field(67,19))
    sleep(1000)
    send_msg(order_msg_2_build_a_donjon)
-   local o = add_objective(obj_build_a_donjon)
+   local o = add_obj(obj_build_a_donjon)
    p1:forbid_buildings{"sentry"}
    p1:allow_buildings{"donjon"}
 
@@ -70,7 +70,7 @@ function foottracks()
    while not check_for_buildings(p1, {donjon=1}) do sleep(2341) end
    o.done = true
    send_msg(order_msg_3_explore_further)
-   o = add_objective(obj_explore_further)
+   o = add_obj(obj_explore_further)
    
    p1:allow_buildings{"sentry", "stronghold", "barrier"}
 
@@ -97,7 +97,7 @@ function mining_and_trainingsites()
       wl.map.Field(82, 20):region(6))
    )
 
-   local pts = smooth_move(wl.map.Field(79,6))
+   local pts = smooth_move(wl.map.Field(82,20))
    sleep(1000)
    send_msg(order_msg_4_build_mining_economy)
    local o = add_obj(obj_build_mining_economy) 
@@ -130,7 +130,7 @@ function mining_and_trainingsites()
    o.done = true
    send_msg(story_note_2)
 
-   sleep(10000)
+   sleep(100000)
 
    send_msg(order_msg_6_build_enhanced_economy_and_training)
    p1:allow_buildings{
@@ -191,11 +191,10 @@ function fortress()
    local o = add_obj(obj_build_a_fortress)
    p1:allow_buildings{"fortress"}
 
-   while not #p1:get_buildings("fortress") > 0 do sleep(6523) end
+   while #p1:get_buildings("fortress") == 0 do sleep(6523) end
 
    o.done = true
    send_msg(story_note_3)
-
 end
 
 function expansion()
@@ -232,10 +231,7 @@ function kalitath()
    send_msg(order_msg_7_destroy_kalitaths_army)
    local o = add_obj(obj_destroy_kalitaths_army)
 
-
-   -- TODO: player defeated
    while not p2.defeated do sleep(7837) end
-
    o.done = true
 end
 
@@ -262,7 +258,10 @@ function renegade_fortresses()
       {"sentry", 116, 98 }
    )
 
-   local pts = smooth_move(wl.map.Field(79,6))
+   -- Some something of the enemy land
+   p1:reveal_fields(wl.map.Field(129,97):region(12))
+
+   local pts = smooth_move(wl.map.Field(117,92))
    sleep(1000)
    send_msg(order_msg_7_renegade_fortification)
    send_msg(order_msg_7_free_althunran)
@@ -289,16 +288,16 @@ function mission_complete()
    sleep(1000)
    send_msg(story_msg_7)
 
-   -- TODO: reveal campaign
    p1:reveal_campaign("campsect1")
 end
 
 run(mission_started)
 run(small_food_economy)
 run(foottracks)
-run(mining_and_trainingsites)
 run(fortress)
 run(expansion)
 run(kalitath)
+run(renegade_fortresses)
 run(mission_complete)
+run(mining_and_trainingsites)
 

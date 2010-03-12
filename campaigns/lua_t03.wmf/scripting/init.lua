@@ -23,9 +23,9 @@ function send_msg(msg)
    p1:message_box(msg.title, msg.body, msg)
 end
 function add_obj(t)
-   p1:add_objective(t.name, t.title, t.body)
+   return p1:add_objective(t.name, t.title, t.body)
 end
 
 use("map", "mission_thread")
 
-wl.debug.set_see_all(true)
+-- wl.debug.set_see_all(true)
