@@ -43,27 +43,37 @@ struct Languages {
  * NONE as first entry. Also increase the NR_LANGUAGES variable by one
  */
 #ifdef DEFINE_LANGUAGES  // defined in fullscreen_menu_options.cc
-#define NR_LANGUAGES 18
+#define NR_LANGUAGES 28
 static Languages available_languages[NR_LANGUAGES] = {
 	{"Default system language", ""},
 // EXTRACT BEGIN (leaves this line untouched)
-	{"česky",      "cs"},
-	{"Dansk",      "da"},
-	{"Deutsch",    "de"},
-	{"English",    "en"},
-	{"Español",    "es"},
-	{"Basque",     "eu"},
-	{"Français",   "fr"},
-	{"Galego",     "gl"},
-	{"עברית",      "he"},
-	{"Italiano",   "it"},
-	{"Magyar",     "hu"},
-	{"Nederlands", "nl"},
-	{"Polski",     "pl"},
-	{"Русский",    "ru"},
-	{"Suomi",      "fi"},
-	{"Slovensky",  "sk"},
-	{"Svenska",    "sv"},
+	{"česky",               "cs"},
+	{"Dansk",               "da"},
+	{"Deutsch",             "de"},
+	{"English",             "en"},
+	{"British English",     "en_GB"},
+	{"Esperanto",           "eo"},
+	{"Español",             "es"},
+	{"Euskara",             "eu"},
+	{"Suomi",               "fi"},
+	{"Français",            "fr"},
+	{"Galego",              "gl"},
+	{"עברית",             "he"},
+	{"Magyar",              "hu"},
+	{"Interlingua",         "ia"},
+	{"Bahasa Indonesia",    "id"},
+	{"Italiano",            "it"},
+	{"Japanese",            "ja"},
+	{"Latin",               "la"},
+	{"Nederlands",          "nl"},
+	{"Polski",              "pl"},
+	{"Português do Brasil", "pt_BR"},
+	{"Русский",             "ru"},
+	{"Sinhala",             "si"},
+	{"Slovensky",           "sk"},
+	{"Slovenščina",         "sl"},
+	{"Srpski",              "sr"},
+	{"Svenska",             "sv"},
 // EXTRACT END (leave this line untouched)
 };
 #endif
