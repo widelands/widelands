@@ -84,7 +84,7 @@ end
 --
 --       pts = smooth_move(wl.map.fields(23, 42))
 --       sleep(1000)
---       timed_move(reverse(pts)) -- Moves in one second back 
+--       timed_move(array_reverse(pts)) -- Moves in one second back 
 --
 --    :arg pts: an array of points, that is tables with ``x`` and ``y`` members
 --       that define the viewpoints to set the view to.
