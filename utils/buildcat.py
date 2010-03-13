@@ -67,6 +67,9 @@ ITERATIVEPOTS = [
           "../../campaigns/%(name)s/scripting/*.lua"
          ]
     ),
+    ("map_%(name)s/map_%(name)s", "maps/",
+         [ "../../maps/%(name)s/scripting/*.lua", ]
+    ),
     ("tribe_%(name)s/tribe_%(name)s", "tribes/",
         ["../../tribes/%(name)s/conf",
          "../../tribes/%(name)s/*/conf"]
@@ -154,9 +157,14 @@ def do_compile( potfile, srcfiles ):
 
         l.merge(confgettext.parse_conf(conf_files))
 
+        if not l.found_something_to_translate:
+            return False
+
         file = open(potfile, "w")
         file.write(str(l))
         file.close()
+        return True
+
 
 
 ##############################################################################
@@ -257,16 +265,20 @@ def do_update_potfiles():
                 oldcwd = os.getcwd()
                 os.chdir(path)
                 potfile = os.path.basename(pot) + '.pot'
-
-                print("\tpo/%s.pot" % pot)
-
-                if potfile == 'widelands.pot':
-                        # This catalogs can be built with xgettext
-                        do_compile_src( potfile, srcfiles )
+                if pot.endswith('widelands'):
+                    # This catalogs can be built with xgettext
+                    do_compile_src(potfile , srcfiles )
+                    succ = True
                 else:
-                        do_compile( potfile, srcfiles )
+                    succ = do_compile(potfile, srcfiles)
 
                 os.chdir(oldcwd)
+
+                if succ:
+                    print("\tpo/%s.pot" % pot)
+                else:
+                    os.rmdir(path)
+
 
         print("")
 

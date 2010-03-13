@@ -28,7 +28,6 @@ class Lua_GetText(object):
         self.findings = defaultdict(list)
 
     def parse(self, contents, filename):
-
         for m in self._SIMPLE_STRING.finditer(contents):
             if m.group("concat"):
                 text = m.group("all_text").strip()
@@ -50,6 +49,9 @@ class Lua_GetText(object):
                 (filename, contents[:start].count('\n') + 1)
             )
 
+    @property
+    def found_something_to_translate(self):
+        return len(self.findings.keys()) > 0
 
     def merge(self, other_findings):
         for key in other_findings:
