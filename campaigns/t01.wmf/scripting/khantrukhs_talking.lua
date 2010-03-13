@@ -43,7 +43,7 @@ function tutorial_thread()
    o = start_lumberjack_02(p)
 
    -- Wait till the hut is build.
-   while not check_for_buildings({lumberjacks_hut = 1},
+   while not check_for_buildings(p, {lumberjacks_hut = 1},
          wl.map.Field(12,13):region(2)) do
       coroutine.yield(wl.game.get_time() + 5000)
    end
