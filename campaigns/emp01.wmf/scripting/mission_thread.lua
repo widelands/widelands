@@ -24,7 +24,6 @@ function mission_thread()
 
 
    sleep(400)
-   -- TODO: hinweis auf page up/page down
    
    send_msg(saledus_1)
    p1:allow_buildings{"barracks"}

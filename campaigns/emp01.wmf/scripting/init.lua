@@ -3,7 +3,6 @@
 -- =======================================================================
 set_textdomain("scenario_emp01.wmf")
 
--- TODO: check if we really need them all
 use("aux", "coroutine")
 use("aux", "objective_utils")
 use("aux", "infrastructure")
