@@ -466,6 +466,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				(Area<FCoords>
 				 (game.map().get_fcoords(warehouse.get_position()),
 				  warehouse.vision_range()));
+			warehouse.m_next_military_act = game.get_gametime();
 			//log("Read warehouse stuff for %p\n", &warehouse);
 		} else
 			throw game_data_error
