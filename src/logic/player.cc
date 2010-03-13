@@ -151,8 +151,18 @@ Message_Id Player::add_message
 			 	(game.get_gametime() + duration, player_number(), id));
 
 	if (Interactive_Player * const iplayer = game.get_ipl())
-		if (&iplayer->player() == this and popup)
-			iplayer->popup_message(id, message);
+		if (&iplayer->player() == this) {
+			//play sound
+			g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+			if(message.sender() == MSG_SND_UNDER_ATTACK)
+				g_sound_handler.play_fx("under_attack", 125, PRIO_ALWAYS_PLAY);
+			else if(message.sender() == MSG_SND_SITE_LOST)
+				g_sound_handler.play_fx("site_lost", 125, PRIO_ALWAYS_PLAY);
+			else if(message.sender() == MSG_SND_SITE_DEFEATED)
+				g_sound_handler.play_fx("site_defeated", 125, PRIO_ALWAYS_PLAY);
+			if(popup)
+				iplayer->popup_message(id, message);
+		}
 
 	return id;
 }
