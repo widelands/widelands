@@ -31,13 +31,13 @@ class Lua_GetText(object):
 
         for m in self._SIMPLE_STRING.finditer(contents):
             if m.group("concat"):
-                text = m.group("all_text")
-                if text.startswith('[['):
-                    text = text[2:-2]
-                else:
-                    text = text[1:-1]
+                text = m.group("all_text").strip()
                 text = self._CONCATENATION.subn("", text)[0]
-                start = m.start('all_text')
+                if text.startswith('[['): text = text[2:]
+                elif text[0] in '\'"': text = text[1:]
+                if text.endswith(']]'): text = text[:-2]
+                elif text[-1] in '\'"': text = text[:-1]
+                start = m.start('paren') or m.start("all_text")
             else:
                 text = m.group("text")
                 start = m.start('text')

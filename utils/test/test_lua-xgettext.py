@@ -153,6 +153,20 @@ class TestConcatStrings_MixQuotes1(_TestLua_GetText_SingleFile):
         if(nil) then return _ ('This ' ..  "is " .. 'fine!')  end
     end
     '''
+class TestConcatStrings_Difficult(_TestLua_GetText_SingleFile):
+    items = [
+        ("a lumberjack'ssecond linethird line.", 0, 3),
+    ]
+
+    code = '''
+msg = "a" ..
+_(
+   "a lumberjack's" ..
+   "second line" ..
+   "third line."
+   ) ..
+"b",
+'''
 
 #####################
 # Multiline Strings #
