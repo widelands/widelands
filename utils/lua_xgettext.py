@@ -65,10 +65,7 @@ class Lua_GetText(object):
             for filename, lineno in occurences:
                 s += "#: %s:%i\n" % (filename, lineno)
             string = string.replace('\\', '\\\\').replace('"', '\\"')
-            if( string.find('\n') == -1 ):
-                s += 'msgid "%s"\n' % string
-            else:
-                s += 'msgid ""\n%s' % string
+            s += 'msgid "%s"\n' % string
             s += 'msgstr ""\n\n'
 
         return s
