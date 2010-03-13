@@ -18,8 +18,6 @@
  */
 
 
-#include <cctype>  // std::tolower
-
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -41,13 +39,16 @@ namespace Widelands {
 void Map_Scripting_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
-	 bool,
+	 bool is_normal_game,
 	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
-	egbase.lua().register_scripts(fs, "map");
+	if (not is_normal_game) { // Only load scripting stuff if this is a scenario
+		egbase.lua().register_scripts(fs, "map");
+	}
 
-	// Now, read the global state if any is saved
+	// Always try to load the global State: even in a normal game, some lua
+	// coroutines could run.
 	Widelands::FileRead fr;
 	if (fr.TryOpen(fs, "scripting/globals.dump")) {
 		egbase.lua().read_global_env(fr, mol, fr.Unsigned32());
@@ -59,7 +60,6 @@ void Map_Scripting_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
-
 	ScriptContainer & p = egbase.lua().get_scripts_for("map");
 
 	fs.EnsureDirectoryExists("scripting");
