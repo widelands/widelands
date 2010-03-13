@@ -92,7 +92,7 @@ order_msg_6_geologist = {
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>" ..
 _"Boldreth exclaims..." ..
 "</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>" ..
-_[[ "Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br> Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!"<br><br>-- NEW OBJECTIVE --<br> ]] ..
+_[[ "Just look at that! In the east is the great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br> Let's expand to the east. There's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!"<br><br>-- NEW OBJECTIVE --<br> ]] ..
 _"* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountain's flank to the east (on mountain terrain though, not mountain meadow). When you click at implied flag you can send Geologists there. Because the flag is on mountains, the Geologists will search for ores; otherwise, they will search for water. Then build a mine for both kinds of resource he will find, choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on mountain terrain. Suitable places for mines are displayed as hammer and pick." ..
 "</p></rt>"
 }
