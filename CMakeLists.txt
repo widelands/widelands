@@ -74,7 +74,6 @@ if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
 	set (WL_INSTALL_LOCALEDIR share/games/widelands/locale)
 endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
 
-# is this needed?
 set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
@@ -147,11 +146,6 @@ else (GGZ_CORE_FOUND)
   message ("GGZ support disabled, check your libraries path and installed packages!")
 endif (GGZ_CORE_FOUND)
 
-# we don't want someone to set this directly...
-# ...and we don't want to remember from former runs...
-unset (WL_VERSION)
-unset (WL_VERSION CACHE)
-
 # ...but using MAJOR, MINOR and PATCH
 if (DEFINED WL_VERSION_MAJOR)
 	set (CPACK_PACKAGE_VERSION_MAJOR ${WL_VERSION_MAJOR})
@@ -196,17 +190,17 @@ if (DEFINED WL_VERSION_MAJOR)
 endif (DEFINED WL_VERSION_MAJOR)
 
 if (NOT DEFINED WL_VERSION)
-#  find_package (PythonInterp REQUIRED)
-  execute_process (
-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/detect_revision.py
-    OUTPUT_VARIABLE WL_VERSION
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    OUTPUT_STRIP_TRAILING_WHITESPACE
+  add_custom_target (
+    BzrRevision ALL
+    COMMAND cmake -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/BzrRevision.cmake
+  )
+else (NOT DEFINED WL_VERSION)
+  add_custom_target (
+    InputRevision ALL
+    COMMAND cmake -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/InputRevision.cmake
   )
 endif (NOT DEFINED WL_VERSION)
-message ("Version of Widelands Build is ${WL_VERSION}(${CMAKE_BUILD_TYPE})")
 
-file (WRITE ${CMAKE_CURRENT_BINARY_DIR}/VERSION "${WL_VERSION}")
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
   DESTINATION ${WL_INSTALL_DATADIR}
