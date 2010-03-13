@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-27 16:15+0000\n"
-"PO-Revision-Date: 2010-02-28 09:15+0000\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-12 22:49+0000\n"
 "Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-01 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-03-13 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -29,8 +29,8 @@ msgstr ""
 "фабрикой топоров и мастерской."
 
 #: ../../tribes/barbarians/axefactory/conf:29
-#: ../../tribes/barbarians/warmill/conf:33
 #: ../../tribes/barbarians/metalworks/conf:33
+#: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
 msgstr "Готов обычный топор"
 
@@ -44,6 +44,45 @@ msgstr "Производит острый топор"
 msgid "Produce broadaxe"
 msgstr "Производит секиру"
 
+#: ../../tribes/barbarians/axefactory/conf:32
+#: ../../tribes/barbarians/bakery/conf:21
+#: ../../tribes/barbarians/big_inn/conf:27
+#: ../../tribes/barbarians/brewery/conf:20
+#: ../../tribes/barbarians/burners_house/conf:19
+#: ../../tribes/barbarians/cattlefarm/conf:21
+#: ../../tribes/barbarians/coalmine/conf:20
+#: ../../tribes/barbarians/deep_coalmine/conf:23
+#: ../../tribes/barbarians/deep_goldmine/conf:23
+#: ../../tribes/barbarians/deep_oremine/conf:23
+#: ../../tribes/barbarians/deeper_coalmine/conf:22
+#: ../../tribes/barbarians/deeper_goldmine/conf:22
+#: ../../tribes/barbarians/deeper_oremine/conf:22
+#: ../../tribes/barbarians/farm/conf:18
+#: ../../tribes/barbarians/fernery/conf:21
+#: ../../tribes/barbarians/fishers_hut/conf:15
+#: ../../tribes/barbarians/gamekeepers_hut/conf:15
+#: ../../tribes/barbarians/goldmine/conf:21
+#: ../../tribes/barbarians/granitemine/conf:18
+#: ../../tribes/barbarians/hardener/conf:18
+#: ../../tribes/barbarians/helmsmithy/conf:28
+#: ../../tribes/barbarians/hunters_hut/conf:15
+#: ../../tribes/barbarians/inn/conf:25
+#: ../../tribes/barbarians/lime_kiln/conf:18
+#: ../../tribes/barbarians/lumberjacks_hut/conf:15
+#: ../../tribes/barbarians/metalworks/conf:43
+#: ../../tribes/barbarians/micro-brewery/conf:22
+#: ../../tribes/barbarians/oremine/conf:21
+#: ../../tribes/barbarians/quarry/conf:15
+#: ../../tribes/barbarians/rangers_hut/conf:13
+#: ../../tribes/barbarians/scouts_hut/conf:17
+#: ../../tribes/barbarians/smelting_works/conf:26
+#: ../../tribes/barbarians/tavern/conf:24
+#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/weaving-mill/conf:19
+#: ../../tribes/barbarians/well/conf:14
+msgid "Work"
+msgstr "Работа"
+
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
 msgstr "Печет хлеб для рабочих."
@@ -55,6 +94,11 @@ msgid ""
 msgstr ""
 "Деревянная лопата является инструментом пекаря, каждому пекарю нужна своя "
 "собственная. Выпускается в мастерской, как и все инструменты."
+
+#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/trainingscamp/conf:36
+msgid "Sleep"
+msgstr "Сон"
 
 #: ../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
@@ -95,6 +139,17 @@ msgid ""
 msgstr ""
 "Молодые воины нуждаются в укреплении духа. Этот напиток делает людей "
 "бесстрашными и сильными."
+
+#: ../../tribes/barbarians/big_inn/conf:24
+#: ../../tribes/barbarians/inn/conf:23
+#: ../../tribes/barbarians/tavern/conf:23
+msgid "Produce ration"
+msgstr "Приготовить рацион"
+
+#: ../../tribes/barbarians/big_inn/conf:25
+#: ../../tribes/barbarians/inn/conf:24
+msgid "Produce snack"
+msgstr "Приготовить закуску"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
@@ -153,6 +208,12 @@ msgstr "Переносит грузы по вашим дорогам."
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
 msgstr "Разводит сильных быков, которые помогают в перевозке товаров."
+
+#: ../../tribes/barbarians/chief-miner/conf:1
+#: ../../tribes/barbarians/master-miner/conf:1
+#: ../../tribes/barbarians/miner/conf:1
+msgid "Works deep in the mines to obtain coal, iron or gold."
+msgstr "Работает в шахтах, добывая уголь, железо или золото."
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
@@ -931,17 +992,6 @@ msgstr ""
 "тяжелое, чтобы убить любое животное одним ударом. Используется только "
 "охотниками. Выпускается в мастерской."
 
-#: ../../tribes/barbarians/inn/conf:23
-#: ../../tribes/barbarians/big_inn/conf:24
-#: ../../tribes/barbarians/tavern/conf:23
-msgid "Produce ration"
-msgstr "Приготовить рацион"
-
-#: ../../tribes/barbarians/inn/conf:24
-#: ../../tribes/barbarians/big_inn/conf:25
-msgid "Produce snack"
-msgstr "Приготовить закуску"
-
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
 msgstr "Готовит еду для шахтёров."
@@ -971,12 +1021,6 @@ msgstr "Рубит деревья."
 #: ../../tribes/barbarians/mask/conf:1
 msgid "An enhanced version of the helmet."
 msgstr "Улучшенная версия шлема."
-
-#: ../../tribes/barbarians/master-miner/conf:1
-#: ../../tribes/barbarians/chief-miner/conf:1
-#: ../../tribes/barbarians/miner/conf:1
-msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr "Работает в шахтах, добывая уголь, железо или золото."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -1098,45 +1142,6 @@ msgstr "Плавить железо"
 msgid "Smelt gold"
 msgstr "Плавить золото"
 
-#: ../../tribes/barbarians/smelting_works/conf:26
-#: ../../tribes/barbarians/lime_kiln/conf:18
-#: ../../tribes/barbarians/burners_house/conf:19
-#: ../../tribes/barbarians/granitemine/conf:18
-#: ../../tribes/barbarians/farm/conf:18
-#: ../../tribes/barbarians/hardener/conf:18
-#: ../../tribes/barbarians/bakery/conf:21
-#: ../../tribes/barbarians/deep_goldmine/conf:23
-#: ../../tribes/barbarians/gamekeepers_hut/conf:15
-#: ../../tribes/barbarians/helmsmithy/conf:28
-#: ../../tribes/barbarians/cattlefarm/conf:21
-#: ../../tribes/barbarians/scouts_hut/conf:17
-#: ../../tribes/barbarians/deep_oremine/conf:23
-#: ../../tribes/barbarians/quarry/conf:15
-#: ../../tribes/barbarians/fishers_hut/conf:15
-#: ../../tribes/barbarians/deeper_goldmine/conf:22
-#: ../../tribes/barbarians/micro-brewery/conf:22
-#: ../../tribes/barbarians/axefactory/conf:32
-#: ../../tribes/barbarians/weaving-mill/conf:19
-#: ../../tribes/barbarians/coalmine/conf:20
-#: ../../tribes/barbarians/deeper_coalmine/conf:22
-#: ../../tribes/barbarians/deep_coalmine/conf:23
-#: ../../tribes/barbarians/fernery/conf:21
-#: ../../tribes/barbarians/lumberjacks_hut/conf:15
-#: ../../tribes/barbarians/inn/conf:25
-#: ../../tribes/barbarians/well/conf:14
-#: ../../tribes/barbarians/warmill/conf:39
-#: ../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../tribes/barbarians/brewery/conf:20
-#: ../../tribes/barbarians/rangers_hut/conf:13
-#: ../../tribes/barbarians/hunters_hut/conf:15
-#: ../../tribes/barbarians/oremine/conf:21
-#: ../../tribes/barbarians/metalworks/conf:43
-#: ../../tribes/barbarians/big_inn/conf:27
-#: ../../tribes/barbarians/goldmine/conf:21
-#: ../../tribes/barbarians/tavern/conf:24
-msgid "Work"
-msgstr "Работа"
-
 #: ../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
 msgstr ""
@@ -1165,11 +1170,6 @@ msgstr "Без тростника ваша крыша протечёт."
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
 msgstr "Тренирует солдат."
-
-#: ../../tribes/barbarians/trainingscamp/conf:36
-#: ../../tribes/barbarians/battlearena/conf:25
-msgid "Sleep"
-msgstr "Сон"
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"

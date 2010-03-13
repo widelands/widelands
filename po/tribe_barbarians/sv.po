@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-27 16:15+0000\n"
-"PO-Revision-Date: 2010-03-02 23:01+0000\n"
-"Last-Translator: Tumaini <Unknown>\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-13 00:33+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-04 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-03-13 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
@@ -29,8 +29,8 @@ msgstr ""
 "samma modell."
 
 #: ../../tribes/barbarians/axefactory/conf:29
-#: ../../tribes/barbarians/warmill/conf:33
 #: ../../tribes/barbarians/metalworks/conf:33
+#: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
 msgstr "Producera yxa"
 
@@ -44,6 +44,45 @@ msgstr "Producera skarpyxa"
 msgid "Produce broadaxe"
 msgstr "Producera bredyxa"
 
+#: ../../tribes/barbarians/axefactory/conf:32
+#: ../../tribes/barbarians/bakery/conf:21
+#: ../../tribes/barbarians/big_inn/conf:27
+#: ../../tribes/barbarians/brewery/conf:20
+#: ../../tribes/barbarians/burners_house/conf:19
+#: ../../tribes/barbarians/cattlefarm/conf:21
+#: ../../tribes/barbarians/coalmine/conf:20
+#: ../../tribes/barbarians/deep_coalmine/conf:23
+#: ../../tribes/barbarians/deep_goldmine/conf:23
+#: ../../tribes/barbarians/deep_oremine/conf:23
+#: ../../tribes/barbarians/deeper_coalmine/conf:22
+#: ../../tribes/barbarians/deeper_goldmine/conf:22
+#: ../../tribes/barbarians/deeper_oremine/conf:22
+#: ../../tribes/barbarians/farm/conf:18
+#: ../../tribes/barbarians/fernery/conf:21
+#: ../../tribes/barbarians/fishers_hut/conf:15
+#: ../../tribes/barbarians/gamekeepers_hut/conf:15
+#: ../../tribes/barbarians/goldmine/conf:21
+#: ../../tribes/barbarians/granitemine/conf:18
+#: ../../tribes/barbarians/hardener/conf:18
+#: ../../tribes/barbarians/helmsmithy/conf:28
+#: ../../tribes/barbarians/hunters_hut/conf:15
+#: ../../tribes/barbarians/inn/conf:25
+#: ../../tribes/barbarians/lime_kiln/conf:18
+#: ../../tribes/barbarians/lumberjacks_hut/conf:15
+#: ../../tribes/barbarians/metalworks/conf:43
+#: ../../tribes/barbarians/micro-brewery/conf:22
+#: ../../tribes/barbarians/oremine/conf:21
+#: ../../tribes/barbarians/quarry/conf:15
+#: ../../tribes/barbarians/rangers_hut/conf:13
+#: ../../tribes/barbarians/scouts_hut/conf:17
+#: ../../tribes/barbarians/smelting_works/conf:26
+#: ../../tribes/barbarians/tavern/conf:24
+#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/weaving-mill/conf:19
+#: ../../tribes/barbarians/well/conf:14
+msgid "Work"
+msgstr "Arbeta"
+
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
 msgstr "Bakar bröd till arbetarna."
@@ -55,6 +94,11 @@ msgid ""
 msgstr ""
 "Bakspaden är bagarens redskap. Varje bagare behöver en egen. Den produceras "
 "i metallsmedjan liksom alla andra verktyg."
+
+#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/trainingscamp/conf:36
+msgid "Sleep"
+msgstr "Sov"
 
 #: ../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
@@ -93,6 +137,17 @@ msgid ""
 "strong."
 msgstr ""
 "Unga krigare behöver lite uppmuntring. Denna dryck gör dig modig och stark."
+
+#: ../../tribes/barbarians/big_inn/conf:24
+#: ../../tribes/barbarians/inn/conf:23
+#: ../../tribes/barbarians/tavern/conf:23
+msgid "Produce ration"
+msgstr "Producera ranson"
+
+#: ../../tribes/barbarians/big_inn/conf:25
+#: ../../tribes/barbarians/inn/conf:24
+msgid "Produce snack"
+msgstr "Producera mellanmål"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
@@ -151,6 +206,12 @@ msgstr "Bär föremål längs med dina vägar."
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
 msgstr "Föder upp de starka oxar som hjälper till att transportera varor."
+
+#: ../../tribes/barbarians/chief-miner/conf:1
+#: ../../tribes/barbarians/master-miner/conf:1
+#: ../../tribes/barbarians/miner/conf:1
+msgid "Works deep in the mines to obtain coal, iron or gold."
+msgstr "Arbetar djupt ner i gruvorna för att få fram kol, järn eller guld."
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
@@ -927,17 +988,6 @@ msgstr ""
 "Detta spjut är lätt nog att kastas, men tungt nog att döda ett djur i ett "
 "slag. Det används endast av jägarna. Tillverkas i verktygssmedjan."
 
-#: ../../tribes/barbarians/inn/conf:23
-#: ../../tribes/barbarians/big_inn/conf:24
-#: ../../tribes/barbarians/tavern/conf:23
-msgid "Produce ration"
-msgstr "Producera ranson"
-
-#: ../../tribes/barbarians/inn/conf:24
-#: ../../tribes/barbarians/big_inn/conf:25
-msgid "Produce snack"
-msgstr "Producera mellanmål"
-
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
 msgstr "Framställer mat till gruvarbetare."
@@ -967,12 +1017,6 @@ msgstr "Fäller träd."
 #: ../../tribes/barbarians/mask/conf:1
 msgid "An enhanced version of the helmet."
 msgstr "En förbättrad version av hjälmen."
-
-#: ../../tribes/barbarians/master-miner/conf:1
-#: ../../tribes/barbarians/chief-miner/conf:1
-#: ../../tribes/barbarians/miner/conf:1
-msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr "Arbetar djupt ner i gruvorna för att få fram kol, järn eller guld."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -1097,45 +1141,6 @@ msgstr "Smält järn"
 msgid "Smelt gold"
 msgstr "Smält guld"
 
-#: ../../tribes/barbarians/smelting_works/conf:26
-#: ../../tribes/barbarians/lime_kiln/conf:18
-#: ../../tribes/barbarians/burners_house/conf:19
-#: ../../tribes/barbarians/granitemine/conf:18
-#: ../../tribes/barbarians/farm/conf:18
-#: ../../tribes/barbarians/hardener/conf:18
-#: ../../tribes/barbarians/bakery/conf:21
-#: ../../tribes/barbarians/deep_goldmine/conf:23
-#: ../../tribes/barbarians/gamekeepers_hut/conf:15
-#: ../../tribes/barbarians/helmsmithy/conf:28
-#: ../../tribes/barbarians/cattlefarm/conf:21
-#: ../../tribes/barbarians/scouts_hut/conf:17
-#: ../../tribes/barbarians/deep_oremine/conf:23
-#: ../../tribes/barbarians/quarry/conf:15
-#: ../../tribes/barbarians/fishers_hut/conf:15
-#: ../../tribes/barbarians/deeper_goldmine/conf:22
-#: ../../tribes/barbarians/micro-brewery/conf:22
-#: ../../tribes/barbarians/axefactory/conf:32
-#: ../../tribes/barbarians/weaving-mill/conf:19
-#: ../../tribes/barbarians/coalmine/conf:20
-#: ../../tribes/barbarians/deeper_coalmine/conf:22
-#: ../../tribes/barbarians/deep_coalmine/conf:23
-#: ../../tribes/barbarians/fernery/conf:21
-#: ../../tribes/barbarians/lumberjacks_hut/conf:15
-#: ../../tribes/barbarians/inn/conf:25
-#: ../../tribes/barbarians/well/conf:14
-#: ../../tribes/barbarians/warmill/conf:39
-#: ../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../tribes/barbarians/brewery/conf:20
-#: ../../tribes/barbarians/rangers_hut/conf:13
-#: ../../tribes/barbarians/hunters_hut/conf:15
-#: ../../tribes/barbarians/oremine/conf:21
-#: ../../tribes/barbarians/metalworks/conf:43
-#: ../../tribes/barbarians/big_inn/conf:27
-#: ../../tribes/barbarians/goldmine/conf:21
-#: ../../tribes/barbarians/tavern/conf:24
-msgid "Work"
-msgstr "Arbeta"
-
 #: ../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
 msgstr ""
@@ -1164,11 +1169,6 @@ msgstr "Vassrör används för att göra vattentäta tak på byggnader."
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
 msgstr "Tränar soldaterna."
-
-#: ../../tribes/barbarians/trainingscamp/conf:36
-#: ../../tribes/barbarians/battlearena/conf:25
-msgid "Sleep"
-msgstr "Sov"
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"

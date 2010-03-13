@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-23 22:03+0000\n"
+"POT-Creation-Date: 2010-03-10 20:09+0100\n"
+"PO-Revision-Date: 2010-03-12 22:49+0000\n"
 "Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-24 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-03-13 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -116,7 +116,14 @@ msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
-" --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1241
+msgid " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1245
+msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
 "                      1000 is normal speed).\n"
@@ -140,9 +147,17 @@ msgid ""
 " --double_buffer=[0|1]\n"
 "                      Enables double buffering\n"
 "                      *HIGHLY EXPERIMENTAL*\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1271
+msgid ""
 " --opengl=[0|1]\n"
 "                      Enables opengl rendering\n"
 "                      *DANGEROUS AND BROKEN, DO NOT USE*\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1277
+msgid ""
 "\n"
 "Options for the internal window manager:\n"
 " --border_snap_distance=[0 ...]\n"
@@ -163,65 +178,8 @@ msgid ""
 "                      panel.\n"
 "\n"
 msgstr ""
-"Ljudalternativ:\n"
-" --nosound            Startar spelet med ljud avstängt.\n"
-" --disable_fx         Avaktiverar ljudeffekter.\n"
-" --disable_music      Avaktiverar musik.\n"
-"\n"
-" --nozip              Spara inte filer som binära zip-filer\n"
-"\n"
-" --editor             Startar Widelands redigerar omedelbart.\n"
-"                      Du kan lägga till =FILNAMN för att omedelbart\n"
-"                      ladda kartan FILNAMN i redigeraren.\n"
-" --scenario=FILNAMN  Startar omedelbart kartan FILNAMN som scenariokarta.\n"
-"                     \n"
-" --loadgame=FILNAMN Laddar omedelbart det sparade spelet FILNAMN.\n"
-" --dedicated=FILNAMN Startar ggz-värd med FILNAMN som karta\n"
-" --speed_of_new_game  Hastigheten det nya spelet kommer köras med\n"
-"                      när det startas, med en faktor 1000 (0 är pausat,\n"
-"                      1000 är normal hastighet).\n"
-" --auto_roadbuild_mode=[yes|no]\n"
-"                      Gå in i vägbyggnadsläge automatiskt \n"
-"                      efter utplacering av flagga som  ej\n"
-"                      är ansluten till en väg.\n"
-" --write_HTML=[yes|no]\n"
-"                      Skriv HTML-hjälpfiler for inläst speldata.\n"
-"\n"
-"Grafikalternativ:\n"
-" --fullscreen=[yes|no]\n"
-"                      Använd fullskärmsläge i spelet.\n"
-" --depth=[16|32]      Färgdjup i bitar per pixel.\n"
-" --xres=[...]         Bredd på fönstret i pixlar.\n"
-" --yres=[...]         Höjd på fönstret i pixlar.\n"
-" --hw_improvements=[0|1]\n"
-"                      Aktivera hårdvaruaccelerering\n"
-"                      *MYCKET EXPERIMENTELLT*\n"
-" --double_buffer=[0|1]\n"
-"                      Aktiverar dubbelbuffring\n"
-"                      *MYCKET EXPERIMENTELLT*\n"
-" --opengl=[0|1]\n"
-"                      Aktiverar opengl-rendering\n"
-"                      *FARLIGT OCH TRASIGT, ANVÄND EJ*\n"
-"\n"
-"Alternativ för den interna fönsterhanteraren:\n"
-" --border_snap_distance=[0 ...]\n"
-"                      Flytta ett fönster till skärmens kant när \n"
-"                      fönstrets kant kommer inom detta avstånd\n"
-"                      från skärmens kant\n"
-" --dock_windows_to_edges=[yes|no]\n"
-"                      Eliminera ett fönsters kanter mod skärmkanten\n"
-"                      när fönsterkanten är intill skärmkanten.\n"
-"\n"
-" --panel_snap_distance=[0 ...]\n"
-"                      Flytta ett fönster till panelkanten när \n"
-"                      fönsterkanten kommer inom detta avstånd\n"
-"                      till panelen.\n"
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Flytta endast fönster till panelkanten om fönstret \n"
-"                      överlappar panelen.\n"
-"\n"
 
-#: ../../src/wlapplication.cc:1295
+#: ../../src/wlapplication.cc:1301
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -230,11 +188,11 @@ msgstr ""
 " --double             Starta spelet två gånger (för lokal nätverkstestning)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1299
+#: ../../src/wlapplication.cc:1305
 msgid " --help               Show this help\n"
 msgstr " --help               Visa denna hjälp\n"
 
-#: ../../src/wlapplication.cc:1303
+#: ../../src/wlapplication.cc:1309
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
@@ -248,19 +206,19 @@ msgstr ""
 "Hoppas att du uppskattar detta spel!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1447
 msgid "Warning: "
 msgstr "Varning: "
 
-#: ../../src/wlapplication.cc:1445
+#: ../../src/wlapplication.cc:1451
 msgid "Game data error"
 msgstr "Speldatafel"
 
-#: ../../src/wlapplication.cc:1448
+#: ../../src/wlapplication.cc:1454
 msgid "Unexpected error during the game"
 msgstr "Oväntat fel under spelets gång"
 
-#: ../../src/wlapplication.cc:1452
+#: ../../src/wlapplication.cc:1458
 msgid ""
 "\n"
 "\n"
@@ -274,7 +232,7 @@ msgstr ""
 "hittar relevanta meddelanden i standardutmatningen (stdout.txt på Windows). "
 "You are using build "
 
-#: ../../src/wlapplication.cc:1458
+#: ../../src/wlapplication.cc:1464
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -286,11 +244,11 @@ msgstr ""
 "Widelands försöker skapa ett sparat spel när fel inträffar under spelet. Det "
 "är oftast - men inte alltid - möjlift att läsa in det och fortsätta spela.\n"
 
-#: ../../src/wlapplication.cc:1569
+#: ../../src/wlapplication.cc:1575
 msgid "Connection timeouted"
 msgstr "Tidsgräns för anslutning överskreds"
 
-#: ../../src/wlapplication.cc:1571
+#: ../../src/wlapplication.cc:1577
 msgid ""
 "Widelands has not been able to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on side\n"
@@ -300,32 +258,32 @@ msgstr ""
 "Det verkar vara ett nätverksproblem, antingen på din sida eller på serverns "
 "sida.\n"
 
-#: ../../src/wlapplication.cc:1592 ../../src/network/network_ggz.cc:373
+#: ../../src/wlapplication.cc:1598 ../../src/network/network_ggz.cc:373
 msgid "Connection problem"
 msgstr "Anslutningsproblem"
 
-#: ../../src/wlapplication.cc:1594
+#: ../../src/wlapplication.cc:1600
 msgid "Widelands has not been able to connect to the host."
 msgstr "Widelands kunde ej ansluta till värden."
 
-#: ../../src/wlapplication.cc:1640
+#: ../../src/wlapplication.cc:1646
 msgid "The address of the game server is invalid"
 msgstr "Adressen till spelservern är ogiltig"
 
-#: ../../src/wlapplication.cc:1745 ../../src/network/nethost.cc:1178
+#: ../../src/wlapplication.cc:1751 ../../src/network/nethost.cc:1183
 msgid "Player"
 msgstr "Spelare"
 
-#: ../../src/wlapplication.cc:1893 ../../src/network/netclient.cc:163
+#: ../../src/wlapplication.cc:1899 ../../src/network/netclient.cc:167
 #: ../../src/network/nethost.cc:433
 msgid "Preparing game"
 msgstr "Förbereder spel"
 
-#: ../../src/wlapplication.cc:2000
+#: ../../src/wlapplication.cc:2006
 msgid "End of replay"
 msgstr "Slut på repris"
 
-#: ../../src/wlapplication.cc:2002
+#: ../../src/wlapplication.cc:2008
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
@@ -333,7 +291,7 @@ msgstr ""
 "Slutet på reprisen har nåtts och spelet har pausats. Du kan sätta igång det "
 "och fortsätta titta om du vill."
 
-#: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:352
+#: ../../src/wlapplication.cc:2088 ../../src/logic/game.cc:352
 #: ../../src/logic/game.cc:391
 msgid "Loading..."
 msgstr "Laddar..."
@@ -363,12 +321,12 @@ msgid "Building types"
 msgstr "Byggnadsslag"
 
 #: ../../src/writeHTML.cc:274 ../../src/writeHTML.cc:509
-#: ../../src/writeHTML.cc:1434
+#: ../../src/writeHTML.cc:1410
 msgid "Icon"
 msgstr "Ikon"
 
 #: ../../src/writeHTML.cc:276 ../../src/writeHTML.cc:511
-#: ../../src/writeHTML.cc:1436 ../../src/ui_fsmenu/netsetup_ggz.cc:143
+#: ../../src/writeHTML.cc:1412 ../../src/ui_fsmenu/netsetup_ggz.cc:143
 #: ../../src/wui/building_statistics_menu.cc:109
 #: ../../src/wui/building_ui.cc:1543 ../../src/wui/building_ui.cc:1731
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:73
@@ -405,23 +363,23 @@ msgid "Vision<br/>range"
 msgstr "Syn-<br/>räckvidd"
 
 #: ../../src/writeHTML.cc:316 ../../src/writeHTML.cc:372
-#: ../../src/logic/building.cc:513
+#: ../../src/logic/building.cc:509
 msgid "Mine"
 msgstr "Gruva"
 
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:388
-#: ../../src/logic/building.cc:514
+#: ../../src/logic/building.cc:510
 msgid "Small"
 msgstr "Liten"
 
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:382
-#: ../../src/logic/building.cc:515
+#: ../../src/logic/building.cc:511
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Medium"
 msgstr "Medel"
 
 #: ../../src/writeHTML.cc:329 ../../src/writeHTML.cc:377
-#: ../../src/logic/building.cc:515
+#: ../../src/logic/building.cc:511
 msgid "Big"
 msgstr "Stor"
 
@@ -567,8 +525,8 @@ msgstr "s befordring"
 msgid "Programs"
 msgstr "Program"
 
-#: ../../src/writeHTML.cc:750 ../../src/writeHTML.cc:1313
-#: ../../src/logic/building.cc:508
+#: ../../src/writeHTML.cc:750 ../../src/writeHTML.cc:1289
+#: ../../src/logic/building.cc:504
 msgid "mine"
 msgstr "bryt"
 
@@ -632,7 +590,7 @@ msgstr "geolog"
 msgid "geologist_find"
 msgstr "geolog finn"
 
-#: ../../src/writeHTML.cc:766 ../../src/writeHTML.cc:1388
+#: ../../src/writeHTML.cc:766 ../../src/writeHTML.cc:1364
 msgid "playFX"
 msgstr "spela ljud"
 
@@ -668,12 +626,12 @@ msgstr "Alster"
 msgid "'s output"
 msgstr "s alster"
 
-#: ../../src/writeHTML.cc:890 ../../src/writeHTML.cc:1041
-#: ../../src/writeHTML.cc:1103 ../../src/writeHTML.cc:1131
-#: ../../src/writeHTML.cc:1151 ../../src/writeHTML.cc:1172
-#: ../../src/writeHTML.cc:1223 ../../src/writeHTML.cc:1264
-#: ../../src/writeHTML.cc:1309 ../../src/writeHTML.cc:1336
-#: ../../src/writeHTML.cc:1360 ../../src/writeHTML.cc:1384
+#: ../../src/writeHTML.cc:890 ../../src/writeHTML.cc:1033
+#: ../../src/writeHTML.cc:1095 ../../src/writeHTML.cc:1123
+#: ../../src/writeHTML.cc:1143 ../../src/writeHTML.cc:1164
+#: ../../src/writeHTML.cc:1207 ../../src/writeHTML.cc:1244
+#: ../../src/writeHTML.cc:1285 ../../src/writeHTML.cc:1312
+#: ../../src/writeHTML.cc:1336 ../../src/writeHTML.cc:1360
 msgid "productionsite_program_reference.xhtml"
 msgstr "productionsite_program_reference.xhtml"
 
@@ -681,16 +639,16 @@ msgstr "productionsite_program_reference.xhtml"
 msgid "Documentation for program command return"
 msgstr "Dokumentation för programkommandot return"
 
-#: ../../src/writeHTML.cc:898 ../../src/logic/production_program.cc:392
-#: ../../src/logic/production_program.cc:753
+#: ../../src/writeHTML.cc:898 ../../src/logic/production_program.cc:389
+#: ../../src/logic/production_program.cc:746
 msgid "failed"
 msgstr "misslyckades"
 
-#: ../../src/writeHTML.cc:899 ../../src/logic/production_program.cc:393
+#: ../../src/writeHTML.cc:899 ../../src/logic/production_program.cc:390
 msgid "completed"
 msgstr "fullbordade"
 
-#: ../../src/writeHTML.cc:900 ../../src/logic/production_program.cc:393
+#: ../../src/writeHTML.cc:900 ../../src/logic/production_program.cc:390
 msgid "skipped"
 msgstr "hoppade över"
 
@@ -710,160 +668,160 @@ msgstr "eller"
 msgid "unless"
 msgstr "såvida ej"
 
-#: ../../src/writeHTML.cc:944 ../../src/writeHTML.cc:966
+#: ../../src/writeHTML.cc:940 ../../src/writeHTML.cc:962
 msgid "economy"
 msgstr "ekonomi"
 
-#: ../../src/writeHTML.cc:946 ../../src/writeHTML.cc:968
+#: ../../src/writeHTML.cc:942 ../../src/writeHTML.cc:964
 msgid "needs"
 msgstr "behöver"
 
-#: ../../src/writeHTML.cc:986
+#: ../../src/writeHTML.cc:982
 msgid "site"
 msgstr "plats"
 
-#: ../../src/writeHTML.cc:988
+#: ../../src/writeHTML.cc:984
 msgid "has"
 msgstr "har"
 
-#: ../../src/writeHTML.cc:1023
+#: ../../src/writeHTML.cc:1015
 msgid "workers of this site"
 msgstr "denna inrättnings arbetare"
 
-#: ../../src/writeHTML.cc:1025
+#: ../../src/writeHTML.cc:1017
 msgid "workers"
 msgstr "arbetare"
 
-#: ../../src/writeHTML.cc:1026
+#: ../../src/writeHTML.cc:1018
 msgid "</span></a> <span class=\"keyword\">"
 msgstr "</span></a> <span class=\"keyword\">"
 
-#: ../../src/writeHTML.cc:1027
+#: ../../src/writeHTML.cc:1019
 msgid "need"
 msgstr "behöver"
 
-#: ../../src/writeHTML.cc:1029
+#: ../../src/writeHTML.cc:1021
 msgid "experience"
 msgstr "erfarenhet"
 
-#: ../../src/writeHTML.cc:1043
+#: ../../src/writeHTML.cc:1035
 msgid "Documentation for program command call"
 msgstr "Dokumentation för programkommandot call"
 
-#: ../../src/writeHTML.cc:1045
+#: ../../src/writeHTML.cc:1037
 msgid "call"
 msgstr "anropa"
 
-#: ../../src/writeHTML.cc:1052
+#: ../../src/writeHTML.cc:1044
 #, c-format
 msgid "site's program %s"
 msgstr "inrättnings program %s"
 
-#: ../../src/writeHTML.cc:1105
+#: ../../src/writeHTML.cc:1097
 msgid "Documentation for program command worker"
 msgstr "Dokumentation för programkommandot worker"
 
-#: ../../src/writeHTML.cc:1107
+#: ../../src/writeHTML.cc:1099
 msgid "worker"
 msgstr "arbetare"
 
-#: ../../src/writeHTML.cc:1118
+#: ../../src/writeHTML.cc:1110
 #, c-format
 msgid "%s's program %s"
 msgstr "%ss program %s"
 
-#: ../../src/writeHTML.cc:1133
+#: ../../src/writeHTML.cc:1125
 msgid "Documentation for program command sleep"
 msgstr "Dokumentation för programkommandot sleep"
 
-#: ../../src/writeHTML.cc:1135
+#: ../../src/writeHTML.cc:1127
 msgid "sleep"
 msgstr "vänta"
 
-#: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
+#: ../../src/writeHTML.cc:1133 ../../src/writeHTML.cc:1153
 #, c-format
 msgid " %u.%03u s"
 msgstr " %u,%03u s"
 
-#: ../../src/writeHTML.cc:1153
+#: ../../src/writeHTML.cc:1145
 msgid "Documentation for program command animate"
 msgstr "Dokumentation för programkommandot animera"
 
-#: ../../src/writeHTML.cc:1155
+#: ../../src/writeHTML.cc:1147
 msgid "animate"
 msgstr "animera"
 
-#: ../../src/writeHTML.cc:1174
+#: ../../src/writeHTML.cc:1166
 msgid "Documentation for program command consume"
 msgstr "Dokumentation för programkommandot consume"
 
-#: ../../src/writeHTML.cc:1176
+#: ../../src/writeHTML.cc:1168
 msgid "consume"
 msgstr "förbruka"
 
-#: ../../src/writeHTML.cc:1225 ../../src/writeHTML.cc:1266
+#: ../../src/writeHTML.cc:1209 ../../src/writeHTML.cc:1246
 msgid "Documentation for program command produce"
 msgstr "Dokumentation för programkommandot skapa"
 
-#: ../../src/writeHTML.cc:1227
+#: ../../src/writeHTML.cc:1211
 msgid "produce"
 msgstr "skapa"
 
-#: ../../src/writeHTML.cc:1268
+#: ../../src/writeHTML.cc:1248
 msgid "recruit"
 msgstr "rekryt"
 
-#: ../../src/writeHTML.cc:1311
+#: ../../src/writeHTML.cc:1287
 msgid "Documentation for program command mine"
 msgstr "Dokumentation för programkommandot bryt"
 
-#: ../../src/writeHTML.cc:1338
+#: ../../src/writeHTML.cc:1314
 msgid "Documentation for program command check_soldier"
 msgstr "Dokumentation för programkommandot check_soldier"
 
-#: ../../src/writeHTML.cc:1340
+#: ../../src/writeHTML.cc:1316
 msgid "check soldier"
 msgstr "mönstra soldat"
 
-#: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1370
+#: ../../src/writeHTML.cc:1322 ../../src/writeHTML.cc:1346
 msgid "hp"
 msgstr "träffpunkter"
 
-#: ../../src/writeHTML.cc:1347 ../../src/writeHTML.cc:1371
+#: ../../src/writeHTML.cc:1323 ../../src/writeHTML.cc:1347
 msgid "attack"
 msgstr "anfall"
 
-#: ../../src/writeHTML.cc:1348 ../../src/writeHTML.cc:1372
+#: ../../src/writeHTML.cc:1324 ../../src/writeHTML.cc:1348
 msgid "defense"
 msgstr "försvar"
 
-#: ../../src/writeHTML.cc:1349 ../../src/writeHTML.cc:1373
+#: ../../src/writeHTML.cc:1325 ../../src/writeHTML.cc:1349
 msgid "evade"
 msgstr "undvikande"
 
-#: ../../src/writeHTML.cc:1362
+#: ../../src/writeHTML.cc:1338
 msgid "Documentation for program command train"
 msgstr "Dokumentation för programkommandot train"
 
-#: ../../src/writeHTML.cc:1364
+#: ../../src/writeHTML.cc:1340
 msgid "train"
 msgstr "träna"
 
-#: ../../src/writeHTML.cc:1386
+#: ../../src/writeHTML.cc:1362
 msgid "Documentation for program command playFX"
 msgstr "Dokumentation för programkommandot playFX"
 
-#: ../../src/writeHTML.cc:1423 ../../src/writeHTML.cc:1429
+#: ../../src/writeHTML.cc:1399 ../../src/writeHTML.cc:1405
 msgid "Ware types"
 msgstr "Varuslag"
 
-#: ../../src/writeHTML.cc:1463
+#: ../../src/writeHTML.cc:1439
 msgid "ware_types.xhtml"
 msgstr "varuslag.xhtml"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
 #: ../../src/economy/request.cc:190 ../../src/economy/wares_queue.cc:254
-#: ../../src/events/event_building.cc:328 ../../src/events/event_flag.cc:40
+#: ../../src/events/event_building.cc:320 ../../src/events/event_flag.cc:42
 #: ../../src/events/event_immovable.cc:42 ../../src/events/event_lua.cc:40
 #: ../../src/events/event_message.cc:109
 #: ../../src/events/event_message_box.cc:166
@@ -876,17 +834,17 @@ msgstr "varuslag.xhtml"
 #: ../../src/events/event_player_worker_types.cc:61
 #: ../../src/events/event_reveal.cc:40
 #: ../../src/events/event_reveal_objective.cc:48
-#: ../../src/events/event_road.cc:80
+#: ../../src/events/event_road.cc:88
 #: ../../src/events/event_set_player_style.cc:41
 #: ../../src/events/event_set_timer.cc:58
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:96
 #: ../../src/game_io/game_game_class_data_packet.cc:44
-#: ../../src/game_io/game_interactive_player_data_packet.cc:77
+#: ../../src/game_io/game_interactive_player_data_packet.cc:86
 #: ../../src/game_io/game_player_economies_data_packet.cc:89
 #: ../../src/game_io/game_player_info_data_packet.cc:142
 #: ../../src/logic/battle.cc:412 ../../src/logic/cmd_check_eventchain.cc:96
-#: ../../src/logic/cmd_incorporate.cc:46 ../../src/logic/cmd_queue.cc:174
-#: ../../src/logic/immovable.cc:624 ../../src/logic/instances.cc:73
+#: ../../src/logic/cmd_incorporate.cc:46 ../../src/logic/cmd_queue.cc:176
+#: ../../src/logic/immovable.cc:631 ../../src/logic/instances.cc:73
 #: ../../src/logic/instances.cc:131 ../../src/logic/instances.cc:475
 #: ../../src/logic/legacy.cc:406 ../../src/logic/legacy.cc:456
 #: ../../src/logic/playercommand.cc:132 ../../src/logic/playercommand.cc:180
@@ -906,13 +864,13 @@ msgstr "varuslag.xhtml"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:672
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:688
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:744
-#: ../../src/map_io/widelands_map_building_data_packet.cc:122
+#: ../../src/map_io/widelands_map_building_data_packet.cc:104
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:213
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:284
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:469
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:549
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:794
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:908
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:283
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:448
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:528
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:757
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:871
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:180
 #: ../../src/map_io/widelands_map_event_data_packet.cc:69
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:93
@@ -1027,13 +985,13 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:184
 #: ../../src/editor/editorinteractive.cc:603
-#: ../../src/logic/editor_game_base.cc:312
+#: ../../src/logic/editor_game_base.cc:311
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Laddar stam: %s"
 
 #: ../../src/editor/editorinteractive.cc:188
-#: ../../src/logic/editor_game_base.cc:308
+#: ../../src/logic/editor_game_base.cc:307
 msgid "Loading world data"
 msgstr "Laddar världsdata"
 
@@ -1082,35 +1040,35 @@ msgstr ""
 
 #: ../../src/events/event_building.cc:72 ../../src/events/event_building.cc:81
 #: ../../src/events/event_message.cc:90 ../../src/graphic/animation.cc:196
-#: ../../src/logic/building.cc:78 ../../src/logic/immovable.cc:187
-#: ../../src/logic/immovable.cc:660 ../../src/logic/immovable.cc:699
-#: ../../src/logic/immovable.cc:854 ../../src/logic/military_data.cc:51
+#: ../../src/logic/building.cc:78 ../../src/logic/immovable.cc:194
+#: ../../src/logic/immovable.cc:667 ../../src/logic/immovable.cc:706
+#: ../../src/logic/immovable.cc:861 ../../src/logic/military_data.cc:51
 #: ../../src/logic/military_data.cc:58
-#: ../../src/logic/production_program.cc:99
-#: ../../src/logic/production_program.cc:256
-#: ../../src/logic/production_program.cc:263
-#: ../../src/logic/production_program.cc:279
-#: ../../src/logic/production_program.cc:294
-#: ../../src/logic/production_program.cc:369
-#: ../../src/logic/production_program.cc:373
-#: ../../src/logic/production_program.cc:496
-#: ../../src/logic/production_program.cc:510
-#: ../../src/logic/production_program.cc:608
-#: ../../src/logic/production_program.cc:652
-#: ../../src/logic/production_program.cc:833
-#: ../../src/logic/production_program.cc:919
-#: ../../src/logic/production_program.cc:992
-#: ../../src/logic/production_program.cc:1002
-#: ../../src/logic/production_program.cc:1013
-#: ../../src/logic/production_program.cc:1167
-#: ../../src/logic/production_program.cc:1189
-#: ../../src/logic/production_program.cc:1236
-#: ../../src/logic/production_program.cc:1248
-#: ../../src/logic/production_program.cc:1257
-#: ../../src/logic/production_program.cc:1341 ../../src/logic/soldier.cc:62
+#: ../../src/logic/production_program.cc:96
+#: ../../src/logic/production_program.cc:253
+#: ../../src/logic/production_program.cc:260
+#: ../../src/logic/production_program.cc:276
+#: ../../src/logic/production_program.cc:291
+#: ../../src/logic/production_program.cc:366
+#: ../../src/logic/production_program.cc:370
+#: ../../src/logic/production_program.cc:485
+#: ../../src/logic/production_program.cc:499
+#: ../../src/logic/production_program.cc:597
+#: ../../src/logic/production_program.cc:641
+#: ../../src/logic/production_program.cc:818
+#: ../../src/logic/production_program.cc:903
+#: ../../src/logic/production_program.cc:974
+#: ../../src/logic/production_program.cc:984
+#: ../../src/logic/production_program.cc:995
+#: ../../src/logic/production_program.cc:1149
+#: ../../src/logic/production_program.cc:1171
+#: ../../src/logic/production_program.cc:1218
+#: ../../src/logic/production_program.cc:1230
+#: ../../src/logic/production_program.cc:1239
+#: ../../src/logic/production_program.cc:1323 ../../src/logic/soldier.cc:62
 #: ../../src/logic/soldier.cc:69 ../../src/logic/soldier.cc:85
 #: ../../src/logic/soldier.cc:92 ../../src/logic/soldier.cc:200
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:351
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:338
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
 #, c-format
 msgid "expected %s but found \"%s\""
@@ -1126,45 +1084,45 @@ msgid "max distance (%u) is smaller than min distance (%u)"
 msgstr "största avstånd (%u) är mindre än minsta avstånd (%u)"
 
 #: ../../src/events/event_building.cc:169
-#: ../../src/events/event_building.cc:304 ../../src/logic/immovable.cc:254
-#: ../../src/logic/immovable.cc:268
+#: ../../src/events/event_building.cc:296 ../../src/logic/immovable.cc:259
+#: ../../src/logic/immovable.cc:273
 msgid "duplicated"
 msgstr "upprepad"
 
 #: ../../src/events/event_building.cc:174
-#: ../../src/events/event_building.cc:311
+#: ../../src/events/event_building.cc:303
 #, c-format
 msgid "%s=\"%s\": invalid"
 msgstr "%s=\"%s\": ogiltigt"
 
-#: ../../src/events/event_building.cc:204
-#: ../../src/events/event_building.cc:230
+#: ../../src/events/event_building.cc:199
+#: ../../src/events/event_building.cc:222
 #, c-format
 msgid "can not have %u %s (only %u)"
 msgstr "kan ej ha %u %s (endast %u)"
 
-#: ../../src/events/event_building.cc:316
+#: ../../src/events/event_building.cc:308
 #, c-format
 msgid "%u soldiers but only %u allowed"
 msgstr "%u soldater men endast %u tillåtna"
 
-#: ../../src/events/event_building.cc:320
+#: ../../src/events/event_building.cc:312
 #, c-format
 msgid "(soldiercontrol): %s"
 msgstr "(soldatstyrare): %s"
 
-#: ../../src/events/event_building.cc:323
+#: ../../src/events/event_building.cc:315
 #, c-format
 msgid "(productionsite): %s"
 msgstr "(tillverkningsinrättning): %s"
 
-#: ../../src/events/event_building.cc:330
+#: ../../src/events/event_building.cc:322
 #: ../../src/trigger/trigger_building.cc:58
 #, c-format
 msgid "(building): %s"
 msgstr "(byggnad): %s"
 
-#: ../../src/events/event_building.cc:442
+#: ../../src/events/event_building.cc:422
 #, c-format
 msgid ""
 "failed to place a %s near (%i, %i) (distance between %u and %u) for player "
@@ -1175,7 +1133,7 @@ msgstr ""
 
 #: ../../src/events/event_expire_message.cc:48
 #: ../../src/logic/playercommand.cc:128
-#: ../../src/map_io/widelands_map_building_data_packet.cc:118
+#: ../../src/map_io/widelands_map_building_data_packet.cc:100
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:61
 #, c-format
 msgid "player %u does not exist"
@@ -1447,7 +1405,7 @@ msgstr ""
 "Markerar ett meddelande som tidigare skapats för en spelare som utgånget. "
 "Meddelandet kommer att upphöra att existera."
 
-#: ../../src/events/event_flag.cc:42
+#: ../../src/events/event_flag.cc:44
 #, c-format
 msgid "(flag): %s"
 msgstr "(flagga): %s"
@@ -1584,15 +1542,15 @@ msgstr "(spelares arbetartyper): %s"
 msgid "Change"
 msgstr "Ändra"
 
-#: ../../src/events/event_road.cc:40
+#: ../../src/events/event_road.cc:42
 msgid "there are no steps"
 msgstr "det finns inga steg"
 
-#: ../../src/events/event_road.cc:43
+#: ../../src/events/event_road.cc:45
 msgid "there is only 1 step, must be at least 2"
 msgstr "det finns endast 1 steg, måste vara minst 2"
 
-#: ../../src/events/event_road.cc:49
+#: ../../src/events/event_road.cc:51
 #, c-format
 msgid ""
 "step %li has direction '%c', must be one of {1 (northeast), 2 (east), 3 "
@@ -1601,7 +1559,7 @@ msgstr ""
 "steg %li har riktning '%c', måste vara en av {1 (nordost), 2 (ost), 3 "
 "(sydost), 4 (sydväst), 5 (väst), 6 (nordväst)}"
 
-#: ../../src/events/event_road.cc:72
+#: ../../src/events/event_road.cc:80
 #, c-format
 msgid ""
 "the steps \"%s\" do not form the optimal path from the start to the end "
@@ -1656,12 +1614,11 @@ msgstr "kommandokö: %s"
 msgid "check eventchain: %s"
 msgstr "kontrollera händelsekedja: %s"
 
-#: ../../src/game_io/game_interactive_player_data_packet.cc:49
-#, c-format
-msgid "player %u does not exist in the game"
-msgstr "spelare %u finns ej i spelet"
+#: ../../src/game_io/game_interactive_player_data_packet.cc:57
+msgid "The game has no players!"
+msgstr ""
 
-#: ../../src/game_io/game_interactive_player_data_packet.cc:79
+#: ../../src/game_io/game_interactive_player_data_packet.cc:88
 #, c-format
 msgid "interactive player: %s"
 msgstr "interaktiv spelare: %s"
@@ -1731,32 +1688,32 @@ msgstr "[strid] soldat %u förlorar strid\n"
 msgid "[battle] waking up winner %d\n"
 msgstr "[strid] väcker vinnare %d\n"
 
-#: ../../src/logic/bob.cc:85 ../../src/logic/immovable.cc:199
+#: ../../src/logic/bob.cc:85 ../../src/logic/immovable.cc:206
 #, c-format
 msgid "bad attribute \"%s\""
 msgstr "felaktigt attribut: %s"
 
-#: ../../src/logic/building.cc:509
+#: ../../src/logic/building.cc:505
 #: ../../src/editor/tools/editor_info_tool.cc:59
 msgid "small"
 msgstr "liten"
 
-#: ../../src/logic/building.cc:510
+#: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:60
 msgid "medium"
 msgstr "medel"
 
-#: ../../src/logic/building.cc:510
+#: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "big"
 msgstr "stor"
 
-#: ../../src/logic/cmd_queue.cc:171
+#: ../../src/logic/cmd_queue.cc:173
 #, c-format
 msgid "duetime (%i) < gametime (%i)"
 msgstr "förväntad tid (%i) < speltime (%i)"
 
-#: ../../src/logic/cmd_queue.cc:176
+#: ../../src/logic/cmd_queue.cc:178
 #, c-format
 msgid "game logic: %s"
 msgstr "spelsimulering: %s"
@@ -1817,90 +1774,90 @@ msgstr ""
 "Du kan lägga till en startposition för hand med kartredigeraren för att lösa "
 "detta problem."
 
-#: ../../src/logic/immovable.cc:133 ../../src/logic/production_program.cc:1396
+#: ../../src/logic/immovable.cc:140 ../../src/logic/production_program.cc:1378
 #, c-format
 msgid "unknown command type \"%s\""
 msgstr "okänt kommandoslag \"%s\""
 
-#: ../../src/logic/immovable.cc:137
+#: ../../src/logic/immovable.cc:144
 msgid "no actions"
 msgstr "inga kommandon"
 
-#: ../../src/logic/immovable.cc:213
+#: ../../src/logic/immovable.cc:220
 msgid "this program has already been declared"
 msgstr "detta program har redan deklarerats"
 
-#: ../../src/logic/immovable.cc:219
+#: ../../src/logic/immovable.cc:226
 #, c-format
 msgid "program %s: %s"
 msgstr "program %s: %s"
 
-#: ../../src/logic/immovable.cc:252 ../../src/logic/immovable.cc:266
+#: ../../src/logic/immovable.cc:257 ../../src/logic/immovable.cc:271
 #, c-format
 msgid "expected 0 .. 255 but found %u"
 msgstr "förväntade 0 .. 255 men fann %u"
 
-#: ../../src/logic/immovable.cc:271
+#: ../../src/logic/immovable.cc:276
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
 msgstr "[terrain affinity] \"%s\" (ej i vald värld): %s"
 
-#: ../../src/logic/immovable.cc:301
+#: ../../src/logic/immovable.cc:306
 #, c-format
 msgid "immovable %s has no program \"%s\""
 msgstr "fast föremål %s har inget program \"%s\""
 
-#: ../../src/logic/immovable.cc:607
+#: ../../src/logic/immovable.cc:614
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
 msgstr "stam %s definierar ej fast föremål-slag \"%s\""
 
-#: ../../src/logic/immovable.cc:610
+#: ../../src/logic/immovable.cc:617
 #, c-format
 msgid "unknown tribe %s"
 msgstr "okänd stam %s"
 
-#: ../../src/logic/immovable.cc:616
+#: ../../src/logic/immovable.cc:623
 #, c-format
 msgid "world does not define immovable type \"%s\""
 msgstr "värld definierar ej fast föremål-slag %s"
 
-#: ../../src/logic/immovable.cc:626
+#: ../../src/logic/immovable.cc:633
 #, c-format
 msgid "immovable type %s"
 msgstr "fast föremål-slag %s"
 
-#: ../../src/logic/immovable.cc:661 ../../src/logic/production_program.cc:609
-#: ../../src/logic/production_program.cc:653
+#: ../../src/logic/immovable.cc:668 ../../src/logic/production_program.cc:598
+#: ../../src/logic/production_program.cc:642
 msgid "duration in ms"
 msgstr "varaktighet i ms"
 
-#: ../../src/logic/immovable.cc:699 ../../src/logic/production_program.cc:1341
+#: ../../src/logic/immovable.cc:706 ../../src/logic/production_program.cc:1323
 msgid "priority"
 msgstr "prioritet"
 
-#: ../../src/logic/immovable.cc:733 ../../src/logic/immovable.cc:802
-#: ../../src/logic/immovable.cc:888
+#: ../../src/logic/immovable.cc:740 ../../src/logic/immovable.cc:809
+#: ../../src/logic/immovable.cc:895
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr "fast föremål-slag ej i stam men målslag har räckvidd (\"%s\")"
 
-#: ../../src/logic/immovable.cc:739 ../../src/logic/immovable.cc:808
-#: ../../src/logic/immovable.cc:894
+#: ../../src/logic/immovable.cc:746 ../../src/logic/immovable.cc:815
+#: ../../src/logic/immovable.cc:901
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
 msgstr "räckvidd \"%s\" angiven för målslag (måste vara \"world\")"
 
-#: ../../src/logic/immovable.cc:754 ../../src/logic/immovable.cc:909
+#: ../../src/logic/immovable.cc:761 ../../src/logic/immovable.cc:916
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
 msgstr "förväntade sannolikhet i intervallet [1, 254] men fann \"%s\""
 
-#: ../../src/logic/immovable.cc:767
+#: ../../src/logic/immovable.cc:774
 msgid "illegal transformation to the same type"
 msgstr "otillåten omvandling till samma slag"
 
-#: ../../src/logic/immovable.cc:855
+#: ../../src/logic/immovable.cc:862
 msgid "probability in range [1, 254]"
 msgstr "sannolikhet i intervallet [1, 254]"
 
@@ -1960,35 +1917,35 @@ msgid_plural "%u(+%u) soldiers"
 msgstr[0] "%u(+%u) soldat"
 msgstr[1] "%u(+%u) soldater"
 
-#: ../../src/logic/militarysite.cc:572
+#: ../../src/logic/militarysite.cc:576
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
 msgstr "%s Fienden besegrade dina soldater vid %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:579
+#: ../../src/logic/militarysite.cc:583
 msgid "Militarysite lost!"
 msgstr "Militär plats förlorad!"
 
-#: ../../src/logic/militarysite.cc:652
+#: ../../src/logic/militarysite.cc:656
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
 msgstr "%sDina soldater besegrade fienden vid %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:659
+#: ../../src/logic/militarysite.cc:663
 msgid "Enemy at site defeated!"
 msgstr "Fiender vid platsen besegrade!"
 
-#: ../../src/logic/militarysite.cc:707
+#: ../../src/logic/militarysite.cc:711
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
 msgstr "%sDin %s upptäckte en angripare.</p>"
 
-#: ../../src/logic/militarysite.cc:708
+#: ../../src/logic/militarysite.cc:712
 #, c-format
 msgid "%sYour %s is under attack.</p>"
 msgstr "%sDin %s är under anfall.</p>"
 
-#: ../../src/logic/militarysite.cc:716
+#: ../../src/logic/militarysite.cc:720
 msgid "You are under attack"
 msgstr "Du är under anfall"
 
@@ -2114,7 +2071,7 @@ msgstr "(spelare %u): meddelande-id är null"
 msgid "player message: %s"
 msgstr "spelarmeddelande: %s"
 
-#: ../../src/logic/production_program.cc:72
+#: ../../src/logic/production_program.cc:69
 #, c-format
 msgid ""
 "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
@@ -2122,7 +2079,7 @@ msgid ""
 msgstr ""
 "%s är ej angivet som insats (\"%s=<count>\" fanns ej i [inputs]-stycket)"
 
-#: ../../src/logic/production_program.cc:85
+#: ../../src/logic/production_program.cc:82
 #, c-format
 msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
@@ -2131,13 +2088,13 @@ msgstr ""
 "fel ordning på varutyper inom gruppen: varutyp %s förekommer efter varutyp "
 "%s (korrigera ordningen!)"
 
-#: ../../src/logic/production_program.cc:99
-#: ../../src/logic/production_program.cc:834
-#: ../../src/logic/production_program.cc:920
+#: ../../src/logic/production_program.cc:96
+#: ../../src/logic/production_program.cc:819
+#: ../../src/logic/production_program.cc:904
 msgid "count"
 msgstr "antal"
 
-#: ../../src/logic/production_program.cc:104
+#: ../../src/logic/production_program.cc:101
 #, c-format
 msgid ""
 "group count is %u but (total) input storage capacity of the specified ware "
@@ -2147,69 +2104,69 @@ msgstr ""
 "varautypen/-typerna är endast %u, så gruppbehovet kan aldlig uppfyllas vid "
 "platsen."
 
-#: ../../src/logic/production_program.cc:134
+#: ../../src/logic/production_program.cc:131
 msgid "not "
 msgstr "inte "
 
-#: ../../src/logic/production_program.cc:156
-#: ../../src/logic/production_program.cc:177
+#: ../../src/logic/production_program.cc:153
+#: ../../src/logic/production_program.cc:174
 msgid "economy needs "
 msgstr "ekonomibehov "
 
-#: ../../src/logic/production_program.cc:206
+#: ../../src/logic/production_program.cc:203
 msgid "site has "
 msgstr "platsen har "
 
-#: ../../src/logic/production_program.cc:232
+#: ../../src/logic/production_program.cc:229
 msgid "workers need experience"
 msgstr "arbetare behöver erfarenhet"
 
-#: ../../src/logic/production_program.cc:257
+#: ../../src/logic/production_program.cc:254
 msgid "ware type or worker type"
 msgstr "varutyp eller arbetartyp"
 
-#: ../../src/logic/production_program.cc:320
+#: ../../src/logic/production_program.cc:317
 #, c-format
 msgid "invalid condition: %s"
 msgstr "ogiltigt villkor: %s"
 
-#: ../../src/logic/production_program.cc:335
+#: ../../src/logic/production_program.cc:332
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
 msgstr "förväntade {\"failed\"|\"completed\"|\"skipped\"} men fann \"%s\""
 
-#: ../../src/logic/production_program.cc:348
+#: ../../src/logic/production_program.cc:345
 msgid "expected \"and\" or end of input"
 msgstr "förväntade \"and\" eller slut på indata"
 
-#: ../../src/logic/production_program.cc:357
+#: ../../src/logic/production_program.cc:354
 msgid "expected condition at end of input"
 msgstr "förväntade villkor vid slut på indata"
 
-#: ../../src/logic/production_program.cc:363
+#: ../../src/logic/production_program.cc:360
 msgid "expected \"or\" or end of input"
 msgstr "förväntade \"or\" eller slut på indata"
 
-#: ../../src/logic/production_program.cc:399
-#: ../../src/logic/production_program.cc:785
+#: ../../src/logic/production_program.cc:396
+#: ../../src/logic/production_program.cc:770
 msgid " and "
 msgstr " och "
 
-#: ../../src/logic/production_program.cc:400
-#: ../../src/logic/production_program.cc:756
+#: ../../src/logic/production_program.cc:397
+#: ../../src/logic/production_program.cc:749
 msgid " because: "
 msgstr " anledning: "
 
-#: ../../src/logic/production_program.cc:415
-#: ../../src/wui/encyclopedia_window.cc:194
+#: ../../src/logic/production_program.cc:408
+#: ../../src/wui/encyclopedia_window.cc:192
 msgid " or "
 msgstr " eller "
 
-#: ../../src/logic/production_program.cc:416
+#: ../../src/logic/production_program.cc:409
 msgid " because not: "
 msgstr " för att inte: "
 
-#: ../../src/logic/production_program.cc:460
+#: ../../src/logic/production_program.cc:449
 #, c-format
 msgid ""
 "the program \"%s\" has not (yet) been declared in %s (wrong declaration "
@@ -2218,55 +2175,55 @@ msgstr ""
 "programmet \"%s\" har (ännu) ej deklarerats i %s (felaktig "
 "deklareringsföljd?)"
 
-#: ../../src/logic/production_program.cc:482
-#: ../../src/logic/production_program.cc:487
-#: ../../src/logic/production_program.cc:492
+#: ../../src/logic/production_program.cc:471
+#: ../../src/logic/production_program.cc:476
+#: ../../src/logic/production_program.cc:481
 #, c-format
 msgid "%s handling method already defined"
 msgstr "%s hanteringsmetod redan definierad"
 
-#: ../../src/logic/production_program.cc:482
+#: ../../src/logic/production_program.cc:471
 msgid "failure"
 msgstr "misslyckades"
 
-#: ../../src/logic/production_program.cc:487
+#: ../../src/logic/production_program.cc:476
 msgid "completion"
 msgstr "komplettering"
 
-#: ../../src/logic/production_program.cc:492
+#: ../../src/logic/production_program.cc:481
 msgid "skip"
 msgstr "hoppa över"
 
-#: ../../src/logic/production_program.cc:497
+#: ../../src/logic/production_program.cc:486
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
 msgstr "{\"misslyckas\"|\"komplettera\"|\"hoppa över\"}"
 
-#: ../../src/logic/production_program.cc:511
+#: ../../src/logic/production_program.cc:500
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
 msgstr "{\"misslyckas\"|\"komplettera\"|\"hoppa över\"}"
 
-#: ../../src/logic/production_program.cc:613
+#: ../../src/logic/production_program.cc:602
 #, c-format
 msgid "sleep: %s"
 msgstr "vänta: %s"
 
-#: ../../src/logic/production_program.cc:635
+#: ../../src/logic/production_program.cc:624
 msgid "idle animation is default; calling is not allowed"
 msgstr ""
 "idle-animation körs om ingenting annat körs; uttryckligt anrop ej tillåtet"
 
-#: ../../src/logic/production_program.cc:685
+#: ../../src/logic/production_program.cc:674
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
 msgstr "väntade ware_type1[,ware_type2[,...]][:N] ..."
 
-#: ../../src/logic/production_program.cc:788
+#: ../../src/logic/production_program.cc:773
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] " saknas"
 msgstr[1] " saknas"
 
-#: ../../src/logic/production_program.cc:848
-#: ../../src/logic/production_program.cc:934
+#: ../../src/logic/production_program.cc:833
+#: ../../src/logic/production_program.cc:918
 #, c-format
 msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
@@ -2274,60 +2231,60 @@ msgid ""
 msgstr ""
 "%s är ej angivet som alster (\"output=%s\" fanns ej i [global]-stycket)"
 
-#: ../../src/logic/production_program.cc:866
+#: ../../src/logic/production_program.cc:851
 msgid "Produced "
 msgstr "Producerade "
 
-#: ../../src/logic/production_program.cc:876
-#: ../../src/logic/production_program.cc:961
+#: ../../src/logic/production_program.cc:860
+#: ../../src/logic/production_program.cc:943
 #, c-format
 msgid "%u "
 msgstr "%u "
 
-#: ../../src/logic/production_program.cc:883
-#: ../../src/logic/production_program.cc:968
+#: ../../src/logic/production_program.cc:867
+#: ../../src/logic/production_program.cc:950
 msgid ", "
 msgstr ", "
 
-#: ../../src/logic/production_program.cc:951
+#: ../../src/logic/production_program.cc:935
 msgid "Recruited "
 msgstr "Rekryterade "
 
-#: ../../src/logic/production_program.cc:992
+#: ../../src/logic/production_program.cc:974
 msgid "distance"
 msgstr "avstånd"
 
-#: ../../src/logic/production_program.cc:1003
-#: ../../src/logic/production_program.cc:1014
+#: ../../src/logic/production_program.cc:985
+#: ../../src/logic/production_program.cc:996
 msgid "percentage"
 msgstr "hundradel"
 
-#: ../../src/logic/production_program.cc:1148
+#: ../../src/logic/production_program.cc:1130
 msgid "Mine empty"
 msgstr "Tom gruva"
 
-#: ../../src/logic/production_program.cc:1152
+#: ../../src/logic/production_program.cc:1134
 msgid ""
 "This mines has run empty. You should consider to expand or destruct it."
 msgstr ""
 "Denna gruva har tagit slut. Du bör överväga att exandera eller stänga den."
 
-#: ../../src/logic/production_program.cc:1167
-#: ../../src/logic/production_program.cc:1236
+#: ../../src/logic/production_program.cc:1149
+#: ../../src/logic/production_program.cc:1218
 msgid "soldier type"
 msgstr "soldatslag"
 
-#: ../../src/logic/production_program.cc:1180
+#: ../../src/logic/production_program.cc:1162
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|evade\"} but found \"%s\""
 msgstr "förväntade {\"hp\"|\"attack\"|\"defense\"|evade\"} men fann \"%s\""
 
-#: ../../src/logic/production_program.cc:1189
-#: ../../src/logic/production_program.cc:1257
+#: ../../src/logic/production_program.cc:1171
+#: ../../src/logic/production_program.cc:1239
 msgid "level"
 msgstr "nivå"
 
-#: ../../src/logic/production_program.cc:1267
+#: ../../src/logic/production_program.cc:1249
 #, c-format
 msgid "expected level > %u but found \"%s\""
 msgstr "förväntade nivå > %u men fann \"%s\""
@@ -2355,14 +2312,6 @@ msgstr[1] "Arbetare saknas"
 msgid "(stopped)"
 msgstr "(stoppad)"
 
-#: ../../src/logic/productionsite.cc:313
-msgid "UP"
-msgstr "UPP"
-
-#: ../../src/logic/productionsite.cc:313
-msgid "DOWN"
-msgstr "NER"
-
 #: ../../src/logic/requirements.cc:267
 #, c-format
 msgid ""
@@ -2385,12 +2334,12 @@ msgstr "förväntade positivt heltal >= %u men fann \"%s\""
 msgid "\"anim_name[,another_anim,...]\""
 msgstr "\"anim_name[,another_anim,...]\""
 
-#: ../../src/logic/soldier.cc:1179
+#: ../../src/logic/soldier.cc:1182
 #, c-format
 msgid "bad direction '%d'"
 msgstr "ogiltig riktning '%d'"
 
-#: ../../src/logic/soldier.cc:1340
+#: ../../src/logic/soldier.cc:1343
 #, c-format
 msgid ""
 "The game engine has encountered a logic error. The %s #%u of player %u could "
@@ -2406,12 +2355,12 @@ msgstr ""
 "lösning på detta problem implementerats. (felraport #1951113) (Spelet har "
 "pausats.)"
 
-#: ../../src/logic/soldier.cc:1351 ../../src/logic/soldier.cc:1356
+#: ../../src/logic/soldier.cc:1354 ../../src/logic/soldier.cc:1359
 #: ../../src/logic/worker.cc:1668
 msgid "no"
 msgstr "ingen"
 
-#: ../../src/logic/soldier.cc:1363 ../../src/logic/soldier.cc:1371
+#: ../../src/logic/soldier.cc:1366 ../../src/logic/soldier.cc:1374
 #: ../../src/logic/worker.cc:1680
 msgid "Logic error"
 msgstr "logikfel"
@@ -2447,7 +2396,7 @@ msgstr "flaggutseende: %s"
 msgid "tribe %s: %s"
 msgstr "stam %s: %s"
 
-#: ../../src/logic/warehouse.cc:489
+#: ../../src/logic/warehouse.cc:492
 #, c-format
 msgid ""
 "<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
@@ -2590,7 +2539,7 @@ msgstr "soldat: %s"
 msgid "carrier: %s"
 msgstr "bärare: %s"
 
-#: ../../src/map_io/widelands_map_building_data_packet.cc:124
+#: ../../src/map_io/widelands_map_building_data_packet.cc:106
 #, c-format
 msgid "buildings: %s"
 msgstr "byggnader: %s"
@@ -2600,17 +2549,17 @@ msgstr "byggnader: %s"
 msgid "buildingdata: %s"
 msgstr "byggnadsdata: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:273
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:272
 #, c-format
 msgid "wares: %s"
 msgstr "varor: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:285
 #, c-format
 msgid "constructionsite: %s"
 msgstr "byggarbetsplats: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:450
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:429
 #, c-format
 msgid ""
 "%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
@@ -2619,22 +2568,22 @@ msgstr ""
 "%s %u har en nästa återskapningstid för arbetartyp \"%s\" satt till %u, men "
 "den var tidigare satt till %u\n"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:471
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:450
 #, c-format
 msgid "warehouse: %s"
 msgstr "lagerbyggnad: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:578
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:557
 #, c-format
 msgid "militarysite: %s"
 msgstr "krigsinrättning: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:708
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:671
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
 msgstr "program %s skippades vid %u, men tiden är bara %u"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:937
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:900
 #, c-format
 msgid "trainingsite: %s"
 msgstr "utbildningsinrättning: %s"
@@ -2835,7 +2784,7 @@ msgstr "\"%s\": %s"
 msgid "messages for player %u: %s"
 msgstr "meddelanden till spelare %u: %s"
 
-#: ../../src/map_io/widelands_map_players_view_data_packet.cc:122
+#: ../../src/map_io/widelands_map_players_view_data_packet.cc:123
 #, c-format
 msgid "unseen immovable: %s"
 msgstr "osedd oflyttbar: %s"
@@ -2909,11 +2858,11 @@ msgstr "artikel %u: %s"
 msgid "waredata: %s"
 msgstr "varudata: %s"
 
-#: ../../src/network/netclient.cc:96
+#: ../../src/network/netclient.cc:100
 msgid "Could not establish connection to host"
 msgstr "Kunde ej upprätta anslutning till värd"
 
-#: ../../src/network/netclient.cc:98
+#: ../../src/network/netclient.cc:102
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either no Widelands server was running at the supposed port or\n"
@@ -2923,24 +2872,24 @@ msgstr ""
 "Antingen körs ingen Widelands-server på angiven port eller\n"
 "så stängdes servern av medans du försökte ansluta."
 
-#: ../../src/network/netclient.cc:120
+#: ../../src/network/netclient.cc:124
 msgid "Client has left the game."
 msgstr "Klient har lämnat spelet."
 
-#: ../../src/network/netclient.cc:198
+#: ../../src/network/netclient.cc:202
 msgid "Client crashed and performed an emergency save."
 msgstr "Klienten havererade och genomförde en nödsparning."
 
-#: ../../src/network/netclient.cc:413
+#: ../../src/network/netclient.cc:417
 msgid "Server sent a player update for a player that does not exist."
 msgstr "Servern skickade en spelaruppdatering för en spelare som ej finns."
 
-#: ../../src/network/netclient.cc:432
+#: ../../src/network/netclient.cc:436
 msgid "Server sent an user update for a user that does not exist."
 msgstr ""
 "Servern skickade en användaruppdatering för en användare som ej finns."
 
-#: ../../src/network/netclient.cc:508
+#: ../../src/network/netclient.cc:512
 #, c-format
 msgid ""
 "Expected a HELLO packet from server, but received command number %u. Maybe "
@@ -2949,36 +2898,36 @@ msgstr ""
 "Väntade ett HELLO-paket från servern, men emottog kommandonummer %u. Kanske "
 "kör servern en annan version av Widelands?"
 
-#: ../../src/network/netclient.cc:515
+#: ../../src/network/netclient.cc:519
 msgid "Server uses a different protocol version"
 msgstr "Servern använder en annan protokollversion."
 
-#: ../../src/network/netclient.cc:639
+#: ../../src/network/netclient.cc:660
 msgid "/me 's file failed md5 checksumming."
 msgstr "/me s fil md5-kontrollsumma  underkändes"
 
-#: ../../src/network/netclient.cc:694
+#: ../../src/network/netclient.cc:715
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Mottog oväntat kommandot LAUNCH från servern."
 
-#: ../../src/network/netclient.cc:714
+#: ../../src/network/netclient.cc:735
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
 msgstr "Servern skickade ett PLAYERCOMMAND trots att inget spel pågår."
 
-#: ../../src/network/netclient.cc:727
+#: ../../src/network/netclient.cc:748
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "Servern skickade ett SYNCREQUEST trots att inget spel pågår."
 
-#: ../../src/network/netclient.cc:754
+#: ../../src/network/netclient.cc:775
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
 msgstr "Servern skickade ett okänt kommando (kommandonummer %u)"
 
-#: ../../src/network/netclient.cc:788
+#: ../../src/network/netclient.cc:809
 msgid "Something went wrong: "
 msgstr "Något gick fel: "
 
-#: ../../src/network/netclient.cc:819
+#: ../../src/network/netclient.cc:840
 msgid " An automatic savegame will be created."
 msgstr " Ett automatsparat spel kommer att skapas."
 
@@ -2994,63 +2943,63 @@ msgstr "Spelet påbörjades alldeles efter att du försökte ansluta."
 msgid "Server has crashed and performed an emergency save."
 msgstr "Sververn har kraschat och nödsparat."
 
-#: ../../src/network/nethost.cc:827
+#: ../../src/network/nethost.cc:832
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "Värden flyttade spelare %s till väntrummet!"
 
-#: ../../src/network/nethost.cc:1127
+#: ../../src/network/nethost.cc:1132
 #, c-format
 msgid "Computer %u"
 msgstr "Dator %u"
 
-#: ../../src/network/nethost.cc:1203
+#: ../../src/network/nethost.cc:1208
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr "VARNING: %s använder version: %s, men värden använder version: %s"
 
-#: ../../src/network/nethost.cc:1250
+#: ../../src/network/nethost.cc:1255
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s har anslutit till spelet"
 
-#: ../../src/network/nethost.cc:1274
+#: ../../src/network/nethost.cc:1279
 msgid "Client reports time to host that is running backwards."
 msgstr "Klienten rapporterar bakåtgående tid till värden."
 
-#: ../../src/network/nethost.cc:1277
+#: ../../src/network/nethost.cc:1282
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Klienten simulerar bortom den tidsgräns som värden tillåter."
 
-#: ../../src/network/nethost.cc:1281
+#: ../../src/network/nethost.cc:1286
 msgid "Client did not submit sync report in time."
 msgstr "Klienten skickade ej sykroniseringsrapport i tid."
 
-#: ../../src/network/nethost.cc:1461
+#: ../../src/network/nethost.cc:1466
 msgid "Client and host have become desynchronized."
 msgstr "Klienten och värden tappande synkroniseringen."
 
-#: ../../src/network/nethost.cc:1503
+#: ../../src/network/nethost.cc:1508
 msgid "New User"
 msgstr "Ny användare"
 
-#: ../../src/network/nethost.cc:1508
+#: ../../src/network/nethost.cc:1513
 msgid "The game has already started."
 msgstr "Spelet har redan börjat."
 
-#: ../../src/network/nethost.cc:1526
+#: ../../src/network/nethost.cc:1531
 msgid "Connection to client lost."
 msgstr "Tappade anslutning till klient."
 
-#: ../../src/network/nethost.cc:1540
+#: ../../src/network/nethost.cc:1545
 msgid "Client sent malformed commands: "
 msgstr "Klient sände ogiltiga kommandon: "
 
-#: ../../src/network/nethost.cc:1573
+#: ../../src/network/nethost.cc:1578
 msgid "Game is running already, but client has not connected fully"
 msgstr "Spelet pågår redan men klienten har inte anslutit färdigt"
 
-#: ../../src/network/nethost.cc:1577
+#: ../../src/network/nethost.cc:1582
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
@@ -3059,57 +3008,57 @@ msgstr ""
 "Första kommandot från klienten är %u i stället för HELLO. Förmodligen är "
 "klienten en inkompatibel version."
 
-#: ../../src/network/nethost.cc:1583
+#: ../../src/network/nethost.cc:1588
 msgid "Server uses a different protocol version."
 msgstr "Servern använder en annan protokollversion."
 
-#: ../../src/network/nethost.cc:1665
+#: ../../src/network/nethost.cc:1670
 msgid "Client sent TIME command even though game is not running."
 msgstr "Klient skickade kommandot TIME trots att spelet ej pågår."
 
-#: ../../src/network/nethost.cc:1673
+#: ../../src/network/nethost.cc:1678
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr "Klient skickade PLAYERCOMMAND trots att spelet ej pågår."
 
-#: ../../src/network/nethost.cc:1685
+#: ../../src/network/nethost.cc:1690
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 "Klient %u (%u) skickade ett spelarkommando (%i) för en annan spelare (%i)."
 
-#: ../../src/network/nethost.cc:1694
+#: ../../src/network/nethost.cc:1699
 msgid "Client sent unexpected synchronization report."
 msgstr "Klient skickade oväntad synkroniseringsrapport."
 
-#: ../../src/network/nethost.cc:1730 ../../src/network/nethost.cc:1742
+#: ../../src/network/nethost.cc:1735 ../../src/network/nethost.cc:1747
 msgid "Client requests file altough none is available to send."
 msgstr "Klienten efterfrågar fil trots att ingen finns tillgänglig."
 
-#: ../../src/network/nethost.cc:1732
+#: ../../src/network/nethost.cc:1737
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr "Påbörjade överföring av fil %s till %s!"
 
-#: ../../src/network/nethost.cc:1753
+#: ../../src/network/nethost.cc:1758
 msgid "Client requests file part that does not exist."
 msgstr "Klienten efterfrågar fildel som inte finns."
 
-#: ../../src/network/nethost.cc:1756
+#: ../../src/network/nethost.cc:1761
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr "Avslutade överföring av fil %s till %s"
 
-#: ../../src/network/nethost.cc:1764
+#: ../../src/network/nethost.cc:1769
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr "Skickar del %u/%u av fil %s til %s"
 
-#: ../../src/network/nethost.cc:1774
+#: ../../src/network/nethost.cc:1779
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Klient skickade okänt kommando nummer %u"
 
-#: ../../src/network/nethost.cc:1830
+#: ../../src/network/nethost.cc:1835
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s har lämnat spelet (%s)"
@@ -3302,23 +3251,23 @@ msgstr "(synfält): %s"
 msgid "OK"
 msgstr "OK"
 
-#: ../../src/ui_basic/progresswindow.cc:46
+#: ../../src/ui_basic/progresswindow.cc:48
 msgid "Preparing..."
 msgstr "Förbereder..."
 
-#: ../../src/ui_basic/spinbox.cc:124
+#: ../../src/ui_basic/spinbox.cc:125
 msgid "Increase the value"
 msgstr "Öka värdet"
 
-#: ../../src/ui_basic/spinbox.cc:132
+#: ../../src/ui_basic/spinbox.cc:133
 msgid "Decrease the value"
 msgstr "Minska värdet"
 
-#: ../../src/ui_basic/spinbox.cc:143
+#: ../../src/ui_basic/spinbox.cc:144
 msgid "Increase the value by 10"
 msgstr "Öka värdet med 10"
 
-#: ../../src/ui_basic/spinbox.cc:151
+#: ../../src/ui_basic/spinbox.cc:152
 msgid "Decrease the value by 10"
 msgstr "Minska värdet med 10"
 
@@ -3417,8 +3366,8 @@ msgstr "Välj din karta!"
 #: ../../src/editor/ui_menus/trigger_message_is_read_or_archived_option_menu.cc:54
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:44
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.h:43
-#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:54
-#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:54
+#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:55
+#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:55
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.h:48
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.h:48
 #: ../../src/editor/ui_menus/event_set_timer_option_menu.h:48
@@ -3789,8 +3738,8 @@ msgstr "Ytterligare inställningar"
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:313
 #: ../../src/wui/game_main_menu_save_game.h:92
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.h:76
-#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:159
-#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:159
+#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:158
+#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:158
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.h:123
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.h:123
 #: ../../src/editor/ui_menus/event_set_timer_option_menu.h:88
@@ -4295,12 +4244,12 @@ msgstr "Namn: "
 msgid "Game Time: "
 msgstr "Speltid: "
 
-#: ../../src/wui/game_main_menu_save_game.cc:115
+#: ../../src/wui/game_main_menu_save_game.cc:110
 #, c-format
 msgid "%02ud%02uh%02u'%02u\"%03u"
 msgstr "%02ud%02uh%02u'%02u\"%03u"
 
-#: ../../src/wui/game_main_menu_save_game.cc:196
+#: ../../src/wui/game_main_menu_save_game.cc:186
 msgid ""
 "Game Saving Error!\n"
 "Saved Game-File may be corrupt!\n"
@@ -4312,21 +4261,21 @@ msgstr ""
 "\n"
 "Anledning:\n"
 
-#: ../../src/wui/game_main_menu_save_game.cc:200
-#: ../../src/wui/game_main_menu_save_game.cc:211
+#: ../../src/wui/game_main_menu_save_game.cc:190
+#: ../../src/wui/game_main_menu_save_game.cc:201
 msgid "Save Game Error!!"
 msgstr "Fel vid sparning av spel!!"
 
-#: ../../src/wui/game_main_menu_save_game.cc:212
+#: ../../src/wui/game_main_menu_save_game.cc:202
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:362
 msgid "A File with the name "
 msgstr "En fil med namnet "
 
-#: ../../src/wui/game_main_menu_save_game.cc:216
+#: ../../src/wui/game_main_menu_save_game.cc:206
 msgid " already exists. Overwrite?"
 msgstr " finns redan. Skriv över?"
 
-#: ../../src/wui/game_message_menu.cc:39 ../../src/wui/game_message_menu.h:147
+#: ../../src/wui/game_message_menu.cc:41 ../../src/wui/game_message_menu.h:141
 msgid "Message Menu: Inbox"
 msgstr "Meddelandemeny: Inkorg"
 
@@ -4861,8 +4810,8 @@ msgstr "Tillgängliga händelseslag: "
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:257
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:306
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.h:65
-#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:149
-#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:149
+#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:148
+#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:148
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.h:113
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.h:113
 #: ../../src/editor/ui_menus/event_set_timer_option_menu.h:76
@@ -5158,7 +5107,7 @@ msgid "Visible"
 msgstr "Synlig"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:241
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:293
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:289
 msgid "Trigger: "
 msgstr "Utlösare: "
 
@@ -5170,7 +5119,7 @@ msgstr ""
 "Målet togs bort, men inte dess utlösare, eftersom den fortfarande refereras "
 "av:\n"
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:278
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:274
 msgid "Note"
 msgstr "OBS"
 
@@ -5375,11 +5324,11 @@ msgstr "Område: "
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.cc:60
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:243
 #: ../../src/editor/ui_menus/event_move_view_option_menu.cc:209
-#: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:193
-#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:169
+#: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:190
+#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:166
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.cc:128
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.cc:129
-#: ../../src/editor/ui_menus/event_set_timer_option_menu.cc:89
+#: ../../src/editor/ui_menus/event_set_timer_option_menu.cc:86
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:284
 #, c-format
 msgid ""
@@ -5392,11 +5341,11 @@ msgstr ""
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.cc:65
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:248
 #: ../../src/editor/ui_menus/event_move_view_option_menu.cc:214
-#: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:198
-#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:174
+#: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:195
+#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:171
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.cc:133
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.cc:134
-#: ../../src/editor/ui_menus/event_set_timer_option_menu.cc:94
+#: ../../src/editor/ui_menus/event_set_timer_option_menu.cc:91
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:289
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:536
 #: ../../src/editor/ui_menus/trigger_message_is_read_or_archived_option_menu.cc:82
@@ -5465,13 +5414,13 @@ msgstr "Alternativ för Flytta anblick-händelse"
 msgid "%s Building Types Event Options"
 msgstr "Alternativ för %s-byggnadstyphändelser"
 
-#: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:225
+#: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:221
 #, c-format
 msgid "No building types are selected. Select at least one."
 msgstr "Inga byggnadstyper är valda. Välj minst en."
 
-#: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:228
-#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:204
+#: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:224
+#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:200
 msgid "Nothing selected"
 msgstr "Ingenting markerat"
 
@@ -5480,7 +5429,7 @@ msgstr "Ingenting markerat"
 msgid "%s Worker Types Event Options"
 msgstr "Alternativ för %s'arbetartyphändelser"
 
-#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:201
+#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:197
 #, c-format
 msgid "No worker types are selected. Select at least one."
 msgstr "Inga arbetartyper är markerade. Markera minst en."
@@ -5581,72 +5530,72 @@ msgstr "ingen beskrivning angiven"
 msgid "no descr"
 msgstr "ingen beskr"
 
-#: ../../src/wui/game_message_menu.h:62
+#: ../../src/wui/game_message_menu.h:63
 msgid "Select"
 msgstr "Välj"
 
-#: ../../src/wui/game_message_menu.h:63
+#: ../../src/wui/game_message_menu.h:64
 msgid "Status"
 msgstr "Status"
 
-#: ../../src/wui/game_message_menu.h:64
+#: ../../src/wui/game_message_menu.h:65
 msgid "Title"
 msgstr "Titel"
 
-#: ../../src/wui/game_message_menu.h:65
+#: ../../src/wui/game_message_menu.h:66
 msgid "Time sent"
 msgstr "Tid skickad"
 
-#: ../../src/wui/game_message_menu.h:76
-#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:99
-#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:99
+#: ../../src/wui/game_message_menu.h:77
+#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:100
+#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:100
 msgid "Clear"
 msgstr "Rensa"
 
-#: ../../src/wui/game_message_menu.h:76
-#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:99
-#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:99
+#: ../../src/wui/game_message_menu.h:77
+#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:100
+#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:100
 msgid "Clear selection"
 msgstr "Töm markering"
 
-#: ../../src/wui/game_message_menu.h:97
+#: ../../src/wui/game_message_menu.h:94
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:120
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:120
 msgid "Invert"
 msgstr "Invertera"
 
-#: ../../src/wui/game_message_menu.h:97
+#: ../../src/wui/game_message_menu.h:94
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:120
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:120
 msgid "Invert selection"
 msgstr "Invertera markering"
 
-#: ../../src/wui/game_message_menu.h:118 ../../src/wui/game_message_menu.h:151
+#: ../../src/wui/game_message_menu.h:112 ../../src/wui/game_message_menu.h:145
 msgid "Archive selected messages"
 msgstr "Arkivera markerade meddelanden"
 
-#: ../../src/wui/game_message_menu.h:129 ../../src/wui/game_message_menu.h:152
+#: ../../src/wui/game_message_menu.h:123 ../../src/wui/game_message_menu.h:146
 msgid "Show Archive"
 msgstr "Visa arkiv"
 
-#: ../../src/wui/game_message_menu.h:138
+#: ../../src/wui/game_message_menu.h:132
 msgid "Message Menu: Archive"
 msgstr "Meddelandemeny: Arkiv"
 
-#: ../../src/wui/game_message_menu.h:142
+#: ../../src/wui/game_message_menu.h:136
 msgid "Restore selected messages"
 msgstr "Återskapa valda meddelanden"
 
-#: ../../src/wui/game_message_menu.h:143
+#: ../../src/wui/game_message_menu.h:137
 msgid "Show Inbox"
 msgstr "Visa inkorg"
 
-#: ../../src/wui/game_message_menu.h:165
+#: ../../src/wui/game_message_menu.h:159
 msgid "center main mapview on location"
 msgstr "centrera huvudkartvy på plats"
 
-#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:72
-#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:72
+#: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:73
+#: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:73
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.h:66
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.h:66
 msgid "Player:"
@@ -5680,6 +5629,12 @@ msgstr "Spelare:"
 #~ msgstr[0] "Väntar på en arbetare!"
 #~ msgstr[1] "Väntar på %u arbetare!"
 
+#~ msgid "UP"
+#~ msgstr "UPP"
+
+#~ msgid "DOWN"
+#~ msgstr "NER"
+
 #~ msgid "Game engine"
 #~ msgstr "Spelsimulerare"
 
@@ -5703,6 +5658,10 @@ msgstr "Spelare:"
 
 #~ msgid "A new warehouse is created"
 #~ msgstr "En ny lagerbyggnad skapas"
+
+#, c-format
+#~ msgid "player %u does not exist in the game"
+#~ msgstr "spelare %u finns ej i spelet"
 
 #~ msgid "Allow building type"
 #~ msgstr "Tillåt byggnadstyp"
@@ -5792,3 +5751,122 @@ msgstr "Spelare:"
 
 #~ msgid "Decrease autosave interval"
 #~ msgstr "Minska intervallet mellan autosparningar"
+
+#~ msgid ""
+#~ "Sound options:\n"
+#~ " --nosound            Starts the game with sound disabled.\n"
+#~ " --disable_fx         Disable sound effects.\n"
+#~ " --disable_music      Disable music.\n"
+#~ "\n"
+#~ " --nozip              Do not save files as binary zip archives.\n"
+#~ "\n"
+#~ " --editor             Directly starts the Widelands editor.\n"
+#~ "                      You can add a =FILENAME to directly load\n"
+#~ "                      the map FILENAME in editor.\n"
+#~ " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
+#~ "                      map.\n"
+#~ " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
+#~ " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
+#~ " --speed_of_new_game  The speed that the new game will run at\n"
+#~ "                      when started, with factor 1000 (0 is pause,\n"
+#~ "                      1000 is normal speed).\n"
+#~ " --auto_roadbuild_mode=[yes|no]\n"
+#~ "                      Whether to enter roadbuilding mode\n"
+#~ "                      automatically after placing a flag that is\n"
+#~ "                      not connected to a road.\n"
+#~ " --write_HTML=[yes|no]\n"
+#~ "                      Write HTML-helpfiles for parsed game data.\n"
+#~ "\n"
+#~ "Graphic options:\n"
+#~ " --fullscreen=[yes|no]\n"
+#~ "                      Whether to use the whole display for the\n"
+#~ "                      game screen.\n"
+#~ " --depth=[16|32]      Color depth in number of bits per pixel.\n"
+#~ " --xres=[...]         Width of the window in pixel.\n"
+#~ " --yres=[...]         Height of the window in pixel.\n"
+#~ " --hw_improvements=[0|1]\n"
+#~ "                      Activate hardware acceleration\n"
+#~ "                      *HIGHLY EXPERIMENTAL*\n"
+#~ " --double_buffer=[0|1]\n"
+#~ "                      Enables double buffering\n"
+#~ "                      *HIGHLY EXPERIMENTAL*\n"
+#~ " --opengl=[0|1]\n"
+#~ "                      Enables opengl rendering\n"
+#~ "                      *DANGEROUS AND BROKEN, DO NOT USE*\n"
+#~ "\n"
+#~ "Options for the internal window manager:\n"
+#~ " --border_snap_distance=[0 ...]\n"
+#~ "                      Move a window to the edge of the screen\n"
+#~ "                      when the edge of the window comes within\n"
+#~ "                      this distance from the edge of the screen.\n"
+#~ " --dock_windows_to_edges=[yes|no]\n"
+#~ "                      Eliminate a window's border towards the\n"
+#~ "                      edge of the screen when the edge of the\n"
+#~ "                      window is next to the edge of the screen.\n"
+#~ " --panel_snap_distance=[0 ...]\n"
+#~ "                      Move a window to the edge of the panel when\n"
+#~ "                      the edge of the window comes within this\n"
+#~ "                      distance from the edge of the panel.\n"
+#~ " --snap_windows_only_when_overlapping=[yes|no]\n"
+#~ "                      Only move a window to the edge of a panel\n"
+#~ "                      if the window is overlapping with the\n"
+#~ "                      panel.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Ljudalternativ:\n"
+#~ " --nosound            Startar spelet med ljud avstängt.\n"
+#~ " --disable_fx         Avaktiverar ljudeffekter.\n"
+#~ " --disable_music      Avaktiverar musik.\n"
+#~ "\n"
+#~ " --nozip              Spara inte filer som binära zip-filer\n"
+#~ "\n"
+#~ " --editor             Startar Widelands redigerar omedelbart.\n"
+#~ "                      Du kan lägga till =FILNAMN för att omedelbart\n"
+#~ "                      ladda kartan FILNAMN i redigeraren.\n"
+#~ " --scenario=FILNAMN  Startar omedelbart kartan FILNAMN som scenariokarta.\n"
+#~ "                     \n"
+#~ " --loadgame=FILNAMN Laddar omedelbart det sparade spelet FILNAMN.\n"
+#~ " --dedicated=FILNAMN Startar ggz-värd med FILNAMN som karta\n"
+#~ " --speed_of_new_game  Hastigheten det nya spelet kommer köras med\n"
+#~ "                      när det startas, med en faktor 1000 (0 är pausat,\n"
+#~ "                      1000 är normal hastighet).\n"
+#~ " --auto_roadbuild_mode=[yes|no]\n"
+#~ "                      Gå in i vägbyggnadsläge automatiskt \n"
+#~ "                      efter utplacering av flagga som  ej\n"
+#~ "                      är ansluten till en väg.\n"
+#~ " --write_HTML=[yes|no]\n"
+#~ "                      Skriv HTML-hjälpfiler for inläst speldata.\n"
+#~ "\n"
+#~ "Grafikalternativ:\n"
+#~ " --fullscreen=[yes|no]\n"
+#~ "                      Använd fullskärmsläge i spelet.\n"
+#~ " --depth=[16|32]      Färgdjup i bitar per pixel.\n"
+#~ " --xres=[...]         Bredd på fönstret i pixlar.\n"
+#~ " --yres=[...]         Höjd på fönstret i pixlar.\n"
+#~ " --hw_improvements=[0|1]\n"
+#~ "                      Aktivera hårdvaruaccelerering\n"
+#~ "                      *MYCKET EXPERIMENTELLT*\n"
+#~ " --double_buffer=[0|1]\n"
+#~ "                      Aktiverar dubbelbuffring\n"
+#~ "                      *MYCKET EXPERIMENTELLT*\n"
+#~ " --opengl=[0|1]\n"
+#~ "                      Aktiverar opengl-rendering\n"
+#~ "                      *FARLIGT OCH TRASIGT, ANVÄND EJ*\n"
+#~ "\n"
+#~ "Alternativ för den interna fönsterhanteraren:\n"
+#~ " --border_snap_distance=[0 ...]\n"
+#~ "                      Flytta ett fönster till skärmens kant när \n"
+#~ "                      fönstrets kant kommer inom detta avstånd\n"
+#~ "                      från skärmens kant\n"
+#~ " --dock_windows_to_edges=[yes|no]\n"
+#~ "                      Eliminera ett fönsters kanter mod skärmkanten\n"
+#~ "                      när fönsterkanten är intill skärmkanten.\n"
+#~ "\n"
+#~ " --panel_snap_distance=[0 ...]\n"
+#~ "                      Flytta ett fönster till panelkanten när \n"
+#~ "                      fönsterkanten kommer inom detta avstånd\n"
+#~ "                      till panelen.\n"
+#~ " --snap_windows_only_when_overlapping=[yes|no]\n"
+#~ "                      Flytta endast fönster till panelkanten om fönstret \n"
+#~ "                      överlappar panelen.\n"
+#~ "\n"
