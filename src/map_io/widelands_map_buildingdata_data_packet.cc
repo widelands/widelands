@@ -266,6 +266,8 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 					constructionsite.m_wares[i] =
 						new WaresQueue
 							(constructionsite, Ware_Index::Null(), 0, 0);
+					constructionsite.m_wares[i]->set_callback
+						(ConstructionSite::wares_queue_callback, &constructionsite);
 					constructionsite.m_wares[i]->Read(fr, game, mol);
 				}
 			} catch (_wexception const & e) {
