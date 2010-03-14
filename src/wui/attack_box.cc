@@ -19,7 +19,6 @@
 
 #include "attack_box.h"
 
-#include "editor/editorinteractive.h"
 #include "logic/soldier.h"
 
 #include "upcast.h"

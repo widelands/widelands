@@ -20,7 +20,6 @@
 #include "trigger_vision.h"
 
 #include "logic/building.h"
-#include "editor/editorinteractive.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "i18n.h"

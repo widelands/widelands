@@ -21,7 +21,6 @@
 
 #include "logic/game.h"
 #include "logic/editor_game_base.h"
-#include "editor/editorinteractive.h"
 #include "logic/playercommand.h"
 
 #include "upcast.h"
