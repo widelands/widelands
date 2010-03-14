@@ -305,18 +305,35 @@ install(
 
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale)
 find_package (PythonInterp REQUIRED)
-add_custom_target (
-  lang ALL
-#  COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/../locale
-  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
-  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
-  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
-  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
-  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
-  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
-  COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-)
+
+
+if (${CMAKE_BUILD_TYPE} STREQUAL Release)
+  add_custom_target (
+    lang ALL
+  #  COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/../locale
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  )
+else (${CMAKE_BUILD_TYPE} STREQUAL Release)
+  add_custom_target (
+    lang
+  #  COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/../locale
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  )
+endif (${CMAKE_BUILD_TYPE} STREQUAL Release)
 
 install(
   DIRECTORY
