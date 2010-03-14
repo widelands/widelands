@@ -1,0 +1,12 @@
+# elemental-file of second Empire Tutorial - created by Peter Schwanemann, 2007
+
+[global]
+packet_version=1
+map_w=80
+map_h=80
+nr_players=2
+world=desert
+name=_"Empire Tutorial2 - An outpost for exile"
+author=Nasenbaer
+descr=_"Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediterranean island, looking like paradise."
+background="tribes/empire/pics/campmap-emp02.jpg"
