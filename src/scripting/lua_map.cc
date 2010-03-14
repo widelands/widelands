@@ -1470,6 +1470,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RO(L_Field, viewpoint_y),
 	PROP_RW(L_Field, resource),
 	PROP_RW(L_Field, resource_amount),
+	PROP_RO(L_Field, owners),
 	{0, 0, 0},
 };
 
@@ -1699,6 +1700,51 @@ GET_X_NEIGHBOUR(tln);
 GET_X_NEIGHBOUR(bln);
 GET_X_NEIGHBOUR(brn);
 
+/* RST
+	.. attribute:: owners
+
+		(RO) An :class:`array` of owners of this field sorted by their military
+		influence. That is owners[1] will really own the fields. This can
+		also return an empty list if the field is neutral at the moment.
+*/
+// UNTESTED
+typedef std::pair<uint8_t, uint32_t> _PlrInfluence;
+static int _sort_owners
+		(const _PlrInfluence & first,
+		 const _PlrInfluence & second)
+{
+	return first.second > second.second;
+}
+int L_Field::get_owners(lua_State * L) {
+	Game & game = get_game(L);
+	Map & map = game.map();
+
+	std::vector<_PlrInfluence> owners;
+
+	iterate_players_existing(other_p, map.get_nrplayers(), game, plr)
+		owners.push_back
+			(_PlrInfluence(plr->player_number(), plr->military_influence
+					(map.get_index(m_c, map.get_width()))
+			)
+		);
+
+	std::sort (owners.begin(), owners.end(), _sort_owners);
+
+	lua_newtable(L);
+	uint32_t cidx = 1;
+	container_iterate_const (std::vector<_PlrInfluence>, owners, i) {
+		if (i.current->second <= 0)
+			continue;
+
+		lua_pushuint32(L, cidx ++);
+		to_lua<L_Player>
+			(L, new L_Player (i.current->first));
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
+
 /*
  ==========================================================
  LUA METHODS
@@ -1708,6 +1754,7 @@ int L_Field::__eq(lua_State * L) {
 	lua_pushboolean(L, (*get_user_class<L_Field>(L, -1))->m_c == m_c);
 	return 1;
 }
+
 /* RST
 	.. function:: region(r1[, r2])
 
