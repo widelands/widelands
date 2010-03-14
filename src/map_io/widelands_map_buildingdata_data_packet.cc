@@ -302,9 +302,9 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			 packet_version <= CURRENT_WAREHOUSE_PACKET_VERSION)
 		{
 			Ware_Index const nr_wares   = warehouse.tribe().get_nrwares  ();
-			Ware_Index const nr_workers = warehouse.tribe().get_nrworkers();
+			Ware_Index const nr_tribe_workers = warehouse.tribe().get_nrworkers();
 			warehouse.m_supply->set_nrwares  (nr_wares);
-			warehouse.m_supply->set_nrworkers(nr_workers);
+			warehouse.m_supply->set_nrworkers(nr_tribe_workers);
 			//log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
 			Tribe_Descr const & tribe = warehouse.tribe();
