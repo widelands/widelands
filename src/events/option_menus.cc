@@ -36,7 +36,6 @@
 #include "event_building.h"
 #include "event_conquer_area.h"
 #include "event_flag.h"
-#include "event_immovable.h"
 #include "event_message_box.h"
 #include "event_move_view.h"
 #include "event_road.h"
@@ -64,9 +63,6 @@ int32_t Event_Conquer_Area              ::option_menu(Editor_Interactive & eia)
 {Event_Conquer_Area_Option_Menu                 m(eia, *this); return m.run();}
 
 int32_t Event_Flag                      ::option_menu(Editor_Interactive &)
-{throw;}
-
-int32_t Event_Immovable                 ::option_menu(Editor_Interactive &)
 {throw;}
 
 int32_t Event_Message_Box               ::option_menu(Editor_Interactive & eia)

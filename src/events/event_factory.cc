@@ -28,7 +28,6 @@
 #include "event_forbid_building_types.h"
 #include "event_forbid_retreat_change.h"
 #include "event_forbid_worker_types.h"
-#include "event_immovable.h"
 #include "event_lua.h"
 #include "event_message.h"
 #include "event_message_box.h"
@@ -205,7 +204,6 @@ Event & create
 	case  4: return *new Event_Building                 (name, state);
 	case  5: return *new Event_Conquer_Area             (name, state);
 	case  6: return *new Event_Flag                     (name, state);
-	case  7: return *new Event_Immovable                (name, state);
 	case  8: return *new Event_Lua                      (name, state);
 	case  9: return *new Event_Message_Box              (name, state);
 	case 10: return *new Event_Move_View                (name, state);
@@ -249,7 +247,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case  4: return *new Event_Building                 (s, egbase);
 	case  5: return *new Event_Conquer_Area             (s, egbase);
 	case  6: return *new Event_Flag                     (s, egbase);
-	case  7: return *new Event_Immovable                (s, egbase);
 	case  8: return *new Event_Lua                      (s, egbase);
 	case  9: return *new Event_Message_Box              (s, egbase);
 	case 10: return *new Event_Move_View                (s, egbase);
