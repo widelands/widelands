@@ -25,6 +25,8 @@ buildings directly. Instead, they must send a player command through the Game
 class.
 */
 
+#include <boost/format.hpp>
+using boost::format;
 
 #include "logic/constructionsite.h"
 #include "game_debug_ui.h"
@@ -154,8 +156,8 @@ private:
 			UI::Textarea
 				(&parent,
 				 0, 0, 200, 74,
-				 _("Do you really want to destroy this ") + building.descname() +
-				 _("?"),
+				 (format(_("Do you really want to destroy this %s?")) %
+					building.descname()).str(),
 				 UI::Align_Center,
 				 true)
 		{}

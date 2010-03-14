@@ -85,6 +85,7 @@ struct AttackBox : public UI::Box {
 		UI::Textarea          * m_text_soldiers;
 		UI::Textarea          * m_text_retreat;
 
+		UI::Callback_Button<AttackBox> * m_less_soldiers;
 		UI::Callback_Button<AttackBox> * m_add_soldiers;
 };
 

@@ -20,6 +20,10 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
+#define MSG_SND_SITE_DEFEATED "site_defeated"
+#define MSG_SND_SITE_LOST "site_lost"
+#define MSG_SND_UNDER_ATTACK "under_attack"
+
 #include "widelands.h"
 #include "widelands_geometry.h"
 

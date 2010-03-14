@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-13 06:53+0000\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-12 22:59+0000\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-03-14 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -1050,154 +1050,150 @@ msgid "Elders"
 msgstr "Anziani"
 
 #: ../../txts/developers:19
-#: ../../txts/developers:318
+#: ../../txts/developers:317
 msgid "Graphics"
 msgstr "Grafica"
 
 #: ../../txts/developers:24
-#: ../../txts/developers:311
+#: ../../txts/developers:310
 msgid "Homepage"
 msgstr "Pagina iniziale"
 
-#: ../../txts/developers:27
-msgid "Janus"
-msgstr "Janus"
-
-#: ../../txts/developers:31
-#: ../../txts/developers:323
+#: ../../txts/developers:29
+#: ../../txts/developers:322
 msgid "Sound"
 msgstr "Suono"
 
-#: ../../txts/developers:36
-#: ../../txts/developers:328
+#: ../../txts/developers:34
+#: ../../txts/developers:327
 msgid "Translation"
 msgstr "Traduzione"
 
-#: ../../txts/developers:44
+#: ../../txts/developers:42
 msgid "Coders"
 msgstr "Programmatori"
 
-#: ../../txts/developers:76
+#: ../../txts/developers:75
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:101
+#: ../../txts/developers:100
 msgid "Musicians"
 msgstr "Musicisti"
 
-#: ../../txts/developers:112
+#: ../../txts/developers:111
 msgid "Sound Effects"
 msgstr "Effetti sonori"
 
-#: ../../txts/developers:121
+#: ../../txts/developers:120
 msgid "Maps and Missions"
 msgstr "Mappe e Missioni"
 
-#: ../../txts/developers:134
+#: ../../txts/developers:133
 msgid "Campaign Story"
 msgstr "Storia della Campagna"
 
-#: ../../txts/developers:137
+#: ../../txts/developers:136
 msgid "Barbarian"
 msgstr "Barbaro"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:142
 msgid "Empire"
 msgstr "Impero"
 
-#: ../../txts/developers:149
+#: ../../txts/developers:148
 msgid "Translators"
 msgstr "Traduttori"
 
-#: ../../txts/developers:153
+#: ../../txts/developers:152
 msgid "Czech"
 msgstr "Ceco"
 
-#: ../../txts/developers:160
+#: ../../txts/developers:159
 msgid "Dansk"
 msgstr "Danese"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:165
 msgid "Dutch"
 msgstr "Olandese"
 
-#: ../../txts/developers:173
+#: ../../txts/developers:172
 msgid "Finnish"
 msgstr "Finlandese"
 
-#: ../../txts/developers:179
+#: ../../txts/developers:178
 msgid "French"
 msgstr "Francese"
 
-#: ../../txts/developers:186
+#: ../../txts/developers:185
 msgid "Galician"
 msgstr "Galiziano"
 
-#: ../../txts/developers:191
+#: ../../txts/developers:190
 msgid "German"
 msgstr "Tedesco"
 
-#: ../../txts/developers:203
+#: ../../txts/developers:202
 msgid "Hebrew"
 msgstr "Ebraico"
 
-#: ../../txts/developers:208
+#: ../../txts/developers:207
 msgid "Hungarian"
 msgstr "Ungherese"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:212
 msgid "Italian"
 msgstr "Italiano"
 
-#: ../../txts/developers:218
+#: ../../txts/developers:217
 msgid "Polish"
 msgstr "Polacco"
 
-#: ../../txts/developers:226
+#: ../../txts/developers:225
 msgid "Russian"
 msgstr "Russo"
 
-#: ../../txts/developers:231
+#: ../../txts/developers:230
 msgid "Slovak"
 msgstr "Slovacco"
 
-#: ../../txts/developers:236
+#: ../../txts/developers:235
 msgid "Spanish"
 msgstr "Spagnolo"
 
-#: ../../txts/developers:241
+#: ../../txts/developers:240
 msgid "Swedish"
 msgstr "Svedese"
 
-#: ../../txts/developers:249
+#: ../../txts/developers:248
 msgid "Packagers"
 msgstr "Pacchettizzatori"
 
-#: ../../txts/developers:253
+#: ../../txts/developers:252
 msgid "Linux Distributions"
 msgstr "Distribuzioni Linux"
 
-#: ../../txts/developers:264
+#: ../../txts/developers:263
 msgid "Other Unix Distributions"
 msgstr "Altre Distribuzioni Unix"
 
-#: ../../txts/developers:273
+#: ../../txts/developers:272
 msgid "Non Unix Distributions"
 msgstr "Distribuzioni Non Unix"
 
-#: ../../txts/developers:284
+#: ../../txts/developers:283
 msgid "Homepage Coders"
 msgstr "Pagina principale degli sviluppatori"
 
-#: ../../txts/developers:293
+#: ../../txts/developers:292
 msgid "Documentation, Help and Wiki"
 msgstr "Documentazione, Aiuto e Wiki"
 
-#: ../../txts/developers:307
+#: ../../txts/developers:306
 msgid "Former elders"
 msgstr "Ex anziani"
 
-#: ../../txts/developers:334
+#: ../../txts/developers:333
 msgid "Other"
 msgstr "Altro"
 
@@ -1487,6 +1483,13 @@ msgstr ""
 "Puoi usate '/me' per iniziare un mesaggio nella chat: '/me è stanco' verrà "
 "visualizzato come '-> Nomignolo è stanco'."
 
+#: ../../txts/tips/multiplayer.tip:10
+msgid ""
+"Use '@name' at the beginning of a chat message to send it to only one player."
+msgstr ""
+"Usa '@nome' all'inizio di un messaggio in chat per spedirlo solo ad un "
+"giocatore."
+
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
@@ -1503,3 +1506,6 @@ msgstr ""
 
 #~ msgid "Wiki and Enduser-Documentation"
 #~ msgstr "Wiki e Documentazione per l'utente finale"
+
+#~ msgid "Janus"
+#~ msgstr "Janus"

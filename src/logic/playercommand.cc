@@ -190,8 +190,8 @@ void Cmd_Bulldoze::Write
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
 	// Now serial
-	Map_Object const & obj = *egbase.objects().get_object(serial);
-	fw.Unsigned32(mos.get_object_file_index(obj));
+	Map_Object const * obj = egbase.objects().get_object(serial);
+	fw.Unsigned32(obj ? mos.get_object_file_index(*obj) : 0);
 	fw.Unsigned8(recurse);
 }
 

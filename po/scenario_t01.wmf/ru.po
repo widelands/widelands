@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:42+0000\n"
-"Last-Translator: Alexander Bikmeyev <Unknown>\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-13 00:49+0000\n"
+"Last-Translator: Lyashenko Vitaly <sudo.vhd@gmail.com>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-03-14 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr ""
+msgstr "Обучение I - Глаза во Тьме"
 
 #: ../../campaigns/t01.wmf/elemental:9
 msgid ""
@@ -28,10 +28,12 @@ msgid ""
 "gameplay and control as well as basic production buildings (wood, stone, "
 "etc.) will be introduced."
 msgstr ""
+"Это первая миссия в обучающей кампании Варваров. Здесь будут показаны основы "
+"игрового процесса, управления и постройки зданий."
 
 #: ../../campaigns/t01.wmf/event:23
 msgid "Thron sighs..."
-msgstr ""
+msgstr "Трон вздыхает..."
 
 #: ../../campaigns/t01.wmf/event:25
 msgid ""
@@ -39,13 +41,16 @@ msgid ""
 "dark.<br> My warriors hunt at day and lie awake at night - listening to the "
 "sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr ""
+" \"Шли месяцы и мы по-прежнему скрывались в старом и темном лесу.<br> Мои "
+"воины днем охотятся и не спят по ночам - прислушиваясь к жестокой бойне, "
+"которая эхом доносится издалека сквозь древние деревья.\" "
 
 #: ../../campaigns/t01.wmf/event:27
 #: ../../campaigns/t01.wmf/event:40
 #: ../../campaigns/t01.wmf/event:53
 #: ../../campaigns/t01.wmf/event:66
 msgid "The story begins"
-msgstr ""
+msgstr "История начинается"
 
 #: ../../campaigns/t01.wmf/event:32
 #: ../../campaigns/t01.wmf/event:45
@@ -72,6 +77,9 @@ msgid ""
 "away.<br> The red lights flash in the darkness and dance to the rhythm of "
 "the wardrums that haunt me even in my nightmares.\" "
 msgstr ""
+" \"Даже отсюда мы видим устрашающее пламя, поглощающее Al'thunran, находясь "
+"при этом так далеко.<br> Красные огни вспыхивающие в темноте и танцующие в "
+"ритме барабанного боя, которые преследуют меня даже в ночных кошмарах.\" "
 
 #: ../../campaigns/t01.wmf/event:51
 msgid ""
@@ -81,6 +89,11 @@ msgid ""
 "times. He keeps my spirits high and those of my warriors awake, not to let "
 "greed or despair destroy our bonds as well.\" "
 msgstr ""
+" \"Кости моего отца покоятся с миром в земле, которую он очищал от "
+"бессмысленного кровопролития возникшего среди нас.<br> Болдрет, мой верный "
+"друг и компаньон, был для меня источником спокойствия и утешения в эти "
+"темные времена. Он не позволял жадности и отчаянию окончательно сломить наш "
+"дух.\" "
 
 #: ../../campaigns/t01.wmf/event:64
 msgid ""
@@ -88,20 +101,25 @@ msgid ""
 "wait, trying not to sleep or die before the right time comes. And so I do... "
 "wait.\" "
 msgstr ""
+" \"Как говорил мой отец, будут времена, чтобы бороться и времена, чтобы лечь "
+"и ждать, стараясь не уснуть или умереть прежде, чем наступит нужный час. И "
+"поэтому я... жду.\" "
 
 #: ../../campaigns/t01.wmf/event:98
 msgid "An old man says..."
-msgstr ""
+msgstr "Старик говорит..."
 
 #: ../../campaigns/t01.wmf/event:100
 msgid ""
 " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days.\" "
 msgstr ""
+" \"Приветствую, вождь. Я Хантрух, и видел много зимних троп. Прошу, позволь "
+"помочь тебе советом в эти темные времена.\" "
 
 #: ../../campaigns/t01.wmf/event:102
 msgid "Somebody comes upon to you"
-msgstr ""
+msgstr "Кто-то подошел к вам"
 
 #: ../../campaigns/t01.wmf/event:112
 msgid "Khantrukh continues..."
@@ -116,6 +134,12 @@ msgid ""
 "harsh lands. I believe to the east of our campside are a few places where we "
 "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
+" \"Одни только боги могут знать сколько нам осталось скрываться здесь. Воины "
+"надеются, что мы скоро сможем победоносно вернутся назад, но я сильно "
+"сомневаюсь что это скоро случится. И дни становятся все короче и "
+"холоднее...<br> Мы должны приготовится на случай, если нам придется "
+"встретить зиму в этих краях. Я думаю мы вполне можем построить хижину "
+"дровосека на востоке от нашего лагеря.\"<br><br>-- НОВОЕ ЗАДАНИЕ --<br> "
 
 #: ../../campaigns/t01.wmf/event:115
 #: ../../campaigns/t01.wmf/objective:7
@@ -123,6 +147,8 @@ msgid ""
 "* Press SPACE to see where you can build.<br> The red spots show you where a "
 "small building - like a lumberjack's hut - may be built.<br>"
 msgstr ""
+"* Нажмите ПРОБЕЛ чтобы увидеть где можно строить.<br> Красные точки означают "
+"возможность постройки маленьких зданий - таких, как хижина дровосека.<br>"
 
 #: ../../campaigns/t01.wmf/event:116
 #: ../../campaigns/t01.wmf/objective:8
@@ -130,6 +156,8 @@ msgid ""
 "* Build a lumberjack's hut at the red spot directly right of your "
 "headquarters by clicking at it and selecting lumberjack's hut.<br>"
 msgstr ""
+"* Постройте хижину дровосека на красной точке справа от штаба, нажав на ней "
+"и выбрав хижину дровосека.<br>"
 
 #: ../../campaigns/t01.wmf/event:118
 #: ../../campaigns/t01.wmf/event:133
@@ -138,7 +166,7 @@ msgstr ""
 #: ../../campaigns/t01.wmf/event:180
 #: ../../campaigns/t01.wmf/event:195
 msgid "The advisor"
-msgstr ""
+msgstr "Советник"
 
 #: ../../campaigns/t01.wmf/event:128
 msgid "The elder remarks..."
@@ -152,6 +180,10 @@ msgid ""
 "men would appreciate a way as short and even as possible - the wood surely "
 "will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Очевидно нашим людям будет тяжело идти через дикую местность к хижине "
+"дровосека. Мы должны проложить путь между штабом и хижиной. Не трудно "
+"догадаться, что люди оценят если дорога будет как можно короче - ведь дерево "
+"достаточно тяжелое.<br><br>-- НОВОЕ ЗАДАНИЕ --<br> "
 
 #: ../../campaigns/t01.wmf/event:131
 #: ../../campaigns/t01.wmf/objective:9
@@ -168,10 +200,21 @@ msgid ""
 "can also click further away to build several steps at once. Click on the "
 "flag at the headquarters to finish the road."
 msgstr ""
+"* Постройте дорогу между вашим штабом и хижиной лесоруба.<br> Когда вы "
+"поставите хижину лесоруба, для нее будет создан флаг. Вы должны соединить "
+"его дорогой с другим флагом.<br> Когда вы нажмете на флаге, вокруг него "
+"появятся маленькие значки, показывающие в каком направлении можно строить "
+"дорогу.<br> Цвет этих значков показывает насколько крутая будет дорога. "
+"Зеленый значит ровная, желтый - крутая и красный - очень крутая. Чем круче "
+"будет спуск, тем тяжелее вашим людям будет ходить по нем.<br> Вы можете "
+"нажать на любом из этих значков чтобы построить первый участок дороги. Новые "
+"значки покажут куда можно строить дальше, и так далее. Несмотря на это, "
+"можно нажать на дальнем участке чтобы построить несколько участков сразу. "
+"Нажмите на флаге возле штаба чтобы закончить дорогу."
 
 #: ../../campaigns/t01.wmf/event:144
 msgid "Khantrukh remembers..."
-msgstr ""
+msgstr "Хантрух вспоминает..."
 
 #: ../../campaigns/t01.wmf/event:146
 msgid ""
@@ -179,6 +222,9 @@ msgid ""
 "crossroads on the way between our site and the lumberjack's hut would ease "
 "the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Есть старая поговорка:<br> 'Разделенная ноша - полноши'.<br> Распутье на "
+"дороге между нашим штабом и хижиной лесоруба облегчит работу нашим "
+"грузчикам.\"<br><br>-- НОВОЕ ЗАДАНИЕ --<br> "
 
 #: ../../campaigns/t01.wmf/event:147
 #: ../../campaigns/t01.wmf/objective:17
@@ -191,6 +237,12 @@ msgid ""
 "in between make them get faster to their destination, thus improving your "
 "infrastructure.<br>"
 msgstr ""
+"* Поместите флаг посредине дороги.<br> Значок флага посреди дороги означает "
+"возможность его постройки. Для постройки флага нажмите на значке и затем на "
+"кнопку флага в появившемся меню. Это разделит работу по переносу дерева "
+"между двумя грузчиками.<br> Когда между двумя точками переносится много "
+"товара, дополнительный флаг между ними ускорит доставку, укрепляя таким "
+"образом вашу инфраструктуру.<br>"
 
 #: ../../campaigns/t01.wmf/event:159
 msgid "The old man looks to the sky..."
@@ -203,6 +255,10 @@ msgid ""
 "people. More trees await our axes south of our new crossroads - let us raise "
 "a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Северные ветра говорят нам, что грядущая зима будет длинной и "
+"безжалостной. Одна хижина дровосека не удовлетворит потребности наших людей. "
+"Больше деревьев ждут наших топоров к югу от нового перекрестка - давайте "
+"построим еще одну хижину дровосека там!<br><br>-- НОВОЕ ЗАДАНИЕ --<br> "
 
 #: ../../campaigns/t01.wmf/event:162
 #: ../../campaigns/t01.wmf/objective:18
@@ -212,6 +268,10 @@ msgid ""
 "Note that instead of building a road step by step, you may also directly "
 "click at the destination to build the entire road at once."
 msgstr ""
+"* Поместите хижину дровосека к югу от флага, который вы только что поместили "
+"на дорогу. Соедините флаг с новой хижиной дровосека после постройки.<br> Не "
+"забывайте, что вместо постройки дороги шаг за шагом можно просто щелкнуть на "
+"конечном пункте, чтобы построить всю дорогу сразу."
 
 #: ../../campaigns/t01.wmf/event:175
 msgid "Khantrukh nods..."
@@ -227,11 +287,18 @@ msgid ""
 "should build a ranger's hut, preferably close to the lumberjack's "
 "hut.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Конечно, если бы мы намеревались построить большое поселение, то нам бы "
+"понадобилось намного больше хижин дровосека, но этого пока достаточно.<br> "
+"Но никогда не забывайте, что эти леса - наше наследие, переданное нам "
+"предками. Мы должны всегда уважать и поддерживать их. Все что мы берем, мы "
+"должны вернуть.<br> Так, чтобы заменить деревья, которые мы рубим нужно "
+"построить хижину лесника, желательно поближе к хижине дровосека.\"<br><br>-- "
+"НОВОЕ ЗАДАНИЕ --<br> "
 
 #: ../../campaigns/t01.wmf/event:178
 #: ../../campaigns/t01.wmf/objective:26
 msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
-msgstr ""
+msgstr "* Постройте хижину лесника восточней первой хижины дровосека."
 
 #: ../../campaigns/t01.wmf/event:190
 msgid "The elder speaks..."
@@ -247,11 +314,18 @@ msgid ""
 "a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
 "NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Я прекрасно понимаю, вождь, что ни у вас, ни у ваших воинов нет абсолютно "
+"никакого желания оставаться здесь надолго. Но даже если так, наша война за "
+"возвращение родного дома может затянутся и нам необходимо хорошо "
+"приготовится.<br> Я бы советовал вам добыть камни ближайшим временем - кто "
+"знает, какие укрепления нам понадобятся в ближайшее время. И - словно "
+"подарок судьбы - неподалеку действительно есть большие скалы...\"<br><br>-- "
+"НОВОЕ ЗАДАНИЕ --<br> "
 
 #: ../../campaigns/t01.wmf/event:193
 #: ../../campaigns/t01.wmf/objective:34
 msgid "* Build two quarries southwest of your headquarters."
-msgstr ""
+msgstr "* Постройте два карьера к юго-западу от штаба."
 
 #: ../../campaigns/t01.wmf/event:220
 #: ../../campaigns/t01.wmf/event:235
@@ -265,10 +339,14 @@ msgid ""
 "legacy.<br> They are a constant reminder why we had to hide here... and why "
 "we must return in the end!\" "
 msgstr ""
+" \"Очередной бессонной ночью, я подошел к холму и пристально глядел на "
+"север. Огни все еще горят, утоляя свой голод на наследии моего отца.<br> Они "
+"- постоянное напоминание, почему мы должны были скрыться здесь... и почему "
+"мы должны вернутся!\" "
 
 #: ../../campaigns/t01.wmf/event:224
 msgid "In the night"
-msgstr ""
+msgstr "Ночью"
 
 #: ../../campaigns/t01.wmf/event:237
 msgid ""
@@ -278,6 +356,11 @@ msgid ""
 "it felt like a farewell. For the first time, I wondered what the future "
 "might hold for me...\" "
 msgstr ""
+" \"Еще раз, я подошел к могиле своего отца, в священной роще у подножия "
+"большого шпиля Кальмаврат. Я просто стоял там и не замечал ни уходящего "
+"времени, ни холодного дождя, льющегося вниз из пасмурного неба...<br> Так "
+"или иначе, это было похоже на прощание. Впервые, я задался вопросом, что "
+"приготовило для меня будущее...\" "
 
 #: ../../campaigns/t01.wmf/event:239
 msgid "At the grave"
@@ -285,7 +368,7 @@ msgstr "У могилы"
 
 #: ../../campaigns/t01.wmf/event:250
 msgid "Thron says thoughtfully..."
-msgstr ""
+msgstr "Трон говорит задумчиво..."
 
 #: ../../campaigns/t01.wmf/event:252
 msgid ""
@@ -296,14 +379,20 @@ msgid ""
 "happen any time soon. He might still be right, but I fear the bloodshed that "
 "too rash a return would cause both on our and the other side...\" "
 msgstr ""
+" \"Некоторое время назад, Болдрет подошел ко мне. Его советом было переехать "
+"ближе к дому - чтобы напасть при первом же признаке появления сил моего "
+"брата.<br> Но я смотрю сквозь лес, и все еще вижу, как черный дым "
+"возвышается к небу. Я знаю - еще слишком рано, и то, на что он надеется, "
+"случится не скоро. Возможно он прав, но я боюсь кровопролития, которое может "
+"вызвать наше опрометчивое возвращение...\" "
 
 #: ../../campaigns/t01.wmf/event:254
 msgid "The other day"
-msgstr ""
+msgstr "На днях"
 
 #: ../../campaigns/t01.wmf/event:265
 msgid "Thron looks furious..."
-msgstr ""
+msgstr "Трон выглядит разъяренным..."
 
 #: ../../campaigns/t01.wmf/event:267
 msgid ""
@@ -312,10 +401,14 @@ msgid ""
 "atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will "
 "stop this madness at any cost!\" "
 msgstr ""
+" \"Сегодня мои воины подобрали старика, который блуждал больной и раненный в "
+"темном лесу. Мы слушали в ужасе, когда он сказал нам о злодеяниях, "
+"творящихся в Альтунране.<br> Тем самым я даю присягу - остановить это "
+"безумие любой ценой!\" "
 
 #: ../../campaigns/t01.wmf/event:269
 msgid "The oath"
-msgstr ""
+msgstr "Присяга"
 
 #: ../../campaigns/t01.wmf/event:300
 msgid ""
@@ -324,6 +417,10 @@ msgid ""
 "VICTORY! ----------------------<br><br> You may continue if you wish. "
 "Otherwise, move on to the next mission.\" "
 msgstr ""
+" \"Очень хорошо, вождь. Теперь у нас есть все, чтобы пережить эту зиму и "
+"подготовится к грядущим сражениям.<br><br>--------------------- ПОБЕДА! -----"
+"-----------------<br><br> Вы можете продолжить если хотите. Иначе, двигаемся "
+"к следующей миссии.\" "
 
 #: ../../campaigns/t01.wmf/event:302
 msgid "Mission Complete"
@@ -331,19 +428,19 @@ msgstr "Миссия завершена"
 
 #: ../../campaigns/t01.wmf/objective:5
 msgid "Build a lumberjack's hut"
-msgstr ""
+msgstr "Постройте хижину дровосека"
 
 #: ../../campaigns/t01.wmf/objective:15
 msgid "Build another lumberjack's hut"
-msgstr ""
+msgstr "Постройте вторую хижину дровосека"
 
 #: ../../campaigns/t01.wmf/objective:24
 msgid "Build a ranger's hut"
-msgstr ""
+msgstr "Постройте хижину лесничего"
 
 #: ../../campaigns/t01.wmf/objective:32
 msgid "Build two quarries"
-msgstr ""
+msgstr "Постройте две каменоломни"
 
 #~ msgid ""
 #~ " \"Obviously, it would be too draining for our people to walk all the way to "

@@ -251,7 +251,7 @@ public:
 protected:
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
-	virtual void init(Editor_Game_Base &, bool loading);
+	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 

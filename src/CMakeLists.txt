@@ -1,6 +1,10 @@
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
 
+IF (DEFINED MSVC)
+  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../build/win32/msvc/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
+endif (DEFINED MSVC)
+
 file(GLOB_RECURSE WL_SRCS_ALL *.cc)
 
 file(GLOB WL_MAIN_SRCS *.cc)
@@ -22,19 +26,23 @@ endforeach (sourcefile ${WL_SRCS_ALL})
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/*_codecheck_stamp_)
 
+add_custom_target (codecheck)
+
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
   foreach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
     string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcefile})
+    if (WIN32)
+      string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
+    endif (WIN32)
     get_filename_component(sourcename ${sourcefile} NAME) 
     set(stamp ${sourcenoslash}_codecheck_stamp_)
     set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
-      add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp}
-	PRE_LINK
+      add_custom_command(
+        TARGET codecheck
 	COMMAND "${WL_SOURCE_CHECKER}" -c "${sourcefile}"
 	COMMAND cmake -E touch ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp}
 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       )
-      add_custom_target(${stamp} DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
   endforeach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
 endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
@@ -66,7 +74,11 @@ add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
 add_subdirectory(wui)
 
-add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
+IF (DEFINED MSVC)
+  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
+else (DEFINED MSVC)
+  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
+endif (DEFINED MSVC)
 
 target_link_libraries(widelands widelands_main)
 
@@ -115,10 +127,19 @@ endif (APPLE)
 if (WIN32)
 if (DEFINED MSVC)
   target_link_libraries(widelands ${INTL_LIBRARY})
+  target_link_libraries(widelands ws2_32)
+  #GGZ on MSVC using 3rdparty bundle needs expat library
+  #if expat is not found, then 3rdparty bundle is not in use, so just continue.
+  if (GGZ_CORE_FOUND)
+    find_library(EXPAT_LIBRARY libexpat)
+    if (EXPAT_LIBRARY)
+      target_link_libraries(widelands ${EXPAT_LIBRARY})
+    endif (EXPAT_LIBRARY)
+  endif (GGZ_CORE_FOUND)
 else (DEFINED MSVC)
   target_link_libraries(widelands intl)
-endif (DEFINED MSVC) 
   target_link_libraries(widelands wsock32)
+endif (DEFINED MSVC) 
 endif (WIN32)
 
 install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)

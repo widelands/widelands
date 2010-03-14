@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:19+0000\n"
-"Last-Translator: Sigra <esigra@gmail.com>\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-13 14:18+0000\n"
+"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-03-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
@@ -24,22 +24,25 @@ msgid ""
 "are equipped with this basic weapon, but also the lumberjack is using the "
 "same model."
 msgstr ""
+"Yxan är ett grundläggande vapen och verktyg för barbarerna. Alla unga "
+"soldater utrustas med detta enkla vapen, men även skogshuggaren använder "
+"samma modell."
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/metalworks/conf:33
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr ""
+msgstr "Producera yxa"
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce sharpaxe"
-msgstr ""
+msgstr "Producera skarpyxa"
 
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce broadaxe"
-msgstr ""
+msgstr "Producera bredyxa"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/bakery/conf:21
@@ -78,40 +81,46 @@ msgstr ""
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
-msgstr ""
+msgstr "Arbeta"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Bakar bröd till arbetarna."
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "in the metal works like all tools."
 msgstr ""
+"Bakspaden är bagarens redskap. Varje bagare behöver en egen. Den produceras "
+"i metallsmedjan liksom alla andra verktyg."
 
 #: ../../tribes/barbarians/battlearena/conf:25
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
-msgstr ""
+msgstr "Sov"
 
 #: ../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Uppgradera soldat undvik 0"
 
 #: ../../tribes/barbarians/battlearena/conf:27
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Uppgradera soldat undvik 0 (endast för kompatibilitet med gamla sparade spel "
+"(build13))"
 
 #: ../../tribes/barbarians/battlearena/conf:28
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Uppgradera soldat undvik 1"
 
 #: ../../tribes/barbarians/battlearena/conf:29
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Uppgradera soldat undvik 1 (endast för kompatibilitet med gamla sparade spel "
+"(build13))"
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -119,50 +128,58 @@ msgid ""
 "produce. Only trained warriors are able to yield such a weapon. It is "
 "produce in the axe factory."
 msgstr ""
+"Detta är det näst farligaste vapen som barbarerna kan producera. Endast "
+"tränade krigare kan svinga det. Det tillverkas i yxfabriken."
 
 #: ../../tribes/barbarians/beer/conf:1
 msgid ""
 "Young warriors need some encouragement. This drink makes a man fearless and "
 "strong."
 msgstr ""
+"Unga krigare behöver lite uppmuntring. Denna dryck gör dig modig och stark."
 
 #: ../../tribes/barbarians/big_inn/conf:24
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr ""
+msgstr "Producera ranson"
 
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr ""
+msgstr "Producera mellanmål"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr ""
+msgstr "Producera måltid"
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Tillverkar vapen för soldater och verktyg för arbetare."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
 "Fire-hardened wood, hard as iron and can not burn, used for military "
 "buildings."
 msgstr ""
+"Eldhärdat trä som är hårt som järn och inte brinner. Det används till "
+"militära byggnader."
 
 #: ../../tribes/barbarians/brewer/conf:1
 #: ../../tribes/barbarians/master-brewer/conf:1
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
+"Tillverkar den finaste ölen som gör krigarna starka och glada under träning."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
 "Warriors with a fundamental fighting knowledge gain a broad axe. It is "
 "produced in the axe factory."
 msgstr ""
+"Krigare med grundläggande stridskunskaper får en bredyxa. De tillverkas i "
+"yxfabriken."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -170,38 +187,43 @@ msgid ""
 "damage, but it's durability is not the best. Only skilled warriors can use "
 "this. Produced in the axe factory."
 msgstr ""
+"Bronsyxan anses vara ett vapen som är svårt att hantera. Den tillfogar stor "
+"skada, men hållbarheten är inte den bästa. Endast skickliga krigare kan "
+"använda den. Tillverkas i yxfabriken."
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Arbetar på byggplatser för att skapa en ny byggnad."
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Bränner kol."
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Bär föremål längs med dina vägar."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr ""
+msgstr "Föder upp de starka oxar som hjälper till att transportera varor."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Arbetar djupt ner i gruvorna för att få fram kol, järn eller guld."
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-msgstr ""
+msgstr "Tyg behövs till seglen på barbarernas skepp. Det tillverkas av lin."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
 "The fires of the barbarians are usually fed with wood, but sometimes, wood "
 "just does not burn hot enough. Then, coal is used."
 msgstr ""
+"Barbarerna använder oftast trä till sina eldar, men ibland brinner inte trä "
+"varmt nog. Då används kol istället."
 
 #: ../../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
@@ -233,7 +255,7 @@ msgstr "Vetefält, litet"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field tiny"
-msgstr "Vetefält, nysåt"
+msgstr "Vetefält, nysått"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field ripe"
@@ -285,7 +307,7 @@ msgstr "Resursindikator kol mycket"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Resursindikator guld lite"
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator gold much"
@@ -333,7 +355,7 @@ msgstr "Bakspade"
 
 #: ../../tribes/barbarians/conf:72
 msgid "Battle Axe"
-msgstr "Krigsyxa"
+msgstr "Stridsyxa"
 
 #: ../../tribes/barbarians/conf:73
 msgid "Beer"
@@ -353,7 +375,7 @@ msgstr "Bronsyxa"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Cloth"
-msgstr "Kläder"
+msgstr "Tyg"
 
 #: ../../tribes/barbarians/conf:78
 msgid "Coal"
@@ -417,7 +439,7 @@ msgstr "Mask"
 
 #: ../../tribes/barbarians/conf:93
 msgid "Meal"
-msgstr "Mål"
+msgstr "Måltid"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Meat"
@@ -425,7 +447,7 @@ msgstr "Kött"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Pick"
-msgstr "Korp"
+msgstr "Hacka"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Pitta Bread"
@@ -433,7 +455,7 @@ msgstr "Pitabröd"
 
 #: ../../tribes/barbarians/conf:97
 msgid "Ration"
-msgstr "Portion"
+msgstr "Ranson"
 
 #: ../../tribes/barbarians/conf:98
 msgid "Raw Stone"
@@ -445,7 +467,7 @@ msgstr "Lie"
 
 #: ../../tribes/barbarians/conf:100
 msgid "Sharp Axe"
-msgstr "Vass yxa"
+msgstr "Skarpyxa"
 
 #: ../../tribes/barbarians/conf:101
 msgid "Shovel"
@@ -489,7 +511,7 @@ msgstr "Bärare"
 
 #: ../../tribes/barbarians/conf:113
 msgid "Ox"
-msgstr ""
+msgstr "Oxe"
 
 #: ../../tribes/barbarians/conf:116
 msgid "Soldier"
@@ -533,11 +555,11 @@ msgstr "Gruvledare"
 
 #: ../../tribes/barbarians/conf:128
 msgid "Farmer"
-msgstr "Jordbrukare"
+msgstr "Bonde"
 
 #: ../../tribes/barbarians/conf:129
 msgid "Ferner"
-msgstr "Ormbunksodlare"
+msgstr "Vass- och linodlare"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Fisher"
@@ -597,11 +619,11 @@ msgstr "Vävare"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Scout"
-msgstr ""
+msgstr "Spejare"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Boskapsuppfödare"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Construction Site"
@@ -609,7 +631,7 @@ msgstr "Byggarbetsplats"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Battle Arena"
-msgstr "Krigsarena"
+msgstr "Stridsarena"
 
 #: ../../tribes/barbarians/conf:152
 msgid "Trainingscamp"
@@ -618,7 +640,7 @@ msgstr "Träningsläger"
 #: ../../tribes/barbarians/conf:155
 #: ../../tribes/barbarians/conf:171
 msgid "Barrier"
-msgstr "Barriär"
+msgstr "Fästning"
 
 #: ../../tribes/barbarians/conf:156
 msgid "Citadel"
@@ -631,7 +653,7 @@ msgstr "Kärntorn"
 #: ../../tribes/barbarians/conf:158
 #: ../../tribes/barbarians/conf:173
 msgid "Fortress"
-msgstr "Fästning"
+msgstr "Borg"
 
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:169
@@ -645,41 +667,41 @@ msgstr "Litet fort"
 #: ../../tribes/barbarians/conf:163
 #: ../../tribes/barbarians/conf:172
 msgid "Castle"
-msgstr ""
+msgstr "Slott"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Guardhall"
-msgstr ""
+msgstr "Vakthall"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Guardhouse"
-msgstr ""
+msgstr "Vaktstuga"
 
 #: ../../tribes/barbarians/conf:166
 msgid "High Tower"
-msgstr ""
+msgstr "Högt torn"
 
 #: ../../tribes/barbarians/conf:167
 msgid "Small Tower"
-msgstr ""
+msgstr "Litet torn"
 
 #: ../../tribes/barbarians/conf:168
 #: ../../tribes/barbarians/conf:175
 msgid "Tower"
-msgstr ""
+msgstr "Torn"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Barracks"
-msgstr ""
+msgstr "Barracker"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Outpost"
-msgstr ""
+msgstr "Utpost"
 
 #: ../../tribes/barbarians/conf:178
 #: ../../tribes/barbarians/conf:179
 msgid "Headquarters"
-msgstr "Huvudkvarter"
+msgstr "Högkvarter"
 
 #: ../../tribes/barbarians/conf:180
 msgid "Warehouse"
@@ -687,7 +709,7 @@ msgstr "Härbre"
 
 #: ../../tribes/barbarians/conf:183
 msgid "War Mill"
-msgstr "Vapenindustri"
+msgstr "Vapenfabrik"
 
 #: ../../tribes/barbarians/conf:184
 msgid "Axefactory"
@@ -743,7 +765,7 @@ msgstr "Veteodling"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Fernery"
-msgstr "Ormbunksodling"
+msgstr "Vass- och linodling"
 
 #: ../../tribes/barbarians/conf:198
 msgid "Fisher's Hut"
@@ -811,7 +833,7 @@ msgstr "Smältverk"
 
 #: ../../tribes/barbarians/conf:214
 msgid "Tavern"
-msgstr "Gatukök"
+msgstr "Krog"
 
 #: ../../tribes/barbarians/conf:215
 msgid "Weaving-Mill"
@@ -823,15 +845,15 @@ msgstr "Brunn"
 
 #: ../../tribes/barbarians/conf:217
 msgid "Scout's Hut"
-msgstr ""
+msgstr "Spejarkoja"
 
 #: ../../tribes/barbarians/conf:218
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Boskapsgård"
 
 #: ../../tribes/barbarians/conf:221
 msgid "Headquarters medium"
-msgstr "Huvudkvarter medium"
+msgstr "Högkvarter mellan"
 
 #: ../../tribes/barbarians/conf:222
 msgid "Citadel village"
@@ -839,84 +861,90 @@ msgstr "Citadellby"
 
 #: ../../tribes/barbarians/farm/conf:14
 msgid "Plant wheat"
-msgstr ""
+msgstr "Så vete"
 
 #: ../../tribes/barbarians/farm/conf:16
 msgid "Harvest wheat"
-msgstr ""
+msgstr "Skörda vete"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Sår fält."
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
-msgstr ""
+msgstr "Odlar lin och vassrör."
 
 #: ../../tribes/barbarians/fernery/conf:13
 msgid "Plant flax"
-msgstr ""
+msgstr "Så lin"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
-msgstr ""
+msgstr "Så vass"
 
 #: ../../tribes/barbarians/fernery/conf:17
 msgid "Harvest flax"
-msgstr ""
+msgstr "Skörda lin"
 
 #: ../../tribes/barbarians/fernery/conf:19
 msgid "Harvest reed"
-msgstr ""
+msgstr "Skörda vass"
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "Produced in the metal works."
 msgstr ""
+"Eldtången används av smältaren, som arbetar i smältsmedjan. Tillverkas i "
+"verktygssmedjan."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-msgstr ""
+msgstr "Förutom pitabröd och kött äter barbarerna även fisk."
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr ""
+msgstr "Fiskar fisk från havet."
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid "Fishing rods are needed by barbarian fishers, to catch fish."
-msgstr ""
+msgstr "Fiskespön används av barbarerna för att fånga fisk."
 
 #: ../../tribes/barbarians/flax/conf:1
 msgid "Flax is a beautiful flower, which are used to make cloth."
-msgstr ""
+msgstr "Lin har vackra blå blommor och används till att göra tyg."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
-msgstr ""
+msgstr "Viltvårdaren ser till att djurstammarna inte blir för små."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Upptäcker gruvresurser."
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
+"Guld är den mest värdefulla av metaller. Endast mycket viktiga föremål "
+"utsmyckas med det."
 
 #: ../../tribes/barbarians/goldstone/conf:1
 msgid "This is the yellow goldstone."
-msgstr ""
+msgstr "Detta är den gula guldmalmen."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be enhanced to grout which delivers solid, non burning build "
 "material."
 msgstr ""
+"Sten kan arbetas till murbruk som kan användas som starkt och brandfast "
+"byggnadsmaterial."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -924,68 +952,76 @@ msgid ""
 "the blacksmiths and the helmsmiths. Make sure you always got some in "
 "reserve! Build at the metal works."
 msgstr ""
+"Hammaren är ett viktigt verktyg. Den används av geologen, arbetaren, smeden "
+"och hjälmsmeden. Se till att du alltid har några på lager! Tillverkas i "
+"verktygssmedjan."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid "Basic defence of a warrior."
-msgstr ""
+msgstr "En krigares grundförsvar."
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr ""
+msgstr "Tillverkar hjälmar för soldater."
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr ""
+msgstr "Producera hjälm"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr ""
+msgstr "Producera mask"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
-msgstr ""
+msgstr "Producera stridshjälm"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "Jägaren för gott kött till nybyggarna."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters. Produced in the metal works."
 msgstr ""
+"Detta spjut är lätt nog att kastas, men tungt nog att döda ett djur i ett "
+"slag. Det används endast av jägarna. Tillverkas i verktygssmedjan."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Framställer mat till gruvarbetare."
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr ""
+msgstr "Vapen och verktyg tillverkas av järn."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
-msgstr ""
+msgstr "Detta är den röda järnmalmen."
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 msgstr ""
+"Hur framställer du en måltid, ett mellanmål eller en ranson om det inte "
+"finns några köksverktyg tillgängliga?"
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kilm."
-msgstr ""
+msgstr "Bränner kalk i kalkbränneriet."
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "Fäller träd."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid "An enhanced version of the helmet."
-msgstr ""
+msgstr "En förbättrad version av hjälmen."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
 msgstr ""
+"En fullständig måltid som tillfredsställer varje gruvarbetares behov."
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -993,79 +1029,86 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
+"Kött innehåller mycket energi. Det används i värdshusen och krogarna för att "
+"framställa mat till gruvarbetarna och de soldater som ligger i träning."
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Producera bakplåt"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Producera eldtång"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
-msgstr ""
+msgstr "Producera fiskespö"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr ""
+msgstr "Producera hammare"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr ""
+msgstr "Producera köksredskap"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr ""
+msgstr "Producera hacka"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr ""
+msgstr "Producera lie"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
-msgstr ""
+msgstr "Producera spade"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr ""
+msgstr "Producera jaktspjut"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Hjälper till att bära föremål på hårt trafikerade vägar."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metal works."
 msgstr ""
+"Denna hacka används av stenhuggarna och gruvarbetarna. Den tillverkas i "
+"verktygssmedjan."
 
 #: ../../tribes/barbarians/pittabread/conf:1
 msgid ""
 "The barbarian bakers are best in making this flat and tasty pitta bread."
 msgstr ""
+"Barbarernas bagare är bäst på att laga detta platta och välsmakande pitabröd."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Planterar träd."
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid "A small bite to keep miners strong and working."
 msgstr ""
+"En liten måltid som hjälper gruvarbetarna att orka med det hårda arbetet."
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid "Raw Stones are the secondary build material of the barbarians."
-msgstr ""
+msgstr "Sten är barbarernas näst mest använda byggnadsmaterial."
 
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Spejare som Scotty Spejare spejar ut outforskade områden på ett spejigt sätt."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
 "The scythe is the tool of the farmers. It is produced in the metal works."
-msgstr ""
+msgstr "Lien är bondens verktyg. Den tillverkas i verktygssmedjan."
 
 #: ../../tribes/barbarians/sharpaxe/conf:1
 msgid ""
@@ -1073,150 +1116,175 @@ msgid ""
 "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
 "than the ordinary axe. Build in the axe factory."
 msgstr ""
+"Riktiga krigare anser skarpyxan vara det första riktiga vapnet som en "
+"krigare kan hantera. Först efter att en krigare visat sin skicklighet med en "
+"vanlig yxa får krafterna provas med denna yxa som är tyngre och skarpare än "
+"den vanliga yxan. Tillverkas i yxfabriken."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
 "the ranger use it. Build at the metal works."
 msgstr ""
+"Denna spade används för hantering av plantor. Den används av vass- och "
+"linodlaren samt skogsvaktaren. Tillverkas i verktygssmedjan."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "Smälter järn."
 
 #: ../../tribes/barbarians/smelting_works/conf:24
 msgid "Smelt iron"
-msgstr ""
+msgstr "Smält järn"
 
 #: ../../tribes/barbarians/smelting_works/conf:25
 msgid "Smelt gold"
-msgstr ""
+msgstr "Smält guld"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
 msgstr ""
+"En smula större, för de avancerade gruvarbetarna. De behöver en stor bit."
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Försvara och erövra!"
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granit out of laying stones."
-msgstr ""
+msgstr "Hugger råa stycken granit från liggande stenblock."
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
 "Only this beer is acceptable for the old warriors. Some say, the whole power "
 "of the barbarians is in this ale."
 msgstr ""
+"Endast detta öl är gott nog för de äldre krigarna. Det sägs att barbarernas "
+"kraft finns i detta öl."
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid "Thatch reed is used to make the roofs of buildings waterproof."
-msgstr ""
+msgstr "Vassrör används för att göra vattentäta tak på byggnader."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Tränar soldaterna."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Uppgradera soldat anfall 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:38
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Uppgradera soldat anfall 0 (endast för kompatibilitet med gamla sparade spel "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Uppgradera soldat anfall 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:40
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Uppgradera soldat anfall 1 (endast för kompatibilitet med gamla sparade spel "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Uppgradera soldat anfall 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:42
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Uppgradera soldat anfall 2 (endast för kompatibilitet med gamla sparade spel "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Uppgradera soldat anfall 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Uppgradera soldat anfall 3 (endast för kompatibilitet med gamla sparade spel "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr ""
+msgstr "Uppgradera soldat anfall 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Uppgradera soldat anfall 4 (endast för kompatibilitet med gamla sparade spel "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Uppgradera soldat träffpoäng 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Uppgradera soldat träffpoäng 0 (endast för kompatibilitet med gamla sparade "
+"spel (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr ""
+msgstr "Uppgradera soldat träffpoäng 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Uppgradera soldat träffpoäng 1 (endast för kompatibilitet med gamla sparade "
+"spel (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr ""
+msgstr "Uppgradera soldat träffpoäng 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Uppgradera soldat träffpoäng 2 (endast för kompatibilitet med gamla sparade "
+"spel (build13))"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid "Trunks are the primary build material of the barbarians."
-msgstr ""
+msgstr "Stockar är barbarernas främsta byggnadsmaterial."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid "An enhanced mask for barbarian warriors."
-msgstr ""
+msgstr "En förbättrad mask för barbarkrigare."
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr ""
+msgstr "Producera bronsyxa"
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"
-msgstr ""
+msgstr "Producera stridsyxa"
 
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce warriorsaxe"
-msgstr ""
+msgstr "Producera krigaryxa"
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -1224,22 +1292,29 @@ msgid ""
 "ever were able to handle those huge and powerful axes. Build at the axe "
 "factory."
 msgstr ""
+"Krigaryxan är det farligaste av alla barbarernas vapen. Endast få krigare "
+"blir skickliga nog att hantera denna stora och slagkraftiga yxa. Tillverkas "
+"i yxfabriken."
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer or to produce grout."
 msgstr ""
+"Vatten är livsnödvändigt! Denna vätska används till mycket, bland annat till "
+"bröd och öl samt till murbruk."
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Tillverkar tyg till skepp och soldater."
 
 #: ../../tribes/barbarians/wheat/conf:1
 msgid ""
 "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
 "be made of this wheat."
 msgstr ""
+"Vete är nödvändigt för barbarernas överlevnad. Gott pitabröd och starkt öl "
+"kan göras med vete."
 
 #~ msgid "Resource indicator gold litte"
 #~ msgstr "Resursindikator guld lite"

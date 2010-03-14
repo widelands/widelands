@@ -74,7 +74,6 @@ if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
 	set (WL_INSTALL_LOCALEDIR share/games/widelands/locale)
 endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
 
-# is this needed?
 set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
@@ -93,27 +92,59 @@ endif (CMAKE_BUILD_TYPE STREQUAL "")
 
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
-if (NOT DEFINED MSVC)
-  find_package(GGZ_Core)
-  include_directories(${GGZ_CORE_INCLUDE_DIR})
-endif (NOT DEFINED MSVC)
+
+# CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
+set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+
+# CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
+set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+
+
+#If building with MSVC, then check for 3rdparty libs
+if (DEFINED MSVC)
+  set (WL_3RDPARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty" CACHE STRING "Widelands 3rdparty dir")
+  set (CMAKE_INCLUDE_PATH "${WL_3RDPARTY_DIR}/include;${WL_3RDPARTY_DIR}/include/sdl")
+  set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
+
+  add_definitions( -Dand=&& -Dor=|| -Dnot=! -Dxor=^ )
+  add_definitions( -Dstrcasecmp=_stricmp )
+  add_definitions( -Dstrncasecmp=_strnicmp )
+  add_definitions( -Dsnprintf=_snprintf )
+  add_definitions( -Drint=floor )
+  add_definitions( -Dstrtoll=_strtoi64 )
+  add_definitions( -Dstrtoull=_strtoui64 )
+  add_definitions( -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS )
+  add_definitions( -Dssize_t=size_t )
+  add_definitions( -Dmkdir=_mkdir )
+
+
+  find_library(INTL_LIBRARY NAMES intl libintl)
+
+  # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
+  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+
+  # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
+  set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MD" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+
+  set (CMAKE_EXE_LINKER_FLAGS_DEBUG "/debug /INCREMENTAL:YES /NODEFAULTLIB:msvcrt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+
+else (DEFINED MSVC)
+  set (HAVE_VARARRAY TRUE CACHE BOOL "Use variable length arrays to improve performance. Requires gcc." )
+endif (DEFINED MSVC)
+
+if (DEFINED WL_3RDPARTY_DIR)
+  set (CMAKE_INCLUDE_PATH "${WL_3RDPARTY_DIR}/include;${WL_3RDPARTY_DIR}/include/sdl")
+  set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
+endif (DEFINED WL_3RDPARTY_DIR)
+
+find_package(GGZ_Core)
 
 if (GGZ_CORE_FOUND)
-  set (CXX_FLAG_GGZ "-DUSE_GGZ")
+  include_directories(${GGZ_CORE_INCLUDE_DIR})
+  add_definitions("-DUSE_GGZ")
 else (GGZ_CORE_FOUND)
   message ("GGZ support disabled, check your libraries path and installed packages!")
 endif (GGZ_CORE_FOUND)
-
-# CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE ${CXX_FLAG_GGZ}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
-# CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
-set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG ${CXX_FLAG_GGZ}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
-# we don't want someone to set this directly...
-# ...and we don't want to remember from former runs...
-unset (WL_VERSION)
-unset (WL_VERSION CACHE)
 
 # ...but using MAJOR, MINOR and PATCH
 if (DEFINED WL_VERSION_MAJOR)
@@ -158,55 +189,18 @@ if (DEFINED WL_VERSION_MAJOR)
 	endif (WL_VERSION_MAJOR STREQUAL "0")
 endif (DEFINED WL_VERSION_MAJOR)
 
-#If building with MSVC, then check for 3rdparty libs
-if (DEFINED MSVC)
-  set (WL_3RDPARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty" CACHE STRING "Widelands 3rdparty dir")
-  set (CMAKE_INCLUDE_PATH "${WL_3RDPARTY_DIR}/include;${WL_3RDPARTY_DIR}/include/sdl")
-  set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
-
-  add_definitions( -Dand=&& -Dor=|| -Dnot=! -Dxor=^ )
-  add_definitions( -Dstrcasecmp=_stricmp )
-  add_definitions( -Dstrncasecmp=_strnicmp )
-  add_definitions( -Dsnprintf=_snprintf )
-  add_definitions( -Drint=floor )
-  add_definitions( -Dstrtoll=_strtoi64 )
-  add_definitions( -Dstrtoull=_strtoui64 )
-  add_definitions( -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS )
-  add_definitions( -Dssize_t=size_t )
-  add_definitions( -Dmkdir=_mkdir )
-
-
-  find_library(INTL_LIBRARY NAMES intl libintl)
-
-# CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
-# CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
-set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MD" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
-set (CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:msvcrt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
-else (DEFINED MSVC)
-  set (HAVE_VARARRAY TRUE CACHE BOOL "Use variable length arrays to improve performance. Requires gcc." )
-endif (DEFINED MSVC)
-
-if (DEFINED WL_3RDPARTY_DIR)
-  set (CMAKE_INCLUDE_PATH "${WL_3RDPARTY_DIR}/include;${WL_3RDPARTY_DIR}/include/sdl")
-  set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
-endif (DEFINED WL_3RDPARTY_DIR)
-
 if (NOT DEFINED WL_VERSION)
-#  find_package (PythonInterp REQUIRED)
-  execute_process (
-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/detect_revision.py
-    OUTPUT_VARIABLE WL_VERSION
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    OUTPUT_STRIP_TRAILING_WHITESPACE
+  add_custom_target (
+    BzrRevision ALL
+    COMMAND cmake -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/BzrRevision.cmake
+  )
+else (NOT DEFINED WL_VERSION)
+  add_custom_target (
+    InputRevision ALL
+    COMMAND cmake -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/InputRevision.cmake
   )
 endif (NOT DEFINED WL_VERSION)
-message ("Version of Widelands Build is ${WL_VERSION}(${CMAKE_BUILD_TYPE})")
 
-file (WRITE ${CMAKE_CURRENT_BINARY_DIR}/VERSION "${WL_VERSION}")
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
   DESTINATION ${WL_INSTALL_DATADIR}

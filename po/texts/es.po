@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:37+0000\n"
-"Last-Translator: raul.ferriz <raul.ferriz@gmail.com>\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-13 01:19+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-03-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -1037,154 +1037,150 @@ msgid "Elders"
 msgstr "Ancianos"
 
 #: ../../txts/developers:19
-#: ../../txts/developers:318
+#: ../../txts/developers:317
 msgid "Graphics"
 msgstr "Gráficos"
 
 #: ../../txts/developers:24
-#: ../../txts/developers:311
+#: ../../txts/developers:310
 msgid "Homepage"
 msgstr "Página inicial"
 
-#: ../../txts/developers:27
-msgid "Janus"
-msgstr ""
-
-#: ../../txts/developers:31
-#: ../../txts/developers:323
+#: ../../txts/developers:29
+#: ../../txts/developers:322
 msgid "Sound"
 msgstr "Sonido"
 
-#: ../../txts/developers:36
-#: ../../txts/developers:328
+#: ../../txts/developers:34
+#: ../../txts/developers:327
 msgid "Translation"
 msgstr "Traducción"
 
-#: ../../txts/developers:44
+#: ../../txts/developers:42
 msgid "Coders"
 msgstr "Programadores"
 
-#: ../../txts/developers:76
+#: ../../txts/developers:75
 msgid "Graphicians"
 msgstr "Grafistas"
 
-#: ../../txts/developers:101
+#: ../../txts/developers:100
 msgid "Musicians"
 msgstr "Músicos"
 
-#: ../../txts/developers:112
+#: ../../txts/developers:111
 msgid "Sound Effects"
 msgstr "Efectos de sonido"
 
-#: ../../txts/developers:121
+#: ../../txts/developers:120
 msgid "Maps and Missions"
 msgstr "Mapas y Misiones"
 
-#: ../../txts/developers:134
+#: ../../txts/developers:133
 msgid "Campaign Story"
 msgstr "Historia de la Campaña"
 
-#: ../../txts/developers:137
+#: ../../txts/developers:136
 msgid "Barbarian"
 msgstr "Bárbaro"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:142
 msgid "Empire"
 msgstr "Imperio"
 
-#: ../../txts/developers:149
+#: ../../txts/developers:148
 msgid "Translators"
 msgstr "Traductores"
 
-#: ../../txts/developers:153
+#: ../../txts/developers:152
 msgid "Czech"
 msgstr "Checo"
 
-#: ../../txts/developers:160
+#: ../../txts/developers:159
 msgid "Dansk"
 msgstr "Danes"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:165
 msgid "Dutch"
 msgstr "Holandés"
 
-#: ../../txts/developers:173
+#: ../../txts/developers:172
 msgid "Finnish"
 msgstr "Finlandés"
 
-#: ../../txts/developers:179
+#: ../../txts/developers:178
 msgid "French"
 msgstr "Francés"
 
-#: ../../txts/developers:186
+#: ../../txts/developers:185
 msgid "Galician"
 msgstr "Gallego"
 
-#: ../../txts/developers:191
+#: ../../txts/developers:190
 msgid "German"
 msgstr "Alemán"
 
-#: ../../txts/developers:203
+#: ../../txts/developers:202
 msgid "Hebrew"
 msgstr "Hebreo"
 
-#: ../../txts/developers:208
+#: ../../txts/developers:207
 msgid "Hungarian"
 msgstr "Húngaro"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:212
 msgid "Italian"
 msgstr "Italiano"
 
-#: ../../txts/developers:218
+#: ../../txts/developers:217
 msgid "Polish"
 msgstr "Polaco"
 
-#: ../../txts/developers:226
+#: ../../txts/developers:225
 msgid "Russian"
 msgstr "Ruso"
 
-#: ../../txts/developers:231
+#: ../../txts/developers:230
 msgid "Slovak"
 msgstr "Eslovaco"
 
-#: ../../txts/developers:236
+#: ../../txts/developers:235
 msgid "Spanish"
 msgstr "Castellano"
 
-#: ../../txts/developers:241
+#: ../../txts/developers:240
 msgid "Swedish"
 msgstr "Sueco"
 
-#: ../../txts/developers:249
+#: ../../txts/developers:248
 msgid "Packagers"
 msgstr "Empaquetadores"
 
-#: ../../txts/developers:253
+#: ../../txts/developers:252
 msgid "Linux Distributions"
 msgstr "Distribuciones Linux"
 
-#: ../../txts/developers:264
+#: ../../txts/developers:263
 msgid "Other Unix Distributions"
 msgstr "Otras Distribuciones Unix"
 
-#: ../../txts/developers:273
+#: ../../txts/developers:272
 msgid "Non Unix Distributions"
 msgstr "Distribuciones no Unix"
 
-#: ../../txts/developers:284
+#: ../../txts/developers:283
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Programadores de la página de inicio"
 
-#: ../../txts/developers:293
+#: ../../txts/developers:292
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Documentación, ayuda y wiki"
 
-#: ../../txts/developers:307
+#: ../../txts/developers:306
 msgid "Former elders"
-msgstr ""
+msgstr "Ancianos previos"
 
-#: ../../txts/developers:334
+#: ../../txts/developers:333
 msgid "Other"
 msgstr "Otro"
 
@@ -1203,6 +1199,10 @@ msgid ""
 "progress and as the Editor becomes better and better this text will also get "
 "longer and more complete."
 msgstr ""
+"Este Editor esta pensado para jugadores a los que les gusta diseñar sus "
+"propios mapas para usar con Widelands.<br>Como puedes ver, este Editor está "
+"en pleno desarrollo y conforme el Editor vaya mejorando este texto se hará "
+"más largo y completo."
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
@@ -1292,6 +1292,8 @@ msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
+"Siempre construye casas para el reforestador y el criador de peces, de lo "
+"contrario te quedarás sin troncos y alimentos."
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
@@ -1307,6 +1309,8 @@ msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
+"Siempre construye un guardabosques y una cabaña de guardabosques, de ese "
+"modo no te quedarás sin troncos y alimentos."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
@@ -1322,12 +1326,17 @@ msgid ""
 "during selection. If you then click on the map, an instance of one of the "
 "selected object types will be placed."
 msgstr ""
+"Puedes seleccionar varios objetos de la naturaleza (bob) si mantienes "
+"presionada la tecla CTRL durante la selección. Si a continuación, haces clic "
+"en el mapa, se colocará una instancia de uno de objetos seleccionado."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Like with natural objects (bobs), you can also select multiple animals or "
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
+"Como con los objetos naturales (bobs), también puedes seleccionar múltiples "
+"animales o texturas de suelo con CTRL + Click del mouse."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -1366,6 +1375,9 @@ msgid ""
 "heavy development. If you've got a question or found a problem, meet us in "
 "the editor forums at www.widelands.org"
 msgstr ""
+"Las herramientas para eventos, activadores, eventos encadenado y objetivos "
+"se encuentran aún en desarrollo. Si tienes dudas o encuentras un problema, "
+"contáctanos en los foros del editor en www.widelands.org"
 
 #: ../../txts/tips/editor.tip:34
 msgid ""
@@ -1378,6 +1390,7 @@ msgstr ""
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
 msgstr ""
+"Construye siempre una cabaña de silvicultor para no quedarte sin troncos."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
@@ -1399,6 +1412,8 @@ msgid ""
 "Your territory can be expanded by building various military buildings - "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"Tu territorio puede epandirsemediante la construcción de varios edificios "
+"militares - Centinelas, fortalezas, cuarteles, etc"
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
@@ -1417,6 +1432,8 @@ msgid ""
 "Any further questions? Our FAQs, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"¿Alguna otra pregunta? Puedes encontrar nuestros PUFs, el wiki y por "
+"supuesto los foros de la comunidad en www.widelands.org."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
@@ -1449,6 +1466,13 @@ msgid ""
 msgstr ""
 "Utilice '/me' al comienzo del mensaje de charla: '/me está cansado' se "
 "mostrará como '-> Apodo está cansado'."
+
+#: ../../txts/tips/multiplayer.tip:10
+msgid ""
+"Use '@name' at the beginning of a chat message to send it to only one player."
+msgstr ""
+"Utiliza '@nombre' al inicio de un mensaje de chat para enviarlo únicamente a "
+"ese jugador."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""

@@ -795,6 +795,8 @@ bool WLApplication::init_settings() {
 	s.get_bool("snap_windows_only_when_overlapping");
 	s.get_bool("dock_windows_to_edges");
 	s.get_bool("remove_syncstreams");
+	s.get_bool("sound_at_message");
+	s.get_bool("voice_at_message");
 	s.get_string("nickname");
 	s.get_string("password");
 	s.get_string("emailadd");
@@ -1541,8 +1543,8 @@ void WLApplication::mainmenu_multiplayer()
 		}
 		if (ggz) {
 			playername = mp.get_nickname();
-			const char * password(mp.get_password().c_str());
-			const char * email   (mp.get_email().c_str());
+			std::string password(mp.get_password());
+			std::string email   (mp.get_email());
 			bool registration = mp.new_registration();
 
 			Section & s = g_options.pull_section("global");
@@ -1554,7 +1556,7 @@ void WLApplication::mainmenu_multiplayer()
 
 			// reinitalise in every run, else graphics look strange
 			Fullscreen_Menu_NetSetupGGZ ns
-				(playername.c_str(), password, email, registration);
+				(playername.c_str(), password.c_str(), email.c_str(), registration);
 			menu_result = ns.run();
 
 			switch (menu_result) {
