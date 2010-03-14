@@ -39,9 +39,6 @@
 #include "event_immovable.h"
 #include "event_message_box.h"
 #include "event_move_view.h"
-#include "event_reveal_campaign.h"
-#include "event_reveal_objective.h"
-#include "event_reveal_scenario.h"
 #include "event_road.h"
 #include "event_set_timer.h"
 #include "event_set_player_frontier_style.h"
@@ -74,15 +71,6 @@ int32_t Event_Immovable                 ::option_menu(Editor_Interactive &)
 
 int32_t Event_Message_Box               ::option_menu(Editor_Interactive & eia)
 {Event_Message_Box_Option_Menu                  m(eia, *this); return m.run();}
-
-int32_t Event_Reveal_Campaign           ::option_menu(Editor_Interactive &)
-{throw;}
-
-int32_t Event_Reveal_Objective          ::option_menu(Editor_Interactive &)
-{throw;}
-
-int32_t Event_Reveal_Scenario           ::option_menu(Editor_Interactive &)
-{throw;}
 
 int32_t Event_Road                      ::option_menu(Editor_Interactive &)
 {throw;}

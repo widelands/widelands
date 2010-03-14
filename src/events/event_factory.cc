@@ -36,9 +36,6 @@
 #include "event_move_view.h"
 #include "event_player_seeall.h"
 #include "event_retreat_change.h"
-#include "event_reveal_campaign.h"
-#include "event_reveal_objective.h"
-#include "event_reveal_scenario.h"
 #include "event_road.h"
 #include "event_set_player_flag_style.h"
 #include "event_set_player_frontier_style.h"
@@ -115,21 +112,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		true,
 		"move_view",              _("Move view"),
 		_("Center the player's view on a certain location.")
-	},
-	{
-		false,
-		"reveal_campaign",        _("Reveal campaign"),
-		_("Reveal a campaign.")
-	},
-	{
-		false,
-		"reveal_objective",       _("Reveal objective"),
-		_("Reveal an objective.")
-	},
-	{
-		false,
-		"reveal_scenario",        _("Reveal scenario"),
-		_("Reveal a scenario.")
 	},
 	{
 		false,
@@ -227,9 +209,6 @@ Event & create
 	case  8: return *new Event_Lua                      (name, state);
 	case  9: return *new Event_Message_Box              (name, state);
 	case 10: return *new Event_Move_View                (name, state);
-	case 11: return *new Event_Reveal_Campaign          (name, state);
-	case 12: return *new Event_Reveal_Objective         (name, state);
-	case 13: return *new Event_Reveal_Scenario          (name, state);
 	case 14: return *new Event_Road                     (name, state);
 	case 15: return *new Event_Set_Timer                (name, state);
 	case 16: return *new Event_Unhide_Area              (name, state);
@@ -251,12 +230,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	char const * type_name = s.get_safe_string("type");
 
 	//  Handle old names.
-	if (not strcmp(type_name, "unhide_objective"))
-		type_name = "reveal_objective";
-	if (not strcmp(type_name, "set_map_visiblity"))
-		type_name = "reveal_scenario";
-	if (not strcmp(type_name, "set_campaign_visiblity"))
-		type_name = "reveal_campaign";
 	if (not strcmp(type_name, "set_null_trigger"))
 		type_name = "set_timer";
 	if (not strcmp(type_name, "allow_building"))
@@ -280,9 +253,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case  8: return *new Event_Lua                      (s, egbase);
 	case  9: return *new Event_Message_Box              (s, egbase);
 	case 10: return *new Event_Move_View                (s, egbase);
-	case 11: return *new Event_Reveal_Campaign          (s, egbase);
-	case 12: return *new Event_Reveal_Objective         (s, egbase);
-	case 13: return *new Event_Reveal_Scenario          (s, egbase);
 	case 14: return *new Event_Road                     (s, egbase);
 	case 15: return *new Event_Set_Timer                (s, egbase);
 	case 16: return *new Event_Unhide_Area              (s, egbase);
