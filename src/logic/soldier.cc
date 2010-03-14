@@ -966,6 +966,21 @@ void Soldier::start_task_defense
 	}
 }
 
+struct SoldierDistance {
+	Soldier * s;
+	int dist;
+
+	SoldierDistance(Soldier * a, int d) :
+		dist(d)
+	{s = a;}
+
+	struct Greater {
+		bool operator()(const SoldierDistance & a, const SoldierDistance & b) {
+			return (a.dist > b.dist);
+		}
+	};
+};
+
 void Soldier::defense_update(Game & game, State & state)
 {
 	std::string signal = get_signal();
@@ -987,7 +1002,7 @@ void Soldier::defense_update(Game & game, State & state)
 	 * Attempt to fix a crash when player bulldozes a building being defended
 	 * by soldiers.
 	 */
-	if(not location)
+	if (not location)
 		return pop_task(game);
 
 	Flag & baseflag = location->base_flag();
@@ -1095,7 +1110,7 @@ void Soldier::defense_update(Game & game, State & state)
 	}
 
 	// Go through soldiers
-	std::list<SoldierDistance *> targets;
+	std::vector<SoldierDistance> targets;
 	container_iterate_const(std::vector<Bob *>, soldiers, i) {
 
 		// If enemy is in our land, then go after it!
@@ -1111,29 +1126,23 @@ void Soldier::defense_update(Game & game, State & state)
 			{
 				uint32_t thisDist = game.map().calc_distance
 					(get_position(), soldier->get_position());
-				targets.push_front(new SoldierDistance (soldier, thisDist));
+				targets.push_back(SoldierDistance(soldier, thisDist));
 			}
 		}
 	}
 
-	targets.sort();
-	
-	while (targets.size() > 0) {
-		SoldierDistance * target = 0;
+	std::stable_sort(targets.begin(), targets.end(), SoldierDistance::Greater());
 
-		target = targets.front();
+	while (targets.size() > 0) {
+		const SoldierDistance & target = targets.back();
 
 		if (position == location) {
-			targets.clear();
-			targets.~list();
 			return start_task_leavebuilding(game, false);
 		}
 
-		if (target->dist <= 1) {
-			molog("[defense] starting battle with %u!\n", (target->s)->serial());
-			new Battle(game, *this, *(target->s));
-			targets.clear();
-			targets.~list();
+		if (target.dist <= 1) {
+			molog("[defense] starting battle with %u!\n", target.s->serial());
+			new Battle(game, *this, *(target.s));
 			return start_task_battle(game);
 		}
 
@@ -1141,24 +1150,21 @@ void Soldier::defense_update(Game & game, State & state)
 		if
 			(start_task_movepath
 			 	(game,
-			 	 (target->s)->get_position(),
+			 	 target.s->get_position(),
 			 	 1,
 			 	 descr().get_right_walk_anims(does_carry_ware()),
 			 	 false,
 			 	 1))
 		{
-			molog("[defense] move towards soldier %u\n", (target->s)->serial());
-			targets.clear();
-			targets.~list();
+			molog("[defense] move towards soldier %u\n", target.s->serial());
 			return;
 		} else {
 			molog
 				("[defense] failed to move towards attacking soldier %u\n",
-				 (target->s)->serial());
-			targets.pop_front();
+				 target.s->serial());
+			targets.pop_back();
 		}
 	}
-	targets.~list();
 	// If the enemy is not in our land, wait
 	return start_task_idle(game, get_animation("idle"), 250);
 }
@@ -1613,9 +1619,5 @@ void Soldier::log_general_info(Editor_Game_Base const & egbase)
 	if (m_battle)
 		molog("BattleSerial: %u\n", m_battle->serial());
 }
-
-bool operator<(SoldierDistance a, SoldierDistance b) {
-	return (a.dist < b.dist);
-};
 
 }
