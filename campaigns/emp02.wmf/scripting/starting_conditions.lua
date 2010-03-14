@@ -59,6 +59,7 @@ prefilled_buildings(p1,
          stonemason = 2,
          toolsmith = 2,
          weaponsmith = 1,
+         donkey = 20,
       },
       soldiers = {
          [{0,0,0,0}] = 45,
