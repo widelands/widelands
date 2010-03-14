@@ -41,6 +41,12 @@
 // TODO: port the Platea scenario to Lua too
 // TODO: port the campaigns to Lua
 
+// TODO: remove allowed buildings map packet
+// TODO: remove variables map packet
+// TODO: remove event map packet buildings map packet
+// TODO: remove trigger map packet buildings map packet
+// TODO: remove event chain map packet
+
 // FUTURE: access to player stock via Player.get_wares and get_workers
 // FUTURE: access to constructionsites via Player.get_buildings
 // FUTURE: making busy roads and second carriers

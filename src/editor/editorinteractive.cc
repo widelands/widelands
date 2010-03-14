@@ -19,7 +19,6 @@
 
 #include "editorinteractive.h"
 #include "tools/editor_delete_immovable_tool.h"
-#include "ui_menus/editor_event_menu.h"
 #include "ui_menus/editor_objectives_menu.h"
 #include "ui_menus/editor_variables_menu.h"
 #include "ui_menus/editor_main_menu.h"
@@ -77,9 +76,6 @@ m_toggle_buildhelp
 m_toggle_player_menu
 	(INIT_BUTTON
 	 	("editor_menu_player_menu",      toggle_playermenu,     _("Players"))),
-m_toggle_event_menu
-	(INIT_BUTTON
-	 	("menu_toggle_event_menu",       toggle_eventmenu,      _("Events"))),
 m_toggle_variables_menu
 	(INIT_BUTTON
 	 	("menu_toggle_variables_menu",   toggle_variablesmenu,  _("Variables"))),
@@ -93,7 +89,6 @@ m_toggle_objectives_menu
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_player_menu,     UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_event_menu,      UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_variables_menu,  UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_objectives_menu, UI::Box::AlignLeft);
 	m_toolbar.resize();
@@ -261,14 +256,6 @@ void Editor_Interactive::toggle_variablesmenu() {
 		new Editor_Variables_Menu(*this, m_variablesmenu);
 }
 
-
-void Editor_Interactive::toggle_eventmenu() {
-	if (m_eventmenu.window)
-		delete m_eventmenu.window;
-	else
-		new Editor_Event_Menu(*this, m_eventmenu);
-}
-
 void Editor_Interactive::map_clicked() {
 	tools.current()
 		.handle_click(tools.use_tool, egbase().map(), get_sel_pos(), *this);
@@ -407,11 +394,6 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code)
 			set_display_flag
 				(Interactive_Base::dfShowCensus,
 				 !get_display_flag (Interactive_Base::dfShowCensus));
-			handled = true;
-			break;
-
-		case SDLK_e:
-			toggle_eventmenu();
 			handled = true;
 			break;
 
