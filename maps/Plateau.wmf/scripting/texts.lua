@@ -103,11 +103,11 @@ briefing_3_captured_ancient_castle = {
 [[Wonderful! Our troops finally defeated Lanissa and her soldiers. The ancient
 castle is ours!<br> It is amazing, how far one can see from the highest tower
 of the castle. We can watch the whole island. So now I wonder, why Lanissa has
-not see us and thus did not prepare. But well, some things will never come to
+not seen us and thus did not prepare. But well, some things will never come to
 the light of day. The only important things at the moment are the left opposing
 troops. We observed enemy's positions from Erwyn north and eastwards of the
 castle. He is known to be a strong warlord and surely commands the strongest
-warriors. In the south we captured some guarded food infrastructures of Jomo -
+warriors. In the south we caught sight of some guarded food infrastructures of Jomo -
 a younger warlord - we should take care about that infrastructures and cut of
 the food supply.]], obj_defeat_erwyn, obj_defeat_jomo),
 }
