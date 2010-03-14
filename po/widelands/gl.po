@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-10 20:09+0100\n"
-"PO-Revision-Date: 2010-03-12 22:50+0000\n"
+"PO-Revision-Date: 2010-03-13 17:45+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-13 04:46+0000\n"
+"X-Launchpad-Export-Date: 2010-03-14 04:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -90,8 +90,8 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
-" --<nome da entrada de configuración>=valor substitúe calquera axuste "
-"daconfiguración\n"
+" --<nome da entrada de configuración>=valor substitúe calquera axuste da "
+"configuración\n"
 "\n"
 " --logfile=FICHEIRO   A saída gárdase no FICHEIRO en vez de imprimirse\n"
 "                      na terminal.\n"
@@ -198,6 +198,9 @@ msgid ""
 "                      testing)\n"
 "\n"
 msgstr ""
+" --double             Iniciar o xogo dúas veces (para probas da\n"
+"                      rede local)\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1305
 msgid " --help               Show this help\n"
@@ -1741,7 +1744,7 @@ msgstr "%u%% construído"
 
 #: ../../src/logic/game.cc:231
 msgid "Preloading a map"
-msgstr "Precargando mapa"
+msgstr "Preparando a carga do mapa"
 
 #: ../../src/logic/game.cc:243
 msgid "Loading a world"
@@ -1759,15 +1762,15 @@ msgstr "Cargando mapa"
 #: ../../src/logic/game.cc:293 ../../src/logic/game.cc:340
 #: ../../src/logic/game.cc:373
 msgid "Preloading map"
-msgstr ""
+msgstr "Preparando a carga do mapa"
 
 #: ../../src/logic/game.cc:307
 msgid "Configuring players"
-msgstr ""
+msgstr "Configurando os xogadores"
 
 #: ../../src/logic/game.cc:324
 msgid "Loading map"
-msgstr ""
+msgstr "Cargando o mapa"
 
 #: ../../src/logic/game.cc:451
 msgid "Creating player infrastructure"
@@ -1775,7 +1778,7 @@ msgstr "Creando infraestructura do xogador"
 
 #: ../../src/logic/game.cc:462 ../../src/logic/player.cc:121
 msgid "Missing starting position"
-msgstr ""
+msgstr "Falta unha posición de inicio"
 
 #: ../../src/logic/game.cc:464 ../../src/logic/player.cc:123
 #, c-format
@@ -1785,108 +1788,114 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
+"Widelands non puido iniciar a partida porque o xogador %u non tiña unha "
+"posición inicial.\n"
+"Podes engadir unha posición inicial manualmente co editor do Widelands para "
+"solucionar o problema."
 
 #: ../../src/logic/immovable.cc:140 ../../src/logic/production_program.cc:1378
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr ""
+msgstr "non se recoñece o tipo de orde «%s»"
 
 #: ../../src/logic/immovable.cc:144
 msgid "no actions"
-msgstr ""
+msgstr "sen accións"
 
 #: ../../src/logic/immovable.cc:220
 msgid "this program has already been declared"
-msgstr ""
+msgstr "xa se declarou este programa"
 
 #: ../../src/logic/immovable.cc:226
 #, c-format
 msgid "program %s: %s"
-msgstr ""
+msgstr "programa %s: %s"
 
 #: ../../src/logic/immovable.cc:257 ../../src/logic/immovable.cc:271
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr ""
+msgstr "esperábase un valor entre 0 e 255 pero atopouse %u"
 
 #: ../../src/logic/immovable.cc:276
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
-msgstr ""
+msgstr "[afinidade do terreo] «%s» (non está no universo actual): %s"
 
 #: ../../src/logic/immovable.cc:306
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr ""
+msgstr "o inmóbil %s non ten un programa chamado «%s»"
 
 #: ../../src/logic/immovable.cc:614
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
-msgstr ""
+msgstr "a tribo %s non define o tipo de inmóbil «%s»"
 
 #: ../../src/logic/immovable.cc:617
 #, c-format
 msgid "unknown tribe %s"
-msgstr ""
+msgstr "non se recoñece a tribo %s"
 
 #: ../../src/logic/immovable.cc:623
 #, c-format
 msgid "world does not define immovable type \"%s\""
-msgstr ""
+msgstr "non se definiu o tipo de inmóbil «%s» para o universo"
 
 #: ../../src/logic/immovable.cc:633
 #, c-format
 msgid "immovable type %s"
-msgstr ""
+msgstr "tipo de inmóbil %s"
 
 #: ../../src/logic/immovable.cc:668 ../../src/logic/production_program.cc:598
 #: ../../src/logic/production_program.cc:642
 msgid "duration in ms"
-msgstr ""
+msgstr "duración en ms"
 
 #: ../../src/logic/immovable.cc:706 ../../src/logic/production_program.cc:1323
 msgid "priority"
-msgstr ""
+msgstr "prioridade"
 
 #: ../../src/logic/immovable.cc:740 ../../src/logic/immovable.cc:809
 #: ../../src/logic/immovable.cc:895
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr ""
+"o tipo de inmóbil non está na tribo pero o tipo do obxectivo ten ámbito "
+"(«%s»)"
 
 #: ../../src/logic/immovable.cc:746 ../../src/logic/immovable.cc:815
 #: ../../src/logic/immovable.cc:901
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
-msgstr ""
+msgstr "deuse o ámbito «%s» para o tipo de obxectivo (ten que ser «world»)"
 
 #: ../../src/logic/immovable.cc:761 ../../src/logic/immovable.cc:916
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
-msgstr ""
+msgstr "esperábase unha probabilidade entre 1 e 254, pero atopouse «%s»"
 
 #: ../../src/logic/immovable.cc:774
 msgid "illegal transformation to the same type"
-msgstr ""
+msgstr "transformación incorrecta ao mesmo tipo"
 
 #: ../../src/logic/immovable.cc:862
 msgid "probability in range [1, 254]"
-msgstr ""
+msgstr "probabilidade entre 1 e 254"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
 msgid "destroy map object: %s"
-msgstr ""
+msgstr "destruír o obxectivo do mapa: %s"
 
 #: ../../src/logic/instances.cc:124
 #, c-format
 msgid "object %u: %s"
-msgstr ""
+msgstr "obxecto %u: %s"
 
 #: ../../src/logic/instances.cc:133
 #, c-format
 msgid "act: %s"
-msgstr ""
+msgstr "acto: %s"
 
 #: ../../src/logic/map.cc:401
 msgid "Player 1"
@@ -1895,21 +1904,21 @@ msgstr "Xogador 1"
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:62
 #: ../../src/logic/soldier.cc:85
 msgid "\"min-max\""
-msgstr ""
+msgstr "«mín-máx»"
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr ""
+msgstr "enteiro positivo <= 100"
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr ""
+msgstr "esperábase un enteiro positivo >= %u <= 100 pero atopouse «%s»"
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr ""
+msgstr "esperábase un enteiro positivo >= %u <= %u pero atopouse «%u»"
 
 #: ../../src/logic/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
@@ -1919,169 +1928,172 @@ msgstr " conquistar"
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u soldado"
+msgstr[1] "%u soldados"
 
 #: ../../src/logic/militarysite.cc:122
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u(+%u) soldado"
+msgstr[1] "%u(+%u) soldados"
 
+# Aquí probablemente haberá que facer un apaño para darlle coherencia ás formas contraídas dos artigos.
 #: ../../src/logic/militarysite.cc:576
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
-msgstr ""
+msgstr "%sO inimigo derrotou aos teus soldados en %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:583
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Perdeuse o sitio!"
 
 #: ../../src/logic/militarysite.cc:656
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
-msgstr ""
+msgstr "%sOs teus soldados venceron ao inimigo en %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:663
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "O sitio deu resultado!"
 
 #: ../../src/logic/militarysite.cc:711
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "%sO teu %s descubriu un intruso.</p>"
 
 #: ../../src/logic/militarysite.cc:712
 #, c-format
 msgid "%sYour %s is under attack.</p>"
-msgstr ""
+msgstr "%sEstán atacando o teu %s.</p>"
 
 #: ../../src/logic/militarysite.cc:720
 msgid "You are under attack"
-msgstr ""
+msgstr "Estante atacando"
 
 #: ../../src/logic/playercommand.cc:134
 #, c-format
 msgid "player command: %s"
-msgstr ""
+msgstr "orde do xogador: %s"
 
 #: ../../src/logic/playercommand.cc:176
 #, c-format
 msgid "player immovable %u: %s"
-msgstr ""
+msgstr "xogador inmóbil %u: %s"
 
 #: ../../src/logic/playercommand.cc:182
 #, c-format
 msgid "bulldoze: %s"
-msgstr ""
+msgstr "demoler: %s"
 
 #: ../../src/logic/playercommand.cc:234
 #, c-format
 msgid "build: %s"
-msgstr ""
+msgstr "construír: %s"
 
 #: ../../src/logic/playercommand.cc:282
 #, c-format
 msgid "build flag: %s"
-msgstr ""
+msgstr "situar bandeira: %s"
 
 #: ../../src/logic/playercommand.cc:369
 #, c-format
 msgid "build road: %s"
-msgstr ""
+msgstr "construír camiño: %s"
 
 #: ../../src/logic/playercommand.cc:423
 #, c-format
 msgid "flag %u: %s"
-msgstr ""
+msgstr "bandeira %u: %s"
 
 #: ../../src/logic/playercommand.cc:429
 #, c-format
 msgid "flag action: %s"
-msgstr ""
+msgstr "acción de bandeira: %s"
 
 #: ../../src/logic/playercommand.cc:480 ../../src/logic/playercommand.cc:538
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
 #, c-format
 msgid "building %u: %s"
-msgstr ""
+msgstr "construción %u: %s"
 
 #: ../../src/logic/playercommand.cc:486
 #, c-format
 msgid "start/stop building: %s"
-msgstr ""
+msgstr "deter ou  retomar a construción: %s"
 
 #: ../../src/logic/playercommand.cc:547
 #, c-format
 msgid "enhance building: %s"
-msgstr ""
+msgstr "mellorar a construción: %s"
 
 #: ../../src/logic/playercommand.cc:619 ../../src/logic/playercommand.cc:1045
 #: ../../src/logic/playercommand.cc:1123
 #, c-format
 msgid "site %u: %s"
-msgstr ""
+msgstr "sitio %u: %s"
 
 #: ../../src/logic/playercommand.cc:629
 #, c-format
 msgid "set ware priority: %s"
-msgstr ""
+msgstr "establecer a prioridade dos útiles: %s"
 
 #: ../../src/logic/playercommand.cc:678
 #, c-format
 msgid "change target quantity: %s"
-msgstr ""
+msgstr "modificar a cantidade do obxectivo: %s"
 
 #: ../../src/logic/playercommand.cc:741
 #, c-format
 msgid "set ware target quantity: %s"
-msgstr ""
+msgstr "establecer a prioridade dos útiles obxectivo: %s"
 
 #: ../../src/logic/playercommand.cc:863
 #, c-format
 msgid "set worker target quantity: %s"
-msgstr ""
+msgstr "establecer a cantidade do traballador obxectivo: %s"
 
 #: ../../src/logic/playercommand.cc:988
 #, c-format
 msgid "change training options: %s"
-msgstr ""
+msgstr "modificar as opcións de adestramento: %s"
 
 #: ../../src/logic/playercommand.cc:1052
 #, c-format
 msgid "soldier %u: %s"
-msgstr ""
+msgstr "soldado %u: %s"
 
 #: ../../src/logic/playercommand.cc:1058
 #, c-format
 msgid "drop soldier: %s"
-msgstr ""
+msgstr "soltar o soldado: %s"
 
 #: ../../src/logic/playercommand.cc:1130
 #, c-format
 msgid "change soldier capacity: %s"
-msgstr ""
+msgstr "cambiar a capacidade do soldado: %s"
 
 #: ../../src/logic/playercommand.cc:1295
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
 msgstr ""
+"retirada: valor fóra de rango. Recibiuse %u cando se esperaba algo entre %u "
+"e %u"
 
 #: ../../src/logic/playercommand.cc:1306
 #, c-format
 msgid "change military config: %s"
-msgstr ""
+msgstr "modificar a configuración militar: %s"
 
 #: ../../src/logic/playercommand.cc:1345
 #, c-format
 msgid "(player %u): message id is null"
-msgstr ""
+msgstr "(xogador %u): a mensaxe non ten identificador"
 
 #: ../../src/logic/playercommand.cc:1350
 #, c-format
 msgid "player message: %s"
-msgstr ""
+msgstr "mensaxe do xogador: %s"
 
 #: ../../src/logic/production_program.cc:69
 #, c-format
@@ -2089,6 +2101,8 @@ msgid ""
 "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
 "section)"
 msgstr ""
+"%s non está declarado coma unha entrada (non se atopou «%s=<conta>» na "
+"sección [inputs])"
 
 #: ../../src/logic/production_program.cc:82
 #, c-format
@@ -2096,12 +2110,14 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
+"orde incorrecta dos tipos de útiles no grupo: o tipo de útil %s aparece tras "
+"o%s (ordénaos ben!)"
 
 #: ../../src/logic/production_program.cc:96
 #: ../../src/logic/production_program.cc:819
 #: ../../src/logic/production_program.cc:904
 msgid "count"
-msgstr ""
+msgstr "conta"
 
 #: ../../src/logic/production_program.cc:101
 #, c-format
@@ -2109,68 +2125,71 @@ msgid ""
 "group count is %u but (total) input storage capacity of the specified ware "
 "type(s) is only %u, so the group can never be fulfilled by the site"
 msgstr ""
+"a conta do grupo é %u pero a capacidade (total) de almacenamento de entrada "
+"do tipo ou tipos de útil indicados é de só %u, polo que o sitio nunca pode "
+"completar o grupo"
 
 #: ../../src/logic/production_program.cc:131
 msgid "not "
-msgstr ""
+msgstr "non "
 
 #: ../../src/logic/production_program.cc:153
 #: ../../src/logic/production_program.cc:174
 msgid "economy needs "
-msgstr ""
+msgstr "necesidades económicas "
 
 #: ../../src/logic/production_program.cc:203
 msgid "site has "
-msgstr ""
+msgstr "o sitio ten "
 
 #: ../../src/logic/production_program.cc:229
 msgid "workers need experience"
-msgstr ""
+msgstr "os traballadores necesitan experiencia"
 
 #: ../../src/logic/production_program.cc:254
 msgid "ware type or worker type"
-msgstr ""
+msgstr "tipo de útiles ou tipo de traballador"
 
 #: ../../src/logic/production_program.cc:317
 #, c-format
 msgid "invalid condition: %s"
-msgstr ""
+msgstr "condición incorrecta: %s"
 
 #: ../../src/logic/production_program.cc:332
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
-msgstr ""
+msgstr "esperábase «failed», «completed» ou «skipped», pero atopouse «%s»"
 
 #: ../../src/logic/production_program.cc:345
 msgid "expected \"and\" or end of input"
-msgstr ""
+msgstr "esperábase un «and» ou o final da entrada"
 
 #: ../../src/logic/production_program.cc:354
 msgid "expected condition at end of input"
-msgstr ""
+msgstr "esperábase unha condición ao final da entrada"
 
 #: ../../src/logic/production_program.cc:360
 msgid "expected \"or\" or end of input"
-msgstr ""
+msgstr "esperábase un «or» ou o final da entrada"
 
 #: ../../src/logic/production_program.cc:396
 #: ../../src/logic/production_program.cc:770
 msgid " and "
-msgstr ""
+msgstr " e "
 
 #: ../../src/logic/production_program.cc:397
 #: ../../src/logic/production_program.cc:749
 msgid " because: "
-msgstr ""
+msgstr " porque: "
 
 #: ../../src/logic/production_program.cc:408
 #: ../../src/wui/encyclopedia_window.cc:192
 msgid " or "
-msgstr ""
+msgstr " ou "
 
 #: ../../src/logic/production_program.cc:409
 msgid " because not: "
-msgstr ""
+msgstr " porque non: "
 
 #: ../../src/logic/production_program.cc:449
 #, c-format
@@ -2178,52 +2197,54 @@ msgid ""
 "the program \"%s\" has not (yet) been declared in %s (wrong declaration "
 "order?)"
 msgstr ""
+"o programa «%s» (aínda) non se declarou en %s (quizais estea mal a orde da "
+"declaración?)"
 
 #: ../../src/logic/production_program.cc:471
 #: ../../src/logic/production_program.cc:476
 #: ../../src/logic/production_program.cc:481
 #, c-format
 msgid "%s handling method already defined"
-msgstr ""
+msgstr "xa se definiu o método de manexo %s"
 
 #: ../../src/logic/production_program.cc:471
 msgid "failure"
-msgstr ""
+msgstr "fallo"
 
 #: ../../src/logic/production_program.cc:476
 msgid "completion"
-msgstr ""
+msgstr "completado"
 
 #: ../../src/logic/production_program.cc:481
 msgid "skip"
-msgstr ""
+msgstr "saltar"
 
 #: ../../src/logic/production_program.cc:486
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"fallo\"|\"completado\"|\"saltouse\"}"
 
 #: ../../src/logic/production_program.cc:500
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{\"fallo\"|\"completar\"|\"saltar\"|\"repetir\"}"
 
 #: ../../src/logic/production_program.cc:602
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "durmir: %s"
 
 #: ../../src/logic/production_program.cc:624
 msgid "idle animation is default; calling is not allowed"
-msgstr ""
+msgstr "o valor por defecto é a animación zombi; non se permite a chamada"
 
 #: ../../src/logic/production_program.cc:674
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr ""
+msgstr "esperábase tipo_de_util1[tipo_de_util2[, etc.]][:N] ..."
 
 #: ../../src/logic/production_program.cc:773
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " non se atopou"
+msgstr[1] " non se atoparon"
 
 #: ../../src/logic/production_program.cc:833
 #: ../../src/logic/production_program.cc:918
@@ -2232,71 +2253,73 @@ msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
+"%s non está declarado como unha saída (non se atopou «output=%s» na sección "
+"[global])"
 
 #: ../../src/logic/production_program.cc:851
 msgid "Produced "
-msgstr ""
+msgstr "Produciu "
 
 #: ../../src/logic/production_program.cc:860
 #: ../../src/logic/production_program.cc:943
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:867
 #: ../../src/logic/production_program.cc:950
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:935
 msgid "Recruited "
-msgstr ""
+msgstr "Recrutou "
 
 #: ../../src/logic/production_program.cc:974
 msgid "distance"
-msgstr ""
+msgstr "distancia"
 
 #: ../../src/logic/production_program.cc:985
 #: ../../src/logic/production_program.cc:996
 msgid "percentage"
-msgstr ""
+msgstr "porcentaxe"
 
 #: ../../src/logic/production_program.cc:1130
 msgid "Mine empty"
-msgstr ""
+msgstr "Mina baleira"
 
 #: ../../src/logic/production_program.cc:1134
 msgid ""
 "This mines has run empty. You should consider to expand or destruct it."
-msgstr ""
+msgstr "Baleirouse esta mina. Deberías pensar en ampliala ou destruíla."
 
 #: ../../src/logic/production_program.cc:1149
 #: ../../src/logic/production_program.cc:1218
 msgid "soldier type"
-msgstr ""
+msgstr "tipo de soldado"
 
 #: ../../src/logic/production_program.cc:1162
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|evade\"} but found \"%s\""
-msgstr ""
+msgstr "esperábase {«vida»|«ataque»|«defensa»|«esquivar»} pero atopouse «%s»"
 
 #: ../../src/logic/production_program.cc:1171
 #: ../../src/logic/production_program.cc:1239
 msgid "level"
-msgstr ""
+msgstr "nivel"
 
 #: ../../src/logic/production_program.cc:1249
 #, c-format
 msgid "expected level > %u but found \"%s\""
-msgstr ""
+msgstr "esperábase un nivel superior a %u pero atopouse «%s»"
 
 #: ../../src/logic/productionsite.cc:70
 msgid "this ware type has already been declared as an output"
-msgstr ""
+msgstr "este tipo de útil xa se declarou coma unha saída"
 
 #: ../../src/logic/productionsite.cc:76
 msgid "this worker type has already been declared as an output"
-msgstr ""
+msgstr "este tipo de traballador xa se declarou coma unha saída"
 
 #: ../../src/logic/productionsite.cc:218
 msgid "(not occupied)"
@@ -2306,8 +2329,8 @@ msgstr "(desocupado)"
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Falta un traballador"
+msgstr[1] "Faltan traballadores"
 
 #: ../../src/logic/productionsite.cc:231
 msgid "(stopped)"
@@ -2319,24 +2342,26 @@ msgid ""
 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
+"esperábase atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) ou "
+"atrTotal (%u) pero atopouse un valor de atributo descoñecido (%u)"
 
 #: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:93
 msgid "positive integer"
-msgstr ""
+msgstr "enteiro positivo"
 
 #: ../../src/logic/soldier.cc:74 ../../src/logic/soldier.cc:97
 #, c-format
 msgid "expected positive integer >= %u but found \"%s\""
-msgstr ""
+msgstr "esperábase un enteiro >= %u pero atopouse «%s»"
 
 #: ../../src/logic/soldier.cc:201
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"nome_da_animacion[,outra_animacion, etc.]\""
 
 #: ../../src/logic/soldier.cc:1182
 #, c-format
 msgid "bad direction '%d'"
-msgstr ""
+msgstr "dirección «%d» incorrecta"
 
 #: ../../src/logic/soldier.cc:1343
 #, c-format
