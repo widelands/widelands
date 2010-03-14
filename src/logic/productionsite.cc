@@ -323,11 +323,9 @@ void ProductionSite::calc_statistics()
 /**
  * Initialize the production site.
  */
-void ProductionSite::init(Editor_Game_Base & egbase, bool loading)
+void ProductionSite::init(Editor_Game_Base & egbase)
 {
-	Building::init(egbase, loading);
-	if(loading)
-		return;
+	Building::init(egbase);
 
 	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 

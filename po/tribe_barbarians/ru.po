@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:20+0000\n"
-"Last-Translator: Alexander Bikmeyev <Unknown>\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-12 22:49+0000\n"
+"Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-03-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -24,22 +24,25 @@ msgid ""
 "are equipped with this basic weapon, but also the lumberjack is using the "
 "same model."
 msgstr ""
+"Топор является основным оружием и инструментом для варваров. Все молодые "
+"солдаты получают это оружие. Топорами пользуются и дровосеки. Выпускается "
+"фабрикой топоров и мастерской."
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/metalworks/conf:33
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr ""
+msgstr "Готов обычный топор"
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce sharpaxe"
-msgstr ""
+msgstr "Производит острый топор"
 
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce broadaxe"
-msgstr ""
+msgstr "Производит секиру"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/bakery/conf:21
@@ -78,40 +81,46 @@ msgstr ""
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
-msgstr ""
+msgstr "Работа"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Печет хлеб для рабочих."
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "in the metal works like all tools."
 msgstr ""
+"Деревянная лопата является инструментом пекаря, каждому пекарю нужна своя "
+"собственная. Выпускается в мастерской, как и все инструменты."
 
 #: ../../tribes/barbarians/battlearena/conf:25
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
-msgstr ""
+msgstr "Сон"
 
 #: ../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Улучшить уклончивость солдат 0"
 
 #: ../../tribes/barbarians/battlearena/conf:27
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Улучшить уклончивость солдат 0 (только для поддержки старых сохранений игры "
+"(build13))"
 
 #: ../../tribes/barbarians/battlearena/conf:28
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Улучшить уклончивость солдат 1"
 
 #: ../../tribes/barbarians/battlearena/conf:29
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Улучшить уклончивость солдат 1 (только для поддержки старых сохранений игры "
+"(build13))"
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -119,6 +128,9 @@ msgid ""
 "produce. Only trained warriors are able to yield such a weapon. It is "
 "produce in the axe factory."
 msgstr ""
+"Это второе самое опасное оружие, которое варвары в состоянии производить. "
+"Только обученные воины могут использовать такое оружие. Выпускается  "
+"фабрикой топоров."
 
 #: ../../tribes/barbarians/beer/conf:1
 msgid ""
@@ -132,28 +144,28 @@ msgstr ""
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr ""
+msgstr "Приготовить рацион"
 
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr ""
+msgstr "Приготовить закуску"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr ""
+msgstr "Приготовить паёк"
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Выпускает оружие для солдат и инструменты для работников"
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
 "Fire-hardened wood, hard as iron and can not burn, used for military "
 "buildings."
 msgstr ""
-"Обожжённое в огне дерево, твёрдое как железо и не сгораемое, используется "
+"Обожжённое в огне дерево, твёрдое и огнеупорное, как железо, используется "
 "для военных строений."
 
 #: ../../tribes/barbarians/brewer/conf:1
@@ -161,12 +173,15 @@ msgstr ""
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
+"Варит отличное пиво для поддержания силы и духа солдат во время боевой учебы."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
 "Warriors with a fundamental fighting knowledge gain a broad axe. It is "
 "produced in the axe factory."
 msgstr ""
+"Хорошо тренированные бойцы получают в качестве оружия секиру, выпускаемую "
+"фабрикой топоров."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -174,28 +189,31 @@ msgid ""
 "damage, but it's durability is not the best. Only skilled warriors can use "
 "this. Produced in the axe factory."
 msgstr ""
+"Бронзовый топор считается оружием, которое трудно содержать - он наносит "
+"сильные повреждения, но его прочность оставляет желать лучшего. Только "
+"квалифицированные воины могут использовать его. Выпускается фабрикой топоров."
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Работает на строительных площадках."
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Пережигает дерево в древесный уголь"
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Переносит грузы по вашим дорогам."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr ""
+msgstr "Разводит сильных быков, которые помогают в перевозке товаров."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Работает в шахтах, добывая уголь, железо или золото."
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
@@ -223,103 +241,103 @@ msgstr "Могучие племена из восточных земель"
 
 #: ../../tribes/barbarians/conf:39
 msgid "Ashes"
-msgstr ""
+msgstr "Пепелище"
 
 #: ../../tribes/barbarians/conf:40
 msgid "Destroyed building"
-msgstr ""
+msgstr "Разрушеное здание"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Field medium"
-msgstr ""
+msgstr "Среднее поле"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Field small"
-msgstr ""
+msgstr "Малое поле"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field tiny"
-msgstr ""
+msgstr "Крошечное поле"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field ripe"
-msgstr ""
+msgstr "Спелое поле"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Field harvested"
-msgstr ""
+msgstr "Сжатое поле"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Flax medium"
-msgstr ""
+msgstr "Средний лён"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Flax small"
-msgstr ""
+msgstr "Малый лён"
 
 #: ../../tribes/barbarians/conf:48
 msgid "Flax tiny"
-msgstr ""
+msgstr "Крошечный лён"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Flax ripe"
-msgstr ""
+msgstr "Созревший лён"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Reed medium"
-msgstr ""
+msgstr "Средний тростник"
 
 #: ../../tribes/barbarians/conf:51
 msgid "Reed small"
-msgstr ""
+msgstr "Малый тростник"
 
 #: ../../tribes/barbarians/conf:52
 msgid "Reed tiny"
-msgstr ""
+msgstr "Маленький тростник"
 
 #: ../../tribes/barbarians/conf:53
 msgid "Reed ripe"
-msgstr ""
+msgstr "Созревший тростник"
 
 #: ../../tribes/barbarians/conf:54
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Залежи ресурсов: мало угля"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Залежи ресурсов: много угля"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Залежи ресурсов: мало золота"
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Залежи ресурсов: много золота"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Resource indicator granit little"
-msgstr ""
+msgstr "Залежи ресурсов: мало гранита"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator granit much"
-msgstr ""
+msgstr "Залежи ресурсов: много гранита"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Залежи ресурсов: мало железа"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Залежи ресурсов: много железа"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Залежи ресурсов: ничего нет"
 
 #: ../../tribes/barbarians/conf:63
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Залежи ресурсов: вода"
 
 #: ../../tribes/barbarians/conf:66
 msgid "Deer"
@@ -335,11 +353,11 @@ msgstr "Топор"
 
 #: ../../tribes/barbarians/conf:71
 msgid "Peel"
-msgstr ""
+msgstr "Лопата хлебопёка"
 
 #: ../../tribes/barbarians/conf:72
 msgid "Battle Axe"
-msgstr "Военный топор"
+msgstr "Боевой топор"
 
 #: ../../tribes/barbarians/conf:73
 msgid "Beer"
@@ -367,7 +385,7 @@ msgstr "Уголь"
 
 #: ../../tribes/barbarians/conf:79
 msgid "Fire Tongs"
-msgstr "Щипцы кузнеца"
+msgstr "Клещи кузнеца"
 
 #: ../../tribes/barbarians/conf:80
 msgid "Fish"
@@ -387,11 +405,11 @@ msgstr "Золото"
 
 #: ../../tribes/barbarians/conf:84
 msgid "Goldstone"
-msgstr "Слиток золота"
+msgstr "Золотой самородок"
 
 #: ../../tribes/barbarians/conf:85
 msgid "Grout"
-msgstr ""
+msgstr "Бетон"
 
 #: ../../tribes/barbarians/conf:86
 msgid "Hammer"
@@ -399,7 +417,7 @@ msgstr "Молот"
 
 #: ../../tribes/barbarians/conf:87
 msgid "Helmet"
-msgstr ""
+msgstr "Шлем"
 
 #: ../../tribes/barbarians/conf:88
 msgid "Hunting Spear"
@@ -411,7 +429,7 @@ msgstr "Железо"
 
 #: ../../tribes/barbarians/conf:90
 msgid "Iron Ore"
-msgstr ""
+msgstr "Железная руда"
 
 #: ../../tribes/barbarians/conf:91
 msgid "Kitchen Tools"
@@ -419,7 +437,7 @@ msgstr "Кухонная утварь"
 
 #: ../../tribes/barbarians/conf:92
 msgid "Mask"
-msgstr "Маска"
+msgstr "Защитная маска"
 
 #: ../../tribes/barbarians/conf:93
 msgid "Meal"
@@ -435,7 +453,7 @@ msgstr "Кирка"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Pitta Bread"
-msgstr ""
+msgstr "Лепёшка"
 
 #: ../../tribes/barbarians/conf:97
 msgid "Ration"
@@ -479,7 +497,7 @@ msgstr "Военный шлем"
 
 #: ../../tribes/barbarians/conf:107
 msgid "Warriors Axe"
-msgstr "Военный Топор"
+msgstr "Топор воина"
 
 #: ../../tribes/barbarians/conf:108
 msgid "Water"
@@ -495,7 +513,7 @@ msgstr "Носильщик"
 
 #: ../../tribes/barbarians/conf:113
 msgid "Ox"
-msgstr ""
+msgstr "Бык"
 
 #: ../../tribes/barbarians/conf:116
 msgid "Soldier"
@@ -507,7 +525,7 @@ msgstr "Пекарь"
 
 #: ../../tribes/barbarians/conf:120
 msgid "Master Blacksmith"
-msgstr "Главный кузнец"
+msgstr "Опытный кузнец"
 
 #: ../../tribes/barbarians/conf:121
 msgid "Blacksmith"
@@ -515,7 +533,7 @@ msgstr "Кузнец"
 
 #: ../../tribes/barbarians/conf:122
 msgid "Master Brewer"
-msgstr "Главный пивовар"
+msgstr "Опытный пивовар"
 
 #: ../../tribes/barbarians/conf:123
 msgid "Brewer"
@@ -527,15 +545,15 @@ msgstr "Строитель"
 
 #: ../../tribes/barbarians/conf:125
 msgid "Burner"
-msgstr "Угольщик"
+msgstr "Углежог"
 
 #: ../../tribes/barbarians/conf:126
 msgid "Master Miner"
-msgstr "Главный шахтёр"
+msgstr "Опытный шахтер"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Chief Miner"
-msgstr "Начальник шахты"
+msgstr "Старший шахтер"
 
 #: ../../tribes/barbarians/conf:128
 msgid "Farmer"
@@ -571,7 +589,7 @@ msgstr "Трактирщик"
 
 #: ../../tribes/barbarians/conf:136
 msgid "Lime-Burner"
-msgstr ""
+msgstr "Бетонщик"
 
 #: ../../tribes/barbarians/conf:137
 msgid "Lumberjack"
@@ -583,7 +601,7 @@ msgstr "Шахтёр"
 
 #: ../../tribes/barbarians/conf:139
 msgid "Ranger"
-msgstr ""
+msgstr "Лесник"
 
 #: ../../tribes/barbarians/conf:140
 msgid "Smelter"
@@ -591,11 +609,11 @@ msgstr "Плавильщик"
 
 #: ../../tribes/barbarians/conf:141
 msgid "Stonemason"
-msgstr "Каменщик"
+msgstr "Каменотес"
 
 #: ../../tribes/barbarians/conf:142
 msgid "Trainer"
-msgstr "Пастух"
+msgstr "Тренер"
 
 #: ../../tribes/barbarians/conf:143
 msgid "Weaver"
@@ -603,11 +621,11 @@ msgstr "Ткач"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Scout"
-msgstr ""
+msgstr "Разведчик"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Скотовод"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Construction Site"
@@ -619,7 +637,7 @@ msgstr "Военная арена"
 
 #: ../../tribes/barbarians/conf:152
 msgid "Trainingscamp"
-msgstr "Казарма"
+msgstr "Тренировочный лагерь"
 
 #: ../../tribes/barbarians/conf:155
 #: ../../tribes/barbarians/conf:171
@@ -651,36 +669,36 @@ msgstr "Крепость"
 #: ../../tribes/barbarians/conf:163
 #: ../../tribes/barbarians/conf:172
 msgid "Castle"
-msgstr ""
+msgstr "Замок"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Guardhall"
-msgstr ""
+msgstr "Форт"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Guardhouse"
-msgstr ""
+msgstr "Караульная"
 
 #: ../../tribes/barbarians/conf:166
 msgid "High Tower"
-msgstr ""
+msgstr "Высокая башня"
 
 #: ../../tribes/barbarians/conf:167
 msgid "Small Tower"
-msgstr ""
+msgstr "Малая башня"
 
 #: ../../tribes/barbarians/conf:168
 #: ../../tribes/barbarians/conf:175
 msgid "Tower"
-msgstr ""
+msgstr "Башня"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Barracks"
-msgstr ""
+msgstr "Казарма"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Outpost"
-msgstr ""
+msgstr "Форпост"
 
 #: ../../tribes/barbarians/conf:178
 #: ../../tribes/barbarians/conf:179
@@ -713,7 +731,7 @@ msgstr "Пивоварня"
 
 #: ../../tribes/barbarians/conf:188
 msgid "Charcoal Burner's House"
-msgstr ""
+msgstr "Домик углежога"
 
 #: ../../tribes/barbarians/conf:189
 msgid "Deeper Coal Mine"
@@ -729,19 +747,19 @@ msgstr "Угольная шахта"
 
 #: ../../tribes/barbarians/conf:192
 msgid "Deeper Gold Mine"
-msgstr "Глубинная Золотоносная шахта"
+msgstr "Глубинный золотой прииск"
 
 #: ../../tribes/barbarians/conf:193
 msgid "Deeper Iron Ore Mine"
-msgstr "Глубинная Железоносная шахта"
+msgstr "Глубинная Железорудная шахта"
 
 #: ../../tribes/barbarians/conf:194
 msgid "Deep Gold Mine"
-msgstr "Глубокая Золотоносная шахта"
+msgstr "Глубокий золотой прииск"
 
 #: ../../tribes/barbarians/conf:195
 msgid "Deep Iron Ore Mine"
-msgstr "Глубокая Железоносная шахта"
+msgstr "Глубокая Железорудная шахта"
 
 #: ../../tribes/barbarians/conf:196
 msgid "Farm"
@@ -753,15 +771,15 @@ msgstr "Оранжерея"
 
 #: ../../tribes/barbarians/conf:198
 msgid "Fisher's Hut"
-msgstr ""
+msgstr "Рыбацкая хижина"
 
 #: ../../tribes/barbarians/conf:199
 msgid "Gamekeeper's Hut"
-msgstr ""
+msgstr "Домик егеря"
 
 #: ../../tribes/barbarians/conf:200
 msgid "Gold Mine"
-msgstr "Золотоносная шахта"
+msgstr "Золотой прииск"
 
 #: ../../tribes/barbarians/conf:201
 msgid "Granite Mine"
@@ -769,15 +787,15 @@ msgstr "Гранитная шахта"
 
 #: ../../tribes/barbarians/conf:202
 msgid "Wood Hardener"
-msgstr ""
+msgstr "Плотник"
 
 #: ../../tribes/barbarians/conf:203
 msgid "Helmsmithy"
-msgstr ""
+msgstr "Кузница"
 
 #: ../../tribes/barbarians/conf:204
 msgid "Hunter's Hut"
-msgstr ""
+msgstr "Заимка"
 
 #: ../../tribes/barbarians/conf:205
 msgid "Inn"
@@ -785,23 +803,23 @@ msgstr "Постоялый двор"
 
 #: ../../tribes/barbarians/conf:206
 msgid "Lime Kiln"
-msgstr ""
+msgstr "Растворный узел"
 
 #: ../../tribes/barbarians/conf:207
 msgid "Lumberjack's Hut"
-msgstr ""
+msgstr "Хижина лесоруба"
 
 #: ../../tribes/barbarians/conf:208
 msgid "Metalwork Shop"
-msgstr ""
+msgstr "Мастерская"
 
 #: ../../tribes/barbarians/conf:209
 msgid "Micro Brewery"
-msgstr ""
+msgstr "Малая пивоварня"
 
 #: ../../tribes/barbarians/conf:210
 msgid "Iron Ore Mine"
-msgstr "Железоносная шахта"
+msgstr "Железорудная шахта"
 
 #: ../../tribes/barbarians/conf:211
 msgid "Quarry"
@@ -809,7 +827,7 @@ msgstr "Каменоломня"
 
 #: ../../tribes/barbarians/conf:212
 msgid "Ranger's Hut"
-msgstr ""
+msgstr "Домик лесника"
 
 #: ../../tribes/barbarians/conf:213
 msgid "Smelting Works"
@@ -829,66 +847,68 @@ msgstr "Колодец"
 
 #: ../../tribes/barbarians/conf:217
 msgid "Scout's Hut"
-msgstr ""
+msgstr "Домик разведчика"
 
 #: ../../tribes/barbarians/conf:218
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Животноводческая ферма"
 
 #: ../../tribes/barbarians/conf:221
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Средний штаб"
 
 #: ../../tribes/barbarians/conf:222
 msgid "Citadel village"
-msgstr ""
+msgstr "Цитадель и посёлок"
 
 #: ../../tribes/barbarians/farm/conf:14
 msgid "Plant wheat"
-msgstr ""
+msgstr "Посадить пшеницу"
 
 #: ../../tribes/barbarians/farm/conf:16
 msgid "Harvest wheat"
-msgstr ""
+msgstr "Сжать пшеницу"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Засевает поля"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
-msgstr ""
+msgstr "Выращивает лён и тростник."
 
 #: ../../tribes/barbarians/fernery/conf:13
 msgid "Plant flax"
-msgstr ""
+msgstr "Посадить лён"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
-msgstr ""
+msgstr "Посадить тростник"
 
 #: ../../tribes/barbarians/fernery/conf:17
 msgid "Harvest flax"
-msgstr ""
+msgstr "Собрать лён"
 
 #: ../../tribes/barbarians/fernery/conf:19
 msgid "Harvest reed"
-msgstr ""
+msgstr "Собрать тростник"
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "Produced in the metal works."
 msgstr ""
+"Кузнечные клещи - инструмент плавильшика, работающего в плавильне. "
+"Выпускается в мастерской."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-msgstr ""
+msgstr "Кроме лепёшек и мяса, варвары охотно поедают и рыбу."
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr ""
+msgstr "Ловит рыбу"
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid "Fishing rods are needed by barbarian fishers, to catch fish."
@@ -904,10 +924,11 @@ msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
+"Егерь гарантирует, что природная популяция животных не снизится чрезмерно."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Ищет полезные ископаемые"
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
@@ -919,13 +940,14 @@ msgstr ""
 
 #: ../../tribes/barbarians/goldstone/conf:1
 msgid "This is the yellow goldstone."
-msgstr "Это слиток жёлтого золота."
+msgstr "Это желтый золотой самородок"
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be enhanced to grout which delivers solid, non burning build "
 "material."
 msgstr ""
+"Из камня можно сделать бетон - прочный и негорючий строительный материал."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -933,68 +955,76 @@ msgid ""
 "the blacksmiths and the helmsmiths. Make sure you always got some in "
 "reserve! Build at the metal works."
 msgstr ""
+"Молот является важнейшим инструментом. Необходим геологам, рабочим, "
+"кузнецам. Убедитесь, что всегда есть некоторый запас! Выпускается в "
+"мастерской."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid "Basic defence of a warrior."
-msgstr ""
+msgstr "Базовая защита воина"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr ""
+msgstr "Производит шлемы для солдат."
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr ""
+msgstr "Производит шлем"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr ""
+msgstr "Создать боевую маску"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
-msgstr ""
+msgstr "Выпускает боевые шлемы"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "Охотник добывает хорошее мясо для колонистов."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters. Produced in the metal works."
 msgstr ""
+"Это копье  достаточно легкое, чтобы его можно было метать, и достаточно "
+"тяжелое, чтобы убить любое животное одним ударом. Используется только "
+"охотниками. Выпускается в мастерской."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Готовит еду для шахтёров."
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr ""
+msgstr "Оружие и инструменты делаются из железа."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
-msgstr ""
+msgstr "Железная руда"
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 msgstr ""
+"Как прикажете готовить еду - пайки, обеды или сытные обеды - без кухонной "
+"утвари?"
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kilm."
-msgstr ""
+msgstr "Готовит бетон из составляющих"
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "Рубит деревья."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid "An enhanced version of the helmet."
-msgstr ""
+msgstr "Улучшенная версия шлема."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
-msgstr ""
+msgstr "Настоящая еда, удовлетворяющая всем потребностям шахтёров."
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -1002,61 +1032,66 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
+"Мясо содержит большое количество энергии. Оно используется на постоялых "
+"дворах и тавернах, чтобы приготовить обед для шахтеров и в солдатских "
+"тренировочных лагерях для восстановления энергии воинов."
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Создать кухонный инвентарь"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Создать кузнечные клещи"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
-msgstr ""
+msgstr "Создать удочку"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr ""
+msgstr "Создать молот"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr ""
+msgstr "Создать кухоную утварь"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr ""
+msgstr "Создать кирку"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr ""
+msgstr "Создать косу"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
-msgstr ""
+msgstr "Создать лопату"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr ""
+msgstr "Создать охотничьё копьё"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Помогает перовозить грузы на сильно загруженных дорогах."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metal works."
 msgstr ""
+"Кирка используется каменщиками в каменоломнях и шахтерами в забоях. "
+"Выпускается в мастерской."
 
 #: ../../tribes/barbarians/pittabread/conf:1
 msgid ""
 "The barbarian bakers are best in making this flat and tasty pitta bread."
-msgstr ""
+msgstr "Пекари варваров лучшие в готовке вкусных тонких лепёшек."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Сажает деревья."
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid "A small bite to keep miners strong and working."
@@ -1064,17 +1099,18 @@ msgstr "Небольшой набор для поддержки сил шахт�
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid "Raw Stones are the secondary build material of the barbarians."
-msgstr ""
+msgstr "Камни  - дополнительный строительный материал варваров."
 
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Разведчики, подобно Разведчику Скотти, разведывают неизведанную местность :-)"
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
 "The scythe is the tool of the farmers. It is produced in the metal works."
-msgstr ""
+msgstr "Коса является инструментом фермеров. Выпускается в мастерской."
 
 #: ../../tribes/barbarians/sharpaxe/conf:1
 msgid ""
@@ -1082,36 +1118,42 @@ msgid ""
 "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
 "than the ordinary axe. Build in the axe factory."
 msgstr ""
+"Настоящие воины считают острый топор первым настоящим оружием после обычного "
+"топора. Острый топор тяжелее и острее обычного. Выпускается на фабрике "
+"топоров."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
 "the ranger use it. Build at the metal works."
 msgstr ""
+"Лопата нужна для ухода за растениями, поэтому ее используют садовники в "
+"оранжереях и лесники. Выпускается в мастерской."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "Плавит железо."
 
 #: ../../tribes/barbarians/smelting_works/conf:24
 msgid "Smelt iron"
-msgstr ""
+msgstr "Плавить железо"
 
 #: ../../tribes/barbarians/smelting_works/conf:25
 msgid "Smelt gold"
-msgstr ""
+msgstr "Плавить золото"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
 msgstr ""
+"Немного больший рацион для опытных шахтеров: как потопаешь, так и полопаешь."
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Защищать и покорять!"
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granit out of laying stones."
-msgstr ""
+msgstr "Извлекает гранитные глыбы из каменных залежей."
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -1123,111 +1165,127 @@ msgstr ""
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid "Thatch reed is used to make the roofs of buildings waterproof."
-msgstr ""
+msgstr "Без тростника ваша крыша протечёт."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Тренирует солдат."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Улучшает навыки атаки 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:38
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Улучшить атаку солдат 0 (только для поддержки старых сохранений игры "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Улучшает навыки атаки 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:40
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Улучшить атаку солдат 1 (только для поддержки старых сохранений игры "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Улучшает навыки атаки 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:42
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Улучшить атаку солдат 2 (только для поддержки старых сохранений игры "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Улучшает навыки атаки 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Улучшить атаку солдат 3 (только для поддержки старых сохранений игры "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr ""
+msgstr "Улучшает навыки атаки 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Улучшить атаку солдат 4 (только для поддержки старых сохранений игры "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Улучшить жизнестойкость солдат 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Улучшить жизнестойкость солдат 0 (только для поддержки старых сохранений "
+"игры (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr ""
+msgstr "Улучшить жизнестойкость солдат 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Улучшить жизнестойкость солдат 1 (только для поддержки старых сохранений "
+"игры (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr ""
+msgstr "Улучшить жизнестойкость солдат 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Улучшить жизнестойкость солдат 2 (только для поддержки старых сохранений "
+"игры (build13))"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid "Trunks are the primary build material of the barbarians."
-msgstr ""
+msgstr "Брёвна - основной строительный материал варваров."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid "An enhanced mask for barbarian warriors."
-msgstr ""
+msgstr "Улучшенная боевая маска для наших воинов"
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr ""
+msgstr "Производит бронзовый топор"
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"
-msgstr ""
+msgstr "Производит боевой топор"
 
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce warriorsaxe"
-msgstr ""
+msgstr "Производит топор воина"
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -1235,22 +1293,29 @@ msgid ""
 "ever were able to handle those huge and powerful axes. Build at the axe "
 "factory."
 msgstr ""
+"Топор воина - самое опасное из орудий убийства. Очень немногие воины "
+"способны хотя бы поднять этот здоровенный тяжелый топор. Выпускается "
+"фабрикой топоров."
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer or to produce grout."
 msgstr ""
+"Вода - это жизнь. Она используется для разных нужд, например, хлебопёками, "
+"пивоварами, бетонщиками..."
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Выпускает сукно для судовых парусов и солдатской униформы."
 
 #: ../../tribes/barbarians/wheat/conf:1
 msgid ""
 "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
 "be made of this wheat."
 msgstr ""
+"Пшеница необходима для выживания. Без нее нельзя испечь вкусные лепешки или "
+"сварить чудесное пиво."
 
 #~ msgid "Forester"
 #~ msgstr "Лесник"

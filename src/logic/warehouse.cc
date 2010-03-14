@@ -414,9 +414,9 @@ void Warehouse::set_needed(Ware_Index const ware_index, uint32_t const value)
 }
 
 
-void Warehouse::init(Editor_Game_Base & egbase, bool loading)
+void Warehouse::init(Editor_Game_Base & egbase)
 {
-	Building::init(egbase, loading);
+	Building::init(egbase);
 
 	Ware_Index const nr_wares   = tribe().get_nrwares  ();
 	Ware_Index const nr_workers = tribe().get_nrworkers();
@@ -430,11 +430,6 @@ void Warehouse::init(Editor_Game_Base & egbase, bool loading)
 	player.see_area
 		(Area<FCoords>
 		 (egbase.map().get_fcoords(get_position()), vision_range()));
-
-	// All code below here is only needed if created during game
-	// so return here if we are loading a game
-	if(loading)
-		return;
 
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares;   ++i) {
 		Request & req =

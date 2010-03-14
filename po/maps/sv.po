@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:21+0000\n"
-"Last-Translator: Dan O'Huiginn <daniel@ohuiginn.net>\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-13 11:32+0000\n"
+"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-03-14 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:24
@@ -50,6 +50,16 @@ msgid ""
 "army was attacked by 100 barbarian footmen and was totally scattered. Only "
 "with pure life he and a handful of soldiers survived."
 msgstr ""
+"För sex månader sedan skickades Lutius - en ung general vid Imperiet - med "
+"150 man till gränslandet längs de norra skogarna, där  barbarstammarna möter "
+"Imperiets officiella land. Hans uppgift var att försvara Imperiets land. "
+"Till en början var allt lugnt, han pratade till och med med några av "
+"barbarernas barn och tänkte på ett fredligt liv, sida vid sida med detta "
+"arkaiska folk. Han började känna sig tryggare ach hans armé började släppa "
+"uppmärksamheten från den möjliga fienden. Detta var deras misstag. En natt i "
+"mars attackerades hans oförberedda armé av 100 barbar-fotsoldater och blev "
+"fullkomligt skingrade. Endast påren vilja överlevde han och en handful "
+"soldater."
 
 #: ../../campaigns/cconfig:36
 msgid "Atlanteans - the new rise"
@@ -81,15 +91,15 @@ msgstr "Imperiet Lektion2 - En utpost för exil"
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
-msgstr ""
+msgstr "Från nemesis till genesis"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
-msgstr ""
+msgstr "Atoll"
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Vem blir atollens verkliga konung?"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -117,6 +127,11 @@ msgid ""
 "Gods? You believe it is and you hope, that your tribe will find the treasure "
 "of this island, before other tribes will follow."
 msgstr ""
+"Några mil från Gerionkusten ligger en liten namnlös ö. Fram tills nu har du "
+"inte sett någon anledning att styra dina skepp dit. Men igår kom ett stort "
+"eldklot från himlen och tog mark på öns mitt. Är det ett tecken från "
+"Gudarna?. Du tror det och du hoppas att din stam ska hitta öns skatt innan "
+"andra stammar följer efter."
 
 #: ../../maps/Crater.wmf/elemental:9
 msgid "Crater"
@@ -166,7 +181,7 @@ msgstr "En flerspelar"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
-msgstr ""
+msgstr "Finska sjöar"
 
 #: ../../maps/Finlakes.wmf/elemental:11
 msgid ""
@@ -230,6 +245,10 @@ msgid ""
 "a few month ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only place enough for one tribe."
 msgstr ""
+"För länge sedan bodde din stam vid denna vackra ensliga glaciärsjö. Ingen "
+"störde dig och det naturen gav var tillräckligt för hela din stam. Men för "
+"några månader sedan kom en annan stam över bergen och slog sig ner. Du är "
+"säker på att det bara finns plats för en stam."
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
@@ -296,16 +315,28 @@ msgid ""
 "hard and small place to live. Don't forget to take care about your timber "
 "supplies, you'll need them."
 msgstr ""
+"Dom nyckfulla Gudarna besvarade inte våra böner. Istället hettade en "
+"tusenfalt hetare Sol upp joden och smälte glaciärer och folk sjönk ner i "
+"havsdjupet. Men nu - högt uppe i dom majestätiska bergen, på den sista biten "
+"land - finner två överlevande stammar sin tillflykt.  Trots att Gudarna "
+"visade nåd, och klimatet har vänt och åter blivit svalare, fortsätter "
+"vattnet att stiga och stiga. Upp mot det sista säkra stället - den högsta "
+"bergskedjan, där mängden guld och utrymmet blott räcker till en enda stam - "
+"leder endast två stigar. Men kom ihåg, var försiktig... detta sista levande "
+"utrymme är också ett hårt ställe att leva på. Glöm inte att ta hand om dina "
+"timmerförråd - du kommer att behöva dom."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
-msgstr ""
+msgstr "Mystiska Labyrinten"
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
 "There are two big questions around: Who created this unbelievable big maze "
 "and what can be found inside?"
 msgstr ""
+"Det finns två stora frågor: Vem byggde denna ofantligt stora labyrint, och "
+"vad kan man finna i den?"
 
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
@@ -318,10 +349,13 @@ msgid ""
 "hard to get, but easy to lose, so if you want it, be aware of the other "
 "clans."
 msgstr ""
+"Du står på en ö, krönt av mäktiga berg, vars mitt döljer en underbar och "
+"mäktig hemlighet. Den Gröna Platån, svår att komma till, men lätt att bli av "
+"med. Om du vill ha den, tag dig i akt för dom andra klanerna!"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid "Rendez-Vous"
-msgstr ""
+msgstr "Rendez-Vous"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:11
 msgid ""
@@ -331,6 +365,10 @@ msgid ""
 "stronghold. Water can be found everywhere, so there is no need to send out "
 "geologists."
 msgstr ""
+"Endast en liten kulle i mitten av kartan sammanlänkar dom fyra konkurrerande "
+"stammarna. Led din armé direkt mot kullen och bygg en mäktig fästning som "
+"ett tecken på din överlägsenhet! Tips: I mitten finns det bara plats för en "
+"fästning. Vatten finns överallt, så du behöver inte skicka ut geologer."
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
@@ -341,10 +379,12 @@ msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
 msgstr ""
+"Ett mystiskt land, fullt av olika landskap, som genomskärs av en handfull "
+"stora floder."
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The ancient sun of fire"
-msgstr ""
+msgstr "Den uråldriga flammande solen"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -353,6 +393,9 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot other followed "
 "afterwards."
 msgstr ""
+"I hundratals år vördades ön som en Gudarnas helgedom. Ingen människa "
+"djärvdes någonsin sätta sin fot på den. Men nu, när en stam slutligen varit "
+"skamlös nog att bosätta sig på kusten av ön, har många andra följt efter."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -385,6 +428,18 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
 msgstr ""
+"Vissa säger att dom ogenomträngliga markerna långt norröver skrämmer bort "
+"även de modigaste av bosättare och de djärvaste av krigare. Stora och gamla "
+"skogar, fulla av rovdjur och storvilt, genomkorsade av våtmarker och berg, "
+"var hölda i dunkel. De som hade lyckats komma tillbaka nämnde enorma "
+"byggnader, dekorerade med sniderier och guld från majestätiska bergskedjor "
+"någonstans bland vildmarken. Tiotals år efteråt finns bara några vittrande "
+"ruiner kvar av de gamla goda tider, täckta av mossa och träd. Deras "
+"silhuetter ger bara en antydan om de forntida konstruktorer "
+"hantverksskicklighet. Ingen vet varför de försvunnit.Folk säger att "
+"ingenting nu blockerar vägen till den fantastiska rikedomen. Men många "
+"kommer att stupa, ituslitna av vargar, uppslukade av träsket ... omringade "
+"av fientliga stammar."
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
@@ -396,10 +451,13 @@ msgid ""
 "which noone found out, yet. Perhaps you will be the one, but be aware of the "
 "others, who are searching, too!"
 msgstr ""
+"Det vilar något mystiskt, som en grå dimma, över dom Tre Oaserna. Ingen har "
+"ännu listat ut vad det är. Kanske blir du den första, men tänk på att du "
+"inte är ensam om att vijal finna Oasernas hemlighet!"
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
-msgstr ""
+msgstr "Tövädret"
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
@@ -409,6 +467,11 @@ msgid ""
 "altar, build there a splendid castle and gain goodwill and the respect of "
 "the Gods."
 msgstr ""
+"Ytterligare ett töväder satte in. Tre stammar tog skydd för den svåra "
+"vintern bland majestätiska berg. Ensamma, satt de och lyssnade till oraklet "
+"och drog ut i krig. Den som överlever kommer att offra sina fienders skatter "
+"på gamla altaret, bygga det en ståtliga slottet och vinna Gudarnas tillit "
+"och respekt."
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
@@ -423,6 +486,11 @@ msgid ""
 "only this ring is left from that mighty firemountain. Do you think, that it "
 "is big enough for more than one tribe?"
 msgstr ""
+"Denna ö steg en gång upp ur havets djupaste grund. Eld steg upp ur det salta "
+"havsvattnet och förde aska, stenar och jord i dagen. Och elden kom närmare "
+"och närmare solen, medan berget växte och växte. Tills en dag, när hela "
+"eldsberget exploderade. Numera är bara denna ring kvar från den mäktiga "
+"eldberget. Tror du att den är stor nog för mer än en stam?"
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
@@ -433,6 +501,8 @@ msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way, than occupying the land of your enemies."
 msgstr ""
+"Ytterligare en märkligt prövning från Gudarna. Det verkar inte finnas något "
+"annat sätt att nå till den andra sidan än att ockupera dina finders land."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The pass through the mountains"
@@ -489,6 +559,9 @@ msgid ""
 "these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
 "Geologists elsewhere."
 msgstr ""
+"Det sägs att även solen och månen måste leta sig igenom dessa bergstoppar. "
+"TIPS: Monoliter markerar malmfyndigheter. Bry dig inte om att skicka "
+"geologer någon annanstans."
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"

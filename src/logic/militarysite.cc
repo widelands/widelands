@@ -162,11 +162,9 @@ void MilitarySite::prefill
 }
 
 
-void MilitarySite::init(Editor_Game_Base & egbase, bool loading)
+void MilitarySite::init(Editor_Game_Base & egbase)
 {
-	ProductionSite::init(egbase, loading);
-	if(loading)
-		return;
+	ProductionSite::init(egbase);
 
 	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 	std::vector<Worker *> const & ws = get_workers();

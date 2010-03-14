@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:33+0000\n"
-"Last-Translator: Alexander Bikmeyev <Unknown>\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-12 22:56+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-03-14 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -761,17 +761,19 @@ msgstr ""
 
 #: ../../txts/README:36
 msgid "General game control"
-msgstr ""
+msgstr "Основы управления игрой"
 
 #: ../../txts/README:40
 msgid "To close an open window, right click it."
-msgstr ""
+msgstr "Чтобы закрыть окно, нажмите на нём правой кнопкой мыши."
 
 #: ../../txts/README:42
 msgid ""
 "To minimize/maximize a window, click on the titlebar of that window either "
 "with middle mousebutton or with left mousebutton while holding down CTRL."
 msgstr ""
+"Чтобы минимизировать / максимизировать окно, щелкните на строке заголовка "
+"этого окна или средней  / левой кнопкой мыши, удерживая CTRL."
 
 #: ../../txts/README:47
 msgid "Keyboard shortcuts (in-game)"
@@ -779,7 +781,7 @@ msgstr "Горячие клавиши (в игре)"
 
 #: ../../txts/README:51
 msgid "SPACE       Toggle build-help"
-msgstr ""
+msgstr "Пробел переключает показ возможностей строительства"
 
 #: ../../txts/README:53
 msgid "M               Toggle minimap"
@@ -795,7 +797,7 @@ msgstr "S               Выводит статистику"
 
 #: ../../txts/README:59
 msgid "O               Toggle objectives display"
-msgstr ""
+msgstr "O Показать задания"
 
 #: ../../txts/README:61
 msgid "F               Toggle Fullscreen"
@@ -803,7 +805,7 @@ msgstr "F               Во весь экран"
 
 #: ../../txts/README:63
 msgid "Home        Center main mapview on starting location"
-msgstr "Начало       Центрирует главный вид карты на начальном положении"
+msgstr "Home Центрирует карту в начальное положение"
 
 #: ../../txts/README:66
 msgid "PAGEUP         Increase gamespeed"
@@ -815,7 +817,7 @@ msgstr "PAGEDOWN    Уменьшить скорость игры"
 
 #: ../../txts/README:71
 msgid "F6           Shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6 Показывает отладочную консоль (только в отладочных сборках)"
 
 #: ../../txts/README:73
 msgid "F10         Quit the game immediately"
@@ -831,6 +833,9 @@ msgid ""
 "is to place flags from end to start. If Shift is also down, place flags from "
 "start to end instead."
 msgstr ""
+"Если закончить дорогу при зажатом Ctrl, то вдоль дороги будут помещены "
+"флаги. По умолчанию флаги помещаются с конца в начало. Если при этом зажать "
+"Shift, то флаги помещаются с начала в конец соответственно."
 
 #: ../../txts/README:83
 msgid "Online Help"
@@ -884,6 +889,8 @@ msgid ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
 msgstr ""
+"- при появлении внутриигровых ошибок вышлите нам сжатый (zip, gzip, bzip2) "
+"повтор. Более подробно см. в разделе \"Повторы\" ниже."
 
 #: ../../txts/README:115
 msgid ""
@@ -899,7 +906,7 @@ msgstr ""
 
 #: ../../txts/README:120
 msgid "Replays</p>"
-msgstr ""
+msgstr "Повторы</p>"
 
 #: ../../txts/README:123
 msgid ""
@@ -909,6 +916,11 @@ msgid ""
 "players, such as building a road or attacking an enemy. The rest of the "
 "filenames will tell you the time you started the game."
 msgstr ""
+"Widelands записывает каждую вашу игру в два файла. Один из них имеет "
+"расширение .wrpl.wgf и содержит начальное сохранение. Второй имеет "
+"расширение .wrpl и содержит все команды, которые давались всеми игроками, "
+"такие как постройка дорог или атака врагов. Остальная часть в именах файлов "
+"содержит информацию о времени, когда вы начали игру."
 
 #: ../../txts/README:125
 msgid ""
@@ -919,6 +931,12 @@ msgid ""
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
 msgstr ""
+"При использовании опции \"Смотреть повтор\" главного меню предыдущая "
+"сыгранная игра будет \"переконструирована\" для просмотра. Однако следует "
+"отметить, что даже небольшие изменения в исполняемых файлах или файлах с "
+"данными Widelands могут привести к несовместимости повторов и "
+"'рассинхронизации'. Это сходно с тем, как сетевые игры страдают от проблем "
+"синхронихации если один из игроков имеет отличающуюся версию игры."
 
 #: ../../txts/README:127
 msgid ""
@@ -928,6 +946,10 @@ msgid ""
 "Linux and in the replays subdirectory of your Widelands installation on "
 "Windows."
 msgstr ""
+"Повторы это очень полезный инструмент для выявления ошибок в коде, поэтому "
+"мы просим вас прикреплять файлы повторов к каждому отчету об ошибках который "
+"вы высылаете. Файлы повторов сохраняются в папке ~/.widelands/replays под "
+"Linux и в подпапке \"replays\" установленной Widelands под Windows."
 
 #: ../../txts/README:131
 msgid "Creating a Session Record</p>"
@@ -995,167 +1017,163 @@ msgstr "Разработка"
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Комманда разработчиков Widelands"
 
 #: ../../txts/developers:9
 msgid "Chieftain"
-msgstr ""
+msgstr "Вождь"
 
 #: ../../txts/developers:15
 msgid "Elders"
-msgstr ""
+msgstr "Старейшины"
 
 #: ../../txts/developers:19
-#: ../../txts/developers:318
+#: ../../txts/developers:317
 msgid "Graphics"
-msgstr ""
+msgstr "Графика"
 
 #: ../../txts/developers:24
-#: ../../txts/developers:311
+#: ../../txts/developers:310
 msgid "Homepage"
-msgstr ""
+msgstr "Домашняя страница"
 
-#: ../../txts/developers:27
-msgid "Janus"
-msgstr ""
-
-#: ../../txts/developers:31
-#: ../../txts/developers:323
+#: ../../txts/developers:29
+#: ../../txts/developers:322
 msgid "Sound"
-msgstr ""
+msgstr "Звук"
 
-#: ../../txts/developers:36
-#: ../../txts/developers:328
+#: ../../txts/developers:34
+#: ../../txts/developers:327
 msgid "Translation"
-msgstr ""
+msgstr "Перевод"
 
-#: ../../txts/developers:44
+#: ../../txts/developers:42
 msgid "Coders"
-msgstr ""
+msgstr "Кодеры"
 
-#: ../../txts/developers:76
+#: ../../txts/developers:75
 msgid "Graphicians"
-msgstr ""
+msgstr "Художники"
 
-#: ../../txts/developers:101
+#: ../../txts/developers:100
 msgid "Musicians"
-msgstr ""
+msgstr "Музыканты"
 
-#: ../../txts/developers:112
+#: ../../txts/developers:111
 msgid "Sound Effects"
-msgstr ""
+msgstr "Звуковые эффекты"
 
-#: ../../txts/developers:121
+#: ../../txts/developers:120
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Карты и миссии"
 
-#: ../../txts/developers:134
+#: ../../txts/developers:133
 msgid "Campaign Story"
-msgstr ""
+msgstr "Историческая кампания"
 
-#: ../../txts/developers:137
+#: ../../txts/developers:136
 msgid "Barbarian"
-msgstr ""
+msgstr "Варвар"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:142
 msgid "Empire"
-msgstr ""
+msgstr "Империя"
 
-#: ../../txts/developers:149
+#: ../../txts/developers:148
 msgid "Translators"
-msgstr ""
+msgstr "Переводчики"
 
-#: ../../txts/developers:153
+#: ../../txts/developers:152
 msgid "Czech"
-msgstr ""
+msgstr "Чешский"
 
-#: ../../txts/developers:160
+#: ../../txts/developers:159
 msgid "Dansk"
-msgstr ""
+msgstr "Датский"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:165
 msgid "Dutch"
-msgstr ""
+msgstr "Голландский"
 
-#: ../../txts/developers:173
+#: ../../txts/developers:172
 msgid "Finnish"
-msgstr ""
+msgstr "Финский"
 
-#: ../../txts/developers:179
+#: ../../txts/developers:178
 msgid "French"
-msgstr ""
+msgstr "Французский"
 
-#: ../../txts/developers:186
+#: ../../txts/developers:185
 msgid "Galician"
-msgstr ""
+msgstr "Галисийский"
 
-#: ../../txts/developers:191
+#: ../../txts/developers:190
 msgid "German"
-msgstr ""
+msgstr "Немецкий"
 
-#: ../../txts/developers:203
+#: ../../txts/developers:202
 msgid "Hebrew"
-msgstr ""
+msgstr "Иврит"
 
-#: ../../txts/developers:208
+#: ../../txts/developers:207
 msgid "Hungarian"
-msgstr ""
+msgstr "Венгерский"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:212
 msgid "Italian"
-msgstr ""
+msgstr "Итальянский"
 
-#: ../../txts/developers:218
+#: ../../txts/developers:217
 msgid "Polish"
-msgstr ""
+msgstr "Польский"
 
-#: ../../txts/developers:226
+#: ../../txts/developers:225
 msgid "Russian"
-msgstr ""
+msgstr "Русский"
 
-#: ../../txts/developers:231
+#: ../../txts/developers:230
 msgid "Slovak"
-msgstr ""
+msgstr "Словацкий"
 
-#: ../../txts/developers:236
+#: ../../txts/developers:235
 msgid "Spanish"
-msgstr ""
+msgstr "Испанский"
 
-#: ../../txts/developers:241
+#: ../../txts/developers:240
 msgid "Swedish"
-msgstr ""
+msgstr "Шведский"
 
-#: ../../txts/developers:249
+#: ../../txts/developers:248
 msgid "Packagers"
-msgstr ""
+msgstr "Упаковщики"
 
-#: ../../txts/developers:253
+#: ../../txts/developers:252
 msgid "Linux Distributions"
-msgstr ""
+msgstr "Дистрибутивы Linux"
 
-#: ../../txts/developers:264
+#: ../../txts/developers:263
 msgid "Other Unix Distributions"
-msgstr ""
+msgstr "Другие дистрибутивы Unix"
 
-#: ../../txts/developers:273
+#: ../../txts/developers:272
 msgid "Non Unix Distributions"
-msgstr ""
+msgstr "Не Unix дистрибутив"
 
-#: ../../txts/developers:284
+#: ../../txts/developers:283
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Домашняя страница разработчиков"
 
-#: ../../txts/developers:293
+#: ../../txts/developers:292
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Документация, помощь и вики"
 
-#: ../../txts/developers:307
+#: ../../txts/developers:306
 msgid "Former elders"
-msgstr ""
+msgstr "Бывшие старейшины"
 
-#: ../../txts/developers:334
+#: ../../txts/developers:333
 msgid "Other"
-msgstr ""
+msgstr "Прочее"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
@@ -1172,16 +1190,24 @@ msgid ""
 "progress and as the Editor becomes better and better this text will also get "
 "longer and more complete."
 msgstr ""
+"Этот редактор предназначен для игроков, которые хотели бы рисовать свои "
+"собственные карты для использования в Widelands.<br> Как вы видите, работа "
+"над редактором продолжается и он становится все лучше и лучше и этот текст "
+"становится больше и полнее."
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
 msgstr ""
+"Пожалуйста, посмотрите на наши руководства для конечных пользователей на "
+"вики-страницах по адресу:"
 
 #: ../../txts/editor_readme:14
 msgid ""
 "Those pages might be more complete and up to date than this file. And there "
 "you further can find a short tutorial about building a map."
 msgstr ""
+"Эти страницы могут быть более полными и актуальными, чем этот файл. И там вы "
+"сможете найти краткое руководство по построению карт."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -1201,7 +1227,7 @@ msgstr "E        Убрать/вывести меню событий"
 
 #: ../../txts/editor_readme:27
 msgid "F        Toggles fullscreen"
-msgstr ""
+msgstr "F Переключает полноэкранный режим"
 
 #: ../../txts/editor_readme:29
 msgid "H        Toggles main menu"
@@ -1221,7 +1247,7 @@ msgstr "T        Вывести меню инструментов"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
-msgstr ""
+msgstr "I Активизирует информационную панель"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -1252,12 +1278,16 @@ msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr ""
+"Некоторые здания, такие, как фермы, имеют очень небольшую рабочую область. "
+"Если здание будет окружено деревьями и дорогами то производство остановится."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
+"Всегда стройте дома лесничего и рыбацкие хижины, чтобы иметь постоянный "
+"запас еды и материалов."
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
@@ -1265,18 +1295,24 @@ msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop to fish."
 msgstr ""
+"Следите за вашими рыбаками. Когда рыбные ресурсы вокруг их рабочей области "
+"исчерпаются, они перестанут рыбачить."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
+"Всегда стройте хижины лесничего и егеря, чтобы иметь постоянный запас еды и "
+"материалов."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
 "You can find general help for the editor as well as a short tutorial in our "
 "wiki at www.widelands.org"
 msgstr ""
+"Вы можете найти общую помощь с редактором, а также краткое руководство в "
+"нашей вики на www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
@@ -1284,12 +1320,17 @@ msgid ""
 "during selection. If you then click on the map, an instance of one of the "
 "selected object types will be placed."
 msgstr ""
+"Вы можете выбрать несколько природных объектов если зажмете CTRL в процессе "
+"выбора. Если после этого кликнуть на карте, будет размещен один из выбранных "
+"объектов."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Like with natural objects (bobs), you can also select multiple animals or "
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
+"Так-же как и природные объекты можно выбрать несколько животных или текстур "
+"при помощи CTRL + клик."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -1297,21 +1338,30 @@ msgid ""
 "cases the complete difference of the normal tool (for example deletion of an "
 "object instead of placing one)."
 msgstr ""
+"Удерживая клавишу SHIFT можно вызвать первый альтернативный инструмент. В "
+"большинстве случаев он выполняет противоположное действие обычному "
+"инструменту (например удаление объекта вместо его помещения)."
 
 #: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
 msgstr ""
+"При нажатой ALT включается второй альтернативный инструмент (если такой "
+"присутствует)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse."
 msgstr ""
+"Цифровые клавиши (1 - 0) позволят вам напрямую задать размер выбранной "
+"области вокруг мыши."
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
 "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
+"Клавиша \"Пробел\" ведет себя как в обычной игре. Она включает и выключает "
+"помощник строительства."
 
 #: ../../txts/tips/editor.tip:30
 msgid ""
@@ -1319,72 +1369,101 @@ msgid ""
 "heavy development. If you've got a question or found a problem, meet us in "
 "the editor forums at www.widelands.org"
 msgstr ""
+"Инструментарий для событий, триггеров, цепных событий и целей еще в "
+"разработке. Если у вас возникнут вопросы или вы найдете проблему, свяжитесь "
+"с нами в редакторском форуме на www.widelands.org."
 
 #: ../../txts/tips/editor.tip:34
 msgid ""
 "You can find a reference for all triggers and events in our wiki at "
 "widelands.org."
 msgstr ""
+"Вы можете найти справочную информацию для всех триггеров и событий в нашей "
+"вики на widelands.org."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
 msgstr ""
+"Всегда стройте хижины лесничих и у вас не будет проблем с материалами."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr ""
+"Процесс строительства начнется только после того, как будет проложена дорога "
+"на строительную площадку."
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
+"Не забудьте отправить геолога для обследования области до создания колодцев "
+"и рудников."
 
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings - "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"Ваша территория может быть расширена путем постройки различных военных "
+"зданий - часовой, крепости, казармы и т.д."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
-msgstr ""
+msgstr "Шахтеры будут работать только если они снабжены пищей."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr ""
+"Разделяйте дороги на короткие участки при помощи флагов. Это ускорит "
+"перемещение ваших товаров."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
 "Any further questions? Our FAQs, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"Есть вопросы? Наши ЧаВо, Вики и, конечно, форум находятся на "
+"www.widelands.org."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
 "Use priority buttons in building window to adjust delivery of a specific "
 "ware."
 msgstr ""
+"Используйте кнопки приоритета в окне постройки для настройки доставки "
+"определенного товара."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
 "Use the 'configure economy' menu to adjust the target quantity of a specific "
 "ware."
 msgstr ""
+"Используйте меню 'управление экономикой' для настройки целевого количества "
+"определенных товаров."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
 "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the "
 "real speed is than democratically set."
 msgstr ""
+"Вы можете использовать 'Page Up' и 'Page Down' для настройки скорости - "
+"реальная скорость устанавливается демократично."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be "
 "printed as '-> Nickname is tired'."
+msgstr ""
+"Вы можете использовать '/me' в начале сообщения чата: '/me устал' будет "
+"передано как '-> \"Псевдоним\" устал'."
+
+#: ../../txts/tips/multiplayer.tip:10
+msgid ""
+"Use '@name' at the beginning of a chat message to send it to only one player."
 msgstr ""
 
 #: ../../txts/tips/singleplayer.tip:2
@@ -1392,6 +1471,8 @@ msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
 msgstr ""
+"Наши компьютерные игроки слишком скучные? Посетите наш сайт по адресу "
+"www.widelands.org чтобы встретиться с другими игроками для игры в онлайне."
 
 #~ msgid "F5           Reveals the entire map (only in debug-builds)"
 #~ msgstr "F5           Открыть всю карту (только в отладочных сборках)"

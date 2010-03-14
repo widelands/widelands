@@ -190,15 +190,17 @@ Building & Building_Descr::create
 	Building & b = construct ? create_constructionsite(old) : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-
+	if(loading) {
+		b.Building::init(egbase);
+		return b;
+	}
 	b.prefill
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 ware_counts, worker_counts, soldier_counts);
-	b.init(egbase, loading);
+	b.init(egbase);
 	b.postfill
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 ware_counts, worker_counts, soldier_counts);
-
 	return b;
 }
 
@@ -364,7 +366,7 @@ Common building initialization code. You must call this from
 derived class' init.
 ===============
 */
-void Building::init(Editor_Game_Base & egbase, bool loading)
+void Building::init(Editor_Game_Base & egbase)
 {
 	PlayerImmovable::init(egbase);
 

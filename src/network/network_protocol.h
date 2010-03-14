@@ -90,7 +90,7 @@ enum {
 	 * \note The host may override the client's chosen name in a subsequent
 	 * \ref NETCMD_SETTING_ALLPLAYERS or \ref NETCMD_SETTING_PLAYER packet.
 	 *
-	 * \note For historical reasons, the HELLO command code should not be 1.
+	 * \note For historical reasons, the HELLO command code should not be 0.
 	 */
 	NETCMD_HELLO = 1,
 

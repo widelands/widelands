@@ -43,6 +43,7 @@
 #include "wui/mapviewpixelconstants.h"
 
 #include <cstdio>
+#include <list>
 
 namespace Widelands {
 
@@ -873,8 +874,10 @@ void Soldier::attack_update(Game & game, State & state)
 			 	 descr().get_right_walk_anims(does_carry_ware())))
 			return;
 		else {
-			molog("[attack] failed to move towards building flag\n");
-			return pop_task(game);
+			molog("[attack] failed to move towards building flag, cancel attack and return home!\n");
+			state.coords = Coords(0, 0);
+			state.objvar1 = 0;
+			return schedule_act(game, 10);
 		}
 	}
 
@@ -1051,10 +1054,10 @@ void Soldier::defense_update(Game & game, State & state)
 		  get_current_hitpoints() < state.ui32var3))
 	{
 
-		if (soldiers.empty())
-			molog("[defense] no enemy soldiers found, ending task\n");
-		else
+		if (get_current_hitpoints() < state.ui32var3)
 			molog("[defense] I am heavily injured!\n");
+		else
+			molog("[defense] no enemy soldiers found, ending task\n");
 
 		// If no enemy was found, return home
 		if (!location) {
@@ -1062,11 +1065,13 @@ void Soldier::defense_update(Game & game, State & state)
 			return pop_task(game);
 		}
 
+		// Soldier is inside of building
 		if (position == location) {
 			molog("[defense] returned home\n");
 			return pop_task(game);
 		}
 
+		// Soldier is on base flag
 		if (position == &baseflag) {
 			return
 				start_task_move
@@ -1090,8 +1095,7 @@ void Soldier::defense_update(Game & game, State & state)
 	}
 
 	// Go through soldiers
-	Soldier * target = 0;
-	uint32_t target_dist = 999;
+	std::list<SoldierDistance *> targets;
 	container_iterate_const(std::vector<Bob *>, soldiers, i) {
 
 		// If enemy is in our land, then go after it!
@@ -1100,29 +1104,36 @@ void Soldier::defense_update(Game & game, State & state)
 			Field const f = game.map().operator[](soldier->get_position());
 
 			//  Check soldier, be sure that we can fight against soldier.
-			// Only pursuers can go over enemy land when defending.
+			// Soldiers can not go over enemy land when defending.
 			if
 				((soldier->canBeChallenged()) and
 				 (f.get_owned_by() == get_owner()->player_number()))
 			{
 				uint32_t thisDist = game.map().calc_distance
 					(get_position(), soldier->get_position());
-				if (thisDist < target_dist) {
-					target_dist = thisDist;
-					target = soldier;
-				}
+				targets.push_front(new SoldierDistance (soldier, thisDist));
 			}
 		}
 	}
 
-	if (target) {
+	targets.sort();
+	
+	while (targets.size() > 0) {
+		SoldierDistance * target = 0;
 
-		if (position == location)
+		target = targets.front();
+
+		if (position == location) {
+			targets.clear();
+			targets.~list();
 			return start_task_leavebuilding(game, false);
+		}
 
-		if (target_dist <= 1) {
-			molog("[defense] starting battle with %u!\n", target->serial());
-			new Battle(game, *this, *target);
+		if (target->dist <= 1) {
+			molog("[defense] starting battle with %u!\n", (target->s)->serial());
+			new Battle(game, *this, *(target->s));
+			targets.clear();
+			targets.~list();
 			return start_task_battle(game);
 		}
 
@@ -1130,22 +1141,24 @@ void Soldier::defense_update(Game & game, State & state)
 		if
 			(start_task_movepath
 			 	(game,
-			 	 target->get_position(),
+			 	 (target->s)->get_position(),
 			 	 1,
 			 	 descr().get_right_walk_anims(does_carry_ware()),
 			 	 false,
 			 	 1))
 		{
-			molog("[defense] move towards soldier %u\n", target->serial());
+			molog("[defense] move towards soldier %u\n", (target->s)->serial());
+			targets.clear();
+			targets.~list();
 			return;
 		} else {
 			molog
 				("[defense] failed to move towards attacking soldier %u\n",
-				 target->serial());
-			return pop_task(game);
+				 (target->s)->serial());
+			targets.pop_front();
 		}
 	}
-
+	targets.~list();
 	// If the enemy is not in our land, wait
 	return start_task_idle(game, get_animation("idle"), 250);
 }
@@ -1600,5 +1613,9 @@ void Soldier::log_general_info(Editor_Game_Base const & egbase)
 	if (m_battle)
 		molog("BattleSerial: %u\n", m_battle->serial());
 }
+
+bool operator<(SoldierDistance a, SoldierDistance b) {
+	return (a.dist < b.dist);
+};
 
 }
