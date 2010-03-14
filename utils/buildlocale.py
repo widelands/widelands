@@ -57,12 +57,11 @@ if __name__ == "__main__":
         # Make sure .pot files are up to date.
         buildcat.do_update_potfiles()
 
-        sys.stdout.write("Compiling translations: ")
+        print("Compiling translations: ")
 
         if len(sys.argv) > 1:
                 # Assume all parameters are language codes to compile
                 lang = sys.argv[1:]
-                print lang
         else:
                 # Find every directory that looks like ISO-639
                 lang = set(p.splitext(p.basename(l))[0] for

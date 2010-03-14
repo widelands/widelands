@@ -260,24 +260,25 @@ def do_update_potfiles():
 
         # Generate .pot catalogs
         for pot, srcfiles in potfiles:
-                path = os.path.normpath("po/" + os.path.dirname(pot))
-                do_makedirs(path)
-                oldcwd = os.getcwd()
-                os.chdir(path)
-                potfile = os.path.basename(pot) + '.pot'
-                if pot.endswith('widelands'):
-                    # This catalogs can be built with xgettext
-                    do_compile_src(potfile , srcfiles )
-                    succ = True
-                else:
-                    succ = do_compile(potfile, srcfiles)
+            pot = pot.lower()
+            path = os.path.normpath("po/" + os.path.dirname(pot))
+            do_makedirs(path)
+            oldcwd = os.getcwd()
+            os.chdir(path)
+            potfile = os.path.basename(pot) + '.pot'
+            if pot.endswith('widelands'):
+                # This catalogs can be built with xgettext
+                do_compile_src(potfile , srcfiles )
+                succ = True
+            else:
+                succ = do_compile(potfile, srcfiles)
 
-                os.chdir(oldcwd)
+            os.chdir(oldcwd)
 
-                if succ:
-                    print("\tpo/%s.pot" % pot)
-                else:
-                    os.rmdir(path)
+            if succ:
+                print("\tpo/%s.pot" % pot)
+            else:
+                os.rmdir(path)
 
 
         print("")
