@@ -19,14 +19,14 @@
 
 #include "trigger_building.h"
 
+#include "i18n.h"
 #include "logic/building.h"
-#include "editor/editorinteractive.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "profile/profile.h"
+#include "wui/interactive_base.h"
 
 #include "upcast.h"
 

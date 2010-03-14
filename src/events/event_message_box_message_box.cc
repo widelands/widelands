@@ -17,18 +17,18 @@
  *
  */
 
-#include "event_message_box_message_box.h"
 
-#include "event_message_box.h"
-#include "logic/game.h"
-#include "graphic/graphic.h"
-#include "editor/editorinteractive.h"
 #include "constants.h"
+#include "event_message_box.h"
+#include "graphic/graphic.h"
+#include "logic/game.h"
 #include "trigger/trigger_time.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "wui/interactive_base.h"
+
+#include "event_message_box_message_box.h"
 
 /**
  * The message box itself

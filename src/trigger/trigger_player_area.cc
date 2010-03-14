@@ -20,7 +20,6 @@
 #include "trigger_building.h"
 
 #include "logic/building.h"
-#include "editor/editorinteractive.h"
 #include "logic/game.h"
 #include "i18n.h"
 #include "logic/map.h"

@@ -19,7 +19,6 @@
 
 #include "trigger_defeated.h"
 
-#include "editor/editorinteractive.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
