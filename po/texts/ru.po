@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-27 16:15+0000\n"
-"PO-Revision-Date: 2010-02-27 10:58+0000\n"
-"Last-Translator: Victor Birkmanis <Unknown>\n"
+"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"PO-Revision-Date: 2010-03-12 22:56+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-28 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-03-14 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -1028,22 +1028,22 @@ msgid "Elders"
 msgstr "Старейшины"
 
 #: ../../txts/developers:19
-#: ../../txts/developers:316
+#: ../../txts/developers:317
 msgid "Graphics"
 msgstr "Графика"
 
 #: ../../txts/developers:24
-#: ../../txts/developers:309
+#: ../../txts/developers:310
 msgid "Homepage"
 msgstr "Домашняя страница"
 
 #: ../../txts/developers:29
-#: ../../txts/developers:321
+#: ../../txts/developers:322
 msgid "Sound"
 msgstr "Звук"
 
 #: ../../txts/developers:34
-#: ../../txts/developers:326
+#: ../../txts/developers:327
 msgid "Translation"
 msgstr "Перевод"
 
@@ -1051,127 +1051,127 @@ msgstr "Перевод"
 msgid "Coders"
 msgstr "Кодеры"
 
-#: ../../txts/developers:74
+#: ../../txts/developers:75
 msgid "Graphicians"
 msgstr "Художники"
 
-#: ../../txts/developers:99
+#: ../../txts/developers:100
 msgid "Musicians"
 msgstr "Музыканты"
 
-#: ../../txts/developers:110
+#: ../../txts/developers:111
 msgid "Sound Effects"
 msgstr "Звуковые эффекты"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:120
 msgid "Maps and Missions"
 msgstr "Карты и миссии"
 
-#: ../../txts/developers:132
+#: ../../txts/developers:133
 msgid "Campaign Story"
 msgstr "Историческая кампания"
 
-#: ../../txts/developers:135
+#: ../../txts/developers:136
 msgid "Barbarian"
 msgstr "Варвар"
 
-#: ../../txts/developers:141
+#: ../../txts/developers:142
 msgid "Empire"
 msgstr "Империя"
 
-#: ../../txts/developers:147
+#: ../../txts/developers:148
 msgid "Translators"
 msgstr "Переводчики"
 
-#: ../../txts/developers:151
+#: ../../txts/developers:152
 msgid "Czech"
 msgstr "Чешский"
 
-#: ../../txts/developers:158
+#: ../../txts/developers:159
 msgid "Dansk"
 msgstr "Датский"
 
-#: ../../txts/developers:164
+#: ../../txts/developers:165
 msgid "Dutch"
 msgstr "Голландский"
 
-#: ../../txts/developers:171
+#: ../../txts/developers:172
 msgid "Finnish"
 msgstr "Финский"
 
-#: ../../txts/developers:177
+#: ../../txts/developers:178
 msgid "French"
 msgstr "Французский"
 
-#: ../../txts/developers:184
+#: ../../txts/developers:185
 msgid "Galician"
 msgstr "Галисийский"
 
-#: ../../txts/developers:189
+#: ../../txts/developers:190
 msgid "German"
 msgstr "Немецкий"
 
-#: ../../txts/developers:201
+#: ../../txts/developers:202
 msgid "Hebrew"
 msgstr "Иврит"
 
-#: ../../txts/developers:206
+#: ../../txts/developers:207
 msgid "Hungarian"
 msgstr "Венгерский"
 
-#: ../../txts/developers:211
+#: ../../txts/developers:212
 msgid "Italian"
 msgstr "Итальянский"
 
-#: ../../txts/developers:216
+#: ../../txts/developers:217
 msgid "Polish"
 msgstr "Польский"
 
-#: ../../txts/developers:224
+#: ../../txts/developers:225
 msgid "Russian"
 msgstr "Русский"
 
-#: ../../txts/developers:229
+#: ../../txts/developers:230
 msgid "Slovak"
 msgstr "Словацкий"
 
-#: ../../txts/developers:234
+#: ../../txts/developers:235
 msgid "Spanish"
 msgstr "Испанский"
 
-#: ../../txts/developers:239
+#: ../../txts/developers:240
 msgid "Swedish"
 msgstr "Шведский"
 
-#: ../../txts/developers:247
+#: ../../txts/developers:248
 msgid "Packagers"
 msgstr "Упаковщики"
 
-#: ../../txts/developers:251
+#: ../../txts/developers:252
 msgid "Linux Distributions"
 msgstr "Дистрибутивы Linux"
 
-#: ../../txts/developers:262
+#: ../../txts/developers:263
 msgid "Other Unix Distributions"
 msgstr "Другие дистрибутивы Unix"
 
-#: ../../txts/developers:271
+#: ../../txts/developers:272
 msgid "Non Unix Distributions"
 msgstr "Не Unix дистрибутив"
 
-#: ../../txts/developers:282
+#: ../../txts/developers:283
 msgid "Homepage Coders"
 msgstr "Домашняя страница разработчиков"
 
-#: ../../txts/developers:291
+#: ../../txts/developers:292
 msgid "Documentation, Help and Wiki"
 msgstr "Документация, помощь и вики"
 
-#: ../../txts/developers:305
+#: ../../txts/developers:306
 msgid "Former elders"
 msgstr "Бывшие старейшины"
 
-#: ../../txts/developers:332
+#: ../../txts/developers:333
 msgid "Other"
 msgstr "Прочее"
 
@@ -1271,16 +1271,8 @@ msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
 "ALT     (удерживать) Выбрать второй альтернативный инструмент по щелчку"
 
-#: ../../txts/tips/atlanteans.tip:6
-msgid ""
-"Always build a forester's and a fish breeder's house, so you will not run "
-"out of trunks and food."
-msgstr ""
-"Всегда стройте дома лесничего и рыбацкие хижины, чтобы иметь постоянный "
-"запас еды и материалов."
-
-#: ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/atlanteans.tip:2
+#: ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
@@ -1288,6 +1280,14 @@ msgid ""
 msgstr ""
 "Некоторые здания, такие, как фермы, имеют очень небольшую рабочую область. "
 "Если здание будет окружено деревьями и дорогами то производство остановится."
+
+#: ../../txts/tips/atlanteans.tip:6
+msgid ""
+"Always build a forester's and a fish breeder's house, so you will not run "
+"out of trunks and food."
+msgstr ""
+"Всегда стройте дома лесничего и рыбацкие хижины, чтобы иметь постоянный "
+"запас еды и материалов."
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
@@ -1460,6 +1460,11 @@ msgid ""
 msgstr ""
 "Вы можете использовать '/me' в начале сообщения чата: '/me устал' будет "
 "передано как '-> \"Псевдоним\" устал'."
+
+#: ../../txts/tips/multiplayer.tip:10
+msgid ""
+"Use '@name' at the beginning of a chat message to send it to only one player."
+msgstr ""
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
