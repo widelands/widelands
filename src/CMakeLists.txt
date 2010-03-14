@@ -1,6 +1,10 @@
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
 
+IF (DEFINED MSVC)
+  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../build/win32/msvc/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
+endif (DEFINED MSVC)
+
 file(GLOB_RECURSE WL_SRCS_ALL *.cc)
 
 file(GLOB WL_MAIN_SRCS *.cc)
@@ -70,7 +74,11 @@ add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
 add_subdirectory(wui)
 
-add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
+IF (DEFINED MSVC)
+  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
+else (DEFINED MSVC)
+  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
+endif (DEFINED MSVC)
 
 target_link_libraries(widelands widelands_main)
 
