@@ -19,7 +19,6 @@
 
 #include "editorinteractive.h"
 #include "tools/editor_delete_immovable_tool.h"
-#include "ui_menus/editor_objectives_menu.h"
 #include "ui_menus/editor_main_menu.h"
 #include "ui_menus/editor_main_menu_load_map.h"
 #include "ui_menus/editor_main_menu_save_map.h"
@@ -74,10 +73,7 @@ m_toggle_buildhelp
 	 	("menu_toggle_buildhelp",        toggle_buildhelp,      _("Buildhelp"))),
 m_toggle_player_menu
 	(INIT_BUTTON
-	 	("editor_menu_player_menu",      toggle_playermenu,     _("Players"))),
-m_toggle_objectives_menu
-	(INIT_BUTTON
-	 	("menu_toggle_objectives_menu",  toggle_objectivesmenu, _("Objectives")))
+	 	("editor_menu_player_menu",      toggle_playermenu,     _("Players")))
 {
 	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_tool_menu,       UI::Box::AlignLeft);
@@ -85,7 +81,6 @@ m_toggle_objectives_menu
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_player_menu,     UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_objectives_menu, UI::Box::AlignLeft);
 	m_toolbar.resize();
 	adjust_toolbar_position();
 
@@ -234,15 +229,6 @@ void Editor_Interactive::toggle_mainmenu() {
 	else
 		new Editor_Main_Menu(*this, m_mainmenu);
 }
-
-
-void Editor_Interactive::toggle_objectivesmenu() {
-	if (m_objectivesmenu.window)
-		delete m_objectivesmenu.window;
-	else
-		new Editor_Objectives_Menu(*this, m_objectivesmenu);
-}
-
 
 void Editor_Interactive::map_clicked() {
 	tools.current()
