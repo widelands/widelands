@@ -1584,7 +1584,8 @@ void WLApplication::mainmenu_multiplayer()
 					}
 					std::string ip = NetGGZ::ref().ip();
 
-					//  Handle "IPv4 compatible" IPv6 addresses returned by ggzd.
+					//  convert IPv6 addresses returned by ggzd to IPv4 addresses.
+					//  At the moment SDL_net does not support IPv6 anyways.
 					if (not ip.compare(0, 7, "::ffff:")) {
 						ip = ip.substr(7);
 						log("GGZClient ## cut IPv6 address: %s\n", ip.c_str());
