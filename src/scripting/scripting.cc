@@ -71,10 +71,6 @@ path.resize(base_path_size);
 		event =
 			new Event_Building
 				(*event_s, egbase, this, building);
-	} else if (not strcmp(event_name, "conquer_area"))   {
-		event_s->set_int("version", 2);
-		event_s->set_string("point", "0 0");
-		event = new Event_Conquer_Area(*event_s, egbase);
 	} else if (not strcmp(event_name, "unhide_area"))    {
 		event_s->set_int("version", 2);
 		event_s->set_string("point", "0 0");

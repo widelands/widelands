@@ -559,7 +559,7 @@ int L_Player::conquer(lua_State * L) {
 	if (lua_gettop(L) > 2)
 		radius = luaL_checkuint32(L, 3);
 
-	game.conquer_area
+	game.conquer_area_no_building
 		(Player_Area<Area<FCoords> >
 			(m_pl, Area<FCoords>
 				((*get_user_class<L_Field>(L, 2))->fcoords(L), radius))

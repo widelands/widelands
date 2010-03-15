@@ -22,8 +22,6 @@
 #include "event_allow_retreat_change.h"
 #include "event_allow_worker_types.h"
 #include "event_building.h"
-#include "event_conquer_area.h"
-#include "event_flag.h"
 #include "event_forbid_retreat_change.h"
 #include "event_forbid_worker_types.h"
 #include "event_lua.h"
@@ -64,18 +62,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		false,
 		"building",               _("Create building"),
 		_("Create a building and optionally place workers in it")
-	},
-	{
-		true,
-		"conquer_area",           _("Conquer area"),
-		_
-			("Gives ownership of all unowned locations within an area to the "
-			 "player.")
-	},
-	{
-		false,
-		"flag",                   _("Create flag"),
-		_("Create a flag.")
 	},
 	{
 		false,
@@ -188,8 +174,6 @@ Event & create
 	case  0: return *new Event_Allow_Worker_Types       (name, state);
 	case  1: return *new Event_Forbid_Worker_Types      (name, state);
 	case  4: return *new Event_Building                 (name, state);
-	case  5: return *new Event_Conquer_Area             (name, state);
-	case  6: return *new Event_Flag                     (name, state);
 	case  8: return *new Event_Lua                      (name, state);
 	case  9: return *new Event_Message_Box              (name, state);
 	case 10: return *new Event_Move_View                (name, state);
@@ -225,8 +209,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case  0: return *new Event_Allow_Worker_Types       (s, egbase);
 	case  1: return *new Event_Forbid_Worker_Types      (s, egbase);
 	case  4: return *new Event_Building                 (s, egbase);
-	case  5: return *new Event_Conquer_Area             (s, egbase);
-	case  6: return *new Event_Flag                     (s, egbase);
 	case  8: return *new Event_Lua                      (s, egbase);
 	case  9: return *new Event_Message_Box              (s, egbase);
 	case 10: return *new Event_Move_View                (s, egbase);
