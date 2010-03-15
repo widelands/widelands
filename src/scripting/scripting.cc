@@ -22,6 +22,7 @@
 
 #include "log.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/player.h"
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
@@ -46,6 +47,112 @@
 // TODO: remove event map packet buildings map packet
 // TODO: remove trigger map packet buildings map packet
 // TODO: remove event chain map packet
+
+// TODO: initialization todos:
+#if 0
+path += init.name;
+Profile init_prof(path.c_str());
+path.resize(base_path_size);
+while
+	(Section * const event_s = init_prof.get_next_section())
+{
+	char const * const event_name = event_s->get_name();
+	Event * event;
+	if      (event_s->get_string("type"))
+		throw game_data_error("type key is not allowed");
+	else if   (event_s->get_string("player"))
+		throw game_data_error("player key is not allowed");
+	else if   (event_s->get_string("point"))
+		throw game_data_error("point key is not allowed");
+	else if   (not strcmp(event_name, "allow_worker_types")) {
+		event_s->set_int("version", 1);
+		event =
+			new Event_Allow_Worker_Types
+				(*event_s, egbase, this);
+	} else if (not strcmp(event_name, "forbid_worker_types"))
+	{
+		event_s->set_int("version", 1);
+		event =
+			new Event_Forbid_Worker_Types
+				(*event_s, egbase, this);
+	} else if (not strcmp(event_name, "allow_building_types"))
+	{
+		event_s->set_int("version", 3);
+		event =
+			new Event_Allow_Building_Types
+				(*event_s, egbase, this);
+	} else if
+		(not strcmp(event_name, "forbid_building_types"))
+	{
+		event_s->set_int("version", 3);
+		event =
+			new Event_Forbid_Building_Types
+				(*event_s, egbase, this);
+	} else if
+		(Building_Index const building =
+			building_index(event_name))
+	{
+		event_s->set_int("version", 2);
+		event =
+			new Event_Building
+				(*event_s, egbase, this, building);
+	} else if (not strcmp(event_name, "conquer_area"))   {
+		event_s->set_int("version", 2);
+		event_s->set_string("point", "0 0");
+		event = new Event_Conquer_Area(*event_s, egbase);
+	} else if (not strcmp(event_name, "unhide_area"))    {
+		event_s->set_int("version", 2);
+		event_s->set_string("point", "0 0");
+		event = new Event_Unhide_Area(*event_s, egbase);
+	} else if
+		(not strcmp(event_name, "seeall"))
+	{
+		event_s->set_int("version", 1);
+		event =
+			new Event_Player_See_All
+				(*event_s, egbase);
+	} else if
+		(not strcmp(event_name, "set_player_frontier_style"))
+	{ //  FIXME simplify this to just "[<frontierstyle_name>]"
+		event_s->set_int("version", 1);
+		event =
+			new Event_Set_Player_Frontier_Style
+				(*event_s, egbase);
+	} else if
+		(not strcmp(event_name, "set_player_flag_style"))
+	{ //  FIXME simplify this to just "[<flagstyle_name>]"
+		event_s->set_int("version", 1);
+		event =
+			new Event_Set_Player_Flag_Style
+				(*event_s, egbase);
+	} else if
+		(not strcmp(event_name, "allow_retreat_change"))
+	{
+		event_s->set_int("version", 1);
+		event =
+			new Event_Allow_Retreat_Change
+				(*event_s, egbase);
+	} else if
+		(not strcmp(event_name, "forbid_retreat_change"))
+	{
+		event_s->set_int("version", 1);
+		event =
+			new Event_Forbid_Retreat_Change
+				(*event_s, egbase);
+	} else if
+		(not strcmp(event_name, "retreat_change"))
+	{
+		event_s->set_int("version", 1);
+		event =
+			new Event_Retreat_Change(*event_s, egbase);
+	} else
+		throw game_data_error
+			("\"%s\" is invalid as player initialization event "
+			 "type for this tribe",
+			 event_name);
+	init.events.push_back(event);
+}
+#endif
 
 // FUTURE: access to player stock via Player.get_wares and get_workers
 // FUTURE: access to constructionsites via Player.get_buildings
@@ -83,6 +190,7 @@ class LuaInterface_Impl : public LuaInterface {
 		}
 
 		virtual void run_script(std::string, std::string);
+		virtual void make_starting_conditions(uint8_t, std::string);
 
 		virtual LuaCoroutine * read_coroutine
 			(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
@@ -273,6 +381,28 @@ void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 		(luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
 		 lua_pcall(m_L, 0, LUA_MULTRET, 0)
 	);
+}
+
+/*
+ * Fullfill the starting conditions for the Player with the given Number
+ */
+void LuaInterface_Impl::make_starting_conditions
+	(uint8_t plrnr, std::string scriptname)
+{
+	Widelands::Game & game = get_game(m_L);
+	Widelands::Player * plr = game.get_player(plrnr);
+	assert(plr);
+
+	// Run the corresponding script which returns a function
+	run_script("tribe_" + plr->tribe().name(), scriptname);
+
+	if (not lua_isfunction(m_L, -1))
+		report_error
+			(m_L, "tribe_%s:%s did not return a function!",
+			 plr->tribe().name().c_str(), scriptname.c_str());
+	to_lua<L_Player>(m_L, new L_Player(plrnr));
+
+	lua_call(m_L, 1, 0);
 }
 
 void LuaInterface_Impl::register_scripts(FileSystem & fs, std::string ns) {

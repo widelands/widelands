@@ -34,6 +34,7 @@
 #include "soldier.h"
 #include "soldiercontrol.h"
 #include "sound/sound_handler.h"
+#include "scripting/scripting.h"
 #include "trainingsite.h"
 #include "tribe.h"
 #include "warehouse.h"
@@ -101,15 +102,10 @@ void Player::create_default_infrastructure() {
 		try {
 			Tribe_Descr::Initialization const & initialization =
 				tribe().initialization(m_initialization_index);
+
 			Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
-			container_iterate_const
-				(std::vector<Event *>, initialization.events, i)
-			{
-				Event & event = **i.current;
-				event.set_player(player_number());
-				event.set_position(starting_pos);
-				event.run(game);
-			}
+			game.lua().make_starting_conditions(player_number(),
+					initialization.name);
 		} catch (Tribe_Descr::Nonexistent) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "

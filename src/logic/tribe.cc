@@ -45,6 +45,7 @@
 #include "militarysite.h"
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "soldier.h"
 #include "trainingsite.h"
 #include "warehouse.h"
@@ -244,6 +245,15 @@ Tribe_Descr::Tribe_Descr
 				throw game_data_error(_("flag styles: %s"), e.what());
 			}
 
+			// Register Lua scripts
+			if (g_fs->IsDirectory(path + "scripting"))
+				egbase.lua().register_scripts
+					(g_fs->MakeSubFileSystem(path), "tribe_" + tribename);
+
+			// Read initializations
+			ScriptContainer & scripts = egbase.lua()
+					.get_scripts_for("tribe_" + tribename);
+
 			if
 				(Section * const inits_s =
 				 	root_conf.get_section("initializations"))
@@ -252,115 +262,18 @@ Tribe_Descr::Tribe_Descr
 					Initialization & init = m_initializations.back();
 					init.    name = v->get_name  ();
 					init.descname = v->get_string();
+
 					try {
+						// Check if it exists
+						if (scripts.find(init.name) == scripts.end())
+							throw game_data_error("has no Lua script!");
+
 						for
 							(Initialization const * i = &m_initializations.front();
 							 i < &init;
 							 ++i)
 							if (i->name == init.name)
 								throw game_data_error("duplicated");
-						path += init.name;
-						Profile init_prof(path.c_str());
-						path.resize(base_path_size);
-						while
-							(Section * const event_s = init_prof.get_next_section())
-						{
-							char const * const event_name = event_s->get_name();
-							Event * event;
-							if      (event_s->get_string("type"))
-								throw game_data_error("type key is not allowed");
-							else if   (event_s->get_string("player"))
-								throw game_data_error("player key is not allowed");
-							else if   (event_s->get_string("point"))
-								throw game_data_error("point key is not allowed");
-							else if   (not strcmp(event_name, "allow_worker_types")) {
-								event_s->set_int("version", 1);
-								event =
-									new Event_Allow_Worker_Types
-										(*event_s, egbase, this);
-							} else if (not strcmp(event_name, "forbid_worker_types"))
-							{
-								event_s->set_int("version", 1);
-								event =
-									new Event_Forbid_Worker_Types
-										(*event_s, egbase, this);
-							} else if (not strcmp(event_name, "allow_building_types"))
-							{
-								event_s->set_int("version", 3);
-								event =
-									new Event_Allow_Building_Types
-										(*event_s, egbase, this);
-							} else if
-								(not strcmp(event_name, "forbid_building_types"))
-							{
-								event_s->set_int("version", 3);
-								event =
-									new Event_Forbid_Building_Types
-										(*event_s, egbase, this);
-							} else if
-								(Building_Index const building =
-								 	building_index(event_name))
-							{
-								event_s->set_int("version", 2);
-								event =
-									new Event_Building
-										(*event_s, egbase, this, building);
-							} else if (not strcmp(event_name, "conquer_area"))   {
-								event_s->set_int("version", 2);
-								event_s->set_string("point", "0 0");
-								event = new Event_Conquer_Area(*event_s, egbase);
-							} else if (not strcmp(event_name, "unhide_area"))    {
-								event_s->set_int("version", 2);
-								event_s->set_string("point", "0 0");
-								event = new Event_Unhide_Area(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "seeall"))
-							{
-								event_s->set_int("version", 1);
-								event =
-									new Event_Player_See_All
-										(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "set_player_frontier_style"))
-							{ //  FIXME simplify this to just "[<frontierstyle_name>]"
-								event_s->set_int("version", 1);
-								event =
-									new Event_Set_Player_Frontier_Style
-										(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "set_player_flag_style"))
-							{ //  FIXME simplify this to just "[<flagstyle_name>]"
-								event_s->set_int("version", 1);
-								event =
-									new Event_Set_Player_Flag_Style
-										(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "allow_retreat_change"))
-							{
-								event_s->set_int("version", 1);
-								event =
-									new Event_Allow_Retreat_Change
-										(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "forbid_retreat_change"))
-							{
-								event_s->set_int("version", 1);
-								event =
-									new Event_Forbid_Retreat_Change
-										(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "retreat_change"))
-							{
-								event_s->set_int("version", 1);
-								event =
-									new Event_Retreat_Change(*event_s, egbase);
-							} else
-								throw game_data_error
-									("\"%s\" is invalid as player initialization event "
-									 "type for this tribe",
-									 event_name);
-							init.events.push_back(event);
-						}
 					} catch (_wexception const & e) {
 						throw game_data_error
 							("[initializations] \"%s=%s\": %s",

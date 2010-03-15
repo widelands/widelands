@@ -107,6 +107,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RW(L_Player, viewpoint_x),
 	PROP_RW(L_Player, viewpoint_y),
 	PROP_RO(L_Player, defeated),
+	PROP_RO(L_Player, starting_field),
 	{0, 0, 0},
 };
 
@@ -244,6 +245,19 @@ int L_Player::get_defeated(lua_State * L) {
 		lua_pushboolean(L, true);
 	else
 		lua_pushboolean(L, false);
+	return 1;
+}
+
+/* RST
+	.. attribute:: starting_field
+
+		(RO) The starting_field for this player as set in the map.
+		Note that it is not guaranteed that the HQ of the player is on this
+		field as a scenario is free to place the HQ wherever it want. This
+		field is only centered when the game starts.
+*/
+int L_Player::get_starting_field(lua_State * L) {
+	to_lua<L_Field>(L, new L_Field(get_game(L).map().get_starting_pos(m_pl)));
 	return 1;
 }
 

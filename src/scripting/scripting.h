@@ -81,6 +81,7 @@ struct LuaInterface {
 	virtual ScriptContainer& get_scripts_for(std::string) = 0;
 
 	virtual void run_script(std::string, std::string) = 0;
+	virtual void make_starting_conditions(uint8_t, std::string) = 0;
 
 	virtual LuaCoroutine* read_coroutine
 		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
