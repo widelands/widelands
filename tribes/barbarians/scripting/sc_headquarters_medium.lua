@@ -60,4 +60,4 @@ function initialize(player)
 end
 
 
--- return initialize
+return initialize

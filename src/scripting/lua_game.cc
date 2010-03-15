@@ -19,16 +19,17 @@
 
 #include <lua.hpp>
 
+#include "economy/economy.h"
 #include "economy/flag.h"
 #include "events/event_message_box.h"
 #include "events/event_message_box_message_box.h"
 #include "gamecontroller.h"
+#include "logic/checkstep.h"
 #include "logic/cmd_luafunction.h"
 #include "logic/objective.h"
+#include "logic/path.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/path.h"
-#include "logic/checkstep.h"
 #include "trigger/trigger_time.h"
 #include "wui/interactive_player.h"
 #include "campvis.h"
@@ -100,6 +101,8 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, get_buildings),
 	METHOD(L_Player, set_flag_style),
 	METHOD(L_Player, set_frontier_style),
+	METHOD(L_Player, get_suitability),
+	METHOD(L_Player, allow_all_workers),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -949,10 +952,35 @@ int L_Player::get_buildings(lua_State * L) {
 }
 
 /* RST
+	.. method:: set_flag_style(name)
+
+		Sets the appearance of the flags for this player to the given style.
+		The style must be defined for the tribe.
+
+		:arg name: name of style
+		:type name: :class:`string`
+*/
+// UNTESTED, UNUSED so far
+int L_Player::set_flag_style(lua_State * L) {
+	Player & p = get(L, get_game(L));
+	const char * name = luaL_checkstring(L, 2);
+
+	try {
+		p.set_flag_style(p.tribe().flag_style_index(name));
+	} catch(Tribe_Descr::Nonexistent) {
+		return report_error(L, "Flag style <%s> does not exist!\n", name);
+	}
+	return 0;
+}
+
+/* RST
 	.. method:: set_frontier_style(name)
 
 		Sets the appearance of the frontiers for this player to the given style.
 		The style must be defined for the tribe.
+
+		:arg name: name of style
+		:type name: :class:`string`
 */
 // UNTESTED, UNUSED so far
 int L_Player::set_frontier_style(lua_State * L) {
@@ -968,20 +996,75 @@ int L_Player::set_frontier_style(lua_State * L) {
 }
 
 /* RST
-	.. method:: set_flag_style(name)
+	.. method:: get_suitability(building, field)
 
-		Sets the appearance of the flags for this player to the given style.
-		The style must be defined for the tribe.
+		Returns the suitability that this building has for this field. This
+		is mainly useful in initialization where buildings must be placed
+		automatically.
+
+		:arg building: name of the building to check for
+		:type building: :class:`string`
+		:arg field: where the suitability should be checked
+		:type field: :class:`wl.map.Field`
+
+		:returns: the suitability
+		:rtype: :class:`integer`
 */
-// UNTESTED, UNUSED so far
-int L_Player::set_flag_style(lua_State * L) {
-	Player & p = get(L, get_game(L));
-	const char * name = luaL_checkstring(L, 2);
+// UNTESTED
+int L_Player::get_suitability(lua_State * L) {
+	Game & game = get_game(L);
+	const Tribe_Descr & tribe = get(L, game).tribe();
 
-	try {
-		p.set_flag_style(p.tribe().flag_style_index(name));
-	} catch(Tribe_Descr::Nonexistent) {
-		return report_error(L, "Flag style <%s> does not exist!\n", name);
+	const char * name = luaL_checkstring(L, 2);
+	Building_Index i = tribe.building_index(name);
+	if (i == Building_Index::Null())
+		report_error(L, "Unknown building type: <%s>", name);
+
+	lua_pushint32
+		(L, tribe.get_building_descr(i)->suitability
+		 (game.map(), (*get_user_class<L_Field>(L, 3))->fcoords(L))
+		);
+	return 1;
+}
+
+
+// TODO: undocumented, should be done properly
+int L_Player::allow_all_workers(lua_State * L) {
+	Game & game = get_game(L);
+	const Tribe_Descr & tribe = get(L, game).tribe();
+	Player & player = get(L, game);
+
+	std::vector<Ware_Index> const & worker_types_without_cost =
+		tribe.worker_types_without_cost();
+
+	for (Ware_Index i = Ware_Index::First(); i < tribe.get_nrworkers(); ++i) {
+		Worker_Descr const & worker_descr = *tribe.get_worker_descr(i);
+		if (not worker_descr.is_buildable())
+			continue;
+
+		player.allow_worker_type(i, true);
+
+		if (worker_descr.buildcost().empty()) {
+			//  Workers of this type can be spawned in warehouses. Start it.
+			uint8_t worker_types_without_cost_index = 0;
+			for (;; ++worker_types_without_cost_index) {
+				assert
+					(worker_types_without_cost_index
+					 <
+					 worker_types_without_cost.size());
+				if
+					(worker_types_without_cost.at
+						(worker_types_without_cost_index) == i)
+					break;
+			}
+			for (uint32_t j = player.get_nr_economies(); j;) {
+				Economy & economy = *player.get_economy_by_number(--j);
+				container_iterate_const
+					(std::vector<Warehouse *>, economy.warehouses(), k)
+					(*k.current)->enable_spawn
+						(game, worker_types_without_cost_index);
+			}
+		}
 	}
 	return 0;
 }

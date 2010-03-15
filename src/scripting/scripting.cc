@@ -46,6 +46,10 @@
 // TODO: remove event map packet buildings map packet
 // TODO: remove trigger map packet buildings map packet
 // TODO: remove event chain map packet
+// TODO: readd allow and forbid worker types. Currently all workers are always
+//         allowed
+// TODO: h:warp_soldiers({0,0,0,0}, 1) crashed on me in initizalisation scripts.
+//         Verify this!
 
 // TODO: initialization todos:
 #if 0
