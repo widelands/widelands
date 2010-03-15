@@ -73,13 +73,6 @@
 		event_s->set_string("point", "0 0");
 		event = new Event_Unhide_Area(*event_s, egbase);
 	} else if
-		(not strcmp(event_name, "seeall"))
-	{
-		event_s->set_int("version", 1);
-		event =
-			new Event_Player_See_All
-				(*event_s, egbase);
-	} else if
 		(not strcmp(event_name, "allow_retreat_change"))
 	{
 		event_s->set_int("version", 1);

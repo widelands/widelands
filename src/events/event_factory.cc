@@ -27,7 +27,6 @@
 #include "event_message.h"
 #include "event_message_box.h"
 #include "event_expire_message.h"
-#include "event_player_seeall.h"
 #include "event_retreat_change.h"
 #include "event_set_timer.h"
 #include "event_unhide_area.h"
@@ -105,11 +104,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 			 "value could be overridden by players if allowed.")
 	},
 	{
-		false, // Change this value when option window exists
-		"seeall",                    _("Set see all mode for a player"),
-		_("Sets the see all mode for a specific player to on/off.")
-	},
-	{
 		false,
 		"message",                   _("Creates a message for a player"),
 		_
@@ -146,7 +140,6 @@ Event & create
 	case 19: return *new Event_Allow_Retreat_Change     (name, state);
 	case 20: return *new Event_Forbid_Retreat_Change    (name, state);
 	case 21: return *new Event_Retreat_Change           (name, state);
-	case 22: return *new Event_Player_See_All           (name, state);
 	case 23: return *new Event_Message                  (name, state);
 	case 24: return *new Event_Expire_Message           (name, state);
 	default:
@@ -176,7 +169,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case 19: return *new Event_Allow_Retreat_Change     (s, egbase);
 	case 20: return *new Event_Forbid_Retreat_Change    (s, egbase);
 	case 21: return *new Event_Retreat_Change           (s, egbase);
-	case 22: return *new Event_Player_See_All           (s, egbase);
 	case 23: return *new Event_Message                  (s, egbase);
 	case 24: return *new Event_Expire_Message           (s, egbase);
 	default:
