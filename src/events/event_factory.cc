@@ -24,7 +24,6 @@
 #include "event_building.h"
 #include "event_forbid_retreat_change.h"
 #include "event_forbid_worker_types.h"
-#include "event_lua.h"
 #include "event_message.h"
 #include "event_message_box.h"
 #include "event_expire_message.h"
@@ -67,11 +66,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		false,
 		"immovable",              _("Create immovable"),
 		_("Create an immovable.")
-	},
-	{
-		false,
-		"lua",              _("Lua event"),
-		_("Run a lua command")
 	},
 	{
 		true,
@@ -174,7 +168,6 @@ Event & create
 	case  0: return *new Event_Allow_Worker_Types       (name, state);
 	case  1: return *new Event_Forbid_Worker_Types      (name, state);
 	case  4: return *new Event_Building                 (name, state);
-	case  8: return *new Event_Lua                      (name, state);
 	case  9: return *new Event_Message_Box              (name, state);
 	case 10: return *new Event_Move_View                (name, state);
 	case 14: return *new Event_Road                     (name, state);
@@ -209,7 +202,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case  0: return *new Event_Allow_Worker_Types       (s, egbase);
 	case  1: return *new Event_Forbid_Worker_Types      (s, egbase);
 	case  4: return *new Event_Building                 (s, egbase);
-	case  8: return *new Event_Lua                      (s, egbase);
 	case  9: return *new Event_Message_Box              (s, egbase);
 	case 10: return *new Event_Move_View                (s, egbase);
 	case 14: return *new Event_Road                     (s, egbase);
