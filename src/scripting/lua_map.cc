@@ -80,6 +80,8 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 				return CAST_TO_LUA(ProductionSite);
 			else if (!strcmp(type_name, "militarysite"))
 				return CAST_TO_LUA(MilitarySite);
+			else if (!strcmp(type_name, "trainingsite"))
+				return CAST_TO_LUA(ProductionSite); // TODO: need trainingssite
 			else
 				return CAST_TO_LUA(Building);
 		}

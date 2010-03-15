@@ -5,9 +5,10 @@
 use("aux", "coroutine")
 use("aux", "infrastructure")
 
-function _place_nearby(plr, building, fields, required_suitability, args)
+function _place_nearby(plr, building, fields, required_suitability, gargs)
    local idx
    local f
+   local args = gargs or {}
 
    while #fields > 0 do
       local idx = math.random(#fields)
@@ -34,7 +35,7 @@ function initialize(p)
    local h = p:place_building("citadel", sf)
    h:warp_soldiers{[{0,0,0,0}] = 12}
 
-    _place_nearby(p, "warehouse", sf:region(11), 1, {
+    _place_nearby(p, "warehouse", sf:region(7), 1, {
       wares = {
          axe = 6,
          bakingtray = 2,
@@ -72,19 +73,35 @@ function initialize(p)
          ox = 5,
       },
       soldiers = {
-         [{0,0,0,0}] = 13, 
+         [{0,0,0,0}] = 25, 
       }
    })
 
-   -- _place_nearby(p, "battlearena", sf:region(20), 1, {
-   --    wares = {
-   --       pittabread = 8,
-   --       fish = 6,
-   --       meat = 6,
-   --    }
-   -- })
+   _place_nearby(p, "battlearena", sf:region(12), 1, {
+      wares = {
+         pittabread = 8,
+         fish = 6,
+         meat = 6,
+      }
+   })
    
-
+   _place_nearby(p, "trainingscamp", sf:region(12), 1)
+  
+   _place_nearby(p, "helmsmithy", sf:region(12), 1, {
+      wares = { iron = 4, gold = 4 }
+   })
+   _place_nearby(p, "metalworks", sf:region(12), 1, {
+      wares = { iron = 8 },
+   })
+   _place_nearby(p, "axefactory", sf:region(12), 1, {
+      wares = { coal = 8 },
+   })
+   _place_nearby(p, "hardener", sf:region(12), 1, {
+      wares = { trunk = 1 },
+   })
+   _place_nearby(p, "lime_kiln", sf:region(12), 1, {
+      wares = { raw_stone = 6, coal = 3 },
+   })
 
 end
 
