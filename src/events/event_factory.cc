@@ -21,7 +21,6 @@
 
 #include "event_allow_retreat_change.h"
 #include "event_allow_worker_types.h"
-#include "event_building.h"
 #include "event_forbid_retreat_change.h"
 #include "event_forbid_worker_types.h"
 #include "event_message.h"
@@ -50,11 +49,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		true,
 		"forbid_worker_types",     _("Forbid worker types"),
 		_("Forbids the creation of workers of certain types for a player.")
-	},
-	{
-		false,
-		"building",               _("Create building"),
-		_("Create a building and optionally place workers in it")
 	},
 	{
 		false,
@@ -125,7 +119,6 @@ Event & create
 	switch (id) {
 	case  0: return *new Event_Allow_Worker_Types       (name, state);
 	case  1: return *new Event_Forbid_Worker_Types      (name, state);
-	case  4: return *new Event_Building                 (name, state);
 	case  9: return *new Event_Message_Box              (name, state);
 	case 15: return *new Event_Set_Timer                (name, state);
 	case 19: return *new Event_Allow_Retreat_Change     (name, state);
@@ -153,7 +146,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	switch (i) {
 	case  0: return *new Event_Allow_Worker_Types       (s, egbase);
 	case  1: return *new Event_Forbid_Worker_Types      (s, egbase);
-	case  4: return *new Event_Building                 (s, egbase);
 	case  9: return *new Event_Message_Box              (s, egbase);
 	case 15: return *new Event_Set_Timer                (s, egbase);
 	case 19: return *new Event_Allow_Retreat_Change     (s, egbase);
