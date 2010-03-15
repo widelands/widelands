@@ -1,4 +1,4 @@
-#!/usr/bin/python -tt
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # Tries to find out the repository revision of the current working directory
@@ -23,8 +23,20 @@ try:
 except ImportError:
     __has_bzr = False
 
+def check_for_explicit_version():
+    """
+    Checks for a file WL_RELEASE in the root directory. It then defaults to
+    this version without further trying to find which revision we're on
+    """
+    if os.path.exists("WL_RELEASE"):
+        return open("WL_RELEASE").read().strip()
+
 def detect_revision():
     revstring='UNKNOWN-REVISION'
+
+    explicit_version =  check_for_explicit_version()
+    if explicit_version:
+        return explicit_version
 
     # All code below relies on posix-isms, don't even try on other systems for now
     # TODO: find out how revision detection can be done cross platform instead of returning "UNKNOWN"
