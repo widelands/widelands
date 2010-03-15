@@ -19,12 +19,9 @@
 
 #include "event_factory.h"
 
-#include "event_allow_retreat_change.h"
-#include "event_forbid_retreat_change.h"
 #include "event_message.h"
 #include "event_message_box.h"
 #include "event_expire_message.h"
-#include "event_retreat_change.h"
 #include "event_set_timer.h"
 #include "profile/profile.h"
 
@@ -57,27 +54,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		_("Set a timer to trigger after a certain duration.")
 	},
 	{
-		false, // Change this value when option window exists
-		"allow_retreat_change",      _("Allows retreat value customization"),
-		_
-			("Allows that the player can change the value of 'retreat when hit"
-			 "points below x%'.")
-	},
-	{
-		false, // Change this value when option window exists
-		"forbid_retreat_change",     _("Forbids retreat value customization"),
-		_
-			("Forbids that the player can change the value of 'retreat when hit"
-			 "points below x%'.")
-	},
-	{
-		false, // Change this value when option window exists
-		"retreat_change",            _("Set player retreat percentage"),
-		_
-			("Sets the player value of 'retreat when hit points below x%', this "
-			 "value could be overridden by players if allowed.")
-	},
-	{
 		false,
 		"message",                   _("Creates a message for a player"),
 		_
@@ -107,9 +83,6 @@ Event & create
 	switch (id) {
 	case  9: return *new Event_Message_Box              (name, state);
 	case 15: return *new Event_Set_Timer                (name, state);
-	case 19: return *new Event_Allow_Retreat_Change     (name, state);
-	case 20: return *new Event_Forbid_Retreat_Change    (name, state);
-	case 21: return *new Event_Retreat_Change           (name, state);
 	case 23: return *new Event_Message                  (name, state);
 	case 24: return *new Event_Expire_Message           (name, state);
 	default:
@@ -132,9 +105,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	switch (i) {
 	case  9: return *new Event_Message_Box              (s, egbase);
 	case 15: return *new Event_Set_Timer                (s, egbase);
-	case 19: return *new Event_Allow_Retreat_Change     (s, egbase);
-	case 20: return *new Event_Forbid_Retreat_Change    (s, egbase);
-	case 21: return *new Event_Retreat_Change           (s, egbase);
 	case 23: return *new Event_Message                  (s, egbase);
 	case 24: return *new Event_Expire_Message           (s, egbase);
 	default:

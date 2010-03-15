@@ -67,6 +67,10 @@ public:
 	int set_viewpoint_y(lua_State * L);
 	int get_defeated(lua_State * L);
 	int get_starting_field(lua_State * L);
+	int get_retreat_percentage(lua_State * L);
+	int set_retreat_percentage(lua_State * L);
+	int get_changing_retreat_percentage_allowed(lua_State * L);
+	int set_changing_retreat_percentage_allowed(lua_State * L);
 
 	/*
 	 * Lua methods

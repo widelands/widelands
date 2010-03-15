@@ -113,6 +113,8 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RW(L_Player, viewpoint_y),
 	PROP_RO(L_Player, defeated),
 	PROP_RO(L_Player, starting_field),
+	PROP_RW(L_Player, retreat_percentage),
+	PROP_RW(L_Player, changing_retreat_percentage_allowed),
 	{0, 0, 0},
 };
 
@@ -265,6 +267,45 @@ int L_Player::get_starting_field(lua_State * L) {
 	to_lua<L_Field>(L, new L_Field(get_game(L).map().get_starting_pos(m_pl)));
 	return 1;
 }
+
+
+/* RST
+	.. attribute:: retreat_percentage
+
+
+		(RW) Soldiers that only have this amount of total hitpoints
+		left will go home
+*/
+// UNTESTED
+int L_Player::get_retreat_percentage(lua_State * L) {
+	lua_pushuint32(L, get(L, get_game(L)).get_retreat_percentage());
+	return 1;
+}
+int L_Player::set_retreat_percentage(lua_State * L) {
+	uint32_t value = luaL_checkuint32(L, -1);
+	if (value > 100)
+		return report_error(L, "%i is not a valid percentage!", value);
+
+	get(L, get_game(L)).set_retreat_percentage(value);
+	return 0;
+}
+
+/* RST
+	.. attribute:: changing_retreat_percentage_allowed
+
+		(RW) A boolean value. :const:`true` if the player is allowed to change
+		    the :attr:`retreat_percentage`, :const:`false` otherwise.
+*/
+// UNTESTED
+int L_Player::get_changing_retreat_percentage_allowed(lua_State * L) {
+	lua_pushuint32(L, get(L, get_game(L)).is_retreat_change_allowed());
+	return 1;
+}
+int L_Player::set_changing_retreat_percentage_allowed(lua_State * L) {
+	get(L, get_game(L)).allow_retreat_change(luaL_checkboolean(L, -1));
+	return 0;
+}
+
 
 /*
  ==========================================================
