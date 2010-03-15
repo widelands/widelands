@@ -314,17 +314,6 @@ private:
 	Battle * m_battle;
 };
 
-struct SoldierDistance {
-	Soldier * s;
-	int       dist;
-	
-	SoldierDistance(Soldier *a, int d) :
-		dist(d)
-	{ s = a;}
-};
-
-bool operator<(SoldierDistance a, SoldierDistance b);
-
 }
 
 #endif
