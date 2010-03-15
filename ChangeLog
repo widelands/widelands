@@ -1,5 +1,8 @@
-### Build 15 (until now)
+### Build 15
+- Support for building with Visual Studio
+- New graphics for some buildings
 - Changed localization structure so that we can translate from launchpad.net
+- Cmake is now a supported build system
 - Lua support (preliminary) 
 - Fix bug that when a worker program had a createitem command where the
   parameter was not the name of a ware type in the tribe, the game would fail
