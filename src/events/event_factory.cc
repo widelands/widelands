@@ -27,7 +27,6 @@
 #include "event_message.h"
 #include "event_message_box.h"
 #include "event_expire_message.h"
-#include "event_move_view.h"
 #include "event_player_seeall.h"
 #include "event_retreat_change.h"
 #include "event_road.h"
@@ -74,11 +73,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 			("Show a message box. It can be modal or and have a picture. An "
 			 "events can be assigned to each button to give the user chose the "
 			 "course of the game.")
-	},
-	{
-		true,
-		"move_view",              _("Move view"),
-		_("Center the player's view on a certain location.")
 	},
 	{
 		false,
@@ -169,7 +163,6 @@ Event & create
 	case  1: return *new Event_Forbid_Worker_Types      (name, state);
 	case  4: return *new Event_Building                 (name, state);
 	case  9: return *new Event_Message_Box              (name, state);
-	case 10: return *new Event_Move_View                (name, state);
 	case 14: return *new Event_Road                     (name, state);
 	case 15: return *new Event_Set_Timer                (name, state);
 	case 16: return *new Event_Unhide_Area              (name, state);
@@ -203,7 +196,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case  1: return *new Event_Forbid_Worker_Types      (s, egbase);
 	case  4: return *new Event_Building                 (s, egbase);
 	case  9: return *new Event_Message_Box              (s, egbase);
-	case 10: return *new Event_Move_View                (s, egbase);
 	case 14: return *new Event_Road                     (s, egbase);
 	case 15: return *new Event_Set_Timer                (s, egbase);
 	case 16: return *new Event_Unhide_Area              (s, egbase);
