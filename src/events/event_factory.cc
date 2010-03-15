@@ -20,9 +20,7 @@
 #include "event_factory.h"
 
 #include "event_allow_retreat_change.h"
-#include "event_allow_worker_types.h"
 #include "event_forbid_retreat_change.h"
-#include "event_forbid_worker_types.h"
 #include "event_message.h"
 #include "event_message_box.h"
 #include "event_expire_message.h"
@@ -40,16 +38,6 @@ namespace Event_Factory {
 
 ///\todo This information belongs into the event classes
 Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
-	{
-		true,
-		"allow_worker_types",      _("Allow worker types"),
-		_("Allows the creation of workers of certain types for a player.")
-	},
-	{
-		true,
-		"forbid_worker_types",     _("Forbid worker types"),
-		_("Forbids the creation of workers of certain types for a player.")
-	},
 	{
 		false,
 		"immovable",              _("Create immovable"),
@@ -117,8 +105,6 @@ Event & create
 	(size_t const id, char const * const name, Event::State const state)
 {
 	switch (id) {
-	case  0: return *new Event_Allow_Worker_Types       (name, state);
-	case  1: return *new Event_Forbid_Worker_Types      (name, state);
 	case  9: return *new Event_Message_Box              (name, state);
 	case 15: return *new Event_Set_Timer                (name, state);
 	case 19: return *new Event_Allow_Retreat_Change     (name, state);
@@ -144,8 +130,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 		if (++i == nr_event_types())
 			throw wexception("invalid type \"%s\"", type_name);
 	switch (i) {
-	case  0: return *new Event_Allow_Worker_Types       (s, egbase);
-	case  1: return *new Event_Forbid_Worker_Types      (s, egbase);
 	case  9: return *new Event_Message_Box              (s, egbase);
 	case 15: return *new Event_Set_Timer                (s, egbase);
 	case 19: return *new Event_Allow_Retreat_Change     (s, egbase);
