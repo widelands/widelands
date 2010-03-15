@@ -39,9 +39,8 @@
 // TODO:   LuaFunction, Testsuite and it's running.
 // TODO: make pickling independent of OS by using widelands Stream*
 // TODO: check SirVer, Lua TODOs!
-// TODO: port the Platea scenario to Lua too
-// TODO: port the campaigns to Lua
-
+// TODO: convert the old initialization files in tribes and delete them
+//
 // TODO: remove allowed buildings map packet
 // TODO: remove variables map packet
 // TODO: remove event map packet buildings map packet
@@ -53,17 +52,6 @@
 path += init.name;
 Profile init_prof(path.c_str());
 path.resize(base_path_size);
-while
-	(Section * const event_s = init_prof.get_next_section())
-{
-	char const * const event_name = event_s->get_name();
-	Event * event;
-	if      (event_s->get_string("type"))
-		throw game_data_error("type key is not allowed");
-	else if   (event_s->get_string("player"))
-		throw game_data_error("player key is not allowed");
-	else if   (event_s->get_string("point"))
-		throw game_data_error("point key is not allowed");
 	else if   (not strcmp(event_name, "allow_worker_types")) {
 		event_s->set_int("version", 1);
 		event =
@@ -74,19 +62,6 @@ while
 		event_s->set_int("version", 1);
 		event =
 			new Event_Forbid_Worker_Types
-				(*event_s, egbase, this);
-	} else if (not strcmp(event_name, "allow_building_types"))
-	{
-		event_s->set_int("version", 3);
-		event =
-			new Event_Allow_Building_Types
-				(*event_s, egbase, this);
-	} else if
-		(not strcmp(event_name, "forbid_building_types"))
-	{
-		event_s->set_int("version", 3);
-		event =
-			new Event_Forbid_Building_Types
 				(*event_s, egbase, this);
 	} else if
 		(Building_Index const building =

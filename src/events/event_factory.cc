@@ -19,13 +19,11 @@
 
 #include "event_factory.h"
 
-#include "event_allow_building_types.h"
 #include "event_allow_retreat_change.h"
 #include "event_allow_worker_types.h"
 #include "event_building.h"
 #include "event_conquer_area.h"
 #include "event_flag.h"
-#include "event_forbid_building_types.h"
 #include "event_forbid_retreat_change.h"
 #include "event_forbid_worker_types.h"
 #include "event_lua.h"
@@ -61,16 +59,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		true,
 		"forbid_worker_types",     _("Forbid worker types"),
 		_("Forbids the creation of workers of certain types for a player.")
-	},
-	{
-		true,
-		"allow_building_types",      _("Allow building types"),
-		_("Allows the construction of buildings of certain types for a player.")
-	},
-	{
-		true,
-		"forbid_building_types",     _("Forbid building types"),
-		_("Forbids the construction of buildings of certain types for a player.")
 	},
 	{
 		false,
@@ -199,8 +187,6 @@ Event & create
 	switch (id) {
 	case  0: return *new Event_Allow_Worker_Types       (name, state);
 	case  1: return *new Event_Forbid_Worker_Types      (name, state);
-	case  2: return *new Event_Allow_Building_Types     (name, state);
-	case  3: return *new Event_Forbid_Building_Types    (name, state);
 	case  4: return *new Event_Building                 (name, state);
 	case  5: return *new Event_Conquer_Area             (name, state);
 	case  6: return *new Event_Flag                     (name, state);
@@ -230,10 +216,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	//  Handle old names.
 	if (not strcmp(type_name, "set_null_trigger"))
 		type_name = "set_timer";
-	if (not strcmp(type_name, "allow_building"))
-		type_name =
-			s.get_bool("allow", true) ? "allow_building_types" :
-			"forbid_building_types";
 
 	size_t i = 0;
 	while (strcmp(type_name, EVENT_TYPE_DESCRIPTIONS[i].id))
@@ -242,8 +224,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	switch (i) {
 	case  0: return *new Event_Allow_Worker_Types       (s, egbase);
 	case  1: return *new Event_Forbid_Worker_Types      (s, egbase);
-	case  2: return *new Event_Allow_Building_Types     (s, egbase);
-	case  3: return *new Event_Forbid_Building_Types    (s, egbase);
 	case  4: return *new Event_Building                 (s, egbase);
 	case  5: return *new Event_Conquer_Area             (s, egbase);
 	case  6: return *new Event_Flag                     (s, egbase);
