@@ -88,6 +88,9 @@ public:
 	int reveal_campaign(lua_State * L);
 	int place_road(lua_State * L);
 	int get_buildings(lua_State * L);
+	int set_flag_style(lua_State * L);
+	int set_frontier_style(lua_State * L);
+
 
 
 	/*

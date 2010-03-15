@@ -49,9 +49,6 @@
 
 // TODO: initialization todos:
 #if 0
-path += init.name;
-Profile init_prof(path.c_str());
-path.resize(base_path_size);
 	else if   (not strcmp(event_name, "allow_worker_types")) {
 		event_s->set_int("version", 1);
 		event =
@@ -83,20 +80,6 @@ path.resize(base_path_size);
 			new Event_Player_See_All
 				(*event_s, egbase);
 	} else if
-		(not strcmp(event_name, "set_player_frontier_style"))
-	{ //  FIXME simplify this to just "[<frontierstyle_name>]"
-		event_s->set_int("version", 1);
-		event =
-			new Event_Set_Player_Frontier_Style
-				(*event_s, egbase);
-	} else if
-		(not strcmp(event_name, "set_player_flag_style"))
-	{ //  FIXME simplify this to just "[<flagstyle_name>]"
-		event_s->set_int("version", 1);
-		event =
-			new Event_Set_Player_Flag_Style
-				(*event_s, egbase);
-	} else if
 		(not strcmp(event_name, "allow_retreat_change"))
 	{
 		event_s->set_int("version", 1);
@@ -116,13 +99,7 @@ path.resize(base_path_size);
 		event_s->set_int("version", 1);
 		event =
 			new Event_Retreat_Change(*event_s, egbase);
-	} else
-		throw game_data_error
-			("\"%s\" is invalid as player initialization event "
-			 "type for this tribe",
-			 event_name);
-	init.events.push_back(event);
-}
+	}
 #endif
 
 // FUTURE: access to player stock via Player.get_wares and get_workers

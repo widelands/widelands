@@ -98,6 +98,8 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, reveal_campaign),
 	METHOD(L_Player, place_road),
 	METHOD(L_Player, get_buildings),
+	METHOD(L_Player, set_flag_style),
+	METHOD(L_Player, set_frontier_style),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -944,6 +946,44 @@ int L_Player::get_buildings(lua_State * L) {
 			lua_rawset(L, -3);
 	}
 	return 1;
+}
+
+/* RST
+	.. method:: set_frontier_style(name)
+
+		Sets the appearance of the frontiers for this player to the given style.
+		The style must be defined for the tribe.
+*/
+// UNTESTED, UNUSED so far
+int L_Player::set_frontier_style(lua_State * L) {
+	Player & p = get(L, get_game(L));
+	const char * name = luaL_checkstring(L, 2);
+
+	try {
+		p.set_frontier_style(p.tribe().frontier_style_index(name));
+	} catch(Tribe_Descr::Nonexistent) {
+		return report_error(L, "Frontier style <%s> does not exist!\n", name);
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: set_flag_style(name)
+
+		Sets the appearance of the flags for this player to the given style.
+		The style must be defined for the tribe.
+*/
+// UNTESTED, UNUSED so far
+int L_Player::set_flag_style(lua_State * L) {
+	Player & p = get(L, get_game(L));
+	const char * name = luaL_checkstring(L, 2);
+
+	try {
+		p.set_flag_style(p.tribe().flag_style_index(name));
+	} catch(Tribe_Descr::Nonexistent) {
+		return report_error(L, "Flag style <%s> does not exist!\n", name);
+	}
+	return 0;
 }
 
 /*

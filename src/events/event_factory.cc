@@ -29,9 +29,6 @@
 #include "event_expire_message.h"
 #include "event_player_seeall.h"
 #include "event_retreat_change.h"
-#include "event_road.h"
-#include "event_set_player_flag_style.h"
-#include "event_set_player_frontier_style.h"
 #include "event_set_timer.h"
 #include "event_unhide_area.h"
 #include "profile/profile.h"
@@ -75,11 +72,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 			 "course of the game.")
 	},
 	{
-		false,
-		"road",                   _("Create road"),
-		_("Create a road and optionally place a carrier on it")
-	},
-	{
 		true,
 		"set_timer",              _("Set timer"),
 		_("Set a timer to trigger after a certain duration.")
@@ -90,20 +82,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		_
 			("Gives vision for a specified amount of time of all locations "
 			 "within an area to the player.")
-	},
-	{
-		true,
-		"set_player_frontier_style", _("Set player's frontier style"),
-		_
-			("Sets the style of the player's frontier markers to one of the "
-			 "styles that are defined in the player's tribe.")
-	},
-	{
-		true,
-		"set_player_flag_style",     _("Set player's flag style"),
-		_
-			("Sets the style of the player's flags to one of the styles that are "
-			 "defined in the player's tribe.")
 	},
 	{
 		false, // Change this value when option window exists
@@ -163,11 +141,8 @@ Event & create
 	case  1: return *new Event_Forbid_Worker_Types      (name, state);
 	case  4: return *new Event_Building                 (name, state);
 	case  9: return *new Event_Message_Box              (name, state);
-	case 14: return *new Event_Road                     (name, state);
 	case 15: return *new Event_Set_Timer                (name, state);
 	case 16: return *new Event_Unhide_Area              (name, state);
-	case 17: return *new Event_Set_Player_Frontier_Style(name, state);
-	case 18: return *new Event_Set_Player_Flag_Style    (name, state);
 	case 19: return *new Event_Allow_Retreat_Change     (name, state);
 	case 20: return *new Event_Forbid_Retreat_Change    (name, state);
 	case 21: return *new Event_Retreat_Change           (name, state);
@@ -196,11 +171,8 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case  1: return *new Event_Forbid_Worker_Types      (s, egbase);
 	case  4: return *new Event_Building                 (s, egbase);
 	case  9: return *new Event_Message_Box              (s, egbase);
-	case 14: return *new Event_Road                     (s, egbase);
 	case 15: return *new Event_Set_Timer                (s, egbase);
 	case 16: return *new Event_Unhide_Area              (s, egbase);
-	case 17: return *new Event_Set_Player_Frontier_Style(s, egbase);
-	case 18: return *new Event_Set_Player_Flag_Style    (s, egbase);
 	case 19: return *new Event_Allow_Retreat_Change     (s, egbase);
 	case 20: return *new Event_Forbid_Retreat_Change    (s, egbase);
 	case 21: return *new Event_Retreat_Change           (s, egbase);

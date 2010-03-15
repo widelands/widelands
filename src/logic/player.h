@@ -115,6 +115,9 @@ struct Player :
 
 	const std::string & get_name() const throw () {return m_name;}
 	void set_name(const std::string & name) {m_name = name;}
+	void set_frontier_style(uint8_t a) {m_frontier_style_index = a;}
+	void set_flag_style(uint8_t a) {m_flag_style_index = a;}
+
 
 	void create_default_infrastructure();
 
