@@ -29,7 +29,6 @@
 #include "event_expire_message.h"
 #include "event_retreat_change.h"
 #include "event_set_timer.h"
-#include "event_unhide_area.h"
 #include "profile/profile.h"
 
 #include "wexception.h"
@@ -74,13 +73,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		true,
 		"set_timer",              _("Set timer"),
 		_("Set a timer to trigger after a certain duration.")
-	},
-	{
-		true,
-		"unhide_area",            _("Unhide area"),
-		_
-			("Gives vision for a specified amount of time of all locations "
-			 "within an area to the player.")
 	},
 	{
 		false, // Change this value when option window exists
@@ -136,7 +128,6 @@ Event & create
 	case  4: return *new Event_Building                 (name, state);
 	case  9: return *new Event_Message_Box              (name, state);
 	case 15: return *new Event_Set_Timer                (name, state);
-	case 16: return *new Event_Unhide_Area              (name, state);
 	case 19: return *new Event_Allow_Retreat_Change     (name, state);
 	case 20: return *new Event_Forbid_Retreat_Change    (name, state);
 	case 21: return *new Event_Retreat_Change           (name, state);
@@ -165,7 +156,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case  4: return *new Event_Building                 (s, egbase);
 	case  9: return *new Event_Message_Box              (s, egbase);
 	case 15: return *new Event_Set_Timer                (s, egbase);
-	case 16: return *new Event_Unhide_Area              (s, egbase);
 	case 19: return *new Event_Allow_Retreat_Change     (s, egbase);
 	case 20: return *new Event_Forbid_Retreat_Change    (s, egbase);
 	case 21: return *new Event_Retreat_Change           (s, egbase);
