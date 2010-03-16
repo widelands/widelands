@@ -304,7 +304,7 @@ Road * Player::build_road(const Path & path) {
 }
 
 
-Road & Player::force_road(Path const & path, bool const create_carrier) {
+Road & Player::force_road(Path const & path) {
 	Map & map = egbase().map();
 	FCoords c = map.get_fcoords(path.get_start());
 	Flag & start = force_flag(c);
@@ -325,7 +325,7 @@ Road & Player::force_road(Path const & path, bool const create_carrier) {
 			immovable->remove(egbase());
 		}
 	}
-	return Road::create(egbase(), start, end, path, create_carrier);
+	return Road::create(egbase(), start, end, path);
 }
 
 

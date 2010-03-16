@@ -43,6 +43,7 @@
 //
 // TODO: readd allow and forbid worker types. Currently all workers are always
 //         allowed
+// TODO: implement the message system
 
 // TODO: clean mess up with warp_workers, set_workers. All should have one
 //    API

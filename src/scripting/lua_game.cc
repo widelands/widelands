@@ -895,7 +895,7 @@ int L_Player::place_road(lua_State * L) {
 
 	Road * r = 0;
 	if (force_road) {
-		r = &get(L, g).force_road(path, false);
+		r = &get(L, g).force_road(path);
 	} else {
 		BaseImmovable * bi = map.get_immovable(current);
 		if (!bi or bi->get_type() != Map_Object::FLAG) {

@@ -71,9 +71,7 @@ struct Road : public PlayerImmovable {
 
 	static Road & create
 		(Editor_Game_Base &,
-		 Flag & start, Flag & end, Path const &,
-		 bool    create_carrier = false,
-		 int32_t type           = Road_Normal);
+		 Flag & start, Flag & end, Path const &);
 
 	Flag & get_flag(FlagId const flag) const {return *m_flags[flag];}
 

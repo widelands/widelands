@@ -87,13 +87,8 @@ Road::~Road()
 */
 Road & Road::create
 	(Editor_Game_Base & egbase,
-	 Flag & start, Flag & end, Path const & path,
-	 bool    const create_carrier,
-	 int32_t const type)
+	 Flag & start, Flag & end, Path const & path)
 {
-	// TODO: SirVer, Lua remove create_carrier from this function after
-	// TODO: SirVer, Lua all campaigns are transfered
-
 	assert(start.get_position() == path.get_start());
 	assert(end  .get_position() == path.get_end  ());
 	assert(start.get_owner   () == end .get_owner());
@@ -101,33 +96,11 @@ Road & Road::create
 	Player & owner          = start.owner();
 	Road & road             = *new Road();
 	road.set_owner(&owner);
-	road.m_type             = type;
+	road.m_type             = Road_Normal;
 	road.m_flags[FlagStart] = &start;
 	road.m_flags[FlagEnd]   = &end;
 	// m_flagidx is set when attach_road() is called, i.e. in init()
 	road._set_path(egbase, path);
-	if (create_carrier) {
-		Coords idle_position = start.get_position();
-		{
-			Map const & map = egbase.map();
-			Path::Step_Vector::size_type idle_index = road.get_idle_index();
-			for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
-				map.get_neighbour(idle_position, path[i], &idle_position);
-		}
-		Tribe_Descr const & tribe = owner.tribe();
-		Carrier & carrier =
-			ref_cast<Carrier, Worker>
-				(tribe.get_worker_descr(tribe.worker_index("carrier"))->create
-				 	(egbase, owner, &start, idle_position));
-		carrier.start_task_road(ref_cast<Game, Editor_Game_Base>(egbase));
-
-		// TODO: SirVer I guess this is wrong. There are already two slots,
-		// we shouldn't push back another. or not?
-		CarrierSlot slot;
-		slot.carrier = &carrier;
-		slot.carrier_type = 1;
-		road.m_carrier_slots.push_back(slot);
-	}
 
 	road.init(egbase);
 
