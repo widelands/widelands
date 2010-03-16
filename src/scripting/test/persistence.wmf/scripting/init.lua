@@ -21,6 +21,7 @@ removed_tree = wl.map.create_immovable("tree4", wl.map.Field(34,34))
 removed_tree:remove()
 corout = coroutine.create(function() coroutine.yield("What cool is that?") end)
 objective = p:add_objective("lumber", "House", "Boat!")
+objective.done = true
 
 -- ========================
 -- Test after unpersisting 
@@ -57,6 +58,8 @@ assert_table(objective)
 assert_equal("lumber", objective.name)
 assert_equal("House", objective.title)
 assert_equal("Boat!", objective.body)
+assert_equal(true, objective.done)
+
 print("################### ALL TEST PASS!")
 wl.debug.exit()
 end

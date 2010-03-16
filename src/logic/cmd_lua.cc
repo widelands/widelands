@@ -19,6 +19,7 @@
 
 #include "cmd_lua.h"
 
+#include "log.h"
 #include "game.h"
 #include "game_data_error.h"
 #include "scripting/scripting.h"

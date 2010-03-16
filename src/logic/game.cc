@@ -23,12 +23,9 @@
 #include "game.h"
 
 #include "carrier.h"
-#include "cmd_check_eventchain.h"
 #include "cmd_lua.h"
 #include "computer_player.h"
 #include "economy/economy.h"
-#include "events/event.h"
-#include "events/event_chain.h"
 #include "findimmovable.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
@@ -469,8 +466,6 @@ bool Game::run
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources();
-		map().mem().remove_unreferenced();
-		map().mtm().remove_unreferenced();
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
@@ -487,12 +482,6 @@ bool Game::run
 
 		// Run the init script, if the map provides one.
 		enqueue_command(new Cmd_Lua(get_gametime(), "map", "init", true));
-
-		// Everything prepared, send the first trigger event
-		// We lie about the sender here. Hey, what is one lie in a lifetime?
-		enqueue_command
-			(new Cmd_CheckEventChain(get_gametime(), static_cast<uint16_t>(-1)));
-
 	}
 
 	if (m_writereplay) {

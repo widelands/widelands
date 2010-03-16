@@ -20,8 +20,8 @@
 #ifndef OBJECTIVE_H
 #define OBJECTIVE_H
 
+#include "named.h"
 #include "i18n.h"
-#include "trigger/trigger.h"
 
 #include <cassert>
 #include <string>
@@ -33,22 +33,18 @@ namespace Widelands {
 ///
 /// A Map (or scenario) objective is an objective that has to be fulfilled to
 /// end a scenario successfully.
-/// Each objective has a trigger assigned to it, which is used to check the
-/// objective's condition.
 /// But note, the objectives itself doesn't check it's conditions, the map
 /// designer is responsible for checking it and setting it's trigger up.
-///
-/// Usually, the win trigger is only set, when all of the objectives triggers
-/// are going up.
-struct Objective : public Named, public Referencer<Trigger> {
+// TODO: SirVer, Lua: replace is and get here!
+struct Objective : public Named {
 	Objective()
 		:
 		m_visname   (name()),
 		m_descr     (_("no descr")),
-		m_trigger   (0),
+		m_is_done   (false),
 		m_is_visible(true)
 	{}
-	virtual ~Objective() {if (m_trigger) unreference(*m_trigger);}
+	virtual ~Objective() {}
 
 	std::string identifier() const {return "Objective: " + name();}
 
@@ -56,32 +52,16 @@ struct Objective : public Named, public Referencer<Trigger> {
 	const std::string & descr() const throw ()    {return m_descr;}
 	void set_visname(std::string const & new_name)  {m_visname = new_name;}
 	void set_descr  (std::string const & new_descr) {m_descr   = new_descr;}
+	void set_done(bool t) {m_is_done = t;}
 	bool get_is_visible()       const throw ()    {return m_is_visible;}
 	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
-
-	//  Get the trigger that is attached to this
-	//  Trigger is created by Editor or on load
-	Trigger * get_trigger() const {return m_trigger;}
-	void set_done(bool t) { if(m_trigger) m_trigger->set_trigger(t); }
-	bool done() {
-		if(not m_trigger)
-			return false;
-		return m_trigger->is_set();
-	}
-
-	//  Setting the values below is only a good idea in editor.
-	void set_trigger(Trigger * const tr) {
-		assert(!m_trigger);
-		if (tr)
-			reference(*tr);
-		m_trigger = tr;
-	}
+	bool done() const throw() {return m_is_done;}
 
 private:
 	std::string m_visname;
 	std::string m_descr;
-	Trigger *   m_trigger;
 	bool        m_is_visible;
+	bool        m_is_done;
 };
 
 }

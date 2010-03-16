@@ -30,7 +30,6 @@
 #include "logic/path.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "trigger/trigger_time.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
 
@@ -710,10 +709,8 @@ int L_Player::add_objective(lua_State * L) {
 
 
 	Objective & o = *new Objective;
-	Trigger_Time & trigger = *new Trigger_Time(name.c_str());
-	map->mtm().register_new(trigger);
 
-	o.set_trigger(&trigger);
+	o.set_done(false);
 	o.set_name(name);
 	o.set_visname(luaL_checkstring(L, 3));
 	o.set_descr(luaL_checkstring(L, 4));
@@ -1281,9 +1278,7 @@ int L_Objective::set_done(lua_State * L) {
 int L_Objective::remove(lua_State * L) {
 	Game & g = get_game(L);
 	Objective & o = get(L, g); // will not return if object doesn't exist
-	std::string trigger_name = o.get_trigger()->name();
 	g.map().mom().remove(m_name);
-	g.map().mtm().remove(trigger_name);
 	return 0;
 }
 

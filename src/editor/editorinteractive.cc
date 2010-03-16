@@ -461,8 +461,7 @@ void Editor_Interactive::select_tool
 /**
  * Reference functions
  *
- *  data is either a pointer to a trigger, event
- *  or a tribe (for buildings)
+ *  data is a pointer to a tribe (for buildings)
  */
 void Editor_Interactive::reference_player_tribe
 	(Widelands::Player_Number const player, void const * const data)

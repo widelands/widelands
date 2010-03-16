@@ -23,11 +23,10 @@
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "profile/profile.h"
-#include "trigger/trigger_time.h"
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 void Map_Objective_Data_Packet::Read
@@ -44,16 +43,14 @@ throw (_wexception)
 	try {prof.read("objective", 0, fs);} catch (...) {return;}
 	Map & map = egbase.map();
 	Manager<Objective> & mom = map.mom();
-	Manager<Trigger>   & mtm = map.mtm();
 
 	try {
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version <= CURRENT_PACKET_VERSION) {
 			while (Section * const s = prof.get_next_section(0)) {
 				char const * const         name = s->get_name();
 				try {
-					char const * const trigger_name = s->get_safe_string("trigger");
 					Objective & objective = *new Objective();
 					objective.set_name(name);
 					try {
@@ -64,11 +61,7 @@ throw (_wexception)
 					objective.set_visname    (s->get_string("name", name));
 					objective.set_descr      (s->get_safe_string("descr"));
 					objective.set_is_visible (s->get_safe_bool  ("visible"));
-					if (Trigger * const trig = mtm[trigger_name])
-						objective.set_trigger(trig);
-					else
-						throw game_data_error
-							("references nonexistent trigger \"%s\"", trigger_name);
+					objective.set_done       (s->get_bool  ("done", false));
 				} catch (_wexception const & e) {
 					throw game_data_error(_("%s: %s"), name, e.what());
 				}
@@ -98,7 +91,7 @@ throw (_wexception)
 		s.set_string("name",     objective.visname());
 		s.set_string("descr",    objective.descr());
 		s.set_bool  ("visible",  objective.get_is_visible());
-		s.set_string("trigger",  objective.get_trigger()->name());
+		s.set_bool  ("done", objective.done());
 	}
 
 	prof.write("objective", false, fs);

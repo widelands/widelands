@@ -71,8 +71,6 @@ struct Player :
 	friend struct Editor_Game_Base;
 	friend class Game_Player_Info_Data_Packet;
 	friend class Game_Player_Economies_Data_Packet;
-	friend struct Event_Set_Player_Frontier_Style;
-	friend struct Event_Set_Player_Flag_Style;
 	friend struct Map_Buildingdata_Data_Packet;
 	friend struct Map_Players_View_Data_Packet;
 	friend struct Map_Exploration_Data_Packet;

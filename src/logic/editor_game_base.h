@@ -60,7 +60,7 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	Editor_Game_Base();
 	virtual ~Editor_Game_Base();
 
-	void set_map(Map *, bool = true);
+	void set_map(Map *);
 	Map & map() const throw () {return *m_map;}
 	Map * get_map() {return m_map;}
 	Map & get_map() const {return *m_map;}
@@ -143,7 +143,7 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	int32_t & get_game_time_pointer() {return m_gametime;}
 	void set_ibase(Interactive_Base * const b) {m_ibase = b;}
 
-	/// Lua frontend, used to run lua triggers and events.
+	/// Lua frontend, used to run Lua scripts
 	LuaInterface& lua() {return *m_lua;}
 
 private:

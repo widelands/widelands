@@ -19,12 +19,10 @@
 
 #include "queue_cmd_factory.h"
 
-#include "cmd_check_eventchain.h"
 #include "cmd_incorporate.h"
 #include "cmd_lua.h"
 #include "cmd_luafunction.h"
 #include "economy/cmd_call_economy_balance.h"
-#include "events/event_chain.h"
 #include "instances.h"
 #include "playercommand.h"
 #include "queue_cmd_ids.h"
@@ -76,8 +74,6 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_Destroy_Map_Object   ();
 	case QUEUE_CMD_ACT:
 		return *new Cmd_Act                  ();
-	case QUEUE_CMD_CHECK_EVENTCHAIN:
-		return *new Cmd_CheckEventChain      ();
 	case QUEUE_CMD_INCORPORATE:
 		return *new Cmd_Incorporate          ();
 	case QUEUE_CMD_LUA:

@@ -43,61 +43,12 @@
 //
 // TODO: remove allowed buildings map packet
 // TODO: remove variables map packet
-// TODO: remove event map packet buildings map packet
-// TODO: remove trigger map packet buildings map packet
-// TODO: remove event chain map packet
 // TODO: readd allow and forbid worker types. Currently all workers are always
 //         allowed
 // TODO: h:warp_soldiers({0,0,0,0}, 1) crashed on me in initizalisation scripts.
 //         Verify this!
-
-// TODO: initialization todos:
-#if 0
-	else if   (not strcmp(event_name, "allow_worker_types")) {
-		event_s->set_int("version", 1);
-		event =
-			new Event_Allow_Worker_Types
-				(*event_s, egbase, this);
-	} else if (not strcmp(event_name, "forbid_worker_types"))
-	{
-		event_s->set_int("version", 1);
-		event =
-			new Event_Forbid_Worker_Types
-				(*event_s, egbase, this);
-	} else if
-		(Building_Index const building =
-			building_index(event_name))
-	{
-		event_s->set_int("version", 2);
-		event =
-			new Event_Building
-				(*event_s, egbase, this, building);
-	} else if (not strcmp(event_name, "unhide_area"))    {
-		event_s->set_int("version", 2);
-		event_s->set_string("point", "0 0");
-		event = new Event_Unhide_Area(*event_s, egbase);
-	} else if
-		(not strcmp(event_name, "allow_retreat_change"))
-	{
-		event_s->set_int("version", 1);
-		event =
-			new Event_Allow_Retreat_Change
-				(*event_s, egbase);
-	} else if
-		(not strcmp(event_name, "forbid_retreat_change"))
-	{
-		event_s->set_int("version", 1);
-		event =
-			new Event_Forbid_Retreat_Change
-				(*event_s, egbase);
-	} else if
-		(not strcmp(event_name, "retreat_change"))
-	{
-		event_s->set_int("version", 1);
-		event =
-			new Event_Retreat_Change(*event_s, egbase);
-	}
-#endif
+//
+// TODO: remove event directory
 
 // FUTURE: access to player stock via Player.get_wares and get_workers
 // FUTURE: access to constructionsites via Player.get_buildings

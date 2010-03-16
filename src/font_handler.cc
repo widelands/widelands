@@ -43,7 +43,7 @@ namespace UI {
 /**
  * Plain Constructor
  */
-Font_Handler::Font_Handler() : m_varcallback(0), m_cbdata(0) {
+Font_Handler::Font_Handler() {
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
@@ -415,7 +415,7 @@ void Font_Handler::draw_richtext
 		}
 		std::vector<Richtext_Block> blocks;
 		Text_Parser p;
-		p.parse(text, blocks, m_varcallback, m_cbdata);
+		p.parse(text, blocks);
 
 		std::vector<SDL_Surface *> rend_blocks;
 		int32_t global_h = 0;
@@ -968,21 +968,6 @@ int32_t Font_Handler::calc_linewidth(TTF_Font & font, std::string const & text)
 	int32_t w, h;
 	TTF_SizeUTF8(&font, text.c_str(), &w, &h);
 	return w;
-}
-
-/**
- * Registers the variable callback which is used (currently, 11.05)
- * for rendering map variables.
- */
-void Font_Handler::register_variable_callback
-	(Varibale_Callback cb, void * const cbdata)
-{
-	m_varcallback = cb;
-	m_cbdata      = cbdata;
-}
-void Font_Handler::unregister_variable_callback() {
-	m_varcallback = 0;
-	m_cbdata = 0;
 }
 
 }
