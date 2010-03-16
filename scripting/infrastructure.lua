@@ -152,7 +152,8 @@ function place_building_in_region(
       table.remove(fields, idx)
    end
    error(string.format(
-      "Could not find a suitable position for '%s'", building)
+      "Could not find a suitable position for building '%s' for player %i",
+      building, plr.number)
    )
 end
 
