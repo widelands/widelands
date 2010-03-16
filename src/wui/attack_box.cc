@@ -146,6 +146,15 @@ void AttackBox::update_attack() {
 	if (m_pl->is_retreat_change_allowed()) {
 		assert(m_slider_retreat);
 		assert(m_text_retreat);
+
+		Widelands::Military_Data MD = m_pl->tribe().get_military_data();
+
+		if (m_slider_retreat->get_value() < MD.get_min_retreat()) 
+			m_slider_retreat->set_value (MD.get_min_retreat());
+
+		if (m_slider_retreat->get_value() > MD.get_max_retreat()) 
+			m_slider_retreat->set_value (MD.get_max_retreat());
+
 		sprintf(buf, "%u %%", m_slider_retreat->get_value());
 		m_text_retreat->set_text(buf);
 	}
