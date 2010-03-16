@@ -227,6 +227,7 @@ private:
 			m_game          (game),
 			m_target        (target),
 			m_counter       (0),
+			m_next_diskspacecheck(0),
 			m_dump          (0),
 			m_syncstreamsave(false)
 		{}
@@ -247,6 +248,7 @@ private:
 		Game        &   m_game;
 		StreamWrite &   m_target;
 		uint32_t        m_counter;
+		uint32_t        m_next_diskspacecheck;
 		::StreamWrite * m_dump;
 		std::string     m_dumpfname;
 		bool            m_syncstreamsave;

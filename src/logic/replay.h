@@ -71,7 +71,6 @@ struct ReplayWriter {
 	void SendPlayerCommand(PlayerCommand *);
 	void SendSync(md5_checksum const &);
 
-	bool hasDiskSpace();
 private:
 	Game        & m_game;
 	StreamWrite * m_cmdlog;

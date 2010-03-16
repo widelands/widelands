@@ -29,7 +29,7 @@
 
 #ifdef _MSC_VER
 #ifndef __attribute__
-#define __attribute__(x) 
+#define __attribute__(x)
 #endif
 #endif
 
@@ -70,7 +70,7 @@ struct ZipFilesystem : public FileSystem {
 	virtual void Rename(std::string const &, std::string const &)
 		__attribute__ ((noreturn));
 
-	virtual unsigned long DiskSpace();
+	virtual unsigned long long DiskSpace();
 
 public:
 	static FileSystem * CreateFromDirectory(std::string const & directory);

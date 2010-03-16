@@ -117,7 +117,7 @@ struct FileSystem {
     static std::string FS_FilenameWoExt(char const *);
 	static std::string GetHomedir();
 
-	virtual unsigned long DiskSpace() = 0;
+	virtual unsigned long long DiskSpace() = 0;
 
 protected:
 	///To get a filesystem, use the Create methods
