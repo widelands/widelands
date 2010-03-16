@@ -109,3 +109,51 @@ function prefilled_buildings(p, ...)
    end
 end
 
+-- RST
+-- .. function:: place_building_in_region(plr, building, region[, opts])
+--
+--    Tries to place a building randomly in the given region. It places houses
+--    using :func:`prefilled_buildings`, therefore uses the same options.
+--    If it fails, an error is thrown. This is a most useful function when
+--    defining starting conditions (initializations) in normal games.
+--
+--    :arg plr: The player for which the building is created
+--    :type plr: :class:`wl.game.Player`
+--    :arg building: The name of the building to create.
+--    :type building: :class:`string`
+--    :arg region: The fields which are searched for a valid location.
+--    :type region: :class:`array`
+--    :arg opts:  a table with prefill information (wares, soldiers, workers,
+--       see :func:`prefilled_buildings`) and the following options:
+--
+--       req_suitability
+--          The reguired suitability for this building. Default value is 1.
+--    :type opts: :class:`table`
+--
+--    :returns: the building created
+function place_building_in_region(
+   plr, building, fields, gargs
+)
+   local idx
+   local f
+   local args = gargs or {}
+   local req_suitability = args.req_suitability or 1
+
+   while #fields > 0 do
+      local idx = math.random(#fields)
+      local f = fields[idx]
+
+      if plr:get_suitability(building, f) >= req_suitability then
+         args[1] = building
+         args[2] = f.x
+         args[3] = f.y
+         return prefilled_buildings(plr, args)
+      end
+      table.remove(fields, idx)
+   end
+   error(string.format(
+      "Could not find a suitable position for '%s'", building)
+   )
+end
+
+

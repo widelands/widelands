@@ -2,30 +2,7 @@
 --                    Start conditions for Citadel Village
 -- =======================================================================
 
-use("aux", "coroutine")
 use("aux", "infrastructure")
-
-function _place_nearby(plr, building, fields, required_suitability, gargs)
-   local idx
-   local f
-   local args = gargs or {}
-
-   while #fields > 0 do
-      local idx = math.random(#fields)
-      local f = fields[idx]
-
-      if plr:get_suitability(building, f) >= required_suitability then
-         args[1] = building
-         args[2] = f.x
-         args[3] = f.y
-         return prefilled_buildings(plr, args)
-      end
-      table.remove(fields, idx)
-   end
-   error(string.format(
-      "Could not find a suitable position for '%s'", building)
-   )
-end
 
 function initialize(p) 
 
@@ -35,7 +12,7 @@ function initialize(p)
    local h = p:place_building("citadel", sf)
    h:warp_soldiers{[{0,0,0,0}] = 12}
 
-    _place_nearby(p, "warehouse", sf:region(7), 1, {
+    place_building_in_region(p, "warehouse", sf:region(7), {
       wares = {
          axe = 6,
          bakingtray = 2,
@@ -77,7 +54,7 @@ function initialize(p)
       }
    })
 
-   _place_nearby(p, "battlearena", sf:region(12), 1, {
+   place_building_in_region(p, "battlearena", sf:region(12), {
       wares = {
          pittabread = 8,
          fish = 6,
@@ -85,21 +62,21 @@ function initialize(p)
       }
    })
    
-   _place_nearby(p, "trainingscamp", sf:region(12), 1)
+   place_building_in_region(p, "trainingscamp", sf:region(12))
   
-   _place_nearby(p, "helmsmithy", sf:region(12), 1, {
+   place_building_in_region(p, "helmsmithy", sf:region(12), {
       wares = { iron = 4, gold = 4 }
    })
-   _place_nearby(p, "metalworks", sf:region(12), 1, {
+   place_building_in_region(p, "metalworks", sf:region(12), {
       wares = { iron = 8 },
    })
-   _place_nearby(p, "axefactory", sf:region(12), 1, {
+   place_building_in_region(p, "axefactory", sf:region(12), {
       wares = { coal = 8 },
    })
-   _place_nearby(p, "hardener", sf:region(12), 1, {
+   place_building_in_region(p, "hardener", sf:region(12), {
       wares = { trunk = 1 },
    })
-   _place_nearby(p, "lime_kiln", sf:region(12), 1, {
+   place_building_in_region(p, "lime_kiln", sf:region(12), {
       wares = { raw_stone = 6, coal = 3 },
    })
 
