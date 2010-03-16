@@ -294,6 +294,16 @@ install(
 )
 
 install(
+  FILES
+    COPYING
+    CREDITS
+    ChangeLog
+  DESTINATION ${WL_INSTALL_DATADIR}
+  CONFIGURATIONS Debug;Release
+  COMPONENT CoreLicenseFiles
+)
+
+install(
   DIRECTORY
     doc
   DESTINATION ${WL_INSTALL_DATADIR}
@@ -368,7 +378,7 @@ install(
 
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
-set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CorePicsFiles CoreVersionFile)
+set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CorePicsFiles CoreVersionFile CoreLicenseFiles)
 set (CPACK_GENERATOR TGZ)
 set (CPACK_SOURCE_GENERATOR TGZ)
 include(CPack)
