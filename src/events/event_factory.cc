@@ -22,7 +22,6 @@
 #include "event_message.h"
 #include "event_message_box.h"
 #include "event_expire_message.h"
-#include "event_set_timer.h"
 #include "profile/profile.h"
 
 #include "wexception.h"
@@ -47,11 +46,6 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 			("Show a message box. It can be modal or and have a picture. An "
 			 "events can be assigned to each button to give the user chose the "
 			 "course of the game.")
-	},
-	{
-		true,
-		"set_timer",              _("Set timer"),
-		_("Set a timer to trigger after a certain duration.")
 	},
 	{
 		false,
@@ -82,7 +76,6 @@ Event & create
 {
 	switch (id) {
 	case  9: return *new Event_Message_Box              (name, state);
-	case 15: return *new Event_Set_Timer                (name, state);
 	case 23: return *new Event_Message                  (name, state);
 	case 24: return *new Event_Expire_Message           (name, state);
 	default:
@@ -94,17 +87,12 @@ Event & create
 Event & create(Section & s, Editor_Game_Base & egbase) {
 	char const * type_name = s.get_safe_string("type");
 
-	//  Handle old names.
-	if (not strcmp(type_name, "set_null_trigger"))
-		type_name = "set_timer";
-
 	size_t i = 0;
 	while (strcmp(type_name, EVENT_TYPE_DESCRIPTIONS[i].id))
 		if (++i == nr_event_types())
 			throw wexception("invalid type \"%s\"", type_name);
 	switch (i) {
 	case  9: return *new Event_Message_Box              (s, egbase);
-	case 15: return *new Event_Set_Timer                (s, egbase);
 	case 23: return *new Event_Message                  (s, egbase);
 	case 24: return *new Event_Expire_Message           (s, egbase);
 	default:
