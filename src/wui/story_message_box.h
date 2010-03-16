@@ -17,31 +17,20 @@
  *
  */
 
-#ifndef EVENT_MESSAGE_BOX_MESSAGE_BOX_H
-#define EVENT_MESSAGE_BOX_MESSAGE_BOX_H
+#ifndef STORY_MESSAGE_BOX_H
+#define STORY_MESSAGE_BOX_H
 
 #include "ui_basic/window.h"
 
 #include <vector>
 
-namespace Widelands {
-struct Event_Message_Box;
-struct Game;
-struct Trigger_Time;
-}
-
-struct Message_Box_Event_Message_Box : public UI::Window {
-	Message_Box_Event_Message_Box
-		(Widelands::Game &, Widelands::Event_Message_Box *,
+struct Story_Message_Box : public UI::Window {
+	Story_Message_Box
+		(UI::Panel * const, std::string, std::string, std::string,
 		 int32_t, int32_t, int32_t, int32_t);
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
-	Widelands::Game                      & m_game;
-	void clicked(int32_t);
-	bool                                   m_is_modal;
-	std::vector<Widelands::Trigger_Time *> m_trigger;
+	void clicked_ok(int32_t);
 };
 
 #endif

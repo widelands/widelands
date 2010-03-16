@@ -20,7 +20,6 @@
 #include "event_factory.h"
 
 #include "event_message.h"
-#include "event_message_box.h"
 #include "event_expire_message.h"
 #include "profile/profile.h"
 
@@ -75,7 +74,6 @@ Event & create
 	(size_t const id, char const * const name, Event::State const state)
 {
 	switch (id) {
-	case  9: return *new Event_Message_Box              (name, state);
 	case 23: return *new Event_Message                  (name, state);
 	case 24: return *new Event_Expire_Message           (name, state);
 	default:
@@ -92,7 +90,6 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 		if (++i == nr_event_types())
 			throw wexception("invalid type \"%s\"", type_name);
 	switch (i) {
-	case  9: return *new Event_Message_Box              (s, egbase);
 	case 23: return *new Event_Message                  (s, egbase);
 	case 24: return *new Event_Expire_Message           (s, egbase);
 	default:

@@ -19,11 +19,11 @@
 
 #include <lua.hpp>
 
+#include "campvis.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "events/event_message_box.h"
-#include "events/event_message_box_message_box.h"
 #include "gamecontroller.h"
+#include "i18n.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_luafunction.h"
 #include "logic/objective.h"
@@ -32,7 +32,7 @@
 #include "logic/tribe.h"
 #include "trigger/trigger_time.h"
 #include "wui/interactive_player.h"
-#include "campvis.h"
+#include "wui/story_message_box.h"
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
@@ -525,42 +525,26 @@ int L_Player::send_message(lua_State * L) {
 // UNTESTED
 int L_Player::message_box(lua_State * L) {
 	Game & game = get_game(L);
-	Event_Message_Box e("temp", Event::INIT);
 
-	e.set_is_modal(true);
-	e.set_window_title(luaL_checkstring(L, 2));
-	e.set_text(luaL_checkstring(L, 3));
-	e.set_dimensions(400, 300);
-	e.set_button_name(0, "OK");
-	e.set_nr_buttons(1);
+	uint32_t w = 400;
+	uint32_t h = 300;
+	int32_t posx = -1;
+	int32_t posy = -1;
+	std::string button_text = _("OK");
+
+#define CHECK_ARG(var, type) \
+	lua_getfield(L, -1, #var); \
+	if (not lua_isnil(L, -1)) var = luaL_check ## type(L, -1); \
+	lua_pop(L, 1);
 
 	if (lua_gettop(L) == 4) {
+		CHECK_ARG(posx, uint32);
+		CHECK_ARG(posy, uint32);
+		CHECK_ARG(w, uint32);
+		CHECK_ARG(h, uint32);
+		CHECK_ARG(button_text, string);
 
-		lua_getfield(L, -1, "posx");
-		if (not lua_isnil(L, -1))
-			e.set_pos(luaL_checkuint32(L, -1), e.get_posy());
-		lua_pop(L, 1);
-
-		lua_getfield(L, -1, "posy");
-		if (not lua_isnil(L, -1))
-			e.set_pos(e.get_posx(), luaL_checkuint32(L, -1));
-		lua_pop(L, 1);
-
-		lua_getfield(L, -1, "w");
-		if (not lua_isnil(L, -1))
-			e.set_dimensions(luaL_checkuint32(L, -1), e.get_h());
-		lua_pop(L, 1);
-
-		lua_getfield(L, -1, "h");
-		if (not lua_isnil(L, -1))
-			e.set_dimensions(e.get_w(), luaL_checkuint32(L, -1));
-		lua_pop(L, 1);
-
-		lua_getfield(L, -1, "button_text");
-		if (not lua_isnil(L, -1))
-			e.set_button_name(0, luaL_checkstring(L, -1));
-		lua_pop(L, 1);
-
+		// This must be done manually
 		lua_getfield(L, 4, "loc");
 		if (not lua_isnil(L, -1)) {
 			Coords c = (*get_user_class<L_Field>(L, -1))->coords();
@@ -568,19 +552,26 @@ int L_Player::message_box(lua_State * L) {
 		}
 		lua_pop(L, 1);
 	}
+#undef CHECK_ARG
 
 	uint32_t cspeed = game.gameController()->desiredSpeed();
 	game.gameController()->setDesiredSpeed(0);
-	e.run(game);
 
-	// Manually force the game to reevalute it's current state,
+	std::string title = luaL_checkstring(L, 2);
+	std::string body =  luaL_checkstring(L, 3);
+	Story_Message_Box * mb =
+		new Story_Message_Box
+				(game.get_ipl(), luaL_checkstring(L, 2), luaL_checkstring(L, 3),
+				 button_text, posx, posy, w, h);
+
+	mb->run();
+	delete mb;
+
+	// Manually force the game to reevaluate it's current state,
 	// especially time information.
 	game.think();
 
 	game.gameController()->setDesiredSpeed(cspeed);
-
-
-
 	return 1;
 }
 
