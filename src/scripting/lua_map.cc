@@ -1354,6 +1354,13 @@ int L_MilitarySite::get_max_soldiers(lua_State * L) {
 int L_MilitarySite::warp_soldiers(lua_State * L) {
 	luaL_checktype(L, 2, LUA_TTABLE);
 
+	// Check that it is not called int the wrong way: warp_soldiers({0,0,0,0}, 1)
+	lua_pushuint32(L, 1);
+	lua_rawget(L, 2);
+	if (lua_isnumber(L, -1))
+		return report_error(L, "Expects an array of (Soldier_descr,count) pairs!");
+	lua_pop(L, 1);
+
 	Game & game = get_game(L);
 	MilitarySite * ms = get(game, L);
 	Tribe_Descr const & tribe = ms->owner().tribe();

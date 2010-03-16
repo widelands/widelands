@@ -29,6 +29,12 @@ function militarysite_tests:test_warp_soldiers_one_at_a_time()
    assert_equal(1, self.sentry:get_soldiers({0,0,0,0}))
    assert_equal(1, self.sentry:get_soldiers({3,0,0,1}))
 end
+function militarysite_tests:test_warp_soldier_illegal_use()
+   assert_error("Expects a list of soldiers", function() 
+      self.sentry:warp_soldiers({0,0,0,0}, 2)
+   end)
+end
+
 function militarysite_tests:test_warp_soldiers_all_at_once()
    self.sentry:warp_soldiers{[{0,0,0,0}] = 2}
    assert_equal(2, self.sentry:get_soldiers())

@@ -41,15 +41,11 @@
 // TODO: check SirVer, Lua TODOs!
 // TODO: convert the old initialization files in tribes and delete them
 //
-// TODO: remove allowed buildings map packet
-// TODO: remove variables map packet
 // TODO: readd allow and forbid worker types. Currently all workers are always
 //         allowed
-// TODO: h:warp_soldiers({0,0,0,0}, 1) crashed on me in initizalisation scripts.
-//         Verify this!
-//
-// TODO: remove event directory
 
+// TODO: clean mess up with warp_workers, set_workers. All should have one
+//    API
 // FUTURE: access to player stock via Player.get_wares and get_workers
 // FUTURE: access to constructionsites via Player.get_buildings
 // FUTURE: making busy roads and second carriers
