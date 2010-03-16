@@ -197,7 +197,8 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	m_last_stat_percent (0),
 	m_is_stopped        (false)
 {
-	*m_result_buffer = '\0';
+	m_statistics_buffer[0] = '\0';
+	m_result_buffer[0] = '\0';
 }
 
 ProductionSite::~ProductionSite() {
