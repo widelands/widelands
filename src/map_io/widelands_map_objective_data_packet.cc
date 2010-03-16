@@ -58,9 +58,9 @@ throw (_wexception)
 					} catch (Manager<Objective>::Already_Exists) {
 						throw game_data_error("duplicated");
 					}
-					objective.set_visname    (s->get_string("name", name));
+					objective.set_descname    (s->get_string("name", name));
 					objective.set_descr      (s->get_safe_string("descr"));
-					objective.set_is_visible (s->get_safe_bool  ("visible"));
+					objective.set_visible (s->get_safe_bool  ("visible"));
 					objective.set_done       (s->get_bool  ("done", false));
 				} catch (_wexception const & e) {
 					throw game_data_error(_("%s: %s"), name, e.what());
@@ -88,9 +88,9 @@ throw (_wexception)
 	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i) {
 		Objective const & objective = mom[i];
 		Section & s = prof.create_section(objective.name().c_str());
-		s.set_string("name",     objective.visname());
+		s.set_string("name",     objective.descname());
 		s.set_string("descr",    objective.descr());
-		s.set_bool  ("visible",  objective.get_is_visible());
+		s.set_bool  ("visible",  objective.visible());
 		s.set_bool  ("done", objective.done());
 	}
 

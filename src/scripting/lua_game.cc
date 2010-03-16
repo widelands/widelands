@@ -712,9 +712,9 @@ int L_Player::add_objective(lua_State * L) {
 
 	o.set_done(false);
 	o.set_name(name);
-	o.set_visname(luaL_checkstring(L, 3));
+	o.set_descname(luaL_checkstring(L, 3));
 	o.set_descr(luaL_checkstring(L, 4));
-	o.set_is_visible(true);
+	o.set_visible(true);
 
 	game.get_map()->mom().register_new(o);
 
@@ -1214,12 +1214,12 @@ int L_Objective::get_name(lua_State * L) {
 */
 int L_Objective::get_title(lua_State * L) {
 	Objective & o = get(L, get_game(L));
-	lua_pushstring(L, o.visname().c_str());
+	lua_pushstring(L, o.descname().c_str());
 	return 1;
 }
 int L_Objective::set_title(lua_State * L) {
 	Objective & o = get(L, get_game(L));
-	o.set_visname(luaL_checkstring(L, -1));
+	o.set_descname(luaL_checkstring(L, -1));
 	return 0;
 }
 /* RST
@@ -1244,12 +1244,12 @@ int L_Objective::set_body(lua_State * L) {
 */
 int L_Objective::get_visible(lua_State * L) {
 	Objective & o = get(L, get_game(L));
-	lua_pushboolean(L, o.get_is_visible());
+	lua_pushboolean(L, o.visible());
 	return 1;
 }
 int L_Objective::set_visible(lua_State * L) {
 	Objective & o = get(L, get_game(L));
-	o.set_is_visible(luaL_checkboolean(L, -1));
+	o.set_visible(luaL_checkboolean(L, -1));
 	return 0;
 }
 /* RST

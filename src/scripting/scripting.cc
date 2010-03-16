@@ -43,7 +43,7 @@
 //
 // TODO: readd allow and forbid worker types. Currently all workers are always
 //         allowed
-// TODO: implement the message system
+// TODO: implement the message system in Lua. Add the old Events functionality
 
 // TODO: clean mess up with warp_workers, set_workers. All should have one
 //    API
