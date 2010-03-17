@@ -317,7 +317,8 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	os.dock_windows_to_edges = m_dock_windows_to_edges.get_state();
 	os.music                 = m_music.get_state();
 	os.fx                    = m_fx.get_state();
-	os.language              = m_language_list.get_selected();
+	if (m_language_list.has_selection())
+		os.language      = m_language_list.get_selected();
 	os.autosave              = m_sb_autosave.getValue();
 	os.maxfps                = m_sb_maxfps.getValue();
 	os.remove_replays        = m_sb_remove_replays.getValue();
