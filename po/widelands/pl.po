@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-14 15:51+0100\n"
-"PO-Revision-Date: 2010-03-14 17:56+0000\n"
+"PO-Revision-Date: 2010-03-16 15:54+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-03-15 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-03-17 04:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/logic/worker.cc:1649
@@ -152,10 +152,24 @@ msgid ""
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
+"Opcje dźwięku:\n"
+" --nosound Rozpoczyna grę z wyłączonym dźwiękiem.\n"
+" --disable_fx Wyłącza efekty dźwiękowe.\n"
+" --disable_music Wyłącza muzykę.\n"
+"\n"
+" --nozip Nie pakuj zapisów gry do zipu.\n"
+"\n"
+" --editor Uruchamia przy starcie edytor Widelands.\n"
+"                        Można dodać =NAZWAPLIKU aby od razu\n"
+"                        załadować mapę NAZWAPLIKU do edytora.\n"
+" --scenario=NAZWAPLIKU Ładuje przy starcie mapę NAZWAPLIKU jako scenariusz.\n"
+" --loadgame=NAZWAPLIKU Ładuje przy starcie zapis gry NAZWAPLIKU.\n"
 
 #: ../../src/wlapplication.cc:1243
 msgid " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
 msgstr ""
+" --dedicated=NAZWAPLIKU Uruchamia gospodarza ggz z plikiem NAZWAPLIKU jako "
+"mapą\n"
 
 #: ../../src/wlapplication.cc:1247
 msgid ""
@@ -190,6 +204,9 @@ msgid ""
 "                      Enables opengl rendering\n"
 "                      *DANGEROUS AND BROKEN, DO NOT USE*\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Włącza/wyłącza rendering opengl\n"
+"                      *NIEBEZPIECZNE I USZKODZONE, NIE UŻYWAĆ*\n"
 
 #: ../../src/wlapplication.cc:1279
 msgid ""
@@ -1496,7 +1513,7 @@ msgstr "Kontynuuj"
 
 #: ../../src/events/event_message_box.cc:138
 msgid "there are no buttons, at least one is required"
-msgstr ""
+msgstr "nie ma przycisków, przynajmniej jeden jest wymagany"
 
 #: ../../src/events/event_message_box.cc:149
 #, c-format
@@ -1971,12 +1988,12 @@ msgstr "Pokonano przeciwnika na danym terenie!"
 #: ../../src/logic/militarysite.cc:709
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "%sTwój %s napotkał napastnika.</p>"
 
 #: ../../src/logic/militarysite.cc:710
 #, c-format
 msgid "%sYour %s is under attack.</p>"
-msgstr ""
+msgstr "%sTwój %s jest atakowany.</p>"
 
 #: ../../src/logic/militarysite.cc:718
 msgid "You are under attack"
@@ -3180,6 +3197,9 @@ msgid ""
 "status Read or Archived, which means that the player has changed the status "
 "of the message."
 msgstr ""
+"Uruchamia się, gdy wiadomość stworzona za pomocą zdarzenia wiadomości "
+"\"Nowa\" zmienia status na \"Przeczytana\" lub \"Zapisana\", co oznacza, że "
+"gracz zmienił status wiadomości."
 
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:58
 #, c-format
