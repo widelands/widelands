@@ -11,13 +11,8 @@ about how certain things are implemented and how to add to it.
    working directly on widelands.
 
 
-Where Lua is used
------------------
+TODO: this section should rather go into a common introduction
 
-TODO: starting conditions of tribes
-TODO: scenarios
-TODO: Plans for winning conditions
-TODO: debug console
 
 Hooks into the Game
 -------------------

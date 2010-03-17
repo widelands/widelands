@@ -1,5 +1,7 @@
-Scripting Tutorial
-==================
+.. _scenario_tutorial:
+
+Scenario Tutorial
+=================
 
 This section describes how to get a map ready for scripting addition and how
 to write simple Lua scripts. It goes trough all the concepts required to get
