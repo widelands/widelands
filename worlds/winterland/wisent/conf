@@ -6,11 +6,11 @@ program=remove
 0=remove
 
 [idle]
-hotspot=25 37
+hotspot=14 27
 pics=wisent_idle_se_??.png
 fps=20
 
 [walk]
-hotspot=25 37
+hotspot=20 32
 dirpics=wisent_walk_!!_??.png
 fps=20
