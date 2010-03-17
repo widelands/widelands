@@ -142,7 +142,6 @@ private:
 
 	Building    * m_building; ///< attached building (replaces road WALK_NW)
 	Road        * m_roads[6]; ///< WALK_xx - 1 as index
-	int32_t      m_items_pending[6];
 
 	int32_t      m_item_capacity; ///< size of m_items array
 	int32_t      m_item_filled; ///< number of items currently on the flag
