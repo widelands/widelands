@@ -6,7 +6,7 @@ program=remove
 
 [idle]
 pics=menu.png
-hotspot=5 9
+hotspot=4 9
 
 [walk]
 hotspot=5 9
