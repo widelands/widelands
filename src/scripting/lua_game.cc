@@ -114,6 +114,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, starting_field),
 	PROP_RW(L_Player, retreat_percentage),
 	PROP_RW(L_Player, changing_retreat_percentage_allowed),
+	PROP_RO(L_Player, inbox),
 	{0, 0, 0},
 };
 
@@ -305,6 +306,28 @@ int L_Player::set_changing_retreat_percentage_allowed(lua_State * L) {
 	return 0;
 }
 
+/* RST
+	.. attribute:: inbox
+
+		(RO) An array of the message that are either read or new. Note that you
+		can't add messages to this array, use :meth:`send_message` for that.
+*/
+int L_Player::get_inbox(lua_State * L) {
+	Player & p = get(L, get_game(L));
+
+	lua_newtable(L);
+	uint32_t cidx = 1;
+	container_iterate_const(MessageQueue, p.messages(), m) {
+		if (m.current->second->status() == Message::Archived)
+			continue;
+
+		lua_pushuint32(L, cidx ++);
+		to_lua<L_Message>(L, new L_Message(m_pl, m.current->first));
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
 
 /*
  ==========================================================

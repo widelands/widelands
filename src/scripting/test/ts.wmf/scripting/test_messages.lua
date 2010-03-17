@@ -7,6 +7,9 @@
 messages_tests = lunit.TestCase("Messages")
 function messages_tests:setup() 
    self.plr = wl.game.Player(1)
+   for i,m in ipairs(self.plr.inbox) do
+      m.status = "archived"
+   end
 end
 
 function messages_tests:test_defaults() 
@@ -58,6 +61,14 @@ function messages_tests:test_changing_status()
       m.status = "bluuuu"
    end)
 end
+function messages_tests:test_inbox()
+   assert_equal(0, #self.plr.inbox)
+   local m1 = self.plr:send_message("Hallo", "World!")
+   assert_equal(1, #self.plr.inbox)
+   local m2 = self.plr:send_message("Hallo", "World!")
+   assert_equal(2, #self.plr.inbox)
 
--- TODO: comparing msgs
--- TODO: access to players messages
+   assert_equal(m1, self.plr.inbox[1])
+   assert_equal(m2, self.plr.inbox[2])
+end
+

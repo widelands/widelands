@@ -41,9 +41,6 @@
 // TODO: check SirVer, Lua TODOs!
 // TODO: convert the old initialization files in tribes and delete them
 //
-// TODO: readd allow and forbid worker types. Currently all workers are always
-//         allowed
-// TODO: implement the message system in Lua. Add the old Events functionality
 
 // TODO: clean mess up with warp_workers, set_workers. All should have one
 //    API
@@ -52,6 +49,8 @@
 // FUTURE: access to player stock via Player.get_wares and get_workers
 // FUTURE: access to constructionsites via Player.get_buildings
 // FUTURE: making busy roads and second carriers
+// FUTURE: readd allow and forbid worker types. Currently all workers are always
+//         allowed
 
 /*
 ============================================
