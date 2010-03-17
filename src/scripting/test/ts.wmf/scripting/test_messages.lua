@@ -2,8 +2,6 @@
 --                          Testing Messages System                         
 -- =======================================================================
 
--- TODO: persistence tests of messages
-
 messages_tests = lunit.TestCase("Messages")
 function messages_tests:setup() 
    self.plr = wl.game.Player(1)
