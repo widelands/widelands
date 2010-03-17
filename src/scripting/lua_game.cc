@@ -101,7 +101,7 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, set_flag_style),
 	METHOD(L_Player, set_frontier_style),
 	METHOD(L_Player, get_suitability),
-	METHOD(L_Player, allow_all_workers),
+	METHOD(L_Player, allow_workers),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -1080,8 +1080,18 @@ int L_Player::get_suitability(lua_State * L) {
 }
 
 
-// TODO: undocumented, should be done properly
-int L_Player::allow_all_workers(lua_State * L) {
+/* RST
+	.. method:: allow_workers(what)
+
+		This will become the corresponding function to :meth:`allow_buildings`,
+		but at the moment this is only a stub that accepts only "all" as
+		argument. It then activates all workers for the player, that means all
+		workers are allowed to spawn in all warehouses.
+*/
+int L_Player::allow_workers(lua_State * L) {
+	if (luaL_checkstring(L, 2) != "all")
+		return report_error(L, "Argument must be <all>!");
+
 	Game & game = get_game(L);
 	const Tribe_Descr & tribe = get(L, game).tribe();
 	Player & player = get(L, game);

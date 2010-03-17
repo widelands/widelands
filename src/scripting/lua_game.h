@@ -98,7 +98,7 @@ public:
 	int set_flag_style(lua_State * L);
 	int set_frontier_style(lua_State * L);
 	int get_suitability(lua_State * L);
-	int allow_all_workers(lua_State * L);
+	int allow_workers(lua_State * L);
 
 
 

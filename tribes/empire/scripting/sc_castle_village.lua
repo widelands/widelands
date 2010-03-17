@@ -5,7 +5,7 @@
 use("aux", "infrastructure")
 
 return function(plr)
-   plr:allow_all_workers()
+   plr:allow_workers("all")
 
    local sf = plr.starting_field
    local h = plr:place_building("castle", sf)

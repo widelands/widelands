@@ -6,7 +6,7 @@ use("aux", "infrastructure")
 
 function initialize(p) 
 
-   p:allow_all_workers();
+   plr:allow_workers("all")
    
    local sf = p.starting_field
    local h = p:place_building("citadel", sf)
