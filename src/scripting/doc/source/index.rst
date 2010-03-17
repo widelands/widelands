@@ -14,6 +14,7 @@ Contents:
    tutorial
    reference
    wlrichtext
+   implementation
 
 Indices and tables
 ==================

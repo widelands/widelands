@@ -34,9 +34,6 @@
 
 #include "scripting.h"
 
-// TODO: document this whole scripting stuff: changes in pluto, pickling,
-// TODO:   unpickling, Luna & Luna changes, mos & mol pickling, LuaCmd <->
-// TODO:   LuaFunction, Testsuite and it's running.
 // TODO: make pickling independent of OS by using widelands Stream*
 //
 // TODO: clean mess up with warp_workers, set_workers. All should have one
