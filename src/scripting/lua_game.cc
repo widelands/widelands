@@ -1089,7 +1089,8 @@ int L_Player::get_suitability(lua_State * L) {
 		workers are allowed to spawn in all warehouses.
 */
 int L_Player::allow_workers(lua_State * L) {
-	if (luaL_checkstring(L, 2) != "all")
+
+	if (luaL_checkstring(L, 2) != std::string("all"))
 		return report_error(L, "Argument must be <all>!");
 
 	Game & game = get_game(L);

@@ -6,7 +6,7 @@ use("aux", "infrastructure")
 
 return function(p) 
 
-   plr:allow_workers("all")
+   p:allow_workers("all")
 
    local sf = p.starting_field
    prefilled_buildings(p, { "headquarters", sf.x, sf.y, 

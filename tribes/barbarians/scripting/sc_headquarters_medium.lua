@@ -7,7 +7,7 @@ use("aux", "infrastructure")
 function initialize(player) 
    local sf = player.starting_field
 
-   plr:allow_workers("all")
+   player:allow_workers("all")
 
    hq = prefilled_buildings(player, { "headquarters", sf.x, sf.y,
       wares = {
