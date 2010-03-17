@@ -86,16 +86,16 @@ static int L_exit(lua_State * const l) {
 }
 
 /* RST
-	.. function:: save(name)
+.. function:: save(name)
 
-		Saves the game exactly as if the player had entered the save dialog and
-		entered name as an argument. It some error occurred will saving, this will
-		throw an Lua error.
+	Saves the game exactly as if the player had entered the save dialog and
+	entered name as an argument. It some error occurred will saving, this will
+	throw an Lua error.
 
-		:arg name: name of save game. If this game already exists, it will
-			silently overwritten
-		:type name: :class:`string`
-		:returns: :const:`nil`
+	:arg name: name of save game. If this game already exists, it will be
+		silently overwritten
+	:type name: :class:`string`
+	:returns: :const:`nil`
 */
 static int L_save(lua_State * const L) {
 	Widelands::Game & game = get_game(L);

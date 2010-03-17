@@ -397,6 +397,7 @@ Flag
 const char L_Flag::className[] = "Flag";
 const MethodType<L_Flag> L_Flag::Methods[] = {
 	METHOD(L_Flag, add_ware),
+	METHOD(L_Flag, get_wares),
 	{0, 0},
 };
 const PropertyType<L_Flag> L_Flag::Properties[] = {
@@ -416,6 +417,7 @@ const PropertyType<L_Flag> L_Flag::Properties[] = {
  ==========================================================
  */
 /* RST
+ * TODO: this is wrong, correct this docstring
 	.. method:: add_ware(ware)
 
 		Adds a ware to this flag. The ware is created from thin air
@@ -443,6 +445,33 @@ int L_Flag::add_ware(lua_State * L)
 
 	f->add_item(game, item);
 	return 0;
+}
+
+/* RST
+	.. method:: get_wares(TODO)
+
+		descr
+
+		:returns: :const:`nil`
+*/
+int L_Flag::get_wares(lua_State * L) {
+	lua_newtable(L);
+
+	container_iterate_const(Flag::Wares, get(get_game(L), L)->get_items(), w) {
+		std::string name = (*w.current)->descr().name();
+		lua_getfield(L, -1, name.c_str());
+		if (lua_isnil(L, -1)) {
+			lua_pop(L, 1);
+			lua_pushuint32(L, 1);
+		} else {
+			uint32_t cur = luaL_checkuint32(L, -1);
+			lua_pop(L, 1);
+			lua_pushuint32(L, cur + 1);
+		}
+		lua_setfield(L, -2, name.c_str());
+	}
+
+	return 1;
 }
 
 /*

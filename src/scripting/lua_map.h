@@ -143,6 +143,7 @@ public:
 	CASTED_GET(PlayerImmovable);
 
 protected:
+	// TODO: move this in L_HasWares
 	Widelands::Ware_Index m_get_ware_index
 		(lua_State * L, Widelands::PlayerImmovable*, const std::string& s);
 	Widelands::Ware_Index m_get_worker_index
@@ -174,6 +175,13 @@ public:
 	CASTED_GET(Building);
 };
 
+// TODO: document this 
+struct L_HasWares {
+	virtual ~L_HasWares() {}
+
+	virtual int get_wares(lua_State * L) = 0;
+	virtual int set_wares(lua_State * L) = 0;
+};
 
 class L_Flag : public L_PlayerImmovable {
 public:
@@ -193,6 +201,7 @@ public:
 	 * Lua Methods
 	 */
 	int add_ware(lua_State *);
+	int get_wares(lua_State *);
 
 	/*
 	 * C Methods
