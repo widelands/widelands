@@ -170,4 +170,5 @@ end
 
 
 use("map", "test_objectives")
+use("map", "test_messages")
 

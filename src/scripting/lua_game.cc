@@ -421,7 +421,8 @@ int L_Player::place_building(lua_State * L) {
 			Default: :const:`false`
 		:type popup: :class:`boolean`
 
-		:returns: :const:`nil`
+		:returns: the message created
+		:rtype: :class:`wl.game.Message`
 */
 // UNTESTED
 int L_Player::send_message(lua_State * L) {
@@ -431,7 +432,7 @@ int L_Player::send_message(lua_State * L) {
 	Coords c = Coords::Null();
 	Duration d = Forever();
 	Message::Status st = Message::New;
-	std::string sender = "LuaEngine";
+	std::string sender = "ScriptingEngine";
 	bool popup = true;
 
 	if (n == 4) {
@@ -483,7 +484,7 @@ int L_Player::send_message(lua_State * L) {
 				 st),
 			popup);
 
-	return 0;
+	return to_lua<L_Message>(L, new L_Message(m_pl, message));
 }
 
 /* RST
@@ -1305,6 +1306,99 @@ Objective & L_Objective::get(lua_State * L, Widelands::Game & g) {
 	return *o;
 }
 
+/* RST
+Message
+---------
+
+.. class:: Message
+
+	This represents a message in the Message Box of a given user.
+*/
+const char L_Message::className[] = "Message";
+const MethodType<L_Message> L_Message::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Message> L_Message::Properties[] = {
+	PROP_RO(L_Message, sender),
+	PROP_RO(L_Message, title),
+	PROP_RO(L_Message, body),
+	{0, 0, 0},
+};
+
+L_Message::L_Message(uint8_t plr, Message_Id id) {
+	m_plr = plr;
+	m_mid = id;
+}
+
+void L_Message::__persist(lua_State * L) {
+	PERS_UINT32("player", m_plr);
+	PERS_UINT32("msg_idx", get_mos(L)->message_savers[m_plr - 1][m_mid].value());
+}
+void L_Message::__unpersist(lua_State * L) {
+	UNPERS_UINT32("player", m_plr);
+	uint32_t midx = 0;
+	UNPERS_UINT32("msg_idx", midx);
+	m_mid = Message_Id(midx);
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: sender
+
+		(RO) The name of the sender of this message
+*/
+int L_Message::get_sender(lua_State * L) {
+	lua_pushstring(L, get(L, get_game(L)).sender());
+	return 1;
+}
+/* RST
+	.. attribute:: title
+
+		(RO) The title of this message
+*/
+int L_Message::get_title(lua_State * L) {
+	lua_pushstring(L, get(L, get_game(L)).title());
+	return 1;
+}
+/* RST
+	.. attribute:: body
+
+		(RO) The body of this message
+*/
+int L_Message::get_body(lua_State * L) {
+	lua_pushstring(L, get(L, get_game(L)).body());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+Player & L_Message::get_plr(lua_State * L, Widelands::Game & game) {
+	if (m_plr > MAX_PLAYERS)
+		report_error(L, "Illegal player number %i",  m_plr);
+	Player * rv = game.get_player(m_plr);
+	if (!rv)
+		report_error(L, "Player with the number %i does not exist", m_plr);
+	return *rv;
+}
+const Message & L_Message::get(lua_State * L, Widelands::Game & game) {
+	const Message * rv = get_plr(L, game).messages()[m_mid];
+	if (!rv)
+		report_error(L, "This message has been deleted!");
+	return *rv;
+}
 
 
 /*
@@ -1410,5 +1504,6 @@ void luaopen_wlgame(lua_State * L) {
 
 	register_class<L_Player>(L, "game");
 	register_class<L_Objective>(L, "game");
+	register_class<L_Message>(L, "game");
 }
 

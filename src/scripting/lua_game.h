@@ -23,12 +23,14 @@
 #include <lua.hpp>
 
 #include "logic/building.h"
+#include "logic/message_id.h"
 
 #include "luna.h"
 
 namespace Widelands {
 	struct Tribe_Descr;
 	struct Objective;
+	struct Message;
 };
 
 /*
@@ -148,6 +150,40 @@ public:
 	 * C Methods
 	 */
 	Widelands::Objective & get(lua_State *, Widelands::Game &);
+};
+
+class L_Message : public L_GameModuleClass {
+	uint32_t m_plr;
+	Widelands::Message_Id m_mid;
+
+public:
+	LUNA_CLASS_HEAD(L_Message);
+
+	L_Message(uint8_t, Widelands::Message_Id);
+	L_Message() : m_plr(0), m_mid(0) {}
+	L_Message(lua_State * L) {
+		report_error(L, "Cannot instantiate a '%s' directly!", className);
+	}
+
+	virtual void __persist(lua_State*);
+	virtual void __unpersist(lua_State*);
+
+	/*
+	 * Properties
+	 */
+	int get_sender(lua_State * L);
+	int get_title(lua_State * L);
+	int get_body(lua_State * L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	Widelands::Player & get_plr(lua_State * L, Widelands::Game & game);
+	const Widelands::Message & get(lua_State * L, Widelands::Game & game);
 };
 
 void luaopen_wlgame(lua_State *);
