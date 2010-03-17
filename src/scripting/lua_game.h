@@ -172,12 +172,18 @@ public:
 	 * Properties
 	 */
 	int get_sender(lua_State * L);
+	int get_sent(lua_State * L);
 	int get_title(lua_State * L);
 	int get_body(lua_State * L);
+	int get_duration(lua_State * L);
+	int get_location(lua_State * L);
+	int get_status(lua_State * L);
+	int set_status(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
+	int __eq(lua_State * L);
 
 	/*
 	 * C Methods

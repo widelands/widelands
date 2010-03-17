@@ -401,10 +401,10 @@ int L_Player::place_building(lua_State * L) {
 		Opts is a table of optional arguments and can be omitted. If it
 		exist it must contain string/value pairs of the following type:
 
-		:arg expires_in: if this is given, the message will be removed
+		:arg duration: if this is given, the message will be removed
 			from the players inbox after this many ms. Default:
 			message never expires.
-		:type expires_in: :class:`integer`
+		:type duration: :class:`integer`
 
 		:arg loc: this field is the location connected to this message. Default:
 			no location attached to message
@@ -414,7 +414,7 @@ int L_Player::place_building(lua_State * L) {
 			'archived'. Default: "new"
 		:type status: :class:`string`
 
-		:arg sender: sender name of this string. Default: "LuaEngine"
+		:arg sender: sender name of this string. Default: "ScriptingEngine"
 		:type sender: :class:`string`
 
 		:arg popup: should the message window be opened for this message or not.
@@ -424,7 +424,6 @@ int L_Player::place_building(lua_State * L) {
 		:returns: the message created
 		:rtype: :class:`wl.game.Message`
 */
-// UNTESTED
 int L_Player::send_message(lua_State * L) {
 	uint32_t n = lua_gettop(L);
 	std::string title = luaL_checkstring(L, 2);
@@ -433,11 +432,11 @@ int L_Player::send_message(lua_State * L) {
 	Duration d = Forever();
 	Message::Status st = Message::New;
 	std::string sender = "ScriptingEngine";
-	bool popup = true;
+	bool popup = false;
 
 	if (n == 4) {
 		// Optional arguments
-		lua_getfield(L, 4, "expires_in");
+		lua_getfield(L, 4, "duration");
 		if (not lua_isnil(L, -1))
 			d = luaL_checkuint32(L, -1);
 		lua_pop(L, 1);
@@ -452,7 +451,7 @@ int L_Player::send_message(lua_State * L) {
 			std::string s = luaL_checkstring(L, -1);
 			if (s == "new") st = Message::New;
 			else if (s == "read") st = Message::Read;
-			else if (s == "archive") st = Message::Archived;
+			else if (s == "archived") st = Message::Archived;
 			else report_error(L, "Unknown message status: %s", s.c_str());
 		}
 		lua_pop(L, 1);
@@ -1316,12 +1315,17 @@ Message
 */
 const char L_Message::className[] = "Message";
 const MethodType<L_Message> L_Message::Methods[] = {
+	METHOD(L_Message, __eq),
 	{0, 0},
 };
 const PropertyType<L_Message> L_Message::Properties[] = {
 	PROP_RO(L_Message, sender),
 	PROP_RO(L_Message, title),
 	PROP_RO(L_Message, body),
+	PROP_RO(L_Message, sent),
+	PROP_RO(L_Message, duration),
+	PROP_RO(L_Message, location),
+	PROP_RW(L_Message, status),
 	{0, 0, 0},
 };
 
@@ -1374,11 +1378,82 @@ int L_Message::get_body(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: sent
+
+		(RO) The game time in milliseconds when this message was sent
+*/
+int L_Message::get_sent(lua_State * L) {
+	lua_pushuint32(L, get(L, get_game(L)).sent());
+	return 1;
+}
+
+/* RST
+	.. attribute:: duration
+
+		(RO) The time in milliseconds before this message is invalidated or nil if
+		this message has an endless duration.
+*/
+int L_Message::get_duration(lua_State * L) {
+	uint32_t d = get(L, get_game(L)).duration();
+	if (d == Forever())
+		return 0;
+	lua_pushuint32(L, d);
+	return 1;
+}
+
+/* RST
+	.. attribute:: location
+
+		(RO) The field that corresponds to this Message.
+*/
+int L_Message::get_location(lua_State * L) {
+	Coords c = get(L, get_game(L)).position();
+	if (c == Coords::Null())
+		return 0;
+	return to_lua<L_Field>(L, new L_Field(c));
+}
+
+/* RST
+	.. attribute:: status
+
+		(RW) The status of the message. Can be either of
+
+			* new
+			* read
+			* archived
+*/
+int L_Message::get_status(lua_State * L) {
+	switch(get(L, get_game(L)).status()) {
+		case Message::New: lua_pushstring(L, "new"); break;
+		case Message::Read: lua_pushstring(L, "read"); break;
+		case Message::Archived: lua_pushstring(L, "archived"); break;
+		default: return report_error(L, "Unknown Message status encountered!");
+	}
+	return 1;
+}
+int L_Message::set_status(lua_State * L) {
+	Message::Status status = Message::New;
+	std::string s = luaL_checkstring(L, -1);
+	if (s == "new") status = Message::New;
+	else if (s == "read") status = Message::Read;
+	else if (s == "archived") status = Message::Archived;
+	else return report_error(L, "Invalid message status <%s>!", s.c_str());
+
+	get_plr(L, get_game(L)).messages().set_message_status(m_mid, status);
+
+	return 0;
+}
+
 /*
  ==========================================================
  LUA METHODS
  ==========================================================
  */
+int L_Message::__eq(lua_State * L) {
+	lua_pushboolean(L, m_mid == (*get_user_class<L_Message>(L, 2))->m_mid);
+	return 1;
+}
 
 /*
  ==========================================================

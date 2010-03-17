@@ -4,12 +4,60 @@
 
 -- TODO: persistence tests of messages
 
-messages_test_creation = lunit.TestCase("Messages creation")
-function messages_test_creation:test_simple()
-   m = wl.game.Player(1):send_message("Hallo", "World!")
+messages_tests = lunit.TestCase("Messages")
+function messages_tests:setup() 
+   self.plr = wl.game.Player(1)
+end
+
+function messages_tests:test_defaults() 
+   local m = self.plr:send_message("Hallo", "World!")
    assert_equal("Hallo", m.title)
    assert_equal("World!", m.body)
    assert_equal("ScriptingEngine", m.sender)
+   assert_equal(0, m.sent)
+   assert_equal(0, m.sent)
+   assert_equal(nil, m.duration)
+   assert_equal(nil, m.location)
+   assert_equal("new", m.status)
+end
+function messages_tests:test_status_read() 
+   local m = self.plr:send_message("Hallo", "World!", {status="read"})
+   assert_equal("read", m.status)
+end
+function messages_tests:test_status_archived() 
+   local m = self.plr:send_message("Hallo", "World!", {status="archived"})
+   assert_equal("archived", m.status)
+end
+function messages_tests:test_status_illegal() 
+   assert_error("Illegal status!", function()
+      self.plr:send_message("Hallo", "World!", {status="nono"})
+   end)
+end
+function messages_tests:test_sender() 
+   local m = self.plr:send_message("Hallo", "World!", {sender="i am you"})
+   assert_equal("i am you", m.sender)
+end
+function messages_tests:test_location() 
+   local f = wl.map.Field(23,28)
+   local m = self.plr:send_message("Hallo", "World!", {loc = f})
+   assert_equal(f, m.location)
+end
+function messages_tests:test_duration() 
+   local m = self.plr:send_message("Hallo", "World!", {duration = 2000})
+   assert_equal(2000, m.duration)
+end
+function messages_tests:test_changing_status() 
+   local m = self.plr:send_message("Hallo", "World!")
+   m.status = "read"
+   assert_equal("read", m.status)
+   m.status = "archived"
+   assert_equal("archived", m.status)
+   m.status = "new"
+   assert_equal("new", m.status)
+   assert_error("Invalid message status!", function()
+      m.status = "bluuuu"
+   end)
 end
 
-
+-- TODO: comparing msgs
+-- TODO: access to players messages
