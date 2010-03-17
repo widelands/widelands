@@ -39,9 +39,7 @@
 // TODO:   LuaFunction, Testsuite and it's running.
 // TODO: make pickling independent of OS by using widelands Stream*
 // TODO: check SirVer, Lua TODOs!
-// TODO: convert the old initialization files in tribes and delete them
 //
-
 // TODO: clean mess up with warp_workers, set_workers. All should have one
 //    API
 // TODO: rethink position, location, field. Should maybe be field in all instances
