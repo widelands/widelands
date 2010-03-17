@@ -39,7 +39,6 @@
 #include "message_queue.h"
 #include "player.h"
 #include "profile/profile.h"
-#include "scripting/scripting.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
@@ -77,25 +76,6 @@ bool Worker::run_createitem(Game & game, State & state, Action const & action)
 	player.ware_produced(wareid);
 
 	++state.ivar1;
-	schedule_act(game, 10);
-	return true;
-}
-
-
-/**
- * Run the given lua script whenever this program runs.
- *
- * Syntax in conffile: lua \<filename\>
- *
- * \param g
- * \param state
- * \param action Which file to load and run
- */
-bool Worker::run_lua(Game & game, State & state, Action const & action) {
-	// TODO: SirVer, Lua: This is not currently working, rework this
-	throw game_data_error("Sorry, this action is not currently implemented!");
-
-	// Advance program state
 	schedule_act(game, 10);
 	return true;
 }
