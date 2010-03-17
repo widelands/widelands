@@ -216,15 +216,23 @@ def read_conffile(filename):
                 oldhs=section[2]['hotspot'].split(" ")
                 newhs=(int(oldhs[0])-ret[0],int(oldhs[1])-ret[1])
                 #print oldhs, newhs
-                # Simply go through the lines of the section and search for
-                # hotspot= if found replace the line. It will be written to the
-                # conf file a the end
-                for i in range(section[0], section[1]+1):
-                    #print i,
-                    #print lines[i],
-                    if re.match(r"hotspot=", lines[i]):
-                        lines[i]="hotspot=%u %u\n" % (newhs[0], newhs[1])
-                        #print i, lines[i],
+                # search all section which use this animation
+                for sec in sections:
+                    if "pics" in section[2]:
+                        fname=section[2]['pics']
+                    else:
+                        fname=section[2]['dirpics']
+                    if ('pics' in sec[2] and sec[2]['pics']==fname) or \
+                       ('dirpics' in sec[2] and sec[2]['dirpics']==fname):
+                        # Simply go through the lines of the section and 
+                        # search for hotspot= if found replace the line. It 
+                        # will be written to the conf file a the end
+                        for i in range(sec[0], sec[1]+1):
+                            #print i,
+                            #print lines[i],
+                            if re.match(r"hotspot=", lines[i]):
+                                lines[i]="hotspot=%u %u\n" % (newhs[0], newhs[1])
+                                #print i, lines[i],
 
     # Now we write back the conf file from our list of lines
     f = open(filename,"w")
