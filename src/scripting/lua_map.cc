@@ -104,8 +104,8 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
  */
 
 /* RST
-Module Classes
-^^^^^^^^^^^^^^
+Module Interfaces
+^^^^^^^^^^^^^^^^^
 
 */
 
@@ -115,8 +115,50 @@ HasWares
 
 .. class:: HasWares
 
-TODO: write me
+	HasWares is an interface that all :class:`PlayerImmovable` objects
+	that can contain wares implement. This is at the time of this writing
+	:class:`~wl.map.Flag`, :class:`~wl.map.Warehouse` and
+	:class:`~wl.map.ProductionSite`.
 */
+
+/* RST
+	.. method:: get_wares(which)
+
+		Gets the number of wares that currently reside here.
+
+		:arg which:  can be either of
+
+		* the string :const:`all`.
+			  In this case the function will return a
+			  :class:`table` of (ware name,amount) pairs that gives information about
+			  all ware information available for this object.
+		* a ware name.
+			In this case a single integer is returned. No check is made
+			if this ware makes sense for this location, you can for example ask a
+			:const:`lumberjacks_hut` for the number of :const:`raw_stone` he has
+			and he will return 0.
+		* an :class:`array` of ware names.
+			In this case a :class:`table` of
+			(ware name,amount) pairs is returned where only the requested wares
+			are listed. All other entries are :const:`nil`.
+
+		:returns: :class:`integer` or :class:`table`
+*/
+
+/* RST
+	.. method:: set_wares(which[, amount])
+
+		Sets the wares available in this location. Either takes two arguments,
+		a ware name and an amount to set it too. Or it takes a table of
+		(ware name, amount) pairs. Wares are created and added to an economy out
+		of thin air.
+
+		:arg which: name of ware or (ware_name, amount) table
+		:type which: :class:`string` or :class:`table`
+		:arg amount: this many units will be available after the call
+		:type amount: :class:`integer`
+*/
+
 
 /*
  ==========================================================
@@ -134,7 +176,7 @@ static Ware_Index _get_ware_index
 		report_error(L, "Invalid ware: <%s>", what.c_str());
 	return idx;
 }
-L_HasWares_Get::WaresSet L_HasWares_Get::m_parse_get_arguments
+L_HasWares::WaresSet L_HasWares::m_parse_get_arguments
 		(lua_State * L, Tribe_Descr const & tribe, bool * return_number)
 {
 	 // takes either "all", a name or an array of ware names
@@ -200,6 +242,12 @@ L_HasWares::WaresMap L_HasWares::m_parse_set_arguments
 	}
 	return rv;
 }
+
+/* RST
+Module Classes
+^^^^^^^^^^^^^^
+
+*/
 
 /* RST
 MapObject
@@ -462,6 +510,7 @@ int L_PlayerImmovable::get_player(lua_State * L) {
  C METHODS
  ==========================================================
  */
+// TODO: remove this macro
 #define GET_INDEX(name, capname) \
 Ware_Index L_PlayerImmovable::m_get_ ## name ## _index \
 	(lua_State * L, PlayerImmovable * i, const std::string & what) \
@@ -471,7 +520,6 @@ Ware_Index L_PlayerImmovable::m_get_ ## name ## _index \
 		report_error(L, "Invalid " #capname ": %s", what.c_str()); \
 	return idx; \
 }
-GET_INDEX(ware, Ware);
 GET_INDEX(worker, Worker);
 #undef GET_INDEX
 
@@ -482,13 +530,13 @@ Flag
 
 .. class:: Flag
 
-	Child of: :class:`PlayerImmovable`
+	Child of: :class:`PlayerImmovable`, :class:`HasWares`
 
 	One flag in the economy of this Player.
 */
 const char L_Flag::className[] = "Flag";
 const MethodType<L_Flag> L_Flag::Methods[] = {
-	METHOD(L_Flag, add_ware),
+	METHOD(L_Flag, set_wares),
 	METHOD(L_Flag, get_wares),
 	{0, 0},
 };
@@ -508,75 +556,105 @@ const PropertyType<L_Flag> L_Flag::Properties[] = {
  LUA METHODS
  ==========================================================
  */
-/* RST
- * TODO: this is wrong, correct this docstring
-	.. method:: add_ware(ware)
-
-		Adds a ware to this flag. The ware is created from thin air
-		and added to the players economy. Reports an error If there is no
-		capacity on this flag.
-
-		:arg ware: name of ware to create
-		:type ware: :class:`string`
-		:returns: :const:`nil`
-*/
-int L_Flag::add_ware(lua_State * L)
+static L_Flag::WaresMap _count_wares(Flag & f, Tribe_Descr const & tribe) {
+	L_Flag::WaresMap rv;
+	container_iterate_const(Flag::Wares, f.get_items(), w) {
+		Ware_Index i = tribe.ware_index((*w.current)->descr().name());
+		if (not rv.count(i))
+			rv.insert(L_Flag::WareAmount(i, 1));
+		else
+			rv[i] += 1;
+	}
+	return rv;
+}
+// Documented in ParentClass
+int L_Flag::set_wares(lua_State * L)
 {
 	Game & game = get_game(L);
 	Flag * f = get(game, L);
+	Tribe_Descr const & tribe = f->owner().tribe();
 
-	if (not f->has_capacity())
-		return report_error(L, "Flag has no capacity left!");
+	WaresMap setpoints = m_parse_set_arguments(L, tribe);
+	WaresMap c_items = _count_wares(*f, tribe);
 
-	Ware_Index idx = m_get_ware_index(L, f, luaL_checkstring(L, 2));
+	uint32_t nitems = 0;
+	container_iterate_const(WaresMap, c_items, c) {
+		// all wares currently on the flag without a setpoint should be removed
+		if (not setpoints.count(c->first))
+			setpoints.insert(WareAmount(c->first, 0));
+		nitems += c->second;
+	}
 
+	// The idea is to change as little as possible on this flag
+	container_iterate_const(WaresMap, setpoints, sp) {
+		uint32_t cur = 0;
+		WaresMap::iterator i = c_items.find(sp->first);
+		if (i != c_items.end())
+			cur = i->second;
 
-	Item_Ware_Descr const & wd = *f->get_owner()->tribe().get_ware_descr(idx);
-	WareInstance & item = *new WareInstance(idx, &wd);
-	item.init(game);
+		int d = sp->second - cur;
+		nitems += d;
 
-	f->add_item(game, item);
+		if (f->total_capacity() < nitems)
+			return report_error(L, "Flag has no capacity left!");
+
+		if (d < 0) {
+			while (d) {
+				container_iterate_const(Flag::Wares, f->get_items(), w) {
+					Ware_Index i = tribe.ware_index((*w.current)->descr().name());
+					if(i == sp->first) {
+						const_cast<WareInstance *>(*w.current)->remove(game);
+						++d;
+						break;
+					}
+				}
+			}
+		} else if (d > 0) {
+			// add items
+			Item_Ware_Descr const & wd = *tribe.get_ware_descr(sp->first);
+			for (uint32_t i = 0; i < d; i++) {
+				WareInstance & item = *new WareInstance(sp->first, &wd);
+				item.init(game);
+				f->add_item(game, item);
+			}
+		}
+
+	}
 	return 0;
 }
 
-/* RST
-	.. method:: get_wares(TODO)
-
-		descr
-
-		:returns: :const:`nil`
-*/
+// Documented in parent Class
 int L_Flag::get_wares(lua_State * L) {
 	Tribe_Descr const & tribe = get(get_game(L), L)->owner().tribe();
 
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_arguments(L, tribe, &return_number);
 
-	lua_newtable(L);
+	WaresMap items = _count_wares(*get(get_game(L), L), tribe);
 
-	container_iterate_const(Flag::Wares, get(get_game(L), L)->get_items(), w) {
-		std::string name = (*w.current)->descr().name();
-		if (not wares_set.count(tribe.ware_index(name)))
-				continue;
+	if (wares_set.size() == tribe.get_nrwares().value()) { // Want all returned
+		wares_set.clear();
+		container_iterate_const(WaresMap, items, w)
+			wares_set.insert(w->first);
+	}
 
-		lua_getfield(L, -1, name.c_str());
-		if (lua_isnil(L, -1)) {
-			lua_pop(L, 1);
-			lua_pushuint32(L, 1);
+	if (not return_number)
+		lua_newtable(L);
+
+	container_iterate_const(WaresSet, wares_set, w) {
+		uint32_t count = 0;
+		if (items.count(*w))
+			count = items[*w];
+
+		if (return_number) {
+			lua_pushuint32(L, count);
+			break;
 		} else {
-			uint32_t cur = luaL_checkuint32(L, -1);
-			lua_pop(L, 1);
-			lua_pushuint32(L, cur + 1);
+		   lua_pushstring(L, tribe.get_ware_descr(*w)->name());
+			lua_pushuint32(L, count);
+			lua_rawset(L, -3);
 		}
-		lua_setfield(L, -2, name.c_str());
 	}
-
-	if (return_number) {
-		// we only had one argument to begin with and we should return a number
-		lua_pushnil(L); // args table nil
-		lua_next(L, 3); // args table warename count
-	}
-
 	return 1;
 }
 
@@ -842,7 +920,7 @@ Warehouse
 
 .. class:: Warehouse
 
-	Child of: :class:`Building`
+	Child of: :class:`Building`, :class:`HasWares`
 
 	Every Headquarter or Warehouse on the Map is of this type.
 */
@@ -871,21 +949,7 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
  LUA METHODS
  ==========================================================
  */
-/* RST
-	.. method:: set_wares(which[, amount])
-TODO: check this doc
-
-		Sets the wares available in this warehouse. Either takes two arguments,
-		an ware name and an amount to set it too. Or it takes a table of name,
-		amount pairs.
-
-		:arg which: name of ware or name, amount table
-		:type which: :class:`string` or :class:`table`
-		:arg amount: this many units will be available after the call
-		:type amount: :class:`integer`
-
-		:returns: :const:`nil`
-*/
+// TODO: remove this macro as soon as HasWorkes is implemented
 #define SET_X(what) \
 int L_Warehouse::set_ ##what ## s(lua_State * L) { \
 	Warehouse * o = get(get_game(L), L); \
@@ -925,6 +989,8 @@ int L_Warehouse::set_ ##what ## s(lua_State * L) { \
 	} \
 	return 0; \
 }
+
+// Documented in parent class
 int L_Warehouse::set_wares(lua_State * L) {
 	Warehouse * wh = get(get_game(L), L);
 	Tribe_Descr const & tribe = wh->owner().tribe();
@@ -941,20 +1007,7 @@ int L_Warehouse::set_wares(lua_State * L) {
 }
 
 
-/* RST
-	.. method:: get_wares(which)
-		TODO: correct this
-
-		Gets the number of wares in this warehouse. If :const:`which` is
-		a :class:`string`, returns a single integer. If :const:`which` is a
-		:class:`table`, you can query more than one ware. The return value then
-		will be a table with ware names as key and integers as values.
-
-		:arg which: which ware(s) to query
-		:type which: :class:`string` or :class:`table` in array form
-
-		:returns: :class:`integer` or :class:`table`
-*/
+// documented in parent class
 int L_Warehouse::get_wares(lua_State * L) {
 	Warehouse * wh = get(get_game(L), L);
 	Tribe_Descr const & tribe = wh->owner().tribe();
@@ -1218,7 +1271,7 @@ ProductionSite
 
 .. class:: ProductionSite
 
-	Child of: :class:`Building`
+	Child of: :class:`Building`, :class:`HasWares`
 
 	Every building that produces anything.
 */
@@ -1362,73 +1415,39 @@ int L_ProductionSite::warp_workers(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: set_wares(which[, amount])
-
-		The function is similar to :meth:`Warehouse.set_wares`.  Only valid wares
-		and only amounts that do not overfill the house are allowed.
-*/
-static Ware_Index m_check_ware_is_valid
-	(lua_State * L, ProductionSite * ps, const std::string & ware_name)
-{
-	Tribe_Descr const & tribe = ps->owner().tribe();
-
-	Ware_Index ware_type = Ware_Index::Null();
-	container_iterate_const(Ware_Types, ps->descr().inputs(), i)
-		if (tribe.get_ware_descr(i.current->first)->name() == ware_name) {
-			ware_type = i.current->first;
-			break;
-		}
-	if (!ware_type)
-			report_error
-				(L, "<%s> is an illegal ware for this productionsite!",
-				 ware_name.c_str());
-
-	return ware_type;
-}
-static int m_set_ware
-	(lua_State * L, ProductionSite * ps,
-	 const std::string & ware_name, uint32_t count)
-{
-	Ware_Index ware_type = m_check_ware_is_valid(L, ps, ware_name);
-	WaresQueue & wq = ps->waresqueue(ware_type);
-	if (count > wq.get_size())
-		return
-			report_error
-				(L, "Not enough space for %u items, only for %i",
-				 count, wq.get_size());
-
-	wq.set_filled(count);
-	wq.update();
-
-	return 0;
-}
+// documented in parent class
 int L_ProductionSite::set_wares(lua_State * L) {
 	ProductionSite * ps = get(get_game(L), L);
+	const Tribe_Descr & tribe = ps->owner().tribe();
 
-	if (lua_gettop(L) == 3) {
-		// string value
-		return m_set_ware(L, ps, luaL_checkstring(L, 2), luaL_checkuint32(L, 3));
-	} else {
-		lua_pushnil(L);
-		while (lua_next(L, 2) != 0) {
-			m_set_ware(L, ps, luaL_checkstring(L, -2), luaL_checkuint32(L, -1));
-			lua_pop(L, 1);
-		}
+	WaresMap setpoints = m_parse_set_arguments(L, tribe);
+
+	WaresSet valid_wares;
+	container_iterate_const(Ware_Types, ps->descr().inputs(), i)
+		valid_wares.insert(i->first);
+
+	container_iterate_const(WaresMap, setpoints, i) {
+		if (not valid_wares.count(i->first))
+			return
+				report_error
+				 (L, "<%s> can't be stored here!",
+				  tribe.get_ware_descr(i->first)->name().c_str());
+
+		WaresQueue & wq = ps->waresqueue(i->first);
+		if (i->second > wq.get_size())
+			return
+				report_error
+					(L, "Not enough space for %u items, only for %i",
+					 i->second, wq.get_size());
+
+		wq.set_filled(i->second);
+		wq.update();
 	}
 
 	return 0;
 }
 
-/* RST
- * TODO: correct this methods doc
-	.. method:: get_wares(which)
-
-		Similar to :meth:`Warehouse.get_wares`. Which can also be :const:`all`
-		which will return a :class:`table` with all wares and their count.
-
-		:returns: :class:`integer` or :class:`table`
-*/
+// documented in parent class
 int L_ProductionSite::get_wares(lua_State * L) {
 	ProductionSite * ps = get(get_game(L), L);
 	Tribe_Descr const & tribe = ps->owner().tribe();

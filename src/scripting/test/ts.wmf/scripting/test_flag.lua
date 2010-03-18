@@ -16,18 +16,55 @@ function flag_tests:test_no_wares_on_creation()
    for name,c in pairs(rv) do cnt = cnt + c end
    assert_equal(0, cnt)
 end
-function flag_tests:test_add_ware_illegal_ware()
+function flag_tests:test_no_wares_on_creation_single_arg()
+   assert_equal(0, self.f:get_wares("trunk"))
+end
+function flag_tests:test_no_wares_on_creation_array_arg()
+   local rv = self.f:get_wares{"trunk", "coal"}
+   assert_equal(0, rv.trunk)
+   assert_equal(0, rv.coal)
+   assert_equal(nil, rv.raw_stone)
+end
+function flag_tests:test_set_wares_two_args()
+   self.f:set_wares("trunk", 3)
+   assert_equal(3, self.f:get_wares("trunk"))
+end
+function flag_tests:test_set_wares_one_arg()
+   self.f:set_wares{
+      trunk = 3, 
+      coal = 2, 
+   }
+   assert_equal(3, self.f:get_wares("trunk"))
+   assert_equal(2, self.f:get_wares("coal"))
+end
+function flag_tests:test_change_wares_on_flag()
+   self.f:set_wares{trunk = 3, coal = 2}
+   self.f:set_wares{fish = 3}
+   assert_equal(3, self.f:get_wares("fish"))
+   assert_equal(0, self.f:get_wares("trunk"))
+   assert_equal(0, self.f:get_wares("coal"))
+end
+function flag_tests:test_change_wares_on_flag2()
+   self.f:set_wares{trunk = 3, coal = 5}
+   self.f:set_wares{trunk = 3, coal = 4, fish = 1}
+   assert_equal(1, self.f:get_wares("fish"))
+   assert_equal(3, self.f:get_wares("trunk"))
+   assert_equal(4, self.f:get_wares("coal"))
+end
+function flag_tests:test_set_wares_illegal_ware()
    function ill()
-      self.f:add_ware("kjhsh")
+      self.f:set_wares("kjhsh", 1)
    end
    assert_error("Illegal ware", ill)
+   function ill1()
+      self.f:set_wares{"trunk", "kjhsh"}
+   end
+   assert_error("Illegal ware", ill1)
 end
-function flag_tests:test_add_too_many_wares()
-   for i=1,7 do self.f:add_ware("trunk") end
-   self.f:add_ware("raw_stone") -- should be fine
-
-   function one_more() self.f:add_ware("trunk") end
-   assert_error("Should be too much", one_more)
+function flag_tests:test_set_wares_many_wares()
+   assert_error("Should be too much", function()
+      self.f:set_wares("trunk", 9)
+   end)
 end
 
 -- =========
@@ -37,21 +74,18 @@ flag_tests_get_ware = lunit.TestCase("flag tests: get_ware")
 function flag_tests_get_ware:setup()
    self.p = wl.game.Player(1)
    self.f = self.p:place_flag(wl.map.Field(13,10), 1)
-   self.f:add_ware("trunk")
-   self.f:add_ware("trunk")
-   self.f:add_ware("raw_stone")
-   self.f:add_ware("raw_stone")
-   self.f:add_ware("coal")
+   self.f:set_wares{trunk = 2, raw_stone = 2, coal = 1}
 end
 function flag_tests_get_ware:teardown()
    pcall(self.f.remove, self.f)
 end
-   
+
 function flag_tests_get_ware:test_get_ware_all()
    local rv = self.f:get_wares("all")
    assert_equal(2, rv.trunk)
    assert_equal(2, rv.raw_stone)
    assert_equal(1, rv.coal)
+   assert_equal(nil, rv.fish)
    local c = 0
    for name,cnt in pairs(rv) do c = c+cnt end
    assert_equal(5, c)
@@ -81,13 +115,11 @@ function flag_tests_get_ware:test_get_ware_many()
    assert_equal(4, c)
 end
 function flag_tests:test_get_wares_non_existant_name()
-   assert_error("non existent ware", function() 
+   assert_error("non existent ware", function()
       self.f:get_wares("balloon")
    end)
-   assert_error("non existent ware", function() 
+   assert_error("non existent ware", function()
       self.f:get_wares{"meat", "balloon"}
    end)
 end
-
-
 

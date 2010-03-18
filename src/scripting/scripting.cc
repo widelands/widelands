@@ -39,7 +39,6 @@
 // TODO: clean mess up with warp_workers, set_workers. All should have one
 //    API
 // TODO: rethink position, location, field. Should maybe be field in all instances
-// TODO: unify ware adding (Flags, Warehouses, Productionsite), add a common base class L_HasWares. Only document this class in documentation
 
 // FUTURE: access to player stock via Player.get_wares and get_workers
 // FUTURE: access to constructionsites via Player.get_buildings

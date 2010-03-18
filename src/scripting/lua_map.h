@@ -146,9 +146,7 @@ public:
 	CASTED_GET(PlayerImmovable);
 
 protected:
-	// TODO: move this in L_HasWares
-	Widelands::Ware_Index m_get_ware_index
-		(lua_State * L, Widelands::PlayerImmovable*, const std::string& s);
+	// TODO: move this in L_HasWorkers
 	Widelands::Ware_Index m_get_worker_index
 		(lua_State * L, Widelands::PlayerImmovable*, const std::string& s);
 };
@@ -178,34 +176,24 @@ public:
 	CASTED_GET(Building);
 };
 
-// TODO: document this
-// TODO: merge this with L_HasWares
-struct L_HasWares_Get {
-	virtual ~L_HasWares_Get() {}
-
-	virtual int get_wares(lua_State * L) = 0;
-
-	typedef std::set<Widelands::Ware_Index> WaresSet;
-
-protected:
-	WaresSet m_parse_get_arguments
-		(lua_State *, Widelands::Tribe_Descr const &, bool *);
-};
-
-struct L_HasWares : public L_HasWares_Get {
+struct L_HasWares {
 	virtual ~L_HasWares() {}
 
 	virtual int set_wares(lua_State * L) = 0;
+	virtual int get_wares(lua_State * L) = 0;
 
+	typedef std::set<Widelands::Ware_Index> WaresSet;
 	typedef std::map<Widelands::Ware_Index, uint32_t> WaresMap;
 	typedef std::pair<Widelands::Ware_Index, uint32_t> WareAmount;
 
 protected:
+	WaresSet m_parse_get_arguments
+		(lua_State *, Widelands::Tribe_Descr const &, bool *);
 	WaresMap m_parse_set_arguments
 		(lua_State *, Widelands::Tribe_Descr const &);
 };
 
-class L_Flag : public L_PlayerImmovable, public L_HasWares_Get {
+class L_Flag : public L_PlayerImmovable, public L_HasWares {
 public:
 	LUNA_CLASS_HEAD(L_Flag);
 
@@ -222,7 +210,7 @@ public:
 	/*
 	 * Lua Methods
 	 */
-	int add_ware(lua_State *);
+	int set_wares(lua_State *);
 	int get_wares(lua_State *);
 
 	/*
@@ -294,7 +282,7 @@ public:
 };
 
 
-class L_ProductionSite : public L_Building, public L_HasWares_Get {
+class L_ProductionSite : public L_Building, public L_HasWares {
 public:
 	LUNA_CLASS_HEAD(L_ProductionSite);
 

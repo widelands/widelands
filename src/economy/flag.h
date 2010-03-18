@@ -97,6 +97,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool is_dead_end() const;
 
 	bool has_capacity();
+	uint32_t total_capacity() {return m_item_capacity;}
 	void wait_for_capacity(Game &, Worker &);
 	void skip_wait_for_capacity(Game &, Worker &);
 	void add_item(Game &, WareInstance &);
@@ -108,7 +109,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void call_carrier(Game &, WareInstance &, PlayerImmovable * nextstep);
 	void update_items(Game &, Flag * other);
 
-	void remove_item(Game &, WareInstance *);
+	void remove_item(Game &, WareInstance * const);
 
 	void add_flag_job
 		(Game &, Ware_Index workerware, std::string const & programname);
