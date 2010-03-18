@@ -187,11 +187,28 @@ struct L_HasWares {
 	typedef std::pair<Widelands::Ware_Index, uint32_t> WareAmount;
 
 protected:
-	WaresSet m_parse_get_arguments
+	WaresSet m_parse_get_wares_arguments
 		(lua_State *, Widelands::Tribe_Descr const &, bool *);
-	WaresMap m_parse_set_arguments
+	WaresMap m_parse_set_wares_arguments
 		(lua_State *, Widelands::Tribe_Descr const &);
 };
+struct L_HasWorkers {
+	virtual ~L_HasWorkers() {}
+
+	virtual int set_wares(lua_State * L) = 0;
+	virtual int get_workers(lua_State * L) = 0;
+
+	typedef std::set<Widelands::Ware_Index> WorkersSet;
+	typedef std::map<Widelands::Ware_Index, uint32_t> WorkersMap;
+	typedef std::pair<Widelands::Ware_Index, uint32_t> WorkerAmount;
+
+protected:
+	WorkersSet m_parse_get_workers_arguments
+		(lua_State *, Widelands::Tribe_Descr const &, bool *);
+   WorkersMap m_parse_set_workers_arguments
+           (lua_State *, Widelands::Tribe_Descr const &);
+};
+
 
 class L_Flag : public L_PlayerImmovable, public L_HasWares {
 public:
@@ -251,7 +268,9 @@ public:
 };
 
 
-class L_Warehouse : public L_Building, public L_HasWares {
+class L_Warehouse : public L_Building,
+	public L_HasWares, public L_HasWorkers
+{
 public:
 	LUNA_CLASS_HEAD(L_Warehouse);
 

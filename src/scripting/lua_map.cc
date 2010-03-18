@@ -168,80 +168,83 @@ HasWares
 // parses the get argument for all classes that can be asked for their
 // current wares. Returns a set with all Ware_Indexes that must be considered.
 
-static Ware_Index _get_ware_index
-	(lua_State * L, Tribe_Descr const & tribe,  const std::string & what)
-{
-	Ware_Index idx = tribe.ware_index(what);
-	if (!idx)
-		report_error(L, "Invalid ware: <%s>", what.c_str());
-	return idx;
-}
-L_HasWares::WaresSet L_HasWares::m_parse_get_arguments
-		(lua_State * L, Tribe_Descr const & tribe, bool * return_number)
-{
-	 // takes either "all", a name or an array of ware names
-	int32_t nargs = lua_gettop(L);
-	if (nargs != 2)
-		report_error(L, "Wrong number of arguments to get_wares!");
-
-	*return_number = false;
-
-	WaresSet rv;
-	if (lua_isstring(L, 2)) {
-		std::string what = luaL_checkstring(L, -1);
-		if (what == "all") {
-			// All wares
-			for (Ware_Index i = Ware_Index::First(); i < tribe.get_nrwares(); ++i)
-				rv.insert(i);
-		} else {
-			// Only one ware
-			rv.insert(_get_ware_index(L, tribe, what));
-			*return_number = true;
-		}
-	} else {
-		// array of names
-		luaL_checktype(L, 2, LUA_TTABLE);
-
-		lua_pushnil(L);
-		while (lua_next(L, 2) != 0) {
-			rv.insert(_get_ware_index(L, tribe, luaL_checkstring(L, -1)));
-			lua_pop(L, 1);
-		}
+#define GET_INDEX(type) \
+	static Ware_Index _get_ ## type ## _index \
+		(lua_State * L, Tribe_Descr const & tribe,  const std::string & what) \
+	{ \
+		Ware_Index idx = tribe. type ## _index(what); \
+		if (!idx) \
+			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
+		return idx; \
 	}
-#ifdef DEBUG
-	if (*return_number)
-		assert(rv.size() == 1);
-#endif
-	return rv;
-}
+GET_INDEX(ware);
+GET_INDEX(worker);
+#undef GET_INDEX
 
-L_HasWares::WaresMap L_HasWares::m_parse_set_arguments
-	(lua_State * L, Tribe_Descr const & tribe)
-{
-	int32_t nargs = lua_gettop(L);
-	if (nargs != 2 and nargs != 3)
-		report_error(L, "Wrong number of arguments to set_wares!");
-
-	WaresMap rv;
-	if (nargs == 3) {
-		// name amount
-		rv.insert(WareAmount(
-			_get_ware_index(L, tribe, luaL_checkstring(L, 2)),
-			luaL_checkuint32(L, 3)
-		));
-	} else {
-		// array of (name, count)
-		lua_pushnil(L);
-		while (lua_next(L, 2) != 0) {
-			rv.insert(WareAmount(
-				_get_ware_index(L, tribe, luaL_checkstring(L, -2)),
-				luaL_checkuint32(L, -1)
-			));
-			lua_pop(L, 1);
-		}
-	}
-	return rv;
+#define PARSERS(type, btype) \
+L_Has ##btype ## s:: btype ##sSet L_Has ## btype ##s \
+	::m_parse_get_##type##s_arguments \
+		(lua_State * L, Tribe_Descr const & tribe, bool * return_number) \
+{ \
+	 /* takes either "all", a name or an array of names */ \
+	int32_t nargs = lua_gettop(L); \
+	if (nargs != 2) \
+		report_error(L, "Wrong number of arguments to get_" #type "!"); \
+	*return_number = false; \
+	btype ## sSet rv; \
+	if (lua_isstring(L, 2)) { \
+		std::string what = luaL_checkstring(L, -1); \
+		if (what == "all") { \
+			for (Ware_Index i = Ware_Index::First(); \
+					i < tribe.get_nr##type##s (); ++i) \
+				rv.insert(i); \
+		} else { \
+			/* Only one item requested */ \
+			rv.insert(_get_##type##_index(L, tribe, what)); \
+			*return_number = true; \
+		} \
+	} else { \
+		/* array of names */ \
+		luaL_checktype(L, 2, LUA_TTABLE); \
+		lua_pushnil(L); \
+		while (lua_next(L, 2) != 0) { \
+			rv.insert(_get_##type##_index(L, tribe, luaL_checkstring(L, -1))); \
+			lua_pop(L, 1); \
+		} \
+	} \
+	return rv; \
+} \
+\
+L_Has##btype##s::btype##sMap L_Has##btype##s:: \
+	m_parse_set_##type##s_arguments \
+	(lua_State * L, Tribe_Descr const & tribe) \
+{ \
+	int32_t nargs = lua_gettop(L); \
+	if (nargs != 2 and nargs != 3) \
+		report_error(L, "Wrong number of arguments to set_" #type "!"); \
+   btype##sMap rv; \
+	if (nargs == 3) { \
+		/* name amount */ \
+		rv.insert(btype##Amount( \
+			_get_##type##_index(L, tribe, luaL_checkstring(L, 2)), \
+			luaL_checkuint32(L, 3) \
+		)); \
+	} else { \
+		/* array of (name, count) */ \
+		lua_pushnil(L); \
+		while (lua_next(L, 2) != 0) { \
+			rv.insert(btype##Amount( \
+				_get_##type##_index(L, tribe, luaL_checkstring(L, -2)), \
+				luaL_checkuint32(L, -1) \
+			)); \
+			lua_pop(L, 1); \
+		} \
+	} \
+	return rv; \
 }
+PARSERS(ware, Ware);
+PARSERS(worker, Worker);
+#undef PARSERS
 
 /* RST
 Module Classes
@@ -574,7 +577,7 @@ int L_Flag::set_wares(lua_State * L)
 	Flag * f = get(game, L);
 	Tribe_Descr const & tribe = f->owner().tribe();
 
-	WaresMap setpoints = m_parse_set_arguments(L, tribe);
+	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
 	WaresMap c_items = _count_wares(*f, tribe);
 
 	uint32_t nitems = 0;
@@ -628,7 +631,7 @@ int L_Flag::get_wares(lua_State * L) {
 	Tribe_Descr const & tribe = get(get_game(L), L)->owner().tribe();
 
 	bool return_number = false;
-	WaresSet wares_set = m_parse_get_arguments(L, tribe, &return_number);
+	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
 	WaresMap items = _count_wares(*get(get_game(L), L), tribe);
 
@@ -995,7 +998,7 @@ int L_Warehouse::set_wares(lua_State * L) {
 	Warehouse * wh = get(get_game(L), L);
 	Tribe_Descr const & tribe = wh->owner().tribe();
 
-	WaresMap setpoints = m_parse_set_arguments(L, tribe);
+	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
 
 	container_iterate_const(WaresMap, setpoints, i) {
 		int32_t d = i.current->second - wh->get_wares().stock(i.current->first);
@@ -1013,7 +1016,7 @@ int L_Warehouse::get_wares(lua_State * L) {
 	Tribe_Descr const & tribe = wh->owner().tribe();
 
 	bool return_number = false;
-	WaresSet wares_set = m_parse_get_arguments(L, tribe, &return_number);
+	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
 	lua_newtable(L);
 
@@ -1420,7 +1423,7 @@ int L_ProductionSite::set_wares(lua_State * L) {
 	ProductionSite * ps = get(get_game(L), L);
 	const Tribe_Descr & tribe = ps->owner().tribe();
 
-	WaresMap setpoints = m_parse_set_arguments(L, tribe);
+	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
 
 	WaresSet valid_wares;
 	container_iterate_const(Ware_Types, ps->descr().inputs(), i)
@@ -1453,7 +1456,7 @@ int L_ProductionSite::get_wares(lua_State * L) {
 	Tribe_Descr const & tribe = ps->owner().tribe();
 
 	bool return_number = false;
-	WaresSet wares_set = m_parse_get_arguments(L, tribe, &return_number);
+	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
 	WaresSet valid_wares = valid_wares;
 	container_iterate_const(Ware_Types, ps->descr().inputs(), i)
