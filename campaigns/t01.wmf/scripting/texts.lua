@@ -6,9 +6,9 @@ function start_lumberjack_01(p)
    return p:add_objective("lumberjack01",
    _ "Build a lumberjack's hut", 
 "<rt><p>" ..
-_"* Press SPACE to see where you can build.<br> The red spots show you where a small building - like a lumberjack's hut - may be built.<br>" ..
-_"* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting lumberjack's hut.<br>" ..
-_"* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You should connect it to another flag with a road.<br> If you click on a flag, little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of the symbols to build the first step of the road there. New symbols will appear to show you where the next step can go, and so on. However, you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road." ..
+_"* Press SPACE to see where you can build.<br> The red house symbols show you where a small building - like a lumberjack's hut - may be built.<br>" ..
+_"* Build a lumberjack's hut at the red house symbol just right of your headquarters by clicking on it and selecting a lumberjack's hut.<br>" ..
+_"* Build a road between your headquarters and the construction site of the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You need to connect it to another flag by building a road between them.<br> If you click on a flag and select to build a road, little symbols will appear around it to show you in which directions you can build it.<br> The colour of these symbols indicats how steep this part of the road will be. Green is for flat, yellow means steep and red stands for very steep. The steeper the road is, the harder it will be for your people to walk on it (and your wares will be transported more slowly).<br> You can click on any of the symbols to build the first part of the road there. New symbols will appear to show you where the next part of the road can go, and so on. However, you can also click farer away from the flag to build several steps at once. Click on the flag at the headquarters to finish the road." ..
 "</p></rt>")
 end
 
