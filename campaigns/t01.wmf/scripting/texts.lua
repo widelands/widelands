@@ -16,8 +16,8 @@ function start_lumberjack_02(p)
    return p:add_objective("lumberjack02",
      _ "Build another lumberjack's hut",
      "<rt><p>" ..
-_"* Place a flag in the middle of the road.<br> There is a flag symbol in the mid of the way you just built. You place a flag there by clicking on the symbol and then clicking on the flag button in the consequently appearing menu. This splits the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>" ..
-_"* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that instead of building a road step by step, you may also directly click at the destination to build the entire road at once." ..
+_"* Place a flag in the middle of the road.<br> There is a flag symbol in the middle of the way you just built. You create a flag there by clicking on the symbol and then choosing the flag button in the menu that opens up. This divides the way the wood is transported into two parts with one carrier each.<br> When much wares are being transported between two points, additional flags in between make them arrive at their destination faster, thus improving your infrastructure.<br>" ..
+_"* Place a lumberjack's hut just south of the flag you just placed on the road. Connect the flag you just raised with the flag of the new lumberjack's hut construction site afterwards.<br> Note that instead of building a road step by step, you may also click directly at its destination to build the entire road at once." ..
 "</p></rt>")
 end
 
