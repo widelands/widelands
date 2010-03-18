@@ -57,17 +57,18 @@ def crop_images(basepath, section):
         use_playercolor=True
 
     # replace the placeholders ?? and !! by a .
-    filepattern=filepattern.replace("?",".")
-    filepattern=filepattern.replace("!",".")
+    filepattern=filepattern.replace(r".",r"\.")
+    filepattern=filepattern.replace(r"??",r"[0-9][0-9]")
+    filepattern=filepattern.replace(r"!!",r"(e|w|sw|se|nw|ne)")
     # The end of the pattern is the end of the filename
     filepattern+="$"
 
     # create a pattern for the playercolor masks
-    filepattern_pc=filepattern.rpartition(".")
-    filepattern_pc=filepattern_pc[0]+"_pc."+filepattern_pc[2]
+    filepattern_pc=filepattern.rpartition("\.")
+    filepattern_pc=filepattern_pc[0]+"_pc\\."+filepattern_pc[2]
 
-    #print filepattern
-    #print filepattern_pc
+    # print filepattern
+    # print filepattern_pc
 
     for filename in os.listdir(basepath):
         if re.match(filepattern, filename):
