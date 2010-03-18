@@ -27,15 +27,25 @@ function warehouse_tests:test_set_get_wares_string_arg()
    assert_equal(0, self.w:get_wares("trunk"))
    self.w:set_wares("trunk", 190)
    assert_equal(190, self.w:get_wares("trunk"))
+   assert_equal(0, self.w:get_wares("raw_stone"))
+end
+function warehouse_tests:test_set_get_wares_all()
+   self.w:set_wares{trunk=190, raw_stone=170}
+   local rv = self.w:get_wares("all")
+   assert_equal(190, rv.trunk)
+   assert_equal(170, rv.raw_stone)
+   assert_equal(0, rv.coal)
 end
 function warehouse_tests:test_set_get_wares_table_arg()
    k = self.w:get_wares{"trunk", "raw_stone"}
    assert_equal(0, k.trunk)
    assert_equal(0, k.raw_stone)
+   assert_equal(nil, k.coal)
    self.w:set_wares{trunk=190, raw_stone=170}
    k = self.w:get_wares{"trunk", "raw_stone"}
    assert_equal(190, k.trunk)
    assert_equal(170, k.raw_stone)
+   assert_equal(nil, k.coal)
 end
 function warehouse_tests:test_set_get_wares_set_is_not_increase()
    k = self.w:get_wares{"trunk", "raw_stone"}

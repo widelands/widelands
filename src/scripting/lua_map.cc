@@ -900,6 +900,7 @@ SET_X(ware);
 
 /* RST
 	.. method:: get_wares(which)
+		TODO: correct this
 
 		Gets the number of wares in this warehouse. If :const:`which` is
 		a :class:`string`, returns a single integer. If :const:`which` is a
@@ -911,6 +912,30 @@ SET_X(ware);
 
 		:returns: :class:`integer` or :class:`table`
 */
+int L_Warehouse::get_wares(lua_State * L) {
+	Warehouse * wh = get(get_game(L), L);
+	Tribe_Descr const & tribe = wh->owner().tribe();
+
+	bool return_number = false;
+	WaresSet wares_set = m_parse_get_arguments(L, tribe, &return_number);
+
+	lua_newtable(L);
+
+	if (return_number)
+		lua_pushuint32(L, wh->get_wares().stock(*wares_set.begin()));
+	else {
+		lua_newtable(L);
+		container_iterate_const(WaresSet, wares_set, i) {
+			lua_pushstring(L, tribe.get_ware_descr(*i.current)->name());
+			lua_pushuint32(L, wh->get_wares().stock(*i.current));
+			lua_rawset(L, -3);
+		}
+	}
+
+	return 1;
+}
+
+// TODO: get_x should be removed
 #define GET_X(what) \
 int L_Warehouse::get_ ##what ## s(lua_State * L) { \
 	Warehouse * o = get(get_game(L), L); \
@@ -940,7 +965,6 @@ int L_Warehouse::get_ ##what ## s(lua_State * L) { \
 	} \
 	return 1; \
 }
-GET_X(ware);
 
 /* RST
 	.. method:: set_workers(which[, amount])
