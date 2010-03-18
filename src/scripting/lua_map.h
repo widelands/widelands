@@ -20,6 +20,8 @@
 #ifndef LUA_MAP_H
 #define LUA_MAP_H
 
+#include <set>
+
 #include <lua.hpp>
 
 #include "economy/flag.h"
@@ -43,6 +45,7 @@ class L_MapModuleClass : public LunaClass {
 };
 
 
+// TODO: order should be reversed: L, game
 #define CASTED_GET(klass) \
 Widelands:: klass * get(Widelands::Game & game, lua_State * L) { \
 	return static_cast<Widelands:: klass *> \
@@ -180,10 +183,17 @@ struct L_HasWares {
 	virtual ~L_HasWares() {}
 
 	virtual int get_wares(lua_State * L) = 0;
-	virtual int set_wares(lua_State * L) = 0;
+	// virtual int set_wares(lua_State * L) = 0;
+
+	typedef std::set<Widelands::Ware_Index> WaresSet;
+	typedef std::set<Widelands::Ware_Index> WorkersSet;
+
+protected:
+	WaresSet m_parse_get_arguments
+		(lua_State *, Widelands::Tribe_Descr const &, bool *);
 };
 
-class L_Flag : public L_PlayerImmovable {
+class L_Flag : public L_PlayerImmovable, public L_HasWares {
 public:
 	LUNA_CLASS_HEAD(L_Flag);
 
@@ -241,7 +251,7 @@ public:
 };
 
 
-class L_Warehouse : public L_Building {
+class L_Warehouse : public L_Building, public L_HasWares {
 public:
 	LUNA_CLASS_HEAD(L_Warehouse);
 

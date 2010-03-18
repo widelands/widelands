@@ -110,6 +110,70 @@ Module Classes
 */
 
 /* RST
+HasWares
+--------
+
+.. class:: HasWares
+
+TODO: write me
+*/
+
+/*
+ ==========================================================
+ C Methods
+ ==========================================================
+ */
+// parses the get argument for all classes that can be asked for their
+// current wares. Returns a set with all Ware_Indexes that must be considered.
+
+static Ware_Index _get_ware_index
+	(lua_State * L, Tribe_Descr const & tribe,  const std::string & what)
+{
+	Ware_Index idx = tribe.ware_index(what);
+	if (!idx)
+		report_error(L, "Invalid ware: <%s>", what.c_str());
+	return idx;
+}
+L_HasWares::WaresSet L_HasWares::m_parse_get_arguments
+		(lua_State * L, Tribe_Descr const & tribe, bool * return_number)
+{
+	 // takes either "all", a name or an array of ware names
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2)
+		report_error(L, "Wrong number of arguments to get_wares!");
+
+	*return_number = false;
+
+	WaresSet rv;
+	if (lua_isstring(L, 2)) {
+		std::string what = luaL_checkstring(L, -1);
+		if (what == "all") {
+			// All wares
+			for (Ware_Index i = Ware_Index::First(); i < tribe.get_nrwares(); ++i)
+				rv.insert(i);
+		} else {
+			// Only one ware
+			rv.insert(_get_ware_index(L, tribe, what));
+			*return_number = true;
+		}
+	} else {
+		// array of names
+		luaL_checktype(L, 2, LUA_TTABLE);
+
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			rv.insert(_get_ware_index(L, tribe, luaL_checkstring(L, -1)));
+			lua_pop(L, 1);
+		}
+	}
+#ifdef DEBUG
+	if (*return_number)
+		assert(rv.size() == 1);
+#endif
+	return rv;
+}
+
+/* RST
 MapObject
 ----------
 
@@ -455,10 +519,18 @@ int L_Flag::add_ware(lua_State * L)
 		:returns: :const:`nil`
 */
 int L_Flag::get_wares(lua_State * L) {
+	Tribe_Descr const & tribe = get(get_game(L), L)->owner().tribe();
+
+	bool return_number = false;
+	WaresSet wares_set = m_parse_get_arguments(L, tribe, &return_number);
+
 	lua_newtable(L);
 
 	container_iterate_const(Flag::Wares, get(get_game(L), L)->get_items(), w) {
 		std::string name = (*w.current)->descr().name();
+		if (not wares_set.count(tribe.ware_index(name)))
+				continue;
+
 		lua_getfield(L, -1, name.c_str());
 		if (lua_isnil(L, -1)) {
 			lua_pop(L, 1);
@@ -469,6 +541,12 @@ int L_Flag::get_wares(lua_State * L) {
 			lua_pushuint32(L, cur + 1);
 		}
 		lua_setfield(L, -2, name.c_str());
+	}
+
+	if (return_number) {
+		// we only had one argument to begin with and we should return a number
+		lua_pushnil(L); // args table nil
+		lua_next(L, 3); // args table warename count
 	}
 
 	return 1;
