@@ -11,13 +11,50 @@ about how certain things are implemented and how to add to it.
    working directly on widelands.
 
 
-TODO: this section should rather go into a common introduction
-
-
 Hooks into the Game
 -------------------
 
-TODO: difference between Lua and LuaFunction packet
+The scripting interface is defined in ``scripting/scripting.h``. It consists
+of the two classes LuaInterface for running scripts and LuaCouroutine which
+wraps a Lua coroutine. The Lua interface is accessed via the lua() function in
+Editor_Game_Base. 
+
+There are two game commands for lua: ``Cmd_Lua`` and ``Cmd_LuaFunction``. The
+first one is only used to enqueue the initial running of the initialization
+scripts in maps (and later on also for win conditions). These scripts are
+responsible to start coroutines -- everything from then on is handled via the
+second packet: Cmd_LuaFunction. 
+When a coroutine yields, it is expected to return the time when it wants to be
+reawakened. Widelands wraps this coroutine in a LuaCoroutine object and
+enqueues a Cmd_LuaFunction to awake and continue the execution of the
+coroutine. When a coroutine ends, it is deleted and Widelands forgets about
+it.
+
+When entering a Lua command into the debug console, none of the above mechanisms
+are used, instead the string is directly executed via
+LuaInterface::interpret_string. This means that this is only run on the
+current machine and that means that it could desync network games if it alters
+the game state in some way. It is an extremely powerful debug tool though.
+
+Classes
+-------
+
+Lua uses the prototype principle for OOP. C++ uses a class based approach.
+Starting from a thin wrapper implementation from the Lua users wiki called
+Luna_ I implemented a easy wrapper for C++ classes that supports inheritance
+and properties. The implementation can be found in ``scripting/luna*``. There
+are many examples of wrapped classes in the code, so this is just a short
+rundown of what to do:
+
+Write the class, make sure that inheritance matches the one you want to have
+in Lua later one (that is L_Immovable must be a child of L_MapObject). 
+TODO: get_modulename, LUNA_CLASS_HEAD, Constructors needed?, __persist
+__unpersists, structures that define functions and properties.
+
+.. _Luna: http://lua-users.org/wiki/SimplerCppBinding
+
+TODO: luna, my extensions, properties and methods, load and save
+functionalities.
 
 Persistence
 -----------
@@ -26,11 +63,6 @@ TODO: Map_Scripting_Data_Packet. wl.* is not saved.
 TODO: pluto, my changes to it (especially persisting classes)
 TODO: map object saver % loader
 
-Classes
--------
-
-TODO: luna, my extensions, properties and methods, load and save
-functionalities.
 
 Testing
 -------
