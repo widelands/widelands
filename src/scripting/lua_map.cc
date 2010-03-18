@@ -134,7 +134,7 @@ static Ware_Index _get_ware_index
 		report_error(L, "Invalid ware: <%s>", what.c_str());
 	return idx;
 }
-L_HasWares::WaresSet L_HasWares::m_parse_get_arguments
+L_HasWares_Get::WaresSet L_HasWares_Get::m_parse_get_arguments
 		(lua_State * L, Tribe_Descr const & tribe, bool * return_number)
 {
 	 // takes either "all", a name or an array of ware names
@@ -170,6 +170,34 @@ L_HasWares::WaresSet L_HasWares::m_parse_get_arguments
 	if (*return_number)
 		assert(rv.size() == 1);
 #endif
+	return rv;
+}
+
+L_HasWares::WaresMap L_HasWares::m_parse_set_arguments
+	(lua_State * L, Tribe_Descr const & tribe)
+{
+	int32_t nargs = lua_gettop(L);
+	if (nargs != 2 and nargs != 3)
+		report_error(L, "Wrong number of arguments to set_wares!");
+
+	WaresMap rv;
+	if (nargs == 3) {
+		// name amount
+		rv.insert(WareAmount(
+			_get_ware_index(L, tribe, luaL_checkstring(L, 2)),
+			luaL_checkuint32(L, 3)
+		));
+	} else {
+		// array of (name, count)
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			rv.insert(WareAmount(
+				_get_ware_index(L, tribe, luaL_checkstring(L, -2)),
+				luaL_checkuint32(L, -1)
+			));
+			lua_pop(L, 1);
+		}
+	}
 	return rv;
 }
 
@@ -845,6 +873,7 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
  */
 /* RST
 	.. method:: set_wares(which[, amount])
+TODO: check this doc
 
 		Sets the wares available in this warehouse. Either takes two arguments,
 		an ware name and an amount to set it too. Or it takes a table of name,
@@ -896,7 +925,21 @@ int L_Warehouse::set_ ##what ## s(lua_State * L) { \
 	} \
 	return 0; \
 }
-SET_X(ware);
+int L_Warehouse::set_wares(lua_State * L) {
+	Warehouse * wh = get(get_game(L), L);
+	Tribe_Descr const & tribe = wh->owner().tribe();
+
+	WaresMap setpoints = m_parse_set_arguments(L, tribe);
+
+	container_iterate_const(WaresMap, setpoints, i) {
+		int32_t d = i.current->second - wh->get_wares().stock(i.current->first);
+		if (d < 0)
+			wh->remove_wares(i.current->first, -d);
+		else if (d > 0)
+			wh->insert_wares(i.current->first, d);
+	}
+}
+
 
 /* RST
 	.. method:: get_wares(which)
