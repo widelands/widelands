@@ -103,13 +103,13 @@ story_msg1 = {
    msg ="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Thron speaks..." ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
-_ [[ "In another sleepless night, I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!" ]] ..
+_ [[ "In another sleepless night, I went up to the hill and gazed to the north. The fires are still burning, satisfying their hunger upon my father's legacy.<br> They are a constant reminder why we have to hide here... and why we must return in the end!" ]] ..
 "</p></rt>", 
 loc = al_thunran,
 }
 
 story_msg2= {
-   title = _"At the grave",
+   title = _"At the tomb",
    msg = "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" .. 
 _"Thron speaks..." ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
@@ -123,7 +123,7 @@ story_msg3 = {
   msg = "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Thron says thoughtfully..." ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
-_[[ "Some time ago, Boldreth came to me. His advice was to move to a place closer to home - to strike at the first sign of my brother's forces wavering.<br> But I look over the forests and I still see black smoke rising to the sky. I know - it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that too rash a return would cause both on our and the other side..." ]] ..
+_[[ "Some time ago, Boldreth came to me. His advice was to move to a place closer to home - to strike at the first sign of my brothers' forces wavering.<br> But I look over the forests and I can still see black smoke rising to the sky. I know - it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that returning too fast would cause both on our and the other side..." ]] ..
 "</p></rt>"
 }
 
