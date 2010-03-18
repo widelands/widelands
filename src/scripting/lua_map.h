@@ -282,7 +282,7 @@ public:
 };
 
 
-class L_ProductionSite : public L_Building {
+class L_ProductionSite : public L_Building, public L_HasWares {
 public:
 	LUNA_CLASS_HEAD(L_ProductionSite);
 

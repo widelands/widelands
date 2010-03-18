@@ -1378,6 +1378,7 @@ int L_ProductionSite::set_wares(lua_State * L) {
 }
 
 /* RST
+ * TODO: correct this methods doc
 	.. method:: get_wares(which)
 
 		Similar to :meth:`Warehouse.get_wares`. Which can also be :const:`all`
@@ -1387,35 +1388,33 @@ int L_ProductionSite::set_wares(lua_State * L) {
 */
 int L_ProductionSite::get_wares(lua_State * L) {
 	ProductionSite * ps = get(get_game(L), L);
+	Tribe_Descr const & tribe = ps->owner().tribe();
 
-	if (lua_isstring(L, 2)) {
-		// string value
-		std::string name = luaL_checkstring(L, 2);
-		if (name == "all") {
-			Tribe_Descr const & tribe = ps->owner().tribe();
-			lua_newtable(L);
-			container_iterate_const(Ware_Types, ps->descr().inputs(), i) {
-				lua_pushstring(L, tribe.get_ware_descr(i.current->first)->name());
-				lua_pushuint32(L, ps->waresqueue(i.current->first).get_filled());
-				lua_rawset(L, -3);
-			}
-		} else {
-			lua_pushuint32
-				(L, ps->waresqueue(m_check_ware_is_valid(L, ps, name)).get_filled()
-			);
-		}
-	} else {
-		// table
+	bool return_number = false;
+	WaresSet wares_set = m_parse_get_arguments(L, tribe, &return_number);
+
+	WaresSet valid_wares = valid_wares;
+	container_iterate_const(Ware_Types, ps->descr().inputs(), i)
+		valid_wares.insert(i.current->first);
+
+	if (not return_number)
 		lua_newtable(L);
-		int rv_idx = lua_gettop(L);
-		lua_pushnil(L);
-		while (lua_next(L, 2) != 0) {
-			uint32_t count = ps->waresqueue
-				(m_check_ware_is_valid(L, ps, luaL_checkstring(L, -1)))
-					.get_filled();
 
-			lua_pushuint32(L, count);
-			lua_rawset(L, rv_idx); // pops value and count
+	if (wares_set.size() == tribe.get_nrwares().value()) // Want all returned
+		wares_set = valid_wares;
+
+	container_iterate_const(WaresSet, wares_set, i) {
+		uint32_t cnt = 0;
+		if (valid_wares.count(*i.current))
+			cnt = ps->waresqueue(*i.current).get_filled();
+
+		if (return_number) { // this is the only thing the customer wants to know
+			lua_pushuint32(L, cnt);
+			break;
+		} else {
+			lua_pushstring(L, tribe.get_ware_descr(*i.current)->name());
+			lua_pushuint32(L, cnt);
+			lua_rawset(L, -3);
 		}
 	}
 	return 1;

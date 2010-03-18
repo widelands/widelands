@@ -80,7 +80,14 @@ function flag_tests_get_ware:test_get_ware_many()
    for name,cnt in pairs(rv) do c = c+cnt end
    assert_equal(4, c)
 end
-
+function flag_tests:test_get_wares_non_existant_name()
+   assert_error("non existent ware", function() 
+      self.f:get_wares("balloon")
+   end)
+   assert_error("non existent ware", function() 
+      self.f:get_wares{"meat", "balloon"}
+   end)
+end
 
 
 

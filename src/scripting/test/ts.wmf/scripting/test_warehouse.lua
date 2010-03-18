@@ -63,6 +63,14 @@ function warehouse_tests:test_set_get_wares_set_is_not_increase()
    assert_equal(10, k.trunk)
    assert_equal(20, k.raw_stone)
 end
+function warehouse_tests:test_get_wares_non_existant_name()
+   assert_error("non existent ware", function() 
+      self.w:get_wares("balloon")
+   end)
+   assert_error("non existent ware", function() 
+      self.w:get_wares{"meat", "balloon"}
+   end)
+end
 
 function warehouse_tests:test_set_worker_illegal_worker()
    function ill()
