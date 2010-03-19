@@ -83,9 +83,9 @@ private:
 	Height height;
 	int8_t brightness;
 
-	NodeCaps        caps                    : 7;
-	Buildhelp_Index buildhelp_overlay_index : 3;
-	uint8_t         roads                   : 6;
+	uint16_t caps                    : 7;
+	uint16_t buildhelp_overlay_index : 3;
+	uint16_t roads                   : 6;
 
 	/**
 	 * A field can be selected in one of 2 selections. This allows the user to
@@ -132,7 +132,7 @@ private:
 
 public:
 	Height get_height() const throw () {return height;}
-	NodeCaps nodecaps() const {return caps;}
+	NodeCaps nodecaps() const {return (NodeCaps)caps;}
 
 	Terrains      get_terrains() const throw () {return terrains;}
 	Terrain_Index terrain_d   () const throw () {return terrains.d;}
