@@ -159,6 +159,29 @@ HasWares
 		:type amount: :class:`integer`
 */
 
+/* RST
+HasWorkers
+----------
+
+.. class:: HasWorkers
+
+	Analogon to :class:`HasWares`, but for Workers. Supported at the time of
+	this writing by :class:`~wl.map.Road`, :class:`~wl.map.Warehouse` and
+	:class:`~wl.map.ProductionSite`.
+*/
+
+/* RST
+	.. method:: get_workers(which)
+
+		Similar to :meth:`HasWares.get_wares`.
+*/
+
+/* RST
+	.. method:: set_workers(which[, amount])
+
+		Similar to :meth:`HasWares.set_wares`.
+*/
+
 
 /*
  ==========================================================
@@ -952,135 +975,52 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
  LUA METHODS
  ==========================================================
  */
-// TODO: remove this macro as soon as HasWorkes is implemented
-#define SET_X(what) \
-int L_Warehouse::set_ ##what ## s(lua_State * L) { \
-	Warehouse * o = get(get_game(L), L); \
-	int n = lua_gettop(L); \
+// Documented in parent class
+#define WH_SET(type, btype) \
+int L_Warehouse::set_##type##s(lua_State * L) { \
+	Warehouse * wh = get(get_game(L), L); \
+	Tribe_Descr const & tribe = wh->owner().tribe(); \
+	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, tribe); \
  \
-	if (n == 3) { \
-		/* String, count combination */ \
-		Ware_Index idx = m_get_ ## what ## _index(L, o, luaL_checkstring(L, 2)); \
-		uint32_t set_point = luaL_checkuint32(L, 3); \
- \
-		uint32_t current = o->get_ ## what ## s().stock(idx); \
-		int32_t diff = set_point - current; \
-		if (diff < 0) \
-			o->remove_ ## what ## s(idx, -diff); \
-		else if (diff > 0) \
-			o->insert_ ## what ## s(idx, diff); \
- \
-	} else { \
-		luaL_checktype(L, 2, LUA_TTABLE); \
- \
-		/* Table, iterate over */ \
-		lua_pushnil(L);  /* first key */ \
-		while (lua_next(L, 2) != 0) { \
-			std::string which = luaL_checkstring(L, -2); \
-			uint32_t set_point = luaL_checkuint32(L, -1); \
-			Ware_Index idx = m_get_ ## what ## _index(L, o, which); \
- \
-			uint32_t current = o->get_ ## what ## s().stock(idx); \
-			int32_t diff = set_point - current; \
-			if (diff < 0) \
-				o->remove_ ## what ## s(idx, -diff); \
-			else if (diff > 0) \
-				o->insert_ ## what ## s(idx, diff); \
- \
-			lua_pop(L, 1); /* pop value, keep key for next iteration */ \
-		} \
+	container_iterate_const(btype##sMap, setpoints, i) { \
+		int32_t d = i.current->second - wh->get_##type##s().stock(i.current->first); \
+		if (d < 0) \
+			wh->remove_##type##s(i.current->first, -d); \
+		else if (d > 0) \
+			wh->insert_##type##s(i.current->first, d); \
 	} \
 	return 0; \
 }
-
-// Documented in parent class
-int L_Warehouse::set_wares(lua_State * L) {
-	Warehouse * wh = get(get_game(L), L);
-	Tribe_Descr const & tribe = wh->owner().tribe();
-
-	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
-
-	container_iterate_const(WaresMap, setpoints, i) {
-		int32_t d = i.current->second - wh->get_wares().stock(i.current->first);
-		if (d < 0)
-			wh->remove_wares(i.current->first, -d);
-		else if (d > 0)
-			wh->insert_wares(i.current->first, d);
-	}
-	return 0;
-}
-
-
 // documented in parent class
-int L_Warehouse::get_wares(lua_State * L) {
-	Warehouse * wh = get(get_game(L), L);
-	Tribe_Descr const & tribe = wh->owner().tribe();
+WH_SET(ware, Ware);
+// documented in parent class
+WH_SET(worker, Worker);
+#undef WH_SET
 
-	bool return_number = false;
-	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
-
-	lua_newtable(L);
-
-	if (return_number)
-		lua_pushuint32(L, wh->get_wares().stock(*wares_set.begin()));
-	else {
-		lua_newtable(L);
-		container_iterate_const(WaresSet, wares_set, i) {
-			lua_pushstring(L, tribe.get_ware_descr(*i.current)->name());
-			lua_pushuint32(L, wh->get_wares().stock(*i.current));
-			lua_rawset(L, -3);
-		}
-	}
-
-	return 1;
-}
-
-// TODO: get_x should be removed
-#define GET_X(what) \
-int L_Warehouse::get_ ##what ## s(lua_State * L) { \
-	Warehouse * o = get(get_game(L), L); \
- \
-	if (lua_isstring(L, 2)) { \
-		/* One string as argument */ \
-		lua_pushuint32 \
-			(L, o->get_ ##what ## s().stock \
-				(m_get_ ##what ## _index(L, o, luaL_checkstring(L, 2))) \
-		); \
-	} else { \
-		/* Table as argument, iterate over it */ \
-		luaL_checktype(L, 2, LUA_TTABLE); \
- \
-		/* create return value table */ \
+#define WH_GET(type, btype) \
+int L_Warehouse::get_##type##s(lua_State * L) { \
+	Warehouse * wh = get(get_game(L), L); \
+	Tribe_Descr const & tribe = wh->owner().tribe(); \
+	bool return_number = false; \
+	btype##sSet set = m_parse_get_##type##s_arguments(L, tribe, &return_number); \
+	lua_newtable(L); \
+	if (return_number) \
+		lua_pushuint32(L, wh->get_##type##s().stock(*set.begin())); \
+	else { \
 		lua_newtable(L); \
-		int table_idx = lua_gettop(L); \
- \
-		lua_pushnil(L);  /* first key */ \
-		while (lua_next(L, 2) != 0) { \
-			std::string which = luaL_checkstring(L, -1); \
- \
-			lua_pushuint32(L, o->get_##what## s().stock \
-					(m_get_## what ##_index(L, o, which))); \
-			lua_settable(L, table_idx); /* pops name count */ \
+		container_iterate_const(btype##sSet, set, i) { \
+			lua_pushstring(L, tribe.get_##type##_descr(*i.current)->name()); \
+			lua_pushuint32(L, wh->get_##type##s().stock(*i.current)); \
+			lua_rawset(L, -3); \
 		} \
 	} \
 	return 1; \
 }
-
-/* RST
-	.. method:: set_workers(which[, amount])
-
-		Analogous to :meth:`set_wares`, but for workers.
-*/
-SET_X(worker);
-#undef SET_X
-
-/* RST
-	.. method:: get_workers(which)
-
-		Analogous to :meth:`get_wares` but for workers.
-*/
-GET_X(worker);
-#undef GET_X
+// documented in parent class
+WH_GET(ware, Ware);
+// documented in parent class
+WH_GET(worker, Worker);
+#undef GET
 
 /* RST
 	.. method:: set_soldiers(which[, amount])
