@@ -6,11 +6,11 @@ program=remove
 0=remove
 
 [idle]
-hotspot=15 22
+hotspot=11 13
 pics=chamois_idle_sw_??.png
 fps=20
 
 [walk]
-hotspot=15 22
+hotspot=8 20
 dirpics=chamois_walk_!!_??.png
 fps=20

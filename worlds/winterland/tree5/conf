@@ -30,7 +30,7 @@ mountain4=      2
 
 [idle]
 pics=idle_?.png
-hotspot=24 60
+hotspot=23 58
 
 [program]
 animate=idle 800000

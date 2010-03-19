@@ -6,11 +6,11 @@ program=remove
 0=remove
 
 [idle]
-hotspot=16 22
+hotspot=8 14
 pics=lynx_idle_sw_??.png
 fps=20
 
 [walk]
-hotspot=16 22
+hotspot=9 21
 dirpics=lynx_walk_!!_??.png
 fps=20

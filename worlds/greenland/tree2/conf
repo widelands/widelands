@@ -44,4 +44,4 @@ transform=fallentree
 [falling]
 pics=f_tree2_??.png
 fps=10
-hotspot=24 60
+hotspot=10 60

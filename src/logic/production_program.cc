@@ -1159,7 +1159,7 @@ ProductionProgram::ActCheck_Soldier::ActCheck_Soldier
 		else
 			throw game_data_error
 				(_
-				 	("expected {\"hp\"|\"attack\"|\"defense\"|evade\"} but found "
+				 	("expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found "
 				 	 "\"%s\""),
 				 parameters);
 

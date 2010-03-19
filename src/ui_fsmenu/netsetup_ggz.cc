@@ -69,7 +69,7 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	maxplayers
 		(this,
 		 m_xres * 17 / 25, m_yres * 77 / 100, m_butw, m_buth * 7 / 10,
-		 8, 1, 8), //  start/min./max. value dummy initializations
+		 7, 1, 7), //  start/min./max. value dummy initializations
 
 // Buttons
 	joingame

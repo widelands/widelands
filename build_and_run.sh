@@ -11,6 +11,7 @@ cd build/compile
 
 # do not duplicate data directories
 # except "po" and "doc" - else some files will be changed in bzr
+rm -rf maps pics tribes worlds campaigns txts
 ln -s ../../maps
 ln -s ../../pics
 ln -s ../../tribes
@@ -18,8 +19,10 @@ ln -s ../../worlds
 ln -s ../../campaigns
 ln -s ../../txts
 
-cmake -DWL_INSTALL_PREFIX=. -DWL_INSTALL_DATADIR=. -DWL_INSTALL_BINDIR=. -DWL_INSTALL_LOCALEDIR=locale ../..
-make
+echo "CFLAGS=${CFLAGS} MAKEOPTS=${MAKEOPTS}"
+
+cmake -DWL_INSTALL_PREFIX=. -DWL_INSTALL_DATADIR=. -DWL_INSTALL_BINDIR=. -DWL_INSTALL_LOCALEDIR=locale ../.. -DCMAKE_EXE_CXX_FLAGS=${CFLAGS}
+make ${MAKEOPTS}
 
 rm -rf ../../VERSION
 rm -rf ../../widelands

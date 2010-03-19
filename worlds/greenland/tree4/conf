@@ -31,7 +31,7 @@ bergwiese= 36
 pics=idle_?.png
 sfx=0 ../../../sound/animals/bird4
 fps=10
-hotspot=24 60
+hotspot=23 59
 
 [program]
 animate=idle 1550000
