@@ -1,6 +1,12 @@
 -- =======================================================================
 --                          ProductionSite Testings                         
 -- =======================================================================
+   
+function _cnt_workers(i)
+   local rv = 0
+   for name,cnt in pairs(i:get_workers("all")) do rv = rv + cnt end
+   return rv
+end
 
 -- ================
 -- Worker creation 
@@ -29,8 +35,8 @@ function productionsite_tests:teardown()
    end)
 end
 function productionsite_tests:test_no_workers_initially()
-   assert_equal(0, #self.inn.workers)
-   assert_equal(0, #self.warmill.workers)
+   assert_equal(0, _cnt_workers(self.inn))
+   assert_equal(0, _cnt_workers(self.warmill))
 end
 function productionsite_tests:test_valid_workers()
    assert_equal(2, #self.inn.valid_workers)
@@ -42,19 +48,38 @@ function productionsite_tests:test_valid_workers()
 end
 function productionsite_tests:test_warp_workers_one_at_a_time_inn()
    self.inn:warp_workers{"innkeeper"}
-   assert_equal(1, #self.inn.workers)
+   assert_equal(1, _cnt_workers(self.inn))
+   assert_equal(1, self.inn:get_workers("innkeeper"))
    self.inn:warp_workers{"innkeeper"}
-   assert_equal(2, #self.inn.workers)
-   assert_equal("innkeeper", self.inn.workers[1])
-   assert_equal("innkeeper", self.inn.workers[2])
+   assert_equal(2, _cnt_workers(self.inn))
+   assert_equal(2, self.inn:get_workers("innkeeper"))
+   local rv = self.inn:get_workers{"innkeeper", "carrier"}
+   assert_equal(2, rv.innkeeper)
+   assert_equal(0, rv.carrier)
+   assert_equal(nil, rv.blacksmith)
 end
 function productionsite_tests:test_warp_workers_one_at_a_time_warmill()
    self.warmill:warp_workers{"master-blacksmith"}
-   assert_equal(1, #self.warmill.workers)
+   assert_equal(1, _cnt_workers(self.warmill))
+   local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
+   assert_equal(0, rv.blacksmith)
+   assert_equal(1, rv["master-blacksmith"])
+   assert_equal(0, rv.carrier)
+
    self.warmill:warp_workers{"blacksmith"}
-   assert_equal(2, #self.warmill.workers)
-   assert_equal("master-blacksmith", self.warmill.workers[1])
-   assert_equal("blacksmith", self.warmill.workers[2])
+   assert_equal(2, _cnt_workers(self.warmill))
+   local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
+   assert_equal(1, rv.blacksmith)
+   assert_equal(1, rv["master-blacksmith"])
+   assert_equal(0, rv.carrier)
+end
+function productionsite_tests:test_get_workers_all()
+   self.warmill:warp_workers{"blacksmith"}
+   self.warmill:warp_workers{"master-blacksmith"}
+   local rv = self.warmill:get_workers("all")
+   assert_equal(1, rv.blacksmith)
+   assert_equal(1, rv["master-blacksmith"])
+   assert_equal(nil, rv.carrier)
 end
 
 function productionsite_tests:test_illegal_name()
@@ -74,9 +99,9 @@ function productionsite_tests:test_no_space()
   end)
 end
 
--- ==============
--- Ware creation 
--- ==============
+-- -- ==============
+-- -- Ware creation
+-- -- ==============
 function productionsite_tests:test_valid_wares()
    ww = self.warmill.valid_wares
    assert_equal(8, ww.iron)
@@ -101,7 +126,7 @@ function productionsite_tests:test_valid_wares_correct_length1()
    assert_equal(0, #c)
 end
 
-function productionsite_tests:test_houses_empty_at_creation() 
+function productionsite_tests:test_houses_empty_at_creation()
    for idx,house in ipairs{self.warmill, self.inn, self.lumberjack} do
       print(house)
       for wname, count in pairs(house.valid_wares) do
@@ -109,11 +134,11 @@ function productionsite_tests:test_houses_empty_at_creation()
       end
    end
 end
-function productionsite_tests:test_set_wares_string_arg() 
+function productionsite_tests:test_set_wares_string_arg()
    self.inn:set_wares("fish", 3)
    assert_equal(3, self.inn:get_wares("fish"))
 end
-function productionsite_tests:test_set_wares_array_arg() 
+function productionsite_tests:test_set_wares_array_arg()
    self.inn:set_wares{fish=3, strongbeer=2}
    assert_equal(3, self.inn:get_wares("fish"))
    assert_equal(2, self.inn:get_wares("strongbeer"))
@@ -141,18 +166,18 @@ function productionsite_tests:test_set_wares_negative_count()
 end
 function productionsite_tests:test_set_wares_illegal_count()
    self.inn:set_wares("meat", 4)
-   assert_error("too big count", function() 
+   assert_error("too big count", function()
       self.inn:set_wares("meat", 5)
    end)
 end
-function productionsite_tests:test_get_wares_array_arg() 
+function productionsite_tests:test_get_wares_array_arg()
    self.inn:set_wares{fish=3, strongbeer=2}
    rv = self.inn:get_wares{"fish", "strongbeer"}
    assert_equal(3, rv.fish)
    assert_equal(2, rv.strongbeer)
    assert_equal(nil, rv.meat)
 end
-function productionsite_tests:test_get_wares_all_arg() 
+function productionsite_tests:test_get_wares_all_arg()
    self.inn:set_wares{fish=3, strongbeer=2}
    rv = self.inn:get_wares("all")
    assert_equal(0, rv.pittabread)
@@ -162,7 +187,7 @@ function productionsite_tests:test_get_wares_all_arg()
    assert_equal(2, rv.strongbeer)
    assert_equal(nil, rv.trunk)
 end
-function productionsite_tests:test_get_wares_string_arg() 
+function productionsite_tests:test_get_wares_string_arg()
    self.inn:set_wares{fish=3, strongbeer=2}
    assert_equal(0, self.inn:get_wares("pittabread"))
    assert_equal(0, self.inn:get_wares("meat"))
@@ -180,10 +205,10 @@ function productionsite_tests:test_get_wares_non_storable_wares()
    assert_equal(nil, rv.strongbeer)
 end
 function productionsite_tests:test_get_wares_non_existant_name()
-   assert_error("non existent ware", function() 
+   assert_error("non existent ware", function()
       self.inn:get_wares("balloon")
    end)
-   assert_error("non existent ware", function() 
+   assert_error("non existent ware", function()
       self.inn:get_wares{"meat", "balloon"}
    end)
 end

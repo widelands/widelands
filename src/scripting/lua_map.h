@@ -301,7 +301,8 @@ public:
 };
 
 
-class L_ProductionSite : public L_Building, public L_HasWares {
+class L_ProductionSite : public L_Building,
+	public L_HasWares, public L_HasWorkers {
 public:
 	LUNA_CLASS_HEAD(L_ProductionSite);
 
@@ -314,14 +315,16 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_workers(lua_State * L);
 	int get_valid_workers(lua_State * L);
 	int get_valid_wares(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
+	// TODO: remove warp_workers
 	int warp_workers(lua_State * L);
+	int get_workers(lua_State * L);
+	int set_workers(lua_State * L);
 	int set_wares(lua_State * L);
 	int get_wares(lua_State * L);
 

@@ -1224,12 +1224,13 @@ const MethodType<L_ProductionSite> L_ProductionSite::Methods[] = {
 	METHOD(L_ProductionSite, warp_workers),
 	METHOD(L_ProductionSite, set_wares),
 	METHOD(L_ProductionSite, get_wares),
+	METHOD(L_ProductionSite, get_workers),
+	METHOD(L_ProductionSite, set_workers),
 	{0, 0},
 };
 const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
 	PROP_RO(L_ProductionSite, valid_workers),
 	PROP_RO(L_ProductionSite, valid_wares),
-	PROP_RO(L_ProductionSite, workers),
 	{0, 0, 0},
 };
 
@@ -1281,25 +1282,6 @@ int L_ProductionSite::get_valid_wares(lua_State * L) {
 	container_iterate_const(Ware_Types, ps->descr().inputs(), i) {
 		lua_pushstring(L, tribe.get_ware_descr(i.current->first)->name());
 		lua_pushuint32(L, i.current->second);
-		lua_rawset(L, -3);
-	}
-	return 1;
-}
-
-/* RST
-	.. attribute:: workers
-
-		(RO) An array of names of workers that work here.  Note that you
-		cannot change this directly, use warp_workers to overwrite any worker.
-*/
-int L_ProductionSite::get_workers(lua_State * L) {
-	const PlayerImmovable::Workers & ws = get(get_game(L), L)->get_workers();
-
-	lua_createtable(L, ws.size(), 0);
-	uint32_t widx = 1;
-	container_iterate_const(PlayerImmovable::Workers, ws, w) {
-		lua_pushuint32(L, widx++);
-		lua_pushstring(L, (*w.current)->descr().name().c_str());
 		lua_rawset(L, -3);
 	}
 	return 1;
@@ -1359,6 +1341,56 @@ int L_ProductionSite::warp_workers(lua_State * L) {
 	return 0;
 }
 
+int L_ProductionSite::set_workers(lua_State * L) {
+	// TODO: write me
+	return 0;
+}
+
+// documented in parent class
+int L_ProductionSite::get_workers(lua_State * L) {
+	ProductionSite * ps = get(get_game(L), L);
+	Tribe_Descr const & tribe = ps->owner().tribe();
+
+	bool return_number = false;
+	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
+
+	WorkersSet valid_workers;
+	container_iterate_const(Ware_Types, ps->descr().working_positions(), i)
+		valid_workers.insert(i.current->first);
+
+	// TODO: counting ninside should have it's own function
+	WorkersMap ninside;
+	container_iterate_const(PlayerImmovable::Workers, ps->get_workers(), w) {
+		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
+		if (not ninside.count(i))
+			ninside.insert(L_ProductionSite::WorkerAmount(i, 1));
+		else
+			ninside[i] += 1;
+	}
+
+	if (set.size() == tribe.get_nrworkers().value()) // Wants all returned
+		set = valid_workers;
+
+	if (not return_number)
+		lua_newtable(L);
+
+	container_iterate_const(WorkersSet, set, i) {
+		uint32_t cnt = 0;
+		if (ninside.count(*i.current))
+			cnt = ninside[*i.current];
+
+		if (return_number) {
+			lua_pushuint32(L, cnt);
+			break;
+		} else {
+			lua_pushstring(L, tribe.get_worker_descr(*i.current)->name());
+			lua_pushuint32(L, cnt);
+			lua_rawset(L, -3);
+		}
+	}
+	return 1;
+}
+
 // documented in parent class
 int L_ProductionSite::set_wares(lua_State * L) {
 	ProductionSite * ps = get(get_game(L), L);
@@ -1399,15 +1431,15 @@ int L_ProductionSite::get_wares(lua_State * L) {
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
-	WaresSet valid_wares = valid_wares;
+	WaresSet valid_wares;
 	container_iterate_const(Ware_Types, ps->descr().inputs(), i)
 		valid_wares.insert(i.current->first);
 
-	if (not return_number)
-		lua_newtable(L);
-
 	if (wares_set.size() == tribe.get_nrwares().value()) // Want all returned
 		wares_set = valid_wares;
+
+	if (not return_number)
+		lua_newtable(L);
 
 	container_iterate_const(WaresSet, wares_set, i) {
 		uint32_t cnt = 0;
