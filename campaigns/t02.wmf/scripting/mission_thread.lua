@@ -1,5 +1,5 @@
 -- =======================================================================
---                            Main Mission Thread
+--                            Main mission thread
 -- =======================================================================
 
 use("map", "mission_thread_texts")
@@ -53,7 +53,7 @@ function introduction_thread()
 end
 
 -- ==================================
--- How to mine & Produce food thread
+-- How to mine & produce food thread
 -- ==================================
 function mines_and_food_thread()
    local f1 = wl.map.Field(30, 15)
@@ -118,9 +118,9 @@ function mines_and_food_thread()
 
 end
 
--- ==============================
--- Better build materials thread
--- ==============================
+-- =================================
+-- Better building materials thread
+-- =================================
 function build_materials_thread()
    local p = wl.game.Player(1)
 
@@ -186,9 +186,9 @@ function mission_complete_thread()
    p:reveal_scenario("barbariantut02")
 end
 
--- ==============
+-- ===============
 -- Village thread
--- ==============
+-- ===============
 function village_thread()
    local p = wl.game.Player(1)
    while not (p:seen_field(wl.map.Field(52,39)) or
@@ -210,7 +210,7 @@ end
 
 --[[
    This is a village of poor but friendly people who have settled in a safe
-   valley between two glaciers. They hunt and grow timber and grain but they do
+   valley between two glaciers. They hunt and produce timber and grain but they do
    not have ores or even stones, so they are dependent on the infrequent
    merchant that may pass by and provide them with whatever they can not
    produce on their own. Their only protection is a guard hut at each entrance
