@@ -146,9 +146,6 @@ public:
 	CASTED_GET(PlayerImmovable);
 
 protected:
-	// TODO: move this in L_HasWorkers
-	Widelands::Ware_Index m_get_worker_index
-		(lua_State * L, Widelands::PlayerImmovable*, const std::string& s);
 };
 
 class L_Building : public L_PlayerImmovable {
@@ -321,8 +318,6 @@ public:
 	/*
 	 * Lua Methods
 	 */
-	// TODO: remove warp_workers
-	int warp_workers(lua_State * L);
 	int get_workers(lua_State * L);
 	int set_workers(lua_State * L);
 	int set_wares(lua_State * L);

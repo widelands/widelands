@@ -536,19 +536,6 @@ int L_PlayerImmovable::get_player(lua_State * L) {
  C METHODS
  ==========================================================
  */
-// TODO: remove this macro
-#define GET_INDEX(name, capname) \
-Ware_Index L_PlayerImmovable::m_get_ ## name ## _index \
-	(lua_State * L, PlayerImmovable * i, const std::string & what) \
-{ \
-	Ware_Index idx = i->get_owner()->tribe(). name ## _index(what); \
-	if (!idx) \
-		report_error(L, "Invalid " #capname ": %s", what.c_str()); \
-	return idx; \
-}
-GET_INDEX(worker, Worker);
-#undef GET_INDEX
-
 
 /* RST
 Flag
@@ -1221,7 +1208,6 @@ ProductionSite
 */
 const char L_ProductionSite::className[] = "ProductionSite";
 const MethodType<L_ProductionSite> L_ProductionSite::Methods[] = {
-	METHOD(L_ProductionSite, warp_workers),
 	METHOD(L_ProductionSite, set_wares),
 	METHOD(L_ProductionSite, get_wares),
 	METHOD(L_ProductionSite, get_workers),
@@ -1292,57 +1278,65 @@ int L_ProductionSite::get_valid_wares(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
-/* RST
-	.. method:: warp_workers(workers)
 
-		Warp workers into this building. The workers are created from thin air.
-
-		:arg workers: array of worker names. If more than one worker of this type
-			should be warped, the worker has to be named more than once.
-
-		:seealso: wl.map.Road.warp_workers
-*/
-int L_ProductionSite::warp_workers(lua_State * L) {
-
-	luaL_checktype(L, 2, LUA_TTABLE);
-
+// documented in parent class
+int L_ProductionSite::set_workers(lua_State * L) {
 	Game & g = get_game(L);
 	ProductionSite * ps = get(g, L);
-	Tribe_Descr const & tribe = ps->owner().tribe();
+	const Tribe_Descr & tribe = ps->owner().tribe();
 
-	Ware_Types const & working_positions = ps->descr().working_positions();
+	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
 
-	lua_pushnil(L);  /* first key */
-	while (lua_next(L, 2) != 0) {
-		std::string name = luaL_checkstring(L, -1);
-		const Worker_Descr * wdes = tribe.get_worker_descr
-			(tribe.worker_index(name));
-		if (!wdes)
-			return report_error(L, "%s is not a valid worker name!", name.c_str());
-
-		bool success = false;
-		container_iterate_const(Ware_Types, working_positions, i) {
-			if (i.current->first == wdes->worker_index()) {
-				if (!ps->warp_worker(g, *wdes)) {
-					success = true;
-					break;
-				} else
-					return report_error(L, "No space left for this worker");
-			}
-		}
-		if (!success)
-			return
-				report_error
-				  (L, "%s is not a valid worker for this site!", name.c_str());
-
-		lua_pop(L, 1); /* pop value, keep key for next iteration */
+	WorkersMap c_workers;
+	container_iterate_const(PlayerImmovable::Workers, ps->get_workers(), w) {
+		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
+		if (not c_workers.count(i))
+			c_workers.insert(L_ProductionSite::WorkerAmount(i, 1));
+		else
+			c_workers[i] += 1;
+		if (not setpoints.count(i))
+			setpoints.insert(WorkerAmount(i, 0));
 	}
 
-	return 0;
-}
+	WorkersSet valid_workers;
+	container_iterate_const(Ware_Types, ps->descr().working_positions(), i)
+		valid_workers.insert(i.current->first);
 
-int L_ProductionSite::set_workers(lua_State * L) {
-	// TODO: write me
+	// The idea is to change as little as possible
+	container_iterate_const(WorkersMap, setpoints, sp) {
+		const Worker_Descr * wdes = tribe.get_worker_descr(sp->first);
+		if (not valid_workers.count(sp->first))
+				  report_error
+					  (L, "%s is not a valid worker for this site!",
+					   wdes->name().c_str());
+
+		uint32_t cur = 0;
+		WorkersMap::iterator i = c_workers.find(sp->first);
+		if (i != c_workers.end())
+			cur = i->second;
+
+		int d = sp->second - cur;
+		if (d < 0) {
+			while (d) {
+				container_iterate_const
+					(PlayerImmovable::Workers, ps->get_workers(), w)
+				{
+					Ware_Index i = tribe.worker_index((*w.current)->descr().name());
+					if(i == sp->first) {
+						const_cast<Worker *>(*w.current)->remove(g);
+						++d;
+						break;
+					}
+				}
+			}
+		} else if (d > 0) {
+			// add workers
+			for (int32_t i = 0; i < d; i++) {
+				if (ps->warp_worker(g, *wdes))
+						return report_error(L, "No space left for this worker");
+			}
+		}
+	}
 	return 0;
 }
 
@@ -1358,14 +1352,13 @@ int L_ProductionSite::get_workers(lua_State * L) {
 	container_iterate_const(Ware_Types, ps->descr().working_positions(), i)
 		valid_workers.insert(i.current->first);
 
-	// TODO: counting ninside should have it's own function
-	WorkersMap ninside;
+	WorkersMap c_workers;
 	container_iterate_const(PlayerImmovable::Workers, ps->get_workers(), w) {
 		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
-		if (not ninside.count(i))
-			ninside.insert(L_ProductionSite::WorkerAmount(i, 1));
+		if (not c_workers.count(i))
+			c_workers.insert(L_ProductionSite::WorkerAmount(i, 1));
 		else
-			ninside[i] += 1;
+			c_workers[i] += 1;
 	}
 
 	if (set.size() == tribe.get_nrworkers().value()) // Wants all returned
@@ -1376,8 +1369,8 @@ int L_ProductionSite::get_workers(lua_State * L) {
 
 	container_iterate_const(WorkersSet, set, i) {
 		uint32_t cnt = 0;
-		if (ninside.count(*i.current))
-			cnt = ninside[*i.current];
+		if (c_workers.count(*i.current))
+			cnt = c_workers[*i.current];
 
 		if (return_number) {
 			lua_pushuint32(L, cnt);

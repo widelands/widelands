@@ -1,3 +1,8 @@
+function _cnt_wares(f)
+   local rv = 0
+   for name,cnt in pairs(f:get_wares("all")) do rv = rv + cnt end
+   return rv
+end
 -- ===================
 -- Flag functionality 
 -- ===================
@@ -43,10 +48,12 @@ function flag_tests:test_change_wares_on_flag()
    assert_equal(3, self.f:get_wares("fish"))
    assert_equal(0, self.f:get_wares("trunk"))
    assert_equal(0, self.f:get_wares("coal"))
+   assert_equal(3, _cnt_wares(self.f))
 end
 function flag_tests:test_change_wares_on_flag2()
    self.f:set_wares{trunk = 3, coal = 5}
    self.f:set_wares{trunk = 3, coal = 4, fish = 1}
+   assert_equal(8, _cnt_wares(self.f))
    assert_equal(1, self.f:get_wares("fish"))
    assert_equal(3, self.f:get_wares("trunk"))
    assert_equal(4, self.f:get_wares("coal"))

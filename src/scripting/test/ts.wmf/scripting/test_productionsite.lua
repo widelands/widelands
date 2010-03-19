@@ -46,11 +46,11 @@ function productionsite_tests:test_valid_workers()
    assert_equal("master-blacksmith", self.warmill.valid_workers[1])
    assert_equal("blacksmith", self.warmill.valid_workers[2])
 end
-function productionsite_tests:test_warp_workers_one_at_a_time_inn()
-   self.inn:warp_workers{"innkeeper"}
+function productionsite_tests:test_set_workers()
+   self.inn:set_workers("innkeeper", 1)
    assert_equal(1, _cnt_workers(self.inn))
    assert_equal(1, self.inn:get_workers("innkeeper"))
-   self.inn:warp_workers{"innkeeper"}
+   self.inn:set_workers{innkeeper=2}
    assert_equal(2, _cnt_workers(self.inn))
    assert_equal(2, self.inn:get_workers("innkeeper"))
    local rv = self.inn:get_workers{"innkeeper", "carrier"}
@@ -58,15 +58,22 @@ function productionsite_tests:test_warp_workers_one_at_a_time_inn()
    assert_equal(0, rv.carrier)
    assert_equal(nil, rv.blacksmith)
 end
-function productionsite_tests:test_warp_workers_one_at_a_time_warmill()
-   self.warmill:warp_workers{"master-blacksmith"}
+function productionsite_tests:test_set_workers_warmill()
+   self.warmill:set_workers("master-blacksmith",1)
    assert_equal(1, _cnt_workers(self.warmill))
    local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
    assert_equal(0, rv.blacksmith)
    assert_equal(1, rv["master-blacksmith"])
    assert_equal(0, rv.carrier)
 
-   self.warmill:warp_workers{"blacksmith"}
+   self.warmill:set_workers("blacksmith",1)
+   assert_equal(1, _cnt_workers(self.warmill))
+   local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
+   assert_equal(1, rv.blacksmith)
+   assert_equal(0, rv["master-blacksmith"])
+   assert_equal(0, rv.carrier)
+   
+   self.warmill:set_workers{blacksmith=1, ["master-blacksmith"] = 1}
    assert_equal(2, _cnt_workers(self.warmill))
    local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
    assert_equal(1, rv.blacksmith)
@@ -74,8 +81,7 @@ function productionsite_tests:test_warp_workers_one_at_a_time_warmill()
    assert_equal(0, rv.carrier)
 end
 function productionsite_tests:test_get_workers_all()
-   self.warmill:warp_workers{"blacksmith"}
-   self.warmill:warp_workers{"master-blacksmith"}
+   self.warmill:set_workers{blacksmith=1, ["master-blacksmith"] = 1}
    local rv = self.warmill:get_workers("all")
    assert_equal(1, rv.blacksmith)
    assert_equal(1, rv["master-blacksmith"])
@@ -84,18 +90,17 @@ end
 
 function productionsite_tests:test_illegal_name()
    assert_error("illegal name", function()
-      self.warmill:warp_workers{"jhsf"}
+      self.warmill:set_workers("jhsf",1)
    end)
 end
 function productionsite_tests:test_illegal_worker()
   assert_error("illegal worker", function()
-      self.warmill:warp_workers{"lumberjack"}
+      self.warmill:set_workers("lumberjack", 1)
   end)
 end
 function productionsite_tests:test_no_space()
-   self.warmill:warp_workers{"blacksmith"}
   assert_error("no_space", function()
-      self.warmill:warp_workers{"blacksmith"}
+      self.warmill:set_workers{blacksmith=2}
   end)
 end
 
