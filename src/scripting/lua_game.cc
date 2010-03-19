@@ -866,7 +866,7 @@ int L_Player::place_road(lua_State * L) {
 	Game & g = get_game(L);
 	Map & map = g.map();
 
-	Flag * starting_flag = (*get_user_class<L_Flag>(L, 2))->get(g, L);
+	Flag * starting_flag = (*get_user_class<L_Flag>(L, 2))->get(L, g);
 	Coords current = starting_flag->get_position();
 	Path path(current);
 

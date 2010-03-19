@@ -45,9 +45,8 @@ class L_MapModuleClass : public LunaClass {
 };
 
 
-// TODO: order should be reversed: L, game
 #define CASTED_GET(klass) \
-Widelands:: klass * get(Widelands::Game & game, lua_State * L) { \
+Widelands:: klass * get(lua_State * L, Widelands::Game & game) { \
 	return static_cast<Widelands:: klass *> \
 		(L_MapObject::get(game, L, #klass)); \
 }

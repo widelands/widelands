@@ -443,7 +443,7 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 */
 int L_BaseImmovable::get_size(lua_State * L) {
 	Game & game = get_game(L);
-	BaseImmovable * o = get(game, L);
+	BaseImmovable * o = get(L, game);
 
 	switch (o->get_size()) {
 		case BaseImmovable::NONE: lua_pushstring(L, "none"); break;
@@ -468,7 +468,7 @@ int L_BaseImmovable::get_size(lua_State * L) {
 */
 int L_BaseImmovable::get_name(lua_State * L) {
 	Game & game = get_game(L);
-	BaseImmovable * o = get(game, L);
+	BaseImmovable * o = get(L, game);
 
 	lua_pushstring(L, o->name().c_str());
 	return 1;
@@ -521,7 +521,7 @@ const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
 int L_PlayerImmovable::get_player(lua_State * L) {
 	return
 		to_lua<L_Player>
-			(L, new L_Player (get(get_game(L), L)->get_owner()->player_number())
+			(L, new L_Player (get(L, get_game(L))->get_owner()->player_number())
 	);
 }
 
@@ -584,7 +584,7 @@ static L_Flag::WaresMap _count_wares(Flag & f, Tribe_Descr const & tribe) {
 int L_Flag::set_wares(lua_State * L)
 {
 	Game & game = get_game(L);
-	Flag * f = get(game, L);
+	Flag * f = get(L, game);
 	Tribe_Descr const & tribe = f->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
@@ -638,12 +638,12 @@ int L_Flag::set_wares(lua_State * L)
 
 // Documented in parent Class
 int L_Flag::get_wares(lua_State * L) {
-	Tribe_Descr const & tribe = get(get_game(L), L)->owner().tribe();
+	Tribe_Descr const & tribe = get(L, get_game(L))->owner().tribe();
 
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
-	WaresMap items = _count_wares(*get(get_game(L), L), tribe);
+	WaresMap items = _count_wares(*get(L, get_game(L)), tribe);
 
 	if (wares_set.size() == tribe.get_nrwares().value()) { // Want all returned
 		wares_set.clear();
@@ -715,7 +715,7 @@ const PropertyType<L_Road> L_Road::Properties[] = {
 		(RO) The length of the roads in number of edges.
 */
 int L_Road::get_length(lua_State * L) {
-	lua_pushuint32(L, get(get_game(L), L)->get_path().get_nsteps());
+	lua_pushuint32(L, get(L, get_game(L))->get_path().get_nsteps());
 	return 1;
 }
 
@@ -727,7 +727,7 @@ int L_Road::get_length(lua_State * L) {
 int L_Road::get_start_flag(lua_State * L) {
 	return
 		to_lua<L_Flag>
-			(L, new L_Flag(get(get_game(L), L)->get_flag(Road::FlagStart)));
+			(L, new L_Flag(get(L, get_game(L))->get_flag(Road::FlagStart)));
 }
 
 /* RST
@@ -738,7 +738,7 @@ int L_Road::get_start_flag(lua_State * L) {
 int L_Road::get_end_flag(lua_State * L) {
 	return
 		to_lua<L_Flag>
-			(L, new L_Flag(get(get_game(L), L)->get_flag(Road::FlagEnd)));
+			(L, new L_Flag(get(L, get_game(L))->get_flag(Road::FlagEnd)));
 }
 
 /* RST
@@ -749,7 +749,7 @@ int L_Road::get_end_flag(lua_State * L) {
 		worker.
 */
 int L_Road::get_workers(lua_State * L) {
-	const PlayerImmovable::Workers & ws = get(get_game(L), L)->get_workers();
+	const PlayerImmovable::Workers & ws = get(L, get_game(L))->get_workers();
 
 	lua_createtable(L, ws.size(), 0);
 	uint32_t widx = 1;
@@ -785,7 +785,7 @@ int L_Road::get_valid_workers(lua_State * L) {
 		* busy
 */
 int L_Road::get_type(lua_State * L) {
-	switch (get(get_game(L), L)->get_roadtype()) {
+	switch (get(L, get_game(L))->get_roadtype()) {
 		case Road_Normal:
 			lua_pushstring(L, "normal"); break;
 		case Road_Busy:
@@ -831,7 +831,7 @@ int L_Road::warp_workers(lua_State * L) {
 	Game & g = get_game(L);
 	Map & map = g.map();
 
-	Road * r = get(g, L);
+	Road * r = get(L, g);
 
 	if (r->get_workers().size())
 		return report_error(L, "No space for this worker!");
@@ -910,7 +910,7 @@ const PropertyType<L_Building> L_Building::Properties[] = {
 		* warehouse
 */
 int L_Building::get_building_type(lua_State * L) {
-	lua_pushstring(L, get(get_game(L), L)->type_name());
+	lua_pushstring(L, get(L, get_game(L))->type_name());
 	return 1;
 }
 
@@ -965,7 +965,7 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
 // Documented in parent class
 #define WH_SET(type, btype) \
 int L_Warehouse::set_##type##s(lua_State * L) { \
-	Warehouse * wh = get(get_game(L), L); \
+	Warehouse * wh = get(L, get_game(L)); \
 	Tribe_Descr const & tribe = wh->owner().tribe(); \
 	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, tribe); \
  \
@@ -986,7 +986,7 @@ WH_SET(worker, Worker);
 
 #define WH_GET(type, btype) \
 int L_Warehouse::get_##type##s(lua_State * L) { \
-	Warehouse * wh = get(get_game(L), L); \
+	Warehouse * wh = get(L, get_game(L)); \
 	Tribe_Descr const & tribe = wh->owner().tribe(); \
 	bool return_number = false; \
 	btype##sSet set = m_parse_get_##type##s_arguments(L, tribe, &return_number); \
@@ -1081,7 +1081,7 @@ static int _get_soldier_levels
 }
 int L_Warehouse::set_soldiers(lua_State * L) {
 	Game & game = get_game(L);
-	Warehouse * wh = get(game, L);
+	Warehouse * wh = get(L, game);
 	Tribe_Descr const & tribe = wh->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
@@ -1234,7 +1234,7 @@ const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
 */
 int L_ProductionSite::get_valid_workers(lua_State * L) {
 	Game & g = get_game(L);
-	ProductionSite * ps = get(g, L);
+	ProductionSite * ps = get(L, g);
 
 	lua_newtable(L);
 
@@ -1260,7 +1260,7 @@ int L_ProductionSite::get_valid_workers(lua_State * L) {
 */
 int L_ProductionSite::get_valid_wares(lua_State * L) {
 	Game & g = get_game(L);
-	ProductionSite * ps = get(g, L);
+	ProductionSite * ps = get(L, g);
 
 	Tribe_Descr const & tribe = ps->owner().tribe();
 
@@ -1282,7 +1282,7 @@ int L_ProductionSite::get_valid_wares(lua_State * L) {
 // documented in parent class
 int L_ProductionSite::set_workers(lua_State * L) {
 	Game & g = get_game(L);
-	ProductionSite * ps = get(g, L);
+	ProductionSite * ps = get(L, g);
 	const Tribe_Descr & tribe = ps->owner().tribe();
 
 	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
@@ -1342,7 +1342,7 @@ int L_ProductionSite::set_workers(lua_State * L) {
 
 // documented in parent class
 int L_ProductionSite::get_workers(lua_State * L) {
-	ProductionSite * ps = get(get_game(L), L);
+	ProductionSite * ps = get(L, get_game(L));
 	Tribe_Descr const & tribe = ps->owner().tribe();
 
 	bool return_number = false;
@@ -1386,7 +1386,7 @@ int L_ProductionSite::get_workers(lua_State * L) {
 
 // documented in parent class
 int L_ProductionSite::set_wares(lua_State * L) {
-	ProductionSite * ps = get(get_game(L), L);
+	ProductionSite * ps = get(L, get_game(L));
 	const Tribe_Descr & tribe = ps->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
@@ -1418,7 +1418,7 @@ int L_ProductionSite::set_wares(lua_State * L) {
 
 // documented in parent class
 int L_ProductionSite::get_wares(lua_State * L) {
-	ProductionSite * ps = get(get_game(L), L);
+	ProductionSite * ps = get(L, get_game(L));
 	Tribe_Descr const & tribe = ps->owner().tribe();
 
 	bool return_number = false;
@@ -1492,7 +1492,7 @@ const PropertyType<L_MilitarySite> L_MilitarySite::Properties[] = {
 */
 int L_MilitarySite::get_max_soldiers(lua_State * L) {
 	lua_pushuint32
-		(L, get(get_game(L), L)->descr().get_max_number_of_soldiers());
+		(L, get(L, get_game(L))->descr().get_max_number_of_soldiers());
 
 	return 1;
 }
@@ -1523,7 +1523,7 @@ int L_MilitarySite::warp_soldiers(lua_State * L) {
 	lua_pop(L, 1);
 
 	Game & game = get_game(L);
-	MilitarySite * ms = get(game, L);
+	MilitarySite * ms = get(L, game);
 	Tribe_Descr const & tribe = ms->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
@@ -1568,7 +1568,7 @@ int L_MilitarySite::warp_soldiers(lua_State * L) {
 */
 int L_MilitarySite::get_soldiers(lua_State * L) {
 	Game & game = get_game(L);
-	MilitarySite * ms = get(game, L);
+	MilitarySite * ms = get(L, game);
 	std::vector<Soldier *> vec = ms->stationedSoldiers();
 
 	if (lua_gettop(L) == 1 or lua_isnil(L, 2)) {
