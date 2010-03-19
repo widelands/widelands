@@ -615,7 +615,7 @@ int L_Flag::set_wares(lua_State * L)
 		} else if (d > 0) {
 			// add items
 			Item_Ware_Descr const & wd = *tribe.get_ware_descr(sp->first);
-			for (uint32_t i = 0; i < d; i++) {
+			for (int32_t i = 0; i < d; i++) {
 				WareInstance & item = *new WareInstance(sp->first, &wd);
 				item.init(game);
 				f->add_item(game, item);
@@ -1007,6 +1007,7 @@ int L_Warehouse::set_wares(lua_State * L) {
 		else if (d > 0)
 			wh->insert_wares(i.current->first, d);
 	}
+	return 0;
 }
 
 

@@ -1311,7 +1311,8 @@ int L_Objective::set_done(lua_State * L) {
  */
 int L_Objective::remove(lua_State * L) {
 	Game & g = get_game(L);
-	Objective & o = get(L, g); // will not return if object doesn't exist
+	// The next call checks if the Objective still exists
+	get(L, g);
 	g.map().mom().remove(m_name);
 	return 0;
 }

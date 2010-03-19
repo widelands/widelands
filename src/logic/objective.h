@@ -40,8 +40,8 @@ struct Objective : public Named {
 		:
 		m_descname   (name()),
 		m_descr     (_("no descr")),
-		m_done   (false),
-		m_visible(true)
+		m_visible(true),
+		m_done   (false)
 	{}
 	virtual ~Objective() {}
 
