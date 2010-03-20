@@ -66,6 +66,7 @@ struct Building_Descr : public Map_Object_Descr {
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
 	bool is_enhanced    () const {return m_enhanced_building;}
+	bool global() const {return m_global;}
 	typedef std::map<Ware_Index, uint8_t> Buildcost;
 	Buildcost const & buildcost() const throw () {return m_buildcost;}
 	PictureID get_buildicon() const {return m_buildicon;}
@@ -100,7 +101,6 @@ struct Building_Descr : public Map_Object_Descr {
 		const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTML(::FileWrite &) const;
-	bool global() const {return m_global;}
 #endif
 	virtual void load_graphics();
 
@@ -129,9 +129,7 @@ private:
 	Enhancements  m_enhancements;
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
-#ifdef WRITE_GAME_DATA_AS_HTML
 	bool          m_global;            // whether this is a "global" building
-#endif
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;

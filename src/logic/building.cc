@@ -57,9 +57,7 @@ Building_Descr::Building_Descr
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_hints         (prof.get_section("aihints")),
-#ifdef WRITE_GAME_DATA_AS_HTML
 	m_global        (false),
-#endif
 	m_vision_range  (0)
 {
 	try {
@@ -119,6 +117,7 @@ Building_Descr::Building_Descr
 				("\"enhancements=%s\": %s", v->get_string(), e.what());
 		}
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
+	m_global = directory.find("global/") < directory.size();
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
 		m_buildicon_fname  = directory;
@@ -155,6 +154,10 @@ Building_Descr::Building_Descr
 					("[buildcost] \"%s=%s\": %s",
 					 val->get_name(), val->get_string(), e.what());
 			}
+	} else if(m_global) {
+		//  get build icon for global buildings (for statistics window)
+		m_buildicon_fname  = directory;
+		m_buildicon_fname += "/menu.png";
 	}
 
 	{ //  parse basic animation data
@@ -169,9 +172,6 @@ Building_Descr::Building_Descr
 		g_sound_handler.load_fx(directory, v->get_string());
 
 	m_vision_range = global_s.get_int("vision_range");
-#ifdef WRITE_GAME_DATA_AS_HTML
-	m_global = directory.find("global/") < directory.size();
-#endif
 }
 
 
