@@ -710,68 +710,16 @@ void MilitarySite::informPlayer(Game & game, bool const discovered)
 		 _("%sYour %s is under attack.</p>"),
 		 formation, descname().c_str());
 
+	// Add a message as long as no previous message was send from a point with
+	// radius <= 5 near the current location in the last 60 seconds
 	owner().add_message_with_timeout
 		(game,
 		 create_message
 		 	("under_attack",
-		 	 game.get_gametime(), 8 * 60 * 1000,
+		 	 game.get_gametime(), 5 * 60 * 1000,
 		 	 _("You are under attack"),
 		 	 message),
-		 30000, 4);
-
-	/* Old code remains here for security reasons:
-	   New code has not been tested yet.
-
-	Map & map  = game.map();
-
-	// Inform the player, that we are under attack by adding a new entry to the
-	// message queue - a sound will automatically be played. But only add this
-	// message if there is no other from that area from last 30 sec.
-	Coords const coords = base_flag().get_position();
-	std::vector<Message> & msgQueue = MessageQueue::get(owner().player_number());
-	for
-		(struct {
-		 	std::vector<Message>::const_iterator current;
-		 	std::vector<Message>::const_iterator const end;
-		 } i = {msgQueue.begin(), msgQueue.end()};;
-		 ++i.current)
-		if (i.current == i.end) {
-			char formation[256];
-			std::string b_name(name());
-			std::string b_tribe(tribe().name());
-			if (b_name.find('.') <= b_name.size()) {
-				// global militarysite
-				b_tribe = b_name.substr(b_name.find('.'), b_name.size());
-				b_name.resize(b_name.find('.'));
-			}
-			snprintf
-				(formation, sizeof(formation),
-				 "<rt image=tribes/%s/%s/%s_i_00.png>"
-				 "<p font-size=14 font-face=FreeSerif>",
-				 b_tribe.c_str(), b_name.c_str(), b_name.c_str());
-			char message[2048];
-			snprintf
-				(message, sizeof(message),
-				 discovered ?
-				 _("%sYour %s discovered an aggressor.</p></rt>") :
-				 _("%sYour %s is under attack.</p></rt>"),
-				 formation, descname().c_str());
-			MessageQueue::add
-				(owner(),
-				 Message
-				 	("under_attack", game.get_gametime(),
-				 	 _("You are under attack!"), coords, message));
-			break;
-		} else if
-			(i.current->sender() == "under_attack" and
-			 map.calc_distance(i.current->get_coords(), coords) < 5 and
-			 game.get_gametime() - i.current->time() < 60000)
-			//  Soldiers are running around during their attack, so we avoid too
-			//  many messages through checking an area with radius = 4
-			//  Further if the found message is older than 60 sec., and the fight
-			//  still goes on, a reminder might be useful.
-			break;
-	*/
+		 60000, 5);
 }
 
 

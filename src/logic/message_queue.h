@@ -136,7 +136,7 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	Message_Id current_message_id() const {return m_current_message_id;}
 
 	/// \Returns whether all messages with id 1, 2, 3, ..., current_message_id
-	/// exist. This should be the case when messages have been loade from a map
+	/// exist. This should be the case when messages have been loaded from a map
 	/// file/savegame but the simulation has not started to run yet.
 	bool is_continuous() const {
 		assert_counts();
