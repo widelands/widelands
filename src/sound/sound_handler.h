@@ -36,6 +36,7 @@
 
 namespace Widelands {struct Game;}
 struct Songset;
+struct SDL_mutex;
 
 /// How many milliseconds in the past to consider for
 /// Sound_Handler::play_or_not()
@@ -270,7 +271,9 @@ protected:
 	FXset_map m_fxs;
 
 	/// List of currently playing effects, and the channel each one is on
-	std::map<uint32_t, std::string> m_active_fx;
+	/// Access to this variable is protected through m_fx_lock mutex.
+	typedef std::map<uint32_t, std::string> Activefx_map;
+	Activefx_map m_active_fx;
 
 	/** Which songset we are currently selecting songs from - not regarding
 	 * if there actually is a song playing \e right \e now.
@@ -282,6 +285,9 @@ protected:
 	 * logic!
 	*/
 	RNG m_rng;
+
+	/// Protects access to m_active_fx between callbacks and main code.
+	SDL_mutex * m_fx_lock;
 };
 
 #endif
