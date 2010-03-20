@@ -1464,6 +1464,10 @@ void NetHost::checkSyncReports()
 			broadcast(s);
 
 			disconnectClient(i, _("Client and host have become desynchronized."));
+			// Pause the game, so that host and client have time to handle the
+			// desync.
+			d->networkspeed = 0;
+			broadcastRealSpeed(d->networkspeed);
 		}
 	}
 }
