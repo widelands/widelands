@@ -164,13 +164,8 @@ LuaInterface_Impl::LuaInterface_Impl
 	luaopen_wlgame(m_L);
 
 	// Push the game onto the stack
-	lua_pushstring(m_L, "egbase");
 	lua_pushlightuserdata(m_L, static_cast<void *>(egbase));
-	lua_settable(m_L, LUA_REGISTRYINDEX);
-	// TODO: this should only be pushed if this is really a game!
-	lua_pushstring(m_L, "game");
-	lua_pushlightuserdata(m_L, static_cast<void *>(egbase));
-	lua_settable(m_L, LUA_REGISTRYINDEX);
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "game");
 
 	register_scripts(*g_fs, "aux");
 }
