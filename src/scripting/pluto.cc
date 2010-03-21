@@ -19,6 +19,7 @@
 #include <lua.hpp>
 
 #include "wexception.h"
+#include "log.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/widelands_fileread.h"
 
@@ -624,11 +625,28 @@ static void unpersistboolean(UnpersistInfo *upi)
 }
 
 
+/* Problem: lua_Numbers are doubles. Doubles can't be saved portably, so
+ * we do what all scientists to since the dawn of matlab: we convert it
+ * to a string that Lua can interpret as the same number again
+ */
 static void persistnumber(PersistInfo *pi)
 {
-	lua_Number n = lua_tonumber(pi->L, -1);
-	pi->writer(pi->L, &n, sizeof(lua_Number), pi->ud);
+	const char * n = lua_tostring(pi->L, -1);
+	pi->fw->CString(n);
 }
+static void unpersistnumber(UnpersistInfo *upi)
+{
+					/* perms reftbl ... */
+	lua_checkstack(upi->L, 1);
+	const char * s = upi->fr->CString();
+
+	lua_pushstring(upi->L, s);
+	lua_Number n = lua_tonumber(upi->L, -1);
+	lua_pop(upi->L, 1);
+	lua_pushnumber(upi->L, n);
+					/* perms reftbl ... num */
+}
+
 
 static void persiststring(PersistInfo *pi)
 {
@@ -829,16 +847,6 @@ static void registerobject(int ref, UnpersistInfo *upi)
 					/* perms reftbl ... obj ref obj */
 	lua_settable(upi->L, 2);
 					/* perms reftbl ... obj */
-}
-
-static void unpersistnumber(UnpersistInfo *upi)
-{
-					/* perms reftbl ... */
-	lua_Number n;
-	lua_checkstack(upi->L, 1);
-	verify(LIF(Z,read)(&upi->zio, &n, sizeof(lua_Number)) == 0);
-	lua_pushnumber(upi->L, n);
-					/* perms reftbl ... num */
 }
 
 static void unpersiststring(UnpersistInfo *upi)
