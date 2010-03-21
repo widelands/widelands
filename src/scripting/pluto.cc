@@ -636,7 +636,7 @@ static void persistproto(PersistInfo *pi)
 	{
 		compile_assert(sizeof(Instruction) == 4);
 		pi->fw->Signed32(p->sizecode);
-		for (uint32_t i = 0; i < p->sizecode; i++)
+		for (int32_t i = 0; i < p->sizecode; i++)
 			pi->fw->Unsigned32(p->code[i]);
 	}
 
@@ -674,7 +674,7 @@ static void persistproto(PersistInfo *pi)
 	/* Serialize line numbers */
 	{
 		pi->fw->Signed32(p->sizelineinfo);
-		for(uint32_t i = 0; i < p->sizelineinfo; i++)
+		for(int32_t i = 0; i < p->sizelineinfo; i++)
 			pi->fw->Signed32(p->lineinfo[i]);
 	}
 
@@ -723,7 +723,7 @@ static void persistthread(PersistInfo *pi)
 	/* Persist the stack */
 	posremaining = revappendstack(L2, pi->L);
 					/* perms reftbl ... thr (rev'ed contents of L2) */
-	pi->writer(pi->L, &posremaining, sizeof(size_t), pi->ud);
+	pi->fw->Unsigned32(posremaining);
 	for(; posremaining > 0; posremaining--) {
 		persist(pi);
 		lua_pop(pi->L, 1);
@@ -732,7 +732,7 @@ static void persistthread(PersistInfo *pi)
 	/* Now, persist the CallInfo stack. */
 	{
 		size_t i, numframes = (L2->ci - L2->base_ci) + 1;
-		pi->writer(pi->L, &numframes, sizeof(size_t), pi->ud);
+		pi->fw->Unsigned32(numframes);
 		for(i=0; i<numframes; i++) {
 			CallInfo *ci = L2->base_ci + i;
 			size_t stackbase = ci->base - L2->stack;
@@ -741,11 +741,11 @@ static void persistthread(PersistInfo *pi)
 			size_t savedpc = (ci != L2->base_ci) ?
 				ci->savedpc - ci_func(ci)->l.p->code :
 				0;
-			pi->writer(pi->L, &stackbase, sizeof(size_t), pi->ud);
-			pi->writer(pi->L, &stackfunc, sizeof(size_t), pi->ud);
-			pi->writer(pi->L, &stacktop, sizeof(size_t), pi->ud);
-			pi->writer(pi->L, &ci->nresults, sizeof(int), pi->ud);
-			pi->writer(pi->L, &savedpc, sizeof(size_t), pi->ud);
+			pi->fw->Unsigned32(stackbase);
+			pi->fw->Unsigned32(stackfunc);
+			pi->fw->Unsigned32(stacktop);
+			pi->fw->Signed32(ci->nresults);
+			pi->fw->Unsigned32(savedpc);
 		}
 	}
 
@@ -754,10 +754,10 @@ static void persistthread(PersistInfo *pi)
 		size_t stackbase = L2->base - L2->stack;
 		size_t stacktop = L2->top - L2->stack;
 		lua_assert(L2->nCcalls <= 1);
-		pi->writer(pi->L, &L2->status, sizeof(lu_byte), pi->ud);
-		pi->writer(pi->L, &stackbase, sizeof(size_t), pi->ud);
-		pi->writer(pi->L, &stacktop, sizeof(size_t), pi->ud);
-		pi->writer(pi->L, &L2->errfunc, sizeof(ptrdiff_t), pi->ud);
+		pi->fw->Unsigned8(L2->status);
+		pi->fw->Unsigned32(stackbase);
+		pi->fw->Unsigned32(stacktop);
+		pi->fw->Signed32(L2->errfunc);
 	}
 
 	/* Finally, record upvalues which need to be reopened */
@@ -767,7 +767,6 @@ static void persistthread(PersistInfo *pi)
 		UpVal *uv;
 					/* perms reftbl ... thr */
 		for(gco = L2->openupval; gco != NULL; gco = uv->next) {
-			size_t stackpos;
 			uv = gco2uv(gco);
 
 			/* Make sure upvalue is really open */
@@ -777,8 +776,7 @@ static void persistthread(PersistInfo *pi)
 			persist(pi);
 			lua_pop(pi->L, 1);
 					/* perms reftbl ... thr */
-			stackpos = uv->v - L2->stack;
-			pi->writer(pi->L, &stackpos, sizeof(size_t), pi->ud);
+			pi->fw->Unsigned32(uv->v - L2->stack);
 		}
 					/* perms reftbl ... thr */
 		lua_pushnil(pi->L);
@@ -1135,7 +1133,7 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 	{
 		p->sizecode = upi->fr->Signed32();
 		pdep_reallocvector(upi->L, p->code, 1, p->sizecode, Instruction);
-		for (uint32_t i = 0; i < p->sizecode; i++)
+		for (int32_t i = 0; i < p->sizecode; i++)
 			p->code[i] = upi->fr->Unsigned32();
 	}
 
@@ -1183,7 +1181,7 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 		if (p->sizelineinfo)
 		{
 			pdep_reallocvector(upi->L, p->lineinfo, 0, p->sizelineinfo, int);
-			for(uint32_t i = 0; i < p->sizelineinfo; i++)
+			for(int32_t i = 0; i < p->sizelineinfo; i++)
 				p->lineinfo[i] = upi->fr->Signed32();
 		}
 	}
@@ -1238,14 +1236,13 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 
 	/* First, deserialize the object stack. */
 	{
-		size_t i, stacksize;
-		verify(LIF(Z,read)(&upi->zio, &stacksize, sizeof(size_t)) == 0);
-		LIF(D,growstack)(L2, (int)stacksize);
+		uint32_t stacksize = upi->fr->Unsigned32();
+		pdep_growstack(L2, (int)stacksize);
 		/* Make sure that the first stack element (a nil, representing
 		 * the imaginary top-level C function) is written to the very,
 		 * very bottom of the stack */
 		L2->top--;
-		for(i=0; i<stacksize; i++) {
+		for(uint32_t i = 0; i < stacksize; i++) {
 			unpersist(upi);
 					/* L1: perms reftbl ... thr obj* */
 		}
@@ -1257,17 +1254,16 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 
 	/* Now, deserialize the CallInfo stack. */
 	{
-		size_t i, numframes;
-		verify(LIF(Z,read)(&upi->zio, &numframes, sizeof(size_t)) == 0);
-		LIF(D,reallocCI)(L2,numframes*2);
-		for(i=0; i<numframes; i++) {
+		uint32_t numframes = upi->fr->Unsigned32();
+		pdep_reallocCI(L2,numframes*2);
+		for(uint32_t i=0; i<numframes; i++) {
 			CallInfo *ci = L2->base_ci + i;
 			size_t stackbase, stackfunc, stacktop, savedpc;
-			verify(LIF(Z,read)(&upi->zio, &stackbase, sizeof(size_t)) == 0);
-			verify(LIF(Z,read)(&upi->zio, &stackfunc, sizeof(size_t)) == 0);
-			verify(LIF(Z,read)(&upi->zio, &stacktop, sizeof(size_t)) == 0);
-			verify(LIF(Z,read)(&upi->zio, &ci->nresults, sizeof(int)) == 0);
-			verify(LIF(Z,read)(&upi->zio, &savedpc, sizeof(size_t)) == 0);
+			stackbase = upi->fr->Unsigned32();
+			stackfunc = upi->fr->Unsigned32();
+			stacktop = upi->fr->Unsigned32();
+			ci->nresults = upi->fr->Signed32();
+			savedpc = upi->fr->Unsigned32();
 
 			if(stacklimit < stacktop)
 				stacklimit = stacktop;
@@ -1289,10 +1285,11 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 	{
 		size_t stackbase, stacktop;
 		L2->savedpc = L2->ci->savedpc;
-		verify(LIF(Z,read)(&upi->zio, &L2->status, sizeof(lu_byte)) == 0);
-		verify(LIF(Z,read)(&upi->zio, &stackbase, sizeof(size_t)) == 0);
-		verify(LIF(Z,read)(&upi->zio, &stacktop, sizeof(size_t)) == 0);
-		verify(LIF(Z,read)(&upi->zio, &L2->errfunc, sizeof(ptrdiff_t)) == 0);
+		L2->status = upi->fr->Unsigned8();
+		stackbase = upi->fr->Unsigned32();
+		stacktop = upi->fr->Unsigned32();
+		L2->errfunc = upi->fr->Signed32();
+
 		L2->base = L2->stack + stackbase;
 		L2->top = L2->stack + stacktop;
 	}
@@ -1302,7 +1299,6 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 		GCObject **nextslot = &L2->openupval;
 		global_State *g = G(L2);
 		while(1) {
-			size_t stackpos;
 			unpersist(upi);
 					/* perms reftbl ... thr uv/nil */
 			if(lua_isnil(upi->L, -1)) {
@@ -1318,8 +1314,7 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 			lua_pop(upi->L, 1);
 					/* perms reftbl ... thr */
 
-			verify(LIF(Z,read)(&upi->zio, &stackpos, sizeof(size_t)) == 0);
-			uv->v = L2->stack + stackpos;
+			uv->v = L2->stack + upi->fr->Unsigned32();
 			gcunlink(upi->L, (GCObject*)uv);
 			uv->marked = luaC_white(g);
 			*nextslot = (GCObject*)uv;
@@ -1337,7 +1332,7 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 	/* 'top' and the values up to there must be filled with 'nil' */
 	{
 		StkId o;
-		LIF(D,checkstack)(L2, (int)stacklimit);
+		pdep_checkstack(L2, (int)stacklimit);
 		for (o = L2->top; o <= L2->top + stacklimit; o++)
 			setnilvalue(o);
 	}
@@ -1520,7 +1515,7 @@ void pluto_unpersist
 #endif
 
 	lua_checkstack(L, 3);
-	LIF(Z,init)(L, &upi.zio, reader, ud);
+	pdep_init(L, &upi.zio, reader, ud);
 
 					/* perms */
 	lua_newtable(L);
