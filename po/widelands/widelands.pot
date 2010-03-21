@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-14 15:51+0100\n"
+"POT-Creation-Date: 2010-03-21 10:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -217,73 +217,73 @@ msgid ""
 "of the server.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1600 ../../src/network/network_ggz.cc:373
+#: ../../src/wlapplication.cc:1601 ../../src/network/network_ggz.cc:373
 msgid "Connection problem"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1602
+#: ../../src/wlapplication.cc:1603
 msgid "Widelands has not been able to connect to the host."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1648
+#: ../../src/wlapplication.cc:1649
 msgid "The address of the game server is invalid"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1753 ../../src/network/nethost.cc:1183
+#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1183
 msgid "Player"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1901 ../../src/network/netclient.cc:167
+#: ../../src/wlapplication.cc:1902 ../../src/network/netclient.cc:167
 #: ../../src/network/nethost.cc:433
 msgid "Preparing game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:2008
+#: ../../src/wlapplication.cc:2009
 msgid "End of replay"
 msgstr ""
 
-#: ../../src/wlapplication.cc:2010
+#: ../../src/wlapplication.cc:2011
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
 
-#: ../../src/wlapplication.cc:2090 ../../src/logic/game.cc:352
+#: ../../src/wlapplication.cc:2091 ../../src/logic/game.cc:352
 #: ../../src/logic/game.cc:391
 msgid "Loading..."
 msgstr ""
 
-#: ../../src/writeHTML.cc:40
+#: ../../src/writeHTML.cc:43
 msgid "Requesters"
 msgstr ""
 
-#: ../../src/writeHTML.cc:55
+#: ../../src/writeHTML.cc:58
 msgid "Providers"
 msgstr ""
 
-#: ../../src/writeHTML.cc:70
+#: ../../src/writeHTML.cc:73
 msgid "Successors"
 msgstr ""
 
-#: ../../src/writeHTML.cc:85
+#: ../../src/writeHTML.cc:88
 msgid "Predecessors"
 msgstr ""
 
-#: ../../src/writeHTML.cc:100
+#: ../../src/writeHTML.cc:103
 msgid "Employers"
 msgstr ""
 
-#: ../../src/writeHTML.cc:263 ../../src/writeHTML.cc:269
+#: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:272
 msgid "Building types"
 msgstr ""
 
-#: ../../src/writeHTML.cc:274 ../../src/writeHTML.cc:509
-#: ../../src/writeHTML.cc:1410
+#: ../../src/writeHTML.cc:277 ../../src/writeHTML.cc:514
+#: ../../src/writeHTML.cc:1422
 msgid "Icon"
 msgstr ""
 
-#: ../../src/writeHTML.cc:276 ../../src/writeHTML.cc:511
-#: ../../src/writeHTML.cc:1412 ../../src/ui_fsmenu/netsetup_ggz.cc:143
+#: ../../src/writeHTML.cc:279 ../../src/writeHTML.cc:516
+#: ../../src/writeHTML.cc:1424 ../../src/ui_fsmenu/netsetup_ggz.cc:143
 #: ../../src/wui/building_statistics_menu.cc:109
 #: ../../src/wui/building_ui.cc:1545 ../../src/wui/building_ui.cc:1733
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:73
@@ -294,485 +294,492 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../../src/writeHTML.cc:278 ../../src/wui/building_statistics_menu.cc:110
+#: ../../src/writeHTML.cc:281 ../../src/wui/building_statistics_menu.cc:110
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:120
 msgid "Size"
 msgstr ""
 
-#: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:513
+#: ../../src/writeHTML.cc:283 ../../src/writeHTML.cc:518
 msgid "Buildable"
 msgstr ""
 
-#: ../../src/writeHTML.cc:282
+#: ../../src/writeHTML.cc:285
 msgid "Enhanced"
 msgstr ""
 
-#: ../../src/writeHTML.cc:285 ../../src/wui/building_ui.cc:657
+#: ../../src/writeHTML.cc:288 ../../src/wui/building_ui.cc:657
 msgid "Stop"
 msgstr ""
 
-#: ../../src/writeHTML.cc:287
+#: ../../src/writeHTML.cc:290
 msgid "Conquer<br/>range"
 msgstr ""
 
-#: ../../src/writeHTML.cc:289 ../../src/writeHTML.cc:515
+#: ../../src/writeHTML.cc:292 ../../src/writeHTML.cc:520
 msgid "Vision<br/>range"
 msgstr ""
 
-#: ../../src/writeHTML.cc:316 ../../src/writeHTML.cc:372
+#: ../../src/writeHTML.cc:319 ../../src/writeHTML.cc:375
 #: ../../src/logic/building.cc:511
 msgid "Mine"
 msgstr ""
 
-#: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:388
+#: ../../src/writeHTML.cc:323 ../../src/writeHTML.cc:391
 #: ../../src/logic/building.cc:512
 msgid "Small"
 msgstr ""
 
-#: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:382
+#: ../../src/writeHTML.cc:327 ../../src/writeHTML.cc:385
 #: ../../src/logic/building.cc:513
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Medium"
 msgstr ""
 
-#: ../../src/writeHTML.cc:329 ../../src/writeHTML.cc:377
+#: ../../src/writeHTML.cc:332 ../../src/writeHTML.cc:380
 #: ../../src/logic/building.cc:513
 msgid "Big"
 msgstr ""
 
-#: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:336
+#: ../../src/writeHTML.cc:336 ../../src/writeHTML.cc:339
 #: ../../src/ui_basic/messagebox.cc:96
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #: ../../src/editor/tools/editor_info_tool.cc:74
 msgid "Yes"
 msgstr ""
 
-#: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:336
+#: ../../src/writeHTML.cc:336 ../../src/writeHTML.cc:339
 #: ../../src/ui_basic/messagebox.cc:103
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #: ../../src/editor/tools/editor_info_tool.cc:74
 msgid "No"
 msgstr ""
 
-#: ../../src/writeHTML.cc:351
+#: ../../src/writeHTML.cc:354
 msgid "building_types.xhtml"
 msgstr ""
 
-#: ../../src/writeHTML.cc:374
+#: ../../src/writeHTML.cc:377
 msgid "Is mine."
 msgstr ""
 
-#: ../../src/writeHTML.cc:379
+#: ../../src/writeHTML.cc:382
 msgid "Is big."
 msgstr ""
 
-#: ../../src/writeHTML.cc:384
+#: ../../src/writeHTML.cc:387
 msgid "Is medium."
 msgstr ""
 
-#: ../../src/writeHTML.cc:390
+#: ../../src/writeHTML.cc:393
 msgid "Is small."
 msgstr ""
 
-#: ../../src/writeHTML.cc:397
+#: ../../src/writeHTML.cc:400
 msgid "Is not buildable."
 msgstr ""
 
-#: ../../src/writeHTML.cc:404
+#: ../../src/writeHTML.cc:407
 msgid "Is enhanced."
 msgstr ""
 
-#: ../../src/writeHTML.cc:411
+#: ../../src/writeHTML.cc:414
 #, c-format
 msgid "Conquer range is %u."
 msgstr ""
 
-#: ../../src/writeHTML.cc:419 ../../src/writeHTML.cc:648
+#: ../../src/writeHTML.cc:422 ../../src/writeHTML.cc:653
 #, c-format
 msgid "Vision range is %u."
 msgstr ""
 
-#: ../../src/writeHTML.cc:427 ../../src/writeHTML.cc:655
+#: ../../src/writeHTML.cc:430 ../../src/writeHTML.cc:660
 msgid "Build cost"
 msgstr ""
 
-#: ../../src/writeHTML.cc:437
-msgid "'s constructionsite"
+#: ../../src/writeHTML.cc:440
+#, c-format
+msgid "%s's constructionsite"
 msgstr ""
 
-#: ../../src/writeHTML.cc:448
+#: ../../src/writeHTML.cc:452
 msgid "Enhancements"
 msgstr ""
 
-#: ../../src/writeHTML.cc:458
-msgid "'s enhancement"
+#: ../../src/writeHTML.cc:462
+#, c-format
+msgid "%s's enhancement"
 msgstr ""
 
-#: ../../src/writeHTML.cc:498 ../../src/writeHTML.cc:504
+#: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
 msgstr ""
 
-#: ../../src/writeHTML.cc:517
+#: ../../src/writeHTML.cc:522
 msgid "Minimum<br/>needed<br/>experience"
 msgstr ""
 
-#: ../../src/writeHTML.cc:519
+#: ../../src/writeHTML.cc:524
 msgid "Maximum<br/>needed<br/>experience"
 msgstr ""
 
-#: ../../src/writeHTML.cc:521
+#: ../../src/writeHTML.cc:526
 msgid "Becomes"
 msgstr ""
 
-#: ../../src/writeHTML.cc:576
+#: ../../src/writeHTML.cc:581
 msgid "worker_types.xhtml"
 msgstr ""
 
-#: ../../src/writeHTML.cc:583
+#: ../../src/writeHTML.cc:588
 msgid "Combat Properties"
 msgstr ""
 
-#: ../../src/writeHTML.cc:590
+#: ../../src/writeHTML.cc:595
 #, c-format
 msgid ""
 "Hitpoints is between %u and %u, plus %u for each level above 0 (maximum "
 "level is %u)."
 msgstr ""
 
-#: ../../src/writeHTML.cc:600
+#: ../../src/writeHTML.cc:605
 #, c-format
 msgid ""
 "Attack is between %u and %u, plus %u for each level above 0 (maximum level "
 "is %u)."
 msgstr ""
 
-#: ../../src/writeHTML.cc:610
+#: ../../src/writeHTML.cc:615
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
 
-#: ../../src/writeHTML.cc:620
+#: ../../src/writeHTML.cc:625
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
 
-#: ../../src/writeHTML.cc:666 ../../src/writeHTML.cc:676
-msgid "'s creation"
+#: ../../src/writeHTML.cc:671 ../../src/writeHTML.cc:682
+#, c-format
+msgid "%s's creation"
 msgstr ""
 
-#: ../../src/writeHTML.cc:686
+#: ../../src/writeHTML.cc:693
 msgid "Spawns in warehouses."
 msgstr ""
 
-#: ../../src/writeHTML.cc:695
+#: ../../src/writeHTML.cc:702
 #, c-format
 msgid "Needs experience from working between %u and %u times to become"
 msgstr ""
 
-#: ../../src/writeHTML.cc:703
-msgid "'s promotion"
+#: ../../src/writeHTML.cc:710
+#, c-format
+msgid "%s's promotion"
 msgstr ""
 
-#: ../../src/writeHTML.cc:713 ../../src/writeHTML.cc:854
+#: ../../src/writeHTML.cc:721 ../../src/writeHTML.cc:866
 msgid "Programs"
 msgstr ""
 
-#: ../../src/writeHTML.cc:750 ../../src/writeHTML.cc:1289
+#: ../../src/writeHTML.cc:758 ../../src/writeHTML.cc:1301
 #: ../../src/logic/building.cc:506
 msgid "mine"
 msgstr ""
 
-#: ../../src/writeHTML.cc:751
+#: ../../src/writeHTML.cc:759
 msgid "breed"
 msgstr ""
 
-#: ../../src/writeHTML.cc:752
+#: ../../src/writeHTML.cc:760
 msgid "createitem"
 msgstr ""
 
-#: ../../src/writeHTML.cc:753
+#: ../../src/writeHTML.cc:761
 msgid "setdescription"
 msgstr ""
 
-#: ../../src/writeHTML.cc:754
+#: ../../src/writeHTML.cc:762
 msgid "setbobdescription"
 msgstr ""
 
-#: ../../src/writeHTML.cc:755
+#: ../../src/writeHTML.cc:763
 msgid "findobject"
 msgstr ""
 
-#: ../../src/writeHTML.cc:756
+#: ../../src/writeHTML.cc:764
 msgid "findspace"
 msgstr ""
 
-#: ../../src/writeHTML.cc:757
+#: ../../src/writeHTML.cc:765
 msgid "walk"
 msgstr ""
 
-#: ../../src/writeHTML.cc:758
+#: ../../src/writeHTML.cc:766
 msgid "animation"
 msgstr ""
 
-#: ../../src/writeHTML.cc:759 ../../src/writeHTML.cc:894
+#: ../../src/writeHTML.cc:767 ../../src/writeHTML.cc:906
 msgid "return"
 msgstr ""
 
-#: ../../src/writeHTML.cc:760
+#: ../../src/writeHTML.cc:768
 msgid "object"
 msgstr ""
 
-#: ../../src/writeHTML.cc:761
+#: ../../src/writeHTML.cc:769
 msgid "plant"
 msgstr ""
 
-#: ../../src/writeHTML.cc:762
+#: ../../src/writeHTML.cc:770
 msgid "create_bob"
 msgstr ""
 
-#: ../../src/writeHTML.cc:763
+#: ../../src/writeHTML.cc:771
 msgid "removeobject"
 msgstr ""
 
-#: ../../src/writeHTML.cc:764
+#: ../../src/writeHTML.cc:772
 msgid "geologist"
 msgstr ""
 
-#: ../../src/writeHTML.cc:765
+#: ../../src/writeHTML.cc:773
 msgid "geologist_find"
 msgstr ""
 
-#: ../../src/writeHTML.cc:766 ../../src/writeHTML.cc:1364
+#: ../../src/writeHTML.cc:774 ../../src/writeHTML.cc:1376
 msgid "playFX"
 msgstr ""
 
-#: ../../src/writeHTML.cc:767
+#: ../../src/writeHTML.cc:775
 msgid "UNKNOWN"
 msgstr ""
 
-#: ../../src/writeHTML.cc:774
+#: ../../src/writeHTML.cc:782
 msgid "Production"
 msgstr ""
 
-#: ../../src/writeHTML.cc:778 ../../src/wui/general_statistics_menu.cc:144
+#: ../../src/writeHTML.cc:786 ../../src/wui/general_statistics_menu.cc:144
 msgid "Workers"
 msgstr ""
 
-#: ../../src/writeHTML.cc:788
-msgid "'s employee"
+#: ../../src/writeHTML.cc:797
+#, c-format
+msgid "%s's employee"
 msgstr ""
 
-#: ../../src/writeHTML.cc:798
+#: ../../src/writeHTML.cc:807
 msgid "Inputs"
 msgstr ""
 
-#: ../../src/writeHTML.cc:808
-msgid "'s input"
+#: ../../src/writeHTML.cc:818
+#, c-format
+msgid "%s's input"
 msgstr ""
 
-#: ../../src/writeHTML.cc:820
+#: ../../src/writeHTML.cc:830
 msgid "Output"
 msgstr ""
 
-#: ../../src/writeHTML.cc:830 ../../src/writeHTML.cc:843
-msgid "'s output"
+#: ../../src/writeHTML.cc:841 ../../src/writeHTML.cc:855
+#, c-format
+msgid "%s's output"
 msgstr ""
 
-#: ../../src/writeHTML.cc:890 ../../src/writeHTML.cc:1033
-#: ../../src/writeHTML.cc:1095 ../../src/writeHTML.cc:1123
-#: ../../src/writeHTML.cc:1143 ../../src/writeHTML.cc:1164
-#: ../../src/writeHTML.cc:1207 ../../src/writeHTML.cc:1244
-#: ../../src/writeHTML.cc:1285 ../../src/writeHTML.cc:1312
-#: ../../src/writeHTML.cc:1336 ../../src/writeHTML.cc:1360
+#: ../../src/writeHTML.cc:902 ../../src/writeHTML.cc:1045
+#: ../../src/writeHTML.cc:1107 ../../src/writeHTML.cc:1135
+#: ../../src/writeHTML.cc:1155 ../../src/writeHTML.cc:1176
+#: ../../src/writeHTML.cc:1219 ../../src/writeHTML.cc:1256
+#: ../../src/writeHTML.cc:1297 ../../src/writeHTML.cc:1324
+#: ../../src/writeHTML.cc:1348 ../../src/writeHTML.cc:1372
 msgid "productionsite_program_reference.xhtml"
 msgstr ""
 
-#: ../../src/writeHTML.cc:892
+#: ../../src/writeHTML.cc:904
 msgid "Documentation for program command return"
 msgstr ""
 
-#: ../../src/writeHTML.cc:898 ../../src/logic/production_program.cc:389
+#: ../../src/writeHTML.cc:910 ../../src/logic/production_program.cc:389
 #: ../../src/logic/production_program.cc:746
 msgid "failed"
 msgstr ""
 
-#: ../../src/writeHTML.cc:899 ../../src/logic/production_program.cc:390
+#: ../../src/writeHTML.cc:911 ../../src/logic/production_program.cc:390
 msgid "completed"
 msgstr ""
 
-#: ../../src/writeHTML.cc:900 ../../src/logic/production_program.cc:390
+#: ../../src/writeHTML.cc:912 ../../src/logic/production_program.cc:390
 msgid "skipped"
 msgstr ""
 
-#: ../../src/writeHTML.cc:905
+#: ../../src/writeHTML.cc:917
 msgid "and"
 msgstr ""
 
-#: ../../src/writeHTML.cc:906
+#: ../../src/writeHTML.cc:918
 msgid "when"
 msgstr ""
 
-#: ../../src/writeHTML.cc:908
+#: ../../src/writeHTML.cc:920
 msgid "or"
 msgstr ""
 
-#: ../../src/writeHTML.cc:909
+#: ../../src/writeHTML.cc:921
 msgid "unless"
 msgstr ""
 
-#: ../../src/writeHTML.cc:940 ../../src/writeHTML.cc:962
+#: ../../src/writeHTML.cc:952 ../../src/writeHTML.cc:974
 msgid "economy"
 msgstr ""
 
-#: ../../src/writeHTML.cc:942 ../../src/writeHTML.cc:964
+#: ../../src/writeHTML.cc:954 ../../src/writeHTML.cc:976
 msgid "needs"
 msgstr ""
 
-#: ../../src/writeHTML.cc:982
+#: ../../src/writeHTML.cc:994
 msgid "site"
 msgstr ""
 
-#: ../../src/writeHTML.cc:984
+#: ../../src/writeHTML.cc:996
 msgid "has"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1015
+#: ../../src/writeHTML.cc:1027
 msgid "workers of this site"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1017
+#: ../../src/writeHTML.cc:1029
 msgid "workers"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1018
+#: ../../src/writeHTML.cc:1030
 msgid "</span></a> <span class=\"keyword\">"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1019
+#: ../../src/writeHTML.cc:1031
 msgid "need"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1021
+#: ../../src/writeHTML.cc:1033
 msgid "experience"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1035
+#: ../../src/writeHTML.cc:1047
 msgid "Documentation for program command call"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1037
+#: ../../src/writeHTML.cc:1049
 msgid "call"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1044
+#: ../../src/writeHTML.cc:1056
 #, c-format
 msgid "site's program %s"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1097
+#: ../../src/writeHTML.cc:1109
 msgid "Documentation for program command worker"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1099
+#: ../../src/writeHTML.cc:1111
 msgid "worker"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1110
+#: ../../src/writeHTML.cc:1122
 #, c-format
 msgid "%s's program %s"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1125
+#: ../../src/writeHTML.cc:1137
 msgid "Documentation for program command sleep"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1127
+#: ../../src/writeHTML.cc:1139
 msgid "sleep"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1133 ../../src/writeHTML.cc:1153
+#: ../../src/writeHTML.cc:1145 ../../src/writeHTML.cc:1165
 #, c-format
 msgid " %u.%03u s"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1145
+#: ../../src/writeHTML.cc:1157
 msgid "Documentation for program command animate"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1147
+#: ../../src/writeHTML.cc:1159
 msgid "animate"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1166
+#: ../../src/writeHTML.cc:1178
 msgid "Documentation for program command consume"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1168
+#: ../../src/writeHTML.cc:1180
 msgid "consume"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1209 ../../src/writeHTML.cc:1246
+#: ../../src/writeHTML.cc:1221 ../../src/writeHTML.cc:1258
 msgid "Documentation for program command produce"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1211
+#: ../../src/writeHTML.cc:1223
 msgid "produce"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1248
+#: ../../src/writeHTML.cc:1260
 msgid "recruit"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1287
+#: ../../src/writeHTML.cc:1299
 msgid "Documentation for program command mine"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1314
+#: ../../src/writeHTML.cc:1326
 msgid "Documentation for program command check_soldier"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1316
+#: ../../src/writeHTML.cc:1328
 msgid "check soldier"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1322 ../../src/writeHTML.cc:1346
+#: ../../src/writeHTML.cc:1334 ../../src/writeHTML.cc:1358
 msgid "hp"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1323 ../../src/writeHTML.cc:1347
+#: ../../src/writeHTML.cc:1335 ../../src/writeHTML.cc:1359
 msgid "attack"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1324 ../../src/writeHTML.cc:1348
+#: ../../src/writeHTML.cc:1336 ../../src/writeHTML.cc:1360
 msgid "defense"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1325 ../../src/writeHTML.cc:1349
+#: ../../src/writeHTML.cc:1337 ../../src/writeHTML.cc:1361
 msgid "evade"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1338
+#: ../../src/writeHTML.cc:1350
 msgid "Documentation for program command train"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1340
+#: ../../src/writeHTML.cc:1352
 msgid "train"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1362
+#: ../../src/writeHTML.cc:1374
 msgid "Documentation for program command playFX"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1399 ../../src/writeHTML.cc:1405
+#: ../../src/writeHTML.cc:1411 ../../src/writeHTML.cc:1417
 msgid "Ware types"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1439
+#: ../../src/writeHTML.cc:1451
 msgid "ware_types.xhtml"
 msgstr ""
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
-#: ../../src/economy/request.cc:190 ../../src/economy/wares_queue.cc:254
+#: ../../src/economy/request.cc:192 ../../src/economy/wares_queue.cc:254
 #: ../../src/events/event_building.cc:320 ../../src/events/event_flag.cc:42
 #: ../../src/events/event_immovable.cc:42 ../../src/events/event_lua.cc:40
 #: ../../src/events/event_message.cc:109
@@ -989,7 +996,7 @@ msgstr ""
 
 #: ../../src/events/event_building.cc:72 ../../src/events/event_building.cc:81
 #: ../../src/events/event_message.cc:90 ../../src/graphic/animation.cc:196
-#: ../../src/logic/building.cc:78 ../../src/logic/immovable.cc:194
+#: ../../src/logic/building.cc:76 ../../src/logic/immovable.cc:194
 #: ../../src/logic/immovable.cc:667 ../../src/logic/immovable.cc:706
 #: ../../src/logic/immovable.cc:861 ../../src/logic/military_data.cc:51
 #: ../../src/logic/military_data.cc:58
@@ -1856,7 +1863,7 @@ msgstr ""
 msgid "%sYour %s is under attack.</p>"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:718
+#: ../../src/logic/militarysite.cc:720
 msgid "You are under attack"
 msgstr ""
 
@@ -2175,7 +2182,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:1162
 #, c-format
-msgid "expected {\"hp\"|\"attack\"|\"defense\"|evade\"} but found \"%s\""
+msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1171
@@ -2196,18 +2203,18 @@ msgstr ""
 msgid "this worker type has already been declared as an output"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:218
+#: ../../src/logic/productionsite.cc:219
 msgid "(not occupied)"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:223
+#: ../../src/logic/productionsite.cc:224
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/productionsite.cc:231
+#: ../../src/logic/productionsite.cc:232
 msgid "(stopped)"
 msgstr ""
 
@@ -2231,12 +2238,12 @@ msgstr ""
 msgid "\"anim_name[,another_anim,...]\""
 msgstr ""
 
-#: ../../src/logic/soldier.cc:1195
+#: ../../src/logic/soldier.cc:1201
 #, c-format
 msgid "bad direction '%d'"
 msgstr ""
 
-#: ../../src/logic/soldier.cc:1356
+#: ../../src/logic/soldier.cc:1362
 #, c-format
 msgid ""
 "The game engine has encountered a logic error. The %s #%u of player %u could "
@@ -2246,13 +2253,13 @@ msgid ""
 "has been implemented yet. (bug #1951113) (The game has been paused.)"
 msgstr ""
 
-#: ../../src/logic/soldier.cc:1367 ../../src/logic/soldier.cc:1372
-#: ../../src/logic/worker.cc:1668
+#: ../../src/logic/soldier.cc:1373 ../../src/logic/soldier.cc:1378
+#: ../../src/logic/worker.cc:1671
 msgid "no"
 msgstr ""
 
-#: ../../src/logic/soldier.cc:1379 ../../src/logic/soldier.cc:1387
-#: ../../src/logic/worker.cc:1680
+#: ../../src/logic/soldier.cc:1385 ../../src/logic/soldier.cc:1393
+#: ../../src/logic/worker.cc:1683
 msgid "Logic error"
 msgstr ""
 
@@ -2307,21 +2314,21 @@ msgid ""
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/worker.cc:640
+#: ../../src/logic/worker.cc:643
 msgid "Out of "
 msgstr ""
 
-#: ../../src/logic/worker.cc:644
+#: ../../src/logic/worker.cc:647
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr ""
 
-#: ../../src/logic/worker.cc:916
+#: ../../src/logic/worker.cc:919
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1649
+#: ../../src/logic/worker.cc:1652
 #, c-format
 msgid ""
 "The game engine has encountered a logic error. The %s #%u of player %u "
@@ -2338,7 +2345,7 @@ msgid ""
 "working. (bug #1796611) (The game has been paused.)"
 msgstr ""
 
-#: ../../src/logic/worker.cc:1666
+#: ../../src/logic/worker.cc:1669
 msgid "nothing"
 msgstr ""
 
@@ -2831,83 +2838,83 @@ msgstr ""
 msgid "Client and host have become desynchronized."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1508
+#: ../../src/network/nethost.cc:1512
 msgid "New User"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1513
+#: ../../src/network/nethost.cc:1517
 msgid "The game has already started."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1531
+#: ../../src/network/nethost.cc:1535
 msgid "Connection to client lost."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1545
+#: ../../src/network/nethost.cc:1549
 msgid "Client sent malformed commands: "
 msgstr ""
 
-#: ../../src/network/nethost.cc:1578
+#: ../../src/network/nethost.cc:1582
 msgid "Game is running already, but client has not connected fully"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1582
+#: ../../src/network/nethost.cc:1586
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
 "is running an incompatible version."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1588
+#: ../../src/network/nethost.cc:1592
 msgid "Server uses a different protocol version."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1670
+#: ../../src/network/nethost.cc:1674
 msgid "Client sent TIME command even though game is not running."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1678
+#: ../../src/network/nethost.cc:1682
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1690
+#: ../../src/network/nethost.cc:1694
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1699
+#: ../../src/network/nethost.cc:1703
 msgid "Client sent unexpected synchronization report."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1735 ../../src/network/nethost.cc:1747
+#: ../../src/network/nethost.cc:1739 ../../src/network/nethost.cc:1751
 msgid "Client requests file altough none is available to send."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1737
+#: ../../src/network/nethost.cc:1741
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1758
+#: ../../src/network/nethost.cc:1762
 msgid "Client requests file part that does not exist."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1761
+#: ../../src/network/nethost.cc:1765
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1769
+#: ../../src/network/nethost.cc:1773
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1779
+#: ../../src/network/nethost.cc:1783
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1835
+#: ../../src/network/nethost.cc:1839
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr ""
@@ -3537,11 +3544,11 @@ msgstr ""
 msgid "Closed"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:57 ../../src/ui_fsmenu/options.cc:382
+#: ../../src/ui_fsmenu/options.cc:57 ../../src/ui_fsmenu/options.cc:383
 msgid "Advanced Options"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:64 ../../src/ui_fsmenu/options.cc:350
+#: ../../src/ui_fsmenu/options.cc:64 ../../src/ui_fsmenu/options.cc:351
 #: ../../src/wui/login_box.cc:75
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:177
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:224
@@ -3567,7 +3574,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:71 ../../src/ui_fsmenu/options.cc:357
+#: ../../src/ui_fsmenu/options.cc:71 ../../src/ui_fsmenu/options.cc:358
 msgid "Apply"
 msgstr ""
 
@@ -3651,55 +3658,55 @@ msgstr ""
 msgid "System default language"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:364
+#: ../../src/ui_fsmenu/options.cc:365
 msgid "x"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:369 ../../src/ui_fsmenu/options.cc:374
+#: ../../src/ui_fsmenu/options.cc:370 ../../src/ui_fsmenu/options.cc:375
 msgid "px."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:393
+#: ../../src/ui_fsmenu/options.cc:394
 msgid "Main menu font:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:399
+#: ../../src/ui_fsmenu/options.cc:400
 msgid "Play a sound at message arrival."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:407
+#: ../../src/ui_fsmenu/options.cc:408
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:412
+#: ../../src/ui_fsmenu/options.cc:413
 msgid "Speed of a new game:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:416
+#: ../../src/ui_fsmenu/options.cc:417
 msgid "Distance for windows to snap to other panels:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:420
+#: ../../src/ui_fsmenu/options.cc:421
 msgid "Distance for windows to snap to borders:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:425
+#: ../../src/ui_fsmenu/options.cc:426
 msgid "Graphics experimental improvements."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:431
+#: ../../src/ui_fsmenu/options.cc:432
 msgid "Graphics double buffering."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:438
+#: ../../src/ui_fsmenu/options.cc:439
 msgid "Remove Syncstream dumps on startup"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:460
+#: ../../src/ui_fsmenu/options.cc:461
 msgid "Pause"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:471
+#: ../../src/ui_fsmenu/options.cc:472
 msgid "FreeSerif (Default)"
 msgstr ""
 
@@ -3735,31 +3742,31 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:165
+#: ../../src/wui/attack_box.cc:172
 msgid "Soldiers:"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:172
+#: ../../src/wui/attack_box.cc:179
 msgid "Send less soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:189
+#: ../../src/wui/attack_box.cc:196
 msgid "Number of soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:199
+#: ../../src/wui/attack_box.cc:206
 msgid "Send more soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:210 ../../src/wui/military_box.cc:130
+#: ../../src/wui/attack_box.cc:217 ../../src/wui/military_box.cc:130
 msgid "Retreat: Never!"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:229 ../../src/wui/military_box.cc:149
+#: ../../src/wui/attack_box.cc:236 ../../src/wui/military_box.cc:149
 msgid "Supported damage before retreat"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:231 ../../src/wui/military_box.cc:151
+#: ../../src/wui/attack_box.cc:238 ../../src/wui/military_box.cc:151
 msgid "Once injured"
 msgstr ""
 
