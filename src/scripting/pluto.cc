@@ -23,6 +23,8 @@
 #include "logic/widelands_filewrite.h"
 #include "logic/widelands_fileread.h"
 
+// TODO: either throw exception or lua_error
+
 #include "pluto.h"
 
 #define USE_PDEP
@@ -97,6 +99,28 @@ void printindent(int indent)
 }
 #endif
 
+
+/*
+ * ========================================================================
+ *                         HELPER FUNCTIONS
+ * ========================================================================
+ */
+
+/* The object is left on the stack. This is primarily used by unpersist, but
+ * may be used by GCed objects that may incur cycles in order to preregister
+ * the object. */
+static void registerobject(int ref, UnpersistInfo *upi)
+{
+					/* perms reftbl ... obj */
+	lua_checkstack(upi->L, 2);
+	lua_pushlightuserdata(upi->L, (void*)(intptr_t)ref);
+					/* perms reftbl ... obj ref */
+	lua_pushvalue(upi->L, -2);
+					/* perms reftbl ... obj ref obj */
+	lua_settable(upi->L, 2);
+					/* perms reftbl ... obj */
+}
+
 /* Mutual recursion requires prototype */
 static void persist(PersistInfo *pi);
 
@@ -116,8 +140,7 @@ static StkId getobject(lua_State *L, int stackpos)
 /* Choose whether to do a regular or special persistence based on an object's
  * metatable. "default" is whether the object, if it doesn't have a __persist
  * entry, is literally persistable or not.
- * Pushes the unpersist closure and returns true if special persistence is
- * used. */
+ * Returns true if special persistence is used. */
 static int persistspecialobject(PersistInfo *pi, int defaction)
 {
 					/* perms reftbl ... obj */
@@ -126,10 +149,7 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 	 * metafunction */
 	if(!lua_getmetatable(pi->L, -1)) {
 		if(defaction) {
-			{
-				int zero = 0;
-				pi->writer(pi->L, &zero, sizeof(int), pi->ud);
-			}
+			pi->fw->Unsigned8(0);
 			return 0;
 		} else {
 			lua_pushstring(pi->L, "Type not literally persistable by default");
@@ -146,10 +166,7 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 		lua_pop(pi->L, 2);
 					/* perms reftbl sptbl ... obj */
 		if(defaction) {
-			{
-				int zero = 0;
-				pi->writer(pi->L, &zero, sizeof(int), pi->ud);
-			}
+			pi->fw->Unsigned8(0);
 			return 0;
 		} else {
 			lua_pushstring(pi->L, "Type not literally persistable by default");
@@ -162,10 +179,7 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 					/* perms reftbl sptbl ... obj mt true */
 			lua_pop(pi->L, 2);
 					/* perms reftbl sptbl ... obj */
-			{
-				int zero = 0;
-				pi->writer(pi->L, &zero, sizeof(int), pi->ud);
-			}
+			pi->fw->Unsigned8(0);
 			return 0;
 		} else {
 			lua_pushstring(pi->L, "Metatable forbade persistence");
@@ -179,31 +193,18 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 					/* perms reftbl ... obj mt __persist */
 	lua_pushvalue(pi->L, -3);
 					/* perms reftbl ... obj mt __persist obj */
-#ifdef PLUTO_PASS_USERDATA_TO_PERSIST
-	lua_pushlightuserdata(pi->L, (void*)pi->writer);
-	lua_pushlightuserdata(pi->L, pi->ud);
-					/* perms reftbl ... obj mt __persist obj ud */
-	lua_call(pi->L, 3, 1);
-					/* perms reftbl ... obj mt func? */
-#else
 	lua_call(pi->L, 1, 1);
-					/* perms reftbl ... obj mt func? */
-#endif
-					/* perms reftbl ... obj mt func? */
-   // TODO: document the changes here
-	// if(!lua_isfunction(pi->L, -1)) {
-	// 	lua_pushstring(pi->L, "__persist function did not return a function");
-	// 	lua_error(pi->L);
-	// }
+					/* perms reftbl ... obj mt table? */
+	// The __persist function returned a table which contains the data
+	// the __unpersist function needs to recreate the state
 	if(!lua_istable(pi->L, -1)) {
 		lua_pushstring(pi->L, "__persist function did not return a table");
 		lua_error(pi->L);
 	}
 					/* perms reftbl ... obj mt table */
-	{
-		int one = 1;
-		pi->writer(pi->L, &one, sizeof(int), pi->ud);
-	}
+
+	// It is indeed a special table
+	pi->fw->Unsigned8(1);
 	persist(pi);
 
 					/* perms reftbl ... obj mt table */
@@ -252,6 +253,89 @@ static void persisttable(PersistInfo *pi)
 	lua_pop(pi->L, 1);
 					/* perms reftbl ... tbl */
 }
+
+static void unpersistspecialtable(int, UnpersistInfo *upi)
+{
+					/* perms reftbl ... */
+	lua_checkstack(upi->L, 1);
+	unpersist(upi);
+					/* perms reftbl ... spfunc? */
+	lua_assert(lua_istable(upi->L, -1));
+					/* perms reftbl ... spfunc */
+
+   luna_restore_object(upi->L);
+
+					/* perms reftbl ... tbl? */
+	lua_assert(lua_istable(upi->L, -1));
+					/* perms reftbl ... tbl */
+}
+
+static void unpersistliteraltable(int ref, UnpersistInfo *upi)
+{
+					/* perms reftbl ... */
+	lua_checkstack(upi->L, 3);
+	/* Preregister table for handling of cycles */
+	lua_newtable(upi->L);
+					/* perms reftbl ... tbl */
+	registerobject(ref, upi);
+					/* perms reftbl ... tbl */
+	/* Unpersist metatable */
+	{
+		unpersist(upi);
+					/* perms reftbl ... tbl mt/nil? */
+		if(lua_istable(upi->L, -1)) {
+					/* perms reftbl ... tbl mt */
+			lua_setmetatable(upi->L, -2);
+					/* perms reftbl ... tbl */
+		} else {
+					/* perms reftbl ... tbl nil? */
+			lua_assert(lua_isnil(upi->L, -1));
+					/* perms reftbl ... tbl nil */
+			lua_pop(upi->L, 1);
+					/* perms reftbl ... tbl */
+		}
+					/* perms reftbl ... tbl */
+	}
+
+	while(1)
+	{
+					/* perms reftbl ... tbl */
+		unpersist(upi);
+					/* perms reftbl ... tbl key/nil */
+		if(lua_isnil(upi->L, -1)) {
+					/* perms reftbl ... tbl nil */
+			lua_pop(upi->L, 1);
+					/* perms reftbl ... tbl */
+			break;
+		}
+					/* perms reftbl ... tbl key */
+		unpersist(upi);
+					/* perms reftbl ... tbl key value? */
+		lua_assert(!lua_isnil(upi->L, -1));
+					/* perms reftbl ... tbl key value */
+		lua_rawset(upi->L, -3);
+					/* perms reftbl ... tbl */
+	}
+}
+
+
+static void unpersisttable(int ref, UnpersistInfo *upi)
+{
+					/* perms reftbl ... */
+	lua_checkstack(upi->L, 1);
+	{
+		int isspecial = upi->fr->Unsigned8();
+		if(isspecial) {
+			unpersistspecialtable(ref, upi);
+					/* perms reftbl ... tbl */
+		} else {
+			unpersistliteraltable(ref, upi);
+					/* perms reftbl ... tbl */
+		}
+					/* perms reftbl ... tbl */
+	}
+}
+
 
 static void persistuserdata(PersistInfo *pi) {
 					/* perms reftbl ... udata */
@@ -843,104 +927,6 @@ void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud, Widelands::Fi
 					/* perms rootobj */
 }
 
-/* The object is left on the stack. This is primarily used by unpersist, but
- * may be used by GCed objects that may incur cycles in order to preregister
- * the object. */
-static void registerobject(int ref, UnpersistInfo *upi)
-{
-					/* perms reftbl ... obj */
-	lua_checkstack(upi->L, 2);
-	lua_pushlightuserdata(upi->L, (void*)(intptr_t)ref);
-					/* perms reftbl ... obj ref */
-	lua_pushvalue(upi->L, -2);
-					/* perms reftbl ... obj ref obj */
-	lua_settable(upi->L, 2);
-					/* perms reftbl ... obj */
-}
-
-static void unpersistspecialtable(int ref, UnpersistInfo *upi)
-{
-	(void) ref; 			/* unused */
-					/* perms reftbl ... */
-	lua_checkstack(upi->L, 1);
-	unpersist(upi);
-					/* perms reftbl ... spfunc? */
-	// lua_assert(lua_isfunction(upi->L, -1));
-					/* perms reftbl ... spfunc */
-
-   luna_restore_object(upi->L);
-
-	// lua_call(upi->L, 0, 1);
-					/* perms reftbl ... tbl? */
-	lua_assert(lua_istable(upi->L, -1));
-					/* perms reftbl ... tbl */
-}
-
-static void unpersistliteraltable(int ref, UnpersistInfo *upi)
-{
-					/* perms reftbl ... */
-	lua_checkstack(upi->L, 3);
-	/* Preregister table for handling of cycles */
-	lua_newtable(upi->L);
-					/* perms reftbl ... tbl */
-	registerobject(ref, upi);
-					/* perms reftbl ... tbl */
-	/* Unpersist metatable */
-	{
-		unpersist(upi);
-					/* perms reftbl ... tbl mt/nil? */
-		if(lua_istable(upi->L, -1)) {
-					/* perms reftbl ... tbl mt */
-			lua_setmetatable(upi->L, -2);
-					/* perms reftbl ... tbl */
-		} else {
-					/* perms reftbl ... tbl nil? */
-			lua_assert(lua_isnil(upi->L, -1));
-					/* perms reftbl ... tbl nil */
-			lua_pop(upi->L, 1);
-					/* perms reftbl ... tbl */
-		}
-					/* perms reftbl ... tbl */
-	}
-
-	while(1)
-	{
-					/* perms reftbl ... tbl */
-		unpersist(upi);
-					/* perms reftbl ... tbl key/nil */
-		if(lua_isnil(upi->L, -1)) {
-					/* perms reftbl ... tbl nil */
-			lua_pop(upi->L, 1);
-					/* perms reftbl ... tbl */
-			break;
-		}
-					/* perms reftbl ... tbl key */
-		unpersist(upi);
-					/* perms reftbl ... tbl key value? */
-		lua_assert(!lua_isnil(upi->L, -1));
-					/* perms reftbl ... tbl key value */
-		lua_rawset(upi->L, -3);
-					/* perms reftbl ... tbl */
-	}
-}
-
-static void unpersisttable(int ref, UnpersistInfo *upi)
-{
-					/* perms reftbl ... */
-	lua_checkstack(upi->L, 1);
-	{
-		int isspecial;
-		verify(LIF(Z,read)(&upi->zio, &isspecial, sizeof(int)) == 0);
-		if(isspecial) {
-			unpersistspecialtable(ref, upi);
-					/* perms reftbl ... tbl */
-		} else {
-			unpersistliteraltable(ref, upi);
-					/* perms reftbl ... tbl */
-		}
-					/* perms reftbl ... tbl */
-	}
-}
 
 static UpVal *makeupval(lua_State *L, int stackpos)
 {
