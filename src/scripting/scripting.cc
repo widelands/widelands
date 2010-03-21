@@ -34,8 +34,6 @@
 
 #include "scripting.h"
 
-// TODO: make pickling independent of OS by using widelands Stream*
-//
 // TODO: rethink position, location, field. Should maybe be field in all instances
 // TODO: cleanup set_soldiers, get_soldiers, warp_soldiers.
 // TODO: implement trainingssite
