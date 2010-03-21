@@ -651,9 +651,18 @@ static void unpersistnumber(UnpersistInfo *upi)
 static void persiststring(PersistInfo *pi)
 {
 	size_t length = lua_strlen(pi->L, -1);
-	pi->writer(pi->L, &length, sizeof(size_t), pi->ud);
-	pi->writer(pi->L, lua_tostring(pi->L, -1), length, pi->ud);
+	pi->fw->Unsigned32(length);
+	pi->fw->Data
+		(lua_tostring(pi->L, -1), length, Widelands::FileWrite::Pos::Null());
 }
+static void unpersiststring(UnpersistInfo *upi)
+{
+					/* perms reftbl sptbl ref */
+	lua_checkstack(upi->L, 1);
+	size_t length = upi->fr->Unsigned32();
+	lua_pushlstring(upi->L, upi->fr->Data(length), length);
+}
+
 
 /* Top-level delegating persist function
  */
@@ -847,20 +856,6 @@ static void registerobject(int ref, UnpersistInfo *upi)
 					/* perms reftbl ... obj ref obj */
 	lua_settable(upi->L, 2);
 					/* perms reftbl ... obj */
-}
-
-static void unpersiststring(UnpersistInfo *upi)
-{
-					/* perms reftbl sptbl ref */
-	size_t length;
-	char* string;
-	lua_checkstack(upi->L, 1);
-	verify(LIF(Z,read)(&upi->zio, &length, sizeof(size_t)) == 0);
-	string = pdep_newvector(upi->L, length, char);
-	verify(LIF(Z,read)(&upi->zio, string, length) == 0);
-	lua_pushlstring(upi->L, string, length);
-					/* perms reftbl sptbl ref str */
-	pdep_freearray(upi->L, string, length, char);
 }
 
 static void unpersistspecialtable(int ref, UnpersistInfo *upi)
