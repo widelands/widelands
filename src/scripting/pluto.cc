@@ -307,8 +307,7 @@ static void unpersisttable(int ref, UnpersistInfo *upi)
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 1);
 	{
-		int isspecial = upi->fr->Unsigned8();
-		if(isspecial) {
+		if(upi->fr->Unsigned8()) {
 			unpersistspecialtable(ref, upi);
 					/* perms reftbl ... tbl */
 		} else {
@@ -327,18 +326,9 @@ static void persistuserdata(PersistInfo *pi) {
 					/* perms reftbl ... udata */
 		return;
 	} else {
-	/* Use literal persistence */
-		size_t length = uvalue(getobject(pi->L, -1))->len;
-		pi->writer(pi->L, &length, sizeof(size_t), pi->ud);
-		pi->writer(pi->L, lua_touserdata(pi->L, -1), length, pi->ud);
-		if(!lua_getmetatable(pi->L, -1)) {
-					/* perms reftbl ... udata */
-			lua_pushnil(pi->L);
-					/* perms reftbl ... udata mt/nil */
-		}
-		persist(pi);
-		lua_pop(pi->L, 1);
-					/* perms reftbl ... udata */
+		lua_pushstring(pi->L, "Attempt to persist a userdata without a "
+				"__persist function. This is not possible!");
+		lua_error(pi->L);
 	}
 }
 
@@ -853,10 +843,9 @@ static void persist(PersistInfo *pi)
 					/* perms reftbl ... obj ref? */
 	if(!lua_isnil(pi->L, -1)) {
 					/* perms reftbl ... obj ref */
-		int zero = 0;
 		int ref = (intptr_t)lua_touserdata(pi->L, -1);
-		pi->writer(pi->L, &zero, sizeof(int), pi->ud);
-		pi->writer(pi->L, &ref, sizeof(int), pi->ud);
+		pi->fw->Unsigned8(0);
+		pi->fw->Signed32(ref);
 		lua_pop(pi->L, 1);
 					/* perms reftbl ... obj ref */
 #ifdef PLUTO_DEBUG
@@ -870,22 +859,17 @@ static void persist(PersistInfo *pi)
 					/* perms reftbl ... obj */
 	/* If the object is nil, write the pseudoreference 0 */
 	if(lua_isnil(pi->L, -1)) {
-		int zero = 0;
-		/* firsttime */
-		pi->writer(pi->L, &zero, sizeof(int), pi->ud);
-		/* ref */
-		pi->writer(pi->L, &zero, sizeof(int), pi->ud);
+		/* firsttime, ref */
+		pi->fw->Unsigned8(0);
+		pi->fw->Unsigned32(0);
 #ifdef PLUTO_DEBUG
 		printindent(pi->level);
 		printf("0 0\n");
 #endif
 		return;
 	}
-	{
-		/* indicate that it's the first time */
-		int one = 1;
-		pi->writer(pi->L, &one, sizeof(int), pi->ud);
-	}
+	/* indicate that it's the first time */
+	pi->fw->Unsigned8(1);
 	lua_pushvalue(pi->L, -1);
 					/* perms reftbl ... obj obj */
 	lua_pushlightuserdata(pi->L, (void*)((intptr_t) ++(pi->counter)));
@@ -893,7 +877,7 @@ static void persist(PersistInfo *pi)
 	lua_rawset(pi->L, 2);
 					/* perms reftbl ... obj */
 
-	pi->writer(pi->L, &pi->counter, sizeof(int), pi->ud);
+	pi->fw->Signed32(pi->counter);
 
 
 	/* At this point, we'll give the permanents table a chance to play. */
@@ -910,7 +894,7 @@ static void persist(PersistInfo *pi)
 			printf("1 %d PERM\n", pi->counter);
 			pi->level++;
 #endif
-			pi->writer(pi->L, &type, sizeof(int), pi->ud);
+			pi->fw->Signed32(type);
 			persist(pi);
 			lua_pop(pi->L, 1);
 					/* perms reftbl ... obj */
@@ -927,7 +911,7 @@ static void persist(PersistInfo *pi)
 	}
 	{
 		int type = lua_type(pi->L, -1);
-		pi->writer(pi->L, &type, sizeof(int), pi->ud);
+		pi->fw->Signed32(type);
 
 #ifdef PLUTO_DEBUG
 		printindent(pi->level);
@@ -1341,10 +1325,8 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 static void unpersistuserdata(int ref, UnpersistInfo *upi)
 {
 					/* perms reftbl ... */
-	int isspecial;
 	lua_checkstack(upi->L, 2);
-	verify(LIF(Z,read)(&upi->zio, &isspecial, sizeof(int)) == 0);
-	if(isspecial) {
+	if(upi->fr->Unsigned8()) {
 		unpersist(upi);
 					/* perms reftbl ... spfunc? */
 		lua_assert(lua_isfunction(upi->L, -1));
@@ -1359,20 +1341,9 @@ static void unpersistuserdata(int ref, UnpersistInfo *upi)
 		lua_assert(lua_isuserdata(upi->L, -1));
 					/* perms reftbl ... udata */
 	} else {
-		size_t length;
-		verify(LIF(Z,read)(&upi->zio, &length, sizeof(size_t)) == 0);
-
-		lua_newuserdata(upi->L, length);
-					/* perms reftbl ... udata */
-		registerobject(ref, upi);
-		verify(LIF(Z,read)(&upi->zio, lua_touserdata(upi->L, -1), length) == 0);
-
-		unpersist(upi);
-					/* perms reftbl ... udata mt/nil? */
-		lua_assert(lua_istable(upi->L, -1) || lua_isnil(upi->L, -1));
-					/* perms reftbl ... udata mt/nil */
-		lua_setmetatable(upi->L, -2);
-					/* perms reftbl ... udata */
+		lua_pushstring(upi->L, "Attempt to unpersist a userdata without a "
+				"__unpersist function. This is not possible!");
+		lua_error(upi->L);
 	}
 					/* perms reftbl ... udata */
 }
@@ -1412,16 +1383,12 @@ int inreftable(lua_State *L, int ref)
 static void unpersist(UnpersistInfo *upi)
 {
 					/* perms reftbl ... */
-	int firstTime;
 	int stacksize = lua_gettop(upi->L); stacksize = stacksize; /* DEBUG */
 	lua_checkstack(upi->L, 2);
-	LIF(Z,read)(&upi->zio, &firstTime, sizeof(int));
-	if(firstTime) {
-		int ref;
-		int type;
-		LIF(Z,read)(&upi->zio, &ref, sizeof(int));
+	if(upi->fr->Unsigned8()) {
+		int ref = upi->fr->Signed32();
 		lua_assert(!inreftable(upi->L, ref));
-		LIF(Z,read)(&upi->zio, &type, sizeof(int));
+		int type = upi->fr->Signed32();
 #ifdef PLUTO_DEBUG
 		printindent(upi->level);
 		printf("1 %d %d\n", ref, type);
@@ -1477,8 +1444,7 @@ static void unpersist(UnpersistInfo *upi)
 		upi->level--;
 #endif
 	} else {
-		int ref;
-		LIF(Z,read)(&upi->zio, &ref, sizeof(int));
+		int ref = upi->fr->Signed32();
 #ifdef PLUTO_DEBUG
 		printindent(upi->level);
 		printf("0 %d\n", ref);
