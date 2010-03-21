@@ -295,6 +295,7 @@ install(
     tribes
     txts
     worlds
+    pics
   DESTINATION ${WLBUILD_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
@@ -382,24 +383,9 @@ add_custom_target (
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pics
   COMMAND cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DWL_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/pics -DWL_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/pics -P PicsFunctions.cmake
 )
-add_custom_target (
-  pics ALL 
-  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/pics ${CMAKE_CURRENT_BINARY_DIR}/pics
-)
-
-install(
-  DIRECTORY
-    ${CMAKE_CURRENT_BINARY_DIR}/pics
-  DESTINATION ${WLBUILD_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release
-  COMPONENT CorePicsFiles
-  PATTERN "*.svn*" EXCLUDE
-  PATTERN "SCons*" EXCLUDE
-)
-
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
-set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CorePicsFiles CoreVersionFile CoreLicenseFiles)
+set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CoreVersionFile CoreLicenseFiles)
 set (CPACK_GENERATOR TGZ)
 set (CPACK_SOURCE_GENERATOR TGZ)
 include(CPack)
