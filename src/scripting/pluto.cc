@@ -27,25 +27,8 @@
 
 #include "pluto.h"
 
-#define USE_PDEP
-
-#ifdef USE_PDEP
 #include "pdep/pdep.h"
 #define LIF(prefix, name) pdep ## _ ## name
-#else
-#include "lapi.h"
-#include "ldo.h"
-#include "lfunc.h"
-#include "lgc.h"
-#include "llimits.h"
-#include "lmem.h"
-#include "lobject.h"
-#include "lopcodes.h"
-#include "lstate.h"
-#include "lstring.h"
-#include "lauxlib.h"
-#define LIF(prefix, name) lua ## prefix ## _ ## name
-#endif
 
 #include <cstring>
 #include <stdint.h>	/*for intptr_t*/
@@ -375,7 +358,7 @@ static void pushproto(lua_State *L, Proto *proto)
 {
 	TValue o;
 	setptvalue(L, &o, proto);
-	LIF(A,pushobject)(L, &o);
+	pdep_pushobject(L, &o);
 }
 
 #define setuvvalue(L,obj,x) \
@@ -387,21 +370,21 @@ static void pushupval(lua_State *L, UpVal *upval)
 {
 	TValue o;
 	setuvvalue(L, &o, upval);
-	LIF(A,pushobject)(L, &o);
+	pdep_pushobject(L, &o);
 }
 
 static void pushclosure(lua_State *L, Closure *closure)
 {
 	TValue o;
 	setclvalue(L, &o, closure);
-	LIF(A,pushobject)(L, &o);
+	pdep_pushobject(L, &o);
 }
 
 static void pushstring(lua_State *L, TString *s)
 {
 	TValue o;
 	setsvalue(L, &o, s);
-	LIF(A,pushobject)(L, &o);
+	pdep_pushobject(L, &o);
 }
 
 static void persistfunction(PersistInfo *pi)
@@ -609,7 +592,7 @@ static void persistupval(PersistInfo *pi)
 
 	lua_pop(pi->L, 1);
 					/* perms reftbl ... */
-	LIF(A,pushobject)(pi->L, uv->v);
+	pdep_pushobject(pi->L, uv->v);
 					/* perms reftbl ... obj */
 	persist(pi);
 					/* perms reftbl ... obj */
@@ -624,9 +607,9 @@ static void persistproto(PersistInfo *pi)
 	/* Persist constant refs */
 	{
 		int i;
-		pi->writer(pi->L, &p->sizek, sizeof(int), pi->ud);
+		pi->fw->Signed32(p->sizek);
 		for(i=0; i<p->sizek; i++) {
-			LIF(A,pushobject)(pi->L, &p->k[i]);
+			pdep_pushobject(pi->L, &p->k[i]);
 					/* perms reftbl ... proto const */
 			persist(pi);
 			lua_pop(pi->L, 1);
@@ -637,9 +620,8 @@ static void persistproto(PersistInfo *pi)
 
 	/* serialize inner Proto refs */
 	{
-		int i;
-		pi->writer(pi->L, &p->sizep, sizeof(int), pi->ud);
-		for(i=0; i<p->sizep; i++)
+		pi->fw->Signed32(p->sizep);
+		for(int i=0; i<p->sizep; i++)
 		{
 			pushproto(pi->L, p->p[i]);
 					/* perms reftbl ... proto subproto */
@@ -652,14 +634,16 @@ static void persistproto(PersistInfo *pi)
 
 	/* Serialize code */
 	{
-		pi->writer(pi->L, &p->sizecode, sizeof(int), pi->ud);
-		pi->writer(pi->L, p->code, sizeof(Instruction) * p->sizecode, pi->ud);
+		compile_assert(sizeof(Instruction) == 4);
+		pi->fw->Signed32(p->sizecode);
+		for (uint32_t i = 0; i < p->sizecode; i++)
+			pi->fw->Unsigned32(p->code[i]);
 	}
 
 	/* Serialize upvalue names */
 	{
 		int i;
-		pi->writer(pi->L, &p->sizeupvalues, sizeof(int), pi->ud);
+		pi->fw->Signed32(p->sizeupvalues);
 		for(i=0; i<p->sizeupvalues; i++)
 		{
 			pushstring(pi->L, p->upvalues[i]);
@@ -670,15 +654,15 @@ static void persistproto(PersistInfo *pi)
 	/* Serialize local variable infos */
 	{
 		int i;
-		pi->writer(pi->L, &p->sizelocvars, sizeof(int), pi->ud);
+		pi->fw->Signed32(p->sizelocvars);
 		for(i=0; i<p->sizelocvars; i++)
 		{
 			pushstring(pi->L, p->locvars[i].varname);
 			persist(pi);
 			lua_pop(pi->L, 1);
 
-			pi->writer(pi->L, &p->locvars[i].startpc, sizeof(int), pi->ud);
-			pi->writer(pi->L, &p->locvars[i].endpc, sizeof(int), pi->ud);
+			pi->fw->Signed32(p->locvars[i].startpc);
+			pi->fw->Signed32(p->locvars[i].endpc);
 		}
 	}
 
@@ -689,23 +673,21 @@ static void persistproto(PersistInfo *pi)
 
 	/* Serialize line numbers */
 	{
-		pi->writer(pi->L, &p->sizelineinfo, sizeof(int), pi->ud);
-		if (p->sizelineinfo)
-		{
-			pi->writer(pi->L, p->lineinfo, sizeof(int) * p->sizelineinfo, pi->ud);
-		}
+		pi->fw->Signed32(p->sizelineinfo);
+		for(uint32_t i = 0; i < p->sizelineinfo; i++)
+			pi->fw->Signed32(p->lineinfo[i]);
 	}
 
 	/* Serialize linedefined and lastlinedefined */
-	pi->writer(pi->L, &p->linedefined, sizeof(int), pi->ud);
-	pi->writer(pi->L, &p->lastlinedefined, sizeof(int), pi->ud);
+	pi->fw->Signed32(p->linedefined);
+	pi->fw->Signed32(p->lastlinedefined);
 
 	/* Serialize misc values */
 	{
-		pi->writer(pi->L, &p->nups, sizeof(lu_byte), pi->ud);
-		pi->writer(pi->L, &p->numparams, sizeof(lu_byte), pi->ud);
-		pi->writer(pi->L, &p->is_vararg, sizeof(lu_byte), pi->ud);
-		pi->writer(pi->L, &p->maxstacksize, sizeof(lu_byte), pi->ud);
+		pi->fw->Unsigned8(p->nups);
+		pi->fw->Unsigned8(p->numparams);
+		pi->fw->Unsigned8(p->is_vararg);
+		pi->fw->Unsigned8(p->maxstacksize);
 	}
 	/* We do not currently persist upvalue names, local variable names,
 	 * variable lifetimes, line info, or source code. */
@@ -1120,8 +1102,8 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 
 	/* Read in constant references */
 	{
-		verify(LIF(Z,read)(&upi->zio, &sizek, sizeof(int)) == 0);
-		LIF(M,reallocvector)(upi->L, p->k, 0, sizek, TValue);
+		sizek = upi->fr->Signed32();
+		pdep_reallocvector(upi->L, p->k, 0, sizek, TValue);
 		for(i=0; i<sizek; i++) {
 					/* perms reftbl ... proto */
 			unpersist(upi);
@@ -1135,8 +1117,8 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 	}
 	/* Read in sub-proto references */
 	{
-		verify(LIF(Z,read)(&upi->zio, &sizep, sizeof(int)) == 0);
-		LIF(M,reallocvector)(upi->L, p->p, 0, sizep, Proto*);
+		sizep = upi->fr->Signed32();
+		pdep_reallocvector(upi->L, p->p, 0, sizep, Proto*);
 		for(i=0; i<sizep; i++) {
 					/* perms reftbl ... proto */
 			unpersist(upi);
@@ -1151,18 +1133,18 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 
 	/* Read in code */
 	{
-		verify(LIF(Z,read)(&upi->zio, &p->sizecode, sizeof(int)) == 0);
-		LIF(M,reallocvector)(upi->L, p->code, 1, p->sizecode, Instruction);
-		verify(LIF(Z,read)(&upi->zio, p->code,
-			sizeof(Instruction) * p->sizecode) == 0);
+		p->sizecode = upi->fr->Signed32();
+		pdep_reallocvector(upi->L, p->code, 1, p->sizecode, Instruction);
+		for (uint32_t i = 0; i < p->sizecode; i++)
+			p->code[i] = upi->fr->Unsigned32();
 	}
 
 	/* Read in upvalue names */
 	{
-		verify(LIF(Z,read)(&upi->zio, &p->sizeupvalues, sizeof(int)) == 0);
+		p->sizeupvalues = upi->fr->Signed32();
 		if (p->sizeupvalues)
 		{
-			LIF(M,reallocvector)(upi->L, p->upvalues, 0, p->sizeupvalues, TString *);
+			pdep_reallocvector(upi->L, p->upvalues, 0, p->sizeupvalues, TString *);
 			for(i=0; i<p->sizeupvalues; i++)
 			{
 				unpersist(upi);
@@ -1174,18 +1156,18 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 
 	/* Read in local variable infos */
 	{
-		verify(LIF(Z,read)(&upi->zio, &p->sizelocvars, sizeof(int)) == 0);
+		p->sizelocvars = upi->fr->Signed32();
 		if (p->sizelocvars)
 		{
-			LIF(M,reallocvector)(upi->L, p->locvars, 0, p->sizelocvars, LocVar);
+			pdep_reallocvector(upi->L, p->locvars, 0, p->sizelocvars, LocVar);
 			for(i=0; i<p->sizelocvars; i++)
 			{
 				unpersist(upi);
 				p->locvars[i].varname = pdep_newlstr(upi->L, lua_tostring(upi->L, -1), strlen(lua_tostring(upi->L, -1)));
 				lua_pop(upi->L, 1);
 
-				verify(LIF(Z,read)(&upi->zio, &p->locvars[i].startpc, sizeof(int)) == 0);
-				verify(LIF(Z,read)(&upi->zio, &p->locvars[i].endpc, sizeof(int)) == 0);
+				p->locvars[i].startpc = upi->fr->Signed32();
+				p->locvars[i].endpc = upi->fr->Signed32();
 			}
 		}
 	}
@@ -1197,25 +1179,25 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 
 	/* Read in line numbers */
 	{
-		verify(LIF(Z,read)(&upi->zio, &p->sizelineinfo, sizeof(int)) == 0);
+		p->sizelineinfo = upi->fr->Signed32();
 		if (p->sizelineinfo)
 		{
-			LIF(M,reallocvector)(upi->L, p->lineinfo, 0, p->sizelineinfo, int);
-			verify(LIF(Z,read)(&upi->zio, p->lineinfo,
-			sizeof(int) * p->sizelineinfo) == 0);
+			pdep_reallocvector(upi->L, p->lineinfo, 0, p->sizelineinfo, int);
+			for(uint32_t i = 0; i < p->sizelineinfo; i++)
+				p->lineinfo[i] = upi->fr->Signed32();
 		}
 	}
 
 	/* Read in linedefined and lastlinedefined */
-	verify(LIF(Z,read)(&upi->zio, &p->linedefined, sizeof(int)) == 0);
-	verify(LIF(Z,read)(&upi->zio, &p->lastlinedefined, sizeof(int)) == 0);
+	p->linedefined = upi->fr->Signed32();
+	p->lastlinedefined = upi->fr->Signed32();
 
 	/* Read in misc values */
 	{
-		verify(LIF(Z,read)(&upi->zio, &p->nups, sizeof(lu_byte)) == 0);
-		verify(LIF(Z,read)(&upi->zio, &p->numparams, sizeof(lu_byte)) == 0);
-		verify(LIF(Z,read)(&upi->zio, &p->is_vararg, sizeof(lu_byte)) == 0);
-		verify(LIF(Z,read)(&upi->zio, &p->maxstacksize, sizeof(lu_byte)) == 0);
+		p->nups = upi->fr->Unsigned8();
+		p->numparams = upi->fr->Unsigned8();
+		p->is_vararg = upi->fr->Unsigned8();
+		p->maxstacksize = upi->fr->Unsigned8();
 	}
 }
 
