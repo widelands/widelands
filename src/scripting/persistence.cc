@@ -19,6 +19,10 @@
 
 #include <lua.hpp>
 
+#include "log.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+
 #include "pluto.h"
 #include "c_utils.h"
 
@@ -31,17 +35,15 @@
  */
 
 struct DataWriter {
-	uint32_t written;
 	Widelands::FileWrite & fw;
 
-	DataWriter(Widelands::FileWrite & gfw) : written(0), fw(gfw) {}
+	DataWriter(Widelands::FileWrite & gfw) : fw(gfw) {}
 };
 
 int write_func(lua_State *, const void * p, size_t data, void * ud) {
 	DataWriter * dw = static_cast<DataWriter *>(ud);
 
 	dw->fw.Data(p, data, Widelands::FileWrite::Pos::Null());
-	dw->written += data;
 
 	return data;
 }
@@ -158,14 +160,19 @@ uint32_t persist_object
 
 
 	DataWriter dw(fw);
-	pluto_persist(L, &write_func, &dw);
+	size_t cpos = fw.GetPos();
+	pluto_persist(L, &write_func, &dw, fw);
+	uint32_t nwritten = fw.GetPos() - cpos;
+
+	log("nwritten: %u\n", nwritten);
+
 	lua_pop(L, 2); // pop the object and the table
 
 	// Delete the entry in the registry
 	lua_pushnil(L);
 	lua_setfield(L, LUA_REGISTRYINDEX, "mos");
 
-	return dw.written;
+	return nwritten;
 }
 
 /**

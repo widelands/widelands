@@ -18,6 +18,9 @@
 
 #include <lua.hpp>
 
+#include "logic/widelands_filewrite.h"
+#include "logic/widelands_fileread.h"
+
 #include "pluto.h"
 
 #define USE_PDEP
@@ -64,6 +67,7 @@ typedef struct PersistInfo_t {
 	int counter;
 	lua_Chunkwriter writer;
 	void *ud;
+	Widelands::FileWrite * fw;
 #ifdef PLUTO_DEBUG
 	int level;
 #endif
@@ -754,7 +758,7 @@ static void persist(PersistInfo *pi)
 #endif
 }
 
-void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud)
+void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud, Widelands::FileWrite & fw)
 {
 	PersistInfo pi;
 
@@ -762,6 +766,7 @@ void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud)
 	pi.L = L;
 	pi.writer = writer;
 	pi.ud = ud;
+	pi.fw = &fw;
 #ifdef PLUTO_DEBUG
 	pi.level = 0;
 #endif
@@ -795,50 +800,6 @@ void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud)
 					/* perms reftbl rootobj */
 	lua_remove(L, 2);
 					/* perms rootobj */
-}
-
-typedef struct WriterInfo_t {
-	char* buf;
-	size_t buflen;
-} WriterInfo;
-
-static int bufwriter (lua_State *L, const void* p, size_t sz, void* ud) {
-	const char* cp = (const char*)p;
-	WriterInfo *wi = (WriterInfo *)ud;
-
-	LIF(M,reallocvector)(L, wi->buf, wi->buflen, wi->buflen+sz, char);
-	while(sz)
-	{
-		/* how dearly I love ugly C pointer twiddling */
-		wi->buf[wi->buflen++] = *cp++;
-		sz--;
-	}
-	return 0;
-}
-
-int persist_l(lua_State *L)
-{
-					/* perms? rootobj? ...? */
-	WriterInfo wi;
-
-	wi.buf = NULL;
-	wi.buflen = 0;
-
-	lua_settop(L, 2);
-					/* perms? rootobj? */
-	luaL_checktype(L, 1, LUA_TTABLE);
-					/* perms rootobj? */
-	luaL_checktype(L, 1, LUA_TTABLE);
-					/* perms rootobj */
-
-	pluto_persist(L, bufwriter, &wi);
-
-	lua_settop(L, 0);
-					/* (empty) */
-	lua_pushlstring(L, wi.buf, wi.buflen);
-					/* str */
-	pdep_freearray(L, wi.buf, wi.buflen, char);
-	return 1;
 }
 
 typedef struct UnpersistInfo_t {
@@ -1620,59 +1581,3 @@ void pluto_unpersist(lua_State *L, lua_Chunkreader reader, void *ud)
 					/* perms rootobj  */
 }
 
-typedef struct LoadInfo_t {
-  char *buf;
-  size_t size;
-} LoadInfo;
-
-
-static const char *bufreader(lua_State *L, void *ud, size_t *sz) {
-	LoadInfo *li = (LoadInfo *)ud;
-
-	(void) L;			/* unused*/
-
-	if(li->size == 0) {
-		return NULL;
-	}
-	*sz = li->size;
-	li->size = 0;
-	return li->buf;
-}
-
-int unpersist_l(lua_State *L)
-{
-	LoadInfo li;
-	char const *origbuf;
-	char *tempbuf;
-	size_t bufsize;
-					/* perms? str? ...? */
-	lua_settop(L, 2);
-					/* perms? str? */
-	origbuf = luaL_checklstring(L, 2, &bufsize);
-	tempbuf = LIF(M,newvector)(L, bufsize, char);
-	memcpy(tempbuf, origbuf, bufsize);
-
-	li.buf = tempbuf;
-	li.size = bufsize;
-
-					/* perms? str */
-	lua_pop(L, 1);
-					/* perms? */
-	luaL_checktype(L, 1, LUA_TTABLE);
-					/* perms */
-	pluto_unpersist(L, bufreader, &li);
-					/* perms rootobj */
-	LIF(M,freearray)(L, tempbuf, bufsize, char);
-	return 1;
-}
-
-static luaL_reg pluto_reg[] = {
-	{ "persist", persist_l },
-	{ "unpersist", unpersist_l },
-	{ NULL, NULL }
-};
-
-LUALIB_API int luaopen_pluto(lua_State *L) {
-	luaL_openlib(L, "pluto", pluto_reg, 0);
-	return 1;
-}
