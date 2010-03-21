@@ -12,6 +12,11 @@
 -- Test Data to persist 
 -- ====================
 my_name = "SirVer"
+pi = 3.1415
+eight = 8
+is_true = true
+is_false = false
+
 p = wl.game.Player(1)
 a = { "Hallo", "Welt" }
 c = { func = function(a) return "I say " .. a .. "!" end }
@@ -36,8 +41,13 @@ use("map", "lunit")
 lunit.import "assertions"
 
 print("###################### CHECKING FOR CORRECT PERSISTENCE")
+assert_equal("SirVer", my_name)
+assert_equal(3.1415, pi)
+assert_equal(8, eight)
+assert_equal(true, is_true)
+assert_equal(false, is_false)
+
 assert_equal(1, p.number)
-assert_equal(my_name, "SirVer")
 
 assert_table(a)
 assert_equal(a[1], "Hallo")
