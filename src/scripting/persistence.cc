@@ -34,20 +34,6 @@
  * ========================================================================
  */
 
-struct DataWriter {
-	Widelands::FileWrite & fw;
-
-	DataWriter(Widelands::FileWrite & gfw) : fw(gfw) {}
-};
-
-int write_func(lua_State *, const void * p, size_t data, void * ud) {
-	DataWriter * dw = static_cast<DataWriter *>(ud);
-
-	dw->fw.Data(p, data, Widelands::FileWrite::Pos::Null());
-
-	return data;
-}
-
 /**
  * Add one object to the table of objects that should not
  * be touched. Returns true if the object was non nil and
@@ -86,22 +72,6 @@ static bool m_add_object_to_not_persist
 		lua_settable(L, 1); //  table[symbol] = integer
 	}
 	return true;
-}
-
-
-struct DataReader_L {
-	uint32_t size;
-	Widelands::FileRead & fr;
-
-	DataReader_L(uint32_t gsize, Widelands::FileRead & gfr) :
-		size(gsize), fr(gfr) {}
-};
-
-const char * read_func_L(lua_State *, void * ud, size_t * sz) {
-	DataReader_L * dr = static_cast<DataReader_L *>(ud);
-
-	*sz = 1; // dr->size;
-	return static_cast<const char *>(dr->fr.Data(1));
 }
 
 
@@ -159,9 +129,8 @@ uint32_t persist_object
 		m_add_object_to_not_persist(L, globals[i], i + 1);
 
 
-	DataWriter dw(fw);
 	size_t cpos = fw.GetPos();
-	pluto_persist(L, &write_func, &dw, fw);
+	pluto_persist(L, fw);
 	uint32_t nwritten = fw.GetPos() - cpos;
 
 	log("nwritten: %u\n", nwritten);
@@ -193,10 +162,7 @@ uint32_t unpersist_object
 	for (uint32_t i = 0; globals[i]; i++)
 		m_add_object_to_not_unpersist(L, globals[i], i + 1);
 
-	DataReader_L rd(size, fr);
-
-	pluto_unpersist(L, &read_func_L, &rd, fr);
-
+	pluto_unpersist(L, fr);
 	lua_remove(L, -2); // remove the globals table
 
 	// Delete the entry in the registry

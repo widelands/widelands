@@ -17,28 +17,21 @@
  */
 
 #include <lua.hpp>
+#include <cstring>
+#include <stdint.h>
 
-#include "wexception.h"
-#include "log.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/widelands_fileread.h"
 
-// TODO: either throw exception or lua_error
+#include "pdep/pdep.h"
 
 #include "pluto.h"
-
-#include "pdep/pdep.h"
-#define LIF(prefix, name) pdep ## _ ## name
-
-#include <cstring>
-#include <stdint.h>	/*for intptr_t*/
 
 
 // #define PLUTO_DEBUG
 
 // Forward declarated from lua_impl.h. So we do not need to include it
 int luna_restore_object(lua_State * L);
-
 
 
 #ifdef PLUTO_DEBUG
@@ -52,8 +45,6 @@ int luna_restore_object(lua_State * L);
 typedef struct PersistInfo_t {
 	lua_State *L;
 	int counter;
-	lua_Chunkwriter writer;
-	void *ud;
 	Widelands::FileWrite * fw;
 #ifdef PLUTO_DEBUG
 	int level;
@@ -948,7 +939,8 @@ static void persist(PersistInfo *pi)
 			persistuserdata(pi);
 			break;
 		case LUA_TLIGHTUSERDATA:
-			throw wexception("Can't persist a lightuserdata object!");
+			lua_pushstring(pi->L, "Can't persist a lightuserdata object!");
+			lua_error(pi->L);
 			break;
 		default:
 			lua_assert(0);
@@ -958,14 +950,12 @@ static void persist(PersistInfo *pi)
 #endif
 }
 
-void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud, Widelands::FileWrite & fw)
+void pluto_persist(lua_State *L, Widelands::FileWrite & fw)
 {
 	PersistInfo pi;
 
 	pi.counter = 0;
 	pi.L = L;
-	pi.writer = writer;
-	pi.ud = ud;
 	pi.fw = &fw;
 #ifdef PLUTO_DEBUG
 	pi.level = 0;
@@ -1205,7 +1195,6 @@ static void gcunlink(lua_State *L, GCObject *gco)
 	prevslot->gch.next = prevslot->gch.next->gch.next;
 }
 
-/* FIXME __ALL__ field ordering */
 static void unpersistthread(int ref, UnpersistInfo *upi)
 {
 					/* perms reftbl ... */
@@ -1425,7 +1414,8 @@ static void unpersist(UnpersistInfo *upi)
 			unpersistpermanent(ref, upi);
 			break;
 		case LUA_TLIGHTUSERDATA:
-			throw wexception("Can't unpersist a lightuserdata object!");
+			lua_pushstring(upi->L, "Can't unpersist a lightuserdata object!");
+			lua_error(upi->L);
 			break;
 		default:
 			lua_assert(0);
@@ -1465,13 +1455,8 @@ static void unpersist(UnpersistInfo *upi)
 }
 
 void pluto_unpersist
-	(lua_State *L, lua_Chunkreader reader, void *ud, Widelands::FileRead & fr)
+	(lua_State *L, Widelands::FileRead & fr)
 {
-	/* We use the graciously provided ZIO (what the heck does the Z stand
-	 * for?) library so that we don't have to deal with the reader directly.
-	 * Letting the reader function decide how much data to return can be
-	 * very unpleasant.
-	 */
 	UnpersistInfo upi;
 	upi.L = L;
 	upi.fr = &fr;

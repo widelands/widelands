@@ -20,11 +20,8 @@
 #ifndef PLUTO_H
 #define PLUTO_H
 
-void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud, Widelands::FileWrite & fw);
-
-void pluto_unpersist(lua_State *L, lua_Chunkreader reader, void *ud, Widelands::FileRead & fr);
-
-LUALIB_API int luaopen_pluto(lua_State *L);
+void pluto_persist(lua_State *L, Widelands::FileWrite & fw);
+void pluto_unpersist(lua_State *L, Widelands::FileRead & fr);
 
 #endif /* end of include guard: PLUTO_H */
 
