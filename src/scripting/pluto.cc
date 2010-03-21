@@ -28,15 +28,8 @@
 #include "pluto.h"
 
 
-// #define PLUTO_DEBUG
-
 // Forward declarated from lua_impl.h. So we do not need to include it
 int luna_restore_object(lua_State * L);
-
-
-#ifdef PLUTO_DEBUG
-#include <stdio.h>
-#endif
 
 #define PLUTO_TPERMANENT 101
 
@@ -46,32 +39,14 @@ typedef struct PersistInfo_t {
 	lua_State *L;
 	int counter;
 	Widelands::FileWrite * fw;
-#ifdef PLUTO_DEBUG
-	int level;
-#endif
 } PersistInfo;
 
 typedef struct UnpersistInfo_t {
 	lua_State *L;
 	Widelands::FileRead * fr;
-#ifdef PLUTO_DEBUG
-	int level;
-#endif
 } UnpersistInfo;
 
 static void unpersist(UnpersistInfo *upi);
-
-
-#ifdef PLUTO_DEBUG
-void printindent(int indent)
-{
-	int il;
-	for(il=0; il<indent; il++) {
-		printf("  ");
-	}
-}
-#endif
-
 
 /*
  * ========================================================================
@@ -838,10 +813,6 @@ static void persist(PersistInfo *pi)
 		pi->fw->Signed32(ref);
 		lua_pop(pi->L, 1);
 					/* perms reftbl ... obj ref */
-#ifdef PLUTO_DEBUG
-		printindent(pi->level);
-		printf("0 %d\n", ref);
-#endif
 		return;
 	}
 					/* perms reftbl ... obj nil */
@@ -852,10 +823,6 @@ static void persist(PersistInfo *pi)
 		/* firsttime, ref */
 		pi->fw->Unsigned8(0);
 		pi->fw->Unsigned32(0);
-#ifdef PLUTO_DEBUG
-		printindent(pi->level);
-		printf("0 0\n");
-#endif
 		return;
 	}
 	/* indicate that it's the first time */
@@ -879,18 +846,10 @@ static void persist(PersistInfo *pi)
 		if(!lua_isnil(pi->L, -1)) {
 					/* perms reftbl ... obj permkey */
 			int type = PLUTO_TPERMANENT;
-#ifdef PLUTO_DEBUG
-			printindent(pi->level);
-			printf("1 %d PERM\n", pi->counter);
-			pi->level++;
-#endif
 			pi->fw->Signed32(type);
 			persist(pi);
 			lua_pop(pi->L, 1);
 					/* perms reftbl ... obj */
-#ifdef PLUTO_DEBUG
-			pi->level--;
-#endif
 			return;
 		} else {
 					/* perms reftbl ... obj nil */
@@ -902,12 +861,6 @@ static void persist(PersistInfo *pi)
 	{
 		int type = lua_type(pi->L, -1);
 		pi->fw->Signed32(type);
-
-#ifdef PLUTO_DEBUG
-		printindent(pi->level);
-		printf("1 %d %d\n", pi->counter, type);
-		pi->level++;
-#endif
 	}
 
 	switch(lua_type(pi->L, -1)) {
@@ -945,9 +898,6 @@ static void persist(PersistInfo *pi)
 		default:
 			lua_assert(0);
 	}
-#ifdef PLUTO_DEBUG
-	pi->level--;
-#endif
 }
 
 void pluto_persist(lua_State *L, Widelands::FileWrite & fw)
@@ -957,9 +907,6 @@ void pluto_persist(lua_State *L, Widelands::FileWrite & fw)
 	pi.counter = 0;
 	pi.L = L;
 	pi.fw = &fw;
-#ifdef PLUTO_DEBUG
-	pi.level = 0;
-#endif
 
 	lua_checkstack(L, 4);
 					/* perms? rootobj? ...? */
@@ -1377,11 +1324,6 @@ static void unpersist(UnpersistInfo *upi)
 		int ref = upi->fr->Signed32();
 		lua_assert(!inreftable(upi->L, ref));
 		int type = upi->fr->Signed32();
-#ifdef PLUTO_DEBUG
-		printindent(upi->level);
-		printf("1 %d %d\n", ref, type);
-		upi->level++;
-#endif
 		switch(type) {
 		case LUA_TBOOLEAN:
 			unpersistboolean(upi);
@@ -1429,15 +1371,8 @@ static void unpersist(UnpersistInfo *upi)
 				type == LUA_TUPVAL));
 		registerobject(ref, upi);
 					/* perms reftbl ... obj */
-#ifdef PLUTO_DEBUG
-		upi->level--;
-#endif
 	} else {
 		int ref = upi->fr->Signed32();
-#ifdef PLUTO_DEBUG
-		printindent(upi->level);
-		printf("0 %d\n", ref);
-#endif
 		if(ref == 0) {
 			lua_pushnil(upi->L);
 					/* perms reftbl ... nil */
@@ -1460,9 +1395,6 @@ void pluto_unpersist
 	UnpersistInfo upi;
 	upi.L = L;
 	upi.fr = &fr;
-#ifdef PLUTO_DEBUG
-	upi.level = 0;
-#endif
 
 	lua_checkstack(L, 3);
 
