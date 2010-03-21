@@ -18,6 +18,7 @@
 
 #include <lua.hpp>
 
+#include "wexception.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/widelands_fileread.h"
 
@@ -623,12 +624,6 @@ static void unpersistboolean(UnpersistInfo *upi)
 }
 
 
-static void persistlightuserdata(PersistInfo *pi)
-{
-	void *p = lua_touserdata(pi->L, -1);
-	pi->writer(pi->L, &p, sizeof(void *), pi->ud);
-}
-
 static void persistnumber(PersistInfo *pi)
 {
 	lua_Number n = lua_tonumber(pi->L, -1);
@@ -742,9 +737,6 @@ static void persist(PersistInfo *pi)
 		case LUA_TBOOLEAN:
 			persistboolean(pi);
 			break;
-		case LUA_TLIGHTUSERDATA:
-			persistlightuserdata(pi);
-			break;
 		case LUA_TNUMBER:
 			persistnumber(pi);
 			break;
@@ -768,6 +760,9 @@ static void persist(PersistInfo *pi)
 			break;
 		case LUA_TUSERDATA:
 			persistuserdata(pi);
+			break;
+		case LUA_TLIGHTUSERDATA:
+			throw wexception("Can't persist a lightuserdata object!");
 			break;
 		default:
 			lua_assert(0);
@@ -834,16 +829,6 @@ static void registerobject(int ref, UnpersistInfo *upi)
 					/* perms reftbl ... obj ref obj */
 	lua_settable(upi->L, 2);
 					/* perms reftbl ... obj */
-}
-
-static void unpersistlightuserdata(UnpersistInfo *upi)
-{
-					/* perms reftbl ... */
-	void *p;
-	lua_checkstack(upi->L, 1);
-	verify(LIF(Z,read)(&upi->zio, &p, sizeof(void *)) == 0);
-	lua_pushlightuserdata(upi->L, p);
-					/* perms reftbl ... ludata */
 }
 
 static void unpersistnumber(UnpersistInfo *upi)
@@ -1485,9 +1470,6 @@ static void unpersist(UnpersistInfo *upi)
 		case LUA_TBOOLEAN:
 			unpersistboolean(upi);
 			break;
-		case LUA_TLIGHTUSERDATA:
-			unpersistlightuserdata(upi);
-			break;
 		case LUA_TNUMBER:
 			unpersistnumber(upi);
 			break;
@@ -1514,6 +1496,9 @@ static void unpersist(UnpersistInfo *upi)
 			break;
 		case PLUTO_TPERMANENT:
 			unpersistpermanent(ref, upi);
+			break;
+		case LUA_TLIGHTUSERDATA:
+			throw wexception("Can't unpersist a lightuserdata object!");
 			break;
 		default:
 			lua_assert(0);
