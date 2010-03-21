@@ -975,6 +975,8 @@ void NetGGZ::send_game_playing()
 void NetGGZ::send_game_done()
 {
 	if (used()) {
+		if (ggz_write_int(m_fd, op_game_statistics) < 0)
+			log("ERROR: Game statistics could not be send!\n");
 		if (ggz_write_int(m_fd, op_state_done) < 0)
 			log("ERROR: Game state could not be send!\n");
 	} else
