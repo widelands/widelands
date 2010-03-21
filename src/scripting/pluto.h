@@ -22,7 +22,7 @@
 
 void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud, Widelands::FileWrite & fw);
 
-void pluto_unpersist(lua_State *L, lua_Chunkreader reader, void *ud);
+void pluto_unpersist(lua_State *L, lua_Chunkreader reader, void *ud, Widelands::FileRead & fr);
 
 LUALIB_API int luaopen_pluto(lua_State *L);
 

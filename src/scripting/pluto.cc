@@ -805,6 +805,7 @@ void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud, Widelands::Fi
 typedef struct UnpersistInfo_t {
 	lua_State *L;
 	ZIO zio;
+	Widelands::FileRead * fr;
 #ifdef PLUTO_DEBUG
 	int level;
 #endif
@@ -1554,7 +1555,8 @@ static void unpersist(UnpersistInfo *upi)
 	lua_assert(lua_gettop(upi->L) == stacksize + 1);
 }
 
-void pluto_unpersist(lua_State *L, lua_Chunkreader reader, void *ud)
+void pluto_unpersist
+	(lua_State *L, lua_Chunkreader reader, void *ud, Widelands::FileRead & fr)
 {
 	/* We use the graciously provided ZIO (what the heck does the Z stand
 	 * for?) library so that we don't have to deal with the reader directly.
@@ -1563,6 +1565,7 @@ void pluto_unpersist(lua_State *L, lua_Chunkreader reader, void *ud)
 	 */
 	UnpersistInfo upi;
 	upi.L = L;
+	upi.fr = &fr;
 #ifdef PLUTO_DEBUG
 	upi.level = 0;
 #endif

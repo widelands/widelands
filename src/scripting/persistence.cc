@@ -100,8 +100,8 @@ struct DataReader_L {
 const char * read_func_L(lua_State *, void * ud, size_t * sz) {
 	DataReader_L * dr = static_cast<DataReader_L *>(ud);
 
-	*sz = dr->size;
-	return static_cast<const char *>(dr->fr.Data(dr->size));
+	*sz = 1; // dr->size;
+	return static_cast<const char *>(dr->fr.Data(1));
 }
 
 
@@ -195,7 +195,7 @@ uint32_t unpersist_object
 
 	DataReader_L rd(size, fr);
 
-	pluto_unpersist(L, &read_func_L, &rd);
+	pluto_unpersist(L, &read_func_L, &rd, fr);
 
 	lua_remove(L, -2); // remove the globals table
 
