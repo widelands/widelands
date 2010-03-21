@@ -579,11 +579,14 @@ void Worker::informPlayer
 	// NOTE for farms, ferneries, vineyards, etc.
 	if ((res_type != "fish") && (res_type != "stone"))
 		return;
+	// NOTE  AND fish_breeders
+	if (building.name() == "fish_breeders_house")
+		return;
 	owner().add_message_with_timeout
 		(game,
 		 building.create_message
 		 	("mine",
-		 	 game.get_gametime(),  60 * 60 * 1000,
+		 	 game.get_gametime(),  60 * 30 * 1000,
 		 	 _("Out of ") + res_type,
 		 	 "<p font-size=14 font-face=FreeSerif>" +
 		 	 std::string
@@ -592,7 +595,7 @@ void Worker::informPlayer
 		 	 	 	 "of the following type: "))
 		 	 +
 		 	 res_type + "</p>"),
-		 600000, 0);
+		 1800000, 0);
 }
 
 

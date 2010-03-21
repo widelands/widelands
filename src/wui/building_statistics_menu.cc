@@ -344,7 +344,10 @@ void Building_Statistics_Menu::update() {
 	{
 		Widelands::Building_Descr const & building =
 			*tribe.get_building_descr(i);
-		if (not (building.is_buildable() or building.is_enhanced()))
+		if 
+			(not (building.is_buildable() 
+			 or building.is_enhanced()
+			 or building.global()))
 			continue;
 
 		std::vector<Widelands::Player::Building_Stats> const & vec =
@@ -396,7 +399,7 @@ void Building_Statistics_Menu::update() {
 			m_btn[Next_Construction]->set_enabled(nr_build);
 		}
 
-		te->set_picture(Columns::Icon, building.get_buildicon(), "FEL");
+		te->set_picture(Columns::Icon, building.get_buildicon(), "X");
 
 		//  add new Table Entry
 		char buffer[100];

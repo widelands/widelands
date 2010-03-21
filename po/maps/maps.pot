@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-14 14:51+0000\n"
+"POT-Creation-Date: 2010-03-21 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -27,7 +27,7 @@ msgid "Empire - The months of exile"
 msgstr ""
 
 #: ../../campaigns/cconfig:33
-msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
+msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - that was their fault. At one night in March his unprepared army was attacked by 100 barbarian footmen and was completely scattered. Only with pure life he and a handful of soldiers survived."
 msgstr ""
 
 #: ../../campaigns/cconfig:36
@@ -91,7 +91,7 @@ msgid "Crater"
 msgstr ""
 
 #: ../../maps/Crater.wmf/elemental:11
-msgid "Long after a meteor crashed into a couple of mountains life blossoms in the crater. Two tribes are now fighting about the rich resources."
+msgid "Long after a meteor crashed into a couple of mountains, life blossoms in the crater. Two tribes are now fighting for the rich resources."
 msgstr ""
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
@@ -99,7 +99,7 @@ msgid "Dry Riverbed"
 msgstr ""
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
-msgid "It is a long time ago, since the last rain drop touched these grounds. No wonder, that here is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last water."
+msgid "It was a long time ago, since the last raindrop touched these grounds. No wonder, that there is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last of water."
 msgstr ""
 
 #: ../../maps/Elven Forests.wmf/elemental:7
@@ -107,7 +107,7 @@ msgid "Elven Forests"
 msgstr ""
 
 #: ../../maps/Elven Forests.wmf/elemental:9
-msgid "The breath-taking beauty of these emerald lands has lured many a tribe into the attempt of taking them for itself."
+msgid "The breath-taking beauty of these emerald lands has lured many tribes into an attempt of taking them for themselves."
 msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
@@ -155,7 +155,7 @@ msgid "Glacier Lake"
 msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
-msgid "A long time your tribe dwelled on this beautiful and lonely glacier lake. Noone disturbed you and the resources were enough for your whole tribe, but a few month ago another tribe came over the mountains and settled down. And you are sure, that there is only place enough for one tribe."
+msgid "A long time your tribe dwelt on this beautiful and lonely glacier lake. No one disturbed you and the resources were enough for your whole tribe, but a few months ago another tribe came over the mountains and settled down. And you are sure, that there is only enough place for one tribe."
 msgstr ""
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
@@ -179,7 +179,7 @@ msgid "Islands at war"
 msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:11
-msgid "For centuries you lived peaceful together with the other tribe on the neighboured island. This peace seems to end now. - Your neighbour begins to expand."
+msgid "For centuries you've lived peacefully together with the other tribe on the neighboured island. This peace seems to end now - your neighbour begins to expand."
 msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
@@ -203,7 +203,7 @@ msgid "Mystical Maze"
 msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
-msgid "There are two big questions around: Who created this unbelievable big maze and what can be found inside?"
+msgid "There are two big questions around: Who created this unbelievably big maze and what can be found inside?"
 msgstr ""
 
 #: ../../maps/Plateau.wmf/elemental:7
@@ -235,7 +235,7 @@ msgid "The ancient sun of fire"
 msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:11
-msgid "For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot other followed afterwards."
+msgid "For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot others followed afterwards."
 msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
@@ -243,7 +243,7 @@ msgid "Swamp Island"
 msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:11
-msgid "It smells like swamp, it looks like swamp and it is swamp. But it is the place you were born and you lived your whole life. If you don't want to loose it, defend it! "
+msgid "It smells like swamp, it looks like swamp and it is swamp. But it is the place you were born and you lived your whole life. If you don't want to lose it, defend it! "
 msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:9
@@ -259,7 +259,7 @@ msgid "The Oasis Triangle"
 msgstr ""
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
-msgid "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
+msgid "There is something mystical, like a grey atmosphere, around these three oases, which no one found out about yet. Perhaps you will be the one, but be aware of the others, who are searching too!"
 msgstr ""
 
 #: ../../maps/The Thaw.wmf/elemental:9
@@ -267,7 +267,7 @@ msgid "The Thaw"
 msgstr ""
 
 #: ../../maps/The Thaw.wmf/elemental:11
-msgid "Another thaw set in. Three tribes were sheltering form severe winter among majestic mountains. While solstice they listened to the oracle and went on war. Only survivor will sacrifice his enemies treasures on the ancient altar, build there a splendid castle and gain goodwill and the respect of the Gods."
+msgid "Another thaw set in. Three tribes were sheltering form severe winter among majestic mountains. During solstice they listened to the oracle and went on to war. The only survivor will sacrifice his enemies' treasures on the ancient altar, build there a splendid castle and gain goodwill and the respect of the Gods."
 msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
@@ -291,7 +291,7 @@ msgid "The pass through the mountains"
 msgstr ""
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
-msgid "In this mountainous region two princes have settled. Now they are expanding their territories unaware of the fact that they are not alone!"
+msgid "In this mountainous area two princes have settled. Now they are expanding their territories unaware of the fact that they are not alone!"
 msgstr ""
 
 #: ../../maps/Three Warriors.wmf/elemental:9
@@ -299,7 +299,7 @@ msgid "Three Warriors"
 msgstr ""
 
 #: ../../maps/Three Warriors.wmf/elemental:11
-msgid "Mighty mountains divide this land into three fertile valleys. But a path connects the valleys and thus seems a fight inescapable! Hint: Water can be found around the lakes."
+msgid "Mighty mountains divide this land into three fertile valleys. But a path connects the valleys and thus a fight seems inescapable! Hint: Water can be found around the lakes."
 msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
@@ -331,6 +331,6 @@ msgid "Wisent Valley"
 msgstr ""
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
-msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
+msgid "It seems as if this magical valley was inhabited by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can your tribe live in peace with your neighbours?"
 msgstr ""
 

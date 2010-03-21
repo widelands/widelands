@@ -1117,7 +1117,7 @@ void ProductionProgram::ActMine::execute
 
 /// Copied from militarysite.cc, MilitarySite::informPlayer
 /// Informs the player about a mine that has run empty, if the mine has not
-/// sent this message within the last 10 minutes.
+/// sent this message within the last 60 minutes.
 void ProductionProgram::ActMine::informPlayer
 	(Game & game, ProductionSite & ps) const
 {
@@ -1135,7 +1135,7 @@ void ProductionProgram::ActMine::informPlayer
 		 	 	 	 "destruct it."))
 		 	 +
 		 	 "</p>"),
-		 600000, 0);
+		 3600000, 0);
 }
 
 

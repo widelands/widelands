@@ -17,6 +17,9 @@
  *
  */
 
+#include <boost/format.hpp>
+using boost::format;
+
 #include "writeHTML.h"
 
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -434,7 +437,8 @@ void Building_Descr::writeHTML(::FileWrite & fw) const {
 				(fw,
 				 name() + "/index_" + i18n::get_locale() + ".xhtml#buildcost_"    +
 				 tribe().get_ware_descr(j.current->first)->name() + "\" title=\"" +
-				 descname() + _("'s constructionsite") + "\"><img src=\"../"      +
+				 (format(_("%s's constructionsite"))%descname()).str() +
+				 "\"><img src=\"../"      +
 				 name() + "/menu.png\" alt=\"" + descname(),
 				 HTMLReferences::Madeof,
 				 j.current->first, j.current->second);
@@ -455,7 +459,8 @@ void Building_Descr::writeHTML(::FileWrite & fw) const {
 				(fw,
 				 name() + "/index_" + i18n::get_locale() + ".xhtml#enhancement_"  +
 				 tribe().get_building_descr(*i.current)->name() + "\" title=\""   +
-				 descname() + _("'s enhancement") + "\"><img src=\"../" + name()  +
+				 (format(_("%s's enhancement")) % descname()).str() +
+				 "\"><img src=\"../" + name()  +
 				 "/menu.png\" alt=\"" + descname(),
 				 HTMLReferences::Become,
 				 *i.current);
@@ -663,7 +668,8 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 						(fw,
 						 name() + "/index_" + i18n::get_locale()                    +
 						 ".xhtml#buildcost_" + j.current->first + "\" title=\""     +
-						 descname() + _("'s creation") + "\"><img src=\"../"        +
+						 (format(_("%s's creation"))%descname()).str() +
+						 "\"><img src=\"../"        +
 						 name() + "/menu.png\" alt=\"" + descname(),
 						 HTMLReferences::Madeof,
 						 wi,
@@ -673,7 +679,8 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 						(fw,
 						 name() + "/index_" + i18n::get_locale()                    +
 						 ".xhtml#buildcost_" + j.current->first + "\" title=\""     +
-						 descname() + _("'s creation") + "\"><img src=\"../"        +
+						 (format(_("%s's creation"))%descname()).str() +
+						 "\"><img src=\"../"        +
 						 name() + "/menu.png\" alt=\"" + descname(),
 						 HTMLReferences::Madeof,
 						 tribe().safe_worker_index(j.current->first),
@@ -700,7 +707,8 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 			(fw,
 			 name() + "/index_" + i18n::get_locale() + ".xhtml#becomes_"         +
 			 tribe().get_worker_descr(becomes())->name() + "\" title=\""         +
-			 descname() + _("'s promotion") + "\"><img src=\"../" + name()       +
+			 (format(_("%s's promotion"))%descname()).str() +
+			 "\"><img src=\"../" + name()       +
 			 "/menu.png\" alt=\"" + descname(),
 			 HTMLReferences::Become,
 			 becomes());
@@ -785,7 +793,8 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 				(fw,
 				 name() + "/index_" + i18n::get_locale() + ".xhtml#worker_"       +
 				 tribe().get_worker_descr(i.current->first)->name()               +
-				 "\" title=\"" + descname() + _("'s employee")                    +
+				 "\" title=\"" +
+				 (format(_("%s's employee"))%descname()).str() +
 				 "\"><img src=\"../" + name() + "/menu.png\" alt=\"" + descname(),
 				 HTMLReferences::Employ,
 				 i.current->first, i.current->second);
@@ -805,7 +814,8 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 					(fw,
 					 name() + "/index_" + i18n::get_locale() + ".xhtml#input_"     +
 					 tribe().get_ware_descr(i.current->first)->name().c_str()      +
-					 "\" title=\"" + descname() + _("'s input")                    +
+					 "\" title=\"" +
+					 (format(_("%s's input"))%descname()).str() +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
 					 descname(),
 					 HTMLReferences::Input,
@@ -827,7 +837,8 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 					(fw,
 					 name() + "/index_" + i18n::get_locale() + ".xhtml#output_"    +
 					 tribe().get_ware_descr(*i.current)->name().c_str()            +
-					 "\" title=\"" + descname() + _("'s output")                   +
+					 "\" title=\"" +
+					 (format(_("%s's output"))%descname()).str() +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
 					 descname(),
 					 HTMLReferences::Output,
@@ -840,7 +851,8 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 					(fw,
 					 name() + "/index_" + i18n::get_locale() + ".xhtml#output_"    +
 					 tribe().get_worker_descr(*i.current)->name().c_str()          +
-					 "\" title=\"" + descname() + _("'s output")                   +
+					 "\" title=\"" +
+					 (format(_("%s's output"))%descname()).str() +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
 					 descname(),
 					 HTMLReferences::Output,
