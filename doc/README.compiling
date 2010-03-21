@@ -20,6 +20,7 @@ for Widelands makes direct use of them:
    - gettext (look at FAQ if you have problems with -lintl)
    - libpng
    - zlib
+   - libjpeg
    - libiconv (only needed under win32)
    - libintl (only needed under win32)
 
@@ -34,7 +35,8 @@ or
 
 For compiling, you will also need
    - Python >= 2.3
-   - scons >= 1.0.0 (optional but recommended, see below)
+   - CMake 2.6 (strictly recommended)
+   - scons >= 1.0.0 (optional, if you don't want to use CMake yet, see below)
 If you have a desparate need to use older Python versions then tell us. It'd be
 possible, but the inconvenience seems not to be worthwile so far.
 
@@ -51,17 +53,154 @@ If you are a developer, you might (optionally!) make use of the following softwa
    - Krazy
      A sourcecode checker from the KDE project, subversion repository available at
      svn://anonsvn.kde.org/home/kde/trunk/quality/krazy2
-
+   - Doxygen
+     Used to generate source code documentation.
 
 
 ============
-=   Unix   =
+=Unix/Linux=
 ============
+
+CMake
+------------------
+The currently most recommended way to build Widelands is using CMake.
+The other ways (SCons, Make standalone) will probably be removed before release of Build16.
+
+The easiest way to start with CMake is the script build_and_run.sh, which is primarily
+used as entry point for beginners. It creates the out of source build directory
+(see below for details), initializes the cmake commands, compiles the sources and then starts the game.
+
+If you want to do it manually, follow this path:
+
+- Create a build directory.
+  CMake is a so called out of source build tool. That means, the build runs in a different
+  directory than where the sources are located, avoiding polluting the sources 
+  directory (and the ignore entries for the VCS systems). If you know SCons, this is different.
+  The build directory can either be a path within your sources directory, or a directory
+  at a completely independent location. In this example, we are using the subdirectory way:
+  Go to your widelands directory, and issue:  
+
+  $ mkdir -p build/compile
+
+  Then go to that build directory
+
+  $ cd build/compile
+
+- Prepare compiling using CMake
+  CMake is in fact only a tool to prepare compilation (and more). It creates lots of
+  Makefiles depending on your input and things it learns from the environment and of course
+  the scripts the widelands developers provided. The most important parameter for the CMake
+  command is the path where your sources are located. This path can be relative or absolute.
+
+  $ cmake ../..
+
+  This command should look for a couple of libraries and initialize the Makefiles.
+
+- Compile and link a widelands executable.
+  As you already know, CMake only prepares the compilation, the Makefiles. Now run make.
+
+  $ make
+
+- Install the game.
+  Unfortunately, you cannot play a game from out of source builds. You have to prepare the
+  directory layout to follow the rules of Linux/Unix in a way Widelands finds it. In the
+  means of CMake/make this means "installing".
+  Since you did not specify any different settings, CMake prepared everything to install
+  widelands to /usr/local - this is the default for Linux. Writing files there will require
+  root privileges, as this is outside of your home directory.
+
+  $ sudo make install
+
+  Now everything is installed in /usr/local, and you can run widelands:
+
+  $ widelands
+
+- Tweak the setup: different install directory.
+  Say, you don't want to install in /usr/local, but in /usr. This can be done by issuing
+  this as a parameter to CMake. Parameters are stated by -Dparameter=value.
+
+  $ cmake -DCMAKE_INSTALL_PREFIX=/usr ../..
+
+  That's it. Widelands will now be installed to /usr if you issue:
+
+  $ sudo make install
+
+- Tweak the setup even more: portable directory layout.
+  Say, you don't want to install to /usr, but only in your home directory. You don't need
+  or want the twin directory layout of /usr/local/share/games/widelands and /usr/local/games.
+  You want everything in one directory, and run from this directory. This can be done:
+
+  $ cmake -DWL_PORTABLE=true -DCMAKE_INSTALL_PREFIX=~/widelands-compiled ../..
+
+  The -DWL_PORTABLE=true parameter changes directory layout in a way so that everything runs
+  from one directory, and that directory is, after installing, even movable - yes, portable.
+
+  $ make install
+  $ cd ~/widelands-compiled
+  $ ./widelands
+
+- Additional parameters CMake understands.
+  This topic is already "enhanced CMaking", everything necessary is already taught.
+
+  - Versioning.
+    Without any settings, CMake refers to BZR revision for versioning. If you want to change that,
+    you can use the different ways:
+
+    $ cmake -DWL_VERSION_STANDARD=true ../..
+
+    This uses a fixed set of versioning settings from the CMake script, provided by developers.
+
+    $ cmake -DWL_VERSION_MAJOR=0 -DWL_VERSION_MINOR=15 -DWL_VERSION_ADDITION="DEV"
+
+    This defines the versions manually.
+
+  - Build type (Release or Debug build)
+    When omitting the Build type, CMake decides upon finding of WL_RELEASE file if it should do
+    a Release or Debug build.
+    
+    $ cmake -DCMAKE_BUILD_TYPE=Release ../..
+    $ cmake -DCMAKE_BUILD_TYPE=Debug ../..
+
+    This setting overrides the automatic decision.
+
+  - Install directories
+    Instead of using the predefined directory layout, you can also modify the details.
+
+    $ cmake -DWL_INSTALL_DATADIR=share/widelands ../..
+
+    This setting defines a path for the data directory relative to CMAKE_INSTALL_PREFIX.
+
+    $ cmake -DWL_INSTALL_BINDIR=gplgames ../..
+
+    This setting defines a path for the executable relative to CMAKE_INSTALL_PREFIX.
+
+    $ cmake -DWL_INSTALL_LOCALEDIR=/usr/locales/widelands ../..
+
+    This setting defines a path for the locales of widelands.
+    This path is either absolute (as in this example) or relative to WL_INSTALL_DATADIR
+    (for portable setups).
+
+- Additional commands you can use with make:
+
+  - make lang
+    In Debug build types, this creates the locale dir and the localizations in it.
+
+  - make codecheck
+    This runs codechecking. Obviously a developer command.
+
+  - make optimizepics
+    This runs the optimization task for PNG files. Takes very long to run.
+    Normally you don't need to do this. This is a developer command.
+
+  - make doc
+    This runs source code documentation. Takes very long and lots of disk space.
+    Obviously a developer command.
 
 scons
 ------------------
-Using scons for building is the preferred way starting with Widelands-build10.
-We still support make, but the motivation to do so is dwindling rapidly.
+Using scons for building is the old way starting with Widelands-build10, ending with build15.
+
+We also still support make, but the motivation to do so is dwindling rapidly.
 
 Change to the Widelands directory and execute "scons". That's it.
 
