@@ -73,6 +73,18 @@ typedef struct PersistInfo_t {
 #endif
 } PersistInfo;
 
+typedef struct UnpersistInfo_t {
+	lua_State *L;
+	ZIO zio;
+	Widelands::FileRead * fr;
+#ifdef PLUTO_DEBUG
+	int level;
+#endif
+} UnpersistInfo;
+
+static void unpersist(UnpersistInfo *upi);
+
+
 #ifdef PLUTO_DEBUG
 void printindent(int indent)
 {
@@ -603,6 +615,14 @@ static void persistboolean(PersistInfo *pi)
 	int b = lua_toboolean(pi->L, -1);
 	pi->writer(pi->L, &b, sizeof(int), pi->ud);
 }
+static void unpersistboolean(UnpersistInfo *upi)
+{
+					/* perms reftbl ... */
+	lua_checkstack(upi->L, 1);
+	lua_pushboolean(upi->L, upi->fr->Unsigned32());
+					/* perms reftbl ... bool */
+}
+
 
 static void persistlightuserdata(PersistInfo *pi)
 {
@@ -802,17 +822,6 @@ void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud, Widelands::Fi
 					/* perms rootobj */
 }
 
-typedef struct UnpersistInfo_t {
-	lua_State *L;
-	ZIO zio;
-	Widelands::FileRead * fr;
-#ifdef PLUTO_DEBUG
-	int level;
-#endif
-} UnpersistInfo;
-
-static void unpersist(UnpersistInfo *upi);
-
 /* The object is left on the stack. This is primarily used by unpersist, but
  * may be used by GCed objects that may incur cycles in order to preregister
  * the object. */
@@ -826,16 +835,6 @@ static void registerobject(int ref, UnpersistInfo *upi)
 					/* perms reftbl ... obj ref obj */
 	lua_settable(upi->L, 2);
 					/* perms reftbl ... obj */
-}
-
-static void unpersistboolean(UnpersistInfo *upi)
-{
-					/* perms reftbl ... */
-	int b;
-	lua_checkstack(upi->L, 1);
-	verify(LIF(Z,read)(&upi->zio, &b, sizeof(int)) == 0);
-	lua_pushboolean(upi->L, b);
-					/* perms reftbl ... bool */
 }
 
 static void unpersistlightuserdata(UnpersistInfo *upi)
