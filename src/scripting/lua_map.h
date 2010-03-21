@@ -232,7 +232,24 @@ public:
 	CASTED_GET(Flag);
 };
 
-class L_Road : public L_PlayerImmovable, public L_HasWorkers {
+// Small helper class that contains the commonalities between L_Road and
+// L_ProductionSite in relation to Worker employment.
+struct _Employer : public L_HasWorkers {
+	virtual int get_workers(lua_State * L);
+	virtual int set_workers(lua_State * L);
+
+	// TODO: add valid_workers here
+
+	virtual Widelands::PlayerImmovable * get(lua_State *, Widelands::Game &) = 0;
+
+protected:
+	virtual WorkersSet _valid_workers(Widelands::PlayerImmovable &) = 0;
+	virtual int _new_worker
+		(Widelands::PlayerImmovable &, Widelands::Game &,
+		 const Widelands::Worker_Descr*) = 0;
+};
+
+class L_Road : public L_PlayerImmovable, public _Employer {
 public:
 	LUNA_CLASS_HEAD(L_Road);
 
@@ -254,13 +271,16 @@ public:
 	/*
 	 * Lua Methods
 	 */
-	int get_workers(lua_State * L);
-	int set_workers(lua_State * L);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(Road);
+protected:
+	virtual WorkersSet _valid_workers(Widelands::PlayerImmovable &);
+	virtual int _new_worker
+		(Widelands::PlayerImmovable &, Widelands::Game &,
+		 const Widelands::Worker_Descr*);
 };
 
 
@@ -298,7 +318,7 @@ public:
 
 
 class L_ProductionSite : public L_Building,
-	public L_HasWares, public L_HasWorkers {
+	public _Employer, public L_HasWares {
 public:
 	LUNA_CLASS_HEAD(L_ProductionSite);
 
@@ -317,8 +337,6 @@ public:
 	/*
 	 * Lua Methods
 	 */
-	int get_workers(lua_State * L);
-	int set_workers(lua_State * L);
 	int set_wares(lua_State * L);
 	int get_wares(lua_State * L);
 
@@ -326,6 +344,12 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(ProductionSite);
+
+protected:
+	virtual WorkersSet _valid_workers(Widelands::PlayerImmovable &);
+	virtual int _new_worker
+		(Widelands::PlayerImmovable &, Widelands::Game &,
+		 const Widelands::Worker_Descr*);
 };
 
 class L_MilitarySite : public L_Building {

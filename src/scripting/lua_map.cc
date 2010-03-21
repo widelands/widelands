@@ -95,6 +95,109 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 }
 #undef CAST_TO_LUA
 
+/*
+ * ========================================================================
+ *                         HELPER CLASSES
+ * ========================================================================
+ */
+int _Employer::set_workers(lua_State * L)
+{
+	Game & g = get_game(L);
+	PlayerImmovable * pi = get(L, g);
+	const Tribe_Descr & tribe = pi->owner().tribe();
+
+	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
+
+	WorkersMap c_workers;
+	container_iterate_const(PlayerImmovable::Workers, pi->get_workers(), w) {
+		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
+		if (not c_workers.count(i))
+			c_workers.insert(L_ProductionSite::WorkerAmount(i, 1));
+		else
+			c_workers[i] += 1;
+		if (not setpoints.count(i))
+			setpoints.insert(WorkerAmount(i, 0));
+	}
+
+	WorkersSet valid_workers = _valid_workers(*pi);
+
+	// The idea is to change as little as possible
+	container_iterate_const(WorkersMap, setpoints, sp) {
+		const Worker_Descr * wdes = tribe.get_worker_descr(sp->first);
+		if (not valid_workers.count(sp->first))
+				  report_error
+					  (L, "<%s> can't be employed here!",
+					   wdes->name().c_str());
+
+		uint32_t cur = 0;
+		WorkersMap::iterator i = c_workers.find(sp->first);
+		if (i != c_workers.end())
+			cur = i->second;
+
+		int d = sp->second - cur;
+		if (d < 0) {
+			while (d) {
+				container_iterate_const
+					(PlayerImmovable::Workers, pi->get_workers(), w)
+				{
+					Ware_Index i = tribe.worker_index((*w.current)->descr().name());
+					if(i == sp->first) {
+						const_cast<Worker *>(*w.current)->remove(g);
+						++d;
+						break;
+					}
+				}
+			}
+		} else if (d > 0) {
+			for ( ; d; --d)
+				if (_new_worker(*pi, g, wdes))
+						return report_error(L, "No space left for this worker");
+		}
+	}
+	return 0;
+}
+
+int _Employer::get_workers(lua_State * L)
+{
+	PlayerImmovable * pi = get(L, get_game(L));
+	Tribe_Descr const & tribe = pi->owner().tribe();
+
+	bool return_number = false;
+	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
+
+	WorkersSet valid_workers = _valid_workers(*pi);
+
+	WorkersMap c_workers;
+	container_iterate_const(PlayerImmovable::Workers, pi->get_workers(), w) {
+		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
+		if (not c_workers.count(i))
+			c_workers.insert(WorkerAmount(i, 1));
+		else
+			c_workers[i] += 1;
+	}
+
+	if (set.size() == tribe.get_nrworkers().value()) // Wants all returned
+		set = valid_workers;
+
+	if (not return_number)
+		lua_newtable(L);
+
+	container_iterate_const(WorkersSet, set, i) {
+		uint32_t cnt = 0;
+		if (c_workers.count(*i.current))
+			cnt = c_workers[*i.current];
+
+		if (return_number) {
+			lua_pushuint32(L, cnt);
+			break;
+		} else {
+			lua_pushstring(L, tribe.get_worker_descr(*i.current)->name());
+			lua_pushuint32(L, cnt);
+			lua_rawset(L, -3);
+		}
+	}
+	return 1;
+}
 
 
 /*
@@ -783,127 +886,43 @@ int L_Road::get_type(lua_State * L) {
  ==========================================================
  */
 
-// TODO: This is nearly identical to L_ProductionSite::set_workers
-int L_Road::set_workers(lua_State * L) {
-	Game & g = get_game(L);
-	Road * r = get(L, g);
-	const Tribe_Descr & tribe = r->owner().tribe();
-
-	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
-
-	WorkersMap c_workers;
-	container_iterate_const(PlayerImmovable::Workers, r->get_workers(), w) {
-		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
-		if (not c_workers.count(i))
-			c_workers.insert(L_ProductionSite::WorkerAmount(i, 1));
-		else
-			c_workers[i] += 1;
-		if (not setpoints.count(i))
-			setpoints.insert(WorkerAmount(i, 0));
-	}
-
+// This is for get_/set_ workers which is implemented in _Employer
+L_HasWorkers::WorkersSet L_Road::_valid_workers
+		(PlayerImmovable & pi)
+{
 	WorkersSet valid_workers;
-	valid_workers.insert(tribe.worker_index("carrier"));
+	valid_workers.insert(pi.owner().tribe().worker_index("carrier"));
+	return valid_workers;
+}
+int L_Road::_new_worker
+	(PlayerImmovable & pi, Game & g, const Worker_Descr * wdes)
+{
+	Road & r = static_cast<Road &>(pi);
 
-	// The idea is to change as little as possible
-	container_iterate_const(WorkersMap, setpoints, sp) {
-		const Worker_Descr * wdes = tribe.get_worker_descr(sp->first);
-		if (not valid_workers.count(sp->first))
-				  report_error
-					  (L, "<%s> is not a valid worker for this site!",
-					   wdes->name().c_str());
+	if (r.get_workers().size())
+		return -1; // No space
 
-		uint32_t cur = 0;
-		WorkersMap::iterator i = c_workers.find(sp->first);
-		if (i != c_workers.end())
-			cur = i->second;
+	// Determine Idle position.
+	Flag & start = r.get_flag(Road::FlagStart);
+	Coords idle_position = start.get_position();
+	const Path & path = r.get_path();
+	Path::Step_Vector::size_type idle_index = r.get_idle_index();
+	for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
+		g.map().get_neighbour(idle_position, path[i], &idle_position);
 
-		// Determine Idle position.
-		Flag & start = r->get_flag(Road::FlagStart);
-		Coords idle_position = start.get_position();
-		const Path & path = r->get_path();
-		Path::Step_Vector::size_type idle_index = r->get_idle_index();
-		for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
-			g.map().get_neighbour(idle_position, path[i], &idle_position);
+	Carrier & carrier = ref_cast<Carrier, Worker>
+		(wdes->create (g, r.owner(), &r, idle_position));
+	carrier.start_task_road(g);
 
-		int d = sp->second - cur;
-		if (d < 0) {
-			while (d) {
-				container_iterate_const
-					(PlayerImmovable::Workers, r->get_workers(), w)
-				{
-					Ware_Index i = tribe.worker_index((*w.current)->descr().name());
-					if(i == sp->first) {
-						const_cast<Worker *>(*w.current)->remove(g);
-						++d;
-						break;
-					}
-				}
-			}
-		} else if (d > 0) {
-			if (r->get_workers().size())
-					return report_error(L, "No space left for this worker");
-			Carrier & carrier = ref_cast<Carrier, Worker>
-				(wdes->create (g, r->owner(), r, idle_position));
-			carrier.start_task_road(g);
-
-			r->assign_carrier(carrier, 0);
-		}
-	}
+	r.assign_carrier(carrier, 0);
 	return 0;
 }
-
-// documented in base class
-// TODO: except for the valid workers, this is the same as for productionsite
-int L_Road::get_workers(lua_State * L) {
-	Road * r = get(L, get_game(L));
-	Tribe_Descr const & tribe = r->owner().tribe();
-
-	bool return_number = false;
-	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
-
-	WorkersSet valid_workers;
-	valid_workers.insert(tribe.worker_index("carrier"));
-
-	WorkersMap c_workers;
-	container_iterate_const(PlayerImmovable::Workers, r->get_workers(), w) {
-		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
-		if (not c_workers.count(i))
-			c_workers.insert(L_ProductionSite::WorkerAmount(i, 1));
-		else
-			c_workers[i] += 1;
-	}
-
-	if (set.size() == tribe.get_nrworkers().value()) // Wants all returned
-		set = valid_workers;
-
-	if (not return_number)
-		lua_newtable(L);
-
-	container_iterate_const(WorkersSet, set, i) {
-		uint32_t cnt = 0;
-		if (c_workers.count(*i.current))
-			cnt = c_workers[*i.current];
-
-		if (return_number) {
-			lua_pushuint32(L, cnt);
-			break;
-		} else {
-			lua_pushstring(L, tribe.get_worker_descr(*i.current)->name());
-			lua_pushuint32(L, cnt);
-			lua_rawset(L, -3);
-		}
-	}
-	return 1;
-}
-
 
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
-
 
 
 /* RST
@@ -1311,109 +1330,21 @@ int L_ProductionSite::get_valid_wares(lua_State * L) {
  ==========================================================
  */
 
-// documented in parent class
-int L_ProductionSite::set_workers(lua_State * L) {
-	Game & g = get_game(L);
-	ProductionSite * ps = get(L, g);
-	const Tribe_Descr & tribe = ps->owner().tribe();
-
-	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
-
-	WorkersMap c_workers;
-	container_iterate_const(PlayerImmovable::Workers, ps->get_workers(), w) {
-		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
-		if (not c_workers.count(i))
-			c_workers.insert(L_ProductionSite::WorkerAmount(i, 1));
-		else
-			c_workers[i] += 1;
-		if (not setpoints.count(i))
-			setpoints.insert(WorkerAmount(i, 0));
-	}
-
+// This is for get_/set_ workers which is implemented in _Employer
+L_HasWorkers::WorkersSet L_ProductionSite::_valid_workers
+		(PlayerImmovable & pi)
+{
+	ProductionSite & ps = static_cast<ProductionSite &>(pi);
 	WorkersSet valid_workers;
-	container_iterate_const(Ware_Types, ps->descr().working_positions(), i)
-		valid_workers.insert(i.current->first);
-
-	// The idea is to change as little as possible
-	container_iterate_const(WorkersMap, setpoints, sp) {
-		const Worker_Descr * wdes = tribe.get_worker_descr(sp->first);
-		if (not valid_workers.count(sp->first))
-				  report_error
-					  (L, "%s is not a valid worker for this site!",
-					   wdes->name().c_str());
-
-		uint32_t cur = 0;
-		WorkersMap::iterator i = c_workers.find(sp->first);
-		if (i != c_workers.end())
-			cur = i->second;
-
-		int d = sp->second - cur;
-		if (d < 0) {
-			while (d) {
-				container_iterate_const
-					(PlayerImmovable::Workers, ps->get_workers(), w)
-				{
-					Ware_Index i = tribe.worker_index((*w.current)->descr().name());
-					if(i == sp->first) {
-						const_cast<Worker *>(*w.current)->remove(g);
-						++d;
-						break;
-					}
-				}
-			}
-		} else if (d > 0) {
-			// add workers
-			for (int32_t i = 0; i < d; i++) {
-				if (ps->warp_worker(g, *wdes))
-						return report_error(L, "No space left for this worker");
-			}
-		}
-	}
-	return 0;
+	container_iterate_const(Ware_Types, ps.descr().working_positions(), i)
+			valid_workers.insert(i.current->first);
+	return valid_workers;
 }
-
-// documented in parent class
-int L_ProductionSite::get_workers(lua_State * L) {
-	ProductionSite * ps = get(L, get_game(L));
-	Tribe_Descr const & tribe = ps->owner().tribe();
-
-	bool return_number = false;
-	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
-
-	WorkersSet valid_workers;
-	container_iterate_const(Ware_Types, ps->descr().working_positions(), i)
-		valid_workers.insert(i.current->first);
-
-	WorkersMap c_workers;
-	container_iterate_const(PlayerImmovable::Workers, ps->get_workers(), w) {
-		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
-		if (not c_workers.count(i))
-			c_workers.insert(L_ProductionSite::WorkerAmount(i, 1));
-		else
-			c_workers[i] += 1;
-	}
-
-	if (set.size() == tribe.get_nrworkers().value()) // Wants all returned
-		set = valid_workers;
-
-	if (not return_number)
-		lua_newtable(L);
-
-	container_iterate_const(WorkersSet, set, i) {
-		uint32_t cnt = 0;
-		if (c_workers.count(*i.current))
-			cnt = c_workers[*i.current];
-
-		if (return_number) {
-			lua_pushuint32(L, cnt);
-			break;
-		} else {
-			lua_pushstring(L, tribe.get_worker_descr(*i.current)->name());
-			lua_pushuint32(L, cnt);
-			lua_rawset(L, -3);
-		}
-	}
-	return 1;
+int L_ProductionSite::_new_worker
+	(PlayerImmovable & pi, Game & g, const Worker_Descr * wdes)
+{
+	ProductionSite & ps = static_cast<ProductionSite &>(pi);
+	return ps.warp_worker(g, *wdes);
 }
 
 // documented in parent class
