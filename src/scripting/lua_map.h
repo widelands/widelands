@@ -238,12 +238,12 @@ struct _Employer : public L_HasWorkers {
 	virtual int get_workers(lua_State * L);
 	virtual int set_workers(lua_State * L);
 
-	// TODO: add valid_workers here
+	int get_valid_workers(lua_State * L);
 
 	virtual Widelands::PlayerImmovable * get(lua_State *, Widelands::Game &) = 0;
 
 protected:
-	virtual WorkersSet _valid_workers(Widelands::PlayerImmovable &) = 0;
+	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &) = 0;
 	virtual int _new_worker
 		(Widelands::PlayerImmovable &, Widelands::Game &,
 		 const Widelands::Worker_Descr*) = 0;
@@ -265,7 +265,6 @@ public:
 	int get_length(lua_State * L);
 	int get_start_flag(lua_State * L);
 	int get_end_flag(lua_State * L);
-	int get_valid_workers(lua_State * L);
 	int get_type(lua_State * L);
 
 	/*
@@ -277,7 +276,7 @@ public:
 	 */
 	CASTED_GET(Road);
 protected:
-	virtual WorkersSet _valid_workers(Widelands::PlayerImmovable &);
+	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
 	virtual int _new_worker
 		(Widelands::PlayerImmovable &, Widelands::Game &,
 		 const Widelands::Worker_Descr*);
@@ -331,7 +330,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_valid_workers(lua_State * L);
 	int get_valid_wares(lua_State * L);
 
 	/*
@@ -346,7 +344,7 @@ public:
 	CASTED_GET(ProductionSite);
 
 protected:
-	virtual WorkersSet _valid_workers(Widelands::PlayerImmovable &);
+	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
 	virtual int _new_worker
 		(Widelands::PlayerImmovable &, Widelands::Game &,
 		 const Widelands::Worker_Descr*);

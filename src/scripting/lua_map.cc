@@ -81,7 +81,7 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 			else if (!strcmp(type_name, "militarysite"))
 				return CAST_TO_LUA(MilitarySite);
 			else if (!strcmp(type_name, "trainingsite"))
-				return CAST_TO_LUA(ProductionSite); // TODO: need trainingssite
+				return CAST_TO_LUA(ProductionSite);
 			else
 				return CAST_TO_LUA(Building);
 		}
@@ -119,7 +119,7 @@ int _Employer::set_workers(lua_State * L)
 			setpoints.insert(WorkerAmount(i, 0));
 	}
 
-	WorkersSet valid_workers = _valid_workers(*pi);
+	WorkersMap valid_workers = _valid_workers(*pi);
 
 	// The idea is to change as little as possible
 	container_iterate_const(WorkersMap, setpoints, sp) {
@@ -165,7 +165,7 @@ int _Employer::get_workers(lua_State * L)
 	bool return_number = false;
 	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
 
-	WorkersSet valid_workers = _valid_workers(*pi);
+	WorkersMap valid_workers = _valid_workers(*pi);
 
 	WorkersMap c_workers;
 	container_iterate_const(PlayerImmovable::Workers, pi->get_workers(), w) {
@@ -176,8 +176,11 @@ int _Employer::get_workers(lua_State * L)
 			c_workers[i] += 1;
 	}
 
-	if (set.size() == tribe.get_nrworkers().value()) // Wants all returned
-		set = valid_workers;
+	if (set.size() == tribe.get_nrworkers().value()) { // Wants all returned
+		set.clear();
+		container_iterate(WorkersMap, valid_workers, i)
+			set.insert(i.current->first);
+	}
 
 	if (not return_number)
 		lua_newtable(L);
@@ -199,6 +202,21 @@ int _Employer::get_workers(lua_State * L)
 	return 1;
 }
 
+int _Employer::get_valid_workers(lua_State * L) {
+	PlayerImmovable * pi = get(L, get_game(L));
+	Tribe_Descr const & tribe = pi->owner().tribe();
+
+	WorkersMap valid_workers = _valid_workers(*pi);
+
+	lua_newtable(L);
+	container_iterate_const(WorkersMap, valid_workers, i) {
+		lua_pushstring
+			(L, tribe.get_worker_descr(i.current->first)->name().c_str());
+		lua_pushuint32(L, i.current->second);
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
 
 /*
  * ========================================================================
@@ -233,8 +251,8 @@ HasWares
 
 		* the string :const:`all`.
 			  In this case the function will return a
-			  :class:`table` of (ware name,amount) pairs that gives information about
-			  all ware information available for this object.
+			  :class:`table` of (ware name,amount) pairs that gives information
+			  about all ware information available for this object.
 		* a ware name.
 			In this case a single integer is returned. No check is made
 			if this ware makes sense for this location, you can for example ask a
@@ -263,6 +281,22 @@ HasWares
 */
 
 /* RST
+	.. attribute:: valid_wares
+
+		(RO) A :class:`table` of (ware_name, count) if storage is somehow
+		constrained in this location. For example for a
+		:class:`~wl.map.ProductionSite` this is the information what wares
+		and how much can be stored as inputs. For unconstrained storage (like
+		:class:`~wl.map.Warehouse`) this is :const:`nil`.
+
+		You can use this to quickly fill a building:
+
+		.. code-block:: lua
+
+			if b.valid_wares then b:set_wares(b.valid_wares) end
+*/
+
+/* RST
 HasWorkers
 ----------
 
@@ -285,6 +319,12 @@ HasWorkers
 		Similar to :meth:`HasWares.set_wares`.
 */
 
+/* RST
+	.. attribute:: valid_workers
+
+		(RO) Similar to :attr:`HasWares.valid_wares` but for workers in this
+		location.
+*/
 
 /*
  ==========================================================
@@ -469,8 +509,6 @@ int L_MapObject::__eq(lua_State * L) {
 
 		Removes this object from the game immediately. If you want to destroy an
 		object as if the player had see :func:`destroy`.
-
-		:returns: :const:`nil`
 */
 int L_MapObject::remove(lua_State * L) {
 	Game & game = get_game(L);
@@ -845,21 +883,6 @@ int L_Road::get_end_flag(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: valid_workers
-
-		(RO) an array of names of workers that are allowed to work in this
-		productionsite. If of one type more than one is allowed, it will appear
-		more than once.
-*/
-int L_Road::get_valid_workers(lua_State * L) {
-	lua_newtable(L);
-	lua_pushuint32(L, 1);
-	lua_pushstring(L, "carrier");
-	lua_rawset(L, -3);
-	return 1;
-}
-
-/* RST
 	.. attribute:: type
 
 		(RO) Type of road. Can be any either of:
@@ -887,11 +910,12 @@ int L_Road::get_type(lua_State * L) {
  */
 
 // This is for get_/set_ workers which is implemented in _Employer
-L_HasWorkers::WorkersSet L_Road::_valid_workers
+L_HasWorkers::WorkersMap L_Road::_valid_workers
 		(PlayerImmovable & pi)
 {
-	WorkersSet valid_workers;
-	valid_workers.insert(pi.owner().tribe().worker_index("carrier"));
+	WorkersMap valid_workers;
+	valid_workers.insert
+		(WorkerAmount(pi.owner().tribe().worker_index("carrier"), 1));
 	return valid_workers;
 }
 int L_Road::_new_worker
@@ -1276,39 +1300,7 @@ const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: valid_workers
-
-		(RO) an array of names of workers that are allowed to work in this
-		productionsite. If of one type more than one is allowed, it will appear
-		more than once.
-*/
-int L_ProductionSite::get_valid_workers(lua_State * L) {
-	Game & g = get_game(L);
-	ProductionSite * ps = get(L, g);
-
-	lua_newtable(L);
-
-	Tribe_Descr const & tribe = ps->owner().tribe();
-	uint32_t idx = 1;
-	container_iterate_const(Ware_Types, ps->descr().working_positions(), i) {
-		std::string name = tribe.get_worker_descr(i.current->first)->name();
-
-		for (uint32_t j = 0; j < i.current->second; j++) {
-			lua_pushuint32(L, idx++);
-			lua_pushstring(L, name);
-			lua_rawset(L, -3);
-		}
-	}
-	return 1;
-}
-
-/* RST
-	.. attribute:: valid_wares
-
-		(RO) An array of (name,count) pairs. This describes what wares and how
-		many of them can be stored inside the building.
-*/
+// documented in parent class
 int L_ProductionSite::get_valid_wares(lua_State * L) {
 	Game & g = get_game(L);
 	ProductionSite * ps = get(L, g);
@@ -1331,14 +1323,14 @@ int L_ProductionSite::get_valid_wares(lua_State * L) {
  */
 
 // This is for get_/set_ workers which is implemented in _Employer
-L_HasWorkers::WorkersSet L_ProductionSite::_valid_workers
+L_HasWorkers::WorkersMap L_ProductionSite::_valid_workers
 		(PlayerImmovable & pi)
 {
 	ProductionSite & ps = static_cast<ProductionSite &>(pi);
-	WorkersSet valid_workers;
+	WorkersMap rv;
 	container_iterate_const(Ware_Types, ps.descr().working_positions(), i)
-			valid_workers.insert(i.current->first);
-	return valid_workers;
+			rv.insert(WorkerAmount(i.current->first, i.current->second));
+	return rv;
 }
 int L_ProductionSite::_new_worker
 	(PlayerImmovable & pi, Game & g, const Worker_Descr * wdes)
@@ -1472,8 +1464,6 @@ int L_MilitarySite::get_max_soldiers(lua_State * L) {
 		Creates soldiers out of thin air. ``list`` is a table of soldier
 		descriptions and counts, see :meth:`wl.map.Warehouse.set_soldiers`
 		for a description.
-
-		:returns: :const:`nil`
 */
 int L_MilitarySite::warp_soldiers(lua_State * L) {
 	luaL_checktype(L, 2, LUA_TTABLE);

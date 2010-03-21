@@ -1,15 +1,15 @@
--- ==============
--- Testing roads 
--- ==============
-
-function _cnt_workers(i)
+-- -- ==============
+-- -- Testing roads
+-- -- ==============
+--
+function _cnt(i)
    local rv = 0
-   for name,cnt in pairs(i:get_workers("all")) do rv = rv + cnt end
+   for name,cnt in pairs(i) do rv = rv + cnt end
    return rv
 end
 
 -- ===================
--- Construction tests 
+-- Construction tests
 -- ===================
 road_construction_tests = lunit.TestCase("road construction tests")
 function road_construction_tests:setup()
@@ -66,7 +66,7 @@ function road_construction_tests:test_road_crosses_itself()
 end
 
 -- ============
--- Usage tests 
+-- Usage tests
 -- ============
 road_tests = lunit.TestCase("road tests")
 function road_tests:setup()
@@ -108,25 +108,25 @@ function road_tests:test_road_upcasting()
 end
 
 -- ====================
--- Creating of carrier 
+-- Creating of carrier
 -- ====================
 function road_tests:test_no_worker_at_creation()
-   assert_equal(0, _cnt_workers(self.r))
+   assert_equal(0, _cnt(self.r:get_workers("all")))
 end
 function road_tests:test_carrier_creation()
    self.r:set_workers("carrier",1)
-   assert_equal(1, _cnt_workers(self.r))
+   assert_equal(1, _cnt(self.r:get_workers("all")))
    assert_equal(1, self.r:get_workers("carrier"))
 end
 function road_tests:test_carrier_creation_and_deletion()
    self.r:set_workers("carrier",1)
-   assert_equal(1, _cnt_workers(self.r))
+   assert_equal(1, _cnt(self.r:get_workers("all")))
    assert_equal(1, self.r:get_workers("carrier"))
    self.r:set_workers("carrier",0)
-   assert_equal(0, _cnt_workers(self.r))
+   assert_equal(0, _cnt(self.r:get_workers("all")))
    assert_equal(0, self.r:get_workers("carrier"))
    self.r:set_workers("carrier",1)
-   assert_equal(1, _cnt_workers(self.r))
+   assert_equal(1, _cnt(self.r:get_workers("all")))
    assert_equal(1, self.r:get_workers("carrier"))
 end
 function road_tests:test_carrier_creation_not_a_carrier()
@@ -146,8 +146,8 @@ function road_tests:test_carrier_no_space()
    end)
 end
 function road_tests:test_valid_workers()
-   assert_equal(1, #self.r.valid_workers)
-   assert_equal("carrier", self.r.valid_workers[1])
+   assert_equal(1, _cnt(self.r.valid_workers))
+   assert_equal(1, self.r.valid_workers.carrier)
 end
 
 

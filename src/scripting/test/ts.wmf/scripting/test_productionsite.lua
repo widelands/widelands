@@ -2,9 +2,9 @@
 --                          ProductionSite Testings                         
 -- =======================================================================
    
-function _cnt_workers(i)
+function _cnt(i)
    local rv = 0
-   for name,cnt in pairs(i:get_workers("all")) do rv = rv + cnt end
+   for name,cnt in pairs(i) do rv = rv + cnt end
    return rv
 end
 
@@ -35,23 +35,22 @@ function productionsite_tests:teardown()
    end)
 end
 function productionsite_tests:test_no_workers_initially()
-   assert_equal(0, _cnt_workers(self.inn))
-   assert_equal(0, _cnt_workers(self.warmill))
+   assert_equal(0, _cnt(self.inn:get_workers("all")))
+   assert_equal(0, _cnt(self.warmill:get_workers("all")))
 end
 function productionsite_tests:test_valid_workers()
-   assert_equal(2, #self.inn.valid_workers)
-   assert_equal("innkeeper", self.inn.valid_workers[1])
-   assert_equal("innkeeper", self.inn.valid_workers[2])
-   assert_equal(2, #self.warmill.valid_workers)
-   assert_equal("master-blacksmith", self.warmill.valid_workers[1])
-   assert_equal("blacksmith", self.warmill.valid_workers[2])
+   assert_equal(2, _cnt(self.inn.valid_workers))
+   assert_equal(2, self.inn.valid_workers.innkeeper)
+   assert_equal(2, _cnt(self.warmill.valid_workers))
+   assert_equal(1, self.warmill.valid_workers.blacksmith)
+   assert_equal(1, self.warmill.valid_workers["master-blacksmith"])
 end
 function productionsite_tests:test_set_workers()
    self.inn:set_workers("innkeeper", 1)
-   assert_equal(1, _cnt_workers(self.inn))
+   assert_equal(1, _cnt(self.inn:get_workers("all")))
    assert_equal(1, self.inn:get_workers("innkeeper"))
    self.inn:set_workers{innkeeper=2}
-   assert_equal(2, _cnt_workers(self.inn))
+   assert_equal(2, _cnt(self.inn:get_workers("all")))
    assert_equal(2, self.inn:get_workers("innkeeper"))
    local rv = self.inn:get_workers{"innkeeper", "carrier"}
    assert_equal(2, rv.innkeeper)
@@ -60,21 +59,21 @@ function productionsite_tests:test_set_workers()
 end
 function productionsite_tests:test_set_workers_warmill()
    self.warmill:set_workers("master-blacksmith",1)
-   assert_equal(1, _cnt_workers(self.warmill))
+   assert_equal(1, _cnt(self.warmill:get_workers("all")))
    local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
    assert_equal(0, rv.blacksmith)
    assert_equal(1, rv["master-blacksmith"])
    assert_equal(0, rv.carrier)
 
    self.warmill:set_workers("blacksmith",1)
-   assert_equal(1, _cnt_workers(self.warmill))
+   assert_equal(1, _cnt(self.warmill:get_workers("all")))
    local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
    assert_equal(1, rv.blacksmith)
    assert_equal(0, rv["master-blacksmith"])
    assert_equal(0, rv.carrier)
-   
+
    self.warmill:set_workers{blacksmith=1, ["master-blacksmith"] = 1}
-   assert_equal(2, _cnt_workers(self.warmill))
+   assert_equal(2, _cnt(self.warmill:get_workers("all")))
    local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
    assert_equal(1, rv.blacksmith)
    assert_equal(1, rv["master-blacksmith"])

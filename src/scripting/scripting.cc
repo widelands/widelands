@@ -36,14 +36,11 @@
 
 // TODO: make pickling independent of OS by using widelands Stream*
 //
-// TODO: clean mess up with warp_workers, set_workers. All should have one
-//    API
-// TODO: what to do with valid_wares and valid_workers? Interfaces?
-// TODO: rework all lua scripts to use set_workers and get_workers (and set_wares, 
+// TODO: rework all lua scripts to use set_workers and get_workers (and set_wares,
 // 		get_wares).
 // TODO: rethink position, location, field. Should maybe be field in all instances
-// TODO: readd the old CheckEventQueue package in loading so that games no longer work,
-//     but can still be loaded.
+// TODO: cleanup set_soldiers, get_soldiers, warp_soldiers.
+// TODO: implement trainingssite
 
 // FUTURE: access to player stock via Player.get_wares and get_workers
 // FUTURE: access to constructionsites via Player.get_buildings
