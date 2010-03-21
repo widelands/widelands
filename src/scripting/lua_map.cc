@@ -1460,7 +1460,7 @@ int L_MilitarySite::get_max_soldiers(lua_State * L) {
 /* RST
 	.. method:: warp_soldiers(list)
 
-		The equivalent to :meth:`wl.map.ProductionSite.warp_workers`.
+		The equivalent to :meth:`~wl.map.HasWorkers.set_workers`.
 		Creates soldiers out of thin air. ``list`` is a table of soldier
 		descriptions and counts, see :meth:`wl.map.Warehouse.set_soldiers`
 		for a description.

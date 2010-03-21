@@ -46,7 +46,7 @@ function connected_road(p, start, cmd, g_create_carriers)
          r = p:place_road(start, unpack(moves))
          start = r.end_flag
          if create_carriers then
-            r:warp_workers{"carrier"}
+            r:set_workers("carrier", 1)
          end
          moves = {}
       end
@@ -90,9 +90,7 @@ function prefilled_buildings(p, ...)
    for idx,bdescr in ipairs({...}) do
       b = p:place_building(bdescr[1], wl.map.Field(bdescr[2],bdescr[3]))
       -- Fill with workers
-      if b.valid_workers and b.warp_workers then
-         b:warp_workers(b.valid_workers)
-      end
+      if b.valid_workers then b:set_workers(b.valid_workers) end
       if bdescr.workers then b:set_workers(bdescr.workers) end
       -- Fill with soldiers
       if b.max_soldiers and b.warp_soldiers then
