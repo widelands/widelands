@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-14 15:51+0100\n"
-"PO-Revision-Date: 2010-03-14 17:22+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2010-03-20 18:30+0000\n"
+"Last-Translator: Dwarik <victor.pelt@gmail.com>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-15 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-03-21 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -1509,7 +1509,7 @@ msgstr "er zijn geen knoppen, er is er tenminste één vereist"
 #: ../../src/events/event_message_box.cc:149
 #, c-format
 msgid "is not modal although %s=%s"
-msgstr ""
+msgstr "is niet modaal alhoewel %s=%s"
 
 #: ../../src/events/event_message_box.cc:154
 #, c-format
@@ -1519,7 +1519,7 @@ msgstr "%s refereert naar \"%s\", wat geen timer is"
 #: ../../src/events/event_message_box.cc:169
 #, c-format
 msgid "(message box): %s"
-msgstr ""
+msgstr "(berichten): %s"
 
 #: ../../src/events/event_move_view.cc:50
 #: ../../src/events/event_player_area.cc:55
@@ -1576,7 +1576,7 @@ msgstr "geen werker-types"
 #: ../../src/events/event_player_worker_types.cc:63
 #, c-format
 msgid "(player worker types): %s"
-msgstr ""
+msgstr "(speler werker types): %s"
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
@@ -1616,22 +1616,22 @@ msgstr "stam van de speler definieert geen vlag-stijl \"%s\""
 #: ../../src/events/event_set_player_flag_style.cc:45
 #, c-format
 msgid "(set player flag style): %s"
-msgstr ""
+msgstr "(zet speler vlag stijl): %s"
 
 #: ../../src/events/event_set_player_frontier_style.cc:41
 #, c-format
 msgid "player's tribe does not define frontier style \"%s\""
-msgstr ""
+msgstr "speler volk heeft geen grens stijl gedefinieerd \"%s\""
 
 #: ../../src/events/event_set_player_frontier_style.cc:45
 #, c-format
 msgid "(set player frontier style): %s"
-msgstr ""
+msgstr "(zet speler grens stijl): %s"
 
 #: ../../src/events/event_set_player_style.cc:43
 #, c-format
 msgid "(set player style): %s"
-msgstr ""
+msgstr "(zet speler stijl): %s"
 
 #: ../../src/events/event_set_timer.cc:54
 #, c-format
@@ -1641,7 +1641,7 @@ msgstr ""
 #: ../../src/events/event_set_timer.cc:60
 #, c-format
 msgid "(set_timer): %s"
-msgstr ""
+msgstr "(zet timer): %s"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:98
 #, c-format
@@ -1656,12 +1656,12 @@ msgstr ""
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
-msgstr ""
+msgstr "Het spel heeft geen spelers!"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:88
 #, c-format
 msgid "interactive player: %s"
-msgstr ""
+msgstr "interactieve speler: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:59
 #, c-format
@@ -1676,22 +1676,22 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:63
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "speler %u: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:91
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "economie: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:57
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr ""
+msgstr "speler nummer (%i) is niet tussen (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:144
 #, c-format
 msgid "player info: %s"
-msgstr ""
+msgstr "speler info: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:55
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:94
@@ -1710,7 +1710,7 @@ msgstr ""
 
 #: ../../src/graphic/animation.cc:197
 msgid "frame number"
-msgstr ""
+msgstr "frame nummer"
 
 #: ../../src/graphic/graphic.cc:818
 #, c-format
@@ -1720,7 +1720,7 @@ msgstr "Animaties laden: %d%% compleet"
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u loose battle\n"
-msgstr ""
+msgstr "[battle] soldaat %u verliest gevecht\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
@@ -1819,7 +1819,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:144
 msgid "no actions"
-msgstr ""
+msgstr "geen acties"
 
 #: ../../src/logic/immovable.cc:220
 msgid "this program has already been declared"

@@ -1,69 +1,66 @@
-# Widelands po/sv_SE/tribes/empire.po
-# Copyright (C) 2008 Widelands Development Team
-# Daniel Nylander <po@danielnylander.se>, 2005.
+# Arabic translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-14 14:51+0000\n"
-"PO-Revision-Date: 2010-03-20 10:00+0000\n"
-"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
-"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2010-03-20 05:05+0000\n"
+"Last-Translator: someone <Unknown>\n"
+"Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-03-21 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-"X-Poedit-Country: swe\n"
-"X-Poedit-Language: swe\n"
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
-msgstr "Detta är en avancerad lans, med stålspets."
+msgstr ""
 
 #: ../../tribes/empire/arena/conf:13
 #: ../../tribes/empire/colosseum/conf:27
 #: ../../tribes/empire/trainingscamp/conf:38
 msgid "Sleep"
-msgstr "Vila"
+msgstr ""
 
 #: ../../tribes/empire/arena/conf:14
 #: ../../tribes/empire/colosseum/conf:28
 msgid "Upgrade soldier evade 0"
-msgstr "Uppgradera undvik 0 för soldat"
+msgstr ""
 
 #: ../../tribes/empire/arena/conf:15
 #: ../../tribes/empire/colosseum/conf:29
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Uppgradera undvik 0 för soldat  (endast för kompatibilitet med gamla sparade "
-"spel (build13))"
 
 #: ../../tribes/empire/armour/conf:1
 msgid "Basic armour for Empire soldiers."
-msgstr "Grundrustning för imperiesoldater."
+msgstr ""
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr "Tillverkar rustningar till soldaterna."
+msgstr ""
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
-msgstr "Tillverka hjälm"
+msgstr ""
 
 #: ../../tribes/empire/armoursmithy/conf:27
 msgid "Produce armour"
-msgstr "Tillverka rustning"
+msgstr "ينتج الدروع"
 
 #: ../../tribes/empire/armoursmithy/conf:28
 msgid "Produce chain armour"
-msgstr "Tillverka ringvävsrustning"
+msgstr ""
 
 #: ../../tribes/empire/armoursmithy/conf:29
 msgid "Produce plate armour"
-msgstr "Tillverka plattrustning"
+msgstr ""
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20
@@ -100,784 +97,766 @@ msgstr "Tillverka plattrustning"
 #: ../../tribes/empire/well/conf:16
 #: ../../tribes/empire/winery/conf:20
 msgid "Work"
-msgstr "Arbeta"
+msgstr ""
 
 #: ../../tribes/empire/axe/conf:1
 msgid ""
 "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "Yxan är skogshuggarens verktyg. Den tillverkas av verktygssmeden."
+msgstr ""
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Bakar bröd till arbetarna."
+msgstr ""
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
 msgstr ""
-"Skrapan är en av bagarens verktyg, varje bagare behöver en egen. Den "
-"tillverkas av verktygssmeden."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the winegrower, for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
-"Korgar behövs av vinodlaren, för att skörda druvor. Den tillverkas av "
-"verktyssmeden."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
 "Young soldiers and miners need some encouragement. This drink makes a man "
 "fearless and strong."
 msgstr ""
-"Unga soldater och gruvarbetare behöver uppskattning. Denna brygd gör en men "
-"orädd och stark."
 
 #: ../../tribes/empire/bread/conf:1
 msgid "The backers of the Empire make really tasty bread."
-msgstr "Imperiets uppbackare gör riktigt gott bröd."
+msgstr ""
 
 #: ../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
-msgstr "Tillverkar öl eller vin."
+msgstr ""
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr "Arbetar vid byggarbetsplatser för att uppföra en ny byggnad."
+msgstr ""
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
-msgstr "Bränner kol."
+msgstr ""
 
 #: ../../tribes/empire/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr "Bär föremål längs med dina vägar."
+msgstr ""
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid "This is a medium armour for Empire soldiers."
-msgstr "En mellanrustning för Imperiets soldater."
+msgstr ""
 
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
 "Cloth is needed for Empire ships and few bigger buildings. It is produced "
 "out of wool."
 msgstr ""
-"Tyg behövs till Imperiets skepp och ett antal större bygnader. Det "
-"tillverkas av ull."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
 "The fires of the Empire are usually fed with wood, but sometimes, wood just "
 "does not burn hot enough. Then, coal is used."
 msgstr ""
-"Imperiets eldar matas normalt sett med trä, men ibland brinner inte trä "
-"varmt nog. Då används kol istället."
 
 #: ../../tribes/empire/colosseum/conf:30
 msgid "Upgrade soldier evade 1"
-msgstr "Uppgradera undvik 1 för soldat"
+msgstr ""
 
 #: ../../tribes/empire/colosseum/conf:31
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Uppgradera undvik 1 för soldat  (endast för kompatibilitet med gamla sparade "
-"spel (build13))"
 
 #: ../../tribes/empire/conf:18
 msgid "The Widelands Development Team"
-msgstr "Widelands utvecklingslag"
+msgstr ""
 
 #: ../../tribes/empire/conf:19
 msgid "Empire"
-msgstr "Imperiet"
+msgstr "الأمبروطورية"
 
 #: ../../tribes/empire/conf:20
 msgid "This is the culture of the roman Empire."
-msgstr "Detta är den romerska kulturen."
+msgstr "هذه الثقافة التي كانت سائدة في الأمبروطورية الرومانية"
 
 #: ../../tribes/empire/conf:39
 msgid "Ashes"
-msgstr "Aska"
+msgstr "رماد"
 
 #: ../../tribes/empire/conf:40
 msgid "Field medium"
-msgstr "Vetefält, mellan"
+msgstr ""
 
 #: ../../tribes/empire/conf:41
 msgid "Field small"
-msgstr "Vetefält, litet"
+msgstr ""
 
 #: ../../tribes/empire/conf:42
 msgid "Field tiny"
-msgstr "Vetefält, nysått"
+msgstr ""
 
 #: ../../tribes/empire/conf:43
 msgid "Field ripe"
-msgstr "Vetefält, moget"
+msgstr ""
 
 #: ../../tribes/empire/conf:44
 msgid "Field harvested"
-msgstr "Vetefält, skördat"
+msgstr ""
 
 #: ../../tribes/empire/conf:45
 msgid "Destroyed building"
-msgstr "Förstörd byggnad"
+msgstr ""
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator coal little"
-msgstr "Resursindikator  järn lite"
+msgstr ""
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator coal much"
-msgstr "Resursindikator kol mycket"
+msgstr ""
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator gold little"
-msgstr "Resursindikator guld lite"
+msgstr ""
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator gold much"
-msgstr "Resursindikator guld mycket"
+msgstr ""
 
 #: ../../tribes/empire/conf:50
 msgid "Resource indicator granit little"
-msgstr "Resursindikator granit lite"
+msgstr ""
 
 #: ../../tribes/empire/conf:51
 msgid "Resource indicator granit much"
-msgstr "Resursindikator granit mycket"
+msgstr ""
 
 #: ../../tribes/empire/conf:52
 msgid "Resource indicator iron little"
-msgstr "Resursindikator järn lite"
+msgstr ""
 
 #: ../../tribes/empire/conf:53
 msgid "Resource indicator iron much"
-msgstr "Resursindikator järn mycket"
+msgstr ""
 
 #: ../../tribes/empire/conf:54
 msgid "Resource indicator no resource"
-msgstr "Resursindikator ingenting"
+msgstr ""
 
 #: ../../tribes/empire/conf:55
 msgid "Resource indicator water"
-msgstr "Resursindikator vatten"
+msgstr ""
 
 #: ../../tribes/empire/conf:56
 msgid "Vine medium"
-msgstr "Vinstock mellan"
+msgstr ""
 
 #: ../../tribes/empire/conf:57
 msgid "Vine small"
-msgstr "Vinstock liten"
+msgstr ""
 
 #: ../../tribes/empire/conf:58
 msgid "Vine tiny"
-msgstr "Vinstock mycket liten"
+msgstr ""
 
 #: ../../tribes/empire/conf:59
 msgid "Vine ripe"
-msgstr "Vinstock mogen"
+msgstr ""
 
 #: ../../tribes/empire/conf:62
 msgid "Advanced Lance"
-msgstr "Avancerad lans"
+msgstr ""
 
 #: ../../tribes/empire/conf:63
 msgid "Armour"
-msgstr "Rustning"
+msgstr ""
 
 #: ../../tribes/empire/conf:64
 msgid "Axe"
-msgstr "Yxa"
+msgstr ""
 
 #: ../../tribes/empire/conf:65
 msgid "Peel"
-msgstr "Bakspade"
+msgstr ""
 
 #: ../../tribes/empire/conf:66
 msgid "Basket"
-msgstr "Korg"
+msgstr ""
 
 #: ../../tribes/empire/conf:67
 msgid "Beer"
-msgstr "Öl"
+msgstr ""
 
 #: ../../tribes/empire/conf:68
 msgid "Bread"
-msgstr "Bröd"
+msgstr ""
 
 #: ../../tribes/empire/conf:69
 msgid "Chain-Armour"
-msgstr "Brynja"
+msgstr ""
 
 #: ../../tribes/empire/conf:70
 msgid "Cloth"
-msgstr "Tyg"
+msgstr ""
 
 #: ../../tribes/empire/conf:71
 msgid "Coal"
-msgstr "Kol"
+msgstr ""
 
 #: ../../tribes/empire/conf:72
 msgid "Fire Tongs"
-msgstr "Eldtång"
+msgstr ""
 
 #: ../../tribes/empire/conf:73
 msgid "Fish"
-msgstr "Fisk"
+msgstr ""
 
 #: ../../tribes/empire/conf:74
 msgid "Fishing Rod"
-msgstr "Fiskespö"
+msgstr ""
 
 #: ../../tribes/empire/conf:75
 msgid "Flour"
-msgstr "Mjöl"
+msgstr ""
 
 #: ../../tribes/empire/conf:76
 msgid "Gold"
-msgstr "Guld"
+msgstr ""
 
 #: ../../tribes/empire/conf:77
 msgid "Goldstone"
-msgstr "Guldmalm"
+msgstr ""
 
 #: ../../tribes/empire/conf:78
 msgid "Grape"
-msgstr "Druva"
+msgstr ""
 
 #: ../../tribes/empire/conf:79
 msgid "Hammer"
-msgstr "Hammare"
+msgstr ""
 
 #: ../../tribes/empire/conf:80
 msgid "Heavy Lance"
-msgstr "Stor Lans"
+msgstr ""
 
 #: ../../tribes/empire/conf:81
 msgid "Helmet"
-msgstr "Hjälm"
+msgstr ""
 
 #: ../../tribes/empire/conf:82
 msgid "Hunting Spear"
-msgstr "Jaktspjut"
+msgstr ""
 
 #: ../../tribes/empire/conf:83
 msgid "Iron"
-msgstr "Järn"
+msgstr ""
 
 #: ../../tribes/empire/conf:84
 msgid "Iron Ore"
-msgstr "Järnmalm"
+msgstr ""
 
 #: ../../tribes/empire/conf:85
 msgid "Kitchen Tools"
-msgstr "Köksredskap"
+msgstr ""
 
 #: ../../tribes/empire/conf:86
 msgid "Lance"
-msgstr "Lans"
+msgstr ""
 
 #: ../../tribes/empire/conf:87
 msgid "Marble Column"
-msgstr "Marmorkolonn"
+msgstr ""
 
 #: ../../tribes/empire/conf:88
 msgid "Marble"
-msgstr "Marmor"
+msgstr ""
 
 #: ../../tribes/empire/conf:89
 msgid "Meal"
-msgstr "Mål"
+msgstr ""
 
 #: ../../tribes/empire/conf:90
 msgid "Meat"
-msgstr "Kött"
+msgstr ""
 
 #: ../../tribes/empire/conf:91
 msgid "Pick"
-msgstr "Korp"
+msgstr ""
 
 #: ../../tribes/empire/conf:92
 msgid "Plate-Armour"
-msgstr "Plåtrustning"
+msgstr ""
 
 #: ../../tribes/empire/conf:93
 msgid "Ration"
-msgstr "Portion"
+msgstr ""
 
 #: ../../tribes/empire/conf:94
 msgid "Saw"
-msgstr "Såg"
+msgstr ""
 
 #: ../../tribes/empire/conf:95
 msgid "Scythe"
-msgstr "Lie"
+msgstr ""
 
 #: ../../tribes/empire/conf:96
 msgid "Shovel"
-msgstr "Spade"
+msgstr ""
 
 #: ../../tribes/empire/conf:97
 msgid "Stones"
-msgstr "Stenar"
+msgstr ""
 
 #: ../../tribes/empire/conf:98
 msgid "Trunk"
-msgstr "Stock"
+msgstr ""
 
 #: ../../tribes/empire/conf:99
 msgid "War-Lance"
-msgstr "Krigs-Lans"
+msgstr ""
 
 #: ../../tribes/empire/conf:100
 msgid "Water"
-msgstr "Vatten"
+msgstr ""
 
 #: ../../tribes/empire/conf:101
 msgid "Wheat"
-msgstr "Vete"
+msgstr ""
 
 #: ../../tribes/empire/conf:102
 msgid "Wine"
-msgstr "Vin"
+msgstr ""
 
 #: ../../tribes/empire/conf:103
 msgid "Wood"
-msgstr "Trä"
+msgstr ""
 
 #: ../../tribes/empire/conf:104
 msgid "Wood Lance"
-msgstr "Trälans"
+msgstr ""
 
 #: ../../tribes/empire/conf:105
 msgid "Wool"
-msgstr "Ull"
+msgstr ""
 
 #: ../../tribes/empire/conf:108
 msgid "Carrier"
-msgstr "Bärare"
+msgstr ""
 
 #: ../../tribes/empire/conf:109
 msgid "Donkey"
-msgstr "Åsna"
+msgstr ""
 
 #: ../../tribes/empire/conf:112
 msgid "Soldier"
-msgstr "Krigare"
+msgstr ""
 
 #: ../../tribes/empire/conf:115
 msgid "Armoursmith"
-msgstr "Rustningssmed"
+msgstr ""
 
 #: ../../tribes/empire/conf:116
 msgid "Baker"
-msgstr "Bagare"
+msgstr ""
 
 #: ../../tribes/empire/conf:117
 msgid "Brewer"
-msgstr "Bryggare"
+msgstr ""
 
 #: ../../tribes/empire/conf:118
 msgid "Builder"
-msgstr "Byggare"
+msgstr ""
 
 #: ../../tribes/empire/conf:119
 msgid "Burner"
-msgstr "Kolare"
+msgstr ""
 
 #: ../../tribes/empire/conf:120
 msgid "Farmer"
-msgstr "Jordbrukare"
+msgstr ""
 
 #: ../../tribes/empire/conf:121
 msgid "Fisher"
-msgstr "Fiskare"
+msgstr ""
 
 #: ../../tribes/empire/conf:122
 msgid "Forester"
-msgstr "Skogvaktare"
+msgstr ""
 
 #: ../../tribes/empire/conf:123
 msgid "Geologist"
-msgstr "Geolog"
+msgstr ""
 
 #: ../../tribes/empire/conf:124
 msgid "Hunter"
-msgstr "Jägare"
+msgstr ""
 
 #: ../../tribes/empire/conf:125
 msgid "Innkeeper"
-msgstr "Krögare"
+msgstr ""
 
 #: ../../tribes/empire/conf:126
 msgid "Lumberjack"
-msgstr "Skogshuggare"
+msgstr ""
 
 #: ../../tribes/empire/conf:127
 msgid "Master Miner"
-msgstr "Gruvchef"
+msgstr ""
 
 #: ../../tribes/empire/conf:128
 msgid "Miller"
-msgstr "Mjölnare"
+msgstr ""
 
 #: ../../tribes/empire/conf:129
 msgid "Miner"
-msgstr "Gruvarbetare"
+msgstr ""
 
 #: ../../tribes/empire/conf:130
 msgid "Pig Breeder"
-msgstr "Grisuppfödare"
+msgstr ""
 
 #: ../../tribes/empire/conf:131
 msgid "Shepherd"
-msgstr "Fåraherde"
+msgstr ""
 
 #: ../../tribes/empire/conf:132
 msgid "Smelter"
-msgstr "Smältare"
+msgstr ""
 
 #: ../../tribes/empire/conf:133
 msgid "Stonemason"
-msgstr "Stenhuggare"
+msgstr ""
 
 #: ../../tribes/empire/conf:134
 msgid "Toolsmith"
-msgstr "Verktygssmed"
+msgstr ""
 
 #: ../../tribes/empire/conf:135
 msgid "Trainer"
-msgstr "Tränare"
+msgstr ""
 
 #: ../../tribes/empire/conf:136
 msgid "Weaponsmith"
-msgstr "Vapensmed"
+msgstr ""
 
 #: ../../tribes/empire/conf:137
 msgid "Weaver"
-msgstr "Vävare"
+msgstr ""
 
 #: ../../tribes/empire/conf:138
 msgid "Vine Farmer"
-msgstr "Vinoldare"
+msgstr ""
 
 #: ../../tribes/empire/conf:139
 msgid "Scout"
-msgstr "Spejare"
+msgstr ""
 
 #: ../../tribes/empire/conf:140
 msgid "Donkey Breeder"
-msgstr "Åsneuppfödare"
+msgstr ""
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
-msgstr "Byggarbetsplats"
+msgstr ""
 
 #: ../../tribes/empire/conf:146
 msgid "Colosseum"
-msgstr "Amfiteater"
+msgstr ""
 
 #: ../../tribes/empire/conf:147
 msgid "Arena"
-msgstr "Arena"
+msgstr ""
 
 #: ../../tribes/empire/conf:148
 msgid "Trainingscamp"
-msgstr "Träningsläger"
+msgstr ""
 
 #: ../../tribes/empire/conf:151
 #: ../../tribes/empire/conf:170
 msgid "Sentry"
-msgstr "Vaktpost"
+msgstr ""
 
 #: ../../tribes/empire/conf:152
 msgid "Barracks"
-msgstr "Barrack"
+msgstr ""
 
 #: ../../tribes/empire/conf:153
 #: ../../tribes/empire/conf:166
 msgid "Barrier"
-msgstr "Barriär"
+msgstr ""
 
 #: ../../tribes/empire/conf:154
 #: ../../tribes/empire/conf:160
 msgid "Castle"
-msgstr "Slott"
+msgstr ""
 
 #: ../../tribes/empire/conf:155
 #: ../../tribes/empire/conf:169
 msgid "Fortress"
-msgstr "Fästning"
+msgstr ""
 
 #: ../../tribes/empire/conf:156
 msgid "Outpost"
-msgstr "Utpost"
+msgstr ""
 
 #: ../../tribes/empire/conf:157
 #: ../../tribes/empire/conf:165
 msgid "Tower"
-msgstr "Torn"
+msgstr ""
 
 #: ../../tribes/empire/conf:161
 msgid "Guardhall"
-msgstr "Vakthall"
+msgstr ""
 
 #: ../../tribes/empire/conf:162
 msgid "Guardhouse"
-msgstr "Vaktstuga"
+msgstr ""
 
 #: ../../tribes/empire/conf:163
 msgid "High Tower"
-msgstr "Högt torn"
+msgstr ""
 
 #: ../../tribes/empire/conf:164
 msgid "Small Tower"
-msgstr "Litet torn"
+msgstr ""
 
 #: ../../tribes/empire/conf:167
 msgid "Citadel"
-msgstr "Citadell"
+msgstr ""
 
 #: ../../tribes/empire/conf:168
 msgid "Donjon"
-msgstr "Kärntorn"
+msgstr ""
 
 #: ../../tribes/empire/conf:171
 msgid "Stronghold"
-msgstr "Litet fort"
+msgstr ""
 
 #: ../../tribes/empire/conf:174
 msgid "Headquarters"
-msgstr "Huvudkvarter"
+msgstr ""
 
 #: ../../tribes/empire/conf:175
 msgid "Headquarters shipwreck"
-msgstr "Huvudkvarter skeppsvrak"
+msgstr ""
 
 #: ../../tribes/empire/conf:176
 msgid "Warehouse"
-msgstr "Härbre"
+msgstr ""
 
 #: ../../tribes/empire/conf:179
 msgid "Armour Smithy"
-msgstr "Rustningssmedja"
+msgstr ""
 
 #: ../../tribes/empire/conf:180
 msgid "Bakery"
-msgstr "Bageri"
+msgstr ""
 
 #: ../../tribes/empire/conf:181
 msgid "Brewery"
-msgstr "Bryggeri"
+msgstr ""
 
 #: ../../tribes/empire/conf:182
 msgid "Charcoal Burner"
-msgstr "Kolare"
+msgstr ""
 
 #: ../../tribes/empire/conf:183
 msgid "Deep Coal Mine"
-msgstr "Djup kolgruva"
+msgstr ""
 
 #: ../../tribes/empire/conf:184
 msgid "Coal Mine"
-msgstr "Kolgruva"
+msgstr ""
 
 #: ../../tribes/empire/conf:185
 msgid "Deep Gold Mine"
-msgstr "Djup guldgruva"
+msgstr ""
 
 #: ../../tribes/empire/conf:186
 msgid "Deep Marble Mine"
-msgstr "Djup marmorgruva"
+msgstr ""
 
 #: ../../tribes/empire/conf:187
 msgid "Deep Iron Ore Mine"
-msgstr "Djup järnmalmsgruva"
+msgstr ""
 
 #: ../../tribes/empire/conf:188
 msgid "Farm"
-msgstr "Veteodling"
+msgstr ""
 
 #: ../../tribes/empire/conf:189
 msgid "Fisher's House"
-msgstr "Fiskarstuga"
+msgstr ""
 
 #: ../../tribes/empire/conf:190
 msgid "Forester's House"
-msgstr "Skogvaktarboställe"
+msgstr ""
 
 #: ../../tribes/empire/conf:191
 msgid "Gold Mine"
-msgstr "Guldgruva"
+msgstr ""
 
 #: ../../tribes/empire/conf:192
 msgid "Hunter's House"
-msgstr "Jägarstuga"
+msgstr ""
 
 #: ../../tribes/empire/conf:193
 msgid "Inn"
-msgstr "Värdshus"
+msgstr ""
 
 #: ../../tribes/empire/conf:194
 msgid "Lumberjack's House"
-msgstr "Skogshuggarstuga"
+msgstr ""
 
 #: ../../tribes/empire/conf:195
 msgid "Marble Mine"
-msgstr "Marmorgruva"
+msgstr ""
 
 #: ../../tribes/empire/conf:196
 msgid "Mill"
-msgstr "Mölla"
+msgstr ""
 
 #: ../../tribes/empire/conf:197
 msgid "Iron Ore Mine"
-msgstr "Järnmalmsgruva"
+msgstr ""
 
 #: ../../tribes/empire/conf:198
 msgid "Piggery"
-msgstr "Grisuppfödning"
+msgstr ""
 
 #: ../../tribes/empire/conf:199
 msgid "Quarry"
-msgstr "Stenbrott"
+msgstr ""
 
 #: ../../tribes/empire/conf:200
 msgid "Sawmill"
-msgstr "Sågverk"
+msgstr ""
 
 #: ../../tribes/empire/conf:201
 msgid "Sheepfarm"
-msgstr "Fåruppfödning"
+msgstr ""
 
 #: ../../tribes/empire/conf:202
 msgid "Smelting Works"
-msgstr "Smältverk"
+msgstr ""
 
 #: ../../tribes/empire/conf:203
 msgid "Stonemason's House"
-msgstr "Stenhuggeri"
+msgstr ""
 
 #: ../../tribes/empire/conf:204
 msgid "Tavern"
-msgstr "Gatukök"
+msgstr ""
 
 #: ../../tribes/empire/conf:205
 msgid "Toolsmithy"
-msgstr "Verktygssmedja"
+msgstr ""
 
 #: ../../tribes/empire/conf:206
 msgid "Weapon Smithy"
-msgstr "Vapensmedja"
+msgstr ""
 
 #: ../../tribes/empire/conf:207
 msgid "Weaving Mill"
-msgstr "Väveri"
+msgstr ""
 
 #: ../../tribes/empire/conf:208
 msgid "Well"
-msgstr "Brunn"
+msgstr ""
 
 #: ../../tribes/empire/conf:209
 msgid "Winery"
-msgstr "Vingård"
+msgstr ""
 
 #: ../../tribes/empire/conf:210
 msgid "Vineyard"
-msgstr "Vinodling"
+msgstr ""
 
 #: ../../tribes/empire/conf:211
 msgid "Scout's House"
-msgstr "Spejarhytta"
+msgstr ""
 
 #: ../../tribes/empire/conf:212
 msgid "Donkeyfarm"
-msgstr "Åsnefarm"
+msgstr ""
 
 #: ../../tribes/empire/conf:215
 msgid "Headquarters medium"
-msgstr "Huvudkvarter medium"
+msgstr ""
 
 #: ../../tribes/empire/conf:216
 msgid "Castle village"
-msgstr "Slottsby"
+msgstr ""
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr "Hjälper till att bära föremål på hårt trafikerade vägar."
+msgstr ""
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr "Föder upp söta och hjälpsamma åsnor"
+msgstr ""
 
 #: ../../tribes/empire/farm/conf:15
 msgid "Plant wheat"
-msgstr "Så vete"
+msgstr ""
 
 #: ../../tribes/empire/farm/conf:17
 msgid "Harvest wheat"
-msgstr "Skörda vete"
+msgstr ""
 
 #: ../../tribes/empire/farmer/conf:2
 msgid "Plants fields."
-msgstr "Sår fält."
+msgstr ""
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "They are produced by the toolsmith."
 msgstr ""
-"Eldtängerna är smältmästarens verktyg, när han arbetar i smältverket. Dom "
-"tillvörkas av verktygssmeden."
 
 #: ../../tribes/empire/fish/conf:1
 msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-msgstr "Förutom bröd och kött, är fisk en födokälla för imperiet."
+msgstr ""
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr "Fiskar fisk från havet."
+msgstr ""
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
 msgstr ""
-"Fiskespön behövs för fiskare för att fånga fisk. Dom tillverkas av "
-"verktygssmeden."
 
 #: ../../tribes/empire/flour/conf:1
 msgid ""
 "Flour is produced out of wheat and is needed for the tasty Empire bread."
-msgstr "Mjöl tillverkas av vete och behövs för imperiets välsmakande bröd."
+msgstr ""
 
 #: ../../tribes/empire/forester/conf:1
 msgid "Plants trees."
-msgstr "Planterar träd."
+msgstr ""
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "Upptäcker gruvresurser."
+msgstr ""
 
 #: ../../tribes/empire/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
-"Guld är den mest värdefulla av metaller. Endast mycket viktiga föremål "
-"utsmyckas med det."
 
 #: ../../tribes/empire/goldstone/conf:1
 msgid "This is the yellow goldstone."
-msgstr "Detta är den gula guldmalmen."
+msgstr ""
 
 #: ../../tribes/empire/grape/conf:1
 msgid "These grapes are the basic for tasty wine."
-msgstr "Dessa vindruvor är grunden till smakrikt vin."
+msgstr ""
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -885,103 +864,89 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always got some in reserve! It is "
 "produced by the toolsmith."
 msgstr ""
-"Hammaren är ett oundgängligt verktyg. Det behövs av geologen, arbetaren, "
-"rustnings- och vapensmeden. Se till att du alltid har några i reserv! Den "
-"tillverkas av verktygssmeden."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid "This is a good warrior lance, with a steel-top and a little blade."
-msgstr "Detta är en bra stridslans, med en stålspets och en liten klinga."
+msgstr ""
 
 #: ../../tribes/empire/helm/conf:1
 msgid "Basic defence of a warrior"
-msgstr "Grundförsvar för en krigare."
+msgstr ""
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr "Jägaren ger gott kött till nybyggarna."
+msgstr ""
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters."
 msgstr ""
-"Detta spjut är tillräckligt lätt för att kasta, men tungt nog för att döda "
-"vilt med en träff. Det används endast av jägaren."
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr "Framställer mat till gruvarbetare."
+msgstr ""
 
 #: ../../tribes/empire/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr "Vapen och verktyg tillverkas av järn."
+msgstr ""
 
 #: ../../tribes/empire/ironore/conf:1
 msgid "This is the red iron ore."
-msgstr "Detta är den röda järnmalmen."
+msgstr ""
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 msgstr ""
-"Hur framställer du en måltid, ett mellanmål eller en ranson om det inte "
-"finns några köksverktyg tillgängliga?"
 
 #: ../../tribes/empire/lance/conf:1
 msgid "This wooden lance has an iron spike."
-msgstr "Trälansen har en järnspets."
+msgstr ""
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
-msgstr "Fäller träd."
+msgstr ""
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
 "Marble is the beautiful stone, which is cutted out of the mountains and "
 "which is used for beautiful buildings and columns."
 msgstr ""
-"Den vackra bergarten marmor huggs ut ur berg och används till vackra "
-"byggnader och pelare."
 
 #: ../../tribes/empire/marblecolumn/conf:1
 msgid ""
 "Marble columns present the high culture of the Empire, so they are needed "
 "for nearly every bigger building."
 msgstr ""
-"Marmorpelare representerar Imperiets högkultur, så det behövs  för i stort "
-"sett varje större byggnad."
 
 #: ../../tribes/empire/marblemine/conf:22
 #: ../../tribes/empire/quarry/conf:19
 msgid "Mine marble"
-msgstr "Bryt marmor"
+msgstr ""
 
 #: ../../tribes/empire/marblemine/conf:23
 #: ../../tribes/empire/quarry/conf:20
 msgid "Mine marble (only for compatibility with old savegames (build13))"
 msgstr ""
-"Bryt marmor (endast för kompatibilitet med gamla sparade spel (build13))"
 
 #: ../../tribes/empire/marblemine/conf:24
 #: ../../tribes/empire/quarry/conf:17
 msgid "Mine stone"
-msgstr "Bryt sten"
+msgstr ""
 
 #: ../../tribes/empire/marblemine/conf:25
 #: ../../tribes/empire/quarry/conf:18
 msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
-"Bryt sten  (endast för kompatibilitet med gamla sparade spel (build13))"
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr "Arbetar djupt ner i gruvorna för att få fram kol, järn eller guld."
+msgstr ""
 
 #: ../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
 msgstr ""
-"En fullständig måltid som tillfredsställer varje gruvarbetares behov."
 
 #: ../../tribes/empire/meat/conf:1
 msgid ""
@@ -989,321 +954,285 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
-"Kött innehåller mycket energi. Det används i värdshusen och krogarna för att "
-"framställa mat till gruvarbetarna och de soldater som ligger i träning."
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr "Maler vetet till mjöl."
+msgstr ""
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced by the "
 "toolsmith."
 msgstr ""
-"Hackor används av stenhuggarna och gruvarbetarna. Dom tillverkas av "
-"verktygssmeden."
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
-msgstr "Föder upp grisar."
+msgstr ""
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid "The strongest armour existing for the Empire soldiers."
-msgstr "Den kraftigaste rustning som finns för Imperiets soldater."
+msgstr ""
 
 #: ../../tribes/empire/ration/conf:1
 msgid "A small bite to keep miners strong and working."
 msgstr ""
-"En liten måltid som hjälper gruvarbetarna att orka med det hårda arbetet."
 
 #: ../../tribes/empire/saw/conf:1
 msgid ""
 "This saw is needed by the sawyer to create all the useful tools. It is "
 "produced by the toolsmith."
 msgstr ""
-"Sågen behövs av sågmästaren för att tillverka alla användbara verktyg. Den "
-"tillverkas av verktygssmeden."
 
 #: ../../tribes/empire/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
-"Spejare som Scotty Spejare spejar ut outforskade områden på ett spejigt sätt."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "Lien är bondens redskap. Den tillverkas hos verktygssmeden."
+msgstr ""
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
-msgstr "Håller får."
+msgstr ""
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "uses it. It is produced by the toolsmith."
 msgstr ""
-"Spaden behövs för att sköta om väkter, den används därför av skogvaktaren. "
-"Spadar tillverkas av verktygssmeden."
 
 #: ../../tribes/empire/smelter/conf:1
 msgid "Smelts iron."
-msgstr "Smälter järn."
+msgstr ""
 
 #: ../../tribes/empire/smelting_works/conf:22
 msgid "Smelt iron"
-msgstr "Smält järn"
+msgstr ""
 
 #: ../../tribes/empire/smelting_works/conf:23
 msgid "Smelt gold"
-msgstr "Smält guld"
+msgstr ""
 
 #: ../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "Försvara och erövra!"
+msgstr ""
 
 #: ../../tribes/empire/stone/conf:1
 #: ../../tribes/empire/wood/conf:1
 msgid "Stones and wood are the basic build material of the Empire."
-msgstr "Sten och trä är imperiets grundläggande byggnadsmaterial."
+msgstr ""
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granit and marble out of laying stones."
-msgstr "Hugger ut block av granit och marmor ur stenar."
+msgstr ""
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr "Tillverkar verktyg till arbetarna."
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr "Tillverka bakplåt"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fire tongs"
-msgstr "Tillverka eldtänger."
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce fishing rod"
-msgstr "Tillverka fiskespö"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:36
 msgid "Produce hammer"
-msgstr "Tillverka hammare"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce kitchen tools"
-msgstr "Tillverka köksredskap"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
-msgstr "Tillverka hacka"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce scythe"
-msgstr "Tillverka lie"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce shovel"
-msgstr "Tillverka spade"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce hunting spear"
-msgstr "Tillverka jaktspjut"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce basket"
-msgstr "Tillverka korg"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce saw"
-msgstr "Tillverka såg"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:44
 msgid "Produce axe"
-msgstr "Tillverka yxa"
+msgstr ""
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr "Tränar soldaterna."
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
-msgstr "Uppgradera soldatattack 0"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:40
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Uppgradera soldatattack 0 (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:41
 msgid "Upgrade soldier attack 1"
-msgstr "Uppgradera soldatattack 1"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:42
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Uppgradera soldatattack 1 (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:43
 msgid "Upgrade soldier attack 2"
-msgstr "Uppgradera soldatattack 2"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:44
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Uppgradera soldatattack 2 (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:45
 msgid "Upgrade soldier attack 3"
-msgstr "Uppgradera soldatattack 3"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:46
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Uppgradera soldatattack 3 (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Uppgradera träffpoäng 0 för soldater"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Uppgradera träffpoäng 0 för soldater (endast för kompatibilitet med gamla "
-"sparade spel (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Uppgradera träffpoäng 1 för soldat"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Uppgradera träffpoäng 1 för soldat (endast för kompatibilitet med gamla "
-"sparade spel (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Uppgradera träffpoäng 2 för soldat"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Uppgradera träffpoäng 2 för soldat (endast för kompatibilitet med gamla "
-"sparade spel (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier hitpoints 3"
-msgstr "Uppgradera träffpoäng 3 för soldat"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:54
 msgid ""
 "Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Uppgradera träffpoäng 3 för soldat (endast för kompatibilitet med gamla "
-"sparade spel (build13))"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid "Trunks are one important build material of the Empire."
-msgstr "Stockar är ett viktigt byggnadsmaterial för imperiet."
+msgstr ""
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."
-msgstr "Odlar vinrankor."
+msgstr ""
 
 #: ../../tribes/empire/vineyard/conf:17
 msgid "Plant vine"
-msgstr "Plantera druvor."
+msgstr ""
 
 #: ../../tribes/empire/vineyard/conf:19
 msgid "Harvest vine"
-msgstr "Skörda druvor"
+msgstr ""
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
 "This is the best and sharpest weapon, the Empire weaponsmith creates for "
 "their warriors."
 msgstr ""
-"Detta är det bästa och vassaste vapen imperiets vapensmed tillverkar till "
-"sina krigare."
 
 #: ../../tribes/empire/water/conf:1
 msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer."
 msgstr ""
-"Vatten är oundgängligt för livet! Vatten används på många ställen, allt "
-"ifrån bröd till öl."
 
 #: ../../tribes/empire/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr "Tillverkar vapen till soldaterna."
+msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
-msgstr "Tillverka trälans"
+msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:30
 msgid "Produce lance"
-msgstr "Tillverka lans"
+msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
-msgstr "Tillverka avancerad lans"
+msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:32
 msgid "Produce heavy lance"
-msgstr "Tillverka tung lans"
+msgstr ""
 
 #: ../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr "Tillverkar tyg till skepp och soldater."
+msgstr ""
 
 #: ../../tribes/empire/wheat/conf:1
 msgid ""
 "Wheat is essential for surviving. Delicious bread and ales can be made of "
 "this wheat."
 msgstr ""
-"Vete är oumbärligt för att överleva. Delikata bröd och öler kan tillverkas "
-"av det."
 
 #: ../../tribes/empire/wine/conf:1
 msgid ""
 "This wine gives enough power, to mine marble or gold. And furthermore, our "
 "soldiers like it, too."
 msgstr ""
-"Vinet ger kraft att bryta marmor och guld. Dessutom gillar våra soldater det."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
 "This is a wooden lance, which is the basic of the Empires military system."
-msgstr "Detta är en trälans; grunden till imperiets militära system."
+msgstr ""
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
-msgstr "Ull är fårens hår, det används i väverier för att tillverka tyg."
-
-#~ msgid "Resource indicator gold litte"
-#~ msgstr "Resursindikator guld lite"
+msgstr ""

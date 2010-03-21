@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:13+0000\n"
-"Last-Translator: atrueba <Unknown>\n"
+"POT-Creation-Date: 2010-03-14 14:51+0000\n"
+"PO-Revision-Date: 2010-03-21 01:20+0000\n"
+"Last-Translator: Jonay <jonay.santana@gmail.com>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-03-21 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr ""
+msgstr "Tutorial 1 - Ojos en la Oscuridad"
 
 #: ../../campaigns/t01.wmf/elemental:9
 msgid ""
@@ -29,10 +29,13 @@ msgid ""
 "gameplay and control as well as basic production buildings (wood, stone, "
 "etc.) will be introduced."
 msgstr ""
+"Primera misión de la Campaña de Tutorial Bárbaros. En este tutorial se "
+"mostrará la dinámica básica de juego y los controles, así como la producción "
+"básica de edificios (madera, piedra, etc)."
 
 #: ../../campaigns/t01.wmf/event:23
 msgid "Thron sighs..."
-msgstr ""
+msgstr "Thron suspira..."
 
 #: ../../campaigns/t01.wmf/event:25
 msgid ""
@@ -40,13 +43,17 @@ msgid ""
 "dark.<br> My warriors hunt at day and lie awake at night - listening to the "
 "sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr ""
+" \"Han pasado meses y aún seguimos escondiéndonos donde los bosques son "
+"viejos y oscuros.<br> Mis guerreros cazan de día y se mantienen despiertos "
+"por la noche - escuchando los sonidos de la cruel masacre que resuenan "
+"lejos, entre los antiguos árboles.\" "
 
 #: ../../campaigns/t01.wmf/event:27
 #: ../../campaigns/t01.wmf/event:40
 #: ../../campaigns/t01.wmf/event:53
 #: ../../campaigns/t01.wmf/event:66
 msgid "The story begins"
-msgstr ""
+msgstr "Comienza la historia"
 
 #: ../../campaigns/t01.wmf/event:32
 #: ../../campaigns/t01.wmf/event:45
@@ -73,6 +80,10 @@ msgid ""
 "away.<br> The red lights flash in the darkness and dance to the rhythm of "
 "the wardrums that haunt me even in my nightmares.\" "
 msgstr ""
+" \"Podemos ver desde aquí las fieras llamas que engullen Al'thunran, a "
+"millas de distancia. <br> Las luces rojas flamean en la oscuridad, y danzan "
+"al ritmo de los tambores de guerra que me atormentan incluso en mis "
+"pesadillas.\" "
 
 #: ../../campaigns/t01.wmf/event:51
 msgid ""
@@ -82,6 +93,12 @@ msgid ""
 "times. He keeps my spirits high and those of my warriors awake, not to let "
 "greed or despair destroy our bonds as well.\" "
 msgstr ""
+" \"Los huesos de mi padre descansan en paz bajo los campos que él limpió del "
+"derramamiento de sangre sin sentido que existió entre nosotros. <br> "
+"Boldreth, mi fiel compañero y amigo es mi fuente de paz y sosiego en estos "
+"tiempos oscuros. Él mantiene mi espíritu elevado y despierto el de mis "
+"guerreros, para impedir que el orgullo o la desesperación destruyan también "
+"nuestros lazos.\" "
 
 #: ../../campaigns/t01.wmf/event:64
 msgid ""
@@ -89,20 +106,25 @@ msgid ""
 "wait, trying not to sleep or die before the right time comes. And so I do... "
 "wait.\" "
 msgstr ""
+" \"Como me dijo mi padre, habrá momentos para luchar y momentos para "
+"esperar, intentando no dormir o morir antes de que llegue el momento "
+"oportuno. Y así hago... espero.\" "
 
 #: ../../campaigns/t01.wmf/event:98
 msgid "An old man says..."
-msgstr ""
+msgstr "Un anciano dice..."
 
 #: ../../campaigns/t01.wmf/event:100
 msgid ""
 " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days.\" "
 msgstr ""
+" \"Saludos, jefe. Soy Khantrukh y he visto pasar muchos inviernos. Por "
+"favor, permíteme ayudarte con mi consejo en estos días sombríos.\" "
 
 #: ../../campaigns/t01.wmf/event:102
 msgid "Somebody comes upon to you"
-msgstr ""
+msgstr "Alguien se te acerca"
 
 #: ../../campaigns/t01.wmf/event:112
 msgid "Khantrukh continues..."
@@ -117,6 +139,13 @@ msgid ""
 "harsh lands. I believe to the east of our campside are a few places where we "
 "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
+" \"Sólo los dioses saben cuanto tendremos que permanecer aquí, ocultos. Los "
+"guerreros esperan que marchemos con gloria cualquier día, pero dudo mucho "
+"que esto suceda pronto. Y los días se están haciendo más cortos y fríos... "
+"<br> Debemos prepararnos, por si hemos de afrontar el invierno en estas "
+"duras tierras. Creo que al este de nuestro campamento hay unos cuantos "
+"lugares en los que podemos construir una cabaña de leñador.\"<br><br>-- NEW "
+"OBJECTIVES --<br> "
 
 #: ../../campaigns/t01.wmf/event:115
 #: ../../campaigns/t01.wmf/objective:7
@@ -124,6 +153,9 @@ msgid ""
 "* Press SPACE to see where you can build.<br> The red spots show you where a "
 "small building - like a lumberjack's hut - may be built.<br>"
 msgstr ""
+"* Pulsa ESPACIO para ver dónde puedes construir.<br> El punto rojo te "
+"muestra dónde puede construirse un edificio pequeño, como una cabaña de "
+"leñador.<br>"
 
 #: ../../campaigns/t01.wmf/event:116
 #: ../../campaigns/t01.wmf/objective:8
@@ -131,6 +163,9 @@ msgid ""
 "* Build a lumberjack's hut at the red spot directly right of your "
 "headquarters by clicking at it and selecting lumberjack's hut.<br>"
 msgstr ""
+"* Construye una cabaña de leñador en el punto rojo situado justo a la "
+"derecha de tu cuartel general haciendo click sobre él, y eligiendo la cabaña "
+"de leñador.<br>"
 
 #: ../../campaigns/t01.wmf/event:118
 #: ../../campaigns/t01.wmf/event:133
