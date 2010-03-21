@@ -62,7 +62,6 @@ typedef struct PersistInfo_t {
 
 typedef struct UnpersistInfo_t {
 	lua_State *L;
-	ZIO zio;
 	Widelands::FileRead * fr;
 #ifdef PLUTO_DEBUG
 	int level;
@@ -1481,7 +1480,6 @@ void pluto_unpersist
 #endif
 
 	lua_checkstack(L, 3);
-	pdep_init(L, &upi.zio, reader, ud);
 
 					/* perms */
 	lua_newtable(L);
