@@ -2,6 +2,12 @@
 -- Testing roads 
 -- ==============
 
+function _cnt_workers(i)
+   local rv = 0
+   for name,cnt in pairs(i:get_workers("all")) do rv = rv + cnt end
+   return rv
+end
+
 -- ===================
 -- Construction tests 
 -- ===================
@@ -105,27 +111,38 @@ end
 -- Creating of carrier 
 -- ====================
 function road_tests:test_no_worker_at_creation()
-   assert_equal(0, #self.r.workers)
+   assert_equal(0, _cnt_workers(self.r))
 end
 function road_tests:test_carrier_creation()
-   self.r:warp_workers{"carrier"}
-   assert_equal(1, #self.r.workers)
-   assert_equal("carrier", self.r.workers[1])
+   self.r:set_workers("carrier",1)
+   assert_equal(1, _cnt_workers(self.r))
+   assert_equal(1, self.r:get_workers("carrier"))
+end
+function road_tests:test_carrier_creation_and_deletion()
+   self.r:set_workers("carrier",1)
+   assert_equal(1, _cnt_workers(self.r))
+   assert_equal(1, self.r:get_workers("carrier"))
+   self.r:set_workers("carrier",0)
+   assert_equal(0, _cnt_workers(self.r))
+   assert_equal(0, self.r:get_workers("carrier"))
+   self.r:set_workers("carrier",1)
+   assert_equal(1, _cnt_workers(self.r))
+   assert_equal(1, self.r:get_workers("carrier"))
 end
 function road_tests:test_carrier_creation_not_a_carrier()
    assert_error("Not an carrier!", function()
-      self.r:warp_workers{"lumberjack"}
+      self.r:set_workers{lumberjack=1}
    end)
 end
 function road_tests:test_carrier_creation_illegal_name()
    assert_error("Illegal name", function()
-      self.r:warp_workers{"kjhskjh"}
+      self.r:set_workers("kjhskjh", 1)
    end)
 end
 function road_tests:test_carrier_no_space()
-   self.r:warp_workers{"carrier"}
+   self.r:set_workers{carrier=1}
    assert_error("No space!", function ()
-      self.r:warp_workers{"carrier"}
+      self.r:set_workers{carrier=2}
    end)
 end
 function road_tests:test_valid_workers()

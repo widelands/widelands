@@ -191,7 +191,7 @@ protected:
 struct L_HasWorkers {
 	virtual ~L_HasWorkers() {}
 
-	virtual int set_wares(lua_State * L) = 0;
+	virtual int set_workers(lua_State * L) = 0;
 	virtual int get_workers(lua_State * L) = 0;
 
 	typedef std::set<Widelands::Ware_Index> WorkersSet;
@@ -232,7 +232,7 @@ public:
 	CASTED_GET(Flag);
 };
 
-class L_Road : public L_PlayerImmovable {
+class L_Road : public L_PlayerImmovable, public L_HasWorkers {
 public:
 	LUNA_CLASS_HEAD(L_Road);
 
@@ -248,14 +248,14 @@ public:
 	int get_length(lua_State * L);
 	int get_start_flag(lua_State * L);
 	int get_end_flag(lua_State * L);
-	int get_workers(lua_State * L);
 	int get_valid_workers(lua_State * L);
 	int get_type(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
-	int warp_workers(lua_State * L);
+	int get_workers(lua_State * L);
+	int set_workers(lua_State * L);
 
 	/*
 	 * C Methods

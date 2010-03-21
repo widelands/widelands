@@ -690,14 +690,14 @@ Road
 */
 const char L_Road::className[] = "Road";
 const MethodType<L_Road> L_Road::Methods[] = {
-	METHOD(L_Road, warp_workers),
+	METHOD(L_Road, get_workers),
+	METHOD(L_Road, set_workers),
 	{0, 0},
 };
 const PropertyType<L_Road> L_Road::Properties[] = {
 	PROP_RO(L_Road, length),
 	PROP_RO(L_Road, start_flag),
 	PROP_RO(L_Road, end_flag),
-	PROP_RO(L_Road, workers),
 	PROP_RO(L_Road, valid_workers),
 	PROP_RO(L_Road, type),
 	{0, 0, 0},
@@ -742,26 +742,6 @@ int L_Road::get_end_flag(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: workers
-
-		(RO) An array of names of carriers that work on this road.  Note that you
-		cannot change this directly, use :meth:`warp_workers` to overwrite any
-		worker.
-*/
-int L_Road::get_workers(lua_State * L) {
-	const PlayerImmovable::Workers & ws = get(L, get_game(L))->get_workers();
-
-	lua_createtable(L, ws.size(), 0);
-	uint32_t widx = 1;
-	container_iterate_const(PlayerImmovable::Workers, ws, w) {
-		lua_pushuint32(L, widx++);
-		lua_pushstring(L, (*w.current)->descr().name().c_str());
-		lua_rawset(L, -3);
-	}
-	return 1;
-}
-
-/* RST
 	.. attribute:: valid_workers
 
 		(RO) an array of names of workers that are allowed to work in this
@@ -803,68 +783,120 @@ int L_Road::get_type(lua_State * L) {
  ==========================================================
  */
 
-/* RST
-	.. method:: warp_workers(workers)
-
-		Immediately creates a worker out of thin air and
-		assigns it the to the road. Currently only carriers can
-		be created like this (e.g. no 'oxes' and therelike).
-
-		:arg names: array of names of workers, e.g. "carrier", "ox"
-		:type name: :class:`array`
-
-		:seealso: wl.map.ProductionSite.warp_workers
-*/
-int L_Road::warp_workers(lua_State * L) {
-	if (lua_gettop(L) != 2)
-		return report_error(L, "Only one carrier can be warped here!");
-
-	luaL_checktype(L, 2, LUA_TTABLE);
-
-	lua_pushuint32(L, 1);
-	lua_rawget(L, -2);
-	std::string name = luaL_checkstring(L, -1);
-
-	if (name != "carrier")
-		return report_error(L, "Only 'carrier' is allowed currently!\n");
-
+// TODO: This is nearly identical to L_ProductionSite::set_workers
+int L_Road::set_workers(lua_State * L) {
 	Game & g = get_game(L);
-	Map & map = g.map();
-
 	Road * r = get(L, g);
+	const Tribe_Descr & tribe = r->owner().tribe();
 
-	if (r->get_workers().size())
-		return report_error(L, "No space for this worker!");
+	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
 
-	Flag & start = r->get_flag(Road::FlagStart);
+	WorkersMap c_workers;
+	container_iterate_const(PlayerImmovable::Workers, r->get_workers(), w) {
+		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
+		if (not c_workers.count(i))
+			c_workers.insert(L_ProductionSite::WorkerAmount(i, 1));
+		else
+			c_workers[i] += 1;
+		if (not setpoints.count(i))
+			setpoints.insert(WorkerAmount(i, 0));
+	}
 
-	Coords idle_position = start.get_position();
-	const Path & path = r->get_path();
+	WorkersSet valid_workers;
+	valid_workers.insert(tribe.worker_index("carrier"));
 
-	// Determine Idle position.
-	Path::Step_Vector::size_type idle_index = r->get_idle_index();
-	for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
-		map.get_neighbour(idle_position, path[i], &idle_position);
+	// The idea is to change as little as possible
+	container_iterate_const(WorkersMap, setpoints, sp) {
+		const Worker_Descr * wdes = tribe.get_worker_descr(sp->first);
+		if (not valid_workers.count(sp->first))
+				  report_error
+					  (L, "<%s> is not a valid worker for this site!",
+					   wdes->name().c_str());
 
-	Player & owner = r->owner();
+		uint32_t cur = 0;
+		WorkersMap::iterator i = c_workers.find(sp->first);
+		if (i != c_workers.end())
+			cur = i->second;
 
-	Tribe_Descr const & tribe = owner.tribe();
-	const Worker_Descr * wd = tribe.get_worker_descr(tribe.worker_index(name));
-	if (!wd)
-		return report_error(L, "%s is not a valid worker name!", name.c_str());
+		// Determine Idle position.
+		Flag & start = r->get_flag(Road::FlagStart);
+		Coords idle_position = start.get_position();
+		const Path & path = r->get_path();
+		Path::Step_Vector::size_type idle_index = r->get_idle_index();
+		for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
+			g.map().get_neighbour(idle_position, path[i], &idle_position);
 
-	if (wd->get_worker_type() != Worker_Descr::CARRIER)
-		return report_error(L, "%s is not a carrier type!", name.c_str());
+		int d = sp->second - cur;
+		if (d < 0) {
+			while (d) {
+				container_iterate_const
+					(PlayerImmovable::Workers, r->get_workers(), w)
+				{
+					Ware_Index i = tribe.worker_index((*w.current)->descr().name());
+					if(i == sp->first) {
+						const_cast<Worker *>(*w.current)->remove(g);
+						++d;
+						break;
+					}
+				}
+			}
+		} else if (d > 0) {
+			if (r->get_workers().size())
+					return report_error(L, "No space left for this worker");
+			Carrier & carrier = ref_cast<Carrier, Worker>
+				(wdes->create (g, r->owner(), r, idle_position));
+			carrier.start_task_road(g);
 
-	Carrier & carrier = ref_cast<Carrier, Worker>
-		(wd->create (g, owner, r, idle_position));
-
-	carrier.start_task_road(g);
-
-	r->assign_carrier(carrier, 0);
-
+			r->assign_carrier(carrier, 0);
+		}
+	}
 	return 0;
 }
+
+// documented in base class
+// TODO: except for the valid workers, this is the same as for productionsite
+int L_Road::get_workers(lua_State * L) {
+	Road * r = get(L, get_game(L));
+	Tribe_Descr const & tribe = r->owner().tribe();
+
+	bool return_number = false;
+	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
+
+	WorkersSet valid_workers;
+	valid_workers.insert(tribe.worker_index("carrier"));
+
+	WorkersMap c_workers;
+	container_iterate_const(PlayerImmovable::Workers, r->get_workers(), w) {
+		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
+		if (not c_workers.count(i))
+			c_workers.insert(L_ProductionSite::WorkerAmount(i, 1));
+		else
+			c_workers[i] += 1;
+	}
+
+	if (set.size() == tribe.get_nrworkers().value()) // Wants all returned
+		set = valid_workers;
+
+	if (not return_number)
+		lua_newtable(L);
+
+	container_iterate_const(WorkersSet, set, i) {
+		uint32_t cnt = 0;
+		if (c_workers.count(*i.current))
+			cnt = c_workers[*i.current];
+
+		if (return_number) {
+			lua_pushuint32(L, cnt);
+			break;
+		} else {
+			lua_pushstring(L, tribe.get_worker_descr(*i.current)->name());
+			lua_pushuint32(L, cnt);
+			lua_rawset(L, -3);
+		}
+	}
+	return 1;
+}
+
 
 /*
  ==========================================================
