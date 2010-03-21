@@ -24,7 +24,11 @@ field = wl.map.Field(32,34)
 tree = wl.map.create_immovable("tree3", field)
 removed_tree = wl.map.create_immovable("tree4", wl.map.Field(34,34))
 removed_tree:remove()
-corout = coroutine.create(function() coroutine.yield("What cool is that?") end)
+corout = coroutine.create(function()
+   local a = 100
+   coroutine.yield("What cool is that?")
+   coroutine.yield(a)
+end)
 objective = p:add_objective("lumber", "House", "Boat!")
 objective.done = true
 
@@ -66,6 +70,8 @@ assert_equal(tree, field.immovable)
 assert_thread(corout)
 _,rv = coroutine.resume(corout)
 assert_equal("What cool is that?", rv)
+_,rv = coroutine.resume(corout)
+assert_equal(100, rv)
 
 assert_table(objective)
 assert_equal("lumber", objective.name)
