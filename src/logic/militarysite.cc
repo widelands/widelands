@@ -522,7 +522,13 @@ bool MilitarySite::attack(Soldier & enemy)
 	Soldier * defender = 0;
 
 	if (present.size()) {
-		defender = present[0];
+		// Find soldier with greatest hitpoints
+		int current_max = 0;
+		container_iterate_const(std::vector<Soldier *>, present, i)
+			if ((*i.current)->get_current_hitpoints() > current_max) {
+				defender = *i.current;
+				current_max = defender->get_current_hitpoints();
+			}
 	} else {
 		// If one of our stationed soldiers is currently walking into the
 		// building, give us another chance.
