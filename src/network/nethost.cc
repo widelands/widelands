@@ -44,6 +44,8 @@
 #include "wlapplication.h"
 
 #include "ui_basic/progresswindow.h"
+#include <boost/format.hpp>
+using boost::format;
 
 
 
@@ -207,6 +209,134 @@ struct HostChatProvider : public ChatProvider {
 			c.recipient = c.msg.substr(1, space - 1);
 			c.msg = c.msg.substr(space + 1);
 		}
+
+		/* Handle hostcommands like:
+		 * /help                : Shows all available commands
+		 * /announce <msg>      : Send a chatmessage as announcement (system chat)
+		 * /warn <name> <reason>: Warn the user <name> because of <reason>
+		 * /kick <name> <reason>: Kick the user <name> because of <reason>
+		 */
+		else if (c.msg.size() > 1 && *c.msg.begin() == '/') {
+
+			// Split up in "cmd" "arg1" "arg2"
+			std::string cmd, arg1, arg2;
+			std::string::size_type const space = c.msg.find(' ');
+			if (space > c.msg.size())
+				// Only cmd
+				cmd = c.msg.substr(1);
+			else {
+				cmd = c.msg.substr(1, space - 1);
+				std::string::size_type const space2 = c.msg.find(' ', space + 1);
+				if (space2 != std::string::npos) {
+					// cmd + arg1 + arg2
+					arg1 = c.msg.substr(space + 1, space2 - space - 1);
+					arg2 = c.msg.substr(space2 + 1);
+				} else if (space + 1 < c.msg.size())
+					// cmd + arg1
+					arg1 = c.msg.substr(space + 1);
+			}
+			if (arg1.empty())
+				arg1 = "";
+			if (arg2.empty())
+				arg2 = "";
+			log((cmd + " + \"" + arg1 + "\" + \"" + arg2 + "\"\n").c_str());
+
+			// let "/me" pass - handled by chat
+			if (cmd == "me") {
+				h->send(c);
+				return;
+			}
+
+			// Everything handled from now on will be system stuff - an so will be
+			// messages send because of that commands
+			c.playern = -2;
+			c.sender = "";
+
+			// Help
+			if (cmd == "help") {
+				c.msg =
+					_
+					 ("Available host commands are:<br>"
+					  "/help  -  Shows this help<br>"
+					  "/announce <msg>  -  Send a chatmessage as announcement"
+					  " (system chat)<br>"
+					  "/warn <name> <reason>  -  Warn the user <name> because of"
+					  " <reason><br>"
+					  "/kick <name> <reason>  -  Kick the user <name> because of"
+					  " <reason>");
+				c.recipient = h->getLocalPlayername();
+			}
+
+			// Announce
+			else if (cmd == "announce") {
+				if (arg1.empty()) {
+					c.msg = _("Wrong use, should be: /announce <message>");
+					c.recipient = h->getLocalPlayername();
+				} else {
+					if (arg2.size())
+						arg1 += " " + arg2;
+					c.msg = "HOST ANNOUNCEMENT: " + arg1;
+				}
+			}
+
+			// Warn user
+			else if (cmd == "warn") {
+				if (arg1.empty() && arg2.empty()) {
+					c.msg = _("Wrong use, should be: /warn <name> <reason>");
+					c.recipient = h->getLocalPlayername();
+				} else {
+					c.msg  = (format("HOST WARNING FOR %s: ") % arg1).str();
+					c.msg += arg2;
+				}
+			}
+
+			// Kick
+			else if (cmd == "kick") {
+				if (arg1.empty()) {
+					c.msg = _("Wrong use, should be: /kick <name> <reason>");
+				} else {
+					kickUser = arg1;
+					if (arg2.size())
+						kickReason = arg2;
+					else
+						kickReason = "No reason given!";
+					c.msg =
+						(format(_("Are you sure you want to kick %s?<br>"))
+						 % arg1).str();
+					c.msg +=
+						(format(_("The stated reason was: %s<br>"))
+						 % kickReason).str();
+					c.msg +=
+						(format(_("If yes, type: /ack_kick %s")) % arg1).str();
+				}
+				c.recipient = h->getLocalPlayername();
+			}
+
+			// Acknowledge kick
+			else if (cmd == "ack_kick") {
+				std::string name;
+				if (arg1.empty())
+					c.msg = _("kick acknowlegement cancled: No name given!");
+				else if (arg2.size())
+					c.msg = _("Wrong use, should be: /ack_kick <name>");
+				else {
+					if (arg1 == kickUser) {
+						h->kickUser(kickUser, kickReason);
+						return;
+					} else
+						c.msg = _("kick acknowlegement cancled: Wrong name given!");
+				}
+				kickUser   = "";
+				kickReason = "";
+				c.recipient = h->getLocalPlayername();
+			}
+
+			// Default
+			else {
+				c.msg = _("Invalid command! Type /help for a list of commands.");
+				c.recipient = h->getLocalPlayername();
+			}
+		}
 		h->send(c);
 	}
 
@@ -222,6 +352,8 @@ struct HostChatProvider : public ChatProvider {
 private:
 	NetHost                * h;
 	std::vector<ChatMessage> messages;
+	std::string              kickUser;
+	std::string              kickReason;
 };
 
 struct Client {
@@ -562,9 +694,10 @@ void NetHost::send(ChatMessage msg)
 	// just be abused by the user, but could also break the whole text formation.
 	//  FIXME It would be better to escape < as &lt; and then render that as <
 	//  FIXME instead of replacing < with { in chat messages.
-	container_iterate(std::string, msg.msg, i)
-		if (*i.current == '<')
-			*i.current = '{';
+	if (msg.playern != -2) // System messages may have special formations
+		container_iterate(std::string, msg.msg, i)
+			if (*i.current == '<')
+				*i.current = '{';
 
 	if (msg.recipient.empty()) {
 		SendPacket s;
@@ -645,6 +778,8 @@ void NetHost::send(ChatMessage msg)
 			return; //  do not deliver it to him twice
 
 		//Now find the sender and send either the message or the failure notice
+		else if (msg.playern == -2) // private system message
+			return;
 		else if (d->localplayername == msg.sender)
 			d->chat.receive(msg);
 		else { // host is not the sender -> get sender
@@ -671,6 +806,51 @@ void NetHost::send(ChatMessage msg)
 				log("WARNING: sender could not be found!");
 		}
 	}
+}
+
+/**
+* If the host sends a chat message with formation /kick <name> <reason>
+* This function will handle this command and try to kick the user.
+*
+* \note perhaps we should add some kind of user interaction like
+*       "do you really want to kick <name>?", to avoid abuse of this feature.
+*/
+void NetHost::kickUser(std::string name, std::string reason)
+{
+	ChatMessage kickmsg;
+	kickmsg.playern = -2; // System message
+	if (d->localplayername == name) {
+		kickmsg.msg = _("You can not kick yourself!");
+		d->chat.receive(kickmsg);
+		return;
+	}
+
+	// Search for the user
+	uint32_t i = 0;
+	uint32_t client = 0;
+	for (; i < d->settings.users.size(); ++i) {
+		UserSettings const & user = d->settings.users.at(i);
+		if (user.name == name)
+			break;
+	}
+	if (i < d->settings.users.size()) {
+		for (; client < d->clients.size(); ++client)
+			if (d->clients.at(client).usernum == i)
+				break;
+		if (client < d->clients.size())
+			i = d->clients.at(client).playernum;
+		else
+			log("WARNING: user was found but no client is connected to it!\n");
+	} else {
+		kickmsg.msg = _("There is no connected user with that nickname!");
+		d->chat.receive(kickmsg);
+		return;
+	}
+
+	if (i >= 0)
+		disconnectPlayer(i, "Kicked by the host: " + reason);
+	else
+		disconnectClient(client, "Kicked by the host: " + reason);
 }
 
 void NetHost::sendSystemChat(char const * const fmt, ...)
