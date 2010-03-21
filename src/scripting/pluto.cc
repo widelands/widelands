@@ -417,11 +417,10 @@ static void persistfunction(PersistInfo *pi)
 		lua_error(pi->L);
 	} else {
 		/* It's a Lua closure. */
-		{
-			/* We don't really _NEED_ the number of upvals,
-			 * but it'll simplify things a bit */
-			pi->writer(pi->L, &cl->l.p->nups, sizeof(lu_byte), pi->ud);
-		}
+		/* We don't really _NEED_ the number of upvals,
+		 * but it'll simplify things a bit */
+		pi->fw->Unsigned8(cl->l.p->nups);
+
 		/* Persist prototype */
 		{
 			pushproto(pi->L, cl->l.p);
@@ -463,6 +462,119 @@ static void persistfunction(PersistInfo *pi)
 		}
 	}
 }
+
+static UpVal *makeupval(lua_State *L, int stackpos)
+{
+	UpVal *uv = pdep_new(L, UpVal);
+	pdep_link(L, (GCObject*)uv, LUA_TUPVAL);
+	uv->tt = LUA_TUPVAL;
+	uv->v = &uv->u.value;
+	uv->u.l.prev = NULL;
+	uv->u.l.next = NULL;
+	setobj(L, uv->v, getobject(L, stackpos));
+	return uv;
+}
+
+static Proto *makefakeproto(lua_State *L, lu_byte nups)
+{
+	Proto *p = pdep_newproto(L);
+	p->sizelineinfo = 1;
+	p->lineinfo = pdep_newvector(L, 1, int);
+	p->lineinfo[0] = 1;
+	p->sizecode = 1;
+	p->code = pdep_newvector(L, 1, Instruction);
+	p->code[0] = CREATE_ABC(OP_RETURN, 0, 1, 0);
+	p->source = pdep_newlstr(L, "", 0);
+	p->maxstacksize = 2;
+	p->nups = nups;
+	p->sizek = 0;
+	p->sizep = 0;
+
+	return p;
+}
+
+static void unboxupval(lua_State *L)
+{
+					/* ... func */
+	LClosure *lcl;
+	UpVal *uv;
+
+	lcl = (LClosure*)clvalue(getobject(L, -1));
+	uv = lcl->upvals[0];
+	lua_pop(L, 1);
+					/* ... */
+	pushupval(L, uv);
+					/* ... upval */
+}
+
+static void unpersistfunction(int ref, UnpersistInfo *upi)
+{
+					/* perms reftbl ... */
+	LClosure *lcl;
+	int i;
+	lua_checkstack(upi->L, 2);
+
+	lu_byte nupvalues = upi->fr->Unsigned8();
+
+	lcl = (LClosure*)pdep_newLclosure(upi->L, nupvalues, hvalue(&upi->L->l_gt));
+	pushclosure(upi->L, (Closure*)lcl);
+
+					/* perms reftbl ... func */
+	/* Put *some* proto in the closure, before the GC can find it */
+	lcl->p = makefakeproto(upi->L, nupvalues);
+
+	/* Also, we need to temporarily fill the upvalues */
+	lua_pushnil(upi->L);
+					/* perms reftbl ... func nil */
+	for(i=0; i<nupvalues; i++) {
+		lcl->upvals[i] = makeupval(upi->L, -1);
+	}
+	lua_pop(upi->L, 1);
+					/* perms reftbl ... func */
+
+	/* I can't see offhand how a function would ever get to be self-
+	 * referential, but just in case let's register it early */
+	registerobject(ref, upi);
+
+	/* Now that it's safe, we can get the real proto */
+	unpersist(upi);
+					/* perms reftbl ... func proto? */
+	lua_assert(lua_type(upi->L, -1) == LUA_TPROTO);
+					/* perms reftbl ... func proto */
+	lcl->p = toproto(upi->L, -1);
+	lua_pop(upi->L, 1);
+					/* perms reftbl ... func */
+
+	for(i=0; i<nupvalues; i++) {
+					/* perms reftbl ... func */
+		unpersist(upi);
+					/* perms reftbl ... func func2 */
+		unboxupval(upi->L);
+					/* perms reftbl ... func upval */
+		lcl->upvals[i] = toupval(upi->L, -1);
+		lua_pop(upi->L, 1);
+					/* perms reftbl ... func */
+	}
+					/* perms reftbl ... func */
+
+	/* Finally, the fenv */
+	unpersist(upi);
+					/* perms reftbl ... func fenv/nil? */
+	lua_assert(lua_type(upi->L, -1) == LUA_TNIL ||
+		lua_type(upi->L, -1) == LUA_TTABLE);
+					/* perms reftbl ... func fenv/nil */
+	if(!lua_isnil(upi->L, -1)) {
+					/* perms reftbl ... func fenv */
+		lua_setfenv(upi->L, -2);
+					/* perms reftbl ... func */
+	} else {
+					/* perms reftbl ... func nil */
+		lua_pop(upi->L, 1);
+					/* perms reftbl ... func */
+	}
+					/* perms reftbl ... func */
+}
+
 
 
 /* Upvalues are tricky. Here's why.
@@ -928,36 +1040,6 @@ void pluto_persist(lua_State *L, lua_Chunkwriter writer, void *ud, Widelands::Fi
 }
 
 
-static UpVal *makeupval(lua_State *L, int stackpos)
-{
-	UpVal *uv = pdep_new(L, UpVal);
-	pdep_link(L, (GCObject*)uv, LUA_TUPVAL);
-	uv->tt = LUA_TUPVAL;
-	uv->v = &uv->u.value;
-	uv->u.l.prev = NULL;
-	uv->u.l.next = NULL;
-	setobj(L, uv->v, getobject(L, stackpos));
-	return uv;
-}
-
-static Proto *makefakeproto(lua_State *L, lu_byte nups)
-{
-	Proto *p = pdep_newproto(L);
-	p->sizelineinfo = 1;
-	p->lineinfo = pdep_newvector(L, 1, int);
-	p->lineinfo[0] = 1;
-	p->sizecode = 1;
-	p->code = pdep_newvector(L, 1, Instruction);
-	p->code[0] = CREATE_ABC(OP_RETURN, 0, 1, 0);
-	p->source = pdep_newlstr(L, "", 0);
-	p->maxstacksize = 2;
-	p->nups = nups;
-	p->sizek = 0;
-	p->sizep = 0;
-
-	return p;
-}
-
 /* The GC is not fond of finding upvalues in tables. We get around this
  * during persistence using a weakly keyed table, so that the GC doesn't
  * bother to mark them. This won't work in unpersisting, however, since
@@ -989,88 +1071,6 @@ static void boxupval_finish(lua_State *L)
 }
 
 
-static void unboxupval(lua_State *L)
-{
-					/* ... func */
-	LClosure *lcl;
-	UpVal *uv;
-
-	lcl = (LClosure*)clvalue(getobject(L, -1));
-	uv = lcl->upvals[0];
-	lua_pop(L, 1);
-					/* ... */
-	pushupval(L, uv);
-					/* ... upval */
-}
-
-static void unpersistfunction(int ref, UnpersistInfo *upi)
-{
-					/* perms reftbl ... */
-	LClosure *lcl;
-	int i;
-	lu_byte nupvalues;
-	lua_checkstack(upi->L, 2);
-
-	verify(LIF(Z,read)(&upi->zio, &nupvalues, sizeof(lu_byte)) == 0);
-
-	lcl = (LClosure*)pdep_newLclosure(upi->L, nupvalues, hvalue(&upi->L->l_gt));
-	pushclosure(upi->L, (Closure*)lcl);
-
-					/* perms reftbl ... func */
-	/* Put *some* proto in the closure, before the GC can find it */
-	lcl->p = makefakeproto(upi->L, nupvalues);
-
-	/* Also, we need to temporarily fill the upvalues */
-	lua_pushnil(upi->L);
-					/* perms reftbl ... func nil */
-	for(i=0; i<nupvalues; i++) {
-		lcl->upvals[i] = makeupval(upi->L, -1);
-	}
-	lua_pop(upi->L, 1);
-					/* perms reftbl ... func */
-
-	/* I can't see offhand how a function would ever get to be self-
-	 * referential, but just in case let's register it early */
-	registerobject(ref, upi);
-
-	/* Now that it's safe, we can get the real proto */
-	unpersist(upi);
-					/* perms reftbl ... func proto? */
-	lua_assert(lua_type(upi->L, -1) == LUA_TPROTO);
-					/* perms reftbl ... func proto */
-	lcl->p = toproto(upi->L, -1);
-	lua_pop(upi->L, 1);
-					/* perms reftbl ... func */
-
-	for(i=0; i<nupvalues; i++) {
-					/* perms reftbl ... func */
-		unpersist(upi);
-					/* perms reftbl ... func func2 */
-		unboxupval(upi->L);
-					/* perms reftbl ... func upval */
-		lcl->upvals[i] = toupval(upi->L, -1);
-		lua_pop(upi->L, 1);
-					/* perms reftbl ... func */
-	}
-					/* perms reftbl ... func */
-
-	/* Finally, the fenv */
-	unpersist(upi);
-					/* perms reftbl ... func fenv/nil? */
-	lua_assert(lua_type(upi->L, -1) == LUA_TNIL ||
-		lua_type(upi->L, -1) == LUA_TTABLE);
-					/* perms reftbl ... func fenv/nil */
-	if(!lua_isnil(upi->L, -1)) {
-					/* perms reftbl ... func fenv */
-		lua_setfenv(upi->L, -2);
-					/* perms reftbl ... func */
-	} else {
-					/* perms reftbl ... func nil */
-		lua_pop(upi->L, 1);
-					/* perms reftbl ... func */
-	}
-					/* perms reftbl ... func */
-}
 
 static void unpersistupval(int ref, UnpersistInfo *upi)
 {
@@ -1372,12 +1372,7 @@ static void unpersistuserdata(int ref, UnpersistInfo *upi)
 					/* perms reftbl ... spfunc? */
 		lua_assert(lua_isfunction(upi->L, -1));
 					/* perms reftbl ... spfunc */
-#ifdef PLUTO_PASS_USERDATA_TO_PERSIST
-		lua_pushlightuserdata(upi->L, &upi->zio);
-		lua_call(upi->L, 1, 1);
-#else
 		lua_call(upi->L, 0, 1);
-#endif
 					/* perms reftbl ... udata? */
 /* This assertion might not be necessary; it's conceivable, for
  * example, that the SP function might decide to return a table
