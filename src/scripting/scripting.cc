@@ -36,8 +36,6 @@
 
 // TODO: make pickling independent of OS by using widelands Stream*
 //
-// TODO: rework all lua scripts to use set_workers and get_workers (and set_wares,
-// 		get_wares).
 // TODO: rethink position, location, field. Should maybe be field in all instances
 // TODO: cleanup set_soldiers, get_soldiers, warp_soldiers.
 // TODO: implement trainingssite
