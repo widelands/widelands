@@ -612,14 +612,13 @@ static void persistthread(PersistInfo *pi)
 
 static void persistboolean(PersistInfo *pi)
 {
-	int b = lua_toboolean(pi->L, -1);
-	pi->writer(pi->L, &b, sizeof(int), pi->ud);
+	pi->fw->Unsigned8(lua_toboolean(pi->L, -1));
 }
 static void unpersistboolean(UnpersistInfo *upi)
 {
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 1);
-	lua_pushboolean(upi->L, upi->fr->Unsigned32());
+	lua_pushboolean(upi->L, upi->fr->Unsigned8());
 					/* perms reftbl ... bool */
 }
 
