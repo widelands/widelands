@@ -99,6 +99,9 @@ void WidelandsServer::spectatorDataEvent(Client *)
 void WidelandsServer::dataEvent(Client * const client)
 {
 	int opcode;
+	int ret;
+	struct sockaddr* addr;
+	socklen_t addrsize;
 
 	std::cout << "WidelandsServer: dataEvent" << std::endl;
 
@@ -106,70 +109,104 @@ void WidelandsServer::dataEvent(Client * const client)
 	int const channel = fd(client->number);
 
 	ggz_read_int(channel, &opcode);
+
+	int teams[2] = {0, 1};
+	GGZGameResult gr[2] = {GGZ_GAME_WIN, GGZ_GAME_LOSS};
+	int scores[2] = {100, 10};
+
 	switch (opcode) {
 	case op_reply_ip:
-		{
-			char * ip;
+		char * ip;
 
-			//  Do not use IP provided by client. Instead, determine peer IP address.
-			ggz_read_string_alloc(channel, &ip);
-			std::cout << "IP: " << ip << std::endl;
-			//  m_ip = ggz_strdup(ip);
-			ggz_free(ip);
+		//  Do not use IP provided by client. Instead, determine peer IP address.
+		ggz_read_string_alloc(channel, &ip);
+		std::cout << "IP: " << ip << std::endl;
+		//  m_ip = ggz_strdup(ip);
+		ggz_free(ip);
 
-			socklen_t addrsize = 256;
-			struct sockaddr * const addr =
-				static_cast<struct sockaddr *>(malloc(addrsize));
-			int const ret = getpeername(channel, addr, &addrsize);
+		addrsize = 256;
+		addr = static_cast<struct sockaddr *>(malloc(addrsize));
+		ret = getpeername(channel, addr, &addrsize);
 
-			//  FIXME: IPv4 compatibility?
-			if (addr->sa_family == AF_INET6) {
-				ip = static_cast<char *>(ggz_malloc(INET6_ADDRSTRLEN));
-				inet_ntop
-					(AF_INET6,
-					 static_cast<void *>
-					 	(&(reinterpret_cast<struct sockaddr_in6 *>(addr))->sin6_addr),
-					 ip,
-					 INET6_ADDRSTRLEN);
-			} else if(addr->sa_family == AF_INET) {
-				ip = static_cast<char *>(ggz_malloc(INET_ADDRSTRLEN));
-				inet_ntop
-					(AF_INET,
-					 static_cast<void *>
-					 	(&(reinterpret_cast<struct sockaddr_in *>(addr))->sin_addr),
-					 ip,
-					 INET_ADDRSTRLEN);
-			} else {
-				ip = NULL;
+		//  FIXME: IPv4 compatibility?
+		if (addr->sa_family == AF_INET6) {
+			ip = static_cast<char *>(ggz_malloc(INET6_ADDRSTRLEN));
+			inet_ntop
+				(AF_INET6,
+				 static_cast<void *>
+				 	(&(reinterpret_cast<struct sockaddr_in6 *>(addr))->sin6_addr),
+				 ip,
+				 INET6_ADDRSTRLEN);
+		} else if(addr->sa_family == AF_INET) {
+			ip = static_cast<char *>(ggz_malloc(INET_ADDRSTRLEN));
+			inet_ntop
+				(AF_INET,
+				 static_cast<void *>
+				 	(&(reinterpret_cast<struct sockaddr_in *>(addr))->sin_addr),
+				 ip,
+				 INET_ADDRSTRLEN);
+		} else {
+			ip = NULL;
+			std::cout << "GAME: unreachable -> done!" << std::endl;
+			ggz_write_int(channel, op_unreachable);
+			changeState(GGZGameServer::done);
+			break;
+		}
+
+		std::cout << "broadcast IP: " << ip << std::endl;
+		m_ip = ggz_strdup(ip);
+		ggz_free(ip);
+		{ //  test for connectablity
+			addrinfo * ai = 0;
+			if (getaddrinfo(m_ip, "7396", 0, &ai)) {
 				std::cout << "GAME: unreachable -> done!" << std::endl;
 				ggz_write_int(channel, op_unreachable);
 				changeState(GGZGameServer::done);
 				break;
 			}
-
-			std::cout << "broadcast IP: " << ip << std::endl;
-			m_ip = ggz_strdup(ip);
-			ggz_free(ip);
-			{ //  test for connectablity
-				addrinfo * ai = 0;
-				if (getaddrinfo(m_ip, "7396", 0, &ai)) {
-					std::cout << "GAME: unreachable -> done!" << std::endl;
-					ggz_write_int(channel, op_unreachable);
-					changeState(GGZGameServer::done);
-					break;
-				}
-			}
-			std::cout << "GAME: reachable -> waiting!" << std::endl;
-			changeState(GGZGameServer::waiting);
 		}
+
+
+		std::cout << "GAME: reachable -> waiting!" << std::endl;
+		changeState(GGZGameServer::waiting);
 		break;
 	case op_state_playing:
 		std::cout << "GAME: playing!" << std::endl;
 		changeState(GGZGameServer::playing);
 		break;
 	case op_state_done:
+		reportGame(teams, gr, scores);
 		std::cout << "GAME: done!" << std::endl;
 		changeState(GGZGameServer::done);
+		break;
+	case op_game_statistics:
+		{
+			std::cout << "GAME: send stats!" << std::endl;
+			int teams[players()];
+			GGZGameResult results[players()];
+			for (int p = 0; p < players(); p++) {
+				//teams[p] = seat(p)->team;
+				results[p] = GGZ_GAME_LOSS;
+			}
+			results[0] =  GGZ_GAME_WIN;
+			//reportGame(int *teams, GGZGameResult *results, int *scores);
+			reportGame(NULL, results, NULL);
+		/*
+			int teams[game.num_players];
+			GGZGameResult results[game.num_players];
+			int i;
+
+			for (p = 0; p < game.num_players; p++) {
+				teams[p] = game.players[p].team;
+				results[p] = GGZ_GAME_LOSS;
+			}
+
+			for (i = 0; i < winner_cnt; i++)
+				results[winners[i]] = GGZ_GAME_WIN;
+
+			ggzdmod_report_game(game.ggz, NULL, results, NULL);
+		*/
+		}
 		break;
 	default:
 		//  Discard
