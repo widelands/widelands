@@ -326,6 +326,11 @@ install(
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale)
 find_package (PythonInterp REQUIRED)
 
+if (WIN32)
+  set (WL_CREATE_SYMLINK_COMMAND "copy_directory")
+else (WIN32)
+  set (WL_CREATE_SYMLINK_COMMAND "create_symlink")
+endif (WIN32)
 
 if (${CMAKE_BUILD_TYPE} STREQUAL Release)
   add_custom_target (
@@ -333,15 +338,15 @@ if (${CMAKE_BUILD_TYPE} STREQUAL Release)
     COMMAND cmake -E echo "Preparing directory po"
     COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
     COMMAND cmake -E echo "Preparing directory campaigns"
-    COMMAND cmake -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
     COMMAND cmake -E echo "Preparing directory maps"
-    COMMAND cmake -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
     COMMAND cmake -E echo "Preparing directory tribes"
-    COMMAND cmake -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
     COMMAND cmake -E echo "Preparing directory txts"
-    COMMAND cmake -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
     COMMAND cmake -E echo "Preparing directory worlds"
-    COMMAND cmake -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
     COMMAND cmake -E echo "Running the locale generation task"
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -352,15 +357,15 @@ else (${CMAKE_BUILD_TYPE} STREQUAL Release)
     COMMAND cmake -E echo "Preparing directory po"
     COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
     COMMAND cmake -E echo "Preparing directory campaigns"
-    COMMAND cmake -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
     COMMAND cmake -E echo "Preparing directory maps"
-    COMMAND cmake -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
     COMMAND cmake -E echo "Preparing directory tribes"
-    COMMAND cmake -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
     COMMAND cmake -E echo "Preparing directory txts"
-    COMMAND cmake -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
     COMMAND cmake -E echo "Preparing directory worlds"
-    COMMAND cmake -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
     COMMAND cmake -E echo "Running the locale generation task"
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
