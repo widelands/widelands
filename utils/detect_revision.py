@@ -12,7 +12,9 @@
 #
 ###############################################
 
-import os,sys
+import os
+import sys
+import os.path as p
 
 # Support for bzr local branches
 try:
@@ -52,7 +54,9 @@ def detect_git_revision():
 
 
 def detect_bzr_revision():
-    b = BzrDir.open(".").open_branch()
+    path = p.join(p.dirname(__file__),p.pardir)
+
+    b = BzrDir.open(path).open_branch()
     revno, nick = b.revno(), b.nick
     return "bzr%s[%s] " % (revno,nick)
 
