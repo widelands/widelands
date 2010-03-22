@@ -113,16 +113,28 @@ end
 -- =========
 -- Soldiers 
 -- =========
+function _cnt(a)
+   local rv = 0
+   for sd, c in pairs(a) do rv = rv + c end
+   return rv
+end
+
+function warehouse_tests:test_get_soldiers_empty_at_start()
+   assert_equal(0, _cnt(self.w:get_soldiers("all")))
+end
 function warehouse_tests:test_set_soldiers()
    self.w:set_soldiers({0,0,0,0}, 100)
-   -- TODO: there is no way to verify this ATM
+   assert_equal(100, _cnt(self.w:get_soldiers("all")))
 end
 function warehouse_tests:test_set_soldiers_by_list()
    self.w:set_soldiers{
       [{0,0,0,0}] = 1,
       [{1,1,0,1}] = 2,
    }
-   -- TODO: there is no way to verify this ATM
+   assert_equal(3, _cnt(self.w:get_soldiers("all")))
+   assert_equal(1, self.w:get_soldiers({0,0,0,0}))
+   assert_equal(2, self.w:get_soldiers({1,1,0,1}))
+   assert_equal(0, self.w:get_soldiers({2,1,0,1}))
 end
 function warehouse_tests:test_set_soldiers_hp_too_high()
    assert_error("hp too high", function()

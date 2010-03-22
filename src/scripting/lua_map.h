@@ -35,6 +35,9 @@
 
 void luaopen_wlmap(lua_State *);
 
+namespace Widelands {
+	struct Soldier_Descr;
+}
 
 /*
  * Base class for all classes in wl.map
@@ -205,6 +208,49 @@ protected:
            (lua_State *, Widelands::Tribe_Descr const &);
 };
 
+struct L_HasSoldiers {
+	struct SoldierDescr {
+		SoldierDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev) :
+			hp(ghp), at(gat), de(gde), ev(gev) {}
+		SoldierDescr() : hp(0), at(0), de(0), ev(0) {}
+
+		uint8_t hp;
+		uint8_t at;
+		uint8_t de;
+		uint8_t ev;
+
+		bool operator<(const SoldierDescr & ot) const {
+		  if (hp < ot.hp) return true;
+		  if (at < ot.at) return true;
+		  if (de < ot.de) return true;
+		  if (ev < ot.ev) return true;
+		  return false;
+		}
+		bool operator==(const SoldierDescr & ot) const {
+		  if (hp == ot.hp and at == ot.at and de == ot.de and ev == ot.ev)
+			  return true;
+		  return false;
+		}
+	};
+
+	virtual ~L_HasSoldiers() {}
+
+	virtual int set_soldiers(lua_State * L) = 0;
+	virtual int get_soldiers(lua_State * L) = 0;
+
+	typedef std::vector<const Widelands::Soldier *> SoldiersList;
+	typedef std::map<SoldierDescr, uint32_t> SoldiersMap;
+	typedef std::pair<SoldierDescr, uint32_t> SoldierAmount;
+
+protected:
+	int m_handle_get_soldiers
+		(lua_State *, Widelands::Soldier_Descr const &, SoldiersList const &);
+	SoldiersMap m_parse_set_soldiers_arguments
+		(lua_State *, Widelands::Soldier_Descr const &);
+	int m_get_soldier_levels
+		(lua_State *, int, const Widelands::Soldier_Descr &, SoldierDescr &);
+};
+
 
 class L_Flag : public L_PlayerImmovable, public L_HasWares {
 public:
@@ -284,7 +330,7 @@ protected:
 
 
 class L_Warehouse : public L_Building,
-	public L_HasWares, public L_HasWorkers
+	public L_HasWares, public L_HasWorkers, public L_HasSoldiers
 {
 public:
 	LUNA_CLASS_HEAD(L_Warehouse);
@@ -307,7 +353,7 @@ public:
 	int set_workers(lua_State*);
 	int get_workers(lua_State*);
 	int set_soldiers(lua_State*);
-	// int get_soldiers(lua_State*);
+	int get_soldiers(lua_State*);
 
 	/*
 	 * C Methods
@@ -350,7 +396,7 @@ protected:
 		 const Widelands::Worker_Descr*);
 };
 
-class L_MilitarySite : public L_Building {
+class L_MilitarySite : public L_Building, public L_HasSoldiers {
 public:
 	LUNA_CLASS_HEAD(L_MilitarySite);
 
@@ -365,6 +411,7 @@ public:
 	 */
 	int get_max_soldiers(lua_State * L);
 	int get_soldiers(lua_State * L);
+	int set_soldiers(lua_State * L);
 
 	/*
 	 * Lua Methods

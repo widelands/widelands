@@ -642,6 +642,19 @@ WareList const & Warehouse::get_workers() const
 	return m_supply->get_workers();
 }
 
+const std::vector<const Soldier *> Warehouse::get_soldiers
+	(Editor_Game_Base & egbase) const
+{
+	std::vector<const Soldier *> rv;
+
+	container_iterate_const
+		(std::vector<OPtr<Worker> >, m_incorporated_workers, i)
+		if (upcast(const Soldier, soldier, i.current->get(egbase)))
+			rv.push_back(soldier);
+
+	return rv;
+}
+
 
 
 /*
