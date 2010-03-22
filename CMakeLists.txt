@@ -149,6 +149,12 @@ else (DEFINED MSVC)
   set (HAVE_VARARRAY TRUE CACHE BOOL "Use variable length arrays to improve performance. Requires gcc." )
 endif (DEFINED MSVC)
 
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  message ("Using compiler flags: ${CMAKE_CXX_FLAGS_DEBUG}")
+ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  message ("Using compiler flags: ${CMAKE_CXX_FLAGS_RELEASE}")
+ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+
 if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_INCLUDE_PATH "${WL_3RDPARTY_DIR}/include;${WL_3RDPARTY_DIR}/include/sdl")
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
