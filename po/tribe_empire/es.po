@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:58+0000\n"
-"Last-Translator: raul.ferriz <raul.ferriz@gmail.com>\n"
+"POT-Creation-Date: 2010-03-21 09:15+0000\n"
+"PO-Revision-Date: 2010-03-21 22:48+0000\n"
+"Last-Translator: Agustín Vela <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-03-22 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -32,13 +32,15 @@ msgstr "Dormir"
 #: ../../tribes/empire/arena/conf:14
 #: ../../tribes/empire/colosseum/conf:28
 msgid "Upgrade soldier evade 0"
-msgstr "Mejorar esquiva de soldado 0"
+msgstr "Mejorar escapada de soldado 0"
 
 #: ../../tribes/empire/arena/conf:15
 #: ../../tribes/empire/colosseum/conf:29
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Mejora la escapada de nivel 0 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
 
 #: ../../tribes/empire/armour/conf:1
 msgid "Basic armour for Empire soldiers."
@@ -46,7 +48,7 @@ msgstr "Armadura simple para los soldados Imperiales."
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Produce armaduras para los soldados"
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
@@ -104,23 +106,27 @@ msgstr "Trabajar"
 #: ../../tribes/empire/axe/conf:1
 msgid ""
 "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr ""
+msgstr "El hacha es la herramienta del leñador. Es producida en la herrería."
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Hace pan para los obreros"
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
 msgstr ""
+"La pala de hornear es la herramienta del panadero. Cada panadero necesita la "
+"suya. Es producida en la herrería."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the winegrower, for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"El viticultor necesita este cesto para la recogida de uva. Es producida en "
+"la herrería."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
@@ -153,7 +159,7 @@ msgstr "Transporta objetos a lo largo de tus carreteras."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid "This is a medium armour for Empire soldiers."
-msgstr ""
+msgstr "Esta es una armadura media para los soldados del Imperio."
 
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
@@ -173,12 +179,14 @@ msgstr ""
 
 #: ../../tribes/empire/colosseum/conf:30
 msgid "Upgrade soldier evade 1"
-msgstr "Mejorar esquiva de soldado 1"
+msgstr "Mejorar escapada de soldado 1"
 
 #: ../../tribes/empire/colosseum/conf:31
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Mejora la escapada  de nivel 1 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
 
 #: ../../tribes/empire/conf:18
 msgid "The Widelands Development Team"
@@ -458,7 +466,7 @@ msgstr "Porteador"
 
 #: ../../tribes/empire/conf:109
 msgid "Donkey"
-msgstr ""
+msgstr "Burro"
 
 #: ../../tribes/empire/conf:112
 msgid "Soldier"
@@ -542,7 +550,7 @@ msgstr "Cantero"
 
 #: ../../tribes/empire/conf:134
 msgid "Toolsmith"
-msgstr ""
+msgstr "Herrería"
 
 #: ../../tribes/empire/conf:135
 msgid "Trainer"
@@ -562,11 +570,11 @@ msgstr "Vendimiador"
 
 #: ../../tribes/empire/conf:139
 msgid "Scout"
-msgstr ""
+msgstr "Explorador"
 
 #: ../../tribes/empire/conf:140
 msgid "Donkey Breeder"
-msgstr ""
+msgstr "Criador de burros"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -619,7 +627,7 @@ msgstr "Torre"
 
 #: ../../tribes/empire/conf:161
 msgid "Guardhall"
-msgstr ""
+msgstr "Cuartel"
 
 #: ../../tribes/empire/conf:162
 msgid "Guardhouse"
@@ -651,7 +659,7 @@ msgstr "Cuartel general"
 
 #: ../../tribes/empire/conf:175
 msgid "Headquarters shipwreck"
-msgstr ""
+msgstr "Cuartel general naufragio"
 
 #: ../../tribes/empire/conf:176
 msgid "Warehouse"
@@ -787,11 +795,11 @@ msgstr "Viñedo"
 
 #: ../../tribes/empire/conf:211
 msgid "Scout's House"
-msgstr ""
+msgstr "Casa de explorador"
 
 #: ../../tribes/empire/conf:212
 msgid "Donkeyfarm"
-msgstr ""
+msgstr "Establo"
 
 #: ../../tribes/empire/conf:215
 msgid "Headquarters medium"
@@ -803,11 +811,11 @@ msgstr "Pueblo del Castillo"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Ayuda al transporte en caminos muy concurridos."
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr ""
+msgstr "Cría a los preciados y útiles burros"
 
 #: ../../tribes/empire/farm/conf:15
 msgid "Plant wheat"
@@ -947,6 +955,8 @@ msgid ""
 "Marble columns present the high culture of the Empire, so they are needed "
 "for nearly every bigger building."
 msgstr ""
+"Las columnas de mármol representan la gran cultura del Imperio, por lo que "
+"son necesarias para casi todas las grandes construcciones."
 
 #: ../../tribes/empire/marblemine/conf:22
 #: ../../tribes/empire/quarry/conf:19
@@ -957,6 +967,7 @@ msgstr "Extraer mármol"
 #: ../../tribes/empire/quarry/conf:20
 msgid "Mine marble (only for compatibility with old savegames (build13))"
 msgstr ""
+"Extraer mármol (sólo por compatibilidad con antiguas partidas (build 13))"
 
 #: ../../tribes/empire/marblemine/conf:24
 #: ../../tribes/empire/quarry/conf:17
@@ -967,11 +978,13 @@ msgstr "Extraer piedra"
 #: ../../tribes/empire/quarry/conf:18
 msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
+"Extrae piedra (sólo por compatibilidad con antiguas partidas (build 13))"
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
 msgstr ""
+"Trabaja a mayor profundidad en las minas para obtener carbón, hierro u oro."
 
 #: ../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -984,13 +997,13 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
-"La carne proporciona mucha energía. Es usada en las posadas y tabernas para "
-"preparar comida para los mineros, y en los campos de entrenamiento para "
-"mantener a los guerreros fuertes."
+"La carne es muy energética. Se usa en las posadas y tabernas para preparar "
+"la comida de los mineros, y en los campos de entrenamiento para mantener a "
+"los guerreros fuertes."
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr ""
+msgstr "Muele el trigo para obtener harina."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1016,16 +1029,19 @@ msgid ""
 "This saw is needed by the sawyer to create all the useful tools. It is "
 "produced by the toolsmith."
 msgstr ""
+"El carpintero necesita esta sierra para fabricar herramientas útiles. Se "
+"fabrica en la herrería."
 
 #: ../../tribes/empire/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
-msgstr ""
+msgstr "Explora terreno inexplorado."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
 msgstr ""
+"La guadaña es la herramienta de los granjeros. Se fabrica en la herrería."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -1064,11 +1080,11 @@ msgstr ""
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granit and marble out of laying stones."
-msgstr ""
+msgstr "Extrae piezas brutas de granito y mármol de los estratos de roca."
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Produce herramientas para los obreros"
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -1120,7 +1136,7 @@ msgstr "Fabricar hacha"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Entrena a los soldados"
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1131,6 +1147,8 @@ msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Mejora el ataque de nivel 0 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:41
 msgid "Upgrade soldier attack 1"
@@ -1141,6 +1159,8 @@ msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Mejora el ataque de nivel 1 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:43
 msgid "Upgrade soldier attack 2"
@@ -1151,6 +1171,8 @@ msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Mejora el ataque de nivel 2 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:45
 msgid "Upgrade soldier attack 3"
@@ -1161,6 +1183,8 @@ msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Mejora el ataque de nivel 3 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
@@ -1171,6 +1195,8 @@ msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Mejora la resistencia de nivel 0 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
@@ -1181,6 +1207,8 @@ msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Mejora la resistencia de nivel 1 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
@@ -1191,6 +1219,8 @@ msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Mejora la resistencia de nivel 2 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier hitpoints 3"
@@ -1201,6 +1231,8 @@ msgid ""
 "Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Mejora la resistencia de nivel 3 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid "Trunks are one important build material of the Empire."
@@ -1237,7 +1269,7 @@ msgstr ""
 
 #: ../../tribes/empire/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Produce armas para los soldados"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"

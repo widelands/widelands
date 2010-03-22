@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-14 14:51+0000\n"
-"PO-Revision-Date: 2010-03-15 23:35+0000\n"
+"POT-Creation-Date: 2010-03-21 09:15+0000\n"
+"PO-Revision-Date: 2010-03-21 22:49+0000\n"
 "Last-Translator: Agustín Vela <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-17 04:35+0000\n"
+"X-Launchpad-Export-Date: 2010-03-22 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -560,7 +560,7 @@ msgstr "Castillo"
 
 #: ../../tribes/atlanteans/conf:151
 msgid "Guardhall"
-msgstr ""
+msgstr "Cuartel"
 
 #: ../../tribes/atlanteans/conf:152
 msgid "Guardhouse"
@@ -987,24 +987,24 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:43
 msgid "Upgrade soldier evade 0"
-msgstr "Mejorar esquiva de soldado 0"
+msgstr "Mejorar escapada de soldado 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:44
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Mejora el esquive de nivel 0 del soldado (sólo por compatibilidad con "
+"Mejora la escapada de nivel 0 del soldado (sólo por compatibilidad con "
 "antiguas partidas (build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Upgrade soldier evade 1"
-msgstr "Mejorar esquiva de soldado 1"
+msgstr "Mejorar escapada de soldado 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Mejora el esquive de nivel 1 del soldado (sólo por compatibilidad con "
+"Mejora la escapada  de nivel 1 del soldado (sólo por compatibilidad con "
 "antiguas partidas (build13))"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
