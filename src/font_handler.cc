@@ -179,7 +179,7 @@ PictureID Font_Handler::create_text_surface
 SDL_Surface * Font_Handler::create_single_line_text_surface
 	(TTF_Font & font,
 	 RGBColor const fg, RGBColor const bg,
-	 std::string       gtext,
+	 std::string       text,
 	 Align,
 	 uint32_t    const caret)
 {
@@ -187,19 +187,11 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
 	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(), 0};
 	SDL_Color sdl_bg = {bg.r(), bg.g(), bg.b(), 0};
 
-	// Some Keys (at least on Mac OS X) Identifiy themselves as a \0. We simply
-	// remove all zero bytes
-	std::string text;
-	for (std::string::iterator i = gtext.begin(); i != gtext.end(); i++)
-		if (*i != '\0')
-			text += *i;
-
 	// Work around an Issue in SDL_TTF that dies when the surface
 	// has zero width
 	int width = 0;
 	if (TTF_SizeUTF8(&font, text.c_str(), &width, 0) < 0 or !width)
 		text = " ";
-
 
 	if
 		(SDL_Surface * const text_surface =

@@ -194,8 +194,13 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 				set_text(txt.c_str());
 			}
 			break;
+
 		default:
-			if (is_printable(code) and txt.size() < m_maxchars) {
+			// Nullbytes happen on MacOS X when entering Multiline Chars, like for
+			// example ~ + o results in a o with a tilde over it. The ~ is reported
+			// as a 0 on keystroke, the o then as the unicode character. We simply
+			// ignore the 0.
+			if (is_printable(code) and code.unicode and txt.size() < m_maxchars) {
 				if (code.unicode < 0x80)         // 1 byte char
 					txt.insert(txt.begin() + m_cur_pos++, 1, code.unicode);
 				else if (code.unicode < 0x800) { // 2 byte char
