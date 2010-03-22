@@ -1536,6 +1536,7 @@ int L_MilitarySite::warp_soldiers(lua_State * L) {
 }
 
 /* RST
+ * TODO: not here
 	.. method:: get_soldiers([descr])
 
 		Returns the number of soldiers of the given type in this building. See
@@ -1549,8 +1550,20 @@ int L_MilitarySite::warp_soldiers(lua_State * L) {
 int L_MilitarySite::get_soldiers(lua_State * L) {
 	Game & game = get_game(L);
 	MilitarySite * ms = get(L, game);
-	std::vector<Soldier *> vec = ms->stationedSoldiers();
+	Tribe_Descr const & tribe = ms->owner().tribe();
 
+	Soldier_Descr const & soldier_descr =  //  soldiers
+			 ref_cast<Soldier_Descr const, Worker_Descr const>
+						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	std::vector<Soldier *> vec = ms->stationedSoldiers();
+	SoldiersList current_soldiers;
+	container_iterate_const(std::vector<Soldier *>, vec, i)
+		current_soldiers.push_back(*i);
+
+	return m_handle_get_soldiers(L, soldier_descr, current_soldiers);
+}
+#if 0
 	if (lua_gettop(L) == 1 or lua_isnil(L, 2)) {
 		lua_pushuint32(L, vec.size());
 		return 1;
@@ -1578,6 +1591,7 @@ int L_MilitarySite::get_soldiers(lua_State * L) {
 
 	return 1;
 }
+#endif 
 
 /*
  ==========================================================
