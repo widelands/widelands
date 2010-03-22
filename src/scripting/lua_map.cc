@@ -712,7 +712,8 @@ const PropertyType<L_Flag> L_Flag::Properties[] = {
  */
 static L_Flag::WaresMap _count_wares(Flag & f, Tribe_Descr const & tribe) {
 	L_Flag::WaresMap rv;
-	container_iterate_const(Flag::Wares, f.get_items(), w) {
+	Flag::Wares current_wares = f.get_items();
+	container_iterate_const(Flag::Wares, current_wares, w) {
 		Ware_Index i = tribe.ware_index((*w.current)->descr().name());
 		if (not rv.count(i))
 			rv.insert(L_Flag::WareAmount(i, 1));
@@ -754,7 +755,8 @@ int L_Flag::set_wares(lua_State * L)
 
 		if (d < 0) {
 			while (d) {
-				container_iterate_const(Flag::Wares, f->get_items(), w) {
+				Flag::Wares current_items = f->get_items();
+				container_iterate_const(Flag::Wares, current_items, w) {
 					Ware_Index i = tribe.ware_index((*w.current)->descr().name());
 					if(i == sp->first) {
 						const_cast<WareInstance *>(*w.current)->remove(game);
