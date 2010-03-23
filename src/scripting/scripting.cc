@@ -35,6 +35,7 @@
 #include "scripting.h"
 
 // TODO: implement trainingssite
+// TODO: rename LuaFunction into LuaCoroutine
 
 // FUTURE: access to player stock via Player.get_wares and get_workers
 // FUTURE: access to constructionsites via Player.get_buildings

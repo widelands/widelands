@@ -36,34 +36,110 @@ LuaInterface::interpret_string. This means that this is only run on the
 current machine and that means that it could desync network games if it alters
 the game state in some way. It is an extremely powerful debug tool though.
 
-Classes
--------
+Lua Classes
+-----------
 
-Lua uses the prototype principle for OOP. C++ uses a class based approach.
-Starting from a thin wrapper implementation from the Lua users wiki called
-Luna_ I implemented a easy wrapper for C++ classes that supports inheritance
-and properties. The implementation can be found in ``scripting/luna*``. There
-are many examples of wrapped classes in the code, so this is just a short
-rundown of what to do:
+Lua uses the prototype principle for OOP, that is an Instance of a class knows
+how to clone itself. C++ uses a class based approach.  Starting from a thin
+wrapper implementation from the Lua users wiki called Luna_ I implemented a
+easy wrapper for C++ classes that supports inheritance and properties. The
+implementation can be found in ``scripting/luna*``. There are many examples of
+wrapped classes in the code, so this is just a short rundown of what to do:
 
 Write the class, make sure that inheritance matches the one you want to have
-in Lua later one (that is L_Immovable must be a child of L_MapObject). 
-TODO: get_modulename, LUNA_CLASS_HEAD, Constructors needed?, __persist
-__unpersists, structures that define functions and properties.
+in Lua later one (that is L_Immovable must be a child of L_MapObject). All
+classes must be derived from ``LunaClass``. Each class must then contain a
+call to ``LUNA_CLASS_HEAD(klassname)`` in it's public definitions. This
+defines static tables for properties and methods and the name for this class. The filling
+of this data is usually done in the corresponding implementation file. A small
+excerpt for the L_Player class looks like so:
+
+.. code-block:: c++
+
+   const char L_Player::className[] = "Player"; // Name of this class
+   const MethodType<L_Player> L_Player::Methods[] = {
+      METHOD(L_Player, __eq),  // compare operator 
+      METHOD(L_Player, place_flag), // a method called place_flag
+      {0, 0}, // end of methods table
+   };
+   const PropertyType<L_Player> L_Player::Properties[] = {
+      PROP_RO(L_Player, number), // Read only property
+      PROP_RW(L_Player, name), // Read write property
+      {0, 0, 0},
+   };
+
+Each method and getters and setters must be defined inside the class.
+Continuing this example, this would mean Player must at least define the
+following public functions to satisfy it's definition tables:
+
+.. code-block:: c++
+
+   int L_Player::__eq(lua_State *);
+   int L_Player::place_flag(lua_State *);
+   int L_Player::get_number(lua_State *);
+   int L_Player::get_name(lua_State *);
+   int L_Player::set_name(lua_State *);
+
+.. ** <-- Fixes vims syntax highlighting
+
+Luna Classes need even more boilerplate to work correctly. Firstly, they must
+define a function ``get_modulename`` that returns a ``const char *`` which
+will be the submodule name where this class is registered. For our example,
+Player would return ``"game"`` because it is defined in ``wl.game``. 
+
+The class must also define two constructors, one that takes no arguments and
+is only used to create a empty class that is created for unpersisting. And a
+second one that takes a ``lua_State *`` that is called when the construction
+is requested from Lua, that is if ``wl.game.Player()`` is called. Some classes
+can't be constructed from Lua and should then answer with ``report_error()``. 
+
+En plus, a function ``__persist(lua_State *)`` and a function
+``__unpersist(lua_State *)`` must be defined. They are discussed in the next
+section. 
 
 .. _Luna: http://lua-users.org/wiki/SimplerCppBinding
-
-TODO: luna, my extensions, properties and methods, load and save
-functionalities.
 
 Persistence
 -----------
 
-TODO: Map_Scripting_Data_Packet. wl.* is not saved.
-TODO: pluto, my changes to it (especially persisting classes)
-TODO: map object saver % loader
+When a savegame is created, the current environment of Lua is persisted. For
+this, I used a library called Pluto_ which is in the public domain. It was
+heavily modified to work with widelands, the ``FileRead`` and ``FileWrite``
+classes and with the Luna class concepts.
 
+.. _Pluto: http://luaforge.net/projects/pluto/
+ 
+The global environment is persisted into the file map/globals.dump. Everything is 
+persisted except of the Lua build-in functions and everything in the ``wl``
+table. Those are c-functions that can not be written out to disk portably.
+Everything else can be saved, that is also everything in the auxiliary scripts
+are saved to disk, so save games only depend on the API defined inside the
+``wl`` module.
 
+Coroutines are persisted together with their ``Cmd_LuaFunction`` package. 
+
+Luna classes have to implement two functions to be properly persistable:
+
+``__persist(lua_State *)``
+   This function is called with an empty table on top of the stack. It is
+   expected that this function stores persistable data into this table. This
+   table is then persisted instead of the object. Some convenience macros are
+   defined in ``luna.h`` to ease this task (e.g. PERS_UINT32).
+
+``__unpersist(lua_State *)``
+   On loading, an instance of the user object is created via the default
+   constructor. This function is then called with the table that was created
+   by ``__persist()`` on the top of the stack. The object is then expected to
+   recreate it's former state with this table. There are equivalent
+   unpersisting macros defined to help with this task (e.g. UNPERS_UINT32).
+
+Widelands reassigns some serial number upon saving and restores them upon
+loading. Some Luna classes need this information (for example
+:class:`MapObject`). Access is provided via the functions ``get_mol(lua_State
+*)`` to the Map_Map_Object_Loader and ``get_mos(lua_State *)`` to the
+Map_Map_Object_Saver. These function return 0 when not called in
+``__persist`` and ``__unpersist``.
+		
 Testing
 -------
 
@@ -104,8 +180,9 @@ should be reported.
 
 persistence.wmf
 ^^^^^^^^^^^^^^^
-This is a much shorter script that only checks if the various Lua classes are
-correctly saved and reloaded again. First, you need to run it as scenario::
+This is a much shorter script that only checks if some data is correctly saved
+and reloaded again. It is also used to check compatibility of savegames
+between different versions. First, you need to run it as scenario::
 
    $ ./widelands --scenario=src/scripting/test/persistence.wmf
        
