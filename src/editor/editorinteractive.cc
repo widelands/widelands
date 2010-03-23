@@ -17,31 +17,33 @@
  *
  */
 
-#include "editorinteractive.h"
+#include <SDL_keysym.h>
+
+#include "debugconsole.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "logic/map.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "map_io/widelands_map_loader.h"
+#include "profile/profile.h"
 #include "tools/editor_delete_immovable_tool.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "ui_menus/editor_main_menu.h"
 #include "ui_menus/editor_main_menu_load_map.h"
 #include "ui_menus/editor_main_menu_save_map.h"
 #include "ui_menus/editor_player_menu.h"
 #include "ui_menus/editor_tool_menu.h"
 #include "ui_menus/editor_toolsize_menu.h"
-#include "wui/game_tips.h"
-#include "graphic/graphic.h"
-#include "i18n.h"
-#include "wui/interactive_base.h"
-#include "logic/map.h"
-#include "wui/overlay_manager.h"
-#include "logic/player.h"
-#include "profile/profile.h"
-#include "logic/tribe.h"
 #include "warning.h"
-#include "map_io/widelands_map_loader.h"
 #include "wlapplication.h"
+#include "wui/game_chat_menu.h"
+#include "wui/game_tips.h"
+#include "wui/interactive_base.h"
+#include "wui/overlay_manager.h"
 
-#include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
-
-#include <SDL_keysym.h>
+#include "editorinteractive.h"
 
 using Widelands::Building;
 
@@ -412,6 +414,17 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code)
 			tool_menu_btn();
 			handled = true;
 			break;
+
+#ifdef DEBUG //  only in debug builds
+		case SDLK_F6:
+			if (get_display_flag(dfDebug)) {
+				new GameChatMenu
+					(this, m_debugconsole, *DebugConsole::getChatProvider());
+				ref_cast<GameChatMenu, UI::UniqueWindow>(*m_debugconsole.window)
+					.enter_chat_message(false);
+			}
+			return true;
+#endif
 
 		default:
 			break;

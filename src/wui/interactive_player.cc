@@ -237,9 +237,7 @@ m_toggle_help
 	addCommand
 		("toggleSeeAll",
 		 boost::bind(&Interactive_Player::cmdToggleSeeAll, this, _1));
-	addCommand
-		("lua",
-		 boost::bind(&Interactive_Player::cmdLua, this, _1));
+	setDefaultCommand (boost::bind(&Interactive_Player::cmdLua, this, _1));
 #endif
 }
 
@@ -550,16 +548,11 @@ void Interactive_Player::cmdToggleSeeAll(std::vector<std::string> const & args)
 
 void Interactive_Player::cmdLua(std::vector<std::string> const & args)
 {
-	if (args.size() < 2) {
-		DebugConsole::write("Usage: lua <string to interpret>");
-		return;
-	}
-
 	std::string cmd;
 
 	// Drop lua, start with the second word
 	for(wl_const_range<std::vector<std::string> >
-		i(args.begin()+1, args.end());;)
+		i(args.begin(), args.end());;)
 	{
 		cmd += i.front();
 		if (i.advance().empty())

@@ -143,6 +143,7 @@ private:
 	UI::UniqueWindow::Registry m_immovablemenu;
 	UI::UniqueWindow::Registry m_bobmenu;
 	UI::UniqueWindow::Registry m_resourcesmenu;
+	UI::UniqueWindow::Registry m_debugconsole;
 
 	UI::Callback_Button<Editor_Interactive> m_toggle_main_menu;
 	UI::Callback_Button<Editor_Interactive> m_toggle_tool_menu;

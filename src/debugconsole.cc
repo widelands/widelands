@@ -32,11 +32,13 @@ struct Console : public ChatProvider, public Handler {
 
 	std::vector<ChatMessage> messages;
 	CommandMap commands;
+	Handler::HandlerFn default_handler;
 
 	Console()
 	{
 		addCommand("help", boost::bind(&Console::cmdHelp, this, _1));
 		addCommand("ls", boost::bind(&Console::cmdLs, this, _1));
+		default_handler = boost::bind(&Console::cmdErr, this, _1);
 	}
 
 	~Console()
@@ -52,6 +54,10 @@ struct Console : public ChatProvider, public Handler {
 	{
 		container_iterate_const(CommandMap, commands, i)
 			write(i.current->first);
+	}
+
+	void cmdErr(std::vector<std::string> const & args) {
+		write("Unknown command: " + args[0]);
 	}
 
 	void send(std::string const & msg)
@@ -72,7 +78,7 @@ struct Console : public ChatProvider, public Handler {
 
 		CommandMap::const_iterator it = commands.find(arg[0]);
 		if (it == commands.end()) {
-			write("Unknown command: " + arg[0]);
+			default_handler(arg);
 			return;
 		}
 
@@ -132,6 +138,11 @@ void Handler::addCommand(std::string const & cmd, HandlerFn const & fun)
 {
 	g_console.commands[cmd] = fun;
 	m_commands.push_back(cmd);
+}
+
+void Handler::setDefaultCommand(HandlerFn const & fun)
+{
+	g_console.default_handler = fun;
 }
 
 }
