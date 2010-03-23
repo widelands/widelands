@@ -16,3 +16,8 @@ marblecolumn=2
 [idle]
 pics=fortress_i_??.png
 hotspot=90 106
+
+[build]
+pics=fortress_b_??.png
+hotspot=90 106
+
