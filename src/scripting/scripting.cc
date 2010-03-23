@@ -35,7 +35,7 @@
 #include "scripting.h"
 
 // TODO: rethink position, location, field. Should maybe be field in all instances
-// TODO: cleanup set_soldiers, get_soldiers, warp_soldiers.
+// TODO: replace warp_soldiers through set_soldiers
 // TODO: implement trainingssite
 
 // FUTURE: access to player stock via Player.get_wares and get_workers

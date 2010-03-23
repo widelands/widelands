@@ -410,13 +410,12 @@ public:
 	 * Properties
 	 */
 	int get_max_soldiers(lua_State * L);
-	int get_soldiers(lua_State * L);
-	int set_soldiers(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
-	int warp_soldiers(lua_State * L);
+	int get_soldiers(lua_State * L);
+	int set_soldiers(lua_State * L);
 
 	/*
 	 * C Methods

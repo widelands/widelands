@@ -412,8 +412,102 @@ PARSERS(ware, Ware);
 PARSERS(worker, Worker);
 #undef PARSERS
 
+/* RST
+HasSoldiers
+------------
 
-// TODO: document this class
+.. class:: HasSoldiers
+
+	Analogon to :class:`HasWorkers`, but for Soldiers. Due to differences in
+	Soldiers and implementation details in Lua this class has a slightly
+	different interface than :class:`HasWorkers`. Supported at the time of this writing
+	by :class:`~wl.map.Warehouse`, :class:`~wl.map.MilitarySite` and
+	:class:`~wl.map.TrainingsSite`.
+*/
+
+/* RST
+	.. method:: get_soldiers(descr)
+
+		Gets information about the soldiers in a location.
+
+		:arg descr: can be either of
+
+		* a soldier description.
+			Returns an :class:`integer` which is the number of soldiers of this
+			kind in this building.
+
+			A soldier description is a :class:`array` that contains the level for
+			hitpoints, attack, defense and evade (in this order). An usage example:
+
+			.. code-block:: lua
+
+				w:get_soldiers({0,0,0,0})
+
+			would return the number of soldiers of level 0 in this location.
+
+		* the string :const:`all`.
+			In this case a :class:`table` of (soldier descriptions, count) is
+			returned. Note that the following will not work, because Lua indexes
+			tables by identity:
+
+			.. code-block:: lua
+
+				w:set_soldiers({0,0,0,0}, 100)
+				w:get_soldiers({0,0,0,0}) -- works, returns 100
+				w:get_soldiers("all")[{0,0,0,0}] -- works not, this is nil
+
+				-- Following is a working way to check for a {0,0,0,0} soldier
+				for descr,count in pairs(w:get_soldiers("all")) do
+					if descr[1] == 0 and descr[2] == 0 and
+						descr[3] == 0 and descr[4] == 0 then
+							print(count)
+					end
+				end
+
+		:returns: Number of soldiers that match descr or the :class:`table`
+			containing all soldiers
+		:rtype: :class:`integer` or :class:`table`.
+*/
+
+/* RST
+	.. method:: set_soldiers(which[, amount])
+
+		Analogous to :meth:`HasWorkers.set_workers`, but for soldiers. Instead of
+		a name a :class:`array` is used to define the soldier. See
+		:meth:`get_soldiers` for an example.
+
+		Usage example:
+
+		.. code-block:: lua
+
+			l:set_soldiers({0,0,0,0}, 100)
+
+		would add 100 level 0 soldiers. While
+
+		.. code-block:: lua
+
+			l:set_soldiers{
+			  [{0,0,0,0}] = 10,
+			  [{1,2,3,4}] = 5,
+			)
+
+		would add 10 level 0 soldier and 5 soldiers with hit point level 1,
+		attack level 2, defense level 3 and evade level 4 (as long as this is
+		legal for the players tribe).
+
+		:arg which: either a table of (description, count) pairs or one
+			description. In that case amount has to be specified as well.
+		:type which: :class:`table` or :class:`array`.
+*/
+
+/* RST
+	.. attribute:: max_soldiers
+
+		(RO) The maximum number of soldiers that can be inside this building at
+		one time. If it is not constrained, like for :class:`~wl.map.Warehouse`
+		this will be :const:`nil`.
+*/
+
 int L_HasSoldiers::m_get_soldier_levels
 	(lua_State * L, int tidx, const Soldier_Descr & sd, SoldierDescr & rv)
 {
@@ -962,7 +1056,7 @@ Road
 
 .. class:: Road
 
-	Child of: :class:`PlayerImmovable`
+	Child of: :class:`PlayerImmovable`, :class:`HasWorkers`
 
 	One flag in the economy of this Player.
 */
@@ -1145,7 +1239,8 @@ Warehouse
 
 .. class:: Warehouse
 
-	Child of: :class:`Building`, :class:`HasWares`
+	Child of: :class:`Building`, :class:`HasWares`, :class:`HasWorkers`,
+	:class:`HasSoldiers`
 
 	Every Headquarter or Warehouse on the Map is of this type.
 */
@@ -1174,7 +1269,6 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
  LUA METHODS
  ==========================================================
  */
-// Documented in parent class
 #define WH_SET(type, btype) \
 int L_Warehouse::set_##type##s(lua_State * L) { \
 	Warehouse * wh = get(L, get_game(L)); \
@@ -1221,32 +1315,7 @@ WH_GET(ware, Ware);
 WH_GET(worker, Worker);
 #undef GET
 
-/* RST
- * TODO: docu should not be here.
-	.. method:: set_soldiers(which[, amount])
-
-		Analogous to :meth:`set_wares`, but for soldiers. Instead of
-		a name a :class:`array` is used to define the soldier. The array contains
-		the level for hitpoints, attack, defense, evade in this order.  A usage
-		example:
-
-		.. code-block:: lua
-
-			w:set_soldiers({0,0,0,0}, 100)
-
-		would add 100 level 0 soldiers. While
-
-		.. code-block:: lua
-
-			w:set_soldiers{
-			  [{0,0,0,0}] = 10,
-			  [{1,2,3,4}] = 5,
-			)
-
-		would add 10 level 0 soldier and 5 soldiers with hit point level 1,
-		attack level 2, defense level 3 and evade level 4 (as long as this is
-		legal for the players tribe).
-*/
+// documented in parent class
 int L_Warehouse::set_soldiers(lua_State * L) {
 	Game & game = get_game(L);
 	Warehouse * wh = get(L, game);
@@ -1272,7 +1341,7 @@ int L_Warehouse::set_soldiers(lua_State * L) {
 	return 0;
 }
 
-// document in base class
+// documented in parent class
 int L_Warehouse::get_soldiers(lua_State * L) {
 	Game & game = get_game(L);
 	Warehouse * wh = get(L, game);
@@ -1300,7 +1369,7 @@ ProductionSite
 
 .. class:: ProductionSite
 
-	Child of: :class:`Building`, :class:`HasWares`
+	Child of: :class:`Building`, :class:`HasWares`, :class:`HasWorkers`
 
 	Every building that produces anything.
 */
@@ -1442,14 +1511,14 @@ MilitarySite
 
 .. class:: MilitarySite
 
-	Child of: :class:`Building`
+	Child of: :class:`Building`, :class:`HasSoldiers`
 
 	Miltary Buildings
 */
 const char L_MilitarySite::className[] = "MilitarySite";
 const MethodType<L_MilitarySite> L_MilitarySite::Methods[] = {
-	METHOD(L_MilitarySite, warp_soldiers),
 	METHOD(L_MilitarySite, get_soldiers),
+	METHOD(L_MilitarySite, set_soldiers),
 	{0, 0},
 };
 const PropertyType<L_MilitarySite> L_MilitarySite::Properties[] = {
@@ -1462,12 +1531,7 @@ const PropertyType<L_MilitarySite> L_MilitarySite::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: max_soldiers
-
-		(RO) The maximum number of soldiers that can be inside this building
-			at one time.
-*/
+// documented in parent class
 int L_MilitarySite::get_max_soldiers(lua_State * L) {
 	lua_pushuint32
 		(L, get(L, get_game(L))->descr().get_max_number_of_soldiers());
@@ -1480,29 +1544,8 @@ int L_MilitarySite::get_max_soldiers(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
-/* RST
-	.. method:: warp_soldiers(list)
-
-		The equivalent to :meth:`~wl.map.HasWorkers.set_workers`.
-		Creates soldiers out of thin air. ``list`` is a table of soldier
-		descriptions and counts, see :meth:`wl.map.Warehouse.set_soldiers`
-		for a description.
-*/
-// TODO: fix me
+// documented in parent class
 int L_MilitarySite::set_soldiers(lua_State * L) {
-	return 0;
-}
-int L_MilitarySite::warp_soldiers(lua_State * L) {
-	luaL_checktype(L, 2, LUA_TTABLE);
-
-	// Check that it is not called int the wrong way: warp_soldiers({0,0,0,0}, 1)
-	lua_pushuint32(L, 1);
-	lua_rawget(L, 2);
-	if (lua_isnumber(L, -1))
-		return report_error
-			(L, "Expects an array of (Soldier_descr,count) pairs!");
-	lua_pop(L, 1);
-
 	Game & game = get_game(L);
 	MilitarySite * ms = get(L, game);
 	Tribe_Descr const & tribe = ms->owner().tribe();
@@ -1511,42 +1554,75 @@ int L_MilitarySite::warp_soldiers(lua_State * L) {
 		ref_cast<Soldier_Descr const, Worker_Descr const>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
-	lua_pushnil(L);
-	while (lua_next(L, 2) != 0) {
-		SoldierDescr de;
-		m_get_soldier_levels(L, 3, soldier_descr, de);
-		uint32_t count = luaL_checkuint32(L, -1);
+	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
 
-		for (uint32_t j = count; j; --j) {
-			Soldier & soldier =
-				ref_cast<Soldier, Worker>
-				(soldier_descr.create
-				 (game, ms->owner(), 0, ms->get_position()));
-			soldier.set_level(de.hp, de.at, de.de, de.ev);
+	// Get information about current soldiers
+	std::vector<Soldier *> curs = ms->stationedSoldiers();
+	SoldiersMap hist;
+	container_iterate(std::vector<Soldier* >, curs, s) {
+		SoldierDescr sd
+			((*s.current)->get_hp_level(),
+			 (*s.current)->get_attack_level(),
+			 (*s.current)->get_defense_level(),
+			 (*s.current)->get_evade_level());
 
-			if (ms->add_soldier(game, soldier)) {
-				return report_error(L, "No space left for soldier!");
-				soldier.remove(game);
+		SoldiersMap::iterator i = hist.find(sd);
+		if (i == hist.end())
+			hist[sd] = 1;
+		else
+			i->second += 1;
+		if (not setpoints.count(sd))
+			setpoints[sd] = 0;
+	}
+
+	// Now adjust them
+	container_iterate_const(SoldiersMap, setpoints, sp) {
+		uint32_t cur = 0;
+		SoldiersMap::iterator i = hist.find(sp->first);
+		if (i != hist.end())
+			cur = i->second;
+
+		int d = sp->second - cur;
+		if (d < 0) {
+			while (d) {
+				std::vector<Soldier *> curs = ms->stationedSoldiers();
+				container_iterate_const(std::vector<Soldier *>, curs, s)
+				{
+					SoldierDescr is
+						((*s.current)->get_hp_level(),
+						 (*s.current)->get_attack_level(),
+						 (*s.current)->get_defense_level(),
+						 (*s.current)->get_evade_level());
+
+					if (is == sp->first) {
+						(*s.current)->remove(game);
+						++d;
+						break;
+					}
+				}
+			}
+		} else if (d > 0) {
+			for ( ; d; --d) {
+				Soldier & soldier =
+					ref_cast<Soldier, Worker>
+					(soldier_descr.create
+					 (game, ms->owner(), 0, ms->get_position()));
+
+				soldier.set_level
+					(sp.current->first.hp, sp.current->first.at,
+					 sp.current->first.de, sp.current->first.ev);
+
+				if (ms->add_soldier(game, soldier)) {
+					return report_error(L, "No space left for soldier!");
+					soldier.remove(game);
+				}
 			}
 		}
-
-		lua_pop(L, 1);
 	}
 	return 0;
 }
 
-/* RST
- * TODO: not here
-	.. method:: get_soldiers([descr])
-
-		Returns the number of soldiers of the given type in this building. See
-		:meth:`warp_soldiers` for a description of the description of soldiers.
-		If descr is not given or :const:`nil` the total number of soldiers is
-		returned.
-
-		:returns: Number of soldiers that match descr
-		:rtype: :class:`integer`
-*/
+// documented in parent class
 int L_MilitarySite::get_soldiers(lua_State * L) {
 	Game & game = get_game(L);
 	MilitarySite * ms = get(L, game);
@@ -1563,35 +1639,6 @@ int L_MilitarySite::get_soldiers(lua_State * L) {
 
 	return m_handle_get_soldiers(L, soldier_descr, current_soldiers);
 }
-#if 0
-	if (lua_gettop(L) == 1 or lua_isnil(L, 2)) {
-		lua_pushuint32(L, vec.size());
-		return 1;
-	}
-
-	Tribe_Descr const & tribe = ms->owner().tribe();
-
-	Soldier_Descr const & soldier_descr =  //  soldiers
-		ref_cast<Soldier_Descr const, Worker_Descr const>
-			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	uint32_t count = 0;
-	SoldierDescr de;
-	m_get_soldier_levels(L, 2, soldier_descr, de);
-#define CHECK(type, val) \
-		((*i.current)->get_ ##type ## _level() == de.val)
-	container_iterate_const(std::vector<Soldier *>, vec, i)
-		if
-			(CHECK(hp, hp) and CHECK(attack, at) and
-			 CHECK(defense, de) and CHECK(evade, ev))
-				++count;
-#undef CHECK
-
-	lua_pushuint32(L, count);
-
-	return 1;
-}
-#endif 
 
 /*
  ==========================================================

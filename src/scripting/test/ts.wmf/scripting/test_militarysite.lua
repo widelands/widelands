@@ -16,7 +16,7 @@ function militarysite_tests:setup()
    self.f1 = wl.map.Field(10,10)
    self.p = wl.game.Player(1)
 
-   self.sentry = self.p:place_building("sentry", self.f1)
+   self.fortress = self.p:place_building("fortress", self.f1)
 end
 function militarysite_tests:teardown()
    pcall(function()
@@ -24,38 +24,55 @@ function militarysite_tests:teardown()
    end)
 end
 function militarysite_tests:test_no_soldiers_initially()
-   assert_equal(0, _cnt(self.sentry:get_soldiers("all")))
+   assert_equal(0, _cnt(self.fortress:get_soldiers("all")))
 end
-function militarysite_tests:test_warp_soldiers_one_at_a_time()
-   self.sentry:warp_soldiers{[{0,0,0,0}] = 1}
-   assert_equal(1, _cnt(self.sentry:get_soldiers("all")))
-   assert_equal(1, self.sentry:get_soldiers({0,0,0,0}))
-   self.sentry:warp_soldiers{[{3,0,0,1}] = 1}
-   assert_equal(2, _cnt(self.sentry:get_soldiers("all")))
-   assert_equal(1, self.sentry:get_soldiers({0,0,0,0}))
-   assert_equal(1, self.sentry:get_soldiers({3,0,0,1}))
+function militarysite_tests:test_max_soldiers()
+   assert_equal(8, self.fortress.max_soldiers);
 end
-function militarysite_tests:test_warp_soldier_illegal_use()
-   assert_error("Expects a list of soldiers", function() 
-      self.sentry:warp_soldiers({0,0,0,0}, 2)
-   end)
+function militarysite_tests:test_set_soldiers_single_arg()
+   self.fortress:set_soldiers({0,0,0,0}, 2)
+   assert_equal(2, self.fortress:get_soldiers({0,0,0,0}))
+end
+function militarysite_tests:test_set_soldiers_multi_arg()
+   self.fortress:set_soldiers{
+      [{0,0,0,0}] = 2,
+      [{1,1,0,1}] = 3
+   }
+   assert_equal(5, _cnt(self.fortress:get_soldiers("all")))
+   assert_equal(2, self.fortress:get_soldiers({0,0,0,0}))
+   assert_equal(3, self.fortress:get_soldiers({1,1,0,1}))
+end
+function militarysite_tests:test_set_soldiers_add_and_remove()
+   self.fortress:set_soldiers{[{0,0,0,0}] = 3}
+   assert_equal(3, _cnt(self.fortress:get_soldiers("all")))
+   assert_equal(3, self.fortress:get_soldiers({0,0,0,0}))
+   self.fortress:set_soldiers{[{3,0,0,1}] = 1, [{0,0,0,0}] = 1}
+   assert_equal(2, _cnt(self.fortress:get_soldiers("all")))
+   assert_equal(1, self.fortress:get_soldiers({0,0,0,0}))
+   assert_equal(1, self.fortress:get_soldiers({3,0,0,1}))
+   self.fortress:set_soldiers({3,2,0,1}, 1)
+   assert_equal(1, _cnt(self.fortress:get_soldiers("all")))
+   assert_equal(0, self.fortress:get_soldiers({0,0,0,0}))
+   assert_equal(0, self.fortress:get_soldiers({3,0,0,1}))
+   assert_equal(1, self.fortress:get_soldiers({3,2,0,1}))
 end
 
-function militarysite_tests:test_warp_soldiers_all_at_once()
-   self.sentry:warp_soldiers{[{0,0,0,0}] = 2}
-   assert_equal(2, _cnt(self.sentry:get_soldiers("all")))
-   assert_equal(2, self.sentry:get_soldiers({0,0,0,0}))
+function militarysite_tests:test_set_soldiers_all_at_once()
+   self.fortress:set_soldiers{[{0,0,0,0}] = self.fortress.max_soldiers}
+   assert_equal(self.fortress.max_soldiers,
+      _cnt(self.fortress:get_soldiers("all")))
+   assert_equal(self.fortress.max_soldiers,
+      self.fortress:get_soldiers({0,0,0,0}))
 end
 function militarysite_tests:test_illegal_soldier()
-   assert_error("illegal name", function()
-      self.sentry:warp_soldiers{[{10,0,0,0}] = 1}
+   assert_error("illegal level", function()
+      self.fortress:set_soldiers{[{10,0,0,0}] = 1}
    end)
 end
 function militarysite_tests:test_no_space()
-   self.sentry:warp_soldiers{[{0,0,0,0}] = 1}
    assert_error("no_space", function()
-      self.sentry:warp_soldiers{[{0,0,0,0}] = 2}
+      self.fortress:set_soldiers{[{0,0,0,0}] = 9}
   end)
-   assert_equal(2, _cnt(self.sentry:get_soldiers("all")))
+   assert_equal(8, _cnt(self.fortress:get_soldiers("all")))
 end
 
