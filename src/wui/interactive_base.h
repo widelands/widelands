@@ -22,6 +22,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
+#include "debugconsole.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "mapview.h"
@@ -41,7 +42,8 @@ struct InteractiveBaseInternals;
  * This is used to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-struct Interactive_Base : public Map_View {
+struct Interactive_Base : public Map_View, public DebugConsole::Handler {
+
 	friend class Sound_Handler;
 
 	enum {
@@ -167,10 +169,13 @@ protected:
 	}
 	UI::Box           m_toolbar;
 
+
 private:
+	void cmdLua(std::vector<std::string> const & args);
 	void update_speedlabel();
 
 	UI::Textarea m_label_speed;
+	UI::UniqueWindow::Registry m_debugconsole;
 };
 
 #define PIC2 g_gr->get_picture(PicMod_UI, "pics/but2.png")

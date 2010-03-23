@@ -53,7 +53,6 @@
 #include "logic/tribe.h"
 #include "overlay_manager.h"
 #include "profile/profile.h"
-#include "scripting/scripting.h"
 #include "stock_menu.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
@@ -237,7 +236,6 @@ m_toggle_help
 	addCommand
 		("toggleSeeAll",
 		 boost::bind(&Interactive_Player::cmdToggleSeeAll, this, _1));
-	setDefaultCommand (boost::bind(&Interactive_Player::cmdLua, this, _1));
 #endif
 }
 
@@ -471,16 +469,6 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
 				.enter_chat_message();
 			return true;
-#ifdef DEBUG //  only in debug builds
-		case SDLK_F6:
-			if (get_display_flag(dfDebug)) {
-				new GameChatMenu
-					(this, m_debugconsole, *DebugConsole::getChatProvider());
-				ref_cast<GameChatMenu, UI::UniqueWindow>(*m_debugconsole.window)
-					.enter_chat_message(false);
-			}
-			return true;
-#endif
 		default:
 			break;
 		}
@@ -545,29 +533,4 @@ void Interactive_Player::cmdToggleSeeAll(std::vector<std::string> const & args)
 
 	player().set_see_all(not player().see_all());
 }
-
-void Interactive_Player::cmdLua(std::vector<std::string> const & args)
-{
-	std::string cmd;
-
-	// Drop lua, start with the second word
-	for(wl_const_range<std::vector<std::string> >
-		i(args.begin(), args.end());;)
-	{
-		cmd += i.front();
-		if (i.advance().empty())
-			break;
-		cmd += ' ';
-	}
-
-	DebugConsole::write("Starting Lua interpretation!");
-	try {
-		game().lua().interpret_string(cmd);
-	} catch (LuaError & e) {
-		DebugConsole::write(e.what());
-	}
-
-	DebugConsole::write("Ending Lua interpretation!");
-}
-
 

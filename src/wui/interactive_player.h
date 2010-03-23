@@ -20,7 +20,6 @@
 #ifndef INTERACTIVE_PLAYER_H
 #define INTERACTIVE_PLAYER_H
 
-#include "debugconsole.h"
 #include "interactive_gamebase.h"
 
 #include "ui_basic/button.h"
@@ -44,8 +43,7 @@ struct Textarea;
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-struct Interactive_Player :
-	public Interactive_GameBase, public DebugConsole::Handler
+struct Interactive_Player : public Interactive_GameBase
 {
 	Interactive_Player
 		(Widelands::Game &,
@@ -98,7 +96,6 @@ struct Interactive_Player :
 private:
 	void cmdSwitchPlayer(std::vector<std::string> const & args);
 	void cmdToggleSeeAll(std::vector<std::string> const & args);
-	void cmdLua(std::vector<std::string> const & args);
 
 	Widelands::Player_Number m_player_number;
 	bool                     m_auto_roadbuild_mode;
@@ -119,7 +116,6 @@ private:
 	UI::UniqueWindow::Registry m_statisticsmenu;
 	UI::UniqueWindow::Registry m_objectives;
 	UI::UniqueWindow::Registry m_encyclopedia;
-	UI::UniqueWindow::Registry m_debugconsole;
 	UI::UniqueWindow::Registry m_message_menu;
 };
 

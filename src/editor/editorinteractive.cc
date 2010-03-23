@@ -19,7 +19,6 @@
 
 #include <SDL_keysym.h>
 
-#include "debugconsole.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
@@ -38,7 +37,6 @@
 #include "ui_menus/editor_toolsize_menu.h"
 #include "warning.h"
 #include "wlapplication.h"
-#include "wui/game_chat_menu.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 #include "wui/overlay_manager.h"
@@ -86,7 +84,6 @@ m_toggle_player_menu
 	m_toolbar.resize();
 	adjust_toolbar_position();
 
-	//  Disable debug. It is no use for editor.
 #ifndef DEBUG
 	set_display_flag(Interactive_Base::dfDebug, false);
 #else
@@ -414,17 +411,6 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code)
 			tool_menu_btn();
 			handled = true;
 			break;
-
-#ifdef DEBUG //  only in debug builds
-		case SDLK_F6:
-			if (get_display_flag(dfDebug)) {
-				new GameChatMenu
-					(this, m_debugconsole, *DebugConsole::getChatProvider());
-				ref_cast<GameChatMenu, UI::UniqueWindow>(*m_debugconsole.window)
-					.enter_chat_message(false);
-			}
-			return true;
-#endif
 
 		default:
 			break;
