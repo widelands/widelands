@@ -1,7 +1,7 @@
 
 function story_messages()
    function _story_box(msg)
-      show_story_box(msg.title, msg.msg, msg.loc)
+      show_story_box(msg.title, msg.msg, msg.field)
    end
 
    wake_me(75 * 1000)

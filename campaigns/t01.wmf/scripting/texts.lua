@@ -105,7 +105,7 @@ _"Thron speaks..." ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _ [[ "In another sleepless night, I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!" ]] ..
 "</p></rt>", 
-loc = al_thunran,
+field = al_thunran,
 }
 
 story_msg2= {
@@ -115,7 +115,7 @@ _"Thron speaks..." ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _[[ "Once again, I went up to my father's tomb, in a sacred grove at the foot of the great spire of Kal'mavrath. I just stood there and felt neither the hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow it felt like a farewell. For the first time, I wondered what the future might hold for me..." ]] ..
 "</p></rt>", 
-loc = grave,
+field = grave,
 }
 
 story_msg3 = {

@@ -56,8 +56,8 @@ end
 -- RST
 -- .. function:: prefilled_buildings(plr, b1_descr[, b2_descr, ...])
 --
---    Create pre-filled buildings. Each description is a arrays which
---    contain building type, location and pre-fill information. A sample usage:
+--    Create pre-filled buildings. Each description is a arrays which contain
+--    building type, build field and pre-fill information. A sample usage:
 --
 --    .. code-block:: lua
 --
@@ -121,7 +121,7 @@ end
 --    :type plr: :class:`wl.game.Player`
 --    :arg building: The name of the building to create.
 --    :type building: :class:`string`
---    :arg region: The fields which are searched for a valid location.
+--    :arg region: The fields which are tested for suitability.
 --    :type region: :class:`array`
 --    :arg opts:  a table with prefill information (wares, soldiers, workers,
 --       see :func:`prefilled_buildings`) and the following options:

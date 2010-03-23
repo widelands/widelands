@@ -33,7 +33,7 @@ objective = p:add_objective("lumber", "House", "Boat!")
 objective.done = true
 
 p:send_message("dummy msg1", "dummy msg 1")
-msg = p:send_message("hello nice", "World", {sender="blah", loc = field })
+msg = p:send_message("hello nice", "World", {sender="blah", field = field })
 
 -- ========================
 -- Test after unpersisting 
@@ -83,7 +83,7 @@ assert_table(msg)
 assert_equal("hello nice", msg.title)
 assert_equal("World", msg.body)
 assert_equal("blah", msg.sender)
-assert_equal(field, msg.location)
+assert_equal(field, msg.field)
 
 
 print("################### ALL TEST PASS!")

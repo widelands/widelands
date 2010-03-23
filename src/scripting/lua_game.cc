@@ -347,7 +347,7 @@ int L_Player::__eq(lua_State * L) {
 /* RST
 	.. function:: place_flag(field[, force])
 
-		Builds a flag at a given position if it is legal to do so. If not,
+		Builds a flag on a given field if it is legal to do so. If not,
 		reports an error
 
 		:arg field: where the flag should be created
@@ -384,10 +384,10 @@ int L_Player::place_flag(lua_State * L) {
 }
 
 /* RST
-	.. method:: place_building(name, pos)
+	.. method:: place_building(name, field)
 
-		Immediately creates a building at the given position. No construction
-		site is created. The building starts out completely empty.  The building
+		Immediately creates a building on the given field. No construction
+		site is created. The building starts out completely empty. The building
 		is forced to be at this position, the same action is taken as for
 		:meth:`place_flag` when force is :const:`true`. Additionally, all
 		buildings that are too close to the new one are ripped.
@@ -429,9 +429,9 @@ int L_Player::place_building(lua_State * L) {
 			message never expires.
 		:type duration: :class:`integer`
 
-		:arg loc: this field is the location connected to this message. Default:
-			no location attached to message
-		:type loc: :class:`wl.map.Field`
+		:arg field: the field connected to this message. Default:
+			no field connected to message
+		:type field: :class:`wl.map.Field`
 
 		:arg status: status to attach to this message. can be 'new', 'read' or
 			'archived'. Default: "new"
@@ -464,7 +464,7 @@ int L_Player::send_message(lua_State * L) {
 			d = luaL_checkuint32(L, -1);
 		lua_pop(L, 1);
 
-		lua_getfield(L, 4, "loc");
+		lua_getfield(L, 4, "field");
 		if (not lua_isnil(L, -1))
 			c = (*get_user_class<L_Field>(L, -1))->coords();
 		lua_pop(L, 1);
@@ -526,9 +526,9 @@ int L_Player::send_message(lua_State * L) {
 		Opts is a table of optional arguments and can be omitted. If it
 		exist it must contain string/value pairs of the following type:
 
-		:arg loc: The main view will be centered on this field when the box
-			pops up. Default: no location attached to message
-		:type loc: :class:`wl.map.Field`
+		:arg field: The main view will be centered on this field when the box
+			pops up. Default: no field attached to message
+		:type field: :class:`wl.map.Field`
 
 		:arg w: width of message box in pixels. Default: 400.
 		:type w: :class:`integer`
@@ -567,7 +567,7 @@ int L_Player::message_box(lua_State * L) {
 		CHECK_ARG(button_text, string);
 
 		// This must be done manually
-		lua_getfield(L, 4, "loc");
+		lua_getfield(L, 4, "field");
 		if (not lua_isnil(L, -1)) {
 			Coords c = (*get_user_class<L_Field>(L, -1))->coords();
 			game.get_ipl()->move_view_to(c);
@@ -805,7 +805,7 @@ int L_Player::hide_fields(lua_State * L) {
 }
 
 /* RST
-	.. method:: reveal_scenarion(name)
+	.. method:: reveal_scenario(name)
 
 		This reveals a scenario inside a campaign. This only works for the
 		interactive player and most likely also only in single player games.
@@ -1359,7 +1359,7 @@ const PropertyType<L_Message> L_Message::Properties[] = {
 	PROP_RO(L_Message, body),
 	PROP_RO(L_Message, sent),
 	PROP_RO(L_Message, duration),
-	PROP_RO(L_Message, location),
+	PROP_RO(L_Message, field),
 	PROP_RW(L_Message, status),
 	{0, 0, 0},
 };
@@ -1438,11 +1438,11 @@ int L_Message::get_duration(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: location
+	.. attribute:: field
 
 		(RO) The field that corresponds to this Message.
 */
-int L_Message::get_location(lua_State * L) {
+int L_Message::get_field(lua_State * L) {
 	Coords c = get(L, get_game(L)).position();
 	if (c == Coords::Null())
 		return 0;

@@ -2,7 +2,7 @@
 --                          Various mission threads                         
 -- =======================================================================
 
--- Mountain and frontier locations
+-- Mountain and frontier fields
 mountain = wl.map.Field(71,14)
 fr1 = wl.map.Field(81,108)
 fr2 = wl.map.Field(85,1)
