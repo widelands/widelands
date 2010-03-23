@@ -110,16 +110,23 @@ find_package(Boost 1.35.0 REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 target_link_libraries(widelands ${Boost_LIBRARIES})
 
+set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
+set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   include(CheckCXXCompilerFlag) #this include should be safe
-  CHECK_CXX_COMPILER_FLAG("-Wold-style-cast" OLDSTYLECAST_SUPPORTED)
-  IF (OLDSTYLECAST_SUPPORTED)
-    set (WL_COMPILERFLAG_OLDSTYLECAST " -Wold-style-cast -isystem ${Boost_INCLUDE_DIR}") #the space before - is on purpose!
-  ENDIF (OLDSTYLECAST_SUPPORTED)
+  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST} Compiler_old-style-cast_supported)
+  IF (Compiler_old-style-cast_supported)
+    set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST}") #the space is on purpose!
+  ENDIF (Compiler_old-style-cast_supported)
+
+  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GENERICWARNINGS} Compiler_generic_warnings_supported)
+  IF (Compiler_generic_warnings_supported)
+    set (WL_COMPILERFLAG_GENERICWARNINGS " ${PARAMETER_COMPILERFLAG_GENERICWARNINGS}") #the space is on purpose!
+  ENDIF (Compiler_generic_warnings_supported)
 ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
 set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
@@ -145,7 +152,7 @@ if (DEFINED MSVC)
   find_library(INTL_LIBRARY NAMES intl libintl)
 
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG${WL_COMPILERFLAG_OLDSTYLECAST}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
   # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
   set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MD" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
