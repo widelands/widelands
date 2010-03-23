@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-14 14:51+0000\n"
-"PO-Revision-Date: 2010-03-15 23:57+0000\n"
-"Last-Translator: Agustín Vela <Unknown>\n"
+"POT-Creation-Date: 2010-03-21 09:15+0000\n"
+"PO-Revision-Date: 2010-03-22 23:51+0000\n"
+"Last-Translator: WalterCool <waltercool@slash.cl>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-17 04:35+0000\n"
+"X-Launchpad-Export-Date: 2010-03-23 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/elemental:7
@@ -92,7 +92,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/event:775
 #: ../../campaigns/t03.wmf/event:849
 msgid "-- NEW OBJECTIVE --"
-msgstr ""
+msgstr "-- NUEVO OBJETIVO --"
 
 #: ../../campaigns/t03.wmf/event:352
 #: ../../campaigns/t03.wmf/objective:7
@@ -100,10 +100,12 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
+"* Construye una básica economía alimenticia - una cabaña de pescador, un "
+"pozo, una graja y una panadería, para poveer a tu gente con comida."
 
 #: ../../campaigns/t03.wmf/event:354
 msgid "The advisor"
-msgstr ""
+msgstr "El consejero"
 
 #: ../../campaigns/t03.wmf/event:387
 msgid ""
@@ -201,7 +203,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/event:581
 #: ../../campaigns/t03.wmf/objective:39
 msgid "* Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "* Construye una fortaleza al este de las montañas."
 
 #: ../../campaigns/t03.wmf/event:583
 msgid "Fortress needed"
@@ -324,7 +326,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:743
 msgid "Thron speaks confidently."
-msgstr ""
+msgstr "Thron habla seguramente."
 
 #: ../../campaigns/t03.wmf/event:745
 msgid ""
@@ -362,6 +364,8 @@ msgstr ""
 #: ../../campaigns/t03.wmf/objective:83
 msgid "* Destroy Kalitaths army and expand your territory to the east."
 msgstr ""
+"* Destruye el ejercito de los Kalitaths y expande tu territorio hacia el "
+"este."
 
 #: ../../campaigns/t03.wmf/event:779
 #: ../../campaigns/t03.wmf/objective:85
@@ -420,7 +424,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:853
 msgid "Military assault"
-msgstr ""
+msgstr "Asalto militar"
 
 #: ../../campaigns/t03.wmf/event:888
 msgid ""
@@ -438,13 +442,15 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:890
 msgid "--------------------- VICTORY! ----------------------"
-msgstr ""
+msgstr "--------------------- VICTORIA! ----------------------"
 
 #: ../../campaigns/t03.wmf/event:892
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Has completado esta misión. Puedes continuar jugando si lo deseas, de otro "
+"modo, avanza a la siguiente misión."
 
 #: ../../campaigns/t03.wmf/objective:5
 msgid "Build up a small food economy"
@@ -470,11 +476,11 @@ msgstr "Construir minas"
 
 #: ../../campaigns/t03.wmf/objective:37
 msgid "Build a fortress"
-msgstr ""
+msgstr "Construye una fortaleza"
 
 #: ../../campaigns/t03.wmf/objective:45
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Construye un almacén"
 
 #: ../../campaigns/t03.wmf/objective:49
 msgid ""

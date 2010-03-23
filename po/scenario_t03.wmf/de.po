@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-14 14:51+0000\n"
-"PO-Revision-Date: 2010-03-16 15:02+0000\n"
-"Last-Translator: kraileth <Unknown>\n"
+"POT-Creation-Date: 2010-03-21 09:15+0000\n"
+"PO-Revision-Date: 2010-03-22 20:40+0000\n"
+"Last-Translator: Pli <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-17 04:35+0000\n"
+"X-Launchpad-Export-Date: 2010-03-23 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/elemental:7
@@ -42,10 +42,11 @@ msgid ""
 "rest at the borders of the old forest and prepare for the coming days.\" "
 msgstr ""
 " \"Die letzten Tage kamen wir unserer Hauptstadt immer näher. Viele Menschen "
-"haben sich uns auf unserem Marsch schon angeschlossen und setzten ihre "
-"Hoffnung auf mich. Jedoch fürchte ich, dass wir nicht stark genug sind, um "
-"den Kampf mit meinen Brüdern aufzunehmen.<br>Fürs erste ruhen wir uns an den "
-"Grenzen des alten Waldes aus und bereiten uns auf die kommenden Tage vor.\" "
+"haben sich unserem Marsch schon angeschlossen und setzten ihre Hoffnung in "
+"mich. Jedoch fürchte ich, dass wir nicht stark genug sind, um zusammen mit "
+"unseren Brüdern in die Schlacht zu ziehen.<br>Für's erste ruhen wir uns an "
+"den Grenzen des alten Waldes aus und bereiten uns auf die kommenden Tage "
+"vor.\" "
 
 #: ../../campaigns/t03.wmf/event:320
 msgid "Close to home"
@@ -71,7 +72,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:335
 msgid "Winter ahead"
-msgstr "Winter voraus"
+msgstr "Der Winter wird kommen"
 
 #: ../../campaigns/t03.wmf/event:346
 msgid "Khantrukh nods"
