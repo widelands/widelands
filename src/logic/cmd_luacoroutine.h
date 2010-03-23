@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_LUAFUNCTION_H
-#define CMD_LUAFUNCTION_H
+#ifndef CMD_LUACOROUTINE_H
+#define CMD_LUACOROUTINE_H
 
 #include <string>
 
@@ -27,16 +27,16 @@
 
 namespace Widelands {
 
-struct Cmd_LuaFunction : public GameLogicCommand {
-	Cmd_LuaFunction() : GameLogicCommand(0) {} // For savegame loading
-	Cmd_LuaFunction(int32_t const _duetime, LuaCoroutine* cr) : 
+struct Cmd_LuaCoroutine : public GameLogicCommand {
+	Cmd_LuaCoroutine() : GameLogicCommand(0) {} // For savegame loading
+	Cmd_LuaCoroutine(int32_t const _duetime, LuaCoroutine* cr) :
 		GameLogicCommand(_duetime), m_cr(cr) {}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual uint8_t id() const {return QUEUE_CMD_LUAFUNCTION;}
+	virtual uint8_t id() const {return QUEUE_CMD_LUACOROUTINE;}
 
 	virtual void execute(Game &);
 
@@ -46,5 +46,5 @@ private:
 
 }
 
-#endif /* end of include guard: CMD_LUAFUNCTION_H */
+#endif /* end of include guard: CMD_LUACOROUTINE__H */
 

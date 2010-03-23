@@ -17,7 +17,7 @@
  *
  */
 
-#include "cmd_luafunction.h"
+#include "cmd_luacoroutine.h"
 
 #include "game.h"
 #include "game_data_error.h"
@@ -25,12 +25,12 @@
 
 namespace Widelands {
 
-void Cmd_LuaFunction::execute (Game & game) {
+void Cmd_LuaCoroutine::execute (Game & game) {
 	try {
 		uint32_t sleeptime;
 		int rv = m_cr->resume(&sleeptime);
 		if (rv == LuaCoroutine::YIELDED) {
-			game.enqueue_command(new Widelands::Cmd_LuaFunction(sleeptime, m_cr));
+			game.enqueue_command(new Widelands::Cmd_LuaCoroutine(sleeptime, m_cr));
 		} else if (rv == LuaCoroutine::DONE) {
 			delete m_cr;
 		}
@@ -39,13 +39,13 @@ void Cmd_LuaFunction::execute (Game & game) {
 	}
 }
 
-#define CMD_LUAFUNCTION_VERSION 1
-void Cmd_LuaFunction::Read
+#define CMD_LUACOROUTINE_VERSION 1
+void Cmd_LuaCoroutine::Read
 	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CMD_LUAFUNCTION_VERSION) {
+		if (packet_version == CMD_LUACOROUTINE_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 
 			m_cr = egbase.lua().read_coroutine(fr, mol, fr.Unsigned32());
@@ -56,10 +56,10 @@ void Cmd_LuaFunction::Read
 		throw game_data_error(_("lua function: %s"), e.what());
 	}
 }
-void Cmd_LuaFunction::Write
+void Cmd_LuaCoroutine::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
-	fw.Unsigned16(CMD_LUAFUNCTION_VERSION);
+	fw.Unsigned16(CMD_LUACOROUTINE_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);
 
 	FileWrite::Pos p = fw.GetPos();

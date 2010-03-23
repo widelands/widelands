@@ -35,14 +35,6 @@
 #include "scripting.h"
 
 // TODO: implement trainingssite
-// TODO: rename LuaFunction into LuaCoroutine
-
-// FUTURE: access to player stock via Player.get_wares and get_workers
-// FUTURE: access to constructionsites via Player.get_buildings
-// FUTURE: making busy roads and second carriers
-// FUTURE: readd allow and forbid worker types. Currently all workers are always
-//         allowed
-// FUTURE: conquer should take a region, as should reveal and hide
 
 /*
 ============================================

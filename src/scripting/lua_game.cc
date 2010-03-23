@@ -25,7 +25,7 @@
 #include "gamecontroller.h"
 #include "i18n.h"
 #include "logic/checkstep.h"
-#include "logic/cmd_luafunction.h"
+#include "logic/cmd_luacoroutine.h"
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
@@ -1567,7 +1567,7 @@ static int L_run_coroutine(lua_State * L) {
 
 	lua_pop(L, 1); // Remove coroutine from stack
 
-	game.enqueue_command(new Widelands::Cmd_LuaFunction(runtime, cr));
+	game.enqueue_command(new Widelands::Cmd_LuaCoroutine(runtime, cr));
 
 	return 0;
 }
