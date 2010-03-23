@@ -80,11 +80,13 @@ end
 --          :class:`wl.map.ProductionSite` and :class:`wl.map.Warehouse` and
 --          ignored otherwise. 
 --       soldiers
---          A table of (soldier_descr,count) as expected by :meth:`wl.map.MilitarySite.warp_soldiers`.
---          If this is nil, the site will be filled with {0,0,0,0} soldiers.
+--          A table of (soldier_descr,count) as expected by
+--          :meth:`wl.map.HasSoldiers.set_soldiers`.  If this is nil, the site
+--          will be filled with {0,0,0,0} soldiers.
 --       workers
---          A table of (workers_name,count) as expected by :meth:`wl.map.Warehouse.set_workers`.
---          Note that ProductionSites are filled with workers by default.
+--          A table of (workers_name,count) as expected by
+--          :meth:`wl.map.Warehouse.set_workers`.  Note that ProductionSites
+--          are filled with workers by default.
 --    :type b1_descr: :class:`array`
 function prefilled_buildings(p, ...)
    for idx,bdescr in ipairs({...}) do
@@ -93,11 +95,11 @@ function prefilled_buildings(p, ...)
       if b.valid_workers then b:set_workers(b.valid_workers) end
       if bdescr.workers then b:set_workers(bdescr.workers) end
       -- Fill with soldiers
-      if b.max_soldiers and b.warp_soldiers then
+      if b.max_soldiers and b.set_soldiers then
          if bdescr.soldiers then
-            b:warp_soldiers(bdescr.soldiers)
+            b:set_soldiers(bdescr.soldiers)
          else
-            b:warp_soldiers{[{0,0,0,0}] = b.max_soldiers}
+            b:set_soldiers({0,0,0,0}, b.max_soldiers)
          end
       elseif bdescr.soldiers then -- Must be a warehouse
          b:set_soldiers(bdescr.soldiers)

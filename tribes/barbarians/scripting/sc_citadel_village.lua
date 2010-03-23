@@ -10,7 +10,7 @@ function initialize(p)
    
    local sf = p.starting_field
    local h = p:place_building("citadel", sf)
-   h:warp_soldiers{[{0,0,0,0}] = 12}
+   h:set_soldiers{[{0,0,0,0}] = 12}
 
     place_building_in_region(p, "warehouse", sf:region(7), {
       wares = {

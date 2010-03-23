@@ -9,7 +9,7 @@ return function(plr)
 
    local sf = plr.starting_field
    local h = plr:place_building("castle", sf)
-   h:warp_soldiers{[{0,0,0,0}] = 12}
+   h:set_soldiers{[{0,0,0,0}] = 12}
 
    plr.changing_retreat_percentage_allowed = true
    plr.retreat_percentage = 60
