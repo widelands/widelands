@@ -9,11 +9,12 @@ Widelands' Lua Scripting documentation
 Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    introduction
    tutorial
    reference
+   roadmap
    wlrichtext
    implementation
 
