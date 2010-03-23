@@ -15,15 +15,16 @@
 import os
 import sys
 import os.path as p
+import subprocess
 
 # Support for bzr local branches
 try:
     from bzrlib.branch import Branch
     from bzrlib.bzrdir import BzrDir
     from bzrlib.errors import NotBranchError
-    __has_bzr = True
+    __has_bzrlib = True
 except ImportError:
-    __has_bzr = False
+    __has_bzrlib = False
 
 def check_for_explicit_version():
     """
@@ -54,13 +55,20 @@ def detect_git_revision():
 
 
 def detect_bzr_revision():
-    path = p.join(p.dirname(__file__),p.pardir)
+    branch_path = p.join(p.dirname(__file__),p.pardir)
 
-    b = BzrDir.open(path).open_branch()
-    revno, nick = b.revno(), b.nick
+    if __has_bzrlib:
+        b = BzrDir.open(branch_path).open_branch()
+        revno, nick = b.revno(), b.nick
+    else:
+        # Windows stand alone installer do not come with bzrlib. We try to
+        # parse the output of bzr then directly
+        run_bzr = lambda subcmd: subprocess.Popen(
+                ["bzr",subcmd], stdout=subprocess.PIPE, cwd=branch_path
+            ).stdout.read().strip()
+        revno = run_bzr("revno")
+        nick = run_bzr("nick")
     return "bzr%s[%s] " % (revno,nick)
-
-
 
 def detect_revision():
     for func in (
