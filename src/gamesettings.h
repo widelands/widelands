@@ -129,6 +129,8 @@ struct GameSettingsProvider {
 	virtual void setPlayerNumber  (uint8_t number) = 0;
 	virtual void setPlayerReady   (uint8_t number, bool ready) = 0;
 	virtual bool getPlayerReady   (uint8_t number) = 0;
+	virtual void setWinCondition(std::string) {} // Todo: those should be pure virtual
+	virtual std::string getWinCondition() { return ""; } // TODO: this
 
 	struct No_Tribe {};
 	std::string const & getPlayersTribe() {

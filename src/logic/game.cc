@@ -80,15 +80,15 @@ void Game::SyncWrapper::StartDump(std::string const & fname) {
 static const unsigned long long MINIMUM_DISK_SPACE = 256*1024*1024;
 
 void Game::SyncWrapper::Data(void const * const data, size_t const size) {
-	uint32_t time = m_game.get_gametime();
 #ifdef SYNC_DEBUG
+	uint32_t time = m_game.get_gametime();
 	log("[sync:%08u t=%6u]", m_counter, time);
 	for (size_t i = 0; i < size; ++i)
 		log(" %02x", (static_cast<uint8_t const *>(data))[i]);
 	log("\n");
 #endif
 
-	if (m_dump && (int32_t)(m_counter - m_next_diskspacecheck) >= 0) {
+	if (m_dump && static_cast<int32_t>(m_counter - m_next_diskspacecheck) >= 0) {
 		m_next_diskspacecheck = m_counter + 16*1024*1024;
 
 		if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
@@ -283,7 +283,6 @@ void Game::init_newgame
 {
 	g_gr->flush(PicMod_Menu);
 
-	// TODO: SirVer use settings here
 	loaderUI.step(_("Preloading map"));
 
 	assert(!get_map());
@@ -317,7 +316,16 @@ void Game::init_newgame
 
 	loaderUI.step(_("Loading map"));
 	maploader->load_map_complete(*this, settings.scenario);
+
+	// Check for win_conditions
+	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+	lua().run_script("win_conditions", settings.win_condition);
+	lua().run_coroutine("check_func");
+	lua().pop_table();
+
+	// TODO: SirVer remove the loaded scripts again
 }
+
 
 
 /**

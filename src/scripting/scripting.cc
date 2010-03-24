@@ -69,6 +69,8 @@ protected:
 		}
 
 		virtual std::string get_string(std::string);
+		virtual void run_coroutine(std::string);
+		virtual void pop_table();
 		virtual void run_script(std::string, std::string);
 };
 
@@ -217,6 +219,34 @@ std::string LuaInterface_Impl::get_string(std::string s) {
 
 	return rv;
 }
+
+// TODO: Should be in LuaGameInterface
+// TODO: this is essentially the same as run_coroutine from lua_game
+#include "logic/game.h"
+#include "logic/cmd_luacoroutine.h"
+void LuaInterface_Impl::run_coroutine(std::string s) {
+	Widelands::Game & g = get_game(m_L);
+
+	if (not lua_istable(m_L, -1))
+		throw LuaError("Last script did not return a table!");
+
+	lua_getfield(m_L, -1, s.c_str());
+	if (not lua_isthread(m_L, -1)) {
+		lua_pop(m_L, 1);
+		throw LuaError
+			(s + "is not a field in the table returned by the last script or not a function");
+	}
+	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(m_L, -1));
+	lua_pop(m_L, 1); // Remove coroutine from stack
+
+	g.enqueue_command(new Widelands::Cmd_LuaCoroutine(g.get_gametime(), cr));
+}
+// TODO: this is dead ugly
+void LuaInterface_Impl::pop_table() {
+	lua_pop(m_L, 1);
+}
+
+// TODO: network games
 
 /*
  * ===========================

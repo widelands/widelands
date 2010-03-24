@@ -338,11 +338,13 @@ void Fullscreen_Menu_LaunchGame::refresh()
 				m_players[i]->refresh();
 
 			// update win conditions information
+			// TODO SirVer this should not be here
 			m_lua->run_script
 				("win_conditions", m_win_conditions[m_cur_wincondition]);
 			std::string n = m_lua->get_string("name");
 			log("name: %s\n", n.c_str());
-
+			m_settings->setWinCondition(m_win_conditions[m_cur_wincondition]);
+			m_lua->pop_table();
 
 		} else { // Multi player savegame information starts here.
 
