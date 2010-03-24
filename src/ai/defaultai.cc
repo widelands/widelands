@@ -985,7 +985,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				if (bf->water_nearby < 3)
 					continue;
 				int effect = bf->water_nearby - 8;
-				prio += effect > 0 ? static_cast<int>(sqrt((double)effect)) : effect;
+				prio += effect > 0 ? static_cast<int>(sqrt(static_cast<double>(effect))) : effect;
 				// if same producers are nearby, then give some penalty
 				for (size_t k = 0; k < bo.outputs.size(); ++k)
 					if (bf->producers_nearby[bo.outputs[k]] > 0)
@@ -1822,7 +1822,7 @@ int32_t DefaultAI::calculate_need_for_ps
 	}
 	if (bo.outputs.size() > 1)
 		output_prio = static_cast<int32_t>
-			(ceil(output_prio / sqrt((double)bo.outputs.size())));
+			(ceil(output_prio / sqrt(static_cast<double>(bo.outputs.size()))));
 	prio += 2 * output_prio;
 
 	// If building consumes some wares, multiply with current statistics of all
