@@ -281,7 +281,7 @@ public:
 
 // Small helper class that contains the commonalities between L_Road and
 // L_ProductionSite in relation to Worker employment.
-struct _Employer : public L_HasWorkers {
+struct _WorkerEmployer : public L_HasWorkers {
 	virtual int get_workers(lua_State * L);
 	virtual int set_workers(lua_State * L);
 
@@ -296,7 +296,18 @@ protected:
 		 const Widelands::Worker_Descr*) = 0;
 };
 
-class L_Road : public L_PlayerImmovable, public _Employer {
+struct _SoldierEmployer : public L_HasSoldiers {
+	virtual int get_soldiers(lua_State * L);
+	virtual int set_soldiers(lua_State * L);
+
+	int get_max_soldiers(lua_State * L);
+
+	virtual Widelands::Building * get(lua_State *, Widelands::Game &) = 0;
+	virtual Widelands::SoldierControl * get_sc
+		(lua_State *, Widelands::Game &) = 0;
+};
+
+class L_Road : public L_PlayerImmovable, public _WorkerEmployer {
 public:
 	LUNA_CLASS_HEAD(L_Road);
 
@@ -364,7 +375,7 @@ public:
 
 
 class L_ProductionSite : public L_Building,
-	public _Employer, public L_HasWares {
+	public _WorkerEmployer, public L_HasWares {
 public:
 	LUNA_CLASS_HEAD(L_ProductionSite);
 
@@ -397,7 +408,7 @@ protected:
 		 const Widelands::Worker_Descr*);
 };
 
-class L_MilitarySite : public L_Building, public L_HasSoldiers {
+class L_MilitarySite : public L_Building, public _SoldierEmployer {
 public:
 	LUNA_CLASS_HEAD(L_MilitarySite);
 
@@ -410,22 +421,22 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_max_soldiers(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
-	int get_soldiers(lua_State * L);
-	int set_soldiers(lua_State * L);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(MilitarySite);
+	Widelands::SoldierControl * get_sc(lua_State * L, Widelands::Game & g) {
+		return get(L, g);
+	}
 };
 
 
-class L_TrainingSite : public L_ProductionSite, public L_HasSoldiers {
+class L_TrainingSite : public L_ProductionSite, public _SoldierEmployer {
 public:
 	LUNA_CLASS_HEAD(L_TrainingSite);
 
@@ -438,18 +449,18 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_max_soldiers(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
-	int get_soldiers(lua_State * L);
-	int set_soldiers(lua_State * L);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(TrainingSite);
+	Widelands::SoldierControl * get_sc(lua_State * L, Widelands::Game & g) {
+		return get(L, g);
+	}
 };
 
 #undef CASTED_GET

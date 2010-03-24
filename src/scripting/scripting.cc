@@ -34,7 +34,6 @@
 
 #include "scripting.h"
 
-// TODO: implement trainingssite
 // TODO: player.tribe == tribename
 
 /*

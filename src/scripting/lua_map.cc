@@ -100,7 +100,11 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
  *                         HELPER CLASSES
  * ========================================================================
  */
-int _Employer::set_workers(lua_State * L)
+
+/*
+ * _WorkerEmployer
+ */
+int _WorkerEmployer::set_workers(lua_State * L)
 {
 	Game & g = get_game(L);
 	PlayerImmovable * pi = get(L, g);
@@ -157,7 +161,7 @@ int _Employer::set_workers(lua_State * L)
 	return 0;
 }
 
-int _Employer::get_workers(lua_State * L)
+int _WorkerEmployer::get_workers(lua_State * L)
 {
 	PlayerImmovable * pi = get(L, get_game(L));
 	Tribe_Descr const & tribe = pi->owner().tribe();
@@ -202,7 +206,7 @@ int _Employer::get_workers(lua_State * L)
 	return 1;
 }
 
-int _Employer::get_valid_workers(lua_State * L) {
+int _WorkerEmployer::get_valid_workers(lua_State * L) {
 	PlayerImmovable * pi = get(L, get_game(L));
 	Tribe_Descr const & tribe = pi->owner().tribe();
 
@@ -217,6 +221,110 @@ int _Employer::get_valid_workers(lua_State * L) {
 	}
 	return 1;
 }
+
+
+/*
+ * _SoldierEmployer
+ */
+int _SoldierEmployer::get_max_soldiers(lua_State * L) {
+	lua_pushuint32(L, get_sc(L, get_game(L))->maxSoldierCapacity());
+	return 1;
+}
+int _SoldierEmployer::get_soldiers(lua_State * L) {
+	Game & game = get_game(L);
+	SoldierControl * sc = get_sc(L, game);
+	Tribe_Descr const & tribe = get(L, game)->owner().tribe();
+
+	Soldier_Descr const & soldier_descr =  //  soldiers
+			 ref_cast<Soldier_Descr const, Worker_Descr const>
+						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	std::vector<Soldier *> vec = sc->stationedSoldiers();
+	SoldiersList current_soldiers;
+	container_iterate_const(std::vector<Soldier *>, vec, i)
+		current_soldiers.push_back(*i);
+
+	return m_handle_get_soldiers(L, soldier_descr, current_soldiers);
+}
+int _SoldierEmployer::set_soldiers(lua_State * L) {
+	Game & game = get_game(L);
+	SoldierControl * sc = get_sc(L, game);
+	Building * building = get(L, game);
+	Tribe_Descr const & tribe = building->owner().tribe();
+
+	Soldier_Descr const & soldier_descr =  //  soldiers
+		ref_cast<Soldier_Descr const, Worker_Descr const>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
+
+	// Get information about current soldiers
+	std::vector<Soldier *> curs = sc->stationedSoldiers();
+	SoldiersMap hist;
+	container_iterate(std::vector<Soldier* >, curs, s) {
+		SoldierDescr sd
+			((*s.current)->get_hp_level(),
+			 (*s.current)->get_attack_level(),
+			 (*s.current)->get_defense_level(),
+			 (*s.current)->get_evade_level());
+
+		SoldiersMap::iterator i = hist.find(sd);
+		if (i == hist.end())
+			hist[sd] = 1;
+		else
+			i->second += 1;
+		if (not setpoints.count(sd))
+			setpoints[sd] = 0;
+	}
+
+	// Now adjust them
+	container_iterate_const(SoldiersMap, setpoints, sp) {
+		uint32_t cur = 0;
+		SoldiersMap::iterator i = hist.find(sp->first);
+		if (i != hist.end())
+			cur = i->second;
+
+		int d = sp->second - cur;
+		if (d < 0) {
+			while (d) {
+				std::vector<Soldier *> curs = sc->stationedSoldiers();
+				container_iterate_const(std::vector<Soldier *>, curs, s)
+				{
+					SoldierDescr is
+						((*s.current)->get_hp_level(),
+						 (*s.current)->get_attack_level(),
+						 (*s.current)->get_defense_level(),
+						 (*s.current)->get_evade_level());
+
+					if (is == sp->first) {
+						(*s.current)->remove(game);
+						++d;
+						break;
+					}
+				}
+			}
+		} else if (d > 0) {
+			for ( ; d; --d) {
+				Soldier & soldier =
+					ref_cast<Soldier, Worker>
+					(soldier_descr.create
+					 (game, building->owner(), 0, building->get_position()));
+
+				soldier.set_level
+					(sp.current->first.hp, sp.current->first.at,
+					 sp.current->first.de, sp.current->first.ev);
+
+				if (sc->incorporateSoldier(game, soldier)) {
+					return report_error(L, "No space left for soldier!");
+					soldier.remove(game);
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+
 
 /*
  * ========================================================================
@@ -508,6 +616,12 @@ HasSoldiers
 		this will be :const:`nil`.
 */
 
+/*
+ ==========================================================
+ C Methods
+ ==========================================================
+ */
+
 int L_HasSoldiers::m_get_soldier_levels
 	(lua_State * L, int tidx, const Soldier_Descr & sd, SoldierDescr & rv)
 {
@@ -627,17 +741,15 @@ int L_HasSoldiers::m_handle_get_soldiers
 		m_get_soldier_levels(L, 2, soldier_descr, wanted);
 
 		uint32_t rv = 0;
-	  container_iterate_const(SoldiersList, soldiers, s) {
-		  SoldierDescr sd
-			  ((*s.current)->get_hp_level(), (*s.current)->get_attack_level(),
-				(*s.current)->get_defense_level(), (*s.current)->get_evade_level());
-		  if (sd == wanted)
-			  ++ rv;
-	  }
-	  lua_pushuint32(L, rv);
-
+		container_iterate_const(SoldiersList, soldiers, s) {
+			SoldierDescr sd
+				((*s.current)->get_hp_level(), (*s.current)->get_attack_level(),
+				 (*s.current)->get_defense_level(), (*s.current)->get_evade_level());
+			if (sd == wanted)
+				++ rv;
+		}
+		lua_pushuint32(L, rv);
 	}
-
 	return 1;
 }
 
@@ -1140,7 +1252,7 @@ int L_Road::get_type(lua_State * L) {
  ==========================================================
  */
 
-// This is for get_/set_ workers which is implemented in _Employer
+// This is for get_/set_ workers which is implemented in _WorkerEmployer
 L_HasWorkers::WorkersMap L_Road::_valid_workers
 		(PlayerImmovable & pi)
 {
@@ -1414,7 +1526,7 @@ int L_ProductionSite::get_valid_wares(lua_State * L) {
  ==========================================================
  */
 
-// This is for get_/set_ workers which is implemented in _Employer
+// This is for get_/set_ workers which is implemented in _WorkerEmployer
 L_HasWorkers::WorkersMap L_ProductionSite::_valid_workers
 		(PlayerImmovable & pi)
 {
@@ -1531,114 +1643,12 @@ const PropertyType<L_MilitarySite> L_MilitarySite::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-// documented in parent class
-int L_MilitarySite::get_max_soldiers(lua_State * L) {
-	lua_pushuint32
-		(L, get(L, get_game(L))->descr().get_max_number_of_soldiers());
-
-	return 1;
-}
 
 /*
  ==========================================================
  LUA METHODS
  ==========================================================
  */
-// documented in parent class
-int L_MilitarySite::set_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	MilitarySite * ms = get(L, game);
-	Tribe_Descr const & tribe = ms->owner().tribe();
-
-	Soldier_Descr const & soldier_descr =  //  soldiers
-		ref_cast<Soldier_Descr const, Worker_Descr const>
-			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
-
-	// Get information about current soldiers
-	std::vector<Soldier *> curs = ms->stationedSoldiers();
-	SoldiersMap hist;
-	container_iterate(std::vector<Soldier* >, curs, s) {
-		SoldierDescr sd
-			((*s.current)->get_hp_level(),
-			 (*s.current)->get_attack_level(),
-			 (*s.current)->get_defense_level(),
-			 (*s.current)->get_evade_level());
-
-		SoldiersMap::iterator i = hist.find(sd);
-		if (i == hist.end())
-			hist[sd] = 1;
-		else
-			i->second += 1;
-		if (not setpoints.count(sd))
-			setpoints[sd] = 0;
-	}
-
-	// Now adjust them
-	container_iterate_const(SoldiersMap, setpoints, sp) {
-		uint32_t cur = 0;
-		SoldiersMap::iterator i = hist.find(sp->first);
-		if (i != hist.end())
-			cur = i->second;
-
-		int d = sp->second - cur;
-		if (d < 0) {
-			while (d) {
-				std::vector<Soldier *> curs = ms->stationedSoldiers();
-				container_iterate_const(std::vector<Soldier *>, curs, s)
-				{
-					SoldierDescr is
-						((*s.current)->get_hp_level(),
-						 (*s.current)->get_attack_level(),
-						 (*s.current)->get_defense_level(),
-						 (*s.current)->get_evade_level());
-
-					if (is == sp->first) {
-						(*s.current)->remove(game);
-						++d;
-						break;
-					}
-				}
-			}
-		} else if (d > 0) {
-			for ( ; d; --d) {
-				Soldier & soldier =
-					ref_cast<Soldier, Worker>
-					(soldier_descr.create
-					 (game, ms->owner(), 0, ms->get_position()));
-
-				soldier.set_level
-					(sp.current->first.hp, sp.current->first.at,
-					 sp.current->first.de, sp.current->first.ev);
-
-				if (ms->add_soldier(game, soldier)) {
-					return report_error(L, "No space left for soldier!");
-					soldier.remove(game);
-				}
-			}
-		}
-	}
-	return 0;
-}
-
-// documented in parent class
-int L_MilitarySite::get_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	MilitarySite * ms = get(L, game);
-	Tribe_Descr const & tribe = ms->owner().tribe();
-
-	Soldier_Descr const & soldier_descr =  //  soldiers
-			 ref_cast<Soldier_Descr const, Worker_Descr const>
-						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	std::vector<Soldier *> vec = ms->stationedSoldiers();
-	SoldiersList current_soldiers;
-	container_iterate_const(std::vector<Soldier *>, vec, i)
-		current_soldiers.push_back(*i);
-
-	return m_handle_get_soldiers(L, soldier_descr, current_soldiers);
-}
 
 /*
  ==========================================================
@@ -1672,120 +1682,18 @@ const PropertyType<L_TrainingSite> L_TrainingSite::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-// documented in parent class
-int L_TrainingSite::get_max_soldiers(lua_State * L) {
-   lua_pushuint32
-		(L, get(L, get_game(L))->descr().get_max_number_of_soldiers());
-	return 1;
-}
 
 /*
  ==========================================================
  LUA METHODS
  ==========================================================
  */
-// documented in parent class
-int L_TrainingSite::set_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	TrainingSite * ts = get(L, game);
-	Tribe_Descr const & tribe = ts->owner().tribe();
-
-	Soldier_Descr const & soldier_descr =  //  soldiers
-		ref_cast<Soldier_Descr const, Worker_Descr const>
-			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
-
-	// Get information about current soldiers
-	std::vector<Soldier *> curs = ts->stationedSoldiers();
-	SoldiersMap hist;
-	container_iterate(std::vector<Soldier* >, curs, s) {
-		SoldierDescr sd
-			((*s.current)->get_hp_level(),
-			 (*s.current)->get_attack_level(),
-			 (*s.current)->get_defense_level(),
-			 (*s.current)->get_evade_level());
-
-		SoldiersMap::iterator i = hist.find(sd);
-		if (i == hist.end())
-			hist[sd] = 1;
-		else
-			i->second += 1;
-		if (not setpoints.count(sd))
-			setpoints[sd] = 0;
-	}
-
-	// Now adjust them
-	container_iterate_const(SoldiersMap, setpoints, sp) {
-		uint32_t cur = 0;
-		SoldiersMap::iterator i = hist.find(sp->first);
-		if (i != hist.end())
-			cur = i->second;
-
-		int d = sp->second - cur;
-		if (d < 0) {
-			while (d) {
-				std::vector<Soldier *> curs = ts->stationedSoldiers();
-				container_iterate_const(std::vector<Soldier *>, curs, s)
-				{
-					SoldierDescr is
-						((*s.current)->get_hp_level(),
-						 (*s.current)->get_attack_level(),
-						 (*s.current)->get_defense_level(),
-						 (*s.current)->get_evade_level());
-
-					if (is == sp->first) {
-						(*s.current)->remove(game);
-						++d;
-						break;
-					}
-				}
-			}
-		} else if (d > 0) {
-			for ( ; d; --d) {
-				Soldier & soldier =
-					ref_cast<Soldier, Worker>
-					(soldier_descr.create
-					 (game, ts->owner(), 0, ts->get_position()));
-
-				soldier.set_level
-					(sp.current->first.hp, sp.current->first.at,
-					 sp.current->first.de, sp.current->first.ev);
-
-				if (ts->add_soldier(game, soldier)) {
-					return report_error(L, "No space left for soldier!");
-					soldier.remove(game);
-				}
-			}
-		}
-	}
-	return 0;
-}
-
-// documented in parent class
-int L_TrainingSite::get_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	TrainingSite * ts = get(L, game);
-	Tribe_Descr const & tribe = ts->owner().tribe();
-
-	Soldier_Descr const & soldier_descr =  //  soldiers
-			 ref_cast<Soldier_Descr const, Worker_Descr const>
-						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	std::vector<Soldier *> vec = ts->stationedSoldiers();
-	SoldiersList current_soldiers;
-	container_iterate_const(std::vector<Soldier *>, vec, i)
-		current_soldiers.push_back(*i);
-
-	return m_handle_get_soldiers(L, soldier_descr, current_soldiers);
-}
 
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
-
 
 
 /* RST

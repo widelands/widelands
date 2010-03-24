@@ -228,7 +228,7 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int MilitarySite::add_soldier(Game & game, Soldier & s) {
+int MilitarySite::incorporateSoldier(Game & game, Soldier & s) {
 	if (s.get_location(game) != this) {
 		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
 			return -1;
@@ -264,7 +264,7 @@ void MilitarySite::request_soldier_callback
 	MilitarySite & msite = ref_cast<MilitarySite, PlayerImmovable>(target);
 	Soldier      & s     = ref_cast<Soldier,      Worker>         (*w);
 
-	msite.add_soldier(game, s);
+	msite.incorporateSoldier(game, s);
 }
 
 

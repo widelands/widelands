@@ -79,7 +79,6 @@ public:
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 	virtual void remove_worker(Worker &);
-	int add_soldier(Game & game, Soldier & s);
 
 	virtual void set_economy(Economy *);
 	virtual bool get_building_work(Game &, Worker &, bool success);
@@ -92,6 +91,7 @@ public:
 	virtual uint32_t soldierCapacity() const;
 	virtual void setSoldierCapacity(uint32_t capacity);
 	virtual void dropSoldier(Soldier &);
+	virtual int incorporateSoldier(Game & game, Soldier & s);
 	// End implementation of SoldierControl
 
 	// Begin implementation of Attackable
