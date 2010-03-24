@@ -90,20 +90,6 @@ template<typename T> struct Manager {
 		throw Nonexistent();
 	}
 
-	/// Removes all unreferenced items. Note that it does not remove groups of
-	/// items that reference each other but are unreferenced from the outside.
-	void remove_unreferenced() {
-		Index items_size = size();
-		for (Index i = items_size; i;)
-			if (items[--i]->referencers().empty()) {
-				delete items[i];
-				items[i] = items.back();
-				items.pop_back();
-				--items_size;
-				i = items_size;
-			}
-	}
-
 	typedef std::vector<T *> container;
 	typedef typename container::size_type Index;
 	Index size() const {return items.size();}
