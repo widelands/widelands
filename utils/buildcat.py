@@ -39,12 +39,18 @@ MAINPOTS = [( "maps/maps", ["../../maps/*/elemental", "../../campaigns/cconfig"]
                           "../../txts/developers",
                           "../../txts/editor_readme",
                           "../../txts/tips/*.tip"] ),
-            ( "widelands/widelands", ["../../src/*.cc",
+            ( "widelands/widelands", [
+                            "../../src/*.cc",
                             "../../src/*/*.cc",
                             "../../src/*/*/*.cc",
                             "../../src/*.h",
                             "../../src/*/*.h",
-                            "../../src/*/*/*.h"] ) ]
+                            "../../src/*/*/*.h",
+            ] ),
+            ( "win_conditions/win_condition", [
+                "../../scripting/win_conditions/*.lua",
+            ]),
+]
 
 
 # This defines the rules for iterative generation of catalogs. This allows
