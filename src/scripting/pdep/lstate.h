@@ -159,7 +159,7 @@ union GCObject {
 #define gco2th(o)	check_exp((o)->gch.tt == LUA_TTHREAD, &((o)->th))
 
 /* macro to convert any Lua object into a GCObject */
-#define obj2gco(v)	(cast(GCObject *, (v)))
+#define obj2gco(v)	(reinterpret_cast<GCObject *>(v))
 
 
 LUAI_FUNC lua_State *luaE_newthread (lua_State *L);

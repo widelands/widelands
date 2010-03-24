@@ -24,7 +24,9 @@
 #define pdep_new(L,t)		cast(t *, pdep_malloc(L, sizeof(t)))
 #define pdep_malloc(L,t)	pdep_realloc_(L, NULL, 0, (t))
 #define pdep_checkstack(L,n)	\
-  if ((char *)L->stack_last - (char *)L->top <= (n)*(int)sizeof(TValue)) \
+  if (reinterpret_cast<char *>(L->stack_last) - \
+		  reinterpret_cast<char *>(L->top) <= \
+		  (n)*static_cast<int>(sizeof(TValue))) \
     pdep_growstack(L, n); \
   else pdep_reallocstack(L, L->stacksize - EXTRA_STACK - 1);
 

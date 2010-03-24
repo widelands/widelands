@@ -61,7 +61,8 @@ static void registerobject(int ref, UnpersistInfo *upi)
 {
 					/* perms reftbl ... obj */
 	lua_checkstack(upi->L, 2);
-	lua_pushlightuserdata(upi->L, (void*)(intptr_t)ref);
+	lua_pushlightuserdata(upi->L, reinterpret_cast<void*>
+			(static_cast<intptr_t>(ref)));
 					/* perms reftbl ... obj ref */
 	lua_pushvalue(upi->L, -2);
 					/* perms reftbl ... obj ref obj */
@@ -318,7 +319,7 @@ static void pushproto(lua_State *L, Proto *proto)
 
 #define setuvvalue(L,obj,x) \
   { TValue *i_o=(obj); \
-    i_o->value.gc=cast(GCObject *, (x)); i_o->tt=LUA_TUPVAL; \
+    i_o->value.gc=obj2gco(x); i_o->tt=LUA_TUPVAL; \
     checkliveness(G(L),i_o); }
 
 static void pushupval(lua_State *L, UpVal *upval)
@@ -404,7 +405,7 @@ static void persistfunction(PersistInfo *pi)
 static UpVal *makeupval(lua_State *L, int stackpos)
 {
 	UpVal *uv = pdep_new(L, UpVal);
-	pdep_link(L, (GCObject*)uv, LUA_TUPVAL);
+	pdep_link(L, obj2gco(uv), LUA_TUPVAL);
 	uv->tt = LUA_TUPVAL;
 	uv->v = &uv->u.value;
 	uv->u.l.prev = NULL;
@@ -437,7 +438,7 @@ static void unboxupval(lua_State *L)
 	LClosure *lcl;
 	UpVal *uv;
 
-	lcl = (LClosure*)clvalue(getobject(L, -1));
+	lcl = reinterpret_cast<LClosure*>(clvalue(getobject(L, -1)));
 	uv = lcl->upvals[0];
 	lua_pop(L, 1);
 					/* ... */
@@ -454,8 +455,9 @@ static void unpersistfunction(int ref, UnpersistInfo *upi)
 
 	lu_byte nupvalues = upi->fr->Unsigned8();
 
-	lcl = (LClosure*)pdep_newLclosure(upi->L, nupvalues, hvalue(&upi->L->l_gt));
-	pushclosure(upi->L, (Closure*)lcl);
+	lcl = reinterpret_cast<LClosure *>
+		(pdep_newLclosure(upi->L, nupvalues, hvalue(&upi->L->l_gt)));
+	pushclosure(upi->L, reinterpret_cast<Closure *>(lcl));
 
 					/* perms reftbl ... func */
 	/* Put *some* proto in the closure, before the GC can find it */
@@ -808,7 +810,7 @@ static void persist(PersistInfo *pi)
 					/* perms reftbl ... obj ref? */
 	if(!lua_isnil(pi->L, -1)) {
 					/* perms reftbl ... obj ref */
-		int ref = (intptr_t)lua_touserdata(pi->L, -1);
+		int ref = reinterpret_cast<intptr_t>(lua_touserdata(pi->L, -1));
 		pi->fw->Unsigned8(0);
 		pi->fw->Signed32(ref);
 		lua_pop(pi->L, 1);
@@ -829,7 +831,8 @@ static void persist(PersistInfo *pi)
 	pi->fw->Unsigned8(1);
 	lua_pushvalue(pi->L, -1);
 					/* perms reftbl ... obj obj */
-	lua_pushlightuserdata(pi->L, (void*)((intptr_t) ++(pi->counter)));
+	lua_pushlightuserdata(pi->L, reinterpret_cast<void *>
+			(static_cast<intptr_t>(++(pi->counter))));
 					/* perms reftbl ... obj obj ref */
 	lua_rawset(pi->L, 2);
 					/* perms reftbl ... obj */
@@ -949,8 +952,8 @@ void pluto_persist(lua_State *L, Widelands::FileWrite & fw)
 static void boxupval_start(lua_State *L)
 {
 	LClosure *lcl;
-	lcl = (LClosure*)pdep_newLclosure(L, 1, hvalue(&L->l_gt));
-	pushclosure(L, (Closure*)lcl);
+	lcl = reinterpret_cast<LClosure *>(pdep_newLclosure(L, 1, hvalue(&L->l_gt)));
+	pushclosure(L, reinterpret_cast<Closure *>(lcl));
 					/* ... func */
 	lcl->p = makefakeproto(L, 1);
 
@@ -964,7 +967,7 @@ static void boxupval_start(lua_State *L)
 static void boxupval_finish(lua_State *L)
 {
 					/* ... func obj */
-	LClosure *lcl = (LClosure *) clvalue(getobject(L, -2));
+	LClosure *lcl = reinterpret_cast<LClosure *>(clvalue(getobject(L, -2)));
 
 	lcl->upvals[0]->u.value = *getobject(L, -1);
 	lua_pop(L, 1);
@@ -1156,7 +1159,7 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 	/* First, deserialize the object stack. */
 	{
 		uint32_t stacksize = upi->fr->Unsigned32();
-		pdep_growstack(L2, (int)stacksize);
+		pdep_growstack(L2, static_cast<int>(stacksize));
 		/* Make sure that the first stack element (a nil, representing
 		 * the imaginary top-level C function) is written to the very,
 		 * very bottom of the stack */
@@ -1234,9 +1237,9 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 					/* perms reftbl ... thr */
 
 			uv->v = L2->stack + upi->fr->Unsigned32();
-			gcunlink(upi->L, (GCObject*)uv);
+			gcunlink(upi->L, reinterpret_cast<GCObject *>(uv));
 			uv->marked = luaC_white(g);
-			*nextslot = (GCObject*)uv;
+			*nextslot = reinterpret_cast<GCObject *>(uv);
 			nextslot = &uv->next;
 			uv->u.l.prev = &G(L2)->uvhead;
 			uv->u.l.next = G(L2)->uvhead.u.l.next;
@@ -1251,7 +1254,7 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 	/* 'top' and the values up to there must be filled with 'nil' */
 	{
 		StkId o;
-		pdep_checkstack(L2, (int)stacklimit);
+		pdep_checkstack(L2, static_cast<int>(stacklimit));
 		for (o = L2->top; o <= L2->top + stacklimit; o++)
 			setnilvalue(o);
 	}
@@ -1305,7 +1308,8 @@ int inreftable(lua_State *L, int ref)
 	int res;
 	lua_checkstack(L, 1);
 					/* perms reftbl ... */
-	lua_pushlightuserdata(L, (void*)(intptr_t)ref);
+	lua_pushlightuserdata(L, reinterpret_cast<void*>
+			(static_cast<intptr_t>(ref)));
 					/* perms reftbl ... ref */
 	lua_gettable(L, 2);
 					/* perms reftbl ... obj? */
@@ -1377,7 +1381,8 @@ static void unpersist(UnpersistInfo *upi)
 			lua_pushnil(upi->L);
 					/* perms reftbl ... nil */
 		} else {
-			lua_pushlightuserdata(upi->L, (void*)(intptr_t)ref);
+			lua_pushlightuserdata(upi->L, reinterpret_cast<void *>
+					(static_cast<intptr_t>(ref)));
 					/* perms reftbl ... ref */
 			lua_gettable(upi->L, 2);
 					/* perms reftbl ... obj? */

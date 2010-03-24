@@ -72,7 +72,7 @@ typedef LUAI_UACNUMBER l_uacNumber;
 
 
 #ifndef cast
-#define cast(t, exp)	((t)(exp))
+#define cast(t, exp)	(static_cast<t>(exp))
 #endif
 
 #define cast_byte(i)	cast(lu_byte, (i))
