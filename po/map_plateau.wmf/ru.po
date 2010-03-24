@@ -1,4 +1,4 @@
-# Spanish translation for widelands
+# Russian translation for widelands
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-14 15:52+0000\n"
-"PO-Revision-Date: 2010-03-23 10:25+0000\n"
-"Last-Translator: Jonay <jonay.santana@gmail.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2010-03-23 14:01+0000\n"
+"Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,35 +22,33 @@ msgid ""
 "* Defeat Erwyn. He commands the strongest opposing soldiers left on this\n"
 "island."
 msgstr ""
-"* Derrota a Erwyn. El comanda los soldados restantes que presentan la mayor "
-"resistencia en esta\n"
-"isla."
+"Победить Эрвина. Он командует самыми сильными солдатами на этом\n"
+"острове."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:40
 msgid "* Defeat Jomo. He takes care about the soldiers food supply."
-msgstr ""
-"* Derrota a Jomo. El protege el suministro de comida para los soldados."
+msgstr "Победить Йомо. Он заботится о питании солдат."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:26
 msgid "* Defeat Lanissa and capture the ancient castle."
-msgstr "* Derrota a Lanissa y captura el antiguo castillo."
+msgstr "Победить Ланиссу и захватить старинный замок."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:54
 msgid "-- NEW OBJECTIVES --"
-msgstr "-- NUEVOS OBJETIVOS --"
+msgstr "-- НОВЫЕ ЗАДАНИЯ --"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:86
 msgid "An ancient castle"
-msgstr "Un antiguo castillo"
+msgstr "Старинный замок"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:102
 msgid "Ancient castle captured"
-msgstr "Antiguo castillo capturado"
+msgstr "Старинный замок захвачен"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:116
 #: ../../maps/Plateau.wmf/scripting/texts.lua:126
 msgid "Another Briefing"
-msgstr "Otro Informe"
+msgstr "Новое Совещание"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:87
 msgid ""
@@ -65,36 +63,36 @@ msgid ""
 "fight!<br>However we really have to capture it. It will be our key for our\n"
 "reign over this island!"
 msgstr ""
-"¡Por los dioses! Uno de nuestros exploradores encontró un poderoso castillo\n"
-"en medio de la vieja meseta. Debe ser bastante antiguo y parece haber sido\n"
-"construido con un estilo extranjero. Es bastante obvio que esta no es una\n"
-"contrucción bárbara.<br>Esperemos que Lanissa, el señor de la guerra que\n"
-"comanda este castillo, todavía no nos haya visto. Quizás tengamos una\n"
-"oportunidad de conquistar este poderoso edificio sin una gran batalla<br>\n"
-"De todos modos realmente tenemos que capturarlo. Será nuestra llave para\n"
-"nuetro reinado sobre esta isla."
+"По воле Богов! Наш разведчик обнаружил мощный замок в середине\n"
+"старого плато. Замок довольно старый и построен в иноземном\n"
+"стиле. Сразу видно, что его строили не варвары.\n"
+"Надеемся, что Ланисса - тамошняя военачальница - еще не заметила\n"
+"нас. Может быть удастся захватить это крепкое здание без шума\n"
+"и пыли. Так или иначе нам его надо брать, ведь это ключ ко\n"
+"всему острову!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:25
 msgid "Capture the ancient castle"
-msgstr "Captura el antiguo castillo"
+msgstr "Захватить старинный замок"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:143
 msgid ""
 "Congratulations! You mastered this scenario. You may play on if you like!"
 msgstr ""
-"¡Felicidades! Has dominado este escenario. Puedes seguir jugando si quieres."
+"Поздравляем! Вы победили в этом сценарии, теперь можете просто поиграть "
+"вволю!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:31
 msgid "Defeat Erwyn"
-msgstr "Derrota a Erwyn"
+msgstr "Победить Эрвина"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:38
 msgid "Defeat Jomo"
-msgstr "Derrota a Jomo"
+msgstr "Победить Йомо"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:120
 msgid "Erwyn defeated"
-msgstr "Erwyn derrotado"
+msgstr "Эрвин побежден"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:74
 msgid ""
@@ -105,16 +103,11 @@ msgid ""
 "has detected us so far, so we should keep quiet and build up our\n"
 "infrastructure. Soon we will be strong enough to raid their positions."
 msgstr ""
-"¡Al fin! ¡Acabamos de dar el primer paso hacia la victoria! Anoche, "
-"arribamos a\n"
-"la isla prohibida y derrotamos a los pocos guardias que vigilaban la parte\n"
-"noroeste de la isla. Estoy bastante seguro de que ninguno de los otros "
-"señores\n"
-"de la guerra nos ha detectado, así que debiéramos de ser silenciosos y "
-"preparar\n"
-"nuestras infraestructuras. Pronto seremos lo suficientemente fuertes como "
-"para\n"
-"atacar sus posiciones."
+"Итак, первый шаг к победе! Прошлой ночью мы высадились\n"
+"на запретном острове и одолели нескольких стражей на северо-\n"
+"западной его части. Я уверен, что никто из военачальников\n"
+"нас не заметил, поэтому мы должны тихонько подготовить\n"
+"инфраструктуру, чтобы набрать сил для налёта на них."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:141
 msgid ""
@@ -122,13 +115,12 @@ msgid ""
 "than\n"
 "the warlords did."
 msgstr ""
-"Finalmente toda la isla es nuestra. Ahora tenemos que defenderla mejor de lo "
-"que\n"
-"lo hicieron los señores de la guerra."
+"Отлично! Весь остров наш! Уж мы-то сумеем защищать его\n"
+"лучше, чем прежние хозяева."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:69
 msgid "First Briefing"
-msgstr "Primer informe"
+msgstr "Первое Совещание"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:121
 msgid ""
@@ -136,9 +128,8 @@ msgid ""
 "strong\n"
 "warlord less on this island!"
 msgstr ""
-"¡Bien! Erwyn se rinde, cuando ha visto sus últimos edificios en llamas. ¡Un "
-"gran\n"
-"señor de la guerra menos en esta isla!"
+"Отлично! Эрвин сдался, увидев, как догорают последние его здания.\n"
+"Одним сильным военачальником меньше на острове!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:131
 msgid ""
@@ -146,29 +137,29 @@ msgid ""
 "warlord\n"
 "less on this island!"
 msgstr ""
-"¡Bien! Jomo se rinde, cuando ha visto sus últimos edificios en llamas. ¡Un \n"
-"señor de la guerra menos en esta isla!"
+"Отлично! Йомо сдался, увидев, как догорают последние его здания.\n"
+"Одним сильным военачальником меньше на острове!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:130
 msgid "Jomo defeated"
-msgstr "Jomo derrotado"
+msgstr "Йомо побежден"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:136
 msgid "Last Briefing"
-msgstr "Último informe"
+msgstr "Последнее Совещание"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:82
 #: ../../maps/Plateau.wmf/scripting/texts.lua:98
 msgid "Second Briefing"
-msgstr "Segundo informe"
+msgstr "Второе Совещание"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:73
 msgid "The forbidden island"
-msgstr "La isla prohibida"
+msgstr "Запретный остров"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:140
 msgid "Victory!"
-msgstr "¡Victoria!"
+msgstr "Победа!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:103
 msgid ""
@@ -191,22 +182,13 @@ msgid ""
 "of\n"
 "the food supply."
 msgstr ""
-"¡Maravilloso! Nuestras tropas por fin derrotaron a Lanissa y sus soldados. "
-"¡El antiguo\n"
-"castillo es nuestro!<br> Es asombroso lo lejos que se puede ver desde la "
-"torre más \n"
-"alta del castillo. Podemos ver toda la isla. Ahora me imagino por qué "
-"Lanissa no nos\n"
-"había visto ni se había preparado. Pero bueno, a veces algunas cosas nunca "
-"ven la \n"
-"luz del día. Lo único importante ahora son las tropas enemigas que aún "
-"quedan. Hemos\n"
-"observado posiciones enemigas de Erwyn tanto al norte como al este del "
-"castillo. Se le\n"
-"conoce por ser un poderoso señor de la guerra y seguramente mandará a los "
-"guerreros\n"
-"más fuertes. En el sur capturamos algunas infraestructuras vigiladas de "
-"comida \n"
-"pertenecientes a Jomo, un señor de la guerra más joven. Debemos ocuparnos de "
-"dichas\n"
-"infraestructuras y cortarles los suministros de alimentos."
+"Чудненько! Наши войска одолели солдат Ланиссы. Старинный\n"
+"замок - наш! Отличный вид открывается с самой высокой его\n"
+"башни. Виден весь остров. Странно, почему же Ланисса не\n"
+"увидела нас и не подготовилась. Ну ладно, не все секреты\n"
+"раскрываются. Важнее, что еще остались очаги сопротивления.\n"
+"Мы видели позиции войск Эрвина к северо-востоку от замка.\n"
+"Он известен как хороший военачальник и явно командует\n"
+"лучшими воинами. На юге мы захватили продовольственную\n"
+"сеть Йомо, молодого военачальника, надо позаботиться о\n"
+"ней и лишить врага пропитания."

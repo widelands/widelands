@@ -1,4 +1,4 @@
-# Japanese translation for widelands
+# Latin translation for widelands
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-21 09:15+0000\n"
-"PO-Revision-Date: 2010-03-23 16:57+0000\n"
+"PO-Revision-Date: 2010-03-23 17:11+0000\n"
 "Last-Translator: alms21 <alms21@gmail.com>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:3
 msgid "Greenland"
-msgstr "グリーンランド"
+msgstr ""
 
 #: ../../worlds/greenland/conf:4
 msgid "These are the beauty and bountifull countries of the barbarians"
@@ -35,34 +35,34 @@ msgstr ""
 #: ../../worlds/greenland/conf:10
 #: ../../worlds/greenland/conf:11
 msgid "Bush"
-msgstr "茂み"
+msgstr "Frutex"
 
 #: ../../worlds/greenland/conf:12
 #: ../../worlds/greenland/conf:13
 msgid "Cactus"
-msgstr "仙人掌"
+msgstr "Cactus"
 
 #: ../../worlds/greenland/conf:14
 #: ../../worlds/greenland/conf:15
 #: ../../worlds/greenland/conf:16
 #: ../../worlds/greenland/conf:17
 msgid "Dead Tree"
-msgstr "枯れ木"
+msgstr ""
 
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
-msgstr "倒木"
+msgstr ""
 
 #: ../../worlds/greenland/conf:19
 #: ../../worlds/greenland/conf:20
 #: ../../worlds/greenland/conf:21
 msgid "Grass"
-msgstr "くさ"
+msgstr "Gramen"
 
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
 msgid "Mushroom"
-msgstr "キノコ"
+msgstr "Fungus"
 
 #: ../../worlds/greenland/conf:24
 #: ../../worlds/greenland/conf:25
@@ -71,13 +71,13 @@ msgstr "キノコ"
 #: ../../worlds/greenland/conf:28
 #: ../../worlds/greenland/conf:29
 msgid "Pebble"
-msgstr "小石"
+msgstr "Calx"
 
 #: ../../worlds/greenland/conf:30
 #: ../../worlds/greenland/conf:31
 #: ../../worlds/greenland/conf:32
 msgid "Skeleton"
-msgstr "骸骨"
+msgstr "Os"
 
 #: ../../worlds/greenland/conf:33
 #: ../../worlds/greenland/conf:34
@@ -96,11 +96,11 @@ msgstr ""
 #: ../../worlds/greenland/conf:44
 #: ../../worlds/greenland/conf:45
 msgid "Stones"
-msgstr "石"
+msgstr "Lapis"
 
 #: ../../worlds/greenland/conf:46
 msgid "Aspen"
-msgstr "アスペン"
+msgstr ""
 
 #: ../../worlds/greenland/conf:47
 msgid "Aspen medium"
@@ -116,7 +116,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:50
 msgid "Oak"
-msgstr "柏"
+msgstr "Robur"
 
 #: ../../worlds/greenland/conf:51
 msgid "Oak medium"
@@ -132,7 +132,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:54
 msgid "Spruce"
-msgstr "トウヒ属"
+msgstr ""
 
 #: ../../worlds/greenland/conf:55
 msgid "Spruce medium"
@@ -148,7 +148,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
-msgstr "榛木"
+msgstr "Alnus"
 
 #: ../../worlds/greenland/conf:59
 msgid "Alder medium"
@@ -164,7 +164,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:62
 msgid "Birch"
-msgstr "白樺"
+msgstr ""
 
 #: ../../worlds/greenland/conf:63
 msgid "Birch medium"
@@ -180,7 +180,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:66
 msgid "Beech"
-msgstr "樗"
+msgstr ""
 
 #: ../../worlds/greenland/conf:67
 msgid "Beech medium"
@@ -196,7 +196,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:70
 msgid "Larch"
-msgstr "唐松"
+msgstr ""
 
 #: ../../worlds/greenland/conf:71
 msgid "Larch medium"
@@ -212,7 +212,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:74
 msgid "Rowan"
-msgstr "七竈"
+msgstr "Sorbus"
 
 #: ../../worlds/greenland/conf:75
 msgid "Rowan medium"
@@ -228,80 +228,80 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:80
 msgid "Badger"
-msgstr "穴熊"
+msgstr ""
 
 #: ../../worlds/greenland/conf:81
 msgid "Brownbear"
-msgstr "ひぐま"
+msgstr "Ursus"
 
 #: ../../worlds/greenland/conf:82
 msgid "Bunny"
-msgstr "バニー"
+msgstr "Cuniculus"
 
 #: ../../worlds/greenland/conf:83
 msgid "Chamois"
-msgstr "セーム"
+msgstr "Capreolus"
 
 #: ../../worlds/greenland/conf:84
 msgid "Deer"
-msgstr "鹿"
+msgstr "Cervus"
 
 #: ../../worlds/greenland/conf:85
 msgid "Duck"
-msgstr "鴨"
+msgstr "Anas"
 
 #: ../../worlds/greenland/conf:86
 msgid "Elk"
-msgstr "アメリカアカシカ"
+msgstr "Alces"
 
 #: ../../worlds/greenland/conf:87
 msgid "Fox"
-msgstr "狐"
+msgstr "Vulpes"
 
 #: ../../worlds/greenland/conf:88
 msgid "Lynx"
-msgstr "やまねこ"
+msgstr "Lynx"
 
 #: ../../worlds/greenland/conf:89
 msgid "Marten"
-msgstr "テン"
+msgstr "Martes"
 
 #: ../../worlds/greenland/conf:90
 msgid "Reindeer"
-msgstr "馴鹿"
+msgstr ""
 
 #: ../../worlds/greenland/conf:91
 msgid "Sheep"
-msgstr "羊"
+msgstr "Ovis"
 
 #: ../../worlds/greenland/conf:92
 msgid "Wisent"
-msgstr "ヴィセント"
+msgstr ""
 
 #: ../../worlds/greenland/conf:93
 msgid "Wolf"
-msgstr "狼"
+msgstr "Lupus"
 
 #: ../../worlds/greenland/resconf:4
 msgid "Coal"
-msgstr "石炭"
+msgstr "Carbo"
 
 #: ../../worlds/greenland/resconf:12
 msgid "Gold"
-msgstr "金"
+msgstr "Aurum"
 
 #: ../../worlds/greenland/resconf:20
 msgid "Iron"
-msgstr "鉄"
+msgstr "Ferrum"
 
 #: ../../worlds/greenland/resconf:28
 msgid "Granit"
-msgstr "グラニット"
+msgstr ""
 
 #: ../../worlds/greenland/resconf:36
 msgid "Water"
-msgstr "水"
+msgstr "Aqua"
 
 #: ../../worlds/greenland/resconf:41
 msgid "Fish"
-msgstr "魚"
+msgstr "Piscis"
