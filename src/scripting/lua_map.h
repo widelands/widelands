@@ -30,6 +30,7 @@
 #include "logic/warehouse.h"
 #include "logic/productionsite.h"
 #include "logic/militarysite.h"
+#include "logic/trainingsite.h"
 
 #include "luna.h"
 
@@ -423,6 +424,33 @@ public:
 	CASTED_GET(MilitarySite);
 };
 
+
+class L_TrainingSite : public L_ProductionSite, public L_HasSoldiers {
+public:
+	LUNA_CLASS_HEAD(L_TrainingSite);
+
+	L_TrainingSite() {}
+	L_TrainingSite(Widelands::TrainingSite & mo) : L_ProductionSite(mo) {
+	}
+	L_TrainingSite(lua_State * L) : L_ProductionSite(L) {}
+	virtual ~L_TrainingSite() {}
+
+	/*
+	 * Properties
+	 */
+	int get_max_soldiers(lua_State * L);
+
+	/*
+	 * Lua Methods
+	 */
+	int get_soldiers(lua_State * L);
+	int set_soldiers(lua_State * L);
+
+	/*
+	 * C Methods
+	 */
+	CASTED_GET(TrainingSite);
+};
 
 #undef CASTED_GET
 

@@ -151,6 +151,8 @@ public:
 	int32_t get_pri(enum tAttribute atr);
 	void set_pri(enum tAttribute atr, int32_t prio);
 
+	int add_soldier(Game &, Soldier &);
+
 protected:
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);

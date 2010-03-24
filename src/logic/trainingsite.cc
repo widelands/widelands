@@ -360,6 +360,30 @@ void TrainingSite::request_soldier_callback
 	tsite.update_soldier_request();
 }
 
+/*
+===============
+Takes one soldier and adds him to ours
+
+returns 0 on succes, -1 if there was no room for this soldier
+===============
+*/
+int TrainingSite::add_soldier(Game & game, Soldier & s) {
+	if (s.get_location(game) != this) {
+		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
+			return -1;
+
+		s.set_location(this);
+	}
+
+	// Bind the worker into this house, hide him on the map
+	s.start_task_idle(game, 0, -1);
+
+	// Make sure the request count is reduced or the request is deleted.
+	update_soldier_request();
+
+	return 0;
+}
+
 
 std::vector<Soldier *> TrainingSite::presentSoldiers() const
 {

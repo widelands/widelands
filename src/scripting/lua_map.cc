@@ -81,7 +81,7 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 			else if (!strcmp(type_name, "militarysite"))
 				return CAST_TO_LUA(MilitarySite);
 			else if (!strcmp(type_name, "trainingsite"))
-				return CAST_TO_LUA(ProductionSite);
+				return CAST_TO_LUA(TrainingSite);
 			else
 				return CAST_TO_LUA(Building);
 		}
@@ -420,9 +420,9 @@ HasSoldiers
 
 	Analogon to :class:`HasWorkers`, but for Soldiers. Due to differences in
 	Soldiers and implementation details in Lua this class has a slightly
-	different interface than :class:`HasWorkers`. Supported at the time of this writing
-	by :class:`~wl.map.Warehouse`, :class:`~wl.map.MilitarySite` and
-	:class:`~wl.map.TrainingsSite`.
+	different interface than :class:`HasWorkers`. Supported at the time of this
+	writing by :class:`~wl.map.Warehouse`, :class:`~wl.map.MilitarySite` and
+	:class:`~wl.map.TrainingSite`.
 */
 
 /* RST
@@ -1646,6 +1646,147 @@ int L_MilitarySite::get_soldiers(lua_State * L) {
  ==========================================================
  */
 
+/* RST
+TrainingSite
+--------------
+
+.. class:: TrainingSite
+
+	Child of: :class:`Building`, :class:`HasSoldiers`
+
+	Miltary Buildings
+*/
+const char L_TrainingSite::className[] = "TrainingSite";
+const MethodType<L_TrainingSite> L_TrainingSite::Methods[] = {
+	METHOD(L_TrainingSite, get_soldiers),
+	METHOD(L_TrainingSite, set_soldiers),
+	{0, 0},
+};
+const PropertyType<L_TrainingSite> L_TrainingSite::Properties[] = {
+	PROP_RO(L_TrainingSite, max_soldiers),
+	{0, 0, 0},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+// documented in parent class
+int L_TrainingSite::get_max_soldiers(lua_State * L) {
+   lua_pushuint32
+		(L, get(L, get_game(L))->descr().get_max_number_of_soldiers());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+// documented in parent class
+int L_TrainingSite::set_soldiers(lua_State * L) {
+	Game & game = get_game(L);
+	TrainingSite * ts = get(L, game);
+	Tribe_Descr const & tribe = ts->owner().tribe();
+
+	Soldier_Descr const & soldier_descr =  //  soldiers
+		ref_cast<Soldier_Descr const, Worker_Descr const>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
+
+	// Get information about current soldiers
+	std::vector<Soldier *> curs = ts->stationedSoldiers();
+	SoldiersMap hist;
+	container_iterate(std::vector<Soldier* >, curs, s) {
+		SoldierDescr sd
+			((*s.current)->get_hp_level(),
+			 (*s.current)->get_attack_level(),
+			 (*s.current)->get_defense_level(),
+			 (*s.current)->get_evade_level());
+
+		SoldiersMap::iterator i = hist.find(sd);
+		if (i == hist.end())
+			hist[sd] = 1;
+		else
+			i->second += 1;
+		if (not setpoints.count(sd))
+			setpoints[sd] = 0;
+	}
+
+	// Now adjust them
+	container_iterate_const(SoldiersMap, setpoints, sp) {
+		uint32_t cur = 0;
+		SoldiersMap::iterator i = hist.find(sp->first);
+		if (i != hist.end())
+			cur = i->second;
+
+		int d = sp->second - cur;
+		if (d < 0) {
+			while (d) {
+				std::vector<Soldier *> curs = ts->stationedSoldiers();
+				container_iterate_const(std::vector<Soldier *>, curs, s)
+				{
+					SoldierDescr is
+						((*s.current)->get_hp_level(),
+						 (*s.current)->get_attack_level(),
+						 (*s.current)->get_defense_level(),
+						 (*s.current)->get_evade_level());
+
+					if (is == sp->first) {
+						(*s.current)->remove(game);
+						++d;
+						break;
+					}
+				}
+			}
+		} else if (d > 0) {
+			for ( ; d; --d) {
+				Soldier & soldier =
+					ref_cast<Soldier, Worker>
+					(soldier_descr.create
+					 (game, ts->owner(), 0, ts->get_position()));
+
+				soldier.set_level
+					(sp.current->first.hp, sp.current->first.at,
+					 sp.current->first.de, sp.current->first.ev);
+
+				if (ts->add_soldier(game, soldier)) {
+					return report_error(L, "No space left for soldier!");
+					soldier.remove(game);
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+// documented in parent class
+int L_TrainingSite::get_soldiers(lua_State * L) {
+	Game & game = get_game(L);
+	TrainingSite * ts = get(L, game);
+	Tribe_Descr const & tribe = ts->owner().tribe();
+
+	Soldier_Descr const & soldier_descr =  //  soldiers
+			 ref_cast<Soldier_Descr const, Worker_Descr const>
+						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	std::vector<Soldier *> vec = ts->stationedSoldiers();
+	SoldiersList current_soldiers;
+	container_iterate_const(std::vector<Soldier *>, vec, i)
+		current_soldiers.push_back(*i);
+
+	return m_handle_get_soldiers(L, soldier_descr, current_soldiers);
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
 
 /* RST
 Field
@@ -2213,6 +2354,14 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_MilitarySite, L_PlayerImmovable>(L);
 	add_parent<L_MilitarySite, L_BaseImmovable>(L);
 	add_parent<L_MilitarySite, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_TrainingSite>(L, "map", true);
+	add_parent<L_TrainingSite, L_ProductionSite>(L);
+	add_parent<L_TrainingSite, L_Building>(L);
+	add_parent<L_TrainingSite, L_PlayerImmovable>(L);
+	add_parent<L_TrainingSite, L_BaseImmovable>(L);
+	add_parent<L_TrainingSite, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 }
 
