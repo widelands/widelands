@@ -56,7 +56,7 @@ protected:
 		bool m_is_lua_file(const std::string &);
 
 	public:
-		LuaInterface_Impl(Widelands::Editor_Game_Base *);
+		LuaInterface_Impl();
 		virtual ~LuaInterface_Impl();
 
 		virtual void interpret_string(std::string);
@@ -70,28 +70,6 @@ protected:
 		virtual void run_script(std::string, std::string);
 };
 
-struct LuaGameInterface_Impl : public LuaInterface_Impl,
-	public virtual LuaGameInterface
-{
-	LuaGameInterface_Impl(Widelands::Editor_Game_Base * g) :
-		LuaInterface_Impl(g) {}
-	virtual ~LuaGameInterface_Impl() {}
-
-	virtual void make_starting_conditions(uint8_t, std::string);
-
-	virtual LuaCoroutine* read_coroutine
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
-		 uint32_t);
-	virtual uint32_t write_coroutine
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&,
-		 LuaCoroutine *);
-
-	virtual void read_global_env
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
-		 uint32_t);
-	virtual uint32_t write_global_env
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&);
-};
 
 /*************************
  * Private functions
@@ -125,8 +103,7 @@ bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 /*************************
  * Public functions
  *************************/
-LuaInterface_Impl::LuaInterface_Impl
-	(Widelands::Editor_Game_Base * const egbase) : m_last_error("") {
+LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	m_L = lua_open();
 
 	// Open the lua libraries
@@ -161,19 +138,152 @@ LuaInterface_Impl::LuaInterface_Impl
 
 	// Now our own
 	luaopen_globals(m_L);
-	luaopen_wldebug(m_L);
-	luaopen_wlmap(m_L);
-	luaopen_wlgame(m_L);
-
-	// Push the game onto the stack
-	lua_pushlightuserdata(m_L, static_cast<void *>(egbase));
-	lua_setfield(m_L, LUA_REGISTRYINDEX, "game");
 
 	register_scripts(*g_fs, "aux");
 }
 
 LuaInterface_Impl::~LuaInterface_Impl() {
 	lua_close(m_L);
+}
+
+void LuaInterface_Impl::register_scripts(FileSystem & fs, std::string ns) {
+	filenameset_t scripting_files;
+
+	// Theoretically, we should be able to use fs.FindFiles(*.lua) here,
+	// but since FindFiles doesn't support Globbing in Zips and most
+	// saved maps/games are zip, we have to work around this issue.
+	fs.FindFiles("scripting", "*", &scripting_files);
+
+	for
+		(filenameset_t::iterator i = scripting_files.begin();
+		 i != scripting_files.end(); i++)
+	{
+		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
+			continue;
+
+		size_t length;
+		std::string data(static_cast<char *>(fs.Load(*i, length)));
+		std::string name = i->substr(0, i->size() - 4); // strips '.lua'
+		size_t pos = name.rfind('/');
+		if (pos == std::string::npos)
+			pos = name.rfind("\\");
+		if (pos != std::string::npos)
+			name = name.substr(pos + 1, name.size());
+
+		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
+		m_register_script(ns, name, data);
+	}
+}
+
+void LuaInterface_Impl::interpret_string(std::string cmd) {
+	int rv = luaL_dostring(m_L, cmd.c_str());
+	m_check_for_errors(rv);
+}
+
+void LuaInterface_Impl::run_script(std::string ns, std::string name) {
+	if
+		((m_scripts.find(ns) == m_scripts.end()) ||
+		 (m_scripts[ns].find(name) == m_scripts[ns].end()))
+		throw LuaScriptNotExistingError(ns, name);
+
+	const std::string & s = m_scripts[ns][name];
+
+	m_check_for_errors
+		(luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
+		 lua_pcall(m_L, 0, LUA_MULTRET, 0)
+	);
+}
+
+
+/*
+ * ===========================
+ * LuaGameInterface
+ * ===========================
+ */
+struct LuaGameInterface_Impl : public LuaInterface_Impl,
+	public virtual LuaGameInterface
+{
+	LuaGameInterface_Impl(Widelands::Editor_Game_Base * g);
+	virtual ~LuaGameInterface_Impl() {}
+
+	virtual void make_starting_conditions(uint8_t, std::string);
+
+	virtual LuaCoroutine* read_coroutine
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
+		 uint32_t);
+	virtual uint32_t write_coroutine
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&,
+		 LuaCoroutine *);
+
+	virtual void read_global_env
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
+		 uint32_t);
+	virtual uint32_t write_global_env
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&);
+};
+
+/*
+ * Special handling of math.random.
+ *
+ * We inject this function to make sure that lua uses our random number
+ * generator.  This guarantees that the game stays in sync over the network and
+ * in replays. Obviously, we only do this for LuaGameInterface, not for
+ * the others.
+ *
+ * The function was designed to simulate the standard math.random function and
+ * was therefore nearly verbatimly copied from the lua sources.
+ */
+static int L_math_random(lua_State * L) {
+	Widelands::Game & game = get_game(L);
+	uint32_t t = game.logic_rand();
+
+	lua_Number r = t / 4294967296.; // create a double in [0,1)
+
+	switch (lua_gettop(L)) {  /* check number of arguments */
+		case 0:
+		{  /* no arguments */
+			lua_pushnumber(L, r);  /* Number between 0 and 1 */
+			break;
+		}
+		case 1:
+		{  /* only upper limit */
+			int32_t u = luaL_checkint32(L, 1);
+			luaL_argcheck(L, 1 <= u, 1, "interval is empty");
+			lua_pushnumber(L, floor(r * u) + 1);  /* int between 1 and `u' */
+			break;
+		}
+		case 2:
+		{  /* lower and upper limits */
+			int32_t l = luaL_checkint32(L, 1);
+			int32_t u = luaL_checkint32(L, 2);
+			luaL_argcheck(L, l <= u, 2, "interval is empty");
+			/* int between `l' and `u' */
+			lua_pushnumber(L, floor(r * (u - l + 1)) + l);
+			break;
+		}
+		default: return luaL_error(L, "wrong number of arguments");
+	}
+	return 1;
+
+}
+
+LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Editor_Game_Base * g) :
+	LuaInterface_Impl()
+{
+	// Overwrite math.random
+	lua_getglobal(m_L, "math");
+	lua_pushcfunction(m_L, L_math_random);
+	lua_setfield(m_L, -2, "random");
+	lua_pop(m_L, 1); // pop "math"
+
+	// Load the remaining libs that are important for the game
+	luaopen_wldebug(m_L);
+	luaopen_wlmap(m_L);
+	luaopen_wlgame(m_L);
+
+	// Push the game onto the stack
+	lua_pushlightuserdata(m_L, static_cast<void *>(g));
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "game");
 }
 
 LuaCoroutine * LuaGameInterface_Impl::read_coroutine
@@ -249,25 +359,6 @@ uint32_t LuaGameInterface_Impl::write_global_env
 }
 
 
-void LuaInterface_Impl::interpret_string(std::string cmd) {
-	int rv = luaL_dostring(m_L, cmd.c_str());
-	m_check_for_errors(rv);
-}
-
-void LuaInterface_Impl::run_script(std::string ns, std::string name) {
-	if
-		((m_scripts.find(ns) == m_scripts.end()) ||
-		 (m_scripts[ns].find(name) == m_scripts[ns].end()))
-		throw LuaScriptNotExistingError(ns, name);
-
-	const std::string & s = m_scripts[ns][name];
-
-	m_check_for_errors
-		(luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
-		 lua_pcall(m_L, 0, LUA_MULTRET, 0)
-	);
-}
-
 /*
  * Fullfill the starting conditions for the Player with the given Number
  */
@@ -290,34 +381,6 @@ void LuaGameInterface_Impl::make_starting_conditions
 	lua_call(m_L, 1, 0);
 }
 
-void LuaInterface_Impl::register_scripts(FileSystem & fs, std::string ns) {
-	filenameset_t scripting_files;
-
-	// Theoretically, we should be able to use fs.FindFiles(*.lua) here,
-	// but since FindFiles doesn't support Globbing in Zips and most
-	// saved maps/games are zip, we have to work around this issue.
-	fs.FindFiles("scripting", "*", &scripting_files);
-
-	for
-		(filenameset_t::iterator i = scripting_files.begin();
-		 i != scripting_files.end(); i++)
-	{
-		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
-			continue;
-
-		size_t length;
-		std::string data(static_cast<char *>(fs.Load(*i, length)));
-		std::string name = i->substr(0, i->size() - 4); // strips '.lua'
-		size_t pos = name.rfind('/');
-		if (pos == std::string::npos)
-			pos = name.rfind("\\");
-		if (pos != std::string::npos)
-			name = name.substr(pos + 1, name.size());
-
-		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
-		m_register_script(ns, name, data);
-	}
-}
 
 /*
 ============================================
@@ -332,4 +395,8 @@ void LuaInterface_Impl::register_scripts(FileSystem & fs, std::string ns) {
 LuaGameInterface* create_LuaGameInterface(Widelands::Editor_Game_Base * g) {
 	return new LuaGameInterface_Impl(g);
 }
+LuaInterface* create_LuaInterface() {
+	return new LuaInterface_Impl();
+}
+
 

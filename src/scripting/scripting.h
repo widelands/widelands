@@ -101,5 +101,6 @@ struct LuaGameInterface : public virtual LuaInterface {
 };
 
 LuaGameInterface* create_LuaGameInterface(Widelands::Editor_Game_Base*);
+LuaInterface* create_LuaInterface();
 
 #endif
