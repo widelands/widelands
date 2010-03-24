@@ -170,9 +170,10 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 				if (begin_of_line)
 					--end_of_last_line;
 				uint32_t begin_of_lastline = end_of_last_line;
-				if (txt.at(begin_of_lastline) == '\n')
+				assert(begin_of_lastline < txt.size());
+				if (begin_of_lastline > 0 && txt.at(begin_of_lastline) == '\n')
 					--begin_of_lastline;
-				while (txt.at(begin_of_lastline) != '\n')
+				while (begin_of_lastline > 0 && txt.at(begin_of_lastline) != '\n')
 					--begin_of_lastline;
 				if (begin_of_lastline)
 					++begin_of_lastline;
