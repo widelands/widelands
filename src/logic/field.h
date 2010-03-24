@@ -132,7 +132,7 @@ private:
 
 public:
 	Height get_height() const throw () {return height;}
-	NodeCaps nodecaps() const {return (NodeCaps)caps;}
+	NodeCaps nodecaps() const {return static_cast<NodeCaps>(caps);}
 
 	Terrains      get_terrains() const throw () {return terrains;}
 	Terrain_Index terrain_d   () const throw () {return terrains.d;}
