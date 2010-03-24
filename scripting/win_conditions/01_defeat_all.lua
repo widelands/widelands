@@ -8,6 +8,7 @@ set_textdomain("win_conditions")
 
 return {
    name = _ "Autocrat",
+   description = _ "The tribe that can defeat all others wins!",
    check_func = coroutine.create(function() 
       -- Find all valid players
       local plrs = {}

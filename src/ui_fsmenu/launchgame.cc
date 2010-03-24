@@ -79,6 +79,13 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		 &Fullscreen_Menu_LaunchGame::start_clicked, *this,
 		 _("Start game"), std::string(), false, false,
 		 m_fn, m_fs),
+	m_wincondition
+		(this,
+		 7 , m_yres * 12 / 19, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_LaunchGame::win_condition_clicked, *this,
+		 "", std::string(), true, false,
+		 m_fn, m_fs),
 
 // Text labels
 	m_title
@@ -92,6 +99,9 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	m_lobby
 		(this,
 		 m_xres * 7 / 10, m_yres * 11 / 20),
+	m_wincondition_descr
+		(this,
+		 7 + m_butw + 7, m_yres * 12 / 19 + m_buth/2 - m_fs/2, m_xres, m_buth),
 	m_name
 		(this,
 		 m_xres * 1 / 25, m_yres * 53 / 200,
@@ -131,7 +141,8 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
 	container_iterate_const(ScriptContainer, sc, wc)
 		m_win_conditions.push_back(wc->first);
-	m_cur_wincondition = 0;
+	m_cur_wincondition = -1;
+	win_condition_clicked();
 
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -243,6 +254,26 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
 		end_modal(0);
 }
 
+/*
+ * WinCondition button has been pressed
+ */
+void Fullscreen_Menu_LaunchGame::win_condition_clicked()
+{
+	// update win conditions information
+	m_cur_wincondition++;
+	m_cur_wincondition %= m_win_conditions.size();
+
+	m_lua->run_script
+		("win_conditions", m_win_conditions[m_cur_wincondition]);
+	std::string n = m_lua->get_string("name");
+	std::string d = m_lua->get_string("description");
+	m_settings->setWinCondition(m_win_conditions[m_cur_wincondition]);
+	m_lua->pop_table();
+
+	m_wincondition.set_title(n);
+	m_wincondition_descr.set_text(d);
+}
+
 
 /**
  * start-button has been pressed
@@ -336,15 +367,6 @@ void Fullscreen_Menu_LaunchGame::refresh()
 			// update the player description groups
 			for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 				m_players[i]->refresh();
-
-			// update win conditions information
-			// TODO SirVer this should not be here
-			m_lua->run_script
-				("win_conditions", m_win_conditions[m_cur_wincondition]);
-			std::string n = m_lua->get_string("name");
-			log("name: %s\n", n.c_str());
-			m_settings->setWinCondition(m_win_conditions[m_cur_wincondition]);
-			m_lua->pop_table();
 
 		} else { // Multi player savegame information starts here.
 

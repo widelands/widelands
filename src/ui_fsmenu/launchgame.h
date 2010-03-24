@@ -73,6 +73,7 @@ private:
 	void select_savegame();
 	void back_clicked();
 	void start_clicked();
+	void win_condition_clicked();
 	void set_scenario_values();
 	void switch_to_position(uint8_t);
 	void load_previous_playerdata();
@@ -85,10 +86,10 @@ private:
 	std::string m_fn;
 
 	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
-	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_back, m_ok;
+	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_back, m_ok, m_wincondition;
 	UI::Callback_IDButton<Fullscreen_Menu_LaunchGame, uint8_t> *
 		m_pos[MAX_PLAYERS];
-	UI::Textarea              m_title, m_mapname, m_lobby;
+	UI::Textarea              m_title, m_mapname, m_lobby, m_wincondition_descr;
 	UI::Textarea              m_name, m_type, m_tribe, m_init, m_ready;
 	UI::Multiline_Textarea    m_notes;
 	UI::Listselect<int32_t> * m_lobby_list;

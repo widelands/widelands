@@ -34,6 +34,10 @@
 
 #include "scripting.h"
 
+// TODO: document win conditions
+// TODO: fix initializations, they should work with the same interface as
+//       win conditions (also remember internationalization)
+// TODO: win conditions for network games.
 /*
 ============================================
        Lua Interface
