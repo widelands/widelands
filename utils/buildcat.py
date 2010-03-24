@@ -291,8 +291,10 @@ def do_update_potfiles():
 #
 ##############################################################################
 def do_buildpo(po, pot, dst):
-        return os.system("msgmerge %s %s %s -o %s" %
-                        (MSGMERGEOPTS, po, pot, dst))
+        rv = os.system("msgmerge %s %s %s -o %s" % (MSGMERGEOPTS, po, pot, dst))
+        if rv:
+            raise RuntimeError("msgmerge exited with errorcode %i!" % rv)
+        return rv
 
 
 ##############################################################################

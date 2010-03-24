@@ -1,41 +1,9 @@
 project (widelands)
 
-# possible configurations:
-# set them via cmake -DVARIABLE=VALUE
-# CMAKE_BUILD_TYPE:
-#     Default is "Debug", Distributors should use "Release"
-# WL_VERSION_STANDARD
-#     Uses the defined standard values for versioning ("BuildXX.YY") if defined.
-#     (Should be set for each official release below.)
-# WL_VERSION_MAJOR, WL_VERSION_MINOR (, WL_VERSION_PATCH):
-#     Default is using SVN revision, Distributors should use correct version
-#     Attention: We are currently only using MAJOR and MINOR.
-#     If you try to set WL_VERSION directly, it will ignore your setting.
-# WL_VERSION_ADDITION:
-#     Suffix of the Build version (e.g. bzr, DEV, RC1, ...)
-# CMAKE_INSTALL_PREFIX:
-#     Prefix for installation of the files.
-#     This is not the install dir which is used for config.h - see WL_INSTALL_PREFIX
-#     default: /usr/local
-# WL_INSTALL_PREFIX:
-#     Prefix for INSTALL_PREFIX in config.h.
-#     This is not the install dir for make install - see CMAKE_INSTALL_PREFIX
-#     default: .
-# WL_INSTALL_BINDIR:
-#     Directory the binary should be in (relative to WL_INSTALL_PREFIX)
-#     default: games
-# WL_INSTALL_DATADIR
-#     Directory for the Widelands data (relative to WL_INSTALL_PREFIX)
-#     default: share/games/widelands
-# WL_INSTALL_LOCALEDIR
-#     Directory for Widelands locales (relative to WL_INSTALL_PREFIX)
-#     default: share/games/widelands/locale
-
 cmake_minimum_required (VERSION 2.6)
 
-
 # Used as versioning, if WL_VERSION_STANDARD is definded.
-if (WL_VERSION_STANDARD STREQUAL "TRUE")
+if (WL_VERSION_STANDARD)
 	# Set the values below for standard versioning.
 	# As long as WL_VERSION_MAJOR is 0, the naming will be in form of
 	# "Build${WL_VERSION_MINOR}" + ".${WL_VERSION_PATCH}" if WL_VERSION_PATCH is
@@ -48,15 +16,48 @@ if (WL_VERSION_STANDARD STREQUAL "TRUE")
 
 	# An addition to the version name (e.g. RC1, DEV, ...)
 	set (WL_VERSION_ADDITION DEV)
-endif (WL_VERSION_STANDARD STREQUAL "TRUE")
-
+endif (WL_VERSION_STANDARD)
 
 # Define the directory structure for installation - will be hardcoded in WL bin
-# If nothing is given on command line, set the standard values.
+# If nothing is given on command line, set the standard values depending on platform.
+
+if (WIN32 OR APPLE OR WL_PORTABLE)
+  if (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
+    set (WL_INSTALL_PREFIX ".")
+  endif (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
+  
+  if (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
+    set (WL_INSTALL_DATADIR ".")
+  endif (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
+
+  if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
+    set (WL_INSTALL_LOCALEDIR "locale")
+  endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
+
+  if (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
+    set (WL_INSTALL_BINDIR ".")
+  endif (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
+elseif (WIN32 OR APPLE OR WL_PORTABLE)
+  if (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
+    set (WL_INSTALL_PREFIX "/usr/local")
+  endif (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
+  
+  if (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
+    set (WL_INSTALL_DATADIR "share/games/widelands")
+  endif (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
+
+  if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
+    set (WL_INSTALL_LOCALEDIR "${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale")
+  endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
+
+  if (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
+    set (WL_INSTALL_BINDIR "games")
+  endif (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
+endif (WIN32 OR APPLE OR WL_PORTABLE)
 
 # General install prefix for config.h
 if (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
-	set (WL_INSTALL_PREFIX .)
+	set (WL_INSTALL_PREFIX /usr/local)
 endif (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
 
 # Widelands binary directory
@@ -71,10 +72,15 @@ endif (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
 
 # Widelands locale directory
 if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
-	set (WL_INSTALL_LOCALEDIR share/games/widelands/locale)
+	set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale)
 endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
 
 set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
+
+set (WLBUILD_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+set (WLBUILD_INSTALL_DATADIR ${WL_INSTALL_DATADIR})
+set (WLBUILD_INSTALL_LOCALEDIR "${CMAKE_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale")
+set (WLBUILD_INSTALL_BINDIR ${WL_INSTALL_BINDIR})
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build-directory and source-directory are the same!")
@@ -86,19 +92,44 @@ endif (CMAKE_INSTALL_PREFIX STREQUAL CMAKE_BINARY_DIR)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
-if (CMAKE_BUILD_TYPE STREQUAL "")
-  set (CMAKE_BUILD_TYPE Debug)
-endif (CMAKE_BUILD_TYPE STREQUAL "")
+if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
+  find_path(FILE_WL_RELEASE "WL_RELEASE" ${CMAKE_CURRENT_SOURCE_DIR})
+  if (${FILE_WL_RELEASE} STREQUAL "FILE_WL_RELEASE-NOTFOUND")
+    set (CMAKE_BUILD_TYPE Debug)
+  else (${FILE_WL_RELEASE} STREQUAL "FILE_WL_RELEASE-NOTFOUND")
+    set (CMAKE_BUILD_TYPE Release)
+  endif (${FILE_WL_RELEASE} STREQUAL "FILE_WL_RELEASE-NOTFOUND")
+endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
+set (BUILD_SHARED_LIBS OFF)
+set (Boost_USE_STATIC_LIBS   ON)
+set (Boost_USE_MULTITHREADED ON)
+find_package(Boost 1.35.0 REQUIRED)
+include_directories(${Boost_INCLUDE_DIR})
+target_link_libraries(widelands ${Boost_LIBRARIES})
+
+set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
+set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall")
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  include(CheckCXXCompilerFlag) #this include should be safe
+  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST} Compiler_old-style-cast_supported)
+  IF (Compiler_old-style-cast_supported)
+    set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST}") #the space is on purpose!
+  ENDIF (Compiler_old-style-cast_supported)
+
+  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GENERICWARNINGS} Compiler_generic_warnings_supported)
+  IF (Compiler_generic_warnings_supported)
+    set (WL_COMPILERFLAG_GENERICWARNINGS " ${PARAMETER_COMPILERFLAG_GENERICWARNINGS}") #the space is on purpose!
+  ENDIF (Compiler_generic_warnings_supported)
+ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
 set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
 
 #If building with MSVC, then check for 3rdparty libs
 if (DEFINED MSVC)
@@ -121,7 +152,7 @@ if (DEFINED MSVC)
   find_library(INTL_LIBRARY NAMES intl libintl)
 
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
   # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
   set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MD" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
@@ -132,13 +163,18 @@ else (DEFINED MSVC)
   set (HAVE_VARARRAY TRUE CACHE BOOL "Use variable length arrays to improve performance. Requires gcc." )
 endif (DEFINED MSVC)
 
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  message ("Using compiler flags: ${CMAKE_CXX_FLAGS_DEBUG}")
+ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  message ("Using compiler flags: ${CMAKE_CXX_FLAGS_RELEASE}")
+ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+
 if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_INCLUDE_PATH "${WL_3RDPARTY_DIR}/include;${WL_3RDPARTY_DIR}/include/sdl")
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 endif (DEFINED WL_3RDPARTY_DIR)
 
 find_package(GGZ_Core)
-
 if (GGZ_CORE_FOUND)
   include_directories(${GGZ_CORE_INCLUDE_DIR})
   add_definitions("-DUSE_GGZ")
@@ -203,7 +239,7 @@ endif (NOT DEFINED WL_VERSION)
 
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
-  DESTINATION ${WL_INSTALL_DATADIR}
+  DESTINATION ${WLBUILD_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreVersionFile
 )
@@ -211,13 +247,6 @@ install (
 include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
 include(CheckIncludeFile)
-
-set (BUILD_SHARED_LIBS OFF)
-set (Boost_USE_STATIC_LIBS   ON)
-set (Boost_USE_MULTITHREADED ON)
-find_package(Boost 1.35.0 REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
-target_link_libraries(widelands ${Boost_LIBRARIES})
 
 find_package(PNG REQUIRED)
 include_directories(${PNG_INCLUDE_DIR})
@@ -286,7 +315,8 @@ install(
     tribes
     txts
     worlds
-  DESTINATION ${WL_INSTALL_DATADIR}
+    pics
+  DESTINATION ${WLBUILD_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
   PATTERN "*.svn*" EXCLUDE
@@ -298,7 +328,7 @@ install(
     COPYING
     CREDITS
     ChangeLog
-  DESTINATION ${WL_INSTALL_DATADIR}
+  DESTINATION ${WLBUILD_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLicenseFiles
 )
@@ -306,7 +336,7 @@ install(
 install(
   DIRECTORY
     doc
-  DESTINATION ${WL_INSTALL_DATADIR}
+  DESTINATION ${WLBUILD_INSTALL_DATADIR}
   CONFIGURATIONS Debug
   COMPONENT DocFiles
   PATTERN "*.svn*" EXCLUDE
@@ -316,30 +346,47 @@ install(
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale)
 find_package (PythonInterp REQUIRED)
 
+if (WIN32)
+  set (WL_CREATE_SYMLINK_COMMAND "copy_directory")
+else (WIN32)
+  set (WL_CREATE_SYMLINK_COMMAND "create_symlink")
+endif (WIN32)
 
 if (${CMAKE_BUILD_TYPE} STREQUAL Release)
   add_custom_target (
     lang ALL
-  #  COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/../locale
+    COMMAND cmake -E echo "Preparing directory po"
     COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+    COMMAND cmake -E echo "Preparing directory campaigns"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
+    COMMAND cmake -E echo "Preparing directory maps"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND cmake -E echo "Preparing directory tribes"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
+    COMMAND cmake -E echo "Preparing directory txts"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
+    COMMAND cmake -E echo "Preparing directory worlds"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+    COMMAND cmake -E echo "Running the locale generation task"
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   )
 else (${CMAKE_BUILD_TYPE} STREQUAL Release)
   add_custom_target (
     lang
-  #  COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/../locale
+    COMMAND cmake -E echo "Preparing directory po"
     COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+    COMMAND cmake -E echo "Preparing directory campaigns"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
+    COMMAND cmake -E echo "Preparing directory maps"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND cmake -E echo "Preparing directory tribes"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
+    COMMAND cmake -E echo "Preparing directory txts"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
+    COMMAND cmake -E echo "Preparing directory worlds"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+    COMMAND cmake -E echo "Running the locale generation task"
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   )
@@ -348,7 +395,7 @@ endif (${CMAKE_BUILD_TYPE} STREQUAL Release)
 install(
   DIRECTORY
     ${CMAKE_CURRENT_BINARY_DIR}/locale/
-  DESTINATION ${WL_INSTALL_LOCALEDIR}
+  DESTINATION ${WLBUILD_INSTALL_LOCALEDIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLanguageFiles
   PATTERN "*.svn*" EXCLUDE
@@ -361,24 +408,9 @@ add_custom_target (
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pics
   COMMAND cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DWL_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/pics -DWL_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/pics -P PicsFunctions.cmake
 )
-add_custom_target (
-  pics ALL 
-  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/pics ${CMAKE_CURRENT_BINARY_DIR}/pics
-)
-
-install(
-  DIRECTORY
-    ${CMAKE_CURRENT_BINARY_DIR}/pics
-  DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release
-  COMPONENT CorePicsFiles
-  PATTERN "*.svn*" EXCLUDE
-  PATTERN "SCons*" EXCLUDE
-)
-
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
-set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CorePicsFiles CoreVersionFile CoreLicenseFiles)
+set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CoreVersionFile CoreLicenseFiles)
 set (CPACK_GENERATOR TGZ)
 set (CPACK_SOURCE_GENERATOR TGZ)
 include(CPack)

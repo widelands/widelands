@@ -36,10 +36,15 @@ def do_compile(lang):
 
             if not buildcat.do_buildpo(po, pot, "tmp.po"):
                 buildcat.do_makedirs(os.path.dirname(mo))
-                if not (os.system("msgfmt -o %s tmp.po" % mo)):
+                err_code = os.system("msgfmt -o %s tmp.po" % mo)
+                if not err_code: # Success
                     os.remove("tmp.po")
                     sys.stdout.write(".")
                     sys.stdout.flush()
+                else:
+                    raise RuntimeError(
+                        "msgfmt exited with errorcode %i!" % err_code
+                    )
 
         sys.stdout.write("\n")
 

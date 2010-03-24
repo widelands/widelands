@@ -2513,7 +2513,7 @@ void Worker::scout_update(Game & game, State & state)
 		// TODO: balance this.
 		Time oldest_seen = game.get_gametime() - 600000; // == 600sec == 10min
 		Coords oldest_coord;
-		bool has_interesting_old_coord;
+		bool has_interesting_old_coord = false;
 
 		Widelands::MapFringeRegion<> mr(map, Area<>(get_position(), 0));
 		uint32_t fringe_size = 0;

@@ -5,7 +5,7 @@ program=scout
 carrier=1
 
 [scout]
-0=scout 45000 # 45 seconds until return
+0=scout 75000 # 75 seconds until return
 
 [idle]
 pics=idle_??.png
