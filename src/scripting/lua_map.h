@@ -82,6 +82,7 @@ public:
 	 * attributes
 	 */
 	int get_serial(lua_State * L);
+	int get_type(lua_State * L);
 
 	/*
 	 * Lua Methods
@@ -323,7 +324,7 @@ public:
 	int get_length(lua_State * L);
 	int get_start_flag(lua_State * L);
 	int get_end_flag(lua_State * L);
-	int get_type(lua_State * L);
+	int get_road_type(lua_State * L);
 
 	/*
 	 * Lua Methods

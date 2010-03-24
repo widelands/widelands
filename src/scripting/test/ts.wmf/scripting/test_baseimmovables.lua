@@ -139,8 +139,18 @@ function immovable_property_tests:test_name_stone()
    assert_equal("stones4", self.big.name)
 end
 
-function immovable_property_tests:test_name_stone()
-   assert_equal("stones4", self.big.name)
+function immovable_property_tests:test_type_pebble()
+   assert_equal("immovable", self.none.type)
+end
+function immovable_property_tests:test_type_tree()
+   assert_equal("immovable", self.small.type)
+end
+function immovable_property_tests:test_type_charcoal_burner()
+   assert_equal("productionsite", self.medium.type)
+   assert_equal("burners_house", self.medium.name)
+end
+function immovable_property_tests:test_type_stone()
+   assert_equal("immovable", self.big.type)
 end
 
 -- ================

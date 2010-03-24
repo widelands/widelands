@@ -34,6 +34,16 @@ function productionsite_tests:teardown()
       self.f3.brn.immovable:remove()
    end)
 end
+function productionsite_tests:test_name()
+   assert_equal("big_inn", self.inn.name)
+   assert_equal("warmill", self.warmill.name)
+   assert_equal("lumberjacks_hut", self.lumberjack.name)
+end
+function productionsite_tests:test_type()
+   assert_equal("productionsite", self.inn.type)
+   assert_equal("productionsite", self.warmill.type)
+   assert_equal("productionsite", self.lumberjack.type)
+end
 function productionsite_tests:test_no_workers_initially()
    assert_equal(0, _cnt(self.inn:get_workers("all")))
    assert_equal(0, _cnt(self.warmill:get_workers("all")))

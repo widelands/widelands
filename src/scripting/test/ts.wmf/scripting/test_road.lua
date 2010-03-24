@@ -90,7 +90,13 @@ function road_tests:test_length()
    assert_equal(2, self.r.length)
 end
 function road_tests:test_roadtype()
-   assert_equal("normal", self.r.type)
+   assert_equal("normal", self.r.road_type)
+end
+function road_tests:test_type()
+   assert_equal("road", self.r.type)
+end
+function road_tests:test_name()
+   assert_equal("road", self.r.name)
 end
 
 function road_tests:test_deletion_of_flag()

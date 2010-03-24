@@ -15,6 +15,12 @@ function flag_tests:teardown()
    pcall(self.f.remove, self.f)
 end
 
+function flag_tests:test_name()
+   assert_equal("flag", self.f.name)
+end
+function flag_tests:test_type()
+   assert_equal("flag", self.f.type)
+end
 function flag_tests:test_no_wares_on_creation()
    local rv = self.f:get_wares("all")
    cnt = 0

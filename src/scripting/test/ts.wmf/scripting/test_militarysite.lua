@@ -23,6 +23,12 @@ function militarysite_tests:teardown()
       self.f1.brn.immovable:remove()
    end)
 end
+function militarysite_tests:test_name()
+   assert_equal("fortress", self.fortress.name)
+end
+function militarysite_tests:test_type()
+   assert_equal("militarysite", self.fortress.type)
+end
 function militarysite_tests:test_no_soldiers_initially()
    assert_equal(0, _cnt(self.fortress:get_soldiers("all")))
 end

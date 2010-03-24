@@ -777,6 +777,7 @@ const MethodType<L_MapObject> L_MapObject::Methods[] = {
 };
 const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	PROP_RO(L_MapObject, serial),
+	PROP_RO(L_MapObject, type),
 	{0, 0, 0},
 };
 
@@ -816,8 +817,19 @@ void L_MapObject::__unpersist(lua_State * L) {
 		constant after saving/loading.
 */
 int L_MapObject::get_serial(lua_State * L) {
-	Game & game = get_game(L);
-	lua_pushuint32(L, m_ptr->get(game)->serial());
+	lua_pushuint32(L, m_ptr->get(get_game(L))->serial());
+	return 1;
+}
+
+/* RST
+	.. attribute:: type
+
+		(RO) the type name of this map object. You can determine with what kind
+		of object you cope by looking at this attribute. Some example types:
+		immovable, flag, road, productionsite, warehouse, militarysite...
+*/
+int L_MapObject::get_type(lua_State * L) {
+	lua_pushstring(L, m_ptr->get(get_game(L))->type_name());
 	return 1;
 }
 
@@ -1183,7 +1195,7 @@ const PropertyType<L_Road> L_Road::Properties[] = {
 	PROP_RO(L_Road, start_flag),
 	PROP_RO(L_Road, end_flag),
 	PROP_RO(L_Road, valid_workers),
-	PROP_RO(L_Road, type),
+	PROP_RO(L_Road, road_type),
 	{0, 0, 0},
 };
 
@@ -1226,14 +1238,14 @@ int L_Road::get_end_flag(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: type
+	.. attribute:: road_type
 
 		(RO) Type of road. Can be any either of:
 
 		* normal
 		* busy
 */
-int L_Road::get_type(lua_State * L) {
+int L_Road::get_road_type(lua_State * L) {
 	switch (get(L, get_game(L))->get_roadtype()) {
 		case Road_Normal:
 			lua_pushstring(L, "normal"); break;

@@ -5,10 +5,17 @@ warehouse_tests = lunit.TestCase("warehouse tests")
 function warehouse_tests:setup()
    self.f = wl.map.Field(10,10)
    self.p = wl.game.Player(1)
-   self.w = self.p:place_building("headquarters", self.f)
+   self.w = self.p:place_building("warehouse", self.f)
 end
 function warehouse_tests:teardown()
    pcall(self.f.brn.remove, self.w)
+end
+
+function warehouse_tests:test_name()
+   assert_equal("warehouse", self.w.name)
+end
+function warehouse_tests:test_type()
+   assert_equal("warehouse", self.w.type)
 end
 
 function warehouse_tests:test_upcasting_from_immovable_to_building()

@@ -24,6 +24,13 @@ function trainingsite_tests:teardown()
    end)
 end
 
+function trainingsite_tests:test_name()
+   assert_equal("trainingscamp", self.camp.name)
+end
+function trainingsite_tests:test_type()
+   assert_equal("trainingsite", self.camp.type)
+end
+
 -- ================
 -- Worker creation 
 -- ================
@@ -175,9 +182,9 @@ end
 -- =================
 -- Soldier creation 
 -- =================
--- function trainingsite_tests:test_no_soldiers_initially()
---    assert_equal(0, _cnt(self.camp:get_soldiers("all")))
--- end
+function trainingsite_tests:test_no_soldiers_initially()
+   assert_equal(0, _cnt(self.camp:get_soldiers("all")))
+end
 function trainingsite_tests:test_max_soldiers()
    assert_equal(12, self.camp.max_soldiers);
 end
