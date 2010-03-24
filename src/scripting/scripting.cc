@@ -34,8 +34,6 @@
 
 #include "scripting.h"
 
-// TODO: player.tribe == tribename
-
 /*
 ============================================
        Lua Interface

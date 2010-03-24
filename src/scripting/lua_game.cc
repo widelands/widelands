@@ -115,6 +115,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RW(L_Player, retreat_percentage),
 	PROP_RW(L_Player, changing_retreat_percentage_allowed),
 	PROP_RO(L_Player, inbox),
+	PROP_RO(L_Player, tribe),
 	{0, 0, 0},
 };
 
@@ -326,6 +327,16 @@ int L_Player::get_inbox(lua_State * L) {
 		lua_rawset(L, -3);
 	}
 
+	return 1;
+}
+
+/* RST
+	.. attribute:: tribe
+
+		(RO) The name of the tribe of this player.
+*/
+int L_Player::get_tribe(lua_State *L) {
+	lua_pushstring(L, get(L, get_game(L)).tribe().name());
 	return 1;
 }
 

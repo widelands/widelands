@@ -9,14 +9,17 @@
 -- there are individual fields which are used only for these tests here, so
 -- this bleeding doesn't matter.
 player_tests = lunit.TestCase("Player tests sizes")
+
+function player_tests:test_tribe_property()
+   assert_equal("barbarians", wl.game.Player(1).tribe)
+   assert_equal("empire", wl.game.Player(2).tribe)
+   assert_equal("atlanteans", wl.game.Player(3).tribe)
+end
+
 function player_tests:test_number_property()
    assert_equal(1, wl.game.Player(1).number)
-end
-function player_tests:test_number_property2()
    assert_equal(2, wl.game.Player(2).number)
-end
-function player_tests:test_number_property2()
-   assert_equal(2, wl.game.Player(2).number)
+   assert_equal(3, wl.game.Player(3).number)
 end
 function player_tests:test_negativ_val_for_player()
    assert_error("Illegal plr",  function() wl.game.Player(-1) end)

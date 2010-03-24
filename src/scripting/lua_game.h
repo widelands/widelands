@@ -74,6 +74,7 @@ public:
 	int get_changing_retreat_percentage_allowed(lua_State * L);
 	int set_changing_retreat_percentage_allowed(lua_State * L);
 	int get_inbox(lua_State * L);
+	int get_tribe(lua_State * L);
 
 	/*
 	 * Lua methods
