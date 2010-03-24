@@ -81,6 +81,9 @@ struct LuaInterface {
 	virtual ScriptContainer& get_scripts_for(std::string) = 0;
 
 	virtual void run_script(std::string, std::string) = 0;
+};
+
+struct LuaGameInterface : public virtual LuaInterface {
 	virtual void make_starting_conditions(uint8_t, std::string) = 0;
 
 	virtual LuaCoroutine* read_coroutine
@@ -97,6 +100,6 @@ struct LuaInterface {
 		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&) = 0;
 };
 
-LuaInterface* create_lua_interface(Widelands::Editor_Game_Base*);
+LuaGameInterface* create_LuaGameInterface(Widelands::Editor_Game_Base*);
 
 #endif

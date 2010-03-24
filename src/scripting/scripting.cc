@@ -39,9 +39,11 @@
        Lua Interface
 ============================================
 */
-class LuaInterface_Impl : public LuaInterface {
+struct LuaInterface_Impl : public virtual LuaInterface {
 	std::string m_last_error;
 	std::map<std::string, ScriptContainer> m_scripts;
+
+protected:
 	lua_State * m_L;
 
 	/*
@@ -66,17 +68,29 @@ class LuaInterface_Impl : public LuaInterface {
 		}
 
 		virtual void run_script(std::string, std::string);
-		virtual void make_starting_conditions(uint8_t, std::string);
+};
 
-		virtual LuaCoroutine * read_coroutine
-			(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
-		virtual uint32_t write_coroutine
-			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &,
-			 LuaCoroutine *);
-		virtual void read_global_env
-			(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
-		virtual uint32_t write_global_env
-			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
+struct LuaGameInterface_Impl : public LuaInterface_Impl,
+	public virtual LuaGameInterface
+{
+	LuaGameInterface_Impl(Widelands::Editor_Game_Base * g) :
+		LuaInterface_Impl(g) {}
+	virtual ~LuaGameInterface_Impl() {}
+
+	virtual void make_starting_conditions(uint8_t, std::string);
+
+	virtual LuaCoroutine* read_coroutine
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
+		 uint32_t);
+	virtual uint32_t write_coroutine
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&,
+		 LuaCoroutine *);
+
+	virtual void read_global_env
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
+		 uint32_t);
+	virtual uint32_t write_global_env
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&);
 };
 
 /*************************
@@ -162,7 +176,7 @@ LuaInterface_Impl::~LuaInterface_Impl() {
 	lua_close(m_L);
 }
 
-LuaCoroutine * LuaInterface_Impl::read_coroutine
+LuaCoroutine * LuaGameInterface_Impl::read_coroutine
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
@@ -173,7 +187,7 @@ LuaCoroutine * LuaInterface_Impl::read_coroutine
 	return rv;
 }
 
-uint32_t LuaInterface_Impl::write_coroutine
+uint32_t LuaGameInterface_Impl::write_coroutine
 	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos,
 	 LuaCoroutine * cr)
 {
@@ -193,7 +207,7 @@ static const char * m_persistent_globals[] = {
 	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
 	"string", "use", "_", "set_textdomain", "coroutine.yield", 0
 };
-void LuaInterface_Impl::read_global_env
+void LuaGameInterface_Impl::read_global_env
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
@@ -224,7 +238,7 @@ void LuaInterface_Impl::read_global_env
 	lua_pop(m_L, 1); // pop the table returned by unpersist_object
 }
 
-uint32_t LuaInterface_Impl::write_global_env
+uint32_t LuaGameInterface_Impl::write_global_env
 	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
 {
 	// Empty table + object to persist on the stack Stack
@@ -257,7 +271,7 @@ void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 /*
  * Fullfill the starting conditions for the Player with the given Number
  */
-void LuaInterface_Impl::make_starting_conditions
+void LuaGameInterface_Impl::make_starting_conditions
 	(uint8_t plrnr, std::string scriptname)
 {
 	Widelands::Game & game = get_game(m_L);
@@ -311,9 +325,11 @@ void LuaInterface_Impl::register_scripts(FileSystem & fs, std::string ns) {
 ============================================
 */
 /*
- * Factory Function
+ * Factory Function, create lua interfaces for the following use cases:
+ *
+ * "game": load all libraries needed for the game to run properly
  */
-LuaInterface * create_lua_interface(Widelands::Editor_Game_Base * g) {
-	return new LuaInterface_Impl(g);
+LuaGameInterface* create_LuaGameInterface(Widelands::Editor_Game_Base * g) {
+	return new LuaGameInterface_Impl(g);
 }
 
