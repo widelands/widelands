@@ -118,7 +118,11 @@ static int L_use(lua_State * L) {
 	lua_pop(L, 2);
 
 	try {
-		get_game(L).lua().run_script(ns, script);
+		lua_getfield(L, LUA_REGISTRYINDEX, "lua_interface");
+		LuaInterface * lua = static_cast<LuaInterface *>(lua_touserdata(L, -1));
+		lua_pop(L, 1); // pop this userdata
+
+		lua->run_script(ns, script);
 	} catch (LuaError & e) {
 		report_error(L, "%s", e.what());
 	}

@@ -62,11 +62,13 @@ protected:
 		virtual void interpret_string(std::string);
 		virtual std::string const & get_last_error() const {return m_last_error;}
 
-		virtual void register_scripts(FileSystem &, std::string);
+		virtual void register_scripts
+			(FileSystem &, std::string, std::string = "scripting");
 		virtual ScriptContainer & get_scripts_for(std::string ns) {
 			return m_scripts[ns];
 		}
 
+		virtual std::string get_string(std::string);
 		virtual void run_script(std::string, std::string);
 };
 
@@ -136,6 +138,10 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 		lua_call(m_L, 1, 0);
 	}
 
+	// Push the instance of this class into the registry
+	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(this));
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
+
 	// Now our own
 	luaopen_globals(m_L);
 
@@ -146,13 +152,15 @@ LuaInterface_Impl::~LuaInterface_Impl() {
 	lua_close(m_L);
 }
 
-void LuaInterface_Impl::register_scripts(FileSystem & fs, std::string ns) {
+void LuaInterface_Impl::register_scripts
+	(FileSystem & fs, std::string ns, std::string subdir)
+{
 	filenameset_t scripting_files;
 
 	// Theoretically, we should be able to use fs.FindFiles(*.lua) here,
 	// but since FindFiles doesn't support Globbing in Zips and most
 	// saved maps/games are zip, we have to work around this issue.
-	fs.FindFiles("scripting", "*", &scripting_files);
+	fs.FindFiles(subdir, "*", &scripting_files);
 
 	for
 		(filenameset_t::iterator i = scripting_files.begin();
@@ -194,6 +202,21 @@ void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 	);
 }
 
+std::string LuaInterface_Impl::get_string(std::string s) {
+	if (not lua_istable(m_L, -1))
+		throw LuaError("Last script did not return a table!");
+
+	lua_getfield(m_L, -1, s.c_str());
+	if (not lua_isstring(m_L, -1)) {
+		lua_pop(m_L, 1);
+		throw LuaError
+			(s + "is not a field in the table returned by the last script");
+	}
+	std::string rv = lua_tostring(m_L, -1);
+	lua_pop(m_L, 1);
+
+	return rv;
+}
 
 /*
  * ===========================

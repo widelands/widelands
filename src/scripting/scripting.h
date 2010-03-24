@@ -77,10 +77,15 @@ struct LuaInterface {
 	virtual void interpret_string(std::string) = 0;
 	virtual std::string const & get_last_error() const = 0;
 
-	virtual void register_scripts(FileSystem &, std::string) = 0;
+	virtual void register_scripts(FileSystem &, std::string,
+			std::string = "scripting") = 0;
 	virtual ScriptContainer& get_scripts_for(std::string) = 0;
 
 	virtual void run_script(std::string, std::string) = 0;
+
+	// If a script returns a table, one can use this function to
+	// query it
+	virtual std::string get_string(std::string) = 0;
 };
 
 struct LuaGameInterface : public virtual LuaInterface {

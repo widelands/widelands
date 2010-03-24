@@ -17,25 +17,26 @@
  *
  */
 
-#include "launchgame.h"
 
-//#include "logic/editor_game_base.h"
-#include "loadgame.h"
-#include "mapselect.h"
-#include "logic/game.h"
-#include "wui/gamechatpanel.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "logic/instances.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "loadgame.h"
+#include "logic/game.h"
+#include "logic/instances.h"
 #include "logic/map.h"
-#include "map_io/map_loader.h"
 #include "logic/player.h"
+#include "map_io/map_loader.h"
+#include "mapselect.h"
 #include "playerdescrgroup.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "warning.h"
+#include "wui/gamechatpanel.h"
+
+#include "launchgame.h"
 
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	(GameSettingsProvider * const settings, GameController * const ctrl,
@@ -123,6 +124,15 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	m_autolaunch   (autolaunch)
 {
 
+	// Register win condition scripts
+	m_lua = create_LuaInterface();
+	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+
+	ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
+	container_iterate_const(ScriptContainer, sc, wc)
+		m_win_conditions.push_back(wc->first);
+	m_cur_wincondition = 0;
+
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_name   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
@@ -163,6 +173,9 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	}
 }
 
+Fullscreen_Menu_LaunchGame::~Fullscreen_Menu_LaunchGame() {
+	delete m_lua;
+}
 
 /**
  * In singleplayer:
@@ -323,6 +336,13 @@ void Fullscreen_Menu_LaunchGame::refresh()
 			// update the player description groups
 			for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 				m_players[i]->refresh();
+
+			// update win conditions information
+			m_lua->run_script
+				("win_conditions", m_win_conditions[m_cur_wincondition]);
+			std::string n = m_lua->get_string("name");
+			log("name: %s\n", n.c_str());
+
 
 		} else { // Multi player savegame information starts here.
 

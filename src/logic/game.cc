@@ -283,6 +283,7 @@ void Game::init_newgame
 {
 	g_gr->flush(PicMod_Menu);
 
+	// TODO: SirVer use settings here
 	loaderUI.step(_("Preloading map"));
 
 	assert(!get_map());

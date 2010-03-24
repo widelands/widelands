@@ -68,6 +68,9 @@ struct GameSettings {
 	/// Name of the selected map
 	std::string mapname;
 	std::string mapfilename;
+	
+	// Win condition to use
+	std::string win_condition;
 
 	/// Is map a scenario
 	bool scenario;

@@ -34,6 +34,7 @@ struct GameChatPanel;
 struct GameController;
 struct GameSettingsProvider;
 struct PlayerDescriptionGroup;
+struct LuaInterface;
 
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player
@@ -56,6 +57,7 @@ struct PlayerDescriptionGroup;
 struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LaunchGame
 		(GameSettingsProvider *, GameController * = 0, bool autolaunch = false);
+	~Fullscreen_Menu_LaunchGame();
 
 	void setChatProvider(ChatProvider &);
 
@@ -65,6 +67,8 @@ struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	void refresh();
 
 private:
+	LuaInterface * m_lua;
+
 	void select_map();
 	void select_savegame();
 	void back_clicked();
@@ -100,6 +104,8 @@ private:
 	bool                      m_is_scenario;
 	bool                      m_is_savegame;
 	bool                      m_autolaunch;
+	std::vector<std::string> m_win_conditions;
+	uint8_t m_cur_wincondition;
 };
 
 
