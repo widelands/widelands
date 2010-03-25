@@ -28,6 +28,8 @@
 
 #include <SDL_keysym.h>
 
+#include <algorithm>
+
 namespace UI {
 /**
  * Initialize an editbox that supports multiline strings.
@@ -333,7 +335,7 @@ void Multiline_Editbox::CalcLinePos()
 	uint32_t lbtt = 0; // linebreaks to top
 	uint32_t lbtb = 0; // linebreaks to bottom
 
-	for (size_t i = 0; i < m_cur_pos; ++i)
+	for (size_t i = 0; i < std::min(m_cur_pos,static_cast<uint32_t>(str.size() - 1)); ++i)
 		if (str.at(i) == '\n')
 			++lbtt;
 	for (size_t i = m_cur_pos; i < leng; ++i)
