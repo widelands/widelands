@@ -11,6 +11,6 @@ pics=badger_idle_e_??.png
 fps=20
 
 [walk]
-hotspot=10 15
+hotspot=13 15
 dirpics=badger_walk_!!_??.png
 fps=20

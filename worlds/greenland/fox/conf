@@ -11,6 +11,6 @@ pics=fox_idle_se_??.png
 fps=10
 
 [walk]
-hotspot=7 14
+hotspot=11 14
 dirpics=fox_walk_!!_??.png
 fps=20
