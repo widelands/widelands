@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-21 10:15+0100\n"
-"PO-Revision-Date: 2010-03-24 00:51+0000\n"
+"PO-Revision-Date: 2010-03-24 10:10+0000\n"
 "Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-03-24 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-03-25 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -172,6 +172,28 @@ msgid ""
 "                      Enables double buffering\n"
 "                      *HIGHLY EXPERIMENTAL*\n"
 msgstr ""
+" --speed_of_new_game Скорость на которой начнется новая игра,\n"
+"                      умноженная на 1000 (0 - пауза,\n"
+"                      1000 - нормальная скорость).\n"
+"--auto_roadbuild_mode=[yes|no]\n"
+"                      Переходить ли автоматически в режим\n"
+"                      прокладки дорог сразу после создания\n"
+"                      флага не на дороге.\n"
+"--write_HTML=[yes|no]\n"
+"                      Write HTML-helpfiles for parsed game data.\n"
+"\n"
+"Параметры графики:\n"
+"--fullscreen=[yes|no]\n"
+"                      Запускать игру в полноэкранном режиме?\n"
+"--depth=[16|32] Глубина цвета в битах на пиксель.\n"
+"--xres=[...] Ширина окна игры в пикселях.\n"
+"--yres=[...] Высота окна игры в пикселях.\n"
+"--hw_improvements=[0|1]\n"
+"                      Использовать аппаратное ускорение\n"
+"                      *ОСТОРОЖНО! НЕ ОТЛАЖЕНО!*\n"
+"--double_buffer=[0|1]\n"
+"                      Разрешить двойную буферизацию\n"
+"                      *ОСТОРОЖНО! НЕ ОТЛАЖЕНО!*\n"
 
 #: ../../src/wlapplication.cc:1273
 msgid ""
@@ -205,6 +227,23 @@ msgid ""
 "                      panel.\n"
 "\n"
 msgstr ""
+"\n"
+"Параметры внутреннего менеджера окон:\n"
+" --border_snap_distance=[0 ...]\n"
+"                      Придвигать окно к краю экрана, когда\n"
+"                      край окна окажется на заданном\n"
+"                      расстоянии от края экрана.\n"
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Убирать рамку окна с той стороны,\n"
+"                      с которой окно касается края экрана.\n"
+" --panel_snap_distance=[0 ...]\n"
+"                      Придвигать окно к краю панели, когда\n"
+"                      край окна окажется на заданном\n"
+"                      расстоянии от края панели.\n"
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Придвигать окно к краю панели только\n"
+"                      если оно перекрывает(ся) панель(ю).\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1303
 msgid ""
@@ -469,7 +508,7 @@ msgstr "Стоимость постройки"
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "Строительство: %s"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
@@ -478,7 +517,7 @@ msgstr "Усовершенствования"
 #: ../../src/writeHTML.cc:462
 #, c-format
 msgid "%s's enhancement"
-msgstr ""
+msgstr "Улучшение: %s"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
@@ -537,7 +576,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:671 ../../src/writeHTML.cc:682
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "Изготовление: %s"
 
 #: ../../src/writeHTML.cc:693
 msgid "Spawns in warehouses."
@@ -551,7 +590,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:710
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "Повышение по службе: %s"
 
 #: ../../src/writeHTML.cc:721 ../../src/writeHTML.cc:866
 msgid "Programs"
@@ -560,35 +599,35 @@ msgstr "Программы"
 #: ../../src/writeHTML.cc:758 ../../src/writeHTML.cc:1301
 #: ../../src/logic/building.cc:506
 msgid "mine"
-msgstr ""
+msgstr "mine"
 
 #: ../../src/writeHTML.cc:759
 msgid "breed"
-msgstr ""
+msgstr "breed"
 
 #: ../../src/writeHTML.cc:760
 msgid "createitem"
-msgstr ""
+msgstr "createitem"
 
 #: ../../src/writeHTML.cc:761
 msgid "setdescription"
-msgstr ""
+msgstr "setdescription"
 
 #: ../../src/writeHTML.cc:762
 msgid "setbobdescription"
-msgstr ""
+msgstr "setbobdescription"
 
 #: ../../src/writeHTML.cc:763
 msgid "findobject"
-msgstr ""
+msgstr "findobject"
 
 #: ../../src/writeHTML.cc:764
 msgid "findspace"
-msgstr ""
+msgstr "findspace"
 
 #: ../../src/writeHTML.cc:765
 msgid "walk"
-msgstr ""
+msgstr "walk"
 
 #: ../../src/writeHTML.cc:766
 msgid "animation"
@@ -596,7 +635,7 @@ msgstr "анимация"
 
 #: ../../src/writeHTML.cc:767 ../../src/writeHTML.cc:906
 msgid "return"
-msgstr ""
+msgstr "return"
 
 #: ../../src/writeHTML.cc:768
 msgid "object"
@@ -604,27 +643,27 @@ msgstr "объект"
 
 #: ../../src/writeHTML.cc:769
 msgid "plant"
-msgstr ""
+msgstr "plant"
 
 #: ../../src/writeHTML.cc:770
 msgid "create_bob"
-msgstr ""
+msgstr "create_bob"
 
 #: ../../src/writeHTML.cc:771
 msgid "removeobject"
-msgstr ""
+msgstr "removeobject"
 
 #: ../../src/writeHTML.cc:772
 msgid "geologist"
-msgstr ""
+msgstr "geologist"
 
 #: ../../src/writeHTML.cc:773
 msgid "geologist_find"
-msgstr ""
+msgstr "geologist_find"
 
 #: ../../src/writeHTML.cc:774 ../../src/writeHTML.cc:1376
 msgid "playFX"
-msgstr ""
+msgstr "playFX"
 
 #: ../../src/writeHTML.cc:775
 msgid "UNKNOWN"
@@ -641,11 +680,11 @@ msgstr "Работники"
 #: ../../src/writeHTML.cc:797
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "Работает в: %s"
 
 #: ../../src/writeHTML.cc:807
 msgid "Inputs"
-msgstr ""
+msgstr "Получает"
 
 #: ../../src/writeHTML.cc:818
 #, c-format
@@ -654,12 +693,12 @@ msgstr "Поступление: %s"
 
 #: ../../src/writeHTML.cc:830
 msgid "Output"
-msgstr ""
+msgstr "Производит"
 
 #: ../../src/writeHTML.cc:841 ../../src/writeHTML.cc:855
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "Готово: %s"
 
 #: ../../src/writeHTML.cc:902 ../../src/writeHTML.cc:1045
 #: ../../src/writeHTML.cc:1107 ../../src/writeHTML.cc:1135
@@ -668,11 +707,11 @@ msgstr ""
 #: ../../src/writeHTML.cc:1297 ../../src/writeHTML.cc:1324
 #: ../../src/writeHTML.cc:1348 ../../src/writeHTML.cc:1372
 msgid "productionsite_program_reference.xhtml"
-msgstr ""
+msgstr "productionsite_program_reference.xhtml"
 
 #: ../../src/writeHTML.cc:904
 msgid "Documentation for program command return"
-msgstr ""
+msgstr "Документация по команде \"return\""
 
 #: ../../src/writeHTML.cc:910 ../../src/logic/production_program.cc:389
 #: ../../src/logic/production_program.cc:746
@@ -685,7 +724,7 @@ msgstr "готово"
 
 #: ../../src/writeHTML.cc:912 ../../src/logic/production_program.cc:390
 msgid "skipped"
-msgstr ""
+msgstr "пропущено"
 
 #: ../../src/writeHTML.cc:917
 msgid "and"
@@ -701,7 +740,7 @@ msgstr "или"
 
 #: ../../src/writeHTML.cc:921
 msgid "unless"
-msgstr ""
+msgstr "пока не"
 
 #: ../../src/writeHTML.cc:952 ../../src/writeHTML.cc:974
 msgid "economy"
@@ -717,106 +756,106 @@ msgstr "место"
 
 #: ../../src/writeHTML.cc:996
 msgid "has"
-msgstr ""
+msgstr "has"
 
 #: ../../src/writeHTML.cc:1027
 msgid "workers of this site"
-msgstr ""
+msgstr "работники этого участка"
 
 #: ../../src/writeHTML.cc:1029
 msgid "workers"
-msgstr ""
+msgstr "работники"
 
 #: ../../src/writeHTML.cc:1030
 msgid "</span></a> <span class=\"keyword\">"
-msgstr ""
+msgstr "</span></a> <span class=\"keyword\">"
 
 #: ../../src/writeHTML.cc:1031
 msgid "need"
-msgstr ""
+msgstr "нужно"
 
 #: ../../src/writeHTML.cc:1033
 msgid "experience"
-msgstr ""
+msgstr "опыт"
 
 #: ../../src/writeHTML.cc:1047
 msgid "Documentation for program command call"
-msgstr ""
+msgstr "Документация по команде call"
 
 #: ../../src/writeHTML.cc:1049
 msgid "call"
-msgstr ""
+msgstr "call"
 
 #: ../../src/writeHTML.cc:1056
 #, c-format
 msgid "site's program %s"
-msgstr ""
+msgstr "site's program %s"
 
 #: ../../src/writeHTML.cc:1109
 msgid "Documentation for program command worker"
-msgstr ""
+msgstr "Документация по команде worker"
 
 #: ../../src/writeHTML.cc:1111
 msgid "worker"
-msgstr ""
+msgstr "работник"
 
 #: ../../src/writeHTML.cc:1122
 #, c-format
 msgid "%s's program %s"
-msgstr ""
+msgstr "%s's program %s"
 
 #: ../../src/writeHTML.cc:1137
 msgid "Documentation for program command sleep"
-msgstr ""
+msgstr "Документация по команде sleep"
 
 #: ../../src/writeHTML.cc:1139
 msgid "sleep"
-msgstr ""
+msgstr "sleep"
 
 #: ../../src/writeHTML.cc:1145 ../../src/writeHTML.cc:1165
 #, c-format
 msgid " %u.%03u s"
-msgstr ""
+msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1157
 msgid "Documentation for program command animate"
-msgstr ""
+msgstr "Документация по команде animate"
 
 #: ../../src/writeHTML.cc:1159
 msgid "animate"
-msgstr ""
+msgstr "animate"
 
 #: ../../src/writeHTML.cc:1178
 msgid "Documentation for program command consume"
-msgstr ""
+msgstr "Документация по команде consume"
 
 #: ../../src/writeHTML.cc:1180
 msgid "consume"
-msgstr ""
+msgstr "consume"
 
 #: ../../src/writeHTML.cc:1221 ../../src/writeHTML.cc:1258
 msgid "Documentation for program command produce"
-msgstr ""
+msgstr "Документация по команде produce"
 
 #: ../../src/writeHTML.cc:1223
 msgid "produce"
-msgstr ""
+msgstr "produce"
 
 #: ../../src/writeHTML.cc:1260
 msgid "recruit"
-msgstr ""
+msgstr "recruit"
 
 #: ../../src/writeHTML.cc:1299
 msgid "Documentation for program command mine"
-msgstr ""
+msgstr "Документация по команде mine"
 
 #: ../../src/writeHTML.cc:1326
 msgid "Documentation for program command check_soldier"
-msgstr ""
+msgstr "Документация по команде check_soldier"
 
 #: ../../src/writeHTML.cc:1328
 msgid "check soldier"
-msgstr ""
+msgstr "check soldier"
 
 #: ../../src/writeHTML.cc:1334 ../../src/writeHTML.cc:1358
 msgid "hp"
@@ -848,7 +887,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1411 ../../src/writeHTML.cc:1417
 msgid "Ware types"
-msgstr ""
+msgstr "Типы товаров"
 
 #: ../../src/writeHTML.cc:1451
 msgid "ware_types.xhtml"
@@ -943,7 +982,7 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:82
 #, c-format
 msgid "duplicated entry for %s"
-msgstr ""
+msgstr "уже есть запись для %s"
 
 #: ../../src/economy/economy_data_packet.cc:95
 #, c-format
@@ -1161,6 +1200,8 @@ msgid ""
 "failed to place a %s near (%i, %i) (distance between %u and %u) for player "
 "%u (suitability required is %u but found only %u)"
 msgstr ""
+"не удалось разместить %s в точке (%i, %i) (расстояние между %u и %u) для "
+"игрока \"%u\" (suitability required is %u but found only %u)"
 
 #: ../../src/events/event_expire_message.cc:48
 #: ../../src/logic/playercommand.cc:128
