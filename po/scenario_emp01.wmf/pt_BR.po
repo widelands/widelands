@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-10 19:09+0000\n"
-"PO-Revision-Date: 2010-03-12 22:57+0000\n"
+"POT-Creation-Date: 2010-03-21 09:15+0000\n"
+"PO-Revision-Date: 2010-03-21 16:49+0000\n"
 "Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-14 04:56+0000\n"
+"X-Launchpad-Export-Date: 2010-03-22 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp01.wmf/elemental:7
@@ -24,9 +24,9 @@ msgstr "Tutorial Império1 - Os litorais de Malac'Mor"
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
 "After losing an important battle against the barbarians, which leads to the "
-"forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to "
+"forfeiture of a bigger part of Empire's territory, Lutius leaves Fremil, to "
 "start a new life. But his destiny takes his ship into a heavy storm, which "
-"nearly desctructs the ship. Only with lot of luck he can save his people and "
+"nearly desctroys the ship. Only with lot of luck he can save his people and "
 "the damaged ship on a unknown desert strand."
 msgstr ""
 
@@ -77,7 +77,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/event:80
 msgid "The rough sea"
-msgstr ""
+msgstr "O mar bravio"
 
 #: ../../campaigns/emp01.wmf/event:93
 msgid ""
@@ -95,7 +95,7 @@ msgstr "Sobrevivente"
 
 #: ../../campaigns/emp01.wmf/event:133
 msgid "Saledus looks around nervously..."
-msgstr ""
+msgstr "Saledus ollha em volta, nervoso..."
 
 #: ../../campaigns/emp01.wmf/event:135
 msgid ""
@@ -115,6 +115,8 @@ msgid ""
 "* Build a barracks at the red point on the east side of the forests, to the "
 "right of your headquarters."
 msgstr ""
+"*Construa um quartel no ponto vermelho no lado leste das florestas, à "
+"direita de seu quartel general."
 
 #: ../../campaigns/emp01.wmf/event:138
 msgid "A foreboding"
@@ -174,6 +176,7 @@ msgstr ""
 msgid ""
 "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr ""
+"* Construa uma casa de lenhador no ponto vermelho, ao sul do quartel general."
 
 #: ../../campaigns/emp01.wmf/event:177
 #: ../../campaigns/emp01.wmf/event:197
@@ -202,6 +205,8 @@ msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
 msgstr ""
+"* Construa duas outras casas de lenhador e uma serraria tão logo haja espaço "
+"suficiente para elas."
 
 #: ../../campaigns/emp01.wmf/event:217
 msgid "Amalea comes in..."
@@ -226,6 +231,8 @@ msgstr ""
 msgid ""
 "* Build a forester's house to preserve the wood resources of this island."
 msgstr ""
+"* Construa uma casa de reflorestador para preservar as reservas de lenha na "
+"ilha."
 
 #: ../../campaigns/emp01.wmf/event:247
 msgid "Saledus notes..."
@@ -305,15 +312,15 @@ msgstr "Construa um quartel"
 
 #: ../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
-msgstr ""
+msgstr "Construa uma casa de lenhador"
 
 #: ../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
+msgstr "Construa duas casas de lenhador e uma serraria"
 
 #: ../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
-msgstr ""
+msgstr "Construa uma casa de reflorestador"
 
 #: ../../campaigns/emp01.wmf/objective:37
 msgid "Build a quarry"

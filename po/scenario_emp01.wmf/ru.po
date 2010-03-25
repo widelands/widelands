@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:18+0000\n"
-"Last-Translator: Alexander Bikmeyev <Unknown>\n"
+"POT-Creation-Date: 2010-03-21 09:15+0000\n"
+"PO-Revision-Date: 2010-03-23 14:53+0000\n"
+"Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-03-24 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -25,11 +25,16 @@ msgstr "Империя. Обучение 1 - Берега Малак Мора"
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
 "After losing an important battle against the barbarians, which leads to the "
-"forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to "
+"forfeiture of a bigger part of Empire's territory, Lutius leaves Fremil, to "
 "start a new life. But his destiny takes his ship into a heavy storm, which "
-"nearly desctructs the ship. Only with lot of luck he can save his people and "
+"nearly desctroys the ship. Only with lot of luck he can save his people and "
 "the damaged ship on a unknown desert strand."
 msgstr ""
+"Проиграв варварам важную битву, из-за чего Империя лишилась большей части "
+"своей территории, Лютиус покинул Фремил, чтобы начать новую жизнь. Но судьба "
+"швырнула его корабль в жуткий шторм, и корабль почти развалился. Только "
+"огромное везение помогло ему и его людям добраться на поврежденном корабле "
+"на неведомое пустынное побережье."
 
 #: ../../campaigns/emp01.wmf/event:61
 #: ../../campaigns/emp01.wmf/event:76
@@ -61,6 +66,27 @@ msgid ""
 "perl-gulf with my family, some of my friends and a few of my best "
 "warriors.\" "
 msgstr ""
+" \"Что стало с нашей Империей? Я действительно хочу знать - почему мой "
+"король запретил мне сражаться с этими чудовищными варварами, которые "
+"прикидывались мирными друзьями, а тёмной ночью напали на мою армию?\r\n"
+"Я и полтораста человек были отправлены патрулировать северную границу возле "
+"гор Гальдина в обширном и прекрасном древнем лесу. Вскоре мы встретили племя "
+"варваров, которое поначалу было дружелюбным. Некоторые из моих людей даже "
+"торговали с ними и их дети бывали у нас в гостях, восхищаясь нашими шикарной "
+"униформой и блестящим оружием. \r\n"
+"Но на пятую ночь они вероломно напали на нас. Я потерял дюжины отличных "
+"бойцов, а сам был схвачен и отведен на допрос к вождю. Он плевал мне в лицо, "
+"смеялся надо мной и потребовал навсегда покинуть эти земли. Ему не нужны "
+"новые земли и он не претендует на наши, но он заявил, что ЭТОТ лес - его "
+"земля и таковой и останется, пока духи не заберут последних из его "
+"народа!\r\n"
+"Три недели спустя я вернулся во Фремил поговорить с королем. Он был сильно "
+"рассержен на варваров, но запретил мне атаковать их племена, полагая, что "
+"наша армия слишком слаба для этого.\r\n"
+"Теперь я не знаю, как смыть свой позор без сражения с варварами. Поэтому я "
+"покинул Фремил на корабле, чтобы найти себе новый мир и новую жизнь где-"
+"нибудь на юге. И вот мы плывем по заливам - я, моя семья и некоторые из моих "
+"лучших воинов.\" "
 
 #: ../../campaigns/emp01.wmf/event:65
 msgid "A dark night"
@@ -75,10 +101,16 @@ msgid ""
 "and is taking in more and more water. We can thank the Gods if we survive "
 "this black night with our lives.\" "
 msgstr ""
+" \"Похоже, плавание по заливам было нашей ошибкой. Природа восстала против "
+"нас и мы попали в свирепый шторм. Я понятия не имею, сколько часов прошло с "
+"тех пор, когда волны стали выше нашего корабля, но выходить наружу всё ещё "
+"самоубийство.\r\n"
+"Наш корабль сильно поврежден, вода всё прибывает. Я возблагодарю Богов, если "
+"этой темной ночью мы выживем.\" "
 
 #: ../../campaigns/emp01.wmf/event:80
 msgid "The rough sea"
-msgstr "Буйное море"
+msgstr "Бурное море"
 
 #: ../../campaigns/emp01.wmf/event:93
 msgid ""
@@ -89,6 +121,12 @@ msgid ""
 "under the only palm trees existing in this far-away sandy desert. I fear we "
 "won't find the help we need to get our ship repaired in good time.\" "
 msgstr ""
+" \"Всё-таки, Боги с нами!\r\n"
+"Мы высадились на неизвестный берег и спокойно отдохнули под прибрежными "
+"пальмами. Но это и все хорошие новости. Правда же такова:\r\n"
+"проснувшись утром я не увидел вокруг ничего, кроме песка.\r\n"
+"Сдается мне, что это единственные пальмы в огромной песчаной пустыне. Боюсь, "
+"что мы не сможем сами отремонтировать корабль.\" "
 
 #: ../../campaigns/emp01.wmf/event:95
 msgid "Survivor"
@@ -96,7 +134,7 @@ msgstr "Выжившие"
 
 #: ../../campaigns/emp01.wmf/event:133
 msgid "Saledus looks around nervously..."
-msgstr ""
+msgstr "Саледус нервно оглядывается..."
 
 #: ../../campaigns/emp01.wmf/event:135
 msgid ""
@@ -109,6 +147,15 @@ msgid ""
 "the forest. Than one of us will keep watch in the darkness and keep us safe "
 "from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Сэр, боюсь, мы не в безопасности в этой чужой земле. Кто знает, какие "
+"чудовища живут в пустыне вокруг этого леса? А что, если они уже в лесу и "
+"выбирают время для нападения?\r\n"
+"Надеюсь, это просто мои страхи, но стража в лесах не помешает, чтобы мы "
+"увидели любого потенциального врага раньше, чем он нас.\r\n"
+"Нам надо построить казармы в восточной части леса, тогда кто-нибудь "
+"постоянно будет на страже и предпредит нас, если что.\"\r\n"
+"\r\n"
+"-- НОВОЕ ЗАДАНИЕ -- "
 
 #: ../../campaigns/emp01.wmf/event:136
 #: ../../campaigns/emp01.wmf/objective:7
@@ -116,10 +163,12 @@ msgid ""
 "* Build a barracks at the red point on the east side of the forests, to the "
 "right of your headquarters."
 msgstr ""
+"* Постройте казарму в отмеченной красным точке на восточной окраине леса "
+"справа от вашего штаба."
 
 #: ../../campaigns/emp01.wmf/event:138
 msgid "A foreboding"
-msgstr ""
+msgstr "Дурное предчувствие"
 
 #: ../../campaigns/emp01.wmf/event:142
 #: ../../campaigns/emp01.wmf/event:166
@@ -135,7 +184,7 @@ msgstr "OK"
 
 #: ../../campaigns/emp01.wmf/event:158
 msgid "Saledus speaks with a sigh of relief..."
-msgstr ""
+msgstr "Саледус говорит, облегченно вздыхая..."
 
 #: ../../campaigns/emp01.wmf/event:160
 msgid ""
@@ -144,10 +193,14 @@ msgid ""
 "is a good step forward. Now we can feel a bit safer and can look forward to "
 "repair our ship.\" "
 msgstr ""
+" \"Сэр, строительство казармы завершено и я отправил одного из моих лучших "
+"солдат наблюдать за пустыней.\r\n"
+"Это хороший шаг, теперь мы в несколько большей безопасности и можем "
+"спокойнее ремонтировать корабль.\" "
 
 #: ../../campaigns/emp01.wmf/event:162
 msgid "Safe for now"
-msgstr ""
+msgstr "Пока в безопасности"
 
 #: ../../campaigns/emp01.wmf/event:172
 msgid "Amalea smiles..."
@@ -162,22 +215,31 @@ msgid ""
 "yesterday and found a nice place for a lumberjack's house, south of our "
 "headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Эй, Лютиус, я видела Саледуса снаружи.\r\n"
+"Он сказал мне про казармы. Ну, я не из тех девочек, которые думают, что нам "
+"надо строить дополнительные, напротив, мы теперь должны сосредоточиться на "
+"других вещах.\r\n"
+"Ясно же, что для ремонта корабля нужен строевой лес. Я прошлась по лесу "
+"вчера и нашла отличное место для хижины дровосека к югу от штаба.\"\r\n"
+"\r\n"
+"-- НОВОЕ ЗАДАНИЕ -- "
 
 #: ../../campaigns/emp01.wmf/event:175
 #: ../../campaigns/emp01.wmf/objective:15
 msgid ""
 "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr ""
+"* Постройте хижину дровосека в отмеченной красным точке к югу от штаба."
 
 #: ../../campaigns/emp01.wmf/event:177
 #: ../../campaigns/emp01.wmf/event:197
 #: ../../campaigns/emp01.wmf/event:222
 msgid "Young Amalea"
-msgstr "Юнная Амалия"
+msgstr "Юная Амалия"
 
 #: ../../campaigns/emp01.wmf/event:192
 msgid "Amalea recommends..."
-msgstr ""
+msgstr "Амалия рекомендует..."
 
 #: ../../campaigns/emp01.wmf/event:194
 msgid ""
@@ -189,6 +251,14 @@ msgid ""
 "building needs, too. So we should build up a sawmill - as soon as we have "
 "enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Лютиус, мне сказали, что наш первый дровосек приступил к работе. Стоило "
+"бы подождать, пока он расчистит место для еще пары таких  хижин, чтобы мы "
+"быстрее набрали нужное количество брёвен.\r\n"
+"Но бревна бесполезны для ремонта корабля, нам нужны доски - и для корабля и "
+"для более крупных зданий, поэтому придется строить лесопилку, как только "
+"расчистим достаточно места.\"\r\n"
+"\r\n"
+"-- НОВОЕ ЗАДАНИЕ -- "
 
 #: ../../campaigns/emp01.wmf/event:195
 #: ../../campaigns/emp01.wmf/objective:23
@@ -196,10 +266,12 @@ msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
 msgstr ""
+"* Постройте еще две хижины дровосеков и лесопилку, как только освободится "
+"достаточно места."
 
 #: ../../campaigns/emp01.wmf/event:217
 msgid "Amalea comes in..."
-msgstr "Вошла Амалия..."
+msgstr "Входит Амалия..."
 
 #: ../../campaigns/emp01.wmf/event:219
 msgid ""
@@ -214,16 +286,26 @@ msgid ""
 "desert.<br> Lutius, I beg you: find someone who takes care about planting "
 "new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Привет, Лютиус. У меня две новости... Сначала хорошая:\r\n"
+"лесопилку построили и мы можем резать бревна на доски.\r\n"
+"Но есть и плохая: наши дровосеки работают как сумасшедшие, деревьев на "
+"острове уже почти не осталось.\r\n"
+"Лютиус, эти деревья защищают от песчаных бурь из пустыни, дают тень в жару и "
+"служат жильем для многих животных. Мы не должны превращать этот остров в "
+"полную пустыню.\r\n"
+"Умоляю, найди кого-нибудь, кто займется посадкой новых деревьев.\"\r\n"
+"\r\n"
+"-- НОВОЕ ЗАДАНИЕ -- "
 
 #: ../../campaigns/emp01.wmf/event:220
 #: ../../campaigns/emp01.wmf/objective:31
 msgid ""
 "* Build a forester's house to preserve the wood resources of this island."
-msgstr ""
+msgstr "* Постройте хижину лесника, чтобы сохранить лес на этом острове."
 
 #: ../../campaigns/emp01.wmf/event:247
 msgid "Saledus notes..."
-msgstr ""
+msgstr "Саледус заметил..."
 
 #: ../../campaigns/emp01.wmf/event:249
 msgid ""
@@ -233,6 +315,13 @@ msgid ""
 "anyway, and the resources we harvest now might be the base of strong and big "
 "buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Эй, дружище! Я тут подумал о скалах на южном побережье. Думаю, мы могли "
+"бы напилить из них камней и мрамора.\r\n"
+"Для ремонта корабля потребуется несколько недель, так что дополнительные "
+"ресурсы, которые мы сможем собрать сейчас, пригодятся для постройки крепких "
+"и больших зданий, когда приплывем на новое место.\"\r\n"
+"\r\n"
+"-- НОВОЕ ЗАДАНИЕ -- "
 
 #: ../../campaigns/emp01.wmf/event:250
 #: ../../campaigns/emp01.wmf/objective:39
@@ -240,14 +329,16 @@ msgid ""
 "* Build a quarry in the south to cut some stones and marble out of the "
 "rocks.<br> These might be used for future buildings."
 msgstr ""
+"* Постройте каменоломню на юге, чтобы вырубить из скал камни и мрамор.\r\n"
+"Это может пригодиться для других зданий."
 
 #: ../../campaigns/emp01.wmf/event:252
 msgid "Thinking about the future"
-msgstr ""
+msgstr "В мыслях о будущем"
 
 #: ../../campaigns/emp01.wmf/event:272
 msgid "Saledus looks promising..."
-msgstr ""
+msgstr "У Саледуса многообещающий вид..."
 
 #: ../../campaigns/emp01.wmf/event:274
 msgid ""
@@ -256,10 +347,13 @@ msgid ""
 "beautiful marble.<br> Now we truly can look forward to settling down on "
 "another island.\" "
 msgstr ""
+" \"Эй, Лютиус, сегодня мы чуть ближе к нашему новому замку. Каменоломня "
+"работает и скоро снабдит нас строительным камнем и мрамором.\r\n"
+"Теперь мы точно можем обдумать переселение на другой остров.\" "
 
 #: ../../campaigns/emp01.wmf/event:276
 msgid "A step forward"
-msgstr ""
+msgstr "Шаг вперёд"
 
 #: ../../campaigns/emp01.wmf/event:292
 msgid ""
@@ -272,6 +366,16 @@ msgid ""
 "completed this mission. You may continue playing if you wish, otherwise move "
 "on to the next mission.\" "
 msgstr ""
+" \"Сегодня мне доложили, что корабль восстановлен. Люди грузят на него "
+"припасы, надеясь, что он послужит нам лучше, чем в прошлый раз.\r\n"
+"Сегодня у нас последняя ночевка на этом острове, завтра утром отплываем в "
+"поисках нового места для жизни.\r\n"
+"Увижу ли я когда-нибудь Фремил?\r\n"
+"\r\n"
+"--------------------- ПОБЕДА! ----------------------\r\n"
+"\r\n"
+"Вы справились с заданием. Теперь, если хотите, можете просто поиграть или же "
+"переходите к следующем заданию. "
 
 #: ../../campaigns/emp01.wmf/event:294
 msgid "Mission Complete"
@@ -279,37 +383,37 @@ msgstr "Миссия выполнена"
 
 #: ../../campaigns/emp01.wmf/event:308
 msgid "Saledus speaks:"
-msgstr ""
+msgstr "Саледус говорит:"
 
 #: ../../campaigns/emp01.wmf/event:310
 msgid ""
 " \"You have made this peninsula a very secure place. It is time to move "
 "on!\" "
-msgstr ""
+msgstr " \"Полуостров в безопасности. Теперь пора двигаться дальше!\" "
 
 #: ../../campaigns/emp01.wmf/event:312
 msgid "Safe Peninsula"
-msgstr ""
+msgstr "Безопасный полуостров"
 
 #: ../../campaigns/emp01.wmf/objective:5
 msgid "Build a barracks"
-msgstr ""
+msgstr "Построить казармы"
 
 #: ../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
-msgstr ""
+msgstr "Построить хижину дровосека"
 
 #: ../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
+msgstr "Построить две хижины дровосеков и лесопилку"
 
 #: ../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
-msgstr ""
+msgstr "Построить хижину лесника"
 
 #: ../../campaigns/emp01.wmf/objective:37
 msgid "Build a quarry"
-msgstr ""
+msgstr "Построить каменоломню"
 
 #~ msgid "First mission of the Empire campaign"
 #~ msgstr "Первая миссия Имперской компании"

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-10 20:09+0100\n"
-"PO-Revision-Date: 2010-03-13 11:43+0000\n"
+"POT-Creation-Date: 2010-03-14 15:51+0100\n"
+"PO-Revision-Date: 2010-03-14 21:45+0000\n"
 "Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-14 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-03-15 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -25,7 +25,7 @@ msgstr "Bluebyte Settlers II-karta. Ingen kommentar angiven!"
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr "FEL: Kunde ej ansluta till metaserver (anledning ovan)!\n"
 
-#: ../../src/wlapplication.cc:1081
+#: ../../src/wlapplication.cc:1083
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -35,15 +35,15 @@ msgstr ""
 "Tyvärr, ingen dubbelinstansavlusning på WIN32.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1084
+#: ../../src/wlapplication.cc:1086
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double är inaktiverat. Detta är ingen avlusningsversion!"
 
-#: ../../src/wlapplication.cc:1201
+#: ../../src/wlapplication.cc:1203
 msgid "This is Widelands-"
 msgstr "Detta är Widelands-"
 
-#: ../../src/wlapplication.cc:1203
+#: ../../src/wlapplication.cc:1205
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -51,7 +51,7 @@ msgstr ""
 "Användning: widelands <val0>=<värde0> ... <valN>=<värdeN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1204
+#: ../../src/wlapplication.cc:1206
 msgid ""
 "Options:\n"
 "\n"
@@ -59,7 +59,7 @@ msgstr ""
 "Inställningar:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1208
+#: ../../src/wlapplication.cc:1210
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -101,7 +101,7 @@ msgstr ""
 "                      Ta bort repriser efter detta anta dagar\n"
 "                      Om satt till 0 raderas inga repriser.\n"
 
-#: ../../src/wlapplication.cc:1227
+#: ../../src/wlapplication.cc:1229
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -130,11 +130,11 @@ msgstr ""
 " --scenario=FILENAME  Starta direkt FILENAME som scenariokarta.\n"
 " --loadgame=FILENAME  Starta direkt det sparade spelet FILENAME.\n"
 
-#: ../../src/wlapplication.cc:1241
+#: ../../src/wlapplication.cc:1243
 msgid " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
 msgstr " --dedicated=FILENAME Starta ggz-värd med FILENAME som karta\n"
 
-#: ../../src/wlapplication.cc:1245
+#: ../../src/wlapplication.cc:1247
 msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
@@ -183,7 +183,7 @@ msgstr ""
 "                      Aktivera dubbelbuffring\n"
 "                      *MYCKET EXPERIMENTELLT*\n"
 
-#: ../../src/wlapplication.cc:1271
+#: ../../src/wlapplication.cc:1273
 msgid ""
 " --opengl=[0|1]\n"
 "                      Enables opengl rendering\n"
@@ -193,7 +193,7 @@ msgstr ""
 "                      Aktiverar rendering med OpenGL\n"
 "                      *FARLIG OCH TRASIG, ANVÄND EJ*\n"
 
-#: ../../src/wlapplication.cc:1277
+#: ../../src/wlapplication.cc:1279
 msgid ""
 "\n"
 "Options for the internal window manager:\n"
@@ -233,7 +233,7 @@ msgstr ""
 "                      fönstret överlappar panelen.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1301
+#: ../../src/wlapplication.cc:1303
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -242,11 +242,11 @@ msgstr ""
 " --double             Starta spelet två gånger (för lokal nätverkstestning)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1305
+#: ../../src/wlapplication.cc:1307
 msgid " --help               Show this help\n"
 msgstr " --help               Visa denna hjälp\n"
 
-#: ../../src/wlapplication.cc:1309
+#: ../../src/wlapplication.cc:1311
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
@@ -260,19 +260,19 @@ msgstr ""
 "Hoppas att du uppskattar detta spel!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1447
+#: ../../src/wlapplication.cc:1449
 msgid "Warning: "
 msgstr "Varning: "
 
-#: ../../src/wlapplication.cc:1451
+#: ../../src/wlapplication.cc:1453
 msgid "Game data error"
 msgstr "Speldatafel"
 
-#: ../../src/wlapplication.cc:1454
+#: ../../src/wlapplication.cc:1456
 msgid "Unexpected error during the game"
 msgstr "Oväntat fel under spelets gång"
 
-#: ../../src/wlapplication.cc:1458
+#: ../../src/wlapplication.cc:1460
 msgid ""
 "\n"
 "\n"
@@ -286,7 +286,7 @@ msgstr ""
 "hittar relevanta meddelanden i standardutmatningen (stdout.txt på Windows). "
 "You are using build "
 
-#: ../../src/wlapplication.cc:1464
+#: ../../src/wlapplication.cc:1466
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -298,11 +298,11 @@ msgstr ""
 "Widelands försöker skapa ett sparat spel när fel inträffar under spelet. Det "
 "är oftast - men inte alltid - möjlift att läsa in det och fortsätta spela.\n"
 
-#: ../../src/wlapplication.cc:1575
+#: ../../src/wlapplication.cc:1577
 msgid "Connection timeouted"
 msgstr "Tidsgräns för anslutning överskreds"
 
-#: ../../src/wlapplication.cc:1577
+#: ../../src/wlapplication.cc:1579
 msgid ""
 "Widelands has not been able to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on side\n"
@@ -312,32 +312,32 @@ msgstr ""
 "Det verkar vara ett nätverksproblem, antingen på din sida eller på serverns "
 "sida.\n"
 
-#: ../../src/wlapplication.cc:1598 ../../src/network/network_ggz.cc:373
+#: ../../src/wlapplication.cc:1600 ../../src/network/network_ggz.cc:373
 msgid "Connection problem"
 msgstr "Anslutningsproblem"
 
-#: ../../src/wlapplication.cc:1600
+#: ../../src/wlapplication.cc:1602
 msgid "Widelands has not been able to connect to the host."
 msgstr "Widelands kunde ej ansluta till värden."
 
-#: ../../src/wlapplication.cc:1646
+#: ../../src/wlapplication.cc:1648
 msgid "The address of the game server is invalid"
 msgstr "Adressen till spelservern är ogiltig"
 
-#: ../../src/wlapplication.cc:1751 ../../src/network/nethost.cc:1183
+#: ../../src/wlapplication.cc:1753 ../../src/network/nethost.cc:1183
 msgid "Player"
 msgstr "Spelare"
 
-#: ../../src/wlapplication.cc:1899 ../../src/network/netclient.cc:167
+#: ../../src/wlapplication.cc:1901 ../../src/network/netclient.cc:167
 #: ../../src/network/nethost.cc:433
 msgid "Preparing game"
 msgstr "Förbereder spel"
 
-#: ../../src/wlapplication.cc:2006
+#: ../../src/wlapplication.cc:2008
 msgid "End of replay"
 msgstr "Slut på repris"
 
-#: ../../src/wlapplication.cc:2008
+#: ../../src/wlapplication.cc:2010
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
@@ -345,7 +345,7 @@ msgstr ""
 "Slutet på reprisen har nåtts och spelet har pausats. Du kan sätta igång det "
 "och fortsätta titta om du vill."
 
-#: ../../src/wlapplication.cc:2088 ../../src/logic/game.cc:352
+#: ../../src/wlapplication.cc:2090 ../../src/logic/game.cc:352
 #: ../../src/logic/game.cc:391
 msgid "Loading..."
 msgstr "Laddar..."
@@ -382,7 +382,7 @@ msgstr "Ikon"
 #: ../../src/writeHTML.cc:276 ../../src/writeHTML.cc:511
 #: ../../src/writeHTML.cc:1412 ../../src/ui_fsmenu/netsetup_ggz.cc:143
 #: ../../src/wui/building_statistics_menu.cc:109
-#: ../../src/wui/building_ui.cc:1543 ../../src/wui/building_ui.cc:1731
+#: ../../src/wui/building_ui.cc:1545 ../../src/wui/building_ui.cc:1733
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:73
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:154
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:147
@@ -404,7 +404,7 @@ msgstr "Byggbar"
 msgid "Enhanced"
 msgstr "Utökad"
 
-#: ../../src/writeHTML.cc:285 ../../src/wui/building_ui.cc:655
+#: ../../src/writeHTML.cc:285 ../../src/wui/building_ui.cc:657
 msgid "Stop"
 msgstr "Stoppa"
 
@@ -417,23 +417,23 @@ msgid "Vision<br/>range"
 msgstr "Syn-<br/>räckvidd"
 
 #: ../../src/writeHTML.cc:316 ../../src/writeHTML.cc:372
-#: ../../src/logic/building.cc:509
+#: ../../src/logic/building.cc:511
 msgid "Mine"
 msgstr "Gruva"
 
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:388
-#: ../../src/logic/building.cc:510
+#: ../../src/logic/building.cc:512
 msgid "Small"
 msgstr "Liten"
 
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:382
-#: ../../src/logic/building.cc:511
+#: ../../src/logic/building.cc:513
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Medium"
 msgstr "Medel"
 
 #: ../../src/writeHTML.cc:329 ../../src/writeHTML.cc:377
-#: ../../src/logic/building.cc:511
+#: ../../src/logic/building.cc:513
 msgid "Big"
 msgstr "Stor"
 
@@ -580,7 +580,7 @@ msgid "Programs"
 msgstr "Program"
 
 #: ../../src/writeHTML.cc:750 ../../src/writeHTML.cc:1289
-#: ../../src/logic/building.cc:504
+#: ../../src/logic/building.cc:506
 msgid "mine"
 msgstr "bryt"
 
@@ -920,11 +920,11 @@ msgstr "varuslag.xhtml"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:744
 #: ../../src/map_io/widelands_map_building_data_packet.cc:104
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:213
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:283
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:448
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:528
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:757
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:871
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:285
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:475
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:555
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:791
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:905
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:180
 #: ../../src/map_io/widelands_map_event_data_packet.cc:69
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:93
@@ -1119,10 +1119,10 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1218
 #: ../../src/logic/production_program.cc:1230
 #: ../../src/logic/production_program.cc:1239
-#: ../../src/logic/production_program.cc:1323 ../../src/logic/soldier.cc:62
-#: ../../src/logic/soldier.cc:69 ../../src/logic/soldier.cc:85
-#: ../../src/logic/soldier.cc:92 ../../src/logic/soldier.cc:200
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:338
+#: ../../src/logic/production_program.cc:1323 ../../src/logic/soldier.cc:63
+#: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:86
+#: ../../src/logic/soldier.cc:93 ../../src/logic/soldier.cc:201
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:344
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
 #, c-format
 msgid "expected %s but found \"%s\""
@@ -1511,7 +1511,7 @@ msgstr "Ingen text definierad"
 msgid "Window Title"
 msgstr "Fönstertitel"
 
-#: ../../src/events/event_message_box.cc:48 ../../src/wui/building_ui.cc:655
+#: ../../src/events/event_message_box.cc:48 ../../src/wui/building_ui.cc:657
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:55
 msgid "Continue"
 msgstr "Fortsätt"
@@ -1747,17 +1747,17 @@ msgstr "[strid] väcker vinnare %d\n"
 msgid "bad attribute \"%s\""
 msgstr "felaktigt attribut: %s"
 
-#: ../../src/logic/building.cc:505
+#: ../../src/logic/building.cc:507
 #: ../../src/editor/tools/editor_info_tool.cc:59
 msgid "small"
 msgstr "liten"
 
-#: ../../src/logic/building.cc:506
+#: ../../src/logic/building.cc:508
 #: ../../src/editor/tools/editor_info_tool.cc:60
 msgid "medium"
 msgstr "medel"
 
-#: ../../src/logic/building.cc:506
+#: ../../src/logic/building.cc:508
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "big"
 msgstr "stor"
@@ -1934,8 +1934,8 @@ msgstr "handla: %s"
 msgid "Player 1"
 msgstr "Spelare 1"
 
-#: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:62
-#: ../../src/logic/soldier.cc:85
+#: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:63
+#: ../../src/logic/soldier.cc:86
 msgid "\"min-max\""
 msgstr "\"min-max\""
 
@@ -1971,35 +1971,35 @@ msgid_plural "%u(+%u) soldiers"
 msgstr[0] "%u(+%u) soldat"
 msgstr[1] "%u(+%u) soldater"
 
-#: ../../src/logic/militarysite.cc:576
+#: ../../src/logic/militarysite.cc:574
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
 msgstr "%s Fienden besegrade dina soldater vid %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:583
+#: ../../src/logic/militarysite.cc:581
 msgid "Militarysite lost!"
 msgstr "Militär plats förlorad!"
 
-#: ../../src/logic/militarysite.cc:656
+#: ../../src/logic/militarysite.cc:654
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
 msgstr "%sDina soldater besegrade fienden vid %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:663
+#: ../../src/logic/militarysite.cc:661
 msgid "Enemy at site defeated!"
 msgstr "Fiender vid platsen besegrade!"
 
-#: ../../src/logic/militarysite.cc:711
+#: ../../src/logic/militarysite.cc:709
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
 msgstr "%sDin %s upptäckte en angripare.</p>"
 
-#: ../../src/logic/militarysite.cc:712
+#: ../../src/logic/militarysite.cc:710
 #, c-format
 msgid "%sYour %s is under attack.</p>"
 msgstr "%sDin %s är under anfall.</p>"
 
-#: ../../src/logic/militarysite.cc:720
+#: ../../src/logic/militarysite.cc:718
 msgid "You are under attack"
 msgstr "Du är under anfall"
 
@@ -2375,25 +2375,25 @@ msgstr ""
 "väntade atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) eller "
 "atrTotal (%u) men hittade okänt attributvärde (%u)"
 
-#: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:93
+#: ../../src/logic/soldier.cc:71 ../../src/logic/soldier.cc:94
 msgid "positive integer"
 msgstr "positivt heltal"
 
-#: ../../src/logic/soldier.cc:74 ../../src/logic/soldier.cc:97
+#: ../../src/logic/soldier.cc:75 ../../src/logic/soldier.cc:98
 #, c-format
 msgid "expected positive integer >= %u but found \"%s\""
 msgstr "förväntade positivt heltal >= %u men fann \"%s\""
 
-#: ../../src/logic/soldier.cc:201
+#: ../../src/logic/soldier.cc:202
 msgid "\"anim_name[,another_anim,...]\""
 msgstr "\"anim_name[,another_anim,...]\""
 
-#: ../../src/logic/soldier.cc:1182
+#: ../../src/logic/soldier.cc:1195
 #, c-format
 msgid "bad direction '%d'"
 msgstr "ogiltig riktning '%d'"
 
-#: ../../src/logic/soldier.cc:1343
+#: ../../src/logic/soldier.cc:1356
 #, c-format
 msgid ""
 "The game engine has encountered a logic error. The %s #%u of player %u could "
@@ -2409,12 +2409,12 @@ msgstr ""
 "lösning på detta problem implementerats. (felraport #1951113) (Spelet har "
 "pausats.)"
 
-#: ../../src/logic/soldier.cc:1354 ../../src/logic/soldier.cc:1359
+#: ../../src/logic/soldier.cc:1367 ../../src/logic/soldier.cc:1372
 #: ../../src/logic/worker.cc:1668
 msgid "no"
 msgstr "ingen"
 
-#: ../../src/logic/soldier.cc:1366 ../../src/logic/soldier.cc:1374
+#: ../../src/logic/soldier.cc:1379 ../../src/logic/soldier.cc:1387
 #: ../../src/logic/worker.cc:1680
 msgid "Logic error"
 msgstr "logikfel"
@@ -2450,7 +2450,7 @@ msgstr "flaggutseende: %s"
 msgid "tribe %s: %s"
 msgstr "stam %s: %s"
 
-#: ../../src/logic/warehouse.cc:492
+#: ../../src/logic/warehouse.cc:487
 #, c-format
 msgid ""
 "<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
@@ -2603,17 +2603,17 @@ msgstr "byggnader: %s"
 msgid "buildingdata: %s"
 msgstr "byggnadsdata: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:272
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:274
 #, c-format
 msgid "wares: %s"
 msgstr "varor: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:285
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:287
 #, c-format
 msgid "constructionsite: %s"
 msgstr "byggarbetsplats: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:429
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:435
 #, c-format
 msgid ""
 "%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
@@ -2622,22 +2622,22 @@ msgstr ""
 "%s %u har en nästa återskapningstid för arbetartyp \"%s\" satt till %u, men "
 "den var tidigare satt till %u\n"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:450
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:477
 #, c-format
 msgid "warehouse: %s"
 msgstr "lagerbyggnad: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:557
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:584
 #, c-format
 msgid "militarysite: %s"
 msgstr "krigsinrättning: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:671
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:698
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
 msgstr "program %s skippades vid %u, men tiden är bara %u"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:900
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:934
 #, c-format
 msgid "trainingsite: %s"
 msgstr "utbildningsinrättning: %s"
@@ -3898,39 +3898,43 @@ msgstr "px."
 msgid "Main menu font:"
 msgstr "Typsnitt för huvudmeny:"
 
-#: ../../src/ui_fsmenu/options.cc:400
+#: ../../src/ui_fsmenu/options.cc:399
+msgid "Play a sound at message arrival."
+msgstr "Spela ett ljud vid meddelanden."
+
+#: ../../src/ui_fsmenu/options.cc:407
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr "Zippa inte Widelands datafiler (kartor, repriser och sparade spel)."
 
-#: ../../src/ui_fsmenu/options.cc:405
+#: ../../src/ui_fsmenu/options.cc:412
 msgid "Speed of a new game:"
 msgstr "Hastighet för nytt spel:"
 
-#: ../../src/ui_fsmenu/options.cc:409
+#: ../../src/ui_fsmenu/options.cc:416
 msgid "Distance for windows to snap to other panels:"
 msgstr "Avstånd för att fönster ska snappa till andra paneler:"
 
-#: ../../src/ui_fsmenu/options.cc:413
+#: ../../src/ui_fsmenu/options.cc:420
 msgid "Distance for windows to snap to borders:"
 msgstr "Avstånd för fönster att snappa till kanter:"
 
-#: ../../src/ui_fsmenu/options.cc:418
+#: ../../src/ui_fsmenu/options.cc:425
 msgid "Graphics experimental improvements."
 msgstr "Experimentella grafikförbättringar"
 
-#: ../../src/ui_fsmenu/options.cc:424
+#: ../../src/ui_fsmenu/options.cc:431
 msgid "Graphics double buffering."
 msgstr "Dubbelbuffring av grafik."
 
-#: ../../src/ui_fsmenu/options.cc:431
+#: ../../src/ui_fsmenu/options.cc:438
 msgid "Remove Syncstream dumps on startup"
 msgstr "Ta bort Synkström vid uppstart"
 
-#: ../../src/ui_fsmenu/options.cc:451
+#: ../../src/ui_fsmenu/options.cc:460
 msgid "Pause"
 msgstr "Pausa"
 
-#: ../../src/ui_fsmenu/options.cc:462
+#: ../../src/ui_fsmenu/options.cc:471
 msgid "FreeSerif (Default)"
 msgstr "FreeSerif (Standard)"
 
@@ -3966,31 +3970,31 @@ msgstr "Fälttåg"
 msgid "Load Game"
 msgstr "Ladda spel"
 
-#: ../../src/wui/attack_box.cc:159
+#: ../../src/wui/attack_box.cc:165
 msgid "Soldiers:"
 msgstr "Soldater:"
 
-#: ../../src/wui/attack_box.cc:165
+#: ../../src/wui/attack_box.cc:172
 msgid "Send less soldiers"
 msgstr "Skicka färre soldater"
 
-#: ../../src/wui/attack_box.cc:182
+#: ../../src/wui/attack_box.cc:189
 msgid "Number of soldiers"
 msgstr "Antal soldater"
 
-#: ../../src/wui/attack_box.cc:192
+#: ../../src/wui/attack_box.cc:199
 msgid "Send more soldiers"
 msgstr "Skicka fler soldater"
 
-#: ../../src/wui/attack_box.cc:199 ../../src/wui/military_box.cc:130
+#: ../../src/wui/attack_box.cc:210 ../../src/wui/military_box.cc:130
 msgid "Retreat: Never!"
 msgstr "Reträtt: Aldrig!"
 
-#: ../../src/wui/attack_box.cc:218 ../../src/wui/military_box.cc:149
+#: ../../src/wui/attack_box.cc:229 ../../src/wui/military_box.cc:149
 msgid "Supported damage before retreat"
 msgstr "Tillåten skada innan reträtt."
 
-#: ../../src/wui/attack_box.cc:220 ../../src/wui/military_box.cc:151
+#: ../../src/wui/attack_box.cc:231 ../../src/wui/military_box.cc:151
 msgid "Once injured"
 msgstr "När skadad"
 
@@ -4039,109 +4043,106 @@ msgstr "Visa föregående"
 msgid "Show next"
 msgstr "Visa nästa"
 
-#: ../../src/wui/building_ui.cc:157
-msgid "Do you really want to destroy this "
-msgstr "Vill du verkligen förstöra denna "
+#: ../../src/wui/building_ui.cc:159
+#, c-format
+msgid "Do you really want to destroy this %s?"
+msgstr "Är du säker på att du vill riva denna %s?"
 
-#: ../../src/wui/building_ui.cc:158
-msgid "?"
-msgstr "?"
-
-#: ../../src/wui/building_ui.cc:203
+#: ../../src/wui/building_ui.cc:205
 msgid "Destroy building?"
 msgstr "Förstör byggnad?"
 
-#: ../../src/wui/building_ui.cc:670
+#: ../../src/wui/building_ui.cc:672
 #, c-format
 msgid "Enhance to %s"
 msgstr "Utöka till %s"
 
-#: ../../src/wui/building_ui.cc:691
+#: ../../src/wui/building_ui.cc:693
 msgid "Destroy"
 msgstr "Förstör"
 
-#: ../../src/wui/building_ui.cc:704 ../../src/wui/building_ui.cc:802
+#: ../../src/wui/building_ui.cc:706 ../../src/wui/building_ui.cc:804
 msgid "Show workarea"
 msgstr "Visa arbetsområde"
 
-#: ../../src/wui/building_ui.cc:715
+#: ../../src/wui/building_ui.cc:717
 msgid "Debug"
 msgstr "Avlusa"
 
-#: ../../src/wui/building_ui.cc:828
+#: ../../src/wui/building_ui.cc:830
 msgid "Hide workarea"
 msgstr "Göm arbetsområde"
 
-#: ../../src/wui/building_ui.cc:1101
+#: ../../src/wui/building_ui.cc:1103
 msgid "Worker Listing"
 msgstr "Arbetarlista"
 
-#: ../../src/wui/building_ui.cc:1137
+#: ../../src/wui/building_ui.cc:1139
 msgid "Type: "
 msgstr "Slag: "
 
-#: ../../src/wui/building_ui.cc:1153
+#: ../../src/wui/building_ui.cc:1155
 msgid "Experience: "
 msgstr "Erfarenhet: "
 
-#: ../../src/wui/building_ui.cc:1170
+#: ../../src/wui/building_ui.cc:1172
 msgid "Trying to become: "
 msgstr "Försöker att bli: "
 
-#: ../../src/wui/building_ui.cc:1216
+#: ../../src/wui/building_ui.cc:1218
 msgid "(vacant)"
 msgstr "(ledig)"
 
-#: ../../src/wui/building_ui.cc:1216
+#: ../../src/wui/building_ui.cc:1218
 msgid "(coming)"
 msgstr "(kommer)"
 
-#: ../../src/wui/building_ui.cc:1375
+#: ../../src/wui/building_ui.cc:1377
 msgid "Highest priority"
 msgstr "Högsta prioritet"
 
-#: ../../src/wui/building_ui.cc:1384
+#: ../../src/wui/building_ui.cc:1386
 msgid "Normal priority"
 msgstr "Normal prioritet"
 
-#: ../../src/wui/building_ui.cc:1393
+#: ../../src/wui/building_ui.cc:1395
 msgid "Lowest priority"
 msgstr "Lägsta prioritet"
 
-#: ../../src/wui/building_ui.cc:1431
+#: ../../src/wui/building_ui.cc:1433
 msgid "Show worker listing"
 msgstr "Visa arbetarlista"
 
-#: ../../src/wui/building_ui.cc:1528 ../../src/wui/building_ui.cc:1767
+#: ../../src/wui/building_ui.cc:1530 ../../src/wui/building_ui.cc:1769
 msgid "Capacity"
 msgstr "Kapacitet"
 
-#: ../../src/wui/building_ui.cc:1544 ../../src/wui/building_ui.cc:1732
+#: ../../src/wui/building_ui.cc:1546 ../../src/wui/building_ui.cc:1734
 msgid "HP"
 msgstr "HP"
 
-#: ../../src/wui/building_ui.cc:1545 ../../src/wui/building_ui.cc:1733
+#: ../../src/wui/building_ui.cc:1547 ../../src/wui/building_ui.cc:1735
 msgid "AT"
 msgstr "AT"
 
-#: ../../src/wui/building_ui.cc:1546 ../../src/wui/building_ui.cc:1734
+#: ../../src/wui/building_ui.cc:1548 ../../src/wui/building_ui.cc:1736
 msgid "DE"
 msgstr "FS"
 
-#: ../../src/wui/building_ui.cc:1547 ../../src/wui/building_ui.cc:1735
+#: ../../src/wui/building_ui.cc:1549 ../../src/wui/building_ui.cc:1737
 msgid "EV"
 msgstr "PA"
 
-#: ../../src/wui/building_ui.cc:1548 ../../src/wui/building_ui.cc:1736
+#: ../../src/wui/building_ui.cc:1550 ../../src/wui/building_ui.cc:1738
 msgid "Level"
 msgstr "Nivå"
 
-#: ../../src/wui/building_ui.cc:1648
+#: ../../src/wui/building_ui.cc:1650
 #, c-format
 msgid "Capacity: %2u"
 msgstr "Kapacitet: %2u"
 
-#: ../../src/wui/building_ui.cc:1793
+#: ../../src/wui/building_ui.cc:1795
 msgid "xx"
 msgstr "xx"
 
@@ -5654,6 +5655,12 @@ msgstr "centrera huvudkartvy på plats"
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.h:66
 msgid "Player:"
 msgstr "Spelare:"
+
+#~ msgid "Do you really want to destroy this "
+#~ msgstr "Vill du verkligen förstöra denna "
+
+#~ msgid "?"
+#~ msgstr "?"
 
 #~ msgid ""
 #~ "expected [\"on failure\" {\"fail\"|\"repeat\"|\"ignore\"}] or end of input "
