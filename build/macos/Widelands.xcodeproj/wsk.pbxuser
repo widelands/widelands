@@ -1,0 +1,129 @@
+// !$*UTF8*$!
+{
+	002F3A2B09D0888800EBEB88 /* SDLMain.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {854, 509}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 307}";
+			sepNavWindowFrame = "{{38, 230}, {913, 622}}";
+		};
+	};
+	002F3A2C09D0888800EBEB88 /* SDLMain.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1348, 5109}}";
+			sepNavSelRange = "{7178, 0}";
+			sepNavVisRange = "{6773, 1074}";
+			sepNavWindowFrame = "{{61, 209}, {913, 622}}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Release;
+		activeExecutable = 7C370E82113680BE00110D1F /* Widelands */;
+		activeSDKPreference = macosx10.6;
+		activeTarget = 8D1107260486CEB800E47090 /* Widelands */;
+		addToTargets = (
+			8D1107260486CEB800E47090 /* Widelands */,
+		);
+		codeSenseManager = 7C3764C41136816500110D1F /* Code sense */;
+		executables = (
+			7C370E82113680BE00110D1F /* Widelands */,
+		);
+		perUserDictionary = {
+			PBXPerProjectTemplateStateSaveDate = 290639832;
+			PBXWorkspaceStateSaveDate = 290639832;
+		};
+		sourceControlManager = 7C3764C31136816500110D1F /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	7C03F7A3114AAB770096B152 /* build_info.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1215, 657}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 399}";
+			sepNavWindowFrame = "{{88, 40}, {1274, 770}}";
+		};
+	};
+	7C03F819114AAB770096B152 /* economy_test_main.cc */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1215, 657}}";
+			sepNavSelRange = "{809, 0}";
+			sepNavVisRange = "{0, 846}";
+			sepNavWindowFrame = "{{65, 61}, {1274, 770}}";
+		};
+	};
+	7C03FFA1114AB0C70096B152 /* build_info.cc */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1215, 657}}";
+			sepNavSelRange = "{150, 0}";
+			sepNavVisRange = "{0, 156}";
+			sepNavWindowFrame = "{{111, 19}, {1274, 770}}";
+		};
+	};
+	7C370E82113680BE00110D1F /* Widelands */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = Widelands;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	7C3764C31136816500110D1F /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	7C3764C41136816500110D1F /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	7CAD747A1139C80C00F7BFAE /* TODO.osx */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {854, 509}}";
+			sepNavSelRange = "{355, 0}";
+			sepNavVisRange = "{0, 371}";
+			sepNavWindowFrame = "{{84, 188}, {913, 622}}";
+		};
+	};
+	7CAD747D1139C98C00F7BFAE /* README.osx */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {854, 509}}";
+			sepNavSelRange = "{253, 0}";
+			sepNavVisRange = "{0, 253}";
+			sepNavWindowFrame = "{{175, 120}, {913, 622}}";
+		};
+	};
+	8D1107260486CEB800E47090 /* Widelands */ = {
+		activeExec = 0;
+		executables = (
+			7C370E82113680BE00110D1F /* Widelands */,
+		);
+	};
+}
