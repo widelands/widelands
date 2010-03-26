@@ -4,7 +4,9 @@
 
 use("aux", "infrastructure")
 
-function initialize(player) 
+return {
+   blah = "Ui",
+   func = coroutine.create(function(player) 
    local sf = player.starting_field
 
    player:allow_workers("all")
@@ -57,7 +59,7 @@ function initialize(player)
          [{0,0,0,0}] = 45,
       }
    })
-end
+end)
+}
 
 
-return initialize

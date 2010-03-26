@@ -22,7 +22,6 @@
 
 #include "log.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/player.h"
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
@@ -38,6 +37,54 @@
 // TODO: fix initializations, they should work with the same interface as
 //       win conditions (also remember internationalization)
 // TODO: win conditions for network games.
+// TODO: convert remaining initizalisation scripts
+// TODO: remove intiialization as it was from the tribes
+// TODO: add possibility to run a specific script by path without having to
+//       load all
+// TODO: add translation search for tribes/scripting/*.lua to tribes catalog
+
+/*
+============================================
+       Lua Table
+============================================
+*/
+class LuaTable_Impl : virtual public LuaTable {
+	lua_State * m_L;
+
+public:
+		LuaTable_Impl(lua_State * L) : m_L(L) {}
+
+		virtual ~LuaTable_Impl() {
+			lua_pop(m_L, 1);
+		}
+
+		virtual std::string get_string(std::string s) {
+			lua_getfield(m_L, -1, s.c_str());
+			if (not lua_isstring(m_L, -1)) {
+				lua_pop(m_L, 1);
+				throw LuaError
+					(s + "is not a field in the table returned by the last "
+					 "script or not a string");
+			}
+			std::string rv = lua_tostring(m_L, -1);
+			lua_pop(m_L, 1);
+
+			return rv;
+		}
+
+	virtual LuaCoroutine * get_coroutine(std::string s) {
+		lua_getfield(m_L, -1, s.c_str());
+		if (not lua_isthread(m_L, -1)) {
+			lua_pop(m_L, 1);
+			throw LuaError
+				(s + "is not a field in the table returned by the last script "
+				 "or not a function");
+		}
+		LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(m_L, -1));
+		lua_pop(m_L, 1); // Remove coroutine from stack
+		return cr;
+	}
+};
 /*
 ============================================
        Lua Interface
@@ -72,10 +119,7 @@ protected:
 			return m_scripts[ns];
 		}
 
-		virtual std::string get_string(std::string);
-		virtual void run_coroutine(std::string);
-		virtual void pop_table();
-		virtual void run_script(std::string, std::string);
+		virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string);
 };
 
 
@@ -194,7 +238,9 @@ void LuaInterface_Impl::interpret_string(std::string cmd) {
 	m_check_for_errors(rv);
 }
 
-void LuaInterface_Impl::run_script(std::string ns, std::string name) {
+boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
+	(std::string ns, std::string name)
+{
 	if
 		((m_scripts.find(ns) == m_scripts.end()) ||
 		 (m_scripts[ns].find(name) == m_scripts[ns].end()))
@@ -204,50 +250,16 @@ void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 
 	m_check_for_errors
 		(luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
-		 lua_pcall(m_L, 0, LUA_MULTRET, 0)
+		 lua_pcall(m_L, 0, 1, 0)
 	);
-}
 
-std::string LuaInterface_Impl::get_string(std::string s) {
-	if (not lua_istable(m_L, -1))
-		throw LuaError("Last script did not return a table!");
-
-	lua_getfield(m_L, -1, s.c_str());
-	if (not lua_isstring(m_L, -1)) {
-		lua_pop(m_L, 1);
-		throw LuaError
-			(s + "is not a field in the table returned by the last script");
+	if (lua_isnil(m_L, -1)) {
+		lua_pop(m_L, 1); // No return value from script
+		lua_newtable(m_L); // Push an empty table
 	}
-	std::string rv = lua_tostring(m_L, -1);
-	lua_pop(m_L, 1);
-
-	return rv;
-}
-
-// TODO: Should be in LuaGameInterface
-// TODO: this is essentially the same as run_coroutine from lua_game
-#include "logic/game.h"
-#include "logic/cmd_luacoroutine.h"
-void LuaInterface_Impl::run_coroutine(std::string s) {
-	Widelands::Game & g = get_game(m_L);
-
 	if (not lua_istable(m_L, -1))
-		throw LuaError("Last script did not return a table!");
-
-	lua_getfield(m_L, -1, s.c_str());
-	if (not lua_isthread(m_L, -1)) {
-		lua_pop(m_L, 1);
-		throw LuaError
-			(s + "is not a field in the table returned by the last script or not a function");
-	}
-	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(m_L, -1));
-	lua_pop(m_L, 1); // Remove coroutine from stack
-
-	g.enqueue_command(new Widelands::Cmd_LuaCoroutine(g.get_gametime(), cr));
-}
-// TODO: this is dead ugly
-void LuaInterface_Impl::pop_table() {
-	lua_pop(m_L, 1);
+		throw LuaError("Script did not return a table!");
+	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
 }
 
 // TODO: network games
@@ -262,8 +274,6 @@ struct LuaGameInterface_Impl : public LuaInterface_Impl,
 {
 	LuaGameInterface_Impl(Widelands::Editor_Game_Base * g);
 	virtual ~LuaGameInterface_Impl() {}
-
-	virtual void make_starting_conditions(uint8_t, std::string);
 
 	virtual LuaCoroutine* read_coroutine
 		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
@@ -414,30 +424,6 @@ uint32_t LuaGameInterface_Impl::write_global_env
 
 	return persist_object(m_L, m_persistent_globals, fw, mos);
 }
-
-
-/*
- * Fullfill the starting conditions for the Player with the given Number
- */
-void LuaGameInterface_Impl::make_starting_conditions
-	(uint8_t plrnr, std::string scriptname)
-{
-	Widelands::Game & game = get_game(m_L);
-	Widelands::Player * plr = game.get_player(plrnr);
-	assert(plr);
-
-	// Run the corresponding script which returns a function
-	run_script("tribe_" + plr->tribe().name(), scriptname);
-
-	if (not lua_isfunction(m_L, -1))
-		report_error
-			(m_L, "tribe_%s:%s did not return a function!",
-			 plr->tribe().name().c_str(), scriptname.c_str());
-	to_lua<L_Player>(m_L, new L_Player(plrnr));
-
-	lua_call(m_L, 1, 0);
-}
-
 
 /*
 ============================================

@@ -22,6 +22,10 @@
 
 #include "scripting.h"
 
+namespace Widelands {
+	struct Player;
+}
+
 /*
 ============================================
        Lua Coroutine
@@ -42,6 +46,8 @@ public:
 		(lua_State*, Widelands::FileRead &,
 		 Widelands::Map_Map_Object_Loader &, uint32_t);
 
+	virtual void push_arg(const Widelands::Player *);
+
 private:
 	void m_reference();
 	void m_unreference();
@@ -49,6 +55,7 @@ private:
 private:
 	lua_State * m_L;
 	uint32_t m_idx;
+	uint32_t m_nargs;
 };
 
 

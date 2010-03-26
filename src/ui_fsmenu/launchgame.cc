@@ -263,17 +263,15 @@ void Fullscreen_Menu_LaunchGame::win_condition_clicked()
 	m_cur_wincondition++;
 	m_cur_wincondition %= m_win_conditions.size();
 
-	m_lua->run_script
+	boost::shared_ptr<LuaTable> t = m_lua->run_script
 		("win_conditions", m_win_conditions[m_cur_wincondition]);
-	std::string n = m_lua->get_string("name");
-	std::string d = m_lua->get_string("description");
+	std::string n = t->get_string("name");
+	std::string d = t->get_string("description");
 	m_settings->setWinCondition(m_win_conditions[m_cur_wincondition]);
-	m_lua->pop_table();
 
 	m_wincondition.set_title(n);
 	m_wincondition_descr.set_text(d);
 }
-
 
 /**
  * start-button has been pressed

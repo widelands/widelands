@@ -19,13 +19,16 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "coroutine_impl.h"
+#include "logic/player.h"
 
 #include "c_utils.h"
+#include "lua_game.h"
 #include "persistence.h"
 
+#include "coroutine_impl.h"
+
 LuaCoroutine_Impl::LuaCoroutine_Impl(lua_State * ms)
-	: m_L(ms), m_idx(LUA_REFNIL)
+	: m_L(ms), m_idx(LUA_REFNIL), m_nargs(0)
 {
 	m_reference();
 }
@@ -37,7 +40,8 @@ LuaCoroutine_Impl::~LuaCoroutine_Impl()
 
 int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 {
-	int rv = lua_resume(m_L, 0);
+	int rv = lua_resume(m_L, m_nargs);
+	m_nargs = 0;
 	int n = lua_gettop(m_L);
 
 	uint32_t sleep_for = 0;
@@ -55,6 +59,15 @@ int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 	return rv;
 }
 
+/*
+ * Push an argument that will be passed to the coroutine the next time it is
+ * resumed
+ */
+void LuaCoroutine_Impl::push_arg(const Widelands::Player * plr) {
+	to_lua<L_Player>(m_L, new L_Player(plr->player_number()));
+	m_nargs++;
+}
+
 static const char * m_persistent_globals[] = {
 	"coroutine.yield", 0,
 };
@@ -62,6 +75,9 @@ uint32_t LuaCoroutine_Impl::write
 	(lua_State * parent, Widelands::FileWrite & fw,
 	 Widelands::Map_Map_Object_Saver & mos)
 {
+	// Push the current numbers of arguments onto the stack
+	lua_pushuint32(m_L, m_nargs);
+
 	// Empty table + object to persist on the stack Stack
 	lua_newtable(parent);
 	lua_pushthread(m_L);
@@ -84,6 +100,10 @@ void LuaCoroutine_Impl::read
 	// get garbage collected
 	lua_pushthread(m_L);
 	m_idx = luaL_ref(m_L, LUA_REGISTRYINDEX);
+
+	// Pop the current numbers of arguments onto the stack
+	m_nargs = luaL_checkuint32(m_L, -1);
+	lua_pop(m_L, 1);
 }
 
 /*

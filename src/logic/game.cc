@@ -24,6 +24,7 @@
 
 #include "carrier.h"
 #include "cmd_lua.h"
+#include "cmd_luacoroutine.h"
 #include "computer_player.h"
 #include "economy/economy.h"
 #include "findimmovable.h"
@@ -319,9 +320,9 @@ void Game::init_newgame
 
 	// Check for win_conditions
 	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-	lua().run_script("win_conditions", settings.win_condition);
-	lua().run_coroutine("check_func");
-	lua().pop_table();
+	LuaCoroutine * cr =  lua().run_script
+		("win_conditions", settings.win_condition)->get_coroutine("check_func");
+	enqueue_command(new Cmd_LuaCoroutine(get_gametime(), cr));
 
 	// TODO: SirVer remove the loaded scripts again
 }
