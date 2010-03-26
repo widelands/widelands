@@ -3,4 +3,4 @@ picture=idle_0.png
 
 [idle]
 pics=idle_?.png
-hotspot=7 63
+hotspot=7 60

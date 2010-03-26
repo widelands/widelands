@@ -8,7 +8,7 @@ picture=sheep_00.png
 [idle]
 pics=sheep_??.png
 sfx=0 ../../../sound/farm/sheep
-hotspot=15 25
+hotspot=8 16
 fps=20
 
 [walk]

@@ -187,7 +187,10 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
 	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(), 0};
 	SDL_Color sdl_bg = {bg.r(), bg.g(), bg.b(), 0};
 
-	if (text.empty())
+	// Work around an Issue in SDL_TTF that dies when the surface
+	// has zero width
+	int width = 0;
+	if (TTF_SizeUTF8(&font, text.c_str(), &width, 0) < 0 or !width)
 		text = " ";
 
 	if

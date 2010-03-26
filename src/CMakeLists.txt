@@ -1,9 +1,27 @@
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
 
-IF (DEFINED MSVC)
+IF (WIN32)
   configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../build/win32/msvc/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
-endif (DEFINED MSVC)
+  if (NOT WL_VERSION_MAJOR OR WL_VERSION_MAJOR STREQUAL "")
+    set (WL_VERSION_MAJOR 0)
+  endif (NOT WL_VERSION_MAJOR OR WL_VERSION_MAJOR STREQUAL "")
+  if (NOT WL_VERSION_MINOR OR WL_VERSION_MINOR STREQUAL "")
+    set (WL_VERSION_MINOR 15)
+  endif (NOT WL_VERSION_MINOR OR WL_VERSION_MINOR STREQUAL "")
+  if (NOT WL_VERSION_PATCH OR WL_VERSION_PATCH STREQUAL "")
+    set (WL_VERSION_PATCH 1)
+  endif (NOT WL_VERSION_PATCH OR WL_VERSION_PATCH STREQUAL "")
+  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../build/win32/msvc/Widelands-msvc.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/Widelands-msvc.iss)
+  IF (MINGW)
+	set(WIN32_ICON_O ${CMAKE_CURRENT_BINARY_DIR}/wl_icon.o)
+	ADD_CUSTOM_COMMAND( OUTPUT ${WIN32_ICON_O}
+		COMMAND ${MINGW_PREFIX}windres
+			-o${WIN32_ICON_O}
+			-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
+		)
+	ENDIF (MINGW)
+endif (WIN32)
 
 file(GLOB_RECURSE WL_SRCS_ALL *.cc)
 
@@ -46,16 +64,6 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
   endforeach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
 endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
-IF (MINGW)
-  # resource compilation for MinGW
-  # TODO by QCS - maybe we need to do something about the ../build/win32 link below...
-  ADD_CUSTOM_COMMAND (
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/widelands_ico.o
-    COMMAND windres.exe -I${CMAKE_CURRENT_SOURCE_DIR} -i${CMAKE_CURRENT_SOURCE_DIR}/../build/win32/mingw/Widelands_win.rc -o ${CMAKE_CURRENT_BINARY_DIR}/widelands_ico.o
-  )
-  SET( WL_SRCS ${WL_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/widelands_ico.o)
-ENDIF (MINGW)
-
 add_subdirectory(ai)
 add_subdirectory(economy)
 add_subdirectory(editor)
@@ -77,7 +85,7 @@ add_subdirectory(wui)
 IF (DEFINED MSVC)
   add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
 else (DEFINED MSVC)
-  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
+  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc ${WIN32_ICON_O})
 endif (DEFINED MSVC)
 
 target_link_libraries(widelands widelands_main)
@@ -142,4 +150,4 @@ else (DEFINED MSVC)
 endif (DEFINED MSVC) 
 endif (WIN32)
 
-install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)
+install(TARGETS widelands DESTINATION ${WLBUILD_INSTALL_BINDIR} COMPONENT ExecutableFiles)

@@ -58,14 +58,13 @@ struct RealFSImpl : public FileSystem {
 	virtual void Rename(std::string const &, std::string const &);
 
 	virtual std::string getBasename() {return m_directory;};
+	virtual unsigned long long DiskSpace();
 
 private:
 	void m_unlink_directory(std::string const & file);
 	void m_unlink_file     (std::string const & file);
 
 	std::string m_directory;
-
-	virtual unsigned long DiskSpace();
 };
 
 #endif

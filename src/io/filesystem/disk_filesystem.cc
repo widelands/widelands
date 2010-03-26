@@ -574,7 +574,7 @@ StreamWrite * RealFSImpl::OpenStreamWrite(std::string const & fname) {
 	return new RealFSStreamWrite(fullname);
 }
 
-unsigned long RealFSImpl::DiskSpace() {
+unsigned long long RealFSImpl::DiskSpace() {
 #ifdef WIN32
 	ULARGE_INTEGER freeavailable;
 	return
@@ -587,7 +587,7 @@ unsigned long RealFSImpl::DiskSpace() {
 #else
 	struct statvfs svfs;
 	if (statvfs(FS_CanonicalizeName(m_directory).c_str(), &svfs) != -1) {
-		return svfs.f_bsize * svfs.f_bavail;
+		return static_cast<unsigned long long>(svfs.f_bsize) * svfs.f_bavail;
 	}
 #endif
 	return 0; //  can not check disk space

@@ -299,16 +299,4 @@ void ReplayWriter::SendSync(md5_checksum const & hash)
 	m_cmdlog->Flush();
 }
 
-/**
- * Check that we have more than X disk space so we are sure
- * that we don't crash when trying to write our replay
- */
-#define MINIMUM_DISK_SPACE 250000000lu //~250M, don't know why sounds good
-
-bool ReplayWriter::hasDiskSpace() {
-	unsigned long space = g_fs->DiskSpace();
-	log ("Disk space: %lu minimum: %lu \n", space, MINIMUM_DISK_SPACE);
-	return space > MINIMUM_DISK_SPACE;
-}
-
 }

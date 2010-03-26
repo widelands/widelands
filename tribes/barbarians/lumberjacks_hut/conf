@@ -19,9 +19,9 @@ sleep=25000 # sleeps shorter than any other tribes
 worker=chop
 
 [idle]
-pics=lumberjack_i_??.png
-hotspot=40 35
+pics=lumberjacks_hut_i_??.png
+hotspot=40 45
 
 [build]
-pics=lumberjack_b_??.png
-hotspot=40 32
+pics=lumberjacks_hut_b_??.png
+hotspot=40 45

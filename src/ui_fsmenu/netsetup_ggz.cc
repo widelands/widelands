@@ -29,8 +29,7 @@
 #include "profile/profile.h"
 
 Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
-	(char const * const nick, char const * const pwd,
-	 char const * const mail, bool newregister)
+	(char const * const nick, char const * const pwd, bool registered)
 :
 	Fullscreen_Menu_Base("internetmenu.jpg"),
 
@@ -119,8 +118,7 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 // Login information
 	nickname(nick),
 	password(pwd),
-	email(mail),
-	newreg(newregister)
+	reg(registered)
 {
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
@@ -192,7 +190,7 @@ void Fullscreen_Menu_NetSetupGGZ::connectToMetaserver()
 	Section & s = g_options.pull_section("global");
 	char const * const metaserver = s.get_string("metaserver", WL_METASERVER);
 
-	if (NetGGZ::ref().initcore(metaserver, nickname, password, email, newreg))
+	if (NetGGZ::ref().initcore(metaserver, nickname, password, reg))
 	{
 		// Update of server spinbox
 		maxplayers.setInterval(1, NetGGZ::ref().max_players());
