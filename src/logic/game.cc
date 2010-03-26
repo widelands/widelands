@@ -319,12 +319,10 @@ void Game::init_newgame
 	maploader->load_map_complete(*this, settings.scenario);
 
 	// Check for win_conditions
-	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-	LuaCoroutine * cr =  lua().run_script
-		("win_conditions", settings.win_condition)->get_coroutine("check_func");
+	LuaCoroutine * cr = lua().run_script
+		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
+		 ".lua", "win_conditions")->get_coroutine("check_func");
 	enqueue_command(new Cmd_LuaCoroutine(get_gametime(), cr));
-
-	// TODO: SirVer remove the loaded scripts again
 }
 
 

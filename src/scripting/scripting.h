@@ -96,6 +96,8 @@ struct LuaInterface {
 	virtual ScriptContainer& get_scripts_for(std::string) = 0;
 
 	virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string) = 0;
+	virtual boost::shared_ptr<LuaTable> run_script
+			(FileSystem &, std::string, std::string) = 0;
 };
 
 struct LuaGameInterface : public virtual LuaInterface {

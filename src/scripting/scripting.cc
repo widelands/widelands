@@ -113,7 +113,8 @@ protected:
 	 */
 	private:
 		int m_check_for_errors(int);
-		void m_register_script(std::string, std::string, std::string);
+		std::string m_register_script
+			(FileSystem & fs, std::string path, std::string ns);
 		bool m_filename_to_short(const std::string &);
 		bool m_is_lua_file(const std::string &);
 
@@ -131,6 +132,8 @@ protected:
 		}
 
 		virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string);
+		virtual boost::shared_ptr<LuaTable> run_script
+			(FileSystem &, std::string, std::string);
 };
 
 
@@ -146,10 +149,22 @@ int LuaInterface_Impl::m_check_for_errors(int rv) {
 	return rv;
 }
 
-void LuaInterface_Impl::m_register_script
-	(std::string ns, std::string name, std::string content)
+std::string LuaInterface_Impl::m_register_script
+	(FileSystem & fs, std::string path, std::string ns)
 {
-	m_scripts[ns][name] = content;
+		size_t length;
+		std::string data(static_cast<char *>(fs.Load(path, length)));
+		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
+		size_t pos = name.rfind('/');
+		if (pos == std::string::npos)
+			pos = name.rfind("\\");
+		if (pos != std::string::npos)
+			name = name.substr(pos + 1, name.size());
+
+		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
+		m_scripts[ns][name] = data;
+
+		return name;
 }
 
 bool LuaInterface_Impl::m_filename_to_short(const std::string & s) {
@@ -230,23 +245,32 @@ void LuaInterface_Impl::register_scripts
 		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
 			continue;
 
-		size_t length;
-		std::string data(static_cast<char *>(fs.Load(*i, length)));
-		std::string name = i->substr(0, i->size() - 4); // strips '.lua'
-		size_t pos = name.rfind('/');
-		if (pos == std::string::npos)
-			pos = name.rfind("\\");
-		if (pos != std::string::npos)
-			name = name.substr(pos + 1, name.size());
-
-		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
-		m_register_script(ns, name, data);
+		m_register_script(fs, *i, ns);
 	}
 }
 
 void LuaInterface_Impl::interpret_string(std::string cmd) {
 	int rv = luaL_dostring(m_L, cmd.c_str());
 	m_check_for_errors(rv);
+}
+
+boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
+	(FileSystem & fs, std::string path, std::string ns)
+{
+	bool delete_ns = false;
+	if (not m_scripts.count(ns))
+		delete_ns = true;
+
+	std::string name = m_register_script(fs, path, ns);
+
+	boost::shared_ptr<LuaTable> rv = run_script(ns, name);
+
+	if (delete_ns)
+		m_scripts.erase(ns);
+	else
+		m_scripts[ns].erase(name);
+
+	return rv;
 }
 
 boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script

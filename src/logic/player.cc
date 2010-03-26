@@ -107,16 +107,14 @@ void Player::create_default_infrastructure() {
 
 			// Run the corresponding script
 			LuaCoroutine * cr = game.lua().run_script
-				("tribe_" + tribe().name(), initialization.name)->get_coroutine("func");
+				(*g_fs, "tribes/" + tribe().name() +
+				 "/scripting/" +  initialization.name + ".lua",
+				 "tribe_" + tribe().name())->get_coroutine("func");
 			cr->push_arg(this);
 			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
 
 	// TODO: SirVer Document the changes in player initializations
 	// TODO: SirVer remove the loaded scripts again
-	// TODO: SirVer errmsg update: should return a coroutine
-	// TODO: SirVer remove make_starting_conditions
-                        // game.lua().make_starting_conditions(player_number(),
-                        //                 initialization.name);
 		} catch (Tribe_Descr::Nonexistent) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "
@@ -164,7 +162,7 @@ Message_Id Player::add_message
 			Section & s = g_options.pull_section("global");
 			if (s.get_bool("sound_at_message", true)) {
 				g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
-				
+
 				// Special voice sounds - turned of by default
 				if (s.get_bool("voice_at_message", false)) {
 					if(message.sender() == MSG_SND_UNDER_ATTACK)
