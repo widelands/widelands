@@ -74,6 +74,7 @@ private:
 	void back_clicked();
 	void start_clicked();
 	void win_condition_clicked();
+	void win_condition_update();
 	void set_scenario_values();
 	void switch_to_position(uint8_t);
 	void load_previous_playerdata();
@@ -86,10 +87,10 @@ private:
 	std::string m_fn;
 
 	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
-	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_back, m_ok, m_wincondition;
+	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_wincondition, m_back, m_ok;
 	UI::Callback_IDButton<Fullscreen_Menu_LaunchGame, uint8_t> *
 		m_pos[MAX_PLAYERS];
-	UI::Textarea              m_title, m_mapname, m_lobby, m_wincondition_descr;
+	UI::Textarea              m_title, m_mapname, m_lobby;
 	UI::Textarea              m_name, m_type, m_tribe, m_init, m_ready;
 	UI::Multiline_Textarea    m_notes;
 	UI::Listselect<int32_t> * m_lobby_list;
@@ -98,15 +99,15 @@ private:
 	GameChatPanel           * m_chat;
 	PlayerDescriptionGroup  * m_players[MAX_PLAYERS];
 	std::string               m_filename;
-	std::string            m_filename_proof; // locale variable to check UI state
+	std::string            m_filename_proof; // local variable to check UI state
 	std::string               m_player_save_name[MAX_PLAYERS];
 	std::string               m_player_save_tribe[MAX_PLAYERS];
 	int8_t                    m_nr_players;
 	bool                      m_is_scenario;
 	bool                      m_is_savegame;
 	bool                      m_autolaunch;
-	std::vector<std::string> m_win_conditions;
-	uint8_t m_cur_wincondition;
+	std::vector<std::string>  m_win_conditions;
+	uint8_t                   m_cur_wincondition;
 };
 
 

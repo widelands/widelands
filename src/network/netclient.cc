@@ -32,6 +32,7 @@
 #include "network_system.h"
 #include "logic/playercommand.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
@@ -116,6 +117,17 @@ NetClient::NetClient
 	d->realspeed = 0;
 	d->desiredspeed = 1000;
 	file = 0;
+
+	// Temporarily register win condition scripts to get the default
+	LuaInterface * lua = create_LuaInterface();
+	lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+	ScriptContainer sc = lua->get_scripts_for("win_conditions");
+	std::vector<std::string> win_conditions;
+	container_iterate_const(ScriptContainer, sc, wc)
+		win_conditions.push_back(wc->first);
+	assert(win_conditions.size());
+	d->settings.win_condition = win_conditions[0];
+
 }
 
 NetClient::~NetClient ()
