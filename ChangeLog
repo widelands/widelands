@@ -1,4 +1,6 @@
 ### Build 15 rc2
+- Removed registering functionality for metaserver. This is to be compatible
+  with future changes to the metaserver.
 - Small text tweaks and translation updates.
 - New graphics for some buildings and menu pics.
 - Fix for Multiline Editboxes that could lead the Editor to crash.
