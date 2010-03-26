@@ -176,8 +176,7 @@ char const * NetGGZ::ip()
 /// initializes the local ggz core
 bool NetGGZ::initcore
 	(char const * const metaserver, char const * const nick,
-	 char const * const pwd, char const * const email,
-	 bool newreg, bool anonymous)
+	 char const * const pwd, bool registered)
 {
 	GGZOptions opt;
 
@@ -249,17 +248,12 @@ bool NetGGZ::initcore
 		(ggzserver, metaserver, WL_METASERVER_PORT, GGZ_CONNECTION_CLEAR);
 #endif
 
-	// Login anonymously:
-	if (anonymous)
-		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, nick, 0, 0);
-
-	// Register a new account:
-	else if (newreg)
-		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_NEW, nick, pwd, email);
-
-	// Normal login:
-	else
+	// Login to registered account:
+	if (registered)
 		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN, nick, pwd, 0);
+	// Login anonymously:
+	else
+		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, nick, 0, 0);
 
 	ggzcore_server_connect(ggzserver);
 

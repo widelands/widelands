@@ -30,8 +30,7 @@ struct LoginBox : public UI::Window {
 
 	std::string get_nickname() {return eb_nickname->text();}
 	std::string get_password() {return eb_password->text();}
-	std::string get_email()    {return eb_emailadd->text();}
-	bool new_registration()    {return cb_register->get_state();}
+	bool registered()          {return cb_register->get_state();}
 	bool set_automaticlog()    {return cb_auto_log->get_state();}
 
 private:
@@ -40,12 +39,10 @@ private:
 
 private:
 	UI::EditBox  * eb_nickname;
-	UI::EditBox  * eb_emailadd;
 	UI::EditBox  * eb_password;
 	UI::Checkbox * cb_register;
 	UI::Checkbox * cb_auto_log;
 	UI::Textarea * ta_nickname;
-	UI::Textarea * ta_emailadd;
 	UI::Textarea * ta_password;
 	UI::Textarea * ta_register;
 	UI::Textarea * ta_auto_log;
