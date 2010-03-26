@@ -63,7 +63,7 @@ public:
 			if (not lua_isstring(m_L, -1)) {
 				lua_pop(m_L, 1);
 				throw LuaError
-					(s + "is not a field in the table returned by the last "
+					(s + " is not a field in the table returned by the last "
 					 "script or not a string");
 			}
 			std::string rv = lua_tostring(m_L, -1);
@@ -74,6 +74,17 @@ public:
 
 	virtual LuaCoroutine * get_coroutine(std::string s) {
 		lua_getfield(m_L, -1, s.c_str());
+
+		if (lua_isfunction(m_L, -1)) {
+			// Oh well, a function, not a coroutine. Let's turn it into one
+			lua_State * t = lua_newthread(m_L);
+			lua_pop(m_L, 1); // Immediately remove this thread again
+
+			lua_xmove(m_L, t, 1); // Move function to coroutine
+			lua_pushthread(t); // Now, move thread object back
+			lua_xmove(t, m_L, 1);
+		}
+
 		if (not lua_isthread(m_L, -1)) {
 			lua_pop(m_L, 1);
 			throw LuaError
