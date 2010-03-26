@@ -256,7 +256,7 @@ void LAN_Game_Finder::run ()
 
 		printf ("Received %s packet\n", info.magic);
 
-		if (strncmp(info.magic, "GAME", 6))
+		if (0 == strncmp(info.magic, "GAME", 6))
 			continue;
 
 		if (info.version != LAN_PROMOTION_PROTOCOL_VERSION)
@@ -266,7 +266,7 @@ void LAN_Game_Finder::run ()
 		//  otherwise just append it to the list
 		for
 			(wl_const_range<std::list<Net_Open_Game *> > 
-			 i(opengames);;)
+			 i(opengames);;++i)
 			if (i.empty()) {
 				opengames.push_back (new Net_Open_Game);
 				opengames.back()->address = addr.sin_addr.s_addr;
