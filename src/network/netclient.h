@@ -82,6 +82,8 @@ struct NetClient :
 	virtual void setPlayerNumber  (uint8_t number);
 	virtual void setPlayerReady   (uint8_t number, bool ready);
 	virtual bool getPlayerReady   (uint8_t number);
+	virtual void setWinCondition(std::string);
+	virtual std::string getWinCondition();
 
 	// ChatProvider interface
 	void send(std::string const & msg);

@@ -369,6 +369,14 @@ bool NetClient::getPlayerReady(uint8_t const number) {
 		 d->settings.players.at(number).ready);
 }
 
+std::string NetClient::getWinCondition() {
+	return d->settings.win_condition;
+}
+
+void NetClient::setWinCondition(std::string) {
+	// Clients are not allowed to change this
+}
+
 void NetClient::setPlayerNumber(uint8_t const number)
 {
 	// If the playernumber we want to switch to is our own, there is no need
@@ -706,6 +714,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->playernum = number;
 		d->settings.users.at(d->settings.usernum).position = number;
 		d->settings.playernum = number;
+		break;
+	}
+	case NETCMD_WIN_CONDITION: {
+		d->settings.win_condition = packet.String();
 		break;
 	}
 
