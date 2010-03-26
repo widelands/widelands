@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-21 10:15+0100\n"
-"PO-Revision-Date: 2010-03-21 10:00+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-03-25 13:31+0100\n"
+"PO-Revision-Date: 2010-03-25 19:00+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-22 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-03-26 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/events/event_road.cc:51
@@ -26,7 +26,7 @@ msgstr ""
 "Schritt %li hat die Richtung '%c', sollte einer von {1 (Nordosten), 2 "
 "(Osten), 3  (Südosten), 4 (Südwesten), 5 (Westen), 6 (Nordwesten)} sein"
 
-#: ../../src/network/nethost.cc:1694
+#: ../../src/network/nethost.cc:1700
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
@@ -357,7 +357,7 @@ msgstr "Widelands konnte keine Verbindung zum Gastgeber erstellen."
 msgid "The address of the game server is invalid"
 msgstr "Die Adresse des Spieler-Servers ist inkorrekt"
 
-#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1183
+#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1189
 msgid "Player"
 msgstr "Spieler"
 
@@ -2016,35 +2016,35 @@ msgid_plural "%u(+%u) soldiers"
 msgstr[0] "%u(+%u) Soldat"
 msgstr[1] "%u(+%u) Soldaten"
 
-#: ../../src/logic/militarysite.cc:574
+#: ../../src/logic/militarysite.cc:580
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
 msgstr "%sDer Feind hat deine Soldaten bei dem/der %s besiegt.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:581
+#: ../../src/logic/militarysite.cc:587
 msgid "Militarysite lost!"
 msgstr "Militärgebäude verloren!"
 
-#: ../../src/logic/militarysite.cc:654
+#: ../../src/logic/militarysite.cc:660
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
 msgstr "%sDeine Soldaten haben den Feind bei dem/der %s besiegt.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:661
+#: ../../src/logic/militarysite.cc:667
 msgid "Enemy at site defeated!"
 msgstr "Feindliches Militärgebäude besiegt."
 
-#: ../../src/logic/militarysite.cc:709
+#: ../../src/logic/militarysite.cc:715
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
 msgstr "%sdein %s hat einen Feind entdeckt.</p>"
 
-#: ../../src/logic/militarysite.cc:710
+#: ../../src/logic/militarysite.cc:716
 #, c-format
 msgid "%sYour %s is under attack.</p>"
 msgstr "%sdein %s wird angegriffen.</p>"
 
-#: ../../src/logic/militarysite.cc:720
+#: ../../src/logic/militarysite.cc:726
 msgid "You are under attack"
 msgstr "Du wirst angegriffen"
 
@@ -3065,67 +3065,67 @@ msgid "Server has crashed and performed an emergency save."
 msgstr ""
 "Der Server ist abgestürzt und hat eine Notfallsicherung durchgeführt."
 
-#: ../../src/network/nethost.cc:832
+#: ../../src/network/nethost.cc:838
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "Der Gastgeber hat %s zu den Zuschauern gesendet!"
 
-#: ../../src/network/nethost.cc:1132
+#: ../../src/network/nethost.cc:1138
 #, c-format
 msgid "Computer %u"
 msgstr "Computer %u"
 
-#: ../../src/network/nethost.cc:1208
+#: ../../src/network/nethost.cc:1214
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
 "WARNUNG: %s benutzt die Version %s, während der Gastgeber die Version %s "
 "benutzt."
 
-#: ../../src/network/nethost.cc:1255
+#: ../../src/network/nethost.cc:1261
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s hat das Spiel betreten."
 
-#: ../../src/network/nethost.cc:1279
+#: ../../src/network/nethost.cc:1285
 msgid "Client reports time to host that is running backwards."
 msgstr "Der Client hat dem Gastgeber eine Zeit genannt, die zurück läuft."
 
-#: ../../src/network/nethost.cc:1282
+#: ../../src/network/nethost.cc:1288
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Der Client simuliert ausserhalb der vom Server erlaubten Zeit."
 
-#: ../../src/network/nethost.cc:1286
+#: ../../src/network/nethost.cc:1292
 msgid "Client did not submit sync report in time."
 msgstr ""
 "Der Client hat der Synchronisationsreport nicht rechtzeitig gesendet."
 
-#: ../../src/network/nethost.cc:1466
+#: ../../src/network/nethost.cc:1472
 msgid "Client and host have become desynchronized."
 msgstr "Client und Server sind unsynchron geworden."
 
-#: ../../src/network/nethost.cc:1512
+#: ../../src/network/nethost.cc:1518
 msgid "New User"
 msgstr "Neuer Benutzer"
 
-#: ../../src/network/nethost.cc:1517
+#: ../../src/network/nethost.cc:1523
 msgid "The game has already started."
 msgstr "Das Spiel hat bereits begonnen."
 
-#: ../../src/network/nethost.cc:1535
+#: ../../src/network/nethost.cc:1541
 msgid "Connection to client lost."
 msgstr "Verbindung zum Client verloren."
 
-#: ../../src/network/nethost.cc:1549
+#: ../../src/network/nethost.cc:1555
 msgid "Client sent malformed commands: "
 msgstr "Der Client hat einen unverständlichen Befehl gesendet: "
 
-#: ../../src/network/nethost.cc:1582
+#: ../../src/network/nethost.cc:1588
 msgid "Game is running already, but client has not connected fully"
 msgstr ""
 "Das Spiel läuft bereits, aber der Client ist noch nicht richtig verbunden."
 
-#: ../../src/network/nethost.cc:1586
+#: ../../src/network/nethost.cc:1592
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
@@ -3135,53 +3135,53 @@ msgstr ""
 "kommen müssen. Höchstwahrscheinlich verwenden Server und Client inkompatible "
 "Versionen."
 
-#: ../../src/network/nethost.cc:1592
+#: ../../src/network/nethost.cc:1598
 msgid "Server uses a different protocol version."
 msgstr "Der Server verwendet eine andere Protokollversion."
 
-#: ../../src/network/nethost.cc:1674
+#: ../../src/network/nethost.cc:1680
 msgid "Client sent TIME command even though game is not running."
 msgstr ""
 "Der Client hat einen TIME Befehl gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/network/nethost.cc:1682
+#: ../../src/network/nethost.cc:1688
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 "Der Client hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/network/nethost.cc:1703
+#: ../../src/network/nethost.cc:1709
 msgid "Client sent unexpected synchronization report."
 msgstr "Der Client hat einen unerwarteten Synchronisationsreport geschickt."
 
-#: ../../src/network/nethost.cc:1739 ../../src/network/nethost.cc:1751
+#: ../../src/network/nethost.cc:1745 ../../src/network/nethost.cc:1757
 msgid "Client requests file altough none is available to send."
 msgstr "Client fordert Datein an, obwohl keine zu Sendung vorgesehen ist."
 
-#: ../../src/network/nethost.cc:1741
+#: ../../src/network/nethost.cc:1747
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr "Transfer der Datei %s zu %s gestartet!"
 
-#: ../../src/network/nethost.cc:1762
+#: ../../src/network/nethost.cc:1768
 msgid "Client requests file part that does not exist."
 msgstr "Client fordert ein Dateienteilstück an, welches nicht existiert."
 
-#: ../../src/network/nethost.cc:1765
+#: ../../src/network/nethost.cc:1771
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr "Der Transfer der Datei %s zum Empfänger %s ist abgeschlossen."
 
-#: ../../src/network/nethost.cc:1773
+#: ../../src/network/nethost.cc:1779
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr "Sende Teil %u/%u der Datei %s zu %s"
 
-#: ../../src/network/nethost.cc:1783
+#: ../../src/network/nethost.cc:1789
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Der Client hat einen unbekannten Befehl Nummer %u gesendet"
 
-#: ../../src/network/nethost.cc:1839
+#: ../../src/network/nethost.cc:1845
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s hat das Spiel verlassen (%s)"

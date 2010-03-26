@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-21 09:15+0000\n"
-"PO-Revision-Date: 2010-03-24 18:58+0000\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-03-25 19:11+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-25 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-03-26 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -617,7 +617,7 @@ msgstr "Fortaleza"
 
 #: ../../tribes/empire/conf:156
 msgid "Outpost"
-msgstr "Asentamento"
+msgstr "Posto de avanzada"
 
 #: ../../tribes/empire/conf:157
 #: ../../tribes/empire/conf:165
@@ -678,7 +678,7 @@ msgstr "Cervexería"
 
 #: ../../tribes/empire/conf:182
 msgid "Charcoal Burner"
-msgstr "Queimador de turba"
+msgstr "Produtor de carbón vexetal"
 
 #: ../../tribes/empire/conf:183
 msgid "Deep Coal Mine"
@@ -742,7 +742,7 @@ msgstr "Mina de ferro"
 
 #: ../../tribes/empire/conf:198
 msgid "Piggery"
-msgstr "Curral"
+msgstr "Cortello"
 
 #: ../../tribes/empire/conf:199
 msgid "Quarry"
