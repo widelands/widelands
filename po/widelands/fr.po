@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-03-25 18:58+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2010-03-26 09:37+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-03-27 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -488,7 +488,7 @@ msgstr "Coût de la construction"
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "constructionsite de %s"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
@@ -497,7 +497,7 @@ msgstr "Améliorations"
 #: ../../src/writeHTML.cc:462
 #, c-format
 msgid "%s's enhancement"
-msgstr ""
+msgstr "amélioration de %s"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
@@ -558,7 +558,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:671 ../../src/writeHTML.cc:682
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "création de %s"
 
 #: ../../src/writeHTML.cc:693
 msgid "Spawns in warehouses."
@@ -573,7 +573,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:710
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "promotion de %s"
 
 #: ../../src/writeHTML.cc:721 ../../src/writeHTML.cc:866
 msgid "Programs"
@@ -663,7 +663,7 @@ msgstr "Travailleurs"
 #: ../../src/writeHTML.cc:797
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "employé de %s"
 
 #: ../../src/writeHTML.cc:807
 msgid "Inputs"
@@ -672,7 +672,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:818
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "entrées de %s"
 
 #: ../../src/writeHTML.cc:830
 msgid "Output"
@@ -681,7 +681,7 @@ msgstr "Sorties"
 #: ../../src/writeHTML.cc:841 ../../src/writeHTML.cc:855
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "sorties de %s"
 
 #: ../../src/writeHTML.cc:902 ../../src/writeHTML.cc:1045
 #: ../../src/writeHTML.cc:1107 ../../src/writeHTML.cc:1135
@@ -1673,7 +1673,7 @@ msgstr ""
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
-msgstr ""
+msgstr "La partie n'a aucun joueurs !"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:88
 #, c-format
@@ -1743,7 +1743,7 @@ msgstr "[bataille] le soldat %u perd la bataille\n"
 #: ../../src/logic/battle.cc:182
 #, c-format
 msgid "[battle] waking up winner %d\n"
-msgstr ""
+msgstr "[battle] réveille le vainqueur %d\n"
 
 #: ../../src/logic/bob.cc:85 ../../src/logic/immovable.cc:206
 #, c-format
@@ -1773,7 +1773,7 @@ msgstr ""
 #: ../../src/logic/cmd_queue.cc:178
 #, c-format
 msgid "game logic: %s"
-msgstr ""
+msgstr "logique du jeu : %s"
 
 #: ../../src/logic/constructionsite.cc:168
 #, c-format
@@ -2021,7 +2021,7 @@ msgstr "joueur inamovible %u : %s"
 #: ../../src/logic/playercommand.cc:182
 #, c-format
 msgid "bulldoze: %s"
-msgstr ""
+msgstr "démolir : %s"
 
 #: ../../src/logic/playercommand.cc:234
 #, c-format
@@ -2335,6 +2335,8 @@ msgstr "Type de soldat"
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
+"attendu {\"hp\"|\"attack\"|\"defense\"|\"evade\"} mais \"%s\" n'est pas "
+"trouvé"
 
 #: ../../src/logic/production_program.cc:1171
 #: ../../src/logic/production_program.cc:1239
@@ -2552,12 +2554,12 @@ msgstr "type de tâche inconnue \"%s\""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:237
 #, c-format
 msgid "task %s is duplicated in stack"
-msgstr ""
+msgstr "la tâche %s est en doublon dans la pile"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:314
 #, c-format
 msgid "reading path: %s"
-msgstr ""
+msgstr "lecture du chemin : %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:387
 #, c-format
@@ -2602,7 +2604,7 @@ msgstr "Marchandises: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:287
 #, c-format
 msgid "constructionsite: %s"
-msgstr ""
+msgstr "constructionsite: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:435
 #, c-format
@@ -2619,17 +2621,17 @@ msgstr "entrepôt: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:584
 #, c-format
 msgid "militarysite: %s"
-msgstr ""
+msgstr "militarysite : %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:698
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
-msgstr ""
+msgstr "le programme %s a sauté temps %u, mais le temps n'est que %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:934
 #, c-format
 msgid "trainingsite: %s"
-msgstr ""
+msgstr "trainingsite : %s"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
@@ -2662,12 +2664,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:99
 #, c-format
 msgid "extradata: %s"
-msgstr ""
+msgstr "extradata : %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "ce nœud est la propriété du joueur %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
@@ -2708,7 +2710,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "bâtiment (%u) : %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:209
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
@@ -2766,7 +2768,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:80
 #, c-format
 msgid "Objectives: %s"
-msgstr ""
+msgstr "Objectifs : %s"
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:80
 #, c-format
