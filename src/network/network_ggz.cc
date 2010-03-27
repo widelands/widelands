@@ -979,7 +979,7 @@ void NetGGZ::send_game_done()
 /// Sends a chat message via ggz room chat
 void NetGGZ::send(std::string const & msg)
 {
-	if (!usedcore())
+	if (!usedcore() or !logged_in)
 		return;
 	int16_t sent;
 	if (msg.size() && *msg.begin() == '@') {
