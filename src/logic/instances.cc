@@ -437,9 +437,6 @@ void Map_Object::log_general_info(Editor_Game_Base const &) {}
  */
 void Map_Object::molog(char const * fmt, ...) const
 {
-	if (!g_verbose && !m_logsink)
-		return;
-
 	va_list va;
 	char buffer[2048];
 
