@@ -192,7 +192,7 @@ void AttackBox::init() {
 				(columnbox,
 				 100, 10,
 				 0, max_attackers, max_attackers > 0 ? 1 : 0,
-				 "slider.png",
+				 "pics/but2.png",
 				 _("Number of soldiers"));
 
 		m_slider_soldiers->changed.set(this, &AttackBox::update_attack);
@@ -232,7 +232,7 @@ void AttackBox::init() {
 				 m_pl->tribe().get_military_data().get_min_retreat(),
 				 m_pl->tribe().get_military_data().get_max_retreat(),
 				 m_pl->get_retreat_percentage(),
-				 "slider.png",
+				 "pics/but2.png",
 				 _("Supported damage before retreat"));
 		m_slider_retreat->changed.set(this, &AttackBox::update_attack);
 		add_text(linebox, _("Once injured"));
