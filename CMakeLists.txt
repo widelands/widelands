@@ -110,13 +110,41 @@ find_package(Boost 1.35.0 REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 target_link_libraries(widelands ${Boost_LIBRARIES})
 
-set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
+set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
+set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
 set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   include(CheckCXXCompilerFlag) #this include should be safe
-  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST} Compiler_old-style-cast_supported)
+  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)
   IF (Compiler_old-style-cast_supported)
-    set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST}") #the space is on purpose!
+    EXEC_PROGRAM(${CMAKE_CXX_COMPILER}
+      ARGS --version
+      OUTPUT_VARIABLE WLBUILD_COMPILERVERSION
+    )
+    STRING(REGEX REPLACE ".*([0-9])\\.([0-9])\\.([0-9]).*" "\\1.\\2.\\3" WLBUILD_COMPILERVERSION_REP ${WLBUILD_COMPILERVERSION})
+    IF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
+      message("===== ATTENTION ===================================================")
+      message("Your compiler has been identified as GCC 4.3.1 or GCC 4.3.2")
+      message(" ")
+      message("There is a bug regarding this version, see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=38000")
+      message("and https://bugs.launchpad.net/widelands/+bug/549479 for details.")
+      message("Build will disable -isystem usage, expect lots of warnings from Boost header files.")
+      message("Widelands should still compile and link correctly.")
+      message("If the compiler identification is correct, please consider updating your gcc.")
+      message("This warning message will disappear at GCC 4.3.3 and higher.")
+      message("If you feel this is wrong, please submit a bug with widelands (not with GCC!)")
+      message("and add the following information how cmake sees your C++ compiler:")
+      message(" ")
+      message("--------------------------------")
+      message("${WLBUILD_COMPILERVERSION}")
+      message("--------------------------------")
+      message(" ")
+      message("Thank you for taking your time to read this.")
+      message("===================================================================")
+      set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST}") #the space is on purpose!
+    ELSE (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
+      set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED}") #the space is on purpose!
+    ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
   ENDIF (Compiler_old-style-cast_supported)
 
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GENERICWARNINGS} Compiler_generic_warnings_supported)

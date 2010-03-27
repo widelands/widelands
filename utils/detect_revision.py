@@ -26,13 +26,16 @@ try:
 except ImportError:
     __has_bzrlib = False
 
+base_path = p.join(p.dirname(__file__),p.pardir)
+
 def check_for_explicit_version():
     """
     Checks for a file WL_RELEASE in the root directory. It then defaults to
     this version without further trying to find which revision we're on
     """
-    if os.path.exists("WL_RELEASE"):
-        return open("WL_RELEASE").read().strip()
+    fname = p.join(base_path, "WL_RELEASE")
+    if os.path.exists(fname):
+        return open(fname).read().strip()
 
 def detect_git_revision():
     if not sys.platform.startswith('linux') and \
@@ -55,10 +58,8 @@ def detect_git_revision():
 
 
 def detect_bzr_revision():
-    branch_path = p.join(p.dirname(__file__),p.pardir)
-
     if __has_bzrlib:
-        b = BzrDir.open(branch_path).open_branch()
+        b = BzrDir.open(base_path).open_branch()
         revno, nick = b.revno(), b.nick
     else:
         # Windows stand alone installer do not come with bzrlib. We try to
