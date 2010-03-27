@@ -381,6 +381,23 @@ private:
 	bool m_actscheduled;
 	bool m_in_act; ///< if do_act is currently running
 	std::string m_signal;
+
+	// saving and loading
+protected:
+	class Loader {
+	public:
+		Loader();
+
+		virtual void load(FileRead &, uint8_t version);
+		virtual void load_pointers();
+		virtual void load_finish();
+	};
+
+public:
+	virtual bool has_new_save_support() {return false;}
+
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	// Pure Bobs cannot be loaded
 };
 
 }

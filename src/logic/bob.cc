@@ -26,6 +26,8 @@
 #include "economy/transfer.h"
 #include "game.h"
 #include "game_data_error.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "wui/mapviewpixelconstants.h"
 #include "path.h"
 #include "player.h"
@@ -1068,6 +1070,87 @@ void Bob::log_general_info(Editor_Game_Base const & egbase)
 
 		molog("* program: %p\n",  m_stack[i].route);
 	}
+}
+
+
+/*
+==============================
+
+Load/save support
+
+==============================
+*/
+
+#define BOB_SAVEGAME_VERSION 1
+
+		virtual void load(FileRead &, uint8_t version);
+		virtual void load_pointers();
+		virtual void load_finish();
+
+void Bob::save(Editor_Game_Base & eg, Map_Map_Object_Saver & mos, FileWrite & fw)
+{
+	fw.Unsigned8(BOB_SAVEGAME_VERSION);
+
+	fw.Unsigned8(m_owner ? m_owner->player_number() : 0);
+	fw.Coords32(m_position);
+
+	// m_linkpprev and m_linknext are recreated automatically
+
+	fw.Unsigned32(m_anim);
+	fw.Signed32(m_animstart);
+	fw.Direction8_allow_null(m_walking);
+	if (m_walking) {
+		fw.Signed32(m_walkstart);
+		fw.Signed32(m_walkend);
+	}
+
+	fw.Unsigned32(m_actid);
+	fw.CString(m_signal);
+
+	fw.Unsigned32(m_stack.size());
+	for(unsigned int i = 0; i < m_stack.size(); ++i) {
+		const State& state = m_stack[i];
+
+		fw.CString(state.task->name);
+		fw.Signed32(state.ivar1);
+		fw.Signed32(state.ivar2);
+		fw.Signed32(state.ivar3);
+		if (Map_Object * obj = state.objvar1.get(eg)) {
+			fw.Unsigned32(mos.get_object_file_index(*obj));
+		} else {
+			fw.Unsigned32(0);
+		}
+		fw.CString(state.svar1);
+
+		fw.Coords32(state.coords);
+		const DirAnimations  * diranims;
+
+		if (state.path) {
+			fw.Unsigned8(1);
+			state.path->save(fw, eg, mos);
+		} else {
+			fw.Unsigned8(0);
+		}
+
+		// TODO: fix transfer handling
+		Transfer             * transfer;
+
+		if (state.route) {
+			fw.Unsigned8(1);
+			state.route->save(fw, eg, mos);
+		} else {
+			fw.Unsigned8(0);
+		}
+
+		fw.CString(state.program ? state.program->get_name() : "");
+	}
+
+	fw.Unsigned32(m_actid);
+
+	// m_actscheduled and m_in_act are for sanity checks only and therefore
+	// do not need to be saved
+
+	fw.CString(m_signal);
 }
 
 }
