@@ -418,7 +418,14 @@ else (${CMAKE_BUILD_TYPE} STREQUAL Release)
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   )
+  add_custom_target (
+    lang_dummy ALL
+    COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  )
 endif (${CMAKE_BUILD_TYPE} STREQUAL Release)
+
+set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES locale)
 
 install(
   DIRECTORY
