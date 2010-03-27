@@ -256,7 +256,7 @@ void LAN_Game_Finder::run ()
 
 		printf ("Received %s packet\n", info.magic);
 
-		if (0 == strncmp(info.magic, "GAME", 6))
+		if (strncmp(info.magic, "GAME", 6))
 			continue;
 
 		if (info.version != LAN_PROMOTION_PROTOCOL_VERSION)
@@ -274,7 +274,7 @@ void LAN_Game_Finder::run ()
 				opengames.back()->info    = info;
 				callback (GameOpened, opengames.back(), userdata);
 				break;
-			} else if (i.front()->address == addr.sin_addr.s_addr) {
+			} else if(0 == strncmp(i.front()->info.hostname, info.hostname, 128)) {
 				i.front()->info = info;
 				callback (GameUpdated, i.front(), userdata);
 				break;
