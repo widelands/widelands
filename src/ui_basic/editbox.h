@@ -74,8 +74,6 @@ private:
 	RGBColor                       m_fontcolor;
 
 	boost::scoped_ptr<EditBoxImpl> m;
-
-	void check_caret();
 };
 
 }
