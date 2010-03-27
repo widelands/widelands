@@ -112,9 +112,6 @@ void Player::create_default_infrastructure() {
 				 "tribe_" + tribe().name())->get_coroutine("func");
 			cr->push_arg(this);
 			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
-
-	// TODO: SirVer Document the changes in player initializations
-	// TODO: SirVer remove the loaded scripts again
 		} catch (Tribe_Descr::Nonexistent) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "

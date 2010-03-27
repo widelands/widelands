@@ -42,6 +42,7 @@
 // TODO: add possibility to run a specific script by path without having to
 //       load all
 // TODO: add translation search for tribes/scripting/*.lua to tribes catalog
+// TODO: Document the changes in player initializations
 
 /*
 ============================================
@@ -127,6 +128,7 @@ protected:
 
 		virtual void register_scripts
 			(FileSystem &, std::string, std::string = "scripting");
+		// TODO: this should only return the names of the scripts, not the content
 		virtual ScriptContainer & get_scripts_for(std::string ns) {
 			return m_scripts[ns];
 		}

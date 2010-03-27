@@ -4,7 +4,11 @@
 
 use("aux", "infrastructure")
 
-return function(p) 
+set_textdomain("tribe", "empire")
+
+return {
+   name = _ "Headquarters medium",
+   func = function(p) 
 
    p:allow_workers("all")
 
@@ -66,4 +70,5 @@ return function(p)
       }
    })
 end
+}
 

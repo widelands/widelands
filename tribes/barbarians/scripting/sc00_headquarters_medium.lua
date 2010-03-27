@@ -4,9 +4,11 @@
 
 use("aux", "infrastructure")
 
+set_textdomain("tribe_barbarians")
+
 return {
-   blah = "Ui",
-   func = coroutine.create(function(player) 
+   name = _ "Headquarters medium",
+   func = function(player) 
    local sf = player.starting_field
 
    player:allow_workers("all")
@@ -59,7 +61,7 @@ return {
          [{0,0,0,0}] = 45,
       }
    })
-end)
+end
 }
 
 

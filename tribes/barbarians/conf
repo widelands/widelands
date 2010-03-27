@@ -217,10 +217,6 @@ well=_Well
 scouts_hut=_"Scout's Hut"
 cattlefarm=_Cattle Farm
 
-[initializations]
-sc_headquarters_medium=_Headquarters medium
-sc_citadel_village=_Citadel village
-
 [military_data]
 retreat_interval=0-80
 retreat=20

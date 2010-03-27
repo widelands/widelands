@@ -20,8 +20,9 @@
 #ifndef SCRIPTING_H
 #define SCRIPTING_H
 
+#include "wexception.h"
+
 #include <map>
-#include <stdexcept>
 #include <stdint.h>
 #include <string>
 
@@ -40,8 +41,8 @@ namespace Widelands {
 	struct Player;
 }
 
-struct LuaError : public std::runtime_error {
-	LuaError(std::string const & reason) : std::runtime_error(reason) {}
+struct LuaError : public _wexception {
+	LuaError(std::string const & reason) : wexception("%s", reason.c_str()) {}
 };
 struct LuaValueError : public LuaError {
 	LuaValueError(std::string const & wanted) :
