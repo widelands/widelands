@@ -321,7 +321,7 @@ void Game::init_newgame
 	// Check for win_conditions
 	LuaCoroutine * cr = lua().run_script
 		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
-		 ".lua", "win_conditions")->get_coroutine("check_func");
+		 ".lua", "win_conditions")->get_coroutine("func");
 	enqueue_command(new Cmd_LuaCoroutine(get_gametime(), cr));
 }
 

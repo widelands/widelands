@@ -2,14 +2,14 @@
 --                         Defeat all Win condition                         
 -- =======================================================================
 
-use("aux", "coroutine")
+use("aux", "coroutine") -- for sleep
 
 set_textdomain("win_conditions")
 
 return {
    name = _ "Autocrat",
    description = _ "The tribe that can defeat all others wins!",
-   check_func = function() 
+   func = function() 
       -- Find all valid players
       local plrs = {}
       for i=1,10 do
