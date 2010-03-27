@@ -33,17 +33,6 @@
 
 #include "scripting.h"
 
-// TODO: document win conditions
-// TODO: fix initializations, they should work with the same interface as
-//       win conditions (also remember internationalization)
-// TODO: win conditions for network games.
-// TODO: convert remaining initizalisation scripts
-// TODO: remove intiialization as it was from the tribes
-// TODO: add possibility to run a specific script by path without having to
-//       load all
-// TODO: add translation search for tribes/scripting/*.lua to tribes catalog
-// TODO: Document the changes in player initializations
-
 /*
 ============================================
        Lua Table
@@ -298,8 +287,6 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 		throw LuaError("Script did not return a table!");
 	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
 }
-
-// TODO: network games
 
 /*
  * ===========================
