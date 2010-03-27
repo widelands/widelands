@@ -53,17 +53,24 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 // Buttons
 	m_select_map
 		(this,
-		 m_xres * 7 / 10, m_yres * 7 / 20, m_butw, m_buth,
+		 m_xres * 7 / 10, m_yres * 3 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_LaunchGame::select_map, *this,
 		 _("Select map"), std::string(), false, false,
 		 m_fn, m_fs),
 	m_select_save
 		(this,
-		 m_xres * 7 / 10, m_yres * 4 / 10, m_butw, m_buth,
+		 m_xres * 7 / 10, m_yres * 7 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_LaunchGame::select_savegame, *this,
 		 _("Select Savegame"), std::string(), false, false,
+		 m_fn, m_fs),
+	m_wincondition
+		(this,
+		 m_xres * 7 / 10 , m_yres * 4 / 10, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_LaunchGame::win_condition_clicked, *this,
+		 "", std::string(), false, false,
 		 m_fn, m_fs),
 	m_back
 		(this,
@@ -79,13 +86,6 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		 &Fullscreen_Menu_LaunchGame::start_clicked, *this,
 		 _("Start game"), std::string(), false, false,
 		 m_fn, m_fs),
-	m_wincondition
-		(this,
-		 7 , m_yres * 12 / 19, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Fullscreen_Menu_LaunchGame::win_condition_clicked, *this,
-		 "", std::string(), true, false,
-		 m_fn, m_fs),
 
 // Text labels
 	m_title
@@ -94,14 +94,11 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		 _("Launch Game"), UI::Align_HCenter),
 	m_mapname
 		(this,
-		 m_xres * 7 / 10 + m_butw / 2, m_yres * 3 / 10,
+		 m_xres * 7 / 10 + m_butw / 2, m_yres * 5 / 20,
 		 std::string(), UI::Align_HCenter),
 	m_lobby
 		(this,
 		 m_xres * 7 / 10, m_yres * 11 / 20),
-	m_wincondition_descr
-		(this,
-		 7 + m_butw + 7, m_yres * 12 / 19 + m_buth/2 - m_fs/2, m_xres, m_buth),
 	m_name
 		(this,
 		 m_xres * 1 / 25, m_yres * 53 / 200,
@@ -254,23 +251,31 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
 		end_modal(0);
 }
 
-/*
+/**
  * WinCondition button has been pressed
  */
 void Fullscreen_Menu_LaunchGame::win_condition_clicked()
 {
-	// update win conditions information
-	m_cur_wincondition++;
-	m_cur_wincondition %= m_win_conditions.size();
+	if (m_settings->canChangeMap()) {
+		m_cur_wincondition++;
+		m_cur_wincondition %= m_win_conditions.size();
+		m_settings->setWinCondition(m_win_conditions[m_cur_wincondition]);
+	}
 
+	win_condition_update();
+}
+
+/**
+ * update win conditions information
+ */
+void Fullscreen_Menu_LaunchGame::win_condition_update() {
 	boost::shared_ptr<LuaTable> t = m_lua->run_script
-		("win_conditions", m_win_conditions[m_cur_wincondition]);
+		("win_conditions", m_settings->getWinCondition());
 	std::string n = t->get_string("name");
 	std::string d = t->get_string("description");
-	m_settings->setWinCondition(m_win_conditions[m_cur_wincondition]);
 
-	m_wincondition.set_title(n);
-	m_wincondition_descr.set_text(d);
+	m_wincondition.set_title(_("Type: ") + n);
+	m_wincondition.set_tooltip(d.c_str());
 }
 
 /**
@@ -322,9 +327,10 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	m_select_map.set_visible(m_settings->canChangeMap());
 	m_select_map.set_enabled(m_settings->canChangeMap());
 	m_select_save.set_visible
-			(settings.multiplayer & m_settings->canChangeMap());
+		(settings.multiplayer && m_settings->canChangeMap());
 	m_select_save.set_enabled
-			(settings.multiplayer & m_settings->canChangeMap());
+		(settings.multiplayer && m_settings->canChangeMap());
+	m_wincondition.set_enabled(m_settings->canChangeMap());
 
 	if (settings.scenario)
 		set_scenario_values();
@@ -409,11 +415,13 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	}
 
 	// Care about Multiplayer clients, lobby and players
+	// As well as win_conditions (in SP they may only change, if clicked)
 	if (settings.multiplayer) {
 		m_lobby_list->clear();
 		container_iterate_const(std::vector<UserSettings>, settings.users, i)
 			if (i.current->position == UserSettings::none())
 				m_lobby_list->add(i.current->name.c_str(), 0);
+		win_condition_update();
 	}
 }
 

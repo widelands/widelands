@@ -186,6 +186,14 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerNumber(number);
 	}
 
+	virtual std::string getWinCondition() {
+		return h->settings().win_condition;
+	}
+
+	virtual void setWinCondition(std::string wc) {
+		h->setWinCondition(wc);
+	}
+
 private:
 	NetHost * h;
 };
@@ -1003,6 +1011,17 @@ void NetHost::setPlayerNumber(uint8_t const number)
 	setPlayerReady(number, false);
 }
 
+void NetHost::setWinCondition(std::string wc)
+{
+	d->settings.win_condition = wc;
+
+	// Broadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_WIN_CONDITION);
+	s.String(wc);
+	broadcast(s);
+}
+
 void NetHost::setPlayerReady
 	(uint8_t const number, bool const ready)
 {
@@ -1249,6 +1268,11 @@ void NetHost::welcomeClient
 	s.reset();
 	s.Unsigned8(NETCMD_SETTING_ALLUSERS);
 	writeSettingAllUsers(s);
+	s.send(client.sock);
+
+	s.reset();
+	s.Unsigned8(NETCMD_WIN_CONDITION);
+	s.String(d->settings.win_condition);
 	s.send(client.sock);
 
 	// Broadcast new information about the player to everybody
