@@ -1090,6 +1090,12 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_commandline.erase("double");
 	}
 
+	if (m_commandline.count("verbose")) {
+		g_verbose = true;
+
+		m_commandline.erase("verbose");
+	}
+
 	if (m_commandline.count("editor")) {
 		m_filename = m_commandline["editor"];
 		if (m_filename.size() and *m_filename.rbegin() == '/')
@@ -1305,6 +1311,7 @@ void WLApplication::show_usage()
 			 "                      testing)\n\n");
 #endif
 #endif
+	wout << _(" --verbose            Enable verbose debug messages\n") << endl;
 	wout << _(" --help               Show this help\n") << endl;
 	wout
 		<<
