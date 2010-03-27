@@ -121,7 +121,7 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
       ARGS --version
       OUTPUT_VARIABLE WLBUILD_COMPILERVERSION
     )
-    STRING(REGEX REPLACE ".* ([0-9])\\.([0-9])\\.([0-9]) .*" "\\1.\\2.\\3" WLBUILD_COMPILERVERSION_REP ${WLBUILD_COMPILERVERSION})
+    STRING(REGEX REPLACE ".*([0-9])\\.([0-9])\\.([0-9]).*" "\\1.\\2.\\3" WLBUILD_COMPILERVERSION_REP ${WLBUILD_COMPILERVERSION})
     IF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
       message("===== ATTENTION ===================================================")
       message("Your compiler has been identified as GCC 4.3.1 or GCC 4.3.2")
