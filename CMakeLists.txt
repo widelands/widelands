@@ -369,9 +369,9 @@ install(
   COMPONENT DocFiles
   PATTERN "*.svn*" EXCLUDE
   PATTERN "SCons*" EXCLUDE
+  PATTERN "CMakeLists.txt" EXCLUDE
 )
 
-execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale)
 find_package (PythonInterp REQUIRED)
 
 if (WIN32)
