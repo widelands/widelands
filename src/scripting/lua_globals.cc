@@ -118,7 +118,7 @@ static int L_use(lua_State * L) {
 	lua_pop(L, 2);
 
 	try {
-		get_game(L).lua().run_script(ns, script);
+		get_egbase(L).lua().run_script(ns, script);
 	} catch (LuaError & e) {
 		report_error(L, "%s", e.what());
 	}
