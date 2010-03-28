@@ -80,8 +80,7 @@ static int L_set_see_all(lua_State * const l) {
 	:returns: :const:`nil`
 */
 static int L_exit(lua_State * const l) {
-	get_game(l).get_ipl()->end_modal(0);
-
+   get_egbase(l).get_ibase()->end_modal(0);
 	return 0;
 }
 
@@ -89,8 +88,9 @@ static int L_exit(lua_State * const l) {
 .. function:: save(name)
 
 	Saves the game exactly as if the player had entered the save dialog and
-	entered name as an argument. It some error occurred will saving, this will
-	throw an Lua error.
+	entered name as an argument. If some error occurred while saving, this will
+	throw an Lua error. Note that this currently doesn't work when called from
+	inside a Coroutine.
 
 	:arg name: name of save game. If this game already exists, it will be
 		silently overwritten

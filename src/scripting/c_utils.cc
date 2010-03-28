@@ -24,10 +24,17 @@
 #include <iostream>
 
 Widelands::Game & get_game(lua_State * const L) {
-	lua_pushstring(L, "game");
-	lua_gettable(L, LUA_REGISTRYINDEX);
-
+	lua_getfield(L, LUA_REGISTRYINDEX, "game");
 	Widelands::Game * g = static_cast<Widelands::Game *>(lua_touserdata(L, -1));
+	lua_pop(L, 1); // pop this userdata
+
+	return *g;
+}
+
+Widelands::Editor_Game_Base & get_egbase(lua_State * const L) {
+	lua_getfield(L, LUA_REGISTRYINDEX, "egbase");
+	Widelands::Editor_Game_Base * g = static_cast<Widelands::Editor_Game_Base *>
+		(lua_touserdata(L, -1));
 	lua_pop(L, 1); // pop this userdata
 
 	return *g;

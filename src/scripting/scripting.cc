@@ -216,7 +216,9 @@ LuaInterface()
 	luaopen_wlmap(m_L);
 	luaopen_wlgame(m_L);
 
-	// TODO: push editor game base
+	// Push the editor game base
+	lua_pushlightuserdata(m_L, static_cast<void *>(g));
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "egbase");
 }
 
 
