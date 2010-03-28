@@ -75,8 +75,8 @@ uint32_t LuaCoroutine_Impl::write
 	(lua_State * parent, Widelands::FileWrite & fw,
 	 Widelands::Map_Map_Object_Saver & mos)
 {
-	// Push the current numbers of arguments onto the stack
-	lua_pushuint32(m_L, m_nargs);
+	// The current numbers of arguments on the stack
+	fw.Unsigned32(m_nargs);
 
 	// Empty table + object to persist on the stack Stack
 	lua_newtable(parent);
@@ -90,6 +90,9 @@ void LuaCoroutine_Impl::read
 	(lua_State * parent, Widelands::FileRead & fr,
 	 Widelands::Map_Map_Object_Loader & mol, uint32_t size)
 {
+	// The current numbers of arguments on the stack
+	m_nargs = fr.Unsigned32();
+
 	// Empty table + object to persist on the stack Stack
 	unpersist_object(parent, m_persistent_globals, fr, mol, size);
 
@@ -101,9 +104,6 @@ void LuaCoroutine_Impl::read
 	lua_pushthread(m_L);
 	m_idx = luaL_ref(m_L, LUA_REGISTRYINDEX);
 
-	// Pop the current numbers of arguments onto the stack
-	m_nargs = luaL_checkuint32(m_L, -1);
-	lua_pop(m_L, 1);
 }
 
 /*
