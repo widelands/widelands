@@ -453,15 +453,18 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 
 	Map & map = game.map();
 	Area<FCoords> area (map.get_fcoords(get_position()), 0);
-	if (action.sparam1 == "immovable")
+	if (action.sparam1 == "immovable") {
+		bool found_reserved = false;
+
 		for (;; ++area.radius) {
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
-				informPlayer
-					(game,
-					 ref_cast<Building, PlayerImmovable>(*get_location(game)),
-					 Map_Object_Descr::get_attribute_name(action.iparam2));
+				if (!found_reserved)
+					informPlayer
+						(game,
+						 ref_cast<Building, PlayerImmovable>(*get_location(game)),
+						 Map_Object_Descr::get_attribute_name(action.iparam2));
 				return true;
 			}
 			std::vector<ImmovableFound> list;
@@ -472,12 +475,21 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 				map.find_reachable_immovables
 					(area, &list, cstep, FindImmovableAttribute(action.iparam2));
 
+			for (int idx = list.size() - 1; idx >= 0; idx--) {
+				if (upcast(Immovable, imm, list[idx].object)) {
+					if (imm->is_reserved_by_worker()) {
+						found_reserved = true;
+						list.erase(list.begin() + idx);
+					}
+				}
+			}
+
 			if (list.size()) {
-				state.objvar1 = list[game.logic_rand() % list.size()].object;
+				set_program_objvar(game, state, list[game.logic_rand() % list.size()].object);
 				break;
 			}
 		}
-	else
+	} else {
 		for (;; ++area.radius) {
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
@@ -497,10 +509,11 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 					(area, &list, cstep, FindBobAttribute(action.iparam2));
 
 			if (list.size()) {
-				state.objvar1 = list[game.logic_rand() % list.size()];
+				set_program_objvar(game, state, list[game.logic_rand() % list.size()]);
 				break;
 			}
 		}
+	}
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -1701,7 +1714,7 @@ const Bob::Task Worker::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Worker::program_update),
 	0,
-	0,
+	static_cast<Bob::Ptr>(&Worker::program_pop),
 	false
 };
 
@@ -1739,6 +1752,25 @@ void Worker::program_update(Game & game, State & state)
 	}
 }
 
+void Worker::program_pop(Game & game, State & state)
+{
+	set_program_objvar(game, state, 0);
+}
+
+void Worker::set_program_objvar(Game & game, State & state, Map_Object * obj)
+{
+	assert(state.task == &taskProgram);
+
+	if (upcast(Immovable, imm, state.objvar1.get(game))) {
+		imm->set_reserved_by_worker(false);
+	}
+
+	state.objvar1 = obj;
+
+	if (upcast(Immovable, imm, obj)) {
+		imm->set_reserved_by_worker(true);
+	}
+}
 
 const Bob::Task Worker::taskGowarehouse = {
 	"gowarehouse",
