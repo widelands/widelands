@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-03-25 18:43+0000\n"
+"PO-Revision-Date: 2010-03-27 15:15+0000\n"
 "Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-03-28 03:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -496,7 +496,7 @@ msgstr "Byggkostnad"
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "%ss byggarbetsplats"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
@@ -505,7 +505,7 @@ msgstr "Utökningar"
 #: ../../src/writeHTML.cc:462
 #, c-format
 msgid "%s's enhancement"
-msgstr ""
+msgstr "%ss förbättring"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
@@ -562,7 +562,7 @@ msgstr "Undvikande är %u, plus %u för varje grad över 0 (högsta grad är %u)
 #: ../../src/writeHTML.cc:671 ../../src/writeHTML.cc:682
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "%ss tillkomst"
 
 #: ../../src/writeHTML.cc:693
 msgid "Spawns in warehouses."
@@ -577,7 +577,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:710
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "%ss befordran"
 
 #: ../../src/writeHTML.cc:721 ../../src/writeHTML.cc:866
 msgid "Programs"
@@ -667,7 +667,7 @@ msgstr "Arbetare"
 #: ../../src/writeHTML.cc:797
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "%ss anställd"
 
 #: ../../src/writeHTML.cc:807
 msgid "Inputs"
@@ -676,7 +676,7 @@ msgstr "Insatsvaror"
 #: ../../src/writeHTML.cc:818
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "%ss råvara"
 
 #: ../../src/writeHTML.cc:830
 msgid "Output"
@@ -685,7 +685,7 @@ msgstr "Alster"
 #: ../../src/writeHTML.cc:841 ../../src/writeHTML.cc:855
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "%ss produktion"
 
 #: ../../src/writeHTML.cc:902 ../../src/writeHTML.cc:1045
 #: ../../src/writeHTML.cc:1107 ../../src/writeHTML.cc:1135
@@ -2338,7 +2338,7 @@ msgstr "soldatslag"
 #: ../../src/logic/production_program.cc:1162
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
-msgstr ""
+msgstr "väntade {\"hp\"|\"attack\"|\"defense\"|\"evade\"} men fann \"%s\""
 
 #: ../../src/logic/production_program.cc:1171
 #: ../../src/logic/production_program.cc:1239
