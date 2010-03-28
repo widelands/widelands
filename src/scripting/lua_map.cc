@@ -905,9 +905,7 @@ BaseImmovable
 
 	Child of: :class:`MapObject`
 
-	This is the base class for all Objects in widelands, including immovables
-	and Bobs. This class can't be instantiated directly, but provides the base
-	for all others.
+	This is the base class for all Immovables in widelands.
 */
 const char L_BaseImmovable::className[] = "BaseImmovable";
 const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {

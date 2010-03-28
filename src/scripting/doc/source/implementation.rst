@@ -19,12 +19,12 @@ of the two classes LuaInterface for running scripts and LuaCouroutine which
 wraps a Lua coroutine. The Lua interface is accessed via the lua() function in
 Editor_Game_Base. 
 
-There are two game commands for lua: ``Cmd_Lua`` and ``Cmd_LuaCoroutine``. The
-first one is only used to enqueue the initial running of the initialization
-scripts in maps (and later on also for win conditions). These scripts are
-responsible to start coroutines -- everything from then on is handled via the
-second packet: ``Cmd_LuaCoroutine``. 
-When a coroutine yields, it is expected to return the time when it wants to be
+There are two game commands for lua: ``Cmd_LuaScript`` and
+``Cmd_LuaCoroutine``. The first one is only used to enqueue the initial
+running of the initialization scripts in maps (and later on also for win
+conditions). These scripts are responsible to start coroutines -- everything
+from then on is handled via the second packet: ``Cmd_LuaCoroutine``. When a
+coroutine yields, it is expected to return the time when it wants to be
 reawakened. Widelands wraps this coroutine in a LuaCoroutine object and
 enqueues a ``Cmd_LuaCoroutine`` to awake and continue the execution of the
 coroutine. When a coroutine ends, it is deleted and Widelands forgets about

@@ -104,7 +104,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool has_pending_item(Game &, Flag & destflag);
 	bool ack_pending_item(Game &, Flag & destflag);
 	WareInstance * fetch_pending_item(Game &, PlayerImmovable & dest);
-	const Wares	get_items();
+	Wares	get_items();
 
 	void call_carrier(Game &, WareInstance &, PlayerImmovable * nextstep);
 	void update_items(Game &, Flag * other);

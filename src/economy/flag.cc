@@ -446,7 +446,7 @@ WareInstance * Flag::fetch_pending_item(Game & game, PlayerImmovable & dest)
  * Return a List of all the wares currently on this Flag. Do not rely
  * the result value to stay valid and do not change them
  */
-const Flag::Wares Flag::get_items() {
+Flag::Wares Flag::get_items() {
 	Wares rv;
 
 	for (int32_t i = 0; i < m_item_filled; ++i)

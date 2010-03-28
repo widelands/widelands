@@ -642,7 +642,7 @@ WareList const & Warehouse::get_workers() const
 	return m_supply->get_workers();
 }
 
-const std::vector<const Soldier *> Warehouse::get_soldiers
+std::vector<const Soldier *> Warehouse::get_soldiers
 	(Editor_Game_Base & egbase) const
 {
 	std::vector<const Soldier *> rv;

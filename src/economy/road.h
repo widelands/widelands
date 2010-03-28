@@ -40,12 +40,10 @@ struct Request;
  * exceptions: placement of carriers if the path's length is odd, splitting
  * a road when a flag is inserted.
  *
- * Every road has one or more Carriers attached to it.
- *
- * All Workers on the Road are attached via add_worker()/remove_worker() in
- * PlayerImmovable.
- * I do not think the last sentence is correct. I added a assign_carrier
- * function to properly add a carrier to a road. * SirVer
+ * Every road has one or more Carriers attached to it. Carriers are attached
+ * when they arrive via the callback function passed to the request. The
+ * callback then calls assign_carrier which incorporates this carrier on this
+ * road.
  */
 struct Road : public PlayerImmovable {
 	friend struct Map_Roaddata_Data_Packet; // For saving

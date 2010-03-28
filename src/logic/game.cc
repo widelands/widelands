@@ -23,7 +23,7 @@
 #include "game.h"
 
 #include "carrier.h"
-#include "cmd_lua.h"
+#include "cmd_luascript.h"
 #include "computer_player.h"
 #include "economy/economy.h"
 #include "findimmovable.h"
@@ -481,7 +481,7 @@ bool Game::run
 		}
 
 		// Run the init script, if the map provides one.
-		enqueue_command(new Cmd_Lua(get_gametime(), "map", "init", true));
+		enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
 	}
 
 	if (m_writereplay) {

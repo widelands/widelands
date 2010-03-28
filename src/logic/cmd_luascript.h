@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_LUA_H
-#define CMD_LUA_H
+#ifndef CMD_LUASCRIPT_H
+#define CMD_LUASCRIPT_H
 
 #include <string>
 
@@ -26,30 +26,26 @@
 
 namespace Widelands {
 
-struct Cmd_Lua : public GameLogicCommand {
-	Cmd_Lua() : GameLogicCommand(0) {} // For savegame loading
-	Cmd_Lua
-		(int32_t const _duetime, std::string ns, std::string script,
-		 bool optional) :
-		GameLogicCommand(_duetime), m_ns(ns),
-		m_script(script), m_optional(optional)
-	{}
+struct Cmd_LuaScript : public GameLogicCommand {
+	Cmd_LuaScript() : GameLogicCommand(0) {} // For savegame loading
+	Cmd_LuaScript
+		(int32_t const _duetime, std::string ns, std::string script) :
+		GameLogicCommand(_duetime), m_ns(ns), m_script(script) {}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual uint8_t id() const {return QUEUE_CMD_LUA;}
+	virtual uint8_t id() const {return QUEUE_CMD_LUASCRIPT;}
 
 	virtual void execute(Game &);
 
 private:
 	std::string m_ns;
 	std::string m_script;
-	bool m_optional;
 };
 
 }
 
-#endif /* end of include guard: CMD_LUA_H */
+#endif /* end of include guard: CMD_LUASCRIPT_H */
 

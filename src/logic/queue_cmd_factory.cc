@@ -20,7 +20,7 @@
 #include "queue_cmd_factory.h"
 
 #include "cmd_incorporate.h"
-#include "cmd_lua.h"
+#include "cmd_luascript.h"
 #include "cmd_luacoroutine.h"
 #include "economy/cmd_call_economy_balance.h"
 #include "instances.h"
@@ -76,8 +76,8 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_Act                  ();
 	case QUEUE_CMD_INCORPORATE:
 		return *new Cmd_Incorporate          ();
-	case QUEUE_CMD_LUA:
-		return *new Cmd_Lua      ();
+	case QUEUE_CMD_LUASCRIPT:
+		return *new Cmd_LuaScript();
 	case QUEUE_CMD_LUACOROUTINE:
 		return *new Cmd_LuaCoroutine ();
 	case QUEUE_CMD_CALL_ECONOMY_BALANCE:
