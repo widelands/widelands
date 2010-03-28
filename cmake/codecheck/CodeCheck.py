@@ -328,7 +328,7 @@ if __name__ == '__main__':
     def check_files(files,color,benchmark):
         d = CodeChecker( benchmark = benchmark, color = color )
         for filename in files:
-            print "Checking %s ..." % filename
+#            print "Checking %s ..." % filename
             errors = d.check_file(filename)
         
         # Print benchmark results
