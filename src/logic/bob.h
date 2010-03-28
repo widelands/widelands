@@ -323,10 +323,16 @@ struct Bob : public Map_Object {
 	bool is_walking() {return m_walking != IDLE;}
 
 
+	/**
+	 * This is a hack that should not be used, if possible.
+	 * It is only introduced here because profiling showed
+	 * that soldiers spend a lot of time in the node blocked check.
+	 */
+	Bob * get_next_on_field() const {return m_linknext;}
+
 protected:
 	Bob(const Descr & descr);
 	virtual ~Bob();
-
 
 private:
 	void do_act(Game &);

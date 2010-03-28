@@ -690,10 +690,6 @@ bool Bob::start_task_movepath
 void Bob::movepath_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
-		if (serial() == 3755)
-			molog
-				("[movepath_update] signal '%s'; popping task\n",
-				 get_signal().c_str());
 		return pop_task(game);
 	}
 
