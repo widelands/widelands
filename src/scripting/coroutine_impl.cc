@@ -71,10 +71,14 @@ void LuaCoroutine_Impl::push_arg(const Widelands::Player * plr) {
 static const char * m_persistent_globals[] = {
 	"coroutine.yield", 0,
 };
+
+#define COROUTINE_DATA_PACKET_VERSION 1
 uint32_t LuaCoroutine_Impl::write
 	(lua_State * parent, Widelands::FileWrite & fw,
 	 Widelands::Map_Map_Object_Saver & mos)
 {
+	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
+
 	// The current numbers of arguments on the stack
 	fw.Unsigned32(m_nargs);
 
@@ -90,6 +94,11 @@ void LuaCoroutine_Impl::read
 	(lua_State * parent, Widelands::FileRead & fr,
 	 Widelands::Map_Map_Object_Loader & mol, uint32_t size)
 {
+	uint8_t version = fr.Unsigned8();
+
+	if(version != COROUTINE_DATA_PACKET_VERSION)
+		throw wexception("Unknown data packet version: %i\n", version);
+
 	// The current numbers of arguments on the stack
 	m_nargs = fr.Unsigned32();
 
