@@ -11,6 +11,6 @@ rv = lunit:run()
 if rv == 0 then -- No errors in the testsuite. Exit the game
    wl.debug.exit()
 else
-   wl.debug.set_see_all(1) -- Reveal everything, easier for debugging
+   wl.game.Player(1).see_all = true -- Reveal everything, easier for debugging
 end
 

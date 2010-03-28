@@ -9,7 +9,6 @@
 -- there are individual fields which are used only for these tests here, so
 -- this bleeding doesn't matter.
 player_tests = lunit.TestCase("Player tests sizes")
-
 function player_tests:test_tribe_property()
    assert_equal("barbarians", wl.game.Player(1).tribe)
    assert_equal("empire", wl.game.Player(2).tribe)
@@ -81,6 +80,60 @@ function player_tests:test_force_building_illegal_name()
       wl.game.Player(1):place_building("kjhsfjkh", wl.map.Field(10,10))
    end)
 end
+
+
+-- =======================================================================
+--                          See Fields/Hide Fields                          
+-- =======================================================================
+player_vision_tests = lunit.TestCase("Player tests sizes")
+function player_vision_tests:setup()
+   self.f = wl.map.Field(50, 20)
+   self.p = wl.game.Player(1)
+   self.p.see_all = false
+end
+function player_vision_tests:teardown()
+   self.p:hide_fields(self.f:region(1))
+   self.p.see_all = false
+end
+-- This test must appear as the very first
+function player_vision_tests:test_seen_field()
+   assert_equal(false, self.p:sees_field(self.f))
+   assert_equal(false, self.p:seen_field(self.f))
+   self.p:reveal_fields(self.f:region(1))
+   self.p:hide_fields(self.f:region(1))
+   assert_equal(false, self.p:sees_field(self.f))
+   assert_equal(true, self.p:seen_field(self.f))
+end
+
+function player_vision_tests:test_sees_field()
+   assert_equal(false, self.p:sees_field(self.f))
+   self.p:reveal_fields(self.f:region(1))
+   assert_equal(true, self.p:sees_field(self.f))
+   self.p:hide_fields(self.f:region(1))
+   assert_equal(false, self.p:sees_field(self.f))
+end
+function player_vision_tests:test_see_all()
+   assert_equal(false, self.p:sees_field(self.f))
+   self.p.see_all = true
+   assert_equal(true, self.p.see_all)
+   assert_equal(true, self.p:sees_field(self.f))
+   self.p.see_all = false
+   assert_equal(false, self.p:sees_field(self.f))
+end
+function player_vision_tests:test_sees_field_see_all_hide()
+   self.p.see_all = true
+   assert_equal(true, self.p:sees_field(self.f))
+   self.p:hide_fields(f:region(1))
+   assert_equal(true, self.p:sees_field(self.f))
+   self.p.see_all = false
+   assert_equal(false, self.p:sees_field(self.f))
+
+   self.p:reveal_fields(self.f:region(1))
+   assert_equal(true, self.p:sees_field(self.f))
+   self.p.see_all = false
+   assert_equal(true, self.p:sees_field(self.f))
+end
+ 
 
 -- =========================
 -- Forbid & Allow buildings 
@@ -170,6 +223,8 @@ function player_building_access:test_access()
    b1:remove()
    assert_equal(1, #self.p:get_buildings("lumberjacks_hut")) 
 end
+
+
 
 
 use("map", "test_objectives")

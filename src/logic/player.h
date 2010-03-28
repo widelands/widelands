@@ -329,7 +329,9 @@ struct Player :
 	const Field * fields() const throw () {return m_fields;}
 
 	// See area
-	Vision vision(Map_Index const i) const throw () {return m_fields[i].vision;}
+	Vision vision(Map_Index const i) const throw () {
+		return m_see_all + m_fields[i].vision;
+	}
 
 	bool has_view_changed() {
 		bool t = m_view_changed;
@@ -339,22 +341,21 @@ struct Player :
 
 	/**
 	 * Update this player's information about this node and the surrounding
-	 * triangles and edges. If lasting is true, the vision is incremented so that
-	 * the node remains seen at least until a corresponding call to unsee_node is
-	 * made.
+	 * triangles and edges.
 	 */
 	void see_node
 		(const Map                  &,
 		 const Widelands::Field & first_map_field,
 		 const FCoords,
-		 const Time,
-		 const bool                   lasting = true)
+		 const Time)
 		throw ();
 
 	/// Decrement this player's vision for a node.
 	void unsee_node(Map_Index const i, Time const gametime) throw () {
 		Field & field = m_fields[i];
-		assert(1 < field.vision);
+		if(field.vision <= 1) // Already doesn't see this
+			return;
+
 		--field.vision;
 		if (field.vision == 1)
 			field.time_node_last_unseen = gametime;
@@ -362,14 +363,14 @@ struct Player :
 	}
 
 	/// Call see_node for each node in the area.
-	void see_area(const Area<FCoords> area, const bool lasting = true)
+	void see_area(const Area<FCoords> area)
 		throw ()
 	{
 		const Time gametime = egbase().get_gametime();
 		const Map & map = egbase().map();
 		const Widelands::Field & first_map_field = map[0];
 		MapRegion<Area<FCoords> > mr(map, area);
-		do see_node(map, first_map_field, mr.location(), gametime, lasting);
+		do see_node(map, first_map_field, mr.location(), gametime);
 		while (mr.advance(map));
 		m_view_changed = true;
 	}

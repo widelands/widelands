@@ -233,9 +233,6 @@ m_toggle_help
 	addCommand
 		("switchplayer",
 		 boost::bind(&Interactive_Player::cmdSwitchPlayer, this, _1));
-	addCommand
-		("toggleSeeAll",
-		 boost::bind(&Interactive_Player::cmdToggleSeeAll, this, _1));
 #endif
 }
 
@@ -522,15 +519,5 @@ void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
 		ref_cast<Building_Statistics_Menu, UI::UniqueWindow>
 			(*building_statistics_window)
 			.update();
-}
-
-void Interactive_Player::cmdToggleSeeAll(std::vector<std::string> const & args)
-{
-	if (args.size() != 1) {
-		DebugConsole::write("Usage: toggleSeeAll (without any arguments)");
-		return;
-	}
-
-	player().set_see_all(not player().see_all());
 }
 

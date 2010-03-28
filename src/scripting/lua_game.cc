@@ -116,6 +116,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RW(L_Player, changing_retreat_percentage_allowed),
 	PROP_RO(L_Player, inbox),
 	PROP_RO(L_Player, tribe),
+	PROP_RW(L_Player, see_all),
 	{0, 0, 0},
 };
 
@@ -339,6 +340,23 @@ int L_Player::get_tribe(lua_State *L) {
 	lua_pushstring(L, get(L, get_game(L)).tribe().name());
 	return 1;
 }
+
+
+/* RST
+.. attribute:: see_all
+
+	(RW) If you set this to true, the map will be completely visible for this
+	player.
+*/
+int L_Player::set_see_all(lua_State * const L) {
+	get(L, get_game(L)).set_see_all(luaL_checkboolean(L, -1));
+	return 0;
+}
+int L_Player::get_see_all(lua_State * const L) {
+	lua_pushboolean(L, get(L, get_game(L)).see_all());
+	return 1;
+}
+
 
 /*
  ==========================================================
@@ -646,12 +664,13 @@ int L_Player::conquer(lua_State * L) {
 		:returns: :const:`true` or :const:`false`
 		:rtype: :class:`bool`
 */
-// UNTESTED
 int L_Player::sees_field(lua_State * L) {
 	Game & game = get_game(L);
 
 	Widelands::Map_Index const i =
 		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &game.map()[0];
+
+	log("Vision: %i\n", get(L, game).vision(i));
 
 	lua_pushboolean(L, get(L, game).vision(i) > 1);
 	return 1;
@@ -666,7 +685,6 @@ int L_Player::sees_field(lua_State * L) {
 		:returns: :const:`true` or :const:`false`
 		:rtype: :class:`bool`
 */
-// UNTESTED
 int L_Player::seen_field(lua_State * L) {
 	Game & game = get_game(L);
 
@@ -766,7 +784,6 @@ int L_Player::add_objective(lua_State * L) {
 
 		:returns: :const:`nil`
 */
-// UNTESTED
 int L_Player::reveal_fields(lua_State * L) {
 	Game & g = get_game(L);
 	Player & p = get(L, g);
@@ -796,7 +813,6 @@ int L_Player::reveal_fields(lua_State * L) {
 
 		:returns: :const:`nil`
 */
-// UNTESTED
 int L_Player::hide_fields(lua_State * L) {
 	Game & g = get_game(L);
 	Player & p = get(L, g);

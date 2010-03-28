@@ -51,25 +51,6 @@ builds).
  * ========================================================================
  */
 /* RST
-.. function:: set_see_all(b)
-
-	Toggles the set see all flag for the interactive player (the human
-	player). This will either completely hide the map or completely uncover
-	it.
-
-	:arg b: either :const:`true` (reveal) or :const:`false` (hide) the map
-	:type b: :class:`boolean`
-	:returns: :const:`nil`
-*/
-static int L_set_see_all(lua_State * const l) {
-	bool const bval = luaL_checkboolean(l, 1);
-
-	get_game(l).get_ipl()->player().set_see_all(bval);
-
-	return 0;
-}
-
-/* RST
 .. function:: exit
 
 	Immediately exits the current game, this is equivalent to the user
@@ -116,7 +97,6 @@ static int L_save(lua_State * const L) {
 }
 
 const static struct luaL_reg wldebug [] = {
-	{"set_see_all", &L_set_see_all},
 	{"exit", &L_exit},
 	{"save", &L_save},
 	{0, 0}
