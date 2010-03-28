@@ -197,13 +197,38 @@ void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 
 /*
  * ===========================
+ * LuaEditorInterface
+ * ===========================
+ */
+struct LuaEditorInterface_Impl : public LuaInterface_Impl 
+{
+	LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g);
+	virtual ~LuaEditorInterface_Impl() {}
+};
+// TODO: replace get_game via get_egbase and adapt accordingly.
+
+LuaEditorInterface_Impl::LuaEditorInterface_Impl
+	(Widelands::Editor_Game_Base * g) :
+LuaInterface()
+{
+	// Load the remaining libs that are important for the game
+	luaopen_wldebug(m_L);
+	luaopen_wlmap(m_L);
+	luaopen_wlgame(m_L);
+
+	// TODO: push editor game base
+}
+
+
+/*
+ * ===========================
  * LuaGameInterface
  * ===========================
  */
-struct LuaGameInterface_Impl : public LuaInterface_Impl,
+struct LuaGameInterface_Impl : public LuaEditorInterface_Impl,
 	public virtual LuaGameInterface
 {
-	LuaGameInterface_Impl(Widelands::Editor_Game_Base * g);
+	LuaGameInterface_Impl(Widelands::Game * g);
 	virtual ~LuaGameInterface_Impl() {}
 
 	virtual void make_starting_conditions(uint8_t, std::string);
@@ -267,19 +292,14 @@ static int L_math_random(lua_State * L) {
 
 }
 
-LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Editor_Game_Base * g) :
-	LuaInterface_Impl()
+LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
+	LuaEditorInterface_Impl(g)
 {
 	// Overwrite math.random
 	lua_getglobal(m_L, "math");
 	lua_pushcfunction(m_L, L_math_random);
 	lua_setfield(m_L, -2, "random");
 	lua_pop(m_L, 1); // pop "math"
-
-	// Load the remaining libs that are important for the game
-	luaopen_wldebug(m_L);
-	luaopen_wlmap(m_L);
-	luaopen_wlgame(m_L);
 
 	// Push the game onto the stack
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));
@@ -392,12 +412,12 @@ void LuaGameInterface_Impl::make_starting_conditions
  *
  * "game": load all libraries needed for the game to run properly
  */
-LuaGameInterface* create_LuaGameInterface(Widelands::Editor_Game_Base * g) {
+LuaGameInterface* create_LuaGameInterface(Widelands::Game * g) {
 	return new LuaGameInterface_Impl(g);
 }
-// LuaGameInterface* create_LuaEditorInterface(Widelands::Editor_Game_Base * g) {
-//         return new LuaEditorInterface_Impl(g);
-// }
+LuaInterface* create_LuaEditorInterface(Widelands::Editor_Game_Base * g) {
+        return new LuaEditorInterface_Impl(g);
+}
 LuaInterface* create_LuaInterface() {
 	return new LuaInterface_Impl();
 }

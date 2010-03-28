@@ -100,7 +100,8 @@ struct LuaGameInterface : public virtual LuaInterface {
 		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&) = 0;
 };
 
-LuaGameInterface* create_LuaGameInterface(Widelands::Editor_Game_Base*);
+LuaGameInterface* create_LuaGameInterface(Widelands::Game *);
+LuaInterface* create_LuaEditorInterface(Widelands::Editor_Game_Base *);
 LuaInterface* create_LuaInterface();
 
 #endif
