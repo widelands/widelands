@@ -117,6 +117,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 
 Game::Game() :
+	Editor_Game_Base(create_LuaGameInterface(this)),
 	m_syncwrapper      (*this, m_synchash),
 	m_ctrl             (0),
 	m_writereplay      (true),

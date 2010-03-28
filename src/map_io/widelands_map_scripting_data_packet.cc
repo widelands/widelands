@@ -19,11 +19,13 @@
 
 
 #include "logic/editor_game_base.h"
+#include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/world.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "upcast.h"
 
 #include "widelands_map_scripting_data_packet.h"
 
@@ -48,10 +50,13 @@ throw (_wexception)
 	}
 
 	// Always try to load the global State: even in a normal game, some lua
-	// coroutines could run.
+	// coroutines could run. But make sure that this is really a game, other
+	// wise this makes no sense.
+	upcast(Game, g, &egbase);
 	Widelands::FileRead fr;
-	if (fr.TryOpen(fs, "scripting/globals.dump")) {
-		egbase.lua().read_global_env(fr, mol, fr.Unsigned32());
+	if (g and fr.TryOpen(fs, "scripting/globals.dump")) {
+		upcast(LuaGameInterface, lgi, &g->lua());
+		lgi->read_global_env(fr, mol, fr.Unsigned32());
 	}
 }
 
@@ -72,15 +77,19 @@ throw (_wexception)
 		fs.Write(fname, i->second.c_str(), i->second.size());
 	}
 
-	// Dump the global environment
-	Widelands::FileWrite fw;
-	Widelands::FileWrite::Pos pos = fw.GetPos();
-	fw.Unsigned32(0); // N bytes written, follows below
+	// Dump the global environment if this is a game and not in the editor
+	if (upcast(Game, g, &egbase)) {
 
-	uint32_t nwritten = Little32(egbase.lua().write_global_env(fw, mos));
-	fw.Data(&nwritten, 4, pos);
+		Widelands::FileWrite fw;
+		Widelands::FileWrite::Pos pos = fw.GetPos();
+		fw.Unsigned32(0); // N bytes written, follows below
 
-	fw.Write(fs, "scripting/globals.dump");
+		upcast(LuaGameInterface, lgi, &g->lua());
+		uint32_t nwritten = Little32(lgi->write_global_env(fw, mos));
+		fw.Data(&nwritten, 4, pos);
+
+		fw.Write(fs, "scripting/globals.dump");
+	}
 }
 
 }

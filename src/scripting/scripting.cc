@@ -395,6 +395,9 @@ void LuaGameInterface_Impl::make_starting_conditions
 LuaGameInterface* create_LuaGameInterface(Widelands::Editor_Game_Base * g) {
 	return new LuaGameInterface_Impl(g);
 }
+// LuaGameInterface* create_LuaEditorInterface(Widelands::Editor_Game_Base * g) {
+//         return new LuaEditorInterface_Impl(g);
+// }
 LuaInterface* create_LuaInterface() {
 	return new LuaInterface_Impl();
 }

@@ -22,6 +22,7 @@
 #include "game.h"
 #include "game_data_error.h"
 #include "scripting/scripting.h"
+#include "upcast.h"
 
 namespace Widelands {
 
@@ -48,7 +49,12 @@ void Cmd_LuaCoroutine::Read
 		if (packet_version == CMD_LUACOROUTINE_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 
-			m_cr = egbase.lua().read_coroutine(fr, mol, fr.Unsigned32());
+			// This function is only called when saving/loading savegames. So save
+			// to cast here
+			upcast(LuaGameInterface, lgi, &egbase.lua());
+			assert(lgi); // If this is not true, this is not a game.
+
+			m_cr = lgi->read_coroutine(fr, mol, fr.Unsigned32());
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -65,7 +71,12 @@ void Cmd_LuaCoroutine::Write
 	FileWrite::Pos p = fw.GetPos();
 	fw.Unsigned32(0); // N bytes written, follows below
 
-	uint32_t nwritten = Little32(egbase.lua().write_coroutine(fw, mos, m_cr));
+	// This function is only called when saving/loading savegames. So save
+	// to cast here
+	upcast(LuaGameInterface, lgi, &egbase.lua());
+	assert(lgi); // If this is not true, this is not a game.
+
+	uint32_t nwritten = Little32(lgi->write_coroutine(fw, mos, m_cr));
 	fw.Data(&nwritten, 4, p);
 }
 

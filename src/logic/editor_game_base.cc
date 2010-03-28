@@ -106,14 +106,17 @@ Editor_Game_Base::Editor_Game_Base()
 initialization
 ============
 */
-Editor_Game_Base::Editor_Game_Base() :
+Editor_Game_Base::Editor_Game_Base(LuaInterface * lua) :
 m_gametime          (0),
+m_lua               (lua),
 m_ibase             (0),
 m_map               (0),
 m_lasttrackserial   (0)
 {
+	if (not m_lua)
+		m_lua = create_LuaGameInterface(this);
+
 	memset(m_players, 0, sizeof(m_players));
-	m_lua = create_LuaGameInterface(this);
 }
 
 

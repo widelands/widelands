@@ -26,6 +26,7 @@
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "tools/editor_delete_immovable_tool.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -529,7 +530,7 @@ void Editor_Interactive::change_world() {
  */
 void Editor_Interactive::run_editor(std::string const & filename)
 {
-	Widelands::Editor_Game_Base editor;
+	Widelands::Editor_Game_Base editor(0);
 	Editor_Interactive eia(editor);
 	editor.set_ibase(&eia); //  TODO get rid of this
 	{

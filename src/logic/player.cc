@@ -103,8 +103,8 @@ void Player::create_default_infrastructure() {
 				tribe().initialization(m_initialization_index);
 
 			Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
-			game.lua().make_starting_conditions(player_number(),
-					initialization.name);
+			dynamic_cast<LuaGameInterface &>(game.lua()).
+				make_starting_conditions(player_number(), initialization.name);
 		} catch (Tribe_Descr::Nonexistent) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "
