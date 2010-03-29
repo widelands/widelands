@@ -61,8 +61,8 @@ return=skipped
 
 [idle]
 pics=armoursmith_i_??.png
-hotspot=68 56
+hotspot=53 55
 
 [working]
 pics=armoursmith_i_??.png
-hotspot=68 56
+hotspot=53 55
