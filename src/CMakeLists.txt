@@ -23,7 +23,7 @@ IF (WIN32)
 	ENDIF (MINGW)
 endif (WIN32)
 
-file(GLOB_RECURSE WL_SRCS_ALL *.cc)
+file(GLOB_RECURSE WL_SRCS_ALL *.cc;*.h)
 
 file(GLOB WL_MAIN_SRCS *.cc)
 add_library(widelands_main ${WL_MAIN_SRCS})
@@ -42,11 +42,11 @@ foreach (sourcefile ${WL_SRCS_ALL})
 endforeach (sourcefile ${WL_SRCS_ALL})
 
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
-set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/*_codecheck_stamp_)
-
-add_custom_target (codecheck ALL)
+set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
+  add_custom_target (codecheck ALL)
+
   foreach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
     string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" sourcewithoutpath ${sourcefile})
     string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcewithoutpath})
@@ -54,7 +54,7 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
       string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
     endif (WIN32)
     get_filename_component(sourcename ${sourcefile} NAME) 
-    set(stamp ${sourcenoslash}_codecheck_stamp_)
+    set(stamp ${sourcenoslash}_)
     set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
     add_custom_command(
       OUTPUT codecheck-stamps/${stamp}
