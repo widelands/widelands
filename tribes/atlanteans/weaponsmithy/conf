@@ -90,7 +90,9 @@ return=skipped
 [idle]
 pics=weaponsmith_i_??.png  # ???
 hotspot=52 63
+playercolor=true
 
 [working]
 pics=weaponsmith_i_??.png  # ???
 hotspot=52 63
+playercolor=true
