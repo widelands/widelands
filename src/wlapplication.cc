@@ -1720,7 +1720,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		return (!s.scenario & (number != s.playernum));
 	}
 	virtual bool canChangePlayerTribe(uint8_t) {return !s.scenario;}
-	virtual bool canChangePlayerInit (uint8_t) {return true;}
+	virtual bool canChangePlayerInit (uint8_t) {return !s.scenario;}
 
 	virtual bool canLaunch() {
 		return s.mapname.size() != 0 && s.players.size() >= 1;
