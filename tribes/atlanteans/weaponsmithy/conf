@@ -89,8 +89,8 @@ return=skipped
 
 [idle]
 pics=weaponsmith_i_??.png  # ???
-hotspot=55 80
+hotspot=52 63
 
 [working]
 pics=weaponsmith_i_??.png  # ???
-hotspot=55 80
+hotspot=52 63
