@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-03-25 18:56+0000\n"
+"PO-Revision-Date: 2010-03-28 09:21+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-03-29 03:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/logic/worker.cc:1652
@@ -1282,6 +1282,7 @@ msgstr "Pole ataku"
 msgid ""
 "Gives ownership of all unowned locations within an area to the player."
 msgstr ""
+"Oddaje własność wszystkich bezpańskich lokacji na danym obszarze graczowi."
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
@@ -1377,16 +1378,20 @@ msgid ""
 "Gives vision for a specified amount of time of all locations within an area "
 "to the player."
 msgstr ""
+"Pokazuje na określoną ilość czasu wszystkie lokacje na danym obszarze "
+"graczowi."
 
 #: ../../src/events/event_factory.cc:153
 msgid "Set player's frontier style"
-msgstr ""
+msgstr "Ustala wygląd granicy"
 
 #: ../../src/events/event_factory.cc:155
 msgid ""
 "Sets the style of the player's frontier markers to one of the styles that "
 "are defined in the player's tribe."
 msgstr ""
+"Ustala wygląd granicznych słupków do jednego z modelów określonych w "
+"plemieniu gracza."
 
 #: ../../src/events/event_factory.cc:160
 msgid "Set player's flag style"
@@ -1397,6 +1402,7 @@ msgid ""
 "Sets the style of the player's flags to one of the styles that are defined "
 "in the player's tribe."
 msgstr ""
+"Ustala wygląd flag do jednego z modelów określonych w plemieniu gracza."
 
 #: ../../src/events/event_factory.cc:167
 msgid "Allows retreat value customization"
@@ -1437,11 +1443,11 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:188
 msgid "Set see all mode for a player"
-msgstr ""
+msgstr "Ustala tryb widź wszystko graczowi"
 
 #: ../../src/events/event_factory.cc:189
 msgid "Sets the see all mode for a specific player to on/off."
-msgstr ""
+msgstr "Ustala tryb widź wszystko danemu graczu."
 
 #: ../../src/events/event_factory.cc:193
 msgid "Creates a message for a player"
@@ -1452,6 +1458,8 @@ msgid ""
 "Creates a message for a player. This message can last forever, during a "
 "specified duration, or until a special event is run."
 msgstr ""
+"Tworzy wiadomość dla gracza. Wiadomość może istnieć na zawsze, daną ilość "
+"czasu, lub do czasu kiedy wybrane zdarzenie jest uruchomione."
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
@@ -1490,7 +1498,7 @@ msgstr "(zdarzenie lua): %s"
 #: ../../src/events/event_message.cc:67
 #, c-format
 msgid "expire: \"%s\" is not an expire message event"
-msgstr ""
+msgstr "upływa: \"%s\" nie jest zdarzeniem upłynięcia wiadomości"
 
 #: ../../src/events/event_message.cc:72
 #, c-format
@@ -1499,11 +1507,16 @@ msgid ""
 "meaning forever, which is the default; omit the duration key to make the "
 "message exist forever"
 msgstr ""
+"czas trwania: wartość %u nie jest dozwolona jako czas trwania; jest to "
+"specjalna wartość oznaczająca na zawsze, co jest domyślne; pomiń klucz "
+"trwania aby wiadomość istniała na zawsze"
 
 #: ../../src/events/event_message.cc:103
 #, c-format
 msgid "status_change: \"%s\" is not a message_is_read_or_archived trigger"
 msgstr ""
+"zmiana_statusu: \"%s\" nie jest wyzwalaczem "
+"wiadomość_jest_przeczytana_lub_archiwizowana"
 
 #: ../../src/events/event_message_box.cc:41
 msgid "No text defined"
@@ -1525,7 +1538,7 @@ msgstr "nie ma przycisków, przynajmniej jeden jest wymagany"
 #: ../../src/events/event_message_box.cc:149
 #, c-format
 msgid "is not modal although %s=%s"
-msgstr ""
+msgstr "nie jest modalny i gdyż %s=%s"
 
 #: ../../src/events/event_message_box.cc:154
 #, c-format
@@ -1535,7 +1548,7 @@ msgstr "%s odwołuje się od \"%s\", który/a nie jest licznikiem czasu"
 #: ../../src/events/event_message_box.cc:169
 #, c-format
 msgid "(message box): %s"
-msgstr ""
+msgstr "(okienko wiadomości): %s"
 
 #: ../../src/events/event_move_view.cc:50
 #: ../../src/events/event_player_area.cc:55
@@ -1546,7 +1559,7 @@ msgstr "błędne współrzędne (%i, %i)"
 #: ../../src/events/event_move_view.cc:56
 #, c-format
 msgid "(move view): %s"
-msgstr ""
+msgstr "(przesuń widok): %s"
 
 #: ../../src/events/event_player_allowed_retreat_change.cc:45
 #: ../../src/events/event_player_retreat_change.cc:45
@@ -3992,7 +4005,7 @@ msgstr "Następny"
 #: ../../src/wui/building_ui.cc:159
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr ""
+msgstr "Na pewno chcesz zniszczyć %s?"
 
 #: ../../src/wui/building_ui.cc:205
 msgid "Destroy building?"
@@ -4409,7 +4422,7 @@ msgstr "%u.%ux"
 
 #: ../../src/wui/interactive_base.cc:234
 msgid "PAUSE"
-msgstr ""
+msgstr "PAUZA"
 
 #: ../../src/wui/interactive_base.cc:254
 #, c-format
@@ -4449,8 +4462,9 @@ msgstr "Informacje o towarach"
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u nowa wiadomość"
+msgstr[1] "%u nowe wiadomości"
+msgstr[2] "%u nowych wiadomości"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
@@ -4462,7 +4476,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Pseudonim:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "email (optional):"
@@ -4474,11 +4488,11 @@ msgstr "UWAGA: Hasło będzie zapisane i wyświetlane otwartym tekstem!"
 
 #: ../../src/wui/login_box.cc:50
 msgid "Password:"
-msgstr ""
+msgstr "Hasło:"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Register new account"
-msgstr ""
+msgstr "Zarejestruj nowe konto"
 
 #: ../../src/wui/login_box.cc:62
 msgid "Automatically use this login information from now on."
@@ -4486,7 +4500,7 @@ msgstr "Używaj podanych informacji logowania automatycznie."
 
 #: ../../src/wui/login_box.cc:69
 msgid "Login"
-msgstr ""
+msgstr "Logowanie"
 
 #: ../../src/wui/login_box.cc:90
 msgid "Empty Nickname"
@@ -4531,7 +4545,7 @@ msgstr "Drogi"
 
 #: ../../src/wui/minimap.cc:178
 msgid "Zoom"
-msgstr ""
+msgstr "Przybliż"
 
 #: ../../src/wui/stock_menu.cc:70
 msgid "Show wares"
@@ -4715,7 +4729,7 @@ msgstr "Ciągi zdarzeń"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:85
 msgid "Triggers"
-msgstr ""
+msgstr "Wyzwalacze"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:103
 #: ../../src/editor/ui_menus/editor_event_menu.cc:136
@@ -5019,11 +5033,11 @@ msgstr "Surowce:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Low"
-msgstr ""
+msgstr "Mało"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "High"
-msgstr ""
+msgstr "Dużo"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:281
 msgid "Map ID:"
@@ -5532,7 +5546,7 @@ msgstr "brak opisu"
 
 #: ../../src/wui/game_message_menu.h:63
 msgid "Select"
-msgstr ""
+msgstr "Wybierz"
 
 #: ../../src/wui/game_message_menu.h:64
 msgid "Status"
