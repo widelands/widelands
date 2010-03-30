@@ -149,6 +149,7 @@ end
 field_resources_tests = lunit.TestCase("Field resources test")
 function field_resources_tests:setup()
    self.f = wl.map.Field(60,40)
+   self._res = self.f.resource
    self._amount = self.f.resource_amount
    self._terr = self.f.terr
    self._terd = self.f.terd
@@ -156,13 +157,12 @@ end
 function field_resources_tests:teardown()
    self.f.terr = self._terr
    self.f.terd = self._terd
+   self.f.resource = self._res
    self.f.resource_amount = self._amount 
 end
-function field_resources_tests:test_default_resource()
-   assert_equal("water", self.f.resource)
-   assert_equal(5, self.f.resource_amount)
-end
+
 function field_resources_tests:test_set_resource_amount()
+   self.f.resource = "water"
    self.f.resource_amount = 25
    assert_equal("water", self.f.resource)
    assert_equal(25, self.f.resource_amount)
@@ -177,10 +177,23 @@ end
 function field_resources_tests:test_set_resource_type()
    self.f.resource = "coal"
    assert_equal("coal", self.f.resource)
-   assert_equal(5, self.f.resource_amount)
+   assert_equal(self._amount, self.f.resource_amount)
 end
 function field_resources_tests:test_set_resource_type_illegal_resource()
    assert_error("Illegal name!", function() self.f.resource = "ksjdjhsdf" end)
+end
+
+function field_resources_tests:test_default_resource()
+   -- In game, default resources are set. In the editor, no
+   -- default resources are set
+   if not wl.editor then
+      assert_equal("water", self.f.resource)
+      assert_equal(5, self.f.resource_amount)
+   else
+      -- The starting resource is the first in the world
+      assert_equal("coal", self.f.resource)
+      assert_equal(0, self.f.resource_amount)
+   end
 end
 
 

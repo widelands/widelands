@@ -1746,7 +1746,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 
 
 L_Field::L_Field(lua_State * L) {
-	Map & m = get_game(L).map();
+	Map & m = get_egbase(L).map();
 	uint32_t rv = luaL_checkuint32(L, 1);
 	if (rv >= static_cast<uint32_t>(m.get_width()))
 		report_error(L, "x coordinate out of range!");
@@ -1794,7 +1794,7 @@ int L_Field::set_height(lua_State * L) {
 	if (height > MAX_FIELD_HEIGHT)
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
-	get_game(L).map().set_height(fcoords(L), height);
+	get_egbase(L).map().set_height(fcoords(L), height);
 
 	return get_height(L);
 }
@@ -1824,14 +1824,14 @@ int L_Field::get_viewpoint_y(lua_State * L) {
 */
 int L_Field::get_resource(lua_State * L) {
 	lua_pushstring
-		(L, get_game(L).map().world().get_resource
+		(L, get_egbase(L).map().world().get_resource
 			 (fcoords(L).field->get_resources())->name().c_str());
 
 	return 1;
 }
 int L_Field::set_resource(lua_State * L) {
 	Field * field = fcoords(L).field;
-	int32_t res = get_game(L).map().world().get_resource
+	int32_t res = get_egbase(L).map().world().get_resource
 		(luaL_checkstring(L, -1));
 
 	if (res == -1)
@@ -1857,7 +1857,7 @@ int L_Field::set_resource_amount(lua_State * L) {
 	Field * field = fcoords(L).field;
 	int32_t res = field->get_resources();
 	int32_t amount = luaL_checkint32(L, -1);
-	int32_t max_amount = get_game(L).map().world().get_resource
+	int32_t max_amount = get_egbase(L).map().world().get_resource
 		(res)->get_max_amount();
 
 	if (amount < 0 or amount > max_amount)
@@ -1877,7 +1877,7 @@ int L_Field::set_resource_amount(lua_State * L) {
 		to remove an immovable, you can use :func:`wl.map.MapObject.remove`.
 */
 int L_Field::get_immovable(lua_State * L) {
-	BaseImmovable * bi = get_game(L).map().get_immovable(m_c);
+	BaseImmovable * bi = get_egbase(L).map().get_immovable(m_c);
 
 	if (!bi)
 		return 0;
@@ -1896,14 +1896,14 @@ int L_Field::get_immovable(lua_State * L) {
 */
 int L_Field::get_terr(lua_State * L) {
 	Terrain_Descr & td =
-		get_game(L).map().world().terrain_descr
+		get_egbase(L).map().world().terrain_descr
 			(fcoords(L).field->terrain_r());
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
 int L_Field::set_terr(lua_State * L) {
 	const char * name = luaL_checkstring(L, -1);
-	Map & map = get_game(L).map();
+	Map & map = get_egbase(L).map();
 	Terrain_Index td =
 		map.world().index_of_terrain(name);
 	if (td == static_cast<Terrain_Index>(-1))
@@ -1918,14 +1918,14 @@ int L_Field::set_terr(lua_State * L) {
 
 int L_Field::get_terd(lua_State * L) {
 	Terrain_Descr & td =
-		get_game(L).map().world().terrain_descr
+		get_egbase(L).map().world().terrain_descr
 			(fcoords(L).field->terrain_d());
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
 int L_Field::set_terd(lua_State * L) {
 	const char * name = luaL_checkstring(L, -1);
-	Map & map = get_game(L).map();
+	Map & map = get_egbase(L).map();
 	Terrain_Index td =
 		map.world().index_of_terrain(name);
 	if (td == static_cast<Terrain_Index>(-1))
@@ -1959,7 +1959,7 @@ int L_Field::set_terd(lua_State * L) {
 */
 #define GET_X_NEIGHBOUR(X) int L_Field::get_ ##X(lua_State* L) { \
    Coords n; \
-   get_game(L).map().get_ ##X(m_c, &n); \
+   get_egbase(L).map().get_ ##X(m_c, &n); \
    to_lua<L_Field>(L, new L_Field(n.x, n.y)); \
 	return 1; \
 }
@@ -1986,12 +1986,12 @@ static int _sort_owners
 	return first.second > second.second;
 }
 int L_Field::get_owners(lua_State * L) {
-	Game & game = get_game(L);
-	Map & map = game.map();
+	Editor_Game_Base & egbase = get_egbase(L);
+	Map & map = egbase.map();
 
 	std::vector<_PlrInfluence> owners;
 
-	iterate_players_existing(other_p, map.get_nrplayers(), game, plr)
+	iterate_players_existing(other_p, map.get_nrplayers(), egbase, plr)
 		owners.push_back
 			(_PlrInfluence(plr->player_number(), plr->military_influence
 					(map.get_index(m_c, map.get_width()))
@@ -2071,7 +2071,7 @@ int L_Field::region(lua_State * L) {
  */
 int L_Field::m_region(lua_State * L, uint32_t radius)
 {
-	Map & map = get_game(L).map();
+	Map & map = get_egbase(L).map();
 	MapRegion<Area<FCoords> > mr
 		(map, Area<FCoords>(fcoords(L), radius));
 
@@ -2090,7 +2090,7 @@ int L_Field::m_region(lua_State * L, uint32_t radius)
 int L_Field::m_hollow_region
 	(lua_State * L, uint32_t radius, uint32_t inner_radius)
 {
-	Map & map = get_game(L).map();
+	Map & map = get_egbase(L).map();
 	HollowArea<Area<> > har(Area<>(m_c, radius), inner_radius);
 
 	MapHollowRegion<Area<> > mr(map, har);
@@ -2107,7 +2107,7 @@ int L_Field::m_hollow_region
 }
 
 const Widelands::FCoords L_Field::fcoords(lua_State * L) {
-	return get_game(L).map().get_fcoords(m_c);
+	return get_egbase(L).map().get_fcoords(m_c);
 }
 
 /*

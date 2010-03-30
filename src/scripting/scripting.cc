@@ -27,12 +27,15 @@
 #include "c_utils.h"
 #include "coroutine_impl.h"
 #include "lua_debug.h"
+#include "lua_editor.h"
 #include "lua_game.h"
 #include "lua_globals.h"
 #include "lua_map.h"
 #include "persistence.h"
 
 #include "scripting.h"
+
+// TODO: add wl.editor to documentation
 
 /*
 ============================================
@@ -197,21 +200,19 @@ void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 
 /*
  * ===========================
- * LuaEditorInterface
+ * LuaEditorGameBaseInterface_Impl
  * ===========================
  */
-struct LuaEditorInterface_Impl : public LuaInterface_Impl 
+struct LuaEditorGameBaseInterface_Impl : public LuaInterface_Impl
 {
-	LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g);
-	virtual ~LuaEditorInterface_Impl() {}
+	LuaEditorGameBaseInterface_Impl(Widelands::Editor_Game_Base * g);
+	virtual ~LuaEditorGameBaseInterface_Impl() {}
 };
-// TODO: replace get_game via get_egbase and adapt accordingly.
 
-LuaEditorInterface_Impl::LuaEditorInterface_Impl
+LuaEditorGameBaseInterface_Impl::LuaEditorGameBaseInterface_Impl
 	(Widelands::Editor_Game_Base * g) :
 LuaInterface()
 {
-	// Load the remaining libs that are important for the game
 	luaopen_wldebug(m_L);
 	luaopen_wlmap(m_L);
 	luaopen_wlgame(m_L);
@@ -224,10 +225,29 @@ LuaInterface()
 
 /*
  * ===========================
+ * LuaEditorInterface_Impl
+ * ===========================
+ */
+struct LuaEditorInterface_Impl : public LuaEditorGameBaseInterface_Impl
+{
+	LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g);
+	virtual ~LuaEditorInterface_Impl() {}
+};
+
+LuaEditorInterface_Impl::LuaEditorInterface_Impl
+	(Widelands::Editor_Game_Base * g) :
+LuaEditorGameBaseInterface_Impl(g)
+{
+	luaopen_wleditor(m_L);
+}
+
+
+/*
+ * ===========================
  * LuaGameInterface
  * ===========================
  */
-struct LuaGameInterface_Impl : public LuaEditorInterface_Impl,
+struct LuaGameInterface_Impl : public LuaEditorGameBaseInterface_Impl,
 	public virtual LuaGameInterface
 {
 	LuaGameInterface_Impl(Widelands::Game * g);
@@ -295,7 +315,7 @@ static int L_math_random(lua_State * L) {
 }
 
 LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
-	LuaEditorInterface_Impl(g)
+	LuaEditorGameBaseInterface_Impl(g)
 {
 	// Overwrite math.random
 	lua_getglobal(m_L, "math");
