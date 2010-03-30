@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-03-28 14:40+0000\n"
+"PO-Revision-Date: 2010-03-29 14:57+0000\n"
 "Last-Translator: mrt <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2010-03-29 03:44+0000\n"
+"X-Launchpad-Export-Date: 2010-03-30 03:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -499,7 +499,7 @@ msgstr "Cena gradnje"
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "Gradbišče od %s"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
@@ -508,7 +508,7 @@ msgstr "Izboljšave"
 #: ../../src/writeHTML.cc:462
 #, c-format
 msgid "%s's enhancement"
-msgstr ""
+msgstr "Ojačanje od %s"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
@@ -564,7 +564,7 @@ msgstr "Izmikanje je %u, plus %u za vsak nivo nad 0 (najvišji nivo je %u)."
 #: ../../src/writeHTML.cc:671 ../../src/writeHTML.cc:682
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "izgradnja od %s"
 
 #: ../../src/writeHTML.cc:693
 msgid "Spawns in warehouses."
@@ -578,7 +578,7 @@ msgstr "Potrebuje delovne izkušnje med %u in %u, da postane"
 #: ../../src/writeHTML.cc:710
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "Promocija od %s"
 
 #: ../../src/writeHTML.cc:721 ../../src/writeHTML.cc:866
 msgid "Programs"
@@ -668,7 +668,7 @@ msgstr "Delavci"
 #: ../../src/writeHTML.cc:797
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "Zaposlen od %s"
 
 #: ../../src/writeHTML.cc:807
 msgid "Inputs"
@@ -677,7 +677,7 @@ msgstr "Surovine"
 #: ../../src/writeHTML.cc:818
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "Vhod od  %s"
 
 #: ../../src/writeHTML.cc:830
 msgid "Output"
@@ -686,7 +686,7 @@ msgstr "Izhod"
 #: ../../src/writeHTML.cc:841 ../../src/writeHTML.cc:855
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "Izhod od  %s"
 
 #: ../../src/writeHTML.cc:902 ../../src/writeHTML.cc:1045
 #: ../../src/writeHTML.cc:1107 ../../src/writeHTML.cc:1135
@@ -1687,7 +1687,7 @@ msgstr "interaktivni igralec: %s"
 #: ../../src/game_io/game_player_economies_data_packet.cc:59
 #, c-format
 msgid "read number of economies as %u, but this was read as %u elsewhere"
-msgstr ""
+msgstr "prebrano število ekonomij je %u, toda druge je bilo prebrano %u"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
@@ -1771,7 +1771,7 @@ msgstr "velik"
 #: ../../src/logic/cmd_queue.cc:173
 #, c-format
 msgid "duetime (%i) < gametime (%i)"
-msgstr ""
+msgstr "čas za izvedbo (%i) < čas igre (%i)"
 
 #: ../../src/logic/cmd_queue.cc:178
 #, c-format
@@ -1899,13 +1899,13 @@ msgstr "prioriteta"
 #: ../../src/logic/immovable.cc:895
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
-msgstr ""
+msgstr "nepremični tip ni v plemenu, toda ciljni tip ima obseg (\"%s\")"
 
 #: ../../src/logic/immovable.cc:746 ../../src/logic/immovable.cc:815
 #: ../../src/logic/immovable.cc:901
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
-msgstr ""
+msgstr "obseg \"%s\" za dan ciljni tip (mora biti \"world\")"
 
 #: ../../src/logic/immovable.cc:761 ../../src/logic/immovable.cc:916
 #, c-format
@@ -2144,6 +2144,7 @@ msgid ""
 "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
 "section)"
 msgstr ""
+"%s ni napovedan kot vhod (\"%s=<count>\" ni bil najden v [vhodnem] delu)"
 
 #: ../../src/logic/production_program.cc:82
 #, c-format
@@ -2151,6 +2152,8 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
+"napačen vrstni red tipov dobrin znotraj skupine: dobrina %s se pojavi za "
+"tipom dobrin %s (popravite vrstni red!)"
 
 #: ../../src/logic/production_program.cc:96
 #: ../../src/logic/production_program.cc:819
@@ -2164,6 +2167,8 @@ msgid ""
 "group count is %u but (total) input storage capacity of the specified ware "
 "type(s) is only %u, so the group can never be fulfilled by the site"
 msgstr ""
+"štetje skupin da %u, toda (skupni) vhod zmogljivosti hranjenja določenih "
+"tipov dobrin je le %u, zato skupina ne more biti zapolnjena"
 
 #: ../../src/logic/production_program.cc:131
 msgid "not "
@@ -2176,7 +2181,7 @@ msgstr "ekonomija potrebuje "
 
 #: ../../src/logic/production_program.cc:203
 msgid "site has "
-msgstr ""
+msgstr "lokacija ima "
 
 #: ../../src/logic/production_program.cc:229
 msgid "workers need experience"
@@ -2195,6 +2200,7 @@ msgstr "neveljaven pogoj: %s"
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
 msgstr ""
+"pričakovano {\"failed\"|\"completed\"|\"skipped\"}, najdeno pa \"%s\""
 
 #: ../../src/logic/production_program.cc:345
 msgid "expected \"and\" or end of input"
@@ -2233,13 +2239,14 @@ msgid ""
 "the program \"%s\" has not (yet) been declared in %s (wrong declaration "
 "order?)"
 msgstr ""
+"program \"%s ni (še) bil naznanjen v %s (napačen vrstni red deklariranja?)"
 
 #: ../../src/logic/production_program.cc:471
 #: ../../src/logic/production_program.cc:476
 #: ../../src/logic/production_program.cc:481
 #, c-format
 msgid "%s handling method already defined"
-msgstr ""
+msgstr "metoda za upravljanje s/z %s je že definirana"
 
 #: ../../src/logic/production_program.cc:471
 msgid "failure"
@@ -2255,24 +2262,24 @@ msgstr "preskoči"
 
 #: ../../src/logic/production_program.cc:486
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"failure\"|\"completion\"|\"skip\"}"
 
 #: ../../src/logic/production_program.cc:500
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
 
 #: ../../src/logic/production_program.cc:602
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "spanje: %s"
 
 #: ../../src/logic/production_program.cc:624
 msgid "idle animation is default; calling is not allowed"
-msgstr ""
+msgstr "nedejavna animacija je privzeta; klicanje ni dovoljeno"
 
 #: ../../src/logic/production_program.cc:674
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr ""
+msgstr "pričakovano ware_type1[,ware_type2[,...]][:N] ..."
 
 #: ../../src/logic/production_program.cc:773
 msgid " is missing"
@@ -2289,6 +2296,7 @@ msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
+"%s ni napovedan kot izhod (\"output=%s\" ni bilo najdeno v [glavnem] delu)"
 
 #: ../../src/logic/production_program.cc:851
 msgid "Produced "
@@ -2336,6 +2344,7 @@ msgstr "tip vojaka"
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
+"pričakovano {\"hp\"|\"attack\"|\"defense\"|\"evade\"}, najdeno pa \"%s\""
 
 #: ../../src/logic/production_program.cc:1171
 #: ../../src/logic/production_program.cc:1239
@@ -2392,7 +2401,7 @@ msgstr "pričakovano pozitivno celo število >= %u, ampak najdeno \"%s\""
 
 #: ../../src/logic/soldier.cc:202
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"ime_animacije[,druga_animacija,...]\""
 
 #: ../../src/logic/soldier.cc:1201
 #, c-format
@@ -2429,7 +2438,7 @@ msgstr "Ne dela"
 
 #: ../../src/logic/tribe.cc:134
 msgid "constructionsite type \"constructionsite\" is missing"
-msgstr ""
+msgstr "gradbišču manjka ustrezni \"constructionsite\""
 
 #: ../../src/logic/tribe.cc:221 ../../src/logic/tribe.cc:242
 msgid "none found"
@@ -2438,12 +2447,12 @@ msgstr "ni najden"
 #: ../../src/logic/tribe.cc:223
 #, c-format
 msgid "frontier styles: %s"
-msgstr ""
+msgstr "slogi ospredja: %s"
 
 #: ../../src/logic/tribe.cc:244
 #, c-format
 msgid "flag styles: %s"
-msgstr ""
+msgstr "slogi zastav: %s"
 
 #: ../../src/logic/tribe.cc:374
 #, c-format
@@ -3509,7 +3518,7 @@ msgstr "Premik na pozicijo"
 
 #: ../../src/ui_fsmenu/launchgame.cc:159
 msgid "Lobby:"
-msgstr ""
+msgstr "Veža:"
 
 #: ../../src/ui_fsmenu/launchgame.cc:161
 msgid "Ready"
@@ -3529,6 +3538,12 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finnished!?!"
 msgstr ""
+"Widelands se je poskušal zagnati z datoteko, ki ni bila najdena na podanem "
+"mestu.\n"
+"Ta datoteka je: %s\n"
+"Če se to primeri pri mrežni igri, je gostitelj morda izbral datoteko, ko je "
+"vi nimate. Običajno bi vam moral takšno datoteko poslati gostitelj, toda "
+"morda prenos še poteka!?!"
 
 #: ../../src/ui_fsmenu/launchgame.cc:269
 msgid "(no map)"
@@ -3665,7 +3680,7 @@ msgstr "nihče"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:50
 msgid "Metaserver Lobby"
-msgstr ""
+msgstr "Veža glavnega strežnika"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:54
 msgid "Users online:"
@@ -3797,7 +3812,7 @@ msgstr "Celozaslonski način"
 
 #: ../../src/ui_fsmenu/options.cc:109
 msgid "Grab Input"
-msgstr ""
+msgstr "Vzemi vhod"
 
 #: ../../src/ui_fsmenu/options.cc:115
 msgid "Enable Music"
@@ -3837,7 +3852,7 @@ msgstr "Pokaži predogled območja stavb"
 
 #: ../../src/ui_fsmenu/options.cc:179
 msgid "Snap windows only when overlapping"
-msgstr ""
+msgstr "Vsadi okno le ob prekrivanju"
 
 #: ../../src/ui_fsmenu/options.cc:185
 msgid "Dock windows to edges"
