@@ -940,10 +940,14 @@ bool WLApplication::init_hardware() {
 /**
  * Shut the hardware down: stop graphics mode, stop sound handler
  */
+
+void terminate (int) {
+	log ("Waited 5 seconds to close audio. problems here so killing widelands. update your sound driver and/or SDL to fix this problem\n");
+	raise(SIGKILL);
+}
+
 void WLApplication::shutdown_hardware()
 {
-	g_sound_handler.shutdown();
-
 	if (g_gr)
 		wout
 			<<
@@ -958,18 +962,11 @@ void WLApplication::shutdown_hardware()
 
 	SDL_QuitSubSystem(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
-	/* Hack to fix pulseaudio bug */
-	char* text = new char[15];
-	SDL_AudioDriverName(text,20);
-	log("SDL_AUDIODRIVER %s\n", text);
+	//SOUND can lock up with buggy SDL/drivers. we try to do the right thing but if it doesn't happen we will kill widelands anyway
+	signal(SIGALRM,terminate);
+	alarm(5);
 
-	if (strcmp(text,"pulse") != 0) {
-
-	} else {
-		log("pulse audio detected, force exit\n");
-		raise(SIGKILL);
-		//workaround for pulse audio
-	}
+	g_sound_handler.shutdown();
 
 }
 

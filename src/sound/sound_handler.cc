@@ -154,14 +154,11 @@ void Sound_Handler::shutdown()
 	SDL_AudioDriverName(text,20);
 	log("SDL_AUDIODRIVER %s\n", text);
 
-	if (strcmp(text,"pulse") != 0) {
+	for(int i = 0; i < numtimesopened; ++i) {
 		Mix_CloseAudio();
-		SDL_QuitSubSystem(SDL_INIT_AUDIO);
-	} else {
-		log("pulse audio detected, skipping close");
-		//workaround for pulse audio
 	}
-
+	SDL_QuitSubSystem(SDL_INIT_AUDIO);
+	
 	if (m_fx_lock)
 	{
 		SDL_DestroyMutex(m_fx_lock);
