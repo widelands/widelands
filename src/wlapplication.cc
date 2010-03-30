@@ -943,7 +943,6 @@ bool WLApplication::init_hardware() {
 void WLApplication::shutdown_hardware()
 {
 	g_sound_handler.shutdown();
-	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 
 	if (g_gr)
 		wout
@@ -957,7 +956,21 @@ void WLApplication::shutdown_hardware()
 	init_graphics(0, 0, 0, false, false, false);
 #endif
 
-	SDL_Quit();
+	SDL_QuitSubSystem(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
+
+	/* Hack to fix pulseaudio bug */
+	char* text = new char[15];
+	SDL_AudioDriverName(text,20);
+	log("SDL_AUDIODRIVER %s\n", text);
+
+	if (strcmp(text,"pulse") != 0) {
+
+	} else {
+		log("pulse audio detected, force exit\n");
+		raise(SIGKILL);
+		//workaround for pulse audio
+	}
+
 }
 
 /**

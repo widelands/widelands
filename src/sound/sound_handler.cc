@@ -140,13 +140,34 @@ void Sound_Handler::shutdown()
 	Mix_ChannelFinished(0);
 	Mix_HookMusicFinished(0);
 
-	Mix_CloseAudio();
+	int numtimesopened, frequency,channels;
+	Uint16 format;
+	numtimesopened=Mix_QuerySpec(&frequency, &format, &channels);
+	log("Sound_Handler closing times %i, freq %i, format %i, chan %i\n",numtimesopened, frequency, format, channels);
+
+	Mix_HaltChannel(-1);
+	assert(numtimesopened == 1);
+	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
+		log ("audio error %s\n", SDL_GetError());
+	}
+	char* text = new char[15];
+	SDL_AudioDriverName(text,20);
+	log("SDL_AUDIODRIVER %s\n", text);
+
+	if (strcmp(text,"pulse") != 0) {
+		Mix_CloseAudio();
+		SDL_QuitSubSystem(SDL_INIT_AUDIO);
+	} else {
+		log("pulse audio detected, skipping close");
+		//workaround for pulse audio
+	}
 
 	if (m_fx_lock)
 	{
 		SDL_DestroyMutex(m_fx_lock);
 		m_fx_lock = 0;
 	}
+
 }
 
 /** Read the main config file, load background music and systemwide sound fx
