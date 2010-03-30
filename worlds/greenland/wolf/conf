@@ -11,6 +11,6 @@ pics=wolf_idle_se_??.png
 fps=10
 
 [walk]
-hotspot=16 19
+hotspot=19 19
 dirpics=wolf_walk_!!_??.png
 fps=20

@@ -11,6 +11,6 @@ pics=chamois_idle_sw_??.png
 fps=20
 
 [walk]
-hotspot=8 20
+hotspot=11 20
 dirpics=chamois_walk_!!_??.png
 fps=20

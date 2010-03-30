@@ -11,6 +11,6 @@ pics=brownbear_idle_se_??.png
 fps=20
 
 [walk]
-hotspot=20 24
+hotspot=24 24
 dirpics=brownbear_walk_!!_??.png
 fps=20

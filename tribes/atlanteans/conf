@@ -32,8 +32,9 @@ hotspot=3 12
 [flag]
 name=flag
 pics=pics/flag_??.png
-hotspot=7 39
-fps=6
+hotspot=15 35
+fps=10
+playercolor=true
 
 [immovable types]
 ashes=_Ashes

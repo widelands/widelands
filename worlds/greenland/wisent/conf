@@ -11,6 +11,6 @@ pics=wisent_idle_se_??.png
 fps=20
 
 [walk]
-hotspot=20 32
+hotspot=24 32
 dirpics=wisent_walk_!!_??.png
 fps=20

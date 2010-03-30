@@ -342,12 +342,12 @@ void WLApplication::run()
 			char const * const meta = s.get_string("metaserver", WL_METASERVER);
 			char const * const name = s.get_string("nickname", "dedicated");
 			char const * const server = s.get_string("servername", name);
-			if (!NetGGZ::ref().initcore(meta, name, "", "", false, true)) {
+			if (!NetGGZ::ref().initcore(meta, name, "", false)) {
 				log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
 				return;
 			}
 			NetGGZ::ref().set_local_servername(server);
-			NetGGZ::ref().set_local_maxplayers(8); // > 8 == freeze -> ggz bug
+			NetGGZ::ref().set_local_maxplayers(7); // > 7 == freeze -> ggz bug
 
 			NetHost netgame(name, true);
 
@@ -797,6 +797,7 @@ bool WLApplication::init_settings() {
 	s.get_bool("remove_syncstreams");
 	s.get_bool("sound_at_message");
 	s.get_bool("voice_at_message");
+	s.get_string("registered");
 	s.get_string("nickname");
 	s.get_string("password");
 	s.get_string("emailadd");
@@ -1544,19 +1545,17 @@ void WLApplication::mainmenu_multiplayer()
 		if (ggz) {
 			playername = mp.get_nickname();
 			std::string password(mp.get_password());
-			std::string email   (mp.get_email());
-			bool registration = mp.new_registration();
+			bool registered = mp.registered();
 
 			Section & s = g_options.pull_section("global");
 			s.set_string("nickname", playername);
-			s.set_string("password", password);
-			// Only change the emailaddress if we register new
-			if (registration)
-				s.set_string("emailadd", email);
+			// Only change the password if we use a registered account
+			if (registered)
+				s.set_string("password", password);
 
 			// reinitalise in every run, else graphics look strange
 			Fullscreen_Menu_NetSetupGGZ ns
-				(playername.c_str(), password.c_str(), email.c_str(), registration);
+				(playername.c_str(), password.c_str(), registered);
 			menu_result = ns.run();
 
 			switch (menu_result) {
@@ -1721,7 +1720,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		return (!s.scenario & (number != s.playernum));
 	}
 	virtual bool canChangePlayerTribe(uint8_t) {return !s.scenario;}
-	virtual bool canChangePlayerInit (uint8_t) {return true;}
+	virtual bool canChangePlayerInit (uint8_t) {return !s.scenario;}
 
 	virtual bool canLaunch() {
 		return s.mapname.size() != 0 && s.players.size() >= 1;

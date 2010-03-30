@@ -11,6 +11,6 @@ pics=marten_idle_se_??.png
 fps=20
 
 [walk]
-hotspot=11 14
+hotspot=15 14
 dirpics=marten_walk_!!_??.png
 fps=20
