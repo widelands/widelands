@@ -23,12 +23,19 @@ IF (WIN32)
 	ENDIF (MINGW)
 endif (WIN32)
 
+file(GLOB WL_MAIN_SRCS *.cc)
+
+IF (DEFINED MSVC)
+  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
+else (DEFINED MSVC)
+  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc ${WIN32_ICON_O})
+  set_target_properties(widelands PROPERTIES MACOSX_BUNDLE TRUE)
+endif (DEFINED MSVC)
+
 file(GLOB_RECURSE WL_SRCS_ALL *.cc;*.h)
 
-file(GLOB WL_MAIN_SRCS *.cc)
 add_library(widelands_main ${WL_MAIN_SRCS})
 
-#file (GLOB WL_SRCS *.cc economy/*.cc trigger/*.cc scripting/*.cc)
 #create WL_SRCS and WL_TEST_SRCS
 #convention: any directory called "test" contains test sources, including subdirectories
 set(WL_SRCS "")
@@ -44,30 +51,31 @@ endforeach (sourcefile ${WL_SRCS_ALL})
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 
-if (CMAKE_BUILD_TYPE STREQUAL Debug)
-  add_custom_target (codecheck ALL)
+macro(CreateCodeCheck)
+  if (CMAKE_BUILD_TYPE STREQUAL Debug)
+    file(GLOB srcfiles *.cc)
+    foreach(sourcefile ${srcfiles})
+      string(REPLACE "${CMAKE_SOURCE_DIR}/src/" "" sourcewithoutpath ${sourcefile})
+      string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcewithoutpath})
+      if (WIN32)
+	string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
+      endif (WIN32)
+      get_filename_component(sourcename ${sourcefile} NAME) 
+      set(stamp ${sourcenoslash}_)
+      set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/${stamp})
+      add_custom_command(
+	OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${stamp}"
+	COMMAND cmake -DWL_SOURCE_CHECKER=${WL_SOURCE_CHECKER} -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=${stamp} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
+	DEPENDS ${sourcefile}
+        COMMENT "Checking ${sourcewithoutpath}"
+      )
+      set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${stamp}")
+      set_source_files_properties("${CMAKE_CURRENT_BINARY_DIR}/${stamp}" PROPERTIES SYMBOLIC TRUE GENERATED TRUE)
+    endforeach(sourcefile ${srcfiles})
+  endif (CMAKE_BUILD_TYPE STREQUAL Debug)
+endmacro(CreateCodeCheck)
 
-  foreach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
-    string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" sourcewithoutpath ${sourcefile})
-    string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcewithoutpath})
-    if (WIN32)
-      string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
-    endif (WIN32)
-    get_filename_component(sourcename ${sourcefile} NAME) 
-    set(stamp ${sourcenoslash}_)
-    set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
-    add_custom_command(
-      OUTPUT codecheck-stamps/${stamp}
-      COMMAND cmake -DWL_SOURCE_CHECKER=${WL_SOURCE_CHECKER} -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=${stamp} -P ${CMAKE_CURRENT_SOURCE_DIR}/CodeCheck.cmake
-      DEPENDS ${sourcewithoutpath}
-    )
-    add_custom_target(
-      codecheck_${stamp}
-      DEPENDS codecheck-stamps/${stamp}
-    )
-    add_dependencies (codecheck codecheck_${stamp})
-  endforeach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
-endif (CMAKE_BUILD_TYPE STREQUAL Debug)
+CreateCodeCheck()
 
 add_subdirectory(ai)
 add_subdirectory(economy)
@@ -86,12 +94,6 @@ add_subdirectory(trigger)
 add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
 add_subdirectory(wui)
-
-IF (DEFINED MSVC)
-  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
-else (DEFINED MSVC)
-  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc ${WIN32_ICON_O})
-endif (DEFINED MSVC)
 
 target_link_libraries(widelands widelands_main)
 
