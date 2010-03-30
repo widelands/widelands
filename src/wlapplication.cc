@@ -66,6 +66,7 @@
 
 #include "timestring.h"
 
+#include <config.h>
 #include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -760,8 +761,19 @@ bool WLApplication::init_settings() {
 	Section & s = g_options.pull_section("global");
 
 	// Set Locale and grab default domain
-	i18n::set_locale(s.get_string("language", ""));
-	i18n::grab_textdomain("widelands");
+	if (m_commandline.count("language")) {
+			i18n::set_locale(m_commandline["language"]);
+			m_commandline.erase("language");
+	} else {
+		i18n::set_locale(s.get_string("language", ""));
+	}
+	if (m_commandline.count("localedir")) {
+		i18n::grab_textdomain("widelands", m_commandline["localedir"]);
+		m_commandline.erase("localedir");
+	} else {
+		i18n::grab_textdomain("widelands", s.get_string("localedir", INSTALL_LOCALEDIR));
+	}
+	log("using locale %s\n", i18n::get_locale().c_str());
 
 	//then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
@@ -1230,6 +1242,7 @@ void WLApplication::show_usage()
 			 "                      of using the SDL\n"
 			 " --language=[de_DE|sv_SE|...]\n"
 			 "                      The locale to use.\n"
+			 " --localedir=DIRNAME  Use DIRNAME as location for the locale"
 			 " --remove_syncstreams=[true|false]\n"
 			 "                      Remove syncstream files on startup\n"
 			 " --remove_replays=[...]\n"

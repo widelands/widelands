@@ -24,6 +24,8 @@
 #include <cstring>
 #include <vector>
 
+#include <config.h>
+
 #ifdef _MSC_VER
 #define __attribute__(x) 
 #endif
@@ -35,7 +37,7 @@ namespace i18n {
 char const * translate(char        const *) __attribute__ ((format_arg (1)));
 char const * translate(std::string const &);
 
-void    grab_textdomain(std::string const &);
+	void    grab_textdomain(std::string const &, std::string const & localedir = INSTALL_LOCALEDIR);
 void release_textdomain();
 
 /// Create an object of this type to grab a textdomain and make sure that it is
@@ -46,7 +48,7 @@ struct Textdomain {
 	~Textdomain()                         {release_textdomain();}
 };
 
-void                set_locale(std::string);
+	void            set_locale(std::string);
 std::string const & get_locale();
 }
 
