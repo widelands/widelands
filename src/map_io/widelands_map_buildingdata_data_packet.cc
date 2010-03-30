@@ -762,8 +762,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 statistics_string_length)
 						log
 							("WARNING: productionsite statistics string can be at "
-							 "most %u characters but a loaded building has the "
-							 "string \"%s\" of length %u\n",
+							 "most %lu characters but a loaded building has the "
+							 "string \"%s\" of length %lu\n",
 							 sizeof(productionsite.m_statistics_buffer) - 1,
 							 statistics_string, statistics_string_length);
 				}
@@ -780,8 +780,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 result_string_length)
 						log
 							("WARNING: productionsite result string can be at "
-							 "most %u characters but a loaded building has the "
-							 "string \"%s\" of length %u\n",
+							 "most %lu characters but a loaded building has the "
+							 "string \"%s\" of length %lu\n",
 							 sizeof(productionsite.m_result_buffer) - 1,
 							 result_string, result_string_length);
 				}
