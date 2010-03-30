@@ -120,5 +120,5 @@ train=soldier evade 1 2
 
 [idle]
 pics=labyrinth_i_??.png  # ???
-hotspot=82 88
+hotspot=80 85
 playercolor=true
