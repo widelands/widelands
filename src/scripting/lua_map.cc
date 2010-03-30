@@ -2154,13 +2154,13 @@ static int L_create_immovable(lua_State * const L) {
 		if (imm->get_size() >= BaseImmovable::SMALL)
 			return report_error(L, "Node is no longer free!");
 
-	Game & game = get_game(L);
+	Editor_Game_Base & egbase = get_egbase(L);
 
 	BaseImmovable * m = 0;
 	if (from_where != "world") {
 		try {
 			Widelands::Tribe_Descr const & tribe =
-				game.manually_load_tribe(from_where);
+				egbase.manually_load_tribe(from_where);
 
 			int32_t const imm_idx = tribe.get_immovable_index(objname);
 			if (imm_idx < 0)
@@ -2169,7 +2169,7 @@ static int L_create_immovable(lua_State * const L) {
 					(L, "Unknown immovable <%s> for tribe <%s>",
 					 objname, from_where.c_str());
 
-			m = &game.create_immovable(c->coords(), imm_idx, &tribe);
+			m = &egbase.create_immovable(c->coords(), imm_idx, &tribe);
 		} catch (game_data_error & gd) {
 			return
 				report_error
@@ -2177,11 +2177,11 @@ static int L_create_immovable(lua_State * const L) {
 					 from_where.c_str());
 		}
 	} else {
-		int32_t const imm_idx = game.map().world().get_immovable_index(objname);
+		int32_t const imm_idx = egbase.map().world().get_immovable_index(objname);
 		if (imm_idx < 0)
 			return report_error(L, "Unknown immovable <%s>", objname);
 
-		m = &game.create_immovable(c->coords(), imm_idx, 0);
+		m = &egbase.create_immovable(c->coords(), imm_idx, 0);
 	}
 
 	return upcasted_immovable_to_lua(L, m);
@@ -2196,7 +2196,7 @@ static int L_create_immovable(lua_State * const L) {
 	:rtype: :class:`integer`
 */
 int L_get_width(lua_State * L) {
-	lua_pushuint32(L, get_game(L).map().get_width());
+	lua_pushuint32(L, get_egbase(L).map().get_width());
 	return 1;
 }
 /* RST
@@ -2208,7 +2208,7 @@ int L_get_width(lua_State * L) {
 	:rtype: :class:`integer`
 */
 int L_get_height(lua_State * L) {
-	lua_pushuint32(L, get_game(L).map().get_height());
+	lua_pushuint32(L, get_egbase(L).map().get_height());
 	return 1;
 }
 
