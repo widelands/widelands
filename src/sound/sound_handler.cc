@@ -140,17 +140,6 @@ void Sound_Handler::shutdown()
 	Mix_ChannelFinished(0);
 	Mix_HookMusicFinished(0);
 
-	int numtimesopened, frequency,channels;
-	Uint16 format;
-	numtimesopened=Mix_QuerySpec(&frequency, &format, &channels);
-	log("Sound_Handler closing times %i, freq %i, format %i, chan %i\n",numtimesopened, frequency, format, channels);
-
-	Mix_HaltChannel(-1);
-	assert(numtimesopened == 1);
-	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
-		log ("audio error %s\n", SDL_GetError());
-	}
-
 	Mix_CloseAudio();
 
 	if (m_fx_lock)
