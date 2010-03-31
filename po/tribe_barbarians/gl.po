@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 19:02+0000\n"
+"PO-Revision-Date: 2010-03-30 19:17+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-03-31 03:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -164,8 +164,8 @@ msgid ""
 "Fire-hardened wood, hard as iron and can not burn, used for military "
 "buildings."
 msgstr ""
-"Madeira endurecida con fogo: dura coma o ferro e ignífuga. Utilízase nos "
-"edificios militares."
+"Madeira endurecida con lume: dura coma o ferro e ignífuga. Utilízase nas "
+"instalacións militares."
 
 #: ../../tribes/barbarians/brewer/conf:1
 #: ../../tribes/barbarians/master-brewer/conf:1
@@ -407,10 +407,9 @@ msgstr "Ouro"
 msgid "Goldstone"
 msgstr "Pedra de ouro"
 
-# Wikipedia en castelán: «Otro uso de la cal es en “lechada” para jalbegar (pintar) las paredes [...]».
 #: ../../tribes/barbarians/conf:85
 msgid "Grout"
-msgstr "Cal"
+msgstr "Cemento"
 
 #: ../../tribes/barbarians/conf:86
 msgid "Hammer"
@@ -479,7 +478,7 @@ msgstr "Pá"
 
 #: ../../tribes/barbarians/conf:102
 msgid "Snack"
-msgstr "Bocadillo"
+msgstr "Merenda"
 
 #: ../../tribes/barbarians/conf:103
 msgid "Strong Beer"
@@ -511,7 +510,7 @@ msgstr "Trigo"
 
 #: ../../tribes/barbarians/conf:112
 msgid "Carrier"
-msgstr "Portador"
+msgstr "Transportista"
 
 #: ../../tribes/barbarians/conf:113
 msgid "Ox"
@@ -607,7 +606,7 @@ msgstr "Forestal"
 
 #: ../../tribes/barbarians/conf:140
 msgid "Smelter"
-msgstr "Forxador"
+msgstr "Fundidor"
 
 #: ../../tribes/barbarians/conf:141
 msgid "Stonemason"
@@ -635,7 +634,7 @@ msgstr "Construcción"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Battle Arena"
-msgstr "Campo de batalla"
+msgstr "Arena de batalla"
 
 #: ../../tribes/barbarians/conf:152
 msgid "Trainingscamp"
@@ -652,7 +651,7 @@ msgstr "Cidadela"
 
 #: ../../tribes/barbarians/conf:157
 msgid "Donjon"
-msgstr "Torre"
+msgstr "Gran torre"
 
 #: ../../tribes/barbarians/conf:158
 #: ../../tribes/barbarians/conf:173
@@ -705,7 +704,7 @@ msgstr "Posto de avanzada"
 #: ../../tribes/barbarians/conf:178
 #: ../../tribes/barbarians/conf:179
 msgid "Headquarters"
-msgstr "Cuartel Xeral"
+msgstr "Cuartel xeral"
 
 #: ../../tribes/barbarians/conf:180
 msgid "Warehouse"
@@ -717,7 +716,7 @@ msgstr "Gran armeria"
 
 #: ../../tribes/barbarians/conf:184
 msgid "Axefactory"
-msgstr "Armeria"
+msgstr "Armería"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Bakery"
@@ -737,7 +736,7 @@ msgstr "Casa do queimador de carbón"
 
 #: ../../tribes/barbarians/conf:189
 msgid "Deeper Coal Mine"
-msgstr "Mina de carbón extrema"
+msgstr "Mina de carbón máis fonda"
 
 #: ../../tribes/barbarians/conf:190
 msgid "Deep Coal Mine"
@@ -749,11 +748,11 @@ msgstr "Mina de carbón"
 
 #: ../../tribes/barbarians/conf:192
 msgid "Deeper Gold Mine"
-msgstr "Mina de ouro extrema"
+msgstr "Mina de ouro máis fonda"
 
 #: ../../tribes/barbarians/conf:193
 msgid "Deeper Iron Ore Mine"
-msgstr "Mina de ferro extrema"
+msgstr "Mina de ferro máis fonda"
 
 #: ../../tribes/barbarians/conf:194
 msgid "Deep Gold Mine"
@@ -773,11 +772,11 @@ msgstr "Plantación"
 
 #: ../../tribes/barbarians/conf:198
 msgid "Fisher's Hut"
-msgstr "Choza do pescador"
+msgstr "Peixaría"
 
 #: ../../tribes/barbarians/conf:199
 msgid "Gamekeeper's Hut"
-msgstr "Choza do forestal"
+msgstr "Cabana do zoólogo"
 
 #: ../../tribes/barbarians/conf:200
 msgid "Gold Mine"
@@ -793,7 +792,7 @@ msgstr "Reforzador de madeira"
 
 #: ../../tribes/barbarians/conf:203
 msgid "Helmsmithy"
-msgstr "Ferrería"
+msgstr "Ferraría"
 
 #: ../../tribes/barbarians/conf:204
 msgid "Hunter's Hut"
@@ -805,7 +804,7 @@ msgstr "Pousada"
 
 #: ../../tribes/barbarians/conf:206
 msgid "Lime Kiln"
-msgstr "Forno de cal"
+msgstr "Forno de pedra calcaria"
 
 #: ../../tribes/barbarians/conf:207
 msgid "Lumberjack's Hut"
@@ -833,7 +832,7 @@ msgstr "Choza do forestal"
 
 #: ../../tribes/barbarians/conf:213
 msgid "Smelting Works"
-msgstr "Forxa"
+msgstr "Fundición"
 
 #: ../../tribes/barbarians/conf:214
 msgid "Tavern"
@@ -877,7 +876,7 @@ msgstr "Campos de cultivo."
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
-msgstr "Cultiva liño e xuncos de palla."
+msgstr "Cultiva liño e palla."
 
 #: ../../tribes/barbarians/fernery/conf:13
 msgid "Plant flax"
@@ -885,7 +884,7 @@ msgstr "Sementar liño"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
-msgstr "Sementar xuncos"
+msgstr "Sementar palla"
 
 #: ../../tribes/barbarians/fernery/conf:17
 msgid "Harvest flax"
@@ -893,7 +892,7 @@ msgstr "Recoller liño"
 
 #: ../../tribes/barbarians/fernery/conf:19
 msgid "Harvest reed"
-msgstr "Recoller xuncos"
+msgstr "Recoller palla"
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
@@ -927,7 +926,7 @@ msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
-"O forestal asegúrase de que a abundancia e riqueza da fauna non diminúa."
+"O zoólogo asegúrase de que a abundancia e riqueza da fauna non diminúa."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -950,8 +949,8 @@ msgid ""
 "Raw stone can be enhanced to grout which delivers solid, non burning build "
 "material."
 msgstr ""
-"Da pedra pode obterse cal, un material de construción máis sólido e menos "
-"ignífugo."
+"Da pedra pode obterse cemento, un material de construción máis sólido e "
+"menos ignífugo."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -1035,7 +1034,7 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
-"A carne contén moitas proteínas. Utilízase nos hostais e tabernas para "
+"A carne contén moitas proteínas. Utilízase nas pousadas e tabernas para "
 "preparar o xantar para os mineiros nos campos de adestramento de soldados "
 "para manter fortes aos guerreiros."
 
@@ -1166,8 +1165,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid "Thatch reed is used to make the roofs of buildings waterproof."
-msgstr ""
-"Os xuncos utilízanse para facer teitos impermeables para os edificios."
+msgstr "A palla utilízase para facer teitos impermeables para os edificios."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1303,7 +1301,8 @@ msgid ""
 "places, be it to make bread or beer or to produce grout."
 msgstr ""
 "A auga é a esencia da vida! Utilízase en moitos lugares, xa sexa para "
-"cociñar pan, producir cervexa ou obter cal."
+"cociñar pan, producir cervexa ou obter cemento\r\n"
+"."
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."

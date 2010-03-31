@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 18:11+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"PO-Revision-Date: 2010-03-30 14:04+0000\n"
+"Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-03-31 03:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid "These shields are used by the best soldiers of the Atlanteans."
-msgstr ""
+msgstr "His scutis optimi milites Atlantidines pugnant."
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Loricas militium facit."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
-msgstr ""
+msgstr "Scutum chalybis facit."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:24
 msgid ""
@@ -36,7 +36,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
-msgstr ""
+msgstr "Scutum melius facit."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:26
 msgid ""
@@ -75,19 +75,23 @@ msgstr "Labor"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Panem laboranti fingit."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
 "The bakingtray is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"Pala pistoria est instrumentum pistoris, cuique pistori una datur. Quae "
+"facta a fabro instrumenti."
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
 "Blackroots are a special kind of roots. The Atlanteans like their strong "
 "taste and use its flour for making bread."
 msgstr ""
+"Radices nigrae sunt genus speciale radicium. Atlantidines gustatus earum "
+"magni aestimantes panem farina fingunt."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:16
 msgid "Plant blackroot"
@@ -127,7 +131,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Res per vias portat."
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -141,13 +145,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:19
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantides"
 
 #: ../../tribes/atlanteans/conf:20
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr ""
+"Gens Atlantidines, qui sunt filii filiaeque ex Atlantide insula, de fabulis "
+"antiquissimis nota est."
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Ashes"
@@ -155,103 +161,103 @@ msgstr "Cinis"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Blackrootfield"
-msgstr ""
+msgstr "Ager nigrarum radicium"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Blackrootfield harvested"
-msgstr ""
+msgstr "Ager nigrarum radicium messus"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Blackrootfield medium"
-msgstr ""
+msgstr "Ager nigrarum radicium mediocris"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Blackrootfield small"
-msgstr ""
+msgstr "Ager nigrarum radicium parvus"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Blackrootfield tiny"
-msgstr ""
+msgstr "Ager nigrarum radicium parvulus"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Cornfield"
-msgstr ""
+msgstr "Ager maizi"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Cornfield harvested"
-msgstr ""
+msgstr "Ager maizi messus"
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Cornfield medium"
-msgstr ""
+msgstr "Ager maizi mediocris"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Cornfield small"
-msgstr ""
+msgstr "Ager maizi parvus"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Cornfield tiny"
-msgstr ""
+msgstr "Ager maizi parvulus"
 
 #: ../../tribes/atlanteans/conf:50
 msgid "Destroyed building"
-msgstr ""
+msgstr "Aedificium destructum"
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Est indicatum hic carbonem paucum situm"
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Est indicatum hic carbonem multum situm"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Est indicatum hic aurum paucum situm"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Est indicatum hic aurum multum situm"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Resource indicator granit little"
-msgstr ""
+msgstr "Est indicatum hic granatum paucum situm"
 
 #: ../../tribes/atlanteans/conf:56
 msgid "Resource indicator granit much"
-msgstr ""
+msgstr "Est indicatum hic granatum multum situm"
 
 #: ../../tribes/atlanteans/conf:57
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Est indicatum hic ferrum paucum situm"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Est indicatum hic ferrum multum situm"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Est indicatum hic nihil situm"
 
 #: ../../tribes/atlanteans/conf:60
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Est indicatum hic aqua sita"
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Advanced Shield"
-msgstr ""
+msgstr "Scutum melius"
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Bakingtray"
-msgstr ""
+msgstr "Pala pistoria"
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Blackroot Flour"
-msgstr ""
+msgstr "Farina nigrae radicis"
 
 #: ../../tribes/atlanteans/conf:66
 msgid "Blackroot"
-msgstr ""
+msgstr "Radix nigra"
 
 #: ../../tribes/atlanteans/conf:67
 msgid "Bread"
@@ -259,7 +265,7 @@ msgstr "Panis"
 
 #: ../../tribes/atlanteans/conf:68
 msgid "Buckets"
-msgstr ""
+msgstr "Situlae"
 
 #: ../../tribes/atlanteans/conf:69
 msgid "Coal"
@@ -267,15 +273,15 @@ msgstr "Carbo"
 
 #: ../../tribes/atlanteans/conf:70
 msgid "Cornflour"
-msgstr ""
+msgstr "Farina maizi"
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Corn"
-msgstr "Callum"
+msgstr "Maizum"
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Diamond"
-msgstr ""
+msgstr "Adamas"
 
 #: ../../tribes/atlanteans/conf:73
 msgid "Double Trident"

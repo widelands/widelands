@@ -1,19 +1,20 @@
 # Widelands po/gl_ES/campaigns/t02.wmf.po
 # Copyright (C) 2007 Widelands Development Team
-# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
 #
+# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:41+0000\n"
-"Last-Translator: atrueba <Unknown>\n"
-"Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-03-30 18:09+0000\n"
+"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
+"Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-03-31 03:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -21,7 +22,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "Tutorial2 - A Place to call Home"
-msgstr ""
+msgstr "Titorial 2 ─ Un futuro fogar"
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -29,10 +30,13 @@ msgid ""
 "higher production buildings, including mining and the military expansions "
 "will be introduced."
 msgstr ""
+"Segunda misión da campaña titorial dos bárbaros. Neste titorial aprenderás o "
+"básico sobre os edificios de produción maior, entre eles a minería e as "
+"instalacións militares."
 
 #: ../../campaigns/t02.wmf/event:134
 msgid "Thron shakes his head..."
-msgstr ""
+msgstr "Thron asinte..."
 
 #: ../../campaigns/t02.wmf/event:136
 msgid ""
@@ -44,12 +48,19 @@ msgid ""
 "throne between the trees, the symbol of unity and peace among our kin became "
 "the wedge that drives us apart.\" "
 msgstr ""
+" «A guerra continúa. Máis e máis irmáns e irmás foxen da brutal guerra que "
+"tomou a capital entre as árbores.<br /> Entristece escoitar as historias que "
+"contan sobre os actos daqueles que comparten o noso sangue. Levo noites "
+"enteiras sen durmir, sen descansar, máis canso do que nunca imaxinara. Pero "
+"aínda así, cada vez que pecho os ollos, vexo a fortaleza que meu pai "
+"construíu consumida polas chamas. O trono entre as árbores, símbolo de "
+"unidade e paz entre os nosos, converteuse na cuña que nos separa.» "
 
 #: ../../campaigns/t02.wmf/event:138
 #: ../../campaigns/t02.wmf/event:149
 #: ../../campaigns/t02.wmf/event:160
 msgid "The story continues"
-msgstr ""
+msgstr "A historia segue"
 
 #: ../../campaigns/t02.wmf/event:141
 #: ../../campaigns/t02.wmf/event:152
@@ -77,7 +88,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:487
 #: ../../campaigns/t02.wmf/event:1165
 msgid "OK"
-msgstr ""
+msgstr "Aceptar"
 
 #: ../../campaigns/t02.wmf/event:147
 msgid ""
@@ -91,6 +102,15 @@ msgid ""
 "whoever threatens our very existence, may it even be one of your blood or "
 "mind?\" "
 msgstr ""
+" «Hoxe os meus cazadores trouxeron homes, mulleres e nenos que agocharan nos "
+"bosques, tratando de escapar da guerra, o odio e a vinganza que se apoderou "
+"das tribos, que agora loitan entre elas coma nos vellos tempos, cando non "
+"eramos máis que bestas salvaxes movidas por instintos. Ningún dos meus "
+"irmáns vai conseguir e manter o control do trono de madeira, ningunha das "
+"tribos será forte abondo para someter a outra. Non vai haber un final para "
+"esta matanza, a non ser que... é isto? É o que me dixo meu pai?<br /> "
+"Levántate contra quen ameace a nosa existencia, sen importar que sexa do teu "
+"mesmo sangue ou forma de pensar?» "
 
 #: ../../campaigns/t02.wmf/event:158
 msgid ""
@@ -103,6 +123,14 @@ msgid ""
 "who still live and think united a new home, replacing what is now lost to "
 "us? Until we can return to the place we once called our home...\" "
 msgstr ""
+" «Boldreth está peor a cada día que pasa. O espírito dos meus afoga a medida "
+"que se achega a fría estación, e seguimos vivindo en simples cabanas e "
+"chozas. Nunca planeara estarmos aquí fóra na xungla durante tanto tempo, "
+"pero tampouco imaxinara que meus irmáns continuarían con esta batalla sen "
+"sentido durante tanto tempo.<br /> Quizais sexa hora de facilitar as cousas "
+"aquí. Quizais sexa a hora de darlles a aqueles que aínda viven e pensan en "
+"comunidade un novo fogar, substituíndo aquilo que xa perdemos. Polo menos "
+"ata que poidamos volver ás terras que outrora chamaramos “fogar”...» "
 
 #: ../../campaigns/t02.wmf/event:215
 msgid "Brave Boldreth steps aside you..."
@@ -115,6 +143,11 @@ msgid ""
 "return to Al'thunran. Too long have we waited while our brethren have fought "
 "on the battlefield, and our axes and swords have turned rusty over time.\" "
 msgstr ""
+" «Entón queres prepararnos para unha estadía máis longa nestes bosques, "
+"Thron? A ver, entendo perfectamente os motivos, pero o meu corazón anhela un "
+"regreso triunfal a Al'thunran. Levamos demasiado agardando mentres os nosos "
+"irmáns loitaban no campo de batalla, e as nosas hachas e espadas oxidáronse "
+"co tempo.» "
 
 #: ../../campaigns/t02.wmf/event:219
 #: ../../campaigns/t02.wmf/event:244
@@ -126,11 +159,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:412
 #: ../../campaigns/t02.wmf/event:425
 msgid "Your loyal companion"
-msgstr ""
+msgstr "Os teus compañeiros leais"
 
 #: ../../campaigns/t02.wmf/event:227
 msgid "Khantrukh joins the both of you..."
-msgstr ""
+msgstr "Khantrukh únese a vós os dous..."
 
 #: ../../campaigns/t02.wmf/event:229
 msgid ""
@@ -138,6 +171,10 @@ msgid ""
 "with you. The rocks close to our camp are shrinking fast under our workers' "
 "tools, and it is a matter of little time only before they are all gone.\" "
 msgstr ""
+" «Rogo que me desculpe, xefe, pero teño un asunto importante que tratar "
+"contigo. As rochas preto do noso campamento están desaparecendo rápido polo "
+"pico dos nosos traballadores, é que desaparezan completamente é só cuestión "
+"de tempo.» "
 
 #: ../../campaigns/t02.wmf/event:231
 #: ../../campaigns/t02.wmf/event:256
@@ -149,11 +186,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:438
 #: ../../campaigns/t02.wmf/event:451
 msgid "The advisor"
-msgstr ""
+msgstr "O conselleiro"
 
 #: ../../campaigns/t02.wmf/event:239
 msgid "Boldreth jumps up..."
-msgstr ""
+msgstr "Boldreth irrompe..."
 
 #: ../../campaigns/t02.wmf/event:241
 msgid ""
@@ -163,6 +200,10 @@ msgid ""
 "of Kal'mavrath - maybe we will find some more big stones to please the old "
 "man?\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Non é unha tarefa propia dun guerreiro, pero algo é algo! Thron, que che "
+"parece se collo algúns dos nosos guerreiros máis descansados e nos achegamos "
+"á gran montaña de Kal'mavrath. Pode que atopemos algunha outra rocha para "
+"compracer ao ancián.»<br /> <br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/t02.wmf/event:242
 #: ../../campaigns/t02.wmf/objective:7
@@ -170,6 +211,9 @@ msgid ""
 "* Build military buildings (like sentries and strongholds) to expand your "
 "territory.<br> Get to the rocks northeast from you and build a quarry there."
 msgstr ""
+"* Constrúe instalacións militares (coma postos de garda e cuarteis) para "
+"expandir o voso territorio.<br /> Acada as rochas do noroeste da vosa "
+"posición e constrúe unha canteira alí."
 
 #: ../../campaigns/t02.wmf/event:252
 msgid "Khantrukh grumbles..."
@@ -177,15 +221,15 @@ msgstr "Khantrukh gruñe..."
 
 #: ../../campaigns/t02.wmf/event:254
 msgid " \"Old man? Disrespectful youth!\" "
-msgstr ""
+msgstr " «Ancián? A ver se amosamos máis respecto!» "
 
 #: ../../campaigns/t02.wmf/event:264
 msgid "Khantrukh nods satisfied..."
-msgstr ""
+msgstr "Khantrukh asinte satisfeito..."
 
 #: ../../campaigns/t02.wmf/event:266
 msgid " \"At last! These rocks should last for a while.\" "
-msgstr ""
+msgstr " «Por fin! Estas rochas deberían durar un tempo.» "
 
 #: ../../campaigns/t02.wmf/event:277
 msgid "Boldreth exclaims..."
@@ -199,6 +243,11 @@ msgid ""
 "send out some of those who understand the stone's tongue to unravel the "
 "mountain's secrets!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Mira iso! A gran montaña de Kal'mavrath! Pregúntome que tesouros da "
+"natureza agochará.<br /> Esta é a oportunidade para os anciáns de demostrar "
+"a nosa valía por vez primeira en moito tempo. Enviemos a algúns dos que "
+"entenden a linga das pedras para desenredar os secretos da montaña!»<br /> "
+"<br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/t02.wmf/event:280
 #: ../../campaigns/t02.wmf/objective:15
@@ -213,6 +262,15 @@ msgid ""
 "Mines may only be built on mountain terrain. Suitable places for mines are "
 "displayed as hammer and pick."
 msgstr ""
+"* Constrúe unha mina de carbón e outra de mineral de ferro.<br /> Sitúa unha "
+"bandeira no flanco da montaña ao leste (pero na montaña, non na chaira). "
+"Cando premas nesa bandeira, poderás enviar alí xeólogos. Dado que a bandeira "
+"estará nas montañas, os xeólogos buscarán minerais ─en caso contrario "
+"buscarán auga─. Logo constrúe unha mina para ambos os dous tipos de recursos "
+"que atoparán, escollendo correctamente a mina a construír:<br />Negro: "
+"carbón<br /> Vermello: mineral de ferro<br /> Amarelo: ouro<br /> Gris: "
+"granito<br /> As minas só poden construírse en terreo montañoso. Os sitios "
+"axeitados para minas amósanse cun martelo e un pico."
 
 #: ../../campaigns/t02.wmf/event:290
 msgid "Boldreth laughs..."
@@ -223,6 +281,9 @@ msgid ""
 " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use "
 "this coal and iron ore for!<br> It might even be enough to...\" "
 msgstr ""
+" «Polas barbas de Chat'Karuth, isto é abraiante! Imaxina todo o que podemos "
+"facer con este carbón e mineral de ferro!<br /> Mesmo podería ser abondo "
+"para...» "
 
 #: ../../campaigns/t02.wmf/event:303
 msgid "Khantrukh interrupts..."
@@ -235,6 +296,10 @@ msgid ""
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
+" «Se ben é certo, deberíamos pensalo máis tarde, polo de agora hai outros "
+"obstáculos máis a man. Os mineiros van pedir maiores racións para traballar "
+"arriba na montaña co frío que vai, e subministrárllelas non vai ser nada "
+"fácil.» "
 
 #: ../../campaigns/t02.wmf/event:315
 msgid "Boldreth nods..."
@@ -247,6 +312,11 @@ msgid ""
 "them. And, of course, the people would cheer to a new tavern - hey, we might "
 "call it 'Thron's Pride' or so if you want!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Teño que pasarcho a ti: ti estás aquí mesmo, ancián.<br /> Semella haber "
+"bastantes animais nestes bosques. Poderiamos cazar máis.E, por suposto, a "
+"xente estaría contenta cunha nova taberna. Se queres podiamos chamala “O' "
+"orgullo de Thron” ou algo así, se gustas!»<br /> <br /> -- NOVO OBXECTIVO --"
+"<br /> "
 
 #: ../../campaigns/t02.wmf/event:318
 #: ../../campaigns/t02.wmf/objective:23
@@ -258,10 +328,16 @@ msgid ""
 "which has to be refined before being used in a secondary building - others "
 "will follow."
 msgstr ""
+"* Consegue un cazador, un zoólogo e un taberneiro.<br />Os mineiros "
+"necesitan comida para traballar.<br /> Un cazador pode cazar animais, "
+"mentres que un zoólogo evita que se extingan. Logo a carne cocíñase na "
+"taberna e prepárase para os mineiros.<br /> Este é só o primeiro exemplo dun "
+"material que ten que “refinarse“ antes de poder usarse nun segundo edificio. "
+"Máis adiante haberá máis."
 
 #: ../../campaigns/t02.wmf/event:328
 msgid "The elder jumps into the air..."
-msgstr ""
+msgstr "O ancián irrompe de súpeto..."
 
 #: ../../campaigns/t02.wmf/event:330
 msgid ""
@@ -270,6 +346,10 @@ msgid ""
 "farm? I sure would enjoy a freshly baken pitta bread for a "
 "change...\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «A sabedoría leva á busca da variedade.<br /> Ao norte da gran montaña hai "
+"unha gran chaira. Por que non aproveitamos o espazo que a nai Natureza nos "
+"forneceu e construímos unha granxa? Encantaríame un pouco de pan de pita, "
+"aínda quentiño do forno...»<br /> <br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/t02.wmf/event:331
 #: ../../campaigns/t02.wmf/objective:31
@@ -280,6 +360,11 @@ msgid ""
 "obtain water by building a well at a spot where your Geologists find a water "
 "source."
 msgstr ""
+"* Constrúe un muíño, unha granxa e unha panadería.<br /> Tamén podes "
+"producir alimentos ─doutro tipo─ con pescadores ou cazadores. O trigo das "
+"granxas ten que mesturarse con auga na panadería antes de poder comerse. "
+"Poder obter auga construíndo un muíño onde o teu xeólogo atopase unha fonte "
+"de auga."
 
 #: ../../campaigns/t02.wmf/event:341
 msgid "Boldreth cheers up..."
@@ -291,6 +376,9 @@ msgid ""
 "sun sets today you will have a magnificient meal fit for the chieftain of "
 "all clans!\" "
 msgstr ""
+" «Os nosos cazadores están nos bosques, Thron.<br /> Prométoche que para a "
+"posta de sol terás un marabilloso banquete digno do xefe de todas as "
+"tribos!» "
 
 #: ../../campaigns/t02.wmf/event:354
 msgid "Khantrukh gazes over the plains..."
@@ -302,10 +390,13 @@ msgid ""
 "to the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!\" "
 msgstr ""
+" «Non é adorable? Os campos dourados, medrando en paz, bailando co vento... "
+"E teño entendido que o panadeiro está de camiño, co seu mellor pan, "
+"reservado para o noso líder!» "
 
 #: ../../campaigns/t02.wmf/event:367
 msgid "Thron recognizes..."
-msgstr ""
+msgstr "Thron recoñece que..."
 
 #: ../../campaigns/t02.wmf/event:369
 msgid ""
@@ -315,10 +406,15 @@ msgid ""
 "higher spirit still the day after.<br> Maybe we actually are slowly creating "
 "a place here which we can... call home.\" "
 msgstr ""
+" «Onte abriu unha taberna para os nosos. Se ben non estou eu para "
+"celebracións, decateime do que este pequeno anaco de fogar significa para os "
+"nosos. As súas cancións encheron o ambiente ata ben entrada a noite, e o seu "
+"ánimo medrou cada día máis.<br /> Pode que, aos poucos, esteamos construíndo "
+"un lugar que poderiamos... chamar fogar.» "
 
 #: ../../campaigns/t02.wmf/event:371
 msgid "A beautiful morning"
-msgstr ""
+msgstr "Unha fermosa mañá"
 
 #: ../../campaigns/t02.wmf/event:380
 msgid "Boldreth remarks..."
@@ -332,6 +428,11 @@ msgid ""
 "whatever we want. And we need the coal to keep the smelter's ovens "
 "burning.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Agora que temos tanto as minas coma o alimento para sustentalas, "
+"deberiamos darlle un mellor uso ao material que os nosos mineiros conseguen. "
+"O mineral de ferro ten que fundirse para separar o ferro, para que así estea "
+"listo para forxar o que queiramos. E precisamos o carbón para manter vivo o "
+"lume da forxa.»<br /> <br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/t02.wmf/event:383
 #: ../../campaigns/t02.wmf/objective:39
@@ -339,6 +440,8 @@ msgid ""
 "* Build a smelting works. The iron ore your miners bring up is not usable "
 "yet - it has to be melted into iron first."
 msgstr ""
+"* Construír unha forxa. O mineral de ferro que extraen os teus mineiros "
+"aínda non pode usarse. Antes hai que separar o ferro."
 
 #: ../../campaigns/t02.wmf/event:393
 msgid "Khantrukh speaks..."
@@ -352,6 +455,11 @@ msgid ""
 "into these places. We should reward this bravery with greater rations for "
 "them.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Os mineiros extraen cada vez menos! Temos que afondar, máis preto do "
+"corazón da montaña, se queremos máis dos seus tesouros!<br /> Por suposto, "
+"nesas profundidades vai frío e está escuro, e só uns poucos voluntarios se "
+"aventuran neses lugares. Deberiamos recompensar esta bravura con mellores "
+"racións de comida.»<br /> <br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/t02.wmf/event:396
 #: ../../campaigns/t02.wmf/objective:47
@@ -372,6 +480,22 @@ msgid ""
 "work a bit faster, smaller mines need cheaper food. It's up to you which "
 "strategy you prefer."
 msgstr ""
+"* Mellora a mina de carbón e maila taberna ás mellores versións dos seus "
+"respectivos edificios.<br />Unha mina normal só pode cavar ao redor dun "
+"terzo dos recursos baixo ela. Hai que mellorala a unha mina máis profunda "
+"para que traballe axeitadamente. Para mellorar un edificio, escólleo e preme "
+"o botón correspondente do menú que aparecerá.<br />Os traballadores obteñen "
+"experiencia traballando ben. Con experiencia abondo vólvense traballadores "
+"máis avanzados, necesarios para traballar nos edificios mellorados. Non "
+"mellores un edificio antes de contar con traballadores avanzados abondo para "
+"traballar no edificio avanzado! Ditos edificios adoitan ter maiores "
+"necesidades que os básicos. Por exemplo, as minas profundas necesitan "
+"merendas en vez de racións. Terás que mellorar a túa taberna a unha pousada "
+"para producir merendas a partir de pan de pita e un segundo tipo de alimento "
+"(carne ou peixe). Por suposto que podes mellorar todas as minas a minas "
+"fondas instantaneamente ─as minas máis grandes funcionan máis rápido, as "
+"máis pequenas necesitan comida de peor calidade─. Ti elixes que estratexia "
+"seguir."
 
 #: ../../campaigns/t02.wmf/event:407
 msgid "Boldreth seems concerned..."
@@ -384,6 +508,10 @@ msgid ""
 "dangerous as ours!<br> We need a wood hardener, and we need one "
 "now!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Acabo de reparar en que estamos case sen vigas! Non podemos poñer aos "
+"nosos guerreiros en cabanas feitas pedazos, e menos en tempos tan perigosos "
+"coma os que corren!<br /> Necesitamos un reforzador de madeira, e canto "
+"antes!»<br /> <br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/t02.wmf/event:410
 #: ../../campaigns/t02.wmf/objective:55
@@ -394,6 +522,12 @@ msgid ""
 "first. Always remember to build a wood hardener before you run out of "
 "blackwood, as without it you cannot expand."
 msgstr ""
+"* Consegue a un reforzador de madeira.<br /> Para facer edificios máis "
+"grandes e mellores (incluídas as instalacións militares) fan falla mellores "
+"materiais de construción. Non se poden facer con simples troncos. Hai que "
+"refinar a madeira en vigas por medio dun reforzador de madeira primeiro. "
+"Lembra construír sempre un reforzador de madeira antes de quedar sen vigas, "
+"posto que sen elas non podes expandirte."
 
 #: ../../campaigns/t02.wmf/event:420
 msgid "Boldreth smiles..."
@@ -407,6 +541,12 @@ msgid ""
 "could, in times of need, build a fortress as the world has not seen "
 "before!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Ben, vello amigo, isto debería asegurar que non se nos veñan abaixo as "
+"fortificacións co primeiro choro dos nosos inimigos na primeira batalla! "
+"Agora podemos expandirnos con seguridade!<br /> Aínda así, non estaría de "
+"máis conseguir algo de cemento para as nosas vindeiras campañas. Así, cando "
+"fose preciso, poderiamos construír unha fortaleza coma nunca antes se "
+"vira!»<br /> <br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/t02.wmf/event:423
 #: ../../campaigns/t02.wmf/objective:63
@@ -420,6 +560,14 @@ msgid ""
 "in the consequently appearing menu. Coal can be obtained by building a "
 "charcoal burner or a coal mine."
 msgstr ""
+"* Constrúe un forno de pedra calcaria e un queimador ou mina de carbón.<br "
+"/> Para edificios mellores farán falla outros materiais mellorados aparte de "
+"vigas. Por exemplo, cemento, que o produce o quentador de pedra calcaria a "
+"partir de pedra, auga e carbón. Podes obter auga construíndo un muíño nunha "
+"fonte de auga, que pode descubrir o teu xeólogo cando o envías a unha "
+"bandeira que non está nunha montaña, premendo en dita bandeira e a "
+"continuación no símbolo do xeólogo no menú que aparecerá. O carbón pode "
+"sacarse dun queimador de carbón ou unha mina de carbón."
 
 #: ../../campaigns/t02.wmf/event:433
 msgid "Khantrukh steps in..."
@@ -434,6 +582,12 @@ msgid ""
 "dripping on my face!<br> Now this is a problem we should do something "
 "about!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Xefe, isto é unha vergoña! Está ben que agora poidamos producir cemento "
+"para fortificacións máis resistentes e mellores, pero con iso non abonda "
+"para evitar que nos furen os tellados! Pode que os máis novos o pasen ben "
+"mollándose coa chuvia pola noite, pero eu non podo durmir coa chuvia "
+"baténdome na cara!<br /> Temos que facer algo ao respecto!»<br /> <br /> -- "
+"NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/t02.wmf/event:436
 #: ../../campaigns/t02.wmf/objective:71
@@ -442,16 +596,21 @@ msgid ""
 "is thatch reed, used to cover roofs. Thatch reed is planted by a fernery, "
 "around the building."
 msgstr ""
+"* Constrúe unha plantación.<br /> O terceiro material necesario para os "
+"edificios mellorados é palla, utilizada para cubrir os tellados. Os xuncos "
+"de palla seméntanse nas plantacións, ao redor do edificio."
 
 #: ../../campaigns/t02.wmf/event:447
 msgid "Khantrukh seems relieved..."
-msgstr ""
+msgstr "Khantrukh semella aliviado..."
 
 #: ../../campaigns/t02.wmf/event:449
 msgid ""
 " \"Wonderful! Our roofs are not dripping anymore, and we have all the "
 "material we need for, well, whichever monumental building we see fit!\" "
 msgstr ""
+" «Marabilloso! Os teitos xa non gotean, e temos todos os materiais que "
+"precisamos para calquera edificio magnífico que queiramos!» "
 
 #: ../../campaigns/t02.wmf/event:467
 #: ../../campaigns/t02.wmf/event:1158
@@ -467,14 +626,20 @@ msgid ""
 "anything but ashes and wasted ruins left of our once beautiful capital when "
 "we get there?\" "
 msgstr ""
+" «Unha noite en que a lúa brillaba con todas as súas forzas, trepei ata a "
+"cima do Kal'mabrath.<br /> Cando albisquei o horizonte, aínda puiden ver "
+"luces carmesí na distancia. É incrible a paixón con que os meus irmáns "
+"loitan esta guerra. Teño medo de volver ver Al'thunran, pregúntome se cando "
+"cheguemos haberá algo máis que cinzas e ruínas do que antes fora a preciosa "
+"capital.» "
 
 #: ../../campaigns/t02.wmf/event:471
 msgid "One fullmoon night"
-msgstr ""
+msgstr "Unha noite de lúa chea"
 
 #: ../../campaigns/t02.wmf/event:480
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "Thron semella preocupado..."
 
 #: ../../campaigns/t02.wmf/event:482
 msgid ""
@@ -484,10 +649,15 @@ msgid ""
 "would finally come to an end.<br> So far, it seems that neither prayer was "
 "fulfilled.\" "
 msgstr ""
+" \"O inverno bótasenos enriba. Algúns dos nosos están sufrindo por mor da "
+"friaxe, pero debemos aguantar. O día do noso regreso xa non pode estar moi "
+"lonxe, non debe.<br /> Recei porque volvese a calor, como recei para que a "
+"guerra rematase dunha vez.<br /> Ata o de agora parece que ningunha das "
+"súplicas foi escoitada.» "
 
 #: ../../campaigns/t02.wmf/event:484
 msgid "Another cold day"
-msgstr ""
+msgstr "Outro día de friaxe"
 
 #: ../../campaigns/t02.wmf/event:548
 msgid ""
@@ -501,10 +671,19 @@ msgid ""
 "this mission. You may continue playing if you wish, otherwise move on to the "
 "next mission."
 msgstr ""
+" «O outro día Boldreth pediume que o acompañase á nova pousada. Dixo que me "
+"animaría.<br /> Cando mirei ao meu arredor, vin caras de fidelidade, de fe "
+"en que puidese guialas nestes días escuros. Mais antes de que puidese dicir "
+"algunhaspalabras de gratitude ou ánimo, un dos meus guerreiros entrou na "
+"pousada. Estivera lonxe no bosque durante os últimos días, e notábaselle o "
+"canso que estaba.<br /> As novas que trouxo cambiárono todo...»<br /> <br /> "
+"--------------------- VITORIA! ----------------------<br /> <br /> "
+"Completaches esta misión. Agora podes seguir xogando, ou continuar coa "
+"seguinte misión."
 
 #: ../../campaigns/t02.wmf/event:550
 msgid "Mission Complete"
-msgstr ""
+msgstr "Misión completada"
 
 #: ../../campaigns/t02.wmf/event:553
 msgid "Continue"
@@ -515,46 +694,48 @@ msgid ""
 " \"We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength.<br> They have decided to join us!\" "
 msgstr ""
+" «Atopamos unha vila con xente amistosa e traballadora, impresionada pola "
+"nosa riqueza, tecnoloxía e forza.<br /> Decidiron unirse a nós!» "
 
 #: ../../campaigns/t02.wmf/event:1162
 msgid "A friendly village joined us!"
-msgstr ""
+msgstr "Unha vila amistosa uniuse a nós!"
 
 #: ../../campaigns/t02.wmf/objective:5
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Expándete cara o noroeste e constrúe unha canteira"
 
 #: ../../campaigns/t02.wmf/objective:13
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Comeza a construción de minas na montaña"
 
 #: ../../campaigns/t02.wmf/objective:21
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Subminístralles alimentos aos teus mineiros"
 
 #: ../../campaigns/t02.wmf/objective:29
 msgid "Bake bread"
-msgstr ""
+msgstr "Cociña pan"
 
 #: ../../campaigns/t02.wmf/objective:37
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Refina os produtos das minas"
 
 #: ../../campaigns/t02.wmf/objective:45
 msgid "Enhance Buildings"
-msgstr ""
+msgstr "Melloras os edificios"
 
 #: ../../campaigns/t02.wmf/objective:53
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Constrúe un reforzador de madeira"
 
 #: ../../campaigns/t02.wmf/objective:61
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Constrúe un queimador de pedra calcaria"
 
 #: ../../campaigns/t02.wmf/objective:69
 msgid "Build a fernery"
-msgstr ""
+msgstr "Constrúe unha plantación"
 
 #~ msgid "Khantrukh seems reliefed..."
 #~ msgstr "Khantrukh semella aliviado..."
