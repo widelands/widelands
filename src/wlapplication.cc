@@ -760,23 +760,13 @@ bool WLApplication::init_settings() {
 	g_options.read("config", "global");
 	Section & s = g_options.pull_section("global");
 
-	// Set Locale and grab default domain
-	if (m_commandline.count("language")) {
-			i18n::set_locale(m_commandline["language"]);
-			m_commandline.erase("language");
-	} else {
-		i18n::set_locale(s.get_string("language", ""));
-	}
-	if (m_commandline.count("localedir")) {
-		i18n::grab_textdomain("widelands", m_commandline["localedir"]);
-		m_commandline.erase("localedir");
-	} else {
-		i18n::grab_textdomain("widelands", s.get_string("localedir", INSTALL_LOCALEDIR));
-	}
-	log("using locale %s\n", i18n::get_locale().c_str());
-
 	//then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
+
+	// Set Locale and grab default domain
+	i18n::set_locale(s.get_string("language", ""));
+	i18n::grab_textdomain("widelands", s.get_string("localedir", INSTALL_LOCALEDIR));
+	log("using locale %s\n", i18n::get_locale().c_str());
 
 	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));

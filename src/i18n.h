@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2006, 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ namespace i18n {
 char const * translate(char        const *) __attribute__ ((format_arg (1)));
 char const * translate(std::string const &);
 
-	void    grab_textdomain(std::string const &, std::string const & localedir = INSTALL_LOCALEDIR);
+void  grab_textdomain(std::string const &, std::string const & localedir = INSTALL_LOCALEDIR);
 void release_textdomain();
 
 /// Create an object of this type to grab a textdomain and make sure that it is
@@ -48,7 +48,7 @@ struct Textdomain {
 	~Textdomain()                         {release_textdomain();}
 };
 
-	void            set_locale(std::string);
+void set_locale(std::string);
 std::string const & get_locale();
 }
 

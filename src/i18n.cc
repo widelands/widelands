@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ char const * translate(std::string const & str) {
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-	void grab_textdomain(std::string const & domain, std::string const & localedir) {
+void grab_textdomain(std::string const & domain, std::string const & localedir) {
 	char const * const dom = domain.c_str();
 	char const * const ldir = localedir.c_str();
 
@@ -93,7 +93,7 @@ void release_textdomain() {
 /**
  * Set the locale to the given string
  */
-	void set_locale(std::string name) {
+void set_locale(std::string name) {
 	std::string lang(name);
 
 	// Somehow setlocale doesn't behave same on
