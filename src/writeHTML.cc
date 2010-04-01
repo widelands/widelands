@@ -437,7 +437,7 @@ void Building_Descr::writeHTML(::FileWrite & fw) const {
 				(fw,
 				 name() + "/index_" + i18n::get_locale() + ".xhtml#buildcost_"    +
 				 tribe().get_ware_descr(j.current->first)->name() + "\" title=\"" +
-				 (format(_("%s's constructionsite"))%descname()).str() +
+				 (format(_("%s's constructionsite")) % descname()).str() +
 				 "\"><img src=\"../"      +
 				 name() + "/menu.png\" alt=\"" + descname(),
 				 HTMLReferences::Madeof,
@@ -668,7 +668,7 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 						(fw,
 						 name() + "/index_" + i18n::get_locale()                    +
 						 ".xhtml#buildcost_" + j.current->first + "\" title=\""     +
-						 (format(_("%s's creation"))%descname()).str() +
+						 (format(_("%s's creation")) % descname()).str() +
 						 "\"><img src=\"../"        +
 						 name() + "/menu.png\" alt=\"" + descname(),
 						 HTMLReferences::Madeof,
@@ -679,7 +679,7 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 						(fw,
 						 name() + "/index_" + i18n::get_locale()                    +
 						 ".xhtml#buildcost_" + j.current->first + "\" title=\""     +
-						 (format(_("%s's creation"))%descname()).str() +
+						 (format(_("%s's creation")) % descname()).str() +
 						 "\"><img src=\"../"        +
 						 name() + "/menu.png\" alt=\"" + descname(),
 						 HTMLReferences::Madeof,
@@ -707,7 +707,7 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 			(fw,
 			 name() + "/index_" + i18n::get_locale() + ".xhtml#becomes_"         +
 			 tribe().get_worker_descr(becomes())->name() + "\" title=\""         +
-			 (format(_("%s's promotion"))%descname()).str() +
+			 (format(_("%s's promotion")) % descname()).str() +
 			 "\"><img src=\"../" + name()       +
 			 "/menu.png\" alt=\"" + descname(),
 			 HTMLReferences::Become,
@@ -815,7 +815,7 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 					 name() + "/index_" + i18n::get_locale() + ".xhtml#input_"     +
 					 tribe().get_ware_descr(i.current->first)->name().c_str()      +
 					 "\" title=\"" +
-					 (format(_("%s's input"))%descname()).str() +
+					 (format(_("%s's input")) % descname()).str() +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
 					 descname(),
 					 HTMLReferences::Input,
@@ -852,7 +852,7 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 					 name() + "/index_" + i18n::get_locale() + ".xhtml#output_"    +
 					 tribe().get_worker_descr(*i.current)->name().c_str()          +
 					 "\" title=\"" +
-					 (format(_("%s's output"))%descname()).str() +
+					 (format(_("%s's output")) % descname()).str() +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
 					 descname(),
 					 HTMLReferences::Output,
@@ -1179,9 +1179,9 @@ void ProductionProgram::ActConsume::writeHTML
 	fw.Text("\">");
 	fw.Text(_("consume"));
 	fw.Text("</a> ");
-	for(wl_const_range<Groups> j(groups());;)
+	for (wl_const_range<Groups> j(groups());;)
 	{
-		for(wl_const_range<std::set<Ware_Index> > i(j.current->first);;)
+		for (wl_const_range<std::set<Ware_Index> > i(j.current->first);;)
 		{
 			Item_Ware_Descr const & ware = *tribe.get_ware_descr(*i.current);
 			std::string const & ware_name     = ware.    name();
@@ -1259,7 +1259,7 @@ void ProductionProgram::ActRecruit::writeHTML
 	fw.Text("\">");
 	fw.Text(_("recruit"));
 	fw.Text("</a> ");
-	for(wl_const_range<Items> i(items());;)
+	for (wl_const_range<Items> i(items());;)
 	{
 		Worker_Descr const & worker = *tribe.get_worker_descr(i.current->first);
 		std::string const & worker_name     = worker.    name();

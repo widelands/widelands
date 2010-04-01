@@ -57,7 +57,8 @@ char const * translate(std::string const & str) {
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-void grab_textdomain(std::string const & domain, std::string const & localedir) {
+void grab_textdomain(std::string const & domain, std::string const & localedir)
+{
 	char const * const dom = domain.c_str();
 	char const * const ldir = localedir.c_str();
 
@@ -65,7 +66,7 @@ void grab_textdomain(std::string const & domain, std::string const & localedir) 
 	bindtextdomain(dom, ldir);
 	log("textdomain %s @ %s\n", dom, ldir);
 	textdomain(dom);
-	textdomains.push_back(std::make_pair(dom,ldir));
+	textdomains.push_back(std::make_pair(dom, ldir));
 }
 
 /**
@@ -131,7 +132,9 @@ void set_locale(std::string name) {
 	/* Than set the variables */
 	setenv ("LANG",     lang.c_str(), 1);
 	setenv ("LANGUAGE", (lang + ":" + lang.substr(0, 2)).c_str(), 1);
-	log("LANG %s, LANGUAGE %s\n", lang.c_str(), (lang + ":" + lang.substr(0,2)).c_str());
+	log("LANG %s, LANGUAGE %s\n",
+		lang.c_str(),
+		(lang + ":" + lang.substr(0,2)).c_str());
 
 	/* Finally make changes known.  */
 	++_nl_msg_cat_cntr;
