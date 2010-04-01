@@ -765,7 +765,8 @@ bool WLApplication::init_settings() {
 
 	// Set Locale and grab default domain
 	i18n::set_locale(s.get_string("language", ""));
-	i18n::grab_textdomain("widelands", s.get_string("localedir", INSTALL_LOCALEDIR));
+	i18n::grab_textdomain
+		 ("widelands", s.get_string("localedir", INSTALL_LOCALEDIR));
 	log("using locale %s\n", i18n::get_locale().c_str());
 
 	set_input_grab(s.get_bool("inputgrab", false));
@@ -944,7 +945,7 @@ bool WLApplication::init_hardware() {
  */
 
 void terminate (int) {
-	log ("Waited 5 seconds to close audio. problems here so killing widelands. update your sound driver and/or SDL to fix this problem\n");
+	 log (_("Waited 5 seconds to close audio. problems here so killing widelands. update your sound driver and/or SDL to fix this problem\n"));
 	raise(SIGKILL);
 }
 
@@ -962,10 +963,12 @@ void WLApplication::shutdown_hardware()
 	init_graphics(0, 0, 0, false, false, false);
 #endif
 
-	SDL_QuitSubSystem(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
+	SDL_QuitSubSystem
+		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
-	//SOUND can lock up with buggy SDL/drivers. we try to do the right thing but if it doesn't happen we will kill widelands anyway
-	signal(SIGALRM,terminate);
+	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
+	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
+	signal(SIGALRM, terminate);
 	alarm(5);
 
 	g_sound_handler.shutdown();
@@ -1258,7 +1261,7 @@ void WLApplication::show_usage()
 #endif
 		<<
 		_
-			( " --speed_of_new_game  The speed that the new game will run at\n"
+			(" --speed_of_new_game  The speed that the new game will run at\n"
 			 "                      when started, with factor 1000 (0 is pause,\n"
 			 "                      1000 is normal speed).\n"
 			 " --auto_roadbuild_mode=[yes|no]\n"

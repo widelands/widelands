@@ -102,7 +102,7 @@ void Sound_Handler::init()
 	const uint16_t bufsize = 1024;
 #endif
 
-	if(m_nosound)
+	if (m_nosound)
 	{
 		set_disable_music(true);
 		set_disable_fx(true);
@@ -140,25 +140,27 @@ void Sound_Handler::shutdown()
 	Mix_ChannelFinished(0);
 	Mix_HookMusicFinished(0);
 
-	int numtimesopened, frequency,channels;
+	int numtimesopened, frequency, channels;
 	Uint16 format;
-	numtimesopened=Mix_QuerySpec(&frequency, &format, &channels);
-	log("Sound_Handler closing times %i, freq %i, format %i, chan %i\n",numtimesopened, frequency, format, channels);
+	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
+	log
+		 (_("Sound_Handler closing times %i, freq %i, format %i, chan %i\n"),
+		  numtimesopened, frequency, format, channels);
 
 	Mix_HaltChannel(-1);
 	assert(numtimesopened == 1);
 	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
 		log ("audio error %s\n", SDL_GetError());
 	}
-	char* text = new char[15];
-	SDL_AudioDriverName(text,20);
+	char * text = new char[15];
+	SDL_AudioDriverName(text, 20);
 	log("SDL_AUDIODRIVER %s\n", text);
 
-	for(int i = 0; i < numtimesopened; ++i) {
+	for (int i = 0; i < numtimesopened; ++i) {
 		Mix_CloseAudio();
 	}
 	SDL_QuitSubSystem(SDL_INIT_AUDIO);
-	
+
 	if (m_fx_lock)
 	{
 		SDL_DestroyMutex(m_fx_lock);
@@ -232,7 +234,7 @@ void Sound_Handler::load_fx
 
 	assert(g_fs);
 
-	if(m_nosound)
+	if (m_nosound)
 		return;
 
 	g_fs->FindFiles(dir, fxname + "_??.ogg." + i18n::get_locale(), &files);
@@ -269,7 +271,7 @@ void Sound_Handler::load_one_fx
 {
 	FileRead fr;
 
-	if(m_nosound)
+	if (m_nosound)
 		return;
 
 	if (not fr.TryOpen(*g_fs, filename)) {
@@ -309,7 +311,7 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 	//x, y resolutions of game window
 	Widelands::FCoords fposition;
 
-	if(m_nosound)
+	if (m_nosound)
 		return -1;
 
 	assert(m_the_game);
@@ -346,7 +348,7 @@ bool Sound_Handler::play_or_not
 	float evaluation; //temporary to calculate single influences
 	float probability; //weighted total of all influences
 
-	if(m_nosound)
+	if (m_nosound)
 		return false;
 
 	//probability that this fx gets played; initially set according to priority
@@ -373,9 +375,10 @@ bool Sound_Handler::play_or_not
 	//find out if an fx called fx_name is already running
 	bool already_running = false;
 
-	// Access to m_active_fx is protected because it can be accessed from callback
+	// Access to m_active_fx is protected because it can
+	// be accessed from callback
 	if (m_fx_lock) SDL_LockMutex(m_fx_lock);
-	container_iterate_const(Activefx_map , m_active_fx, i)
+	container_iterate_const(Activefx_map, m_active_fx, i)
 	{
 		if (i->second == fx_name) {
 			already_running = true;
@@ -426,7 +429,7 @@ void Sound_Handler::play_fx
 	 Widelands::Coords   const map_position,
 	 uint8_t             const priority)
 {
-	if(m_nosound)
+	if (m_nosound)
 		return;
 
 	play_fx(fx_name, stereo_position(map_position), priority);
@@ -444,7 +447,7 @@ void Sound_Handler::play_fx
 	 int32_t             const stereo_pos,
 	 uint8_t             const priority)
 {
-	if(m_nosound)
+	if (m_nosound)
 		return;
 
 	assert(stereo_pos >= -1);
@@ -473,8 +476,9 @@ void Sound_Handler::play_fx
 			Mix_SetPanning(chan, 254 - stereo_pos, stereo_pos);
 			Mix_Volume(chan, get_fx_volume());
 
-			// Access to m_active_fx is protected because it can be accessed from callback
-			if (m_fx_lock) SDL_LockMutex(m_fx_lock);			
+			// Access to m_active_fx is protected
+			// because it can be accessed from callback
+			if (m_fx_lock) SDL_LockMutex(m_fx_lock);
 			m_active_fx[chan] = fx_name;
 			if (m_fx_lock) SDL_UnlockMutex(m_fx_lock);
 
@@ -506,7 +510,7 @@ void Sound_Handler::register_song
 	filenameset_t files;
 	filenameset_t::const_iterator i;
 
-	if(m_nosound)
+	if (m_nosound)
 		return;
 
 	assert(g_fs);
@@ -591,7 +595,7 @@ void Sound_Handler::change_music
 	(std::string const & songset_name,
 	 int32_t const fadeout_ms, int32_t const fadein_ms)
 {
-	if(m_nosound)
+	if (m_nosound)
 		return;
 
 	std::string s = songset_name;
@@ -725,7 +729,8 @@ void Sound_Handler::fx_finished_callback(int32_t const channel)
  */
 void Sound_Handler::handle_channel_finished(uint32_t channel)
 {
-	// Needs locking because m_active_fx may be accessed from this callback or from main thread
+	// Needs locking because m_active_fx may be accessed
+	// from this callback or from main thread
 	if (m_fx_lock) SDL_LockMutex(m_fx_lock);
 	m_active_fx.erase(channel);
 	if (m_fx_lock) SDL_UnlockMutex(m_fx_lock);
