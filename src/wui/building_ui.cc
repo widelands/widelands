@@ -146,7 +146,7 @@ struct BulldozeConfirm : public UI::Window {
 	}
 
 	virtual void think();
-	void close_window() { die();}
+	void close_window() {die();}
 private:
 	Widelands::Object_Ptr m_building;
 	Widelands::Object_Ptr m_todestroy;

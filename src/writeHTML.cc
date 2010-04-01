@@ -794,7 +794,7 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 				 name() + "/index_" + i18n::get_locale() + ".xhtml#worker_"       +
 				 tribe().get_worker_descr(i.current->first)->name()               +
 				 "\" title=\"" +
-				 (format(_("%s's employee"))%descname()).str() +
+				 (format(_("%s's employee")) % descname()).str() +
 				 "\"><img src=\"../" + name() + "/menu.png\" alt=\"" + descname(),
 				 HTMLReferences::Employ,
 				 i.current->first, i.current->second);
@@ -838,7 +838,7 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 					 name() + "/index_" + i18n::get_locale() + ".xhtml#output_"    +
 					 tribe().get_ware_descr(*i.current)->name().c_str()            +
 					 "\" title=\"" +
-					 (format(_("%s's output"))%descname()).str() +
+					 (format(_("%s's output")) % descname()).str() +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
 					 descname(),
 					 HTMLReferences::Output,
