@@ -243,9 +243,10 @@ Immovable_Descr::Immovable_Descr
 		 	prof.get_section("terrain affinity"))
 	{
 		memset(it, 0, sizeof(m_terrain_affinity));
-		for(wl_index_range<Terrain_Index> i
+		for
+			(wl_index_range<Terrain_Index> i
 			(0, world.get_nr_terrains());
-			 i;++i, ++it)
+			 i; ++i, ++it)
 		{
 			char const * const terrain_type_name =
 				world.get_ter(i.current).name().c_str();
