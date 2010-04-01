@@ -38,9 +38,9 @@ the following projects:
     * By Jean-Loup Gailly and Mark Adler
     * Project can be found at http://www.gzip.org/zlib/
 
+
     boost
     * Project can be found at http://www.boost.org
-
 
 
     STLport
@@ -62,20 +62,28 @@ the following projects:
     * By The SCons Foundation
     * Project can be found at http://scons.sourceforge.net/
 
+
     CMake
     * By Kitware, Inc
     * Project can be found at http://www.cmake.org
 
+
     http://www.Sourceforge.net
-    * for their Portal
-    * subversion server
+    * for their Portal and hosting us till early 2010
+
 
     GGZ
     * Project can be found at http://www.ggzgamingzone.org/
 
+
     Bazaar
     * By Canonical Ltd.
     * Project can be found at http://bazaar.canonical.com/en/
+
+   
+    Lua
+    * by Lablua, PUC-Rio
+    * http://www.lua.org
 
 and last but not least:
     http://www.launchpad.org
