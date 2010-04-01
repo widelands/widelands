@@ -331,7 +331,7 @@ std::string FileSystem::FS_FilenameWoExt(const char * p)
 		(p ?
 		FileSystem::FS_Filename(p, extension)
 		: "");
-	if (extention)
+	if (extension)
 		 return fname.substr(0, fname.length() - strlen(extension));
 	else
 		 return fname;
