@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-03-30 11:26+0000\n"
+"PO-Revision-Date: 2010-03-31 15:42+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-31 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-04-01 03:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -215,6 +215,10 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
+". Quaeso, ut hoc ad nuntium addas.\n"
+"\n"
+"Widelands ludum servare conatur, si errorem adesset. Qua de re ludum saepe "
+"non semper retollere continuereque potes.\n"
 
 #: ../../src/wlapplication.cc:1577
 msgid "Connection timeouted"
@@ -261,7 +265,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2091 ../../src/logic/game.cc:352
 #: ../../src/logic/game.cc:391
 msgid "Loading..."
-msgstr ""
+msgstr "Tollo..."
 
 #: ../../src/writeHTML.cc:43
 msgid "Requesters"
@@ -285,7 +289,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:272
 msgid "Building types"
-msgstr ""
+msgstr "Aedificiorum genera"
 
 #: ../../src/writeHTML.cc:277 ../../src/writeHTML.cc:514
 #: ../../src/writeHTML.cc:1422
@@ -307,7 +311,7 @@ msgstr "Nomen"
 #: ../../src/writeHTML.cc:281 ../../src/wui/building_statistics_menu.cc:110
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:120
 msgid "Size"
-msgstr ""
+msgstr "Magnitudo"
 
 #: ../../src/writeHTML.cc:283 ../../src/writeHTML.cc:518
 msgid "Buildable"
@@ -315,7 +319,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:285
 msgid "Enhanced"
-msgstr ""
+msgstr "Auctum"
 
 #: ../../src/writeHTML.cc:288 ../../src/wui/building_ui.cc:657
 msgid "Stop"
@@ -332,7 +336,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:319 ../../src/writeHTML.cc:375
 #: ../../src/logic/building.cc:511
 msgid "Mine"
-msgstr ""
+msgstr "Metallum"
 
 #: ../../src/writeHTML.cc:323 ../../src/writeHTML.cc:391
 #: ../../src/logic/building.cc:512
@@ -366,11 +370,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:354
 msgid "building_types.xhtml"
-msgstr ""
+msgstr "building_types.xhtml"
 
 #: ../../src/writeHTML.cc:377
 msgid "Is mine."
-msgstr ""
+msgstr "Metallum est."
 
 #: ../../src/writeHTML.cc:382
 msgid "Is big."
@@ -413,7 +417,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
-msgstr ""
+msgstr "Auctus"
 
 #: ../../src/writeHTML.cc:462
 #, c-format
@@ -422,7 +426,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
-msgstr "species operarum"
+msgstr "genera operarum"
 
 #: ../../src/writeHTML.cc:522
 msgid "Minimum<br/>needed<br/>experience"
@@ -562,7 +566,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:775
 msgid "UNKNOWN"
-msgstr ""
+msgstr "IGNOTUM"
 
 #: ../../src/writeHTML.cc:782
 msgid "Production"
@@ -758,11 +762,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1335 ../../src/writeHTML.cc:1359
 msgid "attack"
-msgstr ""
+msgstr "Aggressio"
 
 #: ../../src/writeHTML.cc:1336 ../../src/writeHTML.cc:1360
 msgid "defense"
-msgstr ""
+msgstr "Defensio"
 
 #: ../../src/writeHTML.cc:1337 ../../src/writeHTML.cc:1361
 msgid "evade"
@@ -774,7 +778,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1352
 msgid "train"
-msgstr ""
+msgstr "exercere"
 
 #: ../../src/writeHTML.cc:1374
 msgid "Documentation for program command playFX"
@@ -901,21 +905,21 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
-msgstr ""
+msgstr "Index"
 
 #: ../../src/editor/editorinteractive.cc:67
 msgid "Tool"
-msgstr ""
+msgstr "Instrumentum"
 
 #: ../../src/editor/editorinteractive.cc:70
 msgid "Toolsize"
-msgstr ""
+msgstr "Magnitudo instrumenti"
 
 #: ../../src/editor/editorinteractive.cc:73
 #: ../../src/wui/interactive_player.cc:186
 #: ../../src/wui/interactive_spectator.cc:64
 msgid "Minimap"
-msgstr ""
+msgstr "Tabula minima"
 
 #: ../../src/editor/editorinteractive.cc:76
 #: ../../src/wui/interactive_player.cc:189
@@ -924,7 +928,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:79
 msgid "Players"
-msgstr ""
+msgstr "Ludor"
 
 #: ../../src/editor/editorinteractive.cc:82
 #: ../../src/editor/ui_menus/editor_event_menu.cc:75
@@ -956,12 +960,12 @@ msgstr ""
 #: ../../src/logic/editor_game_base.cc:311
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "Tollo gentem: %s"
 
 #: ../../src/editor/editorinteractive.cc:188
 #: ../../src/logic/editor_game_base.cc:307
 msgid "Loading world data"
-msgstr ""
+msgstr "Tollo data mundi"
 
 #: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/editorinteractive.cc:607
@@ -970,11 +974,11 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:232
 msgid "Map unsaved"
-msgstr ""
+msgstr "Tabula non servata"
 
 #: ../../src/editor/editorinteractive.cc:233
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr ""
+msgstr "Tabula non servata est. Num exire vis?"
 
 #: ../../src/editor/editorinteractive.cc:594
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
@@ -982,7 +986,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:182
 #: ../../src/logic/map.h:170
 msgid "No Name"
-msgstr ""
+msgstr "Nullum nomen"
 
 #: ../../src/editor/editorinteractive.cc:596
 #: ../../src/ui_fsmenu/netsetup_lan.cc:185
@@ -990,7 +994,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
 #: ../../src/logic/map.h:171
 msgid "Unknown"
-msgstr ""
+msgstr "Ignotum"
 
 #: ../../src/events/event_allow_building_types.cc:44
 #: ../../src/events/event_allow_retreat_change.cc:43
@@ -1038,7 +1042,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr ""
+msgstr "Expectavi %s sed \"%s\" inveni"
 
 #: ../../src/events/event_building.cc:73 ../../src/events/event_building.cc:82
 msgid "distance (1 .. 255)"
@@ -1086,7 +1090,7 @@ msgstr ""
 #: ../../src/trigger/trigger_building.cc:58
 #, c-format
 msgid "(building): %s"
-msgstr ""
+msgstr "(aedificium): %s"
 
 #: ../../src/events/event_building.cc:422
 #, c-format
@@ -1101,12 +1105,12 @@ msgstr ""
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:61
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "Ludor %u deest"
 
 #: ../../src/events/event_expire_message.cc:55
 #, c-format
 msgid "player %u's message %u does not exist"
-msgstr ""
+msgstr "Nuntium %u ludoris %u deest"
 
 #: ../../src/events/event_expire_message.cc:61
 #, c-format

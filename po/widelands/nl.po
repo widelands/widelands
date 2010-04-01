@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-03-26 12:01+0000\n"
-"Last-Translator: Foppe Benedictus <Unknown>\n"
+"PO-Revision-Date: 2010-03-31 16:11+0000\n"
+"Last-Translator: Jacob Torrey <ranok@r4n0k.com>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-27 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-04-01 03:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -555,7 +555,7 @@ msgstr "Heeft ervaring nodig van tussen de %u en %u keer werken om te worden"
 #: ../../src/writeHTML.cc:710
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "%s's promotie"
 
 #: ../../src/writeHTML.cc:721 ../../src/writeHTML.cc:866
 msgid "Programs"
@@ -645,7 +645,7 @@ msgstr "Werkers"
 #: ../../src/writeHTML.cc:797
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "%s's werknemer"
 
 #: ../../src/writeHTML.cc:807
 msgid "Inputs"
@@ -1835,7 +1835,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:226
 #, c-format
 msgid "program %s: %s"
-msgstr ""
+msgstr "programma %s: %s"
 
 #: ../../src/logic/immovable.cc:257 ../../src/logic/immovable.cc:271
 #, c-format
@@ -1879,7 +1879,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:706 ../../src/logic/production_program.cc:1323
 msgid "priority"
-msgstr ""
+msgstr "prioriteit"
 
 #: ../../src/logic/immovable.cc:740 ../../src/logic/immovable.cc:809
 #: ../../src/logic/immovable.cc:895
