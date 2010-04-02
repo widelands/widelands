@@ -327,7 +327,7 @@ ENDIF (WIN32)
 #configure_file (src/build_info.cc.cmake src/build_info.cc)
 
 add_subdirectory(doc)
-#add_subdirectory(po)
+add_subdirectory(po)
 #add_subdirectory(pics)
 add_subdirectory(src)
 
@@ -379,51 +379,6 @@ if (WIN32)
 else (WIN32)
   set (WL_CREATE_SYMLINK_COMMAND "create_symlink")
 endif (WIN32)
-
-if (${CMAKE_BUILD_TYPE} STREQUAL Release)
-  add_custom_target (
-    lang ALL
-    COMMAND cmake -E echo "Preparing directory po"
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
-    COMMAND cmake -E echo "Preparing directory campaigns"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
-    COMMAND cmake -E echo "Preparing directory maps"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
-    COMMAND cmake -E echo "Preparing directory tribes"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
-    COMMAND cmake -E echo "Preparing directory txts"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
-    COMMAND cmake -E echo "Preparing directory worlds"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
-    COMMAND cmake -E echo "Running the locale generation task"
-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  )
-else (${CMAKE_BUILD_TYPE} STREQUAL Release)
-  add_custom_target (
-    lang
-    COMMAND cmake -E echo "Preparing directory po"
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
-    COMMAND cmake -E echo "Preparing directory campaigns"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
-    COMMAND cmake -E echo "Preparing directory maps"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
-    COMMAND cmake -E echo "Preparing directory tribes"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
-    COMMAND cmake -E echo "Preparing directory txts"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
-    COMMAND cmake -E echo "Preparing directory worlds"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
-    COMMAND cmake -E echo "Running the locale generation task"
-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  )
-  add_custom_target (
-    lang_dummy ALL
-    COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  )
-endif (${CMAKE_BUILD_TYPE} STREQUAL Release)
 
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES locale)
 
