@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-31 17:03+0000\n"
+"PO-Revision-Date: 2010-04-01 14:52+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-01 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-04-02 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -95,27 +95,31 @@ msgstr ""
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:16
 msgid "Plant blackroot"
-msgstr ""
+msgstr "Radices nigras serit"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:18
 msgid "Harvest blackroot"
-msgstr ""
+msgstr "Radices nigras metit"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr ""
+msgstr "Radices nigras serit metitque"
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
 "Blackroot Flour is produced out of blackroots and is one of three parts of "
 "the atlantian bread."
 msgstr ""
+"Farina radicis nigrae est e radice nigra facta unaque e tribus partibus "
+"Atlantidinensis panis."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
 "This tasty bread is made out of corn- and blackrootflour and is one part of "
 "miners meal."
 msgstr ""
+"Hic panis bonus e farina maizi nigraeque radicis coquitur et a homines, qui "
+"in metallis laborant, editur."
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
@@ -541,7 +545,7 @@ msgstr "Carcer"
 
 #: ../../tribes/atlanteans/conf:147
 msgid "Labyrinth"
-msgstr ""
+msgstr "Labyrinthus"
 
 #: ../../tribes/atlanteans/conf:150
 #: ../../tribes/atlanteans/conf:167
@@ -618,7 +622,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Bakery"
-msgstr ""
+msgstr "Pistrina"
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Blackroot Farm"
@@ -630,7 +634,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:181
 msgid "Coal Mine"
-msgstr ""
+msgstr "Metallum carbonis"
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Crystal Mine"
@@ -646,7 +650,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Fisher's House"
-msgstr ""
+msgstr "Domus pistoria"
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Forester's House"
@@ -654,7 +658,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Gold Mine"
-msgstr ""
+msgstr "Metallum auri"
 
 #: ../../tribes/atlanteans/conf:188
 msgid "Goldweaver"
@@ -662,11 +666,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Hunter's House"
-msgstr ""
+msgstr "Domus venatoris"
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Iron Mine"
-msgstr ""
+msgstr "Metallum ferri"
 
 #: ../../tribes/atlanteans/conf:191
 msgid "Mill"

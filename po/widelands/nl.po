@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-03-31 16:11+0000\n"
-"Last-Translator: Jacob Torrey <ranok@r4n0k.com>\n"
+"PO-Revision-Date: 2010-04-01 20:34+0000\n"
+"Last-Translator: PliniusNeo <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-01 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-04-02 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../../src/computer_player.cc:38
 msgid "None"
-msgstr "Geen"
+msgstr "Niets"
 
 #: ../../src/s2map.cc:220
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -142,10 +142,24 @@ msgid ""
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
+"Geluidsoptions:\n"
+" --nosound Start het spel zonder geluid.\n"
+" --disable_fx Geen geluidseffecten.\n"
+" --disable_music Geen muziek.\n"
+"\n"
+" --nozip Sla bestanden niet op als binaire zip archieven.\n"
+"\n"
+" --editor Start direct de Widelands editor.\n"
+"                      U kunt =BESTANDNAAM toevoegen om direct\n"
+"                      de kaart BESTANDNAAM in de editor te laden.\n"
+" --scenario=BESTANDNAAM  Start direct the map BESTANDNAAM als scenario\n"
+"                      kaart.\n"
+" --loadgame=BESTANDNAAM Laad direct het opgeslagen spel BESTANDNAAM.\n"
 
 #: ../../src/wlapplication.cc:1243
 msgid " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
 msgstr ""
+" --dedicated=BESTANDNAAM Start een spel over ggz met BESTANDNAAM als map\n"
 
 #: ../../src/wlapplication.cc:1247
 msgid ""
@@ -472,7 +486,7 @@ msgstr "Bouwkosten"
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "%ss bouwplaats"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
@@ -481,7 +495,7 @@ msgstr "Verbeteringen"
 #: ../../src/writeHTML.cc:462
 #, c-format
 msgid "%s's enhancement"
-msgstr ""
+msgstr "%ss uitbreiding"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
@@ -541,7 +555,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:671 ../../src/writeHTML.cc:682
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "%ss creatie"
 
 #: ../../src/writeHTML.cc:693
 msgid "Spawns in warehouses."
@@ -654,7 +668,7 @@ msgstr "Invoer"
 #: ../../src/writeHTML.cc:818
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "%ss invoer"
 
 #: ../../src/writeHTML.cc:830
 msgid "Output"
@@ -663,7 +677,7 @@ msgstr "Uitvoer"
 #: ../../src/writeHTML.cc:841 ../../src/writeHTML.cc:855
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "%ss resultaat"
 
 #: ../../src/writeHTML.cc:902 ../../src/writeHTML.cc:1045
 #: ../../src/writeHTML.cc:1107 ../../src/writeHTML.cc:1135
@@ -1543,7 +1557,7 @@ msgstr "(verplaats zicht): %s"
 #: ../../src/events/event_player_retreat_change.cc:45
 #, c-format
 msgid "(player allowed retreat change): %s"
-msgstr ""
+msgstr "(speler staat verandering terugtrekken toe): %s"
 
 #: ../../src/events/event_player_area.cc:61
 #, c-format
@@ -1677,7 +1691,7 @@ msgstr ""
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "er is geen vlag op het plaats"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:85
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:63
@@ -1762,7 +1776,7 @@ msgstr ""
 #: ../../src/logic/cmd_queue.cc:178
 #, c-format
 msgid "game logic: %s"
-msgstr ""
+msgstr "spel logika: %s"
 
 #: ../../src/logic/constructionsite.cc:168
 #, c-format
@@ -1914,7 +1928,7 @@ msgstr ""
 #: ../../src/logic/instances.cc:124
 #, c-format
 msgid "object %u: %s"
-msgstr ""
+msgstr "ding %u: %s"
 
 #: ../../src/logic/instances.cc:133
 #, c-format
@@ -2904,7 +2918,7 @@ msgstr "Server zond een onbekend commando (commando nummer %u)"
 
 #: ../../src/network/netclient.cc:809
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Er ging iets fout: "
 
 #: ../../src/network/netclient.cc:840
 msgid " An automatic savegame will be created."
@@ -3519,7 +3533,7 @@ msgstr "Verwijder bestand"
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "Wil je echt verwijderen "
 
 #: ../../src/ui_fsmenu/loadreplay.cc:63
 msgid "Choose a replay!"
@@ -3956,7 +3970,7 @@ msgstr "Toon volgende"
 #: ../../src/wui/building_ui.cc:159
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr ""
+msgstr "Wil je dit echt vernietigen %s?"
 
 #: ../../src/wui/building_ui.cc:205
 msgid "Destroy building?"
@@ -4413,8 +4427,8 @@ msgstr "Goederenhulp"
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u nieuw bericht"
+msgstr[1] "%u nieuwe berichten"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
@@ -4426,7 +4440,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Bijnaam:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "email (optional):"
@@ -4435,6 +4449,8 @@ msgstr "e-mail (optioneel):"
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr ""
+"WAARSCHUWING: Het wachtwoord zal worden getoond en leesbaar worden "
+"opgeslagen!"
 
 #: ../../src/wui/login_box.cc:50
 msgid "Password:"
@@ -5018,7 +5034,7 @@ msgstr "Bergen: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:428
 msgid "Generating random map..."
-msgstr ""
+msgstr "willekeurige kaart aan het genereren..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:150
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
@@ -5383,7 +5399,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:221
 #, c-format
 msgid "No building types are selected. Select at least one."
-msgstr ""
+msgstr "Er zijn geen gebouw types geselecteerd. Kies er tenminste één."
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:224
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:200
@@ -5398,7 +5414,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:197
 #, c-format
 msgid "No worker types are selected. Select at least one."
-msgstr ""
+msgstr "Er zijn geen werker types geselecteerd. Kies er tenminste één."
 
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.cc:50
 msgid "Set Player's Flag Style Event Options"
