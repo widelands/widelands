@@ -70,6 +70,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <signal.h>
 
 #include <cerrno>
 #include <cstring>
@@ -78,6 +79,7 @@
 #include <stdexcept>
 #include <string>
 #include <ctime>
+
 
 #ifdef DEBUG
 #ifndef WIN32
