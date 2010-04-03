@@ -20,7 +20,7 @@ cd build/compile
 # do not duplicate data directories
 # except "po" and "doc" - else some files will be changed in bzr
 for i in maps pics tribes worlds campaigns txts ; do
- test -L $i || rm -rf $i && ln -s ../../$i
+ test -L $i || ( rm -rf $i && ln -s ../../$i )
 done
 
 echo "CFLAGS=${CFLAGS} MAKEOPTS=${MAKEOPTS}"
