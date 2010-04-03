@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-10 19:09+0000\n"
-"PO-Revision-Date: 2010-03-12 22:41+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-03 01:39+0000\n"
+"Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-13 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-04-03 03:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -101,6 +101,14 @@ msgid ""
 "whoever threatens our very existence, may it even be one of your blood or "
 "mind?\" "
 msgstr ""
+" Сегодня мои охотники привели мужчину и женщину с их детьми, которые "
+"прятались в лесах от войны, ненависти и мести племен, воюющих друг с другом "
+"как в древности, когда мы были просто дикарями, ведомыми инстинктами. Никто "
+"из моих братьев не сможет захватить и удержать деревянный трон, ни одно из "
+"племен не сильно настолько, чтобы покорить остальных. Убийствам не будет "
+"конца, если только... Как там говорил отец?\r\n"
+"\"Восстань против того, кто угрожает нашему существованию, будь он даже с "
+"тобой одной крови или языка, так?\" "
 
 #: ../../campaigns/t02.wmf/event:158
 msgid ""
@@ -136,11 +144,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:412
 #: ../../campaigns/t02.wmf/event:425
 msgid "Your loyal companion"
-msgstr ""
+msgstr "Ваш верный спутник"
 
 #: ../../campaigns/t02.wmf/event:227
 msgid "Khantrukh joins the both of you..."
-msgstr ""
+msgstr "Кантрук вступает в ваш разговор..."
 
 #: ../../campaigns/t02.wmf/event:229
 msgid ""
@@ -187,15 +195,15 @@ msgstr "Хантрух проворчал..."
 
 #: ../../campaigns/t02.wmf/event:254
 msgid " \"Old man? Disrespectful youth!\" "
-msgstr ""
+msgstr " \"Это я старик? Ах ты, невежественный юнец!\" "
 
 #: ../../campaigns/t02.wmf/event:264
 msgid "Khantrukh nods satisfied..."
-msgstr ""
+msgstr "Кантрук довольно кивает...."
 
 #: ../../campaigns/t02.wmf/event:266
 msgid " \"At last! These rocks should last for a while.\" "
-msgstr ""
+msgstr " \"Наконец-то! Этих скал хватит на какое-то время.\" "
 
 #: ../../campaigns/t02.wmf/event:277
 msgid "Boldreth exclaims..."

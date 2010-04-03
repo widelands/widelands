@@ -6,26 +6,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 20:30+0000\n"
-"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-02 23:37+0000\n"
+"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-04-03 03:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr ""
+msgstr "Imperiet Lektion2 - En utpost för exil"
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
 "Finally the ship was repaired, so Lutius and his people again went on the "
 "quest to find a good place for a new beginning. Only few days later they "
-"land on a green, mediterranean island, looking like paradise."
+"land on a green, Mediterranean island, looking like paradise."
 msgstr ""
+"Äntligen var skeppet reparerat, så Lutius och hans folk tog återigen upp "
+"sökandet efter ett bra ställe för en nystart. Bara några dar senare landar "
+"de på en grön, paradisliknande medelhavsö."
 
 #: ../../campaigns/emp02.wmf/event:109
 #: ../../campaigns/emp02.wmf/event:136
@@ -36,7 +39,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/event:456
 #: ../../campaigns/emp02.wmf/event:508
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutius dagbok"
 
 #: ../../campaigns/emp02.wmf/event:111
 msgid ""
@@ -48,10 +51,16 @@ msgid ""
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us.\" "
 msgstr ""
+" \"Äntligen! Den här ön verkar vara som gjord för oss, det är en gåva från "
+"till mig och mitt folk.<br> Fram tills nu har vi bara sett en liten del av "
+"ön, men redan denna ger mig sol i sinnet. Det känns som om vi har hittat en "
+"ovärderlig skatt, ett paradisland. <br> På denna ö, ska vi starta vårt nya "
+"liv. Vi ska bygga upp en utpost för vår landsflykt, som kanske kommer att "
+"bli ett nytt, vackert hem för oss allihop\" "
 
 #: ../../campaigns/emp02.wmf/event:113
 msgid "A new island"
-msgstr ""
+msgstr "En ny ö"
 
 #: ../../campaigns/emp02.wmf/event:138
 msgid ""
@@ -64,15 +73,23 @@ msgid ""
 "These forests should last forever, so we really should build a forester's "
 "house too.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"När Saledus och jag vandrade genom dom underbara skogarna i norr kände vi "
+"att vår framtid just hade börjat. Detta land är så fredlig, gott och vackert "
+"att jag skulle kunna stanna här tills jag dör. <br> Men må många dagar "
+"passera fram tills den dagen! Idag måste vi koncentrera oss på nuet, och "
+"bygga några skogshuggarstugor och ett sågverk för att tillverka "
+"grundläggande byggnadsmaterial. <br> Men vi bör inte glömma att bevara "
+"naturens frikostighet. Dessa skogar förtjänar att bevaras för evigt, så vi "
+"bör verkligen bygga en skogvaktarstuga också. \"<br> -- NYA MÅL -- <br> "
 
 #: ../../campaigns/emp02.wmf/event:139
 #: ../../campaigns/emp02.wmf/objective:9
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
-msgstr ""
+msgstr "* Bygg tre skogshuggarstugor, en skogvaktarstuga och ett sågverk."
 
 #: ../../campaigns/emp02.wmf/event:141
 msgid "The green forests"
-msgstr ""
+msgstr "Den gröna skogen"
 
 #: ../../campaigns/emp02.wmf/event:171
 msgid ""
@@ -83,39 +100,49 @@ msgid ""
 "to build strong, luxurious buildings, like those we were accustomed to in "
 "Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Senare vandrade jag ner till stenarna i söder och letade efter en plats "
+"att bygga ett stenbrott för att få tag på hård sten till våra större "
+"byggnader. <br> Återigen kände jag mig som i paradiset, när jag såg några "
+"marmorliknande stenar bland klipporna. Det ser ut som om vi snart kommer att "
+"kunna bygga kraftiga eleganta byggnader, som dom som var vana vid i "
+"Fremil.\" <br> <br> -- NYTT MÅL --<br> "
 
 #: ../../campaigns/emp02.wmf/event:172
 #: ../../campaigns/emp02.wmf/objective:17
 msgid "* Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "* Bygg ett stenbrott söder om ditt högkvarter."
 
 #: ../../campaigns/emp02.wmf/event:174
 msgid "The rocks"
-msgstr ""
+msgstr "Klipporna"
 
 #: ../../campaigns/emp02.wmf/event:192
 msgid ""
 " \"Good news! Today our wood economy was completed. Now we can be sure to "
 "have enough wood for our future building projects.\" "
 msgstr ""
+" \"Goda nyheter! Idag blev vår trädekonomi komplett. Nu kan vi vara säkra på "
+"att ha nog med trä för våra framtida byggnadsprojekt.! "
 
 #: ../../campaigns/emp02.wmf/event:194
 msgid "Wood for the colony"
-msgstr ""
+msgstr "Timmer för kolonin"
 
 #: ../../campaigns/emp02.wmf/event:207
 msgid ""
 " \"Great, today the building of the quarry was completed. Now we get enough "
 "stone to construct larger buildings.\" "
 msgstr ""
+" \"Utmärkt, idag blev stenbrottet färdigställt. Nu får vi tillräckligt med "
+"sten för att uppföra större byggnader.\" "
 
 #: ../../campaigns/emp02.wmf/event:209
 msgid "Stone for the colony"
-msgstr ""
+msgstr "Sten för kolonin"
 
 #: ../../campaigns/emp02.wmf/event:238
 msgid "Saledus looks unhappy"
-msgstr ""
+msgstr "Saledus ser olycklig ut"
 
 #: ../../campaigns/emp02.wmf/event:240
 msgid ""
@@ -129,19 +156,27 @@ msgid ""
 "and to build some barracks or sentries around our colony.\"<br><br>-- NEW "
 "OBJECTIVE --<br> "
 msgstr ""
+" \"Var hälsad Lutius! Jag vill inte orsaka panik, men jag hittade något som "
+"ger mig en oroskänsla i magen och sprider vågor av skräck i hjärtat. När jag "
+"gick ner till de södra delarna hittade jag resterna av ett annat fartyg. Jag "
+"vet inte om bråten är allt som finns kvar av det fartyget. I alla fall: de "
+"verkar inte vara gamla. <br> Kanske personer ombord fartyget var fast i "
+"samma storm som förde oss att Malac' Mor - och fördes till ön. <br> Jag "
+"råder er att vara försiktig och att bygga några baracker eller vakter runt "
+"vår koloni.\" <br> -- NYA MÅL- - <br> "
 
 #: ../../campaigns/emp02.wmf/event:241
 #: ../../campaigns/emp02.wmf/objective:25
 msgid "* Build some barracks and sentries around the colony."
-msgstr ""
+msgstr "* Bygg några barracker och vakttorn runt kolonin."
 
 #: ../../campaigns/emp02.wmf/event:243
 msgid "Dangerous shipparts"
-msgstr ""
+msgstr "Farliga skeppsdelar"
 
 #: ../../campaigns/emp02.wmf/event:276
 msgid "Saledus smiles"
-msgstr ""
+msgstr "Saledus ler"
 
 #: ../../campaigns/emp02.wmf/event:278
 msgid ""
@@ -158,15 +193,15 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/event:279
 #: ../../campaigns/emp02.wmf/objective:33
 msgid "* Expand to the east, to start mining marble from the mountain."
-msgstr ""
+msgstr "* Expandera österut för att börja utvinna marmor ur berget."
 
 #: ../../campaigns/emp02.wmf/event:281
 msgid "Marble on the mountain"
-msgstr ""
+msgstr "Marmor i berget"
 
 #: ../../campaigns/emp02.wmf/event:321
 msgid "Saledus is amazed"
-msgstr ""
+msgstr "Saledus är förbluffad"
 
 #: ../../campaigns/emp02.wmf/event:323
 msgid ""
@@ -190,11 +225,11 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:326
 msgid "Further mountains"
-msgstr ""
+msgstr "Fler berg"
 
 #: ../../campaigns/emp02.wmf/event:367
 msgid "Amalea comes in..."
-msgstr ""
+msgstr "Amalea kommer in..."
 
 #: ../../campaigns/emp02.wmf/event:369
 msgid ""
@@ -224,7 +259,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:372
 msgid "Food for the miners"
-msgstr ""
+msgstr "Mat åt gruvarbetarna"
 
 #: ../../campaigns/emp02.wmf/event:424
 msgid ""
@@ -251,7 +286,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:427
 msgid "The Barbarians"
-msgstr ""
+msgstr "Barbarerna"
 
 #: ../../campaigns/emp02.wmf/event:458
 msgid ""
@@ -266,6 +301,8 @@ msgid ""
 "* As soon as you have enough soldiers, attack and completely destroy the "
 "barbarian buildings.<br>"
 msgstr ""
+"* Attackera barbarerna och förstör deras byggnader fullständigt så snart du "
+"har tillräckligt med soldater.<br>"
 
 #: ../../campaigns/emp02.wmf/event:460
 #: ../../campaigns/emp02.wmf/objective:66
@@ -290,19 +327,19 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:485
 msgid "Victory"
-msgstr ""
+msgstr "Seger"
 
 #: ../../campaigns/emp02.wmf/event:496
 msgid "7 days later..."
-msgstr ""
+msgstr "7 dar senare..."
 
 #: ../../campaigns/emp02.wmf/event:498
 msgid "As time is running by"
-msgstr ""
+msgstr "Tiden går"
 
 #: ../../campaigns/emp02.wmf/event:502
 msgid "OK"
-msgstr ""
+msgstr "Ok"
 
 #: ../../campaigns/emp02.wmf/event:510
 msgid ""
@@ -317,11 +354,11 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:512
 msgid "A Message"
-msgstr ""
+msgstr "Ett meddelande"
 
 #: ../../campaigns/emp02.wmf/event:524
 msgid "Amalea smiles"
-msgstr ""
+msgstr "Amalea ler"
 
 #: ../../campaigns/emp02.wmf/event:526
 msgid ""
@@ -345,11 +382,11 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/objective:23
 msgid "Protect your colony"
-msgstr ""
+msgstr "Skydda din koloni"
 
 #: ../../campaigns/emp02.wmf/objective:31
 msgid "Start mining marble"
-msgstr ""
+msgstr "Börja utvinna marmor"
 
 #: ../../campaigns/emp02.wmf/objective:39
 msgid "Build a stonemason and mining infrastructure"
@@ -357,12 +394,12 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Förse dina gruvarbetare med mat"
 
 #: ../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
-msgstr ""
+msgstr "Skydda den östra gränsen"
 
 #: ../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
-msgstr ""
+msgstr "Förstör barbarstammen"

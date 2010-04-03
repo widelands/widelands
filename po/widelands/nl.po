@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-04-01 20:34+0000\n"
+"PO-Revision-Date: 2010-04-02 14:38+0000\n"
 "Last-Translator: PliniusNeo <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-02 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-04-03 03:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../../src/computer_player.cc:38
 msgid "None"
-msgstr "Niets"
+msgstr "Geen"
 
 #: ../../src/s2map.cc:220
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -1578,7 +1578,7 @@ msgstr "geen gebouw-types"
 #: ../../src/events/event_player_building_types.cc:61
 #, c-format
 msgid "(player building types): %s"
-msgstr ""
+msgstr "(speler gebouw types): %s"
 
 #: ../../src/events/event_player_seeall.cc:45
 #, c-format
@@ -1667,7 +1667,7 @@ msgstr "(zet timer): %s"
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:98
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "opdrachten lijst: %s"
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #: ../../src/logic/cmd_check_eventchain.cc:98
@@ -1727,7 +1727,7 @@ msgstr ""
 #: ../../src/game_io/game_preload_data_packet.cc:57
 #, c-format
 msgid "preload: %s"
-msgstr ""
+msgstr "voorladen: %s"
 
 #: ../../src/graphic/animation.cc:197
 msgid "frame number"
@@ -1746,12 +1746,12 @@ msgstr "[battle] soldaat %u verliest gevecht\n"
 #: ../../src/logic/battle.cc:182
 #, c-format
 msgid "[battle] waking up winner %d\n"
-msgstr ""
+msgstr "[gevecht] winnaar aan het wakkerschudden %d\n"
 
 #: ../../src/logic/bob.cc:85 ../../src/logic/immovable.cc:206
 #, c-format
 msgid "bad attribute \"%s\""
-msgstr ""
+msgstr "slecht attribuut \"%s\""
 
 #: ../../src/logic/building.cc:507
 #: ../../src/editor/tools/editor_info_tool.cc:59
@@ -1836,7 +1836,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:140 ../../src/logic/production_program.cc:1378
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr ""
+msgstr "onbekend commando type \"%s\""
 
 #: ../../src/logic/immovable.cc:144
 msgid "no actions"
@@ -1884,12 +1884,12 @@ msgstr ""
 #: ../../src/logic/immovable.cc:633
 #, c-format
 msgid "immovable type %s"
-msgstr ""
+msgstr "onverplaatsbaar type %s"
 
 #: ../../src/logic/immovable.cc:668 ../../src/logic/production_program.cc:598
 #: ../../src/logic/production_program.cc:642
 msgid "duration in ms"
-msgstr ""
+msgstr "duur in ms"
 
 #: ../../src/logic/immovable.cc:706 ../../src/logic/production_program.cc:1323
 msgid "priority"
@@ -1910,20 +1910,20 @@ msgstr ""
 #: ../../src/logic/immovable.cc:761 ../../src/logic/immovable.cc:916
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
-msgstr ""
+msgstr "verwachtte kans in het bereik [1, 254] maar vond \"%s\""
 
 #: ../../src/logic/immovable.cc:774
 msgid "illegal transformation to the same type"
-msgstr ""
+msgstr "illegale transformatie naar hetzelfde type"
 
 #: ../../src/logic/immovable.cc:862
 msgid "probability in range [1, 254]"
-msgstr ""
+msgstr "kans in bereik [1. 254]"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
 msgid "destroy map object: %s"
-msgstr ""
+msgstr "vernietig kaart object: %s"
 
 #: ../../src/logic/instances.cc:124
 #, c-format
@@ -1942,21 +1942,21 @@ msgstr "Speler 1"
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:63
 #: ../../src/logic/soldier.cc:86
 msgid "\"min-max\""
-msgstr ""
+msgstr "\"min-max\""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr ""
+msgstr "positieve integer <= 100"
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr ""
+msgstr "verwachtte positieve integer >= %u <= 100 maar vond \"%s\""
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr ""
+msgstr "verwachtte positieve integer >= %u <= %u maar vond \"%u\""
 
 #: ../../src/logic/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
@@ -1979,7 +1979,7 @@ msgstr[1] "%u(+%u) soldaten"
 #: ../../src/logic/militarysite.cc:580
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
-msgstr ""
+msgstr "%sDe vijand heeft je soldaten verslagen aan de %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:587
 msgid "Militarysite lost!"
@@ -1988,7 +1988,7 @@ msgstr ""
 #: ../../src/logic/militarysite.cc:660
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
-msgstr ""
+msgstr "%sJe soldaten hebben de vijand verslagen aan de %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:667
 msgid "Enemy at site defeated!"
@@ -2002,11 +2002,11 @@ msgstr ""
 #: ../../src/logic/militarysite.cc:716
 #, c-format
 msgid "%sYour %s is under attack.</p>"
-msgstr ""
+msgstr "%sJe %s wordt aangevallen.</p>"
 
 #: ../../src/logic/militarysite.cc:726
 msgid "You are under attack"
-msgstr ""
+msgstr "Je wordt aangevallen"
 
 #: ../../src/logic/playercommand.cc:134
 #, c-format
@@ -2016,7 +2016,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:176
 #, c-format
 msgid "player immovable %u: %s"
-msgstr ""
+msgstr "speler onverplaatsbaar %u: %s"
 
 #: ../../src/logic/playercommand.cc:182
 #, c-format
@@ -2026,7 +2026,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:234
 #, c-format
 msgid "build: %s"
-msgstr ""
+msgstr "bouw: %s"
 
 #: ../../src/logic/playercommand.cc:282
 #, c-format
@@ -2041,7 +2041,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:423
 #, c-format
 msgid "flag %u: %s"
-msgstr ""
+msgstr "vlag %u: %s"
 
 #: ../../src/logic/playercommand.cc:429
 #, c-format
@@ -2057,7 +2057,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:486
 #, c-format
 msgid "start/stop building: %s"
-msgstr ""
+msgstr "begin/stop met bouwen: %s"
 
 #: ../../src/logic/playercommand.cc:547
 #, c-format
@@ -2203,12 +2203,12 @@ msgstr ""
 #: ../../src/logic/production_program.cc:396
 #: ../../src/logic/production_program.cc:770
 msgid " and "
-msgstr ""
+msgstr " en "
 
 #: ../../src/logic/production_program.cc:397
 #: ../../src/logic/production_program.cc:749
 msgid " because: "
-msgstr ""
+msgstr " omdat: "
 
 #: ../../src/logic/production_program.cc:408
 #: ../../src/wui/encyclopedia_window.cc:192
@@ -2217,7 +2217,7 @@ msgstr " of "
 
 #: ../../src/logic/production_program.cc:409
 msgid " because not: "
-msgstr ""
+msgstr " omdat niet: "
 
 #: ../../src/logic/production_program.cc:449
 #, c-format
@@ -2231,11 +2231,11 @@ msgstr ""
 #: ../../src/logic/production_program.cc:481
 #, c-format
 msgid "%s handling method already defined"
-msgstr ""
+msgstr "%s manier van handelen is al gedefinieerd"
 
 #: ../../src/logic/production_program.cc:471
 msgid "failure"
-msgstr ""
+msgstr "mislukking"
 
 #: ../../src/logic/production_program.cc:476
 msgid "completion"
@@ -2256,7 +2256,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:602
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "slapen: %s"
 
 #: ../../src/logic/production_program.cc:624
 msgid "idle animation is default; calling is not allowed"
@@ -2297,7 +2297,7 @@ msgstr ", "
 
 #: ../../src/logic/production_program.cc:935
 msgid "Recruited "
-msgstr ""
+msgstr "Gerecruteerd "
 
 #: ../../src/logic/production_program.cc:974
 msgid "distance"
@@ -2374,7 +2374,7 @@ msgstr "positieve integer"
 #: ../../src/logic/soldier.cc:75 ../../src/logic/soldier.cc:98
 #, c-format
 msgid "expected positive integer >= %u but found \"%s\""
-msgstr ""
+msgstr "verwachtte positieve integer >= %u maar vond \"%s\""
 
 #: ../../src/logic/soldier.cc:202
 msgid "\"anim_name[,another_anim,...]\""
@@ -2424,12 +2424,12 @@ msgstr "geen gevonden"
 #: ../../src/logic/tribe.cc:223
 #, c-format
 msgid "frontier styles: %s"
-msgstr ""
+msgstr "grens stijlen: %s"
 
 #: ../../src/logic/tribe.cc:244
 #, c-format
 msgid "flag styles: %s"
-msgstr ""
+msgstr "vlag stijlen: %s"
 
 #: ../../src/logic/tribe.cc:374
 #, c-format
@@ -2448,6 +2448,8 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"de grondstof %s moet gedolven worden, die niet in deze wereld aanwezig is; "
+"de stam is niet compatibel met de wereld"
 
 #: ../../src/logic/worker.cc:260
 #, c-format
@@ -2465,6 +2467,8 @@ msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr ""
+"De werkers van dit gebouw kunnen geen grondstoffen meer vinden van het "
+"volgende type: "
 
 #: ../../src/logic/worker.cc:919
 msgid "A geologist found resources."
@@ -2477,17 +2481,17 @@ msgstr "niets"
 #: ../../src/logic/world.cc:623
 #, c-format
 msgid "%s: too many terrain types, can not be more than 16"
-msgstr ""
+msgstr "%s: te veel terrein typen, het  mogen er niet meer dan 16 zijn"
 
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:96
 #, c-format
 msgid "allowed buildings: %s"
-msgstr ""
+msgstr "toegestane gebouwen: %s"
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
 msgid "allowed worker types: %s"
-msgstr ""
+msgstr "toegestane typen werkers: %s"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
@@ -2542,12 +2546,12 @@ msgstr "soldaat: %s"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:691
 #, c-format
 msgid "carrier: %s"
-msgstr ""
+msgstr "drager: %s"
 
 #: ../../src/map_io/widelands_map_building_data_packet.cc:106
 #, c-format
 msgid "buildings: %s"
-msgstr ""
+msgstr "gebouwen: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:215
 #, c-format
@@ -2612,7 +2616,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_event_data_packet.cc:72
 #, c-format
 msgid "Events: %s"
-msgstr ""
+msgstr "Gebeurtenissen: %s"
 
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
@@ -2627,12 +2631,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "het knooppunt is eigendom van speler %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
 msgid "is owned by player %u"
-msgstr ""
+msgstr "is eigendom van speler %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
@@ -2652,12 +2656,12 @@ msgstr "vlaggen: %s"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
 msgid "wrong flag (%u) at given position (%i, %i)"
-msgstr ""
+msgstr "verkeerde vlag (%u) op de gegeven positie (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr ""
+msgstr "geen vlag op de gegeven positie (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
@@ -2689,12 +2693,12 @@ msgstr "hoogten: %s"
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:120
 #, c-format
 msgid "immovable data: %s"
-msgstr ""
+msgstr "onverplaatsbare data: %s"
 
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:113
 #, c-format
 msgid "immovable %u: %s"
-msgstr ""
+msgstr "onverplaatsbaar %u: %s"
 
 #: ../../src/map_io/widelands_map_loader.cc:89
 msgid "Invalid World"
@@ -2720,32 +2724,36 @@ msgstr ""
 #: ../../src/map_io/widelands_map_object_packet.cc:83
 #, c-format
 msgid "map objects: %s"
-msgstr ""
+msgstr "kaart objecten: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:80
 #, c-format
 msgid "Objectives: %s"
-msgstr ""
+msgstr "Doelstellingen: %s"
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:80
 #, c-format
 msgid "player names and tribes: %s"
-msgstr ""
+msgstr "namen van de spelers en de stammen: %s"
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:69
 #, c-format
 msgid "player positions: %s"
-msgstr ""
+msgstr "Speler Posities: %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:88
 #, c-format
 msgid "messages are not ordered: sent at %u but previous message sent at %u"
 msgstr ""
+"De berichten zijn niet geordend: verzonden op %u maar het vorige bericht is "
+"verzonden op %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:94
 #, c-format
 msgid "message is sent in the future: sent at %u but gametime is only %u"
 msgstr ""
+"bericht is in de toekomst verstuurd:verstuurd op %u maar de speeltijd is pas "
+"%u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
@@ -2776,7 +2784,7 @@ msgstr "\"%s\": %s"
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:156
 #, c-format
 msgid "messages for player %u: %s"
-msgstr ""
+msgstr "berichten voor speler %u: %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:123
 #, c-format
@@ -2822,7 +2830,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:68
 #, c-format
 msgid "invalid type \"%s\""
-msgstr ""
+msgstr "ongeldig type \"%s\""
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:76
 #, c-format
@@ -3031,7 +3039,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1747
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr ""
+msgstr "Begonnen met het zenden van bestand %s naar %s!"
 
 #: ../../src/network/nethost.cc:1768
 msgid "Client requests file part that does not exist."
@@ -3040,12 +3048,12 @@ msgstr ""
 #: ../../src/network/nethost.cc:1771
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr ""
+msgstr "Overdracht is voltooid van het bestand %s naar %s"
 
 #: ../../src/network/nethost.cc:1779
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
-msgstr ""
+msgstr "Verzendt deel %u/%u van bestand %s naar %s"
 
 #: ../../src/network/nethost.cc:1789
 #, c-format
@@ -3068,6 +3076,10 @@ msgid ""
 "at http://wl.widelands.org/wiki/InternetGaming can\n"
 "be advantageous."
 msgstr ""
+"Je Server was niet bereikbaar vanaf het internet.\n"
+"Probeer alsjeblieft het probleem op te lossen - Het lezen van de notities\n"
+"op http://wl.widelands.org/wiki/InternetGaming kan\n"
+"voordelig zijn."
 
 #: ../../src/network/network_ggz.cc:499
 msgid "Connected to the metaserver of:"
@@ -3100,7 +3112,7 @@ msgstr " heeft de metaserver verlaten."
 #: ../../src/trigger/trigger_defeated.cc:46
 #, c-format
 msgid "player is %u, but map has only %u players"
-msgstr ""
+msgstr "speler is %u, maar de kaart heeft maar %u spelers"
 
 #: ../../src/trigger/trigger_defeated.cc:52
 #, c-format
@@ -3822,7 +3834,7 @@ msgstr "Hoofdmenu lettertype:"
 
 #: ../../src/ui_fsmenu/options.cc:400
 msgid "Play a sound at message arrival."
-msgstr ""
+msgstr "Speel een geluid af als er een bericht aankomt."
 
 #: ../../src/ui_fsmenu/options.cc:408
 msgid "Do not zip widelands data files (maps, replays and savegames)."

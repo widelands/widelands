@@ -6,34 +6,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 20:29+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-02 22:19+0000\n"
+"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-04-03 03:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr ""
+msgstr "Imperiet Lektion1 - Malac' Mors stränder"
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
 "After losing an important battle against the barbarians, which leads to the "
-"forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to "
+"forfeiture of a bigger part of Empire's territory, Lutius leaves Fremil, to "
 "start a new life. But his destiny takes his ship into a heavy storm, which "
-"nearly desctructs the ship. Only with lot of luck he can save his people and "
+"nearly desctroys the ship. Only with lot of luck he can save his people and "
 "the damaged ship on a unknown desert strand."
 msgstr ""
+"Efter att ha förlorat ett viktigt slag mot barbarerna, som ledde till "
+"förlusten av en stor del av Imperiets territorium, avviker Lutius Fremil för "
+"att starta ett nytt liv. Men hans öde för hans skepp in i en hård storm som "
+"nästan förstör skeppet. Bara med hjälp av stor tur lyckas han rädda sitt "
+"folk och det skadade skeppet till en okänd ödestrand."
 
 #: ../../campaigns/emp01.wmf/event:61
 #: ../../campaigns/emp01.wmf/event:76
 #: ../../campaigns/emp01.wmf/event:91
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutius dagbok"
 
 #: ../../campaigns/emp01.wmf/event:63
 msgid ""
@@ -59,10 +64,31 @@ msgid ""
 "perl-gulf with my family, some of my friends and a few of my best "
 "warriors.\" "
 msgstr ""
+" \"Vad har det blivit av vårt Imperium? Jag ställa denna fråga fråga på "
+"allvar - varför förbjuder min kung mig från att kämpa mot en monstruösa  "
+"barbarstam, som först var som en fredlig vän och sedan attackerade min armé "
+"i mörkaste natten? <br> Med en armé på 150 man blev jag satt att patrullera "
+"på våra nordliga gräns, nära Galdinbergen, i en stor, vacker och gammal "
+"skog. Vi träffade snart en barbarstam, som inledningsvis var vänlig. Några "
+"av mina män bedrev till och med handel med dem. Deras barn kom till oss för "
+"att beundra våra rena och snygga uniformer och vapen. <br> Men i vår femte "
+"natt i regionen attackerade de oss utan provokation. Jag förlorade "
+"dussintals goda män, blev fängslad och tagen till deras hövding. Han "
+"spottade på mig, hånade mig och sa åt mig att lämna detta land för evigt. "
+"Han ville inte ha ny mark och inte vår mark. Men han sa till mig att den här "
+"skogen var deras land - och skulle fortsätta att vara deras tills den sista "
+"mannen av hans folk tas av andarna! <br> Tre veckor senare kom jag tillbaka "
+"till Fremil för att tala med vår kejsare. Han var rasande på barbarerna, men "
+"ville inte godkänna ett anfall mot deras stammar. Han trodde att vår armé "
+"var för svag för att överleva i ett krig mot barbarerna. <br> Men jag såg "
+"inte någon annan väg att bli fri från min skam utan att slåss mot "
+"barbarerna. Så jag lämnade Fremil med båt för att hitta mig en ny värld och "
+"ett nytt liv någonstans i söder. Nu är seglar jag i pärlviken med min "
+"familj, några av mina vänner och några av mina bästa krigare. \" "
 
 #: ../../campaigns/emp01.wmf/event:65
 msgid "A dark night"
-msgstr ""
+msgstr "En mörk natt"
 
 #: ../../campaigns/emp01.wmf/event:78
 msgid ""
@@ -73,10 +99,16 @@ msgid ""
 "and is taking in more and more water. We can thank the Gods if we survive "
 "this black night with our lives.\" "
 msgstr ""
+" \"Det verkar som att ge sig ut till sjöss på pärlviken var ett av våra "
+"största misstag. Naturen var emot oss och förde oss till en mörk, vild "
+"storm. Jag vet inte hur många timmar som har passerat sedan vågorna växte "
+"sig högre än våra båtar. Att gå ut skulle vara självmord. <br> Vårt skepp är "
+"illa skadad och tar in mer och mer vatten. Vi kan tacka gudarna om vi "
+"överlever denna svarta natt med våra liv i behåll. \" "
 
 #: ../../campaigns/emp01.wmf/event:80
 msgid "The rough sea"
-msgstr ""
+msgstr "Den hårda sjön"
 
 #: ../../campaigns/emp01.wmf/event:93
 msgid ""
@@ -87,14 +119,21 @@ msgid ""
 "under the only palm trees existing in this far-away sandy desert. I fear we "
 "won't find the help we need to get our ship repaired in good time.\" "
 msgstr ""
+" \"Äntligen var gudarna med oss! <br> Vi landade på en okänd kust och fann "
+"fridfull vila under palmerna som vajade vid stranden. Men det är ungefär så "
+"bra det blir. Sanningen ä att när jag vaknade i morse såg jag inget annat än "
+"sand runt omkring oss. <br> Det tycks verkligen som om palmerna vi landade "
+"under var dom enda som finns finns i denna fjärran sandöken. Jag är rädd att "
+"vi inte kommer att finna den hjälp vi behöver för att reparera vårt skepp i "
+"tid. \" "
 
 #: ../../campaigns/emp01.wmf/event:95
 msgid "Survivor"
-msgstr ""
+msgstr "Överlevande"
 
 #: ../../campaigns/emp01.wmf/event:133
 msgid "Saledus looks around nervously..."
-msgstr ""
+msgstr "Saledus ser sig nervöst omkring..."
 
 #: ../../campaigns/emp01.wmf/event:135
 msgid ""
@@ -107,6 +146,14 @@ msgid ""
 "the forest. Than one of us will keep watch in the darkness and keep us safe "
 "from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Mästare, jag fruktar att vi inte är säkra i detta främmande land. Vem vet "
+"vilka hemska varelser som lever bortom skogen, i den väldiga öknen? Tänk om "
+"dessa varelser gömmer sig i skogen och väntar på det rätta tillfället att "
+"anfalla oss? <br> Nåja, kanske är min rädsla omotiverad, men det skadar inte "
+"att hålla vakt i skogen, så att vi kan vara säkra på att se några "
+"potentiella fiender innan de kan se oss. <br> Vi borde verkligen bygga en "
+"kasern i den östra delen av skogen. En av oss  att hålla vakt i mörkret och "
+"rädda oss från dessa varelser. \"<br> - NYA MÅL - <br> "
 
 #: ../../campaigns/emp01.wmf/event:136
 #: ../../campaigns/emp01.wmf/objective:7
@@ -114,10 +161,12 @@ msgid ""
 "* Build a barracks at the red point on the east side of the forests, to the "
 "right of your headquarters."
 msgstr ""
+"* Bygg en barrack vid den röda punkten öster om skogen, till höger om ditt "
+"huvudkvarter"
 
 #: ../../campaigns/emp01.wmf/event:138
 msgid "A foreboding"
-msgstr ""
+msgstr "Ett varsel"
 
 #: ../../campaigns/emp01.wmf/event:142
 #: ../../campaigns/emp01.wmf/event:166
@@ -129,11 +178,11 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/event:297
 #: ../../campaigns/emp01.wmf/event:314
 msgid "OK"
-msgstr ""
+msgstr "Nästa"
 
 #: ../../campaigns/emp01.wmf/event:158
 msgid "Saledus speaks with a sigh of relief..."
-msgstr ""
+msgstr "Saledus talar med en lättnadens suck..."
 
 #: ../../campaigns/emp01.wmf/event:160
 msgid ""
@@ -142,14 +191,18 @@ msgid ""
 "is a good step forward. Now we can feel a bit safer and can look forward to "
 "repair our ship.\" "
 msgstr ""
+" \"Mäster, jag såg att byggandet av barackerna slutfördes, så jag har satt "
+"en av mina bästa soldater att hålla uppsikt över öknen. <br> Detta är ett "
+"bra steg framåt. Nu kan vi känna oss lite säkrare och se fram emot att "
+"reparera vårt skepp. \" "
 
 #: ../../campaigns/emp01.wmf/event:162
 msgid "Safe for now"
-msgstr ""
+msgstr "Säkra för tillfället"
 
 #: ../../campaigns/emp01.wmf/event:172
 msgid "Amalea smiles..."
-msgstr ""
+msgstr "Amalea ler..."
 
 #: ../../campaigns/emp01.wmf/event:174
 msgid ""
@@ -160,22 +213,29 @@ msgid ""
 "yesterday and found a nice place for a lumberjack's house, south of our "
 "headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Hej Lutius, jag träffade just Saledus utanför. <br> Han berättade om "
+"barrackerna. Tjaa, jag är inte en av de fegisar som tror att vi behöver fler "
+"barracker - vi borde istället koncentrera oss på andra saker nu. <br> Det är "
+"helt klart att vi behöver timmer för att reparera vårt skepp. Jag "
+"promenerade genom skogen igår och hittade ett trevligt ställe för en "
+"skogshuggarhus, söder om vårt högkvarter. \"<br> -- NYA MÅL-- <br> "
 
 #: ../../campaigns/emp01.wmf/event:175
 #: ../../campaigns/emp01.wmf/objective:15
 msgid ""
 "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr ""
+"* Bygg en skogshuggarstuga vid den röda punten, söder om ditt högkvarter."
 
 #: ../../campaigns/emp01.wmf/event:177
 #: ../../campaigns/emp01.wmf/event:197
 #: ../../campaigns/emp01.wmf/event:222
 msgid "Young Amalea"
-msgstr ""
+msgstr "Unga Amalea"
 
 #: ../../campaigns/emp01.wmf/event:192
 msgid "Amalea recommends..."
-msgstr ""
+msgstr "Amalea rekommenderar..."
 
 #: ../../campaigns/emp01.wmf/event:194
 msgid ""
@@ -187,6 +247,13 @@ msgid ""
 "building needs, too. So we should build up a sawmill - as soon as we have "
 "enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Hej Lutius, jag fick bud om att vår första skogshuggare började arbeta i "
+"dag. Kanske skulle det vara en bra idé att vänta tills han rensar "
+"tillräckligt med utrymme för att bygga upp ytterligare två "
+"skogshuggarstugor, så att vi kan skörda mer timmer. <Br > Men tyvärr är "
+"stockarna värdelösa för att reparera vårt skepp - vi behöver förädlat trä "
+"till fartyg och större byggnader. Så vi bör bygga upp ett sågverk så snart "
+"vi har tillräckligt med utrymme för detta. \"<br> <br> - NYTT MÅL - <br> "
 
 #: ../../campaigns/emp01.wmf/event:195
 #: ../../campaigns/emp01.wmf/objective:23
@@ -194,10 +261,12 @@ msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
 msgstr ""
+"* Bygg två ytterligare skogshuggarstugor och ett sågverk så snart det finns "
+"plats att bygga dom."
 
 #: ../../campaigns/emp01.wmf/event:217
 msgid "Amalea comes in..."
-msgstr ""
+msgstr "Amalea kommer in..."
 
 #: ../../campaigns/emp01.wmf/event:219
 msgid ""
@@ -212,16 +281,25 @@ msgid ""
 "desert.<br> Lutius, I beg you: find someone who takes care about planting "
 "new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Hej Lutius, jag har två viktiga saker att prata om ... Först de goda "
+"nyheterna: <br> Jag såg att byggandet av sågverket är klart, så vi kan börja "
+"förädla timmret skogshuggarna skördar till brädor . <br> Men det är "
+"nästandet enda positiva jag har att meddela. Den dåliga nyheten är att våra "
+"skogsarbetare skördar med en otrolig hastighet. Det finns nästan inga träd "
+"kvar på ön. <br> Lutius, träden ger skydd från sandstormar från öknen, "
+"skugga på varma dagar och de är hem för så många trevliga djur. Vi får inte "
+"lämna denna ö som en öken. <br> Lutius, jag ber dig: hitta någon som tar "
+"hand om plantering nya träd. \"<br> -- NYTT MÅL -- <br> "
 
 #: ../../campaigns/emp01.wmf/event:220
 #: ../../campaigns/emp01.wmf/objective:31
 msgid ""
 "* Build a forester's house to preserve the wood resources of this island."
-msgstr ""
+msgstr "* Bygg en skogvaktarstuga för att bövara skogstillgångarna på ön."
 
 #: ../../campaigns/emp01.wmf/event:247
 msgid "Saledus notes..."
-msgstr ""
+msgstr "Saledus noterar..."
 
 #: ../../campaigns/emp01.wmf/event:249
 msgid ""
@@ -231,6 +309,11 @@ msgid ""
 "anyway, and the resources we harvest now might be the base of strong and big "
 "buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Hej min gamle gode vän. Jag tänkte just på stenarna på den södra stranden "
+"av ön. Kanske skulle vi kunna hugga några användbara stenar och vacker "
+"marmor ur dem. <br> Reparationen av vårt skepp kommer att ta några veckor i "
+"varje fall, och resurserna vi samlar in kan bli gnunden till stora mäktiga "
+"byggnader i ett annat land.\"<br><br>-- NYTT MÅL --<br> "
 
 #: ../../campaigns/emp01.wmf/event:250
 #: ../../campaigns/emp01.wmf/objective:39
@@ -238,14 +321,16 @@ msgid ""
 "* Build a quarry in the south to cut some stones and marble out of the "
 "rocks.<br> These might be used for future buildings."
 msgstr ""
+"* Bygg en stenhuggare i söder för att hugga sten och marmor ur berget. <br> "
+"Detta kan vara användbart till framtida byggnader."
 
 #: ../../campaigns/emp01.wmf/event:252
 msgid "Thinking about the future"
-msgstr ""
+msgstr "Tänker på framtiden"
 
 #: ../../campaigns/emp01.wmf/event:272
 msgid "Saledus looks promising..."
-msgstr ""
+msgstr "Saledus ser lovande ut..."
 
 #: ../../campaigns/emp01.wmf/event:274
 msgid ""
@@ -254,10 +339,14 @@ msgid ""
 "beautiful marble.<br> Now we truly can look forward to settling down on "
 "another island.\" "
 msgstr ""
+" \"Hej Lutius, idag kom vi en bra bit närmare att bygga vår första borg. "
+"Stenhuggaren i söder började arbeta idag och kommer snart att förse oss med "
+"sten och vacker marmor. <br> Nu kan vi sannerligen se fram emot att bosätta "
+"oss på en annan ö.\" "
 
 #: ../../campaigns/emp01.wmf/event:276
 msgid "A step forward"
-msgstr ""
+msgstr "Ett steg framåt"
 
 #: ../../campaigns/emp01.wmf/event:292
 msgid ""
@@ -270,41 +359,51 @@ msgid ""
 "completed this mission. You may continue playing if you wish, otherwise move "
 "on to the next mission.\" "
 msgstr ""
+" \"Idag fick jag bud om att vårt skepp är helt reparerat. Just nu lastar "
+"mitt folk ombord allt på vår nyreparerade fartyg, må det tjäna oss bättre än "
+"förra gången. <br> Ikväll kommer att bli vår sista natt på ön. I morgon "
+"bitti kommer vi att lämna den, på jakt efter en ny plats för vår landsflykt. "
+"<br> Jag undrar fortfarande om vi någonsin kommer att se Fremil igen. <br> --"
+"------------- ------ SEGER! ----------------------< br> <br> Du har slutfört "
+"detta uppdrag. Du kan fortsätta spela om du vill, gå annars vidare till "
+"nästa uppdrag. \" "
 
 #: ../../campaigns/emp01.wmf/event:294
 msgid "Mission Complete"
-msgstr ""
+msgstr "Uppdraget slutfört"
 
 #: ../../campaigns/emp01.wmf/event:308
 msgid "Saledus speaks:"
-msgstr ""
+msgstr "Saledus talar:"
 
 #: ../../campaigns/emp01.wmf/event:310
 msgid ""
 " \"You have made this peninsula a very secure place. It is time to move "
 "on!\" "
 msgstr ""
+" \"Du har gjort denna halvö till en väldigt säker plats. Det är drags att gå "
+"vidare!\" "
 
 #: ../../campaigns/emp01.wmf/event:312
 msgid "Safe Peninsula"
-msgstr ""
+msgstr "Säker halvö"
 
 #: ../../campaigns/emp01.wmf/objective:5
 msgid "Build a barracks"
-msgstr ""
+msgstr "Bygg en barrack"
 
 #: ../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
-msgstr ""
+msgstr "Bygg en skogshuggarstuga"
 
 #: ../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
+msgstr "Bygg två skogshuggarstugor och ett sågverk"
 
 #: ../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
-msgstr ""
+msgstr "Bygg en skogvaktarstuga"
 
 #: ../../campaigns/emp01.wmf/objective:37
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bygg ett stenbrott"
