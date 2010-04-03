@@ -70,7 +70,9 @@
 #include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifndef WIN32
 #include <signal.h>
+#endif
 
 #include <cerrno>
 #include <cstring>
