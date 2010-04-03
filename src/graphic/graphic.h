@@ -93,7 +93,7 @@ struct Graphic {
 	void update_rectangle(Rect const & rect) {
 		update_rectangle (rect.x, rect.y, rect.w, rect.h);
 	}
-	bool need_update();
+	bool need_update() const;
 	void refresh(bool force = true);
 
 	void flush(PicMod module);

@@ -76,7 +76,7 @@ struct Building_Descr : public Map_Object_Descr {
 
 	typedef std::set<Building_Index> Enhancements;
 	Enhancements const & enhancements() const throw () {return m_enhancements;}
-	void add_enhancement(Building_Index const i) {
+	void add_enhancement(const Building_Index & i) {
 		assert(not m_enhancements.count(i));
 		m_enhancements.insert(i);
 	}
