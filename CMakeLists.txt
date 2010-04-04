@@ -112,7 +112,8 @@ target_link_libraries(widelands ${Boost_LIBRARIES})
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
-set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall -Wextra -Wsign-promo")
+set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall")
+set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wextra -Wsign-promo")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   include(CheckCXXCompilerFlag) #this include should be safe
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)
@@ -151,6 +152,10 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   IF (Compiler_generic_warnings_supported)
     set (WL_COMPILERFLAG_GENERICWARNINGS " ${PARAMETER_COMPILERFLAG_GENERICWARNINGS}") #the space is on purpose!
   ENDIF (Compiler_generic_warnings_supported)
+  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_EXTRAWARNINGS} Compiler_extra_warnings_supported)
+  IF (Compiler_extra_warnings_supported)
+    set (WL_COMPILERFLAG_EXTRAWARNINGS " ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}") #the space is on purpose!
+  ENDIF (Compiler_extra_warnings_supported)
 ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
