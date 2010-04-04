@@ -26,13 +26,13 @@
 #include "surface.h"
 
 #include <png.h>
-#include <SDL_opengl.h>
 
 #include <vector>
+#include <boost/shared_ptr.hpp>
 
 #ifdef USE_OPENGL
 #define HAS_OPENGL 1
-#include <boost/shared_ptr.hpp>
+#include <SDL_opengl.h>
 #endif
 
 /**
