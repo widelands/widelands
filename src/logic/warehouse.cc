@@ -291,7 +291,7 @@ IMPLEMENTATION
        i(                                                                     \
           m_next_worker_without_cost_spawn,                                   \
           m_next_worker_without_cost_spawn + nr                               \
-		);                                                                    \
+		);                                                                      \
        i;                                                                     \
        ++i)                                                                   \
       *i.current = value;                                                     \

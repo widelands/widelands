@@ -93,7 +93,9 @@ Bob::Descr::Descr
  * Create a bob of this type
  */
 Bob & Bob::Descr::create
-	(Editor_Game_Base & egbase, Player * const owner,const Coords & coords) const
+	(Editor_Game_Base & egbase,
+	 Player * const owner,
+	 const Coords & coords) const
 {
 	Bob & bob = create_object();
 	bob.set_owner(owner);
