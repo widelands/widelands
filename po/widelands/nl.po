@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-04-02 14:38+0000\n"
-"Last-Translator: PliniusNeo <Unknown>\n"
+"PO-Revision-Date: 2010-04-03 16:30+0000\n"
+"Last-Translator: flipflipsen <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-03 03:52+0000\n"
+"X-Launchpad-Export-Date: 2010-04-04 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -71,7 +71,7 @@ msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
-"Gebruik: widelands <optie0=waarde0> ... <optieN>=<waardeN>\n"
+"Gebruik: widelands <optie0>=<waarde0> ... <optieN>=<waardeN>\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1206
@@ -1673,7 +1673,7 @@ msgstr "opdrachten lijst: %s"
 #: ../../src/logic/cmd_check_eventchain.cc:98
 #, c-format
 msgid "check eventchain: %s"
-msgstr ""
+msgstr "controleer gebeurtenissenreeks: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
@@ -1688,6 +1688,8 @@ msgstr "interactieve speler: %s"
 #, c-format
 msgid "read number of economies as %u, but this was read as %u elsewhere"
 msgstr ""
+"het aantal economieën is gelezen als %u, maar dit was ergens anders als %u "
+"gelezen"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
@@ -1854,7 +1856,7 @@ msgstr "programma %s: %s"
 #: ../../src/logic/immovable.cc:257 ../../src/logic/immovable.cc:271
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr ""
+msgstr "verwachtte 0 .. 255 maar vond %u"
 
 #: ../../src/logic/immovable.cc:276
 #, c-format
@@ -1983,7 +1985,7 @@ msgstr "%sDe vijand heeft je soldaten verslagen aan de %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:587
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Militaire locatie verloren!"
 
 #: ../../src/logic/militarysite.cc:660
 #, c-format
@@ -2021,7 +2023,7 @@ msgstr "speler onverplaatsbaar %u: %s"
 #: ../../src/logic/playercommand.cc:182
 #, c-format
 msgid "bulldoze: %s"
-msgstr ""
+msgstr "wegruimen: %s"
 
 #: ../../src/logic/playercommand.cc:234
 #, c-format
@@ -2093,7 +2095,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:988
 #, c-format
 msgid "change training options: %s"
-msgstr ""
+msgstr "verander de training opties: %s"
 
 #: ../../src/logic/playercommand.cc:1052
 #, c-format
@@ -2118,7 +2120,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1306
 #, c-format
 msgid "change military config: %s"
-msgstr ""
+msgstr "verander militaire configuratie: %s"
 
 #: ../../src/logic/playercommand.cc:1345
 #, c-format
@@ -2168,7 +2170,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:203
 msgid "site has "
-msgstr ""
+msgstr "de locatie heeft "
 
 #: ../../src/logic/production_program.cc:229
 msgid "workers need experience"
@@ -2181,7 +2183,7 @@ msgstr "goederentype of werkertype"
 #: ../../src/logic/production_program.cc:317
 #, c-format
 msgid "invalid condition: %s"
-msgstr ""
+msgstr "ongeldige conditie: %s"
 
 #: ../../src/logic/production_program.cc:332
 #, c-format
@@ -2589,11 +2591,12 @@ msgstr ""
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
 msgstr ""
+"het programma %s was was overgeslagen op tijd %u, maar de tijd is pas %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:934
 #, c-format
 msgid "trainingsite: %s"
-msgstr ""
+msgstr "traininglocatie: %s"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
@@ -2798,7 +2801,7 @@ msgstr "weg: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
-msgstr ""
+msgstr "geen drager plaats"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:134
 #, c-format
@@ -2806,6 +2809,8 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"verwachtte 1 maar vond %u drager plaatsen in de weg die opgeslagen was met "
+"pakket versie 2 (oud)"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
@@ -4567,7 +4572,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:492
 msgid "Worker type target quantities"
-msgstr ""
+msgstr "Doelhoeveelheden van werker type"
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"

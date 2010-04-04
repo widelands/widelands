@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-04-02 23:37+0000\n"
+"PO-Revision-Date: 2010-04-03 14:17+0000\n"
 "Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-03 03:52+0000\n"
+"X-Launchpad-Export-Date: 2010-04-04 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp02.wmf/elemental:9
@@ -189,6 +189,14 @@ msgid ""
 "expand to that mountain and start mining marble.\"<br><br>-- NEW OBJECTIVE --"
 "<br> "
 msgstr ""
+" \"Lutius, jag har goda nyheter till dig: <br> När jag vandrade österut, "
+"hittade jag ett stort berg. <br> Jag är inte helt säker på saken - en geolog "
+"bör kontrollera om jag har rätt - men jag tror det skulle gå att  bryta "
+"marmor på några platser. <br> Det skulle vara en bra källa för att stärka "
+"vårt utbud av kvalitetsmarmor, utöver de ynkliga mängder vi har från "
+"stenbrottet. Kanske hade du rätt när du sa att den här ön är som ett "
+"paradis. <br> Låt oss expandera till detta berg och börja bryta marmor . "
+"\"<br> -- NYA MÅL -- <br> "
 
 #: ../../campaigns/emp02.wmf/event:279
 #: ../../campaigns/emp02.wmf/objective:33
@@ -222,6 +230,9 @@ msgid ""
 "infrastructure (coal mine and / or charcoal burner, iron ore mine, "
 "toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr ""
+"* Bygg en stenhuggare och sedan en komplett gruvdrifts- och "
+"produktionsinfrastruktur (kolgruva och/eller kolmila, järnmalmsgruva, "
+"verktygssmedja, vapen- och rustningssmedja samt smältverk)."
 
 #: ../../campaigns/emp02.wmf/event:326
 msgid "Further mountains"
@@ -311,10 +322,12 @@ msgid ""
 "barbarian headquarters stood before), to avoid new settlements of other "
 "tribes in that region."
 msgstr ""
+"Bygg slutligen en fästning på halvön<br>(nära där barbarernas högkvarter "
+"stod tidigare), för att undviga att nya stammar bosätter sig i den regionen."
 
 #: ../../campaigns/emp02.wmf/event:462
 msgid "Command for Attack"
-msgstr ""
+msgstr "Ge order om attack"
 
 #: ../../campaigns/emp02.wmf/event:483
 msgid ""
@@ -324,6 +337,12 @@ msgid ""
 "us will be put in a boat with the other peaceful ones, and sent back to "
 "their country.\"<br><br>--------------------- VICTORY! ----------------------"
 msgstr ""
+" \"Idag är en dag att vara stolt. Vi har kämpat för vårt nya hem och stigit "
+"segrande ur striden.  <br> Fortfarande gömmer sig några få barbarer på vår "
+"ö, men jag är säker på att vi hittar dom snart. <br> Varje barbar som inte "
+"attackerar oss kommer att sättas på en båt med övriga fredliga, och skickas "
+"tillbaka till sit land.\"<br><br> --------------------- SEGER! --------------"
+"-------"
 
 #: ../../campaigns/emp02.wmf/event:485
 msgid "Victory"
@@ -367,18 +386,22 @@ msgid ""
 "too.<br> It is good to see that we have now got a warmer and more familiar "
 "environment on our island.<br> Thank you, Lutius.\" "
 msgstr ""
+" \"Hälsningar min vän, jag besökte just vår nya krog <br>'Under Palmerna'. "
+"Ölet de serverar är i sanning välsmakande! Du borde verkligen ta dig en "
+"drink där du också. <br> Det är skönt att se att vi har nu fått en varmare "
+"och mer vänskaplig miljö här på ön. <br> Tack, Lutius. \" "
 
 #: ../../campaigns/emp02.wmf/event:528
 msgid "Our new tavern"
-msgstr ""
+msgstr "Vår egen taverna"
 
 #: ../../campaigns/emp02.wmf/objective:7
 msgid "Build up a wood economy"
-msgstr ""
+msgstr "Bygg upp en träekonomi"
 
 #: ../../campaigns/emp02.wmf/objective:15
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bygg ett stenbrott"
 
 #: ../../campaigns/emp02.wmf/objective:23
 msgid "Protect your colony"
@@ -390,7 +413,7 @@ msgstr "Börja utvinna marmor"
 
 #: ../../campaigns/emp02.wmf/objective:39
 msgid "Build a stonemason and mining infrastructure"
-msgstr ""
+msgstr "Bygg en stenhuggare och gruvdriftsinfrastruktur"
 
 #: ../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
