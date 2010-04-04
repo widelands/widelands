@@ -112,7 +112,7 @@ target_link_libraries(widelands ${Boost_LIBRARIES})
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
-set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall -Wextra")
+set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall -Wextra -Wsign-promo")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   include(CheckCXXCompilerFlag) #this include should be safe
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)
