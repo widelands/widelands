@@ -1,15 +1,20 @@
 execute_process(
-  COMMAND "${WL_SOURCE_CHECKER}" --enable=exceptNew,exceptRealloc,possibleError,unusedFunctions --force --quiet --template gcc "${sourcefile}"
+  COMMAND /usr/bin/cppcheck ${sourcefile} --enable=exceptNew,exceptRealloc,possibleError,unusedFunctions --force --quiet -v --template gcc -I ${includedir}
   OUTPUT_VARIABLE checkresult
-#  OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp}
+  ERROR_VARIABLE checkresult2
   OUTPUT_STRIP_TRAILING_WHITESPACE
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..
+  ERROR_STRIP_TRAILING_WHITESPACE
 )
 
-if (checkresult STREQUAL "")
+if (checkresult STREQUAL "" AND checkresult2 STREQUAL "")
   execute_process(
     COMMAND cmake -E touch ${CMAKE_CURRENT_BINARY_DIR}/${stamp}
   )
-else (checkresult STREQUAL "")
-  message ("${checkresult}")
-endif (checkresult STREQUAL "")
+else (checkresult STREQUAL "" AND checkresult2 STREQUAL "")
+  if (NOT checkresult STREQUAL "")
+    message ("${checkresult}")
+  endif (NOT checkresult STREQUAL "")
+  if (NOT checkresult2 STREQUAL "")
+    message ("${checkresult2}")
+  endif (NOT checkresult2 STREQUAL "")
+endif (checkresult STREQUAL "" AND checkresult2 STREQUAL "")

@@ -61,7 +61,7 @@ macro(CreateCodeCheck)
 	string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
       endif (WIN32)
       get_filename_component(sourcename ${sourcefile} NAME) 
-      set(stamp ${sourcenoslash}_)
+      set(stamp ${sourcename}_)
       set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/${stamp})
       add_custom_command(
         OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}"
@@ -72,7 +72,7 @@ macro(CreateCodeCheck)
       if (WL_EXTRAWARNINGS)
         add_custom_command(
           OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}"
-          COMMAND cmake -DWL_SOURCE_CHECKER=cppcheck -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
+          COMMAND cmake -Dincludedir=${CMAKE_SOURCE_DIR}/src -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
           DEPENDS ${sourcefile}
           COMMENT "Checking ${sourcewithoutpath} with CppCheck"
         )
