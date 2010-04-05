@@ -64,13 +64,22 @@ macro(CreateCodeCheck)
       set(stamp ${sourcenoslash}_)
       set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/${stamp})
       add_custom_command(
-	OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${stamp}"
-	COMMAND cmake -DWL_SOURCE_CHECKER=${WL_SOURCE_CHECKER} -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=${stamp} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
-	DEPENDS ${sourcefile}
-        COMMENT "Checking ${sourcewithoutpath}"
+        OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}"                                                                                
+        COMMAND cmake -DWL_SOURCE_CHECKER=${WL_SOURCE_CHECKER} -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake                                                                        
+        DEPENDS ${sourcefile}
+        COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
       )
-      set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${stamp}")
-      set_source_files_properties("${CMAKE_CURRENT_BINARY_DIR}/${stamp}" PROPERTIES SYMBOLIC TRUE GENERATED TRUE)
+      if (WL_EXTRAWARNINGS)
+        add_custom_command(
+          OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}"
+          COMMAND cmake -DWL_SOURCE_CHECKER=cppcheck -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
+          DEPENDS ${sourcefile}
+          COMMENT "Checking ${sourcewithoutpath} with CppCheck"
+        )
+        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp};${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}")
+      else (WL_EXTRAWARNINGS)
+        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}")
+      endif (WL_EXTRAWARNINGS)
     endforeach(sourcefile ${srcfiles})
   endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 endmacro(CreateCodeCheck)
