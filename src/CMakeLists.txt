@@ -64,8 +64,8 @@ macro(CreateCodeCheck)
       set(stamp ${sourcenoslash}_)
       set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/${stamp})
       add_custom_command(
-        OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}"                                                                                
-        COMMAND cmake -DWL_SOURCE_CHECKER=${WL_SOURCE_CHECKER} -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake                                                                        
+        OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}"
+        COMMAND cmake -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
         DEPENDS ${sourcefile}
         COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
       )
