@@ -50,7 +50,7 @@ struct Texture {
 		(char const & fnametempl, uint32_t frametime, const SDL_PixelFormat &);
 	~Texture();
 
-	const char * get_texture_picture() {return m_texture_picture;}
+	const char * get_texture_picture() const {return m_texture_picture;}
 
 	uint8_t * get_pixels   () const {return m_pixels;}
 	uint8_t * get_curpixels() const {return m_curframe;}

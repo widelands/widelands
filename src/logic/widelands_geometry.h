@@ -49,10 +49,10 @@ struct Coords {
 	/// Returns a special value indicating invalidity.
 	static Coords Null() throw () {return Coords(-1, -1);}
 
-	bool operator== (Coords const other) const throw () {
+	bool operator== (const Coords & other) const throw () {
 		return x == other.x and y == other.y;
 	}
-	bool operator!= (Coords const other) const throw () {
+	bool operator!= (const Coords & other) const throw () {
 		return not (*this == other);
 	}
 
@@ -62,12 +62,12 @@ struct Coords {
 	 * For use with standard containers.
 	 */
 	struct ordering_functor {
-		bool operator()(Coords const a, Coords const b) const {
+		bool operator()(const Coords & a, const Coords & b) const {
 			return a.all < b.all;
 		}
 	};
 
-	void reorigin(Coords new_origin, Extent const extent) {
+	void reorigin(Coords new_origin, const Extent & extent) {
 		if (*this) {
 			if (y < new_origin.y)
 				y += extent.h;
@@ -125,7 +125,7 @@ struct Field;
 
 struct FCoords : public Coords {
 	FCoords() throw () {}
-	FCoords(const Coords nc, Field * const nf) throw () : Coords(nc), field(nf)
+	FCoords(const Coords & nc, Field * const nf) throw () : Coords(nc), field(nf)
 	{}
 
 	/**
@@ -134,7 +134,7 @@ struct FCoords : public Coords {
 	 *
 	 * \note You really want to use \ref Map::get_fcoords instead.
 	 */
-	explicit FCoords(const Coords nc) throw () : Coords(nc) {}
+	explicit FCoords(const Coords & nc) throw () : Coords(nc) {}
 
 	Field * field;
 };

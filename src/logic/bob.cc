@@ -93,7 +93,9 @@ Bob::Descr::Descr
  * Create a bob of this type
  */
 Bob & Bob::Descr::create
-	(Editor_Game_Base & egbase, Player * const owner, Coords const coords) const
+	(Editor_Game_Base & egbase,
+	 Player * const owner,
+	 const Coords & coords) const
 {
 	Bob & bob = create_object();
 	bob.set_owner(owner);
@@ -486,7 +488,7 @@ struct BlockedTracker {
 	};
 	typedef std::map<CoordData, bool, CoordOrdering> Cache;
 
-	BlockedTracker(Game & game, Bob & bob, Coords const finaldest)
+	BlockedTracker(Game & game, Bob & bob, const Coords & finaldest)
 		: m_game(game), m_bob(bob), m_map(game.map()), m_finaldest(finaldest)
 	{
 		nrblocked = 0;
@@ -575,7 +577,7 @@ struct CheckStepBlocked {
  */
 bool Bob::start_task_movepath
 	(Game                & game,
-	 Coords          const dest,
+	 Coords        const & dest,
 	 int32_t         const persist,
 	 DirAnimations const & anims,
 	 bool            const forceonlast,
@@ -971,7 +973,7 @@ void Bob::set_owner(Player * const player)
  * Performs the necessary (un)linking in the \ref Field structures and
  * updates the owner's viewing area, if the bob has an owner.
  */
-void Bob::set_position(Editor_Game_Base & egbase, Coords const coords)
+void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
 {
 	FCoords oldposition = m_position;
 

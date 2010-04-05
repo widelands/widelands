@@ -263,6 +263,7 @@ calc_minimap_color
 Return the color to be used in the minimap for the given field.
 ===============
 */
+
 inline static uint32_t calc_minimap_color
 	(SDL_PixelFormat             const &       format,
 	 Widelands::Editor_Game_Base const &       egbase,

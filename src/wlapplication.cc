@@ -70,6 +70,9 @@
 #include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifndef WIN32
+#include <signal.h>
+#endif
 
 #include <cerrno>
 #include <cstring>
@@ -78,6 +81,7 @@
 #include <stdexcept>
 #include <string>
 #include <ctime>
+
 
 #ifdef DEBUG
 #ifndef WIN32
@@ -945,8 +949,12 @@ bool WLApplication::init_hardware() {
  */
 
 void terminate (int) {
-	 log (_("Waited 5 seconds to close audio. problems here so killing widelands. update your sound driver and/or SDL to fix this problem\n"));
+	 log 
+		  (_("Waited 5 seconds to close audio. problems here so killing widelands."
+			  " update your sound driver and/or SDL to fix this problem\n"));
+#ifndef WIN32
 	raise(SIGKILL);
+#endif
 }
 
 void WLApplication::shutdown_hardware()
@@ -966,10 +974,12 @@ void WLApplication::shutdown_hardware()
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
+#ifndef WIN32
 	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
 	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
 	signal(SIGALRM, terminate);
 	alarm(5);
+#endif
 
 	g_sound_handler.shutdown();
 
