@@ -77,7 +77,7 @@ void Game::SyncWrapper::StartDump(std::string const & fname) {
 	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
 }
 
-static const unsigned long long MINIMUM_DISK_SPACE = 256*1024*1024;
+static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
 void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	uint32_t time = m_game.get_gametime();
@@ -88,8 +88,11 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	log("\n");
 #endif
 
-	if (m_dump && (int32_t)(m_counter - m_next_diskspacecheck) >= 0) {
-		m_next_diskspacecheck = m_counter + 16*1024*1024;
+	if
+		(m_dump &&
+		 static_cast<uint32_t>((m_counter - m_next_diskspacecheck) >= 0))
+	{
+		m_next_diskspacecheck = m_counter + 16 * 1024 * 1024;
 
 		if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
 			log("Stop writing to syncstream file: disk is getting full.\n");

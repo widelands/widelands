@@ -39,7 +39,7 @@ struct RoutingNodeNeighbour {
 	RoutingNode * get_neighbour() {
 		return m_nb;
 	}
-	int32_t get_cost() {
+	int32_t get_cost() const {
 		return m_cost;
 	}
 

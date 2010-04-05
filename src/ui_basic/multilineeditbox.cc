@@ -68,7 +68,9 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 			if (m_cur_pos < txt.size()) {
 				do {
 					++m_cur_pos;
-				} while (m_cur_pos < txt.size() && ((txt.at(m_cur_pos) & 0xc0) == 0x80)) ;
+				} while
+						(m_cur_pos < txt.size() &&
+						 ((txt.at(m_cur_pos) & 0xc0) == 0x80));
 				// fallthrough - handle it like backspace
 			} else
 				break;
@@ -103,7 +105,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 						break;
 					}
 
-				} while ((txt.at(m_cur_pos) & 0xc0) == 0x80); 
+				} while ((txt.at(m_cur_pos) & 0xc0) == 0x80);
 
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_cur_pos = m_cur_pos;; ++new_cur_pos) {
@@ -133,7 +135,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 					++begin_of_line;
 				uint32_t begin_of_next_line = m_cur_pos;
 				while
-					(begin_of_next_line < txt.size() 
+					(begin_of_next_line < txt.size()
 					 &&
 					 txt.at(begin_of_next_line) != '\n')
 					++begin_of_next_line;
@@ -149,7 +151,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 					end_of_next_line ? end_of_next_line :
 					begin_of_next_line + m_cur_pos - begin_of_line;
 				// Care about unicode letters
-				while (m_cur_pos < txt.size() && (txt.at(m_cur_pos) & 0xc0) == 0x80) 
+				while (m_cur_pos < txt.size() && (txt.at(m_cur_pos) & 0xc0) == 0x80)
 					++m_cur_pos;
 			}
 			break;
@@ -157,8 +159,8 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 		case SDLK_UP:
 			if (m_cur_pos > 0) {
 				uint32_t begin_of_line = m_cur_pos;
-				
-				if(begin_of_line >= txt.size()) {
+
+				if (begin_of_line >= txt.size()) {
 					begin_of_line = txt.size() - 1;
 				}
 				assert (begin_of_line < txt.size());
@@ -335,7 +337,10 @@ void Multiline_Editbox::CalcLinePos()
 	uint32_t lbtt = 0; // linebreaks to top
 	uint32_t lbtb = 0; // linebreaks to bottom
 
-	for (size_t i = 0; i < std::min(m_cur_pos,static_cast<uint32_t>(str.size() - 1)); ++i)
+	for
+		(size_t i = 0;
+		 i < std::min(m_cur_pos, static_cast<uint32_t>(str.size() - 1));
+		 ++i)
 		if (str.at(i) == '\n')
 			++lbtt;
 	for (size_t i = m_cur_pos; i < leng; ++i)

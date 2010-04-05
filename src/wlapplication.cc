@@ -66,9 +66,13 @@
 
 #include "timestring.h"
 
+#include <config.h>
 #include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifndef WIN32
+#include <signal.h>
+#endif
 
 #include <cerrno>
 #include <cstring>
@@ -77,6 +81,7 @@
 #include <stdexcept>
 #include <string>
 #include <ctime>
+
 
 #ifdef DEBUG
 #ifndef WIN32
@@ -759,12 +764,14 @@ bool WLApplication::init_settings() {
 	g_options.read("config", "global");
 	Section & s = g_options.pull_section("global");
 
-	// Set Locale and grab default domain
-	i18n::set_locale(s.get_string("language", ""));
-	i18n::grab_textdomain("widelands");
-
 	//then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
+
+	// Set Locale and grab default domain
+	i18n::set_locale(s.get_string("language", ""));
+	i18n::grab_textdomain
+		 ("widelands", s.get_string("localedir", INSTALL_LOCALEDIR));
+	log("using locale %s\n", i18n::get_locale().c_str());
 
 	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
@@ -940,11 +947,18 @@ bool WLApplication::init_hardware() {
 /**
  * Shut the hardware down: stop graphics mode, stop sound handler
  */
+
+void terminate (int) {
+	 log 
+		  (_("Waited 5 seconds to close audio. problems here so killing widelands."
+			  " update your sound driver and/or SDL to fix this problem\n"));
+#ifndef WIN32
+	raise(SIGKILL);
+#endif
+}
+
 void WLApplication::shutdown_hardware()
 {
-	g_sound_handler.shutdown();
-	SDL_QuitSubSystem(SDL_INIT_AUDIO);
-
 	if (g_gr)
 		wout
 			<<
@@ -957,7 +971,18 @@ void WLApplication::shutdown_hardware()
 	init_graphics(0, 0, 0, false, false, false);
 #endif
 
-	SDL_Quit();
+	SDL_QuitSubSystem
+		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
+
+#ifndef WIN32
+	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
+	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
+	signal(SIGALRM, terminate);
+	alarm(5);
+#endif
+
+	g_sound_handler.shutdown();
+
 }
 
 /**
@@ -1220,6 +1245,7 @@ void WLApplication::show_usage()
 			 "                      of using the SDL\n"
 			 " --language=[de_DE|sv_SE|...]\n"
 			 "                      The locale to use.\n"
+			 " --localedir=DIRNAME  Use DIRNAME as location for the locale"
 			 " --remove_syncstreams=[true|false]\n"
 			 "                      Remove syncstream files on startup\n"
 			 " --remove_replays=[...]\n"
@@ -1245,7 +1271,7 @@ void WLApplication::show_usage()
 #endif
 		<<
 		_
-			( " --speed_of_new_game  The speed that the new game will run at\n"
+			(" --speed_of_new_game  The speed that the new game will run at\n"
 			 "                      when started, with factor 1000 (0 is pause,\n"
 			 "                      1000 is normal speed).\n"
 			 " --auto_roadbuild_mode=[yes|no]\n"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include <libintl.h>
 
 #include <cstdlib>
+#include <utility>
 
 extern int _nl_msg_cat_cntr;
 
@@ -33,7 +34,7 @@ namespace i18n {
 /// A stack of textdomains. On entering a new textdomain, the old one gets
 /// pushed on the stack. On leaving the domain again it is popped back.
 /// \see grab_texdomain()
-std::vector<std::string> textdomains;
+std::vector<std::pair<std::string, std::string> > textdomains;
 
 std::string locale;
 
@@ -56,13 +57,16 @@ char const * translate(std::string const & str) {
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-void grab_textdomain(std::string const & domain) {
+void grab_textdomain(std::string const & domain, std::string const & localedir)
+{
 	char const * const dom = domain.c_str();
+	char const * const ldir = localedir.c_str();
 
 	bind_textdomain_codeset(dom, "UTF-8");
-	bindtextdomain(dom, INSTALL_LOCALEDIR);
+	bindtextdomain(dom, ldir);
+	log("textdomain %s @ %s\n", dom, ldir);
 	textdomain(dom);
-	textdomains.push_back(dom);
+	textdomains.push_back(std::make_pair(dom, ldir));
 }
 
 /**
@@ -78,10 +82,11 @@ void release_textdomain() {
 	//don't try to get the previous TD when the very first one ('widelands')
 	//just got dropped
 	if (textdomains.size()) {
-		char const * const domain = textdomains.back().c_str();
+		char const * const domain = textdomains.back().first.c_str();
+		char const * const localedir = textdomains.back().second.c_str();
 
 		bind_textdomain_codeset(domain, "UTF-8");
-		bindtextdomain(domain, INSTALL_LOCALEDIR);
+		bindtextdomain(domain, localedir);
 		textdomain(domain);
 	}
 }
@@ -127,6 +132,11 @@ void set_locale(std::string name) {
 	/* Than set the variables */
 	setenv ("LANG",     lang.c_str(), 1);
 	setenv ("LANGUAGE", (lang + ":" + lang.substr(0, 2)).c_str(), 1);
+	log
+		("LANG %s, LANGUAGE %s\n",
+		lang.c_str(),
+		(lang + ":" + lang.substr(0, 2)).c_str());
+
 	/* Finally make changes known.  */
 	++_nl_msg_cat_cntr;
 #endif
@@ -134,9 +144,10 @@ void set_locale(std::string name) {
 	locale = lang.c_str();
 
 	if (textdomains.size()) {
-		char const * const domain = textdomains.back().c_str();
+		char const * const domain = textdomains.back().first.c_str();
+		char const * const localedir = textdomains.back().second.c_str();
 		bind_textdomain_codeset (domain, "UTF-8");
-		bindtextdomain(domain, INSTALL_LOCALEDIR);
+		bindtextdomain(domain, localedir);
 		textdomain(domain);
 	}
 }

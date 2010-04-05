@@ -35,7 +35,7 @@ struct Text_Block {
 	void set_font_size(int32_t const font_size) {m_font_size = font_size;}
 	int32_t get_font_size() const throw () {return m_font_size;}
 
-	void set_font_color(RGBColor const font_color) {m_font_color = font_color;}
+	void set_font_color(RGBColor const & font_color) {m_font_color = font_color;}
 	RGBColor get_font_color() const throw () {return m_font_color;}
 
 	void set_font_weight(std::string const & font_weight) {

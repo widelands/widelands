@@ -691,7 +691,7 @@ Profile::Profile
 Profile::Profile
 	(char const * const filename,
 	 char const * const global_section,
-	 const std::string  textdomain,
+	 const std::string & textdomain,
 	 int32_t      const error_level)
 	: m_filename(filename), m_error_level(error_level)
 {
