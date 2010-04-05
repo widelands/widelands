@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-04-03 22:13+0000\n"
-"Last-Translator: Martin Claus <Unknown>\n"
+"PO-Revision-Date: 2010-04-04 21:41+0000\n"
+"Last-Translator: Mr. Anderson <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-04 03:50+0000\n"
+"X-Launchpad-Export-Date: 2010-04-05 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/events/event_road.cc:51
@@ -185,32 +185,32 @@ msgid ""
 "                      Enables double buffering\n"
 "                      *HIGHLY EXPERIMENTAL*\n"
 msgstr ""
-" --speed_of_new_game Die Geschwindigkeit mit der ein neues Spiel läuft\n"
+" --speed_of_new_game Die Geschwindigkeit, mit der ein neues Spiel läuft,\n"
 "                      wenn es gestartet wird, mit einem Faktor von 1000 (0 "
-"bedeutet Pause,\n"
-"                      1000 bedeutet normale Geschwindigkeit)\n"
+"ist Pause,\n"
+"                      1000 ist normale Geschwindigkeit)\n"
 " --auto_roadbuild_mode=[yes|no]\n"
 "                      Gibt an, ob direkt nach dem Platzieren einer Flagge, "
 "die\n"
 "                      nicht mit einer Straße verbunden ist, der Straßenbau-\n"
 "                      modus gestartet werden soll.\n"
 " --write_HTML=[yes|no]\n"
-"                      Schreibe HTML Hilfe Dateien für verarbeitete "
+"                      Schreibe HTML-Hilfe-Dateien für verarbeitete "
 "Spieldaten.\n"
 "\n"
 "Graphic options:\n"
 " --fullscreen=[yes|no]\n"
-"                      Gibt an ob der gesamte Bildschirm für das Spiel\n"
+"                      Gibt an, ob der gesamte Bildschirm für das Spiel\n"
 "                      genutzt werden soll.\n"
 " --depth=[16|32] Farbtiefe in Bits pro Pixel\n"
 " --xres=[...] Breite des Fensters in Pixel\n"
 " --yres=[...] Höhe des Fensters in Pixel\n"
 " --hw_improvements=[0|1]\n"
 "                      Aktiviere Hardwarebeschleunigung.\n"
-"                      *EXPERIMENTELLE PHASE!*\n"
+"                      *HOCHEXPERIMENTELL*\n"
 " --double_buffer=[0|1]\n"
-"                      Aktiviert doube buffering\n"
-"                      *EXPERIMENTELLE PHASE!*\n"
+"                      Aktiviert Doppelpufferung\n"
+"                      *HOCHEXPERIMENTELL*\n"
 
 #: ../../src/wlapplication.cc:1273
 msgid ""
@@ -1247,8 +1247,8 @@ msgid ""
 "player %u's message %u has duration %u; (it must have infinite duration, so "
 "that only this event can exipre it)"
 msgstr ""
-"Spieler %u's Nachricht %u hat eine Dauer von %u; (sie muss eine unendliche "
-"Dauer haben, so dass sie nur durch diesen Event verfallen kann."
+"Spieler %us Nachricht %u hat eine Dauer von %u; (sie muss eine unendliche "
+"Dauer haben, so dass sie nur durch diesen Ereignis verfallen kann)"
 
 #: ../../src/events/event_expire_message.cc:73
 #, c-format
@@ -1256,9 +1256,9 @@ msgid ""
 "refers to the same message id (player %u's %u) as another expire message "
 "event (\"%s\"); (only one event can expire each message)"
 msgstr ""
-"Verweist auf die selbe Meldungs id (Spieler %u's %u) als ein anderer Lass-"
-"Nachricht-Verfallen event (\"%s\"); (jede Nachricht kann nur durch einen "
-"event verfallen)"
+"Verweist auf die selbe Meldungs-ID (Spieler %us %u) als ein anderes Lass-"
+"Nachricht-Verfallen-Ereignis (\"%s\"); (jede Nachricht kann nur durch ein "
+"Ereignis verfallen)"
 
 #: ../../src/events/event_expire_message.cc:79
 #: ../../src/events/event_message.cc:111
@@ -1272,7 +1272,7 @@ msgstr "Erlaube Arbeitertypen"
 
 #: ../../src/events/event_factory.cc:62
 msgid "Allows the creation of workers of certain types for a player."
-msgstr "Erlaubt die Kreation bestimmter Arten von Arbeitern."
+msgstr "Erlaubt einem Spieler die Erstellung bestimmter Arbeiterarten."
 
 #: ../../src/events/event_factory.cc:66
 msgid "Forbid worker types"
@@ -1280,7 +1280,7 @@ msgstr "Verbiete Arbeiter vom Typ"
 
 #: ../../src/events/event_factory.cc:67
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr "Verbietet einem Spieler, bestimmte Arten von Arbeitern zu kreieren."
+msgstr "Verbietet einem Spieler die Erstellung bestimmter Arbeiterarten."
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
@@ -1403,7 +1403,8 @@ msgstr "Setze Zeitgeber"
 
 #: ../../src/events/event_factory.cc:142
 msgid "Set a timer to trigger after a certain duration."
-msgstr "Setze einen Zeit Auslöser nach einer bestimmten Zeit."
+msgstr ""
+"Setze einen Zeitgeber, der nach einer bestimmten Zeit ausgelöst wird."
 
 #: ../../src/events/event_factory.cc:146
 msgid "Unhide area"
@@ -1487,7 +1488,7 @@ msgstr "Stellt den Alles-Sehen-Modus für einen spezifischen Spieler An/Aus."
 
 #: ../../src/events/event_factory.cc:193
 msgid "Creates a message for a player"
-msgstr "Schreibt eine Nachricht an einen Spieler"
+msgstr "Sendet eine Nachricht an einen Spieler"
 
 #: ../../src/events/event_factory.cc:195
 msgid ""
@@ -1500,15 +1501,15 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
-msgstr "Verwirft eine zuvor geschriebene Nachricht"
+msgstr "Verwirft eine zuvor gesendete Nachricht"
 
 #: ../../src/events/event_factory.cc:202
 msgid ""
 "Expires a message that was previously created for a player. The message will "
 "cease to exist."
 msgstr ""
-"Verwirft eine zuvor an einen Spieler geschickte Nachricht. Die Nachricht "
-"wird gelöscht."
+"Verwirft eine zuvor an einen Spieler gesendete Nachricht. Die Nachricht wird "
+"gelöscht."
 
 #: ../../src/events/event_flag.cc:44
 #, c-format
@@ -2382,8 +2383,7 @@ msgstr "Soldatenart"
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
-"have {\"hp\"|\"attack\"|\"defense\"|\"evade\"} erwartet, aber \"%s\" "
-"gefunden."
+"{\"hp\"|\"attack\"|\"defense\"|\"evade\"} erwartet, aber \"%s\" gefunden."
 
 #: ../../src/logic/production_program.cc:1171
 #: ../../src/logic/production_program.cc:1239
@@ -2393,7 +2393,7 @@ msgstr "Level"
 #: ../../src/logic/production_program.cc:1249
 #, c-format
 msgid "expected level > %u but found \"%s\""
-msgstr "unerwartetes level > %u , fand jedoch \"%s\""
+msgstr "erwarteter level > %u  , fand jedoch \"%s\""
 
 #: ../../src/logic/productionsite.cc:70
 msgid "this ware type has already been declared as an output"
@@ -3323,7 +3323,7 @@ msgstr ""
 
 #: ../../src/trigger/trigger_factory.cc:86
 msgid "Message is Read or Archvied Trigger"
-msgstr "Nachricht wurde gelesen oder archiviert Auslöser"
+msgstr "Nachricht-wurde-gelesen-oder-archiviert-Auslöser"
 
 #: ../../src/trigger/trigger_factory.cc:88
 msgid ""
@@ -3571,7 +3571,7 @@ msgstr "Karte wählen"
 
 #: ../../src/ui_fsmenu/launchgame.cc:65
 msgid "Select Savegame"
-msgstr "Speicherung wählen"
+msgstr "Spielstand wählen"
 
 #: ../../src/ui_fsmenu/launchgame.cc:79
 msgid "Start game"
@@ -3644,9 +3644,9 @@ msgid ""
 "\" for this game, which you do not own. If the transfer of that file does "
 "not start automatically, please add it manually to your filesystem."
 msgstr ""
-"\" für dieses Spiel gewählt. Diese besitzt du nicht. Bitte füge die Datei "
-"selbst in dein Dateisystem ein, wenn die Dateiübertragung nicht automatisch "
-"startet."
+"\" für dieses Spiel gewählt, welche du nicht besitzt. Sollte die "
+"Dateiübertragung nicht automatisch startet, füge die Datei bitte selbst in "
+"dein Dateisystem ein."
 
 #: ../../src/ui_fsmenu/launchgame.cc:332
 msgid "Original:"
@@ -3654,7 +3654,7 @@ msgstr "Original:"
 
 #: ../../src/ui_fsmenu/launchgame.cc:435
 msgid "(Save): "
-msgstr "(Save): "
+msgstr "(Speichern): "
 
 #: ../../src/ui_fsmenu/loadgame.cc:64
 #: ../../src/editor/ui_menus/editor_event_menu.cc:125
@@ -3674,7 +3674,7 @@ msgstr "Wähle ein gespeichertes Spiel!"
 #: ../../src/ui_fsmenu/loadgame.cc:80
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Map Name:"
-msgstr "Karte:"
+msgstr "Kartenname:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:85
 msgid "Gametime:"
@@ -3767,7 +3767,7 @@ msgstr "Niemand"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:50
 msgid "Metaserver Lobby"
-msgstr "Metaserver Lobby"
+msgstr "Metaserver-Lobby"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:54
 msgid "Users online:"
@@ -4838,7 +4838,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:54
 msgid "Event Menu"
-msgstr "Ereignisse"
+msgstr "Ereignismenü"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:64
 msgid "Event Chains"
