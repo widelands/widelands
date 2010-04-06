@@ -51,8 +51,9 @@ endforeach (sourcefile ${WL_SRCS_ALL})
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 
-macro(CreateCodeCheck)
+macro(CreateCodeCheck link_target)
   if (CMAKE_BUILD_TYPE STREQUAL Debug)
+    set (commands "")
     file(GLOB srcfiles *.cc)
     foreach(sourcefile ${srcfiles})
       string(REPLACE "${CMAKE_SOURCE_DIR}/src/" "" sourcewithoutpath ${sourcefile})
@@ -69,6 +70,7 @@ macro(CreateCodeCheck)
         DEPENDS ${sourcefile}
         COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
       )
+      list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp})
       if (WL_EXTRAWARNINGS)
         add_custom_command(
           OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}"
@@ -76,15 +78,18 @@ macro(CreateCodeCheck)
           DEPENDS ${sourcefile}
           COMMENT "Checking ${sourcewithoutpath} with CppCheck"
         )
-        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp};${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}")
+        list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp})
+#        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp};${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}")
       else (WL_EXTRAWARNINGS)
-        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}")
+#        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}")
       endif (WL_EXTRAWARNINGS)
     endforeach(sourcefile ${srcfiles})
+    add_custom_target(codecheck_${link_target} DEPENDS ${commands})
+    add_dependencies(${link_target} codecheck_${link_target})
   endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 endmacro(CreateCodeCheck)
 
-CreateCodeCheck()
+CreateCodeCheck(widelands_main)
 
 add_subdirectory(ai)
 add_subdirectory(economy)

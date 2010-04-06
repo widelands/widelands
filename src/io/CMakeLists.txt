@@ -4,4 +4,4 @@ add_library(widelands_io ${WL_IO_SRCS})
 
 add_subdirectory(filesystem)
 
-CreateCodeCheck()
+CreateCodeCheck(widelands_io)
