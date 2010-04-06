@@ -51,6 +51,11 @@ endforeach (sourcefile ${WL_SRCS_ALL})
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 
+set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
+set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
+
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/CppCheckSuppressions.cmake ${CMAKE_CURRENT_BINARY_DIR}/CppCheckSuppressions)
+
 macro(CreateCodeCheck link_target)
   if (CMAKE_BUILD_TYPE STREQUAL Debug)
     set (commands "")
@@ -74,7 +79,7 @@ macro(CreateCodeCheck link_target)
       if (WL_EXTRAWARNINGS)
         add_custom_command(
           OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}"
-          COMMAND cmake -Dincludedir=${CMAKE_SOURCE_DIR}/src -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
+          COMMAND cmake -DWL_SOURCES_BINARY_ROOT=${WL_SOURCES_BINARY_ROOT} -Dincludedir=${CMAKE_SOURCE_DIR}/src -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
           DEPENDS ${sourcefile}
           COMMENT "Checking ${sourcewithoutpath} with CppCheck"
         )
