@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-04-01 09:55+0000\n"
-"Last-Translator: Fabio Pedretti <pedretti@eco.unibs.it>\n"
+"PO-Revision-Date: 2010-04-05 07:19+0000\n"
+"Last-Translator: Dom De Felice <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-02 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-04-06 03:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -221,7 +221,7 @@ msgstr "Attenzione: "
 
 #: ../../src/wlapplication.cc:1453
 msgid "Game data error"
-msgstr ""
+msgstr "Errore nei dati del gioco"
 
 #: ../../src/wlapplication.cc:1456
 msgid "Unexpected error during the game"
@@ -535,7 +535,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:710
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "Promozione di %s"
 
 #: ../../src/writeHTML.cc:721 ../../src/writeHTML.cc:866
 msgid "Programs"
@@ -701,7 +701,7 @@ msgstr "site"
 
 #: ../../src/writeHTML.cc:996
 msgid "has"
-msgstr ""
+msgstr "ha"
 
 #: ../../src/writeHTML.cc:1027
 msgid "workers of this site"
@@ -1249,11 +1249,11 @@ msgstr "Crea un inamovibile."
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
-msgstr ""
+msgstr "Evento lua"
 
 #: ../../src/events/event_factory.cc:104
 msgid "Run a lua command"
-msgstr ""
+msgstr "Esegui un comando lua"
 
 #: ../../src/events/event_factory.cc:108
 msgid "Show message box"
@@ -1386,23 +1386,27 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:193
 msgid "Creates a message for a player"
-msgstr ""
+msgstr "Crea un messaggio per un giocatore"
 
 #: ../../src/events/event_factory.cc:195
 msgid ""
 "Creates a message for a player. This message can last forever, during a "
 "specified duration, or until a special event is run."
 msgstr ""
+"Crea un messaggio per un giocatore Questo messaggio può durare per sempre, "
+"per un periodo specifico o fin quando non avviene un evento speciale."
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
-msgstr ""
+msgstr "Fa scadere un messaggio precedentemente creato"
 
 #: ../../src/events/event_factory.cc:202
 msgid ""
 "Expires a message that was previously created for a player. The message will "
 "cease to exist."
 msgstr ""
+"Fa scadere un messaggio precedentemente creato per un giocatore. Il "
+"messaggio cesserà di esistere."
 
 #: ../../src/events/event_flag.cc:44
 #, c-format
@@ -5489,11 +5493,11 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:64
 msgid "Status"
-msgstr ""
+msgstr "Stato"
 
 #: ../../src/wui/game_message_menu.h:65
 msgid "Title"
-msgstr ""
+msgstr "Titolo"
 
 #: ../../src/wui/game_message_menu.h:66
 msgid "Time sent"
@@ -5509,27 +5513,27 @@ msgstr ""
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:100
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:100
 msgid "Clear selection"
-msgstr ""
+msgstr "Annulla la selezione"
 
 #: ../../src/wui/game_message_menu.h:94
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:120
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:120
 msgid "Invert"
-msgstr ""
+msgstr "Inverti"
 
 #: ../../src/wui/game_message_menu.h:94
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:120
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:120
 msgid "Invert selection"
-msgstr ""
+msgstr "Inverti la selezione"
 
 #: ../../src/wui/game_message_menu.h:112 ../../src/wui/game_message_menu.h:145
 msgid "Archive selected messages"
-msgstr ""
+msgstr "Archivia i messaggi selezionati"
 
 #: ../../src/wui/game_message_menu.h:123 ../../src/wui/game_message_menu.h:146
 msgid "Show Archive"
-msgstr ""
+msgstr "Mostra l'archivio"
 
 #: ../../src/wui/game_message_menu.h:132
 msgid "Message Menu: Archive"
@@ -5537,7 +5541,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:136
 msgid "Restore selected messages"
-msgstr ""
+msgstr "Ripristina i messaggi selezionati"
 
 #: ../../src/wui/game_message_menu.h:137
 msgid "Show Inbox"
@@ -5545,14 +5549,14 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:159
 msgid "center main mapview on location"
-msgstr ""
+msgstr "centra la mappa principale sul luogo"
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:73
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:73
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.h:66
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.h:66
 msgid "Player:"
-msgstr ""
+msgstr "Giocatore:"
 
 #~ msgid "'s constructionsite"
 #~ msgstr "zona in costruzione"
