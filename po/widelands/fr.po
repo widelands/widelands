@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-04-03 21:41+0000\n"
-"Last-Translator: Alef Burzmali <Unknown>\n"
+"PO-Revision-Date: 2010-04-06 21:25+0000\n"
+"Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-04-04 03:50+0000\n"
+"X-Launchpad-Export-Date: 2010-04-07 03:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -23,12 +23,12 @@ msgstr "Aucun(e)"
 
 #: ../../src/s2map.cc:220
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Carte Settlers II. Pas de commentaire défini !"
+msgstr "Carte Bluebyte Settlers II. Pas de commentaire défini !"
 
 #: ../../src/wlapplication.cc:346
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
-"Erreur: Impossible de se connecter au méta-serveur (raison ci dessus)!\n"
+"Erreur : Impossible de se connecter au méta-serveur (raison ci-dessus)!\n"
 
 #: ../../src/wlapplication.cc:1083
 msgid ""
@@ -37,7 +37,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Désolé, pas de débogage de double instance sous WIN32.\n"
+"Désolé, pas de débogage en double instance sous WIN32.\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1086
@@ -46,7 +46,7 @@ msgstr "--double est désactivé. Ce n'est pas une compilation de débogage !"
 
 #: ../../src/wlapplication.cc:1203
 msgid "This is Widelands-"
-msgstr "Ceci est Widelands-"
+msgstr "Voici Widelands-"
 
 #: ../../src/wlapplication.cc:1205
 msgid ""
@@ -257,7 +257,7 @@ msgstr "Avertissement : "
 
 #: ../../src/wlapplication.cc:1453
 msgid "Game data error"
-msgstr "Erreur de données du jeux"
+msgstr "Erreur de données du jeu"
 
 #: ../../src/wlapplication.cc:1456
 msgid "Unexpected error during the game"
@@ -310,7 +310,7 @@ msgstr "Problème de connexion"
 
 #: ../../src/wlapplication.cc:1603
 msgid "Widelands has not been able to connect to the host."
-msgstr "Widelans n'a pas réussi à contacter l'hôte."
+msgstr "Widelands n'a pas réussi à contacter l'hôte."
 
 #: ../../src/wlapplication.cc:1649
 msgid "The address of the game server is invalid"
@@ -323,7 +323,7 @@ msgstr "Joueur"
 #: ../../src/wlapplication.cc:1902 ../../src/network/netclient.cc:167
 #: ../../src/network/nethost.cc:433
 msgid "Preparing game"
-msgstr "Préparation du jeu"
+msgstr "Préparation de la partie"
 
 #: ../../src/wlapplication.cc:2009
 msgid "End of replay"
@@ -488,7 +488,7 @@ msgstr "Coût de la construction"
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr "constructionsite de %s"
+msgstr "site de construction de %s"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
@@ -501,7 +501,7 @@ msgstr "amélioration de %s"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
-msgstr "Types de travailleurs"
+msgstr "Types d'ouvriers"
 
 #: ../../src/writeHTML.cc:522
 msgid "Minimum<br/>needed<br/>experience"
@@ -586,7 +586,7 @@ msgstr "mine"
 
 #: ../../src/writeHTML.cc:759
 msgid "breed"
-msgstr "elève"
+msgstr "race"
 
 #: ../../src/writeHTML.cc:760
 msgid "createitem"
@@ -610,15 +610,15 @@ msgstr "trouveespace"
 
 #: ../../src/writeHTML.cc:765
 msgid "walk"
-msgstr "Marcher"
+msgstr "marcher"
 
 #: ../../src/writeHTML.cc:766
 msgid "animation"
-msgstr "Animation"
+msgstr "animation"
 
 #: ../../src/writeHTML.cc:767 ../../src/writeHTML.cc:906
 msgid "return"
-msgstr "Retour"
+msgstr "retour"
 
 #: ../../src/writeHTML.cc:768
 msgid "object"
@@ -658,7 +658,7 @@ msgstr "Production"
 
 #: ../../src/writeHTML.cc:786 ../../src/wui/general_statistics_menu.cc:144
 msgid "Workers"
-msgstr "Travailleurs"
+msgstr "Ouvriers"
 
 #: ../../src/writeHTML.cc:797
 #, c-format
@@ -667,7 +667,7 @@ msgstr "employé de %s"
 
 #: ../../src/writeHTML.cc:807
 msgid "Inputs"
-msgstr ""
+msgstr "Entrées"
 
 #: ../../src/writeHTML.cc:818
 #, c-format
@@ -723,7 +723,7 @@ msgstr "ou"
 
 #: ../../src/writeHTML.cc:921
 msgid "unless"
-msgstr "tant que"
+msgstr "à moins que"
 
 #: ../../src/writeHTML.cc:952 ../../src/writeHTML.cc:974
 msgid "economy"
@@ -731,7 +731,7 @@ msgstr "économie"
 
 #: ../../src/writeHTML.cc:954 ../../src/writeHTML.cc:976
 msgid "needs"
-msgstr "nécessite"
+msgstr "demandes"
 
 #: ../../src/writeHTML.cc:994
 msgid "site"
@@ -763,7 +763,7 @@ msgstr "expérience"
 
 #: ../../src/writeHTML.cc:1047
 msgid "Documentation for program command call"
-msgstr ""
+msgstr "Documentation concernant la commande « call »"
 
 #: ../../src/writeHTML.cc:1049
 msgid "call"
@@ -772,11 +772,11 @@ msgstr "appel"
 #: ../../src/writeHTML.cc:1056
 #, c-format
 msgid "site's program %s"
-msgstr "programme du ste %s"
+msgstr "programme du site %s"
 
 #: ../../src/writeHTML.cc:1109
 msgid "Documentation for program command worker"
-msgstr ""
+msgstr "Documentation concernant la commande « worker »"
 
 #: ../../src/writeHTML.cc:1111
 msgid "worker"
@@ -789,7 +789,7 @@ msgstr "Programme de %s : %s"
 
 #: ../../src/writeHTML.cc:1137
 msgid "Documentation for program command sleep"
-msgstr ""
+msgstr "Documentation concernant la commande « sleep »"
 
 #: ../../src/writeHTML.cc:1139
 msgid "sleep"
@@ -802,7 +802,7 @@ msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1157
 msgid "Documentation for program command animate"
-msgstr ""
+msgstr "Documentation concernant la commande « animate »"
 
 #: ../../src/writeHTML.cc:1159
 msgid "animate"
@@ -810,7 +810,7 @@ msgstr "animer"
 
 #: ../../src/writeHTML.cc:1178
 msgid "Documentation for program command consume"
-msgstr ""
+msgstr "Documentation de la commande « consume »"
 
 #: ../../src/writeHTML.cc:1180
 msgid "consume"
@@ -818,7 +818,7 @@ msgstr "consomme"
 
 #: ../../src/writeHTML.cc:1221 ../../src/writeHTML.cc:1258
 msgid "Documentation for program command produce"
-msgstr ""
+msgstr "Documentation concernant la commande « produce »"
 
 #: ../../src/writeHTML.cc:1223
 msgid "produce"
@@ -830,11 +830,11 @@ msgstr "recruter"
 
 #: ../../src/writeHTML.cc:1299
 msgid "Documentation for program command mine"
-msgstr ""
+msgstr "Documentation concernant la commande « mine »"
 
 #: ../../src/writeHTML.cc:1326
 msgid "Documentation for program command check_soldier"
-msgstr ""
+msgstr "Documentation concernant la commande « check_soldier »"
 
 #: ../../src/writeHTML.cc:1328
 msgid "check soldier"
@@ -842,7 +842,7 @@ msgstr "verifie soldat"
 
 #: ../../src/writeHTML.cc:1334 ../../src/writeHTML.cc:1358
 msgid "hp"
-msgstr "hp"
+msgstr "pv"
 
 #: ../../src/writeHTML.cc:1335 ../../src/writeHTML.cc:1359
 msgid "attack"
@@ -858,7 +858,7 @@ msgstr "esquive"
 
 #: ../../src/writeHTML.cc:1350
 msgid "Documentation for program command train"
-msgstr ""
+msgstr "Documentation concernant la commande « train »"
 
 #: ../../src/writeHTML.cc:1352
 msgid "train"
@@ -866,7 +866,7 @@ msgstr "entraine"
 
 #: ../../src/writeHTML.cc:1374
 msgid "Documentation for program command playFX"
-msgstr ""
+msgstr "Documentation concernant la commande « playFX »"
 
 #: ../../src/writeHTML.cc:1411 ../../src/writeHTML.cc:1417
 msgid "Ware types"
@@ -1228,15 +1228,15 @@ msgstr "Autoriser les types d'ouvriers"
 
 #: ../../src/events/event_factory.cc:62
 msgid "Allows the creation of workers of certain types for a player."
-msgstr "Autoriser la création d'un certain type d'ouvriers pour un joueur."
+msgstr "Autoriser la création d'un certain type d'ouvrier pour un joueur."
 
 #: ../../src/events/event_factory.cc:66
 msgid "Forbid worker types"
-msgstr "Interdire des types d'ouvriers"
+msgstr "Interdire des types d'ouvrier"
 
 #: ../../src/events/event_factory.cc:67
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr "Interdire la création d'un certain type d'ouvriers pour un joueur."
+msgstr "Interdire la création d'un certain type d'ouvrier pour un joueur."
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
@@ -1262,8 +1262,7 @@ msgstr "Créer un bâtiment"
 
 #: ../../src/events/event_factory.cc:82
 msgid "Create a building and optionally place workers in it"
-msgstr ""
-"Crée un bâtiment et place éventuellement un travailleur à l'intérieur"
+msgstr "Crée un bâtiment et place éventuellement des ouvriers à l'intérieur"
 
 #: ../../src/events/event_factory.cc:86
 msgid "Conquer area"
@@ -1590,16 +1589,16 @@ msgstr "\"%s\" n'est pas constructible"
 
 #: ../../src/events/event_player_worker_types.cc:58
 msgid "no worker types"
-msgstr "Pas de types de travailleurs"
+msgstr "Pas de types d'ouvrier"
 
 #: ../../src/events/event_player_worker_types.cc:63
 #, c-format
 msgid "(player worker types): %s"
-msgstr "(types de travailleurs du joueur): %s"
+msgstr "(types d'ouvrier du joueur): %s"
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
-msgstr ""
+msgstr "Modifier"
 
 #: ../../src/events/event_road.cc:42
 msgid "there are no steps"
@@ -1671,7 +1670,7 @@ msgstr ""
 #: ../../src/logic/cmd_check_eventchain.cc:98
 #, c-format
 msgid "check eventchain: %s"
-msgstr ""
+msgstr "vérifie la chaîne des événements: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
@@ -2090,7 +2089,7 @@ msgstr "Définir la quantité cible de la marchandise : %s"
 #: ../../src/logic/playercommand.cc:863
 #, c-format
 msgid "set worker target quantity: %s"
-msgstr "Définir la quantité cible de travailleur : %s"
+msgstr "définir la quantité cible d'ouvriers : %s"
 
 #: ../../src/logic/playercommand.cc:988
 #, c-format
@@ -2179,11 +2178,11 @@ msgstr "le site a "
 
 #: ../../src/logic/production_program.cc:229
 msgid "workers need experience"
-msgstr "Les travailleurs ont besoin d'expérience"
+msgstr "les ouvriers ont besoin d'expérience"
 
 #: ../../src/logic/production_program.cc:254
 msgid "ware type or worker type"
-msgstr "Type de marchandise ou de travailleur"
+msgstr "Type de marchandise ou d'ouvrier"
 
 #: ../../src/logic/production_program.cc:317
 #, c-format
@@ -2356,7 +2355,7 @@ msgstr "ce type de marchandise a déjà été déclarée en tant que production"
 
 #: ../../src/logic/productionsite.cc:76
 msgid "this worker type has already been declared as an output"
-msgstr "ce type de travailleur a déjà été déclarée en tant que production"
+msgstr "ce type d'ouvrier a déjà été déclaré en tant que production"
 
 #: ../../src/logic/productionsite.cc:219
 msgid "(not occupied)"
@@ -2366,8 +2365,8 @@ msgstr "(inoccupé)"
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] "travailleur manquant"
-msgstr[1] "travailleurs manquant"
+msgstr[0] "ouvrier manquant"
+msgstr[1] "ouvriers manquant"
 
 #: ../../src/logic/productionsite.cc:232
 msgid "(stopped)"
@@ -2417,7 +2416,7 @@ msgstr ""
 #: ../../src/logic/soldier.cc:1373 ../../src/logic/soldier.cc:1378
 #: ../../src/logic/worker.cc:1671
 msgid "no"
-msgstr ""
+msgstr "non"
 
 #: ../../src/logic/soldier.cc:1385 ../../src/logic/soldier.cc:1393
 #: ../../src/logic/worker.cc:1683
@@ -2438,7 +2437,7 @@ msgstr ""
 
 #: ../../src/logic/tribe.cc:221 ../../src/logic/tribe.cc:242
 msgid "none found"
-msgstr ""
+msgstr "aucun trouvé"
 
 #: ../../src/logic/tribe.cc:223
 #, c-format
@@ -2531,7 +2530,7 @@ msgstr "Constructions autorisées: %s"
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
 msgid "allowed worker types: %s"
-msgstr "Type de travailleur autorisés: %s"
+msgstr "Types d'ouvrier autorisés: %s"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
@@ -2760,7 +2759,7 @@ msgstr "propriétaire : %s"
 #: ../../src/map_io/widelands_map_object_packet.cc:80
 #, c-format
 msgid "unknown object header %u"
-msgstr ""
+msgstr "entête d'objet inconnu %u"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:83
 #, c-format
@@ -2786,6 +2785,8 @@ msgstr "position des joueurs : %s"
 #, c-format
 msgid "messages are not ordered: sent at %u but previous message sent at %u"
 msgstr ""
+"messages dans le désordre : envoyé à %u alors que le message précédent a été "
+"envoyé à %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:94
 #, c-format
@@ -2847,7 +2848,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
 msgid "road %u: %s"
-msgstr ""
+msgstr "route %u : %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
@@ -2867,7 +2868,7 @@ msgstr "Déclencheur : %s"
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:68
 #, c-format
 msgid "invalid type \"%s\""
-msgstr ""
+msgstr "type \"%s\" invalide"
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:76
 #, c-format
@@ -3080,7 +3081,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1747
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr ""
+msgstr "Commencé à envoyer le fichier %s à %s !"
 
 #: ../../src/network/nethost.cc:1768
 msgid "Client requests file part that does not exist."
@@ -3089,12 +3090,12 @@ msgstr "Le client demande des fichiers qui n'existent pas."
 #: ../../src/network/nethost.cc:1771
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr ""
+msgstr "Transfert du fichier %s à %s terminé"
 
 #: ../../src/network/nethost.cc:1779
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
-msgstr ""
+msgstr "Envoi de la partie %u/%u du fichier %s à %s"
 
 #: ../../src/network/nethost.cc:1789
 #, c-format
@@ -3108,7 +3109,7 @@ msgstr "%s a quitté la partie (%s)"
 
 #: ../../src/network/network_ggz.cc:281
 msgid "Closed the connection to the metaserver."
-msgstr ""
+msgstr "Fermé la connexion au méta-serveur."
 
 #: ../../src/network/network_ggz.cc:375
 msgid ""
@@ -3117,10 +3118,14 @@ msgid ""
 "at http://wl.widelands.org/wiki/InternetGaming can\n"
 "be advantageous."
 msgstr ""
+"Votre serveur n'est pas accessible depuis internet.\\n\n"
+"Essayez de résoudre le problème - Consulter les notes\\n\n"
+"sur http://wl.widelands.org/wiki/InternetGaming peut\\n\n"
+"vous aider."
 
 #: ../../src/network/network_ggz.cc:499
 msgid "Connected to the metaserver of:"
-msgstr ""
+msgstr "Connecté au méta-serveur de :"
 
 #: ../../src/network/network_ggz.cc:510
 msgid "Server MOTD:"
@@ -3128,7 +3133,7 @@ msgstr "Serveur MOTD:"
 
 #: ../../src/network/network_ggz.cc:516
 msgid "Reconnected to the metaserver."
-msgstr ""
+msgstr "Reconnecté au méta-serveur."
 
 #: ../../src/network/network_ggz.cc:521
 msgid "NOTE: The Internet gaming implementation is in very early state."
@@ -3140,21 +3145,21 @@ msgstr "Veuillez jeter un coup d'œil à :"
 
 #: ../../src/network/network_ggz.cc:664
 msgid " joined the metaserver."
-msgstr ""
+msgstr " a rejoint le méta-serveur."
 
 #: ../../src/network/network_ggz.cc:673
 msgid " left the metaserver."
-msgstr ""
+msgstr " a quitté le méta-serveur."
 
 #: ../../src/trigger/trigger_defeated.cc:46
 #, c-format
 msgid "player is %u, but map has only %u players"
-msgstr ""
+msgstr "le joueur est %u, mais la carte a seulement %u joueurs"
 
 #: ../../src/trigger/trigger_defeated.cc:52
 #, c-format
 msgid "(defeated): %s"
-msgstr ""
+msgstr "(vaincu) : %s"
 
 #: ../../src/trigger/trigger_factory.cc:41
 msgid "Building Trigger"
@@ -3177,6 +3182,8 @@ msgid ""
 "Triggers when the player was defeated. The trigger is set to true, if the "
 "player has 0 workers."
 msgstr ""
+"Se déclenche lorsque le joueur a été vaincu. Le déclencheur est vrai si le "
+"joueur a 0 ouvriers."
 
 #: ../../src/trigger/trigger_factory.cc:55
 msgid "Military influence Trigger"
@@ -3879,7 +3886,7 @@ msgstr "Police de caractères du menu :"
 
 #: ../../src/ui_fsmenu/options.cc:400
 msgid "Play a sound at message arrival."
-msgstr ""
+msgstr "Jouer un son à l'arrivée d'un message."
 
 #: ../../src/ui_fsmenu/options.cc:408
 msgid "Do not zip widelands data files (maps, replays and savegames)."
@@ -3917,7 +3924,7 @@ msgstr "Pause"
 
 #: ../../src/ui_fsmenu/options.cc:472
 msgid "FreeSerif (Default)"
-msgstr ""
+msgstr "FreeSerif (Défaut)"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:85
 msgid "Initialization"
@@ -4027,7 +4034,7 @@ msgstr "Montrer le suivant"
 #: ../../src/wui/building_ui.cc:159
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr ""
+msgstr "Voulez-vous vraiment détruire ce %s ?"
 
 #: ../../src/wui/building_ui.cc:205
 msgid "Destroy building?"
@@ -4056,7 +4063,7 @@ msgstr "Cacher la zone de travail"
 
 #: ../../src/wui/building_ui.cc:1103
 msgid "Worker Listing"
-msgstr "Liste des travailleurs"
+msgstr "Liste des ouvriers"
 
 #: ../../src/wui/building_ui.cc:1139
 msgid "Type: "
@@ -4092,7 +4099,7 @@ msgstr "Priorité basse"
 
 #: ../../src/wui/building_ui.cc:1433
 msgid "Show worker listing"
-msgstr "Liste des travailleurs"
+msgstr "Liste des ouvriers"
 
 #: ../../src/wui/building_ui.cc:1530 ../../src/wui/building_ui.cc:1769
 msgid "Capacity"
@@ -4313,7 +4320,7 @@ msgstr " existe déjà. Écraser ?"
 
 #: ../../src/wui/game_message_menu.cc:41 ../../src/wui/game_message_menu.h:141
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Menu des messages : Boîte de réception"
 
 #: ../../src/wui/game_objectives_menu.cc:46
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:151
@@ -4489,7 +4496,7 @@ msgstr[1] "%u nouveaux messages"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
-msgstr ""
+msgstr "Quitter le replay"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
@@ -4577,7 +4584,7 @@ msgstr "Montrer les ressources"
 
 #: ../../src/wui/stock_menu.cc:75
 msgid "Show workers"
-msgstr "Montrer les travailleurs"
+msgstr "Montrer les ouvriers"
 
 #: ../../src/wui/transport_ui.cc:44
 msgid "Economy options"
@@ -5588,7 +5595,7 @@ msgstr "Titre"
 
 #: ../../src/wui/game_message_menu.h:66
 msgid "Time sent"
-msgstr ""
+msgstr "Temps envoyé"
 
 #: ../../src/wui/game_message_menu.h:77
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:100
