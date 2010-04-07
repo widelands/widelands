@@ -116,12 +116,17 @@ bool NetGGZ::connect()
 	FD_ZERO(&fdset);
 	FD_SET(fd, &fdset);
 	while (ggzmod_get_state(mod) != GGZMOD_STATE_PLAYING) {
-		select(fd + 1, &fdset, 0, 0, &timeout);
-		ggzmod_dispatch(mod);
+		while (select(fd + 1, &fdset, 0, 0, &timeout) > 0)
+			ggzmod_dispatch(mod);
 		//log("GGZ ## timeout!\n");
 		if (usedcore())
 			datacore();
 	}
+	// Hosting a ggz game on windows requires more processing.
+	while (select(fd + 1, &fdset, 0, 0, &timeout) >0 )
+		ggzmod_dispatch(mod);
+	if (usedcore())
+		datacore();
 
 	return true;
 }
@@ -286,6 +291,8 @@ void NetGGZ::deinitcore()
 	ggzserver = 0;
 	ggzcore_destroy();
 	ggzcore_ready = false;
+	channelfd = -1;
+	gamefd = -1;
 }
 
 
@@ -376,6 +383,29 @@ void NetGGZ::data()
 #pragma GCC diagnostic error "-Wold-style-cast"
 
 
+/* Check for incoming data */
+int NetGGZ::data_is_pending(int fd)
+{
+	if (fd >= 0) {
+		fd_set read_fd_set;
+		int result;
+		struct timeval tv;
+
+		FD_ZERO(&read_fd_set);
+		FD_SET(fd, &read_fd_set);
+
+		tv.tv_sec = tv.tv_usec = 0;
+
+		result =
+			select(fd + 1, &read_fd_set, NULL, NULL, &tv);
+		if (result > 0) {
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
 //\FIXME: mallformed updatedata, if the user is in a room and too many seats
 //        are open (~ > 4).
 /// checks for events on server, room and game
@@ -385,10 +415,11 @@ void NetGGZ::datacore()
 {
 	if (!ggzserver)
 		return;
-	if (ggzcore_server_data_is_pending(ggzserver))
+	while (ggzcore_server_data_is_pending(ggzserver))
 		ggzcore_server_read_data(ggzserver, ggzcore_server_get_fd(ggzserver));
 
-	if (channelfd != -1)
+	while (channelfd != -1 && 
+		   data_is_pending(ggzcore_server_get_channel(ggzserver)))
 		ggzcore_server_read_data
 			(ggzserver, ggzcore_server_get_channel(ggzserver));
 

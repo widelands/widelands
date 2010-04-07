@@ -185,6 +185,8 @@ private:
 	void write_tablelist();
 	void write_userlist();
 
+	int data_is_pending(int fd);
+
 	bool use_ggz;
 	int32_t m_fd;
 	int32_t channelfd;

@@ -152,10 +152,6 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	// try to connect to the metaserver
 	if (!NetGGZ::ref().usedcore())
 		connectToMetaserver();
-#ifdef WIN32
-	//bug in ggz on windows - not able to open a server
-	hostgame.set_enabled(false);
-#endif
 }
 
 
@@ -206,10 +202,7 @@ void Fullscreen_Menu_NetSetupGGZ::fillServersList
 {
 	// List and button cleanup
 	opengames.clear();
-#ifndef WIN32
-	//bug in ggz on windows - not able to open a server
 	hostgame.set_enabled(true);
-#endif
 	joingame.set_enabled(false);
 	std::string localservername = servername.text();
 	localservername += " (" + build_id() + ")";
@@ -333,10 +326,6 @@ void Fullscreen_Menu_NetSetupGGZ::server_doubleclicked (uint32_t)
 /// called when the servername was changed
 void Fullscreen_Menu_NetSetupGGZ::change_servername()
 {
-#ifdef WIN32
-	//bug in ggz on windows - not able to open a server
-	return;
-#endif
 	// Allow user to enter a servername manually
 	hostgame.set_enabled(true);
 
