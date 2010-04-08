@@ -116,15 +116,18 @@ bool NetGGZ::connect()
 	FD_ZERO(&fdset);
 	FD_SET(fd, &fdset);
 	while (ggzmod_get_state(mod) != GGZMOD_STATE_PLAYING) {
-		while (select(fd + 1, &fdset, 0, 0, &timeout) > 0)
+		// just to prevent busy looping. 
+		// TODO: mod fd may not remain constant during processing in linux.
+		select(fd + 1, &fdset, 0, 0, &timeout);
+		// make sure all incoming data is processed before continuing
+		while (data_is_pending(ggzmod_get_fd(mod)))
 			ggzmod_dispatch(mod);
 		//log("GGZ ## timeout!\n");
 		if (usedcore())
 			datacore();
 	}
 	// Hosting a ggz game on windows requires more processing.
-	while (select(fd + 1, &fdset, 0, 0, &timeout) >0 )
-		ggzmod_dispatch(mod);
+	ggzmod_dispatch(mod);
 	if (usedcore())
 		datacore();
 
