@@ -158,8 +158,7 @@ int L_Player::get_number(lua_State * L) {
 		:meth:`allow_buildings` or :meth:`forbid_buildings` for that.
 */
 int L_Player::get_allowed_buildings(lua_State * L) {
-	Game & game = get_game(L);
-	Player & p = get(L, game);
+	Player & p = get(L, get_egbase(L));
 	const Tribe_Descr & t = p.tribe();
 
 	lua_newtable(L);
@@ -181,7 +180,7 @@ int L_Player::get_allowed_buildings(lua_State * L) {
 		a new item, use :meth:`add_objective`.
 */
 int L_Player::get_objectives(lua_State * L) {
-	Manager<Objective> const & mom = get_game(L).map().mom();
+	Manager<Objective> const & mom = get_egbase(L).map().mom();
 
 	lua_newtable(L);
 	for (Manager<Objective>::Index i = 0; i < mom.size(); i++) {
@@ -204,6 +203,7 @@ int L_Player::get_objectives(lua_State * L) {
 // Note: we track the point in the middle of the screen while
 // Interactive_Player::viewpoint tracks the point in the upper left corner. We
 // therefore always add or subtract half a resolution to all values
+// TODO: Rethink this. What about moving in the editor?
 int L_Player::get_viewpoint_x(lua_State * L) {
 	Interactive_Player & ipl = *get_game(L).get_ipl();
 	if (ipl.player_number() == m_pl) {
@@ -266,7 +266,7 @@ int L_Player::get_defeated(lua_State * L) {
 		field is only centered when the game starts.
 */
 int L_Player::get_starting_field(lua_State * L) {
-	to_lua<L_Field>(L, new L_Field(get_game(L).map().get_starting_pos(m_pl)));
+	to_lua<L_Field>(L, new L_Field(get_egbase(L).map().get_starting_pos(m_pl)));
 	return 1;
 }
 
@@ -280,7 +280,7 @@ int L_Player::get_starting_field(lua_State * L) {
 */
 // UNTESTED
 int L_Player::get_retreat_percentage(lua_State * L) {
-	lua_pushuint32(L, get(L, get_game(L)).get_retreat_percentage());
+	lua_pushuint32(L, get(L, get_egbase(L)).get_retreat_percentage());
 	return 1;
 }
 int L_Player::set_retreat_percentage(lua_State * L) {
@@ -288,7 +288,7 @@ int L_Player::set_retreat_percentage(lua_State * L) {
 	if (value > 100)
 		return report_error(L, "%i is not a valid percentage!", value);
 
-	get(L, get_game(L)).set_retreat_percentage(value);
+	get(L, get_egbase(L)).set_retreat_percentage(value);
 	return 0;
 }
 
@@ -300,11 +300,11 @@ int L_Player::set_retreat_percentage(lua_State * L) {
 */
 // UNTESTED
 int L_Player::get_changing_retreat_percentage_allowed(lua_State * L) {
-	lua_pushuint32(L, get(L, get_game(L)).is_retreat_change_allowed());
+	lua_pushuint32(L, get(L, get_egbase(L)).is_retreat_change_allowed());
 	return 1;
 }
 int L_Player::set_changing_retreat_percentage_allowed(lua_State * L) {
-	get(L, get_game(L)).allow_retreat_change(luaL_checkboolean(L, -1));
+	get(L, get_egbase(L)).allow_retreat_change(luaL_checkboolean(L, -1));
 	return 0;
 }
 
@@ -315,7 +315,7 @@ int L_Player::set_changing_retreat_percentage_allowed(lua_State * L) {
 		can't add messages to this array, use :meth:`send_message` for that.
 */
 int L_Player::get_inbox(lua_State * L) {
-	Player & p = get(L, get_game(L));
+	Player & p = get(L, get_egbase(L));
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
@@ -364,9 +364,9 @@ int L_Player::get_see_all(lua_State * const L) {
  ==========================================================
  */
 int L_Player::__eq(lua_State * L) {
-	Game & g = get_game(L);
-	const Player & me = get(L, g);
-	const Player & you = (*get_user_class<L_Player>(L, 2))->get(L, g);
+	Editor_Game_Base & egbase = get_egbase(L);
+	const Player & me = get(L, egbase);
+	const Player & you = (*get_user_class<L_Player>(L, 2))->get(L, egbase);
 
 	lua_pushboolean
 		(L, (me.player_number() == you.player_number()));
@@ -889,10 +889,10 @@ int L_Player::reveal_campaign(lua_State * L) {
 		:returns: the road created
 */
 int L_Player::place_road(lua_State * L) {
-	Game & g = get_game(L);
-	Map & map = g.map();
+	Editor_Game_Base & egbase = get_egbase(L);
+	Map & map = egbase.map();
 
-	Flag * starting_flag = (*get_user_class<L_Flag>(L, 2))->get(L, g);
+	Flag * starting_flag = (*get_user_class<L_Flag>(L, 2))->get(L, egbase);
 	Coords current = starting_flag->get_position();
 	Path path(current);
 
@@ -944,17 +944,17 @@ int L_Player::place_road(lua_State * L) {
 
 	Road * r = 0;
 	if (force_road) {
-		r = &get(L, g).force_road(path);
+		r = &get(L, egbase).force_road(path);
 	} else {
 		BaseImmovable * bi = map.get_immovable(current);
 		if (!bi or bi->get_type() != Map_Object::FLAG) {
-			if (!get(L, g).build_flag(current))
+			if (!get(L, egbase).build_flag(current))
 				return report_error(L, "Could not place end flag!");
 		}
 		if (bi and bi == starting_flag)
 		  return report_error(L, "Cannot build a closed loop!");
 
-		r = get(L, g).build_road(path);
+		r = get(L, egbase).build_road(path);
 	}
 
 	if (!r)
@@ -981,9 +981,9 @@ int L_Player::place_road(lua_State * L) {
 		:rtype: :class:`array` or :class:`table`
 */
 int L_Player::get_buildings(lua_State * L) {
-	Game & g = get_game(L);
-	Map * map = g.get_map();
-	Player & p = get(L, g);
+	Editor_Game_Base & egbase = get_egbase(L);
+	Map * map = egbase.get_map();
+	Player & p = get(L, egbase);
 
 	// if only one string, convert to array so that we can use
 	// m_parse_building_list
@@ -1193,7 +1193,7 @@ void L_Player::m_parse_building_list
 }
 int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 {
-	Player & p = get(L, get_game(L));
+	Player & p = get(L, get_egbase(L));
 
 	std::vector<Building_Index> houses;
 	m_parse_building_list(L, p.tribe(), houses);

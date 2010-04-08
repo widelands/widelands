@@ -283,7 +283,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Flag);
+	CASTED_NEW_GET(Flag);
 };
 
 // Small helper class that contains the commonalities between L_Road and
