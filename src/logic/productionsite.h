@@ -140,9 +140,6 @@ public:
 
 	virtual WaresQueue & waresqueue(Ware_Index);
 
-	void prefill
-		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
-
 	char const * type_name() const throw () {return "productionsite";}
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
