@@ -345,48 +345,6 @@ void Warehouse::load_finish(Editor_Game_Base & egbase) {
 	}
 }
 
-void Warehouse::prefill
-	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
-{}
-void Warehouse::postfill
-	(Game                &       game,
-	 uint32_t      const *       ware_types,
-	 uint32_t      const *       worker_types,
-	 Soldier_Counts const * const soldier_counts)
-{
-	Building::postfill(game, ware_types, worker_types, soldier_counts);
-	if (ware_types)
-		for
-			(wl_index_range<Ware_Index> i
-			(Ware_Index::First(), tribe().get_nrwares());
-			 i; ++i, ++ware_types)
-			if (uint32_t const count = *ware_types)
-				insert_wares  (i.current, count);
-	if (worker_types)
-		for
-			(wl_index_range<Ware_Index> i
-			(Ware_Index::First(), tribe().get_nrworkers());
-			 i; ++i, ++worker_types)
-			if (uint32_t const count = *worker_types)
-				insert_workers(i.current, count);
-	if (soldier_counts) {
-		Soldier_Descr const & soldier_descr =
-			ref_cast<Soldier_Descr const, Worker_Descr const>
-				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
-		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
-			Soldier_Strength const ss = i.current->first;
-			for (uint32_t j = i.current->second; j; --j) {
-				Soldier & soldier =
-					ref_cast<Soldier, Worker>
-						(soldier_descr.create(game, owner(), this, get_position()));
-				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
-				incorporate_worker(game, soldier);
-			}
-		}
-	}
-}
-
-
 /*
 warehouses determine how badly they want a certain ware
 */

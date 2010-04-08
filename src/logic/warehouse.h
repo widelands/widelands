@@ -69,11 +69,6 @@ public:
 
 	void load_finish(Editor_Game_Base &);
 
-	void prefill
-		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
-	void postfill
-		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
-
 	char const * type_name() const throw () {return "warehouse";}
 
 	/// Called only when the oject is logically created in the simulation. If
