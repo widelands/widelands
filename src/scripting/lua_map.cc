@@ -106,8 +106,8 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
  */
 int _WorkerEmployer::set_workers(lua_State * L)
 {
-	Game & g = get_game(L);
-	PlayerImmovable * pi = get(L, g);
+	Editor_Game_Base & egbase = get_egbase(L);
+	PlayerImmovable * pi = get(L, egbase);
 	const Tribe_Descr & tribe = pi->owner().tribe();
 
 	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
@@ -146,7 +146,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 				{
 					Ware_Index i = tribe.worker_index((*w.current)->descr().name());
 					if(i == sp->first) {
-						const_cast<Worker *>(*w.current)->remove(g);
+						const_cast<Worker *>(*w.current)->remove(egbase);
 						++d;
 						break;
 					}
@@ -154,7 +154,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 			}
 		} else if (d > 0) {
 			for ( ; d; --d)
-				if (_new_worker(*pi, g, wdes))
+				if (_new_worker(*pi, egbase, wdes))
 						return report_error(L, "No space left for this worker");
 		}
 	}
@@ -163,7 +163,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 
 int _WorkerEmployer::get_workers(lua_State * L)
 {
-	PlayerImmovable * pi = get(L, get_game(L));
+	PlayerImmovable * pi = get(L, get_egbase(L));
 	Tribe_Descr const & tribe = pi->owner().tribe();
 
 	bool return_number = false;
@@ -207,7 +207,7 @@ int _WorkerEmployer::get_workers(lua_State * L)
 }
 
 int _WorkerEmployer::get_valid_workers(lua_State * L) {
-	PlayerImmovable * pi = get(L, get_game(L));
+	PlayerImmovable * pi = get(L, get_egbase(L));
 	Tribe_Descr const & tribe = pi->owner().tribe();
 
 	WorkersMap valid_workers = _valid_workers(*pi);
@@ -1270,7 +1270,7 @@ L_HasWorkers::WorkersMap L_Road::_valid_workers
 	return valid_workers;
 }
 int L_Road::_new_worker
-	(PlayerImmovable & pi, Game & g, const Worker_Descr * wdes)
+	(PlayerImmovable & pi, Editor_Game_Base & egbase, const Worker_Descr * wdes)
 {
 	Road & r = static_cast<Road &>(pi);
 
@@ -1283,11 +1283,14 @@ int L_Road::_new_worker
 	const Path & path = r.get_path();
 	Path::Step_Vector::size_type idle_index = r.get_idle_index();
 	for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
-		g.map().get_neighbour(idle_position, path[i], &idle_position);
+		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 
 	Carrier & carrier = ref_cast<Carrier, Worker>
-		(wdes->create (g, r.owner(), &r, idle_position));
-	carrier.start_task_road(g);
+		(wdes->create (egbase, r.owner(), &r, idle_position));
+
+	// TODO: this whole stuff should be in a Road function
+	if(upcast(Game, game, &egbase))
+		carrier.start_task_road(*game);
 
 	r.assign_carrier(carrier, 0);
 	return 0;
@@ -1391,7 +1394,7 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
  */
 #define WH_SET(type, btype) \
 int L_Warehouse::set_##type##s(lua_State * L) { \
-	Warehouse * wh = get(L, get_game(L)); \
+	Warehouse * wh = get(L, get_egbase(L)); \
 	Tribe_Descr const & tribe = wh->owner().tribe(); \
 	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, tribe); \
  \
@@ -1412,7 +1415,7 @@ WH_SET(worker, Worker);
 
 #define WH_GET(type, btype) \
 int L_Warehouse::get_##type##s(lua_State * L) { \
-	Warehouse * wh = get(L, get_game(L)); \
+	Warehouse * wh = get(L, get_egbase(L)); \
 	Tribe_Descr const & tribe = wh->owner().tribe(); \
 	bool return_number = false; \
 	btype##sSet set = m_parse_get_##type##s_arguments(L, tribe, &return_number); \
@@ -1545,10 +1548,10 @@ L_HasWorkers::WorkersMap L_ProductionSite::_valid_workers
 	return rv;
 }
 int L_ProductionSite::_new_worker
-	(PlayerImmovable & pi, Game & g, const Worker_Descr * wdes)
+	(PlayerImmovable & pi, Editor_Game_Base & egbase, const Worker_Descr * wdes)
 {
 	ProductionSite & ps = static_cast<ProductionSite &>(pi);
-	return ps.warp_worker(g, *wdes);
+	return ps.warp_worker(egbase, *wdes);
 }
 
 // documented in parent class

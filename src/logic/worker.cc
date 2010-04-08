@@ -988,8 +988,11 @@ void Worker::set_location(PlayerImmovable * const location)
 		// Interrupt whatever we've been doing.
 		set_economy(0);
 
-		send_signal
-			(ref_cast<Game, Editor_Game_Base>(owner().egbase()), "location");
+		Editor_Game_Base & egbase = owner().egbase();
+		if (upcast(Game, game, &egbase))
+			send_signal (*game, "location");
+		else // In the editor: delete us
+			remove(egbase);
 	}
 }
 
@@ -1032,7 +1035,8 @@ void Worker::init(Editor_Game_Base & egbase)
 	// is unknown to this worker till he is initialized
 	//  assert(get_location(egbase));
 
-	create_needed_experience(ref_cast<Game, Editor_Game_Base>(egbase));
+	if(upcast(Game, game, &egbase))
+		create_needed_experience(*game);
 }
 
 
@@ -1054,7 +1058,8 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 	// or doing something else. Get Location might
 	// init a gowarehouse task or something and this results
 	// in a dirty stack. Nono, we do not want to end like this
-	reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+	if(upcast(Game, game, &egbase))
+		reset_tasks(*game);
 
 	if (get_location(egbase))
 		set_location(0);

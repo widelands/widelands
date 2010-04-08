@@ -374,7 +374,9 @@ void ProductionSite::cleanup(Editor_Game_Base & egbase)
  *
  * returns 0 on success -1 if there is no room for this worker
  */
-int ProductionSite::warp_worker(Game & game, const Worker_Descr & wdes) {
+int ProductionSite::warp_worker
+	(Editor_Game_Base & egbase, const Worker_Descr & wdes)
+{
 	bool assigned = false;
 	Working_Position * current = m_working_positions;
 	for
@@ -390,8 +392,10 @@ int ProductionSite::warp_worker(Game & game, const Worker_Descr & wdes) {
 			continue;
 
 		// Okay, space is free and worker is fitting. Let's create him
-		Worker & worker = wdes.create(game, owner(), this, get_position());
-		worker.start_task_idle(game, 0, -1);
+		Worker & worker = wdes.create(egbase, owner(), this, get_position());
+
+		if(upcast(Game, game, &egbase))
+			worker.start_task_idle(*game, 0, -1);
 		current->worker = &worker;
 		delete current->worker_request;
 		current->worker_request = 0;
@@ -401,7 +405,9 @@ int ProductionSite::warp_worker(Game & game, const Worker_Descr & wdes) {
 	if (not assigned)
 		return -1;
 
-	try_start_working(game);
+	if(upcast(Game, game, &egbase))
+		try_start_working(*game);
+
 	return 0;
 }
 

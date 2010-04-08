@@ -113,17 +113,17 @@ function road_tests:test_road_upcasting()
    assert_equal(2, i.length)
 end
 
--- -- ====================
--- -- Creating of carrier
--- -- ====================
--- function road_tests:test_no_worker_at_creation()
---    assert_equal(0, _cnt(self.r:get_workers("all")))
--- end
--- function road_tests:test_carrier_creation()
---    self.r:set_workers("carrier",1)
---    assert_equal(1, _cnt(self.r:get_workers("all")))
---    assert_equal(1, self.r:get_workers("carrier"))
--- end
+-- ====================
+-- Creating of carrier
+-- ====================
+function road_tests:test_no_worker_at_creation()
+   assert_equal(0, _cnt(self.r:get_workers("all")))
+end
+function road_tests:test_carrier_creation()
+   self.r:set_workers("carrier",1)
+   assert_equal(1, _cnt(self.r:get_workers("all")))
+   assert_equal(1, self.r:get_workers("carrier"))
+end
 -- function road_tests:test_carrier_creation_and_deletion()
 --    self.r:set_workers("carrier",1)
 --    assert_equal(1, _cnt(self.r:get_workers("all")))

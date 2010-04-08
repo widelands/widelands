@@ -393,17 +393,19 @@ void Road::_request_carrier_callback
 */
 void Road::remove_worker(Worker & w)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Editor_Game_Base & egbase = owner().egbase();
 
-	container_iterate(SlotVector, m_carrier_slots, i) {
-		Carrier const * carrier = i.current->carrier.get(game);
+	if (upcast(Game, game, &egbase)) {
+		container_iterate(SlotVector, m_carrier_slots, i) {
+			Carrier const * carrier = i.current->carrier.get(*game);
 
-		if (carrier == &w) {
-			i.current->carrier = 0;
-			carrier            = 0;
-			_request_carrier(game, *i.current);
+			if (carrier == &w) {
+				i.current->carrier = 0;
+				carrier            = 0;
+				_request_carrier(*game, *i.current);
+			}
 		}
-	}
+}
 
 	PlayerImmovable::remove_worker(w);
 }
@@ -416,8 +418,6 @@ void Road::assign_carrier(Carrier & c, uint8_t slot)
 {
 	assert(slot <= 1);
 
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
-
 	// Send the worker home if it occupies our slot
 	CarrierSlot & s = m_carrier_slots[slot];
 
@@ -425,7 +425,7 @@ void Road::assign_carrier(Carrier & c, uint8_t slot)
 		delete s.carrier_request;
 		s.carrier_request = 0;
 	}
-	Carrier * current_carrier = s.carrier.get(game);
+	Carrier * current_carrier = s.carrier.get(owner().egbase());
 	if (current_carrier)
 		current_carrier->set_location(0);
 

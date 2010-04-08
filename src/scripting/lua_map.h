@@ -292,7 +292,7 @@ struct _WorkerEmployer : public L_HasWorkers {
 protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &) = 0;
 	virtual int _new_worker
-		(Widelands::PlayerImmovable &, Widelands::Game &,
+		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
 		 const Widelands::Worker_Descr*) = 0;
 };
 
@@ -305,7 +305,7 @@ struct _SoldierEmployer : public L_HasSoldiers {
 	virtual Widelands::Building * get
 		(lua_State *, Widelands::Editor_Game_Base &) = 0;
 	virtual Widelands::SoldierControl * get_sc
-		(lua_State *, Widelands::Game &) = 0;
+		(lua_State *, Widelands::Editor_Game_Base &) = 0;
 };
 
 class L_Road : public L_PlayerImmovable, public _WorkerEmployer {
@@ -337,8 +337,8 @@ public:
 protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
 	virtual int _new_worker
-		(Widelands::PlayerImmovable &, Widelands::Game &,
-		 const Widelands::Worker_Descr*);
+		(Widelands::PlayerImmovable &,
+		 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr*);
 };
 
 
@@ -405,7 +405,7 @@ public:
 protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
 	virtual int _new_worker
-		(Widelands::PlayerImmovable &, Widelands::Game &,
+		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
 		 const Widelands::Worker_Descr*);
 };
 
@@ -431,7 +431,7 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(MilitarySite);
-	Widelands::SoldierControl * get_sc(lua_State * L, Widelands::Game & g) {
+	Widelands::SoldierControl * get_sc(lua_State * L, Widelands::Editor_Game_Base & g) {
 		return get(L, g);
 	}
 };
@@ -459,9 +459,8 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(TrainingSite);
-	Widelands::SoldierControl * get_sc(lua_State * L, Widelands::Game & g) {
-		return get(L, g);
-	}
+	Widelands::SoldierControl * get_sc
+		(lua_State * L, Widelands::Editor_Game_Base & g) {return get(L, g);}
 };
 
 #undef CASTED_GET

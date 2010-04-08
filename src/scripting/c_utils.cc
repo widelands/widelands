@@ -39,6 +39,8 @@ Widelands::Editor_Game_Base & get_egbase(lua_State * const L) {
 		(lua_touserdata(L, -1));
 	lua_pop(L, 1); // pop this userdata
 
+	assert(g);
+
 	return *g;
 }
 
