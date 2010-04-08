@@ -352,7 +352,7 @@ Building & Player::force_building
 		for (size_t i = 0; i < nr_locations; ++i) {
 
 			//  Make sure that the player owns the area around.
-			ref_cast<Game, Editor_Game_Base>(egbase()).conquer_area_no_building
+			egbase().conquer_area_no_building
 				(Player_Area<Area<FCoords> >
 				 	(player_number(), Area<FCoords>(c[i], 1)));
 

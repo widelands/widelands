@@ -180,7 +180,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Building);
+	CASTED_NEW_GET(Building);
 };
 
 struct L_HasWares {

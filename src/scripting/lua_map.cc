@@ -1336,7 +1336,7 @@ const PropertyType<L_Building> L_Building::Properties[] = {
 		* warehouse
 */
 int L_Building::get_building_type(lua_State * L) {
-	lua_pushstring(L, get(L, get_game(L))->type_name());
+	lua_pushstring(L, get(L, get_egbase(L))->type_name());
 	return 1;
 }
 

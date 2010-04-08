@@ -68,20 +68,20 @@ end
 --    k:remove()
 -- end
 
--- function player_tests:test_force_building()
---    f = wl.map.Field(10,10)
---    k = wl.game.Player(1):place_building("headquarters", f)
---    assert_equal(1, k.player.number)
---    assert_equal("warehouse", k.building_type)
---    f.brn.immovable:remove() -- removing map also removes building
--- end
+function player_tests:test_force_building()
+   f = wl.map.Field(10,10)
+   k = wl.game.Player(1):place_building("headquarters", f)
+   assert_equal(1, k.player.number)
+   assert_equal("warehouse", k.building_type)
+   f.brn.immovable:remove() -- removing map also removes building
+end
 -- function player_tests:test_force_building_illegal_name()
 --    assert_error("Illegal building", function()
 --       wl.game.Player(1):place_building("kjhsfjkh", wl.map.Field(10,10))
 --    end)
 -- end
 --
---
+
 -- -- =======================================================================
 -- --                          See Fields/Hide Fields
 -- -- =======================================================================

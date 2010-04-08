@@ -389,40 +389,51 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		(Area<FCoords>
 		 (egbase.map().get_fcoords(get_position()), vision_range()));
 
-	for (Ware_Index i = Ware_Index::First(); i < nr_wares;   ++i) {
-		Request & req =
-			*new Request(*this, i, Warehouse::idle_request_cb, Request::WARE);
+	if (uint32_t const conquer_radius = get_conquers())
+		egbase.conquer_area
+			(Player_Area<Area<FCoords> >
+			 	(player.player_number(),
+			 	 Area<FCoords>
+			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
-		req.set_idle(true);
+	// Below only in games, not in the Editor
+	upcast(Game, game, &egbase);
+	if (game) {
+		for (Ware_Index i = Ware_Index::First(); i < nr_wares;   ++i) {
+			Request & req =
+				*new Request(*this, i, Warehouse::idle_request_cb, Request::WARE);
 
-		m_requests.push_back(&req);
-	}
-	for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i) {
-		Request & req =
-			*new Request
+			req.set_idle(true);
+
+			m_requests.push_back(&req);
+		}
+		for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i) {
+			Request & req =
+				*new Request
 				(*this, i, &Warehouse::idle_request_cb, Request::WORKER);
 
-		req.set_idle(true);
+			req.set_idle(true);
 
-		m_requests.push_back(&req);
-	}
-	{
-		uint32_t const act_time =
-			schedule_act
+			m_requests.push_back(&req);
+		}
+		{
+			uint32_t const act_time =
+				schedule_act
 				(ref_cast<Game, Editor_Game_Base>(egbase),
 				 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
-		std::vector<Ware_Index> const & worker_types_without_cost =
-			tribe().worker_types_without_cost();
+			std::vector<Ware_Index> const & worker_types_without_cost =
+				tribe().worker_types_without_cost();
 
-		for
-			(wl_index_range<uint32_t> i
-			(0, worker_types_without_cost.size());
-			i; ++i)
-			if
-				(owner().is_worker_type_allowed
-				 	(worker_types_without_cost.at(i.current)))
-				m_next_worker_without_cost_spawn[i.current] = act_time;
-	}
+			for
+				(wl_index_range<uint32_t> i
+				 (0, worker_types_without_cost.size());
+				 i; ++i)
+					if
+						(owner().is_worker_type_allowed
+						 (worker_types_without_cost.at(i.current)))
+							m_next_worker_without_cost_spawn[i.current] = act_time;
+		}
+
 	// m_next_military_act is not touched in the loading code. Is only needed if
 	// there warehous is created in the game?
 	// I assume it's for the conquer_radius thing
@@ -431,12 +442,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
 	m_target_supply.resize(m_requests.size());
 
-	if (uint32_t const conquer_radius = get_conquers())
-		ref_cast<Game, Editor_Game_Base>(egbase).conquer_area
-			(Player_Area<Area<FCoords> >
-			 	(player.player_number(),
-			 	 Area<FCoords>
-			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
+
 
 	log("Message: adding (wh) (%s) %i \n", type_name(), player.player_number());
 	char message[2048];
@@ -453,6 +459,8 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		 	 egbase.get_gametime(), 32 * 60 * 1000,
 		 	 descname(),
 		 	 message));
+	}
+
 }
 
 
@@ -481,7 +489,7 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 	}
 	Map & map = egbase.map();
 	if (const uint32_t conquer_radius = get_conquers())
-		ref_cast<Game, Editor_Game_Base>(egbase).unconquer_area
+		egbase.unconquer_area
 			(Player_Area<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
