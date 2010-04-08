@@ -331,10 +331,7 @@ Road & Player::force_road(Path const & path) {
 
 Building & Player::force_building
 	(Coords                const location,
-	 Building_Index        const idx,
-	 uint32_t      const *       ware_counts,
-	 uint32_t      const *       worker_counts,
-	 Soldier_Counts const &       soldier_counts)
+	 Building_Index        const idx)
 {
 	Map & map = egbase().map();
 	FCoords c[4]; //  Big buildings occupy 4 locations.
@@ -365,8 +362,7 @@ Building & Player::force_building
 	}
 	return
 		descr.create
-		(egbase(), *this, c[0], false, ware_counts,
-		 worker_counts, &soldier_counts);
+		(egbase(), *this, c[0], false);
 }
 
 

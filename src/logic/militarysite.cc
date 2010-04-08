@@ -636,24 +636,11 @@ bool MilitarySite::attack(Soldier & enemy)
 			bldname = bldname.substr(0, dot);
 		Building_Index bldi = enemytribe.safe_building_index(bldname.c_str());
 
-		uint32_t     * wares;    // just empty dummies
-		uint32_t     * worker;   // "    "     "
-		Soldier_Counts soldiers; // "    "     "
-
-		Ware_Index const nr_of_wares   = enemytribe.get_nrwares();
-		Ware_Index const nr_of_workers = enemytribe.get_nrworkers();
-		wares  = new uint32_t[nr_of_wares.value()];
-		worker = new uint32_t[nr_of_workers.value()];
-		for (Ware_Index i = Ware_Index::First(); i < nr_of_wares; ++i)
-			wares[i.value()] = 0;
-		for (Ware_Index i = Ware_Index::First(); i < nr_of_workers; ++i)
-			worker[i.value()] = 0;
-
 		// Now we destroy the old building before we place the new one.
 		set_defeating_player(enemy.owner().player_number());
 		schedule_destroy(game);
 
-		enemyplayer->force_building(coords, bldi, wares, worker, soldiers);
+		enemyplayer->force_building(coords, bldi);
 		BaseImmovable * const newimm = game.map()[coords].get_immovable();
 		upcast(MilitarySite, newsite, newimm);
 		newsite->reinit_after_conqueration(game);

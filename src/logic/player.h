@@ -423,10 +423,7 @@ struct Player :
 	Road * build_road(Path const &); /// Build a road if it is allowed.
 	Building& force_building
 		(Coords,
-		 Building_Index,
-		 uint32_t      const * ware_counts,
-		 uint32_t      const * worker_counts,
-		 Soldier_Counts const & soldier_counts);
+		 Building_Index);
 	void build(Coords, Building_Index);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
