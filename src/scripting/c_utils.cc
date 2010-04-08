@@ -28,6 +28,8 @@ Widelands::Game & get_game(lua_State * const L) {
 	Widelands::Game * g = static_cast<Widelands::Game *>(lua_touserdata(L, -1));
 	lua_pop(L, 1); // pop this userdata
 
+	assert(g);
+
 	return *g;
 }
 

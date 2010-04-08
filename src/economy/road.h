@@ -108,7 +108,7 @@ private:
 	void _mark_map(Editor_Game_Base &);
 	void _unmark_map(Editor_Game_Base &);
 
-	void _link_into_flags(Game &);
+	void _link_into_flags(Editor_Game_Base &);
 
 	void _request_carrier(Game &, CarrierSlot &);
 	static void _request_carrier_callback

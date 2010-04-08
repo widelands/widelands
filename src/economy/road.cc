@@ -236,7 +236,7 @@ void Road::init(Editor_Game_Base & egbase)
 	PlayerImmovable::init(egbase);
 
 	if (2 <= m_path.get_nsteps())
-		_link_into_flags(ref_cast<Game, Editor_Game_Base>(egbase));
+		_link_into_flags(egbase);
 }
 
 /**
@@ -246,7 +246,7 @@ void Road::init(Editor_Game_Base & egbase)
  * we needed to have this road already registered
  * as Map Object, thats why this is moved
  */
-void Road::_link_into_flags(Game & game) {
+void Road::_link_into_flags(Editor_Game_Base & egbase) {
 	assert(m_path.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)
@@ -265,22 +265,23 @@ void Road::_link_into_flags(Game & game) {
 	Economy::check_merge(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
 	// Mark Fields
-	_mark_map(game);
+	_mark_map(egbase);
 
 	/*
 	 * Iterate over all Carrierslots
 	 * If a carrier is set assign it to this road, else
 	 * request a new carrier
 	 */
-	container_iterate(SlotVector, m_carrier_slots, i)
-		if (Carrier * const carrier = i.current->carrier.get(game)) {
-			//  This happens after a road split. Tell the carrier what's going on.
-			carrier->set_location    (this);
-			carrier->update_task_road(game);
-		} else if
-			(not i.current->carrier_request and
-			 i.current->carrier_type == 1)
-			_request_carrier(game, *i.current);
+	if (upcast(Game, game, &egbase))
+		container_iterate(SlotVector, m_carrier_slots, i)
+			if (Carrier * const carrier = i.current->carrier.get(*game)) {
+				// This happens after a road split. Tell the carrier what's going on
+				carrier->set_location    (this);
+				carrier->update_task_road(*game);
+			} else if
+				(not i.current->carrier_request and
+				 i.current->carrier_type == 1)
+				_request_carrier(*game, *i.current);
 }
 
 /**
@@ -288,7 +289,6 @@ void Road::_link_into_flags(Game & game) {
 */
 void Road::cleanup(Editor_Game_Base & egbase)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 
 	container_iterate(SlotVector, m_carrier_slots, i) {
 		delete i.current->carrier_request;
@@ -299,7 +299,7 @@ void Road::cleanup(Editor_Game_Base & egbase)
 	}
 
 	// Unmark Fields
-	_unmark_map(game);
+	_unmark_map(egbase);
 
 	// Unlink from flags (also clears the economy)
 	m_flags[FlagStart]->detach_road(m_flagidx[FlagStart]);
@@ -307,10 +307,12 @@ void Road::cleanup(Editor_Game_Base & egbase)
 
 	Economy::check_split(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
-	m_flags[FlagStart]->update_items(game, m_flags[FlagEnd]);
-	m_flags[FlagEnd]->update_items(game, m_flags[FlagStart]);
+	if(upcast(Game, game, &egbase)) {
+		m_flags[FlagStart]->update_items(*game, m_flags[FlagEnd]);
+		m_flags[FlagEnd]->update_items(*game, m_flags[FlagStart]);
+	}
 
-	PlayerImmovable::cleanup(game);
+	PlayerImmovable::cleanup(egbase);
 }
 
 /**

@@ -48,15 +48,7 @@ class L_MapModuleClass : public LunaClass {
 		const char * get_modulename() {return "map";}
 };
 
-// TODO: should take Editor_Game_Base
-
 #define CASTED_GET(klass) \
-Widelands:: klass * get(lua_State * L, Widelands::Game & game) { \
-	return static_cast<Widelands:: klass *> \
-		(L_MapObject::get(game, L, #klass)); \
-}
-// TODO REMOVE ME
-#define CASTED_NEW_GET(klass) \
 Widelands:: klass * get(lua_State * L, Widelands::Editor_Game_Base & egbase) { \
 	return static_cast<Widelands:: klass *> \
 		(L_MapObject::get(egbase, L, #klass)); \
@@ -128,7 +120,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_NEW_GET(BaseImmovable);
+	CASTED_GET(BaseImmovable);
 };
 
 class L_PlayerImmovable : public L_BaseImmovable {
@@ -153,7 +145,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_NEW_GET(PlayerImmovable);
+	CASTED_GET(PlayerImmovable);
 
 protected:
 };
@@ -180,7 +172,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_NEW_GET(Building);
+	CASTED_GET(Building);
 };
 
 struct L_HasWares {
@@ -283,7 +275,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_NEW_GET(Flag);
+	CASTED_GET(Flag);
 };
 
 // Small helper class that contains the commonalities between L_Road and
@@ -294,7 +286,8 @@ struct _WorkerEmployer : public L_HasWorkers {
 
 	int get_valid_workers(lua_State * L);
 
-	virtual Widelands::PlayerImmovable * get(lua_State *, Widelands::Game &) = 0;
+	virtual Widelands::PlayerImmovable * get
+		(lua_State *, Widelands::Editor_Game_Base &) = 0;
 
 protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &) = 0;
@@ -309,7 +302,8 @@ struct _SoldierEmployer : public L_HasSoldiers {
 
 	int get_max_soldiers(lua_State * L);
 
-	virtual Widelands::Building * get(lua_State *, Widelands::Game &) = 0;
+	virtual Widelands::Building * get
+		(lua_State *, Widelands::Editor_Game_Base &) = 0;
 	virtual Widelands::SoldierControl * get_sc
 		(lua_State *, Widelands::Game &) = 0;
 };

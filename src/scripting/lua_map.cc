@@ -1207,7 +1207,7 @@ const PropertyType<L_Road> L_Road::Properties[] = {
 		(RO) The length of the roads in number of edges.
 */
 int L_Road::get_length(lua_State * L) {
-	lua_pushuint32(L, get(L, get_game(L))->get_path().get_nsteps());
+	lua_pushuint32(L, get(L, get_egbase(L))->get_path().get_nsteps());
 	return 1;
 }
 
@@ -1219,7 +1219,7 @@ int L_Road::get_length(lua_State * L) {
 int L_Road::get_start_flag(lua_State * L) {
 	return
 		to_lua<L_Flag>
-			(L, new L_Flag(get(L, get_game(L))->get_flag(Road::FlagStart)));
+			(L, new L_Flag(get(L, get_egbase(L))->get_flag(Road::FlagStart)));
 }
 
 /* RST
@@ -1230,7 +1230,7 @@ int L_Road::get_start_flag(lua_State * L) {
 int L_Road::get_end_flag(lua_State * L) {
 	return
 		to_lua<L_Flag>
-			(L, new L_Flag(get(L, get_game(L))->get_flag(Road::FlagEnd)));
+			(L, new L_Flag(get(L, get_egbase(L))->get_flag(Road::FlagEnd)));
 }
 
 /* RST
@@ -1242,7 +1242,7 @@ int L_Road::get_end_flag(lua_State * L) {
 		* busy
 */
 int L_Road::get_road_type(lua_State * L) {
-	switch (get(L, get_game(L))->get_roadtype()) {
+	switch (get(L, get_egbase(L))->get_roadtype()) {
 		case Road_Normal:
 			lua_pushstring(L, "normal"); break;
 		case Road_Busy:
