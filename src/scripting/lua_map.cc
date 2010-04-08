@@ -1074,8 +1074,8 @@ static L_Flag::WaresMap _count_wares(Flag & f, Tribe_Descr const & tribe) {
 // Documented in ParentClass
 int L_Flag::set_wares(lua_State * L)
 {
-	Game & game = get_game(L);
-	Flag * f = get(L, game);
+	Editor_Game_Base & egbase = get_egbase(L);
+	Flag * f = get(L, egbase);
 	Tribe_Descr const & tribe = f->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
@@ -1108,7 +1108,7 @@ int L_Flag::set_wares(lua_State * L)
 				container_iterate_const(Flag::Wares, current_items, w) {
 					Ware_Index i = tribe.ware_index((*w.current)->descr().name());
 					if(i == sp->first) {
-						const_cast<WareInstance *>(*w.current)->remove(game);
+						const_cast<WareInstance *>(*w.current)->remove(egbase);
 						++d;
 						break;
 					}
@@ -1119,8 +1119,8 @@ int L_Flag::set_wares(lua_State * L)
 			Item_Ware_Descr const & wd = *tribe.get_ware_descr(sp->first);
 			for (int32_t i = 0; i < d; i++) {
 				WareInstance & item = *new WareInstance(sp->first, &wd);
-				item.init(game);
-				f->add_item(game, item);
+				item.init(egbase);
+				f->add_item(egbase, item);
 			}
 		}
 
@@ -1130,12 +1130,12 @@ int L_Flag::set_wares(lua_State * L)
 
 // Documented in parent Class
 int L_Flag::get_wares(lua_State * L) {
-	Tribe_Descr const & tribe = get(L, get_game(L))->owner().tribe();
+	Tribe_Descr const & tribe = get(L, get_egbase(L))->owner().tribe();
 
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
-	WaresMap items = _count_wares(*get(L, get_game(L)), tribe);
+	WaresMap items = _count_wares(*get(L, get_egbase(L)), tribe);
 
 	if (wares_set.size() == tribe.get_nrwares().value()) { // Want all returned
 		wares_set.clear();

@@ -2,10 +2,10 @@
 include "test_baseimmovables"
 
 -- Player immovables
+-- Others
+include "test_flag"
 -- TODO: those should also work in the editor
 if not wl.editor then
-   -- Others
-   include "test_flag"
    include "test_road"
 
    -- Buildings

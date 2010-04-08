@@ -343,7 +343,7 @@ void Flag::skip_wait_for_capacity(Game &, Worker & w)
 }
 
 
-void Flag::add_item(Game & game, WareInstance & item)
+void Flag::add_item(Editor_Game_Base & egbase, WareInstance & item)
 {
 
 	assert(m_item_filled < m_item_capacity);
@@ -353,8 +353,10 @@ void Flag::add_item(Game & game, WareInstance & item)
 	pi.pending  = false;
 	pi.nextstep = 0;
 
-	item.set_location(game, this);
-	item.update(game); //  will call call_carrier() if necessary
+	item.set_location(egbase, this);
+
+	if(upcast(Game, game, &egbase))
+		item.update(*game); //  will call call_carrier() if necessary
 }
 
 /**
@@ -465,7 +467,7 @@ Flag::Wares Flag::get_items() {
  * Force a removal of the given item from this flag.
  * Called by \ref WareInstance::cleanup()
 */
-void Flag::remove_item(Game & game, WareInstance * const item)
+void Flag::remove_item(Editor_Game_Base & egbase, WareInstance * const item)
 {
 	for (int32_t i = 0; i < m_item_filled; ++i) {
 		if (m_items[i].item != item)
@@ -476,7 +478,8 @@ void Flag::remove_item(Game & game, WareInstance * const item)
 			(&m_items[i], &m_items[i + 1],
 			 sizeof(m_items[0]) * (m_item_filled - i));
 
-		wake_up_capacity_queue(game);
+		if(upcast(Game, game, &egbase))
+			wake_up_capacity_queue(*game);
 
 		return;
 	}
@@ -624,8 +627,8 @@ void Flag::cleanup(Editor_Game_Base & egbase)
 	while (m_item_filled) {
 		WareInstance & item = *m_items[--m_item_filled].item;
 
-		item.set_location(ref_cast<Game, Editor_Game_Base>(egbase), 0);
-		item.destroy     (ref_cast<Game, Editor_Game_Base>(egbase));
+		item.set_location(egbase, 0);
+		item.destroy     (egbase);
 	}
 
 	//molog("  items destroyed\n");

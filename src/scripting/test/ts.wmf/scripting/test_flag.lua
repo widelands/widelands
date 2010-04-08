@@ -42,8 +42,8 @@ function flag_tests:test_set_wares_two_args()
 end
 function flag_tests:test_set_wares_one_arg()
    self.f:set_wares{
-      trunk = 3, 
-      coal = 2, 
+      trunk = 3,
+      coal = 2,
    }
    assert_equal(3, self.f:get_wares("trunk"))
    assert_equal(2, self.f:get_wares("coal"))
@@ -81,7 +81,7 @@ function flag_tests:test_set_wares_many_wares()
 end
 
 -- =========
--- get_ware 
+-- get_ware
 -- =========
 flag_tests_get_ware = lunit.TestCase("flag tests: get_ware")
 function flag_tests_get_ware:setup()
