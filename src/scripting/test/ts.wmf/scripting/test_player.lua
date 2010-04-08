@@ -36,38 +36,38 @@ function player_tests:test_create_flag()
    assert_equal(k.player.number, 1)
    k:remove()
 end
--- function player_tests:test_create_flag_non_forcing()
---    f = wl.map.Field(10,10)
---    -- First force the flag, then remove them again
---    k = wl.game.Player(1):place_flag(f, true)
---    k:remove()
---    -- Now, try again, but non forcing
---    k = wl.game.Player(1):place_flag(f)
---    assert_equal(k.player.number, 1)
+function player_tests:test_create_flag_non_forcing()
+   f = wl.map.Field(10,10)
+   -- First force the flag, then remove them again
+   k = wl.game.Player(1):place_flag(f, true)
+   k:remove()
+   -- Now, try again, but non forcing
+   k = wl.game.Player(1):place_flag(f)
+   assert_equal(k.player.number, 1)
+   k:remove()
+end
+function player_tests:test_create_flag_non_forcing_too_close()
+   f = wl.map.Field(10,10)
+   -- First force the flag, then remove them again
+   wl.game.Player(1):place_flag(f, true):remove()
+   wl.game.Player(1):place_flag(f.rn, true):remove()
+
+   -- Now, try again, but non forcing
+   k = wl.game.Player(1):place_flag(f)
+   assert_error("Too close to other!", function()
+      wl.game.Player(1):place_flag(f.rn)
+   end)
+
+   k:remove()
+end
+-- This test is currently disabled because of issue #2938438
+-- function player_tests:test_create_flag2()
+--    f = wl.map.Field(20,10)
+--    k = wl.game.Player(2):place_flag(f, true)
+--    assert_equal(k.player.number, 2)
 --    k:remove()
 -- end
--- function player_tests:test_create_flag_non_forcing_too_close()
---    f = wl.map.Field(10,10)
---    -- First force the flag, then remove them again
---    wl.game.Player(1):place_flag(f, true):remove()
---    wl.game.Player(1):place_flag(f.rn, true):remove()
---
---    -- Now, try again, but non forcing
---    k = wl.game.Player(1):place_flag(f)
---    assert_error("Too close to other!", function()
---       wl.game.Player(1):place_flag(f.rn)
---    end)
---
---    k:remove()
--- end
--- -- This test is currently disabled because of issue #2938438
--- -- function player_tests:test_create_flag2()
--- --    f = wl.map.Field(20,10)
--- --    k = wl.game.Player(2):place_flag(f, true)
--- --    assert_equal(k.player.number, 2)
--- --    k:remove()
--- -- end
---
+
 -- function player_tests:test_force_building()
 --    f = wl.map.Field(10,10)
 --    k = wl.game.Player(1):place_building("headquarters", f)
@@ -85,7 +85,7 @@ end
 -- -- =======================================================================
 -- --                          See Fields/Hide Fields
 -- -- =======================================================================
--- player_vision_tests = lunit.TestCase("Player tests sizes")
+-- player_vision_tests = lunit.TestCase("Player vision tests")
 -- function player_vision_tests:setup()
 --    self.f = wl.map.Field(50, 20)
 --    self.p = wl.game.Player(1)
