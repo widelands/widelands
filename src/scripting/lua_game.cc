@@ -337,7 +337,7 @@ int L_Player::get_inbox(lua_State * L) {
 		(RO) The name of the tribe of this player.
 */
 int L_Player::get_tribe(lua_State *L) {
-	lua_pushstring(L, get(L, get_game(L)).tribe().name());
+	lua_pushstring(L, get(L, get_egbase(L)).tribe().name());
 	return 1;
 }
 

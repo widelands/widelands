@@ -175,6 +175,3 @@ end
 --    assert_equal(self.p, self.f.player)
 -- end
 --
---
---
---
