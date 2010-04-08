@@ -817,7 +817,7 @@ void L_MapObject::__unpersist(lua_State * L) {
 		constant after saving/loading.
 */
 int L_MapObject::get_serial(lua_State * L) {
-	lua_pushuint32(L, m_ptr->get(get_game(L))->serial());
+	lua_pushuint32(L, m_ptr->get(get_egbase(L))->serial());
 	return 1;
 }
 
@@ -839,11 +839,11 @@ int L_MapObject::get_type(lua_State * L) {
  ==========================================================
  */
 int L_MapObject::__eq(lua_State * L) {
-	Game & game = get_game(L);
+	Editor_Game_Base & egbase = get_egbase(L);
 	L_MapObject * other = *get_base_user_class<L_MapObject>(L, -1);
 
-	Map_Object * me = m_get_or_zero(game);
-	Map_Object * you = other->m_get_or_zero(game);
+	Map_Object * me = m_get_or_zero(egbase);
+	Map_Object * you = other->m_get_or_zero(egbase);
 
 
 	// Both objects are destroyed: they are equal
@@ -852,7 +852,7 @@ int L_MapObject::__eq(lua_State * L) {
 		lua_pushboolean(L, false);
 	else // Compare them
 		lua_pushboolean
-			(L, other->get(game, L)->serial() == get(game, L)->serial());
+			(L, other->get(egbase, L)->serial() == get(egbase, L)->serial());
 
 	return 1;
 }
@@ -860,17 +860,17 @@ int L_MapObject::__eq(lua_State * L) {
 /* RST
 	.. method:: remove()
 
-		Removes this object from the game immediately. If you want to destroy an
+		Removes this object immediately. If you want to destroy an
 		object as if the player had see :func:`destroy`.
 */
 int L_MapObject::remove(lua_State * L) {
-	Game & game = get_game(L);
-	Map_Object * o = get(game, L);
+	Editor_Game_Base & egbase = get_egbase(L);
+	Map_Object * o = get(egbase, L);
 
 	if (!o)
 		return 0;
 
-	o->remove(game);
+	o->remove(egbase);
 	return 0;
 }
 
@@ -880,18 +880,18 @@ int L_MapObject::remove(lua_State * L) {
  ==========================================================
  */
 Map_Object * L_MapObject::get
-	(Game & game, lua_State * L, std::string name)
+	(Editor_Game_Base & egbase, lua_State * L, std::string name)
 {
-	Map_Object * o = m_get_or_zero(game);
+	Map_Object * o = m_get_or_zero(egbase);
 	if (!o)
 		report_error(L, "%s no longer exists!", name.c_str());
 	return o;
 }
-Map_Object * L_MapObject::m_get_or_zero (Game & game)
+Map_Object * L_MapObject::m_get_or_zero(Editor_Game_Base & egbase)
 {
 	Map_Object * o = 0;
 	if (m_ptr)
-		o = m_ptr->get(game);
+		o = m_ptr->get(egbase);
 	return o;
 }
 
@@ -959,8 +959,7 @@ int L_BaseImmovable::get_size(lua_State * L) {
 		directory name of this immovable in the tribe or world directory.
 */
 int L_BaseImmovable::get_name(lua_State * L) {
-	Game & game = get_game(L);
-	BaseImmovable * o = get(L, game);
+	BaseImmovable * o = get(L, get_egbase(L));
 
 	lua_pushstring(L, o->name().c_str());
 	return 1;

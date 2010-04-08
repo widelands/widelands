@@ -48,11 +48,18 @@ class L_MapModuleClass : public LunaClass {
 		const char * get_modulename() {return "map";}
 };
 
+// TODO: should take Editor_Game_Base
 
 #define CASTED_GET(klass) \
 Widelands:: klass * get(lua_State * L, Widelands::Game & game) { \
 	return static_cast<Widelands:: klass *> \
 		(L_MapObject::get(game, L, #klass)); \
+}
+// TODO REMOVE ME
+#define CASTED_NEW_GET(klass) \
+Widelands:: klass * get(lua_State * L, Widelands::Editor_Game_Base & egbase) { \
+	return static_cast<Widelands:: klass *> \
+		(L_MapObject::get(egbase, L, #klass)); \
 }
 
 class L_MapObject : public L_MapModuleClass {
@@ -94,9 +101,8 @@ public:
 	 * C Methods
 	 */
 	Widelands::Map_Object * get
-		(Widelands::Game & game, lua_State * L, std::string = "MapObject");
-	Widelands::Map_Object * m_get_or_zero
-		(Widelands::Game & game);
+		(Widelands::Editor_Game_Base &, lua_State *, std::string = "MapObject");
+	Widelands::Map_Object * m_get_or_zero(Widelands::Editor_Game_Base &);
 };
 
 
@@ -122,7 +128,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(BaseImmovable);
+	CASTED_NEW_GET(BaseImmovable);
 };
 
 class L_PlayerImmovable : public L_BaseImmovable {
