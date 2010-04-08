@@ -281,7 +281,7 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 			} else if
 				(not i.current->carrier_request and
 				 i.current->carrier_type == 1)
-				_request_carrier(*game, *i.current);
+				_request_carrier(*i.current);
 }
 
 /**
@@ -334,7 +334,7 @@ void Road::set_economy(Economy * const e)
  * Only call this if the road can handle a new carrier, and if no request has
  * been issued.
 */
-void Road::_request_carrier(Game &, CarrierSlot & slot)
+void Road::_request_carrier(CarrierSlot & slot)
 {
 	if (slot.carrier_type == 1)
 		slot.carrier_request =
@@ -395,17 +395,15 @@ void Road::remove_worker(Worker & w)
 {
 	Editor_Game_Base & egbase = owner().egbase();
 
-	if (upcast(Game, game, &egbase)) {
-		container_iterate(SlotVector, m_carrier_slots, i) {
-			Carrier const * carrier = i.current->carrier.get(*game);
+	container_iterate(SlotVector, m_carrier_slots, i) {
+		Carrier const * carrier = i.current->carrier.get(egbase);
 
-			if (carrier == &w) {
-				i.current->carrier = 0;
-				carrier            = 0;
-				_request_carrier(*game, *i.current);
-			}
+		if (carrier == &w) {
+			i.current->carrier = 0;
+			carrier            = 0;
+			_request_carrier(*i.current);
 		}
-}
+	}
 
 	PlayerImmovable::remove_worker(w);
 }
@@ -448,9 +446,9 @@ void Road::presplit(Game & game, Coords) {_unmark_map(game);}
  * After the split, this road will span [start...new flag]. A new road will
  * be created to span [new flag...end]
 */
+// TODO SirVer: This need to take an Editor_Game_Base as well.
 void Road::postsplit(Game & game, Flag & flag)
 {
-
 	Flag & oldend = *m_flags[FlagEnd];
 
 	// detach from end
@@ -566,7 +564,7 @@ void Road::postsplit(Game & game, Flag & flag)
 			(not i.current->carrier.get(game) and
 			 not i.current->carrier_request and
 			 i.current->carrier_type == 1)
-			_request_carrier(game, *i.current);
+			_request_carrier(*i.current);
 
 	//  Make sure items waiting on the original endpoint flags are dealt with.
 	m_flags[FlagStart]->update_items(game, &oldend);
@@ -612,7 +610,7 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 					(not i.current->carrier.get(game) and
 					 not i.current->carrier_request and
 					 i.current->carrier_type != 1)
-				_request_carrier(game, *i.current);
+				_request_carrier(*i.current);
 		}
 	}
 	return false;
