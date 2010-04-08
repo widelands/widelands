@@ -69,9 +69,6 @@ public:
 	MilitarySite(MilitarySite_Descr const &);
 	virtual ~MilitarySite();
 
-	void prefill
-		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
-
 	char const * type_name() const throw () {return "militarysite";}
 	virtual std::string get_statistics_string();
 

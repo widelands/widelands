@@ -133,35 +133,6 @@ std::string MilitarySite::get_statistics_string()
 }
 
 
-void MilitarySite::prefill
-	(Game                 &       game,
-	 uint32_t       const *       ware_counts,
-	 uint32_t       const *       worker_counts,
-	 Soldier_Counts const * const soldier_counts)
-{
-	ProductionSite::prefill(game, ware_counts, worker_counts, soldier_counts);
-	if (soldier_counts and soldier_counts->size()) {
-		Soldier_Descr const & soldier_descr =
-			ref_cast<Soldier_Descr const, Worker_Descr const>
-				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
-		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
-			Soldier_Strength const ss = i.current->first;
-			for (uint32_t j = i.current->second; j; --j) {
-				Soldier & soldier =
-					ref_cast<Soldier, Worker>
-						(soldier_descr.create(game, owner(), 0, get_position()));
-				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
-				Building::add_worker(soldier);
-				log
-					("MilitarySite::prefill: added soldier (economy = %p)\n",
-					 soldier.get_economy());
-			}
-		}
-		conquer_area(game);
-	}
-}
-
-
 void MilitarySite::init(Editor_Game_Base & egbase)
 {
 	ProductionSite::init(egbase);

@@ -191,13 +191,7 @@ Building & Building_Descr::create
 		b.Building::init(egbase);
 		return b;
 	}
-	b.prefill
-		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 0, 0, 0);
 	b.init(egbase);
-	b.postfill
-		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 0, 0, 0);
 	return b;
 }
 
@@ -561,15 +555,6 @@ WaresQueue & Building::waresqueue(Ware_Index const wi) {
 		("%s (%u) has no WaresQueue for %u",
 		 name().c_str(), serial(), wi.value());
 }
-
-
-void Building::prefill
-	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
-{}
-void Building::postfill
-	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
-{}
-
 
 /*
 ===============

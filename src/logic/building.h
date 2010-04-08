@@ -173,19 +173,6 @@ public:
 	/// \Returns the queue for a ware type or \throws _wexception.
 	virtual WaresQueue & waresqueue(Ware_Index) __attribute__ ((noreturn));
 
-	/// Fills the building with things that it would normally request
-	/// (wares/workers/soldiers).
-	virtual void prefill
-		(Game &,
-		 uint32_t       const * ware_counts,
-		 uint32_t       const * worker_counts,
-		 Soldier_Counts const * worker_types);
-	virtual void postfill
-		(Game &,
-		 uint32_t       const * ware_counts,
-		 uint32_t       const * worker_counts,
-		 Soldier_Counts const * worker_types);
-
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base &);
 

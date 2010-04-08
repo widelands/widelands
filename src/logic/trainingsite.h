@@ -112,9 +112,6 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 public:
 	TrainingSite(TrainingSite_Descr const &);
 
-	void prefill
-		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
-
 	char const * type_name() const throw () {return "trainingsite";}
 	virtual std::string get_statistics_string();
 
