@@ -184,6 +184,12 @@ void Editor_Interactive::load(std::string const & filename) {
 /// Called just before the editor starts, after postload, init and gfxload.
 void Editor_Interactive::start()
 {
+	// Run the editor initialization script, if any
+	try {
+		egbase().lua().run_script("map", "editor_init");
+	} catch(LuaScriptNotExistingError & e) {
+		// do nothing.
+	}
 	egbase().map().overlay_manager().show_buildhelp(true);
 }
 
