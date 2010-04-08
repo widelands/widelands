@@ -8,7 +8,7 @@
 -- state of these fields bleed into others, therefore for the tree players,
 -- there are individual fields which are used only for these tests here, so
 -- this bleeding doesn't matter.
-player_tests = lunit.TestCase("Player tests sizes")
+player_tests = lunit.TestCase("Player tests")
 function player_tests:test_tribe_property()
    assert_equal("barbarians", wl.game.Player(1).tribe)
    assert_equal("empire", wl.game.Player(2).tribe)
@@ -30,12 +30,12 @@ function player_tests:test_ok_val_for_non_existing()
    assert_error("non existing plr",  function() wl.game.Player(5) end)
 end
 
--- function player_tests:test_create_flag()
---    f = wl.map.Field(10,10)
---    k = wl.game.Player(1):place_flag(f, true)
---    assert_equal(k.player.number, 1)
---    k:remove()
--- end
+function player_tests:test_create_flag()
+   f = wl.map.Field(10,10)
+   k = wl.game.Player(1):place_flag(f, true)
+   assert_equal(k.player.number, 1)
+   k:remove()
+end
 -- function player_tests:test_create_flag_non_forcing()
 --    f = wl.map.Field(10,10)
 --    -- First force the flag, then remove them again

@@ -402,11 +402,11 @@ int L_Player::place_flag(lua_State * L) {
 
 	Flag * f;
 	if (not force) {
-		f = get(L, get_game(L)).build_flag(c->fcoords(L));
+		f = get(L, get_egbase(L)).build_flag(c->fcoords(L));
 		if (!f)
 			return report_error(L, "Couldn't build flag!");
 	} else {
-		f = &get(L, get_game(L)).force_flag(c->fcoords(L));
+		f = &get(L, get_egbase(L)).force_flag(c->fcoords(L));
 	}
 
 	return to_lua<L_Flag>(L, new L_Flag(*f));

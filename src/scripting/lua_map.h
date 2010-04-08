@@ -153,7 +153,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(PlayerImmovable);
+	CASTED_NEW_GET(PlayerImmovable);
 
 protected:
 };

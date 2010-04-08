@@ -1011,7 +1011,7 @@ const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
 int L_PlayerImmovable::get_player(lua_State * L) {
 	return
 		to_lua<L_Player>
-			(L, new L_Player (get(L, get_game(L))->get_owner()->player_number())
+			(L, new L_Player (get(L, get_egbase(L))->get_owner()->player_number())
 	);
 }
 

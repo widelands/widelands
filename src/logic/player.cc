@@ -236,7 +236,7 @@ Flag * Player::build_flag(Coords const c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
-		return new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+		return new Flag(egbase(), *this, c);
 	return 0;
 }
 
@@ -257,9 +257,9 @@ Flag & Player::force_flag(FCoords const c) {
 	while (mr.advance(map));
 
 	//  Make sure that the player owns the area around.
-	ref_cast<Game, Editor_Game_Base>(egbase()).conquer_area_no_building
+	egbase().conquer_area_no_building
 		(Player_Area<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
-	return *new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+	return *new Flag(egbase(), *this, c);
 }
 
 /*

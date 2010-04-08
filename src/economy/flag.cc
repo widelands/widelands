@@ -105,7 +105,7 @@ void Flag::load_finish(Editor_Game_Base & egbase) {
  * Create a flag at the given location
 */
 Flag::Flag
-	(Game & game, Player & owning_player, Coords const coords)
+	(Editor_Game_Base & egbase, Player & owning_player, Coords const coords)
 	:
 	PlayerImmovable       (g_flag_descr),
 	m_building            (0),
@@ -121,15 +121,21 @@ Flag::Flag
 	set_flag_position(coords);
 
 
-	upcast(Road, road, game.map().get_immovable(coords));
-	//  we split a road, or a new, standalone flag is created
-	(road ? road->get_economy() : new Economy(owning_player))->add_flag(*this);
+	upcast(Road, road, egbase.map().get_immovable(coords));
+	upcast(Game, game, &egbase);
 
-	if (road)
-		road->presplit(game, coords);
-	init(game);
-	if (road)
-		road->postsplit(game, *this);
+	if(game) {
+		//  we split a road, or a new, standalone flag is created
+		(road ? road->get_economy() : new Economy(owning_player))->add_flag(*this);
+
+		if (road)
+			road->presplit(*game, coords);
+	}
+
+	init(egbase);
+
+	if (road and game)
+			road->postsplit(*game, *this);
 }
 
 void Flag::set_flag_position(Coords coords) {
@@ -636,7 +642,8 @@ void Flag::cleanup(Editor_Game_Base & egbase)
 		}
 	}
 
-	get_economy()->remove_flag(*this);
+	if(Economy* e = get_economy())
+		e->remove_flag(*this);
 
 	unset_position(egbase, m_position);
 

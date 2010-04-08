@@ -60,7 +60,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Map_Flagdata_Data_Packet; // has to read/write this to a file
 
 	Flag(); /// empty flag for savegame loading
-	Flag(Game &, Player & owner, Coords); /// create a new flag
+	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
 	virtual ~Flag();
 
 	void load_finish(Editor_Game_Base &);
