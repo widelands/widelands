@@ -170,11 +170,21 @@ void Editor_Interactive::load(std::string const & filename) {
 			egbase().manually_load_tribe(*i.current);
 		}
 	}
+
+	// Create the players. TODO SirVer this must be managed better
+	loader_ui.step (_("Creating players"));
+	iterate_player_numbers(p, map.get_nrplayers()) {
+		egbase().add_player
+			(p, 0, map.get_scenario_player_tribe(p),
+			 map.get_scenario_player_name(p));
+	}
+
 	loader_ui.step (_("Loading world data"));
 	ml->load_world();
 	ml->load_map_complete(egbase(), true);
 	loader_ui.step(_("Loading graphics..."));
 	egbase().load_graphics(loader_ui);
+
 	register_overlays();
 
 	set_need_save(false);

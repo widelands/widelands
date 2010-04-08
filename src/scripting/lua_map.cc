@@ -829,7 +829,7 @@ int L_MapObject::get_serial(lua_State * L) {
 		immovable, flag, road, productionsite, warehouse, militarysite...
 */
 int L_MapObject::get_type(lua_State * L) {
-	lua_pushstring(L, m_ptr->get(get_game(L))->type_name());
+	lua_pushstring(L, m_ptr->get(get_egbase(L))->type_name());
 	return 1;
 }
 
@@ -934,8 +934,7 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 		* :const:`big` -- Example: Big sized buildings or stones
 */
 int L_BaseImmovable::get_size(lua_State * L) {
-	Game & game = get_game(L);
-	BaseImmovable * o = get(L, game);
+	BaseImmovable * o = get(L, get_egbase(L));
 
 	switch (o->get_size()) {
 		case BaseImmovable::NONE: lua_pushstring(L, "none"); break;

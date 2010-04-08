@@ -124,7 +124,7 @@ L_Player::L_Player(lua_State * L) {
 	m_pl = luaL_checkuint32(L, -1);
 
 	// checks that this is a valid Player
-	get(L, get_game(L));
+	get(L, get_egbase(L));
 }
 
 void L_Player::__persist(lua_State * L) {
@@ -427,11 +427,11 @@ int L_Player::place_building(lua_State * L) {
 	const char * name = luaL_checkstring(L, 2);
 	L_Field * c = *get_user_class<L_Field>(L, 3);
 
-	Building_Index i = get(L, get_game(L)).tribe().building_index(name);
+	Building_Index i = get(L, get_egbase(L)).tribe().building_index(name);
 	if (i == Building_Index::Null())
 		return report_error(L, "Unknown Building: '%s'", name);
 
-	Building & b = get(L, get_game(L)).force_building
+	Building & b = get(L, get_egbase(L)).force_building
 		(c->coords(), i, 0, 0, Soldier_Counts());
 
 	return upcasted_immovable_to_lua(L, &b);
@@ -1204,10 +1204,10 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 
 	return 0;
 }
-Player & L_Player::get(lua_State * L, Widelands::Game & game) {
+Player & L_Player::get(lua_State * L, Widelands::Editor_Game_Base & egbase) {
 	if (m_pl > MAX_PLAYERS)
 		report_error(L, "Illegal player number %i",  m_pl);
-	Player * rv = game.get_player(m_pl);
+	Player * rv = egbase.get_player(m_pl);
 	if (!rv)
 		report_error(L, "Player with the number %i does not exist", m_pl);
 	return *rv;

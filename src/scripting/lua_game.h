@@ -108,7 +108,7 @@ public:
 	/*
 	 * C methods
 	 */
-	Widelands::Player & get(lua_State * L, Widelands::Game & game);
+	Widelands::Player & get(lua_State * L, Widelands::Editor_Game_Base &);
 private:
 	void m_parse_building_list
 		(lua_State *, const Widelands::Tribe_Descr &,
