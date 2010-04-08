@@ -384,6 +384,10 @@ void NetGGZ::data()
 
 
 /* Check for incoming data */
+/// \note The FD_SET macro from glibc uses old-style cast. We can not fix this
+/// ourselves, so we temporarily turn the error into a warning. It is turned
+/// back into an error after this function.
+#pragma GCC diagnostic warning "-Wold-style-cast"
 int NetGGZ::data_is_pending(int fd)
 {
 	if (fd >= 0) {
@@ -405,6 +409,7 @@ int NetGGZ::data_is_pending(int fd)
 
 	return 0;
 }
+#pragma GCC diagnostic error "-Wold-style-cast"
 
 //\FIXME: mallformed updatedata, if the user is in a room and too many seats
 //        are open (~ > 4).
