@@ -75,36 +75,36 @@ function player_tests:test_force_building()
    assert_equal("warehouse", k.building_type)
    f.brn.immovable:remove() -- removing map also removes building
 end
--- function player_tests:test_force_building_illegal_name()
---    assert_error("Illegal building", function()
---       wl.game.Player(1):place_building("kjhsfjkh", wl.map.Field(10,10))
---    end)
--- end
---
+function player_tests:test_force_building_illegal_name()
+   assert_error("Illegal building", function()
+      wl.game.Player(1):place_building("kjhsfjkh", wl.map.Field(10,10))
+   end)
+end
+
 
 -- -- =======================================================================
 -- --                          See Fields/Hide Fields
 -- -- =======================================================================
--- player_vision_tests = lunit.TestCase("Player vision tests")
--- function player_vision_tests:setup()
---    self.f = wl.map.Field(50, 20)
---    self.p = wl.game.Player(1)
---    self.p.see_all = false
--- end
--- function player_vision_tests:teardown()
---    self.p:hide_fields(self.f:region(1))
---    self.p.see_all = false
--- end
--- -- This test must appear as the very first
--- function player_vision_tests:test_seen_field()
---    assert_equal(false, self.p:sees_field(self.f))
---    assert_equal(false, self.p:seen_field(self.f))
---    self.p:reveal_fields(self.f:region(1))
---    self.p:hide_fields(self.f:region(1))
---    assert_equal(false, self.p:sees_field(self.f))
---    assert_equal(true, self.p:seen_field(self.f))
--- end
---
+player_vision_tests = lunit.TestCase("Player vision tests")
+function player_vision_tests:setup()
+   self.f = wl.map.Field(50, 20)
+   self.p = wl.game.Player(1)
+   self.p.see_all = false
+end
+function player_vision_tests:teardown()
+   self.p:hide_fields(self.f:region(1))
+   self.p.see_all = false
+end
+-- This test must appear as the very first
+function player_vision_tests:test_seen_field()
+   assert_equal(false, self.p:sees_field(self.f))
+   assert_equal(false, self.p:seen_field(self.f))
+   self.p:reveal_fields(self.f:region(1))
+   self.p:hide_fields(self.f:region(1))
+   assert_equal(false, self.p:sees_field(self.f))
+   assert_equal(true, self.p:seen_field(self.f))
+end
+
 -- function player_vision_tests:test_sees_field()
 --    assert_equal(false, self.p:sees_field(self.f))
 --    self.p:reveal_fields(self.f:region(1))

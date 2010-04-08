@@ -349,11 +349,11 @@ int L_Player::get_tribe(lua_State *L) {
 	player.
 */
 int L_Player::set_see_all(lua_State * const L) {
-	get(L, get_game(L)).set_see_all(luaL_checkboolean(L, -1));
+	get(L, get_egbase(L)).set_see_all(luaL_checkboolean(L, -1));
 	return 0;
 }
 int L_Player::get_see_all(lua_State * const L) {
-	lua_pushboolean(L, get(L, get_game(L)).see_all());
+	lua_pushboolean(L, get(L, get_egbase(L)).see_all());
 	return 1;
 }
 
@@ -641,12 +641,11 @@ int L_Player::message_box(lua_State * L) {
 */
 // UNTESTED
 int L_Player::conquer(lua_State * L) {
-	Game & game = get_game(L);
 	uint32_t radius = 1;
 	if (lua_gettop(L) > 2)
 		radius = luaL_checkuint32(L, 3);
 
-	game.conquer_area_no_building
+	get_egbase(L).conquer_area_no_building
 		(Player_Area<Area<FCoords> >
 			(m_pl, Area<FCoords>
 				((*get_user_class<L_Field>(L, 2))->fcoords(L), radius))
@@ -664,14 +663,12 @@ int L_Player::conquer(lua_State * L) {
 		:rtype: :class:`bool`
 */
 int L_Player::sees_field(lua_State * L) {
-	Game & game = get_game(L);
+	Editor_Game_Base & egbase = get_egbase(L);
 
 	Widelands::Map_Index const i =
-		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &game.map()[0];
+		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	log("Vision: %i\n", get(L, game).vision(i));
-
-	lua_pushboolean(L, get(L, game).vision(i) > 1);
+	lua_pushboolean(L, get(L, egbase).vision(i) > 1);
 	return 1;
 }
 
@@ -685,12 +682,15 @@ int L_Player::sees_field(lua_State * L) {
 		:rtype: :class:`bool`
 */
 int L_Player::seen_field(lua_State * L) {
-	Game & game = get_game(L);
+	Editor_Game_Base & egbase = get_egbase(L);
 
 	Widelands::Map_Index const i =
-		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &game.map()[0];
+		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	lua_pushboolean(L, get(L, game).vision(i) >= 1);
+	log("Vision: %i\n", get(L, egbase).vision(i));
+	log("See all: %i\n", get(L, egbase).see_all());
+
+	lua_pushboolean(L, get(L, egbase).vision(i) >= 1);
 	return 1;
 }
 
@@ -784,9 +784,9 @@ int L_Player::add_objective(lua_State * L) {
 		:returns: :const:`nil`
 */
 int L_Player::reveal_fields(lua_State * L) {
-	Game & g = get_game(L);
-	Player & p = get(L, g);
-	Map & m = g.map();
+	Editor_Game_Base & egbase = get_egbase(L);
+	Player & p = get(L, egbase);
+	Map & m = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
@@ -794,7 +794,7 @@ int L_Player::reveal_fields(lua_State * L) {
 	while (lua_next(L, 2) != 0) {
 		p.see_node
 			(m, m[0], (*get_user_class<L_Field>(L, -1))->fcoords(L),
-			g.get_gametime());
+			egbase.get_gametime());
 		lua_pop(L, 1);
 	}
 
@@ -813,9 +813,9 @@ int L_Player::reveal_fields(lua_State * L) {
 		:returns: :const:`nil`
 */
 int L_Player::hide_fields(lua_State * L) {
-	Game & g = get_game(L);
-	Player & p = get(L, g);
-	Map & m = g.map();
+	Editor_Game_Base & egbase = get_egbase(L);
+	Player & p = get(L, egbase);
+	Map & m = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
@@ -823,7 +823,7 @@ int L_Player::hide_fields(lua_State * L) {
 	while (lua_next(L, 2) != 0) {
 		p.unsee_node
 			((*get_user_class<L_Field>(L, -1))->fcoords(L).field - &m[0],
-			g.get_gametime());
+			egbase.get_gametime());
 		lua_pop(L, 1);
 	}
 
