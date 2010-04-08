@@ -93,9 +93,6 @@ struct Building_Descr : public Map_Object_Descr {
 		 Player &,
 		 Coords,
 		 bool                   construct,
-		 uint32_t       const * ware_counts    = 0,
-		 uint32_t       const * worker_counts  = 0,
-		 Soldier_Counts const * soldier_counts = 0,
 		 Building_Descr const * old = 0,
 		 bool                   loading = false)
 		const;

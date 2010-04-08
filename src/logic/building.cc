@@ -180,9 +180,6 @@ Building & Building_Descr::create
 	 Player               &       owner,
 	 Coords                 const pos,
 	 bool                   const construct,
-	 uint32_t       const * const ware_counts,
-	 uint32_t       const * const worker_counts,
-	 Soldier_Counts const * const soldier_counts,
 	 Building_Descr const * const old,
 	 bool                         loading)
 	const
@@ -196,11 +193,11 @@ Building & Building_Descr::create
 	}
 	b.prefill
 		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 ware_counts, worker_counts, soldier_counts);
+		 0, 0, 0);
 	b.init(egbase);
 	b.postfill
 		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 ware_counts, worker_counts, soldier_counts);
+		 0, 0, 0);
 	return b;
 }
 
