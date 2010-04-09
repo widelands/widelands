@@ -1,7 +1,6 @@
--- -- ==============
--- -- Testing roads
--- -- ==============
---
+-- ==============
+-- Testing roads
+-- ==============
 function _cnt(i)
    local rv = 0
    for name,cnt in pairs(i) do rv = rv + cnt end
@@ -135,25 +134,24 @@ function road_tests:test_carrier_creation_and_deletion()
    assert_equal(1, _cnt(self.r:get_workers("all")))
    assert_equal(1, self.r:get_workers("carrier"))
 end
--- function road_tests:test_carrier_creation_not_a_carrier()
---    assert_error("Not an carrier!", function()
---       self.r:set_workers{lumberjack=1}
---    end)
--- end
--- function road_tests:test_carrier_creation_illegal_name()
---    assert_error("Illegal name", function()
---       self.r:set_workers("kjhskjh", 1)
---    end)
--- end
--- function road_tests:test_carrier_no_space()
---    self.r:set_workers{carrier=1}
---    assert_error("No space!", function ()
---       self.r:set_workers{carrier=2}
---    end)
--- end
--- function road_tests:test_valid_workers()
---    assert_equal(1, _cnt(self.r.valid_workers))
---    assert_equal(1, self.r.valid_workers.carrier)
--- end
---
---
+function road_tests:test_carrier_creation_not_a_carrier()
+   assert_error("Not an carrier!", function()
+      self.r:set_workers{lumberjack=1}
+   end)
+end
+function road_tests:test_carrier_creation_illegal_name()
+   assert_error("Illegal name", function()
+      self.r:set_workers("kjhskjh", 1)
+   end)
+end
+function road_tests:test_carrier_no_space()
+   self.r:set_workers{carrier=1}
+   assert_error("No space!", function ()
+      self.r:set_workers{carrier=2}
+   end)
+end
+function road_tests:test_valid_workers()
+   assert_equal(1, _cnt(self.r.valid_workers))
+   assert_equal(1, self.r.valid_workers.carrier)
+end
+

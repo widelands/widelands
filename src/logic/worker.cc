@@ -958,6 +958,7 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
 void Worker::set_location(PlayerImmovable * const location)
 {
 	assert(not location or Object_Ptr(location).get(owner().egbase()));
+
 	PlayerImmovable * const oldlocation = get_location(owner().egbase());
 	if (oldlocation == location)
 		return;
@@ -991,8 +992,6 @@ void Worker::set_location(PlayerImmovable * const location)
 		Editor_Game_Base & egbase = owner().egbase();
 		if (upcast(Game, game, &egbase))
 			send_signal (*game, "location");
-		else // In the editor: delete us
-			remove(egbase);
 	}
 }
 
@@ -1047,8 +1046,10 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 {
 	WareInstance * const item = get_carried_item(egbase);
 
-	delete m_supply;
-	m_supply = 0;
+	if (m_supply) {
+		delete m_supply;
+		m_supply = 0;
+	}
 
 	if (item)
 		if (egbase.objects().object_still_available(item))
