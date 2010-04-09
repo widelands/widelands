@@ -117,8 +117,8 @@ public:
 	{
 		return m_carried_item.get(egbase);
 	}
-	void set_carried_item(Game &, WareInstance *);
-	WareInstance * fetch_carried_item(Game &);
+	void set_carried_item(Editor_Game_Base &, WareInstance *);
+	WareInstance * fetch_carried_item(Editor_Game_Base &);
 
 	void schedule_incorporate(Game &);
 	void incorporate(Game &);

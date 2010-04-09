@@ -1076,23 +1076,25 @@ void Worker::cleanup(Editor_Game_Base & egbase)
  * If we carry an item right now, it will be destroyed (see
  * fetch_carried_item()).
  */
-void Worker::set_carried_item(Game & game, WareInstance * const item)
+void Worker::set_carried_item
+	(Editor_Game_Base & egbase, WareInstance * const item)
 {
-	if (WareInstance * const olditem = get_carried_item(game)) {
-		olditem->cleanup(game);
+	if (WareInstance * const olditem = get_carried_item(egbase)) {
+		olditem->cleanup(egbase);
 		delete olditem;
 	}
 
 	m_carried_item = item;
-	item->set_location(game, this);
-	item->update(game);
+	item->set_location(egbase, this);
+	if (upcast(Game, game, &egbase))
+		item->update(*game);
 }
 
 
 /**
  * Stop carrying the current item, and return a pointer to it.
  */
-WareInstance * Worker::fetch_carried_item(Game & game)
+WareInstance * Worker::fetch_carried_item(Editor_Game_Base & game)
 {
 	WareInstance * const item = get_carried_item(game);
 

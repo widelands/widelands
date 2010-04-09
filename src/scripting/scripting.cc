@@ -36,7 +36,7 @@
 #include "scripting.h"
 
 // TODO: add wl.editor to documentation
-// TODO: 
+// TODO: Roads are not rendered in the Editor. Fixe mark_map, post and presplit
 
 /*
 ============================================

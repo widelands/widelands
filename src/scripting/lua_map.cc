@@ -1440,8 +1440,8 @@ WH_GET(worker, Worker);
 
 // documented in parent class
 int L_Warehouse::set_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	Warehouse * wh = get(L, game);
+	Editor_Game_Base & egbase = get_egbase(L);
+	Warehouse * wh = get(L, egbase);
 	Tribe_Descr const & tribe = wh->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
@@ -1454,11 +1454,11 @@ int L_Warehouse::set_soldiers(lua_State * L) {
 		for (uint32_t i = 0; i < s.current->second; i++) {
 			Soldier & soldier =
 				ref_cast<Soldier, Worker>
-				(soldier_descr.create(game, wh->owner(), wh, wh->get_position()));
+				(soldier_descr.create(egbase, wh->owner(), wh, wh->get_position()));
 			soldier.set_level
 				(s.current->first.hp, s.current->first.at,
 				 s.current->first.de, s.current->first.ev);
-			wh->incorporate_worker(game, soldier);
+			wh->incorporate_worker(egbase, soldier);
 		}
 	}
 	return 0;
@@ -1466,17 +1466,17 @@ int L_Warehouse::set_soldiers(lua_State * L) {
 
 // documented in parent class
 int L_Warehouse::get_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	Warehouse * wh = get(L, game);
+	Editor_Game_Base & egbase = get_egbase(L);
+	Warehouse * wh = get(L, egbase);
 	Tribe_Descr const & tribe = wh->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
 			 ref_cast<Soldier_Descr const, Worker_Descr const>
 						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
-	SoldiersList in_warehouse = wh->get_soldiers(game);
-	return m_handle_get_soldiers(L, soldier_descr, in_warehouse);
+	SoldiersList in_warehouse = wh->get_soldiers(egbase);
 
+	return m_handle_get_soldiers(L, soldier_descr, in_warehouse);
 }
 
 /*

@@ -131,7 +131,8 @@ void WarehouseSupply::add_wares     (Ware_Index const id, uint32_t const count)
 	if (!count)
 		return;
 
-	m_economy->add_wares(id, count);
+	if (m_economy) // No economies in the editor
+		m_economy->add_wares(id, count);
 	m_wares.add(id, count);
 }
 
@@ -147,7 +148,8 @@ void WarehouseSupply::remove_wares  (Ware_Index const id, uint32_t const count)
 		return;
 
 	m_wares.remove(id, count);
-	m_economy->remove_wares(id, count);
+	if (m_economy) // No economies in the editor
+		m_economy->remove_wares(id, count);
 }
 
 /*
@@ -161,7 +163,8 @@ void WarehouseSupply::add_workers   (Ware_Index const id, uint32_t const count)
 	if (!count)
 		return;
 
-	m_economy->add_workers(id, count);
+	if (m_economy) // No economies in the editor
+		m_economy->add_workers(id, count);
 	m_workers.add(id, count);
 }
 
@@ -179,7 +182,8 @@ void WarehouseSupply::remove_workers(Ware_Index const id, uint32_t const count)
 		return;
 
 	m_workers.remove(id, count);
-	m_economy->remove_workers(id, count);
+	if (m_economy) // No economies in the editor
+		m_economy->remove_workers(id, count);
 }
 
 /*
@@ -483,8 +487,10 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 	while (m_incorporated_workers.size()) {
 		//  If the game ends and this worker has been created before this
 		//  warehouse, it might already be deleted. So do not try and free him
-		if (upcast(Worker, worker, m_incorporated_workers.begin()->get(egbase)))
-			worker->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+		if (upcast(Worker, worker, m_incorporated_workers.begin()->get(egbase))) {
+			if (upcast(Game, game, &egbase))
+				worker->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+		}
 		m_incorporated_workers.erase(m_incorporated_workers.begin());
 	}
 	Map & map = egbase.map();
@@ -631,7 +637,6 @@ Magically create wares in this warehouse. Updates the economy accordingly.
 */
 void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
 {
-	assert(get_economy());
 	m_supply->add_wares(id, count);
 }
 
@@ -643,7 +648,6 @@ Magically destroy wares.
 */
 void Warehouse::remove_wares(Ware_Index const id, uint32_t const count)
 {
-	assert(get_economy());
 	m_supply->remove_wares(id, count);
 }
 
@@ -654,8 +658,6 @@ Magically create workers in this warehouse. Updates the economy accordingly.
 */
 void Warehouse::insert_workers(Ware_Index const id, uint32_t const count)
 {
-	assert(get_economy());
-
 	m_supply->add_workers(id, count);
 }
 
@@ -667,8 +669,6 @@ Magically destroy workers.
 */
 void Warehouse::remove_workers(Ware_Index const id, uint32_t const count)
 {
-	assert(get_economy());
-
 	m_supply->remove_workers(id, count);
 }
 
@@ -782,12 +782,12 @@ This is the opposite of launch_worker: destroy the worker and add the
 appropriate ware to our warelist
 ===============
 */
-void Warehouse::incorporate_worker(Game & game, Worker & w)
+void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 {
 	assert(w.get_owner() == &owner());
 
-	if (WareInstance * const item = w.fetch_carried_item(game))
-		incorporate_item(game, *item); //  rescue an item
+	if (WareInstance * const item = w.fetch_carried_item(egbase))
+		incorporate_item(egbase, *item); //  rescue an item
 
 	m_supply->add_workers(tribe().worker_index(w.name().c_str()), 1);
 
@@ -797,14 +797,16 @@ void Warehouse::incorporate_worker(Game & game, Worker & w)
 	//  FIXME with the experience (and possibly other data that must survive)
 	//  FIXME may be kept.
 	if (dynamic_cast<Carrier const *>(&w))
-		return w.remove(game);
+		return w.remove(egbase);
 
-	sort_worker_in(game, w);
+	sort_worker_in(egbase, w);
 	w.set_location(0); //  no longer in an economy
-	w.reset_tasks(game);
 
-	//  Bind the worker into this house, hide him on the map.
-	w.start_task_idle(game, 0, -1);
+	if (upcast(Game, game, &egbase)) {
+		//  Bind the worker into this house, hide him on the map.
+		w.reset_tasks(*game);
+		w.start_task_idle(*game, 0, -1);
+	}
 }
 
 
@@ -884,10 +886,10 @@ void Warehouse::do_launch_item(Game & game, WareInstance & item)
 Swallow the item, adding it to out inventory.
 ===============
 */
-void Warehouse::incorporate_item(Game & game, WareInstance & item)
+void Warehouse::incorporate_item(Editor_Game_Base & egbase, WareInstance & item)
 {
 	m_supply->add_wares(item.descr_index(), 1);
-	return item.destroy(game);
+	return item.destroy(egbase);
 }
 
 

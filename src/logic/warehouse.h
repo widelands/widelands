@@ -110,11 +110,11 @@ public:
 
 	uint32_t count_workers(Game const &, Ware_Index, Requirements const &);
 	Worker & launch_worker(Game &, Ware_Index, Requirements const &);
-	void incorporate_worker(Game &, Worker &);
+	void incorporate_worker(Editor_Game_Base &, Worker &);
 
 	WareInstance & launch_item(Game &, Ware_Index);
 	void do_launch_item(Game &, WareInstance &);
-	void incorporate_item(Game &, WareInstance &);
+	void incorporate_item(Editor_Game_Base &, WareInstance &);
 
 	bool can_create_worker(Game &, Ware_Index) const;
 	void     create_worker(Game &, Ware_Index);
