@@ -1517,8 +1517,7 @@ const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
  */
 // documented in parent class
 int L_ProductionSite::get_valid_wares(lua_State * L) {
-	Game & g = get_game(L);
-	ProductionSite * ps = get(L, g);
+	ProductionSite * ps = get(L, get_egbase(L));
 
 	Tribe_Descr const & tribe = ps->owner().tribe();
 
@@ -1556,7 +1555,7 @@ int L_ProductionSite::_new_worker
 
 // documented in parent class
 int L_ProductionSite::set_wares(lua_State * L) {
-	ProductionSite * ps = get(L, get_game(L));
+	ProductionSite * ps = get(L, get_egbase(L));
 	const Tribe_Descr & tribe = ps->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
@@ -1588,7 +1587,7 @@ int L_ProductionSite::set_wares(lua_State * L) {
 
 // documented in parent class
 int L_ProductionSite::get_wares(lua_State * L) {
-	ProductionSite * ps = get(L, get_game(L));
+	ProductionSite * ps = get(L, get_egbase(L));
 	Tribe_Descr const & tribe = ps->owner().tribe();
 
 	bool return_number = false;

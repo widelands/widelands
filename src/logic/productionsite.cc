@@ -288,7 +288,6 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
 
-	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 
 	Ware_Types const & inputs = descr().inputs();
 	m_input_queues.resize(inputs.size());
@@ -315,7 +314,8 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 				wp->worker_request = &request_worker(worker_index);
 	}
 
-	try_start_working(game);
+	if (upcast(Game, game, &egbase))
+		try_start_working(*game);
 }
 
 /**
