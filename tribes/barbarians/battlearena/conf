@@ -61,4 +61,4 @@ train=soldier evade 1 2
 
 [idle]
 pics=battlearena_i_??.png  # ???
-hotspot=80 77
+hotspot=93 62
