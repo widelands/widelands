@@ -184,50 +184,50 @@ end
 -- ================
 -- Access to players buildings
 -- ================
--- player_building_access = lunit.TestCase("Access to Player buildings")
--- function player_building_access:setup()
---    self.p = wl.game.Player(1)
--- end
--- function player_building_access:teardown()
---    for temp,b in ipairs(self.bs) do
---       pcall(b.remove, b)
---    end
--- end
--- function player_building_access:test_single()
---    self.bs = {
---       self.p:place_building("lumberjacks_hut", wl.map.Field(10,10)),
---       self.p:place_building("lumberjacks_hut", wl.map.Field(13,10)),
---       self.p:place_building("quarry", wl.map.Field(8,10)),
---    }
---    assert_equal(2, #self.p:get_buildings("lumberjacks_hut"))
---    assert_equal(1, #self.p:get_buildings("quarry"))
--- end
--- function player_building_access:test_multi()
---    self.bs = {
---       self.p:place_building("lumberjacks_hut", wl.map.Field(10,10)),
---       self.p:place_building("lumberjacks_hut", wl.map.Field(13,10)),
---       self.p:place_building("quarry", wl.map.Field(8,10)),
---    }
---    rv = self.p:get_buildings{"lumberjacks_hut", "quarry"}
---
---    assert_equal(2, #rv.lumberjacks_hut)
---    assert_equal(1, #rv.quarry)
--- end
--- function player_building_access:test_access()
---    local b1 = self.p:place_building("lumberjacks_hut", wl.map.Field(10,10))
---    local b2 = self.p:place_building("lumberjacks_hut", wl.map.Field(13,10))
---    local b3 = self.p:place_building("quarry", wl.map.Field(8,10))
---    self.bs = { b1, b2, b3 }
---    rv = self.p:get_buildings{"lumberjacks_hut", "quarry"}
---
---    assert_equal(b3, rv.quarry[1])
---    b1:remove()
---    assert_equal(1, #self.p:get_buildings("lumberjacks_hut"))
--- end
---
---
---
---
+player_building_access = lunit.TestCase("Access to Player buildings")
+function player_building_access:setup()
+   self.p = wl.game.Player(1)
+end
+function player_building_access:teardown()
+   for temp,b in ipairs(self.bs) do
+      pcall(b.remove, b)
+   end
+end
+function player_building_access:test_single()
+   self.bs = {
+      self.p:place_building("lumberjacks_hut", wl.map.Field(10,10)),
+      self.p:place_building("lumberjacks_hut", wl.map.Field(13,10)),
+      self.p:place_building("quarry", wl.map.Field(8,10)),
+   }
+   assert_equal(2, #self.p:get_buildings("lumberjacks_hut"))
+   assert_equal(1, #self.p:get_buildings("quarry"))
+end
+function player_building_access:test_multi()
+   self.bs = {
+      self.p:place_building("lumberjacks_hut", wl.map.Field(10,10)),
+      self.p:place_building("lumberjacks_hut", wl.map.Field(13,10)),
+      self.p:place_building("quarry", wl.map.Field(8,10)),
+   }
+   rv = self.p:get_buildings{"lumberjacks_hut", "quarry"}
+
+   assert_equal(2, #rv.lumberjacks_hut)
+   assert_equal(1, #rv.quarry)
+end
+function player_building_access:test_access()
+   local b1 = self.p:place_building("lumberjacks_hut", wl.map.Field(10,10))
+   local b2 = self.p:place_building("lumberjacks_hut", wl.map.Field(13,10))
+   local b3 = self.p:place_building("quarry", wl.map.Field(8,10))
+   self.bs = { b1, b2, b3 }
+   rv = self.p:get_buildings{"lumberjacks_hut", "quarry"}
+
+   assert_equal(b3, rv.quarry[1])
+   b1:remove()
+   assert_equal(1, #self.p:get_buildings("lumberjacks_hut"))
+end
+
+
+
+
 -- use("map", "test_objectives")
 -- use("map", "test_messages")
 --
