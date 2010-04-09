@@ -60,7 +60,7 @@ function player_tests:test_create_flag_non_forcing_too_close()
 
    k:remove()
 end
--- This test is currently disabled because of issue #2938438
+-- This test is currently disabled because of bug lp:536366
 -- function player_tests:test_create_flag2()
 --    f = wl.map.Field(20,10)
 --    k = wl.game.Player(2):place_flag(f, true)
@@ -181,10 +181,9 @@ function player_allow_buildings_tests:test_forbid_string_not_all()
    assert_error("String argument must be all", a)
 end
 
--- TODO: here goes it on
--- -- ================
--- -- Access to players buildings
--- -- ================
+-- ================
+-- Access to players buildings
+-- ================
 -- player_building_access = lunit.TestCase("Access to Player buildings")
 -- function player_building_access:setup()
 --    self.p = wl.game.Player(1)

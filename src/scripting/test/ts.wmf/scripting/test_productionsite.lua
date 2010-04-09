@@ -113,9 +113,9 @@ function productionsite_tests:test_no_space()
   end)
 end
 
--- -- ==============
--- -- Ware creation
--- -- ==============
+-- ==============
+-- Ware creation
+-- ==============
 function productionsite_tests:test_valid_wares()
    ww = self.warmill.valid_wares
    assert_equal(8, ww.iron)
