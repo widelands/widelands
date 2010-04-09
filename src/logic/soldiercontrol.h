@@ -101,7 +101,7 @@ struct SoldierControl {
 	 * Add a new soldier into this site. Returns -1 if there is no space
 	 * for him, 0 on success
 	 */
-	virtual int incorporateSoldier(Game &, Soldier &) = 0;
+	virtual int incorporateSoldier(Editor_Game_Base &, Soldier &) = 0;
 
 protected:
 	virtual ~SoldierControl() {}

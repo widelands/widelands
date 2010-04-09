@@ -143,7 +143,7 @@ public:
 	virtual uint32_t soldierCapacity() const;
 	virtual void setSoldierCapacity(uint32_t capacity);
 	virtual void dropSoldier(Soldier &);
-	int incorporateSoldier(Game &, Soldier &);
+	int incorporateSoldier(Editor_Game_Base &, Soldier &);
 	// End implementation of SoldierControl
 
 	int32_t get_pri(enum tAttribute atr);

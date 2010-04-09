@@ -335,8 +335,8 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int TrainingSite::incorporateSoldier(Game & game, Soldier & s) {
-	if (s.get_location(game) != this) {
+int TrainingSite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
+	if (s.get_location(egbase) != this) {
 		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
 			return -1;
 
@@ -344,7 +344,8 @@ int TrainingSite::incorporateSoldier(Game & game, Soldier & s) {
 	}
 
 	// Bind the worker into this house, hide him on the map
-	s.start_task_idle(game, 0, -1);
+	if (upcast(Game, game, &egbase))
+		s.start_task_idle(*game, 0, -1);
 
 	// Make sure the request count is reduced or the request is deleted.
 	update_soldier_request();

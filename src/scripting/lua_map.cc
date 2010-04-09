@@ -227,13 +227,13 @@ int _WorkerEmployer::get_valid_workers(lua_State * L) {
  * _SoldierEmployer
  */
 int _SoldierEmployer::get_max_soldiers(lua_State * L) {
-	lua_pushuint32(L, get_sc(L, get_game(L))->maxSoldierCapacity());
+	lua_pushuint32(L, get_sc(L, get_egbase(L))->maxSoldierCapacity());
 	return 1;
 }
 int _SoldierEmployer::get_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	SoldierControl * sc = get_sc(L, game);
-	Tribe_Descr const & tribe = get(L, game)->owner().tribe();
+	Editor_Game_Base & egbase = get_egbase(L);
+	SoldierControl * sc = get_sc(L, egbase);
+	Tribe_Descr const & tribe = get(L, egbase)->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
 			 ref_cast<Soldier_Descr const, Worker_Descr const>
@@ -247,9 +247,9 @@ int _SoldierEmployer::get_soldiers(lua_State * L) {
 	return m_handle_get_soldiers(L, soldier_descr, current_soldiers);
 }
 int _SoldierEmployer::set_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	SoldierControl * sc = get_sc(L, game);
-	Building * building = get(L, game);
+	Editor_Game_Base & egbase = get_egbase(L);
+	SoldierControl * sc = get_sc(L, egbase);
+	Building * building = get(L, egbase);
 	Tribe_Descr const & tribe = building->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
@@ -297,7 +297,7 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 						 (*s.current)->get_evade_level());
 
 					if (is == sp->first) {
-						(*s.current)->remove(game);
+						(*s.current)->remove(egbase);
 						++d;
 						break;
 					}
@@ -308,15 +308,15 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 				Soldier & soldier =
 					ref_cast<Soldier, Worker>
 					(soldier_descr.create
-					 (game, building->owner(), 0, building->get_position()));
+					 (egbase, building->owner(), 0, building->get_position()));
 
 				soldier.set_level
 					(sp.current->first.hp, sp.current->first.at,
 					 sp.current->first.de, sp.current->first.ev);
 
-				if (sc->incorporateSoldier(game, soldier)) {
+				if (sc->incorporateSoldier(egbase, soldier)) {
 					return report_error(L, "No space left for soldier!");
-					soldier.remove(game);
+					soldier.remove(egbase);
 				}
 			}
 		}
