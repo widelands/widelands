@@ -121,7 +121,7 @@ bool NetGGZ::connect()
 		select(fd + 1, &fdset, 0, 0, &timeout);
 		// make sure all incoming data is processed before continuing
 		while (data_is_pending(ggzmod_get_fd(mod)))
-			ggzmod_dispatch(mod);
+			if (ggzmod_dispatch(mod) < 0) break;
 		//log("GGZ ## timeout!\n");
 		if (usedcore())
 			datacore();
@@ -423,11 +423,11 @@ void NetGGZ::datacore()
 {
 	if (!ggzserver)
 		return;
-	while (ggzcore_server_data_is_pending(ggzserver))
+	if (ggzcore_server_data_is_pending(ggzserver))
 		ggzcore_server_read_data(ggzserver, ggzcore_server_get_fd(ggzserver));
 
-	while (channelfd != -1 && 
-		   data_is_pending(ggzcore_server_get_channel(ggzserver)))
+	if (channelfd != -1 && 
+		data_is_pending(ggzcore_server_get_channel(ggzserver)))
 		ggzcore_server_read_data
 			(ggzserver, ggzcore_server_get_channel(ggzserver));
 
