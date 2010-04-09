@@ -225,9 +225,9 @@ function player_building_access:test_access()
    assert_equal(1, #self.p:get_buildings("lumberjacks_hut"))
 end
 
-
-
-
--- use("map", "test_objectives")
--- use("map", "test_messages")
---
+-- TODO: this is not good - Either make the seperatation between editor & game
+-- more obvious, or make those tests also pass in the editor.
+if not wl.editor then
+   use("map", "test_objectives")
+   use("map", "test_messages")
+end
