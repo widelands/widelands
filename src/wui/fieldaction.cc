@@ -361,11 +361,11 @@ void FieldActionWindow::add_buttons_auto()
 	UI::Box & watchbox = *new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	// Add road-building actions
-	Interactive_GameBase const & igbase =
-		ref_cast<Interactive_GameBase, Interactive_Base>(ibase());
-	Widelands::Player_Number const owner = m_node.field->get_owned_by();
-	if (igbase.can_see(owner)) {
+	upcast(Interactive_GameBase, igbase, &ibase());
 
+	Widelands::Player_Number const owner = m_node.field->get_owned_by();
+
+	if (not igbase or igbase->can_see(owner)) {
 		Widelands::BaseImmovable * const imm = m_map->get_immovable(m_node);
 
 		// The box with road-building buttons
@@ -373,7 +373,7 @@ void FieldActionWindow::add_buttons_auto()
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
-			bool const can_act = igbase.can_act(owner);
+			bool const can_act = igbase ? igbase->can_act(owner) : true;
 			if (can_act) {
 				add_button
 					(buildbox,
