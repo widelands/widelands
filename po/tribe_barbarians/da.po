@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:25+0000\n"
-"Last-Translator: Joe Hansen <Unknown>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-09 11:58+0000\n"
+"Last-Translator: beer <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-04-10 03:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/axe/conf:1
@@ -82,7 +82,7 @@ msgstr "Arbejde"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Bager brød til arbejderne."
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -154,7 +154,7 @@ msgstr "Producer måltid"
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Producere våben til dine soldater og værktøj for dine arbejdere"
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
@@ -202,13 +202,13 @@ msgstr "Transporterer ting langs med dine veje."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr ""
+msgstr "Avler den stærke okse der kan hjælpe med at transportere dine vare"
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Arbejder i de dybe mener for at hende kuld, jern eller guld"
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
@@ -616,7 +616,7 @@ msgstr "Væver"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Scout"
-msgstr ""
+msgstr "Spejder"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
@@ -664,36 +664,36 @@ msgstr "Bastion"
 #: ../../tribes/barbarians/conf:163
 #: ../../tribes/barbarians/conf:172
 msgid "Castle"
-msgstr ""
+msgstr "Borg"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Guardhall"
-msgstr ""
+msgstr "Vagthal"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Guardhouse"
-msgstr ""
+msgstr "Vagthus"
 
 #: ../../tribes/barbarians/conf:166
 msgid "High Tower"
-msgstr ""
+msgstr "Højt tårn"
 
 #: ../../tribes/barbarians/conf:167
 msgid "Small Tower"
-msgstr ""
+msgstr "Lille tårn"
 
 #: ../../tribes/barbarians/conf:168
 #: ../../tribes/barbarians/conf:175
 msgid "Tower"
-msgstr ""
+msgstr "Tårn"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Barracks"
-msgstr ""
+msgstr "Barakker"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Outpost"
-msgstr ""
+msgstr "Forpost"
 
 #: ../../tribes/barbarians/conf:178
 #: ../../tribes/barbarians/conf:179
@@ -842,7 +842,7 @@ msgstr "Brønd"
 
 #: ../../tribes/barbarians/conf:217
 msgid "Scout's Hut"
-msgstr ""
+msgstr "spejders hytte"
 
 #: ../../tribes/barbarians/conf:218
 msgid "Cattle Farm"
@@ -1068,7 +1068,7 @@ msgstr "Producer jagtspyd"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Hjælper med at bære genstande ved ofte brugte veje."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1100,6 +1100,7 @@ msgstr "Råsten er barbarernes næstmest brugte byggemateriale."
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Spejdere som spejderen Scotty spejder uspejdede områder på spejderære."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1165,7 +1166,7 @@ msgstr "Tækkerør bruges til at lave vandtætte tage på bygninger."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Træner soldaterne."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"

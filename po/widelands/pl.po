@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-21 10:15+0100\n"
-"PO-Revision-Date: 2010-03-21 15:53+0000\n"
+"POT-Creation-Date: 2010-03-25 13:31+0100\n"
+"PO-Revision-Date: 2010-04-08 19:50+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-03-22 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-04-09 03:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/logic/worker.cc:1652
@@ -324,7 +324,7 @@ msgstr "Widelands nie było w stanie się połączyć z serwerem."
 msgid "The address of the game server is invalid"
 msgstr "Adres serwera jest niepoprawny"
 
-#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1183
+#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1189
 msgid "Player"
 msgstr "Gracz"
 
@@ -1282,6 +1282,7 @@ msgstr "Pole ataku"
 msgid ""
 "Gives ownership of all unowned locations within an area to the player."
 msgstr ""
+"Oddaje własność wszystkich bezpańskich lokacji na danym obszarze graczowi."
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
@@ -1377,16 +1378,20 @@ msgid ""
 "Gives vision for a specified amount of time of all locations within an area "
 "to the player."
 msgstr ""
+"Pokazuje na określoną ilość czasu wszystkie lokacje na danym obszarze "
+"graczowi."
 
 #: ../../src/events/event_factory.cc:153
 msgid "Set player's frontier style"
-msgstr ""
+msgstr "Ustala wygląd granicy"
 
 #: ../../src/events/event_factory.cc:155
 msgid ""
 "Sets the style of the player's frontier markers to one of the styles that "
 "are defined in the player's tribe."
 msgstr ""
+"Ustala wygląd granicznych słupków do jednego z modelów określonych w "
+"plemieniu gracza."
 
 #: ../../src/events/event_factory.cc:160
 msgid "Set player's flag style"
@@ -1397,6 +1402,7 @@ msgid ""
 "Sets the style of the player's flags to one of the styles that are defined "
 "in the player's tribe."
 msgstr ""
+"Ustala wygląd flag do jednego z modelów określonych w plemieniu gracza."
 
 #: ../../src/events/event_factory.cc:167
 msgid "Allows retreat value customization"
@@ -1437,11 +1443,11 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:188
 msgid "Set see all mode for a player"
-msgstr ""
+msgstr "Ustala tryb widź wszystko graczowi"
 
 #: ../../src/events/event_factory.cc:189
 msgid "Sets the see all mode for a specific player to on/off."
-msgstr ""
+msgstr "Ustala tryb widź wszystko danemu graczu."
 
 #: ../../src/events/event_factory.cc:193
 msgid "Creates a message for a player"
@@ -1452,6 +1458,8 @@ msgid ""
 "Creates a message for a player. This message can last forever, during a "
 "specified duration, or until a special event is run."
 msgstr ""
+"Tworzy wiadomość dla gracza. Wiadomość może istnieć na zawsze, daną ilość "
+"czasu, lub do czasu kiedy wybrane zdarzenie jest uruchomione."
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
@@ -1490,7 +1498,7 @@ msgstr "(zdarzenie lua): %s"
 #: ../../src/events/event_message.cc:67
 #, c-format
 msgid "expire: \"%s\" is not an expire message event"
-msgstr ""
+msgstr "upływa: \"%s\" nie jest zdarzeniem upłynięcia wiadomości"
 
 #: ../../src/events/event_message.cc:72
 #, c-format
@@ -1499,11 +1507,16 @@ msgid ""
 "meaning forever, which is the default; omit the duration key to make the "
 "message exist forever"
 msgstr ""
+"czas trwania: wartość %u nie jest dozwolona jako czas trwania; jest to "
+"specjalna wartość oznaczająca na zawsze, co jest domyślne; pomiń klucz "
+"trwania aby wiadomość istniała na zawsze"
 
 #: ../../src/events/event_message.cc:103
 #, c-format
 msgid "status_change: \"%s\" is not a message_is_read_or_archived trigger"
 msgstr ""
+"zmiana_statusu: \"%s\" nie jest wyzwalaczem "
+"wiadomość_jest_przeczytana_lub_archiwizowana"
 
 #: ../../src/events/event_message_box.cc:41
 msgid "No text defined"
@@ -1525,7 +1538,7 @@ msgstr "nie ma przycisków, przynajmniej jeden jest wymagany"
 #: ../../src/events/event_message_box.cc:149
 #, c-format
 msgid "is not modal although %s=%s"
-msgstr ""
+msgstr "nie jest modalny i gdyż %s=%s"
 
 #: ../../src/events/event_message_box.cc:154
 #, c-format
@@ -1535,7 +1548,7 @@ msgstr "%s odwołuje się od \"%s\", który/a nie jest licznikiem czasu"
 #: ../../src/events/event_message_box.cc:169
 #, c-format
 msgid "(message box): %s"
-msgstr ""
+msgstr "(okienko wiadomości): %s"
 
 #: ../../src/events/event_move_view.cc:50
 #: ../../src/events/event_player_area.cc:55
@@ -1546,7 +1559,7 @@ msgstr "błędne współrzędne (%i, %i)"
 #: ../../src/events/event_move_view.cc:56
 #, c-format
 msgid "(move view): %s"
-msgstr ""
+msgstr "(przesuń widok): %s"
 
 #: ../../src/events/event_player_allowed_retreat_change.cc:45
 #: ../../src/events/event_player_retreat_change.cc:45
@@ -1974,35 +1987,35 @@ msgstr[0] "%u(+%u) żołnierz"
 msgstr[1] "%u(+%u) żołnierze"
 msgstr[2] "%u(+%u) żołnierzy"
 
-#: ../../src/logic/militarysite.cc:574
+#: ../../src/logic/militarysite.cc:580
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
 msgstr "%sPrzeciwnik pokonał twoich żołnierzy w: %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:581
+#: ../../src/logic/militarysite.cc:587
 msgid "Militarysite lost!"
 msgstr "Stracono obóz wojskowy!"
 
-#: ../../src/logic/militarysite.cc:654
+#: ../../src/logic/militarysite.cc:660
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
 msgstr "%sTwoi żołnierze pokonali przeciwnika w: %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:661
+#: ../../src/logic/militarysite.cc:667
 msgid "Enemy at site defeated!"
 msgstr "Pokonano przeciwnika na danym terenie!"
 
-#: ../../src/logic/militarysite.cc:709
+#: ../../src/logic/militarysite.cc:715
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
 msgstr "%sTwój %s napotkał napastnika.</p>"
 
-#: ../../src/logic/militarysite.cc:710
+#: ../../src/logic/militarysite.cc:716
 #, c-format
 msgid "%sYour %s is under attack.</p>"
 msgstr "%sTwój %s jest atakowany.</p>"
 
-#: ../../src/logic/militarysite.cc:720
+#: ../../src/logic/militarysite.cc:726
 msgid "You are under attack"
 msgstr "Zostałeś zaatakowany"
 
@@ -2256,7 +2269,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:602
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "śpij: %s"
 
 #: ../../src/logic/production_program.cc:624
 msgid "idle animation is default; calling is not allowed"
@@ -2945,63 +2958,63 @@ msgstr "Gra rozpoczęła się po twojej próbie podłączenia."
 msgid "Server has crashed and performed an emergency save."
 msgstr "Serwer zawiesił się i awaryjnie zapisał grę."
 
-#: ../../src/network/nethost.cc:832
+#: ../../src/network/nethost.cc:838
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "Gospodarz wysłał gracza %s do lobby!"
 
-#: ../../src/network/nethost.cc:1132
+#: ../../src/network/nethost.cc:1138
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1208
+#: ../../src/network/nethost.cc:1214
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr "UWAGA: %s używa wersję: %s, kiedy serwer używa wersję: %s"
 
-#: ../../src/network/nethost.cc:1255
+#: ../../src/network/nethost.cc:1261
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s dołączył do gry"
 
-#: ../../src/network/nethost.cc:1279
+#: ../../src/network/nethost.cc:1285
 msgid "Client reports time to host that is running backwards."
 msgstr "Klient zgłasza czas gospodarzowi który leci do tyłu."
 
-#: ../../src/network/nethost.cc:1282
+#: ../../src/network/nethost.cc:1288
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Klient symuluje poza czas gry dozwolony przez gospodarza."
 
-#: ../../src/network/nethost.cc:1286
+#: ../../src/network/nethost.cc:1292
 msgid "Client did not submit sync report in time."
 msgstr "Klient nie przesłał raportu synchronizacji na czas."
 
-#: ../../src/network/nethost.cc:1466
+#: ../../src/network/nethost.cc:1472
 msgid "Client and host have become desynchronized."
 msgstr "Klient i serwer przestali być zsynchronizowanii"
 
-#: ../../src/network/nethost.cc:1512
+#: ../../src/network/nethost.cc:1518
 msgid "New User"
 msgstr "Nowy gracz"
 
-#: ../../src/network/nethost.cc:1517
+#: ../../src/network/nethost.cc:1523
 msgid "The game has already started."
 msgstr "Gra już się rozpoczęła."
 
-#: ../../src/network/nethost.cc:1535
+#: ../../src/network/nethost.cc:1541
 msgid "Connection to client lost."
 msgstr "Utracono połączenie z klientem."
 
-#: ../../src/network/nethost.cc:1549
+#: ../../src/network/nethost.cc:1555
 msgid "Client sent malformed commands: "
 msgstr "Klient wysłał nieprawidłowe polecenie: "
 
-#: ../../src/network/nethost.cc:1582
+#: ../../src/network/nethost.cc:1588
 msgid "Game is running already, but client has not connected fully"
 msgstr "Gra już trwa, ale klient nie jest w pełni podłączony."
 
-#: ../../src/network/nethost.cc:1586
+#: ../../src/network/nethost.cc:1592
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
@@ -3010,57 +3023,57 @@ msgstr ""
 "Pierwsze polecenie wysłane przez klienta to %u zamiast HELLO. Klient "
 "prawdopodobnie używa nikompatybilnej wersji."
 
-#: ../../src/network/nethost.cc:1592
+#: ../../src/network/nethost.cc:1598
 msgid "Server uses a different protocol version."
 msgstr "Serwer używa innej wersji protokołu."
 
-#: ../../src/network/nethost.cc:1674
+#: ../../src/network/nethost.cc:1680
 msgid "Client sent TIME command even though game is not running."
 msgstr "Klient wysłał komendę TIME i gdyż gra się jeszcze nie zaczeła."
 
-#: ../../src/network/nethost.cc:1682
+#: ../../src/network/nethost.cc:1688
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 "Klient wysłał komendę PLAYERCOMMAND i gdyż gra się jeszcze nie zaczeła."
 
-#: ../../src/network/nethost.cc:1694
+#: ../../src/network/nethost.cc:1700
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1703
+#: ../../src/network/nethost.cc:1709
 msgid "Client sent unexpected synchronization report."
 msgstr "Klient wysłał nieoczekiwany raport synchronizacji."
 
-#: ../../src/network/nethost.cc:1739 ../../src/network/nethost.cc:1751
+#: ../../src/network/nethost.cc:1745 ../../src/network/nethost.cc:1757
 msgid "Client requests file altough none is available to send."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1741
+#: ../../src/network/nethost.cc:1747
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1762
+#: ../../src/network/nethost.cc:1768
 msgid "Client requests file part that does not exist."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1765
+#: ../../src/network/nethost.cc:1771
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1773
+#: ../../src/network/nethost.cc:1779
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1783
+#: ../../src/network/nethost.cc:1789
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Klient wysłał nieznane polecenie numer %u"
 
-#: ../../src/network/nethost.cc:1839
+#: ../../src/network/nethost.cc:1845
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s opuścił grę (%s)"
@@ -3992,7 +4005,7 @@ msgstr "Następny"
 #: ../../src/wui/building_ui.cc:159
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr ""
+msgstr "Na pewno chcesz zniszczyć %s?"
 
 #: ../../src/wui/building_ui.cc:205
 msgid "Destroy building?"
@@ -4409,7 +4422,7 @@ msgstr "%u.%ux"
 
 #: ../../src/wui/interactive_base.cc:234
 msgid "PAUSE"
-msgstr ""
+msgstr "PAUZA"
 
 #: ../../src/wui/interactive_base.cc:254
 #, c-format
@@ -4449,8 +4462,9 @@ msgstr "Informacje o towarach"
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u nowa wiadomość"
+msgstr[1] "%u nowe wiadomości"
+msgstr[2] "%u nowych wiadomości"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
@@ -4462,7 +4476,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Pseudonim:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "email (optional):"
@@ -4474,11 +4488,11 @@ msgstr "UWAGA: Hasło będzie zapisane i wyświetlane otwartym tekstem!"
 
 #: ../../src/wui/login_box.cc:50
 msgid "Password:"
-msgstr ""
+msgstr "Hasło:"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Register new account"
-msgstr ""
+msgstr "Zarejestruj nowe konto"
 
 #: ../../src/wui/login_box.cc:62
 msgid "Automatically use this login information from now on."
@@ -4486,7 +4500,7 @@ msgstr "Używaj podanych informacji logowania automatycznie."
 
 #: ../../src/wui/login_box.cc:69
 msgid "Login"
-msgstr ""
+msgstr "Logowanie"
 
 #: ../../src/wui/login_box.cc:90
 msgid "Empty Nickname"
@@ -4531,7 +4545,7 @@ msgstr "Drogi"
 
 #: ../../src/wui/minimap.cc:178
 msgid "Zoom"
-msgstr ""
+msgstr "Przybliż"
 
 #: ../../src/wui/stock_menu.cc:70
 msgid "Show wares"
@@ -4715,7 +4729,7 @@ msgstr "Ciągi zdarzeń"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:85
 msgid "Triggers"
-msgstr ""
+msgstr "Wyzwalacze"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:103
 #: ../../src/editor/ui_menus/editor_event_menu.cc:136
@@ -5019,11 +5033,11 @@ msgstr "Surowce:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Low"
-msgstr ""
+msgstr "Mało"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "High"
-msgstr ""
+msgstr "Dużo"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:281
 msgid "Map ID:"
@@ -5532,7 +5546,7 @@ msgstr "brak opisu"
 
 #: ../../src/wui/game_message_menu.h:63
 msgid "Select"
-msgstr ""
+msgstr "Wybierz"
 
 #: ../../src/wui/game_message_menu.h:64
 msgid "Status"

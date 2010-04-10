@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-21 10:15+0100\n"
-"PO-Revision-Date: 2010-03-24 10:10+0000\n"
+"POT-Creation-Date: 2010-03-25 13:31+0100\n"
+"PO-Revision-Date: 2010-04-03 12:52+0000\n"
 "Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-03-25 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-04-04 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -336,7 +336,7 @@ msgstr "Widelands не удалось подключиться к хосту."
 msgid "The address of the game server is invalid"
 msgstr "Неверный адрес игрового сервера"
 
-#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1183
+#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1189
 msgid "Player"
 msgstr "Игрок"
 
@@ -585,7 +585,7 @@ msgstr "Появляются на складе."
 #: ../../src/writeHTML.cc:702
 #, c-format
 msgid "Needs experience from working between %u and %u times to become"
-msgstr ""
+msgstr "Требуется опыт: надо отработать от %u до %u раз, чтобы стать"
 
 #: ../../src/writeHTML.cc:710
 #, c-format
@@ -859,7 +859,7 @@ msgstr "check soldier"
 
 #: ../../src/writeHTML.cc:1334 ../../src/writeHTML.cc:1358
 msgid "hp"
-msgstr ""
+msgstr "зд"
 
 #: ../../src/writeHTML.cc:1335 ../../src/writeHTML.cc:1359
 msgid "attack"
@@ -867,23 +867,23 @@ msgstr "атака"
 
 #: ../../src/writeHTML.cc:1336 ../../src/writeHTML.cc:1360
 msgid "defense"
-msgstr ""
+msgstr "defense"
 
 #: ../../src/writeHTML.cc:1337 ../../src/writeHTML.cc:1361
 msgid "evade"
-msgstr ""
+msgstr "evade"
 
 #: ../../src/writeHTML.cc:1350
 msgid "Documentation for program command train"
-msgstr ""
+msgstr "Документация по команде train"
 
 #: ../../src/writeHTML.cc:1352
 msgid "train"
-msgstr ""
+msgstr "train"
 
 #: ../../src/writeHTML.cc:1374
 msgid "Documentation for program command playFX"
-msgstr ""
+msgstr "Документация по команде playFX"
 
 #: ../../src/writeHTML.cc:1411 ../../src/writeHTML.cc:1417
 msgid "Ware types"
@@ -1181,18 +1181,18 @@ msgstr "%u солдат, но только %u разрешено"
 #: ../../src/events/event_building.cc:312
 #, c-format
 msgid "(soldiercontrol): %s"
-msgstr ""
+msgstr "(soldiercontrol): %s"
 
 #: ../../src/events/event_building.cc:315
 #, c-format
 msgid "(productionsite): %s"
-msgstr ""
+msgstr "(productionsite): %s"
 
 #: ../../src/events/event_building.cc:322
 #: ../../src/trigger/trigger_building.cc:58
 #, c-format
 msgid "(building): %s"
-msgstr ""
+msgstr "(building): %s"
 
 #: ../../src/events/event_building.cc:422
 #, c-format
@@ -1214,7 +1214,7 @@ msgstr "игрок %u не существует"
 #: ../../src/events/event_expire_message.cc:55
 #, c-format
 msgid "player %u's message %u does not exist"
-msgstr ""
+msgstr "для игрока %u не существует сообщение %u"
 
 #: ../../src/events/event_expire_message.cc:61
 #, c-format
@@ -1234,7 +1234,7 @@ msgstr ""
 #: ../../src/events/event_message.cc:111
 #, c-format
 msgid "(expire message): %s"
-msgstr ""
+msgstr "(expire message): %s"
 
 #: ../../src/events/event_factory.cc:61
 msgid "Allow worker types"
@@ -1284,6 +1284,7 @@ msgstr "Захватить местность"
 msgid ""
 "Gives ownership of all unowned locations within an area to the player."
 msgstr ""
+"Отдает во владение игроку все незанятые никем участки в пределах области."
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
@@ -1295,11 +1296,11 @@ msgstr "Создать флаг"
 
 #: ../../src/events/event_factory.cc:98
 msgid "Create immovable"
-msgstr ""
+msgstr "Создать неподвижное"
 
 #: ../../src/events/event_factory.cc:99
 msgid "Create an immovable."
-msgstr ""
+msgstr "Create an immovable."
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
@@ -1367,7 +1368,7 @@ msgstr "Установить таймер"
 
 #: ../../src/events/event_factory.cc:142
 msgid "Set a timer to trigger after a certain duration."
-msgstr ""
+msgstr "Установить таймер, который сработает через определенное время"
 
 #: ../../src/events/event_factory.cc:146
 msgid "Unhide area"
@@ -1466,7 +1467,7 @@ msgstr "Прекратить существование ранее создан�
 #: ../../src/events/event_flag.cc:44
 #, c-format
 msgid "(flag): %s"
-msgstr ""
+msgstr "(flag): %s"
 
 #: ../../src/events/event_forbid_building_types.cc:44
 #: ../../src/events/event_forbid_retreat_change.cc:43
@@ -1478,12 +1479,12 @@ msgstr "Запретить"
 #: ../../src/events/event_immovable.cc:44
 #, c-format
 msgid "(immovable): %s"
-msgstr ""
+msgstr "(immovable): %s"
 
 #: ../../src/events/event_lua.cc:42
 #, c-format
 msgid "(lua event): %s"
-msgstr ""
+msgstr "(lua event): %s"
 
 #: ../../src/events/event_message.cc:67
 #, c-format
@@ -1497,6 +1498,10 @@ msgid ""
 "meaning forever, which is the default; omit the duration key to make the "
 "message exist forever"
 msgstr ""
+"продолжительность: значение \"%u\" не разрешено для указания "
+"продолжительности; это специальное значение, обозначающее \"постоянно\", "
+"которое ставится по умолчанию; чтобы сообщение существовало постоянно, "
+"просто не указывайте продолжительность"
 
 #: ../../src/events/event_message.cc:103
 #, c-format
@@ -1533,7 +1538,7 @@ msgstr "%s отсылает к \"%s\", не являющийся таймеро�
 #: ../../src/events/event_message_box.cc:169
 #, c-format
 msgid "(message box): %s"
-msgstr ""
+msgstr "(message box): %s"
 
 #: ../../src/events/event_move_view.cc:50
 #: ../../src/events/event_player_area.cc:55
@@ -1544,18 +1549,18 @@ msgstr "недопустимые координаты (%i, %i)"
 #: ../../src/events/event_move_view.cc:56
 #, c-format
 msgid "(move view): %s"
-msgstr ""
+msgstr "(move view): %s"
 
 #: ../../src/events/event_player_allowed_retreat_change.cc:45
 #: ../../src/events/event_player_retreat_change.cc:45
 #, c-format
 msgid "(player allowed retreat change): %s"
-msgstr ""
+msgstr "(player allowed retreat change): %s"
 
 #: ../../src/events/event_player_area.cc:61
 #, c-format
 msgid "(player area): %s"
-msgstr ""
+msgstr "(player area): %s"
 
 #: ../../src/events/event_player_building_types.cc:54
 #: ../../src/events/event_player_worker_types.cc:55
@@ -1571,12 +1576,12 @@ msgstr "нет типов построек"
 #: ../../src/events/event_player_building_types.cc:61
 #, c-format
 msgid "(player building types): %s"
-msgstr ""
+msgstr "(player building types): %s"
 
 #: ../../src/events/event_player_seeall.cc:45
 #, c-format
 msgid "(player see all): %s"
-msgstr ""
+msgstr "(player see all): %s"
 
 #: ../../src/events/event_player_worker_types.cc:52
 #, c-format
@@ -1590,7 +1595,7 @@ msgstr "нет типов работников"
 #: ../../src/events/event_player_worker_types.cc:63
 #, c-format
 msgid "(player worker types): %s"
-msgstr ""
+msgstr "(player worker types): %s"
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
@@ -1602,7 +1607,7 @@ msgstr ""
 
 #: ../../src/events/event_road.cc:45
 msgid "there is only 1 step, must be at least 2"
-msgstr ""
+msgstr "здесь только 1 шаг, а надо не меньше 2"
 
 #: ../../src/events/event_road.cc:51
 #, c-format
@@ -1621,12 +1626,12 @@ msgstr ""
 #: ../../src/events/event_set_player_flag_style.cc:41
 #, c-format
 msgid "player's tribe does not define flag style \"%s\""
-msgstr ""
+msgstr "player's tribe does not define flag style \"%s\""
 
 #: ../../src/events/event_set_player_flag_style.cc:45
 #, c-format
 msgid "(set player flag style): %s"
-msgstr ""
+msgstr "(set player flag style): %s"
 
 #: ../../src/events/event_set_player_frontier_style.cc:41
 #, c-format
@@ -1636,7 +1641,7 @@ msgstr ""
 #: ../../src/events/event_set_player_frontier_style.cc:45
 #, c-format
 msgid "(set player frontier style): %s"
-msgstr ""
+msgstr "(set player frontier style): %s"
 
 #: ../../src/events/event_set_player_style.cc:43
 #, c-format
@@ -1964,35 +1969,35 @@ msgid_plural "%u(+%u) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/militarysite.cc:574
+#: ../../src/logic/militarysite.cc:580
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
 msgstr "%sВраг победил ваших солдат в %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:581
+#: ../../src/logic/militarysite.cc:587
 msgid "Militarysite lost!"
 msgstr "Военая постройка потеряна!"
 
-#: ../../src/logic/militarysite.cc:654
+#: ../../src/logic/militarysite.cc:660
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
 msgstr "%sВаши солдаты победили врага в %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:661
+#: ../../src/logic/militarysite.cc:667
 msgid "Enemy at site defeated!"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:709
+#: ../../src/logic/militarysite.cc:715
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
 msgstr "%sВаш %s обнаружил агрессора .</p>"
 
-#: ../../src/logic/militarysite.cc:710
+#: ../../src/logic/militarysite.cc:716
 #, c-format
 msgid "%sYour %s is under attack.</p>"
 msgstr "%sВаш %s атакован.</p>"
 
-#: ../../src/logic/militarysite.cc:720
+#: ../../src/logic/militarysite.cc:726
 msgid "You are under attack"
 msgstr "Вы атакованы"
 
@@ -2932,119 +2937,119 @@ msgstr ""
 msgid "Server has crashed and performed an emergency save."
 msgstr ""
 
-#: ../../src/network/nethost.cc:832
+#: ../../src/network/nethost.cc:838
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1132
+#: ../../src/network/nethost.cc:1138
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1208
+#: ../../src/network/nethost.cc:1214
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1255
+#: ../../src/network/nethost.cc:1261
 #, c-format
 msgid "%s has joined the game"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1279
+#: ../../src/network/nethost.cc:1285
 msgid "Client reports time to host that is running backwards."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1282
+#: ../../src/network/nethost.cc:1288
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1286
+#: ../../src/network/nethost.cc:1292
 msgid "Client did not submit sync report in time."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1466
+#: ../../src/network/nethost.cc:1472
 msgid "Client and host have become desynchronized."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1512
+#: ../../src/network/nethost.cc:1518
 msgid "New User"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1517
+#: ../../src/network/nethost.cc:1523
 msgid "The game has already started."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1535
+#: ../../src/network/nethost.cc:1541
 msgid "Connection to client lost."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1549
+#: ../../src/network/nethost.cc:1555
 msgid "Client sent malformed commands: "
 msgstr ""
 
-#: ../../src/network/nethost.cc:1582
+#: ../../src/network/nethost.cc:1588
 msgid "Game is running already, but client has not connected fully"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1586
+#: ../../src/network/nethost.cc:1592
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
 "is running an incompatible version."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1592
+#: ../../src/network/nethost.cc:1598
 msgid "Server uses a different protocol version."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1674
+#: ../../src/network/nethost.cc:1680
 msgid "Client sent TIME command even though game is not running."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1682
+#: ../../src/network/nethost.cc:1688
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1694
+#: ../../src/network/nethost.cc:1700
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1703
+#: ../../src/network/nethost.cc:1709
 msgid "Client sent unexpected synchronization report."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1739 ../../src/network/nethost.cc:1751
+#: ../../src/network/nethost.cc:1745 ../../src/network/nethost.cc:1757
 msgid "Client requests file altough none is available to send."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1741
+#: ../../src/network/nethost.cc:1747
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1762
+#: ../../src/network/nethost.cc:1768
 msgid "Client requests file part that does not exist."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1765
+#: ../../src/network/nethost.cc:1771
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1773
+#: ../../src/network/nethost.cc:1779
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1783
+#: ../../src/network/nethost.cc:1789
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1839
+#: ../../src/network/nethost.cc:1845
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s вышел из игры (%s)"

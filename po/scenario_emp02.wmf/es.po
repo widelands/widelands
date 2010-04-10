@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:16+0000\n"
-"Last-Translator: Peter Schwanemann <Unknown>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-02 20:04+0000\n"
+"Last-Translator: Juan Eduardo Riva <juaneduardoriva@gmail.com>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-04-03 03:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -27,8 +27,11 @@ msgstr "Imperio 2: Avanzadilla hacia el exilio"
 msgid ""
 "Finally the ship was repaired, so Lutius and his people again went on the "
 "quest to find a good place for a new beginning. Only few days later they "
-"land on a green, mediterranean island, looking like paradise."
+"land on a green, Mediterranean island, looking like paradise."
 msgstr ""
+"Finalmente el barco fue reparado, entonces Lutius y su gente nuevamente se "
+"lanza al desafió de encontrar un lugar apto para un nuevo comienzo. Unos "
+"pocos días después desembarcan en una verde y paradisíaca isla mediterránea."
 
 #: ../../campaigns/emp02.wmf/event:109
 #: ../../campaigns/emp02.wmf/event:136
@@ -162,6 +165,8 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/objective:33
 msgid "* Expand to the east, to start mining marble from the mountain."
 msgstr ""
+"* Expandirse al este, para comenzar a explotar las minas de mármol de la "
+"montaña."
 
 #: ../../campaigns/emp02.wmf/event:281
 msgid "Marble on the mountain"
@@ -169,7 +174,7 @@ msgstr "Mármol en la montaña"
 
 #: ../../campaigns/emp02.wmf/event:321
 msgid "Saledus is amazed"
-msgstr ""
+msgstr "Saledus esta asombrado"
 
 #: ../../campaigns/emp02.wmf/event:323
 msgid ""
@@ -305,7 +310,7 @@ msgstr "Mientras el tiempo pasa"
 
 #: ../../campaigns/emp02.wmf/event:502
 msgid "OK"
-msgstr ""
+msgstr "Aceptar"
 
 #: ../../campaigns/emp02.wmf/event:510
 msgid ""
@@ -317,6 +322,13 @@ msgid ""
 "do...<br><br> You have completed this mission. You may continue playing if "
 "you wish, otherwise move on to the next mission.\" "
 msgstr ""
+" \"Hoy un palomo aterrizo en nuestra isla.<br> Trajo un mensaje que me lleno "
+"de oscuros pensamientos y renovo mis miedos.<br> El mensaje estaba dirigido "
+"a mi, suplicándome que regresara a Fremil.<br> Decía que el Imperio está en "
+"guerra con los Bárbaros. Ellos fueron atacaron desde norte por la tribu que "
+"se me prohibió atacar.<br> A mi enter, es claro lo que debo hacer...<br><br> "
+"Usted ha completado esta misión. Usted puede continuar jugando si lo desea, "
+"de lo contrario avance a la próxima misión.\" "
 
 #: ../../campaigns/emp02.wmf/event:512
 msgid "A Message"
@@ -360,15 +372,15 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Provea a sus mineros de comida"
 
 #: ../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
-msgstr ""
+msgstr "Proteja su frontera este"
 
 #: ../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
-msgstr ""
+msgstr "Destruya a la tribu Bárbara"
 
 #~ msgid "Second mission of the Empire campaign"
 #~ msgstr "Segunda misión de la campaña del Imperio"

@@ -2,23 +2,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-17 15:58+0000\n"
-"Last-Translator: Treecko <Unknown>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-02 14:24+0000\n"
+"Last-Translator: Ulite <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-18 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-04-03 03:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/COPYING:1
 msgid "License"
-msgstr "Licens"
+msgstr ""
 
 #: ../../txts/COPYING:3
 msgid "GNU general public licence"
-msgstr ""
+msgstr "GNU general public licence"
 
 #: ../../txts/COPYING:6
 msgid "Version 2, June 1991<br></p></rt>"
@@ -31,6 +31,10 @@ msgid ""
 "distribute verbatim copies of this license document, but changing it is not "
 "allowed.<br>"
 msgstr ""
+"Copyright (C) 1989, 1991 Free Software Foundation, Inc.<br>59 Temple Place, "
+"Suite 330, Boston, MA 02111-1307 USA<br>Kopiering och distribuering av detta "
+"licensdokument är tillåten för alla, men att göra förändringar är "
+"förbjudet.<br>"
 
 #: ../../txts/COPYING:11
 msgid "Preamble"
@@ -247,6 +251,9 @@ msgid ""
 "particular circumstance, the balance of the section is intended to apply and "
 "the section as a whole is intended to apply in other circumstances."
 msgstr ""
+"Om delar av den här paragrafen förklaras ogiltig eller annars inte kan "
+"verkställas skall resten av paragrafen äga fortsatt giltighet och paragrafen "
+"i sin helhet äga fortsatt giltighet i andra sammanhang."
 
 #: ../../txts/COPYING:54
 msgid ""
@@ -743,150 +750,161 @@ msgid "Elders"
 msgstr "Överste"
 
 #: ../../txts/developers:19
-#: ../../txts/developers:316
+#: ../../txts/developers:318
 msgid "Graphics"
 msgstr "Grafik"
 
 #: ../../txts/developers:24
-#: ../../txts/developers:309
+#: ../../txts/developers:311
 msgid "Homepage"
 msgstr "Hemsida"
 
 #: ../../txts/developers:29
-#: ../../txts/developers:321
+#: ../../txts/developers:323
 msgid "Sound"
 msgstr "Ljud"
 
-#: ../../txts/developers:34
-#: ../../txts/developers:326
-msgid "Translation"
-msgstr "Översättning"
-
-#: ../../txts/developers:42
+#: ../../txts/developers:38
 msgid "Coders"
 msgstr "Programmering"
 
-#: ../../txts/developers:74
+#: ../../txts/developers:70
 msgid "Graphicians"
 msgstr "Grafiska designers"
 
-#: ../../txts/developers:99
+#: ../../txts/developers:97
 msgid "Musicians"
 msgstr "Musikskapare"
 
-#: ../../txts/developers:110
+#: ../../txts/developers:108
 msgid "Sound Effects"
 msgstr "Ljudeffekter"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:117
 msgid "Maps and Missions"
 msgstr "Banor och uppdrag"
 
-#: ../../txts/developers:132
+#: ../../txts/developers:130
 msgid "Campaign Story"
 msgstr "Kampanjberättelse"
 
-#: ../../txts/developers:135
+#: ../../txts/developers:133
 msgid "Barbarian"
 msgstr "Barbarer"
 
-#: ../../txts/developers:141
+#: ../../txts/developers:139
 msgid "Empire"
 msgstr "Imperiet"
 
-#: ../../txts/developers:147
+#: ../../txts/developers:145
 msgid "Translators"
 msgstr "Översättare"
 
-#: ../../txts/developers:151
+#: ../../txts/developers:148
+msgid ""
+"NOTE: this list holds people that translated Widelands before we moved to "
+"launchpad.net. "
+msgstr ""
+
+#: ../../txts/developers:149
+msgid ""
+"See https://translations.launchpad.net/widelands for a list of people that "
+"helped to translate Widelands via launchpad.net."
+msgstr ""
+
+#: ../../txts/developers:153
 msgid "Czech"
 msgstr "Tjeckiska"
 
-#: ../../txts/developers:158
+#: ../../txts/developers:160
 msgid "Dansk"
 msgstr "Danska"
 
-#: ../../txts/developers:164
+#: ../../txts/developers:166
 msgid "Dutch"
 msgstr "Holländska"
 
-#: ../../txts/developers:171
+#: ../../txts/developers:173
 msgid "Finnish"
 msgstr "Finska"
 
-#: ../../txts/developers:177
+#: ../../txts/developers:179
 msgid "French"
 msgstr "Franska"
 
-#: ../../txts/developers:184
+#: ../../txts/developers:186
 msgid "Galician"
 msgstr "Galliska"
 
-#: ../../txts/developers:189
+#: ../../txts/developers:191
 msgid "German"
 msgstr "Tyska"
 
-#: ../../txts/developers:201
+#: ../../txts/developers:203
 msgid "Hebrew"
 msgstr "Hebreiska"
 
-#: ../../txts/developers:206
+#: ../../txts/developers:208
 msgid "Hungarian"
 msgstr "Ungerska"
 
-#: ../../txts/developers:211
+#: ../../txts/developers:213
 msgid "Italian"
 msgstr "Italienska"
 
-#: ../../txts/developers:216
+#: ../../txts/developers:218
 msgid "Polish"
 msgstr "Polska"
 
-#: ../../txts/developers:224
+#: ../../txts/developers:226
 msgid "Russian"
 msgstr "Ryska"
 
-#: ../../txts/developers:229
+#: ../../txts/developers:231
 msgid "Slovak"
 msgstr "Slovakiska"
 
-#: ../../txts/developers:234
+#: ../../txts/developers:236
 msgid "Spanish"
 msgstr "Spanska"
 
-#: ../../txts/developers:239
+#: ../../txts/developers:241
 msgid "Swedish"
 msgstr "Svenska"
 
-#: ../../txts/developers:247
+#: ../../txts/developers:249
 msgid "Packagers"
 msgstr "Paketerare"
 
-#: ../../txts/developers:251
+#: ../../txts/developers:253
 msgid "Linux Distributions"
 msgstr "Linuxdistributioner"
 
-#: ../../txts/developers:262
+#: ../../txts/developers:264
 msgid "Other Unix Distributions"
 msgstr "Övriga Unixdistributioner"
 
-#: ../../txts/developers:271
+#: ../../txts/developers:273
 msgid "Non Unix Distributions"
 msgstr "Icke-UNIX-distributioner"
 
-#: ../../txts/developers:282
+#: ../../txts/developers:284
 msgid "Homepage Coders"
 msgstr ""
 
-#: ../../txts/developers:291
+#: ../../txts/developers:293
 msgid "Documentation, Help and Wiki"
 msgstr ""
 
-#: ../../txts/developers:305
+#: ../../txts/developers:307
 msgid "Former elders"
 msgstr "Före detta åldermän"
 
-#: ../../txts/developers:332
+#: ../../txts/developers:328
+msgid "Translation"
+msgstr "Översättning"
+
+#: ../../txts/developers:335
 msgid "Other"
 msgstr "Övrigt"
 
@@ -1122,6 +1140,11 @@ msgstr ""
 msgid ""
 "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be "
 "printed as '-> Nickname is tired'."
+msgstr ""
+
+#: ../../txts/tips/multiplayer.tip:10
+msgid ""
+"Use '@name' at the beginning of a chat message to send it to only one player."
 msgstr ""
 
 #: ../../txts/tips/singleplayer.tip:2
