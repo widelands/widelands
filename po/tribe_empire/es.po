@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-21 09:15+0000\n"
-"PO-Revision-Date: 2010-03-21 22:48+0000\n"
-"Last-Translator: Agustín Vela <Unknown>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-02 18:53+0000\n"
+"Last-Translator: Juan Eduardo Riva <juaneduardoriva@gmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-23 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-04-03 03:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
-msgstr "Una lanza mejorada, con punta de acero."
+msgstr "Esta es una lanza mejorada, con punta de acero."
 
 #: ../../tribes/empire/arena/conf:13
 #: ../../tribes/empire/colosseum/conf:27
@@ -32,7 +32,7 @@ msgstr "Dormir"
 #: ../../tribes/empire/arena/conf:14
 #: ../../tribes/empire/colosseum/conf:28
 msgid "Upgrade soldier evade 0"
-msgstr "Mejorar escapada de soldado 0"
+msgstr "Free-Range"
 
 #: ../../tribes/empire/arena/conf:15
 #: ../../tribes/empire/colosseum/conf:29
@@ -206,15 +206,15 @@ msgstr "Cenizas"
 
 #: ../../tribes/empire/conf:40
 msgid "Field medium"
-msgstr "Campo mediano"
+msgstr "Campo a medio crecer"
 
 #: ../../tribes/empire/conf:41
 msgid "Field small"
-msgstr "Campo pequeño"
+msgstr "Campo empezando a crecer"
 
 #: ../../tribes/empire/conf:42
 msgid "Field tiny"
-msgstr "Campo diminuto"
+msgstr "Campo recién plantado"
 
 #: ../../tribes/empire/conf:43
 msgid "Field ripe"
@@ -997,9 +997,9 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
-"La carne es muy energética. Se usa en las posadas y tabernas para preparar "
-"la comida de los mineros, y en los campos de entrenamiento para mantener a "
-"los guerreros fuertes."
+"La carne contiene mucha energía. Es usada en las posadas y tabernas para "
+"preparar el almuerzo para los mineros, y en los campos de entrenamiento para "
+"mantener a los guerreros fuertes."
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."

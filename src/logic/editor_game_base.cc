@@ -330,7 +330,7 @@ Building & Editor_Game_Base::warp_building
 {
 	Player & plr = player(owner);
 	Tribe_Descr const & tribe = plr.tribe();
-	return 
+	return
 		tribe.get_building_descr(idx)->create
 			(*this, plr, c,
 			 false,

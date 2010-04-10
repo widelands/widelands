@@ -9,8 +9,8 @@ thatchreed=1
 
 [idle]
 pics=warehouse_i_??.png  # ???
-hotspot=56 77
+hotspot=58 75
 
 [build]
 pics=warehouse_b_??.png  # ???
-hotspot=56 72
+hotspot=58 70

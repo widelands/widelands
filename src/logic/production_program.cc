@@ -62,7 +62,7 @@ void ProductionProgram::parse_ware_type_group
 		char const terminator = *parameters;
 		*parameters = '\0';
 		Ware_Index const ware_index = tribe.safe_ware_index(ware);
-		for (wl_const_range<Ware_Types> i(inputs);;++i)
+		for (wl_const_range<Ware_Types> i(inputs);; ++i)
 			if (i.empty())
 				throw game_data_error
 					(_
@@ -395,7 +395,7 @@ void ProductionProgram::ActReturn::execute
 		if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
 			char const * const operator_string = _(" and ");
 			result_string += _(" because: ");
-			for (wl_const_range<Conditions> i(m_conditions);i;)
+			for (wl_const_range<Conditions> i(m_conditions); i;)
 			{
 				if (not (i.front()->evaluate(ps))) //  A condition is false,
 					return ps.program_step(game); //  continue program.
@@ -407,7 +407,7 @@ void ProductionProgram::ActReturn::execute
 		} else { //  "unless a or b or ..." (all conditions must be false)
 			char const * const operator_string = _(" or ");
 			result_string += _(" because not: ");
-			for (wl_const_range<Conditions> i(m_conditions);i;)
+			for (wl_const_range<Conditions> i(m_conditions); i;)
 			{
 				if ((*i.current)->evaluate(ps)) //  A condition is true,
 					return ps.program_step(game); //  continue program.
@@ -685,7 +685,7 @@ void ProductionProgram::ActConsume::execute
 #ifdef HAVE_VARARRAY
 	uint8_t consumption_quantities[nr_warequeues];
 #else
-	std::vector<uint8_t> consumption_quantities(nr_warequeues,0);
+	std::vector<uint8_t> consumption_quantities(nr_warequeues, 0);
 #endif
 	Groups l_groups = m_groups; //  make a copy for local modification
 	//log("ActConsume::execute(%s):\n", ps.descname().c_str());
@@ -747,10 +747,10 @@ void ProductionProgram::ActConsume::execute
 		result_string            += ' ';
 		result_string            += ps.top_state().program->descname();
 		result_string            += _(" because: ");
-		for (wl_const_range<Groups> i(l_groups);i;)
+		for (wl_const_range<Groups> i(l_groups); i;)
 		{
 			assert(i.current->first.size());
-			for(wl_const_range<std::set<Ware_Index> > j(i.current->first);j;)
+			for (wl_const_range<std::set<Ware_Index> > j(i.current->first); j;)
 			{
 				result_string += tribe.get_ware_descr(j.front())->descname();
 				if (j.advance().empty())
@@ -851,7 +851,7 @@ void ProductionProgram::ActProduce::execute
 	std::string result_string = _("Produced ");
 	assert(m_items.size());
 
-	for(wl_const_range<Items> i(m_items);i;)
+	for (wl_const_range<Items> i(m_items); i;)
 	{
 		{
 			uint8_t const count = i.current->second;
@@ -934,7 +934,7 @@ void ProductionProgram::ActRecruit::execute
 	Tribe_Descr const & tribe = ps.owner().tribe();
 	std::string result_string = _("Recruited ");
 	assert(m_items.size());
-	for(wl_const_range<Items> i(m_items);i;)
+	for (wl_const_range<Items> i(m_items); i;)
 	{
 		{
 			uint8_t const count = i.current->second;

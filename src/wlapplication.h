@@ -153,7 +153,7 @@ struct WLApplication {
 	void run();
 
 	/// \warning true if an external entity wants us to quit
-	bool should_die() {return m_should_die;}
+	bool should_die() const {return m_should_die;}
 
 	int32_t get_time();
 

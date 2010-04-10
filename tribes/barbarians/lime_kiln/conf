@@ -26,8 +26,8 @@ produce=grout:2
 
 [idle]
 pics=stonegrinder_i_??.png  # ???
-hotspot=43 50
+hotspot=47 52
 
 [working]
 pics=stonegrinder_i_??.png  # ???
-hotspot=43 50
+hotspot=47 52

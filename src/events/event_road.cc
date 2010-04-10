@@ -67,9 +67,9 @@ Event_Road::Event_Road(Section & s, Editor_Game_Base & egbase) : Event(s) {
 #ifdef HAVE_VARARRAY
 			char optimal_steps[nr_steps + 1];
 #else
-			std::auto_ptr<char> optimal_steps_buf(new char[nr_steps+1]);
+			std::auto_ptr<char> optimal_steps_buf(new char[nr_steps + 1]);
 			if (!optimal_steps_buf.get()) throw wexception("Out of memory");
-			char *optimal_steps = optimal_steps_buf.get();
+			char * optimal_steps = optimal_steps_buf.get();
 #endif
 			for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
 				optimal_steps[i] = '0' + optimal_path[i];
@@ -99,10 +99,10 @@ void Event_Road::Write
 	s.set_Coords ("point",   m_path.get_start());
 	Path::Step_Vector::size_type const nr_steps = m_path.get_nsteps();
 #ifdef HAVE_VARARRAY
-	char steps[nr_steps+1];
+	char steps[nr_steps + 1];
 #else
 	std::string steps;
-	steps.resize(nr_steps+1);
+	steps.resize(nr_steps + 1);
 #endif
 	for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
 		steps[i] = '0' + m_path[i];

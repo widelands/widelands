@@ -291,7 +291,7 @@ IMPLEMENTATION
        i(                                                                     \
           m_next_worker_without_cost_spawn,                                   \
           m_next_worker_without_cost_spawn + nr                               \
-       );                                                                     \
+		);                                                                      \
        i;                                                                     \
        ++i)                                                                   \
       *i.current = value;                                                     \
@@ -358,14 +358,14 @@ void Warehouse::postfill
 	if (ware_types)
 		for
 			(wl_index_range<Ware_Index> i
-			(Ware_Index::First(),tribe().get_nrwares());
+			(Ware_Index::First(), tribe().get_nrwares());
 			 i; ++i, ++ware_types)
 			if (uint32_t const count = *ware_types)
 				insert_wares  (i.current, count);
 	if (worker_types)
 		for
 			(wl_index_range<Ware_Index> i
-			(Ware_Index::First(),tribe().get_nrworkers());
+			(Ware_Index::First(), tribe().get_nrworkers());
 			 i; ++i, ++worker_types)
 			if (uint32_t const count = *worker_types)
 				insert_workers(i.current, count);
@@ -456,7 +456,8 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		std::vector<Ware_Index> const & worker_types_without_cost =
 			tribe().worker_types_without_cost();
 
-		for (wl_index_range<uint32_t> i
+		for
+			(wl_index_range<uint32_t> i
 			(0, worker_types_without_cost.size());
 			i; ++i)
 			if
@@ -464,8 +465,8 @@ void Warehouse::init(Editor_Game_Base & egbase)
 				 	(worker_types_without_cost.at(i.current)))
 				m_next_worker_without_cost_spawn[i.current] = act_time;
 	}
-	// m_next_military_act is not touched in the loading code. Is only needed if there
-	// warehous is created in the game?
+	// m_next_military_act is not touched in the loading code. Is only needed if
+	// there warehous is created in the game?
 	// I assume it's for the conquer_radius thing
 	m_next_military_act =
 		schedule_act

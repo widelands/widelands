@@ -130,7 +130,8 @@ void Event_Player_Building_Types_Option_Menu::Table::fill
 	 Widelands::Event_Player_Building_Types::Building_Types const & bld_types)
 {
 	for
-		(wl_index_range<Widelands::Building_Index> i(Widelands::Building_Index::First(),tribe.get_nrbuildings());
+		(wl_index_range<Widelands::Building_Index> i
+			(Widelands::Building_Index::First(), tribe.get_nrbuildings());
 		 i;
 		 ++i)
 	{

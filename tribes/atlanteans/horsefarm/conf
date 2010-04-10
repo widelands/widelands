@@ -1,3 +1,4 @@
+soundfx=../../../sound/farm/horse
 size=big
 output=horse
 
@@ -24,6 +25,7 @@ work=_Work
 return=skipped when economy needs water and not economy needs horse
 return=skipped when economy needs corn and not economy needs horse
 consume=corn water
+playFX=../../../sound/farm/horse 192
 animate=working 30000 # feeding cute little foals ;)
 recruit=horse
 

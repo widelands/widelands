@@ -1,19 +1,20 @@
 # Widelands po/gl_ES/worlds/desert.po
 # Copyright (C) 2007 Widelands Development Team
-# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
 #
+# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:28+0000\n"
-"Last-Translator: atrueba <Unknown>\n"
-"Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-03-30 21:39+0000\n"
+"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
+"Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-03-31 03:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -21,7 +22,7 @@ msgstr ""
 
 #: ../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
-msgstr "O Equipo de Desenvolvemento de Widelands"
+msgstr "O equipo de desenvolvemento do Widelands"
 
 #: ../../worlds/desert/conf:3
 msgid "Desert"
@@ -122,7 +123,7 @@ msgstr "Palmeira"
 #: ../../worlds/desert/conf:64
 #: ../../worlds/desert/conf:68
 msgid "Palm medium"
-msgstr ""
+msgstr "Palmeira mediana"
 
 #: ../../worlds/desert/conf:53
 #: ../../worlds/desert/conf:57
@@ -130,7 +131,7 @@ msgstr ""
 #: ../../worlds/desert/conf:65
 #: ../../worlds/desert/conf:69
 msgid "Palm small"
-msgstr ""
+msgstr "Palmeira pequena"
 
 #: ../../worlds/desert/conf:54
 #: ../../worlds/desert/conf:58
@@ -138,55 +139,55 @@ msgstr ""
 #: ../../worlds/desert/conf:66
 #: ../../worlds/desert/conf:70
 msgid "Palm tiny"
-msgstr ""
+msgstr "Palmeira anana"
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
-msgstr ""
+msgstr "Faia"
 
 #: ../../worlds/desert/conf:72
 msgid "Beech medium"
-msgstr ""
+msgstr "Faia mediana"
 
 #: ../../worlds/desert/conf:73
 msgid "Beech small"
-msgstr ""
+msgstr "Faia pequena"
 
 #: ../../worlds/desert/conf:74
 msgid "Beech tiny"
-msgstr ""
+msgstr "Faia anana"
 
 #: ../../worlds/desert/conf:75
 msgid "Larch"
-msgstr ""
+msgstr "Alerce"
 
 #: ../../worlds/desert/conf:76
 msgid "Larch medium"
-msgstr ""
+msgstr "Alerce mediano"
 
 #: ../../worlds/desert/conf:77
 msgid "Larch small"
-msgstr ""
+msgstr "Alerce pequeno"
 
 #: ../../worlds/desert/conf:78
 msgid "Larch tiny"
-msgstr ""
+msgstr "Alerce anano"
 
 #: ../../worlds/desert/conf:79
 msgid "Rowan"
-msgstr ""
+msgstr "Sobreira"
 
 #: ../../worlds/desert/conf:80
 msgid "Rowan medium"
-msgstr ""
+msgstr "Sobreira mediana"
 
 #: ../../worlds/desert/conf:81
 msgid "Rowan small"
-msgstr ""
+msgstr "Sobreira pequena"
 
 #: ../../worlds/desert/conf:82
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Sobreira anana"
 
 #: ../../worlds/desert/conf:85
 msgid "Bunny"
