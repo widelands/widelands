@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-04-05 07:19+0000\n"
+"PO-Revision-Date: 2010-04-09 17:31+0000\n"
 "Last-Translator: Dom De Felice <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-06 03:57+0000\n"
+"X-Launchpad-Export-Date: 2010-04-10 03:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -350,7 +350,7 @@ msgstr "Nome"
 #: ../../src/writeHTML.cc:281 ../../src/wui/building_statistics_menu.cc:110
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:120
 msgid "Size"
-msgstr "Dimensione"
+msgstr "Dimensioni"
 
 #: ../../src/writeHTML.cc:283 ../../src/writeHTML.cc:518
 msgid "Buildable"
@@ -452,7 +452,7 @@ msgstr "Costo della costruzione"
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "Luogo di costruzione di %s"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
@@ -461,7 +461,7 @@ msgstr "Miglioramenti"
 #: ../../src/writeHTML.cc:462
 #, c-format
 msgid "%s's enhancement"
-msgstr ""
+msgstr "Miglioramento di %s"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
@@ -520,11 +520,11 @@ msgstr ""
 #: ../../src/writeHTML.cc:671 ../../src/writeHTML.cc:682
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "Creazione di %s"
 
 #: ../../src/writeHTML.cc:693
 msgid "Spawns in warehouses."
-msgstr ""
+msgstr "Si genera nei magazzini."
 
 #: ../../src/writeHTML.cc:702
 #, c-format
@@ -625,7 +625,7 @@ msgstr "Lavoratori"
 #: ../../src/writeHTML.cc:797
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "Impiegato di %s"
 
 #: ../../src/writeHTML.cc:807
 msgid "Inputs"
@@ -634,7 +634,7 @@ msgstr "Ingressi"
 #: ../../src/writeHTML.cc:818
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "Input di %s"
 
 #: ../../src/writeHTML.cc:830
 msgid "Output"
@@ -643,7 +643,7 @@ msgstr "Uscita"
 #: ../../src/writeHTML.cc:841 ../../src/writeHTML.cc:855
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "Output di %s"
 
 #: ../../src/writeHTML.cc:902 ../../src/writeHTML.cc:1045
 #: ../../src/writeHTML.cc:1107 ../../src/writeHTML.cc:1135
@@ -1715,7 +1715,7 @@ msgstr ""
 #: ../../src/logic/constructionsite.cc:168
 #, c-format
 msgid "%u%% built"
-msgstr "%u%% costruire"
+msgstr "%u%% completato"
 
 #: ../../src/logic/game.cc:231
 msgid "Preloading a map"
@@ -3398,7 +3398,7 @@ msgstr "Chiudi"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr "Premi ESC o il bottone del mouse per continuare ..."
+msgstr "Premi ESC o clicca per continuare ..."
 
 #: ../../src/ui_fsmenu/launchgame.cc:58
 msgid "Select map"

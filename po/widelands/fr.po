@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-04-06 21:25+0000\n"
-"Last-Translator: Emmanuel Andry <Unknown>\n"
+"PO-Revision-Date: 2010-04-09 17:39+0000\n"
+"Last-Translator: YS1 <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-04-07 03:43+0000\n"
+"X-Launchpad-Export-Date: 2010-04-10 03:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1639,7 +1639,7 @@ msgstr "(définit le style de drapeau du joueur): %s"
 #: ../../src/events/event_set_player_frontier_style.cc:41
 #, c-format
 msgid "player's tribe does not define frontier style \"%s\""
-msgstr "la tribu du joueur ne définit pas le style de frontière \"% s\""
+msgstr "la tribu du joueur ne définit pas le style de frontière \"%s\""
 
 #: ../../src/events/event_set_player_frontier_style.cc:45
 #, c-format
