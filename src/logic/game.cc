@@ -96,7 +96,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 	if
 		(m_dump &&
-		 static_cast<int32_t>(m_counter - m_next_diskspacecheck) >= 0)
+		 static_cast<uint32_t>((m_counter - m_next_diskspacecheck) >= 0))
 	{
 		m_next_diskspacecheck = m_counter + 16 * 1024 * 1024;
 
