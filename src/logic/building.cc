@@ -386,8 +386,7 @@ void Building::init(Editor_Game_Base & egbase)
 		Flag * flag = dynamic_cast<Flag *>(map.get_immovable(neighb));
 		if (not flag)
 			flag =
-				new Flag
-					(ref_cast<Game, Editor_Game_Base>(egbase), owner(), neighb);
+				new Flag (egbase, owner(), neighb);
 		m_flag = flag;
 		flag->attach_building(egbase, *this);
 	}
