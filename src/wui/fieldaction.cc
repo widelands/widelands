@@ -719,13 +719,18 @@ Build a flag at this field
 */
 void FieldActionWindow::act_buildflag()
 {
-	ref_cast<Game, Editor_Game_Base>(ibase().egbase()).send_player_build_flag
-		(m_plr->player_number(), m_node);
+	upcast(Game, game, &ibase().egbase());
+	if (game)
+		game->send_player_build_flag(m_plr->player_number(), m_node);
+	else
+		m_plr->build_flag(m_node);
+
 	if (ibase().is_building_road())
 		ibase().finish_build_road();
-	else
+	else if (game)
 		ref_cast<Interactive_Player, Interactive_Base>(ibase())
 			.set_flag_to_connect(m_node);
+
 	okdialog();
 }
 
