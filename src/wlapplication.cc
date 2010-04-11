@@ -1245,7 +1245,7 @@ void WLApplication::show_usage()
 			 "                      of using the SDL\n"
 			 " --language=[de_DE|sv_SE|...]\n"
 			 "                      The locale to use.\n"
-			 " --localedir=DIRNAME  Use DIRNAME as location for the locale"
+			 " --localedir=DIRNAME  Use DIRNAME as location for the locale\n"
 			 " --remove_syncstreams=[true|false]\n"
 			 "                      Remove syncstream files on startup\n"
 			 " --remove_replays=[...]\n"
@@ -1336,7 +1336,7 @@ void WLApplication::show_usage()
 		<<
 		_
 			("Bug reports? Suggestions? Check out the project website:\n"
-			 "        http://www.sourceforge.net/projects/widelands\n\n"
+			 "        https://launchpad.net/widelands\n\n"
 			 "Hope you enjoy this game!\n\n");
 }
 
