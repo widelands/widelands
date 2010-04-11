@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-04-02 07:24+0000\n"
-"Last-Translator: Sonnrain <Unknown>\n"
+"PO-Revision-Date: 2010-04-10 17:09+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-03 03:52+0000\n"
+"X-Launchpad-Export-Date: 2010-04-11 04:10+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -5177,15 +5177,15 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:98
 msgid "Text:"
-msgstr ""
+msgstr "Textum:"
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:111
 msgid "Number of Buttons: "
-msgstr ""
+msgstr "Numerus globulorum: "
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:140
 msgid "Button Name: "
-msgstr ""
+msgstr "Nomen globuli: "
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:161
 msgid "Select Trigger: "
@@ -5247,27 +5247,27 @@ msgstr ""
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:49
 #, c-format
 msgid "Player: %u"
-msgstr ""
+msgstr "Ludor: %u"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
 #, c-format
 msgid "How many: %u"
-msgstr ""
+msgstr "Quot: %u"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:68
 #, c-format
 msgid "Building: %s"
-msgstr ""
+msgstr "Aedificium: %s"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:78
 #, c-format
 msgid "(X, Y): (%i, %i)"
-msgstr ""
+msgstr "(X, Y): (%i, %i)"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:87
 #, c-format
 msgid "Radius: %u"
-msgstr ""
+msgstr "Radius: %u"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:99
 msgid "Building Trigger Options"
@@ -5314,7 +5314,7 @@ msgstr ""
 
 #: ../../src/logic/map.h:172
 msgid "no description defined"
-msgstr ""
+msgstr "descriptio definita non est"
 
 #: ../../src/logic/objective.h:47
 msgid "no descr"
@@ -5326,7 +5326,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:64
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../src/wui/game_message_menu.h:65
 msgid "Title"
@@ -5389,4 +5389,4 @@ msgstr ""
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.h:66
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.h:66
 msgid "Player:"
-msgstr ""
+msgstr "Ludor:"
