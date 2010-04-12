@@ -39,7 +39,14 @@ macro(CreateLocale locale_name)
     DEPENDS ${commands}
     COMMENT "Generating translations for locale ${locale_name}"
   )
-  add_dependencies(lang lang_${locale_name})
+  add_custom_target (
+    checklang_${locale_name}
+    COMMAND cmake -Dlang=${locale_name} -Dpobasedir=${CMAKE_CURRENT_SOURCE_DIR} -Dlocalebasedir=${CMAKE_CURRENT_BINARY_DIR}/../locale -P ${CMAKE_CURRENT_SOURCE_DIR}/CheckLocale.cmake
+    COMMENT "Checking translations for locale ${locale_name}"
+#    WORKING_DIRECTORY=${CMAKE_CURRENT_SOURCE_DIR}
+  )
+  add_dependencies(lang checklang_${locale_name})
+  add_dependencies(checklang_${locale_name} lang_${locale_name})
 endmacro(CreateLocale locale_name)
 
 set (languages_found "")
