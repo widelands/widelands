@@ -769,8 +769,9 @@ bool WLApplication::init_settings() {
 
 	// Set Locale and grab default domain
 	i18n::set_locale(s.get_string("language", ""));
-	i18n::grab_textdomain
-		 ("widelands", s.get_string("localedir", INSTALL_LOCALEDIR));
+	i18n::set_localedir(s.get_string("localedir", INSTALL_LOCALEDIR));
+	i18n::grab_textdomain("widelands");
+
 	log("using locale %s\n", i18n::get_locale().c_str());
 
 	set_input_grab(s.get_bool("inputgrab", false));
@@ -1245,7 +1246,7 @@ void WLApplication::show_usage()
 			 "                      of using the SDL\n"
 			 " --language=[de_DE|sv_SE|...]\n"
 			 "                      The locale to use.\n"
-			 " --localedir=DIRNAME  Use DIRNAME as location for the locale"
+			 " --localedir=DIRNAME  Use DIRNAME as location for the locale\n"
 			 " --remove_syncstreams=[true|false]\n"
 			 "                      Remove syncstream files on startup\n"
 			 " --remove_replays=[...]\n"
@@ -1336,7 +1337,7 @@ void WLApplication::show_usage()
 		<<
 		_
 			("Bug reports? Suggestions? Check out the project website:\n"
-			 "        http://www.sourceforge.net/projects/widelands\n\n"
+			 "        https://launchpad.net/widelands\n\n"
 			 "Hope you enjoy this game!\n\n");
 }
 

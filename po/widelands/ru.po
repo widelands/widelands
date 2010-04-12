@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-04-03 12:52+0000\n"
-"Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
+"PO-Revision-Date: 2010-04-11 21:12+0000\n"
+"Last-Translator: Victor Birkmanis <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-04-04 03:50+0000\n"
+"X-Launchpad-Export-Date: 2010-04-12 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -1671,7 +1671,7 @@ msgstr "проверить цепь событий: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
-msgstr ""
+msgstr "В игре нет игроков!"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:88
 #, c-format
@@ -1685,7 +1685,7 @@ msgstr ""
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "в указанной точке нет флага"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:85
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:63
@@ -1701,7 +1701,7 @@ msgstr ""
 #: ../../src/game_io/game_player_info_data_packet.cc:57
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr ""
+msgstr "номер игрока (%i) вне диапазона (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:144
 #, c-format
@@ -1907,7 +1907,7 @@ msgstr "ожидалась вероятность в пределах [1, 254], 
 
 #: ../../src/logic/immovable.cc:774
 msgid "illegal transformation to the same type"
-msgstr ""
+msgstr "запрещено преобразовывать в тот же самый тип"
 
 #: ../../src/logic/immovable.cc:862
 msgid "probability in range [1, 254]"
@@ -1985,7 +1985,7 @@ msgstr "%sВаши солдаты победили врага в %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:667
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Враг разбит!"
 
 #: ../../src/logic/militarysite.cc:715
 #, c-format
@@ -2136,6 +2136,8 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
+"неверный порядок товаров в группе: товар \"%s\" идет после товара \"%s\" "
+"(исправьте порядок!)"
 
 #: ../../src/logic/production_program.cc:96
 #: ../../src/logic/production_program.cc:819
@@ -2152,12 +2154,12 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:131
 msgid "not "
-msgstr ""
+msgstr "не "
 
 #: ../../src/logic/production_program.cc:153
 #: ../../src/logic/production_program.cc:174
 msgid "economy needs "
-msgstr ""
+msgstr "требуется "
 
 #: ../../src/logic/production_program.cc:203
 msgid "site has "
@@ -2165,11 +2167,11 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:229
 msgid "workers need experience"
-msgstr ""
+msgstr "работникам нужен опыт"
 
 #: ../../src/logic/production_program.cc:254
 msgid "ware type or worker type"
-msgstr ""
+msgstr "тип товара или работника"
 
 #: ../../src/logic/production_program.cc:317
 #, c-format
@@ -2196,17 +2198,17 @@ msgstr ""
 #: ../../src/logic/production_program.cc:396
 #: ../../src/logic/production_program.cc:770
 msgid " and "
-msgstr ""
+msgstr " и "
 
 #: ../../src/logic/production_program.cc:397
 #: ../../src/logic/production_program.cc:749
 msgid " because: "
-msgstr ""
+msgstr " ,потому что: "
 
 #: ../../src/logic/production_program.cc:408
 #: ../../src/wui/encyclopedia_window.cc:192
 msgid " or "
-msgstr ""
+msgstr " либо "
 
 #: ../../src/logic/production_program.cc:409
 msgid " because not: "
@@ -2228,11 +2230,11 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:471
 msgid "failure"
-msgstr ""
+msgstr "сбой"
 
 #: ../../src/logic/production_program.cc:476
 msgid "completion"
-msgstr ""
+msgstr "завершение"
 
 #: ../../src/logic/production_program.cc:481
 msgid "skip"
@@ -2313,12 +2315,13 @@ msgstr "Это шахта пуста. Вы должны или расширит�
 #: ../../src/logic/production_program.cc:1149
 #: ../../src/logic/production_program.cc:1218
 msgid "soldier type"
-msgstr ""
+msgstr "тип солдата"
 
 #: ../../src/logic/production_program.cc:1162
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
+"ожидалось {\"hp\"|\"attack\"|\"defense\"|\"evade\"} но получено \"%s\""
 
 #: ../../src/logic/production_program.cc:1171
 #: ../../src/logic/production_program.cc:1239
@@ -2367,7 +2370,7 @@ msgstr "положительное целое"
 #: ../../src/logic/soldier.cc:75 ../../src/logic/soldier.cc:98
 #, c-format
 msgid "expected positive integer >= %u but found \"%s\""
-msgstr ""
+msgstr "ожидалось положительное целое >= %u но обнаружено \"%s\""
 
 #: ../../src/logic/soldier.cc:202
 msgid "\"anim_name[,another_anim,...]\""
@@ -2376,7 +2379,7 @@ msgstr ""
 #: ../../src/logic/soldier.cc:1201
 #, c-format
 msgid "bad direction '%d'"
-msgstr ""
+msgstr "неправильное направление '%d'"
 
 #: ../../src/logic/soldier.cc:1362
 #, c-format
@@ -2412,7 +2415,7 @@ msgstr ""
 
 #: ../../src/logic/tribe.cc:221 ../../src/logic/tribe.cc:242
 msgid "none found"
-msgstr ""
+msgstr "ничего не найденно"
 
 #: ../../src/logic/tribe.cc:223
 #, c-format
@@ -2427,13 +2430,15 @@ msgstr "стиль флага: %s"
 #: ../../src/logic/tribe.cc:374
 #, c-format
 msgid "tribe %s: %s"
-msgstr ""
+msgstr "племя %s: %s"
 
 #: ../../src/logic/warehouse.cc:487
 #, c-format
 msgid ""
 "<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
 msgstr ""
+"<p font-size=14 font-face=FreeSerif>Новый объект %s добавлен в вашу "
+"экономику.</p>"
 
 #: ../../src/logic/worker.cc:158
 #, c-format
@@ -2441,6 +2446,8 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"шахта должна добывать %s, которого нет в этом мире; племя не совместимо с "
+"этим миром"
 
 #: ../../src/logic/worker.cc:260
 #, c-format
@@ -2448,6 +2455,8 @@ msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"должен разводитиь %s, но это не существует в данном мире; племя не "
+"совместимо с этим миром"
 
 #: ../../src/logic/worker.cc:643
 msgid "Out of "
@@ -2482,7 +2491,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:1669
 msgid "nothing"
-msgstr ""
+msgstr "ничего"
 
 #: ../../src/logic/world.cc:623
 #, c-format

@@ -1,27 +1,25 @@
-# Widelands po/es_ES/campaigns/t02.wmf.po
-# Copyright (C) 2007 Widelands Development Team
-# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
+# Sinhalese translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-04-10 17:01+0000\n"
-"Last-Translator: Juan Eduardo Riva <juaneduardoriva@gmail.com>\n"
-"Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2010-04-11 16:33+0000\n"
+"Last-Translator: Samith Sandanayake <sam.the.devel@gmail.com>\n"
+"Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-11 04:09+0000\n"
+"X-Launchpad-Export-Date: 2010-04-12 03:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-"X-Poedit-Country: SPAIN\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutorial 2 - Un lugar para llamar Hogar"
+msgstr "නිබන්දන2: නිවහන යයි තැනක්"
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -29,13 +27,12 @@ msgid ""
 "higher production buildings, including mining and the military expansions "
 "will be introduced."
 msgstr ""
-"Segunda misión de la Campaña Tutorial de los Bárbaros. En este tutorial se "
-"presentarán los edificios de alta producción incluyendo minas y expansiones "
-"militares."
+"බාබේරියානු නිබන්දන ව්‍යාපාරයේ දෙවන මෙහෙයුම. මෙම නිබන්දනයේදී ද්විතීක නිෂ්පාදන "
+"ශාලා, පතල් හා හමුදා පුළුල් කිරීම් හදුන්වා දේ."
 
 #: ../../campaigns/t02.wmf/event:134
 msgid "Thron shakes his head..."
-msgstr "Thron sacude su cabeza..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:136
 msgid ""
@@ -52,7 +49,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:149
 #: ../../campaigns/t02.wmf/event:160
 msgid "The story continues"
-msgstr "La historia continúa"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:141
 #: ../../campaigns/t02.wmf/event:152
@@ -80,7 +77,7 @@ msgstr "La historia continúa"
 #: ../../campaigns/t02.wmf/event:487
 #: ../../campaigns/t02.wmf/event:1165
 msgid "OK"
-msgstr "Aceptar"
+msgstr "හ‍රි"
 
 #: ../../campaigns/t02.wmf/event:147
 msgid ""
@@ -109,7 +106,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:215
 msgid "Brave Boldreth steps aside you..."
-msgstr "El bravo Boldreth se pone a  tu lado..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:217
 msgid ""
@@ -129,11 +126,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:412
 #: ../../campaigns/t02.wmf/event:425
 msgid "Your loyal companion"
-msgstr "Tu compañero fiel"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:227
 msgid "Khantrukh joins the both of you..."
-msgstr "Khantrukh se une a ambos..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:229
 msgid ""
@@ -152,7 +149,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:438
 #: ../../campaigns/t02.wmf/event:451
 msgid "The advisor"
-msgstr "El consejero"
+msgstr "උපදේශකයා"
 
 #: ../../campaigns/t02.wmf/event:239
 msgid "Boldreth jumps up..."
@@ -176,11 +173,11 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:252
 msgid "Khantrukh grumbles..."
-msgstr "Khantrukh gruñe..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:254
 msgid " \"Old man? Disrespectful youth!\" "
-msgstr " \"¿Viejo? ¡Joven irrespetuoso!\" "
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:264
 msgid "Khantrukh nods satisfied..."
@@ -188,11 +185,11 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:266
 msgid " \"At last! These rocks should last for a while.\" "
-msgstr " \"Por fin! Estas piedras duraran lo suficiente.\" "
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:277
 msgid "Boldreth exclaims..."
-msgstr "Boldreth exclama..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:279
 msgid ""
@@ -219,7 +216,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:290
 msgid "Boldreth laughs..."
-msgstr "Boldreth se ríe..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:292
 msgid ""
@@ -229,7 +226,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:303
 msgid "Khantrukh interrupts..."
-msgstr "Khantrukh interrumpe..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:305
 msgid ""
@@ -241,7 +238,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:315
 msgid "Boldreth nods..."
-msgstr "Boldreth asiente..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:317
 msgid ""
@@ -286,7 +283,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:341
 msgid "Boldreth cheers up..."
-msgstr "Boldreth se alegra..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:343
 msgid ""
@@ -297,7 +294,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:354
 msgid "Khantrukh gazes over the plains..."
-msgstr "Khantrukh observa sobre las llanuras..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:356
 msgid ""
@@ -325,7 +322,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:380
 msgid "Boldreth remarks..."
-msgstr "Boldreth destaca..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:382
 msgid ""
@@ -345,7 +342,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:393
 msgid "Khantrukh speaks..."
-msgstr "Khantrukh habla..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:395
 msgid ""
@@ -378,7 +375,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:407
 msgid "Boldreth seems concerned..."
-msgstr "Boldreth parece preocupado..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:409
 msgid ""
@@ -400,7 +397,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:420
 msgid "Boldreth smiles..."
-msgstr "Boldreth sonríe..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:422
 msgid ""
@@ -426,7 +423,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:433
 msgid "Khantrukh steps in..."
-msgstr "Khantrukh entra..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:435
 msgid ""
@@ -459,7 +456,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:467
 #: ../../campaigns/t02.wmf/event:1158
 msgid "Thron speaks..."
-msgstr "Thron habla..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:469
 msgid ""
@@ -511,7 +508,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:553
 msgid "Continue"
-msgstr "Continuar"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:1160
 msgid ""
@@ -558,163 +555,3 @@ msgstr ""
 #: ../../campaigns/t02.wmf/objective:69
 msgid "Build a fernery"
 msgstr ""
-
-#~ msgid "The Story goes on..."
-#~ msgstr "La historia continúa..."
-
-#~ msgid ""
-#~ " \"Just look at that! The great mountain of Kal'mavrath! I wonder what "
-#~ "treasures nature might have hidden beneath its majestic flanks!<br>Now "
-#~ "that's a chance for the elderly to become useful once in a while! Let us "
-#~ "send out some of those who understand the stone's tongue to unravel the "
-#~ "mountain's secrets!\"<br><br>--NEW OBJECTIVES--<br>- When you click at a "
-#~ "flag you can send Geologists to said flag. If that flag is in mountains, the "
-#~ "Geologists will search the mountain for ores; otherwise, they will search it "
-#~ "for water. Place a flag up on the mountains flank to the east (on mountain "
-#~ "terrain though, not mountain meadow) and send a Gelogist there. Build then a "
-#~ "mine for both kinds of ore he will find, choosing the mine to be built "
-#~ "appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - "
-#~ "granite<br>Mines may only be built on mountain terrain. Suitable places for "
-#~ "mines are displayed with a light grey dot.</p>"
-#~ msgstr ""
-#~ " \"¡Mira eso! ¡La gran montaña de Kal'mavrath! ¡Me pregunto qué tesoros "
-#~ "habrá escondido la naturaleza en sus majestuosas laderas!<br>¡Esta es la "
-#~ "oportunidad de los mayores para ser útiles de nuevo! ¡Enviemos algunos "
-#~ "experimentados en las señales de las rocas a descubrir los secretos de la "
-#~ "montaña!\"<br><br>-- NUEVO OBJETIVO --<br>- Pulsando en una bandera puedes "
-#~ "enviar Geólogos allí. Si la bandera se encuentra en las montañas, el Geólogo "
-#~ "buscará minerales, en otro caso buscará agua. Sitúa una bandera en la ladera "
-#~ "de la montaña al este (en terreno rocoso, no solamente inclinado) y envía un "
-#~ "Geólogo a ella. Construye una mina para cada tipo de recurso que encuentre, "
-#~ "eligiendo el tipo de mina adecuadamente:<br>- Negro: carbón.<br>- Rojo: "
-#~ "hierro.<br>- Amarillo: oro.<br>- Gris: granito.<br>Las minas sólo se pueden "
-#~ "construir en terreno rocoso, en los puntos indicados con un marcador "
-#~ "gris.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter "
-#~ "can hunt down animals, while a gamekeeper prevents them from becoming "
-#~ "extinct. The meat is then processed in a tavern into lunches for your "
-#~ "miners.<br>This is only the first example of a ware which has to be refined "
-#~ "before being used in a secondary building - others will follow.<br>Build a "
-#~ "hunter, a gamekeeper and a tavern.</p>"
-#~ msgstr ""
-#~ "-- NUEVO OBJETIVO --<br>- Para poder trabajar, tus mineros necesitan comida. "
-#~ "Un cazador puede capturar animales, mientras que un guardabosques evita que "
-#~ "se extingan. La carne se prepara en las tabernas, obteniendo comida para tus "
-#~ "mineros.<br>Es sólo un ejemplo de un recurso que debe ser refinado antes de "
-#~ "ser usado en un segundo lugar - habrá más.<br>Construye una cabaña de "
-#~ "cazador, de guardabosques y una taberna.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food "
-#~ "though - are fishers and farms. The wheat of the latter has to be processed "
-#~ "with water in a bakery before it becomes edible. You can obtain water by "
-#~ "building a well at a spot where your Geologists find a water source. Build a "
-#~ "well, a farm and a bakery.</p>"
-#~ msgstr ""
-#~ "-- NUEVO OBJETIVO --<br>- Otras formas de obtener comida - comida diferente -"
-#~ " son los pescadores y las granjas. El trigo de estas últimas debe ser "
-#~ "procesado con agua en una panadería antes de ser útil. Puedes conseguir agua "
-#~ "construyendo un pozo en donde tus Geólogos encuentren agua.<br>Construye un "
-#~ "pozo, una granja y una panadería.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it "
-#~ "has to be melted into iron first. Build a Smelter. Likewise, the coalearth "
-#~ "from your coalmines must be refined into coal - for that, build a Coal "
-#~ "Burner.</p>"
-#~ msgstr ""
-#~ "-- NUEVO OBJETIVO --<br>- El mineral que obtienen tus mineros aún no es "
-#~ "utilizable - debes extraer el hierro primero. Construye una fundición. Del "
-#~ "mismo modo, la turba de tus minas de carbón debe ser refinada en carbón - "
-#~ "para eso, construye un quemador de turba.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all "
-#~ "ressources lying beneath. Then it must be enhanced to a deep mine in order "
-#~ "to keep it working properly. To enhance a building, click it and then the "
-#~ "appropriate button in the appearing menu.<br>Workers gain experience by "
-#~ "successful work. With enough experience they become more advanced workers, "
-#~ "who are necessary to operate enhanced buildings. Do not enhance a building "
-#~ "before you have enough advanced workers to operate the advanced building! "
-#~ "Such buildings usually have greater demands than the basic kind of that "
-#~ "building - for instance, deep mines need rations instead of snacks. You will "
-#~ "have to enhance your tavern to an inn in order to produce rations out of "
-#~ "pittabread AND a second kind of food (meat or fish). Note that the existance "
-#~ "of inns does not make taverns obsolete - normal mines still require snacks "
-#~ "instead of rations. You may of course enhance all mines to deep mines "
-#~ "instantly - bigger mines work a bit faster, smaller mines need cheaper food. "
-#~ "It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to "
-#~ "the better versions of their buildings respectively.</p>"
-#~ msgstr ""
-#~ "-- NUEVO OBJETIVO --<br>Una mina normal sólo puede extraer alrededor de un "
-#~ "tercio de los recursos disponibles. Para poder seguir produciendo debe ser "
-#~ "mejorada a mina profunda. Para mejorar un edificio, pulsa sobre él y "
-#~ "selecciona el botón adecuado en el menú.<br>Los trabajadores ganan "
-#~ "experiencia con el trabajo, convirtiéndose en trabajadores más avanzados con "
-#~ "el tiempo, lo que los habilita para trabajar en edificios más avanzados. ¡No "
-#~ "mejores un edificio antes de tener trabajadores del nivel suficiente "
-#~ "disponibles! Estos edificios habitualmente demandan más recursos que los "
-#~ "básicos - por ejemplo, las minas profundas necesitan raciones, en lugar de "
-#~ "bocadillos. Esto implica que debes mejorar tu taberna a una posada, para "
-#~ "poder producir raciones a partir del pan Y un segundo tipo de comida (carne "
-#~ "o pescado). Ten en cuenta que la existencia de posadas no deja las tabernas "
-#~ "obsoletas, ya que las minas normales siguen necesitando sus bocadillos. Por "
-#~ "supuesto, también puedes mejorar todas las minas simultáneamente: cuanto más "
-#~ "avanzada sea la mina, más rápido trabajará, cuanto más pequeña, menos "
-#~ "recursos necesita. Queda a tu elección.<br>Mejora la mina de carbón y la "
-#~ "taberna a sus versiones respectivas.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- Bigger and better buildings - including all "
-#~ "militarian ones - require better building materials. They cannot be built of "
-#~ "simple trunks - the wood has to be refined to blackwood by a Woodhardener "
-#~ "first. Always remember to build a Woodhardener before you run out of "
-#~ "blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
-#~ msgstr ""
-#~ "-- NUEVO OBJETIVO --<br>Mejores y más grandes edificios - incluyendo todos "
-#~ "los militares - necesitan mejores materiales de construcción. No se pueden "
-#~ "edificar con simples troncos: la madera debe ser convertida en vigas en una "
-#~ "carpintería. Recuerda siempre construir una antes de acabar tus reservas de "
-#~ "vigas, porque sin ellas no podrás expandirte.<br>Construye una "
-#~ "carpintería.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- Better buildings may require also other improved "
-#~ "materials besides blackwood. One of those is grindstone, which is produced "
-#~ "out of water and raw stone by a Stonegrinder. You can obtain water by "
-#~ "building a Well upon a water source, which your Geologists can discover when "
-#~ "you send them to any flag that is not on a mountain by clicking said flag "
-#~ "and the Geologist-symbol in the consecutively appearing menu.<br>Build a "
-#~ "Stonegrinder and a Well.</p>"
-#~ msgstr ""
-#~ "-- NUEVO OBJETIVO --<br>- Mejores edificios pueden necesitar materiales "
-#~ "especiales aparte de las vigas. Uno de ellos son los bloques, que se "
-#~ "fabrican con piedra en bruto y agua en el molino. Puedes obtener agua "
-#~ "construyendo un pozo cerca de una fuente de agua, que tus Geólogos pueden "
-#~ "descubrir si los envías a una bandera que no esté en terreno montañoso, y "
-#~ "seleccionando el símbolo de Geólogo en su menú.<br>Construye un molino y un "
-#~ "pozo.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- The third material necessary for improved buildings "
-#~ "is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a "
-#~ "Fernery.</p>"
-#~ msgstr ""
-#~ "-- NUEVO OBJETIVO --<br> El tercer material necesario para construcciones "
-#~ "mejoradas es la paja, usada para cubrir techos. La paja se obtiene en las "
-#~ "plantaciones.<br>Construye una plantación.</p>"
-
-#~ msgid "Victory!"
-#~ msgstr "¡Victoria!"
-
-#~ msgid ""
-#~ "<p>The ore your miners bring up is not usable yet - it has to be melted into "
-#~ "iron first. Build a Smelter. Likewise, the coalearth from your coalmines "
-#~ "must be refined into coal - for that, build a Coal Burner.</p>"
-#~ msgstr ""
-#~ "<p>El mineral que tus mineros extraen aún no es utilizable - el hierro debe "
-#~ "ser refinado primero. Construye una fundición. Del mismo modo, la turba de "
-#~ "tus minas de carbón debe ser convertido en carbón en un quemador de "
-#~ "turba.</p>"
