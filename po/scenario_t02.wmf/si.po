@@ -1,26 +1,25 @@
-# Widelands po/ru_RU/campaigns/t02.wmf.po
-# Copyright (C) 2008 Widelands Development Team
-# Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006.
+# Sinhalese translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-04-11 10:59+0000\n"
-"Last-Translator: Tino <Unknown>\n"
-"Language-Team: russian <ru@li.org>\n"
+"PO-Revision-Date: 2010-04-11 16:33+0000\n"
+"Last-Translator: Samith Sandanayake <sam.the.devel@gmail.com>\n"
+"Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-04-12 03:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-"X-Poedit-Country: RUSSIAN FEDERATION\n"
-"X-Poedit-Language: Russian\n"
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "Tutorial2 - A Place to call Home"
-msgstr "Обучение II - Место названое Домом"
+msgstr "නිබන්දන2: නිවහන යයි තැනක්"
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -28,13 +27,12 @@ msgid ""
 "higher production buildings, including mining and the military expansions "
 "will be introduced."
 msgstr ""
-"Вторая миссия в обучающей кампании Варваров. Здесь будет рассказано как "
-"строить расширенные здания, включая горную промышленность и военные "
-"постройки."
+"බාබේරියානු නිබන්දන ව්‍යාපාරයේ දෙවන මෙහෙයුම. මෙම නිබන්දනයේදී ද්විතීක නිෂ්පාදන "
+"ශාලා, පතල් හා හමුදා පුළුල් කිරීම් හදුන්වා දේ."
 
 #: ../../campaigns/t02.wmf/event:134
 msgid "Thron shakes his head..."
-msgstr "Трон качает головой..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:136
 msgid ""
@@ -46,20 +44,12 @@ msgid ""
 "throne between the trees, the symbol of unity and peace among our kin became "
 "the wedge that drives us apart.\" "
 msgstr ""
-" \"Война продолжается. Все больше наших братьев и сестер бежит от зверской "
-"войны, бушующей в столице за лесом.<br> Истории, которые они рассказывают о "
-"делах нашей семьи, грустно слышать. Я провожу ночи, лежа с открытыми "
-"глазами, беспокойный, уставший больше, чем я когда-либо полагал. Все же "
-"всякий раз, когда я закрываю свои глаза, я вижу крепость, построенную моим "
-"отцом полностью поглощенную огнем. Трон между деревьями, который был "
-"символом единства и мира среди нашей семьи стал клином, разрушившим наше "
-"узы.\" "
 
 #: ../../campaigns/t02.wmf/event:138
 #: ../../campaigns/t02.wmf/event:149
 #: ../../campaigns/t02.wmf/event:160
 msgid "The story continues"
-msgstr "История продолжается"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:141
 #: ../../campaigns/t02.wmf/event:152
@@ -87,7 +77,7 @@ msgstr "История продолжается"
 #: ../../campaigns/t02.wmf/event:487
 #: ../../campaigns/t02.wmf/event:1165
 msgid "OK"
-msgstr "OK"
+msgstr "හ‍රි"
 
 #: ../../campaigns/t02.wmf/event:147
 msgid ""
@@ -101,14 +91,6 @@ msgid ""
 "whoever threatens our very existence, may it even be one of your blood or "
 "mind?\" "
 msgstr ""
-" Сегодня мои охотники привели мужчину и женщину с их детьми, которые "
-"прятались в лесах от войны, ненависти и мести племен, воюющих друг с другом "
-"как в древности, когда мы были просто дикарями, ведомыми инстинктами. Никто "
-"из моих братьев не сможет захватить и удержать деревянный трон, ни одно из "
-"племен не сильно настолько, чтобы покорить остальных. Убийствам не будет "
-"конца, если только... Как там говорил отец?<br>\"Восстань против того, кто "
-"угрожает нашему существованию, будь он даже с тобой одной крови или языка, "
-"так?\" "
 
 #: ../../campaigns/t02.wmf/event:158
 msgid ""
@@ -124,7 +106,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:215
 msgid "Brave Boldreth steps aside you..."
-msgstr "Бравый Болдреф подошёл к вам..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:217
 msgid ""
@@ -144,11 +126,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:412
 #: ../../campaigns/t02.wmf/event:425
 msgid "Your loyal companion"
-msgstr "Ваш верный спутник"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:227
 msgid "Khantrukh joins the both of you..."
-msgstr "Кантрук вступает в ваш разговор..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:229
 msgid ""
@@ -167,7 +149,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:438
 #: ../../campaigns/t02.wmf/event:451
 msgid "The advisor"
-msgstr "Советник"
+msgstr "උපදේශකයා"
 
 #: ../../campaigns/t02.wmf/event:239
 msgid "Boldreth jumps up..."
@@ -191,23 +173,23 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:252
 msgid "Khantrukh grumbles..."
-msgstr "Хантрух проворчал..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:254
 msgid " \"Old man? Disrespectful youth!\" "
-msgstr " \"Это я старик? Ах ты, невежественный юнец!\" "
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:264
 msgid "Khantrukh nods satisfied..."
-msgstr "Кантрук довольно кивает...."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:266
 msgid " \"At last! These rocks should last for a while.\" "
-msgstr " \"Наконец-то! Этих скал хватит на какое-то время.\" "
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:277
 msgid "Boldreth exclaims..."
-msgstr "Бодреф воскликнул..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:279
 msgid ""
@@ -234,7 +216,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:290
 msgid "Boldreth laughs..."
-msgstr "Болдреф рассмеялся..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:292
 msgid ""
@@ -244,7 +226,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:303
 msgid "Khantrukh interrupts..."
-msgstr "Хантрух прервал..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:305
 msgid ""
@@ -256,7 +238,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:315
 msgid "Boldreth nods..."
-msgstr "Болдреф кивнул..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:317
 msgid ""
@@ -301,7 +283,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:341
 msgid "Boldreth cheers up..."
-msgstr "Болдреф улыбнулся..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:343
 msgid ""
@@ -312,7 +294,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:354
 msgid "Khantrukh gazes over the plains..."
-msgstr "Хантрух внимательно осмотрел равнину..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:356
 msgid ""
@@ -340,7 +322,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:380
 msgid "Boldreth remarks..."
-msgstr "Болдреф заметил..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:382
 msgid ""
@@ -360,7 +342,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:393
 msgid "Khantrukh speaks..."
-msgstr "Хантрух сказал..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:395
 msgid ""
@@ -393,7 +375,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:407
 msgid "Boldreth seems concerned..."
-msgstr "Казалось Болдреф заинтересовался..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:409
 msgid ""
@@ -415,7 +397,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:420
 msgid "Boldreth smiles..."
-msgstr "Болдреф улыбнулся..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:422
 msgid ""
@@ -441,7 +423,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:433
 msgid "Khantrukh steps in..."
-msgstr "Подошел Хантрух..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:435
 msgid ""
@@ -474,7 +456,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:467
 #: ../../campaigns/t02.wmf/event:1158
 msgid "Thron speaks..."
-msgstr "Трон говорит..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:469
 msgid ""
@@ -526,7 +508,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:553
 msgid "Continue"
-msgstr "Продолжить"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/event:1160
 msgid ""
@@ -573,162 +555,3 @@ msgstr ""
 #: ../../campaigns/t02.wmf/objective:69
 msgid "Build a fernery"
 msgstr ""
-
-#~ msgid "Khantrukh seems reliefed..."
-#~ msgstr "Казалось Хантруху полегчало..."
-
-#~ msgid "The Story goes on..."
-#~ msgstr "История продолжается..."
-
-#~ msgid ""
-#~ " \"Just look at that! The great mountain of Kal'mavrath! I wonder what "
-#~ "treasures nature might have hidden beneath its majestic flanks!<br>Now "
-#~ "that's a chance for the elderly to become useful once in a while! Let us "
-#~ "send out some of those who understand the stone's tongue to unravel the "
-#~ "mountain's secrets!\"<br><br>--NEW OBJECTIVES--<br>- When you click at a "
-#~ "flag you can send Geologists to said flag. If that flag is in mountains, the "
-#~ "Geologists will search the mountain for ores; otherwise, they will search it "
-#~ "for water. Place a flag up on the mountains flank to the east (on mountain "
-#~ "terrain though, not mountain meadow) and send a Gelogist there. Build then a "
-#~ "mine for both kinds of ore he will find, choosing the mine to be built "
-#~ "appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - "
-#~ "granite<br>Mines may only be built on mountain terrain. Suitable places for "
-#~ "mines are displayed with a light grey dot.</p>"
-#~ msgstr ""
-#~ " \"Только посмотри на это! Великая гора Калмаврат! Не представляю сколько "
-#~ "сокровищ таит она в себе!<br>Пора уже и старикам сделать что-то полезное! "
-#~ "Пошлём тех, кто понимает язык камней, дабы они разгадали тайны "
-#~ "гор!\"<br><br>--НОВОЕ ЗАДАНИЕ--<br> Щёлкнув на флаге, вы можете выслать к "
-#~ "нему Геолога. Если флаг находится в горах, то геолог станет искать руду, а "
-#~ "иначе он будет искать воду. Поместите флаг у подножия горы на востоке "
-#~ "(именно в горах, а не на горных лугах) и вышлите к нему геолога. Затем "
-#~ "постройте шахты для каждого из двух найденных ресурсов, которые он "
-#~ "обнаружит. Выбирайте соответствующий тип шахты: <br>Чёрный - "
-#~ "уголь<br>Красный - железная руда<br>Жёлтый - золото<br>Серый - "
-#~ "гранит<br>Шахты могут быть построены только в горной местности. Места, "
-#~ "подходящие для строительства шахт обозначены серой меткой.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter "
-#~ "can hunt down animals, while a gamekeeper prevents them from becoming "
-#~ "extinct. The meat is then processed in a tavern into lunches for your "
-#~ "miners.<br>This is only the first example of a ware which has to be refined "
-#~ "before being used in a secondary building - others will follow.<br>Build a "
-#~ "hunter, a gamekeeper and a tavern.</p>"
-#~ msgstr ""
-#~ "--НОВОЕ ЗАДАНИЕ--<br>- Для работы вашим шахтёрам нужна еда. Охотник может "
-#~ "охотится на зверей, а егерь предотвратит их истребление. Затем в таверне из "
-#~ "мяса будут готовить пайки для шахтёров.<br> Это только один пример того, как "
-#~ "ресурсы перед использованием проходят несколько побочных строений. "
-#~ "<br>Постройте Хижину охотника и егеря, а также таверну.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food "
-#~ "though - are fishers and farms. The wheat of the latter has to be processed "
-#~ "with water in a bakery before it becomes edible. You can obtain water by "
-#~ "building a well at a spot where your Geologists find a water source. Build a "
-#~ "well, a farm and a bakery.</p>"
-#~ msgstr ""
-#~ "--НОВОЕ ЗАДАНИЕ--<br>- Другие способы производства еды - хотя и другого типа "
-#~ "- это рыболовство и фермерство. Пшеница затем должна попасть вместе с водой "
-#~ "в пекарню, прежде чем её можно будет использовать. Вы можете получить воду, "
-#~ "построив колодец там, где геолог нашёл воду. Постройте колодец, ферму и "
-#~ "пекарню.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it "
-#~ "has to be melted into iron first. Build a Smelter. Likewise, the coalearth "
-#~ "from your coalmines must be refined into coal - for that, build a Coal "
-#~ "Burner.</p>"
-#~ msgstr ""
-#~ "--НОВОЕ ЗАДАНИЕ--<br>- Руда, которую добывают ваши шахтёры, пока не пригодна "
-#~ "для использования - сначала её нужно переплавить в сталь. Постройте "
-#~ "Плавильню. Так как Углезём из угольной шахты должен быть преобразован в "
-#~ "уголь - постройте Обжиг угля.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all "
-#~ "ressources lying beneath. Then it must be enhanced to a deep mine in order "
-#~ "to keep it working properly. To enhance a building, click it and then the "
-#~ "appropriate button in the appearing menu.<br>Workers gain experience by "
-#~ "successful work. With enough experience they become more advanced workers, "
-#~ "who are necessary to operate enhanced buildings. Do not enhance a building "
-#~ "before you have enough advanced workers to operate the advanced building! "
-#~ "Such buildings usually have greater demands than the basic kind of that "
-#~ "building - for instance, deep mines need rations instead of snacks. You will "
-#~ "have to enhance your tavern to an inn in order to produce rations out of "
-#~ "pittabread AND a second kind of food (meat or fish). Note that the existance "
-#~ "of inns does not make taverns obsolete - normal mines still require snacks "
-#~ "instead of rations. You may of course enhance all mines to deep mines "
-#~ "instantly - bigger mines work a bit faster, smaller mines need cheaper food. "
-#~ "It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to "
-#~ "the better versions of their buildings respectively.</p>"
-#~ msgstr ""
-#~ "--НОВОЕ ЗАДАНИЕ--<br>- Обычная шахта может дать только одну треть всех "
-#~ "залежей ресурса. Затем, для нормальной работы, она должна быть улучшена до "
-#~ "глубокой шахты. Для улучшения строения, щёлкните на нём, а затем, в "
-#~ "появившемся меню, на соответствующей кнопке.<br> При успешной работе, у "
-#~ "работников увеличивается опыт. По достижении некоторого уровня опыта они "
-#~ "становятся опытными работниками, которые необходимы для управления "
-#~ "улучшенными зданиями! Такие строения обычно предъявляют повышенные "
-#~ "требования, по сравнению с обычными - например, глубокая шахта требует Обед, "
-#~ "вместо Пайка. Вам необходимо улучшить таверну до Постоялого двора, чтобы "
-#~ "производить Обеды из лепешек и второго типа еды (мяса или рыбы). Заметьте, "
-#~ "что существование Постоялых дворов не делает таверны не нужными, так как "
-#~ "обычные шахты всё ещё нуждаются в простых пайках. Конечно же, вы можете "
-#~ "обновить все шахты до Глубоких - большие шахты работают немного быстрее, "
-#~ "маленьким требуется дешёвая еда. Выбор за вами.<br> Произведите улучшения "
-#~ "Угольной шахты и Таверны.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- Bigger and better buildings - including all "
-#~ "militarian ones - require better building materials. They cannot be built of "
-#~ "simple trunks - the wood has to be refined to blackwood by a Woodhardener "
-#~ "first. Always remember to build a Woodhardener before you run out of "
-#~ "blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
-#~ msgstr ""
-#~ "--НОВОЕ ЗАДАНИЕ--<br>- Большие и лучшие строения - включая все военные - "
-#~ "требуют лучших строительных материалов. Они не могут быть построены из "
-#~ "брёвен - сначала дерево должно быть превращено в доски на лесопилке. Всегда "
-#~ "помните, что прежде чем начать использовать доски вы должны построить "
-#~ "Лесопилку, без неё вы не сможете развиваться далее.<br>Постройте "
-#~ "Лесопилку.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- Better buildings may require also other improved "
-#~ "materials besides blackwood. One of those is grindstone, which is produced "
-#~ "out of water and raw stone by a Stonegrinder. You can obtain water by "
-#~ "building a Well upon a water source, which your Geologists can discover when "
-#~ "you send them to any flag that is not on a mountain by clicking said flag "
-#~ "and the Geologist-symbol in the consecutively appearing menu.<br>Build a "
-#~ "Stonegrinder and a Well.</p>"
-#~ msgstr ""
-#~ "--НОВОЕ ЗАДАНИЕ--<br>- Лучшие строения требуют и другие улучшенные материалы "
-#~ "кроме досок. Одним из них является бетонный блок, который делается из воды и "
-#~ "Грубого камня в строении Обработка камня. Вы можете получить воду, построив "
-#~ "Колодец на том месте, где Геолог обнаружит воду, если вы пошлёте его к "
-#~ "любому флагу, расположенному не в горах. Для этого нужно щёлкнуть на флаге и "
-#~ "нажать кнопку с изображением Геолога в появившемся меню.<br>Постройте "
-#~ "Обработку камня и Колодец.</p>"
-
-#~ msgid ""
-#~ "--NEW OBJECTIVES--<br>- The third material necessary for improved buildings "
-#~ "is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a "
-#~ "Fernery.</p>"
-#~ msgstr ""
-#~ "--НОВОЕ ЗАДАНИЕ--<br>- Третьим материалом необходимым для улучшенных "
-#~ "строений является тростник, идущий на крыши. Тростник выращивается в "
-#~ "Оранжерее.<br>Постройте Оранжерею.</p>"
-
-#~ msgid "Victory!"
-#~ msgstr "Победа!"
-
-#~ msgid ""
-#~ "<p>The ore your miners bring up is not usable yet - it has to be melted into "
-#~ "iron first. Build a Smelter. Likewise, the coalearth from your coalmines "
-#~ "must be refined into coal - for that, build a Coal Burner.</p>"
-#~ msgstr ""
-#~ "<p> Руда, которую добывают ваши шахтёры пока не пригодна для использования - "
-#~ "сначала ее нужно переплавить в сталь. Постройте Плавильню. Так как Углезём "
-#~ "из угольной шахты должен быть преобразован в уголь - постройте Обжиг "
-#~ "угля.</p>"

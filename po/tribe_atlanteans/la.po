@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-04-10 17:09+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2010-04-11 07:15+0000\n"
+"Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-11 04:09+0000\n"
+"X-Launchpad-Export-Date: 2010-04-12 03:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid "These shields are used by the best soldiers of the Atlanteans."
-msgstr "His scutis optimi milites Atlantidines pugnant."
+msgstr "His scutis optimi milites Atlantidenses pugnant."
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
@@ -90,7 +90,7 @@ msgid ""
 "Blackroots are a special kind of roots. The Atlanteans like their strong "
 "taste and use its flour for making bread."
 msgstr ""
-"Radices nigrae sunt genus speciale radicium. Atlantidines gustatus earum "
+"Radices nigrae sunt genus speciale radicium. Atlantidenses gustatus earum "
 "magni aestimantes panem farina fingunt."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:16
@@ -111,7 +111,7 @@ msgid ""
 "the atlantian bread."
 msgstr ""
 "Farina radicis nigrae est e radice nigra facta unaque e tribus partibus "
-"Atlantidinensis panis."
+"Atlantidensis panis."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
@@ -149,14 +149,14 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:19
 msgid "Atlanteans"
-msgstr "Atlantides"
+msgstr "Atlantidenses"
 
 #: ../../tribes/atlanteans/conf:20
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr ""
-"Gens Atlantidines, qui sunt filii filiaeque ex Atlantide insula, de fabulis "
+"Gens Atlantidenses, qui sunt filii filiaeque ex Atlantide insula, de fabulis "
 "antiquissimis nota est."
 
 #: ../../tribes/atlanteans/conf:39
@@ -449,7 +449,7 @@ msgstr "Agricola nigrarum radicium"
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Builder"
-msgstr "Aedificator"
+msgstr "Architectus"
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Burner"
@@ -485,11 +485,11 @@ msgstr "Pistor farinarius"
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Miner"
-msgstr "Minutor"
+msgstr "Fossor metallicus"
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Sawyer"
-msgstr ""
+msgstr "Opera qui lignum secat"
 
 #: ../../tribes/atlanteans/conf:130
 msgid "Smelter"
@@ -497,7 +497,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:131
 msgid "Smoker"
-msgstr ""
+msgstr "Opera qui piscem carnemque fumat"
 
 #: ../../tribes/atlanteans/conf:132
 msgid "Spiderbreeder"
@@ -505,7 +505,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:133
 msgid "Stonecutter"
-msgstr ""
+msgstr "Lapicida"
 
 #: ../../tribes/atlanteans/conf:134
 msgid "Toolsmith"
@@ -525,7 +525,7 @@ msgstr "Textor"
 
 #: ../../tribes/atlanteans/conf:138
 msgid "Woodcutter"
-msgstr ""
+msgstr "Lignator"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Scout"
@@ -537,7 +537,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:143
 msgid "Construction Site"
-msgstr ""
+msgstr "Locus aedificandi"
 
 #: ../../tribes/atlanteans/conf:146
 msgid "Dungeon"
@@ -598,11 +598,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:163
 msgid "Stronghold"
-msgstr "Propugnaculum"
+msgstr "Bastion"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Barracks"
-msgstr ""
+msgstr "Baracke"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Outpost"
@@ -630,7 +630,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:180
 msgid "Charcoal Burner's House"
-msgstr ""
+msgstr "Casa carbonarii"
 
 #: ../../tribes/atlanteans/conf:181
 msgid "Coal Mine"
@@ -674,7 +674,7 @@ msgstr "Metallum ferri"
 
 #: ../../tribes/atlanteans/conf:191
 msgid "Mill"
-msgstr "Mola"
+msgstr "Molae"
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Quarry"
@@ -694,7 +694,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:196
 msgid "Spiderfarm"
-msgstr ""
+msgstr "Fundus araneus"
 
 #: ../../tribes/atlanteans/conf:197
 msgid "Toolsmithy"
