@@ -769,8 +769,9 @@ bool WLApplication::init_settings() {
 
 	// Set Locale and grab default domain
 	i18n::set_locale(s.get_string("language", ""));
-	i18n::grab_textdomain
-		 ("widelands", s.get_string("localedir", INSTALL_LOCALEDIR));
+	i18n::set_localedir(s.get_string("localedir", INSTALL_LOCALEDIR));
+	i18n::grab_textdomain("widelands");
+
 	log("using locale %s\n", i18n::get_locale().c_str());
 
 	set_input_grab(s.get_bool("inputgrab", false));

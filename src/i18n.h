@@ -27,7 +27,7 @@
 #include <config.h>
 
 #ifdef _MSC_VER
-#define __attribute__(x) 
+#define __attribute__(x)
 #endif
 
 ///A macro to make i18n more readable and aid in tagging strings for translation
@@ -37,7 +37,7 @@ namespace i18n {
 char const * translate(char        const *) __attribute__ ((format_arg (1)));
 char const * translate(std::string const &);
 
-void  grab_textdomain(std::string const &, std::string const & localedir = INSTALL_LOCALEDIR);
+void  grab_textdomain(std::string const &);
 void release_textdomain();
 
 /// Create an object of this type to grab a textdomain and make sure that it is
@@ -50,6 +50,8 @@ struct Textdomain {
 
 void set_locale(std::string);
 std::string const & get_locale();
+
+void set_localedir(std::string);
 }
 
 #endif
