@@ -73,6 +73,8 @@ Story_Message_Box::Story_Message_Box
 		set_pos(Point(gposx, get_y()));
 	if (gposy != -1)
 		set_pos(Point(get_x(), gposy));
+
+	move_inside_parent();
 }
 
 /**
