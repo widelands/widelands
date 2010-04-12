@@ -77,6 +77,8 @@ public:
 	int get_tribe(lua_State * L);
 	int get_see_all(lua_State * L);
 	int set_see_all(lua_State * L);
+	int get_buildhelp(lua_State * L);
+	int set_buildhelp(lua_State * L);
 
 	/*
 	 * Lua methods

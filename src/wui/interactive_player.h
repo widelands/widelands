@@ -58,7 +58,10 @@ struct Interactive_Player : public Interactive_GameBase
 	void toggle_chat        ();
 	void toggle_options_menu();
 	void toggle_objectives();
+	bool buildhelp();
+	void show_buildhelp(bool const t);
 	void toggle_buildhelp ();
+
 	void toggle_resources ();
 	void toggle_help      ();
 	void toggle_message_menu();
