@@ -70,7 +70,7 @@ Story_Message_Box::Story_Message_Box
 	center_to_parent();
 
 	if (gposx != -1)
-		set_pos(Point(gposy, get_y()));
+		set_pos(Point(gposx, get_y()));
 	if (gposy != -1)
 		set_pos(Point(get_x(), gposy));
 }
