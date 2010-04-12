@@ -442,28 +442,46 @@ int L_Player::place_flag(lua_State * L) {
 }
 
 /* RST
-	.. method:: place_building(name, field)
+	.. method:: place_building(name, field[, constructionsite = false])
 
-		Immediately creates a building on the given field. No construction
-		site is created. The building starts out completely empty. The building
-		is forced to be at this position, the same action is taken as for
-		:meth:`place_flag` when force is :const:`true`. Additionally, all
-		buildings that are too close to the new one are ripped.
+		Immediately creates a building on the given field. The building starts
+		out completely empty. If :const:`constructionsite` is set, the building
+		is not created directly, instead a constructionsite for this building is
+		placed. Note that this implies: force = false.
 
-		:returns: :class:`wl.map.Building` object created
+		If :const:`constructionsite` is not set, the buildings i is forced to be
+		at this position, the same action is taken as for :meth:`place_flag` when
+		force is :const:`true`. Additionally, all buildings that are too close to
+		the new one are ripped.
+
+		:returns: :class:`wl.map.Building` object created or :const:`nil` if
+			a constructionsite is created.
 */
+// TODO: this function should take a force parameter as any other
+// TODO: this function should return a wrapped constructionsite
+// TODO: add tests for the constructionsite functionality
 int L_Player::place_building(lua_State * L) {
 	const char * name = luaL_checkstring(L, 2);
 	L_Field * c = *get_user_class<L_Field>(L, 3);
+	bool constructionsite = false;
+
+	if (lua_gettop(L) >= 4)
+		constructionsite = luaL_checkboolean(L, 4);
 
 	Building_Index i = get(L, get_egbase(L)).tribe().building_index(name);
 	if (i == Building_Index::Null())
 		return report_error(L, "Unknown Building: '%s'", name);
 
-	Building & b = get(L, get_egbase(L)).force_building
-		(c->coords(), i, 0, 0, Soldier_Counts());
+	if (not constructionsite) {
+		Building & b = get(L, get_egbase(L)).force_building
+			(c->coords(), i, 0, 0, Soldier_Counts());
 
-	return upcasted_immovable_to_lua(L, &b);
+		return upcasted_immovable_to_lua(L, &b);
+	} else {
+		get(L, get_egbase(L)).build(c->coords(), i);
+		lua_pushnil(L);
+		return 1;
+	}
 }
 
 /* RST
