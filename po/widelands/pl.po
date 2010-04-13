@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 13:31+0100\n"
-"PO-Revision-Date: 2010-04-11 19:59+0000\n"
+"PO-Revision-Date: 2010-04-12 18:31+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-04-12 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-04-13 03:31+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/logic/worker.cc:1652
@@ -1632,7 +1632,7 @@ msgstr "(typy budynków gracza): %s"
 #: ../../src/events/event_player_seeall.cc:45
 #, c-format
 msgid "(player see all): %s"
-msgstr ""
+msgstr "(gracz widzi wszystko): %s"
 
 #: ../../src/events/event_player_worker_types.cc:52
 #, c-format
@@ -1909,17 +1909,17 @@ msgstr "oczekiwano 0 .. 255 lecz znaleziono %u"
 #: ../../src/logic/immovable.cc:276
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
-msgstr ""
+msgstr "[przynależność terenu] \"%s\" (nie jest w obecnym świecie): %s"
 
 #: ../../src/logic/immovable.cc:306
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr ""
+msgstr "stała %s nie ma programu \"%s\""
 
 #: ../../src/logic/immovable.cc:614
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
-msgstr ""
+msgstr "plemię %s nie definiuje stałej typu \"%s\""
 
 #: ../../src/logic/immovable.cc:617
 #, c-format
@@ -1950,12 +1950,13 @@ msgstr "priorytet"
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr ""
+"stała nie obejmuje plemienia, lecz docelowy typ posiada widok (\"%s\")"
 
 #: ../../src/logic/immovable.cc:746 ../../src/logic/immovable.cc:815
 #: ../../src/logic/immovable.cc:901
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
-msgstr ""
+msgstr "widok \"%s\" ustawiony dla docelowego typu (wymagany \"świat\")"
 
 #: ../../src/logic/immovable.cc:761 ../../src/logic/immovable.cc:916
 #, c-format
@@ -2163,7 +2164,7 @@ msgstr "odrzuć żołnierza: %s"
 #: ../../src/logic/playercommand.cc:1130
 #, c-format
 msgid "change soldier capacity: %s"
-msgstr ""
+msgstr "zmień liczbę żołnierzy: %s"
 
 #: ../../src/logic/playercommand.cc:1295
 #, c-format
@@ -2192,6 +2193,8 @@ msgid ""
 "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
 "section)"
 msgstr ""
+"%s nie jest określone jako wejście (\"%s=<wartość>\" nie zostało znalezione "
+"w sekcji [inputs] (wejścia))"
 
 #: ../../src/logic/production_program.cc:82
 #, c-format
@@ -2245,6 +2248,7 @@ msgstr "nieprawidłowy warunek: %s"
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
 msgstr ""
+"oczekiwano {\"nie udano\"|\"dokończono\"|\"pominięto\"}, otrzymano \"%s\""
 
 #: ../../src/logic/production_program.cc:345
 msgid "expected \"and\" or end of input"
@@ -2307,7 +2311,7 @@ msgstr "pomiń"
 
 #: ../../src/logic/production_program.cc:486
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"porażka\"|\"dokończ\"|\"pomiń\"}"
 
 #: ../../src/logic/production_program.cc:500
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
@@ -2331,6 +2335,7 @@ msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] " brak"
 msgstr[1] " brak"
+msgstr[2] " brak"
 
 #: ../../src/logic/production_program.cc:833
 #: ../../src/logic/production_program.cc:918
@@ -2339,6 +2344,8 @@ msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
+"%s nie jest zdeklarowane jako wyjście (znaleziono \"output=%s\"  w sekcji "
+"[global])"
 
 #: ../../src/logic/production_program.cc:851
 msgid "Produced "
@@ -2618,7 +2625,7 @@ msgstr "żołnierz: %s"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:691
 #, c-format
 msgid "carrier: %s"
-msgstr ""
+msgstr "tragarz: %s"
 
 #: ../../src/map_io/widelands_map_building_data_packet.cc:106
 #, c-format
@@ -2785,7 +2792,7 @@ msgstr "Świat \"%s\" używany przez mapę, nie istnieje w twoim systemie."
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
 msgid "ownership: %s"
-msgstr ""
+msgstr "w posiadaniu: %s"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:80
 #, c-format
@@ -2851,30 +2858,32 @@ msgid ""
 "message should have expired at %u; sent at %u with duration %u but gametime "
 "is already %u"
 msgstr ""
+"wiadomość miała wygasnąć w czasie %u; została wysłana w czasie %u z okresem "
+"ważności %u, ale czas gry wynosi już %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:151
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\": %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:156
 #, c-format
 msgid "messages for player %u: %s"
-msgstr ""
+msgstr "wiadomości dla gracza %u: %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:123
 #, c-format
 msgid "unseen immovable: %s"
-msgstr ""
+msgstr "niewidoczna stała: %s"
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr ""
+msgstr "ścieżka: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
-msgstr ""
+msgstr "brak miejsca dla tragarza"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:134
 #, c-format
@@ -2882,21 +2891,23 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"spodziewano się 1, lecz znaleziono %u miejsc dla tragarzy na drodze "
+"zapisanej w wersji pakietu 2 (stara)"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
 msgid "road %u: %s"
-msgstr ""
+msgstr "ścieżka %u: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
 msgid "roaddata: %s"
-msgstr ""
+msgstr "dane ścieżki: %s"
 
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
 msgid "terrain: %s"
-msgstr ""
+msgstr "typ terenu: %s"
 
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:80
 #, c-format
@@ -2906,33 +2917,33 @@ msgstr "Wyzwalacze: %s"
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:68
 #, c-format
 msgid "invalid type \"%s\""
-msgstr ""
+msgstr "błędny typ \"%s\""
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:76
 #, c-format
 msgid "variable %s: %s"
-msgstr ""
+msgstr "zmienna %s: %s"
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:83
 #, c-format
 msgid "variables: %s"
-msgstr ""
+msgstr "zmienne: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
 msgid "ware data: %s"
-msgstr ""
+msgstr "dane magazynu: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:134
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:198
 #, c-format
 msgid "item %u: %s"
-msgstr ""
+msgstr "przedmiot %u: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:205
 #, c-format
 msgid "waredata: %s"
-msgstr ""
+msgstr "dane magazynu: %s"
 
 #: ../../src/network/netclient.cc:100
 msgid "Could not establish connection to host"
@@ -3028,7 +3039,7 @@ msgstr "Gospodarz wysłał gracza %s do lobby!"
 #: ../../src/network/nethost.cc:1138
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Komputer %u"
 
 #: ../../src/network/nethost.cc:1214
 #, c-format
@@ -3101,7 +3112,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1700
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
-msgstr ""
+msgstr "Klient %u (%u) wysłał polecenie gracza (%i) za innego gracza (%i)."
 
 #: ../../src/network/nethost.cc:1709
 msgid "Client sent unexpected synchronization report."
@@ -3109,26 +3120,26 @@ msgstr "Klient wysłał nieoczekiwany raport synchronizacji."
 
 #: ../../src/network/nethost.cc:1745 ../../src/network/nethost.cc:1757
 msgid "Client requests file altough none is available to send."
-msgstr ""
+msgstr "Klient prosi o plik mimo, że nie ma żadnego do wysłania."
 
 #: ../../src/network/nethost.cc:1747
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr ""
+msgstr "Rozpoczęto wysyłanie pliku %s do %s!"
 
 #: ../../src/network/nethost.cc:1768
 msgid "Client requests file part that does not exist."
-msgstr ""
+msgstr "Klient prosi o nieistniejącą część pliku."
 
 #: ../../src/network/nethost.cc:1771
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr ""
+msgstr "Zakończono przesyłanie pliku %s do %s"
 
 #: ../../src/network/nethost.cc:1779
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
-msgstr ""
+msgstr "Wysyłanie części %u/%u pliku %s do %s"
 
 #: ../../src/network/nethost.cc:1789
 #, c-format
@@ -3151,6 +3162,11 @@ msgid ""
 "at http://wl.widelands.org/wiki/InternetGaming can\n"
 "be advantageous."
 msgstr ""
+"Twój serwer nie jest osiągalny z internetu.\n"
+"Prosimy o próbę rozwiązania problemu - \n"
+" - przeczytanie informacji na\n"
+"http://wl.widelands.org/wiki/InternetGaming\n"
+"może pomóc rozwiązać problem."
 
 #: ../../src/network/network_ggz.cc:499
 msgid "Connected to the metaserver of:"
@@ -3167,6 +3183,7 @@ msgstr "Ponownie połączono do metaserweru."
 #: ../../src/network/network_ggz.cc:521
 msgid "NOTE: The Internet gaming implementation is in very early state."
 msgstr ""
+"UWAGA: Implementacja gry wieloosobowej jest na bardzo wczesnym etapie."
 
 #: ../../src/network/network_ggz.cc:525
 msgid "Please take a look at the notes at:"
@@ -3188,7 +3205,7 @@ msgstr "gracz ma numer %u, lecz mapa posiada jedynie %u graczy"
 #: ../../src/trigger/trigger_defeated.cc:52
 #, c-format
 msgid "(defeated): %s"
-msgstr ""
+msgstr "(pokonany): %s"
 
 #: ../../src/trigger/trigger_factory.cc:41
 msgid "Building Trigger"
@@ -3296,7 +3313,7 @@ msgstr "(wiadomość_przeczytana_lub_zapisana): %s"
 #: ../../src/trigger/trigger_military_influence.cc:47
 #, c-format
 msgid "(military influence): %s"
-msgstr ""
+msgstr "(kontrola wojskowa): %s"
 
 #: ../../src/trigger/trigger_ownership.cc:45
 #, c-format
@@ -3311,7 +3328,7 @@ msgstr "(czas): %s"
 #: ../../src/trigger/trigger_vision.cc:52
 #, c-format
 msgid "(vision): %s"
-msgstr ""
+msgstr "(widok): %s"
 
 #: ../../src/ui_basic/messagebox.cc:89
 #: ../../src/ui_fsmenu/campaign_select.cc:74
@@ -3628,7 +3645,7 @@ msgstr "Czas gry:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:111
 msgid "Delete file"
-msgstr ""
+msgstr "Usunąć plik"
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
 msgid "Do you really want to delete "
@@ -3704,7 +3721,7 @@ msgstr "LAN / Bezpośrednie IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:80
 msgid "Show login dialog"
-msgstr ""
+msgstr "Pokazuj dialog logowania"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:107
 #: ../../src/ui_fsmenu/netsetup_lan.cc:109 ../../src/wui/login_box.cc:78
@@ -3742,7 +3759,7 @@ msgstr "Otwórz nowy serwer"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:144
 msgid "Points"
-msgstr ""
+msgstr "Punkty"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:145
 msgid "Server"
@@ -3833,7 +3850,7 @@ msgstr "min."
 
 #: ../../src/ui_fsmenu/options.cc:89
 msgid "days"
-msgstr ""
+msgstr "dni"
 
 #: ../../src/ui_fsmenu/options.cc:96
 msgid "General Options"
@@ -3921,7 +3938,7 @@ msgstr "Czcionka menu głównego:"
 
 #: ../../src/ui_fsmenu/options.cc:400
 msgid "Play a sound at message arrival."
-msgstr ""
+msgstr "Odtwarzaj dźwięk przy przyjściu wiadomość."
 
 #: ../../src/ui_fsmenu/options.cc:408
 msgid "Do not zip widelands data files (maps, replays and savegames)."
@@ -3993,7 +4010,7 @@ msgstr "Wczytaj grę"
 
 #: ../../src/wui/attack_box.cc:172
 msgid "Soldiers:"
-msgstr ""
+msgstr "Żołnierze:"
 
 #: ../../src/wui/attack_box.cc:179
 msgid "Send less soldiers"
@@ -4017,7 +4034,7 @@ msgstr "Akceptowalne obrażenia przed odwrotem"
 
 #: ../../src/wui/attack_box.cc:238 ../../src/wui/military_box.cc:151
 msgid "Once injured"
-msgstr ""
+msgstr "Gdy ranny"
 
 #: ../../src/wui/building_statistics_menu.cc:76
 #: ../../src/wui/game_main_menu.cc:61
@@ -4323,7 +4340,7 @@ msgstr "Długość gry: "
 #: ../../src/wui/game_main_menu_save_game.cc:110
 #, c-format
 msgid "%02ud%02uh%02u'%02u\"%03u"
-msgstr ""
+msgstr "%02ud%02uh%02u'%02u\"%03u"
 
 #: ../../src/wui/game_main_menu_save_game.cc:186
 msgid ""
@@ -4353,7 +4370,7 @@ msgstr " już istnieje. Nadpisać?"
 
 #: ../../src/wui/game_message_menu.cc:41 ../../src/wui/game_message_menu.h:141
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Okno Wiadomości: Skrzynka"
 
 #: ../../src/wui/game_objectives_menu.cc:46
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:151
@@ -5432,7 +5449,7 @@ msgstr "Nazwa w użyciu"
 
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.cc:37
 msgid "Expire Message Event Options"
-msgstr ""
+msgstr "Opcje zdarzenia wygaśnięcia wiadomości"
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
 msgid "Message Box Event Options"
@@ -5521,7 +5538,7 @@ msgstr "Określa opcje zdarzenia \"Ustal styl granicy gracza\""
 
 #: ../../src/editor/ui_menus/event_set_timer_option_menu.cc:37
 msgid "Set Timer Event Options"
-msgstr ""
+msgstr "Opcje zdarzenia czasowego"
 
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
 msgid "Unhide Area Event Options"
@@ -5664,7 +5681,7 @@ msgstr "Przywróć wybrane wiadomości"
 
 #: ../../src/wui/game_message_menu.h:137
 msgid "Show Inbox"
-msgstr ""
+msgstr "Pokaż skrzynkę"
 
 #: ../../src/wui/game_message_menu.h:159
 msgid "center main mapview on location"
