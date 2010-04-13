@@ -28,6 +28,7 @@ class.
 #include <boost/format.hpp>
 using boost::format;
 
+#include "bulldozeconfirm.h"
 #include "logic/constructionsite.h"
 #include "game_debug_ui.h"
 #include "graphic/graphic.h"
@@ -44,6 +45,7 @@ using boost::format;
 #include "logic/warehouse.h"
 #include "waresdisplay.h"
 #include "economy/wares_queue.h"
+#include "waresqueuedisplay.h"
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -77,16 +79,8 @@ using Widelands::atrHP;
 static char const * pic_debug              = "pics/menu_debug.png";
 
 static char const * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
-static char const * pic_queue_background   = "pics/queue_background.png";
 
 static char const * pic_list_worker        = "pics/menu_list_workers.png";
-
-static char const * pic_priority_low       = "pics/low_priority_button.png";
-static char const * pic_priority_normal    = "pics/normal_priority_button.png";
-static char const * pic_priority_high      = "pics/high_priority_button.png";
-static char const * pic_priority_low_on    = "pics/low_priority_on.png";
-static char const * pic_priority_normal_on = "pics/normal_priority_on.png";
-static char const * pic_priority_high_on   = "pics/high_priority_on.png";
 
 static char const * pic_tab_military       = "pics/menu_tab_military.png";
 static char const * pic_tab_training       = "pics/menu_tab_training.png";
@@ -121,337 +115,6 @@ Force the destruction of the options window.
 ===============
 */
 void Building::hide_options() {delete m_optionswindow;}
-
-
-/*
-==============================================================================
-
-class BulldozeConfirm
-
-==============================================================================
-*/
-
-/**
- * Confirm the bulldoze request for a building.
- * \todo move this into it's own set of files
- */
-struct BulldozeConfirm : public UI::Window {
-	BulldozeConfirm
-		(Interactive_Player         & parent,
-		 Building                   & building,
-		 Widelands::PlayerImmovable * todestroy = 0);
-
-	Interactive_Player & iaplayer() const {
-		return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
-	}
-
-	virtual void think();
-	void close_window() {die();}
-private:
-	Widelands::Object_Ptr m_building;
-	Widelands::Object_Ptr m_todestroy;
-
-	struct Message : public UI::Textarea {
-		Message(BulldozeConfirm & parent, Building const & building) :
-			UI::Textarea
-				(&parent,
-				 0, 0, 200, 74,
-				 (format(_("Do you really want to destroy this %s?"))
-				  % building.descname())
-				 	.str(),
-				 UI::Align_Center,
-				 true)
-		{}
-	} m_message;
-
-	struct OK     : public UI::Button {
-		OK(BulldozeConfirm & parent) :
-			UI::Button
-				(&parent,
-				 6, 80, 80, 34,
-				 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/menu_okay.png"))
-		{}
-		void clicked();
-	} m_ok;
-
-	struct Cancel : public UI::Button {
-		Cancel(BulldozeConfirm & parent) :
-			UI::Button
-				(&parent,
-				 114, 80, 80, 34,
-				 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/menu_abort.png"))
-		{}
-		void clicked() {
-			ref_cast<BulldozeConfirm, UI::Panel>(*get_parent()).close_window();
-		}
-	} m_cancel;
-};
-
-
-/*
-===============
-Create the panels.
-If todestroy is 0, the building will be destroyed when the user confirms it.
-Otherwise, todestroy is destroyed when the user confirms it. This is useful to
-confirm building destruction when the building's base flag is removed.
-===============
-*/
-BulldozeConfirm::BulldozeConfirm
-	(Interactive_Player         & parent,
-	 Building                   & building,
-	 Widelands::PlayerImmovable * todestroy)
-	:
-	UI::Window (&parent, 0, 0, 200, 120, _("Destroy building?")),
-	m_building (&building),
-	m_todestroy(todestroy ? todestroy : &building),
-	m_message  (*this, building),
-	m_ok       (*this),
-	m_cancel   (*this)
-{
-	center_to_parent();
-	m_cancel.center_mouse();
-}
-
-
-/*
-===============
-Make sure the building still exists and can in fact be bulldozed.
-===============
-*/
-void BulldozeConfirm::think()
-{
-	Widelands::Editor_Game_Base const & egbase = iaplayer().egbase();
-	upcast(Building,        building,  m_building .get(egbase));
-	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
-
-	if
-		(!todestroy ||
-		 !building  ||
-		 not iaplayer().can_act(building->owner().player_number()) or
-		 !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
-		die();
-}
-
-
-/*
-===============
-Issue the CMD_BULLDOZE command for this building.
-===============
-*/
-void BulldozeConfirm::OK::clicked()
-{
-	BulldozeConfirm & parent =
-		ref_cast<BulldozeConfirm, UI::Panel>(*get_parent());
-	Interactive_Player & iaplayer = parent.iaplayer();
-	Widelands::Game & game   = iaplayer.game();
-	upcast(Building,        building,  parent.m_building.get(game));
-	upcast(Widelands::PlayerImmovable, todestroy, parent.m_todestroy.get(game));
-
-	if
-		(todestroy &&
-		 building &&
-		 iaplayer.can_act(building->owner().player_number()) and
-		 building->get_playercaps() & (1 << Building::PCap_Bulldoze))
-	{
-		game.send_player_bulldoze
-			(*todestroy, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
-		iaplayer.need_complete_redraw();
-	}
-
-	parent.close_window();
-}
-
-
-/*
-===============
-Create a BulldozeConfirm window.
-building is the building that the confirmation dialog displays.
-todestroy is the immovable that will be bulldozed if the user confirms the
-dialog.
-===============
-*/
-void show_bulldoze_confirm
-	(Interactive_Player         &       player,
-	 Building                   &       building,
-	 Widelands::PlayerImmovable * const todestroy)
-{
-	new BulldozeConfirm(player, building, todestroy);
-}
-
-
-/*
-==============================================================================
-
-class WaresQueueDisplay
-
-==============================================================================
-*/
-
-/*
-class WaresQueueDisplay
------------------------
-This passive class displays the status of a WaresQueue.
-It updates itself automatically through think().
-*/
-struct WaresQueueDisplay : public UI::Panel {
-	enum {
-		CellWidth = WARE_MENU_PIC_WIDTH,
-		Border = 4,
-		Height = WARE_MENU_PIC_HEIGHT + 2 * Border,
-	};
-
-public:
-	WaresQueueDisplay
-		(UI::Panel             * parent,
-		 int32_t x, int32_t y,
-		 uint32_t                maxw,
-		 Widelands::WaresQueue *);
-	~WaresQueueDisplay();
-
-	virtual void think();
-	virtual void draw(RenderTarget &);
-
-private:
-	void recalc_size();
-
-private:
-	Widelands::WaresQueue * m_queue;
-	uint32_t         m_max_width;
-	PictureID        m_icon;            //< Index to ware's picture
-	PictureID        m_pic_background;
-
-	uint32_t         m_cache_size;
-	uint32_t         m_cache_filled;
-	uint32_t         m_display_size;
-};
-
-
-WaresQueueDisplay::WaresQueueDisplay
-	(UI::Panel * const parent,
-	 int32_t const x, int32_t const y, uint32_t const maxw,
-	 Widelands::WaresQueue * const queue)
-:
-UI::Panel(parent, x, y, 0, Height),
-m_queue(queue),
-m_max_width(maxw),
-m_pic_background(g_gr->get_picture(PicMod_Game, pic_queue_background)),
-m_cache_size(queue->get_size()),
-m_cache_filled(queue->get_filled()),
-m_display_size(0)
-{
-	const Widelands::Item_Ware_Descr & ware =
-		*queue->owner().tribe().get_ware_descr(m_queue->get_ware());
-	set_tooltip(ware.descname().c_str());
-
-	m_icon = ware.icon();
-	m_pic_background = g_gr->create_grayed_out_pic(m_icon);
-
-	recalc_size();
-
-	set_think(true);
-}
-
-
-WaresQueueDisplay::~WaresQueueDisplay() {
-	g_gr->free_surface(m_pic_background);
-}
-
-
-/*
-===============
-Recalculate the panel's size.
-===============
-*/
-void WaresQueueDisplay::recalc_size()
-{
-	m_display_size = (m_max_width - 2 * Border) / CellWidth;
-
-	m_cache_size = m_queue->get_size();
-
-	if (m_cache_size < m_display_size)
-		m_display_size = m_cache_size;
-
-	set_size(m_display_size * CellWidth + 2 * Border, Height);
-}
-
-
-/*
-===============
-Compare the current WaresQueue state with the cached state; update if necessary.
-===============
-*/
-void WaresQueueDisplay::think()
-{
-	if (static_cast<uint32_t>(m_queue->get_size()) != m_cache_size)
-		recalc_size();
-
-	if (static_cast<uint32_t>(m_queue->get_filled()) != m_cache_filled)
-		update();
-}
-
-
-/*
-===============
-Render the current WaresQueue state.
-===============
-*/
-void WaresQueueDisplay::draw(RenderTarget & dst)
-{
-	if (!m_display_size)
-		return;
-
-	m_cache_filled = m_queue->get_filled();
-
-	uint32_t nr_wares_to_draw = std::min(m_cache_filled, m_display_size);
-	uint32_t nr_empty_to_draw = m_display_size - nr_wares_to_draw;
-	Point point(Border, Border);
-	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth)
-		dst.blit(point, m_icon);
-	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth)
-		dst.blit(point, m_pic_background);
-}
-
-/*
-=====
-
-class Priority_Button
-
-=====
-*/
-
-struct PriorityButtonInfo {
-	UI::Button * button;
-	PictureID picture_enabled;
-	PictureID picture_disabled;
-
-	PriorityButtonInfo() {}
-
-	PriorityButtonInfo
-		(UI::Button * const btn,
-		 PictureID const pic_enabled, PictureID const pic_disabled)
-		:
-		button(btn), picture_enabled(pic_enabled), picture_disabled(pic_disabled)
-	{}
-};
-
-struct PriorityButtonHelper : std::map<int32_t, PriorityButtonInfo> {
-	PriorityButtonHelper
-		(Widelands::Game     & g,
-		 Building            * ps,
-		 int32_t               ware_type,
-		 Widelands::Ware_Index ware_index);
-
-	void button_clicked (int32_t priority);
-	void update_buttons (bool allow_changes);
-
-private:
-	Widelands::Game     & m_game;
-	Building            * m_building;
-	int32_t               m_ware_type;
-	Widelands::Ware_Index m_ware_index;
-};
 
 
 /*
@@ -501,14 +164,6 @@ protected:
 
 	void create_ware_queue_panel
 		(UI::Box *, Building &, Widelands::WaresQueue *);
-
-	std::list<PriorityButtonHelper> m_priority_helpers;
-	UI::Callback_IDButton<PriorityButtonHelper, int32_t> *
-	create_priority_button
-		(UI::Box *, PriorityButtonHelper &,
-		 int32_t priority, int32_t x, int32_t y, int32_t w, int32_t h,
-		 const char * picture1, const char * picture2,
-		 const std::string & tooltip);
 
 protected:
 	UI::Window * & m_registry;
@@ -735,9 +390,7 @@ Callback for bulldozing request
 */
 void Building_Window::act_bulldoze()
 {
-	new BulldozeConfirm
-		(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()),
-		 m_building);
+	show_bulldoze_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
 }
 
 void Building_Window::act_start_stop() {
@@ -921,9 +574,6 @@ void ConstructionSite_Window::think()
 
 	ConstructionSite const & cs =
 		ref_cast<ConstructionSite, Building>(building());
-	bool const can_act = igbase().can_act(cs.owner().player_number());
-	container_iterate(std::list<PriorityButtonHelper>, m_priority_helpers, i)
-		i.current->update_buttons(can_act);
 
 	m_progress->set_state(cs.get_built_per64k());
 }
@@ -1269,35 +919,6 @@ void ProductionSite_Window_ListWorkerWindow::update()
 	}
 }
 
-PriorityButtonHelper::PriorityButtonHelper
-	(Widelands::Game     &       g,
-	 Building            *       building,
-	 int32_t               const ware_type,
-	 Widelands::Ware_Index const ware_index)
-:
-m_game(g),
-m_building  (building),
-m_ware_type (ware_type),
-m_ware_index(ware_index)
-{}
-
-void PriorityButtonHelper::button_clicked (int32_t const priority) {
-	m_game.send_player_set_ware_priority
-		(*m_building, m_ware_type, m_ware_index, priority);
-}
-
-void PriorityButtonHelper::update_buttons (bool const allow_changes) {
-	int32_t const priority =
-		m_building->get_priority(m_ware_type, m_ware_index, false);
-
-	for (iterator it = begin(); it != end(); ++it) {
-		bool const enable = it->first != priority;
-		it->second.button->set_enabled(allow_changes and enable);
-		it->second.button->set_pic
-			(enable ? it->second.picture_enabled : it->second.picture_disabled);
-	}
-}
-
 /*
 ===============
 Create the window and its panels, add it to the registry.
@@ -1320,87 +941,12 @@ ProductionSite_Window::ProductionSite_Window
 	}
 }
 
-UI::Callback_IDButton<PriorityButtonHelper, int32_t> *
-Building_Window::create_priority_button
-	(UI::Box * box, PriorityButtonHelper & helper,
-	 int32_t priority, int32_t x, int32_t, int32_t w, int32_t h,
-	 char const * picture1, char const * picture2,
-	 std::string const & button_tooltip)
-{
-	PictureID const pic_enabled  =
-		g_gr->get_resized_picture
-			(g_gr->get_picture(PicMod_Game,  picture1),
-			 w, h, Graphic::ResizeMode_Clip);
-	PictureID const pic_disabled =
-		g_gr->get_resized_picture
-			(g_gr->get_picture(PicMod_Game,  picture2),
-			 w, h, Graphic::ResizeMode_Clip);
-	UI::Callback_IDButton<PriorityButtonHelper, int32_t> * button =
-		new UI::Callback_IDButton<PriorityButtonHelper, int32_t>
-			(box,
-			 x, 0, w, h,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-			 pic_enabled,
-			 &PriorityButtonHelper::button_clicked, helper, priority,
-			 button_tooltip, true, true);
-	helper[priority] = PriorityButtonInfo(button, pic_enabled, pic_disabled);
-	return button;
-}
-
 void Building_Window::create_ware_queue_panel
 	(UI::Box               * const box,
 	 Building              &       b,
 	 Widelands::WaresQueue * const wq)
 {
-	const int32_t priority_buttons_width = WaresQueueDisplay::Height / 3;
-	UI::Box * hbox = new UI::Box (box, 0, 0, UI::Box::Horizontal);
-	WaresQueueDisplay & wqd =
-		*new WaresQueueDisplay(hbox, 0, 0, get_w() - priority_buttons_width, wq);
-
-	hbox->add(&wqd, UI::Box::AlignTop);
-
-	if (wq->get_ware()) {
-		m_priority_helpers.push_back
-			(PriorityButtonHelper
-			 	(igbase().game(), &b, Widelands::Request::WARE, wq->get_ware()));
-
-		PriorityButtonHelper & helper = m_priority_helpers.back();
-
-		UI::Box * vbox = new UI::Box (hbox, 0, 0, UI::Box::Vertical);
-		// Add priority buttons
-		vbox->add
-			(create_priority_button
-			 	(vbox, helper, HIGH_PRIORITY, 0, 0,
-			 	 priority_buttons_width,
-			 	 priority_buttons_width,
-			 	 pic_priority_high,
-			 	 pic_priority_high_on,
-			 	 _("Highest priority")),
-			 UI::Box::AlignTop);
-		vbox->add
-			(create_priority_button
-			 	(vbox, helper, DEFAULT_PRIORITY, 0, 0,
-			 	 priority_buttons_width,
-			 	 priority_buttons_width,
-			 	 pic_priority_normal,
-			 	 pic_priority_normal_on,
-			 	 _("Normal priority")),
-			 UI::Box::AlignTop);
-		vbox->add
-			(create_priority_button
-			 	(vbox, helper, LOW_PRIORITY, 0, 0,
-			 	 priority_buttons_width,
-			 	 priority_buttons_width,
-			 	 pic_priority_low,
-			 	 pic_priority_low_on,
-			 	 _("Lowest priority")),
-			 UI::Box::AlignTop);
-
-		hbox->add(vbox, UI::Box::AlignCenter);
-		helper.update_buttons(igbase().can_act(b.owner().player_number()));
-	}
-
-	box->add(hbox, UI::Box::AlignLeft);
+	box->add(create_wares_queue_display(box, igbase(), b, wq, get_w()), UI::Box::AlignLeft);
 }
 
 ProductionSite_Window::Production_Box::Production_Box
@@ -1455,10 +1001,6 @@ Make sure the window is redrawn when necessary.
 void ProductionSite_Window::think()
 {
 	Building_Window::think();
-
-	bool const can_act = igbase().can_act(building().owner().player_number());
-	container_iterate(std::list<PriorityButtonHelper>, m_priority_helpers, i)
-		i.current->update_buttons(can_act);
 }
 
 
