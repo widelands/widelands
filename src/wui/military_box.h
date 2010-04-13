@@ -30,6 +30,11 @@
 #include "ui_basic/textarea.h"
 #include <list>
 
+/**
+ * Military settings tab that is part of the \ref FieldActionWindow
+ *
+ * Used to configure the player's global military settings.
+ */
 struct MilitaryBox : public UI::Box {
 	MilitaryBox
 		(UI::Panel              * parent,

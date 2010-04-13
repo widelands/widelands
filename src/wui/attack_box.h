@@ -36,6 +36,10 @@ using Widelands::Bob;
 using Widelands::Building;
 using Widelands::Soldier;
 
+/**
+ * Provides the attack settings that are part of a \ref FieldActionWindow
+ * when clicking on an enemy building.
+ */
 struct AttackBox : public UI::Box {
 	AttackBox
 		(UI::Panel              * parent,
