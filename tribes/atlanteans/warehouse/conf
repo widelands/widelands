@@ -9,5 +9,5 @@ spidercloth=1
 
 [idle]
 pics=warehouse_i_??.png  # ???
-hotspot=60 64
+hotspot=52 64
 playercolor=true

@@ -206,8 +206,8 @@ Event::State Event_Message_Box::run(Game & game) {
 			(game, this, get_posx(), get_posy(), get_w(), get_h());
 	if (get_is_modal()) {
 		mb->run();
-		delete mb;
 	}
+	delete mb;
 
 	m_state = DONE;
 	return m_state;

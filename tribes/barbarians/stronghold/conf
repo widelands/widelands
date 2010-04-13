@@ -12,8 +12,8 @@ raw_stone=3
 
 [idle]
 pics=stronghold_i_??.png
-hotspot=46 52
+hotspot=50 59
 
 [build]
 pics=stronghold_b_??.png
-hotspot=46 52
+hotspot=50 59

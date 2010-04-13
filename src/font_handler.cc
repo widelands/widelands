@@ -261,7 +261,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	std::string const lines = word_wrap_text(font, text, wrap);
 	std::string::size_type const lines_size = lines.size();
 	struct {std::string::size_type pos; bool done;} j = {0, false};
-	for (;not j.done;)
+	for (; not j.done;)
 	{
 		std::string::size_type line_end = lines.find('\n', j.pos);
 		if (line_end == std::string::npos) {
@@ -943,7 +943,7 @@ void Font_Handler::get_size
 	h = 0;
 	std::string::size_type const text_size = text.size();
 	struct {std::string::size_type pos; bool done;} j = {0, false};
-	for (;not j.done;)
+	for (; not j.done;)
 	{
 		std::string::size_type line_end = text.find('\n', j.pos);
 		if (line_end == std::string::npos) {

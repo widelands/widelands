@@ -876,7 +876,9 @@ void Soldier::attack_update(Game & game, State & state)
 			 	 descr().get_right_walk_anims(does_carry_ware())))
 			return;
 		else {
-			molog("[attack] failed to move towards building flag, cancel attack and return home!\n");
+			molog
+				 ("[attack] failed to move towards building flag, "
+					"cancel attack and return home!\n");
 			state.coords = Coords(0, 0);
 			state.objvar1 = 0;
 			return schedule_act(game, 10);

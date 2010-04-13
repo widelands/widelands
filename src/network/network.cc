@@ -164,7 +164,7 @@ RecvPacket::RecvPacket (Deserializer & des)
 	assert(des.queue.size() >= static_cast<size_t>(size));
 	assert(size >= 2);
 
-	buffer.insert(buffer.end(), des.queue.begin()+2, des.queue.begin() + size);
+	buffer.insert(buffer.end(), des.queue.begin() + 2, des.queue.begin() + size);
 	m_index = 0;
 
 	des.queue.erase(des.queue.begin(), des.queue.begin() + size);

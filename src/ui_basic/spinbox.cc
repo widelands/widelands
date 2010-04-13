@@ -163,8 +163,9 @@ SpinBox::SpinBox
 void SpinBox::update()
 {
 
-	for(wl_const_range<std::vector<IntValueTextReplacement> >
-		i(sbi->valrep);;++i)
+	for
+		(wl_const_range<std::vector<IntValueTextReplacement> >
+		i(sbi->valrep);; ++i)
 		if (i.empty()) {
 			char buf[64];
 			snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());

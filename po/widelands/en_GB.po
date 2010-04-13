@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-21 10:15+0100\n"
-"PO-Revision-Date: 2010-03-22 09:58+0000\n"
-"Last-Translator: ColdFFF <coldfff@blueyonder.co.uk>\n"
+"POT-Creation-Date: 2010-03-25 13:31+0100\n"
+"PO-Revision-Date: 2010-03-25 18:33+0000\n"
+"Last-Translator: Alex Denvir <coldfff@blueyonder.co.uk>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-23 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -334,7 +334,7 @@ msgstr "Widelands has not been able to connect to the host."
 msgid "The address of the game server is invalid"
 msgstr "The address of the game server is invalid"
 
-#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1183
+#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1189
 msgid "Player"
 msgstr "Player"
 
@@ -1986,35 +1986,35 @@ msgid_plural "%u(+%u) soldiers"
 msgstr[0] "%u(+%u) soldier"
 msgstr[1] "%u(+%u) soldiers"
 
-#: ../../src/logic/militarysite.cc:574
+#: ../../src/logic/militarysite.cc:580
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
 msgstr "%sThe enemy defeated your soldiers at the %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:581
+#: ../../src/logic/militarysite.cc:587
 msgid "Militarysite lost!"
 msgstr "Military site lost!"
 
-#: ../../src/logic/militarysite.cc:654
+#: ../../src/logic/militarysite.cc:660
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
 msgstr "%sYour soldiers defeated the enemy at the %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:661
+#: ../../src/logic/militarysite.cc:667
 msgid "Enemy at site defeated!"
 msgstr "Enemy at site defeated!"
 
-#: ../../src/logic/militarysite.cc:709
+#: ../../src/logic/militarysite.cc:715
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
 msgstr "%sYour %s discovered an aggressor.</p>"
 
-#: ../../src/logic/militarysite.cc:710
+#: ../../src/logic/militarysite.cc:716
 #, c-format
 msgid "%sYour %s is under attack.</p>"
 msgstr "%sYour %s is under attack.</p>"
 
-#: ../../src/logic/militarysite.cc:720
+#: ../../src/logic/militarysite.cc:726
 msgid "You are under attack"
 msgstr "You are under attack"
 
@@ -3006,63 +3006,63 @@ msgstr "The game has started just after you tried to connect."
 msgid "Server has crashed and performed an emergency save."
 msgstr "Server has crashed and performed an emergency save."
 
-#: ../../src/network/nethost.cc:832
+#: ../../src/network/nethost.cc:838
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "Host sent player %s to the lobby!"
 
-#: ../../src/network/nethost.cc:1132
+#: ../../src/network/nethost.cc:1138
 #, c-format
 msgid "Computer %u"
 msgstr "Computer %u"
 
-#: ../../src/network/nethost.cc:1208
+#: ../../src/network/nethost.cc:1214
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr "WARNING: %s uses version: %s, while Host uses version: %s"
 
-#: ../../src/network/nethost.cc:1255
+#: ../../src/network/nethost.cc:1261
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s has joined the game"
 
-#: ../../src/network/nethost.cc:1279
+#: ../../src/network/nethost.cc:1285
 msgid "Client reports time to host that is running backwards."
 msgstr "Client reports time to host that is running backwards."
 
-#: ../../src/network/nethost.cc:1282
+#: ../../src/network/nethost.cc:1288
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Client simulates beyond the game time allowed by the host."
 
-#: ../../src/network/nethost.cc:1286
+#: ../../src/network/nethost.cc:1292
 msgid "Client did not submit sync report in time."
 msgstr "Client did not submit sync report in time."
 
-#: ../../src/network/nethost.cc:1466
+#: ../../src/network/nethost.cc:1472
 msgid "Client and host have become desynchronized."
 msgstr "Client and host have become desynchronized."
 
-#: ../../src/network/nethost.cc:1512
+#: ../../src/network/nethost.cc:1518
 msgid "New User"
 msgstr "New User"
 
-#: ../../src/network/nethost.cc:1517
+#: ../../src/network/nethost.cc:1523
 msgid "The game has already started."
 msgstr "The game has already started."
 
-#: ../../src/network/nethost.cc:1535
+#: ../../src/network/nethost.cc:1541
 msgid "Connection to client lost."
 msgstr "Connection to client lost."
 
-#: ../../src/network/nethost.cc:1549
+#: ../../src/network/nethost.cc:1555
 msgid "Client sent malformed commands: "
 msgstr "Client sent malformed commands: "
 
-#: ../../src/network/nethost.cc:1582
+#: ../../src/network/nethost.cc:1588
 msgid "Game is running already, but client has not connected fully"
 msgstr "Game is running already, but client has not connected fully"
 
-#: ../../src/network/nethost.cc:1586
+#: ../../src/network/nethost.cc:1592
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
@@ -3071,57 +3071,57 @@ msgstr ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
 "is running an incompatible version."
 
-#: ../../src/network/nethost.cc:1592
+#: ../../src/network/nethost.cc:1598
 msgid "Server uses a different protocol version."
 msgstr "Server uses a different protocol version."
 
-#: ../../src/network/nethost.cc:1674
+#: ../../src/network/nethost.cc:1680
 msgid "Client sent TIME command even though game is not running."
 msgstr "Client sent TIME command even though game is not running."
 
-#: ../../src/network/nethost.cc:1682
+#: ../../src/network/nethost.cc:1688
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr "Client sent PLAYERCOMMAND command even though game is not running."
 
-#: ../../src/network/nethost.cc:1694
+#: ../../src/network/nethost.cc:1700
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 
-#: ../../src/network/nethost.cc:1703
+#: ../../src/network/nethost.cc:1709
 msgid "Client sent unexpected synchronization report."
 msgstr "Client sent unexpected synchronization report."
 
-#: ../../src/network/nethost.cc:1739 ../../src/network/nethost.cc:1751
+#: ../../src/network/nethost.cc:1745 ../../src/network/nethost.cc:1757
 msgid "Client requests file altough none is available to send."
 msgstr "Client requests file altough none is available to send."
 
-#: ../../src/network/nethost.cc:1741
+#: ../../src/network/nethost.cc:1747
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr "Started to send file %s to %s!"
 
-#: ../../src/network/nethost.cc:1762
+#: ../../src/network/nethost.cc:1768
 msgid "Client requests file part that does not exist."
 msgstr "Client requests file part that does not exist."
 
-#: ../../src/network/nethost.cc:1765
+#: ../../src/network/nethost.cc:1771
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr "Completed transfer of file %s to %s"
 
-#: ../../src/network/nethost.cc:1773
+#: ../../src/network/nethost.cc:1779
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr "Sending part %u/%u of file %s to %s"
 
-#: ../../src/network/nethost.cc:1783
+#: ../../src/network/nethost.cc:1789
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Client sent unknown command number %u"
 
-#: ../../src/network/nethost.cc:1839
+#: ../../src/network/nethost.cc:1845
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s has left the game (%s)"

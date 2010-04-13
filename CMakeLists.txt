@@ -192,9 +192,9 @@ else (DEFINED MSVC)
 endif (DEFINED MSVC)
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  message ("Using compiler flags: ${CMAKE_CXX_FLAGS_DEBUG}")
+  message (STATUS "Using compiler flags: ${CMAKE_CXX_FLAGS_DEBUG}")
 ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  message ("Using compiler flags: ${CMAKE_CXX_FLAGS_RELEASE}")
+  message (STATUS "Using compiler flags: ${CMAKE_CXX_FLAGS_RELEASE}")
 ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 if (DEFINED WL_3RDPARTY_DIR)
@@ -207,7 +207,7 @@ if (GGZ_CORE_FOUND)
   include_directories(${GGZ_CORE_INCLUDE_DIR})
   add_definitions("-DUSE_GGZ")
 else (GGZ_CORE_FOUND)
-  message ("GGZ support disabled, check your libraries path and installed packages!")
+  message (STATUS "GGZ support disabled, check your libraries path and installed packages!")
 endif (GGZ_CORE_FOUND)
 
 # ...but using MAJOR, MINOR and PATCH
@@ -369,9 +369,9 @@ install(
   COMPONENT DocFiles
   PATTERN "*.svn*" EXCLUDE
   PATTERN "SCons*" EXCLUDE
+  PATTERN "CMakeLists.txt" EXCLUDE
 )
 
-execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale)
 find_package (PythonInterp REQUIRED)
 
 if (WIN32)

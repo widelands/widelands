@@ -263,6 +263,7 @@ calc_minimap_color
 Return the color to be used in the minimap for the given field.
 ===============
 */
+
 inline static uint32_t calc_minimap_color
 	(SDL_PixelFormat             const &       format,
 	 Widelands::Editor_Game_Base const &       egbase,
@@ -447,7 +448,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 	std::string::size_type const picnametempl_size = data->picnametempl.size();
 	if (sizeof(filename) < picnametempl_size + 3 + 4 + 1)
 		throw wexception
-			("buffer too small (%u) for picture name temlplate of size %u\n",
+			("buffer too small (%lu) for picture name temlplate of size %lu\n",
 			 sizeof(filename), picnametempl_size);
 	strcpy(filename, data->picnametempl.c_str());
 

@@ -187,11 +187,11 @@ Event_Building::Event_Building
 									 nr_ware_types * sizeof(uint32_t));
 							else
 							{
-								for (ware_range i(inputs);i;++i)
+								for (ware_range i(inputs); i; ++i)
 								{
 									char const * const wname =
-										tribe->get_ware_descr(i.current->first)->name().c_str
-											();
+										tribe->get_ware_descr(i.current->first)
+											->name().c_str();
 									uint32_t     const count = s.get_positive(wname, 0);
 									uint32_t     const max   = i.current->second;
 									if (max < count)
@@ -209,11 +209,11 @@ Event_Building::Event_Building
 								ps_descr->working_positions();
 							uint8_t const nr_worker_types = working_positions.size();
 							m_worker_counts = new uint32_t[nr_worker_types];
-							for( ware_range i(working_positions);i;++i)
+							for (ware_range i(working_positions); i; ++i)
 							{
 								char const * const wname =
-									tribe->get_worker_descr(i.current->first)->name().c_str
-										();
+									tribe->get_worker_descr(i.current->first)
+										->name().c_str();
 								uint32_t     const max   = i.current->second;
 								uint32_t     const count =
 									fill ? max : s.get_positive(wname, 0);
@@ -357,13 +357,15 @@ void Event_Building::Write
 	s.set_string("building", descr.name().c_str());
 	if (dynamic_cast<Warehouse_Descr const *>(&descr)) {
 		for //  wares
-			(wl_index_range<Ware_Index> i(Ware_Index::First(), tribe.get_nrwares());
+			(wl_index_range<Ware_Index> i(Ware_Index::First(),
+										  tribe.get_nrwares());
 			 i;
 			 ++i)
 			if (uint32_t const count = m_ware_counts[i.current.value()])
 				s.set_int(tribe.get_ware_descr(i.current)->name().c_str(), count);
 		for //  workers
-			(wl_index_range<Ware_Index>i(Ware_Index::First(), tribe.get_nrworkers());
+			(wl_index_range<Ware_Index> i(Ware_Index::First(),
+										 tribe.get_nrworkers());
 			 i;
 			 ++i)
 			if (uint32_t const count = m_worker_counts[i.current.value()])
@@ -371,17 +373,19 @@ void Event_Building::Write
 	} else if (upcast(ProductionSite_Descr const, ps_descr, &descr)) {
 		{ //  wares
 			Ware_Types const & inputs = ps_descr->inputs();
-			for(ware_range i(inputs);i;++i)
+			for (ware_range i(inputs); i; ++i)
 				if (uint32_t const count = m_ware_counts[i.i])
 					s.set_int
-						(tribe.get_ware_descr(i.current->first)->name().c_str(), count);
+						(tribe.get_ware_descr(i.current->first)->name().c_str(),
+						 	count);
 		}
 		{ //  workers
 			Ware_Types const & working_positions = ps_descr->working_positions();
-			for(ware_range i(working_positions);i;++i)
+			for (ware_range i(working_positions); i; ++i)
 				if (uint32_t const count = m_worker_counts[i.i])
 					s.set_int
-						(tribe.get_worker_descr(i.current->first)->name().c_str(), count);
+						(tribe.get_worker_descr(i.current->first)->name().c_str(),
+						 count);
 		}
 	}
 	container_iterate_const(Soldier_Counts, m_soldier_counts, i) {

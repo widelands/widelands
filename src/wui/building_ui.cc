@@ -146,7 +146,7 @@ struct BulldozeConfirm : public UI::Window {
 	}
 
 	virtual void think();
-	void close_window() { die();}
+	void close_window() {die();}
 private:
 	Widelands::Object_Ptr m_building;
 	Widelands::Object_Ptr m_todestroy;
@@ -156,8 +156,9 @@ private:
 			UI::Textarea
 				(&parent,
 				 0, 0, 200, 74,
-				 (format(_("Do you really want to destroy this %s?")) %
-					building.descname()).str(),
+				 (format(_("Do you really want to destroy this %s?"))
+				  % building.descname())
+				 	.str(),
 				 UI::Align_Center,
 				 true)
 		{}

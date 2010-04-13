@@ -129,7 +129,8 @@ void Event_Player_Worker_Types_Option_Menu::Table::fill
 	 Widelands::Event_Player_Worker_Types::Worker_Types const & bld_types)
 {
 	for
-		(wl_index_range<Widelands::Ware_Index> i(Widelands::Ware_Index::First(), tribe.get_nrworkers());
+		(wl_index_range<Widelands::Ware_Index> i
+			  (Widelands::Ware_Index::First(), tribe.get_nrworkers());
 		 i;
 		 ++i)
 	{

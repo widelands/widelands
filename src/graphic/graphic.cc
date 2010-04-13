@@ -308,7 +308,7 @@ void Graphic::update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h)
 /**
  * Returns true if parts of the screen have been marked for refreshing.
 */
-bool Graphic::need_update()
+bool Graphic::need_update() const
 {
 	return m_nr_update_rects || m_update_fullscreen;
 }

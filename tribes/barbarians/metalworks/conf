@@ -137,8 +137,8 @@ return=skipped
 
 [idle]
 pics=metalworks_i_??.png
-hotspot=40 54
+hotspot=37 51
 
 [working]
 pics=metalworks_i_??.png
-hotspot=40 54
+hotspot=37 51

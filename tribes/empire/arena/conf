@@ -46,3 +46,7 @@ marblecolumn=2
 [idle]
 pics=arena_i_??.png  # ???
 hotspot=82 98
+
+[build]
+pics=arena_b_??.png  # ???
+hotspot=82 98

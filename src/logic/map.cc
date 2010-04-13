@@ -1704,7 +1704,7 @@ void Map::calc_cost
 
 /// Get a node's neighbour by direction.
 void Map::get_neighbour
-	(Coords const f, Direction const dir, Coords * const o) const
+	(const Coords & f, Direction const dir, Coords * const o) const
 {
 	switch (dir) {
 	case WALK_NW: get_tln(f, o); break;
@@ -1719,7 +1719,7 @@ void Map::get_neighbour
 }
 
 void Map::get_neighbour
-	(FCoords const f, Direction const dir, FCoords * const o) const
+	(const FCoords & f, Direction const dir, FCoords * const o) const
 {
 	switch (dir) {
 	case WALK_NW: get_tln(f, o); break;
