@@ -102,11 +102,12 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
 set (BUILD_SHARED_LIBS OFF)
+
+# we only include Boost Headers, no libraries
 set (Boost_USE_STATIC_LIBS   ON)
 set (Boost_USE_MULTITHREADED ON)
 find_package(Boost 1.35.0 REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
-target_link_libraries(widelands ${Boost_LIBRARIES})
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")

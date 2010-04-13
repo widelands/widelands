@@ -148,7 +148,6 @@ target_link_libraries(widelands ${SDLNET_LIBRARY})
 target_link_libraries(widelands ${SDLTTF_LIBRARY})
 target_link_libraries(widelands ${LUA_LIBRARY})
 target_link_libraries(widelands ${SDLGFX_LIBRARY})
-target_link_libraries(widelands ${Boost_unit_test_framework_LIBRARIES})
 
 if (GGZ_CORE_FOUND)
   target_link_libraries(widelands ${GGZ_CORE_LIBRARY})
