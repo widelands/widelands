@@ -18,6 +18,7 @@
  */
 
 #include "buildingwindow.h"
+#include "logic/player.h"
 #include "logic/warehouse.h"
 #include "waresdisplay.h"
 

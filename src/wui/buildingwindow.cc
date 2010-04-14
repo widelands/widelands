@@ -21,9 +21,14 @@
 
 #include "bulldozeconfirm.h"
 #include "game_debug_ui.h"
+#include "graphic/rendertarget.h"
+#include "interactive_player.h"
 #include "logic/maphollowregion.h"
 #include "logic/militarysite.h"
+#include "logic/player.h"
 #include "logic/productionsite.h"
+#include "logic/tribe.h"
+#include "upcast.h"
 #include "waresqueuedisplay.h"
 
 static char const * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
