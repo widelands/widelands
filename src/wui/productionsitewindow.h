@@ -17,28 +17,31 @@
  *
  */
 
-#include "logic/building.h"
-#include "ui_basic/window.h"
+#ifndef _PRODUCTIONSITEWINDOW_H_
+#define _PRODUCTIONSITEWINDOW_H_
 
-using Widelands::Building;
+#include "buildingwindow.h"
+#include "logic/productionsite.h"
 
-/**
- * Create the building's options window if necessary and bring it to
- * the top to be seen by the player.
- */
-void Building::show_options(Interactive_GameBase & igbase)
-{
-	if (m_optionswindow)
-		m_optionswindow->move_to_top();
-	else
-		create_options_window(igbase, m_optionswindow);
-}
+struct ProductionSite_Window : public Building_Window {
+	ProductionSite_Window
+		(Interactive_GameBase & parent,
+		 Widelands::ProductionSite &,
+		 UI::Window *         & registry);
 
-/**
- * Remove the building's options window.
- */
-void Building::hide_options()
-{
-	delete m_optionswindow;
-}
+	Widelands::ProductionSite & productionsite() {
+		return ref_cast<Widelands::ProductionSite, Widelands::Building>(building());
+	}
 
+	virtual void think();
+
+public:
+	void list_worker_clicked();
+protected:
+	struct Production_Box : public UI::Box {
+		Production_Box
+			(UI::Panel & parent, ProductionSite_Window &, Widelands::ProductionSite &);
+	};
+};
+
+#endif // _PRODUCTIONSITEWINDOW_H_
