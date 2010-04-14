@@ -22,6 +22,7 @@
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "productionsitewindow.h"
+#include "soldierlist.h"
 #include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
 
@@ -36,7 +37,6 @@ static char const * pic_tab_military       = "pics/menu_tab_military.png";
 static char const * pic_tab_training       = "pics/menu_tab_training.png";
 static char const * pic_up_train           = "pics/menu_up_train.png";
 static char const * pic_down_train         = "pics/menu_down_train.png";
-static char const * pic_drop_soldier       = "pics/menu_drop_soldier.png";
 
 /**
  * Status window for \ref TrainingSite
@@ -52,8 +52,6 @@ struct TrainingSite_Window : public ProductionSite_Window {
 	virtual void think();
 
 private:
-	void update();
-
 	Widelands::Coords      m_ms_location;
 
 	struct Tab_Panel : public UI::Tab_Panel {
@@ -75,39 +73,19 @@ private:
 		struct Sold_Box : public UI::Box {
 			Sold_Box(Tab_Panel & parent) :
 				UI::Box(&parent, 0,  0, UI::Box::Vertical),
-				m_table                (*this),
-				m_drop_selected_soldier(*this),
 				m_capacity_box         (*this)
 			{
+				add
+					(create_soldier_list
+						(*this,
+						 *static_cast<Interactive_GameBase*>(parent.get_parent()->get_parent()),
+						 static_cast<TrainingSite_Window*>(parent.get_parent())->trainingsite()),
+					 AlignCenter);
+
+				add(&m_capacity_box, UI::Align_Left);
+
 				resize();
 			}
-
-			struct Table : public UI::Table<Soldier &> {
-				Table(UI::Box & parent) :
-					UI::Table<Soldier &>(&parent, 0,  0, 360, 200)
-				{
-					add_column(100, _("Name"));
-					add_column (40, _("HP"));
-					add_column (40, _("AT"));
-					add_column (40, _("DE"));
-					add_column (40, _("EV"));
-					add_column(100, _("Level")); //  enough space for scrollbar
-					parent.add (this, UI::Align_Left);
-				}
-			}                      m_table;
-
-			struct Drop_Selected_Soldier : public UI::Button {
-				Drop_Selected_Soldier(UI::Box & sold_box) :
-					UI::Button
-						(&sold_box,
-						 0, 0, 360, 32,
-						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-						 g_gr->get_picture(PicMod_Game, pic_drop_soldier))
-				{
-					sold_box.add(this, UI::Align_Left);
-				}
-				void clicked();
-			} m_drop_selected_soldier;
 
 			struct Capacity_Box : public UI::Box {
 				Capacity_Box(Sold_Box & parent) :
@@ -117,7 +95,6 @@ private:
 					m_capacity_value_label(*this),
 					m_capacity_increment  (*this)
 				{
-					parent.add(this, UI::Align_Left);
 				}
 
 				struct Capacity_Label : public UI::Textarea {
@@ -192,9 +169,8 @@ TrainingSite_Window::TrainingSite_Window
 	m_ms_location          (ts.get_position()),
 	m_tabpanel             (*this, ts)
 {
-	fit_inner (m_tabpanel);
+	fit_inner(m_tabpanel);
 }
-
 
 /*
 ===============
@@ -205,61 +181,6 @@ void TrainingSite_Window::think()
 {
 	ProductionSite_Window::think();
 
-	Widelands::BaseImmovable const * const base_immovable =
-		igbase().egbase().map()[m_ms_location].get_immovable();
-	if
-		(not dynamic_cast<const Widelands::Building *>(base_immovable)
-		 or
-		 dynamic_cast<const Widelands::ConstructionSite *>(base_immovable))
-	{
-		// The Site has been removed. Die quickly.
-		die();
-		return;
-	}
-	update();
-}
-
-/*
-==============
-Update the listselect, maybe there are new soldiers
-FIXME What if a soldier have been removed and another added? This needs review.
-=============
-*/
-void TrainingSite_Window::update() {
-	std::vector<Soldier *> soldiers = trainingsite().presentSoldiers();
-
-	if (soldiers.size() != m_tabpanel.m_sold_box.m_table.size())
-		m_tabpanel.m_sold_box.m_table.clear();
-
-	for (uint32_t i = 0; i < soldiers.size(); ++i) {
-		Soldier & s = *soldiers[i];
-		UI::Table<Soldier &>::Entry_Record * er =
-			m_tabpanel.m_sold_box.m_table.find(s);
-		if (not er)
-			er = &m_tabpanel.m_sold_box.m_table.add(s);
-		uint32_t const  hl = s.get_hp_level         ();
-		uint32_t const mhl = s.get_max_hp_level     ();
-		uint32_t const  al = s.get_attack_level     ();
-		uint32_t const mal = s.get_max_attack_level ();
-		uint32_t const  dl = s.get_defense_level    ();
-		uint32_t const mdl = s.get_max_defense_level();
-		uint32_t const  el = s.get_evade_level      ();
-		uint32_t const mel = s.get_max_evade_level  ();
-		er->set_string(0, s.descname().c_str());
-		char buffer[sizeof("4294967295 / 4294967295")];
-		sprintf(buffer,  "%u / %u", hl,                mhl);
-		er->set_string(1, buffer);
-		sprintf(buffer,  "%u / %u",      al,                 mal);
-		er->set_string(2, buffer);
-		sprintf(buffer,  "%u / %u",           dl,                  mdl);
-		er->set_string(3, buffer);
-		sprintf(buffer,  "%u / %u",                el,                   mel);
-		er->set_string(4, buffer);
-		sprintf(buffer, "%2u / %u", hl + al + dl + el, mhl + mal + mdl + mel);
-		er->set_string(5, buffer);
-	}
-	m_tabpanel.m_sold_box.m_table.sort();
-
 	TrainingSite const & ts = trainingsite();
 	uint32_t const capacity     = ts.   soldierCapacity();
 	char buffer[sizeof("4294967295")];
@@ -268,29 +189,10 @@ void TrainingSite_Window::update() {
 		(buffer);
 	uint32_t const capacity_min = ts.minSoldierCapacity();
 	bool const can_act = igbase().can_act(ts.owner().player_number());
-	m_tabpanel.m_sold_box.m_drop_selected_soldier.set_enabled
-		(can_act and m_tabpanel.m_sold_box.m_table.has_selection() and
-		 capacity_min < m_tabpanel.m_sold_box.m_table.size());
 	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_decrement.set_enabled
 		(can_act and capacity_min < capacity);
 	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_increment.set_enabled
 		(can_act and                capacity < ts.maxSoldierCapacity());
-}
-
-
-/*
-==============
-Handle the click at drop soldier. Enqueue a command at command queue to
-get out selected soldier from this training site.
-=============
-*/
-void TrainingSite_Window::Tab_Panel::Sold_Box::Drop_Selected_Soldier::clicked()
-{
-	Sold_Box & sold_box = ref_cast<Sold_Box, UI::Panel>(*get_parent());
-	if (sold_box.m_table.selection_index() != Table::no_selection_index())
-		ref_cast<TrainingSite_Window, UI::Panel>
-			(*sold_box.get_parent()->get_parent())
-			.act_drop_soldier(sold_box.m_table.get_selected().serial());
 }
 
 /*
