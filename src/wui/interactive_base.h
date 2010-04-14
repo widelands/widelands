@@ -179,6 +179,7 @@ private:
 };
 
 #define PIC2 g_gr->get_picture(PicMod_UI, "pics/but2.png")
-#define TOOLBAR_BUTTON_COMMON_PARAMETERS &m_toolbar, 0, 0, 34U, 34U, PIC2
+#define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) \
+    &m_toolbar, name, 0, 0, 34U, 34U, PIC2
 
 #endif

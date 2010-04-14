@@ -74,7 +74,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		(this,
 		 m_forbidden_label.get_x(), m_allowed.get_y(), list_width, list_height),
 	m_forbid_button
-		(this,
+		(this, "forbid",
 		 hmargin + list_width + hspacing,
 		 m_allowed.get_y()
 		 + (list_height - middle_button_height * 2 - vspacing) / 2,
@@ -85,7 +85,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 _("Forbid"),
 		 false),
 	m_allow_button
-		(this,
+		(this, "allow",
 		 m_forbid_button.get_x(),
 		 m_forbid_button.get_y() + middle_button_height + vspacing,
 		 middle_button_width, middle_button_height,

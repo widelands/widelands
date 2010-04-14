@@ -34,6 +34,7 @@ namespace UI {
 struct Button : public Panel {
 	Button /// for textual buttons
 		(Panel * const parent,
+		 std::string const & name,
 		 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 		 PictureID const background_pictute_id,
 		 std::string const & title_text,
@@ -44,6 +45,7 @@ struct Button : public Panel {
 		 uint32_t const      fontsize = UI_FONT_SIZE_SMALL);
 	Button /// for pictorial buttons
 		(Panel * const parent,
+		 std::string const & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const PictureID background_pictute_id,
 		 const PictureID foreground_picture_id,
@@ -57,6 +59,9 @@ struct Button : public Panel {
 	void set_pic(PictureID picid);
 	void set_title(const std::string &);
 	const std::string & get_title() const throw () {return m_title;}
+	void set_name(const std::string &);
+	const std::string get_name() const throw() {return m_name;}
+
 	bool enabled() const {return m_enabled;}
 	void set_enabled(bool on);
 	void set_repeating(bool const on) {m_repeating = on;}
@@ -87,6 +92,7 @@ private:
 	int32_t     m_time_nextact;
 
 	std::string m_title;          //  title string used when _mypic == 0
+	std::string m_name;          //  name to address this button for scripting
 
 	PictureID       m_pic_background; //  background texture (picture ID)
 	PictureID       m_pic_custom;     //  custom icon on the button
@@ -105,6 +111,7 @@ private:
 template <typename T> struct Callback_Button : public Button {
 	Callback_Button /// for textual buttons
 		(Panel * const parent,
+		 std::string const & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const PictureID background_pictute_id,
 		 void (T::*callback_function)(),
@@ -117,7 +124,7 @@ template <typename T> struct Callback_Button : public Button {
 		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
 		:
 		Button
-			(parent,
+			(parent, name,
 			 x, y, w, h,
 			 background_pictute_id,
 			 title_text,
@@ -130,6 +137,7 @@ template <typename T> struct Callback_Button : public Button {
 	{}
 	Callback_Button /// for pictorial buttons
 		(Panel * const parent,
+		 std::string const & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const PictureID background_pictute_id,
 		 const PictureID foreground_picture_id,
@@ -142,7 +150,7 @@ template <typename T> struct Callback_Button : public Button {
 		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
 		:
 		Button
-			(parent,
+			(parent, name,
 			 x, y, w, h,
 			 background_pictute_id,
 			 foreground_picture_id,
@@ -170,6 +178,7 @@ protected:
 template <typename T, typename ID> struct Callback_IDButton : public Button {
 	Callback_IDButton /// for textual buttons
 		(Panel * const parent,
+		 std::string const & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const PictureID background_pictute_id,
 		 void (T::*callback_function)(ID),
@@ -183,7 +192,7 @@ template <typename T, typename ID> struct Callback_IDButton : public Button {
 		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
 		:
 		Button
-			(parent,
+			(parent, name,
 			 x, y, w, h,
 			 background_pictute_id,
 			 title_text,
@@ -197,6 +206,7 @@ template <typename T, typename ID> struct Callback_IDButton : public Button {
 	{}
 	Callback_IDButton /// for pictorial buttons
 		(Panel * const parent,
+		 std::string const & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const PictureID background_pictute_id,
 		 const PictureID foreground_picture_id,
@@ -210,7 +220,7 @@ template <typename T, typename ID> struct Callback_IDButton : public Button {
 		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
 		:
 		Button
-			(parent,
+			(parent, name,
 			 x, y, w, h,
 			 background_pictute_id,
 			 foreground_picture_id,

@@ -57,13 +57,13 @@ Window(&parent, 0, 0, 500, 210, _("Metaserver login"))
 		 _("Automatically use this login information from now on."));
 
 	new UI::Callback_Button<LoginBox>
-		(this,
+		(this, "login",
 		 (get_inner_w() / 2 - 200) / 2, 175, 200, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &LoginBox::pressedLogin, *this,
 		 _("Login"));
 	new UI::Callback_Button<LoginBox>
-		(this,
+		(this, "cancel",
 		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, 175, 200, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &LoginBox::pressedCancel, *this,

@@ -38,7 +38,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 		 m_xres * 919 / 1000, m_yres *  11 /   20),
 
 	close_button
-		(this,
+		(this, "close",
 		 m_xres * 3 / 8, m_yres * 9 / 10, m_xres / 4, m_yres * 9 / 200,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_TextView::end_modal, *this, 0,

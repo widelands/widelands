@@ -209,6 +209,7 @@ private:
 		 const std::string & tooltip_text = std::string());
 	void add_button
 		(UI::Box *,
+		 char const * name,
 		 char const * picname,
 		 void (FieldActionWindow::*fn)(),
 		 std::string const & tooltip_text,
@@ -376,7 +377,7 @@ void FieldActionWindow::add_buttons_auto()
 			bool const can_act = igbase.can_act(owner);
 			if (can_act) {
 				add_button
-					(buildbox,
+					(buildbox, "build_road",
 					 pic_buildroad,
 					 &FieldActionWindow::act_buildroad,
 					 _("Build road"));
@@ -388,7 +389,7 @@ void FieldActionWindow::add_buttons_auto()
 					 ||
 					 building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 					add_button
-						(buildbox,
+						(buildbox, "rip_flag",
 						 pic_ripflag,
 						 &FieldActionWindow::act_ripflag,
 						 _("Destroy this flag"));
@@ -396,13 +397,13 @@ void FieldActionWindow::add_buttons_auto()
 
 			if (dynamic_cast<Game const *>(&ibase().egbase())) {
 				add_button
-					(buildbox,
+					(buildbox, "configure_economy",
 					 "pics/genstats_nrwares.png",
 					 &FieldActionWindow::act_configure_economy,
 					 _("Configure economy"));
 				if (can_act)
 					add_button
-						(buildbox,
+						(buildbox, "geologist",
 						 pic_geologist,
 						 &FieldActionWindow::act_geologist,
 						 _("Send geologist to explore site"));
@@ -420,14 +421,14 @@ void FieldActionWindow::add_buttons_auto()
 			// Add build actions
 			if ((m_fastclick = buildcaps & Widelands::BUILDCAPS_FLAG))
 				add_button
-					(buildbox,
+					(buildbox, "build_flag",
 					 pic_buildflag,
 					 &FieldActionWindow::act_buildflag,
 					 _("Put a flag"));
 
 			if (dynamic_cast<Widelands::Road const *>(imm))
 				add_button
-					(buildbox,
+					(buildbox, "destroy_road",
 					 pic_remroad,
 					 &FieldActionWindow::act_removeroad,
 					 _("Destroy a road"));
@@ -445,25 +446,25 @@ void FieldActionWindow::add_buttons_auto()
 	//  census is ok
 	if (dynamic_cast<Game const *>(&ibase().egbase())) {
 		add_button
-			(&watchbox,
+			(&watchbox, "watch",
 			 pic_watchfield,
 			 &FieldActionWindow::act_watch,
 			 _("Watch field in a separate window"));
 		add_button
-			(&watchbox,
+			(&watchbox, "statistics",
 			 pic_showstatistics,
 			 &FieldActionWindow::act_show_statistics,
 			 _("Toggle building statistics display"));
 	}
 	add_button
-		(&watchbox,
+		(&watchbox, "census",
 		 pic_showcensus,
 		 &FieldActionWindow::act_show_census,
 		 _("Toggle building label display"));
 
 	if (ibase().get_display_flag(Interactive_Base::dfDebug))
 		add_button
-			(&watchbox,
+			(&watchbox, "debug",
 			 pic_debug,
 			 &FieldActionWindow::act_debug,
 			 _("Debug window"));
@@ -505,7 +506,7 @@ void FieldActionWindow::add_buttons_attack ()
 				a_box.add(m_attack_box, UI::Box::AlignTop);
 
 				add_button
-					(&a_box,
+					(&a_box, "attack",
 					 pic_attack,
 					 &FieldActionWindow::act_attack,
 					 _("Start attack"));
@@ -608,11 +609,11 @@ void FieldActionWindow::add_buttons_road(bool const flag)
 
 	if (flag)
 		add_button
-			(&buildbox,
+			(&buildbox, "build_flag",
 			 pic_buildflag, &FieldActionWindow::act_buildflag, _("Build flag"));
 
 	add_button
-		(&buildbox,
+		(&buildbox, "cancel_road",
 		 pic_abort, &FieldActionWindow::act_abort_buildroad, _("Cancel road"));
 
 	// Add the box as tab
@@ -637,6 +638,7 @@ uint32_t FieldActionWindow::add_tab
 
 void FieldActionWindow::add_button
 	(UI::Box           * const box,
+	 char        const * const name,
 	 char        const * const picname,
 	 void (FieldActionWindow::*fn)(),
 	 std::string const & tooltip_text,
@@ -644,7 +646,7 @@ void FieldActionWindow::add_button
 {
 	UI::Callback_Button<FieldActionWindow> & button =
 		*new UI::Callback_Button<FieldActionWindow>
-			(box,
+			(box, name,
 			 0, 0, 34, 34,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 			 g_gr->get_picture(PicMod_Game, picname),

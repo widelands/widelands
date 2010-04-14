@@ -61,7 +61,7 @@ Story_Message_Box::Story_Message_Box
 	posy = get_inner_h() - 30;
 	posx += space;
 	new UI::Callback_IDButton<Story_Message_Box, int32_t>
-		(this,
+		(this, "ok",
 		 posx, posy, but_width, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Story_Message_Box::clicked_ok, *this, 0, button_text);

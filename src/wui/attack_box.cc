@@ -109,7 +109,7 @@ UI::Callback_Button<AttackBox> & AttackBox::add_button
 {
 	UI::Callback_Button<AttackBox> & button =
 		*new UI::Callback_Button<AttackBox>
-			(&parent,
+			(&parent, text,
 			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 			 fn,

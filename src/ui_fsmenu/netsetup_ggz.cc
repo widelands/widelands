@@ -72,21 +72,21 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 
 // Buttons
 	joingame
-		(this,
+		(this, "join_game",
 		 m_xres * 17 / 25, m_yres * 55 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_NetSetupGGZ::clicked_joingame, *this,
 		 _("Join this game"), std::string(), false, false,
 		 m_fn, m_fs),
 	hostgame
-		(this,
+		(this, "host_game",
 		 m_xres * 17 / 25, m_yres * 81 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_NetSetupGGZ::clicked_hostgame, *this,
 		 _("Open a new game"), std::string(), true, false,
 		 m_fn, m_fs),
 	back
-		(this,
+		(this, "back",
 		 m_xres * 17 / 25, m_yres * 90 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_NetSetupGGZ::end_modal, *this, CANCEL,

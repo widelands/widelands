@@ -40,7 +40,7 @@ Main_Menu_Map_Options::Enable_Set_Origin_Tool_Button::
 Enable_Set_Origin_Tool_Button(Main_Menu_Map_Options & parent)
 	:
 	UI::Button
-		(&parent,
+		(&parent, "set_origin",
 		 5, parent.get_inner_h() - 25, parent.get_inner_w() - 10, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 _("Set origin"),

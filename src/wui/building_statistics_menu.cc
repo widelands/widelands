@@ -118,7 +118,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
 
 	m_btn[Prev_Owned] =
 		new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
-			(this,
+			(this, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
@@ -128,7 +128,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
 
 	m_btn[Next_Owned] =
 		new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
-			(this,
+			(this, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
@@ -138,7 +138,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
 
 	m_btn[Prev_Construction] =
 		new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
-			(this,
+			(this, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
@@ -148,7 +148,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
 
 	m_btn[Next_Construction] =
 		new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
-			(this,
+			(this, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
@@ -158,7 +158,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
 
 	m_btn[Prev_Unproductive] =
 		new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
-			(this,
+			(this, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
@@ -168,7 +168,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
 
 	m_btn[Next_Unproductive] =
 		new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
-			(this,
+			(this, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),

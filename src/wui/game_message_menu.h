@@ -71,7 +71,7 @@ private:
 	struct Clear_Selection : public UI::Button {
 		Clear_Selection(GameMessageMenu & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "clear_selection",
 				 5, 5, 70, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 _("Clear"), _("Clear selection"))
@@ -88,7 +88,7 @@ private:
 	struct Invert_Selection : public UI::Button {
 		Invert_Selection(GameMessageMenu & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "invert_selection",
 				 80, 5, 70, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 _("Invert"), _("Invert selection"))
@@ -105,7 +105,7 @@ private:
 	struct Archive_Or_Restore_Selected_Messages : public UI::Button {
 		Archive_Or_Restore_Selected_Messages(GameMessageMenu & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "archive_or_restore_selected_messages",
 				 155, 5, 25, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/message_archive.png"),
@@ -117,7 +117,7 @@ private:
 	struct Toggle_Between_Inbox_And_Archive : public UI::Button {
 		Toggle_Between_Inbox_And_Archive(GameMessageMenu & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "toggle_between_inbox_or_archive",
 				 185, 5, 100, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 				 _("Show Archive"))
@@ -152,7 +152,7 @@ private:
 	struct Center_Main_Mapview_On_Location : public UI::Button {
 		Center_Main_Mapview_On_Location(GameMessageMenu & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "center_main_mapview_on_location",
 				 340, 5, 25, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),

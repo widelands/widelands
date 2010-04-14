@@ -29,6 +29,7 @@ namespace UI {
 
 Button::Button //  for textual buttons
 	(Panel * const parent,
+	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 PictureID background_picture_id,
 	 std::string const & title_text,
@@ -44,6 +45,7 @@ Button::Button //  for textual buttons
 	m_repeating     (false),
 	m_flat          (flat),
 	m_title         (title_text),
+	m_name          (name),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (g_gr->get_no_picture()),
 	m_pic_custom_disabled(g_gr->get_no_picture()),
@@ -58,6 +60,7 @@ Button::Button //  for textual buttons
 
 Button::Button //  for pictorial buttons
 	(Panel * const parent,
+	 const std::string & name,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 PictureID background_picture_id,
 	 const PictureID foreground_picture_id,
@@ -72,6 +75,7 @@ Button::Button //  for pictorial buttons
 	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
+	m_name          (name),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
 	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),

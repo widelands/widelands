@@ -167,7 +167,7 @@ private:
 	struct OK     : public UI::Button {
 		OK(BulldozeConfirm & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "yes",
 				 6, 80, 80, 34,
 				 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/menu_okay.png"))
@@ -178,7 +178,7 @@ private:
 	struct Cancel : public UI::Button {
 		Cancel(BulldozeConfirm & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "no",
 				 114, 80, 80, 34,
 				 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/menu_abort.png"))
@@ -648,7 +648,7 @@ void Building_Window::setup_capsbuttons()
 			if (not dynamic_cast<MilitarySite const *>(productionsite)) {
 				bool const is_stopped = productionsite->is_stopped();
 				new UI::Callback_Button<Building_Window>
-					(m_capsbuttons,
+					(m_capsbuttons, is_stopped ? "continue" : "stop",
 					 x, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 					 g_gr->get_picture
@@ -668,12 +668,16 @@ void Building_Window::setup_capsbuttons()
 					Widelands::Building_Descr const & building_descr =
 						*tribe.get_building_descr(*i.current);
 					char buffer[128];
+					char name_buffer[128];
 					snprintf
 						(buffer, sizeof(buffer),
 						 _("Enhance to %s"), building_descr.descname().c_str());
+					snprintf
+						(name_buffer, sizeof(name_buffer),
+						 _("enhance_to_%s"), building_descr.name().c_str());
 					new UI::Callback_IDButton
 						<Building_Window, Widelands::Building_Index>
-						(m_capsbuttons,
+						(m_capsbuttons, name_buffer,
 						 x, 0, 34, 34,
 						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 						 building_descr.get_buildicon(),
@@ -686,7 +690,7 @@ void Building_Window::setup_capsbuttons()
 
 		if (m_capscache & (1 << Building::PCap_Bulldoze)) {
 			new UI::Callback_Button<Building_Window>
-				(m_capsbuttons,
+				(m_capsbuttons, "destroy",
 				 x, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game, pic_bulldoze),
@@ -699,7 +703,7 @@ void Building_Window::setup_capsbuttons()
 	if (can_see) {
 		if (m_building.descr().m_workarea_info.size()) {
 			m_toggle_workarea = new UI::Callback_Button<Building_Window>
-				(m_capsbuttons,
+				(m_capsbuttons, "show_workarea",
 				 x, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
@@ -710,7 +714,7 @@ void Building_Window::setup_capsbuttons()
 
 		if (igbase().get_display_flag(Interactive_Base::dfDebug)) {
 			new UI::Callback_Button<Building_Window>
-				(m_capsbuttons,
+				(m_capsbuttons, "debug",
 				 x, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game,  pic_debug),
@@ -996,7 +1000,7 @@ Warehouse_Window::Warehouse_Window
 
 
 	new UI::Callback_Button<Warehouse_Window>
-		(this,
+		(this, "help",
 		 posx, posy, button_w, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
@@ -1005,7 +1009,7 @@ Warehouse_Window::Warehouse_Window
 	posx += button_w + spacing;
 
 	new UI::Callback_Button<Warehouse_Window>
-		(this,
+		(this, "switchpage",
 		 posx, posy, button_w * 2 + spacing, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"),
@@ -1014,7 +1018,7 @@ Warehouse_Window::Warehouse_Window
 	posx += button_w * 2 + 2 * spacing;
 
 	new UI::Callback_Button<Warehouse_Window>
-		(this,
+		(this, "goto",
 		 posx, posy, button_w, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
@@ -1337,7 +1341,8 @@ Building_Window::create_priority_button
 			 w, h, Graphic::ResizeMode_Clip);
 	UI::Callback_IDButton<PriorityButtonHelper, int32_t> * button =
 		new UI::Callback_IDButton<PriorityButtonHelper, int32_t>
-			(box,
+			 // TODO: all buttons of all wares are equally named
+			(box, "priority_button",
 			 x, 0, w, h,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 pic_enabled,
@@ -1426,12 +1431,12 @@ ProductionSite_Window::Production_Box::Production_Box
 	// Add list worker button
 	add
 		(new UI::Callback_Button<ProductionSite_Window>
-		 	(this,
+		 	(this, "worker_list",
 		 	 0, 0, 32, 32,
 		 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 	 g_gr->get_picture(PicMod_Game,  pic_list_worker),
 		 	 &ProductionSite_Window::list_worker_clicked, window,
-		 	 _("Show worker listing")),
+		 	 _("Show workers list")),
 		 UI::Box::AlignLeft);
 }
 
@@ -1521,7 +1526,7 @@ MilitarySite_Window::MilitarySite_Window
 	m_vbox         (this, 5, 5, UI::Box::Vertical),
 	m_table        (&m_vbox, 0, 0, 360, 200),
 	m_drop_button
-		(&m_vbox,
+		(&m_vbox, "drop_soldier",
 		 0, 0, 360, 32,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, pic_drop_soldier),
@@ -1530,13 +1535,13 @@ MilitarySite_Window::MilitarySite_Window
 	m_capsbuttons  (&m_bottom_box, 0, 34, 34 * 7, 34),
 	m_capacity     (&m_bottom_box, 0, 0, _("Capacity"), UI::Align_Right),
 	m_capacity_down
-		(&m_bottom_box,
+		(&m_bottom_box, "capacity_down",
 		 0, 0, 24, 24,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, pic_down_train),
 		 &MilitarySite_Window::soldier_capacity_down, *this),
 	m_capacity_up
-		(&m_bottom_box,
+		(&m_bottom_box, "capacity_up",
 		 0, 0, 24, 24,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, pic_up_train),
@@ -1744,7 +1749,7 @@ private:
 			struct Drop_Selected_Soldier : public UI::Button {
 				Drop_Selected_Soldier(UI::Box & sold_box) :
 					UI::Button
-						(&sold_box,
+						(&sold_box, "drop_soldier",
 						 0, 0, 360, 32,
 						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 						 g_gr->get_picture(PicMod_Game, pic_drop_soldier))
@@ -1776,7 +1781,7 @@ private:
 				struct Capacity_Decrement : public UI::Button {
 					Capacity_Decrement(UI::Box & parent) :
 						UI::Button
-							(&parent,
+							(&parent, "-",
 							 70, 4, 24, 24,
 							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 							 g_gr->get_picture(PicMod_Game, pic_down_train))
@@ -1802,7 +1807,7 @@ private:
 				struct Capacity_Increment : public UI::Button {
 					Capacity_Increment(UI::Box & parent) :
 						UI::Button
-							(&parent,
+							(&parent, "+",
 							 118, 4, 24, 24,
 							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 							 g_gr->get_picture(PicMod_Game, pic_up_train))
