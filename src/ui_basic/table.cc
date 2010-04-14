@@ -431,7 +431,9 @@ void Table<void *>::set_scrollpos(int32_t const i)
 	update(0, 0, get_eff_w(), get_h());
 }
 
-
+/**
+ * Remove the table entry at the given (zero-based) index.
+ */
 void Table<void *>::remove(const uint32_t i) {
 	assert(i < m_entry_records.size());
 
@@ -440,6 +442,8 @@ void Table<void *>::remove(const uint32_t i) {
 	m_entry_records.erase(it);
 	if (m_selection == i)
 		m_selection = no_selection_index();
+	else if (m_selection > i && m_selection != no_selection_index())
+		m_selection--;
 
 	m_scrollbar->set_steps
 		(m_entry_records.size() * get_lineheight()
