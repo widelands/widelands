@@ -363,7 +363,6 @@ int L_Player::get_see_all(lua_State * L) {
 
 		(RW) True if the buildhelp is show, false otherwise.
 */
-// UNTESTED
 int L_Player::get_buildhelp(lua_State * L) {
 	Game & game = get_game(L);
 	Interactive_Player * ipl = game.get_ipl();
@@ -383,7 +382,7 @@ int L_Player::set_buildhelp(lua_State * L) {
 	if (get(L, game).player_number() != ipl->player_number())
 		return 0;
 
-	ipl->show_buildhelp(luaL_checkboolean(L, 2));
+	ipl->show_buildhelp(luaL_checkboolean(L, -1));
 	return 0;
 }
 
