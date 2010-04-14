@@ -1441,6 +1441,19 @@ void WLApplication::mainmenu()
 
 		try {
 			switch (mm.run()) {
+			case Fullscreen_Menu_Main::mm_playtutorial:
+				{
+					Widelands::Game game;
+					try {
+						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
+					} catch (Widelands::game_data_error const & e) {
+						log("Scenario not started: Game data error: %s\n", e.what());
+					} catch (...) {
+						emergency_save(game);
+						throw;
+					}
+				}
+				break;
 			case Fullscreen_Menu_Main::mm_singleplayer:
 				mainmenu_singleplayer();
 				break;
