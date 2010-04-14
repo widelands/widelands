@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-04-10 17:01+0000\n"
-"Last-Translator: Juan Eduardo Riva <juaneduardoriva@gmail.com>\n"
+"PO-Revision-Date: 2010-04-13 13:50+0000\n"
+"Last-Translator: ironfisher <dgvalde@gmail.com>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-11 04:09+0000\n"
+"X-Launchpad-Export-Date: 2010-04-14 03:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutorial 2 - Un lugar para llamar Hogar"
+msgstr "Tutorial 2 - Un lugar al que llamar Hogar"
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -47,6 +47,14 @@ msgid ""
 "throne between the trees, the symbol of unity and peace among our kin became "
 "the wedge that drives us apart.\" "
 msgstr ""
+" \"La guerra continúa. Cada vez mas de nuestros hermanos y hermanas huyen de "
+"la brutal guerra, furiosos bajos los árboles en la capital.<br> Las "
+"historias que cuentan sobre las hazañas de nuestra fimilia son tristes de "
+"oír. He pasado noches tumbado y despierto, sin descanso, mas cansado de lo "
+"que uno jamás imaginó que podría estar. Incluso cada vez que cerraba los "
+"ojos, veía la fortaleza que construyó mi padre consumida por las llamas. El "
+"trono entre los árboles, el símbolo de la unidad y la paz entre nuestra "
+"familia vino a ser la cuña que nos hizo alejarnos.\" "
 
 #: ../../campaigns/t02.wmf/event:138
 #: ../../campaigns/t02.wmf/event:149
@@ -141,6 +149,10 @@ msgid ""
 "with you. The rocks close to our camp are shrinking fast under our workers' "
 "tools, and it is a matter of little time only before they are all gone.\" "
 msgstr ""
+" \"Te ruego piedad, jefe, pero tengo una gran preocupación que me gustaría "
+"discutir contigo. Las rocas cercanas a nuestro campamento están reduciéndose "
+"debido a las herramientas de nuestros trabajadores y es cuestión de tiempo "
+"que se terminen.\" "
 
 #: ../../campaigns/t02.wmf/event:231
 #: ../../campaigns/t02.wmf/event:256
@@ -184,7 +196,7 @@ msgstr " \"¿Viejo? ¡Joven irrespetuoso!\" "
 
 #: ../../campaigns/t02.wmf/event:264
 msgid "Khantrukh nods satisfied..."
-msgstr ""
+msgstr "Khantrukh asintió satisfecho..."
 
 #: ../../campaigns/t02.wmf/event:266
 msgid " \"At last! These rocks should last for a while.\" "
@@ -294,6 +306,9 @@ msgid ""
 "sun sets today you will have a magnificient meal fit for the chieftain of "
 "all clans!\" "
 msgstr ""
+" \"Nuestros cazadores están afuera en los bosques, Thron.<br> ¡Te prometo "
+"que antes de que el sol se ponga hoy tendrás una magnífica comida digna de "
+"los jefes de todos los clanes!\" "
 
 #: ../../campaigns/t02.wmf/event:354
 msgid "Khantrukh gazes over the plains..."
@@ -308,7 +323,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:367
 msgid "Thron recognizes..."
-msgstr ""
+msgstr "Thron reconoce..."
 
 #: ../../campaigns/t02.wmf/event:369
 msgid ""
@@ -321,7 +336,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:371
 msgid "A beautiful morning"
-msgstr ""
+msgstr "Una hermosa mañana"
 
 #: ../../campaigns/t02.wmf/event:380
 msgid "Boldreth remarks..."
