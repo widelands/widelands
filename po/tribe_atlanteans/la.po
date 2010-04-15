@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-04-12 09:21+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2010-04-14 14:03+0000\n"
+"Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-13 03:31+0000\n"
+"X-Launchpad-Export-Date: 2010-04-15 03:55+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -127,7 +127,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "In areis ad novum aedificium construendum laborat."
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
@@ -469,7 +469,7 @@ msgstr "Piscator"
 
 #: ../../tribes/atlanteans/conf:124
 msgid "Forester"
-msgstr ""
+msgstr "Saltuarius"
 
 #: ../../tribes/atlanteans/conf:125
 msgid "Geologist"
@@ -614,7 +614,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Warehouse"
-msgstr ""
+msgstr "Horreum"
 
 #: ../../tribes/atlanteans/conf:177
 msgid "Armoursmithy"
@@ -626,7 +626,7 @@ msgstr "Pistrina"
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Blackroot Farm"
-msgstr ""
+msgstr "Fundus nigrarum radiciorum"
 
 #: ../../tribes/atlanteans/conf:180
 msgid "Charcoal Burner's House"
@@ -654,7 +654,7 @@ msgstr "Domus pistoria"
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Forester's House"
-msgstr ""
+msgstr "Casa saltuarii"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Gold Mine"
@@ -662,7 +662,7 @@ msgstr "Metallum auri"
 
 #: ../../tribes/atlanteans/conf:188
 msgid "Goldweaver"
-msgstr ""
+msgstr "Aurei textor"
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Hunter's House"
@@ -706,7 +706,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:199
 msgid "Weaving-Mill"
-msgstr ""
+msgstr "Textrinum"
 
 #: ../../tribes/atlanteans/conf:200
 msgid "Well"
@@ -714,15 +714,15 @@ msgstr "Fons"
 
 #: ../../tribes/atlanteans/conf:201
 msgid "Woodcutter's House"
-msgstr ""
+msgstr "Casa lignatoris"
 
 #: ../../tribes/atlanteans/conf:202
 msgid "Scout's House"
-msgstr ""
+msgstr "Casa exploratoris"
 
 #: ../../tribes/atlanteans/conf:203
 msgid "Horse Farm"
-msgstr ""
+msgstr "Equile"
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Headquarters medium"
@@ -737,12 +737,15 @@ msgid ""
 "This corn is the base of the fine cornflour, that every atlantian baker "
 "needs for a good bread."
 msgstr ""
+"E hoc maizo bona maizi farina molita est. Qua pistor quisque panem bonum "
+"fingit."
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
 "Cornflour is produced out of corn and is one of three parts of the atlantian "
 "bread."
 msgstr ""
+"Maizi farina e maizo molita una ex tribus pars boni panis Atlantidensis est."
 
 #: ../../tribes/atlanteans/crystalmine/conf:23
 msgid "Mine stone"
