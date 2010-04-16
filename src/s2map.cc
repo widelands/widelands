@@ -17,18 +17,19 @@
  *
  */
 
-#include "s2map.h"
+#include <iostream>
 
-#include "logic/editor_game_base.h"
-#include "logic/field.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "logic/editor_game_base.h"
+#include "logic/field.h"
 #include "logic/map.h"
+#include "logic/world.h"
 #include "map_io/map_loader.h"
 #include "wexception.h"
-#include "logic/world.h"
 
-#include <iostream>
+#include "s2map.h"
 
 using std::cerr;
 using std::ios;

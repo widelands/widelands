@@ -443,6 +443,19 @@ WareInstance * Flag::fetch_pending_item(Game & game, PlayerImmovable & dest)
 }
 
 /**
+ * Return a List of all the wares currently on this Flag. Do not rely
+ * the result value to stay valid and do not change them
+ */
+Flag::Wares Flag::get_items() {
+	Wares rv;
+
+	for (int32_t i = 0; i < m_item_filled; ++i)
+		rv.push_back(m_items[i].item);
+
+	return rv;
+}
+
+/**
  * Force a removal of the given item from this flag.
  * Called by \ref WareInstance::cleanup()
 */

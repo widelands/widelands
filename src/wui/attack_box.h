@@ -20,7 +20,6 @@
 #ifndef _ATTACK_BOX_H_
 #define _ATTACK_BOX_H_
 
-#include "editor/ui_menus/editor_event_menu_new_event.h"
 #include "graphic/picture_id.h"
 #include "logic/attackable.h"
 #include "logic/bob.h"
@@ -28,6 +27,7 @@
 #include "logic/player.h"
 
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
 #include <list>

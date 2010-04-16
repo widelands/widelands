@@ -59,8 +59,10 @@
 
 #define QUEUE_CMD_DESTROY_MAPOBJECT    127
 #define QUEUE_CMD_ACT                  128
-#define QUEUE_CMD_CHECK_EVENTCHAIN     129
+// 129 was a command related to old events. removed
 #define QUEUE_CMD_INCORPORATE          130
+#define QUEUE_CMD_LUASCRIPT            131
+#define QUEUE_CMD_LUACOROUTINE         132
 
 #define QUEUE_CMD_CALL_ECONOMY_BALANCE 200
 #define QUEUE_CMD_EXPIREMESSAGE             201

@@ -26,7 +26,6 @@
 #include "machdep.h"
 #include "player.h"
 #include "playercommand.h"
-#include "trigger/trigger.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "worker.h"

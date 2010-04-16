@@ -24,7 +24,6 @@
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "events/event.h"
 #include "findimmovable.h"
 #include "game.h"
 #include "game_data_error.h"
@@ -34,6 +33,7 @@
 #include "soldier.h"
 #include "soldiercontrol.h"
 #include "sound/sound_handler.h"
+#include "scripting/scripting.h"
 #include "trainingsite.h"
 #include "tribe.h"
 #include "warehouse.h"
@@ -101,15 +101,10 @@ void Player::create_default_infrastructure() {
 		try {
 			Tribe_Descr::Initialization const & initialization =
 				tribe().initialization(m_initialization_index);
+
 			Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
-			container_iterate_const
-				(std::vector<Event *>, initialization.events, i)
-			{
-				Event & event = **i.current;
-				event.set_player(player_number());
-				event.set_position(starting_pos);
-				event.run(game);
-			}
+			dynamic_cast<LuaGameInterface &>(game.lua()).
+				make_starting_conditions(player_number(), initialization.name);
 		} catch (Tribe_Descr::Nonexistent) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "
@@ -233,16 +228,16 @@ NodeCaps Player::get_buildcaps(FCoords const fc) const {
 }
 
 
-/*
-===============
-Build a flag, checking that it's legal to do so.
-===============
-*/
-void Player::build_flag(Coords const c) {
+/**
+ * Build a flag, checking that it's legal to do so. Returns
+ * the flag in case of success, else returns 0;
+ */
+Flag * Player::build_flag(Coords const c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
-		new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+		return new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+	return 0;
 }
 
 
@@ -276,7 +271,7 @@ Note: the diagnostic log messages aren't exactly errors. They might happen
 in some situations over the network.
 ===============
 */
-void Player::build_road(const Path & path) {
+Road * Player::build_road(const Path & path) {
 	Map & map = egbase().map();
 	FCoords fc = map.get_fcoords(path.get_start());
 	if (upcast(Flag, start, fc.field->get_immovable())) {
@@ -292,22 +287,24 @@ void Player::build_road(const Path & path) {
 						log
 							("%i: building road, immovable in the way, type=%d\n",
 							 player_number(), imm->get_type());
-						return;
+						return 0;
 					}
 				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
 					log("%i: building road, unwalkable\n", player_number());
-					return;
+					return 0;
 				}
 			}
-			Road::create(egbase(), *start, *end, path);
+			return &Road::create(egbase(), *start, *end, path);
 		} else
 			log("%i: building road, missed end flag\n", player_number());
 	} else
 		log("%i: building road, missed start flag\n", player_number());
+
+	return 0;
 }
 
 
-void Player::force_road(Path const & path, bool const create_carrier) {
+Road & Player::force_road(Path const & path) {
 	Map & map = egbase().map();
 	FCoords c = map.get_fcoords(path.get_start());
 	Flag & start = force_flag(c);
@@ -328,11 +325,11 @@ void Player::force_road(Path const & path, bool const create_carrier) {
 			immovable->remove(egbase());
 		}
 	}
-	Road::create(egbase(), start, end, path, create_carrier);
+	return Road::create(egbase(), start, end, path);
 }
 
 
-void Player::force_building
+Building & Player::force_building
 	(Coords                const location,
 	 Building_Index        const idx,
 	 uint32_t      const *       ware_counts,
@@ -366,9 +363,10 @@ void Player::force_building
 				immovable->remove(egbase());
 		}
 	}
-	descr.create
-		(egbase(), *this, c[0], false,
-		 ware_counts, worker_counts, &soldier_counts);
+	return
+		descr.create
+		(egbase(), *this, c[0], false, ware_counts,
+		 worker_counts, &soldier_counts);
 }
 
 
@@ -819,8 +817,7 @@ void Player::see_node
 	(Map              const &       map,
 	 Widelands::Field const &       first_map_field,
 	 FCoords                  const f,
-	 Time                     const gametime,
-	 bool                     const lasting)
+	 Time                     const gametime)
 throw ()
 {
 	assert(0 <= f.x);
@@ -836,12 +833,9 @@ throw ()
 	Vision fvision = field.vision;
 	if (fvision == 0)
 		fvision = 1;
-	if (fvision == 1) {
-		if (not lasting)
-			field.time_node_last_unseen = gametime;
+	if (fvision == 1)
 		discover_node(map, first_map_field, f, field);
-	}
-	fvision += lasting;
+	fvision ++;
 	field.vision = fvision;
 }
 

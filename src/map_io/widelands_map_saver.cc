@@ -31,8 +31,6 @@
 #include "widelands_map_building_data_packet.h"
 #include "widelands_map_buildingdata_data_packet.h"
 #include "widelands_map_elemental_data_packet.h"
-#include "widelands_map_event_data_packet.h"
-#include "widelands_map_event_chain_data_packet.h"
 #include "widelands_map_exploration_data_packet.h"
 #include "widelands_map_extradata_data_packet.h"
 #include "widelands_map_flag_data_packet.h"
@@ -52,9 +50,8 @@
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
+#include "widelands_map_scripting_data_packet.h"
 #include "widelands_map_terrain_data_packet.h"
-#include "widelands_map_trigger_data_packet.h"
-#include "widelands_map_variable_data_packet.h"
 #include "widelands_map_ware_data_packet.h"
 #include "widelands_map_waredata_data_packet.h"
 
@@ -107,8 +104,6 @@ void Map_Saver::save() throw (_wexception) {
 	log("done!\n ");
 
 	//  This must come before anything that references messages, such as:
-	//    * events (Event_Expire_Message)
-	//    * triggers (Trigger_Message_Is_Read_Or_Archived)
 	//    * command queue (PlayerMessageCommand, inherited by
 	//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 	log("Writing Player Message Data ... ");
@@ -129,27 +124,6 @@ void Map_Saver::save() throw (_wexception) {
 	log("done!\n ");
 
 	Map const & map = m_egbase.map();
-
-	if (map.mtm().size()) {
-		log("Writing Trigger Data ... ");
-		Map_Trigger_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);
-		log("done!\n ");
-	}
-
-	//  This must come after messages have been written, because when writing an
-	//  Event_Expire_Message, the sequence number in file of the referenced
-	//  message must be known.
-	if (map.mem().size()) {
-		log("Writing Event Data ... ");
-		Map_Event_Data_Packet                p; p.Write(m_fs, m_egbase, *m_mos);
-		log("done!\n ");
-	}
-
-	if (map.mcm().size()) {
-		log("Writing Event Chain Data ... ");
-		Map_EventChain_Data_Packet           p; p.Write(m_fs, m_egbase, *m_mos);
-		log("done!\n ");
-	}
 
 	Player_Number const nr_players = map.get_nrplayers();
 
@@ -253,8 +227,8 @@ void Map_Saver::save() throw (_wexception) {
 	{Map_Players_View_Data_Packet           p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
-	log("Writing Variable Data ... ");
-	{Map_Variable_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
+	log("Writing Scripting Data ... ");
+	{Map_Scripting_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Objective Data ... ");

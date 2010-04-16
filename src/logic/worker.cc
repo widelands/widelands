@@ -20,10 +20,9 @@
 #include "worker.h"
 
 #include "carrier.h"
-#include "critter_bob.h"
-
 #include "checkstep.h"
 #include "cmd_incorporate.h"
+#include "critter_bob.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -36,18 +35,17 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "mapfringeregion.h"
 #include "message_queue.h"
 #include "player.h"
 #include "profile/profile.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker_program.h"
-#include "mapfringeregion.h"
-
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -60,6 +58,7 @@ namespace Widelands {
  */
 bool Worker::run_createitem(Game & game, State & state, Action const & action)
 {
+
 	if (WareInstance * const item = fetch_carried_item(game)) {
 		molog("  Still carrying an item! Delete it.\n");
 		item->schedule_destroy(game);
@@ -77,58 +76,6 @@ bool Worker::run_createitem(Game & game, State & state, Action const & action)
 	player.ware_produced(wareid);
 
 	++state.ivar1;
-	schedule_act(game, 10);
-	return true;
-}
-
-
-/**
- * Run the given lua script whenever this program runs.
- *
- * Syntax in conffile: lua \<filename\>
- *
- * \param g
- * \param state
- * \param action Which file to load and run
- */
-// TODO: the ugliness!!
-extern "C" {
-#include <lua.h>
-}
-bool Worker::run_lua(Game & game, State & state, Action const & action) {
-	//  TODO: make this general
-	log("state.ivar1: %i\n", state.ivar1);
-	log("state.ivar2: %i\n", state.ivar2);
-	if (!state.ivar2) {
-		try {
-			std::string const cwd =
-				"/Users/sirver/Desktop/Programming/cpp/widelands/"
-				"git_svn_trunk/tribes/barbarians/lumberjack/";
-			LuaState * st = game.lua()->interpret_file(cwd + action.sparam1);
-			LuaCoroutine * cr = st->pop_coroutine();
-			molog("  Starting coroutine!\n");
-			molog("   %i\n", cr->resume());
-			state.path = reinterpret_cast<Path *>(cr);
-			state.ivar2 += 1;
-		} catch (LuaError & err) {
-			molog("  Lua program failed: %s\n", err.what());
-			send_signal(game, "fail"); //  mine empty, abort program
-			pop_task(game);
-			return true;
-		}
-	} else {
-		molog("  Advancing coroutine!\n");
-		LuaCoroutine * cr = reinterpret_cast<LuaCoroutine *>(state.path);
-		int rv = cr->resume();
-		molog("   %i\n", rv);
-		if (rv == 0) {
-			// All done, advance the program
-			++state.ivar1;
-			state.ivar2 = 0;
-		}
-	}
-
-	// Advance program state
 	schedule_act(game, 10);
 	return true;
 }

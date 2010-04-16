@@ -24,11 +24,8 @@
 #include <boost/format.hpp>
 #include <libintl.h>
 
-#include "logic/building.h"
 #include "building_statistics_menu.h"
 #include "chat.h"
-#include "logic/cmd_queue.h"
-#include "logic/constructionsite.h"
 #include "debugconsole.h"
 #include "economy/flag.h"
 #include "encyclopedia_window.h"
@@ -38,27 +35,29 @@
 #include "game_io/game_loader.h"
 #include "game_main_menu.h"
 #include "game_main_menu_save_game.h"
+#include "game_message_menu.h"
 #include "game_objectives_menu.h"
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
-#include "game_message_menu.h"
 #include "helper.h"
 #include "i18n.h"
+#include "logic/building.h"
+#include "logic/cmd_queue.h"
+#include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
 #include "overlay_manager.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "profile/profile.h"
 #include "logic/soldier.h"
-#include "stock_menu.h"
 #include "logic/tribe.h"
-#include "ware_statistics_menu.h"
-
+#include "overlay_manager.h"
+#include "profile/profile.h"
+#include "stock_menu.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
-
 #include "upcast.h"
+#include "ware_statistics_menu.h"
 
 using Widelands::Building;
 using Widelands::Map;
@@ -234,12 +233,6 @@ m_toggle_help
 	addCommand
 		("switchplayer",
 		 boost::bind(&Interactive_Player::cmdSwitchPlayer, this, _1));
-	addCommand
-		("toggleSeeAll",
-		 boost::bind(&Interactive_Player::cmdToggleSeeAll, this, _1));
-	addCommand
-		("lua",
-		 boost::bind(&Interactive_Player::cmdLua, this, _1));
 #endif
 }
 
@@ -373,6 +366,13 @@ void Interactive_Player::toggle_message_menu() {
 void Interactive_Player::toggle_buildhelp() {
 	egbase().map().overlay_manager().toggle_buildhelp();
 }
+bool Interactive_Player::buildhelp() {
+	return egbase().map().overlay_manager().buildhelp();
+}
+void Interactive_Player::show_buildhelp(bool const t) {
+	egbase().map().overlay_manager().show_buildhelp(t);
+}
+
 void Interactive_Player::toggle_resources   () {
 }
 void Interactive_Player::toggle_help        () {
@@ -473,16 +473,6 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
 				.enter_chat_message();
 			return true;
-#ifdef DEBUG //  only in debug builds
-		case SDLK_F6:
-			if (get_display_flag(dfDebug)) {
-				new GameChatMenu
-					(this, m_debugconsole, *DebugConsole::getChatProvider());
-				ref_cast<GameChatMenu, UI::UniqueWindow>(*m_debugconsole.window)
-					.enter_chat_message(false);
-			}
-			return true;
-#endif
 		default:
 			break;
 		}
@@ -537,46 +527,4 @@ void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
 			(*building_statistics_window)
 			.update();
 }
-
-void Interactive_Player::cmdToggleSeeAll(std::vector<std::string> const & args)
-{
-	if (args.size() != 1) {
-		DebugConsole::write("Usage: toggleSeeAll (without any arguments)");
-		return;
-	}
-
-	player().set_see_all(not player().see_all());
-}
-
-void Interactive_Player::cmdLua(std::vector<std::string> const & args)
-{
-	if (args.size() < 2) {
-		DebugConsole::write("Usage: lua <string to interpret>");
-		return;
-	}
-
-	std::string cmd;
-
-	// Drop lua, start with the second word
-	for
-		(wl_const_range<std::vector<std::string> >
-		i(args.begin() + 1, args.end());;)
-	{
-		cmd += i.front();
-		if (i.advance().empty())
-			break;
-		cmd += ' ';
-	}
-
-	DebugConsole::write("Starting Lua interpretation!");
-	LuaInterface * lua = game().lua();
-	try {
-		lua->interpret_string(cmd);
-	} catch (LuaError & e) {
-		DebugConsole::write(e.what());
-	}
-
-	DebugConsole::write("Ending Lua interpretation!");
-}
-
 

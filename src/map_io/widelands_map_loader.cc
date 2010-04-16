@@ -31,8 +31,6 @@
 #include "widelands_map_building_data_packet.h"
 #include "widelands_map_buildingdata_data_packet.h"
 #include "widelands_map_elemental_data_packet.h"
-#include "widelands_map_event_data_packet.h"
-#include "widelands_map_event_chain_data_packet.h"
 #include "widelands_map_exploration_data_packet.h"
 #include "widelands_map_extradata_data_packet.h"
 #include "widelands_map_flag_data_packet.h"
@@ -53,8 +51,7 @@
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
 #include "widelands_map_terrain_data_packet.h"
-#include "widelands_map_trigger_data_packet.h"
-#include "widelands_map_variable_data_packet.h"
+#include "widelands_map_scripting_data_packet.h"
 #include "widelands_map_ware_data_packet.h"
 #include "widelands_map_waredata_data_packet.h"
 #include "logic/world.h"
@@ -96,8 +93,8 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 		Map_Player_Names_And_Tribes_Data_Packet p;
 		p.Pre_Read(m_fs, &m_map, !scenario);
 	}
-	// No trigger file -> not playable as scenario!
-	m_map.set_as_scenario_playable(m_fs.FileExists("trigger"));
+	// No scripting/init.lua file -> not playable as scenario
+	m_map.set_as_scenario_playable(m_fs.FileExists("scripting/init.lua"));
 
 	set_state(STATE_PRELOADED);
 
@@ -293,13 +290,7 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Players_View_Data_Packet   p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
-	log("Reading Variable Data ... ");
-	{Map_Variable_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
-	log("done!\n ");
-
 	//  This must come before anything that references messages, such as:
-	//    * events (Event_Expire_Message)
-	//    * triggers (Trigger_Message_Is_Read_Or_Archived)
 	//    * command queue (PlayerMessageCommand, inherited by
 	//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 	log("Reading Player Message Data ... ");
@@ -309,24 +300,13 @@ int32_t WL_Map_Loader::load_map_complete
 	}
 	log("done!\n ");
 
-	//  Triggers: Depends on messages
-	log("Reading Trigger Data ... ");
-	{Map_Trigger_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
-	log("done!\n ");
-
-	//  Objectives: Depends on triggers
+	//  Objectives
 	log("Reading Objective Data ... ");
 	{Map_Objective_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
-	//  Events: depends on messages, triggers, objectives
-	log("Reading Event Data ... ");
-	{Map_Event_Data_Packet          p; p.Read(m_fs, egbase, !scenario, *m_mol);}
-	log("done!\n ");
-
-	//  Event Chains: depends on events, triggers
-	log("Reading Event Chain Data ... ");
-	{Map_EventChain_Data_Packet     p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	log("Reading Scripting Data ... ");
+	{Map_Scripting_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	if (m_mol->get_nr_unloaded_objects())

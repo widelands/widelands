@@ -17,51 +17,45 @@
  *
  */
 
+#include <string>
+#include <cstring>
+
 #include "game.h"
 
 #include "carrier.h"
-#include "cmd_check_eventchain.h"
+#include "cmd_luascript.h"
 #include "computer_player.h"
-#include "events/event.h"
-#include "events/event_chain.h"
+#include "economy/economy.h"
 #include "findimmovable.h"
-#include "wui/interactive_player.h"
-#include "ui_fsmenu/launchgame.h"
 #include "game_io/game_loader.h"
-#include "wui/game_tips.h"
 #include "game_io/game_preload_data_packet.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "player.h"
 #include "playercommand.h"
 #include "profile/profile.h"
 #include "replay.h"
+#include "scripting/scripting.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
+#include "timestring.h"
 #include "trainingsite.h"
 #include "tribe.h"
+#include "ui_basic/progresswindow.h"
+#include "ui_fsmenu/launchgame.h"
+#include "upcast.h"
 #include "warning.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "map_io/widelands_map_loader.h"
 #include "wlapplication.h"
-
-#include "economy/economy.h"
-
-#include "ui_basic/progresswindow.h"
-
-#include "log.h"
-
-#include "upcast.h"
-
-#include "timestring.h"
-
-#include <string>
-#include <cstring>
+#include "wui/game_tips.h"
+#include "wui/interactive_player.h"
 
 namespace Widelands {
 
@@ -126,6 +120,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 
 Game::Game() :
+	Editor_Game_Base(create_LuaGameInterface(this)),
 	m_syncwrapper      (*this, m_synchash),
 	m_ctrl             (0),
 	m_writereplay      (true),
@@ -136,7 +131,6 @@ Game::Game() :
 	m_last_stats_update(0)
 {
 	g_sound_handler.m_the_game = this;
-	m_lua = create_lua_interface(this);
 }
 
 Game::~Game()
@@ -476,8 +470,6 @@ bool Game::run
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources();
-		map().mem().remove_unreferenced();
-		map().mtm().remove_unreferenced();
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
@@ -492,10 +484,8 @@ bool Game::run
 			map().set_scenario_player_ai   (p, player_ai);
 		}
 
-		// Everything prepared, send the first trigger event
-		// We lie about the sender here. Hey, what is one lie in a lifetime?
-		enqueue_command
-			(new Cmd_CheckEventChain(get_gametime(), static_cast<uint16_t>(-1)));
+		// Run the init script, if the map provides one.
+		enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
 	}
 
 	if (m_writereplay) {
@@ -1112,6 +1102,10 @@ void Game::conquer_area_no_building(Player_Area<Area<FCoords> > player_area) {
 
 /// Conquers the given area for that player; does the actual work.
 /// Additionally, it updates the visible area for that player.
+// TODO: this needs a more fine grained refactoring
+// for example scripts will want to (un)conquer area of non oval shape
+// or give area back to the neutral player (this is very important for the Lua
+// testsuite).
 void Game::do_conquer_area
 	(Player_Area<Area<FCoords> > player_area,
 	 bool          const conquer,

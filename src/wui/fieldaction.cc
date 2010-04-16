@@ -25,7 +25,6 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "editor/editorinteractive.h"
 #include "game_debug_ui.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
