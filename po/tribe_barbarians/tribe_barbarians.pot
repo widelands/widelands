@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-16 21:59+0000\n"
+"POT-Creation-Date: 2010-04-16 22:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -211,7 +211,7 @@ msgid ""
 "Citadel"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:223
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid ""
 "Citadel village"
 msgstr ""
@@ -513,7 +513,7 @@ msgid ""
 "Headquarters"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:222
+#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid ""
 "Headquarters medium"
 msgstr ""
