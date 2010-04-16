@@ -1901,6 +1901,9 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		return true;
 	}
 
+	virtual std::string getWinCondition() { return s.win_condition; }
+	virtual void setWinCondition(std::string wc) { s.win_condition = wc; }
+
 private:
 	GameSettings s;
 };

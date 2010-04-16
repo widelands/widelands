@@ -34,6 +34,7 @@ struct GameChatPanel;
 struct GameController;
 struct GameSettingsProvider;
 struct PlayerDescriptionGroup;
+struct LuaInterface;
 
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player
@@ -56,6 +57,7 @@ struct PlayerDescriptionGroup;
 struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LaunchGame
 		(GameSettingsProvider *, GameController * = 0, bool autolaunch = false);
+	~Fullscreen_Menu_LaunchGame();
 
 	void setChatProvider(ChatProvider &);
 
@@ -65,10 +67,14 @@ struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	void refresh();
 
 private:
+	LuaInterface * m_lua;
+
 	void select_map();
 	void select_savegame();
 	void back_clicked();
 	void start_clicked();
+	void win_condition_clicked();
+	void win_condition_update();
 	void set_scenario_values();
 	void switch_to_position(uint8_t);
 	void load_previous_playerdata();
@@ -81,7 +87,7 @@ private:
 	std::string m_fn;
 
 	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
-	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_back, m_ok;
+	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_wincondition, m_back, m_ok;
 	UI::Callback_IDButton<Fullscreen_Menu_LaunchGame, uint8_t> *
 		m_pos[MAX_PLAYERS];
 	UI::Textarea              m_title, m_mapname, m_lobby;
@@ -93,13 +99,15 @@ private:
 	GameChatPanel           * m_chat;
 	PlayerDescriptionGroup  * m_players[MAX_PLAYERS];
 	std::string               m_filename;
-	std::string            m_filename_proof; // locale variable to check UI state
+	std::string            m_filename_proof; // local variable to check UI state
 	std::string               m_player_save_name[MAX_PLAYERS];
 	std::string               m_player_save_tribe[MAX_PLAYERS];
 	int8_t                    m_nr_players;
 	bool                      m_is_scenario;
 	bool                      m_is_savegame;
 	bool                      m_autolaunch;
+	std::vector<std::string>  m_win_conditions;
+	uint8_t                   m_cur_wincondition;
 };
 
 

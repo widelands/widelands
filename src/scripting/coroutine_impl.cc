@@ -19,13 +19,16 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "coroutine_impl.h"
+#include "logic/player.h"
 
 #include "c_utils.h"
+#include "lua_game.h"
 #include "persistence.h"
 
+#include "coroutine_impl.h"
+
 LuaCoroutine_Impl::LuaCoroutine_Impl(lua_State * ms)
-	: m_L(ms), m_idx(LUA_REFNIL)
+	: m_L(ms), m_idx(LUA_REFNIL), m_nargs(0)
 {
 	m_reference();
 }
@@ -37,7 +40,8 @@ LuaCoroutine_Impl::~LuaCoroutine_Impl()
 
 int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 {
-	int rv = lua_resume(m_L, 0);
+	int rv = lua_resume(m_L, m_nargs);
+	m_nargs = 0;
 	int n = lua_gettop(m_L);
 
 	uint32_t sleep_for = 0;
@@ -55,13 +59,29 @@ int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 	return rv;
 }
 
+/*
+ * Push an argument that will be passed to the coroutine the next time it is
+ * resumed
+ */
+void LuaCoroutine_Impl::push_arg(const Widelands::Player * plr) {
+	to_lua<L_Player>(m_L, new L_Player(plr->player_number()));
+	m_nargs++;
+}
+
 static const char * m_persistent_globals[] = {
 	"coroutine.yield", 0,
 };
+
+#define COROUTINE_DATA_PACKET_VERSION 1
 uint32_t LuaCoroutine_Impl::write
 	(lua_State * parent, Widelands::FileWrite & fw,
 	 Widelands::Map_Map_Object_Saver & mos)
 {
+	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
+
+	// The current numbers of arguments on the stack
+	fw.Unsigned32(m_nargs);
+
 	// Empty table + object to persist on the stack Stack
 	lua_newtable(parent);
 	lua_pushthread(m_L);
@@ -74,6 +94,14 @@ void LuaCoroutine_Impl::read
 	(lua_State * parent, Widelands::FileRead & fr,
 	 Widelands::Map_Map_Object_Loader & mol, uint32_t size)
 {
+	uint8_t version = fr.Unsigned8();
+
+	if(version != COROUTINE_DATA_PACKET_VERSION)
+		throw wexception("Unknown data packet version: %i\n", version);
+
+	// The current numbers of arguments on the stack
+	m_nargs = fr.Unsigned32();
+
 	// Empty table + object to persist on the stack Stack
 	unpersist_object(parent, m_persistent_globals, fr, mol, size);
 
@@ -84,6 +112,7 @@ void LuaCoroutine_Impl::read
 	// get garbage collected
 	lua_pushthread(m_L);
 	m_idx = luaL_ref(m_L, LUA_REGISTRYINDEX);
+
 }
 
 /*

@@ -1631,7 +1631,7 @@ static int L_run_coroutine(lua_State * L) {
 	int nargs = lua_gettop(L);
 	uint32_t runtime = get_game(L).get_gametime();
 	if (nargs < 1)
-		report_error(L, "Too little arguments to run_at");
+		report_error(L, "Too little arguments!");
 	if (nargs == 2)
 		runtime = luaL_checkuint32(L, 2);
 

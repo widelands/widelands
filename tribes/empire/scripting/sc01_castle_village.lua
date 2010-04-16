@@ -4,7 +4,11 @@
 
 use("aux", "infrastructure")
 
-return function(plr)
+set_textdomain("tribe_empire")
+
+return {
+   name = _ "Castle village",
+   func = function(plr)
    plr:allow_workers("all")
 
    local sf = plr.starting_field
@@ -104,8 +108,5 @@ return function(plr)
    })
 
    place_building_in_region(plr, "stonemasons_house", sf:region(11))
-   
-
-
-
 end
+}

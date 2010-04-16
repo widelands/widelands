@@ -29,7 +29,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 14,
+	NETWORK_PROTOCOL_VERSION = 15,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -361,7 +361,15 @@ enum {
 	 * \li Unsigned32: number of the last received part
 	 * \li String: md5sum - to ensure client and host are talking about the same
 	 */
-	NETCMD_FILE_PART = 25
+	NETCMD_FILE_PART = 25,
+
+	/**
+	* Sent by the host to change the win condition.
+	*
+	* Attached data is:
+	* \li String: name of the win condition
+	*/
+	NETCMD_WIN_CONDITION = 26
 };
 
 #endif

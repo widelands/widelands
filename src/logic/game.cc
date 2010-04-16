@@ -23,6 +23,7 @@
 #include "game.h"
 
 #include "carrier.h"
+#include "cmd_luacoroutine.h"
 #include "cmd_luascript.h"
 #include "computer_player.h"
 #include "economy/economy.h"
@@ -80,8 +81,8 @@ void Game::SyncWrapper::StartDump(std::string const & fname) {
 static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
 void Game::SyncWrapper::Data(void const * const data, size_t const size) {
-	uint32_t time = m_game.get_gametime();
 #ifdef SYNC_DEBUG
+	uint32_t time = m_game.get_gametime();
 	log("[sync:%08u t=%6u]", m_counter, time);
 	for (size_t i = 0; i < size; ++i)
 		log(" %02x", (static_cast<uint8_t const *>(data))[i]);
@@ -320,7 +321,14 @@ void Game::init_newgame
 
 	loaderUI.step(_("Loading map"));
 	maploader->load_map_complete(*this, settings.scenario);
+
+	// Check for win_conditions
+	LuaCoroutine * cr = lua().run_script
+		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
+		 ".lua", "win_conditions")->get_coroutine("func");
+	enqueue_command(new Cmd_LuaCoroutine(get_gametime(), cr));
 }
+
 
 
 /**

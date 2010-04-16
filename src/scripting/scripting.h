@@ -20,12 +20,13 @@
 #ifndef SCRIPTING_H
 #define SCRIPTING_H
 
+#include "wexception.h"
+
 #include <map>
-#include <stdexcept>
 #include <stdint.h>
 #include <string>
 
-#include <lua.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include <lua.hpp>
 
@@ -33,14 +34,15 @@
 #include "logic/widelands_fileread.h"
 
 namespace Widelands {
-	struct Map_Map_Object_Loader;
-	struct Map_Map_Object_Saver;
 	struct Editor_Game_Base;
 	struct Game;
+	struct Map_Map_Object_Loader;
+	struct Map_Map_Object_Saver;
+	struct Player;
 }
 
-struct LuaError : public std::runtime_error {
-	LuaError(std::string const & reason) : std::runtime_error(reason) {}
+struct LuaError : public _wexception {
+	LuaError(std::string const & reason) : wexception("%s", reason.c_str()) {}
 };
 struct LuaValueError : public LuaError {
 	LuaValueError(std::string const & wanted) :
@@ -65,9 +67,22 @@ struct LuaCoroutine {
 
 	virtual int get_status(void) = 0;
 	virtual int resume(uint32_t* = 0) = 0;
+
+	virtual void push_arg(const Widelands::Player *) = 0;
 };
 
-/**
+/*
+ * Easy handling of return values from Wideland's Lua configurations
+ * scripts: they return a Lua table with (string,value) pairs.
+ */
+struct LuaTable {
+	virtual ~LuaTable() {}
+
+	virtual std::string get_string(std::string) = 0;
+	virtual LuaCoroutine * get_coroutine(std::string) = 0;
+};
+
+/*
  * This is the thin class that is used to execute code
  */
 typedef std::map<std::string, std::string> ScriptContainer;
@@ -77,15 +92,16 @@ struct LuaInterface {
 	virtual void interpret_string(std::string) = 0;
 	virtual std::string const & get_last_error() const = 0;
 
-	virtual void register_scripts(FileSystem &, std::string) = 0;
+	virtual void register_scripts(FileSystem &, std::string,
+			std::string = "scripting") = 0;
 	virtual ScriptContainer& get_scripts_for(std::string) = 0;
 
-	virtual void run_script(std::string, std::string) = 0;
+	virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string) = 0;
+	virtual boost::shared_ptr<LuaTable> run_script
+			(FileSystem &, std::string, std::string) = 0;
 };
 
 struct LuaGameInterface : public virtual LuaInterface {
-	virtual void make_starting_conditions(uint8_t, std::string) = 0;
-
 	virtual LuaCoroutine* read_coroutine
 		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
 		 uint32_t) = 0;
