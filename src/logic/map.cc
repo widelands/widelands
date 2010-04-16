@@ -1847,6 +1847,7 @@ struct StarQueue {
 
 	// Recursively check integrity
 	void debug(uint32_t const node, char const * const str) {
+#if 0
 		uint32_t l = node * 2 + 1;
 		uint32_t r = node * 2 + 2;
 		if (m_data[node]->heap_index != static_cast<int32_t>(node)) {
@@ -1867,6 +1868,7 @@ struct StarQueue {
 			}
 			debug(r, str);
 		}
+#endif
 	}
 
 private:
