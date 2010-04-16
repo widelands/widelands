@@ -47,7 +47,7 @@ MAINPOTS = [( "maps/maps", ["../../maps/*/elemental", "../../campaigns/cconfig"]
                             "../../src/*/*.h",
                             "../../src/*/*/*.h",
             ] ),
-            ( "win_conditions/win_condition", [
+            ( "win_conditions/win_conditions", [
                 "../../scripting/win_conditions/*.lua",
             ]),
 ]
