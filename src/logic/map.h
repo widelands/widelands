@@ -21,11 +21,9 @@
 #define MAP_H
 
 #include "economy/itransport_cost_calculator.h"
-#include "events/event_chain.h"
 #include "field.h"
 #include "graphic/picture_id.h"
 #include "objective.h"
-#include "variable.h"
 #include "widelands_geometry.h"
 #include "world.h"
 
@@ -345,14 +343,6 @@ struct Map : public ITransportCostCalculator {
 	//  change terrain of a triangle, recalculate buildcaps
 	int32_t change_terrain(TCoords<FCoords>, Terrain_Index);
 
-	Manager<Variable>   const & mvm() const {return m_mvm;}
-	Manager<Variable>         & mvm()       {return m_mvm;}
-	Manager<Trigger>    const & mtm() const {return m_mtm;}
-	Manager<Trigger>          & mtm()       {return m_mtm;}
-	Manager<Event>      const & mem() const {return m_mem;}
-	Manager<Event>            & mem()       {return m_mem;}
-	Manager<EventChain> const & mcm() const {return m_mcm;}
-	Manager<EventChain>       & mcm()       {return m_mcm;}
 	Manager<Objective>  const & mom() const {return m_mom;}
 	Manager<Objective>        & mom()       {return m_mom;}
 
@@ -393,10 +383,6 @@ private:
 	std::vector<std::string> m_scenario_names;
 	std::vector<std::string> m_scenario_ais;
 
-	Manager<Variable>   m_mvm;
-	Manager<Trigger>    m_mtm;
-	Manager<Event>      m_mem;
-	Manager<EventChain> m_mcm;
 	Manager<Objective>  m_mom;
 
 	struct Extradata_Info {
@@ -1054,9 +1040,7 @@ inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
           fc.x < static_cast<Widelands::X_Coordinate>(extent.w);              \
           ++fc.x, ++fc.field)                                                 \
 
-
-std::string g_VariableCallback(std::string, void * data);
-
 }
+
 
 #endif

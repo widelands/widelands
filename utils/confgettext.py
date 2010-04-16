@@ -7,6 +7,8 @@ import sys
 import os
 from time import strftime,gmtime
 
+from collections import defaultdict
+
 time_now = gmtime()
 ### Set the header to something sensible, a much as is possible here.
 head =  "# Widelands PATH/TO/FILE.PO\n"
@@ -26,11 +28,11 @@ head += "\"Content-Type: text/plain; charset=UTF-8\\n\"\n"
 head += "\"Content-Transfer-Encoding: 8bit\\n\"\n"
 head += "\n"
 
-class occurences: 
+class occurences:
     def __init__( self, file, line ):
         self.line = line
         self.file = file
-        
+
 class trans_string:
     def __init__( self ):
         self.occurences = []
@@ -59,11 +61,11 @@ def firstr( str, what ):
 def append_string( known_strings, array, string ):
     if known_strings.has_key( string.str ):
         i = known_strings[string.str]
-        array[i].occurences += string.occurences 
+        array[i].occurences += string.occurences
     else:
         array.append( string )
         known_strings[string.str] = len( array ) - 1
-    
+
 def parse_conf( files ):
     translatable_strings = []
     known_strings = {}
@@ -75,16 +77,16 @@ def parse_conf( files ):
             line = lines[i].rstrip('\n')
             linenr = i+1
             curstr = 0
-            
+
             if multiline and  len(line) and line[0]=='_':
                 line = line[1:]
-                rindex = line.rfind('""') 
+                rindex = line.rfind('""')
                 if rindex == -1 or line[:2] == '""':
                     line = line.strip()
                     line = line.strip('"')
                     curstr = trans_string()
                     curstr.str = line
-                    curstr.occurences.append( occurences( file, linenr )) 
+                    curstr.occurences.append( occurences( file, linenr ))
                     append_string( known_strings, translatable_strings, curstr )
                     continue
                 else:
@@ -93,7 +95,7 @@ def parse_conf( files ):
                     line = line.strip('"')
                     curstr = trans_string()
                     curstr.str = line
-                    curstr.occurences.append( occurences( file, linenr )) 
+                    curstr.occurences.append( occurences( file, linenr ))
                     append_string( known_strings, translatable_strings, curstr )
                     multiline = False
                     continue
@@ -101,7 +103,7 @@ def parse_conf( files ):
             index = line.find( "=_" )
             if( index > 0 ):
                 curstr = trans_string()
-                curstr.occurences.append( occurences( file, linenr )) 
+                curstr.occurences.append( occurences( file, linenr ))
                 restline = line[index+2:]
                 multiline = is_multiline( restline );
                 if multiline: # means exactly one "
@@ -118,7 +120,7 @@ def parse_conf( files ):
                 if( l != -1 and r != -1 ):
                     restline = restline[l+1:]
                     r = firstr( restline, '"\'')
-                    restline = restline[:r] 
+                    restline = restline[:r]
                 else:
                     # Remove comments
                     rindex = max( restline.rfind('#'), restline.rfind('//'))
@@ -129,30 +131,15 @@ def parse_conf( files ):
                 curstr.str = restline
                 append_string( known_strings, translatable_strings, curstr )
 
-    translatable_strings.sort( lambda str1,str2: cmp(str1.occurences[0].file,str2.occurences[0].file) ) 
+    translatable_strings.sort( lambda str1,str2:
+                cmp(str1.occurences[0].file,str2.occurences[0].file) )
 
-    retval = head
+    # Sort this into the way that is returned by lua xgettext so that we can 
+    # join efforts here. 
+    rv = defaultdict()
     for i in translatable_strings:
-        for occ in i.occurences:
-            retval += "#: %s:%i\n" % ( occ.file, occ.line )
+        rv[i.str] = [ (o.file, o.line) for o in i.occurences ]
 
-        # escape the escapable characters 
-        i.str = i.str.replace('\\', '\\\\')
-        i.str = i.str.replace('"', '\\"')
-        if( i.str.find('\n') == -1 ):
-            retval += 'msgid "%s"\n' % i.str
-        else:
-            retval += 'msgid ""\n%s' % i.str
-        retval += 'msgstr ""\n\n'
-    return retval 
+    return rv
 
 
-#: ../src/ui/ui_fs_menus/fullscreen_menu_main.cc:41
-#msgid "Single Player"
-#msgstr ""
-
-if __name__ == "__main__":
-    if( sys.argv < 2 ):
-        print "Usage %s <conf file> [ <conf file> ... ]" % sys.argv[0]
-
-    print parse_conf( sys.argv[1:] )

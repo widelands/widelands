@@ -23,22 +23,53 @@
 #include <cstdio>
 #include <iostream>
 
-extern "C" {
-#include <lauxlib.h>
-#include <lualib.h>
+Widelands::Game & get_game(lua_State * const L) {
+	lua_getfield(L, LUA_REGISTRYINDEX, "game");
+	Widelands::Game * g = static_cast<Widelands::Game *>(lua_touserdata(L, -1));
+	lua_pop(L, 1); // pop this userdata
+
+	return *g;
 }
 
-Widelands::Game * get_game(lua_State * const l) {
-	lua_pushstring(l, "game");
-	lua_gettable(l, LUA_REGISTRYINDEX);
+Widelands::Editor_Game_Base & get_egbase(lua_State * const L) {
+	lua_getfield(L, LUA_REGISTRYINDEX, "egbase");
+	Widelands::Editor_Game_Base * g = static_cast<Widelands::Editor_Game_Base *>
+		(lua_touserdata(L, -1));
+	lua_pop(L, 1); // pop this userdata
 
-	return static_cast<Widelands::Game *>(lua_touserdata(l, -1));
+	return *g;
 }
+
+Widelands::Map_Map_Object_Loader * get_mol(lua_State * const L) {
+	lua_pushstring(L, "mol");
+	lua_gettable(L, LUA_REGISTRYINDEX);
+
+	Widelands::Map_Map_Object_Loader * mol =
+		static_cast<Widelands::Map_Map_Object_Loader *>(lua_touserdata(L, -1));
+
+	lua_pop(L, 1); // pop this userdata
+
+	return mol;
+}
+
+Widelands::Map_Map_Object_Saver * get_mos(lua_State * const L) {
+	lua_pushstring(L, "mos");
+	lua_gettable(L, LUA_REGISTRYINDEX);
+
+	Widelands::Map_Map_Object_Saver * mos =
+		static_cast<Widelands::Map_Map_Object_Saver *>(lua_touserdata(L, -1));
+
+	lua_pop(L, 1); // pop this userdata
+
+	return mos;
+}
+
+
 
 /*
  * Returns an error to lua. Returns 0
  */
-int report_error(lua_State * l, const char * const fmt, ...) {
+int report_error(lua_State * L, const char * const fmt, ...) {
 	char buffer[2048];
 	va_list va;
 
@@ -46,9 +77,9 @@ int report_error(lua_State * l, const char * const fmt, ...) {
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	lua_pushstring(l, buffer);
+	lua_pushstring(L, buffer);
 
-	lua_error(l);
+	lua_error(L);
 
 	return 0;
 }

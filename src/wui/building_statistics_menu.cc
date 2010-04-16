@@ -382,8 +382,8 @@ void Building_Statistics_Menu::update() {
 				++nr_owned;
 				if (productionsite)
 					total_prod +=
-						ref_cast<Widelands::ProductionSite, Widelands::BaseImmovable>
-							(*map[vec[l].pos].get_immovable())
+					ref_cast<Widelands::ProductionSite, Widelands::BaseImmovable>
+						(*map[vec[l].pos].get_immovable())
 						.get_statistics_percent();
 			}
 		}

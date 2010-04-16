@@ -17,6 +17,8 @@
  *
  */
 
+#include <lua.hpp>
+
 #include "lua_debug.h"
 
 #include "c_utils.h"
@@ -25,45 +27,85 @@
 #include "logic/player.h"
 #include "wui/interactive_player.h"
 
-extern "C" {
-#include <lauxlib.h>
-#include <lualib.h>
-}
 
-// LUAMODULE wl.debug
+/* RST
+:mod:`wl.debug`
+==================
+
+.. module:: wl.debug
+   :synopsis: Debugging functionality (only when widelands was build with DEBUG)
+
+.. moduleauthor:: The Widelands development team
+
+.. currentmodule:: wl.debug
+
+The :mod:`wl.debug` module contains functionality that can be useful for
+developers or scenario creators. It allows to access some internals of
+widelands. It is only included in debug builds of widelands (not in release
+builds).
+*/
 
 /*
- * Intern definitions of Lua Functions
+ * ========================================================================
+ *                            MODULE FUNCTIONS
+ * ========================================================================
  */
-/*
- * TODO: describe these with doxygen descriptions
- *
- * LUAFUNC: log
- */
-static int L_log(lua_State * const l) {
-	log("%s\n", luaL_checkstring(l, 1));
+/* RST
+.. function:: exit
 
+	Immediately exits the current game, this is equivalent to the user
+	clicking the exit button in the in-game main menu. This is especially
+	useful for automated testing of features and is for example used in the
+	widelands lua test suite.
+
+	:returns: :const:`nil`
+*/
+static int L_exit(lua_State * const l) {
+   get_egbase(l).get_ibase()->end_modal(0);
 	return 0;
 }
 
-/*
- * TODO: document me
- */
-static int L_setSeeAll(lua_State * const l) {
-	bool const bval = luaL_checkint(l, 1);
+/* RST
+.. function:: save(name)
 
-	get_game(l)->get_ipl()->player().set_see_all(bval);
+	Saves the game exactly as if the player had entered the save dialog and
+	entered name as an argument. If some error occurred while saving, this will
+	throw an Lua error. Note that this currently doesn't work when called from
+	inside a Coroutine.
+
+	:arg name: name of save game. If this game already exists, it will be
+		silently overwritten
+	:type name: :class:`string`
+	:returns: :const:`nil`
+*/
+static int L_save(lua_State * const L) {
+	Widelands::Game & game = get_game(L);
+
+	std::string const complete_filename =
+		game.save_handler().create_file_name
+			(SaveHandler::get_base_dir(), luaL_checkstring(L, -1));
+
+	lua_pop(L, 1); // Make stack empty before persistence starts.
+
+	if (g_fs->FileExists(complete_filename))
+		g_fs->Unlink(complete_filename);
+	std::string error;
+	if (!game.save_handler().save_game(game, complete_filename, &error))
+		return report_error(L, "save error: %s", error.c_str());
 
 	return 0;
 }
 
 const static struct luaL_reg wldebug [] = {
-	{"log", &L_log},
-	{"set_see_all", &L_setSeeAll},
+	{"exit", &L_exit},
+	{"save", &L_save},
 	{0, 0}
 };
 
 
 void luaopen_wldebug(lua_State * const l) {
 	luaL_register(l, "wl.debug", wldebug);
+
+	lua_pop(l, 1); // pop the table from the stack again
 }
+

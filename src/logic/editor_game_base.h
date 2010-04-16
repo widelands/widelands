@@ -34,6 +34,7 @@
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
 struct Interactive_Base;
+class LuaInterface;
 
 namespace Widelands {
 
@@ -56,10 +57,10 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	friend struct ::Interactive_Base;
 	friend class Game_Game_Class_Data_Packet;
 
-	Editor_Game_Base();
+	Editor_Game_Base(LuaInterface * lua);
 	virtual ~Editor_Game_Base();
 
-	void set_map(Map *, bool = true);
+	void set_map(Map *);
 	Map & map() const throw () {return *m_map;}
 	Map * get_map() {return m_map;}
 	Map & get_map() const {return *m_map;}
@@ -142,10 +143,15 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	int32_t & get_game_time_pointer() {return m_gametime;}
 	void set_ibase(Interactive_Base * const b) {m_ibase = b;}
 
+	/// Lua frontend, used to run Lua scripts
+	LuaInterface & lua() {return *m_lua;}
+
 private:
 	int32_t m_gametime;
 	Player                   * m_players[MAX_PLAYERS];
 	Object_Manager             m_objects;
+
+	LuaInterface             * m_lua;
 protected:
 	typedef std::vector<Tribe_Descr *> Tribe_Vector;
 	Tribe_Vector           m_tribes;

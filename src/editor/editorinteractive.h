@@ -120,10 +120,7 @@ private:
 	void tool_menu_btn        ();
 	void toolsize_menu_btn    ();
 	void toggle_mainmenu      ();
-	void toggle_eventmenu     ();
 	void toggle_playermenu    ();
-	void toggle_variablesmenu ();
-	void toggle_objectivesmenu();
 
 	//  state variables
 	bool m_need_save;
@@ -136,12 +133,10 @@ private:
 	int32_t m_realtime;
 
 	UI::UniqueWindow::Registry m_toolmenu;
+
 	UI::UniqueWindow::Registry m_toolsizemenu;
 	UI::UniqueWindow::Registry m_playermenu;
 	UI::UniqueWindow::Registry m_mainmenu;
-	UI::UniqueWindow::Registry m_eventmenu;
-	UI::UniqueWindow::Registry m_variablesmenu;
-	UI::UniqueWindow::Registry m_objectivesmenu;
 	UI::UniqueWindow::Registry m_heightmenu;
 	UI::UniqueWindow::Registry m_noise_heightmenu;
 	UI::UniqueWindow::Registry m_terrainmenu;
@@ -155,9 +150,6 @@ private:
 	UI::Callback_Button<Editor_Interactive> m_toggle_minimap;
 	UI::Callback_Button<Editor_Interactive> m_toggle_buildhelp;
 	UI::Callback_Button<Editor_Interactive> m_toggle_player_menu;
-	UI::Callback_Button<Editor_Interactive> m_toggle_event_menu;
-	UI::Callback_Button<Editor_Interactive> m_toggle_variables_menu;
-	UI::Callback_Button<Editor_Interactive> m_toggle_objectives_menu;
 };
 
 #endif

@@ -17,24 +17,28 @@
  *
  */
 
-#include "logic/checkstep.h"
-#include "logic/cmd_queue.h"
+#include <boost/bind.hpp>
+
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "font_handler.h"
-#include "logic/game.h"
+#include "game_chat_menu.h"
 #include "gamecontroller.h"
-#include "logic/immovable.h"
 #include "interactive_player.h"
+#include "logic/checkstep.h"
+#include "logic/cmd_queue.h"
+#include "logic/game.h"
+#include "logic/immovable.h"
 #include "logic/maptriangleregion.h"
+#include "logic/player.h"
+#include "logic/productionsite.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
 #include "minimap.h"
 #include "overlay_manager.h"
-#include "logic/player.h"
-#include "logic/productionsite.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "upcast.h"
 #include "wlapplication.h"
 
@@ -103,6 +107,8 @@ Interactive_Base::Interactive_Base
 	m_sel.pic = g_gr->get_picture(PicMod_Game, "pics/fsel.png");
 
 	m_label_speed.set_visible(false);
+
+	setDefaultCommand (boost::bind(&Interactive_Base::cmdLua, this, _1));
 }
 
 
@@ -817,11 +823,46 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 					ctrl->setDesiredSpeed(1000 < speed ? speed - 1000 : 0);
 				}
 		return true;
-
+#ifdef DEBUG //  only in debug builds
+		case SDLK_F6:
+			if (get_display_flag(dfDebug)) {
+				new GameChatMenu
+					(this, m_debugconsole, *DebugConsole::getChatProvider());
+				ref_cast<GameChatMenu, UI::UniqueWindow>(*m_debugconsole.window)
+					.enter_chat_message(false);
+			}
+			return true;
+#endif
 	default:
 		break;
 	}
 
 	return Map_View::handle_key(down, code);
 }
+
+void Interactive_Base::cmdLua(std::vector<std::string> const & args)
+{
+	std::string cmd;
+
+	// Drop lua, start with the second word
+	for(wl_const_range<std::vector<std::string> >
+		i(args.begin(), args.end());;)
+	{
+		cmd += i.front();
+		if (i.advance().empty())
+			break;
+		cmd += ' ';
+	}
+
+	DebugConsole::write("Starting Lua interpretation!");
+	try {
+		egbase().lua().interpret_string(cmd);
+	} catch (LuaError & e) {
+		DebugConsole::write(e.what());
+	}
+
+	DebugConsole::write("Ending Lua interpretation!");
+}
+
+
 

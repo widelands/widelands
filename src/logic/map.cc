@@ -22,8 +22,6 @@
 #include "checkstep.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "events/event.h"
-#include "events/event_chain.h"
 #include "findimmovable.h"
 #include "findnode.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -53,16 +51,6 @@
 #define ISLAND_BORDER   10
 
 namespace Widelands {
-
-/**
- * Callback function for font renderer.
- */
-std::string g_VariableCallback(std::string str, void * data) {
-	if (const Map * const map = static_cast<const Map *>(data))
-		if (Variable const * const var = map->mvm()[str])
-			return var->get_string_representation();
-	return (std::string("UNKNOWN:") + str).c_str();
-}
 
 /*
 ==============================================================================
@@ -333,34 +321,6 @@ void Map::cleanup() {
 		m_overlay_manager->reset();
 
 	mom().remove_all();
-	mcm().remove_all();
-	mem().remove_unreferenced();
-	{
-		Manager<Event>::Index nr_events = mem().size();
-		for (Manager<Event>::Index e_idx = 0; e_idx < nr_events; ++e_idx) {
-			Event const & event = mem()[e_idx];
-			Event::Referencers const referencers = event.referencers();
-			container_iterate_const(Event::Referencers, referencers, i)
-				log
-					("ERROR: event %s is still referenced by %s\n",
-					 event.name().c_str(), i.current->first->identifier().c_str());
-		}
-	}
-	mtm().remove_unreferenced();
-	{
-		Manager<Trigger>::Index nr_triggers = mtm().size();
-		for (Manager<Trigger>::Index t_idx = 0; t_idx < nr_triggers; ++t_idx) {
-			Trigger const & trigger = mtm()[t_idx];
-			Trigger::Referencers const referencers = trigger.referencers();
-			container_iterate_const(Trigger::Referencers, referencers, i)
-				log
-					("ERROR: trigger %s is still referenced by %s\n",
-					 trigger.name().c_str(),
-					 i.current->first->identifier().c_str());
-		}
-	}
-
-	mvm().remove_all();
 
 	//  Remove all extra data. Pay attention here, maybe some freeing would be
 	//  needed.
@@ -424,11 +384,6 @@ void Map::set_origin(Coords const new_origin) {
 
 	for (uint8_t i = get_nrplayers();              i;)
 		m_starting_pos[--i].reorigin(new_origin, extent());
-	for (Manager<Event>  ::Index i = mem().size(); i;)
-		mem()         [--i].reorigin(new_origin, extent());
-	for (Manager<Trigger>::Index i = mtm().size(); i;)
-		mtm()         [--i].reorigin(new_origin, extent());
-
 
 	//  Rearrange the fields. This is done in 2 steps. First each column is
 	//  rotated. Then each row is rotated. How to rotate an array is described

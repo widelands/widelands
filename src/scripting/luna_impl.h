@@ -23,10 +23,15 @@
  * it in a header file, not an implementation file
  */
 
-#ifndef LUA_IMPL_H
-#define LUA_IMPL_H
+#ifndef LUNA_IMPL_H
+#define LUNA_IMPL_H
 
 #include <lua.hpp>
+
+#include "c_utils.h"
+
+// This is only needed in pluto.cc
+int luna_restore_object(lua_State * L);
 
 /**
  * Descriptions for the Properties/Methods that should be available to Lua
@@ -46,32 +51,25 @@ struct MethodType {
 
 // Forward declaration of public function, because we need it below
 template <class T> int to_lua(lua_State * L, T * obj);
-
-/*
- * The table must be the last on the stack. Our userdata is saved in
- * table[0]. This function fetches it and makes sure that it is the correct
- * userdata.
- */
-template <class T>
-T * * m_get_user_class_from_table(lua_State * const L) {
-	//  GET table[0]
-	lua_pushnumber(L, 0);
-	lua_rawget    (L, 1);
-
-	return static_cast<T * *>(luaL_checkudata(L, -1, T::className));
-}
+template <class T> T * * get_user_class(lua_State * const L, int narg);
 
 template <class T>
 PropertyType<T> const * m_lookup_property_in_metatable(lua_State * const L) {
+	// stack: table name
+
 	// Look up the key in the metatable
-	lua_getmetatable(L,  1);
-	lua_pushvalue   (L,  2);
-	lua_rawget      (L, -2);
+	lua_getmetatable(L,  1); // table name mt
+	lua_pushvalue   (L,  2); // table name mt name
+	lua_rawget      (L, -2); // table name mt mt_val
 
-	if (!lua_islightuserdata(L, -1))
-		return 0;
+	const PropertyType<T> * rv = 0;
 
-	return static_cast<const PropertyType<T> *>(lua_touserdata(L, -1));
+	if (lua_islightuserdata(L, -1))
+		rv = static_cast<const PropertyType<T> *>(lua_touserdata(L, -1));
+
+	lua_remove(L, -2); // table name mt_val
+
+	return rv;
 }
 
 /**
@@ -87,46 +85,50 @@ PropertyType<T> const * m_lookup_property_in_metatable(lua_State * const L) {
 template <class T>
 int m_property_getter(lua_State * const L) {
 	// Try a normal get on the table
-	lua_pushvalue(L, 2);
-	lua_rawget   (L, 1);
+	lua_pushvalue(L, 2); // table name name
+	lua_rawget   (L, 1); // table name val?
 
 	if (!lua_isnil(L, -1)) {
 		// Found in the table, we return it
 		return 1;
 	}
-
+	lua_pop(L, 1); // table name
 
 	const PropertyType<T>* list = m_lookup_property_in_metatable<T>(L);
-	// Not in metatable?, return nil
-	if (!list)
-		return 1;
+	// stack: table name list
 
-	T * * const obj = m_get_user_class_from_table<T>(L);
+	// Not in metatable?, return it
+	if (!list) {
+		return 1;
+	}
+	lua_pop(L, 1); // table name
+
+	T * * const obj = get_user_class<T>(L, 1);
+	// table name
+
 	// push value on top of the stack for the method call
-	lua_pushvalue(L, 3);
 	return ((*obj)->*(list->getter))(L);
 }
 
 template <class T>
 int m_property_setter(lua_State * const L) {
+	// stack: table name value
 	PropertyType<T> const * list = m_lookup_property_in_metatable<T>(L);
+	lua_pop(L, 1); // table name value
+	// table name value rv
 
 	if (!list) {
 		// Not in metatable?
-		// Pop the result(nil) and the metatable
-		lua_pop(L, 2);
-
 		// do a normal set on the table
 		lua_rawset(L, 1);
 		return 0;
 	}
 
-	T * * const obj = m_get_user_class_from_table<T>(L);
-	// push value on top of the stack for the method call
-	lua_pushvalue(L, 3);
+	T * * const obj = get_user_class<T>(L, 1);
 
 	if (list->setter == 0)
 		return report_error(L, "The property '%s' is read-only!\n", list->name);
+
 	return ((*obj)->*(list->setter))(L);
 }
 
@@ -151,9 +153,7 @@ int m_method_dispatch(lua_State * const L) {
 	ConstMethod func = reinterpret_cast<ConstMethod>
 		(lua_touserdata(L, lua_upvalueindex(1)));
 
-	T * * const obj = m_get_user_class_from_table<T>(L);
-	// pop userdata from the stack
-	lua_pop(L, 1);
+	T * * const obj = get_user_class<T>(L, 1);
 
 	// Call it on our instance
 	return ((*obj)->*(*func))(L);
@@ -172,6 +172,7 @@ int m_garbage_collect(lua_State * const L) {
 	return 0;
 }
 
+
 /**
  * Object creation from lua. The object needs a constructor that only
  * takes a lua_State. If direct creation of this object is not desired,
@@ -186,8 +187,43 @@ template <class T>
 void m_add_constructor_to_lua(lua_State * const L) {
 	lua_pushcfunction (L, &m_constructor<T>);
 	lua_setfield(L, -2, T::className);
-	lua_pop(L, 1);
 }
+
+/*
+ * The instantiator creates an empty class. It is only used to immediately load
+ * objects from a saved game. The instantiator has __ in front of its name.
+ * So: ClassName == Constructor
+ *   __ClassName == Instantiator
+ */
+template <class T>
+int m_instantiator(lua_State * const L) {
+	return to_lua<T>(L, new T());
+}
+
+template <class T>
+void m_add_instantiator_to_lua(lua_State * const L) {
+	std::string s = std::string("__") + T::className;
+	lua_pushcfunction (L, &m_instantiator<T>);
+	lua_setfield(L, -2, s.c_str());
+}
+
+template <class T>
+int m_persist(lua_State * const L) {
+	T * * const obj = get_user_class<T>(L, 1);
+
+	lua_newtable(L);
+
+	lua_pushstring(L, (*obj)->get_modulename());
+	lua_setfield(L, -2, "module");
+
+	lua_pushstring(L, T::className);
+	lua_setfield(L, -2, "class");
+
+	(*obj)->__persist(L);
+
+	return 1;
+}
+
 
 template <class T>
 int m_create_metatable_for_class(lua_State * const L) {
@@ -207,12 +243,16 @@ int m_create_metatable_for_class(lua_State * const L) {
 	lua_pushcfunction(L, &m_property_setter<T>);
 	lua_settable  (L, metatable);
 
+	lua_pushstring(L, "__persist");
+	lua_pushcfunction(L, &m_persist<T>);
+	lua_settable  (L, metatable);
+
 	return metatable;
 }
 
 template <class T>
 void m_register_properties_in_metatable
-	(lua_State * const L, int const metatable)
+	(lua_State * const L)
 {
 	for (int i = 0; T::Properties[i].name; ++i) {
 		// metatable[prop_name] = Pointer to getter setter
@@ -221,12 +261,12 @@ void m_register_properties_in_metatable
 			(L,
 			 const_cast<void *>
 			 	(reinterpret_cast<void const *>(&T::Properties[i])));
-		lua_settable(L, metatable);
+		lua_settable(L, -3); // Metatable is directly before our pushed stuff
 	}
 }
 
 template <class T, class PT>
-void m_register_methods_in_metatable(lua_State * const L, int const metatable)
+void m_register_methods_in_metatable(lua_State * const L)
 {
 	// We add a lua C closure around the call, the closure gets the pointer to
 	// the c method to call as its only argument. We can then use
@@ -240,8 +280,26 @@ void m_register_methods_in_metatable(lua_State * const L, int const metatable)
 			 const_cast<void *>
 			 	(reinterpret_cast<void const *>(&PT::Methods[i].method)));
 		lua_pushcclosure(L, &(m_method_dispatch<T>), 1);
-		lua_settable    (L, metatable);
+		lua_settable(L, -3); // Metatable is directly before our pushed stuff
 	}
+}
+
+/*
+ * Get the userdata in a given stack object
+ */
+template <class T>
+void m_extract_userdata_from_user_class(lua_State* const L, int narg) {
+	luaL_checktype(L, narg, LUA_TTABLE);
+
+	//  GET table[0]
+	lua_pushnumber(L, 0);
+	if(narg > 0)
+		lua_rawget(L, narg);
+	else
+		lua_rawget(L, narg - 1);
+
+	if(not lua_isuserdata(L,-1))
+		luaL_typerror(L, narg, T::className);
 }
 
 #endif
