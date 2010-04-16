@@ -229,6 +229,7 @@ protected:
 	bool poll_event(SDL_Event &, bool throttle);
 
 	bool init_settings();
+  std::string find_relative_locale_path(std::string localedir);
 	void shutdown_settings();
 
 	bool init_hardware();
