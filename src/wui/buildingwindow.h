@@ -62,7 +62,6 @@ protected:
 	void toggle_workarea();
 	void act_start_stop();
 	void act_enhance(Widelands::Building_Index);
-	void act_drop_soldier(uint32_t);
 	void act_change_soldier_capacity(int32_t);
 
 	void create_ware_queue_panel

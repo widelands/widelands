@@ -48,7 +48,6 @@ Building_Window::Building_Window
 	m_building       (b),
 	m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 {
-	m_registry = registry;
 	delete m_registry;
 	m_registry = this;
 
@@ -89,9 +88,6 @@ void Building_Window::draw(RenderTarget & dst)
 		 building().get_ui_anim(),
 		 0,
 		 &building().owner());
-
-	// Draw all the panels etc. above the background
-	UI::Window::draw(dst);
 }
 
 
@@ -264,16 +260,6 @@ void Building_Window::act_enhance(Widelands::Building_Index const id)
 		igbase().game().send_player_enhance_building (m_building, id);
 
 	die();
-}
-
-/*
-===============
-Callback for request to drop a soldier
-===============
-*/
-void Building_Window::act_drop_soldier(uint32_t const serial) {
-	if (serial > 0)
-		igbase().game().send_player_drop_soldier (m_building, serial);
 }
 
 /*
