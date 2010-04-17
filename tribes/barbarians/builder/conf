@@ -1,4 +1,4 @@
-help=_Works at construction sites to create a new building.
+help=_Works at construction sites to rais new buildings.
 soundfx=../../../sound/hammering/hammering
 
 [buildcost]
