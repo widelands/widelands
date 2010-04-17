@@ -6,7 +6,7 @@ use("aux", "infrastructure")
 
 set_textdomain("tribe_barbarians")
 
-return {
+init = {
    name = _ "Headquarters medium",
    func = function(player) 
    local sf = player.starting_field
@@ -64,4 +64,5 @@ return {
 end
 }
 
+return init
 
