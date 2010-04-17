@@ -82,7 +82,7 @@ m_toggle_player_menu
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_player_menu,     UI::Box::AlignLeft);
-	m_toolbar.resize();
+	m_toolbar.layout();
 	adjust_toolbar_position();
 
 #ifndef DEBUG

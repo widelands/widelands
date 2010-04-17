@@ -160,7 +160,7 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	obj.create_debug_panels(parent.egbase(), m_tabs);
 
 	m_tabs.set_snapparent(true);
-	m_tabs.resize();
+	m_tabs.layout();
 
 }
 

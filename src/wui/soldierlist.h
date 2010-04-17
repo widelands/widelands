@@ -17,28 +17,22 @@
  *
  */
 
-#include "logic/building.h"
-#include "ui_basic/window.h"
+#ifndef _SOLDIERLIST_H_
+#define _SOLDIERLIST_H_
 
-using Widelands::Building;
+struct Interactive_GameBase;
 
-/**
- * Create the building's options window if necessary and bring it to
- * the top to be seen by the player.
- */
-void Building::show_options(Interactive_GameBase & igbase)
-{
-	if (m_optionswindow)
-		m_optionswindow->move_to_top();
-	else
-		create_options_window(igbase, m_optionswindow);
+namespace UI {
+struct Panel;
 }
 
-/**
- * Remove the building's options window.
- */
-void Building::hide_options()
-{
-	delete m_optionswindow;
+namespace Widelands {
+struct Building;
 }
 
+UI::Panel* create_soldier_list
+	(UI::Panel& parent,
+	 Interactive_GameBase& igb,
+	 Widelands::Building& building);
+
+#endif // _SOLDIERLIST_H_

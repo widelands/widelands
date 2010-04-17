@@ -84,7 +84,7 @@ m_pit               (pit)
 			cur_x = 0;
 			pos   = Point(5, 15);
 			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
-			box->resize();
+			box->layout();
 			m_tabpanel.add(tab_icon, box);
 		}
 
@@ -109,7 +109,7 @@ m_pit               (pit)
 	}
 
 	m_tabpanel.activate(0);
-	m_tabpanel.resize();
+	m_tabpanel.layout();
 }
 
 

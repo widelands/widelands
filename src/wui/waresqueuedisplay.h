@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,28 +17,27 @@
  *
  */
 
-#include "logic/building.h"
-#include "ui_basic/window.h"
+#ifndef _WARESQUEUEDISPLAY_H_
+#define _WARESQUEUEDISPLAY_H_
 
-using Widelands::Building;
+#include <cstdlib>
 
-/**
- * Create the building's options window if necessary and bring it to
- * the top to be seen by the player.
- */
-void Building::show_options(Interactive_GameBase & igbase)
-{
-	if (m_optionswindow)
-		m_optionswindow->move_to_top();
-	else
-		create_options_window(igbase, m_optionswindow);
+struct Interactive_GameBase;
+
+namespace UI {
+struct Panel;
 }
 
-/**
- * Remove the building's options window.
- */
-void Building::hide_options()
-{
-	delete m_optionswindow;
+namespace Widelands {
+struct Building;
+struct WaresQueue;
 }
 
+UI::Panel* create_wares_queue_display
+	(UI::Panel * parent,
+	 Interactive_GameBase & igb,
+	 Widelands::Building & b,
+	 Widelands::WaresQueue * const wq,
+	 int32_t width);
+
+#endif // _WARESQUEUEDISPLAY_H_

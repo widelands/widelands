@@ -84,7 +84,7 @@ m_pit     (pit)
 			box = new UI::Box
 				 (&m_tabpanel, 0, 0, UI::Box::Horizontal, parent.get_inner_w() - 50,
 				  parent.get_inner_h() - 50);
-			box->resize();
+			box->layout();
 			box->set_scrolling(true);
 			m_tabpanel.add(tab_icon, box);
 		}
@@ -107,7 +107,7 @@ m_pit     (pit)
 	}
 
 	m_tabpanel.activate(0);
-	m_tabpanel.resize();
+	m_tabpanel.layout();
 }
 
 /**

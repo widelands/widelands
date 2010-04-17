@@ -88,7 +88,7 @@ Interactive_Spectator::Interactive_Spectator
 		m_toggle_options_menu.set_enabled(false);
 	}
 
-	m_toolbar.resize();
+	m_toolbar.layout();
 	adjust_toolbar_position();
 
 	// Setup all screen elements

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,28 +17,19 @@
  *
  */
 
-#include "logic/building.h"
-#include "ui_basic/window.h"
+#ifndef _BULLDOZECONFIRM_H_
+#define _BULLDOZECONFIRM_H_
 
-using Widelands::Building;
+struct Interactive_Player;
 
-/**
- * Create the building's options window if necessary and bring it to
- * the top to be seen by the player.
- */
-void Building::show_options(Interactive_GameBase & igbase)
-{
-	if (m_optionswindow)
-		m_optionswindow->move_to_top();
-	else
-		create_options_window(igbase, m_optionswindow);
+namespace Widelands {
+struct Building;
+struct PlayerImmovable;
 }
 
-/**
- * Remove the building's options window.
- */
-void Building::hide_options()
-{
-	delete m_optionswindow;
-}
+void show_bulldoze_confirm
+	(Interactive_Player & player,
+	 Widelands::Building & building,
+	 Widelands::PlayerImmovable * const todestroy = 0);
 
+#endif // _BULLDOZECONFIRM_H_
