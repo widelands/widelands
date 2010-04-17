@@ -77,13 +77,8 @@ lumberjack_message_01 = {
    field = first_lumberjack_field,
    body = rt(p(_
 [[There you go. I will explain about all those symbols in a minute. First, let
-<<<<<<< TREE
  me show you how to make a lumberjack's hut and how to connect it with a road.
  There is a sweet spot for a lumberjack right next to those trees.]]
-=======
- me show you how to make a lumberjack's hut and how to connect it. There is a
- sweet spot for a lumberjack right next to those trees.]]
->>>>>>> MERGE-SOURCE
       )
    )
 }
