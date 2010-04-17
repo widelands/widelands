@@ -285,9 +285,10 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		 g_gr->get_no_picture(), "" == opt.language);
 		 
 	filenameset_t files;
-	g_fs->FindFiles("locale", "*", &files);
+	Section & s = g_options.pull_section("global");
+	g_fs->FindFiles(s.get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
 	Profile ln("txts/languages");
-	Section & s = ln.pull_section("languages");
+	s = ln.pull_section("languages");
 	bool own_selected = false;
 
 	// Add translation directories to the list
