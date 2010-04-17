@@ -82,6 +82,9 @@
 #include <string>
 #include <ctime>
 
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
 
 #ifdef DEBUG
 #ifndef WIN32
@@ -769,7 +772,10 @@ bool WLApplication::init_settings() {
 
 	// Set Locale and grab default domain
 	i18n::set_locale(s.get_string("language", ""));
-	i18n::set_localedir(s.get_string("localedir", INSTALL_LOCALEDIR));
+
+	std::string localedir = s.get_string("localedir", INSTALL_LOCALEDIR);
+	i18n::set_localedir(find_relative_locale_path(localedir));
+
 	i18n::grab_textdomain("widelands");
 
 	log("using locale %s\n", i18n::get_locale().c_str());
@@ -838,6 +844,31 @@ void WLApplication::shutdown_settings()
 	assert(journal);
 	delete journal;
 	journal = 0;
+}
+
+/**
+ * In case that the localedir is defined in a relative manner to the executable file.
+ * Track down the executable file and append the localedir.
+ */
+std::string WLApplication::find_relative_locale_path(std::string localedir)
+{
+#ifdef __APPLE__
+	if (localedir[0] != '/') {
+		uint32_t buffersize = 0;
+		_NSGetExecutablePath(NULL,&buffersize);
+		char buffer[buffersize];
+		int32_t check = _NSGetExecutablePath(buffer,&buffersize);
+		if (check != 0) {
+			throw wexception ("[OSX] dyld could not find the path of the main executable");
+		}
+		std::string executabledir = buffer;
+		executabledir.resize(executabledir.find_last_of('/') + 1);
+		executabledir+= localedir;
+		std::cout << "localedir : " << executabledir << std::endl;
+		return executabledir;
+	}
+#endif
+	return localedir;
 }
 
 /**
@@ -950,7 +981,7 @@ bool WLApplication::init_hardware() {
  */
 
 void terminate (int) {
-	 log 
+	 log
 		  (_("Waited 5 seconds to close audio. problems here so killing widelands."
 			  " update your sound driver and/or SDL to fix this problem\n"));
 #ifndef WIN32
