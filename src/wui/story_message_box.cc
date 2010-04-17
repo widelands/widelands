@@ -85,3 +85,15 @@ void Story_Message_Box::clicked_ok(int32_t const i) {
 	return;
 }
 
+/*
+ * Avoid being closed by right click
+ */
+bool Story_Message_Box::handle_mousepress
+	(const Uint8 btn, int32_t mx, int32_t my)
+{
+	if (btn == SDL_BUTTON_RIGHT)
+		return true;
+
+	return UI::Window::handle_mousepress(btn, mx, my);
+}
+
