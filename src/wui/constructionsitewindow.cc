@@ -21,6 +21,9 @@
 #include "buildingwindow.h"
 #include "logic/constructionsite.h"
 #include "ui_basic/progressbar.h"
+#include "ui_basic/tabpanel.h"
+
+static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 
 /**
  * Status window for construction sites.
@@ -44,7 +47,7 @@ ConstructionSite_Window::ConstructionSite_Window
 	 UI::Window *                & registry)
 	: Building_Window(parent, cs, registry)
 {
-	UI::Box & box = *new UI::Box(this, 0, 0, UI::Box::Vertical);
+	UI::Box & box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
 	m_progress =
@@ -62,13 +65,7 @@ ConstructionSite_Window::ConstructionSite_Window
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
 		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i));
 
-	box.add_space(8);
-
-	// Add the caps button
-	box.add(create_capsbuttons(&box), UI::Box::AlignCenter);
-
-	fit_inner(box);
-	move_inside_parent();
+	get_tabs()->add(g_gr->get_picture(PicMod_UI, pic_tab_wares), &box);
 }
 
 

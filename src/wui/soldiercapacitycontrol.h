@@ -17,28 +17,22 @@
  *
  */
 
-#ifndef _PRODUCTIONSITEWINDOW_H_
-#define _PRODUCTIONSITEWINDOW_H_
+#ifndef _SOLDIERCAPACITYCONTROL_H_
+#define _SOLDIERCAPACITYCONTROL_H_
 
-#include "buildingwindow.h"
-#include "logic/productionsite.h"
-#include "ui_basic/table.h"
+struct Interactive_GameBase;
 
-struct ProductionSite_Window : public Building_Window {
-	ProductionSite_Window
-		(Interactive_GameBase & parent,
-		 Widelands::ProductionSite &,
-		 UI::Window *         & registry);
+namespace UI {
+struct Panel;
+}
 
-	Widelands::ProductionSite & productionsite() {
-		return ref_cast<Widelands::ProductionSite, Widelands::Building>(building());
-	}
+namespace Widelands {
+struct Building;
+}
 
-protected:
-	virtual void think();
+UI::Panel* create_soldier_capacity_control
+	(UI::Panel& parent,
+	 Interactive_GameBase& igb,
+	 Widelands::Building& building);
 
-private:
-	UI::Table<unsigned int> * m_worker_table;
-};
-
-#endif // _PRODUCTIONSITEWINDOW_H_
+#endif // _SOLDIERLIST_H_

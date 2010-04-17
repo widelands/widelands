@@ -279,31 +279,32 @@ void Table<void *>::draw(RenderTarget & dst)
 
 			PictureID           const entry_picture = er.get_picture(i);
 			std::string const &       entry_string  = er.get_string (i);
-			uint32_t w = 0, h = g_fh->get_fontheight(m_fontname, m_fontsize);
+			uint32_t picw = 0;
+			uint32_t pich = 0;
+			uint32_t stringw = 0;
+			uint32_t stringh = g_fh->get_fontheight(m_fontname, m_fontsize);
 			if (entry_picture != g_gr->get_no_picture())
-				g_gr->get_picture_size(entry_picture, w, h);
+				g_gr->get_picture_size(entry_picture, picw, pich);
 			Point point =
 				Point(curx, y)
 				+
 				Point
-					(alignment & Align_Right   ?  curw - w  - 1 :
-					 alignment & Align_HCenter ? (curw - w) / 2 :
+					(alignment & Align_Right   ?  curw - (picw + stringw)  - 1 :
+					 alignment & Align_HCenter ? (curw - (picw + stringw)) / 2 :
 					 1,
-					 (static_cast<int32_t>(get_lineheight())
-					  -
-					  static_cast<int32_t>(h))
-					 /
-					 2);
+					 0);
 			if (entry_picture != g_gr->get_no_picture())
-				dst.blit(point, entry_picture);
-			else
-				UI::g_fh->draw_string
-					(dst,
-					 m_fontname, m_fontsize,
-					 col,
-					 RGBColor(107, 87, 55),
-					 point,
-					 entry_string, alignment);
+				dst.blit
+					(point + Point(0, (static_cast<int32_t>(lineheight) - static_cast<int32_t>(pich))/2),
+					 entry_picture);
+
+			UI::g_fh->draw_string
+				(dst,
+				 m_fontname, m_fontsize,
+				 col,
+				 RGBColor(107, 87, 55),
+				 point + Point(picw, (static_cast<int32_t>(lineheight) - static_cast<int32_t>(stringh))/2),
+				 entry_string, alignment);
 
 			curx += curw;
 		}

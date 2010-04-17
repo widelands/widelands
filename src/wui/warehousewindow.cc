@@ -20,9 +20,13 @@
 #include "buildingwindow.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
+#include "ui_basic/tabpanel.h"
 #include "waresdisplay.h"
 
 using Widelands::Warehouse;
+
+static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
+static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
 
 /**
  * Status window for warehouses
@@ -35,129 +39,38 @@ struct Warehouse_Window : public Building_Window {
 		return ref_cast<Warehouse, Widelands::Building>(building());
 	}
 
-	virtual void think();
-
 private:
-	void clicked_help      ();
-	void clicked_switchpage();
-	void clicked_goto      ();
-
-private:
-	WaresDisplay       * m_waresdisplay;
-	int32_t              m_curpage;
+	void make_wares_tab(WaresDisplay::wdType type, PictureID tabicon, const std::string & tooltip);
 };
 
-/*
-===============
-Open the window, create the window buttons and add to the registry.
-===============
-*/
+/**
+ * Create the tabs of a warehouse window.
+ */
 Warehouse_Window::Warehouse_Window
 	(Interactive_GameBase & parent,
 	 Warehouse            & wh,
 	 UI::Window *         & registry)
 	: Building_Window(parent, wh, registry)
 {
-	// Add wares display
-	m_waresdisplay = new WaresDisplay(this, 0, 0, wh.owner().tribe());
-	m_waresdisplay->add_warelist(wh.get_wares(), WaresDisplay::WARE);
-
-	set_inner_size(m_waresdisplay->get_w(), 0);
-
-	int32_t const spacing = 5;
-	int32_t const nr_buttons = 4; // one more, turn page button is bigger
-	int32_t const button_w =
-		(get_inner_w() - (nr_buttons + 1) * spacing) / nr_buttons;
-	int32_t       posx = spacing;
-	int32_t       posy = m_waresdisplay->get_h() + spacing;
-	m_curpage = 0;
-
-
-	new UI::Callback_Button<Warehouse_Window>
-		(this,
-		 posx, posy, button_w, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
-		 &Warehouse_Window::clicked_help, *this);
-
-	posx += button_w + spacing;
-
-	new UI::Callback_Button<Warehouse_Window>
-		(this,
-		 posx, posy, button_w * 2 + spacing, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"),
-		 &Warehouse_Window::clicked_switchpage, *this);
-
-	posx += button_w * 2 + 2 * spacing;
-
-	new UI::Callback_Button<Warehouse_Window>
-		(this,
-		 posx, posy, button_w, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
-		 &Warehouse_Window::clicked_goto, *this);
-
-	posx += button_w + spacing;
-	posy += 25 + spacing;
-
-	// Add caps buttons
-	posx = 0;
-	UI::Panel * caps = create_capsbuttons(this);
-	caps->set_pos(Point(spacing, posy));
-	if (caps->get_h())
-		posy += caps->get_h() + spacing;
-
-	set_inner_size(get_inner_w(), posy);
-	move_inside_parent();
+	make_wares_tab(WaresDisplay::WARE, g_gr->get_picture(PicMod_UI, pic_tab_wares), _("Wares"));
+	make_wares_tab(WaresDisplay::WORKER, g_gr->get_picture(PicMod_UI, pic_tab_workers), _("Workers"));
 }
 
+void Warehouse_Window::make_wares_tab(WaresDisplay::wdType type, PictureID tabicon, const std::string& tooltip)
+{
+	WaresDisplay * display = new WaresDisplay(get_tabs(), 0, 0, warehouse().owner().tribe());
+	display->set_inner_size(Width, 0);
+	display->add_warelist
+		(type == WaresDisplay::WARE ? warehouse().get_wares() : warehouse().get_workers(),
+		 type);
+
+	get_tabs()->add(tabicon, display, tooltip);
+}
 
 /**
- * \todo Implement help
+ * Create the status window describing the warehouse.
  */
-void Warehouse_Window::clicked_help() {}
-
-
-void Warehouse_Window::clicked_goto() {
-	igbase().move_view_to(warehouse().get_position());
-}
-
-
-/*
- * Switch to the next page, that is, show
- * wares -> workers -> soldier
- */
-void Warehouse_Window::clicked_switchpage() {
-	if        (m_curpage == 0) {
-		//  Showing wares, should show workers.
-		m_waresdisplay->remove_all_warelists();
-		m_waresdisplay->add_warelist
-			(warehouse().get_workers(), WaresDisplay::WORKER);
-		m_curpage = 1;
-	} else if (m_curpage == 1) {
-		//  Showing workers, should show soldiers
-		//  TODO currently switches back to wares
-		m_waresdisplay->remove_all_warelists();
-		m_waresdisplay->add_warelist
-			(warehouse().get_wares(), WaresDisplay::WARE);
-		m_curpage = 0;
-	}
-}
-/*
-===============
-Push the current wares status to the WaresDisplay.
-===============
-*/
-void Warehouse_Window::think() {}
-
-
-/*
-===============
-Create the warehouse information window
-===============
-*/
-void Warehouse::create_options_window
+void Widelands::Warehouse::create_options_window
 	(Interactive_GameBase & parent, UI::Window * & registry)
 {
 	new Warehouse_Window(parent, *this, registry);

@@ -225,7 +225,7 @@ m_toggle_help
 	set_player_number(plyn);
 	fieldclicked.set(this, &Interactive_Player::node_action);
 
-	m_toolbar.resize();
+	m_toolbar.layout();
 	adjust_toolbar_position();
 
 	set_display_flag(dfSpeed, true);

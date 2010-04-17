@@ -96,7 +96,7 @@ m_toggle_objectives_menu
 	m_toolbar.add(&m_toggle_event_menu,      UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_variables_menu,  UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_objectives_menu, UI::Box::AlignLeft);
-	m_toolbar.resize();
+	m_toolbar.layout();
 	adjust_toolbar_position();
 
 	//  Disable debug. It is no use for editor.

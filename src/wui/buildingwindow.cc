@@ -28,6 +28,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
+#include "ui_basic/tabpanel.h"
 #include "upcast.h"
 #include "waresqueuedisplay.h"
 
@@ -51,8 +52,20 @@ Building_Window::Building_Window
 	delete m_registry;
 	m_registry = this;
 
+	m_capscache_player_number = 0;
 	m_capsbuttons = 0;
 	m_capscache = 0;
+
+	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
+	vbox->set_snapparent(true);
+
+	m_tabs = new UI::Tab_Panel(vbox, 0, 0, g_gr->get_no_picture());
+	vbox->add(m_tabs, UI::Box::AlignLeft, true);
+
+	m_capsbuttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+	vbox->add(m_capsbuttons, UI::Box::AlignLeft);
+	// actually create buttons on the first call to think(),
+	// so that overriding create_capsbuttons() works
 
 	move_to_mouse();
 
@@ -90,7 +103,6 @@ void Building_Window::draw(RenderTarget & dst)
 		 &building().owner());
 }
 
-
 /*
 ===============
 Check the capabilities and setup the capsbutton panel in case they've changed.
@@ -100,47 +112,30 @@ void Building_Window::think()
 {
 	if (not igbase().can_see(building().owner().player_number()))
 		die();
+
 	if
 		(m_capscache_player_number != igbase().player_number()
 		 or
-		 building().get_playercaps() != m_capscache)
-		setup_capsbuttons();
+		 building().get_playercaps() != m_capscache) {
+		m_capsbuttons->free_children();
+		create_capsbuttons(m_capsbuttons);
+		move_inside_parent();
+	}
 
 	UI::Window::think();
 }
 
-
-/*
-===============
-Create the capsbuttons panel with the given parent window, set it up and return
-it.
-===============
-*/
-UI::Panel * Building_Window::create_capsbuttons(UI::Panel * const parent)
+/**
+ * Fill caps buttons into the given box.
+ *
+ * May be overridden to add additional buttons.
+ *
+ * \note Children of \p box must be allocated on the heap
+ */
+void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 {
-	delete m_capsbuttons;
-
-	m_capsbuttons = new UI::Panel(parent, 0, 0, Width, 34);
-	setup_capsbuttons();
-
-	return m_capsbuttons;
-}
-
-
-/*
-===============
-Clear the capsbuttons panel and re-setup.
-===============
-*/
-void Building_Window::setup_capsbuttons()
-{
-	assert(m_capsbuttons);
-
-	m_capsbuttons->free_children();
 	m_capscache = building().get_playercaps();
 	m_capscache_player_number = igbase().player_number();
-
-	int32_t x = 0;
 
 	Widelands::Player const & owner = building().owner();
 	Widelands::Player_Number const owner_number = owner.player_number();
@@ -151,16 +146,17 @@ void Building_Window::setup_capsbuttons()
 		if (upcast(Widelands::ProductionSite const, productionsite, &m_building))
 			if (not dynamic_cast<Widelands::MilitarySite const *>(productionsite)) {
 				bool const is_stopped = productionsite->is_stopped();
-				new UI::Callback_Button<Building_Window>
-					(m_capsbuttons,
-					 x, 0, 34, 34,
-					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-					 g_gr->get_picture
-					 	(PicMod_Game,
-					 	 (is_stopped ? "pics/continue.png" : "pics/stop.png")),
-					 &Building_Window::act_start_stop, *this,
-					 is_stopped ? _("Continue") : _("Stop"));
-				x += 34;
+				capsbuttons->add
+					(new UI::Callback_Button<Building_Window>
+						(capsbuttons,
+						 0, 0, 34, 34,
+						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+						 g_gr->get_picture
+						 	(PicMod_Game,
+						 	 (is_stopped ? "pics/continue.png" : "pics/stop.png")),
+						 &Building_Window::act_start_stop, *this,
+						 is_stopped ? _("Continue") : _("Stop")),
+					 UI::Box::AlignCenter);
 			}
 
 		if (m_capscache & 1 << Widelands::Building::PCap_Enhancable) {
@@ -175,59 +171,64 @@ void Building_Window::setup_capsbuttons()
 					snprintf
 						(buffer, sizeof(buffer),
 						 _("Enhance to %s"), building_descr.descname().c_str());
-					new UI::Callback_IDButton
-						<Building_Window, Widelands::Building_Index>
-						(m_capsbuttons,
-						 x, 0, 34, 34,
-						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-						 building_descr.get_buildicon(),
-						 &Building_Window::act_enhance, *this,
-						 *i.current, //  button id = building id
-						 buffer);
-					x += 34;
+					capsbuttons->add
+						(new UI::Callback_IDButton<Building_Window, Widelands::Building_Index>
+							(capsbuttons,
+							 0, 0, 34, 34,
+							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+							 building_descr.get_buildicon(),
+							 &Building_Window::act_enhance, *this,
+							 *i.current, //  button id = building id
+							 buffer),
+						 UI::Box::AlignCenter);
 				}
 		}
 
 		if (m_capscache & (1 << Widelands::Building::PCap_Bulldoze)) {
-			new UI::Callback_Button<Building_Window>
-				(m_capsbuttons,
-				 x, 0, 34, 34,
-				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game, pic_bulldoze),
-				 &Building_Window::act_bulldoze, *this,
-				 _("Destroy"));
-			x += 34;
+			capsbuttons->add
+				(new UI::Callback_Button<Building_Window>
+					(capsbuttons,
+					 0, 0, 34, 34,
+					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+					 g_gr->get_picture(PicMod_Game, pic_bulldoze),
+					 &Building_Window::act_bulldoze, *this,
+					 _("Destroy")),
+				 UI::Box::AlignCenter);
 		}
 	}
 
 	if (can_see) {
 		if (m_building.descr().m_workarea_info.size()) {
 			m_toggle_workarea = new UI::Callback_Button<Building_Window>
-				(m_capsbuttons,
-				 x, 0, 34, 34,
+				(capsbuttons,
+				 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
 				 &Building_Window::toggle_workarea, *this,
 				 _("Show workarea"));
-			x += 34;
+			capsbuttons->add(m_toggle_workarea, UI::Box::AlignCenter);
 		}
 
 		if (igbase().get_display_flag(Interactive_Base::dfDebug)) {
-			new UI::Callback_Button<Building_Window>
-				(m_capsbuttons,
-				 x, 0, 34, 34,
-				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game,  pic_debug),
-				 &Building_Window::act_debug, *this,
-				 _("Debug"));
-			x += 34;
+			capsbuttons->add
+				(new UI::Callback_Button<Building_Window>
+					(capsbuttons,
+					 0, 0, 34, 34,
+					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+					 g_gr->get_picture(PicMod_Game,  pic_debug),
+					 &Building_Window::act_debug, *this,
+					 _("Debug")),
+				 UI::Box::AlignCenter);
 		}
-	}
 
-	if (x == 0) {
-		//  No capsbutton is in this window.
-		//  Resize us, so that we do not take space.
-		m_capsbuttons->set_inner_size(0, 0);
+		capsbuttons->add
+			(new UI::Callback_Button<Building_Window>
+				(capsbuttons,
+				 0, 0, 34, 34,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
+				 &Building_Window::clicked_goto, *this),
+			 UI::Box::AlignCenter);
 	}
 }
 
@@ -260,17 +261,6 @@ void Building_Window::act_enhance(Widelands::Building_Index const id)
 		igbase().game().send_player_enhance_building (m_building, id);
 
 	die();
-}
-
-/*
-===============
-Do a modification at soldier capacity on military and training sites.
-TODO: Check that building is a military or a training site.
-===============
-*/
-void Building_Window::act_change_soldier_capacity(int32_t const value)
-{
-	igbase().game().send_player_change_soldier_capacity (m_building, value);
 }
 
 /*
@@ -329,5 +319,14 @@ void Building_Window::create_ware_queue_panel
 	 Widelands::Building   &       b,
 	 Widelands::WaresQueue * const wq)
 {
-	box->add(create_wares_queue_display(box, igbase(), b, wq, get_w()), UI::Box::AlignLeft);
+	box->add(create_wares_queue_display(box, igbase(), b, wq, Width), UI::Box::AlignLeft);
+}
+
+/**
+ * Center the player's view on the building. Callback function
+ * for the corresponding button.
+ */
+void Building_Window::clicked_goto()
+{
+	igbase().move_view_to(building().get_position());
 }

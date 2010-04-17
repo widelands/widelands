@@ -37,10 +37,7 @@ namespace UI {
 struct Tab_Panel : public Panel {
 	Tab_Panel(Panel * parent, int32_t x, int32_t y, PictureID background);
 
-	void resize();
-
-	void set_snapparent(bool snapparent);
-	bool get_snapparent() const {return m_snapparent;}
+	void layout();
 
 	uint32_t add
 		(PictureID           picid,
@@ -67,7 +64,6 @@ private:
 
 	std::vector<Tab> m_tabs;
 	uint32_t         m_active;         ///< index of the currently active tab
-	bool             m_snapparent; ///< if true, resize parent to fit this panel
 
 	int32_t          m_highlight;      ///< index of the highlighted button
 

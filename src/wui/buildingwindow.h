@@ -52,27 +52,29 @@ struct Building_Window : public UI::Window {
 	virtual void draw(RenderTarget &);
 	virtual void think();
 
-	UI::Panel * create_capsbuttons(UI::Panel * parent);
-
 protected:
-	void setup_capsbuttons();
+	UI::Tab_Panel * get_tabs() {return m_tabs;}
 
 	void act_bulldoze();
 	void act_debug();
 	void toggle_workarea();
 	void act_start_stop();
 	void act_enhance(Widelands::Building_Index);
-	void act_change_soldier_capacity(int32_t);
+	void clicked_goto();
 
 	void create_ware_queue_panel
 		(UI::Box *, Widelands::Building &, Widelands::WaresQueue *);
 
-protected:
+	virtual void create_capsbuttons(UI::Box * buttons);
+
 	UI::Window * & m_registry;
+
 private:
 	Widelands::Building & m_building;
 
-	UI::Panel * m_capsbuttons; //  UI::Panel that contains capabilities buttons
+	UI::Tab_Panel * m_tabs;
+
+	UI::Box * m_capsbuttons; ///< \ref UI::Box that contains capabilities buttons
 	UI::Callback_Button<Building_Window> * m_toggle_workarea;
 
 	//  capabilities that were last used in setting up the caps panel

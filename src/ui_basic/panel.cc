@@ -238,6 +238,9 @@ void Panel::end() {}
  */
 void Panel::set_size(const uint32_t nw, const uint32_t nh)
 {
+	if (nw == _w && nh == _h)
+		return;
+
 	uint32_t const upw = std::min(nw, _w);
 	uint32_t const uph = std::min(nh, _h);
 	_w = nw;
@@ -248,7 +251,19 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 		_cache = g_gr->create_surface(_w, _h);
 	}
 
+	if (_parent) {
+		if (get_snapparent())
+			_parent->set_inner_size(nw, nh);
+
+		if (!(_parent->_flags & pf_internal_layouting)) {
+			_parent->_flags |= pf_internal_layouting;
+			_parent->layout();
+			_parent->_flags &= ~pf_internal_layouting;
+		}
+	}
+
 	update(0, 0, upw, uph);
+	move_inside_parent();
 }
 
 /**
@@ -264,9 +279,27 @@ void Panel::set_pos(const Point n) {
 }
 
 /**
- * Do nothing
-*/
-void Panel::move_inside_parent() {}
+ * Ensure the panel is inside the parent's visibile area after
+ * resizing.
+ *
+ * The default implementation does nothing, this is overriden
+ * by \ref Window
+ */
+void Panel::move_inside_parent()
+{
+}
+
+/**
+ * Automatically layout the children of this panel and adjust this
+ * panel's size, if necessary.
+ *
+ * This is always called when a child resizes.
+ *
+ * The default implementation does nothing.
+ */
+void Panel::layout()
+{
+}
 
 /**
  * Set the size of the inner area (total area minus border)
@@ -617,6 +650,18 @@ void Panel::set_think(bool const yes)
 		_flags |= pf_think;
 	else
 		_flags &= ~pf_think;
+}
+
+/**
+ * Enables/disables resizing the parent to match our size whenever
+ * our size changes.
+ */
+void Panel::set_snapparent(bool snapparent)
+{
+	if (snapparent)
+		_flags |= pf_snap_parent_size;
+	else
+		_flags &= ~pf_snap_parent_size;
 }
 
 /**
