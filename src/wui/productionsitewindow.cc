@@ -64,7 +64,7 @@ ProductionSite_Window::ProductionSite_Window
 	if (!productionsite().descr().nr_working_positions()) {
 		m_worker_table = 0;
 	} else {
-		m_worker_table = new UI::Table<unsigned int>(get_tabs(), 0, 0, 340, 100);
+		m_worker_table = new UI::Table<uintptr_t>(get_tabs(), 0, 0, 340, 100);
 
 		m_worker_table->add_column(150, _("Worker"));
 		m_worker_table->add_column(40, _("Exp"));
@@ -89,7 +89,7 @@ void ProductionSite_Window::think()
 		for(unsigned int i = 0; i < productionsite().descr().nr_working_positions(); ++i) {
 			const Widelands::Worker * worker = productionsite().working_positions()[i].worker;
 			const Widelands::Request * request = productionsite().working_positions()[i].worker_request;
-			UI::Table<unsigned int>::Entry_Record & er = m_worker_table->get_record(i);
+			UI::Table<uintptr_t>::Entry_Record & er = m_worker_table->get_record(i);
 
 			if (worker) {
 				er.set_picture(0, worker->icon(), worker->descname());

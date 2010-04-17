@@ -38,7 +38,7 @@ protected:
 	virtual void think();
 
 private:
-	UI::Table<unsigned int> * m_worker_table;
+	UI::Table<uintptr_t> * m_worker_table;
 };
 
 #endif // _PRODUCTIONSITEWINDOW_H_
