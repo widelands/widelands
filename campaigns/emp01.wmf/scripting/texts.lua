@@ -152,14 +152,14 @@ safe_peninsula = {
 obj_build_barracks = {
    name = "build_barracks",
    title=_"Build a barracks",
-   body=_"<rt><p>" ..
+   body= "<rt><p>" ..
    _"* Build a barracks at the red point on the east side of the forests, to the right of your headquarters." ..
    "</p></rt>"
 }
 obj_build_lumberjack = {
    name = "build_lumberjack",
    title=_"Build a lumberjack's house",
-   body=_"<rt><p>" ..
+   body= "<rt><p>" ..
    _(
    "* Build a lumberjack's house at the red point, south of your headquarters. " ..
    "Cutting down enough trees for more buildings will take a while. You can " ..
