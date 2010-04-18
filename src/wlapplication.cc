@@ -859,12 +859,25 @@ std::string WLApplication::find_relative_locale_path(std::string localedir)
 		char buffer[buffersize];
 		int32_t check = _NSGetExecutablePath(buffer,&buffersize);
 		if (check != 0) {
-			throw wexception ("[OSX] dyld could not find the path of the main executable");
+			throw wexception (_("could not find the path of the main executable"));
 		}
 		std::string executabledir = buffer;
 		executabledir.resize(executabledir.find_last_of('/') + 1);
 		executabledir+= localedir;
-		std::cout << "localedir : " << executabledir << std::endl;
+		log ("localedir: %s\n", executabledir.c_str());
+		return executabledir;
+	}
+#elif linux
+	if (localedir[0] != '/') {		 
+		char buffer[PATH_MAX];
+		size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
+		if (size <= 0) {
+			throw wexception (_("could not find the path of the main executable"));
+		}
+		std::string executabledir(buffer, size);
+		executabledir.resize(executabledir.find_last_of('/') + 1);
+		executabledir += localedir;
+		log ("localedir : %s\n", executabledir.c_str());
 		return executabledir;
 	}
 #endif
