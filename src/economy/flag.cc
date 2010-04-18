@@ -514,7 +514,7 @@ void Flag::call_carrier
 	// Deal with the non-moving case quickly
 	if (!nextstep) {
 		pi->nextstep = 0;
-		pi->pending = false;
+		pi->pending = true;
 		return;
 	}
 
@@ -706,5 +706,28 @@ void Flag::flag_job_request_callback
 
 	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
+
+void Flag::log_general_info(const Widelands::Editor_Game_Base& egbase)
+{
+	molog("Flag at %i,%i\n", m_position.x, m_position.y);
+
+	Widelands::PlayerImmovable::log_general_info(egbase);
+
+	if (m_item_filled) {
+		molog("Wares at flag:\n");
+		for(int i = 0; i < m_item_filled; ++i) {
+			PendingItem& pi = m_items[i];
+			molog
+				(" %i/%i: %s(%i), nextstep %i, %s\n",
+				 i+1, m_item_capacity,
+				 pi.item->descr().name().c_str(), pi.item->serial(),
+				 pi.nextstep.serial(),
+				 pi.pending ? "pending" : "acked by carrier");
+		}
+	} else {
+		molog("No wares at flag.\n");
+	}
+}
+
 
 }

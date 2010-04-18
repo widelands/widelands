@@ -29,6 +29,8 @@ struct Story_Message_Box : public UI::Window {
 		(UI::Panel * const, std::string, std::string, std::string,
 		 int32_t, int32_t, int32_t, int32_t);
 
+	bool handle_mousepress(const Uint8 btn, int32_t mx, int32_t my);
+
 private:
 	void clicked_ok(int32_t);
 };

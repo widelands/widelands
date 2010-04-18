@@ -61,10 +61,10 @@ MapObjectDebugPanel::MapObjectDebugPanel
 	 Widelands::Editor_Game_Base const & egbase,
 	 Widelands::Map_Object       & obj)
 :
-UI::Panel(&parent, 0, 0, 280, 150),
+UI::Panel(&parent, 0, 0, 350, 200),
 m_egbase (egbase),
 m_object (&obj),
-m_log    (this, 0, 0, 280, 150, "")
+m_log    (this, 0, 0, 350, 200, "")
 {
 	m_log.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
 	obj.set_logsink(this);
@@ -151,17 +151,12 @@ MapObjectDebugWindow::MapObjectDebugWindow
 {
 	char buffer[128];
 
-
 	m_serial = obj.serial();
 	snprintf(buffer, sizeof(buffer), "%u", m_serial);
 	set_title(buffer);
 
-
-	obj.create_debug_panels(parent.egbase(), m_tabs);
-
 	m_tabs.set_snapparent(true);
-	m_tabs.resize();
-
+	obj.create_debug_panels(parent.egbase(), m_tabs);
 }
 
 

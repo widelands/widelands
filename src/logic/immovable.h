@@ -153,6 +153,9 @@ public:
 		return descr().get_owner_tribe();
 	}
 
+	bool is_reserved_by_worker() const;
+	void set_reserved_by_worker(bool reserve);
+
 protected:
 	Coords                   m_position;
 
@@ -163,6 +166,12 @@ protected:
 	uint32_t m_program_ptr; ///< index of next instruction to execute
 	int32_t                      m_program_step; ///< time of next step
 
+	/**
+	 * Immovables like trees are reserved by a worker that is walking
+	 * towards them, so that e.g. two lumberjacks don't attempt to
+	 * work on the same tree simultaneously.
+	 */
+	bool m_reserved_by_worker;
 
 	// Load/save support
 protected:

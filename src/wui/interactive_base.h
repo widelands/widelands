@@ -171,6 +171,7 @@ protected:
 
 
 private:
+	void cmdMapObject(std::vector<std::string> const & args);
 	void cmdLua(std::vector<std::string> const & args);
 	void update_speedlabel();
 

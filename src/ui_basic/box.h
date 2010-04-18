@@ -51,11 +51,11 @@ public:
 		 int32_t max_x = 0, int32_t max_y = 0);
 
 	void set_scrolling(bool scroll);
-	void resize();
+	virtual void layout();
 
 	int32_t get_nritems() const {return m_items.size();}
 
-	void add(Panel * panel, uint32_t align);
+	void add(Panel * panel, uint32_t align, bool fullsize = false);
 	void add_space(uint32_t space);
 	bool is_snap_target() const {return true;}
 
@@ -80,7 +80,8 @@ private:
 		union {
 			struct {
 				Panel * panel;
-				uint32_t    align;
+				uint32_t align;
+				bool fullsize;
 			} panel;
 			uint32_t space;
 		} u;

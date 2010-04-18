@@ -67,7 +67,7 @@ Interactive_DServer::Interactive_DServer
 	m_chatDisplay =
 		new ChatDisplay(this, 10, 25, get_w() - 10, get_h() - 25);
 
-	m_toolbar.resize();
+	m_toolbar.layout();
 	adjust_toolbar_position();
 }
 

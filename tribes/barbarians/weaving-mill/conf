@@ -26,12 +26,12 @@ produce=cloth
 
 [idle]
 pics=i_??.png
-hotspot=36 78
+hotspot=33 76
 
 [build]
 pics=b_??.png
-hotspot=36 78
+hotspot=33 76
 
 [working]
 pics=w_??.png
-hotspot=36 78
+hotspot=33 76

@@ -11,8 +11,8 @@ plr = wl.game.Player(1)
 plr:allow_buildings("all")
 
 -- A default headquarters
-use("tribe_barbarians", "sc_headquarters_medium")
-initialize(plr)
+use("tribe_barbarians", "sc00_headquarters_medium")
+init.func(plr) -- defined in sc00_headquarters_medium
 
 
 use("aux", "coroutine")

@@ -322,7 +322,7 @@ This mainly deals with mouse placement
 */
 void FieldActionWindow::init()
 {
-	m_tabpanel.resize();
+	m_tabpanel.layout();
 
 	center_to_parent(); // override UI::UniqueWindow position
 
@@ -474,16 +474,16 @@ void FieldActionWindow::add_buttons_auto()
 
 	// Add tabs
 	if (buildbox && buildbox->get_nritems()) {
-		buildbox->resize();
+		buildbox->layout();
 		add_tab(pic_tab_buildroad, buildbox, _("Build roads"));
 	}
 
-	watchbox.resize();
+	watchbox.layout();
 	add_tab(pic_tab_watch, &watchbox, _("Watch"));
 
 	if (militarybox) {
 		if (militarybox->allowed_change()) {
-			militarybox->resize();
+			militarybox->layout();
 			add_tab(pic_tab_military, militarybox, _("Military settings"));
 		} else
 			delete militarybox;
@@ -514,8 +514,8 @@ void FieldActionWindow::add_buttons_attack ()
 	}
 
 	if (a_box.get_nritems()) { //  add tab
-		m_attack_box->resize();
-		a_box.resize();
+		m_attack_box->layout();
+		a_box.layout();
 		add_tab(pic_tab_attack, &a_box, _("Attack"));
 	}
 }
@@ -617,7 +617,7 @@ void FieldActionWindow::add_buttons_road(bool const flag)
 		 pic_abort, &FieldActionWindow::act_abort_buildroad, _("Cancel road"));
 
 	// Add the box as tab
-	buildbox.resize();
+	buildbox.layout();
 	add_tab(pic_tab_buildroad, &buildbox, _("Build roads"));
 }
 

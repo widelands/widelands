@@ -692,10 +692,6 @@ bool Bob::start_task_movepath
 void Bob::movepath_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
-		if (serial() == 3755)
-			molog
-				("[movepath_update] signal '%s'; popping task\n",
-				 get_signal().c_str());
 		return pop_task(game);
 	}
 
@@ -919,10 +915,6 @@ int32_t Bob::start_walk
 	m_walkstart = game.get_gametime();
 	m_walkend = m_walkstart + tdelta;
 
-	if (serial() == 3755)
-		molog
-			("[start_walk]: changint position from (%i, %i) to (%i, %i)\n",
-			 get_position().x, get_position().y, newnode.x, newnode.y);
 	set_position(game, newnode);
 	set_animation(game, a);
 

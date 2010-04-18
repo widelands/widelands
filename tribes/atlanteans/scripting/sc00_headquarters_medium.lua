@@ -4,7 +4,11 @@
 
 use("aux", "infrastructure")
 
-return function(plr) 
+set_textdomain("tribe_atlanteans")
+
+return {
+   name = _ "Headquarters medium", 
+   func =  function(plr) 
    plr:allow_workers("all")
 
    local sf = plr.starting_field
@@ -68,4 +72,4 @@ return function(plr)
       }
    })
 end
-
+}

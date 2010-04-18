@@ -39,12 +39,18 @@ MAINPOTS = [( "maps/maps", ["../../maps/*/elemental", "../../campaigns/cconfig"]
                           "../../txts/developers",
                           "../../txts/editor_readme",
                           "../../txts/tips/*.tip"] ),
-            ( "widelands/widelands", ["../../src/*.cc",
+            ( "widelands/widelands", [
+                            "../../src/*.cc",
                             "../../src/*/*.cc",
                             "../../src/*/*/*.cc",
                             "../../src/*.h",
                             "../../src/*/*.h",
-                            "../../src/*/*/*.h"] ) ]
+                            "../../src/*/*/*.h",
+            ] ),
+            ( "win_conditions/win_conditions", [
+                "../../scripting/win_conditions/*.lua",
+            ]),
+]
 
 
 # This defines the rules for iterative generation of catalogs. This allows
@@ -72,7 +78,9 @@ ITERATIVEPOTS = [
     ),
     ("tribe_%(name)s/tribe_%(name)s", "tribes/",
         ["../../tribes/%(name)s/conf",
-         "../../tribes/%(name)s/*/conf"]
+         "../../tribes/%(name)s/*/conf",
+         "../../tribes/%(name)s/scripting/*.lua",
+    ]
     ),
     ("world_%(name)s/world_%(name)s", "worlds/",
      ["../../worlds/%(name)s/*conf", "../../worlds/%(name)s/*/conf"]

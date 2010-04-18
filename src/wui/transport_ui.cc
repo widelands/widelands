@@ -493,7 +493,7 @@ private:
 				 &m_worker_target_quantities,
 				 _("Worker type target quantities"));
 			set_snapparent(true);
-			resize();
+			layout();
 		}
 
 		Economy & economy() const {return m_economy;}

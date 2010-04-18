@@ -21,6 +21,7 @@
 
 #include "checkstep.h"
 #include "cmd_expire_message.h"
+#include "cmd_luacoroutine.h"
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -103,8 +104,14 @@ void Player::create_default_infrastructure() {
 				tribe().initialization(m_initialization_index);
 
 			Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
-			dynamic_cast<LuaGameInterface &>(game.lua()).
-				make_starting_conditions(player_number(), initialization.name);
+
+			// Run the corresponding script
+			LuaCoroutine * cr = game.lua().run_script
+				(*g_fs, "tribes/" + tribe().name() +
+				 "/scripting/" +  initialization.name + ".lua",
+				 "tribe_" + tribe().name())->get_coroutine("func");
+			cr->push_arg(this);
+			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
 		} catch (Tribe_Descr::Nonexistent) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "

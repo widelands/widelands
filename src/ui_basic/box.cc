@@ -60,16 +60,15 @@ void Box::set_scrolling(bool scroll)
 		return;
 
 	m_scrolling = scroll;
-	resize();
+	layout();
 }
 
 
 /**
  * Adjust all the children and the box's size.
  */
-void Box::resize()
+void Box::layout()
 {
-
 	uint32_t totaldepth = 0;
 	uint32_t maxbreadth = 0;
 
@@ -80,6 +79,21 @@ void Box::resize()
 		totaldepth += depth;
 		if (breadth > maxbreadth)
 			maxbreadth = breadth;
+	}
+
+	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
+		const Item& it = m_items[idx];
+		if (it.type == Item::ItemPanel && it.u.panel.fullsize) {
+			uint32_t depth, breadth;
+			get_item_size(idx, depth, breadth);
+
+			if (breadth < maxbreadth) {
+				if (m_orientation == Horizontal)
+					it.u.panel.panel->set_size(it.u.panel.panel->get_w(), maxbreadth);
+				else
+					it.u.panel.panel->set_size(maxbreadth, it.u.panel.panel->get_h());
+			}
+		}
 	}
 
 	bool needscrollbar = false;
@@ -167,17 +181,18 @@ void Box::scrollbar_moved(int32_t)
 /**
  * Add a new panel to be controlled by this box
 */
-void Box::add(Panel * const panel, uint32_t const align)
+void Box::add(Panel * const panel, uint32_t const align, bool fullsize)
 {
 	Item it;
 
 	it.type = Item::ItemPanel;
 	it.u.panel.panel = panel;
 	it.u.panel.align = align;
+	it.u.panel.fullsize = fullsize;
 
 	m_items.push_back(it);
 
-	resize();
+	layout();
 }
 
 
@@ -193,7 +208,7 @@ void Box::add_space(uint32_t space)
 
 	m_items.push_back(it);
 
-	resize();
+	layout();
 }
 
 

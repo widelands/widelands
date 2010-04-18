@@ -4,7 +4,11 @@
 
 use("aux", "infrastructure")
 
-function initialize(p) 
+set_textdomain("tribe_barbarians")
+
+return {
+   name = _ "Citadel village", 
+   func = function(p) 
 
    p:allow_workers("all")
    
@@ -79,8 +83,6 @@ function initialize(p)
    place_building_in_region(p, "lime_kiln", sf:region(12), {
       wares = { raw_stone = 6, coal = 3 },
    })
+end,
+}
 
-end
-
-
-return initialize

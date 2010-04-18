@@ -22,7 +22,6 @@
 
 #include "log.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/player.h"
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
@@ -41,6 +40,59 @@
 
 /*
 ============================================
+       Lua Table
+============================================
+*/
+class LuaTable_Impl : virtual public LuaTable {
+	lua_State * m_L;
+
+public:
+		LuaTable_Impl(lua_State * L) : m_L(L) {}
+
+		virtual ~LuaTable_Impl() {
+			lua_pop(m_L, 1);
+		}
+
+		virtual std::string get_string(std::string s) {
+			lua_getfield(m_L, -1, s.c_str());
+			if (not lua_isstring(m_L, -1)) {
+				lua_pop(m_L, 1);
+				throw LuaError
+					(s + " is not a field in the table returned by the last "
+					 "script or not a string");
+			}
+			std::string rv = lua_tostring(m_L, -1);
+			lua_pop(m_L, 1);
+
+			return rv;
+		}
+
+	virtual LuaCoroutine * get_coroutine(std::string s) {
+		lua_getfield(m_L, -1, s.c_str());
+
+		if (lua_isfunction(m_L, -1)) {
+			// Oh well, a function, not a coroutine. Let's turn it into one
+			lua_State * t = lua_newthread(m_L);
+			lua_pop(m_L, 1); // Immediately remove this thread again
+
+			lua_xmove(m_L, t, 1); // Move function to coroutine
+			lua_pushthread(t); // Now, move thread object back
+			lua_xmove(t, m_L, 1);
+		}
+
+		if (not lua_isthread(m_L, -1)) {
+			lua_pop(m_L, 1);
+			throw LuaError
+				(s + "is not a field in the table returned by the last script "
+				 "or not a function");
+		}
+		LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(m_L, -1));
+		lua_pop(m_L, 1); // Remove coroutine from stack
+		return cr;
+	}
+};
+/*
+============================================
        Lua Interface
 ============================================
 */
@@ -56,7 +108,8 @@ protected:
 	 */
 	private:
 		int m_check_for_errors(int);
-		void m_register_script(std::string, std::string, std::string);
+		std::string m_register_script
+			(FileSystem & fs, std::string path, std::string ns);
 		bool m_filename_to_short(const std::string &);
 		bool m_is_lua_file(const std::string &);
 
@@ -67,12 +120,15 @@ protected:
 		virtual void interpret_string(std::string);
 		virtual std::string const & get_last_error() const {return m_last_error;}
 
-		virtual void register_scripts(FileSystem &, std::string);
+		virtual void register_scripts
+			(FileSystem &, std::string, std::string = "scripting");
 		virtual ScriptContainer & get_scripts_for(std::string ns) {
 			return m_scripts[ns];
 		}
 
-		virtual void run_script(std::string, std::string);
+		virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string);
+		virtual boost::shared_ptr<LuaTable> run_script
+			(FileSystem &, std::string, std::string);
 };
 
 
@@ -88,10 +144,22 @@ int LuaInterface_Impl::m_check_for_errors(int rv) {
 	return rv;
 }
 
-void LuaInterface_Impl::m_register_script
-	(std::string ns, std::string name, std::string content)
+std::string LuaInterface_Impl::m_register_script
+	(FileSystem & fs, std::string path, std::string ns)
 {
-	m_scripts[ns][name] = content;
+		size_t length;
+		std::string data(static_cast<char *>(fs.Load(path, length)));
+		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
+		size_t pos = name.rfind('/');
+		if (pos == std::string::npos)
+			pos = name.rfind("\\");
+		if (pos != std::string::npos)
+			name = name.substr(pos + 1, name.size());
+
+		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
+		m_scripts[ns][name] = data;
+
+		return name;
 }
 
 bool LuaInterface_Impl::m_filename_to_short(const std::string & s) {
@@ -141,6 +209,10 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 		lua_call(m_L, 1, 0);
 	}
 
+	// Push the instance of this class into the registry
+	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(this));
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
+
 	// Now our own
 	luaopen_globals(m_L);
 
@@ -151,13 +223,15 @@ LuaInterface_Impl::~LuaInterface_Impl() {
 	lua_close(m_L);
 }
 
-void LuaInterface_Impl::register_scripts(FileSystem & fs, std::string ns) {
+void LuaInterface_Impl::register_scripts
+	(FileSystem & fs, std::string ns, std::string subdir)
+{
 	filenameset_t scripting_files;
 
 	// Theoretically, we should be able to use fs.FindFiles(*.lua) here,
 	// but since FindFiles doesn't support Globbing in Zips and most
 	// saved maps/games are zip, we have to work around this issue.
-	fs.FindFiles("scripting", "*", &scripting_files);
+	fs.FindFiles(subdir, "*", &scripting_files);
 
 	for
 		(filenameset_t::iterator i = scripting_files.begin();
@@ -166,17 +240,7 @@ void LuaInterface_Impl::register_scripts(FileSystem & fs, std::string ns) {
 		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
 			continue;
 
-		size_t length;
-		std::string data(static_cast<char *>(fs.Load(*i, length)));
-		std::string name = i->substr(0, i->size() - 4); // strips '.lua'
-		size_t pos = name.rfind('/');
-		if (pos == std::string::npos)
-			pos = name.rfind("\\");
-		if (pos != std::string::npos)
-			name = name.substr(pos + 1, name.size());
-
-		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
-		m_register_script(ns, name, data);
+		m_register_script(fs, *i, ns);
 	}
 }
 
@@ -185,7 +249,28 @@ void LuaInterface_Impl::interpret_string(std::string cmd) {
 	m_check_for_errors(rv);
 }
 
-void LuaInterface_Impl::run_script(std::string ns, std::string name) {
+boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
+	(FileSystem & fs, std::string path, std::string ns)
+{
+	bool delete_ns = false;
+	if (not m_scripts.count(ns))
+		delete_ns = true;
+
+	std::string name = m_register_script(fs, path, ns);
+
+	boost::shared_ptr<LuaTable> rv = run_script(ns, name);
+
+	if (delete_ns)
+		m_scripts.erase(ns);
+	else
+		m_scripts[ns].erase(name);
+
+	return rv;
+}
+
+boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
+	(std::string ns, std::string name)
+{
 	if
 		((m_scripts.find(ns) == m_scripts.end()) ||
 		 (m_scripts[ns].find(name) == m_scripts[ns].end()))
@@ -195,10 +280,17 @@ void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 
 	m_check_for_errors
 		(luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
-		 lua_pcall(m_L, 0, LUA_MULTRET, 0)
+		 lua_pcall(m_L, 0, 1, 0)
 	);
-}
 
+	if (lua_isnil(m_L, -1)) {
+		lua_pop(m_L, 1); // No return value from script
+		lua_newtable(m_L); // Push an empty table
+	}
+	if (not lua_istable(m_L, -1))
+		throw LuaError("Script did not return a table!");
+	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
+}
 
 /*
  * ===========================
@@ -255,8 +347,6 @@ struct LuaGameInterface_Impl : public LuaEditorGameBaseInterface_Impl,
 {
 	LuaGameInterface_Impl(Widelands::Game * g);
 	virtual ~LuaGameInterface_Impl() {}
-
-	virtual void make_starting_conditions(uint8_t, std::string);
 
 	virtual LuaCoroutine* read_coroutine
 		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
@@ -402,30 +492,6 @@ uint32_t LuaGameInterface_Impl::write_global_env
 
 	return persist_object(m_L, m_persistent_globals, fw, mos);
 }
-
-
-/*
- * Fullfill the starting conditions for the Player with the given Number
- */
-void LuaGameInterface_Impl::make_starting_conditions
-	(uint8_t plrnr, std::string scriptname)
-{
-	Widelands::Game & game = get_game(m_L);
-	Widelands::Player * plr = game.get_player(plrnr);
-	assert(plr);
-
-	// Run the corresponding script which returns a function
-	run_script("tribe_" + plr->tribe().name(), scriptname);
-
-	if (not lua_isfunction(m_L, -1))
-		report_error
-			(m_L, "tribe_%s:%s did not return a function!",
-			 plr->tribe().name().c_str(), scriptname.c_str());
-	to_lua<L_Player>(m_L, new L_Player(plrnr));
-
-	lua_call(m_L, 1, 0);
-}
-
 
 /*
 ============================================
