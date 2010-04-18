@@ -199,7 +199,7 @@ struct Bob : public Map_Object {
 			 Tribe_Descr const *, EncodeData const *);
 
 		virtual ~Descr() {};
-		Bob & create(Editor_Game_Base &, Player * owner, Coords) const;
+		Bob & create(Editor_Game_Base &, Player * owner, const Coords &) const;
 		bool is_world_bob() const {return not m_owner_tribe;}
 
 		char const * get_picture() const {return m_picture.c_str();}
@@ -242,7 +242,7 @@ struct Bob : public Map_Object {
 	Point calc_drawpos(Editor_Game_Base const &, Point) const;
 	void set_owner(Player *);
 	Player * get_owner() const {return m_owner;}
-	void set_position(Editor_Game_Base &, Coords);
+	void set_position(Editor_Game_Base &, const Coords &);
 	FCoords const & get_position() const {return m_position;}
 	Bob * get_next_bob() const throw () {return m_linknext;}
 	bool is_world_bob() const throw () {return descr().is_world_bob();}
@@ -272,7 +272,7 @@ struct Bob : public Map_Object {
 	/// be a "failed to act" error.
 	bool start_task_movepath
 		(Game                &,
-		 const Coords          dest,
+		 const Coords        & dest,
 		 const int32_t         persist,
 		 const DirAnimations &,
 		 const bool            forceonlast = false,
@@ -323,10 +323,16 @@ struct Bob : public Map_Object {
 	bool is_walking() {return m_walking != IDLE;}
 
 
+	/**
+	 * This is a hack that should not be used, if possible.
+	 * It is only introduced here because profiling showed
+	 * that soldiers spend a lot of time in the node blocked check.
+	 */
+	Bob * get_next_on_field() const {return m_linknext;}
+
 protected:
 	Bob(const Descr & descr);
 	virtual ~Bob();
-
 
 private:
 	void do_act(Game &);

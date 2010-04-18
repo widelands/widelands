@@ -19,7 +19,6 @@
 
 #include "attack_box.h"
 
-#include "editor/editorinteractive.h"
 #include "logic/soldier.h"
 
 #include "upcast.h"
@@ -134,7 +133,7 @@ void AttackBox::update_attack() {
 		m_slider_soldiers->set_max_value(max_attackers);
 
 	m_slider_soldiers->set_enabled(max_attackers > 0);
-	m_add_soldiers   ->set_enabled(max_attackers > m_slider_soldiers->get_value());
+	m_add_soldiers->set_enabled(max_attackers > m_slider_soldiers->get_value());
 	m_less_soldiers  ->set_enabled(m_slider_soldiers->get_value() > 0);
 
 	sprintf(buf, "%u / %u", m_slider_soldiers->get_value(), max_attackers);
@@ -149,10 +148,10 @@ void AttackBox::update_attack() {
 
 		Widelands::Military_Data MD = m_pl->tribe().get_military_data();
 
-		if (m_slider_retreat->get_value() < MD.get_min_retreat()) 
+		if (m_slider_retreat->get_value() < MD.get_min_retreat())
 			m_slider_retreat->set_value (MD.get_min_retreat());
 
-		if (m_slider_retreat->get_value() > MD.get_max_retreat()) 
+		if (m_slider_retreat->get_value() > MD.get_max_retreat())
 			m_slider_retreat->set_value (MD.get_max_retreat());
 
 		sprintf(buf, "%u %%", m_slider_retreat->get_value());

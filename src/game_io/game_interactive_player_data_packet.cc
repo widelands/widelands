@@ -45,8 +45,8 @@ void Game_Interactive_Player_Data_Packet::Read
 			Player_Number player_number =
 				fr.Player_Number8(game.map().get_nrplayers());
 			if (not game.get_player(player_number)) {
-				// This happens if the player, that saved the game, was a spectator and
-				// the slot for player 1 was not used in the game.
+				// This happens if the player, that saved the game, was a spectator
+				// and the slot for player 1 was not used in the game.
 				// So now we try to create an InteractivePlayer object for another
 				// player instead.
 				const Player_Number max = game.map().get_nrplayers();

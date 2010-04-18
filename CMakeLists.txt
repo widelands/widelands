@@ -350,6 +350,7 @@ install(
     txts
     worlds
     pics
+    scripting
   DESTINATION ${WLBUILD_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles

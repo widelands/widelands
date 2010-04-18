@@ -447,7 +447,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				//  The checks that the warehouse has a next_spawn time for each
 				//  worker type that the player is allowed to spawn, is in
 				//  Warehouse::load_finish.
-			
+
 			if (uint32_t const conquer_radius = warehouse.get_conquers()) {
 				//  Add to map of military influence.
 				Map const & map = game.map();
@@ -727,7 +727,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			productionsite.m_input_queues.resize(nr_queues);
 			// perhaps the building had more input queues in earlier versions
 			for (; nr_queues > productionsite.m_input_queues.size(); --nr_queues) {
-				productionsite.m_input_queues[nr_queues]=
+				productionsite.m_input_queues[nr_queues] =
 					new WaresQueue(productionsite, Ware_Index::Null(), 0, 0);
 				productionsite.m_input_queues[nr_queues]->Read(fr, game, mol);
 			}
@@ -735,7 +735,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			// the older version had less inputs - that way we leave the new ones
 			// empty
 			for (uint16_t i = 0; i < nr_queues; ++i) {
-				productionsite.m_input_queues[i]=
+				productionsite.m_input_queues[i] =
 					new WaresQueue(productionsite, Ware_Index::Null(), 0, 0);
 				productionsite.m_input_queues[i]->Read(fr, game, mol);
 			}
@@ -762,8 +762,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 statistics_string_length)
 						log
 							("WARNING: productionsite statistics string can be at "
-							 "most %u characters but a loaded building has the "
-							 "string \"%s\" of length %u\n",
+							 "most %lu characters but a loaded building has the "
+							 "string \"%s\" of length %lu\n",
 							 sizeof(productionsite.m_statistics_buffer) - 1,
 							 statistics_string, statistics_string_length);
 				}
@@ -780,8 +780,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 result_string_length)
 						log
 							("WARNING: productionsite result string can be at "
-							 "most %u characters but a loaded building has the "
-							 "string \"%s\" of length %u\n",
+							 "most %lu characters but a loaded building has the "
+							 "string \"%s\" of length %lu\n",
 							 sizeof(productionsite.m_result_buffer) - 1,
 							 result_string, result_string_length);
 				}

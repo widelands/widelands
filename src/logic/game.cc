@@ -17,51 +17,46 @@
  *
  */
 
+#include <string>
+#include <cstring>
+
 #include "game.h"
 
 #include "carrier.h"
-#include "cmd_check_eventchain.h"
+#include "cmd_luacoroutine.h"
+#include "cmd_luascript.h"
 #include "computer_player.h"
-#include "events/event.h"
-#include "events/event_chain.h"
+#include "economy/economy.h"
 #include "findimmovable.h"
-#include "wui/interactive_player.h"
-#include "ui_fsmenu/launchgame.h"
 #include "game_io/game_loader.h"
-#include "wui/game_tips.h"
 #include "game_io/game_preload_data_packet.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "player.h"
 #include "playercommand.h"
 #include "profile/profile.h"
 #include "replay.h"
+#include "scripting/scripting.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
+#include "timestring.h"
 #include "trainingsite.h"
 #include "tribe.h"
+#include "ui_basic/progresswindow.h"
+#include "ui_fsmenu/launchgame.h"
+#include "upcast.h"
 #include "warning.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "map_io/widelands_map_loader.h"
 #include "wlapplication.h"
-
-#include "economy/economy.h"
-
-#include "ui_basic/progresswindow.h"
-
-#include "log.h"
-
-#include "upcast.h"
-
-#include "timestring.h"
-
-#include <string>
-#include <cstring>
+#include "wui/game_tips.h"
+#include "wui/interactive_player.h"
 
 namespace Widelands {
 
@@ -83,19 +78,22 @@ void Game::SyncWrapper::StartDump(std::string const & fname) {
 	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
 }
 
-static const unsigned long long MINIMUM_DISK_SPACE = 256*1024*1024;
+static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
 void Game::SyncWrapper::Data(void const * const data, size_t const size) {
-	uint32_t time = m_game.get_gametime();
 #ifdef SYNC_DEBUG
+	uint32_t time = m_game.get_gametime();
 	log("[sync:%08u t=%6u]", m_counter, time);
 	for (size_t i = 0; i < size; ++i)
 		log(" %02x", (static_cast<uint8_t const *>(data))[i]);
 	log("\n");
 #endif
 
-	if (m_dump && (int32_t)(m_counter - m_next_diskspacecheck) >= 0) {
-		m_next_diskspacecheck = m_counter + 16*1024*1024;
+	if
+		(m_dump &&
+		 static_cast<int32_t>(m_counter - m_next_diskspacecheck) >= 0)
+	{
+		m_next_diskspacecheck = m_counter + 16 * 1024 * 1024;
 
 		if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
 			log("Stop writing to syncstream file: disk is getting full.\n");
@@ -123,6 +121,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 
 Game::Game() :
+	Editor_Game_Base(create_LuaGameInterface(this)),
 	m_syncwrapper      (*this, m_synchash),
 	m_ctrl             (0),
 	m_writereplay      (true),
@@ -133,7 +132,6 @@ Game::Game() :
 	m_last_stats_update(0)
 {
 	g_sound_handler.m_the_game = this;
-	m_lua = create_lua_interface(this);
 }
 
 Game::~Game()
@@ -323,7 +321,14 @@ void Game::init_newgame
 
 	loaderUI.step(_("Loading map"));
 	maploader->load_map_complete(*this, settings.scenario);
+
+	// Check for win_conditions
+	LuaCoroutine * cr = lua().run_script
+		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
+		 ".lua", "win_conditions")->get_coroutine("func");
+	enqueue_command(new Cmd_LuaCoroutine(get_gametime(), cr));
 }
+
 
 
 /**
@@ -473,8 +478,6 @@ bool Game::run
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources();
-		map().mem().remove_unreferenced();
-		map().mtm().remove_unreferenced();
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
@@ -489,10 +492,8 @@ bool Game::run
 			map().set_scenario_player_ai   (p, player_ai);
 		}
 
-		// Everything prepared, send the first trigger event
-		// We lie about the sender here. Hey, what is one lie in a lifetime?
-		enqueue_command
-			(new Cmd_CheckEventChain(get_gametime(), static_cast<uint16_t>(-1)));
+		// Run the init script, if the map provides one.
+		enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
 	}
 
 	if (m_writereplay) {
@@ -1109,6 +1110,10 @@ void Game::conquer_area_no_building(Player_Area<Area<FCoords> > player_area) {
 
 /// Conquers the given area for that player; does the actual work.
 /// Additionally, it updates the visible area for that player.
+// TODO: this needs a more fine grained refactoring
+// for example scripts will want to (un)conquer area of non oval shape
+// or give area back to the neutral player (this is very important for the Lua
+// testsuite).
 void Game::do_conquer_area
 	(Player_Area<Area<FCoords> > player_area,
 	 bool          const conquer,

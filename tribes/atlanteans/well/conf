@@ -20,10 +20,10 @@ produce=water
 
 [idle]
 pics=well_i_??.png  # ???
-hotspot=38 47
+hotspot=35 43
 playercolor=true
 
 [working]
 pics=well_i_??.png  # ???
-hotspot=38 47
+hotspot=35 43
 playercolor=true

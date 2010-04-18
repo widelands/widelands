@@ -48,9 +48,9 @@ struct Military_Data {
 	Military_Data();
 
 	void           parse(Section &);
-	uint8_t        get_max_retreat() {return m_max_retreat;}
-	uint8_t        get_min_retreat() {return m_min_retreat;}
-	uint8_t        get_retreat()     {return m_retreat;}
+	uint8_t        get_max_retreat() const {return m_max_retreat;}
+	uint8_t        get_min_retreat() const {return m_min_retreat;}
+	uint8_t        get_retreat()     const {return m_retreat;}
 private:
 	uint8_t              m_min_retreat;
 	uint8_t              m_max_retreat;

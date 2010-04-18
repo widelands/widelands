@@ -57,6 +57,10 @@ struct Panel : public Object {
 		pf_snap_windows_only_when_overlapping = 128,
 		/// children should snap to the edges of this panel
 		pf_dock_windows_to_edges = 256,
+		/// automatically set parent's inner size to this panel's size whenever the size changes
+		pf_snap_parent_size = 512,
+		/// used internally to break recursive calls to \p layout
+		pf_internal_layouting = 1024
 	}; ///<\todo Turn this into separate bool flags
 
 	Panel
@@ -83,6 +87,7 @@ struct Panel : public Object {
 	void set_size(uint32_t nw, uint32_t nh);
 	void set_pos(Point);
 	virtual void move_inside_parent();
+	virtual void layout();
 
 	int32_t get_x() const {return _x;}
 	int32_t get_y() const {return _y;}
@@ -196,6 +201,10 @@ struct Panel : public Object {
 			_flags &= ~pf_top_on_click;
 	}
 	bool get_top_on_click() const {return _flags & pf_top_on_click;}
+
+	void set_snapparent(bool snapparent);
+	bool get_snapparent() const {return _flags & pf_snap_parent_size;}
+
 
 protected:
 	void die();

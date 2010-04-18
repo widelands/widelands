@@ -13,5 +13,5 @@ stone=1
 
 [idle]
 pics=small_tower_i_??.png
-hotspot=41 63
+hotspot=39 63
 playercolor=true

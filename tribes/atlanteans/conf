@@ -32,8 +32,9 @@ hotspot=3 12
 [flag]
 name=flag
 pics=pics/flag_??.png
-hotspot=7 39
-fps=6
+hotspot=15 35
+fps=10
+playercolor=true
 
 [immovable types]
 ashes=_Ashes
@@ -201,10 +202,6 @@ well=_Well
 woodcutters_house=_Woodcutter's House
 scouts_house=_"Scout's House"
 horsefarm=_Horse Farm
-
-[initializations]
-headquarters_medium=_Headquarters medium
-castle_village=_Castle village
 
 [military_data]
 retreat_interval=20-100

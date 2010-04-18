@@ -985,7 +985,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				if (bf->water_nearby < 3)
 					continue;
 				int effect = bf->water_nearby - 8;
-				prio += effect > 0 ? static_cast<int>(sqrt(static_cast<double>(effect))) : effect;
+				prio += effect > 0 ?
+					 static_cast<int>(sqrt(static_cast<double>(effect))) : effect;
 				// if same producers are nearby, then give some penalty
 				for (size_t k = 0; k < bo.outputs.size(); ++k)
 					if (bf->producers_nearby[bo.outputs[k]] > 0)

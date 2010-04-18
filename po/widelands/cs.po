@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-21 10:15+0100\n"
-"PO-Revision-Date: 2010-03-24 23:23+0000\n"
+"POT-Creation-Date: 2010-03-25 13:31+0100\n"
+"PO-Revision-Date: 2010-03-25 19:17+0000\n"
 "Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-03-25 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-03-26 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -332,7 +332,7 @@ msgstr "Widelands se nepodařilo připojit k  hostiteli."
 msgid "The address of the game server is invalid"
 msgstr "Adresa herního serveru není platná"
 
-#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1183
+#: ../../src/wlapplication.cc:1754 ../../src/network/nethost.cc:1189
 msgid "Player"
 msgstr "Hráč"
 
@@ -1981,35 +1981,35 @@ msgstr[0] "%u(+%u) voják"
 msgstr[1] "%u(+%u) vojáci"
 msgstr[2] "%u(+%u) vojáků"
 
-#: ../../src/logic/militarysite.cc:574
+#: ../../src/logic/militarysite.cc:580
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
 msgstr "%sNepřítel porazil tvé vojáky na %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:581
+#: ../../src/logic/militarysite.cc:587
 msgid "Militarysite lost!"
 msgstr "Vojenská budova ztracena!"
 
-#: ../../src/logic/militarysite.cc:654
+#: ../../src/logic/militarysite.cc:660
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
 msgstr "%sTvoji vojáci porazili nepřítel na %s.</p></rt>"
 
-#: ../../src/logic/militarysite.cc:661
+#: ../../src/logic/militarysite.cc:667
 msgid "Enemy at site defeated!"
 msgstr "Nepřátelská budova dobyta!"
 
-#: ../../src/logic/militarysite.cc:709
+#: ../../src/logic/militarysite.cc:715
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
 msgstr "%sTvůj %s objevil nepřítele.</p>"
 
-#: ../../src/logic/militarysite.cc:710
+#: ../../src/logic/militarysite.cc:716
 #, c-format
 msgid "%sYour %s is under attack.</p>"
 msgstr "%s %s je pod nepřátelským útokem.</p>"
 
-#: ../../src/logic/militarysite.cc:720
+#: ../../src/logic/militarysite.cc:726
 msgid "You are under attack"
 msgstr "Nepřítel na tebe útočí"
 
@@ -3004,63 +3004,63 @@ msgstr "Hra začala hned poté, co jste se snažili připojit."
 msgid "Server has crashed and performed an emergency save."
 msgstr "Server havaroval a provedl nouzové uložení hry."
 
-#: ../../src/network/nethost.cc:832
+#: ../../src/network/nethost.cc:838
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "Hostitel poslal hráče %s do lobby!"
 
-#: ../../src/network/nethost.cc:1132
+#: ../../src/network/nethost.cc:1138
 #, c-format
 msgid "Computer %u"
 msgstr "Počítač %u"
 
-#: ../../src/network/nethost.cc:1208
+#: ../../src/network/nethost.cc:1214
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr "VAROVÁNÍ: %s používá verzi: %s, zatímco Hostitel používá verzi: %s"
 
-#: ../../src/network/nethost.cc:1255
+#: ../../src/network/nethost.cc:1261
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s se připojil ke hře"
 
-#: ../../src/network/nethost.cc:1279
+#: ../../src/network/nethost.cc:1285
 msgid "Client reports time to host that is running backwards."
 msgstr "Klient ohlásil hostiteli čas, který běží pozpátku."
 
-#: ../../src/network/nethost.cc:1282
+#: ../../src/network/nethost.cc:1288
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Klient simuluje hru déle, než po čas povolený hostitelem."
 
-#: ../../src/network/nethost.cc:1286
+#: ../../src/network/nethost.cc:1292
 msgid "Client did not submit sync report in time."
 msgstr "Klient neposlal synchronizační zprávu v limitu."
 
-#: ../../src/network/nethost.cc:1466
+#: ../../src/network/nethost.cc:1472
 msgid "Client and host have become desynchronized."
 msgstr "Mezi klientem a hostitelel došlo k desynchronizaci."
 
-#: ../../src/network/nethost.cc:1512
+#: ../../src/network/nethost.cc:1518
 msgid "New User"
 msgstr "Nový uživatel"
 
-#: ../../src/network/nethost.cc:1517
+#: ../../src/network/nethost.cc:1523
 msgid "The game has already started."
 msgstr "Hra již začala."
 
-#: ../../src/network/nethost.cc:1535
+#: ../../src/network/nethost.cc:1541
 msgid "Connection to client lost."
 msgstr "Připojení ke klientovi bylo ztraceno."
 
-#: ../../src/network/nethost.cc:1549
+#: ../../src/network/nethost.cc:1555
 msgid "Client sent malformed commands: "
 msgstr "Klient poslal chybné příkazy: "
 
-#: ../../src/network/nethost.cc:1582
+#: ../../src/network/nethost.cc:1588
 msgid "Game is running already, but client has not connected fully"
 msgstr "Hra již běží, ale klient není zcela připojen"
 
-#: ../../src/network/nethost.cc:1586
+#: ../../src/network/nethost.cc:1592
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
@@ -3069,56 +3069,56 @@ msgstr ""
 "První příkaz poslaný klientem je %u namísto HELLO. Klient pravděpodobně "
 "používá nekompatibilní verzi."
 
-#: ../../src/network/nethost.cc:1592
+#: ../../src/network/nethost.cc:1598
 msgid "Server uses a different protocol version."
 msgstr "Server používá odlišnou verzi protokolu."
 
-#: ../../src/network/nethost.cc:1674
+#: ../../src/network/nethost.cc:1680
 msgid "Client sent TIME command even though game is not running."
 msgstr "Klient poslal příkaz TIME přestože hra neběží."
 
-#: ../../src/network/nethost.cc:1682
+#: ../../src/network/nethost.cc:1688
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr "Klient poslal příkaz PLAYERCOMMAND přestože neběží žádná hra."
 
-#: ../../src/network/nethost.cc:1694
+#: ../../src/network/nethost.cc:1700
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr "Klient %u (%u) odeslal příkaz (%i) za jiného hráče (%i)."
 
-#: ../../src/network/nethost.cc:1703
+#: ../../src/network/nethost.cc:1709
 msgid "Client sent unexpected synchronization report."
 msgstr "Klient poslal neočekávanou synchronizační zprávu."
 
-#: ../../src/network/nethost.cc:1739 ../../src/network/nethost.cc:1751
+#: ../../src/network/nethost.cc:1745 ../../src/network/nethost.cc:1757
 msgid "Client requests file altough none is available to send."
 msgstr "Klient požaduje soubor, přestože žádný není k dispozici k odeslání."
 
-#: ../../src/network/nethost.cc:1741
+#: ../../src/network/nethost.cc:1747
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr "Začalo odesílání souboru %s k %s!"
 
-#: ../../src/network/nethost.cc:1762
+#: ../../src/network/nethost.cc:1768
 msgid "Client requests file part that does not exist."
 msgstr "Klient požaduje část souboru která neexistuje."
 
-#: ../../src/network/nethost.cc:1765
+#: ../../src/network/nethost.cc:1771
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr "Ukončen přesun souboru %s k %s"
 
-#: ../../src/network/nethost.cc:1773
+#: ../../src/network/nethost.cc:1779
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr "Odesílání části %u/%u souboru %s k %s"
 
-#: ../../src/network/nethost.cc:1783
+#: ../../src/network/nethost.cc:1789
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Klient poslal neznámý příkaz číslo %u"
 
-#: ../../src/network/nethost.cc:1839
+#: ../../src/network/nethost.cc:1845
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s opustil hru (%s)"

@@ -20,9 +20,7 @@
 #ifndef LUA_DEBUG_H
 #define LUA_DEBUG_H
 
-extern "C" {
-#include <lua.h>
-}
+#include <lua.hpp>
 
 void luaopen_wldebug(lua_State *);
 

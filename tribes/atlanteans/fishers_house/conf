@@ -21,5 +21,5 @@ worker=fish
 
 [idle]
 pics=fisher_i_??.png  # ???
-hotspot=42 49
-playercolor=yes
+hotspot=34 42
+playercolor=true

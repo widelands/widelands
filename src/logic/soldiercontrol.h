@@ -97,6 +97,12 @@ struct SoldierControl {
 	 */
 	virtual void dropSoldier(Soldier &) = 0;
 
+	/**
+	 * Add a new soldier into this site. Returns -1 if there is no space
+	 * for him, 0 on success
+	 */
+	virtual int incorporateSoldier(Game &, Soldier &) = 0;
+
 protected:
 	virtual ~SoldierControl() {}
 };

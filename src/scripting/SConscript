@@ -1,7 +1,7 @@
 Import('*')
 
-SRC=simpleglob("*.cc")
 
+SRC=simpleglob("*.cc")
 scripting=srcenv.StaticLibrary(target='scripting', source=SRC)
 
 ###########################################################################

@@ -132,6 +132,7 @@ struct Overlay_Manager {
 	uint8_t get_overlays(Widelands::FCoords c, Overlay_Info *) const;
 	uint8_t get_overlays(Widelands::TCoords<>, Overlay_Info *) const;
 
+	bool buildhelp(void) {return m_showbuildhelp;}
 	void show_buildhelp(bool const t) {m_showbuildhelp = t;}
 	void toggle_buildhelp() {m_showbuildhelp = !m_showbuildhelp;}
 

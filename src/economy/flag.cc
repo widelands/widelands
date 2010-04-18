@@ -77,7 +77,7 @@ Flag::~Flag()
 
 void Flag::load_finish(Editor_Game_Base & egbase) {
 	CapacityWaitQueue & queue = m_capacity_wait;
-	for (wl_range<CapacityWaitQueue > r(queue);r;)
+	for (wl_range<CapacityWaitQueue > r(queue); r;)
 	{
 		Worker & worker = *r->get(egbase);
 		Bob::State const * const state =
@@ -443,6 +443,19 @@ WareInstance * Flag::fetch_pending_item(Game & game, PlayerImmovable & dest)
 }
 
 /**
+ * Return a List of all the wares currently on this Flag. Do not rely
+ * the result value to stay valid and do not change them
+ */
+Flag::Wares Flag::get_items() {
+	Wares rv;
+
+	for (int32_t i = 0; i < m_item_filled; ++i)
+		rv.push_back(m_items[i].item);
+
+	return rv;
+}
+
+/**
  * Force a removal of the given item from this flag.
  * Called by \ref WareInstance::cleanup()
 */
@@ -693,5 +706,13 @@ void Flag::flag_job_request_callback
 
 	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
+
+void Flag::log_general_info(const Widelands::Editor_Game_Base& egbase)
+{
+	molog("Flag at %i,%i\n", m_position.x, m_position.y);
+
+	Widelands::PlayerImmovable::log_general_info(egbase);
+}
+
 
 }

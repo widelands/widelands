@@ -20,10 +20,9 @@
 #include "worker.h"
 
 #include "carrier.h"
-#include "critter_bob.h"
-
 #include "checkstep.h"
 #include "cmd_incorporate.h"
+#include "critter_bob.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -36,18 +35,17 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "mapfringeregion.h"
 #include "message_queue.h"
 #include "player.h"
 #include "profile/profile.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker_program.h"
-#include "mapfringeregion.h"
-
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -60,6 +58,7 @@ namespace Widelands {
  */
 bool Worker::run_createitem(Game & game, State & state, Action const & action)
 {
+
 	if (WareInstance * const item = fetch_carried_item(game)) {
 		molog("  Still carrying an item! Delete it.\n");
 		item->schedule_destroy(game);
@@ -77,58 +76,6 @@ bool Worker::run_createitem(Game & game, State & state, Action const & action)
 	player.ware_produced(wareid);
 
 	++state.ivar1;
-	schedule_act(game, 10);
-	return true;
-}
-
-
-/**
- * Run the given lua script whenever this program runs.
- *
- * Syntax in conffile: lua \<filename\>
- *
- * \param g
- * \param state
- * \param action Which file to load and run
- */
-// TODO: the ugliness!!
-extern "C" {
-#include <lua.h>
-}
-bool Worker::run_lua(Game & game, State & state, Action const & action) {
-	//  TODO: make this general
-	log("state.ivar1: %i\n", state.ivar1);
-	log("state.ivar2: %i\n", state.ivar2);
-	if (!state.ivar2) {
-		try {
-			std::string const cwd =
-				"/Users/sirver/Desktop/Programming/cpp/widelands/"
-				"git_svn_trunk/tribes/barbarians/lumberjack/";
-			LuaState * st = game.lua()->interpret_file(cwd + action.sparam1);
-			LuaCoroutine * cr = st->pop_coroutine();
-			molog("  Starting coroutine!\n");
-			molog("   %i\n", cr->resume());
-			state.path = reinterpret_cast<Path *>(cr);
-			state.ivar2 += 1;
-		} catch (LuaError & err) {
-			molog("  Lua program failed: %s\n", err.what());
-			send_signal(game, "fail"); //  mine empty, abort program
-			pop_task(game);
-			return true;
-		}
-	} else {
-		molog("  Advancing coroutine!\n");
-		LuaCoroutine * cr = reinterpret_cast<LuaCoroutine *>(state.path);
-		int rv = cr->resume();
-		molog("   %i\n", rv);
-		if (rv == 0) {
-			// All done, advance the program
-			++state.ivar1;
-			state.ivar2 = 0;
-		}
-	}
-
-	// Advance program state
 	schedule_act(game, 10);
 	return true;
 }
@@ -453,15 +400,18 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 
 	Map & map = game.map();
 	Area<FCoords> area (map.get_fcoords(get_position()), 0);
-	if (action.sparam1 == "immovable")
+	if (action.sparam1 == "immovable") {
+		bool found_reserved = false;
+
 		for (;; ++area.radius) {
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
-				informPlayer
-					(game,
-					 ref_cast<Building, PlayerImmovable>(*get_location(game)),
-					 Map_Object_Descr::get_attribute_name(action.iparam2));
+				if (!found_reserved)
+					informPlayer
+						(game,
+						 ref_cast<Building, PlayerImmovable>(*get_location(game)),
+						 Map_Object_Descr::get_attribute_name(action.iparam2));
 				return true;
 			}
 			std::vector<ImmovableFound> list;
@@ -472,12 +422,21 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 				map.find_reachable_immovables
 					(area, &list, cstep, FindImmovableAttribute(action.iparam2));
 
+			for (int idx = list.size() - 1; idx >= 0; idx--) {
+				if (upcast(Immovable, imm, list[idx].object)) {
+					if (imm->is_reserved_by_worker()) {
+						found_reserved = true;
+						list.erase(list.begin() + idx);
+					}
+				}
+			}
+
 			if (list.size()) {
-				state.objvar1 = list[game.logic_rand() % list.size()].object;
+				set_program_objvar(game, state, list[game.logic_rand() % list.size()].object);
 				break;
 			}
 		}
-	else
+	} else {
 		for (;; ++area.radius) {
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
@@ -497,10 +456,11 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 					(area, &list, cstep, FindBobAttribute(action.iparam2));
 
 			if (list.size()) {
-				state.objvar1 = list[game.logic_rand() % list.size()];
+				set_program_objvar(game, state, list[game.logic_rand() % list.size()]);
 				break;
 			}
 		}
+	}
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -1701,7 +1661,7 @@ const Bob::Task Worker::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Worker::program_update),
 	0,
-	0,
+	static_cast<Bob::Ptr>(&Worker::program_pop),
 	false
 };
 
@@ -1739,6 +1699,25 @@ void Worker::program_update(Game & game, State & state)
 	}
 }
 
+void Worker::program_pop(Game & game, State & state)
+{
+	set_program_objvar(game, state, 0);
+}
+
+void Worker::set_program_objvar(Game & game, State & state, Map_Object * obj)
+{
+	assert(state.task == &taskProgram);
+
+	if (upcast(Immovable, imm, state.objvar1.get(game))) {
+		imm->set_reserved_by_worker(false);
+	}
+
+	state.objvar1 = obj;
+
+	if (upcast(Immovable, imm, obj)) {
+		imm->set_reserved_by_worker(true);
+	}
+}
 
 const Bob::Task Worker::taskGowarehouse = {
 	"gowarehouse",

@@ -134,8 +134,7 @@ void Map_Players_Messages_Data_Packet::Read
 						}
 					messages.add_message
 						(*new Message
-						 	(s->get_string     ("sender", "") +
-						 	 std::string(" (loaded)"),
+						 	(s->get_string     ("sender", ""),
 						 	 sent,
 						 	 duration,
 						 	 s->get_name       (),
@@ -200,7 +199,7 @@ throw (_wexception)
 				 egbase.get_gametime() <= message.sent() + message.duration());
 			Section & s = prof.create_section_duplicate(message.title().c_str());
 			if (message.sender().size())
-				s.set_string("sender",    message.sender  () + " (saved)");
+				s.set_string("sender",    message.sender  ());
 			s.set_int      ("sent",      message.sent    ());
 			{
 				Duration const duration = message.duration();

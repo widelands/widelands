@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,15 +17,12 @@
  *
  */
 
-#define DEFINE_LANGUAGES  // So that the language array gets defined
-
 #include "options.h"
 
 #include "constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "languages.h"
 #include "profile/profile.h"
 #include "save_handler.h"
 #include "sound/sound_handler.h"
@@ -282,13 +279,44 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	if (not did_select_a_res)
 		m_reslist.select(m_reslist.size() - 1);
 
-	available_languages[0].name = _("System default language");
-	for (uint32_t i = 0; i < NR_LANGUAGES; ++i)
+	// Fill language list
+	m_language_list.add
+		(_("System default language"), "",
+		 g_gr->get_no_picture(), "" == opt.language);
+		 
+	filenameset_t files;
+	Section * s = &g_options.pull_section("global");
+	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
+	Profile ln("txts/languages");
+	s = &ln.pull_section("languages");
+	bool own_selected = false;
+
+	// Add translation directories to the list
+	for
+		(filenameset_t::iterator pname = files.begin();
+		 pname != files.end();
+		 ++pname)
+	{
+		char const * const path = pname->c_str();
+
+		if 
+			(!strcmp(FileSystem::FS_Filename(path), ".") ||
+			 !strcmp(FileSystem::FS_Filename(path), "..") ||
+			 !g_fs->IsDirectory(path))
+			continue;
+
+		char const * const abbrev = FileSystem::FS_Filename(path);
 		m_language_list.add
-			(available_languages[i].name.c_str(),
-			 available_languages[i].abbrev,
-			 g_gr->get_no_picture(),
-			 available_languages[i].abbrev == opt.language);
+			(s->get_string(abbrev, abbrev), abbrev,
+			 g_gr->get_no_picture(), abbrev == opt.language);
+		own_selected |= abbrev == opt.language;
+	}
+	// Add currently used language manually
+	if (!own_selected)
+		m_language_list.add
+			(s->get_string(opt.language.c_str(), opt.language.c_str()), opt.language,
+			 g_gr->get_no_picture(), true);
+		
 }
 
 void Fullscreen_Menu_Options::advanced_options() {

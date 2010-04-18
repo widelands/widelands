@@ -186,7 +186,7 @@ private:
  * only checks whether the target is an allowed location.
  */
 struct CheckStepLimited {
-	void add_allowed_location(Coords const c) {m_allowed_locations.insert(c);}
+	void add_allowed_location(const Coords & c) {m_allowed_locations.insert(c);}
 	bool allowed
 		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
 		const;

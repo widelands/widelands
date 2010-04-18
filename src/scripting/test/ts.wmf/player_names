@@ -1,0 +1,19 @@
+# Automatically created by Widelands bzr5243[lua] (Debug)
+
+[global]
+packet_version="1"
+
+[player_1]
+name="Player 1"
+tribe="barbarians"
+ai=
+
+[player_2]
+name="Player 2"
+tribe="empire"
+ai=
+
+[player_3]
+name="Player 3"
+tribe="atlanteans"
+ai=

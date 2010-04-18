@@ -354,10 +354,31 @@ void TrainingSite::request_soldier_callback
 	assert(s.get_location(game) == &tsite);
 	assert(tsite.m_soldier_request == &rq);
 
-	// bind the worker into this house, hide him on the map
+	tsite.incorporateSoldier(game, s);
+}
+
+/*
+===============
+Takes one soldier and adds him to ours
+
+returns 0 on succes, -1 if there was no room for this soldier
+===============
+*/
+int TrainingSite::incorporateSoldier(Game & game, Soldier & s) {
+	if (s.get_location(game) != this) {
+		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
+			return -1;
+
+		s.set_location(this);
+	}
+
+	// Bind the worker into this house, hide him on the map
 	s.start_task_idle(game, 0, -1);
 
-	tsite.update_soldier_request();
+	// Make sure the request count is reduced or the request is deleted.
+	update_soldier_request();
+
+	return 0;
 }
 
 

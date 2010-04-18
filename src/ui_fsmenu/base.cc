@@ -26,6 +26,7 @@
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
+#include "wexception.h"
 
 #include <cstdio>
 
@@ -71,6 +72,10 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
 	m_pic_background = g_gr->get_picture(PicMod_Menu, buffer);
+	if (m_pic_background == g_gr->get_no_picture())
+		 throw wexception
+			  ("couldn't open splash screen."
+				"make sure all the data files are installed properly");
 	m_res_background = g_gr->get_resized_picture
 			(m_pic_background, m_xres, m_yres, Graphic::ResizeMode_Loose);
 }

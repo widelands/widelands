@@ -344,8 +344,8 @@ void Building_Statistics_Menu::update() {
 	{
 		Widelands::Building_Descr const & building =
 			*tribe.get_building_descr(i);
-		if 
-			(not (building.is_buildable() 
+		if
+			(not (building.is_buildable()
 			 or building.is_enhanced()
 			 or building.global()))
 			continue;
@@ -382,8 +382,8 @@ void Building_Statistics_Menu::update() {
 				++nr_owned;
 				if (productionsite)
 					total_prod +=
-						ref_cast<Widelands::ProductionSite, Widelands::BaseImmovable>
-							(*map[vec[l].pos].get_immovable())
+					ref_cast<Widelands::ProductionSite, Widelands::BaseImmovable>
+						(*map[vec[l].pos].get_immovable())
 						.get_statistics_percent();
 			}
 		}

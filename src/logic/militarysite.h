@@ -91,6 +91,7 @@ public:
 	virtual uint32_t soldierCapacity() const;
 	virtual void setSoldierCapacity(uint32_t capacity);
 	virtual void dropSoldier(Soldier &);
+	virtual int incorporateSoldier(Game & game, Soldier & s);
 	// End implementation of SoldierControl
 
 	// Begin implementation of Attackable

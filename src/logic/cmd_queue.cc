@@ -26,7 +26,6 @@
 #include "machdep.h"
 #include "player.h"
 #include "playercommand.h"
-#include "trigger/trigger.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "worker.h"
@@ -54,8 +53,9 @@ void Cmd_Queue::flush() {
 	while (!m_cmds.empty()) {
 		Command * cmd = m_cmds.top().cmd;
 		m_cmds.pop();
-		// delete after pop, msvc2008 std::priority_queue::pop needs it for comparison.
-		delete cmd; 
+		// delete after pop, msvc2008 std::priority_queue::pop needs
+		// it for comparison.
+		delete cmd;
 	}
 }
 

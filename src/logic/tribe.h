@@ -201,7 +201,6 @@ struct Tribe_Descr {
 	struct Initialization {
 		std::string          name;
 		std::string          descname;
-		std::vector<Event *> events;
 	};
 	typedef std::vector<Initialization> Initializations;
 	Initialization const & initialization(uint8_t const index) const {

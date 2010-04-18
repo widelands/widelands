@@ -243,9 +243,10 @@ Immovable_Descr::Immovable_Descr
 		 	prof.get_section("terrain affinity"))
 	{
 		memset(it, 0, sizeof(m_terrain_affinity));
-		for(wl_index_range<Terrain_Index> i
+		for
+			(wl_index_range<Terrain_Index> i
 			(0, world.get_nr_terrains());
-			 i;++i, ++it)
+			 i; ++i, ++it)
 		{
 			char const * const terrain_type_name =
 				world.get_ter(i.current).name().c_str();
@@ -336,7 +337,8 @@ BaseImmovable (imm_descr),
 m_anim        (0),
 m_program     (0),
 m_program_ptr (0),
-m_program_step(0)
+m_program_step(0),
+m_reserved_by_worker(false)
 {}
 
 
@@ -470,6 +472,22 @@ void Immovable::draw
 		dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, 0);
 }
 
+/**
+ * Returns whether this immovable was reserved by a worker.
+ */
+bool Immovable::is_reserved_by_worker() const
+{
+	return m_reserved_by_worker;
+}
+
+/**
+ * Change whether this immovable is marked as reserved by a worker.
+ */
+void Immovable::set_reserved_by_worker(bool reserve)
+{
+	m_reserved_by_worker = reserve;
+}
+
 
 /*
 ==============================
@@ -479,7 +497,7 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 2
+#define IMMOVABLE_SAVEGAME_VERSION 3
 
 void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
@@ -536,6 +554,9 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	}
 
 	imm.m_program_step = fr.Signed32();
+
+	if (version >= 3)
+		imm.m_reserved_by_worker = fr.Unsigned8();
 }
 
 void Immovable::Loader::load_pointers()
@@ -559,7 +580,7 @@ void Immovable::Loader::load_finish()
 void Immovable::save
 	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
-	// This is in front because it is required to obtain the descriptiong
+	// This is in front because it is required to obtain the description
 	// necessary to create the Immovable
 	fw.Unsigned8(header_Immovable);
 	fw.Unsigned8(IMMOVABLE_SAVEGAME_VERSION);
@@ -585,6 +606,8 @@ void Immovable::save
 
 	fw.Unsigned32(m_program_ptr);
 	fw.Signed32(m_program_step);
+
+	fw.Unsigned8(m_reserved_by_worker);
 }
 
 Map_Object::Loader * Immovable::load

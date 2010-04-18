@@ -32,6 +32,7 @@
 #include "network_system.h"
 #include "logic/playercommand.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
@@ -116,6 +117,17 @@ NetClient::NetClient
 	d->realspeed = 0;
 	d->desiredspeed = 1000;
 	file = 0;
+
+	// Temporarily register win condition scripts to get the default
+	LuaInterface * lua = create_LuaInterface();
+	lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+	ScriptContainer sc = lua->get_scripts_for("win_conditions");
+	std::vector<std::string> win_conditions;
+	container_iterate_const(ScriptContainer, sc, wc)
+		win_conditions.push_back(wc->first);
+	assert(win_conditions.size());
+	d->settings.win_condition = win_conditions[0];
+	delete lua;
 }
 
 NetClient::~NetClient ()
@@ -369,6 +381,14 @@ bool NetClient::getPlayerReady(uint8_t const number) {
 		 d->settings.players.at(number).ready);
 }
 
+std::string NetClient::getWinCondition() {
+	return d->settings.win_condition;
+}
+
+void NetClient::setWinCondition(std::string) {
+	// Clients are not allowed to change this
+}
+
 void NetClient::setPlayerNumber(uint8_t const number)
 {
 	// If the playernumber we want to switch to is our own, there is no need
@@ -559,7 +579,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 #else
 					std::auto_ptr<char> complete_buf(new char[bytes]);
 					if (!complete_buf.get()) throw wexception("Out of memory");
-					char *complete = complete_buf.get();
+					char * complete = complete_buf.get();
 #endif
 					fr.DataComplete(complete, bytes);
 					MD5Checksum<FileRead> md5sum;
@@ -593,7 +613,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		g_fs->EnsureDirectoryExists(path);
 		break;
 	}
-	
+
 	case NETCMD_FILE_PART: {
 		uint32_t part = packet.Unsigned32();
 		uint8_t size = packet.Unsigned8();
@@ -642,7 +662,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 #else
 			std::auto_ptr<char> complete_buf(new char[file->bytes]);
 			if (!complete_buf.get()) throw wexception("Out of memory");
-			char *complete = complete_buf.get();
+			char * complete = complete_buf.get();
 #endif
 			fr.DataComplete(complete, file->bytes);
 			MD5Checksum<FileRead> md5sum;
@@ -706,6 +726,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->playernum = number;
 		d->settings.users.at(d->settings.usernum).position = number;
 		d->settings.playernum = number;
+		break;
+	}
+	case NETCMD_WIN_CONDITION: {
+		d->settings.win_condition = packet.String();
 		break;
 	}
 

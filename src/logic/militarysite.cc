@@ -223,6 +223,34 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 
 /*
 ===============
+Takes one soldier and adds him to ours
+
+returns 0 on succes, -1 if there was no room for this soldier
+===============
+*/
+int MilitarySite::incorporateSoldier(Game & game, Soldier & s) {
+	if (s.get_location(game) != this) {
+		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
+			return -1;
+
+		s.set_location(this);
+	}
+
+	if (not m_didconquer)
+		conquer_area(game);
+
+	// Bind the worker into this house, hide him on the map
+	s.reset_tasks(game);
+	s.start_task_buildingwork(game);
+
+	// Make sure the request count is reduced or the request is deleted.
+	update_soldier_request();
+
+	return 0;
+}
+
+/*
+===============
 Called when our soldier arrives.
 ===============
 */
@@ -236,17 +264,7 @@ void MilitarySite::request_soldier_callback
 	MilitarySite & msite = ref_cast<MilitarySite, PlayerImmovable>(target);
 	Soldier      & s     = ref_cast<Soldier,      Worker>         (*w);
 
-	assert(s.get_location(game) == &msite);
-
-	if (not msite.m_didconquer)
-		msite.conquer_area(game);
-
-	// Bind the worker into this house, hide him on the map
-	s.reset_tasks(game);
-	s.start_task_buildingwork(game);
-
-	// Make sure the request count is reduced or the request is deleted.
-	msite.update_soldier_request();
+	msite.incorporateSoldier(game, s);
 }
 
 

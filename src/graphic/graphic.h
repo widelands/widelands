@@ -26,13 +26,13 @@
 #include "surface.h"
 
 #include <png.h>
-#include <SDL_opengl.h>
 
 #include <vector>
+#include <boost/shared_ptr.hpp>
 
 #ifdef USE_OPENGL
 #define HAS_OPENGL 1
-#include <boost/shared_ptr.hpp>
+#include <SDL_opengl.h>
 #endif
 
 /**
@@ -93,7 +93,7 @@ struct Graphic {
 	void update_rectangle(Rect const & rect) {
 		update_rectangle (rect.x, rect.y, rect.w, rect.h);
 	}
-	bool need_update();
+	bool need_update() const;
 	void refresh(bool force = true);
 
 	void flush(PicMod module);
