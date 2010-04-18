@@ -195,15 +195,12 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	g_fs->PutRightVersionOnTop();
 }
 void WLApplication::setup_homedir() {
-	std::string path = FileSystem::GetHomedir();
-
 	//If we don't have a home directory don't do anything
-	if (path.size()) {
-		RealFSImpl(path).EnsureDirectoryExists(".widelands");
-		path += "/.widelands";
+	if (m_homedir.size()) {
+		//assume some dir exists
 		try {
-			log ("Set home directory: %s\n", path.c_str());
-			g_fs->SetHomeFileSystem(FileSystem::Create(path.c_str()));
+			log ("Set home directory: %s\n", m_homedir.c_str());
+			g_fs->SetHomeFileSystem(FileSystem::Create(m_homedir.c_str()));
 		} catch (FileNotFound_error     const & e) {
 		} catch (FileAccessDenied_error const & e) {
 			log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
@@ -268,7 +265,8 @@ m_gfx_double_buffer    (false),
 #if HAS_OPENGL
 m_gfx_opengl           (false),
 #endif
-m_default_datadirs     (true)
+m_default_datadirs     (true),
+m_homedir(FileSystem::GetHomedir() + "/.widelands")
 {
 	g_fs = new LayeredFileSystem();
 	UI::g_fh = new UI::Font_Handler();
@@ -1145,6 +1143,11 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_default_datadirs = false;
 		m_commandline.erase("datadir");
 	}
+	if (m_commandline.count("homedir")) {
+		log ("Adding home directory: %s\n", m_commandline["homedir"].c_str());
+		m_homedir = m_commandline["homedir"];
+		m_commandline.erase("homedir");
+	}
 
 	if (m_commandline.count("double")) {
 #ifdef DEBUG
@@ -1289,6 +1292,11 @@ void WLApplication::show_usage()
 			 "                      terminal output\n"
 			 " --datadir=DIRNAME    Use specified direction for the widelands\n"
 			 "                      data files\n"
+			 " --homedir=DIRNAME    Use specified directory for widelands config\n"
+			 "                      files, savegames and replays"
+#ifdef linux
+			 "                      Default is ~/.widelands"
+#endif
 			 " --record=FILENAME    Record all events to the given filename for\n"
 			 "                      later playback\n"
 			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
