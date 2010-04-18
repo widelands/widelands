@@ -285,10 +285,10 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		 g_gr->get_no_picture(), "" == opt.language);
 		 
 	filenameset_t files;
-	Section & s = g_options.pull_section("global");
-	g_fs->FindFiles(s.get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
+	Section * s = &g_options.pull_section("global");
+	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
 	Profile ln("txts/languages");
-	s = ln.pull_section("languages");
+	s = &ln.pull_section("languages");
 	bool own_selected = false;
 
 	// Add translation directories to the list
@@ -307,14 +307,14 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 		char const * const abbrev = FileSystem::FS_Filename(path);
 		m_language_list.add
-			(s.get_string(abbrev, abbrev), abbrev,
+			(s->get_string(abbrev, abbrev), abbrev,
 			 g_gr->get_no_picture(), abbrev == opt.language);
 		own_selected |= abbrev == opt.language;
 	}
 	// Add currently used language manually
 	if (!own_selected)
 		m_language_list.add
-			(s.get_string(opt.language.c_str(), opt.language.c_str()), opt.language,
+			(s->get_string(opt.language.c_str(), opt.language.c_str()), opt.language,
 			 g_gr->get_no_picture(), true);
 		
 }
