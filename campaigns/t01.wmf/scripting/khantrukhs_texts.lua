@@ -90,7 +90,7 @@ _[[ "I am well aware, chieftain, that neither you nor your warriors have the des
 _"* Build two quarries southwest of your headquarters." ..
 "</p></rt>"
 
-khantrukh_8 =_ "<rt image=map:khantrukh.png><p line-spacing=3 font-size=12>" ..
+khantrukh_8 = "<rt image=map:khantrukh.png><p line-spacing=3 font-size=12>" ..
 _[[ "Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>--------------------- VICTORY! ----------------------<br><br> You may continue if you wish. Otherwise, move on to the next mission." ]] ..
 "</p></rt>"
 
