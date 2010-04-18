@@ -514,7 +514,7 @@ void Flag::call_carrier
 	// Deal with the non-moving case quickly
 	if (!nextstep) {
 		pi->nextstep = 0;
-		pi->pending = false;
+		pi->pending = true;
 		return;
 	}
 
