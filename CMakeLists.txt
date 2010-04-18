@@ -389,6 +389,8 @@ if (${CMAKE_BUILD_TYPE} STREQUAL Release)
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
     COMMAND cmake -E echo "Preparing directory maps"
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND cmake -E echo "Preparing directory scripting"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/scripting ${CMAKE_CURRENT_BINARY_DIR}/scripting
     COMMAND cmake -E echo "Preparing directory tribes"
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
     COMMAND cmake -E echo "Preparing directory txts"
@@ -408,6 +410,8 @@ else (${CMAKE_BUILD_TYPE} STREQUAL Release)
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
     COMMAND cmake -E echo "Preparing directory maps"
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND cmake -E echo "Preparing directory scripting"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/scripting ${CMAKE_CURRENT_BINARY_DIR}/scripting
     COMMAND cmake -E echo "Preparing directory tribes"
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
     COMMAND cmake -E echo "Preparing directory txts"
