@@ -400,7 +400,7 @@ Does not perform any placability checks.
 ===============
 */
 Immovable & Editor_Game_Base::create_immovable
-	(Coords const c, int32_t const idx, Tribe_Descr const * const tribe)
+	(Coords const c, uint32_t const idx, Tribe_Descr const * const tribe)
 {
 	if (idx < 0)
 		throw wexception
