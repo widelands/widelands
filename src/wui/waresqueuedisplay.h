@@ -21,6 +21,7 @@
 #define _WARESQUEUEDISPLAY_H_
 
 #include <cstdlib>
+#include <stdint.h>
 
 struct Interactive_GameBase;
 
