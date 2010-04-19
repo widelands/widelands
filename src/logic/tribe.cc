@@ -455,6 +455,12 @@ uint32_t Tribe_Descr::get_resource_indicator
 			((static_cast<float>(amount) / res->get_max_amount())
 			 *
 			 num_indicators);
+	if (bestmatch > num_indicators)
+		throw game_data_error
+			("Amount of %s is %i but max amount is %i",
+			 res->name().c_str(),
+			 amount,
+			 res->get_max_amount());
 	if (static_cast<int32_t>(amount) < res->get_max_amount())
 		bestmatch += 1; // Resi start with 1, not 0
 

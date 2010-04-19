@@ -35,4 +35,4 @@ mv VERSION ../../VERSION
 mv src/widelands ../../widelands
 
 cd ../..
-./widelands
+#./widelands

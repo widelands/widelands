@@ -402,12 +402,18 @@ Does not perform any placability checks.
 Immovable & Editor_Game_Base::create_immovable
 	(Coords const c, int32_t const idx, Tribe_Descr const * const tribe)
 {
+	if (idx < 0)
+		throw wexception
+			("Editor_Game_Base::create_immovable(%i, %i): %i is not defined for "
+			 "%s",
+			 c.x, c.y, idx, tribe ? tribe->name().c_str() : "world");
 	Immovable_Descr const & descr =
 		*
 		(tribe ?
 		 tribe->get_immovable_descr(idx)
 		 :
 		 m_map->world().get_immovable_descr(idx));
+	assert(&descr);
 	inform_players_about_immovable
 		(Map::get_index(c, map().get_width()), &descr);
 	return descr.create(*this, c);
