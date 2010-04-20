@@ -70,29 +70,34 @@ end
 function build_lumberjack()
    sleep(100)
 
-   msg_box(lumberjack_message_01)
-   msg_box(lumberjack_message_02)
+   -- msg_box(lumberjack_message_01)
+   -- msg_box(lumberjack_message_02)
 
-   plr:place_building("lumberjacks_hut", first_lumberjack_field, true)
-   msg_box(lumberjack_message_03)
+   ui = wl.ui.get()
+   ui:click(first_lumberjack_field)
 
-   plr:place_road(first_lumberjack_field.brn.immovable, "l", "tl", "l", "l")
-   msg_box(lumberjack_message_04)
-   sleep(15000) 
+   sleep(1000)
 
-   msg_box(lumberjack_message_05)
-
-   -- Wait for flag
-   local f = wl.map.Field(14,11)
-   while not (f.immovable and f.immovable.type == "flag") do sleep(300) end
-
-   msg_box(lumberjack_message_06)
-
-   while #plr:get_buildings("lumberjacks_hut") < 1 do sleep(300) end
-   
-   msg_box(lumberjack_message_07)
-
-   learn_to_move()
+   -- plr:place_building("lumberjacks_hut", first_lumberjack_field, true)
+   -- msg_box(lumberjack_message_03)
+   --
+   -- plr:place_road(first_lumberjack_field.brn.immovable, "l", "tl", "l", "l")
+   -- msg_box(lumberjack_message_04)
+   -- sleep(15000)
+   --
+   -- msg_box(lumberjack_message_05)
+   --
+   -- -- Wait for flag
+   -- local f = wl.map.Field(14,11)
+   -- while not (f.immovable and f.immovable.type == "flag") do sleep(300) end
+   --
+   -- msg_box(lumberjack_message_06)
+   --
+   -- while #plr:get_buildings("lumberjacks_hut") < 1 do sleep(300) end
+   --
+   -- msg_box(lumberjack_message_07)
+   --
+   -- learn_to_move()
 end
 
 function learn_to_move()
@@ -212,5 +217,6 @@ function conclusion()
 
 end
 
-run(starting_infos)
+-- run(starting_infos)
+run(build_lumberjack)
 
