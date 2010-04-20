@@ -22,7 +22,9 @@
 #include "upcast.h"
 #include "wui/interactive_player.h"
 
+
 #include "c_utils.h"
+#include "lua_map.h"
 
 #include "lua_ui.h"
 
@@ -190,6 +192,38 @@ int L_UniqueWindow::close(lua_State * L) {
  * C Functions
  */
 
+// TODO: document me somehow
+const char L_MapView::className[] = "MapView";
+const MethodType<L_MapView> L_MapView::Methods[] = {
+	METHOD(L_MapView, click),
+	METHOD(L_MapView, move_mouse_to),
+	{0, 0},
+};
+const PropertyType<L_MapView> L_MapView::Properties[] = {
+	{0, 0, 0},
+};
+
+/*
+ * Properties
+ */
+
+/*
+ * Lua Functions
+ */
+int L_MapView::move_mouse_to(lua_State * L) {
+	get()->warp_mouse_to_node((*get_user_class<L_Field>(L, 2))->coords());
+	return 0;
+}
+int L_MapView::click(lua_State * L) {
+	get()->warp_mouse_to_node((*get_user_class<L_Field>(L, 2))->coords());
+	get()->fieldclicked.call();
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
 
 /*
  * ========================================================================
@@ -207,7 +241,7 @@ int L_UniqueWindow::close(lua_State * L) {
 	:rtype: class:`Panel`
 */
 static int L_get(lua_State * L) {
-	to_lua<L_Panel>(L, new L_Panel(get_game(L).get_ipl()));
+	to_lua<L_MapView>(L, new L_MapView(get_game(L).get_ipl()));
 	return 1;
 }
 static int L_get_message_window(lua_State * L) {
@@ -234,6 +268,10 @@ void luaopen_wlui(lua_State * L) {
 
 	register_class<L_UniqueWindow>(L, "ui", true);
 	add_parent<L_UniqueWindow, L_Panel>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_MapView>(L, "ui", true);
+	add_parent<L_MapView, L_Panel>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 }

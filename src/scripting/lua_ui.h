@@ -24,11 +24,11 @@
 
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
+#include "wui/mapview.h"
 
 #include "luna.h"
 
 void luaopen_wlui(lua_State *);
-
 
 /*
  * Base class for all classes in wl.ui
@@ -127,6 +127,32 @@ public:
 	 * C Methods
 	 */
 };
+
+class L_MapView : public L_Panel {
+public:
+	LUNA_CLASS_HEAD(L_MapView);
+
+	L_MapView() : L_Panel() {}
+	L_MapView(Map_View * p) : L_Panel(p) {};
+	L_MapView(lua_State * L) : L_Panel(L) {}
+	virtual ~L_MapView() {}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua Methods
+	 */
+	int click(lua_State * L);
+	int move_mouse_to(lua_State * L);
+
+	/*
+	 * C Methods
+	 */
+	Map_View * get() {return static_cast<Map_View *>(m_panel);}
+};
+
 
 
 #endif
