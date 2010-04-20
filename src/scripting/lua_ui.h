@@ -23,6 +23,7 @@
 #include <lua.hpp>
 
 #include "ui_basic/button.h"
+#include "ui_basic/unique_window.h"
 
 #include "luna.h"
 
@@ -101,5 +102,31 @@ public:
 	 */
 	UI::Button * get() {return static_cast<UI::Button *>(m_panel);}
 };
+
+class L_UniqueWindow : public L_Panel {
+	UI::UniqueWindow::Registry * m_reg;
+
+public:
+	LUNA_CLASS_HEAD(L_UniqueWindow);
+
+	L_UniqueWindow() : L_Panel() {}
+	L_UniqueWindow(UI::UniqueWindow::Registry * p);
+	L_UniqueWindow(lua_State * L) : L_Panel(L) {}
+	virtual ~L_UniqueWindow() {}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua Methods
+	 */
+	int close(lua_State * L);
+
+	/*
+	 * C Methods
+	 */
+};
+
 
 #endif

@@ -137,22 +137,59 @@ int L_Button::get_name(lua_State * L) {
 int L_Button::press(lua_State * L) {
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
+	return 0;
 }
 // TODO: docu
 // UNTESTED
 int L_Button::release(lua_State * L) {
 	get()->handle_mousein(true);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
+	return 0;
 }
 // TODO: docu
 int L_Button::click(lua_State * L) {
 	press(L);
 	release(L);
+	return 0;
 }
 
 /*
  * C Functions
  */
+
+
+// TODO: document me somehow
+const char L_UniqueWindow::className[] = "UniqueWindow";
+const MethodType<L_UniqueWindow> L_UniqueWindow::Methods[] = {
+	METHOD(L_UniqueWindow, close),
+	{0, 0},
+};
+const PropertyType<L_UniqueWindow> L_UniqueWindow::Properties[] = {
+	{0, 0, 0},
+};
+
+L_UniqueWindow::L_UniqueWindow(UI::UniqueWindow::Registry * p) :
+	L_Panel(p->window), m_reg(p) {
+		assert(p->window);
+}
+
+/*
+ * Properties
+ */
+
+/*
+ * Lua Functions
+ */
+int L_UniqueWindow::close(lua_State * L) {
+	delete m_reg->window;
+	m_reg->window = 0;
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
 
 /*
  * ========================================================================
@@ -173,8 +210,15 @@ static int L_get(lua_State * L) {
 	to_lua<L_Panel>(L, new L_Panel(get_game(L).get_ipl()));
 	return 1;
 }
+static int L_get_message_window(lua_State * L) {
+	to_lua<L_UniqueWindow>(L,
+			new L_UniqueWindow(&get_game(L).get_ipl()->get_message_menu()));
+	return 1;
+}
+
 const static struct luaL_reg wlui [] = {
 	{"get", &L_get},
+	{"get_message_window", &L_get_message_window},
 	{0, 0}
 };
 
@@ -186,6 +230,10 @@ void luaopen_wlui(lua_State * L) {
 
 	register_class<L_Button>(L, "ui", true);
 	add_parent<L_Button, L_Panel>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_UniqueWindow>(L, "ui", true);
+	add_parent<L_UniqueWindow, L_Panel>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 }
