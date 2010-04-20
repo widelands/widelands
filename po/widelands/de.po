@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-17 00:48+0200\n"
-"PO-Revision-Date: 2010-04-18 00:37+0000\n"
-"Last-Translator: Martin Claus <Unknown>\n"
+"PO-Revision-Date: 2010-04-19 18:53+0000\n"
+"Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-19 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-04-20 03:30+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:1724
@@ -1027,7 +1027,7 @@ msgstr "Lade Stamm: %s"
 
 #: ../../src/editor/editorinteractive.cc:175
 msgid "Creating players"
-msgstr ""
+msgstr "Spieler erstellen"
 
 #: ../../src/editor/editorinteractive.cc:182
 #: ../../src/logic/editor_game_base.cc:313
@@ -2937,7 +2937,7 @@ msgstr "Wähle eine Aufnahme!"
 
 #: ../../src/ui_fsmenu/main.cc:42
 msgid "Play Tutorial"
-msgstr ""
+msgstr "Tutorial spielen"
 
 #: ../../src/ui_fsmenu/main.cc:49
 msgid "Single Player"
@@ -3870,7 +3870,7 @@ msgstr "Leeres Passwort"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Please enter your password!"
-msgstr ""
+msgstr "Bitte gib dein Passwort ein!"
 
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68

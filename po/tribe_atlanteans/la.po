@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-16 22:48+0000\n"
-"PO-Revision-Date: 2010-04-16 18:44+0000\n"
+"PO-Revision-Date: 2010-04-19 19:38+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-17 03:46+0000\n"
+"X-Launchpad-Export-Date: 2010-04-20 03:30+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -30,12 +30,15 @@ msgid ""
 "All atlantean soldiers have to wear the sign of their country on their "
 "chests."
 msgstr ""
+"Signum patriae omnibus militibus Atlantidinibus in pectore portandum est."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
 "Already one of the best tridents of the Atlanteans. Only used by very good "
 "fighters."
 msgstr ""
+"Unus ex optimis tridentibus Atlantidensibus. Quem solum optimi milites "
+"utuntur."
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Armoursmith"
@@ -148,7 +151,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr ""
+msgstr "Atlantidenses equos fortissimos alit."
 
 #: ../../tribes/atlanteans/conf:69
 msgid "Buckets"
@@ -280,11 +283,11 @@ msgstr "Carcer"
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Farm"
-msgstr "Agri"
+msgstr "Fundus"
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Farmer"
-msgstr "Colonus"
+msgstr "Agricola"
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
@@ -316,7 +319,7 @@ msgstr "Piscator"
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Fisher's House"
-msgstr "Domus pistoria"
+msgstr "Casa pistoria"
 
 #: ../../tribes/atlanteans/conf:76
 msgid "Fishing Net"
@@ -431,7 +434,7 @@ msgstr "Venator"
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Hunter's House"
-msgstr "Domus venatoris"
+msgstr "Casa venatoris"
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Hunting Bow"
@@ -665,7 +668,7 @@ msgstr "Textum pro aedificiis navibusque militibusque facit."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Instrumenta pro operis fabricat."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
@@ -880,7 +883,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-msgstr ""
+msgstr "Venator bonum carinem ad Atlantidenses portat."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""

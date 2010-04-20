@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-16 22:48+0000\n"
-"PO-Revision-Date: 2010-04-16 18:52+0000\n"
+"PO-Revision-Date: 2010-04-19 19:20+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-17 03:46+0000\n"
+"X-Launchpad-Export-Date: 2010-04-20 03:30+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -51,19 +51,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:120
 msgid "Baker"
-msgstr ""
+msgstr "Pistor"
 
 #: ../../tribes/barbarians/conf:186
 msgid "Bakery"
-msgstr ""
+msgstr "Pistrina"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Panem laboranti fingit."
 
 #: ../../tribes/barbarians/conf:19
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../tribes/barbarians/conf:171
 msgid "Barracks"
@@ -80,7 +80,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:152
 msgid "Battle Arena"
-msgstr ""
+msgstr "Arena"
 
 #: ../../tribes/barbarians/conf:73
 msgid "Battle Axe"
@@ -129,7 +129,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:125
 msgid "Builder"
-msgstr ""
+msgstr "Architectus"
 
 #: ../../tribes/barbarians/conf:126
 msgid "Burner"
@@ -234,11 +234,11 @@ msgstr "Cervus"
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Defendite et occupate!"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Destroyed building"
-msgstr ""
+msgstr "Aedificium destructum"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -250,15 +250,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:197
 msgid "Farm"
-msgstr ""
+msgstr "Fundus"
 
 #: ../../tribes/barbarians/conf:129
 msgid "Farmer"
-msgstr ""
+msgstr "Agricola"
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "Arbores caedit."
 
 #: ../../tribes/barbarians/conf:130
 msgid "Ferner"
@@ -270,7 +270,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:46
 msgid "Field harvested"
-msgstr ""
+msgstr "Ager messus"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Field medium"
@@ -290,7 +290,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:80
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Forceps"
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
@@ -304,11 +304,11 @@ msgstr "Piscis"
 
 #: ../../tribes/barbarians/conf:131
 msgid "Fisher"
-msgstr ""
+msgstr "Piscator"
 
 #: ../../tribes/barbarians/conf:199
 msgid "Fisher's Hut"
-msgstr ""
+msgstr "Casa piscaria"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Fishing Rod"
@@ -357,11 +357,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:133
 msgid "Geologist"
-msgstr ""
+msgstr "Geologus"
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr ""
+msgstr "Pisces capit."
 
 #: ../../tribes/barbarians/conf:84
 msgid "Gold"
@@ -432,7 +432,7 @@ msgstr "Galea"
 
 #: ../../tribes/barbarians/conf:134
 msgid "Helmsmith"
-msgstr ""
+msgstr "Galearum faber"
 
 #: ../../tribes/barbarians/conf:204
 msgid "Helmsmithy"
@@ -456,7 +456,7 @@ msgstr "Venator"
 
 #: ../../tribes/barbarians/conf:205
 msgid "Hunter's Hut"
-msgstr ""
+msgstr "Casa venatoris"
 
 #: ../../tribes/barbarians/conf:89
 msgid "Hunting Spear"
@@ -476,7 +476,7 @@ msgstr "Ferrum"
 
 #: ../../tribes/barbarians/conf:91
 msgid "Iron Ore"
-msgstr ""
+msgstr "Aes ferreum"
 
 #: ../../tribes/barbarians/conf:211
 msgid "Iron Ore Mine"
@@ -496,11 +496,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:138
 msgid "Lumberjack"
-msgstr ""
+msgstr "Lignator"
 
 #: ../../tribes/barbarians/conf:208
 msgid "Lumberjack's Hut"
-msgstr ""
+msgstr "Casa lignatoris"
 
 #: ../../tribes/barbarians/conf:93
 msgid "Mask"
@@ -524,7 +524,7 @@ msgstr "Cena"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Meat"
-msgstr ""
+msgstr "Caro"
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -561,11 +561,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:72
 msgid "Peel"
-msgstr ""
+msgstr "Pala pistoria"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Pick"
-msgstr ""
+msgstr "Dolabra"
 
 #: ../../tribes/barbarians/conf:97
 msgid "Pitta Bread"
@@ -595,11 +595,11 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/conf:33
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr ""
+msgstr "Axiam fabricat"
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Palam pistoriam fabricat"
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"
@@ -616,7 +616,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Forcipem fabricat."
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
@@ -628,7 +628,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr ""
+msgstr "Galeam fabricat."
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
@@ -648,17 +648,17 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr ""
+msgstr "Dolabram fabricat."
 
 #: ../../tribes/barbarians/big_inn/conf:24
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr ""
+msgstr "Cibus coquit"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr ""
+msgstr "Falcem fabricat."
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
@@ -672,7 +672,7 @@ msgstr ""
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr ""
+msgstr "Gustationem coquit"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
@@ -707,15 +707,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:140
 msgid "Ranger"
-msgstr ""
+msgstr "Saltuarius"
 
 #: ../../tribes/barbarians/conf:213
 msgid "Ranger's Hut"
-msgstr ""
+msgstr "Casa saltuarius"
 
 #: ../../tribes/barbarians/conf:98
 msgid "Ration"
-msgstr ""
+msgstr "Cibus"
 
 #: ../../tribes/barbarians/conf:99
 msgid "Raw Stone"
@@ -756,43 +756,43 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Est indicatum hic carbonem paucum situm"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Est indicatum hic carbonem multum situm"
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Est indicatum hic aurum paucum situm"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Est indicatum hic aurum multum situm"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator granit little"
-msgstr ""
+msgstr "Est indicatum hic granatum paucum situm"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator granit much"
-msgstr ""
+msgstr "Est indicatum hic granatum multum situm"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Est indicatum hic ferrum paucum situm"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Est indicatum hic ferrum multum situm"
 
 #: ../../tribes/barbarians/conf:63
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Est indicatum hic nihil situm"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Est indicatum hic aqua sita"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Scout"
@@ -859,7 +859,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:103
 msgid "Snack"
-msgstr ""
+msgstr "Gustatio"
 
 #: ../../tribes/barbarians/conf:117
 msgid "Soldier"
@@ -999,7 +999,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:169
 #: ../../tribes/barbarians/conf:176
 msgid "Tower"
-msgstr ""
+msgstr "Turris"
 
 #: ../../tribes/barbarians/conf:143
 msgid "Trainer"
@@ -1129,7 +1129,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:181
 msgid "Warehouse"
-msgstr ""
+msgstr "Horreum"
 
 #: ../../tribes/barbarians/conf:108
 msgid "Warriors Axe"
@@ -1157,15 +1157,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:144
 msgid "Weaver"
-msgstr ""
+msgstr "Textor"
 
 #: ../../tribes/barbarians/conf:216
 msgid "Weaving-Mill"
-msgstr ""
+msgstr "Textrinum"
 
 #: ../../tribes/barbarians/conf:217
 msgid "Well"
-msgstr ""
+msgstr "Fons"
 
 #: ../../tribes/barbarians/conf:110
 msgid "Wheat"
@@ -1226,7 +1226,7 @@ msgstr "Labor"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "In areis ad novum aedificium construendum laborat."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
