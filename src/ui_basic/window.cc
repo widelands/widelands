@@ -112,13 +112,22 @@ void Window::set_title(char const * const text)
 }
 
 /**
- * Move the window so that it is under the mouse cursor.
+ * Move the window so that it is centered under the mouse cursor.
 */
 void Window::move_to_mouse() {
 	set_pos(get_mouse_position() - Point(get_w() / 2, get_h() / 2));
 	move_inside_parent();
 }
 
+/**
+ * Move the window so that the given point \p pt - interpreted as inner coordinates
+ * inside the window - is centered under the mouse cursor.
+ */
+void Window::move_to_mouse(const Point & pt)
+{
+	set_pos(get_pos() + get_mouse_position() - pt);
+	move_inside_parent();
+}
 
 /**
  * Move the window so that it is inside the parent panel.
