@@ -11,5 +11,5 @@ hotspot=5 5
 
 [idle_with_worker]
 pics=idle_with_worker_??.png
-hotspot=5 5
+hotspot=33 40
 
