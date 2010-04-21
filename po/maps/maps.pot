@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-16 22:48+0000\n"
+"POT-Creation-Date: 2010-04-21 17:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -84,7 +84,7 @@ msgid ""
 "Comet Island"
 msgstr ""
 
-#: ../../maps/Crater.wmf/elemental:9
+#: ../../maps/Crater.wmf/elemental:7
 msgid ""
 "Crater"
 msgstr ""
@@ -214,7 +214,7 @@ msgid ""
 "Last Bastion"
 msgstr ""
 
-#: ../../maps/Crater.wmf/elemental:11
+#: ../../maps/Crater.wmf/elemental:9
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the crater. Two tribes are now fighting for the rich resources."
 msgstr ""
@@ -251,7 +251,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:33
 msgid ""
-"Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
+"Six months ago, Lutius - a young general of the Empire - was send with 150 soldiers to the frontier beyond the northern forests where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. At first, everything was calm. He even talked to a few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."
 msgstr ""
 
 #: ../../campaigns/cconfig:39
