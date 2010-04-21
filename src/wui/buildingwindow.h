@@ -53,10 +53,14 @@ struct Building_Window : public UI::Window {
 	virtual void think();
 
 protected:
+	void set_center_mouse(UI::Panel * panel);
+
 	UI::Tab_Panel * get_tabs() {return m_tabs;}
 
 	void act_bulldoze();
 	void act_debug();
+	void show_workarea();
+	void hide_workarea();
 	void toggle_workarea();
 	void act_start_stop();
 	void act_enhance(Widelands::Building_Index);
@@ -71,6 +75,8 @@ protected:
 
 private:
 	Widelands::Building & m_building;
+
+	UI::Panel * m_center_mouse;
 
 	UI::Tab_Panel * m_tabs;
 
