@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-17 00:48+0200\n"
-"PO-Revision-Date: 2010-04-19 18:33+0000\n"
+"PO-Revision-Date: 2010-04-20 20:07+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-20 03:30+0000\n"
+"X-Launchpad-Export-Date: 2010-04-21 04:03+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -3752,11 +3752,11 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " walk"
-msgstr ""
+msgstr " ire"
 
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " swim"
-msgstr ""
+msgstr " natare"
 
 #: ../../src/editor/tools/editor_info_tool.cc:71
 #, c-format
@@ -3793,6 +3793,9 @@ msgid ""
 " Size: %ix%i\n"
 " Author: "
 msgstr ""
+"\n"
+" Magnitudo: %ix%i\n"
+" Auctor: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 #: ../../src/editor/tools/editor_info_tool.cc:107
@@ -3800,6 +3803,8 @@ msgid ""
 "\n"
 " Descr: "
 msgstr ""
+"\n"
+" Descr: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:100
 #, c-format
@@ -3807,6 +3812,8 @@ msgid ""
 "\n"
 " Number of Players: %i\n"
 msgstr ""
+"\n"
+" Numerus ludorum: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 msgid ""
@@ -3819,6 +3826,8 @@ msgid ""
 "\n"
 " Author: "
 msgstr ""
+"\n"
+" Auctor: "
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
@@ -3828,46 +3837,46 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu.cc:73
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
 msgid "Save Map"
-msgstr ""
+msgstr "Tabulam servare"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:79
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:61
 msgid "Map Options"
-msgstr ""
+msgstr "Optiones tabulae"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:91
 msgid "Exit Editor"
-msgstr ""
+msgstr "Editorem finire"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:68
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
 msgid "Name: "
-msgstr ""
+msgstr "Nomen: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:75
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
 msgid "Author: "
-msgstr ""
+msgstr "Auctor: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:82
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:97
 msgid "Size: "
-msgstr ""
+msgstr "Magnitudo: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:89
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
 msgid "World: "
-msgstr ""
+msgstr "Mundus: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:96
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:111
 msgid "Players: "
-msgstr ""
+msgstr "Ludores: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:104
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:118
 msgid "Descr: "
-msgstr ""
+msgstr "Descr: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:46
 msgid "Set origin"
@@ -3901,7 +3910,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:125
 msgid "Create Map"
-msgstr ""
+msgstr "Tabulam creare"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:68
 msgid "Random Number:"
@@ -3945,7 +3954,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:281
 msgid "Map ID:"
-msgstr ""
+msgstr "Tabulae ID:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:302
 msgid "Generate Map"
@@ -4019,7 +4028,7 @@ msgstr "Ludorem adde"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:56
 msgid "Remove last player"
-msgstr ""
+msgstr "Postremum ludorem remove"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:67
 msgid "Number of Players"
@@ -4118,12 +4127,12 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:138
 #, c-format
 msgid "Minimum: %u"
-msgstr ""
+msgstr "Minimum: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:140
 #, c-format
 msgid "Maximum: %u"
-msgstr ""
+msgstr "Maximum: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:145
 #, c-format
@@ -4132,11 +4141,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
 msgid "Bobs Menu"
-msgstr ""
+msgstr "Natura mobilis"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs Menu"
-msgstr ""
+msgstr "Natura immobilis"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:42
 msgid "Terrain Select"

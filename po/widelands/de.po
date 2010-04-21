@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-17 00:48+0200\n"
-"PO-Revision-Date: 2010-04-19 18:53+0000\n"
-"Last-Translator: Sonnrain <Unknown>\n"
+"PO-Revision-Date: 2010-04-20 12:13+0000\n"
+"Last-Translator: Thomas <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-20 03:30+0000\n"
+"X-Launchpad-Export-Date: 2010-04-21 04:03+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:1724
@@ -50,6 +50,9 @@ msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Habe 5 Sekunden gewartet um Audio zu beenden. Es gibt hier Probleme, daher "
+"wird Widelands abgebrochen. Bitte den Sound-Treiber und/oder SDL updaten, um "
+"das Problem zu beheben.\n"
 
 #: ../../src/wlapplication.cc:1110
 msgid ""
@@ -108,6 +111,25 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --<config-Eintragsname>=Wert übersteuert beliebige Einräge aus der "
+"Konfigurarationsdatei\n"
+"--logfile=DATEINAME Schreibe Output nach DATEINAME statt Konsole\n"
+"--datadir=VERZEICIHNISNAME Nimm das angegebene Verzeichis für\n"
+"                     die Widelands Datendateien\n"
+"--record=DATEINAME Alle Ereigniss in diese Datei schreiben für\n"
+"                     spätere Wiedergabe\n"
+"--playback=DATEINAME Diese Datei wiedergeben (siehe --record)\n"
+"\n"
+"--coredump=[yes|no] Erzeugt Core Dump Datei bei Segmentfehlern statt SDL zu "
+"verwenden\n"
+"--language=[de_DE|sv_SE]...]\n"
+"                     zu verwendende Lokalisierung\n"
+"--localedir=VERZEICHNISNAME Hier die Lokalisierung verwenden\n"
+"--remove_syncstreams=[true|false]\n"
+"                     Synchronisationsstreams beim Start löschen\n"
+"--remove_replays=[...]\n"
+"                     Replays nach dieser Anzahl von Tagen entfernen\n"
+"                     wenn =0 erfolgt keine Löschung\n"
 
 #: ../../src/wlapplication.cc:1263
 msgid ""
@@ -260,7 +282,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1341
 msgid " --verbose            Enable verbose debug messages\n"
-msgstr ""
+msgstr " --verbose Ausführliche Debugmeldungen ermöglichen\n"
 
 #: ../../src/wlapplication.cc:1342
 msgid " --help               Show this help\n"
@@ -274,6 +296,10 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
+"Fehlermeldungen? Vorschläge? Schau auf der Projekt Webseite nach:\n"
+"        https://launchpad.net/widelands\n"
+"Wir hoffen, die gefällt dieses Spiel!\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1497
 msgid "Warning: "
@@ -3235,7 +3261,7 @@ msgstr "Grafik Doppelbufferung."
 
 #: ../../src/ui_fsmenu/options.cc:439
 msgid "Remove Syncstream dumps on startup"
-msgstr "Entferne Abgleichungsflussentladungen beim Starten"
+msgstr "Sychronisationsdaten-Stream beim Start löschen"
 
 #: ../../src/ui_fsmenu/options.cc:461
 msgid "Pause"
@@ -3838,7 +3864,7 @@ msgstr "ACHTUNG: Passwort wird lesbar angezeigt und gespeichert!"
 
 #: ../../src/wui/login_box.cc:52
 msgid "Log in to a registered account"
-msgstr ""
+msgstr "Log dich mit einem registrierten Account ein"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Automatically use this login information from now on."
@@ -4286,6 +4312,9 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
+"Kann den Spieler nicht entfernen. Irgendwo wird darauf Bezug genommen. "
+"Entferne alle Gebäude und Bobs die von dem Spieler abhängen und versuche es "
+"dann noch einmal."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
