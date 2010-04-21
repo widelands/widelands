@@ -34,6 +34,10 @@
 
 #include "scripting.h"
 
+#ifdef _MSC_VER
+#include <ctype.h> // for tolower
+#endif
+
 // TODO: add wl.editor to documentation
 
 /*
@@ -168,8 +172,13 @@ bool LuaInterface_Impl::m_filename_to_short(const std::string & s) {
 bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 	std::string ext = s.substr(s.size() - 4, s.size());
 	// std::transform fails on older system, therefore we use an explicit loop
-	for (uint32_t i = 0; i < ext.size(); i++)
+	for (uint32_t i = 0; i < ext.size(); i++) {
+#ifndef _MSC_VER
 		ext[i] = std::tolower(ext[i]);
+#else
+		ext[i] = tolower(ext[i]);
+#endif
+	}
 	return (ext == ".lua");
 }
 
