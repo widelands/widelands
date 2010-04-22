@@ -1,7 +1,146 @@
+-- =========================
+-- Some formating functions
+-- =========================
+-- Rich Text
+function rt(text_or_opts, text)
+   k = "<rt>"
+   if text then
+      k = ("<rt %s>"):format(text_or_opts)
+   else
+      text = text_or_opts
+   end
+
+   return k .. text .. "</rt>"
+end
+
+-- Headings
+function h1(s)
+   return "<p font=FreeSerif font-size=18 font-weight=bold font-color=D1D1D1>"
+      ..  s .. "<br></p><p font-size=8> <br></p>"
+end
+   
+function direct_speech(heading, text)
+   return "<p font-size=24 font-face=FreeSerif font-weight=bold " ..
+      "font-color=2F9131>" .. heading .. "</p><p font-size=8> <br></p>" .. text
+end
+
+-- Simple flowing text. One Paragraph
+function p(s)
+   return "<p line-spacing=3 font-size=12>" .. s .. "<br></p>" ..
+      "<p font-size=8> <br></p>"
+end
+
+-- No logic below
+
+-- =======================================================================
+--                            Objective messages
+-- =======================================================================
+obj_build_small_food_economy = {
+   name = "build_small_food_economy",
+   title=_"Build up a small food economy",
+   body = "<rt><p line-spacing=3 font-size=12>" ..
+_[[* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery, to provide your people with food.]] ..
+"</p></rt>",
+}
+
+obj_build_cattlefarm = {
+   name = "obj_build_cattlefarm",
+   title = _ "Remember to build a cattle farm",
+   body = rt(p(_
+[[As your roads grow longer and your economy bigger you should make good use
+ of your oxen to help transport wares quicker. Remember to build a cattle
+ farm!]]))
+}
+
+obj_build_a_donjon = {
+   name = "build_a_donjon",
+   title=_"Build a donjon",
+   body= "<rt><p line-spacing=3 font-size=12>" ..
+_"* Build a donjon at the northeast of your territory to get a farther visual range and to protect your people from sudden attacks of enemies." ..
+"</p></rt>",
+}
+
+obj_explore_further = {
+   name = "explore_further",
+   title=_"Explore further",
+   body= "<rt><p line-spacing=3 font-size=12>" ..
+_"* Build more military buildings to explore the area around the headquarters and to ensure the safety of your people." ..
+"</p></rt>",
+}
+
+obj_build_mining_economy = {
+   name = "build_mining_economy",
+   title=_"Build mines",
+   body= "<rt><p line-spacing=3 font-size=12>" ..
+_"* Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metalworks." ..
+"</p></rt>",
+}
+
+obj_build_a_fortress = {
+   name = "build_a_fortress",
+   title=_"Build a fortress",
+   body= "<rt><p line-spacing=3 font-size=12>" ..
+_"* Build a fortress to the east of the mountains." ..
+"</p></rt>",
+}
+
+obj_build_a_warehouse = {
+   name = "build_a_warehouse",
+   title=_"Build a warehouse",
+   body= "<rt><p line-spacing=3 font-size=12>" ..
+_"* Build a warehouse to the west of the mountains." ..
+"<br>" ..
+_"-> Warehouses are similiar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer." ..
+"</p></rt>",
+}
+
+obj_build_trainingssites = {
+   name = "build_trainingssites",
+   title=_"Build trainingssites",
+   body= "<rt><p line-spacing=3 font-size=12>" ..
+_"* Build a battle arena and a trainings camp to the west of the mountains." ..
+"<br>" ..
+_"-> Trainingssites like a training camp or a battle arena are used for training soldiers in their different attributes. Those attributes are important in fights and the better a soldier is, the higher is the chance to win a fight.<br>Attributes are: health points, attack, defense and evade." ..
+"</p></rt>",
+}
+
+obj_build_weapon_productions = {
+   name = "build_weapon_productions",
+   title=_"Build weapon productions",
+   body= "<rt><p line-spacing=3 font-size=12>" ..
+_"* As soon as the blacksmith reaches his next level (master blacksmith) enhance your metalworks to an axefactory or even a war mill and build up another metalworks to ensure the production of tools." ..
+"</p></rt>",
+}
+
+obj_build_a_helmsmithy = {
+   name = "build_a_helmsmithy",
+   title=_"Build a helmsmithy",
+   body= "<rt><p line-spacing=3 font-size=12>" ..
+_"* Build a helmsmithy to the west of the mountains to provide your soldiers with better armor." ..
+"</p></rt>",
+}
+
+obj_destroy_kalitaths_army = {
+   name = "destroy_kalitaths_army",
+   title=_"Destroy Kalitaths army",
+   body= "<rt><p line-spacing=3 font-size=12>" ..
+_"* Destroy Kalitaths army and expand your territory to the east." ..
+"<br>" ..
+_"-> To attack an enemy you must click on the door of an advarse military building. A menu will pop up allowing you to select the number of soldiers that should attack. When you are ready with setting the number, click on the cross ('start attack')" ..
+"</p></rt>",
+}
+
+obj_military_assault_on_althunran = {
+   name = "military_assault_on_althunran",
+   title=_"Military assault on Al’thunran",
+   body= "<rt><p line-spacing=3 font-size=12>" ..
+_"* Destroy all enforcements of Thron’s two brothers to liberate the throne-circle." ..
+"</p></rt>",
+}
+
 -- =======================================================================
 --                              Messages to the user
 -- =======================================================================
--- No logic in this file
 story_msg_1 = {
    posy=1,
    title=_"Close to home",
@@ -226,101 +365,15 @@ _"* Destroy all enforcements of Thron’s two brothers to liberate the throne-ci
 "</p></rt>",
 }
 
+cattlefarm_01 = {
+   title = _ "Khantrukh speaks",
+   body = rt("image=map:khantrukh.png", direct_speech(
+_"Khantrukh approaches", p(_
+[["Chieftain, remember the poor carriers: Our roads get longer and longer and
+ the burden on their shoulders never gets lighter. We should breed more oxen to
+ make their work lighter and our transportation more efficient."]]
 
--- =======================================================================
---                            Objective messages
--- =======================================================================
-obj_build_small_food_economy = {
-   name = "build_small_food_economy",
-   title=_"Build up a small food economy",
-   body = "<rt><p line-spacing=3 font-size=12>" ..
-_[[* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery, to provide your people with food.]] ..
-"</p></rt>",
+       ))) .. rt(p(_"-- NEW OBJECTIVE --")) ..  obj_build_cattlefarm.body 
 }
-
-obj_build_a_donjon = {
-   name = "build_a_donjon",
-   title=_"Build a donjon",
-   body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* Build a donjon at the northeast of your territory to get a farther visual range and to protect your people from sudden attacks of enemies." ..
-"</p></rt>",
-}
-
-obj_explore_further = {
-   name = "explore_further",
-   title=_"Explore further",
-   body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* Build more military buildings to explore the area around the headquarters and to ensure the safety of your people." ..
-"</p></rt>",
-}
-
-obj_build_mining_economy = {
-   name = "build_mining_economy",
-   title=_"Build mines",
-   body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metalworks." ..
-"</p></rt>",
-}
-
-obj_build_a_fortress = {
-   name = "build_a_fortress",
-   title=_"Build a fortress",
-   body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* Build a fortress to the east of the mountains." ..
-"</p></rt>",
-}
-
-obj_build_a_warehouse = {
-   name = "build_a_warehouse",
-   title=_"Build a warehouse",
-   body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* Build a warehouse to the west of the mountains." ..
-"<br>" ..
-_"-> Warehouses are similiar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer." ..
-"</p></rt>",
-}
-
-obj_build_trainingssites = {
-   name = "build_trainingssites",
-   title=_"Build trainingssites",
-   body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* Build a battle arena and a trainings camp to the west of the mountains." ..
-"<br>" ..
-_"-> Trainingssites like a training camp or a battle arena are used for training soldiers in their different attributes. Those attributes are important in fights and the better a soldier is, the higher is the chance to win a fight.<br>Attributes are: health points, attack, defense and evade." ..
-"</p></rt>",
-}
-
-obj_build_weapon_productions = {
-   name = "build_weapon_productions",
-   title=_"Build weapon productions",
-   body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* As soon as the blacksmith reaches his next level (master blacksmith) enhance your metalworks to an axefactory or even a war mill and build up another metalworks to ensure the production of tools." ..
-"</p></rt>",
-}
-
-obj_build_a_helmsmithy = {
-   name = "build_a_helmsmithy",
-   title=_"Build a helmsmithy",
-   body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* Build a helmsmithy to the west of the mountains to provide your soldiers with better armor." ..
-"</p></rt>",
-}
-
-obj_destroy_kalitaths_army = {
-   name = "destroy_kalitaths_army",
-   title=_"Destroy Kalitaths army",
-   body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* Destroy Kalitaths army and expand your territory to the east." ..
-"<br>" ..
-_"-> To attack an enemy you must click on the door of an advarse military building. A menu will pop up allowing you to select the number of soldiers that should attack. When you are ready with setting the number, click on the cross ('start attack')" ..
-"</p></rt>",
-}
-
-obj_military_assault_on_althunran = {
-   name = "military_assault_on_althunran",
-   title=_"Military assault on Al’thunran",
-   body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* Destroy all enforcements of Thron’s two brothers to liberate the throne-circle." ..
-"</p></rt>",
-}
+       
 
