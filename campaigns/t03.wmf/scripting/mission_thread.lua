@@ -8,6 +8,19 @@ fr1 = wl.map.Field(81,108)
 fr2 = wl.map.Field(85,1)
 fr3 = wl.map.Field(85,11)
 
+function remember_cattlefarm()
+   sleep(100)
+
+   send_msg(cattlefarm_01)
+
+   p1:allow_buildings{"cattlefarm"}
+   local o = add_obj(obj_build_cattlefarm)
+   while not check_for_buildings(p1, {cattlefarm = 1}) do
+      sleep(1234) end
+   o.done = true
+
+end
+
 function initial_message_and_small_food_economy()
    wake_me(2000)
    send_msg(story_msg_1)
@@ -34,6 +47,9 @@ function initial_message_and_small_food_economy()
       }) do sleep(3412) end
    o.done = true
    send_msg(story_note_1)
+
+   sleep(600000)  -- 10 minutes
+   remember_cattlefarm()
 end
 
 function foottracks() 
