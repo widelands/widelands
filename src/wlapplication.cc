@@ -1293,11 +1293,12 @@ void WLApplication::show_usage()
 			 " --datadir=DIRNAME    Use specified direction for the widelands\n"
 			 "                      data files\n"
 			 " --homedir=DIRNAME    Use specified directory for widelands config\n"
-			 "                      files, savegames and replays"
+			 "                      files, savegames and replays\n")
 #ifdef linux
-			 "                      Default is ~/.widelands"
+		<< _("                      Default is ~/.widelands\n")
 #endif
-			 " --record=FILENAME    Record all events to the given filename for\n"
+		<< _
+			(" --record=FILENAME    Record all events to the given filename for\n"
 			 "                      later playback\n"
 			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
 			 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
