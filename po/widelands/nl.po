@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-17 00:48+0200\n"
-"PO-Revision-Date: 2010-04-17 13:00+0000\n"
-"Last-Translator: Foppe Benedictus <Unknown>\n"
+"POT-Creation-Date: 2010-04-21 19:46+0200\n"
+"PO-Revision-Date: 2010-04-22 15:25+0000\n"
+"Last-Translator: PliniusNeo <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-18 03:46+0000\n"
+"X-Launchpad-Export-Date: 2010-04-23 03:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -44,17 +44,21 @@ msgstr "Geen"
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Setters II Kaart. Geen commentaar gedefinieerd!"
 
-#: ../../src/wlapplication.cc:351
+#: ../../src/wlapplication.cc:352
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr "FOUT: Kon niet verbinden met metaserver (fout hierboven)!\n"
 
-#: ../../src/wlapplication.cc:954
+#: ../../src/wlapplication.cc:860 ../../src/wlapplication.cc:873
+msgid "could not find the path of the main executable"
+msgstr ""
+
+#: ../../src/wlapplication.cc:996
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1110
+#: ../../src/wlapplication.cc:1157
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -64,15 +68,15 @@ msgstr ""
 "Sorry, double-instance debuggen niet mogelijk op WIN32.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1113
+#: ../../src/wlapplication.cc:1160
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double is uitgeschakeld. Dit is geen debug-build!"
 
-#: ../../src/wlapplication.cc:1236
+#: ../../src/wlapplication.cc:1283
 msgid "This is Widelands-"
 msgstr "Dit is Widelands-"
 
-#: ../../src/wlapplication.cc:1238
+#: ../../src/wlapplication.cc:1285
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -80,7 +84,7 @@ msgstr ""
 "Gebruik: widelands <optie0>=<waarde0> ... <optieN>=<waardeN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1239
+#: ../../src/wlapplication.cc:1286
 msgid ""
 "Options:\n"
 "\n"
@@ -88,7 +92,7 @@ msgstr ""
 "Opties:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1243
+#: ../../src/wlapplication.cc:1290
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -96,7 +100,10 @@ msgid ""
 "                      terminal output\n"
 " --datadir=DIRNAME    Use specified direction for the widelands\n"
 "                      data files\n"
-" --record=FILENAME    Record all events to the given filename for\n"
+" --homedir=DIRNAME    Use specified directory for widelands config\n"
+"                      files, savegames and replays                      "
+"Default is ~/.widelands --record=FILENAME    Record all events to the given "
+"filename for\n"
 "                      later playback\n"
 " --playback=FILENAME  Playback given filename (see --record)\n"
 "\n"
@@ -112,7 +119,7 @@ msgid ""
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1263
+#: ../../src/wlapplication.cc:1315
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -142,12 +149,12 @@ msgstr ""
 "                      kaart.\n"
 " --loadgame=BESTANDNAAM Laad direct het opgeslagen spel BESTANDNAAM.\n"
 
-#: ../../src/wlapplication.cc:1277
+#: ../../src/wlapplication.cc:1329
 msgid " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
 msgstr ""
 " --dedicated=BESTANDNAAM Start een spel over ggz met BESTANDNAAM als map\n"
 
-#: ../../src/wlapplication.cc:1281
+#: ../../src/wlapplication.cc:1333
 msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
@@ -197,7 +204,7 @@ msgstr ""
 "                      Activeer dubbele buffering\n"
 "                      *EXTREEM EXPERIMENTEEL*\n"
 
-#: ../../src/wlapplication.cc:1307
+#: ../../src/wlapplication.cc:1359
 msgid ""
 " --opengl=[0|1]\n"
 "                      Enables opengl rendering\n"
@@ -207,7 +214,7 @@ msgstr ""
 "                      Activeert renderen met OpenGL\n"
 "                      *PAS OP, WERKT NIET! NIET GEBRUIKEN!*\n"
 
-#: ../../src/wlapplication.cc:1313
+#: ../../src/wlapplication.cc:1365
 msgid ""
 "\n"
 "Options for the internal window manager:\n"
@@ -250,7 +257,7 @@ msgstr ""
 "                      paneel.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1337
+#: ../../src/wlapplication.cc:1389
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -260,15 +267,15 @@ msgstr ""
 "                  locale computer)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1341
+#: ../../src/wlapplication.cc:1393
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1342
+#: ../../src/wlapplication.cc:1394
 msgid " --help               Show this help\n"
 msgstr " --help           Toon deze help\n"
 
-#: ../../src/wlapplication.cc:1346
+#: ../../src/wlapplication.cc:1398
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -277,19 +284,19 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1497
+#: ../../src/wlapplication.cc:1549
 msgid "Warning: "
 msgstr "Waarschuwing: "
 
-#: ../../src/wlapplication.cc:1501
+#: ../../src/wlapplication.cc:1553
 msgid "Game data error"
 msgstr "Spelgegevensfout"
 
-#: ../../src/wlapplication.cc:1504
+#: ../../src/wlapplication.cc:1556
 msgid "Unexpected error during the game"
 msgstr "Onverwachte fout tijdens het spel"
 
-#: ../../src/wlapplication.cc:1508
+#: ../../src/wlapplication.cc:1560
 msgid ""
 "\n"
 "\n"
@@ -303,7 +310,7 @@ msgstr ""
 "gerelateerde berichten vinden op de standaarduitvoer (stdout.txt onder "
 "Windows). Je gebruikt build "
 
-#: ../../src/wlapplication.cc:1514
+#: ../../src/wlapplication.cc:1566
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -316,11 +323,11 @@ msgstr ""
 "ontstaat tijdens het spel. Vaak -helaas niet altijd- is het mogelijk om deze "
 "te laden en ermee verder te spelen.\n"
 
-#: ../../src/wlapplication.cc:1623
+#: ../../src/wlapplication.cc:1675
 msgid "Connection timeouted"
 msgstr "Verbinding timed out"
 
-#: ../../src/wlapplication.cc:1625
+#: ../../src/wlapplication.cc:1677
 msgid ""
 "Widelands has not been able to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on side\n"
@@ -330,32 +337,32 @@ msgstr ""
 "Er schijnt een netwerkprobleem te zijn, ofwel aan jouw kant of aan\n"
 "die van de server.\n"
 
-#: ../../src/wlapplication.cc:1647 ../../src/network/network_ggz.cc:367
+#: ../../src/wlapplication.cc:1699 ../../src/network/network_ggz.cc:367
 msgid "Connection problem"
 msgstr "Verbindingsprobleem"
 
-#: ../../src/wlapplication.cc:1649
+#: ../../src/wlapplication.cc:1701
 msgid "Widelands has not been able to connect to the host."
 msgstr "Widelands kon geen verbinding met de host maken"
 
-#: ../../src/wlapplication.cc:1695
+#: ../../src/wlapplication.cc:1747
 msgid "The address of the game server is invalid"
 msgstr "Het adres van de spelserver is niet geldig"
 
-#: ../../src/wlapplication.cc:1800 ../../src/network/nethost.cc:1208
+#: ../../src/wlapplication.cc:1852 ../../src/network/nethost.cc:1208
 msgid "Player"
 msgstr "Speler"
 
-#: ../../src/wlapplication.cc:1951 ../../src/network/netclient.cc:179
+#: ../../src/wlapplication.cc:2003 ../../src/network/netclient.cc:179
 #: ../../src/network/nethost.cc:441
 msgid "Preparing game"
 msgstr "Spel voorbereiden"
 
-#: ../../src/wlapplication.cc:2058
+#: ../../src/wlapplication.cc:2110
 msgid "End of replay"
 msgstr "Einde herhaling"
 
-#: ../../src/wlapplication.cc:2060
+#: ../../src/wlapplication.cc:2112
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
@@ -363,7 +370,7 @@ msgstr ""
 "Het einde van de herhaling is bereikt en het spel is gepauzeerd. Je mag het "
 "spel uit de pauzestand halen en verder kijken als je dat wilt."
 
-#: ../../src/wlapplication.cc:2140 ../../src/logic/game.cc:357
+#: ../../src/wlapplication.cc:2192 ../../src/logic/game.cc:357
 #: ../../src/logic/game.cc:396
 msgid "Loading..."
 msgstr "Laden..."
@@ -399,12 +406,12 @@ msgstr "Icoon"
 
 #: ../../src/writeHTML.cc:279 ../../src/writeHTML.cc:516
 #: ../../src/writeHTML.cc:1424 ../../src/ui_fsmenu/netsetup_ggz.cc:141
-#: ../../src/wui/building_statistics_menu.cc:109
-#: ../../src/wui/building_ui.cc:1546 ../../src/wui/building_ui.cc:1734
+#: ../../src/wui/building_statistics_menu.cc:111
+#: ../../src/wui/soldierlist.cc:82
 msgid "Name"
 msgstr "Naam"
 
-#: ../../src/writeHTML.cc:281 ../../src/wui/building_statistics_menu.cc:110
+#: ../../src/writeHTML.cc:281 ../../src/wui/building_statistics_menu.cc:112
 msgid "Size"
 msgstr "Grootte"
 
@@ -416,7 +423,7 @@ msgstr "Kan gebouwd worden"
 msgid "Enhanced"
 msgstr "Verbeterd"
 
-#: ../../src/writeHTML.cc:288 ../../src/wui/building_ui.cc:658
+#: ../../src/writeHTML.cc:288 ../../src/wui/buildingwindow.cc:187
 msgid "Stop"
 msgstr "Stop"
 
@@ -675,6 +682,8 @@ msgid "Production"
 msgstr "Productie"
 
 #: ../../src/writeHTML.cc:786 ../../src/wui/general_statistics_menu.cc:144
+#: ../../src/wui/productionsitewindow.cc:78
+#: ../../src/wui/warehousewindow.cc:56
 msgid "Workers"
 msgstr "Werkers"
 
@@ -896,14 +905,14 @@ msgstr "ware_types.xhtml"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
 #: ../../src/economy/request.cc:192 ../../src/economy/wares_queue.cc:254
-#: ../../src/game_io/game_cmd_queue_data_packet.cc:96
+#: ../../src/game_io/game_cmd_queue_data_packet.cc:84
 #: ../../src/game_io/game_game_class_data_packet.cc:44
 #: ../../src/game_io/game_interactive_player_data_packet.cc:86
 #: ../../src/game_io/game_player_economies_data_packet.cc:89
 #: ../../src/game_io/game_player_info_data_packet.cc:142
 #: ../../src/logic/battle.cc:412 ../../src/logic/cmd_incorporate.cc:46
 #: ../../src/logic/cmd_luacoroutine.cc:60 ../../src/logic/cmd_luascript.cc:56
-#: ../../src/logic/cmd_queue.cc:176 ../../src/logic/immovable.cc:654
+#: ../../src/logic/cmd_queue.cc:176 ../../src/logic/immovable.cc:655
 #: ../../src/logic/instances.cc:73 ../../src/logic/instances.cc:131
 #: ../../src/logic/instances.cc:478 ../../src/logic/legacy.cc:406
 #: ../../src/logic/legacy.cc:456 ../../src/logic/playercommand.cc:132
@@ -1065,7 +1074,7 @@ msgstr "Geen naam"
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: ../../src/game_io/game_cmd_queue_data_packet.cc:98
+#: ../../src/game_io/game_cmd_queue_data_packet.cc:86
 #, c-format
 msgid "command queue: %s"
 msgstr "opdrachten lijst: %s"
@@ -1132,8 +1141,8 @@ msgid "preload: %s"
 msgstr "voorladen: %s"
 
 #: ../../src/graphic/animation.cc:196 ../../src/logic/building.cc:76
-#: ../../src/logic/immovable.cc:194 ../../src/logic/immovable.cc:690
-#: ../../src/logic/immovable.cc:729 ../../src/logic/immovable.cc:884
+#: ../../src/logic/immovable.cc:194 ../../src/logic/immovable.cc:691
+#: ../../src/logic/immovable.cc:730 ../../src/logic/immovable.cc:885
 #: ../../src/logic/military_data.cc:51 ../../src/logic/military_data.cc:58
 #: ../../src/logic/production_program.cc:96
 #: ../../src/logic/production_program.cc:253
@@ -1224,7 +1233,7 @@ msgstr "verwachte tijd (%i) < speeltijd (%i)"
 msgid "game logic: %s"
 msgstr "spel logika: %s"
 
-#: ../../src/logic/constructionsite.cc:168
+#: ../../src/logic/constructionsite.cc:176
 #, c-format
 msgid "%u%% built"
 msgstr "%u%% gebouwd"
@@ -1316,58 +1325,58 @@ msgstr "[terrein affiniteit] \"%s\" (niet in huidige wereld): %s"
 msgid "immovable %s has no program \"%s\""
 msgstr ""
 
-#: ../../src/logic/immovable.cc:637
+#: ../../src/logic/immovable.cc:638
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
 msgstr "stam %s definieert geen onverplaatsbaar type \"%s\""
 
-#: ../../src/logic/immovable.cc:640
+#: ../../src/logic/immovable.cc:641
 #, c-format
 msgid "unknown tribe %s"
 msgstr "onbekende stam %s"
 
-#: ../../src/logic/immovable.cc:646
+#: ../../src/logic/immovable.cc:647
 #, c-format
 msgid "world does not define immovable type \"%s\""
 msgstr "de wereld definieert geen onverplaatsbaar type \"%s\""
 
-#: ../../src/logic/immovable.cc:656
+#: ../../src/logic/immovable.cc:657
 #, c-format
 msgid "immovable type %s"
 msgstr "onverplaatsbaar type %s"
 
-#: ../../src/logic/immovable.cc:691 ../../src/logic/production_program.cc:598
+#: ../../src/logic/immovable.cc:692 ../../src/logic/production_program.cc:598
 #: ../../src/logic/production_program.cc:642
 msgid "duration in ms"
 msgstr "duur in ms"
 
-#: ../../src/logic/immovable.cc:729 ../../src/logic/production_program.cc:1323
+#: ../../src/logic/immovable.cc:730 ../../src/logic/production_program.cc:1323
 msgid "priority"
 msgstr "prioriteit"
 
-#: ../../src/logic/immovable.cc:763 ../../src/logic/immovable.cc:832
-#: ../../src/logic/immovable.cc:918
+#: ../../src/logic/immovable.cc:764 ../../src/logic/immovable.cc:833
+#: ../../src/logic/immovable.cc:919
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr ""
 "onverplaatsbar type niet in de stam maar doel type heeft bereik (\"%s\")"
 
-#: ../../src/logic/immovable.cc:769 ../../src/logic/immovable.cc:838
-#: ../../src/logic/immovable.cc:924
+#: ../../src/logic/immovable.cc:770 ../../src/logic/immovable.cc:839
+#: ../../src/logic/immovable.cc:925
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:784 ../../src/logic/immovable.cc:939
+#: ../../src/logic/immovable.cc:785 ../../src/logic/immovable.cc:940
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
 msgstr "verwachtte kans in het bereik [1, 254] maar vond \"%s\""
 
-#: ../../src/logic/immovable.cc:797
+#: ../../src/logic/immovable.cc:798
 msgid "illegal transformation to the same type"
 msgstr "illegale transformatie naar hetzelfde type"
 
-#: ../../src/logic/immovable.cc:885
+#: ../../src/logic/immovable.cc:886
 msgid "probability in range [1, 254]"
 msgstr "kans in bereik [1. 254]"
 
@@ -1935,6 +1944,8 @@ msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"zou hulpbron type %s moeten fokken, die niet bestaat in de wereld; de stam "
+"is niet compatibel met de wereld"
 
 #: ../../src/logic/worker.cc:603
 msgid "Out of "
@@ -2087,7 +2098,7 @@ msgstr "gezien: %s"
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:99
 #, c-format
 msgid "extradata: %s"
-msgstr ""
+msgstr "extradata: %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
@@ -2245,6 +2256,8 @@ msgid ""
 "message should have expired at %u; sent at %u with duration %u but gametime "
 "is already %u"
 msgstr ""
+"bericht zou verlopen moeten zijn op %u; verzonden op %u met duur %u maar de "
+"speeltijd is al %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:150
 #, c-format
@@ -2798,7 +2811,7 @@ msgstr "Hal:"
 msgid "Ready"
 msgstr "Klaar"
 
-#: ../../src/ui_fsmenu/launchgame.cc:277 ../../src/wui/building_ui.cc:1140
+#: ../../src/ui_fsmenu/launchgame.cc:277
 msgid "Type: "
 msgstr "Type: "
 
@@ -2877,7 +2890,7 @@ msgstr "Kies herhaling!"
 
 #: ../../src/ui_fsmenu/main.cc:42
 msgid "Play Tutorial"
-msgstr ""
+msgstr "Speel Oefencampagne"
 
 #: ../../src/ui_fsmenu/main.cc:49
 msgid "Single Player"
@@ -3034,11 +3047,11 @@ msgstr "Open"
 msgid "Closed"
 msgstr "Gesloten"
 
-#: ../../src/ui_fsmenu/options.cc:57 ../../src/ui_fsmenu/options.cc:383
+#: ../../src/ui_fsmenu/options.cc:54 ../../src/ui_fsmenu/options.cc:411
 msgid "Advanced Options"
 msgstr "Gevorderde Opties"
 
-#: ../../src/ui_fsmenu/options.cc:64 ../../src/ui_fsmenu/options.cc:351
+#: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:379
 #: ../../src/wui/login_box.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:130
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:143
@@ -3047,141 +3060,141 @@ msgstr "Gevorderde Opties"
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../../src/ui_fsmenu/options.cc:71 ../../src/ui_fsmenu/options.cc:358
+#: ../../src/ui_fsmenu/options.cc:68 ../../src/ui_fsmenu/options.cc:386
 msgid "Apply"
 msgstr "Toepassen"
 
-#: ../../src/ui_fsmenu/options.cc:83
+#: ../../src/ui_fsmenu/options.cc:80
 msgid "min."
 msgstr "min."
 
-#: ../../src/ui_fsmenu/options.cc:89
+#: ../../src/ui_fsmenu/options.cc:86
 msgid "days"
 msgstr "dagen"
 
-#: ../../src/ui_fsmenu/options.cc:96
+#: ../../src/ui_fsmenu/options.cc:93
 msgid "General Options"
 msgstr "Algemene opties"
 
-#: ../../src/ui_fsmenu/options.cc:103
+#: ../../src/ui_fsmenu/options.cc:100
 msgid "Fullscreen"
 msgstr "Volledig scherm"
 
-#: ../../src/ui_fsmenu/options.cc:109
+#: ../../src/ui_fsmenu/options.cc:106
 msgid "Grab Input"
 msgstr "Pak invoer"
 
-#: ../../src/ui_fsmenu/options.cc:115
+#: ../../src/ui_fsmenu/options.cc:112
 msgid "Enable Music"
 msgstr "Zet muziek aan"
 
-#: ../../src/ui_fsmenu/options.cc:121
+#: ../../src/ui_fsmenu/options.cc:118
 msgid "Enable Sound"
 msgstr "Zet geluid aan"
 
-#: ../../src/ui_fsmenu/options.cc:126
+#: ../../src/ui_fsmenu/options.cc:123
 msgid "Maximum FPS:"
 msgstr "Maximum FPS:"
 
-#: ../../src/ui_fsmenu/options.cc:136
+#: ../../src/ui_fsmenu/options.cc:133
 msgid "In-game resolution"
 msgstr "Spelresolutie"
 
-#: ../../src/ui_fsmenu/options.cc:141
+#: ../../src/ui_fsmenu/options.cc:138
 msgid "Language"
 msgstr "Taal"
 
-#: ../../src/ui_fsmenu/options.cc:152
+#: ../../src/ui_fsmenu/options.cc:149
 msgid "In-game Options"
 msgstr "Spelopties"
 
-#: ../../src/ui_fsmenu/options.cc:159
+#: ../../src/ui_fsmenu/options.cc:156
 msgid "Use single Watchwindow Mode"
 msgstr "Gebruik een enkel Detailscherm"
 
-#: ../../src/ui_fsmenu/options.cc:165
+#: ../../src/ui_fsmenu/options.cc:162
 msgid "Start roadbuilding after placing flag"
 msgstr "Begin wegenaanleg na plaatsen vlag"
 
-#: ../../src/ui_fsmenu/options.cc:172
+#: ../../src/ui_fsmenu/options.cc:169
 msgid "Show buildings area preview"
 msgstr "Werkgebied van gebouw tonen"
 
-#: ../../src/ui_fsmenu/options.cc:179
+#: ../../src/ui_fsmenu/options.cc:176
 msgid "Snap windows only when overlapping"
 msgstr "Haak schermen alleen bij overlappen"
 
-#: ../../src/ui_fsmenu/options.cc:185
+#: ../../src/ui_fsmenu/options.cc:182
 msgid "Dock windows to edges"
 msgstr "Zet schermen vast aan de randen"
 
-#: ../../src/ui_fsmenu/options.cc:190
+#: ../../src/ui_fsmenu/options.cc:187
 msgid "Save game automatically every"
 msgstr "Sla spel automatisch op elke"
 
-#: ../../src/ui_fsmenu/options.cc:194
+#: ../../src/ui_fsmenu/options.cc:191
 msgid "Remove Replays older than:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:198
+#: ../../src/ui_fsmenu/options.cc:195
 msgid "Off"
 msgstr "Uit"
 
-#: ../../src/ui_fsmenu/options.cc:285
+#: ../../src/ui_fsmenu/options.cc:284
 msgid "System default language"
 msgstr "Standaard systeemtaal"
 
-#: ../../src/ui_fsmenu/options.cc:365
+#: ../../src/ui_fsmenu/options.cc:393
 msgid "x"
 msgstr "x"
 
-#: ../../src/ui_fsmenu/options.cc:370 ../../src/ui_fsmenu/options.cc:375
+#: ../../src/ui_fsmenu/options.cc:398 ../../src/ui_fsmenu/options.cc:403
 msgid "px."
 msgstr "px."
 
-#: ../../src/ui_fsmenu/options.cc:394
+#: ../../src/ui_fsmenu/options.cc:422
 msgid "Main menu font:"
 msgstr "Hoofdmenu lettertype:"
 
-#: ../../src/ui_fsmenu/options.cc:400
+#: ../../src/ui_fsmenu/options.cc:428
 msgid "Play a sound at message arrival."
 msgstr "Speel een geluid af als er een bericht aankomt."
 
-#: ../../src/ui_fsmenu/options.cc:408
+#: ../../src/ui_fsmenu/options.cc:436
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
 "Comprimeer widelands gegevenbestand niet (kaarten, herhalingen en opgeslagen "
 "spellen)."
 
-#: ../../src/ui_fsmenu/options.cc:413
+#: ../../src/ui_fsmenu/options.cc:441
 msgid "Speed of a new game:"
 msgstr "Snelheid van een nieuw spel:"
 
-#: ../../src/ui_fsmenu/options.cc:417
+#: ../../src/ui_fsmenu/options.cc:445
 msgid "Distance for windows to snap to other panels:"
 msgstr "Afstand voor vensters om aan te haken aan andere panelen:"
 
-#: ../../src/ui_fsmenu/options.cc:421
+#: ../../src/ui_fsmenu/options.cc:449
 msgid "Distance for windows to snap to borders:"
 msgstr "Afstand voor vensters om aan kaders aan te haken:"
 
-#: ../../src/ui_fsmenu/options.cc:426
+#: ../../src/ui_fsmenu/options.cc:454
 msgid "Graphics experimental improvements."
 msgstr "Experimentele grafische verbeteringen."
 
-#: ../../src/ui_fsmenu/options.cc:432
+#: ../../src/ui_fsmenu/options.cc:460
 msgid "Graphics double buffering."
 msgstr "Dubbele grafische buffering."
 
-#: ../../src/ui_fsmenu/options.cc:439
+#: ../../src/ui_fsmenu/options.cc:467
 msgid "Remove Syncstream dumps on startup"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:461
+#: ../../src/ui_fsmenu/options.cc:489
 msgid "Pause"
 msgstr "Pauze"
 
-#: ../../src/ui_fsmenu/options.cc:472
+#: ../../src/ui_fsmenu/options.cc:500
 msgid "FreeSerif (Default)"
 msgstr "FreeSerif (Standaard)"
 
@@ -3245,153 +3258,84 @@ msgstr ""
 msgid "Once injured"
 msgstr "Wanneer gewond"
 
-#: ../../src/wui/building_statistics_menu.cc:76
+#: ../../src/wui/building_statistics_menu.cc:79
 #: ../../src/wui/game_main_menu.cc:61
 msgid "Building Statistics"
 msgstr "Gebouw Statistieken"
 
-#: ../../src/wui/building_statistics_menu.cc:86
+#: ../../src/wui/building_statistics_menu.cc:89
 msgid "Total Productivity: "
 msgstr "Totale productiviteit: "
 
-#: ../../src/wui/building_statistics_menu.cc:90
+#: ../../src/wui/building_statistics_menu.cc:93
 msgid "Owned: "
 msgstr "Bezet door: "
 
-#: ../../src/wui/building_statistics_menu.cc:96
+#: ../../src/wui/building_statistics_menu.cc:99
 msgid "In Build: "
 msgstr "Wordt gebouwd: "
 
-#: ../../src/wui/building_statistics_menu.cc:102
+#: ../../src/wui/building_statistics_menu.cc:105
 msgid "Jump to unproductive: "
 msgstr "Ga naar werkeloze: "
 
-#: ../../src/wui/building_statistics_menu.cc:111
+#: ../../src/wui/building_statistics_menu.cc:113
 msgid "Prod"
 msgstr "Prod"
 
-#: ../../src/wui/building_statistics_menu.cc:112
+#: ../../src/wui/building_statistics_menu.cc:114
 msgid "Owned"
 msgstr "Bezet door"
 
-#: ../../src/wui/building_statistics_menu.cc:113
+#: ../../src/wui/building_statistics_menu.cc:115
 msgid "Build"
 msgstr "Bouw"
 
-#: ../../src/wui/building_statistics_menu.cc:126
-#: ../../src/wui/building_statistics_menu.cc:146
-#: ../../src/wui/building_statistics_menu.cc:166
+#: ../../src/wui/building_statistics_menu.cc:131
+#: ../../src/wui/building_statistics_menu.cc:151
+#: ../../src/wui/building_statistics_menu.cc:171
 msgid "Show previous"
 msgstr "Toon vorige"
 
-#: ../../src/wui/building_statistics_menu.cc:136
-#: ../../src/wui/building_statistics_menu.cc:156
-#: ../../src/wui/building_statistics_menu.cc:176
+#: ../../src/wui/building_statistics_menu.cc:141
+#: ../../src/wui/building_statistics_menu.cc:161
+#: ../../src/wui/building_statistics_menu.cc:181
 msgid "Show next"
 msgstr "Toon volgende"
 
-#: ../../src/wui/building_ui.cc:159
-#, c-format
-msgid "Do you really want to destroy this %s?"
-msgstr "Wil je dit echt vernietigen %s?"
-
-#: ../../src/wui/building_ui.cc:206
-msgid "Destroy building?"
-msgstr "Vernietig gebouw?"
-
-#: ../../src/wui/building_ui.cc:658
+#: ../../src/wui/buildingwindow.cc:187
 msgid "Continue"
 msgstr "Doorgaan"
 
-#: ../../src/wui/building_ui.cc:673
+#: ../../src/wui/buildingwindow.cc:202
 #, c-format
 msgid "Enhance to %s"
 msgstr "Verbeter naar %s"
 
-#: ../../src/wui/building_ui.cc:694
+#: ../../src/wui/buildingwindow.cc:224
 msgid "Destroy"
 msgstr "Vernietig"
 
-#: ../../src/wui/building_ui.cc:707 ../../src/wui/building_ui.cc:805
-msgid "Show workarea"
-msgstr "Laat werkgebied zien"
-
-#: ../../src/wui/building_ui.cc:718
-msgid "Debug"
-msgstr "Debug"
-
-#: ../../src/wui/building_ui.cc:831
+#: ../../src/wui/buildingwindow.cc:237 ../../src/wui/buildingwindow.cc:350
 msgid "Hide workarea"
 msgstr "Verberg werkgebied"
 
-#: ../../src/wui/building_ui.cc:1104
-msgid "Worker Listing"
-msgstr "Werkerslijst"
+#: ../../src/wui/buildingwindow.cc:250
+msgid "Debug"
+msgstr "Debug"
 
-#: ../../src/wui/building_ui.cc:1156
-msgid "Experience: "
-msgstr "Ervaring: "
+#: ../../src/wui/buildingwindow.cc:367
+msgid "Show workarea"
+msgstr "Laat werkgebied zien"
 
-#: ../../src/wui/building_ui.cc:1173
-msgid "Trying to become: "
-msgstr "Probeert te worden: "
-
-#: ../../src/wui/building_ui.cc:1219
-msgid "(vacant)"
-msgstr "(leeg)"
-
-#: ../../src/wui/building_ui.cc:1219
-msgid "(coming)"
-msgstr "(komend)"
-
-#: ../../src/wui/building_ui.cc:1378
-msgid "Highest priority"
-msgstr "Hoogste prioriteit"
-
-#: ../../src/wui/building_ui.cc:1387
-msgid "Normal priority"
-msgstr "Normale prioriteit"
-
-#: ../../src/wui/building_ui.cc:1396
-msgid "Lowest priority"
-msgstr "Laagste prioriteit"
-
-#: ../../src/wui/building_ui.cc:1434
-msgid "Show worker listing"
-msgstr "Laat werkerslijst zien"
-
-#: ../../src/wui/building_ui.cc:1531 ../../src/wui/building_ui.cc:1770
-msgid "Capacity"
-msgstr "Capaciteit"
-
-#: ../../src/wui/building_ui.cc:1547 ../../src/wui/building_ui.cc:1735
-msgid "HP"
-msgstr "HP"
-
-#: ../../src/wui/building_ui.cc:1548 ../../src/wui/building_ui.cc:1736
-msgid "AT"
-msgstr "AT"
-
-#: ../../src/wui/building_ui.cc:1549 ../../src/wui/building_ui.cc:1737
-msgid "DE"
-msgstr "DE"
-
-#: ../../src/wui/building_ui.cc:1550 ../../src/wui/building_ui.cc:1738
-msgid "EV"
-msgstr "EV"
-
-#: ../../src/wui/building_ui.cc:1551 ../../src/wui/building_ui.cc:1739
-msgid "Level"
-msgstr "Niveau"
-
-#: ../../src/wui/building_ui.cc:1651
+#: ../../src/wui/bulldozeconfirm.cc:58
 #, c-format
-msgid "Capacity: %2u"
-msgstr "Capaciteit: %2u"
+msgid "Do you really want to destroy this %s?"
+msgstr "Wil je dit echt vernietigen %s?"
 
-#: ../../src/wui/building_ui.cc:1796
-msgid "xx"
-msgstr "xx"
+#: ../../src/wui/bulldozeconfirm.cc:105
+msgid "Destroy building?"
+msgstr "Vernietig gebouw?"
 
 #: ../../src/wui/encyclopedia_window.cc:70
 msgid "Tribe ware encyclopedia"
@@ -3497,11 +3441,11 @@ msgstr "Weg annuleren"
 msgid "Chat Menu"
 msgstr "Chat menu"
 
-#: ../../src/wui/game_debug_ui.cc:239
+#: ../../src/wui/game_debug_ui.cc:234
 msgid "Debug Field"
 msgstr "Debugveld"
 
-#: ../../src/wui/game_debug_ui.cc:282
+#: ../../src/wui/game_debug_ui.cc:277
 #, c-format
 msgid ""
 "(%i, %i)\n"
@@ -3577,7 +3521,7 @@ msgstr "Een bestand met de naam "
 msgid " already exists. Overwrite?"
 msgstr " bestaat al. Overschrijven?"
 
-#: ../../src/wui/game_message_menu.cc:41 ../../src/wui/game_message_menu.h:141
+#: ../../src/wui/game_message_menu.cc:43 ../../src/wui/game_message_menu.h:146
 msgid "Message Menu: Inbox"
 msgstr ""
 
@@ -3631,6 +3575,8 @@ msgid "Buildings"
 msgstr "Gebouwen"
 
 #: ../../src/wui/general_statistics_menu.cc:156
+#: ../../src/wui/productionsitewindow.cc:60
+#: ../../src/wui/warehousewindow.cc:55
 msgid "Wares"
 msgstr "Goederen"
 
@@ -3702,21 +3648,21 @@ msgstr "8 u"
 msgid "16 h"
 msgstr "16 u"
 
-#: ../../src/wui/interactive_base.cc:237
+#: ../../src/wui/interactive_base.cc:241
 #, c-format
 msgid "%u.%ux"
 msgstr "%u.%ux"
 
-#: ../../src/wui/interactive_base.cc:240
+#: ../../src/wui/interactive_base.cc:244
 msgid "PAUSE"
 msgstr "PAUZE"
 
-#: ../../src/wui/interactive_base.cc:260
+#: ../../src/wui/interactive_base.cc:264
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../../src/wui/interactive_base.cc:265
+#: ../../src/wui/interactive_base.cc:269
 msgid "NO GAME CONTROLLER"
 msgstr "GEEN SPEL CONTROLLER"
 
@@ -3814,6 +3760,10 @@ msgstr "Leeg wachtwoord"
 msgid "Please enter your password!"
 msgstr ""
 
+#: ../../src/wui/militarysitewindow.cc:58
+msgid "Soldiers"
+msgstr ""
+
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Terrain"
@@ -3835,6 +3785,55 @@ msgstr "Wegen"
 msgid "Zoom"
 msgstr "Zoomen"
 
+#: ../../src/wui/productionsitewindow.cc:69
+#: ../../src/wui/productionsitewindow.cc:78
+msgid "Worker"
+msgstr ""
+
+#: ../../src/wui/productionsitewindow.cc:70
+msgid "Exp"
+msgstr ""
+
+#: ../../src/wui/productionsitewindow.cc:71
+msgid "Next Level"
+msgstr ""
+
+#: ../../src/wui/productionsitewindow.cc:121
+msgid "(vacant)"
+msgstr "(leeg)"
+
+#: ../../src/wui/productionsitewindow.cc:121
+msgid "(coming)"
+msgstr "(komend)"
+
+#: ../../src/wui/soldiercapacitycontrol.cc:71
+msgid "xx"
+msgstr "xx"
+
+#: ../../src/wui/soldiercapacitycontrol.cc:73
+msgid "Capacity"
+msgstr "Capaciteit"
+
+#: ../../src/wui/soldierlist.cc:83
+msgid "HP"
+msgstr "HP"
+
+#: ../../src/wui/soldierlist.cc:84
+msgid "AT"
+msgstr "AT"
+
+#: ../../src/wui/soldierlist.cc:85
+msgid "DE"
+msgstr "DE"
+
+#: ../../src/wui/soldierlist.cc:86
+msgid "EV"
+msgstr "EV"
+
+#: ../../src/wui/soldierlist.cc:87
+msgid "Level"
+msgstr "Niveau"
+
 #: ../../src/wui/stock_menu.cc:70
 msgid "Show wares"
 msgstr "Laat goederen zien"
@@ -3842,6 +3841,10 @@ msgstr "Laat goederen zien"
 #: ../../src/wui/stock_menu.cc:75
 msgid "Show workers"
 msgstr "Laat werkers zien"
+
+#: ../../src/wui/trainingsitewindow.cc:57
+msgid "Soldiers in training"
+msgstr ""
 
 #: ../../src/wui/transport_ui.cc:44
 msgid "Economy options"
@@ -3878,6 +3881,18 @@ msgstr ""
 #: ../../src/wui/transport_ui.cc:492
 msgid "Worker type target quantities"
 msgstr "Doelhoeveelheden van werker type"
+
+#: ../../src/wui/waresqueuedisplay.cc:274
+msgid "Highest priority"
+msgstr "Hoogste prioriteit"
+
+#: ../../src/wui/waresqueuedisplay.cc:285
+msgid "Normal priority"
+msgstr "Normale prioriteit"
+
+#: ../../src/wui/waresqueuedisplay.cc:296
+msgid "Lowest priority"
+msgstr "Laagste prioriteit"
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
@@ -4365,61 +4380,61 @@ msgstr "geen omschijving gedefinieerd"
 msgid "no descr"
 msgstr "geen omschrijving"
 
-#: ../../src/wui/game_message_menu.h:63
+#: ../../src/wui/game_message_menu.h:65
 msgid "Select"
 msgstr "Selecteer"
 
-#: ../../src/wui/game_message_menu.h:64
+#: ../../src/wui/game_message_menu.h:66
 msgid "Status"
 msgstr "Status"
 
-#: ../../src/wui/game_message_menu.h:65
+#: ../../src/wui/game_message_menu.h:67
 msgid "Title"
 msgstr "Titel"
 
-#: ../../src/wui/game_message_menu.h:66
+#: ../../src/wui/game_message_menu.h:68
 msgid "Time sent"
 msgstr "Tijd verzonden"
 
-#: ../../src/wui/game_message_menu.h:77
+#: ../../src/wui/game_message_menu.h:82
 msgid "Clear"
 msgstr "Wissen"
 
-#: ../../src/wui/game_message_menu.h:77
+#: ../../src/wui/game_message_menu.h:82
 msgid "Clear selection"
 msgstr "Selectie wissen"
 
-#: ../../src/wui/game_message_menu.h:94
+#: ../../src/wui/game_message_menu.h:99
 msgid "Invert"
 msgstr "Omkeren"
 
-#: ../../src/wui/game_message_menu.h:94
+#: ../../src/wui/game_message_menu.h:99
 msgid "Invert selection"
 msgstr "Selectie omkeren"
 
-#: ../../src/wui/game_message_menu.h:112 ../../src/wui/game_message_menu.h:145
+#: ../../src/wui/game_message_menu.h:117 ../../src/wui/game_message_menu.h:150
 msgid "Archive selected messages"
 msgstr "Archiveer geselecteerde berichten"
 
-#: ../../src/wui/game_message_menu.h:123 ../../src/wui/game_message_menu.h:146
+#: ../../src/wui/game_message_menu.h:128 ../../src/wui/game_message_menu.h:151
 msgid "Show Archive"
 msgstr "Toon archief"
 
-#: ../../src/wui/game_message_menu.h:132
+#: ../../src/wui/game_message_menu.h:137
 msgid "Message Menu: Archive"
 msgstr "Berichtenmenu: Archief"
 
-#: ../../src/wui/game_message_menu.h:136
+#: ../../src/wui/game_message_menu.h:141
 msgid "Restore selected messages"
 msgstr "Herstel geselecteerde berichten"
 
-#: ../../src/wui/game_message_menu.h:137
+#: ../../src/wui/game_message_menu.h:142
 msgid "Show Inbox"
 msgstr "Laat Inbox zien"
 
-#: ../../src/wui/game_message_menu.h:159
+#: ../../src/wui/game_message_menu.h:164
 msgid "center main mapview on location"
-msgstr ""
+msgstr "centreer overzichtskaart  op locatie"
 
 #~ msgid "Target quantities"
 #~ msgstr "Doelhoeveelheden"
@@ -4651,6 +4666,22 @@ msgstr ""
 
 #~ msgid "?"
 #~ msgstr "echt vernietigen?"
+
+#~ msgid "Worker Listing"
+#~ msgstr "Werkerslijst"
+
+#~ msgid "Experience: "
+#~ msgstr "Ervaring: "
+
+#~ msgid "Trying to become: "
+#~ msgstr "Probeert te worden: "
+
+#~ msgid "Show worker listing"
+#~ msgstr "Laat werkerslijst zien"
+
+#, c-format
+#~ msgid "Capacity: %2u"
+#~ msgstr "Capaciteit: %2u"
 
 #~ msgid "Server sent malformed commands: "
 #~ msgstr "Server zond misvormde commando's: "

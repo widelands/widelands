@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-16 22:48+0000\n"
-"PO-Revision-Date: 2010-04-20 06:06+0000\n"
+"POT-Creation-Date: 2010-04-21 17:46+0000\n"
+"PO-Revision-Date: 2010-04-22 16:25+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-21 04:03+0000\n"
+"X-Launchpad-Export-Date: 2010-04-23 03:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -83,7 +83,7 @@ msgstr "Obex"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr ""
+msgstr "Situlae magnae ad pisces alendos a fabre fabricatur."
 
 #: ../../tribes/atlanteans/conf:67
 msgid "Blackroot"
@@ -250,7 +250,7 @@ msgid "Crystal Mine"
 msgstr "Metallum crystalli"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
-msgid "Cuts raw pieces of granit out of laying stones."
+msgid "Cuts raw pieces of granite out of laying stones."
 msgstr ""
 
 #: ../../tribes/atlanteans/soldier/conf:1
@@ -311,7 +311,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
-msgstr ""
+msgstr "Atlantidenses cibum piscium magni aestimant."
 
 #: ../../tribes/atlanteans/conf:124
 msgid "Fisher"
@@ -699,12 +699,12 @@ msgid "Resource indicator gold much"
 msgstr "Est indicatum hic aurum multum situm"
 
 #: ../../tribes/atlanteans/conf:56
-msgid "Resource indicator granit little"
-msgstr "Est indicatum hic granatum paucum situm"
+msgid "Resource indicator granite little"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:57
-msgid "Resource indicator granit much"
-msgstr "Est indicatum hic granatum multum situm"
+msgid "Resource indicator granite much"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Resource indicator iron little"
@@ -1231,3 +1231,9 @@ msgstr "In areis ad novum aedificium construendum laborat."
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr ""
+
+#~ msgid "Resource indicator granit little"
+#~ msgstr "Est indicatum hic granatum paucum situm"
+
+#~ msgid "Resource indicator granit much"
+#~ msgstr "Est indicatum hic granatum multum situm"
