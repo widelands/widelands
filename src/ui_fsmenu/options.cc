@@ -281,8 +281,12 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 	// Fill language list
 	m_language_list.add
-		(_("System default language"), "",
+		(_("Try system language"), "", // "try", as many translations are missing.
 		 g_gr->get_no_picture(), "" == opt.language);
+
+	m_language_list.add
+		("English", "en",
+		 g_gr->get_no_picture(), "en" == opt.language);
 		 
 	filenameset_t files;
 	Section * s = &g_options.pull_section("global");
