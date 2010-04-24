@@ -73,12 +73,17 @@ function build_lumberjack()
    -- msg_box(lumberjack_message_01)
    -- msg_box(lumberjack_message_02)
 
-   ui = wl.ui.get()
-   ui:click(first_lumberjack_field)
+   mv = wl.ui.MapView()
+   mv:click(first_lumberjack_field)
+   
+   sleep(1500)
+   print ("Now I click on the lumberjack!")
+   sleep(1500)
 
-   sleep(1000)
+   mv.windows.field_action:close()
+   for name,w in pairs(mv.windows) do print ("## ", name) end
 
-   -- plr:place_building("lumberjacks_hut", first_lumberjack_field, true)
+   plr:place_building("lumberjacks_hut", first_lumberjack_field, true)
    -- msg_box(lumberjack_message_03)
    --
    -- plr:place_road(first_lumberjack_field.brn.immovable, "l", "tl", "l", "l")
