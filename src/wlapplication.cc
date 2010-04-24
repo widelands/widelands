@@ -533,7 +533,10 @@ void WLApplication::handle_input(InputCallback const * cb)
 		while (SDL_PollEvent(&ev)) {
 			switch (ev.type) {
 			case SDL_KEYDOWN:
-				if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
+				// get out of here quickly, overriding playback;
+				// since this is the only key event that works, we don't guard
+				// it by requiring Ctrl to be pressed.
+				if (ev.key.keysym.sym == SDLK_F10)
 					m_should_die = true;
 				break;
 			case SDL_QUIT:
@@ -557,7 +560,8 @@ void WLApplication::handle_input(InputCallback const * cb)
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			if (ev.key.keysym.sym == SDLK_F10) { //  TEMP - get out of here quick
+			if (ev.key.keysym.sym == SDLK_F10 &&
+				(get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL))) { //  get out of here quick
 				if (ev.type == SDL_KEYDOWN)
 					m_should_die = true;
 				break;
@@ -866,7 +870,7 @@ std::string WLApplication::find_relative_locale_path(std::string localedir)
 		return executabledir;
 	}
 #elif linux
-	if (localedir[0] != '/') {		 
+	if (localedir[0] != '/') {
 		char buffer[PATH_MAX];
 		size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
 		if (size <= 0) {
