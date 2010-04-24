@@ -28,10 +28,15 @@ using Widelands::Building;
  */
 void Building::show_options(Interactive_GameBase & igbase)
 {
-	if (m_optionswindow)
+	if (m_optionswindow) {
 		m_optionswindow->move_to_top();
-	else
+	} else {
 		create_options_window(igbase, m_optionswindow);
+
+		// Run a first think here so that certain things like caps buttons
+		// get properly initialized
+		m_optionswindow->think();
+	}
 }
 
 /**

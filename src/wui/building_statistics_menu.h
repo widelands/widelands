@@ -42,6 +42,8 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
 	void update();
 
 private:
+	bool compare_building_size(uint32_t rowa, uint32_t rowb);
+
 	Interactive_Player & iplayer() const;
 	enum Jump_Targets {
 		Prev_Owned,        Next_Owned,

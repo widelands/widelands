@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-16 22:48+0000\n"
+"POT-Creation-Date: 2010-04-21 17:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -283,7 +283,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid ""
-"Cuts raw pieces of granit out of laying stones."
+"Cuts raw pieces of granite out of laying stones."
 msgstr ""
 
 #: ../../tribes/atlanteans/soldier/conf:1
@@ -834,12 +834,12 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:56
 msgid ""
-"Resource indicator granit little"
+"Resource indicator granite little"
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:57
 msgid ""
-"Resource indicator granit much"
+"Resource indicator granite much"
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:58

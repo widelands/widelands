@@ -62,6 +62,7 @@ struct Window : public Panel {
 	void set_title(char const * text);
 
 	void move_to_mouse();
+	void move_to_mouse(const Point & pt);
 	virtual void move_inside_parent();
 	void center_to_parent();
 

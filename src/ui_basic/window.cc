@@ -112,13 +112,22 @@ void Window::set_title(char const * const text)
 }
 
 /**
- * Move the window so that it is under the mouse cursor.
+ * Move the window so that it is centered under the mouse cursor.
 */
 void Window::move_to_mouse() {
 	set_pos(get_mouse_position() - Point(get_w() / 2, get_h() / 2));
 	move_inside_parent();
 }
 
+/**
+ * Move the window so that the given point \p pt - interpreted as inner coordinates
+ * inside the window - is centered under the mouse cursor.
+ */
+void Window::move_to_mouse(const Point & pt)
+{
+	set_pos(get_pos() + get_mouse_position() - pt);
+	move_inside_parent();
+}
 
 /**
  * Move the window so that it is inside the parent panel.
@@ -350,7 +359,11 @@ void Window::think() {if (not is_minimal()) Panel::think();}
  * Left-click: drag the window
  * Right-click: close the window
  */
-bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my) {
+bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my)
+{
+	if (get_can_focus())
+		focus();
+
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked. See the
 	//  FIXME usage comment for get_key_state.
@@ -377,6 +390,7 @@ bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my) {
 		//  FIXME No, at least provide a flag for making a window unclosable and
 		//  FIXME provide a callback.
 	}
+
 	return true;
 }
 bool Window::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {

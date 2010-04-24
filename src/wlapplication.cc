@@ -195,15 +195,12 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	g_fs->PutRightVersionOnTop();
 }
 void WLApplication::setup_homedir() {
-	std::string path = FileSystem::GetHomedir();
-
 	//If we don't have a home directory don't do anything
-	if (path.size()) {
-		RealFSImpl(path).EnsureDirectoryExists(".widelands");
-		path += "/.widelands";
+	if (m_homedir.size()) {
+		//assume some dir exists
 		try {
-			log ("Set home directory: %s\n", path.c_str());
-			g_fs->SetHomeFileSystem(FileSystem::Create(path.c_str()));
+			log ("Set home directory: %s\n", m_homedir.c_str());
+			g_fs->SetHomeFileSystem(FileSystem::Create(m_homedir.c_str()));
 		} catch (FileNotFound_error     const & e) {
 		} catch (FileAccessDenied_error const & e) {
 			log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
@@ -268,7 +265,8 @@ m_gfx_double_buffer    (false),
 #if HAS_OPENGL
 m_gfx_opengl           (false),
 #endif
-m_default_datadirs     (true)
+m_default_datadirs     (true),
+m_homedir(FileSystem::GetHomedir() + "/.widelands")
 {
 	g_fs = new LayeredFileSystem();
 	UI::g_fh = new UI::Font_Handler();
@@ -535,7 +533,10 @@ void WLApplication::handle_input(InputCallback const * cb)
 		while (SDL_PollEvent(&ev)) {
 			switch (ev.type) {
 			case SDL_KEYDOWN:
-				if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
+				// get out of here quickly, overriding playback;
+				// since this is the only key event that works, we don't guard
+				// it by requiring Ctrl to be pressed.
+				if (ev.key.keysym.sym == SDLK_F10)
 					m_should_die = true;
 				break;
 			case SDL_QUIT:
@@ -559,7 +560,8 @@ void WLApplication::handle_input(InputCallback const * cb)
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			if (ev.key.keysym.sym == SDLK_F10) { //  TEMP - get out of here quick
+			if (ev.key.keysym.sym == SDLK_F10 &&
+				(get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL))) { //  get out of here quick
 				if (ev.type == SDL_KEYDOWN)
 					m_should_die = true;
 				break;
@@ -859,12 +861,25 @@ std::string WLApplication::find_relative_locale_path(std::string localedir)
 		char buffer[buffersize];
 		int32_t check = _NSGetExecutablePath(buffer,&buffersize);
 		if (check != 0) {
-			throw wexception ("[OSX] dyld could not find the path of the main executable");
+			throw wexception (_("could not find the path of the main executable"));
 		}
 		std::string executabledir = buffer;
 		executabledir.resize(executabledir.find_last_of('/') + 1);
 		executabledir+= localedir;
-		std::cout << "localedir : " << executabledir << std::endl;
+		log ("localedir: %s\n", executabledir.c_str());
+		return executabledir;
+	}
+#elif linux
+	if (localedir[0] != '/') {
+		char buffer[PATH_MAX];
+		size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
+		if (size <= 0) {
+			throw wexception (_("could not find the path of the main executable"));
+		}
+		std::string executabledir(buffer, size);
+		executabledir.resize(executabledir.find_last_of('/') + 1);
+		executabledir += localedir;
+		log ("localedir : %s\n", executabledir.c_str());
 		return executabledir;
 	}
 #endif
@@ -1132,6 +1147,11 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_default_datadirs = false;
 		m_commandline.erase("datadir");
 	}
+	if (m_commandline.count("homedir")) {
+		log ("Adding home directory: %s\n", m_commandline["homedir"].c_str());
+		m_homedir = m_commandline["homedir"];
+		m_commandline.erase("homedir");
+	}
 
 	if (m_commandline.count("double")) {
 #ifdef DEBUG
@@ -1276,7 +1296,13 @@ void WLApplication::show_usage()
 			 "                      terminal output\n"
 			 " --datadir=DIRNAME    Use specified direction for the widelands\n"
 			 "                      data files\n"
-			 " --record=FILENAME    Record all events to the given filename for\n"
+			 " --homedir=DIRNAME    Use specified directory for widelands config\n"
+			 "                      files, savegames and replays\n")
+#ifdef linux
+		<< _("                      Default is ~/.widelands\n")
+#endif
+		<< _
+			(" --record=FILENAME    Record all events to the given filename for\n"
 			 "                      later playback\n"
 			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
 			 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"

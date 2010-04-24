@@ -24,59 +24,34 @@
 #include "i18n.h"
 #include "interactive_player.h"
 #include "logic/player.h"
+#include "logic/warehouse.h"
+#include "ui_basic/tabpanel.h"
+
+static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
+static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
+static const char pic_tab_wares_warehouse[] = "pics/menu_tab_wares_warehouse.png";
+static const char pic_tab_workers_warehouse[] = "pics/menu_tab_workers_warehouse.png";
 
 Stock_Menu::Stock_Menu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow(&plr, &registry, 640, 480, _("Stock")),
-m_player(plr),
-waresdisplay(this, 0, 0, plr.player().tribe()),
-help
-	(this, "help",
-	 0, 0, buttonw(3),                  30,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
-	 &Stock_Menu::clicked_help, *this),
-switchpage
-	(this, "switchpage",
-	 0, 0, buttonw(3) * 2 + hspacing(), 30,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"),
-	 &Stock_Menu::clicked_switch_page, *this),
-current_page(Wares)
+m_player(plr)
 {
-	fill_waredisplay_with_wares();
-	help      .set_pos(Point(posx(0, 3), waresdisplay.get_h()));
-	switchpage.set_pos(Point(posx(1, 3), waresdisplay.get_h()));
-	set_inner_size
-		(waresdisplay.get_w(), waresdisplay.get_h() + 30 + vmargin());
-}
+	UI::Tab_Panel * tabs = new UI::Tab_Panel(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+	tabs->set_snapparent(true);
 
-/**
- * \todo Implement help
- */
-void Stock_Menu::clicked_help() {}
+	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
+	tabs->add(g_gr->get_picture(PicMod_UI, pic_tab_wares), m_all_wares, _("Wares (total)"));
 
+	m_all_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
+	tabs->add(g_gr->get_picture(PicMod_UI, pic_tab_workers), m_all_workers, _("Workers (total)"));
 
-/*
- * Switch to the next page, that is, show
- * wares -> workers -> soldier
- */
-void Stock_Menu::clicked_switch_page() {
-	switch (current_page) {
-	case Wares:
-		current_page = Workers;
-		fill_waredisplay_with_workers();
-		switchpage.set_tooltip(_("Show wares"));
-		break;
-	case Workers:
-		current_page = Wares;
-		fill_waredisplay_with_wares();
-		switchpage.set_tooltip(_("Show workers"));
-		break;
-	default:
-		assert(false);
-	}
+	m_warehouse_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
+	tabs->add(g_gr->get_picture(PicMod_UI, pic_tab_wares_warehouse), m_warehouse_wares, _("Wares in warehouses"));
+
+	m_warehouse_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
+	tabs->add(g_gr->get_picture(PicMod_UI, pic_tab_workers_warehouse), m_warehouse_workers, _("Workers in warehouses"));
 }
 
 /*
@@ -86,35 +61,49 @@ Push the current wares status to the WaresDisplay.
 */
 void Stock_Menu::think()
 {
-	switch (current_page) {
-	case Wares:   fill_waredisplay_with_wares  (); break;
-	case Workers: fill_waredisplay_with_workers(); break;
-	default:
-		assert(false);
+	UI::UniqueWindow::think();
+
+	fill_total_waresdisplay(m_all_wares, WaresDisplay::WARE);
+	fill_total_waresdisplay(m_all_workers, WaresDisplay::WORKER);
+	fill_warehouse_waresdisplay(m_warehouse_wares, WaresDisplay::WARE);
+	fill_warehouse_waresdisplay(m_warehouse_workers, WaresDisplay::WORKER);
+}
+
+/**
+ * Keep the list of wares repositories up-to-date (honoring that the set of \ref Economy
+ * of a player may change)
+ */
+void Stock_Menu::fill_total_waresdisplay(WaresDisplay* waresdisplay, WaresDisplay::wdType type)
+{
+	waresdisplay->remove_all_warelists();
+	Widelands::Player const & player = *m_player.get_player();
+	const uint32_t nrecos = player.get_nr_economies();
+	for (uint32_t i = 0; i < nrecos; ++i)
+		waresdisplay->add_warelist
+			(type == WaresDisplay::WARE ?
+			 player.get_economy_by_number(i)->get_wares() :
+			 player.get_economy_by_number(i)->get_workers(),
+			 type);
+}
+
+/**
+ * Keep the list of wares repositories up-to-date (consider that the available \ref Warehouse
+ * may change)
+ */
+void Stock_Menu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay, WaresDisplay::wdType type)
+{
+	waresdisplay->remove_all_warelists();
+	Widelands::Player const & player = *m_player.get_player();
+	const uint32_t nrecos = player.get_nr_economies();
+	for (uint32_t i = 0; i < nrecos; ++i) {
+		const std::vector<Widelands::Warehouse*> & warehouses = player.get_economy_by_number(i)->warehouses();
+
+		for
+			(std::vector<Widelands::Warehouse*>::const_iterator it = warehouses.begin();
+			 it != warehouses.end();
+			 ++it) {
+			waresdisplay->add_warelist
+				(type == WaresDisplay::WARE ? (*it)->get_wares() : (*it)->get_workers(), type);
+		}
 	}
-}
-
-/*
- * Fills the waresdisplay with wares
- */
-void Stock_Menu::fill_waredisplay_with_wares() {
-	waresdisplay.remove_all_warelists();
-	Widelands::Player const & player = *m_player.get_player();
-	const uint32_t nrecos = player.get_nr_economies();
-	for (uint32_t i = 0; i < nrecos; ++i)
-		waresdisplay.add_warelist
-			(player.get_economy_by_number(i)->get_wares(), WaresDisplay::WARE);
-}
-
-/*
- * Fill it with workers
- */
-void Stock_Menu::fill_waredisplay_with_workers() {
-	waresdisplay.remove_all_warelists();
-	Widelands::Player const & player = *m_player.get_player();
-	const uint32_t nrecos = player.get_nr_economies();
-	for (uint32_t i = 0; i < nrecos; ++i)
-		waresdisplay.add_warelist
-			(player.get_economy_by_number(i)->get_workers(),
-			 WaresDisplay::WORKER);
 }

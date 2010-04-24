@@ -293,6 +293,7 @@ protected:
 
 	//do we want to search the default places for widelands installs
 	bool   m_default_datadirs;
+	std::string m_homedir;
 private:
 	///Holds this process' one and only instance of WLApplication, if it was
 	///created already. NULL otherwise.

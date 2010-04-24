@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-16 22:48+0000\n"
+"POT-Creation-Date: 2010-04-21 17:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -138,7 +138,7 @@ msgstr ""
 
 #: ../../worlds/winterland/resconf:28
 msgid ""
-"Granit"
+"Granite"
 msgstr ""
 
 #: ../../worlds/winterland/conf:16

@@ -176,9 +176,9 @@ void Fullscreen_Menu_MapSelect::ok()
 
 
 /**
-*Called when a different entry in the listbox gets selected.
-*When this happens, the information display at the right needs to be
-*refreshed.
+ * Called when a different entry in the listbox gets selected.
+ * When this happens, the information display at the right needs to be
+ * refreshed.
  */
 void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 {
@@ -217,26 +217,26 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 }
 
 /**
-*listbox got double clicked
+ * listbox got double clicked
  */
 void Fullscreen_Menu_MapSelect::double_clicked(uint32_t) {
 	ok();
 }
 
 /**
-*Fill the list with maps that can be opened.
+ * Fill the list with maps that can be opened.
  *
-*At first, only the subdirectories are added to the list, then the normal
-*files follow. This is done to make navigation easier.
+ * At first, only the subdirectories are added to the list, then the normal
+ * files follow. This is done to make navigation easier.
  *
-*To make things more difficult, we have to support compressed and uncompressed
-*map files here - the former are files, the latter are directories. Care must
-*be taken to sort uncompressed maps (which look like and really are
-*directories) with the files.
+ * To make things more difficult, we have to support compressed and uncompressed
+ * map files here - the former are files, the latter are directories. Care must
+ * be taken to sort uncompressed maps (which look like and really are
+ * directories) with the files.
  *
-*The search starts in \ref m_curdir ("..../maps") and there is no possibility
-*to move further up. If the user moves down into subdirectories, we insert an
-*entry to move back up.
+ * The search starts in \ref m_curdir ("..../maps") and there is no possibility
+ * to move further up. If the user moves down into subdirectories, we insert an
+ * entry to move back up.
  */
 void Fullscreen_Menu_MapSelect::fill_list()
 {

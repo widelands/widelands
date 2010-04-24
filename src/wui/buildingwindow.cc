@@ -52,9 +52,12 @@ Building_Window::Building_Window
 	delete m_registry;
 	m_registry = this;
 
+	m_center_mouse = this;
+
 	m_capscache_player_number = 0;
 	m_capsbuttons = 0;
 	m_capscache = 0;
+	m_toggle_workarea = 0;
 
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 	vbox->set_snapparent(true);
@@ -77,6 +80,8 @@ Building_Window::Building_Window
 		++filename[13];
 		workarea_cumulative_picid[i] = g_gr->get_picture(PicMod_Game, filename);
 	}
+
+	show_workarea();
 }
 
 
@@ -122,8 +127,32 @@ void Building_Window::think()
 		move_inside_parent();
 	}
 
+	if (m_center_mouse) {
+		Point pt(m_center_mouse->get_w() / 2, m_center_mouse->get_h() / 2);
+		UI::Panel * p = m_center_mouse;
+
+		while(p->get_parent() && p != this) {
+			pt = p->to_parent(pt);
+			p = p->get_parent();
+		}
+
+		move_to_mouse(pt);
+
+		m_center_mouse = 0;
+	}
+
 	UI::Window::think();
 }
+
+/**
+ * Arrange for the given child panel to be moved under the mouse pointer
+ * at the end of the next \ref think
+ */
+void Building_Window::set_center_mouse(UI::Panel* panel)
+{
+	m_center_mouse = panel;
+}
+
 
 /**
  * Fill caps buttons into the given box.
@@ -205,8 +234,9 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
 				 &Building_Window::toggle_workarea, *this,
-				 _("Show workarea"));
+				 _("Hide workarea"));
 			capsbuttons->add(m_toggle_workarea, UI::Box::AlignCenter);
+			set_center_mouse(m_toggle_workarea);
 		}
 
 		if (igbase().get_display_flag(Interactive_Base::dfDebug)) {
@@ -275,42 +305,75 @@ void Building_Window::act_debug()
 		 igbase().game().map().get_fcoords(m_building.get_position()));
 }
 
+/**
+ * Show the building's workarea (if it has one).
+ */
+void Building_Window::show_workarea()
+{
+	if (m_workarea_job_id)
+		return; // already shown, nothing to be done
 
-void Building_Window::toggle_workarea() {
+	Workarea_Info const & workarea_info = m_building.descr().m_workarea_info;
+	if (workarea_info.size() == 0)
+		return; // building has no workarea
+
 	Widelands::Map & map =
 		ref_cast<Interactive_GameBase const, UI::Panel>(*get_parent()).egbase()
 		.map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
+	m_workarea_job_id = overlay_manager.get_a_job_id();
+
+	Widelands::HollowArea<> hollow_area
+		(Widelands::Area<>(m_building.get_position(), 0), 0);
+	Workarea_Info::const_iterator it = workarea_info.begin();
+	for
+		(Workarea_Info::size_type i =
+			std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
+			i;
+			++it)
+	{
+		--i;
+		hollow_area.radius = it->first;
+		Widelands::MapHollowRegion<> mr(map, hollow_area);
+		do
+			overlay_manager.register_overlay
+				(mr.location(),
+					workarea_cumulative_picid[i],
+					0,
+					Point::invalid(),
+					m_workarea_job_id);
+		while (mr.advance(map));
+		hollow_area.hole_radius = hollow_area.radius;
+	}
+
+	if (m_toggle_workarea)
+		m_toggle_workarea->set_tooltip(_("Hide workarea"));
+}
+
+/**
+ * Hide the workarea from view.
+ */
+void Building_Window::hide_workarea()
+{
 	if (m_workarea_job_id) {
+		Widelands::Map & map =
+			ref_cast<Interactive_GameBase const, UI::Panel>(*get_parent()).egbase()
+			.map();
+		Overlay_Manager & overlay_manager = map.overlay_manager();
 		overlay_manager.remove_overlay(m_workarea_job_id);
 		m_workarea_job_id = Overlay_Manager::Job_Id::Null();
-		m_toggle_workarea->set_tooltip(_("Show workarea"));
+
+		if (m_toggle_workarea)
+			m_toggle_workarea->set_tooltip(_("Show workarea"));
+	}
+}
+
+
+void Building_Window::toggle_workarea() {
+	if (m_workarea_job_id) {
+		hide_workarea();
 	} else {
-		m_workarea_job_id = overlay_manager.get_a_job_id();
-		Widelands::HollowArea<> hollow_area
-			(Widelands::Area<>(m_building.get_position(), 0), 0);
-		Workarea_Info const & workarea_info = m_building.descr().m_workarea_info;
-		Workarea_Info::const_iterator it = workarea_info.begin();
-		for
-			(Workarea_Info::size_type i =
-			 std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
-			 i;
-			 ++it)
-		{
-			--i;
-			hollow_area.radius = it->first;
-			Widelands::MapHollowRegion<> mr(map, hollow_area);
-			do
-				overlay_manager.register_overlay
-					(mr.location(),
-					 workarea_cumulative_picid[i],
-					 0,
-					 Point::invalid(),
-					 m_workarea_job_id);
-			while (mr.advance(map));
-			hollow_area.hole_radius = hollow_area.radius;
-		}
-		m_toggle_workarea->set_tooltip(_("Hide workarea"));
+		show_workarea();
 	}
 }
 

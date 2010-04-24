@@ -279,6 +279,20 @@ void Panel::set_pos(const Point n) {
 }
 
 /**
+ * Interpret \p pt as a point in the interior of this panel,
+ * and translate it into the interior coordinate system of the parent
+ * and return the result.
+ */
+Point Panel::to_parent(const Point& pt) const
+{
+	if (!_parent)
+		return pt;
+
+	return pt + Point(_lborder + _x, _tborder + _y);
+}
+
+
+/**
  * Ensure the panel is inside the parent's visibile area after
  * resizing.
  *

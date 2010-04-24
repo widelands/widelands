@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-16 22:48+0000\n"
+"POT-Creation-Date: 2010-04-21 17:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -177,7 +177,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid ""
-"Carries items along your roads."
+"Carries items along the roads."
 msgstr ""
 
 #: ../../tribes/barbarians/conf:164
@@ -243,7 +243,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid ""
-"Cuts raw pieces of granit out of laying stones."
+"Cuts raw pieces of granite out of laying stones."
 msgstr ""
 
 #: ../../tribes/barbarians/conf:191
@@ -358,7 +358,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
-"Fire-hardened wood, hard as iron and can not burn, used for military buildings."
+"Fire-hardened wood, as hard as iron and cannot burn, used for military buildings."
 msgstr ""
 
 #: ../../tribes/barbarians/conf:81
@@ -376,6 +376,11 @@ msgid ""
 "Fisher's Hut"
 msgstr ""
 
+#: ../../tribes/barbarians/fisher/conf:1
+msgid ""
+"Fishes in the sea."
+msgstr ""
+
 #: ../../tribes/barbarians/conf:82
 msgid ""
 "Fishing Rod"
@@ -383,7 +388,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid ""
-"Fishing rods are needed by barbarian fishers, to catch fish."
+"Fishing rods are needed by barbarian fishers for fishing."
 msgstr ""
 
 #: ../../tribes/barbarians/conf:83
@@ -393,7 +398,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/flax/conf:1
 msgid ""
-"Flax is a beautiful flower, which are used to make cloth."
+"Flax is a beautiful flower, which is used for making cloth."
 msgstr ""
 
 #: ../../tribes/barbarians/conf:47
@@ -435,11 +440,6 @@ msgstr ""
 #: ../../tribes/barbarians/conf:133
 msgid ""
 "Geologist"
-msgstr ""
-
-#: ../../tribes/barbarians/fisher/conf:1
-msgid ""
-"Gets fish out of the sea."
 msgstr ""
 
 #: ../../tribes/barbarians/conf:84
@@ -934,12 +934,12 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:59
 msgid ""
-"Resource indicator granit little"
+"Resource indicator granite little"
 msgstr ""
 
 #: ../../tribes/barbarians/conf:60
 msgid ""
-"Resource indicator granit much"
+"Resource indicator granite much"
 msgstr ""
 
 #: ../../tribes/barbarians/conf:61
@@ -1081,7 +1081,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
-"The Axe is the basic weapon and tool for the barbarians. All young soldiers are equipped with this basic weapon, but also the lumberjack is using the same model."
+"The Axe is a basic weapon and tool for the barbarians. All young soldiers are equipped with it, but also the lumberjack is using the same model."
 msgstr ""
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
@@ -1126,12 +1126,12 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:20
 msgid ""
-"The mighty tribes of the east-lands!"
+"The mighty tribes of the eastern lands!"
 msgstr ""
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced in the metal works like all tools."
+"The peel is a tool of the baker and each baker needs his own. It is produced in the metal works like all other tools."
 msgstr ""
 
 #: ../../tribes/barbarians/scythe/conf:1
@@ -1156,7 +1156,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
-"This is the second most dangerous weapon, the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produce in the axe factory."
+"This is the second most dangerous weapon the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produced in the axe factory."
 msgstr ""
 
 #: ../../tribes/barbarians/goldstone/conf:1
@@ -1422,7 +1422,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid ""
-"Works at construction sites to create a new building."
+"Works at construction sites to raise a new building."
 msgstr ""
 
 #: ../../tribes/barbarians/chief-miner/conf:1

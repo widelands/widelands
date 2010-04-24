@@ -49,12 +49,14 @@ struct GameMessageMenu : public UI::UniqueWindow {
 
 	enum Mode {Inbox, Archive};
 	void think();
+	virtual bool handle_key(bool down, SDL_keysym code);
 
 private:
 	Interactive_Player & iplayer() const;
 	void                 selected(uint32_t);
 
 	bool status_compare(uint32_t a, uint32_t b);
+	void do_delete();
 
 	struct List : public UI::Table<uintptr_t> {
 		enum Cols {Select, Status, Title, Time_Sent};
