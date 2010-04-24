@@ -1281,6 +1281,11 @@ void Worker::transfer_update(Game & game, State & state) {
 			molog("[transfer]: Got signal '%s' -> recalculate\n", signal.c_str());
 
 			signal_handled();
+		} else if (signal == "blocked") {
+			molog("[transfer]: Blocked by a battle\n");
+
+			signal_handled();
+			return start_task_idle(game, get_animation("idle"), 500);
 		} else {
 			molog("[transfer]: Cancel due to signal '%s'\n", signal.c_str());
 			return pop_task(game);
@@ -1755,8 +1760,8 @@ void Worker::gowarehouse_update(Game & game, State & state)
 
 	if (signal.size()) {
 		// if routing has failed, try a different warehouse/route on next update()
-		if (signal == "fail") {
-			molog("[gowarehouse]: caught 'fail'\n");
+		if (signal == "fail" || signal == "cancel") {
+			molog("[gowarehouse]: caught '%s'\n", signal.c_str());
 			signal_handled();
 		} else if (signal == "transfer") {
 			signal_handled();
@@ -1777,6 +1782,7 @@ void Worker::gowarehouse_update(Game & game, State & state)
 	// If we got a transfer, use it
 	if (state.transfer) {
 		Transfer * const t = state.transfer;
+		molog("[gowarehouse]: Got transfer\n");
 
 		state.transfer = 0;
 		pop_task(game);
@@ -1795,21 +1801,22 @@ void Worker::gowarehouse_update(Game & game, State & state)
 	// flag is removed or a warehouse connects to the Economy).
 	if (!m_supply)
 		m_supply = new IdleWorkerSupply(*this);
-	if (name() == "donkey")
-		molog
-			("Worker::gowarehouse_update: donkey at (%i, %i): nothing to do, "
-			 "starting task idle\n", get_position().x, get_position().y);
 	return start_task_idle(game, get_animation("idle"), 1000);
 }
 
 void Worker::gowarehouse_signalimmediate
-	(Game &, State &, std::string const & signal)
+	(Game &, State & state, std::string const & signal)
 {
 	if (signal == "transfer") {
 		// We are assigned a transfer, make sure our supply disappears immediately
 		// Otherwise, we might receive two transfers in a row.
 		delete m_supply;
 		m_supply = 0;
+	} else if (signal == "cancel") {
+		// If the transfer is cancelled again (e.g. due to building destruction)
+		// in the short window of time before the "transfer" signal is handled,
+		// we need to clean the transfer up.
+		state.transfer = 0;
 	}
 }
 
