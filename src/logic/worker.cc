@@ -2261,11 +2261,16 @@ void Worker::fugitive_update(Game & game, State & state)
 		}
 	}
 
-	//  try to find a flag connected to a warehouse that we can return to
+	// Try to find a flag connected to a warehouse that we can return to
+	//
+	// We always have a high probability to see flags within our vision range,
+	// but with some luck we see flags that are even further away.
 	std::vector<ImmovableFound> flags;
+	int32_t vision = vision_range();
+	int32_t maxdist = 4*vision;
 	if
 		(map.find_immovables
-		 	(Area<FCoords>(map.get_fcoords(get_position()), vision_range()),
+		 	(Area<FCoords>(map.get_fcoords(get_position()), maxdist),
 		 	 &flags, FindFlagWithPlayersWarehouse(*get_owner())))
 	{
 		int32_t bestdist = -1;
@@ -2276,29 +2281,39 @@ void Worker::fugitive_update(Game & game, State & state)
 		container_iterate_const(std::vector<ImmovableFound>, flags, i) {
 			Flag & flag = ref_cast<Flag, BaseImmovable>(*i.current->object);
 
+			if (game.logic_rand() % 2 == 0)
+				continue;
+
 			int32_t const dist =
 				map.calc_distance(get_position(), i.current->coords);
 
-			if (!best || dist < bestdist) {
+			if (!best || bestdist > dist) {
 				best = &flag;
 				bestdist = dist;
 			}
 		}
 
-		if
-			(best and
-			 static_cast<int32_t>(game.logic_rand() % 30) <= 30 - bestdist)
-		{
+		if (best && bestdist > vision) {
+			uint32_t chance = maxdist - (bestdist - vision);
+			if (game.logic_rand() % maxdist >= chance)
+				best = 0;
+		}
+
+		if (best) {
 			molog("[fugitive]: try to move to flag\n");
 
-			//  \todo FIXME ??? \todo
-			//  warehouse could be on a different island, so check for failure
+			// Warehouse could be on a different island, so check for failure
+			// Also, move only a few number of steps in the right direction,
+			// so that we could theoretically lose the flag again, but also
+			// perhaps find a closer flag.
 			if
 				(start_task_movepath
 				 	(game,
 				 	 best->get_position(),
 				 	 0,
-				 	 descr().get_right_walk_anims(does_carry_ware())))
+				 	 descr().get_right_walk_anims(does_carry_ware()),
+				 	 false,
+				 	 4))
 				return;
 		}
 	}
