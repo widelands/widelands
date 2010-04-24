@@ -4,9 +4,9 @@
 
 ui_tests = lunit.TestCase("Game User Interface tests")
 function ui_tests:test_interface()
-   local i = wl.ui.get()
+   local mv = wl.ui.MapView()
 
-   assert_not_equal(nil, i.buttons.buildhelp)
+   assert_not_equal(nil, mv.buttons.buildhelp)
 end
 
 
@@ -15,7 +15,7 @@ end
 -- ========
 button_tests = lunit.TestCase("Button tests")
 function button_tests:setup()
-   self.b = wl.ui.get().buttons.buildhelp
+   self.b = wl.ui.MapView().buttons.buildhelp
    self.p = wl.game.Player(1)
    self.p.buildhelp = false
 end

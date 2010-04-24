@@ -96,8 +96,6 @@ struct Interactive_Player : public Interactive_GameBase
 
 	void popup_message(Widelands::Message_Id, Widelands::Message const &);
 
-	UI::UniqueWindow::Registry & get_message_menu();
-
 private:
 	void cmdSwitchPlayer(std::vector<std::string> const & args);
 

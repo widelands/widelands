@@ -359,13 +359,6 @@ void Interactive_Player::toggle_message_menu() {
 		new GameMessageMenu(*this, m_message_menu);
 }
 
-UI::UniqueWindow::Registry & Interactive_Player::get_message_menu() {
-	if (m_message_menu.window)
-		delete m_message_menu.window;
-	new GameMessageMenu(*this, m_message_menu);
-	return m_message_menu;
-}
-
 void Interactive_Player::toggle_buildhelp() {
 	egbase().map().overlay_manager().toggle_buildhelp();
 }
