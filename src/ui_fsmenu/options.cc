@@ -231,7 +231,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_remove_replays           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
-	SDL_PixelFormat & fmt = *SDL_GetVideoInfo()->vfmt;
+	// take a copy to not change real video info structure
+	SDL_PixelFormat  fmt = *SDL_GetVideoInfo()->vfmt;
 	fmt.BitsPerPixel = 16;
 	if
 		(SDL_Rect const * const * const modes =
