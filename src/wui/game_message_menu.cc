@@ -57,6 +57,9 @@ GameMessageMenu::GameMessageMenu
 		center_to_parent();
 
 	list.set_column_compare(List::Status, boost::bind(&GameMessageMenu::status_compare, this, _1, _2));
+
+	set_can_focus(true);
+	focus();
 }
 
 /**
@@ -176,6 +179,47 @@ void GameMessageMenu::selected(uint32_t const t) {
 	}
 	center_main_mapview_on_location.set_enabled(false);
 	message_body                   .set_text   (std::string());
+}
+
+/**
+ * Handle message menu hotkeys.
+ */
+bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
+{
+	if (down) {
+		switch(code.sym) {
+		case SDLK_g:
+			if (center_main_mapview_on_location.enabled())
+				center_main_mapview_on_location.clicked();
+			return true;
+
+		case SDLK_DELETE:
+			do_delete();
+			return true;
+
+		default:
+			break; // not handled
+		}
+	}
+
+	return UI::Panel::handle_key(down, code);
+}
+
+/**
+ * Delete the currently selected message, if any.
+ */
+void GameMessageMenu::do_delete()
+{
+	if (mode == Archive)
+		return;
+
+	if (!list.has_selection())
+		return;
+
+	Widelands::Game & game = iplayer().game();
+	game.send_player_command
+		(*new Widelands::Cmd_MessageSetStatusArchived
+			(game.get_gametime(), iplayer().player_number(), Message_Id(list.get_selected())));
 }
 
 void GameMessageMenu::Archive_Or_Restore_Selected_Messages::clicked() {

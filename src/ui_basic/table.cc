@@ -302,6 +302,9 @@ void Table<void *>::draw(RenderTarget & dst)
 bool Table<void *>::handle_mousepress
 	(Uint8 const btn, int32_t x, int32_t const y)
 {
+	if (get_can_focus())
+		focus();
+
 	switch (btn) {
 	case SDL_BUTTON_WHEELDOWN:
 	case SDL_BUTTON_WHEELUP:

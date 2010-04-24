@@ -438,6 +438,10 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 			toggle_minimap();
 			return true;
 
+		case SDLK_n:
+			toggle_message_menu();
+			return true;
+
 		case SDLK_o:
 			toggle_objectives();
 			return true;
