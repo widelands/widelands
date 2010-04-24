@@ -81,7 +81,8 @@ FileViewWindow::FileViewWindow
 	(UI::Panel                  & parent,
 	 UI::UniqueWindow::Registry & reg,
 	 std::string          const & filename)
-: UI::UniqueWindow(&parent, &reg, 0, 0, ""), textview(this, 0, 0, 560, 240)
+: UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, ""),
+	textview(this, 0, 0, 560, 240)
 {
 	Profile prof(filename.c_str(), "global", "texts"); // section-less file
 	Section & s = prof.get_safe_section("global");

@@ -42,7 +42,7 @@ WLMessageBox::WLMessageBox
 	 const std::string & text,
 	 const MB_Type type)
 	:
-	Window(parent, 0, 0, 20, 20, caption.c_str()),
+	Window(parent, "message_box", 0, 0, 20, 20, caption.c_str()),
 	d(new WLMessageBoxImpl)
 {
 	d->type = type;

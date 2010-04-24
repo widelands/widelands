@@ -273,7 +273,7 @@ FieldActionWindow::FieldActionWindow
 	 Widelands::Player          * const plr,
 	 UI::UniqueWindow::Registry * const registry)
 :
-	UI::UniqueWindow(ib, registry, 68, 34, _("Action")),
+	UI::UniqueWindow(ib, "field_action", registry, 68, 34, _("Action")),
 	m_plr(plr),
 	m_map(&ib->egbase().map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),

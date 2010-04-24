@@ -30,7 +30,7 @@
 Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory
 	(UI::Panel * const parent, char const * dirname)
 :
-UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
+UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;

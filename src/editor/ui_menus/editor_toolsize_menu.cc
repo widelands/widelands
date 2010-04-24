@@ -36,7 +36,8 @@ inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
 Editor_Toolsize_Menu::Editor_Toolsize_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 	:
-	UI::UniqueWindow(&parent, &registry, 160, 50, _("Toolsize Menu")),
+	UI::UniqueWindow
+		(&parent, "toolsize_menu", &registry, 160, 50, _("Toolsize Menu")),
 	m_textarea(this, 5, 5, 150, 10, std::string(), UI::Align_HCenter),
 	m_increase
 		(this, "incr",

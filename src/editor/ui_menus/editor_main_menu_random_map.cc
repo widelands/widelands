@@ -46,7 +46,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	(Editor_Interactive & parent)
 	:
 	UI::Window
-		(&parent,
+		(&parent, "random_map_menu",
 		 (parent.get_w() - 260) / 2, (parent.get_h() - 450) / 2, 260, 450,
 		 _("New Random Map")),
 	m_currentworld(0)

@@ -102,7 +102,8 @@ BulldozeConfirm::BulldozeConfirm
 	 Widelands::Building        & building,
 	 Widelands::PlayerImmovable * todestroy)
 	:
-	UI::Window (&parent, 0, 0, 200, 120, _("Destroy building?")),
+	UI::Window
+		(&parent, "bulldoze_confirm", 0, 0, 200, 120, _("Destroy building?")),
 	m_building (&building),
 	m_todestroy(todestroy ? todestroy : &building),
 	m_message  (*this, building),

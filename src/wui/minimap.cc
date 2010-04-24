@@ -131,7 +131,7 @@ inline uint32_t MiniMap::but_w                    () const {
 inline uint32_t MiniMap::but_h                    () const {return 20;}
 MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 :
-	UI::UniqueWindow(&ibase, registry, 0, 0, _("Map")),
+	UI::UniqueWindow(&ibase, "minimap", registry, 0, 0, _("Map")),
 	m_view(*this, &registry->flags, 0, 0, 0, 0, ibase),
 
 	button_terrn

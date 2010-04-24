@@ -69,6 +69,7 @@ namespace UI {
  */
 Window::Window
 	(Panel * const parent,
+	 std::string const & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 char const * const title)
 	:
@@ -79,6 +80,7 @@ Window::Window
 		_docked_left(false), _docked_right(false), _docked_bottom(false),
 		_drag_start_win_x(0), _drag_start_win_y(0),
 		_drag_start_mouse_x(0), _drag_start_mouse_y(0),
+		m_name(name),
 		m_pic_lborder
 			(g_gr->get_picture(PicMod_UI, "pics/win_l_border.png")),
 		m_pic_rborder
@@ -105,7 +107,17 @@ Window::Window
 /**
  * Replace the current title with a new one
 */
-void Window::set_title(char const * const text)
+void Window::set_title(const std::string & text)
+{
+	m_title = text;
+	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);
+}
+
+/**
+ * Set the internal name of this window. This is important
+ * for UI scripting
+*/
+void Window::set_name(const std::string & text)
 {
 	m_title = text;
 	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);

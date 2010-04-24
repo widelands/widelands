@@ -56,6 +56,7 @@ const MethodType<L_Panel> L_Panel::Methods[] = {
 };
 const PropertyType<L_Panel> L_Panel::Properties[] = {
 	PROP_RO(L_Panel, buttons),
+	PROP_RO(L_Panel, windows),
 	{0, 0, 0},
 };
 
@@ -66,17 +67,16 @@ const PropertyType<L_Panel> L_Panel::Properties[] = {
 /* RST
 	.. attribute:: buttons
 
-		(RO) An :class:`array` of all buttons in this  TODO
+		(RO) An :class:`array` of all visible buttons inside this Panel.
 */
-static void _push_all_visible_buttons
+static void _put_all_visible_buttons_into_table
 	(lua_State * L, UI::Panel * g)
 {
-	if (not g)
-		return ;
+	if (not g) return;
 
 	for(UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
-		_push_all_visible_buttons(L, f);
+		_put_all_visible_buttons_into_table(L, f);
 
 		if(upcast(UI::Button, b, f))
 			if (b->is_visible()) {
@@ -90,7 +90,38 @@ int L_Panel::get_buttons(lua_State * L) {
 	assert(m_panel);
 
 	lua_newtable(L);
-	_push_all_visible_buttons(L, m_panel);
+	_put_all_visible_buttons_into_table(L, m_panel);
+
+	return 1;
+}
+
+/* RST
+	.. attribute:: windows
+
+		(RO) A :class:`array` of all currently open windows that are
+			children of this Panel.
+*/
+static void _put_all_visible_windows_into_table
+	(lua_State * L, UI::Panel * g)
+{
+	if (not g) return;
+
+	for(UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
+	{
+		_put_all_visible_windows_into_table(L, f);
+
+		if(upcast(UI::Window, win, f)) {
+			lua_pushstring(L, win->get_name());
+			to_lua<L_Window>(L, new L_Window(win));
+			lua_rawset(L, -3);
+		}
+	}
+}
+int L_Panel::get_windows(lua_State * L) {
+	assert(m_panel);
+
+	lua_newtable(L);
+	_put_all_visible_windows_into_table(L, m_panel);
 
 	return 1;
 }
@@ -116,10 +147,6 @@ const PropertyType<L_Button> L_Button::Properties[] = {
 	PROP_RO(L_Button, name),
 	{0, 0, 0},
 };
-
-L_MapView::L_MapView(lua_State * L) :
-	L_Panel(get_egbase(L).get_ibase()) {
-}
 
 /*
  * Properties
@@ -161,6 +188,51 @@ int L_Button::click(lua_State * L) {
  * C Functions
  */
 
+// TODO: document me somehow
+const char L_Window::className[] = "Window";
+const MethodType<L_Window> L_Window::Methods[] = {
+	METHOD(L_Window, close),
+	{0, 0},
+};
+const PropertyType<L_Window> L_Window::Properties[] = {
+	PROP_RO(L_Window, name),
+	{0, 0, 0},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+	.. attribute:: name
+
+		(RO) The name of this button
+*/
+// TODO: maybe this should go to panel
+int L_Window::get_name(lua_State * L) {
+	lua_pushstring(L, get()->get_name());
+	return 1;
+}
+
+/*
+ * Lua Functions
+ */
+
+/* RST
+	.. method:: close
+
+		Closes this window. This invalidates this Object, do
+		not use it any longer.
+*/
+int L_Window::close(lua_State * L) {
+	delete m_panel;
+	m_panel = 0;
+}
+
+/*
+ * C Functions
+ */
+
 
 // TODO: document me somehow
 const char L_MapView::className[] = "MapView";
@@ -172,6 +244,11 @@ const MethodType<L_MapView> L_MapView::Methods[] = {
 const PropertyType<L_MapView> L_MapView::Properties[] = {
 	{0, 0, 0},
 };
+
+L_MapView::L_MapView(lua_State * L) :
+	L_Panel(get_egbase(L).get_ibase()) {
+}
+
 
 /*
  * Properties
@@ -212,6 +289,10 @@ void luaopen_wlui(lua_State * L) {
 
 	register_class<L_Button>(L, "ui", true);
 	add_parent<L_Button, L_Panel>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Window>(L, "ui", true);
+	add_parent<L_Window, L_Panel>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_MapView>(L, "ui", true);

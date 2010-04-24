@@ -46,7 +46,8 @@ Editor_Main_Menu::Editor_Main_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
-		(&parent, &registry, 2 * hmargin + width, 260, _("Main Menu")),
+		(&parent, "main_menu", &registry, 2 * hmargin + width,
+		 260, _("Main Menu")),
 	m_button_new_map
 		(this, "new_map",
 		 hmargin, vmargin + 0 * (height + vspacing), width, height,

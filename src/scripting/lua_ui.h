@@ -23,6 +23,7 @@
 #include <lua.hpp>
 
 #include "ui_basic/button.h"
+#include "ui_basic/window.h"
 #include "wui/mapview.h"
 
 #include "luna.h"
@@ -65,6 +66,7 @@ public:
 	 * Properties
 	 */
 	int get_buttons(lua_State * L);
+	int get_windows(lua_State * L);
 
 	/*
 	 * Lua Methods
@@ -101,6 +103,32 @@ public:
 	 */
 	UI::Button * get() {return static_cast<UI::Button *>(m_panel);}
 };
+
+class L_Window : public L_Panel {
+public:
+	LUNA_CLASS_HEAD(L_Window);
+
+	L_Window() : L_Panel() {}
+	L_Window(UI::Panel * p) : L_Panel(p) {}
+	L_Window(lua_State * L) : L_Panel(L) {}
+	virtual ~L_Window() {}
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State * L);
+
+	/*
+	 * Lua Methods
+	 */
+	int close(lua_State * L);
+
+	/*
+	 * C Methods
+	 */
+	UI::Window * get() {return static_cast<UI::Window *>(m_panel);}
+};
+
 
 class L_MapView : public L_Panel {
 public:

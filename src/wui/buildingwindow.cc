@@ -42,7 +42,7 @@ Building_Window::Building_Window
 	 UI::Window *         & registry)
 	:
 	UI::Window
-		(&parent,
+		(&parent, "building_window",
 		 0, 0, Width, 0,
 		 b.info_string(parent.building_window_title_format()).c_str()),
 	m_registry(registry),

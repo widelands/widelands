@@ -42,7 +42,7 @@ using Widelands::NUMBER_OF_MAP_DIMENSIONS;
 Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 	:
 	UI::Window
-		(&parent,
+		(&parent, "new_map_menu",
 		 (parent.get_w() - 140) / 2, (parent.get_h() - 150) / 2, 140, 150,
 		 _("New Map")),
 	m_currentworld(0)

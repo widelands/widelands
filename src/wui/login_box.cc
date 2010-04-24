@@ -25,7 +25,7 @@
 
 LoginBox::LoginBox(Panel & parent)
 :
-Window(&parent, 0, 0, 500, 210, _("Metaserver login"))
+Window(&parent, "login_box", 0, 0, 500, 210, _("Metaserver login"))
 {
 	center_to_parent();
 

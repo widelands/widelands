@@ -38,7 +38,8 @@
 Editor_Player_Menu::Editor_Player_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 	:
-	UI::UniqueWindow(&parent, &registry, 340, 400, _("Player Options")),
+	UI::UniqueWindow
+		(&parent, "player_menu", &registry, 340, 400, _("Player Options")),
 	m_add_player
 		(this, "add_player",
 		 5, 5, 20, 20,

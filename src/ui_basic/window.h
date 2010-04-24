@@ -53,13 +53,17 @@ namespace UI {
 struct Window : public Panel {
 	Window
 		(Panel      * parent,
+		 std::string const & name,
 		 int32_t      x,
 		 int32_t      y,
 		 uint32_t     w,
 		 uint32_t     h,
 		 char const * title);
 
-	void set_title(char const * text);
+	void set_title(const std::string &);
+	const std::string get_title() const throw() {return m_title;}
+	void set_name(const std::string &);
+	const std::string get_name() const throw() {return m_name;}
 
 	void move_to_mouse();
 	void move_to_mouse(const Point & pt);
@@ -94,6 +98,7 @@ private:
 	int32_t _drag_start_win_x, _drag_start_win_y;
 	int32_t _drag_start_mouse_x, _drag_start_mouse_y;
 
+	std::string m_name;
 	std::string m_title;
 
 	PictureID m_pic_lborder;

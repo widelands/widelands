@@ -40,7 +40,7 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 	Economy_Options_Window(Interactive_GameBase & parent, Economy & economy)
 		:
 		UI::UniqueWindow
-			(&parent, &economy.m_optionswindow_registry, 0, 0,
+			(&parent, "economy_options", &economy.m_optionswindow_registry, 0, 0,
 			 _("Economy options")),
 		m_tabpanel(*this, economy)
 	{

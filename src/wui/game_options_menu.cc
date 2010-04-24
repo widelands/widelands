@@ -33,7 +33,7 @@ GameOptionsMenu::GameOptionsMenu
 	 Interactive_GameBase::Game_Main_Menu_Windows & windows)
 :
 	UI::UniqueWindow
-		(&gb, &registry,
+		(&gb, "options", &registry,
 		 102,
 		 vmargin()
 		 + 4 * (20 + vspacing()) + 2 * vgap() +

@@ -345,7 +345,8 @@ void WSM_Checkbox::draw(RenderTarget & dst) {
 Ware_Statistics_Menu::Ware_Statistics_Menu
 	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
-UI::UniqueWindow(&parent, &registry, 400, 270, _("Ware Statistics")),
+UI::UniqueWindow
+	(&parent, "ware_statistics", &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
 	//  First, we must decide about the size.

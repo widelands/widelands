@@ -56,7 +56,7 @@ Enable_Set_Origin_Tool_Button(Main_Menu_Map_Options & parent)
 Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 	:
 	UI::Window
-		(&parent,
+		(&parent, "map_options",
 		 (parent.get_w() - 200) / 2, (parent.get_h() - 300) / 2, 200, 305,
 		 _("Map Options")),
 	m_enable_set_origin_tool(*this)

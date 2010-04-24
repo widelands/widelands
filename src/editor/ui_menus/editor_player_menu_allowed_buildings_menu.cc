@@ -47,7 +47,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 UI::UniqueWindow::Registry * registry)
 	:
 	UI::UniqueWindow
-		(parent,
+		(parent, "allowed_buildings_menu",
 		 registry,
 		 hmargin +
 		 list_width + hspacing + middle_button_width + hspacing + list_width

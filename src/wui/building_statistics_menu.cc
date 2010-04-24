@@ -73,7 +73,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
-		(&parent,
+		(&parent, "building_statistics",
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Building Statistics")),
