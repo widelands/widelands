@@ -39,6 +39,14 @@
 
 .. currentmodule:: wl.ui
 
+.. Note::
+
+	The objects inside this module can not be persisted. That is if the player
+	tries to save the game while any of these objects are assigned to variables,
+	the game will crash. So when using these, make sure that you only create
+	objects for a short amount of time where the user can't take control to do
+	something else.
+
 */
 
 /*
