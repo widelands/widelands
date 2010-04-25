@@ -64,7 +64,8 @@ EditBox::EditBox
 	m_fontname(UI_FONT_NAME),
 	m_fontsize(UI_FONT_SIZE_SMALL),
 	m_fontcolor(UI_FONT_CLR_FG),
-	m(new EditBoxImpl)
+	m(new EditBoxImpl),
+	m_needredraw(true)
 {
 	set_think(false);
 
