@@ -411,6 +411,7 @@ const MethodType<L_MapView> L_MapView::Methods[] = {
 const PropertyType<L_MapView> L_MapView::Properties[] = {
 	PROP_RW(L_MapView, viewpoint_x),
 	PROP_RW(L_MapView, viewpoint_y),
+	PROP_RW(L_MapView, buildhelp),
 	{0, 0, 0},
 };
 
@@ -450,6 +451,20 @@ int L_MapView::set_viewpoint_y(lua_State * L) {
 	Point p = mv->get_viewpoint();
 	p.y = luaL_checkuint32(L, -1);
 	mv->set_viewpoint(p);
+	return 0;
+}
+
+/* RST
+	.. attribute:: buildhelp
+
+		(RW) True if the buildhelp is show, false otherwise.
+*/
+int L_MapView::get_buildhelp(lua_State * L) {
+	lua_pushboolean(L, get()->buildhelp());
+	return 1;
+}
+int L_MapView::set_buildhelp(lua_State * L) {
+	get()->show_buildhelp(luaL_checkboolean(L, -1));
 	return 0;
 }
 

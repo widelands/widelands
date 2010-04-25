@@ -80,10 +80,11 @@ function starting_infos()
    sleep(100)
 
    msg_box(initial_message_01)
+   sleep(500)
    msg_box(initial_message_02)
 
    -- Wait for buildhelp to come on
-   while not plr.buildhelp do
+   while not wl.ui.MapView().buildhelp do
       sleep(200)
    end
    sleep(1200)
@@ -184,8 +185,8 @@ function build_a_quarry()
       sleep(400)
    end
 
-   function _rip_road()
-      for idx,f in ipairs(first_quarry_field:region(6)) do
+   local function _rip_road()
+      for idx,f in ipairs(cs:region(2)) do
          if f.immovable and f.immovable.type == "road" then 
             click_on_field(f)
             click_on_panel(wl.ui.MapView().windows.
@@ -287,5 +288,5 @@ function conclusion()
 
 end
 
-run(starting_infos)
+run(initial_messages)
 

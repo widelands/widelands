@@ -17,7 +17,6 @@ end
 function ui_tests:_cnt(t) 
    local rv = 0
    for k,v in pairs(t) do
-      print("## ", k)
       rv = rv + 1 end
    return rv
 end
@@ -115,8 +114,7 @@ end
 button_tests = lunit.TestCase("Button tests")
 function button_tests:setup()
    self.b = wl.ui.MapView().buttons.buildhelp
-   self.p = wl.game.Player(1)
-   self.p.buildhelp = false
+   wl.ui.MapView().buildhelp = false
 end
 
 function button_tests:test_name()
@@ -125,6 +123,6 @@ end
 function button_tests:test_click()
    self.b:click()
    
-   assert_equal(true, self.p.buildhelp)
+   assert_equal(true, wl.ui.MapView().buildhelp)
 end
 

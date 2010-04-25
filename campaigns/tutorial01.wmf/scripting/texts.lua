@@ -269,7 +269,7 @@ talk_about_roadbuilding_02 = {
  Also try to keep roads as short as possible and always remember to place as
  many flags as you can on road segments to share the load better.]]
    )) .. rt(p(_
-[[Now please rebuild the road between your quarry and your headquarters. 
+[[Now please rebuild the road between your quarry and your headquarters.
  We'll wait until the quarry is completed.]]
    ))
 }

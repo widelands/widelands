@@ -115,7 +115,6 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, inbox),
 	PROP_RO(L_Player, tribe),
 	PROP_RW(L_Player, see_all),
-	PROP_RW(L_Player, buildhelp),
 	{0, 0, 0},
 };
 
@@ -305,34 +304,6 @@ int L_Player::set_see_all(lua_State * L) {
 int L_Player::get_see_all(lua_State * L) {
 	lua_pushboolean(L, get(L, get_game(L)).see_all());
 	return 1;
-}
-
-/* RST
-	.. attribute:: buildhelp
-
-		(RW) True if the buildhelp is show, false otherwise.
-*/
-int L_Player::get_buildhelp(lua_State * L) {
-	Game & game = get_game(L);
-	Interactive_Player * ipl = game.get_ipl();
-
-	if (get(L, game).player_number() != ipl->player_number()) {
-		lua_pushboolean(L, false);
-		return 1;
-	}
-
-	lua_pushboolean(L, ipl->buildhelp());
-	return 1;
-}
-int L_Player::set_buildhelp(lua_State * L) {
-	Game & game = get_game(L);
-	Interactive_Player * ipl = game.get_ipl();
-
-	if (get(L, game).player_number() != ipl->player_number())
-		return 0;
-
-	ipl->show_buildhelp(luaL_checkboolean(L, -1));
-	return 0;
 }
 
 /*

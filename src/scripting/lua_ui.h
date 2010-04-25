@@ -24,7 +24,7 @@
 
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "wui/mapview.h"
+#include "wui/interactive_base.h"
 
 #include "luna.h"
 
@@ -158,6 +158,8 @@ public:
 	int set_viewpoint_x(lua_State *);
 	int get_viewpoint_y(lua_State *);
 	int set_viewpoint_y(lua_State *);
+	int get_buildhelp(lua_State * L);
+	int set_buildhelp(lua_State * L);
 
 	/*
 	 * Lua Methods
@@ -167,6 +169,6 @@ public:
 	/*
 	 * C Methods
 	 */
-	Map_View * get() {return static_cast<Map_View *>(m_panel);}
+   Interactive_Base * get() { return static_cast<Interactive_Base *>(m_panel); }
 };
 #endif

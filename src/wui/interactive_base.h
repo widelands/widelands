@@ -72,6 +72,10 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	}
 	bool get_sel_freeze() const {return m_sel.freeze;}
 
+	bool buildhelp();
+	void show_buildhelp(bool const t);
+	void toggle_buildhelp ();
+
 	/**
 	 * sel_triangles determines whether the mouse pointer selects triangles.
 	 * (False meas that it selects nodes.)

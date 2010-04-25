@@ -40,7 +40,6 @@
 #endif
 
 // TODO: add wl.editor to documentation
-// TODO: move buildhelp to ui
 
 /*
 ============================================

@@ -359,16 +359,6 @@ void Interactive_Player::toggle_message_menu() {
 		new GameMessageMenu(*this, m_message_menu);
 }
 
-void Interactive_Player::toggle_buildhelp() {
-	egbase().map().overlay_manager().toggle_buildhelp();
-}
-bool Interactive_Player::buildhelp() {
-	return egbase().map().overlay_manager().buildhelp();
-}
-void Interactive_Player::show_buildhelp(bool const t) {
-	egbase().map().overlay_manager().show_buildhelp(t);
-}
-
 void Interactive_Player::toggle_resources   () {
 }
 void Interactive_Player::toggle_help        () {
