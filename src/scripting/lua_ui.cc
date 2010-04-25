@@ -22,13 +22,10 @@
 #include "upcast.h"
 #include "wui/interactive_player.h"
 
-
 #include "c_utils.h"
 #include "lua_map.h"
 
 #include "lua_ui.h"
-
-// TODO: check this whole file, a lot of documentation is missing
 
 /* RST
 :mod:`wl.ui`
@@ -77,6 +74,12 @@ const PropertyType<L_Panel> L_Panel::Properties[] = {
 /*
  * Properties
  */
+
+/* RST
+	.. attribute:: name
+
+		(RO) The name of this panel
+*/
 
 /* RST
 	.. attribute:: buttons
@@ -238,11 +241,19 @@ int L_Panel::set_position_y(lua_State * L) {
  */
 
 
-// TODO: document me somehow
+/* RST
+Button
+------
+
+.. class:: Button
+
+	Child of: :class:`Panel`
+
+	This represents a simple push button.
+*/
 const char L_Button::className[] = "Button";
 const MethodType<L_Button> L_Button::Methods[] = {
 	METHOD(L_Button, press),
-	METHOD(L_Button, release),
 	METHOD(L_Button, click),
 	{0, 0},
 };
@@ -255,11 +266,7 @@ const PropertyType<L_Button> L_Button::Properties[] = {
  * Properties
  */
 
-/* RST
-	.. attribute:: name
-
-		(RO) The name of this button
-*/
+// Documented in parent Class
 int L_Button::get_name(lua_State * L) {
 	lua_pushstring(L, get()->get_name());
 	return 1;
@@ -268,24 +275,27 @@ int L_Button::get_name(lua_State * L) {
 /*
  * Lua Functions
  */
-// TODO: docu
-// UNTESTED
+/* RST
+	.. method:: press
+
+		Press and hold this button. This is mainly to visualize a pressing
+		event in tutorials
+*/
 int L_Button::press(lua_State * L) {
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
 }
-// TODO: docu
-// UNTESTED
-int L_Button::release(lua_State * L) {
-	get()->handle_mousein(true);
-	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
-	return 0;
-}
-// TODO: docu
+/* RST
+	.. method:: click
+
+		Click this button just as if the user would have moused over and clicked
+		it.
+*/
 int L_Button::click(lua_State * L) {
-	press(L);
-	release(L);
+	get()->handle_mousein(true);
+	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
+	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
 }
 
@@ -293,7 +303,16 @@ int L_Button::click(lua_State * L) {
  * C Functions
  */
 
-// TODO: document me somehow
+/* RST
+Window
+------
+
+.. class:: Window
+
+	Child of: :class:`Panel`
+
+	This represents a Window.
+*/
 const char L_Window::className[] = "Window";
 const MethodType<L_Window> L_Window::Methods[] = {
 	METHOD(L_Window, close),
@@ -308,12 +327,7 @@ const PropertyType<L_Window> L_Window::Properties[] = {
  * Properties
  */
 
-/* RST
-	.. attribute:: name
-
-		(RO) The name of this button
-*/
-// TODO: maybe this should go to panel
+// Documented in parent Class
 int L_Window::get_name(lua_State * L) {
 	lua_pushstring(L, get()->get_name());
 	return 1;
@@ -339,12 +353,20 @@ int L_Window::close(lua_State * L) {
  * C Functions
  */
 
+/* RST
+MapView
+-------
 
-// TODO: document me somehow
+.. class:: MapView
+
+	Child of :class:`Panel`
+
+	The map view is the main widget and the root of all panels. It is the big
+	view of the map that is visible at all times while playing.
+*/
 const char L_MapView::className[] = "MapView";
 const MethodType<L_MapView> L_MapView::Methods[] = {
 	METHOD(L_MapView, click),
-	METHOD(L_MapView, move_mouse_to),
 	{0, 0},
 };
 const PropertyType<L_MapView> L_MapView::Properties[] = {
@@ -363,10 +385,16 @@ L_MapView::L_MapView(lua_State * L) :
 /*
  * Lua Functions
  */
-int L_MapView::move_mouse_to(lua_State * L) {
-	get()->warp_mouse_to_node((*get_user_class<L_Field>(L, 2))->coords());
-	return 0;
-}
+
+/* RST
+	.. method:: click(field)
+
+		Moves the mouse onto a field and clicks it just like the user would
+		have.
+
+		:arg field: the field to click on
+		:type field: :class:`wl.map.Field`
+*/
 int L_MapView::click(lua_State * L) {
 	get()->warp_mouse_to_node((*get_user_class<L_Field>(L, 2))->coords());
 	get()->fieldclicked.call();

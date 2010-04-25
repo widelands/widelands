@@ -107,7 +107,6 @@ public:
 	 * Lua Methods
 	 */
 	int press(lua_State * L);
-	int release(lua_State * L);
 	int click(lua_State * L);
 
 	/*
@@ -159,7 +158,6 @@ public:
 	 * Lua Methods
 	 */
 	int click(lua_State * L);
-	int move_mouse_to(lua_State * L);
 
 	/*
 	 * C Methods
