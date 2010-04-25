@@ -64,9 +64,6 @@ Panel
 	The Panel is the most basic ui class. Each ui element is a panel.
 */
 const char L_Panel::className[] = "Panel";
-const MethodType<L_Panel> L_Panel::Methods[] = {
-	{0, 0},
-};
 const PropertyType<L_Panel> L_Panel::Properties[] = {
 	PROP_RO(L_Panel, buttons),
 	PROP_RO(L_Panel, windows),
@@ -77,6 +74,10 @@ const PropertyType<L_Panel> L_Panel::Properties[] = {
 	PROP_RW(L_Panel, width),
 	PROP_RW(L_Panel, height),
 	{0, 0, 0},
+};
+const MethodType<L_Panel> L_Panel::Methods[] = {
+	METHOD(L_Panel, get_descendant_position),
+	{0, 0},
 };
 
 /*
@@ -243,6 +244,36 @@ int L_Panel::set_position_y(lua_State * L) {
 /*
  * Lua Functions
  */
+/* RST
+	.. method:: get_descendant_position(child)
+
+		Get the child position relative to the inner canvas of this Panel in
+		pixels. Throws an error if child is not really a child.
+
+		:arg child: children to get position for
+		:type child: :class:`Panel`
+
+		:returns: x, y
+		:rtype: both are :class:`integers`
+*/
+int L_Panel::get_descendant_position(lua_State * L) {
+	assert(m_panel);
+
+	UI::Panel * cur = (*get_base_user_class<L_Panel>(L, 2))->m_panel;
+
+	Point cp = Point(0, 0);
+	while (cur && cur != m_panel) {
+		cp += cur->to_parent(Point(0, 0));
+		cur = cur->get_parent();
+	}
+
+	if (!cur)
+		return report_error(L, "Widget is not a descendant!");
+
+	lua_pushint32(L, cp.x);
+	lua_pushint32(L, cp.y);
+	return 2;
+}
 
 /*
  * C Functions

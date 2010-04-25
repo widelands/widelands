@@ -62,6 +62,29 @@ function ui_tests:test_position_y()
    assert_equal(60, w.position_y)
 end
 
+function ui_tests:test_descendant_position()
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
+   local b = w.buttons.invert_selection
+   w.position_x = 50
+   w.position_y = 50
+
+   local abs_x, abs_y = self.mv:get_descendant_position(b)
+
+   assert_equal(w.position_x + b.position_x, abs_x)
+   assert_equal(w.position_y + b.position_y, abs_y)
+end
+
+function ui_tests:test_descendant_position_not_child()
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
+   local b = self.mv.buttons.buildhelp
+   
+   assert_error("Not a descendant!", function()
+      w:get_descendant_position(b)
+   end)
+end
+
 function ui_tests:test_width(x)
    self.mv.buttons.messages:click()
    local w = self.mv.windows.messages

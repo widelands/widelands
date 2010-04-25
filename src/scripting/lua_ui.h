@@ -83,6 +83,7 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int get_descendant_position(lua_State * L);
 
 	/*
 	 * C Methods

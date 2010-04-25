@@ -205,13 +205,13 @@ function mouse_smoothly_to_pos(x, y, g_T)
 end
 
 -- RST
--- .. function:: scroll_smoothly_to(f[, T = 1000])
+-- .. function:: mouse_smoothly_to(f[, T = 1000])
 --
 --    Move the mouse on the given field. Make sure that the field is inside
 --    the current view area.
 --
 --    :arg f: Field to mouse to
---    :type r: :class:`wl.map.Field`
+--    :type f: :class:`wl.map.Field`
 --    :arg T: Time in ms to take for the transition.
 --    :type T: :class:`integer`
 --
@@ -224,5 +224,26 @@ function mouse_smoothly_to(f, g_T)
    )
 end
 
+-- RST
+-- .. function:: mouse_smoothly_to_panel(panel[, T = 1000])
+--
+--    Move the mouse to the center of the given ui element.
+--
+--    :arg panel: Panel to mouse to
+--    :type panel: :class:`wl.ui.Panel`
+--    :arg T: Time in ms to take for the transition.
+--    :type T: :class:`integer`
+--
+--    :returns: an :class:`array` with the intermediate points that were
+--       targeted
+
+function mouse_smoothly_to_panel(panel)
+   local x, y = wl.ui.MapView():get_descendant_position(panel)
+
+   return mouse_smoothly_to_pos(
+      x + panel.width / 2,
+      y + panel.height / 2
+   )
+end
 
 
