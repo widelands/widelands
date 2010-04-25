@@ -32,11 +32,12 @@
 struct Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Main();
 	enum {
+		mm_playtutorial,
 		mm_singleplayer,
 		mm_multiplayer,
 		mm_replay,
-		mm_options,
 		mm_editor,
+		mm_options,
 		mm_readme,
 		mm_license,
 		mm_exit
@@ -48,11 +49,12 @@ private:
 	uint32_t                                    m_fs;
 	std::string                                 m_fn;
 	std::string                                 wlcr;
+	UI::Callback_IDButton<Fullscreen_Menu_Main, int32_t> playtutorial;
 	UI::Callback_IDButton<Fullscreen_Menu_Main, int32_t> singleplayer;
 	UI::Callback_IDButton<Fullscreen_Menu_Main, int32_t> multiplayer;
 	UI::Callback_IDButton<Fullscreen_Menu_Main, int32_t> replay;
-	UI::Callback_IDButton<Fullscreen_Menu_Main, int32_t> options;
 	UI::Callback_IDButton<Fullscreen_Menu_Main, int32_t> editor;
+	UI::Callback_IDButton<Fullscreen_Menu_Main, int32_t> options;
 	UI::Callback_IDButton<Fullscreen_Menu_Main, int32_t> readme;
 	UI::Callback_IDButton<Fullscreen_Menu_Main, int32_t> license;
 	UI::Callback_IDButton<Fullscreen_Menu_Main, int32_t> exit;

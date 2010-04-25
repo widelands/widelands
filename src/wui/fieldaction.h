@@ -40,6 +40,6 @@ void show_field_action
 void show_bulldoze_confirm
 	(Interactive_Player         & parent,
 	 Widelands::Building        & building,
-	 Widelands::PlayerImmovable * todestroy);
+	 Widelands::PlayerImmovable * const todestroy);
 
 #endif

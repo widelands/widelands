@@ -29,6 +29,7 @@
 
 #include <limits>
 #include <vector>
+#include <boost/function.hpp>
 
 namespace UI {
 struct Scrollbar;
@@ -136,9 +137,19 @@ template <> struct Table<void *> : public Panel {
 		struct _data {
 			PictureID   d_picture;
 			std::string d_string;
+			bool d_checked;
+
+			_data() : d_checked(false) {}
 		};
 		std::vector<_data> m_data;
 	};
+
+	/**
+	 * Compare the two items at the given indices in the list.
+	 *
+	 * \return \c true if the first item is strictly less than the second
+	 */
+	typedef boost::function<bool (uint32_t, uint32_t)> CompareFn;
 
 	Table
 		(Panel * parent,
@@ -156,6 +167,7 @@ template <> struct Table<void *> : public Panel {
 		 bool                is_checkbox_column = false);
 
 	void set_column_title(uint8_t col, std::string const & title);
+	void set_column_compare(uint8_t col, const CompareFn & fn);
 
 	void clear();
 	void set_sort_column(uint8_t const col) {
@@ -228,6 +240,10 @@ template <> struct Table<void *> : public Panel {
 
 
 private:
+	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
+	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
+	bool sort_helper(uint32_t a, uint32_t b);
+
 	struct Column;
 	typedef std::vector<Column> Columns;
 	struct Column {
@@ -235,6 +251,7 @@ private:
 		uint32_t                              width;
 		Align                                 alignment;
 		bool                                           is_checkbox_column;
+		CompareFn compare;
 	};
 
 	static const int32_t ms_darken_value = -20;

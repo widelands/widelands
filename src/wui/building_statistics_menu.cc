@@ -19,6 +19,8 @@
 
 #include "building_statistics_menu.h"
 
+#include <boost/bind.hpp>
+
 #include "logic/building.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
@@ -61,10 +63,11 @@
 #define UPDATE_TIME 1000  //  1 second, gametime
 
 
+namespace Columns {enum {Name, Size, Prod, Owned, Build};}
+
 inline Interactive_Player & Building_Statistics_Menu::iplayer() const {
 	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
 }
-
 
 Building_Statistics_Menu::Building_Statistics_Menu
 	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
@@ -105,13 +108,15 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_last_building_index(0)
 {
 	//  building list
-	m_table.add_column (32);
-	m_table.add_column(174, _("Name"));
+	m_table.add_column(206, _("Name"));
 	m_table.add_column (50, _("Size"),     UI::Align_HCenter);
 	m_table.add_column (50, _("Prod"),     UI::Align_Right);
 	m_table.add_column (50, _("Owned"),    UI::Align_Right);
 	m_table.add_column (50, _("Build"),    UI::Align_HCenter);
 	m_table.selected.set(this, &Building_Statistics_Menu::table_changed);
+	m_table.set_column_compare
+		(Columns::Size,
+		 boost::bind(&Building_Statistics_Menu::compare_building_size, this, _1, _2));
 
 	//  toggle when to run button
 	m_progbar.set_total(100);
@@ -323,7 +328,31 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
  */
 void Building_Statistics_Menu::table_changed(uint32_t) {update();}
 
-namespace Columns {enum {Icon, Name, Size, Prod, Owned, Build};}
+/**
+ * Callback to sort table based on building size.
+ */
+bool Building_Statistics_Menu::compare_building_size(uint32_t rowa, uint32_t rowb)
+{
+	const Widelands::Tribe_Descr& tribe = iplayer().player().tribe();
+	Widelands::Building_Index a = Widelands::Building_Index(m_table[rowa]);
+	Widelands::Building_Index b = Widelands::Building_Index(m_table[rowb]);
+	const Widelands::Building_Descr * descra = tribe.get_building_descr(a);
+	const Widelands::Building_Descr * descrb = tribe.get_building_descr(b);
+
+	if (!descra || !descrb)
+		return false; // shouldn't happen, but be defensive
+
+	// mines come last
+	if (descrb->get_ismine()) {
+		return !descra->get_ismine();
+	} else if (descra->get_ismine()) {
+		return false;
+	}
+
+	// smallest first
+	return descra->get_size() < descrb->get_size();
+}
+
 
 /*
  * Update table
@@ -344,7 +373,10 @@ void Building_Statistics_Menu::update() {
 	{
 		Widelands::Building_Descr const & building =
 			*tribe.get_building_descr(i);
-		if (not (building.is_buildable() or building.is_enhanced()))
+		if
+			(not (building.is_buildable()
+			 or building.is_enhanced()
+			 or building.global()))
 			continue;
 
 		std::vector<Widelands::Player::Building_Stats> const & vec =
@@ -379,8 +411,8 @@ void Building_Statistics_Menu::update() {
 				++nr_owned;
 				if (productionsite)
 					total_prod +=
-						ref_cast<Widelands::ProductionSite, Widelands::BaseImmovable>
-							(*map[vec[l].pos].get_immovable())
+					ref_cast<Widelands::ProductionSite, Widelands::BaseImmovable>
+						(*map[vec[l].pos].get_immovable())
 						.get_statistics_percent();
 			}
 		}
@@ -396,42 +428,35 @@ void Building_Statistics_Menu::update() {
 			m_btn[Next_Construction]->set_enabled(nr_build);
 		}
 
-		te->set_picture(Columns::Icon, building.get_buildicon(), "FEL");
-
 		//  add new Table Entry
 		char buffer[100];
-		te->set_string(Columns::Name, building.descname());
+		te->set_picture(Columns::Name, building.get_buildicon(), building.descname());
 
 		{
-			char const * str = "";
 			char const * pic = "pics/novalue.png";
 			if (building.get_ismine()) {
-				str = "M";
 				pic = "pics/mine.png";
 			} else switch (building.get_size()) {
 			case Widelands::BaseImmovable::SMALL:
-				str = "1";
 				pic = "pics/small.png";
 				break;
 			case Widelands::BaseImmovable::MEDIUM:
-				str = "2";
 				pic = "pics/medium.png";
 				break;
 			case Widelands::BaseImmovable::BIG:
-				str = "3";
 				pic = "pics/big.png";
 				break;
 			default:
 				assert(false);
 			}
 			te->set_picture
-				(Columns::Size, g_gr->get_picture(PicMod_UI, pic), str);
+				(Columns::Size, g_gr->get_picture(PicMod_UI, pic));
 		}
 
 		if (productionsite and nr_owned) {
 			const uint32_t percent = static_cast<uint32_t>
 				(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
-			snprintf(buffer, sizeof(buffer), "%i", percent);
+			snprintf(buffer, sizeof(buffer), "%3i", percent);
 			if (is_selected)  {
 				m_progbar.set_state(percent);
 				m_btn[Prev_Unproductive]->set_enabled(true);

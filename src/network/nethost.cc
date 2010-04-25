@@ -186,6 +186,14 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerNumber(number);
 	}
 
+	virtual std::string getWinCondition() {
+		return h->settings().win_condition;
+	}
+
+	virtual void setWinCondition(std::string wc) {
+		h->setWinCondition(wc);
+	}
+
 private:
 	NetHost * h;
 };
@@ -560,8 +568,8 @@ void NetHost::send(ChatMessage msg)
 
 	// Make sure that msg is free of richtext formation tags. Such tags could not
 	// just be abused by the user, but could also break the whole text formation.
-	//  FIXME It would be better to escape < as &lt; and then render that as <
-	//  FIXME instead of replacing < with { in chat messages.
+	// FIXME It would be better to escape < as &lt; and then render that as <
+	// FIXME instead of replacing < with { in chat messages.
 	container_iterate(std::string, msg.msg, i)
 		if (*i.current == '<')
 			*i.current = '{';
@@ -583,9 +591,16 @@ void NetHost::send(ChatMessage msg)
 		s.Unsigned8(NETCMD_CHAT);
 
 		// Is this pm for the host player?
-		if (d->localplayername == msg.recipient)
+		if (d->localplayername == msg.recipient) {
 			d->chat.receive(msg);
-		else { //find the recipient
+			// Write the SendPacket - will be used below to show that the message
+			// was received.
+			s.Signed16(msg.playern);
+			s.String(msg.sender);
+			s.String(msg.msg);
+			s.Unsigned8(1);
+			s.String(msg.recipient);
+		} else { //find the recipient
 			uint32_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
 				UserSettings const & user = d->settings.users.at(i);
@@ -593,25 +608,20 @@ void NetHost::send(ChatMessage msg)
 					break;
 			}
 			if (i < d->settings.users.size()) {
-				for
-					(struct {
-					 	std::vector<Client>::const_iterator       current;
-					 	std::vector<Client>::const_iterator const end;
-					 } j = {d->clients.begin(), d->clients.end()};;
-					 ++j.current)
-					if        (j.current          == j.end) {
+				for (wl_const_range<std::vector<Client> > j(d->clients);; ++j)
+					if (j.empty()) {
 						//  Better no wexception; it would break the whole game.
 						log
 							("WARNING: user was found but no client is connected to "
 							 "it!\n");
 						break;
-					} else if (j.current->usernum == i) {
+					} else if (j->usernum == i) {
 						s.Signed16(msg.playern);
 						s.String(msg.sender);
 						s.String(msg.msg);
 						s.Unsigned8(1);
 						s.String(msg.recipient);
-						s.send(j.current->sock);
+						s.send(j->sock);
 						break;
 					}
 
@@ -643,6 +653,8 @@ void NetHost::send(ChatMessage msg)
 			return; //  do not deliver it to him twice
 
 		//Now find the sender and send either the message or the failure notice
+		else if (d->localplayername == msg.sender)
+			d->chat.receive(msg);
 		else { // host is not the sender -> get sender
 			uint32_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
@@ -797,11 +809,11 @@ void NetHost::setMap
 			file->parts.push_back(fp);
 			leftparts -= readout;
 		}
-		char complete[file->bytes];
+		std::vector<char> complete(file->bytes);
 		fr.SetFilePos(0);
-		fr.DataComplete(complete, file->bytes);
+		fr.DataComplete(&complete[0], file->bytes);
 		MD5Checksum<FileRead> md5sum;
-		md5sum.Data(complete, file->bytes);
+		md5sum.Data(&complete[0], file->bytes);
 		md5sum.FinishChecksum();
 		file->md5sum = md5sum.GetChecksum().str();
 	}
@@ -997,6 +1009,17 @@ void NetHost::setPlayerNumber(uint8_t const number)
 	broadcast(s);
 
 	setPlayerReady(number, false);
+}
+
+void NetHost::setWinCondition(std::string wc)
+{
+	d->settings.win_condition = wc;
+
+	// Broadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_WIN_CONDITION);
+	s.String(wc);
+	broadcast(s);
 }
 
 void NetHost::setPlayerReady
@@ -1247,6 +1270,11 @@ void NetHost::welcomeClient
 	writeSettingAllUsers(s);
 	s.send(client.sock);
 
+	s.reset();
+	s.Unsigned8(NETCMD_WIN_CONDITION);
+	s.String(d->settings.win_condition);
+	s.send(client.sock);
+
 	// Broadcast new information about the player to everybody
 	s.reset();
 	s.Unsigned8(NETCMD_SETTING_USER);
@@ -1466,6 +1494,10 @@ void NetHost::checkSyncReports()
 			broadcast(s);
 
 			disconnectClient(i, _("Client and host have become desynchronized."));
+			// Pause the game, so that host and client have time to handle the
+			// desync.
+			d->networkspeed = 0;
+			broadcastRealSpeed(d->networkspeed);
 		}
 	}
 }

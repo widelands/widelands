@@ -5,7 +5,7 @@ program=remove
 0=remove
 
 [idle]
-hotspot=15 25
+hotspot=1 10
 pics=deer_idle_se_??.png
 fps=20
 

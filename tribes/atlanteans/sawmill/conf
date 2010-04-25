@@ -28,11 +28,11 @@ produce=planks
 
 [idle]
 pics=sawmill_i_??.png  # ???
-hotspot=64 59
+hotspot=55 60
 playercolor=true
 
 [working]
 pics=sawmill_b_??.png  # ???
-hotspot=64 59
+hotspot=55 60
 playercolor=true
 fps=25

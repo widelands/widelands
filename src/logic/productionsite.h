@@ -38,6 +38,7 @@ struct ProductionProgram;
 class Soldier;
 struct Request;
 struct WaresQueue;
+struct Worker_Descr;
 
 
 /**
@@ -148,6 +149,7 @@ public:
 	virtual void act(Game &, uint32_t data);
 
 	virtual void remove_worker(Worker &);
+	int warp_worker(Game &, const Worker_Descr & wd);
 
 	virtual bool fetch_from_flag(Game &);
 	virtual bool get_building_work(Game &, Worker &, bool success);

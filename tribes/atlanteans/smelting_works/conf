@@ -46,10 +46,10 @@ return=skipped
 
 [idle]
 pics=smelting_works_i_??.png  # ???
-hotspot=62 71
+hotspot=52 73
 playercolor=true
 
 [working]
 pics=smelting_works_i_??.png  # ???
-hotspot=62 71
+hotspot=52 73
 playercolor=true

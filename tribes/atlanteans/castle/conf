@@ -15,5 +15,5 @@ quartz=1
 
 [idle]
 pics=castle_i_??.png
-hotspot=92 90
+hotspot=87 89
 playercolor=true

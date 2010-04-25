@@ -182,14 +182,12 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					assert(ware_types.size());
 					std::string ware_type_names;
 					for
-						(struct {
-						 	std::set<Ware_Index>::const_iterator       current;
-						 	std::set<Ware_Index>::const_iterator const end;
-						 } k = {ware_types.begin(), ware_types.end()};;)
+						(wl_const_range<std::set<Ware_Index> >
+						 k(ware_types);;)
 					{
 						ware_type_names +=
-							tribe.get_ware_descr(*k.current)->descname();
-						if (++k.current == k.end)
+							tribe.get_ware_descr(*k)->descname();
+						if (k.advance().empty())
 							break;
 						ware_type_names += _(" or ");
 					}

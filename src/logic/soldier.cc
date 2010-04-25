@@ -43,6 +43,7 @@
 #include "wui/mapviewpixelconstants.h"
 
 #include <cstdio>
+#include <list>
 
 namespace Widelands {
 
@@ -780,7 +781,9 @@ void Soldier::attack_update(Game & game, State & state)
 	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
-		return start_task_idle(game, get_animation("idle"), 250);
+		// Note that we *should* be woken via sendSpaceSignals,
+		// so the timeout is just an additional safety net.
+		return start_task_idle(game, get_animation("idle"), 5000);
 
 	if (!location) {
 		molog("[attack] our location disappeared during a battle\n");
@@ -853,7 +856,7 @@ void Soldier::attack_update(Game & game, State & state)
 			(start_task_movepath
 			 	(game,
 			 	 baseflag.get_position(),
-			 	 0,
+			 	 4, // use larger persist when returning home
 			 	 descr().get_right_walk_anims(does_carry_ware())))
 			return;
 		else {
@@ -869,12 +872,16 @@ void Soldier::attack_update(Game & game, State & state)
 			(start_task_movepath
 			 	(game,
 			 	 enemy->base_flag().get_position(),
-			 	 2,
+			 	 3,
 			 	 descr().get_right_walk_anims(does_carry_ware())))
 			return;
 		else {
-			molog("[attack] failed to move towards building flag\n");
-			return pop_task(game);
+			molog
+				 ("[attack] failed to move towards building flag, "
+					"cancel attack and return home!\n");
+			state.coords = Coords(0, 0);
+			state.objvar1 = 0;
+			return schedule_act(game, 10);
 		}
 	}
 
@@ -963,6 +970,21 @@ void Soldier::start_task_defense
 	}
 }
 
+struct SoldierDistance {
+	Soldier * s;
+	int dist;
+
+	SoldierDistance(Soldier * a, int d) :
+		dist(d)
+	{s = a;}
+
+	struct Greater {
+		bool operator()(const SoldierDistance & a, const SoldierDistance & b) {
+			return (a.dist > b.dist);
+		}
+	};
+};
+
 void Soldier::defense_update(Game & game, State & state)
 {
 	std::string signal = get_signal();
@@ -984,15 +1006,20 @@ void Soldier::defense_update(Game & game, State & state)
 	 * Attempt to fix a crash when player bulldozes a building being defended
 	 * by soldiers.
 	 */
-	if (not location or not position)
+	if (not location)
 		return pop_task(game);
 
 	Flag & baseflag = location->base_flag();
 
+	if (m_battle)
+		return start_task_battle(game);
+
 	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
-		return start_task_idle(game, get_animation("idle"), 250);
+		// Note that we *should* be woken via sendSpaceSignals,
+		// so the timeout is just an additional safety net.
+		return start_task_idle(game, get_animation("idle"), 5000);
 
 	// If we only are defending our home ...
 	if (state.ivar1 & CF_DEFEND_STAYHOME) {
@@ -1048,10 +1075,10 @@ void Soldier::defense_update(Game & game, State & state)
 		  get_current_hitpoints() < state.ui32var3))
 	{
 
-		if (soldiers.empty())
-			molog("[defense] no enemy soldiers found, ending task\n");
-		else
+		if (get_current_hitpoints() < state.ui32var3)
 			molog("[defense] I am heavily injured!\n");
+		else
+			molog("[defense] no enemy soldiers found, ending task\n");
 
 		// If no enemy was found, return home
 		if (!location) {
@@ -1059,11 +1086,13 @@ void Soldier::defense_update(Game & game, State & state)
 			return pop_task(game);
 		}
 
+		// Soldier is inside of building
 		if (position == location) {
 			molog("[defense] returned home\n");
 			return pop_task(game);
 		}
 
+		// Soldier is on base flag
 		if (position == &baseflag) {
 			return
 				start_task_move
@@ -1078,7 +1107,7 @@ void Soldier::defense_update(Game & game, State & state)
 			(start_task_movepath
 			 	(game,
 			 	 baseflag.get_position(),
-			 	 0,
+			 	 4, // use larger persist when returning home
 			 	 descr().get_right_walk_anims(does_carry_ware())))
 			return;
 
@@ -1087,8 +1116,7 @@ void Soldier::defense_update(Game & game, State & state)
 	}
 
 	// Go through soldiers
-	Soldier * target = 0;
-	uint32_t target_dist = 999;
+	std::vector<SoldierDistance> targets;
 	container_iterate_const(std::vector<Bob *>, soldiers, i) {
 
 		// If enemy is in our land, then go after it!
@@ -1097,29 +1125,30 @@ void Soldier::defense_update(Game & game, State & state)
 			Field const f = game.map().operator[](soldier->get_position());
 
 			//  Check soldier, be sure that we can fight against soldier.
-			// Only pursuers can go over enemy land when defending.
+			// Soldiers can not go over enemy land when defending.
 			if
 				((soldier->canBeChallenged()) and
 				 (f.get_owned_by() == get_owner()->player_number()))
 			{
 				uint32_t thisDist = game.map().calc_distance
 					(get_position(), soldier->get_position());
-				if (thisDist < target_dist) {
-					target_dist = thisDist;
-					target = soldier;
-				}
+				targets.push_back(SoldierDistance(soldier, thisDist));
 			}
 		}
 	}
 
-	if (target) {
+	std::stable_sort(targets.begin(), targets.end(), SoldierDistance::Greater());
 
-		if (position == location)
+	while (targets.size() > 0) {
+		const SoldierDistance & target = targets.back();
+
+		if (position == location) {
 			return start_task_leavebuilding(game, false);
+		}
 
-		if (target_dist <= 1) {
-			molog("[defense] starting battle with %u!\n", target->serial());
-			new Battle(game, *this, *target);
+		if (target.dist <= 1) {
+			molog("[defense] starting battle with %u!\n", target.s->serial());
+			new Battle(game, *this, *(target.s));
 			return start_task_battle(game);
 		}
 
@@ -1127,22 +1156,21 @@ void Soldier::defense_update(Game & game, State & state)
 		if
 			(start_task_movepath
 			 	(game,
-			 	 target->get_position(),
-			 	 1,
+			 	 target.s->get_position(),
+			 	 3,
 			 	 descr().get_right_walk_anims(does_carry_ware()),
 			 	 false,
 			 	 1))
 		{
-			molog("[defense] move towards soldier %u\n", target->serial());
+			molog("[defense] move towards soldier %u\n", target.s->serial());
 			return;
 		} else {
 			molog
 				("[defense] failed to move towards attacking soldier %u\n",
-				 target->serial());
-			return pop_task(game);
+				 target.s->serial());
+			targets.pop_back();
 		}
 	}
-
 	// If the enemy is not in our land, wait
 	return start_task_idle(game, get_animation("idle"), 250);
 }
@@ -1482,62 +1510,67 @@ struct FindBobSoldierOnBattlefield : public FindBob {
 bool Soldier::checkNodeBlocked
 	(Game & game, FCoords const & field, bool const commit)
 {
-	if (!isOnBattlefield())
-		return false;
+	State * attackdefense = get_state(taskAttack);
 
-	if (upcast(Building, building, get_location(game))) {
-		if (field == building->get_position()) {
-			if (commit)
-				sendSpaceSignals(game);
-			return false; // we can always walk home
-		}
-	}
-
-	std::vector<Bob *> soldiers;
-	game.map().find_bobs
-		(Area<FCoords>(field, 0), &soldiers, FindBobSoldierOnBattlefield());
+	if (!attackdefense)
+		attackdefense = get_state(taskDefense);
 
 	if
-		(soldiers.size() &&
-		 (!m_battle ||
-		  std::find(soldiers.begin(), soldiers.end(), m_battle->opponent(*this))
-		  ==
-		  soldiers.end()))
+		(!attackdefense ||
+		 (attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED and
+		  attackdefense->ui32var3 > get_current_hitpoints()))
 	{
-		if (commit && soldiers.size() == 1) {
-			Soldier & soldier = ref_cast<Soldier, Bob>(*soldiers[0]);
-			if (soldier.get_owner() != get_owner() && soldier.canBeChallenged()) {
-				molog
-					("[checkNodeBlocked] attacking a soldier (%u)\n",
-					 soldier.serial());
-				new Battle(game, *this, soldier);
-			}
-		}
-
-		/// Only battles block retreating soldiers
-		State * state = 0;
-
-		if (get_state(taskAttack)) {
-			state = get_state(taskAttack);
-		}
-		if (get_state(taskDefense)) {
-			state = get_state(taskDefense);
-		}
-		if (state) {
-			if
-				(state->ivar1 & CF_RETREAT_WHEN_INJURED and
-				 state->ui32var3 > get_current_hitpoints())
-			{
-				// Retreating soldiers act like normal bobs
-				return Bob::checkNodeBlocked(game, field, commit);
-			}
-		}
-		return true;
+		// Retreating or non-combatant soldiers act like normal bobs
+		return Bob::checkNodeBlocked(game, field, commit);
 	}
 
-	if (commit)
-		sendSpaceSignals(game);
-	return false;
+	if (field.field->get_immovable() && field.field->get_immovable() == get_location(game)) {
+		if (commit)
+			sendSpaceSignals(game);
+		return false; // we can always walk home
+	}
+
+	Soldier * foundsoldier = 0;
+	bool foundbattle = false;
+	bool foundopponent = false;
+	bool multiplesoldiers = false;
+
+	for (Bob * bob = field.field->get_first_bob(); bob; bob = bob->get_next_on_field()) {
+		if (upcast(Soldier, soldier, bob)) {
+			if (!soldier->isOnBattlefield() || !soldier->get_current_hitpoints())
+				continue;
+
+			if (!foundsoldier) {
+				foundsoldier = soldier;
+			} else {
+				multiplesoldiers = true;
+			}
+
+			if (soldier->getBattle()) {
+				foundbattle = true;
+
+				if (m_battle && m_battle->opponent(*this) == soldier)
+					foundopponent = true;
+			}
+		}
+	}
+
+	if (!foundopponent && (foundbattle || foundsoldier)) {
+		if (commit && !foundbattle && !multiplesoldiers) {
+			if (foundsoldier->get_owner() != get_owner() && foundsoldier->canBeChallenged()) {
+				molog
+					("[checkNodeBlocked] attacking a soldier (%u)\n",
+					 foundsoldier->serial());
+				new Battle(game, *this, *foundsoldier);
+			}
+		}
+
+		return true;
+	} else {
+		if (commit)
+			sendSpaceSignals(game);
+		return false;
+	}
 }
 
 

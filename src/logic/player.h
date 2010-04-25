@@ -37,9 +37,10 @@ struct Economy;
 struct Path;
 struct PlayerImmovable;
 class Soldier;
-struct TrainingSite;
-class Flag;
+class TrainingSite;
+struct Flag;
 struct Tribe_Descr;
+struct Road;
 struct AttackController;
 
 /** class Player
@@ -70,8 +71,6 @@ struct Player :
 	friend struct Editor_Game_Base;
 	friend class Game_Player_Info_Data_Packet;
 	friend class Game_Player_Economies_Data_Packet;
-	friend struct Event_Set_Player_Frontier_Style;
-	friend struct Event_Set_Player_Flag_Style;
 	friend struct Map_Buildingdata_Data_Packet;
 	friend struct Map_Players_View_Data_Packet;
 	friend struct Map_Exploration_Data_Packet;
@@ -114,6 +113,9 @@ struct Player :
 
 	const std::string & get_name() const throw () {return m_name;}
 	void set_name(const std::string & name) {m_name = name;}
+	void set_frontier_style(uint8_t a) {m_frontier_style_index = a;}
+	void set_flag_style(uint8_t a) {m_flag_style_index = a;}
+
 
 	void create_default_infrastructure();
 
@@ -327,7 +329,9 @@ struct Player :
 	const Field * fields() const throw () {return m_fields;}
 
 	// See area
-	Vision vision(Map_Index const i) const throw () {return m_fields[i].vision;}
+	Vision vision(Map_Index const i) const throw () {
+		return m_see_all + m_fields[i].vision;
+	}
 
 	bool has_view_changed() {
 		bool t = m_view_changed;
@@ -337,22 +341,21 @@ struct Player :
 
 	/**
 	 * Update this player's information about this node and the surrounding
-	 * triangles and edges. If lasting is true, the vision is incremented so that
-	 * the node remains seen at least until a corresponding call to unsee_node is
-	 * made.
+	 * triangles and edges.
 	 */
 	void see_node
 		(const Map                  &,
 		 const Widelands::Field & first_map_field,
 		 const FCoords,
-		 const Time,
-		 const bool                   lasting = true)
+		 const Time)
 		throw ();
 
 	/// Decrement this player's vision for a node.
 	void unsee_node(Map_Index const i, Time const gametime) throw () {
 		Field & field = m_fields[i];
-		assert(1 < field.vision);
+		if(field.vision <= 1) // Already doesn't see this
+			return;
+
 		--field.vision;
 		if (field.vision == 1)
 			field.time_node_last_unseen = gametime;
@@ -360,14 +363,14 @@ struct Player :
 	}
 
 	/// Call see_node for each node in the area.
-	void see_area(const Area<FCoords> area, const bool lasting = true)
+	void see_area(const Area<FCoords> area)
 		throw ()
 	{
 		const Time gametime = egbase().get_gametime();
 		const Map & map = egbase().map();
 		const Widelands::Field & first_map_field = map[0];
 		MapRegion<Area<FCoords> > mr(map, area);
-		do see_node(map, first_map_field, mr.location(), gametime, lasting);
+		do see_node(map, first_map_field, mr.location(), gametime);
 		while (mr.advance(map));
 		m_view_changed = true;
 	}
@@ -415,10 +418,10 @@ struct Player :
 	// Player commands
 	// Only to be called indirectly via CmdQueue
 	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
-	void   build_flag(Coords);       /// Build a flag if it is allowed.
-	void   force_road(Path const &, bool create_carrier = false);
-	void   build_road(Path const &); /// Build a road if it is allowed.
-	void force_building
+	Flag*   build_flag(Coords);      /// Build a flag if it is allowed.
+	Road & force_road(Path const &);
+	Road * build_road(Path const &); /// Build a road if it is allowed.
+	Building& force_building
 		(Coords,
 		 Building_Index,
 		 uint32_t      const * ware_counts,

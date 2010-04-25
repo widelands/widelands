@@ -6,7 +6,7 @@ program=remove
 
 [idle]
 pics=deer_idle_sw_??.png
-hotspot=25 30
+hotspot=12 26
 fps=20
 
 [walk]

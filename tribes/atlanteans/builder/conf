@@ -8,12 +8,12 @@ carrier=1
 [idle]
 pics=idle_??.png
 sfx=0 ../../../sound/hammering/hammering
-hotspot=5 13
+hotspot=7 23
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=5 13
+hotspot=9 23
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=5 13
+hotspot=9 23

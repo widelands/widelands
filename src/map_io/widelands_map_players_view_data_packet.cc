@@ -30,13 +30,14 @@
 #include "logic/widelands_streamread_inlines.h"
 #include "logic/widelands_streamwrite_inlines.h"
 
+#include "economy/road.h"
+
 #include "log.h"
 
 #include "upcast.h"
 
 namespace Widelands {
 
-extern const Map_Object_Descr g_road_descr;
 
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
 #define DIRNAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/view"
@@ -217,7 +218,7 @@ void Map_Players_View_Data_Packet::Read
 							 f.field->get_immovable())
 						{
 							map_object_descr = &base_immovable->descr();
-							if (map_object_descr == &g_road_descr)
+							if (Road::IsRoadDescr(map_object_descr))
 								map_object_descr = 0;
 							else if (upcast(Building const, building, base_immovable))
 								if (building->get_position() != f)
@@ -296,10 +297,13 @@ void Map_Players_View_Data_Packet::Read
 					r_player_field  = player_fields + r_index;
 
 					uint32_t file_vision = vision_file.Unsigned32();
+
+					// There used to be a check here that the calculated, and the
+					// loaded vision were the same. I removed this check, because
+					// scripting could have given the player a permanent view of
+					// this field. That's why we save this stuff in the first place!
 					if (file_vision != f_player_field.vision)
-						throw game_data_error
-							("player %u, node (%i, %i): vision mismatch (%u vs. %u)",
-							 plnum, f.x, f.y, f_player_field.vision, file_vision);
+						f_player_field.vision = file_vision;
 				} while (r.x);
 			}
 
@@ -456,7 +460,7 @@ void Map_Players_View_Data_Packet::Read
 						 f.field->get_immovable())
 					{
 						map_object_descr = &base_immovable->descr();
-						if (map_object_descr == &g_road_descr)
+						if (Road::IsRoadDescr(map_object_descr))
 							map_object_descr = 0;
 						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)
@@ -662,7 +666,7 @@ inline static void write_unseen_immovable
 	(Map_Object_Descr const * const map_object_descr,
 	 BitOutBuffer<2> & immovable_kinds_file, FileWrite & immovables_file)
 {
-	assert(map_object_descr != &g_road_descr);
+	assert(not Road::IsRoadDescr(map_object_descr));
 	uint8_t immovable_kind;
 	if (not map_object_descr)
 		immovable_kind = 0;

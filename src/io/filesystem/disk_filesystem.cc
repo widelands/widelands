@@ -32,6 +32,11 @@
 #ifdef WIN32
 #include <windows.h>
 #include <dos.h>
+#ifdef _MSC_VER
+#include <io.h>
+#include <direct.h>
+#define S_ISDIR(x) ((x&_S_IFDIR)?1:0)
+#endif
 #else
 #include <sys/mman.h>
 #include <glob.h>
@@ -396,15 +401,17 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	} catch (...) {
 		if (file)
 			fclose(file);
-		free(data);
+		if (data) free(data);
 		throw;
 	}
 }
 
+#ifndef _MSC_VER
 /// \note The MAP_FAILED macro from glibc uses old-style cast. We can not fix
 /// this ourselves, so we temporarily turn the error into a warning. It is
 /// turned back into an error after this function.
 #pragma GCC diagnostic warning "-Wold-style-cast"
+#endif
 void * RealFSImpl::fastLoad
 	(const std::string & fname, size_t & length, bool & fast)
 {
@@ -440,7 +447,9 @@ void * RealFSImpl::fastLoad
 	return data;
 #endif
 }
+#ifndef _MSC_VER
 #pragma GCC diagnostic error "-Wold-style-cast"
+#endif
 
 /**
  * Write the given block of memory to the repository.
@@ -565,7 +574,7 @@ StreamWrite * RealFSImpl::OpenStreamWrite(std::string const & fname) {
 	return new RealFSStreamWrite(fullname);
 }
 
-unsigned long RealFSImpl::DiskSpace() {
+unsigned long long RealFSImpl::DiskSpace() {
 #ifdef WIN32
 	ULARGE_INTEGER freeavailable;
 	return
@@ -578,7 +587,7 @@ unsigned long RealFSImpl::DiskSpace() {
 #else
 	struct statvfs svfs;
 	if (statvfs(FS_CanonicalizeName(m_directory).c_str(), &svfs) != -1) {
-		return svfs.f_bsize * svfs.f_bavail;
+		return static_cast<unsigned long long>(svfs.f_bsize) * svfs.f_bavail;
 	}
 #endif
 	return 0; //  can not check disk space

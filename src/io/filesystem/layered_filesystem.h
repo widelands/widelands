@@ -84,7 +84,7 @@ struct LayeredFileSystem : public FileSystem {
 
 	void PutRightVersionOnTop();
 
-	virtual unsigned long DiskSpace();
+	virtual unsigned long long DiskSpace();
 
 private:
 	bool m_read_version_from_version_file(FileSystem &, std::string *);

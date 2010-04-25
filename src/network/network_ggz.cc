@@ -176,8 +176,7 @@ char const * NetGGZ::ip()
 /// initializes the local ggz core
 bool NetGGZ::initcore
 	(char const * const metaserver, char const * const nick,
-	 char const * const pwd, char const * const email,
-	 bool newreg, bool anonymous)
+	 char const * const pwd, bool registered)
 {
 	GGZOptions opt;
 
@@ -249,17 +248,12 @@ bool NetGGZ::initcore
 		(ggzserver, metaserver, WL_METASERVER_PORT, GGZ_CONNECTION_CLEAR);
 #endif
 
-	// Login anonymously:
-	if (anonymous)
-		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, nick, 0, 0);
-
-	// Register a new account:
-	else if (newreg)
-		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_NEW, nick, pwd, email);
-
-	// Normal login:
-	else
+	// Login to registered account:
+	if (registered)
 		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN, nick, pwd, 0);
+	// Login anonymously:
+	else
+		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, nick, 0, 0);
 
 	ggzcore_server_connect(ggzserver);
 
@@ -785,7 +779,9 @@ void NetGGZ::write_tablelist()
 			// To avoid freezes for users with build15 when trying to connect to
 			// a table with seats > 8 - could surely happen once the seats problem
 			// is fixed.
-			if (ggzcore_table_get_num_seats(table) > 8)
+			//  FIXME it's even > 7 due to a ggz 0.14.1 bug
+			//if (ggzcore_table_get_num_seats(table) > 8)
+			if (ggzcore_table_get_num_seats(table) > 7)
 				info.state = LAN_GAME_CLOSED;
 			else if (ggzcore_table_get_seat_count(table, GGZ_SEAT_OPEN) > 0)
 				info.state = LAN_GAME_OPEN;
@@ -950,7 +946,11 @@ uint32_t NetGGZ::max_players()
 	//  FIXME available. I already posted this problem to the ggz
 	//  FIXME mailinglist. -- nasenbaer
 	//return gametype ? ggzcore_gametype_get_max_players(gametype) : 1;
-	return gametype ? 8 : 1;
+	//  FIXME due to a bug in ggz 0.14.1 we may even only support <= 7 seats
+	//  FIXME this should be changed once the next official ggz version is
+	//  FIXME released and support for ggz 0.14.1 is removed from widelands src
+	//return gametype ? 8 : 1;
+	return gametype ? 7 : 1;
 }
 
 
@@ -979,7 +979,7 @@ void NetGGZ::send_game_done()
 /// Sends a chat message via ggz room chat
 void NetGGZ::send(std::string const & msg)
 {
-	if (!usedcore())
+	if (!usedcore() or !logged_in)
 		return;
 	int16_t sent;
 	if (msg.size() && *msg.begin() == '@') {

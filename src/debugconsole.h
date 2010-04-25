@@ -25,7 +25,7 @@
 
 #include <boost/function.hpp>
 
-class ChatProvider;
+struct ChatProvider;
 
 /**
  * The debug console is a tool to allow ad-hoc commands that inspect
@@ -57,6 +57,7 @@ struct Handler {
 
 protected:
 	void addCommand(std::string const &, HandlerFn const &);
+	void setDefaultCommand(HandlerFn const &);
 
 private:
 	std::vector<std::string> m_commands;

@@ -71,6 +71,11 @@ void Carrier::road_update(Game & game, State & state)
 	if (signal == "road" || signal == "ware") {
 		// The road changed under us or we're supposed to pick up some ware
 		signal_handled();
+	} else if (signal == "blocked") {
+		// Blocked by an ongoing battle
+		signal_handled();
+		set_animation(game, descr().get_animation("idle"));
+		return schedule_act(game, 250);
 	} else if (signal.size()) {
 		// Something else happened (probably a location signal)
 		molog("[road]: Terminated by signal '%s'\n", signal.c_str());
@@ -144,6 +149,11 @@ void Carrier::transport_update(Game & game, State & state)
 
 	if (signal == "road") {
 		signal_handled();
+	} else if (signal == "blocked") {
+		// Blocked by an ongoing battle
+		signal_handled();
+		set_animation(game, descr().get_animation("idle"));
+		return schedule_act(game, 250);
 	} else if (signal.size()) {
 		molog("[transport]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
@@ -544,6 +554,15 @@ bool Carrier::start_task_walktoflag
 	return
 		start_task_movepath
 			(game, path, idx, descr().get_right_walk_anims(does_carry_ware()));
+}
+
+void Carrier::log_general_info(const Widelands::Editor_Game_Base& egbase)
+{
+	molog("Carrier at %i,%i\n", get_position().x, get_position().y);
+
+	Worker::log_general_info(egbase);
+
+	molog("m_acked_ware = %i\n", m_acked_ware);
 }
 
 }

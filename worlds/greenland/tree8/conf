@@ -29,7 +29,7 @@ bergwiese=  100
 
 [idle]
 pics=idle_?.png
-hotspot=24 60
+hotspot=23 59
 
 [program]
 animate=idle 1432000

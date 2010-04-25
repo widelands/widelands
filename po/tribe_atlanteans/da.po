@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-14 18:26+0000\n"
-"PO-Revision-Date: 2010-02-15 13:36+0000\n"
-"Last-Translator: silentStatic <Unknown>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-10 17:57+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-15 14:55+0000\n"
+"X-Launchpad-Export-Date: 2010-04-11 04:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -219,7 +219,7 @@ msgstr "Ressourceindikator kul meget"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Ressourceindikator guld kun lidt"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator gold much"
@@ -578,7 +578,7 @@ msgstr "Tårn"
 #: ../../tribes/atlanteans/conf:158
 #: ../../tribes/atlanteans/conf:166
 msgid "Barrier"
-msgstr ""
+msgstr "Fæstning"
 
 #: ../../tribes/atlanteans/conf:159
 msgid "Citadel"
@@ -608,7 +608,7 @@ msgstr "Barakker"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Outpost"
-msgstr ""
+msgstr "Forpost"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Headquarters"
@@ -724,7 +724,7 @@ msgstr "Spejder hus"
 
 #: ../../tribes/atlanteans/conf:203
 msgid "Horse Farm"
-msgstr ""
+msgstr "Hæste opdrætter"
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Headquarters medium"
@@ -878,6 +878,8 @@ msgid ""
 "Gold is one of the most valuable materials. Only important things are "
 "garnished with it."
 msgstr ""
+"Guld er et af de mest værdifulde materialer. Kun vigtige ting er beklædt med "
+"det."
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid "A special tabard for atlantian soldiers."
@@ -919,7 +921,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Hjælper med at bære genstande ved ofte brugte veje."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -1039,6 +1041,8 @@ msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
 msgstr ""
+"Hakker anvendes af stenhuggere og minearbejdere. De er produceret af "
+"værktøjsmageren."
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid "Planks are an important build material of the Atlanteans."
@@ -1066,6 +1070,7 @@ msgstr "Saver træet for at producere planker."
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Spejdere som spejderen Scotty spejder uspejdede områder på spejderære."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
@@ -1127,7 +1132,7 @@ msgstr "Forsvar og erobre!"
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "Opdrætter edderkopper for tråd."
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid "Cloth made out of spideryarn."
@@ -1162,7 +1167,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Laver værktøj til arbejderne."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -1234,7 +1239,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Laver våben til soldaterne."
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"

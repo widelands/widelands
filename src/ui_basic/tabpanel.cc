@@ -44,7 +44,6 @@ Tab_Panel::Tab_Panel
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_active         (0),
-	m_snapparent     (false),
 	m_highlight      (-1),
 	m_pic_background (background)
 {}
@@ -55,7 +54,7 @@ Tab_Panel::Tab_Panel
  * contents.
  * Resize the parent if snapparent is enabled.
 */
-void Tab_Panel::resize()
+void Tab_Panel::layout()
 {
 	uint32_t w;
 	uint32_t h;
@@ -74,25 +73,7 @@ void Tab_Panel::resize()
 	}
 
 	set_size(w, h);
-
-	// adjust parent's size, if necessary
-	if (m_snapparent) {
-		get_parent()->set_inner_size(w, h);
-		get_parent()->move_inside_parent();
-	}
 }
-
-
-/**
- * If snapparent is enabled, the parent window will be adjusted to the size of
- * the Tab_Panel whenever the Tab_Panel's size changes.
- * The default for snapparent behaviour is off.
-*/
-void Tab_Panel::set_snapparent(bool const snapparent)
-{
-	m_snapparent = snapparent;
-}
-
 
 /**
  * Add a new tab
@@ -117,6 +98,7 @@ uint32_t Tab_Panel::add
 
 	panel->set_pos(Point(0, TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT));
 	panel->set_visible(id == m_active);
+	layout();
 
 	return id;
 }
@@ -134,7 +116,7 @@ void Tab_Panel::activate(uint32_t idx)
 
 	m_active = idx;
 
-	resize();
+	layout();
 }
 
 

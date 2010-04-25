@@ -24,7 +24,7 @@
 namespace UI {
 
 struct Radiobutton : public Statebox {
-	friend class Radiogroup;
+	friend struct Radiogroup;
 
 	Radiobutton
 		(Panel * parent, Point, PictureID picid, Radiogroup &, int32_t id);

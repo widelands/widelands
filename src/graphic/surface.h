@@ -25,6 +25,10 @@
 
 #include "rect.h"
 
+#ifdef _MSC_VER
+#define __attribute__(x)
+#endif
+
 namespace Widelands {
 struct Editor_Game_Base;
 struct Field;
@@ -45,7 +49,7 @@ struct Vertex;
  * functions do NOT perform any clipping; this is up to the caller.
 */
 class Surface {
-	friend class AnimationGfx;
+	friend struct AnimationGfx;
 	friend struct UI::Font_Handler; //  needs m_surface for SDL_Blitting
 
 	SDL_Surface * m_surface;

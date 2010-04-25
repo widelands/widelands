@@ -27,10 +27,10 @@
 #include "routing_node.h"
 
 namespace Widelands {
-struct Building;
+class Building;
 struct Request;
 struct Road;
-struct WareInstance;
+class WareInstance;
 
 
 
@@ -50,6 +50,8 @@ struct WareInstance;
 /// WALK_xx in all "direction" parameters.
  */
 struct Flag : public PlayerImmovable, public RoutingNode {
+	typedef std::vector<const WareInstance*> Wares;
+
 	friend struct Economy;
 	friend struct Router;
 	friend class FlagQueue;
@@ -95,21 +97,24 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool is_dead_end() const;
 
 	bool has_capacity();
+	uint32_t total_capacity() {return m_item_capacity;}
 	void wait_for_capacity(Game &, Worker &);
 	void skip_wait_for_capacity(Game &, Worker &);
 	void add_item(Game &, WareInstance &);
 	bool has_pending_item(Game &, Flag & destflag);
 	bool ack_pending_item(Game &, Flag & destflag);
 	WareInstance * fetch_pending_item(Game &, PlayerImmovable & dest);
+	Wares	get_items();
 
 	void call_carrier(Game &, WareInstance &, PlayerImmovable * nextstep);
 	void update_items(Game &, Flag * other);
 
-	void remove_item(Game &, WareInstance *);
+	void remove_item(Game &, WareInstance * const);
 
 	void add_flag_job
 		(Game &, Ware_Index workerware, std::string const & programname);
 
+	virtual void log_general_info(Editor_Game_Base const &);
 
 protected:
 	virtual void init(Editor_Game_Base &);
@@ -142,7 +147,6 @@ private:
 
 	Building    * m_building; ///< attached building (replaces road WALK_NW)
 	Road        * m_roads[6]; ///< WALK_xx - 1 as index
-	int32_t      m_items_pending[6];
 
 	int32_t      m_item_capacity; ///< size of m_items array
 	int32_t      m_item_filled; ///< number of items currently on the flag

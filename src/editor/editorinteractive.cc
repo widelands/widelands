@@ -17,34 +17,32 @@
  *
  */
 
-#include "editorinteractive.h"
+#include <SDL_keysym.h>
+
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "logic/map.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "map_io/widelands_map_loader.h"
+#include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "tools/editor_delete_immovable_tool.h"
-#include "ui_menus/editor_event_menu.h"
-#include "ui_menus/editor_objectives_menu.h"
-#include "ui_menus/editor_variables_menu.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "ui_menus/editor_main_menu.h"
 #include "ui_menus/editor_main_menu_load_map.h"
 #include "ui_menus/editor_main_menu_save_map.h"
 #include "ui_menus/editor_player_menu.h"
 #include "ui_menus/editor_tool_menu.h"
 #include "ui_menus/editor_toolsize_menu.h"
-#include "wui/game_tips.h"
-#include "graphic/graphic.h"
-#include "i18n.h"
-#include "wui/interactive_base.h"
-#include "logic/map.h"
-#include "wui/overlay_manager.h"
-#include "logic/player.h"
-#include "profile/profile.h"
-#include "logic/tribe.h"
 #include "warning.h"
-#include "map_io/widelands_map_loader.h"
 #include "wlapplication.h"
+#include "wui/game_tips.h"
+#include "wui/interactive_base.h"
+#include "wui/overlay_manager.h"
 
-#include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
-
-#include <SDL_keysym.h>
+#include "editorinteractive.h"
 
 using Widelands::Building;
 
@@ -76,16 +74,7 @@ m_toggle_buildhelp
 	 	("menu_toggle_buildhelp",        toggle_buildhelp,      _("Buildhelp"))),
 m_toggle_player_menu
 	(INIT_BUTTON
-	 	("editor_menu_player_menu",      toggle_playermenu,     _("Players"))),
-m_toggle_event_menu
-	(INIT_BUTTON
-	 	("menu_toggle_event_menu",       toggle_eventmenu,      _("Events"))),
-m_toggle_variables_menu
-	(INIT_BUTTON
-	 	("menu_toggle_variables_menu",   toggle_variablesmenu,  _("Variables"))),
-m_toggle_objectives_menu
-	(INIT_BUTTON
-	 	("menu_toggle_objectives_menu",  toggle_objectivesmenu, _("Objectives")))
+	 	("editor_menu_player_menu",      toggle_playermenu,     _("Players")))
 {
 	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_tool_menu,       UI::Box::AlignLeft);
@@ -93,13 +82,9 @@ m_toggle_objectives_menu
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_player_menu,     UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_event_menu,      UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_variables_menu,  UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_objectives_menu, UI::Box::AlignLeft);
-	m_toolbar.resize();
+	m_toolbar.layout();
 	adjust_toolbar_position();
 
-	//  Disable debug. It is no use for editor.
 #ifndef DEBUG
 	set_display_flag(Interactive_Base::dfDebug, false);
 #else
@@ -185,11 +170,21 @@ void Editor_Interactive::load(std::string const & filename) {
 			egbase().manually_load_tribe(*i.current);
 		}
 	}
+
+	// Create the players. TODO SirVer this must be managed better
+	loader_ui.step (_("Creating players"));
+	iterate_player_numbers(p, map.get_nrplayers()) {
+		egbase().add_player
+			(p, 0, map.get_scenario_player_tribe(p),
+			 map.get_scenario_player_name(p));
+	}
+
 	loader_ui.step (_("Loading world data"));
 	ml->load_world();
 	ml->load_map_complete(egbase(), true);
 	loader_ui.step(_("Loading graphics..."));
 	egbase().load_graphics(loader_ui);
+
 	register_overlays();
 
 	set_need_save(false);
@@ -199,6 +194,12 @@ void Editor_Interactive::load(std::string const & filename) {
 /// Called just before the editor starts, after postload, init and gfxload.
 void Editor_Interactive::start()
 {
+	// Run the editor initialization script, if any
+	try {
+		egbase().lua().run_script("map", "editor_init");
+	} catch(LuaScriptNotExistingError & e) {
+		// do nothing.
+	}
 	egbase().map().overlay_manager().show_buildhelp(true);
 }
 
@@ -243,30 +244,6 @@ void Editor_Interactive::toggle_mainmenu() {
 		delete m_mainmenu.window;
 	else
 		new Editor_Main_Menu(*this, m_mainmenu);
-}
-
-
-void Editor_Interactive::toggle_objectivesmenu() {
-	if (m_objectivesmenu.window)
-		delete m_objectivesmenu.window;
-	else
-		new Editor_Objectives_Menu(*this, m_objectivesmenu);
-}
-
-
-void Editor_Interactive::toggle_variablesmenu() {
-	if (m_variablesmenu.window)
-		delete m_variablesmenu.window;
-	else
-		new Editor_Variables_Menu(*this, m_variablesmenu);
-}
-
-
-void Editor_Interactive::toggle_eventmenu() {
-	if (m_eventmenu.window)
-		delete m_eventmenu.window;
-	else
-		new Editor_Event_Menu(*this, m_eventmenu);
 }
 
 void Editor_Interactive::map_clicked() {
@@ -410,11 +387,6 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code)
 			handled = true;
 			break;
 
-		case SDLK_e:
-			toggle_eventmenu();
-			handled = true;
-			break;
-
 		case SDLK_f:
 			g_gr->toggle_fullscreen();
 			handled = true;
@@ -505,8 +477,7 @@ void Editor_Interactive::select_tool
 /**
  * Reference functions
  *
- *  data is either a pointer to a trigger, event
- *  or a tribe (for buildings)
+ *  data is a pointer to a tribe (for buildings)
  */
 void Editor_Interactive::reference_player_tribe
 	(Widelands::Player_Number const player, void const * const data)
@@ -575,7 +546,7 @@ void Editor_Interactive::change_world() {
  */
 void Editor_Interactive::run_editor(std::string const & filename)
 {
-	Widelands::Editor_Game_Base editor;
+	Widelands::Editor_Game_Base editor(0);
 	Editor_Interactive eia(editor);
 	editor.set_ibase(&eia); //  TODO get rid of this
 	{

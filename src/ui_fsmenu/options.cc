@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,15 +17,12 @@
  *
  */
 
-#define DEFINE_LANGUAGES  // So that the language array gets defined
-
 #include "options.h"
 
 #include "constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "languages.h"
 #include "profile/profile.h"
 #include "save_handler.h"
 #include "sound/sound_handler.h"
@@ -234,7 +231,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_remove_replays           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
-	SDL_PixelFormat & fmt = *SDL_GetVideoInfo()->vfmt;
+	// take a copy to not change real video info structure
+	SDL_PixelFormat  fmt = *SDL_GetVideoInfo()->vfmt;
 	fmt.BitsPerPixel = 16;
 	if
 		(SDL_Rect const * const * const modes =
@@ -282,13 +280,48 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	if (not did_select_a_res)
 		m_reslist.select(m_reslist.size() - 1);
 
-	available_languages[0].name = _("System default language");
-	for (uint32_t i = 0; i < NR_LANGUAGES; ++i)
+	// Fill language list
+	m_language_list.add
+		(_("Try system language"), "", // "try", as many translations are missing.
+		 g_gr->get_no_picture(), "" == opt.language);
+
+	m_language_list.add
+		("English", "en",
+		 g_gr->get_no_picture(), "en" == opt.language);
+		 
+	filenameset_t files;
+	Section * s = &g_options.pull_section("global");
+	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
+	Profile ln("txts/languages");
+	s = &ln.pull_section("languages");
+	bool own_selected = false;
+
+	// Add translation directories to the list
+	for
+		(filenameset_t::iterator pname = files.begin();
+		 pname != files.end();
+		 ++pname)
+	{
+		char const * const path = pname->c_str();
+
+		if 
+			(!strcmp(FileSystem::FS_Filename(path), ".") ||
+			 !strcmp(FileSystem::FS_Filename(path), "..") ||
+			 !g_fs->IsDirectory(path))
+			continue;
+
+		char const * const abbrev = FileSystem::FS_Filename(path);
 		m_language_list.add
-			(available_languages[i].name.c_str(),
-			 available_languages[i].abbrev,
-			 g_gr->get_no_picture(),
-			 available_languages[i].abbrev == opt.language);
+			(s->get_string(abbrev, abbrev), abbrev,
+			 g_gr->get_no_picture(), abbrev == opt.language);
+		own_selected |= abbrev == opt.language;
+	}
+	// Add currently used language manually
+	if (!own_selected)
+		m_language_list.add
+			(s->get_string(opt.language.c_str(), opt.language.c_str()), opt.language,
+			 g_gr->get_no_picture(), true);
+		
 }
 
 void Fullscreen_Menu_Options::advanced_options() {
@@ -317,8 +350,8 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	os.dock_windows_to_edges = m_dock_windows_to_edges.get_state();
 	os.music                 = m_music.get_state();
 	os.fx                    = m_fx.get_state();
-	if(m_language_list.has_selection())
-		os.language              = m_language_list.get_selected();
+	if (m_language_list.has_selection())
+		os.language      = m_language_list.get_selected();
 	os.autosave              = m_sb_autosave.getValue();
 	os.maxfps                = m_sb_maxfps.getValue();
 	os.remove_replays        = m_sb_remove_replays.getValue();
@@ -392,6 +425,13 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this,
 		 m_xres * 1063 / 10000, m_yres * 1417 / 10000,
 		 _("Main menu font:"), UI::Align_VCenter),
+	m_message_sound
+		(this, Point(m_xres * 29 / 80, m_yres * 171 / 1000)),
+	m_label_message_sound
+		(this,
+		 m_xres * 4 / 10, m_yres * 1883 / 10000,
+		 _("Play a sound at message arrival."),
+		 UI::Align_VCenter),
 
 // Second options block
 	m_nozip (this, Point(m_xres * 19 / 200, m_yres * 5833 / 10000)),
@@ -434,6 +474,8 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	os(opt)
 {
 	m_title                .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_label_message_sound  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_message_sound        .set_state(opt.message_sound);
 	m_label_nozip          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_nozip                .set_state(opt.nozip);
 	m_hw_improvements      .set_state(opt.hw_improvements);
@@ -500,6 +542,7 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	// Write all remaining data from UI elements
+	os.message_sound        = m_message_sound.get_state();
 	os.nozip                = m_nozip.get_state();
 	os.hw_improvements      = m_hw_improvements.get_state();
 	os.double_buffer        = m_double_buffer.get_state();
@@ -573,12 +616,14 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	opt.maxfps                =  m_opt_section.get_int
 		("maxfps",              25);
 
+	opt.message_sound         =  m_opt_section.get_bool
+		("sound_at_message", true);
 	opt.nozip                 =  m_opt_section.get_bool
-		("nozip",           false);
+		("nozip",            false);
 	opt.hw_improvements       =  m_opt_section.get_bool
-		("hw_improvements", false);
+		("hw_improvements",  false);
 	opt.double_buffer         =  m_opt_section.get_bool
-		("double_buffer",   false);
+		("double_buffer",    false);
 	opt.ui_font               =  m_opt_section.get_string
 		("ui_font",     "serif");
 	opt.speed_of_new_game     =  m_opt_section.get_int
@@ -614,6 +659,7 @@ void Options_Ctrl::save_options() {
 	m_opt_section.set_int("autosave",               opt.autosave * 60);
 	m_opt_section.set_int("maxfps",                 opt.maxfps);
 
+	m_opt_section.set_bool("sound_at_message",      opt.message_sound);
 	m_opt_section.set_bool("nozip",                 opt.nozip);
 	m_opt_section.set_bool("hw_improvements",       opt.hw_improvements);
 	m_opt_section.set_bool("double_buffer",         opt.double_buffer);

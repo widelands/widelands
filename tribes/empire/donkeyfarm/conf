@@ -1,3 +1,4 @@
+soundfx=../../../sound/farm/donkey
 size=big
 output=donkey
 
@@ -24,13 +25,14 @@ work=_Work
 return=skipped when economy needs wheat and not economy needs donkey
 return=skipped when economy needs water and not economy needs donkey
 consume=wheat water
+playFX=../../../sound/farm/donkey 192
 animate=working 30000 # feeding cute little baby donkeys ;)
 recruit=donkey
 
 [idle]
 pics=donkeyfarm_i_??.png  # ???
-hotspot=54 54
+hotspot=85 78
 
 [working]
 pics=donkeyfarm_i_??.png  # ???
-hotspot=54 54
+hotspot=85 78

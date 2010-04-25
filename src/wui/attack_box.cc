@@ -19,7 +19,6 @@
 
 #include "attack_box.h"
 
-#include "editor/editorinteractive.h"
 #include "logic/soldier.h"
 
 #include "upcast.h"
@@ -124,6 +123,8 @@ UI::Callback_Button<AttackBox> & AttackBox::add_button
 void AttackBox::update_attack() {
 	assert(m_slider_soldiers);
 	assert(m_text_soldiers);
+	assert(m_less_soldiers);
+	assert(m_add_soldiers);
 
 	char buf[20];
 	int32_t max_attackers = get_max_attackers();
@@ -131,16 +132,28 @@ void AttackBox::update_attack() {
 	if (m_slider_soldiers->get_max_value() != max_attackers)
 		m_slider_soldiers->set_max_value(max_attackers);
 
+	m_slider_soldiers->set_enabled(max_attackers > 0);
+	m_add_soldiers->set_enabled(max_attackers > m_slider_soldiers->get_value());
+	m_less_soldiers  ->set_enabled(m_slider_soldiers->get_value() > 0);
+
 	sprintf(buf, "%u / %u", m_slider_soldiers->get_value(), max_attackers);
 	m_text_soldiers->set_text(buf);
 
 	sprintf(buf, "%u", max_attackers);
 	m_add_soldiers->set_title(buf);
 
-
 	if (m_pl->is_retreat_change_allowed()) {
 		assert(m_slider_retreat);
 		assert(m_text_retreat);
+
+		Widelands::Military_Data MD = m_pl->tribe().get_military_data();
+
+		if (m_slider_retreat->get_value() < MD.get_min_retreat())
+			m_slider_retreat->set_value (MD.get_min_retreat());
+
+		if (m_slider_retreat->get_value() > MD.get_max_retreat())
+			m_slider_retreat->set_value (MD.get_max_retreat());
+
 		sprintf(buf, "%u %%", m_slider_retreat->get_value());
 		m_text_retreat->set_text(buf);
 	}
@@ -152,17 +165,17 @@ void AttackBox::init() {
 
 	uint32_t max_attackers = get_max_attackers();
 
-
 	{ //  Soldiers line
 		UI::Box & linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		add(&linebox, UI::Box::AlignTop);
 		add_text(linebox, _("Soldiers:"));
 
-		add_button
-			(linebox,
-			 "0",
-			 &AttackBox::send_less_soldiers,
-			 _("Send less soldiers"));
+		m_less_soldiers =
+			&add_button
+				(linebox,
+				 "0",
+				 &AttackBox::send_less_soldiers,
+				 _("Send less soldiers"));
 
 		//  Spliter of soldiers
 		UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
@@ -178,7 +191,7 @@ void AttackBox::init() {
 				(columnbox,
 				 100, 10,
 				 0, max_attackers, max_attackers > 0 ? 1 : 0,
-				 "slider.png",
+				 "pics/but2.png",
 				 _("Number of soldiers"));
 
 		m_slider_soldiers->changed.set(this, &AttackBox::update_attack);
@@ -190,6 +203,10 @@ void AttackBox::init() {
 				 buf,
 				 &AttackBox::send_more_soldiers,
 				 _("Send more soldiers"));
+
+		m_slider_soldiers->set_enabled(max_attackers > 0);
+		m_add_soldiers   ->set_enabled(max_attackers > 0);
+		m_less_soldiers  ->set_enabled(max_attackers > 0);
 	}
 
 	{ //  Retreat line
@@ -214,7 +231,7 @@ void AttackBox::init() {
 				 m_pl->tribe().get_military_data().get_min_retreat(),
 				 m_pl->tribe().get_military_data().get_max_retreat(),
 				 m_pl->get_retreat_percentage(),
-				 "slider.png",
+				 "pics/but2.png",
 				 _("Supported damage before retreat"));
 		m_slider_retreat->changed.set(this, &AttackBox::update_attack);
 		add_text(linebox, _("Once injured"));

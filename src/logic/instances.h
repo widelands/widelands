@@ -44,7 +44,7 @@ struct Map_Map_Object_Loader;
  * link them together
  */
 struct Map_Object_Descr {
-	friend class ::DirAnimations;
+	friend struct ::DirAnimations;
 	typedef uint8_t Index;
 	Map_Object_Descr(char const * const _name, char const * const _descname)
 		: m_name(_name), m_descname(_descname)
@@ -379,13 +379,13 @@ struct Object_Ptr {
 	Map_Object * get(Editor_Game_Base const &);
 	Map_Object const * get(Editor_Game_Base const & egbase) const;
 
-	bool operator<  (Object_Ptr const other) const throw () {
+	bool operator<  (const Object_Ptr & other) const throw () {
 		return m_serial < other.m_serial;
 	}
-	bool operator== (Object_Ptr const other) const throw () {
+	bool operator== (const Object_Ptr & other) const throw () {
 		return m_serial == other.m_serial;
 	}
-	bool operator!= (Object_Ptr const other) const throw () {
+	bool operator!= (const Object_Ptr & other) const throw () {
 		return m_serial != other.m_serial;
 	}
 

@@ -29,21 +29,23 @@
 #include "instances.h"
 #include "mapregion.h"
 #include "player.h"
+#include "roadtype.h"
+#include "scripting/scripting.h"
 #include "tribe.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
 #include "wexception.h"
 #include "worker.h"
 #include "world.h"
+
 #include "roadtype.h"
 
+#include "economy/road.h"
 
 #include <set>
 #include <algorithm>
 
 namespace Widelands {
-
-extern Map_Object_Descr g_road_descr;
 
 // hard-coded playercolors
 const uint8_t g_playercolors[MAX_PLAYERS][12] = {
@@ -104,12 +106,16 @@ Editor_Game_Base::Editor_Game_Base()
 initialization
 ============
 */
-Editor_Game_Base::Editor_Game_Base() :
+Editor_Game_Base::Editor_Game_Base(LuaInterface * lua) :
 m_gametime          (0),
+m_lua               (lua),
 m_ibase             (0),
 m_map               (0),
 m_lasttrackserial   (0)
 {
+	if (not m_lua) // TODO SirVer: this is sooo ugly, I can't say
+		m_lua = create_LuaEditorInterface(this);
+
 	memset(m_players, 0, sizeof(m_players));
 }
 
@@ -123,6 +129,8 @@ Editor_Game_Base::~Editor_Game_Base() {
 
 	container_iterate_const(Tribe_Vector, m_tribes, i)
 		delete *i.current;
+
+	delete m_lua;
 }
 
 void Editor_Game_Base::think()
@@ -224,7 +232,7 @@ void Editor_Game_Base::inform_players_about_ownership
 void Editor_Game_Base::inform_players_about_immovable
 	(Map_Index const i, Map_Object_Descr const * const descr)
 {
-	if (descr != &g_road_descr)
+	if (not Road::IsRoadDescr(descr))
 		for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
 			if (Player * const p = m_players[plnum]) {
 				Player::Field & player_field = p->m_fields[i];
@@ -239,14 +247,11 @@ Replaces the current map with the given one. Ownership of the map is transferred
 to the Editor_Game_Base object.
 ===============
 */
-void Editor_Game_Base::set_map(Map * const new_map, bool register_callback) {
+void Editor_Game_Base::set_map(Map * const new_map) {
 	assert(new_map != m_map);
 	delete m_map;
 
 	m_map = new_map;
-
-	if (register_callback)
-		UI::g_fh->register_variable_callback(g_VariableCallback, m_map);
 }
 
 
@@ -327,10 +332,16 @@ idx is the building type index.
 ===============
 */
 Building & Editor_Game_Base::warp_building
-	(Coords const c, Player_Number const owner, Building_Index const i)
+	(Coords const c, Player_Number const owner, Building_Index const idx)
 {
 	Player & plr = player(owner);
-	return plr.tribe().get_building_descr(i)->create(*this, plr, c, false);
+	Tribe_Descr const & tribe = plr.tribe();
+	return
+		tribe.get_building_descr(idx)->create
+			(*this, plr, c,
+			 false,
+			 0, 0, 0, 0,
+			 true);
 }
 
 
@@ -343,7 +354,7 @@ if oldi != -1 this is a constructionsite coming from an enhancing action
 */
 Building & Editor_Game_Base::warp_constructionsite
 	(Coords const c, Player_Number const owner,
-	 Building_Index idx, Building_Index old_id)
+	 Building_Index idx, Building_Index old_id, bool loading)
 {
 	Player            & plr   = player(owner);
 	Tribe_Descr const & tribe = plr.tribe();
@@ -352,7 +363,8 @@ Building & Editor_Game_Base::warp_constructionsite
 			(*this, plr, c,
 			 true,
 			 0, 0, 0,
-			 old_id ? tribe.get_building_descr(old_id) : 0);
+			 old_id ? tribe.get_building_descr(old_id) : 0,
+			 loading);
 }
 
 
@@ -388,7 +400,7 @@ Does not perform any placability checks.
 ===============
 */
 Immovable & Editor_Game_Base::create_immovable
-	(Coords const c, int32_t const idx, Tribe_Descr const * const tribe)
+	(Coords const c, uint32_t const idx, Tribe_Descr const * const tribe)
 {
 	Immovable_Descr const & descr =
 		*
@@ -396,6 +408,7 @@ Immovable & Editor_Game_Base::create_immovable
 		 tribe->get_immovable_descr(idx)
 		 :
 		 m_map->world().get_immovable_descr(idx));
+	assert(&descr);
 	inform_players_about_immovable
 		(Map::get_index(c, map().get_width()), &descr);
 	return descr.create(*this, c);

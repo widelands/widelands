@@ -1,5 +1,26 @@
-### Build 15 (until now)
+### Build 15 rc2
+- Removed registering functionality for metaserver. This is to be compatible
+  with future changes to the metaserver.
+- Small text tweaks and translation updates.
+- New graphics for some buildings and menu pics.
+- Fix for Multiline Editboxes that could lead the Editor to crash.
+- Scout runs a little longer to make it more useful.
+- Fixed descyns happening when a scout left his house in network games.
+- Healthy soldiers defend while injured ones heal at MilitarySite (bzr:5084)
+- Fixed bug when PM is send to the player hosting a newtwork game.
+- Fishbreeder no longer complains about no fish found. 
+- Conquered buildings now appear in statistics.
+- Improvements in the build_and_run.sh script and cmake building in general.
+- Sound & Music system is now thread safe.
+- Win 32 bug fix: Mine symbols were not visible in VC++ builds.
+
+### Build 15 rc1
+- Fix defending soldiers making invisible and freezing battles.
+- Support for building with Visual Studio
+- New graphics for some buildings
+- Added second carrier type for busy roads (donkeys, oxen, horses)
 - Changed localization structure so that we can translate from launchpad.net
+- Cmake is now a supported build system
 - Lua support (preliminary) 
 - Fix bug that when a worker program had a createitem command where the
   parameter was not the name of a ware type in the tribe, the game would fail
@@ -83,7 +104,7 @@
 - Change the code so victorious soldiers conquer an opposing militarysite,
   instead of destroying it. (svn:r4706 - svn:r4711, svn:r4724, svn:r4727,
   svn:r4731, svn:r4732, svn:r4822, svn:r4839)
-- Fix bug that caused udenfined behaviour, particularly segmentations faults in
+- Fix bug that caused undenfined behaviour, particularly segmentations faults in
   64-bit optimized builds. (svn:r4702)
 - Improve player's message queue: (svn:r4698)
     * Add only important and not doubled messages.

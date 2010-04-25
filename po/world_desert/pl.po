@@ -6,19 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:09+0000\n"
-"Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-11 11:37+0000\n"
+"Last-Translator: Szymon Gackowski <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-04-12 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
-msgstr "Zespól rozwojowy Widelands"
+msgstr "Zespół rozwojowy Widelands"
 
 #: ../../worlds/desert/conf:3
 msgid "Desert"
@@ -94,7 +94,7 @@ msgstr "Muszla"
 #: ../../worlds/desert/conf:43
 #: ../../worlds/desert/conf:44
 msgid "Standing Stones"
-msgstr "Stojące Kamienie"
+msgstr "Stojące kamienie"
 
 #: ../../worlds/desert/conf:45
 #: ../../worlds/desert/conf:46
@@ -175,15 +175,15 @@ msgstr "Jarząb"
 
 #: ../../worlds/desert/conf:80
 msgid "Rowan medium"
-msgstr "Średni modrzew"
+msgstr "Średni jarząb"
 
 #: ../../worlds/desert/conf:81
 msgid "Rowan small"
-msgstr "Mały modrzew"
+msgstr "Mały jarząb"
 
 #: ../../worlds/desert/conf:82
 msgid "Rowan tiny"
-msgstr "Malutki modrzew"
+msgstr "Malutki jarząb"
 
 #: ../../worlds/desert/conf:85
 msgid "Bunny"

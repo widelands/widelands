@@ -1,0 +1,204 @@
+# Czech translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-03-14 15:52+0000\n"
+"PO-Revision-Date: 2010-03-25 18:23+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
+"Language-Team: Czech <cs@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:33
+msgid ""
+"* Defeat Erwyn. He commands the strongest opposing soldiers left on this\n"
+"island."
+msgstr ""
+"* Musíš porazit Erwyna. Velí nejsilnějším nepřátelským vojákům přebývajícím "
+"na tomto ostrově."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:40
+msgid "* Defeat Jomo. He takes care about the soldiers food supply."
+msgstr "* Musíš porazit Joma. Má na starosti zásobování vojenských jednotek."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:26
+msgid "* Defeat Lanissa and capture the ancient castle."
+msgstr "* Musíš porazit Lanissu a zmocnit se starobylého hradu."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:54
+msgid "-- NEW OBJECTIVES --"
+msgstr "-- NOVÉ ÚKOLY --"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:86
+msgid "An ancient castle"
+msgstr "Starobylý hrad"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:102
+msgid "Ancient castle captured"
+msgstr "Starobylý hrad byl dobyt"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:116
+#: ../../maps/Plateau.wmf/scripting/texts.lua:126
+msgid "Another Briefing"
+msgstr "Další informace"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:87
+msgid ""
+"By the Gods! One of our scouts found a mighty castle at the middle of the "
+"old\n"
+"plateau. The castle must be quite old and seems to be build in a foreign\n"
+"style. It's quite obvious, that this is not barbarian craft.<br>Let's hope\n"
+"Lanissa - the warlord holding command over that castle - still has not "
+"observed\n"
+"us. Perhaps we have a chance to conquer that mighty building without a "
+"bigger\n"
+"fight!<br>However we really have to capture it. It will be our key for our\n"
+"reign over this island!"
+msgstr ""
+"U všech bohů! Jeden z našich zvědů objevil uprostřed náhorní plošiny "
+"mohutný\n"
+"hrad. Hrad musí být hodně starý a vypadá, že je postavený v cizím stylu. Je "
+"zcela\n"
+"zřejmé, že se nejedná o výtvor žádného z barbarskch kmenů.<br>Doufejme, že\n"
+"nás Lanissa, válečnice velící posádce hradu, ještě nestihla zpozorovat.\n"
+"Snad máme stále šanci dobýt tuto  mohutnou stavbu bez větších bojů!<br>\n"
+"Každopádně ji opravdu musíme získat. Je klíčem k ovládnutí celého ostrova!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:25
+msgid "Capture the ancient castle"
+msgstr "Zmocni se starobylého hradu"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:143
+msgid ""
+"Congratulations! You mastered this scenario. You may play on if you like!"
+msgstr ""
+"Blahopřejeme! Dokončil jsi tuto misi. Pokud chceš, můžeš dál pokračovat ve "
+"hře!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:31
+msgid "Defeat Erwyn"
+msgstr "Musíš porazit Erwyna"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:38
+msgid "Defeat Jomo"
+msgstr "Musíš porazit Joma"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:120
+msgid "Erwyn defeated"
+msgstr "Erwyn byl poražen"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:74
+msgid ""
+"Finally! Our first step to victory was just done! Last night, we landed on\n"
+"the forbidden island and defeated the few guards that sentineled the north\n"
+"western part of the island. I am quite sure, that none of the other "
+"warlords\n"
+"has detected us so far, so we should keep quiet and build up our\n"
+"infrastructure. Soon we will be strong enough to raid their positions."
+msgstr ""
+"Konečně! První krůček k vítězství byl právě vykonán! Minulou noc jsme\n"
+"zakotvili u zakázaného ostrova a přemohli stráže, které hlídaly severní\n"
+"a západní část ostrova. Jsem si docela jistý, že se vše podařilo aniž\n"
+"by nás zpozoroval kdokoliv z místních vládců, takže bychom si nyní měli\n"
+"potichu vybudovat vlastní infrastrukturu. Brzy budeme natolik silní, že\n"
+"zaútočíme na jejich pozice."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:141
+msgid ""
+"Finally! The complete island is ours. Now we just have to defend it better "
+"than\n"
+"the warlords did."
+msgstr ""
+"Konečně! Celý ostrov je náš. Nyní jej musíme chránit lépe než jej chránili \n"
+"poražení válečníci."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:69
+msgid "First Briefing"
+msgstr "První informace"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:121
+msgid ""
+"Great! Erwyn gave up, when he saw his last buildings burning down. One "
+"strong\n"
+"warlord less on this island!"
+msgstr ""
+"Při pohledu na doutnající zbytky poslední ze svých budov se Erwyn vzdal. "
+"Skvělé!  O jednoho\n"
+"silného protivníka méně!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:131
+msgid ""
+"Great! Jomo gave up, when he saw his last buildings burning down. One "
+"warlord\n"
+"less on this island!"
+msgstr ""
+"Při pohledu na doutnající zbytky poslední ze svých budov se Jomo vzdal. "
+"Skvělé!  O jednoho\n"
+"silného protivníka méně!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:130
+msgid "Jomo defeated"
+msgstr "Jomo byl poražen"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:136
+msgid "Last Briefing"
+msgstr "Poslední informace"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:82
+#: ../../maps/Plateau.wmf/scripting/texts.lua:98
+msgid "Second Briefing"
+msgstr "Druhé informace"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:73
+msgid "The forbidden island"
+msgstr "Zapomenutý ostrov"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:140
+msgid "Victory!"
+msgstr "Vítězství!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:103
+msgid ""
+"Wonderful! Our troops finally defeated Lanissa and her soldiers. The "
+"ancient\n"
+"castle is ours!<br> It is amazing, how far one can see from the highest "
+"tower\n"
+"of the castle. We can watch the whole island. So now I wonder, why Lanissa "
+"has\n"
+"not see us and thus did not prepare. But well, some things will never come "
+"to\n"
+"the light of day. The only important things at the moment are the left "
+"opposing\n"
+"troops. We observed enemy's positions from Erwyn north and eastwards of the\n"
+"castle. He is known to be a strong warlord and surely commands the "
+"strongest\n"
+"warriors. In the south we captured some guarded food infrastructures of Jomo "
+"-\n"
+"a younger warlord - we should take care about that infrastructures and cut "
+"of\n"
+"the food supply."
+msgstr ""
+"Výborně! Naše jednotky konečně zvítězily nad Lanissou a jejími vojáky. "
+"Starobylý\n"
+"hrad je náš!<br> Je úžasné, jak daleko je vidět z nejvyšší hradní věže.\n"
+"Můžeme pozorovat celý ostrov. Divím se jak je možné, že nás Lanissa "
+"neviděla\n"
+"a nepřipravila se lépe. I když, existují věci mezi nebem a zemí, které se už "
+"\n"
+"nedozvíme. Důležité jsou v tomto okamžiku pouze zbývající nepřátelské "
+"jednotky.\n"
+"Severně a na východ od hradu jsou vidět Erwynovy pozice. Je všeobecně "
+"známo,\n"
+"že tento silný válečník velí posádkám složeným z nejsilnějších bojovníků.\n"
+"Na jihu je pár hlídaných zásobáren potravin, pod velením mladého válečníka \n"
+"Joma - měli bychom se na tuto infrastrukturu zaměřit a odříznout tak "
+"nepřátelské\n"
+"zásobování."

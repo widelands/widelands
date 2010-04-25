@@ -36,7 +36,7 @@ struct Editor_Game_Base;
 struct Immovable_Descr;
 };
 
-extern class Profile g_options;
+extern struct Profile g_options;
 struct FileSystem;
 
 /**
@@ -58,7 +58,7 @@ struct FileSystem;
  * The value of the key is stored in the second parameter.
  */
 struct Section {
-	friend class Profile;
+	friend struct Profile;
 
 	struct Value {
 		bool   m_used;
@@ -238,7 +238,7 @@ struct Profile {
 	Profile
 		(char const * filename,
 		 char const * global_section,
-		 const std::string  textdomain,
+		 const std::string & textdomain,
 		 int32_t      error_level    = err_throw);
 
 	void error(char const *, ...) const __attribute__((format(printf, 2, 3)));

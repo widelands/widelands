@@ -1,11 +1,11 @@
-help=_Carries items along your roads.
+help=_Carries items along the roads.
 
 [buildcost]
 
 [idle]
 pics=idle_??.png
-hotspot=6 21
-fps=1
+hotspot=14 21
+fps=5
 playercolor=true
 
 [walk]

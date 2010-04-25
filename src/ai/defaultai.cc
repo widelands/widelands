@@ -808,6 +808,19 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Priority of woodcutters depend on the number of near trees
 					prio += bf->trees_nearby * 2;
 					prio /= 2 * (1 + bf->tree_consumers_nearby);
+					if (prio <= 0)
+						continue;
+
+					// Check if the produced wares are needed
+					Ware_Index wt(static_cast<size_t>(bo.outputs[0]));
+					container_iterate(std::list<EconomyObserver *>, economies, l) {
+						// Don't check if the economy has only one flag.
+						if ((*l.current)->flags.size() < 2)
+							continue;
+						if ((*l.current)->economy.needs_ware(wt))
+							prio += 1 + wares[bo.outputs[0]].preciousness;
+					}
+
 					if (bo.total_count() < 2) {
 						prio *= 6; // big bonus for the basics
 						if (bo.total_count() == 0)
@@ -829,6 +842,16 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Add preciousness - makes the defaultAI build foresters earlier
 					prio += 2 * wares[bo.production_hint].preciousness;
 
+					// Check if the reproduced wares are needed
+					Ware_Index wt(static_cast<size_t>(bo.production_hint));
+					container_iterate(std::list<EconomyObserver *>, economies, l) {
+						// Don't check if the economy has only one flag.
+						if ((*l.current)->flags.size() < 2)
+							continue;
+						if ((*l.current)->economy.needs_ware(wt))
+							prio += 1 + wares[bo.production_hint].preciousness;
+					}
+
 					// Do not build too many of these buildings, but still care
 					// to build at least one.
 					if (bo.total_count() > 1)
@@ -842,7 +865,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Calculate the need for this building
 					prio += 3 * wares[bo.production_hint].consumers;
 					prio += wares[bo.production_hint].preciousness;
-					prio += (bf->producers_nearby[bo.production_hint] - 1) * 15;
+					prio += (bf->producers_nearby[bo.production_hint] - 1) * 10;
 				} else if (bo.recruitment) {
 					// "recruitment centeres" like the donkey farm should be build up
 					// as soon as a basic infrastructure was completed.
@@ -962,7 +985,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				if (bf->water_nearby < 3)
 					continue;
 				int effect = bf->water_nearby - 8;
-				prio += effect > 0 ? static_cast<int>(sqrt(effect)) : effect;
+				prio += effect > 0 ?
+					 static_cast<int>(sqrt(static_cast<double>(effect))) : effect;
 				// if same producers are nearby, then give some penalty
 				for (size_t k = 0; k < bo.outputs.size(); ++k)
 					if (bf->producers_nearby[bo.outputs[k]] > 0)
@@ -1047,7 +1071,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			// Check if current economy can supply enough food for production.
 			for (uint32_t k = 0; k < bo.inputs.size(); ++k) {
 				prio += 2 * wares[bo.inputs[k]].producers;
-				prio -= 2 * wares[bo.inputs[k]].consumers;
+				prio -= wares[bo.inputs[k]].consumers;
 			}
 
 			uint32_t ioprio = 0;
@@ -1799,7 +1823,7 @@ int32_t DefaultAI::calculate_need_for_ps
 	}
 	if (bo.outputs.size() > 1)
 		output_prio = static_cast<int32_t>
-			(ceil(output_prio / sqrt(bo.outputs.size())));
+			(ceil(output_prio / sqrt(static_cast<double>(bo.outputs.size()))));
 	prio += 2 * output_prio;
 
 	// If building consumes some wares, multiply with current statistics of all
@@ -2045,7 +2069,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	FCoords f = map.get_fcoords(ms->get_position());
 
 	Building * target = ms; // dummy initialisation to silence the compiler
-	uint32_t   chance    = 0;
+	int32_t   chance    = 0;
 	uint32_t   attackers = 0;
 	uint8_t    retreat   = ms->owner().get_retreat_percentage();
 

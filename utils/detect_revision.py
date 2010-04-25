@@ -1,11 +1,8 @@
-#!/usr/bin/python -tt
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # Tries to find out the repository revision of the current working directory
-# using svn or svk.
-#
-# For svk: must be in checkout's root path, will not work otherwise
-#          (but could be made to)
+# using bzr or git
 
 ###############################################
 #
@@ -15,55 +12,35 @@
 #
 ###############################################
 
-import os,sys
+import os
+import sys
+import os.path as p
+import subprocess
 
 # Support for bzr local branches
 try:
     from bzrlib.branch import Branch
     from bzrlib.bzrdir import BzrDir
     from bzrlib.errors import NotBranchError
-    __has_bzr = True
+    __has_bzrlib = True
 except ImportError:
-    __has_bzr = False
+    __has_bzrlib = False
 
-def detect_revision():
-    revstring='UNKNOWN-REVISION'
+base_path = p.abspath(p.join(p.dirname(__file__),p.pardir))
 
-    # All code below relies on posix-isms, don't even try on other systems for now
-    # TODO: find out how revision detection can be done cross platform instead of returning "UNKNOWN"
-    if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
-	    pass
-    else:
-	    revstring='REVDETECT-BROKEN-PLEASE-REPORT-THIS'
-	    return revstring
+def check_for_explicit_version():
+    """
+    Checks for a file WL_RELEASE in the root directory. It then defaults to
+    this version without further trying to find which revision we're on
+    """
+    fname = p.join(base_path, "WL_RELEASE")
+    if os.path.exists(fname):
+        return open(fname).read().strip()
 
-    svn_revnum = ""
-    if os.path.exists('.svn'):
-        has_svn = os.system('svn >/dev/null 2>&1')==256
-        if has_svn:
-            svn_revnum=os.popen('LANG=C svn info|grep Revision:|cut -d" " -f 2').read().rstrip()
-            revstring='svn%s' % (svn_revnum,)
-
-    if os.path.exists('debian'):
-        has_svn = os.system('svn >/dev/null 2>&1')==256
-        if has_svn:
-            svn_revnum=os.popen('dpkg-parsechangelog | grep ^Version| cut -d : -f 3-| sed \'s/~rc.*/RC/\'').read().rstrip()
-            revstring='%s' % (svn_revnum,)
-
-    has_svk = os.system('svk >/dev/null 2>&1')==0
-
-    if has_svk:
-        cwd=os.getcwd()
-        is_svk_workdir = os.system('svk co -l|grep '+cwd+' >/dev/null 2>&1')==0
-
-        if is_svk_workdir:
-            svk_revnum=os.popen('LANG=C svk info|grep Revision|cut -d" " -f 2').read().rstrip()
-            svn_revnum=os.popen('LANG=C svk info|grep Mirrored|cut -d" " -f 5').read().rstrip()
-
-            if svn_revnum=='':
-                revstring='unofficial-svk%s' % (svk_revnum,)
-            else:
-                revstring='unofficial-svk%s(>=svn%s)' % (svk_revnum, svn_revnum)
+def detect_git_revision():
+    if not sys.platform.startswith('linux') and \
+       not sys.platform.startswith('darwin'):
+        return None
 
     is_git_workdir=os.system('git show >/dev/null 2>&1')==0
     if is_git_workdir:
@@ -73,22 +50,37 @@ def detect_revision():
         svn_revnum=os.popen('git show --pretty=format:%b%n '+common_ancestor+' | grep ^git-svn-id\\: -m 1 | sed "sM.*@\\([0-9]*\\) .*M\\1M"').read().rstrip()
 
         if svn_revnum=='':
-            revstring='unofficial-git-%s' % (git_revnum,)
+            return 'unofficial-git-%s' % (git_revnum,)
         elif is_pristine:
-            revstring='unofficial-git-%s(svn%s)' % (git_revnum, svn_revnum)
+            return 'unofficial-git-%s(svn%s)' % (git_revnum, svn_revnum)
         else:
-            revstring='unofficial-git-%s(svn%s+changes)' % (git_revnum, svn_revnum)
+            return 'unofficial-git-%s(svn%s+changes)' % (git_revnum, svn_revnum)
 
-    if __has_bzr and not is_git_workdir:
-        try:
-            b = BzrDir.open(".").open_branch()
-            revno, nick = b.revno(), b.nick
-            if svn_revnum=='':
-                revstring = "unofficial-bzr-%s-%s" % (nick,revno)
-            else:
-                revstring = "unofficial-bzr-%s-%s(svn%s)" % (nick,revno,svn_revnum)
-        except NotBranchError:
-            pass
+
+def detect_bzr_revision():
+    if __has_bzrlib:
+        b = BzrDir.open(base_path).open_branch()
+        revno, nick = b.revno(), b.nick
+    else:
+        # Windows stand alone installer do not come with bzrlib. We try to
+        # parse the output of bzr then directly
+        run_bzr = lambda subcmd: subprocess.Popen(
+                ["bzr",subcmd], stdout=subprocess.PIPE, cwd=base_path
+            ).stdout.read().strip()
+        revno = run_bzr("revno")
+        nick = run_bzr("nick")
+    return "bzr%s[%s] " % (revno,nick)
+
+def detect_revision():
+    for func in (
+        check_for_explicit_version,
+        detect_git_revision,
+        detect_bzr_revision):
+        rv = func()
+        if rv:
+            return rv
+
+    return 'REVDETECT-BROKEN-PLEASE-REPORT-THIS'
 
 
     return revstring

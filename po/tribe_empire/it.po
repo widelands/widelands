@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-12 16:50+0000\n"
-"Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-10 17:01+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-04-11 04:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/advanced_lance/conf:1
@@ -45,7 +45,7 @@ msgstr "Armatura di base per i soldati dell'Impero"
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Produce armature per i soldati."
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
@@ -107,7 +107,7 @@ msgstr "Questa ascia è lo strumento del falegname. È prodotta dal fabbro."
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Cuoce al forno pane per i lavoratori."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -463,7 +463,7 @@ msgstr "Portatore"
 
 #: ../../tribes/empire/conf:109
 msgid "Donkey"
-msgstr ""
+msgstr "Asino"
 
 #: ../../tribes/empire/conf:112
 msgid "Soldier"
@@ -567,11 +567,11 @@ msgstr "Coltivatore di Vite"
 
 #: ../../tribes/empire/conf:139
 msgid "Scout"
-msgstr ""
+msgstr "Esploratore"
 
 #: ../../tribes/empire/conf:140
 msgid "Donkey Breeder"
-msgstr ""
+msgstr "Allevatore di asini"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -624,31 +624,31 @@ msgstr "Torre"
 
 #: ../../tribes/empire/conf:161
 msgid "Guardhall"
-msgstr ""
+msgstr "Guardia ingresso"
 
 #: ../../tribes/empire/conf:162
 msgid "Guardhouse"
-msgstr ""
+msgstr "Guardiola"
 
 #: ../../tribes/empire/conf:163
 msgid "High Tower"
-msgstr ""
+msgstr "Torre alta"
 
 #: ../../tribes/empire/conf:164
 msgid "Small Tower"
-msgstr ""
+msgstr "Torre piccola"
 
 #: ../../tribes/empire/conf:167
 msgid "Citadel"
-msgstr ""
+msgstr "Cittadella"
 
 #: ../../tribes/empire/conf:168
 msgid "Donjon"
-msgstr ""
+msgstr "Dongione"
 
 #: ../../tribes/empire/conf:171
 msgid "Stronghold"
-msgstr ""
+msgstr "Roccaforte"
 
 #: ../../tribes/empire/conf:174
 msgid "Headquarters"
@@ -792,11 +792,11 @@ msgstr "Piantagione di viti"
 
 #: ../../tribes/empire/conf:211
 msgid "Scout's House"
-msgstr ""
+msgstr "Casa dell'esploratore"
 
 #: ../../tribes/empire/conf:212
 msgid "Donkeyfarm"
-msgstr ""
+msgstr "Allevamento asini"
 
 #: ../../tribes/empire/conf:215
 msgid "Headquarters medium"
@@ -808,11 +808,11 @@ msgstr "Castello del villaggio"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Aiuta a trasportare oggetti pesanti sulle strade usate."
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr ""
+msgstr "Alleva carini ed utilissimi asini"
 
 #: ../../tribes/empire/farm/conf:15
 msgid "Plant wheat"
@@ -981,6 +981,7 @@ msgstr ""
 #: ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
 msgstr ""
+"Lavora in profondità nelle miniere per ottenere carbone, ferro od oro."
 
 #: ../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -998,7 +999,7 @@ msgstr ""
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr ""
+msgstr "Macina il grano per produrre farina."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1032,6 +1033,8 @@ msgstr ""
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Esploratori come Scotty l'esploratore esplorano le aree non esplorate alla "
+"maniera degli esploratori."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
@@ -1077,7 +1080,7 @@ msgstr "Taglia pezzi grezzi di granito e marmo dalle pietre da posare."
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Produce strumenti per i lavoratori."
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -1129,7 +1132,7 @@ msgstr "Produce un'ascia"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Allena i soldati."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1261,7 +1264,7 @@ msgstr ""
 
 #: ../../tribes/empire/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Produce armi per i soldati."
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"

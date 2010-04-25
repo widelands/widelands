@@ -29,6 +29,7 @@
 
 #include "i18n.h"
 
+#include "container_iterate.h"
 #include "ref_cast.h"
 
 namespace Widelands {
@@ -48,15 +49,19 @@ struct GameMessageMenu : public UI::UniqueWindow {
 
 	enum Mode {Inbox, Archive};
 	void think();
+	virtual bool handle_key(bool down, SDL_keysym code);
 
 private:
 	Interactive_Player & iplayer() const;
 	void                 selected(uint32_t);
 
-	struct List : public UI::Table<uintptr_t const> {
+	bool status_compare(uint32_t a, uint32_t b);
+	void do_delete();
+
+	struct List : public UI::Table<uintptr_t> {
 		enum Cols {Select, Status, Title, Time_Sent};
 		List(GameMessageMenu & parent) :
-			UI::Table<uintptr_t const>(&parent, 5, 35, 360, 110)
+			UI::Table<uintptr_t>(&parent, 5, 35, 360, 110)
 		{
 			selected.set(&parent, &GameMessageMenu::selected);
 			add_column (50, _("Select"), UI::Align_HCenter, true);
@@ -65,6 +70,9 @@ private:
 			add_column(100, _("Time sent"));
 		}
 	} list;
+
+	void update_record(List::Entry_Record& er, Widelands::Message const &);
+
 	UI::Multiline_Textarea message_body;
 
 	struct Clear_Selection : public UI::Button {
@@ -78,11 +86,7 @@ private:
 		void clicked() {
 			GameMessageMenu & menu =
 				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
-			for
-				(struct {uint8_t current; uint8_t const end;} i =
-				 	{0, menu.list.size()};
-				 i.current < i.end;
-				 ++i.current)
+			for(wl_index_range<uint8_t>i(0,menu.list.size());i;++i)
 				menu.list.get_record(i.current).set_checked
 					(List::Select, false);
 		}
@@ -99,11 +103,8 @@ private:
 		void clicked() {
 			GameMessageMenu & menu =
 				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
-			for
-				(struct {uint8_t current; uint8_t const end;} i =
-				 	{0, menu.list.size()};
-				 i.current < i.end;
-				 ++i.current)
+
+			for(wl_index_range<uint8_t> i(0, menu.list.size());i;++i)
 				menu.list.get_record(i.current).toggle(List::Select);
 		}
 	} invert_selection;

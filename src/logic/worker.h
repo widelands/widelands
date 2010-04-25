@@ -26,7 +26,7 @@
 #include "productionsite.h"
 
 namespace Widelands {
-struct Building;
+class Building;
 
 /**
  * Worker is the base class for all humans (and actually potential non-humans,
@@ -181,6 +181,8 @@ protected:
 
 	bool does_carry_ware() {return m_carried_item.is_set();}
 
+	void set_program_objvar(Game &, State &, Map_Object * obj);
+
 public:
 	static const Task taskTransfer;
 	static const Task taskBuildingwork;
@@ -203,6 +205,7 @@ private:
 	void buildingwork_update(Game &, State &);
 	void return_update(Game &, State &);
 	void program_update(Game &, State &);
+	void program_pop(Game &, State &);
 	void gowarehouse_update(Game &, State &);
 	void gowarehouse_signalimmediate
 		(Game &,
@@ -222,7 +225,6 @@ private:
 
 	// Program commands
 	bool run_mine             (Game &, State &, Action const &);
-	bool run_lua              (Game &, State &, Action const &);
 	bool run_breed            (Game &, State &, Action const &);
 	bool run_createitem       (Game &, State &, Action const &);
 	bool run_setdescription   (Game &, State &, Action const &);

@@ -1,5 +1,3 @@
-# Automatically created by Widelands 3252
-
 [global]
 packet_version="1"
 map_w="64"
@@ -8,4 +6,4 @@ nr_players="2"
 world="greenland"
 name=_"Crater"
 author="Tarrei"
-descr=_"Long after a meteor crashed into a couple of mountains life blossoms in the crater. Two tribes are now fighting about the rich resources."
+descr=_"Long after a meteor crashed into a couple of mountains, life blossoms in the crater. Two tribes are now fighting for the rich resources."

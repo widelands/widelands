@@ -33,8 +33,8 @@
 
 typedef std::set<std::string> filenameset_t;
 
-class StreamRead;
-class StreamWrite;
+struct StreamRead;
+struct StreamWrite;
 
 
 /**
@@ -114,9 +114,10 @@ struct FileSystem {
 	bool pathIsAbsolute(std::string const & path) const;
 	static char const * FS_Filename(char const *);
 	static char const * FS_Filename(char const *, char const * & extension);
+    static std::string FS_FilenameWoExt(char const *);
 	static std::string GetHomedir();
 
-	virtual unsigned long DiskSpace() = 0;
+	virtual unsigned long long DiskSpace() = 0;
 
 protected:
 	///To get a filesystem, use the Create methods

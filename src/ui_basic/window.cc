@@ -112,13 +112,22 @@ void Window::set_title(char const * const text)
 }
 
 /**
- * Move the window so that it is under the mouse cursor.
+ * Move the window so that it is centered under the mouse cursor.
 */
 void Window::move_to_mouse() {
 	set_pos(get_mouse_position() - Point(get_w() / 2, get_h() / 2));
 	move_inside_parent();
 }
 
+/**
+ * Move the window so that the given point \p pt - interpreted as inner coordinates
+ * inside the window - is centered under the mouse cursor.
+ */
+void Window::move_to_mouse(const Point & pt)
+{
+	set_pos(get_pos() + get_mouse_position() - pt);
+	move_inside_parent();
+}
 
 /**
  * Move the window so that it is inside the parent panel.
@@ -133,24 +142,15 @@ void Window::move_inside_parent() {
 			px = 0;
 			if (parent->get_dock_windows_to_edges() and not _docked_left)
 				dock_left();
-		} else if
-			(px + static_cast<uint32_t>(get_w()) >=
-			 parent->get_inner_w())
-		{
-			assert
-				(parent->get_inner_w() >
-				 static_cast<uint32_t>(get_w()));
-			px = parent->get_inner_w() -
-				static_cast<uint32_t>(get_w());
+		} else if (px + static_cast<uint32_t>(get_w()) >= parent->get_inner_w()) {
+			assert (parent->get_inner_w() > static_cast<uint32_t>(get_w()));
+			px = parent->get_inner_w() - static_cast<uint32_t>(get_w());
 			if (parent->get_dock_windows_to_edges() and not _docked_right)
 				dock_right();
 		}
 		if (py < 0)
 			py = 0;
-		else if
-			(py + static_cast<uint32_t>(get_h()) >
-			 parent->get_inner_h())
-		{
+		else if (py + static_cast<uint32_t>(get_h()) > parent->get_inner_h()) {
 			assert(parent->get_inner_h() >= static_cast<uint32_t>(get_h()));
 			py = parent->get_inner_h() - static_cast<uint32_t>(get_h());
 			if
@@ -350,7 +350,11 @@ void Window::think() {if (not is_minimal()) Panel::think();}
  * Left-click: drag the window
  * Right-click: close the window
  */
-bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my) {
+bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my)
+{
+	if (get_can_focus())
+		focus();
+
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked. See the
 	//  FIXME usage comment for get_key_state.
@@ -377,6 +381,7 @@ bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my) {
 		//  FIXME No, at least provide a flag for making a window unclosable and
 		//  FIXME provide a callback.
 	}
+
 	return true;
 }
 bool Window::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {

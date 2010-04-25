@@ -40,14 +40,16 @@ struct Request;
  * exceptions: placement of carriers if the path's length is odd, splitting
  * a road when a flag is inserted.
  *
- * Every road has one or more Carriers attached to it.
- *
- * All Workers on the Road are attached via add_worker()/remove_worker() in
- * PlayerImmovable.
+ * Every road has one or more Carriers attached to it. Carriers are attached
+ * when they arrive via the callback function passed to the request. The
+ * callback then calls assign_carrier which incorporates this carrier on this
+ * road.
  */
 struct Road : public PlayerImmovable {
 	friend struct Map_Roaddata_Data_Packet; // For saving
 	friend struct Map_Road_Data_Packet; // For init()
+
+    static bool IsRoadDescr(Map_Object_Descr const * const descr);
 
 	enum FlagId {
 		FlagStart = 0,
@@ -65,15 +67,14 @@ struct Road : public PlayerImmovable {
 	Road();
 	virtual ~Road();
 
-	static void  create
+	static Road & create
 		(Editor_Game_Base &,
-		 Flag & start, Flag & end, Path const &,
-		 bool    create_carrier = false,
-		 int32_t type           = Road_Normal);
+		 Flag & start, Flag & end, Path const &);
 
 	Flag & get_flag(FlagId const flag) const {return *m_flags[flag];}
 
 	virtual int32_t  get_type    () const throw ();
+	uint8_t get_roadtype() const {return m_type;}
 	char const * type_name() const throw () {return "road";}
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
@@ -93,6 +94,7 @@ struct Road : public PlayerImmovable {
 	bool notify_ware(Game & game, FlagId flagid);
 
 	virtual void remove_worker(Worker &);
+	void assign_carrier(Carrier &, uint8_t);
 
 protected:
 	virtual void init(Editor_Game_Base &);

@@ -106,8 +106,7 @@ void Fullscreen_Menu_MultiPlayer::ggzLogin() {
 	if (m_auto_log) {
 		m_nickname = s.get_string("nickname", _("nobody"));
 		m_password = s.get_string("password", "nobody");
-		m_email    = s.get_string("emailadd", "nobody@nobody.nob");
-		m_register = false;
+		m_register = s.get_bool("registered", false);
 		end_modal(Metaserver);
 		return;
 	}
@@ -116,9 +115,9 @@ void Fullscreen_Menu_MultiPlayer::ggzLogin() {
 	if (lb.run()) {
 		m_nickname = lb.get_nickname();
 		m_password = lb.get_password();
-		m_email    = lb.get_email();
-		m_register = lb.new_registration();
+		m_register = lb.registered();
 
+		s.set_bool("registered", lb.registered());
 		s.set_bool("auto_log", lb.set_automaticlog());
 
 		end_modal(Metaserver);

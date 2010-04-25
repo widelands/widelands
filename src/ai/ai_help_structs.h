@@ -31,7 +31,7 @@
 namespace Widelands {
 
 struct ProductionSite;
-struct MilitarySite;
+class MilitarySite;
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player * const pl, uint8_t const mc, bool const oe)
@@ -52,7 +52,7 @@ struct CheckStepRoadAI {
 
 
 struct FindNodeUnowned {
-	bool accept (const Map &, const FCoords fc) const {
+	bool accept (const Map &, const FCoords & fc) const {
 		// when looking for unowned terrain to acquire, we are actually
 		// only interested in fields we can walk on
 		return
@@ -170,7 +170,9 @@ struct MineableField {
 	int32_t mines_nearby;
 
 	MineableField (Widelands::FCoords const & fc)
-		: coords(fc), next_update_due(0)
+		 : coords(fc), next_update_due(0),
+			reachable(false),
+			preferred(false)
 	{}
 };
 
@@ -221,7 +223,7 @@ struct BuildingObserver {
 	int32_t                           cnt_built;
 	int32_t                           cnt_under_construction;
 
-	int32_t total_count() {return cnt_built + cnt_under_construction;}
+	int32_t total_count() const {return cnt_built + cnt_under_construction;}
 };
 
 struct ProductionSiteObserver {
