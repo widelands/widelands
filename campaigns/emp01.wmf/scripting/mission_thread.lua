@@ -17,8 +17,7 @@ function mission_thread()
    run(function() sleep(5000) p1:hide_fields(sea:region(6)) end)
 
    -- Back home
-   timed_move(array_reverse(pts))
-   sleep(1000)
+   timed_scroll(array_reverse(pts))
    send_msg(diary_page_3)
 
 

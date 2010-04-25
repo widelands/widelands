@@ -47,8 +47,7 @@ function introduction_thread()
    send_msg(order_msg_4)
 
    -- Move back to HQ
-   timed_move(array_reverse(pts), 10)
-   sleep(1000)
+   timed_scroll(array_reverse(pts), 10)
 end
 
 -- ==================================
@@ -201,15 +200,15 @@ function village_thread()
 
    send_msg(msg_village)
 
-   timed_move(array_reverse(pts), 10)
+   timed_scroll(array_reverse(pts), 10)
    sleep(1500)
 end
 
 
 --[[
    This is a village of poor but friendly people who have settled in a safe
-   valley between two glaciers. They hunt and produce timber and grain but they do
-   not have ores or even stones, so they are dependent on the infrequent
+   valley between two glaciers. They hunt and produce timber and grain but they
+   do not have ores or even stones, so they are dependent on the infrequent
    merchant that may pass by and provide them with whatever they can not
    produce on their own. Their only protection is a guard hut at each entrance
    to the valley. Therefore they realize that they may have to join a more

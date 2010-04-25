@@ -174,8 +174,7 @@ function expand_and_build_marblemine()
    p1:allow_buildings{"barracks", "sentry"}
 
    -- Go back to where we were
-   timed_move(array_reverse(pts))
-   sleep(1000)
+   timed_scroll(array_reverse(pts))
 
    -- sleep while not owning 26, 21
    while wl.map.Field(26,21).owners[1] ~= p1 do sleep(3243) end
@@ -195,8 +194,7 @@ function expand_and_build_marblemine()
       do sleep(2133) end  o.done = true end)
 
    -- Go back to where we were
-   timed_move(array_reverse(pts))
-   sleep(1000)
+   timed_scroll(array_reverse(pts))
 end
 
 function barbarians_thread()
