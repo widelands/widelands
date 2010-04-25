@@ -4,8 +4,7 @@ function mission_thread()
    
    -- Initial messages
    local sea = wl.map.Field(47,25)
-   local pts = smooth_move(sea)
-   sleep(1000)
+   local pts = scroll_smoothly_to(sea)
 
    send_msg(diary_page_1)
    sleep(200)

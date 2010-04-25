@@ -68,8 +68,8 @@ function foottracks()
    )
    p1:reveal_fields(fields)
    
-   local pts = smooth_move(wl.map.Field(67,19))
-   sleep(1000)
+   local pts = scroll_smoothly_to(wl.map.Field(67,19))
+
    send_msg(order_msg_2_build_a_donjon)
    local o = add_obj(obj_build_a_donjon)
    p1:forbid_buildings{"sentry"}
@@ -111,8 +111,8 @@ function mining_and_trainingsites()
       wl.map.Field(82, 20):region(6))
    )
 
-   local pts = smooth_move(wl.map.Field(82,20))
-   sleep(1000)
+   local pts = scroll_smoothly_to(wl.map.Field(82,20))
+
    send_msg(order_msg_4_build_mining_economy)
    local o = add_obj(obj_build_mining_economy) 
    
@@ -275,8 +275,8 @@ function renegade_fortresses()
    -- Some something of the enemy land
    p1:reveal_fields(wl.map.Field(129,97):region(12))
 
-   local pts = smooth_move(wl.map.Field(117,92))
-   sleep(1000)
+   local pts = scroll_smoothly_to(wl.map.Field(117,92))
+
    send_msg(order_msg_7_renegade_fortification)
    send_msg(order_msg_7_free_althunran)
    local o = add_obj(obj_military_assault_on_althunran)
@@ -298,8 +298,8 @@ function mission_complete()
 
    p1:reveal_fields(wl.map.Field(4,9):region(6))
 
-   local pts = smooth_move(wl.map.Field(4,5))
-   sleep(1000)
+   local pts = scroll_smoothly_to(wl.map.Field(4,5))
+
    send_msg(story_msg_7)
 
    p1:reveal_campaign("campsect1")

@@ -16,7 +16,7 @@ init.func(plr) -- defined in sc00_headquarters_medium
 
 
 use("aux", "coroutine")
-use("aux", "smooth_move")
+use("aux", "ui")
 use("aux", "table")
 
 -- Constants
@@ -28,8 +28,8 @@ use("map", "texts")
 
 function msg_box(i)
    if i.field then
-      smooth_move(i.field.trn.trn.trn.trn)
-      sleep(2000)
+      scroll_smoothly_to(i.field.trn.trn.trn.trn)
+
       i.field = nil -- Otherwise message box jumps back
    end
 
