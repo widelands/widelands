@@ -26,7 +26,12 @@ conquer_field = wl.map.Field(19,15)
 
 use("map", "texts")
 
+-- =================
+-- Helper functions 
+-- =================
 function msg_box(i)
+   wl.game.set_speed(1000)
+
    if i.field then
       scroll_smoothly_to(i.field.trn.trn.trn.trn)
 
@@ -52,6 +57,25 @@ function send_message(i)
    sleep(130)
 end
    
+function click_on_field(f, g_T)
+   sleep(500)
+   mouse_smoothly_to(f, g_T)
+   sleep(500)
+   wl.ui.MapView():click(f)
+   sleep(500)
+end
+
+function click_on_panel(panel, g_T)
+   sleep(500)
+   mouse_smoothly_to_panel(panel, g_T)
+   sleep(500)
+   if panel.click then panel:click() end
+   sleep(500)
+end
+
+-- ======
+-- Logic 
+-- ======
 function starting_infos()
    sleep(100)
 
@@ -70,39 +94,47 @@ end
 function build_lumberjack()
    sleep(100)
 
-   -- msg_box(lumberjack_message_01)
-   -- msg_box(lumberjack_message_02)
+   msg_box(lumberjack_message_01)
 
-   mv = wl.ui.MapView()
-   mv:click(first_lumberjack_field)
-   
-   sleep(1500)
-   print ("Now I click on the lumberjack!")
-   sleep(1500)
+   click_on_field(first_lumberjack_field)
 
-   mv.windows.field_action:close()
-   for name,w in pairs(mv.windows) do print ("## ", name) end
+   msg_box(lumberjack_message_02a) -- TODO: renumber messages
+   sleep(500)
 
+   -- TODO: a message about selecting the lumberjack
+   -- TODO: mouse to lumberjack
+   wl.ui.MapView().windows.field_action:close()
    plr:place_building("lumberjacks_hut", first_lumberjack_field, true)
-   -- msg_box(lumberjack_message_03)
-   --
-   -- plr:place_road(first_lumberjack_field.brn.immovable, "l", "tl", "l", "l")
-   -- msg_box(lumberjack_message_04)
-   -- sleep(15000)
-   --
-   -- msg_box(lumberjack_message_05)
-   --
-   -- -- Wait for flag
-   -- local f = wl.map.Field(14,11)
-   -- while not (f.immovable and f.immovable.type == "flag") do sleep(300) end
-   --
-   -- msg_box(lumberjack_message_06)
-   --
-   -- while #plr:get_buildings("lumberjacks_hut") < 1 do sleep(300) end
-   --
-   -- msg_box(lumberjack_message_07)
-   --
-   -- learn_to_move()
+
+   -- Initiate road building
+   wl.ui.MapView():click(first_lumberjack_field.brn)
+   wl.ui.MapView().windows.field_action.buttons.build_road:click()
+
+   sleep(500)
+   msg_box(lumberjack_message_03)
+   sleep(500)
+
+   click_on_field(plr.starting_field.brn)
+
+   msg_box(lumberjack_message_04)
+   sleep(15000)
+   
+   msg_box(lumberjack_message_05)
+   
+   local f = wl.map.Field(14,11)
+   mouse_smoothly_to(f)
+
+   -- Wait for flag
+   while not (f.immovable and f.immovable.type == "flag") do sleep(300) end
+   sleep(300)
+   
+   msg_box(lumberjack_message_06)
+   
+   while #plr:get_buildings("lumberjacks_hut") < 1 do sleep(300) end
+
+   msg_box(lumberjack_message_07)
+
+   learn_to_move()
 end
 
 function learn_to_move()
@@ -110,9 +142,10 @@ function learn_to_move()
    msg_box(inform_about_stones)
    
    function _wait_for_move()
-      local cx = plr.viewpoint_x
-      local cy = plr.viewpoint_y
-      while cx == plr.viewpoint_x and cy == plr.viewpoint_y do
+      local cx = wl.ui.MapView().viewpoint_x
+      local cy = wl.ui.MapView().viewpoint_y
+      while cx == wl.ui.MapView().viewpoint_x and
+            cy == wl.ui.MapView().viewpoint_y do
          sleep(300)
       end
    end
@@ -129,7 +162,7 @@ function learn_to_move()
 
    build_a_quarry()
 end
-
+   
 function build_a_quarry()
    sleep(200)
 
@@ -140,19 +173,49 @@ function build_a_quarry()
    -- TODO: this needs to be done better, but a wrapping of the constructionsite
    -- is needed for this. 
    -- TODO: check that the constructionsite is indeed for the correct building
-   local done = false
-   while not done do
+   local cs = nil
+   while not cs do
       for idx,f in ipairs(first_quarry_field:region(6)) do
          if f.immovable and f.immovable.type == "constructionsite" then
-            done = true
+            cs = f
             break
          end
       end
       sleep(400)
    end
 
-   msg_box(talk_about_roadbuilding)
+   function _rip_road()
+      for idx,f in ipairs(first_quarry_field:region(6)) do
+         if f.immovable and f.immovable.type == "road" then 
+            click_on_field(f)
+            click_on_panel(wl.ui.MapView().windows.
+               field_action.buttons.destroy_road, 300)
+            sleep(200)
+            return 
+         end
+      end
+   end
 
+   msg_box(talk_about_roadbuilding_00)
+   -- Showoff one-by-one roadbuilding
+   click_on_field(wl.map.Field(9,12))
+   click_on_field(wl.map.Field(10,12))
+   click_on_field(wl.map.Field(11,12))
+   click_on_field(wl.map.Field(12,12))
+   click_on_field(wl.map.Field(12,11))
+   sleep(3000)
+   _rip_road()
+   
+   msg_box(talk_about_roadbuilding_01)
+   -- Showoff direct roadbuilding
+   click_on_field(cs.brn)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
+   click_on_field(plr.starting_field.brn)
+   sleep(3000)
+   _rip_road()
+
+   msg_box(talk_about_roadbuilding_02)
+   
    while #plr:get_buildings("quarry") < 1 do sleep(1400) end
 
    messages()
@@ -223,5 +286,5 @@ function conclusion()
 end
 
 -- run(starting_infos)
-run(build_lumberjack)
+run(build_a_quarry)
 

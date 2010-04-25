@@ -79,19 +79,19 @@ lumberjack_message_01 = {
 [[There you go. I will explain about all those symbols in a minute. First, let
  me show you how to make a lumberjack's hut and how to connect it with a road.
  There is a sweet spot for a lumberjack right next to those trees.]]
+      ) .. p(_
+[[First, I'll left-click on the symbol were I want the lumberjack to be built. A
+ window will appear where I can choose between buildings. ]]
       )
    )
 }
 
-lumberjack_message_02 = {
+lumberjack_message_02a = {
    title = _ "Building the lumberjack",
    pos = "topright",
-   field = first_lumberjack_field,
    body = rt(p(_
-[[First, I'll left-click on the symbol were I want the lumberjack to be built. A
- window will appear where I can choose between buildings - you won't see this
- window when I do it, because I am lightning fast. I left-click on the
- lumberjack. This places a construction site at the given location.]]
+[[Now, I left-click on the lumberjack. This places a construction site at the
+ given location.]]
       )
    )
 }
@@ -219,7 +219,7 @@ order_quarry_recap_how_to_build = {
    )
 }
 
-talk_about_roadbuilding = {
+talk_about_roadbuilding_00 = {
    pos = "topright",
    title = _ "Road building",
    body = rt(p(_
@@ -236,12 +236,26 @@ talk_about_roadbuilding = {
 [[the abort symbol.]]
       )) .. rt(p(_
 [[Now, you can either make it longer by one field at a time by left-clicking
- multiple times on neighbouring fields for perfect control over the route the 
- road takes. Alternatively, you can directly click the flag or field where
- the road should end.]]
-      )) .. rt(p(_
+ multiple times on neighbouring fields for perfect control over the route the
+ road takes like so:]]
+      ))
+}
+
+talk_about_roadbuilding_01 = {
+   pos = "topright",
+   title = _ "Road building",
+   body = rt(p(_
+[[Alternatively, you can directly click the flag where
+ the road should end like so.]]
+   ))
+}
+
+talk_about_roadbuilding_02 = {
+   pos = "topright",
+   title = _ "Road building",
+   body = rt(p(_
 [[One more thing: around the field where your road would end you can see
- different markers. The have the following meaning:]]
+ different markers. They have the following meaning:]]
       )) .. rt("image=pics/roadb_green.png", p(_
 [[The terrain is flat here. Your carriers will be very swift on this terrain.]]
    )) .. rt("image=pics/roadb_yellow.png", p(_
@@ -255,8 +269,8 @@ talk_about_roadbuilding = {
  Also try to keep roads as short as possible and always remember to place as
  many flags as you can on road segments to share the load better.]]
    )) .. rt(p(_
-[[Now build the road between your quarry and your headquarters. We'll wait until
- the quarry is completed.]]
+[[Now please rebuild the road between your quarry and your headquarters. 
+ We'll wait until the quarry is completed.]]
    ))
 }
 

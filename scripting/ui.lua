@@ -219,9 +219,18 @@ end
 --       targeted
 function mouse_smoothly_to(f, g_T)
    local mv = wl.ui.MapView()
-   return mouse_smoothly_to_pos(
-      f.viewpoint_x - mv.viewpoint_x, f.viewpoint_y - mv.viewpoint_y, g_T
-   )
+   local dx, dy = f.viewpoint_x - mv.viewpoint_x,
+      f.viewpoint_y - mv.viewpoint_y
+
+   -- FixMe: we need the width and height of triangles here to fix
+   -- for situations where we are close to the borders of the map. Because
+   -- these functions are not used very often, I decided to enter them here
+   -- directly instead of wrapping this up properly. I hope this will not
+   -- lead to problems in the future.
+   if dx < 0 then dx = dx + wl.map.get_width() * 64 end
+   if dy < 0 then dy = dy + wl.map.get_height() * 32 end
+   
+   return mouse_smoothly_to_pos(dx, dy, g_T)
 end
 
 -- RST
@@ -237,12 +246,13 @@ end
 --    :returns: an :class:`array` with the intermediate points that were
 --       targeted
 
-function mouse_smoothly_to_panel(panel)
+function mouse_smoothly_to_panel(panel, g_T)
    local x, y = wl.ui.MapView():get_descendant_position(panel)
 
    return mouse_smoothly_to_pos(
       x + panel.width / 2,
-      y + panel.height / 2
+      y + panel.height / 2,
+      g_T
    )
 end
 
