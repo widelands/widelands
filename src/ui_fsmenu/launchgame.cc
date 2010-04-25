@@ -330,7 +330,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		(settings.multiplayer && m_settings->canChangeMap());
 	m_select_save.set_enabled
 		(settings.multiplayer && m_settings->canChangeMap());
-	m_wincondition.set_enabled(m_settings->canChangeMap());
+	m_wincondition.set_enabled(m_settings->canChangeMap() && !m_is_savegame);
 
 	if (settings.scenario)
 		set_scenario_values();

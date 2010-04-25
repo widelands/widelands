@@ -369,9 +369,9 @@ cattlefarm_01 = {
    title = _ "Khantrukh speaks",
    body = rt("image=map:khantrukh.png", direct_speech(
 _"Khantrukh approaches", p(_
-[["Chieftain, remember the poor carriers: Our roads get longer and longer and
+[[ "Chieftain, remember the poor carriers: Our roads get longer and longer and
  the burden on their shoulders never gets lighter. We should breed more oxen to
- make their work lighter and our transportation more efficient."]]
+ make their work lighter and our transportation more efficient." ]]
 
        ))) .. rt(p(_"-- NEW OBJECTIVE --")) ..  obj_build_cattlefarm.body 
 }

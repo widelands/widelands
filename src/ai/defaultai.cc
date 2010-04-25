@@ -2069,7 +2069,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	FCoords f = map.get_fcoords(ms->get_position());
 
 	Building * target = ms; // dummy initialisation to silence the compiler
-	uint32_t   chance    = 0;
+	int32_t   chance    = 0;
 	uint32_t   attackers = 0;
 	uint8_t    retreat   = ms->owner().get_retreat_percentage();
 

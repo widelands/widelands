@@ -71,6 +71,8 @@ WLMessageBox::WLMessageBox
 	width += 10 + 2 * d->textarea->scrollbar_w();
 	if (width < 100)
 		width = 100;
+	if (width > maxwidth)
+		width = maxwidth;
 	height += 50;
 	if (height > static_cast<uint32_t>(maxheight))
 		height = maxheight;
