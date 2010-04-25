@@ -370,6 +370,8 @@ const MethodType<L_MapView> L_MapView::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_MapView> L_MapView::Properties[] = {
+	PROP_RW(L_MapView, viewpoint_x),
+	PROP_RW(L_MapView, viewpoint_y),
 	{0, 0, 0},
 };
 
@@ -381,6 +383,37 @@ L_MapView::L_MapView(lua_State * L) :
 /*
  * Properties
  */
+/* RST
+	.. attribute:: viewpoint_x, viewpoint_y
+
+		(RW) The current view position of this view. This defines the map position
+		(in pixels) that the top left pixel of this map view currently sees. This
+		can be used together with :attr:`wl.map.Field.viewpoint` to move the view
+		to fields quickly.
+*/
+int L_MapView::get_viewpoint_x(lua_State * L) {
+	lua_pushuint32(L, get()->get_viewpoint().x);
+	return 1;
+}
+int L_MapView::set_viewpoint_x(lua_State * L) {
+	Map_View * mv = get();
+	Point p = mv->get_viewpoint();
+	p.x = luaL_checkuint32(L, -1);
+	mv->set_viewpoint(p);
+	return 0;
+}
+int L_MapView::get_viewpoint_y(lua_State * L) {
+	lua_pushuint32(L, get()->get_viewpoint().y);
+	return 1;
+}
+int L_MapView::set_viewpoint_y(lua_State * L) {
+	Map_View * mv = get();
+	Point p = mv->get_viewpoint();
+	p.y = luaL_checkuint32(L, -1);
+	mv->set_viewpoint(p);
+	return 0;
+}
+
 
 /*
  * Lua Functions

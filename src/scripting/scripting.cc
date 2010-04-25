@@ -40,8 +40,6 @@
 #endif
 
 // TODO: add wl.editor to documentation
-// TODO: add wl.ui to documentation
-// TODO: move viewpoint from player to MapView
 
 /*
 ============================================

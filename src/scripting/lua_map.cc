@@ -32,7 +32,7 @@
 #include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
-#include "wui/mapviewpixelconstants.h"
+#include "wui/mapviewpixelfunctions.h"
 
 #include "c_utils.h"
 #include "lua_game.h"
@@ -1804,11 +1804,15 @@ int L_Field::set_height(lua_State * L) {
 		this field for the current interactive player
 */
 int L_Field::get_viewpoint_x(lua_State * L) {
-	lua_pushuint32(L, m_c.x * TRIANGLE_WIDTH);
+	int32_t px, py;
+	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), m_c, px, py);
+	lua_pushint32(L, px);
 	return 1;
 }
 int L_Field::get_viewpoint_y(lua_State * L) {
-	lua_pushuint32(L, m_c.y * TRIANGLE_HEIGHT);
+	int32_t px, py;
+	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), m_c, px, py);
+	lua_pushint32(L, py);
 	return 1;
 }
 

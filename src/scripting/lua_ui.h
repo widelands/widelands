@@ -153,6 +153,10 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_viewpoint_x(lua_State *);
+	int set_viewpoint_x(lua_State *);
+	int get_viewpoint_y(lua_State *);
+	int set_viewpoint_y(lua_State *);
 
 	/*
 	 * Lua Methods
