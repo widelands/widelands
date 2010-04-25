@@ -98,7 +98,7 @@ function build_lumberjack()
 
    click_on_field(first_lumberjack_field)
 
-   msg_box(lumberjack_message_02a) -- TODO: renumber messages
+   msg_box(lumberjack_message_02)
    sleep(500)
 
    -- TODO: a message about selecting the lumberjack
@@ -231,8 +231,10 @@ function messages()
 
    msg_box(closing_msg_window)
 
-   -- TODO: the message window should be closed here first.
-      
+   if wl.ui.MapView().windows.messages then
+      wl.ui.MapView().windows.messages:close()
+   end
+
    -- Remove all stones
    local fields = first_quarry_field:region(6)
    while #fields > 0 do
@@ -285,6 +287,5 @@ function conclusion()
 
 end
 
--- run(starting_infos)
-run(build_a_quarry)
+run(starting_infos)
 

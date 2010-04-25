@@ -86,7 +86,7 @@ lumberjack_message_01 = {
    )
 }
 
-lumberjack_message_02a = {
+lumberjack_message_02 = {
    title = _ "Building the lumberjack",
    pos = "topright",
    body = rt(p(_

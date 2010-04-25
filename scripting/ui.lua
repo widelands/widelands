@@ -21,7 +21,7 @@ function _calc_move(start, dest, g_T)
    local t1 = 0.75*T
    local a = { x = delta.x/(t0*t1), y = delta.y/(t0*t1) }
 
-   function s(t)
+   local function s(t)
       if t < t0 then
          return {
             x = start.x + 0.5*a.x*t*t,
@@ -46,7 +46,7 @@ function _calc_move(start, dest, g_T)
    local dt = 20
    local rv = {}
    while t < T do
-      cpos = s(t)
+      local cpos = s(t)
       rv[#rv+1] = {
          x = cpos.x,
          y = cpos.y,
@@ -124,7 +124,7 @@ function scroll_smoothly_to_pos(x, y, g_T)
    }
    local dest = { x = x, y = y }
 
-   pts = _calc_move(start, dest, g_T)
+   local pts = _calc_move(start, dest, g_T)
    
    timed_scroll(pts)
 
@@ -146,9 +146,25 @@ end
 --       targeted
 function scroll_smoothly_to(f, g_T)
    local mv = wl.ui.MapView()
-   return scroll_smoothly_to_pos(
-      f.viewpoint_x - mv.width / 2, f.viewpoint_y - mv.height / 2, g_T
-   )
+   local x, y
+   if math.abs(f.viewpoint_x - mv.viewpoint_x) <
+      math.abs(f.viewpoint_x + 64 * wl.map.get_width() - mv.viewpoint_x)
+   then
+      x = f.viewpoint_x
+   else
+      x = f.viewpoint_x + wl.map.get_width() * 64
+   end
+   
+   
+   if math.abs(f.viewpoint_y - mv.viewpoint_y) <
+      math.abs(f.viewpoint_y + 32 * wl.map.get_height() - mv.viewpoint_y)
+   then
+      y = f.viewpoint_y
+   else
+      y = f.viewpoint_y + wl.map.get_height() * 32
+   end
+
+   return scroll_smoothly_to_pos(x - mv.width / 2, y - mv.height / 2, g_T)
 end
 
 
