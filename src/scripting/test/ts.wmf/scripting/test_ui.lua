@@ -47,6 +47,44 @@ function ui_tests:test_window_property1()
    assert_equal(nil, self.mv.windows.messages)
 end
 
+function ui_tests:test_position_x()
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
+
+   w.position_x = 50
+   assert_equal(50, w.position_x)
+end
+function ui_tests:test_position_y()
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
+
+   w.position_y = 60
+   assert_equal(60, w.position_y)
+end
+
+function ui_tests:test_width(x)
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
+
+   w.width = 300
+   assert_equal(300, w.width)
+end
+function ui_tests:test_height(x)
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
+
+   w.height = 200
+   assert_equal(200, w.height)
+end
+
+function ui_tests:test_mouse_pos_x(x)
+   self.mv.mouse_position_x = 200 
+   assert_equal(200, self.mv.mouse_position_x)
+end
+function ui_tests:test_mouse_pos_y(x)
+   self.mv.mouse_position_y = 100 
+   assert_equal(100, self.mv.mouse_position_y)
+end
 
 -- ========
 -- Buttons 

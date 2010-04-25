@@ -67,6 +67,18 @@ public:
 	 */
 	int get_buttons(lua_State * L);
 	int get_windows(lua_State * L);
+	int get_mouse_position_x(lua_State * L);
+	int get_mouse_position_y(lua_State * L);
+	int set_mouse_position_x(lua_State * L);
+	int set_mouse_position_y(lua_State * L);
+	int get_width(lua_State * L);
+	int set_width(lua_State * L);
+	int get_height(lua_State * L);
+	int set_height(lua_State * L);
+	int get_position_x(lua_State * L);
+	int set_position_x(lua_State * L);
+	int get_position_y(lua_State * L);
+	int set_position_y(lua_State * L);
 
 	/*
 	 * Lua Methods

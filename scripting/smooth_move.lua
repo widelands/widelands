@@ -11,12 +11,9 @@ use("aux", "coroutine")
 -- =======================================================================
 --                             PRIVATE FUNCTIONS                            
 -- =======================================================================
-function _calc_move(f, g_plr, g_T)
-   local plr = g_plr or wl.game.Player(1)
+function _calc_move(start, dest, g_T)
    local T = g_T or 1000
 
-   local start = { x = plr.viewpoint_x, y = plr.viewpoint_y }
-   local dest = { x = f.viewpoint_x, y = f.viewpoint_y }
    local delta = { x = dest.x - start.x, y = dest.y - start.y }
 
    -- Accelerate for 25% of time, then move constant, decelerate 25% of time
@@ -124,7 +121,12 @@ end
 --    :returns: an :class:`array` with the intermediate points that were
 --       targeted
 function smooth_move(f, g_plr, g_T)
-   pts = _calc_move(f, g_plr, g_T)
+   local plr = g_plr or wl.game.Player(1)
+
+   local start = { x = plr.viewpoint_x, y = plr.viewpoint_y }
+   local dest = { x = f.viewpoint_x, y = f.viewpoint_y }
+
+   pts = _calc_move(start, dest, g_T)
    run(timed_move, pts)
    return pts
 end

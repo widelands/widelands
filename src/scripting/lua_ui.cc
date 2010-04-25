@@ -49,7 +49,15 @@
  *                            MODULE CLASSES
  * ========================================================================
  */
-// TODO: document me somehow
+
+/* RST
+Panel
+-----
+
+.. class:: Panel
+
+	The Panel is the most basic ui class. Each ui element is a panel.
+*/
 const char L_Panel::className[] = "Panel";
 const MethodType<L_Panel> L_Panel::Methods[] = {
 	{0, 0},
@@ -57,6 +65,12 @@ const MethodType<L_Panel> L_Panel::Methods[] = {
 const PropertyType<L_Panel> L_Panel::Properties[] = {
 	PROP_RO(L_Panel, buttons),
 	PROP_RO(L_Panel, windows),
+	PROP_RW(L_Panel, mouse_position_x),
+	PROP_RW(L_Panel, mouse_position_y),
+	PROP_RW(L_Panel, position_x),
+	PROP_RW(L_Panel, position_y),
+	PROP_RW(L_Panel, width),
+	PROP_RW(L_Panel, height),
 	{0, 0, 0},
 };
 
@@ -126,6 +140,95 @@ int L_Panel::get_windows(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: mouse_position_x, mouse_position_y
+
+		(RW) The current mouse position relative to this Panels position
+*/
+int L_Panel::get_mouse_position_x(lua_State * L) {
+	assert(m_panel);
+	lua_pushint32(L, m_panel->get_mouse_position().x);
+	return 1;
+}
+int L_Panel::set_mouse_position_x(lua_State * L) {
+	assert(m_panel);
+	Point p = m_panel->get_mouse_position();
+	p.x = luaL_checkint32(L, -1);
+	m_panel->set_mouse_pos(p);
+	return 1;
+}
+int L_Panel::get_mouse_position_y(lua_State * L) {
+	assert(m_panel);
+	lua_pushint32(L, m_panel->get_mouse_position().y);
+	return 1;
+}
+int L_Panel::set_mouse_position_y(lua_State * L) {
+	assert(m_panel);
+	Point p = m_panel->get_mouse_position();
+	p.y = luaL_checkint32(L, -1);
+	m_panel->set_mouse_pos(p);
+	return 1;
+}
+
+/* RST
+	.. attribute:: width, height
+
+		(RW) The dimensions of this panel in pixels
+*/
+int L_Panel::get_width(lua_State * L) {
+	assert(m_panel);
+	lua_pushint32(L, m_panel->get_w());
+	return 1;
+}
+int L_Panel::set_width(lua_State * L) {
+	assert(m_panel);
+	m_panel->set_size(luaL_checkint32(L, -1), m_panel->get_h());
+	return 1;
+}
+int L_Panel::get_height(lua_State * L) {
+	assert(m_panel);
+	lua_pushint32(L, m_panel->get_h());
+	return 1;
+}
+int L_Panel::set_height(lua_State * L) {
+	assert(m_panel);
+	m_panel->set_size(m_panel->get_w(), luaL_checkint32(L, -1));
+	return 1;
+}
+
+/* RST
+	.. attribute:: position_x, position_y
+
+		(RO) The top left pixel of the our inner canvas relative to the
+		parent's element inner canvas.
+*/
+int L_Panel::get_position_x(lua_State * L) {
+	assert(m_panel);
+	Point p = m_panel->to_parent(Point(0,0));
+
+	lua_pushint32(L, p.x);
+	return 1;
+}
+int L_Panel::set_position_x(lua_State * L) {
+	assert(m_panel);
+	Point p(luaL_checkint32(L, -1) - m_panel->get_lborder(), m_panel->get_y());
+	m_panel->set_pos(p);
+	return 1;
+}
+int L_Panel::get_position_y(lua_State * L) {
+	assert(m_panel);
+	Point p = m_panel->to_parent(Point(0,0));
+
+	lua_pushint32(L, p.y);
+	return 1;
+}
+int L_Panel::set_position_y(lua_State * L) {
+	assert(m_panel);
+	Point p(m_panel->get_x(), luaL_checkint32(L, -1) - m_panel->get_tborder());
+	m_panel->set_pos(p);
+	return 1;
+}
+
 /*
  * Lua Functions
  */
@@ -170,12 +273,14 @@ int L_Button::get_name(lua_State * L) {
 int L_Button::press(lua_State * L) {
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
+	return 0;
 }
 // TODO: docu
 // UNTESTED
 int L_Button::release(lua_State * L) {
 	get()->handle_mousein(true);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
+	return 0;
 }
 // TODO: docu
 int L_Button::click(lua_State * L) {
@@ -227,6 +332,7 @@ int L_Window::get_name(lua_State * L) {
 int L_Window::close(lua_State * L) {
 	delete m_panel;
 	m_panel = 0;
+	return 0;
 }
 
 /*
