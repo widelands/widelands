@@ -22,13 +22,14 @@ scythe=1
 2=playFX ../../../sound/farm/scythe 220
 3=animation harvesting 10000
 4=object harvest
-5=animation harvesting 2000
+5=animation gathering 4000
 6=createitem wheat
 7=return
 
 [idle]
 pics=idle_??.png
-hotspot=5 13
+hotspot=20 24
+playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
@@ -53,3 +54,9 @@ pics=harvest_??.png
 hotspot=20 25
 playercolor=true
 fps=10
+
+[gathering]
+pics=gather_??.png
+hotspot=11 24
+playercolor=true
+fps=5
