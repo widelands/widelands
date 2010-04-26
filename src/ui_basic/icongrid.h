@@ -65,6 +65,8 @@ protected:
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
+	void clicked_button(uint32_t);
+
 	struct Item {
 		PictureID   picid;
 		void      * data;

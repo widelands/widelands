@@ -17,13 +17,15 @@
  *
  */
 
-#include "icongrid.h"
 
+#include "button.h"
 #include "mouse_constants.h"
 
 #include "font_handler.h"
 #include "graphic/rendertarget.h"
 #include "constants.h"
+
+#include "icongrid.h"
 
 namespace UI {
 /**
@@ -72,9 +74,21 @@ int32_t Icon_Grid::add
 		set_size
 			(m_cell_width * m_columns, m_cell_height * rows + m_font_height);
 
+	uint32_t x, y;
+	get_cell_position(m_items.size() - 1, x, y);
+
+	new Callback_IDButton<Icon_Grid, uint32_t>(this, "blah",
+		x, y, m_cell_width, m_cell_height,
+		g_gr->get_no_picture(), picid,
+		&Icon_Grid::clicked_button, *this, m_items.size() - 1,
+		descr, true, true);
+
 	return m_items.size() - 1;
 }
 
+void Icon_Grid::clicked_button(uint32_t idx) {
+
+}
 
 /**
  * Returns the user-defined data of the icon with the given index.
@@ -92,6 +106,7 @@ void * Icon_Grid::get_data(int32_t const idx)
 */
 void Icon_Grid::draw(RenderTarget & dst)
 {
+#if 0
 	bool highlight = false;
 
 	// First of all, draw the highlight
@@ -134,6 +149,7 @@ void Icon_Grid::draw(RenderTarget & dst)
 			 Point(1, get_h() - m_font_height + 10),
 			 m_items[m_highlight].descr);
 	}
+#endif
 }
 
 /**
