@@ -126,3 +126,17 @@ function button_tests:test_click()
    assert_equal(true, wl.ui.MapView().buildhelp)
 end
 
+-- ========
+-- MapView 
+-- ========
+mv_tests = lunit.TestCase("MapView tests")
+function mv_tests:setup()
+   self.mv = wl.ui.MapView()
+   for n,w in pairs(self.mv.windows) do w:close() end
+end
+
+function mv_tests:test_click()
+   self.mv:click(wl.map.Field(10,10))
+   assert_not_equal(nil, self.mv.windows.field_action)
+end
+
