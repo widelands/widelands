@@ -18,19 +18,19 @@ harvest=Harvest wheat (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_wheat]
-sleep=20000
+sleep=14000  #orig 20000
 worker=plant
 
 [plant]
-sleep=20000
+sleep=14000  #orig 20000
 worker=plant
 
 [harvest_wheat]
-sleep=5000
+sleep=4000  #orig 5000
 worker=harvest
 
 [harvest]
-sleep=5000
+sleep=4000  #orig 5000
 worker=harvest
 
 [work]
