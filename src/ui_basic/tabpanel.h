@@ -27,20 +27,23 @@
 namespace UI {
 /**
  * This represents a Tab of the TabPanel. Note that this does no work
- * of drawing itself or handling anything really, it is only here to 
+ * of drawing itself or handling anything really, it is only here to
  * offer the Panel interface for tabs so that the scripting interface
  * stays the same for all elements
  */
 struct Tab_Panel;
-class Tab : public NamedPanel {
+struct Tab : public NamedPanel {
 	friend struct Tab_Panel;
 
 	Tab(Tab_Panel * parent, uint32_t, std::string name, PictureID gpicid,
 			std::string gtooltip, Panel * gpanel);
 
+	bool active();
+	void activate();
+
 private:
-	// SirVer TODO: really needed?
 	Tab_Panel * m_parent;
+	uint32_t    m_id;
 
 	PictureID   picid;
 	std::string tooltip;
@@ -57,6 +60,8 @@ private:
  * The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
 */
 struct Tab_Panel : public Panel {
+	friend class Tab;
+
 	Tab_Panel(Panel * parent, int32_t x, int32_t y, PictureID background);
 
 	void layout();

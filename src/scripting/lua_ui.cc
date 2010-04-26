@@ -387,10 +387,12 @@ Tab
 */
 const char L_Tab::className[] = "Tab";
 const MethodType<L_Tab> L_Tab::Methods[] = {
+	METHOD(L_Tab, click),
 	{0, 0},
 };
 const PropertyType<L_Tab> L_Tab::Properties[] = {
 	PROP_RO(L_Tab, name),
+	PROP_RO(L_Tab, active),
 	{0, 0, 0},
 };
 
@@ -404,9 +406,28 @@ int L_Tab::get_name(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: active
+
+		(RO) Is this the currently active tab in this window?
+*/
+int L_Tab::get_active(lua_State * L) {
+	lua_pushboolean(L, get()->active());
+	return 1;
+}
+
 /*
  * Lua Functions
  */
+/* RST
+	.. method:: click
+
+		Click this tab making it the active one.
+*/
+int L_Tab::click(lua_State * L) {
+	get()->activate();
+	return 0;
+}
 
 /*
  * C Functions
@@ -581,7 +602,7 @@ void luaopen_wlui(lua_State * L) {
 	register_class<L_Button>(L, "ui", true);
 	add_parent<L_Button, L_Panel>(L);
 	lua_pop(L, 1); // Pop the meta table
-	
+
 	register_class<L_Tab>(L, "ui", true);
 	add_parent<L_Tab, L_Panel>(L);
 	lua_pop(L, 1); // Pop the meta table

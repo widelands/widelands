@@ -42,8 +42,20 @@ Tab::Tab(Tab_Panel * parent, uint32_t id, std::string name, PictureID gpicid,
 			std::string gtooltip, Panel * gpanel) :
 	NamedPanel(parent, name, id * TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH,
 			TP_BUTTON_HEIGHT, gtooltip),
-	m_parent(parent), picid(gpicid),
-		tooltip(gtooltip), panel(gpanel) {}
+	m_parent(parent), m_id(id), picid(gpicid),
+		tooltip(gtooltip), panel(gpanel)
+{
+}
+
+/**
+ * Currently active tab
+ */
+bool Tab::active() {
+	return m_parent->m_active == m_id;
+}
+void Tab::activate() {
+	return m_parent->activate(m_id);
+}
 
 /*
  * =================

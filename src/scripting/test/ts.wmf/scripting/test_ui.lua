@@ -147,6 +147,13 @@ end
 function tab_panel_tests:test_tabs()
    assert_equal(5, self:_cnt(self.w.tabs))
 end
+function tab_panel_tests:test_active()
+   assert_equal(true, self.w.tabs.big.active)
+end
+function tab_panel_tests:test_activate()
+   self.w.tabs.small:click()
+   assert_equal(true, self.w.tabs.small.active)
+end
 
 -- ========
 -- MapView 

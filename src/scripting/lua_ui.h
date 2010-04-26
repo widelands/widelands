@@ -131,10 +131,12 @@ public:
 	 * Properties
 	 */
 	int get_name(lua_State * L);
+	int get_active(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
+	int click(lua_State * L);
 
 	/*
 	 * C Methods
