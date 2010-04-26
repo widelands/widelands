@@ -32,19 +32,15 @@ namespace UI {
 Icon_Grid::Icon_Grid
 	(Panel  * const parent,
 	 int32_t const x, int32_t const y, int32_t const cellw, int32_t const cellh,
-	 uint32_t const flags,
 	 int32_t  const cols)
 	:
 	Panel            (parent, x, y, 0, 0),
-	m_flags          (flags),
 	m_columns        (cols),
 	m_highlight      (-1),
 	m_clicked        (-1),
-	m_selected       (-1),
 	m_cell_width     (cellw),
 	m_cell_height    (cellh),
-	m_font_height    (0),
-	m_selectbox_color(255, 255, 0)
+	m_font_height    (0)
 {}
 
 
@@ -68,26 +64,13 @@ int32_t Icon_Grid::add
 
 
 	// resize
-	if (get_orientation() == Grid_Horizontal)
-	{
-		int32_t rows = (m_items.size() + m_columns - 1) / m_columns;
+	int32_t rows = (m_items.size() + m_columns - 1) / m_columns;
 
-		if (rows <= 1)
-			set_size(m_cell_width * m_items.size(), m_cell_height + m_font_height);
-		else
-			set_size
-				(m_cell_width * m_columns, m_cell_height * rows + m_font_height);
-	}
+	if (rows <= 1)
+		set_size(m_cell_width * m_items.size(), m_cell_height + m_font_height);
 	else
-	{
-		int32_t cols = (m_items.size() + m_columns - 1) / m_columns;
-
-		if (cols <= 1)
-			set_size(m_cell_width, m_cell_height * m_items.size() + m_font_height);
-		else
-			set_size
-				(m_cell_width * cols, m_cell_height * m_columns + m_font_height);
-	}
+		set_size
+			(m_cell_width * m_columns, m_cell_height * rows + m_font_height);
 
 	return m_items.size() - 1;
 }
@@ -101,31 +84,6 @@ void * Icon_Grid::get_data(int32_t const idx)
 	assert(static_cast<uint32_t>(idx) < m_items.size());
 
 	return m_items[idx].data;
-}
-
-
-/**
- * Set the currently selected icon for persistant grids.
-*/
-void Icon_Grid::set_selection(int32_t idx)
-{
-	assert(is_persistant());
-	assert(static_cast<uint32_t>(idx) < m_items.size());
-
-	if (m_selected >= 0)
-		update_for_index(m_selected);
-	update_for_index(idx);
-
-	m_selected = idx;
-}
-
-
-/**
- * Change the color of the selection box (default is yellow).
-*/
-void Icon_Grid::set_selectbox_color(RGBColor clr)
-{
-	m_selectbox_color = clr;
 }
 
 
@@ -158,31 +116,10 @@ void Icon_Grid::draw(RenderTarget & dst)
 			(Point(x + (m_cell_width - w) / 2, y + (m_cell_height - h) / 2),
 			 picid);
 
-		if (get_orientation() == Grid_Horizontal)
-		{
-			x += m_cell_width;
-			if (!((idx + 1) % m_columns)) {
-				x = 0;
-				y += m_cell_height;
-			}
-		}
-		else
-		{
+		x += m_cell_width;
+		if (!((idx + 1) % m_columns)) {
+			x = 0;
 			y += m_cell_height;
-			if (!((idx + 1) % m_columns)) {
-				y = 0;
-				x += m_cell_width;
-			}
-		}
-	}
-
-	// Draw selection mark
-	if (is_persistant())
-	{
-		if (m_selected >= 0) {
-			get_cell_position(m_selected, x, y);
-			dst.draw_rect
-				(Rect(Point(x, y), m_cell_width, m_cell_height), m_selectbox_color);
 		}
 	}
 
@@ -208,11 +145,6 @@ int32_t Icon_Grid::index_for_point(int32_t x, int32_t y)
 	int32_t w = m_cell_width;
 	int32_t h = m_cell_height;
 
-	if (get_orientation() != Grid_Horizontal) {
-		std::swap(x, y);
-		std::swap(w, h);
-	}
-
 	if (x < 0 || x >= m_columns * w || y < 0)
 		return -1;
 
@@ -231,13 +163,8 @@ int32_t Icon_Grid::index_for_point(int32_t x, int32_t y)
 void Icon_Grid::get_cell_position
 	(int32_t const idx, uint32_t & px, uint32_t & py)
 {
-	if (get_orientation() == Grid_Horizontal) {
-		px = (idx % m_columns) * m_cell_width;
-		py = (idx / m_columns) * m_cell_height;
-	} else {
-		px = (idx / m_columns) * m_cell_width;
-		py = (idx % m_columns) * m_cell_height;
-	}
+	px = (idx % m_columns) * m_cell_width;
+	py = (idx / m_columns) * m_cell_height;
 }
 
 
@@ -318,8 +245,6 @@ bool Icon_Grid::handle_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
 	if (m_clicked >= 0) {
 		grab_mouse(false);
 		if (hl == m_clicked) {
-			if (is_persistant())
-				set_selection(hl);
 			clicked.call(hl);
 			play_click();
 		}

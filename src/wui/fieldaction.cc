@@ -88,7 +88,7 @@ BuildGrid::BuildGrid
 	 int32_t                        cols)
 :
 	UI::Icon_Grid
-		(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols),
+		(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
 	m_tribe(tribe)
 {
 	clicked.set(this, &BuildGrid::clickslot);
