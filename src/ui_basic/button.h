@@ -77,6 +77,7 @@ struct Button : public NamedPanel {
 	void handle_mousein(bool inside);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t);
 
 private:
 	virtual void clicked() = 0; /// Override this to react on the click.
