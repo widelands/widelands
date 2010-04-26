@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-21 17:46+0000\n"
-"PO-Revision-Date: 2010-04-22 12:03+0000\n"
-"Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
+"PO-Revision-Date: 2010-04-25 11:04+0000\n"
+"Last-Translator: Szymon Gackowski <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-23 03:43+0000\n"
+"X-Launchpad-Export-Date: 2010-04-26 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:310
@@ -24,16 +24,21 @@ msgid ""
 "is\n"
 " no longer of any use and is just blocking space."
 msgstr ""
+"Otrzymałeś wiadomość. Widzisz, jak zmienił się wygląd przycisku\n"
+" u dołu ekranu? Powinieneś teraz spalić kamieniołom, ponieważ\n"
+" nie spełnia on już swojej roli i tylko blokuje miejsce."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:210
 msgid "And finally the yellow flag symbol only allows for flags."
-msgstr ""
+msgstr "I w końcu symbol żółtej flagi pozwala jedynie na umieszczanie flag."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:284
 msgid ""
 "Archive all messages, including this one, that you currently have in your\n"
 " inbox."
 msgstr ""
+"Archiwizuj wszystkie wiadomości, włączając te, które masz obecnie w swojej\n"
+" skrzynce odbiorczej."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:331
 msgid ""
@@ -44,6 +49,11 @@ msgid ""
 "You\n"
 " therefore need military sites to keep military influence over your land."
 msgstr ""
+"Z chwilą, gdy budynek wojskowy zostaje odsadzony, poszerza twoje\n"
+" terytorium. Możesz go wówczas zburzyć, jeśli potrzebujesz miejsca.\n"
+" Pamiętaj jednak, że ten teren jest wówczas zagrożony: każdy budynek\n"
+" wojskowy w pobliżu może go zająć. Budynki wojskowe są zatem potrzebne,\n"
+" by utrzymywać zajęty przez ciebie teren."
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
@@ -57,23 +67,28 @@ msgid ""
 "about\n"
 " all those build help symbols we activated earlier."
 msgstr ""
+"Zbuduj kamieniołom obok tych kamieni. Pamiętasz jak zrobiłem to wcześniej?\n"
+" Kliknij miejsce, w którym chcesz by stanął budynek, wybierz go w oknie,\n"
+" które się pojawi i gotowe, budynek umiejscowiony. Może to odpowiednia "
+"chwila, by\n"
+" wyjaśnić wszystkie pomocnicze symbole, które aktywowaliśmy wcześniej."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:100
 msgid "Building a connecting road"
-msgstr "Kładzenie i łączenie drogi"
+msgstr "Budowanie łączącej drogi"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:87
 msgid "Building the lumberjack"
-msgstr "Zbudowanie chatki"
+msgstr "Budowanie chatki drwala"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:293
 msgid "Closing windows"
-msgstr ""
+msgstr "Zamykanie okien"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:342
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:343
 msgid "Conclusion"
-msgstr ""
+msgstr "Wniosek"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
 msgid ""
@@ -93,11 +108,14 @@ msgstr "Początki"
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:204
 msgid "Everything can be build on the green house symbol."
 msgstr ""
+"Każdy budynek może zostać zbudowany na terenie z zielonym symbolem domku."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:206
 msgid ""
 "Everything except for big buildings can be build on a yellow house symbol."
 msgstr ""
+"Wszystkie poza największymi budynkami mogą zostać zbudowane na terenie z "
+"żółtym symbolem domku."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:226
 msgid ""
@@ -106,6 +124,11 @@ msgid ""
 " construction site. You can enter road building mode for any flag by\n"
 " left-clicking on a flag and selecting"
 msgstr ""
+"Doskonale! Zaraz po postawieniu budynku przechodzisz do trybu budowy\n"
+" drogi. Nowa droga będzie się rozpoczynać od flagi dokładnie naprzeciwko "
+"nowo postawionego \n"
+" miejsca budowy. Możesz wejść do trybu budowy drogi dla dowolnej flagi \n"
+" klikając na nią i wybierając"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:295
 msgid ""
@@ -114,6 +137,11 @@ msgid ""
 "message\n"
 " windows like this one."
 msgstr ""
+"Doskonale! Przy okazji: zamykanie okien w Widelands jest tak proste jak "
+"klikniecie\n"
+" prawym przyciskiem myszy na nim. Ten sposób działa ze wszystkimi oknami "
+"poza oknami\n"
+" opowieści, takimi jak to."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:175
 msgid ""
@@ -122,6 +150,11 @@ msgid ""
 " right-click-and-hold anywhere on the map, then drag the mouse and instead\n"
 " of the cursor, the view will be moved. Try it."
 msgstr ""
+"Doskonale! Jest jeszcze jeden, szybszy sposób na poruszanie, używając myszy: "
+"kliknij\n"
+" gdziekolwiek na terenie prawym przyciskiem i przytrzymaj go, poruszając "
+"myszą przesuniesz\n"
+" widok zamiast kursora. Spróbuj!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:149
 msgid ""
@@ -130,6 +163,10 @@ msgid ""
 "to\n"
 " the raw stone."
 msgstr ""
+"Doskonale! Chatka drwala jest gotowa. Kiedy drwal się wprowadzi, rozpocznie\n"
+" ścinanie drzew, tak by nasze zasoby drewna były na bezpiecznym poziomie. "
+"Przejdźmy\n"
+" do wydobycia kamienia."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:324
 msgid ""
@@ -145,7 +182,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:317
 msgid "Expanding your territory!"
-msgstr ""
+msgstr "Twoje terytorium się powiększa!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:91
 msgid ""
