@@ -485,11 +485,11 @@ private:
 			m_economy(_economy)
 		{
 			add
-				(g_gr->get_picture(PicMod_UI, "pics/genstats_nrwares.png"),
+				("wares", g_gr->get_picture(PicMod_UI, "pics/genstats_nrwares.png"),
 				 &m_ware_target_quantities,
 				 _("Ware type target quantities"));
 			add
-				(g_gr->get_picture(PicMod_UI, "pics/genstats_nrworkers.png"),
+				("workers", g_gr->get_picture(PicMod_UI, "pics/genstats_nrworkers.png"),
 				 &m_worker_target_quantities,
 				 _("Worker type target quantities"));
 			set_snapparent(true);

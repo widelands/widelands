@@ -23,6 +23,7 @@
 #include <lua.hpp>
 
 #include "ui_basic/button.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
 
@@ -66,6 +67,7 @@ public:
 	 * Properties
 	 */
 	int get_buttons(lua_State * L);
+	int get_tabs(lua_State * L);
 	int get_windows(lua_State * L);
 	int get_mouse_position_x(lua_State * L);
 	int get_mouse_position_y(lua_State * L);
@@ -114,6 +116,30 @@ public:
 	 * C Methods
 	 */
 	UI::Button * get() {return static_cast<UI::Button *>(m_panel);}
+};
+
+class L_Tab : public L_Panel {
+public:
+	LUNA_CLASS_HEAD(L_Tab);
+
+	L_Tab() : L_Panel() {}
+	L_Tab(UI::Panel * p) : L_Panel(p) {}
+	L_Tab(lua_State * L) : L_Panel(L) {}
+	virtual ~L_Tab() {}
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State * L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::Tab * get() {return static_cast<UI::Tab *>(m_panel);}
 };
 
 class L_Window : public L_Panel {

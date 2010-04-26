@@ -31,7 +31,7 @@ namespace UI {
 /// This is simply a button. Override void clicked() to react to the click.
 /// This is all that is needed in most cases, but if there is a need to give a
 /// callback function to the button, there are some templates for that below.
-struct Button : public Panel {
+struct Button : public NamedPanel {
 	Button /// for textual buttons
 		(Panel * const parent,
 		 std::string const & name,
@@ -59,8 +59,6 @@ struct Button : public Panel {
 	void set_pic(PictureID picid);
 	void set_title(const std::string &);
 	const std::string & get_title() const throw () {return m_title;}
-	void set_name(const std::string &);
-	const std::string get_name() const throw() {return m_name;}
 
 	bool enabled() const {return m_enabled;}
 	void set_enabled(bool on);
@@ -92,7 +90,6 @@ private:
 	int32_t     m_time_nextact;
 
 	std::string m_title;          //  title string used when _mypic == 0
-	std::string m_name;          //  name to address this button for scripting
 
 	PictureID       m_pic_background; //  background texture (picture ID)
 	PictureID       m_pic_custom;     //  custom icon on the button

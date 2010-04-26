@@ -126,6 +126,28 @@ function button_tests:test_click()
    assert_equal(true, wl.ui.MapView().buildhelp)
 end
 
+-- =========
+-- TabPanel 
+-- =========
+tab_panel_tests = lunit.TestCase("TabPanel Unit Tests")
+function tab_panel_tests:_cnt(t) 
+   local rv = 0
+   for k,v in pairs(t) do
+      rv = rv + 1 end
+   return rv
+end
+
+function tab_panel_tests:setup()
+   local mv = wl.ui.MapView()
+   for n,w in pairs(mv.windows) do w:close() end
+   mv:click(wl.map.Field(10,10))
+   self.w = mv.windows.field_action
+end
+
+function tab_panel_tests:test_tabs()
+   assert_equal(5, self:_cnt(self.w.tabs))
+end
+
 -- ========
 -- MapView 
 -- ========
@@ -139,4 +161,5 @@ function mv_tests:test_click()
    self.mv:click(wl.map.Field(10,10))
    assert_not_equal(nil, self.mv.windows.field_action)
 end
+
 

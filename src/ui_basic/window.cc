@@ -73,14 +73,13 @@ Window::Window
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 char const * const title)
 	:
-		Panel
-			(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2,
+		NamedPanel
+			(parent, name, x, y, w + VT_B_PIXMAP_THICKNESS * 2,
 			 TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
 		_is_minimal(false), _dragging(false),
 		_docked_left(false), _docked_right(false), _docked_bottom(false),
 		_drag_start_win_x(0), _drag_start_win_y(0),
 		_drag_start_mouse_x(0), _drag_start_mouse_y(0),
-		m_name(name),
 		m_pic_lborder
 			(g_gr->get_picture(PicMod_UI, "pics/win_l_border.png")),
 		m_pic_rborder
@@ -114,16 +113,6 @@ void Window::set_title(const std::string & text)
 }
 
 /**
- * Set the internal name of this window. This is important
- * for UI scripting
-*/
-void Window::set_name(const std::string & text)
-{
-	m_title = text;
-	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);
-}
-
-/**
  * Move the window so that it is centered under the mouse cursor.
 */
 void Window::move_to_mouse() {
@@ -132,8 +121,8 @@ void Window::move_to_mouse() {
 }
 
 /**
- * Move the window so that the given point \p pt - interpreted as inner coordinates
- * inside the window - is centered under the mouse cursor.
+ * Move the window so that the given point \p pt - interpreted as inner
+ * coordinates inside the window - is centered under the mouse cursor.
  */
 void Window::move_to_mouse(const Point & pt)
 {

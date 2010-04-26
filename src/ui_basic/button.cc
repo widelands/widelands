@@ -38,14 +38,13 @@ Button::Button //  for textual buttons
 	 std::string const & fontname,
 	 uint32_t const      fontsize)
 	:
-	Panel           (parent, x, y, w, h, tooltip_text),
+	NamedPanel           (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
 	m_pressed       (false),
 	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
 	m_title         (title_text),
-	m_name          (name),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (g_gr->get_no_picture()),
 	m_pic_custom_disabled(g_gr->get_no_picture()),
@@ -69,13 +68,12 @@ Button::Button //  for pictorial buttons
 	 const std::string & fontname,
 	 const uint32_t      fontsize)
 	:
-	Panel           (parent, x, y, w, h, tooltip_text),
+	NamedPanel      (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
 	m_pressed       (false),
 	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
-	m_name          (name),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
 	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),

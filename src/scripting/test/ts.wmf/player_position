@@ -2,6 +2,6 @@
 
 [global]
 packet_version="2"
-player_1="10 30"
-player_2="30 30"
-player_3="50 30"
+player_1="10 10"
+player_2="30 10"
+player_3="50 10"

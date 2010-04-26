@@ -66,6 +66,7 @@ Panel
 const char L_Panel::className[] = "Panel";
 const PropertyType<L_Panel> L_Panel::Properties[] = {
 	PROP_RO(L_Panel, buttons),
+	PROP_RO(L_Panel, tabs),
 	PROP_RO(L_Panel, windows),
 	PROP_RW(L_Panel, mouse_position_x),
 	PROP_RW(L_Panel, mouse_position_y),
@@ -120,6 +121,38 @@ int L_Panel::get_buttons(lua_State * L) {
 
 	return 1;
 }
+
+/* RST
+	.. attribute:: tabs
+
+		(RO) An :class:`array` of all visible buttons inside this Panel.
+*/
+static void _put_all_tabs_into_table
+	(lua_State * L, UI::Panel * g)
+{
+	if (not g) return;
+
+	for(UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
+	{
+		_put_all_tabs_into_table(L, f);
+
+		if(upcast(UI::Tab_Panel, t, f))
+			container_iterate_const(UI::Tab_Panel::TabList, t->tabs(), tab) {
+				lua_pushstring(L, (*tab)->get_name());
+				to_lua<L_Tab>(L, new L_Tab(*tab));
+				lua_rawset(L, -3);
+			}
+	}
+}
+int L_Panel::get_tabs(lua_State * L) {
+	assert(m_panel);
+
+	lua_newtable(L);
+	_put_all_tabs_into_table(L, m_panel);
+
+	return 1;
+}
+
 
 /* RST
 	.. attribute:: windows
@@ -343,6 +376,43 @@ int L_Button::click(lua_State * L) {
  */
 
 /* RST
+Tab
+------
+
+.. class:: Tab
+
+	Child of: :class:`Panel`
+
+	A tab button.
+*/
+const char L_Tab::className[] = "Tab";
+const MethodType<L_Tab> L_Tab::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Tab> L_Tab::Properties[] = {
+	PROP_RO(L_Tab, name),
+	{0, 0, 0},
+};
+
+/*
+ * Properties
+ */
+
+// Documented in parent Class
+int L_Tab::get_name(lua_State * L) {
+	lua_pushstring(L, get()->get_name());
+	return 1;
+}
+
+/*
+ * Lua Functions
+ */
+
+/*
+ * C Functions
+ */
+
+/* RST
 Window
 ------
 
@@ -510,6 +580,10 @@ void luaopen_wlui(lua_State * L) {
 
 	register_class<L_Button>(L, "ui", true);
 	add_parent<L_Button, L_Panel>(L);
+	lua_pop(L, 1); // Pop the meta table
+	
+	register_class<L_Tab>(L, "ui", true);
+	add_parent<L_Tab, L_Panel>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_Window>(L, "ui", true);

@@ -26,6 +26,28 @@
 
 namespace UI {
 /**
+ * This represents a Tab of the TabPanel. Note that this does no work
+ * of drawing itself or handling anything really, it is only here to 
+ * offer the Panel interface for tabs so that the scripting interface
+ * stays the same for all elements
+ */
+struct Tab_Panel;
+class Tab : public NamedPanel {
+	friend struct Tab_Panel;
+
+	Tab(Tab_Panel * parent, uint32_t, std::string name, PictureID gpicid,
+			std::string gtooltip, Panel * gpanel);
+
+private:
+	// SirVer TODO: really needed?
+	Tab_Panel * m_parent;
+
+	PictureID   picid;
+	std::string tooltip;
+	Panel     * panel;
+};
+
+/**
  * Provides a tab view; every tab is a panel that can contain any number of
  * sub-panels (such as buttons, other Tab_Panels, etc..) and an associated
  * picture.
@@ -40,11 +62,16 @@ struct Tab_Panel : public Panel {
 	void layout();
 
 	uint32_t add
-		(PictureID           picid,
+		(std::string const & name,
+		 PictureID           picid,
 		 Panel             * panel,
 		 std::string const & tooltip = std::string());
 
+	typedef std::vector<Tab*> TabList;
+
+	const TabList & tabs();
 	void activate(uint32_t idx);
+   void activate(std::string const &);
 
 private:
 	// Drawing and event handlers
@@ -56,15 +83,9 @@ private:
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	void handle_mousein(bool inside);
 
-	struct Tab {
-		PictureID   picid;
-		std::string tooltip;
-		Panel     * panel;
-	};
 
-	std::vector<Tab> m_tabs;
+	TabList          m_tabs;
 	uint32_t         m_active;         ///< index of the currently active tab
-
 	int32_t          m_highlight;      ///< index of the highlighted button
 
 	PictureID        m_pic_background; ///< picture used to draw background

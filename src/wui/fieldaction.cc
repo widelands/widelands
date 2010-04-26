@@ -204,7 +204,8 @@ struct FieldActionWindow : public UI::UniqueWindow {
 
 private:
 	uint32_t add_tab
-		(const char * picname,
+		(const std::string & name,
+		 const char * picname,
 		 UI::Panel * panel,
 		 const std::string & tooltip_text = std::string());
 	void add_button
@@ -245,6 +246,8 @@ static const std::string tooltip_tab_build[] = {
 	_("Build medium buildings"),
 	_("Build large buildings")
 };
+static const std::string name_tab_build[] = { "small", "medium", "big" };
+
 
 static char const * const pic_tab_buildmine  = "pics/menu_tab_buildmine.png";
 
@@ -475,16 +478,18 @@ void FieldActionWindow::add_buttons_auto()
 	// Add tabs
 	if (buildbox && buildbox->get_nritems()) {
 		buildbox->layout();
-		add_tab(pic_tab_buildroad, buildbox, _("Build roads"));
+		add_tab("roads", pic_tab_buildroad, buildbox, _("Build roads"));
 	}
 
 	watchbox.layout();
-	add_tab(pic_tab_watch, &watchbox, _("Watch"));
+	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 
 	if (militarybox) {
 		if (militarybox->allowed_change()) {
 			militarybox->layout();
-			add_tab(pic_tab_military, militarybox, _("Military settings"));
+			add_tab("military", pic_tab_military,
+					militarybox, _("Military settings")
+			);
 		} else
 			delete militarybox;
 	}
@@ -516,7 +521,7 @@ void FieldActionWindow::add_buttons_attack ()
 	if (a_box.get_nritems()) { //  add tab
 		m_attack_box->layout();
 		a_box.layout();
-		add_tab(pic_tab_attack, &a_box, _("Attack"));
+		add_tab("attack", pic_tab_attack, &a_box, _("Attack"));
 	}
 }
 
@@ -588,13 +593,14 @@ void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 		if (bbg_house[i])
 			m_tabpanel.activate
 				(m_best_tab = add_tab
-				 	(pic_tab_buildhouse[i],
+				 	(name_tab_build[i], pic_tab_buildhouse[i],
 				 	 bbg_house[i],
 				 	 i18n::translate(tooltip_tab_build[i])));
 
 	if (bbg_mine)
 		m_tabpanel.activate
-			(m_best_tab = add_tab(pic_tab_buildmine, bbg_mine, _("Build mines")));
+			(m_best_tab = add_tab
+			 	("mines", pic_tab_buildmine, bbg_mine, _("Build mines")));
 }
 
 
@@ -618,7 +624,7 @@ void FieldActionWindow::add_buttons_road(bool const flag)
 
 	// Add the box as tab
 	buildbox.layout();
-	add_tab(pic_tab_buildroad, &buildbox, _("Build roads"));
+	add_tab("roads", pic_tab_buildroad, &buildbox, _("Build roads"));
 }
 
 
@@ -628,11 +634,12 @@ Convenience function: Adds a new tab to the main tab panel
 ===============
 */
 uint32_t FieldActionWindow::add_tab
-	(char const * picname, UI::Panel * panel, std::string const & tooltip_text)
+	(std::string const & name, char const * picname,
+	 UI::Panel * panel, std::string const & tooltip_text)
 {
 	return
 		m_tabpanel.add
-			(g_gr->get_picture(PicMod_Game, picname), panel, tooltip_text);
+			(name, g_gr->get_picture(PicMod_Game, picname), panel, tooltip_text);
 }
 
 
