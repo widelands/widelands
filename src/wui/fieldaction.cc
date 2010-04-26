@@ -107,7 +107,8 @@ void BuildGrid::add(Widelands::Building_Index::value_t const id)
 	Widelands::Building_Descr const & descr =
 		*m_tribe.get_building_descr(Widelands::Building_Index(id));
 	UI::Icon_Grid::add
-		(descr.get_buildicon(), reinterpret_cast<void *>(id), descr.descname());
+		(descr.name(), descr.get_buildicon(),
+		 reinterpret_cast<void *>(id), descr.descname());
 }
 
 
@@ -848,8 +849,7 @@ void FieldActionWindow::building_icon_mouse_out
 void FieldActionWindow::building_icon_mouse_in
 	(Widelands::Building_Index::value_t const idx)
 {
-	if (ibase().m_show_workarea_preview) {
-		assert(not m_workarea_preview_job_id);
+	if (ibase().m_show_workarea_preview and not m_workarea_preview_job_id) {
 		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
 		Widelands::HollowArea<> hollow_area(Widelands::Area<>(m_node, 0), 0);
 		const Workarea_Info & workarea_info =
