@@ -292,5 +292,5 @@ function conclusion()
 
 end
 
-run(messages)
+run(starting_infos)
 
