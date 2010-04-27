@@ -102,8 +102,10 @@ void Button::set_pic(PictureID const picid)
 	m_title.clear();
   
 	//log("Button::set_pic\n");
-	if(m_pic_custom != picid)
-		m_needredraw=true;
+       if(m_pic_custom == picid)
+               return;
+
+       m_needredraw=true;
 
 	m_pic_custom = picid;
 	if (m_pic_custom_disabled != g_gr->get_no_picture())
@@ -162,7 +164,6 @@ void Button::set_enabled(bool const on)
 */
 void Button::draw(RenderTarget & odst)
 {
-
 	if(!m_needredraw)
 	{
 		odst.blit(Point(0, 0), m_cache_pid);
@@ -291,11 +292,13 @@ void Button::handle_mousein(bool const inside)
 	bool oldhl = m_highlighted;
 
 	m_highlighted = inside && m_enabled;
-	update();
 
-	//if(oldhl != m_highlighted)
-	//	m_needredraw = true;
-}	
+       if(oldhl == m_highlighted)
+               return;
+
+       m_needredraw = true;
+	update();
+}
 
 
 /**
