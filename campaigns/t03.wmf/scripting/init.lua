@@ -8,7 +8,7 @@ use("aux", "coroutine")
 use("aux", "objective_utils")
 use("aux", "infrastructure")
 use("aux", "table")
-use("aux", "smooth_move")
+use("aux", "ui")
 
 p1 = wl.game.Player(1)
 p2 = wl.game.Player(2)

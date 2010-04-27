@@ -4,8 +4,7 @@ function mission_thread()
    
    -- Initial messages
    local sea = wl.map.Field(47,25)
-   local pts = smooth_move(sea)
-   sleep(1000)
+   local pts = scroll_smoothly_to(sea)
 
    send_msg(diary_page_1)
    sleep(200)
@@ -18,8 +17,7 @@ function mission_thread()
    run(function() sleep(5000) p1:hide_fields(sea:region(6)) end)
 
    -- Back home
-   timed_move(array_reverse(pts))
-   sleep(1000)
+   timed_scroll(array_reverse(pts))
    send_msg(diary_page_3)
 
 

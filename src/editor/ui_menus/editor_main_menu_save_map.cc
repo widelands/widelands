@@ -52,7 +52,7 @@ inline Editor_Interactive & Main_Menu_Save_Map::eia() {
 
 
 Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
-	: UI::Window(&parent, 0, 0, 500, 330, _("Save Map"))
+	: UI::Window(&parent, "save_map_menu", 0, 0, 500, 330, _("Save Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
@@ -129,21 +129,21 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 	posy = get_inner_h() - 30;
 
 	m_ok_btn = new UI::Callback_Button<Main_Menu_Save_Map>
-		(this,
+		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Main_Menu_Save_Map::clicked_ok, *this,
 		 _("OK"));
 
 	new UI::Callback_Button<Main_Menu_Save_Map>
-		(this,
+		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_Save_Map::die, *this,
 		 _("Cancel"));
 
 	new UI::Callback_Button<Main_Menu_Save_Map>
-		(this,
+		(this, "make_directory",
 		 spacing, posy, 120, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_Save_Map::clicked_make_directory, *this,

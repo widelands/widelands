@@ -203,6 +203,17 @@ void Interactive_Base::unset_sel_picture() {
 }
 
 
+void Interactive_Base::toggle_buildhelp() {
+	egbase().map().overlay_manager().toggle_buildhelp();
+}
+bool Interactive_Base::buildhelp() {
+	return egbase().map().overlay_manager().buildhelp();
+}
+void Interactive_Base::show_buildhelp(bool const t) {
+	egbase().map().overlay_manager().show_buildhelp(t);
+}
+
+
 /**
  * Retrieves the configured in-game resolution.
  *

@@ -64,7 +64,7 @@ EncyclopediaWindow::EncyclopediaWindow
 	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
-		(&parent,
+		(&parent, "encyclopedia",
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Tribe ware encyclopedia")),

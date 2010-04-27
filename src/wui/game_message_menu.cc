@@ -40,10 +40,11 @@ inline Interactive_Player & GameMessageMenu::iplayer() const {
 GameMessageMenu::GameMessageMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 	:
-	UI::UniqueWindow(&plr, &registry, 370, 375, _("Message Menu: Inbox")),
+	UI::UniqueWindow
+		(&plr, "messages", &registry, 370, 375, _("Message Menu: Inbox")),
 	list                                (*this),
 	message_body
-		(this,
+		(this, 
 		 5, 150, 360, 220,
 		 "", UI::Align_Left, 1),
 	clear_selection                     (*this),

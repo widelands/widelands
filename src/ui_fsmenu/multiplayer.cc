@@ -44,21 +44,21 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 
 // Buttons
 	metaserver
-		(this,
+		(this, "metaserver",
 		 m_butx, m_yres * 6 / 25, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_MultiPlayer::ggzLogin, *this,
 		 _("Internet game"), std::string(), true, false,
 		 m_fn, m_fs),
 	lan
-		(this,
+		(this, "lan",
 		 m_butx, m_yres * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Lan,
 		 _("LAN / Direct IP"), std::string(), true, false,
 		 m_fn, m_fs),
 	back
-		(this,
+		(this, "back",
 		 m_butx, m_yres * 3 / 4, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Back,
@@ -72,7 +72,7 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 	if (m_auto_log)
 		showloginbox =
 			new UI::Callback_Button<Fullscreen_Menu_MultiPlayer>
-				(this,
+				(this, "login_dialog",
 				 m_butx + m_butw + m_buth / 4, m_yres * 6 / 25, m_buth, m_buth,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 g_gr->get_picture(PicMod_UI, "pics/continue.png"),

@@ -195,7 +195,7 @@ WareQueuePriorityButton::WareQueuePriorityButton
 	 int32_t priority)
 :
 UI::Button
-	(parent,
+	(parent, "priority_button",
 	 x, y, w, h,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_no_picture(),

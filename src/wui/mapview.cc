@@ -58,8 +58,10 @@ void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
 			warp_mouse_to_node(Widelands::Coords(c.x + map.get_width (), c.y));
 		else if (p.y <= 0)
 			warp_mouse_to_node(Widelands::Coords(c.x, c.y + map.get_height()));
-		else
+		else {
 			set_mouse_pos(p);
+			track_sel(p);
+		}
 	}
 }
 

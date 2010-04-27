@@ -36,21 +36,21 @@ Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
 
 // Buttons
 	new_map
-		(this,
+		(this, "new_map",
 		 m_butx, m_yres * 6 / 25, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_Editor::end_modal, *this, New_Map,
 		 _("New Map"), std::string(), true, false,
 		 ui_fn(), fs_small()),
 	load_map
-		(this,
+		(this, "load_map",
 		 m_butx, m_yres * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_Editor::end_modal, *this, Load_Map,
 		 _("Load Map"), std::string(), true, false,
 		 ui_fn(), fs_small()),
 	back
-		(this,
+		(this, "back",
 		 m_butx, m_yres * 3 / 4, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_Editor::end_modal, *this, Back,

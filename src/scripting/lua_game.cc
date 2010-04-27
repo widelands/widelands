@@ -108,8 +108,6 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, number),
 	PROP_RO(L_Player, allowed_buildings),
 	PROP_RO(L_Player, objectives),
-	PROP_RW(L_Player, viewpoint_x),
-	PROP_RW(L_Player, viewpoint_y),
 	PROP_RO(L_Player, defeated),
 	PROP_RO(L_Player, starting_field),
 	PROP_RW(L_Player, retreat_percentage),
@@ -117,7 +115,6 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, inbox),
 	PROP_RO(L_Player, tribe),
 	PROP_RW(L_Player, see_all),
-	PROP_RW(L_Player, buildhelp),
 	{0, 0, 0},
 };
 
@@ -191,55 +188,6 @@ int L_Player::get_objectives(lua_State * L) {
 		lua_settable(L, -3);
 	}
 	return 1;
-}
-
-/* RST
-	.. attribute:: viewpoint_x, viewpoint_y
-
-		(RW) The current view position of this player (if it is an interactive
-		player) in pixels. This can also be set to move to warp to the given
-		position instantly. If you want to jump to a specific field see
-		:attr:`wl.map.Field.viewpoint`. This property returns 0,0 if this is not
-		an Interactive Player
-*/
-// Note: we track the point in the middle of the screen while
-// Interactive_Player::viewpoint tracks the point in the upper left corner. We
-// therefore always add or subtract half a resolution to all values
-int L_Player::get_viewpoint_x(lua_State * L) {
-	Interactive_Player & ipl = *get_game(L).get_ipl();
-	if (ipl.player_number() == m_pl) {
-		lua_pushuint32(L, ipl.get_viewpoint().x + (ipl.get_w() >> 1));
-	} else {
-		lua_pushuint32(L, 0);
-	}
-	return 1;
-}
-int L_Player::set_viewpoint_x(lua_State * L) {
-	Interactive_Player & ipl = *get_game(L).get_ipl();
-	if (ipl.player_number() == m_pl) {
-		Point p = ipl.get_viewpoint();
-		p.x = luaL_checkuint32(L, -1) - (ipl.get_w() >> 1);
-		ipl.set_viewpoint(p);
-	}
-	return 0;
-}
-int L_Player::get_viewpoint_y(lua_State * L) {
-	Interactive_Player & ipl = *get_game(L).get_ipl();
-	if (ipl.player_number() == m_pl) {
-		lua_pushuint32(L, ipl.get_viewpoint().y + (ipl.get_h() >> 1));
-	} else {
-		lua_pushuint32(L, 0);
-	}
-	return 1;
-}
-int L_Player::set_viewpoint_y(lua_State * L) {
-	Interactive_Player & ipl = *get_game(L).get_ipl();
-	if (ipl.player_number() == m_pl) {
-		Point p = ipl.get_viewpoint();
-		p.y = luaL_checkuint32(L, -1) - (ipl.get_h() >> 1);
-		ipl.set_viewpoint(p);
-	}
-	return 0;
 }
 
 /* RST
@@ -356,35 +304,6 @@ int L_Player::set_see_all(lua_State * L) {
 int L_Player::get_see_all(lua_State * L) {
 	lua_pushboolean(L, get(L, get_game(L)).see_all());
 	return 1;
-}
-
-/* RST
-	.. attribute:: buildhelp
-
-		(RW) True if the buildhelp is show, false otherwise.
-*/
-// UNTESTED
-int L_Player::get_buildhelp(lua_State * L) {
-	Game & game = get_game(L);
-	Interactive_Player * ipl = game.get_ipl();
-
-	if (get(L, game).player_number() != ipl->player_number()) {
-		lua_pushboolean(L, false);
-		return 1;
-	}
-
-	lua_pushboolean(L, ipl->buildhelp());
-	return 1;
-}
-int L_Player::set_buildhelp(lua_State * L) {
-	Game & game = get_game(L);
-	Interactive_Player * ipl = game.get_ipl();
-
-	if (get(L, game).player_number() != ipl->player_number())
-		return 0;
-
-	ipl->show_buildhelp(luaL_checkboolean(L, 2));
-	return 0;
 }
 
 /*

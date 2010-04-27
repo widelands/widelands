@@ -30,6 +30,7 @@
 #include "lua_game.h"
 #include "lua_globals.h"
 #include "lua_map.h"
+#include "lua_ui.h"
 #include "persistence.h"
 
 #include "scripting.h"
@@ -319,6 +320,7 @@ LuaInterface()
 	luaopen_wldebug(m_L);
 	luaopen_wlmap(m_L);
 	luaopen_wlgame(m_L);
+	luaopen_wlui(m_L);
 
 	// Push the editor game base
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));

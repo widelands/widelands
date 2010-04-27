@@ -43,7 +43,7 @@
 Editor_Tool_Menu::Editor_Tool_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 :
-UI::UniqueWindow(&parent, &registry, 350, 400, _("Tool Menu"))
+UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tool Menu"))
 {
 
 #define spacing 5

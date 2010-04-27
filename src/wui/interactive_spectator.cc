@@ -44,24 +44,27 @@ Interactive_Spectator::Interactive_Spectator
 	:
 	Interactive_GameBase(_game, global_s, OBSERVER, multiplayer),
 
-#define INIT_BTN(picture, callback, tooltip)                                  \
- TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
+#define INIT_BTN(picture, name, callback, tooltip)                            \
+ TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
  &Interactive_Spectator::callback, *this,                                     \
  tooltip                                                                      \
 
 	m_toggle_chat
-		(INIT_BTN("menu_chat",           toggle_chat,         _("Chat"))),
+		(INIT_BTN("menu_chat", "chat", toggle_chat, _("Chat"))),
 	m_exit
-		(INIT_BTN("menu_exit_game",      exit_btn,            _("Exit Replay"))),
+		(INIT_BTN("menu_exit_game", "exit_replay", exit_btn, _("Exit Replay"))),
 	m_save
-		(INIT_BTN("menu_save_game",      save_btn,            _("Save Game"))),
+		(INIT_BTN("menu_save_game", "save_game", save_btn, _("Save Game"))),
 	m_toggle_options_menu
-		(INIT_BTN("menu_options_menu",   toggle_options_menu, _("Options"))),
+		(INIT_BTN("menu_options_menu", "options_menu",
+					 toggle_options_menu, _("Options"))),
 	m_toggle_statistics
-		(INIT_BTN("menu_general_stats",  toggle_statistics,   _("Statistics"))),
+		(INIT_BTN("menu_general_stats", "general_stats",
+					 toggle_statistics, _("Statistics"))),
 	m_toggle_minimap
-		(INIT_BTN("menu_toggle_minimap", toggle_minimap,      _("Minimap")))
+		(INIT_BTN("menu_toggle_minimap", "minimap",
+					 toggle_minimap, _("Minimap")))
 {
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 	if (!multiplayer) {
