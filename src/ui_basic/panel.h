@@ -283,6 +283,25 @@ inline void Panel::set_dock_windows_to_edges(const bool on) {
 		_flags |= pf_dock_windows_to_edges;
 }
 
+/**
+ * A Panel with a name. Important for scripting
+ */
+struct NamedPanel : public Panel {
+	NamedPanel
+		(Panel * const nparent, std::string const & name,
+		 int32_t  const nx, int32_t  const ny,
+		 uint32_t const nw, uint32_t const nh,
+		 const std::string & tooltip_text = std::string()) :
+			Panel(nparent, nx, ny, nw, nh, tooltip_text), m_name(name)
+	{
+	}
+
+	const std::string get_name() const throw() {return m_name;}
+
+private:
+	std::string m_name;
+};
+
 }
 
 #endif

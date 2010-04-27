@@ -40,28 +40,28 @@ Fullscreen_Menu_Base("singleplmenu.jpg"),
 
 // Buttons
 	new_game
-		(this,
+		(this, "new_game",
 		 m_butx, m_yres * 6 / 25, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_SinglePlayer::end_modal, *this, New_Game,
 		 _("New Game"), std::string(), true, false,
 		 m_fn, m_fs),
 	campaign
-		(this,
+		(this, "campaigns",
 		 m_butx, m_yres * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Campaign,
 		 _("Campaigns"), std::string(), true, false,
 		 m_fn, m_fs),
 	load_game
-		(this,
+		(this, "load_game",
 		 m_butx, m_yres * 87 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Load_Game,
 		 _("Load Game"), std::string(), true, false,
 		 m_fn, m_fs),
 	back
-		(this,
+		(this, "back",
 		 m_butx, m_yres * 3 / 4, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Back,

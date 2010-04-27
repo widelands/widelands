@@ -39,7 +39,7 @@ GameObjectivesMenu::GameObjectivesMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
-		(&plr, &registry,
+		(&plr, "objectives", &registry,
 		 340,
 		 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
 		 _("Objectives Menu")),

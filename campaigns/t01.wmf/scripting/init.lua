@@ -43,21 +43,20 @@ function show_story_box(t, m, pos, gposx, gposy)
    local pts = nil
    if pos ~= nil then
       plr:reveal_fields(pos:region(8))
-      pts = smooth_move(pos)
-      sleep(1200)
+      pts = scroll_smoothly_to(pos)
+
       posx = gposx or 0
       posy = gposy or 80
    end
    plr:message_box(t, m, { posx = posx, posy = posy })
    if pts then
-      timed_move(array_reverse(pts))
-      sleep(1200)
+      timed_scroll(array_reverse(pts))
    end
    sleep(500)
 end
 
 use("aux", "coroutine")
-use("aux", "smooth_move")
+use("aux", "ui")
 use("aux", "table")
 
 use("map", "texts")

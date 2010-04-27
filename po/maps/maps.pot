@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-21 17:46+0000\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -94,7 +94,7 @@ msgid ""
 "Dry Riverbed"
 msgstr ""
 
-#: ../../maps/Four Mountains.wmf/elemental:11
+#: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional water sources. Hint 3: Each mountain contains only one resource."
 msgstr ""
@@ -149,7 +149,7 @@ msgid ""
 "Four Castles"
 msgstr ""
 
-#: ../../maps/Four Mountains.wmf/elemental:9
+#: ../../maps/Four Mountains.wmf/elemental:7
 msgid ""
 "Four Mountains"
 msgstr ""
@@ -234,12 +234,12 @@ msgid ""
 "Mystical Maze"
 msgstr ""
 
-#: ../../maps/Rendez-Vous.wmf/elemental:11
+#: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
 "Only a small hill in the centre of the map connects these four competing tribes. Lead your army right away to this hill and build a giant stronghold as a sign of your superiority! Hint: In the centre is only space for one stronghold. Water can be found everywhere, so there is no need to send out geologists."
 msgstr ""
 
-#: ../../maps/Rendez-Vous.wmf/elemental:9
+#: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid ""
 "Rendez-Vous"
 msgstr ""

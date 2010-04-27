@@ -64,7 +64,7 @@ void Warehouse_Window::make_wares_tab(WaresDisplay::wdType type, PictureID tabic
 		(type == WaresDisplay::WARE ? warehouse().get_wares() : warehouse().get_workers(),
 		 type);
 
-	get_tabs()->add(tabicon, display, tooltip);
+	get_tabs()->add("wares", tabicon, display, tooltip);
 }
 
 /**

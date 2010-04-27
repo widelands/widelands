@@ -86,13 +86,14 @@ lumberjack_message_01 = {
 lumberjack_message_02 = {
    title = _ "Building the lumberjack",
    pos = "topright",
-   field = first_lumberjack_field,
    body = rt(p(_
 [[First, I'll left-click on the symbol were I want the lumberjack to be built. A
- window will appear where I can choose between buildings - you won't see this
- window when I do it, because I am lightning fast. I left-click on the
- lumberjack. This places a construction site at the given location.]]
-      )
+ window will appear where I can choose between buildings. Because I clicked a
+ yellow house symbol - it means that this field can house medium and small
+ buildings - I am presented with all medium buildings that I can build. I
+ go on to select the small buildings tab. Then I choose the lumberjack's hut.
+ Watch me, I'll go really slow: click - select tab - choose building.]]
+    )
    )
 }
 
@@ -219,7 +220,7 @@ order_quarry_recap_how_to_build = {
    )
 }
 
-talk_about_roadbuilding = {
+talk_about_roadbuilding_00 = {
    pos = "topright",
    title = _ "Road building",
    body = rt(p(_
@@ -236,12 +237,26 @@ talk_about_roadbuilding = {
 [[the abort symbol.]]
       )) .. rt(p(_
 [[Now, you can either make it longer by one field at a time by left-clicking
- multiple times on neighbouring fields for perfect control over the route the 
- road takes. Alternatively, you can directly click the flag or field where
- the road should end.]]
-      )) .. rt(p(_
+ multiple times on neighbouring fields for perfect control over the route the
+ road takes like so:]]
+      ))
+}
+
+talk_about_roadbuilding_01 = {
+   pos = "topright",
+   title = _ "Road building",
+   body = rt(p(_
+[[Alternatively, you can directly click the flag where
+ the road should end like so.]]
+   ))
+}
+
+talk_about_roadbuilding_02 = {
+   pos = "topright",
+   title = _ "Road building",
+   body = rt(p(_
 [[One more thing: around the field where your road would end you can see
- different markers. The have the following meaning:]]
+ different markers. They have the following meaning:]]
       )) .. rt("image=pics/roadb_green.png", p(_
 [[The terrain is flat here. Your carriers will be very swift on this terrain.]]
    )) .. rt("image=pics/roadb_yellow.png", p(_
@@ -255,8 +270,8 @@ talk_about_roadbuilding = {
  Also try to keep roads as short as possible and always remember to place as
  many flags as you can on road segments to share the load better.]]
    )) .. rt(p(_
-[[Now build the road between your quarry and your headquarters. We'll wait until
- the quarry is completed.]]
+[[Now please rebuild the road between your quarry and your headquarters.
+ We'll wait until the quarry is completed.]]
    ))
 }
 
@@ -287,18 +302,28 @@ teaching_about_messages = {
    )
 }
 
-closing_msg_window = {
+closing_msg_window_00 = {
    pos = "topright",
    field = first_quarry_field,
    title = _"Closing windows",
    body = rt(p(_
 [[Excellent. By the way: closing windows in Widelands is as easy as
  right-clicking on them. This works with all windows except for story message
- windows like this one.]]
-      ) .. p(_
-[[Let's see how messages work in the real game, shall we? For this, I'll take
- all stones away from the poor stonemason in the quarry. He will then send a
- message that he can't find any in his working area]]
+ windows like this one. Go ahead and try it. Close the messages window,
+ please.]]
+      )
+   )
+}
+
+closing_msg_window_01 = {
+   pos = "topright",
+   field = first_quarry_field,
+   title = _ "Closing windows",
+   body = rt(p(_
+[[Well done! Let's see how messages work in the real game, shall we? For this,
+ I'll take all stones away from the poor stonemason in the quarry. He will then
+ send a message that he can't find any in his working area the next time he
+ tries to do some work.]]
       )
    )
 }

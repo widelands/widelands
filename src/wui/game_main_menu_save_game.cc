@@ -53,7 +53,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 #define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
 #define OK_Y                              (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
 	UI::UniqueWindow
-		(&parent, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
+		(&parent, "save_game", &registry,
+		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
 	m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
 	m_editbox
 		(*this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT),
