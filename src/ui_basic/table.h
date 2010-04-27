@@ -238,7 +238,6 @@ template <> struct Table<void *> : public Panel {
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
-
 private:
 	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
@@ -269,10 +268,7 @@ private:
 	uint32_t           m_last_selection;  // for double clicks
 	Columns::size_type m_sort_column;
 	bool               m_sort_descending;
-	
-	bool               m_needredraw;
-	PictureID          m_cache_pid;
-	
+
 	void header_button_clicked(Columns::size_type);
 	typedef std::vector<Entry_Record *> Entry_Record_vector;
 	Entry_Record_vector m_entry_records;

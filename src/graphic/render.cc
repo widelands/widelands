@@ -190,9 +190,9 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 
 	const Point bl = rc.bottom_left();
 
-	log
+	/*log
 		("Surface::brighten_rect((%d, %d, %d, %d), %d)\n", 
-		 bl.x, rc.x, bl.x, rc.x, factor);
+		 bl.x, rc.x, bl.x, rc.x, factor);*/
 
 #if HAS_OPENGL
 	if (g_opengl) {
