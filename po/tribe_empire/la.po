@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-16 22:48+0000\n"
-"PO-Revision-Date: 2010-04-19 19:48+0000\n"
+"POT-Creation-Date: 2010-04-21 17:46+0000\n"
+"PO-Revision-Date: 2010-04-26 04:59+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-20 03:30+0000\n"
+"X-Launchpad-Export-Date: 2010-04-27 03:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:63
 msgid "Advanced Lance"
-msgstr ""
+msgstr "Hasta melior"
 
 #: ../../tribes/empire/conf:148
 msgid "Arena"
@@ -84,7 +84,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:67
 msgid "Basket"
-msgstr ""
+msgstr "Corbis"
 
 #: ../../tribes/empire/conf:68
 msgid "Beer"
@@ -120,11 +120,11 @@ msgstr "Architectus"
 
 #: ../../tribes/empire/conf:120
 msgid "Burner"
-msgstr ""
+msgstr "Carbonarius"
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Carbo e ligno facit."
 
 #: ../../tribes/empire/conf:109
 msgid "Carrier"
@@ -149,7 +149,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:183
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Carbonarius"
 
 #: ../../tribes/empire/conf:168
 msgid "Citadel"
@@ -182,7 +182,7 @@ msgid "Construction Site"
 msgstr ""
 
 #: ../../tribes/empire/stonemason/conf:1
-msgid "Cuts raw pieces of granit and marble out of laying stones."
+msgid "Cuts raw pieces of granite and marble out of laying stones."
 msgstr ""
 
 #: ../../tribes/empire/conf:184
@@ -283,12 +283,14 @@ msgstr "Casa pistoria"
 
 #: ../../tribes/empire/conf:75
 msgid "Fishing Rod"
-msgstr ""
+msgstr "Harundo"
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
 msgstr ""
+"Harundines piscatoribus ad pisces capiendos utuntur. Quae a faber "
+"fabricantur."
 
 #: ../../tribes/empire/conf:76
 msgid "Flour"
@@ -380,7 +382,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:81
 msgid "Heavy Lance"
-msgstr ""
+msgstr "Hasta gravis"
 
 #: ../../tribes/empire/conf:82
 msgid "Helmet"
@@ -440,7 +442,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:87
 msgid "Lance"
-msgstr ""
+msgstr "Hasta"
 
 #: ../../tribes/empire/conf:127
 msgid "Lumberjack"
@@ -571,7 +573,7 @@ msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
-msgstr ""
+msgstr "Hastam meliorem fabricat"
 
 #: ../../tribes/empire/armoursmithy/conf:27
 msgid "Produce armour"
@@ -587,7 +589,7 @@ msgstr "Palam pistoriam fabricat"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce basket"
-msgstr ""
+msgstr "Corbem fabricat"
 
 #: ../../tribes/empire/armoursmithy/conf:28
 msgid "Produce chain armour"
@@ -599,7 +601,7 @@ msgstr "Forcipem fabricat"
 
 #: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce fishing rod"
-msgstr ""
+msgstr "Harundinem fabricat"
 
 #: ../../tribes/empire/toolsmithy/conf:36
 msgid "Produce hammer"
@@ -607,7 +609,7 @@ msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:32
 msgid "Produce heavy lance"
-msgstr ""
+msgstr "Hastam gravem fabricat"
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
@@ -623,7 +625,7 @@ msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:30
 msgid "Produce lance"
-msgstr ""
+msgstr "Hastam fabricat"
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
@@ -647,7 +649,7 @@ msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
-msgstr ""
+msgstr "Hastam ligneam fabricat"
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
@@ -698,12 +700,12 @@ msgid "Resource indicator gold much"
 msgstr "Est indicatum hic aurum multum situm"
 
 #: ../../tribes/empire/conf:51
-msgid "Resource indicator granit little"
-msgstr "Est indicatum hic granatum paucum situm"
+msgid "Resource indicator granite little"
+msgstr ""
 
 #: ../../tribes/empire/conf:52
-msgid "Resource indicator granit much"
-msgstr "Est indicatum hic granatum multum situm"
+msgid "Resource indicator granite much"
+msgstr ""
 
 #: ../../tribes/empire/conf:53
 msgid "Resource indicator iron little"
@@ -918,7 +920,7 @@ msgstr ""
 
 #: ../../tribes/empire/ironore/conf:1
 msgid "This is the red iron ore."
-msgstr ""
+msgstr "Hoc est aes ferri rubrum."
 
 #: ../../tribes/empire/goldstone/conf:1
 msgid "This is the yellow goldstone."
@@ -979,7 +981,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:99
 msgid "Trunk"
-msgstr ""
+msgstr "Lignum trabale"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid "Trunks are one important build material of the Empire."
@@ -1111,7 +1113,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:100
 msgid "War-Lance"
-msgstr ""
+msgstr "Hasta bellandi"
 
 #: ../../tribes/empire/conf:177
 msgid "Warehouse"
@@ -1133,7 +1135,7 @@ msgstr ""
 
 #: ../../tribes/empire/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr ""
+msgstr "Arma instrumentaque e ferro fabricantur."
 
 #: ../../tribes/empire/conf:137
 msgid "Weaponsmith"
@@ -1175,7 +1177,7 @@ msgstr "Lignum"
 
 #: ../../tribes/empire/conf:105
 msgid "Wood Lance"
-msgstr ""
+msgstr "Hasta lignea"
 
 #: ../../tribes/empire/conf:106
 msgid "Wool"

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-21 19:46+0200\n"
-"PO-Revision-Date: 2010-04-25 20:10+0000\n"
+"PO-Revision-Date: 2010-04-26 08:29+0000\n"
 "Last-Translator: Martin Volf <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-04-26 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-04-27 03:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -33,13 +33,15 @@ msgstr "CHYBA: Připojení k metaserveru se nezdařilo (viz. důvod nahoře)!\n"
 
 #: ../../src/wlapplication.cc:860 ../../src/wlapplication.cc:873
 msgid "could not find the path of the main executable"
-msgstr ""
+msgstr "Nelze nalézt cestu k hlavnímu příkazu"
 
 #: ../../src/wlapplication.cc:996
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Po 5 vteřinách vypnut zvuk. Tyto problémy shazují widelands. Aktualizujte "
+"váš zvukový ovladač a/nebo SDL pro vyřešení tohoto problému.\n"
 
 #: ../../src/wlapplication.cc:1157
 msgid ""
@@ -101,6 +103,28 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --<config-entry-name>=value overwrites any config file setting\n"
+"\n"
+"--logfile=FILENAME Log output to file FILENAME instead of\n"
+"terminal output\n"
+"--datadir=DIRNAME Use specified direction for the widelands\n"
+"data files\n"
+"--homedir=DIRNAME Use specified directory for widelands config\n"
+"files, savegames and replays Default is ~/.widelands --record=FILENAME "
+"Record all events to the given filename for\n"
+"later playback\n"
+"--playback=FILENAME Playback given filename (see --record)\n"
+"\n"
+"--coredump=[yes|no] Generates a core dump on segfaults instead\n"
+"of using the SDL\n"
+"--language=[de_DE|sv_SE|...]\n"
+"The locale to use.\n"
+"--localedir=DIRNAME Use DIRNAME as location for the locale\n"
+"--remove_syncstreams=[true|false]\n"
+"Remove syncstream files on startup\n"
+"--remove_replays=[...]\n"
+"Remove replays after this amount of days.\n"
+"If this is 0 replays are not deleted.\n"
 
 #: ../../src/wlapplication.cc:1315
 msgid ""
@@ -247,7 +271,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1393
 msgid " --verbose            Enable verbose debug messages\n"
-msgstr ""
+msgstr " --verbose povolí verbose ladící zprávy\n"
 
 #: ../../src/wlapplication.cc:1394
 msgid " --help               Show this help\n"
@@ -1062,7 +1086,7 @@ msgstr "fronta příkazů: %s"
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "game_class: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
@@ -1194,12 +1218,12 @@ msgstr "velká"
 #: ../../src/logic/cmd_luacoroutine.cc:62
 #, c-format
 msgid "lua function: %s"
-msgstr ""
+msgstr "lua function: %s"
 
 #: ../../src/logic/cmd_luascript.cc:58
 #, c-format
 msgid "lua: %s"
-msgstr ""
+msgstr "lua: %s"
 
 #: ../../src/logic/cmd_queue.cc:173
 #, c-format
@@ -2595,7 +2619,7 @@ msgstr "OK"
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
 msgid "Sound_Handler closing times %i, freq %i, format %i, chan %i\n"
-msgstr ""
+msgstr "Sound_Handler closing times %i, freq %i, format %i, chan %i\n"
 
 #: ../../src/ui_basic/progresswindow.cc:48
 msgid "Preparing..."
@@ -3791,7 +3815,7 @@ msgstr "Dělník"
 
 #: ../../src/wui/productionsitewindow.cc:70
 msgid "Exp"
-msgstr ""
+msgstr "Zkušenost"
 
 #: ../../src/wui/productionsitewindow.cc:71
 msgid "Next Level"
@@ -4243,6 +4267,8 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
+"Nelze odstranit hráče. Odkazuje na nějaké místo. Odstraňte všechny budovy a "
+"vlajky které závisí na tomto hráči a zkuste to znovu."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
