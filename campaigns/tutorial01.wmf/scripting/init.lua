@@ -69,11 +69,13 @@ end
 
 function click_on_panel(panel, g_T)
    sleep(500)
-   mouse_smoothly_to_panel(panel, g_T)
-   sleep(500)
-   if panel.press then panel:press() sleep(250) end
-   if panel.click then panel:click() end
-   sleep(500)
+   if not panel.active then -- If this is a tab and already on, do nothing
+      mouse_smoothly_to_panel(panel, g_T)
+      sleep(500)
+      if panel.press then panel:press() sleep(250) end
+      if panel.click then panel:click() end
+      sleep(500)
+   end
 end
 
 -- ======
@@ -216,13 +218,53 @@ function build_a_quarry()
 
    msg_box(talk_about_roadbuilding_02)
    
-   msg_box(census_and_statistics)
+   -- Wait till a road is placed to the constructionsite
+   local found
+   while not found do
+      for idx,f in ipairs(cs:region(2)) do
+         if f.immovable and f.immovable.type == "road" then 
+            found = true
+            break
+         end
+      end
+      sleep(1000)
+   end
 
-   -- TODO: Add information about census and statistics here
-   
+   -- Interludium: talk about census and statistics
+   census_and_statistics(cs)
+
    while #plr:get_buildings("quarry") < 1 do sleep(1400) end
 
    messages()
+end
+   
+function census_and_statistics(cs)
+   sleep(25000)
+   
+   wl.ui.MapView().census = false
+   wl.ui.MapView().statistics = false
+  
+   msg_box(census_and_statistics_00)
+   -- Pick any empty field
+   local function _pick_empty_field()
+      local reg = cs:region(2)
+      local f
+      repeat
+         f = reg[math.random(#reg)]
+      until not f.immovable
+      return f
+   end
+
+   click_on_field(_pick_empty_field())
+   click_on_panel(wl.ui.MapView().windows.field_action.tabs.watch)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.census)
+   sleep(300)
+   click_on_field(_pick_empty_field())
+   click_on_panel(wl.ui.MapView().windows.field_action.tabs.watch)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.statistics)
+
+   msg_box(census_and_statistics_01)
+
 end
 
 function messages()
