@@ -20,11 +20,13 @@ use("aux", "ui")
 use("aux", "table")
 
 -- Constants
-first_lumberjack_field = wl.map.Field(15,11)
+first_lumberjack_field = wl.map.Field(16,10)
 first_quarry_field = wl.map.Field(8,12)
 conquer_field = wl.map.Field(19,15)
 
 use("map", "texts")
+
+-- TODO: add objectives, there are none currently
 
 -- =================
 -- Helper functions 
@@ -69,6 +71,7 @@ function click_on_panel(panel, g_T)
    sleep(500)
    mouse_smoothly_to_panel(panel, g_T)
    sleep(500)
+   if panel.press then panel:press() sleep(250) end
    if panel.click then panel:click() end
    sleep(500)
 end
@@ -87,7 +90,7 @@ function starting_infos()
    while not wl.ui.MapView().buildhelp do
       sleep(200)
    end
-   sleep(1200)
+   sleep(500)
 
    build_lumberjack()
 end
@@ -97,19 +100,15 @@ function build_lumberjack()
 
    msg_box(lumberjack_message_01)
 
-   click_on_field(first_lumberjack_field)
-
+   mouse_smoothly_to(first_lumberjack_field)
+   sleep(500)
    msg_box(lumberjack_message_02)
+
    sleep(500)
 
-   -- TODO: a message about selecting the lumberjack
-   -- TODO: mouse to lumberjack
-   wl.ui.MapView().windows.field_action:close()
-   plr:place_building("lumberjacks_hut", first_lumberjack_field, true)
-
-   -- Initiate road building
-   wl.ui.MapView():click(first_lumberjack_field.brn)
-   wl.ui.MapView().windows.field_action.buttons.build_road:click()
+   click_on_field(first_lumberjack_field)
+   click_on_panel(wl.ui.MapView().windows.field_action.tabs.small)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.lumberjacks_hut)
 
    sleep(500)
    msg_box(lumberjack_message_03)
@@ -217,6 +216,8 @@ function build_a_quarry()
 
    msg_box(talk_about_roadbuilding_02)
    
+   -- TODO: Add information about census and statistics here
+   
    while #plr:get_buildings("quarry") < 1 do sleep(1400) end
 
    messages()
@@ -230,11 +231,12 @@ function messages()
 
    while #plr.inbox > 0 do sleep(200) end
 
-   msg_box(closing_msg_window)
+   msg_box(closing_msg_window_00)
 
-   if wl.ui.MapView().windows.messages then
-      wl.ui.MapView().windows.messages:close()
-   end
+   -- Wait for messages window to close
+   while wl.ui.MapView().windows.messages do sleep(300) end
+   
+   msg_box(closing_msg_window_01)
 
    -- Remove all stones
    local fields = first_quarry_field:region(6)
@@ -263,6 +265,8 @@ function messages()
 
    -- Wait for message to arrive
    while #plr.inbox < 1 do sleep(300) end
+
+   sleep(800)
    msg_box(conclude_messages)
 
    expansion()
@@ -288,5 +292,5 @@ function conclusion()
 
 end
 
-run(initial_messages)
+run(messages)
 

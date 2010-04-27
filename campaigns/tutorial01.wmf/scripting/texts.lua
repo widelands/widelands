@@ -79,9 +79,6 @@ lumberjack_message_01 = {
 [[There you go. I will explain about all those symbols in a minute. First, let
  me show you how to make a lumberjack's hut and how to connect it with a road.
  There is a sweet spot for a lumberjack right next to those trees.]]
-      ) .. p(_
-[[First, I'll left-click on the symbol were I want the lumberjack to be built. A
- window will appear where I can choose between buildings. ]]
       )
    )
 }
@@ -90,9 +87,13 @@ lumberjack_message_02 = {
    title = _ "Building the lumberjack",
    pos = "topright",
    body = rt(p(_
-[[Now, I left-click on the lumberjack. This places a construction site at the
- given location.]]
-      )
+[[First, I'll left-click on the symbol were I want the lumberjack to be built. A
+ window will appear where I can choose between buildings. Because I clicked a
+ yellow house symbol - it means that this field can house medium and small
+ buildings - I am presented with all medium buildings that I can build. I
+ go on to select the small buildings tab. Then I choose the lumberjack's hut.
+ Watch me, I'll go really slow: click - select tab - choose building.]]
+    )
    )
 }
 
@@ -301,18 +302,28 @@ teaching_about_messages = {
    )
 }
 
-closing_msg_window = {
+closing_msg_window_00 = {
    pos = "topright",
    field = first_quarry_field,
    title = _"Closing windows",
    body = rt(p(_
 [[Excellent. By the way: closing windows in Widelands is as easy as
  right-clicking on them. This works with all windows except for story message
- windows like this one.]]
-      ) .. p(_
-[[Let's see how messages work in the real game, shall we? For this, I'll take
- all stones away from the poor stonemason in the quarry. He will then send a
- message that he can't find any in his working area]]
+ windows like this one. Go ahead and try it. Close the messages window,
+ please.]]
+      )
+   )
+}
+
+closing_msg_window_01 = {
+   pos = "topright",
+   field = first_quarry_field,
+   title = _ "Closing windows",
+   body = rt(p(_
+[[Well done! Let's see how messages work in the real game, shall we? For this,
+ I'll take all stones away from the poor stonemason in the quarry. He will then
+ send a message that he can't find any in his working area the next time he
+ tries to do some work.]]
       )
    )
 }
