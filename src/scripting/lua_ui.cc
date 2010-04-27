@@ -503,6 +503,8 @@ const PropertyType<L_MapView> L_MapView::Properties[] = {
 	PROP_RW(L_MapView, viewpoint_x),
 	PROP_RW(L_MapView, viewpoint_y),
 	PROP_RW(L_MapView, buildhelp),
+	PROP_RW(L_MapView, census),
+	PROP_RW(L_MapView, statistics),
 	{0, 0, 0},
 };
 
@@ -559,6 +561,37 @@ int L_MapView::set_buildhelp(lua_State * L) {
 	return 0;
 }
 
+/* RST
+	.. attribute:: census
+
+		(RW) True if the census strings are shown on buildings, false otherwise
+*/
+int L_MapView::get_census(lua_State * L) {
+	lua_pushboolean(L, get()->get_display_flag(Interactive_Base::dfShowCensus));
+	return 1;
+}
+int L_MapView::set_census(lua_State * L) {
+	get()->set_display_flag
+		(Interactive_Base::dfShowCensus, luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+	.. attribute:: statistics
+
+		(RW) True if the statistics strings are shown on buildings, false
+		otherwise
+*/
+int L_MapView::get_statistics(lua_State * L) {
+	lua_pushboolean(L, get()->get_display_flag
+			(Interactive_Base::dfShowStatistics));
+	return 1;
+}
+int L_MapView::set_statistics(lua_State * L) {
+	get()->set_display_flag
+		(Interactive_Base::dfShowStatistics, luaL_checkboolean(L, -1));
+	return 0;
+}
 
 /*
  * Lua Functions

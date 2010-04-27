@@ -188,6 +188,10 @@ public:
 	int set_viewpoint_y(lua_State *);
 	int get_buildhelp(lua_State * L);
 	int set_buildhelp(lua_State * L);
+	int get_census(lua_State * L);
+	int set_census(lua_State * L);
+	int get_statistics(lua_State * L);
+	int set_statistics(lua_State * L);
 
 	/*
 	 * Lua Methods

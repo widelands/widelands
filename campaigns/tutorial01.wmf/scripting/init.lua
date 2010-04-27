@@ -216,6 +216,8 @@ function build_a_quarry()
 
    msg_box(talk_about_roadbuilding_02)
    
+   msg_box(census_and_statistics)
+
    -- TODO: Add information about census and statistics here
    
    while #plr:get_buildings("quarry") < 1 do sleep(1400) end
