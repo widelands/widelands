@@ -75,6 +75,9 @@ m_value(this, 0, 0, _("xx"), UI::Align_Center)
 	add(&m_value, AlignCenter);
 	add(&m_increase, AlignCenter);
 
+	m_decrease.set_repeating(true);
+	m_increase.set_repeating(true);
+
 	set_think(true);
 }
 
