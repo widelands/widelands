@@ -290,13 +290,13 @@ function messages()
       local remove_field = true
 
       if f.immovable then
-         temp, temp, n = f.immovable.name:find("stones(%d*)")
+         local n = f.immovable.name:match("stones(%d*)")
          if n then
-            n = n + 0 -- trick to convert string to integer
+            n = tonumber(n)
             f.immovable:remove()
             if n > 1 then 
                remove_field = false
-               wl.map.create_immovable(("stones%i"):format(n-1), f)
+               wl.map.create_immovable("stones" .. n-1, f)
                sleep(150)
             end
          end
@@ -337,4 +337,3 @@ function conclusion()
 end
 
 run(starting_infos)
-
