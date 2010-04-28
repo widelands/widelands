@@ -96,11 +96,9 @@ function block_mouse_for(time)
    
    function _thread()
       while wl.game.get_time() < wait_till do
-         print "Freezing!"
-
          wl.ui.MapView().mouse_position_x = x
          wl.ui.MapView().mouse_position_y = y
-         sleep(200)
+         sleep(20)
       end
    end
    run(_thread)
@@ -153,18 +151,22 @@ function bad_boy_sentry()
    end
 end
    
--- TODO: this needs to be done better, but a wrapping of the constructionsite
--- is needed for this. 
--- TODO: check that the constructionsite is indeed for the correct building
-function allow_constructionsite(i)
+-- Allows constructionsites for the given buildings, all others are invalid
+-- as is any other immovable build by the player
+function allow_constructionsite(i, buildings)
    if i.type == "constructionsite" then
-      return i
+      if not buildings then return i end
+      for idx,n in ipairs(buildings) do
+         if i.building == n then return i end
+      end
+      return false
    elseif i.type == "flag" then
       local tr = i.fields[1].tln.immovable
       if tr and tr.type == "constructionsite" then
-         return tr
+         return allow_constructionsite(tr, buildings)
       end
    end
+
    return false
 end
 
@@ -277,7 +279,7 @@ function build_a_quarry()
    local cs = nil
    -- Wait for the constructionsite to come up.
    illegal_immovable_found = function(i)
-      cs = allow_constructionsite(i, "quarry")
+      cs = allow_constructionsite(i, {"quarry"})
       return cs
    end
 
@@ -459,4 +461,5 @@ function conclusion()
 end
 
 run(bad_boy_sentry)
-run(starting_infos)
+-- run(starting_infos)
+run(build_a_quarry)
