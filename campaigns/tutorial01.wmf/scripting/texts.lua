@@ -32,6 +32,16 @@ end
 -- =============
 -- Textes below
 -- =============
+scould_player = {
+   title = _ "Nice and easy does it all the time",
+   body = rt(p(_
+[[Not so hasty, my friend. If I am too slow for you, you might want to play a
+a real game and just find everything for yourself. Please bear with me, I
+am not the youngest and quickest anymore.]]
+      )
+   )
+}
+
 initial_message_01 = {
    title = _ "Welcome to the Widelands tutorial!",
    body = rt(
