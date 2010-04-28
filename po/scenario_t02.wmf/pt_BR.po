@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-21 17:46+0000\n"
-"PO-Revision-Date: 2010-04-22 19:00+0000\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-04-27 18:32+0000\n"
 "Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-23 03:42+0000\n"
+"X-Launchpad-Export-Date: 2010-04-28 03:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
@@ -33,6 +33,10 @@ msgid ""
 "dangerous as ours!<br> We need a wood hardener, and we need one "
 "now!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Como eu só descobri, estamos ficando sem jacarandá! Não podemos deixar "
+"nossos guerreiros em cabanas em ruínas, e muito menos em tempos tão "
+"perigosos como o nosso!<br> Precisamos de um endurecedor de madeira, e "
+"precisamos agora!\"<br><br>-- NOVO OBJECTIVO --<br> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid " \"At last! These rocks should last for a while.\" "
@@ -55,6 +59,9 @@ msgid ""
 " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use "
 "this coal and iron ore for!<br> It might even be enough to...\" "
 msgstr ""
+" \"Pelas barbas de Chat'Karuth, isto é incrível! Imagine o que poderíamos "
+"fazer com este carvão e minério de ferro!<br> Poderia até mesmo ser "
+"suficiente para...\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:212
 msgid ""
@@ -72,6 +79,10 @@ msgid ""
 "with you. The rocks close to our camp are shrinking fast under our workers' "
 "tools, and it is a matter of little time only before they are all gone.\" "
 msgstr ""
+" \"Eu imploro vosso perdão, cacique, mas eu tenho um assunto grave a "
+"discustir com vós. As rochas próximas ao nosso acampamento estão acabando "
+"velozmente sob nossas ferramentas, e será questão de pouco tempo antes de "
+"que estejam todas acabadas.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:124
 msgid ""
@@ -100,7 +111,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:76
 msgid " \"Old man? Disrespectful youth!\" "
-msgstr ""
+msgstr " \"Velhote? Jovem sem respeito!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:238
 msgid ""
@@ -111,6 +122,12 @@ msgid ""
 "anything but ashes and wasted ruins left of our once beautiful capital when "
 "we get there?\" "
 msgstr ""
+" \"Uma noite, quando a lua brilhava, subi ao pico de Kal'mavrath. <br> "
+"Quando eu olhei para o horizonte, eu ainda vi as luzes tremeluzirem "
+"carmesins ao longe. É incrível com que paixão meus irmãos entram em batalha. "
+"Eu receio o momento que verei Al'thunran novamente - não haverá nada, "
+"somente cinzas e ruínas devastadas de nossa antes bela capital quando "
+"chegarmos lá?\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:144
 msgid ""
@@ -118,6 +135,9 @@ msgid ""
 "sun sets today you will have a magnificient meal fit for the chieftain of "
 "all clans!\" "
 msgstr ""
+" \"Nossos caçadores estão nas florestas, Thron.<br> Eu te prometo, antes que "
+"o sol se ponha hoje você terá uma magnífica refeição feita para o cacique de "
+"todos os nossos clãs!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:181
 msgid ""
@@ -168,6 +188,14 @@ msgid ""
 "throne between the trees, the symbol of unity and peace among our kin became "
 "the wedge that drives us apart.\" "
 msgstr ""
+" \"A guerra continua. Cada vez mais de nossos irmãos e irmãs fugem da guerra "
+"brutal que assola a capital sob as árvores. <br> As histórias que eles "
+"contam sobre os feitos de nosso povo é triste de se ouvir. Eu passei várias "
+"noites acordado deitado, inquieto, mais cansado do que jamais imaginei que "
+"poderia estar. Mas sempre que eu fecho meus olhos, vejo a fortaleza que o "
+"meu pai construiu consumida pelas chamas. O trono entre as árvores, o "
+"símbolo da unidade e da paz entre nossos parentes tornou-se a cunha que nos "
+"separa.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:247
 msgid ""
@@ -301,6 +329,12 @@ msgid ""
 "obtain water by building a well at a spot where your Geologists find a water "
 "source."
 msgstr ""
+"* Construir um poço, uma fazenda e uma padaria. <br> Outras formas de "
+"produção de alimentos - diferentes tipos de alimentos - são pescadores e "
+"caçadores. O trigo das explorações tem de ser processada com água em uma "
+"padaria antes de se tornar comestível. Você pode obter água através da "
+"construção de um poço em um ponto onde seu geólogos encontrem uma fonte de "
+"água."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:192
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:369
@@ -318,6 +352,9 @@ msgid ""
 "* Build military buildings (like sentries and strongholds) to expand your "
 "territory.<br> Get to the rocks northeast from you and build a quarry there."
 msgstr ""
+"* Construa edifícios militares (como sentinelas e fortalezas) para expandir "
+"o seu território. <br> Vá as rochas a nordeste de você e construa uma "
+"pedreira ali."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:182
 msgid ""
@@ -399,7 +436,7 @@ msgstr "Boldreth assente..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:169
 msgid "Boldreth remarks..."
-msgstr ""
+msgstr "Boldreth observa..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:189
 msgid "Boldreth seems concerned..."
@@ -423,7 +460,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:367
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Construa um endurecedor de madeira"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:347
 msgid "Enhance Buildings"
@@ -431,7 +468,7 @@ msgstr "Melhore os Edifícios"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:265
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Expanda a nordeste e construa uma pedreira"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:151
 msgid "Khantrukh gazes over the plains..."
@@ -439,7 +476,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:74
 msgid "Khantrukh grumbles..."
-msgstr ""
+msgstr "Khantrukh resmunga..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:112
 msgid "Khantrukh interrupts..."
@@ -447,11 +484,11 @@ msgstr "Khantrukh interrompe..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:51
 msgid "Khantrukh joins the both of you..."
-msgstr ""
+msgstr "Khantrukh junta-se a vocês dois..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Khantrukh nods satisfied..."
-msgstr ""
+msgstr "Khantrukh acena satisfeito ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:220
 msgid "Khantrukh seems relieved..."
@@ -475,11 +512,11 @@ msgstr "Uma noite de lua cheia"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:292
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Forneça alimentos a seu mineiros"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:339
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Refine seus recursos extraídos"
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -490,7 +527,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:284
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Comece a construir minas na montanha"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:48
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:70
@@ -506,7 +543,7 @@ msgstr "O assessor"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:132
 msgid "The elder jumps into the air..."
-msgstr ""
+msgstr "O mais velho salta no ar..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:7
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:18

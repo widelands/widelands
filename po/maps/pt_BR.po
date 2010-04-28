@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-21 17:46+0000\n"
-"PO-Revision-Date: 2010-04-22 22:30+0000\n"
-"Last-Translator: Vitor <Unknown>\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-04-27 18:51+0000\n"
+"Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-24 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-04-28 03:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:24
@@ -124,7 +124,7 @@ msgstr "Cratera"
 msgid "Dry Riverbed"
 msgstr "Leito de rio seco"
 
-#: ../../maps/Four Mountains.wmf/elemental:11
+#: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
@@ -191,7 +191,7 @@ msgstr ""
 msgid "Four Castles"
 msgstr "Quatro Castelos"
 
-#: ../../maps/Four Mountains.wmf/elemental:9
+#: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
 msgstr "Quatro Montanhas"
 
@@ -238,6 +238,9 @@ msgid ""
 "these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
 "Geologists elsewhere."
 msgstr ""
+"Diz-se que até mesmo o sol e a lua devem encontrar seu caminho entre as "
+"torres destas montanhas. DICA: Monolitos marcam pontos de minério. Não perca "
+"tempo enviando Geólogos em outro lugar."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -300,12 +303,15 @@ msgid ""
 "connects the valleys and thus a fight seems inescapable! Hint: Water can be "
 "found around the lakes."
 msgstr ""
+"Poderosas montanhas dividem a terra em três vales férteis. Mas um caminho "
+"liga os vales e, portanto, uma luta parece inevitável! DICA: A água pode ser "
+"encontrada ao redor dos lagos."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
 msgstr "Labirinto Místico"
 
-#: ../../maps/Rendez-Vous.wmf/elemental:11
+#: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army right away to this hill and build a giant stronghold "
@@ -319,9 +325,9 @@ msgstr ""
 "existe espaço para uma fortaleza. Água pode ser encontrada lá, então não há "
 "necessidade de enviar geólogos."
 
-#: ../../maps/Rendez-Vous.wmf/elemental:9
+#: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
-msgstr ""
+msgstr "Encontro"
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
@@ -339,6 +345,16 @@ msgid ""
 "unprepared army was attacked by 100 barbarian footmen and was completely "
 "scattered. Only with his bare life he and a handful of his soldiers survived."
 msgstr ""
+"Seis meses atrás, Lutius - um jovem general do Império - foi enviado com 150 "
+"soldados para a fronteira além das florestas do norte, onde terras oficiais "
+"do Império e tribos bárbaras se cruzam. Sua tarefa era defender a terra do "
+"Império. No início, tudo estava calmo. Ele até conversou com algumas "
+"crianças bárbaras e pensou em uma vida tranquila - lado a lado com essa "
+"gente arcaica. Ele começou a se sentir mais seguro e seu exército começou a "
+"cair a sua atenção para o inimigo potencial. Essa foi sua falha. Em uma "
+"noite de março o seu exército despreparado foi atacado por 100 homens de "
+"infantaria dos bárbaros, e foi completamente disperso. Somente com suas "
+"vidas ele e um punhado de seus soldados sobreviveram."
 
 #: ../../campaigns/cconfig:39
 msgid "Some descriptive texts..."
@@ -405,10 +421,12 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt of taking them for themselves."
 msgstr ""
+"A beleza de tirar o fôlego destas terras esmeraldinas tem atraído muitas "
+"tribos em uma tentativa de tomá-los para si."
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
-msgstr ""
+msgstr "O longo caminho"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The pass through the mountains"
@@ -419,6 +437,8 @@ msgid ""
 "There are two big questions around: Who created this unbelievably big maze "
 "and what can be found inside?"
 msgstr ""
+"Há duas grandes questões aqui: quem criou este labirinto incrivelmente "
+"grande e que pode ser encontrado em seu interior?"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid ""
@@ -426,6 +446,9 @@ msgid ""
 "oases, which no one found out about yet. Perhaps you will be the one, but be "
 "aware of the others, who are searching too!"
 msgstr ""
+"Há algo de místico, como uma atmosfera cinzenta, em torno destes três oásis, "
+"que ninguém descobriu ainda. Talvez você seja o único, mas esteja ciente de "
+"outros, que estão pesquisando também!"
 
 #: ../../maps/Finlakes.wmf/elemental:11
 msgid ""
@@ -444,6 +467,12 @@ msgid ""
 "only this ring is left from that mighty firemountain. Do you think, that it "
 "is big enough for more than one tribe?"
 msgstr ""
+"Esta ilha saiu do canto mais profundo do mar. Naqueles dias, o fogo passou "
+"jorrou da água salgada do mar e trouxe cinzas, pedras e terra para a luz do "
+"dia. E o fogo se aproximou mais e mais perto do sol, enquanto a montanha "
+"crescia e crescia. Até que um dia, quando a montanha de fogo explodiu. Hoje "
+"em dia este é apenas um anel que resta da poderosa montanha de fogo. Você "
+"acha que é grande o suficiente para mais de uma tribo?"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid ""
@@ -473,7 +502,7 @@ msgstr "Tutorial3 - Esta terra é nossa terra"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
-msgstr ""
+msgstr "Ondas Cintilantes"
 
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
