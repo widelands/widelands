@@ -232,6 +232,7 @@ tab first to find it. Go on, check it out!]]
 
 talk_about_roadbuilding_00 = {
    pos = "topright",
+   field = wl.map.Field(9,12),
    title = _ "Road building",
    body = rt(p(_
 [[Excellent! Directly after you placed a building, you are in road building
@@ -254,6 +255,7 @@ road takes like so:]]
 
 talk_about_roadbuilding_01 = {
    pos = "topright",
+   field = wl.map.Field(9,12),
    title = _ "Road building",
    body = rt(p(_
 [[Alternatively, you can directly click the flag where

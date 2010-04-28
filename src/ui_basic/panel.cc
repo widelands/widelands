@@ -31,6 +31,11 @@ namespace UI {
 Panel * Panel::_modal       = 0;
 Panel * Panel::_g_mousegrab = 0;
 Panel * Panel::_g_mousein   = 0;
+
+// The following variable can be set to false. If so, all mouse and keyboard
+// events are ignored and not passed on to any widget. This is only useful
+// for scripts that want to show off functionality without the user interfering.
+bool Panel::_g_allow_user_input = true;
 PictureID Panel::s_default_cursor = g_gr->get_no_picture();
 
 
@@ -824,6 +829,9 @@ inline Panel * Panel::child_at_mouse_cursor
  */
 void Panel::do_mousein(bool const inside)
 {
+	if (not _g_allow_user_input)
+		return;
+
 	if (!inside && _mousein) {
 		_mousein->do_mousein(false);
 		_mousein = false;
@@ -837,6 +845,9 @@ void Panel::do_mousein(bool const inside)
  * Returns whether the event was processed.
  */
 bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
+	if (not _g_allow_user_input)
+		return true;
+
 	x -= _lborder;
 	y -= _tborder;
 	if (_flags & pf_top_on_click)
@@ -851,6 +862,9 @@ bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	return handle_mousepress(btn, x, y);
 }
 bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
+	if (not _g_allow_user_input)
+		return true;
+
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this)
@@ -866,6 +880,9 @@ bool Panel::do_mousemove
 	(Uint8 const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
+	if (not _g_allow_user_input)
+		return true;
+
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this)
@@ -886,6 +903,9 @@ bool Panel::do_mousemove
  */
 bool Panel::do_key(bool const down, SDL_keysym const code)
 {
+	if (not _g_allow_user_input)
+		return true;
+
 	if (_focus) {
 		if (_focus->do_key(down, code))
 			return true;
@@ -950,10 +970,16 @@ Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
  * panel.
 */
 void Panel::ui_mousepress(const Uint8 button, int32_t x, int32_t y) {
+	if (not _g_allow_user_input)
+		return;
+
 	if (Panel * const p = ui_trackmouse(x, y))
 		p->do_mousepress(button, x, y);
 }
 void Panel::ui_mouserelease(const Uint8 button, int32_t x, int32_t y) {
+	if (not _g_allow_user_input)
+		return;
+
 	if (Panel * const p = ui_trackmouse(x, y))
 		p->do_mouserelease(button, x, y);
 }
@@ -966,6 +992,9 @@ void Panel::ui_mousemove
 	(Uint8 const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
+	if (not _g_allow_user_input)
+		return;
+
 	if (!xdiff && !ydiff)
 		return;
 
@@ -988,6 +1017,9 @@ void Panel::ui_mousemove
  */
 void Panel::ui_key(bool const down, SDL_keysym const code)
 {
+	if (not _g_allow_user_input)
+		return;
+
 	_modal->do_key(down, code);
 }
 

@@ -301,7 +301,7 @@ void Interactive_Base::think()
 	// If one of the arrow keys is pressed, scroll here
 	const uint32_t scrollval = 10;
 
-	if (keyboard_free()) {
+	if (keyboard_free() && Panel::allow_user_input()) {
 		if (get_key_state(SDLK_UP))
 			set_rel_viewpoint(Point(0, -scrollval));
 		if (get_key_state(SDLK_DOWN))

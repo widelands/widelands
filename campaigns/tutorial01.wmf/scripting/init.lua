@@ -40,6 +40,7 @@ use("map", "texts")
 -- =================
 function msg_box(i)
    wl.game.set_speed(1000)
+   local user_input_state = wl.ui.get_user_input_allowed()
 
    if i.field then
       scroll_smoothly_to(i.field.trn.trn.trn.trn)
@@ -55,7 +56,11 @@ function msg_box(i)
       i.posy = 0
    end
 
+   wl.ui.set_user_input_allowed(true)
+
    plr:message_box(i.title, i.body, i)
+
+   wl.ui.set_user_input_allowed(user_input_state)
 
    sleep(130)
 end
@@ -67,14 +72,22 @@ function send_message(i)
 end
    
 function click_on_field(f, g_T)
-   sleep(500)
+   local user_input_state = wl.ui.get_user_input_allowed()
+   wl.ui.set_user_input_allowed(false)
+
    mouse_smoothly_to(f, g_T)
    sleep(500)
+
    wl.ui.MapView():click(f)
    sleep(500)
+
+   wl.ui.set_user_input_allowed(user_input_state)
 end
 
 function click_on_panel(panel, g_T)
+   local user_input_state = wl.ui.get_user_input_allowed()
+   wl.ui.set_user_input_allowed(false)
+
    sleep(500)
    if not panel.active then -- If this is a tab and already on, do nothing
       mouse_smoothly_to_panel(panel, g_T)
@@ -83,6 +96,8 @@ function click_on_panel(panel, g_T)
       if panel.click then panel:click() end
       sleep(500)
    end
+
+   wl.ui.set_user_input_allowed(user_input_state)
 end
    
 -- Remove all stones in a given environment. This is done
@@ -111,26 +126,6 @@ function remove_all_stones(fields, g_sleeptime)
          table.remove(fields, idx)
       end
    end
-end
-
--- ===================
--- Block mouse thread 
--- ===================
--- Keep the mouse at a given position without given the user a chance to mouse
--- away
-function block_mouse_for(time) 
-   local wait_till = wl.game.get_time() + time
-   local x = wl.ui.MapView().mouse_position_x
-   local y = wl.ui.MapView().mouse_position_y
-   
-   function _thread()
-      while wl.game.get_time() < wait_till do
-         wl.ui.MapView().mouse_position_x = x
-         wl.ui.MapView().mouse_position_y = y
-         sleep(20)
-      end
-   end
-   run(_thread)
 end
 
 -- ==============
@@ -226,10 +221,12 @@ function build_lumberjack()
 
    msg_box(lumberjack_message_01)
 
+   wl.ui.set_user_input_allowed(false)
+
+   scroll_smoothly_to(first_lumberjack_field)
    mouse_smoothly_to(first_lumberjack_field)
    sleep(500)
    msg_box(lumberjack_message_02)
-
    sleep(500)
 
    click_on_field(first_lumberjack_field)
@@ -251,16 +248,22 @@ function build_lumberjack()
 
    illegal_immovable_found = function(i) return false end
 
+   wl.ui.set_user_input_allowed(true)
+
    sleep(15000)
    
    msg_box(lumberjack_message_05)
+
+   wl.ui.set_user_input_allowed(false)
    
    local f = wl.map.Field(14,11)
+   scroll_smoothly_to(f)
    mouse_smoothly_to(f)
+   
+   wl.ui.set_user_input_allowed(true)
    
    -- Wait for flag
    while not (f.immovable and f.immovable.type == "flag") do sleep(300) end
-
 
    sleep(300)
    
@@ -328,6 +331,8 @@ function build_a_quarry()
       end
    end
 
+   wl.ui.set_user_input_allowed(false)
+
    illegal_immovable_found = function() return true end
 
    msg_box(talk_about_roadbuilding_00)
@@ -338,7 +343,6 @@ function build_a_quarry()
    click_on_field(wl.map.Field(12,12))
    click_on_field(wl.map.Field(12,11))
    
-   block_mouse_for(3000)
    sleep(3000)
 
    _rip_road()
@@ -349,11 +353,11 @@ function build_a_quarry()
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
    click_on_field(plr.starting_field.brn)
    
-   block_mouse_for(3000)
    sleep(3000)
 
    _rip_road()
 
+   wl.ui.set_user_input_allowed(true)
 
    msg_box(talk_about_roadbuilding_02)
    
@@ -390,6 +394,8 @@ end
 function census_and_statistics(cs)
    sleep(25000)
    
+   wl.ui.set_user_input_allowed(false)
+
    wl.ui.MapView().census = false
    wl.ui.MapView().statistics = false
   
@@ -413,7 +419,8 @@ function census_and_statistics(cs)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.statistics)
 
    msg_box(census_and_statistics_01)
-
+   
+   wl.ui.set_user_input_allowed(true)
 end
 
 function messages()

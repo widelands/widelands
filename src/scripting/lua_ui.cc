@@ -622,7 +622,37 @@ int L_MapView::click(lua_State * L) {
  * ========================================================================
  */
 
+/* RST
+.. function:: set_user_input_allowed(b)
+
+	Allow or disallow user input. Be warned, setting this will make that
+	mouse movements and keyboard presses are completely ignored. Only
+	scripted stuff will still happen.
+
+	:arg b: :const:`true` or :const:`false`
+	:type b: :class:`boolean`
+*/
+static int L_set_user_input_allowed(lua_State * L) {
+	UI::Panel::set_allow_user_input(luaL_checkboolean(L, -1));
+	return 0;
+}
+/* RST
+.. method:: get_user_input_allowed
+
+	Return the current state of this flag.
+
+	:returns: :const:`true` or :const:`false`
+	:rtype: :class:`boolean`
+*/
+static int L_get_user_input_allowed(lua_State * L) {
+	lua_pushboolean(L, UI::Panel::allow_user_input());
+	return 1;
+}
+
+
 const static struct luaL_reg wlui [] = {
+	{"set_user_input_allowed", &L_set_user_input_allowed},
+	{"get_user_input_allowed", &L_get_user_input_allowed},
 	{0, 0}
 };
 
