@@ -79,6 +79,15 @@ at the bottom of the screen which is the fourth one from the left. Or you
 can use the SPACE key to toggle it.]]
       )
    ),
+   obj_name = "enable_buildhelp",
+   obj_title = _ "Enable the build help",
+   obj_body = rt(h1(_"Enable the build help") .. 
+      p(
+[[It is easier to understand what is allowed to be build on which field when
+the build help symbols are enabled. Do so now either by pressing SPACE or by
+clicking the fourth button from the left at the very bottom of the screen.]]
+      )
+   )
 }
 
 lumberjack_message_01 = {
@@ -139,6 +148,14 @@ We can make it easier for him (and more efficient for us) when we place another
 flag on the road. You try it this time: click on the yellow flag symbol
 in between the two blue flags we just placed and then click on the]]
       )) .. rt("image=pics/menu_build_flag.png", p(_ "build flag symbol.")
+   ),
+   obj_name = "build_flag_on_road_to_lumberjack",
+   obj_title = _ "Build a flag to divide the road to the lumberjack",
+   obj_body = rt(h1(_"Build a flag on the road") .. p(_
+[[The shorter your road segments are, the faster your wares will be transported.
+You should therefore make sure that your roads have as many flags as possible. 
+Build a flag now in the middle of the road that connects your headquarters
+to your lumberjack's hut.]])
    )
 }
 
@@ -177,6 +194,16 @@ move your view over there.]]
 on your keyboard. Go ahead and try this out, move the view using the cursor
 keys]]
       )
+   ),
+   obj_name = "move_view_with_cursor_keys",
+   obj_title = _ "Move your view with the cursor keys",
+   obj_body = rt(h1(_"Moving your view") .. p(_
+[[Moving your view is essential to get a complete overview over your whole
+economy. There are two ways to move your view in widelands. The first one is
+to use the cursor keys on your keyboard. The second one is the more common and
+faster one: press-and-hold the right mouse button anywhere on the map, then move
+your mouse around and you'll see the view scroll.]]
+      )
    )
 }
 
@@ -187,13 +214,16 @@ tell_about_right_drag_move = {
 right-click-and-hold anywhere on the map, then drag the mouse and instead
 of the cursor, the view will be moved. Try it.]]
       )
-   )
+   ),
+   obj_name = "move_view_with_mouse",
+   obj_title = _ "Move your view with the mouse",
+   obj_body = inform_about_stones.obj_body,
 }
 
 congratulate_and_on_to_quarry = {
    title = _ "Onward to the quarry",
    body = rt(p(_
-[[Great. Now about the quarry...]]
+[[Great. Now about that quarry...]]
       )
    )
 }
@@ -226,6 +256,17 @@ eases recognition:]]
 [[Now go ahead, try it. The quarry is a small building, so if you click on a
 medium or big building symbol, you will have to select the small buildings
 tab first to find it. Go on, check it out!]]
+      )
+   ), 
+   obj_name = "build_a_quarry",
+   obj_title = _ "Build a quarry next to the stones",
+   obj_body = rt(h1(_ "Build a quarry") .. p(_
+[[There are some stones to the west of your headquarters. Build a quarry right
+next to them. The quarry is a small building like the lumberjack's hut. You
+can therefore build it on any field that shows a red, yellow or green house
+when the build help is enabled (Press SPACE for that).]]) .. p(_
+[[Just click on any house symbol next to the stones, select the small buildings
+tab in the window that opens up, then click on the quarry symbol.]]
       )
    )
 }
@@ -284,7 +325,17 @@ many flags as you can on road segments to share the load better.]]
    )) .. rt(p(_
 [[Now please rebuild the road between your quarry and your headquarters.
 We'll wait until the quarry is completed.]]
-   ))
+   )),
+   obj_name = "build_road_to_quarry",
+   obj_title = _ "Connect the quarry to the headquarters",
+   obj_body = rt(h1(_"Connect your construction site") .. p(_
+[[Connect your quarry construction site to your headquarters with a road. You
+are directly in road building mode when you ordered a new site. But now, you
+aren't. To build a completely new road just click on the flag in front of your
+construction site, click on the build road icon then click on the flag in front
+of your headquarters.]]
+      )
+   )
 }
 
 census_and_statistics_00 = {
@@ -340,8 +391,22 @@ that they get a tick-symbol in front of them. Then, you can click the]]
 [[Archive all messages, including this one, that you currently have in your
  inbox.]]
       )
+   ),
+   obj_name = "archive_all_messages",
+   obj_title = _"Archive all messages in your inbox",
+   obj_body = rt(h1(_"Archive our inbox messages") .. p(_
+[[The message window is central to fully control your tribe's fortune. But you
+get a lot of messages in a real game. To keep your head straight, you should
+try to keep the inbox empty. Archive all your messages in the inbox now. To do
+so, open the messages window by pressing 'n' or clicking the right most button
+at the very bottom of the screen. Then mark all messages by checking the check
+box in front of them. Then, click the archive all button]]
+      )
    )
 }
+
+-- TODO: objectives in messages do not work yet!
+-- TODO: no objectives below this point yet
 
 closing_msg_window_00 = {
    pos = "topright",

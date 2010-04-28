@@ -62,7 +62,15 @@ function msg_box(i)
 
    wl.ui.set_user_input_allowed(user_input_state)
 
+   -- Create an objective, if there is any attached
+   local o = nil
+   if i.obj_name then
+      o = plr:add_objective(i.obj_name, i.obj_title, i.obj_body)
+   end
+
    sleep(130)
+
+   return o
 end
 
 function send_message(i)
@@ -202,12 +210,16 @@ function starting_infos()
 
    msg_box(initial_message_01)
    sleep(500)
-   msg_box(initial_message_02)
+
+   local o = msg_box(initial_message_02)
+
 
    -- Wait for buildhelp to come on
    while not wl.ui.MapView().buildhelp do
       sleep(200)
    end
+   o.done = true
+
    sleep(500)
 
    build_lumberjack()
@@ -252,7 +264,7 @@ function build_lumberjack()
 
    sleep(15000)
    
-   msg_box(lumberjack_message_05)
+   local o = msg_box(lumberjack_message_05)
 
    wl.ui.set_user_input_allowed(false)
    
@@ -264,6 +276,7 @@ function build_lumberjack()
    
    -- Wait for flag
    while not (f.immovable and f.immovable.type == "flag") do sleep(300) end
+   o.done = true
 
    sleep(300)
    
@@ -278,7 +291,7 @@ end
 
 function learn_to_move()
    -- Teaching the user how to scroll on the map
-   msg_box(inform_about_stones)
+   local o = msg_box(inform_about_stones)
    
    function _wait_for_move()
       local cx = wl.ui.MapView().viewpoint_x
@@ -290,11 +303,13 @@ function learn_to_move()
    end
 
    _wait_for_move()
+   o.done = true
    sleep(3000) -- Give the player a chance to try this some more
 
-   msg_box(tell_about_right_drag_move)
+   o = msg_box(tell_about_right_drag_move)
 
    _wait_for_move()
+   o.done = true
    sleep(3000) -- Give the player a chance to try this some more
    
    msg_box(congratulate_and_on_to_quarry)
@@ -306,7 +321,7 @@ function build_a_quarry()
    sleep(200)
 
    -- Teaching how to build a quarry and the nits and knacks of road building.
-   msg_box(order_quarry_recap_how_to_build)
+   local o = msg_box(order_quarry_recap_how_to_build)
 
    local cs = nil
    -- Wait for the constructionsite to come up.
@@ -317,6 +332,7 @@ function build_a_quarry()
 
    -- Wait for the constructionsite to be placed
    while not cs do sleep(300) end
+   o.done = true
    register_immovable_as_allowed(cs)
 
    local function _rip_road()
@@ -359,7 +375,7 @@ function build_a_quarry()
 
    wl.ui.set_user_input_allowed(true)
 
-   msg_box(talk_about_roadbuilding_02)
+   local o = msg_box(talk_about_roadbuilding_02)
    
    -- Wait till a road is placed to the constructionsite
    local found_road = false
@@ -381,6 +397,8 @@ function build_a_quarry()
    end
 
    while not found_road do sleep(300) end
+   o.done = true
+
    illegal_immovable_found = function() return false end
 
    -- Interludium: talk about census and statistics
@@ -427,9 +445,11 @@ function messages()
    -- Teach the player about receiving messages
    sleep(10)
 
-   send_message(teaching_about_messages)
+   local o = send_message(teaching_about_messages)
 
    while #plr.inbox > 0 do sleep(200) end
+   o.done = true
+
    sleep(500)
 
    msg_box(closing_msg_window_00)
