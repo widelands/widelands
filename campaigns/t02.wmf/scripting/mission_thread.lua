@@ -3,7 +3,7 @@
 -- =======================================================================
 
 use("map", "mission_thread_texts")
-use("aux", "smooth_move")
+use("aux", "ui")
 use("aux", "table")
 
 quarry_done = false
@@ -41,15 +41,13 @@ function introduction_thread()
 
    local rocks = wl.map.Field(27, 48)
    p:reveal_fields(rocks:region(6))
-   pts = smooth_move(rocks, p, 3000)
-   sleep(3000)
+   pts = scroll_smoothly_to(rocks, 3000)
 
    send_msg(order_msg_3)
    send_msg(order_msg_4)
 
    -- Move back to HQ
-   timed_move(array_reverse(pts), p, 10)
-   sleep(1000)
+   timed_scroll(array_reverse(pts), 10)
 end
 
 -- ==================================
@@ -198,20 +196,19 @@ function village_thread()
 
    reveal_village()
 
-   pts = smooth_move(wl.map.Field(55, 25), p, 3000)
-   sleep(3000)
+   pts = scroll_smoothly_to(wl.map.Field(55, 25), 3000)
 
    send_msg(msg_village)
 
-   timed_move(array_reverse(pts), p, 10)
+   timed_scroll(array_reverse(pts), 10)
    sleep(1500)
 end
 
 
 --[[
    This is a village of poor but friendly people who have settled in a safe
-   valley between two glaciers. They hunt and produce timber and grain but they do
-   not have ores or even stones, so they are dependent on the infrequent
+   valley between two glaciers. They hunt and produce timber and grain but they
+   do not have ores or even stones, so they are dependent on the infrequent
    merchant that may pass by and provide them with whatever they can not
    produce on their own. Their only protection is a guard hut at each entrance
    to the valley. Therefore they realize that they may have to join a more

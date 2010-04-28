@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-21 17:46+0000\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -376,11 +376,6 @@ msgid ""
 "Fisher's Hut"
 msgstr ""
 
-#: ../../tribes/barbarians/fisher/conf:1
-msgid ""
-"Fishes in the sea."
-msgstr ""
-
 #: ../../tribes/barbarians/conf:82
 msgid ""
 "Fishing Rod"
@@ -440,6 +435,11 @@ msgstr ""
 #: ../../tribes/barbarians/conf:133
 msgid ""
 "Geologist"
+msgstr ""
+
+#: ../../tribes/barbarians/fisher/conf:1
+msgid ""
+"Gets fish out of the sea."
 msgstr ""
 
 #: ../../tribes/barbarians/conf:84

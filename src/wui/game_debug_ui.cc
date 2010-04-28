@@ -103,7 +103,7 @@ void Widelands::Map_Object::create_debug_panels
 	(Widelands::Editor_Game_Base const & egbase, UI::Tab_Panel & tabs)
 {
 	tabs.add
-		(g_gr->get_picture(PicMod_Game, "pics/menu_debug.png"),
+		("debug", g_gr->get_picture(PicMod_Game, "pics/menu_debug.png"),
 		 new MapObjectDebugPanel(tabs, egbase, *this));
 }
 
@@ -143,11 +143,12 @@ private:
 MapObjectDebugWindow::MapObjectDebugWindow
 	(Interactive_Base & parent, Widelands::Map_Object & obj)
 	:
-	UI::Window        (&parent, 0, 0, 100, 100, ""),
+	UI::Window        (&parent, "map_object_debug", 0, 0, 100, 100, ""),
 	m_log_general_info(true),
 	m_object          (&obj),
 	m_tabs
-		(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"))
+		(this, 0, 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"))
 {
 	char buffer[128];
 
@@ -231,7 +232,7 @@ private:
 FieldDebugWindow::FieldDebugWindow
 	(Interactive_Base & parent, Widelands::Coords const coords)
 :
-	UI::Window(&parent, 0, 60, 214, 400, _("Debug Field")),
+	UI::Window(&parent, "field_debug", 0, 60, 214, 400, _("Debug Field")),
 	m_map     (parent.egbase().map()),
 	m_coords  (m_map.get_fcoords(coords)),
 
@@ -239,7 +240,7 @@ FieldDebugWindow::FieldDebugWindow
 	m_ui_field(this, 0, 0, 214, 280, ""),
 
 	m_ui_immovable
-		(this,
+		(this, "immovable",
 		 0, 280, 214, 24,
 		 g_gr->get_no_picture(),
 		 &FieldDebugWindow::open_immovable, *this,

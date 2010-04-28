@@ -86,7 +86,7 @@ m_pit     (pit)
 				  parent.get_inner_h() - 50);
 			box->layout();
 			box->set_scrolling(true);
-			m_tabpanel.add(tab_icon, box);
+			m_tabpanel.add("immovables", tab_icon, box);
 		}
 		assert(box);
 

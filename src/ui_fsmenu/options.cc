@@ -47,21 +47,21 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 // Buttons
 	m_advanced_options
-		(this,
+		(this, "advanced_options",
 		 m_xres * 9 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_Options::advanced_options, *this,
 		 _("Advanced Options"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_cancel
-		(this,
+		(this, "cancel",
 		 m_xres * 51 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_Options::end_modal, *this, om_cancel,
 		 _("Cancel"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_apply
-		(this,
+		(this, "apply",
 		 m_xres * 3 / 8, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_Options::end_modal, *this, om_ok,
@@ -377,14 +377,14 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 
 // Buttons
 	m_cancel
-		(this,
+		(this, "cancel",
 		 m_xres * 41 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_Advanced_Options::end_modal, *this, om_cancel,
 		 _("Cancel"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_apply
-		(this,
+		(this, "apply",
 		 m_xres / 4,   m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_Advanced_Options::end_modal, *this, om_ok,

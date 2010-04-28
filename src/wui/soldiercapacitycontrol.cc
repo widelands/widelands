@@ -59,12 +59,12 @@ Box(parent, 0, 0, Horizontal),
 m_igb(igb),
 m_building(building),
 m_decrease
-	(this, 0, 0, 24, 24,
+	(this, "increase", 0, 0, 24, 24,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, pic_down_train),
 	 &SoldierCapacityControl::click_decrease, *this),
 m_increase
-	(this, 0, 0, 24, 24,
+	(this, "decrease", 0, 0, 24, 24,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, pic_up_train),
 	 &SoldierCapacityControl::click_increase, *this),
@@ -74,6 +74,9 @@ m_value(this, 0, 0, _("xx"), UI::Align_Center)
 	add(&m_decrease, AlignCenter);
 	add(&m_value, AlignCenter);
 	add(&m_increase, AlignCenter);
+
+	m_decrease.set_repeating(true);
+	m_increase.set_repeating(true);
 
 	set_think(true);
 }

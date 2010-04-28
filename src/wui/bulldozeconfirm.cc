@@ -66,7 +66,7 @@ private:
 	struct OK     : public UI::Button {
 		OK(BulldozeConfirm & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "ok",
 				 6, 80, 80, 34,
 				 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/menu_okay.png"))
@@ -77,7 +77,7 @@ private:
 	struct Cancel : public UI::Button {
 		Cancel(BulldozeConfirm & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "abort",
 				 114, 80, 80, 34,
 				 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/menu_abort.png"))
@@ -102,7 +102,8 @@ BulldozeConfirm::BulldozeConfirm
 	 Widelands::Building        & building,
 	 Widelands::PlayerImmovable * todestroy)
 	:
-	UI::Window (&parent, 0, 0, 200, 120, _("Destroy building?")),
+	UI::Window
+		(&parent, "bulldoze_confirm", 0, 0, 200, 120, _("Destroy building?")),
 	m_building (&building),
 	m_todestroy(todestroy ? todestroy : &building),
 	m_message  (*this, building),

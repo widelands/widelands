@@ -42,7 +42,7 @@ Building_Window::Building_Window
 	 UI::Window *         & registry)
 	:
 	UI::Window
-		(&parent,
+		(&parent, "building_window",
 		 0, 0, Width, 0,
 		 b.info_string(parent.building_window_title_format()).c_str()),
 	m_registry(registry),
@@ -177,7 +177,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				bool const is_stopped = productionsite->is_stopped();
 				capsbuttons->add
 					(new UI::Callback_Button<Building_Window>
-						(capsbuttons,
+						(capsbuttons, is_stopped ? "continue" : "stop",
 						 0, 0, 34, 34,
 						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 						 g_gr->get_picture
@@ -202,7 +202,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						 _("Enhance to %s"), building_descr.descname().c_str());
 					capsbuttons->add
 						(new UI::Callback_IDButton<Building_Window, Widelands::Building_Index>
-							(capsbuttons,
+							(capsbuttons, "enhance",
 							 0, 0, 34, 34,
 							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 							 building_descr.get_buildicon(),
@@ -216,7 +216,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		if (m_capscache & (1 << Widelands::Building::PCap_Bulldoze)) {
 			capsbuttons->add
 				(new UI::Callback_Button<Building_Window>
-					(capsbuttons,
+					(capsbuttons, "destroy",
 					 0, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 					 g_gr->get_picture(PicMod_Game, pic_bulldoze),
@@ -229,7 +229,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	if (can_see) {
 		if (m_building.descr().m_workarea_info.size()) {
 			m_toggle_workarea = new UI::Callback_Button<Building_Window>
-				(capsbuttons,
+				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
@@ -242,7 +242,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		if (igbase().get_display_flag(Interactive_Base::dfDebug)) {
 			capsbuttons->add
 				(new UI::Callback_Button<Building_Window>
-					(capsbuttons,
+					(capsbuttons, "debug",
 					 0, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 					 g_gr->get_picture(PicMod_Game,  pic_debug),
@@ -253,7 +253,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 		capsbuttons->add
 			(new UI::Callback_Button<Building_Window>
-				(capsbuttons,
+				(capsbuttons, "goto",
 				 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),

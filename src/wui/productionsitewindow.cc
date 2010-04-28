@@ -57,7 +57,9 @@ ProductionSite_Window::ProductionSite_Window
 		for (uint32_t i = 0; i < warequeues.size(); ++i)
 			create_ware_queue_panel(prod_box, ps, warequeues[i]);
 
-		get_tabs()->add(g_gr->get_picture(PicMod_Game, pic_tab_wares), prod_box, _("Wares"));
+		get_tabs()->add
+			("wares", g_gr->get_picture(PicMod_Game, pic_tab_wares),
+			 prod_box, _("Wares"));
 	}
 
 	// Add workers tab if applicable
@@ -74,7 +76,8 @@ ProductionSite_Window::ProductionSite_Window
 			m_worker_table->add(i);
 
 		get_tabs()->add
-			(g_gr->get_picture(PicMod_UI, pic_tab_workers), m_worker_table,
+			("workers", g_gr->get_picture(PicMod_UI, pic_tab_workers),
+			 m_worker_table,
 			 productionsite().descr().nr_working_positions() > 1 ? _("Workers") : _("Worker"));
 	}
 }

@@ -71,7 +71,7 @@ m_building(building),
 m_table(this, 0, 0, 360, 200),
 
 m_drop_button
-	(this,
+	(this, "drop_soldier",
 	 0, 0, 360, 32,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, pic_drop_soldier),

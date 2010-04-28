@@ -7,7 +7,7 @@ set_textdomain("map_Plateau.wmf")
 use("aux", "coroutine")
 use("aux", "infrastructure")
 use("aux", "table")
-use("aux", "smooth_move")
+use("aux", "ui")
 
 p1 = wl.game.Player(1)
 p2 = wl.game.Player(2)
@@ -43,8 +43,8 @@ function mission_thread()
    p1:hide_fields(way)
 
    -- Move to the castle
-   smooth_move(castle)
-   sleep(1000)
+   scroll_smoothly_to(castle)
+
    send_msg(briefing_2_found_ancient_castle)
    local o = add_obj(obj_capture_ancient_castle)
 
@@ -52,8 +52,7 @@ function mission_thread()
    while #p1:get_buildings"castle.atlanteans" < 1 do sleep(2345) end
    o.done = true
 
-   smooth_move(castle)
-   sleep(1000)
+   scroll_smoothly_to(castle)
    
    p1:reveal_fields(castle:region(18))
    send_msg(briefing_3_captured_ancient_castle)

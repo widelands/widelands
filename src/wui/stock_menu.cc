@@ -35,23 +35,36 @@ static const char pic_tab_workers_warehouse[] = "pics/menu_tab_workers_warehouse
 Stock_Menu::Stock_Menu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
-UI::UniqueWindow(&plr, &registry, 640, 480, _("Stock")),
+UI::UniqueWindow(&plr, "stock_menu", &registry, 640, 480, _("Stock")),
 m_player(plr)
 {
 	UI::Tab_Panel * tabs = new UI::Tab_Panel(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	tabs->set_snapparent(true);
 
 	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
-	tabs->add(g_gr->get_picture(PicMod_UI, pic_tab_wares), m_all_wares, _("Wares (total)"));
+	tabs->add
+		("total_wares", g_gr->get_picture(PicMod_UI, pic_tab_wares),
+		 m_all_wares, _("Wares (total)")
+	);
 
 	m_all_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
-	tabs->add(g_gr->get_picture(PicMod_UI, pic_tab_workers), m_all_workers, _("Workers (total)"));
+	tabs->add("workers_total", g_gr->get_picture(PicMod_UI, pic_tab_workers),
+			m_all_workers, _("Workers (total)")
+	);
 
 	m_warehouse_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
-	tabs->add(g_gr->get_picture(PicMod_UI, pic_tab_wares_warehouse), m_warehouse_wares, _("Wares in warehouses"));
+	tabs->add
+		("wares_in_warehouses",
+		 g_gr->get_picture (PicMod_UI, pic_tab_wares_warehouse),
+		 m_warehouse_wares, _("Wares in warehouses")
+	);
 
 	m_warehouse_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
-	tabs->add(g_gr->get_picture(PicMod_UI, pic_tab_workers_warehouse), m_warehouse_workers, _("Workers in warehouses"));
+	tabs->add
+		("workers_in_warehouses",
+		 g_gr->get_picture(PicMod_UI, pic_tab_workers_warehouse),
+		 m_warehouse_workers, _("Workers in warehouses")
+	);
 }
 
 /*
