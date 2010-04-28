@@ -397,16 +397,79 @@ burn it down again if you need the place. But note that your land is then
 vulnerable: any military site from another player can conquer the land. You
 therefore need military sites to keep military influence over your land.]]
       ) .. p(_
-[[Let's try it out now: Build a military building on your eastern border.]]
+[[Let's try it out now: Build a few  military building on your south western
+border.  We want to capture some of this mountain, so we can search for
+resources there. Bigger buildings will conquer more land which can be beneficial
+close to mountains because you can't build houses in mountains.]]
       )
    )
+}
+
+mining_00 = {
+   pos = "topright",
+   title = _ "Searching for resources",
+   body = rt(p(_
+[[Okay, now we own some of the area on this mountain. Mountains are very
+important, because they contain resources: Coal, Iron Ore, Gold and Granit.
+Each tribe uses the resources differently, but all need mines to get the
+resources out of the ground.]]
+   ) .. p(_
+[[Let's search for resource in this mountain.  First, we'll build a road into
+the mountains and place a flag. Then, we click on the flag and call a geologist
+to it. I show you how it's done.]]
+   )
+)
+}
+
+mining_01 = {
+   pos = "topright",
+   title = _"Waiting for the geologist",
+   body = rt(p(_
+[[The geologist will arrive shortly on the flag and start investigating the
+area in his surrounding. He will place the following markers for the various
+resources:]]
+   )) ..
+   rt("image=tribes/barbarians/resi_coal1/resi_00.png", p(_ "a bit of coal")) ..
+   rt("image=tribes/barbarians/resi_coal2/resi_00.png", p(_ "a lot of coal")) ..
+   rt("image=tribes/barbarians/resi_iron1/resi_00.png", p(_ "a bit of iron")) ..
+   rt("image=tribes/barbarians/resi_iron2/resi_00.png", p(_ "a lot of iron")) ..
+   rt("image=tribes/barbarians/resi_gold1/resi_00.png", p(_ "a bit of gold")) ..
+   rt("image=tribes/barbarians/resi_gold2/resi_00.png", p(_ "a lot of gold")) ..
+   rt("image=tribes/barbarians/resi_granit1/resi_00.png",
+      p(_ "a bit of granit")) ..
+   rt("image=tribes/barbarians/resi_granit2/resi_00.png",
+      p(_ "a lot of granit")) ..
+   rt("image=tribes/barbarians/resi_water1/resi_00.png", p(_ "water")) ..
+   rt("image=tribes/barbarians/resi_none/resi_00.png",
+      p(_ "nothing was found here"))
+   .. rt(p(_
+[[Let's wait what the geologist finds on the mountain.]]
+   )
+)
+}
+
+mining_02 = {
+   pos = "topright",
+   title = _ "Mining conclusion",
+   body = rt(p(_
+[[So our geologist found a lot of coal on this mountain. You should therefore
+build a coal mine here. Building a mine is like building a house. The build
+help symbol for where a mine can be build is]]
+   )) .. rt("image=pics/mine.png", p(_"this one.")) ..
+   rt(p(_
+[[Note that a mine needs rations to work. Rations are
+produced in taverns and taverns need meat, pitta bread, and fish to produce
+them. You will need a lot more infrastructure to get your mines working
+well.]]
+   )
+)
 }
 
 conclude_tutorial = {
    title = _ "Conclusion",
    body = rt(h1(_"Conclusion") ..
       p(_
-[[This concludes the tutorial. There is some stuff we have not covered: mining,
+[[This concludes the tutorial. There is some stuff we have not covered:
 training of soldiers, enhancing buildings, warfare, the statistics, the
 mini-map. We have not even build a single producing building even though
 producing wares is the most important thing in Widelands. But you can learn

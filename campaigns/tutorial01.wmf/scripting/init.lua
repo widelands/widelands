@@ -22,7 +22,7 @@ use("aux", "table")
 -- Constants
 first_lumberjack_field = wl.map.Field(16,10)
 first_quarry_field = wl.map.Field(8,12)
-conquer_field = wl.map.Field(19,15)
+conquer_field = wl.map.Field(6,18)
 
 -- Global variables
 registered_player_immovables = {}
@@ -33,6 +33,7 @@ use("map", "texts")
 
 
 -- TODO: add objectives, there are none currently
+-- TODO: add soldiers, training of soldiers and warfare
 
 -- =================
 -- Helper functions 
@@ -81,6 +82,34 @@ function click_on_panel(panel, g_T)
       if panel.press then panel:press() sleep(250) end
       if panel.click then panel:click() end
       sleep(500)
+   end
+end
+   
+-- Remove all stones in a given environment. This is done
+-- in a loop for a nice optical effect
+function remove_all_stones(fields, g_sleeptime)
+   local sleeptime = g_sleeptime or 150 
+   while #fields > 0 do
+      local idx = math.random(#fields)
+      local f = fields[idx]
+      local remove_field = true
+
+      if f.immovable then
+         local n = f.immovable.name:match("stones(%d*)")
+         if n then
+            n = tonumber(n)
+            f.immovable:remove()
+            if n > 1 then 
+               remove_field = false
+               wl.map.create_immovable("stones" .. n-1, f)
+               sleep(sleeptime)
+            end
+         end
+      end
+
+      if remove_field then
+         table.remove(fields, idx)
+      end
    end
 end
 
@@ -394,6 +423,7 @@ function messages()
    send_message(teaching_about_messages)
 
    while #plr.inbox > 0 do sleep(200) end
+   sleep(500)
 
    msg_box(closing_msg_window_00)
 
@@ -403,29 +433,7 @@ function messages()
    msg_box(closing_msg_window_01)
 
    -- Remove all stones
-   local fields = first_quarry_field:region(6)
-   while #fields > 0 do
-      local idx = math.random(#fields)
-      local f = fields[idx]
-      local remove_field = true
-
-      if f.immovable then
-         local n = f.immovable.name:match("stones(%d*)")
-         if n then
-            n = tonumber(n)
-            f.immovable:remove()
-            if n > 1 then 
-               remove_field = false
-               wl.map.create_immovable("stones" .. n-1, f)
-               sleep(150)
-            end
-         end
-      end
-
-      if remove_field then
-         table.remove(fields, idx)
-      end
-   end
+   remove_all_stones(first_quarry_field:region(6))
 
    -- Wait for message to arrive
    while #plr.inbox < 1 do sleep(300) end
@@ -433,12 +441,18 @@ function messages()
    sleep(800)
    msg_box(conclude_messages)
 
+   sleep(3000)
    expansion()
 end
 
 function expansion() 
    -- Teach about expanding your territory.
    sleep(10)
+   
+   -- This is not really needed since the stones are already
+   -- removed, but while debugging and we start with this function
+   -- it is most useful to have the stones away already
+   remove_all_stones(first_quarry_field:region(6), 20)
 
    msg_box(introduce_expansion)
 
@@ -447,8 +461,80 @@ function expansion()
    
    while #conquer_field.owners < 1 do sleep(100) end
 
-   conclusion()
+   mining()
+end
 
+function mining()
+   -- Teach about geologist and resources
+   sleep(10)
+
+   msg_box(mining_00)
+
+   local function _find_good_flag_position()
+      fields = conquer_field:region(8)
+      while #fields > 0 do
+         local idx = math.random(#fields)
+         local f = fields[idx]
+         
+         if f.terr:match("berg%d+") and f.terd:match("berg%d+") then
+            if pcall(function() plr:place_flag(f) end) then
+               f.immovable:remove()
+               return f
+            end
+         end
+
+         table.remove(fields, idx)
+      end
+   end
+
+   local function _find_nearby_flag()
+      for i=2,8 do
+         for idx, f in ipairs(conquer_field:region(i)) do
+            if f.immovable and f.immovable.type == "flag" then
+               return f
+            end
+         end
+      end
+   end
+
+   scroll_smoothly_to(conquer_field)
+   
+   local dest = _find_good_flag_position()
+   local start = _find_nearby_flag()
+
+   -- Build a road, call a geologist
+   click_on_field(start)
+   click_on_panel(wl.ui.MapView().windows.field_action.tabs.roads)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road)
+   click_on_field(dest)
+   click_on_field(dest) -- second click
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_flag)
+   click_on_field(dest)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.geologist)
+
+   sleep(6000)
+
+   msg_box(mining_01)
+
+   local function _wait_for_some_resi(wanted)
+      while 1 do
+         local cnt = 0
+         for idx, f in ipairs(dest:region(6)) do 
+            if f.immovable and f.immovable.name:sub(1,4) == "resi" then
+               cnt = cnt + 1
+               if cnt >= wanted then return end
+            end
+         end
+         sleep(500)
+      end
+   end
+   _wait_for_some_resi(8)
+
+   scroll_smoothly_to(dest)
+
+   msg_box(mining_02)
+
+   conclusion()
 end
 
 function conclusion()
@@ -461,5 +547,5 @@ function conclusion()
 end
 
 run(bad_boy_sentry)
--- run(starting_infos)
-run(build_a_quarry)
+run(starting_infos)
+
