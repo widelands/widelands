@@ -1,19 +1,5 @@
 # Comments are for graphic designers some ideas
 
-[defaults]
-plrclr0_r=2
-plrclr0_g=2
-plrclr0_b=74
-plrclr1_r=2
-plrclr1_g=2
-plrclr1_b=112
-plrclr2_r=2
-plrclr2_g=2
-plrclr2_b=149
-plrclr3_r=2
-plrclr3_g=2
-plrclr3_b=198
-
 [tribe]
 author=_ The Widelands Development Team
 name=_ Atlanteans
@@ -27,6 +13,7 @@ carrier2=horse
 name=frontier
 pics=pics/frontier_??.png
 hotspot=3 12
+playercolor=true
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
