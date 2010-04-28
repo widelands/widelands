@@ -170,7 +170,7 @@ inform_about_stones = {
    rt(p(_
 [[Stones can be mined in granite mines, but the easier way is to build a quarry
 next to some stones laying around. As it happens, there is a pile of them
-laying right to the west of your headquarters. I will teach you now how to
+laying just to the west of your headquarters. I will teach you now how to
 move your view over there.]]
       ) .. p(_
 [[There are two ways to move your view. The first one is using the cursor keys
@@ -212,9 +212,9 @@ all those build help symbols we activated earlier.]]
 houses and big houses. But not every field can hold anything. The build help
 eases recognition:]]
    )) .. rt("image=pics/big.png", p(_
-[[Everything can be build on the green house symbol.]]
+[[Everything can be built on the green house symbol.]]
    )) .. rt("image=pics/medium.png", p(_
-[[Everything except for big buildings can be build on a yellow house symbol.]]
+[[Everything except for big buildings can be built on a yellow house symbol.]]
    )) .. rt("image=pics/small.png", p(_
 [[Red building symbols can only hold small buildings and flags.]]
    )) .. rt("image=pics/set_flag.png", p(_
@@ -385,7 +385,7 @@ introduce_expansion = {
 [[There is one more thing I'd like to teach you now: Expanding your territory.
 The place that we start with around our headquarters is barely enough for a
 basic build infrastructure and we do not have access to mountains which we
-need to mine minerals and coal. So we have to expand our territory]]
+need to mine minerals and coal. So we have to expand our territory.]]
       ) .. p(_
 [[Expanding is as simple as building a military building at the corner of
 your territory. The barbarians have a few different military buildings:
@@ -473,7 +473,7 @@ conclude_tutorial = {
       p(_
 [[This concludes the tutorial. There is some stuff we have not covered:
 training of soldiers, enhancing buildings, warfare, the statistics, the
-mini-map. We have not even build a single producing building even though
+mini-map. We have not even built a single producing building even though
 producing wares is the most important thing in Widelands. But you can learn
 these while you go through the individual tribe's introduction campaigns. Each
 consists of some scenarios introducing the tribes and their economy while
