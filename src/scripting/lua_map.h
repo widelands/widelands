@@ -26,11 +26,12 @@
 
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "logic/constructionsite.h"
 #include "logic/game.h"
-#include "logic/warehouse.h"
-#include "logic/productionsite.h"
 #include "logic/militarysite.h"
+#include "logic/productionsite.h"
 #include "logic/trainingsite.h"
+#include "logic/warehouse.h"
 
 #include "luna.h"
 
@@ -346,6 +347,33 @@ protected:
 	virtual int _new_worker
 		(Widelands::PlayerImmovable &, Widelands::Game &,
 		 const Widelands::Worker_Descr*);
+};
+
+
+class L_ConstructionSite : public L_Building
+{
+public:
+	LUNA_CLASS_HEAD(L_ConstructionSite);
+
+	L_ConstructionSite() {}
+	L_ConstructionSite(Widelands::ConstructionSite & mo) : L_Building(mo) {
+	}
+	L_ConstructionSite(lua_State * L) : L_Building(L) {}
+	virtual ~L_ConstructionSite() {}
+
+	/*
+	 * Properties
+	 */
+	int get_building(lua_State *);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	CASTED_GET(ConstructionSite);
 };
 
 

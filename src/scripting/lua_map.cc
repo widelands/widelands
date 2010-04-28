@@ -74,12 +74,14 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 		case Map_Object::BUILDING:
 		{
 			const char * type_name = bi->type_name();
-			if (!strcmp(type_name, "warehouse"))
-				return CAST_TO_LUA(Warehouse);
+			if (!strcmp(type_name, "constructionsite"))
+				return CAST_TO_LUA(ConstructionSite);
 			else if (!strcmp(type_name, "productionsite"))
 				return CAST_TO_LUA(ProductionSite);
 			else if (!strcmp(type_name, "militarysite"))
 				return CAST_TO_LUA(MilitarySite);
+			else if (!strcmp(type_name, "warehouse"))
+				return CAST_TO_LUA(Warehouse);
 			else if (!strcmp(type_name, "trainingsite"))
 				return CAST_TO_LUA(TrainingSite);
 			else
@@ -1375,6 +1377,55 @@ int L_Building::get_building_type(lua_State * L) {
  ==========================================================
  */
 
+/* RST
+ConstructionSite
+-----------------
+
+.. class:: ConstructionSite
+
+	Child of: :class:`Building`
+
+	A ConstructionSite as it appears in Game. This is only a minimal wrapping at
+	the moment
+*/
+const char L_ConstructionSite::className[] = "ConstructionSite";
+const MethodType<L_ConstructionSite> L_ConstructionSite::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_ConstructionSite> L_ConstructionSite::Properties[] = {
+	PROP_RO(L_ConstructionSite, building),
+	{0, 0, 0},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: building
+
+		(RO) The name of the building that is constructed here
+*/
+int L_ConstructionSite::get_building(lua_State * L) {
+	lua_pushstring(L, get(L, get_game(L))->building().name());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+
 
 /* RST
 Warehouse
@@ -2276,6 +2327,13 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_Road, L_PlayerImmovable>(L);
 	add_parent<L_Road, L_BaseImmovable>(L);
 	add_parent<L_Road, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_ConstructionSite>(L, "map", true);
+	add_parent<L_ConstructionSite, L_Building>(L);
+	add_parent<L_ConstructionSite, L_PlayerImmovable>(L);
+	add_parent<L_ConstructionSite, L_BaseImmovable>(L);
+	add_parent<L_ConstructionSite, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_Warehouse>(L, "map", true);
