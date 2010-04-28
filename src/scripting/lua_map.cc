@@ -914,6 +914,7 @@ const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
 const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 	PROP_RO(L_BaseImmovable, size),
 	PROP_RO(L_BaseImmovable, name),
+	PROP_RO(L_BaseImmovable, fields),
 	{0, 0, 0},
 };
 
@@ -961,6 +962,28 @@ int L_BaseImmovable::get_name(lua_State * L) {
 	BaseImmovable * o = get(L, get_egbase(L));
 
 	lua_pushstring(L, o->name().c_str());
+	return 1;
+}
+
+/* RST
+	.. attribute:: fields
+
+		(RO) An :class:`array` of :class:`~wl.map.Field` that is occupied by this
+		Immovable. If the immovable occupies more than one field (roads or big
+		buildings for example) the first entry in this list will be the main field
+*/
+int L_BaseImmovable::get_fields(lua_State * L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+
+	BaseImmovable::PositionList pl = get(L, egbase)->get_positions(egbase);
+
+	lua_createtable(L, pl.size(), 0);
+	uint32_t idx = 1;
+	container_iterate_const(BaseImmovable::PositionList, pl, f) {
+		lua_pushuint32(L, idx++);
+		to_lua<L_Field>(L, new L_Field(f->x, f->y));
+		lua_rawset(L, -3);
+	}
 	return 1;
 }
 

@@ -120,6 +120,7 @@ public:
 	 */
 	int get_size(lua_State * L);
 	int get_name(lua_State * L);
+	int get_fields(lua_State * L);
 
 	/*
 	 * Lua Methods
