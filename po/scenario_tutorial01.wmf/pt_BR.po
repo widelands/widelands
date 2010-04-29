@@ -1,4 +1,4 @@
-# French translation for widelands
+# Brazilian Portuguese translation for widelands
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-04-28 20:27+0000\n"
-"Last-Translator: Immunoman <Unknown>\n"
-"Language-Team: French <fr@li.org>\n"
+"PO-Revision-Date: 2010-04-28 18:18+0000\n"
+"Last-Translator: alms21 <alms21@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,7 +33,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:211
 msgid "And finally the yellow flag symbol only allows for flags."
-msgstr "Et enfin le drapeau jaune n'autorise que les drapeaux."
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:299
 msgid ""
@@ -50,18 +50,10 @@ msgid ""
 "You\n"
 " therefore need military sites to keep military influence over your land."
 msgstr ""
-"Dès qu'un bâtiment militaire est occupé, il étend votre territoire. Vous "
-"pouvez alors\n"
-" le brûler si vous avez besoin de place. Mais gardez en tête que ce terrain "
-"est alors\n"
-" vulnérable : tous bâtiment militaire d'un autre joueur pourra le conquérir. "
-"Vous avez\n"
-" donc besoin de bâtiment militaire pour conserver vôtre influence."
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
 msgstr ""
-"Tutoriel de base - carte basée sur le tutoriel 1 (Vent d'Hiver) des Barbares."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:196
 msgid ""
@@ -71,31 +63,24 @@ msgid ""
 "about\n"
 " all those build help symbols we activated earlier."
 msgstr ""
-"Construisez une carrière à côté de ces roches. Vous souvenez-vous de ce que "
-"j'ai fait\n"
-" plus tôt ? Clickez à l'endroit où vous voulez construire. Choisissez votre "
-"bâtiment dans\n"
-" la fenêtre qui apparait ensuite. C'est peut-être le bon moment pour parler "
-"de ce\n"
-" symboles d'aide que nous avons activés tout à l'heure."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:101
 msgid "Building a connecting road"
-msgstr "Constuire une route de connexion."
+msgstr "Construindo uma estrada de ligação"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:87
 msgid "Building the lumberjack"
-msgstr "Construction de la cabane de bucheron"
+msgstr "Construindo o lenhador"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:308
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:321
 msgid "Closing windows"
-msgstr "Fermer les fenêtres"
+msgstr "Cerrando janelas"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:367
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:368
 msgid "Conclusion"
-msgstr "Conclusion"
+msgstr "Conclusão"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:292
 msgid ""
@@ -110,18 +95,17 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:48
 msgid "Diving in"
-msgstr "Plongée"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:205
 msgid "Everything can be build on the green house symbol."
-msgstr "On peut tout construire sur les symboles verts."
+msgstr "Tudo pode ser erigido no símbolo da casa verde."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:207
 msgid ""
 "Everything except for big buildings can be build on a yellow house symbol."
 msgstr ""
-"On peut tout construire, sauf les plus grands bâtiments, sur les symboles "
-"jaunes."
+"Tudo, exceto grandes edifícios, pode ser erigido no símbolo da casa amarela."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:227
 msgid ""
@@ -170,7 +154,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:342
 msgid "Expanding your territory!"
-msgstr "Étendre votre territoire !"
+msgstr "Expandindo seu território!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:90
 msgid ""
@@ -187,7 +171,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:159
 msgid "Getting a quarry up."
-msgstr "Construire une carrière."
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:186
 msgid "Great. Now about the quarry..."
@@ -204,7 +188,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:194
 msgid "How to build a quarry"
-msgstr "Comment construire une carrière"
+msgstr "Como construir uma pedreira."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:234
 msgid ""
@@ -220,7 +204,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:280
 msgid "Introducing messages"
-msgstr "Messages : introduction"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:269
 msgid ""
@@ -232,18 +216,16 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:52
 msgid "Let's dive right in!"
-msgstr "Allez, on y va !"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:361
 msgid ""
 "Let's try it out now: Build a military building on your eastern border."
 msgstr ""
-"Essayez tout de suite : Construisez un bâtiment militaire près de votre "
-"frontière orientale."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:147
 msgid "Lumberjack is done"
-msgstr ""
+msgstr "Lenhador está pronto"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:75
 msgid "Lumberjack's spot"
@@ -251,11 +233,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:333
 msgid "Message arrived!"
-msgstr "Un message est arrivé !"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:281
 msgid "Messages"
-msgstr "Messages"
+msgstr "Mensagens"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:127
 msgid ""
@@ -308,27 +290,27 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:174
 msgid "Other ways to move the view"
-msgstr "Autres moyens de changer la vue."
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:124
 msgid "Placing another flag"
-msgstr "Mettre un autre drapeau"
+msgstr "Fincando outra bandeira"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:209
 msgid "Red building symbols can only hold small buildings and flags."
 msgstr ""
-"Les symboles rouges ne conviennent que pour les petits bâtiments et les "
-"drapeaux."
+"Símbolos de edifícios vermelhos podem apenas permitir a construção de "
+"pequenas edificações e bandeiras."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:225
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:247
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:256
 msgid "Road building"
-msgstr "Construire les routes"
+msgstr "Construindo estrada"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:158
 msgid "Some stones were found"
-msgstr "On a trouvé un peu de pierre."
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:161
 msgid ""
@@ -373,7 +355,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:261
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr "Le terrain est plat par ici. Les porteurs seront donc vifs ici."
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:54
 msgid ""
@@ -435,15 +417,15 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/elemental:7
 msgid "Tutorial01"
-msgstr "Tutorial01"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:136
 msgid "Waiting for the hut to be finished"
-msgstr "En attendant que la hutte soit finie"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:113
 msgid "Waiting for the lumberjack to go up"
-msgstr "En attendant que le bucheron soit en route"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:66
 msgid ""
@@ -455,11 +437,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:38
 msgid "Welcome to Widelands!"
-msgstr "Bienvenue dans Widelands !"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:36
 msgid "Welcome to the Widelands tutorial!"
-msgstr "Bienvenue dans le tutoriel de Widelands !"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:323
 msgid ""
