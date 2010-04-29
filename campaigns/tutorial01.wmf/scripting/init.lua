@@ -745,8 +745,6 @@ function conclusion()
 
 end
 
---run(bad_boy_sentry)
---run(starting_infos)
-
-run(training)
+run(bad_boy_sentry)
+run(starting_infos)
 
