@@ -564,7 +564,20 @@ and their profession: warfare. As mentioned, widelands is about building up, not
 burning down: therefore warfare is also more focused on the economics than the 
 military strategies. But enough of these theories. I am going to create us a
 little trainings ground with a trainings camp and a warehouse to the nord east
-of here.]]
+of here.]]) .. p(_
+[[If you want to come back to this eastern part of your realm, just scroll here
+via right-button scrolling or open the minimap by clicking on the]]
+         )) .. rt("image=pics/menu_toggle_minimap.png", p(_
+[[minimap button at the bottom of the screen. Alternatively you could als press
+'m' on your keyboard]]
+         )) .. (rt(p(_
+[[The minimap shows you the complete map in small. You can directly jump to any
+field by left-clicking on it. You can also toggle buildings, roads, flags and
+player indicators on and off inside the map.]]
+         ) .. p(_
+[[But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted to
+build a small trainings scenario for you. Let's do that now.]]
+         )
       )
    )
 }

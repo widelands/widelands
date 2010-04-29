@@ -32,9 +32,6 @@ illegal_immovable_found = function(i) return false end
 
 use("map", "texts")
 
--- TODO: mention the minimap
--- TODO: the one bug with holding ctrl
-
 -- =================
 -- Helper functions 
 -- =================
