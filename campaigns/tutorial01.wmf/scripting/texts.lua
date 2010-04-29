@@ -23,6 +23,11 @@ function h1(s)
       ..  s .. "<br></p><p font-size=8> <br></p>"
 end
 
+function h2(s)
+   return "<p font=FreeSerif font-size=12 font-weight=bold font-color=D1D1D1>"
+      ..  s .. "<br></p><p font-size=4> <br></p>"
+end
+
 -- Simple flowing text. One Paragraph
 function p(s)
    return "<p line-spacing=3 font-size=12>" .. s .. "<br></p>" ..
@@ -551,17 +556,125 @@ well.]]
 )
 }
 
+warefare_and_training_00 = {
+   title = _ "Warfare and Training",
+   body = rt(h1(_ "Soldiers and Warefare") .. p(_
+[[On to the last topic now. We are going to talk about soldiers, their training
+and their profession: warfare. As mentioned, widelands is about building up, not
+burning down: therefore warfare is also more focused on the economics than the 
+military strategies. But enough of these theories. I am going to create us a
+little trainings ground with a trainings camp and a warehouse to the nord east
+of here.]]
+      )
+   )
+}
+
+warefare_and_training_01 = {
+   pos = "topright",
+   title = _ "Trainings camp and soldier stats",
+   body = rt(p(_
+[[There we go. Take a look at the soldiers that are on their way into our
+trainings camp. They look different to normal workers: they have a health bar
+over their head that displays their remaining hitpoints and they have four
+symbols which symbolize the individual soldiers current levels in the four
+different categories hitpoints, attack, defense and evade.]]
+      ) .. p(_
+[[A soldier is created as any normal worker: a carrier grabs a tool in a
+warehouse as soon as a request for a certain profession is not fulfilled. The
+tool to create a barbarian soldier is an axe. The newly created soldier is of
+level 0. To make the soldier better in any of the four categories, training is
+needed. Training happens in training sites like the trainings camp or the
+battle arena: soldiers go there (as our little fellows are currently doing),
+consume some wares and advance a level in one category. If a barbarian soldier
+is fully trained, he has level 3 hitpoints, level 5 attack, level 0 defense and
+level 2 evade. This is one fearsome warrior then! The individual statistics
+have the following meaning:]]
+      ) .. h2(_"Hitpoints:") .. p(_
+[[The total life of a soldier. A barbarian soldiers starts with ~130 hitpoints,
+with each hitpoint level he gains 28 hitpoints.]]
+      ) .. h2(_"Attack:") .. p(_
+[[The amount of damage a soldier inflicts upon a successful attack on the
+enemy. A barbarian soldier with attack level 0 inflicts ~14 hitpoints damage
+when he succeeds to hit an enemy. For each attack level, he gains 7 damage.
+]]
+      ) .. h2(_"Defense:") .. p(_
+[[Defense is the value that is subtracted from the attack value. The barbarians
+can not train in this skill and therefore have always defense level 0.  If an
+attacker with an attack value of 15 hitpoints hits a barbarian soldier, the
+barbarian would loose 15 - 3 = 12 hitpoints. The 3 hitpoints that are
+subtracted are because of the defense ability.]]
+      ) .. h2(_"Evade:") .. p(_
+[[Evade is the chance that the soldier is able to doge an attack. It is 25% for
+a level 0 evade barbarian and increases in steps of 15% for each level.]]
+      )
+   ) 
+}
+
+enhance_fortress = {
+   pos = "topright",
+   title = _ "Enhance this fortress",
+   body = rt(h1(_ "Enhancing buildings") .. p(_
+[[I will warp you an enemy shortly, but let's make sure you are prepared. This
+fortress is already quite strong and conquers a lot of space. But there is an
+even bigger building: the citadel.]]
+      ) .. p(_
+[[Citadels can not be build directly. Instead, you have to construct a fortress
+first and then enhance it to a citadel. To do so, click on the fortress, then
+choose the enhance to citadel button. Your soldiers will leave the citadel
+while the construction is going on. This means that your has no military
+influence any more. If an enemy builds a military building nearby, your
+construction site could burn down. No sweat, that won't happen here.]]
+      ) .. p(_
+[[Enhance your fortress to a citadel now. Remember that you can speed time up
+by using PAGE_UP, building a citadel takes a while.]]
+      )
+   ),
+   obj_name = "enhance_fortress", 
+   obj_title = _"Enhance your fortress to a citadel",
+   obj_body = rt(h1(_ "Enhance your fortress") .. p(_
+[[Enhance your fortress to a mighty citadel. The citadel can house 12 soldiers
+and is the biggest military buildings the barbarians can build. It also costs a
+lot and takes a long time to build. It is most suited to guard strategically
+important points like constricted points or mountains.]]
+      )
+   )
+}
+
+attack_enemey = {
+   pos = "topright", 
+   title = _ "Defeat your enemy",
+   body = rt(h1(_ "Defeat the enemy") .. p(_
+[[I created a sparing partner for you: It is an empire tribe close to your
+citadel. To attack its buildings, click on the door of your target building,
+choose the number of soldiers that you wish to send and click on the attack
+button. Your soldiers will come from all nearby military buildings. Likewise,
+the defenders will come from all nearby military buildings of the enemy and
+intercept your forces.]]
+      ) .. p(_
+[[Attack and conquer all of military buildings of the enemy and destroy its
+headquarters.]]
+      )
+   ),
+   obj_name = "defeated_the_empire",
+   obj_title = _ "Defeat the enemy tribe",
+   obj_body = rt(h1(_"Defeat your enemy") ..  p(_
+[[Defeat the nearby enemy. To attack a building, click on its doors, choose the
+number of attacking soldiers, then send them via the attack button.]]
+      )
+   )
+}
+
 conclude_tutorial = {
    title = _ "Conclusion",
    body = rt(h1(_"Conclusion") ..
       p(_
-[[This concludes the tutorial. There is some stuff we have not covered:
-training of soldiers, enhancing buildings, warfare, the statistics, the
-mini-map. We have not even built a single producing building even though
-producing wares is the most important thing in Widelands. But you can learn
-these while you go through the individual tribe's introduction campaigns. Each
-consists of some scenarios explaining the tribes and their economy while
-introducing the background story of Widelands. Have fun playing!]]
+[[This concludes the tutorial. There is some stuff we have not covered here --
+we have not even built a single producing building even though producing wares
+is the most important thing in Widelands -- but you've learned the ropes. You
+can learn about the remaining stuff while you go through the individual tribe's
+introduction campaigns. Each consists of some scenarios explaining the tribes
+and their economy while introducing the background story of Widelands. Have fun
+playing!]]
       ) .. p(_
 [[You can continue playing this map or you can end this game whenever you like.
 To leave this game and return to the main menu click on the]]

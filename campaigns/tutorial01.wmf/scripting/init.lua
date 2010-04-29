@@ -23,6 +23,7 @@ use("aux", "table")
 first_lumberjack_field = wl.map.Field(16,10)
 first_quarry_field = wl.map.Field(8,12)
 conquer_field = wl.map.Field(6,18)
+trainings_ground = wl.map.Field(33,57)
 
 -- Global variables
 registered_player_immovables = {}
@@ -31,8 +32,8 @@ illegal_immovable_found = function(i) return false end
 
 use("map", "texts")
 
-
--- TODO: add soldiers, training of soldiers and warfare
+-- TODO: mention the minimap
+-- TODO: the one bug with holding ctrl
 
 -- =================
 -- Helper functions 
@@ -86,33 +87,79 @@ function send_message(i)
    return o
 end
    
-function click_on_field(f, g_T)
+function click_on_field(f, g_T, g_sleeptime)
+   local sleeptime = g_sleeptime or 500
    local user_input_state = wl.ui.get_user_input_allowed()
    wl.ui.set_user_input_allowed(false)
 
    mouse_smoothly_to(f, g_T)
-   sleep(500)
+   sleep(sleeptime)
 
    wl.ui.MapView():click(f)
-   sleep(500)
+   sleep(sleeptime)
 
    wl.ui.set_user_input_allowed(user_input_state)
 end
 
-function click_on_panel(panel, g_T)
+function click_on_panel(panel, g_T, g_sleeptime)
+   local sleeptime = g_sleeptime or 500
    local user_input_state = wl.ui.get_user_input_allowed()
    wl.ui.set_user_input_allowed(false)
 
-   sleep(500)
+   sleep(sleeptime)
    if not panel.active then -- If this is a tab and already on, do nothing
       mouse_smoothly_to_panel(panel, g_T)
-      sleep(500)
+      sleep(sleeptime)
       if panel.press then panel:press() sleep(250) end
       if panel.click then panel:click() end
-      sleep(500)
+      sleep(sleeptime)
    end
 
    wl.ui.set_user_input_allowed(user_input_state)
+end
+
+function warp_houses(descriptions)
+   local user_input_state = wl.ui.get_user_input_allowed()
+   wl.ui.set_user_input_allowed(false)
+
+   for idx, d in ipairs(descriptions) do 
+      local name, x, y = d[1], d[2], d[3]
+      mouse_smoothly_to(wl.map.Field(x, y))
+      sleep(300)
+      prefilled_buildings(plr, d)
+      sleep(300)
+   end
+
+   wl.ui.set_user_input_allowed(user_input_state)
+end
+
+function build_road(field, ...)
+   -- Build a road by clicking the UI. A little faster than before
+   mouse_smoothly_to(field, 400, 200)
+   local function _start_road(field)
+      wl.ui.MapView():click(field)
+      click_on_panel(
+         wl.ui.MapView().windows.field_action.buttons.build_road, 100, 200
+      )
+   end
+
+   _start_road(field)
+
+   for idx, d in ipairs{...} do
+      if d == '|' or d == '.' then
+         mouse_smoothly_to(field, 400, 200)
+         wl.ui.MapView():click(field)
+         if d == '|' then
+            wl.ui.MapView():click(field)
+            click_on_panel(
+               wl.ui.MapView().windows.field_action.buttons.build_flag, 100, 200
+            )
+            _start_road(field)
+         end
+      else
+         field = field[d .. 'n']
+      end
+   end
 end
    
 -- Remove all stones in a given environment. This is done
@@ -570,6 +617,122 @@ function mining()
 
    msg_box(mining_02)
 
+   training()
+end
+
+function training()
+   -- Teach about trainingsites and soldiers
+   sleep(300)
+   
+   msg_box(warefare_and_training_00)
+
+   -- Reveal the trainingsground
+   plr:reveal_fields(trainings_ground:region(10))
+
+   scroll_smoothly_to(wl.map.Field(25,10))
+   scroll_smoothly_to(trainings_ground)
+   
+   -- Build some infrastructure
+   wl.ui.set_user_input_allowed(false)
+
+   warp_houses{
+      {"fortress", 31, 63, soldiers = {[{3,5,0,2}] = 8 }},
+      {"warehouse", 33, 57,
+         soldiers = {
+            [{0,0,0,0}] = 1,
+            [{1,0,0,0}] = 1,
+            [{2,0,0,0}] = 1,
+            [{3,0,0,0}] = 1,
+            [{0,1,0,0}] = 1,
+            [{0,2,0,0}] = 1,
+            [{0,3,0,0}] = 1,
+            [{0,4,0,0}] = 1,
+            [{0,5,0,0}] = 1,
+            [{0,0,0,1}] = 1,
+            [{0,0,0,2}] = 1,
+            [{3,5,0,2}] = 30,
+         },
+         workers = {
+            builder = 1
+         },
+         wares = {
+            trunk = 40,
+            blackwood = 40,
+            cloth = 10,
+            gold = 10,
+            grout = 30,
+            raw_stone = 30,
+            thatchreed = 40,
+         }
+      },
+      {"trainingscamp", 31, 56, soldiers = {} },
+      {"sentry", 28, 57, soldiers = {[{3,5,0,2}] = 2 }},
+      {"sentry", 37, 61, soldiers = {[{3,5,0,2}] = 2 }},
+   }
+   -- Build the roads
+   build_road(wl.map.Field(31,57), "bl", "bl", "|", "br", "br", "|",
+      "r", "r", "|", "tr", "tr", "tl", ".")
+   build_road(wl.map.Field(29,58), "r", "br", ".")
+   build_road(wl.map.Field(38,62), "l", "l", "|", "l", "bl",
+      "|", "tl", "tl", ".")
+   build_road(wl.map.Field(32, 0), "tr", "tr", "tr", '.')
+
+   -- Add wares to the trainingssite so that it does something. Also
+   -- add buildwares to the warehouse
+   local ts = wl.map.Field(31,56).immovable
+   ts:set_wares(ts.valid_wares)
+
+   wl.ui.set_user_input_allowed(true)
+   
+   sleep(8000)
+
+   msg_box(warefare_and_training_01)
+
+   sleep(5000)
+   local citadel_field = wl.map.Field(31, 63)
+   scroll_smoothly_to(citadel_field)
+
+   local o = msg_box(enhance_fortress)
+   while not (citadel_field.immovable and 
+      citadel_field.immovable.name == "citadel") do sleep(800) end
+   o.done = true
+
+   -- Wait for soldiers to move in
+   local citadel = citadel_field.immovable
+   local break_out = false
+   while not break_out do
+      for k,v in pairs(citadel:get_soldiers("all")) do
+         break_out = true
+         break -- Break out if there is at least one soldier here
+      end
+
+      sleep(500)
+   end
+
+   -- Create enemy tribe
+   prefilled_buildings(wl.game.Player(2),
+      {"barrier", 25, 6},
+      {"sentry", 29, 16},
+      {"tower", 30, 21},
+      {"headquarters", 30, 27,
+         workers = {
+            carrier = 50,
+         },
+         soldiers = {
+            [{0,0,0,0}] = 15,
+         }
+      }
+   )
+
+   scroll_smoothly_to(citadel_field)
+   local o = msg_box(attack_enemey)
+
+   local plr2 = wl.game.Player(2)
+   while #plr2:get_buildings("headquarters") > 0 or not plr2.defeated do
+      sleep(3000)
+   end
+   o.done = true
+
    conclusion()
 end
 
@@ -582,6 +745,8 @@ function conclusion()
 
 end
 
-run(bad_boy_sentry)
-run(starting_infos)
+--run(bad_boy_sentry)
+--run(starting_infos)
+
+run(training)
 
