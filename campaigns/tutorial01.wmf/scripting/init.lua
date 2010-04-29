@@ -32,12 +32,21 @@ illegal_immovable_found = function(i) return false end
 use("map", "texts")
 
 
--- TODO: add objectives, there are none currently
 -- TODO: add soldiers, training of soldiers and warfare
 
 -- =================
 -- Helper functions 
 -- =================
+function _try_add_objective(i)
+   -- Add an objective that is defined in the table i to the players objectives.
+   -- Returns the new objective or nil. Does nothing if i does not specify an
+   -- objective.
+   local o = nil
+   if i.obj_name then
+      o = plr:add_objective(i.obj_name, i.obj_title, i.obj_body)
+   end
+   return o
+end
 function msg_box(i)
    wl.game.set_speed(1000)
    local user_input_state = wl.ui.get_user_input_allowed()
@@ -62,11 +71,7 @@ function msg_box(i)
 
    wl.ui.set_user_input_allowed(user_input_state)
 
-   -- Create an objective, if there is any attached
-   local o = nil
-   if i.obj_name then
-      o = plr:add_objective(i.obj_name, i.obj_title, i.obj_body)
-   end
+   local o = _try_add_objective(i)
 
    sleep(130)
 
@@ -76,7 +81,9 @@ end
 function send_message(i)
    plr:send_message(i.title, i.body, i)
 
+   local o = _try_add_objective(i)
    sleep(130)
+   return o
 end
    
 function click_on_field(f, g_T)
@@ -125,8 +132,8 @@ function remove_all_stones(fields, g_sleeptime)
             if n > 1 then 
                remove_field = false
                wl.map.create_immovable("stones" .. n-1, f)
-               sleep(sleeptime)
             end
+            sleep(sleeptime)
          end
       end
 
@@ -452,10 +459,11 @@ function messages()
 
    sleep(500)
 
-   msg_box(closing_msg_window_00)
+   local o = msg_box(closing_msg_window_00)
 
    -- Wait for messages window to close
    while wl.ui.MapView().windows.messages do sleep(300) end
+   o.done = true
    
    msg_box(closing_msg_window_01)
 
@@ -476,17 +484,18 @@ function expansion()
    -- Teach about expanding your territory.
    sleep(10)
    
-   -- This is not really needed since the stones are already
-   -- removed, but while debugging and we start with this function
-   -- it is most useful to have the stones away already
+   -- This is not really needed since the stones are already removed, but if
+   -- we're debugging and we start with this function it is most useful to have
+   -- the stones away already
    remove_all_stones(first_quarry_field:region(6), 20)
 
-   msg_box(introduce_expansion)
+   local o = msg_box(introduce_expansion)
 
    -- From now on, the player can build whatever he wants
    terminate_bad_boy_sentinel = true
    
    while #conquer_field.owners < 1 do sleep(100) end
+   o.done = true
 
    mining()
 end

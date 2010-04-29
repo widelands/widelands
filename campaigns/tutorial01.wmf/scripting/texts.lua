@@ -405,9 +405,6 @@ box in front of them. Then, click the archive all button]]
    )
 }
 
--- TODO: objectives in messages do not work yet!
--- TODO: no objectives below this point yet
-
 closing_msg_window_00 = {
    pos = "topright",
    field = first_quarry_field,
@@ -417,6 +414,14 @@ closing_msg_window_00 = {
 right-clicking on them. This works with all windows except for story message
 windows like this one. Go ahead and try it. Close the messages window,
 please.]]
+      )
+   ),
+   obj_name = "close_message_window",
+   obj_title = _ "Close the messages window",
+   obj_body = rt(h1(_"Close the messages window") .. p(_
+[[All windows in widelands can be closed by right clicking into them. Some
+windows can also be toggled with the buttons at the very bottom of the screen.
+Close the messages window now by right clicking into it.]]
       )
    )
 }
@@ -468,6 +473,20 @@ therefore need military sites to keep military influence over your land.]]
 border.  We want to capture some of this mountain, so we can search for
 resources there. Bigger buildings will conquer more land which can be beneficial
 close to mountains because you can't build houses in mountains.]]
+      )
+   ),
+   obj_name = "conquer_mountain",
+   obj_title = _ "Conquer an area were we can build mines",
+   obj_body = rt(h1(_"Conquer the mountain to the south west") .. p(_
+[[For a full-fledged economy, we need coal, iron and gold. These can be found
+in mountains. Conquer some area on the mountains to the south-west of your
+headquarters by building some military building close to your border.]]
+   ) .. p(_
+[[You can choose from the following military buildings: sentry, stronghold,
+donjon, barrier and fortress. The bigger the building, the more expensive is it
+to be build. But it will also conquer a bigger region. Sometimes, it is useful
+to build a big military building next to a mountain so that you can reach
+fields farther up.]]
       )
    )
 }
@@ -541,8 +560,8 @@ training of soldiers, enhancing buildings, warfare, the statistics, the
 mini-map. We have not even built a single producing building even though
 producing wares is the most important thing in Widelands. But you can learn
 these while you go through the individual tribe's introduction campaigns. Each
-consists of some scenarios introducing the tribes and their economy while
-introducing the background story of Widelands.]]
+consists of some scenarios explaining the tribes and their economy while
+introducing the background story of Widelands. Have fun playing!]]
       ) .. p(_
 [[You can continue playing this map or you can end this game whenever you like.
 To leave this game and return to the main menu click on the]]
