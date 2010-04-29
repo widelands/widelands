@@ -102,12 +102,10 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
 set (BUILD_SHARED_LIBS OFF)
-
 # we only include Boost Headers, no libraries
 set (Boost_USE_STATIC_LIBS   ON)
 set (Boost_USE_MULTITHREADED ON)
 find_package(Boost 1.35.0 REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
@@ -208,7 +206,7 @@ if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 endif (DEFINED WL_3RDPARTY_DIR)
 
-find_package(GGZ_Core)
+find_package(GGZ_Core REQUIRED)
 if (GGZ_CORE_FOUND)
   include_directories(${GGZ_CORE_INCLUDE_DIR})
   add_definitions("-DUSE_GGZ")
