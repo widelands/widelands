@@ -165,6 +165,8 @@ end
 mv_tests = lunit.TestCase("MapView tests")
 function mv_tests:setup()
    self.mv = wl.ui.MapView()
+   self.mv.census = false
+   self.mv.buildhelp = false
    for n,w in pairs(self.mv.windows) do w:close() end
 end
 
@@ -172,5 +174,19 @@ function mv_tests:test_click()
    self.mv:click(wl.map.Field(10,10))
    assert_not_equal(nil, self.mv.windows.field_action)
 end
+
+function mv_tests:test_census()
+   self.mv.census = 1
+   assert_equal(true, self.mv.census)
+   assert_equal(false, self.mv.statistics)
+end
+
+function mv_tests:test_statistics()
+   self.mv.statistics = 1
+   assert_equal(true, self.mv.statistics)
+   assert_equal(false, self.mv.census)
+end
+
+
 
 

@@ -209,7 +209,7 @@ end
    This is a village of poor but friendly people who have settled in a safe
    valley between two glaciers. They hunt and produce timber and grain but they
    do not have ores or even stones, so they are dependent on the infrequent
-   merchant that may pass by and provide them with whatever they can not
+   merchant that may pass by and provide them with whatever they cannot
    produce on their own. Their only protection is a guard hut at each entrance
    to the valley. Therefore they realize that they may have to join a more
    powerful society for protection in order to stay alive in this world.

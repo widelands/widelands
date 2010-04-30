@@ -449,6 +449,32 @@ bool Building::burn_on_destroy()
 }
 
 
+/**
+ * Return all positions on the map that we occupy
+ */
+BaseImmovable::PositionList Building::get_positions
+	(const Editor_Game_Base & egbase) const throw ()
+{
+	PositionList rv;
+
+	rv.push_back(m_position);
+	if (get_size() == BIG) {
+		Map & map = egbase.map();
+		Coords neighb;
+
+		map.get_ln(m_position, &neighb);
+		rv.push_back(neighb);
+
+		map.get_tln(m_position, &neighb);
+		rv.push_back(neighb);
+
+		map.get_trn(m_position, &neighb);
+		rv.push_back(neighb);
+	}
+	return rv;
+}
+
+
 /*
 ===============
 Remove the building from the world now, and create a fire in its place if

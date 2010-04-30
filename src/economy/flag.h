@@ -74,6 +74,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	virtual Flag & base_flag();
 
 	Coords get_position() const {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 	void get_neighbours(RoutingNodeNeighbours &);
 	int32_t get_waitcost() const {return m_item_filled;}
 

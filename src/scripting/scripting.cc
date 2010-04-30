@@ -43,6 +43,7 @@
 // TODO: Roads are not rendered in the Editor. Fixe mark_map, post and presplit
 // TODO: remove wl.debug
 // TODO: get_game should throw an error if not called in the game.
+// Check out what this BaseImmovable <-> Immovable thing is all about.
 
 /*
 ============================================

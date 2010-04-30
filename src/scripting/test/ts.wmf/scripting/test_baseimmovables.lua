@@ -94,6 +94,8 @@ end
 -- -- ==============
 -- -- Property tests
 -- -- ==============
+-- TODO: add tests for immovable.fields
+-- TODO: add also tests for big buildings
 immovable_property_tests = lunit.TestCase("Immovable sizes")
 function immovable_property_tests:setup()
    self.none = wl.map.create_immovable("pebble1", wl.map.Field(19, 10))

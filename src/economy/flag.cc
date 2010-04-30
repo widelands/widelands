@@ -249,6 +249,17 @@ void Flag::detach_road(int32_t const dir)
 }
 
 /**
+ * Return all positions we occupy on the map. For a Flag, this is only one
+*/
+BaseImmovable::PositionList Flag::get_positions
+	(const Editor_Game_Base &) const throw ()
+{
+	PositionList rv;
+	rv.push_back(m_position);
+	return rv;
+}
+
+/**
  * Return neighbouring flags.
 */
 void Flag::get_neighbours(RoutingNodeNeighbours & neighbours)

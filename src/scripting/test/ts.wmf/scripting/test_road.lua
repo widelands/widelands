@@ -75,8 +75,8 @@ function road_tests:setup()
 
    self.start_flag = self.p:place_flag(self.f)
 
-   self.r = self.p:place_road(self.start_flag, "r", "r")
-   self.end_flag = self.f.rn.rn.immovable
+   self.r = self.p:place_road(self.start_flag, "r", "r", "br", "br")
+   self.end_flag = self.f.rn.rn.brn.brn.immovable
 end
 function road_tests:teardown()
    flags = {self.start_flag, self.end_flag}
@@ -86,7 +86,14 @@ function road_tests:teardown()
 end
 
 function road_tests:test_length()
-   assert_equal(2, self.r.length)
+   assert_equal(4, self.r.length)
+end
+function road_tests:test_field()
+   local f = self.r.fields
+   assert_equal(#f, 3)
+   assert_equal(self.f.rn, f[1])
+   assert_equal(self.f.rn.rn, f[2])
+   assert_equal(self.f.rn.rn.brn, f[3])
 end
 function road_tests:test_roadtype()
    assert_equal("normal", self.r.road_type)
@@ -109,7 +116,7 @@ end
 function road_tests:test_road_upcasting()
    i = self.f.rn.immovable
    assert_equal(i, self.r)
-   assert_equal(2, i.length)
+   assert_equal(4, i.length)
 end
 
 -- ====================

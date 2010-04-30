@@ -162,7 +162,9 @@ public:
 
 	virtual Flag & base_flag();
 	virtual uint32_t get_playercaps() const throw ();
+
 	virtual Coords get_position() const throw () {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 
 	std::string const & name() const throw ();
 	const std::string & descname() const throw () {return descr().descname();}

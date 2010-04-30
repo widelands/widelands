@@ -74,12 +74,14 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 		case Map_Object::BUILDING:
 		{
 			const char * type_name = bi->type_name();
-			if (!strcmp(type_name, "warehouse"))
-				return CAST_TO_LUA(Warehouse);
+			if (!strcmp(type_name, "constructionsite"))
+				return CAST_TO_LUA(ConstructionSite);
 			else if (!strcmp(type_name, "productionsite"))
 				return CAST_TO_LUA(ProductionSite);
 			else if (!strcmp(type_name, "militarysite"))
 				return CAST_TO_LUA(MilitarySite);
+			else if (!strcmp(type_name, "warehouse"))
+				return CAST_TO_LUA(Warehouse);
 			else if (!strcmp(type_name, "trainingsite"))
 				return CAST_TO_LUA(TrainingSite);
 			else
@@ -914,6 +916,7 @@ const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
 const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 	PROP_RO(L_BaseImmovable, size),
 	PROP_RO(L_BaseImmovable, name),
+	PROP_RO(L_BaseImmovable, fields),
 	{0, 0, 0},
 };
 
@@ -961,6 +964,28 @@ int L_BaseImmovable::get_name(lua_State * L) {
 	BaseImmovable * o = get(L, get_egbase(L));
 
 	lua_pushstring(L, o->name().c_str());
+	return 1;
+}
+
+/* RST
+	.. attribute:: fields
+
+		(RO) An :class:`array` of :class:`~wl.map.Field` that is occupied by this
+		Immovable. If the immovable occupies more than one field (roads or big
+		buildings for example) the first entry in this list will be the main field
+*/
+int L_BaseImmovable::get_fields(lua_State * L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+
+	BaseImmovable::PositionList pl = get(L, egbase)->get_positions(egbase);
+
+	lua_createtable(L, pl.size(), 0);
+	uint32_t idx = 1;
+	container_iterate_const(BaseImmovable::PositionList, pl, f) {
+		lua_pushuint32(L, idx++);
+		to_lua<L_Field>(L, new L_Field(f->x, f->y));
+		lua_rawset(L, -3);
+	}
 	return 1;
 }
 
@@ -1354,6 +1379,55 @@ int L_Building::get_building_type(lua_State * L) {
  C METHODS
  ==========================================================
  */
+
+/* RST
+ConstructionSite
+-----------------
+
+.. class:: ConstructionSite
+
+	Child of: :class:`Building`
+
+	A ConstructionSite as it appears in Game. This is only a minimal wrapping at
+	the moment
+*/
+const char L_ConstructionSite::className[] = "ConstructionSite";
+const MethodType<L_ConstructionSite> L_ConstructionSite::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_ConstructionSite> L_ConstructionSite::Properties[] = {
+	PROP_RO(L_ConstructionSite, building),
+	{0, 0, 0},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: building
+
+		(RO) The name of the building that is constructed here
+*/
+int L_ConstructionSite::get_building(lua_State * L) {
+	lua_pushstring(L, get(L, get_egbase(L))->building().name());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
 
 
 /* RST
@@ -2255,6 +2329,13 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_Road, L_PlayerImmovable>(L);
 	add_parent<L_Road, L_BaseImmovable>(L);
 	add_parent<L_Road, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_ConstructionSite>(L, "map", true);
+	add_parent<L_ConstructionSite, L_Building>(L);
+	add_parent<L_ConstructionSite, L_PlayerImmovable>(L);
+	add_parent<L_ConstructionSite, L_BaseImmovable>(L);
+	add_parent<L_ConstructionSite, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_Warehouse>(L, "map", true);

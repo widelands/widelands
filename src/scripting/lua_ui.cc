@@ -503,6 +503,8 @@ const PropertyType<L_MapView> L_MapView::Properties[] = {
 	PROP_RW(L_MapView, viewpoint_x),
 	PROP_RW(L_MapView, viewpoint_y),
 	PROP_RW(L_MapView, buildhelp),
+	PROP_RW(L_MapView, census),
+	PROP_RW(L_MapView, statistics),
 	{0, 0, 0},
 };
 
@@ -559,6 +561,37 @@ int L_MapView::set_buildhelp(lua_State * L) {
 	return 0;
 }
 
+/* RST
+	.. attribute:: census
+
+		(RW) True if the census strings are shown on buildings, false otherwise
+*/
+int L_MapView::get_census(lua_State * L) {
+	lua_pushboolean(L, get()->get_display_flag(Interactive_Base::dfShowCensus));
+	return 1;
+}
+int L_MapView::set_census(lua_State * L) {
+	get()->set_display_flag
+		(Interactive_Base::dfShowCensus, luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+	.. attribute:: statistics
+
+		(RW) True if the statistics strings are shown on buildings, false
+		otherwise
+*/
+int L_MapView::get_statistics(lua_State * L) {
+	lua_pushboolean(L, get()->get_display_flag
+			(Interactive_Base::dfShowStatistics));
+	return 1;
+}
+int L_MapView::set_statistics(lua_State * L) {
+	get()->set_display_flag
+		(Interactive_Base::dfShowStatistics, luaL_checkboolean(L, -1));
+	return 0;
+}
 
 /*
  * Lua Functions
@@ -589,7 +622,37 @@ int L_MapView::click(lua_State * L) {
  * ========================================================================
  */
 
+/* RST
+.. function:: set_user_input_allowed(b)
+
+	Allow or disallow user input. Be warned, setting this will make that
+	mouse movements and keyboard presses are completely ignored. Only
+	scripted stuff will still happen.
+
+	:arg b: :const:`true` or :const:`false`
+	:type b: :class:`boolean`
+*/
+static int L_set_user_input_allowed(lua_State * L) {
+	UI::Panel::set_allow_user_input(luaL_checkboolean(L, -1));
+	return 0;
+}
+/* RST
+.. method:: get_user_input_allowed
+
+	Return the current state of this flag.
+
+	:returns: :const:`true` or :const:`false`
+	:rtype: :class:`boolean`
+*/
+static int L_get_user_input_allowed(lua_State * L) {
+	lua_pushboolean(L, UI::Panel::allow_user_input());
+	return 1;
+}
+
+
 const static struct luaL_reg wlui [] = {
+	{"set_user_input_allowed", &L_set_user_input_allowed},
+	{"get_user_input_allowed", &L_get_user_input_allowed},
 	{0, 0}
 };
 
