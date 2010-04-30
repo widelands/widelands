@@ -35,6 +35,30 @@ use("map", "texts")
 -- =================
 -- Helper functions 
 -- =================
+
+-- A small helper class to disable/enable autosaving and user interaction
+UserInputDisabler = {}
+function UserInputDisabler:new()
+   local rv = {}
+   setmetatable(rv, self)
+   self.__index = self
+
+   rv:establish_blocks()
+
+   return rv
+end
+function UserInputDisabler:establish_blocks()
+   self._ui_state = wl.ui.get_user_input_allowed()
+   self._as_state = wl.game.get_allow_autosaving()
+
+   wl.ui.set_user_input_allowed(false)
+   wl.game.set_allow_autosaving(false)
+end
+function UserInputDisabler:lift_blocks()
+   wl.ui.set_user_input_allowed(self._ui_state)
+   wl.game.set_allow_autosaving(self._as_state)
+end
+
 function _try_add_objective(i)
    -- Add an objective that is defined in the table i to the players objectives.
    -- Returns the new objective or nil. Does nothing if i does not specify an
@@ -47,7 +71,8 @@ function _try_add_objective(i)
 end
 function msg_box(i)
    wl.game.set_speed(1000)
-   local user_input_state = wl.ui.get_user_input_allowed()
+
+   local blocker = UserInputDisabler:new()
 
    if i.field then
       scroll_smoothly_to(i.field.trn.trn.trn.trn)
@@ -67,7 +92,7 @@ function msg_box(i)
 
    plr:message_box(i.title, i.body, i)
 
-   wl.ui.set_user_input_allowed(user_input_state)
+   blocker:lift_blocks()
 
    local o = _try_add_objective(i)
 
@@ -86,7 +111,9 @@ end
    
 function click_on_field(f, g_T, g_sleeptime)
    local sleeptime = g_sleeptime or 500
-   local user_input_state = wl.ui.get_user_input_allowed()
+
+   local blocker = UserInputDisabler:new()
+
    wl.ui.set_user_input_allowed(false)
 
    mouse_smoothly_to(f, g_T)
@@ -95,12 +122,14 @@ function click_on_field(f, g_T, g_sleeptime)
    wl.ui.MapView():click(f)
    sleep(sleeptime)
 
-   wl.ui.set_user_input_allowed(user_input_state)
+   blocker:lift_blocks()
 end
 
 function click_on_panel(panel, g_T, g_sleeptime)
    local sleeptime = g_sleeptime or 500
-   local user_input_state = wl.ui.get_user_input_allowed()
+   
+   local blocker = UserInputDisabler:new()
+
    wl.ui.set_user_input_allowed(false)
 
    sleep(sleeptime)
@@ -112,11 +141,12 @@ function click_on_panel(panel, g_T, g_sleeptime)
       sleep(sleeptime)
    end
 
-   wl.ui.set_user_input_allowed(user_input_state)
+   blocker:lift_blocks()
 end
 
 function warp_houses(descriptions)
-   local user_input_state = wl.ui.get_user_input_allowed()
+   local blocker = UserInputDisabler:new()
+
    wl.ui.set_user_input_allowed(false)
 
    for idx, d in ipairs(descriptions) do 
@@ -127,7 +157,7 @@ function warp_houses(descriptions)
       sleep(300)
    end
 
-   wl.ui.set_user_input_allowed(user_input_state)
+   blocker:lift_blocks()
 end
 
 function build_road(field, ...)
