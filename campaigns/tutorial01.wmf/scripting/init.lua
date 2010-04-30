@@ -4,6 +4,8 @@
 
 set_textdomain("scenario_tutorial.wmf")
 
+-- TODO: growing trees destroy my nice new land
+
 -- ===============
 -- Initialization
 -- ===============
@@ -458,34 +460,17 @@ function build_a_quarry()
 
    local o = msg_box(talk_about_roadbuilding_02)
    
-   -- Wait till a road is placed to the constructionsite
-   local found_road = false
-
-   illegal_immovable_found = function(i) 
-      if i.type == "road" then
-         local on_cs = i.start_flag == cs.fields[1].brn.immovable or
-            i.end_flag == cs.fields[1].brn.immovable
-         local on_hq = i.start_flag == plr.starting_field.brn.immovable or
-            i.end_flag == plr.starting_field.brn.immovable
-
-         if on_cs and on_hq then 
-            register_immovable_as_allowed(i)
-            found_road = true
-            return true
-         end
-      end
-      return false
-   end
-
-   while not found_road do sleep(300) end
-   o.done = true
-
-   illegal_immovable_found = function() return false end
+   -- From now on, the player can build whatever he wants
+   terminate_bad_boy_sentinel = true
+   
+   -- Wait a while
+   sleep( 120*1000 )   
 
    -- Interludium: talk about census and statistics
    census_and_statistics(cs)
 
    while #plr:get_buildings("quarry") < 1 do sleep(1400) end
+   o.done = true
 
    messages()
 end
@@ -565,9 +550,6 @@ function expansion()
 
    local o = msg_box(introduce_expansion)
 
-   -- From now on, the player can build whatever he wants
-   terminate_bad_boy_sentinel = true
-   
    while #conquer_field.owners < 1 do sleep(100) end
    o.done = true
 
