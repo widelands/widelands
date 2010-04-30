@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-04-28 18:47+0000\n"
+"PO-Revision-Date: 2010-04-29 21:21+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-29 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-04-30 03:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Advanced Shield"
-msgstr ""
+msgstr "Avansert skjold"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -160,15 +160,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Brenner kull."
 
 #: ../../tribes/atlanteans/conf:110
 msgid "Carrier"
-msgstr ""
+msgstr "Bærer"
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Transporterer ting langs veiene dine."
 
 #: ../../tribes/atlanteans/conf:151
 #: ../../tribes/atlanteans/conf:168
@@ -201,7 +201,7 @@ msgstr "Kullgruve"
 
 #: ../../tribes/atlanteans/conf:144
 msgid "Construction Site"
-msgstr ""
+msgstr "Byggeplass"
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Corn"
@@ -275,11 +275,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Farm"
-msgstr ""
+msgstr "Gård"
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Farmer"
-msgstr ""
+msgstr "Bonde"
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
@@ -442,7 +442,7 @@ msgstr "Jerngruve"
 
 #: ../../tribes/atlanteans/conf:86
 msgid "Iron Ore"
-msgstr ""
+msgstr "Jernmalm"
 
 #: ../../tribes/atlanteans/conf:148
 msgid "Labyrinth"
@@ -480,7 +480,7 @@ msgstr "Mølle"
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Miller"
-msgstr ""
+msgstr "Møller"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid "Mills wheat to produce flour."
@@ -504,7 +504,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Outpost"
-msgstr ""
+msgstr "Utpost"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Pick"
@@ -546,7 +546,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
-msgstr ""
+msgstr "Produser avansert skjold"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:26
 msgid ""
@@ -563,11 +563,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bow"
-msgstr ""
+msgstr "Produser bue"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:34
 msgid "Produce bucket"
-msgstr ""
+msgstr "Produser bøtte"
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
@@ -591,7 +591,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:37
 msgid "Produce hammer"
-msgstr ""
+msgstr "Produser hammer"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:34
 msgid "Produce heavy double trident"
@@ -619,7 +619,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:42
 msgid "Produce saw"
-msgstr ""
+msgstr "Produser sag"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:43
 msgid "Produce scythe"
@@ -720,7 +720,7 @@ msgstr "Sag"
 
 #: ../../tribes/atlanteans/conf:194
 msgid "Sawmill"
-msgstr ""
+msgstr "Sagbruk"
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
@@ -738,7 +738,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:140
 msgid "Scout"
-msgstr ""
+msgstr "Speider"
 
 #: ../../tribes/atlanteans/conf:203
 msgid "Scout's House"
@@ -1136,7 +1136,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:107
 msgid "Water"
-msgstr ""
+msgstr "Vann"
 
 #: ../../tribes/atlanteans/water/conf:1
 msgid ""
@@ -1154,7 +1154,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:137
 msgid "Weaponsmith"
-msgstr ""
+msgstr "Våpensmed"
 
 #: ../../tribes/atlanteans/conf:138
 msgid "Weaver"
@@ -1166,7 +1166,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:201
 msgid "Well"
-msgstr ""
+msgstr "Brønn"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Woodcutter"
