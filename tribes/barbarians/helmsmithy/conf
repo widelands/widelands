@@ -57,12 +57,12 @@ return=skipped
 
 [idle]
 pics=helmsmith_i_??.png  # ???
-hotspot=50 68
+hotspot=65 75
 
 [build]
 pics=helmsmith_b_??.png  # ???
-hotspot=50 68
+hotspot=65 75
 
 [working]
 pics=helmsmith_w_??.png  # ???
-hotspot=50 68
+hotspot=65 75

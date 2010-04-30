@@ -52,7 +52,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 m_lower_label.get_w(), height,
 		 UI::Align_BottomCenter),
 	m_lower_increase
-		(this,
+		(this, "incr_lower",
 		 hmargin() +
 		 (get_inner_w() - 2 * hmargin() - hspacing() - 4 * width) / 4,
 		 m_lower_label.get_y() + m_lower_label.get_h() + vspacing(),
@@ -63,7 +63,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 std::string(),
 		 noise_tool.get_interval().min < MAX_FIELD_HEIGHT),
 	m_lower_decrease
-		(this,
+		(this, "decr_lower",
 		 m_lower_increase.get_x() + m_lower_increase.get_w(),
 		 m_lower_increase.get_y(),
 		 width, height,
@@ -73,7 +73,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 std::string(),
 		 0 < noise_tool.get_interval().min),
 	m_upper_increase
-		(this,
+		(this, "incr_upper",
 		 m_lower_decrease.get_x() + width
 		 +
 		 (get_inner_w() - 2 * hmargin() - hspacing() - 4 * width) / 2 +
@@ -86,7 +86,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 std::string(),
 		 noise_tool.get_interval().max < MAX_FIELD_HEIGHT),
 	m_upper_decrease
-		(this,
+		(this, "decr_upper",
 		 m_upper_increase.get_x() + m_upper_increase.get_w(),
 		 m_upper_increase.get_y(),
 		 width, height,
@@ -102,7 +102,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 get_inner_w() - 2 * hspacing(), height,
 		 UI::Align_BottomCenter),
 	m_setto_increase
-		(this,
+		(this, "incr_set_to",
 		 get_inner_w() / 2 - width,
 		 m_set_label.get_y() + m_set_label.get_h() + vspacing(),
 		 width, height,
@@ -112,7 +112,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 std::string(),
 		 noise_tool.set_tool().get_interval().max < MAX_FIELD_HEIGHT),
 	m_setto_decrease
-		(this,
+		(this, "decr_set_to",
 		 get_inner_w() / 2, m_setto_increase.get_y(), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),

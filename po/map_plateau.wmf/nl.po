@@ -1,0 +1,216 @@
+# Dutch translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-03-14 15:52+0000\n"
+"PO-Revision-Date: 2010-04-10 17:24+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
+"Language-Team: Dutch <nl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-04-11 04:10+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:33
+msgid ""
+"* Defeat Erwyn. He commands the strongest opposing soldiers left on this\n"
+"island."
+msgstr ""
+"* Versla Erwyn. Hij voert de sterkste overgebleven soldaten aan op dit\n"
+"eiland."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:40
+msgid "* Defeat Jomo. He takes care about the soldiers food supply."
+msgstr ""
+"* Versla Jomo. Hij houdt zijch bezich met de voedsel toevoer van de soldaten."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:26
+msgid "* Defeat Lanissa and capture the ancient castle."
+msgstr "* Versla Lanissa en verover het oude kasteel"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:54
+msgid "-- NEW OBJECTIVES --"
+msgstr "-- NIEUWE DOELEN --"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:86
+msgid "An ancient castle"
+msgstr "Een oud kasteel"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:102
+msgid "Ancient castle captured"
+msgstr "Oude kasteel veroverd"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:116
+#: ../../maps/Plateau.wmf/scripting/texts.lua:126
+msgid "Another Briefing"
+msgstr "Nog een Briefing"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:87
+msgid ""
+"By the Gods! One of our scouts found a mighty castle at the middle of the "
+"old\n"
+"plateau. The castle must be quite old and seems to be build in a foreign\n"
+"style. It's quite obvious, that this is not barbarian craft.<br>Let's hope\n"
+"Lanissa - the warlord holding command over that castle - still has not "
+"observed\n"
+"us. Perhaps we have a chance to conquer that mighty building without a "
+"bigger\n"
+"fight!<br>However we really have to capture it. It will be our key for our\n"
+"reign over this island!"
+msgstr ""
+"Bij de Goden! Één van onze verkenners heeft een groots kasteel in het midden "
+"van het oude plateau\n"
+"gevonden. Het kasteel moet redelijk oud zijn en lijkt in een vreemde stijl "
+"te zijn\n"
+"gebouwd. Het is duidelijk dat dit geen handwerk van barbaren is. <br>Laten "
+"we hopen\n"
+"dat Lanissa - de krijgsheer  die het bevel voert over dat kasteel - ons nog "
+"niet heeft \n"
+"ontdekt. Misschien hebben we een kans om dat machtige gebouw te veroveren "
+"zonder een groter \n"
+"gevecht!<br>We moeten het hoe dan ook bezetten. Het zal de sleutel zijn voor "
+"onze\n"
+"heerschappij over dit eiland!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:25
+msgid "Capture the ancient castle"
+msgstr "Verover het oude kasteel"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:143
+msgid ""
+"Congratulations! You mastered this scenario. You may play on if you like!"
+msgstr ""
+"Gefeliciteerd! Je beheerst dit scenario. Als je wilt kun je verder spelen!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:31
+msgid "Defeat Erwyn"
+msgstr "Versla Erwyn"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:38
+msgid "Defeat Jomo"
+msgstr "Versla Jomo"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:120
+msgid "Erwyn defeated"
+msgstr "Erwyn verslagen"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:74
+msgid ""
+"Finally! Our first step to victory was just done! Last night, we landed on\n"
+"the forbidden island and defeated the few guards that sentineled the north\n"
+"western part of the island. I am quite sure, that none of the other "
+"warlords\n"
+"has detected us so far, so we should keep quiet and build up our\n"
+"infrastructure. Soon we will be strong enough to raid their positions."
+msgstr ""
+"Eindelijk! We hebben onze eerste stap naar de overwinning zojuist gezet! "
+"Afgelopen nacht zijn we geland op\n"
+"het verboden eiland en hebben we de weinige bewakers, die het noord-"
+"westelijke \n"
+"deel van het eiland bewaakten, verslagen. Ik ben er vrij zeker van, dat geen "
+"van de andere krijgsheren\n"
+"ons tot nu toe heeft opgemerkt, dus we zullen ons moeten stilhouden en onze "
+"infrastructuur\n"
+"opbouwen. We zullen spoedig sterk genoeg zijn om hun posities aan te vallen."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:141
+msgid ""
+"Finally! The complete island is ours. Now we just have to defend it better "
+"than\n"
+"the warlords did."
+msgstr ""
+"Eindelijk! Het hele eiland is van ons. Nu hoeven we het alleen nog maar "
+"beter te verdedigen dan\n"
+"de krijgsheren hebben gedaan."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:69
+msgid "First Briefing"
+msgstr "Eerste Briefing"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:121
+msgid ""
+"Great! Erwyn gave up, when he saw his last buildings burning down. One "
+"strong\n"
+"warlord less on this island!"
+msgstr ""
+"Geweldig! Erwyn heeft opgegeven, toen hij z'n laatste gebouwen af zag "
+"branden. Één sterke\n"
+"krijgsheer minder op dit eiland!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:131
+msgid ""
+"Great! Jomo gave up, when he saw his last buildings burning down. One "
+"warlord\n"
+"less on this island!"
+msgstr ""
+"Geweldig! Jomo heeft opgegeven, toen hij z'n laatste gebouwen af zag "
+"branden. Één krijgsheer\n"
+"minder op dit eiland!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:130
+msgid "Jomo defeated"
+msgstr "Jomo verslagen"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:136
+msgid "Last Briefing"
+msgstr "Laatste Briefing"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:82
+#: ../../maps/Plateau.wmf/scripting/texts.lua:98
+msgid "Second Briefing"
+msgstr "Tweede Briefing"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:73
+msgid "The forbidden island"
+msgstr "Het verboden eiland"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:140
+msgid "Victory!"
+msgstr "Gewonnen!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:103
+msgid ""
+"Wonderful! Our troops finally defeated Lanissa and her soldiers. The "
+"ancient\n"
+"castle is ours!<br> It is amazing, how far one can see from the highest "
+"tower\n"
+"of the castle. We can watch the whole island. So now I wonder, why Lanissa "
+"has\n"
+"not see us and thus did not prepare. But well, some things will never come "
+"to\n"
+"the light of day. The only important things at the moment are the left "
+"opposing\n"
+"troops. We observed enemy's positions from Erwyn north and eastwards of the\n"
+"castle. He is known to be a strong warlord and surely commands the "
+"strongest\n"
+"warriors. In the south we captured some guarded food infrastructures of Jomo "
+"-\n"
+"a younger warlord - we should take care about that infrastructures and cut "
+"of\n"
+"the food supply."
+msgstr ""
+"Uitstekend! Onze troepen hebben eindelijk Lanissa en haar soldaten "
+"verslagen. Het oude\n"
+"kasteel is van ons!<br> Het is verbluffend, hoe ver je kan zien vanaf de "
+"hoogste toren\n"
+"van het kasteel. We kunnen het hele eiland zien. Dus nu vraag ik me af, "
+"waarom Lanissa ons\n"
+"niet heeft gezien waardoor ze zich niet heeft voorbereid. Maar goed, sommig "
+"dingen zullen nooit aan\n"
+"het daglicht komen. Het enige belangrijke op het moment zijn de overgebleven "
+"vijandige\n"
+"troepen. We hebben de vijandige posities van Erwyn ten noorden en ten oosten "
+"van het kasteel\n"
+"gezien. Hij staat bekend als een sterke krijgsheer en hij voert zeer zeker "
+"het bevel over de sterkste\n"
+"krijgers. In het zuiden hebben we wat bewaakte voedsel voorzieningen bezet "
+"van Jomo -\n"
+"een jongere krijgsheer - we zullen zorg moeten dragen voor deze faciliteiten "
+"en de\n"
+"voedsel voorzieningen afsnijden."

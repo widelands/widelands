@@ -18,12 +18,14 @@
  */
 
 #include <boost/bind.hpp>
+#include <boost/format.hpp>
 
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "font_handler.h"
 #include "game_chat_menu.h"
+#include "game_debug_ui.h"
 #include "gamecontroller.h"
 #include "interactive_player.h"
 #include "logic/checkstep.h"
@@ -42,6 +44,7 @@
 #include "upcast.h"
 #include "wlapplication.h"
 
+using boost::format;
 using Widelands::Area;
 using Widelands::CoordPath;
 using Widelands::Coords;
@@ -109,6 +112,7 @@ Interactive_Base::Interactive_Base
 	m_label_speed.set_visible(false);
 
 	setDefaultCommand (boost::bind(&Interactive_Base::cmdLua, this, _1));
+	addCommand("mapobject", boost::bind(&Interactive_Base::cmdMapObject, this, _1));
 }
 
 
@@ -196,6 +200,17 @@ void Interactive_Base::set_sel_picture(const char * const file) {
 }
 void Interactive_Base::unset_sel_picture() {
 	set_sel_picture("pics/fsel.png");
+}
+
+
+void Interactive_Base::toggle_buildhelp() {
+	egbase().map().overlay_manager().toggle_buildhelp();
+}
+bool Interactive_Base::buildhelp() {
+	return egbase().map().overlay_manager().buildhelp();
+}
+void Interactive_Base::show_buildhelp(bool const t) {
+	egbase().map().overlay_manager().show_buildhelp(t);
 }
 
 
@@ -874,5 +889,23 @@ void Interactive_Base::cmdLua(std::vector<std::string> const & args)
 	DebugConsole::write("Ending Lua interpretation!");
 }
 
+/**
+ * Show a map object's debug window
+ */
+void Interactive_Base::cmdMapObject(const std::vector<std::string>& args)
+{
+	if (args.size() != 2) {
+		DebugConsole::write("usage: mapobject <mapobject serial>");
+		return;
+	}
 
+	uint32_t serial = atoi(args[1].c_str());
+	Map_Object * obj = egbase().objects().get_object(serial);
 
+	if (!obj) {
+		DebugConsole::write(str(format("No Map_Object with serial number %1%") % serial));
+		return;
+	}
+
+	show_mapobject_debug(*this, *obj);
+}

@@ -57,6 +57,10 @@ struct Panel : public Object {
 		pf_snap_windows_only_when_overlapping = 128,
 		/// children should snap to the edges of this panel
 		pf_dock_windows_to_edges = 256,
+		/// automatically set parent's inner size to this panel's size whenever the size changes
+		pf_snap_parent_size = 512,
+		/// used internally to break recursive calls to \p layout
+		pf_internal_layouting = 1024
 	}; ///<\todo Turn this into separate bool flags
 
 	Panel
@@ -83,12 +87,16 @@ struct Panel : public Object {
 	void set_size(uint32_t nw, uint32_t nh);
 	void set_pos(Point);
 	virtual void move_inside_parent();
+	virtual void layout();
 
 	int32_t get_x() const {return _x;}
 	int32_t get_y() const {return _y;}
+	Point get_pos() const {return Point(_x, _y);}
 	//int unstead of uint because of overflow situations
 	int32_t get_w() const {return _w;}
 	int32_t get_h() const {return _h;}
+
+	Point to_parent(const Point &) const;
 
 	virtual bool is_snap_target() const {return false;}
 	uint16_t get_border_snap_distance() const {return _border_snap_distance;}
@@ -197,6 +205,10 @@ struct Panel : public Object {
 	}
 	bool get_top_on_click() const {return _flags & pf_top_on_click;}
 
+	void set_snapparent(bool snapparent);
+	bool get_snapparent() const {return _flags & pf_snap_parent_size;}
+
+
 protected:
 	void die();
 	bool keyboard_free() {return !(_focus);}
@@ -270,6 +282,25 @@ inline void Panel::set_dock_windows_to_edges(const bool on) {
 	if (on)
 		_flags |= pf_dock_windows_to_edges;
 }
+
+/**
+ * A Panel with a name. Important for scripting
+ */
+struct NamedPanel : public Panel {
+	NamedPanel
+		(Panel * const nparent, std::string const & name,
+		 int32_t  const nx, int32_t  const ny,
+		 uint32_t const nw, uint32_t const nh,
+		 const std::string & tooltip_text = std::string()) :
+			Panel(nparent, nx, ny, nw, nh, tooltip_text), m_name(name)
+	{
+	}
+
+	const std::string get_name() const throw() {return m_name;}
+
+private:
+	std::string m_name;
+};
 
 }
 

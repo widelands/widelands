@@ -25,7 +25,7 @@ done
 
 echo "CFLAGS=${CFLAGS} MAKEOPTS=${MAKEOPTS}"
 
-cmake -DWL_PORTABLE=true ../.. -DCMAKE_EXE_CXX_FLAGS=${CFLAGS}
+cmake -DWL_PORTABLE=true ../.. -DCMAKE_EXE_CXX_FLAGS="${CFLAGS}"
 make ${MAKEOPTS}
 
 rm  ../../VERSION || true
@@ -35,4 +35,4 @@ mv VERSION ../../VERSION
 mv src/widelands ../../widelands
 
 cd ../..
-./widelands
+#./widelands

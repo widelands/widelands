@@ -37,6 +37,7 @@ namespace i18n {
 std::vector<std::pair<std::string, std::string> > textdomains;
 
 std::string locale;
+std::string localedir;
 
 /**
  * Translate a string with gettext
@@ -50,6 +51,13 @@ char const * translate(std::string const & str) {
 }
 
 /**
+ * Set the localedir. This should usually only be done once
+ */
+void set_localedir(std::string dname) {
+	localedir = dname;
+}
+
+/**
  * Grab a given TextDomain. If a new one is grabbed, it is pushed on the stack.
  * On release, it is dropped and the previous one is re-grabbed instead.
  *
@@ -57,7 +65,7 @@ char const * translate(std::string const & str) {
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-void grab_textdomain(std::string const & domain, std::string const & localedir)
+void grab_textdomain(std::string const & domain)
 {
 	char const * const dom = domain.c_str();
 	char const * const ldir = localedir.c_str();

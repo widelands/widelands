@@ -400,15 +400,18 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 
 	Map & map = game.map();
 	Area<FCoords> area (map.get_fcoords(get_position()), 0);
-	if (action.sparam1 == "immovable")
+	if (action.sparam1 == "immovable") {
+		bool found_reserved = false;
+
 		for (;; ++area.radius) {
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
-				informPlayer
-					(game,
-					 ref_cast<Building, PlayerImmovable>(*get_location(game)),
-					 Map_Object_Descr::get_attribute_name(action.iparam2));
+				if (!found_reserved)
+					informPlayer
+						(game,
+						 ref_cast<Building, PlayerImmovable>(*get_location(game)),
+						 Map_Object_Descr::get_attribute_name(action.iparam2));
 				return true;
 			}
 			std::vector<ImmovableFound> list;
@@ -419,12 +422,21 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 				map.find_reachable_immovables
 					(area, &list, cstep, FindImmovableAttribute(action.iparam2));
 
+			for (int idx = list.size() - 1; idx >= 0; idx--) {
+				if (upcast(Immovable, imm, list[idx].object)) {
+					if (imm->is_reserved_by_worker()) {
+						found_reserved = true;
+						list.erase(list.begin() + idx);
+					}
+				}
+			}
+
 			if (list.size()) {
-				state.objvar1 = list[game.logic_rand() % list.size()].object;
+				set_program_objvar(game, state, list[game.logic_rand() % list.size()].object);
 				break;
 			}
 		}
-	else
+	} else {
 		for (;; ++area.radius) {
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
@@ -444,10 +456,11 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 					(area, &list, cstep, FindBobAttribute(action.iparam2));
 
 			if (list.size()) {
-				state.objvar1 = list[game.logic_rand() % list.size()];
+				set_program_objvar(game, state, list[game.logic_rand() % list.size()]);
 				break;
 			}
 		}
+	}
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -1276,6 +1289,11 @@ void Worker::transfer_update(Game & game, State & state) {
 			molog("[transfer]: Got signal '%s' -> recalculate\n", signal.c_str());
 
 			signal_handled();
+		} else if (signal == "blocked") {
+			molog("[transfer]: Blocked by a battle\n");
+
+			signal_handled();
+			return start_task_idle(game, get_animation("idle"), 500);
 		} else {
 			molog("[transfer]: Cancel due to signal '%s'\n", signal.c_str());
 			return pop_task(game);
@@ -1656,7 +1674,7 @@ const Bob::Task Worker::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Worker::program_update),
 	0,
-	0,
+	static_cast<Bob::Ptr>(&Worker::program_pop),
 	false
 };
 
@@ -1694,6 +1712,25 @@ void Worker::program_update(Game & game, State & state)
 	}
 }
 
+void Worker::program_pop(Game & game, State & state)
+{
+	set_program_objvar(game, state, 0);
+}
+
+void Worker::set_program_objvar(Game & game, State & state, Map_Object * obj)
+{
+	assert(state.task == &taskProgram);
+
+	if (upcast(Immovable, imm, state.objvar1.get(game))) {
+		imm->set_reserved_by_worker(false);
+	}
+
+	state.objvar1 = obj;
+
+	if (upcast(Immovable, imm, obj)) {
+		imm->set_reserved_by_worker(true);
+	}
+}
 
 const Bob::Task Worker::taskGowarehouse = {
 	"gowarehouse",
@@ -1731,8 +1768,8 @@ void Worker::gowarehouse_update(Game & game, State & state)
 
 	if (signal.size()) {
 		// if routing has failed, try a different warehouse/route on next update()
-		if (signal == "fail") {
-			molog("[gowarehouse]: caught 'fail'\n");
+		if (signal == "fail" || signal == "cancel") {
+			molog("[gowarehouse]: caught '%s'\n", signal.c_str());
 			signal_handled();
 		} else if (signal == "transfer") {
 			signal_handled();
@@ -1753,6 +1790,7 @@ void Worker::gowarehouse_update(Game & game, State & state)
 	// If we got a transfer, use it
 	if (state.transfer) {
 		Transfer * const t = state.transfer;
+		molog("[gowarehouse]: Got transfer\n");
 
 		state.transfer = 0;
 		pop_task(game);
@@ -1771,21 +1809,22 @@ void Worker::gowarehouse_update(Game & game, State & state)
 	// flag is removed or a warehouse connects to the Economy).
 	if (!m_supply)
 		m_supply = new IdleWorkerSupply(*this);
-	if (name() == "donkey")
-		molog
-			("Worker::gowarehouse_update: donkey at (%i, %i): nothing to do, "
-			 "starting task idle\n", get_position().x, get_position().y);
 	return start_task_idle(game, get_animation("idle"), 1000);
 }
 
 void Worker::gowarehouse_signalimmediate
-	(Game &, State &, std::string const & signal)
+	(Game &, State & state, std::string const & signal)
 {
 	if (signal == "transfer") {
 		// We are assigned a transfer, make sure our supply disappears immediately
 		// Otherwise, we might receive two transfers in a row.
 		delete m_supply;
 		m_supply = 0;
+	} else if (signal == "cancel") {
+		// If the transfer is cancelled again (e.g. due to building destruction)
+		// in the short window of time before the "transfer" signal is handled,
+		// we need to clean the transfer up.
+		state.transfer = 0;
 	}
 }
 
@@ -2230,11 +2269,16 @@ void Worker::fugitive_update(Game & game, State & state)
 		}
 	}
 
-	//  try to find a flag connected to a warehouse that we can return to
+	// Try to find a flag connected to a warehouse that we can return to
+	//
+	// We always have a high probability to see flags within our vision range,
+	// but with some luck we see flags that are even further away.
 	std::vector<ImmovableFound> flags;
+	int32_t vision = vision_range();
+	int32_t maxdist = 4*vision;
 	if
 		(map.find_immovables
-		 	(Area<FCoords>(map.get_fcoords(get_position()), vision_range()),
+		 	(Area<FCoords>(map.get_fcoords(get_position()), maxdist),
 		 	 &flags, FindFlagWithPlayersWarehouse(*get_owner())))
 	{
 		int32_t bestdist = -1;
@@ -2245,29 +2289,39 @@ void Worker::fugitive_update(Game & game, State & state)
 		container_iterate_const(std::vector<ImmovableFound>, flags, i) {
 			Flag & flag = ref_cast<Flag, BaseImmovable>(*i.current->object);
 
+			if (game.logic_rand() % 2 == 0)
+				continue;
+
 			int32_t const dist =
 				map.calc_distance(get_position(), i.current->coords);
 
-			if (!best || dist < bestdist) {
+			if (!best || bestdist > dist) {
 				best = &flag;
 				bestdist = dist;
 			}
 		}
 
-		if
-			(best and
-			 static_cast<int32_t>(game.logic_rand() % 30) <= 30 - bestdist)
-		{
+		if (best && bestdist > vision) {
+			uint32_t chance = maxdist - (bestdist - vision);
+			if (game.logic_rand() % maxdist >= chance)
+				best = 0;
+		}
+
+		if (best) {
 			molog("[fugitive]: try to move to flag\n");
 
-			//  \todo FIXME ??? \todo
-			//  warehouse could be on a different island, so check for failure
+			// Warehouse could be on a different island, so check for failure
+			// Also, move only a few number of steps in the right direction,
+			// so that we could theoretically lose the flag again, but also
+			// perhaps find a closer flag.
 			if
 				(start_task_movepath
 				 	(game,
 				 	 best->get_position(),
 				 	 0,
-				 	 descr().get_right_walk_anims(does_carry_ware())))
+				 	 descr().get_right_walk_anims(does_carry_ware()),
+				 	 false,
+				 	 4))
 				return;
 		}
 	}

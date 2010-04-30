@@ -108,8 +108,6 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, number),
 	PROP_RO(L_Player, allowed_buildings),
 	PROP_RO(L_Player, objectives),
-	PROP_RW(L_Player, viewpoint_x),
-	PROP_RW(L_Player, viewpoint_y),
 	PROP_RO(L_Player, defeated),
 	PROP_RO(L_Player, starting_field),
 	PROP_RW(L_Player, retreat_percentage),
@@ -189,56 +187,6 @@ int L_Player::get_objectives(lua_State * L) {
 		lua_settable(L, -3);
 	}
 	return 1;
-}
-
-/* RST
-	.. attribute:: viewpoint_x, viewpoint_y
-
-		(RW) The current view position of this player (if it is an interactive
-		player) in pixels. This can also be set to move to warp to the given
-		position instantly. If you want to jump to a specific field see
-		:attr:`wl.map.Field.viewpoint`. This property returns 0,0 if this is not
-		an Interactive Player
-*/
-// Note: we track the point in the middle of the screen while
-// Interactive_Player::viewpoint tracks the point in the upper left corner. We
-// therefore always add or subtract half a resolution to all values
-// TODO: Rethink this. What about moving in the editor?
-int L_Player::get_viewpoint_x(lua_State * L) {
-	Interactive_Player & ipl = *get_game(L).get_ipl();
-	if (ipl.player_number() == m_pl) {
-		lua_pushuint32(L, ipl.get_viewpoint().x + (ipl.get_w() >> 1));
-	} else {
-		lua_pushuint32(L, 0);
-	}
-	return 1;
-}
-int L_Player::set_viewpoint_x(lua_State * L) {
-	Interactive_Player & ipl = *get_game(L).get_ipl();
-	if (ipl.player_number() == m_pl) {
-		Point p = ipl.get_viewpoint();
-		p.x = luaL_checkuint32(L, -1) - (ipl.get_w() >> 1);
-		ipl.set_viewpoint(p);
-	}
-	return 0;
-}
-int L_Player::get_viewpoint_y(lua_State * L) {
-	Interactive_Player & ipl = *get_game(L).get_ipl();
-	if (ipl.player_number() == m_pl) {
-		lua_pushuint32(L, ipl.get_viewpoint().y + (ipl.get_h() >> 1));
-	} else {
-		lua_pushuint32(L, 0);
-	}
-	return 1;
-}
-int L_Player::set_viewpoint_y(lua_State * L) {
-	Interactive_Player & ipl = *get_game(L).get_ipl();
-	if (ipl.player_number() == m_pl) {
-		Point p = ipl.get_viewpoint();
-		p.y = luaL_checkuint32(L, -1) - (ipl.get_h() >> 1);
-		ipl.set_viewpoint(p);
-	}
-	return 0;
 }
 
 /* RST
@@ -343,10 +291,10 @@ int L_Player::get_tribe(lua_State *L) {
 
 
 /* RST
-.. attribute:: see_all
+	.. attribute:: see_all
 
-	(RW) If you set this to true, the map will be completely visible for this
-	player.
+		(RW) If you set this to true, the map will be completely visible for this
+		player.
 */
 int L_Player::set_see_all(lua_State * const L) {
 	get(L, get_egbase(L)).set_see_all(luaL_checkboolean(L, -1));
@@ -356,7 +304,6 @@ int L_Player::get_see_all(lua_State * const L) {
 	lua_pushboolean(L, get(L, get_egbase(L)).see_all());
 	return 1;
 }
-
 
 /*
  ==========================================================
@@ -413,27 +360,46 @@ int L_Player::place_flag(lua_State * L) {
 }
 
 /* RST
-	.. method:: place_building(name, field)
+	.. method:: place_building(name, field[, constructionsite = false])
 
-		Immediately creates a building on the given field. No construction
-		site is created. The building starts out completely empty. The building
-		is forced to be at this position, the same action is taken as for
-		:meth:`place_flag` when force is :const:`true`. Additionally, all
-		buildings that are too close to the new one are ripped.
+		Immediately creates a building on the given field. The building starts
+		out completely empty. If :const:`constructionsite` is set, the building
+		is not created directly, instead a constructionsite for this building is
+		placed. Note that this implies: force = false.
 
-		:returns: :class:`wl.map.Building` object created
+		If :const:`constructionsite` is not set, the buildings i is forced to be
+		at this position, the same action is taken as for :meth:`place_flag` when
+		force is :const:`true`. Additionally, all buildings that are too close to
+		the new one are ripped.
+
+		:returns: :class:`wl.map.Building` object created or :const:`nil` if
+			a constructionsite is created.
 */
+// TODO: this function should take a force parameter as any other
+// TODO: this function should return a wrapped constructionsite
+// TODO: add tests for the constructionsite functionality
 int L_Player::place_building(lua_State * L) {
 	const char * name = luaL_checkstring(L, 2);
 	L_Field * c = *get_user_class<L_Field>(L, 3);
+	bool constructionsite = false;
+
+	if (lua_gettop(L) >= 4)
+		constructionsite = luaL_checkboolean(L, 4);
 
 	Building_Index i = get(L, get_egbase(L)).tribe().building_index(name);
 	if (i == Building_Index::Null())
 		return report_error(L, "Unknown Building: '%s'", name);
 
-	Building & b = get(L, get_egbase(L)).force_building(c->coords(), i);
+	if (not constructionsite) {
+		Building & b = get(L, get_egbase(L)).force_building
+			(c->coords(), i);
 
-	return upcasted_immovable_to_lua(L, &b);
+		return upcasted_immovable_to_lua(L, &b);
+	} else {
+		get(L, get_egbase(L)).build(c->coords(), i);
+		lua_pushnil(L);
+		return 1;
+	}
 }
 
 /* RST
@@ -1583,7 +1549,7 @@ static int L_run_coroutine(lua_State * L) {
 	int nargs = lua_gettop(L);
 	uint32_t runtime = get_game(L).get_gametime();
 	if (nargs < 1)
-		report_error(L, "Too little arguments to run_at");
+		report_error(L, "Too little arguments!");
 	if (nargs == 2)
 		runtime = luaL_checkuint32(L, 2);
 

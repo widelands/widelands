@@ -58,7 +58,7 @@ struct Interactive_Player : public Interactive_GameBase
 	void toggle_chat        ();
 	void toggle_options_menu();
 	void toggle_objectives();
-	void toggle_buildhelp ();
+
 	void toggle_resources ();
 	void toggle_help      ();
 	void toggle_message_menu();
@@ -107,7 +107,6 @@ private:
 	UI::Callback_Button<Interactive_Player> m_toggle_minimap;
 	UI::Callback_Button<Interactive_Player> m_toggle_buildhelp;
 	UI::Callback_Button<Interactive_Player> m_toggle_message_menu;
-	//  UI::Callback_Button<Interactive_Player> m_toggle_resources;
 	UI::Callback_Button<Interactive_Player> m_toggle_help;
 
 	UI::UniqueWindow::Registry m_chat;

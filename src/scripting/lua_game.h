@@ -63,10 +63,6 @@ public:
 	int get_number(lua_State * L);
 	int get_allowed_buildings(lua_State * L);
 	int get_objectives(lua_State * L);
-	int get_viewpoint_x(lua_State * L);
-	int set_viewpoint_x(lua_State * L);
-	int get_viewpoint_y(lua_State * L);
-	int set_viewpoint_y(lua_State * L);
 	int get_defeated(lua_State * L);
 	int get_starting_field(lua_State * L);
 	int get_retreat_percentage(lua_State * L);

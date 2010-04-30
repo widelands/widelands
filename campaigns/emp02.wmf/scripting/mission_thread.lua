@@ -11,8 +11,7 @@ function building_materials()
    run(function() sleep(5000) p1:hide_fields(forests:region(6)) end)
    
    -- Show the trees
-   smooth_move(forests)
-   sleep(1000)
+   scroll_smoothly_to(forests)
 
    send_msg(diary_page_5_1)
    local o_woodeconomy = add_obj(obj_build_woodeconomy)
@@ -30,8 +29,7 @@ function building_materials()
 
 
    -- Show the stones
-   smooth_move(wl.map.Field(14,25))
-   sleep(1000)
+   scroll_smoothly_to(wl.map.Field(14,25))
    send_msg(diary_page_5_2)
    local o_quarry = add_obj(obj_build_quarry)
    -- Check for completeness of the quarry
@@ -117,8 +115,7 @@ function mining_infrastructure()
    end)
 
    local move_point = wl.map.Field(49,22)
-   smooth_move(move_point)
-   sleep(1000)
+   scroll_smoothly_to(move_point)
 
    send_msg(saledus_3)
    p1:allow_buildings{
@@ -170,16 +167,14 @@ function expand_and_build_marblemine()
    run(function() sleep(10000) p1:hide_fields(shipparts:region(5)) end)
 
    -- Move to the shipparts
-   local pts = smooth_move(shipparts)
-   sleep(1000)
+   local pts = scroll_smoothly_to(shipparts)
 
    send_msg(saledus_1)
    local o = add_obj(obj_build_military_buildings)
    p1:allow_buildings{"barracks", "sentry"}
 
    -- Go back to where we were
-   timed_move(array_reverse(pts))
-   sleep(1000)
+   timed_scroll(array_reverse(pts))
 
    -- sleep while not owning 26, 21
    while wl.map.Field(26,21).owners[1] ~= p1 do sleep(3243) end
@@ -190,8 +185,7 @@ function expand_and_build_marblemine()
    p1:reveal_fields(marblemountains:region(5))
    run(function() sleep(10000) p1:hide_fields(marblemountains:region(5)) end)
 
-   pts = smooth_move(marblemountains)
-   sleep(1000)
+   pts = scroll_smoothly_to(marblemountains)
 
    send_msg(saledus_2)
    p1:allow_buildings{"marblemine", "deep_marblemine"}
@@ -200,8 +194,7 @@ function expand_and_build_marblemine()
       do sleep(2133) end  o.done = true end)
 
    -- Go back to where we were
-   timed_move(array_reverse(pts))
-   sleep(1000)
+   timed_scroll(array_reverse(pts))
 end
 
 function barbarians_thread()
@@ -226,8 +219,7 @@ function barbarians_thread()
    )
    p1:reveal_fields(barbarians)
    run(function() sleep(5000) p1:hide_fields(barbarians) end)
-   smooth_move(wl.map.Field(59, 55))
-   sleep(1000)
+   scroll_smoothly_to(wl.map.Field(59, 55))
 
    send_msg(diary_page_8)
    local o = add_obj(obj_build_bigger_military_buildings)

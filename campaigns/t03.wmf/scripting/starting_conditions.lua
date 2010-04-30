@@ -24,7 +24,7 @@ hq:set_wares{
    hammer=12,
    hunting_spear=2,
    iron=12,
-   ironore=5,
+   ironore=25,
    kitchen_tools=4,
    meal=4,
    meat=6,
@@ -67,6 +67,7 @@ wh:set_wares{trunk=200}
 wh:set_workers{ carrier=40, builder=1, lumberjack=4 }
 
 prefilled_buildings(p2, 
+   {"donjon", 102, 71, soldiers={[{0,0,0,0}] = 4}},
    {"donjon", 104, 4, soldiers={
       [{0,0,0,0}] = 1, [{2,0,0,0}] = 1, [{0,1,0,0}] = 1
    }},

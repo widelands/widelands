@@ -168,4 +168,4 @@ train=soldier hp 2 3
 
 [idle]
 pics=trainingscamp_i_??.png  # ???
-hotspot=77 76
+hotspot=89 85

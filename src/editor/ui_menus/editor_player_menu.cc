@@ -38,9 +38,10 @@
 Editor_Player_Menu::Editor_Player_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 	:
-	UI::UniqueWindow(&parent, &registry, 340, 400, _("Player Options")),
+	UI::UniqueWindow
+		(&parent, "player_menu", &registry, 340, 400, _("Player Options")),
 	m_add_player
-		(this,
+		(this, "add_player",
 		 5, 5, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
@@ -48,7 +49,7 @@ Editor_Player_Menu::Editor_Player_Menu
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
-		(this,
+		(this, "remove_last_player",
 		 get_inner_w() - 5 - 20, 5, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
@@ -148,7 +149,7 @@ void Editor_Player_Menu::update() {
 			m_plr_set_tribes_buts[p - 1] =
 				new UI::Callback_IDButton
 				<Editor_Player_Menu, Widelands::Player_Number const>
-					(this,
+					(this, "tribe",
 					 posx, posy, 140, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 &Editor_Player_Menu::player_tribe_clicked, *this, p - 1,
@@ -171,7 +172,7 @@ void Editor_Player_Menu::update() {
 			m_plr_set_pos_buts[p - 1] =
 				new UI::Callback_IDButton
 				<Editor_Player_Menu, Widelands::Player_Number const>
-					(this,
+					(this, "starting_pos",
 					 posx, posy, size, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_no_picture(), //  set below
@@ -190,7 +191,7 @@ void Editor_Player_Menu::update() {
 			m_plr_make_infrastructure_buts[p - 1] =
 				new UI::Callback_IDButton
 				<Editor_Player_Menu, Widelands::Player_Number const>
-					(this,
+					(this, "build_infrastructure",
 					 posx, posy, size, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_no_picture(), //  set below

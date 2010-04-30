@@ -55,28 +55,28 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 
 // Buttons
 	joingame
-		(this,
+		(this, "join_game",
 		 m_xres * 16 / 25, m_yres * 5333 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_NetSetupLAN::clicked_joingame, *this,
 		 _("Join this game"), std::string(), true, false,
 		 m_fn, m_fs),
 	hostgame
-		(this,
+		(this, "host_game",
 		 m_xres * 16 / 25, m_yres * 6083 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_NetSetupLAN::clicked_hostgame, *this,
 		 _("Host a new game"), std::string(), true, false,
 		 m_fn, m_fs),
 	back
-		(this,
+		(this, "back",
 		 m_xres * 16 / 25, m_yres * 8333 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_NetSetupLAN::end_modal, *this, CANCEL,
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	loadlasthost
-		(this,
+		(this, "load_previous_host",
 		 m_xres * 171 / 200, m_yres * 19 / 40, m_buth, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),

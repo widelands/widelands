@@ -40,7 +40,7 @@ void Game_Cmd_Queue_Data_Packet::Read
 		FileRead fr;
 		fr.Open(fs, "binary/cmd_queue");
 		uint16_t const packet_version = fr.Unsigned16();
-		if (1 <= packet_version) {
+		if (packet_version == CURRENT_PACKET_VERSION) {
 			Cmd_Queue & cmdq = game.cmdqueue();
 
 			// nothing to be done for m_game
@@ -51,45 +51,33 @@ void Game_Cmd_Queue_Data_Packet::Read
 			// Erase all currently pending commands in the queue
 			cmdq.flush();
 
-			if (packet_version == CURRENT_PACKET_VERSION)
-				for (;;) {
-					uint32_t const packet_id = fr.Unsigned16();
+			for (;;) {
+				uint32_t const packet_id = fr.Unsigned16();
 
-					if (!packet_id)
-						break;
+				if (!packet_id)
+					break;
 
-					Cmd_Queue::cmditem item;
-					item.category = fr.Signed32();
-					item.serial = fr.Unsigned32();
+				Cmd_Queue::cmditem item;
+				item.category = fr.Signed32();
+				item.serial = fr.Unsigned32();
 
-					GameLogicCommand & cmd =
-						Queue_Cmd_Factory::create_correct_queue_command(packet_id);
-					cmd.Read(fr, game, *ol);
-
-					item.cmd = &cmd;
-
-					cmdq.m_cmds.push(item);
+				if (packet_id == 129) {
+					// For backwards compatibility with savegames up to build15:
+					// Discard old CheckEventChain commands
+					fr.Unsigned16(); // CheckEventChain version
+					fr.Unsigned16(); // GameLogicCommand version
+					fr.Unsigned32(); // GameLogicCommand duetime
+					fr.Unsigned16(); // CheckEventChain ID
+					continue;
 				}
-			else {
-				// Old-style (version 1) command list
-				uint32_t const ncmds = fr.Unsigned16();
 
-				uint32_t i = 0;
-				while (i < ncmds) {
-					Cmd_Queue::cmditem item;
-					item.category = Cmd_Queue::cat_gamelogic;
-					item.serial = fr.Unsigned32();
+				GameLogicCommand & cmd =
+					Queue_Cmd_Factory::create_correct_queue_command(packet_id);
+				cmd.Read(fr, game, *ol);
 
-					uint32_t const packet_id = fr.Unsigned16();
-					GameLogicCommand & cmd =
-						Queue_Cmd_Factory::create_correct_queue_command(packet_id);
-					cmd.Read(fr, game, *ol);
+				item.cmd = &cmd;
 
-					item.cmd = &cmd;
-
-					cmdq.m_cmds.push(item);
-					++i;
-				}
+				cmdq.m_cmds.push(item);
 			}
 		} else
 			throw game_data_error

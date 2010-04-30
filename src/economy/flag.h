@@ -114,6 +114,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void add_flag_job
 		(Game &, Ware_Index workerware, std::string const & programname);
 
+	virtual void log_general_info(Editor_Game_Base const &);
 
 protected:
 	virtual void init(Editor_Game_Base &);

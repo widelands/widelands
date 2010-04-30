@@ -71,7 +71,7 @@ private:
 			 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h)
 			:
 			UI::Button
-				(&parent,
+				(&parent, "ok",
 				 x, y, w, h,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 _("OK"),
@@ -86,7 +86,7 @@ private:
 			 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h)
 			:
 			UI::Button
-				(&parent,
+				(&parent, "cancel",
 				 x, y, w, h,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 _("Cancel"))

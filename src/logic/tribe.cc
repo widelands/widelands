@@ -237,36 +237,31 @@ Tribe_Descr::Tribe_Descr
 				egbase.lua().register_scripts
 					(g_fs->MakeSubFileSystem(path), "tribe_" + tribename);
 
-			// Read initializations
+			// Read initializations -- all scripts are initializations currently
 			ScriptContainer & scripts = egbase.lua()
 					.get_scripts_for("tribe_" + tribename);
+			container_iterate_const(ScriptContainer, scripts, s) {
+				boost::shared_ptr<LuaTable> t = egbase.lua().run_script
+					("tribe_" + tribename, s->first);
 
-			if
-				(Section * const inits_s =
-				 	root_conf.get_section("initializations"))
-				while (Section::Value const * const v = inits_s->get_next_val()) {
-					m_initializations.resize(m_initializations.size() + 1);
-					Initialization & init = m_initializations.back();
-					init.    name = v->get_name  ();
-					init.descname = v->get_string();
+				m_initializations.resize(m_initializations.size() + 1);
+				Initialization & init = m_initializations.back();
+				init.    name = s->first;
+				init.descname = t->get_string("name");
 
-					try {
-						// Check if it exists
-						if (scripts.find(init.name) == scripts.end())
-							throw game_data_error("has no Lua script!");
-
-						for
-							(Initialization const * i = &m_initializations.front();
-							 i < &init;
-							 ++i)
+				try {
+					for
+						(Initialization const * i = &m_initializations.front();
+						 i < &init;
+						 ++i)
 							if (i->name == init.name)
 								throw game_data_error("duplicated");
-					} catch (_wexception const & e) {
-						throw game_data_error
-							("[initializations] \"%s=%s\": %s",
-							 init.name.c_str(), v->get_string(), e.what());
-					}
+				} catch (_wexception const & e) {
+					throw game_data_error
+						("Initializations: \"%s\": %s",
+						 init.name.c_str(), e.what());
 				}
+			}
 		} catch (std::exception const & e) {
 			throw game_data_error("root conf: %s", e.what());
 		}
@@ -329,6 +324,7 @@ bool Tribe_Descr::exists_tribe
 	buf            += name;
 	buf            += "/conf";
 
+	LuaInterface * lua = create_LuaInterface();
 	FileRead f;
 	if (f.TryOpen(*g_fs, buf.c_str())) {
 		if (info)
@@ -337,20 +333,33 @@ bool Tribe_Descr::exists_tribe
 				info->name = name;
 				info->uiposition =
 					prof.get_safe_section("tribe").get_int("uiposition", 0);
-				Section & inits_s = prof.get_safe_section("initializations");
-				while (Section::Value const * const v = inits_s.get_next_val())
+
+				std::string path = "tribes/" + name + "/scripting";
+				if (g_fs->IsDirectory(path))
+					lua->register_scripts
+						(g_fs->MakeSubFileSystem(path), "tribe_" + name, "");
+
+				ScriptContainer & scripts = lua->get_scripts_for("tribe_" + name);
+				container_iterate_const(ScriptContainer, scripts, s) {
+					boost::shared_ptr<LuaTable> t = lua->run_script
+						("tribe_" + name, s->first);
+
 					info->initializations.push_back
 						(TribeBasicInfo::Initialization
-						 	(v->get_name(), v->get_string()));
+						 (s->first, t->get_string("name")));
+				 }
 			} catch (_wexception const & e) {
+				delete lua;
 				throw game_data_error
 					("reading basic info for tribe \"%s\": %s",
 					 name.c_str(), e.what());
 			}
 
+		delete lua;
 		return true;
 	}
 
+	delete lua;
 	return false;
 }
 
@@ -446,6 +455,12 @@ uint32_t Tribe_Descr::get_resource_indicator
 			((static_cast<float>(amount) / res->get_max_amount())
 			 *
 			 num_indicators);
+	if (bestmatch > num_indicators)
+		throw game_data_error
+			("Amount of %s is %i but max amount is %i",
+			 res->name().c_str(),
+			 amount,
+			 res->get_max_amount());
 	if (static_cast<int32_t>(amount) < res->get_max_amount())
 		bestmatch += 1; // Resi start with 1, not 0
 

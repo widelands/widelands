@@ -229,6 +229,7 @@ protected:
 	bool poll_event(SDL_Event &, bool throttle);
 
 	bool init_settings();
+	std::string find_relative_locale_path(std::string localedir);
 	void shutdown_settings();
 
 	bool init_hardware();
@@ -292,6 +293,7 @@ protected:
 
 	//do we want to search the default places for widelands installs
 	bool   m_default_datadirs;
+	std::string m_homedir;
 private:
 	///Holds this process' one and only instance of WLApplication, if it was
 	///created already. NULL otherwise.

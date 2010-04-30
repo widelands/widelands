@@ -11,7 +11,7 @@ text=_"Like with natural objects (bobs), you can also select multiple animals or
 sec=6
 
 [Tip 4]
-text=_"Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
+text=_"Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete opposite of the normal tool (for example deletion of an object instead of placing one)."
 sec=7
 
 [Tip 5]

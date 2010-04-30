@@ -556,4 +556,13 @@ bool Carrier::start_task_walktoflag
 			(game, path, idx, descr().get_right_walk_anims(does_carry_ware()));
 }
 
+void Carrier::log_general_info(const Widelands::Editor_Game_Base& egbase)
+{
+	molog("Carrier at %i,%i\n", get_position().x, get_position().y);
+
+	Worker::log_general_info(egbase);
+
+	molog("m_acked_ware = %i\n", m_acked_ware);
+}
+
 }

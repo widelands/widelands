@@ -34,7 +34,7 @@ namespace Widelands {
 /// A Map (or scenario) objective is an objective that has to be fulfilled to
 /// end a scenario successfully.
 /// But note, the objectives itself doesn't check it's conditions, the map
-/// designer is responsible for checking it and setting it's trigger up.
+/// designer is responsible for checking it and setting its done property up.
 struct Objective : public Named {
 	Objective()
 		:

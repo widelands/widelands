@@ -299,6 +299,9 @@ void WareInstance::update(Game & game)
 		m_transfer_nextstep = nextstep;
 
 		if (!nextstep) {
+			if (upcast(Flag, flag, location))
+				flag->call_carrier(game, *this, 0);
+
 			Transfer * const t = m_transfer;
 
 			m_transfer = 0;
