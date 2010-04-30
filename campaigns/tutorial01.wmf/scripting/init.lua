@@ -4,8 +4,6 @@
 
 set_textdomain("scenario_tutorial.wmf")
 
--- TODO: growing trees destroy my nice new land
-
 -- ===============
 -- Initialization
 -- ===============
@@ -90,8 +88,6 @@ function msg_box(i)
       i.posy = 0
    end
 
-   wl.ui.set_user_input_allowed(true)
-
    plr:message_box(i.title, i.body, i)
 
    blocker:lift_blocks()
@@ -116,8 +112,6 @@ function click_on_field(f, g_T, g_sleeptime)
 
    local blocker = UserInputDisabler:new()
 
-   wl.ui.set_user_input_allowed(false)
-
    mouse_smoothly_to(f, g_T)
    sleep(sleeptime)
 
@@ -131,8 +125,6 @@ function click_on_panel(panel, g_T, g_sleeptime)
    local sleeptime = g_sleeptime or 500
    
    local blocker = UserInputDisabler:new()
-
-   wl.ui.set_user_input_allowed(false)
 
    sleep(sleeptime)
    if not panel.active then -- If this is a tab and already on, do nothing
@@ -149,8 +141,6 @@ end
 function warp_houses(descriptions)
    local blocker = UserInputDisabler:new()
 
-   wl.ui.set_user_input_allowed(false)
-
    for idx, d in ipairs(descriptions) do 
       local name, x, y = d[1], d[2], d[3]
       mouse_smoothly_to(wl.map.Field(x, y))
@@ -165,6 +155,7 @@ end
 function build_road(field, ...)
    -- Build a road by clicking the UI. A little faster than before
    mouse_smoothly_to(field, 400, 200)
+
    local function _start_road(field)
       wl.ui.MapView():click(field)
       click_on_panel(
@@ -175,6 +166,9 @@ function build_road(field, ...)
    _start_road(field)
 
    for idx, d in ipairs{...} do
+      if field.immovable and field.immovable.player ~= plr then
+         field.immovable:remove()
+      end
       if d == '|' or d == '.' then
          mouse_smoothly_to(field, 400, 200)
          wl.ui.MapView():click(field)
@@ -189,6 +183,60 @@ function build_road(field, ...)
          field = field[d .. 'n']
       end
    end
+end
+   
+function build_eastern_trainings_area()
+   -- Build some infrastructure as another example
+   local blocker = UserInputDisabler:new()
+
+   warp_houses{
+      {"fortress", 31, 63, soldiers = {[{3,5,0,2}] = 8 }},
+      {"warehouse", 33, 57,
+         soldiers = {
+            [{0,0,0,0}] = 1,
+            [{1,0,0,0}] = 1,
+            [{2,0,0,0}] = 1,
+            [{3,0,0,0}] = 1,
+            [{0,1,0,0}] = 1,
+            [{0,2,0,0}] = 1,
+            [{0,3,0,0}] = 1,
+            [{0,4,0,0}] = 1,
+            [{0,5,0,0}] = 1,
+            [{0,0,0,1}] = 1,
+            [{0,0,0,2}] = 1,
+            [{3,5,0,2}] = 30,
+         },
+         workers = {
+            builder = 1
+         },
+         wares = {
+            trunk = 40,
+            blackwood = 40,
+            cloth = 10,
+            gold = 10,
+            grout = 30,
+            raw_stone = 30,
+            thatchreed = 40,
+         }
+      },
+      {"trainingscamp", 31, 56, soldiers = {} },
+      {"sentry", 28, 57, soldiers = {[{3,5,0,2}] = 2 }},
+      {"sentry", 37, 61, soldiers = {[{3,5,0,2}] = 2 }},
+   }
+   -- Build the roads
+   build_road(wl.map.Field(31,57), "bl", "bl", "|", "br", "br", "|",
+      "r", "r", "|", "tr", "tr", "tl", ".")
+   build_road(wl.map.Field(29,58), "r", "br", ".")
+   build_road(wl.map.Field(38,62), "l", "l", "|", "l", "bl",
+      "|", "tl", "tl", ".")
+   build_road(wl.map.Field(32, 0), "tr", "tr", "tr", '.')
+
+   -- Add wares to the trainingssite so that it does something. Also
+   -- add buildwares to the warehouse
+   local ts = wl.map.Field(31,56).immovable
+   ts:set_wares(ts.valid_wares)
+
+   blocker:lift_blocks()
 end
    
 -- Remove all stones in a given environment. This is done
@@ -316,7 +364,7 @@ function build_lumberjack()
 
    msg_box(lumberjack_message_01)
 
-   wl.ui.set_user_input_allowed(false)
+   local blocker = UserInputDisabler:new()
 
    scroll_smoothly_to(first_lumberjack_field)
    mouse_smoothly_to(first_lumberjack_field)
@@ -343,19 +391,19 @@ function build_lumberjack()
 
    illegal_immovable_found = function(i) return false end
 
-   wl.ui.set_user_input_allowed(true)
+   blocker:lift_blocks()
 
    sleep(15000)
    
    local o = msg_box(lumberjack_message_05)
 
-   wl.ui.set_user_input_allowed(false)
+   local blocker = UserInputDisabler:new()
    
    local f = wl.map.Field(14,11)
    scroll_smoothly_to(f)
    mouse_smoothly_to(f)
    
-   wl.ui.set_user_input_allowed(true)
+   blocker:lift_blocks()
    
    -- Wait for flag
    while not (f.immovable and f.immovable.type == "flag") do sleep(300) end
@@ -430,7 +478,7 @@ function build_a_quarry()
       end
    end
 
-   wl.ui.set_user_input_allowed(false)
+   local blocker = UserInputDisabler:new()
 
    illegal_immovable_found = function() return true end
 
@@ -456,7 +504,7 @@ function build_a_quarry()
 
    _rip_road()
 
-   wl.ui.set_user_input_allowed(true)
+   blocker:lift_blocks()
 
    local o = msg_box(talk_about_roadbuilding_02)
    
@@ -478,7 +526,7 @@ end
 function census_and_statistics(cs)
    sleep(25000)
    
-   wl.ui.set_user_input_allowed(false)
+   local blocker = UserInputDisabler:new()
 
    wl.ui.MapView().census = false
    wl.ui.MapView().statistics = false
@@ -504,7 +552,7 @@ function census_and_statistics(cs)
 
    msg_box(census_and_statistics_01)
    
-   wl.ui.set_user_input_allowed(true)
+   blocker:lift_blocks()
 end
 
 function messages()
@@ -635,64 +683,7 @@ function training()
    
    msg_box(warefare_and_training_00)
 
-   -- Reveal the trainingsground
-   plr:reveal_fields(trainings_ground:region(10))
-
-   scroll_smoothly_to(wl.map.Field(25,10))
-   scroll_smoothly_to(trainings_ground)
-   
-   -- Build some infrastructure
-   wl.ui.set_user_input_allowed(false)
-
-   warp_houses{
-      {"fortress", 31, 63, soldiers = {[{3,5,0,2}] = 8 }},
-      {"warehouse", 33, 57,
-         soldiers = {
-            [{0,0,0,0}] = 1,
-            [{1,0,0,0}] = 1,
-            [{2,0,0,0}] = 1,
-            [{3,0,0,0}] = 1,
-            [{0,1,0,0}] = 1,
-            [{0,2,0,0}] = 1,
-            [{0,3,0,0}] = 1,
-            [{0,4,0,0}] = 1,
-            [{0,5,0,0}] = 1,
-            [{0,0,0,1}] = 1,
-            [{0,0,0,2}] = 1,
-            [{3,5,0,2}] = 30,
-         },
-         workers = {
-            builder = 1
-         },
-         wares = {
-            trunk = 40,
-            blackwood = 40,
-            cloth = 10,
-            gold = 10,
-            grout = 30,
-            raw_stone = 30,
-            thatchreed = 40,
-         }
-      },
-      {"trainingscamp", 31, 56, soldiers = {} },
-      {"sentry", 28, 57, soldiers = {[{3,5,0,2}] = 2 }},
-      {"sentry", 37, 61, soldiers = {[{3,5,0,2}] = 2 }},
-   }
-   -- Build the roads
-   build_road(wl.map.Field(31,57), "bl", "bl", "|", "br", "br", "|",
-      "r", "r", "|", "tr", "tr", "tl", ".")
-   build_road(wl.map.Field(29,58), "r", "br", ".")
-   build_road(wl.map.Field(38,62), "l", "l", "|", "l", "bl",
-      "|", "tl", "tl", ".")
-   build_road(wl.map.Field(32, 0), "tr", "tr", "tr", '.')
-
-   -- Add wares to the trainingssite so that it does something. Also
-   -- add buildwares to the warehouse
-   local ts = wl.map.Field(31,56).immovable
-   ts:set_wares(ts.valid_wares)
-
-   wl.ui.set_user_input_allowed(true)
-   
+   build_eastern_trainings_area()
    sleep(8000)
 
    msg_box(warefare_and_training_01)
