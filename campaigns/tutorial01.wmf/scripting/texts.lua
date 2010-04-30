@@ -35,7 +35,7 @@ function p(s)
 end
 
 -- =============
--- Textes below
+-- Texts below
 -- =============
 scould_player = {
    title = _ "Nice and easy does it all the time",
@@ -88,7 +88,7 @@ can use the SPACE key to toggle it.]]
    obj_title = _ "Enable the build help",
    obj_body = rt(h1(_"Enable the build help") .. 
       p(
-[[It is easier to understand what is allowed to be build on which field when
+[[It is easier to understand what is allowed to be built on which field when
 the build help symbols are enabled. Do so now either by pressing SPACE or by
 clicking the fourth button from the left at the very bottom of the screen.]]
       )
@@ -474,7 +474,7 @@ burn it down again if you need the place. But note that your land is then
 vulnerable: any military site from another player can conquer the land. You
 therefore need military sites to keep military influence over your land.]]
       ) .. p(_
-[[Let's try it out now: Build a few  military building on your south western
+[[Let's try it out now: Build a few  military buildings on your south western
 border.  We want to capture some of this mountain, so we can search for
 resources there. Bigger buildings will conquer more land which can be beneficial
 close to mountains because you can't build houses in mountains.]]
@@ -485,11 +485,11 @@ close to mountains because you can't build houses in mountains.]]
    obj_body = rt(h1(_"Conquer the mountain to the south west") .. p(_
 [[For a full-fledged economy, we need coal, iron and gold. These can be found
 in mountains. Conquer some area on the mountains to the south-west of your
-headquarters by building some military building close to your border.]]
+headquarters by building some military buildings close to your border.]]
    ) .. p(_
 [[You can choose from the following military buildings: sentry, stronghold,
-donjon, barrier and fortress. The bigger the building, the more expensive is it
-to be build. But it will also conquer a bigger region. Sometimes, it is useful
+donjon, barrier and fortress. The bigger the building, the more expensive it is
+to be built. But it will also conquer a bigger region. Sometimes, it is useful
 to build a big military building next to a mountain so that you can reach
 fields farther up.]]
       )
@@ -501,13 +501,13 @@ mining_00 = {
    title = _ "Searching for resources",
    body = rt(p(_
 [[Okay, now we own some of the area on this mountain. Mountains are very
-important, because they contain resources: Coal, Iron Ore, Gold and Granit.
+important, because they contain resources: Coal, Iron Ore, Gold and Granite.
 Each tribe uses the resources differently, but all need mines to get the
 resources out of the ground.]]
    ) .. p(_
-[[Let's search for resource in this mountain.  First, we'll build a road into
+[[Let's search for resources in this mountain.  First, we'll build a road into
 the mountains and place a flag. Then, we click on the flag and call a geologist
-to it. I show you how it's done.]]
+to it. I'll show you how it's done.]]
    )
 )
 }
@@ -516,8 +516,8 @@ mining_01 = {
    pos = "topright",
    title = _"Waiting for the geologist",
    body = rt(p(_
-[[The geologist will arrive shortly on the flag and start investigating the
-area in his surrounding. He will place the following markers for the various
+[[The geologist will arrive shortly to the flag and start investigating the
+area in his surroundings. He will place the following markers for the various
 resources:]]
    )) ..
    rt("image=tribes/barbarians/resi_coal1/resi_00.png", p(_ "a bit of coal")) ..
@@ -527,14 +527,14 @@ resources:]]
    rt("image=tribes/barbarians/resi_gold1/resi_00.png", p(_ "a bit of gold")) ..
    rt("image=tribes/barbarians/resi_gold2/resi_00.png", p(_ "a lot of gold")) ..
    rt("image=tribes/barbarians/resi_granit1/resi_00.png",
-      p(_ "a bit of granit")) ..
+      p(_ "a bit of granite")) ..
    rt("image=tribes/barbarians/resi_granit2/resi_00.png",
-      p(_ "a lot of granit")) ..
+      p(_ "a lot of granite")) ..
    rt("image=tribes/barbarians/resi_water1/resi_00.png", p(_ "water")) ..
    rt("image=tribes/barbarians/resi_none/resi_00.png",
       p(_ "nothing was found here"))
    .. rt(p(_
-[[Let's wait what the geologist finds on the mountain.]]
+[[Let's wait and see what the geologist finds on the mountain.]]
    )
 )
 }
@@ -545,7 +545,7 @@ mining_02 = {
    body = rt(p(_
 [[So our geologist found a lot of coal on this mountain. You should therefore
 build a coal mine here. Building a mine is like building a house. The build
-help symbol for where a mine can be build is]]
+help symbol for where a mine can be built is]]
    )) .. rt("image=pics/mine.png", p(_"this one.")) ..
    rt(p(_
 [[Note that a mine needs rations to work. Rations are
@@ -563,20 +563,20 @@ warefare_and_training_00 = {
 and their profession: warfare. As mentioned, widelands is about building up, not
 burning down: therefore warfare is also more focused on the economics than the 
 military strategies. But enough of these theories. I am going to create us a
-little trainings ground with a trainings camp and a warehouse to the nord east
+little training ground with a training camp and a warehouse to the north east
 of here.]]) .. p(_
 [[If you want to come back to this eastern part of your realm, just scroll here
 via right-button scrolling or open the minimap by clicking on the]]
          )) .. rt("image=pics/menu_toggle_minimap.png", p(_
-[[minimap button at the bottom of the screen. Alternatively you could als press
+[[minimap button at the bottom of the screen. Alternatively you could also press
 'm' on your keyboard]]
          )) .. (rt(p(_
-[[The minimap shows you the complete map in small. You can directly jump to any
+[[The minimap shows you the complete map in miniature. You can directly jump to any
 field by left-clicking on it. You can also toggle buildings, roads, flags and
 player indicators on and off inside the map.]]
          ) .. p(_
 [[But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted to
-build a small trainings scenario for you. Let's do that now.]]
+build a small training scenario for you. Let's do that now.]]
          )
       )
    )
@@ -587,9 +587,9 @@ warefare_and_training_01 = {
    title = _ "Trainings camp and soldier stats",
    body = rt(p(_
 [[There we go. Take a look at the soldiers that are on their way into our
-trainings camp. They look different to normal workers: they have a health bar
+trainings camp. They look different than normal workers: they have a health bar
 over their head that displays their remaining hitpoints and they have four
-symbols which symbolize the individual soldiers current levels in the four
+symbols which symbolize the individual soldier's current levels in the four
 different categories hitpoints, attack, defense and evade.]]
       ) .. p(_
 [[A soldier is created as any normal worker: a carrier grabs a tool in a
@@ -603,7 +603,7 @@ is fully trained, he has level 3 hitpoints, level 5 attack, level 0 defense and
 level 2 evade. This is one fearsome warrior then! The individual statistics
 have the following meaning:]]
       ) .. h2(_"Hitpoints:") .. p(_
-[[The total life of a soldier. A barbarian soldiers starts with ~130 hitpoints,
+[[The total life of a soldier. A barbarian soldier starts with ~130 hitpoints,
 with each hitpoint level he gains 28 hitpoints.]]
       ) .. h2(_"Attack:") .. p(_
 [[The amount of damage a soldier inflicts upon a successful attack on the
@@ -614,10 +614,10 @@ when he succeeds to hit an enemy. For each attack level, he gains 7 damage.
 [[Defense is the value that is subtracted from the attack value. The barbarians
 can not train in this skill and therefore have always defense level 0.  If an
 attacker with an attack value of 15 hitpoints hits a barbarian soldier, the
-barbarian would loose 15 - 3 = 12 hitpoints. The 3 hitpoints that are
+barbarian would lose 15 - 3 = 12 hitpoints. The 3 hitpoints that are
 subtracted are because of the defense ability.]]
       ) .. h2(_"Evade:") .. p(_
-[[Evade is the chance that the soldier is able to doge an attack. It is 25% for
+[[Evade is the chance that the soldier is able to dodge an attack. It is 25% for
 a level 0 evade barbarian and increases in steps of 15% for each level.]]
       )
    ) 
@@ -627,14 +627,14 @@ enhance_fortress = {
    pos = "topright",
    title = _ "Enhance this fortress",
    body = rt(h1(_ "Enhancing buildings") .. p(_
-[[I will warp you an enemy shortly, but let's make sure you are prepared. This
+[[I will warp you to an enemy shortly, but let's make sure you are prepared. This
 fortress is already quite strong and conquers a lot of space. But there is an
 even bigger building: the citadel.]]
       ) .. p(_
-[[Citadels can not be build directly. Instead, you have to construct a fortress
+[[Citadels can not be built directly. Instead, you have to construct a fortress
 first and then enhance it to a citadel. To do so, click on the fortress, then
 choose the enhance to citadel button. Your soldiers will leave the citadel
-while the construction is going on. This means that your has no military
+while the construction is going on. This means that your fortress has no military
 influence any more. If an enemy builds a military building nearby, your
 construction site could burn down. No sweat, that won't happen here.]]
       ) .. p(_
@@ -646,7 +646,7 @@ by using PAGE_UP, building a citadel takes a while.]]
    obj_title = _"Enhance your fortress to a citadel",
    obj_body = rt(h1(_ "Enhance your fortress") .. p(_
 [[Enhance your fortress to a mighty citadel. The citadel can house 12 soldiers
-and is the biggest military buildings the barbarians can build. It also costs a
+and is the biggest military building the barbarians can build. It also costs a
 lot and takes a long time to build. It is most suited to guard strategically
 important points like constricted points or mountains.]]
       )
@@ -657,14 +657,14 @@ attack_enemey = {
    pos = "topright", 
    title = _ "Defeat your enemy",
    body = rt(h1(_ "Defeat the enemy") .. p(_
-[[I created a sparing partner for you: It is an empire tribe close to your
+[[I created a sparring partner for you: It is an empire tribe close to your
 citadel. To attack its buildings, click on the door of your target building,
 choose the number of soldiers that you wish to send and click on the attack
 button. Your soldiers will come from all nearby military buildings. Likewise,
 the defenders will come from all nearby military buildings of the enemy and
 intercept your forces.]]
       ) .. p(_
-[[Attack and conquer all of military buildings of the enemy and destroy its
+[[Attack and conquer all of the military buildings of the enemy and destroy its
 headquarters.]]
       )
    ),
