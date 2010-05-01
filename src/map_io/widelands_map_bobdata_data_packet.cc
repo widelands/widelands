@@ -419,14 +419,12 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == WORKER_BOB_PACKET_VERSION) {
-			bool oldsoldier_fix = false;
-
 			if (upcast(Soldier, soldier, &worker)) {
 				try {
 					uint16_t const soldier_worker_bob_packet_version =
 						fr.Unsigned16();
 					if
-						(2 <= soldier_worker_bob_packet_version
+						(5 <= soldier_worker_bob_packet_version
 						 and
 						 soldier_worker_bob_packet_version
 						 <=
@@ -436,19 +434,8 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 						uint32_t min_hp = descr.get_min_hp();
 						assert(min_hp);
-						{
-							//  Soldiers created by old versions of Widelands have
-							//  wrong values for m_hp_max and m_hp_current; they were
-							//  soldier->descr().get_min_hp() less than they should
-							//  be, see bug #1687368.
-							uint32_t const broken_hp_compensation =
-								soldier_worker_bob_packet_version < 3 ? min_hp : 0;
-
-							soldier->m_hp_current =
-								broken_hp_compensation + fr.Unsigned32();
-							soldier->m_hp_max =
-								broken_hp_compensation + fr.Unsigned32();
-						}
+						soldier->m_hp_current = fr.Unsigned32();
+						soldier->m_hp_max = fr.Unsigned32();
 						// This has been commented because now exists a 'die' task,
 						// so a soldier can have 0 hitpoints if it's dying.
 						//if (not soldier->m_hp_current)
@@ -634,13 +621,8 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 							("evade",   get_evade,   get_evade_incr_per_level,
 							 m_evade_level,   m_evade);
 
-						if (soldier_worker_bob_packet_version <= 3) {
-							fr.Unsigned8 (); // old soldier->m_marked
-							oldsoldier_fix = true;
-						}
-						if (soldier_worker_bob_packet_version >= 5)
-							if (Serial const battle = fr.Unsigned32())
-								soldier->m_battle = &mol.get<Battle>(battle);
+						if (Serial const battle = fr.Unsigned32())
+							soldier->m_battle = &mol.get<Battle>(battle);
 
 						if (soldier_worker_bob_packet_version >= 6)
 						{
@@ -726,19 +708,6 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 				(WareInstance * const carried_item =
 				 	worker.m_carried_item.get(egbase))
 				carried_item->set_economy(economy);
-
-			if (oldsoldier_fix)
-				if (upcast(Soldier, soldier, &worker))
-					if (upcast(Game, game, &egbase))
-						if (upcast(MilitarySite, ms, soldier->get_location(egbase)))
-							if (soldier->get_position() == ms->get_position()) {
-								// Fix behaviour of soldiers in buildings
-								soldier->reset_tasks
-									(ref_cast<Game, Editor_Game_Base>(egbase));
-								soldier->start_task_buildingwork
-									(ref_cast<Game, Editor_Game_Base>(egbase));
-								ms->update_soldier_request();
-							}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);

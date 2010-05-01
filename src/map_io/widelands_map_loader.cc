@@ -36,8 +36,6 @@
 #include "widelands_map_flag_data_packet.h"
 #include "widelands_map_flagdata_data_packet.h"
 #include "widelands_map_heights_data_packet.h"
-#include "widelands_map_immovable_data_packet.h"
-#include "widelands_map_immovabledata_data_packet.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_node_ownership_data_packet.h"
 #include "widelands_map_object_packet.h"
@@ -155,18 +153,9 @@ int32_t WL_Map_Loader::load_map_complete
 
 	Map_Object_Packet mapobjects;
 
-	if (bool const have_immovables = m_fs.FileExists("binary/immovable")) {
-		log("Reading Immovable Data ... ");
-		{Map_Immovable_Data_Packet p;   p.Read(m_fs, egbase, !scenario, *m_mol);}
-		log("done!\n ");
-
-		if (m_fs.FileExists("binary/mapobjects"))
-			log("Warning: Map has both binary/immovable and binary/mapobjects\n");
-	} else {
-		log("Reading Map Objects ... ");
-		mapobjects.Read(m_fs, egbase, *m_mol);
-		log("done\n");
-	}
+	log("Reading Map Objects ... ");
+	mapobjects.Read(m_fs, egbase, *m_mol);
+	log("done\n");
 
 	log("Reading Player Start Position Data ... ");
 	{
@@ -262,11 +251,6 @@ int32_t WL_Map_Loader::load_map_complete
 
 	log("Reading Bobdata Data ... ");
 	{Map_Bobdata_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
-	log("done!\n ");
-
-	log("Reading Immovabledata Data ... ");
-	//  We do this only for binary compatibility.
-	{Map_Immovabledata_Data_Packet  p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Second and third phase loading Map Objects ... ");
