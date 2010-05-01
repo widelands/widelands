@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-04-28 17:16+0000\n"
+"PO-Revision-Date: 2010-04-30 19:34+0000\n"
 "Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-29 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-05-01 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -41,11 +41,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Armoursmith"
-msgstr ""
+msgstr "Ferreiro de Armaduras"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Armoursmithy"
-msgstr ""
+msgstr "Forja de Armaduras"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Ashes"
@@ -57,7 +57,7 @@ msgstr "Atlantes"
 
 #: ../../tribes/atlanteans/conf:118
 msgid "Baker"
-msgstr "Padaria"
+msgstr "Padeiro"
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Bakery"
@@ -87,52 +87,54 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:67
 msgid "Blackroot"
-msgstr ""
+msgstr "Raiz Escura"
 
 #: ../../tribes/atlanteans/conf:180
 msgid "Blackroot Farm"
-msgstr ""
+msgstr "Fazenda de Raízes Escuras"
 
 #: ../../tribes/atlanteans/conf:66
 msgid "Blackroot Flour"
-msgstr ""
+msgstr "Farinha de Raiz Escura"
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
 "Blackroot Flour is produced out of blackroots and is one of three parts of "
 "the atlantian bread."
 msgstr ""
+"A Farinha de Raiz Escura é produzida da raiz escura da Verônica e é uma das "
+"três partes do pão atlante."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Blackroot farmer"
-msgstr ""
+msgstr "Fazendeiro de Raízes Escuras"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Blackrootfield"
-msgstr ""
+msgstr "Campo de Raiz Escura"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Blackrootfield harvested"
-msgstr ""
+msgstr "Campo de Raiz Escura Cultivado"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Blackrootfield medium"
-msgstr ""
+msgstr "Campo de Raiz Escura Médio"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Blackrootfield small"
-msgstr ""
+msgstr "Campo de Raiz Escura Pequeno"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Blackrootfield tiny"
-msgstr ""
+msgstr "Campo de Raiz Escura Minúsculo"
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
 "Blackroots are a special kind of roots. The Atlanteans like their strong "
 "taste and use its flour for making bread."
 msgstr ""
-"Ervas-Estreladas são um tipo especial de raízes. Os Atlantes gostam de seu "
+"As Raizes Escuras são um tipo especial de raízes. Os Atlantes gostam de seu "
 "sabor forte e as usam como farinha para fazerem pão."
 
 #: ../../tribes/atlanteans/conf:68
@@ -145,7 +147,7 @@ msgstr "Criar peixes."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "Cria aranhas para produzir fios."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -186,7 +188,7 @@ msgstr "Vila Castelã"
 
 #: ../../tribes/atlanteans/conf:181
 msgid "Charcoal Burner's House"
-msgstr ""
+msgstr "Casa do Carvoeiro"
 
 #: ../../tribes/atlanteans/conf:160
 msgid "Citadel"
@@ -250,7 +252,7 @@ msgstr "Mina de Cristal"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr ""
+msgstr "Corta pedaços crus de granito de pedras"
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -387,7 +389,7 @@ msgstr "Martelo"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:18
 msgid "Harvest blackroot"
-msgstr "Colher Erva-estrelada"
+msgstr "Colher Raiz Escura"
 
 #: ../../tribes/atlanteans/farm/conf:21
 msgid "Harvest corn"
@@ -415,7 +417,7 @@ msgstr "Torreão"
 
 #: ../../tribes/atlanteans/conf:84
 msgid "Hook pole"
-msgstr ""
+msgstr "Gancho de Viga"
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Horse"
@@ -475,13 +477,15 @@ msgstr "A carne é uma das fontes de alimento dos Atlantes."
 
 #: ../../tribes/atlanteans/conf:91
 msgid "Milking Tongs"
-msgstr ""
+msgstr "Pinças de Ordenha"
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
 "Milking tongs are used by the spider breeder, to milk the spiders. They are "
 "produced by the toolsmith."
 msgstr ""
+"As Pinças de Ordenha são usada pelo criador de aranhas, para ordenhá-las. "
+"São produzidas na ferraria."
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Mill"
@@ -537,7 +541,7 @@ msgstr "Pranchas são um importante material de construção dos Atlantes."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:16
 msgid "Plant blackroot"
-msgstr "Plantar Erva-estrelada"
+msgstr "Plantar Raiz Escura"
 
 #: ../../tribes/atlanteans/farm/conf:19
 msgid "Plant corn"
@@ -545,7 +549,7 @@ msgstr "Plantar milho"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr ""
+msgstr "Planta e cultiva raiz escura."
 
 #: ../../tribes/atlanteans/farmer/conf:2
 msgid "Plants fields."
@@ -563,6 +567,8 @@ msgstr "Produz escudo avançado"
 msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
 msgstr ""
+"Produz escudo avançado  (somente em compatibilidade com velhos savegames "
+"(build13))"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -570,7 +576,7 @@ msgstr "Produzir pá de forno"
 
 #: ../../tribes/atlanteans/mill/conf:22
 msgid "Produce blackrootflour"
-msgstr ""
+msgstr "Produzir farinha de raiz escura"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bow"
@@ -610,7 +616,7 @@ msgstr "Produzir tridente duplo pesado"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce hook pole"
-msgstr ""
+msgstr "Produzir gancho de viga"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
@@ -622,7 +628,7 @@ msgstr "Produzir tridente longo"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce milking tongs"
-msgstr ""
+msgstr "Produzir pinça de ordenha"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce pick"
@@ -642,7 +648,7 @@ msgstr "Produzir pá"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:19
 msgid "Produce spidercloth"
-msgstr ""
+msgstr "Produzir tecido de aracnídeo"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"

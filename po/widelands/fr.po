@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-04-29 10:07+0000\n"
-"Last-Translator: Michael DOUBEZ <Unknown>\n"
+"PO-Revision-Date: 2010-04-30 15:25+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-04-30 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-05-01 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -32,13 +32,16 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:864 ../../src/wlapplication.cc:877
 msgid "could not find the path of the main executable"
-msgstr ""
+msgstr "le chemin d'accès du programme principal est introuvable"
 
 #: ../../src/wlapplication.cc:1000
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Le programme a attendu 5 secondes pour fermer le son. Il y a des problèmes "
+"donc Widelands va être fermé. Mettez à jour votre pilote\n"
+"de son et/ou SDL pour résoudre ce problème.\n"
 
 #: ../../src/wlapplication.cc:1161
 msgid ""
@@ -117,6 +120,22 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --record=FILENAME    Enregistre tous les évènements dans le fichier indiqué "
+"pour \n"
+"                      un rappel futur.\n"
+" --playback=FILENAME  Rejoue le fichier indiqué (voir record)\n"
+"\n"
+" --coredump=[yes|no]  Produit un fichier segfaults au lieu de SDL pour \n"
+"                      le fichier d'image mémoire.\n"
+" --language=[de_DE|sv_SE|...]\n"
+"                      The locale to use.\n"
+" --localedir=DIRNAME  Utilise DIRNAME comme emplacement local.\n"
+" --remove_syncstreams=[true|false]\n"
+"                      Enlève les fichiers syncstream au démarrage.\n"
+" --remove_replays=[...]\n"
+"                      Enlève les fichiers de rappel après cette durée (en "
+"jours).\n"
+"                      Si 0, les fichiers ne sont jamais effacés.\n"
 
 #: ../../src/wlapplication.cc:1320
 msgid ""
@@ -979,7 +998,7 @@ msgstr "Menu"
 
 #: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
-msgstr ""
+msgstr "Outils"
 
 #: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
@@ -1022,7 +1041,7 @@ msgstr "Chargement de la tribu : %s"
 
 #: ../../src/editor/editorinteractive.cc:177
 msgid "Creating players"
-msgstr ""
+msgstr "Création des joueurs"
 
 #: ../../src/editor/editorinteractive.cc:184
 #: ../../src/logic/editor_game_base.cc:313
@@ -1587,6 +1606,8 @@ msgid ""
 "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
 "section)"
 msgstr ""
+"%s n'est pas déclaré comme une entrée (\"%s=<count>\" n'a pas été trouvé "
+"dans la section [inputs])"
 
 #: ../../src/logic/production_program.cc:82
 #, c-format
@@ -1718,7 +1739,7 @@ msgstr "pause : %s"
 
 #: ../../src/logic/production_program.cc:624
 msgid "idle animation is default; calling is not allowed"
-msgstr ""
+msgstr "L'animation inactif est par défaut ; l'appel n'est pas autorisé"
 
 #: ../../src/logic/production_program.cc:674
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
@@ -1737,6 +1758,8 @@ msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
+"%s n'est pas déclaré comme produit (\"produit = %s\" n'as pas été trouvé "
+"dans la section [global])"
 
 #: ../../src/logic/production_program.cc:851
 msgid "Produced "
@@ -1966,6 +1989,18 @@ msgid ""
 "object, such as a farm field, is placed on the map while the worker is out "
 "working. (bug #1796611) (The game has been paused.)"
 msgstr ""
+"Le moteur du jeu a rencontré un problème de logique. Le %s # %u du joueur %u "
+"(portant %s) n'a pas trouvé le chemin du retour depuis (%i, %i) (avec %s "
+"inamovible) vers le drapeau de base à (%i, %i) de son %s à (%i, %i). Le %s "
+"sera sans domicile et va surement mourir, à moins que des objets soient "
+"enlevés bientôt et que le %s trouve son chemin vers l'entrepôt. Le %s va "
+"demander un nouvel ouvrier. Malheureusement, cela peut se répéter et vider "
+"le stock d'ouvrier (outils). Il n'y a pas de solution pour ce problème pour "
+"l'instant. Il serait plus sage de détruire le %s et de ne pas reconstruire à "
+"cet endroit de bâtiments qui envoie des ouvriers à l'extérieur. Ce problème "
+"se pose en général à proximité d'un terrain infranchissable, tel de l'eau, "
+"quand un objet, tel un champ, est placé sur la carte alors qu'un ouvrier est "
+"dehors. (bug #1796611) (Le jeux a été mis en pause)"
 
 #: ../../src/logic/worker.cc:1634
 msgid "nothing"
@@ -2866,7 +2901,7 @@ msgstr "Choisir un replay !"
 
 #: ../../src/ui_fsmenu/main.cc:42
 msgid "Play Tutorial"
-msgstr ""
+msgstr "Jouer le tutoriel"
 
 #: ../../src/ui_fsmenu/main.cc:49
 msgid "Single Player"
@@ -3731,11 +3766,11 @@ msgstr "Mot de passe vide"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Please enter your password!"
-msgstr ""
+msgstr "Veuillez entrer votre mot de passe !"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
-msgstr ""
+msgstr "Soldats"
 
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
@@ -3761,7 +3796,7 @@ msgstr "Zoom"
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:81
 msgid "Worker"
-msgstr ""
+msgstr "Ouvrier"
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
@@ -3769,7 +3804,7 @@ msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:73
 msgid "Next Level"
-msgstr ""
+msgstr "Niveau suivant"
 
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "(vacant)"
@@ -3813,11 +3848,11 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:52
 msgid "Workers (total)"
-msgstr ""
+msgstr "Ouvriers (total)"
 
 #: ../../src/wui/stock_menu.cc:59
 msgid "Wares in warehouses"
-msgstr ""
+msgstr "Marchandises dans les entrepôts"
 
 #: ../../src/wui/stock_menu.cc:66
 msgid "Workers in warehouses"
@@ -3825,7 +3860,7 @@ msgstr ""
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
-msgstr ""
+msgstr "Soldats en cours d'entrainement"
 
 #: ../../src/wui/transport_ui.cc:44
 msgid "Economy options"
@@ -4233,6 +4268,8 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
+"Impossible d'enlever ce joueur. Il est référencé quelque part. Enlevez tous "
+"les bâtiments et objets liés à ce joueur et recommencez."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
