@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-04-29 20:58+0000\n"
+"PO-Revision-Date: 2010-05-01 19:08+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-30 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-05-02 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1074,7 +1074,7 @@ msgstr ""
 #: ../../src/graphic/graphic.cc:818
 #, c-format
 msgid "Loading animations: %d%% complete"
-msgstr ""
+msgstr "Laster animasjoner: %d%% komplett"
 
 #: ../../src/logic/battle.cc:178
 #, c-format
@@ -1137,7 +1137,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:241
 msgid "Loading a world"
-msgstr ""
+msgstr "Laster en verden"
 
 #: ../../src/logic/game.cc:247
 #, c-format
@@ -1146,7 +1146,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:260
 msgid "Loading a map"
-msgstr ""
+msgstr "Laster et kart"
 
 #: ../../src/logic/game.cc:291 ../../src/logic/game.cc:345
 #: ../../src/logic/game.cc:378
@@ -1159,7 +1159,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:322
 msgid "Loading map"
-msgstr ""
+msgstr "Laster kart"
 
 #: ../../src/logic/game.cc:456
 msgid "Creating player infrastructure"

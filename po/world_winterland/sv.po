@@ -6,31 +6,73 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-14 14:51+0000\n"
-"PO-Revision-Date: 2010-03-14 15:38+0000\n"
-"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-05-01 11:09+0000\n"
+"Last-Translator: Rasmus Olstedt <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-15 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-05-02 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
 
-#: ../../worlds/winterland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Widelands utvecklingslag"
+#: ../../worlds/winterland/conf:45
+msgid "Aspen"
+msgstr "Asp"
 
-#: ../../worlds/winterland/conf:3
-msgid "Winterland"
-msgstr "Vinterland"
+#: ../../worlds/winterland/conf:46
+msgid "Aspen medium"
+msgstr "Asp mellan"
 
-#: ../../worlds/winterland/conf:4
-msgid ""
-"These are the white, wide and frosty winterlands, in which the Northmen "
-"dwell."
-msgstr "Detta är det vida, vita och kalla vinterlandet, där Nordmännen bor."
+#: ../../worlds/winterland/conf:47
+msgid "Aspen small"
+msgstr "Asp liten"
+
+#: ../../worlds/winterland/conf:48
+msgid "Aspen tiny"
+msgstr "Asp mycket liten"
+
+#: ../../worlds/winterland/conf:79
+msgid "Badger"
+msgstr "Grävling"
+
+#: ../../worlds/winterland/conf:65
+msgid "Beech"
+msgstr "Bok"
+
+#: ../../worlds/winterland/conf:66
+msgid "Beech medium"
+msgstr "Bok mellan"
+
+#: ../../worlds/winterland/conf:67
+msgid "Beech small"
+msgstr "Bok liten"
+
+#: ../../worlds/winterland/conf:68
+msgid "Beech tiny"
+msgstr "Bok mycket liten"
+
+#: ../../worlds/winterland/conf:61
+msgid "Birch"
+msgstr "Björk"
+
+#: ../../worlds/winterland/conf:62
+msgid "Birch medium"
+msgstr "Björk mellan"
+
+#: ../../worlds/winterland/conf:63
+msgid "Birch small"
+msgstr "Björk liten"
+
+#: ../../worlds/winterland/conf:64
+msgid "Birch tiny"
+msgstr "Björk mycket liten"
+
+#: ../../worlds/winterland/conf:80
+msgid "Bunny"
+msgstr "Hare"
 
 #: ../../worlds/winterland/conf:7
 #: ../../worlds/winterland/conf:8
@@ -40,6 +82,10 @@ msgstr "Detta är det vida, vita och kalla vinterlandet, där Nordmännen bor."
 msgid "Bush"
 msgstr "Buske"
 
+#: ../../worlds/winterland/resconf:4
+msgid "Coal"
+msgstr "Kol"
+
 #: ../../worlds/winterland/conf:12
 #: ../../worlds/winterland/conf:13
 #: ../../worlds/winterland/conf:14
@@ -47,16 +93,104 @@ msgstr "Buske"
 msgid "Dead Tree"
 msgstr "Dött träd"
 
+#: ../../worlds/winterland/conf:81
+msgid "Deer"
+msgstr "Hjort"
+
+#: ../../worlds/winterland/conf:82
+msgid "Duck"
+msgstr "And"
+
+#: ../../worlds/winterland/conf:83
+msgid "Elk"
+msgstr "Älg"
+
+#: ../../worlds/winterland/resconf:41
+msgid "Fish"
+msgstr "Fisk"
+
+#: ../../worlds/winterland/conf:84
+msgid "Fox"
+msgstr "Räv"
+
+#: ../../worlds/winterland/resconf:12
+msgid "Gold"
+msgstr "Guld"
+
+#: ../../worlds/winterland/resconf:28
+msgid "Granite"
+msgstr "Granit"
+
 #: ../../worlds/winterland/conf:16
 #: ../../worlds/winterland/conf:17
 #: ../../worlds/winterland/conf:18
 msgid "Grass"
 msgstr "Gräs"
 
+#: ../../worlds/winterland/resconf:20
+msgid "Iron"
+msgstr "Järn"
+
+#: ../../worlds/winterland/conf:69
+msgid "Larch"
+msgstr "Lärkträd"
+
+#: ../../worlds/winterland/conf:70
+msgid "Larch medium"
+msgstr "Lärkträd mellan"
+
+#: ../../worlds/winterland/conf:71
+msgid "Larch small"
+msgstr "Lärkträd litet"
+
+#: ../../worlds/winterland/conf:72
+msgid "Larch tiny"
+msgstr "Lärkträd mycket litet"
+
+#: ../../worlds/winterland/conf:85
+msgid "Lynx"
+msgstr "Lodjur"
+
+#: ../../worlds/winterland/conf:57
+msgid "Maple"
+msgstr "Lönn"
+
+#: ../../worlds/winterland/conf:58
+msgid "Maple medium"
+msgstr "Lönn mellan"
+
+#: ../../worlds/winterland/conf:59
+msgid "Maple small"
+msgstr "Lönn liten"
+
+#: ../../worlds/winterland/conf:60
+msgid "Maple tiny"
+msgstr "Lönn mycket liten"
+
+#: ../../worlds/winterland/conf:86
+msgid "Marten"
+msgstr "Mård"
+
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
 msgid "Mushroom"
 msgstr "Svamp"
+
+#: ../../worlds/winterland/conf:49
+msgid "Oak"
+msgstr "Ek"
+
+#: ../../worlds/winterland/conf:50
+msgid "Oak medium"
+msgstr "Ek mellan"
+
+#: ../../worlds/winterland/conf:51
+msgid "Oak small"
+msgstr "Ek liten"
+
+#: ../../worlds/winterland/conf:52
+msgid "Oak tiny"
+msgstr "Ek mycket liten"
 
 #: ../../worlds/winterland/conf:21
 #: ../../worlds/winterland/conf:22
@@ -67,6 +201,30 @@ msgstr "Svamp"
 msgid "Pebble"
 msgstr "Småsten"
 
+#: ../../worlds/winterland/conf:87
+msgid "Reindeer"
+msgstr "Ren"
+
+#: ../../worlds/winterland/conf:73
+msgid "Rowan"
+msgstr "Rönn"
+
+#: ../../worlds/winterland/conf:74
+msgid "Rowan medium"
+msgstr "Rönn mellan"
+
+#: ../../worlds/winterland/conf:75
+msgid "Rowan small"
+msgstr "Rönn liten"
+
+#: ../../worlds/winterland/conf:76
+msgid "Rowan tiny"
+msgstr "Rönn mycket liten"
+
+#: ../../worlds/winterland/conf:88
+msgid "Sheep"
+msgstr "Får"
+
 #: ../../worlds/winterland/conf:27
 #: ../../worlds/winterland/conf:28
 #: ../../worlds/winterland/conf:29
@@ -76,6 +234,22 @@ msgstr "Skelett"
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
 msgstr "Snögubbe"
+
+#: ../../worlds/winterland/conf:53
+msgid "Spruce"
+msgstr "Gran"
+
+#: ../../worlds/winterland/conf:54
+msgid "Spruce medium"
+msgstr "Gran mellan"
+
+#: ../../worlds/winterland/conf:55
+msgid "Spruce small"
+msgstr "Gran liten"
+
+#: ../../worlds/winterland/conf:56
+msgid "Spruce tiny"
+msgstr "Gran mycket liten"
 
 #: ../../worlds/winterland/conf:31
 #: ../../worlds/winterland/conf:32
@@ -96,177 +270,27 @@ msgstr "Stenblock"
 msgid "Stones"
 msgstr "Stenar"
 
+#: ../../worlds/winterland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Widelands utvecklingslag"
+
+#: ../../worlds/winterland/conf:4
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr "Detta är det vida, vita och kalla vinterlandet, där Nordmännen bor."
+
 #: ../../worlds/winterland/conf:44
 msgid "Track"
 msgstr "Spår"
 
-#: ../../worlds/winterland/conf:45
-msgid "Aspen"
-msgstr "Asp"
+#: ../../worlds/winterland/resconf:36
+msgid "Water"
+msgstr "Vatten"
 
-#: ../../worlds/winterland/conf:46
-msgid "Aspen medium"
-msgstr "Asp mellan"
-
-#: ../../worlds/winterland/conf:47
-msgid "Aspen small"
-msgstr "Asp liten"
-
-#: ../../worlds/winterland/conf:48
-msgid "Aspen tiny"
-msgstr "Asp mycket liten"
-
-#: ../../worlds/winterland/conf:49
-msgid "Oak"
-msgstr "Ek"
-
-#: ../../worlds/winterland/conf:50
-msgid "Oak medium"
-msgstr "Ek mellan"
-
-#: ../../worlds/winterland/conf:51
-msgid "Oak small"
-msgstr "Ek liten"
-
-#: ../../worlds/winterland/conf:52
-msgid "Oak tiny"
-msgstr "Ek mycket liten"
-
-#: ../../worlds/winterland/conf:53
-msgid "Spruce"
-msgstr "Gran"
-
-#: ../../worlds/winterland/conf:54
-msgid "Spruce medium"
-msgstr "Gran mellan"
-
-#: ../../worlds/winterland/conf:55
-msgid "Spruce small"
-msgstr "Gran liten"
-
-#: ../../worlds/winterland/conf:56
-msgid "Spruce tiny"
-msgstr "Gran mycket liten"
-
-#: ../../worlds/winterland/conf:57
-msgid "Maple"
-msgstr "Lönn"
-
-#: ../../worlds/winterland/conf:58
-msgid "Maple medium"
-msgstr "Lönn mellan"
-
-#: ../../worlds/winterland/conf:59
-msgid "Maple small"
-msgstr "Lönn liten"
-
-#: ../../worlds/winterland/conf:60
-msgid "Maple tiny"
-msgstr "Lönn mycket liten"
-
-#: ../../worlds/winterland/conf:61
-msgid "Birch"
-msgstr "Björk"
-
-#: ../../worlds/winterland/conf:62
-msgid "Birch medium"
-msgstr "Björk mellan"
-
-#: ../../worlds/winterland/conf:63
-msgid "Birch small"
-msgstr "Björk liten"
-
-#: ../../worlds/winterland/conf:64
-msgid "Birch tiny"
-msgstr "Björk mycket liten"
-
-#: ../../worlds/winterland/conf:65
-msgid "Beech"
-msgstr "Bok"
-
-#: ../../worlds/winterland/conf:66
-msgid "Beech medium"
-msgstr "Bok mellan"
-
-#: ../../worlds/winterland/conf:67
-msgid "Beech small"
-msgstr "Bok liten"
-
-#: ../../worlds/winterland/conf:68
-msgid "Beech tiny"
-msgstr "Bok mycket liten"
-
-#: ../../worlds/winterland/conf:69
-msgid "Larch"
-msgstr "Lärkträd"
-
-#: ../../worlds/winterland/conf:70
-msgid "Larch medium"
-msgstr "Lärkträd mellan"
-
-#: ../../worlds/winterland/conf:71
-msgid "Larch small"
-msgstr "Lärkträd litet"
-
-#: ../../worlds/winterland/conf:72
-msgid "Larch tiny"
-msgstr "Lärkträd mycket litet"
-
-#: ../../worlds/winterland/conf:73
-msgid "Rowan"
-msgstr "Rönn"
-
-#: ../../worlds/winterland/conf:74
-msgid "Rowan medium"
-msgstr "Rönn mellan"
-
-#: ../../worlds/winterland/conf:75
-msgid "Rowan small"
-msgstr "Rönn liten"
-
-#: ../../worlds/winterland/conf:76
-msgid "Rowan tiny"
-msgstr "Rönn mycket liten"
-
-#: ../../worlds/winterland/conf:79
-msgid "Badger"
-msgstr "Grävling"
-
-#: ../../worlds/winterland/conf:80
-msgid "Bunny"
-msgstr "Hare"
-
-#: ../../worlds/winterland/conf:81
-msgid "Deer"
-msgstr "Hjort"
-
-#: ../../worlds/winterland/conf:82
-msgid "Duck"
-msgstr "And"
-
-#: ../../worlds/winterland/conf:83
-msgid "Elk"
-msgstr "Älg"
-
-#: ../../worlds/winterland/conf:84
-msgid "Fox"
-msgstr "Räv"
-
-#: ../../worlds/winterland/conf:85
-msgid "Lynx"
-msgstr "Lodjur"
-
-#: ../../worlds/winterland/conf:86
-msgid "Marten"
-msgstr "Mård"
-
-#: ../../worlds/winterland/conf:87
-msgid "Reindeer"
-msgstr "Ren"
-
-#: ../../worlds/winterland/conf:88
-msgid "Sheep"
-msgstr "Får"
+#: ../../worlds/winterland/conf:3
+msgid "Winterland"
+msgstr "Vinterland"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"
@@ -276,29 +300,8 @@ msgstr "Visent"
 msgid "Wolf"
 msgstr "Varg"
 
-#: ../../worlds/winterland/resconf:4
-msgid "Coal"
-msgstr "Kol"
-
-#: ../../worlds/winterland/resconf:12
-msgid "Gold"
-msgstr "Guld"
-
-#: ../../worlds/winterland/resconf:20
-msgid "Iron"
-msgstr "Järn"
-
-#: ../../worlds/winterland/resconf:28
-msgid "Granit"
-msgstr "Sten"
-
-#: ../../worlds/winterland/resconf:36
-msgid "Water"
-msgstr "Vatten"
-
-#: ../../worlds/winterland/resconf:41
-msgid "Fish"
-msgstr "Fisk"
+#~ msgid "Granit"
+#~ msgstr "Sten"
 
 #~ msgid "Tree"
 #~ msgstr "Träd"

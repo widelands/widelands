@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-04-29 20:28+0000\n"
+"PO-Revision-Date: 2010-05-01 14:35+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-30 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-05-02 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/winterland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Osp"
 
 #: ../../worlds/winterland/conf:46
 msgid "Aspen medium"
@@ -39,7 +39,7 @@ msgstr "Grevling"
 
 #: ../../worlds/winterland/conf:65
 msgid "Beech"
-msgstr ""
+msgstr "Bøk"
 
 #: ../../worlds/winterland/conf:66
 msgid "Beech medium"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: ../../worlds/winterland/conf:61
 msgid "Birch"
-msgstr ""
+msgstr "Bjørk"
 
 #: ../../worlds/winterland/conf:62
 msgid "Birch medium"
@@ -71,7 +71,7 @@ msgstr ""
 
 #: ../../worlds/winterland/conf:80
 msgid "Bunny"
-msgstr ""
+msgstr "Kanin"
 
 #: ../../worlds/winterland/conf:7
 #: ../../worlds/winterland/conf:8
@@ -79,7 +79,7 @@ msgstr ""
 #: ../../worlds/winterland/conf:10
 #: ../../worlds/winterland/conf:11
 msgid "Bush"
-msgstr ""
+msgstr "Buske"
 
 #: ../../worlds/winterland/resconf:4
 msgid "Coal"
@@ -90,11 +90,11 @@ msgstr "Kull"
 #: ../../worlds/winterland/conf:14
 #: ../../worlds/winterland/conf:15
 msgid "Dead Tree"
-msgstr ""
+msgstr "Dødt tre"
 
 #: ../../worlds/winterland/conf:81
 msgid "Deer"
-msgstr ""
+msgstr "Hjort"
 
 #: ../../worlds/winterland/conf:82
 msgid "Duck"
@@ -102,7 +102,7 @@ msgstr "And"
 
 #: ../../worlds/winterland/conf:83
 msgid "Elk"
-msgstr ""
+msgstr "Elg"
 
 #: ../../worlds/winterland/resconf:41
 msgid "Fish"
@@ -152,7 +152,7 @@ msgstr "Gaupe"
 
 #: ../../worlds/winterland/conf:57
 msgid "Maple"
-msgstr ""
+msgstr "Lønn"
 
 #: ../../worlds/winterland/conf:58
 msgid "Maple medium"
@@ -168,7 +168,7 @@ msgstr ""
 
 #: ../../worlds/winterland/conf:86
 msgid "Marten"
-msgstr ""
+msgstr "Mår"
 
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
@@ -177,7 +177,7 @@ msgstr "Sopp"
 
 #: ../../worlds/winterland/conf:49
 msgid "Oak"
-msgstr ""
+msgstr "Eik"
 
 #: ../../worlds/winterland/conf:50
 msgid "Oak medium"
@@ -198,15 +198,15 @@ msgstr ""
 #: ../../worlds/winterland/conf:25
 #: ../../worlds/winterland/conf:26
 msgid "Pebble"
-msgstr ""
+msgstr "Småstein"
 
 #: ../../worlds/winterland/conf:87
 msgid "Reindeer"
-msgstr ""
+msgstr "Rein"
 
 #: ../../worlds/winterland/conf:73
 msgid "Rowan"
-msgstr ""
+msgstr "Rogn"
 
 #: ../../worlds/winterland/conf:74
 msgid "Rowan medium"
@@ -236,7 +236,7 @@ msgstr "Snømann"
 
 #: ../../worlds/winterland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Gran"
 
 #: ../../worlds/winterland/conf:54
 msgid "Spruce medium"
@@ -267,7 +267,7 @@ msgstr ""
 #: ../../worlds/winterland/conf:42
 #: ../../worlds/winterland/conf:43
 msgid "Stones"
-msgstr ""
+msgstr "Steiner"
 
 #: ../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
@@ -289,7 +289,7 @@ msgstr "Vann"
 
 #: ../../worlds/winterland/conf:3
 msgid "Winterland"
-msgstr ""
+msgstr "Vinterland"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"

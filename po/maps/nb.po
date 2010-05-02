@@ -1,4 +1,4 @@
-# Latin translation for widelands
+# Norwegian Bokmal translation for widelands
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-01 13:37+0000\n"
-"Last-Translator: Sonnrain <Unknown>\n"
-"Language-Team: Latin <la@li.org>\n"
+"PO-Revision-Date: 2010-05-01 18:40+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
+"Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,15 +19,15 @@ msgstr ""
 
 #: ../../campaigns/cconfig:24
 msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Tutorialis) Barbari - Imperium secundum"
+msgstr "(Opplæring) Barbarer - Det andre imperiet"
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
-msgstr "I - De nemese ad genesem"
+msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "In hac tabula pro nonnullis ludoribus insula X formae creata est."
+msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -37,10 +37,6 @@ msgid ""
 "Gods? You believe it is and you hope, that your tribe will find the treasure "
 "of this island, before other tribes will follow."
 msgstr ""
-"Paucos milia passuum a Gerion litore parva insula sita est, cui nomen non "
-"est. Abhinc te ibi navare non oportet sed heri magna ignis a caelo veniens "
-"media insula inflixit. Divinumne signum? Ita putans speras tuos gazam "
-"insulae inventuros antequam alii sequant."
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
@@ -49,20 +45,18 @@ msgid ""
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only enough place for one tribe."
 msgstr ""
-"Longe te duce gens apud hoc lacu colunt. Nemo vos turbabat et satis materiei "
-"aderant sed paucis mentibus ante alia gens per montes advenit et vicus "
-"condidit. Tu solum satis terrae pro una gente esse non nescis!"
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
 msgstr ""
-"In hac tabula pro nonnullis ludoribus parva insula circuli formae creata est."
 
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
 msgstr ""
+"Et mystisk land, fullt av forskjellige landskaper, som alle krysses av en "
+"håndfull store elver."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -76,6 +70,8 @@ msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way, than occupying the land of your enemies."
 msgstr ""
+"En annen underlig test fra gudene. Den eneste måten å komme til den andre "
+"siden ser ut til å være å ta over landområdene til fiendene dine."
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
@@ -88,27 +84,27 @@ msgstr ""
 
 #: ../../campaigns/cconfig:36
 msgid "Atlanteans - the new rise"
-msgstr "Atlantidenses - Ascensio nova"
+msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
-msgstr "Atollum"
+msgstr "Atoll"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
-msgstr "Scacci matti"
+msgstr "Sjakkmatt"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
-msgstr "Cometae insula"
+msgstr "Kometøya"
 
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
-msgstr "Crater"
+msgstr "Krater"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
-msgstr "Alveus torridus"
+msgstr ""
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -117,10 +113,6 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
-"Circum quaque gente sunt quattuor montes. Quis primus has occupans aquam "
-"terramque sibi esse dicet?\r\n"
-"Tibi ostento: I. Aquam apud flumen invenies. II. Viri nivei plus aquae "
-"indicant. III. In quaque monte solum unum aes est."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -128,7 +120,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
-msgstr "Imperium - Exilii menses"
+msgstr ""
 
 #: ../../campaigns/cconfig:74
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
@@ -140,15 +132,15 @@ msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
-msgstr "Hostem visum!"
+msgstr "Fiende i sikte"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
-msgstr "Lacus Finnici"
+msgstr ""
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
-msgstr "Ludi ignei"
+msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
@@ -167,19 +159,19 @@ msgstr ""
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
-msgstr "Quattuor castelli"
+msgstr ""
 
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
-msgstr "Montes Quattuor"
+msgstr "Fire fjell"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
-msgstr "Lacus gelidus"
+msgstr ""
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
-msgstr "Paeninsula aurea"
+msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
@@ -190,8 +182,6 @@ msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories unaware of the fact that they are not alone!"
 msgstr ""
-"In has montes duo reguli vicos condiderunt. Nunc se solum non esse "
-"nescientes terras augeunt!"
 
 #: ../../maps/Firegames.wmf/elemental:9
 msgid ""
@@ -203,7 +193,7 @@ msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
-msgstr ""
+msgstr "Øyer i krig"
 
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid ""
@@ -226,6 +216,9 @@ msgid ""
 "place you were born and you lived your whole life. If you don't want to lose "
 "it, defend it! "
 msgstr ""
+"Det lukter som sump, det ser ut som sump og det er sump. Men det er her du "
+"ble født og har bodd hele livet ditt. Hvis du ikke vil miste det, må du "
+"forsvare det! "
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
@@ -233,13 +226,10 @@ msgid ""
 "wonder, that there is not much water left in this dry riverbed. Everyone "
 "knows: soon there will be a war. A war about the last of water."
 msgstr ""
-"Tempora transeunt a gutta pluvia ultima ad hoc terram cadente. Ea re paucum "
-"aquae in hoc alveo torrido relicta est. Omnes se mox pugnaturos esse non "
-"nesciunt. Pugnabunt, ut postrema copia aquae obtineant."
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
-msgstr "Lacus tranquillitatis"
+msgstr ""
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
@@ -250,8 +240,8 @@ msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the "
 "crater. Two tribes are now fighting for the rich resources."
 msgstr ""
-"Olim lapis de caelo in has montes cecidit. Nunc vita in cratere florente duo "
-"gentes pugnant, ut divitem terram habeant."
+"Lenge etter at en meteor slo ned i en fjellgruppe, yrer det nå av liv i "
+"krateret. To stammer kjemper nå om ressursene."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -268,7 +258,7 @@ msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
-msgstr ""
+msgstr "Mystisk labyrint"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -302,7 +292,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:39
 msgid "Some descriptive texts..."
-msgstr "Texta describentia quaedam..."
+msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -321,7 +311,7 @@ msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
-msgstr ""
+msgstr "Sumpøya"
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -355,7 +345,7 @@ msgstr ""
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
-msgstr ""
+msgstr "Den lange veien"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The pass through the mountains"
@@ -379,8 +369,6 @@ msgid ""
 "These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
 "forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
-"Finnica hic est amoena terra, quae sunt lacus et flumina et silvae antiquae "
-"et montes. Nunc a te via invenienda est..."
 
 #: ../../maps/The big lake.wmf/elemental:9
 msgid ""
@@ -401,19 +389,19 @@ msgstr ""
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
-msgstr ""
+msgstr "Tre krigere"
 
 #: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Tutorialis I - Oculi in obscuro"
+msgstr "Opplæring 1 - Øyne i mørket"
 
 #: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutorialis II - Locus qui domum appellemus"
+msgstr ""
 
 #: ../../campaigns/cconfig:67
 msgid "Tutorial3 - This land is our land"
-msgstr "Tutorialis III - Hoc nostrum solum"
+msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -452,17 +440,6 @@ msgid ""
 "Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
 "force the tribes to march once again under a common banner."
 msgstr ""
-"Chat'Karuth senecto mortem obienti erant tres fortissimi gloriaeque avidi "
-"filii et erat exercitus, qui omnes hostes silvas antiquas aggredientes "
-"superabat. Glorioso regno prope expleto filius maximus natu, qui Thron "
-"nominatus erat, ab patre imperator electus est, quo alii fratri minime "
-"satiati erant. Senectus imperator hoc non nesciens filio consilium dedit, ut "
-"Thron e capite regni, quae urbs Al'thunran appellata erat, eveniret et "
-"copias in montes altas cogeret. Haec facta Thron corpus patris in sepulcro "
-"deponens per deos animamque patris iuravit, ut olim reverteret et ordinem "
-"restitueret. Dum fratres caece irati contra Thron atque paucos milites, qui "
-"limites Al'thuran urbis defendebant, bellum gerunt, iuvenis imperator "
-"fratres coniungendos et omnes gentes sub uno signo congregandas petivit."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -470,8 +447,6 @@ msgid ""
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
 msgstr ""
-"Utrum sit insolitissima species natura an sit creata a demente (aut ludi "
-"avidissimo) deo: Hac insana tabula duo hostes novi pro caedi expectantur."
 
 #: ../../maps/Last Bastion.wmf/elemental:11
 msgid ""
@@ -489,7 +464,7 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr "Quis rex verus magni atolli fiet?"
+msgstr "Hvem vil bli den virkelige herskeren over det store atollet?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
@@ -502,23 +477,3 @@ msgid ""
 "hard to get, but easy to lose, so if you want it, be aware of the other "
 "clans."
 msgstr ""
-
-#~ msgid ""
-#~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
-#~ "soldiers at the frontier among the northern forests, where Barbarian-tribes "
-#~ "and official Empire-land are crossing. His task was to defend the Empire-"
-#~ "land. First everything was calm, he even talked to few barbarian children "
-#~ "and thought about a peaceful life - side by side with this archaic folk. He "
-#~ "began to feel saver and his army begun to draw off the attention on they "
-#~ "potential enemy - that was their fault. At one night in March his unprepared "
-#~ "army was attacked by 100 barbarian footmen and was completely scattered. "
-#~ "Only with pure life he and a handful of soldiers survived."
-#~ msgstr ""
-#~ "Sex menses Lutius, iuvenis dux imperii, ad patriam defendendam cum CL "
-#~ "militibus apud septentrionalem confinium ultimum erat, qua regione silvestri "
-#~ "gentes barbariorum tangunt imperium. Omnibus primo quiescentibus Lutius cum "
-#~ "quibusdem liberis locutus de tranquilla vita cum hac antiqua gente "
-#~ "cogitabat. Se securios esse aestimantes huius milites hostem neglegebant. "
-#~ "Quod error maximus. Subito martialis nocte praeter expectatione exercitus a "
-#~ "C barbaris agressus omninoque pervictus est. Lutius et pauci milites solam "
-#~ "vitam servaverunt."
