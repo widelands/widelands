@@ -207,7 +207,6 @@ void Building_Statistics_Menu::draw(RenderTarget & dst) {
 		dst.drawanim
 			(FLAG_POINT - Point(TRIANGLE_WIDTH / 2, TRIANGLE_HEIGHT),
 			 m_anim, 0, &player);
-	dst.drawanim(FLAG_POINT, player.flag_anim(), 0, &player);
 
 	// Draw all the panels etc. above the background
 	UI::Window::draw(dst);

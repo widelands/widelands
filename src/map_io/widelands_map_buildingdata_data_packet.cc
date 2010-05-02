@@ -487,44 +487,21 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if
-			(packet_version == CURRENT_MILITARYSITE_PACKET_VERSION ||
-			 packet_version == 2)
+		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION)
 		{
 			read_productionsite(militarysite, fr, game, mol);
 
-			if (packet_version >= 3) {
-				delete militarysite.m_soldier_request;
-				militarysite.m_soldier_request = 0;
+			delete militarysite.m_soldier_request;
+			militarysite.m_soldier_request = 0;
 
-				if (fr.Unsigned8()) {
-					militarysite.m_soldier_request =
-						new Request
-							(militarysite,
-							 Ware_Index::First(),
-							 MilitarySite::request_soldier_callback,
-							 Request::WORKER);
-					militarysite.m_soldier_request->Read(fr, game, mol);
-				}
-			} else if (packet_version == 2) {
-				uint16_t const nr_requests = fr.Unsigned16();
-				for (uint16_t i = 0; i < nr_requests; ++i) {
-					// Oh well...
-					Request req
+			if (fr.Unsigned8()) {
+				militarysite.m_soldier_request =
+					new Request
 						(militarysite,
-						 Ware_Index::First(),
-						 MilitarySite::request_soldier_callback,
-						 Request::WORKER);
-					req.Read(fr, game, mol);
-				}
-			}
-
-			if (packet_version == 2) {
-				// We don't keep soldier lists anymore, but we do have to fix
-				// existing soldiers
-				uint16_t const nr_soldiers = fr.Unsigned16();
-				for (uint16_t i = 0; i < nr_soldiers; ++i)
-					fr.Unsigned32();
+							Ware_Index::First(),
+							MilitarySite::request_soldier_callback,
+							Request::WORKER);
+				militarysite.m_soldier_request->Read(fr, game, mol);
 			}
 
 			if ((militarysite.m_didconquer = fr.Unsigned8())) {
@@ -546,10 +523,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 
 			//  capacity (modified by user)
 			militarysite.m_capacity = fr.Unsigned8();
-
-			if (packet_version >= 3) {
-				militarysite.m_nexthealtime = fr.Signed32();
-			}
+			militarysite.m_nexthealtime = fr.Signed32();
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -762,8 +736,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 statistics_string_length)
 						log
 							("WARNING: productionsite statistics string can be at "
-							 "most %lu characters but a loaded building has the "
-							 "string \"%s\" of length %lu\n",
+							 "most %u characters but a loaded building has the "
+							 "string \"%s\" of length %u\n",
 							 sizeof(productionsite.m_statistics_buffer) - 1,
 							 statistics_string, statistics_string_length);
 				}
@@ -780,8 +754,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 result_string_length)
 						log
 							("WARNING: productionsite result string can be at "
-							 "most %lu characters but a loaded building has the "
-							 "string \"%s\" of length %lu\n",
+							 "most %u characters but a loaded building has the "
+							 "string \"%s\" of length %u\n",
 							 sizeof(productionsite.m_result_buffer) - 1,
 							 result_string, result_string_length);
 				}
@@ -805,9 +779,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 {
 	try {
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();
-		if
-			(trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION ||
-			 trainingsite_packet_version == 2)
+		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION)
 		{
 			read_productionsite(trainingsite, fr, game, mol);
 
@@ -836,10 +808,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					upgrade->prio = fr.Unsigned8();
 					upgrade->credit = fr.Unsigned8();
 					upgrade->lastattempt = fr.Signed32();
-					if (trainingsite_packet_version > 2)
-						upgrade->lastsuccess = fr.Unsigned8();
-					else
-						upgrade->lastsuccess = fr.Signed32() == upgrade->lastattempt;
+					upgrade->lastsuccess = fr.Unsigned8();
 				} else {
 					fr.Unsigned8();
 					fr.Unsigned8();
@@ -847,59 +816,6 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					fr.Signed32();
 				}
 			}
-		} else if (trainingsite_packet_version == 1) {
-			read_productionsite(trainingsite, fr, game, mol);
-
-			// Compatibility: trainingsite used to require a list of soldiers
-			// This is now dealt with automatically via add_workers
-			{
-				uint16_t const nr_requests = fr.Unsigned16();
-				for (uint16_t i = 0; i < nr_requests; ++i) {
-					Request req
-						(trainingsite,
-						 Ware_Index::First(),
-						 TrainingSite::request_soldier_callback,
-						 Request::WORKER);
-					req.Read(fr, game, mol);
-				}
-			}
-			{
-				uint16_t const nr_soldiers = fr.Unsigned16();
-				for (uint16_t i = 0; i < nr_soldiers; ++i) {
-					uint32_t const soldier_serial = fr.Unsigned32();
-					try {
-						trainingsite.m_soldiers.push_back
-							(&mol.get<Soldier>(soldier_serial));
-					} catch (_wexception const & e) {
-						throw game_data_error
-							("soldier #%u (%u): %s", i, soldier_serial, e.what());
-					}
-				}
-			}
-
-			// Do not save m_list_upgrades (remake at load).
-
-			//  Building heros?
-			trainingsite.m_build_heros = fr.Unsigned8();
-
-			//  priority upgrades
-			trainingsite.set_pri(atrHP, fr.Unsigned16());
-			trainingsite.set_pri(atrAttack, fr.Unsigned16());
-			trainingsite.set_pri(atrDefense, fr.Unsigned16());
-			trainingsite.set_pri(atrEvade, fr.Unsigned16());
-
-			//  priority modificators (not compatible with new version)
-			fr.Unsigned16();
-			fr.Unsigned16();
-			fr.Unsigned16();
-			fr.Unsigned16();
-
-			//  capacity (modified by user)
-			trainingsite.m_capacity = fr.Unsigned8();
-
-			fr.CString(); //  m_prog_name -- this is obsolete
-
-			trainingsite.update_soldier_request();
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), trainingsite_packet_version);

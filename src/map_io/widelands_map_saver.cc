@@ -36,8 +36,6 @@
 #include "widelands_map_flag_data_packet.h"
 #include "widelands_map_flagdata_data_packet.h"
 #include "widelands_map_heights_data_packet.h"
-#include "widelands_map_immovable_data_packet.h"
-#include "widelands_map_immovabledata_data_packet.h"
 #include "widelands_map_map_object_saver.h"
 #include "widelands_map_node_ownership_data_packet.h"
 #include "widelands_map_object_packet.h"

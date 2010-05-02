@@ -45,50 +45,6 @@ void Requirements::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == REQUIREMENTS_VERSION) {
 			*this = RequirementsStorage::read(fr, egbase, mol);
-		} else if (packet_version == 2) {
-			RequireAnd req;
-
-			for (;;) {
-				uint32_t const at = fr.Unsigned32();
-
-				if (at == 0xffffffff)
-					break;
-
-				int32_t const min = fr.Signed32();
-				int32_t const max = fr.Signed32();
-
-				req.add(RequireAttribute(static_cast<tAttribute>(at), min, max));
-			}
-
-			*this = req;
-		} else if (packet_version == 1) {
-			RequireAnd req;
-
-			{ //  HitPoints Levels
-				uint8_t const min = fr.Unsigned8();
-				uint8_t const max = fr.Unsigned8();
-				req.add(RequireAttribute(atrHP, min, max));
-			}
-
-			{ //  Attack Levels
-				uint8_t const min = fr.Unsigned8();
-				uint8_t const max = fr.Unsigned8();
-				req.add(RequireAttribute(atrAttack, min, max));
-			}
-
-			{ //  Defense levels
-				uint8_t const min = fr.Unsigned8();
-				uint8_t const max = fr.Unsigned8();
-				req.add(RequireAttribute(atrDefense, min, max));
-			}
-
-			{ //  Evade
-				uint8_t const min = fr.Unsigned8();
-				uint8_t const max = fr.Unsigned8();
-				req.add(RequireAttribute(atrEvade, min, max));
-			}
-
-			*this = req;
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);

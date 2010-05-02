@@ -40,15 +40,12 @@ void Game_Player_Info_Data_Packet::Read
 		FileRead fr;
 		fr.Open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.Unsigned16();
-		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		if (5 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 			uint32_t const max_players = fr.Unsigned16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
 				if (fr.Unsigned8()) {
 					bool    const see_all = fr.Unsigned8();
-					if (packet_version <= 2)
-						// Used to be the player type, not needed anymore
-						fr.Signed32();
 
 					int32_t const plnum   =
 						packet_version < 7 ? fr.Signed32() : fr.Player_Number8();
@@ -110,19 +107,13 @@ void Game_Player_Info_Data_Packet::Read
 					for (uint32_t j = 0; j < 4; ++j)
 						player.m_playercolor[j] = rgb[j];
 
-					if (packet_version >= 2) {
-						player.ReadStatistics(fr, 0);
-						if (packet_version >= 4) {
-							player.m_casualties = fr.Unsigned32();
-							player.m_kills      = fr.Unsigned32();
-							if (packet_version >= 5) {
-								player.m_msites_lost         = fr.Unsigned32();
-								player.m_msites_defeated     = fr.Unsigned32();
-								player.m_civil_blds_lost     = fr.Unsigned32();
-								player.m_civil_blds_defeated = fr.Unsigned32();
-							}
-						}
-					}
+					player.ReadStatistics(fr, 0);
+					player.m_casualties = fr.Unsigned32();
+					player.m_kills      = fr.Unsigned32();
+					player.m_msites_lost         = fr.Unsigned32();
+					player.m_msites_defeated     = fr.Unsigned32();
+					player.m_civil_blds_lost     = fr.Unsigned32();
+					player.m_civil_blds_defeated = fr.Unsigned32();
 
 					if (packet_version >= 8) {
 						player.allow_retreat_change(fr.Unsigned8());
@@ -131,12 +122,7 @@ void Game_Player_Info_Data_Packet::Read
 				}
 			}
 
-			if (packet_version >= 2)
-				game.ReadStatistics
-					(fr,
-					 packet_version >= 5 ? 3 :
-					 packet_version == 4 ? 2 :
-					 1);
+			game.ReadStatistics(fr, 3);
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
