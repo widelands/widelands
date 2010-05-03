@@ -77,9 +77,24 @@ int report_error(lua_State * L, const char * const fmt, ...) {
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	lua_pushstring(L, buffer);
+
+	// Also create a traceback
+	lua_getfield(L, LUA_GLOBALSINDEX, "debug");
+	if (!lua_istable(L, -1)) {
+		lua_pop(L, 1);
+		return 1;
+	}
+	lua_getfield(L, -1, "traceback");
+	if (!lua_isfunction(L, -1)) {
+		lua_pop(L, 2);
+		return 1;
+	}
+	lua_pushstring(L, buffer); // error message
+	lua_pushinteger(L, 2);  /* skip this function and traceback */
+	lua_call(L, 2, 1);  /* call debug.traceback */
 
 	lua_error(L);
 
 	return 0;
 }
+
