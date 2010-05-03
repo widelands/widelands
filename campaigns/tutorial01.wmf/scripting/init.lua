@@ -88,6 +88,7 @@ function msg_box(i)
       i.posy = 0
    end
 
+   wl.ui.set_user_input_allowed(true)
    plr:message_box(i.title, i.body, i)
 
    blocker:lift_blocks()
