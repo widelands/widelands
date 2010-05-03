@@ -516,7 +516,7 @@ function build_a_quarry()
    sleep( 120*1000 )   
 
    -- Interludium: talk about census and statistics
-   census_and_statistics(cs)
+   census_and_statistics(cs.fields[1])
 
    while #plr:get_buildings("quarry") < 1 do sleep(1400) end
    o.done = true
@@ -524,8 +524,8 @@ function build_a_quarry()
    messages()
 end
    
-function census_and_statistics(cs)
-   sleep(25000)
+function census_and_statistics(field)
+   sleep(15000)
    
    local blocker = UserInputDisabler:new()
 
@@ -535,7 +535,7 @@ function census_and_statistics(cs)
    msg_box(census_and_statistics_00)
    -- Pick any empty field
    local function _pick_empty_field()
-      local reg = cs.fields[1]:region(2)
+      local reg = field:region(2)
       local f
       repeat
          f = reg[math.random(#reg)]
