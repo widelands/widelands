@@ -122,6 +122,24 @@ bool Road::get_passable() const throw ()
 	return true;
 }
 
+BaseImmovable::PositionList Road::get_positions
+	(const Editor_Game_Base & egbase) const throw()
+{
+	Map & map = egbase.map();
+	Coords curf = map.get_fcoords(m_path.get_start());
+
+	PositionList rv;
+	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
+	for (Path::Step_Vector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
+	{
+		if (steps > 0 && steps < m_path.get_nsteps())
+			rv.push_back(curf);
+
+		if (steps < m_path.get_nsteps())
+			map.get_neighbour(curf, m_path[steps], &curf);
+	}
+	return rv;
+}
 
 static std::string const road_name = "road";
 std::string const & Road::name() const throw () {return road_name;}

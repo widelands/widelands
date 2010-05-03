@@ -40,6 +40,11 @@
 #endif
 
 // TODO: add wl.editor to documentation
+// TODO: position or field should be on the immovable classes.
+// Check out what this BaseImmovable <-> Immovable thing is all about.
+// TODO: road must offer some access to it's fields for this to work.
+// TODO: also big buildings occupy more space: i suggest some occupied fields property
+// TODO: and also a field property
 
 /*
 ============================================

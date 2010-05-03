@@ -348,6 +348,15 @@ int32_t Immovable::get_type() const throw ()
 	return IMMOVABLE;
 }
 
+BaseImmovable::PositionList Immovable::get_positions
+	(const Editor_Game_Base &) const throw ()
+{
+	PositionList rv;
+
+	rv.push_back(m_position);
+	return rv;
+}
+
 int32_t Immovable::get_size() const throw ()
 {
 	return descr().get_size();

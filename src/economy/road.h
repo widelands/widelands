@@ -78,6 +78,7 @@ struct Road : public PlayerImmovable {
 	char const * type_name() const throw () {return "road";}
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
+	virtual PositionList get_positions(const Editor_Game_Base &) const throw ();
 	std::string const & name() const throw ();
 
 	virtual Flag & base_flag();

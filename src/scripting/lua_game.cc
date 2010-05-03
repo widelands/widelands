@@ -571,11 +571,14 @@ int L_Player::message_box(lua_State * L) {
 	}
 #undef CHECK_ARG
 
+	std::string title = luaL_checkstring(L, 2);
+	std::string body =  luaL_checkstring(L, 3);
+
 	uint32_t cspeed = game.gameController()->desiredSpeed();
 	game.gameController()->setDesiredSpeed(0);
 
-	std::string title = luaL_checkstring(L, 2);
-	std::string body =  luaL_checkstring(L, 3);
+	game.save_handler().set_allow_autosaving(false);
+
 	Story_Message_Box * mb =
 		new Story_Message_Box
 				(game.get_ipl(), luaL_checkstring(L, 2), luaL_checkstring(L, 3),
@@ -586,9 +589,12 @@ int L_Player::message_box(lua_State * L) {
 
 	// Manually force the game to reevaluate it's current state,
 	// especially time information.
-	game.think();
+	game.gameController()->think();
 
 	game.gameController()->setDesiredSpeed(cspeed);
+
+	game.save_handler().set_allow_autosaving(true);
+
 	return 1;
 }
 
@@ -1581,15 +1587,45 @@ static int L_set_speed(lua_State * L) {
 }
 
 /* RST
-	.. function:: get_speed(speed)
+.. function:: get_speed(speed)
 
-		Gets the current game speed
+	Gets the current game speed
 
-		:returns: :const:`nil`
+	:returns: :const:`nil`
 */
 // UNTESTED
 static int L_get_speed(lua_State * L) {
 	lua_pushuint32(L, get_game(L).gameController()->desiredSpeed());
+	return 1;
+}
+
+/* RST
+	.. function:: set_allow_autosaving(b)
+
+		Disable or enable auto-saving. When you show off UI features in a
+		tutorial or scenario, you have to disallow auto-saving because UI
+		elements can now be saved.
+
+		:arg b: allow autosaving or disallow it
+		:type b: :class:`boolean`
+*/
+// UNTESTED
+static int L_set_allow_autosaving(lua_State * L) {
+	get_game(L).save_handler().set_allow_autosaving
+		(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+	.. function:: get_allow_autosaving
+
+		Returns the current state of autosaving.
+
+		:returns: :class:`boolean`
+*/
+// UNTESTED
+static int L_get_allow_autosaving(lua_State * L) {
+	lua_pushboolean(L, get_game(L).save_handler().get_allow_autosaving());
 	return 1;
 }
 
@@ -1598,6 +1634,8 @@ const static struct luaL_reg wlgame [] = {
 	{"get_time", &L_get_time},
 	{"get_speed", &L_get_speed},
 	{"set_speed", &L_set_speed},
+	{"set_allow_autosaving", &L_set_allow_autosaving},
+	{"get_allow_autosaving", &L_get_allow_autosaving},
 	{0, 0}
 };
 
