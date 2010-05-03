@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-01 20:26+0000\n"
+"PO-Revision-Date: 2010-05-02 09:00+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-02 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-05-03 03:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -46,7 +46,7 @@ msgstr "Loricarum faber"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Armoursmithy"
-msgstr ""
+msgstr "Fabrica loricarum"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Ashes"
@@ -395,11 +395,11 @@ msgstr "Maizum metit"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Headquarters"
-msgstr ""
+msgstr "Principia"
 
 #: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Principia mediocria"
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Heavy Double Trident"
@@ -539,7 +539,7 @@ msgstr "Radices nigras serit"
 
 #: ../../tribes/atlanteans/farm/conf:19
 msgid "Plant corn"
-msgstr ""
+msgstr "Maizum colit."
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
@@ -547,11 +547,11 @@ msgstr "Radices nigras serit metitque"
 
 #: ../../tribes/atlanteans/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Agros colit."
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Arbores colit."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
@@ -677,7 +677,7 @@ msgstr "Arma militibus fabricat."
 
 #: ../../tribes/atlanteans/conf:193
 msgid "Quarry"
-msgstr ""
+msgstr "Lapidicina"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Quartz"
@@ -701,11 +701,11 @@ msgstr "Est indicatum hic aurum multum situm"
 
 #: ../../tribes/atlanteans/conf:56
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Est indicatum hic granitum paucum situm"
 
 #: ../../tribes/atlanteans/conf:57
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Est indicatum hic granitum paucum situm"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Resource indicator iron little"
@@ -757,6 +757,8 @@ msgstr "Casa exploratoris"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Exploratores, sicut Explorus explorans explorator, regiones inexploratas "
+"exploraverunt modo explorante."
 
 #: ../../tribes/atlanteans/conf:96
 msgid "Scythe"
@@ -979,7 +981,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid "This is the medium trident - used by advanced soldiers."
-msgstr ""
+msgstr "Hunc tridentem medium expertiores milites utuntur."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -993,7 +995,7 @@ msgstr "Hoc est luteum aes aureum."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid "This steel shield is used by experienced soldiers."
-msgstr ""
+msgstr "Hoc scutum chalybe experti milites utuntur."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
@@ -1062,6 +1064,8 @@ msgid ""
 "Trunks are the base for planks, which are used in nearly every building of "
 "the Atlanteans."
 msgstr ""
+"E lignis trabaliis ligna tabularia faciuntur. Quibus aedificia Atlantidensia "
+"construuntur."
 
 #: ../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
@@ -1163,19 +1167,19 @@ msgstr "Aqua"
 msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, for example to make bread."
-msgstr ""
+msgstr "Aqua essentialis vitae est! Quacum panis et aliae res faciuntur."
 
 #: ../../tribes/atlanteans/conf:199
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Fabrica armorum"
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid "Weapons and Tools are made of iron."
-msgstr ""
+msgstr "Arma instrumentaque e ferro fabricantur."
 
 #: ../../tribes/atlanteans/conf:137
 msgid "Weaponsmith"
-msgstr ""
+msgstr "Faber armorum"
 
 #: ../../tribes/atlanteans/conf:138
 msgid "Weaver"

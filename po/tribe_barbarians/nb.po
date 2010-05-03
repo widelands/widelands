@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-01 19:06+0000\n"
+"PO-Revision-Date: 2010-05-02 11:01+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-02 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-05-03 03:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -59,7 +59,7 @@ msgstr "Bakeri"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Baker brød til arbeiderne."
 
 #: ../../tribes/barbarians/conf:19
 msgid "Barbarians"
@@ -67,7 +67,7 @@ msgstr "Barbarer"
 
 #: ../../tribes/barbarians/conf:171
 msgid "Barracks"
-msgstr ""
+msgstr "Brakke"
 
 #: ../../tribes/barbarians/conf:156
 #: ../../tribes/barbarians/conf:172
@@ -101,11 +101,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:122
 msgid "Blacksmith"
-msgstr ""
+msgstr "Grovsmed"
 
 #: ../../tribes/barbarians/conf:75
 msgid "Blackwood"
-msgstr ""
+msgstr "Herdet tre"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -230,7 +230,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:67
 msgid "Deer"
-msgstr ""
+msgstr "Hjort"
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -238,7 +238,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:41
 msgid "Destroyed building"
-msgstr ""
+msgstr "Ødelagt bygning"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -258,7 +258,7 @@ msgstr "Bonde"
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "Feller trær."
 
 #: ../../tribes/barbarians/conf:130
 msgid "Ferner"
@@ -290,7 +290,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:80
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Ildtang"
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
@@ -308,7 +308,7 @@ msgstr "Fisker"
 
 #: ../../tribes/barbarians/conf:199
 msgid "Fisher's Hut"
-msgstr ""
+msgstr "Fiskerhytte"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Fishing Rod"
@@ -316,7 +316,7 @@ msgstr "Fiskestang"
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid "Fishing rods are needed by barbarian fishers for fishing."
-msgstr ""
+msgstr "Fiskestenger brukes av barbariske fiskere til fisking."
 
 #: ../../tribes/barbarians/conf:83
 msgid "Flax"
@@ -345,11 +345,11 @@ msgstr ""
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:174
 msgid "Fortress"
-msgstr ""
+msgstr "Fort"
 
 #: ../../tribes/barbarians/conf:132
 msgid "Gamekeeper"
-msgstr ""
+msgstr "Viltforvalter"
 
 #: ../../tribes/barbarians/conf:200
 msgid "Gamekeeper's Hut"
@@ -361,7 +361,7 @@ msgstr "Geolog"
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr ""
+msgstr "Får fisk opp av havet."
 
 #: ../../tribes/barbarians/conf:84
 msgid "Gold"
@@ -376,6 +376,8 @@ msgid ""
 "Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
+"Gull er det mest verdifulle av alle metaller, og brukes kun til meget "
+"viktige ting."
 
 #: ../../tribes/barbarians/conf:85
 msgid "Goldstone"
@@ -424,7 +426,7 @@ msgstr "Hovedkvarter"
 
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Mellomstort hovedkvarter"
 
 #: ../../tribes/barbarians/conf:88
 msgid "Helmet"
@@ -432,11 +434,11 @@ msgstr "Hjelm"
 
 #: ../../tribes/barbarians/conf:134
 msgid "Helmsmith"
-msgstr ""
+msgstr "Hjelmsmed"
 
 #: ../../tribes/barbarians/conf:204
 msgid "Helmsmithy"
-msgstr ""
+msgstr "Hjelmsmie"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
@@ -444,7 +446,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:167
 msgid "High Tower"
-msgstr ""
+msgstr "Høyt tårn"
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
@@ -484,7 +486,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:92
 msgid "Kitchen Tools"
-msgstr ""
+msgstr "Kjøkkenredskaper"
 
 #: ../../tribes/barbarians/conf:207
 msgid "Lime Kiln"
@@ -520,7 +522,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:94
 msgid "Meal"
-msgstr ""
+msgstr "Måltid"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Meat"
@@ -539,11 +541,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:210
 msgid "Micro Brewery"
-msgstr ""
+msgstr "Mikrobryggeri"
 
 #: ../../tribes/barbarians/conf:139
 msgid "Miner"
-msgstr ""
+msgstr "Gruvearbeider"
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -557,7 +559,7 @@ msgstr "Utpost"
 
 #: ../../tribes/barbarians/conf:114
 msgid "Ox"
-msgstr ""
+msgstr "Okse"
 
 #: ../../tribes/barbarians/conf:72
 msgid "Peel"
@@ -565,11 +567,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:96
 msgid "Pick"
-msgstr ""
+msgstr "Hakke"
 
 #: ../../tribes/barbarians/conf:97
 msgid "Pitta Bread"
-msgstr ""
+msgstr "Pitabrød"
 
 #: ../../tribes/barbarians/fernery/conf:13
 msgid "Plant flax"
@@ -581,7 +583,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/farm/conf:14
 msgid "Plant wheat"
-msgstr ""
+msgstr "Plant hvete"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
@@ -589,7 +591,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Planter trær."
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/metalworks/conf:33
@@ -608,15 +610,15 @@ msgstr ""
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce broadaxe"
-msgstr ""
+msgstr "Produser bredøks"
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr ""
+msgstr "Produser bronseøks"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Produser ildtenger"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
@@ -636,25 +638,25 @@ msgstr "Produser jaktspyd"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr ""
+msgstr "Produser kjøkkenredskaper"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr ""
+msgstr "Produser maske"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr ""
+msgstr "Produser måltid"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr ""
+msgstr "Produser hakke"
 
 #: ../../tribes/barbarians/big_inn/conf:24
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr ""
+msgstr "Produser rasjon"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
@@ -663,7 +665,7 @@ msgstr "Produser ljå"
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce sharpaxe"
-msgstr ""
+msgstr "Produser skarpøks"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
@@ -676,7 +678,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
-msgstr ""
+msgstr "Produser krigshjelm"
 
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce warriorsaxe"
@@ -688,7 +690,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Produserer mat til gruvearbeiderne."
 
 #: ../../tribes/barbarians/brewer/conf:1
 #: ../../tribes/barbarians/master-brewer/conf:1
@@ -699,7 +701,7 @@ msgstr ""
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Produserer våpen til soldatene og verktøy til arbeiderne."
 
 #: ../../tribes/barbarians/conf:212
 msgid "Quarry"
@@ -715,7 +717,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:98
 msgid "Ration"
-msgstr ""
+msgstr "Rasjon"
 
 #: ../../tribes/barbarians/conf:99
 msgid "Raw Stone"
@@ -800,7 +802,7 @@ msgstr "Speider"
 
 #: ../../tribes/barbarians/conf:218
 msgid "Scout's Hut"
-msgstr ""
+msgstr "Speiderhytte"
 
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
@@ -847,7 +849,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:214
 msgid "Smelting Works"
-msgstr ""
+msgstr "Smelteverk"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
@@ -939,10 +941,13 @@ msgid ""
 "the blacksmiths and the helmsmiths. Make sure you always got some in "
 "reserve! Build at the metal works."
 msgstr ""
+"Hammeren er et essensielt verktøy. Det brukes av geologer, arbeidere, "
+"grovsmeder og hjelmsmeder. Sørg for at du alltid har noen i reserve! "
+"Produseres på metallverket."
 
 #: ../../tribes/barbarians/conf:20
 msgid "The mighty tribes of the eastern lands!"
-msgstr ""
+msgstr "Den mektige stammen fra de østlige landene!"
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -953,7 +958,7 @@ msgstr ""
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
 "The scythe is the tool of the farmers. It is produced in the metal works."
-msgstr ""
+msgstr "Ljåen er bondens verktøy. Den produseres i metallverket."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -994,129 +999,151 @@ msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters. Produced in the metal works."
 msgstr ""
+"Dette spydet er lett nok til å kastes, men tungt nok til å kunne drepe "
+"ethvert dyr i et kast. Det brukes kun av jegerne. Produseres i metallverket."
 
 #: ../../tribes/barbarians/conf:169
 #: ../../tribes/barbarians/conf:176
 msgid "Tower"
-msgstr ""
+msgstr "Tårn"
 
 #: ../../tribes/barbarians/conf:143
 msgid "Trainer"
-msgstr ""
+msgstr "Trener"
 
 #: ../../tribes/barbarians/conf:153
 msgid "Trainingscamp"
-msgstr ""
+msgstr "Treningsleir"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Trener soldatene."
 
 #: ../../tribes/barbarians/conf:106
 msgid "Trunk"
-msgstr ""
+msgstr "Trestamme"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid "Trunks are the primary build material of the barbarians."
-msgstr ""
+msgstr "Trestammer er det mest brukte byggematerialet blant barbarene."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Oppgrader soldat angrep 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:38
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat angrep 0 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Oppgrader soldat angrep 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:40
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat angrep 1 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Oppgrader soldat angrep 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:42
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat angrep 2 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Oppgrader soldat angrep 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat angrep 3 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr ""
+msgstr "Oppgrader soldat angrep 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat angrep 4 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Oppgrader soldat unnvik 0"
 
 #: ../../tribes/barbarians/battlearena/conf:27
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Oppgrader soldat unnvik 0 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/barbarians/battlearena/conf:28
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Oppgrader soldat unnvik 1"
 
 #: ../../tribes/barbarians/battlearena/conf:29
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Oppgrader soldat unnvik 1 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Oppgrader soldat liv 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat liv 0 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr ""
+msgstr "Oppgrader soldat liv 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat liv 1 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr ""
+msgstr "Oppgrader soldat liv 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat liv 2 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/barbarians/conf:107
 msgid "War Helmet"
@@ -1178,11 +1205,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:68
 msgid "Wildboar"
-msgstr ""
+msgstr "Villsvin"
 
 #: ../../tribes/barbarians/conf:203
 msgid "Wood Hardener"
-msgstr ""
+msgstr "Treherder"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/bakery/conf:21
@@ -1231,10 +1258,12 @@ msgstr ""
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Arbeider dypt i gruvene for å hente ut kull, jern eller gull."
 
 #: ../../tribes/barbarians/beer/conf:1
 msgid ""
 "Young warriors need some encouragement. This drink makes a man fearless and "
 "strong."
 msgstr ""
+"Unge krigere trenger litt oppmuntring. Denne drikken gjør en mann fryktløs "
+"og sterk."

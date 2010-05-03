@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-21 17:46+0000\n"
-"PO-Revision-Date: 2010-04-24 09:13+0000\n"
-"Last-Translator: Immunoman <Unknown>\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-05-02 17:31+0000\n"
+"Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-25 03:43+0000\n"
+"X-Launchpad-Export-Date: 2010-05-03 03:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -72,11 +72,11 @@ msgstr "Caserne"
 #: ../../tribes/barbarians/conf:156
 #: ../../tribes/barbarians/conf:172
 msgid "Barrier"
-msgstr "Barrière"
+msgstr "Barricade"
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid "Basic defence of a warrior."
-msgstr "La défence de base d'un soldat."
+msgstr "La défense de base d'un soldat."
 
 #: ../../tribes/barbarians/conf:152
 msgid "Battle Arena"
@@ -111,7 +111,7 @@ msgstr "Bois dur"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr "Élève des mules pour aider au transport des marchandises."
+msgstr "Élève des bœufs pour aider au transport des marchandises."
 
 #: ../../tribes/barbarians/conf:124
 msgid "Brewer"
@@ -143,7 +143,7 @@ msgstr "Produit du Charbon"
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kilm."
-msgstr "Produit de la chaux dans le four à chaux"
+msgstr "Produit du ciment dans la cimenterie"
 
 #: ../../tribes/barbarians/conf:113
 msgid "Carrier"
@@ -206,7 +206,7 @@ msgstr "Site de construction"
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr "Taillez des tranches de granite à partir des pierres disponibles."
+msgstr "Coupe des blocs de granit à partir des pierres disponibles."
 
 #: ../../tribes/barbarians/conf:191
 msgid "Deep Coal Mine"
@@ -242,7 +242,7 @@ msgstr "Défend et conquiert"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Destroyed building"
-msgstr "Bâtiments détruit"
+msgstr "Bâtiment détruit"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -274,11 +274,11 @@ msgstr "Horticulteur"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Field harvested"
-msgstr "Champs moissoné"
+msgstr "Champ moissoné"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Field medium"
-msgstr "Champs moyen"
+msgstr "Champ moyen"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Field ripe"
@@ -286,15 +286,15 @@ msgstr "Champ mûr"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field small"
-msgstr "Champs petit"
+msgstr "Champ petit"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field tiny"
-msgstr "Champs Très petit"
+msgstr "Champ très petit"
 
 #: ../../tribes/barbarians/conf:80
 msgid "Fire Tongs"
-msgstr "Pinces"
+msgstr "Tenailles"
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
@@ -316,10 +316,6 @@ msgstr "Pêcheur"
 msgid "Fisher's Hut"
 msgstr "Cabane de pêcheur"
 
-#: ../../tribes/barbarians/fisher/conf:1
-msgid "Fishes in the sea."
-msgstr "Pêche dans la mer."
-
 #: ../../tribes/barbarians/conf:82
 msgid "Fishing Rod"
 msgstr "Canne à pêche"
@@ -327,7 +323,7 @@ msgstr "Canne à pêche"
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid "Fishing rods are needed by barbarian fishers for fishing."
 msgstr ""
-"Des cannes à pêche sont nécessaire pour que les pêcheurs puissent pêcher."
+"Des cannes à pêche sont nécessaires pour que les pêcheurs puissent pêcher."
 
 #: ../../tribes/barbarians/conf:83
 msgid "Flax"
@@ -335,7 +331,7 @@ msgstr "Lin"
 
 #: ../../tribes/barbarians/flax/conf:1
 msgid "Flax is a beautiful flower, which is used for making cloth."
-msgstr "Le lin est une belle fleur, on s'en sert pour faire du tissu."
+msgstr "Le lin est une belle fleur dont on se sert pour faire du tissu."
 
 #: ../../tribes/barbarians/conf:47
 msgid "Flax medium"
@@ -370,6 +366,10 @@ msgstr "Cabane de garde-chasse"
 msgid "Geologist"
 msgstr "Géologue"
 
+#: ../../tribes/barbarians/fisher/conf:1
+msgid "Gets fish out of the sea."
+msgstr "Pêche des poissons."
+
 #: ../../tribes/barbarians/conf:84
 msgid "Gold"
 msgstr "Or"
@@ -396,11 +396,11 @@ msgstr "Mine de granit"
 
 #: ../../tribes/barbarians/conf:86
 msgid "Grout"
-msgstr "Chaux"
+msgstr "Ciment"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
-msgstr "Cultive le roseau de chaume et le lin"
+msgstr "Cultive le chaume de roseau et le lin"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Guardhall"
@@ -499,7 +499,7 @@ msgstr "Ustensiles de Cuisine"
 
 #: ../../tribes/barbarians/conf:207
 msgid "Lime Kiln"
-msgstr "Four à chaux"
+msgstr "Cimenterie"
 
 #: ../../tribes/barbarians/conf:137
 msgid "Lime-Burner"
@@ -601,7 +601,7 @@ msgstr "Plante du Blé"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr "Plante des champs"
+msgstr "Ensemence des champs"
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -624,7 +624,7 @@ msgstr "Produit des haches de bataille"
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce broadaxe"
-msgstr "Produit des grands haches"
+msgstr "Produit des grandes haches"
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
@@ -700,11 +700,11 @@ msgstr "Produit des haches de guerre"
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr "Produit du tissu pour les bateaux et les soldats"
+msgstr "Produit du tissu pour les bateaux et les soldats."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr "Produit de la nourriture pour les mineurs"
+msgstr "Produit de la nourriture pour les mineurs."
 
 #: ../../tribes/barbarians/brewer/conf:1
 #: ../../tribes/barbarians/master-brewer/conf:1
@@ -748,7 +748,7 @@ msgid ""
 "Raw stone can be enhanced to grout which delivers solid, non burning build "
 "material."
 msgstr ""
-"La pierre brute peut être transformée en chaux, qui fournit un matériau de "
+"La pierre brute peut être transformée en ciment, qui fournit un matériau de "
 "construction solide et ignifugé."
 
 #: ../../tribes/barbarians/sharpaxe/conf:1
@@ -780,19 +780,19 @@ msgstr "Roseau très petit"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator coal little"
-msgstr "Indicateur de ressource en charbon,  peu"
+msgstr "Indicateur de ressource : peu de charbon"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator coal much"
-msgstr "Indicateur de ressource en charbon, beaucoup"
+msgstr "Indicateur de ressource : beaucoup de charbon"
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator gold little"
-msgstr "Indicateur de ressource en or,  peu"
+msgstr "Indicateur de ressource : peu d'or"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Resource indicator gold much"
-msgstr "Indicateur de ressource en or, beaucoup"
+msgstr "Indicateur de ressource : beaucoup d'or"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator granite little"
@@ -804,19 +804,19 @@ msgstr "Indicateur de ressource : beaucoup de granit."
 
 #: ../../tribes/barbarians/conf:61
 msgid "Resource indicator iron little"
-msgstr "Indicateur de ressource en fer,  peu"
+msgstr "Indicateur de ressource : un peu de fer"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Resource indicator iron much"
-msgstr "Indicateur de ressource en fer,  beaucoup"
+msgstr "Indicateur de ressource : beaucoup de fer"
 
 #: ../../tribes/barbarians/conf:63
 msgid "Resource indicator no resource"
-msgstr "Indicateur de ressource, rien"
+msgstr "Indicateur de ressource : rien"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Resource indicator water"
-msgstr "Indicateur de ressource, eau"
+msgstr "Indicateur de ressource : eau"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Scout"
@@ -881,7 +881,7 @@ msgstr "Forge des casques pour les soldats."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr "Fait fondre du fer"
+msgstr "Fait fondre du fer."
 
 #: ../../tribes/barbarians/conf:103
 msgid "Snack"
@@ -913,7 +913,8 @@ msgstr "Chaume de roseau"
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid "Thatch reed is used to make the roofs of buildings waterproof."
-msgstr "Le roseau de chaume est utilisé pour faire des toits imperméables."
+msgstr ""
+"Le chaume de roseau est utilisé pour construire des toits imperméables."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
@@ -933,7 +934,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr "Le chasseur apporte de la bonne viande aux colons"
+msgstr "Le chasseur apporte de la bonne viande aux colons."
 
 #: ../../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
@@ -943,8 +944,8 @@ msgstr "L'équipe de développement de Widelands"
 msgid ""
 "The barbarian bakers are best in making this flat and tasty pitta bread."
 msgstr ""
-"Les boulangers barbares sont les meilleurs pour faire ce pain pitta, plat et "
-"délicieux."
+"Les boulangers barbares sont les meilleurs pour faire ces miches de pain, "
+"plates et délicieuses."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -962,8 +963,8 @@ msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "Produced in the metal works."
 msgstr ""
-"Les pinces sont l'outil du fondeur, qui travaille à la fonderie. Elles sont "
-"produites à la ferronnerie."
+"Les tenailles sont l'outil du fondeur, qui travaille à la fonderie. Elles "
+"sont produites à la ferronnerie."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -981,7 +982,7 @@ msgid ""
 msgstr ""
 "Le marteau est un outil essentiel. Il est utilisé par le géologue, l'ouvrier "
 "et toutes les sortes de forgerons. Assurez-vous de toujours en avoir en "
-"réserve ! Il est produit à la feronnerie."
+"réserve ! Il est produit à la ferronnerie."
 
 #: ../../tribes/barbarians/conf:20
 msgid "The mighty tribes of the eastern lands!"
@@ -1069,15 +1070,15 @@ msgstr "Camp d'entraînement"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr "Entraîne les soldats"
+msgstr "Entraîne les soldats."
 
 #: ../../tribes/barbarians/conf:106
 msgid "Trunk"
-msgstr "Tronc"
+msgstr "Rondin"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid "Trunks are the primary build material of the barbarians."
-msgstr "Les troncs sont la permière ressource de construction des barbares."
+msgstr "Les rondins sont la permière ressource de construction des barbares."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -1199,7 +1200,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:107
 msgid "War Helmet"
-msgstr "Heaume"
+msgstr "Heaume de guerre"
 
 #: ../../tribes/barbarians/conf:184
 msgid "War Mill"
@@ -1231,11 +1232,11 @@ msgid ""
 "places, be it to make bread or beer or to produce grout."
 msgstr ""
 "L'eau est l'essence même de la vie ! Cette eau est utilisée à beaucoup "
-"d'endroits, pour faire du pain, de la bière, ou de la chaux."
+"d'endroits, pour faire du pain, de la bière, ou du ciment."
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr "Les armes et les outils sont fait en fer."
+msgstr "Les armes et les outils sont faits en fer."
 
 #: ../../tribes/barbarians/conf:144
 msgid "Weaver"
@@ -1258,8 +1259,8 @@ msgid ""
 "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
 "be made of this wheat."
 msgstr ""
-"Le blé est essentiel pour la survie, le bon pain et les bières fortes en "
-"sont tirées."
+"Le blé est essentiel pour la survie, les bonnes miches de pain et les bières "
+"fortes en sont tirées."
 
 #: ../../tribes/barbarians/conf:68
 msgid "Wildboar"
@@ -1402,9 +1403,6 @@ msgstr ""
 
 #~ msgid "Resource indicator granit much"
 #~ msgstr "Indicateur de ressource en or,  beaucoup"
-
-#~ msgid "Gets fish out of the sea."
-#~ msgstr "Pêche des poissons."
 
 #~ msgid "Cuts raw pieces of granit out of laying stones."
 #~ msgstr "Coupe des morceaux bruts de granit à partir de pierres."

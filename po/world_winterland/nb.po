@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-01 14:35+0000\n"
+"PO-Revision-Date: 2010-05-02 09:27+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-02 03:50+0000\n"
+"X-Launchpad-Export-Date: 2010-05-03 04:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/winterland/conf:45
@@ -23,15 +23,15 @@ msgstr "Osp"
 
 #: ../../worlds/winterland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Mellomstor osp"
 
 #: ../../worlds/winterland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Liten osp"
 
 #: ../../worlds/winterland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Veldig liten osp"
 
 #: ../../worlds/winterland/conf:79
 msgid "Badger"
@@ -43,15 +43,15 @@ msgstr "Bøk"
 
 #: ../../worlds/winterland/conf:66
 msgid "Beech medium"
-msgstr ""
+msgstr "Mellomstor bøk"
 
 #: ../../worlds/winterland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Liten bøk"
 
 #: ../../worlds/winterland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Veldig liten bøk"
 
 #: ../../worlds/winterland/conf:61
 msgid "Birch"
@@ -59,15 +59,15 @@ msgstr "Bjørk"
 
 #: ../../worlds/winterland/conf:62
 msgid "Birch medium"
-msgstr ""
+msgstr "Mellomstor bjørk"
 
 #: ../../worlds/winterland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Liten bjørk"
 
 #: ../../worlds/winterland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Veldig liten bjørk"
 
 #: ../../worlds/winterland/conf:80
 msgid "Bunny"
@@ -156,15 +156,15 @@ msgstr "Lønn"
 
 #: ../../worlds/winterland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Mellomstor lønn"
 
 #: ../../worlds/winterland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Liten lønn"
 
 #: ../../worlds/winterland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Veldig liten lønn"
 
 #: ../../worlds/winterland/conf:86
 msgid "Marten"
@@ -181,15 +181,15 @@ msgstr "Eik"
 
 #: ../../worlds/winterland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Mellomstor eik"
 
 #: ../../worlds/winterland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Liten eik"
 
 #: ../../worlds/winterland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Veldig liten eik"
 
 #: ../../worlds/winterland/conf:21
 #: ../../worlds/winterland/conf:22
@@ -210,15 +210,15 @@ msgstr "Rogn"
 
 #: ../../worlds/winterland/conf:74
 msgid "Rowan medium"
-msgstr ""
+msgstr "Mellomstor rogn"
 
 #: ../../worlds/winterland/conf:75
 msgid "Rowan small"
-msgstr ""
+msgstr "Liten rogn"
 
 #: ../../worlds/winterland/conf:76
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Veldig liten rogn"
 
 #: ../../worlds/winterland/conf:88
 msgid "Sheep"
@@ -240,15 +240,15 @@ msgstr "Gran"
 
 #: ../../worlds/winterland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Mellomstor gran"
 
 #: ../../worlds/winterland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Liten gran"
 
 #: ../../worlds/winterland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Veldig liten gran"
 
 #: ../../worlds/winterland/conf:31
 #: ../../worlds/winterland/conf:32
