@@ -208,6 +208,8 @@ struct Panel : public Object {
 	void set_snapparent(bool snapparent);
 	bool get_snapparent() const {return _flags & pf_snap_parent_size;}
 
+	inline static void set_allow_user_input(bool t) {_g_allow_user_input=t;}
+	inline static bool allow_user_input(void) {return _g_allow_user_input;}
 
 protected:
 	void die();
@@ -229,6 +231,7 @@ private:
 	bool do_mousemove
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_key(bool down, SDL_keysym code);
+
 
 	Panel * _parent;
 	Panel * _next, * _prev;
@@ -269,6 +272,7 @@ private:
 	static Panel * _modal;
 	static Panel * _g_mousegrab;
 	static Panel * _g_mousein;
+	static bool _g_allow_user_input;
 	static PictureID s_default_cursor;
 };
 

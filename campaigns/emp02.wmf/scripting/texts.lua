@@ -66,7 +66,7 @@ obj_remove_the_barbarians = {
    title =_"Destroy the barbarian tribe",
    body ="<rt><p>" ..
 _"* As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.<br>" ..
-_"* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood befre), to avoid new settlements of other tribes in that region." ..
+_"* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region." ..
 "</p></rt>",
 }
 
@@ -132,7 +132,7 @@ diary_page_7 = {
    body="<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
 "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
-_[[ "Great, today the building of the quarry was completed. Now we get enough stone to construct larger buildings." ]] ..
+_[[ "Great! Today the building of the quarry was completed. Now we get enough stone to construct larger buildings." ]] ..
 "</p></rt>",
 }
 
@@ -144,7 +144,7 @@ saledus_1 = {
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8F9131>" ..
 _"Saledus looks unhappy" ..
 "</p></rt><rt image=map:Saledus.png><p line-spacing=3 font-size=12><br>" ..
-_[[ "Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern strands I found the remains of another ship. I don't know whether these parts are all that is left of that ship. Inn any case: these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony."<br><br>-- NEW OBJECTIVE --<br> ]] ..
+_[[ "Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern shore I found the remains of another ship. I don't know whether these parts are all that is left of that ship. In any case, these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony."<br><br>-- NEW OBJECTIVE --<br> ]] ..
 _"* Build some barracks and sentries around the colony." ..
 "</p></rt>",
 }
@@ -193,7 +193,7 @@ diary_page_8 = {
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
 "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
-_[[ "By the Gods! This is absolutely terrible. It seems as if we stand close to a test - and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br> Today, as I walked down to the eastern strands,<br> I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br> At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br> Anyway, we must build up stronger military buildings as soon as possible."<br><br>-- NEW OBJECTIVE --<br> ]] ..
+_[[ "By the Gods! This is absolutely terrible. It seems as if we stand close to a test - and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br> Today, as I walked down to the eastern shore,<br> I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br> At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br> Anyway, we must build up stronger military buildings as soon as possible."<br><br>-- NEW OBJECTIVE --<br> ]] ..
 _"* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory, build a tower." ..
 "</p></rt>",
 }

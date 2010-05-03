@@ -301,7 +301,7 @@ void Interactive_Base::think()
 	// If one of the arrow keys is pressed, scroll here
 	const uint32_t scrollval = 10;
 
-	if (keyboard_free()) {
+	if (keyboard_free() && Panel::allow_user_input()) {
 		if (get_key_state(SDLK_UP))
 			set_rel_viewpoint(Point(0, -scrollval));
 		if (get_key_state(SDLK_DOWN))
@@ -590,7 +590,10 @@ void Interactive_Base::finish_build_road()
 		// Build the path as requested
 		ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_road
 			(m_road_build_player, *new Widelands::Path(*m_buildroad));
-		if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+		if
+			(allow_user_input() and
+			 (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)))
+		{
 			//  place flags
 			Map const & map = egbase().map();
 			std::vector<Coords>         const &       c_vector =
