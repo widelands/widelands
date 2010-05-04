@@ -6,10 +6,7 @@ include "test_field"
 include "test_immovables"
 include "test_player"
 
--- TODO: those tests should also be run in the editor
-if not wl.editor then
-   include "test_ui"
-end
+include "test_ui"
 
 include "test_table"
 

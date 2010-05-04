@@ -9,6 +9,18 @@ function ui_tests:setup()
    for name,win in pairs(self.mv.windows) do
       win:close()
    end
+
+   if wl.editor then
+      self.b1 = "menu"
+      self.w1 = "main_menu"
+      self.b2 = "players"
+      self.w2 = "players_menu"
+   else
+      self.b1 = "messages"
+      self.w1 = "messages"
+      self.b2 = "objectives"
+      self.w2 = "objectives"
+   end
 end
 
 -- ======
@@ -23,48 +35,59 @@ end
 
 function ui_tests:test_buttons_property()
    assert_not_equal(nil, self.mv.buttons.buildhelp)
-   assert_equal(7, self:_cnt(self.mv.buttons)) -- a scenario game, so 7 buttons
+
+   if wl.editor then
+      assert_equal(6, self:_cnt(self.mv.buttons)) -- Editor has 6 buttons
+   else
+      assert_equal(7, self:_cnt(self.mv.buttons)) -- a scenario game, so 7
+   end
 end
 
 function ui_tests:test_window_property()
    -- No window to start with
    assert_equal(0, self:_cnt(self.mv.windows))
 
-   self.mv.buttons.messages:click()
+   self.mv.buttons[self.b1]:click()
    assert_equal(1, self:_cnt(self.mv.windows))
    
-   assert_not_equal(nil, self.mv.windows.messages)
+   assert_not_equal(nil, self.mv.windows[self.w1])
 end
 
 function ui_tests:test_window_property1()
    assert_equal(0, self:_cnt(self.mv.windows))
 
-   self.mv.buttons.objectives:click()
+   self.mv.buttons[self.b2]:click()
    assert_equal(1, self:_cnt(self.mv.windows))
    
-   assert_not_equal(nil, self.mv.windows.objectives)
-   assert_equal(nil, self.mv.windows.messages)
+   assert_not_equal(nil, self.mv.windows[self.w2])
+   assert_equal(nil, self.mv.windows[self.w1])
 end
 
 function ui_tests:test_position_x()
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
+   self.mv.buttons[self.b1]:click()
+   local w = self.mv.windows[self.w1]
 
    w.position_x = 50
    assert_equal(50, w.position_x)
 end
 function ui_tests:test_position_y()
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
+   self.mv.buttons[self.b1]:click()
+   local w = self.mv.windows[self.w1]
 
    w.position_y = 60
    assert_equal(60, w.position_y)
 end
 
 function ui_tests:test_descendant_position()
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
-   local b = w.buttons.invert_selection
+   self.mv.buttons[self.b1]:click()
+   local w = self.mv.windows[self.w1]
+   local b
+   if not wl.editor then 
+      b = w.buttons.invert_selection
+   else
+      b = w.buttons.exit
+   end
+
    w.position_x = 50
    w.position_y = 50
 
@@ -75,41 +98,41 @@ function ui_tests:test_descendant_position()
 end
 
 function ui_tests:test_descendant_position_not_child()
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
+   self.mv.buttons[self.b1]:click()
+   local w = self.mv.windows[self.w1]
    local b = self.mv.buttons.buildhelp
-   
+
    assert_error("Not a descendant!", function()
       w:get_descendant_position(b)
    end)
 end
 
 function ui_tests:test_width(x)
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
+   self.mv.buttons[self.b1]:click()
+   local w = self.mv.windows[self.w1]
 
    w.width = 300
    assert_equal(300, w.width)
 end
 function ui_tests:test_height(x)
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
+   self.mv.buttons[self.b1]:click()
+   local w = self.mv.windows[self.w1]
 
    w.height = 200
    assert_equal(200, w.height)
 end
 
 function ui_tests:test_mouse_pos_x(x)
-   self.mv.mouse_position_x = 200 
+   self.mv.mouse_position_x = 200
    assert_equal(200, self.mv.mouse_position_x)
 end
 function ui_tests:test_mouse_pos_y(x)
-   self.mv.mouse_position_y = 100 
+   self.mv.mouse_position_y = 100
    assert_equal(100, self.mv.mouse_position_y)
 end
 
 -- ========
--- Buttons 
+-- Buttons
 -- ========
 button_tests = lunit.TestCase("Button tests")
 function button_tests:setup()
@@ -122,15 +145,17 @@ function button_tests:test_name()
 end
 function button_tests:test_click()
    self.b:click()
-   
+
    assert_equal(true, wl.ui.MapView().buildhelp)
 end
 
+-- TODO: this is not proper, all tests should run and editor/game seperation should be cleaner
+if not wl.editor then 
 -- =========
--- TabPanel 
+-- TabPanel
 -- =========
 tab_panel_tests = lunit.TestCase("TabPanel Unit Tests")
-function tab_panel_tests:_cnt(t) 
+function tab_panel_tests:_cnt(t)
    local rv = 0
    for k,v in pairs(t) do
       rv = rv + 1 end
@@ -160,7 +185,7 @@ function tab_panel_tests:test_activate()
 end
 
 -- ========
--- MapView 
+-- MapView
 -- ========
 mv_tests = lunit.TestCase("MapView tests")
 function mv_tests:setup()
@@ -187,6 +212,5 @@ function mv_tests:test_statistics()
    assert_equal(false, self.mv.census)
 end
 
-
-
+end
 
