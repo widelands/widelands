@@ -622,8 +622,6 @@ void WLApplication::handle_input(InputCallback const * cb)
 			break;
 
 		case SDL_MOUSEMOTION:
-			// All the interesting stuff is now in Sys_PollEvent()
-
 			m_mouse_position = Point(ev.motion.x, ev.motion.y);
 
 			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)

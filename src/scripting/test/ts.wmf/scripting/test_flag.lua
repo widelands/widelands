@@ -9,7 +9,8 @@ end
 flag_tests = lunit.TestCase("flag tests")
 function flag_tests:setup()
    self.p = wl.game.Player(1)
-   self.f = self.p:place_flag(wl.map.Field(13,10), 1)
+   self.field = wl.map.Field(13,10)
+   self.f = self.p:place_flag(self.field, 1)
 end
 function flag_tests:teardown()
    pcall(self.f.remove, self.f)
@@ -20,6 +21,11 @@ function flag_tests:test_name()
 end
 function flag_tests:test_type()
    assert_equal("flag", self.f.type)
+end
+function flag_tests:test_fields()
+   local f = self.f.fields
+   assert_equal(1, #f)
+   assert_equal(self.field, f[1])
 end
 function flag_tests:test_no_wares_on_creation()
    local rv = self.f:get_wares("all")

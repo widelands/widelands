@@ -352,6 +352,15 @@ struct FakeAttackController : public BaseImmovable {
 	virtual bool get_passable() const throw () {return true;}
 	virtual void draw (Editor_Game_Base const &, RenderTarget &, FCoords, Point)
 	{}
+	virtual PositionList get_positions (const Editor_Game_Base &) const throw ()
+	{
+		// This violates what I had in mind for get_positions, but since this is
+		// attic code and get_positions was added long after this code was gone
+		// I guess it is save to return an empty list here.
+		PositionList rv;
+		return rv;
+	}
+
 
 	struct Loader : public BaseImmovable::Loader {
 		virtual void load(FileRead & fr, uint8_t const version) {
@@ -425,6 +434,14 @@ struct FakeBattle : public BaseImmovable {
 	virtual bool get_passable() const throw () {return true;}
 	virtual void draw (Editor_Game_Base const &, RenderTarget &, FCoords, Point)
 	{}
+	virtual PositionList get_positions (const Editor_Game_Base &) const throw ()
+	{
+		// This violates what I had in mind for get_positions, but since this is
+		// attic code and get_positions was added long after this code was gone
+		// I guess it is save to return an empty list here.
+		PositionList rv;
+		return rv;
+	}
 
 	struct Loader : public BaseImmovable::Loader {
 		virtual void load(FileRead & fr, uint8_t const version) {

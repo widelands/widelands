@@ -4,3 +4,9 @@ packet_version=1
 [player_1]
 name=Player 1
 tribe=barbarians
+
+[player_2]
+name=Sparing Partner
+tribe=empire
+ai="Defensive"
+

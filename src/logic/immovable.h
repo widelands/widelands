@@ -56,6 +56,15 @@ struct BaseImmovable : public Map_Object {
 
 	virtual int32_t  get_size    () const throw () = 0;
 	virtual bool get_passable() const throw () = 0;
+
+	typedef std::vector<Coords> PositionList;
+	/**
+	 * Return all coordinates occupied by this Immovable. We gurantee that the
+	 * list always contains one entry and the first one is the main position
+	 * if one can be chosen as main.
+	 */
+	virtual PositionList get_positions
+		(const Editor_Game_Base &) const throw () = 0;
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
 		= 0;
@@ -127,6 +136,7 @@ public:
 	Immovable(const Immovable_Descr &);
 
 	Coords get_position() const {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 
 	virtual int32_t  get_type    () const throw ();
 	char const * type_name() const throw () {return "immovable";}
