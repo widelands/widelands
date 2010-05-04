@@ -94,8 +94,6 @@ end
 -- -- ==============
 -- -- Property tests
 -- -- ==============
--- TODO: add tests for immovable.fields
--- TODO: add also tests for big buildings
 immovable_property_tests = lunit.TestCase("Immovable sizes")
 function immovable_property_tests:setup()
    self.none = wl.map.create_immovable("pebble1", wl.map.Field(19, 10))
@@ -104,15 +102,17 @@ function immovable_property_tests:setup()
       "burners_house", wl.map.Field(10,10)
    )
    self.big = wl.map.create_immovable("stones4", wl.map.Field(20, 10))
+   self.big_building = wl.game.Player(1):place_building(
+      "fortress", wl.map.Field(15,11)
+   )
 end
 function immovable_property_tests:teardown()
-   pcall(self.none.remove, self.none)
-   pcall(self.small.remove, self.small)
-   pcall(self.medium.remove, self.medium)
-   -- also remove flag
-   local f = wl.map.Field(10,10)
-   pcall(f.brn.immovable.remove, f.brn.immovable)
-   pcall(self.big.remove, self.big)
+   pcall(function () self.none:remove() end)
+   pcall(function () self.small:remove() end)
+   -- remove flag
+   pcall(function () self.medium.fields[1].brn.immovable:remove() end)
+   pcall(function() self.big:remove() end)
+   pcall(function () self.big_building.fields[1].brn.immovable:remove() end)
 end
 
 function immovable_property_tests:test_size_none()
@@ -127,6 +127,9 @@ end
 function immovable_property_tests:test_size_big()
    assert_equal("big", self.big.size)
 end
+function immovable_property_tests:test_size_fortress()
+   assert_equal("big", self.big_building.size)
+end
 function immovable_property_tests:test_name_pebble()
    assert_equal("pebble1", self.none.name)
 end
@@ -138,6 +141,9 @@ function immovable_property_tests:test_name_charcoal_burner()
 end
 function immovable_property_tests:test_name_stone()
    assert_equal("stones4", self.big.name)
+end
+function immovable_property_tests:test_name_fortress()
+   assert_equal("fortress", self.big_building.name)
 end
 
 function immovable_property_tests:test_type_pebble()
@@ -152,6 +158,34 @@ function immovable_property_tests:test_type_charcoal_burner()
 end
 function immovable_property_tests:test_type_stone()
    assert_equal("immovable", self.big.type)
+end
+function immovable_property_tests:test_type_fortress()
+   assert_equal("militarysite", self.big_building.type)
+   assert_equal("fortress", self.big_building.name)
+end
+
+function immovable_property_tests:test_fields_pebble()
+   assert_equal(1, #self.none.fields)
+   assert_equal(wl.map.Field(19,10), self.none.fields[1])
+end
+function immovable_property_tests:test_fields_tree()
+   assert_equal(1, #self.small.fields)
+   assert_equal(wl.map.Field(18,10), self.small.fields[1])
+end
+function immovable_property_tests:test_fields_charcoal_burner()
+   assert_equal(1, #self.medium.fields)
+   assert_equal(wl.map.Field(10,10), self.medium.fields[1])
+end
+function immovable_property_tests:test_fields_stone()
+   assert_equal(1, #self.big.fields)
+   assert_equal(wl.map.Field(20,10), self.big.fields[1])
+end
+function immovable_property_tests:test_field_fortress()
+   assert_equal(4, #self.big_building.fields)
+   assert_equal(wl.map.Field(15,11), self.big_building.fields[1])
+   assert_equal(wl.map.Field(15,11).ln, self.big_building.fields[2])
+   assert_equal(wl.map.Field(15,11).tln, self.big_building.fields[3])
+   assert_equal(wl.map.Field(15,11).trn, self.big_building.fields[4])
 end
 
 -- ================
