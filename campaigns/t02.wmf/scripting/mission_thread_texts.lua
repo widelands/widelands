@@ -416,7 +416,7 @@ overwhelming. Our poor carriers are no longer able to transport the goods as
 fast as we need them to. I suggest we give them some support by breeding
 oxen.<br> They are amazing animals: The ox is as swift as a human being while
 being much stronger and very frugal: all we need is wheat and water to breed
-them and they will do their work on the roads loyally and reliably.]]) .. 
+them and they will do their work on the roads loyally and reliably."]]) .. 
    new_objectives(obj_build_cattlefarm)
 }
 
