@@ -32,6 +32,7 @@
 #include "player.h"
 #include "roadtype.h"
 #include "scripting/scripting.h"
+#include "sound/sound_handler.h"
 #include "tribe.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
@@ -117,6 +118,8 @@ m_lasttrackserial   (0)
 	if (not m_lua) // TODO SirVer: this is sooo ugly, I can't say
 		m_lua = create_LuaEditorInterface(this);
 
+	g_sound_handler.m_egbase = this;
+
 	memset(m_players, 0, sizeof(m_players));
 }
 
@@ -132,6 +135,9 @@ Editor_Game_Base::~Editor_Game_Base() {
 		delete *i.current;
 
 	delete m_lua;
+
+	assert(this == g_sound_handler.m_egbase);
+	g_sound_handler.m_egbase = 0;
 }
 
 void Editor_Game_Base::think()

@@ -130,13 +130,10 @@ Game::Game() :
 	m_replaywriter     (0),
 	m_last_stats_update(0)
 {
-	g_sound_handler.m_the_game = this;
 }
 
 Game::~Game()
 {
-	assert(this == g_sound_handler.m_the_game);
-	g_sound_handler.m_the_game = 0;
 	delete m_replaywriter;
 }
 
