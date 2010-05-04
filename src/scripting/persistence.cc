@@ -74,6 +74,18 @@ static bool m_add_object_to_not_persist
 	return true;
 }
 
+// Special handling for the upvalues of pairs and ipairs which are iterator
+// functions, but always the same and therefor need not be persisted (in fact
+// they are c functions, so they can't be persisted all the same)
+static void m_add_iterator_function_to_not_persist
+	(lua_State * L, std::string global, uint32_t idx)
+{
+	lua_getglobal(L, global.c_str());
+	lua_newtable(L);
+	lua_call(L, 1, 1); // pairs{}, stack now contains iterator function
+	lua_pushuint32(L, idx);
+	lua_settable(L, 1); //  table[function] = integer
+}
 
 static bool m_add_object_to_not_unpersist
 	(lua_State * L, std::string name, uint32_t idx) {
@@ -103,18 +115,38 @@ static bool m_add_object_to_not_unpersist
 	return true;
 }
 
+static void m_add_iterator_function_to_not_unpersist
+	(lua_State * L, std::string global, uint32_t idx)
+{
+	lua_pushuint32(L, idx); // integer
+	lua_getglobal(L, global.c_str());
+	lua_newtable(L);
+	lua_call(L, 1, 1); // pairs{}, stack now contains iterator function
+	lua_settable(L, -3); //  table[int] = function
+}
+
 /*
  * ========================================================================
  *                            PUBLIC INTERFACE
  * ========================================================================
  */
 
+static const char * m_persistent_globals[] = {
+	"_VERSION", "assert", "collectgarbage", "coroutine", "debug",
+	"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",
+	"load", "loadfile", "loadstring", "math", "module", "newproxy", "next",
+	"os", "package", "pairs", "pcall", "print", "rawequal",
+	"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
+	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
+	"string", "use", "_", "set_textdomain", "coroutine.yield", 0
+};
+
 /**
  * Does all the persisting work. Returns the number of bytes
  * written
  */
 uint32_t persist_object
-	(lua_State * L, const char ** globals,
+	(lua_State * L,
 	 Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
 {
 	assert(lua_gettop(L) == 2); // table object
@@ -125,8 +157,13 @@ uint32_t persist_object
 
 	// Push objects that should not be touched while persisting into the empty
 	// table at stack position 1
-	for (uint32_t i = 0; globals[i]; i++)
-		m_add_object_to_not_persist(L, globals[i], i + 1);
+	uint32_t i = 0;
+	for (i = 0; m_persistent_globals[i]; i++)
+		m_add_object_to_not_persist(L, m_persistent_globals[i], i + 1);
+
+	++i;
+	m_add_iterator_function_to_not_persist(L, "pairs", i++);
+	m_add_iterator_function_to_not_persist(L, "ipairs", i++);
 
 
 	size_t cpos = fw.GetPos();
@@ -149,7 +186,7 @@ uint32_t persist_object
  * written
  */
 uint32_t unpersist_object
-	(lua_State * L, const char ** globals,
+	(lua_State * L,
 	 Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
@@ -159,8 +196,13 @@ uint32_t unpersist_object
 
 	// Push objects that should not be loaded
 	lua_newtable(L);
-	for (uint32_t i = 0; globals[i]; i++)
-		m_add_object_to_not_unpersist(L, globals[i], i + 1);
+	uint32_t i = 0;
+	for (i = 0; m_persistent_globals[i]; i++)
+		m_add_object_to_not_unpersist(L, m_persistent_globals[i], i + 1);
+
+	++i;
+	m_add_iterator_function_to_not_unpersist(L, "pairs", i++);
+	m_add_iterator_function_to_not_unpersist(L, "ipairs", i++);
 
 	pluto_unpersist(L, fr);
 	lua_remove(L, -2); // remove the globals table

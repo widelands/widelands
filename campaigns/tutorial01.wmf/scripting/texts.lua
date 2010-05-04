@@ -40,9 +40,10 @@ end
 scould_player = {
    title = _ "Nice and easy does it all the time",
    body = rt(p(_
-[[Not so hasty, my friend. If I am too slow for you, you might want to play a
-a real game and just find everything for yourself. Please bear with me, I
-am not the youngest and quickest anymore.]]
+[[I am sorry, but I have to rip this again. We might need the space here later
+on. If I am too slow for you, you might want to play a real game and just find
+everything out for yourself. Otherwise, please bear with me, I am not the
+youngest and quickest anymore.]]
       )
    )
 }
@@ -293,9 +294,10 @@ road building by clicking on the starting flag of the road and selecting]]
       )) .. rt("image=pics/menu_abort.png", p(_
 [[the abort symbol.]]
       )) .. rt(p(_
-[[Now, you can either make it longer by one field at a time by left-clicking
-multiple times on neighbouring fields for perfect control over the route the
-road takes like so:]]
+[[Now, about this road. Remember: we are already in road building mode since you
+just ordered the quarry. You can either make it longer by one field at a time
+by left-clicking multiple times on neighbouring fields for perfect control over
+the route the road takes like so:]]
       ))
 }
 
@@ -349,7 +351,7 @@ census_and_statistics_00 = {
 [[While we wait, I'll quickly show you another useful feature. All construction
 sites look the same and some buildings look alike. It is sometimes hard to tell
 them apart. Widelands offers a feature to show label texts over the buildings.
-They are called the census and you can toggle them via the 'c' key or via a
+They are called the census and you can toggle them via the 'c' key or via
 the button on the watch tab of any field.]]
     ) .. p(_
 [[Similar to this are building statistics which are also toggled via a
@@ -417,8 +419,8 @@ closing_msg_window_00 = {
    body = rt(p(_
 [[Excellent. By the way: closing windows in Widelands is as easy as
 right-clicking on them. This works with all windows except for story message
-windows like this one. Go ahead and try it. Close the messages window,
-please.]]
+windows like this one. Go ahead and try it. First, close this window by pressing
+the button below, then right click into the messages window to close it.]]
       )
    ),
    obj_name = "close_message_window",
@@ -450,7 +452,8 @@ conclude_messages = {
    body = rt(p(_
 [[A message has been sent to you. See how the button at the bottom of the
 screen has changed appearance? You should now burn this quarry down as it is
-no longer of any use and is just blocking space.]]
+no longer of any use and is just blocking space. To do that, click on the
+quarry and select the destroy button.]]
    ))
 }
 
@@ -474,7 +477,7 @@ burn it down again if you need the place. But note that your land is then
 vulnerable: any military site from another player can conquer the land. You
 therefore need military sites to keep military influence over your land.]]
       ) .. p(_
-[[Let's try it out now: Build a few  military buildings on your south western
+[[Let's try it out now: Build a few military buildings on your south western
 border.  We want to capture some of this mountain, so we can search for
 resources there. Bigger buildings will conquer more land which can be beneficial
 close to mountains because you can't build houses in mountains.]]
@@ -501,9 +504,9 @@ mining_00 = {
    title = _ "Searching for resources",
    body = rt(p(_
 [[Okay, now we own some of the area on this mountain. Mountains are very
-important, because they contain resources: Coal, Iron Ore, Gold and Granite.
-Each tribe uses the resources differently, but all need mines to get the
-resources out of the ground.]]
+important, because they contain resources: coal, iron ore, goldstone and
+granite.  Each tribe uses the resources differently, but all need mines to get
+the resources out of the ground.]]
    ) .. p(_
 [[Let's search for resources in this mountain.  First, we'll build a road into
 the mountains and place a flag. Then, we click on the flag and call a geologist
@@ -551,7 +554,8 @@ help symbol for where a mine can be built is]]
 [[Note that a mine needs rations to work. Rations are
 produced in taverns and taverns need meat, pitta bread, and fish to produce
 them. You will need a lot more infrastructure to get your mines working
-well.]]
+well. This infrastructure also varies from tribe to tribe. You'll get them
+explained in the introduction campaigns for the three tribes.]]
    )
 )
 }
@@ -560,20 +564,22 @@ warefare_and_training_00 = {
    title = _ "Warfare and Training",
    body = rt(h1(_ "Soldiers and Warefare") .. p(_
 [[On to the last topic now. We are going to talk about soldiers, their training
-and their profession: warfare. As mentioned, widelands is about building up, not
-burning down: therefore warfare is also more focused on the economics than the 
-military strategies. But enough of these theories. I am going to create us a
-little training ground with a training camp and a warehouse to the north east
-of here.]]) .. p(_
+and their profession: warfare. As mentioned, widelands is about building up,
+not burning down: therefore warfare is also more focused on the economics than
+the military strategies. Nevertheless, warfare offers one way to challenge
+other players and it has some game mechanics that deserve explanation. The
+economies of the tribes are explained in their individual tutorial campaigns.
+Ok, I am going to create us a little training ground with a training camp and a
+warehouse to the north east of here.]]) .. p(_
 [[If you want to come back to this eastern part of your realm, just scroll here
 via right-button scrolling or open the minimap by clicking on the]]
          )) .. rt("image=pics/menu_toggle_minimap.png", p(_
 [[minimap button at the bottom of the screen. Alternatively you could also press
 'm' on your keyboard]]
          )) .. (rt(p(_
-[[The minimap shows you the complete map in miniature. You can directly jump to any
-field by left-clicking on it. You can also toggle buildings, roads, flags and
-player indicators on and off inside the map.]]
+[[The minimap shows you the complete map in miniature. You can directly jump to
+any field by left-clicking on it. You can also toggle buildings, roads, flags
+and player indicators on and off inside the map.]]
          ) .. p(_
 [[But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted to
 build a small training scenario for you. Let's do that now.]]
@@ -612,10 +618,11 @@ when he succeeds to hit an enemy. For each attack level, he gains 7 damage.
 ]]
       ) .. h2(_"Defense:") .. p(_
 [[Defense is the value that is subtracted from the attack value. The barbarians
-can not train in this skill and therefore have always defense level 0.  If an
-attacker with an attack value of 15 hitpoints hits a barbarian soldier, the
-barbarian would lose 15 - 3 = 12 hitpoints. The 3 hitpoints that are
-subtracted are because of the defense ability.]]
+can not train in this skill and therefore have always defense level 0 which
+means that they always get 3 hitpoints subtracted from the damage inflicted. If
+an attacker with an attack value of 15 hitpoints hits a barbarian soldier, the
+barbarian would lose 15 - 3 = 12 hitpoints. The 3 hitpoints that are subtracted
+are because of the defense ability.]]
       ) .. h2(_"Evade:") .. p(_
 [[Evade is the chance that the soldier is able to dodge an attack. It is 25% for
 a level 0 evade barbarian and increases in steps of 15% for each level.]]
@@ -634,9 +641,9 @@ an even bigger building: the citadel.]]
 [[Citadels can not be built directly. Instead, you have to construct a fortress
 first and then enhance it to a citadel. To do so, click on the fortress, then
 choose the enhance to citadel button. Your soldiers will leave the citadel
-while the construction is going on. This means that your fortress has no military
-influence any more. If an enemy builds a military building nearby, your
-construction site could burn down. No sweat, that won't happen here.]]
+while the construction is going on. This means that your fortress has no
+military influence any more. If an enemy builds a military building nearby,
+your construction site could burn down. No sweat, that won't happen here.]]
       ) .. p(_
 [[Enhance your fortress to a citadel now. Remember that you can speed time up
 by using PAGE_UP, building a citadel takes a while.]]
@@ -664,7 +671,7 @@ button. Your soldiers will come from all nearby military buildings. Likewise,
 the defenders will come from all nearby military buildings of the enemy and
 intercept your forces.]]
       ) .. p(_
-[[Attack and conquer all of the military buildings of the enemy and destroy its
+[[Attack and conquer all military buildings of the enemy and destroy its
 headquarters.]]
       )
    ),

@@ -43,13 +43,6 @@ void Game_Preload_Data_Packet::Read
 			m_mapname    = s.get_safe_string("mapname");
 			m_background = s.get_safe_string("background");
 			m_player_nr  = s.get_safe_int   ("player_nr");
-		} else if (packet_version == 1) {
-			m_gametime   = s.get_safe_int   ("gametime");
-			m_mapname    = s.get_safe_string("mapname");
-			m_background = "pics/progress.png";
-			// Of course this is wrong, but at least player 1 is always in game
-			// so widelands won't crash with this setting.
-			m_player_nr  = 1;
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);

@@ -46,38 +46,22 @@ void Game_Player_Economies_Data_Packet::Read
 		FileRead fr;
 		fr.Open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.Unsigned16();
-		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		if (3 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 			iterate_players_existing(p, nr_players, game, player)
 				try {
 					Player::Economies & economies = player->m_economies;
 					uint16_t const nr_economies = economies.size();
-					if (packet_version == 1) {
-						uint16_t const nr_economies_from_file = fr.Unsigned16();
-						if (nr_economies != nr_economies_from_file)
-							throw game_data_error
-								(_
-								 	("read number of economies as %u, but this was "
-								 	 "read as %u elsewhere"),
-								 nr_economies_from_file, nr_economies);
-					}
-
 					Player::Economies ecos(nr_economies);
 					container_iterate(Player::Economies, ecos, i)
 						if
 							(upcast
 							 	(Flag const,
 							 	 flag,
-							 	 (packet_version == 1 ?
-							 	  map[fr.Coords32(extent)]
-							 	  :
-							 	  map[fr.Map_Index32(max_index)])
-							 	 .get_immovable()))
+							 	 map[fr.Map_Index32(max_index)].get_immovable()))
 						{
 							*i.current = flag->get_economy();
-							if (packet_version >= 3) {
-								EconomyDataPacket d(flag->get_economy());
-								d.Read(fr);
-							}
+							EconomyDataPacket d(flag->get_economy());
+							d.Read(fr);
 						} else
 							throw game_data_error
 								(_("there is no flag at the specified location"));

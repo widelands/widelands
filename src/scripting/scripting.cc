@@ -457,21 +457,12 @@ uint32_t LuaGameInterface_Impl::write_coroutine
 }
 
 
-static const char * m_persistent_globals[] = {
-	"_VERSION", "assert", "collectgarbage", "coroutine", "debug",
-	"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",
-	"load", "loadfile", "loadstring", "math", "module", "newproxy", "next",
-	"os", "package", "pairs", "pcall", "print", "rawequal",
-	"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
-	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
-	"string", "use", "_", "set_textdomain", "coroutine.yield", 0
-};
 void LuaGameInterface_Impl::read_global_env
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
 	// Empty table + object to persist on the stack Stack
-	unpersist_object(m_L, m_persistent_globals, fr, mol, size);
+	unpersist_object(m_L, fr, mol, size);
 	luaL_checktype(m_L, -1, LUA_TTABLE);
 
 	// Now, we have to merge all keys from the loaded table
@@ -504,7 +495,7 @@ uint32_t LuaGameInterface_Impl::write_global_env
 	lua_newtable(m_L);
 	lua_pushvalue(m_L, LUA_GLOBALSINDEX);
 
-	return persist_object(m_L, m_persistent_globals, fw, mos);
+	return persist_object(m_L, fw, mos);
 }
 
 /*

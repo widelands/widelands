@@ -33,13 +33,14 @@ end
 --
 --    Checks if the number of buildings defined in which are found for the
 --    given player. If region is given, buildings are only searched on the
---    corresponding fields.
+--    corresponding fields. If more buildings or equal the number of requested
+--    buildings are found, this function returns true.
 --
 --    Example usage:
 --
 --    .. code-block:: lua
 --
---       check_for_buildings(wl.map.Field(20,20):region(8), {lumberjacks_hut=2, quarry=1})
+--       check_for_buildings(wl.game.Player(1), {lumberjacks_hut=2, quarry=1})
 --
 --    :arg plr: Player to check for
 --    :type plr: :class:`wl.game.Player`

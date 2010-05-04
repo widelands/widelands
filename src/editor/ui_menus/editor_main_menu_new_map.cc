@@ -113,7 +113,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		 posx, posy, width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_New_Map::button_clicked, *this, 4,
-		 Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name());
+		 Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 
 	posy += height + spacing + spacing + spacing;
 
@@ -142,7 +142,7 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 		if (m_currentworld == m_worlds.size())
 			m_currentworld = 0;
 		m_world->set_title
-			(Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name
+			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name
 			 	());
 		break;
 	}
