@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-01 20:26+0000\n"
+"PO-Revision-Date: 2010-05-03 04:31+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-02 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../tribes/empire/ration/conf:1
 msgid "A small bite to keep miners strong and working."
-msgstr ""
+msgstr "Morsa parva, ut fossores forte laborent."
 
 #: ../../tribes/empire/conf:63
 msgid "Advanced Lance"
@@ -92,7 +92,7 @@ msgstr "Cervesia"
 
 #: ../../tribes/empire/fish/conf:1
 msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-msgstr ""
+msgstr "Pisces, praeter panem carnemque, ab Imperiani eduntur."
 
 #: ../../tribes/empire/conf:69
 msgid "Bread"
@@ -104,7 +104,7 @@ msgstr ""
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
-msgstr ""
+msgstr "Sues alit."
 
 #: ../../tribes/empire/conf:118
 msgid "Brewer"
@@ -211,7 +211,7 @@ msgstr "Aedificium destructum"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Aquam vel aes ad metalla rimanda invenit."
 
 #: ../../tribes/empire/conf:169
 msgid "Donjon"
@@ -223,7 +223,7 @@ msgstr "Asinus"
 
 #: ../../tribes/empire/conf:141
 msgid "Donkey Breeder"
-msgstr ""
+msgstr "Asinarius"
 
 #: ../../tribes/empire/conf:213
 msgid "Donkeyfarm"
@@ -299,7 +299,7 @@ msgstr "Farina"
 #: ../../tribes/empire/flour/conf:1
 msgid ""
 "Flour is produced out of wheat and is needed for the tasty Empire bread."
-msgstr ""
+msgstr "Imperiani farina ex tritico molita panes finguntur."
 
 #: ../../tribes/empire/conf:123
 msgid "Forester"
@@ -342,11 +342,11 @@ msgstr "Aes aureum"
 
 #: ../../tribes/empire/conf:79
 msgid "Grape"
-msgstr ""
+msgstr "Uva"
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."
-msgstr ""
+msgstr "Vineas colit."
 
 #: ../../tribes/empire/conf:162
 msgid "Guardhall"
@@ -370,11 +370,11 @@ msgstr "Triticum metit."
 
 #: ../../tribes/empire/conf:175
 msgid "Headquarters"
-msgstr ""
+msgstr "Principia"
 
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Principia mediocria"
 
 #: ../../tribes/empire/conf:176
 msgid "Headquarters shipwreck"

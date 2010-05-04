@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-04-30 15:25+0000\n"
-"Last-Translator: Immunoman <Unknown>\n"
+"PO-Revision-Date: 2010-05-03 13:12+0000\n"
+"Last-Translator: Michael DOUBEZ <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-05-01 03:50+0000\n"
+"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1636,7 +1636,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:131
 msgid "not "
-msgstr ""
+msgstr "non "
 
 #: ../../src/logic/production_program.cc:153
 #: ../../src/logic/production_program.cc:174
@@ -1743,7 +1743,7 @@ msgstr "L'animation inactif est par défaut ; l'appel n'est pas autorisé"
 
 #: ../../src/logic/production_program.cc:674
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr ""
+msgstr "format attendu marchandise_type1[,marchandise_type1[,...]][:N] ..."
 
 #: ../../src/logic/production_program.cc:773
 msgid " is missing"
@@ -1851,6 +1851,8 @@ msgid ""
 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
+"attendu atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) ou "
+"atrTotal (%u) mais la valeur d'attribut trouvée (%u) est inconnue"
 
 #: ../../src/logic/soldier.cc:71 ../../src/logic/soldier.cc:94
 msgid "positive integer"
@@ -2103,6 +2105,8 @@ msgid ""
 "%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
 "previously set to %u\n"
 msgstr ""
+"%s %u a un temps next_spawn pour le travailleur de type \"%s\" positionné à "
+"%u, mais il était précédemment à %u\n"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:477
 #, c-format
@@ -2157,7 +2161,7 @@ msgstr "possède le drapeau (%u)"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr ""
+msgstr "noeud adjacent (%i,%i): %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
@@ -2269,6 +2273,8 @@ msgstr ""
 #, c-format
 msgid "message is sent in the future: sent at %u but gametime is only %u"
 msgstr ""
+"message envoyé dans le futur: envoyé à %u mais le temps du jeu est seulement "
+"de %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
@@ -2277,12 +2283,17 @@ msgid ""
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
+"la valeur %u n'est pas une durée autorisée; elle est une valeur spéciale "
+"signifiant \"pour toujours\", ce qui est le comportement par défaut; omettez "
+"la touche de durée pour que le message existes pour toujours"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
 msgid ""
 "duration %u is too large; causes numeric overflow when added to sent time %u"
 msgstr ""
+"la valeur de durée %u est trop grande; elle cause un dépassement d'entier "
+"lorsqu'elle est ajoutée à l'heure d'envoi %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:117
 #, c-format
@@ -2290,6 +2301,8 @@ msgid ""
 "message should have expired at %u; sent at %u with duration %u but gametime "
 "is already %u"
 msgstr ""
+"le message devrait avoir expiré à %u; envoyé à %u avec une durée %u mais le "
+"temps du jeu est déjà %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:150
 #, c-format
@@ -2313,7 +2326,7 @@ msgstr "route : %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
-msgstr ""
+msgstr "pas d'emplacement de porteur"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:134
 #, c-format
@@ -2321,6 +2334,8 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"1 emplacement de porteur attendu mais %u trouvé sur la route sauvée avec la "
+"version de 2 de paquet (ancien)"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
@@ -2398,7 +2413,7 @@ msgstr "Le serveur utilise une version différente du protocole"
 
 #: ../../src/network/netclient.cc:680
 msgid "/me 's file failed md5 checksumming."
-msgstr ""
+msgstr "/me : la somme de contrôle md5 du fichier a échoué"
 
 #: ../../src/network/netclient.cc:739
 msgid "Unexpectedly received LAUNCH command from server."
@@ -3153,7 +3168,7 @@ msgstr "Arrêt"
 
 #: ../../src/ui_fsmenu/options.cc:285
 msgid "Try system language"
-msgstr ""
+msgstr "Essayer le langage du système"
 
 #: ../../src/ui_fsmenu/options.cc:398
 msgid "x"
@@ -3732,7 +3747,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:52
 msgid "Log in to a registered account"
-msgstr ""
+msgstr "Ouvrir une session vers un compte existant"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Automatically use this login information from now on."
@@ -3844,7 +3859,7 @@ msgstr "Niveau"
 
 #: ../../src/wui/stock_menu.cc:47
 msgid "Wares (total)"
-msgstr ""
+msgstr "Marchandises (total)"
 
 #: ../../src/wui/stock_menu.cc:52
 msgid "Workers (total)"
@@ -3856,7 +3871,7 @@ msgstr "Marchandises dans les entrepôts"
 
 #: ../../src/wui/stock_menu.cc:66
 msgid "Workers in warehouses"
-msgstr ""
+msgstr "Travailleurs dans les entrepôts"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"

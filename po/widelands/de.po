@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-05-02 06:32+0000\n"
-"Last-Translator: Sonnrain <Unknown>\n"
+"PO-Revision-Date: 2010-05-03 17:01+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-03 03:59+0000\n"
+"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:1724
@@ -1117,7 +1117,7 @@ msgstr "Kommandoschlange: %s"
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "game_class: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
@@ -1400,7 +1400,7 @@ msgstr "unbeweglicher Typ nicht im Stamm, Ziel hat jedoch Weite (\"%s\")"
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
 msgstr ""
-"Weite \"%s\" die für den Zieltypen gegeben wurde muss (\"Welt\") sein"
+"Weite \"%s\", die für den Zieltypen gegeben wurde (muss \"Welt\" sein)"
 
 #: ../../src/logic/immovable.cc:785 ../../src/logic/immovable.cc:940
 #, c-format

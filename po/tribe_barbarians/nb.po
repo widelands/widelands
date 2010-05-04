@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-02 11:01+0000\n"
-"Last-Translator: Hans Joachim Desserud <Unknown>\n"
+"PO-Revision-Date: 2010-05-03 14:04+0000\n"
+"Last-Translator: Fredrik Sudmann <fsudmann@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-03 03:59+0000\n"
+"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -121,7 +121,7 @@ msgstr "Bryggeri"
 
 #: ../../tribes/barbarians/conf:76
 msgid "Broad Axe"
-msgstr ""
+msgstr "Bredøks"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Bronze Axe"
@@ -170,11 +170,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:128
 msgid "Chief Miner"
-msgstr ""
+msgstr "Gruvesjef"
 
 #: ../../tribes/barbarians/conf:157
 msgid "Citadel"
-msgstr ""
+msgstr "Festning"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
@@ -458,7 +458,7 @@ msgstr "Jeger"
 
 #: ../../tribes/barbarians/conf:205
 msgid "Hunter's Hut"
-msgstr ""
+msgstr "Jegerhytte"
 
 #: ../../tribes/barbarians/conf:89
 msgid "Hunting Spear"
@@ -506,7 +506,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:93
 msgid "Mask"
-msgstr ""
+msgstr "Maske"
 
 #: ../../tribes/barbarians/conf:121
 msgid "Master Blacksmith"
@@ -790,7 +790,7 @@ msgstr "Ressursindikator jern mye"
 
 #: ../../tribes/barbarians/conf:63
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Ressursindikator ingen ressurs"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Resource indicator water"
@@ -1248,7 +1248,7 @@ msgstr "Treherder"
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
-msgstr ""
+msgstr "Arbeid"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
