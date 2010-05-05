@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-05-03 13:12+0000\n"
+"PO-Revision-Date: 2010-05-04 11:32+0000\n"
 "Last-Translator: Michael DOUBEZ <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-05-05 03:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -200,6 +200,29 @@ msgid ""
 "                      Enables double buffering\n"
 "                      *HIGHLY EXPERIMENTAL*\n"
 msgstr ""
+" --speed_of_new_game  La vitesse à laquelle la nouvelle \n"
+"                      partie va démarrer, avec un facteur 1000 \n"
+"                      (0=pause, 1000=vitesse normale).\n"
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      Déclencher automatiquement la \n"
+"                      construction d'une route après\n"
+"                       avoir placé un drapeau.\n"
+" --write_HTML=[yes|no]\n"
+"                      Écrit des fichiers d'aide en HTML pour les données du "
+"jeu séparé.\n"
+"\n"
+"Options graphiques :\n"
+" --fullscreen=[yes|no]\n"
+"                      Afficher ou non le jeu en plein écran.\n"
+" --depth=[16|32]      Profondeur de couleur (en bit par pixel)\n"
+" --xres=[...]         Largeur de la fenêtre en pixel.\n"
+" --yres=[...]         Hauteur de la fenêtre en pixel.\n"
+" --hw_improvements=[0|1]\n"
+"                      Autorise l'accélération matérielle\n"
+"                      *TRÈS EXPÉRIMENTAL*\n"
+" --double_buffer=[0|1]\n"
+"                      Autorise le double buffering\n"
+"                      *TRÈS EXPÉRIMENTAL*\n"
 
 #: ../../src/wlapplication.cc:1364
 msgid ""
@@ -1218,12 +1241,12 @@ msgstr "grand"
 #: ../../src/logic/cmd_luacoroutine.cc:62
 #, c-format
 msgid "lua function: %s"
-msgstr ""
+msgstr "lua function: %s"
 
 #: ../../src/logic/cmd_luascript.cc:58
 #, c-format
 msgid "lua: %s"
-msgstr ""
+msgstr "lua: %s"
 
 #: ../../src/logic/cmd_queue.cc:173
 #, c-format
@@ -2027,7 +2050,7 @@ msgstr "Types d'ouvrier autorisés: %s"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
 msgid "unknown bob type %u"
-msgstr ""
+msgstr "bob de type inconnu %u"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
@@ -2037,7 +2060,7 @@ msgstr "la tribu \"%s\" n'existe pas"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:141
 #, c-format
 msgid "bobs: %s"
-msgstr ""
+msgstr "bobs: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:233
 #, c-format
@@ -2057,17 +2080,17 @@ msgstr "lecture du chemin : %s"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:387
 #, c-format
 msgid "bob %u: %s"
-msgstr ""
+msgstr "bob %u: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:394
 #, c-format
 msgid "bobdata: %s"
-msgstr ""
+msgstr "bobdata: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:409
 #, c-format
 msgid "critter bob: %s"
-msgstr ""
+msgstr "bob bestiole : %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:675
 #, c-format
@@ -2203,7 +2226,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "altitudes: %s"
 
 #: ../../src/map_io/widelands_map_immovable_data_packet.cc:98
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:120
@@ -2993,7 +3016,7 @@ msgstr "personne"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:51
 msgid "Metaserver Lobby"
-msgstr ""
+msgstr "Hall du méta-serveur"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:55
 msgid "Users online:"
@@ -4221,11 +4244,11 @@ msgstr "SansNom"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 msgid "<Directory>"
-msgstr ""
+msgstr "<Répertoire>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "<Not a map file>"
-msgstr ""
+msgstr "<pas un fichier de carte>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:384
 msgid " exists already. Overwrite?"

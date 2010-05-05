@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-05-03 14:01+0000\n"
+"PO-Revision-Date: 2010-05-04 11:42+0000\n"
 "Last-Translator: Fredrik Sudmann <fsudmann@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-05-05 03:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -28,17 +28,19 @@ msgstr "Bluebyte Settlers II-kart. Ingen kommentar definert!"
 
 #: ../../src/wlapplication.cc:352
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr ""
+msgstr "FEIL: Kunne ikke koble til metaserver (se årsak over)!\n"
 
 #: ../../src/wlapplication.cc:864 ../../src/wlapplication.cc:877
 msgid "could not find the path of the main executable"
-msgstr ""
+msgstr "kunne ikke finne stien til hovedkjørefila"
 
 #: ../../src/wlapplication.cc:1000
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Ventet 5 sekunder for å stenge lyd. Støtte på problemer, så stenger "
+"widelands. Oppdater lydkortdriveren din og/eller SDL for å fikse problemet\n"
 
 #: ../../src/wlapplication.cc:1161
 msgid ""
@@ -46,10 +48,13 @@ msgid ""
 "Sorry, no double-instance debugging on WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Beklager, men ingen dobbelinstans-debugging i win32\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1164
 msgid "--double is disabled. This is not a debug build!"
-msgstr ""
+msgstr "-- double er deaktivert. Dette er ikke en avlusingsversjon!"
 
 #: ../../src/wlapplication.cc:1287
 msgid "This is Widelands-"
@@ -60,12 +65,16 @@ msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
+"Bruk: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1290
 msgid ""
 "Options:\n"
 "\n"
 msgstr ""
+"Valg:\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1294
 msgid ""
@@ -78,10 +87,18 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays\n"
 msgstr ""
+" --<config-entry-name>=value overskriver alle konfigurasjonsinnstillinger\n"
+"\n"
+" --logfile=FILENAME  Logger utdata til FILENAME istedet for \n"
+"                      terminal-utdata\n"
+" --datadir=DIRNAME    Bruk spesifikk mappe for widelands-konfig\n"
+"                      data files\n"
+" --homedir=DIRNAME    Use specified directory for widelands config\n"
+"                      filer, spillagring og replays\n"
 
 #: ../../src/wlapplication.cc:1302
 msgid "                      Default is ~/.widelands\n"
-msgstr ""
+msgstr "                      Standard er ~/.widelands\n"
 
 #: ../../src/wlapplication.cc:1305
 msgid ""
@@ -100,6 +117,20 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --record=FILENAME    Ta opp alle hendelser til gitt filnavn for\n"
+"                      senere gjenspilling\n"
+" --playback=FILENAME  Spill igjen gitt filnavn (se --record)\n"
+"\n"
+" --coredump=[yes|no]  Genererer en kjernedump ved segfaults istedet\n"
+"                      for å bruke SDL\n"
+" --language=[de_DE|sv_SE|...]\n"
+"                      Brukt lokalisjon.\n"
+" --localedir=DIRNAME  Bruk DIRNAME som lokasjon for lokalisjon\n"
+" --remove_syncstreams=[true|false]\n"
+"                      Fjern syncstream-filer ved oppstart\n"
+" --remove_replays=[...]\n"
+"                      Fjern replays etter dette antall dager.\n"
+"                      Hvis dette er 0 blir ikke replays slettet.\n"
 
 #: ../../src/wlapplication.cc:1320
 msgid ""
@@ -209,7 +240,7 @@ msgstr "Advarsel: "
 
 #: ../../src/wlapplication.cc:1558
 msgid "Game data error"
-msgstr ""
+msgstr "Spilldatafeil"
 
 #: ../../src/wlapplication.cc:1561
 msgid "Unexpected error during the game"
@@ -234,7 +265,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1680
 msgid "Connection timeouted"
-msgstr ""
+msgstr "Tilkobling timet ut"
 
 #: ../../src/wlapplication.cc:1682
 msgid ""
@@ -245,15 +276,15 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1704 ../../src/network/network_ggz.cc:367
 msgid "Connection problem"
-msgstr ""
+msgstr "Problem ved tilkobling"
 
 #: ../../src/wlapplication.cc:1706
 msgid "Widelands has not been able to connect to the host."
-msgstr ""
+msgstr "Widelands kunne ikke koble til vert."
 
 #: ../../src/wlapplication.cc:1752
 msgid "The address of the game server is invalid"
-msgstr ""
+msgstr "Adressen til spilltjener er ikke gyldig"
 
 #: ../../src/wlapplication.cc:1857 ../../src/network/nethost.cc:1208
 msgid "Player"
@@ -262,11 +293,11 @@ msgstr "Spiller"
 #: ../../src/wlapplication.cc:2008 ../../src/network/netclient.cc:179
 #: ../../src/network/nethost.cc:441
 msgid "Preparing game"
-msgstr ""
+msgstr "Klargjør spill"
 
 #: ../../src/wlapplication.cc:2115
 msgid "End of replay"
-msgstr ""
+msgstr "Slutt på replay"
 
 #: ../../src/wlapplication.cc:2117
 msgid ""
@@ -281,23 +312,23 @@ msgstr "Laster…"
 
 #: ../../src/writeHTML.cc:43
 msgid "Requesters"
-msgstr ""
+msgstr "Etterspørrere"
 
 #: ../../src/writeHTML.cc:58
 msgid "Providers"
-msgstr ""
+msgstr "Leverandører"
 
 #: ../../src/writeHTML.cc:73
 msgid "Successors"
-msgstr ""
+msgstr "Etterkommere"
 
 #: ../../src/writeHTML.cc:88
 msgid "Predecessors"
-msgstr ""
+msgstr "Forgjengere"
 
 #: ../../src/writeHTML.cc:103
 msgid "Employers"
-msgstr ""
+msgstr "Arbeidsgivere"
 
 #: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:272
 msgid "Building types"
@@ -321,11 +352,11 @@ msgstr "Størrelse"
 
 #: ../../src/writeHTML.cc:283 ../../src/writeHTML.cc:518
 msgid "Buildable"
-msgstr ""
+msgstr "Byggbar"
 
 #: ../../src/writeHTML.cc:285
 msgid "Enhanced"
-msgstr ""
+msgstr "Forbedret"
 
 #: ../../src/writeHTML.cc:288 ../../src/wui/buildingwindow.cc:187
 msgid "Stop"
@@ -333,11 +364,11 @@ msgstr "Stopp"
 
 #: ../../src/writeHTML.cc:290
 msgid "Conquer<br/>range"
-msgstr ""
+msgstr "Erobrings<br/>rekkevidde"
 
 #: ../../src/writeHTML.cc:292 ../../src/writeHTML.cc:520
 msgid "Vision<br/>range"
-msgstr ""
+msgstr "Syns<br/>rekkevidde"
 
 #: ../../src/writeHTML.cc:319 ../../src/writeHTML.cc:375
 #: ../../src/logic/building.cc:511
@@ -376,7 +407,7 @@ msgstr "Nei"
 
 #: ../../src/writeHTML.cc:354
 msgid "building_types.xhtml"
-msgstr ""
+msgstr "building_types.xhtml"
 
 #: ../../src/writeHTML.cc:377
 msgid "Is mine."
@@ -388,71 +419,71 @@ msgstr "Er stor."
 
 #: ../../src/writeHTML.cc:387
 msgid "Is medium."
-msgstr ""
+msgstr "Er medium"
 
 #: ../../src/writeHTML.cc:393
 msgid "Is small."
-msgstr ""
+msgstr "Er liten"
 
 #: ../../src/writeHTML.cc:400
 msgid "Is not buildable."
-msgstr ""
+msgstr "Er ikke byggbar"
 
 #: ../../src/writeHTML.cc:407
 msgid "Is enhanced."
-msgstr ""
+msgstr "Er forbedret"
 
 #: ../../src/writeHTML.cc:414
 #, c-format
 msgid "Conquer range is %u."
-msgstr ""
+msgstr "Erobringsrekkevidde er %u."
 
 #: ../../src/writeHTML.cc:422 ../../src/writeHTML.cc:653
 #, c-format
 msgid "Vision range is %u."
-msgstr ""
+msgstr "Synsrekkevidde er %u."
 
 #: ../../src/writeHTML.cc:430 ../../src/writeHTML.cc:660
 msgid "Build cost"
-msgstr ""
+msgstr "Bygningskostnad"
 
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "%s's byggeplass"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
-msgstr ""
+msgstr "Forbedringer"
 
 #: ../../src/writeHTML.cc:462
 #, c-format
 msgid "%s's enhancement"
-msgstr ""
+msgstr "%s's forbedring"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
-msgstr ""
+msgstr "Arbeidertyper"
 
 #: ../../src/writeHTML.cc:522
 msgid "Minimum<br/>needed<br/>experience"
-msgstr ""
+msgstr "Minimal<br/>krevd<br/>erfaring"
 
 #: ../../src/writeHTML.cc:524
 msgid "Maximum<br/>needed<br/>experience"
-msgstr ""
+msgstr "Maksimal<br/>krevd<br/>erfaring"
 
 #: ../../src/writeHTML.cc:526
 msgid "Becomes"
-msgstr ""
+msgstr "Blir"
 
 #: ../../src/writeHTML.cc:581
 msgid "worker_types.xhtml"
-msgstr ""
+msgstr "worker_types.xhtml"
 
 #: ../../src/writeHTML.cc:588
 msgid "Combat Properties"
-msgstr ""
+msgstr "Kampegenskaper"
 
 #: ../../src/writeHTML.cc:595
 #, c-format
@@ -460,6 +491,8 @@ msgid ""
 "Hitpoints is between %u and %u, plus %u for each level above 0 (maximum "
 "level is %u)."
 msgstr ""
+"Treffpoeng er mellom %u og %u, pluss %u for hvert nivå over 0 (maksimalt "
+"nivå er %u)."
 
 #: ../../src/writeHTML.cc:605
 #, c-format
@@ -467,108 +500,111 @@ msgid ""
 "Attack is between %u and %u, plus %u for each level above 0 (maximum level "
 "is %u)."
 msgstr ""
+"Angrep er mellom %u og %u, pluss %u for hvert nivå over 0 (maksimalt nivå er "
+"%u)."
 
 #: ../../src/writeHTML.cc:615
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Forsvar er %u, pluss %u for hvert nivå over 0 (maksimalt nivå er %u)."
 
 #: ../../src/writeHTML.cc:625
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr ""
+msgstr "Unnvik er %u, pluss %u for hvert nivå over 0 (maksimalt nivå er %u)."
 
 #: ../../src/writeHTML.cc:671 ../../src/writeHTML.cc:682
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "%s's kreasjon"
 
 #: ../../src/writeHTML.cc:693
 msgid "Spawns in warehouses."
-msgstr ""
+msgstr "Dukker opp i varehuset."
 
 #: ../../src/writeHTML.cc:702
 #, c-format
 msgid "Needs experience from working between %u and %u times to become"
-msgstr ""
+msgstr "Trenger erfaring fra arbeid mellom %u og %u ganger for å bli"
 
 #: ../../src/writeHTML.cc:710
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "%s's forfremmelse"
 
 #: ../../src/writeHTML.cc:721 ../../src/writeHTML.cc:866
 msgid "Programs"
-msgstr ""
+msgstr "Programmer"
 
 #: ../../src/writeHTML.cc:758 ../../src/writeHTML.cc:1301
 #: ../../src/logic/building.cc:506
 msgid "mine"
-msgstr ""
+msgstr "gruve"
 
 #: ../../src/writeHTML.cc:759
 msgid "breed"
-msgstr ""
+msgstr "avle"
 
 #: ../../src/writeHTML.cc:760
 msgid "createitem"
-msgstr ""
+msgstr "createitem"
 
 #: ../../src/writeHTML.cc:761
 msgid "setdescription"
-msgstr ""
+msgstr "setdescription"
 
 #: ../../src/writeHTML.cc:762
 msgid "setbobdescription"
-msgstr ""
+msgstr "setbobdescription"
 
 #: ../../src/writeHTML.cc:763
 msgid "findobject"
-msgstr ""
+msgstr "findobject"
 
 #: ../../src/writeHTML.cc:764
 msgid "findspace"
-msgstr ""
+msgstr "findspace"
 
 #: ../../src/writeHTML.cc:765
 msgid "walk"
-msgstr ""
+msgstr "gå"
 
 #: ../../src/writeHTML.cc:766
 msgid "animation"
-msgstr ""
+msgstr "animasjon"
 
 #: ../../src/writeHTML.cc:767 ../../src/writeHTML.cc:906
 msgid "return"
-msgstr ""
+msgstr "returner"
 
 #: ../../src/writeHTML.cc:768
 msgid "object"
-msgstr ""
+msgstr "objekt"
 
 #: ../../src/writeHTML.cc:769
 msgid "plant"
-msgstr ""
+msgstr "plant"
 
 #: ../../src/writeHTML.cc:770
 msgid "create_bob"
-msgstr ""
+msgstr "create_bob"
 
 #: ../../src/writeHTML.cc:771
 msgid "removeobject"
-msgstr ""
+msgstr "removeobject"
 
 #: ../../src/writeHTML.cc:772
 msgid "geologist"
-msgstr ""
+msgstr "geolog"
 
 #: ../../src/writeHTML.cc:773
 msgid "geologist_find"
-msgstr ""
+msgstr "geologist_find"
 
 #: ../../src/writeHTML.cc:774 ../../src/writeHTML.cc:1376
 msgid "playFX"
-msgstr ""
+msgstr "playFX"
 
 #: ../../src/writeHTML.cc:775
 msgid "UNKNOWN"
@@ -582,30 +618,30 @@ msgstr "Produksjon"
 #: ../../src/wui/productionsitewindow.cc:81
 #: ../../src/wui/warehousewindow.cc:56
 msgid "Workers"
-msgstr ""
+msgstr "Arbeidere"
 
 #: ../../src/writeHTML.cc:797
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "%s's ansatt"
 
 #: ../../src/writeHTML.cc:807
 msgid "Inputs"
-msgstr ""
+msgstr "Innspill"
 
 #: ../../src/writeHTML.cc:818
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "%s's innspill"
 
 #: ../../src/writeHTML.cc:830
 msgid "Output"
-msgstr ""
+msgstr "Utspill"
 
 #: ../../src/writeHTML.cc:841 ../../src/writeHTML.cc:855
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "%s's utspill"
 
 #: ../../src/writeHTML.cc:902 ../../src/writeHTML.cc:1045
 #: ../../src/writeHTML.cc:1107 ../../src/writeHTML.cc:1135
@@ -614,89 +650,89 @@ msgstr ""
 #: ../../src/writeHTML.cc:1297 ../../src/writeHTML.cc:1324
 #: ../../src/writeHTML.cc:1348 ../../src/writeHTML.cc:1372
 msgid "productionsite_program_reference.xhtml"
-msgstr ""
+msgstr "productionsite_program_reference.xhtml"
 
 #: ../../src/writeHTML.cc:904
 msgid "Documentation for program command return"
-msgstr ""
+msgstr "Dokumentasjon for programmets kommando-tilbakemelding"
 
 #: ../../src/writeHTML.cc:910 ../../src/logic/production_program.cc:389
 #: ../../src/logic/production_program.cc:746
 msgid "failed"
-msgstr ""
+msgstr "feilet"
 
 #: ../../src/writeHTML.cc:911 ../../src/logic/production_program.cc:390
 msgid "completed"
-msgstr ""
+msgstr "fullført"
 
 #: ../../src/writeHTML.cc:912 ../../src/logic/production_program.cc:390
 msgid "skipped"
-msgstr ""
+msgstr "hoppet over"
 
 #: ../../src/writeHTML.cc:917
 msgid "and"
-msgstr ""
+msgstr "og"
 
 #: ../../src/writeHTML.cc:918
 msgid "when"
-msgstr ""
+msgstr "når"
 
 #: ../../src/writeHTML.cc:920
 msgid "or"
-msgstr ""
+msgstr "eller"
 
 #: ../../src/writeHTML.cc:921
 msgid "unless"
-msgstr ""
+msgstr "med mindre"
 
 #: ../../src/writeHTML.cc:952 ../../src/writeHTML.cc:974
 msgid "economy"
-msgstr ""
+msgstr "økonomi"
 
 #: ../../src/writeHTML.cc:954 ../../src/writeHTML.cc:976
 msgid "needs"
-msgstr ""
+msgstr "trenger"
 
 #: ../../src/writeHTML.cc:994
 msgid "site"
-msgstr ""
+msgstr "sted"
 
 #: ../../src/writeHTML.cc:996
 msgid "has"
-msgstr ""
+msgstr "har"
 
 #: ../../src/writeHTML.cc:1027
 msgid "workers of this site"
-msgstr ""
+msgstr "arbeidere på dette stedet"
 
 #: ../../src/writeHTML.cc:1029
 msgid "workers"
-msgstr ""
+msgstr "arbeidere"
 
 #: ../../src/writeHTML.cc:1030
 msgid "</span></a> <span class=\"keyword\">"
-msgstr ""
+msgstr "</span></a> <span class=\"keyword\">"
 
 #: ../../src/writeHTML.cc:1031
 msgid "need"
-msgstr ""
+msgstr "trenger"
 
 #: ../../src/writeHTML.cc:1033
 msgid "experience"
-msgstr ""
+msgstr "erfaring"
 
 #: ../../src/writeHTML.cc:1047
 msgid "Documentation for program command call"
-msgstr ""
+msgstr "Dokumentasjon for programmets kommandokall"
 
 #: ../../src/writeHTML.cc:1049
 msgid "call"
-msgstr ""
+msgstr "kall"
 
 #: ../../src/writeHTML.cc:1056
 #, c-format
 msgid "site's program %s"
-msgstr ""
+msgstr "stedets program %s"
 
 #: ../../src/writeHTML.cc:1109
 msgid "Documentation for program command worker"
@@ -704,12 +740,12 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1111
 msgid "worker"
-msgstr ""
+msgstr "arbeider"
 
 #: ../../src/writeHTML.cc:1122
 #, c-format
 msgid "%s's program %s"
-msgstr ""
+msgstr "%s's program %s"
 
 #: ../../src/writeHTML.cc:1137
 msgid "Documentation for program command sleep"
@@ -717,12 +753,12 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1139
 msgid "sleep"
-msgstr ""
+msgstr "sov"
 
 #: ../../src/writeHTML.cc:1145 ../../src/writeHTML.cc:1165
 #, c-format
 msgid " %u.%03u s"
-msgstr ""
+msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1157
 msgid "Documentation for program command animate"
@@ -730,7 +766,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1159
 msgid "animate"
-msgstr ""
+msgstr "animer"
 
 #: ../../src/writeHTML.cc:1178
 msgid "Documentation for program command consume"
@@ -738,7 +774,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1180
 msgid "consume"
-msgstr ""
+msgstr "konsumer"
 
 #: ../../src/writeHTML.cc:1221 ../../src/writeHTML.cc:1258
 msgid "Documentation for program command produce"
@@ -746,11 +782,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1223
 msgid "produce"
-msgstr ""
+msgstr "produser"
 
 #: ../../src/writeHTML.cc:1260
 msgid "recruit"
-msgstr ""
+msgstr "rekrutt"
 
 #: ../../src/writeHTML.cc:1299
 msgid "Documentation for program command mine"
@@ -762,23 +798,23 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1328
 msgid "check soldier"
-msgstr ""
+msgstr "sjekk soldat"
 
 #: ../../src/writeHTML.cc:1334 ../../src/writeHTML.cc:1358
 msgid "hp"
-msgstr ""
+msgstr "hp"
 
 #: ../../src/writeHTML.cc:1335 ../../src/writeHTML.cc:1359
 msgid "attack"
-msgstr ""
+msgstr "angrep"
 
 #: ../../src/writeHTML.cc:1336 ../../src/writeHTML.cc:1360
 msgid "defense"
-msgstr ""
+msgstr "forsvar"
 
 #: ../../src/writeHTML.cc:1337 ../../src/writeHTML.cc:1361
 msgid "evade"
-msgstr ""
+msgstr "unnvik"
 
 #: ../../src/writeHTML.cc:1350
 msgid "Documentation for program command train"
@@ -786,7 +822,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1352
 msgid "train"
-msgstr ""
+msgstr "tren"
 
 #: ../../src/writeHTML.cc:1374
 msgid "Documentation for program command playFX"
@@ -794,11 +830,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1411 ../../src/writeHTML.cc:1417
 msgid "Ware types"
-msgstr ""
+msgstr "Varetyper"
 
 #: ../../src/writeHTML.cc:1451
 msgid "ware_types.xhtml"
-msgstr ""
+msgstr "ware_types.xhtml"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
 #: ../../src/economy/request.cc:192 ../../src/economy/wares_queue.cc:254
@@ -853,7 +889,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:203
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "unknown/unhandled version %u"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
@@ -874,48 +910,48 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "ukjent versjon %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "økonomi: %s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "varekø: %s"
 
 #: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
-msgstr ""
+msgstr "Meny"
 
 #: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
-msgstr ""
+msgstr "Verktøy"
 
 #: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
-msgstr ""
+msgstr "Verktøystørrelse"
 
 #: ../../src/editor/editorinteractive.cc:73
 #: ../../src/wui/interactive_player.cc:186
 #: ../../src/wui/interactive_spectator.cc:67
 msgid "Minimap"
-msgstr ""
+msgstr "Minikart"
 
 #: ../../src/editor/editorinteractive.cc:76
 #: ../../src/wui/interactive_player.cc:189
 msgid "Buildhelp"
-msgstr ""
+msgstr "Bygningshjelp"
 
 #: ../../src/editor/editorinteractive.cc:79
 msgid "Players"
-msgstr ""
+msgstr "Spillere"
 
 #: ../../src/editor/editorinteractive.cc:151
 msgid "Unsupported format"
-msgstr ""
+msgstr "Ikke-støttet format"
 
 #: ../../src/editor/editorinteractive.cc:153
 #, c-format
@@ -929,29 +965,29 @@ msgstr ""
 #: ../../src/logic/editor_game_base.cc:317
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "Laster stamme: %s"
 
 #: ../../src/editor/editorinteractive.cc:177
 msgid "Creating players"
-msgstr ""
+msgstr "Lag spillere"
 
 #: ../../src/editor/editorinteractive.cc:184
 #: ../../src/logic/editor_game_base.cc:313
 msgid "Loading world data"
-msgstr ""
+msgstr "Laster verdensdata"
 
 #: ../../src/editor/editorinteractive.cc:187
 #: ../../src/editor/editorinteractive.cc:580
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Laster grafikk"
 
 #: ../../src/editor/editorinteractive.cc:235
 msgid "Map unsaved"
-msgstr ""
+msgstr "Ulagert kart"
 
 #: ../../src/editor/editorinteractive.cc:236
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr ""
+msgstr "Kartet er ikke lagret. Vil du virkelig avslutte?"
 
 #: ../../src/editor/editorinteractive.cc:567
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
@@ -959,7 +995,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:184
 #: ../../src/logic/map.h:168
 msgid "No Name"
-msgstr ""
+msgstr "Uten navn"
 
 #: ../../src/editor/editorinteractive.cc:569
 #: ../../src/ui_fsmenu/netsetup_lan.cc:185
@@ -967,17 +1003,17 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
 #: ../../src/logic/map.h:169
 msgid "Unknown"
-msgstr ""
+msgstr "Ukjent"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:86
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "kommandokø: %s"
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "game_class: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"

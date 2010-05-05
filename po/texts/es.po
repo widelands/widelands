@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-03 08:17+0000\n"
+"PO-Revision-Date: 2010-05-04 15:04+0000\n"
 "Last-Translator: Shay <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-05-05 03:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -524,7 +524,7 @@ msgstr "Checo"
 
 #: ../../txts/README:86
 msgid "DELETE      Archive the current message"
-msgstr ""
+msgstr "DEL Archiva el mensaje actual."
 
 #: ../../txts/developers:161
 msgid "Dansk"
@@ -745,6 +745,8 @@ msgstr ""
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
+"En la ventana de mensajes, se encuentran disponibles las siguientes teclas "
+"de acceso rápido:"
 
 #: ../../txts/README:9
 #: ../../txts/editor_readme:7
@@ -832,7 +834,7 @@ msgstr "Músicos"
 
 #: ../../txts/README:55
 msgid "N               Toggle messages ('news')"
-msgstr ""
+msgstr "N Activa/Desactiva los mensajes ('noticias')"
 
 #: ../../txts/developers:149
 msgid ""

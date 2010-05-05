@@ -1,4 +1,4 @@
-# Norwegian Bokmal translation for widelands
+# Spanish translation for widelands
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-04 07:11+0000\n"
-"Last-Translator: Fredrik Sudmann <fsudmann@gmail.com>\n"
-"Language-Team: Norwegian Bokmal <nb@li.org>\n"
+"PO-Revision-Date: 2010-05-04 15:31+0000\n"
+"Last-Translator: Shay <Unknown>\n"
+"Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,105 +19,105 @@ msgstr ""
 
 #: ../../scripting/win_conditions/00_endless_game.lua:8
 msgid "An endless game without rules"
-msgstr "Et endeløst spill uten regler"
+msgstr "Juego sin fin, sin reglas"
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:10
 msgid "Autocrat"
-msgstr "Autokrat"
+msgstr "Autócrata"
 
 #: ../../scripting/win_conditions/02_collectors.lua:11
 msgid "Collectors"
-msgstr "Samlere"
+msgstr "Coleccionistas"
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:39
 msgid "Congratulations!"
-msgstr "Gratulerer!"
+msgstr "¡Felicidades!"
 
 #: ../../scripting/win_conditions/00_endless_game.lua:7
 msgid "Endless Game"
-msgstr "Endeløst spill"
+msgstr "Juego sin fin"
 
 #: ../../scripting/win_conditions/03_tribes_together.lua:85
 msgid "Game over"
-msgstr "Spillet er slutt"
+msgstr "Fin del juego"
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:28
 msgid "Sorry, you have lost this game!"
-msgstr "Beklager, du har tapt dette spillet!"
+msgstr "¡Has perdido!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:49
 msgid "Status"
-msgstr "Status"
+msgstr "Estado"
 
 #: ../../scripting/win_conditions/02_collectors.lua:40
 msgid "The game will end in %i minutes."
-msgstr "Spillet vil avslutte om %i minutter."
+msgstr "El juego terminara en %i minutos."
 
 #: ../../scripting/win_conditions/02_collectors.lua:44
 msgid "The player %i has currently %i points"
-msgstr "Spilleren %i har for øyeblikket %i poeng"
+msgstr "El jugador %i tiene %i puntos"
 
 #: ../../scripting/win_conditions/03_tribes_together.lua:11
 msgid ""
 "The three tribes play together vs each other. Vision is granted to all the "
 "players playing together"
 msgstr ""
-"De tre stammene spiller sammen mot hverandre. Synsfelt deles mellom alle "
-"spillerne som spiller sammen"
+"Las tres tribus juegan juntas unas contra otras. La visión está garantizada "
+"a todos los jugadores que juegan juntos"
 
 #: ../../scripting/win_conditions/03_tribes_together.lua:79
 msgid "The tribe %s is no more."
-msgstr "Stammen %s er ikke lenger."
+msgstr "La tribu %s ha desaparecido."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:11
 msgid "The tribe that can defeat all others wins!"
-msgstr "Den stammen som kan overvinne alle andre vinner!"
+msgstr "¡La tribu que derrote a las otras gana!"
 
 #: ../../scripting/win_conditions/03_tribes_together.lua:79
 msgid "Tribe defeated!"
-msgstr "Stammen er slått!"
+msgstr "¡Tribu derrotada!"
 
 #: ../../scripting/win_conditions/03_tribes_together.lua:10
 msgid "Tribes together"
-msgstr "Stammer sammen"
+msgstr "Las tribus juntas"
 
 #: ../../scripting/win_conditions/02_collectors.lua:71
 msgid "You are the winner!"
-msgstr "Du vant!"
+msgstr "¡Eres el ganador!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:12
 msgid ""
 "You get points for wares in your HQ, the one with the highest number of "
 "wares at the end of 4 hours wins the game"
 msgstr ""
-"Du får poeng for varene i ditt HK. Den med mest varer mot slutten av et 4 "
-"timers spill vinner spillet"
+"Obtén puntos por los bienes en tu cuartel general. Quien tenga el mayor "
+"numero de bienes al final de 4 horas, gana el juego"
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:40
 #: ../../scripting/win_conditions/03_tribes_together.lua:85
 msgid "You have won this game!"
-msgstr "Du har vunnet spillet!"
+msgstr "¡Has ganado la partida!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:69
 msgid "You lost"
-msgstr "Du tapte"
+msgstr "Has perdido"
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:27
 msgid "You lost!"
-msgstr "Du tapte!"
+msgstr "¡Has perdido!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:71
 msgid "You won!"
-msgstr "Du vant!"
+msgstr "¡Has ganado!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:69
 msgid "You've lost this game!"
-msgstr "Du har tapt spillet!"
+msgstr "¡Has perdido esta partida!"
 
 #: ../../scripting/win_conditions/03_tribes_together.lua:74
 msgid "You've lost!"
-msgstr "Du har tapt!"
+msgstr "¡Perdiste!"
 
 #: ../../scripting/win_conditions/03_tribes_together.lua:74
 msgid "Your tribe is no more. You have lost this game"
-msgstr "Stammen din er utryddet. Du har tapt spillet"
+msgstr "Tu tribu no sobrevivió. Has perdido la partida"
