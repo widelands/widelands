@@ -149,6 +149,17 @@ void NetClient::run ()
 			return;
 	}
 
+#if HAVE_GGZ
+	// if this is a ggz game, tell the metaserver a bit abou the game
+	if (use_ggz)
+	{
+		NetGGZ::ref().set_map(d->settings.mapname, 0, 0);
+		NetGGZ::ref().set_players(d->settings);
+		// ToDo: Feed NetGGZ with some information first
+		NetGGZ::ref().send_game_info();
+	}
+#endif
+
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
@@ -193,6 +204,17 @@ void NetClient::run ()
 			(loaderUI,
 			 d->settings.savegame ?
 			 Widelands::Game::Loaded : Widelands::Game::NewNonScenario);
+
+#if HAVE_GGZ
+	// if this is a ggz game, tell the metaserver the result of the game
+	if (use_ggz)
+	{
+		// ToDo: NetGGZ::ref().set_results();
+		// ToDo: Feed NetGGZ with some information first
+		NetGGZ::ref().send_game_statistics
+			(game.get_gametime(), game.get_general_statistics());
+	}
+#endif
 		d->modal = 0;
 		d->game = 0;
 	} catch (...) {
@@ -559,7 +581,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 #else
 					std::auto_ptr<char> complete_buf(new char[bytes]);
 					if (!complete_buf.get()) throw wexception("Out of memory");
-					char *complete = complete_buf.get();
+					char * complete = complete_buf.get();
 #endif
 					fr.DataComplete(complete, bytes);
 					MD5Checksum<FileRead> md5sum;
@@ -593,7 +615,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		g_fs->EnsureDirectoryExists(path);
 		break;
 	}
-	
+
 	case NETCMD_FILE_PART: {
 		uint32_t part = packet.Unsigned32();
 		uint8_t size = packet.Unsigned8();
@@ -642,7 +664,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 #else
 			std::auto_ptr<char> complete_buf(new char[file->bytes]);
 			if (!complete_buf.get()) throw wexception("Out of memory");
-			char *complete = complete_buf.get();
+			char * complete = complete_buf.get();
 #endif
 			fr.DataComplete(complete, file->bytes);
 			MD5Checksum<FileRead> md5sum;

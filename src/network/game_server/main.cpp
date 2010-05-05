@@ -27,7 +27,7 @@
 #include <ctime>
 
 // Version information
-#define WIDELANDS_SERVER_VERSION "0.4"
+#define WIDELANDS_SERVER_VERSION "0.5"
 
 // Main function: parse arguments and start server
 int main(int argc, char** argv)

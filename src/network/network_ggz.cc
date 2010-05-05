@@ -26,6 +26,8 @@
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
+#include "game_server/protocol_helpers.h"
+#include "container_iterate.h"
 
 #include <cstring>
 
@@ -47,7 +49,10 @@ NetGGZ::NetGGZ() :
 	tableseats    (1),
 	userupdate    (false),
 	tableupdate   (false),
-	motd          ()
+	motd          (),
+	mapname       (),
+	map_w         (-1),
+	map_h         (-1)
 {}
 
 
@@ -975,14 +980,268 @@ void NetGGZ::send_game_playing()
 void NetGGZ::send_game_done()
 {
 	if (used()) {
-		if (ggz_write_int(m_fd, op_game_statistics) < 0)
-			log("ERROR: Game statistics could not be send!\n");
 		if (ggz_write_int(m_fd, op_state_done) < 0)
 			log("ERROR: Game state could not be send!\n");
 	} else
 		log("ERROR: GGZ not used!\n");
 }
 
+
+void NetGGZ::send_game_info()
+{
+	if (used()) {
+		if (ggz_write_int(m_fd, op_game_information) < 0)
+			log("ERROR: Game information could not be send!\n");
+
+		std::list<WLGGZParameter> params;
+		WLGGZParameter par;
+
+		par.set(mapname);
+		params.push_back(par);
+		wlggz_write(m_fd, gameinfo_mapname, params);
+
+		params.clear();
+		par.set(map_w);
+		params.push_back(par);
+		par.set(map_h);
+		params.push_back(par);
+		wlggz_write(m_fd, gameinfo_mapsize, params);
+
+		params.clear();
+		par.set(static_cast<int>(gametype_endless));
+		params.push_back(par);
+		wlggz_write(m_fd, gameinfo_gametype, params);
+
+		std::vector<Net_Player_Info>::iterator pit = playerinfo.begin();
+		while (pit! = playerinfo.end())
+		{
+			params.clear();
+			par.set(pit->playernum);
+			params.push_back(par);
+			wlggz_write(m_fd, gameinfo_playerid, params);
+
+			params.clear();
+			par.set(pit->name);
+			params.push_back(par);
+			wlggz_write(m_fd, gameinfo_playername, params);
+
+			params.clear();
+			par.set(pit->tribe);
+			params.push_back(par);
+			wlggz_write(m_fd, gameinfo_tribe, params);
+
+			params.clear();
+			par.set(static_cast<int>(pit->type));
+			params.push_back(par);
+			wlggz_write(m_fd, gameinfo_playertype, params);
+
+			pit++;
+		}
+
+		ggz_write_int(m_fd, 0);
+		std::cout << "GGZ: write int (0) end of list" << std::endl;
+	} else
+		log("ERROR: GGZ not used!\n");
+}
+
+void NetGGZ::send_game_statistics
+	(int32_t gametime,
+	 const Widelands::Game::General_Stats_vector & resultvec)
+{
+	if (used()) {
+		ggz_write_int(m_fd, op_game_statistics);
+
+		std::list<WLGGZParameter> params;
+		WLGGZParameter par;
+
+		par.set(mapname);
+		params.push_back(gametime);
+		wlggz_write(m_fd, gamestat_gametime, params);
+
+		log
+			("resultvec size: %d, playerinfo size: %d\n",
+			 resultvec.size(), playerinfo.size());
+
+		for (int i = 0; i < playerinfo.size(); i++)
+		{
+			params.clear();
+			par.set_int(i);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_playernumber, params);
+
+
+			params.clear();
+			if (resultvec.at(i).land_size.size())
+				par.set_int(resultvec.at(i).land_size.back());
+			else
+				par.set_int(0);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_land, params);
+
+			params.clear();
+			if (resultvec.at(i).nr_buildings.size())
+				par.set_int(resultvec[i].nr_buildings.back());
+			else
+				par.set_int(0);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_buildings, params);
+
+			params.clear();
+			if (resultvec.at(i).miltary_strength.size())
+				par.set_int(resultvec[i].miltary_strength.back());
+			else
+				par.set_int(0);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_militarystrength, params);
+
+			params.clear();
+			if (resultvec.at(i).nr_casualties.size())
+				par.set_int(resultvec[i].nr_casualties.back());
+			else
+				par.set_int(0);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_casualties, params);
+
+			//params.clear();
+			//par.set(resultvec[i].nr_civil_blds_defeated.back());
+			//params.push_back(par);
+			//wlggz_write(m_fd, gamestat_land, params);
+
+			params.clear();
+			if (resultvec.at(i).nr_civil_blds_lost.size())
+				par.set_int(resultvec[i].nr_civil_blds_lost.back());
+			else
+				par.set_int(0);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_civbuildingslost, params);
+
+			params.clear();
+			if (resultvec.at(i).nr_kills.size())
+				par.set_int(resultvec[i].nr_kills.back());
+			else
+				par.set_int(0);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_kills, params);
+
+			//params.clear();
+			//par.set(resultvec[i].nr_msites_defeated.back());
+			//params.push_back(par);
+			//wlggz_write(m_fd, gamestat_mil, params);
+
+			params.clear();
+			if (resultvec.at(i).nr_msites_lost.size())
+				par.set_int(resultvec[i].nr_msites_lost.back());
+			else
+				par.set_int(0);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_milbuildingslost, params);
+
+			params.clear();
+			if (resultvec.at(i).nr_wares.size())
+				par.set_int(resultvec[i].nr_wares.back());
+			else
+				par.set_int(0);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_wares, params);
+
+			params.clear();
+			if (resultvec.at(i).nr_workers.size())
+				par.set_int(resultvec[i].nr_workers.back());
+			else
+				par.set_int(0);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_workers, params);
+
+			params.clear();
+			if (resultvec.at(i).productivity.size())
+				par.set_int(resultvec[i].productivity.back());
+			else
+				par.set_int(0);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_productivity, params);
+		}
+
+		/*
+		- gamestat_playernumber
+		gamestat_result
+		gamestat_points
+		- gamestat_land
+		- gamestat_buildings
+		- gamestat_milbuildingslost
+		- gamestat_civbuildingslost
+		gamestat_buildingsdefeat
+		gamestat_milbuildingsconq
+		gamestat_economystrength
+		gamestat_militarystrength
+		- gamestat_workers
+		- gamestat_wares
+		- gamestat_productivity
+		- gamestat_casualties
+		- gamestat_kills */
+
+		ggz_write_int(m_fd, 0);
+	} else
+		log("ERROR: GGZ not used!\n");
+}
+
+void NetGGZ::set_players(GameSettings & settings)
+{
+	log
+		("NetGGZ: playernum(%d) usernum(%d)\n",
+		 static_cast<int>(settings.playernum),
+		 static_cast<int>(settings.usernum));
+
+	std::vector<PlayerSettings>::iterator pit = settings.players.begin();
+	int i = 0;
+	while (pit != settings.players.end())
+	{
+		log
+			("NetGGZ: PlayerSetting: init_index(%d), name(%s), "
+			 "ai(%s), tribe(%s)\n",
+			 static_cast<int>(pit->initialization_index),
+			 pit->name.c_str(), pit->ai.c_str(), pit->tribe.c_str());
+
+		Net_Player_Info player;
+		player.name = pit->name;
+		player.tribe = pit->tribe;
+		player.playernum = i;
+		if (pit->ai.compare("Aggressive") == 0)
+			player.type = playertype_ai_aggressive;
+		else if (pit->ai.compare("Normal") == 0)
+			player.type = playertype_ai_normal;
+		else if (pit->ai.compare("Defensive") == 0)
+			player.type = playertype_ai_defensive;
+		else if (pit->ai.compare("None") == 0)
+			player.type = playertype_ai_none;
+		else if (pit->ai.empty() and not player.name.empty())
+			player.type = playertype_human;
+		else {
+			log
+				("NetGGZ: WARNING: Unknown AI %s. Plaer name %s\n",
+				 pit->ai.c_str(), pit->name.c_str());
+			player.type = playertype_unknown;
+		}
+		if (not player.name.empty())
+			playerinfo.push_back(player);
+		pit++; i++;
+	}
+
+	std::vector<UserSettings>::iterator uit = settings.users.begin();
+	while (uit != settings.users.end())
+	{
+		log
+			("NetGGZ: UserSetting: position(%d), name(%s)\n",
+			 static_cast<int>(uit->position), uit->name.c_str());
+		uit++;
+	}
+}
+
+void NetGGZ::set_map(std::string name, int w, int h)
+{
+	mapname = name;
+	map_w = w;
+	map_h = h;
+}
 
 /// Sends a chat message via ggz room chat
 void NetGGZ::send(std::string const & msg)

@@ -38,10 +38,16 @@
 #include <string>
 #include <vector>
 
+#include <limits>
+#include "gamesettings.h"
+#include "logic/game.h"
+
 #ifdef WIN32
 #include <winsock2.h>
 #include <io.h>
 #endif
+
+#include "game_server/protocol.h"
 
 /// A simply network player struct
 struct Net_Player {
@@ -49,6 +55,13 @@ struct Net_Player {
 	std::string   name;
 	GGZPlayerType type;
 	char          stats[16];
+};
+
+struct Net_Player_Info {
+	int playernum;
+	std::string name;
+	std::string tribe;
+	WLGGZPlayerType type;
 };
 
 /// A MOTD struct for easier output to the chat panel
@@ -112,7 +125,10 @@ struct NetGGZ : public ChatProvider {
 	std::vector<Net_Game_Info> const & tables();
 	std::vector<Net_Player>    const & users();
 
-	enum Protocol
+	// Include the enums to communicate with the server
+
+
+	/* enum Protocol
 	{
 		op_greeting = 1,
 		op_request_ip = 2, // request the IP of the host
@@ -122,7 +138,7 @@ struct NetGGZ : public ChatProvider {
 		op_state_done = 6, // tell the server that the game ended
 		op_game_statistics = 7, // send game statistics
 		op_unreachable = 99 // the metaserver says we are unreachable
-	};
+	};*/
 
 	bool initcore
 		(const char *, const char *, const char *, const char *,
@@ -133,6 +149,11 @@ struct NetGGZ : public ChatProvider {
 	void launch  ();
 	void send_game_playing();
 	void send_game_done();
+	void send_game_info();
+	void send_game_statistics(int32_t gametime,
+		const Widelands::Game::General_Stats_vector& resultvec);
+	void set_players(GameSettings&);
+	void set_map(std::string, int, int);
 	void join(char const * tablename);
 
 	// functions for local server setup
@@ -207,7 +228,11 @@ private:
 	bool tableupdate;
 	std::vector<Net_Game_Info> tablelist;
 	std::vector<Net_Player>    userlist;
+	std::vector<Net_Player_Info> playerinfo;
 	MOTD motd;
+
+	std::string mapname;
+	int map_w, map_h;
 
 	// The chat messages
 	std::vector<ChatMessage> messages;

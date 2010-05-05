@@ -21,7 +21,7 @@
 
 #define WIDELANDS_PROTOCOL 1
 
-enum NetworkOpcodes
+enum WLGGZNetworkOpcodes
 {
 	op_greeting = 1,
 	op_request_ip = 2,
@@ -29,9 +29,102 @@ enum NetworkOpcodes
 	op_broadcast_ip = 4,
 	op_state_playing = 5,
 	op_state_done = 6,
+
+	/* Opcode to transmit statistics and game results tu the server
+	 * For each argument ther comes first integer to indicate which data
+	 * it is (GameInfo) then a second integer to indicate the dataype
+	 * and then the argument. A argument type of 0 indicates the end of
+	 * the argument list.
+	 */
 	op_game_statistics = 7,
+
+	// Similiar to the above op_game_statistics just for GameInfo
+	op_game_information = 8,
+
 	op_unreachable = 99
 };
 
+enum WLGGZDataType
+{
+	ggzdatatype_null = 0,
+	ggzdatatype_integer = 1,
+	ggzdatatype_char = 2,
+	ggzdatatype_string = 3,
+	ggzdatatype_boolean = 4,
+	ggzdatatype_raw = 99
+};
+
+enum WLGGZGameInfo
+{
+	// one integer, the widelands player number
+	gameinfo_playerid = 1,
+	// one string, the name of the player
+	gameinfo_playername = 2,
+	// one string, the name of the tribe
+	gameinfo_tribe = 3,
+	// one integer
+	gameinfo_gametype = 4,
+	// one string, the name of the map
+	gameinfo_mapname = 5, 
+	// two integers, the width then the height of the map
+	gameinfo_mapsize = 6,
+	// one integer
+	gameinfo_playertype = 7
+};
+
+enum WLGGZPlayerType
+{
+	playertype_null = 0,
+	playertype_human = 1,
+	playertype_ai_aggressive = 2,
+	playertype_ai_normal = 3,
+	playertype_ai_defensive = 4,
+	playertype_ai_none = 5,
+	playertype_unknown = 99
+};
+
+enum WLGGZGameType
+{
+	gametype_endless = 1
+};
+
+enum WLGGZGameStatsResult
+{
+	gamestatresult_winner = 1,
+	gamestatresult_looser = 2,
+	gamestatresult_giveup = 3
+};
+
+enum WLGGZGameStats
+{
+	/* This codes can occur multiple times. The values are
+	 * for the playerid which was send last. 
+	 */
+	gamestat_playernumber = 1, // integer
+	gamestat_result = 2, // intger
+	gamestat_points = 3, // integer
+	gamestat_land = 4, // integer, land conquerored by player
+	gamestat_buildings = 5, // integer, number of buildings theplayer has
+	gamestat_milbuildingslost = 6, // integer
+	gamestat_civbuildingslost = 7, // integer
+	gamestat_buildingsdefeat = 8, // integer
+	gamestat_milbuildingsconq = 9, // integer
+	gamestat_economystrength = 10, // integer
+	gamestat_militarystrength = 11, // integer
+	gamestat_workers = 12, // integer
+	gamestat_wares = 13, // integer
+	gamestat_productivity = 14, // integer
+	gamestat_casualties = 15, // integer
+	gamestat_kills = 16, // integer
+	gamestat_gametime = 17 // integer
+};
+
+/*ToDo:
+ * game time
+ * client version
+ * 
+ *
+ */
+  
 #endif
 

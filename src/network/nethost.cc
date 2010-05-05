@@ -533,7 +533,12 @@ void NetHost::run(bool const autorun)
 #if HAVE_GGZ
 	// if this is a ggz game, tell the metaserver that the game started
 	if (use_ggz)
+	{
+		//NetGGZ::ref().set_map(d->settings.mapname, 0, 0);
+		//NetGGZ::ref().set_players(d->settings.players);
+		//NetGGZ::ref().send_game_info();
 		NetGGZ::ref().send_game_playing();
+	}
 #endif
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
@@ -600,6 +605,20 @@ void NetHost::run(bool const autorun)
 		// wait mode when there are no clients
 		checkHungClients();
 		initComputerPlayers();
+
+#if HAVE_GGZ
+		// if this is a ggz game, tell the metaserver about the game
+		if (use_ggz)
+		{
+			assert(&game.map());
+			NetGGZ::ref().set_map
+				(d->settings.mapname, game.map().get_width(),
+				 game.map().get_height());
+			NetGGZ::ref().set_players(d->settings);
+			NetGGZ::ref().send_game_info();
+		}
+#endif
+
 		game.run
 			(loaderUI,
 			 d->settings.savegame ?
@@ -607,7 +626,11 @@ void NetHost::run(bool const autorun)
 #if HAVE_GGZ
 		// if this is a ggz game, tell the metaserver that the game is done.
 		if (use_ggz)
+		{
+			NetGGZ::ref().send_game_statistics
+				(game.get_gametime(), game.get_general_statistics());
 			NetGGZ::ref().send_game_done();
+		}
 #endif
 		clearComputerPlayers();
 	} catch (...) {
