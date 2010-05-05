@@ -4,7 +4,7 @@ help=_Carries items along your roads.
 
 [idle]
 pics=idle_??.png
-hotspot=7 20
+hotspot=7 27
 plrclr0_r=2
 plrclr0_g=2
 plrclr0_b=74
@@ -20,7 +20,7 @@ plrclr3_b=255
 fps=2
 
 [walk]
-hotspot=7 20
+hotspot=7 27
 plrclr0_r=2
 plrclr0_g=2
 plrclr0_b=74
@@ -36,7 +36,7 @@ plrclr3_b=255
 fps=12
 
 [walkload]
-hotspot=7 20
+hotspot=7 27
 plrclr0_r=2
 plrclr0_g=2
 plrclr0_b=74

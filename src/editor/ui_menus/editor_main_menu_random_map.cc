@@ -46,7 +46,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	(Editor_Interactive & parent)
 	:
 	UI::Window
-		(&parent,
+		(&parent, "random_map_menu",
 		 (parent.get_w() - 260) / 2, (parent.get_h() - 450) / 2, 260, 450,
 		 _("New Random Map")),
 	m_currentworld(0)
@@ -98,14 +98,14 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	}
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "width_up",
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Main_Menu_New_Random_Map::button_clicked, *this, 0);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "width_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
@@ -126,14 +126,14 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	m_height = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "height_up",
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Main_Menu_New_Random_Map::button_clicked, *this, 2);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "height_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
@@ -145,14 +145,14 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	// ---------- Water -----------
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "water_up",
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Main_Menu_New_Random_Map::button_clicked, *this, 4);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "water_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
@@ -168,14 +168,14 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	// ---------- Land -----------
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "land_up",
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Main_Menu_New_Random_Map::button_clicked, *this, 6);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "land_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
@@ -192,14 +192,14 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	// ---------- Wasteland -----------
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "wasteland_up",
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Main_Menu_New_Random_Map::button_clicked, *this, 10);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "wasteland_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
@@ -250,7 +250,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	m_res_amount = 2;
 
 	m_res = new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "resources",
 		 posx, posy, width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_New_Random_Map::button_clicked, *this, 12,
@@ -268,11 +268,11 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		++m_currentworld;
 
 	m_world = new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
-		(this,
+		(this, "world",
 		 posx, posy, width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_New_Random_Map::button_clicked, *this, 8,
-		 Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name());
+		 Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 
 	posy += height + spacing + spacing + spacing;
 
@@ -295,7 +295,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	// ---------- "Generate Map" button ----------
 
 	m_goButton = new UI::Callback_Button<Main_Menu_New_Random_Map>
-		(this,
+		(this, "generate_map",
 		 posx, posy, width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Main_Menu_New_Random_Map::clicked_create_map, *this,
@@ -343,7 +343,7 @@ void Main_Menu_New_Random_Map::button_clicked(int32_t n) {
 		if (m_currentworld == m_worlds.size())
 			m_currentworld = 0;
 		m_world->set_title
-			(Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name());
+			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 		break;
 	case 9:
 		break;
@@ -476,7 +476,7 @@ void Main_Menu_New_Random_Map::id_edit_box_changed()
 			(strcmp(mapInfo.worldName.c_str(), m_worlds[m_currentworld].c_str()))
 			++m_currentworld;
 		m_world->set_title
-			(Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name());
+			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 
 		button_clicked(-1);  // Update other values in UI as well
 

@@ -38,7 +38,9 @@ int32_t Editor_Info_Tool::handle_click_impl
 {
 	Widelands::World const & world = map.world();
 	UI::Window * const w =
-		new UI::Window(&parent, 30, 30, 400, 200, _("Field Information"));
+		new UI::Window
+			(&parent, "field_information", 30, 30, 400, 200,
+			 _("Field Information"));
 	UI::Multiline_Textarea * const multiline_textarea =
 		new UI::Multiline_Textarea
 			(w, 0, 0, w->get_inner_w(), w->get_inner_h());

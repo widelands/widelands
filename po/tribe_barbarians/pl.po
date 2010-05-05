@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-10 19:09+0000\n"
-"PO-Revision-Date: 2010-03-13 18:21+0000\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-03-25 18:56+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-14 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-03-26 04:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/axe/conf:1
@@ -98,27 +98,27 @@ msgstr "Sleep (Śpij)"
 
 #: ../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
-msgstr "Upgrade soldier evade 0 (Ulepsz wymijanie 0 żołnierza)"
+msgstr "Upgrade soldier evade 0 (Ulepsz uniki 0 żołnierza)"
 
 #: ../../tribes/barbarians/battlearena/conf:27
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz wymijanie 0 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz uniki 0 żołnierza (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/barbarians/battlearena/conf:28
 msgid "Upgrade soldier evade 1"
-msgstr "Upgrade soldier evade 1 (Ulepsz wymijanie 1 żołnierza)"
+msgstr "Upgrade soldier evade 1 (Ulepsz uniki 1 żołnierza)"
 
 #: ../../tribes/barbarians/battlearena/conf:29
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz wymijanie 1 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz uniki 1 żołnierza (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -188,7 +188,7 @@ msgid ""
 "this. Produced in the axe factory."
 msgstr ""
 "Topór z brązu uznany jest za broń najtrudniejszą do władania. Zadaje dużo "
-"obrażeń, ale nie jest bardzo wytrzymały. Tylko najlepsi wojownicy nogą się "
+"obrażeń, ale nie jest bardzo wytrzymały. Tylko najlepsi wojownicy mogą się "
 "nim posługiwać. Produkowany w fabryce toporów."
 
 #: ../../tribes/barbarians/builder/conf:1
@@ -223,12 +223,12 @@ msgid ""
 "The fires of the barbarians are usually fed with wood, but sometimes, wood "
 "just does not burn hot enough. Then, coal is used."
 msgstr ""
-"Barbarzyńcy zazwyczaj palą drewno,. lecz tam gdzie potrzeba wysokiej "
+"Barbarzyńcy zazwyczaj palą drewno, lecz tam gdzie potrzeba wysokiej "
 "temperatury, używają węgla."
 
 #: ../../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
-msgstr "Zespól rozwojowy Widelands"
+msgstr "Zespół rozwojowy Widelands"
 
 #: ../../tribes/barbarians/conf:19
 msgid "Barbarians"
@@ -548,11 +548,11 @@ msgstr "Wypalacz"
 
 #: ../../tribes/barbarians/conf:126
 msgid "Master Miner"
-msgstr "Mistrz górników"
+msgstr "Nadsztygar"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Chief Miner"
-msgstr "Górnik"
+msgstr "Sztygar"
 
 #: ../../tribes/barbarians/conf:128
 msgid "Farmer"
@@ -1179,8 +1179,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz atak 0 żołnierza (tylko dla utrzymania "
-"kompatybliności ze starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz atak 0 żołnierza (tylko dla utrzymania kompatybilności "
+"ze starymi zapisami (build13)))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
@@ -1192,8 +1192,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz atak 1 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz atak 1 żołnierza (tylko dla utrzymania kompatybilności "
+"ze starymi zapisami (build13)))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
@@ -1205,8 +1205,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz atak 2 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz atak 2 żołnierza (tylko dla utrzymania kompatybilności "
+"ze starymi zapisami (build13)))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
@@ -1218,8 +1218,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz atak 3 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz atak 3 żołnierza (tylko dla utrzymania kompatybilności "
+"ze starymi zapisami (build13)))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
@@ -1231,8 +1231,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz atak 4 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz atak 4 żołnierza (tylko dla utrzymania kompatybilności "
+"ze starymi zapisami (build13)))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
@@ -1244,8 +1244,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz punkty życia 0 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz punkty życia 0 żołnierza (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
@@ -1257,8 +1257,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz punkty życia 1 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz punkty życia 1 żołnierza (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
@@ -1270,8 +1270,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz punkty życia 2 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz punkty życia 2 żołnierza (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid "Trunks are the primary build material of the barbarians."
@@ -1283,7 +1283,7 @@ msgstr "Ulepszona maska dla barbarzyńskich wojowników."
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr "Produce bronzeaxe (Produkuj topór z bronzu)"
+msgstr "Produce bronzeaxe (Produkuj topór z brązu)"
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"

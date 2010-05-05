@@ -57,6 +57,7 @@ struct Handler {
 
 protected:
 	void addCommand(std::string const &, HandlerFn const &);
+	void setDefaultCommand(HandlerFn const &);
 
 private:
 	std::vector<std::string> m_commands;

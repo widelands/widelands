@@ -19,6 +19,8 @@
 
 #include "game_message_menu.h"
 
+#include <boost/bind.hpp>
+
 #include "interactive_player.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
@@ -38,10 +40,11 @@ inline Interactive_Player & GameMessageMenu::iplayer() const {
 GameMessageMenu::GameMessageMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 	:
-	UI::UniqueWindow(&plr, &registry, 370, 375, _("Message Menu: Inbox")),
+	UI::UniqueWindow
+		(&plr, "messages", &registry, 370, 375, _("Message Menu: Inbox")),
 	list                                (*this),
 	message_body
-		(this,
+		(this, 
 		 5, 150, 360, 220,
 		 "", UI::Align_Left, 1),
 	clear_selection                     (*this),
@@ -53,32 +56,33 @@ GameMessageMenu::GameMessageMenu
 {
 	if (get_usedefaultpos())
 		center_to_parent();
+
+	list.set_column_compare(List::Status, boost::bind(&GameMessageMenu::status_compare, this, _1, _2));
+
+	set_can_focus(true);
+	focus();
 }
 
+/**
+ * When comparing messages by status, new messages come before others.
+ */
+bool GameMessageMenu::status_compare(uint32_t a, uint32_t b)
+{
+	MessageQueue & mq = iplayer().player().messages();
+	const Message * msga = mq[Message_Id(list[a])];
+	const Message * msgb = mq[Message_Id(list[b])];
+
+	if (msga && msgb) {
+		return msga->status() == Message::New && msgb->status() != Message::New;
+	}
+	return false; // shouldn't happen
+}
 
 static char const * const status_picture_filename[] = {
 	"pics/message_new.png",
 	"pics/message_read.png",
 	"pics/message_archived.png"
 };
-
-
-#define SET_TITLE_AND_TIME                                                    \
-   te.set_string(List::Title, message.title());                               \
-   uint32_t time = message.sent();                                            \
-   char timestring[] = "000:00:00.000";                                       \
-   timestring[12] +=  time        % 10;                                       \
-   timestring[11] += (time /= 10) % 10;                                       \
-   timestring[10] += (time /= 10) % 10;                                       \
-   timestring [8] += (time /= 10) % 10;                                       \
-   timestring [7] += (time /= 10) %  6;                                       \
-   timestring [5] += (time /=  6) % 10;                                       \
-   timestring [4] += (time /= 10) %  6;                                       \
-   timestring [2] += (time /=  6) % 10;                                       \
-   timestring [1] += (time /= 10) % 10;                                       \
-   timestring [0] +=  time /= 10;                                             \
-   te.set_string(List::Time_Sent, time < 10 ? timestring : "-------------");  \
-
 
 void GameMessageMenu::show_new_message
 	(Message_Id const id, Widelands::Message const & message)
@@ -89,115 +93,39 @@ void GameMessageMenu::show_new_message
 	if ((mode == Archive) != (status == Message::Archived))
 		toggle_between_inbox_and_archive.clicked();
 	List::Entry_Record & te = list.add(id.value(), true);
-	te.set_picture
-		(List::Status,
-		 g_gr->get_picture(PicMod_UI, status_picture_filename[status]));
-	SET_TITLE_AND_TIME;
+	update_record(te, message);
 }
 
-
-
-static std::string const status_sort_string[] = {"new", "read"};
-
-void GameMessageMenu::think() {
+void GameMessageMenu::think()
+{
 	MessageQueue & mq = iplayer().player().messages();
-#if 0
-	log
-		("GameMessageMenu::think: %u new, %u read, %u archived\n",
-		 mq.nr_messages(Message::New),
-		 mq.nr_messages(Message::Read),
-		 mq.nr_messages(Message::Archived));
-#endif
-	switch (mode) {
-	case Inbox:
-		//  Remove those that are still in the list but no longer in the queue.
-		for (uint32_t j = list.size(); j;)
-			if (Message const * const message = mq[Message_Id(list[--j])])
-				switch (message->status()) {
-				case Message::New:
-					//  Nothing to do. If it is new, it must have been new before.
-					//  before. (The list is cleared when switching mode.)
-					break;
-				case Message::Read:
-					//  It is read now, but might have been new before, so set the
-					//  icon for new.
-					list.get_record(j).set_picture
-						(List::Status,
-						 g_gr->get_picture
-						 	(PicMod_UI, status_picture_filename[Message::Read]),
-						 status_sort_string[Message::Read]);
-					break;
-				case Message::Archived:
-					list.remove(j);
-					break;
-				default:
-					assert(false);
-				}
-			else //  No longer in the queue and must be removed from the list.
-				list.remove(j);
 
-		//  Add those that are in the queue but not yet in the list.
-		container_iterate_const(MessageQueue, mq, i) {
-			Message_Id      const id      =  i.current->first;
-			Message const &       message = *i.current->second;
-			Message::Status const status  = message.status();
-			if (status == Message::Archived)
-				continue;
-			assert(status < 2);
-			for (uint32_t j = 0;; ++j)
-				if (j == list.size()) {
-					List::Entry_Record & te = list.add(id.value());
-					te.set_picture
-						(List::Status,
-						 g_gr->get_picture
-						 	(PicMod_UI, status_picture_filename[status]),
-						 status_sort_string[status]);
-					SET_TITLE_AND_TIME;
-					break;
-				} else if (list[j] == id.value())
-					break;
+	// Update messages in the list and remove messages that should no longer be shown
+	for(uint32_t j = list.size(); j; --j) {
+		if (Message const * const message = mq[Message_Id(list[j-1])]) {
+			if ((mode == Archive) != (message->status() == Message::Archived)) {
+				list.remove(j-1);
+			} else {
+				update_record(list.get_record(j-1), *message);
+			}
+		} else {
+			list.remove(j-1);
 		}
-		break;
-	case Archive:
-		//  Remove those that are still in the list but no longer in the queue.
-		for (uint32_t j = list.size(); j;)
-			if (Message const * const message = mq[Message_Id(list[--j])])
-				switch (message->status()) {
-				case Message::New:
-					//  fallthrough
-				case Message::Read:
-					list.remove(j);
-					break;
-				case Message::Archived:
-					//  Nothing to do. If it is archived, it must have been archived
-					//  before. (The list is cleared when switching mode.)
-					break;
-				default:
-					assert(false);
-				}
-			else //  No longer in the queue and must be removed from the list.
-				list.remove(j);
-
-		//  Add those that are in the queue but not yet in the list.
-		container_iterate_const(MessageQueue, mq, i) {
-			Message_Id      const id      =  i.current->first;
-			Message const &       message = *i.current->second;
-			if (message.status() != Message::Archived)
-				continue;
-			for (uint32_t j = 0;; ++j)
-				if (j == list.size()) {
-					List::Entry_Record & te = list.add(id.value());
-					te.set_picture
-						(List::Status,
-						 g_gr->get_picture
-						 	(PicMod_UI, status_picture_filename[Message::Archived]));
-					SET_TITLE_AND_TIME;
-					break;
-				} else if (list[j] == id.value())
-					break;
-		}
-		break;
 	}
+
+	// Add new messages to the list
+	container_iterate_const(MessageQueue, mq, i) {
+		Message_Id      const id      =  i.current->first;
+		Message const &       message = *i.current->second;
+		Message::Status const status  = message.status();
+		if ((mode == Archive) != (status == Message::Archived))
+			continue;
+		if (!list.find(id.value())) {
+			List::Entry_Record & er = list.add(id.value());
+			update_record(er, message);
+		}
+	}
+
 	if (list.size()) {
 		if (not list.has_selection())
 			list.select(0);
@@ -205,6 +133,28 @@ void GameMessageMenu::think() {
 		center_main_mapview_on_location.set_enabled(false);
 		message_body.set_text(std::string());
 	}
+}
+
+void GameMessageMenu::update_record(GameMessageMenu::List::Entry_Record& er, const Widelands::Message& message)
+{
+	er.set_picture
+		(List::Status,
+		 g_gr->get_picture(PicMod_UI, status_picture_filename[message.status()]));
+	er.set_string(List::Title, message.title());
+
+	uint32_t time = message.sent();
+	char timestring[] = "000:00:00.000";
+	timestring[12] +=  time        % 10;
+	timestring[11] += (time /= 10) % 10;
+	timestring[10] += (time /= 10) % 10;
+	timestring [8] += (time /= 10) % 10;
+	timestring [7] += (time /= 10) %  6;
+	timestring [5] += (time /=  6) % 10;
+	timestring [4] += (time /= 10) %  6;
+	timestring [2] += (time /=  6) % 10;
+	timestring [1] += (time /= 10) % 10;
+	timestring [0] +=  time /= 10;
+	er.set_string(List::Time_Sent, time < 10 ? timestring : "-------------");
 }
 
 /*
@@ -230,6 +180,47 @@ void GameMessageMenu::selected(uint32_t const t) {
 	}
 	center_main_mapview_on_location.set_enabled(false);
 	message_body                   .set_text   (std::string());
+}
+
+/**
+ * Handle message menu hotkeys.
+ */
+bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
+{
+	if (down) {
+		switch(code.sym) {
+		case SDLK_g:
+			if (center_main_mapview_on_location.enabled())
+				center_main_mapview_on_location.clicked();
+			return true;
+
+		case SDLK_DELETE:
+			do_delete();
+			return true;
+
+		default:
+			break; // not handled
+		}
+	}
+
+	return UI::Panel::handle_key(down, code);
+}
+
+/**
+ * Delete the currently selected message, if any.
+ */
+void GameMessageMenu::do_delete()
+{
+	if (mode == Archive)
+		return;
+
+	if (!list.has_selection())
+		return;
+
+	Widelands::Game & game = iplayer().game();
+	game.send_player_command
+		(*new Widelands::Cmd_MessageSetStatusArchived
+			(game.get_gametime(), iplayer().player_number(), Message_Id(list.get_selected())));
 }
 
 void GameMessageMenu::Archive_Or_Restore_Selected_Messages::clicked() {

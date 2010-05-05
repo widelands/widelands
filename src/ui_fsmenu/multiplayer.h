@@ -42,8 +42,7 @@ struct Fullscreen_Menu_MultiPlayer : public Fullscreen_Menu_Base {
 	void ggzLogin();
 	std::string get_nickname() {return m_nickname;}
 	std::string get_password() {return m_password;}
-	std::string get_email()    {return m_email;}
-	bool new_registration()    {return m_register;}
+	bool registered()          {return m_register;}
 
 private:
 	uint32_t                                            m_butw;
@@ -60,7 +59,6 @@ private:
 	// Values from ggz login window
 	std::string m_nickname;
 	std::string m_password;
-	std::string m_email;
 	bool        m_register;
 	bool        m_auto_log;
 };

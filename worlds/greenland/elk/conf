@@ -11,6 +11,6 @@ pics=elk_idle_se_??.png
 fps=20
 
 [walk]
-hotspot=17 34
+hotspot=21 34
 dirpics=elk_walk_!!_??.png
 fps=20

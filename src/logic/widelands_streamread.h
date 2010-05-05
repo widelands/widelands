@@ -177,15 +177,15 @@ struct StreamRead : public ::StreamRead {
 	/// Both coordinates are read from the file before checking and possibly
 	/// throwing, so in case such an exception is thrown, it is guaranteed that
 	/// the whole coordinate pair has been read.
-	Coords Coords32(Extent);
+	Coords Coords32(const Extent &);
 
 	/// Like Coords32 but the result can have the special value indicating
 	/// invalidity, as defined by Coords::Null.
-	Coords Coords32_allow_null(Extent);
+	Coords Coords32_allow_null(const Extent &);
 
 	Coords Coords32(); /// Unchecked reading.
 
-	Area<Coords, uint16_t> Area48(Extent);
+	Area<Coords, uint16_t> Area48(const Extent &);
 
 	Player_Number Player_Number8() {return Unsigned8();}
 
@@ -278,7 +278,7 @@ inline Map_Index StreamRead::Map_Index32(Map_Index const max) {
 	return i;
 }
 
-inline Coords StreamRead::Coords32(const Extent extent) {
+inline Coords StreamRead::Coords32(const Extent & extent) {
 	uint16_t const x = Unsigned16();
 	uint16_t const y = Unsigned16();
 	if (extent.w <= x)
@@ -288,7 +288,7 @@ inline Coords StreamRead::Coords32(const Extent extent) {
 	return Coords(x, y);
 }
 
-inline Coords StreamRead::Coords32_allow_null(const Extent extent) {
+inline Coords StreamRead::Coords32_allow_null(const Extent & extent) {
 	uint16_t const x = Unsigned16();
 	uint16_t const y = Unsigned16();
 	const Coords result(x, y);
@@ -307,7 +307,7 @@ inline Coords StreamRead::Coords32() {
 	return Coords(x, y);
 }
 
-inline Area<Coords, uint16_t> StreamRead::Area48(Extent const extent) {
+inline Area<Coords, uint16_t> StreamRead::Area48(const Extent & extent) {
 	Coords   const c =   Coords32(extent);
 	uint16_t const r = Unsigned16();
 	return Area<Coords, uint16_t>(c, r);

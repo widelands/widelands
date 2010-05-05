@@ -64,7 +64,7 @@ EncyclopediaWindow::EncyclopediaWindow
 	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
-		(&parent,
+		(&parent, "encyclopedia",
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Tribe ware encyclopedia")),
@@ -182,7 +182,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					assert(ware_types.size());
 					std::string ware_type_names;
 					for
-						(wl_const_range<std::set<Ware_Index> > 
+						(wl_const_range<std::set<Ware_Index> >
 						 k(ware_types);;)
 					{
 						ware_type_names +=

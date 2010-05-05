@@ -26,8 +26,8 @@ produce=blackwood
 
 [idle]
 pics=hardener_i_??.png  # ???
-hotspot=41 52
+hotspot=38 50
 
 [working]
 pics=hardener_i_??.png  # ???
-hotspot=41 52
+hotspot=38 50

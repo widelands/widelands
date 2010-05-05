@@ -20,11 +20,11 @@
 #ifndef TEXT_PARSER_H
 #define TEXT_PARSER_H
 
+#include <vector>
+#include <string>
+
 #include "ui_basic/align.h"
 #include "rgbcolor.h"
-#include "ui_basic/variable_callback.h"
-
-#include <vector>
 
 namespace UI {
 
@@ -35,7 +35,7 @@ struct Text_Block {
 	void set_font_size(int32_t const font_size) {m_font_size = font_size;}
 	int32_t get_font_size() const throw () {return m_font_size;}
 
-	void set_font_color(RGBColor const font_color) {m_font_color = font_color;}
+	void set_font_color(RGBColor const & font_color) {m_font_color = font_color;}
 	RGBColor get_font_color() const throw () {return m_font_color;}
 
 	void set_font_weight(std::string const & font_weight) {
@@ -117,16 +117,14 @@ private:
 struct Text_Parser {
 	void parse
 		(std::string & text,
-		 std::vector<Richtext_Block> & blocks,
-		 Varibale_Callback, void * const);
+		 std::vector<Richtext_Block> & blocks);
 private:
 	void parse_richtexttext_attributes(std::string format, Richtext_Block *);
 	bool parse_textblock
 		(std::string                                       & block,
 		 std::string                                       & block_format,
 		 std::vector<std::string>                          & words,
-		 std::vector<std::vector<std::string>::size_type>  & line_breaks,
-		 Varibale_Callback vcb, void * vcdata);
+		 std::vector<std::vector<std::string>::size_type>  & line_breaks);
 	void parse_text_attributes(std::string format, Text_Block &);
 	bool extract_format_block
 		(std      ::string & block,

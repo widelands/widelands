@@ -11,7 +11,7 @@ text=_"Like with natural objects (bobs), you can also select multiple animals or
 sec=6
 
 [Tip 4]
-text=_"Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
+text=_"Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete opposite of the normal tool (for example deletion of an object instead of placing one)."
 sec=7
 
 [Tip 5]
@@ -26,10 +26,3 @@ sec=6
 text=_"SPACE key behaves like in normal game. It switches buildhelp on or off."
 sec=6
 
-[Tip 8]
-text=_"The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
-sec=7
-
-[Tip 9]
-text=_"You can find a reference for all triggers and events in our wiki at widelands.org."
-sec=6

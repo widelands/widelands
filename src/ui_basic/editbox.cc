@@ -46,6 +46,9 @@ struct EditBoxImpl {
 	/// Position of the caret.
 	uint32_t caret;
 
+	/// Current scrolling offset to the text anchor position, in pixels
+	int32_t scrolloffset;
+
 	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
 };
@@ -69,8 +72,9 @@ EditBox::EditBox
 
 	m->id = id;
 	m->align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
-	// yes, use *signed* max as maximum length; just a small safe-guard.
 	m->caret = 0;
+	m->scrolloffset = 0;
+	// yes, use *signed* max as maximum length; just a small safe-guard.
 	m->maxLength = std::numeric_limits<int32_t>::max();
 
 	set_handle_mouse(true);
@@ -138,6 +142,7 @@ void EditBox::setMaxLength(uint32_t const n)
 		if (m->caret > m->text.size())
 			m->caret = m->text.size();
 
+		check_caret();
 		update();
 	}
 }
@@ -163,6 +168,8 @@ void EditBox::setAlign(Align _align)
 	_align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
 	if (_align != m->align) {
 		m->align = _align;
+		m->scrolloffset = 0;
+		check_caret();
 		update();
 	}
 }
@@ -220,6 +227,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				while ((m->text[--m->caret] & 0xc0) == 0x80)
 					m->text.erase(m->text.begin() + m->caret);
 				m->text.erase(m->text.begin() + m->caret);
+				check_caret();
 				changed.call();
 				changedid.call(m->id);
 				update();
@@ -233,6 +241,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 					for (uint32_t new_caret = m->caret;; m->caret = new_caret)
 						if (0 == new_caret or isspace(m->text[--new_caret]))
 							break;
+				check_caret();
 				update();
 			}
 			return true;
@@ -250,6 +259,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 							m->caret = new_caret;
 							break;
 						}
+				check_caret();
 				update();
 			}
 			return true;
@@ -257,6 +267,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_HOME:
 			if (m->caret != 0) {
 				m->caret = 0;
+				check_caret();
 				update();
 			}
 			return true;
@@ -264,12 +275,17 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_END:
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
+				check_caret();
 				update();
 			}
 			return true;
 
 		default:
-			if (is_printable(code)) {
+			// Nullbytes happen on MacOS X when entering Multiline Chars, like for
+			// example ~ + o results in a o with a tilde over it. The ~ is reported
+			// as a 0 on keystroke, the o then as the unicode character. We simply
+			// ignore the 0.
+			if (is_printable(code) and code.unicode) {
 				if (m->text.size() < m->maxLength) {
 					if (code.unicode < 0x80)         // 1 byte char
 						m->text.insert
@@ -292,6 +308,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 							(m->text.begin() + m->caret++,
 							 ((code.unicode & 0x3f) | 0x80));
 					}
+					check_caret();
 					changed.call();
 					changedid.call(m->id);
 					update();
@@ -350,6 +367,8 @@ void EditBox::draw(RenderTarget & dst)
 		break;
 	}
 
+	pos.x += m->scrolloffset;
+
 	UI::g_fh->draw_string
 		(dst,
 		 m_fontname, m_fontsize, m_fontcolor, UI_FONT_CLR_BG,
@@ -361,6 +380,48 @@ void EditBox::draw(RenderTarget & dst)
 		 g_gr->get_no_picture(),
 		 has_focus() ? static_cast<int32_t>(m->caret) :
 		 std::numeric_limits<uint32_t>::max());
+}
+
+/**
+ * Check the caret's position and scroll it into view if necessary.
+ */
+void EditBox::check_caret()
+{
+	std::string leftstr(m->text, 0, m->caret);
+	std::string rightstr(m->text, m->caret, std::string::npos);
+	uint32_t leftw;
+	uint32_t rightw;
+	uint32_t tmp;
+
+	UI::g_fh->get_size(m_fontname, m_fontsize, leftstr, leftw, tmp);
+	UI::g_fh->get_size(m_fontname, m_fontsize, rightstr, rightw, tmp);
+
+	int32_t caretpos;
+
+	switch (m->align & Align_Horizontal) {
+	case Align_HCenter:
+		caretpos = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2 + m->scrolloffset + leftw;
+		break;
+	case Align_Right:
+		caretpos = get_w() - 4 + m->scrolloffset - rightw;
+		break;
+	default:
+		caretpos = 4 + m->scrolloffset + leftw;
+		break;
+	}
+
+	if (caretpos < 4)
+		m->scrolloffset += 4 - caretpos + get_w()/5;
+	else if (caretpos > get_w() - 4)
+		m->scrolloffset -= caretpos - get_w() + 4 + get_w()/5;
+
+	if ((m->align & Align_Horizontal) == Align_Left) {
+		if (m->scrolloffset > 0)
+			m->scrolloffset = 0;
+	} else if ((m->align & Align_Horizontal) == Align_Right) {
+		if (m->scrolloffset < 0)
+			m->scrolloffset = 0;
+	}
 }
 
 }

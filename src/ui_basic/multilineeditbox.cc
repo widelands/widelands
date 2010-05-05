@@ -28,6 +28,8 @@
 
 #include <SDL_keysym.h>
 
+#include <algorithm>
+
 namespace UI {
 /**
  * Initialize an editbox that supports multiline strings.
@@ -64,15 +66,22 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 
 		case SDLK_DELETE:
 			if (m_cur_pos < txt.size()) {
-				while ((txt.at(++m_cur_pos) & 0xc0) == 0x80) {};
+				do {
+					++m_cur_pos;
+				} while
+						(m_cur_pos < txt.size() &&
+						 ((txt.at(m_cur_pos) & 0xc0) == 0x80));
 				// fallthrough - handle it like backspace
 			} else
 				break;
 
 		case SDLK_BACKSPACE:
 			if (txt.size() and m_cur_pos) {
-				while ((txt.at(--m_cur_pos) & 0xc0) == 0x80)
+				while ((txt.at(--m_cur_pos) & 0xc0) == 0x80) {
 					txt.erase(txt.begin() + m_cur_pos);
+					if (m_cur_pos == 0)
+						break;
+				}
 				txt.erase(txt.begin() + m_cur_pos);
 				set_text(txt.c_str());
 			}
@@ -90,9 +99,17 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 
 		case SDLK_RIGHT:
 			if (m_cur_pos < txt.size()) {
-				while ((txt.at(++m_cur_pos) & 0xc0) == 0x80) {};
+				do {
+					++m_cur_pos;
+					if (m_cur_pos >= txt.size()) {
+						break;
+					}
+
+				} while ((txt.at(m_cur_pos) & 0xc0) == 0x80);
+
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-					for (uint32_t new_cur_pos = m_cur_pos;; ++new_cur_pos)
+					for (uint32_t new_cur_pos = m_cur_pos;; ++new_cur_pos) {
+						assert ((new_cur_pos - 1) < txt.size());
 						if
 							(new_cur_pos == txt.size()
 							 or
@@ -101,12 +118,15 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 							m_cur_pos = new_cur_pos;
 							break;
 						}
+					}
 			}
 			break;
 
 		case SDLK_DOWN:
 			if (m_cur_pos < txt.size()) {
 				uint32_t begin_of_line = m_cur_pos;
+
+				assert(begin_of_line < txt.size());
 				if (txt.at(begin_of_line) == '\n')
 					--begin_of_line;
 				while (begin_of_line > 0 && txt.at(begin_of_line) != '\n')
@@ -115,15 +135,15 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 					++begin_of_line;
 				uint32_t begin_of_next_line = m_cur_pos;
 				while
-					(txt.at(begin_of_next_line) != '\n'
+					(begin_of_next_line < txt.size()
 					 &&
-					 begin_of_next_line < txt.size())
+					 txt.at(begin_of_next_line) != '\n')
 					++begin_of_next_line;
 				begin_of_next_line += begin_of_next_line == txt.size() ? -1 : 1;
 				uint32_t end_of_next_line = begin_of_next_line;
 				while
-					(txt.at(end_of_next_line) != '\n' &&
-					 end_of_next_line < txt.size())
+					(end_of_next_line < txt.size() &&
+					 txt.at(end_of_next_line) != '\n')
 					++end_of_next_line;
 				m_cur_pos =
 					begin_of_next_line + m_cur_pos - begin_of_line
@@ -131,7 +151,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 					end_of_next_line ? end_of_next_line :
 					begin_of_next_line + m_cur_pos - begin_of_line;
 				// Care about unicode letters
-				while ((txt.at(m_cur_pos) & 0xc0) == 0x80)
+				while (m_cur_pos < txt.size() && (txt.at(m_cur_pos) & 0xc0) == 0x80)
 					++m_cur_pos;
 			}
 			break;
@@ -139,6 +159,11 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 		case SDLK_UP:
 			if (m_cur_pos > 0) {
 				uint32_t begin_of_line = m_cur_pos;
+
+				if (begin_of_line >= txt.size()) {
+					begin_of_line = txt.size() - 1;
+				}
+				assert (begin_of_line < txt.size());
 				if (txt.at(begin_of_line) == '\n')
 					--begin_of_line;
 				while (begin_of_line > 0 && txt.at(begin_of_line) != '\n')
@@ -149,7 +174,8 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 				if (begin_of_line)
 					--end_of_last_line;
 				uint32_t begin_of_lastline = end_of_last_line;
-				if (txt.at(begin_of_lastline) == '\n')
+				assert(begin_of_lastline < txt.size());
+				if (begin_of_lastline > 0 && txt.at(begin_of_lastline) == '\n')
 					--begin_of_lastline;
 				while (begin_of_lastline > 0 && txt.at(begin_of_lastline) != '\n')
 					--begin_of_lastline;
@@ -161,7 +187,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 					end_of_last_line ? end_of_last_line :
 					begin_of_lastline + (m_cur_pos - begin_of_line);
 				// Care about unicode letters
-				while ((txt.at(m_cur_pos) & 0xc0) == 0x80)
+				while (m_cur_pos < txt.size() && (txt.at(m_cur_pos) & 0xc0) == 0x80)
 					++m_cur_pos;
 			}
 			break;
@@ -194,8 +220,13 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 				set_text(txt.c_str());
 			}
 			break;
+
 		default:
-			if (is_printable(code) and txt.size() < m_maxchars) {
+			// Nullbytes happen on MacOS X when entering Multiline Chars, like for
+			// example ~ + o results in a o with a tilde over it. The ~ is reported
+			// as a 0 on keystroke, the o then as the unicode character. We simply
+			// ignore the 0.
+			if (is_printable(code) and code.unicode and txt.size() < m_maxchars) {
 				if (code.unicode < 0x80)         // 1 byte char
 					txt.insert(txt.begin() + m_cur_pos++, 1, code.unicode);
 				else if (code.unicode < 0x800) { // 2 byte char
@@ -306,7 +337,10 @@ void Multiline_Editbox::CalcLinePos()
 	uint32_t lbtt = 0; // linebreaks to top
 	uint32_t lbtb = 0; // linebreaks to bottom
 
-	for (size_t i = 0; i < m_cur_pos; ++i)
+	for
+		(size_t i = 0;
+		 i < std::min(m_cur_pos, static_cast<uint32_t>(str.size() - 1));
+		 ++i)
 		if (str.at(i) == '\n')
 			++lbtt;
 	for (size_t i = m_cur_pos; i < leng; ++i)

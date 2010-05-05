@@ -20,8 +20,8 @@
 #ifndef OBJECTIVE_H
 #define OBJECTIVE_H
 
+#include "named.h"
 #include "i18n.h"
-#include "trigger/trigger.h"
 
 #include <cassert>
 #include <string>
@@ -33,49 +33,34 @@ namespace Widelands {
 ///
 /// A Map (or scenario) objective is an objective that has to be fulfilled to
 /// end a scenario successfully.
-/// Each objective has a trigger assigned to it, which is used to check the
-/// objective's condition.
 /// But note, the objectives itself doesn't check it's conditions, the map
-/// designer is responsible for checking it and setting it's trigger up.
-///
-/// Usually, the win trigger is only set, when all of the objectives triggers
-/// are going up.
-struct Objective : public Named, public Referencer<Trigger> {
+/// designer is responsible for checking it and setting its done property up.
+struct Objective : public Named {
 	Objective()
 		:
-		m_visname   (name()),
+		m_descname   (name()),
 		m_descr     (_("no descr")),
-		m_trigger   (0),
-		m_is_visible(true)
+		m_visible(true),
+		m_done   (false)
 	{}
-	virtual ~Objective() {if (m_trigger) unreference(*m_trigger);}
+	virtual ~Objective() {}
 
 	std::string identifier() const {return "Objective: " + name();}
 
-	const std::string & visname() const throw ()  {return m_visname;}
+	const std::string & descname() const throw ()  {return m_descname;}
 	const std::string & descr() const throw ()    {return m_descr;}
-	void set_visname(std::string const & new_name)  {m_visname = new_name;}
+	bool visible() const throw () {return m_visible;}
+	bool done() const throw() {return m_done;}
+	void set_descname(std::string const & new_name)  {m_descname = new_name;}
 	void set_descr  (std::string const & new_descr) {m_descr   = new_descr;}
-	bool get_is_visible()       const throw ()    {return m_is_visible;}
-	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
-
-	//  Get the trigger that is attached to this
-	//  Trigger is created by Editor or on load
-	Trigger * get_trigger() const {return m_trigger;}
-
-	//  Setting the values below is only a good idea in editor.
-	void set_trigger(Trigger * const tr) {
-		assert(!m_trigger);
-		if (tr)
-			reference(*tr);
-		m_trigger = tr;
-	}
+	void set_visible(const bool t) throw ()    {m_visible = t;}
+	void set_done(bool t) {m_done = t;}
 
 private:
-	std::string m_visname;
+	std::string m_descname;
 	std::string m_descr;
-	Trigger *   m_trigger;
-	bool        m_is_visible;
+	bool        m_visible;
+	bool        m_done;
 };
 
 }

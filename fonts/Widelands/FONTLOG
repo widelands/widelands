@@ -21,6 +21,12 @@ at the file "LICENSE" for more information).
 
 3. ChangeLog
 ============
+1 February 2010 (Peter Schwanemann) -> Version 1.0.3.1
+- Addition of some more characters + minor improvements of some of the existing ones.
+
+21 October 2009 (Peter Schwanemann) -> Version 1.0.2.3
+- Minor improvements of @-sign and removing of "Preferred family" as suggested by David Ludlow
+
 16 July 2009 (Peter Schwanemann) -> Version 1.0.2.2
 - Added character for "sterling", "section", "onequarter", "onehalf" and
   "threequarters". Fixed some other characters

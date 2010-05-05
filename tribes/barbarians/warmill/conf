@@ -103,8 +103,8 @@ return=skipped
 
 [idle]
 pics=i_??.png  # ???
-hotspot=39 60
+hotspot=38 54
 
 [working]
 pics=i_??.png  # ???
-hotspot=39 60
+hotspot=38 54

@@ -44,21 +44,21 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 
 // Buttons
 	metaserver
-		(this,
+		(this, "metaserver",
 		 m_butx, m_yres * 6 / 25, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_MultiPlayer::ggzLogin, *this,
 		 _("Internet game"), std::string(), true, false,
 		 m_fn, m_fs),
 	lan
-		(this,
+		(this, "lan",
 		 m_butx, m_yres * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Lan,
 		 _("LAN / Direct IP"), std::string(), true, false,
 		 m_fn, m_fs),
 	back
-		(this,
+		(this, "back",
 		 m_butx, m_yres * 3 / 4, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Back,
@@ -72,7 +72,7 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 	if (m_auto_log)
 		showloginbox =
 			new UI::Callback_Button<Fullscreen_Menu_MultiPlayer>
-				(this,
+				(this, "login_dialog",
 				 m_butx + m_butw + m_buth / 4, m_yres * 6 / 25, m_buth, m_buth,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 g_gr->get_picture(PicMod_UI, "pics/continue.png"),
@@ -106,8 +106,7 @@ void Fullscreen_Menu_MultiPlayer::ggzLogin() {
 	if (m_auto_log) {
 		m_nickname = s.get_string("nickname", _("nobody"));
 		m_password = s.get_string("password", "nobody");
-		m_email    = s.get_string("emailadd", "nobody@nobody.nob");
-		m_register = false;
+		m_register = s.get_bool("registered", false);
 		end_modal(Metaserver);
 		return;
 	}
@@ -116,9 +115,9 @@ void Fullscreen_Menu_MultiPlayer::ggzLogin() {
 	if (lb.run()) {
 		m_nickname = lb.get_nickname();
 		m_password = lb.get_password();
-		m_email    = lb.get_email();
-		m_register = lb.new_registration();
+		m_register = lb.registered();
 
+		s.set_bool("registered", lb.registered());
 		s.set_bool("auto_log", lb.set_automaticlog());
 
 		end_modal(Metaserver);

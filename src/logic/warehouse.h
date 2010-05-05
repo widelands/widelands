@@ -104,6 +104,8 @@ public:
 
 	WareList const & get_wares() const;
 	WareList const & get_workers() const;
+	std::vector<const Soldier *> get_soldiers(Editor_Game_Base &) const;
+
 	void insert_wares  (Ware_Index, uint32_t count);
 	void remove_wares  (Ware_Index, uint32_t count);
 	void insert_workers(Ware_Index, uint32_t count);

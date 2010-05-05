@@ -19,7 +19,6 @@
 
 #include "attack_box.h"
 
-#include "editor/editorinteractive.h"
 #include "logic/soldier.h"
 
 #include "upcast.h"
@@ -110,7 +109,7 @@ UI::Callback_Button<AttackBox> & AttackBox::add_button
 {
 	UI::Callback_Button<AttackBox> & button =
 		*new UI::Callback_Button<AttackBox>
-			(&parent,
+			(&parent, text,
 			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 			 fn,
@@ -134,7 +133,7 @@ void AttackBox::update_attack() {
 		m_slider_soldiers->set_max_value(max_attackers);
 
 	m_slider_soldiers->set_enabled(max_attackers > 0);
-	m_add_soldiers   ->set_enabled(max_attackers > m_slider_soldiers->get_value());
+	m_add_soldiers->set_enabled(max_attackers > m_slider_soldiers->get_value());
 	m_less_soldiers  ->set_enabled(m_slider_soldiers->get_value() > 0);
 
 	sprintf(buf, "%u / %u", m_slider_soldiers->get_value(), max_attackers);
@@ -149,10 +148,10 @@ void AttackBox::update_attack() {
 
 		Widelands::Military_Data MD = m_pl->tribe().get_military_data();
 
-		if (m_slider_retreat->get_value() < MD.get_min_retreat()) 
+		if (m_slider_retreat->get_value() < MD.get_min_retreat())
 			m_slider_retreat->set_value (MD.get_min_retreat());
 
-		if (m_slider_retreat->get_value() > MD.get_max_retreat()) 
+		if (m_slider_retreat->get_value() > MD.get_max_retreat())
 			m_slider_retreat->set_value (MD.get_max_retreat());
 
 		sprintf(buf, "%u %%", m_slider_retreat->get_value());
@@ -192,7 +191,7 @@ void AttackBox::init() {
 				(columnbox,
 				 100, 10,
 				 0, max_attackers, max_attackers > 0 ? 1 : 0,
-				 "slider.png",
+				 "pics/but2.png",
 				 _("Number of soldiers"));
 
 		m_slider_soldiers->changed.set(this, &AttackBox::update_attack);
@@ -232,7 +231,7 @@ void AttackBox::init() {
 				 m_pl->tribe().get_military_data().get_min_retreat(),
 				 m_pl->tribe().get_military_data().get_max_retreat(),
 				 m_pl->get_retreat_percentage(),
-				 "slider.png",
+				 "pics/but2.png",
 				 _("Supported damage before retreat"));
 		m_slider_retreat->changed.set(this, &AttackBox::update_attack);
 		add_text(linebox, _("Once injured"));

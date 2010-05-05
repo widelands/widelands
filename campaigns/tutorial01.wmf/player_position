@@ -1,0 +1,5 @@
+[global]
+packet_version=2
+player_1=12 10
+player_2=50 10
+

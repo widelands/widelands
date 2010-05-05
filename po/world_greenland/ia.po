@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-10 19:09+0000\n"
-"PO-Revision-Date: 2010-03-13 01:20+0000\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-03-25 18:29+0000\n"
 "Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Interlingua <ia@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-14 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/greenland/conf:2
@@ -47,7 +47,7 @@ msgstr "Cacto"
 #: ../../worlds/greenland/conf:16
 #: ../../worlds/greenland/conf:17
 msgid "Dead Tree"
-msgstr ""
+msgstr "Arbore Morte"
 
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
@@ -71,7 +71,7 @@ msgstr "Fungo"
 #: ../../worlds/greenland/conf:28
 #: ../../worlds/greenland/conf:29
 msgid "Pebble"
-msgstr ""
+msgstr "Glarea"
 
 #: ../../worlds/greenland/conf:30
 #: ../../worlds/greenland/conf:31
@@ -100,19 +100,19 @@ msgstr "Roccas"
 
 #: ../../worlds/greenland/conf:46
 msgid "Aspen"
-msgstr ""
+msgstr "Poplo"
 
 #: ../../worlds/greenland/conf:47
 msgid "Aspen medium"
-msgstr ""
+msgstr "Poplo Mediano"
 
 #: ../../worlds/greenland/conf:48
 msgid "Aspen small"
-msgstr ""
+msgstr "Poplo Parve"
 
 #: ../../worlds/greenland/conf:49
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Poplo Minuscule"
 
 #: ../../worlds/greenland/conf:50
 msgid "Oak"
@@ -120,31 +120,31 @@ msgstr "Tanno"
 
 #: ../../worlds/greenland/conf:51
 msgid "Oak medium"
-msgstr ""
+msgstr "Tanno Mediano"
 
 #: ../../worlds/greenland/conf:52
 msgid "Oak small"
-msgstr ""
+msgstr "Tanno Parve"
 
 #: ../../worlds/greenland/conf:53
 msgid "Oak tiny"
-msgstr ""
+msgstr "Tanno Minuscule"
 
 #: ../../worlds/greenland/conf:54
 msgid "Spruce"
-msgstr ""
+msgstr "Abiete"
 
 #: ../../worlds/greenland/conf:55
 msgid "Spruce medium"
-msgstr ""
+msgstr "Abiete Mediano"
 
 #: ../../worlds/greenland/conf:56
 msgid "Spruce small"
-msgstr ""
+msgstr "Abiete Parve"
 
 #: ../../worlds/greenland/conf:57
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Abiete Minuscule"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
@@ -164,51 +164,51 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:62
 msgid "Birch"
-msgstr ""
+msgstr "Betula"
 
 #: ../../worlds/greenland/conf:63
 msgid "Birch medium"
-msgstr ""
+msgstr "Betula Medio"
 
 #: ../../worlds/greenland/conf:64
 msgid "Birch small"
-msgstr ""
+msgstr "Betula Parve"
 
 #: ../../worlds/greenland/conf:65
 msgid "Birch tiny"
-msgstr ""
+msgstr "Betula Minuscule"
 
 #: ../../worlds/greenland/conf:66
 msgid "Beech"
-msgstr ""
+msgstr "Fago"
 
 #: ../../worlds/greenland/conf:67
 msgid "Beech medium"
-msgstr ""
+msgstr "Fago Medio"
 
 #: ../../worlds/greenland/conf:68
 msgid "Beech small"
-msgstr ""
+msgstr "Fago Parve"
 
 #: ../../worlds/greenland/conf:69
 msgid "Beech tiny"
-msgstr ""
+msgstr "Fago Minuscule"
 
 #: ../../worlds/greenland/conf:70
 msgid "Larch"
-msgstr ""
+msgstr "Larice"
 
 #: ../../worlds/greenland/conf:71
 msgid "Larch medium"
-msgstr ""
+msgstr "Larice Medio"
 
 #: ../../worlds/greenland/conf:72
 msgid "Larch small"
-msgstr ""
+msgstr "Larice Parve"
 
 #: ../../worlds/greenland/conf:73
 msgid "Larch tiny"
-msgstr ""
+msgstr "Larice Minuscule"
 
 #: ../../worlds/greenland/conf:74
 msgid "Rowan"
@@ -228,7 +228,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:80
 msgid "Badger"
-msgstr ""
+msgstr "Taxon"
 
 #: ../../worlds/greenland/conf:81
 msgid "Brownbear"
@@ -236,7 +236,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:82
 msgid "Bunny"
-msgstr ""
+msgstr "Cunilio"
 
 #: ../../worlds/greenland/conf:83
 msgid "Chamois"
@@ -252,7 +252,7 @@ msgstr "Anate"
 
 #: ../../worlds/greenland/conf:86
 msgid "Elk"
-msgstr ""
+msgstr "Alce"
 
 #: ../../worlds/greenland/conf:87
 msgid "Fox"
@@ -260,15 +260,15 @@ msgstr "Vulpe"
 
 #: ../../worlds/greenland/conf:88
 msgid "Lynx"
-msgstr ""
+msgstr "Lynce"
 
 #: ../../worlds/greenland/conf:89
 msgid "Marten"
-msgstr ""
+msgstr "Vison"
 
 #: ../../worlds/greenland/conf:90
 msgid "Reindeer"
-msgstr ""
+msgstr "Ren"
 
 #: ../../worlds/greenland/conf:91
 msgid "Sheep"
@@ -276,7 +276,7 @@ msgstr "Ove"
 
 #: ../../worlds/greenland/conf:92
 msgid "Wisent"
-msgstr ""
+msgstr "Bison"
 
 #: ../../worlds/greenland/conf:93
 msgid "Wolf"
@@ -296,11 +296,11 @@ msgstr "Ferro"
 
 #: ../../worlds/greenland/resconf:28
 msgid "Granit"
-msgstr ""
+msgstr "Granito"
 
 #: ../../worlds/greenland/resconf:36
 msgid "Water"
-msgstr ""
+msgstr "Aqua"
 
 #: ../../worlds/greenland/resconf:41
 msgid "Fish"

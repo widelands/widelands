@@ -21,6 +21,8 @@
 
 #if HAVE_GGZ
 
+#include <boost/bind.hpp>
+
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
@@ -29,8 +31,7 @@
 #include "profile/profile.h"
 
 Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
-	(char const * const nick, char const * const pwd,
-	 char const * const mail, bool newregister)
+	(char const * const nick, char const * const pwd, bool registered)
 :
 	Fullscreen_Menu_Base("internetmenu.jpg"),
 
@@ -73,21 +74,21 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 
 // Buttons
 	joingame
-		(this,
+		(this, "join_game",
 		 m_xres * 17 / 25, m_yres * 55 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_NetSetupGGZ::clicked_joingame, *this,
 		 _("Join this game"), std::string(), false, false,
 		 m_fn, m_fs),
 	hostgame
-		(this,
+		(this, "host_game",
 		 m_xres * 17 / 25, m_yres * 81 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_NetSetupGGZ::clicked_hostgame, *this,
 		 _("Open a new game"), std::string(), true, false,
 		 m_fn, m_fs),
 	back
-		(this,
+		(this, "back",
 		 m_xres * 17 / 25, m_yres * 90 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_NetSetupGGZ::end_modal, *this, CANCEL,
@@ -119,8 +120,7 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 // Login information
 	nickname(nick),
 	password(pwd),
-	email(mail),
-	newreg(newregister)
+	reg(registered)
 {
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
@@ -143,6 +143,8 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
 	usersonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Server"));
+	usersonline.set_column_compare
+		(0, boost::bind(&Fullscreen_Menu_NetSetupGGZ::compare_usertype, this, _1, _2));
 	usersonline .double_clicked.set
 		(this, &Fullscreen_Menu_NetSetupGGZ::user_doubleclicked);
 	opengames   .set_font(m_fn, m_fs);
@@ -192,7 +194,7 @@ void Fullscreen_Menu_NetSetupGGZ::connectToMetaserver()
 	Section & s = g_options.pull_section("global");
 	char const * const metaserver = s.get_string("metaserver", WL_METASERVER);
 
-	if (NetGGZ::ref().initcore(metaserver, nickname, password, email, newreg))
+	if (NetGGZ::ref().initcore(metaserver, nickname, password, reg))
 	{
 		// Update of server spinbox
 		maxplayers.setInterval(1, NetGGZ::ref().max_players());
@@ -238,6 +240,29 @@ void Fullscreen_Menu_NetSetupGGZ::fillServersList
 	}
 }
 
+static int usertype_sortorder(GGZPlayerType type)
+{
+	switch(type) {
+	case GGZ_PLAYER_BOT: return 0;
+	case GGZ_PLAYER_ADMIN: return 1;
+	case GGZ_PLAYER_HOST: return 2;
+	case GGZ_PLAYER_NORMAL: return 3;
+	case GGZ_PLAYER_GUEST: return 4;
+	default: return 5;
+	}
+}
+
+/**
+ * \return \c true if the user in row \p rowa should come before the user in row \p rowb
+ * when sorted according to usertype
+ */
+bool Fullscreen_Menu_NetSetupGGZ::compare_usertype(unsigned int rowa, unsigned int rowb)
+{
+	const Net_Player * playera = usersonline[rowa];
+	const Net_Player * playerb = usersonline[rowb];
+
+	return usertype_sortorder(playera->type) < usertype_sortorder(playerb->type);
+}
 
 /// fills the user list
 void Fullscreen_Menu_NetSetupGGZ::fillUserList
@@ -245,7 +270,7 @@ void Fullscreen_Menu_NetSetupGGZ::fillUserList
 {
 	usersonline.clear();
 	for (uint32_t i = 0; i < users.size(); ++i) {
-		Net_Player user(users[i]);
+		const Net_Player & user(users[i]);
 		UI::Table<const Net_Player * const>::Entry_Record & er =
 			usersonline.add(&user);
 		er.set_string(1, user.name);
@@ -257,22 +282,22 @@ void Fullscreen_Menu_NetSetupGGZ::fillUserList
 			// NOTE the chars in set_picture() are only there to make list sortable
 			case GGZ_PLAYER_GUEST:
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_red.png");
-				er.set_picture(0, pic, "3");
+				er.set_picture(0, pic);
 				break;
 			case GGZ_PLAYER_NORMAL:
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_yellow.png");
-				er.set_picture(0, pic, "2");
+				er.set_picture(0, pic);
 				break;
 			case GGZ_PLAYER_ADMIN:
 			case GGZ_PLAYER_HOST:
 			case GGZ_PLAYER_BOT:
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_green.png");
 				er.set_color(RGBColor(0, 255, 0));
-				er.set_picture(0, pic, "1");
+				er.set_picture(0, pic);
 				break;
 			case GGZ_PLAYER_UNKNOWN:
 				pic = g_gr->get_picture(PicMod_UI, "pics/low_priority_button.png");
-				er.set_picture(0, pic, "4");
+				er.set_picture(0, pic);
 				break;
 			default:
 				continue;

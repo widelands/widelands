@@ -35,32 +35,32 @@ GameMainMenu::GameMainMenu
 	 UI::UniqueWindow::Registry                 & registry,
 	 Interactive_Player::Game_Main_Menu_Windows & windows)
 :
-UI::UniqueWindow(&plr, &registry, 180, 55, _("Main Menu")),
+UI::UniqueWindow(&plr, "main_menu", &registry, 180, 55, _("Main Menu")),
 m_player      (plr),
 m_windows     (windows),
 general_stats
-	(this,
+	(this, "general_stats",
 	 posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
 	 &GameMainMenu::clicked_general_stats, *this,
 	 _("General Statistics")),
 ware_stats
-	(this,
+	(this, "ware_stats",
 	 posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
 	 &GameMainMenu::clicked_ware_stats, *this,
 	 _("Ware Statistics")),
 building_stats
-	(this,
+	(this, "building_stats",
 	 posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
 	 &GameMainMenu::clicked_building_stats, *this,
 	 _("Building Statistics")),
 stock
-	(this,
+	(this, "stock",
 	 posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),

@@ -20,7 +20,6 @@
 #ifndef INTERACTIVE_PLAYER_H
 #define INTERACTIVE_PLAYER_H
 
-#include "debugconsole.h"
 #include "interactive_gamebase.h"
 
 #include "ui_basic/button.h"
@@ -44,8 +43,7 @@ struct Textarea;
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-struct Interactive_Player :
-	public Interactive_GameBase, public DebugConsole::Handler
+struct Interactive_Player : public Interactive_GameBase
 {
 	Interactive_Player
 		(Widelands::Game &,
@@ -60,7 +58,7 @@ struct Interactive_Player :
 	void toggle_chat        ();
 	void toggle_options_menu();
 	void toggle_objectives();
-	void toggle_buildhelp ();
+
 	void toggle_resources ();
 	void toggle_help      ();
 	void toggle_message_menu();
@@ -97,8 +95,6 @@ struct Interactive_Player :
 
 private:
 	void cmdSwitchPlayer(std::vector<std::string> const & args);
-	void cmdToggleSeeAll(std::vector<std::string> const & args);
-	void cmdLua(std::vector<std::string> const & args);
 
 	Widelands::Player_Number m_player_number;
 	bool                     m_auto_roadbuild_mode;
@@ -111,7 +107,6 @@ private:
 	UI::Callback_Button<Interactive_Player> m_toggle_minimap;
 	UI::Callback_Button<Interactive_Player> m_toggle_buildhelp;
 	UI::Callback_Button<Interactive_Player> m_toggle_message_menu;
-	//  UI::Callback_Button<Interactive_Player> m_toggle_resources;
 	UI::Callback_Button<Interactive_Player> m_toggle_help;
 
 	UI::UniqueWindow::Registry m_chat;
@@ -119,7 +114,6 @@ private:
 	UI::UniqueWindow::Registry m_statisticsmenu;
 	UI::UniqueWindow::Registry m_objectives;
 	UI::UniqueWindow::Registry m_encyclopedia;
-	UI::UniqueWindow::Registry m_debugconsole;
 	UI::UniqueWindow::Registry m_message_menu;
 };
 

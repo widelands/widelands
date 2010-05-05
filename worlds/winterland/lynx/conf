@@ -11,6 +11,6 @@ pics=lynx_idle_sw_??.png
 fps=20
 
 [walk]
-hotspot=9 21
+hotspot=11 21
 dirpics=lynx_walk_!!_??.png
 fps=20

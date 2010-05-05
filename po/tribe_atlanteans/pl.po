@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-10 19:09+0000\n"
-"PO-Revision-Date: 2010-03-13 01:12+0000\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-03-25 16:28+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-14 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-03-26 04:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -33,8 +33,8 @@ msgid ""
 "Produce steel shield (only for compatibility with old savegames (build13))"
 msgstr ""
 "Produce steel shield (only for compatibility with old savegames "
-"(build13))<br/>Produkuj stalową tarczę (tylko dla utrzymania kompatybliności "
-"z starymi zapisami (build13))"
+"(build13))<br>(Produkuj stalową tarczę (tylko dla utrzymania kompatybilności "
+"ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
@@ -45,8 +45,8 @@ msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
 msgstr ""
 "Produce advanced shield (only for compatibility with old savegames "
-"(build13))<br/>Produkuj zaawansowaną tarczę (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13))"
+"(build13))<br>(Produkuj zaawansowaną tarczę (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:27
 #: ../../tribes/atlanteans/bakery/conf:21
@@ -793,8 +793,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz atak 0 żołnierza (tylko dla utrzymania "
-"kompatybliności ze starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz atak 0 żołnierza (tylko dla utrzymania kompatybilności "
+"ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/dungeon/conf:34
 msgid "Upgrade soldier attack 1"
@@ -806,8 +806,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz atak 1 żołnierza (tylko dla utrzymania "
-"kompatybliności ze starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz atak 1 żołnierza (tylko dla utrzymania kompatybilności "
+"ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/dungeon/conf:36
 msgid "Upgrade soldier attack 2"
@@ -819,8 +819,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz atak 2 żołnierza (tylko dla utrzymania "
-"kompatybliności ze starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz atak 2 żołnierza (tylko dla utrzymania kompatybilności "
+"ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/dungeon/conf:38
 msgid "Upgrade soldier attack 3"
@@ -832,8 +832,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz atak 3 żołnierza (tylko dla utrzymania "
-"kompatybliności ze starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz atak 3 żołnierza (tylko dla utrzymania kompatybilności "
+"ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/farm/conf:19
 msgid "Plant corn"
@@ -960,8 +960,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
-"(build13))<br/>Ulepsz obronę 0 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13))"
+"(build13))<br>(Ulepsz obronę 0 żołnierza (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:39
 msgid "Upgrade soldier defense 1"
@@ -973,8 +973,8 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
-"(build13))<br/>Ulepsz obronę 1 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13))"
+"(build13))<br>(Ulepsz obronę 1 żołnierza (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:41
 msgid "Upgrade soldier hitpoints 0"
@@ -986,32 +986,32 @@ msgid ""
 "(build13))"
 msgstr ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz punkty życia 0 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz punkty życia 0 żołnierza (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:43
 msgid "Upgrade soldier evade 0"
-msgstr "Upgrade soldier evade 0 (Ulepsz wymijanie 0 żołnierza)"
+msgstr "Upgrade soldier evade 0 (Ulepsz uniki 0 żołnierza)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:44
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz wymijanie 0 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz uniki 0 żołnierza (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Upgrade soldier evade 1"
-msgstr "Upgrade soldier evade 1 (Ulepsz wymijanie 1 żołnierza)"
+msgstr "Upgrade soldier evade 1 (Ulepsz uniki 1 żołnierza)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames "
-"(build13))<br/>(Ulepsz wymijanie 1 żołnierza (tylko dla utrzymania "
-"kompatybliności z starymi zapisami (build13)))"
+"(build13))<br>(Ulepsz uniki 1 żołnierza (tylko dla utrzymania "
+"kompatybilności ze starymi zapisami (build13)))"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid "This is the basic weapon for atlantian soldiers."

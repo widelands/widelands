@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-10 19:09+0000\n"
-"PO-Revision-Date: 2010-03-13 00:32+0000\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-03-25 14:28+0000\n"
 "Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Interlingua <ia@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-14 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/blackland/conf:2
@@ -67,7 +67,7 @@ msgstr "Fungo"
 #: ../../worlds/blackland/conf:27
 #: ../../worlds/blackland/conf:28
 msgid "Pebble"
-msgstr ""
+msgstr "Glarea"
 
 #: ../../worlds/blackland/conf:29
 #: ../../worlds/blackland/conf:30
@@ -96,19 +96,19 @@ msgstr "Roccas"
 
 #: ../../worlds/blackland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Poplo"
 
 #: ../../worlds/blackland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Poplo Mediano"
 
 #: ../../worlds/blackland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Poplo Parve"
 
 #: ../../worlds/blackland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Poplo Minuscule"
 
 #: ../../worlds/blackland/conf:49
 msgid "Oak"
@@ -116,31 +116,31 @@ msgstr "Tanno"
 
 #: ../../worlds/blackland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Tanno Mediano"
 
 #: ../../worlds/blackland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Tanno Parve"
 
 #: ../../worlds/blackland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Tanno Minuscule"
 
 #: ../../worlds/blackland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Abiete"
 
 #: ../../worlds/blackland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Abiete Mediano"
 
 #: ../../worlds/blackland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Abiete Parve"
 
 #: ../../worlds/blackland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Abiete Minuscule"
 
 #: ../../worlds/blackland/conf:57
 msgid "Maple"
@@ -148,15 +148,15 @@ msgstr "Acere"
 
 #: ../../worlds/blackland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Acere Mediano"
 
 #: ../../worlds/blackland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Acere Parve"
 
 #: ../../worlds/blackland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Acere Minuscule"
 
 #: ../../worlds/blackland/conf:61
 msgid "Birch"
@@ -168,11 +168,11 @@ msgstr "Betula Medio"
 
 #: ../../worlds/blackland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Betula Parve"
 
 #: ../../worlds/blackland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Betula Minuscule"
 
 #: ../../worlds/blackland/conf:65
 msgid "Beech"
@@ -184,11 +184,11 @@ msgstr "Fago Medio"
 
 #: ../../worlds/blackland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Fago Parve"
 
 #: ../../worlds/blackland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Fago Minuscule"
 
 #: ../../worlds/blackland/conf:69
 msgid "Larch"
@@ -200,7 +200,7 @@ msgstr "Larice Medio"
 
 #: ../../worlds/blackland/conf:71
 msgid "Larch small"
-msgstr ""
+msgstr "Larice Parve"
 
 #: ../../worlds/blackland/conf:72
 msgid "Larch tiny"
@@ -224,7 +224,7 @@ msgstr ""
 
 #: ../../worlds/blackland/conf:79
 msgid "Bunny"
-msgstr ""
+msgstr "Cunilio"
 
 #: ../../worlds/blackland/conf:80
 msgid "Deer"

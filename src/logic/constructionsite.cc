@@ -50,6 +50,14 @@ ConstructionSite_Descr::ConstructionSite_Descr
 : Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
+
+	{ // animation when a worker entered the site
+		Section & sec = prof.get_safe_section("idle_with_worker");
+		if (!is_animation_known("idle_with_worker"))
+			add_animation
+				("idle_with_worker",
+				 g_anim.get(directory.c_str(), sec, 0, encdata));
+	}
 }
 
 
@@ -369,6 +377,9 @@ void ConstructionSite::request_builder_callback
 	assert(w);
 
 	ConstructionSite & cs = ref_cast<ConstructionSite, PlayerImmovable>(target);
+
+	// Start playing animation with worker
+	cs.start_animation(game, cs.descr().get_animation("idle_with_worker"));
 
 	cs.m_builder = w;
 

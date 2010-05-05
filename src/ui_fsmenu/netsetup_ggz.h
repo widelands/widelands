@@ -49,7 +49,7 @@ struct Fullscreen_Menu_NetSetupGGZ : public Fullscreen_Menu_Base {
 		JOINGAME
 	};
 
-	Fullscreen_Menu_NetSetupGGZ (const char *, const char *, const char *, bool);
+	Fullscreen_Menu_NetSetupGGZ (const char *, const char *, bool);
 
 	virtual void think();
 
@@ -81,8 +81,7 @@ private:
 	// Login information
 	const char * nickname;
 	const char * password;
-	const char * email;
-	bool         newreg;
+	bool         reg;
 
 	void fillServersList(std::vector<Net_Game_Info> const &);
 	void fillUserList   (std::vector<Net_Player> const &);
@@ -97,6 +96,8 @@ private:
 	void clicked_joingame();
 	void clicked_hostgame();
 	void clicked_lasthost();
+
+	bool compare_usertype(unsigned int rowa, unsigned int rowb);
 };
 
 #endif // if HAVE_GGZ
