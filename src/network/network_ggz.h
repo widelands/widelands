@@ -231,6 +231,7 @@ private:
 
 	std::string mapname;
 	int map_w, map_h;
+	WLGGZGameType win_condition;
 
 	// The chat messages
 	std::vector<ChatMessage> messages;

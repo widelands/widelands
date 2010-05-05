@@ -85,7 +85,10 @@ enum WLGGZPlayerType
 
 enum WLGGZGameType
 {
-	gametype_endless = 1
+	gametype_endless = 1,
+	gametype_defeatall = 2,
+	gametype_collectors = 3,
+	gametype_tribes_together =4
 };
 
 enum WLGGZGameStatsResult

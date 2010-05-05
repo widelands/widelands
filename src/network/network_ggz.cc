@@ -52,7 +52,8 @@ NetGGZ::NetGGZ() :
 	motd          (),
 	mapname       (),
 	map_w         (-1),
-	map_h         (-1)
+	map_h         (-1),
+	win_condition (gametype_endless)
 {}
 
 
@@ -1001,8 +1002,9 @@ void NetGGZ::send_game_info()
 		params.push_back(par);
 		wlggz_write(m_fd, gameinfo_mapsize, params);
 
+
 		params.clear();
-		par.set(static_cast<int>(gametype_endless));
+		par.set(static_cast<int>(win_condition));
 		params.push_back(par);
 		wlggz_write(m_fd, gameinfo_gametype, params);
 
@@ -1056,7 +1058,7 @@ void NetGGZ::send_game_statistics
 			("resultvec size: %d, playerinfo size: %d\n",
 			 resultvec.size(), playerinfo.size());
 
-		for (int i = 0; i < playerinfo.size(); i++)
+		for (unsigned int i = 0; i < playerinfo.size(); i++)
 		{
 			params.clear();
 			par.set_int(i);
@@ -1181,9 +1183,21 @@ void NetGGZ::send_game_statistics
 void NetGGZ::set_players(GameSettings & settings)
 {
 	log
-		("NetGGZ: playernum(%d) usernum(%d)\n",
+		("NetGGZ: playernum(%d) usernum(%d) win_condition \"%s\"\n",
 		 static_cast<int>(settings.playernum),
-		 static_cast<int>(settings.usernum));
+		 static_cast<int>(settings.usernum),
+		 settings.win_condition.c_str());
+ 
+	if (settings.win_condition.compare("00_endless_game") == 0)
+		win_condition = gametype_endless;
+	else if (settings.win_condition.compare("01_defeat_all") == 0)
+		win_condition = gametype_defeatall;
+	else if (settings.win_condition.compare("02_collectors") == 0)
+		win_condition = gametype_collectors;
+	else if (settings.win_condition.compare("03_tribes_together") == 0)
+		win_condition = gametype_tribes_together;
+	else
+		win_condition = gametype_endless;
 
 	std::vector<PlayerSettings>::iterator pit = settings.players.begin();
 	int i = 0;

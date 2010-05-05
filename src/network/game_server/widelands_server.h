@@ -56,7 +56,7 @@ class WidelandsPlayer
 	public:
 		WidelandsPlayer(std::string playername, int wl_num):
 			m_name(playername),
-			m_tribe(""),
+			m_tribe(),
 			m_wl_player_number(wl_num),
 			m_ggz_player_number(-1),
 			m_type(playertype_null)

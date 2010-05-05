@@ -50,6 +50,25 @@ WidelandsServer::~WidelandsServer()
 	std::cout << "WidelandsServer: Map \"" << m_map.name() << "\" (" << m_map.w() <<
 		", " << m_map.h() << ")" << std::endl;
 	std::cout << "WidelandsServer: GameTime: " << m_result_gametime << std::endl;
+	std::cout << "WidelandsServer: Win Condition: ";
+	switch(m_map.gametype())
+	{
+		case gametype_endless:
+			std::cout << "endless" << std::endl;
+			break;
+		case gametype_defeatall:
+			std::cout << "defeat all" << std::endl;
+			break;
+		case gametype_collectors:
+			std::cout << "collectors" << std::endl;
+			break;
+		case gametype_tribes_together:
+			std::cout << "tribes together" << std::endl;
+			break;
+		default:
+			std::cout << "unknown (ERROR)" << std::endl;
+			break;
+	}
 	
 	std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
 	while(it != m_players.end())
@@ -176,7 +195,7 @@ void WidelandsServer::read_game_information(int fd)
 			case gameinfo_playerid:
 				//std::cout << "WidelandsServer: GAMEINFO: gameinfo_playerid\n";
 				playernum = parlist.front().get_integer();
-				playername="";
+				playername.erase();
 				player = NULL;
 				break;
 			case gameinfo_playername:
@@ -184,7 +203,7 @@ void WidelandsServer::read_game_information(int fd)
 				//std::cout << "WidelandsServer: GAMEINFO: gameinfo_playername\n";
 				parlist.front().get_string();
 				
-				if(playername=="" and not parlist.front().get_string().empty() and player == NULL)
+				if(playername.empty() and not parlist.front().get_string().empty() and player == NULL)
 				{
 					playername = parlist.front().get_string();
 					player = m_players[playername];
