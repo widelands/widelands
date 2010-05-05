@@ -280,17 +280,18 @@ void WidelandsServer::read_game_statistics(int fd)
 			case gamestat_playernumber:
 			{
 				std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
-				player=NULL;
+				player = NULL;
 				while(it != m_players.end())
 				{
-					if(it->second->wl_player_number()==parlist.front().get_integer())
-						player=it->second;
-					it++;
+					if(it->second->wl_player_number() == parlist.front().get_integer())
+						player = it->second;
+					++it;
 				}
 				if(not player)
 					std::cout << "GGZ:: GAMESTATISTICS: ERROR: got playernumber but could no find the player " <<
-					parlist.front().get_integer() << std::endl;
+						parlist.front().get_integer() << std::endl;
 				break;
+				
 			}
 			case gamestat_result:
 				if(player)
@@ -475,11 +476,10 @@ void WidelandsServer::dataEvent(Client * const client)
 	{
 		std::cout << "WidelandsServer: GAME: read game info!" << std::endl;
 		read_game_information(channel);
-		WidelandsPlayer * player = m_players[client->name];
-		if(!&player)
-			std::cout << "WidelandsServer: GAMEINFO: read gameinfo but player does not exist: " << client->name << std::endl;
-		else
-			player->set_ggz_player_number(client->number);
+		if(m_players.find(client->name) != m_players.end())
+		{
+			m_players[client->name]->set_ggz_player_number(client->number);
+		}
 		break;
 	}
 	default:

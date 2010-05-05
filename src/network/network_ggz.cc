@@ -1201,6 +1201,7 @@ void NetGGZ::set_players(GameSettings & settings)
 
 	std::vector<PlayerSettings>::iterator pit = settings.players.begin();
 	int i = 0;
+	playerinfo.clear();
 	while (pit != settings.players.end())
 	{
 		log
