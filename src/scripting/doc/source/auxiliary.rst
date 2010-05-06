@@ -17,3 +17,4 @@ otherwise stated. All auxiliary scripts are documented in this section.
    aux_objective_utils
    aux_ui
    aux_table
+   aux_metaserver
