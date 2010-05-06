@@ -831,32 +831,24 @@ void NetGGZ::write_userlist()
 		GGZTable * tab = ggzcore_player_get_table(player);
 		user.table = tab ? ggzcore_table_get_desc(tab) : "--";
 
-		// TODO unfinished work down here!
-		// TODO something in ggzd does not work as it should!
-		/* int buf[1];
-		int wins[1];
-		int losses[1];
-		int ties[1];
-		int forfeits[1];
-		if (ggzcore_player_get_rating(player, buf)) {
-			snprintf(user.stats, sizeof(user.stats), "r %i", buf[0]);
-			log(user.stats);
-		} else if (ggzcore_player_get_highscore(player, buf)) {
-			snprintf(user.stats, sizeof(user.stats), "hs %i", buf[1]);
-			log(user.stats);
-		} else if (ggzcore_player_get_ranking(player, buf)) {
-			snprintf(user.stats, sizeof(user.stats), "ra %i", buf[1]);
-			log(user.stats);
-		} else if
+		int buf, wins, losses, ties, forfeits;
+		if
 			(ggzcore_player_get_record
-			 (player, wins, losses, ties, forfeits))
+			 (player, &wins, &losses, &ties, &forfeits)
+			 and
+			 ggzcore_player_get_rating(player, &buf))
 		{
 			snprintf
-				(user.stats, sizeof(user.stats), "%i %i %i %i",
-				 wins[1], losses[1], ties[1], forfeits[1]);
-			log(user.stats);
-		} else*/
-		snprintf(user.stats, sizeof(user.stats), "%i", 0);
+				(user.stats, sizeof(user.stats), "%i, %i, %i",
+				 buf - 1500, wins, losses);
+			log
+				("GGZ: Stats (\"%s\"): score: %i, wins: %i, losses: %i - \"%s\"\n",
+				 user.name.c_str(), buf, wins, losses, user.stats);
+		} else if (ggzcore_player_get_rating(player, &buf)) {
+			snprintf(user.stats, sizeof(user.stats), "%i", buf - 1500);
+			//log(user.stats);
+		} else
+			snprintf(user.stats, sizeof(user.stats), "-");
 		user.type = ggzcore_player_get_type(player);
 		userlist.push_back(user);
 	}
@@ -1073,6 +1065,15 @@ void NetGGZ::send_game_statistics
 			params.push_back(par);
 			wlggz_write(m_fd, gamestat_playernumber, params);
 
+			params.clear();
+			par.set_int(playerinfo.at(i).result);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_result, params);
+
+			params.clear();
+			par.set_int(playerinfo.at(i).points);
+			params.push_back(par);
+			wlggz_write(m_fd, gamestat_points, params);
 
 			params.clear();
 			if (resultvec.at(i).land_size.size())
@@ -1084,7 +1085,7 @@ void NetGGZ::send_game_statistics
 
 			params.clear();
 			if (resultvec.at(i).nr_buildings.size())
-				par.set_int(resultvec[i].nr_buildings.back());
+				par.set_int(resultvec.at(i).nr_buildings.back());
 			else
 				par.set_int(0);
 			params.push_back(par);
@@ -1092,7 +1093,7 @@ void NetGGZ::send_game_statistics
 
 			params.clear();
 			if (resultvec.at(i).miltary_strength.size())
-				par.set_int(resultvec[i].miltary_strength.back());
+				par.set_int(resultvec.at(i).miltary_strength.back());
 			else
 				par.set_int(0);
 			params.push_back(par);
@@ -1100,7 +1101,7 @@ void NetGGZ::send_game_statistics
 
 			params.clear();
 			if (resultvec.at(i).nr_casualties.size())
-				par.set_int(resultvec[i].nr_casualties.back());
+				par.set_int(resultvec.at(i).nr_casualties.back());
 			else
 				par.set_int(0);
 			params.push_back(par);
@@ -1113,7 +1114,7 @@ void NetGGZ::send_game_statistics
 
 			params.clear();
 			if (resultvec.at(i).nr_civil_blds_lost.size())
-				par.set_int(resultvec[i].nr_civil_blds_lost.back());
+				par.set_int(resultvec.at(i).nr_civil_blds_lost.back());
 			else
 				par.set_int(0);
 			params.push_back(par);
@@ -1121,7 +1122,7 @@ void NetGGZ::send_game_statistics
 
 			params.clear();
 			if (resultvec.at(i).nr_kills.size())
-				par.set_int(resultvec[i].nr_kills.back());
+				par.set_int(resultvec.at(i).nr_kills.back());
 			else
 				par.set_int(0);
 			params.push_back(par);
@@ -1134,7 +1135,7 @@ void NetGGZ::send_game_statistics
 
 			params.clear();
 			if (resultvec.at(i).nr_msites_lost.size())
-				par.set_int(resultvec[i].nr_msites_lost.back());
+				par.set_int(resultvec.at(i).nr_msites_lost.back());
 			else
 				par.set_int(0);
 			params.push_back(par);
@@ -1142,7 +1143,7 @@ void NetGGZ::send_game_statistics
 
 			params.clear();
 			if (resultvec.at(i).nr_wares.size())
-				par.set_int(resultvec[i].nr_wares.back());
+				par.set_int(resultvec.at(i).nr_wares.back());
 			else
 				par.set_int(0);
 			params.push_back(par);
@@ -1150,7 +1151,7 @@ void NetGGZ::send_game_statistics
 
 			params.clear();
 			if (resultvec.at(i).nr_workers.size())
-				par.set_int(resultvec[i].nr_workers.back());
+				par.set_int(resultvec.at(i).nr_workers.back());
 			else
 				par.set_int(0);
 			params.push_back(par);
@@ -1158,7 +1159,7 @@ void NetGGZ::send_game_statistics
 
 			params.clear();
 			if (resultvec.at(i).productivity.size())
-				par.set_int(resultvec[i].productivity.back());
+				par.set_int(resultvec.at(i).productivity.back());
 			else
 				par.set_int(0);
 			params.push_back(par);
@@ -1194,6 +1195,16 @@ void NetGGZ::report_result
 {
 	playerinfo[player].points = points;
 	playerinfo[player].result = win?gamestatresult_winner:gamestatresult_looser;
+
+	bool finished=true;
+	container_iterate_const(std::vector<Net_Player_Info>, playerinfo, i)
+	{
+		if(i.current->result == gamestatresult_null)
+			finished=false;
+	}
+
+	if(finished)
+		send_game_statistics(gametime, resultvec);
 }
 
 
