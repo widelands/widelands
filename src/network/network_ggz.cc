@@ -28,6 +28,7 @@
 #include "wlapplication.h"
 #include "game_server/protocol_helpers.h"
 #include "container_iterate.h"
+#include "build_info.h"
 
 #include <cstring>
 
@@ -1033,6 +1034,13 @@ void NetGGZ::send_game_info()
 
 			pit++;
 		}
+
+		params.clear();
+		par.set(build_id());
+		params.push_back(par);
+		par.set(build_type());
+		params.push_back(par);
+		wlggz_write(m_fd, gameinfo_version, params);
 
 		ggz_write_int(m_fd, 0);
 		std::cout << "GGZ: write int (0) end of list" << std::endl;

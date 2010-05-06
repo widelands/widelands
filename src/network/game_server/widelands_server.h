@@ -66,11 +66,15 @@ class WidelandsPlayer
 		int ggz_player_number() { return m_ggz_player_number; }
 		std::string tribe() { return m_tribe; }
 		WLGGZPlayerType type() { return m_type; }
+		std::string version() { return m_version; }
+		std::string build() { return m_build; }
 		
 		void set_ggz_player_number(int num) 
 			{ m_ggz_player_number=num; }
 		void set_tribe(std::string tribe) { m_tribe=tribe; }
 		void set_type(WLGGZPlayerType type) { m_type=type; }
+		void set_version(std::string v, std::string b)
+			{ m_build = b; m_version = v; }
 
 		WidelandsPlayerStats stats;
 
@@ -80,6 +84,7 @@ class WidelandsPlayer
 		int m_ggz_player_number;
 		int m_wl_player_number;
 		WLGGZPlayerType m_type;
+		std::string m_build, m_version;
 };
 
 class WidelandsMap 
@@ -121,7 +126,7 @@ class WidelandsServer : public GGZGameServer
 		void errorEvent();
 
 	private:
-		void read_game_information(int fd);
+		void read_game_information(int fd, Client * client);
 		void read_game_statistics(int fd);
 
 		WidelandsMap m_map;
@@ -131,6 +136,7 @@ class WidelandsServer : public GGZGameServer
 		char * m_wlserver_ip;
 
 		int m_result_gametime;
+		std::string host_version, host_build;
 };
 
 #endif

@@ -69,7 +69,9 @@ enum WLGGZGameInfo
 	// two integers, the width then the height of the map
 	gameinfo_mapsize = 6,
 	// one integer
-	gameinfo_playertype = 7
+	gameinfo_playertype = 7,
+	// two strings: version string, than buildtype 
+	gameinfo_version = 8,
 };
 
 enum WLGGZPlayerType

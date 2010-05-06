@@ -176,7 +176,7 @@ void WidelandsServer::spectatorDataEvent(Client *)
 	std::cout << "WidelandsServer: spectatorDataEvent" << std::endl;
 }
 
-void WidelandsServer::read_game_information(int fd)
+void WidelandsServer::read_game_information(int fd, Client * client)
 {
 	int gameinfo, playernum=-1;
 	std::string playername="";
@@ -251,12 +251,33 @@ void WidelandsServer::read_game_information(int fd)
 				if(player)
 					player->set_type(static_cast<WLGGZPlayerType>(parlist.front().get_integer()));
 				break;
+			case gameinfo_version:
+			{
+				std::string version = parlist.front().get_string();
+				parlist.pop_front();
+				std::string build = parlist.front().get_string();
+				if (client->number == 0)
+				{
+					host_version = version;
+					parlist.pop_front();
+					host_build = build;
+				}
+				if(m_players.find(client->name) != m_players.end())
+					m_players[client->name]->set_version(version, build);
+				std::cout << "WidelandsServer: GAMEINFO: Player \"" << client->name <<
+					"\": " << version << " (" << build << ")\n";
+				break;
+			}
 			default:
 				std::cout << "WidelandsServer: GAMEINFO: error unknown WLGGZGameInfo!" << std::endl;
 		
 		}
 	ggz_read_int(fd, &gameinfo);
 	//std::cout << "WidelandsServer: GAMEINFO: read_int ("<< gameinfo <<") gameinfo_type\n";
+	}
+	if(m_players.find(client->name) != m_players.end())
+	{
+		m_players[client->name]->set_ggz_player_number(client->number);
 	}
 	//std::cout << "WidelandsServer: GAMEINFO: finished" << std::endl;
 }
@@ -455,9 +476,8 @@ void WidelandsServer::dataEvent(Client * const client)
 		changeState(GGZGameServer::done);
 		break;
 	case op_game_statistics:
-		{
-			std::cout << "WidelandsServer: GAME: read stats!" << std::endl;
-			read_game_statistics(channel);
+		std::cout << "WidelandsServer: GAME: read stats!" << std::endl;
+		read_game_statistics(channel);
 			
 			/*
 			int teams[players()];
@@ -470,18 +490,11 @@ void WidelandsServer::dataEvent(Client * const client)
 			//reportGame(int *teams, GGZGameResult *results, int *scores);
 			reportGame(NULL, results, NULL);
 			*/
-		}
 		break;
 	case op_game_information:
-	{
 		std::cout << "WidelandsServer: GAME: read game info!" << std::endl;
-		read_game_information(channel);
-		if(m_players.find(client->name) != m_players.end())
-		{
-			m_players[client->name]->set_ggz_player_number(client->number);
-		}
+		read_game_information(channel, client);
 		break;
-	}
 	default:
 		//  Discard
 		std::cerr << "WidelandsServer: Data error. Unhandled opcode(" << opcode << ")!" << std::endl;
