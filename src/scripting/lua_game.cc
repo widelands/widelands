@@ -1648,16 +1648,16 @@ static int L_get_allow_autosaving(lua_State * L) {
 */
 static int L_report_result(lua_State * L) {
 	int32_t points = 0;
-	if (lua_gettop(L) >= 4)
-		points = luaL_checkint32(L, 4);
+	if (lua_gettop(L) >= 3)
+		points = luaL_checkint32(L, 3);
 
 	std::string extra = "";
-	if (lua_gettop(L) >= 5)
-		extra = luaL_checkstring(L, 5);
+	if (lua_gettop(L) >= 4)
+		extra = luaL_checkstring(L, 4);
 
 	get_game(L).gameController()->report_result
-		((*get_user_class<L_Player>(L, 2))->get(L, get_game(L)).player_number(),
-		 points, luaL_checkboolean(L, 3), extra
+		((*get_user_class<L_Player>(L, 1))->get(L, get_game(L)).player_number(),
+		 points, luaL_checkboolean(L, 2), extra
 	);
 	return 0;
 }
