@@ -635,8 +635,8 @@ void NetHost::run(bool const autorun)
 		// if this is a ggz game, tell the metaserver that the game is done.
 		if (use_ggz)
 		{
-			NetGGZ::ref().send_game_statistics
-				(game.get_gametime(), game.get_general_statistics());
+			//NetGGZ::ref().send_game_statistics
+			//	(game.get_gametime(), game.get_general_statistics());
 			NetGGZ::ref().send_game_done();
 		}
 #endif
@@ -2121,3 +2121,16 @@ void NetHost::reaper()
 		else
 			d->clients.erase(d->clients.begin() + index);
 }
+
+void NetHost::report_result(int player, int points, std::string extra)
+{
+#if HAVE_GGZ
+	// if this is a ggz game, tell the metaserver that the game is done.
+	if (use_ggz)
+	{
+		NetGGZ::ref().report_result
+			(player, points, d->game->get_gametime(), d->game->get_general_statistics());
+	}
+#endif
+}
+

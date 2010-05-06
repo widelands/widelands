@@ -148,6 +148,8 @@ struct NetGGZ : public ChatProvider {
 	void send_game_playing();
 	void send_game_done();
 	void send_game_info();
+	void report_result(int32_t player, int32_t points, int32_t gametime,
+		const Widelands::Game::General_Stats_vector& resultvec);
 	void send_game_statistics(int32_t gametime,
 		const Widelands::Game::General_Stats_vector& resultvec);
 	void set_players(GameSettings&);

@@ -1188,6 +1188,12 @@ void NetGGZ::send_game_statistics
 		log("ERROR: GGZ not used!\n");
 }
 
+void NetGGZ::report_result(int32_t player, int32_t points, int32_t gametime, const Widelands::Game::General_Stats_vector& resultvec)
+{
+	//ToDo
+}
+
+
 void NetGGZ::set_players(GameSettings & settings)
 {
 	log
