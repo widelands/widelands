@@ -174,7 +174,9 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 			gl.preload_game(gpdp);
 
 			m_list.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
-		} catch (_wexception const &) {} //  we simply skip illegal entries
+		} catch (_wexception const & e) {
+			//  we simply skip illegal entries
+		}
 	}
 
 	if (m_list.size())

@@ -21,19 +21,19 @@ harvestreed=Harvest reed (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_flax]
-sleep=20000
+sleep=18500  #orig sleep=20000 but ferner animation was increased by 1.5sec
 worker=plantflax
 
 [plantflax]
-sleep=20000
+sleep=18500  #orig sleep=20000 but ferner animation was increased by 1.5sec
 worker=plantflax
 
 [plant_reed]
-sleep=20000
+sleep=18000  #orig sleep=20000 but ferner animation was increased by 2sec
 worker=plantreed
 
 [plantreed]
-sleep=20000
+sleep=18000  #orig sleep=20000 but ferner animation was increased by 2sec
 worker=plantreed
 
 [harvest_flax]
