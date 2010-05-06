@@ -1188,9 +1188,12 @@ void NetGGZ::send_game_statistics
 		log("ERROR: GGZ not used!\n");
 }
 
-void NetGGZ::report_result(int32_t player, int32_t points, int32_t gametime, const Widelands::Game::General_Stats_vector& resultvec)
+void NetGGZ::report_result
+	(int32_t player, int32_t points, bool win, int32_t gametime,
+	 const Widelands::Game::General_Stats_vector& resultvec)
 {
-	//ToDo
+	playerinfo[player].points = points;
+	playerinfo[player].result = win?gamestatresult_winner:gamestatresult_looser;
 }
 
 

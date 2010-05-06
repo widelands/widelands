@@ -2122,14 +2122,17 @@ void NetHost::reaper()
 			d->clients.erase(d->clients.begin() + index);
 }
 
-void NetHost::report_result(int player, int points, std::string extra)
+void NetHost::report_result(int player, int points, bool win, std::string extra)
 {
+	log
+		("NetHost::report_result(%d, %d, %s, %s)\n", player, points,
+		 win?"won":"lost", extra.c_str());
 #if HAVE_GGZ
 	// if this is a ggz game, tell the metaserver that the game is done.
 	if (use_ggz)
 	{
 		NetGGZ::ref().report_result
-			(player, points, d->game->get_gametime(), d->game->get_general_statistics());
+			(player, points, win, d->game->get_gametime(), d->game->get_general_statistics());
 	}
 #endif
 }

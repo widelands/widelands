@@ -95,9 +95,10 @@ enum WLGGZGameType
 
 enum WLGGZGameStatsResult
 {
+	gamestatresult_null = 0,
 	gamestatresult_winner = 1,
 	gamestatresult_looser = 2,
-	gamestatresult_giveup = 3
+	gamestatresult_leave = 3
 };
 
 enum WLGGZGameStats

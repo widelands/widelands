@@ -86,7 +86,7 @@ struct NetHost : public GameController, private SyncCallback {
 	// Host command releated stuff
 	void kickUser(std::string, std::string);
 
-	void report_result(int player, int points, std::string extra);
+	void report_result(int player, int points, bool win, std::string extra);
 private:
 	NetTransferFile * file;
 

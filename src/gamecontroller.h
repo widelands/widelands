@@ -73,7 +73,7 @@ struct GameController {
 	static GameController * createSinglePlayer
 		(Widelands::Game &, bool cpls, Widelands::Player_Number local);
 	
-	virtual void report_result(int player, int points, std::string extra) {}
+	virtual void report_result(int player, int points, bool win, std::string extra) {}
 };
 
 #endif

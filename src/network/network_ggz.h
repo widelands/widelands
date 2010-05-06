@@ -58,10 +58,20 @@ struct Net_Player {
 };
 
 struct Net_Player_Info {
+	Net_Player_Info():
+		playernum(-1),
+		points(0),
+		name(),
+		tribe(),
+		type(playertype_null),
+		result(gamestatresult_null)
+		{}
 	int playernum;
+	int points;
 	std::string name;
 	std::string tribe;
 	WLGGZPlayerType type;
+	WLGGZGameStatsResult result;
 };
 
 /// A MOTD struct for easier output to the chat panel
@@ -148,10 +158,12 @@ struct NetGGZ : public ChatProvider {
 	void send_game_playing();
 	void send_game_done();
 	void send_game_info();
-	void report_result(int32_t player, int32_t points, int32_t gametime,
-		const Widelands::Game::General_Stats_vector& resultvec);
-	void send_game_statistics(int32_t gametime,
-		const Widelands::Game::General_Stats_vector& resultvec);
+	void report_result
+		(int32_t player, int32_t points, bool win, int32_t gametime,
+		 const Widelands::Game::General_Stats_vector & resultvec);
+	void send_game_statistics
+		(int32_t gametime,
+		 const Widelands::Game::General_Stats_vector & resultvec);
 	void set_players(GameSettings&);
 	void set_map(std::string, int, int);
 	void join(char const * tablename);
