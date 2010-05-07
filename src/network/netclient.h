@@ -89,6 +89,7 @@ struct NetClient :
 	void send(std::string const & msg);
 	std::vector<ChatMessage> const & getMessages() const;
 
+	void report_result(int player, int points, bool win, std::string extra);
 private:
 	NetTransferFile * file;
 

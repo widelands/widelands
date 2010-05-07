@@ -161,17 +161,6 @@ void NetClient::run ()
 			return;
 	}
 
-#if HAVE_GGZ
-	// if this is a ggz game, tell the metaserver a bit abou the game
-	if (use_ggz)
-	{
-		NetGGZ::ref().set_map(d->settings.mapname, 0, 0);
-		NetGGZ::ref().set_players(d->settings);
-		// ToDo: Feed NetGGZ with some information first
-		NetGGZ::ref().send_game_info();
-	}
-#endif
-
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
@@ -212,6 +201,20 @@ void NetClient::run ()
 		d->lasttimestamp_realtime = WLApplication::get()->get_time();
 
 		d->modal = game.get_ibase();
+
+#if HAVE_GGZ
+		// if this is a ggz game, tell the metaserver about the game
+		if (use_ggz)
+		{
+			assert(&game.map());
+			NetGGZ::ref().set_map
+				(d->settings.mapname, game.map().get_width(),
+				 game.map().get_height());
+			NetGGZ::ref().set_players(d->settings);
+			NetGGZ::ref().send_game_info();
+		}
+#endif
+
 		game.run
 			(loaderUI,
 			 d->settings.savegame ?
@@ -223,8 +226,8 @@ void NetClient::run ()
 	{
 		// ToDo: NetGGZ::ref().set_results();
 		// ToDo: Feed NetGGZ with some information first
-		NetGGZ::ref().send_game_statistics
-			(game.get_gametime(), game.get_general_statistics());
+		// NetGGZ::ref().send_game_statistics
+		//	(game.get_gametime(), game.get_general_statistics());
 	}
 #endif
 		d->modal = 0;
@@ -503,6 +506,21 @@ void NetClient::send(std::string const & msg)
 std::vector<ChatMessage> const & NetClient::getMessages() const
 {
 	return d->chatmessages;
+}
+
+void NetClient::report_result(int player, int points, bool win, std::string extra)
+{
+	log
+		("NetClient::report_result(%d, %d, %s, %s)\n", player, points,
+		 win?"won":"lost", extra.c_str());
+#if HAVE_GGZ
+	// if this is a ggz game, tell the metaserver that the game is done.
+	if (use_ggz)
+	{
+		NetGGZ::ref().report_result
+			(player, points, win, d->game->get_gametime(), d->game->get_general_statistics());
+	}
+#endif
 }
 
 void NetClient::sendTime()
