@@ -1045,6 +1045,7 @@ void NetGGZ::send_game_statistics
 	 const Widelands::Game::General_Stats_vector & resultvec)
 {
 	if (used()) {
+		log("NetGGZ::send_game_statistics: send statistics to metaserver now!\n");
 		ggz_write_int(m_fd, op_game_statistics);
 
 		std::list<WLGGZParameter> params;
@@ -1193,15 +1194,41 @@ void NetGGZ::report_result
 	(int32_t player, int32_t points, bool win, int32_t gametime,
 	 const Widelands::Game::General_Stats_vector& resultvec)
 {
-	playerinfo[player].points = points;
-	playerinfo[player].result = win?gamestatresult_winner:gamestatresult_looser;
+	log
+		("NetGGZ::report_result(%d, %d, %s)\n", player, points,
+		 win?"won":"lost");
+	//log("NetGGZ::report_result: player %i/%i\n", player, playerinfo.size());
 
-	bool finished=true;
-	container_iterate_const(std::vector<Net_Player_Info>, playerinfo, i)
+	if(player < 1 or player > playerinfo.size())
 	{
-		if(i.current->result == gamestatresult_null)
-			finished=false;
+		throw wexception("NetGGZ::report_result: ERROR: player number out of range\n");
 	}
+	
+	playerinfo.at(player-1).points = points;
+	playerinfo.at(player-1).result = (win?gamestatresult_winner:gamestatresult_looser);
+
+	bool finished = true;
+
+	for (unsigned int i = 0; i < playerinfo.size(); i++)
+	{
+		if (playerinfo.at(i).result == gamestatresult_null)
+			finished = false;
+	}
+
+	//container_iterate(std::vector<Net_Player_Info>, playerinfo, it)
+	/*
+	std::vector<Net_Player_Info>::iterator pit = playerinfo.begin();
+	while (pit != playerinfo.end())
+	{
+		log("NetGGZ::report_result: no result yet: 1 %s\n", pit->name);
+		if (pit->result == gamestatresult_null)
+		{
+			finished = false;
+			log("NetGGZ::report_result: no result yet: %s\n", pit->name);
+		}
+		pit++;
+	}
+	*/
 
 	if(finished)
 		send_game_statistics(gametime, resultvec);
