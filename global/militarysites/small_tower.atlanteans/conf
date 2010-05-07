@@ -1,5 +1,5 @@
 size=small
-heal_per_second=2
+heal_per_second=1
 conquers=6
 vision_range=13
 max_soldiers=3

@@ -1,6 +1,6 @@
 size=medium
 max_soldiers=5
-heal_per_second=5
+heal_per_second=2
 conquers=8
 max_medics=2
 heal_increase_per_medic=3
