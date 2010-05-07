@@ -2,8 +2,6 @@ size=big
 max_soldiers=8
 heal_per_second=1
 conquers=11
-max_medics=3
-heal_increase_per_medic=3
 enhancement=castle
 
 [buildcost]
