@@ -329,7 +329,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 			// The healing algorithm is totally arbitrary
 			if (s.get_current_hitpoints() < s.get_max_hitpoints()) {
 				s.heal(total_heal);
-				total_heal -= total_heal / 3;
+				break;
 			}
 		}
 
