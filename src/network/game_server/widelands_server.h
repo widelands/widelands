@@ -137,6 +137,7 @@ class WidelandsServer : public GGZGameServer
 
 		int m_result_gametime;
 		std::string host_version, host_build;
+		bool m_reported;
 };
 
 #endif

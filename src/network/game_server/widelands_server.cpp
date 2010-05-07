@@ -36,21 +36,27 @@
 #include <arpa/inet.h>
 
 // Constructor: inherit from ggzgameserver
-WidelandsServer::WidelandsServer()
-: GGZGameServer()
+WidelandsServer::WidelandsServer():
+	GGZGameServer(),
+	m_wlserver_ip(NULL),
+	m_result_gametime(0),
+	host_version(),
+	host_build(),
+	m_reported(false),
+	m_map()
 {
-	std::cout << "WidelandsServer: launched!" << std::endl;
-	m_wlserver_ip = NULL;
+	std::cout << std::endl << "WidelandsServer: launched!" << std::endl;
 }
 
 // Destructor
 WidelandsServer::~WidelandsServer()
 {
-	std::cout << "WidelandsServer: closing!" << std::endl;
+	std::cout << "WidelandsServer: closing!" << std::endl << std::endl;
 	std::cout << "WidelandsServer: Map \"" << m_map.name() << "\" (" << m_map.w() <<
 		", " << m_map.h() << ")" << std::endl;
 	std::cout << "WidelandsServer: GameTime: " << m_result_gametime << std::endl;
 	std::cout << "WidelandsServer: Win Condition: ";
+
 	switch(m_map.gametype())
 	{
 		case gametype_endless:
@@ -69,7 +75,7 @@ WidelandsServer::~WidelandsServer()
 			std::cout << "unknown (ERROR)" << std::endl;
 			break;
 	}
-	
+
 	std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
 	while(it != m_players.end())
 	{
@@ -83,7 +89,9 @@ WidelandsServer::~WidelandsServer()
 			it->second->stats.milbuildingslost << ", civbuildingslost: " << it->second->stats.civbuildingslost << std::endl;
 		it++;
 	}
-	
+
+	std::cout << std::endl;
+
 	if(m_wlserver_ip)
 		ggz_free(m_wlserver_ip);
 }
@@ -133,7 +141,7 @@ void WidelandsServer::stateEvent()
 // Player join hook
 void WidelandsServer::joinEvent(Client * const client)
 {
-	std::cout << "WidelandsServer: joinEvent" << std::endl;
+	std::cout << "WidelandsServer: joinEvent: " << client->name << std::endl;
 
 	// Send greeter
 	int const channel = fd(client->number);
@@ -279,6 +287,35 @@ void WidelandsServer::read_game_information(int fd, Client * client)
 	{
 		m_players[client->name]->set_ggz_player_number(client->number);
 	}
+
+	int num = playercount(Seat::player);
+	std::cout << "WidelandsServer: GAMEINFO: number of players " << num << std::endl;
+
+	for (int i=0; i<num; i++)
+	{
+		std::cout << "WidelandsServer: GAMEINFO: seat i:" << i;
+		if (seat(i))
+		{
+			std::cout << ", s:" << seat(i)->number; 
+			if (seat(i)->client)
+			{
+				std::cout << ", c: " << seat(i)->client->number;
+				std::cout << ", Name: " << seat(i)->client->name;
+				if(m_players.find(seat(i)->client->name) != m_players.end())
+				{
+					if(m_players[seat(i)->client->name]->ggz_player_number()==-1)
+						m_players[seat(i)->client->name]->
+							set_ggz_player_number(seat(i)->client->number);
+				}
+			} else {
+				std::cout << " client* does not exist";
+			}
+		} else {
+			std::cout << " does not exist ...";
+		}
+		std::cout << std::endl;
+	}
+	
 	//std::cout << "WidelandsServer: GAMEINFO: finished" << std::endl;
 }
 
@@ -302,6 +339,11 @@ void WidelandsServer::read_game_statistics(int fd)
 			{
 				std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
 				player = NULL;
+				if ( not parlist.size() or not parlist.front().is_integer())
+				{
+					std::cout << "WidelandsServer: GAMESTATISTICS: ERROR: got playernumber but parameter error" << std::endl;
+					break;
+				}
 				while(it != m_players.end())
 				{
 					if(it->second->wl_player_number() == parlist.front().get_integer())
@@ -309,73 +351,106 @@ void WidelandsServer::read_game_statistics(int fd)
 					++it;
 				}
 				if(not player)
-					std::cout << "GGZ:: GAMESTATISTICS: ERROR: got playernumber but could no find the player " <<
+					std::cout << "WidelandsServer: GAMESTATISTICS: ERROR: got playernumber but could no find the player " <<
 						parlist.front().get_integer() << std::endl;
 				break;
 				
 			}
 			case gamestat_result:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.result=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got result but catched a error" << std::endl;
 				break;
 			case gamestat_points:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.points=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got points but catched a error" << std::endl;
 				break;
 			case gamestat_land:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.land=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got land but catched a error" << std::endl;
 				break;
 			case gamestat_buildings:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.buildings=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got buildings but catched a error" << std::endl;
 				break;
 			case gamestat_milbuildingslost:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.milbuildingslost=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got milbuildingslost but catched a error" << std::endl;
 				break;
 			case gamestat_civbuildingslost:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.civbuildingslost=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got civbuildingslost but catched a error" << std::endl;
 				break;
 			case gamestat_buildingsdefeat:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.buildingsdefeat=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got buildingsdefeat but catched a error" << std::endl;
 				break;
 			case gamestat_milbuildingsconq:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.milbuildingsconq=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got milbuildingsconq but catched a error" << std::endl;
 				break;
 			case gamestat_economystrength:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.economystrength=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got economystrength but catched a error" << std::endl;
 				break;
 			case gamestat_militarystrength:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.militarystrength=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got militarystrength but catched a error" << std::endl;
 				break;
 			case gamestat_workers:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.workers=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got workers but catched a error" << std::endl;
 				break;
 			case gamestat_wares:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.wares=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got wares but catched a error" << std::endl;
 				break;
 			case gamestat_productivity:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.productivity=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got productivity but catched a error" << std::endl;
 				break;
 			case gamestat_casualties:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.casualties=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got casulties but catched a error" << std::endl;
 				break;
 			case gamestat_kills:
-				if(player)
+				if(player and parlist.size() and parlist.front().is_integer())
 					player->stats.kills=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got kills but catched a error" << std::endl;
 				break;
 			case gamestat_gametime:
-				m_result_gametime=parlist.front().get_integer();
+				if (parlist.size() and parlist.front().is_integer())
+					m_result_gametime=parlist.front().get_integer();
+				else
+					std::cerr << "WidelandsServer: GAMESTATISTICS: got gametime but catched a error" << std::endl;
 				break;
 			default:
 				std::cout << "WidelandsServer: GAMESTATISTICS: error unknown WLGGZGameStats!" << std::endl;
@@ -384,7 +459,116 @@ void WidelandsServer::read_game_statistics(int fd)
 	//std::cout << "WidelandsServer: GAMESTATISTICS: read_int ("<< gameinfo <<") stats_type\n";
 	}
 	//std::cout << "WidelandsServer: GAMESTATISTICS: finished" << std::endl;
+	
+		
+			/*
+			int teams[players()];
+			GGZGameResult results[players()];
+			for (int p = 0; p < players(); p++) {
+				//teams[p] = seat(p)->team;
+				results[p] = GGZ_GAME_LOSS;
+			}
+			results[0] =  GGZ_GAME_WIN;
+			//reportGame(int *teams, GGZGameResult *results, int *scores);
+			reportGame(NULL, results, NULL);
+			*/
+	GGZGameResult results[players()];
+	int score[players()], teams[players()];
+	for (int p = 0; p < players(); p++) {
+		teams[p] = 0;
+		results[p] = GGZ_GAME_NONE;
+		score[p] = 0;
+	}
+	
+	if (m_reported)
+		return;
+
+	if (m_map.gametype() == gametype_defeatall)
+	{
+		std::cout << "WidelandsServer: gametype defeat all" << std::endl;
+
+		std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
+		int number = 0;
+		while(it != m_players.end())
+		{
+			std::cout << "WidelandsServer: Player (ggz: " << it->second->ggz_player_number() << 
+				", wl: " <<  it->second->wl_player_number() << " , \"" << it->first << 
+				"\") " << it->second->tribe() << std::endl;
+
+			if (it->second->ggz_player_number() >= 0)
+			{
+				number++;
+				if (it->second->ggz_player_number() >= players())
+					std::cerr << "WidelandsServer: ERROR: ggz_player_number() >= players()";
+				else
+				{
+					if (it->second->stats.result == gamestatresult_winner) {
+						results[it->second->ggz_player_number()] = GGZ_GAME_WIN;
+						score[it->second->ggz_player_number()] = 7;
+					} else if (it->second->stats.result == gamestatresult_looser) {
+						results[it->second->ggz_player_number()] = GGZ_GAME_LOSS;
+						score[it->second->ggz_player_number()] = -3;
+					} else 
+						results[it->second->ggz_player_number()] = GGZ_GAME_FORFEIT;
+				}
+			}
+			it++;
+		}
+		if(number < 2)
+			std::cout << "WidelandsServer: Less than two player in game. Do not report" << std::endl;
+		if(m_result_gametime < (30 * 60 * 1000))
+			std::cout << "WidelandsServer: Game lasted less than 30 minutes. Do not report" << std::endl;
+		//reportGame(int *teams, GGZGameResult *results, int *scores);
+		if(number > 1 and m_result_gametime > (30 * 60 * 1000))
+			reportGame(NULL, results, score);
+	} else if (m_map.gametype() == gametype_tribes_together)
+	{
+		std::cout << "WidelandsServer: gametype tribes together. not implemented. WARNING\n";
+	} else if (m_map.gametype() == gametype_collectors)
+	{
+		std::cout << "WidelandsServer: gametype collectors" << std::endl;
+
+		std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
+		int number = 0;
+		while(it != m_players.end())
+		{
+			std::cout << "WidelandsServer: Player (ggz: " << it->second->ggz_player_number() << 
+				", wl: " <<  it->second->wl_player_number() << " , \"" << it->first << 
+				"\") " << it->second->tribe() << std::endl;
+
+			if (it->second->ggz_player_number() >= 0)
+			{
+				number++;
+				if (it->second->ggz_player_number() >= players())
+					std::cerr << "WidelandsServer: ERROR: ggz_player_number() >= players()";
+				else
+				{
+					if (it->second->stats.result == gamestatresult_winner) {
+						results[it->second->ggz_player_number()] = GGZ_GAME_WIN;
+						score[it->second->ggz_player_number()] = 1;
+					} else if (it->second->stats.result == gamestatresult_looser) {
+						results[it->second->ggz_player_number()] = GGZ_GAME_LOSS;
+						score[it->second->ggz_player_number()] = -1;
+					} else 
+						results[it->second->ggz_player_number()] = GGZ_GAME_FORFEIT;
+				}
+			}
+			it++;
+		}
+		if(number < 2)
+			std::cout << "WidelandsServer: Less than two player in game. Do not report" << std::endl;
+		//reportGame(int *teams, GGZGameResult *results, int *scores);
+		if(number > 1)
+			reportGame(NULL, results, score);
+	} else if (m_map.gametype() == gametype_endless)
+	{
+		std::cout << "WidelandsServer: gametype_endless\n";
+	} else
+		std::cout << "WidelandsServer: Error: Unknow gametype! cannot report game\n";
+
+	m_reported = true;
 }
+
 
 
 // Game data event
@@ -395,7 +579,7 @@ void WidelandsServer::dataEvent(Client * const client)
 	struct sockaddr* addr;
 	socklen_t addrsize;
 
-	std::cout << "WidelandsServer: dataEvent" << std::endl;
+	std::cout << "WidelandsServer: data event from " << client->name << std::endl;
 
 	// Read data
 	int const channel = fd(client->number);
@@ -403,9 +587,9 @@ void WidelandsServer::dataEvent(Client * const client)
 	ggz_read_int(channel, &opcode);
 	//std::cout << "WidelandsServer: dataEvent: read opcode ("<< opcode <<")"<< std::endl;
 
-	int teams[2] = {0, 1};
-	GGZGameResult gr[2] = {GGZ_GAME_WIN, GGZ_GAME_LOSS};
-	int scores[2] = {100, 10};
+	//int teams[2] = {0, 1};
+	//GGZGameResult gr[2] = {GGZ_GAME_WIN, GGZ_GAME_LOSS};
+	//int scores[2] = {100, 10};
 
 	switch (opcode) {
 	case op_reply_ip:
@@ -468,7 +652,7 @@ void WidelandsServer::dataEvent(Client * const client)
 		changeState(GGZGameServer::playing);
 		break;
 	case op_state_done:
-		reportGame(teams, gr, scores);
+		//reportGame(teams, gr, scores);
 		std::cout << "WidelandsServer: GAME: done!" << std::endl;
 		/* ToDo: Do not switch to state done directly. This exit the widelands server
 		 * imediately. Switch to waiting first and wait for statistics. This should have
@@ -478,18 +662,6 @@ void WidelandsServer::dataEvent(Client * const client)
 	case op_game_statistics:
 		std::cout << "WidelandsServer: GAME: read stats!" << std::endl;
 		read_game_statistics(channel);
-			
-			/*
-			int teams[players()];
-			GGZGameResult results[players()];
-			for (int p = 0; p < players(); p++) {
-				//teams[p] = seat(p)->team;
-				results[p] = GGZ_GAME_LOSS;
-			}
-			results[0] =  GGZ_GAME_WIN;
-			//reportGame(int *teams, GGZGameResult *results, int *scores);
-			reportGame(NULL, results, NULL);
-			*/
 		break;
 	case op_game_information:
 		std::cout << "WidelandsServer: GAME: read game info!" << std::endl;
