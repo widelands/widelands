@@ -293,8 +293,6 @@ void Bob::do_pop_task(Game & game)
 
 	delete state.path;
 	delete state.route;
-	if (state.transfer)
-		state.transfer->has_failed();
 
 	m_stack.pop_back();
 }
@@ -1057,7 +1055,6 @@ void Bob::log_general_info(Editor_Game_Base const & egbase)
 					 static_cast<long unsigned int>(j + 1),
 					 static_cast<long unsigned int>(nr_steps), path[j]);
 		}
-		molog("* transfer: %p\n",  m_stack[i].transfer);
 		molog("* route: %p\n",  m_stack[i].route);
 
 		molog("* program: %p\n",  m_stack[i].route);

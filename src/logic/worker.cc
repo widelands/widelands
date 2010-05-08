@@ -925,13 +925,16 @@ Worker::Worker(const Worker_Descr & worker_descr)
 	Bob          (worker_descr),
 	m_economy    (0),
 	m_supply     (0),
+	m_transfer   (0),
 	m_needed_exp (0),
 	m_current_exp(0)
-{}
+{
+}
 
 Worker::~Worker()
 {
 	assert(!m_location.is_set());
+	assert(!m_transfer);
 }
 
 
@@ -947,6 +950,7 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
 	}
 
 	molog("Economy: %p\n", m_economy);
+	molog("transfer: %p\n",  m_transfer);
 
 	if (upcast(WareInstance, ware, m_carried_item.get(egbase))) {
 		molog
@@ -1227,8 +1231,8 @@ void Worker::init_auto_task(Game & game) {
 const Bob::Task Worker::taskTransfer = {
 	"transfer",
 	static_cast<Bob::Ptr>(&Worker::transfer_update),
-	static_cast<Bob::PtrSignal>(&Worker::transfer_signalimmediate),
 	0,
+	static_cast<Bob::Ptr>(&Worker::transfer_pop),
 	false
 };
 
@@ -1240,16 +1244,23 @@ void Worker::start_task_transfer(Game & game, Transfer * t)
 {
 	// hackish override for gowarehouse
 	if (State * const state = get_state(taskGowarehouse)) {
-		assert(!state->transfer);
+		assert(!m_transfer);
 
-		state->transfer = t;
+		m_transfer = t;
 		send_signal(game, "transfer");
 	} else { //  just start a normal transfer
 		push_task(game, taskTransfer);
-		top_state().transfer = t;
+		m_transfer = t;
 	}
 }
 
+void Worker::transfer_pop(Game & game, State & state)
+{
+	if (m_transfer) {
+		m_transfer->has_failed();
+		m_transfer = 0;
+	}
+}
 
 void Worker::transfer_update(Game & game, State & state) {
 	Map & map = game.map();
@@ -1263,7 +1274,7 @@ void Worker::transfer_update(Game & game, State & state) {
 	}
 
 	// The request is no longer valid, the task has failed
-	if (!state.transfer) {
+	if (!m_transfer) {
 		molog("[transfer]: Fail (without transfer)\n");
 
 		send_signal(game, "fail");
@@ -1324,12 +1335,12 @@ void Worker::transfer_update(Game & game, State & state) {
 	// Figure out where to go
 	bool success;
 	PlayerImmovable * const nextstep =
-		state.transfer->get_next_step(location, success);
+		m_transfer->get_next_step(location, success);
 
 	if (!nextstep) {
-		Transfer * const t = state.transfer;
+		Transfer * const t = m_transfer;
 
-		state.transfer = 0;
+		m_transfer = 0;
 
 		if (success) {
 			pop_task(game);
@@ -1439,19 +1450,12 @@ void Worker::transfer_update(Game & game, State & state) {
 }
 
 
-void Worker::transfer_signalimmediate
-	(Game &, State & state, std::string const & signal)
-{
-	if (signal == "cancel")
-		state.transfer = 0; //  do not call transfer_fail/finish when cancelled
-}
-
-
 /**
  * Called by transport code when the transfer has been cancelled & destroyed.
  */
 void Worker::cancel_task_transfer(Game & game)
 {
+	m_transfer = 0;
 	send_signal(game, "cancel");
 }
 
@@ -1780,11 +1784,12 @@ void Worker::gowarehouse_update(Game & game, State & state)
 	}
 
 	// If we got a transfer, use it
-	if (state.transfer) {
-		Transfer * const t = state.transfer;
+	if (m_transfer) {
+		Transfer * const t = m_transfer;
+		m_transfer = 0;
+
 		molog("[gowarehouse]: Got transfer\n");
 
-		state.transfer = 0;
 		pop_task(game);
 		return start_task_transfer(game, t);
 	}
@@ -1812,11 +1817,6 @@ void Worker::gowarehouse_signalimmediate
 		// Otherwise, we might receive two transfers in a row.
 		delete m_supply;
 		m_supply = 0;
-	} else if (signal == "cancel") {
-		// If the transfer is cancelled again (e.g. due to building destruction)
-		// in the short window of time before the "transfer" signal is handled,
-		// we need to clean the transfer up.
-		state.transfer = 0;
 	}
 }
 
@@ -1824,6 +1824,11 @@ void Worker::gowarehouse_pop(Game &, State &)
 {
 	delete m_supply;
 	m_supply = 0;
+
+	if (m_transfer) {
+		m_transfer->has_failed();
+		m_transfer = 0;
+	}
 }
 
 

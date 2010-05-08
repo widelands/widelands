@@ -170,7 +170,6 @@ struct Bob : public Map_Object {
 			coords  (Coords::Null()),
 			diranims(0),
 			path    (0),
-			transfer(0),
 			route   (0),
 			program (0)
 		{}
@@ -185,7 +184,6 @@ struct Bob : public Map_Object {
 		Coords                 coords;
 		const DirAnimations  * diranims;
 		Path                 * path;
-		Transfer             * transfer;
 		Route                * route;
 		const BobProgramBase * program; ///< pointer to current program
 	};

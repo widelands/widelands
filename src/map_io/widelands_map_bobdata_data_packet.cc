@@ -44,7 +44,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 4
+#define CURRENT_PACKET_VERSION 5
 
 // Bob subtype versions
 #define CRITTER_BOB_PACKET_VERSION 1
@@ -103,14 +103,8 @@ void Map_Bobdata_Data_Packet::Read
 					//  basic initialization
 					bob.set_position(egbase, fr.Coords32(extent));
 
-					Transfer * trans = 0;
-					if (fr.Unsigned8()) { //  look if we had an transfer
-						// stack should be non-empty at this point,
-						// but savegames can always be broken/corrupted...
-						if (bob.m_stack.size()) {
-							trans = bob.m_stack[0].transfer;
-							assert(trans);
-						}
+					if (packet_version <= 4) {
+						fr.Unsigned8(); // used to indicate whether we had a transfer
 					}
 
 					bob.m_actid = fr.Unsigned32();
@@ -243,8 +237,6 @@ void Map_Bobdata_Data_Packet::Read
 							state.ivar2 = fr.Signed32();
 							state.ivar3 = fr.Signed32();
 
-							state.transfer = 0;
-
 							if (Serial const objvar1_serial = fr.Unsigned32()) {
 								try {
 									state.objvar1 =
@@ -314,16 +306,6 @@ void Map_Bobdata_Data_Packet::Read
 										(_("reading path: %s"), e.what());
 								}
 							}
-
-							if (i < old_stacksize && !trans)
-								delete state.transfer;
-
-							state.transfer =
-								state.task == &Worker::taskGowarehouse
-								||
-								state.task == &Worker::taskTransfer
-								?
-								trans : 0;
 
 							{
 								bool const has_route = fr.Unsigned8();
@@ -750,9 +732,6 @@ throw (_wexception)
 				//  FIELD can't be saved
 
 				//  m_linknext, linkpprev are handled automatically
-
-				//  Are we currently transferring?
-				fw.Unsigned8(bob.m_stack.size() && bob.m_stack[0].transfer);
 
 				fw.Unsigned32(bob.m_actid);
 				// Don't have to save m_actscheduled, as that's only used for

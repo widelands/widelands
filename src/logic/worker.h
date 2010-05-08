@@ -201,7 +201,7 @@ public:
 private:
 	// task details
 	void transfer_update(Game &, State &);
-	void transfer_signalimmediate(Game &, State &, std::string const & signal);
+	void transfer_pop(Game &, State &);
 	void buildingwork_update(Game &, State &);
 	void return_update(Game &, State &);
 	void program_update(Game &, State &);
@@ -251,6 +251,7 @@ private:
 	Economy          * m_economy;      ///< economy this worker is registered in
 	OPtr<WareInstance>    m_carried_item; ///< item we are carrying
 	IdleWorkerSupply * m_supply;   ///< supply while gowarehouse and not transfer
+	Transfer * m_transfer; ///< where we are currently being sent
 	int32_t                m_needed_exp;   ///< experience for next level
 	int32_t                m_current_exp;  ///< current experience
 };
