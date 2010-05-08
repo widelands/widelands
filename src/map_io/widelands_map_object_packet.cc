@@ -28,6 +28,7 @@
 #include "wexception.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "logic/worker.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
@@ -79,6 +80,10 @@ void Map_Object_Packet::Read
 
 			case Map_Object::header_Critter:
 				loaders.insert(Critter_Bob::load(egbase, mol, fr));
+				break;
+
+			case Map_Object::header_Worker:
+				loaders.insert(Worker::load(egbase, mol, fr));
 				break;
 
 			default:

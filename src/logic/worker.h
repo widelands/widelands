@@ -254,6 +254,34 @@ private:
 	Transfer * m_transfer; ///< where we are currently being sent
 	int32_t                m_needed_exp;   ///< experience for next level
 	int32_t                m_current_exp;  ///< current experience
+
+	// saving and loading
+protected:
+	class Loader : public Bob::Loader {
+	public:
+		Loader();
+
+		virtual void load(FileRead &);
+		virtual void load_pointers();
+		virtual void load_finish();
+
+	protected:
+		virtual const Task * get_task(const std::string& name);
+		virtual const BobProgramBase * get_program(const std::string& name);
+
+	private:
+		uint32_t m_location;
+		uint32_t m_carried_item;
+	};
+
+	virtual Loader* create_loader();
+
+public:
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void do_save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+
+	static Map_Object::Loader * load
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
 
 }

@@ -35,6 +35,8 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "mapfringeregion.h"
 #include "message_queue.h"
 #include "player.h"
@@ -2681,6 +2683,154 @@ void Worker::draw
 {
 	if (get_current_anim())
 		draw_inner(game, dst, calc_drawpos(game, pos));
+}
+
+/*
+==============================
+
+Load/save support
+
+==============================
+*/
+
+#define WORKER_SAVEGAME_VERSION 1
+
+Worker::Loader::Loader()
+{
+}
+
+void Worker::Loader::load(FileRead& fr)
+{
+	Bob::Loader::load(fr);
+
+	uint8_t version = fr.Unsigned8();
+	if (version != WORKER_SAVEGAME_VERSION)
+		throw game_data_error("unknown/unhandled version %u", version);
+
+	Worker& worker = get<Worker>();
+	m_location = fr.Unsigned32();
+	m_carried_item = fr.Unsigned32();
+	worker.m_needed_exp = fr.Signed32();
+	worker.m_current_exp = fr.Signed32();
+}
+
+void Worker::Loader::load_pointers()
+{
+	Bob::Loader::load_pointers();
+
+	Worker& worker = get<Worker>();
+
+	if (m_location)
+		worker.set_location(&mol().get<PlayerImmovable>(m_location));
+	if (m_carried_item)
+		worker.m_carried_item = &mol().get<WareInstance>(m_carried_item);
+}
+
+void Worker::Loader::load_finish()
+{
+	Bob::Loader::load_finish();
+
+	// it's not entirely clear whether this is the best place to put this code,
+	// keep an open mind once player immovables are also handled via the new save code
+	Worker& worker = get<Worker>();
+	Economy * economy = 0;
+	if (PlayerImmovable * const location = worker.m_location.get(egbase()))
+		economy = location->get_economy();
+	worker.set_economy(economy);
+	if (WareInstance * const carried_item = worker.m_carried_item.get(egbase()))
+		carried_item->set_economy(economy);
+}
+
+const Bob::Task* Worker::Loader::get_task(const std::string& name)
+{
+	if (name == "program") return &taskProgram;
+	if (name == "transfer") return &taskTransfer;
+	if (name == "buildingwork") return &taskBuildingwork;
+	if (name == "return") return &taskReturn;
+	if (name == "gowarehouse") return &taskGowarehouse;
+	if (name == "dropoff") return &taskDropoff;
+	if (name == "releaserecruit") return &taskReleaserecruit;
+	if (name == "fetchfromflag") return &taskFetchfromflag;
+	if (name == "waitforcapacity") return &taskWaitforcapacity;
+	if (name == "leavebuilding") return &taskLeavebuilding;
+	if (name == "fugitive") return &taskFugitive;
+	if (name == "geologist") return &taskGeologist;
+	if (name == "scout") return &taskScout;
+	return Bob::Loader::get_task(name);
+}
+
+const BobProgramBase* Worker::Loader::get_program(const std::string& name)
+{
+	Worker& worker = get<Worker>();
+	return worker.descr().get_program(name);
+}
+
+Worker::Loader* Worker::create_loader()
+{
+	return new Loader;
+}
+
+/**
+ * Load function for all classes derived from \ref Worker
+ *
+ * Derived classes must override \ref create_loader to make sure
+ * the appropriate actual load functions are called.
+ */
+Map_Object::Loader* Worker::load(Editor_Game_Base& egbase, Map_Map_Object_Loader& mol, FileRead& fr)
+{
+	try {
+		// header has already been read by caller
+		std::string tribename = fr.CString();
+		std::string name = fr.CString();
+
+		egbase.manually_load_tribe(tribename);
+
+		const Tribe_Descr * tribe = egbase.get_tribe(tribename);
+		if (!tribe)
+			throw game_data_error("unknown tribe '%s'", tribename.c_str());
+
+		const Worker_Descr * descr = tribe->get_worker_descr(tribe->safe_worker_index(name));
+
+		Worker * worker = static_cast<Worker*>(&descr->create_object());
+		std::auto_ptr<Loader> loader(worker->create_loader());
+		loader->init(egbase, mol, *worker);
+		loader->load(fr);
+		return loader.release();
+	} catch (const std::exception & e) {
+		throw wexception(_("loading worker: %s"), e.what());
+	}
+}
+
+/**
+ * Save the \ref Worker specific header and version info.
+ *
+ * \warning Do not override this function, override \ref do_save instead.
+ */
+void Worker::save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+{
+	fw.Unsigned8(header_Worker);
+	fw.CString(tribe().name());
+	fw.CString(descr().name());
+
+	do_save(egbase, mos, fw);
+}
+
+/**
+ * Save the data fields of this worker.
+ *
+ * This is separate from \ref save because of the way data headers are treated.
+ *
+ * Override this function in derived classes.
+ */
+void Worker::do_save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+{
+	Bob::save(egbase, mos, fw);
+
+	fw.Unsigned8(WORKER_SAVEGAME_VERSION);
+	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
+	fw.Unsigned32(mos.get_object_file_index_or_zero(m_carried_item.get(egbase)));
+	fw.Signed32(m_needed_exp);
+	fw.Signed32(m_current_exp);
 }
 
 }

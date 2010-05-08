@@ -375,7 +375,7 @@ Map_Object::Loader* Critter_Bob::load(Editor_Game_Base & egbase, Map_Map_Object_
 			}
 
 			if (!descr)
-				throw game_data_error("undefined critter %s/%s", owner, name);
+				throw game_data_error("undefined critter %s/%s", owner.c_str(), name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);

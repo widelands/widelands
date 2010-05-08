@@ -83,6 +83,25 @@ private:
 
 	/// -1: no ware acked; 0/1: acked ware for start/end flag of road
 	int32_t m_acked_ware;
+
+	// saving and loading
+protected:
+	class Loader : public Worker::Loader {
+	public:
+		Loader();
+
+		virtual void load(FileRead &);
+
+	protected:
+		virtual const Task * get_task(const std::string& name);
+	};
+
+	virtual Loader* create_loader();
+
+public:
+	virtual bool has_new_save_support() {return true;}
+
+	virtual void do_save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 };
 
 }
