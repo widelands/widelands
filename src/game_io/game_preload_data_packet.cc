@@ -27,6 +27,8 @@
 
 namespace Widelands {
 
+// Note: releases up to build15 used version number 1 to indicate a savegame without
+// interactive player
 #define CURRENT_PACKET_VERSION 2
 
 
@@ -38,18 +40,19 @@ void Game_Preload_Data_Packet::Read
 		prof.read("preload", 0, fs);
 		Section & s = prof.get_safe_section("global");
 		int32_t const packet_version = s.get_int("packet_version");
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			m_gametime   = s.get_safe_int   ("gametime");
 			m_mapname    = s.get_safe_string("mapname");
-			m_background = s.get_safe_string("background");
-			m_player_nr  = s.get_safe_int   ("player_nr");
-		} else if (packet_version == 1) {
-			m_gametime   = s.get_safe_int   ("gametime");
-			m_mapname    = s.get_safe_string("mapname");
-			m_background = "pics/progress.png";
-			// Of course this is wrong, but at least player 1 is always in game
-			// so widelands won't crash with this setting.
-			m_player_nr  = 1;
+
+			if (packet_version >= 2) {
+				m_background = s.get_safe_string("background");
+				m_player_nr  = s.get_safe_int   ("player_nr");
+			} else {
+				m_background = "pics/progress.png";
+				// Of course this is wrong, but at least player 1 is always in game
+				// so widelands won't crash with this setting.
+				m_player_nr  = 1;
+			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
@@ -68,7 +71,7 @@ void Game_Preload_Data_Packet::Write
 
 	Interactive_Player const * const ipl = game.get_ipl();
 
-	s.set_int   ("packet_version", ipl ? CURRENT_PACKET_VERSION : 1);
+	s.set_int   ("packet_version", CURRENT_PACKET_VERSION);
 
 	//  save some kind of header.
 	s.set_int   ("gametime",       game.get_gametime());
@@ -76,14 +79,19 @@ void Game_Preload_Data_Packet::Write
 	s.set_string("mapname",        map.get_name());  // Name of map
 	if (ipl) {
 		// player that saved the game.
-		s.set_int   ("player_nr",   ipl->player_number());
-
-		std::string bg             (map.get_background());
-		if (bg.empty())
-			bg =                     map.get_world_name();
-		s.set_string("background",  bg);
+		s.set_int("player_nr", ipl->player_number());
+	} else {
+		// pretend that the first player that is actually there has saved the game
+		for(int i = 1; i <= MAX_PLAYERS; ++i) {
+			if (game.get_player(i))
+				s.set_int("player_nr", i);
+		}
 	}
 
+	std::string bg(map.get_background());
+	if (bg.empty())
+		bg = map.get_world_name();
+	s.set_string("background",  bg);
 
 	prof.write("preload", false, fs);
 }

@@ -34,7 +34,7 @@ GameChatMenu::GameChatMenu
 	 UI::UniqueWindow::Registry & registry,
 	 ChatProvider               & chat)
 :
-UI::UniqueWindow(parent, &registry, 440, 235, _("Chat Menu")),
+UI::UniqueWindow(parent, "chat", &registry, 440, 235, _("Chat Menu")),
 m_chat(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat)
 {
 	if (get_usedefaultpos())

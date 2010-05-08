@@ -50,18 +50,21 @@ namespace UI {
  * Minimize means, that the window is only the caption bar, nothing inside.
  * Another click on this bar resizes the window again
  */
-struct Window : public Panel {
+struct Window : public NamedPanel {
 	Window
 		(Panel      * parent,
+		 std::string const & name,
 		 int32_t      x,
 		 int32_t      y,
 		 uint32_t     w,
 		 uint32_t     h,
 		 char const * title);
 
-	void set_title(char const * text);
+	void set_title(const std::string &);
+	const std::string get_title() const throw() {return m_title;}
 
 	void move_to_mouse();
+	void move_to_mouse(const Point & pt);
 	virtual void move_inside_parent();
 	void center_to_parent();
 

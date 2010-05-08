@@ -21,7 +21,6 @@
 
 #include "interactive_player.h"
 #include "logic/player.h"
-#include "trigger/trigger_time.h"
 
 using namespace Widelands;
 
@@ -40,7 +39,7 @@ GameObjectivesMenu::GameObjectivesMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
-		(&plr, &registry,
+		(&plr, "objectives", &registry,
 		 340,
 		 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
 		 _("Objectives Menu")),
@@ -91,19 +90,12 @@ void GameObjectivesMenu::think() {
 	Manager<Widelands::Objective>::Index const nr_objectives = mom.size();
 	for (Manager<Widelands::Objective>::Index i = 0; i < nr_objectives; ++i) {
 		bool should_show =
-			mom[i].get_is_visible() and not mom[i].get_trigger()->is_set();
-		if (should_show) {
-
-			//  FIXME Does not this change the game state from UI code???
-			mom[i].get_trigger()->check_set_conditions(iplayer().game());
-
-			should_show &= !mom[i].get_trigger()->is_set();
-		}
+			mom[i].visible() and not mom[i].done();
 		uint32_t const list_size = list.size();
 		for (uint32_t j = 0;; ++j)
 			if (j == list_size) { //  the objective is not in our list
 				if     (should_show)
-					list.add(mom[i].visname().c_str(), mom[i]);
+					list.add(mom[i].descname().c_str(), mom[i]);
 				break;
 			} else if (&list[j] == &mom[i]) { //  the objective is in our list
 				if (not should_show)

@@ -23,19 +23,6 @@
 #include "constructionsite.h"
 #include "critter_bob.h"
 #include "editor_game_base.h"
-#include "events/event_allow_building_types.h"
-#include "events/event_allow_retreat_change.h"
-#include "events/event_allow_worker_types.h"
-#include "events/event_building.h"
-#include "events/event_conquer_area.h"
-#include "events/event_forbid_building_types.h"
-#include "events/event_forbid_retreat_change.h"
-#include "events/event_forbid_worker_types.h"
-#include "events/event_player_seeall.h"
-#include "events/event_set_player_frontier_style.h"
-#include "events/event_set_player_flag_style.h"
-#include "events/event_unhide_area.h"
-#include "events/event_retreat_change.h"
 #include "game.h"
 #include "game_data_error.h"
 #include "helper.h"
@@ -45,6 +32,7 @@
 #include "militarysite.h"
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "soldier.h"
 #include "trainingsite.h"
 #include "warehouse.h"
@@ -244,129 +232,36 @@ Tribe_Descr::Tribe_Descr
 				throw game_data_error(_("flag styles: %s"), e.what());
 			}
 
-			if
-				(Section * const inits_s =
-				 	root_conf.get_section("initializations"))
-				while (Section::Value const * const v = inits_s->get_next_val()) {
-					m_initializations.resize(m_initializations.size() + 1);
-					Initialization & init = m_initializations.back();
-					init.    name = v->get_name  ();
-					init.descname = v->get_string();
-					try {
-						for
-							(Initialization const * i = &m_initializations.front();
-							 i < &init;
-							 ++i)
+			// Register Lua scripts
+			if (g_fs->IsDirectory(path + "scripting"))
+				egbase.lua().register_scripts
+					(g_fs->MakeSubFileSystem(path), "tribe_" + tribename);
+
+			// Read initializations -- all scripts are initializations currently
+			ScriptContainer & scripts = egbase.lua()
+					.get_scripts_for("tribe_" + tribename);
+			container_iterate_const(ScriptContainer, scripts, s) {
+				boost::shared_ptr<LuaTable> t = egbase.lua().run_script
+					("tribe_" + tribename, s->first);
+
+				m_initializations.resize(m_initializations.size() + 1);
+				Initialization & init = m_initializations.back();
+				init.    name = s->first;
+				init.descname = t->get_string("name");
+
+				try {
+					for
+						(Initialization const * i = &m_initializations.front();
+						 i < &init;
+						 ++i)
 							if (i->name == init.name)
 								throw game_data_error("duplicated");
-						path += init.name;
-						Profile init_prof(path.c_str());
-						path.resize(base_path_size);
-						while
-							(Section * const event_s = init_prof.get_next_section())
-						{
-							char const * const event_name = event_s->get_name();
-							Event * event;
-							if      (event_s->get_string("type"))
-								throw game_data_error("type key is not allowed");
-							else if   (event_s->get_string("player"))
-								throw game_data_error("player key is not allowed");
-							else if   (event_s->get_string("point"))
-								throw game_data_error("point key is not allowed");
-							else if   (not strcmp(event_name, "allow_worker_types")) {
-								event_s->set_int("version", 1);
-								event =
-									new Event_Allow_Worker_Types
-										(*event_s, egbase, this);
-							} else if (not strcmp(event_name, "forbid_worker_types"))
-							{
-								event_s->set_int("version", 1);
-								event =
-									new Event_Forbid_Worker_Types
-										(*event_s, egbase, this);
-							} else if (not strcmp(event_name, "allow_building_types"))
-							{
-								event_s->set_int("version", 3);
-								event =
-									new Event_Allow_Building_Types
-										(*event_s, egbase, this);
-							} else if
-								(not strcmp(event_name, "forbid_building_types"))
-							{
-								event_s->set_int("version", 3);
-								event =
-									new Event_Forbid_Building_Types
-										(*event_s, egbase, this);
-							} else if
-								(Building_Index const building =
-								 	building_index(event_name))
-							{
-								event_s->set_int("version", 2);
-								event =
-									new Event_Building
-										(*event_s, egbase, this, building);
-							} else if (not strcmp(event_name, "conquer_area"))   {
-								event_s->set_int("version", 2);
-								event_s->set_string("point", "0 0");
-								event = new Event_Conquer_Area(*event_s, egbase);
-							} else if (not strcmp(event_name, "unhide_area"))    {
-								event_s->set_int("version", 2);
-								event_s->set_string("point", "0 0");
-								event = new Event_Unhide_Area(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "seeall"))
-							{
-								event_s->set_int("version", 1);
-								event =
-									new Event_Player_See_All
-										(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "set_player_frontier_style"))
-							{ //  FIXME simplify this to just "[<frontierstyle_name>]"
-								event_s->set_int("version", 1);
-								event =
-									new Event_Set_Player_Frontier_Style
-										(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "set_player_flag_style"))
-							{ //  FIXME simplify this to just "[<flagstyle_name>]"
-								event_s->set_int("version", 1);
-								event =
-									new Event_Set_Player_Flag_Style
-										(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "allow_retreat_change"))
-							{
-								event_s->set_int("version", 1);
-								event =
-									new Event_Allow_Retreat_Change
-										(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "forbid_retreat_change"))
-							{
-								event_s->set_int("version", 1);
-								event =
-									new Event_Forbid_Retreat_Change
-										(*event_s, egbase);
-							} else if
-								(not strcmp(event_name, "retreat_change"))
-							{
-								event_s->set_int("version", 1);
-								event =
-									new Event_Retreat_Change(*event_s, egbase);
-							} else
-								throw game_data_error
-									("\"%s\" is invalid as player initialization event "
-									 "type for this tribe",
-									 event_name);
-							init.events.push_back(event);
-						}
-					} catch (_wexception const & e) {
-						throw game_data_error
-							("[initializations] \"%s=%s\": %s",
-							 init.name.c_str(), v->get_string(), e.what());
-					}
+				} catch (_wexception const & e) {
+					throw game_data_error
+						("Initializations: \"%s\": %s",
+						 init.name.c_str(), e.what());
 				}
+			}
 		} catch (std::exception const & e) {
 			throw game_data_error("root conf: %s", e.what());
 		}
@@ -429,6 +324,7 @@ bool Tribe_Descr::exists_tribe
 	buf            += name;
 	buf            += "/conf";
 
+	LuaInterface * lua = create_LuaInterface();
 	FileRead f;
 	if (f.TryOpen(*g_fs, buf.c_str())) {
 		if (info)
@@ -437,20 +333,33 @@ bool Tribe_Descr::exists_tribe
 				info->name = name;
 				info->uiposition =
 					prof.get_safe_section("tribe").get_int("uiposition", 0);
-				Section & inits_s = prof.get_safe_section("initializations");
-				while (Section::Value const * const v = inits_s.get_next_val())
+
+				std::string path = "tribes/" + name + "/scripting";
+				if (g_fs->IsDirectory(path))
+					lua->register_scripts
+						(g_fs->MakeSubFileSystem(path), "tribe_" + name, "");
+
+				ScriptContainer & scripts = lua->get_scripts_for("tribe_" + name);
+				container_iterate_const(ScriptContainer, scripts, s) {
+					boost::shared_ptr<LuaTable> t = lua->run_script
+						("tribe_" + name, s->first);
+
 					info->initializations.push_back
 						(TribeBasicInfo::Initialization
-						 	(v->get_name(), v->get_string()));
+						 (s->first, t->get_string("name")));
+				 }
 			} catch (_wexception const & e) {
+				delete lua;
 				throw game_data_error
 					("reading basic info for tribe \"%s\": %s",
 					 name.c_str(), e.what());
 			}
 
+		delete lua;
 		return true;
 	}
 
+	delete lua;
 	return false;
 }
 
@@ -546,6 +455,12 @@ uint32_t Tribe_Descr::get_resource_indicator
 			((static_cast<float>(amount) / res->get_max_amount())
 			 *
 			 num_indicators);
+	if (bestmatch > num_indicators)
+		throw game_data_error
+			("Amount of %s is %i but max amount is %i",
+			 res->name().c_str(),
+			 amount,
+			 res->get_max_amount());
 	if (static_cast<int32_t>(amount) < res->get_max_amount())
 		bestmatch += 1; // Resi start with 1, not 0
 

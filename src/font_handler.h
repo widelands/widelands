@@ -25,7 +25,6 @@
 #include "rgbcolor.h"
 #include "graphic/graphic.h"
 #include "graphic/picture_id.h"
-#include "ui_basic/variable_callback.h"
 #include "ui_basic/widget_cache.h"
 
 #include <SDL_ttf.h>
@@ -93,13 +92,6 @@ struct Font_Handler {
 	void get_size_from_cache
 		(PictureID widget_cache_id, uint32_t & w, uint32_t & h);
 
-	/// Register a callback which is used whenever the
-	/// tag<variable name="kljdf"> appears
-	void register_variable_callback(Varibale_Callback, void * cbdata);
-
-	/// Unegister a callback registered with register_variable_callback()
-	void unregister_variable_callback();
-
 private:
 	struct _Cache_Infos {
 		PictureID picture_id;
@@ -126,8 +118,6 @@ private:
 
 	Font_Loader           * m_font_loader;
 	std::list<_Cache_Infos> m_cache;
-	Varibale_Callback m_varcallback;
-	void                  * m_cbdata;
 
 private:
 	PictureID create_text_surface

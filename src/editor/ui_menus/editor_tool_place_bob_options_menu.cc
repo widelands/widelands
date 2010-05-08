@@ -84,8 +84,8 @@ m_pit               (pit)
 			cur_x = 0;
 			pos   = Point(5, 15);
 			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
-			box->resize();
-			m_tabpanel.add(tab_icon, box);
+			box->layout();
+			m_tabpanel.add("icons", tab_icon, box);
 		}
 
 		Widelands::Bob::Descr const & descr = *world.get_bob_descr(i);
@@ -109,7 +109,7 @@ m_pit               (pit)
 	}
 
 	m_tabpanel.activate(0);
-	m_tabpanel.resize();
+	m_tabpanel.layout();
 }
 
 

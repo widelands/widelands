@@ -38,7 +38,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 		 m_xres * 919 / 1000, m_yres *  11 /   20),
 
 	close_button
-		(this,
+		(this, "close",
 		 m_xres * 3 / 8, m_yres * 9 / 10, m_xres / 4, m_yres * 9 / 200,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_TextView::end_modal, *this, 0,
@@ -81,7 +81,8 @@ FileViewWindow::FileViewWindow
 	(UI::Panel                  & parent,
 	 UI::UniqueWindow::Registry & reg,
 	 std::string          const & filename)
-: UI::UniqueWindow(&parent, &reg, 0, 0, ""), textview(this, 0, 0, 560, 240)
+: UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, ""),
+	textview(this, 0, 0, 560, 240)
 {
 	Profile prof(filename.c_str(), "global", "texts"); // section-less file
 	Section & s = prof.get_safe_section("global");

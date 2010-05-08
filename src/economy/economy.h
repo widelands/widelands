@@ -148,8 +148,8 @@ struct Economy {
 	UI::UniqueWindow::Registry m_optionswindow_registry;
 
 
-	WareList const & get_wares  () {return m_wares;}
-	WareList const & get_workers() {return m_workers;}
+	WareList const & get_wares  () const {return m_wares;}
+	WareList const & get_workers() const {return m_workers;}
 
 	///< called by \ref Cmd_Call_Economy_Balance
 	void balance_requestsupply(uint32_t timerid);

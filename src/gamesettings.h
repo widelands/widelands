@@ -68,6 +68,9 @@ struct GameSettings {
 	/// Name of the selected map
 	std::string mapname;
 	std::string mapfilename;
+	
+	/// Win condition to use
+	std::string win_condition;
 
 	/// Is map a scenario
 	bool scenario;
@@ -126,6 +129,8 @@ struct GameSettingsProvider {
 	virtual void setPlayerNumber  (uint8_t number) = 0;
 	virtual void setPlayerReady   (uint8_t number, bool ready) = 0;
 	virtual bool getPlayerReady   (uint8_t number) = 0;
+	virtual void setWinCondition  (std::string wc) = 0;
+	virtual std::string getWinCondition() = 0;
 
 	struct No_Tribe {};
 	std::string const & getPlayersTribe() {

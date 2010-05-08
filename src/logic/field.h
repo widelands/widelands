@@ -137,12 +137,13 @@ public:
 	Terrains      get_terrains() const throw () {return terrains;}
 	Terrain_Index terrain_d   () const throw () {return terrains.d;}
 	Terrain_Index terrain_r   () const throw () {return terrains.r;}
-	void          set_terrains(const Terrains i) throw () {terrains = i;}
+	void          set_terrains(const Terrains & i) throw () {terrains = i;}
 	void set_terrain
 		(const TCoords<FCoords>::TriangleIndex t, Terrain_Index const i)
 		throw ()
 	{
-		(t == TCoords<FCoords>::D ? terrains.d : terrains.r) = i;
+		if (t == TCoords<FCoords>::D) set_terrain_d(i);
+		else set_terrain_r(i);
 	}
 	void set_terrain_d(Terrain_Index const i) throw () {terrains.d = i;}
 	void set_terrain_r(Terrain_Index const i) throw () {terrains.r = i;}

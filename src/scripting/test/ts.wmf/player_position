@@ -1,0 +1,7 @@
+# Automatically created by Widelands bzr5243[lua] (Debug)
+
+[global]
+packet_version="2"
+player_1="10 10"
+player_2="30 10"
+player_3="50 10"

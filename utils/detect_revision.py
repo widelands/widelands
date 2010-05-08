@@ -26,7 +26,7 @@ try:
 except ImportError:
     __has_bzrlib = False
 
-base_path = p.join(p.dirname(__file__),p.pardir)
+base_path = p.abspath(p.join(p.dirname(__file__),p.pardir))
 
 def check_for_explicit_version():
     """
@@ -65,7 +65,7 @@ def detect_bzr_revision():
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
         run_bzr = lambda subcmd: subprocess.Popen(
-                ["bzr",subcmd], stdout=subprocess.PIPE, cwd=branch_path
+                ["bzr",subcmd], stdout=subprocess.PIPE, cwd=base_path
             ).stdout.read().strip()
         revno = run_bzr("revno")
         nick = run_bzr("nick")

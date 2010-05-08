@@ -1,3 +1,4 @@
+soundfx=../../../sound/farm/ox
 size=big
 output=ox
 
@@ -24,6 +25,7 @@ work=_Work
 return=skipped when economy needs wheat and not economy needs ox
 return=skipped when economy needs water and not economy needs ox
 consume=wheat water
+playFX=../../../sound/farm/ox 192
 animate=working 30000 # animation of feeding the cattles
 recruit=ox
 

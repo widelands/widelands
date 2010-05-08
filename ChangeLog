@@ -1,3 +1,6 @@
+- Removed unused medic code.
+- Reduced healing rate of soldiers.
+
 ### Build 15 rc2
 - Removed registering functionality for metaserver. This is to be compatible
   with future changes to the metaserver.

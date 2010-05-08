@@ -1,19 +1,5 @@
 # Comments are for graphic designers some ideas
 
-[defaults]
-plrclr0_r=2
-plrclr0_g=2
-plrclr0_b=74
-plrclr1_r=2
-plrclr1_g=2
-plrclr1_b=112
-plrclr2_r=2
-plrclr2_g=2
-plrclr2_b=149
-plrclr3_r=2
-plrclr3_g=2
-plrclr3_b=198
-
 [tribe]
 author=_The Widelands Development Team
 name=_Empire
@@ -27,13 +13,15 @@ carrier2=donkey
 name=frontier
 pics=pics/frontier_??.png
 hotspot=1 19
+playercolor=true
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
 name=flag
 pics=pics/flag_??.png
-hotspot=7 39
-fps=8
+hotspot=14 38
+fps=10
+playercolor=true
 
 [immovable types]
 ashes=_Ashes
@@ -47,8 +35,8 @@ resi_coal1=_Resource indicator coal little
 resi_coal2=_Resource indicator coal much
 resi_gold1=_Resource indicator gold little
 resi_gold2=_Resource indicator gold much
-resi_granit1=_Resource indicator granit little
-resi_granit2=_Resource indicator granit much
+resi_granit1=_Resource indicator granite little
+resi_granit2=_Resource indicator granite much
 resi_iron1=_Resource indicator iron little
 resi_iron2=_Resource indicator iron much
 resi_none=_Resource indicator no resource

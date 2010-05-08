@@ -86,7 +86,7 @@ private:
 	struct Follow : public UI::Button {
 		Follow(WatchWindow & parent, uint32_t const h) :
 			UI::Button
-				(&parent,
+				(&parent, "follow",
 				 0, h - 34, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png"),
@@ -149,7 +149,7 @@ private:
 	struct Go_To : public UI::Button {
 		Go_To(WatchWindow & parent, uint32_t const h) :
 			UI::Button
-				(&parent,
+				(&parent, "center_mainview_here",
 				 34, h - 34, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 g_gr->get_picture(PicMod_UI, "pics/menu_goto.png"),
@@ -174,7 +174,7 @@ private:
 			 bool const visible)
 			:
 			UI::Button
-				(&parent,
+				(&parent, "close",
 				 w - 34, h - 34, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 g_gr->get_picture(PicMod_UI, "pics/menu_abort.png"),
@@ -205,7 +205,7 @@ private:
 	struct View_Button : public UI::Button {
 		View_Button(WatchWindow & parent, uint8_t const index) :
 			UI::Button
-				(&parent,
+				(&parent, "view",
 				 74 + (17 * index), 200 - 34, 17, 34, g_gr->get_no_picture(),
 				 "-", std::string(),
 				 false),
@@ -233,7 +233,7 @@ WatchWindow::WatchWindow
 	 Widelands::Coords    const coords,
 	 bool                   const _single_window)
 :
-	UI::Window(&parent, x, y, w, h, _("Watch")),
+	UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
 	mapview   (this, 0, 0, 200, 166, parent),
 	last_visit(game().get_gametime()),
 	single_window(_single_window),

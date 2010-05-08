@@ -12,46 +12,69 @@ shovel=1
 0=setdescription tribe:flax0t
 1=findspace size:any radius:1
 2=walk coords
-3=animation idle 500 # Play a planting animation
+3=animation flaxplanting 2500 # Play a planting animation
 4=plant
-5=animation idle 500
-6=return
+#5=animation flaxplanting 500
+5=return  #6=return
 
 [plantreed]
 0=setdescription tribe:reed0t
 1=findspace size:any radius:1
 2=walk coords
-3=animation idle 500 # Play a planting animation
+3=animation reedplanting 1500 # Play a planting animation
 4=plant
-5=animation idle 500
+5=animation reedplanting 1500
 6=return
 
 [harvestflax]
 0=findobject attrib:grown_flax radius:1
 1=walk object
-2=animation idle 10000
+2=animation harvesting 12000  #4sec animation cycle
 3=object harvest
-4=animation idle 2000
+4=animation harvesting 1
 5=createitem flax
 6=return
 
 [harvestreed]
 0=findobject attrib:grown_reed radius:1
 1=walk object
-2=animation idle 10000
+2=animation harvesting 12000  #4sec animation cycle
 3=object harvest
-4=animation idle 2000 # wait for the tree to disappear
+4=animation harvesting 1 
 5=createitem thatchreed
 6=return
 
 [idle]
 pics=idle_??.png
 hotspot=5 13
+playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=5 13
+hotspot=9 23
+playercolor=true
+fps=10
 
 [walkload]
-dirpics=walk_!!_??.png
-hotspot=5 13
+dirpics=walkload_!!_??.png
+hotspot=9 23
+playercolor=true
+fps=10
+
+[flaxplanting]
+pics=plantflax_??.png
+hotspot=11 23
+playercolor=true
+fps=10
+
+[reedplanting]
+pics=plantreed_??.png
+hotspot=11 23
+playercolor=true
+fps=10
+
+[harvesting]
+pics=harvest_??.png
+hotspot=13 24
+playercolor=true
+fps=5

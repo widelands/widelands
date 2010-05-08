@@ -78,8 +78,7 @@ Text_Block::Text_Block(Text_Block const & src) {
 
 void Text_Parser::parse
 	(std::string                 & text,
-	 std::vector<Richtext_Block> & blocks,
-	 Varibale_Callback const vcb, void * const vcdata)
+	 std::vector<Richtext_Block> & blocks)
 {
 	bool more_richtext_blocks = true;
 	//First while loop parses all richtext blocks (images)
@@ -112,7 +111,7 @@ void Text_Parser::parse
 
 			more_text_blocks =
 				parse_textblock
-					(unparsed_text, block_format, words, line_breaks, vcb, vcdata);
+					(unparsed_text, block_format, words, line_breaks);
 			parse_text_attributes(block_format, new_block);
 
 			new_block.set_words(words);
@@ -128,28 +127,12 @@ bool Text_Parser::parse_textblock
 	(std::string                                      & block,
 	 std::string                                      & block_format,
 	 std::vector<std::string>                         & words,
-	 std::vector<std::vector<std::string>::size_type> & line_breaks,
-	 Varibale_Callback vcb, void * const vcdata)
+	 std::vector<std::vector<std::string>::size_type> & line_breaks)
 {
 	std::string block_text;
 
 	const bool extract_more =
 		extract_format_block(block, block_text, block_format, "<p", ">", "</p>");
-
-	//  serch for map variables
-	for
-		(std::string::size_type offset;
-		 (offset = block_text.find("<variable name=")) != std::string::npos;)
-	{
-		std::string::size_type const end = block_text.find('>');
-		if (end == std::string::npos)
-			log("WARNING: <variable> tag not closed!\n");
-		else {
-			std::string name(block_text.substr(offset + 15, end - (offset + 15)));
-			std::string str = vcb(name, vcdata);
-			block_text.replace(offset, end - offset + 1, str);
-		}
-	}
 
 	//Split the the text because of " "
 	std::vector<std::string> unwrapped_words;

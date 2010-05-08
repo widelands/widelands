@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,15 +17,12 @@
  *
  */
 
-#define DEFINE_LANGUAGES  // So that the language array gets defined
-
 #include "options.h"
 
 #include "constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "languages.h"
 #include "profile/profile.h"
 #include "save_handler.h"
 #include "sound/sound_handler.h"
@@ -50,21 +47,21 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 // Buttons
 	m_advanced_options
-		(this,
+		(this, "advanced_options",
 		 m_xres * 9 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_Options::advanced_options, *this,
 		 _("Advanced Options"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_cancel
-		(this,
+		(this, "cancel",
 		 m_xres * 51 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_Options::end_modal, *this, om_cancel,
 		 _("Cancel"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_apply
-		(this,
+		(this, "apply",
 		 m_xres * 3 / 8, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_Options::end_modal, *this, om_ok,
@@ -234,7 +231,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_remove_replays           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
-	SDL_PixelFormat & fmt = *SDL_GetVideoInfo()->vfmt;
+	// take a copy to not change real video info structure
+	SDL_PixelFormat  fmt = *SDL_GetVideoInfo()->vfmt;
 	fmt.BitsPerPixel = 16;
 	if
 		(SDL_Rect const * const * const modes =
@@ -282,13 +280,48 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	if (not did_select_a_res)
 		m_reslist.select(m_reslist.size() - 1);
 
-	available_languages[0].name = _("System default language");
-	for (uint32_t i = 0; i < NR_LANGUAGES; ++i)
+	// Fill language list
+	m_language_list.add
+		(_("Try system language"), "", // "try", as many translations are missing.
+		 g_gr->get_no_picture(), "" == opt.language);
+
+	m_language_list.add
+		("English", "en",
+		 g_gr->get_no_picture(), "en" == opt.language);
+		 
+	filenameset_t files;
+	Section * s = &g_options.pull_section("global");
+	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
+	Profile ln("txts/languages");
+	s = &ln.pull_section("languages");
+	bool own_selected = "" == opt.language || "en" == opt.language;
+
+	// Add translation directories to the list
+	for
+		(filenameset_t::iterator pname = files.begin();
+		 pname != files.end();
+		 ++pname)
+	{
+		char const * const path = pname->c_str();
+
+		if 
+			(!strcmp(FileSystem::FS_Filename(path), ".") ||
+			 !strcmp(FileSystem::FS_Filename(path), "..") ||
+			 !g_fs->IsDirectory(path))
+			continue;
+
+		char const * const abbrev = FileSystem::FS_Filename(path);
 		m_language_list.add
-			(available_languages[i].name.c_str(),
-			 available_languages[i].abbrev,
-			 g_gr->get_no_picture(),
-			 available_languages[i].abbrev == opt.language);
+			(s->get_string(abbrev, abbrev), abbrev,
+			 g_gr->get_no_picture(), abbrev == opt.language);
+		own_selected |= abbrev == opt.language;
+	}
+	// Add currently used language manually
+	if (!own_selected)
+		m_language_list.add
+			(s->get_string(opt.language.c_str(), opt.language.c_str()), opt.language,
+			 g_gr->get_no_picture(), true);
+		
 }
 
 void Fullscreen_Menu_Options::advanced_options() {
@@ -344,14 +377,14 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 
 // Buttons
 	m_cancel
-		(this,
+		(this, "cancel",
 		 m_xres * 41 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_Advanced_Options::end_modal, *this, om_cancel,
 		 _("Cancel"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_apply
-		(this,
+		(this, "apply",
 		 m_xres / 4,   m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_Advanced_Options::end_modal, *this, om_ok,

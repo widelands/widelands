@@ -20,8 +20,8 @@ worker=cut
 
 [idle]
 pics=b_quarry_i_??.png  # ???
-hotspot=47 45
+hotspot=45 41
 
 [build]
 pics=b_quarry_b_??.png  # ???
-hotspot=48 43
+hotspot=45 41

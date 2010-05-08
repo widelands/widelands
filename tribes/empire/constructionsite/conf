@@ -6,5 +6,10 @@ buildable=no # counterintuitive, but correct: player can't build constructionsit
 vision_range=2
 
 [idle]
-pics=construction_i_??.png  # ???
+pics=construction_i_??.png
 hotspot=5 5
+
+[idle_with_worker]
+pics=idle_with_worker_??.png
+hotspot=33 40
+

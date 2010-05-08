@@ -39,7 +39,7 @@ throw (_wexception)
 
 	try {
 		uint32_t const packet_version = s.get_safe_positive("packet_version");
-		if (packet_version <= CURRENT_PACKET_VERSION) {
+		if (2 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			//  Read all the positions
 			//  This could bring trouble if one player position/ is not set (this
 			//  is possible in the editor), is also -1, -1.
@@ -48,17 +48,9 @@ throw (_wexception)
 			Player_Number const nr_players = map.get_nrplayers();
 			iterate_player_numbers(p, nr_players)
 				try {
-					if (packet_version == 1) {
-						char buf_x[12], buf_y[12];
-						snprintf(buf_x, sizeof(buf_x), "player_%u_x", p);
-						snprintf(buf_y, sizeof(buf_y), "player_%u_y", p);
-						map.set_starting_pos
-							(p, Coords(s.get_int(buf_x), s.get_int(buf_y)));
-					} else {
-						char buffer[10];
-						snprintf(buffer, sizeof(buffer), "player_%u", p);
-						map.set_starting_pos(p, s.get_safe_Coords(buffer, extent));
-					}
+					char buffer[10];
+					snprintf(buffer, sizeof(buffer), "player_%u", p);
+					map.set_starting_pos(p, s.get_safe_Coords(buffer, extent));
 				} catch (_wexception const & e) {
 					throw game_data_error(_("player %u: %s"), p, e.what());
 				}

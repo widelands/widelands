@@ -379,13 +379,13 @@ struct Object_Ptr {
 	Map_Object * get(Editor_Game_Base const &);
 	Map_Object const * get(Editor_Game_Base const & egbase) const;
 
-	bool operator<  (Object_Ptr const other) const throw () {
+	bool operator<  (const Object_Ptr & other) const throw () {
 		return m_serial < other.m_serial;
 	}
-	bool operator== (Object_Ptr const other) const throw () {
+	bool operator== (const Object_Ptr & other) const throw () {
 		return m_serial == other.m_serial;
 	}
-	bool operator!= (Object_Ptr const other) const throw () {
+	bool operator!= (const Object_Ptr & other) const throw () {
 		return m_serial != other.m_serial;
 	}
 

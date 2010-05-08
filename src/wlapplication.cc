@@ -66,9 +66,13 @@
 
 #include "timestring.h"
 
+#include <config.h>
 #include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifndef WIN32
+#include <signal.h>
+#endif
 
 #include <cerrno>
 #include <cstring>
@@ -77,6 +81,10 @@
 #include <stdexcept>
 #include <string>
 #include <ctime>
+
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
 
 #ifdef DEBUG
 #ifndef WIN32
@@ -187,15 +195,12 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	g_fs->PutRightVersionOnTop();
 }
 void WLApplication::setup_homedir() {
-	std::string path = FileSystem::GetHomedir();
-
 	//If we don't have a home directory don't do anything
-	if (path.size()) {
-		RealFSImpl(path).EnsureDirectoryExists(".widelands");
-		path += "/.widelands";
+	if (m_homedir.size()) {
+		//assume some dir exists
 		try {
-			log ("Set home directory: %s\n", path.c_str());
-			g_fs->SetHomeFileSystem(FileSystem::Create(path.c_str()));
+			log ("Set home directory: %s\n", m_homedir.c_str());
+			g_fs->SetHomeFileSystem(FileSystem::Create(m_homedir.c_str()));
 		} catch (FileNotFound_error     const & e) {
 		} catch (FileAccessDenied_error const & e) {
 			log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
@@ -260,7 +265,8 @@ m_gfx_double_buffer    (false),
 #if HAS_OPENGL
 m_gfx_opengl           (false),
 #endif
-m_default_datadirs     (true)
+m_default_datadirs     (true),
+m_homedir(FileSystem::GetHomedir() + "/.widelands")
 {
 	g_fs = new LayeredFileSystem();
 	UI::g_fh = new UI::Font_Handler();
@@ -527,7 +533,10 @@ void WLApplication::handle_input(InputCallback const * cb)
 		while (SDL_PollEvent(&ev)) {
 			switch (ev.type) {
 			case SDL_KEYDOWN:
-				if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
+				// get out of here quickly, overriding playback;
+				// since this is the only key event that works, we don't guard
+				// it by requiring Ctrl to be pressed.
+				if (ev.key.keysym.sym == SDLK_F10)
 					m_should_die = true;
 				break;
 			case SDL_QUIT:
@@ -551,7 +560,8 @@ void WLApplication::handle_input(InputCallback const * cb)
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			if (ev.key.keysym.sym == SDLK_F10) { //  TEMP - get out of here quick
+			if (ev.key.keysym.sym == SDLK_F10 &&
+				(get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL))) { //  get out of here quick
 				if (ev.type == SDL_KEYDOWN)
 					m_should_die = true;
 				break;
@@ -612,8 +622,6 @@ void WLApplication::handle_input(InputCallback const * cb)
 			break;
 
 		case SDL_MOUSEMOTION:
-			// All the interesting stuff is now in Sys_PollEvent()
-
 			m_mouse_position = Point(ev.motion.x, ev.motion.y);
 
 			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)
@@ -759,12 +767,18 @@ bool WLApplication::init_settings() {
 	g_options.read("config", "global");
 	Section & s = g_options.pull_section("global");
 
-	// Set Locale and grab default domain
-	i18n::set_locale(s.get_string("language", ""));
-	i18n::grab_textdomain("widelands");
-
 	//then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
+
+	// Set Locale and grab default domain
+	i18n::set_locale(s.get_string("language", ""));
+
+	std::string localedir = s.get_string("localedir", INSTALL_LOCALEDIR);
+	i18n::set_localedir(find_relative_locale_path(localedir));
+
+	i18n::grab_textdomain("widelands");
+
+	log("using locale %s\n", i18n::get_locale().c_str());
 
 	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
@@ -830,6 +844,44 @@ void WLApplication::shutdown_settings()
 	assert(journal);
 	delete journal;
 	journal = 0;
+}
+
+/**
+ * In case that the localedir is defined in a relative manner to the executable file.
+ * Track down the executable file and append the localedir.
+ */
+std::string WLApplication::find_relative_locale_path(std::string localedir)
+{
+#ifdef __APPLE__
+	if (localedir[0] != '/') {
+		uint32_t buffersize = 0;
+		_NSGetExecutablePath(NULL,&buffersize);
+		char buffer[buffersize];
+		int32_t check = _NSGetExecutablePath(buffer,&buffersize);
+		if (check != 0) {
+			throw wexception (_("could not find the path of the main executable"));
+		}
+		std::string executabledir = buffer;
+		executabledir.resize(executabledir.find_last_of('/') + 1);
+		executabledir+= localedir;
+		log ("localedir: %s\n", executabledir.c_str());
+		return executabledir;
+	}
+#elif linux
+	if (localedir[0] != '/') {
+		char buffer[PATH_MAX];
+		size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
+		if (size <= 0) {
+			throw wexception (_("could not find the path of the main executable"));
+		}
+		std::string executabledir(buffer, size);
+		executabledir.resize(executabledir.find_last_of('/') + 1);
+		executabledir += localedir;
+		log ("localedir : %s\n", executabledir.c_str());
+		return executabledir;
+	}
+#endif
+	return localedir;
 }
 
 /**
@@ -940,11 +992,18 @@ bool WLApplication::init_hardware() {
 /**
  * Shut the hardware down: stop graphics mode, stop sound handler
  */
+
+void terminate (int) {
+	 log
+		  (_("Waited 5 seconds to close audio. problems here so killing widelands."
+			  " update your sound driver and/or SDL to fix this problem\n"));
+#ifndef WIN32
+	raise(SIGKILL);
+#endif
+}
+
 void WLApplication::shutdown_hardware()
 {
-	g_sound_handler.shutdown();
-	SDL_QuitSubSystem(SDL_INIT_AUDIO);
-
 	if (g_gr)
 		wout
 			<<
@@ -957,7 +1016,18 @@ void WLApplication::shutdown_hardware()
 	init_graphics(0, 0, 0, false, false, false);
 #endif
 
-	SDL_Quit();
+	SDL_QuitSubSystem
+		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
+
+#ifndef WIN32
+	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
+	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
+	signal(SIGALRM, terminate);
+	alarm(5);
+#endif
+
+	g_sound_handler.shutdown();
+
 }
 
 /**
@@ -1074,6 +1144,11 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		g_fs->AddFileSystem(FileSystem::Create(m_commandline["datadir"]));
 		m_default_datadirs = false;
 		m_commandline.erase("datadir");
+	}
+	if (m_commandline.count("homedir")) {
+		log ("Adding home directory: %s\n", m_commandline["homedir"].c_str());
+		m_homedir = m_commandline["homedir"];
+		m_commandline.erase("homedir");
 	}
 
 	if (m_commandline.count("double")) {
@@ -1219,13 +1294,20 @@ void WLApplication::show_usage()
 			 "                      terminal output\n"
 			 " --datadir=DIRNAME    Use specified direction for the widelands\n"
 			 "                      data files\n"
-			 " --record=FILENAME    Record all events to the given filename for\n"
+			 " --homedir=DIRNAME    Use specified directory for widelands config\n"
+			 "                      files, savegames and replays\n")
+#ifdef linux
+		<< _("                      Default is ~/.widelands\n")
+#endif
+		<< _
+			(" --record=FILENAME    Record all events to the given filename for\n"
 			 "                      later playback\n"
 			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
 			 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 			 "                      of using the SDL\n"
 			 " --language=[de_DE|sv_SE|...]\n"
 			 "                      The locale to use.\n"
+			 " --localedir=DIRNAME  Use DIRNAME as location for the locale\n"
 			 " --remove_syncstreams=[true|false]\n"
 			 "                      Remove syncstream files on startup\n"
 			 " --remove_replays=[...]\n"
@@ -1251,7 +1333,7 @@ void WLApplication::show_usage()
 #endif
 		<<
 		_
-			( " --speed_of_new_game  The speed that the new game will run at\n"
+			(" --speed_of_new_game  The speed that the new game will run at\n"
 			 "                      when started, with factor 1000 (0 is pause,\n"
 			 "                      1000 is normal speed).\n"
 			 " --auto_roadbuild_mode=[yes|no]\n"
@@ -1317,7 +1399,7 @@ void WLApplication::show_usage()
 		<<
 		_
 			("Bug reports? Suggestions? Check out the project website:\n"
-			 "        http://www.sourceforge.net/projects/widelands\n\n"
+			 "        https://launchpad.net/widelands\n\n"
 			 "Hope you enjoy this game!\n\n");
 }
 
@@ -1422,6 +1504,19 @@ void WLApplication::mainmenu()
 
 		try {
 			switch (mm.run()) {
+			case Fullscreen_Menu_Main::mm_playtutorial:
+				{
+					Widelands::Game game;
+					try {
+						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
+					} catch (Widelands::game_data_error const & e) {
+						log("Scenario not started: Game data error: %s\n", e.what());
+					} catch (...) {
+						emergency_save(game);
+						throw;
+					}
+				}
+				break;
 			case Fullscreen_Menu_Main::mm_singleplayer:
 				mainmenu_singleplayer();
 				break;
@@ -1727,7 +1822,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		return (!s.scenario & (number != s.playernum));
 	}
 	virtual bool canChangePlayerTribe(uint8_t) {return !s.scenario;}
-	virtual bool canChangePlayerInit (uint8_t) {return true;}
+	virtual bool canChangePlayerInit (uint8_t) {return !s.scenario;}
 
 	virtual bool canLaunch() {
 		return s.mapname.size() != 0 && s.players.size() >= 1;
@@ -1860,6 +1955,9 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		//a single player is always ready
 		return true;
 	}
+
+	virtual std::string getWinCondition() { return s.win_condition; }
+	virtual void setWinCondition(std::string wc) { s.win_condition = wc; }
 
 private:
 	GameSettings s;
