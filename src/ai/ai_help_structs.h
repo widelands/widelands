@@ -201,18 +201,20 @@ struct BuildingObserver {
 		MINE
 	}                                 type;
 
-	bool                              is_basic;
+	bool                              is_basic; // is a "must" to have for the ai
 	bool                              prod_build_material;
-	bool                              recruitment;
+	bool                              recruitment; // is "producing" workers?
 
 	bool                              is_buildable;
 
-	bool                              need_trees;
-	bool                              need_stones;
-	bool                              need_water;
+	bool                              need_trees;  // lumberjack = true
+	bool                              need_stones; // quarry = true
+	bool                              need_water;  // fisher, fish_breeder = true
 
-	int32_t                           mines;
-	uint16_t                          mines_percent;
+	bool                              unoccupied;  // >= 1 unoccupied ?
+
+	int32_t                           mines;       // type of resource it mines
+	uint16_t                          mines_percent; // % of res it can mine
 
 	uint32_t                          current_stats;
 
