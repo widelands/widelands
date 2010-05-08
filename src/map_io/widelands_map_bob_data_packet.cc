@@ -128,8 +128,6 @@ throw (_wexception)
 				for (uint16_t x = 0; x < map.get_width(); ++x) {
 					uint32_t const nr_bobs = fr.Unsigned32();
 
-					assert(!map[Coords(x, y)].get_first_bob());
-
 					for (uint32_t i = 0; i < nr_bobs; ++i)
 						ReadBob(fr, egbase, skip, mol, Coords(x, y));
 				}
@@ -167,6 +165,12 @@ throw (_wexception)
 
 			map.find_bobs //  FIXME clean up this mess!
 				(Area<FCoords>(map.get_fcoords(Coords(x, y)), 0), &bobarr);
+
+			for(uint32_t i = bobarr.size(); i > 0; --i) {
+				if (bobarr[i-1]->has_new_save_support())
+					bobarr.erase(bobarr.begin() + i - 1);
+			}
+
 			fw.Unsigned32(bobarr.size());
 
 			for (uint32_t i = 0; i < bobarr.size(); ++i) {

@@ -74,12 +74,27 @@ private:
 	void roam_update   (Game &, State &);
 	void program_update(Game &, State &);
 
-private:
 	bool run_remove(Game &, State &, Critter_BobAction const &);
 
-private:
 	static Task const taskRoam;
 	static Task const taskProgram;
+
+	// saving and loading
+protected:
+	struct Loader : Bob::Loader {
+		Loader();
+
+		virtual const Task * get_task(const std::string& name);
+		virtual const BobProgramBase * get_program(const std::string& name);
+	};
+
+public:
+	virtual bool has_new_save_support() {return true;}
+
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+
+	static Map_Object::Loader * load
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
 
 }

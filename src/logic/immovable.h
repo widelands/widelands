@@ -186,7 +186,7 @@ protected:
 	// Load/save support
 protected:
 	struct Loader : public BaseImmovable::Loader {
-		virtual void load(FileRead &, uint8_t version);
+		void load(FileRead &, uint8_t version);
 		virtual void load_pointers();
 		virtual void load_finish();
 	};

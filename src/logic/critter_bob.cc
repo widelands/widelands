@@ -22,8 +22,10 @@
 #include "critter_bob_program.h"
 #include "field.h"
 #include "game.h"
+#include "game_data_error.h"
 #include "helper.h"
 #include "profile/profile.h"
+#include "tribe.h"
 #include "wexception.h"
 
 #include <cstdio>
@@ -320,6 +322,82 @@ void Critter_Bob::init_auto_task(Game & game) {
 
 Bob & Critter_Bob_Descr::create_object() const {
 	return *new Critter_Bob(*this);
+}
+
+/*
+==============================
+
+Load / Save implementation
+
+==============================
+*/
+
+#define CRITTER_SAVEGAME_VERSION 1
+
+Critter_Bob::Loader::Loader()
+{
+}
+
+const Bob::Task* Critter_Bob::Loader::get_task(const std::string& name)
+{
+	if (name == "roam") return &taskRoam;
+	if (name == "program") return &taskProgram;
+	return Bob::Loader::get_task(name);
+}
+
+const BobProgramBase* Critter_Bob::Loader::get_program(const std::string& name)
+{
+	Critter_Bob& critter = get<Critter_Bob>();
+	return critter.descr().get_program(name);
+}
+
+
+Map_Object::Loader* Critter_Bob::load(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+{
+	std::auto_ptr<Loader> loader(new Loader);
+
+	try {
+		// The header has been peeled away by the caller
+
+		uint8_t const version = fr.Unsigned8();
+		if (1 <= version && version <= CRITTER_SAVEGAME_VERSION) {
+			std::string owner = fr.CString();
+			std::string name = fr.CString();
+			const Critter_Bob_Descr * descr = 0;
+
+			if (owner == "world") {
+				descr = dynamic_cast<const Critter_Bob_Descr*>(egbase.map().world().get_bob_descr(name));
+			} else {
+				egbase.manually_load_tribe(owner);
+
+				if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
+					descr = dynamic_cast<const Critter_Bob_Descr*>(tribe->get_bob_descr(name));
+			}
+
+			if (!descr)
+				throw game_data_error("undefined critter %s/%s", owner, name);
+
+			loader->init(egbase, mol, descr->create_object());
+			loader->load(fr);
+		} else
+			throw game_data_error(_("unknown/unhandled version %u"), version);
+	} catch (const std::exception & e) {
+		throw wexception(_("loading critter: %s"), e.what());
+	}
+
+	return loader.release();
+}
+
+void Critter_Bob::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+{
+	fw.Unsigned8(header_Critter);
+	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);
+
+	std::string owner = descr().get_owner_tribe() ? descr().get_owner_tribe()->name() : "world";
+	fw.CString(owner);
+	fw.CString(descr().name());
+
+	Bob::save(egbase, mos, fw);
 }
 
 }

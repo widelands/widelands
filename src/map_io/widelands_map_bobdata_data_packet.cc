@@ -717,6 +717,11 @@ throw (_wexception)
 			map.find_bobs
 				(Area<FCoords>(map.get_fcoords(Coords(x, y)), 0), &bobarr);
 
+			for(uint32_t i = bobarr.size(); i > 0; --i) {
+				if (bobarr[i-1]->has_new_save_support())
+					bobarr.erase(bobarr.begin() + i - 1);
+			}
+
 			for (uint32_t i = 0; i < bobarr.size(); ++i) {
 				Bob        const & bob   = *bobarr[i];
 				Bob::Descr const & descr = bob.descr();

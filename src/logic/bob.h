@@ -20,6 +20,7 @@
 #ifndef BOB_H
 #define BOB_H
 
+#include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/encodedata.h"
 #include "point.h"
@@ -388,18 +389,28 @@ private:
 
 	// saving and loading
 protected:
-	class Loader {
+	class Loader : public Map_Object::Loader {
 	public:
 		Loader();
 
-		virtual void load(FileRead &, uint8_t version);
+		void load(FileRead &);
 		virtual void load_pointers();
 		virtual void load_finish();
+
+	protected:
+		virtual const Task * get_task(const std::string& name);
+		virtual const BobProgramBase * get_program(const std::string& name);
+
+	private:
+		struct LoadState {
+			uint32_t objvar1;
+			Route::LoadData route;
+		};
+
+		std::vector<LoadState> states;
 	};
 
 public:
-	virtual bool has_new_save_support() {return false;}
-
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 	// Pure Bobs cannot be loaded
 };
@@ -407,4 +418,3 @@ public:
 }
 
 #endif
-

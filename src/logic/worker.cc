@@ -1242,8 +1242,11 @@ const Bob::Task Worker::taskTransfer = {
  */
 void Worker::start_task_transfer(Game & game, Transfer * t)
 {
-	// hackish override for gowarehouse
-	if (State * const state = get_state(taskGowarehouse)) {
+	// Hackish override for receiving transfers during gowarehouse,
+	// and to correctly handle the stack during loading of games
+	// (in that case, the transfer task already exists on the stack
+	// when this is called).
+	if (get_state(taskGowarehouse) || get_state(taskTransfer)) {
 		assert(!m_transfer);
 
 		m_transfer = t;
@@ -1288,7 +1291,7 @@ void Worker::transfer_update(Game & game, State & state) {
 		// The caller requested a route update, or the previously calulcated route
 		// failed.
 		// We will recalculate the route on the next update().
-		if (signal == "road" || signal == "fail") {
+		if (signal == "road" || signal == "fail" || signal == "transfer") {
 			molog("[transfer]: Got signal '%s' -> recalculate\n", signal.c_str());
 
 			signal_handled();

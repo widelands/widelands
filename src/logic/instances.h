@@ -60,6 +60,7 @@ struct Map_Object_Descr {
 			throw Animation_Nonexistent();
 		return it->second;
 	}
+	uint32_t get_animation(const std::string& name) const {return get_animation(name.c_str());}
 
 	uint32_t main_animation() const throw () {
 		return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
@@ -237,7 +238,8 @@ public:
 		header_Immovable = 2,
 		header_Legacy_Battle = 3,
 		header_Legacy_AttackController = 4,
-		header_Battle = 5
+		header_Battle = 5,
+		header_Critter = 6
 	};
 
 	/**
@@ -276,7 +278,7 @@ public:
 		}
 
 	protected:
-		virtual void load(FileRead &, uint8_t version);
+		void load(FileRead &);
 
 	public:
 		virtual void load_pointers();
