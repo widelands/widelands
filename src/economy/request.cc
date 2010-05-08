@@ -178,13 +178,13 @@ void Request::Read
 					trans->set_idle(fr.Unsigned8());
 					m_transfers.push_back(trans);
 
-					if (version<5)
+					if (version < 5)
 						if (fr.Unsigned8())
 							m_requirements.Read (fr, game, mol);
 				} catch (_wexception const & e) {
 					throw wexception("transfer %u: %s", i, e.what());
 				}
-			if (version>=5)
+			if (version >= 5)
 				m_requirements.Read (fr, game, mol);
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);

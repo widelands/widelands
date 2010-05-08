@@ -43,21 +43,21 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 
 // Buttons
 	m_back
-		(this,
+		(this, "back",
 		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_LoadGame::end_modal, *this, 0,
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_ok
-		(this,
+		(this, "ok",
 		 m_xres * 71 / 100, m_yres * 15 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_LoadGame::clicked_ok, *this,
 		 _("OK"), std::string(), false, false,
 		 m_fn, m_fs),
 	m_delete
-		(this,
+		(this, "delete",
 		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_LoadGame::clicked_delete, *this,
@@ -174,7 +174,9 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 			gl.preload_game(gpdp);
 
 			m_list.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
-		} catch (_wexception const &) {} //  we simply skip illegal entries
+		} catch (_wexception const & e) {
+			//  we simply skip illegal entries
+		}
 	}
 
 	if (m_list.size())

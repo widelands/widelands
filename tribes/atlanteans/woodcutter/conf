@@ -18,16 +18,16 @@ saw=1
 
 [sawing]
 pics=sawing_??.png
-hotspot=5 13
+hotspot=6 22
 
 [idle]
 pics=idle_??.png
-hotspot=5 13
+hotspot=6 22
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=5 13
+hotspot=6 22
 
 [walkload]
 dirpics=walkload_!!_??.png
-hotspot=5 13
+hotspot=6 22

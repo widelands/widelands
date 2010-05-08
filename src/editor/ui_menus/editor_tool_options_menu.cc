@@ -25,7 +25,8 @@ Editor_Tool_Options_Menu::Editor_Tool_Options_Menu
 	 uint32_t const width, uint32_t const height,
 	 char                 const * const title)
 	:
-	UI::UniqueWindow(&parent, &registry, width, height, title),
+	UI::UniqueWindow
+		(&parent, "tool_options_menu", &registry, width, height, title),
 	m_current_pointer(parent.tools.current_pointer)
 {
 	if (get_usedefaultpos())

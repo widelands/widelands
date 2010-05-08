@@ -154,7 +154,7 @@ Building_Descr::Building_Descr
 					("[buildcost] \"%s=%s\": %s",
 					 val->get_name(), val->get_string(), e.what());
 			}
-	} else if(m_global) {
+	} else if (m_global) {
 		//  get build icon for global buildings (for statistics window)
 		m_buildicon_fname  = directory;
 		m_buildicon_fname += "/menu.png";
@@ -190,7 +190,7 @@ Building & Building_Descr::create
 	Building & b = construct ? create_constructionsite(old) : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	if(loading) {
+	if (loading) {
 		b.Building::init(egbase);
 		return b;
 	}
@@ -288,7 +288,7 @@ Building::~Building()
 
 void Building::load_finish(Editor_Game_Base & egbase) {
 	Leave_Queue & queue = m_leave_queue;
-	for (wl_range<Leave_Queue> i(queue);i;)
+	for (wl_range<Leave_Queue> i(queue); i;)
 	{
 		Worker & worker = *i->get(egbase);
 		{
@@ -456,6 +456,32 @@ By default, burn always.
 bool Building::burn_on_destroy()
 {
 	return true;
+}
+
+
+/**
+ * Return all positions on the map that we occupy
+ */
+BaseImmovable::PositionList Building::get_positions
+	(const Editor_Game_Base & egbase) const throw ()
+{
+	PositionList rv;
+
+	rv.push_back(m_position);
+	if (get_size() == BIG) {
+		Map & map = egbase.map();
+		Coords neighb;
+
+		map.get_ln(m_position, &neighb);
+		rv.push_back(neighb);
+
+		map.get_tln(m_position, &neighb);
+		rv.push_back(neighb);
+
+		map.get_trn(m_position, &neighb);
+		rv.push_back(neighb);
+	}
+	return rv;
 }
 
 

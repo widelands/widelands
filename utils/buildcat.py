@@ -15,6 +15,7 @@
 ##############################################################################
 
 import confgettext
+from lua_xgettext import Lua_GetText
 from glob import glob
 import os
 import re
@@ -38,12 +39,18 @@ MAINPOTS = [( "maps/maps", ["../../maps/*/elemental", "../../campaigns/cconfig"]
                           "../../txts/developers",
                           "../../txts/editor_readme",
                           "../../txts/tips/*.tip"] ),
-            ( "widelands/widelands", ["../../src/*.cc",
+            ( "widelands/widelands", [
+                            "../../src/*.cc",
                             "../../src/*/*.cc",
                             "../../src/*/*/*.cc",
                             "../../src/*.h",
                             "../../src/*/*.h",
-                            "../../src/*/*/*.h"] ) ]
+                            "../../src/*/*/*.h",
+            ] ),
+            ( "win_conditions/win_conditions", [
+                "../../scripting/win_conditions/*.lua",
+            ]),
+]
 
 
 # This defines the rules for iterative generation of catalogs. This allows
@@ -62,11 +69,18 @@ MAINPOTS = [( "maps/maps", ["../../maps/*/elemental", "../../campaigns/cconfig"]
 ITERATIVEPOTS = [
     ("scenario_%(name)s/scenario_%(name)s", "campaigns/",
          ["../../campaigns/%(name)s/e*",
-          "../../campaigns/%(name)s/objective"]
+          "../../campaigns/%(name)s/objective",
+          "../../campaigns/%(name)s/scripting/*.lua"
+         ]
+    ),
+    ("map_%(name)s/map_%(name)s", "maps/",
+         [ "../../maps/%(name)s/scripting/*.lua", ]
     ),
     ("tribe_%(name)s/tribe_%(name)s", "tribes/",
         ["../../tribes/%(name)s/conf",
-         "../../tribes/%(name)s/*/conf"]
+         "../../tribes/%(name)s/*/conf",
+         "../../tribes/%(name)s/scripting/*.lua",
+    ]
     ),
     ("world_%(name)s/world_%(name)s", "worlds/",
      ["../../worlds/%(name)s/*conf", "../../worlds/%(name)s/*/conf"]
@@ -138,12 +152,27 @@ def do_makedirs( dirs ):
 def do_compile( potfile, srcfiles ):
         files = []
         for i in srcfiles:
-                files += glob(i)
+            files += glob(i)
+        files = set(files)
 
-        catalog = confgettext.parse_conf(files)
+        lua_files = set([ f for f in files if
+            os.path.splitext(f)[-1].lower() == '.lua' ])
+        conf_files = files - lua_files
+
+        l = Lua_GetText()
+        for fname in lua_files:
+            l.parse(open(fname, "r").read(), fname)
+
+        l.merge(confgettext.parse_conf(conf_files))
+
+        if not l.found_something_to_translate:
+            return False
+
         file = open(potfile, "w")
-        file.write(catalog)
+        file.write(str(l))
         file.close()
+        return True
+
 
 
 ##############################################################################
@@ -239,21 +268,26 @@ def do_update_potfiles():
 
         # Generate .pot catalogs
         for pot, srcfiles in potfiles:
-                path = os.path.normpath("po/" + os.path.dirname(pot))
-                do_makedirs(path)
-                oldcwd = os.getcwd()
-                os.chdir(path)
-                potfile = os.path.basename(pot) + '.pot'
+            pot = pot.lower()
+            path = os.path.normpath("po/" + os.path.dirname(pot))
+            do_makedirs(path)
+            oldcwd = os.getcwd()
+            os.chdir(path)
+            potfile = os.path.basename(pot) + '.pot'
+            if pot.endswith('widelands'):
+                # This catalogs can be built with xgettext
+                do_compile_src(potfile , srcfiles )
+                succ = True
+            else:
+                succ = do_compile(potfile, srcfiles)
 
+            os.chdir(oldcwd)
+
+            if succ:
                 print("\tpo/%s.pot" % pot)
+            else:
+                os.rmdir(path)
 
-                if potfile == 'widelands.pot':
-                        # This catalogs can be built with xgettext
-                        do_compile_src( potfile, srcfiles )
-                else:
-                        do_compile( potfile, srcfiles )
-
-                os.chdir(oldcwd)
 
         print("")
 

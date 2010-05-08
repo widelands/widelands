@@ -1,0 +1,11 @@
+# Automatically created by Widelands bzr5243[lua] (Debug)
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="80"
+nr_players="3"
+world="greenland"
+name="00Test"
+author="Unknown"
+descr="no description defined"

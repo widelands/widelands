@@ -1,0 +1,10 @@
+[global]
+packet_version=1
+map_w=64
+map_h=64
+nr_players=2
+world=greenland
+name=_"Tutorial01"
+author="Winterwind, SirVer, Nasenbaer"
+descr=_"Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
+background="tribes/barbarians/pics/campmap-tut1+2.jpg"

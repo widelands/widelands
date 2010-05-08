@@ -1,19 +1,20 @@
 # Widelands po/gl_ES/campaigns/emp02.wmf.po
 # Copyright (C) 2007 Widelands Development Team
-# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
 #
+# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:15+0000\n"
-"Last-Translator: Peter Schwanemann <Unknown>\n"
-"Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-10 17:27+0000\n"
+"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
+"Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-04-11 04:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -21,14 +22,18 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Tutorial do Imperio 2: Un asentamento cada o exilo"
+msgstr "Titorial do imperio 2 ─ Un asentamento cara o exilio"
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
 "Finally the ship was repaired, so Lutius and his people again went on the "
 "quest to find a good place for a new beginning. Only few days later they "
-"land on a green, mediterranean island, looking like paradise."
+"land on a green, Mediterranean island, looking like paradise."
 msgstr ""
+"Por fin se reparou o barco, así que Lutius e os seus retomaron o seu "
+"obxectivo de atopar un bo lugar para comezar de cero. Poucos días despois "
+"soltaron áncoras nunha illa mediterránea completamente verde, case "
+"paradisíaca."
 
 #: ../../campaigns/emp02.wmf/event:109
 #: ../../campaigns/emp02.wmf/event:136
@@ -51,6 +56,12 @@ msgid ""
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us.\" "
 msgstr ""
+" «Por fin! Esta illa semella ideal para nós, é un regalo dos deuses para min "
+"e os meus.<br /> Polo de agora só ollamos unha pequena parte da illa, pero "
+"só esta parte xa me está aclarando a mente. Sinto coma se atoparamos un "
+"tesouro de valor incalculable, un paraíso.<br /> Nesta illa comezaremos unha "
+"nova vida. Levantaremos un asentamento para o exilio, un novo fogar para "
+"todos e cada un de nós.» "
 
 #: ../../campaigns/emp02.wmf/event:113
 msgid "A new island"
@@ -67,11 +78,22 @@ msgid ""
 "These forests should last forever, so we really should build a forester's "
 "house too.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «En canto Saledus e mais eu atravesamos estes marabillosos bosques do "
+"norte, tivemos a sensación de que o noso futuro acababa de comezar. Estas "
+"terras son moi pacíficas, e preciosas. Podería pasar nelas toda a miña "
+"vida.<br /> Pero aínda queda moito para iso! Polo de agora, debemos "
+"concentrarnos no presente, e construír un par de casas de leñador e unha "
+"serraría para conseguir algúns materiais de construción básicos.<br /> Pero "
+"non debemos esquecer preservar este regalo da natureza. Estes bosques "
+"deberían perdurar polos tempos dos tempos, polo que tamén deberiamos "
+"construír unha casa para o forestal.»<br /> <br /> -- NOVO OBXECTIVO --<br "
+"/> "
 
 #: ../../campaigns/emp02.wmf/event:139
 #: ../../campaigns/emp02.wmf/objective:9
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
 msgstr ""
+"* Constrúe tres casas para leñadores, unha para un forestal e unha serraría."
 
 #: ../../campaigns/emp02.wmf/event:141
 msgid "The green forests"
@@ -86,11 +108,17 @@ msgid ""
 "to build strong, luxurious buildings, like those we were accustomed to in "
 "Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Máis adiante, descendín cara as rochas do sur e busquei un lugar no que "
+"podermos levantar unha canteira da que obter pedra para os nosos edificios "
+"máis grandes.<br />Volvin sentir coma se estivese no paraíso entre as rochas "
+"había mármore. Semella que pronto poderemos construír edificios resistentes "
+"de luxo, coma aqueles aos que estabamos afeitos en Fremil.»<br /> <br /> -- "
+"NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/emp02.wmf/event:172
 #: ../../campaigns/emp02.wmf/objective:17
 msgid "* Build a quarry to the south of your headquarters."
-msgstr "* Construe unha canteira ó sur do teu cuartel xeral."
+msgstr "* Constrúe unha canteira ó sur do teu cuartel xeral."
 
 #: ../../campaigns/emp02.wmf/event:174
 msgid "The rocks"
@@ -101,6 +129,9 @@ msgid ""
 " \"Good news! Today our wood economy was completed. Now we can be sure to "
 "have enough wood for our future building projects.\" "
 msgstr ""
+" «Boas novas! A nosa industria da madeira xa está en marcha. Agora podemos "
+"asegurar o noso subministro de madeira para os nosos futuros proxectos "
+"arquitectónicos.» "
 
 #: ../../campaigns/emp02.wmf/event:194
 msgid "Wood for the colony"
@@ -111,6 +142,8 @@ msgid ""
 " \"Great, today the building of the quarry was completed. Now we get enough "
 "stone to construct larger buildings.\" "
 msgstr ""
+" «Perfecto, hoxe rematouse a construción da canteira. Agora disporemos de "
+"pedra abondo para construír meirandes edificios» "
 
 #: ../../campaigns/emp02.wmf/event:209
 msgid "Stone for the colony"
@@ -132,11 +165,19 @@ msgid ""
 "and to build some barracks or sentries around our colony.\"<br><br>-- NEW "
 "OBJECTIVE --<br> "
 msgstr ""
+" «Saúdos, Lutius. Non quero alarmar a ninguén, pero descubrín algo que me "
+"ten bastante preocupado e intranquilo. Cando fun ás praias do sur atopei os "
+"restos doutra embarcación. Non sei se iso é o único que queda del. En "
+"calquera caso, os restos semellan recentes.<br /> Pode que aos que viaxaban "
+"nesa embarcación os collese a mesma tormenta que nos levou a nós a Malac' "
+"Mor, e os levase ata esta illa.<br /> Rógoche que sexas precavido e "
+"constrúas algún cuartel ou sentinelas ao redor da nosa colonia.»<br /> <br "
+"/>  -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/emp02.wmf/event:241
 #: ../../campaigns/emp02.wmf/objective:25
 msgid "* Build some barracks and sentries around the colony."
-msgstr ""
+msgstr "* Constrúe algún cuartel e sentinelas ao redor da colonia."
 
 #: ../../campaigns/emp02.wmf/event:243
 msgid "Dangerous shipparts"
@@ -157,11 +198,20 @@ msgid ""
 "expand to that mountain and start mining marble.\"<br><br>-- NEW OBJECTIVE --"
 "<br> "
 msgstr ""
+" «Lutius, teño noticias para ti:<br /> Ao ir ao leste, atopei unha montaña "
+"máis grande.<br /> Non estou completamente seguro ─debería confirmalo o "
+"xeólogo─ pero coido que poderíamos conseguir mármore dalgunhas partes da "
+"montaña.<br /> Sería unha boa fonte para manter o noso subministro de "
+"mármore de calidade, alén das reducidas cantidades de mármore presentes na "
+"canteira. Pode que estiveses no certo ao dicir que esta illa era coma o "
+"paraíso.<br /> Expandámonos cara esa montala e comecemos picar mármore.»<br "
+"/> <br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/emp02.wmf/event:279
 #: ../../campaigns/emp02.wmf/objective:33
 msgid "* Expand to the east, to start mining marble from the mountain."
 msgstr ""
+"* Expándete cara o leste, para comezar a extracción de mármore da montaña."
 
 #: ../../campaigns/emp02.wmf/event:281
 msgid "Marble on the mountain"
@@ -169,7 +219,7 @@ msgstr "Mármore na montaña"
 
 #: ../../campaigns/emp02.wmf/event:321
 msgid "Saledus is amazed"
-msgstr ""
+msgstr "Saledus está abraiado"
 
 #: ../../campaigns/emp02.wmf/event:323
 msgid ""
@@ -182,6 +232,14 @@ msgid ""
 "stonemason, who cuts columns from marble.<br> After all, now we can begin "
 "living as we did in Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Por todos os deuses, isto si que é sorte! Hai outras dúas montañas, e "
+"semella que unha está chea de carbón e a outra de mineral de ferro. "
+"Deberiamos comezar a construír minas de mineral de ferro e carbón (ou polo "
+"menos produtores de carbón vexetal), forxas e ferrerías de todo tipo.<br /> "
+"Aínda así, para estes edificios máis grandes necesitamos mellores materiais. "
+"Así que hai que construír<br /> unha canteira, cun canteiro que extraia as "
+"columnas de mármore.<br /> Por fin podemos comezar a vivir tal como o "
+"faciamos en Fremil.»<br /> <br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/emp02.wmf/event:324
 #: ../../campaigns/emp02.wmf/objective:41
@@ -190,6 +248,9 @@ msgid ""
 "infrastructure (coal mine and / or charcoal burner, iron ore mine, "
 "toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr ""
+"* Constrúe unha canteira e a continuación unha infraestrutura completa de "
+"minería e produción (mina de carbón e/ou produtor de carbón vexetal, mina de "
+"mineral de ferro, forxa e ferrarías de todo tipo)."
 
 #: ../../campaigns/emp02.wmf/event:326
 msgid "Further mountains"
@@ -209,6 +270,13 @@ msgid ""
 "about helping them out?<br> I can't tell you what exactly we need... but "
 "here are my recommendations:\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Bos días, Lutius, desculpa o meu criticismo, pero paréceme que esqueciches "
+"unha cousa.<br /> Construír minas está ben e é unha boa idea, faranos a vida "
+"máis cómoda,<br /> pero aos traballadores das minas non lles gusta a "
+"situación actual. Teñen que traballar duro e non teñen tempo de prepararse "
+"algo de comer eles mesmos.<br />Que che parece se lles botamos unha man?<br "
+"/> Non che podo dicir que é o que necesitamos ou deixamos de necesitar... "
+"pero teño algunhas recomendacións:»<br /> <br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/emp02.wmf/event:370
 #: ../../campaigns/emp02.wmf/objective:49
@@ -224,6 +292,17 @@ msgid ""
 "wine and all mines need at least rations, which are produced out of bread OR "
 "meat OR fish."
 msgstr ""
+"* Para producir comida substanciosa para os mineiros poderiamos construír "
+"unha taberna. Para subministrarlles bebidas boas e fortes, poderiamos "
+"levantar unha cervexaría ou unha bodega.<br /> Por suposto isto implica que "
+"precisemos máis recursos para a preparación da comida, coma pescado, carne "
+"ou pan.<br /> Para conseguirmos estes víveres, será necesaria a construción "
+"dunha peixaría, unha granxa, un muíño e unha panadería.<br /> Quizais tamén "
+"precisemos dunha casa para un cazador,<br/> un cortello, un viñedo e algúns "
+"pozos.<br /> Ti dedides o que queres construír.<br />Pero lembra que as "
+"minas de mineral de ferro e carbón precisan cervexa, as de mármore e ouro "
+"precisan viño e todas elas precisan racións, que se obteñen ben de peixe, "
+"ben de carne ou ben de pan."
 
 #: ../../campaigns/emp02.wmf/event:372
 msgid "Food for the miners"
@@ -243,6 +322,16 @@ msgid ""
 "Anyway, we must build up stronger military buildings as soon as "
 "possible.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" «Por todos os deuses! Isto é terrible. Parece que nos estivesen poñendo a "
+"proba, e que Saledus estaba no certo respecto dos restos de barco que "
+"atopara.<br /> Hoxe, cando me dirixín ás praias do leste,<br />quedei "
+"apampado. Albisquei unha desas odiosas e demoníacas tribos bárbaras que "
+"tantos problemas nos deron outrora.<br /> Ao principio fun confiado e "
+"mantiven a esperanza de que fosen pacíficos, pero en canto un deles me viu, "
+"cargaron contra min e comezaron a tirarme as súas lanzas. Grazas aos "
+"deuses<br /> puiden fuxir e agocharme antes de volver á colonia aproveitando "
+"o manto da noite.<br /> De todos xeitos, temos que construír mellores "
+"edificios militares canto antes.»<br /> <br /> -- NOVO OBXECTIVO --<br /> "
 
 #: ../../campaigns/emp02.wmf/event:425
 #: ../../campaigns/emp02.wmf/objective:57
@@ -251,6 +340,9 @@ msgid ""
 "tower, on the eastern frontier. To watch deep inside the enemy territory, "
 "build a tower."
 msgstr ""
+"* Construír mellores edificios militares, coma un posto de avanzada, unha "
+"barreira ou unha torre na fronteira leste. Para vixiar mellor o territorio "
+"inimigo, constrúe unha torre."
 
 #: ../../campaigns/emp02.wmf/event:427
 msgid "The Barbarians"
@@ -262,6 +354,10 @@ msgid ""
 "infrastructure is getting better and better. Now we should think of "
 "preparing ourselves for battle.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
+" «Moi ben. Completouse o primeiro edificio militar importante e a "
+"insfraestrutura de minas está mellorando rapidamente. Agora deberiamos "
+"pensar en prepararmos para a batalla.»<br /> <br /> -- NOVOS OBXECTIVOS --"
+"<br /> "
 
 #: ../../campaigns/emp02.wmf/event:459
 #: ../../campaigns/emp02.wmf/objective:65
@@ -269,6 +365,8 @@ msgid ""
 "* As soon as you have enough soldiers, attack and completely destroy the "
 "barbarian buildings.<br>"
 msgstr ""
+"* En canto teñas soldados abondo, ataca e arrasa os edificios dos "
+"bárbaros.<br />"
 
 #: ../../campaigns/emp02.wmf/event:460
 #: ../../campaigns/emp02.wmf/objective:66
@@ -277,6 +375,9 @@ msgid ""
 "barbarian headquarters stood before), to avoid new settlements of other "
 "tribes in that region."
 msgstr ""
+"* Para rematar, levanta unha fortaleza na península<br /> (preto de onde "
+"antes estaba o cuartel xeral dos bárbaros) para evitar os novos asentamentos "
+"doutras tribos nesa rexión."
 
 #: ../../campaigns/emp02.wmf/event:462
 msgid "Command for Attack"
@@ -290,6 +391,12 @@ msgid ""
 "us will be put in a boat with the other peaceful ones, and sent back to "
 "their country.\"<br><br>--------------------- VICTORY! ----------------------"
 msgstr ""
+" «Hoxe é un día de orgullo. Loitamos polo noso novo fogar e saímos "
+"vitoriosos.<br /> Aínda quedan algúns bárbaros agochados na nosa illa, pero "
+"estou convencido de que non habemos tardar en atopalos.<br /> Os bárbaros "
+"que non nos ataquen partiran nunha barca, xunto co resto dos que sexan "
+"pacíficos, de volta ás súas terras.»<br /> <br /> --------------------- "
+"VITORIA! ----------------------"
 
 #: ../../campaigns/emp02.wmf/event:485
 msgid "Victory"
@@ -305,7 +412,7 @@ msgstr "Mentres o tempo pasa"
 
 #: ../../campaigns/emp02.wmf/event:502
 msgid "OK"
-msgstr ""
+msgstr "Aceptar"
 
 #: ../../campaigns/emp02.wmf/event:510
 msgid ""
@@ -317,6 +424,13 @@ msgid ""
 "do...<br><br> You have completed this mission. You may continue playing if "
 "you wish, otherwise move on to the next mission.\" "
 msgstr ""
+" «Unha pomba aterrou hoxe na nosa illa.<br /> Trouxo unha mensaxe que me "
+"devolveu os vellos temores e encheu de pensamentos escuros.<br /> A mensaxe "
+"ía dirixida a min, rogándome que volvese a Fremil.<br /> Di que o imperio "
+"está en guerra cos bárbaros. Atacounos dende o norte a tribo á que se me "
+"prohibira atacar.<br /> Para min está claro o que debo facer...<br /> <br /> "
+"Completaches esta misión. Podes seguir xogando se queres, ou senón continúa "
+"coa seguinte misión.» "
 
 #: ../../campaigns/emp02.wmf/event:512
 msgid "A Message"
@@ -333,18 +447,22 @@ msgid ""
 "too.<br> It is good to see that we have now got a warmer and more familiar "
 "environment on our island.<br> Thank you, Lutius.\" "
 msgstr ""
+" «Saúdos, amigo, acabo de visitar a nosa nova taberna<br /> “Nas palmeiras”. "
+"A cervexa está moi boa. Deberías ir tomar algo ti tamén.<br /> Alégrame que "
+"teñamos un ambiente máis cálido e familiar na nosa illa.<br /> Grazas, "
+"Lutius.» "
 
 #: ../../campaigns/emp02.wmf/event:528
 msgid "Our new tavern"
-msgstr ""
+msgstr "A nosa nova taberna"
 
 #: ../../campaigns/emp02.wmf/objective:7
 msgid "Build up a wood economy"
-msgstr ""
+msgstr "Levanta unha industria da madeira"
 
 #: ../../campaigns/emp02.wmf/objective:15
 msgid "Build a quarry"
-msgstr ""
+msgstr "Constrúe unha canteira"
 
 #: ../../campaigns/emp02.wmf/objective:23
 msgid "Protect your colony"
@@ -352,23 +470,23 @@ msgstr "Pedra para a colonia"
 
 #: ../../campaigns/emp02.wmf/objective:31
 msgid "Start mining marble"
-msgstr ""
+msgstr "Comeza extraer mármore"
 
 #: ../../campaigns/emp02.wmf/objective:39
 msgid "Build a stonemason and mining infrastructure"
-msgstr ""
+msgstr "Constrúe unha infraestrutura canteira e mineira"
 
 #: ../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Subminístralles alimentos aos teus mineiros"
 
 #: ../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
-msgstr ""
+msgstr "Protexe a fronteira oriental"
 
 #: ../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
-msgstr ""
+msgstr "Acaba coa tribo bárbara"
 
 #~ msgid "Second mission of the Empire campaign"
 #~ msgstr "Segunda misión da campaña do Imperio"

@@ -192,9 +192,9 @@ else (DEFINED MSVC)
 endif (DEFINED MSVC)
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  message ("Using compiler flags: ${CMAKE_CXX_FLAGS_DEBUG}")
+  message (STATUS "Using compiler flags: ${CMAKE_CXX_FLAGS_DEBUG}")
 ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  message ("Using compiler flags: ${CMAKE_CXX_FLAGS_RELEASE}")
+  message (STATUS "Using compiler flags: ${CMAKE_CXX_FLAGS_RELEASE}")
 ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 if (DEFINED WL_3RDPARTY_DIR)
@@ -207,7 +207,7 @@ if (GGZ_CORE_FOUND)
   include_directories(${GGZ_CORE_INCLUDE_DIR})
   add_definitions("-DUSE_GGZ")
 else (GGZ_CORE_FOUND)
-  message ("GGZ support disabled, check your libraries path and installed packages!")
+  message (STATUS "GGZ support disabled, check your libraries path and installed packages!")
 endif (GGZ_CORE_FOUND)
 
 # ...but using MAJOR, MINOR and PATCH
@@ -251,6 +251,9 @@ if (DEFINED WL_VERSION_MAJOR)
 			set (CPACK_PACKAGE_VERSION_MINOR 0)
 		endif (DEFINED WL_VERSION_MINOR)
 	endif (WL_VERSION_MAJOR STREQUAL "0")
+	# Needed - else detect_revision.py will still use bzr or even crash, if
+	# Widelands is compiled in a bzr export
+	file (WRITE WL_RELEASE "${WL_VERSION}")
 endif (DEFINED WL_VERSION_MAJOR)
 
 if (NOT DEFINED WL_VERSION)
@@ -344,6 +347,7 @@ install(
     txts
     worlds
     pics
+    scripting
   DESTINATION ${WLBUILD_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
@@ -369,9 +373,9 @@ install(
   COMPONENT DocFiles
   PATTERN "*.svn*" EXCLUDE
   PATTERN "SCons*" EXCLUDE
+  PATTERN "CMakeLists.txt" EXCLUDE
 )
 
-execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale)
 find_package (PythonInterp REQUIRED)
 
 if (WIN32)
@@ -389,6 +393,8 @@ if (${CMAKE_BUILD_TYPE} STREQUAL Release)
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
     COMMAND cmake -E echo "Preparing directory maps"
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND cmake -E echo "Preparing directory scripting"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/scripting ${CMAKE_CURRENT_BINARY_DIR}/scripting
     COMMAND cmake -E echo "Preparing directory tribes"
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
     COMMAND cmake -E echo "Preparing directory txts"
@@ -408,6 +414,8 @@ else (${CMAKE_BUILD_TYPE} STREQUAL Release)
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
     COMMAND cmake -E echo "Preparing directory maps"
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND cmake -E echo "Preparing directory scripting"
+    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/scripting ${CMAKE_CURRENT_BINARY_DIR}/scripting
     COMMAND cmake -E echo "Preparing directory tribes"
     COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
     COMMAND cmake -E echo "Preparing directory txts"

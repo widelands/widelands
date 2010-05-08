@@ -29,6 +29,7 @@ namespace UI {
 
 Button::Button //  for textual buttons
 	(Panel * const parent,
+	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 PictureID background_picture_id,
 	 std::string const & title_text,
@@ -37,7 +38,7 @@ Button::Button //  for textual buttons
 	 std::string const & fontname,
 	 uint32_t const      fontsize)
 	:
-	Panel           (parent, x, y, w, h, tooltip_text),
+	NamedPanel           (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
 	m_pressed       (false),
 	m_enabled       (_enabled),
@@ -58,6 +59,7 @@ Button::Button //  for textual buttons
 
 Button::Button //  for pictorial buttons
 	(Panel * const parent,
+	 const std::string & name,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 PictureID background_picture_id,
 	 const PictureID foreground_picture_id,
@@ -66,7 +68,7 @@ Button::Button //  for pictorial buttons
 	 const std::string & fontname,
 	 const uint32_t      fontsize)
 	:
-	Panel           (parent, x, y, w, h, tooltip_text),
+	NamedPanel      (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
 	m_pressed       (false),
 	m_enabled       (_enabled),
@@ -301,5 +303,9 @@ bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 	}
 	return true;
 }
+bool Button::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t) {
+	return true; // We handle this always by lighting up
+}
+
 
 }

@@ -1,9 +1,7 @@
 size=medium
 max_soldiers=4
-heal_per_second=5
+heal_per_second=2
 conquers=9
-max_medics=2
-heal_increase_per_medic=3
 vision_range=17
 enhancement=high_tower
 
@@ -15,5 +13,5 @@ spidercloth=1
 
 [idle]
 pics=tower_i_??.png
-hotspot=55 70
+hotspot=46 58
 playercolor=true

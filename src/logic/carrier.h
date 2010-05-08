@@ -60,6 +60,7 @@ struct Carrier : public Worker {
 	void start_task_transport(Game &, int32_t fromflag);
 	bool start_task_walktoflag(Game &, int32_t flag, bool offset = false);
 
+	virtual void log_general_info(Editor_Game_Base const &);
 
 private:
 	MO_DESCR(Descr);

@@ -38,7 +38,7 @@ struct Path {
 	friend struct Map;
 
 	Path() {}
-	Path(Coords const c) : m_start(c), m_end(c) {}
+	Path(const Coords & c) : m_start(c), m_end(c) {}
 	Path(CoordPath &);
 
 	void reverse();
@@ -55,7 +55,7 @@ struct Path {
 
 	void append(Map const & map, Direction);
 
-	void reorigin(Coords const new_origin, Extent const extent) {
+	void reorigin(const Coords & new_origin, const Extent & extent) {
 		m_start.reorigin(new_origin, extent);
 		m_end  .reorigin(new_origin, extent);
 	}

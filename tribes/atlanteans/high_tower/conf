@@ -1,10 +1,8 @@
 size=medium
 buildable=no
 max_soldiers=5
-heal_per_second=5
+heal_per_second=2
 conquers=9
-max_medics=2
-heal_increase_per_medic=3
 vision_range=21
 enhanced_building=yes
 
@@ -15,5 +13,5 @@ stone=2
 
 [idle]
 pics=high_tower_i_??.png
-hotspot=55 90
+hotspot=44 76
 playercolor=true

@@ -181,6 +181,8 @@ protected:
 
 	bool does_carry_ware() {return m_carried_item.is_set();}
 
+	void set_program_objvar(Game &, State &, Map_Object * obj);
+
 public:
 	static const Task taskTransfer;
 	static const Task taskBuildingwork;
@@ -199,10 +201,11 @@ public:
 private:
 	// task details
 	void transfer_update(Game &, State &);
-	void transfer_signalimmediate(Game &, State &, std::string const & signal);
+	void transfer_pop(Game &, State &);
 	void buildingwork_update(Game &, State &);
 	void return_update(Game &, State &);
 	void program_update(Game &, State &);
+	void program_pop(Game &, State &);
 	void gowarehouse_update(Game &, State &);
 	void gowarehouse_signalimmediate
 		(Game &,
@@ -222,7 +225,6 @@ private:
 
 	// Program commands
 	bool run_mine             (Game &, State &, Action const &);
-	bool run_lua              (Game &, State &, Action const &);
 	bool run_breed            (Game &, State &, Action const &);
 	bool run_createitem       (Game &, State &, Action const &);
 	bool run_setdescription   (Game &, State &, Action const &);
@@ -249,6 +251,7 @@ private:
 	Economy          * m_economy;      ///< economy this worker is registered in
 	OPtr<WareInstance>    m_carried_item; ///< item we are carrying
 	IdleWorkerSupply * m_supply;   ///< supply while gowarehouse and not transfer
+	Transfer * m_transfer; ///< where we are currently being sent
 	int32_t                m_needed_exp;   ///< experience for next level
 	int32_t                m_current_exp;  ///< current experience
 };

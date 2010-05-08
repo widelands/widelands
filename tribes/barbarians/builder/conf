@@ -1,4 +1,4 @@
-help=_Works at construction sites to create a new building.
+help=_Works at construction sites to raise a new building.
 soundfx=../../../sound/hammering/hammering
 
 [buildcost]
@@ -6,14 +6,20 @@ hammer=1
 carrier=1
 
 [idle]
-pics=idle_??.png
+pics=work_??.png
 sfx=0 ../../../sound/hammering/hammering
-hotspot=7 23
+hotspot=11 22
+playercolor=true
+fps=10
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=9 23
+hotspot=10 23
+playercolor=true
+fps=10
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=9 23
+hotspot=10 23
+playercolor=true
+fps=10

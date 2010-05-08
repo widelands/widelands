@@ -41,7 +41,7 @@ struct StreamWrite : public ::StreamWrite {
 	void Direction8           (Direction);
 	void Direction8_allow_null(Direction);
 	void Map_Index32(Map_Index const i) {Unsigned32(i);}
-	void Coords32      (Coords);
+	void Coords32      (const Coords &);
 	void Area48        (Area<Coords, uint16_t>);
 	void Player_Number8(const Player_Number pn) {Unsigned8(pn);}
 	void Tribe         (Tribe_Descr     const &);
@@ -61,7 +61,7 @@ inline void StreamWrite::Direction8_allow_null(Direction const d) {
 	Data(&d, 1);
 }
 
-inline void StreamWrite::Coords32(const Coords c) {
+inline void StreamWrite::Coords32(const Coords & c) {
 	assert(static_cast<uint16_t>(c.x) < 0x8000 or c.x == -1);
 	assert(static_cast<uint16_t>(c.y) < 0x8000 or c.y == -1);
 	{uint16_t const x = Little16(c.x); Data(&x, 2);}

@@ -95,7 +95,9 @@ Bob::Descr::Descr
  * Create a bob of this type
  */
 Bob & Bob::Descr::create
-	(Editor_Game_Base & egbase, Player * const owner, Coords const coords) const
+	(Editor_Game_Base & egbase,
+	 Player * const owner,
+	 const Coords & coords) const
 {
 	Bob & bob = create_object();
 	bob.set_owner(owner);
@@ -293,8 +295,6 @@ void Bob::do_pop_task(Game & game)
 
 	delete state.path;
 	delete state.route;
-	if (state.transfer)
-		state.transfer->has_failed();
 
 	m_stack.pop_back();
 }
@@ -488,7 +488,7 @@ struct BlockedTracker {
 	};
 	typedef std::map<CoordData, bool, CoordOrdering> Cache;
 
-	BlockedTracker(Game & game, Bob & bob, Coords const finaldest)
+	BlockedTracker(Game & game, Bob & bob, const Coords & finaldest)
 		: m_game(game), m_bob(bob), m_map(game.map()), m_finaldest(finaldest)
 	{
 		nrblocked = 0;
@@ -577,7 +577,7 @@ struct CheckStepBlocked {
  */
 bool Bob::start_task_movepath
 	(Game                & game,
-	 Coords          const dest,
+	 Coords        const & dest,
 	 int32_t         const persist,
 	 DirAnimations const & anims,
 	 bool            const forceonlast,
@@ -692,10 +692,6 @@ bool Bob::start_task_movepath
 void Bob::movepath_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
-		if (serial() == 3755)
-			molog
-				("[movepath_update] signal '%s'; popping task\n",
-				 get_signal().c_str());
 		return pop_task(game);
 	}
 
@@ -919,10 +915,6 @@ int32_t Bob::start_walk
 	m_walkstart = game.get_gametime();
 	m_walkend = m_walkstart + tdelta;
 
-	if (serial() == 3755)
-		molog
-			("[start_walk]: changint position from (%i, %i) to (%i, %i)\n",
-			 get_position().x, get_position().y, newnode.x, newnode.y);
 	set_position(game, newnode);
 	set_animation(game, a);
 
@@ -973,7 +965,7 @@ void Bob::set_owner(Player * const player)
  * Performs the necessary (un)linking in the \ref Field structures and
  * updates the owner's viewing area, if the bob has an owner.
  */
-void Bob::set_position(Editor_Game_Base & egbase, Coords const coords)
+void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
 {
 	FCoords oldposition = m_position;
 
@@ -1065,7 +1057,6 @@ void Bob::log_general_info(Editor_Game_Base const & egbase)
 					 static_cast<long unsigned int>(j + 1),
 					 static_cast<long unsigned int>(nr_steps), path[j]);
 		}
-		molog("* transfer: %p\n",  m_stack[i].transfer);
 		molog("* route: %p\n",  m_stack[i].route);
 
 		molog("* program: %p\n",  m_stack[i].route);
