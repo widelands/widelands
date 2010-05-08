@@ -698,8 +698,10 @@ void DefaultAI::update_productionsite_stats(int32_t gametime) {
 	}
 
 	// Scale statistics down
-	for (uint32_t i = 0; i < buildings.size(); ++i)
-		buildings[i].current_stats /= productionsites.front().bo->cnt_built;
+	for (uint32_t i = 0; i < buildings.size(); ++i) {
+		if (buildings[i].cnt_built > 0)
+			buildings[i].current_stats /= buildings[i].cnt_built;
+	}
 }
 
 
