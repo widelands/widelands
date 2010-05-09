@@ -928,7 +928,6 @@ Worker::Worker(const Worker_Descr & worker_descr)
 	m_economy    (0),
 	m_supply     (0),
 	m_transfer   (0),
-	m_needed_exp (0),
 	m_current_exp(0)
 {
 }
@@ -961,8 +960,7 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
 		molog("* m_carried_item->get_economy() (): %p\n", ware->get_economy());
 	}
 
-	molog("m_needed_exp: %i\n", m_needed_exp);
-	molog("m_current_exp: %i\n", m_current_exp);
+	molog("m_current_exp: %i / %i\n", m_current_exp, descr().get_level_experience());
 
 	molog("m_supply: %p\n", m_supply);
 }
@@ -1152,16 +1150,11 @@ void Worker::incorporate(Game & game)
  */
 void Worker::create_needed_experience(Game & game)
 {
-	if (descr().get_min_exp() == -1 && descr().get_max_exp() == -1) {
-		m_needed_exp = m_current_exp = -1;
+	if (descr().get_level_experience() == -1) {
+		m_current_exp = -1;
 		return;
 	}
 
-	assert(descr().get_min_exp() <= descr().get_max_exp());
-	m_needed_exp =
-		descr().get_min_exp()
-		+
-		game.logic_rand() % (1 + descr().get_max_exp() - descr().get_min_exp());
 	m_current_exp = 0;
 }
 
@@ -1175,7 +1168,7 @@ void Worker::create_needed_experience(Game & game)
  */
 Ware_Index Worker::gain_experience(Game & game) {
 	return
-		m_needed_exp == -1 or ++m_current_exp < m_needed_exp ?
+		descr().get_level_experience() == -1 || ++m_current_exp < descr().get_level_experience() ?
 		Ware_Index::Null() : level(game);
 }
 
@@ -2710,7 +2703,6 @@ void Worker::Loader::load(FileRead& fr)
 	Worker& worker = get<Worker>();
 	m_location = fr.Unsigned32();
 	m_carried_item = fr.Unsigned32();
-	worker.m_needed_exp = fr.Signed32();
 	worker.m_current_exp = fr.Signed32();
 }
 
@@ -2829,7 +2821,6 @@ void Worker::do_save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWr
 	fw.Unsigned8(WORKER_SAVEGAME_VERSION);
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_carried_item.get(egbase)));
-	fw.Signed32(m_needed_exp);
 	fw.Signed32(m_current_exp);
 }
 

@@ -48,10 +48,10 @@ namespace Widelands {
 
 // Bob subtype versions
 #define CRITTER_BOB_PACKET_VERSION 1
-#define WORKER_BOB_PACKET_VERSION 1
+#define WORKER_BOB_PACKET_VERSION 2
 
 // Worker subtype versions
-#define SOLDIER_WORKER_BOB_PACKET_VERSION 6
+#define SOLDIER_WORKER_BOB_PACKET_VERSION 7
 #define CARRIER_WORKER_BOB_PACKET_VERSION 1
 
 
@@ -400,7 +400,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == WORKER_BOB_PACKET_VERSION) {
+		if (1 <= packet_version && packet_version <= WORKER_BOB_PACKET_VERSION) {
 			if (upcast(Soldier, soldier, &worker)) {
 				try {
 					uint16_t const soldier_worker_bob_packet_version =
@@ -414,29 +414,16 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 					{
 						Soldier_Descr const & descr = soldier->descr();
 
-						uint32_t min_hp = descr.get_min_hp();
-						assert(min_hp);
 						soldier->m_hp_current = fr.Unsigned32();
-						soldier->m_hp_max = fr.Unsigned32();
-						// This has been commented because now exists a 'die' task,
-						// so a soldier can have 0 hitpoints if it's dying.
-						//if (not soldier->m_hp_current)
-						// throw game_data_error("no hitpoints (should be dead)");
-						if (soldier->m_hp_max < soldier->m_hp_current)
-							throw game_data_error
-								("hp_max (%u) < hp_current (%u)",
-								 soldier->m_hp_max, soldier->m_hp_current);
 
-						soldier->m_min_attack    = fr.Unsigned32();
-						soldier->m_max_attack    = fr.Unsigned32();
-						if (soldier->m_max_attack < soldier->m_min_attack)
-							throw game_data_error
-								("max_attack = %u but must be at least %u",
-								 soldier->m_max_attack, soldier->m_min_attack);
-
-						soldier->m_defense       = fr.Unsigned32();
-
-						soldier->m_evade         = fr.Unsigned32();
+						if (soldier_worker_bob_packet_version <= 6) {
+							// no longer used values
+							fr.Unsigned32(); // max hp
+							fr.Unsigned32(); // min attack
+							fr.Unsigned32(); // max attack
+							fr.Unsigned32(); // defense
+							fr.Unsigned32(); // evade
+						}
 
 #define READLEVEL(variable, pn, maxfunction)                                  \
    soldier->variable = fr.Unsigned32();                                       \
@@ -460,148 +447,8 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						READLEVEL(m_defense_level, "defense", get_max_defense_level);
 						READLEVEL(m_evade_level,   "evade",   get_max_evade_level);
 
-						{ //  validate hp values
-							uint32_t const level_increase =
-								descr.get_hp_incr_per_level() * soldier->m_hp_level;
-							min_hp += level_increase;
-							uint32_t const max = descr.get_max_hp() + level_increase;
-							if (soldier->m_hp_max < min_hp) {
-								//  The soldier's type's definition may have changed,
-								//  so that max_hp must be larger. Adjust it and scale
-								//  up the current amount of hitpoints proportionally.
-								uint32_t const new_current =
-									soldier->m_hp_current * min_hp / soldier->m_hp_max;
-								log
-									("WARNING: %s %s (%u) of player %u has hp_max = %u "
-									 "but it must be at least %u (= %u + %u * %u), "
-									 "changing it to that value and increasing current "
-									 "hp from %u to %u\n",
-									 descr.tribe().name().c_str(),
-									 descr.descname().c_str(), soldier->serial(),
-									 soldier->owner().player_number(),
-									 soldier->m_hp_max, min_hp,
-									 descr.get_min_hp(),
-									 descr.get_hp_incr_per_level(), soldier->m_hp_level,
-									 soldier->m_hp_current, new_current);
-								soldier->m_hp_current = new_current;
-								soldier->m_hp_max = min_hp;
-							} else if (max < soldier->m_hp_max) {
-								//  The soldier's type's definition may have changed,
-								//  so that max_hp must be smaller. Adjust it and scale
-								//  down the current amount of hitpoints
-								//  proportionally. Round to the soldier's favour and
-								//  make sure that the scaling does not kill the
-								//  soldier.
-								uint32_t const new_current =
-									1
-									+
-									(soldier->m_hp_current * max - 1)
-									/
-									soldier->m_hp_max;
-								assert(new_current);
-								assert(new_current <= soldier->m_hp_max);
-								log
-									("WARNING: %s %s (%u) of player %u has hp_max = %u "
-									 "but it can be at most %u (= %u + %u * %u), "
-									 "changing it to that value and decreasing current "
-									 "hp from %u to %u\n",
-									 descr.tribe().name().c_str(),
-									 descr.descname().c_str(), soldier->serial(),
-									 soldier->owner().player_number(),
-									 soldier->m_hp_max, max,
-									 descr.get_max_hp(),
-									 descr.get_hp_incr_per_level(), soldier->m_hp_level,
-									 soldier->m_hp_current, new_current);
-								soldier->m_hp_current = new_current;
-								soldier->m_hp_max = max;
-							}
-						}
-
-						{ //  validate attack values
-							uint32_t const level_increase =
-								descr.get_attack_incr_per_level()
-								*
-								soldier->m_attack_level;
-							{
-								uint32_t const min =
-									descr.get_min_attack() + level_increase;
-								if (soldier->m_min_attack < min) {
-									log
-										("WARNING: %s %s (%u) of player %u has "
-										 "min_attack = %u but it must be at least %u (= "
-										 "%u + %u * %u), changing it to that value\n",
-										 descr.tribe().name().c_str(),
-										 descr.descname().c_str(), soldier->serial(),
-										 soldier->owner().player_number(),
-										 soldier->m_min_attack, min,
-										 descr.get_min_attack(),
-										 descr.get_attack_incr_per_level(),
-										 soldier->m_attack_level);
-									soldier->m_min_attack = min;
-									if (soldier->m_max_attack < min) {
-										log
-											(" (and changing max_attack from %u to the "
-											 "same value)",
-											 soldier->m_max_attack);
-										soldier->m_max_attack = min;
-									}
-									log("\n");
-								}
-							}
-							{
-								uint32_t const max =
-									descr.get_max_attack() + level_increase;
-								if (max < soldier->m_max_attack) {
-									log
-										("WARNING: %s %s (%u) of player %u has "
-										 "max_attack = %u but it can be at most %u (= "
-										 "%u + %u * %u), changing it to that value",
-										 descr.tribe().name().c_str(),
-										 descr.descname().c_str(), soldier->serial(),
-										 soldier->owner().player_number(),
-										 soldier->m_max_attack, max,
-										 descr.get_max_attack(),
-										 descr.get_attack_incr_per_level(),
-										 soldier->m_attack_level);
-									soldier->m_max_attack = max;
-									if (max < soldier->m_min_attack) {
-										log
-											(" (and changing min_attack from %u to the "
-											 "same value)",
-											 soldier->m_min_attack);
-										soldier->m_min_attack = max;
-									}
-									log("\n");
-								}
-							}
-							assert(soldier->m_min_attack <= soldier->m_max_attack);
-						}
-
-#define VALIDATE_VALUE(pn, valuefunct, incrfunct, level_variable, variable)   \
-   {                                                                          \
-      uint32_t const value =                                                  \
-         descr.valuefunct() + descr.incrfunct() * soldier->level_variable;    \
-      if (value != soldier->variable) {                                       \
-         log                                                                  \
-            ("WARNING: %s %s (%u) of player %u has "                          \
-             pn                                                               \
-             " = %u but it must be %u (= %u + %u * %u), changing it to that " \
-             "value\n",                                                       \
-             descr.tribe().name().c_str(), descr.descname().c_str(),          \
-             soldier->serial(), soldier->owner().player_number(),             \
-             soldier->variable, value,                                        \
-             descr.valuefunct(), descr.incrfunct(), soldier->level_variable); \
-         soldier->variable = value;                                           \
-      }                                                                       \
-   }                                                                          \
-
-						VALIDATE_VALUE
-							("defense", get_defense, get_defense_incr_per_level,
-							 m_defense_level, m_defense);
-
-						VALIDATE_VALUE
-							("evade",   get_evade,   get_evade_incr_per_level,
-							 m_evade_level,   m_evade);
+						if (soldier->m_hp_current > soldier->get_max_hitpoints())
+							soldier->m_hp_current = soldier->get_max_hitpoints();
 
 						if (Serial const battle = fr.Unsigned32())
 							soldier->m_battle = &mol.get<Battle>(battle);
@@ -679,8 +526,17 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 			// Skip supply
 
-			worker.m_needed_exp  = fr.Signed32();
+			if (packet_version == 1)
+				fr.Signed32(); // used to be needed_exp
 			worker.m_current_exp = fr.Signed32();
+
+			if (worker.m_current_exp >= worker.get_needed_experience()) {
+				// avoid inconsistencies in case the game data has changed
+				if (worker.get_needed_experience() == -1)
+					worker.m_current_exp = -1;
+				else
+					worker.m_current_exp = worker.get_needed_experience() - 1;
+			}
 
 			Economy * economy = 0;
 			if (PlayerImmovable * const location = worker.m_location.get(egbase))
@@ -866,11 +722,6 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 	if (upcast(Soldier const, soldier, &worker)) {
 		fw.Unsigned16(SOLDIER_WORKER_BOB_PACKET_VERSION);
 		fw.Unsigned32(soldier->m_hp_current);
-		fw.Unsigned32(soldier->m_hp_max);
-		fw.Unsigned32(soldier->m_min_attack);
-		fw.Unsigned32(soldier->m_max_attack);
-		fw.Unsigned32(soldier->m_defense);
-		fw.Unsigned32(soldier->m_evade);
 		fw.Unsigned32(soldier->m_hp_level);
 		fw.Unsigned32(soldier->m_attack_level);
 		fw.Unsigned32(soldier->m_defense_level);
@@ -905,7 +756,6 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 	} else
 		fw.Unsigned32(0);
 
-	fw.Signed32(worker.m_needed_exp);
 	fw.Signed32(worker.m_current_exp);
 }
 

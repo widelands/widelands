@@ -1,5 +1,5 @@
 help=_Produces the finest ales to keep warriors strong and happy in training.
-experience=18-21
+experience=19
 becomes=master-brewer
 
 [buildcost]

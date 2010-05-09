@@ -46,7 +46,13 @@ struct Flag;
  * file. The higher the preciousness, the more will defaultAI care for that ware
  * and will try to build up an infrastructure to create that ware.
  *
- * \ToDo Improvements:
+ * \NOTE Network safeness:
+ * - The current implementation does not care about network safe randomness, as
+ *   only the host is running the computer player code and sends it's player
+ *   commands to all other players. If this network behaviour is changed,
+ *   remember to change some time() in network save random functions.
+ *
+ * \TODO Improvements:
  * - Improve different initialization types (Aggressive, Normal, Defensive)
  * - Improve update code - currently the whole buildable area owned by defaultAI
  *   is rechecked after construction of a building or a road. Instead it would
