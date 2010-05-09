@@ -592,9 +592,9 @@ void Soldier_Descr::writeHTMLSoldier(::FileWrite & fw) const {
 	snprintf
 		(buffer, sizeof(buffer),
 		 _
-		 	("Hitpoints is between %u and %u, plus %u for each level above 0 "
+		 	("Hitpoints is %u, plus %u for each level above 0 "
 		 	 "(maximum level is %u)."),
-		 m_min_hp,      m_max_hp,      m_hp_incr,      m_max_hp_level);
+		 m_base_hp,      m_hp_incr,      m_max_hp_level);
 	fw.Text(buffer);
 	fw.Text
 		("</p>\n"
