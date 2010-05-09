@@ -26,8 +26,6 @@
 #include "wexception.h"
 #include "widelands_map_allowed_building_types_data_packet.h"
 #include "widelands_map_allowed_worker_types_data_packet.h"
-#include "widelands_map_bob_data_packet.h"
-#include "widelands_map_bobdata_data_packet.h"
 #include "widelands_map_building_data_packet.h"
 #include "widelands_map_buildingdata_data_packet.h"
 #include "widelands_map_elemental_data_packet.h"
@@ -106,10 +104,6 @@ void Map_Saver::save() throw (_wexception) {
 	//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 	log("Writing Player Message Data ... ");
 	{Map_Players_Messages_Data_Packet       p; p.Write(m_fs, m_egbase, *m_mos);}
-	log("done!\n ");
-
-	log("Writing Bob Data ... ");
-	{Map_Bob_Data_Packet                    p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Resources Data ... ");
@@ -204,12 +198,6 @@ void Map_Saver::save() throw (_wexception) {
 	if (m_mos->get_nr_wares()) {
 		log("Writing Waredata Data ... ");
 		{Map_Waredata_Data_Packet            p; p.Write(m_fs, m_egbase, *m_mos);}
-		log("done!\n ");
-	}
-
-	if (m_mos->get_nr_bobs()) {
-		log("Writing Bobdata Data ... ");
-		{Map_Bobdata_Data_Packet             p; p.Write(m_fs, m_egbase, *m_mos);}
 		log("done!\n ");
 	}
 

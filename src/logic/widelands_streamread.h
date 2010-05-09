@@ -163,7 +163,6 @@ struct StreamRead : public ::StreamRead {
 	/// Read a Direction from the file. Use this when the result can only be a
 	/// direction or 0 (none).
 	///
-	/// \Throws direction_is_null if the direction is 0.
 	/// \Throws direction_invalid if direction is > 6.
 	Direction Direction8_allow_null();
 

@@ -465,7 +465,7 @@ void Map_Object::molog(char const * fmt, ...) const
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load(FileRead & fr, uint8_t)
+void Map_Object::Loader::load(FileRead & fr)
 {
 	try {
 		uint8_t const header = fr.Unsigned8();

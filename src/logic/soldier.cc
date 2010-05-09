@@ -31,6 +31,8 @@
 #include "gamecontroller.h"
 #include "graphic/graphic.h"
 #include "helper.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "message_queue.h"
 #include "militarysite.h"
 #include "player.h"
@@ -1197,7 +1199,7 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 
 void Soldier::move_in_battle_update(Game & game, State &)
 {
-	if (m_combat_walkend <= game.get_gametime()) {
+	if (static_cast<int32_t>(game.get_gametime() - m_combat_walkend) >= 0) {
 		switch (m_combat_walking) {
 			case CD_NONE:
 				break;
@@ -1603,6 +1605,92 @@ void Soldier::log_general_info(Editor_Game_Base const & egbase)
 	molog ("HasBattle:   %s\n", m_battle ? "yes" : "no");
 	if (m_battle)
 		molog("BattleSerial: %u\n", m_battle->serial());
+}
+
+/*
+==============================
+
+Load/save support
+
+==============================
+*/
+
+#define SOLDIER_SAVEGAME_VERSION 1
+
+Soldier::Loader::Loader()
+{
+}
+
+void Soldier::Loader::load(FileRead& fr)
+{
+	Worker::Loader::load(fr);
+
+	uint8_t version = fr.Unsigned8();
+	if (version != SOLDIER_SAVEGAME_VERSION)
+		throw game_data_error("unknown/unhandled version %u", version);
+
+	Soldier& soldier = get<Soldier>();
+	soldier.m_hp_current = fr.Unsigned32();
+	soldier.m_hp_level = std::min(fr.Unsigned32(), soldier.descr().get_max_hp_level());
+	soldier.m_attack_level = std::min(fr.Unsigned32(), soldier.descr().get_max_attack_level());
+	soldier.m_defense_level = std::min(fr.Unsigned32(), soldier.descr().get_max_defense_level());
+	soldier.m_evade_level = std::min(fr.Unsigned32(), soldier.descr().get_max_evade_level());
+
+	if (soldier.m_hp_current > soldier.get_max_hitpoints())
+		soldier.m_hp_current = soldier.get_max_hitpoints();
+
+	soldier.m_combat_walking = static_cast<CombatWalkingDir>(fr.Unsigned8());
+	if (soldier.m_combat_walking != CD_NONE) {
+		soldier.m_combat_walkstart = fr.Signed32();
+		soldier.m_combat_walkend = fr.Signed32();
+	}
+
+	m_battle = fr.Unsigned32();
+}
+
+void Soldier::Loader::load_pointers()
+{
+    Worker::Loader::load_pointers();
+
+	Soldier& soldier = get<Soldier>();
+
+	if (m_battle)
+		soldier.m_battle = &mol().get<Battle>(m_battle);
+}
+
+const Bob::Task* Soldier::Loader::get_task(const std::string& name)
+{
+	if (name == "attack") return &taskAttack;
+	if (name == "defense") return &taskDefense;
+	if (name == "battle") return &taskBattle;
+	if (name == "moveInBattle") return &taskMoveInBattle;
+	if (name == "die") return &taskDie;
+	return Worker::Loader::get_task(name);
+}
+
+Soldier::Loader* Soldier::create_loader()
+{
+	return new Loader;
+}
+
+void Soldier::do_save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+{
+	Worker::do_save(egbase, mos, fw);
+
+	fw.Unsigned8(SOLDIER_SAVEGAME_VERSION);
+	fw.Unsigned32(m_hp_current);
+	fw.Unsigned32(m_hp_level);
+	fw.Unsigned32(m_attack_level);
+	fw.Unsigned32(m_defense_level);
+	fw.Unsigned32(m_evade_level);
+
+	fw.Unsigned8(m_combat_walking);
+	if (m_combat_walking != CD_NONE) {
+		fw.Signed32(m_combat_walkstart);
+		fw.Signed32(m_combat_walkend);
+	}
+
+	fw.Unsigned32(mos.get_object_file_index_or_zero(m_battle));
 }
 
 }

@@ -504,7 +504,7 @@ Load/save support
 
 void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
-	BaseImmovable::Loader::load(fr, version);
+	BaseImmovable::Loader::load(fr);
 
 	Immovable & imm = ref_cast<Immovable, Map_Object>(*get_object());
 
