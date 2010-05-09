@@ -48,7 +48,7 @@ namespace Widelands {
 
 // Bob subtype versions
 #define CRITTER_BOB_PACKET_VERSION 1
-#define WORKER_BOB_PACKET_VERSION 1
+#define WORKER_BOB_PACKET_VERSION 2
 
 // Worker subtype versions
 #define SOLDIER_WORKER_BOB_PACKET_VERSION 7
@@ -418,7 +418,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == WORKER_BOB_PACKET_VERSION) {
+		if (1 <= packet_version && packet_version <= WORKER_BOB_PACKET_VERSION) {
 			if (upcast(Soldier, soldier, &worker)) {
 				try {
 					uint16_t const soldier_worker_bob_packet_version =
@@ -544,8 +544,17 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 			// Skip supply
 
-			worker.m_needed_exp  = fr.Signed32();
+			if (packet_version == 1)
+				fr.Signed32(); // used to be needed_exp
 			worker.m_current_exp = fr.Signed32();
+
+			if (worker.m_current_exp >= worker.get_needed_experience()) {
+				// avoid inconsistencies in case the game data has changed
+				if (worker.get_needed_experience() == -1)
+					worker.m_current_exp = -1;
+				else
+					worker.m_current_exp = worker.get_needed_experience() - 1;
+			}
 
 			Economy * economy = 0;
 			if (PlayerImmovable * const location = worker.m_location.get(egbase))
@@ -763,7 +772,6 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 	} else
 		fw.Unsigned32(0);
 
-	fw.Signed32(worker.m_needed_exp);
 	fw.Signed32(worker.m_current_exp);
 }
 

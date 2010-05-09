@@ -519,9 +519,7 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 	fw.Text("</th><th>");
 	fw.Text(_("Vision<br/>range"));
 	fw.Text("</th><th>");
-	fw.Text(_("Minimum<br/>needed<br/>experience"));
-	fw.Text("</th><th>");
-	fw.Text(_("Maximum<br/>needed<br/>experience"));
+	fw.Text(_("Needed<br/>experience"));
 	fw.Text("</th><th>");
 	fw.Text(_("Becomes"));
 	fw.Text
@@ -550,10 +548,7 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 		fw.Text("</td>");
 		if (Ware_Index const becomes = worker_descr.becomes()) {
 			fw.Text("<td align=\"right\">");
-			sprintf(buffer, "%u", worker_descr.get_min_exp());
-			fw.Text(buffer);
-			fw.Text("</td><td align=\"right\">");
-			sprintf(buffer, "%u", worker_descr.get_max_exp());
+			sprintf(buffer, "%u", worker_descr.get_level_experience());
 			fw.Text(buffer);
 			Worker_Descr const & becomes_descr = *get_worker_descr(becomes);
 			std::string const & becomes_name     = becomes_descr.    name();
@@ -699,8 +694,8 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 		fw.Text("<p>");
 		snprintf
 			(buffer, sizeof(buffer),
-			 _("Needs experience from working between %u and %u times to become"),
-			 get_min_exp(), get_max_exp());
+			 _("Needs experience from working %u times to become"),
+			 get_level_experience());
 		fw.Text(buffer);
 		fw.Text(" <a name=\"becomes_");
 		tribe().referenceWorker

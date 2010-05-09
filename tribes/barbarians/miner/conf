@@ -1,5 +1,5 @@
 help=_Works deep in the mines to obtain coal, iron or gold.
-experience=18-21
+experience=19
 becomes=chief-miner
 
 [buildcost]

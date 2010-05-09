@@ -1,5 +1,5 @@
 help=_Works deep in the mines to obtain coal, iron or gold.
-experience=25-32
+experience=28
 becomes=master-miner
 
 [idle]

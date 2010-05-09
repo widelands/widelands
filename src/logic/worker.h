@@ -141,9 +141,9 @@ public:
 	void create_needed_experience(Game &);
 	Ware_Index level             (Game &);
 
-	int32_t get_needed_experience() const {return m_needed_exp;}
+	int32_t get_needed_experience() const {return descr().get_level_experience();}
 	int32_t get_current_experience() const {return m_current_exp;}
-	bool needs_experience() const {return m_needed_exp != -1;}
+	bool needs_experience() const {return get_needed_experience() != -1;}
 
 	// debug
 	virtual void log_general_info(Editor_Game_Base const &);
@@ -251,8 +251,7 @@ private:
 	Economy          * m_economy;      ///< economy this worker is registered in
 	OPtr<WareInstance>    m_carried_item; ///< item we are carrying
 	IdleWorkerSupply * m_supply;   ///< supply while gowarehouse and not transfer
-	int32_t                m_needed_exp;   ///< experience for next level
-	int32_t                m_current_exp;  ///< current experience
+	int32_t m_current_exp;  ///< current experience
 };
 
 }
