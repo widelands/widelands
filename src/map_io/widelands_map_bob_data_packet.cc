@@ -145,58 +145,7 @@ void Map_Bob_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
-	FileWrite fw;
-
-	// now packet version
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
-
-	// Now, all bob id and registerd it
-	// A Field can have more
-	// than one bob, we have to take this into account
-	//  uint8_t   numbers of bob for field
-	//      bob1
-	//      bob2
-	//      ...
-	//      bobn
-	Map & map = egbase.map();
-	for (uint16_t y = 0; y < map.get_height(); ++y) {
-		for (uint16_t x = 0; x < map.get_width(); ++x) {
-			std::vector<Bob *> bobarr;
-
-			map.find_bobs //  FIXME clean up this mess!
-				(Area<FCoords>(map.get_fcoords(Coords(x, y)), 0), &bobarr);
-
-			for(uint32_t i = bobarr.size(); i > 0; --i) {
-				if (bobarr[i-1]->has_new_save_support())
-					bobarr.erase(bobarr.begin() + i - 1);
-			}
-
-			fw.Unsigned32(bobarr.size());
-
-			for (uint32_t i = 0; i < bobarr.size(); ++i) {
-				// write serial number
-
-				//  a bob can not be owned by two nodes
-				assert(not mos.is_object_known(*bobarr[i]));
-
-				Serial const reg = mos.register_object(*bobarr[i]);
-
-				// Write its owner
-				std::string owner_tribe =
-					bobarr[i]->descr().get_owner_tribe() ?
-					bobarr[i]->descr().get_owner_tribe()->name() : "world";
-				fw.String(owner_tribe);
-				// Write it's name
-				fw.String(bobarr[i]->name());
-				// Write it's subtype
-				fw.Unsigned8(bobarr[i]->get_bob_type());
-				// And it's file register index
-				fw.Unsigned32(reg);
-			}
-		}
-	}
-
-	fw.Write(fs, "binary/bob");
+	throw wexception("bob packet is deprecated");
 }
 
 }

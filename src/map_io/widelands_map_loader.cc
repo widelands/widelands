@@ -164,9 +164,12 @@ int32_t WL_Map_Loader::load_map_complete
 	}
 	log("done!\n ");
 
-	log("Reading Bob Data ... ");
-	{Map_Bob_Data_Packet            p; p.Read(m_fs, egbase, !scenario, *m_mol);}
-	log("done!\n ");
+	bool have_oldbobs = m_fs.FileExists("binary/bob");
+	if (have_oldbobs) {
+		log("Reading Bob Data ... ");
+		{Map_Bob_Data_Packet            p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+		log("done!\n ");
+	}
 
 	log("Reading Resources Data ... ");
 	{Map_Resources_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
@@ -249,9 +252,11 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Waredata_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
-	log("Reading Bobdata Data ... ");
-	{Map_Bobdata_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
-	log("done!\n ");
+	if (have_oldbobs) {
+		log("Reading Bobdata Data ... ");
+		{Map_Bobdata_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+		log("done!\n ");
+	}
 
 	log("Second and third phase loading Map Objects ... ");
 	mapobjects.LoadFinish();
