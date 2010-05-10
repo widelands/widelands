@@ -22,11 +22,8 @@
 --
 --    :returns: :const:`nil`
 function run(func, ...) 
-   print("Running a coroutine now: func", func)
    local c = coroutine.create(func)
-   print("Created it ", c)
    local success, sleeptime = coroutine.resume(c, ...)
-   print("Resumed it", success, sleeptime)
    if success then
       if coroutine.status(c) ~= "dead" then 
          wl.game.run_coroutine(c, sleeptime)
