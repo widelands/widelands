@@ -560,7 +560,7 @@ explained in the introduction campaigns for the three tribes.]]
 )
 }
 
-warefare_and_training_00 = {
+warfare_and_training_00 = {
    title = _ "Warfare and Training",
    body = rt(h1(_ "Soldiers and Warefare") .. p(_
 [[On to the last topic now. We are going to talk about soldiers, their training
@@ -588,7 +588,7 @@ build a small training scenario for you. Let's do that now.]]
    )
 }
 
-warefare_and_training_01 = {
+warfare_and_training_01 = {
    pos = "topright",
    title = _ "Trainings camp and soldier stats",
    body = rt(p(_

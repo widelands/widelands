@@ -8,7 +8,7 @@ max_defense_level=0
 max_evade_level=2
 
 # initial values and per level increasements
-hp=110-150
+hp=130
 hp_incr_per_level=21
 attack=13-15
 attack_incr_per_level=8

@@ -340,7 +340,7 @@ Load/Save support
 
 void Battle::Loader::load(FileRead & fr, uint8_t const version)
 {
-	Map_Object::Loader::load(fr, version);
+	Map_Object::Loader::load(fr);
 
 	Battle & battle = get<Battle>();
 
