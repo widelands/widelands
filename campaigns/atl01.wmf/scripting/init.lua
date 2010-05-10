@@ -104,6 +104,7 @@ function water_rise(f, sleeptime)
             step = false
             sleep(sleeptime)
          end
+         if f.immovable then f.immovable:remove() end
 
          for idx, nf in ipairs{f.trn, f.tln, f.rn, f.ln, f.brn, f.bln} do
             if nf.terr ~= "wasser" or nf.terd ~= "wasser" then 
