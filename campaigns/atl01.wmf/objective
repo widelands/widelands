@@ -1,9 +1,4 @@
 # Automatically created by Widelands bzr5319[campaigns] (Debug)
 
 [global]
-packet_version="1"
-
-[player_1]
-name="Player 1"
-tribe="atlanteans"
-ai=
+packet_version="2"
