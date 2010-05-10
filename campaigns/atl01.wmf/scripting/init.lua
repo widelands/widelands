@@ -75,7 +75,7 @@ end
 
 rise_water = true
 step = false
-current_water_level = 11
+current_water_level = 9
 ncoroutines = 0
 
 
@@ -105,19 +105,13 @@ function water_rise(f, sleeptime)
             sleep(sleeptime)
          end
 
-         print "Now comes the loop!"
-
          for idx, nf in ipairs{f.trn, f.tln, f.rn, f.ln, f.brn, f.bln} do
-            print "In loop!"
             if nf.terr ~= "wasser" or nf.terd ~= "wasser" then 
                seeding_fields[#seeding_fields + 1] = nf
             end
-            print "After if"
          end
       end
-      print ("And sleeping!", sleep, sleeptime)
       sleep(sleeptime)
-      print "After sleep"
    end
    
    ncoroutines = ncoroutines - 1
@@ -138,7 +132,6 @@ seeding_fields = {
 function start()
    run(function()
       while true do
-         print "2) I woke up!"
          local old_seeding_fields = seeding_fields
          seeding_fields = {}
          while #old_seeding_fields > 0 do 
@@ -149,23 +142,20 @@ function start()
                water_rise(f, math.random(300,1000))
             end)
             table.remove(old_seeding_fields, idx)
-            print(("%i and %i"):format(#seeding_fields, #old_seeding_fields))
          end
-         print "2) I sleep now!"
          sleep(3000)
-         print "2) I sleeped now!"
       end
    end)
 
 
    run(function()
-      while true do
-         print "1) I woke up!"
-         step = 1
-         print "1) I sleep now!"
-         sleep(300)
-         print "1) I sleeped now!"
-      end
+      while true do step = 1; sleep(300) end
    end)
+end
+
+start()
+
+function rise()
+   current_water_level = current_water_level + 1
 end
 
