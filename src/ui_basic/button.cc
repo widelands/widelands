@@ -172,7 +172,7 @@ void Button::draw(RenderTarget & odst)
 		return;
 	}
 
-	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
+	m_cache_pid = g_gr->create_surface_a(odst.get_w(), odst.get_h());
 	
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
 
@@ -182,10 +182,12 @@ void Button::draw(RenderTarget & odst)
 			(Rect(Point(0, 0), get_w(), get_h()),
 			 m_pic_background,
 			 Point(get_x(), get_y()));
+	else
+		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
 	
 			 
-	if (m_enabled and m_highlighted)
+	if (m_enabled and m_highlighted and not m_flat)
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
@@ -196,11 +198,12 @@ void Button::draw(RenderTarget & odst)
 
 		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
 		//  is that -1 >> 1 is -1 but -1 / 2 is 0).
-		dst.blit
+		dst.blit_a
 			(Point
 			 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
 			 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
-			 m_enabled ? m_pic_custom : m_pic_custom_disabled);
+			 m_enabled ? m_pic_custom : m_pic_custom_disabled, not m_flat);
+
 	} else if (m_title.length()) //  otherwise draw title string centered
 		UI::g_fh->draw_string
 			(dst,
@@ -220,7 +223,7 @@ void Button::draw(RenderTarget & odst)
 	//  a pressed but not highlighted button occurs when the user has pressed
 	//  the left mouse button and then left the area of the button or the button
 	//  stays pressed when it is pressed once
-	RGBColor black(0, 0, 0);
+	RGBAColor black(0, 0, 0, 255);
 
 	if (not m_flat) {
 		assert(2 <= get_w());
@@ -258,11 +261,18 @@ void Button::draw(RenderTarget & odst)
 	} else {
 		//  Button is flat, do not draw borders, instead, if it is pressed, draw
 		//  a box around it.
-		if (m_pressed && m_highlighted)
-			dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
+		if (m_enabled and m_highlighted )
+		{
+			RGBAColor shade(100, 100, 100, 80);
+			dst.fill_rect(Rect(Point(0, 0), get_w(), 2), shade);
+			dst.fill_rect(Rect(Point(0, 2), 2, get_h() - 2), shade);
+			dst.fill_rect(Rect(Point(0, get_h() -2 ), get_w(), get_h()), shade);
+			dst.fill_rect(Rect(Point(get_w() - 2, 0), get_w(), get_h()), shade);
+			//dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
+		}
 	}
 	odst.blit(Point(0, 0), m_cache_pid);
-	m_needredraw=false;
+	m_needredraw = false;
 }
 
 void Button::think()
