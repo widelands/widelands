@@ -54,12 +54,11 @@ struct Soldier_Descr : public Worker_Descr {
 	uint32_t get_max_defense_level     () const {return m_max_defense_level;}
 	uint32_t get_max_evade_level       () const {return m_max_evade_level;}
 
-	uint32_t get_min_hp                () const {return m_min_hp;}
-	uint32_t get_max_hp                () const {return m_max_hp;}
-	uint32_t get_min_attack            () const {return m_min_attack;}
-	uint32_t get_max_attack            () const {return m_max_attack;}
-	uint32_t get_defense               () const {return m_defense;}
-	uint32_t get_evade                 () const {return m_evade;}
+	uint32_t get_base_hp        () const {return m_base_hp;}
+	uint32_t get_base_min_attack() const {return m_min_attack;}
+	uint32_t get_base_max_attack() const {return m_max_attack;}
+	uint32_t get_base_defense   () const {return m_defense;}
+	uint32_t get_base_evade     () const {return m_evade;}
 
 	uint32_t get_hp_incr_per_level     () const {return m_hp_incr;}
 	uint32_t get_attack_incr_per_level () const {return m_attack_incr;}
@@ -90,8 +89,7 @@ protected:
 	virtual Bob & create_object() const;
 
 	//  start values
-	uint32_t m_min_hp;
-	uint32_t m_max_hp;
+	uint32_t m_base_hp;
 	uint32_t m_min_attack;
 	uint32_t m_max_attack;
 	uint32_t m_defense;
@@ -110,10 +108,10 @@ protected:
 	uint32_t m_max_evade_level;
 
 	//  level pictures
-	std::vector<PictureID>    m_hp_pics;
-	std::vector<PictureID>    m_attack_pics;
-	std::vector<PictureID>    m_evade_pics;
-	std::vector<PictureID>    m_defense_pics;
+	std::vector<PictureID>   m_hp_pics;
+	std::vector<PictureID>   m_attack_pics;
+	std::vector<PictureID>   m_evade_pics;
+	std::vector<PictureID>   m_defense_pics;
 	std::vector<std::string> m_hp_pics_fn;
 	std::vector<std::string> m_attack_pics_fn;
 	std::vector<std::string> m_evade_pics_fn;
@@ -217,11 +215,11 @@ public:
 	}
 
 	uint32_t get_current_hitpoints() const {return m_hp_current;}
-	uint32_t get_max_hitpoints    () const {return m_hp_max;}
-	uint32_t get_min_attack       () const {return m_min_attack;}
-	uint32_t get_max_attack       () const {return m_max_attack;}
-	uint32_t get_defense          () const {return m_defense;}
-	uint32_t get_evade            () const {return m_evade;}
+	uint32_t get_max_hitpoints() const;
+	uint32_t get_min_attack() const;
+	uint32_t get_max_attack() const;
+	uint32_t get_defense() const;
+	uint32_t get_evade() const;
 
 	PictureID get_hp_level_pic     () const {
 		return descr().get_hp_level_pic     (m_hp_level);
@@ -286,12 +284,6 @@ protected:
 
 private:
 	uint32_t m_hp_current;
-	uint32_t m_hp_max;
-	uint32_t m_min_attack;
-	uint32_t m_max_attack;
-	uint32_t m_defense;
-	uint32_t m_evade;
-
 	uint32_t m_hp_level;
 	uint32_t m_attack_level;
 	uint32_t m_defense_level;
@@ -312,6 +304,27 @@ private:
 	 * object.
 	 */
 	Battle * m_battle;
+
+	// saving and loading
+protected:
+	class Loader : public Worker::Loader {
+	public:
+		Loader();
+
+		virtual void load(FileRead &);
+		virtual void load_pointers();
+
+	protected:
+		virtual const Task * get_task(const std::string& name);
+
+	private:
+		uint32_t m_battle;
+	};
+
+	virtual Loader* create_loader();
+
+public:
+	virtual void do_save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 };
 
 }
