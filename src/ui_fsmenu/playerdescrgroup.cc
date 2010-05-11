@@ -164,12 +164,16 @@ void PlayerDescriptionGroup::refresh()
 				} else
 					d->btnReadyPlayer->set_visible(false);
 			}
-			// get translated tribesname
 			std::string tribepath("tribes/" + player.tribe);
-			Profile prof
-				((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
-			Section & global = prof.get_safe_section("tribe");
-			d->btnPlayerTribe->set_title(global.get_safe_string("name"));
+			if(!m_tribenames[player.tribe].size())
+			{
+				// get translated tribesname
+				Profile prof
+					((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
+				Section & global = prof.get_safe_section("tribe");
+				m_tribenames[player.tribe] = global.get_safe_string("name");
+			}
+			d->btnPlayerTribe->set_title(m_tribenames[player.tribe]);
 			d->btnPlayerType->set_title(title);
 			{
 				i18n::Textdomain td(tribepath); // for translated initialisation

@@ -113,6 +113,7 @@ struct Graphic {
 
 	void save_png(const PictureID &, StreamWrite *);
 	PictureID create_surface(int32_t w, int32_t h);
+	PictureID create_surface_a(int32_t w, int32_t h);
 	void free_surface(const PictureID & pic);
 	PictureID create_grayed_out_pic(const PictureID & picid);
 	RenderTarget * get_surface_renderer(const PictureID & pic);

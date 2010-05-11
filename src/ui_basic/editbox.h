@@ -73,6 +73,9 @@ private:
 	uint32_t                       m_fontsize;
 	RGBColor                       m_fontcolor;
 
+	bool        m_needredraw;
+	PictureID   m_cache_pid;
+
 	boost::scoped_ptr<EditBoxImpl> m;
 
 	void check_caret();
