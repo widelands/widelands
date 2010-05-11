@@ -5,6 +5,8 @@
 use("aux", "coroutine")
 use("aux", "infrastructure")
 
+use("map", "water_rising")
+
 -- ===================
 -- Constants & Config
 -- ===================
@@ -73,90 +75,24 @@ function intro()
    initialize()
 end
 
-rise_water = true
-step = false
-current_water_level = 9
-ncoroutines = 0
 
+function rise_water()
 
-function water_rise(f, sleeptime)
-   -- If we can't do anything yet, put is back to be considered
-   -- later
-   if f.height > current_water_level then
-      if f.terr ~= "wasser" or f.terd ~= "wasser" then
-         seeding_fields[#seeding_fields + 1] = f
-      end
-      return
-   end
-   ncoroutines = ncoroutines + 1
-
-   while not (f.terr == "wasser" and f.terd == "wasser") do
-      if step then
-         print(("Caring for %i:%i, n: %i"):format(f.x, f.y, ncoroutines))
-
-         if f.terr ~= "wasser" then
-            f.terr = "wasser"
-            step = false
-            sleep(sleeptime)
-         end
-         if f.terd ~= "wasser" then
-            f.terd = "wasser"
-            step = false
-            sleep(sleeptime)
-         end
-         if f.immovable then f.immovable:remove() end
-
-         for idx, nf in ipairs{f.trn, f.tln, f.rn, f.ln, f.brn, f.bln} do
-            if nf.terr ~= "wasser" or nf.terd ~= "wasser" then 
-               seeding_fields[#seeding_fields + 1] = nf
-            end
-         end
-      end
-      sleep(sleeptime)
-   end
+   local seeding_fields = {
+      wl.map.Field(86,8),
+      wl.map.Field(38, 140),
+      wl.map.Field(106, 14),
+      wl.map.Field(130, 157),
+   }
    
-   ncoroutines = ncoroutines - 1
-end
+   -- Global variable!
+   wr = WaterRiser:new(seeding_fields)
 
--- run(intro) TODO: comment me in again
+   wr:run()
+end
 
 -- TODO: comment me out again
 plr.see_all = 1
 
-seeding_fields = {
-   wl.map.Field(86,8),
-   wl.map.Field(38, 140),
-   wl.map.Field(106, 14),
-   wl.map.Field(130, 157),
-}
-
-function start()
-   run(function()
-      while true do
-         local old_seeding_fields = seeding_fields
-         seeding_fields = {}
-         while #old_seeding_fields > 0 do 
-            local idx = math.random(#old_seeding_fields)
-            local f = old_seeding_fields[idx]
-
-            run(function()
-               water_rise(f, math.random(300,1000))
-            end)
-            table.remove(old_seeding_fields, idx)
-         end
-         sleep(3000)
-      end
-   end)
-
-
-   run(function()
-      while true do step = 1; sleep(300) end
-   end)
-end
-
-start()
-
-function rise()
-   current_water_level = current_water_level + 1
-end
+-- run(intro) TODO: comment me in again
 
