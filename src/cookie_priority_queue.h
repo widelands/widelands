@@ -210,7 +210,7 @@ void cookie_priority_queue<_T, _C, _CA>::decrease_key(cookie_priority_queue<_T, 
 		swap(elt_cookie, parent_cookie);
 	}
 
-	selftest();
+	//selftest();
 }
 
 template<typename _T, typename _C, typename _CA>
@@ -253,7 +253,7 @@ void cookie_priority_queue<_T, _C, _CA>::increase_key(cookie_priority_queue<_T, 
 		break;
 	}
 
-	selftest();
+	//selftest();
 }
 
 template<typename _T, typename _C, typename _CA>
