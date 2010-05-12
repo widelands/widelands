@@ -908,22 +908,6 @@ bool WLApplication::init_hardware() {
 #elif __APPLE__
 	videomode.push_back("Quartz");
 #endif
-
-
-#if 0
-	//add experimental video modes
-	if (m_gfx_hw_improvements) {
-#ifdef linux
-		videomode.push_back("svga");
-		videomode.push_back("fbcon");
-		videomode.push_back("directfb");
-		videomode.push_back("dga");
-#elif WIN32
-		videomode.push_back("directx");
-#endif
-	}
-#endif
-
 	//if a video mode is given on the command line, add that one first
 	const char * videodrv;
 	videodrv = getenv("SDL_VIDEODRIVER");
@@ -1085,29 +1069,9 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		g_options.pull_section("global").create_val("nozip", "true");
 		m_commandline.erase("nozip");
 	}
-	if (m_commandline.count("hw_improvement")) {
-		if (m_commandline["hw_improvement"].compare("0") == 0) {
-			g_options.pull_section("global").create_val("hw_improvement", "false");
-		} else if (m_commandline["hw_improvement"].compare("1") == 0) {
-			g_options.pull_section("global").create_val("hw_improvement", "true");
-		} else {
-			log ("Invalid option hw_improvement=[0|1]\n");
-		}
-		m_commandline.erase("hw_improvement");
-	}
-	if (m_commandline.count("double_buffer")) {
-		if (m_commandline["double_buffer"].compare("0") == 0) {
-			g_options.pull_section("global").create_val("double_buffer", "false");
-		} else if (m_commandline["double_buffer"].compare("1") == 0) {
-			g_options.pull_section("global").create_val("double_buffer", "true");
-		} else {
-			log ("Invalid double_buffer=[0|1]\n");
-		}
-		m_commandline.erase("double_buffer");
-	}
 
 	if (m_commandline.count("opengl")) {
-#if USE_OPENGL
+#ifdef USE_OPENGL
 		if (m_commandline["opengl"].compare("0") == 0) {
 			g_options.pull_section("global").create_val("opengl", "false");
 		} else if (m_commandline["opengl"].compare("1") == 0) {
@@ -1331,19 +1295,13 @@ void WLApplication::show_usage()
 			 "                      game screen.\n"
 			 " --depth=[16|32]      Color depth in number of bits per pixel.\n"
 			 " --xres=[...]         Width of the window in pixel.\n"
-			 " --yres=[...]         Height of the window in pixel.\n"
-			 " --hw_improvements=[0|1]\n"
-			 "                      Activate hardware acceleration\n"
-			 "                      *HIGHLY EXPERIMENTAL*\n"
-			 " --double_buffer=[0|1]\n"
-			 "                      Enables double buffering\n"
-			 "                      *HIGHLY EXPERIMENTAL*\n")
+			 " --yres=[...]         Height of the window in pixel.\n")
 #if USE_OPENGL
 		<<
 		_
 			 (" --opengl=[0|1]\n"
 			 "                      Enables opengl rendering\n"
-			 "                      *DANGEROUS AND BROKEN, DO NOT USE*\n")
+			 "                      *EXPERIMENTAL*\n")
 #endif
 		<<
 		_
