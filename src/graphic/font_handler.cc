@@ -19,16 +19,18 @@
  * http://www.wesnoth.org
  */
 
-#include "font_handler.h"
+
 
 #include "io/filesystem/filesystem.h"
 #include "font_loader.h"
 #include "helper.h"
-#include "graphic/rendertarget.h"
-#include "graphic/surface.h"
 #include "log.h"
 #include "wexception.h"
 #include "text_parser.h"
+
+#include "graphic/rendertarget.h"
+#include "graphic/surface.h"
+#include "graphic/font_handler.h"
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -100,6 +102,7 @@ void Font_Handler::draw_string
 	//Width and height of text, needed for alignment
 	uint32_t w, h;
 	PictureID picid;
+	//log("Font_Handler::draw_string(%s)\n", text.c_str());
 	//Fontrender takes care of caching
 	if (widget_cache == Widget_Cache_None) {
 		// look if text is cached
@@ -130,7 +133,7 @@ void Font_Handler::draw_string
 			m_cache.push_front (ci);
 
 			while (m_cache.size() > CACHE_ARRAY_SIZE) {
-				g_gr->free_surface(m_cache.back().picture_id);
+				g_gr->free_picture_surface(m_cache.back().picture_id);
 				m_cache.pop_back();
 			}
 			//Set for alignment and blitting
@@ -144,7 +147,7 @@ void Font_Handler::draw_string
 		picid = widget_cache_id;
 	} else { // We need to (re)create the picid for the widget.
 		if (widget_cache == Widget_Cache_Update)
-			g_gr->free_surface(widget_cache_id);
+			g_gr->free_picture_surface(widget_cache_id);
 		widget_cache_id =
 			create_text_surface
 				(font, fg, bg, text, align, wrap, 0, caret, transparent);
@@ -335,6 +338,8 @@ void Font_Handler::render_caret
 	 SDL_Surface       & line,
 	 std::string const & text_caret_pos)
 {
+#warning TODO OpenGL: rewrite for new renderer
+#if 0
 	int32_t caret_x, caret_y;
 
 	TTF_SizeUTF8(&font, text_caret_pos.c_str(), &caret_x, &caret_y);
@@ -343,13 +348,20 @@ void Font_Handler::render_caret
 	Surface * const caret_surf =
 		g_gr->get_picture_surface
 			(g_gr->get_picture(PicMod_Game, "pics/caret.png"));
-	SDL_Surface * const caret_surf_sdl = caret_surf->m_surface;
+#ifdef USE_OPENGL
+	if(!g_opengl)
+#else
+	{
+		SDL_Surface * const caret_surf_sdl = caret_surf->m_surface;
 
-	SDL_Rect r;
-	r.x = caret_x - caret_surf_sdl->w;
-	r.y = (caret_y - caret_surf_sdl->h) / 2;
-
-	SDL_BlitSurface(caret_surf_sdl, 0, &line, &r);
+		SDL_Rect r;
+		r.x = caret_x - caret_surf_sdl->w;
+		r.y = (caret_y - caret_surf_sdl->h) / 2;
+		
+		SDL_BlitSurface(caret_surf_sdl, 0, &line, &r);
+	}
+#endif
+#endif
 }
 
 /*
@@ -407,12 +419,19 @@ void Font_Handler::draw_richtext
 	 PictureID    &       widget_cache_id,
 	 bool           const transparent)
 {
+	log("Font_Handler::draw_richtext(%s)\n", text.c_str());
+#ifdef USE_OPENGL
+	if(g_opengl)
+		return;
+#endif
+
+#warning TODO OpenGL:  fix to work with new renderer
 	PictureID picid;
 	if (widget_cache == Widget_Cache_Use)
 		picid = widget_cache_id;
 	else {
 		if (widget_cache == Widget_Cache_Update) {
-			g_gr->free_surface(widget_cache_id);
+			g_gr->free_picture_surface(widget_cache_id);
 		}
 		std::vector<Richtext_Block> blocks;
 		Text_Parser p;
@@ -464,7 +483,10 @@ void Font_Handler::draw_richtext
 						img_surf_h < static_cast<int32_t>(image->get_h()) ?
 						image->get_h() : img_surf_h;
 					img_surf_w = img_surf_w + image->get_w();
+#if 0
+					//#ifndef USE_OPENGL
 					rend_cur_images.push_back(image->m_surface);
+#endif
 				}
 			}
 			SDL_Surface * const block_images =
@@ -787,16 +809,15 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
 PictureID Font_Handler::convert_sdl_surface
 	(SDL_Surface & surface, RGBColor const bg, bool const transparent)
 {
-	Surface & surf = *new Surface();
-
 	if (transparent)
 		SDL_SetColorKey
 			(&surface, SDL_SRCCOLORKEY,
 			 SDL_MapRGB(surface.format, bg.r(), bg.g(), bg.b()));
 
-	surf.set_sdl_surface(surface);
+	Surface & surf = g_gr->create_surface(surface);
 
 	PictureID picid = g_gr->get_picture(PicMod_Font, surf);
+
 	return picid;
 }
 
@@ -828,13 +849,13 @@ void Font_Handler::do_align
  */
 void Font_Handler::flush_cache() {
 	while (!m_cache.empty()) {
-		g_gr->free_surface (m_cache.front().picture_id);
+		g_gr->free_picture_surface (m_cache.front().picture_id);
 		m_cache.pop_front();
 	}
 }
 //Deletes widget controlled surface
 void Font_Handler::delete_widget_cache(PictureID const widget_cache_id) {
-	g_gr->free_surface(widget_cache_id);
+	g_gr->free_picture_surface(widget_cache_id);
 }
 
 //Inserts linebreaks into a text, so it doesn't get bigger than max_width

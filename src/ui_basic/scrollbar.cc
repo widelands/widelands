@@ -320,16 +320,16 @@ void Scrollbar::draw(RenderTarget & odst)
 	if (m_steps == 1 && !m_force_draw)
 		return; // don't draw a not doing scrollbar
 		
-	
+	/*
 	if(!m_needredraw)
 	{
 		odst.blit(Point(0, 0), m_cache_pid);
 		return;
 	}
 
-	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
-	
-	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
+	m_cache_pid = g_gr->create_picture_surface(odst.get_w(), odst.get_h());
+	*/
+	RenderTarget &dst = odst; // *(g_gr->get_surface_renderer(m_cache_pid));
 
 	if (m_horizontal) {
 		if ((2 * Size + knobsize) > static_cast<uint32_t>(get_w())) {
@@ -384,7 +384,7 @@ void Scrollbar::draw(RenderTarget & odst)
 			 	(Point(0, knobpos + knobsize / 2),
 			 	 get_w(), get_h() - knobpos - knobsize / 2 - Size));
 	}
-	odst.blit(Point(0, 0), m_cache_pid);
+	//odst.blit(Point(0, 0), m_cache_pid);
 	m_needredraw = false;
 }
 

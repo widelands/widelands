@@ -21,7 +21,7 @@
 
 #include "mouse_constants.h"
 
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
 
@@ -316,15 +316,15 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 
 void EditBox::draw(RenderTarget & odst)
 {
-	if(!m_needredraw)
-	{
-		odst.blit(Point(0, 0), m_cache_pid);
-		return;
-	}
+	//if(!m_needredraw)
+	//{
+	//	odst.blit(Point(0, 0), m_cache_pid);
+	//	return;
+	//}
 
-	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
+	//m_cache_pid = g_gr->create_picture_surface(odst.get_w(), odst.get_h());
 
-	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
+	RenderTarget &dst = odst; //*(g_gr->get_surface_renderer(m_cache_pid));
 
 	// Draw the background
 	dst.tile
@@ -381,8 +381,8 @@ void EditBox::draw(RenderTarget & odst)
 		 has_focus() ? static_cast<int32_t>(m->caret) :
 		 std::numeric_limits<uint32_t>::max());
 
-	odst.blit(Point(0, 0), m_cache_pid);
-	m_needredraw = false;
+	//odst.blit(Point(0, 0), m_cache_pid);
+	//m_needredraw = false;
 }
 
 }

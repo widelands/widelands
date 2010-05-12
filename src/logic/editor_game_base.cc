@@ -23,7 +23,7 @@
 #include "battle.h"
 #include "building.h"
 #include "economy/flag.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "game.h"
 #include "i18n.h"
 #include "instances.h"

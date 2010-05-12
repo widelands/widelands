@@ -33,7 +33,7 @@
 #include "economy/flag.h"
 #include "encyclopedia_window.h"
 #include "fieldaction.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "game_chat_menu.h"
 #include "game_io/game_loader.h"
 #include "game_main_menu.h"

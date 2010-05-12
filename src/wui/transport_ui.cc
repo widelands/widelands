@@ -18,7 +18,7 @@
  */
 
 #include "economy/economy.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "interactive_gamebase.h"
 #include "logic/item_ware_descr.h"
 #include "logic/player.h"

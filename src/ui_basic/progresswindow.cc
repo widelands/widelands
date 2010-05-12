@@ -20,7 +20,7 @@
 #include "progresswindow.h"
 
 #include "constants.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -85,7 +85,7 @@ void ProgressWindow::draw_background
 	}
 
 	if (background_resized != background_original)
-		g_gr->free_surface(background_resized);
+		g_gr->free_picture_surface(background_resized);
 
 	const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
 	m_label_rectangle.x = xres / 4;

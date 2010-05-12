@@ -21,7 +21,7 @@
 
 #include "mouse_constants.h"
 
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 #include "log.h"
@@ -90,7 +90,7 @@ Button::Button //  for pictorial buttons
 
 Button::~Button() {
 	if (m_pic_custom_disabled != g_gr->get_no_picture())
-		g_gr->free_surface(m_pic_custom_disabled);
+		g_gr->free_picture_surface(m_pic_custom_disabled);
 }
 
 
@@ -107,7 +107,7 @@ void Button::set_pic(PictureID const picid)
 
 	m_pic_custom = picid;
 	if (m_pic_custom_disabled != g_gr->get_no_picture())
-		g_gr->free_surface(m_pic_custom_disabled);
+		g_gr->free_picture_surface(m_pic_custom_disabled);
 	m_pic_custom_disabled = g_gr->create_grayed_out_pic(picid);
 
 	update();

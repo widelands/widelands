@@ -22,19 +22,15 @@
 
 #include "animation_gfx.h"
 #include "picture.h"
+#include "picture_id.h"
 #include "rect.h"
-#include "surface.h"
+//#include "surface.h"
+//#include "texture.h"
 
 #include <png.h>
-#include <SDL_opengl.h>
 
 #include <vector>
-
-#ifdef USE_OPENGL
-#define HAS_OPENGL 1
-#include <boost/shared_ptr.hpp>
-#endif
-
+#include <map>
 /**
  * Names of road terrains
  */
@@ -45,16 +41,19 @@
 
 namespace UI {struct ProgressWindow;}
 
+class Surface;
+class Texture;
 struct RenderTarget;
 class Surface;
 struct Graphic;
 struct Road_Textures;
 struct StreamWrite;
 struct Texture;
+struct SDL_Surface;
+struct SDL_Rect;
 
-///\todo Get rid of this global function
-SDL_Surface * LoadImage(char const * filename);
-
+// This table is used by create_grayed_out_pic() 
+// to map colors to grayscle. It is initialized in Graphic::Graphic()
 extern uint32_t luminance_table_r[0x100];
 extern uint32_t luminance_table_g[0x100];
 extern uint32_t luminance_table_b[0x100];
@@ -72,16 +71,9 @@ extern uint32_t luminance_table_b[0x100];
 */
 
 struct Graphic {
-#if HAS_OPENGL
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool hw_improvements, bool double_buffer, bool opengl);
-#else
-	Graphic
-		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool hw_improvements, bool double_buffer);
-#endif
-
+		 bool fullscreen, bool opengl);
 	~Graphic();
 
 	int32_t get_xres() const;
@@ -98,6 +90,7 @@ struct Graphic {
 
 	void flush(PicMod module);
 	void flush_animations();
+	Surface & LoadImage(const std::string & fname);
 	PictureID & get_picture(PicMod module, const std::string & fname)
 	__attribute__ ((pure));
 	PictureID get_picture
@@ -111,10 +104,15 @@ struct Graphic {
 	void get_picture_size
 		(const PictureID & pic, uint32_t & w, uint32_t & h) const;
 
-	void save_png(const PictureID &, StreamWrite *);
-	PictureID create_surface(int32_t w, int32_t h);
-	PictureID create_surface_a(int32_t w, int32_t h);
-	void free_surface(const PictureID & pic);
+	void save_png(const PictureID &, StreamWrite *) const;
+	void save_png(Surface & surf, StreamWrite *) const;
+
+	PictureID create_picture_surface(int32_t w, int32_t h);
+	Surface & create_surface(SDL_Surface &);
+	Surface & create_surface(Surface &);
+	Surface & create_surface(int32_t w, int32_t h);
+	void free_picture_surface(const PictureID & pic);
+
 	PictureID create_grayed_out_pic(const PictureID & picid);
 	RenderTarget * get_surface_renderer(const PictureID & pic);
 
@@ -160,7 +158,8 @@ protected:
 		 png_size_t length);
 	static void m_png_flush_function (png_structp png_ptr);
 
-	Surface m_screen;
+	Surface * m_screen;
+	SDL_Surface * m_sdl_screen;
 	RenderTarget * m_rendertarget;
 	SDL_Rect m_update_rects[MAX_RECTS];
 	int32_t m_nr_update_rects;
@@ -178,9 +177,7 @@ protected:
 };
 
 extern Graphic * g_gr;
-#if HAS_OPENGL
 extern bool g_opengl;
-#endif
 
 #endif
 

@@ -23,7 +23,7 @@
 #include "computer_player.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "editor/editorinteractive.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/editor_mapselect.h"
@@ -87,6 +87,8 @@ volatile int32_t WLApplication::may_run = 0;
 #endif
 #endif
 
+#define MINIMUM_DISK_SPACE 250000000lu
+#define SCREENSHOT_DIR "screenshots" 
 
 //Always specifying namespaces is good, but let's not go too far ;-)
 //using std::cout;
@@ -255,11 +257,7 @@ m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
 m_gfx_w(0), m_gfx_h(0),
 m_gfx_fullscreen       (false),
-m_gfx_hw_improvements  (false),
-m_gfx_double_buffer    (false),
-#if HAS_OPENGL
 m_gfx_opengl           (false),
-#endif
 m_default_datadirs     (true)
 {
 	g_fs = new LayeredFileSystem();
@@ -558,14 +556,23 @@ void WLApplication::handle_input(InputCallback const * cb)
 			}
 			if (ev.key.keysym.sym == SDLK_F11) { //  take screenshot
 				if (ev.type == SDL_KEYDOWN)
+				{
+					if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
+						log
+							("Omitting screenshot because diskspace is lower than %luMB\n",
+							 MINIMUM_DISK_SPACE/1000/1000);
+						break;
+					}
+					g_fs->EnsureDirectoryExists(SCREENSHOT_DIR);
 					for (uint32_t nr = 0; nr < 10000; ++nr) {
 						char buffer[256];
-						snprintf(buffer, sizeof(buffer), "shot%04u.bmp", nr); // FIXME
+						snprintf(buffer, sizeof(buffer), SCREENSHOT_DIR "/shot%04u.png", nr);
 						if (g_fs->FileExists(buffer))
 							continue;
 						g_gr->screenshot(*buffer);
 						break;
 					}
+				}
 				break;
 			}
 			if (cb && cb->key) {
@@ -698,27 +705,15 @@ void WLApplication::set_input_grab(bool grab)
  * \todo Ensure that calling this with active UI elements does barf
  * \todo Document parameters
  */
-#if HAS_OPENGL
+
 void WLApplication::init_graphics
 	(int32_t const w, int32_t const h, int32_t const bpp,
-	 bool const fullscreen, bool const hw_improvements,
-	 bool const double_buffer, bool const opengl)
-#else
-void WLApplication::init_graphics
-	(int32_t const w, int32_t const h, int32_t const bpp,
-	 bool const fullscreen, bool const hw_improvements,
-	 bool const double_buffer)
-#endif
+	 bool const fullscreen, bool const opengl)
 {
 	if
 		(w == m_gfx_w && h == m_gfx_h &&
 		 fullscreen == m_gfx_fullscreen &&
-		 hw_improvements == m_gfx_hw_improvements &&
-		 double_buffer == m_gfx_double_buffer
-#if HAS_OPENGL
-		 && opengl == m_gfx_opengl
-#endif
-		 /**/)
+		 opengl == m_gfx_opengl)
 		return;
 
 	delete g_gr;
@@ -727,21 +722,13 @@ void WLApplication::init_graphics
 	m_gfx_w = w;
 	m_gfx_h = h;
 	m_gfx_fullscreen = fullscreen;
-	m_gfx_hw_improvements = hw_improvements;
-	m_gfx_double_buffer = double_buffer;
-#if HAS_OPENGL
 	m_gfx_opengl = opengl;
-#endif
+
 
 	// If we are not to be shut down
 	if (w && h) {
-#if HAS_OPENGL
 		g_gr = new Graphic
-			(w, h, bpp, fullscreen, hw_improvements, double_buffer, opengl);
-#else
-		g_gr = new Graphic
-			(w, h, bpp, fullscreen, hw_improvements, double_buffer);
-#endif
+			(w, h, bpp, fullscreen, opengl);
 	}
 }
 
@@ -770,9 +757,8 @@ bool WLApplication::init_settings() {
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
 	m_gfx_fullscreen = s.get_bool("fullscreen", false);
-	m_gfx_hw_improvements = s.get_bool("hw_improvements", false);
-	m_gfx_double_buffer = s.get_bool("double_buffer", false);
-#if HAS_OPENGL
+
+#if USE_OPENGL
 	m_gfx_opengl = s.get_bool("opengl", false);
 #endif
 
@@ -868,6 +854,8 @@ bool WLApplication::init_hardware() {
 	videomode.push_back("Quartz");
 #endif
 
+
+#if 0
 	//add experimental video modes
 	if (m_gfx_hw_improvements) {
 #ifdef linux
@@ -879,6 +867,7 @@ bool WLApplication::init_hardware() {
 		videomode.push_back("directx");
 #endif
 	}
+#endif
 
 	//if a video mode is given on the command line, add that one first
 	const char * videodrv;
@@ -915,17 +904,9 @@ bool WLApplication::init_hardware() {
 	uint32_t xres = s.get_int("xres", XRES);
 	uint32_t yres = s.get_int("yres", YRES);
 
-#if HAS_OPENGL
 	init_graphics
 		(xres, yres, s.get_int("depth", 16),
-		 m_gfx_fullscreen, m_gfx_hw_improvements,
-		 m_gfx_double_buffer, m_gfx_opengl);
-#else
-	init_graphics
-		(xres, yres, s.get_int("depth", 16),
-		 m_gfx_fullscreen, m_gfx_hw_improvements,
-		 m_gfx_double_buffer);
-#endif
+		 m_gfx_fullscreen, m_gfx_opengl);
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
@@ -948,11 +929,8 @@ void WLApplication::shutdown_hardware()
 			"WARNING: Hardware shutting down although graphics system is still "
 			"alive!"
 			<< endl;
-#if HAS_OPENGL
-	init_graphics(0, 0, 0, false, false, false, false);
-#else
-	init_graphics(0, 0, 0, false, false, false);
-#endif
+
+	init_graphics(0, 0, 0, false, false);
 
 	SDL_Quit();
 }
@@ -1054,8 +1032,9 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		}
 		m_commandline.erase("double_buffer");
 	}
-#if HAS_OPENGL
+
 	if (m_commandline.count("opengl")) {
+#if USE_OPENGL
 		if (m_commandline["opengl"].compare("0") == 0) {
 			g_options.pull_section("global").create_val("opengl", "false");
 		} else if (m_commandline["opengl"].compare("1") == 0) {
@@ -1063,9 +1042,12 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		} else {
 			log ("Invalid option opengl=[0|1]\n");
 		}
+#else
+		log("WARNIG: This version was compiled without support for OpenGL\n");
+#endif
 		m_commandline.erase("opengl");
 	}
-#endif
+
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
 		g_fs->AddFileSystem(FileSystem::Create(m_commandline["datadir"]));
@@ -1263,7 +1245,7 @@ void WLApplication::show_usage()
 			 " --double_buffer=[0|1]\n"
 			 "                      Enables double buffering\n"
 			 "                      *HIGHLY EXPERIMENTAL*\n"
-#if HAS_OPENGL
+#if USE_OPENGL
 			 " --opengl=[0|1]\n"
 			 "                      Enables opengl rendering\n"
 			 "                      *DANGEROUS AND BROKEN, DO NOT USE*\n"

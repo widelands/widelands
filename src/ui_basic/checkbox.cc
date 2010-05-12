@@ -57,7 +57,7 @@ Statebox::Statebox
 Statebox::~Statebox() {
 	if (m_flags & Owns_Custom_Picture) {
 		assert(m_flags & Has_Custom_Picture);
-		g_gr->free_surface(m_pic_graphics);
+		g_gr->free_picture_surface(m_pic_graphics);
 	}
 }
 

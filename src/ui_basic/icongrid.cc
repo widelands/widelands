@@ -21,7 +21,7 @@
 
 #include "mouse_constants.h"
 
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "constants.h"
 

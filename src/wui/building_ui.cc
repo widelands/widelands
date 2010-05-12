@@ -352,7 +352,7 @@ m_display_size(0)
 
 
 WaresQueueDisplay::~WaresQueueDisplay() {
-	g_gr->free_surface(m_pic_background);
+	g_gr->free_picture_surface(m_pic_background);
 }
 
 

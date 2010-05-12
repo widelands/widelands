@@ -29,7 +29,7 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "ui_basic/messagebox.h"
 
 #include <cstdio>

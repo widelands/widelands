@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,17 @@
  *
  */
 
+#include "io/filesystem/layered_filesystem.h"
+#include "io/fileread.h"
+#include "graphic.h"
 #include "texture.h"
 
-#include "constants.h"
-#include "graphic.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "wexception.h"
-
 #include "log.h"
+#include "constants.h"
+#include "wexception.h"
+#include "container_iterate.h"
+
+#include <SDL_image.h>
 
 /**
  * Create a texture, taking the pixel data from a Pic.
@@ -60,24 +63,38 @@ is_32bit   (format.BytesPerPixel == 4)
 			nr = nr / 10;
 		}
 
+		//log("Texture::Texture(%s): load %s\n", &fnametmpl, fname);
 		if (nr) // cycled up to maximum possible frame number
 			break;
-
+		
 		// is the frame actually there?
 		if (!g_fs->FileExists(fname))
 			break;
-
-		// Load it
+		
+		if (g_opengl){
+			
+			continue;
+		}
+		
+		//We are not in opengl mode. Loa
 		SDL_Surface * surf;
 
 		m_texture_picture = strdup(fname);
 
-		try {
-			surf = LoadImage(fname);
-		} catch (std::exception const & e) {
-			log("WARNING: Failed to load texture frame %s: %s\n", fname, e.what());
+		FileRead fr;
+
+		//fastOpen tries to use mmap
+		fr.fastOpen(*g_fs, fname);
+
+		surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+
+		log("loaded into sdl surface ...\n");
+		
+		if (!surf) {
+			log("WARNING: Failed to load texture frame %s: %s\n", fname, IMG_GetError());
 			break;
 		}
+		
 
 		if (surf->w != TEXTURE_WIDTH || surf->h != TEXTURE_HEIGHT) {
 			SDL_FreeSurface(surf);
@@ -89,6 +106,7 @@ is_32bit   (format.BytesPerPixel == 4)
 			break;
 		}
 
+		log("Search colormap ...\n");
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
 			if (surf->format->BitsPerPixel == 8)
@@ -110,6 +128,7 @@ is_32bit   (format.BytesPerPixel == 4)
 			}
 		}
 
+		log("convert to palette ...\n");
 		// Convert to our palette
 		SDL_Palette palette;
 		SDL_PixelFormat fmt;
@@ -122,8 +141,10 @@ is_32bit   (format.BytesPerPixel == 4)
 		fmt.BytesPerPixel = 1;
 		fmt.palette = &palette;
 
+		log("Convert Surface ...\n");
 		SDL_Surface * const cv = SDL_ConvertSurface(surf, &fmt, 0);
 
+		log("allocate pixel memor< ...\n");
 		// Add the frame
 		m_pixels =
 			static_cast<uint8_t *>
@@ -132,6 +153,7 @@ is_32bit   (format.BytesPerPixel == 4)
 		m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_nrframes];
 		++m_nrframes;
 
+		log("Copy pixels ...\n");
 		SDL_LockSurface(cv);
 
 		for (int32_t y = 0; y < TEXTURE_HEIGHT; ++y)
@@ -142,7 +164,9 @@ is_32bit   (format.BytesPerPixel == 4)
 
 		SDL_UnlockSurface(cv);
 		
-#ifdef HAS_OPENGL
+#warning TODO opengl: rework this code
+#ifdef USE_OPENGL
+/*
 		fmt.BitsPerPixel = 24;
 		fmt.BytesPerPixel = 3;
 		fmt.palette = 0;
@@ -150,29 +174,12 @@ is_32bit   (format.BytesPerPixel == 4)
 		fmt.Gmask = 0x0000FF00;
 		fmt.Bmask = 0x00FF0000;
 		fmt.Amask = 0;
-		SDL_Surface * tsurface = SDL_ConvertSurface(surf, &fmt, 0);
-		
-		GLuint texture;
-		
-		// Let OpenGL create a texture object
-		glGenTextures( 1, &texture );
+*/
+		if (g_opengl) {
+			SurfaceOpenGL * tsurface = &dynamic_cast<SurfaceOpenGL &>(g_gr->LoadImage(fname));// SDL_ConvertSurface(surf, &fmt, 0);
 
-		// seclet the texture object
-		glBindTexture( GL_TEXTURE_2D, texture );
-
-		// set texture filter to siply take the nearest pixel.
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-
-		glTexImage2D( GL_TEXTURE_2D, 0, 3, tsurface->w, tsurface->h, 0,
-		GL_RGB, GL_UNSIGNED_BYTE, tsurface->pixels );
-		
-		
-		if(tsurface)
-		SDL_FreeSurface(tsurface);
-		
-		
-		m_glFrames.push_back(texture);
+			m_glFrames.push_back(tsurface);
+		}
 #endif
 
 		SDL_FreeSurface(cv);
@@ -190,6 +197,9 @@ Texture::~Texture ()
 	delete m_colormap;
 	free(m_pixels);
 	free(m_texture_picture);
+
+	container_iterate(std::vector<SurfaceOpenGL *>, m_glFrames, it)
+		delete *it.current;
 }
 
 /**

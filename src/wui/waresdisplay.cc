@@ -20,7 +20,7 @@
 #include "waresdisplay.h"
 
 #include "logic/editor_game_base.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "i18n.h"
 #include "logic/player.h"
 #include "graphic/rendertarget.h"

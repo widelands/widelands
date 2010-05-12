@@ -22,7 +22,7 @@
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "logic/game.h"
 #include "gamecontroller.h"
 #include "logic/immovable.h"
@@ -91,12 +91,12 @@ Interactive_Base::Interactive_Base
 		(get_xres(), get_yres(),
 		 global_s.get_int("depth", 16),
 		 global_s.get_bool("fullscreen", false),
-		 global_s.get_bool("hw_improvements", false),
-		 global_s.get_bool("double_buffer", false)
-#if HAS_OPENGL
-		 /**/, global_s.get_bool("opengl", false)
+#if USE_OPENGL
+		 global_s.get_bool("opengl", false)
+#else
+		 false
 #endif
-		 /**/);
+		 );
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.

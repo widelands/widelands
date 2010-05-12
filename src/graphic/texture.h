@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,12 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <boost/shared_ptr.hpp>
-
 #include "colormap.h"
 #include "picture_id.h"
 
+#include "graphic/render/surface_opengl.h"
+
+#include <boost/shared_ptr.hpp>
 #include <stdint.h>
 #include <vector>
 
@@ -61,11 +62,10 @@ struct Texture {
 
 	void animate(uint32_t time);
 	void reset_was_animated() {m_was_animated = false;}
-	bool was_animated() const throw () {return m_was_animated;}
-#ifdef HAS_OPENGL
+	bool was_animated() const throw () {return m_was_animated;} 
+#ifdef USE_OPENGL
 	uint32_t getTexture(uint32_t frame = 0) const
-		{return m_glFrames.at(frame);}
-	//uint32_t getCurTexture(return m_glFrames.at(frame););
+		{return m_glFrames.at(frame)->get_texture();}
 #endif
 
 private:
@@ -77,8 +77,8 @@ private:
 	uint32_t   m_frametime;
 	bool       is_32bit;
 	bool       m_was_animated;
-#ifdef HAS_OPENGL
-	std::vector<uint32_t> m_glFrames;
+#ifdef USE_OPENGL
+	std::vector<SurfaceOpenGL *> m_glFrames;
 #endif
 };
 

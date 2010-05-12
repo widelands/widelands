@@ -21,10 +21,8 @@
 
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "editor/editorinteractive.h"
-#include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "graphic/rendertarget.h"
 #include <SDL_keysym.h>
 #include "wlapplication.h"
 #include "logic/world.h"
@@ -33,6 +31,10 @@
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/checkbox.h"
+
+#include "graphic/graphic.h"
+#include "graphic/texture.h"
+#include "graphic/rendertarget.h"
 
 Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	(Editor_Interactive         & parent,
@@ -91,7 +93,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			}
 
 			//  create a surface for this
-			PictureID surface = g_gr->create_surface(64, 64);
+			PictureID surface = g_gr->create_picture_surface(64, 64);
 
 			//  get the rendertarget for this
 			RenderTarget & target = *g_gr->get_surface_renderer(surface);
@@ -168,7 +170,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu() {
 	container_iterate_const(std::vector<PictureID>, m_surfaces, i)
-		g_gr->free_surface(*i.current);
+		g_gr->free_picture_surface(*i.current);
 }
 
 

@@ -50,22 +50,17 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 
 	Section & s = g_options.pull_section("global");
 
-#if HAS_OPENGL
 	WLApplication::get()->init_graphics
 		(m_xres, m_yres,
 		 s.get_int("depth", 16),
 		 s.get_bool("fullscreen", false),
-		 s.get_bool("hw_improvements", false),
-		 s.get_bool("double_buffer", false),
-		 s.get_bool("opengl", false));
+#ifdef USE_OPENGL
+		 s.get_bool("opengl", false)
 #else
-	WLApplication::get()->init_graphics
-		(m_xres, m_yres,
-		 s.get_int("depth", 16),
-		 s.get_bool("fullscreen", false),
-		 s.get_bool("hw_improvements", false),
-		 s.get_bool("double_buffer", false));
+		 false
 #endif
+		 );
+
 
 	// Load background graphics
 	char buffer[256];
@@ -77,7 +72,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 
 Fullscreen_Menu_Base::~Fullscreen_Menu_Base() {
 	if (m_res_background != m_pic_background)
-		g_gr->free_surface(m_res_background);
+		g_gr->free_picture_surface(m_res_background);
 }
 
 

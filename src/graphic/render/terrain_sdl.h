@@ -21,14 +21,19 @@
 #define TERRAIN_H
 
 #include "constants.h"
-#include "graphic/graphic.h"
-#include "wui/mapviewpixelconstants.h"
+#include "log.h"
 #include "random.h"
-#include "graphic/surface.h"
-#include "logic/roadtype.h"
 #include "vertex.h"
 
-#include "log.h"
+#include "wui/mapviewpixelconstants.h"
+
+
+#include "logic/roadtype.h"
+
+#include "graphic/render/surface_sdl.h"
+#include "graphic/graphic.h"
+#include "graphic/texture.h"
+
 
 ///Must be a power of two
 #define DITHER_WIDTH 4
@@ -81,7 +86,7 @@ struct RightEdge {
  * The edge lists will be overwritten with undefined values.
  */
 template<typename T> static void render_edge_lists
-	(Surface & dst, Texture const & tex,
+	(SurfaceSDL & dst, Texture const & tex,
 	 int32_t y, int32_t height,
 	 LeftEdge * left, RightEdge * right,
 	 int32_t dbdx, int32_t dtydx)
@@ -210,14 +215,13 @@ struct WLPolygon {
  * texture x coordinates.
  */
 template<typename T> static void render_triangle
-	(Surface & dst,
+	(SurfaceSDL & dst,
 	 Vertex const & p1, Vertex const & p2, Vertex const & p3,
 	 Texture const & tex)
 {
 	if (p1.y == p2.y && p2.y == p3.y)
 		return; // degenerate triangle
-
-#if HAS_OPENGL
+#if NULL_WAS_HAS_OPENGL
 	if (g_opengl) {
 		if(p1.b==-128 and p2.b==-128 and p3.b==-128)
 			return;
@@ -370,18 +374,10 @@ template<typename T> static void render_triangle
  * rendering could be handled as a special case then.
 */
 template<typename T> static void dither_edge_horiz
-	(Surface & dst,
+	(SurfaceSDL & dst,
 	 Vertex const & start, Vertex const & end,
 	 Texture const & ttex, Texture const & btex)
 {
-#ifdef HAS_OPENGL
-
-	//log("Warning: render_triangle not implemented\n");
-	if (g_opengl) {
-		return;
-	}
-#endif
-
 	uint8_t * tpixels, * bpixels;
 	T * tcolormap, * bcolormap;
 
@@ -475,18 +471,10 @@ template<typename T> static void dither_edge_horiz
  * \see dither_edge_horiz
  */
 template<typename T> static void dither_edge_vert
-	(Surface & dst,
+	(SurfaceSDL & dst,
 	 Vertex const & start, Vertex const & end,
 	 Texture const & ltex, Texture const & rtex)
 {
-#ifdef HAS_OPENGL
-
-	//log("Warning: render_triangle not implemented\n");
-	if (g_opengl) {
-		return;
-	}
-#endif
-
 	uint8_t * lpixels, * rpixels;
 	T * lcolormap, * rcolormap;
 
@@ -573,16 +561,15 @@ template<typename T> static void dither_edge_vert
 }
 
 template<typename T> static void render_road_horiz
-	(Surface & dst, Point const start, Point const end, Surface const & src)
+	(SurfaceSDL & dst, Point const start, Point const end, Surface const & src)
 {
 	int32_t const dstw = dst.get_w();
 	int32_t const dsth = dst.get_h();
 
 	int32_t const ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int32_t centery = start.y << 16;
-	
-#ifdef HAS_OPENGL
 
+#ifdef NULL_WAS_HAS_OPENGL
 	//log("Warning: render_triangle not implemented\n");
 	if (g_opengl) {
 		glMatrixMode(GL_TEXTURE);
@@ -627,7 +614,7 @@ template<typename T> static void render_road_horiz
 }
 
 template<typename T> static void render_road_vert
-	(Surface & dst, Point const start, Point const end, Surface const & src)
+	(SurfaceSDL & dst, Point const start, Point const end, Surface const & src)
 {
 	int32_t const dstw = dst.get_w();
 	int32_t const dsth = dst.get_h();
@@ -635,8 +622,7 @@ template<typename T> static void render_road_vert
 	int32_t const xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int32_t centerx = start.x << 16;
 
-#ifdef HAS_OPENGL
-
+#ifdef NULL_WAS_HAS_OPENGL
 	//log("Warning: render_triangle not implemented\n");
 	if (g_opengl) {
 		glMatrixMode(GL_TEXTURE);
@@ -679,7 +665,7 @@ template<typename T> static void render_road_vert
 }
 
 template<typename T> static void draw_field_int
-	(Surface       & dst,
+	(SurfaceSDL       & dst,
 	 Vertex  const &  f_vert,
 	 Vertex  const &  r_vert,
 	 Vertex  const & bl_vert,

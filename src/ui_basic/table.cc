@@ -19,8 +19,9 @@
 
 #include "table.h"
 
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
+#include "graphic/surface.h"
 #include "button.h"
 #include "mouse_constants.h"
 #include "scrollbar.h"
@@ -259,11 +260,11 @@ void Table<void *>::draw(RenderTarget & odst)
 		return;
 	}
 
-	m_cache_pid = g_gr->create_surface_a(odst.get_w(), odst.get_h());
+	m_cache_pid = g_gr->create_picture_surface(odst.get_w(), odst.get_h());
 
 	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 80));
 
-	SDL_SetAlpha(m_cache_pid->surface->get_sdl_surface(), SDL_SRCALPHA, 0);
+	//SDL_SetAlpha(m_cache_pid->surface->get_sdl_surface(), SDL_SRCALPHA, 0);
 	
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
   
