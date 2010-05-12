@@ -56,6 +56,7 @@ struct Options_Ctrl {
 		uint32_t maxfps;
 		uint32_t remove_replays;
 		bool remove_syncstreams;
+		bool opengl;
 
 		// advanced options
 		bool message_sound;
@@ -172,6 +173,8 @@ private:
 
 	UI::Checkbox                m_remove_syncstreams;
 	UI::Textarea                m_label_remove_syncstreams;
+	UI::Checkbox                m_opengl;
+	UI::Textarea                m_label_opengl;
 
 	Options_Ctrl::Options_Struct os;
 };

@@ -459,6 +459,12 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		 m_xres * 1313 / 10000, m_yres * 7865 / 10000,
 		 _("Remove Syncstream dumps on startup"), UI::Align_VCenter),
 
+	m_opengl (this, Point(m_xres * 19 / 200, m_yres * 8180 / 10000)),
+	m_label_opengl
+		(this,
+		 m_xres * 1313 / 10000, m_yres * 8330 / 10000,
+		 _("OpenGL rendering *Highly experimental!*"), UI::Align_VCenter),
+
 	os(opt)
 {
 	m_title                .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
@@ -471,6 +477,11 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_label_snap_dis_panel .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_remove_syncstreams.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
+	m_label_opengl         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_opengl               .set_state(opt.opengl);
+#ifndef USE_OPENGL
+	m_opengl               .set_enabled(false);
+#endif
 	m_sb_speed             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_border        .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_panel         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -533,6 +544,11 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	os.panel_snap_distance  = m_sb_dis_panel.getValue();
 	os.border_snap_distance = m_sb_dis_border.getValue();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
+#ifdef USE_OPENGL
+	os.opengl               = m_opengl.get_state();
+#else
+	os.opengl               = false;
+#endif
 	return os;
 }
 
@@ -614,6 +630,8 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 		("remove_replays", 0);
 	opt.remove_syncstreams    = m_opt_section.get_bool
 		("remove_syncstreams", true);
+	opt.opengl                = m_opt_section.get_bool
+		("opengl", false);
 	return opt;
 }
 
@@ -646,6 +664,7 @@ void Options_Ctrl::save_options() {
 
 	m_opt_section.set_int("remove_replays",         opt.remove_replays);
 	m_opt_section.set_bool("remove_syncstreams",    opt.remove_syncstreams);
+	m_opt_section.set_bool("opengl",                opt.opengl);
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
