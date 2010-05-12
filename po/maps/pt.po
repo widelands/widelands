@@ -1,4 +1,4 @@
-# Norwegian Bokmal translation for widelands
+# Portuguese translation for widelands
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-11 16:38+0000\n"
-"Last-Translator: Hans Joachim Desserud <Unknown>\n"
-"Language-Team: Norwegian Bokmal <nb@li.org>\n"
+"PO-Revision-Date: 2010-05-08 23:02+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:24
 msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Opplæring) Barbarer - Det andre imperiet"
+msgstr ""
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "Kart for krig mellom flere spillere på en X-formet øy."
+msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -48,15 +48,13 @@ msgstr ""
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
-msgstr "Et kart for krig mellom flere spillere på en liten sirkelformet øy."
+msgstr ""
 
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
 msgstr ""
-"Et mystisk land, fullt av forskjellige landskaper, som alle krysses av en "
-"håndfull store elver."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -70,8 +68,6 @@ msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way, than occupying the land of your enemies."
 msgstr ""
-"En annen underlig test fra gudene. Den eneste måten å komme til den andre "
-"siden ser ut til å være å ta over landområdene til fiendene dine."
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
@@ -88,19 +84,19 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
-msgstr "Atoll"
+msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
-msgstr "Sjakkmatt"
+msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
-msgstr "Kometøya"
+msgstr ""
 
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
-msgstr "Krater"
+msgstr ""
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -113,18 +109,14 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
-"Hver stamme er omringet av fire mektige fjell. Hvem vil være den første til "
-"å erobre dem for å legge beslag på ressursene for sin egen stamme? Hint 1: "
-"vann finnes rundt elven. Hint 2 : snømenn merker ytterligere vannressurser. "
-"Hint 3: Hvert av fjellene inneholder kun en ressurs hver."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
-msgstr "Alviske skoger"
+msgstr ""
 
 #: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
-msgstr "Imperiet - Månedene i eksil"
+msgstr ""
 
 #: ../../campaigns/cconfig:74
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
@@ -136,11 +128,11 @@ msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
-msgstr "Fiende i sikte"
+msgstr ""
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
-msgstr "De finske sjøer"
+msgstr ""
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -163,11 +155,11 @@ msgstr ""
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
-msgstr "Fire slott"
+msgstr ""
 
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
-msgstr "Fire fjell"
+msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -175,7 +167,7 @@ msgstr ""
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
-msgstr "Gyllen halvøy"
+msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
@@ -197,7 +189,7 @@ msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
-msgstr "Øyer i krig"
+msgstr ""
 
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid ""
@@ -205,9 +197,6 @@ msgid ""
 "these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
 "Geologists elsewhere."
 msgstr ""
-"Det blir at sagt at selv solen og månen må finne veien gjennom toppene til "
-"disse fjellene. Hint: Monolitter marker malm-forekomster. Ikke bry med å "
-"sende geologer andre steder."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -223,9 +212,6 @@ msgid ""
 "place you were born and you lived your whole life. If you don't want to lose "
 "it, defend it! "
 msgstr ""
-"Det lukter som sump, det ser ut som sump og det er sump. Men det er her du "
-"ble født og har bodd hele livet ditt. Hvis du ikke vil miste det, må du "
-"forsvare det! "
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
@@ -247,8 +233,6 @@ msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the "
 "crater. Two tribes are now fighting for the rich resources."
 msgstr ""
-"Lenge etter at en meteor slo ned i en fjellgruppe, yrer det nå av liv i "
-"krateret. To stammer kjemper nå om ressursene."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -265,7 +249,7 @@ msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
-msgstr "Mystisk labyrint"
+msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -318,19 +302,19 @@ msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
-msgstr "Sumpøya"
+msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
-msgstr "Det fjerne nord"
+msgstr ""
 
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
-msgstr "Det grønne platået"
+msgstr ""
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
-msgstr "Oasetriangelet"
+msgstr ""
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
@@ -342,7 +326,7 @@ msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
-msgstr "Den store innsjøen"
+msgstr ""
 
 #: ../../maps/Elven Forests.wmf/elemental:9
 msgid ""
@@ -352,11 +336,11 @@ msgstr ""
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
-msgstr "Den lange veien"
+msgstr ""
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The pass through the mountains"
-msgstr "Passet gjennom fjellene"
+msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
@@ -396,11 +380,11 @@ msgstr ""
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
-msgstr "Tre krigere"
+msgstr ""
 
 #: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Opplæring 1 - Øyne i mørket"
+msgstr ""
 
 #: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
@@ -471,7 +455,7 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr "Hvem vil bli den virkelige herskeren over det store atollet?"
+msgstr ""
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"

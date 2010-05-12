@@ -1,4 +1,4 @@
-# English (United Kingdom) translation for widelands
+# Portuguese translation for widelands
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-08 11:44+0000\n"
-"Last-Translator: Alex Denvir <coldfff@blueyonder.co.uk>\n"
-"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
+"PO-Revision-Date: 2010-05-05 13:24+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,11 +25,6 @@ msgid ""
 "higher spirit still the day after.<br> Maybe we actually are slowly creating "
 "a place here which we can... call home.\" "
 msgstr ""
-" \"A tavern opened for our people yesterday. While I am hardly in the mood "
-"for celebration, I noticed how much this tiny bit of home meant to my "
-"people. Their songs filled the air until the deep night, and they were in "
-"higher spirit still the day after.<br> Maybe we actually are slowly creating "
-"a place here which we can... call home.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:191
 msgid ""
@@ -38,14 +33,10 @@ msgid ""
 "dangerous as ours!<br> We need a wood hardener, and we need one "
 "now!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"As I just discovered, we are running short on blackwood! We cannot put "
-"our warriors into some crumbling huts, and even less so in times as "
-"dangerous as ours!<br> We need a wood hardener, and we need one "
-"now!\"<br><br>-- NEW OBJECTIVE --<br> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid " \"At last! These rocks should last for a while.\" "
-msgstr " \"At last! These rocks should last for a while.\" "
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:31
 msgid ""
@@ -58,22 +49,12 @@ msgid ""
 "who still live and think united a new home, replacing what is now lost to "
 "us? Until we can return to the place we once called our home...\" "
 msgstr ""
-" \"Boldreth seems more and more torn as the days go by. The spirits of my "
-"fellows sink as the cold season approaches, and we are still living in no "
-"more than huts and barracks. I never intended to stay out here in the "
-"wilderness for so long - but I never thought my brothers would engage in "
-"this senseless battle for so long either.<br> Perhaps it's time to make "
-"ourselves feel a little more at ease here. Perhaps it's time to give those "
-"who still live and think united a new home, replacing what is now lost to "
-"us? Until we can return to the place we once called our home...\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:105
 msgid ""
 " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use "
 "this coal and iron ore for!<br> It might even be enough to...\" "
 msgstr ""
-" \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use "
-"this coal and iron ore for!<br> It might even be enough to...\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:212
 msgid ""
@@ -84,12 +65,6 @@ msgid ""
 "dripping on my face!<br> Now this is a problem we should do something "
 "about!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Chieftain, this is a disgrace! It is well that we can produce grout for "
-"mighty fortifications and great buildings now - only this does not prevent "
-"our roofs from becoming leaky! Maybe the young ones like spending their "
-"nights in the rain, but I just can't find any sleep with these raindrops "
-"dripping on my face!<br> Now this is a problem we should do something "
-"about!\"<br><br>-- NEW OBJECTIVE --<br> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:53
 msgid ""
@@ -97,9 +72,6 @@ msgid ""
 "with you. The rocks close to our camp are shrinking fast under our workers' "
 "tools, and it is a matter of little time only before they are all gone.\" "
 msgstr ""
-" \"I beg your forgiveness, chieftain, but I have a grave concern to discuss "
-"with you. The rocks close to our camp are shrinking fast under our workers' "
-"tools, and it is a matter of little time only before they are all gone.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:124
 msgid ""
@@ -108,10 +80,6 @@ msgid ""
 "them. And, of course, the people would cheer to a new tavern - hey, we might "
 "call it 'Thron's Pride' or so if you want!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"I have to hand it to you: you are right here, old man.<br> There seem to "
-"be quite many animals in the forests here - we might just hunt down more of "
-"them. And, of course, the people would cheer to a new tavern - hey, we might "
-"call it 'Thron's Pride' or so if you want!\"<br><br>-- NEW OBJECTIVE --<br> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:153
 msgid ""
@@ -119,9 +87,6 @@ msgid ""
 "to the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!\" "
 msgstr ""
-" \"Isn't it lovely, the view of golden fields, growing peacefully, dancing "
-"to the wind? And I believe the baker is just on his way here, with his most "
-"delicious bread reserved for our chieftain alone!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:95
 msgid ""
@@ -132,16 +97,10 @@ msgid ""
 "the stone's tongue to unravel the mountain's secrets!\"<br><br>-- NEW "
 "OBJECTIVE --<br> "
 msgstr ""
-" \"Just look at that! In the east is the great mountain of Kal'mavrath! I "
-"wonder what treasures nature might have hidden beneath its majestic "
-"flanks!<br> Let's expand to the east. There's a chance for the elderly to "
-"become useful once in a while! Let us send out some of those who understand "
-"the stone's tongue to unravel the mountain's secrets!\"<br><br>-- NEW "
-"OBJECTIVE --<br> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:76
 msgid " \"Old man? Disrespectful youth!\" "
-msgstr " \"Old man? Disrespectful youth!\" "
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:238
 msgid ""
@@ -152,12 +111,6 @@ msgid ""
 "anything but ashes and wasted ruins left of our once beautiful capital when "
 "we get there?\" "
 msgstr ""
-" \"One night, when the moon shone brightly, I climbed to the peak of "
-"Kal'mavrath.<br> When I gazed at the horizon, I still saw crimson lights "
-"flicker in the distance. It is incredible how much passion my brethren fight "
-"this war with. I fear the moment I see Al'thunran again - will there be "
-"anything but ashes and wasted ruins left of our once beautiful capital when "
-"we get there?\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:144
 msgid ""
@@ -165,9 +118,6 @@ msgid ""
 "sun sets today you will have a magnificient meal fit for the chieftain of "
 "all clans!\" "
 msgstr ""
-" \"Our hunters are out in the forests, Thron.<br> I promise you, before the "
-"sun sets today you will have a magnificent meal fit for the chieftain of all "
-"clans!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:181
 msgid ""
@@ -177,11 +127,6 @@ msgid ""
 "into these places. We should reward this bravery with greater rations for "
 "them.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Our miners are digging up less and less by day! We have to go deeper, "
-"closer to the mountain's core, if we want more of its treasures!<br> Of "
-"course, it is dark and cold in such depths and only few venture voluntarily "
-"into these places. We should reward this bravery with greater rations for "
-"them.\"<br><br>-- NEW OBJECTIVE --<br> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:171
 msgid ""
@@ -191,11 +136,6 @@ msgid ""
 "whatever we want. And we need the coal to keep the smelter's ovens "
 "burning.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"So now that we have both the mines and the food to sustain them, we "
-"should bring what our brave miners gain for us into a more useful state. The "
-"iron ore has to be melted into iron so that it is ready to be forged into "
-"whatever we want. And we need the coal to keep the smelter's ovens "
-"burning.\"<br><br>-- NEW OBJECTIVE --<br> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:42
 msgid ""
@@ -204,10 +144,6 @@ msgid ""
 "return to Al'thunran. Too long have we waited while our brethren have fought "
 "on the battlefield, and our axes and swords have turned rusty over time.\" "
 msgstr ""
-" \"So you want to prepare us for a longer stay in these forests, Thron? "
-"Well, I see the wisdom in doing so, yet my heart is yearning for a glorious "
-"return to Al'thunran. Too long have we waited while our brethren have fought "
-"on the battlefield, and our axes and swords have turned rusty over time.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:229
 msgid ""
@@ -221,15 +157,6 @@ msgid ""
 "this mission. You may continue playing if you wish, otherwise move on to the "
 "next mission."
 msgstr ""
-" \"The other day Boldreth asked me to accompany him to the new inn. It would "
-"cheer me up, he said.<br> When I looked around, I saw faithful faces, "
-"trusting that I could guide them through these dark days. Yet before I could "
-"speak any words of gratitude or encouragement, one of my warriors ran into "
-"the inn. He had been far out in the forest for the past days and I could see "
-"how weary he was.<br> The news he brought changed everything...\"<br><br>----"
-"----------------- VICTORY! ----------------------<br><br> You have completed "
-"this mission. You may continue playing if you wish, otherwise move on to the "
-"next mission."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:12
 msgid ""
@@ -241,13 +168,6 @@ msgid ""
 "throne between the trees, the symbol of unity and peace among our kin became "
 "the wedge that drives us apart.\" "
 msgstr ""
-" \"The war goes on. More and more of our brothers and sisters flee the "
-"brutal war raging in the capital beneath the trees.<br> The stories they "
-"tell about the deeds of our kin are sad to hear. I've spent nights lying "
-"awake, restless, more tired I ever believed one could be. Yet whenever I "
-"close my eyes, I see the fortress my father built consumed by flames. The "
-"throne between the trees, the symbol of unity and peace among our kin became "
-"the wedge that drives us apart.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:247
 msgid ""
@@ -257,11 +177,6 @@ msgid ""
 "would finally come to an end.<br> So far, it seems that neither prayer was "
 "fulfilled.\" "
 msgstr ""
-" \"The winter is upon us. Many of us are suffering from the cold, yet we "
-"must endure. The day we may return cannot be far any more - it must not be "
-"far any more.<br> I prayed it might get warmer again, as I prayed the war "
-"would finally come to an end.<br> So far, it seems that neither prayer was "
-"fulfilled.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:21
 msgid ""
@@ -275,23 +190,12 @@ msgid ""
 "whoever threatens our very existence, may it even be one of your blood or "
 "mind?\" "
 msgstr ""
-" \"Today my hunters brought men, women and little children who had hidden "
-"out in the forests, trying to escape the war, hate and revenge that rage "
-"among the tribes fighting each other like in old times, when we were no more "
-"but the wild beasts driven and controlled by instincts. None of my brothers "
-"will ever gain and hold control over the wooden throne, none of the tribes "
-"will be strong enough to subdue the other. There will be no end to this "
-"slaughtering, unless... is this it? As father told me?<br> Rise against "
-"whoever threatens our very existence, may it even be one of your blood or "
-"mind?\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:256
 msgid ""
 " \"We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength.<br> They have decided to join us!\" "
 msgstr ""
-" \"We have found a village with friendly and productive people, impressed by "
-"our wealth, technology and strength.<br> They have decided to join us!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:201
 msgid ""
@@ -301,11 +205,6 @@ msgid ""
 "could, in times of need, build a fortress as the world has not seen "
 "before!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Well, old friend, this should ensure that our fortifications do not break "
-"down with our foes' first battle cry! Now we can expand safely!<br> Still, "
-"it would not hurt to assemble some grout for our further campaign; thus we "
-"could, in times of need, build a fortress as the world has not seen "
-"before!\"<br><br>-- NEW OBJECTIVE --<br> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:64
 msgid ""
@@ -315,11 +214,6 @@ msgid ""
 "of Kal'mavrath - maybe we will find some more big stones to please the old "
 "man?\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"While it is certainly no worthy task for a warrior, at least it is "
-"something to be done! Thron, what do you say about me taking a few of our "
-"most restless warriors and venturing somewhat closer to the great mountain "
-"of Kal'mavrath - maybe we will find some more big stones to please the old "
-"man?\"<br><br>-- NEW OBJECTIVE --<br> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:114
 msgid ""
@@ -328,10 +222,6 @@ msgid ""
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
-" \"While this is true, we should consider it later, for now other obstacles "
-"are at hand. The miners will definitely demand greater rations for working "
-"high up on the mountain in this bitter cold, and providing these supplies "
-"may not be easy.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:134
 msgid ""
@@ -340,18 +230,12 @@ msgid ""
 "farm? I sure would enjoy a freshly baken pitta bread for a "
 "change...\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Wisdom commands to seek variety.<br> North of the great mountain is a "
-"large plain - why don't we use the space Mother Nature gave us and build a "
-"farm? I sure would enjoy a freshly baked pitta bread for a "
-"change...\"<br><br>-- NEW OBJECTIVE --<br> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:222
 msgid ""
 " \"Wonderful! Our roofs are not dripping anymore, and we have all the "
 "material we need for, well, whichever monumental building we see fit!\" "
 msgstr ""
-" \"Wonderful! Our roofs are not dripping any more, and we have all the "
-"material we need for, well, whichever monumental building we see fit!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:96
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:286
@@ -366,15 +250,6 @@ msgid ""
 "Mines may only be built on mountain terrain. Suitable places for mines are "
 "displayed as hammer and pick."
 msgstr ""
-"* Build a coal mine and an iron ore mine.<br> Place a flag up on the "
-"mountain's flank to the east (on mountain terrain though, not mountain "
-"meadow). When you click at implied flag you can send Geologists there. "
-"Because the flag is on mountains, the Geologists will search for ores; "
-"otherwise, they will search for water. Then build a mine for both kinds of "
-"resource he will find, choosing the mine to be built appropriately:<br> "
-"Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> "
-"Mines may only be built on mountain terrain. Suitable places for mines are "
-"displayed as hammer and pick."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:213
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:385
@@ -383,9 +258,6 @@ msgid ""
 "is thatch reed, used to cover roofs. Thatch reed is planted by a fernery, "
 "around the building."
 msgstr ""
-"* Build a fernery.<br> The third material necessary for improved buildings "
-"is thatch reed, used to cover roofs. Thatch reed is planted by a fernery, "
-"around the building."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:125
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:314
@@ -397,12 +269,6 @@ msgid ""
 "which has to be refined before being used in a secondary building - others "
 "will follow."
 msgstr ""
-"* Build a hunter, a gamekeeper and a tavern.<br> In order to work, your "
-"miners need food.<br> A hunter can hunt down animals, while a gamekeeper "
-"prevents them from becoming extinct. The meat is then processed in a tavern "
-"into lunches for your miners.<br> This is only the first example of a ware "
-"which has to be refined before being used in a secondary building - others "
-"will follow."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:202
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:377
@@ -416,14 +282,6 @@ msgid ""
 "in the consequently appearing menu. Coal can be obtained by building a "
 "charcoal burner or a coal mine."
 msgstr ""
-"* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better "
-"buildings may require also other improved materials besides blackwood. One "
-"of those is grout, which is produced out of raw stone, water and coal by a "
-"lime-burner. You can obtain water by building a well upon a water source, "
-"which your Geologists can discover when you send them to any flag that is "
-"not on a mountain, by clicking on the implied flag and the Geologist-symbol "
-"in the consequently appearing menu. Coal can be obtained by building a "
-"charcoal burner or a coal mine."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:172
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:341
@@ -431,8 +289,6 @@ msgid ""
 "* Build a smelting works. The iron ore your miners bring up is not usable "
 "yet - it has to be melted into iron first."
 msgstr ""
-"* Build a smelting works. The iron ore your miners bring up is not usable "
-"yet - it has to be melted into iron first."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:135
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
@@ -443,11 +299,6 @@ msgid ""
 "obtain water by building a well at a spot where your Geologists find a water "
 "source."
 msgstr ""
-"* Build a well, a farm and a bakery.<br> Other ways to produce food - "
-"different kinds of food - are fishers and hunters. The wheat of the farms "
-"has to be processed with water in a bakery before it becomes edible. You can "
-"obtain water by building a well at a spot where your Geologists find a water "
-"source."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:192
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:369
@@ -458,11 +309,6 @@ msgid ""
 "first. Always remember to build a wood hardener before you run out of "
 "blackwood, as without it you cannot expand."
 msgstr ""
-"* Build a wood hardener.<br> Bigger and better buildings - including all "
-"military ones - require better building materials. They cannot be built of "
-"simple trunks - the wood has to be refined to blackwood by a wood hardener "
-"first. Always remember to build a wood hardener before you run out of "
-"blackwood, as without it you cannot expand."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:65
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:278
@@ -470,8 +316,6 @@ msgid ""
 "* Build military buildings (like sentries and strongholds) to expand your "
 "territory.<br> Get to the rocks northeast from you and build a quarry there."
 msgstr ""
-"* Build military buildings (like sentries and strongholds) to expand your "
-"territory.<br> Get to the rocks north-east from you and build a quarry there."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:182
 msgid ""
@@ -495,25 +339,6 @@ msgid ""
 "faster, smaller mines need cheaper food. It's up to you which strategy you "
 "prefer."
 msgstr ""
-"* Enhance the coal mine and the tavern to the better versions of their "
-"buildings respectively.<br> A normal mine can only dig up about one third of "
-"all resources lying beneath it; then it must be enhanced to a deep mine in "
-"order to keep it working properly. To enhance a building, choose it and then "
-"click the appropriate button in the appearing menu.<br> Workers gain "
-"experience by successful work. With enough experience they become more "
-"advanced workers, who are necessary to operate the enhanced buildings. Do "
-"not enhance a building before you have enough advanced workers to operate "
-"the advanced building! Such buildings usually have greater demands than the "
-"basic kind of that building - for instance, deep mines need snacks instead "
-"of rations. You will have to enhance your tavern to an inn in order to "
-"produce snacks out of pitta bread AND a second kind of food (meat or fish) "
-"AND beer. Beer is produced in a micro brewery out of water and wheat.<br> "
-"Consider that an inn produces both rations and snacks. So the production of "
-"rations for not yet enhanced mines will be lower. Therefore, you have to "
-"decide how many taverns to enhance. The same with the mines: You may of "
-"course enhance all mines to deep mines instantly - bigger mines work a bit "
-"faster, smaller mines need cheaper food. It's up to you which strategy you "
-"prefer."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:361
 msgid ""
@@ -533,141 +358,126 @@ msgid ""
 "work a bit faster, smaller mines need cheaper food. It's up to you which "
 "strategy you prefer."
 msgstr ""
-"* Enhance the coal mine and the tavern to the better versions of their "
-"buildings respectively.<br> A normal mine can only dig up about one third of "
-"all resources lying beneath it; then it must be enhanced to a deep mine in "
-"order to keep it working properly. To enhance a building, choose it and then "
-"click the appropriate button in the appearing menu.<br> Workers gain "
-"experience by successful work. With enough experience they become more "
-"advanced workers, who are necessary to operate the enhanced buildings. Do "
-"not enhance a building before you have enough advanced workers to operate "
-"the advanced building! Such buildings usually have greater demands than the "
-"basic kind of that building - for instance, deep mines need snacks instead "
-"of rations. You will have to enhance your tavern to an inn in order to "
-"produce snacks out of pitta bread AND a second kind of food (meat or fish). "
-"You may of course enhance all mines to deep mines instantly - bigger mines "
-"work a bit faster, smaller mines need cheaper food. It's up to you which "
-"strategy you prefer."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:158
 msgid "A beautiful morning"
-msgstr "A beautiful morning"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:252
 msgid "A friendly village joined us!"
-msgstr "A friendly village joined us!"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:243
 msgid "Another cold day"
-msgstr "Another cold day"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:320
 msgid "Bake bread"
-msgstr "Bake bread"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:142
 msgid "Boldreth cheers up..."
-msgstr "Boldreth cheers up..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Boldreth exclaims..."
-msgstr "Boldreth exclaims..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:62
 msgid "Boldreth jumps up..."
-msgstr "Boldreth jumps up..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:103
 msgid "Boldreth laughs..."
-msgstr "Boldreth laughs..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:122
 msgid "Boldreth nods..."
-msgstr "Boldreth nods..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:169
 msgid "Boldreth remarks..."
-msgstr "Boldreth remarks..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:189
 msgid "Boldreth seems concerned..."
-msgstr "Boldreth seems concerned..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:199
 msgid "Boldreth smiles..."
-msgstr "Boldreth smiles..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:40
 msgid "Brave Boldreth steps aside you..."
-msgstr "Brave Boldreth steps aside you..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:383
 msgid "Build a fernery"
-msgstr "Build a fernery"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:375
 msgid "Build a lime kiln and coal economy"
-msgstr "Build a lime kiln and coal economy"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:367
 msgid "Build a wood hardener"
-msgstr "Build a wood hardener"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:347
 msgid "Enhance Buildings"
-msgstr "Enhance Buildings"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:265
 msgid "Expand north-east and build a quarry"
-msgstr "Expand north-east and build a quarry"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:151
 msgid "Khantrukh gazes over the plains..."
-msgstr "Khantrukh gazes over the plains..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:74
 msgid "Khantrukh grumbles..."
-msgstr "Khantrukh grumbles..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:112
 msgid "Khantrukh interrupts..."
-msgstr "Khantrukh interrupts..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:51
 msgid "Khantrukh joins the both of you..."
-msgstr "Khantrukh joins the both of you..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Khantrukh nods satisfied..."
-msgstr "Khantrukh nods satisfied..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:220
 msgid "Khantrukh seems relieved..."
-msgstr "Khantrukh seems relieved..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:179
 msgid "Khantrukh speaks..."
-msgstr "Khantrukh speaks..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:210
 msgid "Khantrukh steps in..."
-msgstr "Khantrukh steps in..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:227
 msgid "Mission Complete"
-msgstr "Mission Complete"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:234
 msgid "One fullmoon night"
-msgstr "One fullmoon night"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:292
 msgid "Provide your miners with food"
-msgstr "Provide your miners with food"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:339
 msgid "Refine your mined resources"
-msgstr "Refine your mined resources"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -675,13 +485,10 @@ msgid ""
 "higher production buildings, including mining and the military expansions "
 "will be introduced."
 msgstr ""
-"Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
-"higher production buildings, including mining and the military expansions "
-"will be introduced."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:284
 msgid "Start building mines on the mountain"
-msgstr "Start building mines on the mountain"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:48
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:70
@@ -693,38 +500,38 @@ msgstr "Start building mines on the mountain"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:208
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:218
 msgid "The advisor"
-msgstr "The advisor"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:132
 msgid "The elder jumps into the air..."
-msgstr "The elder jumps into the air..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:7
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:18
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:28
 msgid "The story continues"
-msgstr "The story continues"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:245
 msgid "Thron looks worried..."
-msgstr "Thron looks worried..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:160
 msgid "Thron recognizes..."
-msgstr "Thron recognizes..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:10
 msgid "Thron shakes his head..."
-msgstr "Thron shakes his head..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:236
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:254
 msgid "Thron speaks..."
-msgstr "Thron speaks..."
+msgstr ""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutorial2 - A Place to call Home"
+msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:37
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:58
@@ -736,23 +543,4 @@ msgstr "Tutorial2 - A Place to call Home"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:187
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:197
 msgid "Your loyal companion"
-msgstr "Your loyal companion"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid ""
-#~ " \"Just look at that! The great mountain of Kal'mavrath! I wonder what "
-#~ "treasures nature might have hidden beneath its majestic flanks!<br> Now "
-#~ "that's a chance for the elderly to become useful once in a while! Let us "
-#~ "send out some of those who understand the stone's tongue to unravel the "
-#~ "mountain's secrets!\"<br><br>-- NEW OBJECTIVE --<br> "
-#~ msgstr ""
-#~ " \"Just look at that! The great mountain of Kal'mavrath! I wonder what "
-#~ "treasures nature might have hidden beneath its majestic flanks!<br> Now "
-#~ "that's a chance for the elderly to become useful once in a while! Let us "
-#~ "send out some of those who understand the stone's tongue to unravel the "
-#~ "mountain's secrets!\"<br><br>-- NEW OBJECTIVE --<br> "
-
-#~ msgid "Continue"
-#~ msgstr "Continue"
+msgstr ""

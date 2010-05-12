@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-04-29 16:34+0000\n"
-"Last-Translator: Andreas Breitschopp <Unknown>\n"
+"PO-Revision-Date: 2010-05-08 11:44+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-30 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -529,24 +529,25 @@ msgstr "Mahlt Weizen um Mehl zu produzieren."
 #: ../../tribes/empire/marblemine/conf:22
 #: ../../tribes/empire/quarry/conf:19
 msgid "Mine marble"
-msgstr "Mint Marmor"
+msgstr "Baut Marmor ab"
 
 #: ../../tribes/empire/marblemine/conf:23
 #: ../../tribes/empire/quarry/conf:20
 msgid "Mine marble (only for compatibility with old savegames (build13))"
 msgstr ""
-"Mint Marmor (nur für Abwärtskompatiblität mit Speicherständen von build13)."
+"Baut Marmor ab (nur für Abwärtskompatiblität mit Speicherständen von "
+"build13)."
 
 #: ../../tribes/empire/marblemine/conf:24
 #: ../../tribes/empire/quarry/conf:17
 msgid "Mine stone"
-msgstr "Mint Steine"
+msgstr "Baut Stein ab."
 
 #: ../../tribes/empire/marblemine/conf:25
 #: ../../tribes/empire/quarry/conf:18
 msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
-"Mint Stein (nur für Abwärtskompatiblität mit Speicherständen von build13)."
+"Baut Stein ab (nur für Abwärtskompatiblität mit Speicherständen von build13)."
 
 #: ../../tribes/empire/conf:130
 msgid "Miner"

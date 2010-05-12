@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-05-02 08:25+0000\n"
+"PO-Revision-Date: 2010-05-09 06:06+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-03 03:59+0000\n"
+"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -50,7 +50,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1164
 msgid "--double is disabled. This is not a debug build!"
-msgstr ""
+msgstr "--double uti non potes. Emendandi aedes non est!"
 
 #: ../../src/wlapplication.cc:1287
 msgid "This is Widelands-"
@@ -84,7 +84,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1302
 msgid "                      Default is ~/.widelands\n"
-msgstr ""
+msgstr "                      Regula est ~/.widelands\n"
 
 #: ../../src/wlapplication.cc:1305
 msgid ""
@@ -232,6 +232,10 @@ msgid ""
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build "
 msgstr ""
+"\n"
+"\n"
+"Hunc errorem, quaeso, nunties, ut Widelands ludus emendetur et melius fiat. "
+"Plus in regulare editione (stdout.txt in Windows systemate). Uteris aedem "
 
 #: ../../src/wlapplication.cc:1571
 msgid ""
@@ -378,7 +382,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "Yes"
-msgstr ""
+msgstr "Fac ita"
 
 #: ../../src/writeHTML.cc:336 ../../src/writeHTML.cc:339
 #: ../../src/ui_basic/messagebox.cc:105
@@ -418,7 +422,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:414
 #, c-format
 msgid "Conquer range is %u."
-msgstr ""
+msgstr "Regio expugnandi est %u."
 
 #: ../../src/writeHTML.cc:422 ../../src/writeHTML.cc:653
 #, c-format
@@ -480,21 +484,25 @@ msgid ""
 "Attack is between %u and %u, plus %u for each level above 0 (maximum level "
 "is %u)."
 msgstr ""
+"Agressio est inter %u et %u, %u additum in quoque gradu super 0 (gradus "
+"maximus est %u)."
 
 #: ../../src/writeHTML.cc:615
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Agressio est %u, %u additum in quoque gradu super 0 (gradus maximus est %u)."
 
 #: ../../src/writeHTML.cc:625
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Vitatio est %u, %u additum in quoque gradu super 0 (gradus maximus est %u)."
 
 #: ../../src/writeHTML.cc:671 ../../src/writeHTML.cc:682
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "%s creatur."
 
 #: ../../src/writeHTML.cc:693
 msgid "Spawns in warehouses."
@@ -521,7 +529,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:759
 msgid "breed"
-msgstr ""
+msgstr "Alere"
 
 #: ../../src/writeHTML.cc:760
 msgid "createitem"
@@ -573,11 +581,11 @@ msgstr "Dele rem"
 
 #: ../../src/writeHTML.cc:772
 msgid "geologist"
-msgstr ""
+msgstr "Aes quaere"
 
 #: ../../src/writeHTML.cc:773
 msgid "geologist_find"
-msgstr ""
+msgstr "Aes inveni"
 
 #: ../../src/writeHTML.cc:774 ../../src/writeHTML.cc:1376
 msgid "playFX"
@@ -652,7 +660,7 @@ msgstr "et"
 
 #: ../../src/writeHTML.cc:918
 msgid "when"
-msgstr ""
+msgstr "si"
 
 #: ../../src/writeHTML.cc:920
 msgid "or"
@@ -660,7 +668,7 @@ msgstr "aut"
 
 #: ../../src/writeHTML.cc:921
 msgid "unless"
-msgstr ""
+msgstr "nisi"
 
 #: ../../src/writeHTML.cc:952 ../../src/writeHTML.cc:974
 msgid "economy"
@@ -676,7 +684,7 @@ msgstr "aedificium"
 
 #: ../../src/writeHTML.cc:996
 msgid "has"
-msgstr ""
+msgstr "habet"
 
 #: ../../src/writeHTML.cc:1027
 msgid "workers of this site"
@@ -696,7 +704,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1033
 msgid "experience"
-msgstr ""
+msgstr "experientia"
 
 #: ../../src/writeHTML.cc:1047
 msgid "Documentation for program command call"
@@ -730,7 +738,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1139
 msgid "sleep"
-msgstr ""
+msgstr "Dormi"
 
 #: ../../src/writeHTML.cc:1145 ../../src/writeHTML.cc:1165
 #, c-format
@@ -751,7 +759,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1180
 msgid "consume"
-msgstr ""
+msgstr "consume"
 
 #: ../../src/writeHTML.cc:1221 ../../src/writeHTML.cc:1258
 msgid "Documentation for program command produce"
@@ -779,7 +787,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1334 ../../src/writeHTML.cc:1358
 msgid "hp"
-msgstr ""
+msgstr "vp"
 
 #: ../../src/writeHTML.cc:1335 ../../src/writeHTML.cc:1359
 msgid "attack"
@@ -1180,7 +1188,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:467 ../../src/logic/player.cc:123
 msgid "Missing starting position"
-msgstr ""
+msgstr "Loco primo egeo"
 
 #: ../../src/logic/game.cc:469 ../../src/logic/player.cc:125
 #, c-format
@@ -1253,7 +1261,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:692 ../../src/logic/production_program.cc:598
 #: ../../src/logic/production_program.cc:642
 msgid "duration in ms"
-msgstr ""
+msgstr "Spatium in ms"
 
 #: ../../src/logic/immovable.cc:730 ../../src/logic/production_program.cc:1323
 msgid "priority"
@@ -1310,17 +1318,17 @@ msgstr "\"min-max\""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr ""
+msgstr "Numerus integer positivus <= 100"
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr ""
+msgstr "Expectavi numerum integrum positivum >= %u <= 100 sed \"%s\" inveni."
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr ""
+msgstr "Expectavi numerum integrum positivum >= %u <= %u sed \"%u\" inveni."
 
 #: ../../src/logic/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
@@ -1475,7 +1483,7 @@ msgstr "miles %u: %s"
 #: ../../src/logic/playercommand.cc:1058
 #, c-format
 msgid "drop soldier: %s"
-msgstr ""
+msgstr "expelle militem: %s"
 
 #: ../../src/logic/playercommand.cc:1130
 #, c-format
@@ -1520,7 +1528,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:819
 #: ../../src/logic/production_program.cc:904
 msgid "count"
-msgstr ""
+msgstr "Numerus"
 
 #: ../../src/logic/production_program.cc:101
 #, c-format
@@ -1531,7 +1539,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:131
 msgid "not "
-msgstr ""
+msgstr "non "
 
 #: ../../src/logic/production_program.cc:153
 #: ../../src/logic/production_program.cc:174
@@ -1540,7 +1548,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:203
 msgid "site has "
-msgstr ""
+msgstr "Aedificio est "
 
 #: ../../src/logic/production_program.cc:229
 msgid "workers need experience"
@@ -1575,21 +1583,21 @@ msgstr ""
 #: ../../src/logic/production_program.cc:396
 #: ../../src/logic/production_program.cc:770
 msgid " and "
-msgstr ""
+msgstr " et "
 
 #: ../../src/logic/production_program.cc:397
 #: ../../src/logic/production_program.cc:749
 msgid " because: "
-msgstr ""
+msgstr " quod "
 
 #: ../../src/logic/production_program.cc:408
 #: ../../src/wui/encyclopedia_window.cc:192
 msgid " or "
-msgstr ""
+msgstr " vel "
 
 #: ../../src/logic/production_program.cc:409
 msgid " because not: "
-msgstr ""
+msgstr " quod non "
 
 #: ../../src/logic/production_program.cc:449
 #, c-format
@@ -1628,7 +1636,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:602
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "dormi: %s"
 
 #: ../../src/logic/production_program.cc:624
 msgid "idle animation is default; calling is not allowed"
@@ -1641,8 +1649,8 @@ msgstr ""
 #: ../../src/logic/production_program.cc:773
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " deest"
+msgstr[1] " desunt"
 
 #: ../../src/logic/production_program.cc:833
 #: ../../src/logic/production_program.cc:918
@@ -1654,18 +1662,18 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:851
 msgid "Produced "
-msgstr ""
+msgstr "Facit "
 
 #: ../../src/logic/production_program.cc:860
 #: ../../src/logic/production_program.cc:943
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:867
 #: ../../src/logic/production_program.cc:950
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:935
 msgid "Recruited "
@@ -1673,7 +1681,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:974
 msgid "distance"
-msgstr ""
+msgstr "Intervallum"
 
 #: ../../src/logic/production_program.cc:985
 #: ../../src/logic/production_program.cc:996
@@ -1682,12 +1690,12 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:1130
 msgid "Mine empty"
-msgstr ""
+msgstr "Metallum exhaustum"
 
 #: ../../src/logic/production_program.cc:1134
 msgid ""
 "This mines has run empty. You should consider to expand or destruct it."
-msgstr ""
+msgstr "Hoc metallum exhaustum est. Quod aut augeri aut deleri consideres."
 
 #: ../../src/logic/production_program.cc:1149
 #: ../../src/logic/production_program.cc:1218
@@ -1702,12 +1710,12 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1171
 #: ../../src/logic/production_program.cc:1239
 msgid "level"
-msgstr ""
+msgstr "Gradus"
 
 #: ../../src/logic/production_program.cc:1249
 #, c-format
 msgid "expected level > %u but found \"%s\""
-msgstr ""
+msgstr "Expectavi gradum > %u, sed \"%s\" inveni."
 
 #: ../../src/logic/productionsite.cc:70
 msgid "this ware type has already been declared as an output"
@@ -1719,14 +1727,14 @@ msgstr ""
 
 #: ../../src/logic/productionsite.cc:219
 msgid "(not occupied)"
-msgstr ""
+msgstr "(operarius deest)"
 
 #: ../../src/logic/productionsite.cc:224
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Operarius deest."
+msgstr[1] "Operarii desunt."
 
 #: ../../src/logic/productionsite.cc:232
 msgid "(stopped)"
@@ -1741,16 +1749,16 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:71 ../../src/logic/soldier.cc:94
 msgid "positive integer"
-msgstr ""
+msgstr "Numerus integer positivus"
 
 #: ../../src/logic/soldier.cc:75 ../../src/logic/soldier.cc:98
 #, c-format
 msgid "expected positive integer >= %u but found \"%s\""
-msgstr ""
+msgstr "Expectavi numerum integrum positivum >0 %u sed inveni \"%s\""
 
 #: ../../src/logic/soldier.cc:202
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"anim_name[,another_anim,...]\""
 
 #: ../../src/logic/soldier.cc:1207
 #, c-format
@@ -1770,7 +1778,7 @@ msgstr ""
 #: ../../src/logic/soldier.cc:1379 ../../src/logic/soldier.cc:1384
 #: ../../src/logic/worker.cc:1636
 msgid "no"
-msgstr ""
+msgstr "Non"
 
 #: ../../src/logic/soldier.cc:1391 ../../src/logic/soldier.cc:1399
 #: ../../src/logic/worker.cc:1648
@@ -1783,11 +1791,11 @@ msgstr ""
 
 #: ../../src/logic/trainingsite.cc:175
 msgid "Not Working"
-msgstr ""
+msgstr "Nullum facit."
 
 #: ../../src/logic/tribe.cc:122
 msgid "constructionsite type \"constructionsite\" is missing"
-msgstr ""
+msgstr "Areae genus \"area\" deest."
 
 #: ../../src/logic/tribe.cc:200 ../../src/logic/tribe.cc:221
 #, c-format
@@ -1811,7 +1819,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:269
 #, c-format
 msgid "tribe %s: %s"
-msgstr ""
+msgstr "Gens %s: %s"
 
 #: ../../src/logic/warehouse.cc:488
 #, c-format
@@ -1841,11 +1849,11 @@ msgstr ""
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
-msgstr ""
+msgstr "Haec materies ab huius aedificii operario inveniri non potest: "
 
 #: ../../src/logic/worker.cc:879
 msgid "A geologist found resources."
-msgstr ""
+msgstr "Geologus aes vel aquam invenit."
 
 #: ../../src/logic/worker.cc:1617
 #, c-format
@@ -1866,7 +1874,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:1634
 msgid "nothing"
-msgstr ""
+msgstr "nullum"
 
 #: ../../src/logic/world.cc:623
 #, c-format
@@ -1876,12 +1884,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:96
 #, c-format
 msgid "allowed buildings: %s"
-msgstr ""
+msgstr "Aedificia licita: %s"
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
 msgid "allowed worker types: %s"
-msgstr ""
+msgstr "operarii liciti: %s"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
@@ -1931,32 +1939,32 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:675
 #, c-format
 msgid "soldier: %s"
-msgstr ""
+msgstr "Miles: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:691
 #, c-format
 msgid "carrier: %s"
-msgstr ""
+msgstr "Portator: %s"
 
 #: ../../src/map_io/widelands_map_building_data_packet.cc:106
 #, c-format
 msgid "buildings: %s"
-msgstr ""
+msgstr "Aedificia: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:215
 #, c-format
 msgid "buildingdata: %s"
-msgstr ""
+msgstr "Data aedificiorum: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:274
 #, c-format
 msgid "wares: %s"
-msgstr ""
+msgstr "Res: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:287
 #, c-format
 msgid "constructionsite: %s"
-msgstr ""
+msgstr "Area: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:435
 #, c-format
@@ -1968,7 +1976,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:477
 #, c-format
 msgid "warehouse: %s"
-msgstr ""
+msgstr "Horreum: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:584
 #, c-format
@@ -1988,7 +1996,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
 msgid "elemental data: %s"
-msgstr ""
+msgstr "Data elementaria: %s"
 
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
@@ -2003,37 +2011,37 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "Nexum habet ludor %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
 msgid "is owned by player %u"
-msgstr ""
+msgstr "est ludori %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "habet insigne (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr ""
+msgstr "Nexus proximus (%i, %i): %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "Insignia: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
 msgid "wrong flag (%u) at given position (%i, %i)"
-msgstr ""
+msgstr "Insigne falsum (%u) in loco dicto (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr ""
+msgstr "Insigne nullum in loco dicto (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
@@ -2043,23 +2051,23 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "Aedificium (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:212
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:219
 #, c-format
 msgid "flagdata: %s"
-msgstr ""
+msgstr "Data insignium: %s"
 
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "Altitudo: %s"
 
 #: ../../src/map_io/widelands_map_immovable_data_packet.cc:98
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:120
@@ -2074,7 +2082,7 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:86
 msgid "Invalid World"
-msgstr ""
+msgstr "Mundus vetitus"
 
 #: ../../src/map_io/widelands_map_loader.cc:88
 #, c-format
@@ -2094,27 +2102,27 @@ msgstr ""
 #: ../../src/map_io/widelands_map_object_packet.cc:83
 #, c-format
 msgid "map objects: %s"
-msgstr ""
+msgstr "Res tabulae: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:66
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
 msgid "Objectives: %s"
-msgstr ""
+msgstr "Agenda: %s"
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:80
 #, c-format
 msgid "player names and tribes: %s"
-msgstr ""
+msgstr "Nomina ludorum gentiumque: %s"
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:69
 #, c-format
 msgid "player positions: %s"
-msgstr ""
+msgstr "Loci ludorum: %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:88
 #, c-format
@@ -2150,12 +2158,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:150
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\": %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:155
 #, c-format
 msgid "messages for player %u: %s"
-msgstr ""
+msgstr "Nuntium ad ludorem %u: %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:123
 #, c-format
@@ -2165,7 +2173,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr ""
+msgstr "Via: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
@@ -2181,12 +2189,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
 msgid "road %u: %s"
-msgstr ""
+msgstr "Via %u: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
 msgid "roaddata: %s"
-msgstr ""
+msgstr "Data viarum: %s"
 
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
@@ -2196,18 +2204,18 @@ msgstr ""
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
 msgid "ware data: %s"
-msgstr ""
+msgstr "Data rerum: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:134
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:198
 #, c-format
 msgid "item %u: %s"
-msgstr ""
+msgstr "res %u: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:205
 #, c-format
 msgid "waredata: %s"
-msgstr ""
+msgstr "Data rerum: %s"
 
 #: ../../src/network/netclient.cc:101
 msgid "Could not establish connection to host"
@@ -2330,7 +2338,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1547
 msgid "The game has already started."
-msgstr ""
+msgstr "Ludus iam incepit."
 
 #: ../../src/network/nethost.cc:1565
 msgid "Connection to client lost."
@@ -2456,7 +2464,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:61
 #: ../../src/wui/game_main_menu_save_game.h:77
 msgid "OK"
-msgstr ""
+msgstr "Bene"
 
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
@@ -2465,15 +2473,15 @@ msgstr ""
 
 #: ../../src/ui_basic/progresswindow.cc:48
 msgid "Preparing..."
-msgstr ""
+msgstr "Praeparo..."
 
 #: ../../src/ui_basic/spinbox.cc:125
 msgid "Increase the value"
-msgstr ""
+msgstr "Pretium auge"
 
 #: ../../src/ui_basic/spinbox.cc:133
 msgid "Decrease the value"
-msgstr ""
+msgstr "Pretium minue"
 
 #: ../../src/ui_basic/spinbox.cc:144
 msgid "Increase the value by 10"
@@ -2485,20 +2493,20 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
-msgstr ""
+msgstr "Elige contentionem"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:54
 msgid "Campaign:"
-msgstr ""
+msgstr "Contentio:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:58
 msgid "Difficulty:"
-msgstr ""
+msgstr "Difficultas:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:62
 #: ../../src/ui_fsmenu/campaign_select.cc:272
 msgid "Description:"
-msgstr ""
+msgstr "Descriptio:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:81
 #: ../../src/ui_fsmenu/campaign_select.cc:290 ../../src/ui_fsmenu/editor.cc:57
@@ -2510,7 +2518,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/netsetup_lan.cc:76
 #: ../../src/ui_fsmenu/singleplayer.cc:68
 msgid "Back"
-msgstr ""
+msgstr "Reverte"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:123
 #: ../../src/ui_fsmenu/campaign_select.cc:165
@@ -2522,38 +2530,38 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:124
 msgid "Easy living"
-msgstr ""
+msgstr "Otiose ludas"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:125
 msgid "Be vigilant"
-msgstr ""
+msgstr "Caveas"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:126
 msgid "Hard struggle"
-msgstr ""
+msgstr "Gravissima impedimenta habeas"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:170
 msgid "[Invalid entry]"
-msgstr ""
+msgstr "[Inscriptio errata]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:266
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 #: ../../src/ui_fsmenu/mapselect.cc:52
 msgid "Choose your map!"
-msgstr ""
+msgstr "Tabulam elige!"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:268
 #: ../../src/ui_fsmenu/editor_mapselect.cc:55
 #: ../../src/ui_fsmenu/mapselect.cc:62
 msgid "Name:"
-msgstr ""
+msgstr "Nomen:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:270
 #: ../../src/ui_fsmenu/editor_mapselect.cc:60
 #: ../../src/ui_fsmenu/mapselect.cc:68
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:94
 msgid "Author:"
-msgstr ""
+msgstr "Auctor:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:357
 #, c-format
@@ -2568,35 +2576,35 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
 msgid "New Map"
-msgstr ""
+msgstr "Tabula nova"
 
 #: ../../src/ui_fsmenu/editor.cc:50
 #: ../../src/editor/ui_menus/editor_main_menu.cc:68
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:50
 msgid "Load Map"
-msgstr ""
+msgstr "Tabulam tolle"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:65
 #: ../../src/ui_fsmenu/mapselect.cc:74
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
 msgid "Size:"
-msgstr ""
+msgstr "Magnitudo:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:70
 #: ../../src/ui_fsmenu/mapselect.cc:80
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:89
 msgid "World:"
-msgstr ""
+msgstr "Mundus:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:75
 #: ../../src/ui_fsmenu/mapselect.cc:86
 msgid "Players:"
-msgstr ""
+msgstr "Ludor:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:80
 #: ../../src/ui_fsmenu/mapselect.cc:92
 msgid "Descr:"
-msgstr ""
+msgstr "Descr:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:218
 #: ../../src/ui_fsmenu/mapselect.cc:261
@@ -2606,39 +2614,39 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/fileview.cc:45 ../../src/wui/watchwindow.cc:181
 msgid "Close"
-msgstr ""
+msgstr "Claude"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr ""
+msgstr "Prime ESC vel mure utere, ut incipias."
 
 #: ../../src/ui_fsmenu/launchgame.cc:59
 msgid "Select map"
-msgstr ""
+msgstr "Tabulam eligere"
 
 #: ../../src/ui_fsmenu/launchgame.cc:66
 msgid "Select Savegame"
-msgstr ""
+msgstr "Ludum servatum eligere"
 
 #: ../../src/ui_fsmenu/launchgame.cc:87
 msgid "Start game"
-msgstr ""
+msgstr "Ludum incipere"
 
 #: ../../src/ui_fsmenu/launchgame.cc:94
 msgid "Launch Game"
-msgstr ""
+msgstr "Ludum incipe"
 
 #: ../../src/ui_fsmenu/launchgame.cc:105
 msgid "Player's name"
-msgstr ""
+msgstr "Nomen ludoris"
 
 #: ../../src/ui_fsmenu/launchgame.cc:109
 msgid "Player's type"
-msgstr ""
+msgstr "Genus ludoris"
 
 #: ../../src/ui_fsmenu/launchgame.cc:113
 msgid "Player's tribe"
-msgstr ""
+msgstr "Gens ludoris"
 
 #: ../../src/ui_fsmenu/launchgame.cc:117
 msgid "Start type"
@@ -2650,15 +2658,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchgame.cc:177
 msgid "Lobby:"
-msgstr ""
+msgstr "Auditorium:"
 
 #: ../../src/ui_fsmenu/launchgame.cc:179
 msgid "Ready"
-msgstr ""
+msgstr "Paratus"
 
 #: ../../src/ui_fsmenu/launchgame.cc:277
 msgid "Type: "
-msgstr ""
+msgstr "Genus: "
 
 #: ../../src/ui_fsmenu/launchgame.cc:288
 msgid "File not found"
@@ -2677,7 +2685,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchgame.cc:316
 msgid "(no map)"
-msgstr ""
+msgstr "(nulla tabula)"
 
 #: ../../src/ui_fsmenu/launchgame.cc:358
 msgid "WARNING!!! Host selected the file \""
@@ -2695,24 +2703,24 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchgame.cc:485
 msgid "(Save): "
-msgstr ""
+msgstr "(Servare:) "
 
 #: ../../src/ui_fsmenu/loadgame.cc:64
 msgid "Delete"
-msgstr ""
+msgstr "Delere"
 
 #: ../../src/ui_fsmenu/loadgame.cc:76
 msgid "Choose saved game!"
-msgstr ""
+msgstr "Elige ludum servatum!"
 
 #: ../../src/ui_fsmenu/loadgame.cc:80
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Map Name:"
-msgstr ""
+msgstr "Nomen tabulae:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:85
 msgid "Gametime:"
-msgstr ""
+msgstr "Tempus ludendi:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:111
 msgid "Delete file"
@@ -2720,7 +2728,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "Visne delere "
 
 #: ../../src/ui_fsmenu/loadreplay.cc:63
 msgid "Choose a replay!"
@@ -2728,15 +2736,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:42
 msgid "Play Tutorial"
-msgstr ""
+msgstr "Lude tutorialem"
 
 #: ../../src/ui_fsmenu/main.cc:49
 msgid "Single Player"
-msgstr ""
+msgstr "Unus ludor"
 
 #: ../../src/ui_fsmenu/main.cc:56
 msgid "Multi Player"
-msgstr ""
+msgstr "Nonnulli ludores"
 
 #: ../../src/ui_fsmenu/main.cc:63
 msgid "Watch Replay"
@@ -2744,35 +2752,35 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:70
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../../src/ui_fsmenu/main.cc:77 ../../src/wui/game_options_menu.cc:42
 #: ../../src/wui/interactive_dedicated_server.cc:56
 #: ../../src/wui/interactive_player.cc:176
 #: ../../src/wui/interactive_spectator.cc:61
 msgid "Options"
-msgstr ""
+msgstr "Optiones"
 
 #: ../../src/ui_fsmenu/main.cc:84
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
 msgid "View Readme"
-msgstr ""
+msgstr "Legemi"
 
 #: ../../src/ui_fsmenu/main.cc:91 ../../src/wui/game_options_menu.cc:60
 msgid "License"
-msgstr ""
+msgstr "Licentia"
 
 #: ../../src/ui_fsmenu/main.cc:98 ../../src/wui/game_options_menu.cc:95
 msgid "Exit Game"
-msgstr ""
+msgstr "Ludum finire"
 
 #: ../../src/ui_fsmenu/main.cc:105
 msgid "Version "
-msgstr ""
+msgstr "Aedes: "
 
 #: ../../src/ui_fsmenu/main.cc:110
 msgid "by the Widelands Development Team"
-msgstr ""
+msgstr "Consilium Widelands ludum fingens"
 
 #: ../../src/ui_fsmenu/mapselect.cc:57
 msgid "Load Map as scenario: "
@@ -2801,7 +2809,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/multiplayer.cc:107
 #: ../../src/ui_fsmenu/netsetup_lan.cc:109 ../../src/wui/login_box.cc:73
 msgid "nobody"
-msgstr ""
+msgstr "Nemo"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:51
 msgid "Metaserver Lobby"

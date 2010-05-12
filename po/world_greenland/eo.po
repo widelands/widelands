@@ -7,144 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 18:00+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-05-07 13:50+0000\n"
+"Last-Translator: Kristjan <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-05-12 04:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: ../../worlds/greenland/conf:2
-msgid "The Widelands Development Team"
-msgstr ""
-
-#: ../../worlds/greenland/conf:3
-msgid "Greenland"
-msgstr "Gronlando"
-
-#: ../../worlds/greenland/conf:4
-msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr ""
-
-#: ../../worlds/greenland/conf:7
-#: ../../worlds/greenland/conf:8
-#: ../../worlds/greenland/conf:9
-#: ../../worlds/greenland/conf:10
-#: ../../worlds/greenland/conf:11
-msgid "Bush"
-msgstr "Arbusto"
-
-#: ../../worlds/greenland/conf:12
-#: ../../worlds/greenland/conf:13
-msgid "Cactus"
-msgstr "Kakto"
-
-#: ../../worlds/greenland/conf:14
-#: ../../worlds/greenland/conf:15
-#: ../../worlds/greenland/conf:16
-#: ../../worlds/greenland/conf:17
-msgid "Dead Tree"
-msgstr "Morta arbo"
-
-#: ../../worlds/greenland/conf:18
-msgid "Fallen Tree"
-msgstr ""
-
-#: ../../worlds/greenland/conf:19
-#: ../../worlds/greenland/conf:20
-#: ../../worlds/greenland/conf:21
-msgid "Grass"
-msgstr "Herbo"
-
-#: ../../worlds/greenland/conf:22
-#: ../../worlds/greenland/conf:23
-msgid "Mushroom"
-msgstr "Fungo"
-
-#: ../../worlds/greenland/conf:24
-#: ../../worlds/greenland/conf:25
-#: ../../worlds/greenland/conf:26
-#: ../../worlds/greenland/conf:27
-#: ../../worlds/greenland/conf:28
-#: ../../worlds/greenland/conf:29
-msgid "Pebble"
-msgstr ""
-
-#: ../../worlds/greenland/conf:30
-#: ../../worlds/greenland/conf:31
-#: ../../worlds/greenland/conf:32
-msgid "Skeleton"
-msgstr "Skeleto"
-
-#: ../../worlds/greenland/conf:33
-#: ../../worlds/greenland/conf:34
-#: ../../worlds/greenland/conf:35
-#: ../../worlds/greenland/conf:36
-#: ../../worlds/greenland/conf:37
-#: ../../worlds/greenland/conf:38
-#: ../../worlds/greenland/conf:39
-msgid "Standing Stones"
-msgstr ""
-
-#: ../../worlds/greenland/conf:40
-#: ../../worlds/greenland/conf:41
-#: ../../worlds/greenland/conf:42
-#: ../../worlds/greenland/conf:43
-#: ../../worlds/greenland/conf:44
-#: ../../worlds/greenland/conf:45
-msgid "Stones"
-msgstr "Sxtono"
-
-#: ../../worlds/greenland/conf:46
-msgid "Aspen"
-msgstr "Tremolo"
-
-#: ../../worlds/greenland/conf:47
-msgid "Aspen medium"
-msgstr "Tremolo meza"
-
-#: ../../worlds/greenland/conf:48
-msgid "Aspen small"
-msgstr "Tremolo mala"
-
-#: ../../worlds/greenland/conf:49
-msgid "Aspen tiny"
-msgstr "Tremolo nana"
-
-#: ../../worlds/greenland/conf:50
-msgid "Oak"
-msgstr "Kveko"
-
-#: ../../worlds/greenland/conf:51
-msgid "Oak medium"
-msgstr "Kveko meza"
-
-#: ../../worlds/greenland/conf:52
-msgid "Oak small"
-msgstr "Kevko mala"
-
-#: ../../worlds/greenland/conf:53
-msgid "Oak tiny"
-msgstr "Kveko nana"
-
-#: ../../worlds/greenland/conf:54
-msgid "Spruce"
-msgstr "Piceo"
-
-#: ../../worlds/greenland/conf:55
-msgid "Spruce medium"
-msgstr "Piceo meza"
-
-#: ../../worlds/greenland/conf:56
-msgid "Spruce small"
-msgstr "Piceo mala"
-
-#: ../../worlds/greenland/conf:57
-msgid "Spruce tiny"
-msgstr "Piceo nana"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
@@ -162,6 +33,42 @@ msgstr "Alno mala"
 msgid "Alder tiny"
 msgstr "Alno nana"
 
+#: ../../worlds/greenland/conf:46
+msgid "Aspen"
+msgstr "Tremolo"
+
+#: ../../worlds/greenland/conf:47
+msgid "Aspen medium"
+msgstr "Tremolo meza"
+
+#: ../../worlds/greenland/conf:48
+msgid "Aspen small"
+msgstr "Tremolo mala"
+
+#: ../../worlds/greenland/conf:49
+msgid "Aspen tiny"
+msgstr "Tremolo nana"
+
+#: ../../worlds/greenland/conf:80
+msgid "Badger"
+msgstr "Melo"
+
+#: ../../worlds/greenland/conf:66
+msgid "Beech"
+msgstr "Fago"
+
+#: ../../worlds/greenland/conf:67
+msgid "Beech medium"
+msgstr "Fago meza"
+
+#: ../../worlds/greenland/conf:68
+msgid "Beech small"
+msgstr "Fago mala"
+
+#: ../../worlds/greenland/conf:69
+msgid "Beech tiny"
+msgstr "Fago nana"
+
 #: ../../worlds/greenland/conf:62
 msgid "Birch"
 msgstr "Betulo"
@@ -178,21 +85,87 @@ msgstr "Betulo mala"
 msgid "Birch tiny"
 msgstr "Betulo nana"
 
-#: ../../worlds/greenland/conf:66
-msgid "Beech"
-msgstr ""
+#: ../../worlds/greenland/conf:81
+msgid "Brownbear"
+msgstr "Bruna urso"
 
-#: ../../worlds/greenland/conf:67
-msgid "Beech medium"
-msgstr "Fago meza"
+#: ../../worlds/greenland/conf:82
+msgid "Bunny"
+msgstr "Kuniklo"
 
-#: ../../worlds/greenland/conf:68
-msgid "Beech small"
-msgstr "Fago mala"
+#: ../../worlds/greenland/conf:7
+#: ../../worlds/greenland/conf:8
+#: ../../worlds/greenland/conf:9
+#: ../../worlds/greenland/conf:10
+#: ../../worlds/greenland/conf:11
+msgid "Bush"
+msgstr "Arbusto"
 
-#: ../../worlds/greenland/conf:69
-msgid "Beech tiny"
-msgstr "Fago nana"
+#: ../../worlds/greenland/conf:12
+#: ../../worlds/greenland/conf:13
+msgid "Cactus"
+msgstr "Kakto"
+
+#: ../../worlds/greenland/conf:83
+msgid "Chamois"
+msgstr "Ĉamo"
+
+#: ../../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr "Karbo"
+
+#: ../../worlds/greenland/conf:14
+#: ../../worlds/greenland/conf:15
+#: ../../worlds/greenland/conf:16
+#: ../../worlds/greenland/conf:17
+msgid "Dead Tree"
+msgstr "Morta arbo"
+
+#: ../../worlds/greenland/conf:84
+msgid "Deer"
+msgstr "Cervo"
+
+#: ../../worlds/greenland/conf:85
+msgid "Duck"
+msgstr "Anaso"
+
+#: ../../worlds/greenland/conf:86
+msgid "Elk"
+msgstr "Kanada cervo"
+
+#: ../../worlds/greenland/conf:18
+msgid "Fallen Tree"
+msgstr "Falinta arbo"
+
+#: ../../worlds/greenland/resconf:41
+msgid "Fish"
+msgstr "Fiŝo"
+
+#: ../../worlds/greenland/conf:87
+msgid "Fox"
+msgstr "Vulpo"
+
+#: ../../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr "Oro"
+
+#: ../../worlds/greenland/resconf:28
+msgid "Granite"
+msgstr "Granito"
+
+#: ../../worlds/greenland/conf:19
+#: ../../worlds/greenland/conf:20
+#: ../../worlds/greenland/conf:21
+msgid "Grass"
+msgstr "Herbo"
+
+#: ../../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr "Gronlando"
+
+#: ../../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr "Fero"
 
 #: ../../worlds/greenland/conf:70
 msgid "Larch"
@@ -210,6 +183,48 @@ msgstr "Lariko mala"
 msgid "Larch tiny"
 msgstr "Lariko nana"
 
+#: ../../worlds/greenland/conf:88
+msgid "Lynx"
+msgstr "Linko"
+
+#: ../../worlds/greenland/conf:89
+msgid "Marten"
+msgstr "Marteso"
+
+#: ../../worlds/greenland/conf:22
+#: ../../worlds/greenland/conf:23
+msgid "Mushroom"
+msgstr "Fungo"
+
+#: ../../worlds/greenland/conf:50
+msgid "Oak"
+msgstr "Kveko"
+
+#: ../../worlds/greenland/conf:51
+msgid "Oak medium"
+msgstr "Kveko meza"
+
+#: ../../worlds/greenland/conf:52
+msgid "Oak small"
+msgstr "Kevko mala"
+
+#: ../../worlds/greenland/conf:53
+msgid "Oak tiny"
+msgstr "Kveko nana"
+
+#: ../../worlds/greenland/conf:24
+#: ../../worlds/greenland/conf:25
+#: ../../worlds/greenland/conf:26
+#: ../../worlds/greenland/conf:27
+#: ../../worlds/greenland/conf:28
+#: ../../worlds/greenland/conf:29
+msgid "Pebble"
+msgstr ""
+
+#: ../../worlds/greenland/conf:90
+msgid "Reindeer"
+msgstr "Boaco"
+
 #: ../../worlds/greenland/conf:74
 msgid "Rowan"
 msgstr "Sorbuso"
@@ -226,53 +241,62 @@ msgstr "Sorbuso mala"
 msgid "Rowan tiny"
 msgstr "Sorbuso nana"
 
-#: ../../worlds/greenland/conf:80
-msgid "Badger"
-msgstr ""
-
-#: ../../worlds/greenland/conf:81
-msgid "Brownbear"
-msgstr "Bruna urso"
-
-#: ../../worlds/greenland/conf:82
-msgid "Bunny"
-msgstr "Kuniklo"
-
-#: ../../worlds/greenland/conf:83
-msgid "Chamois"
-msgstr "Ĉamo"
-
-#: ../../worlds/greenland/conf:84
-msgid "Deer"
-msgstr "Cervo"
-
-#: ../../worlds/greenland/conf:85
-msgid "Duck"
-msgstr "Anaso"
-
-#: ../../worlds/greenland/conf:86
-msgid "Elk"
-msgstr "Kanada cervo"
-
-#: ../../worlds/greenland/conf:87
-msgid "Fox"
-msgstr "Vulpo"
-
-#: ../../worlds/greenland/conf:88
-msgid "Lynx"
-msgstr "Linko"
-
-#: ../../worlds/greenland/conf:89
-msgid "Marten"
-msgstr "Marteso"
-
-#: ../../worlds/greenland/conf:90
-msgid "Reindeer"
-msgstr "Boaco"
-
 #: ../../worlds/greenland/conf:91
 msgid "Sheep"
 msgstr "Ŝafo"
+
+#: ../../worlds/greenland/conf:30
+#: ../../worlds/greenland/conf:31
+#: ../../worlds/greenland/conf:32
+msgid "Skeleton"
+msgstr "Skeleto"
+
+#: ../../worlds/greenland/conf:54
+msgid "Spruce"
+msgstr "Piceo"
+
+#: ../../worlds/greenland/conf:55
+msgid "Spruce medium"
+msgstr "Piceo meza"
+
+#: ../../worlds/greenland/conf:56
+msgid "Spruce small"
+msgstr "Piceo mala"
+
+#: ../../worlds/greenland/conf:57
+msgid "Spruce tiny"
+msgstr "Piceo nana"
+
+#: ../../worlds/greenland/conf:33
+#: ../../worlds/greenland/conf:34
+#: ../../worlds/greenland/conf:35
+#: ../../worlds/greenland/conf:36
+#: ../../worlds/greenland/conf:37
+#: ../../worlds/greenland/conf:38
+#: ../../worlds/greenland/conf:39
+msgid "Standing Stones"
+msgstr "Starantaj ŝtonoj"
+
+#: ../../worlds/greenland/conf:40
+#: ../../worlds/greenland/conf:41
+#: ../../worlds/greenland/conf:42
+#: ../../worlds/greenland/conf:43
+#: ../../worlds/greenland/conf:44
+#: ../../worlds/greenland/conf:45
+msgid "Stones"
+msgstr "Sxtono"
+
+#: ../../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr ""
+
+#: ../../worlds/greenland/resconf:36
+msgid "Water"
+msgstr "Akvo"
 
 #: ../../worlds/greenland/conf:92
 msgid "Wisent"
@@ -282,26 +306,5 @@ msgstr "Bizono"
 msgid "Wolf"
 msgstr "Lupo"
 
-#: ../../worlds/greenland/resconf:4
-msgid "Coal"
-msgstr "Karbo"
-
-#: ../../worlds/greenland/resconf:12
-msgid "Gold"
-msgstr "Oro"
-
-#: ../../worlds/greenland/resconf:20
-msgid "Iron"
-msgstr "Fero"
-
-#: ../../worlds/greenland/resconf:28
-msgid "Granit"
-msgstr "Granito"
-
-#: ../../worlds/greenland/resconf:36
-msgid "Water"
-msgstr "Akvo"
-
-#: ../../worlds/greenland/resconf:41
-msgid "Fish"
-msgstr "Fiŝo"
+#~ msgid "Granit"
+#~ msgstr "Granito"

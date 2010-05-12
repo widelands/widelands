@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-04-30 09:33+0000\n"
-"Last-Translator: Seumas <jameslukehadley@googlemail.com>\n"
+"PO-Revision-Date: 2010-05-08 11:47+0000\n"
+"Last-Translator: Alex Denvir <coldfff@blueyonder.co.uk>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-01 03:50+0000\n"
+"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/README:117
@@ -505,7 +505,7 @@ msgstr "Czech"
 
 #: ../../txts/README:86
 msgid "DELETE      Archive the current message"
-msgstr ""
+msgstr "DELETE      Archive the current message"
 
 #: ../../txts/developers:161
 msgid "Dansk"
@@ -569,7 +569,7 @@ msgstr "French"
 
 #: ../../txts/README:84
 msgid "G           Go to location corresponding to current message"
-msgstr ""
+msgstr "G           Go to location corresponding to current message"
 
 #: ../../txts/COPYING:3
 msgid "GNU general public licence"
@@ -723,6 +723,7 @@ msgstr ""
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
+"In the message window, the following additional shortcuts are available:"
 
 #: ../../txts/README:9
 #: ../../txts/editor_readme:7
@@ -810,7 +811,7 @@ msgstr "Musicians"
 
 #: ../../txts/README:55
 msgid "N               Toggle messages ('news')"
-msgstr ""
+msgstr "N               Toggle messages ('news')"
 
 #: ../../txts/developers:149
 msgid ""

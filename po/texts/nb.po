@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-03 14:10+0000\n"
-"Last-Translator: Fredrik Sudmann <fsudmann@gmail.com>\n"
+"PO-Revision-Date: 2010-05-08 15:25+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/README:117
@@ -415,6 +415,8 @@ msgstr "Barbar"
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
+"Sørg for å sende en geolog til å undersøke området før du bygger en brønn "
+"eller gruve."
 
 #: ../../txts/README:57
 msgid "C               Toggle census"
@@ -466,7 +468,7 @@ msgstr ""
 
 #: ../../txts/README:75
 msgid "Ctrl+F10    Quit the game immediately"
-msgstr ""
+msgstr "Ctrl+F10 Avslutter spillet øyeblikkelig"
 
 #: ../../txts/developers:154
 msgid "Czech"
@@ -727,6 +729,8 @@ msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop to fish."
 msgstr ""
+"Hold et øye med fiskerene dine. Etter at fiskeressursene i et område er "
+"oppbrukt, vil de stoppe å fiske."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -734,7 +738,7 @@ msgstr "Tastatursnarveier"
 
 #: ../../txts/README:47
 msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgstr "Tastatursnarveier (i spillet)"
 
 #: ../../txts/COPYING:1
 msgid "License"
@@ -752,11 +756,11 @@ msgstr "Linux-distribusjoner"
 
 #: ../../txts/README:53
 msgid "M               Toggle minimap"
-msgstr ""
+msgstr "M Slå minikart på/av"
 
 #: ../../txts/editor_readme:31
 msgid "M        Toggles minimap"
-msgstr ""
+msgstr "M Slår minikart på/av"
 
 #: ../../txts/developers:118
 msgid "Maps and Missions"
@@ -764,7 +768,7 @@ msgstr "Kart og oppdrag"
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
-msgstr ""
+msgstr "Gruvearbeidere vil kun jobbe hvis de blir forsynt med mat."
 
 #: ../../txts/developers:97
 msgid "Musicians"
@@ -832,7 +836,7 @@ msgstr "Andre"
 
 #: ../../txts/developers:265
 msgid "Other Unix Distributions"
-msgstr ""
+msgstr "Andre Unix-distribusjoner"
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
@@ -915,22 +919,26 @@ msgstr ""
 
 #: ../../txts/README:51
 msgid "SPACE       Toggle build-help"
-msgstr ""
+msgstr "MELLOMROM Slå byggehjelp på/av"
 
 #: ../../txts/editor_readme:21
 msgid "SPACE    Toggles build help"
-msgstr ""
+msgstr "MELLOMROM Slår byggehjelp på/av"
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
 "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
+"Mellomrom-tasten oppfører seg som i et vanlig spill. Den slår byggehjelpen "
+"på eller av."
 
 #: ../../txts/developers:150
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
+"Se https://translations.launchpad.net/widelands for en liste over de som har "
+"vært med å oversette Widelands via launchpad.net."
 
 #: ../../txts/developers:232
 msgid "Slovak"
@@ -964,6 +972,8 @@ msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr ""
+"Del opp veiene dine i kortere avstander ved å plante noen flagg. Dette gjør "
+"at varetransporten din går raskere."
 
 #: ../../txts/README:27
 msgid "Status"
@@ -1099,10 +1109,12 @@ msgid ""
 "Those pages might be more complete and up to date than this file. And there "
 "you further can find a short tutorial about building a map."
 msgstr ""
+"De sidene kan være mer komplette og mer oppdaterte enn denne filen. I "
+"tillegg kan du finne en kort innføring i hvordan du kan lage ditt eget kart."
 
 #: ../../txts/README:40
 msgid "To close an open window, right click it."
-msgstr ""
+msgstr "For å lukke et åpent vindu, høyreklikk det."
 
 #: ../../txts/README:145
 msgid ""
@@ -1198,6 +1210,9 @@ msgid ""
 "information, see the file 'COPYING' or select the License button from the "
 "main menu."
 msgstr ""
+"Widelands er lisensiert under GNU General Public License (GPL). For mer "
+"informasjon, se filen 'COPYING' eller trykk på knappen merket Lisens i "
+"hovedmenyen."
 
 #: ../../txts/README:31
 msgid ""

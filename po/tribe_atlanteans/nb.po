@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-03 14:05+0000\n"
-"Last-Translator: Fredrik Sudmann <fsudmann@gmail.com>\n"
+"PO-Revision-Date: 2010-05-10 17:04+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -63,7 +63,7 @@ msgstr "Bakeri"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Baker brød til arbeiderne."
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Bakingtray"
@@ -71,7 +71,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:166
 msgid "Barracks"
-msgstr ""
+msgstr "Brakke"
 
 #: ../../tribes/atlanteans/conf:159
 #: ../../tribes/atlanteans/conf:167
@@ -92,7 +92,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:66
 msgid "Blackroot Flour"
-msgstr ""
+msgstr "Svartrotmel"
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
@@ -173,7 +173,7 @@ msgstr "Transporterer ting langs veiene dine."
 #: ../../tribes/atlanteans/conf:151
 #: ../../tribes/atlanteans/conf:168
 msgid "Castle"
-msgstr ""
+msgstr "Slott"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
@@ -251,7 +251,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Destroyed building"
-msgstr ""
+msgstr "Ødelagt bygning"
 
 #: ../../tribes/atlanteans/conf:73
 msgid "Diamond"
@@ -328,7 +328,7 @@ msgstr ""
 #: ../../tribes/atlanteans/conf:162
 #: ../../tribes/atlanteans/conf:169
 msgid "Fortress"
-msgstr ""
+msgstr "Fort"
 
 #: ../../tribes/atlanteans/conf:126
 msgid "Geologist"
@@ -390,7 +390,7 @@ msgstr "Hovedkvarter"
 
 #: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Mellomstort hovedkvarter"
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Heavy Double Trident"
@@ -402,7 +402,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:154
 msgid "High Tower"
-msgstr ""
+msgstr "Høyt tårn"
 
 #: ../../tribes/atlanteans/conf:84
 msgid "Hook pole"
@@ -500,7 +500,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Miner"
-msgstr ""
+msgstr "Gruvearbeider"
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Outpost"
@@ -508,7 +508,7 @@ msgstr "Utpost"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Pick"
-msgstr ""
+msgstr "Hakke"
 
 #: ../../tribes/atlanteans/pick/conf:1
 msgid ""
@@ -542,7 +542,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Planter trær."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
@@ -579,7 +579,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:35
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Produser ildtenger"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce fishing net"
@@ -615,7 +615,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce pick"
-msgstr ""
+msgstr "Produser hakke"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:42
 msgid "Produce saw"
@@ -635,7 +635,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
-msgstr ""
+msgstr "Produser stålskjold"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:24
 msgid ""
@@ -652,7 +652,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Lager rustninger til soldatene."
 
 #: ../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
@@ -660,11 +660,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Lager verktøy til arbeiderne."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Lager våpen til soldatene."
 
 #: ../../tribes/atlanteans/conf:193
 msgid "Quarry"
@@ -775,7 +775,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:155
 msgid "Small Tower"
-msgstr ""
+msgstr "Lite tårn"
 
 #: ../../tribes/atlanteans/smelting_works/conf:24
 msgid "Smelt gold"
@@ -791,7 +791,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:195
 msgid "Smelting Works"
-msgstr ""
+msgstr "Smelteverk"
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -807,11 +807,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:98
 msgid "Smoked fish"
-msgstr ""
+msgstr "Røkt fisk"
 
 #: ../../tribes/atlanteans/conf:99
 msgid "Smoked meat"
-msgstr ""
+msgstr "Røkt kjøtt"
 
 #: ../../tribes/atlanteans/conf:132
 msgid "Smoker"
@@ -847,7 +847,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:102
 msgid "Steel Shield"
-msgstr ""
+msgstr "Stålskjold"
 
 #: ../../tribes/atlanteans/conf:103
 msgid "Steel Trident"
@@ -855,7 +855,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Stone"
-msgstr ""
+msgstr "Stein"
 
 #: ../../tribes/atlanteans/stone/conf:1
 msgid "Stone is one basic build ware type of the Atlanteans."
@@ -978,7 +978,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid "This steel shield is used by experienced soldiers."
-msgstr ""
+msgstr "Dette stålskjoldet blir brukt av erfarne soldater."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
@@ -991,6 +991,7 @@ msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr ""
+"Denne stammen er kjent fra de eldste sagn. Sønner og døtre av Atlantis."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
@@ -1013,24 +1014,24 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:135
 msgid "Toolsmith"
-msgstr ""
+msgstr "Verktøysmed"
 
 #: ../../tribes/atlanteans/conf:198
 msgid "Toolsmithy"
-msgstr ""
+msgstr "Verktøysmie"
 
 #: ../../tribes/atlanteans/conf:156
 #: ../../tribes/atlanteans/conf:171
 msgid "Tower"
-msgstr ""
+msgstr "Tårn"
 
 #: ../../tribes/atlanteans/conf:136
 msgid "Trainer"
-msgstr ""
+msgstr "Trener"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Trener soldatene."
 
 #: ../../tribes/atlanteans/conf:106
 msgid "Trunk"
@@ -1132,7 +1133,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:175
 msgid "Warehouse"
-msgstr ""
+msgstr "Varehus"
 
 #: ../../tribes/atlanteans/conf:107
 msgid "Water"
@@ -1150,7 +1151,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid "Weapons and Tools are made of iron."
-msgstr ""
+msgstr "Våpen og verktøy er laget av jern."
 
 #: ../../tribes/atlanteans/conf:137
 msgid "Weaponsmith"
@@ -1170,7 +1171,7 @@ msgstr "Brønn"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Woodcutter"
-msgstr ""
+msgstr "Tømmerhugger"
 
 #: ../../tribes/atlanteans/conf:202
 msgid "Woodcutter's House"

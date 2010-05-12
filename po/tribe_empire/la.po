@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-03 04:31+0000\n"
+"PO-Revision-Date: 2010-05-10 16:16+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -67,7 +67,7 @@ msgstr "Panem laboranti fingit."
 
 #: ../../tribes/empire/conf:153
 msgid "Barracks"
-msgstr ""
+msgstr "Casa militaris"
 
 #: ../../tribes/empire/conf:154
 #: ../../tribes/empire/conf:167
@@ -145,7 +145,7 @@ msgstr "Burg Dorf"
 
 #: ../../tribes/empire/conf:70
 msgid "Chain-Armour"
-msgstr ""
+msgstr "Lorica serta"
 
 #: ../../tribes/empire/conf:183
 msgid "Charcoal Burner"
@@ -410,7 +410,7 @@ msgstr "Casa venatoris"
 
 #: ../../tribes/empire/conf:83
 msgid "Hunting Spear"
-msgstr ""
+msgstr "Hasta venatoris"
 
 #: ../../tribes/empire/conf:194
 msgid "Inn"
@@ -545,11 +545,11 @@ msgstr "Dolabra"
 
 #: ../../tribes/empire/conf:131
 msgid "Pig Breeder"
-msgstr ""
+msgstr "Subulcus"
 
 #: ../../tribes/empire/conf:199
 msgid "Piggery"
-msgstr ""
+msgstr "Suile"
 
 #: ../../tribes/empire/vineyard/conf:17
 msgid "Plant vine"
@@ -561,11 +561,11 @@ msgstr ""
 
 #: ../../tribes/empire/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Agros colit."
 
 #: ../../tribes/empire/forester/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Arbores colit."
 
 #: ../../tribes/empire/conf:93
 msgid "Plate-Armour"
@@ -617,7 +617,7 @@ msgstr "Galeam fabricat."
 
 #: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce hunting spear"
-msgstr ""
+msgstr "Hasta venatoris fabricat."
 
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce kitchen tools"
@@ -677,7 +677,7 @@ msgstr "Arma militibus fabricat."
 
 #: ../../tribes/empire/conf:200
 msgid "Quarry"
-msgstr ""
+msgstr "Lapidicina"
 
 #: ../../tribes/empire/conf:94
 msgid "Ration"
@@ -701,11 +701,11 @@ msgstr "Est indicatum hic aurum multum situm"
 
 #: ../../tribes/empire/conf:51
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Est indicatum hic granitum paucum situm"
 
 #: ../../tribes/empire/conf:52
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Est indicatum hic granitum multum situm"
 
 #: ../../tribes/empire/conf:53
 msgid "Resource indicator iron little"
@@ -828,7 +828,7 @@ msgstr "Tabernus"
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "Venator carnem bonum ad colonos portat."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
@@ -837,7 +837,7 @@ msgstr "Falx instrumentum agricolae est. Quae a fabre facitur."
 
 #: ../../tribes/empire/conf:18
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "Concilium Widelands ludum fingens"
 
 #: ../../tribes/empire/axe/conf:1
 msgid ""
@@ -846,7 +846,7 @@ msgstr ""
 
 #: ../../tribes/empire/bread/conf:1
 msgid "The backers of the Empire make really tasty bread."
-msgstr ""
+msgstr "Imperiani pistores panem boni saporis fingit."
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""
@@ -926,7 +926,7 @@ msgstr "Hoc est aes ferri rubrum."
 
 #: ../../tribes/empire/goldstone/conf:1
 msgid "This is the yellow goldstone."
-msgstr ""
+msgstr "Hoc est fulvum aes aureum."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1091,7 +1091,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:139
 msgid "Vine Farmer"
-msgstr ""
+msgstr "Vinitor"
 
 #: ../../tribes/empire/conf:57
 msgid "Vine medium"
@@ -1111,7 +1111,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:211
 msgid "Vineyard"
-msgstr ""
+msgstr "Vinetum"
 
 #: ../../tribes/empire/conf:100
 msgid "War-Lance"
@@ -1133,7 +1133,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:207
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Fabrica armorum"
 
 #: ../../tribes/empire/iron/conf:1
 msgid "Weapons and tools are made of iron."
@@ -1141,7 +1141,7 @@ msgstr "Arma instrumentaque e ferro fabricantur."
 
 #: ../../tribes/empire/conf:137
 msgid "Weaponsmith"
-msgstr ""
+msgstr "Faber armorum"
 
 #: ../../tribes/empire/conf:138
 msgid "Weaver"
@@ -1171,7 +1171,7 @@ msgstr "Vinum"
 
 #: ../../tribes/empire/conf:210
 msgid "Winery"
-msgstr ""
+msgstr "Cella vinaria"
 
 #: ../../tribes/empire/conf:104
 msgid "Wood"
@@ -1183,11 +1183,11 @@ msgstr "Hasta lignea"
 
 #: ../../tribes/empire/conf:106
 msgid "Wool"
-msgstr ""
+msgstr "Lana"
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "Lana est crinis ovium. E qua textum fiet."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20

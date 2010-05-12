@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-03 14:04+0000\n"
-"Last-Translator: Fredrik Sudmann <fsudmann@gmail.com>\n"
+"PO-Revision-Date: 2010-05-08 15:16+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-04 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -93,7 +93,7 @@ msgstr "Øl"
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-msgstr ""
+msgstr "Ved siden av pitabrød og kjøtt, er fisk et matkilde for barbarene."
 
 #: ../../tribes/barbarians/conf:187
 msgid "Big Inn"
@@ -149,12 +149,12 @@ msgstr "Bærer"
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
-msgstr ""
+msgstr "Bærer ting langs veiene."
 
 #: ../../tribes/barbarians/conf:164
 #: ../../tribes/barbarians/conf:173
 msgid "Castle"
-msgstr ""
+msgstr "Slott"
 
 #: ../../tribes/barbarians/conf:146
 msgid "Cattle Breeder"
@@ -674,7 +674,7 @@ msgstr "Produser spade"
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr ""
+msgstr "Produser matbit"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
@@ -833,7 +833,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:168
 msgid "Small Tower"
-msgstr ""
+msgstr "Lite tårn"
 
 #: ../../tribes/barbarians/smelting_works/conf:25
 msgid "Smelt gold"
@@ -861,7 +861,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:103
 msgid "Snack"
-msgstr ""
+msgstr "Matbit"
 
 #: ../../tribes/barbarians/conf:117
 msgid "Soldier"
@@ -896,6 +896,8 @@ msgid ""
 "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
 "are equipped with it, but also the lumberjack is using the same model."
 msgstr ""
+"Øksen er et grunnleggende våpen og verktøy for barbarene. Alle unge krigere "
+"er utstyrt med en, men også tømmerhuggeren benytter samme modell."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -1155,7 +1157,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:181
 msgid "Warehouse"
-msgstr ""
+msgstr "Varehus"
 
 #: ../../tribes/barbarians/conf:108
 msgid "Warriors Axe"

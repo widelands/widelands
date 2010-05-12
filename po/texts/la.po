@@ -1,15 +1,16 @@
-# Widelands po/he_HE/texts.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Latin translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-11 15:23+0000\n"
-"Last-Translator: Michael DOUBEZ <Unknown>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2010-05-10 16:59+0000\n"
+"Last-Translator: Sonnrain <Unknown>\n"
+"Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,7 +19,7 @@ msgstr ""
 
 #: ../../txts/README:117
 msgid "- how to reproduce the bug"
-msgstr ""
+msgstr "- quomodo emendum iterum fieri potest"
 
 #: ../../txts/README:121
 msgid ""
@@ -42,7 +43,7 @@ msgstr ""
 
 #: ../../txts/README:119
 msgid "- which map you were playing"
-msgstr ""
+msgstr "- qua tabula ludebas"
 
 #: ../../txts/COPYING:20
 msgid ""
@@ -61,17 +62,20 @@ msgid ""
 "having been made by running the Program). Whether that is true depends on "
 "what the Program does.<br>"
 msgstr ""
-"0. רישיון זה חל על כל תוכנית או יצירה אחרת המכילה הודעה, שהוצבה על ידי בעל "
-"זכות היוצרים, האומרת שניתן להפיצה על-פי תנאיו של רישיון ציבורי כללי זה. "
-"ה\"תוכנית\", להלן, מתייחסת לכל תוכנית או יצירה כאמור, ו\"יצירה המבוססת על "
-"התוכנית\" פירושה התוכנית או כל יצירה נגזרת כמשמעה בחוק זכות-יוצרים: כלומר, "
-"יצירה המכילה את התוכנה או חלק ממנה, בין אם במדויק ובין אם לאחר שינויים ו/או "
-"במתורגם לשפה אחרת. (להלן יכלל תרגום, בלא הגבלה, במונח \"שינויים\"). לכל מקבל "
-"רישיון נתייחס כ\"אתה\".<br>\r\n"
-"רישיון זה אינו חל על פעילויות שאינן העתקה, הפצה ושינויים; פעילויות כאלה "
-"מצויות מחוץ לתחומו. הפעולה של הרצת התוכנית אינה מוגבלת ופלט התוכנית מכוסה רק "
-"אם תוכנו מהווה יצירה המבוססת על התוכנית (בהתעלם מכך שנוצר באמצעות הפעלת "
-"התוכנית). השאלה אם זה כך אם לאו, תלויה במה שהתוכנית עושה.<br>"
+"0. This License applies to any program or other work which contains a notice "
+"placed by the copyright holder saying it may be distributed under the terms "
+"of this General Public License. The Program, below, refers to any such "
+"program or work, and a work based on the Program means either the Program or "
+"any derivative work under copyright law: that is to say, a work containing "
+"the Program or a portion of it, either verbatim or with modifications and/or "
+"translated into another language. (Hereinafter, translation is included "
+"without limitation in the term modification.) Each licensee is addressed as "
+"you.<br>Activities other than copying, distribution and modification are not "
+"covered by this License; they are outside its scope. The act of running the "
+"Program is not restricted, and the output from the Program is covered only "
+"if its contents constitute a work based on the Program (independent of "
+"having been made by running the Program). Whether that is true depends on "
+"what the Program does.<br>"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
@@ -88,13 +92,14 @@ msgid ""
 "a fee for the physical act of transferring a copy, and you may at your "
 "option offer warranty protection in exchange for a fee.<br>"
 msgstr ""
-"1. אתה רשאי להעתיק ולהפיץ עותקים מדויקים של קוד המקור של התוכנית, כפי שקיבלת "
-"אותו, בכל אמצעי, בתנאי שאתה מפרסם על כל עותק, בבירור ובאופן נאות, הודעת "
-"זכויות יוצרים מתאימה ופטור מאחריות, שומר בלא פגע את כל ההודעות המתייחסות "
-"לרישיון זה ולהיעדר כל אחריות ונותן לכל מקבל אחר של התוכנית עותק מרישיון זה "
-"ביחד עם התוכנית.<br>אתה רשאי לדרוש תשלום עבור הפעולה הפיסית של העברת עותק "
-"ואתה רשאי, לפי בחירתך, להציע הגנת אחריות (warranty protection) בתמורה "
-"לתשלום.<br>"
+"1. You may copy and distribute verbatim copies of the Program's source code "
+"as you receive it, in any medium, provided that you conspicuously and "
+"appropriately publish on each copy an appropriate copyright notice and "
+"disclaimer of warranty; keep intact all the notices that refer to this "
+"License and to the absence of any warranty; and give any other recipients of "
+"the Program a copy of this License along with the Program.<br>You may charge "
+"a fee for the physical act of transferring a copy, and you may at your "
+"option offer warranty protection in exchange for a fee.<br>"
 
 #: ../../txts/COPYING:66
 msgid ""
@@ -106,11 +111,13 @@ msgid ""
 "preserving the free status of all derivatives of our free software and of "
 "promoting the sharing and reuse of software generally."
 msgstr ""
-"10. אם ברצונך לשלב חלקים מהתוכנית לתוך תוכניות חופשיות אחרות שתנאי הפצתן "
-"שונים, כתוב אל היוצר כדי לבקש את רשותו. בקשר עם תוכנה שזכויות היוצרים בה "
-"שייכות לקרן התוכנה החופשית, כתוב לקרן התוכנה החופשית; לעתים אנו מתירים "
-"יוצאים מן הכלל. החלטתנו תונחה על ידי שתי המטרות של שמירת מעמדן החופשי של כל "
-"נגזרות התוכנה החופשית שלנו ושל קידום השיתוף והשימוש-מחדש בתוכנה באופן כללי."
+"10. If you wish to incorporate parts of the Program into other free programs "
+"whose distribution conditions are different, write to the author to ask for "
+"permission. For software which is copyrighted by the Free Software "
+"Foundation, write to the Free Software Foundation; we sometimes make "
+"exceptions for this. Our decision will be guided by the two goals of "
+"preserving the free status of all derivatives of our free software and of "
+"promoting the sharing and reuse of software generally."
 
 #: ../../txts/COPYING:74
 msgid ""
@@ -124,12 +131,15 @@ msgid ""
 "PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR "
 "CORRECTION."
 msgstr ""
-"11. מאחר שהתוכנית מורשית בלא תשלום, אין אחריות על התוכנית, ככל שהדבר מותר על-"
-"פי החוק החל. מלבד במקום שבו צוין אחרת בכתב, בעל זכות היוצרים ו/או צדדים "
-"אחרים מספקים את התוכנית \"כפי שהיא\", בלא אחריות מסוג כלשהו, בין אם מפורשת "
-"ובין אם משתמעת, לרבות, אך מבלי למעט מהאמור, האחריות המשתמעת למסחריות והתאמה "
-"למטרה מסוימת. כל הסיכון ביחס לאיכות וביצועי התוכנית חל עליך. היה והתוכנה "
-"תוכח כפגומה, אתה תישא במחיר של כל השירותים והתיקונים הנחוצים."
+"11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR "
+"THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN "
+"OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES "
+"PROVIDE THE PROGRAM AS IS WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR "
+"IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF "
+"MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO "
+"THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM "
+"PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR "
+"CORRECTION."
 
 #: ../../txts/COPYING:77
 msgid ""
@@ -143,13 +153,15 @@ msgid ""
 "PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE "
 "POSSIBILITY OF SUCH DAMAGES."
 msgstr ""
-"12. בשום מקרה, אלא אם נדרש הדבר על-ידי החוק החל, או שהוסכם כך בכתב, בעל זכות "
-"היוצרים, או כל צד אחר ששינה ו/או הפיץ מחדש את התוכנית כפי שהותר לעיל, לא "
-"ישאו כלפיך באחריות לנזקים, לרבות נזקים כלליים, מיוחדים, משניים או תוצאתיים "
-"כלשהם, הנובעים מהשימוש או מאי-היכולת להשתמש בתוכנה (לרבות, אך מבלי לגרוע "
-"מאמור לעיל, אבדן נתונים או נתונים שעובדו שלא במדויק או הפסדים שבהם נשאת אתה "
-"או צדדים שלישיים או כשל של התוכנית לפעול ביחד עם תוכניות אחרות), גם אם הודע "
-"לבעל הזכות או צד אחר שכזה על האפשרות לנזקים כאמור."
+"12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING "
+"WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR "
+"REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, "
+"INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING "
+"OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO "
+"LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR "
+"THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER "
+"PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE "
+"POSSIBILITY OF SUCH DAMAGES."
 
 #: ../../txts/COPYING:24
 msgid ""
@@ -172,20 +184,24 @@ msgid ""
 "such an announcement, your work based on the Program is not required to "
 "print an announcement.)"
 msgstr ""
-"2. אתה רשאי לשנות את עותק או עותקי התוכנית שלך או כל חלק מהם, ובכך ליצור "
-"יצירה המבוססת על התוכנית, ולהעתיק ולהפיץ שינויים או יצירה כאמור על-פי תנאי "
-"סעיף 1 לעיל, בתנאי שתעמוד גם בכל התנאים הבאים:<br><br>א) עליך לגרום לקבצים "
-"ששונו לשאת הודעות בולטות המצהירות ששינית את הקבצים ואת התאריך של כל "
-"שינוי.<br>\tב) עליך לגרום לכל יצירה, שאתה מפיץ או מפרסם, אשר כולה או חלקה "
-"מכילה או נגזרת מהתוכנית או כל חלק ממנה, להיות מורשית כמכלול בלא תשלום לכל צד "
-"שלישי שהוא על-פי תנאי רישיון זה.<br>ג) אם התוכנית ששונתה קוראת ברגיל ובאופן "
-"אינטראקטיבי פקודות, בעת שמפעילים אותה, עליך לגרום לה, כשמתחילים להפעילה "
-"לשימוש אינטראקטיבי כאמור בדרך הרגילה ביותר, להדפיס או להציג הודעה הכוללת "
-"הודעת זכויות יוצרים מתאימה והודעה שאין כל אחריות (או, במקום זאת, האומרת שאתה "
-"מספק אחריות) ושכל משתמש רשאי להפיץ מחדש את התוכנית על-פי תנאים אלה, והאומרת "
-"למשתמש איך לצפות בעותק של רישיון זה. (חריג: אם התוכנית עצמה היא אינטראקטיבית "
-"אבל אינה מדפיסה באופן רגיל הודעות מעין אלה, יצירתך המבוססת על התוכנית אינה "
-"נדרשת להדפיס את ההודעה)."
+"2. You may modify your copy or copies of the Program or any portion of it, "
+"thus forming a work based on the Program, and copy and distribute such "
+"modifications or work under the terms of Section 1 above, provided that you "
+"also meet all of these conditions:<br><br>a) You must cause the modified "
+"files to carry prominent notices stating that you changed the files and the "
+"date of any change.<br>b) You must cause any work that you distribute or "
+"publish, that in whole or in part contains or is derived from the Program or "
+"any part thereof, to be licensed as a whole at no charge to all third "
+"parties under the terms of this License.<br>c) If the modified program "
+"normally reads commands interactively when run, you must cause it, when "
+"started running for such interactive use in the most ordinary way, to print "
+"or display an announcement including an appropriate copyright notice and a "
+"notice that there is no warranty (or else, saying that you provide a "
+"warranty) and that users may redistribute the program under these "
+"conditions, and telling the user how to view a copy of this License. "
+"(Exception: if the Program itself is interactive but does not normally print "
+"such an announcement, your work based on the Program is not required to "
+"print an announcement.)"
 
 #: ../../txts/COPYING:30
 msgid ""
@@ -206,18 +222,22 @@ msgid ""
 "code or executable form with such an offer, in accord with Subsection b "
 "above.)"
 msgstr ""
-"3. אתה רשאי להעתיק או להפיץ את התוכנית (או יצירה המבוססת עליה, על-פי סעיף 2) "
-"בקוד יעד (object code) או בקובץ בר-ביצוע (executable form) על-פי תנאי סעיפים "
-"1 ו- 2 לעיל ובלבד שתעשה גם אחד מהדברים הבאים:<br><br>א) תצרף אליה עותק מלא "
-"של קוד המקור התואם, הניתן לקריאה במכונה (machine-readable source code) שיש "
-"להפיצו על-פי תנאי הסעיפים 1 ו- 2 לעיל על-גבי אמצעי מקובל להחלפת תוכנה; "
-"או,<br>ב) תצרף אליה הצעה בכתב, התקפה למשך שלוש שנים לפחות, לתת לכל צד שלישי, "
-"בתמורה שלא תעלה על העלות הכרוכה עבורך בהפצה פיסית של הקוד, העתק מלא של קוד "
-"המקור התואם, הניתן לקריאה במכונה, אשר יופץ על-פי תנאי הסעיפים 1 ו- 2 לעיל "
-"במדיה מקובלת להחלת תוכנה; או,<br>ג) תצרף אליה את המידע שקיבלת בנוגע להצעה "
-"להפיץ את קוד המקור התואם. (אפשרות זו מותרת רק להפצות לא מסחריות ורק אם אתה "
-"מקבל את התוכנית בקוד יעד או בקובץ בר-ביצוע ביחד עם הצעה כזו, בהתאם לסעיף-קטן "
-"ב' לעיל)."
+"3. You may copy and distribute the Program (or a work based on it, under "
+"Section 2) in object code or executable form under the terms of Sections 1 "
+"and 2 above provided that you also do one of the following:<br><br>a) "
+"Accompany it with the complete corresponding machine-readable source code, "
+"which must be distributed under the terms of Sections 1 and 2 above on a "
+"medium customarily used for software interchange; or,<br>b) Accompany it "
+"with a written offer, valid for at least three years, to give any third "
+"party, for a charge no more than your cost of physically performing source "
+"distribution, a complete machine-readable copy of the corresponding source "
+"code, to be distributed under the terms of Sections 1 and 2 above on a "
+"medium customarily used for software interchange; or,<br>c) Accompany it "
+"with the information you received as to the offer to distribute "
+"corresponding source code. (This alternative is allowed only for "
+"noncommercial distribution and only if you received the program in object "
+"code or executable form with such an offer, in accord with Subsection b "
+"above.)"
 
 #: ../../txts/COPYING:39
 msgid ""
@@ -228,11 +248,12 @@ msgid ""
 "copies, or rights, from you under this License will not have their licenses "
 "terminated so long as such parties remain in full compliance."
 msgstr ""
-"4. אינך רשאי להעתיק, לשנות, ליתן רשיונות משנה או להפיץ את התוכנה אלא באופן "
-"שנקבע במפורש ברישיון זה. כל ניסיון להעתיק, לשנות, ליתן רשיונות-משנה או להפיץ "
-"את התוכנית באופן אחר, יהיה בטל מעיקרו ויסיים מאליו את זכויותיך על-פי רישיון "
-"זה. למרות זאת, לא יסתיים רשיונם של צדדים שקיבלו עותקים או זכויות ממך על-פי "
-"תנאי רישיון זה, כל עוד צדדים אלה מצייתים לרשיון זה במלואו."
+"4. You may not copy, modify, sublicense, or distribute the Program except as "
+"expressly provided under this License. Any attempt otherwise to copy, "
+"modify, sublicense or distribute the Program is void, and will automatically "
+"terminate your rights under this License. However, parties who have received "
+"copies, or rights, from you under this License will not have their licenses "
+"terminated so long as such parties remain in full compliance."
 
 #: ../../txts/COPYING:42
 msgid ""
@@ -244,12 +265,13 @@ msgid ""
 "this License to do so, and all its terms and conditions for copying, "
 "distributing or modifying the Program or works based on it."
 msgstr ""
-"5. אינך נדרש להסכים לרישיון זה, מפני שלא חתמת עליו. יחד עם זאת, שום דבר אחר "
-"אינו מתיר לך לשנות או להפיץ את התוכנית או יצירות הנגזרות ממנה. פעולות אלה "
-"אסורות על-פי חוק אם אינך מסכים לרישיון זה. לכן, על-ידי שינוי או הפצת התוכנית "
-"(או יצירה המתבססת על התוכנית), אתה מעיד שאתה מקבל רישיון זה לעשות כן, ואת כל "
-"תניותיו ותנאיו הנוגעים להעתקה, הפצה ושינוי של התוכנית או יצירות המבוססות "
-"עליה."
+"5. You are not required to accept this License, since you have not signed "
+"it. However, nothing else grants you permission to modify or distribute the "
+"Program or its derivative works. These actions are prohibited by law if you "
+"do not accept this License. Therefore, by modifying or distributing the "
+"Program (or any work based on the Program), you indicate your acceptance of "
+"this License to do so, and all its terms and conditions for copying, "
+"distributing or modifying the Program or works based on it."
 
 #: ../../txts/COPYING:45
 msgid ""
@@ -260,11 +282,12 @@ msgid ""
 "recipients' exercise of the rights granted herein. You are not responsible "
 "for enforcing compliance by third parties to this License."
 msgstr ""
-"6. בכל פעם שאתה מפיץ מחדש את התוכנית (או כל יצירה המבוססת על התוכנית), המקבל "
-"מקבל באופן אוטומטי רישיון ממעניק הרישיון המקורי להעתיק, להפיץ או לשנות את "
-"התוכנית בכפוף לתנאים אלה. אינך רשאי לכפות הגבלות נוספות כלשהן על מימוש "
-"זכויותיו של המקבל המוענקות לו בזאת. אינך אחראי לאכוף ציות של צדדים שלישיים "
-"לרישיון זה."
+"6. Each time you redistribute the Program (or any work based on the "
+"Program), the recipient automatically receives a license from the original "
+"licensor to copy, distribute or modify the Program subject to these terms "
+"and conditions. You may not impose any further restrictions on the "
+"recipients' exercise of the rights granted herein. You are not responsible "
+"for enforcing compliance by third parties to this License."
 
 #: ../../txts/COPYING:48
 msgid ""
@@ -281,14 +304,18 @@ msgid ""
 "it and this License would be to refrain entirely from distribution of the "
 "Program."
 msgstr ""
-"7. אם כתוצאה מפסק-דין או טענות בדבר הפרת פטנט או מכל סיבה אחרת (שאינה מוגבלת "
-"לענייני פטנטים) נכפים עליך תנאים (בין אם בהחלטת בית משפט, בהסכם או בדרך "
-"אחרת), הסותרים את תנאי רישיון זה, הם אינם פוטרים אותך מתנאי רישיון זה. אם "
-"אינך יכול להפיץ באופן שימלא בעת ובעונה אחת אחר התחייבויותיך על-פי רשיון זה "
-"וכל התחייבות רלבנטית אחרת, כי אז כתוצאה מכך אינך רשאי להפיץ את התוכנית כלל. "
-"לדוגמה, אם רישיון פטנט לא יתיר הפצה מחדש של התוכנית בלא תמלוגים על-ידי כל מי "
-"שמקבלים עותקים, במישרין או בעקיפין, באמצעותך, כי אז הצעד היחיד, שתוכל לנקוט "
-"כדי ליישב בינו לבין רישיון זה היא להימנע כליל מהפצת התוכנית."
+"7. If, as a consequence of a court judgment or allegation of patent "
+"infringement or for any other reason (not limited to patent issues), "
+"conditions are imposed on you (whether by court order, agreement or "
+"otherwise) that contradict the conditions of this License, they do not "
+"excuse you from the conditions of this License. If you cannot distribute so "
+"as to satisfy simultaneously your obligations under this License and any "
+"other pertinent obligations, then as a consequence you may not distribute "
+"the Program at all. For example, if a patent license would not permit "
+"royalty-free redistribution of the Program by all those who receive copies "
+"directly or indirectly through you, then the only way you could satisfy both "
+"it and this License would be to refrain entirely from distribution of the "
+"Program."
 
 #: ../../txts/COPYING:60
 msgid ""
@@ -300,11 +327,13 @@ msgid ""
 " In such case, this License incorporates the limitation as if written in the "
 "body of this License."
 msgstr ""
-"8. אם הפצת התוכנית ו/או השימוש בה מוגבלים במדינות מסוימות, בין אם על ידי "
-"פטנטים ובין אם על ידי זכויות יוצרים, בעל זכות היוצרים המקורי, המכפיף את "
-"התוכנית לרישיון זה, רשאי להוסיף הגבלה מפורשת על הפצה בתחום גיאוגרפי המוציאה "
-"מהכלל מדינות אלה, באופן שההפצה תהיה מותרת רק במדינות שלא הוצאו כך מהכלל או "
-"ביניהן. במקרה כזה, רישיון זה משלב לתוכו את המגבלה כאילו נכתבה בגוף רישיון זה."
+"8. If the distribution and/or use of the Program is restricted in certain "
+"countries either by patents or by copyrighted interfaces, the original "
+"copyright holder who places the Program under this License may add an "
+"explicit geographical distribution limitation excluding those countries, so "
+"that distribution is permitted only in or among countries not thus excluded. "
+"In such case, this License incorporates the limitation as if written in the "
+"body of this License."
 
 #: ../../txts/COPYING:63
 msgid ""
@@ -319,14 +348,16 @@ msgid ""
 "a version number of this License, you may choose any version ever published "
 "by the Free Software Foundation."
 msgstr ""
-"9. קרן התוכנה החופשית רשאית לפרסם מעת לעת גרסאות חדשות ו/או מתוקנות של "
-"הרישיון הציבורי הכללי. גרסאות חדשות כאלה יהיו דומות ברוחן לגרסה הנוכחית, אבל "
-"הן עשויות להיות שונות בפרטיהן כדי להתמודד עם בעיות או עניינים חדשים.<br>לכל "
-"גרסה ניתן מספר גרסה ייחודי. אם התוכנית מציינת מספר גרסה של רישיון זה החל "
-"עליה וכן \"כל גרסה מאוחרת יותר\", כי אז עומדת לך הברירה לנהוג או על-פי "
-"התניות והתנאים של אותה גרסה או של כל גרסה מאוחרת שפורסמה על ידי קרן התכנה "
-"החופשית. אם התוכנית אינה מציינת מספר גרסה של רישיון זה, אתה רשאי לבחור כל "
-"גרסה שפורסמה אי-פעם על ידי קרן התכנה החופשית."
+"9. The Free Software Foundation may publish revised and/or new versions of "
+"the General Public License from time to time. Such new versions will be "
+"similar in spirit to the present version, but may differ in detail to "
+"address new problems or concerns.<br>Each version is given a distinguishing "
+"version number. If the Program specifies a version number of this License "
+"which applies to it and any later version, you have the option of following "
+"the terms and conditions either of that version or of any later version "
+"published by the Free Software Foundation. If the Program does not specify a "
+"version number of this License, you may choose any version ever published by "
+"the Free Software Foundation."
 
 #: ../../txts/COPYING:96
 msgid ""
@@ -344,17 +375,6 @@ msgid ""
 "Boston, MA  02111-1307  USA<br><br><br>Also add information on how to "
 "contact you by electronic and paper mail."
 msgstr ""
-"<שורה אחת למתן שם לתוכנית ומושג מה היא עושה.><br>\r\n"
-"זכויות היוצרים © <שנה> <שם המחבר><br><br>תוכנית זו היא תוכנה חופשית; אתה "
-"יכול להפיצה מחדש ו/או לשנות אותה על-פי תנאי הרישיון הציבורי הכללי של GNU כפי "
-"שפורסם על ידי קרן התוכנה החופשית; בין אם גרסה 2 של הרישיון, ובין אם (לפי "
-"בחירתך) כל גרסה מאוחרת שלו.<br>תוכנית זו מופצת בתקווה שתהיה מועילה, אבל בלא "
-"אחריות כלשהי; ואפילו ללא האחריות המשתמעת בדבר מסחריותה או התאמתה למטרה "
-"מסויימת. לפרטים נוספים, ראה את הרישיון הציבורי הכללי של GNU.<br>ביחד עם "
-"תוכנית זו היית אמור לקבל עותק של הרישיון הציבורי הכללי של GNU; במידה שלא, "
-"כתוב ל- Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, "
-", MA 02111-1307, USA.<br>הוסף גם פרטים שיאפשרו ליצור איתך קשר בדואר אלקטרוני "
-"ורגיל."
 
 #: ../../txts/README:151
 msgid ""
@@ -374,7 +394,7 @@ msgstr ""
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
-msgstr ""
+msgstr "Semper casam saltuarii aedifices, ne lignum desit."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
@@ -387,10 +407,12 @@ msgid ""
 "Any further questions? Our FAQs, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"Plusne scire vis? Nostrae FAQ, vici, fora communitatis invenies apud "
+"www.widelands.org."
 
 #: ../../txts/developers:134
 msgid "Barbarian"
-msgstr "ברבר"
+msgstr "Barbari"
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
@@ -407,11 +429,11 @@ msgstr ""
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
-msgstr ""
+msgstr "CTRL+L Tabulam tollere"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
-msgstr ""
+msgstr "CTRL+S Tabulam servare"
 
 #: ../../txts/developers:131
 msgid "Campaign Story"
@@ -423,11 +445,11 @@ msgstr ""
 
 #: ../../txts/developers:9
 msgid "Chieftain"
-msgstr ""
+msgstr "Regulus"
 
 #: ../../txts/developers:38
 msgid "Coders"
-msgstr ""
+msgstr "Scriptores"
 
 #: ../../txts/COPYING:8
 msgid ""
@@ -436,6 +458,10 @@ msgid ""
 "distribute verbatim copies of this license document, but changing it is not "
 "allowed.<br>"
 msgstr ""
+"Copyright (C) 1989, 1991 Free Software Foundation, Inc.<br>59 Temple Place, "
+"Suite 330, Boston, MA 02111-1307 USA<br>Everyone is permitted to copy and "
+"distribute verbatim copies of this license document, but changing it is not "
+"allowed.<br>"
 
 #: ../../txts/README:139
 msgid "Creating a Session Record</p>"
@@ -443,11 +469,11 @@ msgstr ""
 
 #: ../../txts/README:75
 msgid "Ctrl+F10    Quit the game immediately"
-msgstr ""
+msgstr "CTRL+F10 Ludum statim claudere"
 
 #: ../../txts/developers:154
 msgid "Czech"
-msgstr "צ'כית"
+msgstr "Lingua Bohemica"
 
 #: ../../txts/README:86
 msgid "DELETE      Archive the current message"
@@ -455,7 +481,7 @@ msgstr ""
 
 #: ../../txts/developers:161
 msgid "Dansk"
-msgstr "דני"
+msgstr "Danica lingua"
 
 #: ../../txts/developers:1
 msgid "Development"
@@ -463,11 +489,11 @@ msgstr ""
 
 #: ../../txts/developers:296
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Documenta, adiutatum, vici"
 
 #: ../../txts/developers:167
 msgid "Dutch"
-msgstr "הולנדית"
+msgstr "Nederlandica lingua"
 
 #: ../../txts/editor_readme:25
 msgid "E        Toggles event menu"
@@ -479,11 +505,11 @@ msgstr ""
 
 #: ../../txts/developers:140
 msgid "Empire"
-msgstr "אימפריה"
+msgstr "Imperium"
 
 #: ../../txts/COPYING:82
 msgid "End of Terms and Conditions"
-msgstr "סוף התניות והתנאים"
+msgstr ""
 
 #: ../../txts/README:63
 msgid "F               Toggle Fullscreen"
@@ -503,7 +529,7 @@ msgstr ""
 
 #: ../../txts/developers:174
 msgid "Finnish"
-msgstr "פינית"
+msgstr "Finnica lingua"
 
 #: ../../txts/developers:310
 msgid "Former elders"
@@ -511,7 +537,7 @@ msgstr ""
 
 #: ../../txts/developers:180
 msgid "French"
-msgstr "צרפתית"
+msgstr "Francogallica lingua"
 
 #: ../../txts/README:84
 msgid "G           Go to location corresponding to current message"
@@ -519,17 +545,19 @@ msgstr ""
 
 #: ../../txts/COPYING:3
 msgid "GNU general public licence"
-msgstr "הרישיון הציבורי הכללי של GNU"
+msgstr "GNU general public licence"
 
 #: ../../txts/COPYING:17
 msgid ""
 "GNU general public license terms and conditions for copying, distribution "
 "and modification"
-msgstr "הרישיון הציבורי הכללי של GNU תניות ותנאים להעתקה, הפצה ושינוי"
+msgstr ""
+"GNU general public license terms and conditions for copying, distribution "
+"and modification"
 
 #: ../../txts/developers:187
 msgid "Galician"
-msgstr "גליציאנית"
+msgstr "Gallaica lingua"
 
 #: ../../txts/README:36
 msgid "General game control"
@@ -537,7 +565,7 @@ msgstr ""
 
 #: ../../txts/developers:192
 msgid "German"
-msgstr "גרמנית"
+msgstr "Theodisca lingua"
 
 #: ../../txts/developers:70
 msgid "Graphicians"
@@ -546,7 +574,7 @@ msgstr ""
 #: ../../txts/developers:19
 #: ../../txts/developers:321
 msgid "Graphics"
-msgstr "גרפיקה"
+msgstr "Imagines"
 
 #: ../../txts/editor_readme:29
 msgid "H        Toggles main menu"
@@ -554,7 +582,7 @@ msgstr ""
 
 #: ../../txts/developers:204
 msgid "Hebrew"
-msgstr "עברית"
+msgstr "Hebraica lingua"
 
 #: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
@@ -574,7 +602,7 @@ msgstr ""
 #: ../../txts/developers:24
 #: ../../txts/developers:314
 msgid "Homepage"
-msgstr "דף הבית"
+msgstr ""
 
 #: ../../txts/developers:287
 msgid "Homepage Coders"
@@ -582,11 +610,11 @@ msgstr ""
 
 #: ../../txts/COPYING:86
 msgid "How to Apply These Terms to Your New Programs"
-msgstr "איך להחיל תנאים אלה על התוכניות החדשות שלך"
+msgstr ""
 
 #: ../../txts/developers:209
 msgid "Hungarian"
-msgstr "הונגרית"
+msgstr "Hungarica lingua"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
@@ -598,8 +626,9 @@ msgid ""
 "particular circumstance, the balance of the section is intended to apply and "
 "the section as a whole is intended to apply in other circumstances."
 msgstr ""
-"אם בנסיבות מסוימות כלשהן יקבע שחלק כלשהו מסעיף זה בטל או שאי-אפשר לאוכפו, "
-"יתרת הסעיף מכוונת לחול והסעיף יוסיף לחול בשלמותו בנסיבות אחרות."
+"If any portion of this section is held invalid or unenforceable under any "
+"particular circumstance, the balance of the section is intended to apply and "
+"the section as a whole is intended to apply in other circumstances."
 
 #: ../../txts/COPYING:36
 msgid ""
@@ -609,10 +638,11 @@ msgid ""
 "even though third parties are notcompelled to copy the source along with the "
 "object code."
 msgstr ""
-"אם הפצת קבצים ברי-ביצוע או כאלה שבקוד-יעד נעשית על ידי הצעת גישה לעותק המצוי "
-"במקום שיועד לכך, כי אז הצעת גישה שוות ערך לעותק של קוד המקור, המצוי באותו "
-"מקום, תחשב להפצה של קוד המקור, למרות שצדדים שלישיים אינם מחויבים להעתיק את "
-"קוד המקור ביחד עם קוד היעד."
+"If distribution of executable or object code is made by offering access to "
+"copy from a designated place, then offering equivalent access to copy the "
+"source code from the same place counts as distribution of the source code, "
+"even though third parties are notcompelled to copy the source along with the "
+"object code."
 
 #: ../../txts/COPYING:98
 msgid ""
@@ -623,11 +653,12 @@ msgid ""
 "are welcome to redistribute it<br>under certain conditions; type `show c' "
 "for details."
 msgstr ""
-"אם התוכנית היא אינטראקטיבית, גרום לכך שתציג הודעה קצרה כדוגמת זו, כשהיא "
-"מתחילה בפעולתה האינטראקטיבית:<br><br>Gnomovision גרסה 69, זכויות יוצרים © "
-"<שנה> <שם היוצר><br>Gnomovision באה בלא אחריות כלשהי; לפרטים הקלד 'show "
-"w'.<br>זוהי תוכנה חופשית ואתה מוזמן להפיצה הלאה בתנאים מסוימים. לפרטים הקלד "
-"'show c'."
+"If the program is interactive, make it output a short notice like "
+"this<br>when it starts in an interactive mode:<br><br>Gnomovision version "
+"69, Copyright (C) year name of author<br>Gnomovision comes with ABSOLUTELY "
+"NO WARRANTY; for details type `show w'.<br>This is free software, and you "
+"are welcome to redistribute it<br>under certain conditions; type `show c' "
+"for details."
 
 #: ../../txts/COPYING:90
 msgid ""
@@ -635,9 +666,9 @@ msgid ""
 "use to the public, the best way to achieve this is to make it free software "
 "which everyone can redistribute and change under these terms."
 msgstr ""
-"אם אתה מפתח תוכנית חדשה, ורוצה שהציבור יפיק ממנה את מירב התועלת, הדרך הטובה "
-"ביותר להשיג זאת היא לעשותה תוכנה חופשית שכל אחד יכול להפיץ מחדש ולשנות על-פי "
-"תנאים אלה."
+"f you develop a new program, and you want it to be of the greatest possible "
+"use to the public, the best way to achieve this is to make it free software "
+"which everyone can redistribute and change under these terms."
 
 #: ../../txts/README:95
 msgid ""
@@ -674,17 +705,10 @@ msgid ""
 "she is willing to distribute software through any other system and a "
 "licensee cannot impose that choice."
 msgstr ""
-"סעיף זה אינו מיועד לגרום לך להפר פטנטים כלשהם או תביעות זכות קנייניות אחרות "
-"כלשהן או לערער על תקפותה של תביעת זכות מעין זו; סעיף זה מיועד אך ורק להגן על "
-"שלמות מערכת ההפצה של התוכנה החופשית, המיושמת באמצעות פרקטיקה של רשיונות "
-"ציבוריים. אנשים רבים הרימו תרומות נדיבות למגוון רחב של תוכנות המופצות "
-"באמצעות מערכת זו בהסתמך על יישום עקבי שלה; זהו תפקידו של היוצר/התורם להחליט "
-"האם הוא או היא מוכנים להפיץ תוכנה באמצעות מערכת אחרת כלשהי והרישיון אינו "
-"יכול לכפות בחירה זו."
 
 #: ../../txts/developers:214
 msgid "Italian"
-msgstr "איטלקית"
+msgstr "Italica lingua"
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
@@ -703,7 +727,7 @@ msgstr ""
 
 #: ../../txts/COPYING:1
 msgid "License"
-msgstr "רישיון"
+msgstr "Licentia"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -733,7 +757,7 @@ msgstr ""
 
 #: ../../txts/developers:97
 msgid "Musicians"
-msgstr "מוזיקאים"
+msgstr ""
 
 #: ../../txts/README:55
 msgid "N               Toggle messages ('news')"
@@ -747,7 +771,7 @@ msgstr ""
 
 #: ../../txts/COPYING:70
 msgid "No warranty"
-msgstr "העדר אחריות"
+msgstr ""
 
 #: ../../txts/developers:276
 msgid "Non Unix Distributions"
@@ -781,7 +805,7 @@ msgstr ""
 
 #: ../../txts/developers:338
 msgid "Other"
-msgstr ""
+msgstr "Altera"
 
 #: ../../txts/developers:265
 msgid "Other Unix Distributions"
@@ -819,11 +843,11 @@ msgstr ""
 
 #: ../../txts/developers:219
 msgid "Polish"
-msgstr "פולנית"
+msgstr "Polonica lingua"
 
 #: ../../txts/COPYING:11
 msgid "Preamble"
-msgstr "מבוא"
+msgstr ""
 
 #: ../../txts/README:1
 msgid "README"
@@ -856,11 +880,11 @@ msgstr ""
 
 #: ../../txts/developers:227
 msgid "Russian"
-msgstr "רוסית"
+msgstr "Ruthenica lingua"
 
 #: ../../txts/README:59
 msgid "S               Toggle statistics"
-msgstr ""
+msgstr "S                  Zeigt die Statistiken"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
@@ -887,7 +911,7 @@ msgstr ""
 
 #: ../../txts/developers:232
 msgid "Slovak"
-msgstr "סלובקית"
+msgstr "Slovaca lingua"
 
 #: ../../txts/tips/atlanteans.tip:2
 #: ../../txts/tips/barbarians.tip:2
@@ -900,15 +924,15 @@ msgstr ""
 #: ../../txts/developers:29
 #: ../../txts/developers:326
 msgid "Sound"
-msgstr ""
+msgstr "Sonus"
 
 #: ../../txts/developers:108
 msgid "Sound Effects"
-msgstr ""
+msgstr "Sonitus"
 
 #: ../../txts/developers:237
 msgid "Spanish"
-msgstr "ספרדית"
+msgstr "Hispanica lingua"
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
@@ -918,11 +942,11 @@ msgstr ""
 
 #: ../../txts/README:27
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../txts/developers:242
 msgid "Swedish"
-msgstr "שוודית"
+msgstr "Suecica lingua"
 
 #: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
@@ -944,12 +968,6 @@ msgid ""
 "sign a copyright disclaimer for the program, if necessary.  Here is a "
 "sample; alter the names:"
 msgstr ""
-"הפקודות ההיפותטיות 'show w' ו- 'show c' צריכות להציג את החלקים המתאימים מתוך "
-"הרישיון הציבורי הכללי. כמובן, שהפקודות שתשתמש בהן יכולות להיקרא בשמות אחרים "
-"פרט ל- 'show w' ו- 'show c' ; הן יכולות אפילו להיות הקלקות עכבר או פריטי-"
-"תפריט כל מה שיתאים לתוכנית שלך.<br><br>עליך לגרום למעבידך (אם אתה עובד "
-"כמתכנת) או למוסד-החינוכי שלך, אם קיים, לחתום על \"כתב ויתור על זכות יוצרים\" "
-"לתוכנה, במידת ההכרח. להלן דוגמה; שנה את השמות:"
 
 #: ../../txts/COPYING:14
 msgid ""
@@ -989,34 +1007,6 @@ msgid ""
 "precise terms and conditions for copying, distribution and modification "
 "follow.<br>"
 msgstr ""
-"הרישיונות למרבית התוכנות מכוונים לשלול את חירותך לחלוק בהן ולשנות אותן. "
-"בניגוד לכך, הרישיון הציבורי הכללי של GNU מיועד להבטיח את חירותך לחלוק תוכנה "
-"חופשית ולשנות אותה -- כדי לוודא שהתוכנה היא חופשית לכל משתמשיה. רישיון "
-"ציבורי כללי זה חל על מרבית התוכנות של קרן התוכנה החופשית ועל כל תוכנית "
-"(Program) אחרת, שיוצריה מחויבים לשימוש בו. (תוכנות אחרות של קרן התוכנה "
-"החופשית כפופות במקום זאת לרישיון הציבורי הכללי לספריות של GNU). אתה יכול "
-"להחיל אותו גם על תוכנות שלך.<br>כשאנו מדברים על תוכנה חופשית, אנו מתייחסים "
-"לחירות, לא למחיר. הרישיונות הציבוריים הכלליים שלנו מיועדים להבטיח שתהיה לך "
-"החירות להפיץ עותקים של תוכנה חופשית (ולדרוש תשלום עבור שירות זה, אם רצונך "
-"בכך), שתקבל קוד מקור או תוכל להשיג אותו אם תרצה בכך, שתוכל לשנות את התוכנה "
-"או להשתמש בחלקים ממנה בתוכניות חופשיות חדשות, ושתדע שאתה יכול לעשות את "
-"הדברים האלה.<br>כדי להגן על זכויותיך, עלינו להשית מגבלות האוסרות על כל אחד "
-"לשלול ממך זכויות אלה או לבקש ממך לוותר עליהן. מגבלות אלה מיתרגמות למחויבויות "
-"מסוימות, החלות עליך אם אתה מפיץ עותקים של התוכנה או משנה אותה.<br>לדוגמה, אם "
-"אתה מפיץ עותקים של תוכנית כזו, בין אם בחינם ובין אם בתשלום, אתה חייב לתת "
-"למקבלים את כל הזכויות שיש לך עצמך. אתה חייב לוודא שגם הם מקבלים או יכולים "
-"להשיג את קוד המקור. ואתה חייב להראות להם תנאים אלה, כדי שיכירו את "
-"זכויותיהם.<br>אנו מגנים על זכויותיך בשני שלבים: (1) מגנים בזכות יוצרים על "
-"התוכנה ו- (2) מציעים לך רישיון זה, המקנה לך הרשאה חוקית להעתיק, להפיץ ו/או "
-"לשנות את התוכנה.<br>בנוסף, כדי להגן על כל יוצר וגם עלינו, אנו רוצים לוודא "
-"שכל אחד מבין, שאין אחריות על תוכנה חופשית זו. אם התוכנה מותאמת ומועברת הלאה "
-"על-ידי אדם אחר, אנו רוצים שמקבליה יידעו שמה שיש בידם אינו המקור, כך שכל בעיה "
-"הנובעת מאחרים לא תשליך על המוניטין של היוצרים המקוריים.<br>לבסוף, כל תוכנית "
-"חופשית מאוימת בקביעות על-ידי פטנטים על תוכנות. אנו רוצים להימנע מהסכנה "
-"שמפיצים-מחדש של תוכנית חופשית ישיגו באופן אישי רישיונות-פטנט ולמעשה יהפכו את "
-"התוכנית לקניינית. כדי למנוע זאת, הבהרנו שכל פטנט חייב להרשות שימוש חופשי לכל "
-"או שלא להירשם כלל כפטנט.<br>התניות והתנאים המדויקים להעתקות, הפצות ושינויים "
-"מפורטים להלן."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -1036,14 +1026,6 @@ msgid ""
 "and so on) of the operating system on which the executable runs, unless that "
 "component itself accompanies the executable."
 msgstr ""
-"קוד המקור ליצירה פירושו הדרך המועדפת לעשיית שינויים ביצירה. ליצירה שהיא קובץ "
-"בר-ביצוע, קוד המקור המלא פירושו כל קוד המקור של כל המודולים שהיא מכילה ועוד "
-"כל קבצי הגדרות הממשק המתייחסים אליו ועוד התסריטים (scripts) השולטים בהידור "
-"(compilation) ובהתקנה של הקבצים ברי-הביצוע. למרות זאת, כחריג יוצא מהכלל, קוד "
-"המקור המופץ לא צריך לכלול דבר כלשהו המופץ באופן רגיל (בין אם בקוד מקור ובין "
-"אם בצורה בינארית) ביחד עם הרכיבים העיקריים (מהדרים, ליבה [kernel] וכיו\"ב) "
-"של מערכת ההפעלה שבה הקובץ בר-הביצוע פועל, אלא אם כן רכיב זה בעצמו מצורף "
-"לקובץ בר-הביצוע."
 
 #: ../../txts/COPYING:27
 msgid ""
@@ -1063,18 +1045,6 @@ msgid ""
 "with a work based on the Program) on a volume of a storage or distribution "
 "medium does not bring the other work under the scope of this License."
 msgstr ""
-"דרישות אלה חלות על היצירה שהותאמה כמכלול. אם חלקים הניתנים לזיהוי מאותה "
-"יצירה, אינם נגזרים מהתוכנית ויכולים להיחשב באופן סביר כיצירות עצמאיות "
-"ונפרדות כשלעצמם, כי אז רישיון זה ותנאיו אינם חלים על חלקים אלה כשאתה מפיץ "
-"אותם כיצירות נפרדות. אבל כשתפיץ אותם חלקים כחלק ממכלול, שהוא יצירה המבוססת "
-"על התוכנית, הפצת אותו מכלול חייבת להיות על-פי תנאי רישיון זה, שההיתרים שהוא "
-"מקנה למקבלי-רשיונות אחרים משתרעים על המכלול במלואו, ולפיכך על כל חלק וחלק "
-"ממנו בהתעלם מהשאלה מי כתב אותו.<br>הנה כי כן, חלק זה ברישיון אינו מתכוון "
-"לתבוע זכויות או לערער על זכויותיך ליצור יצירות לגמרי לבדך; חלף זאת, כוונתו "
-"היא לממש את הזכות לשלוט בהפצה של יצירה נגזרת או שיתופית המבוססת על "
-"התוכנית.<br>בנוסף, צירוף בלבד של יצירה אחרת, שאינה מבוססת על התוכנית, אל "
-"התוכנית (או אל יצירה המבוססת על התוכנית) במדיה לאחסון או הפצה, אינו מכניס את "
-"היצירה האחרת תחת כנפי רישיון זה."
 
 #: ../../txts/editor_readme:10
 msgid ""
@@ -1092,18 +1062,12 @@ msgid ""
 "library.  If this is what you want to do, use the GNU Library General Public "
 "License instead of this License."
 msgstr ""
-"רישיון ציבורי כללי זה אינו מתיר לשלב את התוכנית שלך לתוך תוכניות קנייניות. "
-"אם התוכנית שלך היא ספריה של רוטינות-משנה, אפשר שתמצא שזה שימושי יותר להרשות "
-"קישור של יישום קנייני עם הספרייה. אם זה מה שברצונך לעשות, השתמש ברישיון "
-"הציבורי הכללי לספריות של GNU, במקום ברישיון זה."
 
 #: ../../txts/COPYING:57
 msgid ""
 "This section is intended to make thoroughly clear what is believed to be a "
 "consequence of the rest of this License."
 msgstr ""
-"סעיף זה מיועד להבהיר באופן שאינו משתמע לשני פנים מה שאנו מאמינים שהוא תולדה "
-"של יתרת רישיון זה."
 
 #: ../../txts/editor_readme:14
 msgid ""
@@ -1128,9 +1092,6 @@ msgid ""
 "exclusion of warranty; and each file should have at least the copyright line "
 "and a pointer to where the full notice is found."
 msgstr ""
-"כדי לעשות זאת, צרף את ההודעות הבאות לתוכנית. הכי בטוח לצרף אותם לתחילתו של "
-"כל קובץ מקור כדי להבהיר באופן היעיל ביותר את העדר האחריות; וכל קובץ צריך "
-"לכלול לפחות את שורת זכות היוצרים\" והפניה למקום הימצאה של ההודעה המלאה."
 
 #: ../../txts/README:42
 msgid ""
@@ -1140,11 +1101,11 @@ msgstr ""
 
 #: ../../txts/developers:331
 msgid "Translation"
-msgstr "תרגום"
+msgstr ""
 
 #: ../../txts/developers:146
 msgid "Translators"
-msgstr "מתרגמים"
+msgstr ""
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
@@ -1175,7 +1136,7 @@ msgstr ""
 
 #: ../../txts/COPYING:6
 msgid "Version 2, June 1991<br></p></rt>"
-msgstr "גרסה 2, יוני 1991<br></p></rt>"
+msgstr ""
 
 #: ../../txts/README:80
 msgid ""
@@ -1186,7 +1147,7 @@ msgstr ""
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Concilium Widelands ludum fingens"
 
 #: ../../txts/README:142
 msgid ""
@@ -1268,8 +1229,6 @@ msgid ""
 "Hacker.<br><br><signature of Ty Coon>, 1 April 1989<br>Ty Coon, President of "
 "Vice"
 msgstr ""
-"יויודין בע\"מ מוותרת בזאת על כל זכות יוצרים בתוכנית `Gnomovision' שנכתבה על-"
-"ידי ג'ימס האקר.<br><br><חתימת טי-קון>, 1 באפריל 1989<br>טי-קון, נשיא של סגן"
 
 #: ../../txts/README:5
 msgid "an open source strategy game"
