@@ -318,6 +318,15 @@ void SurfaceOpenGL::blit(Point const dst, Surface * const src, Rect const srcrc,
 		* glVertex2f() sets the screen coordiantes which belong to the 
 		* previous texture coordinate. This is the destination rectangle 
 		*/
+	unsigned int dst_w, dst_h;
+	if (oglsrc->get_dest_w() > 0) {
+		dst_w = oglsrc->get_dest_w();
+		dst_h = oglsrc->get_dest_h();
+	} else {
+		dst_w = srcrc.w;
+		dst_h = srcrc.h;
+	}
+
 	glBegin(GL_QUADS);
 		//set color white, otherwise textures get mixed with color
 		glColor3f(1.0,1.0,1.0);
@@ -326,17 +335,88 @@ void SurfaceOpenGL::blit(Point const dst, Surface * const src, Rect const srcrc,
 		glVertex2i(   dst.x,           dst.y );
 		//top-right
 		glTexCoord2i( srcrc.x+srcrc.w, srcrc.y );
-		glVertex2f(   dst.x+srcrc.w,   dst.y );
+		glVertex2f(   dst.x+dst_w,   dst.y );
 		//botton-right
 		glTexCoord2i( srcrc.x+srcrc.w, srcrc.y+srcrc.h );
-		glVertex2f(   dst.x+srcrc.w,   dst.y+srcrc.h );
+		glVertex2f(   dst.x+dst_w,   dst.y+dst_h );
 		//bottom-left
 		glTexCoord2i( srcrc.x,         srcrc.y + srcrc.h);
-		glVertex2f(   dst.x,           dst.y+srcrc.h );
+		glVertex2f(   dst.x,           dst.y+dst_h );
 	glEnd();
 
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
 }
+
+void SurfaceOpenGL::blit(Rect dstrc, Surface * src, Rect srcrc, bool enable_alpha) {
+	assert(g_opengl);
+	assert(m_surf_type != SURFACE_SCREEN);
+	upcast(SurfaceOpenGL, oglsrc, src);
+	assert(oglsrc);
+
+	GLuint tex;
+
+	try {
+		tex = oglsrc->get_texture();
+	} catch (...) {
+		log("WARNING: SurfaceOpenGL::blit(): Source surface has no texture\n");
+		return;
+	}
+
+	/* Set a texture scaling factor. Normaly texture coordiantes 
+	* (see glBegin()...glEnd() Block below) are given in the range 0-1
+	* to avoid the calculation (and let opengl do it) the texture 
+	* space is modified. glMatrixMode select which matrix to manipulate
+	* (the texture transformation matrix in this case). glLoadIdentity()
+	* resets the (selected) matrix to the identity matrix. And finally 
+	* glScalef() calculates the texture matrix.
+	*/
+	glMatrixMode(GL_TEXTURE);
+	glLoadIdentity();
+	glScalef(1.0f/static_cast<GLfloat>(src->get_w()), 1.0f/static_cast<GLfloat>(src->get_h()), 1);
+
+	// Enable Alpha blending 
+	if(enable_alpha) {
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	} else
+		glDisable(GL_BLEND);
+
+	/* select the texture to paint on the screen
+		* openGL does not know anything about SDL_Surfaces
+		* opengl uses textures to handle images
+		* getTexture() returns the texture id of the Surface. It creates
+		* the texture from the SDL_Surface if it doesn't exist
+		*/
+	
+	glBindTexture( GL_TEXTURE_2D, tex);
+	
+	/* This block between blBegin() and glEnd() does the blit.
+		* It draws a textured rectangle. glTexCoord2i() set the Texture
+		* Texture cooardinates. This is the source rectangle.
+		* glVertex2f() sets the screen coordiantes which belong to the 
+		* previous texture coordinate. This is the destination rectangle 
+		*/
+	glBegin(GL_QUADS);
+		//set color white, otherwise textures get mixed with color
+		glColor3f(1.0,1.0,1.0);
+		//top-left 
+		glTexCoord2i( srcrc.x,         srcrc.y );
+		glVertex2i(   dstrc.x,         dstrc.y );
+		//top-right
+		glTexCoord2i( srcrc.x + srcrc.w, srcrc.y );
+		glVertex2f(   dstrc.x + dstrc.w, dstrc.y );
+		//botton-right
+		glTexCoord2i( srcrc.x + srcrc.w, srcrc.y + srcrc.h );
+		glVertex2f(   dstrc.x + dstrc.w, dstrc.y + dstrc.h );
+		//bottom-left
+		glTexCoord2i( srcrc.x,           srcrc.y + srcrc.h);
+		glVertex2f(   dstrc.x,           dstrc.y + dstrc.h );
+	glEnd();
+
+	glMatrixMode(GL_TEXTURE);
+	glLoadIdentity();
+}
+
 
 #endif //USE_OPENGL

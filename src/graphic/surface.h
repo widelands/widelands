@@ -85,11 +85,13 @@ public:
 */
 	virtual SurfaceType get_surface_type() { return m_surf_type; }
 	
+	
+	
+protected:
 	int32_t m_offsx;
 	int32_t m_offsy;
 	uint32_t m_w, m_h;
-	
-protected:
+
 	Surface():
 		m_offsx(0), m_offsy(0),
 		m_w(0), m_h(0),

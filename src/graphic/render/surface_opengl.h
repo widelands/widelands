@@ -66,6 +66,8 @@ public:
 	/// Get width and height
 	uint32_t get_w() const {return m_w;}
 	uint32_t get_h() const {return m_h;}
+	uint32_t get_dest_w() const {return m_dest_w;}
+	uint32_t get_dest_h() const {return m_dest_h;}
 	void update();
 
 	/// Save a bitmap of this to a file
@@ -121,7 +123,12 @@ public:
 	void brighten_rect(Rect, int32_t factor);
 
 	void blit(Point, Surface *, Rect srcrc, bool enable_alpha = true);
+	void blit(Rect dstrc, Surface *, Rect srcrc, bool enable_alpha = true);
 	//void fast_blit(Surface *);
+	
+	void set_resized(unsigned int w, unsigned int h){
+		m_dest_w = w; m_dest_h = h;
+	}
 
 	oglTexture & getTexture(){return *m_texture;}
 

@@ -27,7 +27,9 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	Surface(par_surface.w, par_surface.h, SURFACE_SOURCE),
 	m_glTexUpdate(false),
 	m_pixels(NULL),
-	m_locked(false)
+	m_locked(false),
+	m_dest_w(0),
+	m_dest_h(0)
 {
 	GLuint texture;
 	SDL_Surface *surface;
@@ -120,7 +122,9 @@ SurfaceOpenGL::SurfaceOpenGL(int w, int h):
 	m_texture(0),
 	m_glTexUpdate(false),
 	m_pixels(NULL),
-	m_locked(false)
+	m_locked(false),
+	m_dest_w(0),
+	m_dest_h(0)
 {
 	log("SurfaceOpenGL::SurfaceOpenGL(%d, %d)", w, h);
 }

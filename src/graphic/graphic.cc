@@ -494,9 +494,10 @@ PictureID Graphic::get_resized_picture
 	uint32_t width = w;
 	uint32_t height = h;
 
-	if (g_opengl)
+	if (g_opengl) {
+		dynamic_cast<SurfaceOpenGL *>(index->surface)->set_resized(w, h);
 		return index;
-
+	}
 	if (mode != ResizeMode_Loose) {
 		const double ratio_x = double(w) / orig->get_w();
 		const double ratio_y = double(h) / orig->get_h();
