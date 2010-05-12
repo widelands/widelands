@@ -1338,7 +1338,7 @@ void WLApplication::show_usage()
 			 " --double_buffer=[0|1]\n"
 			 "                      Enables double buffering\n"
 			 "                      *HIGHLY EXPERIMENTAL*\n")
-#if HAS_OPENGL
+#if USE_OPENGL
 		<<
 		_
 			 (" --opengl=[0|1]\n"
