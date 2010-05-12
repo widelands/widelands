@@ -941,8 +941,9 @@ void GameView::draw_field
 	 Texture const &  f_r_texture)
 {
 	upcast(SurfaceSDL, sdlsurf, m_surface);
+#ifdef USE_OPENGL
 	upcast(SurfaceOpenGL, oglsurf, m_surface);
-
+#endif
 	if(sdlsurf){
 		dynamic_cast<SurfaceSDL*>(m_surface)->set_subwin(subwin);
 		switch (sdlsurf->format().BytesPerPixel) {
@@ -964,9 +965,12 @@ void GameView::draw_field
 			assert(false);
 		}
 		dynamic_cast<SurfaceSDL*>(m_surface)->unset_subwin();
-	} else if (oglsurf) {
+	} 
+#ifdef USE_OPENGL
+	else if (oglsurf) {
 		log("Should render terrain with opengl here ...\n");
 	}
+#endif
 }
 
 /*

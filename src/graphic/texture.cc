@@ -198,8 +198,10 @@ Texture::~Texture ()
 	free(m_pixels);
 	free(m_texture_picture);
 
+#ifdef USE_OPENGL
 	container_iterate(std::vector<SurfaceOpenGL *>, m_glFrames, it)
 		delete *it.current;
+#endif
 }
 
 /**

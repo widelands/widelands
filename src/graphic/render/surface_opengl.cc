@@ -21,6 +21,8 @@
 
 #include <cassert>
 
+#ifdef USE_OPENGL
+
 SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface): 
 	Surface(par_surface.w, par_surface.h, SURFACE_SOURCE),
 	m_glTexUpdate(false),
@@ -203,3 +205,5 @@ void SurfaceOpenGL::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
 
 	*reinterpret_cast<uint32_t *>(m_pixels + y*get_pitch() + x*4) = clr;
 }
+
+#endif //USE_OPENGL

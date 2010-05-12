@@ -26,6 +26,8 @@
 #include <SDL.h>
 
 
+#ifdef USE_OPENGL
+
 /*
  * Updating the whole Surface
  */
@@ -337,3 +339,4 @@ void SurfaceOpenGL::blit(Point const dst, Surface * const src, Rect const srcrc,
 	glLoadIdentity();
 }
 
+#endif //USE_OPENGL

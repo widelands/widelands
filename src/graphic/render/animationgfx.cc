@@ -278,10 +278,11 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 		Surface & newsurface = g_gr->create_surface(origsurface);
 
 		Surface & pcmask = *m_pcmasks[i];
+		SDL_PixelFormat * fmt, * fmt_pc;
 
+#ifdef USE_OPENGL
 		upcast(SurfaceOpenGL, oglsurf, &origsurface);
 
-		SDL_PixelFormat * fmt, * fmt_pc;
 		if (oglsurf)
 		{
 			fmt_pc = fmt = new SDL_PixelFormat;
@@ -291,7 +292,9 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 			fmt->Bmask=0x00FF0000; fmt->Bshift=16;
 			fmt->Gmask=0x0000FF00; fmt->Gshift=8;
 			fmt->Rmask=0x000000FF; fmt->Rshift=0;
-		} else {
+		} else 
+#endif
+		{
 			fmt = const_cast<SDL_PixelFormat*>(&newsurface.format());
 			fmt_pc = const_cast<SDL_PixelFormat*>(&pcmask.format());
 		}
