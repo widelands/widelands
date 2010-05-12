@@ -1823,7 +1823,7 @@ int32_t Map::findpath
 			Pathfield & neighbpf = pathfields->fields[neighb.field - m_fields];
 
 			// Is the field Closed already?
-			if (neighbpf.cycle == pathfields->cycle && neighbpf.heap_index < 0)
+			if (neighbpf.cycle == pathfields->cycle && !neighbpf.heap_cookie.is_active())
 				continue;
 
 			// Check passability
