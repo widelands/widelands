@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2008-10-16 08:39+0000\n"
-"Last-Translator: Alexander Bikmeyev <Unknown>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-11 10:31+0000\n"
+"Last-Translator: Jens Beyer (Qcumber-some) <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-04-12 03:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
 #: ../../campaigns/cconfig:24
 msgid "(Tutorial) Barbarians - The second Empire"
-msgstr ""
+msgstr "(Обучение) Варвары - Вторая Империя"
 
 #: ../../campaigns/cconfig:27
 msgid ""
@@ -37,10 +37,20 @@ msgid ""
 "Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
 "force the tribes to march once again under a common banner."
 msgstr ""
+"Когда Чат'Карус умер, он был уже стар, а его три сына, сильные и амбициозные "
+"полководцы, способные справиться с любым врагом, осмелившимся восстать "
+"против древних лесов.  После его кончины власть переходила старшему сыну, "
+"Тсрону. Это решение оставило двух младших сыновей недовольным. Тсрон понимал "
+"это, поэтому, он последовал наказу отца, покин столицу  Алсунапана и повел "
+"свои войска к высоким горам где был похоронен его отец. Он поклялся богам и "
+"себе вернутся и востановить порядок. Пока его брать неистовствавали в "
+"кровавой войне против него Тсрон и скудные войска которые остались с ним, "
+"пытались образумить братьев и объеденить силы что бы вновь сражаться  под "
+"одним флагом."
 
 #: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
-msgstr ""
+msgstr "Империя - Месяц в изгнании"
 
 #: ../../campaigns/cconfig:33
 msgid ""
@@ -50,54 +60,63 @@ msgid ""
 "land. First everything was calm, he even talked to few barbarian children "
 "and thought about a peaceful life - side by side with this archaic folk. He "
 "began to feel saver and his army begun to draw off the attention on they "
-"potential enemy - That was their fault. At one night in march his unprepared "
-"army was attacked by 100 barbarian footmen and was totally scattered. Only "
-"with pure life he and a handful of soldiers survived."
+"potential enemy - that was their fault. At one night in March his unprepared "
+"army was attacked by 100 barbarian footmen and was completely scattered. "
+"Only with pure life he and a handful of soldiers survived."
 msgstr ""
+"Шесть месяцев назад Лютиус, молодой генерал Империи, был вместе со 150 "
+"солдатами отправлен на границу, проходяшую по северным лесам, туда, где была "
+"официальная линия раздела между землями Империи и племен варваров. Его "
+"задача была - охранять земли Империи. Сначала всё было спокойно, он даже "
+"иногда болтал с туземными ребятишками и размышлял о мирной жизни бок о бок с "
+"этим отсталым народцем. Это их сгубило - армия потеряла бдительность. Одной "
+"мартовской ночью обленившаяся армия была атакована сотней варварских "
+"пехотинцев и полностью вырезана. В живых остались лишь сам Лютиус и горстка "
+"солдат."
 
 #: ../../campaigns/cconfig:36
 msgid "Atlanteans - the new rise"
-msgstr ""
+msgstr "Атланты - новый восход"
 
 #: ../../campaigns/cconfig:39
 msgid "Some descriptive texts..."
-msgstr ""
+msgstr "Описание..."
 
 #: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr ""
+msgstr "Обучение I - Глаза во Тьме"
 
 #: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
-msgstr ""
+msgstr "Обучение II - Место названое Домом"
 
 #: ../../campaigns/cconfig:67
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Обучение III - Это наша земля!"
 
 #: ../../campaigns/cconfig:74
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr ""
+msgstr "Империя. Обучение 1 - Берега Малак Мора"
 
 #: ../../campaigns/cconfig:79
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr ""
+msgstr "Империя Обучение 2 - Форпост для изгнанников"
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
-msgstr ""
+msgstr "01 - Из возмездья в бытие"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
-msgstr ""
+msgstr "Атолл"
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Кто станет реальным королём большого атолла?"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
-msgstr "Шах и Мат"
+msgstr "Шах и мат"
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -111,7 +130,7 @@ msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
-msgstr ""
+msgstr "Остров кометы"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -121,16 +140,23 @@ msgid ""
 "Gods? You believe it is and you hope, that your tribe will find the treasure "
 "of this island, before other tribes will follow."
 msgstr ""
+"В нескольких милях от побережья Гериона лежит маленький безымянный остров. "
+"До сей поры у тебя не было причин посещать его, но вчера огромный огненный "
+"шар ударил с небес в самое сердце островка. Это знак Богов? Ты уверен, что "
+"так и есть, и надеешься, что твое племя овладеет сокровищем раньше, чем "
+"остальные племена доберутся туда."
 
 #: ../../maps/Crater.wmf/elemental:9
 msgid "Crater"
-msgstr ""
+msgstr "Кратер"
 
 #: ../../maps/Crater.wmf/elemental:11
 msgid ""
-"Long after a meteor crashed into a couple of mountains life blossoms in the "
-"crater. Two tribes are now fighting about the rich resources."
+"Long after a meteor crashed into a couple of mountains, life blossoms in the "
+"crater. Two tribes are now fighting for the rich resources."
 msgstr ""
+"Спустя много лет после падения метеорита в горы, в кратере расцвела жизнь. И "
+"теперь два племени сражаются за богатые ресурсы."
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -138,13 +164,13 @@ msgstr "Пересохшее русло"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
-"It is a long time ago, since the last rain drop touched these grounds. No "
-"wonder, that here is not much water left in this dry riverbed. Everyone "
-"knows: soon there will be a war. A war about the last water."
+"It was a long time ago, since the last raindrop touched these grounds. No "
+"wonder, that there is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last of water."
 msgstr ""
-"Уже давным давно эти земли не видели дождя. Не удивительно, что в этом "
-"высохшем русле не осталось воды. Все знают: скоро здесь разразится война. "
-"Война за последнюю воду."
+"Давно уже на эту почву не падало ни капли дождя, так что немудрено, что "
+"русло реки пересохло. И все уже знают: скоро война. Война за последние "
+"источники воды."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -152,29 +178,31 @@ msgstr "Леса эльфов"
 
 #: ../../maps/Elven Forests.wmf/elemental:9
 msgid ""
-"The breath-taking beauty of these emerald lands has lured many a tribe into "
-"the attempt of taking them for itself."
+"The breath-taking beauty of these emerald lands has lured many tribes into "
+"an attempt of taking them for themselves."
 msgstr ""
-"Освежающая красота этих изумрудных земель привлекает многие племена, "
-"желающих прибрать их себе."
+"Дух захватывающая красота этих изумрудных земель привлекла внимание многих "
+"племен. И каждое хочет заполучить эти земли себе."
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
-msgstr ""
+msgstr "Враг совсем рядом"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr ""
+msgstr "Многопользовательская карта, битва на Х-образном острове."
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
-msgstr ""
+msgstr "Финские озера"
 
 #: ../../maps/Finlakes.wmf/elemental:11
 msgid ""
 "These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
 "forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
+"Красивые финские земли, заполнены озерами, реками, древними лесами и горами. "
+"Найдите путь через эти земли."
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -187,6 +215,9 @@ msgid ""
 "if you are alone, but no-one knows, what might happen if you meet an "
 "opponent tribe?"
 msgstr ""
+"Было ли это испытанием, посланным Богами, или просто чей-то коварный план, "
+"но однажды ты и твое племя проснулись на этом острове среди огня и лавы. "
+"Похоже, ты здесь один, но что будет, если встретится другое племя?"
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -202,7 +233,7 @@ msgstr ""
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid "Four Mountains"
-msgstr ""
+msgstr "Четыре горы"
 
 #: ../../maps/Four Mountains.wmf/elemental:11
 msgid ""
@@ -211,6 +242,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Каждое племя окружено четырьмя могучими горами. Кто сможет первым покорить "
+"их, и добыть ресурсы для своего племени? Подсказка 1: Ищи воду у реки. "
+"Подсказка 2: Снеговики отмечают дополнительные источники воды. Подсказка 3: "
+"Каждая гора содержит только один ресурс."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -218,15 +253,15 @@ msgstr "Ледниковое озеро"
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
-"A long time your tribe dwelled on this beautiful and lonely glacier lake. "
-"Noone disturbed you and the resources were enough for your whole tribe, but "
-"a few month ago another tribe came over the mountains and settled down. And "
-"you are sure, that there is only place enough for one tribe."
+"A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
+"one disturbed you and the resources were enough for your whole tribe, but a "
+"few months ago another tribe came over the mountains and settled down. And "
+"you are sure, that there is only enough place for one tribe."
 msgstr ""
-"Уже давно ваше племя пребывает у этого прекрасного и уединённого ледникового "
-"озера. Никто вас не беспокоит, и ресурсов для вашего племени достаточно, но "
-"несколько месяцев назад в горы пришли и обосновались другие. Вы знаете, что "
-"здесь есть место только для одного племени."
+"Давным-давно твое племя поселилось на берегах красивого ледникового озера. "
+"Никто не беспокоил вас, а ресурсов вполне хватало на всех. Но несколько "
+"месяцев назад какие-то чужаки пришли из-за гор, явно желая устроиться здесь "
+"надолго. Но ты-то знаешь, что места здесь хватит только на одно племя!"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
@@ -239,7 +274,7 @@ msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
-msgstr ""
+msgstr "Столкновение"
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -247,17 +282,22 @@ msgid ""
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
 msgstr ""
+"После столкновения с астероидом и следующей суровой зимы, три острова "
+"соединились льдом и камнем, положив конец мирному сосуществованию трех "
+"племен."
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
-msgstr ""
+msgstr "Воюющие острова"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
-"For centuries you lived peaceful together with the other tribe on the "
-"neighboured island. This peace seems to end now. - Your neighbour begins to "
+"For centuries you've lived peacefully together with the other tribe on the "
+"neighboured island. This peace seems to end now - your neighbour begins to "
 "expand."
 msgstr ""
+"Веками вы мирно соседствовали с племенем на другом острове. Но теперь миру, "
+"кажется, конец - сосед решил расширить свои владения."
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -275,7 +315,7 @@ msgstr ""
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
-msgstr ""
+msgstr "Последняя крепость"
 
 #: ../../maps/Last Bastion.wmf/elemental:11
 msgid ""
@@ -290,16 +330,27 @@ msgid ""
 "hard and small place to live. Don't forget to take care about your timber "
 "supplies, you'll need them."
 msgstr ""
+"Жестокие Боги не вняли нашим молитвам. Напротив, Солнце стало жарче в тысячу "
+"раз и растопило ледники, устроив новый потоп. И сейчас, на самых верхушках "
+"бывших гор, на последних клочках суши нашли прибежище два уцелевших племени. "
+"И хотя Боги сжалились и климат снова стал холоднее, вода продолжает "
+"прибывать. К последнему надежному месту, высочайшему горному хребту, где "
+"места и запасов золота едва хватит на одно племя, ведут только две тропы с "
+"противоположных направлений. Но помни... это последнее пригодное для жизни "
+"место, очень мало и условия там жесткие. Не забывай пополнять запасы "
+"строевого леса, они тебе ох как пригодятся."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
-msgstr ""
+msgstr "Таинственный лабиринт"
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
-"There are two big questions around: Who created this unbelievable big maze "
+"There are two big questions around: Who created this unbelievably big maze "
 "and what can be found inside?"
 msgstr ""
+"Два главных вопроса: кто создал этот огромный лабиринт и что находится "
+"внутри него?"
 
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
@@ -319,7 +370,7 @@ msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid "Rendez-Vous"
-msgstr ""
+msgstr "Место встречи изменить нельзя"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:11
 msgid ""
@@ -329,6 +380,10 @@ msgid ""
 "stronghold. Water can be found everywhere, so there is no need to send out "
 "geologists."
 msgstr ""
+"Только маленький холм в центре карты соединяет 4 враждующих племени. Приведи "
+"свою армию на этот холм и построй гигантскую крепость в знак своего "
+"превосходства! Подсказка: в центре хватит места только для одной крепости. "
+"Вода есть везде, поэтому нет необходимости посылать геологов на ее поиски."
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
@@ -339,33 +394,41 @@ msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
 msgstr ""
+"Загадочная страна с разнообразными ландшафтами, рассеченными несколькими "
+"большими реками."
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The ancient sun of fire"
-msgstr ""
+msgstr "Свет древнего огня"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
 "For hundreds of years this island was kept as sanctuary of the Gods. No "
 "human ever ventured to set a foot on it. But now, that a tribe was finally "
-"barefaced enough to settle on the coast of that island, a lot other followed "
-"afterwards."
+"barefaced enough to settle on the coast of that island, a lot others "
+"followed afterwards."
 msgstr ""
+"Сотни лет этот остров был священной обителью Богов и никто не решался "
+"ступить на него. Но вот появилось племя, настолько бесстыдное, что решило "
+"поселиться там. За ним последовали и многие другие..."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
-msgstr ""
+msgstr "Болотный остров"
 
 #: ../../maps/Swamp Island.wmf/elemental:11
 msgid ""
 "It smells like swamp, it looks like swamp and it is swamp. But it is the "
-"place you were born and you lived your whole life. If you don't want to "
-"loose it, defend it! "
+"place you were born and you lived your whole life. If you don't want to lose "
+"it, defend it! "
 msgstr ""
+"Оно воняет болотом, оно выглядит как болото, да оно и есть болото. Но ты "
+"родился здесь и прожил всю жизнь. Если не хочешь потерять свою родину, "
+"защищай ее! "
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
-msgstr ""
+msgstr "Крайний север"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -381,33 +444,46 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
 msgstr ""
+"Говорят, что непроходимые земли на крайнем севере пугают даже самых отважных "
+"поселенцев и храбрейших воинов. Обширные старые леса, полные крупной и "
+"хищной дичи, пронизаны болотинами и таинственными холмами. Те, кто отважился "
+"добраться туда, рассказывали об огромных зданиях, украшенных резьбой и "
+"золотом из горных приисков где-то в глуши. Спустя многие годы лишь остатки "
+"руин, на которых уже проросли кустарник и деревья, напоминали об этих старых "
+"добрых временах. Очертания руин дают лишь слабое представление о мастерстве "
+"древних строителей. Никто не знает, почему и как они исчезли. Говорят, что "
+"теперь ничто не преграждает путь к богатству. Но многие умерли разорванные "
+"волками, другие утопли в болоте... в окружении враждебных племен."
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
-msgstr "Оазис Треугольник"
+msgstr "Треугольник оазисов"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid ""
-"There is something mystical, like a grey atmosphere, about this three Oasis, "
-"which noone found out, yet. Perhaps you will be the one, but be aware of the "
-"others, who are searching, too!"
+"There is something mystical, like a grey atmosphere, around these three "
+"oases, which no one found out about yet. Perhaps you will be the one, but be "
+"aware of the others, who are searching too!"
 msgstr ""
-"Есть что-то мистическое вроде серого облака вокруг этих трёх Оазисов, "
-"которые ещё никто не нашёл. Возможно вы будете единственным, но опасайтесь "
-"других, которые также ищут его!"
+"Словно какая-то загадочная серая дымка окутывает эти три оазиса, которые "
+"никто еще не нашел. Может тебе повёзет, но учти, что есть и другие желающие."
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
-msgstr ""
+msgstr "Оттепель"
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
 "Another thaw set in. Three tribes were sheltering form severe winter among "
-"majestic mountains. While solstice they listened to the oracle and went on "
-"war. Only survivor will sacrifice his enemies treasures on the ancient "
-"altar, build there a splendid castle and gain goodwill and the respect of "
-"the Gods."
+"majestic mountains. During solstice they listened to the oracle and went on "
+"to war. The only survivor will sacrifice his enemies' treasures on the "
+"ancient altar, build there a splendid castle and gain goodwill and the "
+"respect of the Gods."
 msgstr ""
+"И снова оттепель. Три племени укрывались в горах от суровой зимы. Во время "
+"вынужденной изоляции они по велению своих оракулов готовились к войне. "
+"Единственный победитель принесет в жертву на древнем алтаре сокровища своих "
+"врагов, построит роскошный замок и обретет благоволение и уважение Богов."
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
@@ -422,55 +498,71 @@ msgid ""
 "only this ring is left from that mighty firemountain. Do you think, that it "
 "is big enough for more than one tribe?"
 msgstr ""
+"Когда-то этот остров возник из морской пучины. В те дни возник огонь, "
+"который вынес из соленой воды на свет божий  пепел, камни и грунт. Огонь "
+"тянулся выше и выше, и росла созданная им гора, пока однажды вся огненная "
+"гора не взорвалась. В наше время лишь кольцо островков напоминает о былом "
+"величии той горы. Думаете, этих островов хватит для больше чем одного "
+"племени?"
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
-msgstr "Длинная дорога"
+msgstr "Долгий путь"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way, than occupying the land of your enemies."
 msgstr ""
+"Еще одно странное испытание ниспослали Боги. Чтобы дойти до другого края, "
+"нет, похоже, иного пути, кроме как занять земли своих врагов."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The pass through the mountains"
-msgstr ""
+msgstr "Перевал"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
-"In this mountainous region two princes have settled. Now they are expanding "
+"In this mountainous area two princes have settled. Now they are expanding "
 "their territories unaware of the fact that they are not alone!"
 msgstr ""
+"В этих гористых краях мирно уживались два князя. Теперь они решили расширять "
+"свои территории, не обращая внимания друг на друга."
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
-msgstr ""
+msgstr "Три воина"
 
 #: ../../maps/Three Warriors.wmf/elemental:11
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
-"connects the valleys and thus seems a fight inescapable! Hint: Water can be "
+"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
 "found around the lakes."
 msgstr ""
+"Могучие горы делят этот край на три изобильных долины. Но есть путь, "
+"соединяющий долины, а значит война неизбежна! Подсказка: воду можно найти "
+"вокруг озёр."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
-msgstr ""
+msgstr "Мелководье"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
 msgstr ""
+"Множество прекрасных зеленых островов ожидают смельчаков, не боящихся "
+"перейти в брод мерцающее на солнце мелководье между ними."
 
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
-msgstr ""
+msgstr "Две границы"
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
 msgstr ""
+"Карта для многопользовательской игры на небольшом кольцеобразном острове."
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
@@ -488,12 +580,146 @@ msgstr ""
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
-msgstr ""
+msgstr "Долина зубров"
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
-"It seems as if this magical valley was inhabitated by wisents since the "
+"It seems as if this magical valley was inhabited by wisents since the "
 "beginning of days. When your tribe came to this place, you were sure that it "
-"offers enough space for a peaceful life. But can you tribe live in peace "
+"offers enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbours?"
 msgstr ""
+"Кажется, зубры жили в этой волшебной долине с начала времен. Придя в эту "
+"землю, ты понял, что места для мирной жизни там вполне достаточно. Но как же "
+"можно жить в мире с такими-то соседями?"
+
+#~ msgid ""
+#~ "It is a long time ago, since the last rain drop touched these grounds. No "
+#~ "wonder, that here is not much water left in this dry riverbed. Everyone "
+#~ "knows: soon there will be a war. A war about the last water."
+#~ msgstr ""
+#~ "Уже давным давно эти земли не видели дождя. Не удивительно, что в этом "
+#~ "высохшем русле не осталось воды. Все знают: скоро здесь разразится война. "
+#~ "Война за последнюю воду."
+
+#~ msgid ""
+#~ "The breath-taking beauty of these emerald lands has lured many a tribe into "
+#~ "the attempt of taking them for itself."
+#~ msgstr ""
+#~ "Освежающая красота этих изумрудных земель привлекает многие племена, "
+#~ "желающих прибрать их себе."
+
+#~ msgid ""
+#~ "A long time your tribe dwelled on this beautiful and lonely glacier lake. "
+#~ "Noone disturbed you and the resources were enough for your whole tribe, but "
+#~ "a few month ago another tribe came over the mountains and settled down. And "
+#~ "you are sure, that there is only place enough for one tribe."
+#~ msgstr ""
+#~ "Уже давно ваше племя пребывает у этого прекрасного и уединённого ледникового "
+#~ "озера. Никто вас не беспокоит, и ресурсов для вашего племени достаточно, но "
+#~ "несколько месяцев назад в горы пришли и обосновались другие. Вы знаете, что "
+#~ "здесь есть место только для одного племени."
+
+#~ msgid ""
+#~ "There is something mystical, like a grey atmosphere, about this three Oasis, "
+#~ "which noone found out, yet. Perhaps you will be the one, but be aware of the "
+#~ "others, who are searching, too!"
+#~ msgstr ""
+#~ "Есть что-то мистическое вроде серого облака вокруг этих трёх Оазисов, "
+#~ "которые ещё никто не нашёл. Возможно вы будете единственным, но опасайтесь "
+#~ "других, которые также ищут его!"
+
+#~ msgid ""
+#~ "Long after a meteor crashed into a couple of mountains life blossoms in the "
+#~ "crater. Two tribes are now fighting about the rich resources."
+#~ msgstr ""
+#~ "Спустя долгие годы, после падения метеора, жизнь расцветает в кратере. "
+#~ "Борьба двух племен за богатую ресурсами долину."
+
+#~ msgid ""
+#~ "There are two big questions around: Who created this unbelievable big maze "
+#~ "and what can be found inside?"
+#~ msgstr ""
+#~ "Есть два важных вопроса: кто создал этот невероятно большой лабиринт и что "
+#~ "может быть найдено внутри?"
+
+#~ msgid ""
+#~ "For centuries you lived peaceful together with the other tribe on the "
+#~ "neighboured island. This peace seems to end now. - Your neighbour begins to "
+#~ "expand."
+#~ msgstr ""
+#~ "Веками вы жили в мире с другим племенем, на соседнем острове. Мирное время "
+#~ "заканчивается - сосед начинает расширяться."
+
+#~ msgid ""
+#~ "It smells like swamp, it looks like swamp and it is swamp. But it is the "
+#~ "place you were born and you lived your whole life. If you don't want to "
+#~ "loose it, defend it! "
+#~ msgstr ""
+#~ "Оно пахнет болотом, выглядит как болото, оно и есть болото. Но это место, "
+#~ "где вы родились и жили всю жизнь. Если не хотите потерять его, защищайтесь! "
+
+#~ msgid ""
+#~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
+#~ "soldiers at the frontier among the northern forests, where Barbarian-tribes "
+#~ "and official Empire-land are crossing. His task was to defend the Empire-"
+#~ "land. First everything was calm, he even talked to few barbarian children "
+#~ "and thought about a peaceful life - side by side with this archaic folk. He "
+#~ "began to feel saver and his army begun to draw off the attention on they "
+#~ "potential enemy - That was their fault. At one night in march his unprepared "
+#~ "army was attacked by 100 barbarian footmen and was totally scattered. Only "
+#~ "with pure life he and a handful of soldiers survived."
+#~ msgstr ""
+#~ "Шесть месяцев назад, Литиус - молодой генерал Империи - был послан с 150 "
+#~ "солдатами в преграничную крепость в северных лесах, где граничили земли "
+#~ "варварский\\х племен  и империи."
+#~ "Ничто не предвещало беды и мирная жизнь казалась реальностью. Но в одну "
+#~ "тихую ночь налет варваров перевернул его жизнь с ног на голову. Спашийся "
+#~ "чудом ему и горстке солдат придется бороться за выживание."
+
+#~ msgid ""
+#~ "For hundreds of years this island was kept as sanctuary of the Gods. No "
+#~ "human ever ventured to set a foot on it. But now, that a tribe was finally "
+#~ "barefaced enough to settle on the coast of that island, a lot other followed "
+#~ "afterwards."
+#~ msgstr ""
+#~ "Сотни лет этот остров считался священной обителью Богов. Нога ни одного "
+#~ "человека не ступала туда. Но вот нашлось племя, которое не побоялось осесть "
+#~ "на берегу этого острова. За ним последовали остальные..."
+
+#~ msgid ""
+#~ "In this mountainous region two princes have settled. Now they are expanding "
+#~ "their territories unaware of the fact that they are not alone!"
+#~ msgstr ""
+#~ "В этой гористой стране мирно уживались два князя. Но теперь каждый из них "
+#~ "решил расширить свои владения, невзирая на то, что у другого такие же планы."
+
+#~ msgid ""
+#~ "Another thaw set in. Three tribes were sheltering form severe winter among "
+#~ "majestic mountains. While solstice they listened to the oracle and went on "
+#~ "war. Only survivor will sacrifice his enemies treasures on the ancient "
+#~ "altar, build there a splendid castle and gain goodwill and the respect of "
+#~ "the Gods."
+#~ msgstr ""
+#~ "И снова потеплело. Три племени укрывались в горах от суровой зимы. Во время "
+#~ "вынужденной изоляции друг от друга, все они по велению  оракулов готовились "
+#~ "к войне. Только один выживший принесет сокровища своих врагов в жертву на "
+#~ "древнем алтаре, построит там роскошный замок и выскажет свое почтение Богам."
+
+#~ msgid ""
+#~ "Mighty mountains divide this land into three fertile valleys. But a path "
+#~ "connects the valleys and thus seems a fight inescapable! Hint: Water can be "
+#~ "found around the lakes."
+#~ msgstr ""
+#~ "Могучие горы делят этот край на три плодородных долины. Но долины соединены "
+#~ "проходом, а значит битва неизбежна. Подсказка: воду можно найти вокруг озёр."
+
+#~ msgid ""
+#~ "It seems as if this magical valley was inhabitated by wisents since the "
+#~ "beginning of days. When your tribe came to this place, you were sure that it "
+#~ "offers enough space for a peaceful life. But can you tribe live in peace "
+#~ "with your neighbours?"
+#~ msgstr ""
+#~ "Кажется, зубры живут в этой долине с начала времен. Когда твое племя "
+#~ "добралось туда, казалось, что места там вполне хватит для мирной жизни. Но "
+#~ "как можно жить мирно с такими-то соседями?"

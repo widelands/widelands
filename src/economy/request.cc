@@ -96,7 +96,7 @@ Request::~Request()
 }
 
 // Modified to allow Requirements and SoldierRequests
-#define REQUEST_VERSION 4
+#define REQUEST_VERSION 5
 
 /**
  * Read this request from a file
@@ -178,12 +178,14 @@ void Request::Read
 					trans->set_idle(fr.Unsigned8());
 					m_transfers.push_back(trans);
 
-					if (fr.Unsigned8())
-						m_requirements.Read (fr, game, mol);
+					if (version < 5)
+						if (fr.Unsigned8())
+							m_requirements.Read (fr, game, mol);
 				} catch (_wexception const & e) {
 					throw wexception("transfer %u: %s", i, e.what());
 				}
-
+			if (version >= 5)
+				m_requirements.Read (fr, game, mol);
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);
 		} else
@@ -234,10 +236,8 @@ void Request::Write
 			fw.Unsigned32(mos.get_object_file_index(*trans.m_worker));
 		}
 		fw.Unsigned8(trans.is_idle());
-
-		fw.Unsigned8(true); //  for version compatibility
-		m_requirements.Write (fw, game, mos);
 	}
+	m_requirements.Write (fw, game, mos);
 }
 
 /**

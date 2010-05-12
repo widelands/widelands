@@ -31,7 +31,7 @@
 namespace Widelands {
 
 struct ProductionSite;
-struct MilitarySite;
+class MilitarySite;
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player * const pl, uint8_t const mc, bool const oe)
@@ -52,7 +52,7 @@ struct CheckStepRoadAI {
 
 
 struct FindNodeUnowned {
-	bool accept (const Map &, const FCoords fc) const {
+	bool accept (const Map &, const FCoords & fc) const {
 		// when looking for unowned terrain to acquire, we are actually
 		// only interested in fields we can walk on
 		return
@@ -170,7 +170,9 @@ struct MineableField {
 	int32_t mines_nearby;
 
 	MineableField (Widelands::FCoords const & fc)
-		: coords(fc), next_update_due(0)
+		 : coords(fc), next_update_due(0),
+			reachable(false),
+			preferred(false)
 	{}
 };
 
@@ -199,18 +201,20 @@ struct BuildingObserver {
 		MINE
 	}                                 type;
 
-	bool                              is_basic;
+	bool                              is_basic; // is a "must" to have for the ai
 	bool                              prod_build_material;
-	bool                              recruitment;
+	bool                              recruitment; // is "producing" workers?
 
 	bool                              is_buildable;
 
-	bool                              need_trees;
-	bool                              need_stones;
-	bool                              need_water;
+	bool                              need_trees;  // lumberjack = true
+	bool                              need_stones; // quarry = true
+	bool                              need_water;  // fisher, fish_breeder = true
 
-	int32_t                           mines;
-	uint16_t                          mines_percent;
+	bool                              unoccupied;  // >= 1 unoccupied ?
+
+	int32_t                           mines;       // type of resource it mines
+	uint16_t                          mines_percent; // % of res it can mine
 
 	uint32_t                          current_stats;
 
@@ -221,7 +225,7 @@ struct BuildingObserver {
 	int32_t                           cnt_built;
 	int32_t                           cnt_under_construction;
 
-	int32_t total_count() {return cnt_built + cnt_under_construction;}
+	int32_t total_count() const {return cnt_built + cnt_under_construction;}
 };
 
 struct ProductionSiteObserver {

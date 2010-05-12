@@ -38,6 +38,8 @@
 
 #include <libintl.h>
 
+#include "config.h"
+
 namespace Widelands {
 
 ProductionProgram::Action::~Action() {}
@@ -60,20 +62,15 @@ void ProductionProgram::parse_ware_type_group
 		char const terminator = *parameters;
 		*parameters = '\0';
 		Ware_Index const ware_index = tribe.safe_ware_index(ware);
-		for
-			(struct {
-			 	Ware_Types::const_iterator       current;
-			 	Ware_Types::const_iterator const end;
-			 } i = {inputs.begin(), inputs.end()};;
-			 ++i.current)
-			if (i.current == i.end)
+		for (wl_const_range<Ware_Types> i(inputs);; ++i)
+			if (i.empty())
 				throw game_data_error
 					(_
 					 	("%s is not declared as an input (\"%s=<count>\" was not "
 					 	 "found in the [inputs] section)"),
 					 ware, ware);
-			else if (i.current->first == ware_index) {
-				count_max += i.current->second;
+			else if (i->first == ware_index) {
+				count_max += i.front().second;
 				break;
 			}
 		if
@@ -398,32 +395,24 @@ void ProductionProgram::ActReturn::execute
 		if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
 			char const * const operator_string = _(" and ");
 			result_string += _(" because: ");
-			for
-				(struct {
-				 	Conditions::const_iterator current;
-				 	Conditions::const_iterator const end;
-				 } i = {m_conditions.begin(), m_conditions.end()};;)
+			for (wl_const_range<Conditions> i(m_conditions); i;)
 			{
-				if (not (*i.current)->evaluate(ps)) //  A condition is false,
+				if (not (i.front()->evaluate(ps))) //  A condition is false,
 					return ps.program_step(game); //  continue program.
-				result_string += (*i.current)->description(ps.owner().tribe());
-				if (++i.current == i.end)
+				result_string += i.front()->description(ps.owner().tribe());
+				if (i.advance().empty())
 					break;
 				result_string += operator_string;
 			}
 		} else { //  "unless a or b or ..." (all conditions must be false)
 			char const * const operator_string = _(" or ");
 			result_string += _(" because not: ");
-			for
-				(struct {
-				 	Conditions::const_iterator current;
-				 	Conditions::const_iterator const end;
-				 } i = {m_conditions.begin(), m_conditions.end()};;)
+			for (wl_const_range<Conditions> i(m_conditions); i;)
 			{
 				if ((*i.current)->evaluate(ps)) //  A condition is true,
 					return ps.program_step(game); //  continue program.
-				result_string += (*i.current)->description(ps.owner().tribe());
-				if (++i.current == i.end)
+				result_string += i.front()->description(ps.owner().tribe());
+				if (i.advance().empty())
 					break;
 				result_string += operator_string;
 			}
@@ -693,7 +682,11 @@ void ProductionProgram::ActConsume::execute
 {
 	std::vector<WaresQueue *> const warequeues = ps.warequeues();
 	size_t const nr_warequeues = warequeues.size();
+#ifdef HAVE_VARARRAY
 	uint8_t consumption_quantities[nr_warequeues];
+#else
+	std::vector<uint8_t> consumption_quantities(nr_warequeues, 0);
+#endif
 	Groups l_groups = m_groups; //  make a copy for local modification
 	//log("ActConsume::execute(%s):\n", ps.descname().c_str());
 
@@ -754,21 +747,13 @@ void ProductionProgram::ActConsume::execute
 		result_string            += ' ';
 		result_string            += ps.top_state().program->descname();
 		result_string            += _(" because: ");
-		for
-			(struct {
-			 	Groups::const_iterator       current;
-			 	Groups::const_iterator const end;
-			 } i = {l_groups.begin(), l_groups.end()};;)
+		for (wl_const_range<Groups> i(l_groups); i;)
 		{
 			assert(i.current->first.size());
-			for
-				(struct {
-				 	std::set<Ware_Index>::const_iterator       current;
-				 	std::set<Ware_Index>::const_iterator const end;
-				 } j = {i.current->first.begin(), i.current->first.end()};;)
+			for (wl_const_range<std::set<Ware_Index> > j(i.current->first); j;)
 			{
-				result_string += tribe.get_ware_descr(*j.current)->descname();
-				if (++j.current == j.end)
+				result_string += tribe.get_ware_descr(j.front())->descname();
+				if (j.advance().empty())
 					break;
 				result_string += ',';
 			}
@@ -780,7 +765,7 @@ void ProductionProgram::ActConsume::execute
 					result_string += buffer;
 				}
 			}
-			if (++i.current == i.end)
+			if (i.advance().empty())
 				break;
 			result_string += _(" and ");
 		}
@@ -865,9 +850,8 @@ void ProductionProgram::ActProduce::execute
 	Tribe_Descr const & tribe = ps.owner().tribe();
 	std::string result_string = _("Produced ");
 	assert(m_items.size());
-	for
-		(struct {Items::const_iterator current; Items::const_iterator const end;}
-		 i = {m_items.begin(), m_items.end()};;)
+
+	for (wl_const_range<Items> i(m_items); i;)
 	{
 		{
 			uint8_t const count = i.current->second;
@@ -878,7 +862,7 @@ void ProductionProgram::ActProduce::execute
 			}
 		}
 		result_string += tribe.get_ware_descr(i.current->first)->descname();
-		if (++i.current == i.end)
+		if (i.advance().empty())
 			break;
 		result_string += _(", ");
 	}
@@ -950,9 +934,7 @@ void ProductionProgram::ActRecruit::execute
 	Tribe_Descr const & tribe = ps.owner().tribe();
 	std::string result_string = _("Recruited ");
 	assert(m_items.size());
-	for
-		(struct {Items::const_iterator current; Items::const_iterator const end;}
-		 i = {m_items.begin(), m_items.end()};;)
+	for (wl_const_range<Items> i(m_items); i;)
 	{
 		{
 			uint8_t const count = i.current->second;
@@ -963,7 +945,7 @@ void ProductionProgram::ActRecruit::execute
 			}
 		}
 		result_string += tribe.get_worker_descr(i.current->first)->descname();
-		if (++i.current == i.end)
+		if (i.advance().empty())
 			break;
 		result_string += _(", ");
 	}
@@ -1135,7 +1117,7 @@ void ProductionProgram::ActMine::execute
 
 /// Copied from militarysite.cc, MilitarySite::informPlayer
 /// Informs the player about a mine that has run empty, if the mine has not
-/// sent this message within the last 10 minutes.
+/// sent this message within the last 60 minutes.
 void ProductionProgram::ActMine::informPlayer
 	(Game & game, ProductionSite & ps) const
 {
@@ -1153,7 +1135,7 @@ void ProductionProgram::ActMine::informPlayer
 		 	 	 	 "destruct it."))
 		 	 +
 		 	 "</p>"),
-		 600000, 0);
+		 3600000, 0);
 }
 
 
@@ -1177,7 +1159,7 @@ ProductionProgram::ActCheck_Soldier::ActCheck_Soldier
 		else
 			throw game_data_error
 				(_
-				 	("expected {\"hp\"|\"attack\"|\"defense\"|evade\"} but found "
+				 	("expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found "
 				 	 "\"%s\""),
 				 parameters);
 

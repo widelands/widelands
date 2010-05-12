@@ -29,6 +29,7 @@
 
 #include "i18n.h"
 
+#include "container_iterate.h"
 #include "ref_cast.h"
 
 namespace Widelands {
@@ -48,15 +49,19 @@ struct GameMessageMenu : public UI::UniqueWindow {
 
 	enum Mode {Inbox, Archive};
 	void think();
+	virtual bool handle_key(bool down, SDL_keysym code);
 
 private:
 	Interactive_Player & iplayer() const;
 	void                 selected(uint32_t);
 
-	struct List : public UI::Table<uintptr_t const> {
+	bool status_compare(uint32_t a, uint32_t b);
+	void do_delete();
+
+	struct List : public UI::Table<uintptr_t> {
 		enum Cols {Select, Status, Title, Time_Sent};
 		List(GameMessageMenu & parent) :
-			UI::Table<uintptr_t const>(&parent, 5, 35, 360, 110)
+			UI::Table<uintptr_t>(&parent, 5, 35, 360, 110)
 		{
 			selected.set(&parent, &GameMessageMenu::selected);
 			add_column (50, _("Select"), UI::Align_HCenter, true);
@@ -65,12 +70,15 @@ private:
 			add_column(100, _("Time sent"));
 		}
 	} list;
+
+	void update_record(List::Entry_Record& er, Widelands::Message const &);
+
 	UI::Multiline_Textarea message_body;
 
 	struct Clear_Selection : public UI::Button {
 		Clear_Selection(GameMessageMenu & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "clear_selection",
 				 5, 5, 70, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 _("Clear"), _("Clear selection"))
@@ -78,11 +86,7 @@ private:
 		void clicked() {
 			GameMessageMenu & menu =
 				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
-			for
-				(struct {uint8_t current; uint8_t const end;} i =
-				 	{0, menu.list.size()};
-				 i.current < i.end;
-				 ++i.current)
+			for(wl_index_range<uint8_t>i(0,menu.list.size());i;++i)
 				menu.list.get_record(i.current).set_checked
 					(List::Select, false);
 		}
@@ -91,7 +95,7 @@ private:
 	struct Invert_Selection : public UI::Button {
 		Invert_Selection(GameMessageMenu & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "invert_selection",
 				 80, 5, 70, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 _("Invert"), _("Invert selection"))
@@ -99,11 +103,8 @@ private:
 		void clicked() {
 			GameMessageMenu & menu =
 				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
-			for
-				(struct {uint8_t current; uint8_t const end;} i =
-				 	{0, menu.list.size()};
-				 i.current < i.end;
-				 ++i.current)
+
+			for(wl_index_range<uint8_t> i(0, menu.list.size());i;++i)
 				menu.list.get_record(i.current).toggle(List::Select);
 		}
 	} invert_selection;
@@ -111,7 +112,7 @@ private:
 	struct Archive_Or_Restore_Selected_Messages : public UI::Button {
 		Archive_Or_Restore_Selected_Messages(GameMessageMenu & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "archive_or_restore_selected_messages",
 				 155, 5, 25, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/message_archive.png"),
@@ -123,7 +124,7 @@ private:
 	struct Toggle_Between_Inbox_And_Archive : public UI::Button {
 		Toggle_Between_Inbox_And_Archive(GameMessageMenu & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "toggle_between_inbox_or_archive",
 				 185, 5, 100, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 				 _("Show Archive"))
@@ -158,7 +159,7 @@ private:
 	struct Center_Main_Mapview_On_Location : public UI::Button {
 		Center_Main_Mapview_On_Location(GameMessageMenu & parent) :
 			UI::Button
-				(&parent,
+				(&parent, "center_main_mapview_on_location",
 				 340, 5, 25, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),

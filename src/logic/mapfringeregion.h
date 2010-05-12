@@ -53,7 +53,7 @@ template <typename Area_type = Area<> > struct MapFringeRegion {
 	 * keeps returning true. When finally advance returns false, it means that
 	 * the iteration is done and location is the same as it was before the first
 	 * call to advance. The iteration can then be redone by calling advance
-	 * again, which will return true util it reaches the first location the next
+	 * again, which will return true until it reaches the first location the next
 	 * time around, and so on.
 	 */
 	bool advance(const Map &) throw ();

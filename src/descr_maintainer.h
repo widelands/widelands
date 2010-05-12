@@ -35,7 +35,7 @@ template <typename T> struct Descr_Maintainer {
 		return std::numeric_limits<typename T::Index>::max();
 	}
 
-	T * exists(char const * name);
+	T * exists(char const * name) const;
 	int32_t add(T *);
 	typename T::Index get_nitems() const throw () {return nitems;}
 
@@ -88,7 +88,7 @@ int32_t Descr_Maintainer<T>::add(T * const item) {
 
 /// Returns the element if it exists, 0 otherwise.
 template <typename T>
-T * Descr_Maintainer<T>::exists(char const * const name) {
+T * Descr_Maintainer<T>::exists(char const * const name) const {
 	for (typename T::Index i = 0; i < nitems; ++i)
 		if (name == items[i]->name())
 			return items[i];

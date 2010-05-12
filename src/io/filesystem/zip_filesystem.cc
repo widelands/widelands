@@ -466,6 +466,6 @@ void ZipFilesystem::Rename(std::string const &, std::string const &) {
 	throw wexception("rename inside zip FS is not implemented yet");
 }
 
-unsigned long ZipFilesystem::DiskSpace() {
+unsigned long long ZipFilesystem::DiskSpace() {
 	return 0; //  FIXME
 }

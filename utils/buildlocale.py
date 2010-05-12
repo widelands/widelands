@@ -36,10 +36,15 @@ def do_compile(lang):
 
             if not buildcat.do_buildpo(po, pot, "tmp.po"):
                 buildcat.do_makedirs(os.path.dirname(mo))
-                if not (os.system("msgfmt -o %s tmp.po" % mo)):
+                err_code = os.system("msgfmt -o %s tmp.po" % mo)
+                if not err_code: # Success
                     os.remove("tmp.po")
                     sys.stdout.write(".")
                     sys.stdout.flush()
+                else:
+                    raise RuntimeError(
+                        "msgfmt exited with errorcode %i!" % err_code
+                    )
 
         sys.stdout.write("\n")
 
@@ -57,12 +62,11 @@ if __name__ == "__main__":
         # Make sure .pot files are up to date.
         buildcat.do_update_potfiles()
 
-        sys.stdout.write("Compiling translations: ")
+        print("Compiling translations: ")
 
         if len(sys.argv) > 1:
                 # Assume all parameters are language codes to compile
                 lang = sys.argv[1:]
-                print lang
         else:
                 # Find every directory that looks like ISO-639
                 lang = set(p.splitext(p.basename(l))[0] for

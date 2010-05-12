@@ -17,6 +17,9 @@
  *
  */
 
+#include <boost/format.hpp>
+using boost::format;
+
 #include "writeHTML.h"
 
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -434,7 +437,8 @@ void Building_Descr::writeHTML(::FileWrite & fw) const {
 				(fw,
 				 name() + "/index_" + i18n::get_locale() + ".xhtml#buildcost_"    +
 				 tribe().get_ware_descr(j.current->first)->name() + "\" title=\"" +
-				 descname() + _("'s constructionsite") + "\"><img src=\"../"      +
+				 (format(_("%s's constructionsite")) % descname()).str() +
+				 "\"><img src=\"../"      +
 				 name() + "/menu.png\" alt=\"" + descname(),
 				 HTMLReferences::Madeof,
 				 j.current->first, j.current->second);
@@ -455,7 +459,8 @@ void Building_Descr::writeHTML(::FileWrite & fw) const {
 				(fw,
 				 name() + "/index_" + i18n::get_locale() + ".xhtml#enhancement_"  +
 				 tribe().get_building_descr(*i.current)->name() + "\" title=\""   +
-				 descname() + _("'s enhancement") + "\"><img src=\"../" + name()  +
+				 (format(_("%s's enhancement")) % descname()).str() +
+				 "\"><img src=\"../" + name()  +
 				 "/menu.png\" alt=\"" + descname(),
 				 HTMLReferences::Become,
 				 *i.current);
@@ -514,9 +519,7 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 	fw.Text("</th><th>");
 	fw.Text(_("Vision<br/>range"));
 	fw.Text("</th><th>");
-	fw.Text(_("Minimum<br/>needed<br/>experience"));
-	fw.Text("</th><th>");
-	fw.Text(_("Maximum<br/>needed<br/>experience"));
+	fw.Text(_("Needed<br/>experience"));
 	fw.Text("</th><th>");
 	fw.Text(_("Becomes"));
 	fw.Text
@@ -545,10 +548,7 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 		fw.Text("</td>");
 		if (Ware_Index const becomes = worker_descr.becomes()) {
 			fw.Text("<td align=\"right\">");
-			sprintf(buffer, "%u", worker_descr.get_min_exp());
-			fw.Text(buffer);
-			fw.Text("</td><td align=\"right\">");
-			sprintf(buffer, "%u", worker_descr.get_max_exp());
+			sprintf(buffer, "%u", worker_descr.get_level_experience());
 			fw.Text(buffer);
 			Worker_Descr const & becomes_descr = *get_worker_descr(becomes);
 			std::string const & becomes_name     = becomes_descr.    name();
@@ -587,9 +587,9 @@ void Soldier_Descr::writeHTMLSoldier(::FileWrite & fw) const {
 	snprintf
 		(buffer, sizeof(buffer),
 		 _
-		 	("Hitpoints is between %u and %u, plus %u for each level above 0 "
+		 	("Hitpoints is %u, plus %u for each level above 0 "
 		 	 "(maximum level is %u)."),
-		 m_min_hp,      m_max_hp,      m_hp_incr,      m_max_hp_level);
+		 m_base_hp,      m_hp_incr,      m_max_hp_level);
 	fw.Text(buffer);
 	fw.Text
 		("</p>\n"
@@ -663,7 +663,8 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 						(fw,
 						 name() + "/index_" + i18n::get_locale()                    +
 						 ".xhtml#buildcost_" + j.current->first + "\" title=\""     +
-						 descname() + _("'s creation") + "\"><img src=\"../"        +
+						 (format(_("%s's creation")) % descname()).str() +
+						 "\"><img src=\"../"        +
 						 name() + "/menu.png\" alt=\"" + descname(),
 						 HTMLReferences::Madeof,
 						 wi,
@@ -673,7 +674,8 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 						(fw,
 						 name() + "/index_" + i18n::get_locale()                    +
 						 ".xhtml#buildcost_" + j.current->first + "\" title=\""     +
-						 descname() + _("'s creation") + "\"><img src=\"../"        +
+						 (format(_("%s's creation")) % descname()).str() +
+						 "\"><img src=\"../"        +
 						 name() + "/menu.png\" alt=\"" + descname(),
 						 HTMLReferences::Madeof,
 						 tribe().safe_worker_index(j.current->first),
@@ -692,15 +694,16 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 		fw.Text("<p>");
 		snprintf
 			(buffer, sizeof(buffer),
-			 _("Needs experience from working between %u and %u times to become"),
-			 get_min_exp(), get_max_exp());
+			 _("Needs experience from working %u times to become"),
+			 get_level_experience());
 		fw.Text(buffer);
 		fw.Text(" <a name=\"becomes_");
 		tribe().referenceWorker
 			(fw,
 			 name() + "/index_" + i18n::get_locale() + ".xhtml#becomes_"         +
 			 tribe().get_worker_descr(becomes())->name() + "\" title=\""         +
-			 descname() + _("'s promotion") + "\"><img src=\"../" + name()       +
+			 (format(_("%s's promotion")) % descname()).str() +
+			 "\"><img src=\"../" + name()       +
 			 "/menu.png\" alt=\"" + descname(),
 			 HTMLReferences::Become,
 			 becomes());
@@ -785,7 +788,8 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 				(fw,
 				 name() + "/index_" + i18n::get_locale() + ".xhtml#worker_"       +
 				 tribe().get_worker_descr(i.current->first)->name()               +
-				 "\" title=\"" + descname() + _("'s employee")                    +
+				 "\" title=\"" +
+				 (format(_("%s's employee")) % descname()).str() +
 				 "\"><img src=\"../" + name() + "/menu.png\" alt=\"" + descname(),
 				 HTMLReferences::Employ,
 				 i.current->first, i.current->second);
@@ -805,7 +809,8 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 					(fw,
 					 name() + "/index_" + i18n::get_locale() + ".xhtml#input_"     +
 					 tribe().get_ware_descr(i.current->first)->name().c_str()      +
-					 "\" title=\"" + descname() + _("'s input")                    +
+					 "\" title=\"" +
+					 (format(_("%s's input")) % descname()).str() +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
 					 descname(),
 					 HTMLReferences::Input,
@@ -827,7 +832,8 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 					(fw,
 					 name() + "/index_" + i18n::get_locale() + ".xhtml#output_"    +
 					 tribe().get_ware_descr(*i.current)->name().c_str()            +
-					 "\" title=\"" + descname() + _("'s output")                   +
+					 "\" title=\"" +
+					 (format(_("%s's output")) % descname()).str() +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
 					 descname(),
 					 HTMLReferences::Output,
@@ -840,7 +846,8 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 					(fw,
 					 name() + "/index_" + i18n::get_locale() + ".xhtml#output_"    +
 					 tribe().get_worker_descr(*i.current)->name().c_str()          +
-					 "\" title=\"" + descname() + _("'s output")                   +
+					 "\" title=\"" +
+					 (format(_("%s's output")) % descname()).str() +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
 					 descname(),
 					 HTMLReferences::Output,
@@ -909,14 +916,10 @@ void ProductionProgram::ActReturn::writeHTML
 			fw.Text(_("unless"));
 		}
 		fw.Text("</span> ");
-		for
-			(struct {
-			 	Conditions::const_iterator       current;
-			 	Conditions::const_iterator const end;
-			 } i = {m_conditions.begin(), m_conditions.end()};;)
+		for (wl_const_range<Conditions> i(m_conditions);;)
 		{
-			(*i.current)->writeHTML(fw, site);
-			if (++i.current == i.end)
+			i.front()->writeHTML(fw, site);
+			if (i.advance().empty())
 				break;
 			fw.Text("<span class=\"keyword\">");
 			fw.Text(op);
@@ -987,11 +990,7 @@ void ProductionProgram::ActReturn::Site_Has::writeHTML
 	fw.Text("</span> <span class=\"keyword\">");
 	fw.Text(_("has"));
 	fw.Text("</span>");
-	for
-		(struct {
-		 	std::set<Ware_Index>::const_iterator       current;
-		 	std::set<Ware_Index>::const_iterator const end;
-		 } i = {group.first.begin(), group.first.end()};;)
+	for (wl_const_range<std::set<Ware_Index> > i(group.first);;)
 	{
 		Item_Ware_Descr const & ware_type = *tribe.get_ware_descr(*i.current);
 		std::string const & ware_type_name     = ware_type.    name();
@@ -1005,7 +1004,7 @@ void ProductionProgram::ActReturn::Site_Has::writeHTML
 		fw.Text("/menu.png\" alt=\"");
 		fw.Text(ware_type_descname);
 		fw.Text("\"/></a>");
-		if (++i.current == i.end)
+		if (i.advance().empty())
 			break;
 		fw.Unsigned8(',');
 	}
@@ -1175,17 +1174,9 @@ void ProductionProgram::ActConsume::writeHTML
 	fw.Text("\">");
 	fw.Text(_("consume"));
 	fw.Text("</a> ");
-	for
-		(struct {
-		 	Groups::const_iterator       current;
-		 	Groups::const_iterator const end;
-		 } j = {groups().begin(), groups().end()};;)
+	for (wl_const_range<Groups> j(groups());;)
 	{
-		for
-			(struct {
-			 	std::set<Ware_Index>::const_iterator       current;
-			 	std::set<Ware_Index>::const_iterator const end;
-			 } i = {j.current->first.begin(), j.current->first.end()};;)
+		for (wl_const_range<std::set<Ware_Index> > i(j.current->first);;)
 		{
 			Item_Ware_Descr const & ware = *tribe.get_ware_descr(*i.current);
 			std::string const & ware_name     = ware.    name();
@@ -1199,7 +1190,7 @@ void ProductionProgram::ActConsume::writeHTML
 			fw.Text("/menu.png\" alt=\"");
 			fw.Text(ware_descname);
 			fw.Text("\"/></a>");
-			if (++i.current == i.end)
+			if (i.advance().empty())
 				break;
 			fw.Unsigned8(',');
 		}
@@ -1208,7 +1199,7 @@ void ProductionProgram::ActConsume::writeHTML
 			sprintf(buffer, ":%u", j.current->second);
 			fw.Text(buffer);
 		}
-		if (++j.current == j.end)
+		if (j.advance().empty())
 			break;
 		fw.Unsigned8(' ');
 	}
@@ -1226,11 +1217,7 @@ void ProductionProgram::ActProduce::writeHTML
 	fw.Text("\">");
 	fw.Text(_("produce"));
 	fw.Text("</a> ");
-	for
-		(struct {
-		 	Items::const_iterator       current;
-		 	Items::const_iterator const end;
-		 } i = {items().begin(), items().end()};;)
+	for (wl_const_range<Items> i(items());;)
 	{
 		Item_Ware_Descr const & ware = *tribe.get_ware_descr(i.current->first);
 		std::string const & ware_name     = ware.    name();
@@ -1249,7 +1236,7 @@ void ProductionProgram::ActProduce::writeHTML
 			sprintf(buffer, ":%u", i.current->second);
 			fw.Text(buffer);
 		}
-		if (++i.current == i.end)
+		if (i.advance().empty())
 			break;
 		fw.Unsigned8(' ');
 	}
@@ -1267,11 +1254,7 @@ void ProductionProgram::ActRecruit::writeHTML
 	fw.Text("\">");
 	fw.Text(_("recruit"));
 	fw.Text("</a> ");
-	for
-		(struct {
-		 	Items::const_iterator       current;
-		 	Items::const_iterator const end;
-		 } i = {items().begin(), items().end()};;)
+	for (wl_const_range<Items> i(items());;)
 	{
 		Worker_Descr const & worker = *tribe.get_worker_descr(i.current->first);
 		std::string const & worker_name     = worker.    name();
@@ -1290,7 +1273,7 @@ void ProductionProgram::ActRecruit::writeHTML
 			sprintf(buffer, ":%u", i.current->second);
 			fw.Text(buffer);
 		}
-		if (++i.current == i.end)
+		if (i.advance().empty())
 			break;
 		fw.Unsigned8(' ');
 	}

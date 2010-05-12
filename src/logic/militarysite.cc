@@ -53,15 +53,11 @@ MilitarySite_Descr::MilitarySite_Descr
 		(_name, _descname, directory, prof, global_s, _tribe, encdata),
 m_conquer_radius     (0),
 m_num_soldiers       (0),
-m_num_medics         (0),
-m_heal_per_second    (0),
-m_heal_incr_per_medic(0)
+m_heal_per_second    (0)
 {
 	m_conquer_radius      = global_s.get_safe_int("conquers");
 	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
-	m_num_medics          = global_s.get_safe_int("max_medics");
 	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
-	m_heal_incr_per_medic = global_s.get_safe_int("heal_increase_per_medic");
 	if (m_conquer_radius > 0)
 		m_workarea_info[m_conquer_radius].insert(descname() + _(" conquer"));
 }
@@ -165,6 +161,7 @@ void MilitarySite::prefill
 void MilitarySite::init(Editor_Game_Base & egbase)
 {
 	ProductionSite::init(egbase);
+
 	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 	std::vector<Worker *> const & ws = get_workers();
 	container_iterate_const(std::vector<Worker *>, ws, i)
@@ -222,6 +219,34 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 
 /*
 ===============
+Takes one soldier and adds him to ours
+
+returns 0 on succes, -1 if there was no room for this soldier
+===============
+*/
+int MilitarySite::incorporateSoldier(Game & game, Soldier & s) {
+	if (s.get_location(game) != this) {
+		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
+			return -1;
+
+		s.set_location(this);
+	}
+
+	if (not m_didconquer)
+		conquer_area(game);
+
+	// Bind the worker into this house, hide him on the map
+	s.reset_tasks(game);
+	s.start_task_buildingwork(game);
+
+	// Make sure the request count is reduced or the request is deleted.
+	update_soldier_request();
+
+	return 0;
+}
+
+/*
+===============
 Called when our soldier arrives.
 ===============
 */
@@ -235,17 +260,7 @@ void MilitarySite::request_soldier_callback
 	MilitarySite & msite = ref_cast<MilitarySite, PlayerImmovable>(target);
 	Soldier      & s     = ref_cast<Soldier,      Worker>         (*w);
 
-	assert(s.get_location(game) == &msite);
-
-	if (not msite.m_didconquer)
-		msite.conquer_area(game);
-
-	// Bind the worker into this house, hide him on the map
-	s.reset_tasks(game);
-	s.start_task_buildingwork(game);
-
-	// Make sure the request count is reduced or the request is deleted.
-	msite.update_soldier_request();
+	msite.incorporateSoldier(game, s);
 }
 
 
@@ -310,7 +325,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 			// The healing algorithm is totally arbitrary
 			if (s.get_current_hitpoints() < s.get_max_hitpoints()) {
 				s.heal(total_heal);
-				total_heal -= total_heal / 3;
+				break;
 			}
 		}
 
@@ -521,7 +536,13 @@ bool MilitarySite::attack(Soldier & enemy)
 	Soldier * defender = 0;
 
 	if (present.size()) {
-		defender = present[0];
+		// Find soldier with greatest hitpoints
+		int current_max = 0;
+		container_iterate_const(std::vector<Soldier *>, present, i)
+			if ((*i.current)->get_current_hitpoints() > current_max) {
+				defender = *i.current;
+				current_max = defender->get_current_hitpoints();
+			}
 	} else {
 		// If one of our stationed soldiers is currently walking into the
 		// building, give us another chance.
@@ -709,68 +730,16 @@ void MilitarySite::informPlayer(Game & game, bool const discovered)
 		 _("%sYour %s is under attack.</p>"),
 		 formation, descname().c_str());
 
+	// Add a message as long as no previous message was send from a point with
+	// radius <= 5 near the current location in the last 60 seconds
 	owner().add_message_with_timeout
 		(game,
 		 create_message
 		 	("under_attack",
-		 	 game.get_gametime(), 8 * 60 * 1000,
+		 	 game.get_gametime(), 5 * 60 * 1000,
 		 	 _("You are under attack"),
 		 	 message),
-		 30000, 4);
-
-	/* Old code remains here for security reasons:
-	   New code has not been tested yet.
-
-	Map & map  = game.map();
-
-	// Inform the player, that we are under attack by adding a new entry to the
-	// message queue - a sound will automatically be played. But only add this
-	// message if there is no other from that area from last 30 sec.
-	Coords const coords = base_flag().get_position();
-	std::vector<Message> & msgQueue = MessageQueue::get(owner().player_number());
-	for
-		(struct {
-		 	std::vector<Message>::const_iterator current;
-		 	std::vector<Message>::const_iterator const end;
-		 } i = {msgQueue.begin(), msgQueue.end()};;
-		 ++i.current)
-		if (i.current == i.end) {
-			char formation[256];
-			std::string b_name(name());
-			std::string b_tribe(tribe().name());
-			if (b_name.find('.') <= b_name.size()) {
-				// global militarysite
-				b_tribe = b_name.substr(b_name.find('.'), b_name.size());
-				b_name.resize(b_name.find('.'));
-			}
-			snprintf
-				(formation, sizeof(formation),
-				 "<rt image=tribes/%s/%s/%s_i_00.png>"
-				 "<p font-size=14 font-face=FreeSerif>",
-				 b_tribe.c_str(), b_name.c_str(), b_name.c_str());
-			char message[2048];
-			snprintf
-				(message, sizeof(message),
-				 discovered ?
-				 _("%sYour %s discovered an aggressor.</p></rt>") :
-				 _("%sYour %s is under attack.</p></rt>"),
-				 formation, descname().c_str());
-			MessageQueue::add
-				(owner(),
-				 Message
-				 	("under_attack", game.get_gametime(),
-				 	 _("You are under attack!"), coords, message));
-			break;
-		} else if
-			(i.current->sender() == "under_attack" and
-			 map.calc_distance(i.current->get_coords(), coords) < 5 and
-			 game.get_gametime() - i.current->time() < 60000)
-			//  Soldiers are running around during their attack, so we avoid too
-			//  many messages through checking an area with radius = 4
-			//  Further if the found message is older than 60 sec., and the fight
-			//  still goes on, a reminder might be useful.
-			break;
-	*/
+		 60000, 5);
 }
 
 

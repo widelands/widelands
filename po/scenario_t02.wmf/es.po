@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:41+0000\n"
-"Last-Translator: atrueba <Unknown>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-10 17:01+0000\n"
+"Last-Translator: Juan Eduardo Riva <juaneduardoriva@gmail.com>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-04-11 04:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "Tutorial2 - A Place to call Home"
-msgstr ""
+msgstr "Tutorial 2 - Un lugar para llamar Hogar"
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -29,10 +29,13 @@ msgid ""
 "higher production buildings, including mining and the military expansions "
 "will be introduced."
 msgstr ""
+"Segunda misión de la Campaña Tutorial de los Bárbaros. En este tutorial se "
+"presentarán los edificios de alta producción incluyendo minas y expansiones "
+"militares."
 
 #: ../../campaigns/t02.wmf/event:134
 msgid "Thron shakes his head..."
-msgstr ""
+msgstr "Thron sacude su cabeza..."
 
 #: ../../campaigns/t02.wmf/event:136
 msgid ""
@@ -49,7 +52,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:149
 #: ../../campaigns/t02.wmf/event:160
 msgid "The story continues"
-msgstr ""
+msgstr "La historia continúa"
 
 #: ../../campaigns/t02.wmf/event:141
 #: ../../campaigns/t02.wmf/event:152
@@ -77,7 +80,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:487
 #: ../../campaigns/t02.wmf/event:1165
 msgid "OK"
-msgstr ""
+msgstr "Aceptar"
 
 #: ../../campaigns/t02.wmf/event:147
 msgid ""
@@ -126,11 +129,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:412
 #: ../../campaigns/t02.wmf/event:425
 msgid "Your loyal companion"
-msgstr ""
+msgstr "Tu compañero fiel"
 
 #: ../../campaigns/t02.wmf/event:227
 msgid "Khantrukh joins the both of you..."
-msgstr ""
+msgstr "Khantrukh se une a ambos..."
 
 #: ../../campaigns/t02.wmf/event:229
 msgid ""
@@ -149,7 +152,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/event:438
 #: ../../campaigns/t02.wmf/event:451
 msgid "The advisor"
-msgstr ""
+msgstr "El consejero"
 
 #: ../../campaigns/t02.wmf/event:239
 msgid "Boldreth jumps up..."
@@ -177,7 +180,7 @@ msgstr "Khantrukh gruñe..."
 
 #: ../../campaigns/t02.wmf/event:254
 msgid " \"Old man? Disrespectful youth!\" "
-msgstr ""
+msgstr " \"¿Viejo? ¡Joven irrespetuoso!\" "
 
 #: ../../campaigns/t02.wmf/event:264
 msgid "Khantrukh nods satisfied..."
@@ -185,7 +188,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:266
 msgid " \"At last! These rocks should last for a while.\" "
-msgstr ""
+msgstr " \"Por fin! Estas piedras duraran lo suficiente.\" "
 
 #: ../../campaigns/t02.wmf/event:277
 msgid "Boldreth exclaims..."

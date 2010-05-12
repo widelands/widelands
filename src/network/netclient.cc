@@ -32,6 +32,7 @@
 #include "network_system.h"
 #include "logic/playercommand.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
@@ -39,6 +40,10 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 
+#include "config.h"
+#ifndef HAVE_VARARRAY
+#include <climits>
+#endif
 
 struct NetClientImpl {
 	GameSettings settings;
@@ -112,6 +117,17 @@ NetClient::NetClient
 	d->realspeed = 0;
 	d->desiredspeed = 1000;
 	file = 0;
+
+	// Temporarily register win condition scripts to get the default
+	LuaInterface * lua = create_LuaInterface();
+	lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+	ScriptContainer sc = lua->get_scripts_for("win_conditions");
+	std::vector<std::string> win_conditions;
+	container_iterate_const(ScriptContainer, sc, wc)
+		win_conditions.push_back(wc->first);
+	assert(win_conditions.size());
+	d->settings.win_condition = win_conditions[0];
+	delete lua;
 }
 
 NetClient::~NetClient ()
@@ -365,6 +381,14 @@ bool NetClient::getPlayerReady(uint8_t const number) {
 		 d->settings.players.at(number).ready);
 }
 
+std::string NetClient::getWinCondition() {
+	return d->settings.win_condition;
+}
+
+void NetClient::setWinCondition(std::string) {
+	// Clients are not allowed to change this
+}
+
 void NetClient::setPlayerNumber(uint8_t const number)
 {
 	// If the playernumber we want to switch to is our own, there is no need
@@ -550,7 +574,13 @@ void NetClient::handle_packet(RecvPacket & packet)
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());
 				if (bytes == fr.GetSize()) {
+#ifdef HAVE_VARARRAY
 					char complete[bytes];
+#else
+					std::auto_ptr<char> complete_buf(new char[bytes]);
+					if (!complete_buf.get()) throw wexception("Out of memory");
+					char * complete = complete_buf.get();
+#endif
 					fr.DataComplete(complete, bytes);
 					MD5Checksum<FileRead> md5sum;
 					md5sum.Data(complete, bytes);
@@ -596,10 +626,15 @@ void NetClient::handle_packet(RecvPacket & packet)
 		s.send(d->sock);
 
 		FilePart fp;
+
+#ifdef HAVE_VARARRAY
 		char buf[size];
+#else
+		char buf[UCHAR_MAX];
+#endif
 		if (packet.Data(buf, size) != size)
 			log("Readproblem. Will try to go on anyways\n");
-		memcpy(fp.part, buf, size);
+		memcpy(fp.part, &buf[0], size);
 		file->parts.push_back(fp);
 
 		// Write file to disk as soon as all parts arrived
@@ -622,7 +657,13 @@ void NetClient::handle_packet(RecvPacket & packet)
 			// Check for consistence
 			FileRead fr;
 			fr.Open(*g_fs, file->filename.c_str());
+#ifdef HAVE_VARARRAY
 			char complete[file->bytes];
+#else
+			std::auto_ptr<char> complete_buf(new char[file->bytes]);
+			if (!complete_buf.get()) throw wexception("Out of memory");
+			char * complete = complete_buf.get();
+#endif
 			fr.DataComplete(complete, file->bytes);
 			MD5Checksum<FileRead> md5sum;
 			md5sum.Data(complete, file->bytes);
@@ -685,6 +726,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->playernum = number;
 		d->settings.users.at(d->settings.usernum).position = number;
 		d->settings.playernum = number;
+		break;
+	}
+	case NETCMD_WIN_CONDITION: {
+		d->settings.win_condition = packet.String();
 		break;
 	}
 

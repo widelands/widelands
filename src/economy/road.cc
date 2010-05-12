@@ -36,7 +36,12 @@
 namespace Widelands {
 
 // dummy instance because Map_Object needs a description
-Map_Object_Descr g_road_descr("road", "Road");
+const Map_Object_Descr g_road_descr("road", "Road");
+
+bool Road::IsRoadDescr(Map_Object_Descr const * const descr)
+{
+	return descr == &g_road_descr;
+}
 
 /**
  * Most of the actual work is done in init.
@@ -80,11 +85,9 @@ Road::~Road()
 /**
  * Create a road between the given flags, using the given path.
 */
-void Road::create
+Road & Road::create
 	(Editor_Game_Base & egbase,
-	 Flag & start, Flag & end, Path const & path,
-	 bool    const create_carrier,
-	 int32_t const type)
+	 Flag & start, Flag & end, Path const & path)
 {
 	assert(start.get_position() == path.get_start());
 	assert(end  .get_position() == path.get_end  ());
@@ -93,33 +96,15 @@ void Road::create
 	Player & owner          = start.owner();
 	Road & road             = *new Road();
 	road.set_owner(&owner);
-	road.m_type             = type;
+	road.m_type             = Road_Normal;
 	road.m_flags[FlagStart] = &start;
 	road.m_flags[FlagEnd]   = &end;
 	// m_flagidx is set when attach_road() is called, i.e. in init()
 	road._set_path(egbase, path);
-	if (create_carrier) {
-		Coords idle_position = start.get_position();
-		{
-			Map const & map = egbase.map();
-			Path::Step_Vector::size_type idle_index = road.get_idle_index();
-			for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
-				map.get_neighbour(idle_position, path[i], &idle_position);
-		}
-		Tribe_Descr const & tribe = owner.tribe();
-		Carrier & carrier =
-			ref_cast<Carrier, Worker>
-				(tribe.get_worker_descr(tribe.worker_index("carrier"))->create
-				 	(egbase, owner, &start, idle_position));
-		carrier.start_task_road(ref_cast<Game, Editor_Game_Base>(egbase));
-
-		CarrierSlot slot;
-		slot.carrier = &carrier;
-		slot.carrier_type = 1;
-		road.m_carrier_slots.push_back(slot);
-	}
 
 	road.init(egbase);
+
+	return road;
 }
 
 int32_t Road::get_type() const throw ()
@@ -137,6 +122,24 @@ bool Road::get_passable() const throw ()
 	return true;
 }
 
+BaseImmovable::PositionList Road::get_positions
+	(const Editor_Game_Base & egbase) const throw()
+{
+	Map & map = egbase.map();
+	Coords curf = map.get_fcoords(m_path.get_start());
+
+	PositionList rv;
+	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
+	for (Path::Step_Vector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
+	{
+		if (steps > 0 && steps < m_path.get_nsteps())
+			rv.push_back(curf);
+
+		if (steps < m_path.get_nsteps())
+			map.get_neighbour(curf, m_path[steps], &curf);
+	}
+	return rv;
+}
 
 static std::string const road_name = "road";
 std::string const & Road::name() const throw () {return road_name;}
@@ -419,6 +422,31 @@ void Road::remove_worker(Worker & w)
 	}
 
 	PlayerImmovable::remove_worker(w);
+}
+
+/**
+ * A carrier was created by someone else (e.g. Scripting Engine)
+ * and should now be assigned to this road.
+ */
+void Road::assign_carrier(Carrier & c, uint8_t slot)
+{
+	assert(slot <= 1);
+
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+
+	// Send the worker home if it occupies our slot
+	CarrierSlot & s = m_carrier_slots[slot];
+
+	if (s.carrier_request) {
+		delete s.carrier_request;
+		s.carrier_request = 0;
+	}
+	Carrier * current_carrier = s.carrier.get(game);
+	if (current_carrier)
+		current_carrier->set_location(0);
+
+	m_carrier_slots[slot].carrier = &c;
+	m_carrier_slots[slot].carrier_request = 0;
 }
 
 

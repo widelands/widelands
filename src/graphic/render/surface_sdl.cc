@@ -18,8 +18,8 @@
  */
 
 #include "surface_sdl.h"
-
 #include "logic/editor_game_base.h"
+#include "log.h"
 
 #include <cassert>
 

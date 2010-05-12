@@ -23,7 +23,7 @@
 #include "animation.h"
 #include "logic/widelands.h"
 
-struct Surface;
+class Surface;
 
 struct AnimationGfx { /// The graphics belonging to an animation.
 	AnimationGfx(AnimationData const * data);

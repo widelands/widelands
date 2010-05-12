@@ -60,6 +60,7 @@ struct Carrier : public Worker {
 	void start_task_transport(Game &, int32_t fromflag);
 	bool start_task_walktoflag(Game &, int32_t flag, bool offset = false);
 
+	virtual void log_general_info(Editor_Game_Base const &);
 
 private:
 	MO_DESCR(Descr);
@@ -82,6 +83,23 @@ private:
 
 	/// -1: no ware acked; 0/1: acked ware for start/end flag of road
 	int32_t m_acked_ware;
+
+	// saving and loading
+protected:
+	class Loader : public Worker::Loader {
+	public:
+		Loader();
+
+		virtual void load(FileRead &);
+
+	protected:
+		virtual const Task * get_task(const std::string& name);
+	};
+
+	virtual Loader* create_loader();
+
+public:
+	virtual void do_save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 };
 
 }

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-12 17:26+0000\n"
-"Last-Translator: Tarou <pierre.salagnac@gmail.com>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-11 10:29+0000\n"
+"Last-Translator: Tino <Unknown>\n"
 "Language-Team: French <eandry@mandriva.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-04-12 03:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/COPYING:1
@@ -762,7 +762,7 @@ msgstr ""
 
 #: ../../txts/README:27
 msgid "Status"
-msgstr "Status"
+msgstr "État"
 
 #: ../../txts/README:31
 msgid ""
@@ -1061,55 +1061,62 @@ msgstr "Graphismes"
 msgid "Homepage"
 msgstr "Page d'accueil"
 
-#: ../../txts/developers:27
-msgid "Janus"
-msgstr "Janus"
-
-#: ../../txts/developers:31
+#: ../../txts/developers:29
 #: ../../txts/developers:323
 msgid "Sound"
 msgstr "Son"
 
-#: ../../txts/developers:36
-#: ../../txts/developers:328
-msgid "Translation"
-msgstr "Traduction"
-
-#: ../../txts/developers:44
+#: ../../txts/developers:38
 msgid "Coders"
 msgstr "Développeurs"
 
-#: ../../txts/developers:76
+#: ../../txts/developers:70
 msgid "Graphicians"
 msgstr "Graphistes"
 
-#: ../../txts/developers:101
+#: ../../txts/developers:97
 msgid "Musicians"
 msgstr "Musiciens"
 
-#: ../../txts/developers:112
+#: ../../txts/developers:108
 msgid "Sound Effects"
 msgstr "Effets sonores"
 
-#: ../../txts/developers:121
+#: ../../txts/developers:117
 msgid "Maps and Missions"
 msgstr "Cartes et missions"
 
-#: ../../txts/developers:134
+#: ../../txts/developers:130
 msgid "Campaign Story"
 msgstr "Histoire de la campagne"
 
-#: ../../txts/developers:137
+#: ../../txts/developers:133
 msgid "Barbarian"
 msgstr "Barbare"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:139
 msgid "Empire"
 msgstr "Empire"
 
-#: ../../txts/developers:149
+#: ../../txts/developers:145
 msgid "Translators"
 msgstr "Traducteurs"
+
+#: ../../txts/developers:148
+msgid ""
+"NOTE: this list holds people that translated Widelands before we moved to "
+"launchpad.net. "
+msgstr ""
+"NOTE : cette liste contient les noms des gens qui ont participé à la "
+"traduction de Widelands avant que le projet ne déménage vers launchpad.net . "
+
+#: ../../txts/developers:149
+msgid ""
+"See https://translations.launchpad.net/widelands for a list of people that "
+"helped to translate Widelands via launchpad.net."
+msgstr ""
+"Voyez sur https://translations.launchpad.net/widelands pour la liste des "
+"personnes qui ont aidé à traduire Widelands depuis launchpad.net ."
 
 #: ../../txts/developers:153
 msgid "Czech"
@@ -1199,7 +1206,11 @@ msgstr "Documentation, Aide et Wiki"
 msgid "Former elders"
 msgstr "Les membres fondateurs"
 
-#: ../../txts/developers:334
+#: ../../txts/developers:328
+msgid "Translation"
+msgstr "Traduction"
+
+#: ../../txts/developers:335
 msgid "Other"
 msgstr "Autres"
 
@@ -1219,10 +1230,9 @@ msgid ""
 "longer and more complete."
 msgstr ""
 "Cet éditeur est destiné aux joueurs désirant créer leur propres cartes pour "
-"Widelands.\r\n"
-"Comme vous pouvez le voir, cet éditeur est un gros travail en cours, et au "
-"fur et à mesure qu'il s'améliorera, ce texte deviendra plus long et sera "
-"plus complet"
+"Widelands.<br>Comme vous pouvez le voir, cet éditeur est un gros travail en "
+"cours, et au fur et à mesure qu'il s'améliorera, ce texte deviendra plus "
+"long et sera plus complet"
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
@@ -1494,6 +1504,13 @@ msgstr ""
 "Vous pouvez utiliser '/me' au début d'un message instantané : \"/me est "
 "fatigué' sera affiché '->Pseudo est fatigué'."
 
+#: ../../txts/tips/multiplayer.tip:10
+msgid ""
+"Use '@name' at the beginning of a chat message to send it to only one player."
+msgstr ""
+"Utilisez \"@nom\" au début d'un message instantané pour ne l'envoyer qu'à ce "
+"joueur."
+
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
@@ -1512,3 +1529,6 @@ msgstr ""
 #~ msgstr ""
 #~ "F5           Révéler entièrement la carte (seulement si compilé pour le "
 #~ "déboguage)"
+
+#~ msgid "Janus"
+#~ msgstr "Janus"

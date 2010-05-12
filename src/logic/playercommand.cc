@@ -121,12 +121,12 @@ void PlayerCommand::Read
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (1 <= packet_version and packet_version <= PLAYER_COMMAND_VERSION) {
+		if (2 <= packet_version and packet_version <= PLAYER_COMMAND_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 			m_sender    = fr.Unsigned8 ();
 			if (not egbase.get_player(m_sender))
 				throw game_data_error(_("player %u does not exist"), m_sender);
-			m_cmdserial = 1 < packet_version ? fr.Unsigned32() : 0;
+			m_cmdserial = fr.Unsigned32();
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -190,8 +190,8 @@ void Cmd_Bulldoze::Write
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
 	// Now serial
-	Map_Object const & obj = *egbase.objects().get_object(serial);
-	fw.Unsigned32(mos.get_object_file_index(obj));
+	Map_Object const * obj = egbase.objects().get_object(serial);
+	fw.Unsigned32(obj ? mos.get_object_file_index(*obj) : 0);
 	fw.Unsigned8(recurse);
 }
 

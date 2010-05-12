@@ -17,25 +17,26 @@
  *
  */
 
-#include "launchgame.h"
 
-//#include "logic/editor_game_base.h"
-#include "loadgame.h"
-#include "mapselect.h"
-#include "logic/game.h"
-#include "wui/gamechatpanel.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "logic/instances.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "loadgame.h"
+#include "logic/game.h"
+#include "logic/instances.h"
 #include "logic/map.h"
-#include "map_io/map_loader.h"
 #include "logic/player.h"
+#include "map_io/map_loader.h"
+#include "mapselect.h"
 #include "playerdescrgroup.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "warning.h"
+#include "wui/gamechatpanel.h"
+
+#include "launchgame.h"
 
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	(GameSettingsProvider * const settings, GameController * const ctrl,
@@ -51,28 +52,35 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 
 // Buttons
 	m_select_map
-		(this,
-		 m_xres * 7 / 10, m_yres * 7 / 20, m_butw, m_buth,
+		(this, "select_map",
+		 m_xres * 7 / 10, m_yres * 3 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_LaunchGame::select_map, *this,
 		 _("Select map"), std::string(), false, false,
 		 m_fn, m_fs),
 	m_select_save
-		(this,
-		 m_xres * 7 / 10, m_yres * 4 / 10, m_butw, m_buth,
+		(this, "select_savegame",
+		 m_xres * 7 / 10, m_yres * 7 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_LaunchGame::select_savegame, *this,
 		 _("Select Savegame"), std::string(), false, false,
 		 m_fn, m_fs),
+	m_wincondition
+		(this, "win_condition",
+		 m_xres * 7 / 10 , m_yres * 4 / 10, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_LaunchGame::win_condition_clicked, *this,
+		 "", std::string(), false, false,
+		 m_fn, m_fs),
 	m_back
-		(this,
+		(this, "back",
 		 m_xres * 7 / 10, m_yres * 9 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_LaunchGame::back_clicked, *this,
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_ok
-		(this,
+		(this, "ok",
 		 m_xres * 7 / 10, m_yres * 1 / 2, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_LaunchGame::start_clicked, *this,
@@ -86,7 +94,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		 _("Launch Game"), UI::Align_HCenter),
 	m_mapname
 		(this,
-		 m_xres * 7 / 10 + m_butw / 2, m_yres * 3 / 10,
+		 m_xres * 7 / 10 + m_butw / 2, m_yres * 5 / 20,
 		 std::string(), UI::Align_HCenter),
 	m_lobby
 		(this,
@@ -123,6 +131,16 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	m_autolaunch   (autolaunch)
 {
 
+	// Register win condition scripts
+	m_lua = create_LuaInterface();
+	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+
+	ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
+	container_iterate_const(ScriptContainer, sc, wc)
+		m_win_conditions.push_back(wc->first);
+	m_cur_wincondition = -1;
+	win_condition_clicked();
+
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_name   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
@@ -137,7 +155,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
 		m_pos[i] =
 			new UI::Callback_IDButton<Fullscreen_Menu_LaunchGame, uint8_t>
-				(this,
+				(this, "switch_to_position",
 				 m_xres / 100, y += m_buth, m_yres * 17 / 500, m_yres * 17 / 500,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 g_gr->get_picture(PicMod_Game, posIco),
@@ -163,6 +181,9 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	}
 }
 
+Fullscreen_Menu_LaunchGame::~Fullscreen_Menu_LaunchGame() {
+	delete m_lua;
+}
 
 /**
  * In singleplayer:
@@ -230,6 +251,32 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
 		end_modal(0);
 }
 
+/**
+ * WinCondition button has been pressed
+ */
+void Fullscreen_Menu_LaunchGame::win_condition_clicked()
+{
+	if (m_settings->canChangeMap()) {
+		m_cur_wincondition++;
+		m_cur_wincondition %= m_win_conditions.size();
+		m_settings->setWinCondition(m_win_conditions[m_cur_wincondition]);
+	}
+
+	win_condition_update();
+}
+
+/**
+ * update win conditions information
+ */
+void Fullscreen_Menu_LaunchGame::win_condition_update() {
+	boost::shared_ptr<LuaTable> t = m_lua->run_script
+		("win_conditions", m_settings->getWinCondition());
+	std::string n = t->get_string("name");
+	std::string d = t->get_string("description");
+
+	m_wincondition.set_title(_("Type: ") + n);
+	m_wincondition.set_tooltip(d.c_str());
+}
 
 /**
  * start-button has been pressed
@@ -280,9 +327,10 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	m_select_map.set_visible(m_settings->canChangeMap());
 	m_select_map.set_enabled(m_settings->canChangeMap());
 	m_select_save.set_visible
-			(settings.multiplayer & m_settings->canChangeMap());
+		(settings.multiplayer && m_settings->canChangeMap());
 	m_select_save.set_enabled
-			(settings.multiplayer & m_settings->canChangeMap());
+		(settings.multiplayer && m_settings->canChangeMap());
+	m_wincondition.set_enabled(m_settings->canChangeMap() && !m_is_savegame);
 
 	if (settings.scenario)
 		set_scenario_values();
@@ -367,11 +415,13 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	}
 
 	// Care about Multiplayer clients, lobby and players
+	// As well as win_conditions (in SP they may only change, if clicked)
 	if (settings.multiplayer) {
 		m_lobby_list->clear();
 		container_iterate_const(std::vector<UserSettings>, settings.users, i)
 			if (i.current->position == UserSettings::none())
 				m_lobby_list->add(i.current->name.c_str(), 0);
+		win_condition_update();
 	}
 }
 

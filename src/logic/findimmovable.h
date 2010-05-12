@@ -24,8 +24,8 @@
 
 namespace Widelands {
 
-class BaseImmovable;
-class Player;
+struct BaseImmovable;
+struct Player;
 
 struct FindImmovable {
 private:

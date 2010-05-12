@@ -5,19 +5,22 @@ program=scout
 carrier=1
 
 [scout]
-0=scout 45000 # 45 seconds until return
+0=scout 75000 # 75 seconds until return
 
 [idle]
 pics=idle_??.png
-hotspot=11 22
+hotspot=11 25
 fps=10
+playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=10 21
+hotspot=11 25
 fps=10
+playercolor=true
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=10 21
+hotspot=11 25
 fps=10
+playercolor=true

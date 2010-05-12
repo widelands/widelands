@@ -17,27 +17,34 @@
  *
  */
 
-#include "logic/checkstep.h"
-#include "logic/cmd_queue.h"
+#include <boost/bind.hpp>
+#include <boost/format.hpp>
+
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/font_handler.h"
-#include "logic/game.h"
+#include "game_chat_menu.h"
+#include "game_debug_ui.h"
 #include "gamecontroller.h"
-#include "logic/immovable.h"
 #include "interactive_player.h"
+#include "logic/checkstep.h"
+#include "logic/cmd_queue.h"
+#include "logic/game.h"
+#include "logic/immovable.h"
 #include "logic/maptriangleregion.h"
+#include "logic/player.h"
+#include "logic/productionsite.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
 #include "minimap.h"
 #include "overlay_manager.h"
-#include "logic/player.h"
-#include "logic/productionsite.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "upcast.h"
 #include "wlapplication.h"
 
+using boost::format;
 using Widelands::Area;
 using Widelands::CoordPath;
 using Widelands::Coords;
@@ -103,6 +110,9 @@ Interactive_Base::Interactive_Base
 	m_sel.pic = g_gr->get_picture(PicMod_Game, "pics/fsel.png");
 
 	m_label_speed.set_visible(false);
+
+	setDefaultCommand (boost::bind(&Interactive_Base::cmdLua, this, _1));
+	addCommand("mapobject", boost::bind(&Interactive_Base::cmdMapObject, this, _1));
 }
 
 
@@ -193,6 +203,17 @@ void Interactive_Base::unset_sel_picture() {
 }
 
 
+void Interactive_Base::toggle_buildhelp() {
+	egbase().map().overlay_manager().toggle_buildhelp();
+}
+bool Interactive_Base::buildhelp() {
+	return egbase().map().overlay_manager().buildhelp();
+}
+void Interactive_Base::show_buildhelp(bool const t) {
+	egbase().map().overlay_manager().show_buildhelp(t);
+}
+
+
 /**
  * Retrieves the configured in-game resolution.
  *
@@ -280,7 +301,7 @@ void Interactive_Base::think()
 	// If one of the arrow keys is pressed, scroll here
 	const uint32_t scrollval = 10;
 
-	if (keyboard_free()) {
+	if (keyboard_free() && Panel::allow_user_input()) {
 		if (get_key_state(SDLK_UP))
 			set_rel_viewpoint(Point(0, -scrollval));
 		if (get_key_state(SDLK_DOWN))
@@ -569,7 +590,10 @@ void Interactive_Base::finish_build_road()
 		// Build the path as requested
 		ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_road
 			(m_road_build_player, *new Widelands::Path(*m_buildroad));
-		if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+		if
+			(allow_user_input() and
+			 (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)))
+		{
 			//  place flags
 			Map const & map = egbase().map();
 			std::vector<Coords>         const &       c_vector =
@@ -817,7 +841,16 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 					ctrl->setDesiredSpeed(1000 < speed ? speed - 1000 : 0);
 				}
 		return true;
-
+#ifdef DEBUG //  only in debug builds
+		case SDLK_F6:
+			if (get_display_flag(dfDebug)) {
+				new GameChatMenu
+					(this, m_debugconsole, *DebugConsole::getChatProvider());
+				ref_cast<GameChatMenu, UI::UniqueWindow>(*m_debugconsole.window)
+					.enter_chat_message(false);
+			}
+			return true;
+#endif
 	default:
 		break;
 	}
@@ -825,3 +858,47 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 	return Map_View::handle_key(down, code);
 }
 
+void Interactive_Base::cmdLua(std::vector<std::string> const & args)
+{
+	std::string cmd;
+
+	// Drop lua, start with the second word
+	for(wl_const_range<std::vector<std::string> >
+		i(args.begin(), args.end());;)
+	{
+		cmd += i.front();
+		if (i.advance().empty())
+			break;
+		cmd += ' ';
+	}
+
+	DebugConsole::write("Starting Lua interpretation!");
+	try {
+		egbase().lua().interpret_string(cmd);
+	} catch (LuaError & e) {
+		DebugConsole::write(e.what());
+	}
+
+	DebugConsole::write("Ending Lua interpretation!");
+}
+
+/**
+ * Show a map object's debug window
+ */
+void Interactive_Base::cmdMapObject(const std::vector<std::string>& args)
+{
+	if (args.size() != 2) {
+		DebugConsole::write("usage: mapobject <mapobject serial>");
+		return;
+	}
+
+	uint32_t serial = atoi(args[1].c_str());
+	Map_Object * obj = egbase().objects().get_object(serial);
+
+	if (!obj) {
+		DebugConsole::write(str(format("No Map_Object with serial number %1%") % serial));
+		return;
+	}
+
+	show_mapobject_debug(*this, *obj);
+}

@@ -20,16 +20,21 @@
 #ifndef _MILITARY_BOX_H_
 #define _MILITARY_BOX_H_
 
-#include "editor/ui_menus/editor_event_menu_new_event.h"
 #include "graphic/picture_id.h"
 #include "logic/attackable.h"
 #include "logic/player.h"
 
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
 #include <list>
 
+/**
+ * Military settings tab that is part of the \ref FieldActionWindow
+ *
+ * Used to configure the player's global military settings.
+ */
 struct MilitaryBox : public UI::Box {
 	MilitaryBox
 		(UI::Panel              * parent,
@@ -57,7 +62,8 @@ struct MilitaryBox : public UI::Box {
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
 		UI::Callback_Button<MilitaryBox> & add_button
 			(UI::Box           & parent,
-			 char const * picname,
+			 char const *,
+			 char const *,
 			 void (MilitaryBox::*fn)(),
 			 std::string const & tooltip_text);
 

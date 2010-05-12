@@ -37,14 +37,14 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 
 // Buttons
 	m_back
-		(this,
+		(this, "back",
 		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_LoadReplay::end_modal, *this, 0,
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_ok
-		(this,
+		(this, "ok",
 		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_LoadReplay::clicked_ok, *this,
@@ -118,12 +118,8 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			Widelands::Game_Loader gl(savename, game);
 			gl.preload_game(gpdp);
 
-			char const * extension, * fname =
-				FileSystem::FS_Filename(pname->c_str(), extension);
-			char fname_without_extension[extension - fname + 1];
-			for (char * p = fname_without_extension;; ++p, ++fname)
-				if (fname == extension) {*p = '\0'; break;} else *p = *fname;
-			m_list.add(fname_without_extension, *pname);
+			m_list.add
+				 (FileSystem::FS_FilenameWoExt(pname->c_str()).c_str(), *pname);
 		} catch (_wexception const &) {} //  we simply skip illegal entries
 	}
 

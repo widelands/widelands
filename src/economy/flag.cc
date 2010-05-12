@@ -34,6 +34,7 @@
 #include "upcast.h"
 #include "wexception.h"
 #include "logic/worker.h"
+#include "container_iterate.h"
 
 namespace Widelands {
 
@@ -76,14 +77,9 @@ Flag::~Flag()
 
 void Flag::load_finish(Editor_Game_Base & egbase) {
 	CapacityWaitQueue & queue = m_capacity_wait;
-	for
-		(struct {
-		 	CapacityWaitQueue::iterator       current;
-		 	CapacityWaitQueue::const_iterator end;
-		 } i = {queue.begin(), queue.end()};
-		 i .current != i .end;)
+	for (wl_range<CapacityWaitQueue > r(queue); r;)
 	{
-		Worker & worker = *i.current->get(egbase);
+		Worker & worker = *r->get(egbase);
 		Bob::State const * const state =
 			worker.get_state(Worker::taskWaitforcapacity);
 		if (not state)
@@ -98,11 +94,10 @@ void Flag::load_finish(Editor_Game_Base & egbase) {
 				 "queue.\n",
 				 worker.serial(), serial(), state->objvar1.serial());
 		else {
-			++i.current;
+			++r;
 			continue;
 		}
-		i.current = queue.erase(i.current);
-		i.end     = queue.end  ();
+		r = wl_erase(queue, r.current);
 	}
 }
 
@@ -245,6 +240,17 @@ void Flag::detach_road(int32_t const dir)
 
 	m_roads[dir - 1]->set_economy(0);
 	m_roads[dir - 1] = 0;
+}
+
+/**
+ * Return all positions we occupy on the map. For a Flag, this is only one
+*/
+BaseImmovable::PositionList Flag::get_positions
+	(const Editor_Game_Base &) const throw ()
+{
+	PositionList rv;
+	rv.push_back(m_position);
+	return rv;
 }
 
 /**
@@ -448,6 +454,19 @@ WareInstance * Flag::fetch_pending_item(Game & game, PlayerImmovable & dest)
 }
 
 /**
+ * Return a List of all the wares currently on this Flag. Do not rely
+ * the result value to stay valid and do not change them
+ */
+Flag::Wares Flag::get_items() {
+	Wares rv;
+
+	for (int32_t i = 0; i < m_item_filled; ++i)
+		rv.push_back(m_items[i].item);
+
+	return rv;
+}
+
+/**
  * Force a removal of the given item from this flag.
  * Called by \ref WareInstance::cleanup()
 */
@@ -506,7 +525,7 @@ void Flag::call_carrier
 	// Deal with the non-moving case quickly
 	if (!nextstep) {
 		pi->nextstep = 0;
-		pi->pending = false;
+		pi->pending = true;
 		return;
 	}
 
@@ -698,5 +717,28 @@ void Flag::flag_job_request_callback
 
 	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
+
+void Flag::log_general_info(const Widelands::Editor_Game_Base& egbase)
+{
+	molog("Flag at %i,%i\n", m_position.x, m_position.y);
+
+	Widelands::PlayerImmovable::log_general_info(egbase);
+
+	if (m_item_filled) {
+		molog("Wares at flag:\n");
+		for(int i = 0; i < m_item_filled; ++i) {
+			PendingItem& pi = m_items[i];
+			molog
+				(" %i/%i: %s(%i), nextstep %i, %s\n",
+				 i+1, m_item_capacity,
+				 pi.item->descr().name().c_str(), pi.item->serial(),
+				 pi.nextstep.serial(),
+				 pi.pending ? "pending" : "acked by carrier");
+		}
+	} else {
+		molog("No wares at flag.\n");
+	}
+}
+
 
 }

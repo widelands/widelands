@@ -4,7 +4,7 @@ picture=duck_00.png
 [idle]
 pics=duck_??.png
 sfx=0 ../../../sound/animals/duck
-hotspot=5 10
+hotspot=5 7
 
 [walk]
 hotspot=5 10

@@ -31,6 +31,11 @@ namespace UI {
 Panel * Panel::_modal       = 0;
 Panel * Panel::_g_mousegrab = 0;
 Panel * Panel::_g_mousein   = 0;
+
+// The following variable can be set to false. If so, all mouse and keyboard
+// events are ignored and not passed on to any widget. This is only useful
+// for scripts that want to show off functionality without the user interfering.
+bool Panel::_g_allow_user_input = true;
 PictureID Panel::s_default_cursor = g_gr->get_no_picture();
 
 
@@ -238,6 +243,9 @@ void Panel::end() {}
  */
 void Panel::set_size(const uint32_t nw, const uint32_t nh)
 {
+	if (nw == _w && nh == _h)
+		return;
+
 	uint32_t const upw = std::min(nw, _w);
 	uint32_t const uph = std::min(nh, _h);
 	_w = nw;
@@ -248,7 +256,19 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 		_cache = g_gr->create_picture_surface(_w, _h);
 	}
 
+	if (_parent) {
+		if (get_snapparent())
+			_parent->set_inner_size(nw, nh);
+
+		if (!(_parent->_flags & pf_internal_layouting)) {
+			_parent->_flags |= pf_internal_layouting;
+			_parent->layout();
+			_parent->_flags &= ~pf_internal_layouting;
+		}
+	}
+
 	update(0, 0, upw, uph);
+	move_inside_parent();
 }
 
 /**
@@ -264,9 +284,41 @@ void Panel::set_pos(const Point n) {
 }
 
 /**
- * Do nothing
-*/
-void Panel::move_inside_parent() {}
+ * Interpret \p pt as a point in the interior of this panel,
+ * and translate it into the interior coordinate system of the parent
+ * and return the result.
+ */
+Point Panel::to_parent(const Point& pt) const
+{
+	if (!_parent)
+		return pt;
+
+	return pt + Point(_lborder + _x, _tborder + _y);
+}
+
+
+/**
+ * Ensure the panel is inside the parent's visibile area after
+ * resizing.
+ *
+ * The default implementation does nothing, this is overriden
+ * by \ref Window
+ */
+void Panel::move_inside_parent()
+{
+}
+
+/**
+ * Automatically layout the children of this panel and adjust this
+ * panel's size, if necessary.
+ *
+ * This is always called when a child resizes.
+ *
+ * The default implementation does nothing.
+ */
+void Panel::layout()
+{
+}
 
 /**
  * Set the size of the inner area (total area minus border)
@@ -334,6 +386,9 @@ void Panel::move_to_top()
  */
 void Panel::set_visible(bool const on)
 {
+	if(((_flags & pf_visible) >1) == on)
+		return;
+
 	_flags &= ~pf_visible;
 	if (on)
 		_flags |= pf_visible;
@@ -620,6 +675,18 @@ void Panel::set_think(bool const yes)
 }
 
 /**
+ * Enables/disables resizing the parent to match our size whenever
+ * our size changes.
+ */
+void Panel::set_snapparent(bool snapparent)
+{
+	if (snapparent)
+		_flags |= pf_snap_parent_size;
+	else
+		_flags &= ~pf_snap_parent_size;
+}
+
+/**
  * Cause this panel to be removed on the next frame.
  * Use this for a panel that needs to destroy itself after a button has
  * been pressed (e.g. non-modal dialogs).
@@ -765,6 +832,9 @@ inline Panel * Panel::child_at_mouse_cursor
  */
 void Panel::do_mousein(bool const inside)
 {
+	if (not _g_allow_user_input)
+		return;
+
 	if (!inside && _mousein) {
 		_mousein->do_mousein(false);
 		_mousein = false;
@@ -778,6 +848,9 @@ void Panel::do_mousein(bool const inside)
  * Returns whether the event was processed.
  */
 bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
+	if (not _g_allow_user_input)
+		return true;
+
 	x -= _lborder;
 	y -= _tborder;
 	if (_flags & pf_top_on_click)
@@ -792,6 +865,9 @@ bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	return handle_mousepress(btn, x, y);
 }
 bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
+	if (not _g_allow_user_input)
+		return true;
+
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this)
@@ -807,6 +883,9 @@ bool Panel::do_mousemove
 	(Uint8 const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
+	if (not _g_allow_user_input)
+		return true;
+
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this)
@@ -827,6 +906,9 @@ bool Panel::do_mousemove
  */
 bool Panel::do_key(bool const down, SDL_keysym const code)
 {
+	if (not _g_allow_user_input)
+		return true;
+
 	if (_focus) {
 		if (_focus->do_key(down, code))
 			return true;
@@ -891,10 +973,16 @@ Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
  * panel.
 */
 void Panel::ui_mousepress(const Uint8 button, int32_t x, int32_t y) {
+	if (not _g_allow_user_input)
+		return;
+
 	if (Panel * const p = ui_trackmouse(x, y))
 		p->do_mousepress(button, x, y);
 }
 void Panel::ui_mouserelease(const Uint8 button, int32_t x, int32_t y) {
+	if (not _g_allow_user_input)
+		return;
+
 	if (Panel * const p = ui_trackmouse(x, y))
 		p->do_mouserelease(button, x, y);
 }
@@ -907,6 +995,9 @@ void Panel::ui_mousemove
 	(Uint8 const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
+	if (not _g_allow_user_input)
+		return;
+
 	if (!xdiff && !ydiff)
 		return;
 
@@ -929,6 +1020,9 @@ void Panel::ui_mousemove
  */
 void Panel::ui_key(bool const down, SDL_keysym const code)
 {
+	if (not _g_allow_user_input)
+		return;
+
 	_modal->do_key(down, code);
 }
 

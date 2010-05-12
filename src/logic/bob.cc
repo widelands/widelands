@@ -26,6 +26,8 @@
 #include "economy/transfer.h"
 #include "game.h"
 #include "game_data_error.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "wui/mapviewpixelconstants.h"
 #include "path.h"
 #include "player.h"
@@ -93,7 +95,9 @@ Bob::Descr::Descr
  * Create a bob of this type
  */
 Bob & Bob::Descr::create
-	(Editor_Game_Base & egbase, Player * const owner, Coords const coords) const
+	(Editor_Game_Base & egbase,
+	 Player * const owner,
+	 const Coords & coords) const
 {
 	Bob & bob = create_object();
 	bob.set_owner(owner);
@@ -291,8 +295,6 @@ void Bob::do_pop_task(Game & game)
 
 	delete state.path;
 	delete state.route;
-	if (state.transfer)
-		state.transfer->has_failed();
 
 	m_stack.pop_back();
 }
@@ -364,7 +366,7 @@ void Bob::signal_handled()
  * the top-most task's update() function is called, but only with a certain
  * delay.
  *
- * This function also calls all task's mask() function immediately.
+ * This function also calls all tasks' signal_immediate() function immediately.
  *
  * \param g the \ref Game object
  * \param sig the signal string
@@ -486,7 +488,7 @@ struct BlockedTracker {
 	};
 	typedef std::map<CoordData, bool, CoordOrdering> Cache;
 
-	BlockedTracker(Game & game, Bob & bob, Coords const finaldest)
+	BlockedTracker(Game & game, Bob & bob, const Coords & finaldest)
 		: m_game(game), m_bob(bob), m_map(game.map()), m_finaldest(finaldest)
 	{
 		nrblocked = 0;
@@ -575,7 +577,7 @@ struct CheckStepBlocked {
  */
 bool Bob::start_task_movepath
 	(Game                & game,
-	 Coords          const dest,
+	 Coords        const & dest,
 	 int32_t         const persist,
 	 DirAnimations const & anims,
 	 bool            const forceonlast,
@@ -690,10 +692,6 @@ bool Bob::start_task_movepath
 void Bob::movepath_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
-		if (serial() == 3755)
-			molog
-				("[movepath_update] signal '%s'; popping task\n",
-				 get_signal().c_str());
 		return pop_task(game);
 	}
 
@@ -917,10 +915,6 @@ int32_t Bob::start_walk
 	m_walkstart = game.get_gametime();
 	m_walkend = m_walkstart + tdelta;
 
-	if (serial() == 3755)
-		molog
-			("[start_walk]: changint position from (%i, %i) to (%i, %i)\n",
-			 get_position().x, get_position().y, newnode.x, newnode.y);
 	set_position(game, newnode);
 	set_animation(game, a);
 
@@ -971,7 +965,7 @@ void Bob::set_owner(Player * const player)
  * Performs the necessary (un)linking in the \ref Field structures and
  * updates the owner's viewing area, if the bob has an owner.
  */
-void Bob::set_position(Editor_Game_Base & egbase, Coords const coords)
+void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
 {
 	FCoords oldposition = m_position;
 
@@ -1063,10 +1057,201 @@ void Bob::log_general_info(Editor_Game_Base const & egbase)
 					 static_cast<long unsigned int>(j + 1),
 					 static_cast<long unsigned int>(nr_steps), path[j]);
 		}
-		molog("* transfer: %p\n",  m_stack[i].transfer);
 		molog("* route: %p\n",  m_stack[i].route);
 
 		molog("* program: %p\n",  m_stack[i].route);
+	}
+}
+
+
+/*
+==============================
+
+Load/save support
+
+==============================
+*/
+
+#define BOB_SAVEGAME_VERSION 1
+
+Bob::Loader::Loader()
+{
+}
+
+void Bob::Loader::load(FileRead & fr)
+{
+	Map_Object::Loader::load(fr);
+
+	uint8_t version = fr.Unsigned8();
+	if (version != BOB_SAVEGAME_VERSION)
+		throw game_data_error("unknown/unhandled version: %u", version);
+
+	Bob& bob = get<Bob>();
+
+	if (Player_Number owner_number = fr.Unsigned8()) {
+		if (owner_number > egbase().map().get_nrplayers())
+			throw game_data_error
+				("owner number is %u but there are only %u players",
+				 owner_number, egbase().map().get_nrplayers());
+
+		Player * owner = egbase().get_player(owner_number);
+		if (!owner)
+			throw game_data_error("owning player %u does not exist", owner_number);
+
+		bob.set_owner(owner);
+	}
+
+	bob.set_position(egbase(), fr.Coords32());
+
+	std::string animname = fr.CString();
+	bob.m_anim = animname.size() ? bob.descr().get_animation(animname) : 0;
+	bob.m_animstart = fr.Signed32();
+	bob.m_walking = static_cast<WalkingDir>(fr.Direction8_allow_null());
+	if (bob.m_walking) {
+		bob.m_walkstart = fr.Signed32();
+		bob.m_walkend = fr.Signed32();
+	}
+
+	bob.m_actid = fr.Unsigned32();
+	bob.m_signal = fr.CString();
+
+	uint32_t stacksize = fr.Unsigned32();
+	bob.m_stack.resize(stacksize);
+	states.resize(stacksize);
+	for(uint32_t i = 0; i < stacksize; ++i) {
+		State & state = bob.m_stack[i];
+		LoadState & loadstate = states[i];
+
+		state.task = get_task(fr.CString());
+		state.ivar1 = fr.Signed32();
+		state.ivar2 = fr.Signed32();
+		state.ivar3 = fr.Signed32();
+		loadstate.objvar1 = fr.Unsigned32();
+		state.svar1 = fr.CString();
+		state.coords = fr.Coords32_allow_null(egbase().map().extent());
+
+		if (fr.Unsigned8()) {
+			uint32_t anims[6];
+			for(int i = 0; i < 6; ++i)
+				anims[i] = bob.descr().get_animation(fr.CString());
+			state.diranims = new DirAnimations
+				(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
+		}
+
+		if (fr.Unsigned8()) {
+			state.path = new Path;
+			state.path->load(fr, egbase().map());
+		}
+
+		if (fr.Unsigned8()) {
+			state.route = new Route;
+			state.route->load(loadstate.route, fr);
+		}
+
+		std::string programname = fr.CString();
+		if (programname.size())
+			state.program = get_program(programname);
+	}
+}
+
+void Bob::Loader::load_pointers()
+{
+	Map_Object::Loader::load_pointers();
+
+	Bob& bob = get<Bob>();
+	for(uint32_t i = 0; i < bob.m_stack.size(); ++i) {
+		State & state = bob.m_stack[i];
+		LoadState & loadstate = states[i];
+
+		if (loadstate.objvar1)
+			state.objvar1 = &mol().get<Map_Object>(loadstate.objvar1);
+
+		if (state.route)
+			state.route->load_pointers(loadstate.route, mol());
+	}
+}
+
+void Bob::Loader::load_finish()
+{
+	Map_Object::Loader::load_finish();
+}
+
+const Bob::Task * Bob::Loader::get_task(const std::string& name)
+{
+	if (name == "move") return &taskMove;
+	if (name == "movepath") return &taskMovepath;
+	if (name == "idle") return &taskIdle;
+
+	throw game_data_error("unknown bob task '%s'", name.c_str());
+}
+
+const BobProgramBase * Bob::Loader::get_program(const std::string& name)
+{
+	throw game_data_error("unknown bob program '%s'", name.c_str());
+}
+
+void Bob::save(Editor_Game_Base & eg, Map_Map_Object_Saver & mos, FileWrite & fw)
+{
+	Map_Object::save(eg, mos, fw);
+
+	fw.Unsigned8(BOB_SAVEGAME_VERSION);
+
+	fw.Unsigned8(m_owner ? m_owner->player_number() : 0);
+	fw.Coords32(m_position);
+
+	// m_linkpprev and m_linknext are recreated automatically
+
+	fw.CString(m_anim ? descr().get_animation_name(m_anim) : "");
+	fw.Signed32(m_animstart);
+	fw.Direction8_allow_null(m_walking);
+	if (m_walking) {
+		fw.Signed32(m_walkstart);
+		fw.Signed32(m_walkend);
+	}
+
+	fw.Unsigned32(m_actid);
+	fw.CString(m_signal);
+
+	fw.Unsigned32(m_stack.size());
+	for(unsigned int i = 0; i < m_stack.size(); ++i) {
+		const State& state = m_stack[i];
+
+		fw.CString(state.task->name);
+		fw.Signed32(state.ivar1);
+		fw.Signed32(state.ivar2);
+		fw.Signed32(state.ivar3);
+		if (const Map_Object * obj = state.objvar1.get(eg)) {
+			fw.Unsigned32(mos.get_object_file_index(*obj));
+		} else {
+			fw.Unsigned32(0);
+		}
+		fw.CString(state.svar1);
+
+		fw.Coords32(state.coords);
+
+		if (state.diranims) {
+			fw.Unsigned8(1);
+			for(int dir = 1; dir <= 6; ++dir)
+				fw.CString(descr().get_animation_name(state.diranims->get_animation(dir)).c_str());
+		} else {
+			fw.Unsigned8(0);
+		}
+
+		if (state.path) {
+			fw.Unsigned8(1);
+			state.path->save(fw);
+		} else {
+			fw.Unsigned8(0);
+		}
+
+		if (state.route) {
+			fw.Unsigned8(1);
+			state.route->save(fw, eg, mos);
+		} else {
+			fw.Unsigned8(0);
+		}
+
+		fw.CString(state.program ? state.program->get_name() : "");
 	}
 }
 

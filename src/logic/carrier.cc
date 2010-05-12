@@ -19,6 +19,7 @@
 
 #include "carrier.h"
 #include "game.h"
+#include "game_data_error.h"
 #include "wexception.h"
 
 #include "economy/road.h"
@@ -71,6 +72,11 @@ void Carrier::road_update(Game & game, State & state)
 	if (signal == "road" || signal == "ware") {
 		// The road changed under us or we're supposed to pick up some ware
 		signal_handled();
+	} else if (signal == "blocked") {
+		// Blocked by an ongoing battle
+		signal_handled();
+		set_animation(game, descr().get_animation("idle"));
+		return schedule_act(game, 250);
 	} else if (signal.size()) {
 		// Something else happened (probably a location signal)
 		molog("[road]: Terminated by signal '%s'\n", signal.c_str());
@@ -144,6 +150,11 @@ void Carrier::transport_update(Game & game, State & state)
 
 	if (signal == "road") {
 		signal_handled();
+	} else if (signal == "blocked") {
+		// Blocked by an ongoing battle
+		signal_handled();
+		set_animation(game, descr().get_animation("idle"));
+		return schedule_act(game, 250);
 	} else if (signal.size()) {
 		molog("[transport]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
@@ -544,6 +555,61 @@ bool Carrier::start_task_walktoflag
 	return
 		start_task_movepath
 			(game, path, idx, descr().get_right_walk_anims(does_carry_ware()));
+}
+
+void Carrier::log_general_info(const Widelands::Editor_Game_Base& egbase)
+{
+	molog("Carrier at %i,%i\n", get_position().x, get_position().y);
+
+	Worker::log_general_info(egbase);
+
+	molog("m_acked_ware = %i\n", m_acked_ware);
+}
+
+/*
+==============================
+
+Load/save support
+
+==============================
+*/
+
+#define CARRIER_SAVEGAME_VERSION 1
+
+Carrier::Loader::Loader()
+{
+}
+
+void Carrier::Loader::load(FileRead& fr)
+{
+	Worker::Loader::load(fr);
+
+	uint8_t version = fr.Unsigned8();
+	if (version != CARRIER_SAVEGAME_VERSION)
+		throw game_data_error("unknown/unhandled version %u", version);
+
+	Carrier& carrier = get<Carrier>();
+	carrier.m_acked_ware = fr.Signed32();
+}
+
+const Bob::Task* Carrier::Loader::get_task(const std::string& name)
+{
+	if (name == "road") return &taskRoad;
+	if (name == "transport") return &taskTransport;
+	return Worker::Loader::get_task(name);
+}
+
+Carrier::Loader* Carrier::create_loader()
+{
+	return new Loader;
+}
+
+void Carrier::do_save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+{
+	Worker::do_save(egbase, mos, fw);
+
+	fw.Unsigned8(CARRIER_SAVEGAME_VERSION);
+	fw.Signed32(m_acked_ware);
 }
 
 }

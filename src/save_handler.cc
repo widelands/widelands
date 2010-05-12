@@ -36,6 +36,9 @@ using Widelands::Game_Saver;
 void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	initialize(realtime);
 
+	if (not m_allow_autosaving) // Is autosaving allowed atm?
+		return;
+
 	int32_t const autosaveInterval =
 		g_options.pull_section("global").get_int
 			("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);

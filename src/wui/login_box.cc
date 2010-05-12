@@ -25,7 +25,7 @@
 
 LoginBox::LoginBox(Panel & parent)
 :
-Window(&parent, 0, 0, 500, 230, _("Metaserver login"))
+Window(&parent, "login_box", 0, 0, 500, 210, _("Metaserver login"))
 {
 	center_to_parent();
 
@@ -35,8 +35,8 @@ Window(&parent, 0, 0, 500, 230, _("Metaserver login"))
 			(this, 150, 5, 330, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0, UI::Align_Left);
 
-	ta_emailadd = new UI::Textarea(this, 10, 40, _("email (optional):"));
-	eb_emailadd =
+	ta_password = new UI::Textarea(this, 10, 40, _("Password:"));
+	eb_password =
 		new UI::EditBox
 			(this, 150, 40, 330, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0, UI::Align_Left);
@@ -47,37 +47,32 @@ Window(&parent, 0, 0, 500, 230, _("Metaserver login"))
 			 _("WARNING: Password will be shown and saved readable!"),
 			 UI::Align_Center);
 
-	ta_password = new UI::Textarea(this, 10, 110, _("Password:"));
-	eb_password =
-		new UI::EditBox
-			(this, 150, 110, 330, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0, UI::Align_Left);
+	cb_register = new UI::Checkbox(this, Point(10, 110));
+	ta_register =
+		new UI::Textarea(this, 40, 110, _("Log in to a registered account"));
 
-	cb_register = new UI::Checkbox(this, Point(10, 135));
-	ta_register = new UI::Textarea(this, 40, 130, _("Register new account"));
-
-	cb_auto_log = new UI::Checkbox(this, Point(10, 160));
+	cb_auto_log = new UI::Checkbox(this, Point(10, 135));
 	ta_auto_log = new UI::Textarea
-		(this, 40, 155,
+		(this, 40, 135,
 		 _("Automatically use this login information from now on."));
 
 	new UI::Callback_Button<LoginBox>
-		(this,
-		 (get_inner_w() / 2 - 200) / 2, 195, 200, 20,
+		(this, "login",
+		 (get_inner_w() / 2 - 200) / 2, 175, 200, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &LoginBox::pressedLogin, *this,
 		 _("Login"));
 	new UI::Callback_Button<LoginBox>
-		(this,
-		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, 195, 200, 20,
+		(this, "cancel",
+		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, 175, 200, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &LoginBox::pressedCancel, *this,
 		 _("Cancel"));
 
 	Section & s = g_options.pull_section("global");
 	eb_nickname->setText(s.get_string("nickname", _("nobody")));
-	eb_emailadd->setText(s.get_string("emailadd", ""));
 	eb_password->setText(s.get_string("password", ""));
+	cb_register->set_state(s.get_bool("registered", false));
 }
 
 
@@ -100,9 +95,9 @@ void LoginBox::pressedLogin()
 		mb.run();
 		return;
 	}
-	if (eb_password->text().empty()) {
+	if (eb_password->text().empty() && cb_register->get_state()) {
 		UI::WLMessageBox mb
-			(this, _("Empty Password"), _("Please enter a password!"),
+			(this, _("Empty Password"), _("Please enter your password!"),
 			 UI::WLMessageBox::OK);
 		mb.run();
 		return;

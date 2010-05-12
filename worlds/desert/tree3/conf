@@ -34,7 +34,7 @@ mountain4=            2
 pics=idle_?.png
 sfx=0 ../../../sound/animals/bird3
 fps=10
-hotspot=24 60
+hotspot=24 59
 
 [program]
 animate=idle 1550000

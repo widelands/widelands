@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-13 06:53+0000\n"
-"Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-10 17:29+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-04-11 04:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -1059,55 +1059,62 @@ msgstr "Grafica"
 msgid "Homepage"
 msgstr "Pagina iniziale"
 
-#: ../../txts/developers:27
-msgid "Janus"
-msgstr "Janus"
-
-#: ../../txts/developers:31
+#: ../../txts/developers:29
 #: ../../txts/developers:323
 msgid "Sound"
 msgstr "Suono"
 
-#: ../../txts/developers:36
-#: ../../txts/developers:328
-msgid "Translation"
-msgstr "Traduzione"
-
-#: ../../txts/developers:44
+#: ../../txts/developers:38
 msgid "Coders"
 msgstr "Programmatori"
 
-#: ../../txts/developers:76
+#: ../../txts/developers:70
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:101
+#: ../../txts/developers:97
 msgid "Musicians"
 msgstr "Musicisti"
 
-#: ../../txts/developers:112
+#: ../../txts/developers:108
 msgid "Sound Effects"
 msgstr "Effetti sonori"
 
-#: ../../txts/developers:121
+#: ../../txts/developers:117
 msgid "Maps and Missions"
 msgstr "Mappe e Missioni"
 
-#: ../../txts/developers:134
+#: ../../txts/developers:130
 msgid "Campaign Story"
 msgstr "Storia della Campagna"
 
-#: ../../txts/developers:137
+#: ../../txts/developers:133
 msgid "Barbarian"
 msgstr "Barbaro"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:139
 msgid "Empire"
 msgstr "Impero"
 
-#: ../../txts/developers:149
+#: ../../txts/developers:145
 msgid "Translators"
 msgstr "Traduttori"
+
+#: ../../txts/developers:148
+msgid ""
+"NOTE: this list holds people that translated Widelands before we moved to "
+"launchpad.net. "
+msgstr ""
+"NOTA: questa lista contiene le persone che hanno tradotto Widelands prima "
+"del passaggio a launchpad.net. "
+
+#: ../../txts/developers:149
+msgid ""
+"See https://translations.launchpad.net/widelands for a list of people that "
+"helped to translate Widelands via launchpad.net."
+msgstr ""
+"Visita https://translations.launchpad.net/widelands per una lista delle "
+"persone che hanno aiutato a tradurre Widelands tramite launchpad.net."
 
 #: ../../txts/developers:153
 msgid "Czech"
@@ -1197,7 +1204,11 @@ msgstr "Documentazione, Aiuto e Wiki"
 msgid "Former elders"
 msgstr "Ex anziani"
 
-#: ../../txts/developers:334
+#: ../../txts/developers:328
+msgid "Translation"
+msgstr "Traduzione"
+
+#: ../../txts/developers:335
 msgid "Other"
 msgstr "Altro"
 
@@ -1487,6 +1498,13 @@ msgstr ""
 "Puoi usate '/me' per iniziare un mesaggio nella chat: '/me è stanco' verrà "
 "visualizzato come '-> Nomignolo è stanco'."
 
+#: ../../txts/tips/multiplayer.tip:10
+msgid ""
+"Use '@name' at the beginning of a chat message to send it to only one player."
+msgstr ""
+"Usa '@nome' all'inizio di un messaggio in chat per spedirlo solo ad un "
+"giocatore."
+
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
@@ -1503,3 +1521,6 @@ msgstr ""
 
 #~ msgid "Wiki and Enduser-Documentation"
 #~ msgstr "Wiki e Documentazione per l'utente finale"
+
+#~ msgid "Janus"
+#~ msgstr "Janus"

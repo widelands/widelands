@@ -29,13 +29,13 @@ Textarea::Textarea
 	 const std::string & text, const Align align, const bool multiline)
 	:
 		Panel      (parent, x, y, 0, 0),
-		m_text     (text),
 		m_align    (align),
 		m_multiline(multiline)
 {
 	set_handle_mouse(false);
 	set_think       (false);
 	set_font        (UI_FONT_SMALL, UI_FONT_CLR_FG);
+	set_text        (text);
 }
 
 Textarea::Textarea
@@ -76,6 +76,9 @@ Textarea:: Textarea
  * Set the text of the Textarea. Size is automatically adjusted
  */
 void Textarea::set_text(const std::string & text) {
+	if(m_text == text)
+		return;
+
 	collapse(); // collapse() implicitly updates
 
 	m_text = text;

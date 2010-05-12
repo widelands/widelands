@@ -27,6 +27,12 @@
 #include <string>
 #include <cstring>
 
+#ifdef _MSC_VER
+#ifndef __attribute__
+#define __attribute__(x)
+#endif
+#endif
+
 struct ZipFilesystem : public FileSystem {
 	ZipFilesystem(std::string const &);
 	virtual ~ZipFilesystem();
@@ -64,7 +70,7 @@ struct ZipFilesystem : public FileSystem {
 	virtual void Rename(std::string const &, std::string const &)
 		__attribute__ ((noreturn));
 
-	virtual unsigned long DiskSpace();
+	virtual unsigned long long DiskSpace();
 
 public:
 	static FileSystem * CreateFromDirectory(std::string const & directory);

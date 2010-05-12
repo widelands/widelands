@@ -20,14 +20,10 @@
 #ifndef STOCK_MENU_H
 #define STOCK_MENU_H
 
+#include "ui_basic/unique_window.h"
 #include "waresdisplay.h"
 
-#include "ui_basic/button.h"
-#include "ui_basic/unique_window.h"
-
-class WaresDisplay;
 struct Interactive_Player;
-namespace Widelands {struct Economy;}
 
 /*
  * Shows statistics about all stocks currently in the game of
@@ -40,35 +36,13 @@ struct Stock_Menu : public UI::UniqueWindow {
 
 private:
 	Interactive_Player &  m_player;
-	WaresDisplay          waresdisplay;
-	UI::Callback_Button<Stock_Menu> help;
-	UI::Callback_Button<Stock_Menu> switchpage;
-	enum {Wares, Workers} current_page;
-	void fill_waredisplay_with_wares  ();
-	void fill_waredisplay_with_workers();
+	WaresDisplay * m_all_wares;
+	WaresDisplay * m_all_workers;
+	WaresDisplay * m_warehouse_wares;
+	WaresDisplay * m_warehouse_workers;
 
-	/** Returns the horizontal/vertical spacing between buttons. */
-	uint32_t hspacing() const {return 5;};
-	uint32_t vspacing() const {return 5;};
-
-	/** Returns the horizontal/vertical margin between edge and buttons. */
-	uint32_t hmargin() const {return 2 * hspacing();}
-	uint32_t vmargin() const {return 2 * vspacing();}
-
-	/** Returns the width of a button in a row with nr_buttons buttons. */
-	uint32_t buttonw(const uint32_t nr_buttons) const {
-		return
-			(waresdisplay.get_w() - (nr_buttons + 3) * hspacing()) / nr_buttons;
-	}
-
-	/// Returns the x coordinate of the (left edge of) button number nr in a row
-	/// with nr_buttons buttons.
-	uint32_t posx(uint32_t const nr, uint32_t const nr_buttons) const {
-		return hmargin() + nr * (buttonw(nr_buttons) + hspacing());
-	}
-
-	void clicked_help       ();
-	void clicked_switch_page();
+	void fill_total_waresdisplay(WaresDisplay * waresdisplay, WaresDisplay::wdType type);
+	void fill_warehouse_waresdisplay(WaresDisplay * waresdisplay, WaresDisplay::wdType type);
 };
 
 #endif

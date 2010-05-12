@@ -21,10 +21,10 @@
 
 #include "checkstep.h"
 #include "cmd_expire_message.h"
+#include "cmd_luacoroutine.h"
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "events/event.h"
 #include "findimmovable.h"
 #include "game.h"
 #include "game_data_error.h"
@@ -34,6 +34,7 @@
 #include "soldier.h"
 #include "soldiercontrol.h"
 #include "sound/sound_handler.h"
+#include "scripting/scripting.h"
 #include "trainingsite.h"
 #include "tribe.h"
 #include "warehouse.h"
@@ -48,7 +49,7 @@
 
 namespace Widelands {
 
-extern Map_Object_Descr g_road_descr;
+extern const Map_Object_Descr g_road_descr;
 
 Player::Player
 	(Editor_Game_Base  & the_egbase,
@@ -101,15 +102,16 @@ void Player::create_default_infrastructure() {
 		try {
 			Tribe_Descr::Initialization const & initialization =
 				tribe().initialization(m_initialization_index);
+
 			Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
-			container_iterate_const
-				(std::vector<Event *>, initialization.events, i)
-			{
-				Event & event = **i.current;
-				event.set_player(player_number());
-				event.set_position(starting_pos);
-				event.run(game);
-			}
+
+			// Run the corresponding script
+			LuaCoroutine * cr = game.lua().run_script
+				(*g_fs, "tribes/" + tribe().name() +
+				 "/scripting/" +  initialization.name + ".lua",
+				 "tribe_" + tribe().name())->get_coroutine("func");
+			cr->push_arg(this);
+			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
 		} catch (Tribe_Descr::Nonexistent) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "
@@ -151,8 +153,29 @@ Message_Id Player::add_message
 			 	(game.get_gametime() + duration, player_number(), id));
 
 	if (Interactive_Player * const iplayer = game.get_ipl())
-		if (&iplayer->player() == this and popup)
-			iplayer->popup_message(id, message);
+		if (&iplayer->player() == this) {
+
+			// play sound if enabled
+			Section & s = g_options.pull_section("global");
+			if (s.get_bool("sound_at_message", true)) {
+				g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+
+				// Special voice sounds - turned of by default
+				if (s.get_bool("voice_at_message", false)) {
+					if (message.sender() == MSG_SND_UNDER_ATTACK)
+						g_sound_handler.play_fx
+							("under_attack", 125, PRIO_ALWAYS_PLAY);
+					else if (message.sender() == MSG_SND_SITE_LOST)
+						g_sound_handler.play_fx
+							("site_lost", 125, PRIO_ALWAYS_PLAY);
+					else if (message.sender() == MSG_SND_SITE_DEFEATED)
+						g_sound_handler.play_fx
+							("site_defeated", 125, PRIO_ALWAYS_PLAY);
+				}
+			}
+			if (popup)
+				iplayer->popup_message(id, message);
+		}
 
 	return id;
 }
@@ -212,16 +235,16 @@ NodeCaps Player::get_buildcaps(FCoords const fc) const {
 }
 
 
-/*
-===============
-Build a flag, checking that it's legal to do so.
-===============
-*/
-void Player::build_flag(Coords const c) {
+/**
+ * Build a flag, checking that it's legal to do so. Returns
+ * the flag in case of success, else returns 0;
+ */
+Flag * Player::build_flag(Coords const c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
-		new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+		return new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+	return 0;
 }
 
 
@@ -255,7 +278,7 @@ Note: the diagnostic log messages aren't exactly errors. They might happen
 in some situations over the network.
 ===============
 */
-void Player::build_road(const Path & path) {
+Road * Player::build_road(const Path & path) {
 	Map & map = egbase().map();
 	FCoords fc = map.get_fcoords(path.get_start());
 	if (upcast(Flag, start, fc.field->get_immovable())) {
@@ -271,22 +294,24 @@ void Player::build_road(const Path & path) {
 						log
 							("%i: building road, immovable in the way, type=%d\n",
 							 player_number(), imm->get_type());
-						return;
+						return 0;
 					}
 				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
 					log("%i: building road, unwalkable\n", player_number());
-					return;
+					return 0;
 				}
 			}
-			Road::create(egbase(), *start, *end, path);
+			return &Road::create(egbase(), *start, *end, path);
 		} else
 			log("%i: building road, missed end flag\n", player_number());
 	} else
 		log("%i: building road, missed start flag\n", player_number());
+
+	return 0;
 }
 
 
-void Player::force_road(Path const & path, bool const create_carrier) {
+Road & Player::force_road(Path const & path) {
 	Map & map = egbase().map();
 	FCoords c = map.get_fcoords(path.get_start());
 	Flag & start = force_flag(c);
@@ -307,11 +332,11 @@ void Player::force_road(Path const & path, bool const create_carrier) {
 			immovable->remove(egbase());
 		}
 	}
-	Road::create(egbase(), start, end, path, create_carrier);
+	return Road::create(egbase(), start, end, path);
 }
 
 
-void Player::force_building
+Building & Player::force_building
 	(Coords                const location,
 	 Building_Index        const idx,
 	 uint32_t      const *       ware_counts,
@@ -345,9 +370,10 @@ void Player::force_building
 				immovable->remove(egbase());
 		}
 	}
-	descr.create
-		(egbase(), *this, c[0], false,
-		 ware_counts, worker_counts, &soldier_counts);
+	return
+		descr.create
+		(egbase(), *this, c[0], false, ware_counts,
+		 worker_counts, &soldier_counts);
 }
 
 
@@ -714,8 +740,10 @@ void Player::enemyflagaction
 					findAttackSoldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
 
-					retreat = std::max(retreat, tribe().get_military_data().get_min_retreat());
-					retreat = std::min(retreat, tribe().get_military_data().get_max_retreat());
+					retreat = std::max
+						(retreat, tribe().get_military_data().get_min_retreat());
+					retreat = std::min
+						(retreat, tribe().get_military_data().get_max_retreat());
 
 					container_iterate_const(std::vector<Soldier *>, attackers, i)
 						ref_cast<MilitarySite, PlayerImmovable>
@@ -751,7 +779,7 @@ throw ()
 			const Map_Object_Descr * map_object_descr;
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
-				if (map_object_descr == &g_road_descr)
+				if (Road::IsRoadDescr(map_object_descr))
 					map_object_descr = 0;
 				else if (upcast(Building const, building, base_immovable))
 					if (building->get_position() != f)
@@ -796,8 +824,7 @@ void Player::see_node
 	(Map              const &       map,
 	 Widelands::Field const &       first_map_field,
 	 FCoords                  const f,
-	 Time                     const gametime,
-	 bool                     const lasting)
+	 Time                     const gametime)
 throw ()
 {
 	assert(0 <= f.x);
@@ -813,12 +840,9 @@ throw ()
 	Vision fvision = field.vision;
 	if (fvision == 0)
 		fvision = 1;
-	if (fvision == 1) {
-		if (not lasting)
-			field.time_node_last_unseen = gametime;
+	if (fvision == 1)
 		discover_node(map, first_map_field, f, field);
-	}
-	fvision += lasting;
+	fvision ++;
 	field.vision = fvision;
 }
 

@@ -57,9 +57,7 @@ Building_Descr::Building_Descr
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_hints         (prof.get_section("aihints")),
-#ifdef WRITE_GAME_DATA_AS_HTML
 	m_global        (false),
-#endif
 	m_vision_range  (0)
 {
 	try {
@@ -119,6 +117,7 @@ Building_Descr::Building_Descr
 				("\"enhancements=%s\": %s", v->get_string(), e.what());
 		}
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
+	m_global = directory.find("global/") < directory.size();
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
 		m_buildicon_fname  = directory;
@@ -155,6 +154,10 @@ Building_Descr::Building_Descr
 					("[buildcost] \"%s=%s\": %s",
 					 val->get_name(), val->get_string(), e.what());
 			}
+	} else if (m_global) {
+		//  get build icon for global buildings (for statistics window)
+		m_buildicon_fname  = directory;
+		m_buildicon_fname += "/menu.png";
 	}
 
 	{ //  parse basic animation data
@@ -169,9 +172,6 @@ Building_Descr::Building_Descr
 		g_sound_handler.load_fx(directory, v->get_string());
 
 	m_vision_range = global_s.get_int("vision_range");
-#ifdef WRITE_GAME_DATA_AS_HTML
-	m_global = directory.find("global/") < directory.size();
-#endif
 }
 
 
@@ -183,12 +183,17 @@ Building & Building_Descr::create
 	 uint32_t       const * const ware_counts,
 	 uint32_t       const * const worker_counts,
 	 Soldier_Counts const * const soldier_counts,
-	 Building_Descr const * const old)
+	 Building_Descr const * const old,
+	 bool                         loading)
 	const
 {
 	Building & b = construct ? create_constructionsite(old) : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
+	if (loading) {
+		b.Building::init(egbase);
+		return b;
+	}
 	b.prefill
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 ware_counts, worker_counts, soldier_counts);
@@ -196,7 +201,6 @@ Building & Building_Descr::create
 	b.postfill
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 ware_counts, worker_counts, soldier_counts);
-
 	return b;
 }
 
@@ -284,14 +288,9 @@ Building::~Building()
 
 void Building::load_finish(Editor_Game_Base & egbase) {
 	Leave_Queue & queue = m_leave_queue;
-	for
-		(struct {
-		 	Leave_Queue::iterator       current;
-		 	Leave_Queue::const_iterator end;
-		 } i = {queue.begin(), queue.end()};
-		 i .current != i .end;)
+	for (wl_range<Leave_Queue> i(queue); i;)
 	{
-		Worker & worker = *i.current->get(egbase);
+		Worker & worker = *i->get(egbase);
 		{
 			OPtr<PlayerImmovable> const worker_location = worker.get_location();
 			if
@@ -316,11 +315,10 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 				 "leavebuilding task is for map object %u! Removing from queue.\n",
 				 worker.serial(), serial(), state->objvar1.serial());
 		else {
-			++i.current;
+			++i;
 			continue;
 		}
-		i.current = queue.erase(i.current);
-		i.end     = queue.end  ();
+		i = wl_erase(queue, i.current);
 	}
 }
 
@@ -461,6 +459,32 @@ bool Building::burn_on_destroy()
 }
 
 
+/**
+ * Return all positions on the map that we occupy
+ */
+BaseImmovable::PositionList Building::get_positions
+	(const Editor_Game_Base & egbase) const throw ()
+{
+	PositionList rv;
+
+	rv.push_back(m_position);
+	if (get_size() == BIG) {
+		Map & map = egbase.map();
+		Coords neighb;
+
+		map.get_ln(m_position, &neighb);
+		rv.push_back(neighb);
+
+		map.get_tln(m_position, &neighb);
+		rv.push_back(neighb);
+
+		map.get_trn(m_position, &neighb);
+		rv.push_back(neighb);
+	}
+	return rv;
+}
+
+
 /*
 ===============
 Remove the building from the world now, and create a fire in its place if
@@ -495,7 +519,7 @@ std::string Building::info_string(std::string const & format) {
 	std::ostringstream result;
 	container_iterate_const(std::string, format, i)
 		if (*i.current == '%') {
-			if (++i.current == i.end) { //  unterminated format sequence
+			if (i.advance().empty()) { //  unterminated format sequence
 				result << '%';
 				break;
 			}

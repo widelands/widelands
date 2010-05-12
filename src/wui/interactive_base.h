@@ -22,6 +22,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
+#include "debugconsole.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "mapview.h"
@@ -41,7 +42,8 @@ struct InteractiveBaseInternals;
  * This is used to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-struct Interactive_Base : public Map_View {
+struct Interactive_Base : public Map_View, public DebugConsole::Handler {
+
 	friend class Sound_Handler;
 
 	enum {
@@ -69,6 +71,10 @@ struct Interactive_Base : public Map_View {
 		return m_sel.pos;
 	}
 	bool get_sel_freeze() const {return m_sel.freeze;}
+
+	bool buildhelp();
+	void show_buildhelp(bool const t);
+	void toggle_buildhelp ();
 
 	/**
 	 * sel_triangles determines whether the mouse pointer selects triangles.
@@ -167,13 +173,18 @@ protected:
 	}
 	UI::Box           m_toolbar;
 
+
 private:
+	void cmdMapObject(std::vector<std::string> const & args);
+	void cmdLua(std::vector<std::string> const & args);
 	void update_speedlabel();
 
 	UI::Textarea m_label_speed;
+	UI::UniqueWindow::Registry m_debugconsole;
 };
 
 #define PIC2 g_gr->get_picture(PicMod_UI, "pics/but2.png")
-#define TOOLBAR_BUTTON_COMMON_PARAMETERS &m_toolbar, 0, 0, 34U, 34U, PIC2
+#define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) \
+    &m_toolbar, name, 0, 0, 34U, 34U, PIC2
 
 #endif

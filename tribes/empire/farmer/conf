@@ -11,9 +11,9 @@ scythe=1
 0=setdescription tribe:field0t
 1=findspace size:any radius:2 space
 2=walk coords
-3=animation idle 500
+3=animation idle 4000  #orig 500
 4=plant
-5=animation idle 500
+5=animation idle 4000  #orig 500
 6=return
 
 [harvest]
@@ -22,7 +22,7 @@ scythe=1
 2=playFX ../../../sound/farm/scythe 220
 3=animation idle 10000
 4=object harvest
-5=animation idle 2000
+5=animation idle 4000  #orig 2000
 6=createitem wheat
 7=return
 

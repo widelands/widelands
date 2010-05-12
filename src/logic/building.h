@@ -43,7 +43,7 @@ struct Profile;
 
 namespace Widelands {
 
-class Flag;
+struct Flag;
 struct Message;
 struct Tribe_Descr;
 struct WaresQueue;
@@ -66,6 +66,7 @@ struct Building_Descr : public Map_Object_Descr {
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
 	bool is_enhanced    () const {return m_enhanced_building;}
+	bool global() const {return m_global;}
 	typedef std::map<Ware_Index, uint8_t> Buildcost;
 	Buildcost const & buildcost() const throw () {return m_buildcost;}
 	PictureID get_buildicon() const {return m_buildicon;}
@@ -75,7 +76,7 @@ struct Building_Descr : public Map_Object_Descr {
 
 	typedef std::set<Building_Index> Enhancements;
 	Enhancements const & enhancements() const throw () {return m_enhancements;}
-	void add_enhancement(Building_Index const i) {
+	void add_enhancement(const Building_Index & i) {
 		assert(not m_enhancements.count(i));
 		m_enhancements.insert(i);
 	}
@@ -95,11 +96,11 @@ struct Building_Descr : public Map_Object_Descr {
 		 uint32_t       const * ware_counts    = 0,
 		 uint32_t       const * worker_counts  = 0,
 		 Soldier_Counts const * soldier_counts = 0,
-		 Building_Descr const * old = 0)
+		 Building_Descr const * old = 0,
+		 bool                   loading = false)
 		const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTML(::FileWrite &) const;
-	bool global() const {return m_global;}
 #endif
 	virtual void load_graphics();
 
@@ -128,9 +129,7 @@ private:
 	Enhancements  m_enhancements;
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
-#ifdef WRITE_GAME_DATA_AS_HTML
 	bool          m_global;            // whether this is a "global" building
-#endif
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;
@@ -166,7 +165,9 @@ public:
 
 	virtual Flag & base_flag();
 	virtual uint32_t get_playercaps() const throw ();
+
 	virtual Coords get_position() const throw () {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 
 	std::string const & name() const throw ();
 	const std::string & descname() const throw () {return descr().descname();}

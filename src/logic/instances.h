@@ -44,7 +44,7 @@ struct Map_Map_Object_Loader;
  * link them together
  */
 struct Map_Object_Descr {
-	friend class ::DirAnimations;
+	friend struct ::DirAnimations;
 	typedef uint8_t Index;
 	Map_Object_Descr(char const * const _name, char const * const _descname)
 		: m_name(_name), m_descname(_descname)
@@ -60,6 +60,7 @@ struct Map_Object_Descr {
 			throw Animation_Nonexistent();
 		return it->second;
 	}
+	uint32_t get_animation(const std::string& name) const {return get_animation(name.c_str());}
 
 	uint32_t main_animation() const throw () {
 		return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
@@ -237,7 +238,9 @@ public:
 		header_Immovable = 2,
 		header_Legacy_Battle = 3,
 		header_Legacy_AttackController = 4,
-		header_Battle = 5
+		header_Battle = 5,
+		header_Critter = 6,
+		header_Worker = 7
 	};
 
 	/**
@@ -276,7 +279,7 @@ public:
 		}
 
 	protected:
-		virtual void load(FileRead &, uint8_t version);
+		void load(FileRead &);
 
 	public:
 		virtual void load_pointers();
@@ -379,13 +382,13 @@ struct Object_Ptr {
 	Map_Object * get(Editor_Game_Base const &);
 	Map_Object const * get(Editor_Game_Base const & egbase) const;
 
-	bool operator<  (Object_Ptr const other) const throw () {
+	bool operator<  (const Object_Ptr & other) const throw () {
 		return m_serial < other.m_serial;
 	}
-	bool operator== (Object_Ptr const other) const throw () {
+	bool operator== (const Object_Ptr & other) const throw () {
 		return m_serial == other.m_serial;
 	}
-	bool operator!= (Object_Ptr const other) const throw () {
+	bool operator!= (const Object_Ptr & other) const throw () {
 		return m_serial != other.m_serial;
 	}
 

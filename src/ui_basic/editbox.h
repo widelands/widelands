@@ -77,6 +77,8 @@ private:
 	PictureID   m_cache_pid;
 
 	boost::scoped_ptr<EditBoxImpl> m;
+
+	void check_caret();
 };
 
 }

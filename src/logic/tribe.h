@@ -133,6 +133,9 @@ struct Tribe_Descr {
 	Bob::Descr const * get_bob_descr(uint16_t const index) const {
 		return m_bobs.get(index);
 	}
+	Bob::Descr const * get_bob_descr(const std::string& name) const {
+		return m_bobs.exists(name.c_str());
+	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
 
 	std::vector<Ware_Index> const & worker_types_without_cost() const {
@@ -201,7 +204,6 @@ struct Tribe_Descr {
 	struct Initialization {
 		std::string          name;
 		std::string          descname;
-		std::vector<Event *> events;
 	};
 	typedef std::vector<Initialization> Initializations;
 	Initialization const & initialization(uint8_t const index) const {

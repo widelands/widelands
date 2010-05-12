@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
@@ -25,7 +26,6 @@
 #include "md5.h"
 #include "random.h"
 #include "save_handler.h"
-#include "scripting/scripting.h"
 
 namespace UI {struct ProgressWindow;}
 struct Computer_Player;
@@ -40,7 +40,7 @@ namespace Widelands {
 struct Flag;
 struct Path;
 struct PlayerImmovable;
-struct TrainingSite;
+class TrainingSite;
 
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
@@ -82,7 +82,7 @@ struct Game : public Editor_Game_Base {
 	friend class Cmd_Queue; // this class handles the commands
 	friend class Game_Game_Class_Data_Packet;
 	friend class Game_Player_Info_Data_Packet;
-	friend class Game_Loader;
+	friend struct Game_Loader;
 	friend struct ::Game_Main_Menu_Load_Game;
 	friend struct ::WLApplication;
 
@@ -176,11 +176,6 @@ struct Game : public Editor_Game_Base {
 	void ReadStatistics(FileRead &, uint32_t version);
 	void WriteStatistics(FileWrite &);
 
-
-	/// Lua frontend, used to run lua triggers and events.
-	LuaInterface * lua() {return m_lua;}
-
-
 private:
 	/// \param preferred_player
 	///  When conquer is false, this can be used to prefer a player over other
@@ -227,6 +222,7 @@ private:
 			m_game          (game),
 			m_target        (target),
 			m_counter       (0),
+			m_next_diskspacecheck(0),
 			m_dump          (0),
 			m_syncstreamsave(false)
 		{}
@@ -247,6 +243,7 @@ private:
 		Game        &   m_game;
 		StreamWrite &   m_target;
 		uint32_t        m_counter;
+		uint32_t        m_next_diskspacecheck;
 		::StreamWrite * m_dump;
 		std::string     m_dumpfname;
 		bool            m_syncstreamsave;
@@ -277,8 +274,6 @@ private:
 
 	uint32_t m_last_stats_update;
 	General_Stats_vector m_general_stats;
-
-	LuaInterface       * m_lua;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

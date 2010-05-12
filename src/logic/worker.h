@@ -26,7 +26,7 @@
 #include "productionsite.h"
 
 namespace Widelands {
-struct Building;
+class Building;
 
 /**
  * Worker is the base class for all humans (and actually potential non-humans,
@@ -141,9 +141,9 @@ public:
 	void create_needed_experience(Game &);
 	Ware_Index level             (Game &);
 
-	int32_t get_needed_experience() const {return m_needed_exp;}
+	int32_t get_needed_experience() const {return descr().get_level_experience();}
 	int32_t get_current_experience() const {return m_current_exp;}
-	bool needs_experience() const {return m_needed_exp != -1;}
+	bool needs_experience() const {return get_needed_experience() != -1;}
 
 	// debug
 	virtual void log_general_info(Editor_Game_Base const &);
@@ -181,6 +181,8 @@ protected:
 
 	bool does_carry_ware() {return m_carried_item.is_set();}
 
+	void set_program_objvar(Game &, State &, Map_Object * obj);
+
 public:
 	static const Task taskTransfer;
 	static const Task taskBuildingwork;
@@ -199,10 +201,11 @@ public:
 private:
 	// task details
 	void transfer_update(Game &, State &);
-	void transfer_signalimmediate(Game &, State &, std::string const & signal);
+	void transfer_pop(Game &, State &);
 	void buildingwork_update(Game &, State &);
 	void return_update(Game &, State &);
 	void program_update(Game &, State &);
+	void program_pop(Game &, State &);
 	void gowarehouse_update(Game &, State &);
 	void gowarehouse_signalimmediate
 		(Game &,
@@ -222,7 +225,6 @@ private:
 
 	// Program commands
 	bool run_mine             (Game &, State &, Action const &);
-	bool run_lua              (Game &, State &, Action const &);
 	bool run_breed            (Game &, State &, Action const &);
 	bool run_createitem       (Game &, State &, Action const &);
 	bool run_setdescription   (Game &, State &, Action const &);
@@ -249,8 +251,36 @@ private:
 	Economy          * m_economy;      ///< economy this worker is registered in
 	OPtr<WareInstance>    m_carried_item; ///< item we are carrying
 	IdleWorkerSupply * m_supply;   ///< supply while gowarehouse and not transfer
-	int32_t                m_needed_exp;   ///< experience for next level
+	Transfer * m_transfer; ///< where we are currently being sent
 	int32_t                m_current_exp;  ///< current experience
+
+	// saving and loading
+protected:
+	class Loader : public Bob::Loader {
+	public:
+		Loader();
+
+		virtual void load(FileRead &);
+		virtual void load_pointers();
+		virtual void load_finish();
+
+	protected:
+		virtual const Task * get_task(const std::string& name);
+		virtual const BobProgramBase * get_program(const std::string& name);
+
+	private:
+		uint32_t m_location;
+		uint32_t m_carried_item;
+	};
+
+	virtual Loader* create_loader();
+
+public:
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void do_save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+
+	static Map_Object::Loader * load
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
 
 }

@@ -42,7 +42,7 @@ WLMessageBox::WLMessageBox
 	 const std::string & text,
 	 const MB_Type type)
 	:
-	Window(parent, 0, 0, 20, 20, caption.c_str()),
+	Window(parent, "message_box", 0, 0, 20, 20, caption.c_str()),
 	d(new WLMessageBoxImpl)
 {
 	d->type = type;
@@ -71,6 +71,8 @@ WLMessageBox::WLMessageBox
 	width += 10 + 2 * d->textarea->scrollbar_w();
 	if (width < 100)
 		width = 100;
+	if (width > maxwidth)
+		width = maxwidth;
 	height += 50;
 	if (height > static_cast<uint32_t>(maxheight))
 		height = maxheight;
@@ -82,20 +84,20 @@ WLMessageBox::WLMessageBox
 
 	if (type == OK) {
 		new Callback_Button<WLMessageBox>
-			(this,
+			(this, "ok",
 			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 			 &WLMessageBox::pressedOk, *this,
 			 _("OK"));
 	} else if (type == YESNO) {
 		new Callback_Button<WLMessageBox>
-			(this,
+			(this, "yes",
 			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 			 &WLMessageBox::pressedYes, *this,
 			 _("Yes"));
 		new Callback_Button<WLMessageBox>
-			(this,
+			(this, "no",
 			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),

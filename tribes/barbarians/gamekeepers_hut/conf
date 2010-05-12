@@ -20,8 +20,8 @@ worker=release
 
 [idle]
 pics=gamekeeper_i_??.png
-hotspot=49 45
+hotspot=43 40
 
 [build]
 pics=gamekeeper_i_??.png
-hotspot=49 45
+hotspot=43 40

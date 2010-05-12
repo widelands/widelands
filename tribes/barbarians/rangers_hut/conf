@@ -18,7 +18,7 @@ worker=plant
 
 [idle]
 pics=b_ranger_i_??.png  # ???
-hotspot=45 44
+hotspot=43 43
 
 [build]
 pics=b_ranger_b_??.png  # ???

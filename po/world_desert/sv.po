@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:27+0000\n"
-"Last-Translator: Sigra <esigra@gmail.com>\n"
+"POT-Creation-Date: 2010-03-14 14:51+0000\n"
+"PO-Revision-Date: 2010-03-14 17:15+0000\n"
+"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-03-15 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
@@ -121,7 +121,7 @@ msgstr "Palm"
 #: ../../worlds/desert/conf:64
 #: ../../worlds/desert/conf:68
 msgid "Palm medium"
-msgstr ""
+msgstr "Palm mellan"
 
 #: ../../worlds/desert/conf:53
 #: ../../worlds/desert/conf:57
@@ -129,7 +129,7 @@ msgstr ""
 #: ../../worlds/desert/conf:65
 #: ../../worlds/desert/conf:69
 msgid "Palm small"
-msgstr ""
+msgstr "Palm liten"
 
 #: ../../worlds/desert/conf:54
 #: ../../worlds/desert/conf:58
@@ -137,55 +137,55 @@ msgstr ""
 #: ../../worlds/desert/conf:66
 #: ../../worlds/desert/conf:70
 msgid "Palm tiny"
-msgstr ""
+msgstr "Palm mycket liten"
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
-msgstr ""
+msgstr "Bok"
 
 #: ../../worlds/desert/conf:72
 msgid "Beech medium"
-msgstr ""
+msgstr "Bok mellan"
 
 #: ../../worlds/desert/conf:73
 msgid "Beech small"
-msgstr ""
+msgstr "Bok liten"
 
 #: ../../worlds/desert/conf:74
 msgid "Beech tiny"
-msgstr ""
+msgstr "Bok mycket liten"
 
 #: ../../worlds/desert/conf:75
 msgid "Larch"
-msgstr ""
+msgstr "Lärkträd"
 
 #: ../../worlds/desert/conf:76
 msgid "Larch medium"
-msgstr ""
+msgstr "Lärkträd mellan"
 
 #: ../../worlds/desert/conf:77
 msgid "Larch small"
-msgstr ""
+msgstr "Lärkträd litet"
 
 #: ../../worlds/desert/conf:78
 msgid "Larch tiny"
-msgstr ""
+msgstr "Lärkträd mycket litet"
 
 #: ../../worlds/desert/conf:79
 msgid "Rowan"
-msgstr ""
+msgstr "Rönn"
 
 #: ../../worlds/desert/conf:80
 msgid "Rowan medium"
-msgstr ""
+msgstr "Rönn mellan"
 
 #: ../../worlds/desert/conf:81
 msgid "Rowan small"
-msgstr ""
+msgstr "Rönn liten"
 
 #: ../../worlds/desert/conf:82
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Rönn mycket liten"
 
 #: ../../worlds/desert/conf:85
 msgid "Bunny"

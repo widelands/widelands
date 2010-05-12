@@ -17,6 +17,7 @@
  *
  */
 
+#include "config.h"
 #include "graphic.h"
 
 #include "build_info.h"
@@ -305,7 +306,7 @@ void Graphic::update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h)
 /**
  * Returns true if parts of the screen have been marked for refreshing.
 */
-bool Graphic::need_update()
+bool Graphic::need_update() const
 {
 	return m_nr_update_rects || m_update_fullscreen;
 }
@@ -631,6 +632,7 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 		uint32_t surf_w = surf.get_w();
 		uint32_t surf_h = surf.get_h();
 		uint32_t row_size = 4 * surf_w;
+
 		png_bytep rowb = NULL;
 		png_bytep rowp = NULL;
 
@@ -642,14 +644,24 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 		upcast(SurfaceOpenGL, oglsurf, &surf);
 		if (sdlsurf) {
 			fmt = const_cast<SDL_PixelFormat*>(&sdlsurf->format());
-			rowb = new png_byte[row_size];
+			rowb = (new png_byte[row_size]);
+			if (!rowb) 
+				throw wexception("Out of memory.");
+			//rowb = new png_byte[row_size];
 		} else if (oglsurf) {
 			oglsurf->lock();
 			fmt = NULL;
 		} else
 			return;
 		
+
+		SDL_PixelFormat & format = const_cast<SDL_PixelFormat &>(surf.format());
+
+	// Write each row
+
+
 		for (uint32_t y = 0; y < surf_h; ++y) {
+
 			rowp = rowb;
 			if(sdlsurf)
 				for (uint32_t x = 0; x < surf_w; rowp += 4, ++x)
@@ -662,6 +674,7 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 					(oglsurf->get_pixels() + oglsurf->get_pitch() * (surf_h - y - 1));
 			} else
 				throw wexception("Try to save save_png with unknown surface\n");
+
 			png_write_row(png_ptr, rowb);
 		}
 		if(oglsurf)
@@ -808,16 +821,7 @@ void Graphic::free_picture_surface(const PictureID & picid) {
 	//delete pic->surface;
 	//pic.surface = 0;
 	//pic.module = 0;
-	for
-		(struct {
-		 	Picturemap::      iterator       current;
-		 	Picturemap::const_iterator const end;
-		 } it = {
-		 	m_picturemap[picid->module].begin(),
-		 	m_picturemap[picid->module].end  ()
-		 };
-		 it.current != it.end;
-		 ++it.current)
+	container_iterate(Picturemap, m_picturemap[picid->module], it)
 		if (it.current->second == picid) {
 			m_picturemap[picid->module].erase(it.current);
 			break;
@@ -957,7 +961,7 @@ void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 		const uint32_t percent = 100 * id / nr_animations;
 		if (percent != last_shown) {
 			last_shown = percent;
-			loader_ui.stepf(step_description, percent);
+			loader_ui.stepf(step_description.c_str(), percent);
 		}
 		++id;
 		m_animations.push_back(new AnimationGfx(g_anim.get_animation(id)));

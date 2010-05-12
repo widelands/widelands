@@ -21,6 +21,11 @@
 #define MESSAGE_ID_H
 
 #include <stdint.h>
+#ifdef _MSC_VER
+#ifndef __attribute__
+#define __attribute__(x) 
+#endif
+#endif
 
 namespace Widelands {
 

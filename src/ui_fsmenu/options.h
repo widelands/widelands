@@ -32,7 +32,7 @@
 #include <cstring>
 #include <vector>
 
-class Fullscreen_Menu_Options;
+struct Fullscreen_Menu_Options;
 struct Section;
 
 #define NUM_RESOLUTIONS 6
@@ -60,6 +60,7 @@ struct Options_Ctrl {
 		bool remove_syncstreams;
 
 		// advanced options
+		bool message_sound;
 		bool nozip;
 		std::string ui_font;
 		int32_t speed_of_new_game;
@@ -164,6 +165,8 @@ private:
 	UI::Textarea                m_title;
 	UI::Listselect<std::string> m_ui_font_list;
 	UI::Textarea                m_label_ui_font;
+	UI::Checkbox                m_message_sound;
+	UI::Textarea                m_label_message_sound;
 	UI::Checkbox                m_nozip;
 	UI::Textarea                m_label_nozip, m_label_speed;
 

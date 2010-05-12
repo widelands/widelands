@@ -31,6 +31,7 @@ namespace UI {
 
 Button::Button //  for textual buttons
 	(Panel * const parent,
+	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 PictureID background_picture_id,
 	 std::string const & title_text,
@@ -39,7 +40,7 @@ Button::Button //  for textual buttons
 	 std::string const & fontname,
 	 uint32_t const      fontsize)
 	:
-	Panel           (parent, x, y, w, h, tooltip_text),
+	NamedPanel           (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
 	m_pressed       (false),
 	m_enabled       (_enabled),
@@ -61,6 +62,7 @@ Button::Button //  for textual buttons
 
 Button::Button //  for pictorial buttons
 	(Panel * const parent,
+	 const std::string & name,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 PictureID background_picture_id,
 	 const PictureID foreground_picture_id,
@@ -69,7 +71,7 @@ Button::Button //  for pictorial buttons
 	 const std::string & fontname,
 	 const uint32_t      fontsize)
 	:
-	Panel           (parent, x, y, w, h, tooltip_text),
+	NamedPanel      (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
 	m_pressed       (false),
 	m_enabled       (_enabled),
@@ -102,8 +104,10 @@ void Button::set_pic(PictureID const picid)
 	m_title.clear();
   
 	//log("Button::set_pic\n");
-	if(m_pic_custom != picid)
-		m_needredraw=true;
+       if(m_pic_custom == picid)
+               return;
+
+       m_needredraw=true;
 
 	m_pic_custom = picid;
 	if (m_pic_custom_disabled != g_gr->get_no_picture())
@@ -136,10 +140,10 @@ void Button::set_title(std::string const & title) {
 */
 void Button::set_enabled(bool const on)
 {
-	if(m_enabled!=on)
-		m_needredraw=true;
-
-	//log("Button::set_enabled\n");
+	if(m_enabled == on)
+		return;
+ 
+	m_needredraw=true;
 
 	// disabled buttons should look different...
 	if (on)
@@ -163,13 +167,14 @@ void Button::set_enabled(bool const on)
 void Button::draw(RenderTarget & dst)
 {
 /*
+
 	if(!m_needredraw)
 	{
 		odst.blit(Point(0, 0), m_cache_pid);
 		return;
 	}
 
-	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
+	m_cache_pid = g_gr->create_surface_a(odst.get_w(), odst.get_h());
 	
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
 */
@@ -179,10 +184,12 @@ void Button::draw(RenderTarget & dst)
 			(Rect(Point(0, 0), get_w(), get_h()),
 			 m_pic_background,
 			 Point(get_x(), get_y()));
+	else
+		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
 	
 			 
-	if (m_enabled and m_highlighted)
+	if (m_enabled and m_highlighted and not m_flat)
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
@@ -198,6 +205,7 @@ void Button::draw(RenderTarget & dst)
 			 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
 			 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
 			 m_enabled ? m_pic_custom : m_pic_custom_disabled);
+
 	} else if (m_title.length()) //  otherwise draw title string centered
 		UI::g_fh->draw_string
 			(dst,
@@ -217,7 +225,7 @@ void Button::draw(RenderTarget & dst)
 	//  a pressed but not highlighted button occurs when the user has pressed
 	//  the left mouse button and then left the area of the button or the button
 	//  stays pressed when it is pressed once
-	RGBColor black(0, 0, 0);
+	RGBAColor black(0, 0, 0, 255);
 
 	if (not m_flat) {
 		assert(2 <= get_w());
@@ -255,12 +263,20 @@ void Button::draw(RenderTarget & dst)
 	} else {
 		//  Button is flat, do not draw borders, instead, if it is pressed, draw
 		//  a box around it.
-		if (m_pressed && m_highlighted)
-			dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
+		if (m_enabled and m_highlighted )
+		{
+			RGBAColor shade(100, 100, 100, 80);
+			dst.fill_rect(Rect(Point(0, 0), get_w(), 2), shade);
+			dst.fill_rect(Rect(Point(0, 2), 2, get_h() - 2), shade);
+			dst.fill_rect(Rect(Point(0, get_h() -2 ), get_w(), get_h()), shade);
+			dst.fill_rect(Rect(Point(get_w() - 2, 0), get_w(), get_h()), shade);
+			//dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
+		}
 	}
-	
+
 	//odst.blit(Point(0, 0), m_cache_pid);
 	//m_needredraw=false;
+
 }
 
 void Button::think()
@@ -292,11 +308,13 @@ void Button::handle_mousein(bool const inside)
 	bool oldhl = m_highlighted;
 
 	m_highlighted = inside && m_enabled;
-	update();
 
-	//if(oldhl != m_highlighted)
-	//	m_needredraw = true;
-}	
+       if(oldhl == m_highlighted)
+               return;
+
+       m_needredraw = true;
+	update();
+}
 
 
 /**
@@ -343,5 +361,9 @@ bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 	}
 	return true;
 }
+bool Button::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t) {
+	return true; // We handle this always by lighting up
+}
+
 
 }

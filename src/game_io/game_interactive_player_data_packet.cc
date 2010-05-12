@@ -41,18 +41,24 @@ void Game_Interactive_Player_Data_Packet::Read
 		FileRead fr;
 		fr.Open(fs, "binary/interactive_player");
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
-			Player_Number const player_number =
+		if (packet_version == CURRENT_PACKET_VERSION) {
+			Player_Number player_number =
 				fr.Player_Number8(game.map().get_nrplayers());
-			if (not game.get_player(player_number))
-				throw game_data_error
-					(_("player %u does not exist in the game"), player_number);
+			if (not game.get_player(player_number)) {
+				// This happens if the player, that saved the game, was a spectator
+				// and the slot for player 1 was not used in the game.
+				// So now we try to create an InteractivePlayer object for another
+				// player instead.
+				const Player_Number max = game.map().get_nrplayers();
+				for (player_number = 1; player_number <= max; ++player_number)
+					if (game.get_player(player_number))
+						break;
+				if (player_number > max)
+					throw game_data_error(_("The game has no players!"));
+			}
 			int32_t       const x             = fr.Unsigned16();
 			int32_t       const y             = fr.Unsigned16();
 			uint32_t      const display_flags = fr.Unsigned32();
-
-			if (packet_version == 1)
-				game.m_last_stats_update = fr.Unsigned32();
 
 			if (Interactive_Player * const plr = game.get_ipl()) {
 				plr->set_player_number(player_number);
@@ -66,11 +72,6 @@ void Game_Interactive_Player_Data_Packet::Read
 				uint32_t const realdf =
 					(olddf & ~loaded_df) | (display_flags & loaded_df);
 				plr->set_display_flags(realdf);
-
-				if (packet_version == 1) {
-					plr->get_player()->ReadStatistics(fr, 0);
-					game.ReadStatistics(fr, 0);
-				}
 			}
 		} else
 			throw game_data_error

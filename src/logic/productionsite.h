@@ -38,6 +38,7 @@ struct ProductionProgram;
 class Soldier;
 struct Request;
 struct WaresQueue;
+struct Worker_Descr;
 
 
 /**
@@ -148,6 +149,7 @@ public:
 	virtual void act(Game &, uint32_t data);
 
 	virtual void remove_worker(Worker &);
+	int warp_worker(Game &, const Worker_Descr & wd);
 
 	virtual bool fetch_from_flag(Game &);
 	virtual bool get_building_work(Game &, Worker &, bool success);
@@ -157,6 +159,8 @@ public:
 	typedef std::vector<WaresQueue *> Input_Queues;
 	Input_Queues const & warequeues() const {return m_input_queues;}
 	std::vector<Worker *> const & workers() const;
+
+	bool can_start_working() const throw ();
 
 protected:
 	virtual void create_options_window
@@ -195,7 +199,6 @@ protected:
 	virtual void program_end(Game &, Program_Result);
 
 	void calc_statistics();
-	bool can_start_working() const throw ();
 	void try_start_working(Game &);
 	void set_post_timer (int32_t const t) {m_post_timer = t;}
 

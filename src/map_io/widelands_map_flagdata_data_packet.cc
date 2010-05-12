@@ -122,8 +122,11 @@ throw (_wexception)
 
 					//  Roads are set somewhere else.
 
+					// Compatibility stuff: Read 6 bytes of attic stuff
+					// that is no longer used (was m_items_pending)
 					for (uint32_t i = 0; i < 6; ++i)
-						flag.m_items_pending[i] = fr.Unsigned32();
+						fr.Unsigned32();
+
 					flag.m_item_capacity = fr.Unsigned32();
 
 					{
@@ -242,8 +245,10 @@ void Map_Flagdata_Data_Packet::Write
 
 			//  Roads are not saved, they are set on load.
 
+			// Compatibility stuff: Write 6 bytes of attic stuff that is
+			// no longer used (was m_items_pending)
 			for (uint32_t i = 0; i < 6; ++i)
-				fw.Unsigned32(flag->m_items_pending[i]);
+				fw.Unsigned32(0);
 
 			fw.Unsigned32(flag->m_item_capacity);
 

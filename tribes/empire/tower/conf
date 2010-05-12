@@ -1,9 +1,7 @@
 size=medium
 max_soldiers=5
-heal_per_second=5
+heal_per_second=2
 conquers=9
-max_medics=2
-heal_increase_per_medic=3
 vision_range=19
 
 [buildcost]
@@ -14,4 +12,8 @@ marblecolumn=2
 
 [idle]
 pics=tower_i_??.png
+hotspot=55 92
+
+[build]
+pics=tower_b_??.png
 hotspot=55 92

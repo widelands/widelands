@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,9 +81,12 @@ m_pit     (pit)
 		if (cur_x == immovables_in_row) {
 			cur_x = 0;
 			pos = Point(5, 15);
-			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
-			box->resize();
-			m_tabpanel.add(tab_icon, box);
+			box = new UI::Box
+				 (&m_tabpanel, 0, 0, UI::Box::Horizontal, parent.get_inner_w() - 50,
+				  parent.get_inner_h() - 50);
+			box->layout();
+			box->set_scrolling(true);
+			m_tabpanel.add("immovables", tab_icon, box);
 		}
 		assert(box);
 
@@ -104,7 +107,7 @@ m_pit     (pit)
 	}
 
 	m_tabpanel.activate(0);
-	m_tabpanel.resize();
+	m_tabpanel.layout();
 }
 
 /**

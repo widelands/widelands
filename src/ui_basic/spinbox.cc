@@ -23,6 +23,7 @@
 #include "button.h"
 #include "textarea.h"
 #include "wexception.h"
+#include "container_iterate.h"
 
 #include <vector>
 
@@ -117,7 +118,7 @@ SpinBox::SpinBox
 	sbi->text->set_font(sbi->fontname, sbi->fontsize, sbi->fontcolor);
 	sbi->butPlus =
 		new Callback_IDButton<SpinBox, int32_t>
-			(this,
+			(this, "+",
 			 butw * 21 / 10, 0, butw, butw,
 			 sbi->background,
 			 &SpinBox::changeValue, *this, 1,
@@ -125,7 +126,7 @@ SpinBox::SpinBox
 			 true, false, sbi->fontname, sbi->fontsize);
 	sbi->butMinus =
 		new Callback_IDButton<SpinBox, int32_t>
-			(this,
+			(this, "-",
 			 w - butw * 31 / 10, 0, butw, butw,
 			 sbi->background,
 			 &SpinBox::changeValue, *this, -1,
@@ -136,7 +137,7 @@ SpinBox::SpinBox
 	if (m_big) {
 		sbi->butTenPlus =
 			new Callback_IDButton<SpinBox, int32_t>
-				(this,
+				(this, "++",
 				 0, 0, butw * 2, butw,
 				 sbi->background,
 				 &SpinBox::changeValue, *this, 10,
@@ -144,7 +145,7 @@ SpinBox::SpinBox
 				 true, false, sbi->fontname, sbi->fontsize);
 		sbi->butTenMinus =
 			new Callback_IDButton<SpinBox, int32_t>
-				(this,
+				(this, "--",
 				 w - 2 * butw, 0, butw * 2, butw,
 				 sbi->background,
 				 &SpinBox::changeValue, *this, -10,
@@ -161,13 +162,11 @@ SpinBox::SpinBox
  */
 void SpinBox::update()
 {
+
 	for
-		(struct {
-		 	std::vector<IntValueTextReplacement>::const_iterator       current;
-		 	std::vector<IntValueTextReplacement>::const_iterator const end;
-		 } i = {sbi->valrep.begin(), sbi->valrep.end()};;
-		 ++i.current)
-		if (i.current == i.end) {
+		(wl_const_range<std::vector<IntValueTextReplacement> >
+		i(sbi->valrep);; ++i)
+		if (i.empty()) {
 			char buf[64];
 			snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
 			sbi->text->set_text(buf);
