@@ -690,7 +690,7 @@ function training()
 
    local citadel_field = wl.map.Field(31, 63)
 
-   build_eastern_trainings_area(citadel_fild)
+   build_eastern_trainings_area(citadel_field)
    sleep(8000)
 
    msg_box(warfare_and_training_01)

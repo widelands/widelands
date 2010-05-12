@@ -24,6 +24,8 @@
 #include "font_handler.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
+#include "log.h"
+
 
 namespace UI {
 
@@ -44,6 +46,7 @@ Button::Button //  for textual buttons
 	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
+	m_needredraw    (true),
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (g_gr->get_no_picture()),
@@ -74,6 +77,7 @@ Button::Button //  for pictorial buttons
 	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
+	m_needredraw    (true),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
 	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
@@ -98,6 +102,12 @@ Button::~Button() {
 void Button::set_pic(PictureID const picid)
 {
 	m_title.clear();
+  
+	//log("Button::set_pic\n");
+       if(m_pic_custom == picid)
+               return;
+
+       m_needredraw=true;
 
 	m_pic_custom = picid;
 	if (m_pic_custom_disabled != g_gr->get_no_picture())
@@ -112,9 +122,14 @@ void Button::set_pic(PictureID const picid)
  * Set a text title for the Button
 */
 void Button::set_title(std::string const & title) {
+	if(m_title == title)
+		 return;
+  
 	m_pic_custom = g_gr->get_no_picture();
 	m_title      = title;
 
+	//log("Button::set_title\n");
+	m_needredraw=true;
 	update();
 }
 
@@ -125,6 +140,11 @@ void Button::set_title(std::string const & title) {
 */
 void Button::set_enabled(bool const on)
 {
+	if(m_enabled == on)
+		return;
+ 
+	m_needredraw=true;
+
 	// disabled buttons should look different...
 	if (on)
 		m_enabled = true;
@@ -144,16 +164,30 @@ void Button::set_enabled(bool const on)
 /**
  * Redraw the button
 */
-void Button::draw(RenderTarget & dst)
+void Button::draw(RenderTarget & odst)
 {
+	if(!m_needredraw)
+	{
+		odst.blit(Point(0, 0), m_cache_pid);
+		return;
+	}
+
+	m_cache_pid = g_gr->create_surface_a(odst.get_w(), odst.get_h());
+	
+	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
+
 	// Draw the background
 	if (not m_flat)
 		dst.tile
 			(Rect(Point(0, 0), get_w(), get_h()),
 			 m_pic_background,
 			 Point(get_x(), get_y()));
+	else
+		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
-	if (m_enabled and m_highlighted)
+	
+			 
+	if (m_enabled and m_highlighted and not m_flat)
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
@@ -164,11 +198,12 @@ void Button::draw(RenderTarget & dst)
 
 		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
 		//  is that -1 >> 1 is -1 but -1 / 2 is 0).
-		dst.blit
+		dst.blit_a
 			(Point
 			 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
 			 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
-			 m_enabled ? m_pic_custom : m_pic_custom_disabled);
+			 m_enabled ? m_pic_custom : m_pic_custom_disabled, not m_flat);
+
 	} else if (m_title.length()) //  otherwise draw title string centered
 		UI::g_fh->draw_string
 			(dst,
@@ -188,7 +223,7 @@ void Button::draw(RenderTarget & dst)
 	//  a pressed but not highlighted button occurs when the user has pressed
 	//  the left mouse button and then left the area of the button or the button
 	//  stays pressed when it is pressed once
-	RGBColor black(0, 0, 0);
+	RGBAColor black(0, 0, 0, 255);
 
 	if (not m_flat) {
 		assert(2 <= get_w());
@@ -226,9 +261,18 @@ void Button::draw(RenderTarget & dst)
 	} else {
 		//  Button is flat, do not draw borders, instead, if it is pressed, draw
 		//  a box around it.
-		if (m_pressed && m_highlighted)
-			dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
+		if (m_enabled and m_highlighted )
+		{
+			RGBAColor shade(100, 100, 100, 80);
+			dst.fill_rect(Rect(Point(0, 0), get_w(), 2), shade);
+			dst.fill_rect(Rect(Point(0, 2), 2, get_h() - 2), shade);
+			dst.fill_rect(Rect(Point(0, get_h() -2 ), get_w(), get_h()), shade);
+			dst.fill_rect(Rect(Point(get_w() - 2, 0), get_w(), get_h()), shade);
+			//dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
+		}
 	}
+	odst.blit(Point(0, 0), m_cache_pid);
+	m_needredraw = false;
 }
 
 void Button::think()
@@ -236,7 +280,6 @@ void Button::think()
 	assert(m_repeating);
 	assert(m_pressed);
 	Panel::think();
-
 
 	if (m_highlighted) {
 		int32_t const time = WLApplication::get()->get_time();
@@ -258,7 +301,14 @@ void Button::think()
 */
 void Button::handle_mousein(bool const inside)
 {
+	bool oldhl = m_highlighted;
+
 	m_highlighted = inside && m_enabled;
+
+       if(oldhl == m_highlighted)
+               return;
+
+       m_needredraw = true;
 	update();
 }
 
@@ -273,6 +323,8 @@ bool Button::handle_mousepress(Uint8 const btn, int32_t, int32_t) {
 	if (m_enabled) {
 		assert(m_highlighted);
 		grab_mouse(true);
+		if(!m_pressed)
+			m_needredraw=true;
 		m_pressed = true;
 		if (m_repeating) {
 			m_time_nextact =
@@ -290,6 +342,8 @@ bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 
 	set_think(false);
 	if (m_pressed) {
+		if(m_pressed)
+			m_needredraw=true;
 		m_pressed = false;
 		grab_mouse(false);
 		update();

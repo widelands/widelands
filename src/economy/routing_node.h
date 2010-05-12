@@ -22,6 +22,7 @@
 
 #include <vector>
 
+#include "cookie_priority_queue.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
@@ -57,19 +58,25 @@ typedef std::vector<RoutingNodeNeighbour> RoutingNodeNeighbours;
  * this interface has been extracted to reduce coupling
  */
 class RoutingNode {
-	friend struct Router;
-	friend class RoutingNodeQueue;
+public:
+	struct LessCost {
+		bool operator()(const RoutingNode& a, const RoutingNode& b) const {
+			return a.cost() < b.cost();
+		}
+	};
+	typedef cookie_priority_queue<RoutingNode, LessCost> Queue;
 
 // The variables are only protected so that Test classes can use them
 protected:
+	friend struct Router;
 	uint32_t      mpf_cycle;
-	int32_t       mpf_heapindex;
+	Queue::cookie mpf_cookie;
 	int32_t       mpf_realcost; ///< real cost of getting to this flag
 	RoutingNode * mpf_backlink; ///< flag where we came from
 	int32_t       mpf_estimate; ///< estimate of cost to destination
 
 public:
-	RoutingNode() : mpf_cycle(0), mpf_heapindex(0),
+	RoutingNode() : mpf_cycle(0),
 		mpf_realcost(0), mpf_backlink(0), mpf_estimate(0) {}
 	virtual ~RoutingNode() {}
 
@@ -78,6 +85,7 @@ public:
 	}
 
 	int32_t cost() const {return mpf_realcost + mpf_estimate;}
+	Queue::cookie& cookie() {return mpf_cookie;}
 
 	virtual int32_t get_waitcost() const = 0;
 	virtual void get_neighbours(RoutingNodeNeighbours &) = 0;

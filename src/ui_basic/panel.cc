@@ -386,6 +386,9 @@ void Panel::move_to_top()
  */
 void Panel::set_visible(bool const on)
 {
+	if(((_flags & pf_visible) >1) == on)
+		return;
+
 	_flags &= ~pf_visible;
 	if (on)
 		_flags |= pf_visible;

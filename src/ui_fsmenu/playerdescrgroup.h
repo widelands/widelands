@@ -56,6 +56,7 @@ private:
 	void toggle_playerinit();
 
 	PlayerDescriptionGroupImpl * d;
+	std::map<std::string,std::string> m_tribenames;
 };
 
 
