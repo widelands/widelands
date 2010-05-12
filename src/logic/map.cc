@@ -1720,163 +1720,6 @@ Map_Loader * Map::get_correct_loader(char const * const filename) {
 }
 
 /**
- * Provides the flexible priority queue to maintain the open list.
- */
-struct StarQueue {
-	void flush() {m_data.clear();}
-
-	// Return the best node and readjust the tree
-	// Basic idea behind the algorithm:
-	//  1. the top slot of the tree is empty
-	//  2. if this slot has both children:
-	//       fill this slot with one of its children or with slot[_size],
-	//       whichever is best;
-	//       if we filled with slot[_size], stop
-	//       otherwise, repeat the algorithm with the child slot
-	//     if it doesn't have any children (l >= _size)
-	//       put slot[_size] in its place and stop
-	//     if only the left child is there
-	//       arrange left child and slot[_size] correctly and stop
-	Pathfield * pop() {
-		if (m_data.empty())
-			return 0;
-
-		Pathfield * const head = m_data[0];
-
-		uint32_t nsize = m_data.size() - 1;
-		uint32_t fix = 0;
-		while (fix < nsize) {
-			uint32_t l = fix * 2 + 1;
-			uint32_t r = fix * 2 + 2;
-			if (l >= nsize) {
-				m_data[fix] = m_data[nsize];
-				m_data[fix]->heap_index = fix;
-				break;
-			}
-			if (r >= nsize) {
-				if (m_data[nsize]->cost() <= m_data[l]->cost()) {
-					m_data[fix] = m_data[nsize];
-					m_data[fix]->heap_index = fix;
-				} else {
-					m_data[fix] = m_data[l];
-					m_data[fix]->heap_index = fix;
-					m_data[l] = m_data[nsize];
-					m_data[l]->heap_index = l;
-				}
-				break;
-			}
-
-			if
-				(m_data[nsize]->cost() <= m_data[l]->cost() &&
-				 m_data[nsize]->cost() <= m_data[r]->cost())
-			{
-				m_data[fix] = m_data[nsize];
-				m_data[fix]->heap_index = fix;
-				break;
-			}
-			if (m_data[l]->cost() <= m_data[r]->cost()) {
-				m_data[fix] = m_data[l];
-				m_data[fix]->heap_index = fix;
-				fix = l;
-			} else {
-				m_data[fix] = m_data[r];
-				m_data[fix]->heap_index = fix;
-				fix = r;
-			}
-		}
-
-
-		m_data.pop_back();
-
-		if (m_data.size())
-			debug(0, "pop");
-
-
-		head->heap_index = -1;
-		return head;
-	}
-
-	// Add a new node and readjust the tree
-	// Basic idea:
-	//  1. Put the new node in the last slot
-	//  2. If parent slot is worse than self, exchange places and recurse
-	// Note that I rearranged this a bit so swap isn't necessary
-	void push(Pathfield & t) {
-		uint32_t slot = m_data.size();
-		m_data.push_back(static_cast<Pathfield *>(0));
-
-		while (slot > 0) {
-			uint32_t parent = (slot - 1) / 2;
-
-			if (m_data[parent]->cost() < t.cost())
-				break;
-
-			m_data[slot] = m_data[parent];
-			m_data[slot]->heap_index = slot;
-			slot = parent;
-		}
-		m_data[slot] = &t;
-		t.heap_index = slot;
-
-		debug(0, "push");
-	}
-
-	// Rearrange the tree after a node has become better, i.e. move the
-	// node up
-	// Pushing algorithm is basically the same as in push()
-	void boost(Pathfield & t) {
-		uint32_t slot = t.heap_index;
-
-		assert(m_data[slot] == &t);
-
-		while (slot > 0) {
-			uint32_t parent = (slot - 1) / 2;
-
-			if (m_data[parent]->cost() <= t.cost())
-				break;
-
-			m_data[slot] = m_data[parent];
-			m_data[slot]->heap_index = slot;
-			slot = parent;
-		}
-		m_data[slot] = &t;
-		t.heap_index = slot;
-
-		debug(0, "boost");
-	}
-
-	// Recursively check integrity
-	void debug(uint32_t const node, char const * const str) {
-#if 0
-		uint32_t l = node * 2 + 1;
-		uint32_t r = node * 2 + 2;
-		if (m_data[node]->heap_index != static_cast<int32_t>(node)) {
-			fprintf(stderr, "%s: heap_index integrity!\n", str);
-			exit(-1);
-		}
-		if (l < m_data.size()) {
-			if (m_data[node]->cost() > m_data[l]->cost()) {
-				fprintf(stderr, "%s: Integrity failure\n", str);
-				exit(-1);
-			}
-			debug(l, str);
-		}
-		if (r < m_data.size()) {
-			if (m_data[node]->cost() > m_data[r]->cost()) {
-				fprintf(stderr, "%s: Integrity failure\n", str);
-				exit(-1);
-			}
-			debug(r, str);
-		}
-#endif
-	}
-
-private:
-	std::vector<Pathfield *> m_data;
-};
-
-
-/**
  * Finds a path from start to end for a Map_Object with the given movecaps.
  *
  * The path is stored in \p path, as a series of Map_Object::WalkingDir entries.
@@ -1892,9 +1735,9 @@ private:
  * \param checkstep findpath() calls this checkstep functor-like to determine
  * whether moving from one field to another is legal.
  *
- * \param instart UNDOCUMENTED
- * \param inend UNDOCUMENTED
- * \param path UNDOCUMENTED
+ * \param instart starting point of the search
+ * \param inend end point of the search
+ * \param path will receive the found path if successful
  * \param flags UNDOCUMENTED
  *
  * \return the cost of the path (in milliseconds of normal walking
@@ -1941,16 +1784,21 @@ int32_t Map::findpath
 
 	// Actual pathfinding
 	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
-	StarQueue Open;
+	Pathfield::Queue Open;
 	Pathfield * curpf = &pathfields->fields[start.field - m_fields];
 	curpf->cycle      = pathfields->cycle;
 	curpf->real_cost  = 0;
 	curpf->estim_cost = calc_cost_lowerbound(start, end);
 	curpf->backlink   = IDLE;
 
-	Open.push(*curpf);
+	Open.push(curpf);
 
-	while ((curpf = Open.pop())) {
+	for (;;) {
+		if (Open.empty()) // there simply is no path
+			return -1;
+		curpf = Open.top();
+		Open.pop(curpf);
+
 		cur.field = m_fields + (curpf - pathfields->fields.get());
 		get_coords(*cur.field, cur);
 
@@ -2005,17 +1853,15 @@ int32_t Map::findpath
 				neighbpf.real_cost  = cost;
 				neighbpf.estim_cost = calc_cost_lowerbound(neighb, end);
 				neighbpf.backlink   = *direction;
-				Open.push(neighbpf);
+				Open.push(&neighbpf);
 			} else if (neighbpf.cost() > cost + neighbpf.estim_cost) {
 				// found a better path to a field that's already Open
 				neighbpf.real_cost = cost;
 				neighbpf.backlink = *direction;
-				Open.boost(neighbpf);
+				Open.decrease_key(&neighbpf);
 			}
 		}
 	}
-	if (!curpf) // there simply is no path
-		return -1;
 
 	// Now unwind the taken route (even if we couldn't find a complete one!)
 	int32_t const result = cur == end ? curpf->real_cost : -1;
