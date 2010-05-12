@@ -147,8 +147,11 @@ void Sound_Handler::shutdown()
 		 (_("Sound_Handler closing times %i, freq %i, format %i, chan %i\n"),
 		  numtimesopened, frequency, format, channels);
 
+	if (!numtimesopened)
+		 return;
+
 	Mix_HaltChannel(-1);
-	assert(numtimesopened == 1);
+
 	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
 		log ("audio error %s\n", SDL_GetError());
 	}
@@ -156,6 +159,9 @@ void Sound_Handler::shutdown()
 	SDL_AudioDriverName(text, 20);
 	log("SDL_AUDIODRIVER %s\n", text);
 
+	if (numtimesopened != 1) {
+		 log (_("PROBLEM: sound device opened multiple times, trying to close"));
+	}
 	for (int i = 0; i < numtimesopened; ++i) {
 		Mix_CloseAudio();
 	}
