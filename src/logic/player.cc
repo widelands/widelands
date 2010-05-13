@@ -936,9 +936,9 @@ void Player::receive(NoteImmovable const & note)
 }
 
 
-void Player::receive(NoteField const & note)
+void Player::receive(NoteFieldPossession const & note)
 {
-	NoteSender<NoteField>::send(note);
+	NoteSender<NoteFieldPossession>::send(note);
 }
 
 void Player::setAI(const std::string & ai)

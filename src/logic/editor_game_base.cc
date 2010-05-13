@@ -144,7 +144,7 @@ void Editor_Game_Base::receive(NoteImmovable const & note)
 	note.pi->owner().receive(note);
 }
 
-void Editor_Game_Base::receive(NoteField const & note)
+void Editor_Game_Base::receive(NoteFieldPossession const & note)
 {
 	get_player(note.fc.field->get_owned_by())->receive(note);
 }

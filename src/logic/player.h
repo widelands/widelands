@@ -58,8 +58,8 @@ struct AttackController;
  *                      -- Nicolai
  */
 struct Player :
-	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteField>,
-	public NoteSender  <NoteImmovable>, public NoteSender  <NoteField>
+	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
+	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
 {
 	struct Building_Stats {
 		bool is_constructionsite;
@@ -512,7 +512,7 @@ struct Player :
 	void next_ware_production_period();
 
 	void receive(NoteImmovable const &);
-	void receive(NoteField     const &);
+	void receive(NoteFieldPossession     const &);
 
 	void setAI(std::string const &);
 	const std::string & getAI() const;

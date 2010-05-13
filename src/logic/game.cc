@@ -1080,11 +1080,11 @@ void Game::conquer_area_no_building(Player_Area<Area<FCoords> > player_area) {
 		Player_Number const owner = mr.location().field->get_owned_by();
 		if (owner != player_area.player_number) {
 			if (owner)
-				receive(NoteField(mr.location(), LOSE));
+				receive(NoteFieldPossession(mr.location(), LOSE));
 			mr.location().field->set_owned_by(player_area.player_number);
 			inform_players_about_ownership
 				(mr.location().field - &first_field, player_area.player_number);
-			receive (NoteField(mr.location(), GAIN));
+			receive (NoteFieldPossession(mr.location(), GAIN));
 		}
 	} while (mr.advance(map()));
 
@@ -1142,10 +1142,10 @@ void Game::do_conquer_area
 				 player(owner).military_influence(index) < new_influence_modified)
 			{
 				if (owner)
-					receive(NoteField(mr.location(), LOSE));
+					receive(NoteFieldPossession(mr.location(), LOSE));
 				mr.location().field->set_owned_by(player_area.player_number);
 				inform_players_about_ownership(index, player_area.player_number);
-				receive (NoteField(mr.location(), GAIN));
+				receive (NoteFieldPossession(mr.location(), GAIN));
 			}
 		} else if
 			(not (conquering_player.military_influence(index) -= influence)
@@ -1183,11 +1183,11 @@ void Game::do_conquer_area
 				}
 			}
 			if (best_player != player_area.player_number) {
-				receive (NoteField(mr.location(), LOSE));
+				receive (NoteFieldPossession(mr.location(), LOSE));
 				mr.location().field->set_owned_by (best_player);
 				inform_players_about_ownership(index, best_player);
 				if (best_player)
-					receive (NoteField(mr.location(), GAIN));
+					receive (NoteFieldPossession(mr.location(), GAIN));
 			}
 		}
 	} while (mr.advance(map()));
