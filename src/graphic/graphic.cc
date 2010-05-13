@@ -143,6 +143,7 @@ Graphic::Graphic
 
 		GLboolean glBool;
 		GLint glInt;
+		const GLubyte * glstr;
 
 		glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
 		log
@@ -154,6 +155,9 @@ Graphic::Graphic
 
 		glGetIntegerv(GL_AUX_BUFFERS, &glInt);
 		log("Graphics: OpenGL: Number of aux buffers %u\n", glInt);
+
+		glstr =  glGetString(GL_VERSION);
+		log("Graphics: OpenGL: Version %s\n", reinterpret_cast<const char *>(glstr));
 	}
 #endif
 	/* Information about the video capabilities. */
