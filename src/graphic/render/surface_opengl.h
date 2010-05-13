@@ -68,6 +68,8 @@ public:
 	uint32_t get_h() const {return m_h;}
 	uint32_t get_dest_w() const {return m_dest_w;}
 	uint32_t get_dest_h() const {return m_dest_h;}
+	uint32_t get_tex_w() const {return m_tex_w;}
+	uint32_t get_tex_h() const {return m_tex_h;}
 	void update();
 
 	/// Save a bitmap of this to a file
@@ -146,6 +148,7 @@ private:
 	bool m_locked;
 
 	uint32_t m_dest_w, m_dest_h;
+	uint32_t m_tex_w, m_tex_h;
 };
 
 #endif

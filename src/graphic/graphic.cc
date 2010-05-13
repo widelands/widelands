@@ -767,7 +767,7 @@ PictureID Graphic::create_picture_surface(int32_t w, int32_t h)
  */
 Surface & Graphic::create_surface(SDL_Surface & surf)
 {
-	log("Graphic::create_surface(SDL_Surface&)");
+	log("Graphic::create_surface(SDL_Surface&)\n");
 	if(g_opengl)
 	{
 #ifdef USE_OPENGL
@@ -780,7 +780,7 @@ Surface & Graphic::create_surface(SDL_Surface & surf)
 
 Surface & Graphic::create_surface(Surface & surf)
 {
-	log("Graphic::create_surface(Surface&)");
+	log("Graphic::create_surface(Surface&)\n");
 	upcast(SurfaceSDL, sdlsurf, &surf);
 	if (sdlsurf) {
 		return *new SurfaceSDL

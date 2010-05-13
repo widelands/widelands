@@ -294,7 +294,7 @@ void SurfaceOpenGL::blit(Point const dst, Surface * const src, Rect const srcrc,
 	*/
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
-	glScalef(1.0f/static_cast<GLfloat>(src->get_w()), 1.0f/static_cast<GLfloat>(src->get_h()), 1);
+	glScalef(1.0f/static_cast<GLfloat>(oglsrc->get_tex_w()), 1.0f/static_cast<GLfloat>(oglsrc->get_tex_h()), 1);
 
 	// Enable Alpha blending 
 	if(enable_alpha) {

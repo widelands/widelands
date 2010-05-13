@@ -18,10 +18,16 @@
 
 #include "surface_opengl.h"
 #include "log.h"
+#include "graphic/graphic.h"
 
 #include <cassert>
+#include <cmath>
 
 #ifdef USE_OPENGL
+
+long unsigned int pix_used = 0;
+long unsigned int pix_aloc = 0;
+long unsigned int num_tex = 0;
 
 SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface): 
 	Surface(par_surface.w, par_surface.h, SURFACE_SOURCE),
@@ -36,13 +42,43 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	GLenum pixels_format, pixels_type;
 	GLint  Bpp;
 
+	GLenum err = glGetError();
+	if (err != GL_NO_ERROR)
+		log("GL_ERROR before loading texture! 0x%X\n", err);
+
 	surface = &par_surface;
 
-	if(surface->format->palette or (surface->format->colorkey > 0))
+	if (g_gr->caps().gl.tex_power_of_two)
 	{
-		log("Warning: trying to use a paletted picture for opengl texture\n");
-		surface = SDL_DisplayFormatAlpha(&par_surface);
-		SDL_BlitSurface(surface, 0, &par_surface, 0);
+		unsigned int wexp = log2(surface->w);
+		unsigned int hexp = log2(surface->h);
+		if (pow(2,wexp) < surface->w)
+			wexp++;
+		if (pow(2,hexp) < surface->h)
+			hexp++;
+
+		m_tex_w = pow(2,wexp);
+		m_tex_h = pow(2,hexp);
+	} else {
+		m_tex_w = surface->w;
+		m_tex_h = surface->h;
+	}
+
+	log("SurfaceOpenGL() size %d, %d old: (%d, %d)\n", m_tex_w, m_tex_w, surface->w, surface->w);
+
+	if
+		(surface->format->palette or (surface->format->colorkey > 0) or
+		 m_tex_w != surface->w or m_tex_h != surface->h)
+	{
+		log("SurfaceOpenGL: convert surface for opengl\n");
+		surface = SDL_CreateRGBSurface
+			(SDL_SWSURFACE, m_tex_w, m_tex_h,
+			 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+		assert(surface);
+		//SDL_DisplayFormatAlpha(&par_surface);
+		SDL_SetAlpha(surface, 0, 0);
+		SDL_SetAlpha(&par_surface, 0, 0);
+		SDL_BlitSurface(&par_surface, 0, surface, 0);
 		SDL_FreeSurface(&par_surface);
 	}
 
@@ -50,11 +86,11 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	Bpp = fmt.BytesPerPixel;
 
 	log
-		("SurfaceOpenGL::SurfaceOpenGL(SDL_Surface) Size: (%d, %d) %db(%dB) ", get_w(), get_h(),
+		("SurfaceOpenGL::SurfaceOpenGL(SDL_Surface) Size: (%d, %d) %db(%dB) ", m_tex_w, m_tex_h,
 		 fmt.BitsPerPixel, Bpp);
 
 	log("R:%X, G:%X, B:%X, A:%X", fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
-		 
+
 	if(Bpp==4) {
 		if(fmt.Rmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Bmask==0x00ff0000) {
 			if(fmt.Amask==0xff000000) {
@@ -64,13 +100,13 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 			}
 		} else if(fmt.Bmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Rmask==0x00ff0000) {
 			if(fmt.Amask==0xff000000) { 
-				pixels_format=GL_BGRA; log(" RGBA 8888 ");
+				pixels_format=GL_BGRA; log(" BGRA 8888 ");
 			} else {
-				pixels_format=GL_BGR; log(" RGBA 8888 ");
+				pixels_format=GL_BGR; log(" BGRA 8888 ");
 			}
 		} else
 			assert(false);
-		pixels_type=GL_UNSIGNED_INT_8_8_8_8_REV;
+		pixels_type=GL_UNSIGNED_BYTE;
 	} else if (Bpp==3) {
 		if(fmt.Rmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Bmask==0x00ff0000) {
 			pixels_format=GL_RGB; log(" RGB 888 ");
@@ -91,20 +127,50 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 
 	// Let OpenGL create a texture object
 	glGenTextures( 1, &texture );
+	err = glGetError();
+	if (err != GL_NO_ERROR)
+		log("GL_ERROR: glGenTextures 0x%X!\n", err);
 
 	// selcet the texture object
 	glBindTexture( GL_TEXTURE_2D, texture );
+	err = glGetError();
+	if (err != GL_NO_ERROR)
+		log("GL_ERROR: glBindTexture 0x%X!\n", err);
 
 	// set texture filter to siply take the nearest pixel.
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+	err = glGetError();
+	if (err != GL_NO_ERROR)
+		log("GL_ERROR: glTexParameteri 0x%X!\n", err);
 
 	SDL_LockSurface(surface);
-	glTexImage2D( GL_TEXTURE_2D, 0, Bpp, surface->w, surface->h, 0,
+
+	/* glTexImage2D( GLenum  target, GLint level, GLint internalFormat,
+			GLsizei width, GLsizei height, GLint border, GLenum format,
+			GLenum type, const GLvoid * data);*/
+
+
+	glTexImage2D( GL_TEXTURE_2D, 0, 4, m_tex_w, m_tex_h, 0,
 	pixels_format, pixels_type, surface->pixels );
 	SDL_UnlockSurface(surface);
+	log
+		("TexImage: 0x%X, %d, 0x%X, 0x%X, 0x%X, 0x%X, 0x%X, 0x%X, surface->pixels )\n",
+		 GL_TEXTURE_2D, 0, Bpp, m_tex_w, m_tex_h, 0, pixels_format, pixels_type);
 
 	SDL_FreeSurface(surface);
+
+	pix_used += m_w * m_h;
+	pix_aloc += m_tex_w * m_tex_h;
+	num_tex++;
+	log("texture stats: num: %lu, used: %lu (%luM), alocated: %lu (%luM) ++\n",
+		 num_tex, pix_used * 4, pix_used * 4 / (1024 * 1024), pix_aloc * 4, pix_aloc * 4/ (1024 * 1024));
+
+	err = glGetError();
+	if (err != GL_NO_ERROR)
+		log("GL_ERROR: glTexImage2D 0x%X!\n", err);
+
+	assert(glIsTexture(texture));
 
 	m_texture = new oglTexture(texture);
 	m_glTexUpdate = false;
@@ -112,8 +178,16 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 
 
 SurfaceOpenGL::~SurfaceOpenGL() {
-	if(m_texture)
+	log("~SurfaceOpenGL(%d, %d)\n", m_w, m_h);
+	log("texture stats: num: %lu, used: %lu (%luM), alocated: %lu (%luM) --\n",
+		 num_tex, pix_used * 4, pix_used * 4 / (1024 * 1024), pix_aloc * 4, pix_aloc * 4/ (1024 * 1024));
+	if(m_texture) {
+		pix_used -= m_w * m_h;
+		pix_aloc -= m_tex_w * m_tex_h;
+		num_tex--;
 		delete m_texture;
+	}
+	delete[] m_pixels;
 }
 
 
@@ -126,7 +200,22 @@ SurfaceOpenGL::SurfaceOpenGL(int w, int h):
 	m_dest_w(0),
 	m_dest_h(0)
 {
-	log("SurfaceOpenGL::SurfaceOpenGL(%d, %d)", w, h);
+	if (g_gr and g_gr->caps().gl.tex_power_of_two)
+	{
+		unsigned int wexp = log2(w);
+		unsigned int hexp = log2(h);
+		if (pow(2,wexp) < w)
+			wexp++;
+		if (pow(2,hexp) < h)
+			hexp++;
+
+		m_tex_w = pow(2, wexp);
+		m_tex_h = pow(2, hexp);
+	} else {
+		m_tex_w = w;
+		m_tex_h = h;
+	}
+	log("SurfaceOpenGL::SurfaceOpenGL(%d, %d): texture (%d, %d)", w, h, m_tex_w, m_tex_h);
 }
 
 
@@ -134,21 +223,24 @@ void SurfaceOpenGL::lock() {
 	if (m_locked)
 		return;
 	try {
-		m_pixels = new uint8_t[m_w * m_h * 4];
+		if(m_surf_type == SURFACE_SCREEN)
+			m_pixels = new uint8_t[m_w * m_h * 4];
+		else
+			m_pixels = new uint8_t[m_tex_w * m_tex_h * 4];
 	} catch (std::bad_alloc) {
 		return;
 	}
-
 	if (m_surf_type == SURFACE_SCREEN)
 		glReadPixels
 			( 0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels );
 	else if (m_texture) {
+		assert(glIsTexture(m_texture->id()));
 		glBindTexture( GL_TEXTURE_2D, m_texture->id());
 		glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels);
 		m_glTexUpdate = false;
 	} else
 		m_glTexUpdate = true;
-
+	log("locked opengl surface(%d, %d)\n", m_tex_w, m_tex_h);
 	m_locked = true;
 }
 
@@ -162,6 +254,7 @@ void SurfaceOpenGL::unlock() {
 		assert(m_surf_type != SURFACE_SCREEN);
 		if (!m_texture)
 		{
+			log("unlock opengl surface: create new texture (%d, %d)\n", m_tex_w, m_tex_h);
 			GLuint texture;
 			glGenTextures( 1, &texture );
 
@@ -172,11 +265,16 @@ void SurfaceOpenGL::unlock() {
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
 			
+			pix_used += m_w * m_h;
+			pix_aloc += m_tex_w * m_tex_h;
+			num_tex++;
+
 			m_texture = new oglTexture(texture);
 		}
 		glBindTexture( GL_TEXTURE_2D, m_texture->id());
+		log("unlock opengl surface: (%d, %d)\n", m_tex_w, m_tex_h);
 		glTexImage2D
-			(GL_TEXTURE_2D, 0, 4, m_w, m_h, 0, GL_RGBA,
+			(GL_TEXTURE_2D, 0, 4, m_tex_w, m_tex_h, 0, GL_RGBA,
 			 GL_UNSIGNED_BYTE,  m_pixels);
 	}
 
