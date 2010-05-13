@@ -72,7 +72,7 @@ struct DefaultAI : Computer_Player {
 	virtual void think ();
 
 	virtual void receive(Widelands::NoteImmovable const &);
-	virtual void receive(Widelands::NoteField     const &);
+	virtual void receive(Widelands::NoteFieldPossession     const &);
 
 	enum {
 		AGGRESSIVE = 2,

@@ -186,9 +186,13 @@ function build_road(field, ...)
    end
 end
    
-function build_eastern_trainings_area()
+function build_eastern_trainings_area(citadel_field)
    -- Build some infrastructure as another example
    local blocker = UserInputDisabler:new()
+   
+   plr:reveal_fields(citadel_field:region(8))
+   scroll_smoothly_to(wl.map.Field(21,9))
+   scroll_smoothly_to(citadel_field)
 
    warp_houses{
       {"fortress", 31, 63, soldiers = {[{3,5,0,2}] = 8 }},
@@ -682,15 +686,16 @@ function training()
    -- Teach about trainingsites and soldiers
    sleep(300)
    
-   msg_box(warefare_and_training_00)
+   msg_box(warfare_and_training_00)
 
-   build_eastern_trainings_area()
+   local citadel_field = wl.map.Field(31, 63)
+
+   build_eastern_trainings_area(citadel_field)
    sleep(8000)
 
-   msg_box(warefare_and_training_01)
+   msg_box(warfare_and_training_01)
 
    sleep(5000)
-   local citadel_field = wl.map.Field(31, 63)
    scroll_smoothly_to(citadel_field)
 
    local o = msg_box(enhance_fortress)

@@ -304,6 +304,27 @@ private:
 	 * object.
 	 */
 	Battle * m_battle;
+
+	// saving and loading
+protected:
+	class Loader : public Worker::Loader {
+	public:
+		Loader();
+
+		virtual void load(FileRead &);
+		virtual void load_pointers();
+
+	protected:
+		virtual const Task * get_task(const std::string& name);
+
+	private:
+		uint32_t m_battle;
+	};
+
+	virtual Loader* create_loader();
+
+public:
+	virtual void do_save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 };
 
 }

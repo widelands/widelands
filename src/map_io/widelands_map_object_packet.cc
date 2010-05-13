@@ -20,6 +20,7 @@
 #include "widelands_map_object_packet.h"
 
 #include "logic/battle.h"
+#include "logic/critter_bob.h"
 #include "logic/editor_game_base.h"
 #include "logic/immovable.h"
 #include "logic/legacy.h"
@@ -27,6 +28,7 @@
 #include "wexception.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "logic/worker.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
@@ -74,6 +76,14 @@ void Map_Object_Packet::Read
 
 			case Map_Object::header_Battle:
 				loaders.insert(Battle::load(egbase, mol, fr));
+				break;
+
+			case Map_Object::header_Critter:
+				loaders.insert(Critter_Bob::load(egbase, mol, fr));
+				break;
+
+			case Map_Object::header_Worker:
+				loaders.insert(Worker::load(egbase, mol, fr));
 				break;
 
 			default:

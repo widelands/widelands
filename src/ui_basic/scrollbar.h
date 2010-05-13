@@ -100,6 +100,9 @@ private:
 	PictureID m_pic_plus;       ///< right/down
 	PictureID m_pic_background;
 	PictureID m_pic_buttons;
+
+	bool        m_needredraw;
+	PictureID   m_cache_pid;
 };
 
 }
