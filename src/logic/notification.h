@@ -121,6 +121,13 @@ struct NoteFieldPossession {
 		: fc(_fc), lg(_lg) {}
 };
 
+struct NoteFieldTransformed {
+	FCoords fc;
+
+	NoteFieldTransformed(FCoords const & _fc)
+		: fc(_fc) {}
+};
+
 }
 
 #endif

@@ -51,7 +51,9 @@ struct Tribe_Descr;
 struct Flag;
 struct AttackController;
 
-struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteFieldPossession>
+struct Editor_Game_Base : NoteReceiver<NoteImmovable>,
+	NoteReceiver<NoteFieldPossession>,
+	NoteReceiver<NoteFieldTransformed>
 {
 	friend struct ::Fullscreen_Menu_LaunchGame;
 	friend struct ::Interactive_Base;
@@ -134,6 +136,7 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteFieldPos
 
 	void receive(NoteImmovable const &);
 	void receive(NoteFieldPossession     const &);
+	void receive(NoteFieldTransformed    const &);
 
 	void cleanup_objects() throw () {
 		objects().cleanup(*this);

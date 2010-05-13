@@ -332,6 +332,13 @@ struct Player :
 	Vision vision(Map_Index const i) const throw () {
 		return m_see_all + m_fields[i].vision;
 	}
+	/**
+	 * Called when a node becomes seen or has changed.  Discovers the node and
+	 * those of the 6 surrounding edges/triangles that are not seen from another
+	 * node.
+	 */
+	void rediscover_node(Map const &, Widelands::Field const &, FCoords)
+		throw ();
 
 	bool has_view_changed() {
 		bool t = m_view_changed;
@@ -513,6 +520,7 @@ struct Player :
 
 	void receive(NoteImmovable const &);
 	void receive(NoteFieldPossession     const &);
+	void receive(NoteFieldTransformed     const &);
 
 	void setAI(std::string const &);
 	const std::string & getAI() const;
@@ -520,13 +528,6 @@ struct Player :
 private:
 	void update_building_statistics(Building &, losegain_t);
 
-	/**
-	 * Called when a node becomes seen (not only the first time) before the
-	 * vision counter is incremented. Discovers the node and those of the 6
-	 * surrounding edges/triangles that are not seen from another node.
-	 */
-	void discover_node(Map const &, Widelands::Field const &, FCoords, Field &)
-		throw ();
 
 private:
 	MessageQueue           m_messages;
