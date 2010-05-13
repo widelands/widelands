@@ -21,6 +21,7 @@
 
 #include <algorithm>
 
+#include "game_data_error.h"
 #include "map.h"
 #include "instances.h"
 
@@ -56,6 +57,39 @@ void Path::append(const Map & map, const Direction dir) {
 	map.get_neighbour(m_end, dir, &m_end);
 }
 
+/**
+ * Save the given path in the given file
+ */
+void Path::save(FileWrite & fw) const
+{
+	fw.Unsigned8(1); // version number
+	fw.Coords32(m_start);
+
+	// Careful: steps are stored in the reverse order in m_path
+	// However, we save them in the forward order, to make loading easier
+	fw.Unsigned32(m_path.size());
+	for(uint32_t i = m_path.size(); i > 0; --i)
+		fw.Direction8(m_path[i-1]);
+}
+
+/**
+ * Load the path from the given file.
+ *
+ * The path previously contained in \p this object is entirely
+ * replaced by the path from the file.
+ */
+void Path::load(FileRead & fr, Map const & map)
+{
+	uint8_t version = fr.Unsigned8();
+	if (version != 1)
+		throw game_data_error("path: unknown version %u", version);
+
+	m_start = m_end = fr.Coords32(map.extent());
+	m_path.clear();
+	uint32_t steps = fr.Unsigned32();
+	while(steps--)
+		append(map, fr.Direction8());
+}
 
 /*
 ===============

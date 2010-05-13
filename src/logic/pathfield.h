@@ -26,6 +26,8 @@
 #include <stdint.h>
 #include <vector>
 
+#include "cookie_priority_queue.h"
+
 namespace Widelands {
 
 /**
@@ -38,13 +40,22 @@ namespace Widelands {
  * structure
  */
 struct Pathfield {
-	int32_t heap_index; //  index of this field in heap, for backlinking
+	struct LessCost {
+		bool operator()(const Pathfield& a, const Pathfield& b) const {
+			return a.cost() < b.cost();
+		}
+	};
+
+	typedef cookie_priority_queue<Pathfield, LessCost> Queue;
+
+	Queue::cookie heap_cookie;
 	int32_t real_cost;  //  true cost up to this field
 	int32_t estim_cost; //  estimated cost till goal
 	uint16_t cycle;
 	uint8_t  backlink;   //  how we got here (WALK_*)
 
 	int32_t cost() const throw () {return real_cost + estim_cost;}
+	Queue::cookie& cookie() {return heap_cookie;}
 };
 
 struct Pathfields {

@@ -63,7 +63,7 @@ void Game_Interactive_Player_Data_Packet::Read
 			if (Interactive_Player * const plr = game.get_ipl()) {
 				plr->set_player_number(player_number);
 
-				plr->set_viewpoint(Point(x, y));
+				plr->set_viewpoint(Point(x, y), true);
 
 				uint32_t const loaded_df =
 					Interactive_Base::dfShowCensus |

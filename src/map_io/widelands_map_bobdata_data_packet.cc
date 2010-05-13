@@ -44,14 +44,14 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 4
+#define CURRENT_PACKET_VERSION 5
 
 // Bob subtype versions
 #define CRITTER_BOB_PACKET_VERSION 1
-#define WORKER_BOB_PACKET_VERSION 1
+#define WORKER_BOB_PACKET_VERSION 2
 
 // Worker subtype versions
-#define SOLDIER_WORKER_BOB_PACKET_VERSION 6
+#define SOLDIER_WORKER_BOB_PACKET_VERSION 7
 #define CARRIER_WORKER_BOB_PACKET_VERSION 1
 
 
@@ -103,14 +103,8 @@ void Map_Bobdata_Data_Packet::Read
 					//  basic initialization
 					bob.set_position(egbase, fr.Coords32(extent));
 
-					Transfer * trans = 0;
-					if (fr.Unsigned8()) { //  look if we had an transfer
-						// stack should be non-empty at this point,
-						// but savegames can always be broken/corrupted...
-						if (bob.m_stack.size()) {
-							trans = bob.m_stack[0].transfer;
-							assert(trans);
-						}
+					if (packet_version <= 4) {
+						fr.Unsigned8(); // used to indicate whether we had a transfer
 					}
 
 					bob.m_actid = fr.Unsigned32();
@@ -243,8 +237,6 @@ void Map_Bobdata_Data_Packet::Read
 							state.ivar2 = fr.Signed32();
 							state.ivar3 = fr.Signed32();
 
-							state.transfer = 0;
-
 							if (Serial const objvar1_serial = fr.Unsigned32()) {
 								try {
 									state.objvar1 =
@@ -314,16 +306,6 @@ void Map_Bobdata_Data_Packet::Read
 										(_("reading path: %s"), e.what());
 								}
 							}
-
-							if (i < old_stacksize && !trans)
-								delete state.transfer;
-
-							state.transfer =
-								state.task == &Worker::taskGowarehouse
-								||
-								state.task == &Worker::taskTransfer
-								?
-								trans : 0;
 
 							{
 								bool const has_route = fr.Unsigned8();
@@ -418,7 +400,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == WORKER_BOB_PACKET_VERSION) {
+		if (1 <= packet_version && packet_version <= WORKER_BOB_PACKET_VERSION) {
 			if (upcast(Soldier, soldier, &worker)) {
 				try {
 					uint16_t const soldier_worker_bob_packet_version =
@@ -432,29 +414,16 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 					{
 						Soldier_Descr const & descr = soldier->descr();
 
-						uint32_t min_hp = descr.get_min_hp();
-						assert(min_hp);
 						soldier->m_hp_current = fr.Unsigned32();
-						soldier->m_hp_max = fr.Unsigned32();
-						// This has been commented because now exists a 'die' task,
-						// so a soldier can have 0 hitpoints if it's dying.
-						//if (not soldier->m_hp_current)
-						// throw game_data_error("no hitpoints (should be dead)");
-						if (soldier->m_hp_max < soldier->m_hp_current)
-							throw game_data_error
-								("hp_max (%u) < hp_current (%u)",
-								 soldier->m_hp_max, soldier->m_hp_current);
 
-						soldier->m_min_attack    = fr.Unsigned32();
-						soldier->m_max_attack    = fr.Unsigned32();
-						if (soldier->m_max_attack < soldier->m_min_attack)
-							throw game_data_error
-								("max_attack = %u but must be at least %u",
-								 soldier->m_max_attack, soldier->m_min_attack);
-
-						soldier->m_defense       = fr.Unsigned32();
-
-						soldier->m_evade         = fr.Unsigned32();
+						if (soldier_worker_bob_packet_version <= 6) {
+							// no longer used values
+							fr.Unsigned32(); // max hp
+							fr.Unsigned32(); // min attack
+							fr.Unsigned32(); // max attack
+							fr.Unsigned32(); // defense
+							fr.Unsigned32(); // evade
+						}
 
 #define READLEVEL(variable, pn, maxfunction)                                  \
    soldier->variable = fr.Unsigned32();                                       \
@@ -478,148 +447,8 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						READLEVEL(m_defense_level, "defense", get_max_defense_level);
 						READLEVEL(m_evade_level,   "evade",   get_max_evade_level);
 
-						{ //  validate hp values
-							uint32_t const level_increase =
-								descr.get_hp_incr_per_level() * soldier->m_hp_level;
-							min_hp += level_increase;
-							uint32_t const max = descr.get_max_hp() + level_increase;
-							if (soldier->m_hp_max < min_hp) {
-								//  The soldier's type's definition may have changed,
-								//  so that max_hp must be larger. Adjust it and scale
-								//  up the current amount of hitpoints proportionally.
-								uint32_t const new_current =
-									soldier->m_hp_current * min_hp / soldier->m_hp_max;
-								log
-									("WARNING: %s %s (%u) of player %u has hp_max = %u "
-									 "but it must be at least %u (= %u + %u * %u), "
-									 "changing it to that value and increasing current "
-									 "hp from %u to %u\n",
-									 descr.tribe().name().c_str(),
-									 descr.descname().c_str(), soldier->serial(),
-									 soldier->owner().player_number(),
-									 soldier->m_hp_max, min_hp,
-									 descr.get_min_hp(),
-									 descr.get_hp_incr_per_level(), soldier->m_hp_level,
-									 soldier->m_hp_current, new_current);
-								soldier->m_hp_current = new_current;
-								soldier->m_hp_max = min_hp;
-							} else if (max < soldier->m_hp_max) {
-								//  The soldier's type's definition may have changed,
-								//  so that max_hp must be smaller. Adjust it and scale
-								//  down the current amount of hitpoints
-								//  proportionally. Round to the soldier's favour and
-								//  make sure that the scaling does not kill the
-								//  soldier.
-								uint32_t const new_current =
-									1
-									+
-									(soldier->m_hp_current * max - 1)
-									/
-									soldier->m_hp_max;
-								assert(new_current);
-								assert(new_current <= soldier->m_hp_max);
-								log
-									("WARNING: %s %s (%u) of player %u has hp_max = %u "
-									 "but it can be at most %u (= %u + %u * %u), "
-									 "changing it to that value and decreasing current "
-									 "hp from %u to %u\n",
-									 descr.tribe().name().c_str(),
-									 descr.descname().c_str(), soldier->serial(),
-									 soldier->owner().player_number(),
-									 soldier->m_hp_max, max,
-									 descr.get_max_hp(),
-									 descr.get_hp_incr_per_level(), soldier->m_hp_level,
-									 soldier->m_hp_current, new_current);
-								soldier->m_hp_current = new_current;
-								soldier->m_hp_max = max;
-							}
-						}
-
-						{ //  validate attack values
-							uint32_t const level_increase =
-								descr.get_attack_incr_per_level()
-								*
-								soldier->m_attack_level;
-							{
-								uint32_t const min =
-									descr.get_min_attack() + level_increase;
-								if (soldier->m_min_attack < min) {
-									log
-										("WARNING: %s %s (%u) of player %u has "
-										 "min_attack = %u but it must be at least %u (= "
-										 "%u + %u * %u), changing it to that value\n",
-										 descr.tribe().name().c_str(),
-										 descr.descname().c_str(), soldier->serial(),
-										 soldier->owner().player_number(),
-										 soldier->m_min_attack, min,
-										 descr.get_min_attack(),
-										 descr.get_attack_incr_per_level(),
-										 soldier->m_attack_level);
-									soldier->m_min_attack = min;
-									if (soldier->m_max_attack < min) {
-										log
-											(" (and changing max_attack from %u to the "
-											 "same value)",
-											 soldier->m_max_attack);
-										soldier->m_max_attack = min;
-									}
-									log("\n");
-								}
-							}
-							{
-								uint32_t const max =
-									descr.get_max_attack() + level_increase;
-								if (max < soldier->m_max_attack) {
-									log
-										("WARNING: %s %s (%u) of player %u has "
-										 "max_attack = %u but it can be at most %u (= "
-										 "%u + %u * %u), changing it to that value",
-										 descr.tribe().name().c_str(),
-										 descr.descname().c_str(), soldier->serial(),
-										 soldier->owner().player_number(),
-										 soldier->m_max_attack, max,
-										 descr.get_max_attack(),
-										 descr.get_attack_incr_per_level(),
-										 soldier->m_attack_level);
-									soldier->m_max_attack = max;
-									if (max < soldier->m_min_attack) {
-										log
-											(" (and changing min_attack from %u to the "
-											 "same value)",
-											 soldier->m_min_attack);
-										soldier->m_min_attack = max;
-									}
-									log("\n");
-								}
-							}
-							assert(soldier->m_min_attack <= soldier->m_max_attack);
-						}
-
-#define VALIDATE_VALUE(pn, valuefunct, incrfunct, level_variable, variable)   \
-   {                                                                          \
-      uint32_t const value =                                                  \
-         descr.valuefunct() + descr.incrfunct() * soldier->level_variable;    \
-      if (value != soldier->variable) {                                       \
-         log                                                                  \
-            ("WARNING: %s %s (%u) of player %u has "                          \
-             pn                                                               \
-             " = %u but it must be %u (= %u + %u * %u), changing it to that " \
-             "value\n",                                                       \
-             descr.tribe().name().c_str(), descr.descname().c_str(),          \
-             soldier->serial(), soldier->owner().player_number(),             \
-             soldier->variable, value,                                        \
-             descr.valuefunct(), descr.incrfunct(), soldier->level_variable); \
-         soldier->variable = value;                                           \
-      }                                                                       \
-   }                                                                          \
-
-						VALIDATE_VALUE
-							("defense", get_defense, get_defense_incr_per_level,
-							 m_defense_level, m_defense);
-
-						VALIDATE_VALUE
-							("evade",   get_evade,   get_evade_incr_per_level,
-							 m_evade_level,   m_evade);
+						if (soldier->m_hp_current > soldier->get_max_hitpoints())
+							soldier->m_hp_current = soldier->get_max_hitpoints();
 
 						if (Serial const battle = fr.Unsigned32())
 							soldier->m_battle = &mol.get<Battle>(battle);
@@ -697,8 +526,17 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 			// Skip supply
 
-			worker.m_needed_exp  = fr.Signed32();
+			if (packet_version == 1)
+				fr.Signed32(); // used to be needed_exp
 			worker.m_current_exp = fr.Signed32();
+
+			if (worker.m_current_exp >= worker.get_needed_experience()) {
+				// avoid inconsistencies in case the game data has changed
+				if (worker.get_needed_experience() == -1)
+					worker.m_current_exp = -1;
+				else
+					worker.m_current_exp = worker.get_needed_experience() - 1;
+			}
 
 			Economy * economy = 0;
 			if (PlayerImmovable * const location = worker.m_location.get(egbase))
@@ -722,207 +560,7 @@ void Map_Bobdata_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
-	FileWrite fw;
-
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
-
-	Map & map = egbase.map();
-	for (uint16_t y = 0; y < map.get_height(); ++y) {
-		for (uint16_t x = 0; x < map.get_width(); ++x) {
-
-			std::vector<Bob *> bobarr;
-
-			map.find_bobs
-				(Area<FCoords>(map.get_fcoords(Coords(x, y)), 0), &bobarr);
-
-			for (uint32_t i = 0; i < bobarr.size(); ++i) {
-				Bob        const & bob   = *bobarr[i];
-				Bob::Descr const & descr = bob.descr();
-				assert(mos.is_object_known(bob));
-				uint32_t const reg = mos.get_object_file_index(bob);
-
-				fw.Unsigned32(reg);
-				//  BOB STUFF
-
-				fw.Unsigned8(bob.m_owner ? bob.m_owner->player_number() : 0);
-
-				fw.Coords32(bob.m_position);
-				//  FIELD can't be saved
-
-				//  m_linknext, linkpprev are handled automatically
-
-				//  Are we currently transferring?
-				fw.Unsigned8(bob.m_stack.size() && bob.m_stack[0].transfer);
-
-				fw.Unsigned32(bob.m_actid);
-				// Don't have to save m_actscheduled, as that's only used for
-				// integrity checks
-
-				// Animation
-				fw.CString
-					(bob.m_anim ?
-					 bob.descr().get_animation_name(bob.m_anim).c_str() : "");
-				fw.Signed32(bob.m_animstart);
-
-				fw.Direction8_allow_null(bob.m_walking);
-
-				fw.Signed32(bob.m_walkstart);
-
-				fw.Signed32(bob.m_walkend);
-
-				//  number of states
-				fw.Unsigned16(bob.m_stack.size());
-				for (uint32_t index = 0; index < bob.m_stack.size(); ++index) {
-					Bob::State const & s = bob.m_stack[index];
-
-					//  Write name, enough to reconstruct the task structure
-					fw.CString(s.task->name);
-
-					fw.Signed32(s.ivar1);
-					fw.Signed32(s.ivar2);
-					fw.Signed32(s.ivar3);
-
-					if (Map_Object const * const obj = s.objvar1.get(egbase)) {
-						assert(mos.is_object_known(*obj));
-						fw.Unsigned32(mos.get_object_file_index(*obj));
-					} else
-						fw.Unsigned32(0);
-
-					fw.CString(s.svar1.c_str());
-
-					fw.Coords32(s.coords);
-
-					if (DirAnimations const * const diranims = s.diranims) {
-						fw.Unsigned8(1);
-						fw.CString
-							(descr.get_animation_name(diranims->get_animation(1))
-							 .c_str());
-						fw.CString
-							(descr.get_animation_name(diranims->get_animation(2))
-							 .c_str());
-						fw.CString
-							(descr.get_animation_name(diranims->get_animation(3))
-							 .c_str());
-						fw.CString
-							(descr.get_animation_name(diranims->get_animation(4))
-							 .c_str());
-						fw.CString
-							(descr.get_animation_name(diranims->get_animation(5))
-							 .c_str());
-						fw.CString
-							(descr.get_animation_name(diranims->get_animation(6))
-							 .c_str());
-					} else
-						fw.Unsigned8(0);
-
-					if (const Path * const path = s.path) {
-						const Path::Step_Vector::size_type nr_steps =
-							s.path->get_nsteps();
-						fw.Unsigned16(nr_steps);
-						if (nr_steps) {
-							fw.Coords32(path->get_start());
-							for
-								(Path::Step_Vector::size_type idx = 0;
-								 idx < nr_steps;
-								 ++idx)
-								fw.Unsigned8((*path)[idx]);
-						}
-					} else
-						fw.Unsigned16(0);
-
-					if (s.route) {
-						fw.Unsigned8(1);
-						s.route->save(fw, egbase, mos);
-					} else
-						fw.Unsigned8(0);
-
-					if (s.program) {
-						fw.Unsigned8(1);
-						fw.CString(s.program->get_name().c_str());
-					} else
-						fw.Unsigned8(0);
-
-				}
-
-				fw.CString(bob.m_signal.c_str());
-
-				if      (upcast(Critter_Bob const, critter_bob, &bob))
-					write_critter_bob(fw, egbase, mos, *critter_bob);
-				else if (upcast(Worker      const, worker,      &bob))
-					write_worker_bob (fw, egbase, mos, *worker);
-				else
-					assert(false);
-
-				mos.mark_object_as_saved(bob);
-			}
-
-		}
-	}
-
-	fw.Write(fs, "binary/bob_data");
-}
-
-void Map_Bobdata_Data_Packet::write_critter_bob
-	(FileWrite            & fw,
-	 Editor_Game_Base     &,
-	 Map_Map_Object_Saver &,
-	 Critter_Bob    const &)
-{
-	fw.Unsigned16(CRITTER_BOB_PACKET_VERSION);
-}
-
-void Map_Bobdata_Data_Packet::write_worker_bob
-	(FileWrite            & fw,
-	 Editor_Game_Base     & egbase,
-	 Map_Map_Object_Saver & mos,
-	 Worker         const & worker)
-{
-	fw.Unsigned16(WORKER_BOB_PACKET_VERSION);
-
-	if (upcast(Soldier const, soldier, &worker)) {
-		fw.Unsigned16(SOLDIER_WORKER_BOB_PACKET_VERSION);
-		fw.Unsigned32(soldier->m_hp_current);
-		fw.Unsigned32(soldier->m_hp_max);
-		fw.Unsigned32(soldier->m_min_attack);
-		fw.Unsigned32(soldier->m_max_attack);
-		fw.Unsigned32(soldier->m_defense);
-		fw.Unsigned32(soldier->m_evade);
-		fw.Unsigned32(soldier->m_hp_level);
-		fw.Unsigned32(soldier->m_attack_level);
-		fw.Unsigned32(soldier->m_defense_level);
-		fw.Unsigned32(soldier->m_evade_level);
-		if (soldier->m_battle)
-			fw.Unsigned32(mos.get_object_file_index(*soldier->m_battle));
-		else
-			fw.Unsigned32(0);
-		// New at version 6
-		fw.Direction8_allow_null(soldier->m_combat_walking);
-		fw.Unsigned32(soldier->m_combat_walkstart);
-		fw.Unsigned32(soldier->m_combat_walkend);
-	} else if (upcast(Carrier const, carrier, &worker)) {
-		fw.Unsigned16(CARRIER_WORKER_BOB_PACKET_VERSION);
-		fw.Signed32(carrier->m_acked_ware);
-	}
-
-	if (Map_Object const * const loca = worker.m_location.get(egbase)) {
-		assert(mos.is_object_known(*loca));
-		fw.Unsigned32(mos.get_object_file_index(*loca));
-	} else
-		fw.Unsigned32(0);
-
-	//  Economy is not our beer.
-
-	if
-		(Map_Object const * const carried_item =
-		 	worker.m_carried_item.get(egbase))
-	{
-		assert(mos.is_object_known(*carried_item));
-		fw.Unsigned32(mos.get_object_file_index(*carried_item));
-	} else
-		fw.Unsigned32(0);
-
-	fw.Signed32(worker.m_needed_exp);
-	fw.Signed32(worker.m_current_exp);
+	throw wexception("bobdata packet is deprecated");
 }
 
 }

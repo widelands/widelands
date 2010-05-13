@@ -157,6 +157,8 @@ public:
 	Input_Queues const & warequeues() const {return m_input_queues;}
 	std::vector<Worker *> const & workers() const;
 
+	bool can_start_working() const throw ();
+
 protected:
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);
@@ -194,7 +196,6 @@ protected:
 	virtual void program_end(Game &, Program_Result);
 
 	void calc_statistics();
-	bool can_start_working() const throw ();
 	void try_start_working(Game &);
 	void set_post_timer (int32_t const t) {m_post_timer = t;}
 

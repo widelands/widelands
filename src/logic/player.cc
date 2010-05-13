@@ -749,22 +749,24 @@ void Player::enemyflagaction
 }
 
 
-inline void Player::discover_node
+inline void Player::rediscover_node
 	(Map              const &       map,
 	 Widelands::Field const &       first_map_field,
-	 FCoords                  const f,
-	 Field                  &       field)
+	 FCoords          const f)
 throw ()
 {
+
 	assert(0 <= f.x);
 	assert(f.x < map.get_width());
 	assert(0 <= f.y);
 	assert(f.y < map.get_height());
 	assert(&map[0] <= f.field);
-	assert           (f.field < &map[0] + map.max_index());
+	assert(f.field < &map[0] + map.max_index());
+
+	Field & field = m_fields[f.field - &first_map_field];
+
 	assert(m_fields <= &field);
-	assert            (&field < m_fields + map.max_index());
-	assert(field.vision <= 1);
+	assert(&field < m_fields + map.max_index());
 
 	{ // discover everything (above the ground) in this field
 		field.terrains = f.field->get_terrains();
@@ -837,7 +839,7 @@ throw ()
 	if (fvision == 0)
 		fvision = 1;
 	if (fvision == 1)
-		discover_node(map, first_map_field, f, field);
+		rediscover_node(map, first_map_field, f);
 	fvision ++;
 	field.vision = fvision;
 }
@@ -932,9 +934,9 @@ void Player::receive(NoteImmovable const & note)
 }
 
 
-void Player::receive(NoteField const & note)
+void Player::receive(NoteFieldPossession const & note)
 {
-	NoteSender<NoteField>::send(note);
+	NoteSender<NoteFieldPossession>::send(note);
 }
 
 void Player::setAI(const std::string & ai)

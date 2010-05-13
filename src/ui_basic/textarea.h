@@ -63,10 +63,12 @@ struct Textarea : public Panel {
 	void draw(RenderTarget &);
 
 	void set_font(std::string const & name, int32_t size, RGBColor fg) {
+		collapse();
 		m_fontname = name;
 		m_fontsize = size;
 		m_fcolor   = fg;
 		set_text(m_text);
+		expand();
 	}
 
 private:

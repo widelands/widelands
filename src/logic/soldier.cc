@@ -31,6 +31,8 @@
 #include "gamecontroller.h"
 #include "graphic/graphic.h"
 #include "helper.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "message_queue.h"
 #include "militarysite.h"
 #include "player.h"
@@ -55,28 +57,7 @@ Soldier_Descr::Soldier_Descr
 {
 	add_attribute(Map_Object::SOLDIER);
 
-	try { //  hitpoints
-		const char * const hp = global_s.get_safe_string("hp");
-		std::vector<std::string> list(split_string(hp, "-"));
-		if (list.size() != 2)
-			throw game_data_error
-				(_("expected %s but found \"%s\""), _("\"min-max\""), hp);
-		container_iterate(std::vector<std::string>, list, i)
-			remove_spaces(*i.current);
-		char * endp;
-		m_min_hp = strtol(list[0].c_str(), &endp, 0);
-		if (*endp or 0 == m_min_hp)
-			throw game_data_error
-				(_("expected %s but found \"%s\""),
-				 _("positive integer"), list[0].c_str());
-		m_max_hp = strtol(list[1].c_str(), &endp, 0);
-		if (*endp or m_max_hp < m_min_hp)
-			throw game_data_error
-				(_("expected positive integer >= %u but found \"%s\""),
-				 m_min_hp, list[1].c_str());
-	} catch (_wexception const & e) {
-		throw game_data_error("hp: %s", e.what());
-	}
+	m_base_hp = global_s.get_safe_positive("hp");
 
 	try { //  parse attack
 		const char * const attack = global_s.get_safe_string("attack");
@@ -343,21 +324,7 @@ void Soldier::init(Editor_Game_Base & egbase)
 	m_defense_level = 0;
 	m_evade_level   = 0;
 
-	m_hp_max        = 0;
-	m_min_attack    = descr().get_min_attack();
-	m_max_attack    = descr().get_max_attack();
-	m_defense       = descr().get_defense   ();
-	m_evade         = descr().get_evade     ();
-	{
-		const uint32_t min_hp = descr().get_min_hp();
-		assert(min_hp);
-		assert(min_hp <= descr().get_max_hp());
-
-		if (upcast(Game, game, &egbase))
-			m_hp_max = min_hp + game->logic_rand() %
-					(descr().get_max_hp() - (min_hp - 1));
-	}
-	m_hp_current    = m_hp_max;
+	m_hp_current    = get_max_hitpoints();
 
 	m_combat_walking   = CD_NONE;
 	m_combat_walkstart = 0;
@@ -389,39 +356,25 @@ void Soldier::set_hp_level(const uint32_t hp) {
 	assert(m_hp_level <= hp);
 	assert              (hp <= descr().get_max_hp_level());
 
-	while (m_hp_level < hp) {
-		++m_hp_level;
-		m_hp_max     += descr().get_hp_incr_per_level();
-		m_hp_current += descr().get_hp_incr_per_level();
-	}
+	m_hp_level = hp;
 }
 void Soldier::set_attack_level(const uint32_t attack) {
 	assert(m_attack_level <= attack);
 	assert                  (attack <= descr().get_max_attack_level());
 
-	while (m_attack_level < attack) {
-		++m_attack_level;
-		m_min_attack += descr().get_attack_incr_per_level();
-		m_max_attack += descr().get_attack_incr_per_level();
-	}
+	m_attack_level = attack;
 }
 void Soldier::set_defense_level(const uint32_t defense) {
 	assert(m_defense_level <= defense);
 	assert                   (defense <= descr().get_max_defense_level());
 
-	while (m_defense_level < defense) {
-		++m_defense_level;
-		m_defense += descr().get_defense_incr_per_level();
-	}
+	m_defense_level = defense;
 }
 void Soldier::set_evade_level(const uint32_t evade) {
 	assert(m_evade_level <= evade);
 	assert                 (evade <= descr().get_max_evade_level());
 
-	while (m_evade_level < evade) {
-		++m_evade_level;
-		m_evade += descr().get_evade_incr_per_level();
-	}
+	m_evade_level = evade;
 }
 
 uint32_t Soldier::get_level(tAttribute const at) const {
@@ -451,13 +404,38 @@ int32_t Soldier::get_tattribute(uint32_t const attr) const
 	return Worker::get_tattribute(attr);
 }
 
+uint32_t Soldier::get_max_hitpoints() const
+{
+	return descr().get_base_hp() + m_hp_level*descr().get_hp_incr_per_level();
+}
+
+uint32_t Soldier::get_min_attack() const
+{
+	return descr().get_base_min_attack() + m_attack_level*descr().get_attack_incr_per_level();
+}
+
+uint32_t Soldier::get_max_attack() const
+{
+	return descr().get_base_max_attack() + m_attack_level*descr().get_attack_incr_per_level();
+}
+
+uint32_t Soldier::get_defense() const
+{
+	return descr().get_base_defense() + m_defense_level*descr().get_defense_incr_per_level();
+}
+
+uint32_t Soldier::get_evade() const
+{
+	return descr().get_base_evade() + m_evade_level*descr().get_evade_incr_per_level();
+}
+
 //  Unsignedness ensures that we can only heal, not hurt through this method.
 void Soldier::heal (const uint32_t hp) {
-	molog ("[soldier] healing (%d+)%d/%d\n", hp, m_hp_current, m_hp_max);
+	molog ("[soldier] healing (%d+)%d/%d\n", hp, m_hp_current, get_max_hitpoints());
 	assert(hp);
-	assert(m_hp_current <  m_hp_max);
-	m_hp_current += std::min(hp, m_hp_max - m_hp_current);
-	assert(m_hp_current <= m_hp_max);
+	assert(m_hp_current <  get_max_hitpoints());
+	m_hp_current += std::min(hp, get_max_hitpoints() - m_hp_current);
+	assert(m_hp_current <= get_max_hitpoints());
 }
 
 /**
@@ -467,7 +445,7 @@ void Soldier::damage (const uint32_t value)
 {
 	assert (m_hp_current > 0);
 
-	molog ("[soldier] damage %d(-%d)/%d\n", m_hp_current, value, m_hp_max);
+	molog ("[soldier] damage %d(-%d)/%d\n", m_hp_current, value, get_max_hitpoints());
 	if (m_hp_current < value)
 		m_hp_current = 0;
 	else
@@ -562,8 +540,8 @@ void Soldier::draw
 		Rect r(Point(drawpos.x - w, drawpos.y - h - 7), w * 2, 5);
 		dst.draw_rect(r, HP_FRAMECOLOR);
 		// Draw the actual bar
-		assert(m_hp_max);
-		const float fraction = static_cast<float>(m_hp_current) / m_hp_max;
+		assert(get_max_hitpoints());
+		const float fraction = static_cast<float>(m_hp_current) / get_max_hitpoints();
 		RGBColor color(owner().get_playercolor()[2]);
 		assert(2 <= r.w);
 		assert(2 <= r.h);
@@ -1221,7 +1199,7 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 
 void Soldier::move_in_battle_update(Game & game, State &)
 {
-	if (m_combat_walkend <= game.get_gametime()) {
+	if (static_cast<int32_t>(game.get_gametime() - m_combat_walkend) >= 0) {
 		switch (m_combat_walking) {
 			case CD_NONE:
 				break;
@@ -1617,16 +1595,102 @@ void Soldier::log_general_info(Editor_Game_Base const & egbase)
 	molog
 		("Levels: %d/%d/%d/%d\n",
 		 m_hp_level, m_attack_level, m_defense_level, m_evade_level);
-	molog ("HitPoints: %d/%d\n", m_hp_current, m_hp_max);
-	molog ("Attack :  %d-%d\n", m_min_attack, m_max_attack);
-	molog ("Defense : %d%%\n", m_defense);
-	molog ("Evade:    %d%%\n", m_evade);
+	molog ("HitPoints: %d/%d\n", m_hp_current, get_max_hitpoints());
+	molog ("Attack :  %d-%d\n", get_min_attack(), get_max_attack());
+	molog ("Defense : %d%%\n", get_defense());
+	molog ("Evade:    %d%%\n", get_evade());
 	molog ("CombatWalkingDir:   %i\n", m_combat_walking);
 	molog ("CombatWalkingStart: %i\n", m_combat_walkstart);
 	molog ("CombatWalkEnd:      %i\n", m_combat_walkend);
 	molog ("HasBattle:   %s\n", m_battle ? "yes" : "no");
 	if (m_battle)
 		molog("BattleSerial: %u\n", m_battle->serial());
+}
+
+/*
+==============================
+
+Load/save support
+
+==============================
+*/
+
+#define SOLDIER_SAVEGAME_VERSION 1
+
+Soldier::Loader::Loader()
+{
+}
+
+void Soldier::Loader::load(FileRead& fr)
+{
+	Worker::Loader::load(fr);
+
+	uint8_t version = fr.Unsigned8();
+	if (version != SOLDIER_SAVEGAME_VERSION)
+		throw game_data_error("unknown/unhandled version %u", version);
+
+	Soldier& soldier = get<Soldier>();
+	soldier.m_hp_current = fr.Unsigned32();
+	soldier.m_hp_level = std::min(fr.Unsigned32(), soldier.descr().get_max_hp_level());
+	soldier.m_attack_level = std::min(fr.Unsigned32(), soldier.descr().get_max_attack_level());
+	soldier.m_defense_level = std::min(fr.Unsigned32(), soldier.descr().get_max_defense_level());
+	soldier.m_evade_level = std::min(fr.Unsigned32(), soldier.descr().get_max_evade_level());
+
+	if (soldier.m_hp_current > soldier.get_max_hitpoints())
+		soldier.m_hp_current = soldier.get_max_hitpoints();
+
+	soldier.m_combat_walking = static_cast<CombatWalkingDir>(fr.Unsigned8());
+	if (soldier.m_combat_walking != CD_NONE) {
+		soldier.m_combat_walkstart = fr.Signed32();
+		soldier.m_combat_walkend = fr.Signed32();
+	}
+
+	m_battle = fr.Unsigned32();
+}
+
+void Soldier::Loader::load_pointers()
+{
+    Worker::Loader::load_pointers();
+
+	Soldier& soldier = get<Soldier>();
+
+	if (m_battle)
+		soldier.m_battle = &mol().get<Battle>(m_battle);
+}
+
+const Bob::Task* Soldier::Loader::get_task(const std::string& name)
+{
+	if (name == "attack") return &taskAttack;
+	if (name == "defense") return &taskDefense;
+	if (name == "battle") return &taskBattle;
+	if (name == "moveInBattle") return &taskMoveInBattle;
+	if (name == "die") return &taskDie;
+	return Worker::Loader::get_task(name);
+}
+
+Soldier::Loader* Soldier::create_loader()
+{
+	return new Loader;
+}
+
+void Soldier::do_save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+{
+	Worker::do_save(egbase, mos, fw);
+
+	fw.Unsigned8(SOLDIER_SAVEGAME_VERSION);
+	fw.Unsigned32(m_hp_current);
+	fw.Unsigned32(m_hp_level);
+	fw.Unsigned32(m_attack_level);
+	fw.Unsigned32(m_defense_level);
+	fw.Unsigned32(m_evade_level);
+
+	fw.Unsigned8(m_combat_walking);
+	if (m_combat_walking != CD_NONE) {
+		fw.Signed32(m_combat_walkstart);
+		fw.Signed32(m_combat_walkend);
+	}
+
+	fw.Unsigned32(mos.get_object_file_index_or_zero(m_battle));
 }
 
 }

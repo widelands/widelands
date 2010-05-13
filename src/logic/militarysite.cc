@@ -53,15 +53,11 @@ MilitarySite_Descr::MilitarySite_Descr
 		(_name, _descname, directory, prof, global_s, _tribe, encdata),
 m_conquer_radius     (0),
 m_num_soldiers       (0),
-m_num_medics         (0),
-m_heal_per_second    (0),
-m_heal_incr_per_medic(0)
+m_heal_per_second    (0)
 {
 	m_conquer_radius      = global_s.get_safe_int("conquers");
 	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
-	m_num_medics          = global_s.get_safe_int("max_medics");
 	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
-	m_heal_incr_per_medic = global_s.get_safe_int("heal_increase_per_medic");
 	if (m_conquer_radius > 0)
 		m_workarea_info[m_conquer_radius].insert(descname() + _(" conquer"));
 }
@@ -305,7 +301,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 			// The healing algorithm is totally arbitrary
 			if (s.get_current_hitpoints() < s.get_max_hitpoints()) {
 				s.heal(total_heal);
-				total_heal -= total_heal / 3;
+				break;
 			}
 		}
 

@@ -1003,5 +1003,4 @@ void Game::WriteStatistics(FileWrite & fw)
 		}
 }
 
-
 }

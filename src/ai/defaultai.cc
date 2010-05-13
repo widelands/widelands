@@ -202,7 +202,7 @@ void DefaultAI::receive(NoteImmovable const & note)
 }
 
 /// called by Widelands game engine when a field changed
-void DefaultAI::receive(NoteField const & note)
+void DefaultAI::receive(NoteFieldPossession const & note)
 {
 	if (note.lg == GAIN)
 		unusable_fields.push_back(note.fc);
@@ -219,7 +219,7 @@ void DefaultAI::late_initialization ()
 {
 	player = game().get_player(player_number());
 	NoteReceiver<NoteImmovable>::connect(*player);
-	NoteReceiver<NoteField>::connect(*player);
+	NoteReceiver<NoteFieldPossession>::connect(*player);
 	tribe = &player->tribe();
 
 	log ("ComputerPlayer(%d): initializing (%u)\n", player_number(), type);
@@ -251,6 +251,7 @@ void DefaultAI::late_initialization ()
 		bo.cnt_under_construction = 0;
 		bo.production_hint        = -1;
 		bo.current_stats          = 100;
+		bo.unoccupied             = false;
 
 		bo.is_basic               = false;
 
@@ -676,19 +677,30 @@ void DefaultAI::update_productionsite_stats(int32_t gametime) {
 		// If there are no buildings of that type set the current_stats to 100
 		else
 			buildings[i].current_stats = 100;
+		buildings[i].unoccupied = false;
 	}
 
-	// Check all available productionsites and add there statistics value
+	// Check all available productionsites
 	for (uint32_t i = 0; i < productionsites.size(); ++i) {
 		assert(productionsites.front().bo->cnt_built > 0);
 
+		// Add statistics value
 		productionsites.front().bo->current_stats +=
-			productionsites.front().site->get_statistics_percent()
-			/ productionsites.front().bo->cnt_built;
+			productionsites.front().site->get_statistics_percent();
+
+		// Check whether this building is completely occupied
+		productionsites.front().bo->unoccupied |=
+			!productionsites.front().site->can_start_working();
 
 		// Now reorder the buildings
 		productionsites.push_back(productionsites.front());
 		productionsites.pop_front();
+	}
+
+	// Scale statistics down
+	for (uint32_t i = 0; i < buildings.size(); ++i) {
+		if (buildings[i].cnt_built > 0)
+			buildings[i].current_stats /= buildings[i].cnt_built;
 	}
 }
 
@@ -879,17 +891,17 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// take care about borders and enemies
 					prio = recalc_with_border_range(*bf, prio);
 				} else { // "normal" productionsites
+					// Don't build another building of this type, if there is already
+					// one that is unoccupied at the moment
+					if (bo.unoccupied)
+						continue;
 					if (bo.is_basic && (bo.total_count() == 0))
 						prio += 100; // for very important buildings
 
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
-						// Don't check if the economy has only one flag.
-						// It is either a constructionsite not yet connected or the
-						// headquarters directly after start - in last case we need
-						// lumberjack huts and quarries, and so there is no need to
-						// check the other productionsites at that state.
-						if ((*l.current)->flags.size() < 2)
+						// Don't check if the economy has no warehouse.
+						if (!(*l.current)->economy.warehouses().size())
 							continue;
 						for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
 							Ware_Index wt(static_cast<size_t>(bo.outputs[m]));
@@ -907,7 +919,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						int32_t inout_prio = 0;
 						for (size_t k = 0; k < bo.inputs.size(); ++k) {
 							inout_prio += bf->producers_nearby[bo.inputs[k]];
-							inout_prio -= bf->consumers_nearby[bo.inputs[k]] / 3;
+							inout_prio -= bf->consumers_nearby[bo.inputs[k]] / 2;
 						}
 						for (size_t k = 0; k < bo.outputs.size(); ++k)
 							inout_prio += bf->consumers_nearby[bo.outputs[k]];
@@ -1016,6 +1028,11 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		BuildingObserver & bo = buildings[i];
 
 		if (!bo.is_buildable || bo.type != BuildingObserver::MINE)
+			continue;
+
+		// Don't build another building of this type, if there is already
+		// one that is unoccupied at the moment
+		if (bo.unoccupied)
 			continue;
 
 		// Only have one mine of a type under construction
@@ -1508,6 +1525,15 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 			if (en_bo.cnt_under_construction > 0)
 				continue;
 
+			// ... but we possibly need the trained workers of this buildings
+			// instead we should check, whether this building or economy has
+			// enough workers for the enhanced building
+			//
+			// Don't enhance this building, if there is already
+			// one or more of the same type that is unoccupied at the moment
+			//if (en_bo.unoccupied)
+				//continue;
+
 			int32_t prio = 0; // priority for enhancement
 
 			// Find new outputs of enhanced building
@@ -1606,6 +1632,15 @@ bool DefaultAI::check_mines(int32_t gametime)
 			// under construction
 			if (en_bo.cnt_under_construction > 0)
 				continue;
+
+			// ... but we possibly need the trained workers of this buildings
+			// instead we should check, whether this building or economy has
+			// enough workers for the enhanced building
+			//
+			// Don't enhance this building, if there is already
+			// one or more of the same type that is unoccupied at the moment
+			//if (en_bo.unoccupied)
+				//continue;
 
 			// Check if mine needs an enhancement to mine more resources
 			uint8_t const until =
@@ -1797,9 +1832,6 @@ int32_t DefaultAI::calculate_need_for_ps
 	// the same (always == another game but same map with
 	// defaultAI on same coords)
 	prio += time(0) % 3 - 1;
-
-	//  TODO check if there are other buildings of that type that wait for a
-	//  TODO worker. If yes, set priority to -10000 or something.
 
 	// check if current economy can supply enough material for
 	// production.

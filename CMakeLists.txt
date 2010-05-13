@@ -251,6 +251,9 @@ if (DEFINED WL_VERSION_MAJOR)
 			set (CPACK_PACKAGE_VERSION_MINOR 0)
 		endif (DEFINED WL_VERSION_MINOR)
 	endif (WL_VERSION_MAJOR STREQUAL "0")
+	# Needed - else detect_revision.py will still use bzr or even crash, if
+	# Widelands is compiled in a bzr export
+	file (WRITE WL_RELEASE "${WL_VERSION}")
 endif (DEFINED WL_VERSION_MAJOR)
 
 if (NOT DEFINED WL_VERSION)

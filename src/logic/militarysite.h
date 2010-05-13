@@ -41,22 +41,14 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 	uint32_t get_max_number_of_soldiers () const throw () {
 		return m_num_soldiers;
 	}
-	uint32_t get_max_number_of_medics   () const throw () {
-		return m_num_medics;
-	}
 	uint32_t get_heal_per_second        () const throw () {
 		return m_heal_per_second;
-	}
-	uint32_t get_heal_increase_per_medic() const throw () {
-		return m_heal_incr_per_medic;
 	}
 
 private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
-	uint32_t m_num_medics;
 	uint32_t m_heal_per_second;
-	uint32_t m_heal_incr_per_medic;
 };
 
 class MilitarySite :
