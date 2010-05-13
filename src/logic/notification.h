@@ -113,12 +113,19 @@ struct NoteImmovable {
 		: pi(_pi), lg(_lg) {}
 };
 
-struct NoteField {
+struct NoteFieldPossession {
 	FCoords fc;
 	losegain_t lg;
 
-	NoteField(FCoords const & _fc, losegain_t const _lg)
+	NoteFieldPossession(FCoords const & _fc, losegain_t const _lg)
 		: fc(_fc), lg(_lg) {}
+};
+
+struct NoteFieldTransformed {
+	FCoords fc;
+
+	NoteFieldTransformed(FCoords const & _fc)
+		: fc(_fc) {}
 };
 
 }

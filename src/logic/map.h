@@ -29,6 +29,7 @@
 
 #include "interval.h"
 #include "manager.h"
+#include "notification.h"
 
 #include <set>
 #include <string>
@@ -131,7 +132,10 @@ struct FindBobEnemySoldier : public FindBob {
  *
  * Warning: width and height must be even
  */
-struct Map : public ITransportCostCalculator {
+struct Map :
+	public ITransportCostCalculator,
+	NoteSender<NoteFieldTransformed>
+{
 	friend struct Editor_Game_Base;
 	friend struct Map_Loader;
 	friend struct ::S2_Map_Loader;

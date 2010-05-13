@@ -245,7 +245,7 @@ WatchWindow::WatchWindow
 		for (uint8_t i = 0; i < NUM_VIEWS; ++i)
 			view_btns[i] = new View_Button(*this, i);
 	mapview.fieldclicked.set(&parent, &Interactive_GameBase::node_action);
-	mapview.warpview.set(this, &WatchWindow::stop_tracking_by_drag);
+	mapview.changeview.set(this, &WatchWindow::stop_tracking_by_drag);
 	warp_mainview.set(&parent, &Interactive_Base::move_view_to_point);
 
 	add_view(coords);
@@ -314,7 +314,7 @@ void WatchWindow::toggle_buttons() {
 
 //Draws the current view
 void WatchWindow::show_view(bool) {
-	mapview.set_viewpoint(views[cur_index].view_point);
+	mapview.set_viewpoint(views[cur_index].view_point, true);
 }
 
 WatchWindow::~WatchWindow() {
@@ -354,7 +354,7 @@ void WatchWindow::think()
 		pos = bob->calc_drawpos(game(), pos);
 
 		mapview.set_viewpoint
-			(pos - Point(mapview.get_w() / 2, mapview.get_h() / 2));
+			(pos - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
 	}
 
 	mapview.need_complete_redraw(); //  make sure that the view gets updated

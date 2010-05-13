@@ -202,7 +202,7 @@ void DefaultAI::receive(NoteImmovable const & note)
 }
 
 /// called by Widelands game engine when a field changed
-void DefaultAI::receive(NoteField const & note)
+void DefaultAI::receive(NoteFieldPossession const & note)
 {
 	if (note.lg == GAIN)
 		unusable_fields.push_back(note.fc);
@@ -219,7 +219,7 @@ void DefaultAI::late_initialization ()
 {
 	player = game().get_player(player_number());
 	NoteReceiver<NoteImmovable>::connect(*player);
-	NoteReceiver<NoteField>::connect(*player);
+	NoteReceiver<NoteFieldPossession>::connect(*player);
 	tribe = &player->tribe();
 
 	log ("ComputerPlayer(%d): initializing (%u)\n", player_number(), type);
