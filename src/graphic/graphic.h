@@ -60,6 +60,20 @@ extern uint32_t luminance_table_r[0x100];
 extern uint32_t luminance_table_g[0x100];
 extern uint32_t luminance_table_b[0x100];
 
+struct GLCaps
+{
+	int major_version;
+	int minor_version;
+	int tex_max_size;
+	bool tex_power_of_two;
+};
+
+struct GraphicCaps
+{
+	bool offscreen_rendering;
+	GLCaps gl;
+};
+
 /**
  * A renderer to get pixels to a 16bit framebuffer.
  *
@@ -152,6 +166,9 @@ struct Graphic {
 
 	Surface * get_road_texture(int32_t roadtex);
 
+	const GraphicCaps & caps() const throw()
+		{ return m_caps; }
+
 protected:
 	/// Static function for png writing
 	static void m_png_write_function
@@ -166,6 +183,7 @@ protected:
 	SDL_Rect m_update_rects[MAX_RECTS];
 	int32_t m_nr_update_rects;
 	bool m_update_fullscreen;
+	GraphicCaps m_caps;
 
 	/// hash of filename/picture ID pairs
 	std::vector

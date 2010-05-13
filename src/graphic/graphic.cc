@@ -143,7 +143,7 @@ Graphic::Graphic
 
 		GLboolean glBool;
 		GLint glInt;
-		const GLubyte * glstr;
+		const char * str;
 
 		glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
 		log
@@ -152,12 +152,31 @@ Graphic::Graphic
 
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInt);
 		log("Graphics: OpenGL: Max texture size %u\n", glInt);
+		m_caps.gl.tex_max_size = glInt;
 
 		glGetIntegerv(GL_AUX_BUFFERS, &glInt);
 		log("Graphics: OpenGL: Number of aux buffers %u\n", glInt);
 
-		glstr =  glGetString(GL_VERSION);
-		log("Graphics: OpenGL: Version %s\n", reinterpret_cast<const char *>(glstr));
+		str = reinterpret_cast<const char *>(glGetString(GL_VERSION));
+		m_caps.gl.major_version = atoi(str);
+		m_caps.gl.minor_version = strstr(str,".")?atoi(strstr(str,".") + 1):0;
+		log
+			("Graphics: OpenGL: Version %d.%d \"%s\"\n",
+			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
+
+		str = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
+		m_caps.gl.tex_power_of_two =
+			(m_caps.gl.major_version < 2) and
+			(strstr(str, "GL_ARB_texture_non_power_of_two") == 0);
+
+		log("Graphics: OpenGL: Textures ");
+		log
+			( m_caps.gl.tex_power_of_two?"must have a size power of two\n":
+			 "may have any size\n");
+
+		m_caps.offscreen_rendering = false;
+	} else {
+		m_caps.offscreen_rendering = true;
 	}
 #endif
 	/* Information about the video capabilities. */
