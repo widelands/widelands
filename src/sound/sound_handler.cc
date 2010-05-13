@@ -299,7 +299,7 @@ void Sound_Handler::load_one_fx
 		log
 			("Sound_Handler: loading sound effect \"%s\" for FXset \"%s\" "
 			 "failed: %s\n",
-			 filename, fx_name.c_str(), strerror(errno));
+			 filename, fx_name.c_str(), Mix_GetError());
 }
 
 /** Calculate  the position of an effect in relation to the visible part of the
