@@ -207,12 +207,8 @@ if (DEFINED WL_3RDPARTY_DIR)
 endif (DEFINED WL_3RDPARTY_DIR)
 
 find_package(GGZ_Core REQUIRED)
-if (GGZ_CORE_FOUND)
-  include_directories(${GGZ_CORE_INCLUDE_DIR})
-  add_definitions("-DUSE_GGZ")
-else (GGZ_CORE_FOUND)
-  message (STATUS "GGZ support disabled, check your libraries path and installed packages!")
-endif (GGZ_CORE_FOUND)
+include_directories(${GGZ_CORE_INCLUDE_DIR})
+add_definitions("-DUSE_GGZ")
 
 # ...but using MAJOR, MINOR and PATCH
 if (DEFINED WL_VERSION_MAJOR)
@@ -297,10 +293,10 @@ include_directories(${ZLIB_INCLUDE_DIR})
 find_package(Lua51 REQUIRED)
 include_directories(${LUA_INCLUDE_DIR})
 
-if (APPLE)
+if (APPLE OR WIN32)
   find_package(intl REQUIRED)
   include_directories(${INTL_INCLUDE_DIR})
-endif (APPLE)
+endif (APPLE OR WIN32)
 
 find_package(SDL REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})

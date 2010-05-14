@@ -146,31 +146,24 @@ target_link_libraries(widelands ${SDLNET_LIBRARY})
 target_link_libraries(widelands ${SDLTTF_LIBRARY})
 target_link_libraries(widelands ${LUA_LIBRARY})
 target_link_libraries(widelands ${SDLGFX_LIBRARY})
+target_link_libraries(widelands ${GGZ_CORE_LIBRARY})
 
-if (GGZ_CORE_FOUND)
-  target_link_libraries(widelands ${GGZ_CORE_LIBRARY})
-endif (GGZ_CORE_FOUND)
-
-if (APPLE)
+if (APPLE OR WIN32)
   target_link_libraries(widelands ${INTL_LIBRARY})
-endif (APPLE)
+endif (APPLE OR WIN32)
 
 if (WIN32)
-if (DEFINED MSVC)
-  target_link_libraries(widelands ${INTL_LIBRARY})
-  target_link_libraries(widelands ws2_32)
-  #GGZ on MSVC using 3rdparty bundle needs expat library
-  #if expat is not found, then 3rdparty bundle is not in use, so just continue.
-  if (GGZ_CORE_FOUND)
-    find_library(EXPAT_LIBRARY libexpat)
-    if (EXPAT_LIBRARY)
-      target_link_libraries(widelands ${EXPAT_LIBRARY})
-    endif (EXPAT_LIBRARY)
-  endif (GGZ_CORE_FOUND)
-else (DEFINED MSVC)
-  target_link_libraries(widelands intl)
-  target_link_libraries(widelands wsock32)
-endif (DEFINED MSVC) 
+  if (DEFINED MSVC)
+    target_link_libraries(widelands ws2_32)
+
+    #GGZ on MSVC using 3rdparty bundle needs expat library
+    #if expat is not found, then 3rdparty bundle is not in use, so just continue.
+    find_package(EXPAT REQUIRED)
+    target_link_libraries(widelands ${EXPAT_LIBRARY})
+
+  else (DEFINED MSVC)
+    target_link_libraries(widelands wsock32)
+  endif (DEFINED MSVC) 
 endif (WIN32)
 
 install(TARGETS widelands DESTINATION ${WLBUILD_INSTALL_BINDIR} COMPONENT ExecutableFiles)
