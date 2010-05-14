@@ -180,6 +180,15 @@ If you want to do it manually, follow this path:
     This path is either absolute (as in this example) or relative to WL_INSTALL_DATADIR
     (for portable setups).
 
+  - Controlling which languages are installed
+    Instead of having all languages installed, you may want to control which languages are available.
+
+    $ cmake -DWL_LINGUAS="de;en_GB;eo" ../..
+    
+    This setting only makes the languages German, English (Great Britain) and Esperanto available.
+    You can also select only one language; and you have to use the semicolon character if you want
+    to create a list of languages.
+
 - Additional commands you can use with make:
 
   - make lang

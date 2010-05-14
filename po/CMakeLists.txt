@@ -35,29 +35,31 @@ macro(CreateLocale locale_name)
     endif (${pofile_name} STREQUAL ${locale_name})
   endforeach (pofile ${pofiles})
   add_custom_target (
-    lang_${locale_name}
+    translang_${locale_name}
     DEPENDS ${commands}
-    COMMENT "Generating translations for locale ${locale_name}"
   )
   add_custom_target (
-    checklang_${locale_name}
+    lang_${locale_name}
     COMMAND cmake -Dlang=${locale_name} -Dpobasedir=${CMAKE_CURRENT_SOURCE_DIR} -Dlocalebasedir=${CMAKE_CURRENT_BINARY_DIR}/../locale -P ${CMAKE_CURRENT_SOURCE_DIR}/CheckLocale.cmake
     COMMENT "Checking translations for locale ${locale_name}"
-#    WORKING_DIRECTORY=${CMAKE_CURRENT_SOURCE_DIR}
   )
-  add_dependencies(lang checklang_${locale_name})
-  add_dependencies(checklang_${locale_name} lang_${locale_name})
+  add_dependencies(lang lang_${locale_name})
+  add_dependencies(lang_${locale_name} translang_${locale_name})
 endmacro(CreateLocale locale_name)
 
 set (languages_found "")
-file (GLOB_RECURSE pofiles *.po)
-foreach(pofile ${pofiles})
-  get_filename_component(pofile ${pofile} NAME_WE)
-  list(APPEND languages_found ${pofile})
-endforeach(pofile ${pofiles})
+if (DEFINED WL_LINGUAS AND NOT WL_LINGUAS STREQUAL "")
+  set(languages_found ${WL_LINGUAS})
+else (DEFINED WL_LINGUAS AND NOT WL_LINGUAS STREQUAL "")
+  file (GLOB_RECURSE pofiles *.po)
+  foreach(pofile ${pofiles})
+    get_filename_component(pofile ${pofile} NAME_WE)
+    list(APPEND languages_found ${pofile})
+  endforeach(pofile ${pofiles})
 
-list(SORT languages_found)
-list(REMOVE_DUPLICATES languages_found)
+  list(SORT languages_found)
+  list(REMOVE_DUPLICATES languages_found)
+endif (DEFINED WL_LINGUAS AND NOT WL_LINGUAS STREQUAL "")
 
 foreach(language ${languages_found})
   CreateLocale(${language})
