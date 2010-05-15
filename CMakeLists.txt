@@ -272,6 +272,8 @@ install (
   COMPONENT CoreVersionFile
 )
 
+enable_testing()
+
 include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
 include(CheckIncludeFile)
@@ -402,6 +404,6 @@ add_custom_target (
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
 set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CoreVersionFile CoreLicenseFiles)
-set (CPACK_GENERATOR TGZ)
-set (CPACK_SOURCE_GENERATOR TGZ)
+set (CPACK_GENERATOR "TGZ")
+set (CPACK_SOURCE_GENERATOR "TGZ")
 include(CPack)
