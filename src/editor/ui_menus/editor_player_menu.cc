@@ -187,21 +187,22 @@ void Editor_Player_Menu::update() {
 		posy += size + spacing;
 
       // Build infrastructure but
-      if(!m_plr_make_infrastructure_buts[p - 1]) {
-			m_plr_make_infrastructure_buts[p - 1] =
-				new UI::Callback_IDButton
-				<Editor_Player_Menu, Widelands::Player_Number const>
-					(this, "build_infrastructure",
-					 posx, posy, size, size,
-					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-					 g_gr->get_no_picture(), //  set below
-					 &Editor_Player_Menu::make_infrastructure_clicked, *this, p,
-					 std::string());
-					 // _("I"), //  SirVer, TODO come up with a picture for this
-					 // _("Make infrastructure"));
-         posx+=size+spacing;
-      }
-		m_plr_make_infrastructure_buts[p - 1]->set_enabled(true);
+		// Still disabled at the moment.
+      // if(!m_plr_make_infrastructure_buts[p - 1]) {
+      //                   m_plr_make_infrastructure_buts[p - 1] =
+      //                           new UI::Callback_IDButton
+      //                           <Editor_Player_Menu, Widelands::Player_Number const>
+      //                                   (this, "build_infrastructure",
+      //                                    posx, posy, size, size,
+      //                                    g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+      //                                    g_gr->get_no_picture(), //  set below
+      //                                    &Editor_Player_Menu::make_infrastructure_clicked, *this, p,
+      //                                    std::string());
+      //                                    // _("I"), //  SirVer, TODO come up with a picture for this
+      //                                    // _("Make infrastructure"));
+      //    posx+=size+spacing;
+      // }
+      //           m_plr_make_infrastructure_buts[p - 1]->set_enabled(true);
 	}
 	set_inner_size(get_inner_w(), posy + spacing);
 }
