@@ -32,6 +32,8 @@ long unsigned int num_tex = 0;
 #define handle_glerror() \
 	_handle_glerror(__FILE__, __LINE__)
 
+SDL_PixelFormat * rgbafmt = NULL;
+
 GLenum _handle_glerror(const char * file, unsigned int line)
 {
 	GLenum err = glGetError();
@@ -242,6 +244,20 @@ SurfaceOpenGL::SurfaceOpenGL(int w, int h):
 		m_tex_h = h;
 	}
 	log("SurfaceOpenGL::SurfaceOpenGL(%d, %d): texture (%d, %d)", w, h, m_tex_w, m_tex_h);
+}
+
+const SDL_PixelFormat * SurfaceOpenGL::get_format() const
+{
+	if (rgbafmt)
+		return rgbafmt;
+	rgbafmt = new SDL_PixelFormat;
+	rgbafmt->BitsPerPixel = 32;
+	rgbafmt->BytesPerPixel = 4;
+	rgbafmt->Rmask = 0x000000ff; rgbafmt->Gmask = 0x0000ff00;
+	rgbafmt->Bmask = 0x00ff0000; rgbafmt->Amask = 0xff000000;
+	rgbafmt->Ashift = 24; rgbafmt->Bshift = 16; rgbafmt->Gshift = 8;
+	rgbafmt->Ashift = 0; rgbafmt->palette = NULL;
+	return rgbafmt;
 }
 
 

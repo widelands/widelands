@@ -91,20 +91,11 @@ public:
 /*	// For the bravest: Direct Pixel access. Use carefully
 	/// Needed if you want to blit directly to the screen by memcpy
 	void force_disable_alpha()*/
-/*
-	const SDL_PixelFormat * get_format() const
-	{
-		SDL_PixelFormat fmt;
-		fmt.BitsPerPixel = 32;
-		fmt.BytesPerPixel = 4;
-		fmt.Rmask=0x000000ff; fmt.Gmask=0x0000ff00;
-		fmt.Bmask=0x00ff0000; fmt.Amask=0xff000000;
-		fmt.Ashift=24;fmt.Bshift=16;fmt.Gshift=8;
-		return fmt;
-	}
+
+	const SDL_PixelFormat * get_format() const;
 	const SDL_PixelFormat & format() const
 	{ return *get_format();}
-*/
+
 	uint16_t get_pitch() const {return m_w*4;}
 	uint8_t * get_pixels() const
 	{
