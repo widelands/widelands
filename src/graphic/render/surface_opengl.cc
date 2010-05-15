@@ -29,6 +29,46 @@ long unsigned int pix_used = 0;
 long unsigned int pix_aloc = 0;
 long unsigned int num_tex = 0;
 
+#define handle_glerror() \
+	_handle_glerror(__FILE__, __LINE__)
+
+GLenum _handle_glerror(const char * file, unsigned int line)
+{
+	GLenum err = glGetError();
+	if (err==GL_NO_ERROR)
+		return err;
+
+	log("%s:%d: OpenGL ERROR: ", file, line);
+
+	switch (err)
+	{
+	case GL_INVALID_VALUE:
+		log("invalid value\n");
+		break;
+	case GL_INVALID_ENUM:
+		log("invalid enum\n");
+		break;
+	case GL_INVALID_OPERATION:
+		log("invalid operation\n");
+		break;
+	case GL_STACK_OVERFLOW:
+		log("stack overflow\n");
+		break;
+	case GL_STACK_UNDERFLOW:
+		log("stack undeflow\n");
+		break;
+	case GL_OUT_OF_MEMORY:
+		log("out of memory\n");
+		break;
+	case GL_TABLE_TOO_LARGE:
+		log("table too large\n");
+		break;
+	default:
+		log("unknown\n");
+	}
+	return err;
+}
+
 SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface): 
 	Surface(par_surface.w, par_surface.h, SURFACE_SOURCE),
 	m_glTexUpdate(false),
@@ -42,9 +82,7 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	GLenum pixels_format, pixels_type;
 	GLint  Bpp;
 
-	GLenum err = glGetError();
-	if (err != GL_NO_ERROR)
-		log("GL_ERROR before loading texture! 0x%X\n", err);
+	handle_glerror();
 
 	surface = &par_surface;
 
@@ -64,7 +102,7 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 		m_tex_h = surface->h;
 	}
 
-	log("SurfaceOpenGL() size %d, %d old: (%d, %d)\n", m_tex_w, m_tex_w, surface->w, surface->w);
+	//log("SurfaceOpenGL() size %d, %d old: (%d, %d)\n", m_tex_w, m_tex_w, surface->w, surface->w);
 
 	if
 		(surface->format->palette or (surface->format->colorkey > 0) or
@@ -127,22 +165,16 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 
 	// Let OpenGL create a texture object
 	glGenTextures( 1, &texture );
-	err = glGetError();
-	if (err != GL_NO_ERROR)
-		log("GL_ERROR: glGenTextures 0x%X!\n", err);
+	handle_glerror();
 
 	// selcet the texture object
 	glBindTexture( GL_TEXTURE_2D, texture );
-	err = glGetError();
-	if (err != GL_NO_ERROR)
-		log("GL_ERROR: glBindTexture 0x%X!\n", err);
+	handle_glerror();
 
 	// set texture filter to siply take the nearest pixel.
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-	err = glGetError();
-	if (err != GL_NO_ERROR)
-		log("GL_ERROR: glTexParameteri 0x%X!\n", err);
+	handle_glerror();
 
 	SDL_LockSurface(surface);
 
@@ -154,10 +186,10 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	glTexImage2D( GL_TEXTURE_2D, 0, 4, m_tex_w, m_tex_h, 0,
 	pixels_format, pixels_type, surface->pixels );
 	SDL_UnlockSurface(surface);
-	log
+	/*log
 		("TexImage: 0x%X, %d, 0x%X, 0x%X, 0x%X, 0x%X, 0x%X, 0x%X, surface->pixels )\n",
 		 GL_TEXTURE_2D, 0, Bpp, m_tex_w, m_tex_h, 0, pixels_format, pixels_type);
-
+*/
 	SDL_FreeSurface(surface);
 
 	pix_used += m_w * m_h;
@@ -166,9 +198,7 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	log("texture stats: num: %lu, used: %lu (%luM), alocated: %lu (%luM) ++\n",
 		 num_tex, pix_used * 4, pix_used * 4 / (1024 * 1024), pix_aloc * 4, pix_aloc * 4/ (1024 * 1024));
 
-	err = glGetError();
-	if (err != GL_NO_ERROR)
-		log("GL_ERROR: glTexImage2D 0x%X!\n", err);
+	handle_glerror();
 
 	assert(glIsTexture(texture));
 
