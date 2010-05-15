@@ -23,6 +23,11 @@ function field_tests:test_direct_change_impossible()
    assert_error("c.x should be read only", function() c.x = 12 end) 
    assert_error("c.y should be read only", function() c.y = 12 end) 
 end
+function field_tests:test_hash()
+   local c = wl.map.Field(25,40)
+   assert_equal("25_40", c.__hash)
+end
+
 function field_tests:test_r_neighbour()
    c = wl.map.Field(25,40)
    assert_equal(wl.map.Field(26,40), c.rn)

@@ -1796,6 +1796,7 @@ const MethodType<L_Field> L_Field::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_Field> L_Field::Properties[] = {
+	PROP_RO(L_Field, __hash),
 	PROP_RO(L_Field, x),
 	PROP_RO(L_Field, y),
 	PROP_RO(L_Field, rn),
@@ -1841,6 +1842,14 @@ void L_Field::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
+// Hash is used to identify a class in a Set
+int L_Field::get___hash(lua_State * L) {
+	char buf[25];
+	snprintf(buf, sizeof(buf), "%i_%i", m_c.x, m_c.y);
+	lua_pushstring(L, buf);
+	return 1;
+}
+
 /* RST
 	.. attribute:: x, y
 
@@ -1863,12 +1872,17 @@ int L_Field::get_height(lua_State * L) {
 }
 int L_Field::set_height(lua_State * L) {
 	uint32_t height = luaL_checkuint32(L, -1);
+	FCoords f = fcoords(L);
+
+	if (f.field->get_height() == height)
+		return 0;
+
 	if (height > MAX_FIELD_HEIGHT)
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
-	get_egbase(L).map().set_height(fcoords(L), height);
+	get_egbase(L).map().set_height(f, height);
 
-	return get_height(L);
+	return 0;
 }
 
 /* RST

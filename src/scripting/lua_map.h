@@ -519,6 +519,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get___hash(lua_State *);
 	int get_x(lua_State * L);
 	int get_y(lua_State * L);
 	int get_viewpoint_x(lua_State * L);
