@@ -71,7 +71,7 @@ GLenum _handle_glerror(const char * file, unsigned int line)
 	return err;
 }
 
-SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface): 
+SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	Surface(par_surface.w, par_surface.h, SURFACE_SOURCE),
 	m_glTexUpdate(false),
 	m_pixels(NULL),
@@ -124,45 +124,49 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	SDL_PixelFormat const & fmt = *surface->format;
 	Bpp = fmt.BytesPerPixel;
 
+	/*
 	log
 		("SurfaceOpenGL::SurfaceOpenGL(SDL_Surface) Size: (%d, %d) %db(%dB) ", m_tex_w, m_tex_h,
 		 fmt.BitsPerPixel, Bpp);
 
 	log("R:%X, G:%X, B:%X, A:%X", fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
+	*/
 
 	if(Bpp==4) {
 		if(fmt.Rmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Bmask==0x00ff0000) {
 			if(fmt.Amask==0xff000000) {
-				pixels_format=GL_RGBA; log(" RGBA 8888 ");
+				pixels_format=GL_RGBA; //log(" RGBA 8888 ");
 			} else {
-				pixels_format=GL_RGB; log(" RGB 8880 ");
+				pixels_format=GL_RGB; //log(" RGB 8880 ");
 			}
 		} else if(fmt.Bmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Rmask==0x00ff0000) {
 			if(fmt.Amask==0xff000000) { 
-				pixels_format=GL_BGRA; log(" BGRA 8888 ");
+				pixels_format=GL_BGRA; //log(" BGRA 8888 ");
 			} else {
-				pixels_format=GL_BGR; log(" BGRA 8888 ");
+				pixels_format=GL_BGR; //log(" BGRA 8888 ");
 			}
 		} else
 			assert(false);
 		pixels_type=GL_UNSIGNED_BYTE;
 	} else if (Bpp==3) {
 		if(fmt.Rmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Bmask==0x00ff0000) {
-			pixels_format=GL_RGB; log(" RGB 888 ");
-		} else
+			pixels_format=GL_RGB; //log(" RGB 888 ");
+		} else if (fmt.Bmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Rmask==0x00ff0000) {
+			pixels_format=GL_BGR;
+		}else
 			assert(false);
 		pixels_type=GL_UNSIGNED_BYTE;
 	} else if (Bpp==2) {
 		if((fmt.Rmask==0xF800) and (fmt.Gmask==0x7E0) and (fmt.Bmask==0x1F)) {
-			pixels_format=GL_RGB; log(" RGB 565"); 
+			pixels_format=GL_RGB; //log(" RGB 565"); 
 		} else if ((fmt.Bmask==0xF800) and (fmt.Gmask==0x7E0) and (fmt.Rmask==0x1F)) {
-			pixels_format=GL_BGR; log(" BGR 565"); 
+			pixels_format=GL_BGR; //log(" BGR 565"); 
 		} else
 			assert(false);
 		pixels_type = GL_UNSIGNED_SHORT_5_6_5;
 	} else
 		assert(false);
-	log("\n");
+	//log("\n");
 
 	// Let OpenGL create a texture object
 	glGenTextures( 1, &texture );
@@ -172,31 +176,28 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	glBindTexture( GL_TEXTURE_2D, texture );
 	handle_glerror();
 
-	// set texture filter to siply take the nearest pixel.
+	// set texture filter to siply take the  nearest pixel.
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
 	handle_glerror();
 
 	SDL_LockSurface(surface);
 
-	/* glTexImage2D( GLenum  target, GLint level, GLint internalFormat,
-			GLsizei width, GLsizei height, GLint border, GLenum format,
-			GLenum type, const GLvoid * data);*/
-
-
 	glTexImage2D( GL_TEXTURE_2D, 0, WL_GLINTERNALFORMAT, m_tex_w, m_tex_h, 0,
 	pixels_format, pixels_type, surface->pixels );
-	SDL_UnlockSurface(surface);
+	handle_glerror();
 
+	SDL_UnlockSurface(surface);
 	SDL_FreeSurface(surface);
 
 	pix_used += m_w * m_h;
 	pix_aloc += m_tex_w * m_tex_h;
 	num_tex++;
-	log("texture stats: num: %lu, used: %lu (%luM), alocated: %lu (%luM) ++\n",
-		 num_tex, pix_used * 4, pix_used * 4 / (1024 * 1024), pix_aloc * 4, pix_aloc * 4/ (1024 * 1024));
-
-	handle_glerror();
+	log
+		("texture stats: num: %lu, used: %lu (%luM), "
+		 "alocated: %lu (%luM) ++\n",
+		 num_tex, pix_used * 4, pix_used * 4 / (1024 * 1024),
+		 pix_aloc * 4, pix_aloc * 4/ (1024 * 1024));
 
 	assert(glIsTexture(texture));
 
@@ -206,15 +207,17 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 
 
 SurfaceOpenGL::~SurfaceOpenGL() {
-	log("~SurfaceOpenGL(%d, %d)\n", m_w, m_h);
-	log("texture stats: num: %lu, used: %lu (%luM), alocated: %lu (%luM) --\n",
-		 num_tex, pix_used * 4, pix_used * 4 / (1024 * 1024), pix_aloc * 4, pix_aloc * 4/ (1024 * 1024));
 	if(m_texture) {
 		pix_used -= m_w * m_h;
 		pix_aloc -= m_tex_w * m_tex_h;
 		num_tex--;
 		delete m_texture;
 	}
+	log
+		("~SurfaceOpenGL(): texture stats: num: %lu, "
+		 "used: %lu (%luM), alocated: %lu (%luM) --\n",
+		 num_tex, pix_used * 4, pix_used * 4 / (1024 * 1024),
+		 pix_aloc * 4, pix_aloc * 4/ (1024 * 1024));
 	delete[] m_pixels;
 }
 
