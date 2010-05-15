@@ -49,10 +49,14 @@ using Widelands::Road;
  * Updating the whole Surface
  */
 void SurfaceSDL::update() {
-	log("SurfaceSDL::update()\n");
-	//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
-	//in case of 2d graphics but also allows for double buffering
-	SDL_Flip(m_surface);
+	if(m_surf_type == SURFACE_SCREEN) {
+		//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
+		SDL_Flip(m_surface);
+		log("SurfaceSDL::update(): update complete screen\n");
+	} else {
+		SDL_UpdateRect(m_surface, m_offsx, m_offsy, m_w, m_h);
+		log("SurfaceSDL::update()\n");
+	}
 }
 
 /*
