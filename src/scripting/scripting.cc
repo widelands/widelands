@@ -30,6 +30,7 @@
 #include "lua_game.h"
 #include "lua_globals.h"
 #include "lua_map.h"
+#include "lua_root.h"
 #include "lua_ui.h"
 #include "persistence.h"
 
@@ -236,6 +237,7 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
 
 	// Now our own
+	luaopen_wlroot(m_L);
 	luaopen_globals(m_L);
 
 	register_scripts(*g_fs, "aux");

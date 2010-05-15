@@ -42,9 +42,10 @@ static void m_instantiate_new_lua_class(lua_State * L) {
 
 	// get this classes instantiator
 	lua_getglobal(L, "wl"); // table wl
-	lua_getfield(L, -1, module.c_str()); // table wl module
+	if (module != "")
+		lua_getfield(L, -1, module.c_str()); // table wl module?
 	std::string instantiator = "__" + klass;
-	lua_getfield(L, -1, instantiator.c_str()); // table wl module func
+	lua_getfield(L, -1, instantiator.c_str()); // table wl module? func
 
 	// Hopefully this is a function!
 	luaL_checktype(L, -1, LUA_TFUNCTION);
