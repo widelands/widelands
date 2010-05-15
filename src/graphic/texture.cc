@@ -63,20 +63,12 @@ is_32bit   (format.BytesPerPixel == 4)
 			nr = nr / 10;
 		}
 
-		//log("Texture::Texture(%s): load %s\n", &fnametmpl, fname);
 		if (nr) // cycled up to maximum possible frame number
 			break;
-		
-		// is the frame actually there?
+
 		if (!g_fs->FileExists(fname))
 			break;
-		
-		if (g_opengl){
-			
-			continue;
-		}
-		
-		//We are not in opengl mode. Loa
+
 		SDL_Surface * surf;
 
 		m_texture_picture = strdup(fname);
@@ -88,13 +80,10 @@ is_32bit   (format.BytesPerPixel == 4)
 
 		surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 
-		log("loaded into sdl surface ...\n");
-		
 		if (!surf) {
 			log("WARNING: Failed to load texture frame %s: %s\n", fname, IMG_GetError());
 			break;
 		}
-		
 
 		if (surf->w != TEXTURE_WIDTH || surf->h != TEXTURE_HEIGHT) {
 			SDL_FreeSurface(surf);
@@ -106,7 +95,17 @@ is_32bit   (format.BytesPerPixel == 4)
 			break;
 		}
 
-		log("Search colormap ...\n");
+		if (g_opengl) {
+			SurfaceOpenGL * tsurface =
+				&dynamic_cast<SurfaceOpenGL &>
+				(g_gr->LoadImage(fname));
+			// SDL_ConvertSurface(surf, &fmt, 0);
+			m_glFrames.push_back(tsurface);
+			++m_nrframes;
+			continue;
+		}
+
+
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
 			if (surf->format->BitsPerPixel == 8)
@@ -128,7 +127,6 @@ is_32bit   (format.BytesPerPixel == 4)
 			}
 		}
 
-		log("convert to palette ...\n");
 		// Convert to our palette
 		SDL_Palette palette;
 		SDL_PixelFormat fmt;
@@ -141,10 +139,8 @@ is_32bit   (format.BytesPerPixel == 4)
 		fmt.BytesPerPixel = 1;
 		fmt.palette = &palette;
 
-		log("Convert Surface ...\n");
 		SDL_Surface * const cv = SDL_ConvertSurface(surf, &fmt, 0);
 
-		log("allocate pixel memor< ...\n");
 		// Add the frame
 		m_pixels =
 			static_cast<uint8_t *>
@@ -153,7 +149,6 @@ is_32bit   (format.BytesPerPixel == 4)
 		m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_nrframes];
 		++m_nrframes;
 
-		log("Copy pixels ...\n");
 		SDL_LockSurface(cv);
 
 		for (int32_t y = 0; y < TEXTURE_HEIGHT; ++y)
@@ -161,31 +156,10 @@ is_32bit   (format.BytesPerPixel == 4)
 				(m_curframe + y * TEXTURE_WIDTH,
 				 static_cast<uint8_t *>(cv->pixels) + y * cv->pitch,
 				 TEXTURE_WIDTH);
-
 		SDL_UnlockSurface(cv);
-		
-#warning TODO opengl: rework this code
-#ifdef USE_OPENGL
-/*
-		fmt.BitsPerPixel = 24;
-		fmt.BytesPerPixel = 3;
-		fmt.palette = 0;
-		fmt.Rmask = 0x000000FF;
-		fmt.Gmask = 0x0000FF00;
-		fmt.Bmask = 0x00FF0000;
-		fmt.Amask = 0;
-*/
-		if (g_opengl) {
-			SurfaceOpenGL * tsurface = &dynamic_cast<SurfaceOpenGL &>(g_gr->LoadImage(fname));// SDL_ConvertSurface(surf, &fmt, 0);
-
-			m_glFrames.push_back(tsurface);
-		}
-#endif
-
 		SDL_FreeSurface(cv);
 		SDL_FreeSurface(surf);
 	}
-
 
 	if (!m_nrframes)
 		throw wexception("%s: texture has no frames", &fnametmpl);
