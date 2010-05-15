@@ -26,6 +26,8 @@
 #include <SDL_opengl.h>
 #include <assert.h>
 
+#define WL_GLINTERNALFORMAT GL_RGBA
+
 namespace Widelands {
 struct Editor_Game_Base;
 struct Field;

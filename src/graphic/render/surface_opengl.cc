@@ -183,7 +183,7 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 			GLenum type, const GLvoid * data);*/
 
 
-	glTexImage2D( GL_TEXTURE_2D, 0, 4, m_tex_w, m_tex_h, 0,
+	glTexImage2D( GL_TEXTURE_2D, 0, WL_GLINTERNALFORMAT, m_tex_w, m_tex_h, 0,
 	pixels_format, pixels_type, surface->pixels );
 	SDL_UnlockSurface(surface);
 	/*log
@@ -304,7 +304,7 @@ void SurfaceOpenGL::unlock() {
 		glBindTexture( GL_TEXTURE_2D, m_texture->id());
 		log("unlock opengl surface: (%d, %d)\n", m_tex_w, m_tex_h);
 		glTexImage2D
-			(GL_TEXTURE_2D, 0, 4, m_tex_w, m_tex_h, 0, GL_RGBA,
+			(GL_TEXTURE_2D, 0, WL_GLINTERNALFORMAT, m_tex_w, m_tex_h, 0, GL_RGBA,
 			 GL_UNSIGNED_BYTE,  m_pixels);
 	}
 
