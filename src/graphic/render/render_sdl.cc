@@ -56,15 +56,6 @@ void SurfaceSDL::update() {
 }
 
 /*
- * Save a bitmap
- */
-void SurfaceSDL::save_bmp(const char & fname) const {
-	assert(m_surface);
-
-	SDL_SaveBMP(m_surface, &fname);
-}
-
-/*
 ===============
 Draws the outline of a rectangle
 ===============
@@ -138,51 +129,49 @@ void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
 	if(m_surface->format->BytesPerPixel == 4)
 	{
 		for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
-		  
+
 			Uint8 * const pix =
 				static_cast<Uint8 *>(m_surface->pixels) +
 				(y + m_offsy)* m_surface->pitch + (x + m_offsx) * 4;
-		  
+
 			uint32_t const clr = *reinterpret_cast<const Uint32 *>(pix);
 			uint8_t gr, gg, gb;
 			SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
 			int16_t r = gr + factor;
 			int16_t g = gg + factor;
 			int16_t b = gb + factor;
-		
+
 			if (b & 0xFF00)
 				b = ~b >> 24;
 			if (g & 0xFF00)
 				g = ~g >> 24;
 			if (r & 0xFF00)
 				r = ~r >> 24;
-		
+
 			*reinterpret_cast<Uint32 *>(pix) = SDL_MapRGB(m_surface->format, r, g, b);
 		}
 	} else if(m_surface->format->BytesPerPixel == 2) {
 		for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
-		  
 			Uint8 * const pix =
 				static_cast<Uint8 *>(m_surface->pixels) +
 				(y + m_offsy)* m_surface->pitch + (x + m_offsx) * 2;
-		  
+
 			uint32_t const clr = *reinterpret_cast<const Uint16 *>(pix);
 			uint8_t gr, gg, gb;
 			SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
 			int16_t r = gr + factor;
 			int16_t g = gg + factor;
 			int16_t b = gb + factor;
-		
+
 			if (b & 0xFF00)
 				b = ~b >> 24;
 			if (g & 0xFF00)
 				g = ~g >> 24;
 			if (r & 0xFF00)
 				r = ~r >> 24;
-		
+
 			*reinterpret_cast<Uint16 *>(pix) = SDL_MapRGB(m_surface->format, r, g, b);
 		}
-	  
 	}
 	unlock();
 }
@@ -205,14 +194,7 @@ void SurfaceSDL::blit(Point const dst, Surface * const src, Rect const srcrc, bo
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
-	//uint32_t flags = dynamic_cast<SurfaceSDL*>(src)->get_sdl_surface()->flags;
-                
-	//SDL_SetAlpha
-	//	(dynamic_cast<SurfaceSDL*>(src)->get_sdl_surface(),
-	//	 enable_alpha?SDL_SRCALPHA:0, 0);
-	//SDL_SetAlpha(m_surface, enable_alpha && SDL_SRCALPHA, 0);
 	SDL_BlitSurface(dynamic_cast<SurfaceSDL*>(src)->get_sdl_surface(), &srcrect, m_surface, &dstrect);
-	//SDL_SetAlpha(dynamic_cast<SurfaceSDL*>(src)->get_sdl_surface(), flags & SDL_SRCALPHA, 0);
 }
 
 

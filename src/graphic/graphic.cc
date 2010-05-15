@@ -690,15 +690,10 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 #endif
 		else
 			return;
-		
-
-		SDL_PixelFormat & format = const_cast<SDL_PixelFormat &>(surf.format());
-
-	// Write each row
 
 
+		// Write each row
 		for (uint32_t y = 0; y < surf_h; ++y) {
-
 			rowp = rowb;
 			if(sdlsurf)
 				for (uint32_t x = 0; x < surf_w; rowp += 4, ++x)

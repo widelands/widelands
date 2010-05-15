@@ -102,11 +102,10 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 		m_tex_h = surface->h;
 	}
 
-	//log("SurfaceOpenGL() size %d, %d old: (%d, %d)\n", m_tex_w, m_tex_w, surface->w, surface->w);
-
 	if
 		(surface->format->palette or (surface->format->colorkey > 0) or
-		 m_tex_w != surface->w or m_tex_h != surface->h)
+		 m_tex_w != static_cast<uint32_t>(surface->w) or 
+		 m_tex_h != static_cast<uint32_t>(surface->h))
 	{
 		log("SurfaceOpenGL: convert surface for opengl\n");
 		surface = SDL_CreateRGBSurface
@@ -186,10 +185,7 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	glTexImage2D( GL_TEXTURE_2D, 0, WL_GLINTERNALFORMAT, m_tex_w, m_tex_h, 0,
 	pixels_format, pixels_type, surface->pixels );
 	SDL_UnlockSurface(surface);
-	/*log
-		("TexImage: 0x%X, %d, 0x%X, 0x%X, 0x%X, 0x%X, 0x%X, 0x%X, surface->pixels )\n",
-		 GL_TEXTURE_2D, 0, Bpp, m_tex_w, m_tex_h, 0, pixels_format, pixels_type);
-*/
+
 	SDL_FreeSurface(surface);
 
 	pix_used += m_w * m_h;
