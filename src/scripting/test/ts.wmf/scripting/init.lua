@@ -9,6 +9,7 @@ include "test_player"
 include "test_ui"
 
 include "test_table"
+include "test_set"
 
 
 rv = lunit:run()

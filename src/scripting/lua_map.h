@@ -546,6 +546,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int __tostring(lua_State * L);
 	int __eq(lua_State * L);
 	int region(lua_State * L);
 

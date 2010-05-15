@@ -1792,6 +1792,7 @@ Field
 const char L_Field::className[] = "Field";
 const MethodType<L_Field> L_Field::Methods[] = {
 	METHOD(L_Field, __eq),
+	METHOD(L_Field, __tostring),
 	METHOD(L_Field, region),
 	{0, 0},
 };
@@ -2112,6 +2113,12 @@ int L_Field::get_owners(lua_State * L) {
  */
 int L_Field::__eq(lua_State * L) {
 	lua_pushboolean(L, (*get_user_class<L_Field>(L, -1))->m_c == m_c);
+	return 1;
+}
+int L_Field::__tostring(lua_State * L) {
+	char buf[100];
+	snprintf(buf, sizeof(buf), "Field(%i,%i)", m_c.x, m_c.y);
+	lua_pushstring(L, buf);
 	return 1;
 }
 
