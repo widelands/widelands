@@ -39,6 +39,7 @@ enum SurfaceType {
 class Surface {
 
 public:
+	virtual ~Surface() {}
 	/// Get width and height
 	virtual uint32_t get_w() const {return m_w;}
 	virtual uint32_t get_h() const {return m_h;}
