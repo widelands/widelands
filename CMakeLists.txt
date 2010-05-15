@@ -102,10 +102,13 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
 set (BUILD_SHARED_LIBS OFF)
-# we only include Boost Headers, no libraries
+# we only include Boost Headers to the main executable, no libraries
+# unit_test_framework is for testing only
+set (Boost_FIND_COMPONENTS unit_test_framework)
 set (Boost_USE_STATIC_LIBS   ON)
 set (Boost_USE_MULTITHREADED ON)
-find_package(Boost 1.35.0 REQUIRED)
+set (Boost_DETAILED_FAILURE_MSG ON)
+find_package(Boost 1.35.0 COMPONENTS unit_test_framework REQUIRED)
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
