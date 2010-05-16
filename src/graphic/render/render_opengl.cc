@@ -122,6 +122,7 @@ void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
 	* color of the destination and Xsrc is the color of the source.
 	*/
 	glEnable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
 
 	// And now simply draw a rect with facor as the color (this is the source color)
@@ -129,8 +130,8 @@ void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
 	glBegin(GL_QUADS);
 		glColor3f
 		((factor / 256.0f),
-			(factor / 256.0f),
-			(factor / 256.0f));
+		(factor / 256.0f),
+		(factor / 256.0f));
 		glVertex2f(rc.x,        rc.y);
 		glVertex2f(rc.x + rc.w, rc.y);
 		glVertex2f(rc.x + rc.w, rc.y + rc.h);
@@ -203,7 +204,7 @@ void SurfaceOpenGL::blit(Point const dst, Surface * const src, Rect const srcrc,
 	* getTexture() returns the texture id of the Surface. It creates
 	* the texture from the SDL_Surface if it doesn't exist
 	*/
-	
+	glEnable(GL_TEXTURE_2D);
 	glBindTexture( GL_TEXTURE_2D, tex);
 	
 	/* This block between blBegin() and glEnd() does the blit.
