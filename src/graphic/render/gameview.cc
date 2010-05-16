@@ -115,7 +115,7 @@ void GameView::rendermap
 	 Widelands::Player           const &       player,
 	 Point                                     viewofs)
 {
-	m_surface->clear();
+	m_surface->fill_rect(m_rect, RGBAColor(0,0,0,255));
 
 	if (player.see_all())
 		return rendermap(egbase, viewofs);

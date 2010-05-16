@@ -34,24 +34,44 @@ void draw_field_opengl
 	if(p1.b<=-128 and p2.b<=-128 and p3.b<=-128)
 		return;
 
+#warning This code works for the main view but is broken for the watchwindow
+
 	glBindTexture( GL_TEXTURE_2D, texture.getTexture());
 	GLfloat brightness;
+
+	Vertex t1(p1), t2(p2), t3(p3);
+	
+	t1.x = p1.x + subwin.x;
+	t1.y = p1.y + subwin.y;
+	t2.x = p2.x + subwin.x;
+	t2.y = p2.y + subwin.y;
+	t3.x = p3.x + subwin.x;
+	t3.y = p3.y + subwin.y;
+
+	if ( (t1.x<subwin.x and t2.x<subwin.x and t3.x<subwin.x) or
+		(t1.y<subwin.y and t2.y<subwin.y and t3.y<subwin.y))
+		return;
+
+	int subxr = subwin.x + subwin.w, subyd = subwin.y + subwin.h;
+	if ( (t1.x > subxr and t2.x>subxr and t3.x>subxr) or
+		(t1.y>subyd and t2.y>subyd and t3.y>subyd))
+		return;
 
 	glBegin(GL_TRIANGLES);
 		brightness=(150.0+p1.b)/150.0;
 		glColor3f(brightness, brightness, brightness);
-		glTexCoord2i(subwin.x + p1.tx, subwin.y + p1.ty);
-		glVertex2f(subwin.x + p1.x, subwin.y + p1.y);
+		glTexCoord2i(t1.tx, t1.ty);
+		glVertex2f(t1.x, t1.y);
 
 		brightness=(150.0+p2.b)/150.0;
 		glColor3f(brightness, brightness, brightness);
-		glTexCoord2i(subwin.x + p2.tx, subwin.y + p2.ty);
-		glVertex2f(subwin.x + p2.x, subwin.y + p2.y);
+		glTexCoord2i(t2.tx, t2.ty);
+		glVertex2f(t2.x, t2.y);
 
 		brightness=(150.0+p3.b)/150.0;
 		glColor3f(brightness, brightness, brightness);
-		glTexCoord2i(subwin.x + p3.tx, subwin.y + p3.ty);
-		glVertex2f(subwin.x + p3.x, subwin.y + p3.y);
+		glTexCoord2i(t3.tx, t3.ty);
+		glVertex2f(t3.x, t3.y);
 	glEnd();
 }
 
