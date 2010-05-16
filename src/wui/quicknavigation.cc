@@ -25,7 +25,9 @@
 
 static const uint32_t MaxHistorySize = 32;
 
-QuickNavigation::QuickNavigation(const Widelands::Editor_Game_Base& egbase, uint32_t screenwidth, uint32_t screenheight)
+QuickNavigation::QuickNavigation
+	(const Widelands::Editor_Game_Base & egbase,
+	 uint32_t screenwidth, uint32_t screenheight)
 : m_egbase(egbase)
 {
 	m_screenwidth = screenwidth;
@@ -36,7 +38,7 @@ QuickNavigation::QuickNavigation(const Widelands::Editor_Game_Base& egbase, uint
 	m_history_index = 0;
 }
 
-void QuickNavigation::set_setview(const QuickNavigation::SetViewFn& fn)
+void QuickNavigation::set_setview(const QuickNavigation::SetViewFn & fn)
 {
 	m_setview = fn;
 }
@@ -52,19 +54,26 @@ void QuickNavigation::view_changed(Point newpos, bool jump)
 {
 	if (m_havefirst && m_update) {
 		if (!jump) {
-			Point delta = MapviewPixelFunctions::calc_pix_difference(m_egbase.map(), newpos, m_anchor);
+			Point delta =
+				MapviewPixelFunctions::calc_pix_difference
+					(m_egbase.map(), newpos, m_anchor);
 
-			if (static_cast<uint32_t>(abs(delta.x)) > m_screenwidth ||
-			    static_cast<uint32_t>(abs(delta.y)) > m_screenheight)
+			if
+				(static_cast<uint32_t>(abs(delta.x)) > m_screenwidth ||
+			    	 static_cast<uint32_t>(abs(delta.y)) > m_screenheight)
 				jump = true;
 		}
 
 		if (jump) {
 			if (m_history_index < m_history.size())
-				m_history.erase(m_history.begin() + m_history_index, m_history.end());
+				m_history.erase
+					(m_history.begin() + m_history_index,
+					 m_history.end());
 			m_history.push_back(m_current);
 			if (m_history.size() > MaxHistorySize)
-				m_history.erase(m_history.begin(), m_history.end() - MaxHistorySize);
+				m_history.erase
+					(m_history.begin(),
+					 m_history.end() - MaxHistorySize);
 			m_history_index = m_history.size();
 		}
 	}
@@ -88,7 +97,9 @@ bool QuickNavigation::handle_key(bool down, SDL_keysym key)
 		unsigned int which = key.sym - SDLK_0;
 		assert(which < 10);
 
-		bool ctrl = WLApplication::get()->get_key_state(SDLK_LCTRL) || WLApplication::get()->get_key_state(SDLK_RCTRL);
+		bool ctrl =
+			WLApplication::get()->get_key_state(SDLK_LCTRL) ||
+			WLApplication::get()->get_key_state(SDLK_RCTRL);
 		if (ctrl) {
 			m_landmarks[which].point = m_current;
 			m_landmarks[which].set = true;
@@ -111,7 +122,7 @@ bool QuickNavigation::handle_key(bool down, SDL_keysym key)
 	}
 
 	if (key.sym == SDLK_PERIOD) {
-		if (m_history_index+1 < m_history.size()) {
+		if (m_history_index + 1 < m_history.size()) {
 			m_history_index++;
 			setview(m_history[m_history_index]);
 		}

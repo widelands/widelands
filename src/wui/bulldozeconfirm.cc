@@ -127,10 +127,12 @@ void BulldozeConfirm::think()
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if
-		(!todestroy ||
-		 !building  ||
-		 not iaplayer().can_act(building->owner().player_number()) or
-		 !(building->get_playercaps() & (1 << Widelands::Building::PCap_Bulldoze)))
+		(not todestroy ||
+		 not building  ||
+		 not iaplayer().can_act(building->owner().player_number())
+		 or not
+		 (building->get_playercaps()
+		  and (1 << Widelands::Building::PCap_Bulldoze)))
 		die();
 }
 
@@ -172,7 +174,8 @@ void BulldozeConfirm::OK::clicked()
  * \param building this is the building that the confirmation dialog displays.
  * \param todestroy if this is non-zero, then this immovable will be bulldozed
  * instead of \p building if the user confirms the dialog.
- * This is useful in the combination where \p todestroy is the base flag of \p building
+ * This is useful in the combination where \p todestroy is the base flag
+ * of \p building
  */
 void show_bulldoze_confirm
 	(Interactive_Player         &       player,

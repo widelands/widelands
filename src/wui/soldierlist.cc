@@ -39,11 +39,11 @@ static char const * pic_drop_soldier = "pics/menu_drop_soldier.png";
  */
 struct SoldierList : UI::Box {
 	SoldierList
-		(UI::Panel& parent,
-		 Interactive_GameBase& igb,
-		 Widelands::Building& building);
+		(UI::Panel & parent,
+		 Interactive_GameBase & igb,
+		 Widelands::Building & building);
 
-	SoldierControl& soldiers() const;
+	SoldierControl & soldiers() const;
 
 protected:
 	void think();
@@ -51,17 +51,17 @@ protected:
 private:
 	void drop_button_clicked();
 
-	Interactive_GameBase& m_igb;
-	Widelands::Building& m_building;
+	Interactive_GameBase & m_igb;
+	Widelands::Building & m_building;
 
-	UI::Table<Soldier&> m_table;
+	UI::Table<Soldier &> m_table;
 	UI::Callback_Button<SoldierList> m_drop_button;
 };
 
 SoldierList::SoldierList
-	(UI::Panel& parent,
-	 Interactive_GameBase& igb,
-	 Widelands::Building& building)
+	(UI::Panel & parent,
+	 Interactive_GameBase & igb,
+	 Widelands::Building & building)
 :
 UI::Box(&parent, 0, 0, UI::Box::Vertical),
 
@@ -92,9 +92,9 @@ m_drop_button
 	add(&m_drop_button, UI::Box::AlignCenter);
 }
 
-SoldierControl& SoldierList::soldiers() const
+SoldierControl & SoldierList::soldiers() const
 {
-	return *dynamic_cast<SoldierControl*>(&m_building);
+	return *dynamic_cast<SoldierControl *>(&m_building);
 }
 
 void SoldierList::think()
@@ -102,23 +102,30 @@ void SoldierList::think()
 	std::vector<Soldier *> soldierlist = soldiers().presentSoldiers();
 
 	uint32_t index = m_table.size();
-	while(index > 0) {
+	while (index > 0) {
 		index--;
 
-		if (std::find(soldierlist.begin(), soldierlist.end(), &m_table[index]) == soldierlist.end())
+		if
+			(std::find
+				(soldierlist.begin(), soldierlist.end(),
+				 &m_table[index])
+			 == soldierlist.end())
 			m_table.remove(index);
 	}
 
-	for(std::vector<Soldier*>::const_iterator it = soldierlist.begin(); it != soldierlist.end(); ++it) {
+	for
+		(std::vector<Soldier *>::const_iterator it = soldierlist.begin();
+		 it != soldierlist.end(); ++it)
+	{
 		Soldier & s = **it;
 		if (!m_table.find(**it))
 			m_table.add(s);
 	}
 
 	// Update soldier stats (they may change in training sites)
-	for(index = 0; index < m_table.size(); ++index) {
-		UI::Table<Soldier &>::Entry_Record& er = m_table.get_record(index);
-		Soldier& s = m_table[index];
+	for (index = 0; index < m_table.size(); ++index) {
+		UI::Table<Soldier &>::Entry_Record & er = m_table.get_record(index);
+		Soldier & s = m_table[index];
 		uint32_t const  hl = s.get_hp_level         ();
 		uint32_t const mhl = s.get_max_hp_level     ();
 		uint32_t const  al = s.get_attack_level     ();
@@ -153,14 +160,15 @@ void SoldierList::think()
 void SoldierList::drop_button_clicked()
 {
 	if (m_table.has_selection())
-		m_igb.game().send_player_drop_soldier(m_building, m_table.get_selected().serial());
+		m_igb.game().send_player_drop_soldier
+			(m_building, m_table.get_selected().serial());
 }
 
 
-UI::Panel* create_soldier_list
-	(UI::Panel& parent,
-	 Interactive_GameBase& igb,
-	 Widelands::Building& building)
+UI::Panel * create_soldier_list
+	(UI::Panel & parent,
+	 Interactive_GameBase & igb,
+	 Widelands::Building & building)
 {
 	return new SoldierList(parent, igb, building);
 }
