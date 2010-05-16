@@ -32,6 +32,7 @@
 #include "graphic/render/surface_sdl.h"
 
 #include "log.h"
+#include "upcast.h"
 
 using Widelands::BaseImmovable;
 using Widelands::Coords;
@@ -243,7 +244,13 @@ void RenderTarget::clear()
 }
 
 /**
- * Blits a blitsource into this bitmap
+ * Blits a Surface on the screen or (if possible) on another Surface
+ * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
+ * to a non screen surface.
+ *
+ * This blit function copies the pixels to the destination surface. 
+ * I the source surface contains a alpha channel this is used during
+ * the blit.
  */
 void RenderTarget::blit(const Point dst, const PictureID picture)
 {
@@ -251,10 +258,56 @@ void RenderTarget::blit(const Point dst, const PictureID picture)
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
 }
 
+/**
+ * Blits a Surface on the screen or (if possible) on another Surface
+ * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
+ * to a non screen surface.
+ *
+ * This blit function copies the pixels values without alpha channel to the
+ * destination surface.
+ */
 void RenderTarget::blit_solid(const Point dst, const PictureID picture)
 {
-	if (Surface * const src = g_gr->get_picture_surface(picture))
+	Surface * const src = g_gr->get_picture_surface(picture);
+	upcast(SurfaceSDL, sdlsurf, src);
+	bool alpha;
+	uint8_t alphaval;
+	if (sdlsurf) {
+		alpha = sdlsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
+		alphaval = sdlsurf->get_sdl_surface()->format->alpha;
+		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
+	}
+	if (src)
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
+	if (sdlsurf) {
+		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
+	}
+}
+
+/**
+ * Blits a Surface on the screen or (if possible) on another Surface
+ * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
+ * to a non screen surface.
+ *
+ * This blit function copies the pixels (including alpha channel) to the destination surface.
+ * The destination pixels will be exactly like the source pixels.
+ */
+void RenderTarget::blit_copy(Point dst, PictureID picture)
+{
+	Surface * const src = g_gr->get_picture_surface(picture);
+	upcast(SurfaceSDL, sdlsurf, src);
+	bool alpha;
+	uint8_t alphaval;
+	if (sdlsurf) {
+		alpha = sdlsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
+		alphaval = sdlsurf->get_sdl_surface()->format->alpha;
+		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
+	}
+	if (src)
+		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
+	if (sdlsurf) {
+		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
+	}
 }
 
 void RenderTarget::blitrect

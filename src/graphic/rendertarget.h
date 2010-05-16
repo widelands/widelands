@@ -72,6 +72,7 @@ struct RenderTarget {
 
 	void blit(Point dst, PictureID picture);
 	void blit_solid(Point dst, PictureID picture);
+	void blit_copy(Point dst, PictureID picture);
 	void blitrect(Point dst, PictureID picture, Rect src);
 	void tile(Rect, PictureID picture, Point ofs);
 
