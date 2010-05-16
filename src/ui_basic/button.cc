@@ -47,6 +47,7 @@ Button::Button //  for textual buttons
 	m_repeating     (false),
 	m_flat          (flat),
 	m_needredraw    (true),
+	m_cache_pic     (g_gr->get_no_picture()),
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (g_gr->get_no_picture()),
@@ -78,6 +79,7 @@ Button::Button //  for pictorial buttons
 	m_repeating     (false),
 	m_flat          (flat),
 	m_needredraw    (true),
+	m_cache_pic     (g_gr->get_no_picture()),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
 	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
@@ -171,12 +173,13 @@ void Button::draw(RenderTarget & odst)
 	if (g_gr->caps().offscreen_rendering) {
 		if(!m_needredraw)
 		{
-			odst.blit(Point(0, 0), m_cache_pid);
+			odst.blit(Point(0, 0), m_cache_pic);
 			return;
 		} else {
-			m_cache_pid =
-				g_gr->create_picture_surface(odst.get_w(), odst.get_h());
-			dst = (g_gr->get_surface_renderer(m_cache_pid));
+			if (m_cache_pic == g_gr->get_no_picture())
+				m_cache_pic =
+					g_gr->create_picture_surface(odst.get_w(), odst.get_h());
+			dst = (g_gr->get_surface_renderer(m_cache_pic));
 		}
 	}
 
@@ -283,7 +286,7 @@ void Button::draw(RenderTarget & odst)
 	}
 
 	if (g_gr->caps().offscreen_rendering)
-		odst.blit(Point(0, 0), m_cache_pid);
+		odst.blit(Point(0, 0), m_cache_pic);
 	m_needredraw=false;
 }
 

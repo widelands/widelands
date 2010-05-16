@@ -88,7 +88,7 @@ private:
 	bool        m_repeating;
 	bool        m_flat;
 	bool        m_needredraw;
-	PictureID   m_cache_pid;
+	PictureID   m_cache_pic;
 	
 
 	int32_t     m_time_nextact;

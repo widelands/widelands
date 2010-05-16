@@ -55,7 +55,8 @@ BaseListselect::BaseListselect
 	m_show_check(show_check),
 	m_fontname(UI_FONT_NAME),
 	m_fontsize(UI_FONT_SIZE_SMALL),
-	m_needredraw(true)
+	m_needredraw(true),
+	m_cache_pic(g_gr->get_no_picture())
 {
 	set_think(false);
 
@@ -346,28 +347,30 @@ Redraw the listselect box
 */
 void BaseListselect::draw(RenderTarget & odst)
 {
-	// Only render if something changed
-	/*
-	if(!m_needredraw)
-	{
-		odst.blit(Point(0, 0), m_cache_pid);
-		return;
+	RenderTarget * dst = &odst;
+
+	if (g_gr->caps().offscreen_rendering) {
+		if(!m_needredraw)
+		{
+			odst.blit(Point(0, 0), m_cache_pic);
+			return;
+		} else {
+			if (m_cache_pic == g_gr->get_no_picture())
+				m_cache_pic =
+					g_gr->create_picture_surface(odst.get_w(), odst.get_h());
+			dst = (g_gr->get_surface_renderer(m_cache_pic));
+		}
 	}
-	
-	// Create a off-screen surface 
-	m_cache_pid = g_gr->create_picture_surface(odst.get_w(), odst.get_h());
-
-	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
-	*/
-
-	RenderTarget &dst = odst; //*(g_gr->get_surface_renderer(m_cache_pid));
 
 	// draw text lines
 	const uint32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
 	int32_t y = 1 + idx * lineheight - m_scrollpos;
 
-	//dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	if (not g_gr->caps().offscreen_rendering)
+		dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	else
+		dst->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(20, 20, 20, 80));
 
 	while (idx < m_entry_records.size()) {
 		assert
@@ -392,10 +395,15 @@ void BaseListselect::draw(RenderTarget & odst)
 			assert(2 <= get_eff_w());
 			// Make the area a bit more white and more transparent
 			if( r.w > 0 and r.h > 0 )
-				dst.fill_rect(r, RGBAColor(100, 100, 100, 80));
-			//dst.brighten_rect
-			//(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
-			// -ms_darken_value*2);
+			{
+				if (g_gr->caps().offscreen_rendering)
+					dst->fill_rect(r, RGBAColor(100, 100, 100, 80));
+				else
+					dst->brighten_rect
+						(r, -ms_darken_value*2);
+						//(Rect(Point(1, y), get_eff_w() - 2,
+						// m_lineheight), -ms_darken_value*2);
+			}
 		}
 
 
@@ -411,7 +419,7 @@ void BaseListselect::draw(RenderTarget & odst)
 
 		// Horizontal center the string
 		UI::g_fh->draw_string
-			(dst,
+			(*dst,
 			 m_fontname, m_fontsize,
 			 col,
 			 RGBColor(107, 87, 55),
@@ -429,15 +437,21 @@ void BaseListselect::draw(RenderTarget & odst)
 		if (er.picid != g_gr->get_no_picture()) {
 			uint32_t w, h;
 			g_gr->get_picture_size(er.picid, w, h);
-			dst.blit_solid(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+			if (g_gr->caps().offscreen_rendering)
+				dst->blit_solid
+					(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+			else
+				dst->blit
+					(Point(1, y + (get_lineheight() - h) / 2), er.picid);
 		}
 
 		y += lineheight;
 		++idx;
 	}
-	//SDL_SetAlpha(&surf, SDL_SRCALPHA, 0);
-	//odst.blit(Point(0, 0), m_cache_pid);
-	//m_needredraw = false;
+	
+	if (g_gr->caps().offscreen_rendering)
+		odst.blit(Point(0, 0), m_cache_pic);
+	m_needredraw = false;
 }
 
 /**
