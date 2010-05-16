@@ -144,7 +144,7 @@ private:
 			Decrease_Permanent(Ware_Type_Box & parent) :
 				UI::Button
 					(&parent, "decr_permanent_target_quantity", 190, 0, 24, 24,
-					 g_gr->get_no_picture(),
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 					 _("Decrease permanent target quantity"),
 					 true)
@@ -175,7 +175,7 @@ private:
 			Increase_Permanent(Ware_Type_Box & parent) :
 				UI::Button
 					(&parent, "incr_permanent_target_quantity", 214, 0, 24, 24,
-					 g_gr->get_no_picture(),
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 					 _("Increase permanent target quantity"))
 			{
@@ -204,7 +204,7 @@ private:
 			Decrease_Temporary(Ware_Type_Box & parent) :
 				UI::Button
 					(&parent, "decr_temp_target_quantity", 280, 0, 24, 24,
-					 g_gr->get_no_picture(),
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 					 _("Decrease temporary target quantity"))
 			{
@@ -235,7 +235,7 @@ private:
 			Increase_Temporary(Ware_Type_Box & parent) :
 				UI::Button
 					(&parent, "incr_temp_target_quantity",  304, 0, 24, 24,
-					 g_gr->get_no_picture(),
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 					 _("Increase temporary target quantity"))
 			{
@@ -263,7 +263,8 @@ private:
 			Reset(Ware_Type_Box & parent) :
 				UI::Button
 					(&parent, "reset_target_quantity",  330, 0, 90, 24,
-					 g_gr->get_no_picture(), _("Reset"),
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+					 _("Reset"),
 					 _("Reset target quantity to default value"))
 			{}
 			void clicked() {
@@ -337,7 +338,7 @@ private:
 			Decrease_Permanent(Worker_Type_Box & parent) :
 				UI::Button
 					(&parent, "decr_perm_target_quantity",  190, 0, 24, 24,
-					 g_gr->get_no_picture(),
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 					 _("Decrease permanent target quantity"),
 					 true)
@@ -368,7 +369,7 @@ private:
 			Increase_Permanent(Worker_Type_Box & parent) :
 				UI::Button
 					(&parent, "incr_perm_target_quantity",  214, 0, 24, 24,
-					 g_gr->get_no_picture(),
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 					 _("Increase permanent target quantity"))
 			{
@@ -397,7 +398,7 @@ private:
 			Decrease_Temporary(Worker_Type_Box & parent) :
 				UI::Button
 					(&parent, "decr_temp_target_quantity",  280, 0, 24, 24,
-					 g_gr->get_no_picture(),
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 					 _("Decrease temporary target quantity"))
 			{
@@ -428,7 +429,7 @@ private:
 			Increase_Temporary(Worker_Type_Box & parent) :
 				UI::Button
 					(&parent, "incr_temp_target_quantity",  304, 0, 24, 24,
-					 g_gr->get_no_picture(),
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 					 _("Increase temporary target quantity"))
 			{
@@ -456,7 +457,8 @@ private:
 			Reset(Worker_Type_Box & parent) :
 				UI::Button
 					(&parent, "reset_target_quantity",  330, 0, 90, 24,
-					 g_gr->get_no_picture(), _("Reset"),
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+					 _("Reset"),
 					 _("Reset target quantity to default value"))
 			{}
 			void clicked() {

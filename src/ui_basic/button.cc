@@ -177,12 +177,13 @@ void Button::draw(RenderTarget & odst)
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
 
 	// Draw the background
-	if (not m_flat)
+	if (not m_flat) {
+		assert(m_pic_background != g_gr->get_no_picture());
 		dst.tile
 			(Rect(Point(0, 0), get_w(), get_h()),
 			 m_pic_background,
 			 Point(get_x(), get_y()));
-	else
+	} else
 		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
 	
