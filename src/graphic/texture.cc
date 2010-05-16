@@ -95,15 +95,20 @@ is_32bit   (format.BytesPerPixel == 4)
 			break;
 		}
 
+#ifdef USE_OPENGL
 		if (g_opengl) {
 			SurfaceOpenGL * tsurface =
 				&dynamic_cast<SurfaceOpenGL &>
 				(g_gr->LoadImage(fname));
 			// SDL_ConvertSurface(surf, &fmt, 0);
 			m_glFrames.push_back(tsurface);
+			tsurface->lock();
+			m_mmap_color = tsurface->get_pixel(0, 0);
+			tsurface->unlock();
 			++m_nrframes;
 			continue;
 		}
+#endif
 
 
 		// Determine color map if it's the first frame
@@ -182,9 +187,11 @@ Texture::~Texture ()
  * Return the basic terrain colour to be used in the minimap.
 */
 Uint32 Texture::get_minimap_color(const char shade) {
+	if (not m_pixels)
+		return m_mmap_color;
+
 	uint8_t clr = m_pixels[0]; // just use the top-left pixel
 	uint32_t table = static_cast<uint8_t>(shade);
-
 	return
 		is_32bit ?
 		static_cast<const Uint32 *>(m_colormap->get_colormap())

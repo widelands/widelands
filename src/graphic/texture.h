@@ -71,6 +71,7 @@ struct Texture {
 private:
 	Colormap * m_colormap;
 	uint8_t  * m_pixels;
+	uint32_t   m_mmap_color;
 	uint8_t  * m_curframe;
 	char     * m_texture_picture;
 	uint32_t   m_nrframes;
