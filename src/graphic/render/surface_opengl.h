@@ -56,7 +56,7 @@ public:
 		oglTexture(GLuint id): m_textureID(id) {}
 		~oglTexture()
 			{glDeleteTextures( 1, &m_textureID);}
-		GLuint id() {return m_textureID;}
+		GLuint id() const {return m_textureID;}
 	private:
 		GLuint m_textureID;
 	};
@@ -77,7 +77,7 @@ public:
 	/// Save a bitmap of this to a file
 	//void save_bmp(const char & fname) const;
 
-	GLuint get_texture()
+	GLuint get_texture() const
 	{
 #if defined(DEBUG)
 		if (m_surf_type != SURFACE_SOURCE)
@@ -125,7 +125,7 @@ public:
 		m_dest_w = w; m_dest_h = h;
 	}
 
-	oglTexture & getTexture(){return *m_texture;}
+	oglTexture & getTexture() {return *m_texture;}
 
 private:
 	SurfaceOpenGL & operator= (SurfaceOpenGL const &);

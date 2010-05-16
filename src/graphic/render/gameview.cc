@@ -18,7 +18,6 @@
  */
 
 #include "gameview.h"
-#include "terrain_sdl.h"
 #include "upcast.h"
 
 #include "economy/road.h"
@@ -38,6 +37,9 @@
 #include "graphic/texture.h"
 
 #include "wui/overlay_manager.h"
+
+#include "terrain_sdl.h"
+#include "terrain_opengl.h"
 
 using Widelands::BaseImmovable;
 using Widelands::Coords;
@@ -122,6 +124,17 @@ void GameView::rendermap
 
 	const Player::Field * const first_player_field = player.fields();
 	Widelands::Time const gametime = egbase.get_gametime();
+
+#ifdef USE_OPENGL
+	if (g_opengl) {
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+		glScalef
+			(1.0f/static_cast<GLfloat>(TEXTURE_WIDTH),
+			 1.0f/static_cast<GLfloat>(TEXTURE_HEIGHT), 1);
+		glDisable(GL_BLEND);
+	}
+#endif
 
 	while (dy--) {
 		const int32_t posy = b_posy;
@@ -538,6 +551,13 @@ void GameView::rendermap
 		}
 	}
 
+#ifdef USE_OPENGL
+	if (g_opengl) {
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+	}
+#endif
+
 	g_gr->reset_texture_animation_reminder();
 }
 
@@ -923,10 +943,32 @@ void GameView::renderminimap
 	draw_minimap(egbase, player, m_rect, viewpoint - m_offset, flags);
 }
 
+
+
 /**
  * Draw ground textures and roads for the given parallelogram (two triangles)
  * into the bitmap.
-*/
+ *
+ * Vertices:
+ *   - f_vert vertice of the field
+ *   - r_vert vertice right of the field
+ *   - bl_vert vertice bottom left of the field
+ *   - br_vert vertice bottom right of the field
+ *
+ * Textures:
+ *   - f_r_texture Terrain of the triangle right of the field
+ *   - f_d_texture Terrain of the triangle under of the field
+ *   - tr_d_texture Terrain of the triangle to of the right triangle ??
+ *   - l_r_texture Terrain of the triangle left if the down triangle ??
+ *
+ *             (tr_d)
+ *
+ *       (f) *------* (r)
+ *          / \  r /
+ *  (l_r)  /   \  /
+ *        /  d  \/
+ *  (bl) *------* (br)
+ */
 
 void GameView::draw_field
 	(Rect          & subwin,
@@ -968,7 +1010,14 @@ void GameView::draw_field
 	} 
 #ifdef USE_OPENGL
 	else if (oglsurf) {
-		log("Should render terrain with opengl here ...\n");
+		
+
+		// Draw triangle right (bottom) of the field
+		draw_field_opengl(*oglsurf, subwin, f_vert, br_vert, r_vert, f_r_texture);
+		// Draw triangle bottom of the field
+		draw_field_opengl(*oglsurf, subwin, f_vert, bl_vert, br_vert, f_d_texture);
+		// Draw the roads
+		draw_roads_opengl(subwin, roads, f_vert, r_vert, bl_vert, br_vert);
 	}
 #endif
 }

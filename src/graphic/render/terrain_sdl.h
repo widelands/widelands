@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TERRAIN_H
-#define TERRAIN_H
+#ifndef TERRAIN_SDL_H
+#define TERRAIN_SDL_H
 
 #include "constants.h"
 #include "log.h"
@@ -221,35 +221,6 @@ template<typename T> static void render_triangle
 {
 	if (p1.y == p2.y && p2.y == p3.y)
 		return; // degenerate triangle
-#if NULL_WAS_HAS_OPENGL
-	if (g_opengl) {
-		if(p1.b==-128 and p2.b==-128 and p3.b==-128)
-			return;
-		glMatrixMode(GL_TEXTURE);
-		glLoadIdentity();
-		glScalef(1.0f/(GLfloat)TEXTURE_WIDTH, 1.0f/(GLfloat)TEXTURE_HEIGHT, 1);
-		glBindTexture( GL_TEXTURE_2D, tex.getTexture());
-		glDisable(GL_BLEND);
-		GLfloat brightness;
-		glBegin(GL_TRIANGLES);
-		    brightness=(150.0+p1.b)/150.0;
-		    glColor3f(brightness, brightness, brightness);
-		    glTexCoord2i(p1.tx, p1.ty);
-		    glVertex2f(p1.x, p1.y);
-		    
-		    brightness=(150.0+p2.b)/150.0;
-		    glColor3f(brightness, brightness, brightness);
-		    glTexCoord2i(p2.tx, p2.ty);
-		    glVertex2f(p2.x, p2.y);
-		    
-		    brightness=(150.0+p3.b)/150.0;
-		    glColor3f(brightness, brightness, brightness);
-		    glTexCoord2i(p3.tx, p3.ty);
-		    glVertex2f(p3.x, p3.y);
-		glEnd();
-		return;
-	}
-#endif
 
 	// Clip the triangle
 	WLPolygon polygon;
@@ -569,32 +540,6 @@ template<typename T> static void render_road_horiz
 	int32_t const ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int32_t centery = start.y << 16;
 
-#ifdef NULL_WAS_HAS_OPENGL
-	//log("Warning: render_triangle not implemented\n");
-	if (g_opengl) {
-		glMatrixMode(GL_TEXTURE);
-		glLoadIdentity();
-		glScalef(1.0f/(GLfloat)TEXTURE_WIDTH, 1.0f/(GLfloat)TEXTURE_HEIGHT, 1);
-		glBindTexture( GL_TEXTURE_2D, const_cast<Surface &>(src).getTexture());
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glColor4f(1.0f,1.0f,1.0f,0.6f);
-		glBegin(GL_QUADS);
-		    glTexCoord2i(0, 0);
-		    glVertex2f(start.x, start.y-2);
-		    //glTexCoord2i(p2.tx, p2.ty);
-		    glTexCoord2i(TEXTURE_WIDTH, 0);
-		    glVertex2f(end.x, end.y-2);
-		    //glTexCoord2i(p3.tx, p3.ty);
-		    glTexCoord2i(TEXTURE_WIDTH, 4);
-		    glVertex2f(end.x, end.y+2);
-		    glTexCoord2i(TEXTURE_WIDTH, 4);
-		    glVertex2f(start.x, start.y+2);
-		glEnd();
-		return;
-	}
-#endif
-
 	for (int32_t x = start.x, sx = 0; x < end.x; ++x, centery += ydiff, ++sx) {
 		if (x < 0 || x >= dstw)
 			continue;
@@ -621,30 +566,6 @@ template<typename T> static void render_road_vert
 
 	int32_t const xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int32_t centerx = start.x << 16;
-
-#ifdef NULL_WAS_HAS_OPENGL
-	//log("Warning: render_triangle not implemented\n");
-	if (g_opengl) {
-		glMatrixMode(GL_TEXTURE);
-		glLoadIdentity();
-		glScalef(1.0f/(GLfloat)TEXTURE_WIDTH, 1.0f/(GLfloat)TEXTURE_HEIGHT, 1);
-		glBindTexture( GL_TEXTURE_2D, const_cast<Surface &>(src).getTexture());
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glColor4f(1.0f,1.0f,1.0f,0.6f);
-		glBegin(GL_QUADS);
-		    glTexCoord2i(0, 0);
-		    glVertex2f(start.x - 3, start.y);
-		    glTexCoord2i(6, 0);
-		    glVertex2f(start.x + 3, start.y);
-		    glTexCoord2i(TEXTURE_WIDTH, TEXTURE_HEIGHT);
-		    glVertex2f(end.x + 3, end.y);
-		    glTexCoord2i(TEXTURE_WIDTH - 6 , TEXTURE_HEIGHT);
-		    glVertex2f(end.x - 3, end.y);
-		glEnd();
-		return;
-	}
-#endif
 
 	for (int32_t y = start.y, sy = 0; y < end.y; ++y, centerx += xdiff, ++sy) {
 		if (y < 0 || y >= dsth)
