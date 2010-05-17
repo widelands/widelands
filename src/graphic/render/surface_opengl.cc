@@ -212,13 +212,12 @@ SurfaceOpenGL::~SurfaceOpenGL() {
 		num_tex--;
 		delete m_texture;
 	}
-	/*
-	log
+	/* log
 		("~SurfaceOpenGL(): texture stats: num: %lu, "
 		 "used: %lu (%luM), alocated: %lu (%luM) --\n",
 		 num_tex, pix_used * 4, pix_used * 4 / (1024 * 1024),
-		 pix_aloc * 4, pix_aloc * 4/ (1024 * 1024));
-	*/
+		 pix_aloc * 4, pix_aloc * 4/ (1024 * 1024)); */
+
 	delete[] m_pixels;
 }
 

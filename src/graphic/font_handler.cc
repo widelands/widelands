@@ -27,9 +27,12 @@
 #include "log.h"
 #include "wexception.h"
 #include "text_parser.h"
+#include "upcast.h"
 
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
+#include "graphic/render/surface_sdl.h"
+#include "graphic/render/surface_opengl.h"
 #include "graphic/font_handler.h"
 
 #include <SDL_image.h>
@@ -340,8 +343,6 @@ void Font_Handler::render_caret
 	 SDL_Surface       & line,
 	 std::string const & text_caret_pos)
 {
-#warning TODO OpenGL: rewrite for new renderer
-#if 0
 	int32_t caret_x, caret_y;
 
 	TTF_SizeUTF8(&font, text_caret_pos.c_str(), &caret_x, &caret_y);
@@ -350,20 +351,23 @@ void Font_Handler::render_caret
 	Surface * const caret_surf =
 		g_gr->get_picture_surface
 			(g_gr->get_picture(PicMod_Game, "pics/caret.png"));
-#ifdef USE_OPENGL
+
+	//TODO: Implement caret rendering for opengl
 	if(!g_opengl)
-#else
 	{
-		SDL_Surface * const caret_surf_sdl = caret_surf->m_surface;
+		upcast(SurfaceSDL, sdlsurf, caret_surf);
+		assert(sdlsurf);
+		SDL_Surface * const caret_surf_sdl = sdlsurf->get_sdl_surface();
 
 		SDL_Rect r;
 		r.x = caret_x - caret_surf_sdl->w;
 		r.y = (caret_y - caret_surf_sdl->h) / 2;
 		
 		SDL_BlitSurface(caret_surf_sdl, 0, &line, &r);
+	} else {
+		log("WARNING: Should render caret here but it's not implemented\n");
 	}
-#endif
-#endif
+
 }
 
 /*
@@ -422,12 +426,7 @@ void Font_Handler::draw_richtext
 	 bool           const transparent)
 {
 	log("Font_Handler::draw_richtext(%s)\n", text.c_str());
-#ifdef USE_OPENGL
-	if(g_opengl)
-		return;
-#endif
 
-#warning TODO OpenGL:  fix to work with new renderer
 	PictureID picid;
 	if (widget_cache == Widget_Cache_Use)
 		picid = widget_cache_id;
@@ -485,10 +484,11 @@ void Font_Handler::draw_richtext
 						img_surf_h < static_cast<int32_t>(image->get_h()) ?
 						image->get_h() : img_surf_h;
 					img_surf_w = img_surf_w + image->get_w();
-#if 0
-					//#ifndef USE_OPENGL
-					rend_cur_images.push_back(image->m_surface);
-#endif
+
+					upcast(SurfaceSDL, sdlsurf, image);
+					if (sdlsurf)
+						rend_cur_images.push_back(sdlsurf->get_sdl_surface());
+
 				}
 			}
 			SDL_Surface * const block_images =
