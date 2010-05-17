@@ -71,12 +71,17 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 		 throw wexception
 			  ("couldn't open splash screen."
 				"make sure all the data files are installed properly");
-	m_res_background = g_gr->get_resized_picture
+
+	m_res_background = g_gr->get_no_picture();
+	if (g_gr->caps().resize_surfaces)
+		m_res_background = g_gr->get_resized_picture
 			(m_pic_background, m_xres, m_yres, Graphic::ResizeMode_Loose);
 }
 
 Fullscreen_Menu_Base::~Fullscreen_Menu_Base() {
-	if (m_res_background != m_pic_background)
+	if 
+		(m_res_background != g_gr->get_no_picture() and 
+		 m_res_background != m_pic_background)
 		g_gr->free_picture_surface(m_res_background);
 }
 
@@ -85,7 +90,10 @@ Fullscreen_Menu_Base::~Fullscreen_Menu_Base() {
  * Draw the background / splash screen
 */
 void Fullscreen_Menu_Base::draw(RenderTarget & dst) {
-	dst.blit(Point(0, 0), m_res_background);
+	if (g_gr->caps().blit_resized)
+		dst.blit(Rect(Point(0, 0), dst.get_w(), dst.get_h()), m_pic_background);
+	else
+		dst.blit(Point(0, 0), m_res_background);
 }
 
 

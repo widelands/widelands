@@ -255,6 +255,23 @@ void RenderTarget::clear()
 void RenderTarget::blit(const Point dst, const PictureID picture)
 {
 	if (Surface * const src = g_gr->get_picture_surface(picture))
+		doblit
+			(Rect(dst, 0, 0),
+			 src, Rect(Point(0, 0), src->get_w(), src->get_h()));
+}
+
+/**
+ * Blits a Surface on the screen or (if possible) on another Surface
+ * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
+ * to a non screen surface.
+ *
+ * This blit function copies the pixels to the destination surface. 
+ * I the source surface contains a alpha channel this is used during
+ * the blit.
+ */
+void RenderTarget::blit(const Rect dst, const PictureID picture)
+{
+	if (Surface * const src = g_gr->get_picture_surface(picture))
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
 }
 
@@ -281,10 +298,14 @@ void RenderTarget::blit_solid(const Point dst, const PictureID picture)
 		alpha = sdlsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
 		alphaval = sdlsurf->get_sdl_surface()->format->alpha;
 		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
-		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
+		doblit
+			(Rect(dst, 0, 0),
+			 src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
 		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
 	} else if (oglsurf) {
-		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
+		doblit
+			(Rect(dst, 0, 0),
+			 src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
 	}
 	
 }
@@ -309,7 +330,9 @@ void RenderTarget::blit_copy(Point dst, PictureID picture)
 		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
 	}
 	if (src)
-		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
+		doblit
+			(Rect(dst, 0, 0),
+			 src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
 	if (sdlsurf) {
 		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
 	}
@@ -322,7 +345,7 @@ void RenderTarget::blitrect
 	assert(0 <= srcrc.y);
 
 	if (Surface * const src = g_gr->get_picture_surface(picture))
-		doblit(dst, src, srcrc);
+		doblit(Rect(dst, 0, 0), src, srcrc);
 }
 
 /**
@@ -427,7 +450,7 @@ void RenderTarget::drawanim
 
 	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
 
-	doblit(dst, frame, srcrc);
+	doblit(Rect(dst, 0, 0), frame, srcrc);
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
@@ -466,7 +489,7 @@ void RenderTarget::drawanimrect
 
 	dst += srcrc;
 
-	doblit(dst, frame, srcrc);
+	doblit(Rect(dst, 0, 0), frame, srcrc);
 }
 
 /**
@@ -528,7 +551,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
 /**
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
-void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc, bool enable_alpha)
+void RenderTarget::doblit(Rect dst, Surface * const src, Rect srcrc, bool enable_alpha)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
@@ -570,5 +593,9 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc, bool enabl
 	dst += m_rect;
 
 	// Draw it
-	m_surface->blit(dst, src, srcrc, enable_alpha);
+	upcast(SurfaceOpenGL, oglsurf, m_surface);
+	if (oglsurf and dst.w and dst.h)
+		oglsurf->blit(dst, src, srcrc, enable_alpha);
+	else
+		m_surface->blit(Point(dst.x, dst.y), src, srcrc, enable_alpha);
 }

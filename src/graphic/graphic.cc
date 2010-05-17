@@ -179,7 +179,7 @@ Graphic::Graphic
 			( m_caps.gl.tex_power_of_two?"must have a size power of two\n":
 			 "may have any size\n");
 
-		m_caps.resize_surfaces = true;
+		m_caps.resize_surfaces = false;
 		m_caps.offscreen_rendering = false;
 		m_caps.blit_resized = true;
 	}

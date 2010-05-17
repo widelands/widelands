@@ -71,6 +71,7 @@ struct RenderTarget {
 	void clear();
 
 	void blit(Point dst, PictureID picture);
+	void blit(Rect dst, PictureID picture);
 	void blit_solid(Point dst, PictureID picture);
 	void blit_copy(Point dst, PictureID picture);
 	void blitrect(Point dst, PictureID picture, Rect src);
@@ -97,7 +98,7 @@ struct RenderTarget {
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Point dst, Surface * const src, Rect srcrc, bool enable_alpha=true);
+	void doblit(Rect dst, Surface * const src, Rect srcrc, bool enable_alpha=true);
 
 	///The target surface
 	Surface * m_surface;

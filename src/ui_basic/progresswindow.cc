@@ -72,22 +72,29 @@ void ProgressWindow::draw_background
 
 	PictureID const background_original =
 		g_gr->get_picture(PicMod_Menu, m_background.c_str());
-	PictureID const background_resized  =
-		g_gr->get_resized_picture //  FIXME memory leak!!!
-			(background_original, xres, yres, Graphic::ResizeMode_Loose);
+	
+	if (g_gr->caps().resize_surfaces and not g_gr->caps().blit_resized) {
+		PictureID const background_resized  =
+			g_gr->get_resized_picture
+				(background_original, xres, yres,
+				 Graphic::ResizeMode_Loose);
 
-	if (background_resized != g_gr->get_no_picture()) {
-		uint32_t w = 0;
-		uint32_t h = 0;
-		g_gr->get_picture_size(background_resized, w, h);
-		// center picture horizontally
-		Point pt((xres - w) / 2, 0);
-		rt.blitrect(pt, background_resized, wnd_rect);
-		g_gr->update_fullscreen();
+		if (background_resized != g_gr->get_no_picture()) {
+			uint32_t w = 0;
+			uint32_t h = 0;
+			g_gr->get_picture_size(background_resized, w, h);
+			// center picture horizontally
+			Point pt((xres - w) / 2, 0);
+			rt.blitrect(pt, background_resized, wnd_rect);
+			g_gr->update_fullscreen();
+		}
+
+		if (background_resized != background_original)
+			g_gr->free_picture_surface(background_resized);
+	} else {
+		rt.blit(Rect(Point(0, 0), rt.get_w(), rt.get_h()), background_original);
+
 	}
-
-	if (background_resized != background_original)
-		g_gr->free_picture_surface(background_resized);
 
 	const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
 	m_label_rectangle.x = xres / 4;

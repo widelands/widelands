@@ -175,8 +175,8 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	handle_glerror();
 
 	// set texture filter to siply take the  nearest pixel.
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 	handle_glerror();
 
 	SDL_LockSurface(surface);
