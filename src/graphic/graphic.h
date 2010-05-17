@@ -71,6 +71,8 @@ struct GLCaps
 struct GraphicCaps
 {
 	bool offscreen_rendering;
+	bool resize_surfaces;
+	bool blit_resized;
 	GLCaps gl;
 };
 

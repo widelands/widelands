@@ -75,9 +75,7 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	Surface(par_surface.w, par_surface.h, SURFACE_SOURCE),
 	m_glTexUpdate(false),
 	m_pixels(NULL),
-	m_locked(false),
-	m_dest_w(0),
-	m_dest_h(0)
+	m_locked(false)
 {
 	GLuint texture;
 	SDL_Surface *surface;
@@ -227,9 +225,7 @@ SurfaceOpenGL::SurfaceOpenGL(int w, int h):
 	m_texture(0),
 	m_glTexUpdate(false),
 	m_pixels(NULL),
-	m_locked(false),
-	m_dest_w(0),
-	m_dest_h(0)
+	m_locked(false)
 {
 	if (g_gr and g_gr->caps().gl.tex_power_of_two)
 	{
@@ -326,31 +322,6 @@ void SurfaceOpenGL::unlock() {
 	delete[] m_pixels;
 	m_pixels = NULL;
 	m_locked = false;
-}
-
-
-uint32_t SurfaceOpenGL::get_pixel(uint32_t x, uint32_t y) {
-	x += m_offsx;
-	y += m_offsy;
-
-	assert(x < get_w());
-	assert(y < get_h());
-	assert(m_locked);
-
-	return *reinterpret_cast<uint32_t *>(m_pixels + y*get_pitch() + x*4);
-}
-
-
-void SurfaceOpenGL::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
-	x += m_offsx;
-	y += m_offsy;
-
-	assert(x < get_w());
-	assert(y < get_h());
-	assert(m_locked);
-	m_glTexUpdate = true;
-
-	*reinterpret_cast<uint32_t *>(m_pixels + y*get_pitch() + x*4) = clr;
 }
 
 #endif //USE_OPENGL

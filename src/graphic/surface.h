@@ -26,11 +26,11 @@
 
 enum SurfaceType {
 	SURFACE_INVALID,
-	SURFACE_SOURCE,		// This sourface is used as source only
-	SURFACE_OFFSCREEN,	// Use surface as source and destinantion
-	SURFACE_SCREEN		// This draws to screen directly
+	SURFACE_SOURCE,       // This sourface is used as source only
+	SURFACE_OFFSCREEN,    // Use surface as source and destinantion
+	SURFACE_SCREEN        // This draws to screen directly
 };
-	
+
 
 /**
  * This represents a simple bitmap without managing its memory. The rendering
@@ -66,7 +66,7 @@ public:
 			(Rect(Point(0,0),get_w(), get_h()), 
 			 RGBAColor(255, 255, 255, 255));
 	}
-	
+
 	virtual void draw_rect(Rect, RGBColor) = 0;
 	virtual void fill_rect(Rect, RGBAColor) = 0;
 	virtual void brighten_rect(Rect, int32_t factor) = 0;
@@ -78,16 +78,9 @@ public:
 
 	virtual void set_type(SurfaceType type)
 		{ m_surf_type = type; }
-/*
-	virtual void draw_minimap
-		(Widelands::Editor_Game_Base const &,
-		 Widelands::Player           const *,
-		 Rect, Point, uint32_t flags) = 0;
-*/
+
 	virtual SurfaceType get_surface_type() { return m_surf_type; }
-	
-	
-	
+
 protected:
 	int32_t m_offsx;
 	int32_t m_offsy;

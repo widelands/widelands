@@ -68,8 +68,6 @@ public:
 	/// Get width and height
 	uint32_t get_w() const {return m_w;}
 	uint32_t get_h() const {return m_h;}
-	uint32_t get_dest_w() const {return m_dest_w;}
-	uint32_t get_dest_h() const {return m_dest_h;}
 	uint32_t get_tex_w() const {return m_tex_w;}
 	uint32_t get_tex_h() const {return m_tex_h;}
 	void update();
@@ -88,15 +86,12 @@ public:
 		return m_texture->id();
 	}
 
-/*	// For the bravest: Direct Pixel access. Use carefully
-	/// Needed if you want to blit directly to the screen by memcpy
-	void force_disable_alpha()*/
-
 	const SDL_PixelFormat * get_format() const;
 	const SDL_PixelFormat & format() const
 	{ return *get_format();}
 
-	uint16_t get_pitch() const {return m_w*4;}
+	/// Directly access the pixels. This is only valid if the surface is locked
+	inline uint16_t get_pitch() const {return m_w * 4;}
 	uint8_t * get_pixels() const
 	{
 		assert(m_locked);
@@ -109,8 +104,27 @@ public:
 	void unlock();
 
 	/// For the slowest: Indirect pixel access
-	uint32_t get_pixel(uint32_t x, uint32_t y);
-	void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
+	inline uint32_t get_pixel(uint32_t x, uint32_t y) {
+		x += m_offsx;
+		y += m_offsy;
+
+		assert(x < get_w());
+		assert(y < get_h());
+		assert(m_locked);
+
+		return *reinterpret_cast<uint32_t *>(m_pixels + y * get_pitch() + x * 4);
+	}
+	inline void set_pixel(uint32_t x, uint32_t y, Uint32 clr) {
+		x += m_offsx;
+		y += m_offsy;
+	
+		assert(x < get_w());
+		assert(y < get_h());
+		assert(m_locked);
+		m_glTexUpdate = true;
+
+		*reinterpret_cast<uint32_t *>(m_pixels + y * get_pitch() + x * 4) = clr;
+	}
 
 	void clear();
 	void draw_rect(Rect, RGBColor);
@@ -118,12 +132,8 @@ public:
 	void brighten_rect(Rect, int32_t factor);
 
 	void blit(Point, Surface *, Rect srcrc, bool enable_alpha = true);
-	void blit(Rect dstrc, Surface *, Rect srcrc, bool enable_alpha = true);
+	void blit(Rect dst, Surface *, Rect srcrc, bool enable_alpha = true);
 	//void fast_blit(Surface *);
-	
-	void set_resized(unsigned int w, unsigned int h){
-		m_dest_w = w; m_dest_h = h;
-	}
 
 	oglTexture & getTexture() {return *m_texture;}
 
@@ -140,7 +150,8 @@ private:
 	uint8_t * m_pixels;
 	bool m_locked;
 
-	uint32_t m_dest_w, m_dest_h;
+	// Keep the size of the opengl texture. This is neccesary because some
+	// systems support only a poer of two for texture sizes.
 	uint32_t m_tex_w, m_tex_h;
 };
 

@@ -135,6 +135,11 @@ Graphic::Graphic
 		log("Graphics: OPENGL DOUBLE BUFFERING ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
+
+	m_caps.resize_surfaces = true;
+	m_caps.offscreen_rendering = true;
+	m_caps.blit_resized = false;
+	
 #ifdef USE_OPENGL
 	if (0 != (sdlsurface->flags & SDL_OPENGL))
 	{
@@ -174,11 +179,12 @@ Graphic::Graphic
 			( m_caps.gl.tex_power_of_two?"must have a size power of two\n":
 			 "may have any size\n");
 
+		m_caps.resize_surfaces = true;
 		m_caps.offscreen_rendering = false;
-	} else {
-		m_caps.offscreen_rendering = true;
+		m_caps.blit_resized = true;
 	}
 #endif
+
 	/* Information about the video capabilities. */
 	SDL_VideoInfo const * info = SDL_GetVideoInfo();
 	char videodrvused[16];
@@ -302,8 +308,9 @@ RenderTarget * Graphic::get_render_target()
 */
 void Graphic::toggle_fullscreen()
 {
+	log("Try DL_WM_ToggleFullScreen...\n");
 	//ToDo Make this work again
-	//SDL_WM_ToggleFullScreen(m_screen.get_sdl_surface());
+	SDL_WM_ToggleFullScreen(m_sdl_screen);
 }
 
 /**
@@ -346,16 +353,20 @@ bool Graphic::need_update() const
 */
 void Graphic::refresh(bool force)
 {
+#ifdef USE_OPENGL
+	if (g_opengl) {
+		SDL_GL_SwapBuffers();
+		m_update_fullscreen = false;
+		m_nr_update_rects = 0;
+		return;
+	}
+#endif
+
 	if (force or m_update_fullscreen)
 		m_screen->update();
-#ifdef USE_OPENGL
 	else
-		if (g_opengl)
-			SDL_GL_SwapBuffers();
-#endif
-//		else
-//			SDL_UpdateRects
-//				(m_screen.get_sdl_surface(), m_nr_update_rects, m_update_rects);
+		SDL_UpdateRects
+			(m_sdl_screen, m_nr_update_rects, m_update_rects);
 
 	m_update_fullscreen = false;
 	m_nr_update_rects = 0;
@@ -496,6 +507,8 @@ PictureID & Graphic::get_no_picture() const {
 /**
  * Produces a resized version of the specified picture
  *
+ * This might not work with the rendere. Check g_gr->caps().resize_surfaces
+ * to be sure the resizing is possible.
  * Might return same id if dimensions are the same
  */
 PictureID Graphic::get_resized_picture
@@ -508,7 +521,8 @@ PictureID Graphic::get_resized_picture
 	//throw wexception
 	//("get_resized_picture(%i): picture does not exist", index);
 
-#warning This works only for SDL correctly.
+	if (g_opengl)
+		g_gr->get_no_picture();
 
 	Surface * const orig = index->surface;
 	if (orig->get_w() == w and orig->get_h() == h)
@@ -517,10 +531,6 @@ PictureID Graphic::get_resized_picture
 	uint32_t width = w;
 	uint32_t height = h;
 
-	if (g_opengl) {
-		dynamic_cast<SurfaceOpenGL *>(index->surface)->set_resized(w, h);
-		return index;
-	}
 	if (mode != ResizeMode_Loose) {
 		const double ratio_x = double(w) / orig->get_w();
 		const double ratio_y = double(h) / orig->get_h();
@@ -580,8 +590,6 @@ SDL_Surface * Graphic::resize
 {
 	Surface & orig = *g_gr->get_picture_surface(index);
 
-#warning TODO opengl: not reimplemented for OpenGL yet
-	// ToDo move this function to SurfaceSDL and OpenGL
 	if(g_opengl)
 		throw wexception("Graphic::resize() not yet implemented for opengl");
 	else {
@@ -605,7 +613,6 @@ void Graphic::get_picture_size
 	Surface & bmp = *pic->surface;
 
 	w = bmp.get_w();
-
 	h = bmp.get_h();
 }
 

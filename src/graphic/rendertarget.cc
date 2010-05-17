@@ -269,19 +269,24 @@ void RenderTarget::blit(const Point dst, const PictureID picture)
 void RenderTarget::blit_solid(const Point dst, const PictureID picture)
 {
 	Surface * const src = g_gr->get_picture_surface(picture);
+	if (not src)
+		return;
+
 	upcast(SurfaceSDL, sdlsurf, src);
-	bool alpha;
-	uint8_t alphaval;
+	upcast(SurfaceOpenGL, oglsurf, src);
+
 	if (sdlsurf) {
+		bool alpha;
+		uint8_t alphaval;
 		alpha = sdlsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
 		alphaval = sdlsurf->get_sdl_surface()->format->alpha;
 		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
-	}
-	if (src)
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
-	if (sdlsurf) {
 		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
+	} else if (oglsurf) {
+		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
 	}
+	
 }
 
 /**
@@ -334,7 +339,6 @@ void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
 		return;
 
 	if (clip(r)) {
-
 		// Make sure the offset is within bounds
 		ofs.x = ofs.x % src->get_w();
 
