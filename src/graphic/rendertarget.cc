@@ -147,27 +147,11 @@ void RenderTarget::draw_line
 	 *       or if this is a offscreen surface.
 	 */
 	if (g_opengl) {
-		assert(x1>=0);
-		assert(x2>=0);
-		assert(y1>=0);
-		assert(y2>=0);
-		uint32_t sx = x1 + m_offset.x;
-		uint32_t sy = x2 + m_offset.x;
-		uint32_t dx = y1 + m_offset.y;
-		uint32_t dy = y2 + m_offset.y;
-
 		//ToDo Clip against m_rect
-  
-		glDisable(GL_BLEND);
-		glDisable(GL_TEXTURE_2D);
-		glBegin(GL_LINES);
-		glColor3f
-			((color.r() / 256.0f),
-			 (color.g() / 256.0f),
-			 (color.b() / 256.0f));
-		glVertex2f(sx, sy);
-		glVertex2f(dx, dy);
-		glEnd();
+		upcast(SurfaceOpenGL, oglsurf, m_surface);
+		oglsurf->draw_line
+			(x1 + m_offset.x + m_rect.x, y1 + m_offset.y + m_rect.y,
+			 x2 + m_offset.x + m_rect.x, y2 + m_offset.y + m_rect.y, color);
 		return;
 	}
 #endif

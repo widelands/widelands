@@ -130,6 +130,9 @@ public:
 	void draw_rect(Rect, RGBColor);
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
+	void draw_line
+		(int32_t const x1, int32_t const y1,
+		 int32_t const x2, int32_t const y2, RGBColor const color);
 
 	void blit(Point, Surface *, Rect srcrc, bool enable_alpha = true);
 	void blit(Rect dst, Surface *, Rect srcrc, bool enable_alpha = true);

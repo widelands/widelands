@@ -104,12 +104,13 @@ This function is slow as hell.
 void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
 	if(!factor)
 		return;
+
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
-
 	assert(g_opengl);
+
 	/* glBlendFunc is a very nice feature of opengl. You can specify how the 
 	* color is calculated.
 	* 
@@ -129,9 +130,9 @@ void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
 	// over the region
 	glBegin(GL_QUADS);
 		glColor3f
-		((factor / 256.0f),
-		(factor / 256.0f),
-		(factor / 256.0f));
+			((static_cast<GLfloat>(factor) / 256.0f),
+			 (static_cast<GLfloat>(factor) / 256.0f),
+			 (static_cast<GLfloat>(factor) / 256.0f));
 		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y);
 		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y);
 		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y + rc.h);
@@ -139,6 +140,21 @@ void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
 	glEnd();
 }
 
+void SurfaceOpenGL::draw_line
+	(int32_t const x1, int32_t const y1,
+	 int32_t const x2, int32_t const y2, RGBColor const color)
+{
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+	glBegin(GL_LINES);
+	glColor3f
+		((color.r() / 256.0f),
+			(color.g() / 256.0f),
+			(color.b() / 256.0f));
+	glVertex2f(x1 + m_offsx, y1 + m_offsy);
+	glVertex2f(x2 + m_offsx, y2 + m_offsy);
+	glEnd();
+}
 
 /*
 ===============
