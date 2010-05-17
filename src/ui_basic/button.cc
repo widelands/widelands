@@ -205,7 +205,7 @@ void Button::draw(RenderTarget & odst)
 
 		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
 		//  is that -1 >> 1 is -1 but -1 / 2 is 0).
-		if (g_gr->caps().offscreen_rendering)
+		if (g_gr->caps().offscreen_rendering and m_flat)
 			dst->blit_copy
 				(Point
 				 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
