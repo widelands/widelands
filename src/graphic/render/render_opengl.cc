@@ -179,19 +179,19 @@ void SurfaceOpenGL::blit(Rect dst, Surface * src, Rect srcrc, bool enable_alpha)
 	upcast(SurfaceOpenGL, oglsrc, src);
 
 	assert(g_opengl);
+#ifdef DEBUG
 	if (m_surf_type != SURFACE_SCREEN)
 	{
 		log("ERROR: SurfaceOpenGL::blit(): Destination surface is not the screen\n");
 		return;
 	}
 
-
 	if (not oglsrc)
 	{
 		log("ERROR: SurfaceOpenGL::blit(): Source surface is not an opengl surface\n");
 		throw wexception("Invalid Surface: Not a opengl surface");
 	}
-
+#endif
 	GLuint tex;
 
 	try {

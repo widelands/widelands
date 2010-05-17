@@ -24,14 +24,14 @@
 #include <cassert>
 
 SurfaceSDL::~SurfaceSDL() {
-	log("SurfaceSDL::~SurfaceSDL()\n");
+	//log("SurfaceSDL::~SurfaceSDL()\n");
 	if (m_surface and m_surf_type != SURFACE_SCREEN)
 		SDL_FreeSurface(m_surface);
 }
 
 void SurfaceSDL::set_sdl_surface(SDL_Surface & surface)
 {
-	log("SurfaceSDL::set_sdl_surface(SDL_Surface&)\n");
+	//log("SurfaceSDL::set_sdl_surface(SDL_Surface&)\n");
 	if (m_surface)
 		SDL_FreeSurface(m_surface);
 

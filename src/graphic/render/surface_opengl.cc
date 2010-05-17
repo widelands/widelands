@@ -191,12 +191,13 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	pix_used += m_w * m_h;
 	pix_aloc += m_tex_w * m_tex_h;
 	num_tex++;
+	/*
 	log
 		("texture stats: num: %lu, used: %lu (%luM), "
 		 "alocated: %lu (%luM) ++\n",
 		 num_tex, pix_used * 4, pix_used * 4 / (1024 * 1024),
 		 pix_aloc * 4, pix_aloc * 4/ (1024 * 1024));
-
+	*/
 	assert(glIsTexture(texture));
 
 	m_texture = new oglTexture(texture);
@@ -211,11 +212,13 @@ SurfaceOpenGL::~SurfaceOpenGL() {
 		num_tex--;
 		delete m_texture;
 	}
+	/*
 	log
 		("~SurfaceOpenGL(): texture stats: num: %lu, "
 		 "used: %lu (%luM), alocated: %lu (%luM) --\n",
 		 num_tex, pix_used * 4, pix_used * 4 / (1024 * 1024),
 		 pix_aloc * 4, pix_aloc * 4/ (1024 * 1024));
+	*/
 	delete[] m_pixels;
 }
 
@@ -242,7 +245,7 @@ SurfaceOpenGL::SurfaceOpenGL(int w, int h):
 		m_tex_w = w;
 		m_tex_h = h;
 	}
-	log("SurfaceOpenGL::SurfaceOpenGL(%d, %d): texture (%d, %d)", w, h, m_tex_w, m_tex_h);
+	//log("SurfaceOpenGL::SurfaceOpenGL(%d, %d): texture (%d, %d)", w, h, m_tex_w, m_tex_h);
 }
 
 const SDL_PixelFormat * SurfaceOpenGL::get_format() const
@@ -281,7 +284,7 @@ void SurfaceOpenGL::lock() {
 		m_glTexUpdate = false;
 	} else
 		m_glTexUpdate = true;
-	log("locked opengl surface(%d, %d)\n", m_tex_w, m_tex_h);
+	//log("locked opengl surface(%d, %d)\n", m_tex_w, m_tex_h);
 	m_locked = true;
 }
 
@@ -295,7 +298,7 @@ void SurfaceOpenGL::unlock() {
 		assert(m_surf_type != SURFACE_SCREEN);
 		if (!m_texture)
 		{
-			log("unlock opengl surface: create new texture (%d, %d)\n", m_tex_w, m_tex_h);
+			//log("unlock opengl surface: create new texture (%d, %d)\n", m_tex_w, m_tex_h);
 			GLuint texture;
 			glGenTextures( 1, &texture );
 
@@ -313,7 +316,7 @@ void SurfaceOpenGL::unlock() {
 			m_texture = new oglTexture(texture);
 		}
 		glBindTexture( GL_TEXTURE_2D, m_texture->id());
-		log("unlock opengl surface: (%d, %d)\n", m_tex_w, m_tex_h);
+		//log("unlock opengl surface: (%d, %d)\n", m_tex_w, m_tex_h);
 		glTexImage2D
 			(GL_TEXTURE_2D, 0, WL_GLINTERNALFORMAT, m_tex_w, m_tex_h, 0, GL_RGBA,
 			 GL_UNSIGNED_BYTE,  m_pixels);

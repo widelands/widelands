@@ -414,7 +414,7 @@ void Graphic::flush_animations() {
 
 Surface & Graphic::LoadImage(const std::string & fname, bool alpha)
 {
-	log("Graphic::LoadImage(\"%s\")\n", fname.c_str());
+	//log("Graphic::LoadImage(\"%s\")\n", fname.c_str());
 	FileRead fr;
 	SDL_Surface * sdlsurf;
 
@@ -748,7 +748,7 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
 */
 PictureID Graphic::create_picture_surface(int32_t w, int32_t h, bool alpha)
 { 
-	log(" Graphic::create_picture_surface(%d, %d)\n", w, h);
+	//log(" Graphic::create_picture_surface(%d, %d)\n", w, h);
 	Surface & surf = create_surface(w, h, alpha);
 
 	Picture & pic = *new Picture();
@@ -769,7 +769,7 @@ PictureID Graphic::create_picture_surface(int32_t w, int32_t h, bool alpha)
  */
 Surface & Graphic::create_surface(SDL_Surface & surf, bool alpha)
 {
-	log("Graphic::create_surface(SDL_Surface&)\n");
+	//log("Graphic::create_surface(SDL_Surface&)\n");
 	if(g_opengl)
 	{
 #ifdef USE_OPENGL
@@ -789,7 +789,7 @@ Surface & Graphic::create_surface(SDL_Surface & surf, bool alpha)
 
 Surface & Graphic::create_surface(Surface & surf, bool alpha)
 {
-	log("Graphic::create_surface(Surface&)\n");
+	//log("Graphic::create_surface(Surface&)\n");
 	upcast(SurfaceSDL, sdlsurf, &surf);
 	if (sdlsurf) {
 		if (alpha)
@@ -821,7 +821,7 @@ Surface & Graphic::create_surface(Surface & surf, bool alpha)
  */
 Surface & Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 {
-	log(" Graphic::create_surface(%d, %d)\n", w, h);
+	//log(" Graphic::create_surface(%d, %d)\n", w, h);
 	if(g_opengl)
 	{
 #ifdef USE_OPENGL
