@@ -176,8 +176,8 @@ m_toggle_options_menu
 	 	("menu_options_menu", "options_menu", toggle_options_menu, _("Options"))),
 m_toggle_statistics_menu
 	(INIT_BTN
-	 	("menu_toggle_menu", "statistics_menu", toggle_statistics_menu
-		 , _("Statistics"))),
+	 	("menu_toggle_menu", "statistics_menu", toggle_statistics_menu,
+		 _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN
 	 	("menu_objectives", "objectives", toggle_objectives, _("Objectives"))),

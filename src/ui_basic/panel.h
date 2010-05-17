@@ -84,7 +84,7 @@ struct Panel : public Object {
 	virtual void end();
 
 	// Geometry
-	void set_size(uint32_t nw, uint32_t nh);
+	virtual void set_size(uint32_t nw, uint32_t nh);
 	void set_pos(Point);
 	virtual void move_inside_parent();
 	virtual void layout();

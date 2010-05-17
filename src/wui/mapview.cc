@@ -105,7 +105,7 @@ void Map_View::draw(RenderTarget & dst)
 		draw_tooltip(dst, text);
 }
 
-void Map_View::set_changeview(const Map_View::ChangeViewFn& fn)
+void Map_View::set_changeview(const Map_View::ChangeViewFn & fn)
 {
 	m_changeview = fn;
 }
