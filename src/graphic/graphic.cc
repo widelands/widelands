@@ -412,7 +412,7 @@ void Graphic::flush_animations() {
 }
 
 
-Surface & Graphic::LoadImage(const std::string & fname)
+Surface & Graphic::LoadImage(const std::string & fname, bool alpha)
 {
 	log("Graphic::LoadImage(\"%s\")\n", fname.c_str());
 	FileRead fr;
@@ -426,7 +426,7 @@ Surface & Graphic::LoadImage(const std::string & fname)
         if (!sdlsurf)
                 throw wexception("%s", IMG_GetError());
 
-	Surface & surf = create_surface(*sdlsurf);
+	Surface & surf = create_surface(*sdlsurf, alpha);
 	
 	return surf;
 }
@@ -438,7 +438,7 @@ Surface & Graphic::LoadImage(const std::string & fname)
  *
  * \return 0 (a null-picture) if the picture cannot be loaded.
 */
-PictureID & Graphic::get_picture(PicMod const module, const std::string & fname)
+PictureID & Graphic::get_picture(PicMod const module, const std::string & fname, bool alpha )
 {
 	//  Check if the picture is already loaded.
 	pmit it = m_picturemap[module].find(fname);
@@ -450,7 +450,7 @@ PictureID & Graphic::get_picture(PicMod const module, const std::string & fname)
 		Surface * surf;
 
 		try {
-			surf = &LoadImage(fname);
+			surf = &LoadImage(fname, alpha);
 			log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
 		} catch (std::exception const & e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());
@@ -746,10 +746,10 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
  * A RenderTarget for the surface can be obtained using get_surface_renderer().
  * \note Surfaces do not belong to a module and must be freed explicitly.
 */
-PictureID Graphic::create_picture_surface(int32_t w, int32_t h)
+PictureID Graphic::create_picture_surface(int32_t w, int32_t h, bool alpha)
 { 
 	log(" Graphic::create_picture_surface(%d, %d)\n", w, h);
-	Surface & surf = create_surface(w, h);
+	Surface & surf = create_surface(w, h, alpha);
 
 	Picture & pic = *new Picture();
 	PictureID id = PictureID(&pic);
@@ -767,7 +767,7 @@ PictureID Graphic::create_picture_surface(int32_t w, int32_t h)
  * Software rendering depending on the actual setting. The SDL_Surface must
  * not be used after calling this. Surface takes care of the SDL_Surface.
  */
-Surface & Graphic::create_surface(SDL_Surface & surf)
+Surface & Graphic::create_surface(SDL_Surface & surf, bool alpha)
 {
 	log("Graphic::create_surface(SDL_Surface&)\n");
 	if(g_opengl)
@@ -776,17 +776,28 @@ Surface & Graphic::create_surface(SDL_Surface & surf)
 		return *new SurfaceOpenGL(surf);
 #endif
 	} else {
-		return *new SurfaceSDL(surf);
+		SDL_Surface * surface;
+		if (alpha)
+			surface = SDL_DisplayFormatAlpha(&surf);
+		else
+			surface = SDL_DisplayFormat(&surf);
+		SDL_FreeSurface(&surf);
+		return *new SurfaceSDL(*surface);
+		
 	}
 }
 
-Surface & Graphic::create_surface(Surface & surf)
+Surface & Graphic::create_surface(Surface & surf, bool alpha)
 {
 	log("Graphic::create_surface(Surface&)\n");
 	upcast(SurfaceSDL, sdlsurf, &surf);
 	if (sdlsurf) {
-		return *new SurfaceSDL
-			(*SDL_DisplayFormatAlpha(sdlsurf->get_sdl_surface()));
+		if (alpha)
+			return *new SurfaceSDL
+				(*SDL_DisplayFormatAlpha(sdlsurf->get_sdl_surface()));
+		else
+			return *new SurfaceSDL
+				(*SDL_DisplayFormat(sdlsurf->get_sdl_surface()));
 	} else {
 		Surface & tsurf = create_surface(surf.get_w(), surf.get_h());	
 
@@ -808,7 +819,7 @@ Surface & Graphic::create_surface(Surface & surf)
  *
  *
  */
-Surface & Graphic::create_surface(int32_t w, int32_t h)
+Surface & Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 {
 	log(" Graphic::create_surface(%d, %d)\n", w, h);
 	if(g_opengl)
@@ -823,9 +834,12 @@ Surface & Graphic::create_surface(int32_t w, int32_t h)
 			 w, h,
 			 format.BitsPerPixel,
 			 format.Rmask, format.Gmask, format.Bmask, format.Amask);
-		SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
-		SDL_FreeSurface(&tsurf);
-		return *new SurfaceSDL(surf);
+		if (alpha) {
+			SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
+			SDL_FreeSurface(&tsurf);
+			return *new SurfaceSDL(surf);
+		} 
+		return *new SurfaceSDL(tsurf);
 	}
 }
 

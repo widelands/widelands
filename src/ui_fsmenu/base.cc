@@ -66,7 +66,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	// Load background graphics
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
-	m_pic_background = g_gr->get_picture(PicMod_Menu, buffer);
+	m_pic_background = g_gr->get_picture(PicMod_Menu, buffer, false);
 	if (m_pic_background == g_gr->get_no_picture())
 		 throw wexception
 			  ("couldn't open splash screen."

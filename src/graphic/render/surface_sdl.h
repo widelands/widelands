@@ -35,10 +35,7 @@ public:
 	SurfaceSDL(SDL_Surface & surface) : 
 		Surface(surface.w, surface.h, SURFACE_OFFSCREEN),
 		m_surface(&surface)
-	{
-		//m_w = surface.w;
-		//m_h = surface.h;
-	}
+	{}
 	SurfaceSDL():
 		Surface(),
 		m_surface(0)

@@ -103,7 +103,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 			strcpy(after_basename, extensions[extnr]);
 			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
-					Surface & surface = g_gr->LoadImage(filename);
+					Surface & surface = g_gr->LoadImage(filename, true);
 					if (width == 0) { //  This is the first frame.
 						width  = surface.get_w();
 						height = surface.get_h();
@@ -176,13 +176,14 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 		}
 
 		switch (m_encodedata.hasplrclrs) {
+#warning TODO Do not load playercolor mask as opengl texture or use it as opengl texture
 		case EncodeData::Mask:
 			strcpy(after_basename, "_pc");
 			for (size_t extnr = 0;;) {
 				strcpy(after_basename + 3, extensions[extnr]);
 				if (g_fs->FileExists(filename)) {
 					try {
-						Surface & surface = g_gr->LoadImage(filename);
+						Surface & surface = g_gr->LoadImage(filename, true);
 						if (width != surface.get_w() or height != surface.get_h())
 							throw wexception
 								("playercolor mask has wrong size: (%u, %u), should "
@@ -275,7 +276,7 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
 		//  Copy the old surface.
 		Surface & origsurface = *m_plrframes[0][i];
-		Surface & newsurface = g_gr->create_surface(origsurface);
+		Surface & newsurface = g_gr->create_surface(origsurface, true);
 
 		Surface & pcmask = *m_pcmasks[i];
 		SDL_PixelFormat * fmt, * fmt_pc;

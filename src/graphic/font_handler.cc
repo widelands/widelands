@@ -816,7 +816,7 @@ PictureID Font_Handler::convert_sdl_surface
 			(&surface, SDL_SRCCOLORKEY,
 			 SDL_MapRGB(surface.format, bg.r(), bg.g(), bg.b()));
 
-	Surface & surf = g_gr->create_surface(surface);
+	Surface & surf = g_gr->create_surface(surface, transparent);
 
 	PictureID picid = g_gr->get_picture(PicMod_Font, surf);
 

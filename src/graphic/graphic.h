@@ -108,8 +108,8 @@ struct Graphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	Surface & LoadImage(const std::string & fname);
-	PictureID & get_picture(PicMod module, const std::string & fname)
+	Surface & LoadImage(const std::string & fname, bool alpha = false);
+	PictureID & get_picture(PicMod module, const std::string & fname, bool alpha = true)
 	__attribute__ ((pure));
 	PictureID get_picture
 		(PicMod module, Surface &, const std::string & name = "");
@@ -125,10 +125,10 @@ struct Graphic {
 	void save_png(const PictureID &, StreamWrite *) const;
 	void save_png(Surface & surf, StreamWrite *) const;
 
-	PictureID create_picture_surface(int32_t w, int32_t h);
-	Surface & create_surface(SDL_Surface &);
-	Surface & create_surface(Surface &);
-	Surface & create_surface(int32_t w, int32_t h);
+	PictureID create_picture_surface(int32_t w, int32_t h, bool alpha = false);
+	Surface & create_surface(SDL_Surface &, bool alpha = false);
+	Surface & create_surface(Surface &, bool alpha = false);
+	Surface & create_surface(int32_t w, int32_t h, bool alpha = false);
 	void free_picture_surface(const PictureID & pic);
 
 	PictureID create_grayed_out_pic(const PictureID & picid);
