@@ -41,6 +41,7 @@ Texture::Texture
 :
 m_colormap (0),
 m_pixels   (0),
+m_frame_num(0),
 m_nrframes (0),
 m_frametime(frametime),
 is_32bit   (format.BytesPerPixel == 4)
@@ -206,11 +207,11 @@ Uint32 Texture::get_minimap_color(const char shade) {
  */
 void Texture::animate(uint32_t time)
 {
-	int32_t const frame = (time / m_frametime) % m_nrframes;
+	m_frame_num = (time / m_frametime) % m_nrframes;
 
 	uint8_t * const lastframe = m_curframe;
 
-	m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * frame];
+	m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_frame_num];
 	if (lastframe != m_curframe)
 		m_was_animated = true;
 }
