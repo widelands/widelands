@@ -1936,6 +1936,9 @@ int32_t Map::change_terrain
 	(TCoords<FCoords> const c, Terrain_Index const terrain)
 {
 	c.field->set_terrain(c.t, terrain);
+
+	NoteSender<NoteFieldTransformed>::send(NoteFieldTransformed(c));
+
 	recalc_for_field_area(Area<FCoords>(c, 2));
 
 	return 2;

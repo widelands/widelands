@@ -31,14 +31,14 @@
  */
 struct Computer_Player :
 	Widelands::NoteReceiver<Widelands::NoteImmovable>,
-	Widelands::NoteReceiver<Widelands::NoteField>
+	Widelands::NoteReceiver<Widelands::NoteFieldPossession>
 {
 	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
 
 	virtual void think () = 0;
 
 	virtual void receive(Widelands::NoteImmovable const &) {}
-	virtual void receive(Widelands::NoteField     const &) {}
+	virtual void receive(Widelands::NoteFieldPossession     const &) {}
 
 	Widelands::Game & game() const throw () {return m_game;}
 	Widelands::Player_Number player_number() {return m_player_number;}
