@@ -91,7 +91,7 @@ public:
 	{ return *get_format();}
 
 	/// Directly access the pixels. This is only valid if the surface is locked
-	inline uint16_t get_pitch() const {return m_w * 4;}
+	inline uint16_t get_pitch() const {return m_tex_w * 4;}
 	uint8_t * get_pixels() const
 	{
 		assert(m_locked);
