@@ -33,7 +33,7 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 	MilitarySite_Descr
 		(char const * name, char const * descname,
 		 std::string const & directory, Profile &,  Section & global_s,
-		 Tribe_Descr const & tribe, EncodeData const *);
+		 Tribe_Descr const & tribe);
 
 	virtual Building & create_object() const;
 

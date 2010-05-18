@@ -32,33 +32,6 @@
 #include <cstdio>
 
 
-/*
-===============
-Reset the EncodeData to defaults (no special colors)
-===============
-*/
-void EncodeData::clear()
-{
-	hasplrclrs = No;
-}
-
-
-/*
-===============
-Parse color codes from section, the following keys are currently known:
-
-clrkey_[r, g, b]     color key
-===============
-*/
-void EncodeData::parse(Section & s)
-{
-	if (s.get_bool("playercolor", false))
-		hasplrclrs = Mask;
-	else
-		hasplrclrs = No;
-}
-
-
 /// Find out if there is a sound effect registered for the animation's frame
 /// and try to play it. This is used to have sound effects that are tightly
 /// synchronized to an animation, for example when a geologist is shown
@@ -121,13 +94,11 @@ void AnimationManager::flush()
  * \param directory     which directory to look in for image and sound files
  * \param s             conffile section to search for data on this animation
  * \param picnametempl  a template for the picture names
- * \param encdefaults   default values for player colors, see \ref EncodeData
 */
 uint32_t AnimationManager::get
 	(char       const * const directory,
 	 Section          &       s,
-	 char       const *       picnametempl,
-	 EncodeData const * const encdefaults)
+	 char       const *       picnametempl)
 {
 	m_animations.push_back(AnimationData());
 	uint32_t const id = m_animations.size();
@@ -135,7 +106,6 @@ uint32_t AnimationManager::get
 	ad.frametime = FRAME_LENGTH;
 	ad.hotspot.x = 0;
 	ad.hotspot.y = 0;
-	ad.encdata.clear();
 	ad.picnametempl = "";
 
 	// Determine picture name template
@@ -183,7 +153,7 @@ uint32_t AnimationManager::get
 		ad.sfx_cues[frame_number] = parameters;
 	}
 
-	ad.encdata.parse(s);
+	ad.hasplrclrs = s.get_bool("playercolor", false);
 
 	int32_t const fps = s.get_int("fps");
 	if (fps < 0)
@@ -265,8 +235,7 @@ void DirAnimations::parse
 	 std::string           const &       directory,
 	 Profile                     &       prof,
 	 char                  const * const sectnametempl,
-	 Section                     * const defaults,
-	 EncodeData            const * const encdefaults)
+	 Section                     * const defaults)
 {
 	char dirpictempl[256];
 	char sectnamebase[256];
@@ -320,7 +289,7 @@ void DirAnimations::parse
 		}
 
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir]);
-		m_animations[dir] = g_anim.get(directory, *s, sectname, encdefaults);
+		m_animations[dir] = g_anim.get(directory, *s, sectname);
 		b.add_animation(anim_name.c_str(), m_animations[dir]);
 	}
 }

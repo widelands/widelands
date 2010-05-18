@@ -23,7 +23,6 @@
 #include "attackable.h"
 #include "building.h"
 
-struct EncodeData;
 struct Interactive_Player;
 struct Profile;
 
@@ -47,7 +46,7 @@ struct Warehouse_Descr : public Building_Descr {
 	Warehouse_Descr
 		(char const * name, char const * descname,
 		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &, EncodeData const *);
+		 Tribe_Descr const &);
 
 	virtual Building & create_object() const;
 

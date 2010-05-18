@@ -265,9 +265,9 @@ Warehouse building
 Warehouse_Descr::Warehouse_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
+	 Tribe_Descr const & _tribe)
 :
-	Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata),
+	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
 m_conquers    (0)
 {
 	if

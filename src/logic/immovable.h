@@ -97,9 +97,6 @@ struct Immovable_Descr : public Map_Object_Descr {
 	int32_t get_size() const throw () {return m_size;}
 	char const * get_picture() const {return m_picture.c_str();}
 	ImmovableProgram const * get_program(std::string const &) const;
-	EncodeData const & get_default_encodedata() const {
-		return m_default_encodedata;
-	}
 
 	Immovable & create(Editor_Game_Base &, Coords) const;
 
@@ -110,8 +107,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 protected:
 	std::string m_picture;
-	int32_t           m_size;
-	EncodeData    m_default_encodedata;
+	int32_t     m_size;
 
 	Programs    m_programs;
 

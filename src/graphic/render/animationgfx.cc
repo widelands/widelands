@@ -50,7 +50,7 @@ static const char extensions[nextensions][5] = {".png", ".jpg"};
 AnimationGfx::AnimationGfx(AnimationData const * const data) :
 	m_hotspot(data->hotspot)
 {
-	m_encodedata.hasplrclrs = data->encdata.hasplrclrs;
+	m_hasplrclrs = data->hasplrclrs;
 
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
@@ -171,9 +171,8 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 				goto end;  //  This frame does not exist. No more frames in anim.
 		}
 
-		switch (m_encodedata.hasplrclrs) {
+		if (m_hasplrclrs) {
 #warning TODO Do not load playercolor mask as opengl texture or use it as opengl texture
-		case EncodeData::Mask:
 			strcpy(after_basename, "_pc");
 			for (size_t extnr = 0;;) {
 				strcpy(after_basename + 3, extensions[extnr]);
@@ -196,8 +195,6 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 					throw wexception("\"%s\" is missing", filename);
 				}
 			}
-			break;
-		case EncodeData::No:;
 		}
 
 		//  Increment the number in the filename.
