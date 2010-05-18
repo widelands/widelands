@@ -25,12 +25,10 @@
 struct Section;
 
 struct EncodeData {
-	enum {No, Mask, Old} hasplrclrs;
-	RGBColor plrclr[4];
+	enum {No, Mask} hasplrclrs;
 
 	void clear();
 	void parse(Section &);
-	void add(EncodeData const &);
 };
 
 #endif

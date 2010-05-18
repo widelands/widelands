@@ -51,10 +51,6 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 	m_hotspot(data->hotspot)
 {
 	m_encodedata.hasplrclrs = data->encdata.hasplrclrs;
-	m_encodedata.plrclr[0]  = data->encdata.plrclr[0];
-	m_encodedata.plrclr[1]  = data->encdata.plrclr[1];
-	m_encodedata.plrclr[2]  = data->encdata.plrclr[2];
-	m_encodedata.plrclr[3]  = data->encdata.plrclr[3];
 
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
@@ -201,9 +197,6 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 				}
 			}
 			break;
-		case EncodeData::Old:
-			log("WARNING: The old playercolor code used but not implemented any more! (%s)\n", filename);
-			m_encodedata.hasplrclrs = EncodeData::No;
 		case EncodeData::No:;
 		}
 

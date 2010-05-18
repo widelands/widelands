@@ -54,36 +54,8 @@ void EncodeData::parse(Section & s)
 {
 	if (s.get_bool("playercolor", false))
 		hasplrclrs = Mask;
-
-	// Read old-style player color codes
-	char key[] = "plrclr0_r";
-	for (uint8_t i = 0; i < 4; ++i, ++key[6]) {
-		key[8] = 'r'; int32_t const r = s.get_int(key, -1);
-		key[8] = 'g'; int32_t const g = s.get_int(key, -1);
-		key[8] = 'b'; int32_t const b = s.get_int(key, -1);
-
-		if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-			return;
-
-		plrclr[i] = RGBColor(r, g, b);
-	}
-
-	hasplrclrs = Old;
-}
-
-
-/*
-===============
-Add another encode data. Already existing color codes are overwritten
-===============
-*/
-void EncodeData::add(EncodeData const & other)
-{
-	if (other.hasplrclrs == Old) {
-		hasplrclrs = Old;
-		for (int32_t i = 0; i < 4; ++i)
-			plrclr[i] = other.plrclr[i];
-	}
+	else
+		hasplrclrs = No;
 }
 
 
@@ -210,10 +182,6 @@ uint32_t AnimationManager::get
 		}
 		ad.sfx_cues[frame_number] = parameters;
 	}
-
-	// Get descriptive data
-	if (encdefaults)
-		ad.encdata.add(*encdefaults);
 
 	ad.encdata.parse(s);
 
