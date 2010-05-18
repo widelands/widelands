@@ -1102,6 +1102,7 @@ void Graphic::screenshot(const char & fname) const
 	log("Save screenshot to %s\n", &fname);
 	StreamWrite * sw = g_fs->OpenStreamWrite(std::string(&fname));
 	save_png(*m_screen, sw);
+	delete sw;
 }
 
 
