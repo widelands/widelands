@@ -95,11 +95,11 @@ Set.__add = Set.union
 
 function Set:substract(b)
    local rv = Set:new()
-   for k in pairs(self) do
-      if k ~= "size" then rv:add(k) end
+   for hash, value in pairs(self) do
+      if hash ~= "size" then rv:add(value) end
    end
-   for k in pairs(b) do 
-      if k ~= "size" then rv:discard(k) end
+   for hash, value in pairs(b) do 
+      if hash ~= "size" then rv:discard(value) end
    end
    return rv
 end
@@ -107,9 +107,9 @@ Set.__sub = Set.substract
 
 function Set:intersection(b)
    local rv = Set:new{}
-   for hash in pairs(self) do
+   for hash,value in pairs(self) do
       if b[hash] and hash ~= "size" then
-         rv:add(hash)
+         rv:add(value)
       end
    end
    return rv
