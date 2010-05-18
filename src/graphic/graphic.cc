@@ -110,13 +110,6 @@ Graphic::Graphic
 		log("Graphics: Trying FULLSCREEN\n");
 	}
 
-	// Delete the old surfaces. They are no more valid after SetVideoMode
-	delete m_rendertarget;
-	m_rendertarget = NULL;
-	delete m_screen;
-	m_screen = NULL;
-	m_sdl_screen = NULL;
-
 	log("Graphics: Try to set Videomode %ux%u %uBit\n", w, h, bpp);
 	// Here we actually set the video mode
 	sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
@@ -280,7 +273,6 @@ Graphic::Graphic
 	m_screen->set_type(SURFACE_SCREEN);
 
 	m_sdl_screen = sdlsurface;
-	delete m_rendertarget;
 	m_rendertarget = new RenderTarget(m_screen);
 }
 
@@ -289,10 +281,12 @@ Graphic::Graphic
 */
 Graphic::~Graphic()
 {
+	log("Graphic::~Graphic()");
 	for (size_t i = 1; i < m_picturemap.size(); ++i)
 		flush(static_cast<PicMod>(i));
 
 	delete m_rendertarget;
+	delete m_screen;
 	delete m_roadtextures;
 }
 
