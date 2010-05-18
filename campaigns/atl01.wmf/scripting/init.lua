@@ -7,6 +7,9 @@ use("aux", "infrastructure")
 
 use("map", "water_rising")
 
+-- TODO: document Set class
+-- TODO: remove table_unique 
+
 -- ===================
 -- Constants & Config
 -- ===================

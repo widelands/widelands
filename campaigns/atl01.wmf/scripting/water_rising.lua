@@ -2,6 +2,16 @@
 --                        Water rising Functionality                        
 -- =======================================================================
 
+use("aux", "set")
+
+normalization_fields = Set:new()
+for x=1,wl.map.get_width()-1 do
+   for y=1,wl.map.get_height()-1 do
+      normalization_fields:add(wl.map.Field(x,y))
+   end
+end
+normalization_fields = normalization_fields -
+   Set:new(wl.map.Field(75, 80):region(12))
 
 WaterRiser = {}
 function WaterRiser:new(seeds, g_water_level)
@@ -87,6 +97,7 @@ function WaterRiser:_rise_for(f, sleeptime)
    self._ncoroutines = self._ncoroutines - 1
 end
 
+
 function WaterRiser:run()
    run(function()
       while true do
@@ -115,8 +126,22 @@ function WaterRiser:run()
    end)
 end
 
+function _do_normalize(water_height)
+   print("size: ", normalization_fields.size)
+   local st = os.clock()
+   for f in normalization_fields:items() do
+      if f.terr == "wasser" and f.terd == "wasser" then
+         f.height = water_height
+      end
+   end
+   local delta = os.clock() - st
+   print("### Took: ", delta)
+
+end
 function WaterRiser:rise()
    self._water_level = self._water_level + 1
+
+   _do_normalize(self._water_level)
 end
 
 
