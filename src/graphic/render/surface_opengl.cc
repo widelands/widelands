@@ -130,22 +130,28 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	log("R:%X, G:%X, B:%X, A:%X", fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
 	*/
 
+	glPushAttrib(GL_PIXEL_MODE_BIT);
+	bool pushed = not (handle_glerror() == GL_STACK_OVERFLOW);
+
 	if(Bpp==4) {
 		if(fmt.Rmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Bmask==0x00ff0000) {
 			if(fmt.Amask==0xff000000) {
 				pixels_format=GL_RGBA; //log(" RGBA 8888 ");
 			} else {
-				pixels_format=GL_RGB; //log(" RGB 8880 ");
+				pixels_format=GL_RGBA; //log(" RGB 8880 ");
+				glPixelTransferi(GL_ALPHA_SCALE, 0);
+				//GL_ALPHA_BIAS
 			}
 		} else if(fmt.Bmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Rmask==0x00ff0000) {
 			if(fmt.Amask==0xff000000) { 
 				pixels_format=GL_BGRA; //log(" BGRA 8888 ");
 			} else {
-				pixels_format=GL_BGR; //log(" BGRA 8888 ");
+				pixels_format=GL_BGRA; //log(" BGRA 8888 ");
 			}
 		} else
 			assert(false);
-		pixels_type=GL_UNSIGNED_BYTE;
+		pixels_type = GL_UNSIGNED_BYTE;
+		
 	} else if (Bpp==3) {
 		if(fmt.Rmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Bmask==0x00ff0000) {
 			pixels_format=GL_RGB; //log(" RGB 888 ");
@@ -153,7 +159,7 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 			pixels_format=GL_BGR;
 		}else
 			assert(false);
-		pixels_type=GL_UNSIGNED_BYTE;
+		pixels_type = GL_UNSIGNED_BYTE;
 	} else if (Bpp==2) {
 		if((fmt.Rmask==0xF800) and (fmt.Gmask==0x7E0) and (fmt.Bmask==0x1F)) {
 			pixels_format=GL_RGB; //log(" RGB 565"); 
@@ -184,6 +190,9 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	glTexImage2D( GL_TEXTURE_2D, 0, WL_GLINTERNALFORMAT, m_tex_w, m_tex_h, 0,
 	pixels_format, pixels_type, surface->pixels );
 	handle_glerror();
+
+	if (pushed)
+		glPopAttrib();
 
 	SDL_UnlockSurface(surface);
 	SDL_FreeSurface(surface);
@@ -257,7 +266,7 @@ const SDL_PixelFormat * SurfaceOpenGL::get_format() const
 	rgbafmt->Rmask = 0x000000ff; rgbafmt->Gmask = 0x0000ff00;
 	rgbafmt->Bmask = 0x00ff0000; rgbafmt->Amask = 0xff000000;
 	rgbafmt->Ashift = 24; rgbafmt->Bshift = 16; rgbafmt->Gshift = 8;
-	rgbafmt->Ashift = 0; rgbafmt->palette = NULL;
+	rgbafmt->Rshift = 0; rgbafmt->palette = NULL;
 	return rgbafmt;
 }
 
