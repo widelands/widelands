@@ -424,7 +424,8 @@ void Graphic::flush_animations() {
 }
 
 
-Surface & Graphic::LoadImage(const std::string & fname, bool alpha)
+Surface & Graphic::load_image
+(const std::string & fname, bool alpha)
 {
 	//log("Graphic::LoadImage(\"%s\")\n", fname.c_str());
 	FileRead fr;
@@ -462,7 +463,7 @@ PictureID & Graphic::get_picture
 		Surface * surf;
 
 		try {
-			surf = &LoadImage(fname, alpha);
+			surf = &load_image(fname, alpha);
 			log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
 		} catch (std::exception const & e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());

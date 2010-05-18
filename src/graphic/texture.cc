@@ -102,7 +102,7 @@ is_32bit   (format.BytesPerPixel == 4)
 		if (g_opengl) {
 			SurfaceOpenGL * tsurface =
 				&dynamic_cast<SurfaceOpenGL &>
-				(g_gr->LoadImage(fname));
+				(g_gr->load_image(fname));
 			// SDL_ConvertSurface(surf, &fmt, 0);
 			m_glFrames.push_back(tsurface);
 			tsurface->lock();

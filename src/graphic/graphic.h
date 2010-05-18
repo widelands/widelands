@@ -108,7 +108,8 @@ struct Graphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	Surface & LoadImage(const std::string & fname, bool alpha = false);
+	Surface & load_image
+(const std::string & fname, bool alpha = false);
 	PictureID & get_picture(PicMod module, const std::string & fname, bool alpha = true)
 	__attribute__ ((pure));
 	PictureID get_picture
