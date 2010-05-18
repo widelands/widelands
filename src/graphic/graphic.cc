@@ -281,7 +281,6 @@ Graphic::Graphic
 */
 Graphic::~Graphic()
 {
-	log("Graphic::~Graphic()");
 	for (size_t i = 1; i < m_picturemap.size(); ++i)
 		flush(static_cast<PicMod>(i));
 

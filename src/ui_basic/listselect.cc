@@ -349,7 +349,9 @@ void BaseListselect::draw(RenderTarget & odst)
 {
 	RenderTarget * dst = &odst;
 
-	if (g_gr->caps().offscreen_rendering) {
+	// Render Caching is disable because it does not work good with the
+	// transparent background.
+	if (g_gr->caps().offscreen_rendering and false) {
 		if(!m_needredraw)
 		{
 			odst.blit(Point(0, 0), m_cache_pic);
@@ -367,10 +369,10 @@ void BaseListselect::draw(RenderTarget & odst)
 	uint32_t idx = m_scrollpos / lineheight;
 	int32_t y = 1 + idx * lineheight - m_scrollpos;
 
-	if (not g_gr->caps().offscreen_rendering)
+	//if (not g_gr->caps().offscreen_rendering)
 		dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
-	else
-		dst->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(20, 20, 20, 80));
+	//else
+	//	dst->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(20, 20, 20, 80));
 
 	while (idx < m_entry_records.size()) {
 		assert
@@ -396,9 +398,9 @@ void BaseListselect::draw(RenderTarget & odst)
 			// Make the area a bit more white and more transparent
 			if( r.w > 0 and r.h > 0 )
 			{
-				if (g_gr->caps().offscreen_rendering)
-					dst->fill_rect(r, RGBAColor(100, 100, 100, 80));
-				else
+				//if (g_gr->caps().offscreen_rendering and false)
+				//dst->fill_rect(r, RGBAColor(100, 100, 100, 80));
+				//else
 					dst->brighten_rect
 						(r, -ms_darken_value*2);
 						//(Rect(Point(1, y), get_eff_w() - 2,
@@ -449,7 +451,7 @@ void BaseListselect::draw(RenderTarget & odst)
 		++idx;
 	}
 	
-	if (g_gr->caps().offscreen_rendering)
+	if (g_gr->caps().offscreen_rendering and false)
 		odst.blit(Point(0, 0), m_cache_pic);
 	m_needredraw = false;
 }
