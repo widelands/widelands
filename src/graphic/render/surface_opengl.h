@@ -79,7 +79,8 @@ public:
 	{
 #if defined(DEBUG)
 		if (m_surf_type != SURFACE_SOURCE)
-			throw wexception("Try to get opengl texture id but not a source surface");
+			throw wexception
+				("Try to get opengl texture id but not a source surface");
 		if (not m_texture)
 			throw wexception("no texture");
 #endif

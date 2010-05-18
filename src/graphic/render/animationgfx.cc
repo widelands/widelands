@@ -21,8 +21,8 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 
-#include "graphic/render/surface_sdl.h"
-#include "graphic/render/surface_opengl.h"
+#include "surface_sdl.h"
+#include "surface_opengl.h"
 #include "graphic/graphic.h"
 
 #include "log.h"
@@ -172,7 +172,8 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 		}
 
 		if (m_hasplrclrs) {
-#warning TODO Do not load playercolor mask as opengl texture or use it as opengl texture
+			//TODO Do not load playercolor mask as opengl texture or use it as
+			//     opengl texture.
 			strcpy(after_basename, "_pc");
 			for (size_t extnr = 0;;) {
 				strcpy(after_basename + 3, extensions[extnr]);
@@ -278,16 +279,16 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 		{
 			fmt_pc = fmt = new SDL_PixelFormat;
 			memset(fmt, 0, sizeof(SDL_PixelFormat));
-			fmt->BitsPerPixel=32; fmt->BytesPerPixel=4;
-			fmt->Amask=0xFF000000; fmt->Ashift=24;
-			fmt->Bmask=0x00FF0000; fmt->Bshift=16;
-			fmt->Gmask=0x0000FF00; fmt->Gshift=8;
-			fmt->Rmask=0x000000FF; fmt->Rshift=0;
-		} else 
+			fmt->BitsPerPixel = 32; fmt->BytesPerPixel = 4;
+			fmt->Amask = 0xFF000000; fmt->Ashift = 24;
+			fmt->Bmask = 0x00FF0000; fmt->Bshift = 16;
+			fmt->Gmask = 0x0000FF00; fmt->Gshift = 8;
+			fmt->Rmask = 0x000000FF; fmt->Rshift = 0;
+		} else
 #endif
 		{
-			fmt = const_cast<SDL_PixelFormat*>(&newsurface.format());
-			fmt_pc = const_cast<SDL_PixelFormat*>(&pcmask.format());
+			fmt = const_cast<SDL_PixelFormat *>(&newsurface.format());
+			fmt_pc = const_cast<SDL_PixelFormat *>(&pcmask.format());
 		}
 
 		origsurface.lock();
@@ -320,7 +321,7 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 					plrclr.b = (plrclrs[3].b() * intensity) >> 8;
 
 					RGBAColor dest(source);
-					dest.r = 
+					dest.r =
 						(plrclr.r * influence + dest.r * (65536 - influence)) >> 16;
 					dest.g =
 						(plrclr.g * influence + dest.g * (65536 - influence)) >> 16;

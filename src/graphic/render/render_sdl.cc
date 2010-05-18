@@ -36,7 +36,7 @@ Rendering functions of the software renderer.
 #include "io/filesystem/layered_filesystem.h"
 #include "wui/minimap.h"
 
-#include "graphic/render/surface_sdl.h"
+#include "surface_sdl.h"
 #include "graphic/graphic.h"
 
 #include <SDL.h>
@@ -49,7 +49,7 @@ using Widelands::Road;
  * Updating the whole Surface
  */
 void SurfaceSDL::update() {
-	if(m_surf_type == SURFACE_SCREEN) {
+	if (m_surf_type == SURFACE_SCREEN) {
 		//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
 		SDL_Flip(m_surface);
 		log("SurfaceSDL::update(): update complete screen\n");
@@ -117,7 +117,7 @@ This function is slow as hell.
 ===============
 */
 void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
-	if(!factor)
+	if (!factor)
 		return;
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
@@ -130,13 +130,15 @@ void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
 
 	lock();
 
-	if(m_surface->format->BytesPerPixel == 4)
+	if (m_surface->format->BytesPerPixel == 4)
 	{
-		for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
+		for (int32_t y = rc.y; y < bl.y; ++y)
+			for (int32_t x = rc.x; x < bl.x; ++x)
+		{
 
 			Uint8 * const pix =
 				static_cast<Uint8 *>(m_surface->pixels) +
-				(y + m_offsy)* m_surface->pitch + (x + m_offsx) * 4;
+				(y + m_offsy) * m_surface->pitch + (x + m_offsx) * 4;
 
 			uint32_t const clr = *reinterpret_cast<const Uint32 *>(pix);
 			uint8_t gr, gg, gb;
@@ -152,13 +154,16 @@ void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
 			if (r & 0xFF00)
 				r = ~r >> 24;
 
-			*reinterpret_cast<Uint32 *>(pix) = SDL_MapRGB(m_surface->format, r, g, b);
+			*reinterpret_cast<Uint32 *>(pix) =
+				SDL_MapRGB(m_surface->format, r, g, b);
 		}
-	} else if(m_surface->format->BytesPerPixel == 2) {
-		for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
+	} else if (m_surface->format->BytesPerPixel == 2) {
+		for (int32_t y = rc.y; y < bl.y; ++y)
+			for (int32_t x = rc.x; x < bl.x; ++x)
+		{
 			Uint8 * const pix =
 				static_cast<Uint8 *>(m_surface->pixels) +
-				(y + m_offsy)* m_surface->pitch + (x + m_offsx) * 2;
+				(y + m_offsy) * m_surface->pitch + (x + m_offsx) * 2;
 
 			uint32_t const clr = *reinterpret_cast<const Uint16 *>(pix);
 			uint8_t gr, gg, gb;
@@ -174,7 +179,8 @@ void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
 			if (r & 0xFF00)
 				r = ~r >> 24;
 
-			*reinterpret_cast<Uint16 *>(pix) = SDL_MapRGB(m_surface->format, r, g, b);
+			*reinterpret_cast<Uint16 *>(pix) =
+				SDL_MapRGB(m_surface->format, r, g, b);
 		}
 	}
 	unlock();
@@ -191,14 +197,17 @@ void SurfaceSDL::clear() {
 }
 
 
-void SurfaceSDL::blit(Point const dst, Surface * const src, Rect const srcrc, bool enable_alpha)
+void SurfaceSDL::blit
+	(Point const dst, Surface * const src, Rect const srcrc, bool enable_alpha)
 {
 	assert(src);
 	assert(this);
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
-	SDL_BlitSurface(dynamic_cast<SurfaceSDL*>(src)->get_sdl_surface(), &srcrect, m_surface, &dstrect);
+	SDL_BlitSurface
+		(dynamic_cast<SurfaceSDL *>(src)->get_sdl_surface(),
+		 &srcrect, m_surface, &dstrect);
 }
 
 
@@ -206,5 +215,7 @@ void SurfaceSDL::blit(Point const dst, Surface * const src, Rect const srcrc, bo
  * Fast blit, simply copy the source to the destination
  */
 void SurfaceSDL::fast_blit(Surface * const src) {
-	SDL_BlitSurface(dynamic_cast<SurfaceSDL*>(src)->get_sdl_surface(), 0, m_surface, 0);
+	SDL_BlitSurface
+		(dynamic_cast<SurfaceSDL *>(src)->get_sdl_surface(),
+		 0, m_surface, 0);
 }

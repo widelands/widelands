@@ -232,7 +232,7 @@ void RenderTarget::clear()
  * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
  * to a non screen surface.
  *
- * This blit function copies the pixels to the destination surface. 
+ * This blit function copies the pixels to the destination surface.
  * I the source surface contains a alpha channel this is used during
  * the blit.
  */
@@ -249,7 +249,7 @@ void RenderTarget::blit(const Point dst, const PictureID picture)
  * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
  * to a non screen surface.
  *
- * This blit function copies the pixels to the destination surface. 
+ * This blit function copies the pixels to the destination surface.
  * I the source surface contains a alpha channel this is used during
  * the blit.
  */
@@ -291,7 +291,6 @@ void RenderTarget::blit_solid(const Point dst, const PictureID picture)
 			(Rect(dst, 0, 0),
 			 src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
 	}
-	
 }
 
 /**
@@ -299,7 +298,8 @@ void RenderTarget::blit_solid(const Point dst, const PictureID picture)
  * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
  * to a non screen surface.
  *
- * This blit function copies the pixels (including alpha channel) to the destination surface.
+ * This blit function copies the pixels (including alpha channel)
+ * to the destination surface.
  * The destination pixels will be exactly like the source pixels.
  */
 void RenderTarget::blit_copy(Point dst, PictureID picture)
@@ -535,7 +535,8 @@ bool RenderTarget::clip(Rect & r) const throw ()
 /**
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
-void RenderTarget::doblit(Rect dst, Surface * const src, Rect srcrc, bool enable_alpha)
+void RenderTarget::doblit
+	(Rect dst, Surface * const src, Rect srcrc, bool enable_alpha)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);

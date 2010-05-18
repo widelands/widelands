@@ -60,7 +60,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 #else
 		 false
 #endif
-		 );
+);
 
 
 	// Load background graphics
@@ -79,8 +79,8 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 }
 
 Fullscreen_Menu_Base::~Fullscreen_Menu_Base() {
-	if 
-		(m_res_background != g_gr->get_no_picture() and 
+	if
+		(m_res_background != g_gr->get_no_picture() and
 		 m_res_background != m_pic_background)
 		g_gr->free_picture_surface(m_res_background);
 }

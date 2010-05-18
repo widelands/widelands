@@ -32,8 +32,8 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "graphic/render/surface_opengl.h"
-#include "graphic/render/surface_sdl.h"
+#include "surface_opengl.h"
+#include "surface_sdl.h"
 #include "graphic/texture.h"
 
 #include "wui/overlay_manager.h"
@@ -48,7 +48,7 @@ using Widelands::Map;
 using Widelands::Map_Object_Descr;
 using Widelands::Player;
 using Widelands::TCoords;
-using namespace  Widelands; 
+using namespace  Widelands;
 
 inline static Sint8 node_brightness
 	(Widelands::Time   gametime,
@@ -115,7 +115,7 @@ void GameView::rendermap
 	 Widelands::Player           const &       player,
 	 Point                                     viewofs)
 {
-	m_surface->fill_rect(m_rect, RGBAColor(0,0,0,255));
+	m_surface->fill_rect(m_rect, RGBAColor(0, 0, 0, 255));
 
 	if (player.see_all())
 		return rendermap(egbase, viewofs);
@@ -130,8 +130,8 @@ void GameView::rendermap
 		glMatrixMode(GL_TEXTURE);
 		glLoadIdentity();
 		glScalef
-			(1.0f/static_cast<GLfloat>(TEXTURE_WIDTH),
-			 1.0f/static_cast<GLfloat>(TEXTURE_HEIGHT), 1);
+			(1.0f / static_cast<GLfloat>(TEXTURE_WIDTH),
+			 1.0f / static_cast<GLfloat>(TEXTURE_HEIGHT), 1);
 		glDisable(GL_BLEND);
 	}
 #endif
@@ -986,8 +986,9 @@ void GameView::draw_field
 #ifdef USE_OPENGL
 	upcast(SurfaceOpenGL, oglsurf, m_surface);
 #endif
-	if(sdlsurf){
-		dynamic_cast<SurfaceSDL*>(m_surface)->set_subwin(subwin);
+	if (sdlsurf)
+	{
+		dynamic_cast<SurfaceSDL *>(m_surface)->set_subwin(subwin);
 		switch (sdlsurf->format().BytesPerPixel) {
 		case 2:
 			draw_field_int<Uint16>
@@ -1006,16 +1007,16 @@ void GameView::draw_field
 		default:
 			assert(false);
 		}
-		dynamic_cast<SurfaceSDL*>(m_surface)->unset_subwin();
-	} 
+		dynamic_cast<SurfaceSDL *>(m_surface)->unset_subwin();
+	}
 #ifdef USE_OPENGL
 	else if (oglsurf) {
-		
-
 		// Draw triangle right (bottom) of the field
-		draw_field_opengl(*oglsurf, subwin, f_vert, br_vert, r_vert, f_r_texture);
+		draw_field_opengl
+			(*oglsurf, subwin, f_vert, br_vert, r_vert, f_r_texture);
 		// Draw triangle bottom of the field
-		draw_field_opengl(*oglsurf, subwin, f_vert, bl_vert, br_vert, f_d_texture);
+		draw_field_opengl
+			(*oglsurf, subwin, f_vert, bl_vert, br_vert, f_d_texture);
 		// Draw the roads
 		draw_roads_opengl(subwin, roads, f_vert, r_vert, bl_vert, br_vert);
 	}
@@ -1097,6 +1098,11 @@ inline static uint32_t calc_minimap_color
 	return pixelcolor;
 }
 
+/*
+ *
+ *
+ *
+ */
 template<typename T>
 static void draw_minimap_int
 	(Uint8                             * const pixels,
@@ -1171,36 +1177,44 @@ void GameView::draw_minimap
 	 Point                               const viewpt,
 	 uint32_t                            const flags)
 {
+	// First create a temporary SDL Surface to draw the minimap. This Surface is
+	// is created in almost display pixel format without alpha channel.
+	// Bits per pixels must be 16 or 32 for the minimap code to work
+	// TODO: Currently the minimap is redrawn every frame. That is not really
+	//       necesary. The created surface could be cached and only redrawn two
+	//       or three times per second
+	const SDL_PixelFormat & fmt =
+		g_gr->get_render_target()->get_surface().format();
 	SDL_Surface * surface = SDL_CreateRGBSurface
 				(SDL_SWSURFACE,
 				 rc.w,
 				 rc.h,
-				 32,
-				 0x000000FF,
-				 0x0000FF00,
-				 0x00FF0000,
-				 0x00000000);
-
-	log("SurfaceSDL::draw_minimap(Rect(%d, %d, %d, %d), Point(%d, %d))\n",
-	    rc.x, rc.y, rc.w, rc.h, viewpt.x, viewpt.y);
+				 fmt.BytesPerPixel == 2?16:32,
+				 fmt.Rmask,
+				 fmt.Gmask,
+				 fmt.Bmask,
+				 0);
 
 	Rect rc2;
-	rc2.x=rc2.y=0;
-	rc2.w=rc.w;
-	rc2.h=rc.h;
+	rc2.x = rc2.y = 0;
+	rc2.w = rc.w;
+	rc2.h = rc.h;
+
 	SDL_FillRect(surface, 0, SDL_MapRGBA(surface->format, 0, 0, 0, 255));
 	SDL_LockSurface(surface);
-	
+
 	Uint8 * const pixels = static_cast<uint8_t *>(surface->pixels);
 	Widelands::X_Coordinate const w = egbase.map().get_width();
 	switch (surface->format->BytesPerPixel) {
 	case sizeof(Uint16):
 		draw_minimap_int<Uint16>
-			(pixels, surface->pitch, *surface->format, w, egbase, player, rc2, viewpt, flags);
+			(pixels, surface->pitch, *surface->format,
+			 w, egbase, player, rc2, viewpt, flags);
 		break;
 	case sizeof(Uint32):
 		draw_minimap_int<Uint32>
-			(pixels, surface->pitch, *surface->format, w, egbase, player, rc2, viewpt, flags);
+			(pixels, surface->pitch, *surface->format,
+			 w, egbase, player, rc2, viewpt, flags);
 		break;
 	default:
 		assert (false);
@@ -1210,7 +1224,7 @@ void GameView::draw_minimap
 
 	Surface & surf = g_gr->create_surface(*surface);
 
-	m_surface->blit(Point(rc.x,rc.y), &surf, rc2, false);
+	m_surface->blit(Point(rc.x, rc.y), &surf, rc2, false);
 
 	delete &surf;
 }

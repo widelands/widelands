@@ -49,7 +49,7 @@ const SDL_PixelFormat & SurfaceSDL::format() const {
 uint8_t * SurfaceSDL::get_pixels() const {
 	//log("SurfaceSDL::get_pixels()\n");
 	assert(m_surface);
-	
+
 	return
 		static_cast<uint8_t *>(m_surface->pixels)
 		+

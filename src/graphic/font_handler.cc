@@ -29,11 +29,11 @@
 #include "text_parser.h"
 #include "upcast.h"
 
-#include "graphic/rendertarget.h"
-#include "graphic/surface.h"
+#include "rendertarget.h"
+#include "surface.h"
 #include "graphic/render/surface_sdl.h"
 #include "graphic/render/surface_opengl.h"
-#include "graphic/font_handler.h"
+#include "font_handler.h"
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -353,7 +353,7 @@ void Font_Handler::render_caret
 			(g_gr->get_picture(PicMod_Game, "pics/caret.png"));
 
 	//TODO: Implement caret rendering for opengl
-	if(!g_opengl)
+	if (!g_opengl)
 	{
 		upcast(SurfaceSDL, sdlsurf, caret_surf);
 		assert(sdlsurf);
@@ -362,7 +362,7 @@ void Font_Handler::render_caret
 		SDL_Rect r;
 		r.x = caret_x - caret_surf_sdl->w;
 		r.y = (caret_y - caret_surf_sdl->h) / 2;
-		
+
 		SDL_BlitSurface(caret_surf_sdl, 0, &line, &r);
 	} else {
 		log("WARNING: Should render caret here but it's not implemented\n");

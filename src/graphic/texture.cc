@@ -82,7 +82,9 @@ is_32bit   (format.BytesPerPixel == 4)
 		surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 
 		if (!surf) {
-			log("WARNING: Failed to load texture frame %s: %s\n", fname, IMG_GetError());
+			log
+				("WARNING: Failed to load texture frame %s: %s\n",
+				 fname, IMG_GetError());
 			break;
 		}
 
