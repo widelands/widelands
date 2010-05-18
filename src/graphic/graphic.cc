@@ -911,7 +911,7 @@ void Graphic::free_picture_surface(const PictureID & picid) {
 
 PictureID Graphic::create_grayed_out_pic(const PictureID & picid) {
 	if (picid != get_no_picture()) {
-		Surface & s = create_surface(*get_picture_surface(picid));
+		Surface & s = create_surface(*get_picture_surface(picid), true);
 #ifdef USE_OPENGL
 		upcast(SurfaceOpenGL, gl_dest, &s);
 		upcast(SurfaceOpenGL, gl_src, get_picture_surface(picid));
