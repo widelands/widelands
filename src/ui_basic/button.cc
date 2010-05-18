@@ -179,6 +179,14 @@ void Button::draw(RenderTarget & odst)
 			if (m_cache_pic == g_gr->get_no_picture())
 				m_cache_pic =
 					g_gr->create_picture_surface(odst.get_w(), odst.get_h(), m_flat);
+			else if 
+				(m_cache_pic->rendertarget->get_w() != odst.get_w() or
+				 m_cache_pic->rendertarget->get_h() != odst.get_h())
+			{
+				g_gr->free_picture_surface(m_cache_pic);
+				m_cache_pic =
+					g_gr->create_picture_surface(odst.get_w(), odst.get_h(), m_flat);
+			}
 			dst = (g_gr->get_surface_renderer(m_cache_pic));
 		}
 	}
