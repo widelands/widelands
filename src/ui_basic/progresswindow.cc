@@ -42,13 +42,16 @@
 namespace UI {
 
 ProgressWindow::ProgressWindow(const std::string & background)
-	: m_xres(0), m_yres(0)
+	: m_xres(0), m_yres(0),
+	m_background_pic(g_gr->get_no_picture())
 {
 	set_background(background);
 	step(_("Preparing..."));
 }
 
 ProgressWindow::~ProgressWindow() {
+	if (m_background_pic != g_gr->get_no_picture())
+		g_gr->free_picture_surface(m_background_pic);
 	const VisualizationArray & visualizations = m_visualizations;
 	container_iterate_const(VisualizationArray, visualizations, i)
 		(*i.current)->stop(); //  inform visualizations
@@ -57,51 +60,57 @@ ProgressWindow::~ProgressWindow() {
 void ProgressWindow::draw_background
 	(RenderTarget & rt, const uint32_t xres, const uint32_t yres)
 {
-
 	m_label_center.x = xres / 2;
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
-
-	// Load background graphics
 	Rect wnd_rect(Point(0, 0), xres, yres);
-	const PictureID pic_tile =
+
+	if
+		(m_background_pic == g_gr->get_no_picture()
+		 or xres != m_xres or yres != m_yres)
+	{
+		if (m_background_pic != g_gr->get_no_picture())
+			g_gr->free_picture_surface(m_background_pic);
+
+		// Load background graphics
+		PictureID const background_original =
+			g_gr->get_picture(PicMod_Menu, m_background.c_str());
+
+		if (g_gr->caps().resize_surfaces and not g_gr->caps().blit_resized) {
+			PictureID const background_resized  =
+				g_gr->get_resized_picture
+					(background_original, xres, yres,
+					 Graphic::ResizeMode_Loose);
+
+			if (background_resized != g_gr->get_no_picture()) {
+				m_background_pic = background_resized;
+				g_gr->free_picture_surface(background_original);
+			} else
+				m_background_pic = background_original;
+		} else
+			m_background_pic = background_original;
+
+		const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
+		m_label_rectangle.x = xres / 4;
+		m_label_rectangle.w = xres / 2;
+		m_label_rectangle.y =
+		m_label_center.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
+		m_label_rectangle.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
+		// remember last resolution
+		m_xres = xres;
+		m_yres = yres;
+	}
+
+	/*const PictureID pic_tile =
 		g_gr->get_picture(PicMod_Menu, "pics/progress.png");
 	if (pic_tile != g_gr->get_no_picture()) {
 		rt.tile(wnd_rect, pic_tile, Point(0, 0));
-		g_gr->update_fullscreen();
-	}
+		g_gr->update_fullscreen(); */
 
-	PictureID const background_original =
-		g_gr->get_picture(PicMod_Menu, m_background.c_str());
-	
-	if (g_gr->caps().resize_surfaces and not g_gr->caps().blit_resized) {
-		PictureID const background_resized  =
-			g_gr->get_resized_picture
-				(background_original, xres, yres,
-				 Graphic::ResizeMode_Loose);
-
-		if (background_resized != g_gr->get_no_picture()) {
-			uint32_t w = 0;
-			uint32_t h = 0;
-			g_gr->get_picture_size(background_resized, w, h);
-			// center picture horizontally
-			Point pt((xres - w) / 2, 0);
-			rt.blitrect(pt, background_resized, wnd_rect);
-			g_gr->update_fullscreen();
-		}
-
-		if (background_resized != background_original)
-			g_gr->free_picture_surface(background_resized);
-	} else {
-		rt.blit(Rect(Point(0, 0), rt.get_w(), rt.get_h()), background_original);
-
-	}
-
-	const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
-	m_label_rectangle.x = xres / 4;
-	m_label_rectangle.w = xres / 2;
-	m_label_rectangle.y =
-		m_label_center.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
-	m_label_rectangle.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
+	if (g_gr->caps().resize_surfaces and not g_gr->caps().blit_resized)
+		g_gr->free_picture_surface(m_background_pic);
+	else
+		rt.blit
+			(Rect(Point(0, 0), rt.get_w(), rt.get_h()), m_background_pic);
 
 	Rect border_rect = m_label_rectangle;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
@@ -110,10 +119,6 @@ void ProgressWindow::draw_background
 	border_rect.h += 2 * PROGRESS_STATUS_BORDER_Y;
 
 	rt.draw_rect(border_rect, PROGRESS_FONT_COLOR_FG);
-
-	// remember last resolution
-	m_xres = xres;
-	m_yres = yres;
 }
 
 /// Set a picture to render in the background
@@ -142,7 +147,10 @@ void ProgressWindow::set_background(const std::string & file_name) {
 		}
 	} else
 		m_background = "pics/progress.png";
-
+	if (m_background_pic != g_gr->get_no_picture()) {
+		g_gr->free_picture_surface(m_background_pic);
+		m_background_pic = g_gr->get_no_picture();
+	}
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 	update(true);
 }
@@ -152,11 +160,9 @@ void ProgressWindow::step(const std::string & description) {
 
 	const uint32_t xres = g_gr->get_xres();
 	const uint32_t yres = g_gr->get_yres();
-	bool repaint = (xres != m_xres or yres != m_yres);
 
-	// if resolution is changed, repaint the background
-	if (repaint)
-		draw_background(rt, xres, yres);
+	// always repaint the background first
+	draw_background(rt, xres, yres);
 
 	rt.fill_rect(m_label_rectangle, PROGRESS_FONT_COLOR_BG);
 	UI::g_fh->draw_string
@@ -164,7 +170,7 @@ void ProgressWindow::step(const std::string & description) {
 		 m_label_center, description, Align_Center);
 	g_gr->update_rectangle(m_label_rectangle);
 
-	update(repaint);
+	update(true);
 }
 
 void ProgressWindow::update(bool const repaint) {
