@@ -73,7 +73,8 @@ Slider::Slider
 		 m_value >= m_max_value ? get_bar_size() :
 		 (m_value - m_min_value) * get_bar_size() / (m_max_value - m_min_value)),
 	m_cursor_size (cursor_size),
-	m_needredraw     (true)
+	m_needredraw     (true),
+	m_cache_pic      (g_gr->get_no_picture())
 {
 	//  cursor initial position
 
@@ -140,7 +141,9 @@ void Slider::draw_cursor
 	RGBColor black(0, 0, 0);
 
 	// Make the slider button opaque
-	m_cache_pid->surface->fill_rect(Rect(Point(x, y), w, h), RGBAColor(0, 0, 0, 255));
+	if (g_gr->caps().offscreen_rendering)
+		m_cache_pic->surface->fill_rect
+			(Rect(Point(x, y), w, h), RGBAColor(0, 0, 0, 255));
 	dst.tile //  background
 		(Rect(Point(x, y), w, h), m_pic_background, Point(get_x(), get_y()));
 
@@ -354,40 +357,48 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
  * \param dst The graphic destination.
  */
 void HorizontalSlider::draw(RenderTarget & odst) {
-	if(!m_needredraw)
-	{
-		odst.blit(Point(0, 0), m_cache_pid);
-		return;
+	RenderTarget * dst = &odst;
+	if (g_gr->caps().offscreen_rendering) {
+		if (!m_needredraw)
+		{
+			odst.blit(Point(0, 0), m_cache_pic);
+			return;
+		}
+
+		if (m_cache_pic == g_gr->get_no_picture())
+		{
+			m_cache_pic = g_gr->create_picture_surface
+				(odst.get_w(), odst.get_h(), true);
+		}
+		
+		dst = g_gr->get_surface_renderer(m_cache_pic);
+		dst->fill_rect
+			(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 	}
 
-	m_cache_pid = g_gr->create_picture_surface(odst.get_w(), odst.get_h());
-
-	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
-
-	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
-  
 	RGBAColor black(0, 0, 0, 255);
 
-	dst.brighten_rect //  bottom edge
+	dst->brighten_rect //  bottom edge
 		(Rect(Point(get_x_gap(), get_h() / 2), get_bar_size(), 2),
 		 BUTTON_EDGE_BRIGHT_FACTOR);
-	dst.brighten_rect //  right edge
+	dst->brighten_rect //  right edge
 		(Rect(Point(get_x_gap() + get_bar_size() - 2, get_y_gap()), 2, 2),
 		 BUTTON_EDGE_BRIGHT_FACTOR);
 
 	//  top edge
-	dst.fill_rect
+	dst->fill_rect
 		(Rect(Point(get_x_gap(), get_y_gap()),     get_bar_size() - 1, 1), black);
-	dst.fill_rect
+	dst->fill_rect
 		(Rect(Point(get_x_gap(), get_y_gap() + 1), get_bar_size() - 2, 1), black);
 
 	//  left edge
-	dst.fill_rect(Rect(Point(get_x_gap(),     get_y_gap()), 1, 4), black);
-	dst.fill_rect(Rect(Point(get_x_gap() + 1, get_y_gap()), 1, 3), black);
+	dst->fill_rect(Rect(Point(get_x_gap(),     get_y_gap()), 1, 4), black);
+	dst->fill_rect(Rect(Point(get_x_gap() + 1, get_y_gap()), 1, 3), black);
 
-	draw_cursor(dst, m_cursor_pos, 0, m_cursor_size, get_h());
+	draw_cursor(*dst, m_cursor_pos, 0, m_cursor_size, get_h());
 
-	odst.blit(Point(0, 0), m_cache_pid);
+	if (g_gr->caps().offscreen_rendering)
+		odst.blit(Point(0, 0), m_cache_pic);
 	m_needredraw = false;
 }
 
@@ -447,40 +458,45 @@ bool HorizontalSlider::handle_mousepress
  * \param dst The graphic destination.
  */
 void VerticalSlider::draw(RenderTarget & odst) {
-	if(!m_needredraw)
+	RenderTarget * dst = &odst;
+	if (g_gr->caps().offscreen_rendering)
 	{
-		odst.blit(Point(0, 0), m_cache_pid);
-		return;
+		if(!m_needredraw)
+		{
+			odst.blit(Point(0, 0), m_cache_pic);
+			return;
+		}
+	if (m_cache_pic == g_gr->get_no_picture())
+		m_cache_pic = g_gr->create_picture_surface
+			(odst.get_w(), odst.get_h(), true);
+	dst = g_gr->get_surface_renderer(m_cache_pic);
+
+	dst->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 	}
-
-	m_cache_pid = g_gr->create_picture_surface(odst.get_w(), odst.get_h());
-
-	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
-
-	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
 
 	RGBAColor black(0, 0, 0, 255);
 
-	dst.brighten_rect //  right edge
+	dst->brighten_rect //  right edge
 		(Rect(Point(get_w() / 2, get_y_gap()), 2, get_bar_size()),
 		 BUTTON_EDGE_BRIGHT_FACTOR);
-	dst.brighten_rect //  bottom edge
+	dst->brighten_rect //  bottom edge
 		(Rect(Point(get_x_gap(), get_y_gap() + get_bar_size() - 2), 2, 2),
 		 BUTTON_EDGE_BRIGHT_FACTOR);
 
 	//  left edge
-	dst.fill_rect
+	dst->fill_rect
 		(Rect(Point(get_x_gap(),     get_y_gap()), 1, get_bar_size() - 1), black);
-	dst.fill_rect
+	dst->fill_rect
 		(Rect(Point(get_x_gap() + 1, get_y_gap()), 1, get_bar_size() - 2), black);
 
 	//  top edge
-	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap()),     4, 1), black);
-	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap() + 1), 3, 1), black);
+	dst->fill_rect(Rect(Point(get_x_gap(), get_y_gap()),     4, 1), black);
+	dst->fill_rect(Rect(Point(get_x_gap(), get_y_gap() + 1), 3, 1), black);
 
-	draw_cursor(dst, 0, m_cursor_pos, get_w(), m_cursor_size);
+	draw_cursor(*dst, 0, m_cursor_pos, get_w(), m_cursor_size);
 
-	odst.blit(Point(0, 0), m_cache_pid);
+	if (g_gr->caps().offscreen_rendering)
+		odst.blit(Point(0, 0), m_cache_pic);
 	m_needredraw = false;
 }
 
