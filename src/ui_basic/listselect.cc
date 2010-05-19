@@ -439,7 +439,7 @@ void BaseListselect::draw(RenderTarget & odst)
 		if (er.picid != g_gr->get_no_picture()) {
 			uint32_t w, h;
 			g_gr->get_picture_size(er.picid, w, h);
-			if (g_gr->caps().offscreen_rendering)
+			if (g_gr->caps().offscreen_rendering and false)
 				dst->blit_solid
 					(Point(1, y + (get_lineheight() - h) / 2), er.picid);
 			else
