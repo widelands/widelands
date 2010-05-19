@@ -75,30 +75,30 @@ void draw_field_opengl
 	glEnd();
 }
 
-#define horiz_road_opengl(tex, start, end) \
-	glBindTexture( GL_TEXTURE_2D, tex); \
-	glBegin(GL_QUADS); \
-	    glTexCoord2i(0, 0); \
-	    glVertex2f(start.x, start.y-2); \
-	    glTexCoord2i(TEXTURE_WIDTH, 0); \
-	    glVertex2f(end.x, end.y-2); \
-	    glTexCoord2i(TEXTURE_WIDTH, 4); \
-	    glVertex2f(end.x, end.y+2); \
-	    glTexCoord2i(TEXTURE_WIDTH, 4); \
-	    glVertex2f(start.x, start.y+2); \
+#define horiz_road_opengl(tex, start, end)                                    \
+	glBindTexture( GL_TEXTURE_2D, tex);                                        \
+	glBegin(GL_QUADS);                                                         \
+		glTexCoord2i(0, 0);                                                     \
+		glVertex2f(subwin.x + start.x, subwin.y + start.y - 2);                 \
+		glTexCoord2i(TEXTURE_WIDTH, 0);                                         \
+		glVertex2f(subwin.x + end.x,   subwin.y + end.y - 2);                   \
+		glTexCoord2i(TEXTURE_WIDTH, 4);                                         \
+		glVertex2f(subwin.x + end.x,   subwin.y + end.y + 2);                   \
+		glTexCoord2i(TEXTURE_WIDTH, 4);                                         \
+		glVertex2f(subwin.x + start.x, subwin.y + start.y + 2);                 \
 	glEnd();
 
-#define vert_road_opengl(tex, start, end) \
-	glBindTexture( GL_TEXTURE_2D, tex); \
-	glBegin(GL_QUADS); \
-	    glTexCoord2i(0, 0); \
-	    glVertex2f(start.x - 3, start.y); \
-	    glTexCoord2i(6, 0); \
-	    glVertex2f(start.x + 3, start.y); \
-	    glTexCoord2i(TEXTURE_WIDTH, TEXTURE_HEIGHT); \
-	    glVertex2f(end.x + 3, end.y); \
-	    glTexCoord2i(TEXTURE_WIDTH - 6 , TEXTURE_HEIGHT); \
-	    glVertex2f(end.x - 3, end.y); \
+#define vert_road_opengl(tex, start, end)                                     \
+	glBindTexture( GL_TEXTURE_2D, tex);                                        \
+	glBegin(GL_QUADS);                                                         \
+		glTexCoord2i(0, 0);                                                     \
+		glVertex2f(subwin.x + start.x - 3, subwin.y + start.y);                 \
+		glTexCoord2i(6, 0);                                                     \
+		glVertex2f(subwin.x + start.x + 3, subwin.y + start.y);                 \
+		glTexCoord2i(TEXTURE_WIDTH, TEXTURE_HEIGHT);                            \
+		glVertex2f(subwin.x + end.x + 3,   subwin.y + end.y);                   \
+		glTexCoord2i(TEXTURE_WIDTH - 6 , TEXTURE_HEIGHT);                       \
+		glVertex2f(subwin.x + end.x - 3,   subwin.y + end.y);                   \
 	glEnd();
 
 void draw_roads_opengl
@@ -119,7 +119,7 @@ void draw_roads_opengl
 		(*g_gr->get_road_texture(Widelands::Road_Busy)).get_texture();
 
 	glDisable(GL_BLEND);
-	glColor4f(1.0f,1.0f,1.0f,0.6f);
+	glColor4f(1.0f, 1.0f, 1.0f, 0.6f);
 
 	road = (roads >> Widelands::Road_East) & Widelands::Road_Mask;
 	if ((-128 < f_vert.b or -128 < r_vert.b) and road) {
