@@ -425,8 +425,6 @@ void Font_Handler::draw_richtext
 	 PictureID    &       widget_cache_id,
 	 bool           const transparent)
 {
-	log("Font_Handler::draw_richtext(%s)\n", text.c_str());
-
 	PictureID picid;
 	if (widget_cache == Widget_Cache_Use)
 		picid = widget_cache_id;
