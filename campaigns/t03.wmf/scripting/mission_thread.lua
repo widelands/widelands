@@ -75,7 +75,7 @@ function foottracks()
    p1:forbid_buildings{"sentry"}
    p1:allow_buildings{"donjon"}
 
-   timed_scroll(array_reverse(pts), p1, 10)
+   timed_scroll(array_reverse(pts), 10)
 
    -- Hide the tracks again
    sleep(5000)
@@ -126,7 +126,7 @@ function mining_and_trainingsites()
       "burners_house",
    }
    
-   timed_scroll(array_reverse(pts), p1, 10)
+   timed_scroll(array_reverse(pts), 10)
    sleep(500)
 
    while true do
@@ -281,7 +281,7 @@ function renegade_fortresses()
    send_msg(order_msg_7_free_althunran)
    local o = add_obj(obj_military_assault_on_althunran)
 
-   timed_scroll(array_reverse(pts), p1, 10)
+   timed_scroll(array_reverse(pts), 10)
    sleep(500)
 
    while not (p3.defeated and p4.defeated) do
