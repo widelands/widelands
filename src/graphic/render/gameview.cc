@@ -125,22 +125,7 @@ void GameView::rendermap
 	const Player::Field * const first_player_field = player.fields();
 	Widelands::Time const gametime = egbase.get_gametime();
 
-#ifdef USE_OPENGL
-	if (g_opengl) {
-		glMatrixMode(GL_TEXTURE);
-		glLoadIdentity();
-		glScalef
-			(1.0f / static_cast<GLfloat>(TEXTURE_WIDTH),
-			 1.0f / static_cast<GLfloat>(TEXTURE_HEIGHT), 1);
-		glDisable(GL_BLEND);
-
-		// Use scissor test to clip the window. This takes coordinates in screen
-		// coordinates (y goes from bottom to top)
-		glScissor
-			(m_rect.x, g_gr->get_yres() - m_rect.y - m_rect.h, m_rect.w, m_rect.h);
-		glEnable(GL_SCISSOR_TEST);
-	}
-#endif
+	rendermap_init();
 
 	while (dy--) {
 		const int32_t posy = b_posy;
@@ -557,13 +542,7 @@ void GameView::rendermap
 		}
 	}
 
-#ifdef USE_OPENGL
-	if (g_opengl) {
-		glDisable(GL_SCISSOR_TEST);
-		glMatrixMode(GL_TEXTURE);
-		glLoadIdentity();
-	}
-#endif
+	rendermap_deint();
 
 	g_gr->reset_texture_animation_reminder();
 }
@@ -573,6 +552,8 @@ void GameView::rendermap
 	 Point                                     viewofs)
 {
 	RENDERMAP_INITIALIZANTONS;
+
+	rendermap_init();
 
 	while (dy--) {
 		const int32_t posy = b_posy;
@@ -929,6 +910,8 @@ void GameView::rendermap
 		}
 	}
 
+	rendermap_deint();
+
 	g_gr->reset_texture_animation_reminder();
 }
 
@@ -1236,3 +1219,33 @@ void GameView::draw_minimap
 	delete &surf;
 }
 
+void GameView::rendermap_init()
+{
+#ifdef USE_OPENGL
+	if (g_opengl) {
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+		glScalef
+			(1.0f / static_cast<GLfloat>(TEXTURE_WIDTH),
+			 1.0f / static_cast<GLfloat>(TEXTURE_HEIGHT), 1);
+			 glDisable(GL_BLEND);
+
+		// Use scissor test to clip the window. This takes coordinates in screen
+		// coordinates (y goes from bottom to top)
+		glScissor
+			(m_rect.x, g_gr->get_yres() - m_rect.y - m_rect.h, m_rect.w, m_rect.h);
+			 glEnable(GL_SCISSOR_TEST);
+	}
+#endif
+}
+
+void GameView::rendermap_deint()
+{
+#ifdef USE_OPENGL
+	if (g_opengl) {
+		glDisable(GL_SCISSOR_TEST);
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+	}
+#endif
+}

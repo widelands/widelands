@@ -83,7 +83,8 @@ void ProgressWindow::draw_background
 
 			if (background_resized != g_gr->get_no_picture()) {
 				m_background_pic = background_resized;
-				g_gr->free_picture_surface(background_original);
+				if (background_resized != background_original)
+					g_gr->free_picture_surface(background_original);
 			} else
 				m_background_pic = background_original;
 		} else
@@ -107,7 +108,8 @@ void ProgressWindow::draw_background
 		g_gr->update_fullscreen(); */
 
 	if (g_gr->caps().resize_surfaces and not g_gr->caps().blit_resized)
-		g_gr->free_picture_surface(m_background_pic);
+		rt.blit
+			(Point(0, 0), m_background_pic);
 	else
 		rt.blit
 			(Rect(Point(0, 0), rt.get_w(), rt.get_h()), m_background_pic);

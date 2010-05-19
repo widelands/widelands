@@ -91,6 +91,8 @@ public:
 		 Point                               const viewpt,
 		 uint32_t                            const flags);
 private:
+	void rendermap_init();
+	void rendermap_deint();
 };
 
 #endif //WIDELANDS_GAMEVIEW_H
