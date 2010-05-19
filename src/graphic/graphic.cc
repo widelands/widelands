@@ -101,7 +101,6 @@ Graphic::Graphic
 	if (opengl) {
 		log("Graphics: Trying opengl\n");
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 1);
 		flags |= SDL_OPENGL;
 	}
 #endif

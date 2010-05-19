@@ -34,8 +34,6 @@ void draw_field_opengl
 	if(p1.b<=-128 and p2.b<=-128 and p3.b<=-128)
 		return;
 
-#warning This code works for the main view but is broken for the watchwindow
-
 	glBindTexture( GL_TEXTURE_2D, texture.getTexture());
 	GLfloat brightness;
 

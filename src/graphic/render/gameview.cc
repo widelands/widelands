@@ -134,29 +134,11 @@ void GameView::rendermap
 			 1.0f / static_cast<GLfloat>(TEXTURE_HEIGHT), 1);
 		glDisable(GL_BLEND);
 
-		if
-			(g_gr->caps().gl.stencil_buffer_bits and
-			 (
-			  m_rect.x > 0 or m_rect.y > 0 or
-			  m_rect.w < g_gr->get_xres() or m_rect.h < g_gr->get_yres()))
-		{
-			glEnable(GL_STENCIL_TEST);
-			glClearStencil(0);
-			glClear(GL_STENCIL_BUFFER_BIT);
-
-			glStencilFunc(GL_ALWAYS, 1, 1);
-			glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-			glBegin(GL_QUADS);
-				glColor3f(0.0f, 0.0f, 0.0f);
-				glVertex2i(m_rect.x,            m_rect.y);
-				glVertex2i(m_rect.x + m_rect.w, m_rect.y);
-				glVertex2i(m_rect.x + m_rect.w, m_rect.y + m_rect.h);
-				glVertex2i(m_rect.x,            m_rect.y + m_rect.h);
-			glEnd();
-
-			glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-			glStencilFunc(GL_EQUAL, 1, 1);
-		}
+		// Use scissor test to clip the window. This takes coordinates in screen
+		// coordinates (y goes from bottom to top)
+		glScissor
+			(m_rect.x, g_gr->get_yres() - m_rect.y - m_rect.h, m_rect.w, m_rect.h);
+		glEnable(GL_SCISSOR_TEST);
 	}
 #endif
 
@@ -577,7 +559,7 @@ void GameView::rendermap
 
 #ifdef USE_OPENGL
 	if (g_opengl) {
-		glDisable(GL_STENCIL_TEST);
+		glDisable(GL_SCISSOR_TEST);
 		glMatrixMode(GL_TEXTURE);
 		glLoadIdentity();
 	}
