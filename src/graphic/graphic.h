@@ -66,6 +66,8 @@ struct GLCaps
 	int minor_version;
 	int tex_max_size;
 	bool tex_power_of_two;
+	int stencil_buffer_bits;
+	int aux_buffers;
 };
 
 struct GraphicCaps

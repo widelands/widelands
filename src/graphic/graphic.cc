@@ -101,6 +101,7 @@ Graphic::Graphic
 	if (opengl) {
 		log("Graphics: Trying opengl\n");
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 1);
 		flags |= SDL_OPENGL;
 	}
 #endif
@@ -160,11 +161,16 @@ Graphic::Graphic
 			 (glBool == GL_TRUE)?"enabled":"disabled");
 
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInt);
-		log("Graphics: OpenGL: Max texture size %u\n", glInt);
+		log("Graphics: OpenGL: Max texture size: %u\n", glInt);
 		m_caps.gl.tex_max_size = glInt;
 
 		glGetIntegerv(GL_AUX_BUFFERS, &glInt);
-		log("Graphics: OpenGL: Number of aux buffers %u\n", glInt);
+		log("Graphics: OpenGL: Number of aux buffers: %u\n", glInt);
+		m_caps.gl.aux_buffers = glInt;
+
+		glGetIntegerv(GL_STENCIL_BITS, &glInt);
+		log("Graphics: OpenGL: Number of stencil buffer bits: %u\n", glInt);
+		m_caps.gl.stencil_buffer_bits = glInt;
 
 		str = reinterpret_cast<const char *>(glGetString(GL_VERSION));
 		m_caps.gl.major_version = atoi(str);
