@@ -186,15 +186,14 @@ void SurfaceOpenGL::blit
 #ifdef DEBUG
 	if (m_surf_type != SURFACE_SCREEN)
 	{
-		log
-			("ERROR: SurfaceOpenGL::blit(): "
-			 "Destination surface is not the screen\n");
+		throw wexception
+			("Surface not the screen: Offscreen rendering not possible");
 		return;
 	}
 
 	if (not oglsrc)
 	{
-		throw wexception("Invalid Surface: Not a opengl surface");
+		throw wexception("Invalid surface: Not a opengl surface");
 	}
 #endif
 	GLuint tex;
@@ -202,7 +201,8 @@ void SurfaceOpenGL::blit
 	try {
 		tex = oglsrc->get_texture();
 	} catch (...) {
-		log("WARNING: SurfaceOpenGL::blit(): Source surface has no texture\n");
+		throw wexception
+			("SurfaceOpenGL::blit(): Source surface has no texture\n");
 		return;
 	}
 

@@ -469,7 +469,7 @@ PictureID & Graphic::get_picture
 
 		try {
 			surf = &load_image(fname, alpha);
-			log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
+			//log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
 		} catch (std::exception const & e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());
 			return get_no_picture();
@@ -534,7 +534,7 @@ PictureID Graphic::get_resized_picture
 	 uint32_t const w, uint32_t const h,
 	 ResizeMode const mode)
 {
-	log("Graphic::get_resized_picture()\n");
+	//log("Graphic::get_resized_picture()\n");
 
 	// Resizing is not possible with opengl surfaces
 	if (g_opengl)

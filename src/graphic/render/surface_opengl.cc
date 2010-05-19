@@ -112,7 +112,7 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 		 m_tex_w != static_cast<uint32_t>(surface->w) or
 		 m_tex_h != static_cast<uint32_t>(surface->h))
 	{
-		log("SurfaceOpenGL: convert surface for opengl\n");
+		//log("SurfaceOpenGL: convert surface for opengl\n");
 		surface = SDL_CreateRGBSurface
 			(SDL_SWSURFACE, m_tex_w, m_tex_h,
 			 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);

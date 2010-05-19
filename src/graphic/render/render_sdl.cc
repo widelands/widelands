@@ -52,10 +52,10 @@ void SurfaceSDL::update() {
 	if (m_surf_type == SURFACE_SCREEN) {
 		//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
 		SDL_Flip(m_surface);
-		log("SurfaceSDL::update(): update complete screen\n");
+		//log("SurfaceSDL::update(): update complete screen\n");
 	} else {
 		SDL_UpdateRect(m_surface, m_offsx, m_offsy, m_w, m_h);
-		log("SurfaceSDL::update()\n");
+		//log("SurfaceSDL::update()\n");
 	}
 }
 
@@ -70,7 +70,7 @@ void SurfaceSDL::draw_rect(const Rect rc, const RGBColor clr) {
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
-	log("SurfaceSDL::draw_rect()\n");
+	//log("SurfaceSDL::draw_rect()\n");
 	const uint32_t color = clr.map(format());
 
 	const Point bl = rc.bottom_left() - Point(1, 1);
@@ -97,7 +97,7 @@ void SurfaceSDL::fill_rect(const Rect rc, const RGBAColor clr) {
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
-	log("SurfaceSDL::fill_rect()\n");
+	//log("SurfaceSDL::fill_rect()\n");
 	const uint32_t color = clr.map(format());
 
 	SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
@@ -124,7 +124,7 @@ void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
 
-	log("SurfaceSDL::brighten_rect()\n");
+	//log("SurfaceSDL::brighten_rect()\n");
 
 	const Point bl = rc.bottom_left();
 
