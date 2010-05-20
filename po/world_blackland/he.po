@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-11 11:54+0000\n"
+"PO-Revision-Date: 2010-05-12 13:36+0000\n"
 "Last-Translator: Michael DOUBEZ <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-12 04:12+0000\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/blackland/conf:45
@@ -263,7 +263,7 @@ msgstr "צוות הפיתוח של ווידלנדס"
 
 #: ../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
-msgstr ""
+msgstr "אלה הן אפל-ארצות האפוריות, המחרידית והמסוכנות"
 
 #: ../../worlds/blackland/resconf:36
 msgid "Water"

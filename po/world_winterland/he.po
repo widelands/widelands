@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-06 14:11+0000\n"
+"PO-Revision-Date: 2010-05-12 13:38+0000\n"
 "Last-Translator: Michael DOUBEZ <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-12 04:12+0000\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/winterland/conf:45
@@ -276,7 +276,7 @@ msgstr "צוות הפיתוח של ווידלנדס"
 msgid ""
 "These are the white, wide and frosty winterlands, in which the Northmen "
 "dwell."
-msgstr ""
+msgstr "אלה הן ארצות החורף הלבנות, הנרחבות והכפוריות שבהן הצפונים שיכונים"
 
 #: ../../worlds/winterland/conf:44
 msgid "Track"
@@ -288,7 +288,7 @@ msgstr "מים"
 
 #: ../../worlds/winterland/conf:3
 msgid "Winterland"
-msgstr ""
+msgstr "ארץ החורף"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"

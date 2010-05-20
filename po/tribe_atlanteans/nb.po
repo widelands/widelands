@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-10 17:04+0000\n"
+"PO-Revision-Date: 2010-05-16 10:30+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -39,11 +39,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Armoursmith"
-msgstr ""
+msgstr "Rustningssmed"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Armoursmithy"
-msgstr ""
+msgstr "Rustningssmie"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Ashes"
@@ -152,7 +152,7 @@ msgstr "Bøtter"
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Builder"
-msgstr ""
+msgstr "Bygger"
 
 #: ../../tribes/atlanteans/conf:121
 msgid "Burner"
@@ -205,7 +205,7 @@ msgstr "Byggeplass"
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Corn"
-msgstr ""
+msgstr "Mais"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Cornfield"
@@ -229,7 +229,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Cornflour"
-msgstr ""
+msgstr "Maismel"
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
@@ -263,11 +263,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:161
 msgid "Donjon"
-msgstr ""
+msgstr "Borgtårn"
 
 #: ../../tribes/atlanteans/conf:74
 msgid "Double Trident"
-msgstr ""
+msgstr "Dobbel trefork"
 
 #: ../../tribes/atlanteans/conf:147
 msgid "Dungeon"
@@ -287,7 +287,7 @@ msgstr "Feller trær."
 
 #: ../../tribes/atlanteans/conf:75
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Ildtang"
 
 #: ../../tribes/atlanteans/conf:77
 msgid "Fish"
@@ -295,7 +295,7 @@ msgstr "Fisk"
 
 #: ../../tribes/atlanteans/conf:123
 msgid "Fish Breeder"
-msgstr ""
+msgstr "Fiskeoppdretter"
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Fish Breeder's House"
@@ -414,7 +414,7 @@ msgstr "Hest"
 
 #: ../../tribes/atlanteans/conf:141
 msgid "Horse Breeder"
-msgstr ""
+msgstr "Hesteoppdretter"
 
 #: ../../tribes/atlanteans/conf:204
 msgid "Horse Farm"
@@ -450,11 +450,11 @@ msgstr "Labyrint"
 
 #: ../../tribes/atlanteans/conf:88
 msgid "Light trident"
-msgstr ""
+msgstr "Lett trefork"
 
 #: ../../tribes/atlanteans/conf:89
 msgid "Long Trident"
-msgstr ""
+msgstr "Lang trefork"
 
 #: ../../tribes/atlanteans/conf:90
 msgid "Meat"
@@ -530,7 +530,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/farm/conf:19
 msgid "Plant corn"
-msgstr ""
+msgstr "Plant mais"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
@@ -571,11 +571,11 @@ msgstr "Produser bøtte"
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
-msgstr ""
+msgstr "Produser maismel"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:33
 msgid "Produce double trident"
-msgstr ""
+msgstr "Produser dobbel trefork"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:35
 msgid "Produce fire tongs"
@@ -603,11 +603,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
-msgstr ""
+msgstr "Produser lett trefork"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:31
 msgid "Produce long trident"
-msgstr ""
+msgstr "Produser lang trefork"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce milking tongs"
@@ -756,7 +756,7 @@ msgstr "Ljå"
 #: ../../tribes/atlanteans/conf:163
 #: ../../tribes/atlanteans/conf:165
 msgid "Sentry"
-msgstr ""
+msgstr "Vaktpost"
 
 #: ../../tribes/atlanteans/conf:97
 msgid "Shovel"
@@ -819,7 +819,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:196
 msgid "Smokery"
-msgstr ""
+msgstr "Røkeri"
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
@@ -831,7 +831,7 @@ msgstr "Soldat"
 
 #: ../../tribes/atlanteans/conf:133
 msgid "Spiderbreeder"
-msgstr ""
+msgstr "Edderkoppoppdretter"
 
 #: ../../tribes/atlanteans/conf:100
 msgid "Spidercloth"
@@ -851,7 +851,7 @@ msgstr "Stålskjold"
 
 #: ../../tribes/atlanteans/conf:103
 msgid "Steel Trident"
-msgstr ""
+msgstr "Ståltrefork"
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Stone"
@@ -880,7 +880,7 @@ msgstr ""
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
+msgstr "Ljåen er bondens verktøy. Den er laget av verktøysmeden."
 
 #: ../../tribes/atlanteans/conf:18
 msgid "The Widelands Development Team"
@@ -940,7 +940,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid "This is an advanced trident for more experienced soldiers."
-msgstr ""
+msgstr "Dette er en avansert trefork for mer erfarne soldater."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid "This is red iron ore."
@@ -1035,7 +1035,7 @@ msgstr "Trener soldatene."
 
 #: ../../tribes/atlanteans/conf:106
 msgid "Trunk"
-msgstr ""
+msgstr "Trestamme"
 
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""
@@ -1147,7 +1147,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:199
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Våpensmie"
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid "Weapons and Tools are made of iron."

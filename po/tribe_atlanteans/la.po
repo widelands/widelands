@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-09 18:01+0000\n"
+"PO-Revision-Date: 2010-05-18 05:43+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -524,6 +524,7 @@ msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
 msgstr ""
+"Lapicidinarii fossoresque dolabris utuntur. Quae a fabre fabricantur."
 
 #: ../../tribes/atlanteans/conf:94
 msgid "Planks"
@@ -988,6 +989,8 @@ msgid ""
 "This is the most dangerous weapon of the atlantian military. Only the best "
 "of the best soldiers may use it."
 msgstr ""
+"Hunc est acerrimus ex armis Atlantidensibus. Solum milites optimi eo uti "
+"licet."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid "This is the yellow gold ore."

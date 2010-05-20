@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-08 11:44+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-05-15 13:13+0000\n"
+"Last-Translator: Marc Wischnowsky <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -79,11 +79,11 @@ msgstr "Barriere"
 
 #: ../../tribes/empire/armour/conf:1
 msgid "Basic armour for Empire soldiers."
-msgstr "Die Grundausrüstung für Soldaten des Imperiums."
+msgstr "Grundlegende Bewaffnung für Soldaten des Empires"
 
 #: ../../tribes/empire/helm/conf:1
 msgid "Basic defence of a warrior"
-msgstr "Die Grundausrüstung eines Soldaten."
+msgstr "Grundlegende Verteidigungsausrüstung eines Kriegers"
 
 #: ../../tribes/empire/conf:67
 msgid "Basket"
@@ -103,7 +103,7 @@ msgstr "Brot"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr "Züchtet süße und hilfreiche Esel"
+msgstr "Züchtet niedliche und hilfreiche Esel"
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
@@ -123,11 +123,11 @@ msgstr "Baumeister"
 
 #: ../../tribes/empire/conf:120
 msgid "Burner"
-msgstr "Brenner"
+msgstr "Köhler"
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
-msgstr "Verbrennt Kohle."
+msgstr "Brennt Kohle"
 
 #: ../../tribes/empire/conf:109
 msgid "Carrier"
@@ -144,7 +144,7 @@ msgstr "Burg"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
-msgstr "Burg Dorf"
+msgstr "Burgdorf"
 
 #: ../../tribes/empire/conf:70
 msgid "Chain-Armour"
@@ -401,7 +401,7 @@ msgstr "Helm"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr "Hilft, Waren auf viel benutzende Straßen zu transportieren."
+msgstr "Hilft, Waren auf viel benutzten Straßen zu transportieren."
 
 #: ../../tribes/empire/conf:164
 msgid "High Tower"
@@ -471,7 +471,7 @@ msgstr "Marmor"
 
 #: ../../tribes/empire/conf:88
 msgid "Marble Column"
-msgstr "Marmorsäulen"
+msgstr "Marmorsäule"
 
 #: ../../tribes/empire/conf:196
 msgid "Marble Mine"
@@ -482,8 +482,8 @@ msgid ""
 "Marble columns present the high culture of the Empire, so they are needed "
 "for nearly every bigger building."
 msgstr ""
-"Marmorsäulen präsentieren die hoch entwickelte Kultur des Imperiums und "
-"werden daher in vielen großen Gebäuden verwendet."
+"Marmorsäulen zeigen die hoch entwickelte Kultur des Imperiums und werden "
+"daher in vielen großen Gebäuden verwendet."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -651,7 +651,7 @@ msgstr "Produziert Lanze"
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
-msgstr "Produziert Spitzhache"
+msgstr "Produziert Spitzhacke"
 
 #: ../../tribes/empire/armoursmithy/conf:29
 msgid "Produce plate armour"
@@ -707,39 +707,39 @@ msgstr "Ration"
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator coal little"
-msgstr "Ressourcen Anzeige für wenig Kohle"
+msgstr "Ressourcenanzeige für wenig Kohle"
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator coal much"
-msgstr "Ressourcen Anzeige für viel Kohle"
+msgstr "Ressourcenanzeige für viel Kohle"
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator gold little"
-msgstr "Ressourcen Anzeige für wenig Gold"
+msgstr "Ressourcenanzeige für wenig Gold"
 
 #: ../../tribes/empire/conf:50
 msgid "Resource indicator gold much"
-msgstr "Ressourcen Anzeige für viel Gold"
+msgstr "Ressourcenanzeige für viel Gold"
 
 #: ../../tribes/empire/conf:51
 msgid "Resource indicator granite little"
-msgstr "Ressourcen Anzeige für wenig Granit"
+msgstr "Ressourcenanzeige für wenig Granit"
 
 #: ../../tribes/empire/conf:52
 msgid "Resource indicator granite much"
-msgstr "Ressourcen Anzeige für viel Granit"
+msgstr "Ressourcenanzeige für viel Granit"
 
 #: ../../tribes/empire/conf:53
 msgid "Resource indicator iron little"
-msgstr "Ressourcen Anzeige für wenig Eisen"
+msgstr "Ressourcenanzeige für wenig Eisen"
 
 #: ../../tribes/empire/conf:54
 msgid "Resource indicator iron much"
-msgstr "Ressourcen Anzeige für viel Eisen"
+msgstr "Ressourcenanzeige für viel Eisen"
 
 #: ../../tribes/empire/conf:55
 msgid "Resource indicator no resource"
-msgstr "Ressourcen Anzeige für keine Ressource"
+msgstr "Ressourcenanzeige für fehlende Ressource"
 
 #: ../../tribes/empire/conf:56
 msgid "Resource indicator water"
@@ -765,8 +765,8 @@ msgstr "Erkunderhütte"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
-"Erkunder wie Erkundigunde, der erkundliche Erkunder, erkundete das Gebiet "
-"auf erkundliche Weise."
+"Erkunder wie Erkundigunde, der Erkunder, erkunden das unerkundete Gebiet auf "
+"erkundliche Weise."
 
 #: ../../tribes/empire/conf:96
 msgid "Scythe"
@@ -1001,8 +1001,8 @@ msgid ""
 "This wine gives enough power, to mine marble or gold. And furthermore, our "
 "soldiers like it, too."
 msgstr ""
-"Dieser Wein gibt genug Kraft, um Marmor oder Gold abzubauen, und sogar die "
-"Soldaten mögen den Wein äußerst gerne."
+"Dieser Wein gibt genug Kraft, um Marmor oder Gold abzubauen. Und auch die "
+"Soldaten mögen ihn sehr gerne."
 
 #: ../../tribes/empire/lance/conf:1
 msgid "This wooden lance has an iron spike."
@@ -1027,7 +1027,7 @@ msgstr "Ausbilder"
 
 #: ../../tribes/empire/conf:149
 msgid "Trainingscamp"
-msgstr "Trainingslager"
+msgstr "Ausbildungslager"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1115,55 +1115,55 @@ msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Verbessert Lebenspunkte des Soldaten 0"
+msgstr "Erhöht Lebenspunkte des Soldaten 0"
 
 #: ../../tribes/empire/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Verbessert Lebenspunkte des Soldaten 0 (nur für Abwärtskompatiblität mit "
+"Erhöht Lebenspunkte des Soldaten 0 (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
 #: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Verbessert Lebenspunkte des Soldaten 1"
+msgstr "Erhöht Lebenspunkte des Soldaten 1"
 
 #: ../../tribes/empire/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Verbessert Lebenspunkte des Soldaten 1 (nur für Abwärtskompatiblität mit "
+"Erhöht Lebenspunkte des Soldaten 1 (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Verbessert Lebenspunkte des Soldaten 2"
+msgstr "Erhöht Lebenspunkte des Soldaten 2"
 
 #: ../../tribes/empire/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Verbessert Lebenspunkte des Soldaten 2 (nur für Abwärtskompatiblität mit "
+"rhöht Lebenspunkte des Soldaten 2 (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier hitpoints 3"
-msgstr "Verbessert Lebenspunkte des Soldaten 3"
+msgstr "Erhöht Lebenspunkte des Soldaten 3"
 
 #: ../../tribes/empire/trainingscamp/conf:54
 msgid ""
 "Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Verbessert Lebenspunkte des Soldaten 3 (nur für Abwärtskompatiblität mit "
+"Erhöht Lebenspunkte des Soldaten 3 (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
 #: ../../tribes/empire/conf:139
 msgid "Vine Farmer"
-msgstr "Weinbauer"
+msgstr "Winzer"
 
 #: ../../tribes/empire/conf:57
 msgid "Vine medium"
@@ -1183,7 +1183,7 @@ msgstr "frisch gesäte Weinrebe"
 
 #: ../../tribes/empire/conf:211
 msgid "Vineyard"
-msgstr "Weinhof"
+msgstr "Weinberg"
 
 #: ../../tribes/empire/conf:100
 msgid "War-Lance"
@@ -1202,8 +1202,8 @@ msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer."
 msgstr ""
-"Wasser ist die Basis des Lebens. Dieses Wasser wird für viele Sachen "
-"benutzt, sei es für Brot oder für Bier."
+"Wasser ist die Quelle des Lebens. Dieses Wasser wird an vielen Orten "
+"benutzt, sei es um Brot oder Bier zu machen."
 
 #: ../../tribes/empire/conf:207
 msgid "Weapon Smithy"
@@ -1264,7 +1264,7 @@ msgstr "Wolle"
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
 msgstr ""
-"Wolle ist das Haar von Schaffen. Imperiale Webereien benutzen sie, um Stoffe "
+"Wolle ist das Haar von Schafen. Imperiale Webereien benutzen sie, um Stoffe "
 "zu erstellen."
 
 #: ../../tribes/empire/armoursmithy/conf:30
@@ -1302,7 +1302,7 @@ msgstr ""
 #: ../../tribes/empire/well/conf:16
 #: ../../tribes/empire/winery/conf:20
 msgid "Work"
-msgstr "Arbeit"
+msgstr "Arbeitet"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."

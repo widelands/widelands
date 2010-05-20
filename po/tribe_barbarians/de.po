@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-04-29 16:31+0000\n"
-"Last-Translator: Andreas Breitschopp <Unknown>\n"
+"PO-Revision-Date: 2010-05-15 13:34+0000\n"
+"Last-Translator: Marc Wischnowsky <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-30 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -72,7 +72,7 @@ msgstr "Barbaren"
 
 #: ../../tribes/barbarians/conf:171
 msgid "Barracks"
-msgstr "Barracke"
+msgstr "Baracke"
 
 #: ../../tribes/barbarians/conf:156
 #: ../../tribes/barbarians/conf:172
@@ -81,7 +81,7 @@ msgstr "Barriere"
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid "Basic defence of a warrior."
-msgstr "Die Grundausrüstung eines Kriegers."
+msgstr "Die grundlegende Verteidigungsausrüstung eines Kriegers"
 
 #: ../../tribes/barbarians/conf:152
 msgid "Battle Arena"
@@ -138,11 +138,11 @@ msgstr "Baumeister"
 
 #: ../../tribes/barbarians/conf:126
 msgid "Burner"
-msgstr "Brenner"
+msgstr "Köhler"
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr "Verbrennt Kohle."
+msgstr "Brennt Kohle"
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kilm."
@@ -183,7 +183,7 @@ msgstr "Zitadelle"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
-msgstr "Zitadellen Dorf"
+msgstr "Zitadellendorf"
 
 #: ../../tribes/barbarians/conf:78
 msgid "Cloth"
@@ -783,43 +783,43 @@ msgstr "frisch gesäter Reet"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator coal little"
-msgstr "Ressourcen Anzeige für wenig Kohle"
+msgstr "Ressourcenanzeige für wenig Kohle"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator coal much"
-msgstr "Ressourcen Anzeige für viel Kohle"
+msgstr "Ressourcenanzeige für viel Kohle"
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator gold little"
-msgstr "Ressourcen Anzeige für wenig Gold"
+msgstr "Ressourcenanzeige für wenig Gold"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Resource indicator gold much"
-msgstr "Ressourcen Anzeige für viel Gold"
+msgstr "Ressourcenanzeige für viel Gold"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator granite little"
-msgstr "Ressourcen Anzeige für wenig Granit"
+msgstr "Ressourcenanzeige für wenig Granit"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator granite much"
-msgstr "Ressourcen Anzeige für viel Granit"
+msgstr "Ressourcenanzeige für viel Granit"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Resource indicator iron little"
-msgstr "Ressourcen Anzeige für wenig Eisen"
+msgstr "Ressourcenanzeige für wenig Eisen"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Resource indicator iron much"
-msgstr "Ressourcen Anzeige für viel Eisen"
+msgstr "Ressourcenanzeige für viel Eisen"
 
 #: ../../tribes/barbarians/conf:63
 msgid "Resource indicator no resource"
-msgstr "Ressourcen Anzeige für keine Ressource"
+msgstr "Ressourcenanzeige für fehlende Ressource"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Resource indicator water"
-msgstr "Ressourcen Anzeige für Wasser"
+msgstr "Ressourcenanzeige für Wasser"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Scout"
@@ -833,8 +833,8 @@ msgstr "Erkunderhütte"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
-"Erkunder wie Erkundigunde, der erkundliche Erkunder, erkundeten das Gebiet "
-"auf erkundliche Weise."
+"Erkunder wie Erkundigunde, der Erkunder, erkunden das unerkundete Gebiet auf "
+"erkundliche Weise."
 
 #: ../../tribes/barbarians/conf:100
 msgid "Scythe"
@@ -1064,11 +1064,11 @@ msgstr "Wachturm"
 
 #: ../../tribes/barbarians/conf:143
 msgid "Trainer"
-msgstr "Trainer"
+msgstr "Ausbilder"
 
 #: ../../tribes/barbarians/conf:153
 msgid "Trainingscamp"
-msgstr "Trainingslager"
+msgstr "Ausbildungslager"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1166,38 +1166,38 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Verbessert Lebenspunkte des Soldaten 0"
+msgstr "Erhöht Lebenspunkte des Soldaten 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Verbessert Lebenspunkte des Soldaten 0 (nur für Abwärtskompatiblität mit "
+"Erhöht Lebenspunkte des Soldaten 0 (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Verbessert Lebenspunkte des Soldaten 1"
+msgstr "Erhöht Lebenspunkte des Soldaten 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Verbessert Lebenspunkte des Soldaten 1 (nur für Abwärtskompatiblität mit "
+"Erhöht Lebenspunkte des Soldaten 1 (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Verbessert Lebenspunkte des Soldaten 2"
+msgstr "Erhöht Lebenspunkte des Soldaten 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Verbessert Lebenspunkte des Soldaten 2 (nur für Abwärtskompatiblität mit "
+"Erhöht Lebenspunkte des Soldaten 2 (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
 #: ../../tribes/barbarians/conf:107
@@ -1233,8 +1233,8 @@ msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer or to produce grout."
 msgstr ""
-"Wasser ist die Basis des Lebens. Dieses Wasser wird für viele Sachen "
-"benutzt, sei es für Brot, für Bier oder um Mörtel herzustellen."
+"Wasser ist die Quelle des Lebens. Dieses Wasser wird an vielen Orten "
+"benutzt, sei es um Brot, Bier oder Mörtel herzustellen."
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid "Weapons and tools are made of iron."

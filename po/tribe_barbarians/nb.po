@@ -8,18 +8,19 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-08 15:16+0000\n"
+"PO-Revision-Date: 2010-05-16 10:26+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
 msgstr ""
+"Litt større, for de avanserte gruvearbeiderne. De har bruk for en større bit."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -27,15 +28,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid "A small bite to keep miners strong and working."
-msgstr ""
+msgstr "En liten matbit for å holde gruvearbeiderne sterke og i arbeid."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid "An enhanced mask for barbarian warriors."
-msgstr ""
+msgstr "En forbedret maske for barbarkrigerne."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid "An enhanced version of the helmet."
-msgstr ""
+msgstr "En forbedret utgave av hjelmen."
 
 #: ../../tribes/barbarians/conf:40
 msgid "Ashes"
@@ -47,7 +48,7 @@ msgstr "Øks"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Axefactory"
-msgstr ""
+msgstr "Øksefabrikk"
 
 #: ../../tribes/barbarians/conf:120
 msgid "Baker"
@@ -76,7 +77,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid "Basic defence of a warrior."
-msgstr ""
+msgstr "Krigerens basisbeskyttelse."
 
 #: ../../tribes/barbarians/conf:152
 msgid "Battle Arena"
@@ -84,7 +85,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:73
 msgid "Battle Axe"
-msgstr ""
+msgstr "Stridsøks"
 
 #: ../../tribes/barbarians/conf:74
 msgid "Beer"
@@ -97,7 +98,7 @@ msgstr "Ved siden av pitabrød og kjøtt, er fisk et matkilde for barbarene."
 
 #: ../../tribes/barbarians/conf:187
 msgid "Big Inn"
-msgstr ""
+msgstr "Resturant"
 
 #: ../../tribes/barbarians/conf:122
 msgid "Blacksmith"
@@ -109,11 +110,11 @@ msgstr "Herdet tre"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr ""
+msgstr "Aler opp sterke okser som hjelper til med transport av varer."
 
 #: ../../tribes/barbarians/conf:124
 msgid "Brewer"
-msgstr ""
+msgstr "Brygger"
 
 #: ../../tribes/barbarians/conf:188
 msgid "Brewery"
@@ -129,7 +130,7 @@ msgstr "Bronseøks"
 
 #: ../../tribes/barbarians/conf:125
 msgid "Builder"
-msgstr ""
+msgstr "Bygger"
 
 #: ../../tribes/barbarians/conf:126
 msgid "Burner"
@@ -158,7 +159,7 @@ msgstr "Slott"
 
 #: ../../tribes/barbarians/conf:146
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Kvegoppdretter"
 
 #: ../../tribes/barbarians/conf:219
 msgid "Cattle Farm"
@@ -182,11 +183,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:78
 msgid "Cloth"
-msgstr ""
+msgstr "Tøy"
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-msgstr ""
+msgstr "Tøy brukes til seilene på barbarenes skip. Det lages av lin."
 
 #: ../../tribes/barbarians/conf:79
 msgid "Coal"
@@ -234,7 +235,7 @@ msgstr "Hjort"
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Forsvar og erobre!"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Destroyed building"
@@ -246,7 +247,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:158
 msgid "Donjon"
-msgstr ""
+msgstr "Borgtårn"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Farm"
@@ -297,6 +298,8 @@ msgid ""
 "Fire-hardened wood, as hard as iron and cannot burn, used for military "
 "buildings."
 msgstr ""
+"Tre herdet av ild er hardt som jern og brenner ikke. Brukes til militære "
+"bygninger."
 
 #: ../../tribes/barbarians/conf:81
 msgid "Fish"
@@ -320,11 +323,11 @@ msgstr "Fiskestenger brukes av barbariske fiskere til fisking."
 
 #: ../../tribes/barbarians/conf:83
 msgid "Flax"
-msgstr ""
+msgstr "Lin"
 
 #: ../../tribes/barbarians/flax/conf:1
 msgid "Flax is a beautiful flower, which is used for making cloth."
-msgstr ""
+msgstr "Lin er en vakker blomst, som brukes til å lage tøy."
 
 #: ../../tribes/barbarians/conf:47
 msgid "Flax medium"
@@ -381,7 +384,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:85
 msgid "Goldstone"
-msgstr ""
+msgstr "Gullmalm"
 
 #: ../../tribes/barbarians/conf:202
 msgid "Granite Mine"
@@ -389,7 +392,7 @@ msgstr "Granittgruve"
 
 #: ../../tribes/barbarians/conf:86
 msgid "Grout"
-msgstr ""
+msgstr "Sementmørtel"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
@@ -466,11 +469,11 @@ msgstr "Jaktspyd"
 
 #: ../../tribes/barbarians/conf:206
 msgid "Inn"
-msgstr ""
+msgstr "Vertshus"
 
 #: ../../tribes/barbarians/conf:136
 msgid "Innkeeper"
-msgstr ""
+msgstr "Vertshusholder"
 
 #: ../../tribes/barbarians/conf:90
 msgid "Iron"
@@ -490,7 +493,7 @@ msgstr "Kjøkkenredskaper"
 
 #: ../../tribes/barbarians/conf:207
 msgid "Lime Kiln"
-msgstr ""
+msgstr "Kalkovn"
 
 #: ../../tribes/barbarians/conf:137
 msgid "Lime-Burner"
@@ -605,7 +608,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"
-msgstr ""
+msgstr "Produser stridsøks"
 
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
@@ -618,7 +621,7 @@ msgstr "Produser bronseøks"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr "Produser ildtenger"
+msgstr "Produser ildtang"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
@@ -686,7 +689,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Produserer vevet tøy til skip og soldater."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -697,6 +700,7 @@ msgstr "Produserer mat til gruvearbeiderne."
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
+"Produserer den fineste øl som holder krigerne sterke og glade under trening."
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
@@ -709,11 +713,11 @@ msgstr "Steinbrudd"
 
 #: ../../tribes/barbarians/conf:140
 msgid "Ranger"
-msgstr ""
+msgstr "Skogvokter"
 
 #: ../../tribes/barbarians/conf:213
 msgid "Ranger's Hut"
-msgstr ""
+msgstr "Skogvokterhytte"
 
 #: ../../tribes/barbarians/conf:98
 msgid "Ration"
@@ -721,17 +725,19 @@ msgstr "Rasjon"
 
 #: ../../tribes/barbarians/conf:99
 msgid "Raw Stone"
-msgstr ""
+msgstr "Grov stein"
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid "Raw Stones are the secondary build material of the barbarians."
-msgstr ""
+msgstr "Grov stein er barbarenes nest mest brukte byggemateriale."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be enhanced to grout which delivers solid, non burning build "
 "material."
 msgstr ""
+"Grov stein kan forbedres til sementmørtel, som er et solid, ikke-brennbart "
+"byggemateriale."
 
 #: ../../tribes/barbarians/sharpaxe/conf:1
 msgid ""
@@ -816,7 +822,7 @@ msgstr "Ljå"
 #: ../../tribes/barbarians/conf:160
 #: ../../tribes/barbarians/conf:170
 msgid "Sentry"
-msgstr ""
+msgstr "Vaktpost"
 
 #: ../../tribes/barbarians/conf:101
 msgid "Sharp Axe"
@@ -845,7 +851,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:141
 msgid "Smelter"
-msgstr ""
+msgstr "Smelter"
 
 #: ../../tribes/barbarians/conf:214
 msgid "Smelting Works"
@@ -869,11 +875,11 @@ msgstr "Soldat"
 
 #: ../../tribes/barbarians/conf:142
 msgid "Stonemason"
-msgstr ""
+msgstr "Steinhugger"
 
 #: ../../tribes/barbarians/conf:104
 msgid "Strong Beer"
-msgstr ""
+msgstr "Sterkt øl"
 
 #: ../../tribes/barbarians/conf:161
 msgid "Stronghold"
@@ -881,7 +887,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:215
 msgid "Tavern"
-msgstr ""
+msgstr "Kro"
 
 #: ../../tribes/barbarians/conf:105
 msgid "Thatch Reed"
@@ -904,6 +910,8 @@ msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
+"Viltforvalteren sørger for at den naturlige dyrebestanden ikke synker for "
+"lavt."
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -930,12 +938,16 @@ msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "Produced in the metal works."
 msgstr ""
+"Ildtangen er verktøyet smelteren bruker, når han jobber i smelteverket. "
+"Produseres på metallverket,"
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
 "The fires of the barbarians are usually fed with wood, but sometimes, wood "
 "just does not burn hot enough. Then, coal is used."
 msgstr ""
+"Barbarene bruker som oftest tre som brensel, men noen ganger trenger man "
+"sterkere varme. Da brenner man kull."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -985,16 +997,21 @@ msgid ""
 "Only trained warriors are able to yield such a weapon. It is produced in the "
 "axe factory."
 msgstr ""
+"Dette er det nest farligste våpnet barbarene er i stand til å lage. Kun "
+"trente krigere er i stand til å håndtere slike våpen. Produseres i "
+"øksefabrikken."
 
 #: ../../tribes/barbarians/goldstone/conf:1
 msgid "This is the yellow goldstone."
-msgstr ""
+msgstr "Dette er den gylne gullmalmen."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metal works."
 msgstr ""
+"Denne hakken blir brukt av steinhuggerne og gruvearbeiderne. Den er "
+"produsert i metallverket."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -1161,7 +1178,7 @@ msgstr "Varehus"
 
 #: ../../tribes/barbarians/conf:108
 msgid "Warriors Axe"
-msgstr ""
+msgstr "Krigerøks"
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -1185,7 +1202,7 @@ msgstr "Våpen og redskaper er laget av jern."
 
 #: ../../tribes/barbarians/conf:144
 msgid "Weaver"
-msgstr ""
+msgstr "Vever"
 
 #: ../../tribes/barbarians/conf:216
 msgid "Weaving-Mill"

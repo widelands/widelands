@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-05-11 17:13+0000\n"
+"PO-Revision-Date: 2010-05-18 11:27+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-12 04:11+0000\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:09+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -284,6 +284,9 @@ msgid ""
 "There seems to be a network problem, either on your side or on side\n"
 "of the server.\n"
 msgstr ""
+"Widelands klarte ikke å hente IP-addressen til tjeneren i tide.\n"
+"Det ser ut til å være et nettverksproblem, enten på din side eller\n"
+"på tjenersiden.\n"
 
 #: ../../src/wlapplication.cc:1704 ../../src/network/network_ggz.cc:367
 msgid "Connection problem"
@@ -970,6 +973,8 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
+"Widelands kunne ikke laste filen \"%s\". Filformetet ser ikke ut til å være "
+"kompatibelt."
 
 #: ../../src/editor/editorinteractive.cc:171
 #: ../../src/editor/editorinteractive.cc:576
@@ -1053,7 +1058,7 @@ msgstr "spiller %u: %s"
 #: ../../src/game_io/game_player_economies_data_packet.cc:91
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "økonomier: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:57
 #, c-format
@@ -1063,7 +1068,7 @@ msgstr ""
 #: ../../src/game_io/game_player_info_data_packet.cc:144
 #, c-format
 msgid "player info: %s"
-msgstr ""
+msgstr "spiller info: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:55
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:94
@@ -1161,7 +1166,7 @@ msgstr ""
 #: ../../src/logic/cmd_luascript.cc:58
 #, c-format
 msgid "lua: %s"
-msgstr ""
+msgstr "lua: %s"
 
 #: ../../src/logic/cmd_queue.cc:173
 #, c-format
@@ -1210,11 +1215,11 @@ msgstr "Laster kart"
 
 #: ../../src/logic/game.cc:456
 msgid "Creating player infrastructure"
-msgstr ""
+msgstr "Skaper spillerinfrastruktur"
 
 #: ../../src/logic/game.cc:467 ../../src/logic/player.cc:123
 msgid "Missing starting position"
-msgstr ""
+msgstr "Mangler startposisjon"
 
 #: ../../src/logic/game.cc:469 ../../src/logic/player.cc:125
 #, c-format
@@ -1241,7 +1246,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:226
 #, c-format
 msgid "program %s: %s"
-msgstr ""
+msgstr "program %s: %s"
 
 #: ../../src/logic/immovable.cc:258 ../../src/logic/immovable.cc:272
 #, c-format
@@ -1289,7 +1294,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:730 ../../src/logic/production_program.cc:1323
 msgid "priority"
-msgstr ""
+msgstr "prioritet"
 
 #: ../../src/logic/immovable.cc:764 ../../src/logic/immovable.cc:833
 #: ../../src/logic/immovable.cc:919
@@ -1324,7 +1329,7 @@ msgstr ""
 #: ../../src/logic/instances.cc:124
 #, c-format
 msgid "object %u: %s"
-msgstr ""
+msgstr "objekt %u: %s"
 
 #: ../../src/logic/instances.cc:133
 #, c-format
@@ -1342,21 +1347,21 @@ msgstr ""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr ""
+msgstr "positivt heltall <= 100"
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr ""
+msgstr "forventet positivt heltall >= %u <= 100 men fant \"%s\""
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr ""
+msgstr "forventet positivt heltall >= %u <= %u men fant \"%u\""
 
 #: ../../src/logic/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
-msgstr ""
+msgstr " erobre"
 
 #: ../../src/logic/militarysite.cc:117
 #, c-format
@@ -1561,12 +1566,12 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:131
 msgid "not "
-msgstr ""
+msgstr "ikke "
 
 #: ../../src/logic/production_program.cc:153
 #: ../../src/logic/production_program.cc:174
 msgid "economy needs "
-msgstr ""
+msgstr "økonomi trenger "
 
 #: ../../src/logic/production_program.cc:203
 msgid "site has "
@@ -1574,7 +1579,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:229
 msgid "workers need experience"
-msgstr ""
+msgstr "arbeidere trenger erfaring"
 
 #: ../../src/logic/production_program.cc:254
 msgid "ware type or worker type"
@@ -1712,12 +1717,12 @@ msgstr "prosent"
 
 #: ../../src/logic/production_program.cc:1130
 msgid "Mine empty"
-msgstr ""
+msgstr "Tom gruve"
 
 #: ../../src/logic/production_program.cc:1134
 msgid ""
 "This mines has run empty. You should consider to expand or destruct it."
-msgstr ""
+msgstr "Denne gruven er tom. Du bør vurdere å utvide eller rive den."
 
 #: ../../src/logic/production_program.cc:1149
 #: ../../src/logic/production_program.cc:1218
@@ -1771,12 +1776,12 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:71 ../../src/logic/soldier.cc:94
 msgid "positive integer"
-msgstr ""
+msgstr "positivt heltall"
 
 #: ../../src/logic/soldier.cc:75 ../../src/logic/soldier.cc:98
 #, c-format
 msgid "expected positive integer >= %u but found \"%s\""
-msgstr ""
+msgstr "forventet positivt heltall >= %u men fant \"%s\""
 
 #: ../../src/logic/soldier.cc:202
 msgid "\"anim_name[,another_anim,...]\""
@@ -1805,15 +1810,15 @@ msgstr ""
 #: ../../src/logic/soldier.cc:1391 ../../src/logic/soldier.cc:1399
 #: ../../src/logic/worker.cc:1648
 msgid "Logic error"
-msgstr ""
+msgstr "Feil i logikken"
 
 #: ../../src/logic/trainingsite.cc:173
 msgid "Resting"
-msgstr ""
+msgstr "Hviler"
 
 #: ../../src/logic/trainingsite.cc:175
 msgid "Not Working"
-msgstr ""
+msgstr "Arbeider ikke"
 
 #: ../../src/logic/tribe.cc:122
 msgid "constructionsite type \"constructionsite\" is missing"
@@ -1826,7 +1831,7 @@ msgstr ""
 
 #: ../../src/logic/tribe.cc:209 ../../src/logic/tribe.cc:230
 msgid "none found"
-msgstr ""
+msgstr "ingen funnet"
 
 #: ../../src/logic/tribe.cc:211
 #, c-format
@@ -1848,6 +1853,7 @@ msgstr "stamme %s: %s"
 msgid ""
 "<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
 msgstr ""
+"<p font-size=14 font-face=FreeSerif>En ny %s ble lagt til økonomien din.</p>"
 
 #: ../../src/logic/worker.cc:105
 #, c-format
@@ -1865,13 +1871,14 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:603
 msgid "Out of "
-msgstr ""
+msgstr "Tom for "
 
 #: ../../src/logic/worker.cc:607
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr ""
+"Arbeideren i denne bygningen kan ikke finne mer av følgende ressurser: "
 
 #: ../../src/logic/worker.cc:879
 msgid "A geologist found resources."
@@ -1901,17 +1908,17 @@ msgstr "ingenting"
 #: ../../src/logic/world.cc:623
 #, c-format
 msgid "%s: too many terrain types, can not be more than 16"
-msgstr ""
+msgstr "%s: for mange typer terreng, kan ikke være mer enn 16"
 
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:96
 #, c-format
 msgid "allowed buildings: %s"
-msgstr ""
+msgstr "tillatte bygninger: %s"
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
 msgid "allowed worker types: %s"
-msgstr ""
+msgstr "tillatte typer arbeidere: %s"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
@@ -2033,7 +2040,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "noden er eid av spiler %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
@@ -2043,17 +2050,17 @@ msgstr "er eid av spiller %u"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "har et flagg (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr ""
+msgstr "nabonode (%i, %i): %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "flagg: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
@@ -2104,7 +2111,7 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:86
 msgid "Invalid World"
-msgstr ""
+msgstr "Ugyldig verden"
 
 #: ../../src/map_io/widelands_map_loader.cc:88
 #, c-format
@@ -2114,7 +2121,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
 msgid "ownership: %s"
-msgstr ""
+msgstr "eierskap: %s"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:80
 #, c-format
@@ -2155,6 +2162,7 @@ msgstr ""
 #, c-format
 msgid "message is sent in the future: sent at %u but gametime is only %u"
 msgstr ""
+"meldingen er sendt i fremtiden: ble sendt %u men spilltiden er kun %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
@@ -2241,7 +2249,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:101
 msgid "Could not establish connection to host"
-msgstr ""
+msgstr "Kunne ikke opprette forbindelse til vert"
 
 #: ../../src/network/netclient.cc:103
 msgid ""
@@ -2261,10 +2269,12 @@ msgstr "Klient krasjet og foretok en nødlagring."
 #: ../../src/network/netclient.cc:437
 msgid "Server sent a player update for a player that does not exist."
 msgstr ""
+"Tjener sendte en spilleroppdatering for en spiller som ikke eksisterer."
 
 #: ../../src/network/netclient.cc:456
 msgid "Server sent an user update for a user that does not exist."
 msgstr ""
+"Tjener sendte en brukeroppdatering for en bruker som ikke eksisterer."
 
 #: ../../src/network/netclient.cc:532
 #, c-format
@@ -2296,15 +2306,15 @@ msgstr ""
 #: ../../src/network/netclient.cc:799
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
-msgstr ""
+msgstr "Tjener sendte en ukjent kommando (kommando nummer %u)"
 
 #: ../../src/network/netclient.cc:833
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Noe gikk galt: "
 
 #: ../../src/network/netclient.cc:864
 msgid " An automatic savegame will be created."
-msgstr ""
+msgstr " Et automatisk lagret spill vil bli opprettet."
 
 #: ../../src/network/nethost.cc:342
 msgid "Server has left the game."
@@ -2321,7 +2331,7 @@ msgstr "Tjener krasjet og foretok en nødlagring."
 #: ../../src/network/nethost.cc:846
 #, c-format
 msgid "Host sent player %s to the lobby!"
-msgstr ""
+msgstr "Vert sendte spiller %s til lobbyen!"
 
 #: ../../src/network/nethost.cc:1157
 #, c-format
@@ -2336,7 +2346,7 @@ msgstr "ADVARSEL: %s bruker versjon: %s, mens Vert bruker versjon: %s"
 #: ../../src/network/nethost.cc:1285
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "%s har sluttet seg til spillet"
 
 #: ../../src/network/nethost.cc:1309
 msgid "Client reports time to host that is running backwards."
@@ -2356,19 +2366,19 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1542
 msgid "New User"
-msgstr ""
+msgstr "Ny bruker"
 
 #: ../../src/network/nethost.cc:1547
 msgid "The game has already started."
-msgstr ""
+msgstr "Spillet har allerede startet."
 
 #: ../../src/network/nethost.cc:1565
 msgid "Connection to client lost."
-msgstr ""
+msgstr "Mistet forbindelse til klient."
 
 #: ../../src/network/nethost.cc:1579
 msgid "Client sent malformed commands: "
-msgstr ""
+msgstr "Klient sendte ugyldige kommandoer: "
 
 #: ../../src/network/nethost.cc:1612
 msgid "Game is running already, but client has not connected fully"
@@ -2397,6 +2407,7 @@ msgstr ""
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
+"Klient %u (%u) sendte en spillerkommando (%i) for en annen spiller (%i)."
 
 #: ../../src/network/nethost.cc:1733
 msgid "Client sent unexpected synchronization report."
@@ -2413,27 +2424,27 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1792
 msgid "Client requests file part that does not exist."
-msgstr ""
+msgstr "Klient etterspør en fildel som ikke eksisterer."
 
 #: ../../src/network/nethost.cc:1795
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr ""
+msgstr "Fullført overføring av fil %s til %s"
 
 #: ../../src/network/nethost.cc:1803
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
-msgstr ""
+msgstr "Sender del %u/%u av filen %s til %s"
 
 #: ../../src/network/nethost.cc:1813
 #, c-format
 msgid "Client sent unknown command number %u"
-msgstr ""
+msgstr "Klient sendte ukjent kommando nummer %u"
 
 #: ../../src/network/nethost.cc:1869
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr ""
+msgstr "%s har forlatt spillet (%s)"
 
 #: ../../src/network/network_ggz.cc:275
 msgid "Closed the connection to the metaserver."
@@ -2499,7 +2510,7 @@ msgstr "Forbereder..."
 
 #: ../../src/ui_basic/spinbox.cc:125
 msgid "Increase the value"
-msgstr ""
+msgstr "Øk verdien"
 
 #: ../../src/ui_basic/spinbox.cc:133
 msgid "Decrease the value"
@@ -2507,7 +2518,7 @@ msgstr ""
 
 #: ../../src/ui_basic/spinbox.cc:144
 msgid "Increase the value by 10"
-msgstr ""
+msgstr "Øk verdien med 10"
 
 #: ../../src/ui_basic/spinbox.cc:152
 msgid "Decrease the value by 10"
@@ -2540,7 +2551,7 @@ msgstr "Beskrivelse:"
 #: ../../src/ui_fsmenu/netsetup_lan.cc:76
 #: ../../src/ui_fsmenu/singleplayer.cc:68
 msgid "Back"
-msgstr ""
+msgstr "Tilbake"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:123
 #: ../../src/ui_fsmenu/campaign_select.cc:165
@@ -2548,7 +2559,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/campaign_select.cc:226
 #: ../../src/ui_fsmenu/campaign_select.cc:417
 msgid "[No value found]"
-msgstr ""
+msgstr "[Ingen verdi funnet]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:124
 msgid "Easy living"
@@ -2570,7 +2581,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 #: ../../src/ui_fsmenu/mapselect.cc:52
 msgid "Choose your map!"
-msgstr ""
+msgstr "Velg et kart!"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:268
 #: ../../src/ui_fsmenu/editor_mapselect.cc:55
@@ -2583,12 +2594,12 @@ msgstr "Navn:"
 #: ../../src/ui_fsmenu/mapselect.cc:68
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:94
 msgid "Author:"
-msgstr ""
+msgstr "Utvikler:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:357
 #, c-format
 msgid "Invalid path to file in cconfig: %s"
-msgstr ""
+msgstr "Ugyldig sti til fil i cconfig: %s"
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
@@ -2626,7 +2637,7 @@ msgstr "Spillere:"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:80
 #: ../../src/ui_fsmenu/mapselect.cc:92
 msgid "Descr:"
-msgstr ""
+msgstr "Beskr.:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:218
 #: ../../src/ui_fsmenu/mapselect.cc:261
@@ -2636,11 +2647,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/fileview.cc:45 ../../src/wui/watchwindow.cc:181
 msgid "Close"
-msgstr ""
+msgstr "Lukk"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr ""
+msgstr "Trykk ESC eller klikk for å fortsette..."
 
 #: ../../src/ui_fsmenu/launchgame.cc:59
 msgid "Select map"
@@ -2652,27 +2663,27 @@ msgstr "Velg lagret spill"
 
 #: ../../src/ui_fsmenu/launchgame.cc:87
 msgid "Start game"
-msgstr ""
+msgstr "Start spillet"
 
 #: ../../src/ui_fsmenu/launchgame.cc:94
 msgid "Launch Game"
-msgstr ""
+msgstr "Start spill"
 
 #: ../../src/ui_fsmenu/launchgame.cc:105
 msgid "Player's name"
-msgstr ""
+msgstr "Spillers navn"
 
 #: ../../src/ui_fsmenu/launchgame.cc:109
 msgid "Player's type"
-msgstr ""
+msgstr "Spillertype"
 
 #: ../../src/ui_fsmenu/launchgame.cc:113
 msgid "Player's tribe"
-msgstr ""
+msgstr "Stamme"
 
 #: ../../src/ui_fsmenu/launchgame.cc:117
 msgid "Start type"
-msgstr ""
+msgstr "Starter med"
 
 #: ../../src/ui_fsmenu/launchgame.cc:163
 msgid "Switch to position"
@@ -2680,19 +2691,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchgame.cc:177
 msgid "Lobby:"
-msgstr ""
+msgstr "Lobby:"
 
 #: ../../src/ui_fsmenu/launchgame.cc:179
 msgid "Ready"
-msgstr ""
+msgstr "Klar"
 
 #: ../../src/ui_fsmenu/launchgame.cc:277
 msgid "Type: "
-msgstr ""
+msgstr "Type: "
 
 #: ../../src/ui_fsmenu/launchgame.cc:288
 msgid "File not found"
-msgstr ""
+msgstr "Fant ikke filen"
 
 #: ../../src/ui_fsmenu/launchgame.cc:290
 #, c-format
@@ -2707,7 +2718,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchgame.cc:316
 msgid "(no map)"
-msgstr ""
+msgstr "(intet kart)"
 
 #: ../../src/ui_fsmenu/launchgame.cc:358
 msgid "WARNING!!! Host selected the file \""
@@ -2721,44 +2732,44 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchgame.cc:380
 msgid "Original:"
-msgstr ""
+msgstr "Original:"
 
 #: ../../src/ui_fsmenu/launchgame.cc:485
 msgid "(Save): "
-msgstr ""
+msgstr "(Lagret): "
 
 #: ../../src/ui_fsmenu/loadgame.cc:64
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 #: ../../src/ui_fsmenu/loadgame.cc:76
 msgid "Choose saved game!"
-msgstr ""
+msgstr "Velg et lagret spill!"
 
 #: ../../src/ui_fsmenu/loadgame.cc:80
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Map Name:"
-msgstr ""
+msgstr "Kart:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:85
 msgid "Gametime:"
-msgstr ""
+msgstr "Spilltid:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:111
 msgid "Delete file"
-msgstr ""
+msgstr "Slett fil"
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "Vil du virkelig slette "
 
 #: ../../src/ui_fsmenu/loadreplay.cc:63
 msgid "Choose a replay!"
-msgstr ""
+msgstr "Velg en reprise!"
 
 #: ../../src/ui_fsmenu/main.cc:42
 msgid "Play Tutorial"
-msgstr ""
+msgstr "Spill innføring"
 
 #: ../../src/ui_fsmenu/main.cc:49
 msgid "Single Player"
@@ -2770,7 +2781,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:63
 msgid "Watch Replay"
-msgstr ""
+msgstr "Se reprise"
 
 #: ../../src/ui_fsmenu/main.cc:70
 msgid "Editor"
@@ -2806,23 +2817,23 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:57
 msgid "Load Map as scenario: "
-msgstr ""
+msgstr "Last kart som scenario: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:207
 msgid "(directory)"
-msgstr ""
+msgstr "(mappe)"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
-msgstr ""
+msgstr "Velg spilltype"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:51
 msgid "Internet game"
-msgstr ""
+msgstr "Spill over Internett"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:58
 msgid "LAN / Direct IP"
-msgstr ""
+msgstr "Lokalt nettverk (LAN) / Direkte IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:80
 msgid "Show login dialog"
@@ -2831,7 +2842,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/multiplayer.cc:107
 #: ../../src/ui_fsmenu/netsetup_lan.cc:109 ../../src/wui/login_box.cc:73
 msgid "nobody"
-msgstr ""
+msgstr "ingen"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:51
 msgid "Metaserver Lobby"
@@ -2851,7 +2862,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:67
 msgid "Maximum of players:"
-msgstr ""
+msgstr "Maksimalt antall spillere:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:81
 #: ../../src/ui_fsmenu/netsetup_lan.cc:62
@@ -2868,7 +2879,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:145
 msgid "Server"
-msgstr ""
+msgstr "Tjener"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
@@ -2880,27 +2891,27 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:50
 msgid "Your nickname:"
-msgstr ""
+msgstr "Ditt kallenavn:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Host to connect:"
-msgstr ""
+msgstr "Koble til vert"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:69
 msgid "Host a new game"
-msgstr ""
+msgstr "Vær vert for et nytt spill"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:84
 msgid "Load previous host"
-msgstr ""
+msgstr "Last forrige vert"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:114
 msgid "Host"
-msgstr ""
+msgstr "Vert"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:115 ../../src/wui/minimap.cc:134
 msgid "Map"
-msgstr ""
+msgstr "Kart"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:116
 msgid "State"
@@ -2909,7 +2920,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/netsetup_lan.cc:183
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:140
 msgid "Open"
-msgstr ""
+msgstr "Åpen"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:184
 msgid "Closed"
@@ -2917,7 +2928,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:54 ../../src/ui_fsmenu/options.cc:416
 msgid "Advanced Options"
-msgstr ""
+msgstr "Avanserte innstillinger"
 
 #: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:384
 #: ../../src/wui/login_box.cc:70
@@ -2954,11 +2965,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:112
 msgid "Enable Music"
-msgstr ""
+msgstr "Aktiver musikk"
 
 #: ../../src/ui_fsmenu/options.cc:118
 msgid "Enable Sound"
-msgstr ""
+msgstr "Aktiver lyd"
 
 #: ../../src/ui_fsmenu/options.cc:123
 msgid "Maximum FPS:"
@@ -2974,7 +2985,7 @@ msgstr "Språk"
 
 #: ../../src/ui_fsmenu/options.cc:149
 msgid "In-game Options"
-msgstr ""
+msgstr "Spill-innstillinger"
 
 #: ../../src/ui_fsmenu/options.cc:156
 msgid "Use single Watchwindow Mode"
@@ -2998,23 +3009,23 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:187
 msgid "Save game automatically every"
-msgstr ""
+msgstr "Lagre spillet automatisk hver"
 
 #: ../../src/ui_fsmenu/options.cc:191
 msgid "Remove Replays older than:"
-msgstr ""
+msgstr "Fjern reprise eldre enn:"
 
 #: ../../src/ui_fsmenu/options.cc:195
 msgid "Off"
-msgstr ""
+msgstr "Av"
 
 #: ../../src/ui_fsmenu/options.cc:285
 msgid "Try system language"
-msgstr ""
+msgstr "Prøv systemspråket"
 
 #: ../../src/ui_fsmenu/options.cc:398
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: ../../src/ui_fsmenu/options.cc:403 ../../src/ui_fsmenu/options.cc:408
 msgid "px."
@@ -3022,11 +3033,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:427
 msgid "Main menu font:"
-msgstr ""
+msgstr "Skrifttype for hovedmeny:"
 
 #: ../../src/ui_fsmenu/options.cc:433
 msgid "Play a sound at message arrival."
-msgstr ""
+msgstr "Spill av en lyd når man mottar meldinger."
 
 #: ../../src/ui_fsmenu/options.cc:441
 msgid "Do not zip widelands data files (maps, replays and savegames)."
@@ -3034,7 +3045,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:446
 msgid "Speed of a new game:"
-msgstr ""
+msgstr "Hastighet for nytt spill"
 
 #: ../../src/ui_fsmenu/options.cc:450
 msgid "Distance for windows to snap to other panels:"
@@ -3058,11 +3069,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:494
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: ../../src/ui_fsmenu/options.cc:505
 msgid "FreeSerif (Default)"
-msgstr ""
+msgstr "FreeSerif (standard)"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:85
 msgid "Initialization"
@@ -3171,7 +3182,7 @@ msgstr "Vis neste"
 
 #: ../../src/wui/buildingwindow.cc:187
 msgid "Continue"
-msgstr ""
+msgstr "Fortsett"
 
 #: ../../src/wui/buildingwindow.cc:202
 #, c-format
@@ -3217,15 +3228,15 @@ msgstr "Antall"
 
 #: ../../src/wui/fieldaction.cc:246
 msgid "Build small buildings"
-msgstr ""
+msgstr "Bygg små bygninger..."
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build medium buildings"
-msgstr ""
+msgstr "Bygg mellomstore bygninger..."
 
 #: ../../src/wui/fieldaction.cc:248
 msgid "Build large buildings"
-msgstr ""
+msgstr "Bygg store bygninger..."
 
 #: ../../src/wui/fieldaction.cc:280
 msgid "Action"
@@ -3269,7 +3280,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:474
 msgid "Debug window"
-msgstr ""
+msgstr "Feilsøkingsvindu"
 
 #: ../../src/wui/fieldaction.cc:482 ../../src/wui/fieldaction.cc:628
 msgid "Build roads"
@@ -3293,7 +3304,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:604
 msgid "Build mines"
-msgstr ""
+msgstr "Bygg gruver..."
 
 #: ../../src/wui/fieldaction.cc:620
 msgid "Build flag"
@@ -3318,6 +3329,9 @@ msgid ""
 "   height: %u\n"
 "   owner: %u\n"
 msgstr ""
+"(%i, %i)\n"
+"   høyde: %u\n"
+"   eier: %u\n"
 
 #: ../../src/wui/game_main_menu.cc:38
 #: ../../src/editor/ui_menus/editor_main_menu.cc:50
@@ -3347,16 +3361,16 @@ msgstr "Lagre spill"
 
 #: ../../src/wui/game_main_menu_save_game.cc:62
 msgid "Map Name: "
-msgstr ""
+msgstr "Kart: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:66
 msgid "Game Time: "
-msgstr ""
+msgstr "Spilltid: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:111
 #, c-format
 msgid "%02ud%02uh%02u'%02u\"%03u"
-msgstr ""
+msgstr "%02ud%02ut%02u'%02u\"%03u"
 
 #: ../../src/wui/game_main_menu_save_game.cc:187
 msgid ""
@@ -3398,7 +3412,7 @@ msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:52
 msgid "README"
-msgstr ""
+msgstr "LES_MEG"
 
 #: ../../src/wui/game_options_menu.cc:68
 msgid "Authors"
@@ -3411,7 +3425,7 @@ msgstr "Lydinnstillinger"
 
 #: ../../src/wui/game_options_sound_menu.cc:33
 msgid "Ingame Music"
-msgstr ""
+msgstr "Musikk i spillet"
 
 #: ../../src/wui/game_options_sound_menu.cc:39
 msgid "Sound FX"
@@ -3419,11 +3433,11 @@ msgstr "Lydeffekter"
 
 #: ../../src/wui/game_options_sound_menu.cc:43
 msgid "Ingame Music Volume"
-msgstr ""
+msgstr "Lydstyrke for musikk i spillet"
 
 #: ../../src/wui/game_options_sound_menu.cc:57
 msgid "Sound FX Volume"
-msgstr "Lydeffekter volum"
+msgstr "Lydstyrke for lydeffekter"
 
 #: ../../src/wui/general_statistics_menu.cc:139
 msgid "Land"
@@ -3519,11 +3533,11 @@ msgstr "PAUSE"
 #: ../../src/wui/interactive_base.cc:275
 #, c-format
 msgid "%s (%s)"
-msgstr ""
+msgstr "%s (%s)"
 
 #: ../../src/wui/interactive_base.cc:280
 msgid "NO GAME CONTROLLER"
-msgstr ""
+msgstr "INGEN SPILLKONTROLL"
 
 #: ../../src/wui/interactive_dedicated_server.cc:53
 #: ../../src/wui/interactive_player.cc:173
@@ -3535,16 +3549,16 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:180
 #: ../../src/wui/interactive_spectator.cc:64
 msgid "Statistics"
-msgstr ""
+msgstr "Statistikk"
 
 #: ../../src/wui/interactive_player.cc:183
 msgid "Objectives"
-msgstr ""
+msgstr "Mål"
 
 #: ../../src/wui/interactive_player.cc:193
 #: ../../src/wui/interactive_player.cc:279
 msgid "Messages"
-msgstr ""
+msgstr "Meldinger"
 
 #: ../../src/wui/interactive_player.cc:197
 msgid "Ware help"
@@ -3554,12 +3568,12 @@ msgstr "Varehjelp"
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u ny melding"
+msgstr[1] "%u nye meldinger"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
-msgstr ""
+msgstr "Avslutt reprise"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
@@ -3567,7 +3581,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Kallenavn:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
@@ -3575,7 +3589,7 @@ msgstr "Passord:"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr ""
+msgstr "ADVARSEL: Passord vil bli vist og lagret lesbart!"
 
 #: ../../src/wui/login_box.cc:52
 msgid "Log in to a registered account"
@@ -3587,31 +3601,31 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
-msgstr ""
+msgstr "Logg inn"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
-msgstr ""
+msgstr "Tomt kallenavn"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "Vennligst oppgi et kallenavn!"
 
 #: ../../src/wui/login_box.cc:92
 msgid "Space in Nickname"
-msgstr ""
+msgstr "Mellomrom i kallenavn!"
 
 #: ../../src/wui/login_box.cc:93
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr ""
+msgstr "Beklager, men mellomrom er ikke tillatt i kallenavn!"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Empty Password"
-msgstr ""
+msgstr "Tomt passord"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Please enter your password!"
-msgstr ""
+msgstr "Vennligst skriv inn passordet ditt!"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
@@ -3620,7 +3634,7 @@ msgstr "Soldater"
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Terrain"
-msgstr ""
+msgstr "Terreng"
 
 #: ../../src/wui/minimap.cc:150
 msgid "Owner"
@@ -3628,7 +3642,7 @@ msgstr "Eier"
 
 #: ../../src/wui/minimap.cc:157
 msgid "Flags"
-msgstr ""
+msgstr "Flagg"
 
 #: ../../src/wui/minimap.cc:164
 msgid "Roads"
@@ -3636,12 +3650,12 @@ msgstr "Veier"
 
 #: ../../src/wui/minimap.cc:178
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:81
 msgid "Worker"
-msgstr ""
+msgstr "Arbeider"
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
@@ -3657,7 +3671,7 @@ msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "(coming)"
-msgstr ""
+msgstr "(kommer)"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid "xx"
@@ -3665,11 +3679,11 @@ msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:73
 msgid "Capacity"
-msgstr ""
+msgstr "Kapasitet"
 
 #: ../../src/wui/soldierlist.cc:83
 msgid "HP"
-msgstr ""
+msgstr "Liv"
 
 #: ../../src/wui/soldierlist.cc:84
 msgid "AT"
@@ -3689,19 +3703,19 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:47
 msgid "Wares (total)"
-msgstr ""
+msgstr "Varer (totalt)"
 
 #: ../../src/wui/stock_menu.cc:52
 msgid "Workers (total)"
-msgstr ""
+msgstr "Arbeidere (totalt)"
 
 #: ../../src/wui/stock_menu.cc:59
 msgid "Wares in warehouses"
-msgstr ""
+msgstr "Varer i varehus"
 
 #: ../../src/wui/stock_menu.cc:66
 msgid "Workers in warehouses"
-msgstr ""
+msgstr "Arbeidere i varehus"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
@@ -3749,15 +3763,15 @@ msgstr "Høyest prioritet"
 
 #: ../../src/wui/waresqueuedisplay.cc:285
 msgid "Normal priority"
-msgstr ""
+msgstr "Normal prioritet"
 
 #: ../../src/wui/waresqueuedisplay.cc:296
 msgid "Lowest priority"
-msgstr ""
+msgstr "Laveste prioritet"
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
-msgstr ""
+msgstr "Følg"
 
 #: ../../src/wui/watchwindow.cc:156
 msgid "Center mainview on this"
@@ -3845,6 +3859,8 @@ msgid ""
 "\n"
 " Number of Players: %i\n"
 msgstr ""
+"\n"
+" Antall spillere: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:105
 msgid ""
@@ -3905,7 +3921,7 @@ msgstr "Spillere: "
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:104
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:118
 msgid "Descr: "
-msgstr ""
+msgstr "Beskr: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:46
 msgid "Set origin"
@@ -3975,7 +3991,7 @@ msgstr "Ressurser:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Low"
-msgstr "Lite"
+msgstr "Lav"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "High"
@@ -4085,11 +4101,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
-msgstr ""
+msgstr "Tillatte bygninger"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:61
 msgid "Allowed Buildings:"
-msgstr ""
+msgstr "Tillatte bygninger:"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:67
 msgid "Forbidden Buildings:"
@@ -4101,7 +4117,7 @@ msgstr "Forby"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "<-"
-msgstr ""
+msgstr "<-"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:95
 msgid "Allow"
@@ -4151,7 +4167,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Resource"
-msgstr ""
+msgstr "Ressurs"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"
@@ -4160,12 +4176,12 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:138
 #, c-format
 msgid "Minimum: %u"
-msgstr ""
+msgstr "Minimum: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:140
 #, c-format
 msgid "Maximum: %u"
-msgstr ""
+msgstr "Maksimum: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:145
 #, c-format
@@ -4200,15 +4216,15 @@ msgstr ""
 
 #: ../../src/ai/defaultai.h:79
 msgid "Aggressive"
-msgstr ""
+msgstr "Aggressiv"
 
 #: ../../src/ai/defaultai.h:88
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ../../src/ai/defaultai.h:97
 msgid "Defensive"
-msgstr ""
+msgstr "Defensiv"
 
 #: ../../src/logic/map.h:170
 msgid "no description defined"
@@ -4256,7 +4272,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:130 ../../src/wui/game_message_menu.h:153
 msgid "Show Archive"
-msgstr ""
+msgstr "Vis arkiv"
 
 #: ../../src/wui/game_message_menu.h:139
 msgid "Message Menu: Archive"
@@ -4268,7 +4284,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:144
 msgid "Show Inbox"
-msgstr ""
+msgstr "Vis innboks"
 
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"
