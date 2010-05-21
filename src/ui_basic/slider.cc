@@ -368,7 +368,7 @@ void HorizontalSlider::draw(RenderTarget & odst) {
 		if (m_cache_pic == g_gr->get_no_picture())
 		{
 			m_cache_pic = g_gr->create_picture_surface
-				(odst.get_w(), odst.get_h(), true);
+				(get_w(), get_h(), true);
 		}
 		
 		dst = g_gr->get_surface_renderer(m_cache_pic);
@@ -468,7 +468,7 @@ void VerticalSlider::draw(RenderTarget & odst) {
 		}
 	if (m_cache_pic == g_gr->get_no_picture())
 		m_cache_pic = g_gr->create_picture_surface
-			(odst.get_w(), odst.get_h(), true);
+			(get_w(), get_h(), true);
 	dst = g_gr->get_surface_renderer(m_cache_pic);
 
 	dst->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));

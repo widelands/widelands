@@ -345,7 +345,7 @@ void EditBox::draw(RenderTarget & odst)
 	//	return;
 	//}
 
-	//m_cache_pid = g_gr->create_picture_surface(odst.get_w(), odst.get_h());
+	//m_cache_pid = g_gr->create_picture_surface(get_w(), get_h());
 
 	RenderTarget &dst = odst; //*(g_gr->get_surface_renderer(m_cache_pid));
 

@@ -41,7 +41,7 @@ foreach (sourcefile ${WL_SRCS_ALL})
   endif (${sourcefile} MATCHES ".*/test/.*")
 endforeach (sourcefile ${WL_SRCS_ALL})
 
-execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
+execute_process (COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/*_codecheck_stamp_)
 
 add_custom_target (codecheck)
@@ -58,7 +58,7 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
       add_custom_command(
         TARGET codecheck
 	COMMAND "${WL_SOURCE_CHECKER}" -c "${sourcefile}"
-	COMMAND cmake -E touch ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp}
+	COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp}
 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       )
   endforeach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})

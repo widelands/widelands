@@ -359,7 +359,8 @@ void BaseListselect::draw(RenderTarget & odst)
 		} else {
 			if (m_cache_pic == g_gr->get_no_picture())
 				m_cache_pic =
-					g_gr->create_picture_surface(odst.get_w(), odst.get_h());
+					g_gr->create_picture_surface(get_w(), get_h());
+			// TODO: Handle resize here
 			dst = (g_gr->get_surface_renderer(m_cache_pic));
 		}
 	}

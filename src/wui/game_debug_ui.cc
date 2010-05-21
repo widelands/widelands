@@ -242,7 +242,7 @@ FieldDebugWindow::FieldDebugWindow
 	m_ui_immovable
 		(this, "immovable",
 		 0, 280, 214, 24,
-		 g_gr->get_no_picture(),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &FieldDebugWindow::open_immovable, *this,
 		 ""),
 
