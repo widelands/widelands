@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-05-18 11:27+0000\n"
-"Last-Translator: Hans Joachim Desserud <Unknown>\n"
+"PO-Revision-Date: 2010-05-20 07:42+0000\n"
+"Last-Translator: Fredrik Sudmann <fsudmann@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-20 05:09+0000\n"
+"X-Launchpad-Export-Date: 2010-05-21 03:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -273,6 +273,10 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
+". Vennligst legg til denne informasjonen til rapporten din.\n"
+"\n"
+"Widelands prøver å lagre spillet når feil oppstår under spilling. Det er "
+"ofte - men ikke alltid - mulig å laste det og fortsette å spille.\n"
 
 #: ../../src/wlapplication.cc:1680
 msgid "Connection timeouted"
@@ -311,7 +315,7 @@ msgstr "Klargjør spill"
 
 #: ../../src/wlapplication.cc:2115
 msgid "End of replay"
-msgstr "Slutt på replay"
+msgstr "Reprisen er slutt"
 
 #: ../../src/wlapplication.cc:2117
 msgid ""
@@ -1207,7 +1211,7 @@ msgstr "Forhåndslaster kart"
 
 #: ../../src/logic/game.cc:305
 msgid "Configuring players"
-msgstr ""
+msgstr "Setter opp spillere"
 
 #: ../../src/logic/game.cc:322
 msgid "Loading map"
@@ -1469,7 +1473,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:547
 #, c-format
 msgid "enhance building: %s"
-msgstr ""
+msgstr "oppgrader bygning: %s"
 
 #: ../../src/logic/playercommand.cc:619 ../../src/logic/playercommand.cc:1045
 #: ../../src/logic/playercommand.cc:1123
@@ -1754,7 +1758,7 @@ msgstr ""
 
 #: ../../src/logic/productionsite.cc:219
 msgid "(not occupied)"
-msgstr ""
+msgstr "(ikke besatt)"
 
 #: ../../src/logic/productionsite.cc:224
 #, c-format
@@ -2157,6 +2161,8 @@ msgstr ""
 #, c-format
 msgid "messages are not ordered: sent at %u but previous message sent at %u"
 msgstr ""
+"meldinger er ikke i rekkefølge: ble sendt %u mens forrige melding ble sendt "
+"%u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:94
 #, c-format
@@ -2323,6 +2329,7 @@ msgstr "Tjener har forlatt spillet."
 #: ../../src/network/nethost.cc:418
 msgid "The game has started just after you tried to connect."
 msgstr ""
+"Spillet har startet like etter at du forsøkte å opprette en forbindelse."
 
 #: ../../src/network/nethost.cc:496
 msgid "Server has crashed and performed an emergency save."
@@ -2350,7 +2357,7 @@ msgstr "%s har sluttet seg til spillet"
 
 #: ../../src/network/nethost.cc:1309
 msgid "Client reports time to host that is running backwards."
-msgstr ""
+msgstr "Klient rapporterer tid til verten som går baklengs."
 
 #: ../../src/network/nethost.cc:1312
 msgid "Client simulates beyond the game time allowed by the host."
@@ -2362,7 +2369,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1496
 msgid "Client and host have become desynchronized."
-msgstr ""
+msgstr "Klient og vert har blitt usynkronisert."
 
 #: ../../src/network/nethost.cc:1542
 msgid "New User"
@@ -2514,7 +2521,7 @@ msgstr "Øk verdien"
 
 #: ../../src/ui_basic/spinbox.cc:133
 msgid "Decrease the value"
-msgstr ""
+msgstr "Senk verdien"
 
 #: ../../src/ui_basic/spinbox.cc:144
 msgid "Increase the value by 10"
@@ -2522,7 +2529,7 @@ msgstr "Øk verdien med 10"
 
 #: ../../src/ui_basic/spinbox.cc:152
 msgid "Decrease the value by 10"
-msgstr ""
+msgstr "Senk verdien med 10"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
@@ -2567,11 +2574,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:125
 msgid "Be vigilant"
-msgstr ""
+msgstr "Vær på vakt"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:126
 msgid "Hard struggle"
-msgstr ""
+msgstr "Hard kamp"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:170
 msgid "[Invalid entry]"
@@ -2773,11 +2780,11 @@ msgstr "Spill innføring"
 
 #: ../../src/ui_fsmenu/main.cc:49
 msgid "Single Player"
-msgstr ""
+msgstr "Enspiller"
 
 #: ../../src/ui_fsmenu/main.cc:56
 msgid "Multi Player"
-msgstr ""
+msgstr "Flerspiller"
 
 #: ../../src/ui_fsmenu/main.cc:63
 msgid "Watch Replay"
@@ -3699,7 +3706,7 @@ msgstr ""
 
 #: ../../src/wui/soldierlist.cc:87
 msgid "Level"
-msgstr ""
+msgstr "Brett"
 
 #: ../../src/wui/stock_menu.cc:47
 msgid "Wares (total)"

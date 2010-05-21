@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-05-16 18:38+0000\n"
+"PO-Revision-Date: 2010-05-20 05:37+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-20 05:09+0000\n"
+"X-Launchpad-Export-Date: 2010-05-21 03:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4207,7 +4207,7 @@ msgstr "descriptio definita non est"
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
-msgstr ""
+msgstr "(Nulla descriptio)"
 
 #: ../../src/wui/game_message_menu.h:67
 msgid "Select"
