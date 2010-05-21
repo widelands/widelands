@@ -354,7 +354,7 @@ void BaseListselect::draw(RenderTarget & odst)
 	}
 
 	// Create a off-screen surface 
-	m_cache_pid = g_gr->create_surface_a(odst.get_w(), odst.get_h());
+	m_cache_pid = g_gr->create_surface_a(get_w(), get_h());
 
 	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
