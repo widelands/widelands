@@ -149,8 +149,6 @@ void Request::Read
 			}
 			m_idle              = fr.Unsigned8();
 			m_count             = fr.Unsigned32();
-			if (0 == m_count)
-				throw wexception("count is 0");
 			m_required_time     = fr.Unsigned32();
 			m_required_interval = fr.Unsigned32();
 

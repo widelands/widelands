@@ -314,6 +314,68 @@ Warehouse::~Warehouse()
 	delete[] m_next_worker_without_cost_spawn;
 }
 
+/**
+ * Try to bring the given \ref PlannedWorkers up to date with our game data.
+ * Return \c false if \p pw cannot be salvaged.
+ */
+bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
+{
+	if (!pw.index || !(pw.index < m_supply->get_workers().get_nrwareids()))
+		return false;
+
+	const Worker_Descr * w_desc = tribe().get_worker_descr(pw.index);
+	if (!w_desc || !w_desc->is_buildable())
+		return false;
+
+	const Worker_Descr::Buildcost & cost = w_desc->buildcost();
+	uint32_t idx = 0;
+
+	for (Worker_Descr::Buildcost::const_iterator cost_it = cost.begin(); cost_it != cost.end(); ++cost_it, ++idx) {
+		Request::Type type;
+		Ware_Index ware;
+
+		if ((ware = tribe().ware_index(cost_it->first)))
+			type = Request::WARE;
+		else if ((ware = tribe().worker_index(cost_it->first)))
+			type = Request::WORKER;
+		else
+			return false;
+
+		if (idx < pw.requests.size()) {
+			if
+				(pw.requests[idx]->get_type() == type &&
+				 pw.requests[idx]->get_index() == ware)
+				continue;
+
+			std::vector<Request*>::iterator req_it = pw.requests.begin() + idx + 1;
+			while (req_it != pw.requests.end()) {
+				if ((*req_it)->get_type() == type && (*req_it)->get_index() == ware)
+					break;
+				++req_it;
+			}
+
+			if (req_it != pw.requests.end()) {
+				std::swap(*req_it, pw.requests[idx]);
+				continue;
+			}
+		}
+
+		log
+			("_load_finish_planned_worker: old savegame: need to create new request for '%s'\n",
+			 cost_it->first.c_str());
+		pw.requests.insert
+			(pw.requests.begin() + idx,
+			 new Request(*this, ware, &Warehouse::request_cb, type));
+	}
+
+	while (pw.requests.size() > idx) {
+		log("_load_finish_planned_worker: old savegame: removing outdated request.\n");
+		delete pw.requests.back();
+		pw.requests.pop_back();
+	}
+
+	return true;
+}
 
 void Warehouse::load_finish(Editor_Game_Base & egbase) {
 	Building::load_finish(egbase);
@@ -341,6 +403,19 @@ void Warehouse::load_finish(Editor_Game_Base & egbase) {
 				 tribe().get_worker_descr(worker_index)->descname().c_str(),
 				 descname().c_str(), serial(), get_position().x, get_position().y,
 				 next_spawn);
+		}
+	}
+
+	// Ensure consistency of PlannedWorker requests
+	{
+		uint32_t pwidx = 0;
+		while (pwidx < m_planned_workers.size()) {
+			if (!_load_finish_planned_worker(m_planned_workers[pwidx])) {
+				m_planned_workers[pwidx].cleanup();
+				m_planned_workers.erase(m_planned_workers.begin() + pwidx);
+			} else {
+				pwidx++;
+			}
 		}
 	}
 }
@@ -386,34 +461,6 @@ void Warehouse::postfill
 	}
 }
 
-
-/*
-warehouses determine how badly they want a certain ware
-*/
-int32_t Warehouse::get_priority
-	(int32_t const type, Ware_Index const ware_index, bool) const
-{
-	//  NOTE  100 is idle priority, so the priority should be > 100 if the
-	//  NOTE  warehouse really wants to have this ware.
-
-	// return 100, if type is a ware, or the warehouse has no request itself
-	if (type == Request::WORKER || m_target_supply[ware_index] == 0)
-		return 100;
-	int32_t const x =
-		(m_target_supply.at(ware_index) + 2 -
-		 m_supply->get_wares().stock(ware_index))
-		*
-		100;
-	//  return 100 if all requests are fulfilled, else 100 * number of requested
-	return (x > 100) ? x : 100;
-}
-
-void Warehouse::set_needed(Ware_Index const ware_index, uint32_t const value)
-{
-	m_target_supply[ware_index] = value;
-}
-
-
 void Warehouse::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
@@ -433,7 +480,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares;   ++i) {
 		Request & req =
-			*new Request(*this, i, Warehouse::idle_request_cb, Request::WARE);
+			*new Request(*this, i, Warehouse::request_cb, Request::WARE);
 
 		req.set_idle(true);
 
@@ -442,7 +489,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i) {
 		Request & req =
 			*new Request
-				(*this, i, &Warehouse::idle_request_cb, Request::WORKER);
+				(*this, i, &Warehouse::request_cb, Request::WORKER);
 
 		req.set_idle(true);
 
@@ -471,7 +518,6 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	m_next_military_act =
 		schedule_act
 			(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
-	m_target_supply.resize(m_requests.size());
 
 	if (uint32_t const conquer_radius = get_conquers())
 		ref_cast<Game, Editor_Game_Base>(egbase).conquer_area
@@ -511,6 +557,11 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 	while (m_requests.size()) {
 		delete m_requests.back();
 		m_requests.pop_back();
+	}
+
+	while (m_planned_workers.size()) {
+		m_planned_workers.back().cleanup();
+		m_planned_workers.pop_back();
 	}
 
 	//  all cached workers are unbound and freed
@@ -600,8 +651,14 @@ void Warehouse::act(Game & game, uint32_t const data)
 				//  If warehouse can heal, this is the place to put it.
 			}
 		}
-		m_next_military_act = schedule_act (game, 1000);
+		m_next_military_act = schedule_act(game, 1000);
 	}
+
+	// Update planned workers; this is to update the request amounts and check
+	// whether we suddenly can produce a requested worker. This is mostly because
+	// previously available wares may become unavailable due to secondary requests.
+	_update_all_planned_workers(game);
+
 	Building::act(game, data);
 }
 
@@ -626,6 +683,11 @@ void Warehouse::set_economy(Economy * const e)
 
 	for (uint32_t i = 0; i < m_requests.size(); ++i)
 		m_requests[i]->set_economy(e);
+
+	container_iterate_const(std::vector<PlannedWorkers>, m_planned_workers, pw_it) {
+		container_iterate_const(std::vector<Request*>, pw_it.current->requests, req_it)
+			(*req_it.current)->set_economy(e);
+	}
 
 	if (e)
 		e->add_warehouse(*this);
@@ -930,18 +992,19 @@ void Warehouse::incorporate_item(Game & game, WareInstance & item)
 Called when a transfer for one of the idle Requests completes.
 ===============
 */
-void Warehouse::idle_request_cb
+void Warehouse::request_cb
 	(Game            &       game,
 	 Request         &,
 	 Ware_Index        const ware,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
+	Warehouse & wh = ref_cast<Warehouse, PlayerImmovable>(target);
+
 	if (w)
 		w->schedule_incorporate(game);
 	else
-		ref_cast<Warehouse, PlayerImmovable>(target).m_supply->add_wares
-			(ware, 1);
+		wh.m_supply->add_wares(ware, 1);
 }
 
 
@@ -996,8 +1059,129 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 	}
 
 	incorporate_worker(game, w_desc.create(game, owner(), this, m_position));
+
+	// Update PlannedWorkers::amount here if appropriate, because this function
+	// may have been called directly by the Economy.
+	// Do not update anything else about PlannedWorkers here, because this function
+	// is called by _update_planned_workers, so avoid recursion
+	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, pw_it) {
+		if (pw_it.current->index == worker && pw_it.current->amount)
+			pw_it.current->amount--;
+	}
 }
 
+/**
+ * Return the number of workers of the given type that we plan to create in this warehouse.
+ */
+uint32_t Warehouse::get_planned_workers(Game & game, Ware_Index index) const
+{
+	container_iterate_const(std::vector<PlannedWorkers>, m_planned_workers, i) {
+		if (i.current->index == index)
+			return i.current->amount;
+	}
+
+	return 0;
+}
+
+/**
+ * Increase the amount of workers we plan to create of the given \p index by \p amount.
+ */
+void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
+{
+	if (!amount)
+		return;
+
+	PlannedWorkers * pw = 0;
+
+	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, i) {
+		if (i.current->index == index) {
+			pw = &*i.current;
+			break;
+		}
+	}
+
+	if (!pw) {
+		m_planned_workers.push_back(PlannedWorkers());
+		pw = &m_planned_workers.back();
+		pw->index = index;
+		pw->amount = 0;
+
+		const Worker_Descr & w_desc = *tribe().get_worker_descr(pw->index);
+		const Worker_Descr::Buildcost & cost = w_desc.buildcost();
+		container_iterate_const(Worker_Descr::Buildcost, cost, cost_it) {
+			std::string const & input_name = cost_it.current->first;
+
+			if (Ware_Index id_w = tribe().ware_index(input_name)) {
+				pw->requests.push_back
+					(new Request(*this, id_w, &Warehouse::request_cb, Request::WARE));
+			} else if ((id_w = tribe().worker_index(input_name))) {
+				pw->requests.push_back
+					(new Request(*this, id_w, &Warehouse::request_cb, Request::WORKER));
+			} else
+				throw wexception("plan_workers: bad buildcost '%s'", input_name.c_str());
+		}
+	}
+
+	pw->amount += amount;
+	_update_planned_workers(game, *pw);
+}
+
+/**
+ * See if we can create the workers of the given plan, and update requests accordingly.
+ */
+void Warehouse::_update_planned_workers(Game & game, Warehouse::PlannedWorkers& pw)
+{
+	const Worker_Descr & w_desc = *tribe().get_worker_descr(pw.index);
+	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
+
+	while(pw.amount && can_create_worker(game, pw.index))
+		create_worker(game, pw.index);
+
+	uint32_t idx = 0;
+	container_iterate_const(Worker_Descr::Buildcost, cost, cost_it) {
+		std::string const & input_name = cost_it.current->first;
+		uint32_t supply;
+
+		if (Ware_Index id_w = tribe().ware_index(input_name)) {
+			supply = m_supply->stock_wares(id_w);
+		} else if ((id_w = tribe().worker_index(input_name))) {
+			supply = m_supply->stock_workers(id_w);
+		} else
+			throw wexception("_update_planned_workers: bad buildcost '%s'", input_name.c_str());
+
+		if (supply >= pw.amount * cost_it.current->second)
+			pw.requests[idx]->set_count(0);
+		else
+			pw.requests[idx]->set_count(pw.amount * cost_it.current->second - supply);
+		++idx;
+	}
+
+	while (pw.requests.size() > idx) {
+		delete pw.requests.back();
+		pw.requests.pop_back();
+	}
+}
+
+/**
+ * Check all planned worker creations.
+ *
+ * Needs to be called periodically, because some necessary supplies might arrive
+ * due to idle transfers instead of by explicit request.
+ */
+void Warehouse::_update_all_planned_workers(Game & game)
+{
+	uint32_t idx = 0;
+	while(idx < m_planned_workers.size()) {
+		_update_planned_workers(game, m_planned_workers[idx]);
+
+		if (!m_planned_workers[idx].amount) {
+			m_planned_workers[idx].cleanup();
+			m_planned_workers.erase(m_planned_workers.begin() + idx);
+		} else {
+			idx++;
+		}
+	}
+}
 
 void Warehouse::enable_spawn
 	(Game & game, uint8_t const worker_types_without_cost_index)
@@ -1074,6 +1258,14 @@ bool Warehouse::attack(Soldier & enemy)
 	set_defeating_player(enemy.owner().player_number());
 	schedule_destroy(game);
 	return false;
+}
+
+void Warehouse::PlannedWorkers::cleanup()
+{
+	while (requests.size()) {
+		delete requests.back();
+		requests.pop_back();
+	}
 }
 
 }

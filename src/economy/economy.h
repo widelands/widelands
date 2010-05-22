@@ -170,6 +170,7 @@ private:
 	Supply * _find_best_supply(Game &, Request const &, int32_t & cost);
 	void _process_requests(Game &, RSPairStruct &);
 	void _create_requested_workers(Game &);
+	void _create_requested_worker(Game &, Ware_Index);
 
 	bool   _has_request(Request &);
 
