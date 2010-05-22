@@ -37,11 +37,9 @@ class Worker;
  *
  * Call get_next_step() to find out where you should go next. If
  * get_next_step() returns 0, the transfer is complete or cannot be
- * completed. Call finish() if success is true, fail() otherwise.
- * Call fail() if something really bad has happened (e.g. the worker
+ * completed. Call has_finished() if success is true, has_failed() otherwise.
+ * Call has_failed() if something really bad has happened (e.g. the worker
  * or ware was destroyed).
- *
- * \todo The mentioned function fail() does not exist!
  */
 struct Transfer {
 	friend struct Request;
@@ -50,7 +48,7 @@ struct Transfer {
 	Transfer(Game &, Request &, Worker       &);
 	~Transfer();
 
-	Request & request() const {return m_request;}
+	Request * get_request() const {return m_request;}
 	bool is_idle() const {return m_idle;}
 
 	void set_idle(bool idle);
@@ -64,11 +62,12 @@ public:
 private:
 	void tlog(char const * fmt, ...) PRINTF_FORMAT(2, 3);
 
-	Game         & m_game;
-	Request      & m_request;
+	Game & m_game;
+	Request * m_request;
+	OPtr<PlayerImmovable> m_destination;
 	WareInstance * m_item;    ///< non-null if ware is an item
-	Worker       * m_worker;  ///< non-null if ware is a worker
-	Route        m_route;
+	Worker * m_worker;  ///< non-null if ware is a worker
+	Route m_route;
 
 	bool m_idle; ///< an idle transfer can be fail()ed if the item feels like it
 };

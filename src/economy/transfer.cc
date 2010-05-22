@@ -27,6 +27,7 @@
 
 #include "logic/game.h"
 #include "logic/immovable.h"
+#include "logic/player.h"
 #include "request.h"
 #include "logic/worker.h"
 #include "upcast.h"
@@ -35,8 +36,9 @@ namespace Widelands {
 
 Transfer::Transfer(Game & game, Request & req, WareInstance & it) :
 	m_game(game),
-	m_request(req),
-	m_item   (&it),
+	m_request(&req),
+	m_destination(&req.target()),
+	m_item(&it),
 	m_worker(0),
 	m_idle(false)
 {
@@ -45,9 +47,10 @@ Transfer::Transfer(Game & game, Request & req, WareInstance & it) :
 
 Transfer::Transfer(Game & game, Request & req, Worker & w) :
 	m_game(game),
-	m_request(req),
+	m_request(&req),
+	m_destination(&req.target()),
 	m_item(0),
-	m_worker (&w),
+	m_worker(&w),
 	m_idle(false)
 {
 	m_worker->start_task_transfer(game, this);
@@ -55,7 +58,7 @@ Transfer::Transfer(Game & game, Request & req, Worker & w) :
 
 /**
  * Cleanup.
-*/
+ */
 Transfer::~Transfer()
 {
 	if (m_worker) {
@@ -83,26 +86,29 @@ void Transfer::set_idle(bool idle)
 PlayerImmovable * Transfer::get_next_step
 	(PlayerImmovable * const location, bool & success)
 {
-	PlayerImmovable & destination = m_request.target();
+	if (!location || !location->get_economy()) {
+		tlog("no location or economy -> fail\n");
+		success = false;
+		return 0;
+	}
 
-	// Catch the simplest cases
-	if (not location or location->get_economy() != destination.get_economy()) {
-		tlog("no location or economy mismatch -> fail\n");
-
+	PlayerImmovable * destination = m_destination.get(location->get_economy()->owner().egbase());
+	if (!destination || destination->get_economy() != location->get_economy()) {
+		tlog("destination disappeared or economy mismatch -> fail\n");
 		success = false;
 		return 0;
 	}
 
 	success = true;
 
-	if (location == &destination)
+	if (location == destination)
 		return 0;
 
-	Flag & locflag  = location  ->base_flag();
-	Flag & destflag = destination.base_flag();
+	Flag & locflag  = location->base_flag();
+	Flag & destflag = destination->base_flag();
 
 	if (&locflag == &destflag)
-		return &locflag == location ? &destination : &locflag;
+		return &locflag == location ? destination : &locflag;
 
 	// Brute force: recalculate the best route every time
 	if (!locflag.get_economy()->find_route(locflag, destflag, &m_route, m_item))
@@ -114,7 +120,7 @@ PlayerImmovable * Transfer::get_next_step
 				m_route.starttrim(1);
 
 	if (m_route.get_nrsteps() >= 1)
-		if (upcast(Road const, road, &destination))
+		if (upcast(Road const, road, destination))
 			if
 				(&road->get_flag(Road::FlagEnd)
 				 ==
@@ -127,17 +133,17 @@ PlayerImmovable * Transfer::get_next_step
 
 		// special rule to get items into buildings
 		if (m_item and m_route.get_nrsteps() == 1)
-			if (dynamic_cast<Building const *>(&destination)) {
-				assert(&m_route.get_flag(m_game, 1) == &destination.base_flag());
+			if (dynamic_cast<Building const *>(destination)) {
+				assert(&m_route.get_flag(m_game, 1) == &destflag);
 
-				return &destination;
+				return destination;
 			}
 
 		if (m_route.get_nrsteps() >= 1) {
 			return &m_route.get_flag(m_game, 1);
 		}
 
-		return &destination;
+		return destination;
 	}
 
 	return &m_route.get_flag(m_game, 0);
@@ -150,7 +156,8 @@ PlayerImmovable * Transfer::get_next_step
  */
 void Transfer::has_finished()
 {
-	m_request.transfer_finish(m_game, *this);
+	if (m_request)
+		m_request->transfer_finish(m_game, *this);
 }
 
 /**
@@ -160,7 +167,8 @@ void Transfer::has_finished()
 */
 void Transfer::has_failed()
 {
-	m_request.transfer_fail(m_game, *this);
+	if (m_request)
+		m_request->transfer_fail(m_game, *this);
 }
 
 void Transfer::tlog(char const * const fmt, ...)
