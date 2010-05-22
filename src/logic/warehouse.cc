@@ -1088,6 +1088,15 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 	}
 
 	incorporate_worker(game, w_desc.create(game, owner(), this, m_position));
+
+	// Update PlannedWorkers::amount here if appropriate, because this function
+	// may have been called directly by the Economy.
+	// Do not update anything else about PlannedWorkers here, because this function
+	// is called by _update_planned_workers, so avoid recursion
+	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, pw_it) {
+		if (pw_it.current->index == worker && pw_it.current->amount)
+			pw_it.current->amount--;
+	}
 }
 
 /**
@@ -1154,10 +1163,8 @@ void Warehouse::_update_planned_workers(Game & game, Warehouse::PlannedWorkers& 
 	const Worker_Descr & w_desc = *tribe().get_worker_descr(pw.index);
 	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
 
-	while(pw.amount && can_create_worker(game, pw.index)) {
+	while(pw.amount && can_create_worker(game, pw.index))
 		create_worker(game, pw.index);
-		pw.amount--;
-	}
 
 	uint32_t idx = 0;
 	container_iterate_const(Worker_Descr::Buildcost, cost, cost_it) {
