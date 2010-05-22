@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-19 08:33+0000\n"
+"PO-Revision-Date: 2010-05-21 08:21+0000\n"
 "Last-Translator: Javi Sol <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-20 05:09+0000\n"
+"X-Launchpad-Export-Date: 2010-05-22 03:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -156,7 +156,7 @@ msgstr "Porteador"
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
-msgstr ""
+msgstr "Transporta items a través de las carreteras."
 
 #: ../../tribes/barbarians/conf:164
 #: ../../tribes/barbarians/conf:173
@@ -210,7 +210,7 @@ msgstr "Construcción"
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr ""
+msgstr "Corta trozos en bruto de granito a partir de piedras sueltas."
 
 #: ../../tribes/barbarians/conf:191
 msgid "Deep Coal Mine"
@@ -335,7 +335,7 @@ msgstr "Lino"
 
 #: ../../tribes/barbarians/flax/conf:1
 msgid "Flax is a beautiful flower, which is used for making cloth."
-msgstr ""
+msgstr "Flax es una hermosa flor, usada para hacer tela."
 
 #: ../../tribes/barbarians/conf:47
 msgid "Flax medium"
@@ -801,11 +801,11 @@ msgstr "Indicador recurso mucho oro"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Indicador de recursos poco granito"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Indicador de recursos mucho granito"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Resource indicator iron little"
@@ -986,13 +986,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:20
 msgid "The mighty tribes of the eastern lands!"
-msgstr ""
+msgstr "¡Las poderosas tribus de las tierras del este!"
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
 "The peel is a tool of the baker and each baker needs his own. It is produced "
 "in the metal works like all other tools."
 msgstr ""
+"La pala es una herramienta del pastelero y cada pastelero necesita la suya. "
+"Se fabrica en la forja como el resto de herramientas."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1028,6 +1030,9 @@ msgid ""
 "Only trained warriors are able to yield such a weapon. It is produced in the "
 "axe factory."
 msgstr ""
+"Ésta es la segunda arma más peligrosa que son capaces de producir los "
+"bárbaros. Sólo los guerreros entrenados son capaces de rendir con tales "
+"armas. Se fabrica en la fábrica de hachas."
 
 #: ../../tribes/barbarians/goldstone/conf:1
 msgid "This is the yellow goldstone."
@@ -1306,6 +1311,7 @@ msgstr "Trabajar"
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
 msgstr ""
+"Trabaja en sitios de construcción para desarrollar un nuevo edificio."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1

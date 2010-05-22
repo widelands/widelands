@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-19 12:52+0000\n"
+"PO-Revision-Date: 2010-05-21 19:30+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-20 05:08+0000\n"
+"X-Launchpad-Export-Date: 2010-05-22 03:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -282,11 +282,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field small"
-msgstr ""
+msgstr "Ager parvus"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field tiny"
-msgstr ""
+msgstr "Ager parvulus"
 
 #: ../../tribes/barbarians/conf:80
 msgid "Fire Tongs"
@@ -376,6 +376,7 @@ msgid ""
 "Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
+"Aurum est aes pretiosissimum. Solum res gravissimae maximaeque eo ornatur."
 
 #: ../../tribes/barbarians/conf:85
 msgid "Goldstone"
@@ -464,7 +465,7 @@ msgstr "Hasta venatoris"
 
 #: ../../tribes/barbarians/conf:206
 msgid "Inn"
-msgstr ""
+msgstr "Taberna"
 
 #: ../../tribes/barbarians/conf:136
 msgid "Innkeeper"
@@ -516,7 +517,7 @@ msgstr "Coquus cervisiae expertus"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Master Miner"
-msgstr ""
+msgstr "Fossor metallicus peritissimus"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Meal"
@@ -577,11 +578,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
-msgstr ""
+msgstr "Cannas serit."
 
 #: ../../tribes/barbarians/farm/conf:14
 msgid "Plant wheat"
-msgstr ""
+msgstr "Triticum serit."
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
@@ -748,11 +749,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:52
 msgid "Reed small"
-msgstr ""
+msgstr "Cannae parvae"
 
 #: ../../tribes/barbarians/conf:53
 msgid "Reed tiny"
-msgstr ""
+msgstr "Cannae sertae"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator coal little"
@@ -873,7 +874,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:104
 msgid "Strong Beer"
-msgstr ""
+msgstr "Cervisia fortis"
 
 #: ../../tribes/barbarians/conf:161
 msgid "Stronghold"
@@ -896,6 +897,8 @@ msgid ""
 "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
 "are equipped with it, but also the lumberjack is using the same model."
 msgstr ""
+"Ascia est arma simplex ac instrumentum Barbari. Omnes milites iuvenes eam "
+"habent, sed etiam lignatores eadem utuntur."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -955,7 +958,7 @@ msgstr ""
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
 "The scythe is the tool of the farmers. It is produced in the metal works."
-msgstr ""
+msgstr "Falx est instrumentum agricolae. Quae est fabricata in fabrica."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -983,7 +986,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/goldstone/conf:1
 msgid "This is the yellow goldstone."
-msgstr ""
+msgstr "Hoc est fulvum aes aureum."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1012,7 +1015,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Milites hic exerceunt."
 
 #: ../../tribes/barbarians/conf:106
 msgid "Trunk"
@@ -1020,7 +1023,7 @@ msgstr "Lignum trabale"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid "Trunks are the primary build material of the barbarians."
-msgstr ""
+msgstr "Ligna trabalia sunt materies principes Barbarorum."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -1227,7 +1230,7 @@ msgstr "Labor"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
-msgstr ""
+msgstr "Laborat in areis, ut novum aedificium construatur."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1

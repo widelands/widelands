@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-19 13:37+0000\n"
+"PO-Revision-Date: 2010-05-21 18:57+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-20 05:08+0000\n"
+"X-Launchpad-Export-Date: 2010-05-22 03:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:24
@@ -228,6 +228,8 @@ msgid ""
 "these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
 "Geologists elsewhere."
 msgstr ""
+"Etiam sol et luna viam per montes quaerere dicitur.\r\n"
+"Tibi ostende: Obelisci aes monstrant, alibi geologi nullum invenient."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -356,7 +358,7 @@ msgstr ""
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
-msgstr ""
+msgstr "Frigora solventia"
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The ancient sun of fire"
@@ -378,7 +380,7 @@ msgstr "Iter longum"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The pass through the mountains"
-msgstr ""
+msgstr "Transitus per montes"
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
@@ -440,7 +442,7 @@ msgstr ""
 
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
-msgstr ""
+msgstr "Limites duas"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
@@ -512,7 +514,7 @@ msgstr "Quis rex verus magni atolli fiet?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
-msgstr ""
+msgstr "Vallum bovium indomesticorum"
 
 #: ../../maps/Plateau.wmf/elemental:9
 msgid ""
