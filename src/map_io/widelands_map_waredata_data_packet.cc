@@ -211,64 +211,7 @@ void Map_Waredata_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
-	FileWrite fw;
-
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
-
-	//  We transverse the map and whenever we find a suitable object, we check
-	//  if it has wares of some kind.
-	std::vector<uint32_t> ids;
-	Map   const & map        = egbase.map();
-	Field const & fields_end = map[map.max_index()];
-	for (Field const * field = &map[0]; field < &fields_end; ++field) {
-		// First, check for Flags
-		if (upcast(Flag const, fl, field->get_immovable()))
-			for (int32_t i = 0; i < fl->m_item_filled; ++i) {
-				assert(mos.is_object_known(*fl->m_items[i].item));
-				write_ware(fw, egbase, mos, *fl->m_items[i].item);
-			}
-
-		//  Now, check for workers.
-		for (Bob const * b = field->get_first_bob(); b; b = b->get_next_bob())
-			if (upcast(Worker const, worker, b))
-				if
-					(WareInstance const * const ware =
-					 	worker->get_carried_item(egbase))
-				{
-					assert(mos.is_object_known(*ware));
-					write_ware(fw, egbase, mos, *ware);
-				}
-	}
-
-	fw.Write(fs, "binary/ware_data");
-}
-
-/*
- * Write this ware instances data to disk
- */
-void Map_Waredata_Data_Packet::write_ware
-	(FileWrite            & fw,
-	 Editor_Game_Base     & egbase,
-	 Map_Map_Object_Saver & mos,
-	 WareInstance   const & ware)
-{
-	fw.Unsigned32(mos.get_object_file_index(ware));
-
-	if (Map_Object const * const obj = ware.m_location.get(egbase)) {
-		assert(mos.is_object_known(*obj));
-		fw.Unsigned32(mos.get_object_file_index(*obj));
-	} else
-		fw.Unsigned32(0);
-
-	fw.CString(ware.descr().name());
-
-	if (Map_Object const * const obj = ware.m_transfer_nextstep.get(egbase)) {
-		assert(mos.is_object_known(*obj));
-		fw.Unsigned32(mos.get_object_file_index(*obj));
-	} else
-		fw.Unsigned32(0);
-
-	mos.mark_object_as_saved(ware);
+	throw wexception("Map_Waredata_Data_Packet::Write is obsolete");
 }
 
 }

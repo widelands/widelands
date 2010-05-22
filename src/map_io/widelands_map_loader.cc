@@ -229,10 +229,12 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Building_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
-
-	log("Reading Map Ware Data ... ");
-	{Map_Ware_Data_Packet           p; p.Read(m_fs, egbase, !scenario, *m_mol);}
-	log("done!\n ");
+	bool have_oldwares = m_fs.FileExists("binary/ware");
+	if (have_oldwares) {
+		log("Reading Map Ware Data ... ");
+		{Map_Ware_Data_Packet           p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+		log("done!\n ");
+	}
 
 	//  DATA PACKETS
 	log("Reading Flagdata Data ... ");
@@ -248,10 +250,11 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Buildingdata_Data_Packet   p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
-
-	log("Reading Waredata Data ... ");
-	{Map_Waredata_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
-	log("done!\n ");
+	if (have_oldwares) {
+		log("Reading Waredata Data ... ");
+		{Map_Waredata_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+		log("done!\n ");
+	}
 
 	if (have_oldbobs) {
 		log("Reading Bobdata Data ... ");
