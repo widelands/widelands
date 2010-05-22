@@ -328,7 +328,6 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				req.Read(fr, game, mol);
 				warehouse.m_requests[i] = &req;
 			}
-			warehouse.m_target_supply.resize(warehouse.m_requests.size());
 
 			assert(warehouse.m_incorporated_workers.empty());
 			{

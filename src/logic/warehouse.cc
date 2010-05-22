@@ -461,34 +461,6 @@ void Warehouse::postfill
 	}
 }
 
-
-/*
-warehouses determine how badly they want a certain ware
-*/
-int32_t Warehouse::get_priority
-	(int32_t const type, Ware_Index const ware_index, bool) const
-{
-	//  NOTE  100 is idle priority, so the priority should be > 100 if the
-	//  NOTE  warehouse really wants to have this ware.
-
-	// return 100, if type is a ware, or the warehouse has no request itself
-	if (type == Request::WORKER || m_target_supply[ware_index] == 0)
-		return 100;
-	int32_t const x =
-		(m_target_supply.at(ware_index) + 2 -
-		 m_supply->get_wares().stock(ware_index))
-		*
-		100;
-	//  return 100 if all requests are fulfilled, else 100 * number of requested
-	return (x > 100) ? x : 100;
-}
-
-void Warehouse::set_needed(Ware_Index const ware_index, uint32_t const value)
-{
-	m_target_supply[ware_index] = value;
-}
-
-
 void Warehouse::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
@@ -546,7 +518,6 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	m_next_military_act =
 		schedule_act
 			(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
-	m_target_supply.resize(m_requests.size());
 
 	if (uint32_t const conquer_radius = get_conquers())
 		ref_cast<Game, Editor_Game_Base>(egbase).conquer_area

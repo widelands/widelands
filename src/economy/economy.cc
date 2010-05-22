@@ -597,18 +597,8 @@ Supply * Economy::_find_best_supply
 		Supply & supp = m_supplies[i];
 
 		// idle requests only get active supplies
-		if (req.is_idle() and not supp.is_active()) {
-			/* unless the warehouse REALLY needs the supply */
-			if (req.get_priority(0) > 100) { //  100 is the 'real idle' priority
-				//check if the supply is at current target
-				if (&target_flag == &supp.get_position(game)->base_flag()) {
-					//assert(false);
-					continue;
-				}
-			} else if (not supp.is_active()) {
-				continue;
-			}
-		}
+		if (req.is_idle() and not supp.is_active())
+			continue;
 
 		// Check requirements
 		if (!supp.nr_supplies(game, req))
