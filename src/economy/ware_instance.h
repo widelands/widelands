@@ -20,11 +20,9 @@
 #ifndef S__WARE_INSTANCE_H
 #define S__WARE_INSTANCE_H
 
-// For Ware Index
+#include "economy/transfer.h"
 #include "logic/widelands.h"
-// For MO_DESCR
 #include "logic/instances.h"
-// For Item_Ware_Descr
 #include "logic/item_ware_descr.h"
 
 
@@ -83,6 +81,7 @@ public:
 
 	void set_transfer(Game &, Transfer &);
 	void cancel_transfer(Game &);
+	Transfer * get_transfer() const {return m_transfer;}
 
 private:
 	Object_Ptr        m_location;
@@ -105,6 +104,7 @@ protected:
 	private:
 		uint32_t m_location;
 		uint32_t m_transfer_nextstep;
+		Transfer::ReadData m_transfer;
 	};
 
 public:

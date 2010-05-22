@@ -31,6 +31,8 @@
 #include "request.h"
 #include "logic/worker.h"
 #include "upcast.h"
+#include <map_io/widelands_map_map_object_saver.h>
+#include <map_io/widelands_map_map_object_loader.h>
 
 namespace Widelands {
 
@@ -57,6 +59,34 @@ Transfer::Transfer(Game & game, Request & req, Worker & w) :
 }
 
 /**
+ * Create a transfer without linking it into the given ware instance and without a request.
+ *
+ * This is used for loading savegames.
+ */
+Transfer::Transfer(Game & game, WareInstance & w) :
+	m_game(game),
+	m_request(0),
+	m_item(&w),
+	m_worker(0),
+	m_idle(false)
+{
+}
+
+/**
+ * Create a transfer without linking it into the given worker and without a request.
+ *
+ * This is used for loading savegames.
+ */
+Transfer::Transfer(Game & game, Worker & w) :
+	m_game(game),
+	m_request(0),
+	m_item(0),
+	m_worker(&w),
+	m_idle(false)
+{
+}
+
+/**
  * Cleanup.
  */
 Transfer::~Transfer()
@@ -69,6 +99,25 @@ Transfer::~Transfer()
 		m_item->cancel_transfer(m_game);
 	}
 
+}
+
+/**
+ * Override the \ref Request of this transfer.
+ *
+ * \note Only use for loading savegames
+ */
+void Transfer::set_request(Request * req)
+{
+	assert(!m_request);
+	assert(req);
+
+	if (&req->target() != m_destination.get(m_game)) {
+		log
+			("WARNING: Transfer::set_request req->target (%u) vs. destination (%u) mismatch\n",
+			 req->target().serial(), m_destination.serial());
+		m_destination = &req->target();
+	}
+	m_request = req;
 }
 
 /**
@@ -194,6 +243,40 @@ void Transfer::tlog(char const * const fmt, ...)
 	}
 
 	log("T%c(%u): %s", id, serial, buffer);
+}
+
+/*
+==============================
+
+Load/save support
+
+==============================
+*/
+
+#define TRANSFER_SAVEGAME_VERSION 1
+
+void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
+{
+	uint8_t version = fr.Unsigned8();
+	if (version != TRANSFER_SAVEGAME_VERSION)
+		throw wexception("unhandled/unknown transfer version %u", version);
+
+	rd.destination = fr.Unsigned32();
+	m_idle = fr.Unsigned8();
+}
+
+void Transfer::read_pointers(Map_Map_Object_Loader & mol, const Widelands::Transfer::ReadData & rd)
+{
+	if (rd.destination)
+		m_destination = &mol.get<PlayerImmovable>(rd.destination);
+}
+
+void Transfer::write(Map_Map_Object_Saver& mos, FileWrite& fw)
+{
+	fw.Unsigned8(TRANSFER_SAVEGAME_VERSION);
+	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(m_game)));
+	fw.Unsigned8(m_idle);
+	// not saving route right now, will be recaculated anyway
 }
 
 }

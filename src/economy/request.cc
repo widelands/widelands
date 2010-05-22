@@ -96,7 +96,7 @@ Request::~Request()
 }
 
 // Modified to allow Requirements and SoldierRequests
-#define REQUEST_VERSION 5
+#define REQUEST_VERSION 6
 
 /**
  * Read this request from a file
@@ -160,25 +160,48 @@ void Request::Read
 			uint16_t const nr_transfers = fr.Unsigned16();
 			for (uint16_t i = 0; i < nr_transfers; ++i)
 				try {
-					uint8_t const what_is = fr.Unsigned8();
-					if (what_is != WARE and what_is != WORKER and what_is != 2)
-						throw wexception
-							("type is %u but must be one of {%u (WARE), %u (WORKER), "
-							 "%u (SOLDIER)}",
-							 what_is, WARE, WORKER, 2);
-					uint32_t const reg = fr.Unsigned32();
-					if (not mol.is_object_known(reg))
-						throw wexception("%u is not known", reg);
-					Transfer * const trans =
-						what_is == WARE ?
-						new Transfer(game, *this, mol.get<WareInstance>(reg)) :
-						new Transfer(game, *this, mol.get<Worker>      (reg));
-					trans->set_idle(fr.Unsigned8());
-					m_transfers.push_back(trans);
+					if (version >= 6) {
+						Map_Object * obj = &mol.get<Map_Object>(fr.Unsigned32());
+						Transfer * transfer;
 
-					if (version < 5)
-						if (fr.Unsigned8())
-							m_requirements.Read (fr, game, mol);
+						if (upcast(Worker, worker, obj)) {
+							transfer = worker->get_transfer();
+						} else if (upcast(WareInstance, ware, obj)) {
+							transfer = ware->get_transfer();
+						} else
+							throw wexception
+								("transfer target %u is neither ware nor worker",
+								 obj->serial());
+
+						if (!transfer) {
+							log
+								("WARNING: loading request, transferred object %u has no transfer\n",
+								 obj->serial());
+						} else {
+							transfer->set_request(this);
+							m_transfers.push_back(transfer);
+						}
+					} else {
+						uint8_t const what_is = fr.Unsigned8();
+						if (what_is != WARE and what_is != WORKER and what_is != 2)
+							throw wexception
+								("type is %u but must be one of {%u (WARE), %u (WORKER), "
+								 "%u (SOLDIER)}",
+								 what_is, WARE, WORKER, 2);
+						uint32_t const reg = fr.Unsigned32();
+						if (not mol.is_object_known(reg))
+							throw wexception("%u is not known", reg);
+						Transfer * const trans =
+							what_is == WARE ?
+							new Transfer(game, *this, mol.get<WareInstance>(reg)) :
+							new Transfer(game, *this, mol.get<Worker>      (reg));
+						trans->set_idle(fr.Unsigned8());
+						m_transfers.push_back(trans);
+
+						if (version < 5)
+							if (fr.Unsigned8())
+								m_requirements.Read (fr, game, mol);
+					}
 				} catch (_wexception const & e) {
 					throw wexception("transfer %u: %s", i, e.what());
 				}
@@ -224,16 +247,13 @@ void Request::Write
 	fw.Unsigned16(m_transfers.size()); //  Write number of current transfers.
 	for (uint32_t i = 0; i < m_transfers.size(); ++i) {
 		Transfer & trans = *m_transfers[i];
-		//  is this a ware (or a worker)
-		fw.Unsigned8(m_type);
-		if        (trans.m_item) { //  write ware/worker
+		if (trans.m_item) { //  write ware/worker
 			assert(mos.is_object_known(*trans.m_item));
 			fw.Unsigned32(mos.get_object_file_index(*trans.m_item));
 		} else if (trans.m_worker) {
 			assert(mos.is_object_known(*trans.m_worker));
 			fw.Unsigned32(mos.get_object_file_index(*trans.m_worker));
 		}
-		fw.Unsigned8(trans.is_idle());
 	}
 	m_requirements.Write (fw, game, mos);
 }

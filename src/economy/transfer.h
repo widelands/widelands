@@ -27,6 +27,8 @@ struct Game;
 struct PlayerImmovable;
 struct Request;
 class WareInstance;
+struct Map_Map_Object_Loader;
+struct Map_Map_Object_Saver;
 class Worker;
 
 /**
@@ -46,18 +48,30 @@ struct Transfer {
 
 	Transfer(Game &, Request &, WareInstance &);
 	Transfer(Game &, Request &, Worker       &);
+	Transfer(Game &, WareInstance &);
+	Transfer(Game &, Worker &);
 	~Transfer();
 
 	Request * get_request() const {return m_request;}
+	void set_request(Request * req);
 	bool is_idle() const {return m_idle;}
 
 	void set_idle(bool idle);
 
-public:
 	/// Called by the controlled ware or worker
 	PlayerImmovable * get_next_step(PlayerImmovable *, bool & psuccess);
 	void has_finished();
 	void has_failed();
+
+	struct ReadData {
+		uint32_t destination;
+
+		ReadData() : destination(0) {}
+	};
+
+	void read(FileRead & fr, ReadData & rd);
+	void read_pointers(Map_Map_Object_Loader & mol, const ReadData & rd);
+	void write(Map_Map_Object_Saver & mos, FileWrite & fw);
 
 private:
 	void tlog(char const * fmt, ...) PRINTF_FORMAT(2, 3);

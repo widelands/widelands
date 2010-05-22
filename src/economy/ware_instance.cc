@@ -444,8 +444,13 @@ void WareInstance::Loader::load(FileRead & fr)
 {
 	Map_Object::Loader::load(fr);
 
+	WareInstance & ware = get<WareInstance>();
 	m_location = fr.Unsigned32();
 	m_transfer_nextstep = fr.Unsigned32();
+	if (fr.Unsigned8()) {
+		ware.m_transfer = new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), ware);
+		ware.m_transfer->read(fr, m_transfer);
+	}
 }
 
 void WareInstance::Loader::load_pointers()
@@ -456,6 +461,8 @@ void WareInstance::Loader::load_pointers()
 	ware.set_location(egbase(), &mol().get<Map_Object>(m_location));
 	if (m_transfer_nextstep)
 		ware.m_transfer_nextstep = &mol().get<Map_Object>(m_transfer_nextstep);
+	if (ware.m_transfer)
+		ware.m_transfer->read_pointers(mol(), m_transfer);
 }
 
 void WareInstance::Loader::load_finish()
@@ -481,6 +488,12 @@ void WareInstance::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, F
 
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_transfer_nextstep.get(egbase)));
+	if (m_transfer) {
+		fw.Unsigned8(1);
+		m_transfer->write(mos, fw);
+	} else {
+		fw.Unsigned8(0);
+	}
 }
 
 Map_Object::Loader * WareInstance::load(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
