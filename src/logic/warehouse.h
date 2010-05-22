@@ -124,6 +124,9 @@ public:
 	bool can_create_worker(Game &, Ware_Index) const;
 	void     create_worker(Game &, Ware_Index);
 
+	uint32_t get_planned_workers(Game &, Ware_Index index) const;
+	void plan_workers(Game &, Ware_Index index, uint32_t amount);
+
 	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
 	void disable_spawn(uint8_t worker_types_without_cost_index);
 
@@ -140,9 +143,30 @@ protected:
 		(Interactive_GameBase &, UI::Window * & registry);
 
 private:
-	static void idle_request_cb
+	/**
+	 * Plan to produce a certain worker type in this warehouse. This means requesting
+	 * all the necessary wares, if multiple different wares types are needed.
+	 */
+	struct PlannedWorkers {
+		/// Index of the worker type we plan to create
+		Ware_Index index;
+
+		/// How many workers of this type are we supposed to create?
+		uint32_t amount;
+
+		/// Requests to obtain the required build costs
+		std::vector<Request *> requests;
+
+		void cleanup();
+	};
+
+	static void request_cb
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 	void sort_worker_in(Editor_Game_Base &, Worker &);
+
+	bool _load_finish_planned_worker(PlannedWorkers & pw);
+	void _update_planned_workers(Game &, PlannedWorkers & pw);
+	void _update_all_planned_workers(Game &);
 
 	WarehouseSupply       * m_supply;
 	std::vector<Request *>  m_requests; // one idle request per ware type
@@ -154,6 +178,8 @@ private:
 
 	/// how many do we want to store in this building
 	std::vector<size_t> m_target_supply; // absolute value
+
+	std::vector<PlannedWorkers> m_planned_workers;
 };
 
 }

@@ -77,6 +77,7 @@ struct Request : public Trackable {
 	int32_t get_type() const {return m_type;}
 	bool is_idle() const {return m_idle;}
 	uint32_t get_count() const {return m_count;}
+	uint32_t get_open_count() const {return m_count - m_transfers.size();}
 	bool is_open() const {return m_idle || m_transfers.size() < m_count;}
 	Economy * get_economy() const throw () {return m_economy;}
 	int32_t get_required_time() const;

@@ -754,85 +754,117 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 	}
 }
 
+/**
+ * Check whether there is a supply for the given request. If the request is a worker
+ * request without supply, attempt to create a new worker in a warehouse.
+ */
+void Economy::_create_requested_worker(Game & game, Ware_Index index)
+{
+	unsigned demand = 0;
+
+	container_iterate_const(RequestList, m_requests, j) {
+		const Request & req = **j.current;
+
+		if (req.is_idle() || req.get_type() != Request::WORKER || req.get_index() != index)
+			continue;
+
+		// need to check for each request separately, because esp. soldier requests
+		// have different specific requirements
+		if (m_supplies.have_supplies(game, req))
+			continue;
+
+		demand += req.get_open_count();
+	}
+
+	if (!demand)
+		return;
+
+	// We have worker demand that is not fulfilled by supplies
+	// Find warehouses where we can create the required workers
+	Tribe_Descr const & tribe = owner().tribe();
+	Worker_Descr const & w_desc = *tribe.get_worker_descr(index);
+	Worker_Descr::Buildcost const & cost = w_desc.buildcost();
+	Warehouse * best_wh = 0;
+	uint32_t best_wh_available = 0;
+	std::vector<bool> available_somewhere;
+	uint32_t total_planned = 0;
+
+	available_somewhere.insert(available_somewhere.begin(), cost.size(), false);
+
+	for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
+		Warehouse * wh = m_warehouses[n_wh];
+
+		uint32_t planned = wh->get_planned_workers(game, index);
+		total_planned += planned;
+
+		while (wh->can_create_worker(game, index)) {
+			wh->create_worker(game, index);
+			if (!--demand)
+				return;
+		}
+
+		// Determine the best warehouse based on how many types of needed supplies are already
+		// in that warehouse. Additionally, give a bonus if we've previously planned to create
+		// workers in that warehouse, so that one single warehouse tends to become to the "worker
+		// production center".
+		uint32_t available = planned ? 1 : 0;
+		uint32_t idx = 0;
+		container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
+			std::string const & input_name = bc.current->first;
+			uint32_t supply;
+			if (Ware_Index id_w = tribe.ware_index(input_name)) {
+				supply = wh->get_wares().stock(id_w);
+			} else if ((id_w = tribe.worker_index(input_name))) {
+				supply = wh->get_workers().stock(id_w);
+			} else
+				throw wexception
+					("Economy::_create_requested_worker: buildcost inconsistency '%s'",
+					 input_name.c_str());
+
+			if (supply >= bc.current->second) {
+				available++;
+				available_somewhere[idx] = true;
+			}
+
+			++idx;
+		}
+
+		if (!best_wh || available > best_wh_available) {
+			best_wh = wh;
+			best_wh_available = available;
+		}
+	}
+
+	// If all different supply types are available in some warehouse,
+	// but apparently not all in the same warehouse at the same time in sufficient quantity,
+	// start planning in earnest.
+	if
+		(demand > total_planned &&
+		 std::find(available_somewhere.begin(), available_somewhere.end(), false) == available_somewhere.end()) {
+		log
+			("Start planning for %i workers of type '%s' in warehouse at %i,%i.\n",
+			 demand, w_desc.name().c_str(), best_wh->get_position().x, best_wh->get_position().y);
+		best_wh->plan_workers(game, index, demand - total_planned);
+	}
+}
 
 /**
  * Walk all Requests and find requests of workers than aren't supplied. Then
  * try to create the worker at warehouses.
-*/
+ */
 void Economy::_create_requested_workers(Game & game)
 {
-	/*
-		Find the request of workers that can not be supplied
-	*/
-	if (warehouses().size()) {
-		Tribe_Descr const & tribe = owner().tribe();
-		container_iterate_const(RequestList, m_requests, j) {
-			Request const & req = **j.current;
+	if (!warehouses().size())
+		return;
 
-			if (!req.is_idle() && req.get_type() == Request::WORKER) {
-				Ware_Index const index = req.get_index();
-				Worker_Descr const & w_desc = *tribe.get_worker_descr(index);
+	Tribe_Descr const & tribe = owner().tribe();
+	for (Ware_Index index = Ware_Index::First(); index < tribe.get_nrworkers(); ++index) {
+		if (!owner().is_worker_type_allowed(index))
+			continue;
+		if (!tribe.get_worker_descr(index)->is_buildable())
+			continue;
 
-				for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
-					if (m_supplies[i].nr_supplies(game, req))
-						goto requested_worker_exists;
-
-				// If there aren't enough supplies...
-				if (owner().is_worker_type_allowed(index)) {
-					if (not w_desc.is_buildable()) {
-						log
-							("Economy::_create_requested_workers: ERROR: "
-							 "attempting to create worker of non-buildable type "
-							 "%s\n",
-							 w_desc.descname().c_str());
-					}
-					assert(w_desc.is_buildable());
-					bool created_worker = false;
-					for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
-						if (m_warehouses[n_wh]->can_create_worker(game, index)) {
-							m_warehouses[n_wh]->create_worker(game, index);
-							created_worker = true;
-							break;
-						} // if (m_warehouses[n_wh]
-					}
-					if (! created_worker) {
-						uint32_t nth_wh = 0;
-						if (warehouses().size() > 1) {
-							// Find nearest warehouse!
-							// NOTE  Just a dummy implementation to ensure that each
-							// NOTE  call of this function sets an request for the same
-							// NOTE  warehouse - should of coures be improved further.
-							Coords const tac = req.target_flag().get_position();
-							Coords whc = m_warehouses[0]->base_flag().get_position();
-							int32_t current = (tac.x - whc.x) * (tac.y - whc.y);
-							current = current < 1 ? (- current) : current;
-							for (uint32_t i = 0; i < warehouses().size(); ++i) {
-								whc = m_warehouses[i]->base_flag().get_position();
-								int32_t cost = (tac.x - whc.x) * (tac.y - whc.y);
-								cost = cost < 0 ? (- cost) : cost;
-								if (current > cost) {
-									current = cost;
-									nth_wh = i;
-								}
-							}
-						}
-						Warehouse & nearest = *m_warehouses[nth_wh];
-						Worker_Descr::Buildcost const & cost = w_desc.buildcost();
-						container_iterate_const
-							(Worker_Descr::Buildcost, cost, bc_it)
-							if
-								(Ware_Index const w_id =
-								 	tribe.ware_index(bc_it.current->first.c_str()))
-								nearest.set_needed(w_id, bc_it.current->second);
-					}
-				} //else
-					//log
-						//("Economy::_create_requested_workers: Could not create %s "
-						 //"for player %u because it is forbidden\n",
-						 //w_desc.descname().c_str(), owner().player_number());
-			} // if (req->is_open())
-			requested_worker_exists:;
-		}
+		_create_requested_worker(game, index);
 	}
 }
 
