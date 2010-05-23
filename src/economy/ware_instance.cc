@@ -33,7 +33,6 @@
 #include "request.h"
 #include "wexception.h"
 #include "upcast.h"
-#include <sys/socket.h>
 
 namespace Widelands {
 
