@@ -22,6 +22,7 @@
 
 #include <stdint.h>
 #include <vector>
+#include <boost/function.hpp>
 
 namespace Widelands {
 class IRoute;
@@ -33,17 +34,20 @@ class RoutingNode;
  * The functionality was split from Economy
  */
 struct Router {
-	Router();
+	typedef boost::function<void ()> ResetCycleFn;
+
+	Router(const ResetCycleFn & reset);
 
 	bool find_route
 		(RoutingNode & start, RoutingNode & end,
 		 IRoute * route,
 		 bool    wait,
 		 int32_t cost_cutoff,
-		 ITransportCostCalculator   & cost_calculator,
-		 std::vector<RoutingNode *> & nodes);
+		 ITransportCostCalculator   & cost_calculator);
+	uint32_t assign_cycle();
 
 private:
+	ResetCycleFn m_reset;
 	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
 };
 

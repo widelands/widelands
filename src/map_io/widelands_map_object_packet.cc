@@ -86,6 +86,10 @@ void Map_Object_Packet::Read
 				loaders.insert(Worker::load(egbase, mol, fr));
 				break;
 
+			case Map_Object::header_WareInstance:
+				loaders.insert(WareInstance::load(egbase, mol, fr));
+				break;
+
 			default:
 				throw game_data_error(_("unknown object header %u"), header);
 			}

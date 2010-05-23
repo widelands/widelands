@@ -52,7 +52,7 @@ namespace Widelands {
 
 // Subversions
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
-#define CURRENT_WAREHOUSE_PACKET_VERSION        3
+#define CURRENT_WAREHOUSE_PACKET_VERSION        4
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   4
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
@@ -317,16 +317,17 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				warehouse.insert_workers(id, fr.Unsigned16());
 			}
 
-			warehouse.m_requests.resize(fr.Unsigned16());
-			for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i) {
-				Request & req =
-					*new Request
+			if (packet_version <= 3) {
+				// eat the obsolete idle request structures
+				uint32_t nrrequests = fr.Unsigned16();
+				while (nrrequests--) {
+					boost::scoped_ptr<Request> req(new Request
 						(warehouse,
 						 Ware_Index::First(),
 						 &Warehouse::request_cb,
-						 Request::WORKER);
-				req.Read(fr, game, mol);
-				warehouse.m_requests[i] = &req;
+						 Request::WORKER));
+					req->Read(fr, game, mol);
+				}
 			}
 
 			assert(warehouse.m_incorporated_workers.empty());
@@ -1047,11 +1048,6 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 		fw.Unsigned16(workers.stock(i));
 	}
 	fw.Unsigned8(0);
-
-	const uint16_t requests_size = warehouse.m_requests.size();
-	fw.Unsigned16(requests_size);
-	for (uint16_t i = 0; i < warehouse.m_requests.size(); ++i)
-		warehouse.m_requests[i]->Write(fw, game, mos);
 
 	//  Incorporated workers, write sorted after file-serial.
 	fw.Unsigned16(warehouse.m_incorporated_workers.size());

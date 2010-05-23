@@ -27,6 +27,7 @@
 
 namespace Widelands {
 
+struct Flag;
 class RoutingNode;
 struct Road;
 
@@ -68,6 +69,7 @@ public:
 
 // The variables are only protected so that Test classes can use them
 protected:
+	friend struct Economy;
 	friend struct Router;
 	uint32_t      mpf_cycle;
 	Queue::cookie mpf_cookie;
@@ -87,6 +89,7 @@ public:
 	int32_t cost() const {return mpf_realcost + mpf_estimate;}
 	Queue::cookie& cookie() {return mpf_cookie;}
 
+	virtual Flag & base_flag() = 0;
 	virtual int32_t get_waitcost() const = 0;
 	virtual void get_neighbours(RoutingNodeNeighbours &) = 0;
 	virtual Coords get_position() const = 0;

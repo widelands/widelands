@@ -33,7 +33,18 @@ namespace Widelands {
 /*************************************************************************/
 /*                         Router Implementation                         */
 /*************************************************************************/
-Router::Router() : mpf_cycle(0) {}
+Router::Router(const ResetCycleFn& reset) : m_reset(reset), mpf_cycle(0) {}
+
+uint32_t Router::assign_cycle()
+{
+	++mpf_cycle;
+	if (!mpf_cycle) { // reset all cycle fields
+		m_reset();
+		++mpf_cycle;
+	}
+
+	return mpf_cycle;
+}
 
 /**
  * Calculate a route between two nodes. This is using the A* algorithm, the
@@ -63,16 +74,9 @@ bool Router::find_route
 	 IRoute * const route,
 	 bool    const wait,
 	 int32_t const cost_cutoff,
-	 ITransportCostCalculator   & cost_calculator,
-	 std::vector<RoutingNode *> & nodes)
+	 ITransportCostCalculator   & cost_calculator)
 {
-	// advance the path-finding cycle
-	++mpf_cycle;
-	if (!mpf_cycle) { // reset all cycle fields
-		for (uint32_t i = 0; i < nodes.size(); ++i)
-			nodes[i]->mpf_cycle = 0;
-		++mpf_cycle;
-	}
+	assign_cycle();
 
 	// Add the starting node into the open list
 	RoutingNode::Queue Open;

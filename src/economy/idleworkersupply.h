@@ -37,9 +37,9 @@ struct IdleWorkerSupply : public Supply {
 	void set_economy(Economy *);
 	virtual PlayerImmovable * get_position(Game &);
 
-	/// Idle workers are always active supplies, because they need to get
-	/// into a Warehouse ASAP.
-	virtual bool is_active() const throw () {return true;}
+	virtual bool is_active() const throw ();
+	virtual bool has_storage() const throw ();
+	virtual void send_to_storage(Game &, Warehouse* wh);
 
 	virtual uint32_t nr_supplies(Game const &, Request const &) const;
 	virtual WareInstance & launch_item(Game &, Request const &)

@@ -197,6 +197,15 @@ Warehouse supplies are never active.
 */
 bool WarehouseSupply::is_active() const throw () {return false;}
 
+bool WarehouseSupply::has_storage() const throw ()
+{
+	return true;
+}
+
+void WarehouseSupply::send_to_storage(Game &, Warehouse* wh)
+{
+	throw wexception("WarehouseSupply::send_to_storage: should never be called");
+}
 
 uint32_t WarehouseSupply::nr_supplies
 	(Game const & game, Request const & req) const
@@ -478,23 +487,6 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		(Area<FCoords>
 		 (egbase.map().get_fcoords(get_position()), vision_range()));
 
-	for (Ware_Index i = Ware_Index::First(); i < nr_wares;   ++i) {
-		Request & req =
-			*new Request(*this, i, Warehouse::request_cb, Request::WARE);
-
-		req.set_idle(true);
-
-		m_requests.push_back(&req);
-	}
-	for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i) {
-		Request & req =
-			*new Request
-				(*this, i, &Warehouse::request_cb, Request::WORKER);
-
-		req.set_idle(true);
-
-		m_requests.push_back(&req);
-	}
 	{
 		uint32_t const act_time =
 			schedule_act
@@ -554,11 +546,6 @@ Destroy the warehouse.
 */
 void Warehouse::cleanup(Editor_Game_Base & egbase)
 {
-	while (m_requests.size()) {
-		delete m_requests.back();
-		m_requests.pop_back();
-	}
-
 	while (m_planned_workers.size()) {
 		m_planned_workers.back().cleanup();
 		m_planned_workers.pop_back();
@@ -680,9 +667,6 @@ void Warehouse::set_economy(Economy * const e)
 
 	m_supply->set_economy(e);
 	Building::set_economy(e);
-
-	for (uint32_t i = 0; i < m_requests.size(); ++i)
-		m_requests[i]->set_economy(e);
 
 	container_iterate_const(std::vector<PlannedWorkers>, m_planned_workers, pw_it) {
 		container_iterate_const(std::vector<Request*>, pw_it.current->requests, req_it)
@@ -1007,6 +991,21 @@ void Warehouse::request_cb
 		wh.m_supply->add_wares(ware, 1);
 }
 
+/**
+ * Receive a ware from a transfer that was not associated to a \ref Request.
+ */
+void Warehouse::receive_ware(Game & game, Ware_Index ware)
+{
+	m_supply->add_wares(ware, 1);
+}
+
+/**
+ * Receive a worker from a transfer that was not associated to a \ref Request.
+ */
+void Warehouse::receive_worker(Game & game, Worker & worker)
+{
+	worker.schedule_incorporate(game);
+}
 
 Building & Warehouse_Descr::create_object() const {
 	return *new Warehouse(*this);

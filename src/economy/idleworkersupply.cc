@@ -28,6 +28,7 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "wexception.h"
+#include "logic/warehouse.h"
 #include "logic/worker.h"
 
 namespace Widelands {
@@ -63,6 +64,18 @@ void IdleWorkerSupply::set_economy(Economy * const e)
 	}
 }
 
+/**
+ * Worker is walking around the road network, so active by definition.
+ */
+bool IdleWorkerSupply::is_active() const throw ()
+{
+	return true;
+}
+
+bool IdleWorkerSupply::has_storage() const throw ()
+{
+	return m_worker.get_transfer();
+}
 
 /**
  * Return the worker's position.
@@ -106,6 +119,15 @@ Worker & IdleWorkerSupply::launch_worker(Game &, Request const & req)
 		throw wexception("IdleWorkerSupply: worker type mismatch");
 
 	return m_worker;
+}
+
+void IdleWorkerSupply::send_to_storage(Game & game, Warehouse* wh)
+{
+	assert(!has_storage());
+
+	Transfer * t = new Transfer(game, m_worker);
+	t->set_destination(*wh);
+	m_worker.start_task_transfer(game, t);
 }
 
 }
