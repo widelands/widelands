@@ -647,20 +647,16 @@ void DefaultAI::update_mineable_field (MineableField & field)
 		field.preferred = true;
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
-		if (dynamic_cast<Flag const *>(immovables[i].object))
+		if (dynamic_cast<Flag const *>(immovables[i].object)) {
 			field.reachable = true;
-		else if (upcast(Building const, bld, immovables[i].object))
-			if
-				(player->get_buildcaps(map.get_fcoords(immovables[i].coords))
-				 &
-				 BUILDCAPS_MINE)
-			{
-
-			if
-				(dynamic_cast<ConstructionSite const *>(bld) or
-				 dynamic_cast<ProductionSite   const *>(bld))
+		} else if (upcast(Building const, bld, immovables[i].object)) {
+			if (bld->descr().get_ismine()) {
 				++field.mines_nearby;
+			} else if (upcast(ConstructionSite const, cs, bld)) {
+				if(cs->building().get_ismine())
+					++field.mines_nearby;
 			}
+		}
 	}
 }
 
