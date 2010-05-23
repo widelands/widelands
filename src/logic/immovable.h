@@ -32,7 +32,7 @@ struct Economy;
 struct Flag;
 struct Map;
 struct Tribe_Descr;
-struct WareInstance;
+class WareInstance;
 class Worker;
 
 /**
