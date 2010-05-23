@@ -1099,7 +1099,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			ioprio /= bo.outputs.size();
 			prio += ioprio;
 
-			prio -= 2 * (*j)->mines_nearby * (*j)->mines_nearby;
+			prio -= (*j)->mines_nearby * (*j)->mines_nearby;
 			prio /= 1 + bo.cnt_built * 2;
 
 			// multiply with current statistics of all other buildings of this
