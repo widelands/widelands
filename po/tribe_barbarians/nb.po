@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-16 10:26+0000\n"
+"PO-Revision-Date: 2010-05-22 19:51+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-20 05:09+0000\n"
+"X-Launchpad-Export-Date: 2010-05-23 03:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -215,7 +215,7 @@ msgstr "Dyp gullgruve"
 
 #: ../../tribes/barbarians/conf:196
 msgid "Deep Iron Ore Mine"
-msgstr ""
+msgstr "Dyp jernmalmgruve"
 
 #: ../../tribes/barbarians/conf:190
 msgid "Deeper Coal Mine"
@@ -227,7 +227,7 @@ msgstr "Dypere gullgruve"
 
 #: ../../tribes/barbarians/conf:194
 msgid "Deeper Iron Ore Mine"
-msgstr ""
+msgstr "Dypere jernmalmgruve"
 
 #: ../../tribes/barbarians/conf:67
 msgid "Deer"
@@ -485,7 +485,7 @@ msgstr "Jernmalm"
 
 #: ../../tribes/barbarians/conf:211
 msgid "Iron Ore Mine"
-msgstr ""
+msgstr "Jernmalmgruve"
 
 #: ../../tribes/barbarians/conf:92
 msgid "Kitchen Tools"
@@ -847,7 +847,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/smelting_works/conf:24
 msgid "Smelt iron"
-msgstr ""
+msgstr "Smelt jern"
 
 #: ../../tribes/barbarians/conf:141
 msgid "Smelter"
@@ -863,7 +863,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "Smelter jern."
 
 #: ../../tribes/barbarians/conf:103
 msgid "Snack"
@@ -989,7 +989,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
-msgstr ""
+msgstr "Dette er den røde jernmalmen."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
