@@ -43,7 +43,7 @@ Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
 void Cmd_Call_Economy_Balance::execute(Game & game)
 {
 	if (Flag * const flag = m_flag.get(game))
-		flag->get_economy()->balance_requestsupply(m_timerid);
+		flag->get_economy()->balance(m_timerid);
 }
 
 #define CURRENT_CMD_CALL_ECONOMY_VERSION 3

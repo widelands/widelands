@@ -88,6 +88,7 @@ struct Economy {
 		 Route * route,
 		 bool    wait,
 		 int32_t cost_cutoff = -1);
+	Warehouse * find_closest_warehouse(Flag & start, bool is_ware = false, Route * route = 0, uint32_t cost_cutoff = 0);
 
 	std::vector<Flag *>::size_type get_nrflags() const {return m_flags.size();}
 	void    add_flag(Flag &);
@@ -152,7 +153,7 @@ struct Economy {
 	WareList const & get_workers() const {return m_workers;}
 
 	///< called by \ref Cmd_Call_Economy_Balance
-	void balance_requestsupply(uint32_t timerid);
+	void balance(uint32_t timerid);
 
 	void rebalance_supply() {_start_request_timer();}
 
@@ -161,6 +162,7 @@ private:
 /* Functions */
 /*************/
 	void _remove_flag(Flag &);
+	void _reset_all_pathfinding_cycles();
 
 	void _merge(Economy &);
 	void _split(Flag &);
@@ -169,6 +171,8 @@ private:
 
 	Supply * _find_best_supply(Game &, Request const &, int32_t & cost);
 	void _process_requests(Game &, RSPairStruct &);
+	void _balance_requestsupply(Game &);
+	void _handle_active_supplies(Game &);
 	void _create_requested_workers(Game &);
 	void _create_requested_worker(Game &, Ware_Index);
 

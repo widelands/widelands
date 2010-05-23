@@ -62,7 +62,6 @@ Request::Request
 	m_target_constructionsite (dynamic_cast<ConstructionSite *>(&_target)),
 	m_economy          (_target.get_economy()),
 	m_index            (index),
-	m_idle             (false),
 	m_count            (1),
 	m_callbackfn       (cbfn),
 	m_required_time    (_target.owner().egbase().get_gametime()),
@@ -147,7 +146,8 @@ void Request::Read
 				} else
 					throw wexception("request for unknown type \"%s\"", type_name);
 			}
-			m_idle              = fr.Unsigned8();
+			if (version <= 5)
+				fr.Unsigned8(); // was m_idle
 			m_count             = fr.Unsigned32();
 			m_required_time     = fr.Unsigned32();
 			m_required_interval = fr.Unsigned32();
@@ -195,7 +195,7 @@ void Request::Read
 							what_is == WARE ?
 							new Transfer(game, *this, mol.get<WareInstance>(reg)) :
 							new Transfer(game, *this, mol.get<Worker>      (reg));
-						trans->set_idle(fr.Unsigned8());
+						fr.Unsigned8(); // was: is_idle
 						m_transfers.push_back(trans);
 
 						if (version < 5)
@@ -234,8 +234,6 @@ void Request::Write
 		(m_type == WARE                          ?
 		 tribe.get_ware_descr  (m_index)->name() :
 		 tribe.get_worker_descr(m_index)->name());
-
-	fw.Unsigned8(m_idle);
 
 	fw.Unsigned32(m_count);
 
@@ -338,13 +336,6 @@ int32_t Request::get_priority (int32_t cost) const
 					 cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST);
 	}
 
-
-	if (is_idle()) //  idle requests are prioritized only by cost
-		return
-			std::max
-				(0,
-				 MAX_IDLE_PRIORITY - cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST);
-
 	if (cost > PRIORITY_MAX_COST)
 		cost = PRIORITY_MAX_COST;
 
@@ -379,23 +370,6 @@ void Request::set_economy(Economy * const e)
 		m_economy = e;
 		if (m_economy && is_open())
 			m_economy->   add_request(*this);
-	}
-}
-
-/**
- * Make a Request idle or not idle.
-*/
-void Request::set_idle(bool const idle)
-{
-	if (m_idle != idle) {
-		bool const wasopen = is_open();
-		m_idle = idle;
-		if (m_economy) { //  Idle requests are always added to the economy.
-			if       (wasopen && !is_open())
-				m_economy->remove_request(*this);
-			else if (!wasopen &&  is_open())
-				m_economy->   add_request(*this);
-		}
 	}
 }
 
@@ -471,8 +445,6 @@ void Request::start_transfer(Game & game, Supply & supp)
 		t = new Transfer(game, *this, item);
 	}
 
-	t->set_idle(m_idle);
-
 	m_transfers.push_back(t);
 	if (!is_open())
 		m_economy->remove_request(*this);
@@ -495,10 +467,8 @@ void Request::transfer_finish(Game & game, Transfer & t)
 
 	remove_transfer(find_transfer(t));
 
-	if (!m_idle) {
-		set_required_time(get_base_required_time(game, 1));
-		--m_count;
-	}
+	set_required_time(get_base_required_time(game, 1));
+	--m_count;
 
 	// the callback functions are likely to delete us,
 	// therefore we musn't access member variables behind this

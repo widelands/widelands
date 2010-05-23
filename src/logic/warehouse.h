@@ -131,6 +131,9 @@ public:
 	virtual bool attack   (Soldier &);
 	// End Attackable implementation
 
+	virtual void receive_ware(Game &, Ware_Index ware);
+	virtual void receive_worker(Game &, Worker & worker);
+
 protected:
 
 	/// Create the warehouse information window.
@@ -164,7 +167,6 @@ private:
 	void _update_all_planned_workers(Game &);
 
 	WarehouseSupply       * m_supply;
-	std::vector<Request *>  m_requests; // one idle request per ware type
 
 	// Workers who live here at the moment
 	std::vector<OPtr<Worker> > m_incorporated_workers;

@@ -54,9 +54,7 @@ struct Transfer {
 
 	Request * get_request() const {return m_request;}
 	void set_request(Request * req);
-	bool is_idle() const {return m_idle;}
-
-	void set_idle(bool idle);
+	void set_destination(PlayerImmovable & imm);
 
 	/// Called by the controlled ware or worker
 	PlayerImmovable * get_next_step(PlayerImmovable *, bool & psuccess);
@@ -82,8 +80,6 @@ private:
 	WareInstance * m_item;    ///< non-null if ware is an item
 	Worker * m_worker;  ///< non-null if ware is a worker
 	Route m_route;
-
-	bool m_idle; ///< an idle transfer can be fail()ed if the item feels like it
 };
 
 }

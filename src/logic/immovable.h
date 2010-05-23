@@ -32,6 +32,7 @@ struct Economy;
 struct Flag;
 struct Map;
 struct Tribe_Descr;
+struct WareInstance;
 class Worker;
 
 /**
@@ -238,6 +239,21 @@ struct PlayerImmovable : public BaseImmovable {
 	Workers const & get_workers() const {return m_workers;}
 
 	virtual void log_general_info(Editor_Game_Base const &);
+
+	/**
+	 * These functions are called when a ware or worker arrives at
+	 * this immovable as the destination of a transfer that does not
+	 * have an associated request.
+	 *
+	 * At the time of this writing, this happens only for warehouses.
+	 *
+	 * \note This is independent of the \ref add_worker / \ref remove_worker
+	 * functionality, which has to do with setting up locations.
+	 */
+	/*@{*/
+	virtual void receive_ware(Game &, Ware_Index ware);
+	virtual void receive_worker(Game &, Worker & worker);
+	/*@}*/
 
 protected:
 	void set_owner(Player *);

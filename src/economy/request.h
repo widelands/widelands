@@ -75,10 +75,9 @@ struct Request : public Trackable {
 	PlayerImmovable & target() const throw () {return m_target;}
 	Ware_Index get_index() const {return m_index;}
 	int32_t get_type() const {return m_type;}
-	bool is_idle() const {return m_idle;}
 	uint32_t get_count() const {return m_count;}
 	uint32_t get_open_count() const {return m_count - m_transfers.size();}
-	bool is_open() const {return m_idle || m_transfers.size() < m_count;}
+	bool is_open() const {return m_transfers.size() < m_count;}
 	Economy * get_economy() const throw () {return m_economy;}
 	int32_t get_required_time() const;
 	int32_t get_last_request_time() const {return m_last_request_time;}
@@ -87,7 +86,6 @@ struct Request : public Trackable {
 	Flag & target_flag() const;
 
 	void set_economy(Economy *);
-	void set_idle(bool idle);
 	void set_count(uint32_t);
 	void set_required_time(int32_t time);
 	void set_required_interval(int32_t interval);
@@ -95,7 +93,6 @@ struct Request : public Trackable {
 	void set_last_request_time(int32_t const time) {m_last_request_time = time;}
 
 	void start_transfer(Game &, Supply &);
-
 
 	void Read (FileRead  &, Game &, Map_Map_Object_Loader &);
 	void Write(FileWrite &, Game &, Map_Map_Object_Saver  &) const;
@@ -131,7 +128,6 @@ private:
 
 	Economy         * m_economy;
 	Ware_Index        m_index;             //  the index of the ware descr
-	bool              m_idle;
 	uint32_t          m_count;             //  how many do we need in total
 
 	callback_t        m_callbackfn;        //  called on request success

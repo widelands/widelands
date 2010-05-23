@@ -19,6 +19,8 @@
 
 #include "economy.h"
 
+#include <boost/bind.hpp>
+
 // Package includes
 #include "flag.h"
 #include "route.h"
@@ -66,7 +68,7 @@ Economy::Economy(Player & player) :
 		m_worker_target_quantities[i.value()] = tq;
 	}
 
-	m_router = new Router();
+	m_router = new Router(boost::bind(&Economy::_reset_all_pathfinding_cycles, this));
 }
 
 Economy::~Economy()
@@ -177,11 +179,94 @@ bool Economy::find_route
 
 	Map & map = owner().egbase().map();
 
-	std::vector<RoutingNode *> & nodes =
-		*reinterpret_cast<std::vector<RoutingNode *> *>(&m_flags);
-
 	return
-		m_router->find_route(start, end, route, wait, cost_cutoff, map, nodes);
+		m_router->find_route(start, end, route, wait, cost_cutoff, map);
+}
+
+/**
+ * Find the warehouse closest to the given starting flag.
+ *
+ * If the search was successful and \p route is non-null, a route is also computed.
+ *
+ * \param start starting flag
+ * \param is_ware whether to path-find as if the path were for a ware
+ * \param route if non-null, fill in a route to the warehouse
+ * \param cost_cutoff if positive, find paths of at most that length (in milliseconds)
+ */
+Warehouse * Economy::find_closest_warehouse(Flag & start, bool is_ware, Route * route, uint32_t cost_cutoff)
+{
+	if (!warehouses().size())
+		return 0;
+
+	// Perform a simple Dijkstra
+	// FIXME Find a good way to share code with Router::find_route
+	uint32_t mpf_cycle = m_router->assign_cycle();
+	RoutingNode::Queue open;
+
+	start.mpf_cycle = mpf_cycle;
+	start.mpf_realcost = 0;
+	start.mpf_backlink = 0;
+	start.mpf_estimate = 0;
+	open.push(&start);
+
+	while (!open.empty()) {
+		RoutingNode * current = open.top();
+		open.pop(current);
+
+		if (cost_cutoff && current->mpf_realcost > static_cast<int32_t>(cost_cutoff))
+			return 0;
+
+		Flag & flag = current->base_flag();
+		if (upcast(Warehouse, warehouse, flag.get_building())) {
+			if (route) {
+				route->init(current->mpf_realcost);
+
+				while (current) {
+					route->insert_as_first(current);
+					current = current->mpf_backlink;
+				}
+			}
+
+			return warehouse;
+		}
+
+		// Loop through all neighbouring nodes
+		RoutingNodeNeighbours neighbours;
+
+		current->get_neighbours(neighbours);
+
+		for (uint32_t i = 0; i < neighbours.size(); ++i) {
+			RoutingNode & neighbour = *neighbours[i].get_neighbour();
+			int32_t cost;
+
+			// We have already found the best path to this neighbour, no need to visit it again.
+			if (neighbour.mpf_cycle == mpf_cycle && !neighbour.cookie().is_active())
+				continue;
+
+			cost = current->mpf_realcost + neighbours[i].get_cost();
+			if (is_ware) {
+				cost +=
+					(current->get_waitcost() + neighbour.get_waitcost())
+					* neighbours[i].get_cost() / 2;
+			}
+
+			if (neighbour.mpf_cycle != mpf_cycle) {
+				// add to open list
+				neighbour.mpf_cycle = mpf_cycle;
+				neighbour.mpf_realcost = cost;
+				neighbour.mpf_estimate = 0;
+				neighbour.mpf_backlink = current;
+				open.push(&neighbour);
+			} else if (cost < neighbour.mpf_realcost) {
+				// found a better path to a field that's already Open
+				neighbour.mpf_realcost = cost;
+				neighbour.mpf_backlink = current;
+				open.decrease_key(&neighbour);
+			}
+		}
+	}
+
+	return 0;
 }
 
 
@@ -229,6 +314,15 @@ void Economy::_remove_flag(Flag & flag)
 			return m_flags.pop_back();
 		}
 	throw wexception("trying to remove nonexistent flag");
+}
+
+/**
+ * Callback for the incredibly rare case that the \ref Router pathfinding cycle wraps around.
+ */
+void Economy::_reset_all_pathfinding_cycles()
+{
+	container_iterate(Flags, m_flags, i)
+		(*i.current)->reset_path_finding_cycle();
 }
 
 /**
@@ -596,10 +690,6 @@ Supply * Economy::_find_best_supply
 	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
 		Supply & supp = m_supplies[i];
 
-		// idle requests only get active supplies
-		if (req.is_idle() and not supp.is_active())
-			continue;
-
 		// Check requirements
 		if (!supp.nr_supplies(game, req))
 			continue;
@@ -682,9 +772,6 @@ struct RSPairStruct {
 */
 void Economy::_process_requests(Game & game, RSPairStruct & s)
 {
-	//  TODO This function should be called from time to time.
-	_create_requested_workers (game);
-
 	container_iterate_const(RequestList, m_requests, i) {
 		Request & req = **i.current;
 
@@ -703,7 +790,7 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 		if (!supp)
 			continue;
 
-		if (!req.is_idle() and not supp->is_active()) {
+		if (!supp->is_active()) {
 			// Calculate the time the building will be forced to idle waiting
 			// for the request
 			int32_t const idletime =
@@ -745,6 +832,45 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 }
 
 /**
+ * Try to fulfill open requests with available supplies.
+ */
+void Economy::_balance_requestsupply(Game & game)
+{
+	RSPairStruct rsps;
+	rsps.nexttimer = -1;
+
+	//  Try to fulfill Requests.
+	_process_requests(game, rsps);
+
+	//  Now execute request/supply pairs.
+	while (rsps.queue.size()) {
+		RequestSupplyPair rsp = rsps.queue.top();
+
+		rsps.queue.pop();
+
+		if
+			(!rsp.request                ||
+			 !rsp.supply                 ||
+			 !_has_request(*rsp.request) ||
+			 !rsp.supply->nr_supplies(game, *rsp.request))
+		{
+			rsps.nexttimer = 200;
+			continue;
+		}
+
+		rsp.request->start_transfer(game, *rsp.supply);
+		rsp.request->set_last_request_time(game.get_gametime());
+
+		//  for multiple wares
+		if (rsp.request && _has_request(*rsp.request))
+			rsps.nexttimer = 200;
+	}
+
+	if (rsps.nexttimer > 0) //  restart the timer, if necessary
+		_start_request_timer(rsps.nexttimer);
+}
+
+/**
  * Check whether there is a supply for the given request. If the request is a worker
  * request without supply, attempt to create a new worker in a warehouse.
  */
@@ -755,7 +881,7 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	container_iterate_const(RequestList, m_requests, j) {
 		const Request & req = **j.current;
 
-		if (req.is_idle() || req.get_type() != Request::WORKER || req.get_index() != index)
+		if (req.get_type() != Request::WORKER || req.get_index() != index)
 			continue;
 
 		// need to check for each request separately, because esp. soldier requests
@@ -859,48 +985,64 @@ void Economy::_create_requested_workers(Game & game)
 }
 
 /**
+ * Send all active supplies (wares that are outside on the road network without
+ * being sent to a specific request) to a warehouse.
+ */
+void Economy::_handle_active_supplies(Game & game)
+{
+	if (!warehouses().size())
+		return;
+
+	typedef std::vector<std::pair<Supply*, Warehouse*> > Assignments;
+	Assignments assignments;
+
+	for(uint32_t idx = 0; idx < m_supplies.get_nrsupplies(); ++idx) {
+		Supply & supply = m_supplies[idx];
+		if (supply.has_storage())
+			continue;
+
+		Warehouse * wh = find_closest_warehouse(supply.get_position(game)->base_flag());
+
+		if (!wh) {
+			log("Warning: Economy::_handle_active_supplies didn't find warehouse\n");
+			return;
+		}
+
+		assignments.push_back(std::make_pair(&supply, wh));
+	}
+
+	// Actually start with the transfers in a separate second phase,
+	// to avoid potential future problems caused by the m_supplies changing
+	// under us in some way.
+	::StreamWrite & ss = game.syncstream();
+	ss.Unsigned32(0x02decafa); // appears as facade02 in sync stream
+	ss.Unsigned32(assignments.size());
+
+	container_iterate_const(Assignments, assignments, it) {
+		ss.Unsigned32(it.current->first->get_position(game)->serial());
+		ss.Unsigned32(it.current->second->serial());
+
+		it.current->first->send_to_storage(game, it.current->second);
+	}
+}
+
+/**
  * Balance Requests and Supplies by collecting and weighing pairs, and
  * starting transfers for them.
 */
-void Economy::balance_requestsupply(uint32_t const timerid)
+void Economy::balance(uint32_t const timerid)
 {
 	if (m_request_timerid != timerid)
 		return;
 	++m_request_timerid;
 
-	RSPairStruct rsps;
-	rsps.nexttimer = -1;
-
-	//  Try to fulfill non-idle Requests.
 	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
-	_process_requests(game, rsps);
 
-	//  Now execute request/supply pairs.
-	while (rsps.queue.size()) {
-		RequestSupplyPair rsp = rsps.queue.top();
+	_create_requested_workers (game);
 
-		rsps.queue.pop();
+	_balance_requestsupply(game);
 
-		if
-			(!rsp.request                ||
-			 !rsp.supply                 ||
-			 !_has_request(*rsp.request) ||
-			 !rsp.supply->nr_supplies(game, *rsp.request))
-		{
-			rsps.nexttimer = 200;
-			continue;
-		}
-
-		rsp.request->start_transfer(game, *rsp.supply);
-		rsp.request->set_last_request_time(game.get_gametime());
-
-		//  for multiple wares
-		if (rsp.request && _has_request(*rsp.request))
-			rsps.nexttimer = 200;
-	}
-
-	if (rsps.nexttimer > 0) //  restart the timer, if necessary
-		_start_request_timer(rsps.nexttimer);
+	_handle_active_supplies(game);
 }
 
 }

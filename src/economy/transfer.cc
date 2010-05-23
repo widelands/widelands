@@ -41,8 +41,7 @@ Transfer::Transfer(Game & game, Request & req, WareInstance & it) :
 	m_request(&req),
 	m_destination(&req.target()),
 	m_item(&it),
-	m_worker(0),
-	m_idle(false)
+	m_worker(0)
 {
 	m_item->set_transfer(game, *this);
 }
@@ -52,37 +51,30 @@ Transfer::Transfer(Game & game, Request & req, Worker & w) :
 	m_request(&req),
 	m_destination(&req.target()),
 	m_item(0),
-	m_worker(&w),
-	m_idle(false)
+	m_worker(&w)
 {
 	m_worker->start_task_transfer(game, this);
 }
 
 /**
  * Create a transfer without linking it into the given ware instance and without a request.
- *
- * This is used for loading savegames.
  */
 Transfer::Transfer(Game & game, WareInstance & w) :
 	m_game(game),
 	m_request(0),
 	m_item(&w),
-	m_worker(0),
-	m_idle(false)
+	m_worker(0)
 {
 }
 
 /**
  * Create a transfer without linking it into the given worker and without a request.
- *
- * This is used for loading savegames.
  */
 Transfer::Transfer(Game & game, Worker & w) :
 	m_game(game),
 	m_request(0),
 	m_item(0),
-	m_worker(&w),
-	m_idle(false)
+	m_worker(&w)
 {
 }
 
@@ -121,17 +113,18 @@ void Transfer::set_request(Request * req)
 }
 
 /**
- * An idle transfer can be fail()ed by the controlled item whenever a better
- * Request is available.
-*/
-void Transfer::set_idle(bool idle)
+ * Set the destination for a transfer that has no associated \ref Request.
+ */
+void Transfer::set_destination(PlayerImmovable& imm)
 {
-	m_idle = idle;
+	assert(!m_request);
+
+	m_destination = &imm;
 }
 
 /**
  * Determine where we should be going from our current location.
-*/
+ */
 PlayerImmovable * Transfer::get_next_step
 	(PlayerImmovable * const location, bool & success)
 {
@@ -200,24 +193,42 @@ PlayerImmovable * Transfer::get_next_step
 
 /**
  * Transfer finished successfully.
- * This Transfer object will be deleted indirectly by finish().
+ * This Transfer object will be deleted.
  * The caller might be destroyed, too.
  */
 void Transfer::has_finished()
 {
-	if (m_request)
+	if (m_request) {
 		m_request->transfer_finish(m_game, *this);
+	} else {
+		PlayerImmovable * destination = m_destination.get(m_game);
+		if (!destination)
+			throw wexception("Transfer: claims to have finished successfully, but destination is gone");
+
+		if (m_worker) {
+			destination->receive_worker(m_game, *m_worker);
+			m_worker = 0;
+		} else {
+			destination->receive_ware(m_game, m_item->descr_index());
+			m_item->destroy(m_game);
+			m_item = 0;
+		}
+
+		delete this;
+	}
 }
 
 /**
  * Transfer failed for reasons beyond our control.
- * This Transfer object will be deleted indirectly by
- * m_request->transfer_fail().
+ * This Transfer object will be deleted.
 */
 void Transfer::has_failed()
 {
-	if (m_request)
+	if (m_request) {
 		m_request->transfer_fail(m_game, *this);
+	} else {
+		delete this;
+	}
 }
 
 void Transfer::tlog(char const * const fmt, ...)
@@ -262,7 +273,6 @@ void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
 		throw wexception("unhandled/unknown transfer version %u", version);
 
 	rd.destination = fr.Unsigned32();
-	m_idle = fr.Unsigned8();
 }
 
 void Transfer::read_pointers(Map_Map_Object_Loader & mol, const Widelands::Transfer::ReadData & rd)
@@ -275,7 +285,6 @@ void Transfer::write(Map_Map_Object_Saver& mos, FileWrite& fw)
 {
 	fw.Unsigned8(TRANSFER_SAVEGAME_VERSION);
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(m_game)));
-	fw.Unsigned8(m_idle);
 	// not saving route right now, will be recaculated anyway
 }
 

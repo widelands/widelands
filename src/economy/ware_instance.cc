@@ -33,6 +33,7 @@
 #include "request.h"
 #include "wexception.h"
 #include "upcast.h"
+#include <sys/socket.h>
 
 namespace Widelands {
 
@@ -51,6 +52,8 @@ struct IdleWareSupply : public Supply {
 	//  implementation of Supply
 	virtual PlayerImmovable * get_position(Game &);
 	virtual bool is_active() const throw ();
+	virtual bool has_storage() const throw ();
+	virtual void send_to_storage(Game &, Warehouse* wh);
 
 	virtual uint32_t nr_supplies(Game const &, Request const &) const;
 	virtual WareInstance & launch_item(Game &, Request const &);
@@ -108,9 +111,14 @@ PlayerImmovable * IdleWareSupply::get_position(Game & game)
 	return 0;
 }
 
-bool IdleWareSupply::is_active()  const throw ()
+bool IdleWareSupply::is_active() const throw ()
 {
-	return not m_ware.is_moving();
+	return true;
+}
+
+bool IdleWareSupply::has_storage()  const throw ()
+{
+	return m_ware.is_moving();
 }
 
 uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
@@ -143,6 +151,15 @@ WareInstance & IdleWareSupply::launch_item(Game &, Request const & req) {
 Worker & IdleWareSupply::launch_worker(Game &, Request const &)
 {
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
+}
+
+void IdleWareSupply::send_to_storage(Game & game, Warehouse* wh)
+{
+	assert(!has_storage());
+
+	Transfer * t = new Transfer(game, m_ware);
+	t->set_destination(*wh);
+	m_ware.set_transfer(game, *t);
 }
 
 
@@ -282,7 +299,7 @@ void WareInstance::update(Game & game)
 	}
 
 	// Update whether we have a Supply or not
-	if (!m_transfer || m_transfer->is_idle()) {
+	if (!m_transfer || !m_transfer->get_request()) {
 		if (!m_supply)
 			m_supply = new IdleWareSupply(*this);
 	} else {
@@ -470,7 +487,7 @@ void WareInstance::Loader::load_finish()
 	Map_Object::Loader::load_finish();
 
 	WareInstance & ware = get<WareInstance>();
-	if (!ware.m_transfer || ware.m_transfer->is_idle()) {
+	if (!ware.m_transfer || !ware.m_transfer->get_request()) {
 		if (!ware.m_supply)
 			ware.m_supply = new IdleWareSupply(ware);
 	}
