@@ -58,7 +58,7 @@ m_pit               (pit)
 			 	 24U),
 			 12U);
 
-	m_tabpanel.set_snapparent(true);
+	set_center_panel(&m_tabpanel);
 
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_bobs; ++j) {
@@ -84,7 +84,6 @@ m_pit               (pit)
 			cur_x = 0;
 			pos   = Point(5, 15);
 			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
-			box->layout();
 			m_tabpanel.add("icons", tab_icon, box);
 		}
 
@@ -109,7 +108,6 @@ m_pit               (pit)
 	}
 
 	m_tabpanel.activate(0);
-	m_tabpanel.layout();
 }
 
 

@@ -28,32 +28,42 @@ namespace UI {
 
 /**
  * This defines a non responsive (to clicks) text area, where a text
- * can easily be printed
+ * can easily be printed.
+ *
+ * Textareas can operate in auto-move mode or in layouted mode.
+ *
+ * In auto-move mode, which is selected by constructors that take x/y coordinates
+ * as parameters, the given (x,y) is used as the anchor for the text.
+ * The panel automatically changes its size and position so that the
+ * given (x,y) always stay the anchor point. This is incompatible with
+ * using the Textarea in a layouted situation, e.g. inside \ref Box.
+ *
+ * In layouted mode, which is selected by the constructor that does not
+ * take coordinates, the textarea simply sets its desired size
+ * appropriately for the contained text.
+ *
+ * A multiline Textarea differs from a \ref Multiline_Textarea in that
+ * the latter provides scrollbars.
  */
 struct Textarea : public Panel {
-
-	/**
-	 * For non-multiline textareas, the dimensions are set automatically,
-	 * depending on the text. For multiline textareas, only the height and
-	 * vertical position is adjusted automatically. A multiline Textarea differs
-	 * from a Multiline_Textarea in that Multiline_Textarea provides scrollbars.
-	 */
 	Textarea
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 std::string const & text = std::string(),
 		 Align align = Align_Left, bool multiline = false);
-
 	Textarea
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 Align align = Align_Left, bool multiline = false);
-
 	Textarea
 		(Panel *  const parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 const std::string & text,
 		 Align align = Align_Left, bool multiline = false);
+	Textarea
+		(Panel * parent,
+		 const std::string & text = std::string(),
+		 Align align = Align_Left, bool multiline = false, uint32_t width = 0);
 
 	void set_text(const std::string &);
 	std::string get_text();
@@ -62,19 +72,16 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget &);
 
-	void set_font(std::string const & name, int32_t size, RGBColor fg) {
-		collapse();
-		m_fontname = name;
-		m_fontsize = size;
-		m_fcolor   = fg;
-		set_text(m_text);
-		expand();
-	}
+	void set_font(std::string const & name, int32_t size, RGBColor fg);
+
+protected:
+	virtual void update_desired_size();
 
 private:
 	void collapse();
 	void expand();
 
+	bool m_layoutmode;
 	std::string m_text;
 	Align       m_align;
 	bool        m_multiline;

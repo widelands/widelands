@@ -39,7 +39,7 @@ UI::UniqueWindow(&plr, "stock_menu", &registry, 640, 480, _("Stock")),
 m_player(plr)
 {
 	UI::Tab_Panel * tabs = new UI::Tab_Panel(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
-	tabs->set_snapparent(true);
+	set_center_panel(tabs);
 
 	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
 	tabs->add

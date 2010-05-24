@@ -93,7 +93,7 @@ private:
 
 SoldierPanel::SoldierPanel(UI::Panel & parent, Widelands::Editor_Game_Base & egbase, Widelands::Building & building)
 :
-Panel(&parent, 0, 0, 1, 1),
+Panel(&parent, 0, 0, 0, 0),
 m_egbase(egbase),
 m_soldiers(*dynamic_cast<SoldierControl*>(&building)),
 m_last_animate_time(0)
@@ -111,7 +111,8 @@ m_last_animate_time(0)
 		m_rows = (maxcapacity + m_cols - 1) / m_cols;
 	}
 
-	set_inner_size(m_cols * m_icon_width, m_rows * m_icon_height);
+	set_size(m_cols * m_icon_width, m_rows * m_icon_height);
+	set_desired_size(m_cols * m_icon_width, m_rows * m_icon_height);
 	set_think(true);
 
 	// Initialize the icons
@@ -334,7 +335,7 @@ UI::Box(&parent, 0, 0, UI::Box::Vertical),
 m_igb(igb),
 m_building(building),
 m_soldierpanel(*this, igb.egbase(), building),
-m_infotext(this, 0, 0, _("Click soldier to send away"))
+m_infotext(this, _("Click soldier to send away"))
 {
 	add(&m_soldierpanel, UI::Box::AlignCenter);
 
