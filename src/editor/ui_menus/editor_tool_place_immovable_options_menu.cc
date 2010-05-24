@@ -92,7 +92,7 @@ m_pit     (pit)
 			 g_gr->get_picture
 			 	(PicMod_Game, world.get_immovable_descr(i)->get_picture()));
 
-		cb.set_size(width, height);
+		cb.set_desired_size(width, height);
 		cb.set_id(i);
 		cb.set_state(m_pit.is_enabled(i));
 		cb.changedtoid.set

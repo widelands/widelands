@@ -95,7 +95,7 @@ m_pit               (pit)
 			 g_gr->get_picture(PicMod_Game, descr.get_picture()),
 			 critter_descr ? critter_descr->descname() : std::string());
 
-		cb.set_size(width, height);
+		cb.set_desired_size(width, height);
 		cb.set_id(i);
 		cb.set_state(m_pit.is_enabled(i));
 		cb.changedtoid.set(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);

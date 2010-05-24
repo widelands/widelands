@@ -96,6 +96,7 @@ struct Panel : public Object {
 
 	// Geometry
 	virtual void set_size(uint32_t nw, uint32_t nh);
+	void set_desired_size(uint32_t w, uint32_t h);
 	void set_pos(Point);
 	virtual void move_inside_parent();
 	virtual void layout();
@@ -227,7 +228,6 @@ protected:
 	void die();
 	bool keyboard_free() {return !(_focus);}
 
-	void set_desired_size(uint32_t w, uint32_t h);
 	virtual void update_desired_size();
 
 	static void play_click();
