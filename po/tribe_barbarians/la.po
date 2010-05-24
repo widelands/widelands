@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-21 19:30+0000\n"
+"PO-Revision-Date: 2010-05-23 08:21+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-22 03:53+0000\n"
+"X-Launchpad-Export-Date: 2010-05-24 03:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -297,6 +297,8 @@ msgid ""
 "Fire-hardened wood, as hard as iron and cannot burn, used for military "
 "buildings."
 msgstr ""
+"Igne duratum lignum, quod est ferro durum et ignem concipere non potest, pro "
+"militaribus aedificiis construendis necesse est."
 
 #: ../../tribes/barbarians/conf:81
 msgid "Fish"
@@ -450,6 +452,7 @@ msgstr ""
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 msgstr ""
+"Quo modo cibus, gustatio, cena coquuntur, nisi culinaria instrumenta?"
 
 #: ../../tribes/barbarians/conf:135
 msgid "Hunter"
@@ -637,7 +640,7 @@ msgstr "Hasta venatoris fabricat."
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr ""
+msgstr "Culinaria instrumenta fabricat."
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
@@ -645,7 +648,7 @@ msgstr "Larvam fabricat."
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr ""
+msgstr "Cenam coquit."
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
@@ -741,7 +744,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:51
 msgid "Reed medium"
-msgstr ""
+msgstr "Cannae mediocres"
 
 #: ../../tribes/barbarians/conf:54
 msgid "Reed ripe"
@@ -908,7 +911,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "Venator carnem bonum ad colonos portat."
 
 #: ../../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
@@ -954,6 +957,8 @@ msgid ""
 "The peel is a tool of the baker and each baker needs his own. It is produced "
 "in the metal works like all other tools."
 msgstr ""
+"Pala est instrumentum pistoris, quisque pistor una utitur. Sicut omnia "
+"instrumenta in fabrica fit."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
