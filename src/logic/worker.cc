@@ -1205,8 +1205,8 @@ Ware_Index Worker::level(Game & game) {
  * Set a fallback task.
  */
 void Worker::init_auto_task(Game & game) {
-	if (get_location(game)) {
-		if (get_economy()->warehouses().size())
+	if (PlayerImmovable * location = get_location(game)) {
+		if (get_economy()->warehouses().size() || location->get_type() == BUILDING)
 			return start_task_gowarehouse(game);
 
 		set_location(0);
@@ -1792,6 +1792,11 @@ void Worker::gowarehouse_update(Game & game, State & state)
 		return start_task_transfer(game, t);
 	}
 
+	// Always leave buildings in an orderly manner,
+	// even when no warehouses are left to return to
+	if (location->get_type() == BUILDING && get_position() == static_cast<Building*>(location)->get_position())
+		return start_task_leavebuilding(game, true);
+
 	if (!get_economy()->warehouses().size()) {
 		molog("[gowarehouse]: No warehouse left in Economy\n");
 		return pop_task(game);
@@ -1804,6 +1809,7 @@ void Worker::gowarehouse_update(Game & game, State & state)
 	// flag is removed or a warehouse connects to the Economy).
 	if (!m_supply)
 		m_supply = new IdleWorkerSupply(*this);
+
 	return start_task_idle(game, get_animation("idle"), 1000);
 }
 
