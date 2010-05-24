@@ -389,6 +389,7 @@ void ConstructionSite::request_builder_callback
 	cs.m_builder_request = 0;
 
 	w->start_task_buildingwork(game);
+	cs.set_seeing(true);
 }
 
 
