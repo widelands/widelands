@@ -60,7 +60,7 @@ void Box::set_scrolling(bool scroll)
 		return;
 
 	m_scrolling = scroll;
-	layout();
+	update_desired_size();
 }
 
 /**
@@ -177,6 +177,9 @@ void Box::update_positions()
 
 	uint32_t totaldepth = 0;
 	uint32_t totalbreadth = m_orientation == Horizontal ? get_h() : get_w();
+	if (m_scrollbar)
+		totalbreadth -= Scrollbar::Size;
+
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		uint32_t depth, breadth;
 		get_item_desired_size(idx, depth, breadth);

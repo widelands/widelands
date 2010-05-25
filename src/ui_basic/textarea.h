@@ -42,10 +42,19 @@ namespace UI {
  * take coordinates, the textarea simply sets its desired size
  * appropriately for the contained text.
  *
+ * Finally, there is static mode, which does not change desired or actual
+ * size in any way based on the text.
+ *
  * A multiline Textarea differs from a \ref Multiline_Textarea in that
  * the latter provides scrollbars.
  */
 struct Textarea : public Panel {
+	enum LayoutMode {
+		AutoMove,
+		Layouted,
+		Static
+	};
+
 	Textarea
 		(Panel * parent,
 		 int32_t x, int32_t y,
@@ -65,6 +74,8 @@ struct Textarea : public Panel {
 		 const std::string & text = std::string(),
 		 Align align = Align_Left, bool multiline = false, uint32_t width = 0);
 
+	void set_layout_mode(LayoutMode lm);
+	void set_fixed_size(const std::string & text);
 	void set_text(const std::string &);
 	std::string get_text();
 	void set_align(Align);
@@ -81,7 +92,7 @@ private:
 	void collapse();
 	void expand();
 
-	bool m_layoutmode;
+	LayoutMode m_layoutmode;
 	std::string m_text;
 	Align       m_align;
 	bool        m_multiline;

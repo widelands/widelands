@@ -68,12 +68,15 @@ m_increase
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, pic_up_train),
 	 &SoldierCapacityControl::click_increase, *this),
-m_value(this, _("xx"), UI::Align_Center)
+m_value(this, "", UI::Align_Center)
 {
 	add(new UI::Textarea(this, _("Capacity")), AlignCenter);
 	add(&m_decrease, AlignCenter);
 	add(&m_value, AlignCenter);
 	add(&m_increase, AlignCenter);
+
+	m_value.set_layout_mode(UI::Textarea::Static);
+	m_value.set_fixed_size("199");
 
 	m_decrease.set_repeating(true);
 	m_increase.set_repeating(true);
