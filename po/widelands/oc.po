@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 10:19+0200\n"
-"PO-Revision-Date: 2010-05-23 20:40+0000\n"
+"PO-Revision-Date: 2010-05-24 07:58+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-05-24 03:43+0000\n"
+"X-Launchpad-Export-Date: 2010-05-25 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -223,7 +223,7 @@ msgstr "Error de donadas del jòc"
 
 #: ../../src/wlapplication.cc:1561
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "Error inesperada pendent lo jòc"
 
 #: ../../src/wlapplication.cc:1565
 msgid ""
@@ -244,7 +244,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1680
 msgid "Connection timeouted"
-msgstr ""
+msgstr "Relambi de connexion depassat"
 
 #: ../../src/wlapplication.cc:1682
 msgid ""
@@ -259,20 +259,20 @@ msgstr "Problèma de connexion"
 
 #: ../../src/wlapplication.cc:1706
 msgid "Widelands has not been able to connect to the host."
-msgstr ""
+msgstr "Widelands a pas capitat de contactar l'òste."
 
 #: ../../src/wlapplication.cc:1752
 msgid "The address of the game server is invalid"
-msgstr ""
+msgstr "L'adreça del servidor del jòc es incorrècta"
 
 #: ../../src/wlapplication.cc:1857 ../../src/network/nethost.cc:1208
 msgid "Player"
-msgstr ""
+msgstr "Jogaire"
 
 #: ../../src/wlapplication.cc:2008 ../../src/network/netclient.cc:179
 #: ../../src/network/nethost.cc:441
 msgid "Preparing game"
-msgstr ""
+msgstr "Preparacion de la partida"
 
 #: ../../src/wlapplication.cc:2115
 msgid "End of replay"
@@ -287,83 +287,83 @@ msgstr ""
 #: ../../src/wlapplication.cc:2197 ../../src/logic/game.cc:357
 #: ../../src/logic/game.cc:396
 msgid "Loading..."
-msgstr ""
+msgstr "Cargament en cors..."
 
 #: ../../src/writeHTML.cc:43
 msgid "Requesters"
-msgstr ""
+msgstr "Demandaires"
 
 #: ../../src/writeHTML.cc:58
 msgid "Providers"
-msgstr ""
+msgstr "Provesidors"
 
 #: ../../src/writeHTML.cc:73
 msgid "Successors"
-msgstr ""
+msgstr "Successors"
 
 #: ../../src/writeHTML.cc:88
 msgid "Predecessors"
-msgstr ""
+msgstr "Predecessors"
 
 #: ../../src/writeHTML.cc:103
 msgid "Employers"
-msgstr ""
+msgstr "Emplegaires"
 
 #: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:272
 msgid "Building types"
-msgstr ""
+msgstr "Tipes de construccion(s)"
 
 #: ../../src/writeHTML.cc:277 ../../src/writeHTML.cc:514
 #: ../../src/writeHTML.cc:1422
 msgid "Icon"
-msgstr ""
+msgstr "Icòna"
 
 #: ../../src/writeHTML.cc:279 ../../src/writeHTML.cc:516
 #: ../../src/writeHTML.cc:1424 ../../src/ui_fsmenu/netsetup_ggz.cc:143
 #: ../../src/wui/building_statistics_menu.cc:111
 #: ../../src/wui/soldierlist.cc:82
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: ../../src/writeHTML.cc:281 ../../src/wui/building_statistics_menu.cc:112
 msgid "Size"
-msgstr ""
+msgstr "Talha"
 
 #: ../../src/writeHTML.cc:283 ../../src/writeHTML.cc:518
 msgid "Buildable"
-msgstr ""
+msgstr "Constructible"
 
 #: ../../src/writeHTML.cc:285
 msgid "Enhanced"
-msgstr ""
+msgstr "Melhorat"
 
 #: ../../src/writeHTML.cc:288 ../../src/wui/buildingwindow.cc:187
 msgid "Stop"
-msgstr ""
+msgstr "Arrestar"
 
 #: ../../src/writeHTML.cc:290
 msgid "Conquer<br/>range"
-msgstr ""
+msgstr "Distància<br/>de conquèsta"
 
 #: ../../src/writeHTML.cc:292 ../../src/writeHTML.cc:520
 msgid "Vision<br/>range"
-msgstr ""
+msgstr "Distància<br/>de vista"
 
 #: ../../src/writeHTML.cc:319 ../../src/writeHTML.cc:375
 #: ../../src/logic/building.cc:511
 msgid "Mine"
-msgstr ""
+msgstr "Mina"
 
 #: ../../src/writeHTML.cc:323 ../../src/writeHTML.cc:391
 #: ../../src/logic/building.cc:512
 msgid "Small"
-msgstr ""
+msgstr "Pichon"
 
 #: ../../src/writeHTML.cc:327 ../../src/writeHTML.cc:385
 #: ../../src/logic/building.cc:513
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Medium"
-msgstr ""
+msgstr "Mejan"
 
 #: ../../src/writeHTML.cc:332 ../../src/writeHTML.cc:380
 #: ../../src/logic/building.cc:513
@@ -375,34 +375,34 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "Yes"
-msgstr ""
+msgstr "Òc"
 
 #: ../../src/writeHTML.cc:336 ../../src/writeHTML.cc:339
 #: ../../src/ui_basic/messagebox.cc:105
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: ../../src/writeHTML.cc:354
 msgid "building_types.xhtml"
-msgstr ""
+msgstr "building_types.xhtml"
 
 #: ../../src/writeHTML.cc:377
 msgid "Is mine."
-msgstr ""
+msgstr "Es  mieu."
 
 #: ../../src/writeHTML.cc:382
 msgid "Is big."
-msgstr ""
+msgstr "Es grand."
 
 #: ../../src/writeHTML.cc:387
 msgid "Is medium."
-msgstr ""
+msgstr "Es mejan."
 
 #: ../../src/writeHTML.cc:393
 msgid "Is small."
-msgstr ""
+msgstr "Es pichon."
 
 #: ../../src/writeHTML.cc:400
 msgid "Is not buildable."
@@ -433,7 +433,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
-msgstr ""
+msgstr "Melhoraments"
 
 #: ../../src/writeHTML.cc:462
 #, c-format
@@ -454,15 +454,15 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:526
 msgid "Becomes"
-msgstr ""
+msgstr "Ven"
 
 #: ../../src/writeHTML.cc:581
 msgid "worker_types.xhtml"
-msgstr ""
+msgstr "worker_types.xhtml"
 
 #: ../../src/writeHTML.cc:588
 msgid "Combat Properties"
-msgstr ""
+msgstr "Proprietats de combat"
 
 #: ../../src/writeHTML.cc:595
 #, c-format
@@ -491,7 +491,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:671 ../../src/writeHTML.cc:682
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "creacion de %s"
 
 #: ../../src/writeHTML.cc:693
 msgid "Spawns in warehouses."
@@ -505,20 +505,20 @@ msgstr ""
 #: ../../src/writeHTML.cc:710
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "promocion de %s"
 
 #: ../../src/writeHTML.cc:721 ../../src/writeHTML.cc:866
 msgid "Programs"
-msgstr ""
+msgstr "Programas"
 
 #: ../../src/writeHTML.cc:758 ../../src/writeHTML.cc:1301
 #: ../../src/logic/building.cc:506
 msgid "mine"
-msgstr ""
+msgstr "mina"
 
 #: ../../src/writeHTML.cc:759
 msgid "breed"
-msgstr ""
+msgstr "raça"
 
 #: ../../src/writeHTML.cc:760
 msgid "createitem"
@@ -526,7 +526,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:761
 msgid "setdescription"
-msgstr ""
+msgstr "definirdescripcion"
 
 #: ../../src/writeHTML.cc:762
 msgid "setbobdescription"
@@ -546,19 +546,19 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:766
 msgid "animation"
-msgstr ""
+msgstr "animacion"
 
 #: ../../src/writeHTML.cc:767 ../../src/writeHTML.cc:906
 msgid "return"
-msgstr ""
+msgstr "retorn"
 
 #: ../../src/writeHTML.cc:768
 msgid "object"
-msgstr ""
+msgstr "objècte"
 
 #: ../../src/writeHTML.cc:769
 msgid "plant"
-msgstr ""
+msgstr "planta"
 
 #: ../../src/writeHTML.cc:770
 msgid "create_bob"
@@ -570,7 +570,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:772
 msgid "geologist"
-msgstr ""
+msgstr "geològ"
 
 #: ../../src/writeHTML.cc:773
 msgid "geologist_find"
@@ -582,17 +582,17 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:775
 msgid "UNKNOWN"
-msgstr ""
+msgstr "DESCONEGUT"
 
 #: ../../src/writeHTML.cc:782
 msgid "Production"
-msgstr ""
+msgstr "Produccion"
 
 #: ../../src/writeHTML.cc:786 ../../src/wui/general_statistics_menu.cc:145
 #: ../../src/wui/productionsitewindow.cc:81
 #: ../../src/wui/warehousewindow.cc:56
 msgid "Workers"
-msgstr ""
+msgstr "Obrièrs"
 
 #: ../../src/writeHTML.cc:797
 #, c-format
@@ -601,21 +601,21 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:807
 msgid "Inputs"
-msgstr ""
+msgstr "Entradas"
 
 #: ../../src/writeHTML.cc:818
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "entradas de %s"
 
 #: ../../src/writeHTML.cc:830
 msgid "Output"
-msgstr ""
+msgstr "Sortidas"
 
 #: ../../src/writeHTML.cc:841 ../../src/writeHTML.cc:855
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "sortidas de %s"
 
 #: ../../src/writeHTML.cc:902 ../../src/writeHTML.cc:1045
 #: ../../src/writeHTML.cc:1107 ../../src/writeHTML.cc:1135
@@ -633,27 +633,27 @@ msgstr ""
 #: ../../src/writeHTML.cc:910 ../../src/logic/production_program.cc:389
 #: ../../src/logic/production_program.cc:746
 msgid "failed"
-msgstr ""
+msgstr "Pas capitat"
 
 #: ../../src/writeHTML.cc:911 ../../src/logic/production_program.cc:390
 msgid "completed"
-msgstr ""
+msgstr "acabat"
 
 #: ../../src/writeHTML.cc:912 ../../src/logic/production_program.cc:390
 msgid "skipped"
-msgstr ""
+msgstr "ignorat"
 
 #: ../../src/writeHTML.cc:917
 msgid "and"
-msgstr ""
+msgstr "e"
 
 #: ../../src/writeHTML.cc:918
 msgid "when"
-msgstr ""
+msgstr "quand"
 
 #: ../../src/writeHTML.cc:920
 msgid "or"
-msgstr ""
+msgstr "o"
 
 #: ../../src/writeHTML.cc:921
 msgid "unless"
@@ -661,15 +661,15 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:952 ../../src/writeHTML.cc:974
 msgid "economy"
-msgstr ""
+msgstr "economia"
 
 #: ../../src/writeHTML.cc:954 ../../src/writeHTML.cc:976
 msgid "needs"
-msgstr ""
+msgstr "demandas"
 
 #: ../../src/writeHTML.cc:994
 msgid "site"
-msgstr ""
+msgstr "site"
 
 #: ../../src/writeHTML.cc:996
 msgid "has"

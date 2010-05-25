@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-23 20:57+0000\n"
+"PO-Revision-Date: 2010-05-24 07:58+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-24 03:42+0000\n"
+"X-Launchpad-Export-Date: 2010-05-25 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -141,11 +141,11 @@ msgstr "Castèl"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
-msgstr ""
+msgstr "Vilatge fortificat"
 
 #: ../../tribes/empire/conf:70
 msgid "Chain-Armour"
-msgstr ""
+msgstr "Cotte de maille"
 
 #: ../../tribes/empire/conf:183
 msgid "Charcoal Burner"
@@ -157,7 +157,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:71
 msgid "Cloth"
-msgstr ""
+msgstr "Teissut"
 
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
@@ -167,19 +167,19 @@ msgstr ""
 
 #: ../../tribes/empire/conf:72
 msgid "Coal"
-msgstr ""
+msgstr "Carbon"
 
 #: ../../tribes/empire/conf:185
 msgid "Coal Mine"
-msgstr ""
+msgstr "Mina de carbon"
 
 #: ../../tribes/empire/conf:147
 msgid "Colosseum"
-msgstr ""
+msgstr "Colisèu"
 
 #: ../../tribes/empire/conf:144
 msgid "Construction Site"
-msgstr ""
+msgstr "Site de Construccion"
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of laying stones."
@@ -187,15 +187,15 @@ msgstr ""
 
 #: ../../tribes/empire/conf:184
 msgid "Deep Coal Mine"
-msgstr ""
+msgstr "Mine de Carbon Prigonda"
 
 #: ../../tribes/empire/conf:186
 msgid "Deep Gold Mine"
-msgstr ""
+msgstr "Mina d'Aur Prigonda"
 
 #: ../../tribes/empire/conf:188
 msgid "Deep Iron Ore Mine"
-msgstr ""
+msgstr "Mina de Fèrre Prigonda"
 
 #: ../../tribes/empire/conf:187
 msgid "Deep Marble Mine"
@@ -207,7 +207,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:46
 msgid "Destroyed building"
-msgstr ""
+msgstr "Bastiments destruches"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -219,7 +219,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:110
 msgid "Donkey"
-msgstr ""
+msgstr "Ase"
 
 #: ../../tribes/empire/conf:141
 msgid "Donkey Breeder"
@@ -231,15 +231,15 @@ msgstr ""
 
 #: ../../tribes/empire/conf:19
 msgid "Empire"
-msgstr ""
+msgstr "L'Empèri"
 
 #: ../../tribes/empire/conf:189
 msgid "Farm"
-msgstr ""
+msgstr "La Bòria"
 
 #: ../../tribes/empire/conf:121
 msgid "Farmer"
-msgstr ""
+msgstr "Borièr"
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
@@ -251,7 +251,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:41
 msgid "Field medium"
-msgstr ""
+msgstr "Camp mejan"
 
 #: ../../tribes/empire/conf:44
 msgid "Field ripe"
@@ -259,7 +259,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:42
 msgid "Field small"
-msgstr ""
+msgstr "Camp pichon"
 
 #: ../../tribes/empire/conf:43
 msgid "Field tiny"
@@ -271,15 +271,15 @@ msgstr ""
 
 #: ../../tribes/empire/conf:74
 msgid "Fish"
-msgstr ""
+msgstr "Peis"
 
 #: ../../tribes/empire/conf:122
 msgid "Fisher"
-msgstr ""
+msgstr "Pescaire"
 
 #: ../../tribes/empire/conf:190
 msgid "Fisher's House"
-msgstr ""
+msgstr "Cabana de pescaire"
 
 #: ../../tribes/empire/conf:75
 msgid "Fishing Rod"
@@ -292,7 +292,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:76
 msgid "Flour"
-msgstr ""
+msgstr "Farina"
 
 #: ../../tribes/empire/flour/conf:1
 msgid ""
@@ -301,7 +301,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:123
 msgid "Forester"
-msgstr ""
+msgstr "Silvicultor"
 
 #: ../../tribes/empire/conf:191
 msgid "Forester's House"
@@ -310,11 +310,11 @@ msgstr ""
 #: ../../tribes/empire/conf:156
 #: ../../tribes/empire/conf:170
 msgid "Fortress"
-msgstr ""
+msgstr "Fortalesa"
 
 #: ../../tribes/empire/conf:124
 msgid "Geologist"
-msgstr ""
+msgstr "Geològ"
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Gets fish out of the sea."
@@ -322,11 +322,11 @@ msgstr ""
 
 #: ../../tribes/empire/conf:77
 msgid "Gold"
-msgstr ""
+msgstr "Aur"
 
 #: ../../tribes/empire/conf:192
 msgid "Gold Mine"
-msgstr ""
+msgstr "La mina d'aur"
 
 #: ../../tribes/empire/gold/conf:1
 msgid ""
@@ -336,11 +336,11 @@ msgstr ""
 
 #: ../../tribes/empire/conf:78
 msgid "Goldstone"
-msgstr ""
+msgstr "Pepita d'aur"
 
 #: ../../tribes/empire/conf:79
 msgid "Grape"
-msgstr ""
+msgstr "Rasim"
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."
@@ -356,7 +356,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:80
 msgid "Hammer"
-msgstr ""
+msgstr "Martèl"
 
 #: ../../tribes/empire/vineyard/conf:19
 msgid "Harvest vine"
@@ -368,7 +368,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:175
 msgid "Headquarters"
-msgstr ""
+msgstr "Quartièr General"
 
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -384,7 +384,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:82
 msgid "Helmet"
-msgstr ""
+msgstr "Casc"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
@@ -400,11 +400,11 @@ msgstr ""
 
 #: ../../tribes/empire/conf:125
 msgid "Hunter"
-msgstr ""
+msgstr "Caçaire"
 
 #: ../../tribes/empire/conf:193
 msgid "Hunter's House"
-msgstr ""
+msgstr "Cabana del caçaire"
 
 #: ../../tribes/empire/conf:83
 msgid "Hunting Spear"
@@ -412,23 +412,23 @@ msgstr ""
 
 #: ../../tribes/empire/conf:194
 msgid "Inn"
-msgstr ""
+msgstr "Albèrga"
 
 #: ../../tribes/empire/conf:126
 msgid "Innkeeper"
-msgstr ""
+msgstr "Albergista"
 
 #: ../../tribes/empire/conf:84
 msgid "Iron"
-msgstr ""
+msgstr "Fèrre"
 
 #: ../../tribes/empire/conf:85
 msgid "Iron Ore"
-msgstr ""
+msgstr "Mineral de fèrre"
 
 #: ../../tribes/empire/conf:198
 msgid "Iron Ore Mine"
-msgstr ""
+msgstr "Mina de Fèrre"
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -452,15 +452,15 @@ msgstr ""
 
 #: ../../tribes/empire/conf:89
 msgid "Marble"
-msgstr ""
+msgstr "Marme"
 
 #: ../../tribes/empire/conf:88
 msgid "Marble Column"
-msgstr ""
+msgstr "Colomna de marme"
 
 #: ../../tribes/empire/conf:196
 msgid "Marble Mine"
-msgstr ""
+msgstr "Mina de Marme"
 
 #: ../../tribes/empire/marblecolumn/conf:1
 msgid ""
@@ -484,7 +484,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:91
 msgid "Meat"
-msgstr ""
+msgstr "Carn"
 
 #: ../../tribes/empire/meat/conf:1
 msgid ""
@@ -495,11 +495,11 @@ msgstr ""
 
 #: ../../tribes/empire/conf:197
 msgid "Mill"
-msgstr ""
+msgstr "Molin"
 
 #: ../../tribes/empire/conf:129
 msgid "Miller"
-msgstr ""
+msgstr "Molinièr"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
@@ -508,7 +508,7 @@ msgstr ""
 #: ../../tribes/empire/marblemine/conf:22
 #: ../../tribes/empire/quarry/conf:19
 msgid "Mine marble"
-msgstr ""
+msgstr "Mina de marme"
 
 #: ../../tribes/empire/marblemine/conf:23
 #: ../../tribes/empire/quarry/conf:20
