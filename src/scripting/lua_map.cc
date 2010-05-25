@@ -1810,6 +1810,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RW(L_Field, terr),
 	PROP_RW(L_Field, terd),
 	PROP_RW(L_Field, height),
+	PROP_RW(L_Field, raw_height),
 	PROP_RO(L_Field, viewpoint_x),
 	PROP_RO(L_Field, viewpoint_y),
 	PROP_RW(L_Field, resource),
@@ -1885,6 +1886,35 @@ int L_Field::set_height(lua_State * L) {
 
 	return 0;
 }
+
+/* RST
+	.. attribute:: raw_height
+
+		(RW The same as :prop:`height`, but setting this will not trigger a
+		recalculation of the surrounding fields. You can use this field to 
+		change the height of many fields on a map quickly, then use
+		:func:`wl.map.recalculate()` to make sure that everything is in order.
+*/
+// UNTESTED
+int L_Field::get_raw_height(lua_State * L) {
+	lua_pushuint32(L, fcoords(L).field->get_height());
+	return 1;
+}
+int L_Field::set_raw_height(lua_State * L) {
+	uint32_t height = luaL_checkuint32(L, -1);
+	FCoords f = fcoords(L);
+
+	if (f.field->get_height() == height)
+		return 0;
+
+	if (height > MAX_FIELD_HEIGHT)
+		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
+
+	f.field->set_height(height);
+
+	return 0;
+}
+
 
 /* RST
 	.. attribute:: viewpoint_x, viewpoint_y
@@ -2309,10 +2339,23 @@ int L_get_height(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. function:: recalculate()
+
+		This map recalculates the whole map state: height of fields, buildcaps
+		and so on. You only need to call this function if you changed
+		Field.raw_height in any way.
+*/
+int L_recalculate(lua_State * L) {
+	get_egbase(L).map().recalc_whole_map();
+	return 0;
+}
+
 const static struct luaL_reg wlmap [] = {
 	{"create_immovable", &L_create_immovable},
 	{"get_width", &L_get_width},
 	{"get_height", &L_get_height},
+	{"recalculate", &L_recalculate},
 	{0, 0}
 };
 
