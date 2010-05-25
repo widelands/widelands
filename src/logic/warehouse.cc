@@ -1091,6 +1091,43 @@ uint32_t Warehouse::get_planned_workers(Game & game, Ware_Index index) const
 }
 
 /**
+ * Calculate the supply of wares available to this warehouse in each of the buildcost
+ * items for the given worker.
+ *
+ * This is the current stock plus any incoming transfers.
+ */
+std::vector<uint32_t> Warehouse::calc_available_for_worker(Game & game, Ware_Index index) const
+{
+	const Worker_Descr & w_desc = *tribe().get_worker_descr(index);
+	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
+	std::vector<uint32_t> available;
+
+	container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
+		std::string const & input_name = bc.current->first;
+		if (Ware_Index id_w = tribe().ware_index(input_name)) {
+			available.push_back(get_wares().stock(id_w));
+		} else if ((id_w = tribe().worker_index(input_name))) {
+			available.push_back(get_workers().stock(id_w));
+		} else
+			throw wexception
+				("Economy::_create_requested_worker: buildcost inconsistency '%s'",
+				 input_name.c_str());
+	}
+
+	container_iterate_const(std::vector<PlannedWorkers>, m_planned_workers, i) {
+		if (i.current->index == index) {
+			assert(available.size() == i.current->requests.size());
+
+			for (uint32_t idx = 0; idx < available.size(); ++idx)
+				available[idx] += i.current->requests[idx]->get_num_transfers();
+		}
+	}
+
+	return available;
+}
+
+
+/**
  * Set the amount of workers we plan to create of the given \p index to \p amount.
  */
 void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)

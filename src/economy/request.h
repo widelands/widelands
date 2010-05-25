@@ -82,6 +82,7 @@ struct Request : public Trackable {
 	int32_t get_required_time() const;
 	int32_t get_last_request_time() const {return m_last_request_time;}
 	int32_t get_priority(int32_t cost) const;
+	uint32_t get_num_transfers() const {return m_transfers.size();}
 
 	Flag & target_flag() const;
 

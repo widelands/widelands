@@ -918,21 +918,11 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 				return;
 		}
 
-		uint32_t idx = 0;
-		container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
-			std::string const & input_name = bc.current->first;
-			uint32_t supply;
-			if (Ware_Index id_w = tribe.ware_index(input_name)) {
-				supply = wh->get_wares().stock(id_w);
-			} else if ((id_w = tribe.worker_index(input_name))) {
-				supply = wh->get_workers().stock(id_w);
-			} else
-				throw wexception
-					("Economy::_create_requested_worker: buildcost inconsistency '%s'",
-					 input_name.c_str());
+		std::vector<uint32_t> wh_available = wh->calc_available_for_worker(game, index);
+		assert(wh_available.size() == total_available.size());
 
-			total_available[idx++] += supply;
-		}
+		for(uint32_t idx = 0; idx < total_available.size(); ++idx)
+			total_available[idx] += wh_available[idx];
 	}
 
 	// Couldn't create enough workers now.
@@ -940,11 +930,11 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	// throughout the economy.
 	uint32_t can_create = std::numeric_limits<uint32_t>::max();
 	uint32_t idx = 0;
-	Worker_Descr::Buildcost::const_iterator scarcest_ware = cost.begin();
+	uint32_t scarcest_idx = 0;
 	container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
 		uint32_t cc = total_available[idx] / bc.current->second;
 		if (cc <= can_create) {
-			scarcest_ware = bc.current;
+			scarcest_idx = idx;
 			can_create = cc;
 		}
 		idx++;
@@ -965,28 +955,15 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 		}
 	} else if (total_planned < demand) {
 		uint32_t plan_goal = std::min(can_create, demand);
-		Ware_Index scarcest_index;
-		bool scarcest_isworker;
-
-		if ((scarcest_index = tribe.ware_index(scarcest_ware->first))) {
-			scarcest_isworker = false;
-		} else {
-			scarcest_index = tribe.worker_index(scarcest_ware->first);
-			scarcest_isworker = true;
-		}
 
 		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
 			Warehouse * wh = m_warehouses[n_wh];
+			uint32_t supply = wh->calc_available_for_worker(game, index)[scarcest_idx];
 
-			uint32_t supply;
-			if (scarcest_isworker)
-				supply = wh->get_workers().stock(scarcest_index);
-			else
-				supply = wh->get_wares().stock(scarcest_index);
-
+			total_planned -= wh->get_planned_workers(game, index);
 			uint32_t plan = std::min(supply, plan_goal - total_planned);
-			total_planned += plan - wh->get_planned_workers(game, index);
 			wh->plan_workers(game, index, plan);
+			total_planned += plan;
 		}
 	}
 }
