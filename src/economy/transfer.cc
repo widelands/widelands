@@ -104,9 +104,10 @@ void Transfer::set_request(Request * req)
 	assert(req);
 
 	if (&req->target() != m_destination.get(m_game)) {
-		log
-			("WARNING: Transfer::set_request req->target (%u) vs. destination (%u) mismatch\n",
-			 req->target().serial(), m_destination.serial());
+		if (m_destination.is_set())
+			log
+				("WARNING: Transfer::set_request req->target (%u) vs. destination (%u) mismatch\n",
+				 req->target().serial(), m_destination.serial());
 		m_destination = &req->target();
 	}
 	m_request = req;

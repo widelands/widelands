@@ -876,8 +876,10 @@ void Warehouse::incorporate_worker(Game & game, Worker & w)
 	//  FIXME And even such workers should be removed and only a small record
 	//  FIXME with the experience (and possibly other data that must survive)
 	//  FIXME may be kept.
-	if (dynamic_cast<Carrier const *>(&w))
-		return w.remove(game);
+	if (dynamic_cast<Carrier const *>(&w)) {
+		w.remove(game);
+		return;
+	}
 
 	sort_worker_in(game, w);
 	w.set_location(0); //  no longer in an economy
@@ -985,10 +987,16 @@ void Warehouse::request_cb
 {
 	Warehouse & wh = ref_cast<Warehouse, PlayerImmovable>(target);
 
-	if (w)
+	if (w) {
 		w->schedule_incorporate(game);
-	else
+	} else {
 		wh.m_supply->add_wares(ware, 1);
+
+		// This ware may be used to build planned workers,
+		// so it seems like a good idea to update the associated requests
+		// and use the ware before it is sent away again.
+		wh._update_all_planned_workers(game);
+	}
 }
 
 /**
@@ -1083,13 +1091,10 @@ uint32_t Warehouse::get_planned_workers(Game & game, Ware_Index index) const
 }
 
 /**
- * Increase the amount of workers we plan to create of the given \p index by \p amount.
+ * Set the amount of workers we plan to create of the given \p index to \p amount.
  */
 void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 {
-	if (!amount)
-		return;
-
 	PlannedWorkers * pw = 0;
 
 	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, i) {
@@ -1100,6 +1105,9 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 	}
 
 	if (!pw) {
+		if (!amount)
+			return;
+
 		m_planned_workers.push_back(PlannedWorkers());
 		pw = &m_planned_workers.back();
 		pw->index = index;
@@ -1121,7 +1129,7 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 		}
 	}
 
-	pw->amount += amount;
+	pw->amount = amount;
 	_update_planned_workers(game, *pw);
 }
 

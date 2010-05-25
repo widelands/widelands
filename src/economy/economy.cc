@@ -896,16 +896,15 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 		return;
 
 	// We have worker demand that is not fulfilled by supplies
-	// Find warehouses where we can create the required workers
+	// Find warehouses where we can create the required workers,
+	// and collect stats about existing build prerequisites
 	Tribe_Descr const & tribe = owner().tribe();
 	Worker_Descr const & w_desc = *tribe.get_worker_descr(index);
 	Worker_Descr::Buildcost const & cost = w_desc.buildcost();
-	Warehouse * best_wh = 0;
-	uint32_t best_wh_available = 0;
-	std::vector<bool> available_somewhere;
+	std::vector<uint32_t> total_available;
 	uint32_t total_planned = 0;
 
-	available_somewhere.insert(available_somewhere.begin(), cost.size(), false);
+	total_available.insert(total_available.begin(), cost.size(), 0);
 
 	for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
 		Warehouse * wh = m_warehouses[n_wh];
@@ -919,11 +918,6 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 				return;
 		}
 
-		// Determine the best warehouse based on how many types of needed supplies are already
-		// in that warehouse. Additionally, give a bonus if we've previously planned to create
-		// workers in that warehouse, so that one single warehouse tends to become to the "worker
-		// production center".
-		uint32_t available = planned ? 1 : 0;
 		uint32_t idx = 0;
 		container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
 			std::string const & input_name = bc.current->first;
@@ -937,30 +931,63 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 					("Economy::_create_requested_worker: buildcost inconsistency '%s'",
 					 input_name.c_str());
 
-			if (supply >= bc.current->second) {
-				available++;
-				available_somewhere[idx] = true;
-			}
-
-			++idx;
-		}
-
-		if (!best_wh || available > best_wh_available) {
-			best_wh = wh;
-			best_wh_available = available;
+			total_available[idx++] += supply;
 		}
 	}
 
-	// If all different supply types are available in some warehouse,
-	// but apparently not all in the same warehouse at the same time in sufficient quantity,
-	// start planning in earnest.
-	if
-		(demand > total_planned &&
-		 std::find(available_somewhere.begin(), available_somewhere.end(), false) == available_somewhere.end()) {
-		log
-			("Start planning for %i workers of type '%s' in warehouse at %i,%i.\n",
-			 demand, w_desc.name().c_str(), best_wh->get_position().x, best_wh->get_position().y);
-		best_wh->plan_workers(game, index, demand - total_planned);
+	// Couldn't create enough workers now.
+	// Let's see how many we have resources for that may be scattered
+	// throughout the economy.
+	uint32_t can_create = std::numeric_limits<uint32_t>::max();
+	uint32_t idx = 0;
+	Worker_Descr::Buildcost::const_iterator scarcest_ware = cost.begin();
+	container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
+		uint32_t cc = total_available[idx] / bc.current->second;
+		if (cc <= can_create) {
+			scarcest_ware = bc.current;
+			can_create = cc;
+		}
+		idx++;
+	}
+
+	if (total_planned > can_create) {
+		// Eliminate some excessive plans, to make sure we never request more than
+		// there are supplies for (otherwise, cyclic transportation might happen)
+		// Note that supplies might suddenly disappear outside our control because
+		// of loss of land or silly player actions.
+		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
+			Warehouse * wh = m_warehouses[n_wh];
+
+			uint32_t planned = wh->get_planned_workers(game, index);
+			uint32_t reduce = std::min(planned, total_planned - can_create);
+			wh->plan_workers(game, index, planned - reduce);
+			total_planned -= reduce;
+		}
+	} else if (total_planned < demand) {
+		uint32_t plan_goal = std::min(can_create, demand);
+		Ware_Index scarcest_index;
+		bool scarcest_isworker;
+
+		if ((scarcest_index = tribe.ware_index(scarcest_ware->first))) {
+			scarcest_isworker = false;
+		} else {
+			scarcest_index = tribe.worker_index(scarcest_ware->first);
+			scarcest_isworker = true;
+		}
+
+		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
+			Warehouse * wh = m_warehouses[n_wh];
+
+			uint32_t supply;
+			if (scarcest_isworker)
+				supply = wh->get_workers().stock(scarcest_index);
+			else
+				supply = wh->get_wares().stock(scarcest_index);
+
+			uint32_t plan = std::min(supply, plan_goal - total_planned);
+			total_planned += plan - wh->get_planned_workers(game, index);
+			wh->plan_workers(game, index, plan);
+		}
 	}
 }
 
