@@ -876,8 +876,10 @@ void Warehouse::incorporate_worker(Game & game, Worker & w)
 	//  FIXME And even such workers should be removed and only a small record
 	//  FIXME with the experience (and possibly other data that must survive)
 	//  FIXME may be kept.
-	if (dynamic_cast<Carrier const *>(&w))
-		return w.remove(game);
+	if (dynamic_cast<Carrier const *>(&w)) {
+		w.remove(game);
+		return;
+	}
 
 	sort_worker_in(game, w);
 	w.set_location(0); //  no longer in an economy
@@ -985,10 +987,16 @@ void Warehouse::request_cb
 {
 	Warehouse & wh = ref_cast<Warehouse, PlayerImmovable>(target);
 
-	if (w)
+	if (w) {
 		w->schedule_incorporate(game);
-	else
+	} else {
 		wh.m_supply->add_wares(ware, 1);
+
+		// This ware may be used to build planned workers,
+		// so it seems like a good idea to update the associated requests
+		// and use the ware before it is sent away again.
+		wh._update_all_planned_workers(game);
+	}
 }
 
 /**
@@ -1083,13 +1091,47 @@ uint32_t Warehouse::get_planned_workers(Game & game, Ware_Index index) const
 }
 
 /**
- * Increase the amount of workers we plan to create of the given \p index by \p amount.
+ * Calculate the supply of wares available to this warehouse in each of the buildcost
+ * items for the given worker.
+ *
+ * This is the current stock plus any incoming transfers.
+ */
+std::vector<uint32_t> Warehouse::calc_available_for_worker(Game & game, Ware_Index index) const
+{
+	const Worker_Descr & w_desc = *tribe().get_worker_descr(index);
+	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
+	std::vector<uint32_t> available;
+
+	container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
+		std::string const & input_name = bc.current->first;
+		if (Ware_Index id_w = tribe().ware_index(input_name)) {
+			available.push_back(get_wares().stock(id_w));
+		} else if ((id_w = tribe().worker_index(input_name))) {
+			available.push_back(get_workers().stock(id_w));
+		} else
+			throw wexception
+				("Economy::_create_requested_worker: buildcost inconsistency '%s'",
+				 input_name.c_str());
+	}
+
+	container_iterate_const(std::vector<PlannedWorkers>, m_planned_workers, i) {
+		if (i.current->index == index) {
+			assert(available.size() == i.current->requests.size());
+
+			for (uint32_t idx = 0; idx < available.size(); ++idx)
+				available[idx] += i.current->requests[idx]->get_num_transfers();
+		}
+	}
+
+	return available;
+}
+
+
+/**
+ * Set the amount of workers we plan to create of the given \p index to \p amount.
  */
 void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 {
-	if (!amount)
-		return;
-
 	PlannedWorkers * pw = 0;
 
 	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, i) {
@@ -1100,6 +1142,9 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 	}
 
 	if (!pw) {
+		if (!amount)
+			return;
+
 		m_planned_workers.push_back(PlannedWorkers());
 		pw = &m_planned_workers.back();
 		pw->index = index;
@@ -1121,7 +1166,7 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 		}
 	}
 
-	pw->amount += amount;
+	pw->amount = amount;
 	_update_planned_workers(game, *pw);
 }
 

@@ -121,6 +121,7 @@ public:
 
 	uint32_t get_planned_workers(Game &, Ware_Index index) const;
 	void plan_workers(Game &, Ware_Index index, uint32_t amount);
+	std::vector<uint32_t> calc_available_for_worker(Game &, Ware_Index index) const;
 
 	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
 	void disable_spawn(uint8_t worker_types_without_cost_index);

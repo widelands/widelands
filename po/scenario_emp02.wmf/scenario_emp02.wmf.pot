@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"POT-Creation-Date: 2010-05-25 15:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:196
 msgid ""
-" \"By the Gods! This is absolutely terrible. It seems as if we stand close to a test - and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br> Today, as I walked down to the eastern strands,<br> I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br> At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br> Anyway, we must build up stronger military buildings as soon as possible.\"<br><br>-- NEW OBJECTIVE --<br> "
+" \"By the Gods! This is absolutely terrible. It seems as if we stand close to a test - and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br> Today, as I walked down to the eastern shore,<br> I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br> At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br> Anyway, we must build up stronger military buildings as soon as possible.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:171
@@ -41,12 +41,12 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:135
 msgid ""
-" \"Great, today the building of the quarry was completed. Now we get enough stone to construct larger buildings.\" "
+" \"Great! Today the building of the quarry was completed. Now we get enough stone to construct larger buildings.\" "
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:147
 msgid ""
-" \"Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern strands I found the remains of another ship. I don't know whether these parts are all that is left of that ship. Inn any case: these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony.\"<br><br>-- NEW OBJECTIVE --<br> "
+" \"Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern shore I found the remains of another ship. I don't know whether these parts are all that is left of that ship. In any case, these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:253
@@ -126,14 +126,10 @@ msgid ""
 "* Expand to the east, to start mining marble from the mountain."
 msgstr ""
 
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:69
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:211
 msgid ""
 "* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
-msgstr ""
-
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:69
-msgid ""
-"* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood befre), to avoid new settlements of other tribes in that region."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:52
