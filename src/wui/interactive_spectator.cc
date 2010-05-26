@@ -66,6 +66,7 @@ Interactive_Spectator::Interactive_Spectator
 		(INIT_BTN("menu_toggle_minimap", "minimap",
 					 toggle_minimap, _("Minimap")))
 {
+	m_toolbar.set_layout_toplevel(true);
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 	if (!multiplayer) {
 		m_toolbar.add(&m_exit,                UI::Box::AlignLeft);
@@ -91,7 +92,6 @@ Interactive_Spectator::Interactive_Spectator
 		m_toggle_options_menu.set_enabled(false);
 	}
 
-	m_toolbar.layout();
 	adjust_toolbar_position();
 
 	// Setup all screen elements

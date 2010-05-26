@@ -538,46 +538,92 @@ void Soldier::draw
 			 w,
 			 h);
 
-	// Draw energy bar
-	// first: draw white sourrounding
-		// Reduces energy bar length, so no overlap between soldiers
-		w = w * 3 / 5;
-		Rect r(Point(drawpos.x - w, drawpos.y - h - 7), w * 2, 5);
-		dst.draw_rect(r, HP_FRAMECOLOR);
-		// Draw the actual bar
-		assert(get_max_hitpoints());
-		const float fraction = static_cast<float>(m_hp_current) / get_max_hitpoints();
-		RGBColor color(owner().get_playercolor()[2]);
-		assert(2 <= r.w);
-		assert(2 <= r.h);
-		dst.fill_rect
-			(Rect
-			 	(r + Point(1, 1),
-			 	 static_cast<int32_t>(fraction * (r.w - 2)), r.h - 2),
-			 color);
-
-		//  Draw information fields about levels. First, gather information.
-		const PictureID hppic = get_hp_level_pic();
-		const PictureID attackpic = get_attack_level_pic();
-		const PictureID defensepic = get_defense_level_pic();
-		const PictureID evadepic = get_evade_level_pic();
-		uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
-		g_gr->get_picture_size(hppic,      hpw, hph);
-		g_gr->get_picture_size(attackpic,  atw, ath);
-		g_gr->get_picture_size(defensepic, dew, deh);
-		g_gr->get_picture_size(evadepic,   evw, evh);
-
-		{
-			const uint32_t w_half = r.w >> 1;
-			dst.blit(r + Point(w_half - atw, -(hph + ath)), attackpic);
-			dst.blit(r + Point(w_half,       -(evh + deh)), defensepic);
-			dst.blit(r + Point(w_half - hpw, -hph),         hppic);
-			dst.blit(r + Point(w_half,       -evh),         evadepic);
-		}
+		draw_info_icon(dst, Point(drawpos.x, drawpos.y - h - 7), true);
 
 		draw_inner(game, dst, drawpos);
 	}
 }
+
+/**
+ * Draw the info icon (level indicators + HP bar) for this soldier.
+ *
+ * \param anchor_below if \c true, the icon is drawn horizontally centered above \p pt.
+ * Otherwise, the icon is drawn below and right of \p pt.
+ */
+void Soldier::draw_info_icon(RenderTarget & dst, Point pt, bool anchor_below) const
+{
+	// Gather information to determine coordinates
+	uint32_t w, h;
+	g_gr->get_animation_size(descr().main_animation(), 0, w, h);
+	w = w * 3 / 5;
+
+	const PictureID hppic = get_hp_level_pic();
+	const PictureID attackpic = get_attack_level_pic();
+	const PictureID defensepic = get_defense_level_pic();
+	const PictureID evadepic = get_evade_level_pic();
+	uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
+	g_gr->get_picture_size(hppic,      hpw, hph);
+	g_gr->get_picture_size(attackpic,  atw, ath);
+	g_gr->get_picture_size(defensepic, dew, deh);
+	g_gr->get_picture_size(evadepic,   evw, evh);
+
+	uint32_t totalwidth = std::max(std::max(atw + dew, hpw + evw), 2*w);
+	uint32_t totalheight = 5 + std::max(hph + ath, evh + deh);
+
+	if (!anchor_below) {
+		pt.x += totalwidth / 2;
+		pt.y += totalheight - 5;
+	} else {
+		pt.y -= 5;
+	}
+
+	// Draw energy bar
+	Rect energy_outer(Point(pt.x - w, pt.y), w * 2, 5);
+	dst.draw_rect(energy_outer, HP_FRAMECOLOR);
+
+	assert(get_max_hitpoints());
+	Rect energy_inner
+		(Point(pt.x - w + 1, pt.y + 1),
+		 2*(w-1)*m_hp_current / get_max_hitpoints(),
+		 3);
+	RGBColor color(owner().get_playercolor()[2]);
+	dst.fill_rect(energy_inner, color);
+
+	// Draw level pictures
+	{
+		dst.blit(pt + Point(-atw, -(hph + ath)), attackpic);
+		dst.blit(pt + Point(0, -(evh + deh)), defensepic);
+		dst.blit(pt + Point(-hpw, -hph), hppic);
+		dst.blit(pt + Point(0, -evh), evadepic);
+	}
+}
+
+/**
+ * Compute the size of the info icon (level indicators + HP bar) for soldiers of
+ * the given tribe.
+ */
+void Soldier::calc_info_icon_size(const Tribe_Descr& tribe, uint32_t& w, uint32_t& h)
+{
+	const Soldier_Descr * soldierdesc =
+		static_cast<const Soldier_Descr*>(tribe.get_worker_descr(tribe.worker_index("soldier")));
+	const PictureID hppic = soldierdesc->get_hp_level_pic(0);
+	const PictureID attackpic = soldierdesc->get_attack_level_pic(0);
+	const PictureID defensepic = soldierdesc->get_defense_level_pic(0);
+	const PictureID evadepic = soldierdesc->get_evade_level_pic(0);
+	uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
+	g_gr->get_picture_size(hppic,      hpw, hph);
+	g_gr->get_picture_size(attackpic,  atw, ath);
+	g_gr->get_picture_size(defensepic, dew, deh);
+	g_gr->get_picture_size(evadepic,   evw, evh);
+
+	uint32_t animw, animh;
+	g_gr->get_animation_size(soldierdesc->main_animation(), 0, animw, animh);
+	animw = animw * 3 / 5;
+
+	w = std::max(std::max(atw + dew, hpw + evw), 2*animw);
+	h = 5 + std::max(hph + ath, evh + deh);
+}
+
 
 /**
  *

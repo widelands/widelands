@@ -90,21 +90,28 @@ void WaresDisplay::add_warelist
 {
 	//  If you register something twice, it is counted twice. Not my problem.
 	m_warelists.push_back(&wares);
-
-	int32_t rows, height;
-
-	rows = (wares.get_nrwareids().value() + WaresPerRow - 1) / WaresPerRow;
-	height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
-
-	set_size(get_inner_w(), height + 30);
-	m_curware.set_pos(Point(0, get_inner_h() - 25));
-	m_curware.set_size(get_inner_w(), 20);
-
 	m_type = type;
 
-	update();
+	update_desired_size();
 }
 
+void WaresDisplay::update_desired_size()
+{
+	if (m_warelists.size()) {
+		int32_t rows, height;
+
+		rows = (m_warelists[0]->get_nrwareids().value() + WaresPerRow - 1) / WaresPerRow;
+		height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
+
+		set_desired_size(Width, height + 30);
+	}
+}
+
+void WaresDisplay::layout()
+{
+	m_curware.set_pos(Point(0, get_inner_h() - 25));
+	m_curware.set_size(get_inner_w(), 20);
+}
 
 void WaresDisplay::remove_all_warelists() {
 	m_warelists.clear();

@@ -60,6 +60,7 @@ Interactive_DServer::Interactive_DServer
 			_("Statistics"))
 	)
 {
+	m_toolbar.set_layout_toplevel(true);
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics,      UI::Box::AlignLeft);
@@ -67,7 +68,6 @@ Interactive_DServer::Interactive_DServer
 	m_chatDisplay =
 		new ChatDisplay(this, 10, 25, get_w() - 10, get_h() - 25);
 
-	m_toolbar.layout();
 	adjust_toolbar_position();
 }
 

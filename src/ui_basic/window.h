@@ -63,6 +63,7 @@ struct Window : public NamedPanel {
 	void set_title(const std::string &);
 	const std::string get_title() const throw() {return m_title;}
 
+	void set_center_panel(Panel * panel);
 	void move_to_mouse();
 	void move_to_mouse(const Point & pt);
 	virtual void move_inside_parent();
@@ -82,6 +83,10 @@ struct Window : public NamedPanel {
 	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);
 	bool handle_mousemove
 		(Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff);
+
+protected:
+	virtual void layout();
+	virtual void update_desired_size();
 
 private:
 	void dock_left();
@@ -103,6 +108,8 @@ private:
 	PictureID m_pic_top;
 	PictureID m_pic_bottom;
 	PictureID m_pic_background;
+
+	Panel * m_center_panel;
 };
 
 }
