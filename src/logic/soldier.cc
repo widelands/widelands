@@ -356,7 +356,12 @@ void Soldier::set_hp_level(const uint32_t hp) {
 	assert(m_hp_level <= hp);
 	assert              (hp <= descr().get_max_hp_level());
 
+	uint32_t oldmax = get_max_hitpoints();
+
 	m_hp_level = hp;
+
+	uint32_t newmax = get_max_hitpoints();
+	m_hp_current = m_hp_current * newmax / oldmax;
 }
 void Soldier::set_attack_level(const uint32_t attack) {
 	assert(m_attack_level <= attack);
