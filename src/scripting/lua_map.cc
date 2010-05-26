@@ -1779,6 +1779,43 @@ const PropertyType<L_TrainingSite> L_TrainingSite::Properties[] = {
 
 
 /* RST
+Bob
+---
+
+.. class:: Bob
+
+	Child of: :class:`MapObject`
+
+	This is the base class for all Bobs in widelands.
+*/
+const char L_Bob::className[] = "Bob";
+const MethodType<L_Bob> L_Bob::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Bob> L_Bob::Properties[] = {
+	{0, 0, 0},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+/* RST
 Field
 -----
 
@@ -1807,6 +1844,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RO(L_Field, bln),
 	PROP_RO(L_Field, brn),
 	PROP_RO(L_Field, immovable),
+	PROP_RO(L_Field, bobs),
 	PROP_RW(L_Field, terr),
 	PROP_RW(L_Field, terd),
 	PROP_RW(L_Field, height),
@@ -1891,7 +1929,7 @@ int L_Field::set_height(lua_State * L) {
 	.. attribute:: raw_height
 
 		(RW The same as :prop:`height`, but setting this will not trigger a
-		recalculation of the surrounding fields. You can use this field to 
+		recalculation of the surrounding fields. You can use this field to
 		change the height of many fields on a map quickly, then use
 		:func:`wl.map.recalculate()` to make sure that everything is in order.
 */
@@ -2004,6 +2042,27 @@ int L_Field::get_immovable(lua_State * L) {
 		return 0;
 	else
 		upcasted_immovable_to_lua(L, bi);
+	return 1;
+}
+
+/* RST
+	.. attribute:: bobs
+
+		(RO) An :class:`array` of :class:`~wl.map.Bob` that are associated
+		with this field
+*/
+// UNTESTED
+int L_Field::get_bobs(lua_State * L) {
+	Bob * b = fcoords(L).field->get_first_bob();
+
+	lua_newtable(L);
+	uint32_t cidx = 1;
+	while (b) {
+		lua_pushuint32(L, cidx++);
+		to_lua<L_Bob>(L, new L_Bob(*b));
+		lua_rawset(L, -3);
+		b = b->get_next_bob();
+	}
 	return 1;
 }
 
@@ -2365,6 +2424,11 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<L_Field>(L, "map");
 	register_class<L_MapObject>(L, "map");
+
+
+	register_class<L_Bob>(L, "map", true);
+	add_parent<L_Bob, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_BaseImmovable>(L, "map", true);
 	add_parent<L_BaseImmovable, L_MapObject>(L);
