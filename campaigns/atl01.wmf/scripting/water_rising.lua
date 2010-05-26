@@ -4,6 +4,22 @@
 
 use("aux", "set")
 
+-- ================
+-- Helper function 
+-- ================
+function _format_time(t)
+   local mins = math.floor(t/1000 / 60)
+   t = t - mins * 1000 * 60
+   local secs = math.floor(t/1000)
+   
+   if mins > 0 then
+      return ("%im%isec"):format(mins,secs)
+   else
+      return ("%isec"):format(secs)
+   end
+end
+
+
 
 -- =================
 -- A Field Triangle 
@@ -63,6 +79,14 @@ function Triangle:get_height()
    end
 end
 
+function Triangle:fields()
+   if self._d == "d" then
+      return {self._f, self._f.bln, self._f}
+   else
+      return {self._f, self._f.brn, self._f.rn}
+   end
+end
+
 function Triangle:neighbours()
    if self._d == "d" then
       return {
@@ -118,11 +142,14 @@ end
 
 function WaterRiser:_rise_water()
    while self._to_flood.size > 0 do
-      print("In loop: ", self._to_flood.size, self._shore.size, self._ocean.size)
       local tr = self._to_flood:pop_at(math.random(self._to_flood.size))
 
       tr:set_ter("wasser")
       tr:set_height(self._water_level, "raw_height")
+      for idx,f in ipairs(tr:fields()) do
+         if f.immovable then f.immovable:remove() end
+      end
+         
       self._ocean:add(tr)
 
       -- Check the neighbours
@@ -139,29 +166,59 @@ function WaterRiser:_rise_water()
    end
 end
 
-function WaterRiser:rise()
-   self._water_level = self._water_level + 1
+function WaterRiser:rise(level)
+
+   run(function() 
+   while self._water_level < level do
+
+      self._water_level = self._water_level + 1
    
-   -- Relevel the ocean
-   for tr in self._ocean:items() do
-      tr:set_height(self._water_level, "raw_height")
-   end
-   wl.map.recalculate()
+      local rising = true
+      run(function()
+         print(("Beginning rise to: %i"):format(self._water_level))
+         local st = wl.game.get_time()
 
-   -- Check for all shore fields if they remain shore or
-   -- are going to be reflooded
-   for tr in self._shore:items() do
-      if tr:get_height() <= self._water_level then
-         self._shore:discard(tr)
-         self._to_flood:add(tr)
-      end
-   end
+         -- Relevel the ocean over 5 mins
+         local scnt = math.floor(self._ocean.size / 300)
+         local cnt = scnt
+         for tr in self._ocean:items() do
+            tr:set_height(self._water_level, "raw_height")
+            cnt = cnt - 1
+            if cnt == 0 then
+               cnt = scnt
+               sleep(1000)
+            end
+         end
+         wl.map.recalculate()
 
-   -- Launch the raising function
-   run(function() self:_rise_water() end)
+         local delta = wl.game.get_time() - st
+         print(("Done with normalization, took %s"):format(_format_time(delta)))
+
+         -- Check for all shore fields if they remain shore or
+         -- are going to be reflooded
+         for tr in self._shore:items() do
+            if tr:get_height() <= self._water_level then
+               self._shore:discard(tr)
+               self._to_flood:add(tr)
+            end
+         end
+
+         -- Launch the raising function
+         self:_rise_water()
+
+         local delta = wl.game.get_time() - st
+         print(("Raising to %i took %s"):format(self._water_level,
+            _format_time(delta)))
+         rising = false
+      end)
+
+      while rising do sleep(3000) end
+   end
+   end)
 
 end
 
+-- TODO: remove this debug function
 function WaterRiser:set(what, t)
    if what == "s" then
       for tr in self._shore:items() do
@@ -179,13 +236,7 @@ function WaterRiser:set(what, t)
 end
 
 function s()
-   local st = os.clock()
    wr = WaterRiser:new(wl.map.Field(92,19))
-
-   local delta = os.clock() - st
-   print("Took: ", delta)
-   print(wr._ocean.size)
-   print(wr._shore.size)
 end
 
 

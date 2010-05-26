@@ -79,21 +79,6 @@ function intro()
 end
 
 
-function rise_water()
-
-   local seeding_fields = {
-      wl.map.Field(86,8),
-      wl.map.Field(38, 140),
-      wl.map.Field(106, 14),
-      wl.map.Field(130, 157),
-   }
-   
-   -- Global variable!
-   wr = WaterRiser:new(seeding_fields)
-
-   wr:run()
-end
-
 -- TODO: comment me out again
 plr.see_all = 1
 
