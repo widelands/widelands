@@ -59,10 +59,12 @@ namespace Widelands {
 struct Item_Ware_Descr : public Map_Object_Descr {
 	typedef Ware_Index::value_t Index;
 	Item_Ware_Descr
-		(char const * const name, char const * const descname,
+		(const Tribe_Descr & tribe, char const * const name, char const * const descname,
 		 std::string const & directory, Profile &, Section & global_s);
 
 	virtual ~Item_Ware_Descr() {};
+
+	const Tribe_Descr & tribe() const {return m_tribe;}
 
 	/// \return index to ware's icon inside picture stack
 	PictureID icon() const throw () {return m_icon;}
@@ -97,6 +99,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	uint8_t preciousness() const {return m_preciousness;}
 
 private:
+	const Tribe_Descr & m_tribe;
 	std::string m_helptext;   ///< Long descriptive text
 	uint32_t    m_default_target_quantity;
 	std::string m_icon_fname; ///< Filename of ware's main picture

@@ -753,7 +753,7 @@ void Player::enemyflagaction
 }
 
 
-inline void Player::rediscover_node
+void Player::rediscover_node
 	(Map              const &       map,
 	 Widelands::Field const &       first_map_field,
 	 FCoords          const f)

@@ -47,6 +47,7 @@ Button::Button //  for textual buttons
 	m_repeating     (false),
 	m_flat          (flat),
 	m_needredraw    (true),
+	m_cache_pid     (g_gr->get_no_picture()),
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (g_gr->get_no_picture()),
@@ -78,6 +79,7 @@ Button::Button //  for pictorial buttons
 	m_repeating     (false),
 	m_flat          (flat),
 	m_needredraw    (true),
+	m_cache_pid     (g_gr->get_no_picture()),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
 	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
@@ -170,19 +172,30 @@ void Button::draw(RenderTarget & odst)
 	{
 		odst.blit(Point(0, 0), m_cache_pid);
 		return;
+	} else {
+		if (m_cache_pid == g_gr->get_no_picture())
+			m_cache_pid =
+				g_gr->create_surface_a(get_w(), get_h());
+		else if 
+			(m_cache_pid->rendertarget->get_w() != get_w() or
+			 m_cache_pid->rendertarget->get_h() != get_h())
+		{
+			g_gr->free_surface(m_cache_pid);
+			m_cache_pid =
+				g_gr->create_surface_a(get_w(), get_h());
+		}
 	}
-
-	m_cache_pid = g_gr->create_surface_a(odst.get_w(), odst.get_h());
 	
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
 
 	// Draw the background
-	if (not m_flat)
+	if (not m_flat) {
+		assert(m_pic_background != g_gr->get_no_picture());
 		dst.tile
 			(Rect(Point(0, 0), get_w(), get_h()),
 			 m_pic_background,
 			 Point(get_x(), get_y()));
-	else
+	} else
 		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
 	

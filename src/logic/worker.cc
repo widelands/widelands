@@ -1205,8 +1205,8 @@ Ware_Index Worker::level(Game & game) {
  * Set a fallback task.
  */
 void Worker::init_auto_task(Game & game) {
-	if (get_location(game)) {
-		if (get_economy()->warehouses().size())
+	if (PlayerImmovable * location = get_location(game)) {
+		if (get_economy()->warehouses().size() || location->get_type() == BUILDING)
 			return start_task_gowarehouse(game);
 
 		set_location(0);
@@ -1792,6 +1792,11 @@ void Worker::gowarehouse_update(Game & game, State & state)
 		return start_task_transfer(game, t);
 	}
 
+	// Always leave buildings in an orderly manner,
+	// even when no warehouses are left to return to
+	if (location->get_type() == BUILDING && get_position() == static_cast<Building*>(location)->get_position())
+		return start_task_leavebuilding(game, true);
+
 	if (!get_economy()->warehouses().size()) {
 		molog("[gowarehouse]: No warehouse left in Economy\n");
 		return pop_task(game);
@@ -1804,6 +1809,7 @@ void Worker::gowarehouse_update(Game & game, State & state)
 	// flag is removed or a warehouse connects to the Economy).
 	if (!m_supply)
 		m_supply = new IdleWorkerSupply(*this);
+
 	return start_task_idle(game, get_animation("idle"), 1000);
 }
 
@@ -2686,7 +2692,7 @@ Load/save support
 ==============================
 */
 
-#define WORKER_SAVEGAME_VERSION 1
+#define WORKER_SAVEGAME_VERSION 2
 
 Worker::Loader::Loader()
 {
@@ -2697,13 +2703,20 @@ void Worker::Loader::load(FileRead& fr)
 	Bob::Loader::load(fr);
 
 	uint8_t version = fr.Unsigned8();
-	if (version != WORKER_SAVEGAME_VERSION)
+	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
 		throw game_data_error("unknown/unhandled version %u", version);
 
 	Worker& worker = get<Worker>();
 	m_location = fr.Unsigned32();
 	m_carried_item = fr.Unsigned32();
 	worker.m_current_exp = fr.Signed32();
+
+	if (version >= 2) {
+		if (fr.Unsigned8()) {
+			worker.m_transfer = new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), worker);
+			worker.m_transfer->read(fr, m_transfer);
+		}
+	}
 }
 
 void Worker::Loader::load_pointers()
@@ -2716,6 +2729,8 @@ void Worker::Loader::load_pointers()
 		worker.set_location(&mol().get<PlayerImmovable>(m_location));
 	if (m_carried_item)
 		worker.m_carried_item = &mol().get<WareInstance>(m_carried_item);
+	if (worker.m_transfer)
+		worker.m_transfer->read_pointers(mol(), m_transfer);
 }
 
 void Worker::Loader::load_finish()
@@ -2822,6 +2837,13 @@ void Worker::do_save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWr
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_carried_item.get(egbase)));
 	fw.Signed32(m_current_exp);
+
+	if (m_transfer) {
+		fw.Unsigned8(1);
+		m_transfer->write(mos, fw);
+	} else {
+		fw.Unsigned8(0);
+	}
 }
 
 }

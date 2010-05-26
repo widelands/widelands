@@ -56,24 +56,35 @@ bool LayeredFileSystem::IsWritable() const {
 }
 
 /**
- * Add a new filesystem to the top of the stack
+ * Add a new filesystem to the top of the stack.
+ * Take ownership of the given filesystem.
  * \todo throw on failure
  */
 void LayeredFileSystem::AddFileSystem(FileSystem & fs)
 {
 	//only add it to the stack if there isn't a conflicting version file in
 	//the directory
-	if (! FindConflictingVersionFile(fs)) {
+	if (!FindConflictingVersionFile(fs)) {
 		m_filesystems.push_back(&fs);
 	} else {
+		delete &fs;
 		log("File system NOT added\n");
 	}
 }
+
+/**
+ * Set the home filesystem (which is the preferred filesystem for writing files).
+ * Take ownership of the given filesystem.
+ */
 void LayeredFileSystem::SetHomeFileSystem(FileSystem & fs)
 {
-	if (! FindConflictingVersionFile(fs)) {
+	delete m_home;
+	m_home = 0;
+
+	if (!FindConflictingVersionFile(fs)) {
 		m_home = &fs;
 	} else {
+		delete &fs;
 		log("File system NOT added\n");
 	}
 }

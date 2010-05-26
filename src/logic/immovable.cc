@@ -1091,6 +1091,25 @@ void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 }
 
 /**
+ * We are the destination of the given ware's transfer, which is not associated
+ * with any request.
+ */
+void PlayerImmovable::receive_ware(Game&, Ware_Index ware)
+{
+	throw wexception("MO(%u): Received a ware(%u), don't know what to do with it", serial(), ware.value());
+}
+
+/**
+ * We are the destination of the given worker's transfer, which is not associated
+ * with any request.
+ */
+void PlayerImmovable::receive_worker(Game& , Worker& worker)
+{
+	throw wexception("MO(%u): Received a worker(%u), don't know what to do with it", serial(), worker.serial());
+}
+
+
+/**
  * Dump general information
  */
 void PlayerImmovable::log_general_info(Editor_Game_Base const & egbase)

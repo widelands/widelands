@@ -100,7 +100,7 @@ void Map_View::draw(RenderTarget & dst)
 		draw_tooltip(dst, text);
 }
 
-void Map_View::set_changeview(const Map_View::ChangeViewFn& fn)
+void Map_View::set_changeview(const Map_View::ChangeViewFn & fn)
 {
 	m_changeview = fn;
 }
@@ -118,7 +118,8 @@ void Map_View::set_viewpoint(Point vp, bool jump)
 	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), vp);
 	m_viewpoint = vp;
 
-	m_changeview(vp, jump);
+	if (m_changeview)
+		m_changeview(vp, jump);
 	changeview.call(m_viewpoint.x, m_viewpoint.y);
 
 	m_complete_redraw_needed = true;

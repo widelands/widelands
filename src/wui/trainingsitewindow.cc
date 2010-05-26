@@ -57,7 +57,7 @@ ProductionSite_Window  (parent, ts, registry)
 		 _("Soldiers in training"));
 }
 
-void TrainingSite_Window::create_capsbuttons(UI::Box* buttons)
+void TrainingSite_Window::create_capsbuttons(UI::Box * buttons)
 {
 	ProductionSite_Window::create_capsbuttons(buttons);
 

@@ -25,11 +25,14 @@
 #include "transfer.h"
 
 #include "logic/game.h"
+#include "logic/tribe.h"
 #include "logic/warehouse.h"
+#include "logic/worker.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "request.h"
 #include "wexception.h"
 #include "upcast.h"
-#include "logic/worker.h"
 
 namespace Widelands {
 
@@ -48,6 +51,8 @@ struct IdleWareSupply : public Supply {
 	//  implementation of Supply
 	virtual PlayerImmovable * get_position(Game &);
 	virtual bool is_active() const throw ();
+	virtual bool has_storage() const throw ();
+	virtual void send_to_storage(Game &, Warehouse* wh);
 
 	virtual uint32_t nr_supplies(Game const &, Request const &) const;
 	virtual WareInstance & launch_item(Game &, Request const &);
@@ -105,9 +110,14 @@ PlayerImmovable * IdleWareSupply::get_position(Game & game)
 	return 0;
 }
 
-bool IdleWareSupply::is_active()  const throw ()
+bool IdleWareSupply::is_active() const throw ()
 {
-	return not m_ware.is_moving();
+	return true;
+}
+
+bool IdleWareSupply::has_storage()  const throw ()
+{
+	return m_ware.is_moving();
 }
 
 uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
@@ -140,6 +150,15 @@ WareInstance & IdleWareSupply::launch_item(Game &, Request const & req) {
 Worker & IdleWareSupply::launch_worker(Game &, Request const &)
 {
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
+}
+
+void IdleWareSupply::send_to_storage(Game & game, Warehouse* wh)
+{
+	assert(!has_storage());
+
+	Transfer * t = new Transfer(game, m_ware);
+	t->set_destination(*wh);
+	m_ware.set_transfer(game, *t);
 }
 
 
@@ -279,7 +298,7 @@ void WareInstance::update(Game & game)
 	}
 
 	// Update whether we have a Supply or not
-	if (!m_transfer || m_transfer->is_idle()) {
+	if (!m_transfer || !m_transfer->get_request()) {
 		if (!m_supply)
 			m_supply = new IdleWareSupply(*this);
 	} else {
@@ -422,6 +441,105 @@ PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(game)) : 0;
 }
 
+
+/*
+==============================
+
+Load/save support
+
+==============================
+*/
+
+#define WAREINSTANCE_SAVEGAME_VERSION 1
+
+WareInstance::Loader::Loader()
+{
+}
+
+void WareInstance::Loader::load(FileRead & fr)
+{
+	Map_Object::Loader::load(fr);
+
+	WareInstance & ware = get<WareInstance>();
+	m_location = fr.Unsigned32();
+	m_transfer_nextstep = fr.Unsigned32();
+	if (fr.Unsigned8()) {
+		ware.m_transfer = new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), ware);
+		ware.m_transfer->read(fr, m_transfer);
+	}
+}
+
+void WareInstance::Loader::load_pointers()
+{
+	Map_Object::Loader::load_pointers();
+
+	WareInstance & ware = get<WareInstance>();
+	ware.set_location(egbase(), &mol().get<Map_Object>(m_location));
+	if (m_transfer_nextstep)
+		ware.m_transfer_nextstep = &mol().get<Map_Object>(m_transfer_nextstep);
+	if (ware.m_transfer)
+		ware.m_transfer->read_pointers(mol(), m_transfer);
+}
+
+void WareInstance::Loader::load_finish()
+{
+	Map_Object::Loader::load_finish();
+
+	WareInstance & ware = get<WareInstance>();
+	if (!ware.m_transfer || !ware.m_transfer->get_request()) {
+		if (!ware.m_supply)
+			ware.m_supply = new IdleWareSupply(ware);
+	}
+}
+
+
+void WareInstance::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+{
+	fw.Unsigned8(header_WareInstance);
+	fw.Unsigned8(WAREINSTANCE_SAVEGAME_VERSION);
+	fw.CString(descr().tribe().name());
+	fw.CString(descr().name());
+
+	Map_Object::save(egbase, mos, fw);
+
+	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
+	fw.Unsigned32(mos.get_object_file_index_or_zero(m_transfer_nextstep.get(egbase)));
+	if (m_transfer) {
+		fw.Unsigned8(1);
+		m_transfer->write(mos, fw);
+	} else {
+		fw.Unsigned8(0);
+	}
+}
+
+Map_Object::Loader * WareInstance::load(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+{
+	try {
+		uint8_t version = fr.Unsigned8();
+
+		if (version != WAREINSTANCE_SAVEGAME_VERSION)
+			throw wexception("unknown/unhandled version %i", version);
+
+		std::string tribename = fr.CString();
+		std::string warename = fr.CString();
+
+		egbase.manually_load_tribe(tribename);
+
+		const Tribe_Descr * tribe = egbase.get_tribe(tribename);
+		if (!tribe)
+			throw wexception("unknown tribe '%s'", tribename.c_str());
+
+		Ware_Index wareindex = tribe->safe_ware_index(warename);
+		const Item_Ware_Descr * descr = tribe->get_ware_descr(wareindex);
+
+		std::auto_ptr<Loader> loader(new Loader);
+		loader->init(egbase, mol, *new WareInstance(wareindex, descr));
+		loader->load(fr);
+		return loader.release();
+	} catch(const std::exception & e) {
+		throw wexception("WareInstance: %s", e.what());
+	}
+}
 
 }
 

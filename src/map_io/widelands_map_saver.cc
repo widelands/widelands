@@ -48,8 +48,6 @@
 #include "widelands_map_roaddata_data_packet.h"
 #include "widelands_map_scripting_data_packet.h"
 #include "widelands_map_terrain_data_packet.h"
-#include "widelands_map_ware_data_packet.h"
-#include "widelands_map_waredata_data_packet.h"
 
 #include "log.h"
 
@@ -162,10 +160,6 @@ void Map_Saver::save() throw (_wexception) {
 	log("done!\n ");
 
 
-	log("Writing Map Ware Data ... ");
-	{Map_Ware_Data_Packet                   p; p.Write(m_fs, m_egbase, *m_mos);}
-	log("done!\n ");
-
 	log("Writing Area Watchers Data ... ");
 	{Map_Players_AreaWatchers_Data_Packet   p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
@@ -187,17 +181,9 @@ void Map_Saver::save() throw (_wexception) {
 		log("done!\n ");
 	}
 
-
 	if (m_mos->get_nr_buildings()) {
 		log("Writing Buildingdata Data ... ");
 		{Map_Buildingdata_Data_Packet        p; p.Write(m_fs, m_egbase, *m_mos);}
-		log("done!\n ");
-	}
-
-
-	if (m_mos->get_nr_wares()) {
-		log("Writing Waredata Data ... ");
-		{Map_Waredata_Data_Packet            p; p.Write(m_fs, m_egbase, *m_mos);}
 		log("done!\n ");
 	}
 
