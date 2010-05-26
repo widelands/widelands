@@ -418,76 +418,98 @@ void Player::build(Coords c, Building_Index const idx)
 Bulldoze the given road, flag or building.
 ===============
 */
-void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
+void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 {
-	// General security check
-	if (imm.get_owner() != this)
-		return;
+	std::vector<OPtr<PlayerImmovable> > bulldozelist;
+	bulldozelist.push_back(&_imm);
 
-	// Extended security check
-	if (upcast(Building, building, &imm)) {
-		if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+	while (bulldozelist.size()) {
+		PlayerImmovable * imm = bulldozelist.back().get(egbase());
+		bulldozelist.pop_back();
+		if (!imm)
+			continue;
+
+		// General security check
+		if (imm->get_owner() != this)
 			return;
-		if (recurse) {
+
+		// Destroy, after extended security check
+		if (upcast(Building, building, imm)) {
+			if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+				return;
+
 			Flag & flag = building->base_flag();
 			building->destroy(egbase());
 			//  Now imm and building are dangling reference/pointer! Do not use!
-			if (flag.is_dead_end())
-				ref_cast<Game, Editor_Game_Base>(egbase()).send_player_bulldoze
-					(flag, true);
-			return;
-		}
-	} else if (upcast(Flag, flag, &imm)) {
-		if (Building * const flagbuilding = flag->get_building())
-			if
-				(!
-				 (flagbuilding->get_playercaps() & (1 << Building::PCap_Bulldoze)))
-			{
-				log
-					("Player trying to rip flag (%u) with undestroyable building "
-					 "(%u)\n",
-					 flag->serial(), flagbuilding->serial());
-				return;
-			}
-		if (recurse)
-			for (uint8_t primary_road_id = 6; primary_road_id; --primary_road_id)
-				if (Road * const primary_road = flag->get_road(primary_road_id)) {
-					Flag & primary_start = primary_road->get_flag(Road::FlagStart);
-					Flag & primary_other =
-						flag == &primary_start ?
-						primary_road->get_flag(Road::FlagEnd) : primary_start;
-					primary_road->destroy(egbase());
-					log
-						("destroying road from (%i, %i) going in dir %u\n",
-						 flag->get_position().x, flag->get_position().y,
-						 primary_road_id);
-					//  The primary road is gone. Now see if the flag at the other
-					//  end of it is a dead-end.
-					if (primary_other.is_dead_end())
-						ref_cast<Game, Editor_Game_Base>(egbase())
-							.send_player_bulldoze(primary_other, true);
-				}
-	} else if (upcast(Road, road, &imm)) {
-		if (recurse) {
-			Flag & start = road->get_flag(Road::FlagStart);
-			Flag & end   = road->get_flag(Road::FlagEnd);
-			while (Road * const r = start.get_road(end)) //  destroy every road
-				r->destroy(egbase()); //  between start and end, not just selected
-			//  Now imm and road are dangling reference/pointer! Do not use!
-			if (start.is_dead_end())
-				ref_cast<Game, Editor_Game_Base>(egbase()).send_player_bulldoze
-					(start, true);
-			if (end  .is_dead_end())
-				ref_cast<Game, Editor_Game_Base>(egbase()).send_player_bulldoze
-					(end,   true);
-			return;
-		}
-	} else
-		throw wexception
-			("Player::bulldoze(%u): bad immovable type", imm.serial());
 
-	// Now destroy it
-	imm.destroy(egbase());
+			if (recurse && flag.is_dead_end())
+				bulldozelist.push_back(&flag);
+		} else if (upcast(Flag, flag, imm)) {
+			if (Building * const flagbuilding = flag->get_building())
+				if
+					(!
+					(flagbuilding->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+				{
+					log
+						("Player trying to rip flag (%u) with undestroyable building "
+						"(%u)\n",
+						flag->serial(), flagbuilding->serial());
+					return;
+				}
+
+			OPtr<Flag> flagcopy = flag;
+			if (recurse) {
+				for (uint8_t primary_road_id = 6; primary_road_id; --primary_road_id) {
+					// Recursive bulldoze calls may cause flag to disappear
+					if (!flagcopy.get(egbase()))
+						return;
+
+					if (Road * const primary_road = flag->get_road(primary_road_id)) {
+						Flag & primary_start = primary_road->get_flag(Road::FlagStart);
+						Flag & primary_other =
+							flag == &primary_start ?
+							primary_road->get_flag(Road::FlagEnd) : primary_start;
+						primary_road->destroy(egbase());
+						log
+							("destroying road from (%i, %i) going in dir %u\n",
+							flag->get_position().x, flag->get_position().y,
+							primary_road_id);
+						//  The primary road is gone. Now see if the flag at the other
+						//  end of it is a dead-end.
+						if (primary_other.is_dead_end())
+							bulldozelist.push_back(&primary_other);
+					}
+				}
+			}
+
+			// Recursive bulldoze calls may cause flag to disappear
+			if (flagcopy.get(egbase()))
+				flag->destroy(egbase());
+		} else if (upcast(Road, road, imm)) {
+			Flag & start = road->get_flag(Road::FlagStart);
+			Flag & end = road->get_flag(Road::FlagEnd);
+
+			road->destroy(egbase());
+			//  Now imm and road are dangling reference/pointer! Do not use!
+
+			if (recurse) {
+				// Destroy all roads between the flags, not just selected
+				while (Road * const r = start.get_road(end))
+					r->destroy(egbase());
+
+				OPtr<Flag> endcopy = &end;
+				if (start.is_dead_end())
+					bulldozelist.push_back(&start);
+				// At this point, end may have become dangling
+				if (Flag * pend = endcopy.get(egbase())) {
+					if (pend->is_dead_end())
+						bulldozelist.push_back(&end);
+				}
+			}
+		} else
+			throw wexception
+				("Player::bulldoze(%u): bad immovable type", imm->serial());
+	}
 }
 
 
