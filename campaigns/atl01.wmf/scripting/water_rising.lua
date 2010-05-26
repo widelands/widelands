@@ -148,6 +148,9 @@ function WaterRiser:_rise_water()
       tr:set_height(self._water_level, "raw_height")
       for idx,f in ipairs(tr:fields()) do
          if f.immovable then f.immovable:remove() end
+         for idx,b in ipairs(f.bobs) do
+            b:remove()
+         end
       end
          
       self._ocean:add(tr)
@@ -170,49 +173,42 @@ function WaterRiser:rise(level)
 
    run(function() 
    while self._water_level < level do
-
       self._water_level = self._water_level + 1
    
-      local rising = true
-      run(function()
-         print(("Beginning rise to: %i"):format(self._water_level))
-         local st = wl.game.get_time()
+      print(("Beginning rise to: %i"):format(self._water_level))
+      local st = wl.game.get_time()
 
-         -- Relevel the ocean over 5 mins
-         local scnt = math.floor(self._ocean.size / 300)
-         local cnt = scnt
-         for tr in self._ocean:items() do
-            tr:set_height(self._water_level, "raw_height")
-            cnt = cnt - 1
-            if cnt == 0 then
-               cnt = scnt
-               sleep(1000)
-            end
+      -- Relevel the ocean over 5 mins
+      local scnt = math.floor(self._ocean.size / 300)
+      local cnt = scnt
+      for tr in self._ocean:items() do
+         tr:set_height(self._water_level, "raw_height")
+         cnt = cnt - 1
+         if cnt == 0 then
+            cnt = scnt
+            sleep(1000)
          end
-         wl.map.recalculate()
+      end
+      wl.map.recalculate()
 
-         local delta = wl.game.get_time() - st
-         print(("Done with normalization, took %s"):format(_format_time(delta)))
+      local delta = wl.game.get_time() - st
+      print(("Done with normalization, took %s"):format(_format_time(delta)))
 
-         -- Check for all shore fields if they remain shore or
-         -- are going to be reflooded
-         for tr in self._shore:items() do
-            if tr:get_height() <= self._water_level then
-               self._shore:discard(tr)
-               self._to_flood:add(tr)
-            end
+      -- Check for all shore fields if they remain shore or
+      -- are going to be reflooded
+      for tr in self._shore:items() do
+         if tr:get_height() <= self._water_level then
+            self._shore:discard(tr)
+            self._to_flood:add(tr)
          end
+      end
 
-         -- Launch the raising function
-         self:_rise_water()
+      -- Launch the raising function
+      self:_rise_water()
 
-         local delta = wl.game.get_time() - st
-         print(("Raising to %i took %s"):format(self._water_level,
-            _format_time(delta)))
-         rising = false
-      end)
-
-      while rising do sleep(3000) end
+      local delta = wl.game.get_time() - st
+      print(("Raising to %i took %s"):format(self._water_level,
+         _format_time(delta)))
    end
    end)
 
