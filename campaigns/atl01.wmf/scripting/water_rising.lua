@@ -218,25 +218,5 @@ function WaterRiser:rise(level)
 
 end
 
--- TODO: remove this debug function
-function WaterRiser:set(what, t)
-   if what == "s" then
-      for tr in self._shore:items() do
-         tr:set_ter(t)
-      end
-   elseif what == "o" then
-      for tr in self._ocean:items() do
-         tr:set_ter(t)
-      end
-   elseif what == "f" then
-      for tr in self._to_flood:items() do
-         tr:set_ter(t)
-      end
-   end
-end
-
-function s()
-   wr = WaterRiser:new(wl.map.Field(92,19))
-end
 
 

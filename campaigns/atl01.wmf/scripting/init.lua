@@ -79,6 +79,9 @@ function intro()
 end
 
 
+wr = WaterRiser:new(wl.map.Field(92,19))
+wr:rise(25) -- Rise the water to level 25
+
 -- TODO: comment me out again
 plr.see_all = 1
 
