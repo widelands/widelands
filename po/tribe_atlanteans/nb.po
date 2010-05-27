@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-05-25 20:18+0000\n"
+"PO-Revision-Date: 2010-05-26 17:32+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-26 03:42+0000\n"
+"X-Launchpad-Export-Date: 2010-05-27 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -1047,43 +1047,51 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Oppgrader soldat angrep 0"
 
 #: ../../tribes/atlanteans/dungeon/conf:33
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat angrep 0 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:34
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Oppgrader soldat angrep 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:35
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat angrep 1 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:36
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Oppgrader soldat angrep 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:37
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat angrep 2 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:38
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Oppgrader soldat angrep 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat angrep 3 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:37
 msgid "Upgrade soldier defense 0"
@@ -1107,31 +1115,37 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:43
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Oppgrader soldat unnvik 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:44
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Oppgrader soldat unnvik 0 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Oppgrader soldat unnvik 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Oppgrader soldat unnvik 1 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:41
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Oppgrader soldat liv 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:42
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Oppgrader soldat liv 0 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/conf:162
 msgid "Warehouse"

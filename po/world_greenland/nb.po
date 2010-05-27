@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-05-04 07:23+0000\n"
-"Last-Translator: Fredrik Sudmann <fsudmann@gmail.com>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-05-26 18:07+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-05 03:43+0000\n"
+"X-Launchpad-Export-Date: 2010-05-27 03:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/greenland/conf:58
@@ -173,15 +173,15 @@ msgstr "Lerk"
 
 #: ../../worlds/greenland/conf:71
 msgid "Larch medium"
-msgstr "Lerk medium"
+msgstr "Mellomstor lerk"
 
 #: ../../worlds/greenland/conf:72
 msgid "Larch small"
-msgstr "Lerk liten"
+msgstr "Liten lerk"
 
 #: ../../worlds/greenland/conf:73
 msgid "Larch tiny"
-msgstr "Lerk knøttliten"
+msgstr "Veldig liten lerk"
 
 #: ../../worlds/greenland/conf:88
 msgid "Lynx"

@@ -7,21 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-21 17:46+0000\n"
-"PO-Revision-Date: 2010-04-22 22:23+0000\n"
-"Last-Translator: Vitor <Unknown>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-05-26 22:48+0000\n"
+"Last-Translator: HicHic <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-24 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-05-27 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../txts/README:109
+#: ../../txts/README:69
+msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
+msgstr ""
+
+#: ../../txts/README:67
+msgid ", / .       Go to previous / next location"
+msgstr ""
+
+#: ../../txts/README:121
 msgid "- how to reproduce the bug"
 msgstr "- Como reproduzir o bug"
 
-#: ../../txts/README:113
+#: ../../txts/README:125
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
@@ -29,7 +37,7 @@ msgstr ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
 
-#: ../../txts/README:115
+#: ../../txts/README:127
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) session record if possible, unless "
 "the<br>bug is trivial to reproduce. In fact, it may be a good idea to always "
@@ -37,15 +45,15 @@ msgid ""
 "below."
 msgstr ""
 
-#: ../../txts/README:107
+#: ../../txts/README:119
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
 msgstr ""
 
-#: ../../txts/README:111
+#: ../../txts/README:123
 msgid "- which map you were playing"
-msgstr ""
+msgstr "- Qual o mapa que estava jogando"
 
 #: ../../txts/COPYING:20
 msgid ""
@@ -64,6 +72,20 @@ msgid ""
 "having been made by running the Program). Whether that is true depends on "
 "what the Program does.<br>"
 msgstr ""
+"0. Esta Licença se aplica a qualquer programa ou outro trabalho que contenha "
+"um aviso colocado pelo detentor dos direitos autorais dizendo que pode ser "
+"distribuído sob os termos desta Licença Pública Geral. O Programa, abaixo, "
+"refere-se a qualquer programa ou trabalho, e um trabalho baseado no Programa "
+"significa ou o Programa ou qualquer trabalho derivado sob a lei de direitos "
+"autorais: isto é, uma obra contendo o Programa ou uma parte dele, na íntegra "
+"ou com modificações e / ou traduzido para outra língua. (Doravante, a "
+"tradução é incluída sem limitações no termo modificação). Cada licenciado é "
+"endereçado como você. <br> Atividades outras que a cópia, distribuição e "
+"modificação não estão cobertas por esta Licença, estando fora de seu "
+"alcance. O ato de executar o Programa não é restrito, ea saída do Programa é "
+"coberto apenas se seu conteúdo constituir um trabalho baseado no Programa "
+"(independente de ter sido produzida pela execução do Programa). Se isso é "
+"verdadeiro depende do que o Programa faz. <br>"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
@@ -80,6 +102,14 @@ msgid ""
 "a fee for the physical act of transferring a copy, and you may at your "
 "option offer warranty protection in exchange for a fee.<br>"
 msgstr ""
+"1. Você pode copiar e distribuir cópias fiéis do código-fonte do Programa ao "
+"recebê-lo, em qualquer meio, desde que você conspícua e apropriadamente "
+"publique em cada cópia um aviso de copyright apropriada e exoneração de "
+"garantia; manter intactos todos os avisos que se referem a esta Licença e à "
+"ausência de qualquer garantia e forneça a outros recebedores do Programa uma "
+"cópia desta Licença junto com o Programa. <br> Você pode cobrar uma taxa "
+"pelo acto físico de transferir uma cópia, e pode por sua opção oferecer "
+"protecção de garantia em troca de uma taxa. <br>"
 
 #: ../../txts/COPYING:66
 msgid ""
@@ -159,6 +189,22 @@ msgid ""
 "code or executable form with such an offer, in accord with Subsection b "
 "above.)"
 msgstr ""
+"3. Você pode copiar e distribuir o Programa (ou trabalho baseado nele, sob a "
+"Secção 2) em código-objeto ou em forma executável sob os termos das Seções 1 "
+"e 2 acima, desde que você faça um dos seguintes procedimentos: <br> a) O "
+"acompanhe com o código-fonte correspondente completo legível por máquina, "
+"que deve ser distribuído sob os termos das Seções 1 e 2 acima num meio "
+"usualmente utilizado para intercâmbio de software; ou, <br> b) O acompanhe "
+"com uma oferta escrita, válida por pelo menos três anos, para dar a "
+"quaisquer terceiros, por um custo não superior ao custo de efectuar a "
+"distribuição física, uma cópia completa em formato digital do código fonte "
+"correspondente, para ser distribuído sob os termos das Seções 1 e 2 acima e "
+"em meio normalmente utilizado para o intercâmbio de software; ou, <br> c) O "
+"acompanhe com a informação que você recebeu em relação à oferta para "
+"distribuir o correspondente código fonte. (Esta alternativa é permitida "
+"somente para distribuição não-comercial e apenas se você recebeu o programa "
+"em código-objeto ou formato executável com essa oferta, de acordo com a "
+"Subseção b acima.)"
 
 #: ../../txts/COPYING:39
 msgid ""
@@ -169,6 +215,13 @@ msgid ""
 "copies, or rights, from you under this License will not have their licenses "
 "terminated so long as such parties remain in full compliance."
 msgstr ""
+"4. Você não pode copiar, modificar, sublicenciar ou distribuir o Programa, "
+"exceto conforme expressamente estabelecido nesta Licença. Qualquer outra "
+"tentativa de copiar, modificar, sublicenciar ou distribuir o Programa é "
+"nula, e automaticamente rescindirá seus direitos sob esta Licença. No "
+"entanto, terceiros que tiverem recebido cópias, ou direitos de você sob esta "
+"Licença não terão suas licenças rescindidas, enquanto estes terceiros "
+"mantiverem o seu pleno cumprimento."
 
 #: ../../txts/COPYING:42
 msgid ""
@@ -180,6 +233,14 @@ msgid ""
 "this License to do so, and all its terms and conditions for copying, "
 "distributing or modifying the Program or works based on it."
 msgstr ""
+"5. Você não é obrigado a aceitar esta Licença, desde que não tenham "
+"assinado. No entanto, nada lhe concede permissão para modificar ou "
+"distribuir o Programa ou seus trabalhos derivados. Estas acções são "
+"proibidas por lei se você não aceitar esta licença. Portanto, ao modificar "
+"ou distribuir o Programa (ou qualquer trabalho baseado no Programa), você "
+"indica sua aceitação desta Licença para fazê-lo, e todos os seus termos e "
+"condições para copiar, distribuir ou modificar o Programa ou trabalhos "
+"baseados nele."
 
 #: ../../txts/COPYING:45
 msgid ""
@@ -190,6 +251,12 @@ msgid ""
 "recipients' exercise of the rights granted herein. You are not responsible "
 "for enforcing compliance by third parties to this License."
 msgstr ""
+"6. Cada vez que você redistribuir o Programa (ou qualquer trabalho baseado "
+"no Programa), o destinatário recebe automaticamente uma licença do "
+"licenciante original para copiar, distribuir ou modificar o Programa, "
+"sujeitos a estes termos e condições. Você não pode impor quaisquer outras "
+"restrições ao exercício daqueles que recebem os direitos atribuídos aqui. "
+"Você não é responsável por impor a conformidade de terceiros a esta Licença."
 
 #: ../../txts/COPYING:48
 msgid ""
@@ -206,6 +273,18 @@ msgid ""
 "it and this License would be to refrain entirely from distribution of the "
 "Program."
 msgstr ""
+"7. Se, como consequência de uma sentença judicial ou alegação de infrigir "
+"patentes ou por qualquer outra razão (não limitada a assuntos de patentes), "
+"condições forem impostas a você (por ordem judicial, acordo ou de outro "
+"modo) que contradigam as condições desta Licença, elas não o livram das "
+"condições desta Licença. Se você não puder distribuir de forma a satisfazer "
+"simultaneamente suas obrigações sob esta Licença ou quaisquer outras "
+"obrigações pertinentes, então como consequência você não poderá distribuir o "
+"Programa. Por exemplo, se uma licença de patente não permitir a "
+"redistribuição sem pagar direitos do Programa por todos aqueles que recebam "
+"cópias directamente ou indirectamente através de si, então a única forma de "
+"você satisfazer a ela ea esta Licença seria a de desistir completamente de "
+"distribuir o programa."
 
 #: ../../txts/COPYING:60
 msgid ""
@@ -217,6 +296,13 @@ msgid ""
 " In such case, this License incorporates the limitation as if written in the "
 "body of this License."
 msgstr ""
+"8. Se a distribuição e / ou utilização do Programa está restrito em certos "
+"países quer por patentes ou direitos autorais, o detentor original dos "
+"direitos autorais que colocar o Programa sob esta Licença poderá acrescentar "
+"uma limitação geográfica de distribuição explícita excluindo esses países, "
+"de modo que a distribuição seja permitida somente em ou entre países não "
+"excluídos. Neste caso, esta Licença incorpora a limitação como se a escrita "
+"no corpo desta Licença."
 
 #: ../../txts/COPYING:63
 msgid ""
@@ -231,6 +317,16 @@ msgid ""
 "a version number of this License, you may choose any version ever published "
 "by the Free Software Foundation."
 msgstr ""
+"9. A Free Software Foundation pode publicar versões revisadas e / ou novas "
+"versões da General Public License de tempos a tempos. Estas novas versões "
+"serão similares em espírito à versão actual, mas podem diferir em detalhes "
+"para endereçar novos problemas ou preocupações. <br> Cada versão é dada um "
+"número distinto. Se o Programa especifica um número de versão desta Licença "
+"que se aplica a ele e qualquer outra versão posterior, você tem a opção de "
+"seguir os termos e condições quer dessa versão ou de qualquer versão "
+"posterior publicada pela Free Software Foundation. Se o Programa não "
+"especificar um número de versão desta Licença, você pode escolher qualquer "
+"versão já publicada pela Free Software Foundation."
 
 #: ../../txts/COPYING:96
 msgid ""
@@ -249,7 +345,7 @@ msgid ""
 "contact you by electronic and paper mail."
 msgstr ""
 
-#: ../../txts/README:143
+#: ../../txts/README:155
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
@@ -264,6 +360,8 @@ msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
+"Sempre construa uma casa de guarda florestal e um criador de peixes, de modo "
+"que você não vai ficar sem dos troncos e dos alimentos."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
@@ -280,17 +378,21 @@ msgid ""
 "Any further questions? Our FAQs, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"Dúvidas? Nosso FAQs, o wiki e, claro, fóruns de nossa comunidade podem ser "
+"encontradas em www.widelands.org."
 
-#: ../../txts/developers:134
+#: ../../txts/developers:135
 msgid "Barbarian"
-msgstr ""
+msgstr "Bárbaro"
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
+"Certifique-se de enviar um geólogo para pesquisa antes de construir um poço "
+"ou uma mina"
 
-#: ../../txts/README:55
+#: ../../txts/README:57
 msgid "C               Toggle census"
 msgstr ""
 
@@ -300,15 +402,15 @@ msgstr ""
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
-msgstr ""
+msgstr "CTRL+L Carregar Mapa"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
-msgstr ""
+msgstr "CTRL+S Salvar Mapa"
 
-#: ../../txts/developers:131
+#: ../../txts/developers:132
 msgid "Campaign Story"
-msgstr ""
+msgstr "Campanha"
 
 #: ../../txts/README:16
 msgid "Check out the Widelands project homepage:"
@@ -316,7 +418,7 @@ msgstr ""
 
 #: ../../txts/developers:9
 msgid "Chieftain"
-msgstr ""
+msgstr "Chefe"
 
 #: ../../txts/developers:38
 msgid "Coders"
@@ -334,15 +436,23 @@ msgstr ""
 "distribuição de cópias verbatim deste documento de licença, mas alterações "
 "não são permitidas.<br>"
 
-#: ../../txts/README:131
+#: ../../txts/README:143
 msgid "Creating a Session Record</p>"
 msgstr ""
 
-#: ../../txts/developers:154
+#: ../../txts/README:79
+msgid "Ctrl+F10    Quit the game immediately"
+msgstr ""
+
+#: ../../txts/developers:155
 msgid "Czech"
 msgstr ""
 
-#: ../../txts/developers:161
+#: ../../txts/README:90
+msgid "DELETE      Archive the current message"
+msgstr ""
+
+#: ../../txts/developers:162
 msgid "Dansk"
 msgstr ""
 
@@ -350,11 +460,11 @@ msgstr ""
 msgid "Development"
 msgstr ""
 
-#: ../../txts/developers:296
+#: ../../txts/developers:297
 msgid "Documentation, Help and Wiki"
 msgstr ""
 
-#: ../../txts/developers:167
+#: ../../txts/developers:168
 msgid "Dutch"
 msgstr ""
 
@@ -366,7 +476,7 @@ msgstr ""
 msgid "Elders"
 msgstr ""
 
-#: ../../txts/developers:140
+#: ../../txts/developers:141
 msgid "Empire"
 msgstr ""
 
@@ -374,7 +484,7 @@ msgstr ""
 msgid "End of Terms and Conditions"
 msgstr "Fim dos Termos e Condições"
 
-#: ../../txts/README:61
+#: ../../txts/README:63
 msgid "F               Toggle Fullscreen"
 msgstr ""
 
@@ -382,28 +492,28 @@ msgstr ""
 msgid "F        Toggles fullscreen"
 msgstr ""
 
-#: ../../txts/README:73
-msgid "F10         Quit the game immediately"
-msgstr ""
-
-#: ../../txts/README:75
+#: ../../txts/README:81
 msgid "F11         Take a screenshot"
 msgstr ""
 
-#: ../../txts/README:71
+#: ../../txts/README:77
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr ""
 
-#: ../../txts/developers:174
+#: ../../txts/developers:175
 msgid "Finnish"
 msgstr ""
 
-#: ../../txts/developers:310
+#: ../../txts/developers:311
 msgid "Former elders"
 msgstr ""
 
-#: ../../txts/developers:180
+#: ../../txts/developers:181
 msgid "French"
+msgstr ""
+
+#: ../../txts/README:88
+msgid "G           Go to location corresponding to current message"
 msgstr ""
 
 #: ../../txts/COPYING:3
@@ -416,7 +526,7 @@ msgid ""
 "and modification"
 msgstr ""
 
-#: ../../txts/developers:187
+#: ../../txts/developers:188
 msgid "Galician"
 msgstr ""
 
@@ -424,7 +534,7 @@ msgstr ""
 msgid "General game control"
 msgstr ""
 
-#: ../../txts/developers:192
+#: ../../txts/developers:193
 msgid "German"
 msgstr ""
 
@@ -433,7 +543,7 @@ msgid "Graphicians"
 msgstr ""
 
 #: ../../txts/developers:19
-#: ../../txts/developers:321
+#: ../../txts/developers:322
 msgid "Graphics"
 msgstr ""
 
@@ -441,7 +551,7 @@ msgstr ""
 msgid "H        Toggles main menu"
 msgstr ""
 
-#: ../../txts/developers:204
+#: ../../txts/developers:205
 msgid "Hebrew"
 msgstr ""
 
@@ -452,20 +562,20 @@ msgstr ""
 #: ../../txts/tips/editor.tip:14
 msgid ""
 "Holding down SHIFT switches first alternative tool on. This tool is in most "
-"cases the complete difference of the normal tool (for example deletion of an "
+"cases the complete opposite of the normal tool (for example deletion of an "
 "object instead of placing one)."
 msgstr ""
 
-#: ../../txts/README:63
+#: ../../txts/README:65
 msgid "Home        Center main mapview on starting location"
 msgstr ""
 
 #: ../../txts/developers:24
-#: ../../txts/developers:314
+#: ../../txts/developers:315
 msgid "Homepage"
 msgstr ""
 
-#: ../../txts/developers:287
+#: ../../txts/developers:288
 msgid "Homepage Coders"
 msgstr ""
 
@@ -473,7 +583,7 @@ msgstr ""
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "Como Aplicar Estes Termos aos Seus Novos Programas"
 
-#: ../../txts/developers:209
+#: ../../txts/developers:210
 msgid "Hungarian"
 msgstr ""
 
@@ -520,17 +630,22 @@ msgstr ""
 "amplamente pelo público, a melhor forma de alcançar este objetivo é torná-lo "
 "software livre que qualquer um pode redistribuir e alterar, sob estes termos."
 
-#: ../../txts/README:87
+#: ../../txts/README:99
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
 msgstr ""
 
-#: ../../txts/README:99
+#: ../../txts/README:111
 msgid ""
 "If you want to report bugs, please send your report to the mailing list, "
 "<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
 "page:"
+msgstr ""
+
+#: ../../txts/README:86
+msgid ""
+"In the message window, the following additional shortcuts are available:"
 msgstr ""
 
 #: ../../txts/README:9
@@ -551,7 +666,7 @@ msgid ""
 "licensee cannot impose that choice."
 msgstr ""
 
-#: ../../txts/developers:214
+#: ../../txts/developers:215
 msgid "Italian"
 msgstr ""
 
@@ -580,7 +695,7 @@ msgid ""
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
 
-#: ../../txts/developers:254
+#: ../../txts/developers:255
 msgid "Linux Distributions"
 msgstr ""
 
@@ -592,7 +707,7 @@ msgstr ""
 msgid "M        Toggles minimap"
 msgstr ""
 
-#: ../../txts/developers:118
+#: ../../txts/developers:119
 msgid "Maps and Missions"
 msgstr ""
 
@@ -600,11 +715,15 @@ msgstr ""
 msgid "Miners will only work if supplied with food."
 msgstr ""
 
-#: ../../txts/developers:97
+#: ../../txts/developers:98
 msgid "Musicians"
 msgstr ""
 
-#: ../../txts/developers:149
+#: ../../txts/README:55
+msgid "N               Toggle messages ('news')"
+msgstr ""
+
+#: ../../txts/developers:150
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -614,11 +733,11 @@ msgstr ""
 msgid "No warranty"
 msgstr ""
 
-#: ../../txts/developers:276
+#: ../../txts/developers:277
 msgid "Non Unix Distributions"
 msgstr ""
 
-#: ../../txts/README:146
+#: ../../txts/README:158
 msgid ""
 "Note that while recorded files are platform independent, they generally "
 "won't work across different versions of Widelands, because the user "
@@ -627,11 +746,11 @@ msgid ""
 "files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr ""
 
-#: ../../txts/README:59
+#: ../../txts/README:61
 msgid "O               Toggle objectives display"
 msgstr ""
 
-#: ../../txts/README:140
+#: ../../txts/README:152
 msgid ""
 "On Windows, create a shortcut to the file widelands.exe (right-click on "
 "widelands.exe and choose Create Shortcut). Then edit the shortcut (right-"
@@ -640,15 +759,15 @@ msgid ""
 "to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr ""
 
-#: ../../txts/README:83
+#: ../../txts/README:95
 msgid "Online Help"
 msgstr "Ajuda On-Line"
 
-#: ../../txts/developers:338
+#: ../../txts/developers:339
 msgid "Other"
 msgstr ""
 
-#: ../../txts/developers:265
+#: ../../txts/developers:266
 msgid "Other Unix Distributions"
 msgstr ""
 
@@ -662,15 +781,15 @@ msgstr ""
 msgid "P        Toggles player menu"
 msgstr ""
 
-#: ../../txts/README:68
+#: ../../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
 msgstr "PAGEDOWN Diminui a velocidade do jogo"
 
-#: ../../txts/README:66
+#: ../../txts/README:72
 msgid "PAGEUP         Increase gamespeed"
 msgstr "PAGEUP Aumenta a velocidade do jogo"
 
-#: ../../txts/developers:250
+#: ../../txts/developers:251
 msgid "Packagers"
 msgstr ""
 
@@ -678,11 +797,11 @@ msgstr ""
 msgid "Please look into our enduser manuals in our wiki-pages at:"
 msgstr ""
 
-#: ../../txts/README:104
+#: ../../txts/README:116
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../../txts/developers:219
+#: ../../txts/developers:220
 msgid "Polish"
 msgstr ""
 
@@ -702,7 +821,7 @@ msgstr ""
 msgid "README for the Widelands Editor"
 msgstr ""
 
-#: ../../txts/README:127
+#: ../../txts/README:139
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic code, so we "
 "ask you to attach replay files to all bug reports that you submit. The "
@@ -711,19 +830,19 @@ msgid ""
 "Windows."
 msgstr ""
 
-#: ../../txts/README:120
+#: ../../txts/README:132
 msgid "Replays</p>"
 msgstr ""
 
-#: ../../txts/README:95
+#: ../../txts/README:107
 msgid "Reporting Bugs"
 msgstr "Relatando Erros"
 
-#: ../../txts/developers:227
+#: ../../txts/developers:228
 msgid "Russian"
 msgstr ""
 
-#: ../../txts/README:57
+#: ../../txts/README:59
 msgid "S               Toggle statistics"
 msgstr ""
 
@@ -744,13 +863,13 @@ msgid ""
 "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
 
-#: ../../txts/developers:150
+#: ../../txts/developers:151
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
 
-#: ../../txts/developers:232
+#: ../../txts/developers:233
 msgid "Slovak"
 msgstr ""
 
@@ -763,15 +882,15 @@ msgid ""
 msgstr ""
 
 #: ../../txts/developers:29
-#: ../../txts/developers:326
+#: ../../txts/developers:327
 msgid "Sound"
 msgstr ""
 
-#: ../../txts/developers:108
+#: ../../txts/developers:109
 msgid "Sound Effects"
 msgstr ""
 
-#: ../../txts/developers:237
+#: ../../txts/developers:238
 msgid "Spanish"
 msgstr ""
 
@@ -785,7 +904,7 @@ msgstr ""
 msgid "Status"
 msgstr "Situação"
 
-#: ../../txts/developers:242
+#: ../../txts/developers:243
 msgid "Swedish"
 msgstr ""
 
@@ -922,7 +1041,7 @@ msgstr ""
 msgid "To close an open window, right click it."
 msgstr ""
 
-#: ../../txts/README:137
+#: ../../txts/README:149
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
@@ -942,11 +1061,11 @@ msgid ""
 "with middle mousebutton or with left mousebutton while holding down CTRL."
 msgstr ""
 
-#: ../../txts/developers:331
+#: ../../txts/developers:332
 msgid "Translation"
 msgstr ""
 
-#: ../../txts/developers:146
+#: ../../txts/developers:147
 msgid "Translators"
 msgstr ""
 
@@ -967,7 +1086,7 @@ msgid ""
 "ware."
 msgstr ""
 
-#: ../../txts/README:125
+#: ../../txts/README:137
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -981,7 +1100,7 @@ msgstr ""
 msgid "Version 2, June 1991<br></p></rt>"
 msgstr "Versão 2, Junho 1991<br></p></rt>"
 
-#: ../../txts/README:78
+#: ../../txts/README:84
 msgid ""
 "When finishing a road, if Ctrl is down, place flags along the road. Default "
 "is to place flags from end to start. If Shift is also down, place flags from "
@@ -992,7 +1111,7 @@ msgstr ""
 msgid "Widelands Development Team"
 msgstr ""
 
-#: ../../txts/README:134
+#: ../../txts/README:146
 msgid ""
 "Widelands can record all your keypresses and mouse movements to a file. It "
 "can then replay an entire session from starting the game to exiting it. This "
@@ -1003,11 +1122,11 @@ msgstr ""
 msgid ""
 "Widelands is a strategy game aiming for gameplay similar to Settlers II by "
 "BlueByte.<br>In this game, you start out on a small piece of land with "
-"nothing more than a few of useful resources. Using those, you can build "
+"nothing more than a few useful resources. Using those, you can build "
 "yourself an empire with many thousands of inhabitants. On your way towards "
 "this goal, you will have to build up an economic infrastructure, explore the "
 "lands around you and face enemies who are trying to rule the world just like "
-"you do."
+"you."
 msgstr ""
 
 #: ../../txts/README:22
@@ -1025,7 +1144,7 @@ msgid ""
 "game."
 msgstr ""
 
-#: ../../txts/README:123
+#: ../../txts/README:135
 msgid ""
 "Widelands records every game you play in two files. One of these files has a "
 ".wrpl.wgf extension and contains an initial savegame. The other file has "
@@ -1056,7 +1175,7 @@ msgstr ""
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
 "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the "
-"real speed is than democratically set."
+"real speed is then democratically set."
 msgstr ""
 
 #: ../../txts/tips/general_game.tip:10
