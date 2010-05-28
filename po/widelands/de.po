@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-26 23:38+0000\n"
+"PO-Revision-Date: 2010-05-27 07:40+0000\n"
 "Last-Translator: kraileth <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-27 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-05-28 03:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:1724
@@ -566,7 +566,7 @@ msgstr "Arbeiterarten"
 
 #: ../../src/writeHTML.cc:522
 msgid "Needed<br/>experience"
-msgstr ""
+msgstr "Erfordert<br/>Erfahrung"
 
 #: ../../src/writeHTML.cc:524
 msgid "Becomes"
@@ -585,6 +585,8 @@ msgstr "Kampfeinstellungen"
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Lebenspunkte sind %u, plus %u für jede Stufe über 0 (die maximale Stufe ist "
+"%u)."
 
 #: ../../src/writeHTML.cc:600
 #, c-format
@@ -619,7 +621,7 @@ msgstr "Wird in Warenhäusern erzeugt."
 #: ../../src/writeHTML.cc:697
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr ""
+msgstr "Benötigt die Erfahrung von %u Arbeitsvorgängen um zu werden:"
 
 #: ../../src/writeHTML.cc:705
 #, c-format
@@ -1259,7 +1261,7 @@ msgstr "%u%% gebaut"
 #: ../../src/logic/critter_bob.cc:385
 #, c-format
 msgid "loading critter: %s"
-msgstr ""
+msgstr "Lade Tier: %s"
 
 #: ../../src/logic/game.cc:229
 msgid "Preloading a map"
@@ -2039,7 +2041,7 @@ msgstr "nichts"
 #: ../../src/logic/worker.cc:2807
 #, c-format
 msgid "loading worker: %s"
-msgstr ""
+msgstr "Lade Arbeiter: %s"
 
 #: ../../src/logic/world.cc:623
 #, c-format

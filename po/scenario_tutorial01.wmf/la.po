@@ -1,4 +1,4 @@
-# Brazilian Portuguese translation for widelands
+# Latin translation for widelands
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-05-26 22:58+0000\n"
-"Last-Translator: HicHic <Unknown>\n"
-"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"PO-Revision-Date: 2010-05-27 09:41+0000\n"
+"Last-Translator: Sonnrain <Unknown>\n"
+"Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,11 +25,6 @@ msgid ""
 "no longer of any use and is just blocking space. To do that, click on the\n"
 "quarry and select the destroy button."
 msgstr ""
-"A mensagem foi enviada para você. Veja como o botão na parte inferior da\n"
-"tela mudou a aparência? Agora você deve queimar essa mina, pois isto é\n"
-"não de qualquer uso e é apenas o bloqueio do espaço. Para fazer isso, clique "
-"no\n"
-"pedreira e selecione o botão de destruir."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:610
 msgid ""
@@ -58,38 +53,31 @@ msgid ""
 "screen.\n"
 "Close the messages window now by right clicking into it."
 msgstr ""
-"Todas as janelas em Widelands pode ser fechada com o botão direito em si. "
-"Algumas\n"
-"janelas também pode ser alternado com os botões na parte inferior da tela.\n"
-"Feche a janela de mensagens agora com o botão direito nele."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
 msgid ""
 "Alternatively, you can directly click the flag where\n"
 "the road should end like so."
 msgstr ""
-"Alternativamente, você pode clicar diretamente no pavilhão onde\n"
-"o caminho deve terminar assim o desejar."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:266
 msgid "And finally the yellow flag symbol only allows for flags."
-msgstr "E, finalmente, o símbolo de bandeira amarela só permite bandeiras."
+msgstr ""
+"Et ultimum: Flavum insignis signum solum insignia ibi ponere posse indicit."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:412
 msgid "Archive all messages in your inbox"
-msgstr "Arquivar todas as mensagens em sua caixa de entrada"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:407
 msgid ""
 "Archive all messages, including this one, that you currently have in your\n"
 " inbox."
 msgstr ""
-"Arquivar todas as mensagens, incluindo este, que você tem atualmente em sua\n"
-" inbox."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:413
 msgid "Archive our inbox messages"
-msgstr "Arquive nossas mensagens na caixa de entrada."
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:484
 msgid ""
@@ -99,22 +87,12 @@ msgid ""
 "vulnerable: any military site from another player can conquer the land. You\n"
 "therefore need military sites to keep military influence over your land."
 msgstr ""
-"Assim como um edifício militar é lotado, ele estende a sua terra. Você pode, "
-"então,\n"
-"queimá-lo novamente se você precisar de um lugar. Mas note que a sua terra é "
-"então\n"
-"vulnerável: qualquer construção militar de outro jogador pode conquistar a "
-"terra. Você\n"
-"portanto, precisa de instalações militares para manter a influência dos "
-"militares sobre sua terra."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:683
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
 msgstr ""
-"Ataque e conquiste todos os edifícios militares do inimigo e destrua o sua\n"
-"sede"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
@@ -126,11 +104,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid "Build a flag on the road"
-msgstr "Construa uma bandeira na estrada"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:167
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr "Construa uma bandeira para dividir a estrada para lenhador"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:278
 msgid "Build a quarry"
@@ -154,11 +132,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid "Building a connecting road"
-msgstr "Construindo uma estrada de ligação"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:118
 msgid "Building the lumberjack"
-msgstr "Construindo o lenhador"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:593
 msgid ""
@@ -187,25 +165,25 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:437
 msgid "Close the messages window"
-msgstr "Feche a janela de mensagens"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:427
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:448
 msgid "Closing windows"
-msgstr "Cerrando janelas"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:697
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:698
 msgid "Conclusion"
-msgstr "Conclusão"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:346
 msgid "Connect the quarry to the headquarters"
-msgstr "Conecte a pedreira com a sede"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:347
 msgid "Connect your construction site"
-msgstr "Conecte sua construação"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:348
 msgid ""
@@ -221,11 +199,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
-msgstr "Conquiste uma área em que podemos construir minas"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
 msgid "Conquer the mountain to the south west"
-msgstr "Conquiste a montanha no sudoeste"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
@@ -240,11 +218,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid "Defeat the enemy"
-msgstr "Vença o inimigo"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
 msgid "Defeat the enemy tribe"
-msgstr "Vença a tribo inimiga"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:690
 msgid ""
@@ -287,11 +265,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhance this fortress"
-msgstr "Melhore esta fortaleza"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid "Enhance your fortress"
-msgstr "Melhore sua fortaleza"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
 msgid "Enhance your fortress to a citadel"
@@ -386,7 +364,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:470
 msgid "Expanding your territory!"
-msgstr "Expandindo seu território!"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:121
 msgid ""
@@ -436,7 +414,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:248
 msgid "How to build a quarry"
-msgstr "Como construir uma pedreira."
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:43
 msgid ""
@@ -546,7 +524,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:188
 msgid "Lumberjack is done"
-msgstr "Lenhador está pronto"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:104
 msgid "Lumberjack's spot"
@@ -558,7 +536,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
 msgid "Messages"
-msgstr "Mensagens"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:556
 msgid "Mining conclusion"
@@ -690,19 +668,17 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:157
 msgid "Placing another flag"
-msgstr "Fincando outra bandeira"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:264
 msgid "Red building symbols can only hold small buildings and flags."
 msgstr ""
-"Símbolos de edifícios vermelhos podem apenas permitir a construção de "
-"pequenas edificações e bandeiras."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:292
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:316
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:325
 msgid "Road building"
-msgstr "Construindo estrada"
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:513
 msgid "Searching for resources"
