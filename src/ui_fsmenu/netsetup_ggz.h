@@ -96,6 +96,8 @@ private:
 	void clicked_joingame();
 	void clicked_hostgame();
 	void clicked_lasthost();
+
+	bool compare_usertype(unsigned int rowa, unsigned int rowb);
 };
 
 #endif // if HAVE_GGZ

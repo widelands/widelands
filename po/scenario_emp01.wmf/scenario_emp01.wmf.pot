@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-16 22:48+0000\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -16,12 +16,12 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
 msgid ""
-" \"Finally, the Gods were with us!<br> We landed on an unknown coast and found peaceful rest under the palm trees growing at the strand. But that is about as good as it gets. The truth is:<br> when I woke up this morning, I saw nothing more than sand around us.<br> It really seems as if we landed under the only palm trees existing in this far-away sandy desert. I fear we won't find the help we need to get our ship repaired in good time.\" "
+" \"Finally, the Gods were with us!<br> We landed on an unknown coast and found peaceful rest under the palm trees growing at the shore. But that is about as good as it gets. The truth is:<br> when I woke up this morning, I saw nothing more than sand around us.<br> It really seems as if we landed under the only palm trees existing in this far-away sandy desert. I fear we won't find the help we need to get our ship repaired in good time.\" "
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:90
 msgid ""
-" \"Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can faster harvest the trunks.<br> But unfortunately the trunks are useless for repairing our ship - we need refined wood, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
+" \"Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can harvest the trunks faster.<br> But unfortunately the trunks are useless for repairing our ship - we need refined lumber, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:73
@@ -36,12 +36,12 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:114
 msgid ""
-" \"Hey, my good old friend. I just thought about the rocks standing on the south strand of this land. Perhaps we could cut out some useful hard stones and beautiful marble.<br> The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
+" \"Hey, my good old friend. I just thought about the rocks standing on the south shore of this land. Perhaps we could cut out some useful hard stones and beautiful marble.<br> The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:102
 msgid ""
-" \"Hi Lutius, I've got two important things to talk about... First the good news:<br> I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting to wood.<br> But that's just about the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br> Lutius, these trees provide shelter from the sandstorms from the desert, shade on the hot days and they are the home of so many gentle animals. We shouldn't leave this island a complete desert.<br> Lutius, I beg you: find someone who takes care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
+" \"Hi Lutius, I've got two important things to talk about... First the good news:<br> I saw that the construction of the sawmill is complete, so we can begin to refine the trunks that the lumberjacks are harvesting into lumber.<br> But that's just about the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br> Lutius, these trees provide shelter from the sandstorms from the desert, shade on the hot days and they are the home of so many gentle animals. We shouldn't leave this island a complete desert.<br> Lutius, I beg you: find someone who takes care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:26
@@ -51,7 +51,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:50
 msgid ""
-" \"Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Than one of us will keep watch in the darkness and keep us safe from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
+" \"Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Then one of us can keep watch in the darkness and keep us safe from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:63
@@ -104,12 +104,6 @@ msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr ""
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:155
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:162
-msgid ""
-"<rt><p>"
-msgstr ""
-
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:10
 msgid ""
 "A dark night"
@@ -127,7 +121,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
-"After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
+"After losing an important battle against the barbarians which lead to the lost of a big part of the Empire's territory, Lutius leaves Fremil to start a new life. But his destiny takes his ship into a heavy storm, which nearly destroys it. Only with a lot of luck he manages to beach his damaged ship on an unknown desert strand and save his people. For now."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:100

@@ -84,14 +84,14 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 
 // Buttons
 	m_back
-		(this,
+		(this, "back",
 		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_Editor_MapSelect::end_modal, *this, 0,
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_ok
-		(this,
+		(this, "ok",
 		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_Editor_MapSelect::ok, *this,

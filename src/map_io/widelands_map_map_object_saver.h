@@ -45,6 +45,7 @@ struct Map_Map_Object_Saver {
 	Serial register_object(Map_Object const &);
 
 	uint32_t get_object_file_index(Map_Object const &);
+	uint32_t get_object_file_index_or_zero(Map_Object const *);
 
 	void mark_object_as_saved(Map_Object const &);
 

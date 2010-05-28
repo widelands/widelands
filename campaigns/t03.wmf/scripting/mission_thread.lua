@@ -8,6 +8,19 @@ fr1 = wl.map.Field(81,108)
 fr2 = wl.map.Field(85,1)
 fr3 = wl.map.Field(85,11)
 
+function remember_cattlefarm()
+   sleep(100)
+
+   send_msg(cattlefarm_01)
+
+   p1:allow_buildings{"cattlefarm"}
+   local o = add_obj(obj_build_cattlefarm)
+   while not check_for_buildings(p1, {cattlefarm = 1}) do
+      sleep(1234) end
+   o.done = true
+
+end
+
 function initial_message_and_small_food_economy()
    wake_me(2000)
    send_msg(story_msg_1)
@@ -34,6 +47,9 @@ function initial_message_and_small_food_economy()
       }) do sleep(3412) end
    o.done = true
    send_msg(story_note_1)
+
+   sleep(600000)  -- 10 minutes
+   remember_cattlefarm()
 end
 
 function foottracks() 
@@ -52,14 +68,14 @@ function foottracks()
    )
    p1:reveal_fields(fields)
    
-   local pts = smooth_move(wl.map.Field(67,19))
-   sleep(1000)
+   local pts = scroll_smoothly_to(wl.map.Field(67,19))
+
    send_msg(order_msg_2_build_a_donjon)
    local o = add_obj(obj_build_a_donjon)
    p1:forbid_buildings{"sentry"}
    p1:allow_buildings{"donjon"}
 
-   timed_move(array_reverse(pts), p1, 10)
+   timed_scroll(array_reverse(pts), 10)
 
    -- Hide the tracks again
    sleep(5000)
@@ -95,8 +111,8 @@ function mining_and_trainingsites()
       wl.map.Field(82, 20):region(6))
    )
 
-   local pts = smooth_move(wl.map.Field(82,20))
-   sleep(1000)
+   local pts = scroll_smoothly_to(wl.map.Field(82,20))
+
    send_msg(order_msg_4_build_mining_economy)
    local o = add_obj(obj_build_mining_economy) 
    
@@ -110,7 +126,7 @@ function mining_and_trainingsites()
       "burners_house",
    }
    
-   timed_move(array_reverse(pts), p1, 10)
+   timed_scroll(array_reverse(pts), 10)
    sleep(500)
 
    while true do
@@ -259,13 +275,13 @@ function renegade_fortresses()
    -- Some something of the enemy land
    p1:reveal_fields(wl.map.Field(129,97):region(12))
 
-   local pts = smooth_move(wl.map.Field(117,92))
-   sleep(1000)
+   local pts = scroll_smoothly_to(wl.map.Field(117,92))
+
    send_msg(order_msg_7_renegade_fortification)
    send_msg(order_msg_7_free_althunran)
    local o = add_obj(obj_military_assault_on_althunran)
 
-   timed_move(array_reverse(pts), p1, 10)
+   timed_scroll(array_reverse(pts), 10)
    sleep(500)
 
    while not (p3.defeated and p4.defeated) do
@@ -282,8 +298,8 @@ function mission_complete()
 
    p1:reveal_fields(wl.map.Field(4,9):region(6))
 
-   local pts = smooth_move(wl.map.Field(4,5))
-   sleep(1000)
+   local pts = scroll_smoothly_to(wl.map.Field(4,5))
+
    send_msg(story_msg_7)
 
    p1:reveal_campaign("campsect1")

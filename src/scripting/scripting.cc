@@ -30,11 +30,21 @@
 #include "lua_game.h"
 #include "lua_globals.h"
 #include "lua_map.h"
+#include "lua_ui.h"
 #include "persistence.h"
 
 #include "scripting.h"
 
+#ifdef _MSC_VER
+#include <ctype.h> // for tolower
+#endif
+
 // TODO: add wl.editor to documentation
+// TODO: position or field should be on the immovable classes.
+// Check out what this BaseImmovable <-> Immovable thing is all about.
+// TODO: road must offer some access to it's fields for this to work.
+// TODO: also big buildings occupy more space: i suggest some occupied fields property
+// TODO: and also a field property
 
 /*
 ============================================
@@ -148,11 +158,13 @@ std::string LuaInterface_Impl::m_register_script
 		size_t length;
 		std::string data(static_cast<char *>(fs.Load(path, length)));
 		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
-		size_t pos = name.rfind('/');
-		if (pos == std::string::npos)
-			pos = name.rfind("\\");
-		if (pos != std::string::npos)
-			name = name.substr(pos + 1, name.size());
+
+		for (size_t i = name.size() - 1; i; i--) {
+			if (name[i] == '/' or name[i] == '\\') {
+				name = name.substr(i + 1, name.size());
+				break;
+			}
+		}
 
 		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
 		m_scripts[ns][name] = data;
@@ -166,8 +178,13 @@ bool LuaInterface_Impl::m_filename_to_short(const std::string & s) {
 bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 	std::string ext = s.substr(s.size() - 4, s.size());
 	// std::transform fails on older system, therefore we use an explicit loop
-	for (uint32_t i = 0; i < ext.size(); i++)
+	for (uint32_t i = 0; i < ext.size(); i++) {
+#ifndef _MSC_VER
 		ext[i] = std::tolower(ext[i]);
+#else
+		ext[i] = tolower(ext[i]);
+#endif
+	}
 	return (ext == ".lua");
 }
 
@@ -208,7 +225,7 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	}
 
 	// Push the instance of this class into the registry
-	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(this));
+	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(dynamic_cast<LuaInterface*>(this)));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
 
 	// Now our own
@@ -308,6 +325,7 @@ LuaInterface()
 	luaopen_wldebug(m_L);
 	luaopen_wlmap(m_L);
 	luaopen_wlgame(m_L);
+	luaopen_wlui(m_L);
 
 	// Push the editor game base
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));
@@ -440,21 +458,12 @@ uint32_t LuaGameInterface_Impl::write_coroutine
 }
 
 
-static const char * m_persistent_globals[] = {
-	"_VERSION", "assert", "collectgarbage", "coroutine", "debug",
-	"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",
-	"load", "loadfile", "loadstring", "math", "module", "newproxy", "next",
-	"os", "package", "pairs", "pcall", "print", "rawequal",
-	"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
-	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
-	"string", "use", "_", "set_textdomain", "coroutine.yield", 0
-};
 void LuaGameInterface_Impl::read_global_env
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
 	// Empty table + object to persist on the stack Stack
-	unpersist_object(m_L, m_persistent_globals, fr, mol, size);
+	unpersist_object(m_L, fr, mol, size);
 	luaL_checktype(m_L, -1, LUA_TTABLE);
 
 	// Now, we have to merge all keys from the loaded table
@@ -487,7 +496,7 @@ uint32_t LuaGameInterface_Impl::write_global_env
 	lua_newtable(m_L);
 	lua_pushvalue(m_L, LUA_GLOBALSINDEX);
 
-	return persist_object(m_L, m_persistent_globals, fw, mos);
+	return persist_object(m_L, fw, mos);
 }
 
 /*

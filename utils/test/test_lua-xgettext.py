@@ -234,6 +234,20 @@ is that then]] .. [[More]] ..  "And more"
     end
     '''
 
+class TestMultilineStrings_ContainingSingleLine(_TestLua_GetText_SingleFile):
+  items = [
+        ('"Lorem ipsum dolor sit amet, consetetur sadipscing\nelitr, sed diam '
+         'nonumy eirmod tempor"', 0, 4),
+    ]
+  code = '''
+    function a()
+        if(nil) then return _
+[["Lorem ipsum dolor sit amet, consetetur sadipscing
+elitr, sed diam nonumy eirmod tempor"]]
+        end
+    end
+    '''
+
 class TestVerySimpleMultilineString(_TestLua_GetText_SingleFile):
     items = [
         (' "There is an old saying:<br> blah ', 0, 1),

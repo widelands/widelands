@@ -919,23 +919,15 @@ void Game::sample_statistics()
 /**
  * Read statistics data from a file.
  *
- * \param fr UNDOCUMENTED
- * \param version indicates the kind of statistics file, which may be
- *   0 - old style statistics (from the time when statistics were kept in
- *       Interactive_Player)
- *   1 - without casualties
- *   2 - with casualties
- *   3 - with military/civilian buildings lost/defeated
- *
- * \todo Document parameter fr
- * \todo Would it make sense to not support the old style anymore?
+ * \param fr file to read from
+ * \param version indicates the kind of statistics file; the current version
+ *   is 3, support for older versions (used in widelands build <= 12) was dropped
+ *   after the release of build 15
  */
 void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 {
-	if (version <= 3) {
-		if (version >= 1) {
-			m_last_stats_update = fr.Unsigned32();
-		}
+	if (version == 3) {
+		m_last_stats_update = fr.Unsigned32();
 
 		// Read general statistics
 		uint32_t entries = fr.Unsigned16();
@@ -965,17 +957,12 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 				m_general_stats[p - 1].nr_buildings    [j] = fr.Unsigned32();
 				m_general_stats[p - 1].nr_wares        [j] = fr.Unsigned32();
 				m_general_stats[p - 1].productivity    [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_casualties   [j] =
-					version >= 2 ? fr.Unsigned32() : 0;
+				m_general_stats[p - 1].nr_casualties   [j] = fr.Unsigned32();
 				m_general_stats[p - 1].nr_kills        [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_msites_lost        [j] =
-					version >= 3 ? fr.Unsigned32() : 0;
-				m_general_stats[p - 1].nr_msites_defeated    [j] =
-					version >= 3 ? fr.Unsigned32() : 0;
-				m_general_stats[p - 1].nr_civil_blds_lost    [j] =
-					version >= 3 ? fr.Unsigned32() : 0;
-				m_general_stats[p - 1].nr_civil_blds_defeated[j] =
-					version >= 3 ? fr.Unsigned32() : 0;
+				m_general_stats[p - 1].nr_msites_lost        [j] = fr.Unsigned32();
+				m_general_stats[p - 1].nr_msites_defeated    [j] = fr.Unsigned32();
+				m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.Unsigned32();
+				m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.Unsigned32();
 				m_general_stats[p - 1].miltary_strength[j] = fr.Unsigned32();
 			}
 	} else
@@ -1093,11 +1080,11 @@ void Game::conquer_area_no_building(Player_Area<Area<FCoords> > player_area) {
 		Player_Number const owner = mr.location().field->get_owned_by();
 		if (owner != player_area.player_number) {
 			if (owner)
-				receive(NoteField(mr.location(), LOSE));
+				receive(NoteFieldPossession(mr.location(), LOSE));
 			mr.location().field->set_owned_by(player_area.player_number);
 			inform_players_about_ownership
 				(mr.location().field - &first_field, player_area.player_number);
-			receive (NoteField(mr.location(), GAIN));
+			receive (NoteFieldPossession(mr.location(), GAIN));
 		}
 	} while (mr.advance(map()));
 
@@ -1155,10 +1142,10 @@ void Game::do_conquer_area
 				 player(owner).military_influence(index) < new_influence_modified)
 			{
 				if (owner)
-					receive(NoteField(mr.location(), LOSE));
+					receive(NoteFieldPossession(mr.location(), LOSE));
 				mr.location().field->set_owned_by(player_area.player_number);
 				inform_players_about_ownership(index, player_area.player_number);
-				receive (NoteField(mr.location(), GAIN));
+				receive (NoteFieldPossession(mr.location(), GAIN));
 			}
 		} else if
 			(not (conquering_player.military_influence(index) -= influence)
@@ -1196,11 +1183,11 @@ void Game::do_conquer_area
 				}
 			}
 			if (best_player != player_area.player_number) {
-				receive (NoteField(mr.location(), LOSE));
+				receive (NoteFieldPossession(mr.location(), LOSE));
 				mr.location().field->set_owned_by (best_player);
 				inform_players_about_ownership(index, best_player);
 				if (best_player)
-					receive (NoteField(mr.location(), GAIN));
+					receive (NoteFieldPossession(mr.location(), GAIN));
 			}
 		}
 	} while (mr.advance(map()));

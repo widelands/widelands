@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ inline Editor_Interactive & Main_Menu_Save_Map::eia() {
 
 
 Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
-	: UI::Window(&parent, 0, 0, 500, 330, _("Save Map"))
+	: UI::Window(&parent, "save_map_menu", 0, 0, 500, 330, _("Save Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
@@ -129,21 +129,21 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 	posy = get_inner_h() - 30;
 
 	m_ok_btn = new UI::Callback_Button<Main_Menu_Save_Map>
-		(this,
+		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Main_Menu_Save_Map::clicked_ok, *this,
 		 _("OK"));
 
 	new UI::Callback_Button<Main_Menu_Save_Map>
-		(this,
+		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_Save_Map::die, *this,
 		 _("Cancel"));
 
 	new UI::Callback_Button<Main_Menu_Save_Map>
-		(this,
+		(this, "make_directory",
 		 spacing, posy, 120, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_Save_Map::clicked_make_directory, *this,
@@ -160,7 +160,9 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 	move_to_top();
 }
 
-
+/**
+ * Called when the ok button was pressed or a file in list was double clicked.
+ */
 void Main_Menu_Save_Map::clicked_ok() {
 	assert(m_ok_btn->enabled());
 	std::string filename = m_editbox->text();
@@ -198,6 +200,10 @@ void Main_Menu_Save_Map::clicked_ok() {
 			die();
 	}
 }
+
+/**
+ * Called, when the make directory button was clicked.
+ */
 void Main_Menu_Save_Map::clicked_make_directory() {
 	Main_Menu_Save_Map_Make_Directory md(this, _("unnamed"));
 	if (md.run()) {
@@ -213,8 +219,8 @@ void Main_Menu_Save_Map::clicked_make_directory() {
 	}
 }
 
-/*
- * called when a item is selected
+/**
+ * called when an item was selected
  */
 void Main_Menu_Save_Map::clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
@@ -226,7 +232,6 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 				(map.get_correct_loader(name));
 			ml->preload_map(true); // This has worked before, no problem
 		}
-
 
 		m_editbox->setText(FileSystem::FS_Filename(name));
 
@@ -242,26 +247,41 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
 		m_size->set_text(buf);
 	} else {
-		m_name     ->set_text("");
+		m_name     ->set_text(FileSystem::FS_Filename(name));
 		m_author   ->set_text("");
-		m_descr    ->set_text("");
 		m_world    ->set_text("");
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
-		m_editbox  ->setText(eia().egbase().map().get_name());
+		if (g_fs->IsDirectory(name)) {
+			m_descr    ->set_text(_("<Directory>"));
+		} else {
+			m_descr    ->set_text(_("<Not a map file>"));
+		}
+
 	}
 	edit_box_changed();
 }
 
-/*
+/**
  * An Item has been doubleclicked
  */
 void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
 	assert(m_ok_btn->enabled());
-	clicked_ok();
+	const char * const name = m_ls->get_selected();
+	if
+		(g_fs->IsDirectory(name)
+		 &&
+		 !Widelands::WL_Map_Loader::is_widelands_map(name))
+	{
+		m_curdir = g_fs->FS_CanonicalizeName(name);
+		m_ls->clear();
+		m_mapfiles.clear();
+		fill_list();
+	} else
+		clicked_ok();
 }
 
-/*
+/**
  * fill the file list
  */
 void Main_Menu_Save_Map::fill_list() {
@@ -322,14 +342,14 @@ void Main_Menu_Save_Map::fill_list() {
 		m_ls->select(0);
 }
 
-/*
+/**
  * The editbox was changed. Enable ok button
  */
 void Main_Menu_Save_Map::edit_box_changed() {
 	m_ok_btn->set_enabled(m_editbox->text().size());
 }
 
-/*
+/**
  * Save the map in the current directory with
  * the current filename
  *

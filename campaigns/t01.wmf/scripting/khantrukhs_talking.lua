@@ -22,7 +22,7 @@ function check_ranger()
 end
 
 function tutorial_thread()
-   show_story_box(_"Somebody comes upon to you", khantrukh_1)
+   show_story_box(_"Somebody comes up to you", khantrukh_1)
    show_story_box(_"The advisor", khantrukh_2, nil, 80, 80)
    o = start_lumberjack_01(p)
    -- Wait till the hut is build.

@@ -5,4 +5,4 @@ Widelands Scripting Reference
    :maxdepth: 3
  
    core
-   aux
+   auxiliary

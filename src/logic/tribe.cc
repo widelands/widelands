@@ -91,7 +91,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
 				m_wares.add
 					(new Item_Ware_Descr
-					 	(_name, _descname, path, prof, global_s));
+					 	(*this, _name, _descname, path, prof, global_s));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 #define PARSE_WORKER_TYPES(name, descr_type)                                  \
@@ -455,6 +455,12 @@ uint32_t Tribe_Descr::get_resource_indicator
 			((static_cast<float>(amount) / res->get_max_amount())
 			 *
 			 num_indicators);
+	if (bestmatch > num_indicators)
+		throw game_data_error
+			("Amount of %s is %i but max amount is %i",
+			 res->name().c_str(),
+			 amount,
+			 res->get_max_amount());
 	if (static_cast<int32_t>(amount) < res->get_max_amount())
 		bestmatch += 1; // Resi start with 1, not 0
 

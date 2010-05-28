@@ -1,3 +1,8 @@
+- Removed unused medic code.
+- Reduced healing rate of soldiers.
+- New keyboard shortcuts for the message window: N, G, Delete
+- New keyboard shortcuts for quick navigation: comma, period, and (Ctrl+)0-9
+
 ### Build 15 rc2
 - Removed registering functionality for metaserver. This is to be compatible
   with future changes to the metaserver.
@@ -8,7 +13,7 @@
 - Fixed descyns happening when a scout left his house in network games.
 - Healthy soldiers defend while injured ones heal at MilitarySite (bzr:5084)
 - Fixed bug when PM is send to the player hosting a newtwork game.
-- Fishbreeder no longer complains about no fish found. 
+- Fishbreeder no longer complains about no fish found.
 - Conquered buildings now appear in statistics.
 - Improvements in the build_and_run.sh script and cmake building in general.
 - Sound & Music system is now thread safe.
@@ -21,7 +26,7 @@
 - Added second carrier type for busy roads (donkeys, oxen, horses)
 - Changed localization structure so that we can translate from launchpad.net
 - Cmake is now a supported build system
-- Lua support (preliminary) 
+- Lua support (preliminary)
 - Fix bug that when a worker program had a createitem command where the
   parameter was not the name of a ware type in the tribe, the game would fail
   an assertion when the command was executed. Now throw an exception when the

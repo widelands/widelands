@@ -11,6 +11,7 @@ which are implemented in C++ and provide the glue between Lua and Widelands.
    wl
    wl_map
    wl_game
+   wl_ui
    wl_debug
 
 

@@ -39,10 +39,23 @@ namespace UI {
 
 /**
  * Panel is a basic rectangular UI element.
- * The outer rectangle is defined by (_x, _y, _w, _h) and encloses the entire
- * panel, including both border and inner area/rectangle.  The inner rectangle
- * is the outer rectangle minus the border sizes.  Child panel coordinates are
- * always relative to the inner rectangle.
+ *
+ * Every panel has an outer rectangle and an inner rectangle. The inner rectangle
+ * is always equal to the outer rectangle minus the border size. Child panel coordinates
+ * are always relative to the inner rectangle.
+ *
+ * Every panel has an actual size and a desired size. In general, a panel should never
+ * change its own actual size, but only its desired size. It is up to the parent panel
+ * to adjust the actual size based on the desired size.
+ *
+ * The desired size is a quantity that is computed in \ref update_desired_size based
+ * only on the attributes of this panel and of its children. The actual size may differ
+ * from this, and when it does, a panel may have to adapt also its children's positions
+ * and actual sizes in \ref layout.
+ *
+ * If a panel is the top-level panel, or if has \ref set_layout_toplevel, then whenever
+ * its desired size changes, this automatically changes the actual size (which then invokes
+ * \ref layout and \ref move_inside_parent).
  */
 struct Panel : public Object {
 	enum {
@@ -57,10 +70,8 @@ struct Panel : public Object {
 		pf_snap_windows_only_when_overlapping = 128,
 		/// children should snap to the edges of this panel
 		pf_dock_windows_to_edges = 256,
-		/// automatically set parent's inner size to this panel's size whenever the size changes
-		pf_snap_parent_size = 512,
-		/// used internally to break recursive calls to \p layout
-		pf_internal_layouting = 1024
+		/// whether any change in the desired size should propagate to the actual size
+		pf_layout_toplevel = 512,
 	}; ///<\todo Turn this into separate bool flags
 
 	Panel
@@ -84,16 +95,25 @@ struct Panel : public Object {
 	virtual void end();
 
 	// Geometry
-	void set_size(uint32_t nw, uint32_t nh);
+	virtual void set_size(uint32_t nw, uint32_t nh);
+	void set_desired_size(uint32_t w, uint32_t h);
 	void set_pos(Point);
 	virtual void move_inside_parent();
 	virtual void layout();
 
+	void set_layout_toplevel(bool ltl);
+	bool get_layout_toplevel() const;
+
+	void get_desired_size(uint32_t &w, uint32_t &h) const;
+
 	int32_t get_x() const {return _x;}
 	int32_t get_y() const {return _y;}
+	Point get_pos() const {return Point(_x, _y);}
 	//int unstead of uint because of overflow situations
 	int32_t get_w() const {return _w;}
 	int32_t get_h() const {return _h;}
+
+	Point to_parent(const Point &) const;
 
 	virtual bool is_snap_target() const {return false;}
 	uint16_t get_border_snap_distance() const {return _border_snap_distance;}
@@ -113,7 +133,6 @@ struct Panel : public Object {
 	}
 	void set_dock_windows_to_edges(const bool on = true);
 	void set_inner_size(uint32_t nw, uint32_t nh);
-	void fit_inner(Panel & inner);
 	void set_border(uint32_t l, uint32_t r, uint32_t t, uint32_t b);
 
 	uint32_t get_lborder() const {return _lborder;}
@@ -202,13 +221,14 @@ struct Panel : public Object {
 	}
 	bool get_top_on_click() const {return _flags & pf_top_on_click;}
 
-	void set_snapparent(bool snapparent);
-	bool get_snapparent() const {return _flags & pf_snap_parent_size;}
-
+	static void set_allow_user_input(bool t) {_g_allow_user_input=t;}
+	static bool allow_user_input(void) {return _g_allow_user_input;}
 
 protected:
 	void die();
 	bool keyboard_free() {return !(_focus);}
+
+	virtual void update_desired_size();
 
 	static void play_click();
 
@@ -227,6 +247,7 @@ private:
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_key(bool down, SDL_keysym code);
 
+
 	Panel * _parent;
 	Panel * _next, * _prev;
 	Panel * _fchild, * _lchild; //  first, last child
@@ -237,10 +258,16 @@ private:
 	PictureID _cache;
 	bool _needdraw;
 
+	/**
+	 * The outer rectangle is defined by (_x, _y, _w, _h)
+	 */
+	/*@{*/
 	int32_t _x, _y;
 	uint32_t _w, _h;
+	/*@}*/
 	uint32_t _lborder, _rborder, _tborder, _bborder;
 	uint8_t _border_snap_distance, _panel_snap_distance;
+	uint32_t _desired_w, _desired_h;
 
 	bool _running;
 	int32_t _retcode;
@@ -266,6 +293,7 @@ private:
 	static Panel * _modal;
 	static Panel * _g_mousegrab;
 	static Panel * _g_mousein;
+	static bool _g_allow_user_input;
 	static PictureID s_default_cursor;
 };
 
@@ -279,6 +307,25 @@ inline void Panel::set_dock_windows_to_edges(const bool on) {
 	if (on)
 		_flags |= pf_dock_windows_to_edges;
 }
+
+/**
+ * A Panel with a name. Important for scripting
+ */
+struct NamedPanel : public Panel {
+	NamedPanel
+		(Panel * const nparent, std::string const & name,
+		 int32_t  const nx, int32_t  const ny,
+		 uint32_t const nw, uint32_t const nh,
+		 const std::string & tooltip_text = std::string()) :
+			Panel(nparent, nx, ny, nw, nh, tooltip_text), m_name(name)
+	{
+	}
+
+	const std::string get_name() const throw() {return m_name;}
+
+private:
+	std::string m_name;
+};
 
 }
 

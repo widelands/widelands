@@ -40,7 +40,8 @@ inline Interactive_Player & GameMessageMenu::iplayer() const {
 GameMessageMenu::GameMessageMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 	:
-	UI::UniqueWindow(&plr, &registry, 370, 375, _("Message Menu: Inbox")),
+	UI::UniqueWindow
+		(&plr, "messages", &registry, 370, 375, _("Message Menu: Inbox")),
 	list                                (*this),
 	message_body
 		(this,
@@ -56,7 +57,12 @@ GameMessageMenu::GameMessageMenu
 	if (get_usedefaultpos())
 		center_to_parent();
 
-	list.set_column_compare(List::Status, boost::bind(&GameMessageMenu::status_compare, this, _1, _2));
+	list.set_column_compare
+		(List::Status, boost::bind(&GameMessageMenu::status_compare,
+		 this, _1, _2));
+
+	set_can_focus(true);
+	focus();
 }
 
 /**
@@ -96,16 +102,17 @@ void GameMessageMenu::think()
 {
 	MessageQueue & mq = iplayer().player().messages();
 
-	// Update messages in the list and remove messages that should no longer be shown
-	for(uint32_t j = list.size(); j; --j) {
-		if (Message const * const message = mq[Message_Id(list[j-1])]) {
+	// Update messages in the list and remove messages
+	// that should no longer be shown
+	for (uint32_t j = list.size(); j; --j) {
+		if (Message const * const message = mq[Message_Id(list[j - 1])]) {
 			if ((mode == Archive) != (message->status() == Message::Archived)) {
-				list.remove(j-1);
+				list.remove(j - 1);
 			} else {
-				update_record(list.get_record(j-1), *message);
+				update_record(list.get_record(j - 1), *message);
 			}
 		} else {
-			list.remove(j-1);
+			list.remove(j - 1);
 		}
 	}
 
@@ -131,7 +138,9 @@ void GameMessageMenu::think()
 	}
 }
 
-void GameMessageMenu::update_record(GameMessageMenu::List::Entry_Record& er, const Widelands::Message& message)
+void GameMessageMenu::update_record
+	(GameMessageMenu::List::Entry_Record & er,
+	 const Widelands::Message & message)
 {
 	er.set_picture
 		(List::Status,
@@ -176,6 +185,48 @@ void GameMessageMenu::selected(uint32_t const t) {
 	}
 	center_main_mapview_on_location.set_enabled(false);
 	message_body                   .set_text   (std::string());
+}
+
+/**
+ * Handle message menu hotkeys.
+ */
+bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+		case SDLK_g:
+			if (center_main_mapview_on_location.enabled())
+				center_main_mapview_on_location.clicked();
+			return true;
+
+		case SDLK_DELETE:
+			do_delete();
+			return true;
+
+		default:
+			break; // not handled
+		}
+	}
+
+	return UI::Panel::handle_key(down, code);
+}
+
+/**
+ * Delete the currently selected message, if any.
+ */
+void GameMessageMenu::do_delete()
+{
+	if (mode == Archive)
+		return;
+
+	if (!list.has_selection())
+		return;
+
+	Widelands::Game & game = iplayer().game();
+	game.send_player_command
+		(*new Widelands::Cmd_MessageSetStatusArchived
+			(game.get_gametime(), iplayer().player_number(),
+			 Message_Id(list.get_selected())));
 }
 
 void GameMessageMenu::Archive_Or_Restore_Selected_Messages::clicked() {

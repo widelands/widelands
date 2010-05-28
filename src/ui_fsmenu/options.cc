@@ -47,21 +47,21 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 // Buttons
 	m_advanced_options
-		(this,
+		(this, "advanced_options",
 		 m_xres * 9 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_Options::advanced_options, *this,
 		 _("Advanced Options"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_cancel
-		(this,
+		(this, "cancel",
 		 m_xres * 51 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_Options::end_modal, *this, om_cancel,
 		 _("Cancel"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_apply
-		(this,
+		(this, "apply",
 		 m_xres * 3 / 8, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_Options::end_modal, *this, om_ok,
@@ -231,7 +231,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_remove_replays           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
-	SDL_PixelFormat & fmt = *SDL_GetVideoInfo()->vfmt;
+	// take a copy to not change real video info structure
+	SDL_PixelFormat  fmt = *SDL_GetVideoInfo()->vfmt;
 	fmt.BitsPerPixel = 16;
 	if
 		(SDL_Rect const * const * const modes =
@@ -281,15 +282,19 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 	// Fill language list
 	m_language_list.add
-		(_("System default language"), "",
+		(_("Try system language"), "", // "try", as many translations are missing.
 		 g_gr->get_no_picture(), "" == opt.language);
+
+	m_language_list.add
+		("English", "en",
+		 g_gr->get_no_picture(), "en" == opt.language);
 		 
 	filenameset_t files;
 	Section * s = &g_options.pull_section("global");
 	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
 	Profile ln("txts/languages");
 	s = &ln.pull_section("languages");
-	bool own_selected = false;
+	bool own_selected = "" == opt.language || "en" == opt.language;
 
 	// Add translation directories to the list
 	for
@@ -372,14 +377,14 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 
 // Buttons
 	m_cancel
-		(this,
+		(this, "cancel",
 		 m_xres * 41 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_Advanced_Options::end_modal, *this, om_cancel,
 		 _("Cancel"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_apply
-		(this,
+		(this, "apply",
 		 m_xres / 4,   m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_Advanced_Options::end_modal, *this, om_ok,

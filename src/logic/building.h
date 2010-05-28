@@ -165,7 +165,9 @@ public:
 
 	virtual Flag & base_flag();
 	virtual uint32_t get_playercaps() const throw ();
+
 	virtual Coords get_position() const throw () {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 
 	std::string const & name() const throw ();
 	const std::string & descname() const throw () {return descr().descname();}
@@ -207,7 +209,7 @@ public:
 	}
 
 	int32_t get_base_priority() const {return m_priority;}
-	virtual int32_t get_priority
+	int32_t get_priority
 		(int32_t type, Ware_Index, bool adjust = true) const;
 	void set_priority(int32_t new_priority);
 	void set_priority(int32_t type, Ware_Index ware_index, int32_t new_priority);
@@ -260,6 +262,8 @@ protected:
 		(Interactive_GameBase &, UI::Window * & registry)
 		= 0;
 
+	void set_seeing(bool see);
+
 	UI::Window * m_optionswindow;
 	Coords       m_position;
 	Flag       * m_flag;
@@ -277,6 +281,9 @@ protected:
 
 	int32_t m_priority; // base priority
 	std::map<Ware_Index, int32_t> m_ware_priorities;
+
+	/// Whether we see our \ref vision_range area based on workers in the building
+	bool m_seeing;
 };
 
 }

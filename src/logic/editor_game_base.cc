@@ -144,11 +144,19 @@ void Editor_Game_Base::receive(NoteImmovable const & note)
 	note.pi->owner().receive(note);
 }
 
-void Editor_Game_Base::receive(NoteField const & note)
+void Editor_Game_Base::receive(NoteFieldPossession const & note)
 {
 	get_player(note.fc.field->get_owned_by())->receive(note);
 }
 
+void Editor_Game_Base::receive(NoteFieldTransformed const & note)
+{
+	Widelands::Map_Index const i = note.fc.field - &(*m_map)[0];
+
+	iterate_players_existing(p, m_map->get_nrplayers(), *this, plr)
+		if(plr->vision(i) > 1) // player currently sees field?
+			plr->rediscover_node(*m_map, (*m_map)[0], note.fc);
+}
 
 void Editor_Game_Base::remove_player(const Player_Number plnum) {
 	assert(1 <= plnum);
@@ -249,9 +257,13 @@ to the Editor_Game_Base object.
 */
 void Editor_Game_Base::set_map(Map * const new_map) {
 	assert(new_map != m_map);
+	assert(new_map);
+
 	delete m_map;
 
 	m_map = new_map;
+
+	NoteReceiver<NoteFieldTransformed>::connect(*m_map);
 }
 
 
@@ -400,7 +412,7 @@ Does not perform any placability checks.
 ===============
 */
 Immovable & Editor_Game_Base::create_immovable
-	(Coords const c, int32_t const idx, Tribe_Descr const * const tribe)
+	(Coords const c, uint32_t const idx, Tribe_Descr const * const tribe)
 {
 	Immovable_Descr const & descr =
 		*
@@ -408,6 +420,7 @@ Immovable & Editor_Game_Base::create_immovable
 		 tribe->get_immovable_descr(idx)
 		 :
 		 m_map->world().get_immovable_descr(idx));
+	assert(&descr);
 	inform_players_about_immovable
 		(Map::get_index(c, map().get_width()), &descr);
 	return descr.create(*this, c);

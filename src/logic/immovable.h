@@ -32,6 +32,7 @@ struct Economy;
 struct Flag;
 struct Map;
 struct Tribe_Descr;
+class WareInstance;
 class Worker;
 
 /**
@@ -56,6 +57,15 @@ struct BaseImmovable : public Map_Object {
 
 	virtual int32_t  get_size    () const throw () = 0;
 	virtual bool get_passable() const throw () = 0;
+
+	typedef std::vector<Coords> PositionList;
+	/**
+	 * Return all coordinates occupied by this Immovable. We gurantee that the
+	 * list always contains one entry and the first one is the main position
+	 * if one can be chosen as main.
+	 */
+	virtual PositionList get_positions
+		(const Editor_Game_Base &) const throw () = 0;
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
 		= 0;
@@ -127,6 +137,7 @@ public:
 	Immovable(const Immovable_Descr &);
 
 	Coords get_position() const {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 
 	virtual int32_t  get_type    () const throw ();
 	char const * type_name() const throw () {return "immovable";}
@@ -176,7 +187,7 @@ protected:
 	// Load/save support
 protected:
 	struct Loader : public BaseImmovable::Loader {
-		virtual void load(FileRead &, uint8_t version);
+		void load(FileRead &, uint8_t version);
 		virtual void load_pointers();
 		virtual void load_finish();
 	};
@@ -228,6 +239,21 @@ struct PlayerImmovable : public BaseImmovable {
 	Workers const & get_workers() const {return m_workers;}
 
 	virtual void log_general_info(Editor_Game_Base const &);
+
+	/**
+	 * These functions are called when a ware or worker arrives at
+	 * this immovable as the destination of a transfer that does not
+	 * have an associated request.
+	 *
+	 * At the time of this writing, this happens only for warehouses.
+	 *
+	 * \note This is independent of the \ref add_worker / \ref remove_worker
+	 * functionality, which has to do with setting up locations.
+	 */
+	/*@{*/
+	virtual void receive_ware(Game &, Ware_Index ware);
+	virtual void receive_worker(Game &, Worker & worker);
+	/*@}*/
 
 protected:
 	void set_owner(Player *);

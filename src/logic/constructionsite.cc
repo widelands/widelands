@@ -50,6 +50,14 @@ ConstructionSite_Descr::ConstructionSite_Descr
 : Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
+
+	{ // animation when a worker entered the site
+		Section & sec = prof.get_safe_section("idle_with_worker");
+		if (!is_animation_known("idle_with_worker"))
+			add_animation
+				("idle_with_worker",
+				 g_anim.get(directory.c_str(), sec, 0, encdata));
+	}
 }
 
 
@@ -316,9 +324,11 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
-		m_building->create(egbase, owner(), m_position, false);
-		if (Worker * const builder = m_builder.get(egbase))
+		Building& building = m_building->create(egbase, owner(), m_position, false);
+		if (Worker * const builder = m_builder.get(egbase)) {
 			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+			builder->set_location(&building);
+		}
 	}
 }
 
@@ -370,12 +380,16 @@ void ConstructionSite::request_builder_callback
 
 	ConstructionSite & cs = ref_cast<ConstructionSite, PlayerImmovable>(target);
 
+	// Start playing animation with worker
+	cs.start_animation(game, cs.descr().get_animation("idle_with_worker"));
+
 	cs.m_builder = w;
 
 	delete &rq;
 	cs.m_builder_request = 0;
 
 	w->start_task_buildingwork(game);
+	cs.set_seeing(true);
 }
 
 

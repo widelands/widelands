@@ -68,10 +68,6 @@ void LuaCoroutine_Impl::push_arg(const Widelands::Player * plr) {
 	m_nargs++;
 }
 
-static const char * m_persistent_globals[] = {
-	"coroutine.yield", 0,
-};
-
 #define COROUTINE_DATA_PACKET_VERSION 1
 uint32_t LuaCoroutine_Impl::write
 	(lua_State * parent, Widelands::FileWrite & fw,
@@ -87,7 +83,7 @@ uint32_t LuaCoroutine_Impl::write
 	lua_pushthread(m_L);
 	lua_xmove (m_L, parent, 1);
 
-	return persist_object(parent, m_persistent_globals, fw, mos);
+	return persist_object(parent, fw, mos);
 }
 
 void LuaCoroutine_Impl::read
@@ -103,7 +99,7 @@ void LuaCoroutine_Impl::read
 	m_nargs = fr.Unsigned32();
 
 	// Empty table + object to persist on the stack Stack
-	unpersist_object(parent, m_persistent_globals, fr, mol, size);
+	unpersist_object(parent, fr, mol, size);
 
 	m_L = luaL_checkthread(parent, -1);
 	lua_pop(parent, 1);

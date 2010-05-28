@@ -103,7 +103,7 @@ void Widelands::Map_Object::create_debug_panels
 	(Widelands::Editor_Game_Base const & egbase, UI::Tab_Panel & tabs)
 {
 	tabs.add
-		(g_gr->get_picture(PicMod_Game, "pics/menu_debug.png"),
+		("debug", g_gr->get_picture(PicMod_Game, "pics/menu_debug.png"),
 		 new MapObjectDebugPanel(tabs, egbase, *this));
 }
 
@@ -143,11 +143,12 @@ private:
 MapObjectDebugWindow::MapObjectDebugWindow
 	(Interactive_Base & parent, Widelands::Map_Object & obj)
 	:
-	UI::Window        (&parent, 0, 0, 100, 100, ""),
+	UI::Window        (&parent, "map_object_debug", 0, 0, 100, 100, ""),
 	m_log_general_info(true),
 	m_object          (&obj),
 	m_tabs
-		(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"))
+		(this, 0, 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"))
 {
 	char buffer[128];
 
@@ -155,8 +156,9 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	snprintf(buffer, sizeof(buffer), "%u", m_serial);
 	set_title(buffer);
 
-	m_tabs.set_snapparent(true);
 	obj.create_debug_panels(parent.egbase(), m_tabs);
+
+	set_center_panel(&m_tabs);
 }
 
 
@@ -231,7 +233,7 @@ private:
 FieldDebugWindow::FieldDebugWindow
 	(Interactive_Base & parent, Widelands::Coords const coords)
 :
-	UI::Window(&parent, 0, 60, 214, 400, _("Debug Field")),
+	UI::Window(&parent, "field_debug", 0, 60, 214, 400, _("Debug Field")),
 	m_map     (parent.egbase().map()),
 	m_coords  (m_map.get_fcoords(coords)),
 
@@ -239,9 +241,9 @@ FieldDebugWindow::FieldDebugWindow
 	m_ui_field(this, 0, 0, 214, 280, ""),
 
 	m_ui_immovable
-		(this,
+		(this, "immovable",
 		 0, 280, 214, 24,
-		 g_gr->get_no_picture(),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &FieldDebugWindow::open_immovable, *this,
 		 ""),
 
@@ -271,21 +273,37 @@ void FieldDebugWindow::think()
 	UI::Window::think();
 
 	// Select information about the field itself
-	str = "";
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("(%i, %i)\n   height: %u\n   owner: %u\n"),
-		 m_coords.x, m_coords.y,
-		 m_coords.field->get_height(), m_coords.field->get_owned_by());
-	str += buffer;
+	Widelands::Editor_Game_Base const & egbase =
+		ref_cast<Interactive_Base const, UI::Panel const>(*get_parent())
+		.egbase();
+	{
+		Widelands::Player_Number const owner = m_coords.field->get_owned_by();
+		snprintf
+			(buffer, sizeof(buffer), "(%i, %i)\nheight: %u\nowner: %u\n",
+			 m_coords.x, m_coords.y, m_coords.field->get_height(), owner);
+		str += buffer;
+		if (owner) {
+			Widelands::NodeCaps const buildcaps =
+				egbase.player(owner).get_buildcaps(m_coords);
+			if      (buildcaps & Widelands::BUILDCAPS_BIG)
+				str += "  can build big building\n";
+			else if (buildcaps & Widelands::BUILDCAPS_MEDIUM)
+				str += "  can build medium building\n";
+			else if (buildcaps & Widelands::BUILDCAPS_SMALL)
+				str += "  can build small building\n";
+			if      (buildcaps & Widelands::BUILDCAPS_FLAG)
+				str += "  can place flag\n";
+			if      (buildcaps & Widelands::BUILDCAPS_MINE)
+				str += "  can build mine\n";
+			if      (buildcaps & Widelands::BUILDCAPS_PORT)
+				str += "  can build port\n";
+		}
+	}
 	if (m_coords.field->nodecaps() & Widelands::MOVECAPS_WALK)
 		str += "is walkable\n";
 	if (m_coords.field->nodecaps() & Widelands::MOVECAPS_SWIM)
 		str += "is swimable\n";
 	Widelands::Map_Index const i = m_coords.field - &m_map[0];
-	Widelands::Editor_Game_Base const & egbase =
-		ref_cast<Interactive_Base const, UI::Panel const>(*get_parent())
-		.egbase();
 	Widelands::Player_Number const nr_players = m_map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		Widelands::Player::Field const & player_field = player->fields()[i];

@@ -1,9 +1,7 @@
 size=small
-heal_per_second=2
+heal_per_second=1
 conquers=6
 max_soldiers=2
-max_medics=0
-heal_increase_per_medic=0
 enhanced_building=yes
 
 [buildcost]

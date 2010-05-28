@@ -84,7 +84,7 @@ UI::Slider & AttackBox::add_slider
 			 min, max, initial,
 			 g_gr->get_picture(PicMod_Game, picname),
 			 hint);
-	parent.add(&result, UI::Box::AlignTop);
+	parent.add(&result, UI::Box::AlignCenter);
 	return result;
 }
 
@@ -95,7 +95,7 @@ UI::Textarea & AttackBox::add_text
 	 std::string const & fontname,
 	 uint32_t      fontsize)
 {
-	UI::Textarea & result = *new UI::Textarea(&parent, 0, 0, str.c_str());
+	UI::Textarea & result = *new UI::Textarea(&parent, str.c_str());
 	result.set_font(fontname, fontsize, UI_FONT_CLR_FG);
 	parent.add(&result, alignment);
 	return result;
@@ -109,14 +109,14 @@ UI::Callback_Button<AttackBox> & AttackBox::add_button
 {
 	UI::Callback_Button<AttackBox> & button =
 		*new UI::Callback_Button<AttackBox>
-			(&parent,
+			(&parent, text,
 			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 			 fn,
 			 *this,
 			 text,
 			 tooltip_text);
-	parent.add(&button, Box::AlignTop);
+	parent.add(&button, Box::AlignCenter);
 	return button;
 }
 
@@ -167,8 +167,9 @@ void AttackBox::init() {
 
 	{ //  Soldiers line
 		UI::Box & linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
-		add(&linebox, UI::Box::AlignTop);
+		add(&linebox, UI::Box::AlignCenter);
 		add_text(linebox, _("Soldiers:"));
+		linebox.add_space(8);
 
 		m_less_soldiers =
 			&add_button
@@ -179,7 +180,7 @@ void AttackBox::init() {
 
 		//  Spliter of soldiers
 		UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
-		linebox.add(&columnbox, UI::Box::AlignTop);
+		linebox.add(&columnbox, UI::Box::AlignCenter);
 
 		sprintf(buf, "%u / %u", max_attackers > 0 ? 1 : 0, max_attackers);
 

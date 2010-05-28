@@ -663,6 +663,37 @@ PictureID Graphic::create_surface(int32_t w, int32_t h)
 }
 
 /**
+ * Create an offscreen surface with alpha channel
+ * \note Surfaces do not belong to a module and must be freed explicitly.
+*/
+PictureID Graphic::create_surface_a(int32_t w, int32_t h)
+{
+	const SDL_PixelFormat & format = m_screen.format();
+	SDL_Surface & tsurf =
+		*SDL_CreateRGBSurface
+			(SDL_SWSURFACE,
+			 w, h,
+			 format.BitsPerPixel,
+			 format.Rmask, format.Gmask, format.Bmask, format.Amask);
+
+	SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
+
+	SDL_FreeSurface(&tsurf);
+
+	Picture & pic = *new Picture();
+	PictureID id = PictureID(&pic);
+	m_picturemap[PicSurface].insert(std::make_pair("", id));
+
+	pic.module    = PicSurface; // mark as surface
+	pic.surface   = new Surface();
+	pic.surface->set_sdl_surface(surf);
+	assert(pic.rendertarget == 0);
+	pic.rendertarget = new RenderTarget(pic.surface);
+
+	return id;
+}
+
+/**
  * Free the given surface.
  * Unlike normal pictures, surfaces are not freed by flush().
 */

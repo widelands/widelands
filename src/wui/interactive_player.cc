@@ -162,43 +162,39 @@ Interactive_Player::Interactive_Player
 	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
 m_flag_to_connect(Widelands::Coords::Null()),
 
-#define INIT_BTN(picture, callback, tooltip)                                  \
- TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
+#define INIT_BTN(picture, name, callback, tooltip)                            \
+ TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
  &Interactive_Player::callback, *this,                                        \
  tooltip                                                                      \
 
 m_toggle_chat
 	(INIT_BTN
-	 	("menu_chat",                  toggle_chat,            _("Chat"))),
+	 	("menu_chat", "chat", toggle_chat, _("Chat"))),
 m_toggle_options_menu
 	(INIT_BTN
-	 	("menu_options_menu",          toggle_options_menu,    _("Options"))),
+	 	("menu_options_menu", "options_menu", toggle_options_menu, _("Options"))),
 m_toggle_statistics_menu
 	(INIT_BTN
-	 	("menu_toggle_menu",           toggle_statistics_menu, _("Statistics"))),
+	 	("menu_toggle_menu", "statistics_menu", toggle_statistics_menu,
+		 _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN
-	 	("menu_objectives",            toggle_objectives,      _("Objectives"))),
+	 	("menu_objectives", "objectives", toggle_objectives, _("Objectives"))),
 m_toggle_minimap
 	(INIT_BTN
-	 	("menu_toggle_minimap",        toggle_minimap,         _("Minimap"))),
+	 	("menu_toggle_minimap", "minimap", toggle_minimap, _("Minimap"))),
 m_toggle_buildhelp
 	(INIT_BTN
-	 	("menu_toggle_buildhelp",      toggle_buildhelp,       _("Buildhelp"))),
+	 	("menu_toggle_buildhelp", "buildhelp", toggle_buildhelp, _("Buildhelp"))),
 m_toggle_message_menu
 	(INIT_BTN
-	 	("menu_toggle_oldmessage_menu", toggle_message_menu,   _("Messages"))),
-#if 0
-m_toggle_resources
-	(INIT_BTN
-	 	("editor_menu_tool_change_resources",
-	 	 toggle_resources,
-	 	 _("Resource information"))),
-#endif
+	 	("menu_toggle_oldmessage_menu", "messages", toggle_message_menu,
+		  _("Messages"))
+	),
 m_toggle_help
 	(INIT_BTN
-	 	("menu_help",                  toggle_help,            _("Ware help")))
+	 	("menu_help", "help", toggle_help, _("Ware help")))
 {
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
@@ -224,7 +220,6 @@ m_toggle_help
 	set_player_number(plyn);
 	fieldclicked.set(this, &Interactive_Player::node_action);
 
-	m_toolbar.layout();
 	adjust_toolbar_position();
 
 	set_display_flag(dfSpeed, true);
@@ -363,16 +358,6 @@ void Interactive_Player::toggle_message_menu() {
 		new GameMessageMenu(*this, m_message_menu);
 }
 
-void Interactive_Player::toggle_buildhelp() {
-	egbase().map().overlay_manager().toggle_buildhelp();
-}
-bool Interactive_Player::buildhelp() {
-	return egbase().map().overlay_manager().buildhelp();
-}
-void Interactive_Player::show_buildhelp(bool const t) {
-	egbase().map().overlay_manager().show_buildhelp(t);
-}
-
 void Interactive_Player::toggle_resources   () {
 }
 void Interactive_Player::toggle_help        () {
@@ -436,6 +421,10 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 
 		case SDLK_m:
 			toggle_minimap();
+			return true;
+
+		case SDLK_n:
+			toggle_message_menu();
 			return true;
 
 		case SDLK_o:

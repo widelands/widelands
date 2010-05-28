@@ -71,7 +71,7 @@ macro(CreateCodeCheck link_target)
       set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/${stamp})
       add_custom_command(
         OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}"
-        COMMAND cmake -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
+        COMMAND ${CMAKE_COMMAND} -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
         DEPENDS ${sourcefile}
         COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
       )
@@ -79,7 +79,7 @@ macro(CreateCodeCheck link_target)
       if (WL_EXTRAWARNINGS)
         add_custom_command(
           OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}"
-          COMMAND cmake -DWL_SOURCES_BINARY_ROOT=${WL_SOURCES_BINARY_ROOT} -Dincludedir=${CMAKE_SOURCE_DIR}/src -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
+          COMMAND ${CMAKE_COMMAND} -DWL_SOURCES_BINARY_ROOT=${WL_SOURCES_BINARY_ROOT} -Dincludedir=${CMAKE_SOURCE_DIR}/src -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
           DEPENDS ${sourcefile}
           COMMENT "Checking ${sourcewithoutpath} with CppCheck"
         )

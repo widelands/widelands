@@ -43,19 +43,24 @@ Interactive_DServer::Interactive_DServer
 	:
 	Interactive_GameBase(_game, global_s, NONE, true),
 
-#define INIT_BTN(picture, callback, tooltip)                                  \
- TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
+#define INIT_BTN(picture, name, callback, tooltip)                            \
+ TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
  &Interactive_DServer::callback, *this,                                       \
  tooltip                                                                      \
 
 	m_toggle_chat
-		(INIT_BTN("menu_chat",           toggle_chat,         _("Chat"))),
+		(INIT_BTN("menu_chat", "chat", toggle_chat, _("Chat"))),
 	m_toggle_options_menu
-		(INIT_BTN("menu_options_menu",   toggle_options_menu, _("Options"))),
+		(INIT_BTN("menu_options_menu", "options_menu", toggle_options_menu,
+			_("Options"))
+	),
 	m_toggle_statistics
-		(INIT_BTN("menu_general_stats",  toggle_statistics,   _("Statistics")))
+		(INIT_BTN("menu_general_stats", "general_stats", toggle_statistics,
+			_("Statistics"))
+	)
 {
+	m_toolbar.set_layout_toplevel(true);
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics,      UI::Box::AlignLeft);
@@ -63,7 +68,6 @@ Interactive_DServer::Interactive_DServer
 	m_chatDisplay =
 		new ChatDisplay(this, 10, 25, get_w() - 10, get_h() - 25);
 
-	m_toolbar.layout();
 	adjust_toolbar_position();
 }
 

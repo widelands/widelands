@@ -19,12 +19,12 @@ _[[ "We can see the raging flames that swallow Al'thunran from here, miles away.
 show_story_box(title, msg, al_thunran)
 
 msg = "<rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
-_[[ "My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well." ]] ..
+_[[ "My father's bones rest peacefully in the grounds on which he once ended the senseless bloodspilling that has risen among us. It pains me that his peace only endured for one generation.<br> Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy the bonds between us as well." ]] ..
 "</p></rt>"
 show_story_box(title, msg, grave)
 
 msg = "<rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
-_[[ "As father told me, there will be times to fight and times to lie and wait, trying not to sleep or die before the right time comes. And so I do... wait." ]] .. 
+_[[ "As father told me, there are times to fight and times to lie and wait, trying not to fall asleep or die before the right time comes. And so I do... wait." ]] .. 
 "</p></rt>"
 show_story_box(title, msg)
 sleep(2000)

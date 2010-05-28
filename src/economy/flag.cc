@@ -243,6 +243,17 @@ void Flag::detach_road(int32_t const dir)
 }
 
 /**
+ * Return all positions we occupy on the map. For a Flag, this is only one
+*/
+BaseImmovable::PositionList Flag::get_positions
+	(const Editor_Game_Base &) const throw ()
+{
+	PositionList rv;
+	rv.push_back(m_position);
+	return rv;
+}
+
+/**
  * Return neighbouring flags.
 */
 void Flag::get_neighbours(RoutingNodeNeighbours & neighbours)
@@ -514,7 +525,7 @@ void Flag::call_carrier
 	// Deal with the non-moving case quickly
 	if (!nextstep) {
 		pi->nextstep = 0;
-		pi->pending = false;
+		pi->pending = true;
 		return;
 	}
 
@@ -712,6 +723,21 @@ void Flag::log_general_info(const Widelands::Editor_Game_Base& egbase)
 	molog("Flag at %i,%i\n", m_position.x, m_position.y);
 
 	Widelands::PlayerImmovable::log_general_info(egbase);
+
+	if (m_item_filled) {
+		molog("Wares at flag:\n");
+		for(int i = 0; i < m_item_filled; ++i) {
+			PendingItem& pi = m_items[i];
+			molog
+				(" %i/%i: %s(%i), nextstep %i, %s\n",
+				 i+1, m_item_capacity,
+				 pi.item->descr().name().c_str(), pi.item->serial(),
+				 pi.nextstep.serial(),
+				 pi.pending ? "pending" : "acked by carrier");
+		}
+	} else {
+		molog("No wares at flag.\n");
+	}
 }
 
 

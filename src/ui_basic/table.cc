@@ -92,7 +92,7 @@ void Table<void *>::add_column
 		if (title.size()) {
 			c.btn =
 				new Callback_IDButton<Table, Columns::size_type>
-					(this,
+					(this, title,
 					 complete_width, 0, width, m_headerheight,
 					 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
 					 &Table::header_button_clicked, *this, m_columns.size(),
@@ -136,7 +136,7 @@ void Table<void *>::set_column_title
 			complete_width += m_columns.at(i).width;
 		column.btn =
 			new Callback_IDButton<Table, Columns::size_type>
-				(this,
+				(this, title,
 				 complete_width, 0, column.width, m_headerheight,
 				 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
 				 &Table::header_button_clicked, *this, col,
@@ -302,6 +302,9 @@ void Table<void *>::draw(RenderTarget & dst)
 bool Table<void *>::handle_mousepress
 	(Uint8 const btn, int32_t x, int32_t const y)
 {
+	if (get_can_focus())
+		focus();
+
 	switch (btn) {
 	case SDL_BUTTON_WHEELDOWN:
 	case SDL_BUTTON_WHEELUP:

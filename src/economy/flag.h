@@ -64,6 +64,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	virtual ~Flag();
 
 	void load_finish(Editor_Game_Base &);
+	virtual void destroy(Editor_Game_Base &);
 
 	virtual int32_t  get_type    () const throw ();
 	char const * type_name() const throw () {return "flag";}
@@ -74,6 +75,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	virtual Flag & base_flag();
 
 	Coords get_position() const {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 	void get_neighbours(RoutingNodeNeighbours &);
 	int32_t get_waitcost() const {return m_item_filled;}
 
@@ -119,7 +121,6 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 protected:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
-	virtual void destroy(Editor_Game_Base &);
 
 	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 

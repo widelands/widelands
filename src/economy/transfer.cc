@@ -27,35 +27,60 @@
 
 #include "logic/game.h"
 #include "logic/immovable.h"
+#include "logic/player.h"
 #include "request.h"
 #include "logic/worker.h"
 #include "upcast.h"
+#include <map_io/widelands_map_map_object_saver.h>
+#include <map_io/widelands_map_map_object_loader.h>
 
 namespace Widelands {
 
 Transfer::Transfer(Game & game, Request & req, WareInstance & it) :
 	m_game(game),
-	m_request(req),
-	m_item   (&it),
-	m_worker(0),
-	m_idle(false)
+	m_request(&req),
+	m_destination(&req.target()),
+	m_item(&it),
+	m_worker(0)
 {
 	m_item->set_transfer(game, *this);
 }
 
 Transfer::Transfer(Game & game, Request & req, Worker & w) :
 	m_game(game),
-	m_request(req),
+	m_request(&req),
+	m_destination(&req.target()),
 	m_item(0),
-	m_worker (&w),
-	m_idle(false)
+	m_worker(&w)
 {
 	m_worker->start_task_transfer(game, this);
 }
 
 /**
+ * Create a transfer without linking it into the given ware instance and without a request.
+ */
+Transfer::Transfer(Game & game, WareInstance & w) :
+	m_game(game),
+	m_request(0),
+	m_item(&w),
+	m_worker(0)
+{
+}
+
+/**
+ * Create a transfer without linking it into the given worker and without a request.
+ */
+Transfer::Transfer(Game & game, Worker & w) :
+	m_game(game),
+	m_request(0),
+	m_item(0),
+	m_worker(&w)
+{
+}
+
+/**
  * Cleanup.
-*/
+ */
 Transfer::~Transfer()
 {
 	if (m_worker) {
@@ -69,40 +94,64 @@ Transfer::~Transfer()
 }
 
 /**
- * An idle transfer can be fail()ed by the controlled item whenever a better
- * Request is available.
-*/
-void Transfer::set_idle(bool idle)
+ * Override the \ref Request of this transfer.
+ *
+ * \note Only use for loading savegames
+ */
+void Transfer::set_request(Request * req)
 {
-	m_idle = idle;
+	assert(!m_request);
+	assert(req);
+
+	if (&req->target() != m_destination.get(m_game)) {
+		if (m_destination.is_set())
+			log
+				("WARNING: Transfer::set_request req->target (%u) vs. destination (%u) mismatch\n",
+				 req->target().serial(), m_destination.serial());
+		m_destination = &req->target();
+	}
+	m_request = req;
+}
+
+/**
+ * Set the destination for a transfer that has no associated \ref Request.
+ */
+void Transfer::set_destination(PlayerImmovable& imm)
+{
+	assert(!m_request);
+
+	m_destination = &imm;
 }
 
 /**
  * Determine where we should be going from our current location.
-*/
+ */
 PlayerImmovable * Transfer::get_next_step
 	(PlayerImmovable * const location, bool & success)
 {
-	PlayerImmovable & destination = m_request.target();
+	if (!location || !location->get_economy()) {
+		tlog("no location or economy -> fail\n");
+		success = false;
+		return 0;
+	}
 
-	// Catch the simplest cases
-	if (not location or location->get_economy() != destination.get_economy()) {
-		tlog("no location or economy mismatch -> fail\n");
-
+	PlayerImmovable * destination = m_destination.get(location->get_economy()->owner().egbase());
+	if (!destination || destination->get_economy() != location->get_economy()) {
+		tlog("destination disappeared or economy mismatch -> fail\n");
 		success = false;
 		return 0;
 	}
 
 	success = true;
 
-	if (location == &destination)
+	if (location == destination)
 		return 0;
 
-	Flag & locflag  = location  ->base_flag();
-	Flag & destflag = destination.base_flag();
+	Flag & locflag  = location->base_flag();
+	Flag & destflag = destination->base_flag();
 
 	if (&locflag == &destflag)
-		return &locflag == location ? &destination : &locflag;
+		return &locflag == location ? destination : &locflag;
 
 	// Brute force: recalculate the best route every time
 	if (!locflag.get_economy()->find_route(locflag, destflag, &m_route, m_item))
@@ -114,7 +163,7 @@ PlayerImmovable * Transfer::get_next_step
 				m_route.starttrim(1);
 
 	if (m_route.get_nrsteps() >= 1)
-		if (upcast(Road const, road, &destination))
+		if (upcast(Road const, road, destination))
 			if
 				(&road->get_flag(Road::FlagEnd)
 				 ==
@@ -127,17 +176,17 @@ PlayerImmovable * Transfer::get_next_step
 
 		// special rule to get items into buildings
 		if (m_item and m_route.get_nrsteps() == 1)
-			if (dynamic_cast<Building const *>(&destination)) {
-				assert(&m_route.get_flag(m_game, 1) == &destination.base_flag());
+			if (dynamic_cast<Building const *>(destination)) {
+				assert(&m_route.get_flag(m_game, 1) == &destflag);
 
-				return &destination;
+				return destination;
 			}
 
 		if (m_route.get_nrsteps() >= 1) {
 			return &m_route.get_flag(m_game, 1);
 		}
 
-		return &destination;
+		return destination;
 	}
 
 	return &m_route.get_flag(m_game, 0);
@@ -145,22 +194,42 @@ PlayerImmovable * Transfer::get_next_step
 
 /**
  * Transfer finished successfully.
- * This Transfer object will be deleted indirectly by finish().
+ * This Transfer object will be deleted.
  * The caller might be destroyed, too.
  */
 void Transfer::has_finished()
 {
-	m_request.transfer_finish(m_game, *this);
+	if (m_request) {
+		m_request->transfer_finish(m_game, *this);
+	} else {
+		PlayerImmovable * destination = m_destination.get(m_game);
+		if (!destination)
+			throw wexception("Transfer: claims to have finished successfully, but destination is gone");
+
+		if (m_worker) {
+			destination->receive_worker(m_game, *m_worker);
+			m_worker = 0;
+		} else {
+			destination->receive_ware(m_game, m_item->descr_index());
+			m_item->destroy(m_game);
+			m_item = 0;
+		}
+
+		delete this;
+	}
 }
 
 /**
  * Transfer failed for reasons beyond our control.
- * This Transfer object will be deleted indirectly by
- * m_request->transfer_fail().
+ * This Transfer object will be deleted.
 */
 void Transfer::has_failed()
 {
-	m_request.transfer_fail(m_game, *this);
+	if (m_request) {
+		m_request->transfer_fail(m_game, *this);
+	} else {
+		delete this;
+	}
 }
 
 void Transfer::tlog(char const * const fmt, ...)
@@ -186,6 +255,38 @@ void Transfer::tlog(char const * const fmt, ...)
 	}
 
 	log("T%c(%u): %s", id, serial, buffer);
+}
+
+/*
+==============================
+
+Load/save support
+
+==============================
+*/
+
+#define TRANSFER_SAVEGAME_VERSION 1
+
+void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
+{
+	uint8_t version = fr.Unsigned8();
+	if (version != TRANSFER_SAVEGAME_VERSION)
+		throw wexception("unhandled/unknown transfer version %u", version);
+
+	rd.destination = fr.Unsigned32();
+}
+
+void Transfer::read_pointers(Map_Map_Object_Loader & mol, const Widelands::Transfer::ReadData & rd)
+{
+	if (rd.destination)
+		m_destination = &mol.get<PlayerImmovable>(rd.destination);
+}
+
+void Transfer::write(Map_Map_Object_Saver& mos, FileWrite& fw)
+{
+	fw.Unsigned8(TRANSFER_SAVEGAME_VERSION);
+	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(m_game)));
+	// not saving route right now, will be recaculated anyway
 }
 
 }
