@@ -31,6 +31,15 @@
 namespace UI {
 
 struct EditBoxImpl {
+	/**
+	 * Font used for rendering text.
+	 */
+	/*@{*/
+	std::string fontname;
+	uint32_t fontsize;
+	RGBColor fontcolor;
+	/*@}*/
+
 	/// Background tile style.
 	PictureID background;
 
@@ -51,6 +60,14 @@ struct EditBoxImpl {
 
 	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
+
+	/**
+	 * Caching implementation
+	 */
+	/*@{*/
+	bool needredraw;
+	PictureID cache_pid;
+	/*@}*/
 };
 
 EditBox::EditBox
@@ -61,15 +78,15 @@ EditBox::EditBox
 	 Align _align)
 	:
 	Panel(parent, x, y, w, h),
-	m_fontname(UI_FONT_NAME),
-	m_fontsize(UI_FONT_SIZE_SMALL),
-	m_fontcolor(UI_FONT_CLR_FG),
-	m(new EditBoxImpl),
-	m_needredraw(true)
+	m(new EditBoxImpl)
 {
 	set_think(false);
 
+	m->needredraw = true;
 	m->background = background;
+	m->fontname = UI_FONT_NAME;
+	m->fontsize = UI_FONT_SIZE_SMALL;
+	m->fontcolor = UI_FONT_CLR_FG;
 
 	m->id = id;
 	m->align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
@@ -95,6 +112,15 @@ std::string const & EditBox::text() const
 	return m->text;
 }
 
+/**
+ * Set the font used by the edit box.
+ */
+void EditBox::set_font(std::string const & name, int32_t size, RGBColor color)
+{
+	m->fontname = name;
+	m->fontsize = size;
+	m->fontcolor = color;
+}
 
 /**
  * Set the current text in the edit box.
@@ -115,7 +141,7 @@ void EditBox::setText(std::string const & t)
 	if (caretatend || m->caret > m->text.size())
 		m->caret = m->text.size();
 
-	m_needredraw = true;
+	m->needredraw = true;
 	update();
 }
 
@@ -171,7 +197,7 @@ void EditBox::setAlign(Align _align)
 	if (_align != m->align) {
 		m->align = _align;
 		m->scrolloffset = 0;
-		m_needredraw = true;
+		m->needredraw = true;
 		check_caret();
 		update();
 	}
@@ -185,7 +211,7 @@ bool EditBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
-		m_needredraw = true;
+		m->needredraw = true;
 		update();
 		return true;
 	}
@@ -234,7 +260,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				check_caret();
 				changed.call();
 				changedid.call(m->id);
-				m_needredraw = true;
+				m->needredraw = true;
 				update();
 			}
 			return true;
@@ -247,7 +273,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 						if (0 == new_caret or isspace(m->text[--new_caret]))
 							break;
 
-				m_needredraw = true;
+				m->needredraw = true;
 				check_caret();
 
 				update();
@@ -268,7 +294,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 							break;
 						}
 
-				m_needredraw = true;
+				m->needredraw = true;
 
 				check_caret();
 				update();
@@ -279,7 +305,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			if (m->caret != 0) {
 				m->caret = 0;
 
-				m_needredraw = true;
+				m->needredraw = true;
 				check_caret();
 				update();
 			}
@@ -288,7 +314,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_END:
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
-				m_needredraw = true;
+				m->needredraw = true;
 				check_caret();
 				update();
 			}
@@ -325,7 +351,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 					check_caret();
 					changed.call();
 					changedid.call(m->id);
-					m_needredraw = true;
+					m->needredraw = true;
 					update();
 				}
 				return true;
@@ -396,7 +422,7 @@ void EditBox::draw(RenderTarget & odst)
 
 	UI::g_fh->draw_string
 		(dst,
-		 m_fontname, m_fontsize, m_fontcolor, UI_FONT_CLR_BG,
+		 m->fontname, m->fontsize, m->fontcolor, UI_FONT_CLR_BG,
 		 pos,
 		 m->text,
 		 align(),
@@ -421,8 +447,8 @@ void EditBox::check_caret()
 	uint32_t rightw;
 	uint32_t tmp;
 
-	UI::g_fh->get_size(m_fontname, m_fontsize, leftstr, leftw, tmp);
-	UI::g_fh->get_size(m_fontname, m_fontsize, rightstr, rightw, tmp);
+	UI::g_fh->get_size(m->fontname, m->fontsize, leftstr, leftw, tmp);
+	UI::g_fh->get_size(m->fontname, m->fontsize, rightstr, rightw, tmp);
 
 	int32_t caretpos;
 

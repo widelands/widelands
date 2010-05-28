@@ -52,7 +52,7 @@ namespace Widelands {
 
 // Subversions
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
-#define CURRENT_WAREHOUSE_PACKET_VERSION        2
+#define CURRENT_WAREHOUSE_PACKET_VERSION        4
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   4
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
@@ -317,18 +317,18 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				warehouse.insert_workers(id, fr.Unsigned16());
 			}
 
-			warehouse.m_requests.resize(fr.Unsigned16());
-			for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i) {
-				Request & req =
-					*new Request
+			if (packet_version <= 3) {
+				// eat the obsolete idle request structures
+				uint32_t nrrequests = fr.Unsigned16();
+				while (nrrequests--) {
+					boost::scoped_ptr<Request> req(new Request
 						(warehouse,
 						 Ware_Index::First(),
-						 Warehouse::idle_request_cb,
-						 Request::WORKER);
-				req.Read(fr, game, mol);
-				warehouse.m_requests[i] = &req;
+						 &Warehouse::request_cb,
+						 Request::WORKER));
+					req->Read(fr, game, mol);
+				}
 			}
-			warehouse.m_target_supply.resize(warehouse.m_requests.size());
 
 			assert(warehouse.m_incorporated_workers.empty());
 			{
@@ -447,6 +447,29 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				//  The checks that the warehouse has a next_spawn time for each
 				//  worker type that the player is allowed to spawn, is in
 				//  Warehouse::load_finish.
+
+			if (packet_version >= 3) {
+				// Read planned worker data
+				// Consistency checks are in Warehouse::load_finish
+				uint32_t nr_planned_workers = fr.Unsigned32();
+				while (nr_planned_workers--) {
+					warehouse.m_planned_workers.push_back(Warehouse::PlannedWorkers());
+					Warehouse::PlannedWorkers & pw = warehouse.m_planned_workers.back();
+					pw.index = tribe.worker_index(fr.CString());
+					pw.amount = fr.Unsigned32();
+
+					uint32_t nr_requests = fr.Unsigned32();
+					while (nr_requests--) {
+						pw.requests.push_back
+							(new Request
+								(warehouse,
+								Ware_Index::First(),
+								&Warehouse::request_cb,
+								Request::WORKER));
+						pw.requests.back()->Read(fr, game, mol);
+					}
+				}
+			}
 
 			if (uint32_t const conquer_radius = warehouse.get_conquers()) {
 				//  Add to map of military influence.
@@ -1026,11 +1049,6 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	}
 	fw.Unsigned8(0);
 
-	const uint16_t requests_size = warehouse.m_requests.size();
-	fw.Unsigned16(requests_size);
-	for (uint16_t i = 0; i < warehouse.m_requests.size(); ++i)
-		warehouse.m_requests[i]->Write(fw, game, mos);
-
 	//  Incorporated workers, write sorted after file-serial.
 	fw.Unsigned16(warehouse.m_incorporated_workers.size());
 	typedef std::map<uint32_t, const Worker *> TWorkerMap;
@@ -1066,6 +1084,16 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 		}
 	}
 	fw.Unsigned8(0); //  terminator for spawn times
+
+	fw.Unsigned32(warehouse.m_planned_workers.size());
+	container_iterate_const(std::vector<Warehouse::PlannedWorkers>, warehouse.m_planned_workers, pw_it) {
+		fw.CString(tribe.get_worker_descr(pw_it.current->index)->name());
+		fw.Unsigned32(pw_it.current->amount);
+
+		fw.Unsigned32(pw_it.current->requests.size());
+		container_iterate_const(std::vector<Request*>, pw_it.current->requests, req_it)
+			(*req_it.current)->Write(fw, game, mos);
+	}
 }
 
 

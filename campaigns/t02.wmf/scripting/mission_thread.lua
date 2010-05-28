@@ -137,6 +137,7 @@ function mines_and_food_thread()
    -- Enable food production
    plr:allow_buildings{
       "hunters_hut",
+      "fishers_hut",
       "gamekeepers_hut",
       "tavern",
       "farm",

@@ -85,8 +85,6 @@ public:
 	///   that the owning player is allowed to create and schedules act for for
 	///   the spawn.
 	/// * Schedules act for military stuff (and sets m_next_military_act).
-	/// * Sets the size of m_target_supplys to the sum of all ware and worker
-	///   types.
 	/// * Sees the area (since a warehouse is considered to be always occupied).
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
@@ -97,9 +95,6 @@ public:
 	virtual void act(Game & game, uint32_t data);
 
 	virtual void set_economy(Economy *);
-	virtual int32_t get_priority
-		(int32_t type, Ware_Index ware_index, bool adjust = true) const;
-	void set_needed(Ware_Index, uint32_t value = 1);
 
 	WareList const & get_wares() const;
 	WareList const & get_workers() const;
@@ -123,6 +118,10 @@ public:
 	bool can_create_worker(Game &, Ware_Index) const;
 	void     create_worker(Game &, Ware_Index);
 
+	uint32_t get_planned_workers(Game &, Ware_Index index) const;
+	void plan_workers(Game &, Ware_Index index, uint32_t amount);
+	std::vector<uint32_t> calc_available_for_worker(Game &, Ware_Index index) const;
+
 	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
 	void disable_spawn(uint8_t worker_types_without_cost_index);
 
@@ -132,6 +131,9 @@ public:
 	virtual bool attack   (Soldier &);
 	// End Attackable implementation
 
+	virtual void receive_ware(Game &, Ware_Index ware);
+	virtual void receive_worker(Game &, Worker & worker);
+
 protected:
 
 	/// Create the warehouse information window.
@@ -139,20 +141,39 @@ protected:
 		(Interactive_GameBase &, UI::Window * & registry);
 
 private:
-	static void idle_request_cb
+	/**
+	 * Plan to produce a certain worker type in this warehouse. This means requesting
+	 * all the necessary wares, if multiple different wares types are needed.
+	 */
+	struct PlannedWorkers {
+		/// Index of the worker type we plan to create
+		Ware_Index index;
+
+		/// How many workers of this type are we supposed to create?
+		uint32_t amount;
+
+		/// Requests to obtain the required build costs
+		std::vector<Request *> requests;
+
+		void cleanup();
+	};
+
+	static void request_cb
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 	void sort_worker_in(Editor_Game_Base &, Worker &);
 
+	bool _load_finish_planned_worker(PlannedWorkers & pw);
+	void _update_planned_workers(Game &, PlannedWorkers & pw);
+	void _update_all_planned_workers(Game &);
+
 	WarehouseSupply       * m_supply;
-	std::vector<Request *>  m_requests; // one idle request per ware type
 
 	// Workers who live here at the moment
 	std::vector<OPtr<Worker> > m_incorporated_workers;
 	uint32_t                 * m_next_worker_without_cost_spawn;
 	uint32_t                   m_next_military_act;
 
-	/// how many do we want to store in this building
-	std::vector<size_t> m_target_supply; // absolute value
+	std::vector<PlannedWorkers> m_planned_workers;
 };
 
 }

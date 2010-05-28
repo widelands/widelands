@@ -92,6 +92,7 @@ Interactive_Base::Interactive_Base
 	m_label_speed
 		(this, get_w(), 0, std::string(), UI::Align_TopRight)
 {
+	m_toolbar.set_layout_toplevel(true);
 	m->quicknavigation->set_setview
 		(boost::bind(&Map_View::set_viewpoint, this, _1, true));
 	set_changeview

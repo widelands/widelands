@@ -94,7 +94,7 @@ struct FileSystem {
 	 */
 	virtual StreamWrite * OpenStreamWrite(std::string const & fname) = 0;
 
-	virtual FileSystem &   MakeSubFileSystem(std::string const & dirname) = 0;
+	virtual FileSystem & MakeSubFileSystem(std::string const & dirname) = 0;
 	virtual FileSystem & CreateSubFileSystem
 		(std::string const & dirname, Type) = 0;
 	virtual void Unlink(std::string const &) = 0;
@@ -114,7 +114,7 @@ struct FileSystem {
 	bool pathIsAbsolute(std::string const & path) const;
 	static char const * FS_Filename(char const *);
 	static char const * FS_Filename(char const *, char const * & extension);
-    static std::string FS_FilenameWoExt(char const *);
+	static std::string FS_FilenameWoExt(char const *);
 	static std::string GetHomedir();
 
 	virtual unsigned long long DiskSpace() = 0;

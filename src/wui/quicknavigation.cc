@@ -79,7 +79,7 @@ void QuickNavigation::view_changed(Point newpos, bool jump)
 	}
 
 	if (jump || !m_havefirst) {
-		m_anchor = m_current;
+		m_anchor = newpos;
 	}
 
 	m_current = newpos;

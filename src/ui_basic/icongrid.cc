@@ -99,11 +99,11 @@ int32_t Icon_Grid::add
 	int32_t rows = (m_items.size() + m_columns - 1) / m_columns;
 
 	if (rows <= 1) {
-		set_size(m_cell_width * m_columns, m_cell_height + m_ta->get_h());
+		set_desired_size(m_cell_width * m_columns, m_cell_height + m_ta->get_h());
 		m_ta->set_size(get_inner_w(), m_ta->get_h());
 		m_ta->set_pos(Point(0, m_cell_height));
 	} else {
-		set_size(m_cell_width * m_columns, m_cell_height * rows + m_ta->get_h());
+		set_desired_size(m_cell_width * m_columns, m_cell_height * rows + m_ta->get_h());
 		m_ta->set_size(get_inner_w(), m_ta->get_h());
 		m_ta->set_pos(Point(0, m_cell_height * rows));
 	}

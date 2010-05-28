@@ -25,6 +25,7 @@
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+#include <scripting/pdep/llimits.h>
 
 namespace UI {
 
@@ -53,6 +54,7 @@ Panel::Panel
 	_x(nx), _y(ny), _w(nw), _h(nh),
 	_lborder(0), _rborder(0), _tborder(0), _bborder(0),
 	_border_snap_distance(0), _panel_snap_distance(0),
+	_desired_w(nw), _desired_h(nh),
 	_running(false),
 	_tooltip(tooltip_text.size() ? strdup(tooltip_text.c_str()) : 0)
 {
@@ -256,19 +258,12 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 		_cache = g_gr->create_picture_surface(_w, _h);
 	}
 
-	if (_parent) {
-		if (get_snapparent())
-			_parent->set_inner_size(nw, nh);
+	if (_parent)
+		move_inside_parent();
 
-		if (!(_parent->_flags & pf_internal_layouting)) {
-			_parent->_flags |= pf_internal_layouting;
-			_parent->layout();
-			_parent->_flags &= ~pf_internal_layouting;
-		}
-	}
+	layout();
 
 	update(0, 0, upw, uph);
-	move_inside_parent();
 }
 
 /**
@@ -281,6 +276,63 @@ void Panel::set_pos(const Point n) {
 	_y = n.y;
 	update(0, 0, _w, _h);
 	_needdraw = nd;
+}
+
+/**
+ * Set \p w and \p h to the desired width and height of this panel, respectively.
+ */
+void Panel::get_desired_size(uint32_t& w, uint32_t& h) const
+{
+	w = _desired_w;
+	h = _desired_h;
+}
+
+/**
+ * Set this panel's desired size and invoke the recursive update of the parent.
+ *
+ * \note The desired size of a panel must only depend on the attributes of this
+ * panel and its children that are not derived from layout routines.
+ * In particular, it must be independent of the panel's position on the screen
+ * or of its actual size.
+ */
+void Panel::set_desired_size(uint32_t w, uint32_t h)
+{
+	if (_desired_w == w && _desired_h == h)
+		return;
+
+	_desired_w = w;
+	_desired_h = h;
+	if (!get_layout_toplevel() && _parent) {
+		_parent->update_desired_size();
+	} else {
+		set_size(_desired_w, _desired_h);
+	}
+}
+
+/**
+ * Recompute this panel's desired size.
+ *
+ * This is automatically called whenever a child panel's desired size changes.
+ */
+void Panel::update_desired_size()
+{
+}
+
+/**
+ * Set whether this panel acts as a layouting toplevel.
+ *
+ * Typically, only true for \ref Window.
+ */
+void Panel::set_layout_toplevel(bool ltl)
+{
+	_flags &= ~pf_layout_toplevel;
+	if (ltl)
+		_flags |= pf_layout_toplevel;
+}
+
+bool Panel::get_layout_toplevel() const
+{
+	return _flags & pf_layout_toplevel;
 }
 
 /**
@@ -309,10 +361,10 @@ void Panel::move_inside_parent()
 }
 
 /**
- * Automatically layout the children of this panel and adjust this
- * panel's size, if necessary.
+ * Automatically layout the children of this panel and adjust their size.
  *
- * This is always called when a child resizes.
+ * \note This is always called when this panel's size is changed, so do not
+ * call \ref set_size from this function!
  *
  * The default implementation does nothing.
  */
@@ -327,17 +379,6 @@ void Panel::set_inner_size(uint32_t const nw, uint32_t const nh)
 {
 	set_size(nw + _lborder + _rborder, nh + _tborder + _bborder);
 }
-
-
-/**
- * Resize so that we match the size of the inner panel.
- */
-void Panel::fit_inner(Panel & inner)
-{
-	set_inner_size(inner.get_w(), inner.get_h());
-	inner.set_pos(Point(0, 0));
-}
-
 
 /**
  * Change the border dimensions.
@@ -672,18 +713,6 @@ void Panel::set_think(bool const yes)
 		_flags |= pf_think;
 	else
 		_flags &= ~pf_think;
-}
-
-/**
- * Enables/disables resizing the parent to match our size whenever
- * our size changes.
- */
-void Panel::set_snapparent(bool snapparent)
-{
-	if (snapparent)
-		_flags |= pf_snap_parent_size;
-	else
-		_flags &= ~pf_snap_parent_size;
 }
 
 /**

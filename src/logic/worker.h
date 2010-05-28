@@ -21,6 +21,7 @@
 #define WORKER_H
 
 #include "economy/idleworkersupply.h"
+#include "economy/transfer.h"
 #include "economy/ware_instance.h"
 #include "worker_descr.h"
 #include "productionsite.h"
@@ -151,6 +152,7 @@ public:
 	// worker-specific tasks
 	void start_task_transfer(Game &, Transfer *);
 	void cancel_task_transfer(Game &);
+	Transfer * get_transfer() const {return m_transfer;}
 
 	void start_task_buildingwork(Game &);
 	void update_task_buildingwork(Game &);
@@ -271,6 +273,7 @@ protected:
 	private:
 		uint32_t m_location;
 		uint32_t m_carried_item;
+		Transfer::ReadData m_transfer;
 	};
 
 	virtual Loader* create_loader();

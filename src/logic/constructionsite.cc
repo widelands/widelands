@@ -324,9 +324,11 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
-		m_building->create(egbase, owner(), m_position, false);
-		if (Worker * const builder = m_builder.get(egbase))
+		Building& building = m_building->create(egbase, owner(), m_position, false);
+		if (Worker * const builder = m_builder.get(egbase)) {
 			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+			builder->set_location(&building);
+		}
 	}
 }
 
@@ -387,6 +389,7 @@ void ConstructionSite::request_builder_callback
 	cs.m_builder_request = 0;
 
 	w->start_task_buildingwork(game);
+	cs.set_seeing(true);
 }
 
 
