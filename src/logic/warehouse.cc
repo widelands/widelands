@@ -202,6 +202,11 @@ bool WarehouseSupply::has_storage() const throw ()
 	return true;
 }
 
+void WarehouseSupply::get_ware_type(bool& isworker, Ware_Index& ware) const
+{
+	throw wexception("WarehouseSupply::get_ware_type: calling this is nonsensical");
+}
+
 void WarehouseSupply::send_to_storage(Game &, Warehouse* wh)
 {
 	throw wexception("WarehouseSupply::send_to_storage: should never be called");
