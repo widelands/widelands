@@ -4,6 +4,8 @@
 
 use("aux", "coroutine")
 use("aux", "infrastructure")
+use("aux", "objective_utils")
+use("aux", "ui")
 
 use("map", "water_rising")
 
@@ -44,6 +46,11 @@ function msg_boxes(boxes_descr)
    end
 end
 
+-- Add an objective
+function add_obj(o)
+   return plr:add_objective(o.name, o.title, o.body)
+end
+
 
 -- ===============
 -- Initialization
@@ -76,14 +83,69 @@ function intro()
    sleep(200)
 
    initialize()
+   
+   build_environment()
+end
+
+function build_environment()
+   msg_boxes(first_briefing_messages)
+   local o = add_obj(obj_build_environment)
+   
+   while not check_for_buildings(plr, {
+      woodcutters_house = 3,
+      foresters_house = 3,
+      quarry = 1,
+      sawmill = 1,
+   }) do sleep(3731) end
+
+   o.done = true
+end
+
+function leftover_buildings()
+   -- All fields with left over buildings
+   local lob_fields = Set:new{
+      wl.map.Field( 59, 86),
+      wl.map.Field( 72, 89),
+      wl.map.Field(111,137),
+      wl.map.Field(121,144),
+   }
+
+   local msgs = {
+      first_leftover_building_found,
+      second_leftover_building_found,
+      third_leftover_building_found,
+   }
+
+   while lob_fields.size > 0 and #msgs > 0 do
+      for f in lob_fields:items() do
+         if plr:sees_field(f) then
+            scroll_smoothly_to(f)
+
+            msg_boxes(msgs[1])
+
+            table.remove(msgs, 1)
+            lob_fields:discard(f)
+            break
+         end
+      end
+      sleep(3000)
+   end
 end
 
 
 wr = WaterRiser:new(wl.map.Field(92,19))
-wr:rise(25) -- Rise the water to level 25
 
--- TODO: comment me out again
-plr.see_all = 1
+-- TODO: remove/reuse this debug function 
+function start_water_rising()
+   -- TODO: remove this again
+   plr.see_all = 1
 
--- run(intro) TODO: comment me in again
+   wr:rise(25) -- Rise the water to level 25
+end
+
+
+-- run(intro)
+run(leftover_buildings)
+
+
 

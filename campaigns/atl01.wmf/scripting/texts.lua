@@ -86,6 +86,13 @@ obj_be_a_smarty = {
    ),
 }
 
+obj_build_environment = {
+   name = "build_environment",
+   title = _ "Build 3 wood cutters, 3 foresters, sawmill and quarry",
+   body = obj_text(_"Build environment", _
+[[Build 3 wood cutters, 3 foresters, sawmill and quarry]]
+   ),
+}
 
 -- =======================================================================
 --                                  Texts                                  
@@ -119,6 +126,45 @@ _ is not. Capice?]]
    ) .. new_objectives(obj_be_a_smarty)
 }
 } -- end of initial messages.
+
+first_briefing_messages = {
+{
+   title = _ "The princess orders",
+   body = princess(_ "The princess speaks", _
+[[Build environment first]]
+   ) .. new_objectives(obj_build_environment)
+}
+}
+
+
+first_leftover_building_found = {
+{
+   title = _ "Strange buildings",
+   body = princess(_ "I say",
+[[Maybe we are not alone here..]]
+   )
+}
+}
+
+second_leftover_building_found = {
+{
+   title = _ "Strange buildings",
+   body = princess(_ "I say",
+[[Yet another of those]]
+   )
+}
+}
+
+third_leftover_building_found = {
+{
+   title = _ "Strange buildings",
+   body = princess(_ "I say",
+[[And Yet another of those. But i am confident that we are alone on
+this island as we have already conquered and seen so much of it.]]
+   )
+}
+}
+
 
 -- Add similar dialog queues. To test them use a debug build, press F6 and
 -- enter msg_boxes(initial_messages) or similar.
