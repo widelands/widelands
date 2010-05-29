@@ -20,6 +20,14 @@ function _format_time(t)
 end
 
 
+function _fully_flooded(f)
+   if f.terd == "wasser" and f.terr == "wasser" and
+      f.tln.terr == "wasser" and f.tln.terd == "wasser" and
+      f.ln.terr == "wasser" and f.trn.terd == "wasser" then
+      return true
+   end
+   return false
+end
 
 -- =================
 -- A Field Triangle 
@@ -57,20 +65,6 @@ function Triangle:set_ter(t)
    end
 end
 
-function Triangle:set_height(h, g_property)
-   local property = g_property or "height"
-
-   if self._d == "d" then
-      self._f[property] = h
-      self._f.bln[property] = h
-      self._f.brn[property] = h
-   else
-      self._f[property] = h
-      self._f.brn[property] = h
-      self._f.rn[property] = h
-   end
-end
-
 function Triangle:get_height()
    if self._d == "d" then
       return (self._f.height + self._f.bln.height + self._f.brn.height) / 3
@@ -81,7 +75,7 @@ end
 
 function Triangle:fields()
    if self._d == "d" then
-      return {self._f, self._f.bln, self._f}
+      return {self._f, self._f.bln, self._f.brn}
    else
       return {self._f, self._f.brn, self._f.rn}
    end
@@ -145,11 +139,13 @@ function WaterRiser:_rise_water()
       local tr = self._to_flood:pop_at(math.random(self._to_flood.size))
 
       tr:set_ter("wasser")
-      tr:set_height(self._water_level, "raw_height")
       for idx,f in ipairs(tr:fields()) do
-         if f.immovable then f.immovable:remove() end
-         for idx,b in ipairs(f.bobs) do
-            b:remove()
+         if _fully_flooded(f) then
+            f.height = self._water_level
+            if f.immovable then f.immovable:remove() end
+            for idx,b in ipairs(f.bobs) do
+               b:remove()
+            end
          end
       end
          
@@ -182,7 +178,15 @@ function WaterRiser:rise(level)
       local scnt = math.floor(self._ocean.size / 300)
       local cnt = scnt
       for tr in self._ocean:items() do
-         tr:set_height(self._water_level, "raw_height")
+         for idx,f in ipairs(tr:fields()) do
+            if _fully_flooded(f) then
+               f.raw_height = self._water_level
+               if f.immovable then f.immovable:remove() end
+               for idx,b in ipairs(f.bobs) do
+                  b:remove()
+               end
+            end
+         end
          cnt = cnt - 1
          if cnt == 0 then
             cnt = scnt
