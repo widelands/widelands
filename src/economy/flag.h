@@ -100,6 +100,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	bool has_capacity();
 	uint32_t total_capacity() {return m_item_capacity;}
+	uint32_t current_items() const {return m_item_filled;}
 	void wait_for_capacity(Game &, Worker &);
 	void skip_wait_for_capacity(Game &, Worker &);
 	void add_item(Game &, WareInstance &);

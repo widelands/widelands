@@ -203,6 +203,7 @@ private:
 	static void request_cb
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 	void sort_worker_in(Editor_Game_Base &, Worker &);
+	void check_remove_stock(Game &);
 
 	bool _load_finish_planned_worker(PlannedWorkers & pw);
 	void _update_planned_workers(Game &, PlannedWorkers & pw);
@@ -217,6 +218,7 @@ private:
 	std::vector<OPtr<Worker> > m_incorporated_workers;
 	uint32_t                 * m_next_worker_without_cost_spawn;
 	uint32_t                   m_next_military_act;
+	uint32_t m_next_stock_remove_act;
 
 	std::vector<PlannedWorkers> m_planned_workers;
 };

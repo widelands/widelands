@@ -483,6 +483,9 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				}
 			}
 
+			if (packet_version >= 5)
+				warehouse.m_next_stock_remove_act = fr.Unsigned32();
+
 			if (uint32_t const conquer_radius = warehouse.get_conquers()) {
 				//  Add to map of military influence.
 				Map const & map = game.map();
@@ -1108,6 +1111,8 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 		container_iterate_const(std::vector<Request*>, pw_it.current->requests, req_it)
 			(*req_it.current)->Write(fw, game, mos);
 	}
+
+	fw.Unsigned32(warehouse.m_next_stock_remove_act);
 }
 
 
