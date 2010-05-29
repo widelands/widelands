@@ -40,7 +40,9 @@ struct Warehouse_Window : public Building_Window {
 	}
 
 private:
-	void make_wares_tab(WaresDisplay::wdType type, PictureID tabicon, const std::string & tooltip);
+	void make_wares_tab
+		(WaresDisplay::wdType type,
+		 PictureID tabicon, const std::string & tooltip);
 };
 
 /**
@@ -52,19 +54,26 @@ Warehouse_Window::Warehouse_Window
 	 UI::Window *         & registry)
 	: Building_Window(parent, wh, registry)
 {
-	make_wares_tab(WaresDisplay::WARE, g_gr->get_picture(PicMod_UI, pic_tab_wares), _("Wares"));
-	make_wares_tab(WaresDisplay::WORKER, g_gr->get_picture(PicMod_UI, pic_tab_workers), _("Workers"));
+	make_wares_tab
+		(WaresDisplay::WARE, g_gr->get_picture(PicMod_UI, pic_tab_wares),
+		 _("Wares"));
+	make_wares_tab
+		(WaresDisplay::WORKER, g_gr->get_picture(PicMod_UI, pic_tab_workers),
+		 _("Workers"));
 }
 
-void Warehouse_Window::make_wares_tab(WaresDisplay::wdType type, PictureID tabicon, const std::string& tooltip)
+void Warehouse_Window::make_wares_tab
+	(WaresDisplay::wdType type, PictureID tabicon, const std::string & tooltip)
 {
-	WaresDisplay * display = new WaresDisplay(get_tabs(), 0, 0, warehouse().owner().tribe());
+	WaresDisplay * display =
+		new WaresDisplay(get_tabs(), 0, 0, warehouse().owner().tribe());
 	display->set_inner_size(Width, 0);
 	display->add_warelist
-		(type == WaresDisplay::WARE ? warehouse().get_wares() : warehouse().get_workers(),
+		(type == WaresDisplay::WARE ?
+		 warehouse().get_wares() : warehouse().get_workers(),
 		 type);
 
-	get_tabs()->add(tabicon, display, tooltip);
+	get_tabs()->add("wares", tabicon, display, tooltip);
 }
 
 /**

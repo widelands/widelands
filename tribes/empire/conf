@@ -1,19 +1,5 @@
 # Comments are for graphic designers some ideas
 
-[defaults]
-plrclr0_r=2
-plrclr0_g=2
-plrclr0_b=74
-plrclr1_r=2
-plrclr1_g=2
-plrclr1_b=112
-plrclr2_r=2
-plrclr2_g=2
-plrclr2_b=149
-plrclr3_r=2
-plrclr3_g=2
-plrclr3_b=198
-
 [tribe]
 author=_The Widelands Development Team
 name=_Empire
@@ -27,6 +13,7 @@ carrier2=donkey
 name=frontier
 pics=pics/frontier_??.png
 hotspot=1 19
+playercolor=true
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
@@ -211,6 +198,10 @@ winery=_Winery
 vineyard=_Vineyard
 scouts_house=_"Scout's House"
 donkeyfarm=_Donkeyfarm
+
+[initializations]
+headquarters_medium=_Headquarters medium
+castle_village=_Castle village
 
 [military_data]
 retreat_interval=10-90

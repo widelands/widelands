@@ -32,12 +32,6 @@ struct Map_Waredata_Data_Packet : public Map_Data_Packet {
 		throw (_wexception);
 	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
 		throw (_wexception);
-private:
-	void write_ware
-		(FileWrite            &,
-		 Editor_Game_Base     &,
-		 Map_Map_Object_Saver &,
-		 WareInstance   const &);
 };
 
 }

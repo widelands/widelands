@@ -53,12 +53,12 @@ MilitarySite_Window::MilitarySite_Window
 Building_Window(parent, ms, registry)
 {
 	get_tabs()->add
-		(g_gr->get_picture(PicMod_Game, pic_tab_military),
+		("soldiers", g_gr->get_picture(PicMod_Game, pic_tab_military),
 		 create_soldier_list(*get_tabs(), parent, militarysite()),
 		 _("Soldiers"));
 }
 
-void MilitarySite_Window::create_capsbuttons(UI::Box* buttons)
+void MilitarySite_Window::create_capsbuttons(UI::Box * buttons)
 {
 	Building_Window::create_capsbuttons(buttons);
 

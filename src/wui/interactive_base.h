@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,6 +71,10 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 		return m_sel.pos;
 	}
 	bool get_sel_freeze() const {return m_sel.freeze;}
+
+	bool buildhelp();
+	void show_buildhelp(bool const t);
+	void toggle_buildhelp ();
 
 	/**
 	 * sel_triangles determines whether the mouse pointer selects triangles.
@@ -180,6 +184,7 @@ private:
 };
 
 #define PIC2 g_gr->get_picture(PicMod_UI, "pics/but2.png")
-#define TOOLBAR_BUTTON_COMMON_PARAMETERS &m_toolbar, 0, 0, 34U, 34U, PIC2
+#define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) \
+    &m_toolbar, name, 0, 0, 34U, 34U, PIC2
 
 #endif

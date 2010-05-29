@@ -53,9 +53,7 @@ m_pit     (pit)
 		(static_cast<uint32_t>
 		 (ceil(sqrt(static_cast<float>(nr_immovables)))), 6U);
 
-
-	m_tabpanel.set_snapparent(true);
-
+	set_center_panel(&m_tabpanel);
 
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_immovables; ++j) {
@@ -84,9 +82,8 @@ m_pit     (pit)
 			box = new UI::Box
 				 (&m_tabpanel, 0, 0, UI::Box::Horizontal, parent.get_inner_w() - 50,
 				  parent.get_inner_h() - 50);
-			box->layout();
 			box->set_scrolling(true);
-			m_tabpanel.add(tab_icon, box);
+			m_tabpanel.add("immovables", tab_icon, box);
 		}
 		assert(box);
 
@@ -95,7 +92,7 @@ m_pit     (pit)
 			 g_gr->get_picture
 			 	(PicMod_Game, world.get_immovable_descr(i)->get_picture()));
 
-		cb.set_size(width, height);
+		cb.set_desired_size(width, height);
 		cb.set_id(i);
 		cb.set_state(m_pit.is_enabled(i));
 		cb.changedtoid.set
@@ -107,7 +104,6 @@ m_pit     (pit)
 	}
 
 	m_tabpanel.activate(0);
-	m_tabpanel.layout();
 }
 
 /**

@@ -1,9 +1,7 @@
 size=big
 max_soldiers=12
-heal_per_second=6
+heal_per_second=2
 conquers=12
-max_medics=4
-heal_increase_per_medic=3
 
 [buildcost]
 planks=4

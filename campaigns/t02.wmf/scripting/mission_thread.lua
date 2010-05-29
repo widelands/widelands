@@ -3,23 +3,20 @@
 -- =======================================================================
 
 use("map", "mission_thread_texts")
-use("aux", "smooth_move")
+use("aux", "ui")
 use("aux", "table")
 
 quarry_done = false
 enhance_buildings_done = false
 build_materials_done = false
+cattle_farm_done = false
 
 function send_msg(t)
-   p:message_box(t.title, t.body, t)
+   plr:message_box(t.title, t.body, t)
 end
 
 function add_obj(t)
-   local o = p:add_objective(t.name, t.title, t.body)
-   if t.check then
-      run(t.check, o)
-   end
-   return o
+   return plr:add_objective(t.name, t.title, t.body)
 end
 
 
@@ -37,19 +34,31 @@ function introduction_thread()
    send_msg(order_msg_2)
 
    -- Reveal the rocks
-   add_obj(obj_claim_northeastern_rocks)
+   local obj = add_obj(obj_claim_northeastern_rocks)
 
    local rocks = wl.map.Field(27, 48)
-   p:reveal_fields(rocks:region(6))
-   pts = smooth_move(rocks, p, 3000)
-   sleep(3000)
+   local intermediate_point = wl.map.Field(31,12)
+   plr:reveal_fields(rocks:region(6))
+   local way1 = scroll_smoothly_to(intermediate_point, 1500)
+   local way2 = scroll_smoothly_to(rocks, 1500)
 
    send_msg(order_msg_3)
    send_msg(order_msg_4)
 
    -- Move back to HQ
-   timed_move(array_reverse(pts), p, 10)
-   sleep(1000)
+   timed_scroll(array_reverse(way2), 10)
+   timed_scroll(array_reverse(way1), 10)
+
+   -- Now, wait till the quarry comes up
+   local f = wl.map.Field(27,48):region(6)
+   while not check_for_buildings(plr, { quarry = 1 }, f) do 
+      sleep(5000)
+   end
+   obj.done = true
+
+   send_msg(order_msg_5_quarry)
+
+   quarry_done = true
 end
 
 -- ==================================
@@ -60,14 +69,14 @@ function mines_and_food_thread()
    local f2 = wl.map.Field(24, 61)
 
    -- Sleep until we see the mountains
-   while not p:seen_field(f1) and not p:seen_field(f2) do
+   while not plr:seen_field(f1) and not plr:seen_field(f2) do
       sleep(4000)
    end
 
    -- Send a msg and add the objective
    send_msg(order_msg_6_geologist)
    o = add_obj(obj_build_mines)
-   p:allow_buildings{
+   plr:allow_buildings{
       "coalmine",
       "oremine",
       "goldmine",
@@ -75,7 +84,7 @@ function mines_and_food_thread()
    }
 
    -- Wait for completion
-   while not check_for_buildings(p, {coalmine = 1, oremine = 1}) do
+   while not check_for_buildings(plr, {coalmine = 1, oremine = 1}) do
       sleep(5000)
    end
    o.done = true
@@ -85,11 +94,50 @@ function mines_and_food_thread()
    send_msg(order_msg_10_bread)
 
    local obj_bf = add_obj(obj_basic_food)
+   -- The function to check for completeness
+   run(function() 
+      local tavern_msg_done = nil
+      local hunter_msg_done = nil
+      while true do
+         local rv = plr:get_buildings{
+            "hunters_hut", "gamekeepers_hut", "tavern"
+         }
+         if #rv.hunters_hut >= 1 and not hunter_msg_done then
+            send_msg(order_msg_11_basic_food_began)
+            hunter_msg_done = true
+         end
+         if #rv.tavern >= 1 and not tavern_msg_done then
+            send_msg(order_msg_13_tavern)
+            tavern_msg_done = true
+         end
+         if #rv.hunters_hut >= 1 and #rv.gamekeepers_hut >= 1
+                  and #rv.tavern >= 1 then break end
+         sleep(5331)
+      end
+      obj_bf.done = true
+   end)
+
    local obj_farming = add_obj(obj_begin_farming)
 
+   -- Start the cattlefarm thread
+   run(cattle_farm)
+
+   run(function() 
+      while 1 do
+         local rv = plr:get_buildings{"well", "bakery", "farm"}
+         if #rv.well >= 1 and #rv.bakery >= 1 and #rv.farm >= 1 then
+            break
+         end
+         sleep(4234)
+      end
+      send_msg(order_msg_12_farming_began)
+      obj_farming.done = true
+   end)
+
    -- Enable food production
-   p:allow_buildings{
+   plr:allow_buildings{
       "hunters_hut",
+      "fishers_hut",
       "gamekeepers_hut",
       "tavern",
       "farm",
@@ -103,18 +151,28 @@ function mines_and_food_thread()
 
    -- Ready to build refiner stuff
    send_msg(order_msg_14_refine_ore)
-   p:allow_buildings{"smelting_works"}
+   plr:allow_buildings{"smelting_works"}
    o = add_obj(obj_refine_ores)
-   while #p:get_buildings("smelting_works") < 1 do
+   while #plr:get_buildings("smelting_works") < 1 do
       sleep(6223)
    end
    o.done = true
 
    -- Information about making mines deeper
    send_msg(order_msg_15_mines_exhausted)
-   p:allow_buildings{ "deep_coalmine", "inn" }
+   plr:allow_buildings{ "deep_coalmine", "inn", "micro-brewery" }
    -- objective.check will make sure that this i finished
-   add_obj(obj_enhance_buildings)
+   local obj = add_obj(obj_enhance_buildings)
+
+   run(function()
+      while not check_for_buildings(plr,
+         { inn = 1, deep_coalmine = 1, ["micro-brewery"] = 1 })
+      do
+         sleep(5742)
+      end
+      obj.done = true
+      enhance_buildings_done = true
+   end)
 
 end
 
@@ -122,11 +180,11 @@ end
 -- Better building materials thread
 -- =================================
 function build_materials_thread()
-   local p = wl.game.Player(1)
+   local plr = wl.game.Player(1)
 
    -- Wait for a barrier or a sentry to be build
    while true do
-      local rv = p:get_buildings{"sentry", "stronghold"}
+      local rv = plr:get_buildings{"sentry", "stronghold"}
       if #rv.sentry + #rv.stronghold > 0 then
          break
       end
@@ -134,17 +192,17 @@ function build_materials_thread()
    end
 
    send_msg(order_msg_16_blackwood)
-   p:allow_buildings{"hardener"}
+   plr:allow_buildings{"hardener"}
    local o = add_obj(obj_better_material_1)
-   while #p:get_buildings("hardener") < 1 do sleep(5421) end
+   while #plr:get_buildings("hardener") < 1 do sleep(5421) end
    o.done = true
 
    send_msg(order_msg_17_grindstone)
-   p:allow_buildings{"lime_kiln", "well", "burners_house"}
+   plr:allow_buildings{"lime_kiln", "well", "burners_house"}
    o = add_obj(obj_better_material_2)
    -- Wait for the buildings to be build
    while true do
-      local rv = p:get_buildings{"lime_kiln", "well",
+      local rv = plr:get_buildings{"lime_kiln", "well",
          "coalmine", "deep_coalmine", "burners_house"}
       if (#rv.lime_kiln > 0 and #rv.well > 0) and
          (#rv.coalmine + #rv.deep_coalmine + #rv.burners_house > 0) then
@@ -155,15 +213,37 @@ function build_materials_thread()
    o.done = true
 
    send_msg(order_msg_18_fernery)
-   p:allow_buildings{"fernery"}
+   plr:allow_buildings{"fernery"}
    o = add_obj(obj_better_material_3)
-   while #p:get_buildings("fernery") < 1 do sleep(5421) end
+   while #plr:get_buildings("fernery") < 1 do sleep(5421) end
 
    send_msg(order_msg_19_all_material)
    o.done = true
 
    build_materials_done = true
 end
+
+-- ==================
+-- Cattlefarm thread 
+-- ==================
+function cattle_farm()
+   while not check_for_buildings(plr, { farm = 1, well = 1 }) do
+      sleep(7834)
+   end
+
+   send_msg(msg_cattlefarm_00)
+
+   local o = add_obj(obj_build_cattlefarm)
+   plr:allow_buildings{"cattlefarm"}
+
+   while not check_for_buildings(plr, { cattlefarm = 1 }) do
+      sleep(2323)
+   end
+   o.done = true
+
+   cattle_farm_done = true
+end
+
 
 -- ======================
 -- Throns story messages
@@ -176,43 +256,45 @@ function story_messages_thread()
    send_msg(msg_story_1)
 end
 
+-- =================
+-- Mission complete 
+-- =================
 function mission_complete_thread()
    while not (build_materials_done and quarry_done
-            and enhance_buildings_done ) do
+            and enhance_buildings_done and cattle_farm_done) do
          sleep(10000)
    end
 
    send_msg(msg_mission_complete)
-   p:reveal_scenario("barbariantut02")
+   plr:reveal_scenario("barbariantut02")
 end
 
 -- ===============
 -- Village thread
 -- ===============
 function village_thread()
-   local p = wl.game.Player(1)
-   while not (p:seen_field(wl.map.Field(52,39)) or
-              p:seen_field(wl.map.Field(58,10))) do
+   local plr = wl.game.Player(1)
+   while not (plr:seen_field(wl.map.Field(52,39)) or
+              plr:seen_field(wl.map.Field(58,10))) do
          sleep(6534)
    end
 
    reveal_village()
 
-   pts = smooth_move(wl.map.Field(55, 25), p, 3000)
-   sleep(3000)
+   pts = scroll_smoothly_to(wl.map.Field(55, 25), 3000)
 
    send_msg(msg_village)
 
-   timed_move(array_reverse(pts), p, 10)
+   timed_scroll(array_reverse(pts), 10)
    sleep(1500)
 end
 
 
 --[[
    This is a village of poor but friendly people who have settled in a safe
-   valley between two glaciers. They hunt and produce timber and grain but they do
-   not have ores or even stones, so they are dependent on the infrequent
-   merchant that may pass by and provide them with whatever they can not
+   valley between two glaciers. They hunt and produce timber and grain but they
+   do not have ores or even stones, so they are dependent on the infrequent
+   merchant that may pass by and provide them with whatever they cannot
    produce on their own. Their only protection is a guard hut at each entrance
    to the valley. Therefore they realize that they may have to join a more
    powerful society for protection in order to stay alive in this world.
@@ -278,8 +360,8 @@ function reveal_village()
       { "field2", 55, 35, "barbarians" },
    }
 
-   local p = wl.game.Player(1)
-   prefilled_buildings(p,
+   local plr = wl.game.Player(1)
+   prefilled_buildings(plr,
       {"sentry", 57, 9},
       {"sentry", 52, 39},
       {"hunters_hut", 56, 10},
@@ -303,33 +385,33 @@ function reveal_village()
    )
 
    -- Adjust the borders so that the village owns everything green
-   p:conquer(wl.map.Field(59, 16), 2)
-   p:conquer(wl.map.Field(57, 18), 2)
-   p:conquer(wl.map.Field(58, 19), 1)
-   p:conquer(wl.map.Field(58, 20), 1)
-   p:conquer(wl.map.Field(54, 15), 1)
-   p:conquer(wl.map.Field(54, 16), 1)
-   p:conquer(wl.map.Field(54, 20), 1)
-   p:conquer(wl.map.Field(54, 22), 1)
-   p:conquer(wl.map.Field(57, 23), 1)
-   p:conquer(wl.map.Field(58, 24), 1)
-   p:conquer(wl.map.Field(57, 27), 1)
-   p:conquer(wl.map.Field(56, 31), 1)
-   p:conquer(wl.map.Field(56, 33), 1)
-   p:conquer(wl.map.Field(52, 32), 1)
+   plr:conquer(wl.map.Field(59, 16), 2)
+   plr:conquer(wl.map.Field(57, 18), 2)
+   plr:conquer(wl.map.Field(58, 19), 1)
+   plr:conquer(wl.map.Field(58, 20), 1)
+   plr:conquer(wl.map.Field(54, 15), 1)
+   plr:conquer(wl.map.Field(54, 16), 1)
+   plr:conquer(wl.map.Field(54, 20), 1)
+   plr:conquer(wl.map.Field(54, 22), 1)
+   plr:conquer(wl.map.Field(57, 23), 1)
+   plr:conquer(wl.map.Field(58, 24), 1)
+   plr:conquer(wl.map.Field(57, 27), 1)
+   plr:conquer(wl.map.Field(56, 31), 1)
+   plr:conquer(wl.map.Field(56, 33), 1)
+   plr:conquer(wl.map.Field(52, 32), 1)
 
    -- Build roads
    -- Start at northern sentry
-   connected_road(p, wl.map.Field(58, 10).immovable,
+   connected_road(plr, wl.map.Field(58, 10).immovable,
       "w,sw|se,sw|e,se|se,se|sw,sw|sw,w|sw,sw|se,sw|sw,sw|se,sw|" ..
       "sw,sw|sw,sw|sw,sw|se,se,sw|e,e|sw,sw|se,sw|")
 
-   connected_road(p, wl.map.Field(57, 25).immovable, "sw,w|sw,w")
-   connected_road(p, wl.map.Field(57, 29).immovable, "w,w|w,w")
-   connected_road(p, wl.map.Field(55, 34).immovable, "sw,sw")
-   connected_road(p, wl.map.Field(57, 22).immovable, "sw,w")
-   connected_road(p, wl.map.Field(54, 19).immovable, "sw,se,e")
-   connected_road(p, wl.map.Field(56, 17).immovable, "sw,se")
+   connected_road(plr, wl.map.Field(57, 25).immovable, "sw,w|sw,w")
+   connected_road(plr, wl.map.Field(57, 29).immovable, "w,w|w,w")
+   connected_road(plr, wl.map.Field(55, 34).immovable, "sw,sw")
+   connected_road(plr, wl.map.Field(57, 22).immovable, "sw,w")
+   connected_road(plr, wl.map.Field(54, 19).immovable, "sw,se,e")
+   connected_road(plr, wl.map.Field(56, 17).immovable, "sw,se")
 end
 
 run(introduction_thread)

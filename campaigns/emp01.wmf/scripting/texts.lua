@@ -35,7 +35,7 @@ diary_page_3 = {
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
    _"Diary of Lutius" ..
    "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
-   _[[ "Finally, the Gods were with us!<br> We landed on an unknown coast and found peaceful rest under the palm trees growing at the strand. But that is about as good as it gets. The truth is:<br> when I woke up this morning, I saw nothing more than sand around us.<br> It really seems as if we landed under the only palm trees existing in this far-away sandy desert. I fear we won't find the help we need to get our ship repaired in good time." ]] ..
+   _[[ "Finally, the Gods were with us!<br> We landed on an unknown coast and found peaceful rest under the palm trees growing at the shore. But that is about as good as it gets. The truth is:<br> when I woke up this morning, I saw nothing more than sand around us.<br> It really seems as if we landed under the only palm trees existing in this far-away sandy desert. I fear we won't find the help we need to get our ship repaired in good time." ]] ..
    "</p></rt>",
    width=400,
    height=350,
@@ -47,7 +47,7 @@ saledus_1 = {
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8F9131>" ..
    _"Saledus looks around nervously..." ..
    "</p></rt><rt image=map:Saledus.png><p line-spacing=3 font-size=12><br>" ..
-   _[[ "Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Than one of us will keep watch in the darkness and keep us safe from these creatures."<br><br>-- NEW OBJECTIVE --<br> ]] ..
+   _[[ "Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Then one of us can keep watch in the darkness and keep us safe from these creatures."<br><br>-- NEW OBJECTIVE --<br> ]] ..
    _"* Build a barracks at the red point on the east side of the forests, to the right of your headquarters." ..
    "</p></rt>",
    width=400,
@@ -87,7 +87,7 @@ amalea_2 = {
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=AF7511>" ..
    _"Amalea recommends..." ..
    "</p></rt><rt image=map:Amalea.png><p line-spacing=3 font-size=12><br>" ..
-   _[[ "Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can faster harvest the trunks.<br> But unfortunately the trunks are useless for repairing our ship - we need refined wood, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have enough space for this."<br><br>-- NEW OBJECTIVE --<br> ]] ..
+   _[[ "Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can harvest the trunks faster.<br> But unfortunately the trunks are useless for repairing our ship - we need refined lumber, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have enough space for this."<br><br>-- NEW OBJECTIVE --<br> ]] ..
    _"* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them." ..
    "</p></rt>",
    width=400,
@@ -99,7 +99,7 @@ amalea_3 = {
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=AF7511>" ..
    _"Amalea comes in..." ..
    "</p></rt><rt image=map:Amalea.png><p line-spacing=3 font-size=12><br>" ..
-   _[[ "Hi Lutius, I've got two important things to talk about... First the good news:<br> I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting to wood.<br> But that's just about the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br> Lutius, these trees provide shelter from the sandstorms from the desert, shade on the hot days and they are the home of so many gentle animals. We shouldn't leave this island a complete desert.<br> Lutius, I beg you: find someone who takes care about planting new trees."<br><br>-- NEW OBJECTIVE --<br> ]] ..
+   _[[ "Hi Lutius, I've got two important things to talk about... First the good news:<br> I saw that the construction of the sawmill is complete, so we can begin to refine the trunks that the lumberjacks are harvesting into lumber.<br> But that's just about the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br> Lutius, these trees provide shelter from the sandstorms from the desert, shade on the hot days and they are the home of so many gentle animals. We shouldn't leave this island a complete desert.<br> Lutius, I beg you: find someone who takes care about planting new trees."<br><br>-- NEW OBJECTIVE --<br> ]] ..
    _"* Build a forester's house to preserve the wood resources of this island." ..
    "</p></rt>",
    width=400,
@@ -111,7 +111,7 @@ saledus_3 = {
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8F9131>" ..
    _"Saledus notes..." ..
    "</p></rt><rt image=map:Saledus.png><p line-spacing=3 font-size=12><br>" ..
-   _[[ "Hey, my good old friend. I just thought about the rocks standing on the south strand of this land. Perhaps we could cut out some useful hard stones and beautiful marble.<br> The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land."<br><br>-- NEW OBJECTIVE --<br> ]] ..
+   _[[ "Hey, my good old friend. I just thought about the rocks standing on the south shore of this land. Perhaps we could cut out some useful hard stones and beautiful marble.<br> The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land."<br><br>-- NEW OBJECTIVE --<br> ]] ..
    _"* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings." ..
    "</p></rt>",
    width=400,

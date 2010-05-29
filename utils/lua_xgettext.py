@@ -43,7 +43,7 @@ class Lua_GetText(object):
 
             # Lua uses the same escaping as python. Let's use this to our
             # advantage.
-            text = eval('str("""%s""")' % text)
+            text = eval('str(""" %s """)' % text)[1:-1]
 
             self.findings[text].append(
                 (filename, contents[:start].count('\n') + 1)

@@ -200,12 +200,12 @@ void WLApplication::setup_homedir() {
 		//assume some dir exists
 		try {
 			log ("Set home directory: %s\n", m_homedir.c_str());
-			g_fs->SetHomeFileSystem(FileSystem::Create(m_homedir.c_str()));
-		} catch (FileNotFound_error     const & e) {
-		} catch (FileAccessDenied_error const & e) {
-			log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
-		} catch (FileType_error         const & e) {
-			//TODO: handle me
+
+			std::auto_ptr<FileSystem> home(new RealFSImpl(m_homedir));
+			home->EnsureDirectoryExists(".");
+			g_fs->SetHomeFileSystem(*home.release());
+		} catch (const std::exception & e) {
+			log("Failed to add home directory: %s\n", e.what());
 		}
 	} else {
 		//TODO: complain
@@ -622,8 +622,6 @@ void WLApplication::handle_input(InputCallback const * cb)
 			break;
 
 		case SDL_MOUSEMOTION:
-			// All the interesting stuff is now in Sys_PollEvent()
-
 			m_mouse_position = Point(ev.motion.x, ev.motion.y);
 
 			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)

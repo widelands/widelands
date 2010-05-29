@@ -47,7 +47,7 @@ using Widelands::WL_Map_Loader;
  * Create all the buttons etc...
 */
 Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
-	: UI::Window(&parent, 0, 0, 500, 300, _("Load Map"))
+	: UI::Window(&parent, "load_map_menu", 0, 0, 500, 300, _("Load Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
@@ -114,7 +114,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 	posy = get_inner_h() - 30;
 
 	m_ok_btn = new UI::Callback_Button<Main_Menu_Load_Map>
-		(this,
+		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Main_Menu_Load_Map::clicked_ok, *this,
@@ -123,7 +123,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 		 false);
 
 	new UI::Callback_Button<Main_Menu_Load_Map>
-		(this,
+		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_Load_Map::die, *this,

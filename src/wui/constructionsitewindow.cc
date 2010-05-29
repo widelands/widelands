@@ -65,7 +65,7 @@ ConstructionSite_Window::ConstructionSite_Window
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
 		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i));
 
-	get_tabs()->add(g_gr->get_picture(PicMod_UI, pic_tab_wares), &box);
+	get_tabs()->add("wares", g_gr->get_picture(PicMod_UI, pic_tab_wares), &box);
 }
 
 

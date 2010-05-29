@@ -33,7 +33,35 @@ namespace UI {
 //  height of the bar separating buttons and tab contents
 #define TP_SEPARATOR_HEIGHT  4
 
+/*
+ * =================
+ * class Tab
+ * =================
+ */
+Tab::Tab(Tab_Panel * parent, uint32_t id, std::string name, PictureID gpicid,
+			std::string gtooltip, Panel * gpanel) :
+	NamedPanel(parent, name, id * TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH,
+			TP_BUTTON_HEIGHT, gtooltip),
+	m_parent(parent), m_id(id), picid(gpicid),
+		tooltip(gtooltip), panel(gpanel)
+{
+}
 
+/**
+ * Currently active tab
+ */
+bool Tab::active() {
+	return m_parent->m_active == m_id;
+}
+void Tab::activate() {
+	return m_parent->activate(m_id);
+}
+
+/*
+ * =================
+ * class Tab_Panel
+ * =================
+ */
 /**
  * Initialize an empty Tab_Panel
 */
@@ -48,13 +76,25 @@ Tab_Panel::Tab_Panel
 	m_pic_background (background)
 {}
 
+/**
+ * Resize the visible tab based on our actual size.
+ */
+void Tab_Panel::layout()
+{
+	if (m_active < m_tabs.size()) {
+		Panel * const panel = m_tabs[m_active]->panel;
+		uint32_t h = get_h();
+
+		// avoid excessive craziness in case there is a wraparound
+		h = std::min(h, h - (TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT));
+		panel->set_size(get_w(), h);
+	}
+}
 
 /**
- * Resize according to number of tabs and the size of the currently visible
- * contents.
- * Resize the parent if snapparent is enabled.
-*/
-void Tab_Panel::layout()
+ * Compute our desired size based on the currently selected tab.
+ */
+void Tab_Panel::update_desired_size()
 {
 	uint32_t w;
 	uint32_t h;
@@ -65,40 +105,42 @@ void Tab_Panel::layout()
 
 	// size of contents
 	if (m_active < m_tabs.size()) {
-		Panel * const panel = m_tabs[m_active].panel;
+		Panel * const panel = m_tabs[m_active]->panel;
+		uint32_t panelw, panelh;
 
-		if (static_cast<uint32_t>(panel->get_w()) > w)
-			w = panel->get_w();
-		h += panel->get_h();
+		panel->get_desired_size(panelw, panelh);
+
+		if (panelw > w)
+			w = panelw;
+		h += panelh;
 	}
 
-	set_size(w, h);
+	set_desired_size(w, h);
+
+	// This is not redundant, because even if all this doesn't change our desired size,
+	// we were typically called because of a child window that changed, and we need
+	// to relayout that.
+	layout();
 }
 
 /**
  * Add a new tab
 */
 uint32_t Tab_Panel::add
-	(PictureID           const picid,
+	(std::string const & name,
+	 PictureID           const picid,
 	 Panel             * const panel,
 	 std::string const &       tooltip_text)
 {
 	assert(panel);
 	assert(panel->get_parent() == this);
 
-	Tab t;
-	uint32_t id;
-
-	t.picid = picid;
-	t.tooltip = tooltip_text;
-	t.panel = panel;
-
-	m_tabs.push_back(t);
-	id = m_tabs.size() - 1;
+	uint32_t id = m_tabs.size();
+	m_tabs.push_back(new Tab(this, id, name, picid, tooltip_text, panel));
 
 	panel->set_pos(Point(0, TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT));
 	panel->set_visible(id == m_active);
-	layout();
+	update_desired_size();
 
 	return id;
 }
@@ -110,15 +152,28 @@ uint32_t Tab_Panel::add
 void Tab_Panel::activate(uint32_t idx)
 {
 	if (m_active < m_tabs.size())
-		m_tabs[m_active].panel->set_visible(false);
+		m_tabs[m_active]->panel->set_visible(false);
 	if (idx < m_tabs.size())
-		m_tabs[idx].panel->set_visible(true);
+		m_tabs[idx]->panel->set_visible(true);
 
 	m_active = idx;
 
-	layout();
+	update_desired_size();
 }
 
+void Tab_Panel::activate(std::string const & name)
+{
+	for (uint32_t t = 0; t < m_tabs.size(); t++)
+		if (m_tabs[t]->get_name() == name)
+			activate(t);
+}
+
+/**
+ * Return the tab names in order
+ */
+const Tab_Panel::TabList & Tab_Panel::tabs() {
+	return m_tabs;
+}
 
 /**
  * Draw the buttons and the tab
@@ -152,11 +207,11 @@ void Tab_Panel::draw(RenderTarget & dst)
 
 		// Draw the icon
 		uint32_t cpw, cph;
-		g_gr->get_picture_size(m_tabs[idx].picid, cpw, cph);
+		g_gr->get_picture_size(m_tabs[idx]->picid, cpw, cph);
 
 		dst.blit
 			(Point(x + (TP_BUTTON_WIDTH - cpw) / 2, (TP_BUTTON_HEIGHT - cph) / 2),
-			 m_tabs[idx].picid);
+			 m_tabs[idx]->picid);
 
 		// Draw top part of border
 		RGBColor black(0, 0, 0);
@@ -238,7 +293,7 @@ bool Tab_Panel::handle_mousemove
 		{
 			const char * t = 0;
 			if (hl >= 0) {
-				const std::string & str = m_tabs[hl].tooltip;
+				const std::string & str = m_tabs[hl]->tooltip;
 				if (str.size())
 					t = str.c_str();
 			}

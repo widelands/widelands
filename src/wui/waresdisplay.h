@@ -63,6 +63,9 @@ public:
 	void remove_all_warelists();
 
 protected:
+	virtual void layout();
+	virtual void update_desired_size();
+
 	virtual void draw(RenderTarget &);
 	virtual void draw_ware
 		(RenderTarget &,

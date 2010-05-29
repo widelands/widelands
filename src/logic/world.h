@@ -331,6 +331,9 @@ struct World {
 	Bob::Descr const * get_bob_descr(uint16_t const index) const {
 		return bobs.get(index);
 	}
+	Bob::Descr const * get_bob_descr(const std::string& name) const {
+		return bobs.exists(name.c_str());
+	}
 	int32_t get_nr_bobs() const {return bobs.get_nitems();}
 	int32_t get_immovable_index(char const * const l)const {
 		return immovables.get_index(l);

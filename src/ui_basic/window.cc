@@ -69,11 +69,12 @@ namespace UI {
  */
 Window::Window
 	(Panel * const parent,
+	 std::string const & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 char const * const title)
 	:
-		Panel
-			(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2,
+		NamedPanel
+			(parent, name, x, y, w + VT_B_PIXMAP_THICKNESS * 2,
 			 TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
 		_is_minimal(false), _dragging(false),
 		_docked_left(false), _docked_right(false), _docked_bottom(false),
@@ -88,7 +89,8 @@ Window::Window
 		m_pic_bottom
 			(g_gr->get_picture(PicMod_UI, "pics/win_bot.png")),
 		m_pic_background
-			(g_gr->get_picture(PicMod_UI, "pics/win_bg.png"))
+			(g_gr->get_picture(PicMod_UI, "pics/win_bg.png")),
+		m_center_panel(0)
 {
 
 	if (title)
@@ -99,16 +101,54 @@ Window::Window
 		 TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_cache(true);
 	set_top_on_click(true);
+	set_layout_toplevel(true);
 }
 
 
 /**
  * Replace the current title with a new one
 */
-void Window::set_title(char const * const text)
+void Window::set_title(const std::string & text)
 {
 	m_title = text;
 	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);
+}
+
+/**
+ * Set the center panel.
+ *
+ * The center panel is a child panel that will automatically determine the inner size
+ * of the window.
+ */
+void Window::set_center_panel(Panel* panel)
+{
+	assert(panel->get_parent() == this);
+
+	m_center_panel = panel;
+	update_desired_size();
+}
+
+/**
+ * Update the window's desired size based on its center panel.
+ */
+void Window::update_desired_size()
+{
+	if (m_center_panel) {
+		uint32_t innerw, innerh;
+		m_center_panel->get_desired_size(innerw, innerh);
+		set_desired_size(innerw + get_lborder() + get_rborder(), innerh + get_tborder() + get_bborder());
+	}
+}
+
+/**
+ * Change the center panel's size so that it fills the window entirely.
+ */
+void Window::layout()
+{
+	if (m_center_panel) {
+		m_center_panel->set_pos(Point(0, 0));
+		m_center_panel->set_size(get_inner_w(), get_inner_h());
+	}
 }
 
 /**
@@ -120,8 +160,8 @@ void Window::move_to_mouse() {
 }
 
 /**
- * Move the window so that the given point \p pt - interpreted as inner coordinates
- * inside the window - is centered under the mouse cursor.
+ * Move the window so that the given point \p pt - interpreted as inner
+ * coordinates inside the window - is centered under the mouse cursor.
  */
 void Window::move_to_mouse(const Point & pt)
 {

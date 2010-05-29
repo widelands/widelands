@@ -62,7 +62,8 @@ struct MilitaryBox : public UI::Box {
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
 		UI::Callback_Button<MilitaryBox> & add_button
 			(UI::Box           & parent,
-			 char const * picname,
+			 char const *,
+			 char const *,
 			 void (MilitaryBox::*fn)(),
 			 std::string const & tooltip_text);
 

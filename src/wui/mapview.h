@@ -20,6 +20,8 @@
 #ifndef MAPVIEW_H
 #define MAPVIEW_H
 
+#include <boost/function.hpp>
+
 #include "logic/widelands_geometry.h"
 
 #include "ui_basic/panel.h"
@@ -31,19 +33,34 @@ struct Interactive_Base;
  * Implements a view of a map. It is used to render a valid map on the screen.
  */
 struct Map_View : public UI::Panel {
+	/**
+	 * Callback function type for when the view position changes.
+	 *
+	 * Parameters are x/y screen coordinates and whether the change should
+	 * be considered a "jump" or a smooth scrolling event.
+	 */
+	typedef boost::function<void (Point, bool)> ChangeViewFn;
+
 	Map_View
 		(UI::Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 Interactive_Base &);
 
-	UI::Signal2<int32_t, int32_t> warpview; // x/y in screen coordinates
+	void set_changeview(const ChangeViewFn& fn);
+
+	/**
+	 * Called whenever the view position changes, for whatever reason.
+	 *
+	 * Parameters are x/y position in screen coordinates.
+	 */
+	UI::Signal2<int32_t, int32_t> changeview;
+
 	UI::Signal fieldclicked;
 
 	void warp_mouse_to_node(Widelands::Coords);
 
-	// Function to set the viewpoint
-	void set_viewpoint(Point vp);
-	void set_rel_viewpoint(Point r) {set_viewpoint(m_viewpoint + r);}
+	void set_viewpoint(Point vp, bool jump);
+	void set_rel_viewpoint(Point r, bool jump) {set_viewpoint(m_viewpoint + r, jump);}
 
 	Point get_viewpoint() const {return m_viewpoint;}
 	bool is_dragging() const {return m_dragging;}
@@ -67,6 +84,7 @@ private:
 	void stop_dragging();
 
 	Interactive_Base & m_intbase;
+	ChangeViewFn m_changeview;
 	Point              m_viewpoint;
 	bool               m_dragging;
 	bool               m_complete_redraw_needed;

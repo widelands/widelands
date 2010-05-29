@@ -51,38 +51,40 @@ Interactive_Base(e, g_options.pull_section("global")),
 m_need_save     (false),
 m_realtime      (WLApplication::get()->get_time()),
 
-#define INIT_BUTTON(picture, callback, tooltip)                               \
- TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
+#define INIT_BUTTON(picture, name, callback, tooltip)                         \
+ TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
  &Editor_Interactive::callback, *this,                                        \
  tooltip                                                                      \
 
 m_toggle_main_menu
 	(INIT_BUTTON
-	 	("menu_toggle_menu",             toggle_mainmenu,       _("Menu"))),
+	 	("menu_toggle_menu", "menu", toggle_mainmenu, _("Menu"))),
 m_toggle_tool_menu
 	(INIT_BUTTON
-	 	("editor_menu_toggle_tool_menu", tool_menu_btn,         _("Tool"))),
+	 	("editor_menu_toggle_tool_menu", "tools", tool_menu_btn, _("Tools"))),
 m_toggle_toolsize_menu
 	(INIT_BUTTON
-	 	("editor_menu_set_toolsize_menu", toolsize_menu_btn,    _("Toolsize"))),
+	 	("editor_menu_set_toolsize_menu", "toolsize", toolsize_menu_btn,
+		 _("Toolsize"))
+	),
 m_toggle_minimap
 	(INIT_BUTTON
-	 	("menu_toggle_minimap",          toggle_minimap,        _("Minimap"))),
+	 	("menu_toggle_minimap", "minimap", toggle_minimap, _("Minimap"))),
 m_toggle_buildhelp
 	(INIT_BUTTON
-	 	("menu_toggle_buildhelp",        toggle_buildhelp,      _("Buildhelp"))),
+	 	("menu_toggle_buildhelp", "buildhelp", toggle_buildhelp, _("Buildhelp"))),
 m_toggle_player_menu
 	(INIT_BUTTON
-	 	("editor_menu_player_menu",      toggle_playermenu,     _("Players")))
+	 	("editor_menu_player_menu", "players", toggle_playermenu, _("Players")))
 {
+	m_toolbar.set_layout_toplevel(true);
 	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_tool_menu,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_toolsize_menu,   UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_player_menu,     UI::Box::AlignLeft);
-	m_toolbar.layout();
 	adjust_toolbar_position();
 
 #ifndef DEBUG
