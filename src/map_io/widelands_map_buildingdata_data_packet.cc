@@ -52,7 +52,7 @@ namespace Widelands {
 
 // Subversions
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
-#define CURRENT_WAREHOUSE_PACKET_VERSION        4
+#define CURRENT_WAREHOUSE_PACKET_VERSION        5
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   4
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
@@ -305,16 +305,28 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			Ware_Index const nr_tribe_workers = warehouse.tribe().get_nrworkers();
 			warehouse.m_supply->set_nrwares  (nr_wares);
 			warehouse.m_supply->set_nrworkers(nr_tribe_workers);
+			warehouse.m_ware_policy.resize(nr_wares.value(), Warehouse::SP_Normal);
+			warehouse.m_worker_policy.resize(nr_tribe_workers.value(), Warehouse::SP_Normal);
 			//log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
 			Tribe_Descr const & tribe = warehouse.tribe();
 			while (fr.Unsigned8()) {
 				Ware_Index const id = tribe.safe_ware_index(fr.CString());
-				warehouse.insert_wares(id, fr.Unsigned16());
+				if (packet_version >= 5) {
+					warehouse.insert_wares(id, fr.Unsigned32());
+					warehouse.set_ware_policy(id, static_cast<Warehouse::StockPolicy>(fr.Unsigned8()));
+				} else {
+					warehouse.insert_wares(id, fr.Unsigned16());
+				}
 			}
 			while (fr.Unsigned8()) {
 				Ware_Index const id = tribe.safe_worker_index(fr.CString());
-				warehouse.insert_workers(id, fr.Unsigned16());
+				if (packet_version >= 5) {
+					warehouse.insert_workers(id, fr.Unsigned32());
+					warehouse.set_worker_policy(id, static_cast<Warehouse::StockPolicy>(fr.Unsigned8()));
+				} else {
+					warehouse.insert_workers(id, fr.Unsigned16());
+				}
 			}
 
 			if (packet_version <= 3) {
@@ -1038,14 +1050,16 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	for (Ware_Index i = Ware_Index::First(); i < wares.get_nrwareids  (); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_ware_descr(i)->name());
-		fw.Unsigned16(wares.stock(i));
+		fw.Unsigned32(wares.stock(i));
+		fw.Unsigned8(warehouse.get_ware_policy(i));
 	}
 	fw.Unsigned8(0);
 	WareList const & workers = warehouse.m_supply->get_workers();
 	for (Ware_Index i = Ware_Index::First(); i < workers.get_nrwareids(); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_worker_descr(i)->name());
-		fw.Unsigned16(workers.stock(i));
+		fw.Unsigned32(workers.stock(i));
+		fw.Unsigned8(warehouse.get_worker_policy(i));
 	}
 	fw.Unsigned8(0);
 

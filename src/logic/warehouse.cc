@@ -479,6 +479,9 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	m_supply->set_nrwares  (nr_wares);
 	m_supply->set_nrworkers(nr_workers);
 
+	m_ware_policy.resize(nr_wares.value(), SP_Normal);
+	m_worker_policy.resize(nr_workers.value(), SP_Normal);
+
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
 	// almost always going to be a carrier inside, that shouldn't hurt).
@@ -1310,6 +1313,39 @@ void Warehouse::PlannedWorkers::cleanup()
 		delete requests.back();
 		requests.pop_back();
 	}
+}
+
+Warehouse::StockPolicy Warehouse::get_ware_policy(Ware_Index ware) const
+{
+	assert(ware.value() < m_ware_policy.size());
+	return m_ware_policy[ware.value()];
+}
+
+Warehouse::StockPolicy Warehouse::get_worker_policy(Ware_Index ware) const
+{
+	assert(ware.value() < m_worker_policy.size());
+	return m_worker_policy[ware.value()];
+}
+
+Warehouse::StockPolicy Warehouse::get_stock_policy(bool isworker, Ware_Index ware) const
+{
+	if (isworker)
+		return get_worker_policy(ware);
+	else
+		return get_ware_policy(ware);
+}
+
+
+void Warehouse::set_ware_policy(Ware_Index ware, Warehouse::StockPolicy policy)
+{
+	assert(ware.value() < m_ware_policy.size());
+	m_ware_policy[ware.value()] = policy;
+}
+
+void Warehouse::set_worker_policy(Ware_Index ware, Warehouse::StockPolicy policy)
+{
+	assert(ware.value() < m_worker_policy.size());
+	m_worker_policy[ware.value()] = policy;
 }
 
 }

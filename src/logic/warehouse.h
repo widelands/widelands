@@ -23,6 +23,7 @@
 #include "attackable.h"
 #include "building.h"
 
+struct S;
 struct EncodeData;
 struct Interactive_Player;
 struct Profile;
@@ -64,6 +65,40 @@ class Warehouse : public Building, public Attackable {
 	MO_DESCR(Warehouse_Descr);
 
 public:
+	/**
+	 * Each ware and worker type has an associated per-warehouse
+	 * stock policy that defines whether it will be stocked by this
+	 * warehouse.
+	 *
+	 * \note The values of this enum are written directly into savegames,
+	 * so be careful when changing them.
+	 */
+	enum StockPolicy {
+		/**
+		 * The default policy allows stocking wares without any special priority.
+		 */
+		SP_Normal = 0,
+
+		/**
+		 * As long as there are warehouses with this policy for a ware, all
+		 * available unstocked supplies will be transferred to warehouses
+		 * with this policy.
+		 */
+		SP_Prefer = 1,
+
+		/**
+		 * If a ware has this stock policy, no new items of this ware will enter
+		 * the warehouse.
+		 */
+		SP_DontStock = 2,
+
+		/**
+		 * Like \ref SP_DontStock, but in addition, existing stock of this ware
+		 * will be transported out of the warehouse over time.
+		 */
+		SP_Remove = 3,
+	};
+
 	Warehouse(const Warehouse_Descr &);
 	virtual ~Warehouse();
 
@@ -135,6 +170,12 @@ public:
 	virtual void receive_ware(Game &, Ware_Index ware);
 	virtual void receive_worker(Game &, Worker & worker);
 
+	StockPolicy get_ware_policy(Ware_Index ware) const;
+	StockPolicy get_worker_policy(Ware_Index ware) const;
+	StockPolicy get_stock_policy(bool isworker, Ware_Index ware) const;
+	void set_ware_policy(Ware_Index ware, StockPolicy policy);
+	void set_worker_policy(Ware_Index ware, StockPolicy policy);
+
 protected:
 
 	/// Create the warehouse information window.
@@ -168,6 +209,9 @@ private:
 	void _update_all_planned_workers(Game &);
 
 	WarehouseSupply       * m_supply;
+
+	std::vector<StockPolicy> m_ware_policy;
+	std::vector<StockPolicy> m_worker_policy;
 
 	// Workers who live here at the moment
 	std::vector<OPtr<Worker> > m_incorporated_workers;
