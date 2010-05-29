@@ -1033,11 +1033,15 @@ void Economy::_handle_active_supplies(Game & game)
 			if (policy == Warehouse::SP_Normal)
 				havenormal = true;
 		}
-		if (!havenormal && !haveprefer)
+		if (!havenormal && !haveprefer && !isworker)
 			continue;
 
 		Warehouse * wh = find_closest_warehouse
 			(supply.get_position(game)->base_flag(), !isworker, 0, 0,
+			 (!haveprefer && !havenormal)
+			 ?
+			 WarehouseAcceptFn()
+			 :
 			 boost::bind
 				(&accept_warehouse_if_policy,
 				 _1, isworker, ware,
