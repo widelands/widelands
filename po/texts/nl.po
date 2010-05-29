@@ -6,23 +6,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-27 08:19+0000\n"
-"PO-Revision-Date: 2010-04-28 08:59+0000\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-05-28 13:56+0000\n"
 "Last-Translator: PliniusNeo <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-29 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-05-29 03:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Netherlands\n"
 "X-Poedit-Language: Dutch\n"
 
-#: ../../txts/README:117
+#: ../../txts/README:69
+msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
+msgstr "(CTRL+) 0-9  Onthoudt en gaat naar eerder opgeslagen locaties"
+
+#: ../../txts/README:67
+msgid ", / .       Go to previous / next location"
+msgstr ", / .       Ga naar vorige / volgende locatie"
+
+#: ../../txts/README:121
 msgid "- how to reproduce the bug"
 msgstr "- hoe de bug te reproduceren"
 
-#: ../../txts/README:121
+#: ../../txts/README:125
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
@@ -31,7 +39,7 @@ msgstr ""
 "voordeed in het spel. Voor meer uitleg, zie de paragrafen over Herhalingen "
 "hieronder."
 
-#: ../../txts/README:123
+#: ../../txts/README:127
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) session record if possible, unless "
 "the<br>bug is trivial to reproduce. In fact, it may be a good idea to always "
@@ -43,7 +51,7 @@ msgstr ""
 "idee zijn om je spel op te nemen voor het geval er een bug bovenkomt. Voor "
 "meer uitleg, zie hieronder."
 
-#: ../../txts/README:115
+#: ../../txts/README:119
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
@@ -51,7 +59,7 @@ msgstr ""
 "- welke versie van Widelands je speelt (dus het build nummer of dat het een "
 "eigen compilatie is van de SVN)"
 
-#: ../../txts/README:119
+#: ../../txts/README:123
 msgid "- which map you were playing"
 msgstr "- welke kaart je speelde"
 
@@ -412,7 +420,7 @@ msgstr ""
 "USA<br><br><br>Voeg ook informatie bij hoe men contact met U kan opnemen via "
 "e-mail en gewone post."
 
-#: ../../txts/README:151
+#: ../../txts/README:155
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
@@ -456,7 +464,7 @@ msgstr ""
 "Nog meer vragen? Onze veelgestelde vragen (FAQ's), de wiki en uiteraard onze "
 "gemeenschapsfora zijn te vinden op www.widelands.org."
 
-#: ../../txts/developers:134
+#: ../../txts/developers:135
 msgid "Barbarian"
 msgstr "Barbaren"
 
@@ -483,7 +491,7 @@ msgstr "CTRL+L   Kaart laden"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S    Kaart opslaan"
 
-#: ../../txts/developers:131
+#: ../../txts/developers:132
 msgid "Campaign Story"
 msgstr "Campagneverhaal"
 
@@ -518,23 +526,23 @@ msgstr ""
 "kopieën van te verspreiden, er wijzigingen in maken is echter niet "
 "toegestaan.<br>"
 
-#: ../../txts/README:139
+#: ../../txts/README:143
 msgid "Creating a Session Record</p>"
 msgstr "Een sessieverslag opnemen</p>"
 
-#: ../../txts/README:75
+#: ../../txts/README:79
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl+F10   Sluit het spel direct"
 
-#: ../../txts/developers:154
+#: ../../txts/developers:155
 msgid "Czech"
 msgstr "Tsjechisch"
 
-#: ../../txts/README:86
+#: ../../txts/README:90
 msgid "DELETE      Archive the current message"
 msgstr "DELETE      Archiveer het huidige bericht"
 
-#: ../../txts/developers:161
+#: ../../txts/developers:162
 msgid "Dansk"
 msgstr "Deens"
 
@@ -542,11 +550,11 @@ msgstr "Deens"
 msgid "Development"
 msgstr "Ontwikkeling"
 
-#: ../../txts/developers:296
+#: ../../txts/developers:297
 msgid "Documentation, Help and Wiki"
 msgstr "Documentatie, help en wiki"
 
-#: ../../txts/developers:167
+#: ../../txts/developers:168
 msgid "Dutch"
 msgstr "Nederlands"
 
@@ -558,7 +566,7 @@ msgstr "E        Schakel gebeurtenissenmenu aan/uit"
 msgid "Elders"
 msgstr "Ouderlingen"
 
-#: ../../txts/developers:140
+#: ../../txts/developers:141
 msgid "Empire"
 msgstr "Keizerrijk"
 
@@ -574,27 +582,27 @@ msgstr "F               Schakel volledig scherm aan/uit"
 msgid "F        Toggles fullscreen"
 msgstr "F        Schakelt volledig scherm aan/uit"
 
-#: ../../txts/README:77
+#: ../../txts/README:81
 msgid "F11         Take a screenshot"
 msgstr "F11         Maak een schermafdruk"
 
-#: ../../txts/README:73
+#: ../../txts/README:77
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6           Toont de debugconsole (alleen in debug-builds)"
 
-#: ../../txts/developers:174
+#: ../../txts/developers:175
 msgid "Finnish"
 msgstr "Fins"
 
-#: ../../txts/developers:310
+#: ../../txts/developers:311
 msgid "Former elders"
 msgstr "Voormalige ouderlingen"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:181
 msgid "French"
 msgstr "Frans"
 
-#: ../../txts/README:84
+#: ../../txts/README:88
 msgid "G           Go to location corresponding to current message"
 msgstr ""
 "G           Ga naar de locatie die overeenkomt met het huidige bericht"
@@ -611,7 +619,7 @@ msgstr ""
 "GNU algemene publieke licentiebepalingen en -voorwaarden om te kopiëren, "
 "verspreiden en wijzigen"
 
-#: ../../txts/developers:187
+#: ../../txts/developers:188
 msgid "Galician"
 msgstr "Galicisch"
 
@@ -619,7 +627,7 @@ msgstr "Galicisch"
 msgid "General game control"
 msgstr "Algemene spelbesturing"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:193
 msgid "German"
 msgstr "Duits"
 
@@ -628,7 +636,7 @@ msgid "Graphicians"
 msgstr "Grafici"
 
 #: ../../txts/developers:19
-#: ../../txts/developers:321
+#: ../../txts/developers:322
 msgid "Graphics"
 msgstr "Afbeeldingen"
 
@@ -636,7 +644,7 @@ msgstr "Afbeeldingen"
 msgid "H        Toggles main menu"
 msgstr "H        Schakel hoofdmenu aan/uit"
 
-#: ../../txts/developers:204
+#: ../../txts/developers:205
 msgid "Hebrew"
 msgstr "Hebreeuws"
 
@@ -649,23 +657,24 @@ msgstr ""
 #: ../../txts/tips/editor.tip:14
 msgid ""
 "Holding down SHIFT switches first alternative tool on. This tool is in most "
-"cases the complete difference of the normal tool (for example deletion of an "
+"cases the complete opposite of the normal tool (for example deletion of an "
 "object instead of placing one)."
 msgstr ""
-"Als je SHIFT ingedrukt houdt zet je het eerste alternatieve gereedschap aan. "
-"Meestal is deze het tegengestelde van het gebruikelijke gereedschap (zoals "
-"het verwijderen van een object in plaats van plaatsen)."
+"SHIFT ingedrukt houden schakelt het eerste alternatieve gereedschap aan. Dit "
+"gereedschap is in de meeste gevallen het compleet tegenovergestelde van het "
+"normale gereedschap (bijvoorbeeld het verwijderen van een object in plaats "
+"van het plaatsen ervan)."
 
 #: ../../txts/README:65
 msgid "Home        Center main mapview on starting location"
 msgstr "Home        Centreer hoofdkaartvenster op startlocatie"
 
 #: ../../txts/developers:24
-#: ../../txts/developers:314
+#: ../../txts/developers:315
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../../txts/developers:287
+#: ../../txts/developers:288
 msgid "Homepage Coders"
 msgstr "Website developers"
 
@@ -673,7 +682,7 @@ msgstr "Website developers"
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "Hoe deze bepalingen op uw nieuwe Programma's toe te passen."
 
-#: ../../txts/developers:209
+#: ../../txts/developers:210
 msgid "Hungarian"
 msgstr "Hongaars"
 
@@ -733,7 +742,7 @@ msgstr ""
 "door het Programma vrije software te maken welke iedereen kan verspreiden en "
 "wijzigen onder deze bepalingen."
 
-#: ../../txts/README:95
+#: ../../txts/README:99
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
@@ -742,7 +751,7 @@ msgstr ""
 "Editor, bezoek dan zeker onze homepage. Je kunt actuele online hulp vinden "
 "op:"
 
-#: ../../txts/README:107
+#: ../../txts/README:111
 msgid ""
 "If you want to report bugs, please send your report to the mailing list, "
 "<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
@@ -752,7 +761,7 @@ msgstr ""
 "list: <widelands-public@list.sourceforge.net><br>Om je af te melden, bezoek "
 "de volgende pagina:"
 
-#: ../../txts/README:82
+#: ../../txts/README:86
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
@@ -785,7 +794,7 @@ msgstr ""
 "verspreiden door middel van een ander systeem en een gelicenseerde kan die "
 "keuze niet afdwingen."
 
-#: ../../txts/developers:214
+#: ../../txts/developers:215
 msgid "Italian"
 msgstr "Italiaans"
 
@@ -818,7 +827,7 @@ msgstr ""
 "Net als met natuurlijke objecten (blobs), kun je ook meerdere dieren of "
 "bodemtypes selecteren met CTRL + muisklik."
 
-#: ../../txts/developers:254
+#: ../../txts/developers:255
 msgid "Linux Distributions"
 msgstr "Linux Distributies"
 
@@ -830,7 +839,7 @@ msgstr "M      Schakel minikaart aan/uit"
 msgid "M        Toggles minimap"
 msgstr "M        Schakel minikaart aan/uit"
 
-#: ../../txts/developers:118
+#: ../../txts/developers:119
 msgid "Maps and Missions"
 msgstr "Kaarten en missies"
 
@@ -838,7 +847,7 @@ msgstr "Kaarten en missies"
 msgid "Miners will only work if supplied with food."
 msgstr "Mijnwerkers werken niet zonder voedsel."
 
-#: ../../txts/developers:97
+#: ../../txts/developers:98
 msgid "Musicians"
 msgstr "Musici"
 
@@ -846,7 +855,7 @@ msgstr "Musici"
 msgid "N               Toggle messages ('news')"
 msgstr ""
 
-#: ../../txts/developers:149
+#: ../../txts/developers:150
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -858,11 +867,11 @@ msgstr ""
 msgid "No warranty"
 msgstr "Geen garantie"
 
-#: ../../txts/developers:276
+#: ../../txts/developers:277
 msgid "Non Unix Distributions"
 msgstr "Niet-Unix Distributies"
 
-#: ../../txts/README:154
+#: ../../txts/README:158
 msgid ""
 "Note that while recorded files are platform independent, they generally "
 "won't work across different versions of Widelands, because the user "
@@ -881,7 +890,7 @@ msgstr ""
 msgid "O               Toggle objectives display"
 msgstr "O              Schakel het tonen van de doelen aan/uit"
 
-#: ../../txts/README:148
+#: ../../txts/README:152
 msgid ""
 "On Windows, create a shortcut to the file widelands.exe (right-click on "
 "widelands.exe and choose Create Shortcut). Then edit the shortcut (right-"
@@ -895,15 +904,15 @@ msgstr ""
 "In het Doel veld moet iets staan als c:\\games\\widelands\\widelands.exe. "
 "voeg hierachter de tekst ' --record=bestandsnaam.rec' toe."
 
-#: ../../txts/README:91
+#: ../../txts/README:95
 msgid "Online Help"
 msgstr "Online Hulp"
 
-#: ../../txts/developers:338
+#: ../../txts/developers:339
 msgid "Other"
 msgstr "Overige"
 
-#: ../../txts/developers:265
+#: ../../txts/developers:266
 msgid "Other Unix Distributions"
 msgstr "Andere Unix Distributies"
 
@@ -919,15 +928,15 @@ msgstr ""
 msgid "P        Toggles player menu"
 msgstr "P        Schakel spelersmenu aan/uit"
 
-#: ../../txts/README:70
+#: ../../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
 msgstr "PAGEDOWN    Verlaag spelsnelheid"
 
-#: ../../txts/README:68
+#: ../../txts/README:72
 msgid "PAGEUP         Increase gamespeed"
 msgstr "PAGEUP         Verhoog spelsnelheid"
 
-#: ../../txts/developers:250
+#: ../../txts/developers:251
 msgid "Packagers"
 msgstr "Pakketmakers"
 
@@ -936,11 +945,11 @@ msgid "Please look into our enduser manuals in our wiki-pages at:"
 msgstr ""
 "Kijk alsjeblieft naar onze gebruikershandleidingen in onze wiki-pagina's op:"
 
-#: ../../txts/README:112
+#: ../../txts/README:116
 msgid "Please provide enough background information. Tell us:"
 msgstr "Voorzie ons van voldoende achtergrondinformatie. vertel ons:"
 
-#: ../../txts/developers:219
+#: ../../txts/developers:220
 msgid "Polish"
 msgstr "Pools"
 
@@ -960,7 +969,7 @@ msgstr "LEESMIJ voor de Editor"
 msgid "README for the Widelands Editor"
 msgstr "LEESMIJ voor de Widelands Editor"
 
-#: ../../txts/README:135
+#: ../../txts/README:139
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic code, so we "
 "ask you to attach replay files to all bug reports that you submit. The "
@@ -974,15 +983,15 @@ msgstr ""
 "worden opgeslagen in de map ~/.widelands/replays in je home op Linux en in "
 "de replays submap van je Widelands installatie op Windows."
 
-#: ../../txts/README:128
+#: ../../txts/README:132
 msgid "Replays</p>"
 msgstr "Herhalingen</p>"
 
-#: ../../txts/README:103
+#: ../../txts/README:107
 msgid "Reporting Bugs"
 msgstr "Bugs doorgeven"
 
-#: ../../txts/developers:227
+#: ../../txts/developers:228
 msgid "Russian"
 msgstr "Russisch"
 
@@ -1011,7 +1020,7 @@ msgstr ""
 "SPATIEBALK werkt net als tijdens het normale spel. Het zet de bouwhulp aan "
 "of uit."
 
-#: ../../txts/developers:150
+#: ../../txts/developers:151
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -1019,7 +1028,7 @@ msgstr ""
 "Zie https://translations.launchpad.net/widelands voor de lijst van mensen "
 "die hebben geholpen Widelands te vertalen via launchpad.net."
 
-#: ../../txts/developers:232
+#: ../../txts/developers:233
 msgid "Slovak"
 msgstr "Slowaaks"
 
@@ -1034,15 +1043,15 @@ msgstr ""
 "het gebouw volledig omringd is door bomen of wegen, zal de productie stoppen."
 
 #: ../../txts/developers:29
-#: ../../txts/developers:326
+#: ../../txts/developers:327
 msgid "Sound"
 msgstr "Geluid"
 
-#: ../../txts/developers:108
+#: ../../txts/developers:109
 msgid "Sound Effects"
 msgstr "Geluidseffecten"
 
-#: ../../txts/developers:237
+#: ../../txts/developers:238
 msgid "Spanish"
 msgstr "Spaans"
 
@@ -1058,7 +1067,7 @@ msgstr ""
 msgid "Status"
 msgstr "Status"
 
-#: ../../txts/developers:242
+#: ../../txts/developers:243
 msgid "Swedish"
 msgstr "Zweeds"
 
@@ -1285,7 +1294,7 @@ msgstr ""
 msgid "To close an open window, right click it."
 msgstr "Om een venster te sluiten, moet je er rechts op klikken."
 
-#: ../../txts/README:145
+#: ../../txts/README:149
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
@@ -1315,11 +1324,11 @@ msgstr ""
 "Om een venster te minimaliseren/maximaliseren, klik op de titelbalk van dat "
 "venster met de middelste of linker muisknop, terwijl je CTRL ingedrukt houdt."
 
-#: ../../txts/developers:331
+#: ../../txts/developers:332
 msgid "Translation"
 msgstr "Vertaling"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:147
 msgid "Translators"
 msgstr "Vertalers"
 
@@ -1346,7 +1355,7 @@ msgstr ""
 "Gebruik het menu 'configureer economie' om de doelhoeveelheid van een "
 "specifiek materiaal aan te passen."
 
-#: ../../txts/README:133
+#: ../../txts/README:137
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -1367,7 +1376,7 @@ msgstr ""
 msgid "Version 2, June 1991<br></p></rt>"
 msgstr "Versie 2, Juni 1991<br></p></rt>"
 
-#: ../../txts/README:80
+#: ../../txts/README:84
 msgid ""
 "When finishing a road, if Ctrl is down, place flags along the road. Default "
 "is to place flags from end to start. If Shift is also down, place flags from "
@@ -1381,7 +1390,7 @@ msgstr ""
 msgid "Widelands Development Team"
 msgstr "Het Widelands Ontwikkelteam"
 
-#: ../../txts/README:142
+#: ../../txts/README:146
 msgid ""
 "Widelands can record all your keypresses and mouse movements to a file. It "
 "can then replay an entire session from starting the game to exiting it. This "
@@ -1395,19 +1404,12 @@ msgstr ""
 msgid ""
 "Widelands is a strategy game aiming for gameplay similar to Settlers II by "
 "BlueByte.<br>In this game, you start out on a small piece of land with "
-"nothing more than a few of useful resources. Using those, you can build "
+"nothing more than a few useful resources. Using those, you can build "
 "yourself an empire with many thousands of inhabitants. On your way towards "
 "this goal, you will have to build up an economic infrastructure, explore the "
 "lands around you and face enemies who are trying to rule the world just like "
-"you do."
+"you."
 msgstr ""
-"Widelands is een strategiespel dat probeert eenzelfde spelbeleving te "
-"bereiken als Settlers II van Bluebyte.<br>In dit spel begin je op een klein "
-"stuk land, met niets meer dan een paar bruikbare voorraden. Als je deze "
-"gebruikt, kun je een koninkrijk bouwen met vele duizenden inwoners. Op weg "
-"naar dit doel moet je een economische infrastructuur aanleggen, het "
-"omringende land verkennen en de vijanden het hoofd bieden die net als jij "
-"proberen de wereld te regeren."
 
 #: ../../txts/README:22
 msgid ""
@@ -1430,7 +1432,7 @@ msgstr ""
 "vrijwilligers nodig. Jouw bijdragen (ja, ik heb het tegen jou) zijn vereist, "
 "vooral in het grafische deel, om Wideland een nog beter spel te maken."
 
-#: ../../txts/README:131
+#: ../../txts/README:135
 msgid ""
 "Widelands records every game you play in two files. One of these files has a "
 ".wrpl.wgf extension and contains an initial savegame. The other file has "
@@ -1474,11 +1476,10 @@ msgstr ""
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
 "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the "
-"real speed is than democratically set."
+"real speed is then democratically set."
 msgstr ""
-"Je kunt de toetsen 'Page up' en 'Page down' gebruiken om de gewenste "
-"snelheid aan te passen - de werkelijke snelheid wordt dan democratisch "
-"bepaald."
+"Je kan de 'Page up' en 'Page down' toetsen gebruiken om je gewenste snelheid "
+"aan te passen - De echte snelheid wordt daarna democratisch gekozen."
 
 #: ../../txts/tips/general_game.tip:10
 msgid ""
@@ -1504,6 +1505,23 @@ msgstr ""
 msgid "an open source strategy game"
 msgstr "een open source strategiespel"
 
+#~ msgid ""
+#~ "Widelands is a strategy game aiming for gameplay similar to Settlers II by "
+#~ "BlueByte.<br>In this game, you start out on a small piece of land with "
+#~ "nothing more than a few of useful resources. Using those, you can build "
+#~ "yourself an empire with many thousands of inhabitants. On your way towards "
+#~ "this goal, you will have to build up an economic infrastructure, explore the "
+#~ "lands around you and face enemies who are trying to rule the world just like "
+#~ "you do."
+#~ msgstr ""
+#~ "Widelands is een strategiespel dat probeert eenzelfde spelbeleving te "
+#~ "bereiken als Settlers II van Bluebyte.<br>In dit spel begin je op een klein "
+#~ "stuk land, met niets meer dan een paar bruikbare voorraden. Als je deze "
+#~ "gebruikt, kun je een koninkrijk bouwen met vele duizenden inwoners. Op weg "
+#~ "naar dit doel moet je een economische infrastructuur aanleggen, het "
+#~ "omringende land verkennen en de vijanden het hoofd bieden die net als jij "
+#~ "proberen de wereld te regeren."
+
 #~ msgid "F5           Reveals the entire map (only in debug-builds)"
 #~ msgstr "F5           Onthul de hele kaart (alleen in debug-builds)"
 
@@ -1515,6 +1533,15 @@ msgstr "een open source strategiespel"
 
 #~ msgid "Wiki and Enduser-Documentation"
 #~ msgstr "Wiki en Eindgebruikersdocumentatie"
+
+#~ msgid ""
+#~ "Holding down SHIFT switches first alternative tool on. This tool is in most "
+#~ "cases the complete difference of the normal tool (for example deletion of an "
+#~ "object instead of placing one)."
+#~ msgstr ""
+#~ "Als je SHIFT ingedrukt houdt zet je het eerste alternatieve gereedschap aan. "
+#~ "Meestal is deze het tegengestelde van het gebruikelijke gereedschap (zoals "
+#~ "het verwijderen van een object in plaats van plaatsen)."
 
 #~ msgid ""
 #~ "The tools for events, triggers, event chains and objectives are still under "
@@ -1531,6 +1558,14 @@ msgstr "een open source strategiespel"
 #~ msgstr ""
 #~ "Je kunt referentiemateriaal vinden voor alle acties en gebeurtenissen op "
 #~ "widelands.org."
+
+#~ msgid ""
+#~ "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the "
+#~ "real speed is than democratically set."
+#~ msgstr ""
+#~ "Je kunt de toetsen 'Page up' en 'Page down' gebruiken om de gewenste "
+#~ "snelheid aan te passen - de werkelijke snelheid wordt dan democratisch "
+#~ "bepaald."
 
 #~ msgid "Janus"
 #~ msgstr "Janus"

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-27 07:40+0000\n"
-"Last-Translator: kraileth <Unknown>\n"
+"PO-Revision-Date: 2010-05-28 08:06+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-28 03:36+0000\n"
+"X-Launchpad-Export-Date: 2010-05-29 03:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:1724
@@ -292,7 +292,7 @@ msgid ""
 "\n"
 msgstr ""
 " --double             Startet das Spiel doppelt (Für Tests über das\n"
-"                      localhost Netz)\n"
+"                      lokale Netz)\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1396
@@ -311,10 +311,10 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
-"Fehlermeldungen? Vorschläge? Schau auf der Projekt Webseite nach:\n"
+"Fehlermeldungen? Vorschläge? Schau auf der Webseite des Projekts nach:\n"
 "        https://launchpad.net/widelands\n"
 "\n"
-"Wir hoffen, dir gefällt dieses Spiel!\n"
+"Wir hoffen, Dir gefällt dieses Spiel!\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1552
@@ -699,7 +699,7 @@ msgstr "Finde Gestein"
 
 #: ../../src/writeHTML.cc:769 ../../src/writeHTML.cc:1371
 msgid "playFX"
-msgstr "Spiele Sound"
+msgstr "spiele Effekte"
 
 #: ../../src/writeHTML.cc:770
 msgid "UNKNOWN"

@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-28 00:26+0000\n"
+"PO-Revision-Date: 2010-05-28 14:20+0000\n"
 "Last-Translator: Ercin Senturk <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-05-28 03:36+0000\n"
+"X-Launchpad-Export-Date: 2010-05-29 03:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
-msgstr "Hiç"
+msgstr "Yok"
 
 #: ../../src/s2map.cc:221
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -307,7 +307,7 @@ msgstr "Oyun hazırlanıyor"
 
 #: ../../src/wlapplication.cc:2113
 msgid "End of replay"
-msgstr ""
+msgstr "Tekrarın sonu"
 
 #: ../../src/wlapplication.cc:2115
 msgid ""
@@ -344,7 +344,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:272
 msgid "Building types"
-msgstr ""
+msgstr "İnşa tipleri"
 
 #: ../../src/writeHTML.cc:277 ../../src/writeHTML.cc:514
 #: ../../src/writeHTML.cc:1417
@@ -368,7 +368,7 @@ msgstr "İnşa edilebilir"
 
 #: ../../src/writeHTML.cc:285
 msgid "Enhanced"
-msgstr ""
+msgstr "Gelişmiş"
 
 #: ../../src/writeHTML.cc:288 ../../src/wui/buildingwindow.cc:187
 msgid "Stop"
@@ -376,7 +376,7 @@ msgstr "Dur"
 
 #: ../../src/writeHTML.cc:290
 msgid "Conquer<br/>range"
-msgstr "Fetih"
+msgstr "Fetih<br>mesafe"
 
 #: ../../src/writeHTML.cc:292 ../../src/writeHTML.cc:520
 msgid "Vision<br/>range"
@@ -385,7 +385,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:319 ../../src/writeHTML.cc:375
 #: ../../src/logic/building.cc:538
 msgid "Mine"
-msgstr "Benim"
+msgstr "Maden"
 
 #: ../../src/writeHTML.cc:323 ../../src/writeHTML.cc:391
 #: ../../src/logic/building.cc:539
@@ -439,7 +439,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:400
 msgid "Is not buildable."
-msgstr ""
+msgstr "İnşa edilebilir değil."
 
 #: ../../src/writeHTML.cc:407
 msgid "Is enhanced."
@@ -475,11 +475,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
-msgstr ""
+msgstr "İşçi tipleri"
 
 #: ../../src/writeHTML.cc:522
 msgid "Needed<br/>experience"
-msgstr ""
+msgstr "Gerekli<br>tecrübe"
 
 #: ../../src/writeHTML.cc:524
 msgid "Becomes"
@@ -491,13 +491,14 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:583
 msgid "Combat Properties"
-msgstr ""
+msgstr "Savaş Özellikleri"
 
 #: ../../src/writeHTML.cc:590
 #, c-format
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Can Puanı %u, 0 'dan yüksek her sevye için artı %u (maksimum sevye %u)."
 
 #: ../../src/writeHTML.cc:600
 #, c-format
@@ -505,6 +506,8 @@ msgid ""
 "Attack is between %u and %u, plus %u for each level above 0 (maximum level "
 "is %u)."
 msgstr ""
+"Atak %u ve %u arasında, 0 'dan yüksek her sevye için artı %u (maksimum sevye "
+"%u)."
 
 #: ../../src/writeHTML.cc:610
 #, c-format
@@ -519,30 +522,30 @@ msgstr ""
 #: ../../src/writeHTML.cc:666 ../../src/writeHTML.cc:677
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "%s'in yapımı"
 
 #: ../../src/writeHTML.cc:688
 msgid "Spawns in warehouses."
-msgstr ""
+msgstr "Ambarlada meydana gelir."
 
 #: ../../src/writeHTML.cc:697
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr ""
+msgstr "%u defa çalışma tecrübesi gerek olmak için"
 
 #: ../../src/writeHTML.cc:705
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "%s'nin terfisi"
 
 #: ../../src/writeHTML.cc:716 ../../src/writeHTML.cc:861
 msgid "Programs"
-msgstr ""
+msgstr "Uygulamalar"
 
 #: ../../src/writeHTML.cc:753 ../../src/writeHTML.cc:1296
 #: ../../src/logic/building.cc:533
 msgid "mine"
-msgstr ""
+msgstr "maden"
 
 #: ../../src/writeHTML.cc:754
 msgid "breed"
@@ -570,11 +573,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:760
 msgid "walk"
-msgstr ""
+msgstr "yürü"
 
 #: ../../src/writeHTML.cc:761
 msgid "animation"
-msgstr ""
+msgstr "animasyon"
 
 #: ../../src/writeHTML.cc:762 ../../src/writeHTML.cc:901
 msgid "return"
@@ -582,7 +585,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:763
 msgid "object"
-msgstr ""
+msgstr "nesne"
 
 #: ../../src/writeHTML.cc:764
 msgid "plant"
@@ -598,11 +601,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:767
 msgid "geologist"
-msgstr ""
+msgstr "jeolog"
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist_find"
-msgstr ""
+msgstr "jeolog_bul"
 
 #: ../../src/writeHTML.cc:769 ../../src/writeHTML.cc:1371
 msgid "playFX"
@@ -610,17 +613,17 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:770
 msgid "UNKNOWN"
-msgstr ""
+msgstr "BİLİNMEYEN"
 
 #: ../../src/writeHTML.cc:777
 msgid "Production"
-msgstr ""
+msgstr "Üretim"
 
 #: ../../src/writeHTML.cc:781 ../../src/wui/general_statistics_menu.cc:146
 #: ../../src/wui/productionsitewindow.cc:84
 #: ../../src/wui/warehousewindow.cc:62
 msgid "Workers"
-msgstr ""
+msgstr "İşçiler"
 
 #: ../../src/writeHTML.cc:792
 #, c-format
@@ -629,7 +632,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:802
 msgid "Inputs"
-msgstr ""
+msgstr "Girdiler"
 
 #: ../../src/writeHTML.cc:813
 #, c-format
@@ -638,7 +641,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:825
 msgid "Output"
-msgstr ""
+msgstr "Çıktı"
 
 #: ../../src/writeHTML.cc:836 ../../src/writeHTML.cc:850
 #, c-format
@@ -661,19 +664,19 @@ msgstr ""
 #: ../../src/writeHTML.cc:905 ../../src/logic/production_program.cc:389
 #: ../../src/logic/production_program.cc:746
 msgid "failed"
-msgstr ""
+msgstr "başarısız oldu"
 
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:390
 msgid "completed"
-msgstr ""
+msgstr "tamamlandı"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:390
 msgid "skipped"
-msgstr ""
+msgstr "geçildi"
 
 #: ../../src/writeHTML.cc:912
 msgid "and"
-msgstr ""
+msgstr "ve"
 
 #: ../../src/writeHTML.cc:913
 msgid "when"
@@ -681,19 +684,19 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:915
 msgid "or"
-msgstr ""
+msgstr "veya"
 
 #: ../../src/writeHTML.cc:916
 msgid "unless"
-msgstr ""
+msgstr "olmadıkça"
 
 #: ../../src/writeHTML.cc:947 ../../src/writeHTML.cc:969
 msgid "economy"
-msgstr ""
+msgstr "ekonomi"
 
 #: ../../src/writeHTML.cc:949 ../../src/writeHTML.cc:971
 msgid "needs"
-msgstr ""
+msgstr "ihtiyaçlar"
 
 #: ../../src/writeHTML.cc:989
 msgid "site"
@@ -705,11 +708,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1022
 msgid "workers of this site"
-msgstr ""
+msgstr "bu alanın çalışanları"
 
 #: ../../src/writeHTML.cc:1024
 msgid "workers"
-msgstr ""
+msgstr "işçiler"
 
 #: ../../src/writeHTML.cc:1025
 msgid "</span></a> <span class=\"keyword\">"
@@ -717,11 +720,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1026
 msgid "need"
-msgstr ""
+msgstr "ihtiyaç"
 
 #: ../../src/writeHTML.cc:1028
 msgid "experience"
-msgstr ""
+msgstr "tecrübe"
 
 #: ../../src/writeHTML.cc:1042
 msgid "Documentation for program command call"
@@ -729,7 +732,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1044
 msgid "call"
-msgstr ""
+msgstr "çağrı"
 
 #: ../../src/writeHTML.cc:1051
 #, c-format
