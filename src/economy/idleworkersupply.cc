@@ -77,6 +77,12 @@ bool IdleWorkerSupply::has_storage() const throw ()
 	return m_worker.get_transfer();
 }
 
+void IdleWorkerSupply::get_ware_type(bool& isworker, Ware_Index& ware) const
+{
+	isworker = true;
+	ware = m_worker.worker_index();
+}
+
 /**
  * Return the worker's position.
  */
