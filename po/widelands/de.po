@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-28 08:06+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-05-29 19:52+0000\n"
+"Last-Translator: LennStar <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-29 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-05-30 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:1724
@@ -3668,12 +3668,12 @@ msgstr "30 m"
 #: ../../src/wui/general_statistics_menu.cc:236
 #: ../../src/wui/ware_statistics_menu.cc:439
 msgid "1 h"
-msgstr "1 Std"
+msgstr "1 h"
 
 #: ../../src/wui/general_statistics_menu.cc:245
 #: ../../src/wui/ware_statistics_menu.cc:448
 msgid "2 h"
-msgstr "2 Std"
+msgstr "2 h"
 
 #: ../../src/wui/general_statistics_menu.cc:256
 #: ../../src/wui/ware_statistics_menu.cc:459
@@ -3683,17 +3683,17 @@ msgstr "Hilfe"
 #: ../../src/wui/general_statistics_menu.cc:265
 #: ../../src/wui/ware_statistics_menu.cc:468
 msgid "4 h"
-msgstr "4 Std"
+msgstr "4 h"
 
 #: ../../src/wui/general_statistics_menu.cc:273
 #: ../../src/wui/ware_statistics_menu.cc:477
 msgid "8 h"
-msgstr "8 Std"
+msgstr "8 h"
 
 #: ../../src/wui/general_statistics_menu.cc:282
 #: ../../src/wui/ware_statistics_menu.cc:486
 msgid "16 h"
-msgstr "16 Std"
+msgstr "16 h"
 
 #: ../../src/wui/interactive_base.cc:267
 #, c-format
@@ -3736,7 +3736,7 @@ msgstr "Nachrichten"
 
 #: ../../src/wui/interactive_player.cc:197
 msgid "Ware help"
-msgstr "Waren-Hilfe"
+msgstr "Warenhilfe"
 
 #: ../../src/wui/interactive_player.cc:287
 #, c-format
@@ -3755,7 +3755,7 @@ msgstr "Metaserver-Login"
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr "Spitzname:"
+msgstr "Nickname:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
@@ -3763,7 +3763,7 @@ msgstr "Passwort:"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr "ACHTUNG: Passwort wird lesbar angezeigt und gespeichert!"
+msgstr "ACHTUNG: Passwort wird angezeigt und im Klartext gespeichert!"
 
 #: ../../src/wui/login_box.cc:52
 msgid "Log in to a registered account"
@@ -3779,19 +3779,19 @@ msgstr "Login"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
-msgstr "Leerer Spitzname"
+msgstr "leerer Nickname"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Please enter a nickname!"
-msgstr "Bitte gib einen Spitznamen ein!"
+msgstr "Bitte gib einen Nicknamen ein!"
 
 #: ../../src/wui/login_box.cc:92
 msgid "Space in Nickname"
-msgstr "Leerzeichen im Spitznamen"
+msgstr "Leerzeichen im Nicknamen"
 
 #: ../../src/wui/login_box.cc:93
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr "Entschuldige, aber Leerzeichen sind im Spitznamen nicht erlaubt!"
+msgstr "Entschuldige, aber Leerzeichen sind im Nicknamen nicht erlaubt!"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Empty Password"
@@ -3897,7 +3897,7 @@ msgstr "trainierende Soldaten"
 
 #: ../../src/wui/transport_ui.cc:44
 msgid "Economy options"
-msgstr "Wirtschafts-Einstellungen"
+msgstr "Wirtschaftseinstellungen"
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:343
 msgid "Decrease permanent target quantity"
@@ -4234,7 +4234,7 @@ msgstr "Erstelle Ordner"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:208
 msgid "unnamed"
-msgstr "Namenlos"
+msgstr "namenlos"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 msgid "<Directory>"
@@ -4301,8 +4301,8 @@ msgid ""
 "and bobs that depend on this player and try again."
 msgstr ""
 "Kann den Spieler nicht entfernen. Irgendwo wird darauf Bezug genommen. "
-"Entferne alle Gebäude und Bobs die von dem Spieler abhängen und versuche es "
-"dann noch einmal."
+"Entferne alle Gebäude und Objekte, die von dem Spieler abhängen und versuche "
+"es dann noch einmal."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"

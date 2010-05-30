@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-28 23:58+0000\n"
-"Last-Translator: MichaelDeswert <michael.deswert@scarlet.be>\n"
+"PO-Revision-Date: 2010-05-29 17:32+0000\n"
+"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-29 03:47+0000\n"
+"X-Launchpad-Export-Date: 2010-05-30 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -57,6 +57,9 @@ msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"5 Seconden gewacht om geluid te sluiten, er zijn hier problemen dus "
+"widelands sluit. update je geluid stuurprogramma en/of SDL om dit probleem "
+"op te lossen\n"
 
 #: ../../src/wlapplication.cc:1159
 msgid ""
@@ -1086,7 +1089,7 @@ msgstr "opdrachten lijst: %s"
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "game_class: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
@@ -1130,7 +1133,7 @@ msgstr "speler info: %s"
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:78
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "onbekende/onbehandelde versie %i"
 
 #: ../../src/game_io/game_preload_data_packet.cc:60
 #, c-format
@@ -1618,7 +1621,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:819
 #: ../../src/logic/production_program.cc:904
 msgid "count"
-msgstr ""
+msgstr "aantal"
 
 #: ../../src/logic/production_program.cc:101
 #, c-format
@@ -1718,7 +1721,7 @@ msgstr "voltooiing"
 
 #: ../../src/logic/production_program.cc:481
 msgid "skip"
-msgstr ""
+msgstr "overslaan"
 
 #: ../../src/logic/production_program.cc:486
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
@@ -1735,7 +1738,7 @@ msgstr "slapen: %s"
 
 #: ../../src/logic/production_program.cc:624
 msgid "idle animation is default; calling is not allowed"
-msgstr ""
+msgstr "stille animatie is standaard; aanroepen is niet toegestaan"
 
 #: ../../src/logic/production_program.cc:674
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
@@ -1823,7 +1826,7 @@ msgstr "dit type waren is al aangegeven als een uitvoer"
 
 #: ../../src/logic/productionsite.cc:76
 msgid "this worker type has already been declared as an output"
-msgstr ""
+msgstr "dit werker type is al aangegeven als een uitvoer"
 
 #: ../../src/logic/productionsite.cc:219
 msgid "(not occupied)"
@@ -1846,6 +1849,8 @@ msgid ""
 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
+"verwachtte atrLP (%u), atrAanval (%u), atrVerdediging (%u), atrOntwijken "
+"(%u) of atrTotaal (%u) maar vond onbekende attribuut waarde (%u)"
 
 #: ../../src/logic/soldier.cc:75
 msgid "positive integer"
@@ -1970,7 +1975,7 @@ msgstr "niets"
 #: ../../src/logic/worker.cc:2807
 #, c-format
 msgid "loading worker: %s"
-msgstr ""
+msgstr "laden werker: %s"
 
 #: ../../src/logic/world.cc:623
 #, c-format
@@ -2588,7 +2593,7 @@ msgstr "OK"
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
 msgid "Sound_Handler closing times %i, freq %i, format %i, chan %i\n"
-msgstr ""
+msgstr "Sound_Handler sluitingstijden %i, freq %i, formaat %i, kanaal %i\n"
 
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"

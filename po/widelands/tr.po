@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-28 14:20+0000\n"
+"PO-Revision-Date: 2010-05-29 19:42+0000\n"
 "Last-Translator: Ercin Senturk <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-05-29 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-05-30 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -336,11 +336,11 @@ msgstr "Varisler"
 
 #: ../../src/writeHTML.cc:88
 msgid "Predecessors"
-msgstr ""
+msgstr "Öncüller"
 
 #: ../../src/writeHTML.cc:103
 msgid "Employers"
-msgstr ""
+msgstr "Çalıştıranlar"
 
 #: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:272
 msgid "Building types"
@@ -419,7 +419,7 @@ msgstr "Hayır"
 
 #: ../../src/writeHTML.cc:354
 msgid "building_types.xhtml"
-msgstr ""
+msgstr "building_types.xhtml"
 
 #: ../../src/writeHTML.cc:377
 msgid "Is mine."
@@ -439,7 +439,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:400
 msgid "Is not buildable."
-msgstr "İnşa edilebilir değil."
+msgstr "İnşa edilemez."
 
 #: ../../src/writeHTML.cc:407
 msgid "Is enhanced."
@@ -448,30 +448,30 @@ msgstr ""
 #: ../../src/writeHTML.cc:414
 #, c-format
 msgid "Conquer range is %u."
-msgstr ""
+msgstr "Fetih mesafesi %u."
 
 #: ../../src/writeHTML.cc:422 ../../src/writeHTML.cc:648
 #, c-format
 msgid "Vision range is %u."
-msgstr ""
+msgstr "Görme mesafesi %u."
 
 #: ../../src/writeHTML.cc:430 ../../src/writeHTML.cc:655
 msgid "Build cost"
-msgstr ""
+msgstr "İnşa masrfı"
 
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "%s'nın inşaalanı."
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
-msgstr ""
+msgstr "Geliştirmeler"
 
 #: ../../src/writeHTML.cc:462
 #, c-format
 msgid "%s's enhancement"
-msgstr ""
+msgstr "%s'nın geliştirmeleri"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
@@ -487,7 +487,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:576
 msgid "worker_types.xhtml"
-msgstr ""
+msgstr "worker_types.xhtml"
 
 #: ../../src/writeHTML.cc:583
 msgid "Combat Properties"
@@ -549,15 +549,15 @@ msgstr "maden"
 
 #: ../../src/writeHTML.cc:754
 msgid "breed"
-msgstr ""
+msgstr "cins"
 
 #: ../../src/writeHTML.cc:755
 msgid "createitem"
-msgstr ""
+msgstr "maddeyarat"
 
 #: ../../src/writeHTML.cc:756
 msgid "setdescription"
-msgstr ""
+msgstr "tanımkoy"
 
 #: ../../src/writeHTML.cc:757
 msgid "setbobdescription"
@@ -565,11 +565,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:758
 msgid "findobject"
-msgstr ""
+msgstr "nesnebul"
 
 #: ../../src/writeHTML.cc:759
 msgid "findspace"
-msgstr ""
+msgstr "boşlukbul"
 
 #: ../../src/writeHTML.cc:760
 msgid "walk"
@@ -589,7 +589,7 @@ msgstr "nesne"
 
 #: ../../src/writeHTML.cc:764
 msgid "plant"
-msgstr ""
+msgstr "bitki"
 
 #: ../../src/writeHTML.cc:765
 msgid "create_bob"
@@ -597,7 +597,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:766
 msgid "removeobject"
-msgstr ""
+msgstr "nesnesil"
 
 #: ../../src/writeHTML.cc:767
 msgid "geologist"
@@ -609,7 +609,7 @@ msgstr "jeolog_bul"
 
 #: ../../src/writeHTML.cc:769 ../../src/writeHTML.cc:1371
 msgid "playFX"
-msgstr ""
+msgstr "FXçal"
 
 #: ../../src/writeHTML.cc:770
 msgid "UNKNOWN"
@@ -628,7 +628,7 @@ msgstr "İşçiler"
 #: ../../src/writeHTML.cc:792
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "%s'nin çalışanı"
 
 #: ../../src/writeHTML.cc:802
 msgid "Inputs"
@@ -637,7 +637,7 @@ msgstr "Girdiler"
 #: ../../src/writeHTML.cc:813
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "%s'nin girdisi"
 
 #: ../../src/writeHTML.cc:825
 msgid "Output"
@@ -646,7 +646,7 @@ msgstr "Çıktı"
 #: ../../src/writeHTML.cc:836 ../../src/writeHTML.cc:850
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "%s'nin çıktısı"
 
 #: ../../src/writeHTML.cc:897 ../../src/writeHTML.cc:1040
 #: ../../src/writeHTML.cc:1102 ../../src/writeHTML.cc:1130
@@ -655,11 +655,11 @@ msgstr ""
 #: ../../src/writeHTML.cc:1292 ../../src/writeHTML.cc:1319
 #: ../../src/writeHTML.cc:1343 ../../src/writeHTML.cc:1367
 msgid "productionsite_program_reference.xhtml"
-msgstr ""
+msgstr "productionsite_program_reference.xhtml"
 
 #: ../../src/writeHTML.cc:899
 msgid "Documentation for program command return"
-msgstr ""
+msgstr "return program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:905 ../../src/logic/production_program.cc:389
 #: ../../src/logic/production_program.cc:746
@@ -700,7 +700,7 @@ msgstr "ihtiyaçlar"
 
 #: ../../src/writeHTML.cc:989
 msgid "site"
-msgstr ""
+msgstr "site"
 
 #: ../../src/writeHTML.cc:991
 msgid "has"
@@ -728,7 +728,7 @@ msgstr "tecrübe"
 
 #: ../../src/writeHTML.cc:1042
 msgid "Documentation for program command call"
-msgstr ""
+msgstr "çağrı program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:1044
 msgid "call"
@@ -741,53 +741,53 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1104
 msgid "Documentation for program command worker"
-msgstr ""
+msgstr "işçi program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:1106
 msgid "worker"
-msgstr ""
+msgstr "işçi"
 
 #: ../../src/writeHTML.cc:1117
 #, c-format
 msgid "%s's program %s"
-msgstr ""
+msgstr "%s'nin programı %s"
 
 #: ../../src/writeHTML.cc:1132
 msgid "Documentation for program command sleep"
-msgstr ""
+msgstr "uyu program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:1134
 msgid "sleep"
-msgstr ""
+msgstr "uyu"
 
 #: ../../src/writeHTML.cc:1140 ../../src/writeHTML.cc:1160
 #, c-format
 msgid " %u.%03u s"
-msgstr ""
+msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1152
 msgid "Documentation for program command animate"
-msgstr ""
+msgstr "canlandır program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:1154
 msgid "animate"
-msgstr ""
+msgstr "canlandır"
 
 #: ../../src/writeHTML.cc:1173
 msgid "Documentation for program command consume"
-msgstr ""
+msgstr "harca program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:1175
 msgid "consume"
-msgstr ""
+msgstr "harca"
 
 #: ../../src/writeHTML.cc:1216 ../../src/writeHTML.cc:1253
 msgid "Documentation for program command produce"
-msgstr ""
+msgstr "üret program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:1218
 msgid "produce"
-msgstr ""
+msgstr "üret"
 
 #: ../../src/writeHTML.cc:1255
 msgid "recruit"
@@ -795,51 +795,51 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1294
 msgid "Documentation for program command mine"
-msgstr ""
+msgstr "maden program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:1321
 msgid "Documentation for program command check_soldier"
-msgstr ""
+msgstr "asker_kontrol program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:1323
 msgid "check soldier"
-msgstr ""
+msgstr "asker kontrol"
 
 #: ../../src/writeHTML.cc:1329 ../../src/writeHTML.cc:1353
 msgid "hp"
-msgstr ""
+msgstr "cp"
 
 #: ../../src/writeHTML.cc:1330 ../../src/writeHTML.cc:1354
 msgid "attack"
-msgstr ""
+msgstr "saldırı"
 
 #: ../../src/writeHTML.cc:1331 ../../src/writeHTML.cc:1355
 msgid "defense"
-msgstr ""
+msgstr "defans"
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "evade"
-msgstr ""
+msgstr "kaçınma"
 
 #: ../../src/writeHTML.cc:1345
 msgid "Documentation for program command train"
-msgstr ""
+msgstr "yetiştir program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:1347
 msgid "train"
-msgstr ""
+msgstr "yetiştir"
 
 #: ../../src/writeHTML.cc:1369
 msgid "Documentation for program command playFX"
-msgstr ""
+msgstr "FXçal program komutu için dökümantasyon"
 
 #: ../../src/writeHTML.cc:1406 ../../src/writeHTML.cc:1412
 msgid "Ware types"
-msgstr ""
+msgstr "Mal tipleri"
 
 #: ../../src/writeHTML.cc:1446
 msgid "ware_types.xhtml"
-msgstr ""
+msgstr "mal_tipleri.xhtml"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
 #: ../../src/economy/request.cc:213 ../../src/economy/wares_queue.cc:254
@@ -893,28 +893,28 @@ msgstr ""
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:203
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "bilinmeyen/işlenemeyen versiyon %u"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr ""
+msgstr "ekonomi dengesini çağır:%s"
 
 #: ../../src/economy/economy_data_packet.cc:62
 #: ../../src/economy/economy_data_packet.cc:82
 #, c-format
 msgid "duplicated entry for %s"
-msgstr ""
+msgstr "%s için çift giriş"
 
 #: ../../src/economy/economy_data_packet.cc:95
 #, c-format
 msgid "target quantities: %s"
-msgstr ""
+msgstr "hedef miktarlar:%s"
 
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "bilinmeyen versiyon %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format

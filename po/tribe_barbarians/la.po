@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-05-25 12:27+0000\n"
+"PO-Revision-Date: 2010-05-29 05:50+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-26 03:43+0000\n"
+"X-Launchpad-Export-Date: 2010-05-30 03:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -1132,11 +1132,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:94
 msgid "War Helmet"
-msgstr ""
+msgstr "Galea bellica"
 
 #: ../../tribes/barbarians/conf:171
 msgid "War Mill"
-msgstr ""
+msgstr "Fabrica armorum"
 
 #: ../../tribes/barbarians/conf:168
 msgid "Warehouse"
