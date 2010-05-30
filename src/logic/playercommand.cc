@@ -35,7 +35,6 @@
 #include "map_io/widelands_map_map_object_loader.h"
 
 #include "upcast.h"
-#include <sys/socket.h>
 
 namespace Widelands {
 
