@@ -52,6 +52,7 @@ struct IdleWareSupply : public Supply {
 	virtual PlayerImmovable * get_position(Game &);
 	virtual bool is_active() const throw ();
 	virtual bool has_storage() const throw ();
+	virtual void get_ware_type(bool& isworker, Ware_Index& ware) const;
 	virtual void send_to_storage(Game &, Warehouse* wh);
 
 	virtual uint32_t nr_supplies(Game const &, Request const &) const;
@@ -118,6 +119,12 @@ bool IdleWareSupply::is_active() const throw ()
 bool IdleWareSupply::has_storage()  const throw ()
 {
 	return m_ware.is_moving();
+}
+
+void IdleWareSupply::get_ware_type(bool& isworker, Ware_Index& ware) const
+{
+	isworker = false;
+	ware = m_ware.descr_index();
 }
 
 uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const

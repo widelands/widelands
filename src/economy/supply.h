@@ -28,6 +28,7 @@ struct PlayerImmovable;
 struct Game;
 struct Request;
 class Warehouse;
+struct Ware_Index;
 class WareInstance;
 class Worker;
 
@@ -61,6 +62,13 @@ struct Supply : public Trackable {
 	 * If this is \c false, somebody needs to find this supply a warehouse.
 	 */
 	virtual bool has_storage() const throw () = 0;
+
+	/**
+	 * Gets the ware type of this supply.
+	 *
+	 * \note This is only valid if \ref has_storage returns \c false.
+	 */
+	virtual void get_ware_type(bool & isworker, Ware_Index & ware) const = 0;
 
 	/**
 	 * Send this to the given warehouse.

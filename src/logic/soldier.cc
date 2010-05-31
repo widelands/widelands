@@ -579,12 +579,20 @@ void Soldier::draw_info_icon(RenderTarget & dst, Point pt, bool anchor_below) co
 	dst.draw_rect(energy_outer, HP_FRAMECOLOR);
 
 	assert(get_max_hitpoints());
-	Rect energy_inner
-		(Point(pt.x - w + 1, pt.y + 1),
-		 2*(w-1)*m_hp_current / get_max_hitpoints(),
-		 3);
+	uint32_t health_width = 2*(w-1)*m_hp_current / get_max_hitpoints();
+	Rect energy_inner(Point(pt.x - w + 1, pt.y + 1), health_width, 3);
+	Rect energy_complement
+		(energy_inner + Point(health_width, 0), 2*(w-1) - health_width, 3);
 	RGBColor color(owner().get_playercolor()[2]);
+	RGBColor complement_color;
+
+	if (static_cast<uint32_t>(color.r()) + color.g() + color.b() > 128*3)
+		complement_color = RGBColor(32,32,32);
+	else
+		complement_color = RGBColor(224,224,224);
+
 	dst.fill_rect(energy_inner, color);
+	dst.fill_rect(energy_complement, complement_color);
 
 	// Draw level pictures
 	{
