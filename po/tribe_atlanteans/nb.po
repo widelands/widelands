@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-05-26 17:32+0000\n"
+"PO-Revision-Date: 2010-05-30 15:51+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-27 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-05-31 03:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -51,7 +51,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:5
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantere"
 
 #: ../../tribes/atlanteans/conf:105
 msgid "Baker"
@@ -67,7 +67,7 @@ msgstr "Baker brød til arbeiderne."
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Bakingtray"
-msgstr ""
+msgstr "Stekebrett"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "Barracks"
@@ -88,7 +88,7 @@ msgstr "Svartrot"
 
 #: ../../tribes/atlanteans/conf:167
 msgid "Blackroot Farm"
-msgstr ""
+msgstr "Svartrotgård"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Blackroot Flour"
@@ -99,10 +99,12 @@ msgid ""
 "Blackroot Flour is produced out of blackroots and is one of three parts of "
 "the atlantian bread."
 msgstr ""
+"Svartrotmel er laget av svartrøtter og er en av de tre bestanddelne i den "
+"atlantiske brødet."
 
 #: ../../tribes/atlanteans/conf:106
 msgid "Blackroot farmer"
-msgstr ""
+msgstr "Svartrotbonde"
 
 #: ../../tribes/atlanteans/conf:28
 msgid "Blackrootfield"
@@ -136,7 +138,7 @@ msgstr "Brød"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
-msgstr ""
+msgstr "Aler opp fisk."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
@@ -144,7 +146,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr ""
+msgstr "Aler opp de sterke atlantiske hestene"
 
 #: ../../tribes/atlanteans/conf:56
 msgid "Buckets"
@@ -156,7 +158,7 @@ msgstr "Bygger"
 
 #: ../../tribes/atlanteans/conf:108
 msgid "Burner"
-msgstr ""
+msgstr "Brenner"
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
@@ -236,6 +238,8 @@ msgid ""
 "Cornflour is produced out of corn and is one of three parts of the atlantian "
 "bread."
 msgstr ""
+"Maismel lages av mais og er en av de tre bestanddelene i det atlantiske "
+"brødet."
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Crystal Mine"
@@ -355,6 +359,7 @@ msgid ""
 "Gold is one of the most valuable materials. Only important things are "
 "garnished with it."
 msgstr ""
+"Gull er et av de mest verdifulle metallene. Det brukes kun til viktige ting."
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Golden Tabard"
@@ -362,7 +367,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Goldweaver"
-msgstr ""
+msgstr "Gullvever"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Guardhall"
@@ -466,13 +471,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Milking Tongs"
-msgstr ""
+msgstr "Melketang"
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
 "Milking tongs are used by the spider breeder, to milk the spiders. They are "
 "produced by the toolsmith."
 msgstr ""
+"Melketenger brukes av edderkoppoppdretteren, til å melke edderkoppene. De "
+"lages av verktøysmeden."
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Mill"
@@ -524,7 +531,7 @@ msgstr "Planker"
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid "Planks are an important build material of the Atlanteans."
-msgstr ""
+msgstr "Planker er et viktig byggemateriale for atlanterne."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:16
 msgid "Plant blackroot"
@@ -554,14 +561,16 @@ msgstr "Produser avansert skjold"
 msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
 msgstr ""
+"Produser avansert skjold (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Produser stekebrett"
 
 #: ../../tribes/atlanteans/mill/conf:22
 msgid "Produce blackrootflour"
-msgstr ""
+msgstr "Produser svartrotmel"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bow"
@@ -585,7 +594,7 @@ msgstr "Produser ildtenger"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce fishing net"
-msgstr ""
+msgstr "Produser fiskegarn"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:21
 msgid "Produce golden tabard"
@@ -613,7 +622,7 @@ msgstr "Produser lang trefork"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce milking tongs"
-msgstr ""
+msgstr "Produser melketenger"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce pick"
@@ -643,10 +652,12 @@ msgstr "Produser stålskjold"
 msgid ""
 "Produce steel shield (only for compatibility with old savegames (build13))"
 msgstr ""
+"Produser stålskjold (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:32
 msgid "Produce steel trident"
-msgstr ""
+msgstr "Produser ståltrefork"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:20
 msgid "Produce tabard"
@@ -674,7 +685,7 @@ msgstr "Steinbrudd"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Quartz"
-msgstr ""
+msgstr "Kvarts"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Resource indicator coal little"
@@ -736,7 +747,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Sawyer"
-msgstr ""
+msgstr "Sager"
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Scout"
@@ -841,7 +852,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Spiderfarm"
-msgstr ""
+msgstr "Edderkoppgård"
 
 #: ../../tribes/atlanteans/conf:88
 msgid "Spideryarn"
@@ -906,7 +917,7 @@ msgstr "Fiskeren fisker deilig fisk."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr ""
+msgstr "Fiskegarn blir laget av verktøysmeden og brukt av fiskeren."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -917,7 +928,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid "These shields are used by the best soldiers of the Atlanteans."
-msgstr ""
+msgstr "Disse skjoldene blir brukt av atlanternes beste soldater."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -926,7 +937,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid "This bow is used by the atlantian hunter."
-msgstr ""
+msgstr "Denne buen blir brukt av den atlantiske jegeren."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
@@ -1221,7 +1232,7 @@ msgstr ""
 #: ../../tribes/atlanteans/well/conf:13
 #: ../../tribes/atlanteans/woodcutters_house/conf:16
 msgid "Work"
-msgstr ""
+msgstr "Arbeid"
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."

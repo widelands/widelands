@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-29 17:32+0000\n"
-"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
+"PO-Revision-Date: 2010-05-30 20:29+0000\n"
+"Last-Translator: Christian Groenendijk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-30 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-05-31 03:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -619,7 +619,7 @@ msgstr "mijn"
 
 #: ../../src/writeHTML.cc:754
 msgid "breed"
-msgstr "fok"
+msgstr "ras"
 
 #: ../../src/writeHTML.cc:755
 msgid "createitem"
@@ -643,7 +643,7 @@ msgstr "vindruimte"
 
 #: ../../src/writeHTML.cc:760
 msgid "walk"
-msgstr "loop"
+msgstr "wandel"
 
 #: ../../src/writeHTML.cc:761
 msgid "animation"
@@ -716,7 +716,7 @@ msgstr "Uitvoer"
 #: ../../src/writeHTML.cc:836 ../../src/writeHTML.cc:850
 #, c-format
 msgid "%s's output"
-msgstr "%ss resultaat"
+msgstr "%ss uitvoer"
 
 #: ../../src/writeHTML.cc:897 ../../src/writeHTML.cc:1040
 #: ../../src/writeHTML.cc:1102 ../../src/writeHTML.cc:1130
@@ -734,7 +734,7 @@ msgstr "Documentatie voor programma commando keerterug"
 #: ../../src/writeHTML.cc:905 ../../src/logic/production_program.cc:389
 #: ../../src/logic/production_program.cc:746
 msgid "failed"
-msgstr "mislukte"
+msgstr "mislukt"
 
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:390
 msgid "completed"
@@ -1278,7 +1278,7 @@ msgstr "Creëren speler's infrastructuur"
 
 #: ../../src/logic/game.cc:467 ../../src/logic/player.cc:123
 msgid "Missing starting position"
-msgstr "Ontbrekend startpunt"
+msgstr "Ontbrekende start positie"
 
 #: ../../src/logic/game.cc:469 ../../src/logic/player.cc:125
 #, c-format
@@ -1392,12 +1392,12 @@ msgstr "vernietig kaart object: %s"
 #: ../../src/logic/instances.cc:124
 #, c-format
 msgid "object %u: %s"
-msgstr "ding %u: %s"
+msgstr "object %u: %s"
 
 #: ../../src/logic/instances.cc:133
 #, c-format
 msgid "act: %s"
-msgstr ""
+msgstr "bedrijf: %s"
 
 #: ../../src/logic/map.cc:361
 msgid "Player 1"
@@ -2073,6 +2073,8 @@ msgid ""
 "%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
 "previously set to %u\n"
 msgstr ""
+"%s %u heeft een next_spawn tijd voor werker type \"%s\" gezet op %u, maar "
+"deze was eerst gezet op %u\n"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:500
 #, c-format
@@ -2315,7 +2317,7 @@ msgstr "waar data: %s"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:198
 #, c-format
 msgid "item %u: %s"
-msgstr ""
+msgstr "voorwerp %u: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:205
 #, c-format
@@ -2939,7 +2941,7 @@ msgstr "LAN / Direct IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:80
 msgid "Show login dialog"
-msgstr ""
+msgstr "Geef login-dialoog weer"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:107
 #: ../../src/ui_fsmenu/netsetup_lan.cc:109 ../../src/wui/login_box.cc:73
@@ -3115,7 +3117,7 @@ msgstr "Sla spel automatisch op elke"
 
 #: ../../src/ui_fsmenu/options.cc:191
 msgid "Remove Replays older than:"
-msgstr ""
+msgstr "Verwijder Herhalingen ouder dan:"
 
 #: ../../src/ui_fsmenu/options.cc:195
 msgid "Off"
@@ -3123,7 +3125,7 @@ msgstr "Uit"
 
 #: ../../src/ui_fsmenu/options.cc:285
 msgid "Try system language"
-msgstr ""
+msgstr "Probeer systeemtaal"
 
 #: ../../src/ui_fsmenu/options.cc:398
 msgid "x"
@@ -3169,7 +3171,7 @@ msgstr "Dubbele grafische buffering."
 
 #: ../../src/ui_fsmenu/options.cc:472
 msgid "Remove Syncstream dumps on startup"
-msgstr ""
+msgstr "Verwijder Syncstream dumps bij het opstarten"
 
 #: ../../src/ui_fsmenu/options.cc:494
 msgid "Pause"
@@ -3463,7 +3465,7 @@ msgstr "Speeltijd: "
 #: ../../src/wui/game_main_menu_save_game.cc:111
 #, c-format
 msgid "%02ud%02uh%02u'%02u\"%03u"
-msgstr ""
+msgstr "%02ud%02uu%02u'%02u\"%03u"
 
 #: ../../src/wui/game_main_menu_save_game.cc:187
 msgid ""
@@ -3493,7 +3495,7 @@ msgstr " bestaat al. Overschrijven?"
 
 #: ../../src/wui/game_message_menu.cc:44 ../../src/wui/game_message_menu.h:148
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Berichten Menu: Inbox"
 
 #: ../../src/wui/game_objectives_menu.cc:45
 msgid "Objectives Menu"
@@ -3692,31 +3694,31 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:52
 msgid "Log in to a registered account"
-msgstr ""
+msgstr "Inloggen bij een geregistreerd profiel"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Automatically use this login information from now on."
-msgstr ""
+msgstr "Gebruik vanaf nu automatisch deze inlog informatie."
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
-msgstr ""
+msgstr "Log in"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
-msgstr ""
+msgstr "Lege Bijnaam"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "Vul alsjeblieft een bijnaam in!"
 
 #: ../../src/wui/login_box.cc:92
 msgid "Space in Nickname"
-msgstr ""
+msgstr "Spatie in Bijnaam"
 
 #: ../../src/wui/login_box.cc:93
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr ""
+msgstr "Sorry, maar spaties zijn niet toegestaan in bijnamen"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Empty Password"
@@ -3724,11 +3726,11 @@ msgstr "Leeg wachtwoord"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Please enter your password!"
-msgstr ""
+msgstr "Voer alsjeblieft je wachtwoord in!"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
-msgstr ""
+msgstr "Soldaten"
 
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
@@ -3754,7 +3756,7 @@ msgstr "Zoomen"
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Worker"
-msgstr ""
+msgstr "Werker"
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
@@ -3762,7 +3764,7 @@ msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:73
 msgid "Next Level"
-msgstr ""
+msgstr "Volgend Niveau"
 
 #: ../../src/wui/productionsitewindow.cc:140
 msgid "(vacant)"
@@ -3802,19 +3804,19 @@ msgstr "Niveau"
 
 #: ../../src/wui/stock_menu.cc:47
 msgid "Wares (total)"
-msgstr ""
+msgstr "Goederen (totaal)"
 
 #: ../../src/wui/stock_menu.cc:52
 msgid "Workers (total)"
-msgstr ""
+msgstr "Werkers (totaal)"
 
 #: ../../src/wui/stock_menu.cc:59
 msgid "Wares in warehouses"
-msgstr ""
+msgstr "Werkers in magazijnen"
 
 #: ../../src/wui/stock_menu.cc:66
 msgid "Workers in warehouses"
-msgstr ""
+msgstr "Werkers in magazijnen"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"

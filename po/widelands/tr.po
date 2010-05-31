@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-29 19:42+0000\n"
+"PO-Revision-Date: 2010-05-30 22:03+0000\n"
 "Last-Translator: Ercin Senturk <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-05-30 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-05-31 03:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -290,7 +290,7 @@ msgstr "Bağlantı problemi"
 
 #: ../../src/wlapplication.cc:1704
 msgid "Widelands has not been able to connect to the host."
-msgstr "Widelans sunucuya bağlanamadı."
+msgstr "Widelands sunucuya bağlanamadı."
 
 #: ../../src/wlapplication.cc:1750
 msgid "The address of the game server is invalid"
@@ -380,7 +380,7 @@ msgstr "Fetih<br>mesafe"
 
 #: ../../src/writeHTML.cc:292 ../../src/writeHTML.cc:520
 msgid "Vision<br/>range"
-msgstr ""
+msgstr "Görüş<br>mesafe"
 
 #: ../../src/writeHTML.cc:319 ../../src/writeHTML.cc:375
 #: ../../src/logic/building.cc:538
@@ -419,7 +419,7 @@ msgstr "Hayır"
 
 #: ../../src/writeHTML.cc:354
 msgid "building_types.xhtml"
-msgstr "building_types.xhtml"
+msgstr "inşa_tipleri.xhtml"
 
 #: ../../src/writeHTML.cc:377
 msgid "Is mine."
@@ -526,7 +526,7 @@ msgstr "%s'in yapımı"
 
 #: ../../src/writeHTML.cc:688
 msgid "Spawns in warehouses."
-msgstr "Ambarlada meydana gelir."
+msgstr "Ambarlarda meydana gelir."
 
 #: ../../src/writeHTML.cc:697
 #, c-format
@@ -919,43 +919,43 @@ msgstr "bilinmeyen versiyon %u"
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "ekonomi:%s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "malmeydanı:%s"
 
 #: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
-msgstr ""
+msgstr "Menü"
 
 #: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
-msgstr ""
+msgstr "Araçlar"
 
 #: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
-msgstr ""
+msgstr "Araçboyutu"
 
 #: ../../src/editor/editorinteractive.cc:73
 #: ../../src/wui/interactive_player.cc:186
 #: ../../src/wui/interactive_spectator.cc:67
 msgid "Minimap"
-msgstr ""
+msgstr "Mini Harita"
 
 #: ../../src/editor/editorinteractive.cc:76
 #: ../../src/wui/interactive_player.cc:189
 msgid "Buildhelp"
-msgstr ""
+msgstr "İnşayardım"
 
 #: ../../src/editor/editorinteractive.cc:79
 msgid "Players"
-msgstr ""
+msgstr "Oyuncular"
 
 #: ../../src/editor/editorinteractive.cc:151
 msgid "Unsupported format"
-msgstr ""
+msgstr "Desteklenmeyen format"
 
 #: ../../src/editor/editorinteractive.cc:153
 #, c-format
@@ -963,35 +963,36 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
+"Widelands \"%s\" dosyasını yükleyemedi. Dosya formatı uyumlu gözükmüyor."
 
 #: ../../src/editor/editorinteractive.cc:171
 #: ../../src/editor/editorinteractive.cc:576
 #: ../../src/logic/editor_game_base.cc:329
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "Yüklenen kabile:%s"
 
 #: ../../src/editor/editorinteractive.cc:177
 msgid "Creating players"
-msgstr ""
+msgstr "Oyuncular yaratılıyor"
 
 #: ../../src/editor/editorinteractive.cc:184
 #: ../../src/logic/editor_game_base.cc:325
 msgid "Loading world data"
-msgstr ""
+msgstr "Dünya verisi yükleniyor"
 
 #: ../../src/editor/editorinteractive.cc:187
 #: ../../src/editor/editorinteractive.cc:580
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Grafikler yükleniyor..."
 
 #: ../../src/editor/editorinteractive.cc:235
 msgid "Map unsaved"
-msgstr ""
+msgstr "Harita kaydedilmedi"
 
 #: ../../src/editor/editorinteractive.cc:236
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr ""
+msgstr "Harita kaydedilmedi, çıkmak istiyormusunuz?"
 
 #: ../../src/editor/editorinteractive.cc:567
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
@@ -999,7 +1000,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:184
 #: ../../src/logic/map.h:172
 msgid "No Name"
-msgstr ""
+msgstr "İsimsiz"
 
 #: ../../src/editor/editorinteractive.cc:569
 #: ../../src/ui_fsmenu/netsetup_lan.cc:185
@@ -1007,51 +1008,51 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
 #: ../../src/logic/map.h:173
 msgid "Unknown"
-msgstr ""
+msgstr "Bilinmeyen"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:86
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "komut sırası:%s"
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "oyun_sınıf:%s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
-msgstr ""
+msgstr "Oyunda oyuncu yok!"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:80
 #, c-format
 msgid "interactive player: %s"
-msgstr ""
+msgstr "etkileşimli oyuncu:%s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:67
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "belirtilen konumda bayrak yok"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:69
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "oyuncu %u:%s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:75
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "ekonomiler: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr ""
+msgstr "oyuncu numarası (%i) aralığın dışında (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:130
 #, c-format
 msgid "player info: %s"
-msgstr ""
+msgstr "oyuncu bilgisi: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:58
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:94
@@ -1061,12 +1062,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:78
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "bilinmeyen/işlenemeyen versiyon %i"
 
 #: ../../src/game_io/game_preload_data_packet.cc:60
 #, c-format
 msgid "preload: %s"
-msgstr ""
+msgstr "önyükleme: %s"
 
 #: ../../src/graphic/animation.cc:196 ../../src/logic/building.cc:76
 #: ../../src/logic/immovable.cc:194 ../../src/logic/immovable.cc:693
@@ -1099,56 +1100,56 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr ""
+msgstr "%s bekleniyor fakat \"%s\" bulundu"
 
 #: ../../src/graphic/animation.cc:197
 msgid "frame number"
-msgstr ""
+msgstr "kare sayısı"
 
 #: ../../src/graphic/graphic.cc:849
 #, c-format
 msgid "Loading animations: %d%% complete"
-msgstr ""
+msgstr "Canlandırma yükleniyor: %d%% tamamlandı"
 
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u loose battle\n"
-msgstr ""
+msgstr "[savaş] asker %u savaşı kaybetti\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
 msgid "[battle] waking up winner %d\n"
-msgstr ""
+msgstr "[savaş] kazananın uyanışı %d\n"
 
 #: ../../src/logic/bob.cc:87 ../../src/logic/immovable.cc:206
 #, c-format
 msgid "bad attribute \"%s\""
-msgstr ""
+msgstr "kötü nitelik \"%s\""
 
 #: ../../src/logic/building.cc:534
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
-msgstr ""
+msgstr "küçük"
 
 #: ../../src/logic/building.cc:535
 #: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "medium"
-msgstr ""
+msgstr "orta"
 
 #: ../../src/logic/building.cc:535
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "big"
-msgstr ""
+msgstr "büyük"
 
 #: ../../src/logic/cmd_luacoroutine.cc:62
 #, c-format
 msgid "lua function: %s"
-msgstr ""
+msgstr "lua fonksiyon: %s"
 
 #: ../../src/logic/cmd_luascript.cc:58
 #, c-format
 msgid "lua: %s"
-msgstr ""
+msgstr "lua: %s"
 
 #: ../../src/logic/cmd_queue.cc:173
 #, c-format

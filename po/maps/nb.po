@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-05-28 13:37+0000\n"
-"Last-Translator: Fredrik Sudmann <fsudmann@gmail.com>\n"
+"PO-Revision-Date: 2010-05-30 15:25+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-29 03:47+0000\n"
+"X-Launchpad-Export-Date: 2010-05-31 03:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:24
@@ -23,7 +23,7 @@ msgstr "(Opplæring) Barbarer - Det andre imperiet"
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
-msgstr ""
+msgstr "01 - Fra Nemesis til Genesis"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -69,6 +69,9 @@ msgid ""
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
 msgstr ""
+"Etter at en astroide slo ned og den harde vinteren som fulgte, har tre øyer "
+"nå blitt knyttet sammen av is og stein. Dette var slutten på den fredfulle "
+"sameksistensen mellom tre stammer."
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
@@ -109,7 +112,7 @@ msgstr "Krater"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
-msgstr ""
+msgstr "Inntørket elveleie"
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -187,7 +190,7 @@ msgstr "Gyllen halvøy"
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
-msgstr ""
+msgstr "Nedslag"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -204,6 +207,10 @@ msgid ""
 "if you are alone, but no-one knows, what might happen if you meet an "
 "opponent tribe?"
 msgstr ""
+"Er det en test fra gudene, eller en ond plan lagt av noen andre, som har "
+"ført til at du og stammen din har våknet opp på denne øyen omgitt av lava og "
+"ild. Hittil virker det som du er alene, men hvem vet hva som kan skje om du "
+"møter en annen stamme?"
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
