@@ -48,14 +48,11 @@ void SurfaceOpenGL::draw_rect(const Rect rc, const RGBColor clr) {
 	glDisable(GL_TEXTURE_2D);
 
 	glBegin(GL_LINE_LOOP);
-		glColor3f
-		((clr.r() / 256.0f),
-		 (clr.g() / 256.0f),
-		 (clr.b() / 256.0f));
-		glVertex2f(m_offsx + rc.x + 1,    m_offsy + rc.y);
-		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y);
-		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y + rc.h - 1);
-		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y + rc.h - 1);
+		glColor3ub(clr.r(), clr.g(), clr.b());
+		glVertex2f(m_offsx + rc.x + 0.5f,        m_offsy + rc.y + 0.5f);
+		glVertex2f(m_offsx + rc.x + rc.w - 0.5f, m_offsy + rc.y + 0.5f);
+		glVertex2f(m_offsx + rc.x + rc.w - 0.5f, m_offsy + rc.y + rc.h - 0.5f);
+		glVertex2f(m_offsx + rc.x + 0.5f,        m_offsy + rc.y + rc.h - 0.5f);
 	glEnd();
 	glEnable(GL_TEXTURE_2D);
 }
@@ -69,19 +66,15 @@ Draws a filled rectangle
 void SurfaceOpenGL::fill_rect(const Rect rc, const RGBAColor clr) {
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
-	assert(rc.w >= 1);
-	assert(rc.h >= 1);
+	assert(rc.w >= 0);
+	assert(rc.h >= 0);
 	assert(g_opengl);
 
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 
 	glBegin(GL_QUADS);
-		glColor4f
-		(((static_cast<GLfloat>(clr.r)) / 256.0f),
-		 ((static_cast<GLfloat>(clr.g)) / 256.0f),
-		 ((static_cast<GLfloat>(clr.b)) / 256.0f),
-		 ((static_cast<GLfloat>(clr.a)) / 256.0f));
+		glColor4ub(clr.r, clr.g, clr.b, clr.a);
 		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y);
 		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y);
 		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y + rc.h);
@@ -147,12 +140,9 @@ void SurfaceOpenGL::draw_line
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	glBegin(GL_LINES);
-	glColor3f
-		((color.r() / 256.0f),
-			(color.g() / 256.0f),
-			(color.b() / 256.0f));
-	glVertex2f(x1 + m_offsx, y1 + m_offsy);
-	glVertex2f(x2 + m_offsx, y2 + m_offsy);
+	glColor3ub(color.r(), color.g(), color.b());
+	glVertex2f(x1 + m_offsx + 0.5f, y1 + m_offsy + 0.5f);
+	glVertex2f(x2 + m_offsx + 0.5f, y2 + m_offsy + 0.5f);
 	glEnd();
 }
 
