@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-30 20:29+0000\n"
-"Last-Translator: Christian Groenendijk <Unknown>\n"
+"PO-Revision-Date: 2010-05-31 12:08+0000\n"
+"Last-Translator: PliniusNeo <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-31 03:43+0000\n"
+"X-Launchpad-Export-Date: 2010-06-01 03:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -57,9 +57,9 @@ msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
-"5 Seconden gewacht om geluid te sluiten, er zijn hier problemen dus "
-"widelands sluit. update je geluid stuurprogramma en/of SDL om dit probleem "
-"op te lossen\n"
+"5 Seconden gewacht om het geluid te sluiten, er zijn hier problemen dus "
+"Widelands sluit. Update je geluidkaart stuurprogramma en/of SDL om dit "
+"probleem op te lossen\n"
 
 #: ../../src/wlapplication.cc:1159
 msgid ""
@@ -106,6 +106,17 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays\n"
 msgstr ""
+" --<config-entry-name>=waarde overschrijft een configuratiebestand "
+"instelling\n"
+"\n"
+" --logfile=BESTANDSNAAM log uitvoer naar bestand BESTANDSNAAM in plaats van "
+"\n"
+"                      scherm uitvoer\n"
+"--datadir=DIRNAAM Gebruik gespecificeerde directory voor Widelands\n"
+"                      data bestanden\n"
+"--homedir=DIRNAAM Gebruik gespecificeerde directory voor Widelands "
+"configuratie\n"
+"                      bestanden, opgeslagen spellen en herhalingen\n"
 
 #: ../../src/wlapplication.cc:1300
 msgid "                      Default is ~/.widelands\n"
@@ -128,6 +139,20 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --record=BESTANDSNAAM Sla alle gebeurtenissen op onder de gegeven "
+"bestandsnaam om\n"
+"                      later af te spelen\n"
+" --playback=BESTANDSNAAM Speelt de gegeven bestandsnaam af (zie --record)\n"
+"\n"
+" --coredump=[yes|no] Genereert een core dump op segmentatiefouten in plaats "
+"van\n"
+"                      gebruik te maken van SDL\n"
+"--language=[de_DE|sv_SE|...]\n"
+"                      De lokale gebruiken.\n"
+" --localedir=DIRNAAM gebruik DIRNAAM als locatie voor de lokale\n"
+" --remove_replays=[...]\n"
+"                      Verwijder herhalingen na dit aantal dagen.\n"
+"                      Als dit 0 is worden de herhalingen niet verwijderd.\n"
 
 #: ../../src/wlapplication.cc:1318
 msgid ""
@@ -145,19 +170,19 @@ msgid ""
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
-"Geluidsoptions:\n"
+"Geluidsopties:\n"
 " --nosound Start het spel zonder geluid.\n"
-" --disable_fx Geen geluidseffecten.\n"
-" --disable_music Geen muziek.\n"
+" --disable_fx Schakel geluidseffecten uit.\n"
+" --disable_music Schakel muziek uit.\n"
 "\n"
 " --nozip Sla bestanden niet op als binaire zip archieven.\n"
 "\n"
-" --editor Start direct de Widelands editor.\n"
+" --editor Start meteen de Widelands editor.\n"
 "                      U kunt =BESTANDNAAM toevoegen om direct\n"
 "                      de kaart BESTANDNAAM in de editor te laden.\n"
-" --scenario=BESTANDNAAM  Start direct the map BESTANDNAAM als scenario\n"
+" --scenario=BESTANDNAAM  Start meteen de map BESTANDNAAM als scenario\n"
 "                      kaart.\n"
-" --loadgame=BESTANDNAAM Laad direct het opgeslagen spel BESTANDNAAM.\n"
+" --loadgame=BESTANDNAAM Laad meteen het opgeslagen spel BESTANDNAAM.\n"
 
 #: ../../src/wlapplication.cc:1332
 msgid " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
@@ -200,7 +225,7 @@ msgstr ""
 " --write_HTML=[yes|no]\n"
 "                      Schrijf HTML-hulpbestanden voor ontleedde spel data.\n"
 "\n"
-"Graphic options:\n"
+"Grafische opties:\n"
 " --fullscreen=[yes|no]\n"
 "                      Of het hele beeld gebruikt moet worden voor het\n"
 "                      speel scherm.\n"
@@ -222,7 +247,7 @@ msgid ""
 msgstr ""
 " --opengl=[0|1]\n"
 "                      Activeert renderen met OpenGL\n"
-"                      *PAS OP, WERKT NIET! NIET GEBRUIKEN!*\n"
+"                      *PAS OP, GEVAARLIJK EN DEFECT! NIET GEBRUIKEN!*\n"
 
 #: ../../src/wlapplication.cc:1368
 msgid ""
@@ -273,7 +298,7 @@ msgid ""
 "                      testing)\n"
 "\n"
 msgstr ""
-" --double       Start het spel tweemaal (voor netwerktest op de\n"
+" --double       Start het spel tweemaal (voor netwerktests op de\n"
 "                  locale computer)\n"
 "\n"
 
@@ -283,7 +308,7 @@ msgstr " --verbose            Activeer uitgebreide debug berichten\n"
 
 #: ../../src/wlapplication.cc:1397
 msgid " --help               Show this help\n"
-msgstr " --help           Toon deze help\n"
+msgstr " --help Toon deze hulp\n"
 
 #: ../../src/wlapplication.cc:1401
 msgid ""
@@ -332,15 +357,15 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
-". Voeg deze informatie toe aan je rapport.\n"
+". Voeg deze informatie alsjeblieft toe aan je rapport.\n"
 "\n"
 "Widelands probeert een savegame (bewaard spel) te creëren als er een fout "
-"ontstaat tijdens het spel. Vaak -helaas niet altijd- is het mogelijk om deze "
+"optreedt tijdens het spel. Vaak -helaas niet altijd- is het mogelijk om deze "
 "te laden en ermee verder te spelen.\n"
 
 #: ../../src/wlapplication.cc:1678
 msgid "Connection timeouted"
-msgstr "Verbinding timed out"
+msgstr "Verbinding timed-out"
 
 #: ../../src/wlapplication.cc:1680
 msgid ""
@@ -358,11 +383,11 @@ msgstr "Verbindingsprobleem"
 
 #: ../../src/wlapplication.cc:1704
 msgid "Widelands has not been able to connect to the host."
-msgstr "Widelands kon geen verbinding met de host maken"
+msgstr "Widelands kon geen verbinding maken met de host."
 
 #: ../../src/wlapplication.cc:1750
 msgid "The address of the game server is invalid"
-msgstr "Het adres van de spelserver is niet geldig"
+msgstr "Het adres van de spelserver is ongeldig"
 
 #: ../../src/wlapplication.cc:1855 ../../src/network/nethost.cc:1208
 msgid "Player"
@@ -375,7 +400,7 @@ msgstr "Spel voorbereiden"
 
 #: ../../src/wlapplication.cc:2113
 msgid "End of replay"
-msgstr "Einde herhaling"
+msgstr "Einde van herhaling"
 
 #: ../../src/wlapplication.cc:2115
 msgid ""
@@ -530,7 +555,7 @@ msgstr "Bouwkosten"
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr "%ss bouwplaats"
+msgstr "%s's bouwplaats"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
@@ -539,7 +564,7 @@ msgstr "Verbeteringen"
 #: ../../src/writeHTML.cc:462
 #, c-format
 msgid "%s's enhancement"
-msgstr "%ss uitbreiding"
+msgstr "%s's uitbreiding"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
@@ -547,7 +572,7 @@ msgstr "Werkertypes"
 
 #: ../../src/writeHTML.cc:522
 msgid "Needed<br/>experience"
-msgstr ""
+msgstr "Benodigde<br/>ervaring"
 
 #: ../../src/writeHTML.cc:524
 msgid "Becomes"
@@ -566,6 +591,7 @@ msgstr "Gevecht eigenschappen"
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Hitpoints is %u plus %u voor elk niveau boven 0 (het maximale niveau is %u)."
 
 #: ../../src/writeHTML.cc:600
 #, c-format
@@ -596,7 +622,7 @@ msgstr "%ss creatie"
 
 #: ../../src/writeHTML.cc:688
 msgid "Spawns in warehouses."
-msgstr "Verschijnt in Warenhuis"
+msgstr "Verschijnt in Warenhuizen"
 
 #: ../../src/writeHTML.cc:697
 #, c-format
@@ -623,7 +649,7 @@ msgstr "ras"
 
 #: ../../src/writeHTML.cc:755
 msgid "createitem"
-msgstr "creeeritem"
+msgstr "Creëeronderdeel"
 
 #: ../../src/writeHTML.cc:756
 msgid "setdescription"
@@ -963,7 +989,7 @@ msgstr "ware_types.xhtml"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:203
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr "onbekend/niet ondersteinde versie %u"
+msgstr "onbekend/onafgehandelde versie %u"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
@@ -974,7 +1000,7 @@ msgstr "roep economie evenwicht: %s"
 #: ../../src/economy/economy_data_packet.cc:82
 #, c-format
 msgid "duplicated entry for %s"
-msgstr "dubbele invoer voor %s"
+msgstr "gedupliceerde invoer voor %s"
 
 #: ../../src/economy/economy_data_packet.cc:95
 #, c-format
@@ -1102,7 +1128,7 @@ msgstr "interactieve speler: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:67
 msgid "there is no flag at the specified location"
-msgstr "er is geen vlag op het plaats"
+msgstr "er is geen vlag op de aangegeven plaats"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:69
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
@@ -1118,7 +1144,7 @@ msgstr "economie: %s"
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr "speler nummer (%i) is niet tussen (1 .. %u)"
+msgstr "speler nummer (%i) is buiten bereik (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:130
 #, c-format
@@ -1180,7 +1206,7 @@ msgstr "frame nummer"
 #: ../../src/graphic/graphic.cc:849
 #, c-format
 msgid "Loading animations: %d%% complete"
-msgstr "Animaties laden: %d%% compleet"
+msgstr "Animaties laden: %d%% voltooid"
 
 #: ../../src/logic/battle.cc:178
 #, c-format
@@ -2250,6 +2276,8 @@ msgstr ""
 msgid ""
 "duration %u is too large; causes numeric overflow when added to sent time %u"
 msgstr ""
+"duur %u is te groot; veroorzaakt numerieke overloop als ze aan verstuurde "
+"tijd %u wordt toegevoegd"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:117
 #, c-format
@@ -3760,7 +3788,7 @@ msgstr "Werker"
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
-msgstr ""
+msgstr "Erv"
 
 #: ../../src/wui/productionsitewindow.cc:73
 msgid "Next Level"
@@ -3852,7 +3880,7 @@ msgstr "Herstel doelhoeveelheid naar standaardwaarde"
 
 #: ../../src/wui/transport_ui.cc:492
 msgid "Ware type target quantities"
-msgstr ""
+msgstr "Doelhoeveelheden van goederentype"
 
 #: ../../src/wui/transport_ui.cc:497
 msgid "Worker type target quantities"
@@ -4228,6 +4256,8 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
+"Kan speler niet verwijderen. Er wordt ergens naar hem verwezen. Verwijder "
+"alle gebouwen en bobs die van deze speler afhangen en probeer het opnieuw."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"

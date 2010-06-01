@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-05-27 13:37+0000\n"
+"PO-Revision-Date: 2010-05-31 20:43+0000\n"
 "Last-Translator: kraileth <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-28 03:36+0000\n"
+"X-Launchpad-Export-Date: 2010-06-01 03:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -381,6 +381,9 @@ msgid ""
 "for\n"
 "a level 0 evade barbarian and increases in steps of 15% for each level."
 msgstr ""
+"Ausweichen beschreibt die Wahrscheinlichkeit, dass ein Soldat einem Angriff "
+"ausweichen kann. Sie liegt bei 25% für einen Stufe 0 Barbaren und erhöht "
+"sich um 15% für jede Stufe."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid "Evade:"
@@ -388,12 +391,13 @@ msgstr "Ausweichen:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
-msgstr ""
+msgstr "Alles kann auf einem grünen Haussymbol gebaut werden."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:262
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
 msgstr ""
+"Alles außer großen Gebäuden kann auf einem gelben Haussymbol gebaut werden."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:294
 msgid ""
@@ -402,6 +406,10 @@ msgid ""
 "construction site. You can enter road building mode for any flag by\n"
 "left-clicking on a flag and selecting"
 msgstr ""
+"Ausgezeichnet! Direkt nachdem Du ein Gebäude platziert hast, befindest Du "
+"Dich im Straßenbaumodus. Die neue Straße wird bei der Flagge vor Deiner "
+"neuerstellten Baustelle beginnen. Du kannst bei jeder Flagge in den "
+"Straßenbaumodus schalten, indem Du sie linksklickst und auswählst:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:429
 msgid ""
@@ -412,6 +420,12 @@ msgid ""
 "pressing\n"
 "the button below, then right click into the messages window to close it."
 msgstr ""
+"Wunderbar. Übrigens: Fenster zu schließen ist in Widelands ganz einfach - "
+"ein Rechtsklick darauf genügt. Dies funktioniert bei allen Fenstern mit "
+"Ausnahme von Texten, welche die Spielhandlung betreffen, wie dieses. "
+"Versuche es ruhig. Schließe zuerst dieses Fenster durch Betätigen des "
+"Knopfes unterhalb des Textes und klicke dann mit rechts ins "
+"Nachrichtenfenster, um es zu schließen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:227
 msgid ""
@@ -420,6 +434,11 @@ msgid ""
 "right-click-and-hold anywhere on the map, then drag the mouse and instead\n"
 "of the cursor, the view will be moved. Try it."
 msgstr ""
+"Großartig. Es gibt allerdings auch eine schnellere Methode, um den "
+"Bildausschnitt zu bewegen, indem man die Maus verwendet: Klicke einfach "
+"irgendwo auf der Karte mit rechts und halte die Maustaste gedrückt, dann "
+"bewege die Maus anstatt der Pfeiltasten, und das angezeigte Gebiet wird "
+"bewegt. Probier's aus."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:191
 msgid ""
@@ -428,6 +447,9 @@ msgid ""
 "to\n"
 "the raw stone."
 msgstr ""
+"Super. Die Holzfällerhütte steht. Ein Holzfäller wird dort nun einziehen und "
+"damit beginnen, Bäume zu fällen, so dass unsere Zufuhr an Stämmen erstmal "
+"gesichert ist. Nun zum einfachen Stein."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:477
 msgid ""
@@ -440,6 +462,13 @@ msgid ""
 "also\n"
 "vary in their vision range: buildings with a tower see farther than others."
 msgstr ""
+"Gebietsvergrößerung läuft einfach so ab, dass ein Militärgebäude am Rand "
+"Deines Gebietes erbaut wird. Die Barbaren haben ein paar verschiedene "
+"Militärgebäude: Wachposten, Barrieren, Wachtürme, Bastionen, Festungen und "
+"Zitadellen. Je größer das Gebäude, desto teurer ist sein Bau, desto mehr "
+"Land um es herum erobert es und desto mehr Soldaten können dort stationiert "
+"werden. Die Gebäude haben außerdem eine unterschiedliche Sichtweite: Gebäude "
+"mit Türmen können weiter sehen als andere."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:470
 msgid "Expanding your territory!"
@@ -462,6 +491,16 @@ msgid ""
 "then select\n"
 "the tab - and finally I'll choose the building."
 msgstr ""
+"Zuerst klicke ich mit der linken Maustaste auf das Symbol, wo ich die "
+"Holzfällerhütte gebaut haben will. Ein Fenster wird erscheinen, in dem ich "
+"das zu errichtende Gebäude auswählen kann. Da ich auf ein gelbes Haussymbol "
+"klicken werde - was bedeutet, das auf diesem Feld mittlere oder kleine "
+"Gebäude stehen könnten - werden mir alle mittleren Gebäude angezeigt, die "
+"ich bauen kann. Die Holzfällerhütte ist jedoch ein kleines Gebäude, so dass "
+"ich den Reiter der kleinen Gebäude anklicke. Dann werde ich die "
+"Holzfällerhütte auswählen. Klicke nun auf \"OK\" und sieh mir zu. Ich werde "
+"es ganz langsam tun: Haussymbol anklicken, den Reiter wählen und schließlich "
+"das Gebäude auswählen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:498
 msgid ""
@@ -469,6 +508,10 @@ msgid ""
 "in mountains. Conquer some area on the mountains to the south-west of your\n"
 "headquarters by building some military buildings close to your border."
 msgstr ""
+"Für eine ausgewachsene Wirtschaft benötigen wir Kohle, Eisen und Gold. Diese "
+"können in den Bergen gefunden werden. Erobere etwas Land auf den Bergen "
+"südwestlich Deines Hauptquartiers indem Du ein Militärgebäude nahe bei "
+"Deiner Grenze errichtest."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:200
 msgid "Getting a quarry up."
@@ -476,7 +519,7 @@ msgstr "Einen Steinbruch aufbauen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:240
 msgid "Great. Now about that quarry..."
-msgstr ""
+msgstr "Prima. Nun wegen des Steinbruchs..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:391
 msgid ""
@@ -486,10 +529,14 @@ msgid ""
 "your\n"
 "tribe, won or lost military buildings, resources found..."
 msgstr ""
+"Hallo, ich bin's wieder! Diesmal habe ich Dir eine Nachricht gesandt. "
+"Nachrichten werden Dir von Widelands geschickt, um Dich über wichtige "
+"Ereignisse zu informieren: Erschöpfte Minen, Angriffe auf Deinen Stamm, "
+"eroberte oder verlorene Militärgebäude, entdeckte Ressourcen..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:620
 msgid "Hitpoints:"
-msgstr ""
+msgstr "Lebenspunkte:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:248
 msgid "How to build a quarry"
@@ -504,6 +551,11 @@ msgid ""
 "everything out for yourself. Otherwise, please bear with me, I am not the\n"
 "youngest and quickest anymore."
 msgstr ""
+"Tut mir leid, ich muss das wieder abreißen. Wir könnten den Platz hier "
+"später gebrauchen. Falls ich zu langsam für Dich bin, willst Du vielleicht "
+"einfach das richtige Spiel spielen und alles selbst herausfinden. Ansonsten "
+"habe bitte etwas Geduld, ich bin nicht mehr der Jüngste und Schnellste, "
+"musst Du wissen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:676
 msgid ""
@@ -516,6 +568,13 @@ msgid ""
 "the defenders will come from all nearby military buildings of the enemy and\n"
 "intercept your forces."
 msgstr ""
+"Ich habe einen Übungspartner für Dich erschaffen: Es ist ein Imperiumsstamm "
+"in der Nähe Deiner Zitadelle. Um seine Gebäude anzugreifen, klicke auf die "
+"Tür Deines Zielgebäudes, wähle die Anzahl der Soldaten, die angreifen sollen "
+"und klicke auf den Angriffsknopf. Deine Soldaten werden aus allen "
+"Militärgebäuden in der Nähe kommen. Gleichsam werden die Verteidiger von "
+"allen Militärgebäuden des Gegners, die im Umfeld des angegriffenen Gebäudes "
+"liegen, kommen, um Deine Truppen abzufangen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:646
 msgid ""
