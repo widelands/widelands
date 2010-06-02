@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-31 12:08+0000\n"
+"PO-Revision-Date: 2010-06-01 11:40+0000\n"
 "Last-Translator: PliniusNeo <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-06-01 03:37+0000\n"
+"X-Launchpad-Export-Date: 2010-06-02 03:30+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -35,6 +35,19 @@ msgid ""
 "object, such as a farm field, is placed on the map while the worker is out "
 "working. (bug #1796611) (The game has been paused.)"
 msgstr ""
+"De engine is een logische fout tegengekomen. De %s #%u van speler %u (een %s "
+"dragend) kon geen weg terug vinden van (%i, %i) (met %s onverplaatsbaar) "
+"naar de basis vlag op (%i, %i) van zijn %s op (%i, %i). De %s zal dakloos "
+"worden gemaakt en waarschijnlijk sterven, tenzij een of ander object spoedig "
+"verplaatst wordt en de %s een weg vindt naar een vlag die met een magazijn "
+"verbonden is. Het %s zal meteen een nieuwe werker aanvragen. Helaas kan dit "
+"herhaaldelijk plaatsvinden en de voorraad werkers (gereedschappen) leeg "
+"laten lopen. Er is nog geen oplossing voor dit probleem geïmplementeerd. Het "
+"zou het veiligst zijn om het %s te vernietigen en het niet opnieuw op te "
+"bouwen op die locatie, noch een ander gebouw dat werkers de kaart op stuurt. "
+"Dit probleem vindt vaak plaats in de buurt van ondoordringbaar terrein, "
+"zoals water, als een object, zoals een akker, op de map geplaatst wordt als "
+"de werker buiten aan het werken is. (bug #1796611) (Het spel is gepauzeerd.)"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -457,7 +470,7 @@ msgstr "Grootte"
 
 #: ../../src/writeHTML.cc:283 ../../src/writeHTML.cc:518
 msgid "Buildable"
-msgstr "Kan gebouwd worden"
+msgstr "bebouwbare"
 
 #: ../../src/writeHTML.cc:285
 msgid "Enhanced"
@@ -627,7 +640,7 @@ msgstr "Verschijnt in Warenhuizen"
 #: ../../src/writeHTML.cc:697
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr ""
+msgstr "Heeft %u keer ervaring nodig van werken om te worden"
 
 #: ../../src/writeHTML.cc:705
 #, c-format
@@ -689,7 +702,7 @@ msgstr "plant"
 
 #: ../../src/writeHTML.cc:765
 msgid "create_bob"
-msgstr "creeer_bob"
+msgstr "creëer_bob"
 
 #: ../../src/writeHTML.cc:766
 msgid "removeobject"
@@ -804,7 +817,7 @@ msgstr "heeft"
 
 #: ../../src/writeHTML.cc:1022
 msgid "workers of this site"
-msgstr "arbeiders van deze plaats"
+msgstr "werkers van deze plaats"
 
 #: ../../src/writeHTML.cc:1024
 msgid "workers"
@@ -841,7 +854,7 @@ msgstr "Documentatie voor programma commando arbeider"
 
 #: ../../src/writeHTML.cc:1106
 msgid "worker"
-msgstr "arbeider"
+msgstr "werker"
 
 #: ../../src/writeHTML.cc:1117
 #, c-format
@@ -1256,7 +1269,7 @@ msgstr "verwachte tijd (%i) < speeltijd (%i)"
 #: ../../src/logic/cmd_queue.cc:178
 #, c-format
 msgid "game logic: %s"
-msgstr "spel logika: %s"
+msgstr "spellogica: %s"
 
 #: ../../src/logic/constructionsite.cc:176
 #, c-format
@@ -1266,7 +1279,7 @@ msgstr "%u%% gebouwd"
 #: ../../src/logic/critter_bob.cc:385
 #, c-format
 msgid "loading critter: %s"
-msgstr ""
+msgstr "beest aan het laden: %s"
 
 #: ../../src/logic/game.cc:229
 msgid "Preloading a map"
@@ -1395,7 +1408,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:927
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
-msgstr "gegeven bereik \"%s\" voor doeltype (moet zijn \"world\")"
+msgstr "bereik \"%s\" gegeven voor doeltype (moet zijn \"world\")"
 
 #: ../../src/logic/immovable.cc:787 ../../src/logic/immovable.cc:942
 #, c-format
@@ -1640,8 +1653,8 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
-"verkeerde volgorde van waar typen binnen groep: waar type %s verschijnt na "
-"waar type %s (repareer de volgorde!)"
+"verkeerde volgorde van goederen typen binnen groep: waar type %s verschijnt "
+"na goederen type %s (repareer de volgorde!)"
 
 #: ../../src/logic/production_program.cc:96
 #: ../../src/logic/production_program.cc:819
@@ -1656,7 +1669,7 @@ msgid ""
 "type(s) is only %u, so the group can never be fulfilled by the site"
 msgstr ""
 "het groeps aantal is %u maar de (totale) invoer opslag capaciteit van de "
-"gespecificeerde waren type(s) is maar %u, dus de groep kan nooit door de "
+"gespecificeerde goederen type(s) is maar %u, dus de groep kan nooit door de "
 "locatie voldaan worden"
 
 #: ../../src/logic/production_program.cc:131
@@ -1751,11 +1764,11 @@ msgstr "overslaan"
 
 #: ../../src/logic/production_program.cc:486
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"mislukking\"|\"voltooiïng\"|\"overslaan\"}"
 
 #: ../../src/logic/production_program.cc:500
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{\"misluk\"|\"voltooi\"|\"sla over\"|\"herhaal\"}"
 
 #: ../../src/logic/production_program.cc:602
 #, c-format
@@ -1848,7 +1861,7 @@ msgstr "verwachtte niveau > %u maar vond \"%s\""
 
 #: ../../src/logic/productionsite.cc:70
 msgid "this ware type has already been declared as an output"
-msgstr "dit type waren is al aangegeven als een uitvoer"
+msgstr "dit type goederen is al aangegeven als een uitvoer"
 
 #: ../../src/logic/productionsite.cc:76
 msgid "this worker type has already been declared as an output"
@@ -1889,7 +1902,7 @@ msgstr "verwachtte positieve integer >= %u maar vond \"%s\""
 
 #: ../../src/logic/soldier.cc:183
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"anim_naam[,volgende_anim,...]\""
 
 #: ../../src/logic/soldier.cc:1183
 #, c-format
@@ -1905,6 +1918,12 @@ msgid ""
 "not be executed). Strange things may happen. No solution for this problem "
 "has been implemented yet. (bug #1951113) (The game has been paused.)"
 msgstr ""
+"De engine is een logische fout tegengekomen. De %s #%u van speler %u kon "
+"geen weg vinden van (%i, %i) (met %s onverplaatsbaar) naar de vijand (%s #%u "
+"van speler %u) op (%i, %i) (met %s onverplaatsbaar). De %s zal nu deserteren "
+"(maar zal niet geëxecuteerd worden). Vreemde dingen kunnen gebeuren. Er is "
+"nog geen oplossing voor dit probleem geïmplementeerd. (bug #1951113) (Het "
+"spel is gepauzeerd.)"
 
 #: ../../src/logic/soldier.cc:1355 ../../src/logic/soldier.cc:1360
 #: ../../src/logic/worker.cc:1638
@@ -1926,12 +1945,12 @@ msgstr "Niet werkend"
 
 #: ../../src/logic/tribe.cc:122
 msgid "constructionsite type \"constructionsite\" is missing"
-msgstr ""
+msgstr "bouwplaats type \"constructionsite\" mist"
 
 #: ../../src/logic/tribe.cc:200 ../../src/logic/tribe.cc:221
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr "%s is dubbel"
+msgstr "\"%s\" is dubbel"
 
 #: ../../src/logic/tribe.cc:209 ../../src/logic/tribe.cc:230
 msgid "none found"
@@ -1967,7 +1986,7 @@ msgid ""
 "compatible with world"
 msgstr ""
 "de grondstof %s moet gedolven worden, die niet in deze wereld aanwezig is; "
-"de stam is niet compatibel met de wereld"
+"de stam is niet geschikt voor deze wereld"
 
 #: ../../src/logic/worker.cc:209
 #, c-format
@@ -1976,7 +1995,7 @@ msgid ""
 "compatible with world"
 msgstr ""
 "zou hulpbron type %s moeten fokken, die niet bestaat in de wereld; de stam "
-"is niet compatibel met de wereld"
+"is niet geschikt voor deze wereld"
 
 #: ../../src/logic/worker.cc:605
 msgid "Out of "
@@ -2021,7 +2040,7 @@ msgstr "toegestane typen werkers: %s"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
 msgid "unknown bob type %u"
-msgstr ""
+msgstr "onbekend bob type %u"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
@@ -2031,7 +2050,7 @@ msgstr "stam \"%s\" bestaat niet"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:139
 #, c-format
 msgid "bobs: %s"
-msgstr ""
+msgstr "bobs: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:227
 #, c-format
@@ -2056,12 +2075,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:376
 #, c-format
 msgid "bobdata: %s"
-msgstr ""
+msgstr "bobdata: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:391
 #, c-format
 msgid "critter bob: %s"
-msgstr ""
+msgstr "beest bob: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:486
 #, c-format
@@ -2115,8 +2134,7 @@ msgstr "militaire locatie: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:695
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
-msgstr ""
-"het programma %s was was overgeslagen op tijd %u, maar de tijd is pas %u"
+msgstr "het programma %s was overgeslagen op tijd %u, maar de tijd is pas %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:873
 #, c-format
@@ -2301,7 +2319,7 @@ msgstr "berichten voor speler %u: %s"
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:123
 #, c-format
 msgid "unseen immovable: %s"
-msgstr ""
+msgstr "ongeziene onverplaatsbare: %s"
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
@@ -2350,7 +2368,7 @@ msgstr "voorwerp %u: %s"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:205
 #, c-format
 msgid "waredata: %s"
-msgstr ""
+msgstr "goederendata: %s"
 
 #: ../../src/network/netclient.cc:101
 msgid "Could not establish connection to host"
@@ -2399,7 +2417,7 @@ msgstr "Server gebruikt een andere versie van het protocol."
 
 #: ../../src/network/netclient.cc:680
 msgid "/me 's file failed md5 checksumming."
-msgstr ""
+msgstr "/me 's bestand faalde op de md5 checksum controle"
 
 #: ../../src/network/netclient.cc:739
 msgid "Unexpectedly received LAUNCH command from server."
@@ -2424,7 +2442,7 @@ msgstr "Er ging iets fout: "
 
 #: ../../src/network/netclient.cc:864
 msgid " An automatic savegame will be created."
-msgstr " Een automatische kopie wordt opgeslagen."
+msgstr " Een automatische opgeslagen spel wordt gecreërd."
 
 #: ../../src/network/nethost.cc:342
 msgid "Server has left the game."
@@ -2597,7 +2615,7 @@ msgstr ""
 
 #: ../../src/network/network_ggz.cc:519
 msgid "Please take a look at the notes at:"
-msgstr "Kijk aub. naar de aantekeningen op:"
+msgstr "Kijk alstublieft naar de aantekeningen op:"
 
 #: ../../src/network/network_ggz.cc:658
 msgid " joined the metaserver."
@@ -2628,6 +2646,7 @@ msgstr "Sound_Handler sluitingstijden %i, freq %i, formaat %i, kanaal %i\n"
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"
 msgstr ""
+"PROBLEEM: geluidsapparaat meerdere keren geopend, aan het proberen te sluiten"
 
 #: ../../src/ui_basic/progresswindow.cc:48
 msgid "Preparing..."
@@ -2639,15 +2658,15 @@ msgstr "Verlaag de waarde"
 
 #: ../../src/ui_basic/spinbox.cc:133
 msgid "Decrease the value"
-msgstr "Verhoog de waarde"
+msgstr "Verlaag de waarde"
 
 #: ../../src/ui_basic/spinbox.cc:144
 msgid "Increase the value by 10"
-msgstr "Verlaag de waarde met 10"
+msgstr "Verhoog de waarde met 10"
 
 #: ../../src/ui_basic/spinbox.cc:152
 msgid "Decrease the value by 10"
-msgstr "Verhoog de waarde met 10"
+msgstr "Verlaag de waarde met 10"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
@@ -2816,7 +2835,7 @@ msgstr "Schakel naar positie"
 
 #: ../../src/ui_fsmenu/launchgame.cc:177
 msgid "Lobby:"
-msgstr "Hal:"
+msgstr "wachtkamer"
 
 #: ../../src/ui_fsmenu/launchgame.cc:179
 msgid "Ready"
@@ -2861,6 +2880,8 @@ msgid ""
 "\" for this game, which you do not own. If the transfer of that file does "
 "not start automatically, please add it manually to your filesystem."
 msgstr ""
+"\" geselecteerd, welke niet in uw bezit is. Als de overdracht niet "
+"automatisch start, Voeg deze dan handmatig toe aan uw bestandstssysteem."
 
 #: ../../src/ui_fsmenu/launchgame.cc:380
 msgid "Original:"
@@ -2945,7 +2966,7 @@ msgstr "Versie "
 
 #: ../../src/ui_fsmenu/main.cc:110
 msgid "by the Widelands Development Team"
-msgstr "door het Widelands ontwikkelingsteam"
+msgstr "door het Widelands Ontwikkelingsteam"
 
 #: ../../src/ui_fsmenu/mapselect.cc:57
 msgid "Load Map as scenario: "
@@ -3125,7 +3146,7 @@ msgstr "Gebruik een enkel Detailscherm"
 
 #: ../../src/ui_fsmenu/options.cc:162
 msgid "Start roadbuilding after placing flag"
-msgstr "Begin wegenaanleg na plaatsen vlag"
+msgstr "Start met wegenaanleg na het plaatsen van een vlag"
 
 #: ../../src/ui_fsmenu/options.cc:169
 msgid "Show buildings area preview"
@@ -3227,7 +3248,7 @@ msgstr "Mens"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:39
 msgid "Single Player Menu"
-msgstr "Enige speler menu"
+msgstr "Één speler menu"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:47
 msgid "New Game"
@@ -3259,11 +3280,11 @@ msgstr "Stuur meer soldaten"
 
 #: ../../src/wui/attack_box.cc:216 ../../src/wui/military_box.cc:130
 msgid "Retreat: Never!"
-msgstr "Terugtrekken: nooit!"
+msgstr "Terugtrekken: Nooit!"
 
 #: ../../src/wui/attack_box.cc:235 ../../src/wui/military_box.cc:149
 msgid "Supported damage before retreat"
-msgstr ""
+msgstr "Ontvangen schade voor terugtrekken"
 
 #: ../../src/wui/attack_box.cc:237 ../../src/wui/military_box.cc:151
 msgid "Once injured"
@@ -3292,11 +3313,11 @@ msgstr "Ga naar werkeloze: "
 
 #: ../../src/wui/building_statistics_menu.cc:113
 msgid "Prod"
-msgstr "Prod"
+msgstr "aansporen"
 
 #: ../../src/wui/building_statistics_menu.cc:114
 msgid "Owned"
-msgstr "Bezet door"
+msgstr "eigendom"
 
 #: ../../src/wui/building_statistics_menu.cc:115
 msgid "Build"
@@ -3350,7 +3371,7 @@ msgstr "Vernietig gebouw?"
 
 #: ../../src/wui/encyclopedia_window.cc:70
 msgid "Tribe ware encyclopedia"
-msgstr "Stam warenencyclopedie"
+msgstr "Stam goederen encyclopedie"
 
 #: ../../src/wui/encyclopedia_window.cc:87
 msgid "Consumed ware type(s)"
@@ -3398,7 +3419,7 @@ msgstr "Plaats een vlag"
 
 #: ../../src/wui/fieldaction.cc:438
 msgid "Destroy a road"
-msgstr "Vernietig weg"
+msgstr "Vernietig een weg"
 
 #: ../../src/wui/fieldaction.cc:456
 msgid "Watch field in a separate window"
@@ -3704,7 +3725,7 @@ msgstr "Verlaat herhaling"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
-msgstr ""
+msgstr "Metaserver login"
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
@@ -4392,7 +4413,7 @@ msgstr "geen omschijving gedefinieerd"
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
-msgstr "geen omschrijving"
+msgstr "geen omschr"
 
 #: ../../src/wui/game_message_menu.h:67
 msgid "Select"
