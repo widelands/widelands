@@ -303,6 +303,11 @@ bool NetClient::canChangePlayerTribe(uint8_t number)
 	return number == d->playernum;
 }
 
+bool NetClient::canChangePlayerTeam(uint8_t number)
+{
+	return number == d->playernum;
+}
+
 bool NetClient::canChangePlayerInit(uint8_t)
 {
 	return false;
@@ -341,6 +346,17 @@ void NetClient::setPlayerTribe(uint8_t number, std::string const & tribe)
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_CHANGETRIBE);
 	s.String(tribe);
+	s.send(d->sock);
+}
+
+void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
+{
+	if (number != d->playernum)
+		return;
+
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_CHANGETEAM);
+	s.Unsigned8(team);
 	s.send(d->sock);
 }
 
@@ -443,6 +459,7 @@ void NetClient::recvOnePlayer
 	player.initialization_index = packet.Unsigned8();
 	player.ai = packet.String();
 	player.ready = static_cast<bool>(packet.Unsigned8());
+	player.team = packet.Unsigned8();
 
 	if (number == d->playernum)
 		d->localplayername = player.name;
