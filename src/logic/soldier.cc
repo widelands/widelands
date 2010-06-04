@@ -841,7 +841,7 @@ void Soldier::attack_update(Game & game, State & state)
 			(Area<FCoords>
 			 	(game.map().get_fcoords(enemy->base_flag().get_position()), 0),
 			 &soldiers,
-			 FindBobEnemySoldier(*get_owner()));
+			 FindBobEnemySoldier(get_owner()));
 		defenders += soldiers.size();
 	}
 
@@ -1075,7 +1075,7 @@ void Soldier::defense_update(Game & game, State & state)
 			game.map().find_bobs
 				(Area<FCoords>(get_position(), 0),
 				 &soldiers,
-				 FindBobEnemySoldier(*get_owner()));
+				 FindBobEnemySoldier(get_owner()));
 
 			container_iterate_const(std::vector<Bob *>, soldiers, i) {
 				if (upcast(Soldier, soldier, *i.current)) {

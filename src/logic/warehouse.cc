@@ -1291,7 +1291,7 @@ void Warehouse::aggressor(Soldier & enemy)
 		(game.map().find_bobs
 		 	(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
 		 	 0,
-		 	 FindBobEnemySoldier(owner())))
+		 	 FindBobEnemySoldier(&owner())))
 		return;
 
 	Ware_Index const soldier_index = tribe().worker_index("soldier");
