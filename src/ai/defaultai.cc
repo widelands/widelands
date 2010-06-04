@@ -2109,7 +2109,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 	for (uint32_t j = 0; j < immovables.size(); ++j)
 		if (upcast(MilitarySite, bld, immovables[j].object)) {
-			if (bld->owner().player_number() == pn)
+			if (!player->is_hostile(bld->owner()))
 				continue;
 			if (bld->canAttack()) {
 				int32_t ta = player->findAttackSoldiers(bld->base_flag());
@@ -2126,7 +2126,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 				}
 			}
 		} else if (upcast(Warehouse, wh, immovables[j].object)) {
-			if (wh->owner().player_number() == pn)
+			if (!player->is_hostile(wh->owner()))
 				continue;
 			if (wh->canAttack()) {
 				int32_t ta = player->findAttackSoldiers(wh->base_flag());
