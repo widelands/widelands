@@ -202,6 +202,11 @@ bool WarehouseSupply::has_storage() const throw ()
 	return true;
 }
 
+void WarehouseSupply::get_ware_type(bool& isworker, Ware_Index& ware) const
+{
+	throw wexception("WarehouseSupply::get_ware_type: calling this is nonsensical");
+}
+
 void WarehouseSupply::send_to_storage(Game &, Warehouse* wh)
 {
 	throw wexception("WarehouseSupply::send_to_storage: should never be called");
@@ -314,6 +319,8 @@ Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
 	m_next_worker_without_cost_spawn =
 		new uint32_t[nr_worker_types_without_cost];
 	SET_WORKER_WITHOUT_COST_SPAWNS(nr_worker_types_without_cost, Never());
+
+	m_next_stock_remove_act = 0;
 }
 
 
@@ -479,6 +486,9 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	m_supply->set_nrwares  (nr_wares);
 	m_supply->set_nrworkers(nr_workers);
 
+	m_ware_policy.resize(nr_wares.value(), SP_Normal);
+	m_worker_policy.resize(nr_workers.value(), SP_Normal);
+
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
 	// almost always going to be a carrier inside, that shouldn't hurt).
@@ -510,6 +520,10 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	m_next_military_act =
 		schedule_act
 			(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
+
+	m_next_stock_remove_act =
+		schedule_act
+			(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
 
 	if (uint32_t const conquer_radius = get_conquers())
 		ref_cast<Game, Editor_Game_Base>(egbase).conquer_area
@@ -639,6 +653,12 @@ void Warehouse::act(Game & game, uint32_t const data)
 			}
 		}
 		m_next_military_act = schedule_act(game, 1000);
+	}
+
+	if (static_cast<int32_t>(m_next_stock_remove_act - gametime) <= 0) {
+		check_remove_stock(game);
+
+		m_next_stock_remove_act = schedule_act(game, 4000);
 	}
 
 	// Update planned workers; this is to update the request amounts and check
@@ -1311,5 +1331,65 @@ void Warehouse::PlannedWorkers::cleanup()
 		requests.pop_back();
 	}
 }
+
+Warehouse::StockPolicy Warehouse::get_ware_policy(Ware_Index ware) const
+{
+	assert(ware.value() < m_ware_policy.size());
+	return m_ware_policy[ware.value()];
+}
+
+Warehouse::StockPolicy Warehouse::get_worker_policy(Ware_Index ware) const
+{
+	assert(ware.value() < m_worker_policy.size());
+	return m_worker_policy[ware.value()];
+}
+
+Warehouse::StockPolicy Warehouse::get_stock_policy(bool isworker, Ware_Index ware) const
+{
+	if (isworker)
+		return get_worker_policy(ware);
+	else
+		return get_ware_policy(ware);
+}
+
+
+void Warehouse::set_ware_policy(Ware_Index ware, Warehouse::StockPolicy policy)
+{
+	assert(ware.value() < m_ware_policy.size());
+	m_ware_policy[ware.value()] = policy;
+}
+
+void Warehouse::set_worker_policy(Ware_Index ware, Warehouse::StockPolicy policy)
+{
+	assert(ware.value() < m_worker_policy.size());
+	m_worker_policy[ware.value()] = policy;
+}
+
+/**
+ * Check if there is are remaining wares with stock policy \ref SP_Remove,
+ * and remove one of them if appropriate.
+ */
+void Warehouse::check_remove_stock(Game & game)
+{
+	if (base_flag().current_items() < base_flag().total_capacity() / 2) {
+		for (Ware_Index ware = Ware_Index::First(); ware.value() < m_ware_policy.size(); ++ware) {
+			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
+				continue;
+
+			launch_item(game, ware);
+			break;
+		}
+	}
+
+	for (Ware_Index widx = Ware_Index::First(); widx.value() < m_worker_policy.size(); ++widx) {
+		if (get_worker_policy(widx) != SP_Remove || !get_workers().stock(widx))
+			continue;
+
+		Worker & worker = launch_worker(game, widx, Requirements());
+		worker.start_task_leavebuilding(game, true);
+		break;
+	}
+}
+
 
 }

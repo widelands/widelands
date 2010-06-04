@@ -145,7 +145,7 @@ void MilitaryBox::init() {
 				 m_pl->tribe().get_military_data().get_min_retreat(),
 				 m_pl->tribe().get_military_data().get_max_retreat(),
 				 m_pl->get_retreat_percentage(),
-				 "slider.png",
+				 "caret.png",
 				 _("Supported damage before retreat"));
 		m_slider_retreat->changed.set(this, &MilitaryBox::update);
 		add_text(linebox, _("Once injured"));

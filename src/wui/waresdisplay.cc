@@ -58,18 +58,10 @@ bool WaresDisplay::handle_mousemove
 {
 	assert(m_warelists.size());
 
-	Widelands::Ware_Index const index =
-		x < 0 or y < 0 ?
-		Widelands::Ware_Index::Null()
-		:
-		Widelands::Ware_Index
-			(static_cast<Widelands::Ware_Index::value_t>
-			 	(y / (WARE_MENU_PIC_HEIGHT + 8 + 3) * WaresPerRow
-			 	 +
-			 	 x / (WARE_MENU_PIC_WIDTH + 4)));
+	Widelands::Ware_Index const index = ware_at_point(x, y);
 
 	m_curware.set_text
-		(index < m_warelists[0]->get_nrwareids() ?
+		(index ?
 		 (m_type == WORKER ?
 		  m_tribe.get_worker_descr(index)->descname()
 		  :
@@ -79,6 +71,29 @@ bool WaresDisplay::handle_mousemove
 		 "");
 	return true;
 }
+
+/**
+ * Returns the index of the ware under the given coordinates, or WareIndex::Null()
+ * if the given point is outside the range.
+ */
+Widelands::Ware_Index WaresDisplay::ware_at_point(int32_t x, int32_t y) const
+{
+	if (x < 0 || y < 0)
+		return Widelands::Ware_Index::Null();
+
+	Widelands::Ware_Index const index =
+		Widelands::Ware_Index
+			(static_cast<Widelands::Ware_Index::value_t>
+			 	(y / (WARE_MENU_PIC_HEIGHT + 8 + 3) * WaresPerRow
+			 	 +
+			 	 x / (WARE_MENU_PIC_WIDTH + 4)));
+
+	if (index < m_warelists[0]->get_nrwareids())
+		return index;
+
+	return Widelands::Ware_Index::Null();
+}
+
 
 /*
 ===============
