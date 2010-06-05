@@ -109,12 +109,17 @@ struct FindBobAttribute : public FindBob {
 	uint32_t m_attrib;
 	virtual ~FindBobAttribute() {}  // make gcc shut up
 };
+
+/**
+ * Find soldiers which are hostile to the given player (or all soldiers
+ * if player is 0).
+ */
 struct FindBobEnemySoldier : public FindBob {
-	FindBobEnemySoldier(Player & _player) : player(_player) {}
+	FindBobEnemySoldier(Player * _player) : player(_player) {}
 
 	virtual bool accept(Bob *) const;
 
-	Player & player;
+	Player * player;
 };
 
 

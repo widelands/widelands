@@ -54,6 +54,7 @@ private:
 	void toggle_playertype();
 	void toggle_playertribe();
 	void toggle_playerinit();
+	void toggle_playerteam();
 
 	PlayerDescriptionGroupImpl * d;
 	std::map<std::string,std::string> m_tribenames;
