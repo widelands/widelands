@@ -185,8 +185,8 @@ private:
 	void write_tablelist();
 	void write_userlist();
 
-	int data_is_pending(int fd);
-
+	int data_is_pending(int fd) const;
+	int wait_for_ggzmod_data(int modfd, long timeout_sec, long timeout_usec) const;
 	bool use_ggz;
 	int32_t m_fd;
 	int32_t channelfd;

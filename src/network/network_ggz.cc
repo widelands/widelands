@@ -26,7 +26,7 @@
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
-
+#include "container_iterate.h"
 #include <cstring>
 
 static NetGGZ    * ggzobj    = 0;
@@ -76,11 +76,6 @@ bool NetGGZ::used()
 
 
 /// connects to the metaserver
-///
-/// \note The FD_SET macro from glibc uses old-style cast. We can not fix this
-/// ourselves, so we temporarily turn the error into a warning. It is turned
-/// back into an error after this function.
-#pragma GCC diagnostic warning "-Wold-style-cast"
 bool NetGGZ::connect()
 {
 	if (!used())
@@ -109,20 +104,16 @@ bool NetGGZ::connect()
 
 	int32_t const fd = ggzmod_get_fd(mod);
 	log("GGZ ## connection fd %i\n", fd);
-	struct timeval timeout;
-	timeout.tv_sec = 0;
-	timeout.tv_usec = 999 * 1000;
-	fd_set fdset;
-	FD_ZERO(&fdset);
-	FD_SET(fd, &fdset);
 	while (ggzmod_get_state(mod) != GGZMOD_STATE_PLAYING) {
-		// just to prevent busy looping. 
-		// TODO: mod fd may not remain constant during processing in linux.
-		select(fd + 1, &fdset, 0, 0, &timeout);
+		// Prevent busy looping by waiting for data, abort connect if select fails
+		if (wait_for_ggzmod_data(ggzmod_get_fd(mod), 1,0) < 0)
+		{
+			log("GGZ ## select failed during connect.\n");
+			return false;
+		}
 		// make sure all incoming data is processed before continuing
 		while (data_is_pending(ggzmod_get_fd(mod)))
 			if (ggzmod_dispatch(mod) < 0) break;
-		//log("GGZ ## timeout!\n");
 		if (usedcore())
 			datacore();
 	}
@@ -133,7 +124,6 @@ bool NetGGZ::connect()
 
 	return true;
 }
-#pragma GCC diagnostic error "-Wold-style-cast"
 
 
 /// handles the events of the ggzmod server
@@ -391,7 +381,7 @@ void NetGGZ::data()
 /// ourselves, so we temporarily turn the error into a warning. It is turned
 /// back into an error after this function.
 #pragma GCC diagnostic warning "-Wold-style-cast"
-int NetGGZ::data_is_pending(int fd)
+int NetGGZ::data_is_pending(int fd) const
 {
 	if (fd >= 0) {
 		fd_set read_fd_set;
@@ -411,6 +401,53 @@ int NetGGZ::data_is_pending(int fd)
 	}
 
 	return 0;
+}
+#pragma GCC diagnostic error "-Wold-style-cast"
+
+
+/// Check for incoming data during connecting to meta server.
+/// Check for modfd given as argument and all sockets that are used in 
+/// datacore.
+/// Fdset will be reinitialized on every round because modfd may change during 
+/// processing.
+/// \note The FD_SET macro from glibc uses old-style cast. We can not fix this
+/// ourselves, so we temporarily turn the error into a warning. It is turned
+/// back into an error after this function.
+#pragma GCC diagnostic warning "-Wold-style-cast"
+int NetGGZ::wait_for_ggzmod_data(int modfd, long timeout_sec, long timeout_usec) const
+{
+
+	fd_set read_fd_set;
+	int maxfd = 0;
+	int result = 0;
+	struct timeval tv;
+
+	FD_ZERO(&read_fd_set);
+
+	tv.tv_sec = timeout_sec;
+	tv.tv_usec = timeout_usec;
+
+	std::vector<int> fdlist;
+
+	if (ggzserver)
+	{
+		fdlist.push_back(ggzcore_server_get_fd(ggzserver));
+		fdlist.push_back(ggzcore_server_get_channel(ggzserver));
+	}
+	fdlist.push_back(gamefd);
+	fdlist.push_back(modfd);
+
+	container_iterate_const(std::vector<int>, fdlist, it)
+	{
+		if (*it< 0) continue;
+		FD_SET(*it, &read_fd_set);
+		if (*it>maxfd) maxfd = *it;
+	}
+
+	if (maxfd>0)
+		result = select(maxfd+1, &read_fd_set, NULL, NULL, &tv);
+
+	return result;
 }
 #pragma GCC diagnostic error "-Wold-style-cast"
 
