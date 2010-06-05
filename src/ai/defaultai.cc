@@ -474,8 +474,9 @@ void DefaultAI::update_buildable_field
 	(BuildableField & field, uint16_t range, bool military)
 {
 	// look if there is any unowned land nearby
-	FindNodeUnowned find_unowned(player_number());
 	Map & map = game().map();
+	FindNodeUnowned find_unowned(player, game());
+	Player_Number const pn = player->player_number();
 
 	field.unowned_land_nearby =
 		map.find_fields(Area<FCoords>(field.coords, range), 0, find_unowned);
@@ -528,8 +529,11 @@ void DefaultAI::update_buildable_field
 			if (dynamic_cast<const Flag *>(&base_immovable))
 				field.reachable = true;
 			if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
-				if (player_immovable->owner().player_number() != player_number()) {
-					field.enemy_nearby = true;
+				// TODO  Only continue; if this is an opposing site
+				// TODO  allied sites should be counted for military influence
+				if (player_immovable->owner().player_number() != pn) {
+					if (player->is_hostile(player_immovable->owner()))
+						field.enemy_nearby = true;
 					continue;
 				}
 
@@ -1687,13 +1691,12 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 	// Check next militarysite
 	bool changed = false;
 	Map & map = game().map();
-	uint16_t const pn = player_number();
 	MilitarySite * ms = militarysites.front().site;
 	uint32_t const vision = ms->vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
 
 	// look if there is any enemy land nearby
-	FindNodeUnowned find_unowned(pn, true);
+	FindNodeUnowned find_unowned(player, game(), true);
 
 	if (map.find_fields(Area<FCoords>(f, vision), 0, find_unowned) == 0) {
 		// If no enemy in sight - decrease the number of stationed soldiers
@@ -2097,7 +2100,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	FCoords f = map.get_fcoords(ms->get_position());
 
 	Building * target = ms; // dummy initialisation to silence the compiler
-	int32_t   chance    = 0;
+	int32_t    chance    = 0;
 	uint32_t   attackers = 0;
 	uint8_t    retreat   = ms->owner().get_retreat_percentage();
 
