@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-05-31 20:43+0000\n"
-"Last-Translator: kraileth <Unknown>\n"
+"PO-Revision-Date: 2010-06-04 16:11+0000\n"
+"Last-Translator: FetteNase <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-01 03:37+0000\n"
+"X-Launchpad-Export-Date: 2010-06-05 03:30+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -583,6 +583,9 @@ msgid ""
 "is\n"
 "an even bigger building: the citadel."
 msgstr ""
+"Ich werde bald einen Feind für dich erstellen, aber sei sicher, dass du\n"
+"vorbereitet bist. Diese Festung ist stark und nimmt viel Land ein, aber es \n"
+"gibt ein noch größeres Gebäude: die Zitadelle."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:301
 msgid ""
@@ -616,6 +619,10 @@ msgid ""
 "buildings\n"
 "tab in the window that opens up, then click on the quarry symbol."
 msgstr ""
+"Klick auf ein Haussymbol in der Nähe der Steine. In dem Fenster, das sich \n"
+"dann öffnet, klickst du den Reiter mit den kleinen Gebäuden an und dann auf "
+"\n"
+"das Symbol des Steinbruchs."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:338
 msgid ""
@@ -623,10 +630,15 @@ msgid ""
 "Also try to keep roads as short as possible and always remember to place as\n"
 "many flags as you can on road segments to share the load better."
 msgstr ""
+"Achte beim Straßenbau auf das Gefälle und verwende es zu deinem Nutzen.\n"
+"Versuche auch die Straßen so kurz wie möglich zu halten und setze so viele \n"
+"Flaggen wie möglich auf die Straßen, da die Last so besser verteilt wird."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:88
 msgid "Left-click the \"OK\" button to close this box and then try it."
 msgstr ""
+"Mit der linken Maustaste auf den \"OK\"-Knopf drücken, um das Fenster zu "
+"schließen und probiere es aus."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:371
 msgid ""
@@ -636,6 +648,11 @@ msgid ""
 "the\n"
 "watch tab and then click on the corresponding buttons."
 msgstr ""
+"Lass mich beide für dich aktivieren. Merke dir: \"c\" und \"s\" sind die "
+"Tasten dafür.\n"
+"Alternativ kannst du auf ein Feld ohne Gebäude klicken, den "
+"Beobachtungsreiter \n"
+"öffnen und auf die entsprechenden Knöpfe klicken."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:68
 msgid "Let's dive right in!"
@@ -649,6 +666,10 @@ msgid ""
 "geologist\n"
 "to it. I'll show you how it's done."
 msgstr ""
+"Lass uns nach Ressourcen in dem Gebirge suchen. Als erstes bauen \n"
+"wir eine Straße in das Gebirge und setzen eine Flagge. Dann klicken\n"
+"wir auf die Flagge und rufen einen Geologen herbei. Ich werde dir \n"
+"zeigen wie es geht."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
 msgid ""
@@ -693,7 +714,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
-msgstr ""
+msgstr "Bewege die Ansicht"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:215
 msgid ""
@@ -706,6 +727,15 @@ msgid ""
 "move\n"
 "your mouse around and you'll see the view scroll."
 msgstr ""
+"Moving your view is essential to get a complete overview of your whole\n"
+"Die Ansicht zu bewegen ist wichtig um einen kompletten Überblick über \n"
+"deine Wirtschaft zu bekommen. Es gibt zwei Wege um die Ansicht zu \n"
+"bewegen. Die erste Möglichkeit besteht darin, die Pfeiltasten zu benutzen. \n"
+"Die zweite ist die gebräuchlichere und schnellere: drücke und halte die "
+"rechte \n"
+"Maustaste irgendwo auf der Karte und bewege die Maus herum. Du wirst sehen, "
+"\n"
+"dass sich die Ansicht verschiebt."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
 msgid "Nice and easy does it all the time"
@@ -865,6 +895,8 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember\n"
 "to visit us at"
 msgstr ""
+"Danke, dass du dieses Tutorial gespielt hast. Hab Freude an Widelands \n"
+"und besuche uns unter"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:137
 msgid ""
@@ -1195,7 +1227,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:538
 msgid "a lot of iron"
-msgstr ""
+msgstr "eine Menge an Eisen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
@@ -1241,4 +1273,4 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
-msgstr ""
+msgstr "Wasser"
