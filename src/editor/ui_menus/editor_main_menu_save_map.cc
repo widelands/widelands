@@ -266,7 +266,6 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
  * An Item has been doubleclicked
  */
 void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
-	assert(m_ok_btn->enabled());
 	const char * const name = m_ls->get_selected();
 	if
 		(g_fs->IsDirectory(name)
