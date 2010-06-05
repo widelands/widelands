@@ -1823,6 +1823,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	}
 	virtual bool canChangePlayerTribe(uint8_t) {return !s.scenario;}
 	virtual bool canChangePlayerInit (uint8_t) {return !s.scenario;}
+	virtual bool canChangePlayerTeam(uint8_t) {return !s.scenario;}
 
 	virtual bool canLaunch() {
 		return s.mapname.size() != 0 && s.players.size() >= 1;
@@ -1854,6 +1855,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			char buf[200];
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
 			player.name = buf;
+			player.team = 0;
 			// Set default computerplayer ai type
 			if (player.state == PlayerSettings::stateComputer) {
 				Computer_Player::ImplementationVector const & impls =
@@ -1930,6 +1932,11 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 				return;
 			}
 		assert(false);
+	}
+
+	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) {
+		if (number < s.players.size())
+			s.players[number].team = team;
 	}
 
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {

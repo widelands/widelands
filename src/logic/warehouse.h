@@ -162,6 +162,7 @@ public:
 	void disable_spawn(uint8_t worker_types_without_cost_index);
 
 	// Begin Attackable implementation
+	virtual Player& owner() const {return Building::owner();}
 	virtual bool canAttack();
 	virtual void aggressor(Soldier &);
 	virtual bool attack   (Soldier &);

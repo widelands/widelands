@@ -502,7 +502,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 		(map.find_bobs
 		 	(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
 		 	 0,
-		 	 FindBobEnemySoldier(owner())))
+		 	 FindBobEnemySoldier(&owner())))
 		return;
 
 	// We're dealing with a soldier that we might want to keep busy

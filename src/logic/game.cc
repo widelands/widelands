@@ -315,7 +315,8 @@ void Game::init_newgame
 			(i + 1,
 			 playersettings.initialization_index,
 			 playersettings.tribe,
-			 playersettings.name);
+			 playersettings.name,
+			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
 	}
 
