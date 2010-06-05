@@ -72,26 +72,30 @@ the atlanteans. All tribes have a different economy, strength and weaknesses,
 but the general gameplay is the same for all. We play the barbarians for now.]]
       ) .. p(_
 [[You usually start the game with one headquarters. This is the big building
-with the blue flag in front of it. The headquarters is a ware house that stores
+with the blue flag in front of it. The headquarters is a warehouse that stores
 wares, workers and soldiers. Some wares are needed for building houses, others
 for making other wares. Obviously, the wares in the headquarters will not last
 forever, so you must make sure to reproduce them. The most important wares in
 the early game are the basic build wares: trunks and raw stone. Let's make sure
-that we do not run out of trunks. For this, we need to build a lumberjack.]]
+that we do not run out of trunks. For this, we need a lumberjack and a hut for
+him to stay in.]]
       ) .. p(_
-[[We need to find a nice place for the lumberjack. To make this easier, we
-activate the build help. To do this, either click on the build help button
-at the bottom of the screen which is the fourth one from the left. Or you
-can use the SPACE key to toggle it.]]
+[[We need to find a nice place for the lumberjack's hut. To make this easier,
+we can activate the build help. There are two ways you can do this, either by
+clicking on the build help button at the bottom of the screen which is the
+fourth one from the left. Or you can use the SPACE key to toggle it.]]
+      ) .. p(_
+[[Left-click the "OK" button to close this box and then try it.]]
       )
    ),
    obj_name = "enable_buildhelp",
    obj_title = _ "Enable the build help",
-   obj_body = rt(h1(_"Enable the build help") .. 
+   obj_body = rt(h1(_"Enable the build help") ..
       p(
 [[It is easier to understand what is allowed to be built on which field when
 the build help symbols are enabled. Do so now either by pressing SPACE or by
-clicking the fourth button from the left at the very bottom of the screen.]]
+clicking the fourth button from the left at the very bottom of the screen.
+Click the "OK" button and then give it a try.]]
       )
    )
 }
@@ -103,7 +107,9 @@ lumberjack_message_01 = {
    body = rt(p(_
 [[There you go. I will explain about all those symbols in a minute. First, let
 me show you how to make a lumberjack's hut and how to connect it with a road.
-There is a sweet spot for a lumberjack right next to those trees.]]
+There is a sweet spot for a lumberjack right next to those trees.  I'll describe
+the steps I will take and then ask you to click on the "OK" button for me to
+demonstrate.]]
       )
    )
 }
@@ -112,12 +118,14 @@ lumberjack_message_02 = {
    title = _ "Building the lumberjack",
    pos = "topright",
    body = rt(p(_
-[[First, I'll left-click on the symbol were I want the lumberjack to be built. A
-window will appear where I can choose between buildings. Because I'll click a
-yellow house symbol - which means that this field can house medium and small
-buildings - I am presented with all medium buildings that I can build. I
-go on to select the small buildings tab. Then I choose the lumberjack's hut.
-Watch me, I'll go really slow: click - select tab - choose building.]]
+[[First, I'll left-click on the symbol where I want the lumberjack's hut to be
+built. A window will appear where I can choose between buildings. Because I'll
+click a yellow house symbol - which means that its field can house medium and small
+buildings - I am presented with all the medium buildings that I can build. The
+lumberjack's hut is a small building so I will go on to select the small buildings
+tab. Then I'll choose the lumberjack's hut.
+Click the "OK" button to watch me. I'll go really slow: I will click - then select
+the tab - and finally I'll choose the building.]]
     )
    )
 }
@@ -127,9 +135,9 @@ lumberjack_message_03 = {
    pos = "topright",
    body = rt(p(_
 [[That won't do yet. I still need to connect the lumberjack's hut to the
-rest of my road network. After I ordered a construction site, I am
-automatically in road building mode, so all I have to do is click on the flag
-in front of my headquarters.]]
+rest of my road network. After I ordered a construction site, I was
+automatically put in road building mode, so all I have to do is click on the
+blue flag in front of my headquarters.]]
        )
    )
 }
@@ -139,8 +147,8 @@ lumberjack_message_04 = {
    pos = "topright",
    body = rt(p(_
 [[Now watch closely as a builder leaves the headquarters and goes to the
-construction site. Also a carrier will take position in between the two flags
-and carry wares from one flag to the other.]]
+construction site. Also a carrier will take position in between the two blue
+flags and carry wares from one blue flag to the other.]]
       )
    )
 }
@@ -151,7 +159,7 @@ lumberjack_message_05 = {
    body = rt(p(_
 [[Nice how they work, isn't it? But the poor carrier has a very long way to go.
 We can make it easier for him (and more efficient for us) when we place another
-flag on the road. You try it this time: click on the yellow flag symbol
+blue flag on the road. You try it this time: click on the yellow flag symbol
 in between the two blue flags we just placed and then click on the]]
       )) .. rt("image=pics/menu_build_flag.png", p(_ "build flag symbol.")
    ),
@@ -159,8 +167,8 @@ in between the two blue flags we just placed and then click on the]]
    obj_title = _ "Build a flag to divide the road to the lumberjack",
    obj_body = rt(h1(_"Build a flag on the road") .. p(_
 [[The shorter your road segments are, the faster your wares will be transported.
-You should therefore make sure that your roads have as many flags as possible. 
-Build a flag now in the middle of the road that connects your headquarters
+You should therefore make sure that your roads have as many flags as possible.
+Build a blue flag now in the middle of the road that connects your headquarters
 to your lumberjack's hut.]])
    )
 }
@@ -193,19 +201,19 @@ inform_about_stones = {
    rt(p(_
 [[Stones can be mined in granite mines, but the easier way is to build a quarry
 next to some stones laying around. As it happens, there is a pile of them
-laying just to the west of your headquarters. I will teach you now how to
+laying just to the west (left) of your headquarters. I will teach you now how to
 move your view over there.]]
       ) .. p(_
 [[There are two ways to move your view. The first one is using the cursor keys
-on your keyboard. Go ahead and try this out, move the view using the cursor
-keys]]
+on your keyboard. Go ahead and try this out.  Click the "OK" button and then move
+the view using the cursor keys]]
       )
    ),
    obj_name = "move_view_with_cursor_keys",
    obj_title = _ "Move your view with the cursor keys",
    obj_body = rt(h1(_"Moving your view") .. p(_
-[[Moving your view is essential to get a complete overview over your whole
-economy. There are two ways to move your view in widelands. The first one is
+[[Moving your view is essential to get a complete overview of your whole
+economy. There are two ways to move your view in Widelands. The first one is
 to use the cursor keys on your keyboard. The second one is the more common and
 faster one: press-and-hold the right mouse button anywhere on the map, then move
 your mouse around and you'll see the view scroll.]]
@@ -240,9 +248,10 @@ order_quarry_recap_how_to_build = {
    title = _ "How to build a quarry",
    body = rt(p(_
 [[Build a quarry next to those stones here. Remember how I did it earlier?
-Just click the place were you want the building to be, choose it from the
-window that appears and it is placed. Maybe it is a good time to explain about
-all those build help symbols we activated earlier.]]
+Make sure that build help is on, then just click the place were you want the
+building to be, choose it from the window that appears and it is placed. Maybe
+it is a good time to explain about all those build help symbols we activated
+earlier.]]
    ) .. p(_
 [[You can build four things on fields in Widelands: Flags, small houses, medium
 houses and big houses. But not every field can hold anything. The build help
@@ -263,7 +272,7 @@ eases recognition:]]
 medium or big building symbol, you will have to select the small buildings
 tab first to find it. Go on, check it out!]]
       )
-   ), 
+   ),
    obj_name = "build_a_quarry",
    obj_title = _ "Build a quarry next to the stones",
    obj_body = rt(h1(_ "Build a quarry") .. p(_
@@ -402,8 +411,8 @@ that they get a tick-symbol in front of them. Then, you can click the]]
    obj_name = "archive_all_messages",
    obj_title = _"Archive all messages in your inbox",
    obj_body = rt(h1(_"Archive our inbox messages") .. p(_
-[[The message window is central to fully control your tribe's fortune. But you
-get a lot of messages in a real game. To keep your head straight, you should
+[[The message window is central to fully controlling your tribe's fortune. But
+you get a lot of messages in a real game. To keep your head straight, you should
 try to keep the inbox empty. Archive all your messages in the inbox now. To do
 so, open the messages window by pressing 'n' or clicking the right most button
 at the very bottom of the screen. Then mark all messages by checking the check
@@ -426,7 +435,7 @@ the button below, then right click into the messages window to close it.]]
    obj_name = "close_message_window",
    obj_title = _ "Close the messages window",
    obj_body = rt(h1(_"Close the messages window") .. p(_
-[[All windows in widelands can be closed by right clicking into them. Some
+[[All windows in Widelands can be closed by right clicking into them. Some
 windows can also be toggled with the buttons at the very bottom of the screen.
 Close the messages window now by right clicking into it.]]
       )
@@ -560,11 +569,11 @@ explained in the introduction campaigns for the three tribes.]]
 )
 }
 
-warefare_and_training_00 = {
+warfare_and_training_00 = {
    title = _ "Warfare and Training",
-   body = rt(h1(_ "Soldiers and Warefare") .. p(_
+   body = rt(h1(_ "Soldiers and Warfare") .. p(_
 [[On to the last topic now. We are going to talk about soldiers, their training
-and their profession: warfare. As mentioned, widelands is about building up,
+and their profession: warfare. As mentioned, Widelands is about building up,
 not burning down: therefore warfare is also more focused on the economics than
 the military strategies. Nevertheless, warfare offers one way to challenge
 other players and it has some game mechanics that deserve explanation. The
@@ -588,7 +597,7 @@ build a small training scenario for you. Let's do that now.]]
    )
 }
 
-warefare_and_training_01 = {
+warfare_and_training_01 = {
    pos = "topright",
    title = _ "Trainings camp and soldier stats",
    body = rt(p(_
@@ -627,7 +636,7 @@ are because of the defense ability.]]
 [[Evade is the chance that the soldier is able to dodge an attack. It is 25% for
 a level 0 evade barbarian and increases in steps of 15% for each level.]]
       )
-   ) 
+   )
 }
 
 enhance_fortress = {
@@ -649,7 +658,7 @@ your construction site could burn down. No sweat, that won't happen here.]]
 by using PAGE_UP, building a citadel takes a while.]]
       )
    ),
-   obj_name = "enhance_fortress", 
+   obj_name = "enhance_fortress",
    obj_title = _"Enhance your fortress to a citadel",
    obj_body = rt(h1(_ "Enhance your fortress") .. p(_
 [[Enhance your fortress to a mighty citadel. The citadel can house 12 soldiers
@@ -661,7 +670,7 @@ important points like constricted points or mountains.]]
 }
 
 attack_enemey = {
-   pos = "topright", 
+   pos = "topright",
    title = _ "Defeat your enemy",
    body = rt(h1(_ "Defeat the enemy") .. p(_
 [[I created a sparring partner for you: It is an empire tribe close to your

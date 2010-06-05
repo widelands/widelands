@@ -60,7 +60,6 @@ Building_Window::Building_Window
 	m_toggle_workarea = 0;
 
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
-	vbox->set_snapparent(true);
 
 	m_tabs = new UI::Tab_Panel(vbox, 0, 0, g_gr->get_no_picture());
 	vbox->add(m_tabs, UI::Box::AlignLeft, true);
@@ -72,6 +71,7 @@ Building_Window::Building_Window
 
 	move_to_mouse();
 
+	set_center_panel(vbox);
 	set_think(true);
 
 	char filename[] = "pics/workarea0cumulative.png";

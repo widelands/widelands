@@ -35,6 +35,8 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "mapfringeregion.h"
 #include "message_queue.h"
 #include "player.h"
@@ -925,13 +927,15 @@ Worker::Worker(const Worker_Descr & worker_descr)
 	Bob          (worker_descr),
 	m_economy    (0),
 	m_supply     (0),
-	m_needed_exp (0),
+	m_transfer   (0),
 	m_current_exp(0)
-{}
+{
+}
 
 Worker::~Worker()
 {
 	assert(!m_location.is_set());
+	assert(!m_transfer);
 }
 
 
@@ -947,6 +951,7 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
 	}
 
 	molog("Economy: %p\n", m_economy);
+	molog("transfer: %p\n",  m_transfer);
 
 	if (upcast(WareInstance, ware, m_carried_item.get(egbase))) {
 		molog
@@ -955,8 +960,7 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
 		molog("* m_carried_item->get_economy() (): %p\n", ware->get_economy());
 	}
 
-	molog("m_needed_exp: %i\n", m_needed_exp);
-	molog("m_current_exp: %i\n", m_current_exp);
+	molog("m_current_exp: %i / %i\n", m_current_exp, descr().get_level_experience());
 
 	molog("m_supply: %p\n", m_supply);
 }
@@ -1146,16 +1150,11 @@ void Worker::incorporate(Game & game)
  */
 void Worker::create_needed_experience(Game & game)
 {
-	if (descr().get_min_exp() == -1 && descr().get_max_exp() == -1) {
-		m_needed_exp = m_current_exp = -1;
+	if (descr().get_level_experience() == -1) {
+		m_current_exp = -1;
 		return;
 	}
 
-	assert(descr().get_min_exp() <= descr().get_max_exp());
-	m_needed_exp =
-		descr().get_min_exp()
-		+
-		game.logic_rand() % (1 + descr().get_max_exp() - descr().get_min_exp());
 	m_current_exp = 0;
 }
 
@@ -1169,7 +1168,7 @@ void Worker::create_needed_experience(Game & game)
  */
 Ware_Index Worker::gain_experience(Game & game) {
 	return
-		m_needed_exp == -1 or ++m_current_exp < m_needed_exp ?
+		descr().get_level_experience() == -1 || ++m_current_exp < descr().get_level_experience() ?
 		Ware_Index::Null() : level(game);
 }
 
@@ -1206,8 +1205,8 @@ Ware_Index Worker::level(Game & game) {
  * Set a fallback task.
  */
 void Worker::init_auto_task(Game & game) {
-	if (get_location(game)) {
-		if (get_economy()->warehouses().size())
+	if (PlayerImmovable * location = get_location(game)) {
+		if (get_economy()->warehouses().size() || location->get_type() == BUILDING)
 			return start_task_gowarehouse(game);
 
 		set_location(0);
@@ -1227,8 +1226,8 @@ void Worker::init_auto_task(Game & game) {
 const Bob::Task Worker::taskTransfer = {
 	"transfer",
 	static_cast<Bob::Ptr>(&Worker::transfer_update),
-	static_cast<Bob::PtrSignal>(&Worker::transfer_signalimmediate),
 	0,
+	static_cast<Bob::Ptr>(&Worker::transfer_pop),
 	false
 };
 
@@ -1238,18 +1237,28 @@ const Bob::Task Worker::taskTransfer = {
  */
 void Worker::start_task_transfer(Game & game, Transfer * t)
 {
-	// hackish override for gowarehouse
-	if (State * const state = get_state(taskGowarehouse)) {
-		assert(!state->transfer);
+	// Hackish override for receiving transfers during gowarehouse,
+	// and to correctly handle the stack during loading of games
+	// (in that case, the transfer task already exists on the stack
+	// when this is called).
+	if (get_state(taskGowarehouse) || get_state(taskTransfer)) {
+		assert(!m_transfer);
 
-		state->transfer = t;
+		m_transfer = t;
 		send_signal(game, "transfer");
 	} else { //  just start a normal transfer
 		push_task(game, taskTransfer);
-		top_state().transfer = t;
+		m_transfer = t;
 	}
 }
 
+void Worker::transfer_pop(Game & game, State & state)
+{
+	if (m_transfer) {
+		m_transfer->has_failed();
+		m_transfer = 0;
+	}
+}
 
 void Worker::transfer_update(Game & game, State & state) {
 	Map & map = game.map();
@@ -1263,7 +1272,7 @@ void Worker::transfer_update(Game & game, State & state) {
 	}
 
 	// The request is no longer valid, the task has failed
-	if (!state.transfer) {
+	if (!m_transfer) {
 		molog("[transfer]: Fail (without transfer)\n");
 
 		send_signal(game, "fail");
@@ -1277,7 +1286,7 @@ void Worker::transfer_update(Game & game, State & state) {
 		// The caller requested a route update, or the previously calulcated route
 		// failed.
 		// We will recalculate the route on the next update().
-		if (signal == "road" || signal == "fail") {
+		if (signal == "road" || signal == "fail" || signal == "transfer") {
 			molog("[transfer]: Got signal '%s' -> recalculate\n", signal.c_str());
 
 			signal_handled();
@@ -1324,12 +1333,12 @@ void Worker::transfer_update(Game & game, State & state) {
 	// Figure out where to go
 	bool success;
 	PlayerImmovable * const nextstep =
-		state.transfer->get_next_step(location, success);
+		m_transfer->get_next_step(location, success);
 
 	if (!nextstep) {
-		Transfer * const t = state.transfer;
+		Transfer * const t = m_transfer;
 
-		state.transfer = 0;
+		m_transfer = 0;
 
 		if (success) {
 			pop_task(game);
@@ -1439,19 +1448,12 @@ void Worker::transfer_update(Game & game, State & state) {
 }
 
 
-void Worker::transfer_signalimmediate
-	(Game &, State & state, std::string const & signal)
-{
-	if (signal == "cancel")
-		state.transfer = 0; //  do not call transfer_fail/finish when cancelled
-}
-
-
 /**
  * Called by transport code when the transfer has been cancelled & destroyed.
  */
 void Worker::cancel_task_transfer(Game & game)
 {
+	m_transfer = 0;
 	send_signal(game, "cancel");
 }
 
@@ -1780,14 +1782,20 @@ void Worker::gowarehouse_update(Game & game, State & state)
 	}
 
 	// If we got a transfer, use it
-	if (state.transfer) {
-		Transfer * const t = state.transfer;
+	if (m_transfer) {
+		Transfer * const t = m_transfer;
+		m_transfer = 0;
+
 		molog("[gowarehouse]: Got transfer\n");
 
-		state.transfer = 0;
 		pop_task(game);
 		return start_task_transfer(game, t);
 	}
+
+	// Always leave buildings in an orderly manner,
+	// even when no warehouses are left to return to
+	if (location->get_type() == BUILDING && get_position() == static_cast<Building*>(location)->get_position())
+		return start_task_leavebuilding(game, true);
 
 	if (!get_economy()->warehouses().size()) {
 		molog("[gowarehouse]: No warehouse left in Economy\n");
@@ -1801,6 +1809,7 @@ void Worker::gowarehouse_update(Game & game, State & state)
 	// flag is removed or a warehouse connects to the Economy).
 	if (!m_supply)
 		m_supply = new IdleWorkerSupply(*this);
+
 	return start_task_idle(game, get_animation("idle"), 1000);
 }
 
@@ -1812,11 +1821,6 @@ void Worker::gowarehouse_signalimmediate
 		// Otherwise, we might receive two transfers in a row.
 		delete m_supply;
 		m_supply = 0;
-	} else if (signal == "cancel") {
-		// If the transfer is cancelled again (e.g. due to building destruction)
-		// in the short window of time before the "transfer" signal is handled,
-		// we need to clean the transfer up.
-		state.transfer = 0;
 	}
 }
 
@@ -1824,6 +1828,11 @@ void Worker::gowarehouse_pop(Game &, State &)
 {
 	delete m_supply;
 	m_supply = 0;
+
+	if (m_transfer) {
+		m_transfer->has_failed();
+		m_transfer = 0;
+	}
 }
 
 
@@ -2673,6 +2682,168 @@ void Worker::draw
 {
 	if (get_current_anim())
 		draw_inner(game, dst, calc_drawpos(game, pos));
+}
+
+/*
+==============================
+
+Load/save support
+
+==============================
+*/
+
+#define WORKER_SAVEGAME_VERSION 2
+
+Worker::Loader::Loader()
+{
+}
+
+void Worker::Loader::load(FileRead& fr)
+{
+	Bob::Loader::load(fr);
+
+	uint8_t version = fr.Unsigned8();
+	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
+		throw game_data_error("unknown/unhandled version %u", version);
+
+	Worker& worker = get<Worker>();
+	m_location = fr.Unsigned32();
+	m_carried_item = fr.Unsigned32();
+	worker.m_current_exp = fr.Signed32();
+
+	if (version >= 2) {
+		if (fr.Unsigned8()) {
+			worker.m_transfer = new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), worker);
+			worker.m_transfer->read(fr, m_transfer);
+		}
+	}
+}
+
+void Worker::Loader::load_pointers()
+{
+	Bob::Loader::load_pointers();
+
+	Worker& worker = get<Worker>();
+
+	if (m_location)
+		worker.set_location(&mol().get<PlayerImmovable>(m_location));
+	if (m_carried_item)
+		worker.m_carried_item = &mol().get<WareInstance>(m_carried_item);
+	if (worker.m_transfer)
+		worker.m_transfer->read_pointers(mol(), m_transfer);
+}
+
+void Worker::Loader::load_finish()
+{
+	Bob::Loader::load_finish();
+
+	// it's not entirely clear whether this is the best place to put this code,
+	// keep an open mind once player immovables are also handled via the new save code
+	Worker& worker = get<Worker>();
+	Economy * economy = 0;
+	if (PlayerImmovable * const location = worker.m_location.get(egbase()))
+		economy = location->get_economy();
+	worker.set_economy(economy);
+	if (WareInstance * const carried_item = worker.m_carried_item.get(egbase()))
+		carried_item->set_economy(economy);
+}
+
+const Bob::Task* Worker::Loader::get_task(const std::string& name)
+{
+	if (name == "program") return &taskProgram;
+	if (name == "transfer") return &taskTransfer;
+	if (name == "buildingwork") return &taskBuildingwork;
+	if (name == "return") return &taskReturn;
+	if (name == "gowarehouse") return &taskGowarehouse;
+	if (name == "dropoff") return &taskDropoff;
+	if (name == "releaserecruit") return &taskReleaserecruit;
+	if (name == "fetchfromflag") return &taskFetchfromflag;
+	if (name == "waitforcapacity") return &taskWaitforcapacity;
+	if (name == "leavebuilding") return &taskLeavebuilding;
+	if (name == "fugitive") return &taskFugitive;
+	if (name == "geologist") return &taskGeologist;
+	if (name == "scout") return &taskScout;
+	return Bob::Loader::get_task(name);
+}
+
+const BobProgramBase* Worker::Loader::get_program(const std::string& name)
+{
+	Worker& worker = get<Worker>();
+	return worker.descr().get_program(name);
+}
+
+Worker::Loader* Worker::create_loader()
+{
+	return new Loader;
+}
+
+/**
+ * Load function for all classes derived from \ref Worker
+ *
+ * Derived classes must override \ref create_loader to make sure
+ * the appropriate actual load functions are called.
+ */
+Map_Object::Loader* Worker::load(Editor_Game_Base& egbase, Map_Map_Object_Loader& mol, FileRead& fr)
+{
+	try {
+		// header has already been read by caller
+		std::string tribename = fr.CString();
+		std::string name = fr.CString();
+
+		egbase.manually_load_tribe(tribename);
+
+		const Tribe_Descr * tribe = egbase.get_tribe(tribename);
+		if (!tribe)
+			throw game_data_error("unknown tribe '%s'", tribename.c_str());
+
+		const Worker_Descr * descr = tribe->get_worker_descr(tribe->safe_worker_index(name));
+
+		Worker * worker = static_cast<Worker*>(&descr->create_object());
+		std::auto_ptr<Loader> loader(worker->create_loader());
+		loader->init(egbase, mol, *worker);
+		loader->load(fr);
+		return loader.release();
+	} catch (const std::exception & e) {
+		throw wexception(_("loading worker: %s"), e.what());
+	}
+}
+
+/**
+ * Save the \ref Worker specific header and version info.
+ *
+ * \warning Do not override this function, override \ref do_save instead.
+ */
+void Worker::save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+{
+	fw.Unsigned8(header_Worker);
+	fw.CString(tribe().name());
+	fw.CString(descr().name());
+
+	do_save(egbase, mos, fw);
+}
+
+/**
+ * Save the data fields of this worker.
+ *
+ * This is separate from \ref save because of the way data headers are treated.
+ *
+ * Override this function in derived classes.
+ */
+void Worker::do_save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+{
+	Bob::save(egbase, mos, fw);
+
+	fw.Unsigned8(WORKER_SAVEGAME_VERSION);
+	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
+	fw.Unsigned32(mos.get_object_file_index_or_zero(m_carried_item.get(egbase)));
+	fw.Signed32(m_current_exp);
+
+	if (m_transfer) {
+		fw.Unsigned8(1);
+		m_transfer->write(mos, fw);
+	} else {
+		fw.Unsigned8(0);
+	}
 }
 
 }

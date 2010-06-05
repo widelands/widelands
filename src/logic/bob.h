@@ -20,6 +20,7 @@
 #ifndef BOB_H
 #define BOB_H
 
+#include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/encodedata.h"
 #include "point.h"
@@ -170,7 +171,6 @@ struct Bob : public Map_Object {
 			coords  (Coords::Null()),
 			diranims(0),
 			path    (0),
-			transfer(0),
 			route   (0),
 			program (0)
 		{}
@@ -185,7 +185,6 @@ struct Bob : public Map_Object {
 		Coords                 coords;
 		const DirAnimations  * diranims;
 		Path                 * path;
-		Transfer             * transfer;
 		Route                * route;
 		const BobProgramBase * program; ///< pointer to current program
 	};
@@ -387,9 +386,37 @@ private:
 	bool m_actscheduled;
 	bool m_in_act; ///< if do_act is currently running
 	std::string m_signal;
+
+	// saving and loading
+protected:
+	class Loader : public Map_Object::Loader {
+	public:
+		Loader();
+
+		void load(FileRead &);
+		virtual void load_pointers();
+		virtual void load_finish();
+
+	protected:
+		virtual const Task * get_task(const std::string& name);
+		virtual const BobProgramBase * get_program(const std::string& name);
+
+	private:
+		struct LoadState {
+			uint32_t objvar1;
+			Route::LoadData route;
+		};
+
+		std::vector<LoadState> states;
+	};
+
+public:
+	virtual bool has_new_save_support() {return true;}
+
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	// Pure Bobs cannot be loaded
 };
 
 }
 
 #endif
-

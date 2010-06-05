@@ -40,6 +40,7 @@
 #include "minimap.h"
 #include "overlay_manager.h"
 #include "profile/profile.h"
+#include "quicknavigation.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
 #include "wlapplication.h"
@@ -57,8 +58,13 @@ using Widelands::TCoords;
 struct InteractiveBaseInternals {
 	MiniMap * mm;
 	MiniMap::Registry minimap;
+	boost::scoped_ptr<QuickNavigation> quicknavigation;
 
-	InteractiveBaseInternals() : mm(0) {}
+	InteractiveBaseInternals(QuickNavigation * qnav)
+	:
+	mm(0),
+	quicknavigation(qnav)
+	{}
 };
 
 Interactive_Base::Interactive_Base
@@ -66,7 +72,9 @@ Interactive_Base::Interactive_Base
 	:
 	Map_View(0, 0, 0, get_xres(), get_yres(), *this),
 	m_show_workarea_preview(global_s.get_bool("workareapreview", false)),
-	m(new InteractiveBaseInternals),
+	m
+		(new InteractiveBaseInternals
+		 (new QuickNavigation(the_egbase, get_w(), get_h()))),
 	m_egbase                      (the_egbase),
 #ifdef DEBUG //  not in releases
 	m_display_flags               (dfDebug),
@@ -84,7 +92,14 @@ Interactive_Base::Interactive_Base
 	m_label_speed
 		(this, get_w(), 0, std::string(), UI::Align_TopRight)
 {
-	warpview.set(this, &Interactive_Player::mainview_move);
+	m_toolbar.set_layout_toplevel(true);
+	m->quicknavigation->set_setview
+		(boost::bind(&Map_View::set_viewpoint, this, _1, true));
+	set_changeview
+		(boost::bind(&QuickNavigation::view_changed,
+		 m->quicknavigation.get(), _1, _2));
+
+	changeview.set(this, &Interactive_Base::mainview_move);
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance (global_s.get_int("panel_snap_distance", 10));
@@ -112,7 +127,8 @@ Interactive_Base::Interactive_Base
 	m_label_speed.set_visible(false);
 
 	setDefaultCommand (boost::bind(&Interactive_Base::cmdLua, this, _1));
-	addCommand("mapobject", boost::bind(&Interactive_Base::cmdMapObject, this, _1));
+	addCommand
+		("mapobject", boost::bind(&Interactive_Base::cmdMapObject, this, _1));
 }
 
 
@@ -303,13 +319,13 @@ void Interactive_Base::think()
 
 	if (keyboard_free() && Panel::allow_user_input()) {
 		if (get_key_state(SDLK_UP))
-			set_rel_viewpoint(Point(0, -scrollval));
+			set_rel_viewpoint(Point(0, -scrollval), false);
 		if (get_key_state(SDLK_DOWN))
-			set_rel_viewpoint(Point(0,  scrollval));
+			set_rel_viewpoint(Point(0,  scrollval), false);
 		if (get_key_state(SDLK_LEFT))
-			set_rel_viewpoint(Point(-scrollval, 0));
+			set_rel_viewpoint(Point(-scrollval, 0), false);
 		if (get_key_state(SDLK_RIGHT))
-			set_rel_viewpoint(Point (scrollval, 0));
+			set_rel_viewpoint(Point (scrollval, 0), false);
 	}
 
 	egbase().think(); // Call game logic here. The game advances.
@@ -417,7 +433,7 @@ void Interactive_Base::minimap_warp(int32_t x, int32_t y)
 		x += map.get_width () * TRIANGLE_WIDTH;
 	if (y < 0)
 		y += map.get_height() * TRIANGLE_HEIGHT;
-	set_viewpoint(Point(x, y));
+	set_viewpoint(Point(x, y), true);
 }
 
 
@@ -450,7 +466,7 @@ void Interactive_Base::move_view_to_point(Point pos)
 	if (m->minimap.window)
 		m->mm->set_view_pos(pos.x, pos.y);
 
-	set_viewpoint(pos - Point(get_w() / 2, get_h() / 2));
+	set_viewpoint(pos - Point(get_w() / 2, get_h() / 2), true);
 }
 
 
@@ -819,6 +835,9 @@ void Interactive_Base::roadb_remove_overlay()
 
 bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 {
+	if (m->quicknavigation->handle_key(down, code))
+		return true;
+
 	switch (code.sym) {
 	case SDLK_PAGEUP:
 		if (!get_display_flag(dfSpeed))
@@ -863,8 +882,9 @@ void Interactive_Base::cmdLua(std::vector<std::string> const & args)
 	std::string cmd;
 
 	// Drop lua, start with the second word
-	for(wl_const_range<std::vector<std::string> >
-		i(args.begin(), args.end());;)
+	for
+		(wl_const_range<std::vector<std::string> >
+		 i(args.begin(), args.end());;)
 	{
 		cmd += i.front();
 		if (i.advance().empty())
@@ -896,7 +916,8 @@ void Interactive_Base::cmdMapObject(const std::vector<std::string>& args)
 	Map_Object * obj = egbase().objects().get_object(serial);
 
 	if (!obj) {
-		DebugConsole::write(str(format("No Map_Object with serial number %1%") % serial));
+		DebugConsole::write
+			(str(format("No Map_Object with serial number %1%") % serial));
 		return;
 	}
 

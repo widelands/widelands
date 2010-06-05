@@ -23,6 +23,8 @@
 #include <vector>
 
 #include "widelands.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 #include "widelands_geometry.h"
 
 namespace Widelands {
@@ -59,6 +61,9 @@ struct Path {
 		m_start.reorigin(new_origin, extent);
 		m_end  .reorigin(new_origin, extent);
 	}
+
+	void save(FileWrite & fw) const;
+	void load(FileRead & fr, Map const & map);
 
 private:
 	Coords m_start;

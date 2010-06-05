@@ -99,8 +99,7 @@ public:
 	virtual Worker_Type get_worker_type() const {return NORMAL;}
 
 	// For leveling
-	int32_t get_max_exp() const throw () {return m_max_experience;}
-	int32_t get_min_exp() const throw () {return m_min_experience;}
+	int32_t get_level_experience() const throw () {return m_level_experience;}
 	Ware_Index becomes() const throw () {return m_becomes;}
 	Ware_Index worker_index() const throw ();
 	bool can_act_as(Ware_Index) const;
@@ -127,9 +126,17 @@ protected:
 	DirAnimations m_walkload_anims;
 	bool              m_buildable;
 	Buildcost     m_buildcost;
-	int32_t           m_max_experience;
-	int32_t           m_min_experience;
-	Ware_Index    m_becomes;       /// Type that this type can become (or Null).
+
+	/**
+	 * Number of experience points required for leveling up,
+	 * or -1 if the worker cannot level up.
+	 */
+	int32_t m_level_experience;
+
+	/**
+	 * Type that this worker can become, i.e. level up to (or Null).
+	 */
+	Ware_Index    m_becomes;
 	Programs    m_programs;
 };
 

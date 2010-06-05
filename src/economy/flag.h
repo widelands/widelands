@@ -64,6 +64,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	virtual ~Flag();
 
 	void load_finish(Editor_Game_Base &);
+	virtual void destroy(Editor_Game_Base &);
 
 	virtual int32_t  get_type    () const throw ();
 	char const * type_name() const throw () {return "flag";}
@@ -99,6 +100,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	bool has_capacity();
 	uint32_t total_capacity() {return m_item_capacity;}
+	uint32_t current_items() const {return m_item_filled;}
 	void wait_for_capacity(Game &, Worker &);
 	void skip_wait_for_capacity(Game &, Worker &);
 	void add_item(Game &, WareInstance &);
@@ -120,7 +122,6 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 protected:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
-	virtual void destroy(Editor_Game_Base &);
 
 	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 

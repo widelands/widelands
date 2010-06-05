@@ -58,7 +58,8 @@ enum {
 	PLCMD_RESETWORKERTARGETQUANTITY,
 	PLCMD_CHANGEMILITARYCONFIG,
 	PLCMD_MESSAGESETSTATUSREAD,
-	PLCMD_MESSAGESETSTATUSARCHIVED
+	PLCMD_MESSAGESETSTATUSARCHIVED,
+	PLCMD_SETSTOCKPOLICY
 };
 
 /*** class PlayerCommand ***/
@@ -94,6 +95,7 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_MESSAGESETSTATUSREAD:  return new Cmd_MessageSetStatusRead (des);
 	case PLCMD_MESSAGESETSTATUSARCHIVED:
 		return new Cmd_MessageSetStatusArchived (des);
+	case PLCMD_SETSTOCKPOLICY: return new Cmd_SetStockPolicy(des);
 	default:
 		throw wexception
 			("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -1389,6 +1391,119 @@ void Cmd_MessageSetStatusArchived::serialize (StreamWrite & ser)
 	ser.Unsigned8 (PLCMD_MESSAGESETSTATUSARCHIVED);
 	ser.Unsigned8 (sender());
 	ser.Unsigned32(message_id().value());
+}
+
+/*** struct Cmd_SetStockPolicy ***/
+Cmd_SetStockPolicy::Cmd_SetStockPolicy
+	(int32_t time, Player_Number p,
+	 Warehouse& wh, bool isworker, Ware_Index ware, Warehouse::StockPolicy policy)
+: PlayerCommand(time, p)
+{
+	m_warehouse = wh.serial();
+	m_isworker = isworker;
+	m_ware = ware;
+	m_policy = policy;
+}
+
+Cmd_SetStockPolicy::Cmd_SetStockPolicy()
+: PlayerCommand()
+{
+}
+
+uint8_t Cmd_SetStockPolicy::id() const
+{
+	return QUEUE_CMD_SETSTOCKPOLICY;
+}
+
+void Cmd_SetStockPolicy::execute(Game& game)
+{
+	// Sanitize data that could have come from the network
+	if (Player * plr = game.get_player(sender())) {
+		if (upcast(Warehouse, warehouse, game.objects().get_object(m_warehouse))) {
+			if (&warehouse->owner() != plr) {
+				log
+					("Cmd_SetStockPolicy: sender %u, but warehouse owner %u\n",
+					 sender(), warehouse->owner().player_number());
+				return;
+			}
+
+			switch (m_policy) {
+			case Warehouse::SP_Normal:
+			case Warehouse::SP_Prefer:
+			case Warehouse::SP_DontStock:
+			case Warehouse::SP_Remove:
+				break;
+			default:
+				log("Cmd_SetStockPolicy: sender %u, bad policy %u\n", sender(), m_policy);
+				return;
+			}
+
+			const Tribe_Descr & tribe = warehouse->tribe();
+			if (m_isworker) {
+				if (!(m_ware < tribe.get_nrworkers())) {
+					log
+						("Cmd_SetStockPolicy: sender %u, worker %u out of bounds\n",
+						 sender(), m_ware.value());
+					return;
+				}
+				warehouse->set_worker_policy(m_ware, m_policy);
+			} else {
+				if (!(m_ware < tribe.get_nrwares())) {
+					log
+						("Cmd_SetStockPolicy: sender %u, ware %u out of bounds\n",
+						 sender(), m_ware.value());
+					return;
+				}
+				warehouse->set_ware_policy(m_ware, m_policy);
+			}
+		}
+	}
+}
+
+Cmd_SetStockPolicy::Cmd_SetStockPolicy(StreamRead& des)
+	: PlayerCommand(0, des.Unsigned8())
+{
+	m_warehouse = des.Unsigned32();
+	m_isworker = des.Unsigned8();
+	m_ware = Ware_Index(des.Unsigned8());
+	m_policy = static_cast<Warehouse::StockPolicy>(des.Unsigned8());
+}
+
+void Cmd_SetStockPolicy::serialize(StreamWrite & ser)
+{
+	ser.Unsigned8(PLCMD_SETSTOCKPOLICY);
+	ser.Unsigned8(sender());
+	ser.Unsigned32(m_warehouse);
+	ser.Unsigned8(m_isworker);
+	ser.Unsigned8(m_ware.value());
+	ser.Unsigned8(m_policy);
+}
+
+#define PLAYER_CMD_SETSTOCKPOLICY_VERSION 1
+void Cmd_SetStockPolicy::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_Object_Loader& mol)
+{
+	try {
+		uint8_t version = fr.Unsigned8();
+		if (version != PLAYER_CMD_SETSTOCKPOLICY_VERSION)
+			throw game_data_error("unknown/unhandled version %u", version);
+		PlayerCommand::Read(fr, egbase, mol);
+		m_warehouse = fr.Unsigned32();
+		m_isworker = fr.Unsigned8();
+		m_ware = Ware_Index(fr.Unsigned8());
+		m_policy = static_cast<Warehouse::StockPolicy>(fr.Unsigned8());
+	} catch (const std::exception & e) {
+		throw game_data_error("Cmd_SetStockPolicy: %s", e.what());
+	}
+}
+
+void Cmd_SetStockPolicy::Write(FileWrite& fw, Editor_Game_Base& egbase, Map_Map_Object_Saver& mos)
+{
+	fw.Unsigned8(PLAYER_CMD_SETSTOCKPOLICY_VERSION);
+	PlayerCommand::Write(fw, egbase, mos);
+	fw.Unsigned32(m_warehouse);
+	fw.Unsigned8(m_isworker);
+	fw.Unsigned8(m_ware.value());
+	fw.Unsigned8(m_policy);
 }
 
 }

@@ -277,7 +277,8 @@ PlayerImmovable(building_descr),
 m_optionswindow(0),
 m_flag         (0),
 m_defeating_player(0),
-m_priority (DEFAULT_PRIORITY)
+m_priority (DEFAULT_PRIORITY),
+m_seeing(false)
 {}
 
 Building::~Building()
@@ -872,11 +873,8 @@ void Building::log_general_info(Editor_Game_Base const & egbase) {
 
 void Building::add_worker(Worker & worker) {
 	if (not get_workers().size()) {
-		//  The first worker will enter the building so it should start seeing.
-		Player & player = owner();
-		Map    & map    = player.egbase().map();
-		player.see_area
-			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+		if (worker.descr().name() != "builder")
+			set_seeing(true);
 	}
 	PlayerImmovable::add_worker(worker);
 }
@@ -884,13 +882,31 @@ void Building::add_worker(Worker & worker) {
 
 void Building::remove_worker(Worker & worker) {
 	PlayerImmovable::remove_worker(worker);
-	if (not get_workers().size()) {
-		//  The last worker has left the building so it should stop seeing.
-		Player & player = owner();
-		Map    & map    = player.egbase().map();
+	if (not get_workers().size())
+		set_seeing(false);
+}
+
+/**
+ * Change whether this building sees its vision range based on workers inside the building.
+ *
+ * \note Warehouses always see their surroundings; this is handled separately.
+ */
+void Building::set_seeing(bool see)
+{
+	if (see == m_seeing)
+		return;
+
+	Player & player = owner();
+	Map    & map    = player.egbase().map();
+
+	if (see)
+		player.see_area
+			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+	else
 		player.unsee_area
 			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
-	}
+
+	m_seeing = see;
 }
 
 Message & Building::create_message

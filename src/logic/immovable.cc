@@ -435,14 +435,7 @@ void Immovable::switch_program(Game & game, std::string const & programname)
 uint32_t Immovable_Descr::terrain_suitability
 	(FCoords const f, Map const & map) const
 {
-	World const & world = map.world();
-	uint8_t nr_terrain_types = world.get_nr_terrains();
 	uint32_t result = 0;
-#ifdef HAVE_VARARRAY
-	uint8_t nr_triangles[nr_terrain_types];
-#else
-	uint8_t nr_triangles[UCHAR_MAX];
-#endif
 	//  Neighbours
 	FCoords const tr = map.tr_n(f);
 	FCoords const tl = map.tl_n(f);
@@ -511,7 +504,7 @@ Load/save support
 
 void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
-	BaseImmovable::Loader::load(fr, version);
+	BaseImmovable::Loader::load(fr);
 
 	Immovable & imm = ref_cast<Immovable, Map_Object>(*get_object());
 
@@ -1096,6 +1089,25 @@ void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 
 	BaseImmovable::cleanup(egbase);
 }
+
+/**
+ * We are the destination of the given ware's transfer, which is not associated
+ * with any request.
+ */
+void PlayerImmovable::receive_ware(Game&, Ware_Index ware)
+{
+	throw wexception("MO(%u): Received a ware(%u), don't know what to do with it", serial(), ware.value());
+}
+
+/**
+ * We are the destination of the given worker's transfer, which is not associated
+ * with any request.
+ */
+void PlayerImmovable::receive_worker(Game& , Worker& worker)
+{
+	throw wexception("MO(%u): Received a worker(%u), don't know what to do with it", serial(), worker.serial());
+}
+
 
 /**
  * Dump general information

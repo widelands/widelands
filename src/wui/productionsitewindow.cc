@@ -72,13 +72,16 @@ ProductionSite_Window::ProductionSite_Window
 		m_worker_table->add_column(40, _("Exp"));
 		m_worker_table->add_column(150, _("Next Level"));
 
-		for(unsigned int i = 0; i < productionsite().descr().nr_working_positions(); ++i)
+		for
+			(unsigned int i = 0;
+			 i < productionsite().descr().nr_working_positions(); ++i)
 			m_worker_table->add(i);
 
 		get_tabs()->add
 			("workers", g_gr->get_picture(PicMod_UI, pic_tab_workers),
 			 m_worker_table,
-			 productionsite().descr().nr_working_positions() > 1 ? _("Workers") : _("Worker"));
+			 productionsite().descr().nr_working_positions() > 1 ?
+			 _("Workers") : _("Worker"));
 	}
 }
 
@@ -87,12 +90,20 @@ void ProductionSite_Window::think()
 	Building_Window::think();
 
 	if (m_worker_table) {
-		assert(productionsite().descr().nr_working_positions() == m_worker_table->size());
+		assert
+			(productionsite().descr().nr_working_positions() ==
+			 m_worker_table->size());
 
-		for(unsigned int i = 0; i < productionsite().descr().nr_working_positions(); ++i) {
-			const Widelands::Worker * worker = productionsite().working_positions()[i].worker;
-			const Widelands::Request * request = productionsite().working_positions()[i].worker_request;
-			UI::Table<uintptr_t>::Entry_Record & er = m_worker_table->get_record(i);
+		for
+			(unsigned int i = 0;
+			 i < productionsite().descr().nr_working_positions(); ++i)
+		{
+			const Widelands::Worker * worker =
+				productionsite().working_positions()[i].worker;
+			const Widelands::Request * request =
+				productionsite().working_positions()[i].worker_request;
+			UI::Table<uintptr_t>::Entry_Record & er =
+				m_worker_table->get_record(i);
 
 			if (worker) {
 				er.set_picture(0, worker->icon(), worker->descname());
@@ -109,10 +120,13 @@ void ProductionSite_Window::think()
 					snprintf
 						(buffer, sizeof(buffer),
 						 "%i/%i",
-						 worker->get_current_experience(), worker->get_needed_experience());
+						 worker->get_current_experience(),
+						 worker->get_needed_experience());
 
 					er.set_string(1, buffer);
-					er.set_string(2, worker->tribe().get_worker_descr(worker->becomes())->descname());
+					er.set_string
+						(2, worker->tribe().get_worker_descr
+						 (worker->becomes())->descname());
 				} else {
 					// Worker is not upgradeable
 					er.set_string(1, "---");
@@ -121,7 +135,9 @@ void ProductionSite_Window::think()
 			} else {
 				const Widelands::Worker_Descr * desc =
 					productionsite().tribe().get_worker_descr(request->get_index());
-				er.set_picture(0, desc->icon(), request->is_open() ? _("(vacant)") : _("(coming)"));
+				er.set_picture
+					(0, desc->icon(),
+					 request->is_open() ? _("(vacant)") : _("(coming)"));
 
 				er.set_string(1, "");
 				er.set_string(2, "");

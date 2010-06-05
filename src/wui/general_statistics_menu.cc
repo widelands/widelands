@@ -41,8 +41,9 @@ using namespace Widelands;
 General_Statistics_Menu::General_Statistics_Menu
 	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
 :
-UI::UniqueWindow(&parent, "statistics_menu", &registry,
-		440, 400, _("General Statistics")),
+UI::UniqueWindow
+	(&parent, "statistics_menu", &registry,
+	 440, 400, _("General Statistics")),
 m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 {
 	uint32_t const spacing =  5;

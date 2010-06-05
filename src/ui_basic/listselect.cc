@@ -23,6 +23,7 @@
 #include "font_handler.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
+#include "log.h"
 
 #include "container_iterate.h"
 
@@ -53,7 +54,8 @@ BaseListselect::BaseListselect
 	m_last_selection(no_selection_index()),
 	m_show_check(show_check),
 	m_fontname(UI_FONT_NAME),
-	m_fontsize(UI_FONT_SIZE_SMALL)
+	m_fontsize(UI_FONT_SIZE_SMALL),
+	m_needredraw(true)
 {
 	set_think(false);
 
@@ -139,7 +141,8 @@ void BaseListselect::add
 	m_entry_records.push_back(er);
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
-
+	
+	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 
 	if (sel)
@@ -181,6 +184,7 @@ void BaseListselect::add_front
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
+	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 
 	if (sel)
@@ -248,6 +252,7 @@ void BaseListselect::set_scrollpos(const int32_t i)
 {
 	m_scrollpos = i;
 
+	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 }
 
@@ -283,6 +288,7 @@ void BaseListselect::select(const uint32_t i)
 	}
 	m_selection = i;
 
+	m_needredraw = true;
 	selected.call(m_selection);
 	update(0, 0, get_eff_w(), get_h());
 }
@@ -335,35 +341,61 @@ uint32_t BaseListselect::get_eff_w() const throw ()
 	return get_w();
 }
 
-
 /**
 Redraw the listselect box
 */
-void BaseListselect::draw(RenderTarget & dst)
+void BaseListselect::draw(RenderTarget & odst)
 {
+	// Only render if something changed
+	if(!m_needredraw)
+	{
+		odst.blit(Point(0, 0), m_cache_pid);
+		return;
+	}
+
+	// Create a off-screen surface 
+	m_cache_pid = g_gr->create_surface_a(get_w(), get_h());
+
+	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
+
+	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
+
 	// draw text lines
 	const uint32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
 	int32_t y = 1 + idx * lineheight - m_scrollpos;
 
-	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	//dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
 		assert
 			(get_h()
 			 <
 			 static_cast<int32_t>(std::numeric_limits<int32_t>::max()));
+
 		if (y >= static_cast<int32_t>(get_h()))
-			return;
+			break;
 
 		const Entry_Record & er = *m_entry_records[idx];
 
+		// Highlight the current selected entry
 		if (idx == m_selection) {
+			Rect r = Rect(Point(1, y), get_eff_w() - 2, m_lineheight);
+			if( r.x < 0 ) {
+				r.w+=r.x; r.x=0;
+			}
+			if( r.y < 0 ) {
+				r.h+=r.y; r.y=0;
+			}
 			assert(2 <= get_eff_w());
-			dst.brighten_rect
-				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
-				 -ms_darken_value);
+			// Make the area a bit more white and more transparent
+			if( r.w > 0 and r.h > 0 )
+				m_cache_pid->surface->fill_rect(r, RGBAColor(100, 100, 100, 80));
+			//dst.brighten_rect
+			//(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
+			// -ms_darken_value*2);
 		}
+
 
 		int32_t const x =
 			m_align & Align_Right   ? get_eff_w() -      1 :
@@ -391,16 +423,20 @@ void BaseListselect::draw(RenderTarget & dst)
 			 m_align);
 
 		// Now draw pictures
+
 		if (er.picid != g_gr->get_no_picture()) {
 			uint32_t w, h;
 			g_gr->get_picture_size(er.picid, w, h);
-			dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+			dst.blit_a(Point(1, y + (get_lineheight() - h) / 2), er.picid, false);
 		}
+
 		y += lineheight;
 		++idx;
 	}
+	//SDL_SetAlpha(&surf, SDL_SRCALPHA, 0);
+	odst.blit(Point(0, 0), m_cache_pid);
+	m_needredraw = false;
 }
-
 
 /**
  * Handle mouse presses: select the appropriate entry

@@ -27,8 +27,8 @@
 
 namespace Widelands {
 
-// Note: releases up to build15 used version number 1 to indicate a savegame without
-// interactive player
+// Note: releases up to build15 used version number 1 to indicate
+// a savegame without interactive player
 #define CURRENT_PACKET_VERSION 2
 
 
@@ -81,8 +81,9 @@ void Game_Preload_Data_Packet::Write
 		// player that saved the game.
 		s.set_int("player_nr", ipl->player_number());
 	} else {
-		// pretend that the first player that is actually there has saved the game
-		for(int i = 1; i <= MAX_PLAYERS; ++i) {
+		// pretend that the first player that is actually
+		// there has saved the game
+		for (int i = 1; i <= MAX_PLAYERS; ++i) {
 			if (game.get_player(i))
 				s.set_int("player_nr", i);
 		}

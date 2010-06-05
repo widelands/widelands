@@ -57,6 +57,8 @@
 #define QUEUE_CMD_MESSAGESETSTATUSREAD       21
 #define QUEUE_CMD_MESSAGESETSTATUSARCHIVED   22
 
+#define QUEUE_CMD_SETSTOCKPOLICY        23
+
 #define QUEUE_CMD_DESTROY_MAPOBJECT    127
 #define QUEUE_CMD_ACT                  128
 // 129 was a command related to old events. removed

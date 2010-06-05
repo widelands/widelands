@@ -92,7 +92,7 @@ public:
 
 	void clear();
 	void draw_rect(Rect, RGBColor);
-	void fill_rect(Rect, RGBColor);
+	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
 
 	void blit(Point, Surface *, Rect srcrc);

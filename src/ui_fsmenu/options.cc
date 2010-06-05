@@ -294,7 +294,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
 	Profile ln("txts/languages");
 	s = &ln.pull_section("languages");
-	bool own_selected = false;
+	bool own_selected = "" == opt.language || "en" == opt.language;
 
 	// Add translation directories to the list
 	for

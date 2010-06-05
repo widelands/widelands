@@ -100,13 +100,17 @@ void Map_View::draw(RenderTarget & dst)
 		draw_tooltip(dst, text);
 }
 
+void Map_View::set_changeview(const Map_View::ChangeViewFn & fn)
+{
+	m_changeview = fn;
+}
 
 /*
 ===============
 Set the viewpoint to the given pixel coordinates
 ===============
 */
-void Map_View::set_viewpoint(Point vp)
+void Map_View::set_viewpoint(Point vp, bool jump)
 {
 	if (vp == m_viewpoint)
 		return;
@@ -114,7 +118,9 @@ void Map_View::set_viewpoint(Point vp)
 	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), vp);
 	m_viewpoint = vp;
 
-	warpview.call(m_viewpoint.x, m_viewpoint.y);
+	if (m_changeview)
+		m_changeview(vp, jump);
+	changeview.call(m_viewpoint.x, m_viewpoint.y);
 
 	m_complete_redraw_needed = true;
 }
@@ -175,7 +181,7 @@ bool Map_View::handle_mousemove
 {
 	if (m_dragging) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT))
-			set_rel_viewpoint(Point(xdiff, ydiff));
+			set_rel_viewpoint(Point(xdiff, ydiff), false);
 		else stop_dragging();
 	}
 

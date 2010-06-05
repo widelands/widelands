@@ -19,6 +19,8 @@
 
 #include "economy.h"
 
+#include <boost/bind.hpp>
+
 // Package includes
 #include "flag.h"
 #include "route.h"
@@ -66,7 +68,7 @@ Economy::Economy(Player & player) :
 		m_worker_target_quantities[i.value()] = tq;
 	}
 
-	m_router = new Router();
+	m_router = new Router(boost::bind(&Economy::_reset_all_pathfinding_cycles, this));
 }
 
 Economy::~Economy()
@@ -177,11 +179,98 @@ bool Economy::find_route
 
 	Map & map = owner().egbase().map();
 
-	std::vector<RoutingNode *> & nodes =
-		*reinterpret_cast<std::vector<RoutingNode *> *>(&m_flags);
-
 	return
-		m_router->find_route(start, end, route, wait, cost_cutoff, map, nodes);
+		m_router->find_route(start, end, route, wait, cost_cutoff, map);
+}
+
+/**
+ * Find the warehouse closest to the given starting flag.
+ *
+ * If the search was successful and \p route is non-null, a route is also computed.
+ *
+ * \param start starting flag
+ * \param is_ware whether to path-find as if the path were for a ware
+ * \param route if non-null, fill in a route to the warehouse
+ * \param cost_cutoff if positive, find paths of at most that length (in milliseconds)
+ */
+Warehouse * Economy::find_closest_warehouse
+	(Flag & start, bool is_ware, Route * route, uint32_t cost_cutoff,
+	 const Economy::WarehouseAcceptFn & acceptfn)
+{
+	if (!warehouses().size())
+		return 0;
+
+	// Perform a simple Dijkstra
+	// FIXME Find a good way to share code with Router::find_route
+	uint32_t mpf_cycle = m_router->assign_cycle();
+	RoutingNode::Queue open;
+
+	start.mpf_cycle = mpf_cycle;
+	start.mpf_realcost = 0;
+	start.mpf_backlink = 0;
+	start.mpf_estimate = 0;
+	open.push(&start);
+
+	while (!open.empty()) {
+		RoutingNode * current = open.top();
+		open.pop(current);
+
+		if (cost_cutoff && current->mpf_realcost > static_cast<int32_t>(cost_cutoff))
+			return 0;
+
+		Flag & flag = current->base_flag();
+		if (upcast(Warehouse, warehouse, flag.get_building())) {
+			if (!acceptfn || acceptfn(*warehouse)) {
+				if (route) {
+					route->init(current->mpf_realcost);
+
+					while (current) {
+						route->insert_as_first(current);
+						current = current->mpf_backlink;
+					}
+				}
+
+				return warehouse;
+			}
+		}
+
+		// Loop through all neighbouring nodes
+		RoutingNodeNeighbours neighbours;
+
+		current->get_neighbours(neighbours);
+
+		for (uint32_t i = 0; i < neighbours.size(); ++i) {
+			RoutingNode & neighbour = *neighbours[i].get_neighbour();
+			int32_t cost;
+
+			// We have already found the best path to this neighbour, no need to visit it again.
+			if (neighbour.mpf_cycle == mpf_cycle && !neighbour.cookie().is_active())
+				continue;
+
+			cost = current->mpf_realcost + neighbours[i].get_cost();
+			if (is_ware) {
+				cost +=
+					(current->get_waitcost() + neighbour.get_waitcost())
+					* neighbours[i].get_cost() / 2;
+			}
+
+			if (neighbour.mpf_cycle != mpf_cycle) {
+				// add to open list
+				neighbour.mpf_cycle = mpf_cycle;
+				neighbour.mpf_realcost = cost;
+				neighbour.mpf_estimate = 0;
+				neighbour.mpf_backlink = current;
+				open.push(&neighbour);
+			} else if (cost < neighbour.mpf_realcost) {
+				// found a better path to a field that's already Open
+				neighbour.mpf_realcost = cost;
+				neighbour.mpf_backlink = current;
+				open.decrease_key(&neighbour);
+			}
+		}
+	}
+
+	return 0;
 }
 
 
@@ -229,6 +318,15 @@ void Economy::_remove_flag(Flag & flag)
 			return m_flags.pop_back();
 		}
 	throw wexception("trying to remove nonexistent flag");
+}
+
+/**
+ * Callback for the incredibly rare case that the \ref Router pathfinding cycle wraps around.
+ */
+void Economy::_reset_all_pathfinding_cycles()
+{
+	container_iterate(Flags, m_flags, i)
+		(*i.current)->reset_path_finding_cycle();
 }
 
 /**
@@ -596,20 +694,6 @@ Supply * Economy::_find_best_supply
 	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
 		Supply & supp = m_supplies[i];
 
-		// idle requests only get active supplies
-		if (req.is_idle() and not supp.is_active()) {
-			/* unless the warehouse REALLY needs the supply */
-			if (req.get_priority(0) > 100) { //  100 is the 'real idle' priority
-				//check if the supply is at current target
-				if (&target_flag == &supp.get_position(game)->base_flag()) {
-					//assert(false);
-					continue;
-				}
-			} else if (not supp.is_active()) {
-				continue;
-			}
-		}
-
 		// Check requirements
 		if (!supp.nr_supplies(game, req))
 			continue;
@@ -692,9 +776,6 @@ struct RSPairStruct {
 */
 void Economy::_process_requests(Game & game, RSPairStruct & s)
 {
-	//  TODO This function should be called from time to time.
-	_create_requested_workers (game);
-
 	container_iterate_const(RequestList, m_requests, i) {
 		Request & req = **i.current;
 
@@ -713,7 +794,7 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 		if (!supp)
 			continue;
 
-		if (!req.is_idle() and not supp->is_active()) {
+		if (!supp->is_active()) {
 			// Calculate the time the building will be forced to idle waiting
 			// for the request
 			int32_t const idletime =
@@ -754,103 +835,15 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 	}
 }
 
-
 /**
- * Walk all Requests and find requests of workers than aren't supplied. Then
- * try to create the worker at warehouses.
-*/
-void Economy::_create_requested_workers(Game & game)
+ * Try to fulfill open requests with available supplies.
+ */
+void Economy::_balance_requestsupply(Game & game)
 {
-	/*
-		Find the request of workers that can not be supplied
-	*/
-	if (warehouses().size()) {
-		Tribe_Descr const & tribe = owner().tribe();
-		container_iterate_const(RequestList, m_requests, j) {
-			Request const & req = **j.current;
-
-			if (!req.is_idle() && req.get_type() == Request::WORKER) {
-				Ware_Index const index = req.get_index();
-				Worker_Descr const & w_desc = *tribe.get_worker_descr(index);
-
-				for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
-					if (m_supplies[i].nr_supplies(game, req))
-						goto requested_worker_exists;
-
-				// If there aren't enough supplies...
-				if (owner().is_worker_type_allowed(index)) {
-					if (not w_desc.is_buildable()) {
-						log
-							("Economy::_create_requested_workers: ERROR: "
-							 "attempting to create worker of non-buildable type "
-							 "%s\n",
-							 w_desc.descname().c_str());
-					}
-					assert(w_desc.is_buildable());
-					bool created_worker = false;
-					for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
-						if (m_warehouses[n_wh]->can_create_worker(game, index)) {
-							m_warehouses[n_wh]->create_worker(game, index);
-							created_worker = true;
-							break;
-						} // if (m_warehouses[n_wh]
-					}
-					if (! created_worker) {
-						uint32_t nth_wh = 0;
-						if (warehouses().size() > 1) {
-							// Find nearest warehouse!
-							// NOTE  Just a dummy implementation to ensure that each
-							// NOTE  call of this function sets an request for the same
-							// NOTE  warehouse - should of coures be improved further.
-							Coords const tac = req.target_flag().get_position();
-							Coords whc = m_warehouses[0]->base_flag().get_position();
-							int32_t current = (tac.x - whc.x) * (tac.y - whc.y);
-							current = current < 1 ? (- current) : current;
-							for (uint32_t i = 0; i < warehouses().size(); ++i) {
-								whc = m_warehouses[i]->base_flag().get_position();
-								int32_t cost = (tac.x - whc.x) * (tac.y - whc.y);
-								cost = cost < 0 ? (- cost) : cost;
-								if (current > cost) {
-									current = cost;
-									nth_wh = i;
-								}
-							}
-						}
-						Warehouse & nearest = *m_warehouses[nth_wh];
-						Worker_Descr::Buildcost const & cost = w_desc.buildcost();
-						container_iterate_const
-							(Worker_Descr::Buildcost, cost, bc_it)
-							if
-								(Ware_Index const w_id =
-								 	tribe.ware_index(bc_it.current->first.c_str()))
-								nearest.set_needed(w_id, bc_it.current->second);
-					}
-				} //else
-					//log
-						//("Economy::_create_requested_workers: Could not create %s "
-						 //"for player %u because it is forbidden\n",
-						 //w_desc.descname().c_str(), owner().player_number());
-			} // if (req->is_open())
-			requested_worker_exists:;
-		}
-	}
-}
-
-/**
- * Balance Requests and Supplies by collecting and weighing pairs, and
- * starting transfers for them.
-*/
-void Economy::balance_requestsupply(uint32_t const timerid)
-{
-	if (m_request_timerid != timerid)
-		return;
-	++m_request_timerid;
-
 	RSPairStruct rsps;
 	rsps.nexttimer = -1;
 
-	//  Try to fulfill non-idle Requests.
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	//  Try to fulfill Requests.
 	_process_requests(game, rsps);
 
 	//  Now execute request/supply pairs.
@@ -879,6 +872,221 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 
 	if (rsps.nexttimer > 0) //  restart the timer, if necessary
 		_start_request_timer(rsps.nexttimer);
+}
+
+/**
+ * Check whether there is a supply for the given request. If the request is a worker
+ * request without supply, attempt to create a new worker in a warehouse.
+ */
+void Economy::_create_requested_worker(Game & game, Ware_Index index)
+{
+	unsigned demand = 0;
+
+	container_iterate_const(RequestList, m_requests, j) {
+		const Request & req = **j.current;
+
+		if (req.get_type() != Request::WORKER || req.get_index() != index)
+			continue;
+
+		// need to check for each request separately, because esp. soldier requests
+		// have different specific requirements
+		if (m_supplies.have_supplies(game, req))
+			continue;
+
+		demand += req.get_open_count();
+	}
+
+	if (!demand)
+		return;
+
+	// We have worker demand that is not fulfilled by supplies
+	// Find warehouses where we can create the required workers,
+	// and collect stats about existing build prerequisites
+	Tribe_Descr const & tribe = owner().tribe();
+	Worker_Descr const & w_desc = *tribe.get_worker_descr(index);
+	Worker_Descr::Buildcost const & cost = w_desc.buildcost();
+	std::vector<uint32_t> total_available;
+	uint32_t total_planned = 0;
+
+	total_available.insert(total_available.begin(), cost.size(), 0);
+
+	for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
+		Warehouse * wh = m_warehouses[n_wh];
+
+		uint32_t planned = wh->get_planned_workers(game, index);
+		total_planned += planned;
+
+		while (wh->can_create_worker(game, index)) {
+			wh->create_worker(game, index);
+			if (!--demand)
+				return;
+		}
+
+		std::vector<uint32_t> wh_available = wh->calc_available_for_worker(game, index);
+		assert(wh_available.size() == total_available.size());
+
+		for(uint32_t idx = 0; idx < total_available.size(); ++idx)
+			total_available[idx] += wh_available[idx];
+	}
+
+	// Couldn't create enough workers now.
+	// Let's see how many we have resources for that may be scattered
+	// throughout the economy.
+	uint32_t can_create = std::numeric_limits<uint32_t>::max();
+	uint32_t idx = 0;
+	uint32_t scarcest_idx = 0;
+	container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
+		uint32_t cc = total_available[idx] / bc.current->second;
+		if (cc <= can_create) {
+			scarcest_idx = idx;
+			can_create = cc;
+		}
+		idx++;
+	}
+
+	if (total_planned > can_create) {
+		// Eliminate some excessive plans, to make sure we never request more than
+		// there are supplies for (otherwise, cyclic transportation might happen)
+		// Note that supplies might suddenly disappear outside our control because
+		// of loss of land or silly player actions.
+		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
+			Warehouse * wh = m_warehouses[n_wh];
+
+			uint32_t planned = wh->get_planned_workers(game, index);
+			uint32_t reduce = std::min(planned, total_planned - can_create);
+			wh->plan_workers(game, index, planned - reduce);
+			total_planned -= reduce;
+		}
+	} else if (total_planned < demand) {
+		uint32_t plan_goal = std::min(can_create, demand);
+
+		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
+			Warehouse * wh = m_warehouses[n_wh];
+			uint32_t supply = wh->calc_available_for_worker(game, index)[scarcest_idx];
+
+			total_planned -= wh->get_planned_workers(game, index);
+			uint32_t plan = std::min(supply, plan_goal - total_planned);
+			wh->plan_workers(game, index, plan);
+			total_planned += plan;
+		}
+	}
+}
+
+/**
+ * Walk all Requests and find requests of workers than aren't supplied. Then
+ * try to create the worker at warehouses.
+ */
+void Economy::_create_requested_workers(Game & game)
+{
+	if (!warehouses().size())
+		return;
+
+	Tribe_Descr const & tribe = owner().tribe();
+	for (Ware_Index index = Ware_Index::First(); index < tribe.get_nrworkers(); ++index) {
+		if (!owner().is_worker_type_allowed(index))
+			continue;
+		if (!tribe.get_worker_descr(index)->is_buildable())
+			continue;
+
+		_create_requested_worker(game, index);
+	}
+}
+
+/**
+ * Helper function for \ref _handle_active_supplies
+ */
+static bool accept_warehouse_if_policy(Warehouse & wh, bool isworker, Ware_Index ware, Warehouse::StockPolicy policy)
+{
+	return wh.get_stock_policy(isworker, ware) == policy;
+}
+
+/**
+ * Send all active supplies (wares that are outside on the road network without
+ * being sent to a specific request) to a warehouse.
+ */
+void Economy::_handle_active_supplies(Game & game)
+{
+	if (!warehouses().size())
+		return;
+
+	typedef std::vector<std::pair<Supply*, Warehouse*> > Assignments;
+	Assignments assignments;
+
+	for(uint32_t idx = 0; idx < m_supplies.get_nrsupplies(); ++idx) {
+		Supply & supply = m_supplies[idx];
+		if (supply.has_storage())
+			continue;
+
+		bool isworker;
+		Ware_Index ware;
+		supply.get_ware_type(isworker, ware);
+
+		bool haveprefer = false;
+		bool havenormal = false;
+		for (uint32_t nwh = 0; nwh < m_warehouses.size(); ++nwh) {
+			Warehouse * wh = m_warehouses[nwh];
+			Warehouse::StockPolicy policy = wh->get_stock_policy(isworker, ware);
+			if (policy == Warehouse::SP_Prefer) {
+				haveprefer = true;
+				break;
+			}
+			if (policy == Warehouse::SP_Normal)
+				havenormal = true;
+		}
+		if (!havenormal && !haveprefer && !isworker)
+			continue;
+
+		Warehouse * wh = find_closest_warehouse
+			(supply.get_position(game)->base_flag(), !isworker, 0, 0,
+			 (!haveprefer && !havenormal)
+			 ?
+			 WarehouseAcceptFn()
+			 :
+			 boost::bind
+				(&accept_warehouse_if_policy,
+				 _1, isworker, ware,
+				 haveprefer ? Warehouse::SP_Prefer : Warehouse::SP_Normal));
+
+		if (!wh) {
+			log("Warning: Economy::_handle_active_supplies didn't find warehouse\n");
+			return;
+		}
+
+		assignments.push_back(std::make_pair(&supply, wh));
+	}
+
+	// Actually start with the transfers in a separate second phase,
+	// to avoid potential future problems caused by the m_supplies changing
+	// under us in some way.
+	::StreamWrite & ss = game.syncstream();
+	ss.Unsigned32(0x02decafa); // appears as facade02 in sync stream
+	ss.Unsigned32(assignments.size());
+
+	container_iterate_const(Assignments, assignments, it) {
+		ss.Unsigned32(it.current->first->get_position(game)->serial());
+		ss.Unsigned32(it.current->second->serial());
+
+		it.current->first->send_to_storage(game, it.current->second);
+	}
+}
+
+/**
+ * Balance Requests and Supplies by collecting and weighing pairs, and
+ * starting transfers for them.
+*/
+void Economy::balance(uint32_t const timerid)
+{
+	if (m_request_timerid != timerid)
+		return;
+	++m_request_timerid;
+
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+
+	_create_requested_workers (game);
+
+	_balance_requestsupply(game);
+
+	_handle_active_supplies(game);
 }
 
 }

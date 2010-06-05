@@ -77,6 +77,31 @@ float MapviewPixelFunctions::calc_brightness
 }
 
 /**
+ * Compute a - b, taking care to handle wrap-around effects properly.
+ */
+Point MapviewPixelFunctions::calc_pix_difference(Widelands::Map const & map, Point a, Point b)
+{
+	normalize_pix(map, a);
+	normalize_pix(map, b);
+
+	Point diff = a - b;
+
+	int32_t map_end_screen_x = get_map_end_screen_x(map);
+	if (diff.x > map_end_screen_x / 2)
+		diff.x -= map_end_screen_x;
+	else if (diff.x < -map_end_screen_x / 2)
+		diff.x += map_end_screen_x;
+
+	int32_t map_end_screen_y = get_map_end_screen_y(map);
+	if (diff.y > map_end_screen_y / 2)
+		diff.y -= map_end_screen_y;
+	else if (diff.y < -map_end_screen_y / 2)
+		diff.y += map_end_screen_y;
+
+	return diff;
+}
+
+/**
  * Calculate the pixel (currently Manhattan) distance between the two points,
  * taking wrap-arounds into account.
 */

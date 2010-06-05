@@ -76,13 +76,25 @@ Tab_Panel::Tab_Panel
 	m_pic_background (background)
 {}
 
+/**
+ * Resize the visible tab based on our actual size.
+ */
+void Tab_Panel::layout()
+{
+	if (m_active < m_tabs.size()) {
+		Panel * const panel = m_tabs[m_active]->panel;
+		uint32_t h = get_h();
+
+		// avoid excessive craziness in case there is a wraparound
+		h = std::min(h, h - (TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT));
+		panel->set_size(get_w(), h);
+	}
+}
 
 /**
- * Resize according to number of tabs and the size of the currently visible
- * contents.
- * Resize the parent if snapparent is enabled.
-*/
-void Tab_Panel::layout()
+ * Compute our desired size based on the currently selected tab.
+ */
+void Tab_Panel::update_desired_size()
 {
 	uint32_t w;
 	uint32_t h;
@@ -94,13 +106,21 @@ void Tab_Panel::layout()
 	// size of contents
 	if (m_active < m_tabs.size()) {
 		Panel * const panel = m_tabs[m_active]->panel;
+		uint32_t panelw, panelh;
 
-		if (static_cast<uint32_t>(panel->get_w()) > w)
-			w = panel->get_w();
-		h += panel->get_h();
+		panel->get_desired_size(panelw, panelh);
+
+		if (panelw > w)
+			w = panelw;
+		h += panelh;
 	}
 
-	set_size(w, h);
+	set_desired_size(w, h);
+
+	// This is not redundant, because even if all this doesn't change our desired size,
+	// we were typically called because of a child window that changed, and we need
+	// to relayout that.
+	layout();
 }
 
 /**
@@ -120,7 +140,7 @@ uint32_t Tab_Panel::add
 
 	panel->set_pos(Point(0, TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT));
 	panel->set_visible(id == m_active);
-	layout();
+	update_desired_size();
 
 	return id;
 }
@@ -138,9 +158,11 @@ void Tab_Panel::activate(uint32_t idx)
 
 	m_active = idx;
 
-	layout();
+	update_desired_size();
 }
-void Tab_Panel::activate(std::string const & name) {
+
+void Tab_Panel::activate(std::string const & name)
+{
 	for (uint32_t t = 0; t < m_tabs.size(); t++)
 		if (m_tabs[t]->get_name() == name)
 			activate(t);

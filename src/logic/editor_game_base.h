@@ -51,7 +51,9 @@ struct Tribe_Descr;
 struct Flag;
 struct AttackController;
 
-struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
+struct Editor_Game_Base : NoteReceiver<NoteImmovable>,
+	NoteReceiver<NoteFieldPossession>,
+	NoteReceiver<NoteFieldTransformed>
 {
 	friend struct ::Fullscreen_Menu_LaunchGame;
 	friend struct ::Interactive_Base;
@@ -126,13 +128,15 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	}
 	// Get a tribe from the loaded list, when available
 	Tribe_Descr const * get_tribe(const char * tribe) const;
+	Tribe_Descr const * get_tribe(const std::string& name) const {return get_tribe(name.c_str());}
 
 	void inform_players_about_ownership(Map_Index, Player_Number);
 	void inform_players_about_immovable(Map_Index, Map_Object_Descr const *);
 	void inform_players_about_road     (FCoords,   Map_Object_Descr const *);
 
 	void receive(NoteImmovable const &);
-	void receive(NoteField     const &);
+	void receive(NoteFieldPossession     const &);
+	void receive(NoteFieldTransformed    const &);
 
 	void cleanup_objects() throw () {
 		objects().cleanup(*this);

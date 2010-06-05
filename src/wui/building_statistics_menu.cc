@@ -116,7 +116,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_table.selected.set(this, &Building_Statistics_Menu::table_changed);
 	m_table.set_column_compare
 		(Columns::Size,
-		 boost::bind(&Building_Statistics_Menu::compare_building_size, this, _1, _2));
+		 boost::bind
+		 	(&Building_Statistics_Menu::compare_building_size, this, _1, _2));
 
 	//  toggle when to run button
 	m_progbar.set_total(100);
@@ -330,7 +331,8 @@ void Building_Statistics_Menu::table_changed(uint32_t) {update();}
 /**
  * Callback to sort table based on building size.
  */
-bool Building_Statistics_Menu::compare_building_size(uint32_t rowa, uint32_t rowb)
+bool Building_Statistics_Menu::compare_building_size
+	(uint32_t const rowa, uint32_t const rowb)
 {
 	const Widelands::Tribe_Descr& tribe = iplayer().player().tribe();
 	Widelands::Building_Index a = Widelands::Building_Index(m_table[rowa]);
@@ -342,11 +344,10 @@ bool Building_Statistics_Menu::compare_building_size(uint32_t rowa, uint32_t row
 		return false; // shouldn't happen, but be defensive
 
 	// mines come last
-	if (descrb->get_ismine()) {
+	if (descrb->get_ismine())
 		return !descra->get_ismine();
-	} else if (descra->get_ismine()) {
+	else if (descra->get_ismine())
 		return false;
-	}
 
 	// smallest first
 	return descra->get_size() < descrb->get_size();
@@ -410,8 +411,8 @@ void Building_Statistics_Menu::update() {
 				++nr_owned;
 				if (productionsite)
 					total_prod +=
-					ref_cast<Widelands::ProductionSite, Widelands::BaseImmovable>
-						(*map[vec[l].pos].get_immovable())
+						ref_cast<Widelands::ProductionSite, Widelands::BaseImmovable>
+							(*map[vec[l].pos].get_immovable())
 						.get_statistics_percent();
 			}
 		}
@@ -429,7 +430,8 @@ void Building_Statistics_Menu::update() {
 
 		//  add new Table Entry
 		char buffer[100];
-		te->set_picture(Columns::Name, building.get_buildicon(), building.descname());
+		te->set_picture
+			(Columns::Name, building.get_buildicon(), building.descname());
 
 		{
 			char const * pic = "pics/novalue.png";
@@ -448,21 +450,21 @@ void Building_Statistics_Menu::update() {
 			default:
 				assert(false);
 			}
-			te->set_picture
-				(Columns::Size, g_gr->get_picture(PicMod_UI, pic));
+			te->set_picture(Columns::Size, g_gr->get_picture(PicMod_UI, pic));
 		}
 
 		if (productionsite and nr_owned) {
-			const uint32_t percent = static_cast<uint32_t>
-				(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
-			snprintf(buffer, sizeof(buffer), "%3i", percent);
+			uint32_t const percent =
+				static_cast<uint32_t>
+					(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
+			snprintf(buffer, sizeof(buffer), "%3u", percent);
 			if (is_selected)  {
 				m_progbar.set_state(percent);
 				m_btn[Prev_Unproductive]->set_enabled(true);
 				m_btn[Next_Unproductive]->set_enabled(true);
 			}
 		} else {
-			snprintf(buffer, sizeof(buffer), "-");
+			snprintf(buffer, sizeof(buffer), " ");
 			if (is_selected) {
 				m_btn[Prev_Unproductive]->set_enabled(false);
 				m_btn[Next_Unproductive]->set_enabled(false);
@@ -471,13 +473,13 @@ void Building_Statistics_Menu::update() {
 		te->set_string(Columns::Prod, buffer);
 
 		//  number of this buildings
-		snprintf(buffer, sizeof(buffer), "%3i", nr_owned); // space-pad for sort
+		snprintf(buffer, sizeof(buffer), "%3u", nr_owned); //  space-pad for sort
 		te->set_string(Columns::Owned, buffer);
 		if (is_selected)
 			m_owned.set_text(buffer);
 
 		//  number of currently builds
-		snprintf(buffer, sizeof(buffer), "%3i", nr_build); // space-pad for sort
+		snprintf(buffer, sizeof(buffer), "%3u", nr_build); //  space-pad for sort
 		te->set_string(Columns::Build, buffer);
 		if (is_selected)
 			m_in_build.set_text(buffer);

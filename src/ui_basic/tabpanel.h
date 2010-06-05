@@ -64,8 +64,6 @@ struct Tab_Panel : public Panel {
 
 	Tab_Panel(Panel * parent, int32_t x, int32_t y, PictureID background);
 
-	void layout();
-
 	uint32_t add
 		(std::string const & name,
 		 PictureID           picid,
@@ -76,7 +74,11 @@ struct Tab_Panel : public Panel {
 
 	const TabList & tabs();
 	void activate(uint32_t idx);
-   void activate(std::string const &);
+	void activate(std::string const &);
+
+protected:
+	virtual void layout();
+	virtual void update_desired_size();
 
 private:
 	// Drawing and event handlers

@@ -78,13 +78,13 @@ m_toggle_player_menu
 	(INIT_BUTTON
 	 	("editor_menu_player_menu", "players", toggle_playermenu, _("Players")))
 {
+	m_toolbar.set_layout_toplevel(true);
 	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_tool_menu,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_toolsize_menu,   UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_player_menu,     UI::Box::AlignLeft);
-	m_toolbar.layout();
 	adjust_toolbar_position();
 
 #ifndef DEBUG

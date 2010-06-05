@@ -36,6 +36,7 @@ float calc_brightness
 	 int32_t const bl,
 	 int32_t const br);
 
+Point calc_pix_difference(Widelands::Map const &, Point, Point);
 uint32_t calc_pix_distance(Widelands::Map const &, Point, Point);
 
 uint32_t get_map_end_screen_x(Widelands::Map const &);

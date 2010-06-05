@@ -58,7 +58,7 @@ m_pit               (pit)
 			 	 24U),
 			 12U);
 
-	m_tabpanel.set_snapparent(true);
+	set_center_panel(&m_tabpanel);
 
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_bobs; ++j) {
@@ -84,7 +84,6 @@ m_pit               (pit)
 			cur_x = 0;
 			pos   = Point(5, 15);
 			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
-			box->layout();
 			m_tabpanel.add("icons", tab_icon, box);
 		}
 
@@ -96,7 +95,7 @@ m_pit               (pit)
 			 g_gr->get_picture(PicMod_Game, descr.get_picture()),
 			 critter_descr ? critter_descr->descname() : std::string());
 
-		cb.set_size(width, height);
+		cb.set_desired_size(width, height);
 		cb.set_id(i);
 		cb.set_state(m_pit.is_enabled(i));
 		cb.changedtoid.set(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);
@@ -109,7 +108,6 @@ m_pit               (pit)
 	}
 
 	m_tabpanel.activate(0);
-	m_tabpanel.layout();
 }
 
 

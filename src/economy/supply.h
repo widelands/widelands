@@ -27,6 +27,8 @@ namespace Widelands {
 struct PlayerImmovable;
 struct Game;
 struct Request;
+class Warehouse;
+struct Ware_Index;
 class WareInstance;
 class Worker;
 
@@ -46,7 +48,35 @@ class Worker;
  */
 struct Supply : public Trackable {
 	virtual PlayerImmovable * get_position(Game &) = 0;
+
+	/**
+	 * Indicates whether this supply is active as explained above (out
+	 * on the road network).
+	 */
 	virtual bool is_active() const throw () = 0;
+
+	/**
+	 * Indicates whether this supply is in storage or on its way to
+	 * storage.
+	 *
+	 * If this is \c false, somebody needs to find this supply a warehouse.
+	 */
+	virtual bool has_storage() const throw () = 0;
+
+	/**
+	 * Gets the ware type of this supply.
+	 *
+	 * \note This is only valid if \ref has_storage returns \c false.
+	 */
+	virtual void get_ware_type(bool & isworker, Ware_Index & ware) const = 0;
+
+	/**
+	 * Send this to the given warehouse.
+	 *
+	 * Sets up all the required transfers; assumes that \ref has_storage
+	 * returns \c false.
+	 */
+	virtual void send_to_storage(Game &, Warehouse * wh) = 0;
 
 	/**
 	 * \return the number of items or workers that can be launched right

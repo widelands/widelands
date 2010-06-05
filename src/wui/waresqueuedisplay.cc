@@ -59,8 +59,8 @@ public:
 	virtual void think();
 	virtual void draw(RenderTarget &);
 
-private:
-	void recalc_size();
+protected:
+	virtual void update_desired_size();
 
 private:
 	Widelands::WaresQueue * m_queue;
@@ -93,7 +93,7 @@ m_display_size(0)
 	m_icon = ware.icon();
 	m_pic_background = g_gr->create_grayed_out_pic(m_icon);
 
-	recalc_size();
+	update_desired_size();
 
 	set_think(true);
 }
@@ -107,7 +107,7 @@ WaresQueueDisplay::~WaresQueueDisplay() {
  *
  * This is useful for construction sites, whose queues shrink over time.
  */
-void WaresQueueDisplay::recalc_size()
+void WaresQueueDisplay::update_desired_size()
 {
 	m_display_size = (m_max_width - 2 * Border) / CellWidth;
 
@@ -116,7 +116,7 @@ void WaresQueueDisplay::recalc_size()
 	if (m_cache_size < m_display_size)
 		m_display_size = m_cache_size;
 
-	set_size(m_display_size * CellWidth + 2 * Border, Height);
+	set_desired_size(m_display_size * CellWidth + 2 * Border, Height);
 }
 
 /**
@@ -125,7 +125,7 @@ void WaresQueueDisplay::recalc_size()
 void WaresQueueDisplay::think()
 {
 	if (static_cast<uint32_t>(m_queue->get_size()) != m_cache_size)
-		recalc_size();
+		update_desired_size();
 
 	if (static_cast<uint32_t>(m_queue->get_filled()) != m_cache_filled)
 		update();
