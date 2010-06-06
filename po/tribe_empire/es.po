@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-05-31 15:18+0000\n"
-"Last-Translator: David Vargas <Unknown>\n"
+"PO-Revision-Date: 2010-06-05 17:12+0000\n"
+"Last-Translator: fgp <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-01 03:36+0000\n"
+"X-Launchpad-Export-Date: 2010-06-06 03:30+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -191,7 +191,7 @@ msgstr "Construcción"
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of laying stones."
-msgstr ""
+msgstr "Corta trozos de granito y mármol de piedras sueltas"
 
 #: ../../tribes/empire/conf:171
 msgid "Deep Coal Mine"
@@ -725,11 +725,11 @@ msgstr "Indicador recurso mucho oro"
 
 #: ../../tribes/empire/conf:38
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Indicador de recursos poco granito"
 
 #: ../../tribes/empire/conf:39
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Indicador de recursos mucho granito"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator iron little"
@@ -871,7 +871,7 @@ msgstr "El hacha es la herramienta del leñador. Es producida en la herrería."
 
 #: ../../tribes/empire/bread/conf:1
 msgid "The bakers of the Empire make really tasty bread."
-msgstr ""
+msgstr "Los panaderos del Imperio hacen buen pan"
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""

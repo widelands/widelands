@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-05-30 18:56+0000\n"
-"Last-Translator: LennStar <Unknown>\n"
+"PO-Revision-Date: 2010-06-05 21:42+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-31 03:43+0000\n"
+"X-Launchpad-Export-Date: 2010-06-06 03:30+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:1724
@@ -2915,7 +2915,7 @@ msgstr "Original:"
 
 #: ../../src/ui_fsmenu/launchgame.cc:485
 msgid "(Save): "
-msgstr "(Speichern): "
+msgstr "(Spielstand): "
 
 #: ../../src/ui_fsmenu/loadgame.cc:64
 msgid "Delete"
@@ -4230,7 +4230,7 @@ msgstr "Erstelle Zufallskarte..."
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:150
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
 msgid "Make Directory"
-msgstr "Erstelle Ordner"
+msgstr "Erstelle Verzeichnis"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:208
 msgid "unnamed"
