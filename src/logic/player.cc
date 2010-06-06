@@ -63,6 +63,7 @@ Player::Player
 	m_initialization_index(initialization_index),
 	m_frontier_style_index(0),
 	m_flag_style_index    (0),
+	m_team_number(0),
 	m_see_all           (false),
 	m_plnum             (plnum),
 	m_tribe             (tribe_descr),
@@ -141,6 +142,22 @@ void Player::allocate_map()
 	m_fields = new Field[map.max_index()];
 }
 
+/**
+ * Assign the player the given team number.
+ */
+void Player::set_team_number(TeamNumber team)
+{
+	m_team_number = team;
+}
+
+/**
+ * Returns whether this player and the given other player can attack
+ * each other.
+ */
+bool Player::is_hostile(const Player& other) const
+{
+	return &other != this && (!m_team_number || m_team_number != other.m_team_number);
+}
 
 Message_Id Player::add_message
 	(Game & game, Message & message, bool const popup)
@@ -754,7 +771,7 @@ void Player::enemyflagaction
 			 attacker, player_number());
 	else if (count == 0)
 		log("enemyflagaction: count is 0\n");
-	else if (&flag.owner() != this)
+	else if (is_hostile(flag.owner()))
 		if (Building * const building = flag.get_building())
 			if (upcast(Attackable, attackable, building))
 				if (attackable->canAttack()) {

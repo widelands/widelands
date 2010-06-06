@@ -107,13 +107,17 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		(this,
 		 m_xres * 19 / 100, m_yres * 53 / 200,
 		 _("Player's type"), UI::Align_Left),
+	m_team
+		(this,
+		 m_xres * 31 / 100, m_yres * 53 / 200,
+		 _("Team"), UI::Align_Left),
 	m_tribe
 		(this,
-		 m_xres * 8 / 25, m_yres * 53 / 200,
+		 m_xres * 36 / 100, m_yres * 53 / 200,
 		 _("Player's tribe"), UI::Align_Left),
 	m_init
 		(this,
-		 m_xres * 9 / 20, m_yres * 53 / 200,
+		 m_xres * 51 / 100, m_yres * 53 / 200,
 		 _("Start type"), UI::Align_Left),
 	m_ready
 		(this,
@@ -145,6 +149,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_name   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	m_type   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
+	m_team   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	m_tribe  .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	m_init   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	m_notes  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);

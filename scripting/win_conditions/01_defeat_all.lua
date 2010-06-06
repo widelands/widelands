@@ -1,5 +1,5 @@
 -- =======================================================================
---                         Defeat all Win condition                         
+--                         Defeat all Win condition
 -- =======================================================================
 
 use("aux", "coroutine") -- for sleep
@@ -8,8 +8,8 @@ set_textdomain("win_conditions")
 
 return {
    name = _ "Autocrat",
-   description = _ "The tribe that can defeat all others wins!",
-   func = function() 
+   description = _ "The tribe (or team) that can defeat all others wins!",
+   func = function()
       -- Find all valid players
       local plrs = {}
       for i=1,10 do
@@ -18,9 +18,26 @@ return {
          end
       end
 
+      local function count_factions()
+         local factions = 0
+         local teams = {}
+         for idx,p in ipairs(plrs) do
+            local team = p.team
+            if team == 0 then
+               factions = factions + 1
+            else
+               if not teams[team] then
+                  teams[team] = true
+                  factions = factions + 1
+               end
+            end
+         end
+         return factions
+      end
+
       -- Iterate all players, if one is defeated, remove him
       -- from the list and send him a defeated message
-      while #plrs > 1 do
+      repeat
          sleep(5000)
          for idx,p in ipairs(plrs) do
             if p.defeated then
@@ -31,15 +48,16 @@ return {
                break
             end
          end
-      end
+      until count_factions() <= 1
 
-      -- Only one player left. This is the winner!
-      local p = plrs[1]
-      p:send_message(
-         _ "Congratulations!",
-         _ "You have won this game!", 
-         {popup = true}
-      )
+      -- Send congratulations to all remaining players
+      for idx,p in ipairs(plrs) do
+         p:send_message(
+            _ "Congratulations!",
+            _ "You have won this game!",
+            {popup = true}
+         )
+      end
 
    end,
 }
