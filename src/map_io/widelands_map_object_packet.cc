@@ -99,25 +99,14 @@ void Map_Object_Packet::Read
 }
 
 
-struct loader_sorter {
-	bool operator()
-		(Map_Object::Loader * const a, Map_Object::Loader * const b) const
-	{
-		assert(a->get_object()->serial() != b->get_object()->serial());
-		return a->get_object()->serial() < b->get_object()->serial();
-	}
-};
 void Map_Object_Packet::LoadFinish() {
-	typedef std::set<Map_Object::Loader *, loader_sorter> LoaderSetSorted;
-	LoaderSetSorted loaders_sorted;
 	// load_pointer stage
 	container_iterate_const(LoaderSet, loaders, i) {
 		(*i.current)->load_pointers();
-		loaders_sorted.insert(*i.current);
 	}
 
 	// load_finish stage
-	container_iterate_const(LoaderSetSorted, loaders_sorted, i) {
+	container_iterate_const(LoaderSet, loaders, i) {
 		(*i.current)->load_finish();
 		(*i.current)->mol().mark_object_as_loaded(*(*i.current)->get_object());
 	}
