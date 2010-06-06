@@ -138,7 +138,7 @@ int m_property_setter(lua_State * const L) {
  * make sure that the method is called correctly: obj.method(obj) or
  * obj:method(). We also check that we are not called with another object
  */
-template <class T>
+template <class T, class PT>
 int m_method_dispatch(lua_State * const L) {
 	// Check for invalid: obj.method()
 	int const n = lua_gettop(L);
@@ -149,7 +149,7 @@ int m_method_dispatch(lua_State * const L) {
 	luaL_checktype(L, 1, LUA_TTABLE);
 
 	// Get the method pointer from the closure
-	typedef int (T::* const * ConstMethod)(lua_State *);
+	typedef int (PT::* const * ConstMethod)(lua_State *);
 	ConstMethod func = reinterpret_cast<ConstMethod>
 		(lua_touserdata(L, lua_upvalueindex(1)));
 
@@ -279,7 +279,7 @@ void m_register_methods_in_metatable(lua_State * const L)
 			(L,
 			 const_cast<void *>
 			 	(reinterpret_cast<void const *>(&PT::Methods[i].method)));
-		lua_pushcclosure(L, &(m_method_dispatch<T>), 1);
+		lua_pushcclosure(L, &(m_method_dispatch<T, PT>), 1);
 		lua_settable(L, -3); // Metatable is directly before our pushed stuff
 	}
 }
