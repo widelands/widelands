@@ -2,6 +2,8 @@ project (widelands)
 
 cmake_minimum_required (VERSION 2.6)
 
+enable_testing()
+
 # Used as versioning, if WL_VERSION_STANDARD is definded.
 if (WL_VERSION_STANDARD)
 	# Set the values below for standard versioning.
@@ -106,9 +108,8 @@ set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 set (BUILD_SHARED_LIBS OFF)
 set (Boost_USE_STATIC_LIBS   ON)
 set (Boost_USE_MULTITHREADED ON)
-find_package(Boost 1.35.0 REQUIRED)
+find_package(Boost 1.35.0 REQUIRED COMPONENTS unit_test_framework prg_exec_monitor)
 include_directories(${Boost_INCLUDE_DIR})
-target_link_libraries(widelands ${Boost_LIBRARIES})
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
