@@ -8,7 +8,7 @@ list(REMOVE_ITEM SDL_LIBRARY_NOMAIN  ${SDLMAIN_LIBRARY})
 target_link_libraries(test_widelands_scripting 
 	widelands_logic widelands_main widelands_ai widelands_scripting widelands_sound widelands_wui widelands_graphic widelands_economy widelands_map_io widelands_editor widelands_ui_fsmenu widelands_network widelands_game_io widelands_ui_basic widelands_profile widelands_io
 	widelands_io_filesystem widelands_editor widelands_editor_tools widelands_editor_ui_menus 
-	${Boost_unit_test_framework_LIBRARIES}
+	${Boost_LIBRARIES}
 	${PNG_LIBRARY}
 	${ZLIB_LIBRARY}
 	${JPEG_LIBRARY}

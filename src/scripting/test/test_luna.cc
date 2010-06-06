@@ -15,8 +15,9 @@ public:
 	LUNA_CLASS_HEAD(L_Class);
 	const char * get_modulename() {return "test";}
 	L_Class() :x(123) {}
+	virtual ~L_Class() {}
 	L_Class(lua_State *L) :x(124) {}
-	int test(lua_State *L) 
+	virtual int test(lua_State *L) 
 	{
 		lua_pushuint32(L, x);
 		return 1;
@@ -33,6 +34,55 @@ const PropertyType<L_Class> L_Class::Properties[] = {
 	{0, 0, 0},
 };
 
+class L_SubClass : public L_Class
+{
+	int y;
+public:
+	LUNA_CLASS_HEAD(L_SubClass);
+	L_SubClass() :y(1230) {}
+	L_SubClass(lua_State *L) : L_Class(L), y(1240) {}
+	virtual int subtest(lua_State *L) 
+	{
+		lua_pushuint32(L, y);
+		return 1;
+	}
+	virtual void __persist(lua_State * L) {}
+	virtual void __unpersist(lua_State * L) {}
+};
+const char L_SubClass::className[] = "SubClass";
+const MethodType<L_SubClass> L_SubClass::Methods[] = {
+	METHOD(L_SubClass, subtest),
+	{0, 0},
+};
+const PropertyType<L_SubClass> L_SubClass::Properties[] = {
+	{0, 0, 0},
+};
+
+class L_VirtualClass : public virtual L_Class
+{
+	int z;
+public:
+	LUNA_CLASS_HEAD(L_VirtualClass);
+	L_VirtualClass() :z(12300) {}
+	L_VirtualClass(lua_State *L) : L_Class(L), z(12400) {}
+	virtual int virtualtest(lua_State *L) 
+	{
+		lua_pushuint32(L, z);
+		return 1;
+	}
+	virtual void __persist(lua_State * L) {}
+	virtual void __unpersist(lua_State * L) {}
+};
+const char L_VirtualClass::className[] = "VirtualClass";
+const MethodType<L_VirtualClass> L_VirtualClass::Methods[] = {
+	METHOD(L_VirtualClass, virtualtest),
+	{0, 0},
+};
+const PropertyType<L_VirtualClass> L_VirtualClass::Properties[] = {
+	{0, 0, 0},
+};
+
+
 const static struct luaL_reg wltest [] = {
 	{0, 0}
 };
@@ -42,11 +92,22 @@ const static struct luaL_reg wl [] = {
 
 BOOST_AUTO_TEST_CASE(test_luna)
 {
-	char * script =
-		"print( 'test_luna' )\n"
+	const char * script1 =
+		"print( 'test_luna simple class' )\n"
 		"t = wl.test.Class()\n"
 		"x = t:test()\n"
 		"print( x )\n";
+	const char * script2 =
+		"print( 'test_luna simple inheritance' )\n"
+		"s = wl.test.SubClass()\n"
+		"sx = s:test()\n"
+		"print( sx )\n";
+	const char * script3 =
+		"print( 'test_luna virtual inheritance' )\n"
+		"v = wl.test.VirtualClass()\n"
+		"vx = v:test()\n"
+		"print( vx )\n";
+
 	shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
 	lua_State*L = L_ptr.get();
 	luaL_openlibs(L);
@@ -57,9 +118,22 @@ BOOST_AUTO_TEST_CASE(test_luna)
 	lua_pop(L, 1); // pop the table from the stack
 	register_class<L_Class>(L, "test");
 
-	BOOST_CHECK_EQUAL(0, luaL_loadbuffer(L, script, strlen(script), "testscript"));
+	// single inheritance
+	register_class<L_SubClass>(L, "test", true);
+	add_parent<L_SubClass, L_Class>(L);
+	lua_pop(L, 1); // Pop the meta table
 
+	// virtual base class 
+	register_class<L_VirtualClass>(L, "test", true);
+	add_parent<L_VirtualClass, L_Class>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	BOOST_CHECK_EQUAL(0, luaL_loadbuffer(L, script1, strlen(script1), "testscript1"));
 	BOOST_CHECK_EQUAL(0, lua_pcall(L, 0, 1, 0));
 	
+	BOOST_CHECK_EQUAL(0, luaL_loadbuffer(L, script2, strlen(script2), "testscript2"));
+	BOOST_CHECK_EQUAL(0, lua_pcall(L, 0, 1, 0));
 
+	BOOST_CHECK_EQUAL(0, luaL_loadbuffer(L, script3, strlen(script3), "testscript3"));
+	BOOST_CHECK_EQUAL(0, lua_pcall(L, 0, 1, 0));
 }
