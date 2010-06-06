@@ -65,7 +65,8 @@ SinglePlayerGameController::SinglePlayerGameController
 		 	("speed_of_new_game", 1000)),
 	m_player_cmdserial(0),
 	m_local           (local)
-{}
+{
+}
 
 SinglePlayerGameController::~SinglePlayerGameController()
 {

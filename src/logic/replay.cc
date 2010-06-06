@@ -66,6 +66,9 @@ struct Cmd_ReplaySyncRead : public Command {
 				 "Replay has: %s\n",
 				 duetime(), myhash.str().c_str(), m_hash.str().c_str());
 
+			// In case syncstream logging is on, save it for analysis
+			game.save_syncstream(true);
+
 			// There has to be a better way to do this.
 			game.gameController()->setDesiredSpeed(0);
 		} else {
