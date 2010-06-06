@@ -6,109 +6,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 19:16+0000\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-05-26 13:25+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-05-27 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Samouczek 1 - Oczy w mroku"
-
-#: ../../campaigns/t01.wmf/elemental:9
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
 msgid ""
-"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
-"gameplay and control as well as basic production buildings (wood, stone, "
-"etc.) will be introduced."
-msgstr ""
-"Pierwsza misja z Samouczka barbarzyńców. W tej części zostaną przedstawione "
-"podstawowe założenia gry, interfejs oraz podstawowe budynki produkcyjne "
-"(pozyskiwanie drewna, kamieni itp.)."
-
-#: ../../campaigns/t01.wmf/event:23
-msgid "Thron sighs..."
-msgstr "Tron wzdycha..."
-
-#: ../../campaigns/t01.wmf/event:25
-msgid ""
-" \"It's been months and we are still hiding where the forests are old and "
-"dark.<br> My warriors hunt at day and lie awake at night - listening to the "
-"sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
-msgstr ""
-" \"Minęły miesiące a my wciąż chronimy się tam gdzie las jest stary i "
-"ciemny. Moi wojownicy polują za dnia i nie śpią w nocy, nasłuchując dźwięków "
-"okrutnej rzezi nadchodzących z daleka spośród drzew.\" "
-
-#: ../../campaigns/t01.wmf/event:27
-#: ../../campaigns/t01.wmf/event:40
-#: ../../campaigns/t01.wmf/event:53
-#: ../../campaigns/t01.wmf/event:66
-msgid "The story begins"
-msgstr "Opowieść się rozpoczyna..."
-
-#: ../../campaigns/t01.wmf/event:32
-#: ../../campaigns/t01.wmf/event:45
-#: ../../campaigns/t01.wmf/event:58
-#: ../../campaigns/t01.wmf/event:71
-#: ../../campaigns/t01.wmf/event:106
-#: ../../campaigns/t01.wmf/event:122
-#: ../../campaigns/t01.wmf/event:137
-#: ../../campaigns/t01.wmf/event:153
-#: ../../campaigns/t01.wmf/event:168
-#: ../../campaigns/t01.wmf/event:184
-#: ../../campaigns/t01.wmf/event:199
-#: ../../campaigns/t01.wmf/event:229
-#: ../../campaigns/t01.wmf/event:244
-#: ../../campaigns/t01.wmf/event:259
-#: ../../campaigns/t01.wmf/event:274
-#: ../../campaigns/t01.wmf/event:306
-msgid "OK"
-msgstr "OK"
-
-#: ../../campaigns/t01.wmf/event:38
-msgid ""
-" \"We can see the raging flames that swallow Al'thunran from here, miles "
-"away.<br> The red lights flash in the darkness and dance to the rhythm of "
-"the wardrums that haunt me even in my nightmares.\" "
-msgstr ""
-" \"I stąd widać szalejące płomienie trawiące odległe Al'thunran. Nawet w "
-"moich koszmarach wciąż mnie nawiedzają czerwone światła rozbłyskujące w "
-"ciemności, tańczące w rytmie wojennych bębnów.\" "
-
-#: ../../campaigns/t01.wmf/event:51
-msgid ""
-" \"My father's bones lay peacefully in the grounds he cleared from the "
-"senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal "
-"companion and friend is a source of peace and comfort to me in these dark "
-"times. He keeps my spirits high and those of my warriors awake, not to let "
-"greed or despair destroy our bonds as well.\" "
-msgstr ""
-" \"Prochy mojego ojca spoczywają spokojnie w ziemi, którą uwolnił od "
-"panującego tu wcześniej bezsensownego rozlewu krwi.<br> Boldreth, mój "
-"lojalny towarzysz i przyjaciel, jest mi źródłem pokoju w tych mrocznych "
-"czasach. Podtrzymuje mnie i mych wojowników na duchu, by chciwość lub "
-"zwątpienie nie wkradły się w nasze serca.\" "
-
-#: ../../campaigns/t01.wmf/event:64
-msgid ""
-" \"As father told me, there will be times to fight and times to lie and "
-"wait, trying not to sleep or die before the right time comes. And so I do... "
+" \"As father told me, there are times to fight and times to lie and wait, "
+"trying not to fall asleep or die before the right time comes. And so I do... "
 "wait.\" "
 msgstr ""
 " \"Jak powiedział mi ojciec, będzie czas na walkę i na odpoczynek, będziesz "
 "się starał nie zasnąć czekając oraz nie zginąć przed czasem. I to właśnie "
 "robię... czekam.\" "
 
-#: ../../campaigns/t01.wmf/event:98
-msgid "An old man says..."
-msgstr "Stary człowiek mówi..."
-
-#: ../../campaigns/t01.wmf/event:100
+#: ../../campaigns/t01.wmf/scripting/texts.lua:45
 msgid ""
 " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days.\" "
@@ -116,200 +34,11 @@ msgstr ""
 " \"Chwała wodzu! Mam na imię Khantrukh, przeżyłem na tym świecie już wiele "
 "lat. Proszę, pozwól mi pomóc sobie moją radą w te okrutne, ciemne dni.\" "
 
-#: ../../campaigns/t01.wmf/event:102
-msgid "Somebody comes upon to you"
-msgstr "Ktoś do Ciebie podchodzi"
-
-#: ../../campaigns/t01.wmf/event:112
-msgid "Khantrukh continues..."
-msgstr "Khantrukh mówi dalej..."
-
-#: ../../campaigns/t01.wmf/event:114
-msgid ""
-" \"None but the gods know how long we have to remain hidden here. The "
-"warriors hope we may march back gloriously any day now, but I strongly doubt "
-"that will happen soon. And the days are already getting shorter and "
-"colder...<br> We should prepare, in case we have to face the winter in these "
-"harsh lands. I believe to the east of our campside are a few places where we "
-"could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
-msgstr ""
-" \"Tylko bogowie wiedzą jak długo uda nam się pozostać tutaj w ukryciu. "
-"Wojownicy uważają, że możemy w każdej chwili powrócić w chwale, jednak ja "
-"szczerze wątpię, iż stanie się to niebawem. Dni już teraz robią się coraz "
-"krótsze i zimniejsze...<br> Jeżeli chcemy przetrwać zimę w tej niemiłej "
-"krainie, powinniśmy się wcześniej przygotować. Sądzę, że wschodnia część "
-"obozu będzie idealna by wznieść chatę drwala.\"<br><br>-- NOWE CELE --<br> "
-
-#: ../../campaigns/t01.wmf/event:115
-#: ../../campaigns/t01.wmf/objective:7
-msgid ""
-"* Press SPACE to see where you can build.<br> The red spots show you where a "
-"small building - like a lumberjack's hut - may be built.<br>"
-msgstr ""
-"* Naciśnij Spację aby zobaczyć gdzie można budować.<br> Czerwone punkty "
-"pokazują gdzie można budować małe budynki, takie jak na przykład chata "
-"drwala.<br>"
-
-#: ../../campaigns/t01.wmf/event:116
-#: ../../campaigns/t01.wmf/objective:8
-msgid ""
-"* Build a lumberjack's hut at the red spot directly right of your "
-"headquarters by clicking at it and selecting lumberjack's hut.<br>"
-msgstr ""
-"* Na prawo od swojej kwatery głównej zbuduj chatę drwala. Naciśnij na "
-"czerwony punkt i wybierz odpowiedni budynek.<br>"
-
-#: ../../campaigns/t01.wmf/event:118
-#: ../../campaigns/t01.wmf/event:133
-#: ../../campaigns/t01.wmf/event:149
-#: ../../campaigns/t01.wmf/event:164
-#: ../../campaigns/t01.wmf/event:180
-#: ../../campaigns/t01.wmf/event:195
-msgid "The advisor"
-msgstr "Doradca"
-
-#: ../../campaigns/t01.wmf/event:128
-msgid "The elder remarks..."
-msgstr "Starzec zauważa..."
-
-#: ../../campaigns/t01.wmf/event:130
-msgid ""
-" \"Obviously, it would be too draining for our people to walk all the way to "
-"the lumberjack's hut through the wilderness. We will have to make a path "
-"between our hall and the lumberjack's hut. It's not a hard guess that the "
-"men would appreciate a way as short and even as possible - the wood surely "
-"will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" \"Przemierzanie całej trasy do chatki drwala przez taką puszczę było by "
-"niewątpliwie zbyt męczące dla naszych ludzi. Będziemy musieli zbudować drogę "
-"łączącą halę z chatką drwala. Nietrudno się domyślić, że ludzie woleli by "
-"drogę tak krótką i prostą jak to tylko możliwe - przenoszenie drzewa na "
-"pewno i tak będzie wystarczająco ciężką pracą.\"<br><br>-- NOWE CELE --<br> "
-
-#: ../../campaigns/t01.wmf/event:131
-#: ../../campaigns/t01.wmf/objective:9
-msgid ""
-"* Build a road between your headquarters and the lumberjack's hut.<br> When "
-"you place the lumberjack's hut, a flag is created for it. You should connect "
-"it to another flag with a road.<br> If you click on a flag, little symbols "
-"will appear around it to show you in which directions you can build the "
-"road.<br> The colour of those symbols indicate how steep the road will be. "
-"Green is flat, yellow is steep and red is very steep. The steeper the step "
-"is, the harder it will be for your people to walk on it.<br> You can click "
-"on any of the symbols to build the first step of the road there. New symbols "
-"will appear to show you where the next step can go, and so on. However, you "
-"can also click further away to build several steps at once. Click on the "
-"flag at the headquarters to finish the road."
-msgstr ""
-"* Zbuduj drogę łączącą kwaterą główną i chatkę drwala.<br> Przy utworzeniu "
-"chatki drwala została automatycznie utworzona również flaga. Należy ją "
-"połączyć drogą z inną flagą. <br> Naciśnięcie na taką flagę (i na ikonę "
-"drogi) spowoduje, że pojawią się wokół niej symbole pokazujące, w którym "
-"kierunku może zostać poprowadzona droga.<br> Kolor tych symboli oznacza jak "
-"stroma będzie droga. Zielona jest płaska, żółta stroma, a czerwona bardzo "
-"stroma. Im bardziej stroma jest droga, tym trudniej będzie po niej chodzić "
-"Twoim ludziom.<br> Klikając na jeden z symboli wybudujesz w tym kierunku "
-"kawałek drogi, a następnie musisz wybrać kolejny kierunek. Poza tym, możesz "
-"kliknąć trochę dalej, aby wybudować dłuższy kawałek na raz. Naciśnij na "
-"flagę przy kwaterze głównej, aby dokończyć drogę."
-
-#: ../../campaigns/t01.wmf/event:144
-msgid "Khantrukh remembers..."
-msgstr "Khantrukh przypomina..."
-
-#: ../../campaigns/t01.wmf/event:146
-msgid ""
-" \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A "
-"crossroads on the way between our site and the lumberjack's hut would ease "
-"the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" \"Jest stare powiedzenie:<br> \"Podzielony ciężar łatwiej jest nosić.\"<br> "
-"Skrzyżowanie na drodze pomiędzy nami i chatką drwala ułatwi drogę naszym "
-"tragarzom. \"<br><br>-- NOWE CELE --<br> "
-
-#: ../../campaigns/t01.wmf/event:147
-#: ../../campaigns/t01.wmf/objective:17
-msgid ""
-"* Place a flag in the middle of the road.<br> There is a flag symbol in the "
-"mid of the way you just built. You place a flag there by clicking on the "
-"symbol and then clicking on the flag button in the consequently appearing "
-"menu. This splits the work of carrying the wood between two carriers.<br> "
-"When much wares are being transported between two points, additional flags "
-"in between make them get faster to their destination, thus improving your "
-"infrastructure.<br>"
-msgstr ""
-"* Umieść flagę na środku drogi. <br> Na drodze, która właśnie została "
-"zbudowana, powinien znajdować się symbol flagi. Kiedy na niego klikniesz, a "
-"następnie klikniesz przycisk z flagą, umieścisz w tym miejscu flagę. Zadanie "
-"przenoszenia drzewa zostanie podzielone między dwóch tragarzy. <br> W "
-"sytuacji, gdy konieczne jest przenoszenie dużej ilości surowców między dwoma "
-"punktami, umieszczenie pomiędzy nimi flag przyśpieszy transport. To w "
-"efekcie usprawni całą Twoją infrastrukturę.<br>"
-
-#: ../../campaigns/t01.wmf/event:159
-msgid "The old man looks to the sky..."
-msgstr "Stary człowiek patrzy w niebo..."
-
-#: ../../campaigns/t01.wmf/event:161
-msgid ""
-" \"The northern winds tell us that the coming winter will be a long and "
-"cruel one. One lumberjack's hut will not be enough to still the needs of our "
-"people. More trees await our axes south of our new crossroads - let us raise "
-"a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" \"Północne wiatry zwiastują nadejście długiej i srogiej zimy. Jedna chatka "
-"drwala nie zaspokoi naszych potrzeb. Na południe od nowego skrzyżowania "
-"drzewa tylko czekają na nasze topory - postawmy tam nową chatkę "
-"drwala!\"<br><br>--NOWE CELE--<br> "
-
-#: ../../campaigns/t01.wmf/event:162
-#: ../../campaigns/t01.wmf/objective:18
-msgid ""
-"* Place a lumberjack's hut directly south of the flag you just placed on the "
-"road. Connect the implied flag with the new lumberjack's hut afterwards.<br> "
-"Note that instead of building a road step by step, you may also directly "
-"click at the destination to build the entire road at once."
-msgstr ""
-"* Postaw chatkę drwala dokładnie na południe od flagi niedawno umieszczonej "
-"na drodze. Połącz wspomnianą flagę z tą, która znajdzie się przy nowej "
-"chatce drwala.<br> Zauważ, że zamiast budować drogę po kawałku, możesz "
-"bezpośrednio połączyć flagi i zbudować całą drogę od razu."
-
-#: ../../campaigns/t01.wmf/event:175
-msgid "Khantrukh nods..."
-msgstr "Khantrukh przytakuje..."
-
-#: ../../campaigns/t01.wmf/event:177
-msgid ""
-" \"Of course, if we intended to build a bigger settlement, much more "
-"lumberjack's huts would be advisable, but this should do for now.<br> But "
-"never forget - these forests are our legacy, entrusted to us by our "
-"ancestors. We must always respect and nourish them. What we take, we must "
-"give back again.<br> So, in order to replace the trees we chop down, we "
-"should build a ranger's hut, preferably close to the lumberjack's "
-"hut.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" \"Oczywiście, jeżeli chcemy wznieść większą osadę, będziemy potrzebowali "
-"dużo więcej chat drwali, jednak na razie tyle powinno wystarczyć.<br> Nigdy "
-"nie zapomnij, że te lasy to dziedzictwo powierzone nam przez naszych "
-"przodków. Musisz pamiętać, żeby zawsze je szanować: co zabierzemy, musimy i "
-"zwrócić z powrotem.<br> Tak więc, aby zastąpić ścięte drzewa, musimy wznieść "
-"leśniczówkę możliwie jak najbliżej chaty drwala.\"<br><br>--NOWE CELE--<br> "
-
-#: ../../campaigns/t01.wmf/event:178
-#: ../../campaigns/t01.wmf/objective:26
-msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
-msgstr "* Zbuduj leśniczówkę na wschód od pierwszej chatki drwala."
-
-#: ../../campaigns/t01.wmf/event:190
-msgid "The elder speaks..."
-msgstr "Starszy mówi..."
-
-#: ../../campaigns/t01.wmf/event:192
+#: ../../campaigns/t01.wmf/scripting/texts.lua:89
 msgid ""
 " \"I am well aware, chieftain, that neither you nor your warriors have the "
 "desire to stay in this forsaken place for long. But even so, our war to "
-"conquer back our home might take a long time and it would seem wise to make "
+"reconquer our home might take a long time and it would seem wise to make "
 "preparations.<br> I would advise that we obtain stones for the future - who "
 "knows what fortifications we might be forced to build very soon. And - like "
 "a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
@@ -322,21 +51,11 @@ msgstr ""
 "jakie fortyfikacje będziemy musieli wkrótce wznosić? Cudownym zrządzeniem "
 "losu pokłady skał znajdują się dosyć niedaleko...\"<br><br>--NOWE CELE--<br> "
 
-#: ../../campaigns/t01.wmf/event:193
-#: ../../campaigns/t01.wmf/objective:34
-msgid "* Build two quarries southwest of your headquarters."
-msgstr "* Zbuduj dwa kamieniołomy na południowy zachód od kwatery głównej."
-
-#: ../../campaigns/t01.wmf/event:220
-#: ../../campaigns/t01.wmf/event:235
-msgid "Thron speaks..."
-msgstr "Tron mówi..."
-
-#: ../../campaigns/t01.wmf/event:222
+#: ../../campaigns/t01.wmf/scripting/texts.lua:105
 msgid ""
 " \"In another sleepless night, I went up to the hill and gazed to the north. "
-"The fires are still burning, stilling their hunger upon my father's "
-"legacy.<br> They are a constant reminder why we had to hide here... and why "
+"The fires are still burning, satisfying their hunger upon my father's "
+"legacy.<br> They are a constant reminder why we have to hide here... and why "
 "we must return in the end!\" "
 msgstr ""
 " \"Kolejnej bezsennej nocy poszedłem na wzgórze i spojrzałem na północ. "
@@ -344,11 +63,79 @@ msgstr ""
 "przypomina, dlaczego musimy się tutaj ukrywać...<br> i dlaczego musimy na "
 "koniec wrócić!\" "
 
-#: ../../campaigns/t01.wmf/event:224
-msgid "In the night"
-msgstr "W nocy"
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:11
+msgid ""
+" \"It's been months and we are still hiding where the forests are old and "
+"dark.<br> My warriors hunt at day and lie awake at night - listening to the "
+"sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
+msgstr ""
+" \"Minęły miesiące a my wciąż chronimy się tam gdzie las jest stary i "
+"ciemny. Moi wojownicy polują za dnia i nie śpią w nocy, nasłuchując dźwięków "
+"okrutnej rzezi nadchodzących z daleka spośród drzew.\" "
 
-#: ../../campaigns/t01.wmf/event:237
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:22
+msgid ""
+" \"My father's bones rest peacefully in the grounds on which he once ended "
+"the senseless bloodspilling that has risen among us. It pains me that his "
+"peace only endured for one generation.<br> Boldreth, my loyal companion and "
+"friend is a source of peace and comfort to me in these dark times. He keeps "
+"my spirits high and those of my warriors awake, not to let greed or despair "
+"destroy the bonds between us as well.\" "
+msgstr ""
+" \"Prochy mojego ojca spoczywają spokojnie w ziemi, którą uwolnił od "
+"panującego tu wcześniej bezsensownego rozlewu krwi.<br> Boldreth, mój "
+"lojalny towarzysz i przyjaciel, jest mi źródłem pokoju w tych mrocznych "
+"czasach. Podtrzymuje mnie i mych wojowników na duchu, by chciwość lub "
+"zwątpienie nie wkradły się w nasze serca.\" "
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:51
+msgid ""
+" \"None but the gods know how long we have to remain hidden here. The "
+"warriors hope we may march back gloriously any day now, but I strongly doubt "
+"that will happen soon. And the days are already getting shorter and "
+"colder...<br> We should prepare, in case we have to face the winter in these "
+"harsh lands. I believe to the east of our campsite are a few places where we "
+"could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
+msgstr ""
+" \"Tylko bogowie wiedzą jak długo uda nam się pozostać tutaj w ukryciu. "
+"Wojownicy uważają, że możemy w każdej chwili powrócić w chwale, jednak ja "
+"szczerze wątpię, iż stanie się to niebawem. Dni już teraz robią się coraz "
+"krótsze i zimniejsze...<br> Jeżeli chcemy przetrwać zimę w tej niemiłej "
+"krainie, powinniśmy się wcześniej przygotować. Sądzę, że wschodnia część "
+"obozu będzie idealna by wznieść chatę drwala.\"<br><br>-- NOWE CELE --<br> "
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:60
+msgid ""
+" \"Obviously, it would be too exhausting for our people to walk all the way "
+"to the lumberjack's hut through the wilderness. We will have to build a road "
+"between our hall and the lumberjack's hut. It's not a hard guess that the "
+"men would appreciate a way as short and plain as possible - the wood will "
+"surely be heavy enough, nevertheless.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+" \"Przemierzanie całej trasy do chatki drwala przez taką puszczę było by "
+"niewątpliwie zbyt męczące dla naszych ludzi. Będziemy musieli zbudować drogę "
+"łączącą halę z chatką drwala. Nietrudno się domyślić, że ludzie woleli by "
+"drogę tak krótką i prostą jak to tylko możliwe - przenoszenie drzewa na "
+"pewno i tak będzie wystarczająco ciężką pracą.\"<br><br>-- NOWE CELE --<br> "
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:81
+msgid ""
+" \"Of course, if we intended to build a bigger settlement, many more "
+"lumberjack's huts would be advisable, but this should suffice for now.<br> "
+"But never forget - these forests are our heritage, entrusted upon us by our "
+"ancestors. We must always respect and care for them. What we take, we must "
+"give back again.<br> So, in order to replace the trees we chop down, we "
+"should build a ranger's hut, preferably close to the lumberjack's "
+"hut.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+" \"Oczywiście, jeżeli chcemy wznieść większą osadę, będziemy potrzebowali "
+"dużo więcej chat drwali, jednak na razie tyle powinno wystarczyć.<br> Nigdy "
+"nie zapomnij, że te lasy to dziedzictwo powierzone nam przez naszych "
+"przodków. Musisz pamiętać, żeby zawsze je szanować: co zabierzemy, musimy i "
+"zwrócić z powrotem.<br> Tak więc, aby zastąpić ścięte drzewa, musimy wznieść "
+"leśniczówkę możliwie jak najbliżej chaty drwala.\"<br><br>--NOWE CELE--<br> "
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:115
 msgid ""
 " \"Once again, I went up to my father's tomb, in a sacred grove at the foot "
 "of the great spire of Kal'mavrath. I just stood there and felt neither the "
@@ -362,22 +149,14 @@ msgstr ""
 "to było pożegnanie. Pierwszy raz zaciekawiło mnie to, co przyszłość może "
 "kryć dla mnie...\" "
 
-#: ../../campaigns/t01.wmf/event:239
-msgid "At the grave"
-msgstr "Nad grobem"
-
-#: ../../campaigns/t01.wmf/event:250
-msgid "Thron says thoughtfully..."
-msgstr "Thron mówi zamyślony..."
-
-#: ../../campaigns/t01.wmf/event:252
+#: ../../campaigns/t01.wmf/scripting/texts.lua:125
 msgid ""
 " \"Some time ago, Boldreth came to me. His advice was to move to a place "
-"closer to home - to strike at the first sign of my brother's forces "
-"wavering.<br> But I look over the forests and I still see black smoke rising "
-"to the sky. I know - it is too early yet, and what he hopes for will not "
-"happen any time soon. He might still be right, but I fear the bloodshed that "
-"too rash a return would cause both on our and the other side...\" "
+"closer to home - to strike at the first sign of my brothers' forces "
+"wavering.<br> But I look over the forests and I can still see black smoke "
+"rising to the sky. I know - it is too early yet, and what he hopes for will "
+"not happen any time soon. He might still be right, but I fear the bloodshed "
+"that returning too fast would cause both on our and the other side...\" "
 msgstr ""
 " \"Jakiś czas temu Boldreth przyszedł do mnie i poradził, aby przenieść się "
 "w jakieś miejsce bliżej domu - by uderzyć, gdy tylko wojska mojego brata się "
@@ -387,15 +166,29 @@ msgstr ""
 "ma rację, ale boje się, że zbyt szybki powrót spowoduje ogromny rozlew krwi "
 "i wielkie straty po obu stronach...\" "
 
-#: ../../campaigns/t01.wmf/event:254
-msgid "The other day"
-msgstr "Kolejny dzień..."
+#: ../../campaigns/t01.wmf/scripting/texts.lua:74
+msgid ""
+" \"The northern winds tell us that the coming winter will be a long and "
+"cruel one. One lumberjack's hut will not be enough to fit the needs of our "
+"people. More trees wait for our axes just south of our new crossroads - let "
+"us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+" \"Północne wiatry zwiastują nadejście długiej i srogiej zimy. Jedna chatka "
+"drwala nie zaspokoi naszych potrzeb. Na południe od nowego skrzyżowania "
+"drzewa tylko czekają na nasze topory - postawmy tam nową chatkę "
+"drwala!\"<br><br>--NOWE CELE--<br> "
 
-#: ../../campaigns/t01.wmf/event:265
-msgid "Thron looks furious..."
-msgstr "Thron wygląda rozwścieczenie..."
+#: ../../campaigns/t01.wmf/scripting/texts.lua:67
+msgid ""
+" \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A "
+"crossroads on the way between our headquarters and the lumberjack's hut "
+"would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+" \"Jest stare powiedzenie:<br> \"Podzielony ciężar łatwiej jest nosić.\"<br> "
+"Skrzyżowanie na drodze pomiędzy nami i chatką drwala ułatwi drogę naszym "
+"tragarzom. \"<br><br>-- NOWE CELE --<br> "
 
-#: ../../campaigns/t01.wmf/event:267
+#: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
 " \"Today, my warriors picked up an old man, wandering sick and wounded "
 "through the dark forest. We listened in horror when he told us of the "
@@ -407,41 +200,286 @@ msgstr ""
 "okrucieństwach mających miejsce w Al'thunran.<br> Niniejszym odnawiam moją "
 "przysięgę, zatrzymam to szaleństwo nieważne za jaką cenę!\" "
 
-#: ../../campaigns/t01.wmf/event:269
-msgid "The oath"
-msgstr "Przysięga"
-
-#: ../../campaigns/t01.wmf/event:300
+#: ../../campaigns/t01.wmf/scripting/texts.lua:94
 msgid ""
 " \"Very well done, chieftain. We now have all we need to face the winter and "
 "may prepare ourselves for the battles ahead.<br><br>--------------------- "
-"VICTORY! ----------------------<br><br> You may continue if you wish. "
-"Otherwise, move on to the next mission.\" "
+"VICTORY! ----------------------<br><br> You may continue to play this map if "
+"you wish. Otherwise, move on to the next mission.\" "
 msgstr ""
 " \"Dobra robota Wodzu. Mamy teraz wszystko co potrzebne by stawić czoła "
 "zimie i możemy się przygotować na czekające nas bitwy.<br><br>---------------"
 "------ ZWYCIĘSTWO! ---------------------<br><br> Możesz kontynuować grę "
 "jeżeli chcesz lub przejść do kolejnej misji.\" "
 
-#: ../../campaigns/t01.wmf/event:302
-msgid "Mission Complete"
-msgstr "Misja zakończona"
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
+msgid ""
+" \"We can see the raging flames that swallow Al'thunran from here, miles "
+"away.<br> The red lights flash in the darkness and dance to the rhythm of "
+"the wardrums that haunt me even in my nightmares.\" "
+msgstr ""
+" \"I stąd widać szalejące płomienie trawiące odległe Al'thunran. Nawet w "
+"moich koszmarach wciąż mnie nawiedzają czerwone światła rozbłyskujące w "
+"ciemności, tańczące w rytmie wojennych bębnów.\" "
 
-#: ../../campaigns/t01.wmf/objective:5
+#: ../../campaigns/t01.wmf/scripting/texts.lua:10
+#: ../../campaigns/t01.wmf/scripting/texts.lua:53
+msgid ""
+"* Build a lumberjack's hut at the red house symbol just right of your "
+"headquarters by clicking on it and selecting a lumberjack's hut.<br>"
+msgstr ""
+"* Na prawo od swojej kwatery głównej zbuduj chatę drwala. Naciśnij na "
+"czerwony punkt i wybierz odpowiedni budynek.<br>"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:27
+#: ../../campaigns/t01.wmf/scripting/texts.lua:82
+msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
+msgstr "* Zbuduj leśniczówkę na wschód od pierwszej chatki drwala."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:61
+msgid ""
+"* Build a road between your headquarters and the construction site of the "
+"lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created "
+"for it. You need to connect it to another flag by building a road between "
+"them.<br> If you click on a flag and select to build a road, little symbols "
+"will appear around it to show you in which directions you can build it.<br> "
+"The colour of these symbols indicates how steep this part of the road will "
+"be. Green is for flat, yellow means steep and red stands for very steep. The "
+"steeper the road is, the harder it will be for your people to walk on it "
+"(and your wares will be transported more slowly).<br> You can click on any "
+"of the symbols to build the first part of the road there. New symbols will "
+"appear to show you where the next part of the road can go, and so on. "
+"However, you can also click farer away from the flag to build several steps "
+"at once. Click on the flag at the headquarters to finish the road."
+msgstr ""
+"* Zbuduj drogę łączącą kwaterą główną i plac budowy chatki drwala.<br> Przy "
+"utworzeniu chatki drwala została automatycznie utworzona również flaga. "
+"Należy ją połączyć drogą z inną flagą. <br> Naciśnięcie na taką flagę (i na "
+"ikonę drogi) spowoduje, że pojawią się wokół niej symbole pokazujące, w "
+"którym kierunku może zostać poprowadzona droga.<br> Kolor tych symboli "
+"oznacza jak stroma będzie droga. Zielona jest płaska, żółta stroma, a "
+"czerwona bardzo stroma. Im bardziej stroma jest droga, tym trudniej będzie "
+"po niej chodzić Twoim ludziom.<br> Klikając na jeden z symboli wybudujesz w "
+"tym kierunku kawałek drogi, a następnie musisz wybrać kolejny kierunek. Poza "
+"tym, możesz kliknąć trochę dalej, aby wybudować dłuższy kawałek na raz. "
+"Naciśnij na flagę przy kwaterze głównej, aby dokończyć drogę."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:11
+msgid ""
+"* Build a road between your headquarters and the construction site of the "
+"lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created "
+"for it. You need to connect it to another flag by building a road between "
+"them.<br> If you click on a flag and select to build a road, little symbols "
+"will appear around it to show you in which directions you can build it.<br> "
+"The colour of these symbols indicates how steep this part of the road will "
+"be. Green is for flat, yellow means steep and red stands for very steep. The "
+"steeper the road is, the harder it will be for your people to walk on it "
+"(and your wares will be transported more slowly).<br> You can click on any "
+"of the symbols to build the first part of the road there. New symbols will "
+"appear to show you where the next part of the road can go, and so on. "
+"However, you can also click farther away from the flag to build several "
+"steps at once. Click on the flag at the headquarters to finish the road."
+msgstr ""
+"* Zbuduj drogę łączącą kwaterą główną i plac budowy chatki drwala.<br> Przy "
+"utworzeniu chatki drwala została automatycznie utworzona również flaga. "
+"Należy ją połączyć drogą z inną flagą. <br> Naciśnięcie na taką flagę (i na "
+"ikonę drogi) spowoduje, że pojawią się wokół niej symbole pokazujące, w "
+"którym kierunku może zostać poprowadzona droga.<br> Kolor tych symboli "
+"oznacza jak stroma będzie droga. Zielona jest płaska, żółta stroma, a "
+"czerwona bardzo stroma. Im bardziej stroma jest droga, tym trudniej będzie "
+"po niej chodzić Twoim ludziom.<br> Klikając na jeden z symboli wybudujesz w "
+"tym kierunku kawałek drogi, a następnie musisz wybrać kolejny kierunek. Poza "
+"tym, możesz kliknąć trochę dalej, aby wybudować dłuższy kawałek na raz. "
+"Naciśnij na flagę przy kwaterze głównej, aby dokończyć drogę."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:34
+#: ../../campaigns/t01.wmf/scripting/texts.lua:90
+msgid "* Build two quarries southwest of your headquarters."
+msgstr "* Zbuduj dwa kamieniołomy na południowy zachód od kwatery głównej."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:19
+#: ../../campaigns/t01.wmf/scripting/texts.lua:68
+msgid ""
+"* Place a flag in the middle of the road.<br> There is a flag symbol in the "
+"middle of the way you just built. You create a flag there by clicking on the "
+"symbol and then choosing the flag button in the menu that opens up. This "
+"divides the way the wood is transported into two parts with one carrier "
+"each.<br> When many wares are being transported between two points, "
+"additional flags in between make them arrive at their destination faster, "
+"thus improving your infrastructure.<br>"
+msgstr ""
+"* Umieść flagę na środku drogi. <br> Na drodze, która właśnie została "
+"zbudowana, powinien znajdować się symbol flagi. Kiedy na niego klikniesz, a "
+"następnie klikniesz przycisk z flagą, umieścisz w tym miejscu flagę. Zadanie "
+"przenoszenia drzewa zostanie podzielone między dwóch tragarzy. <br> W "
+"sytuacji, gdy konieczne jest przenoszenie dużej ilości surowców między dwoma "
+"punktami, umieszczenie pomiędzy nimi flag przyśpieszy transport. To w "
+"efekcie usprawni całą Twoją infrastrukturę.<br>"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:20
+#: ../../campaigns/t01.wmf/scripting/texts.lua:75
+msgid ""
+"* Place a lumberjack's hut just south of the flag you just placed on the "
+"road. Connect the flag you just raised with the flag of the new lumberjack's "
+"hut construction site afterwards.<br> Note that instead of building a road "
+"step by step, you may also click directly at its destination to build the "
+"entire road at once."
+msgstr ""
+"* Postaw chatkę drwala dokładnie na południe od flagi niedawno umieszczonej "
+"na drodze. Połącz wspomnianą flagę z tą, która znajdzie się przy nowej "
+"chatce drwala.<br> Zauważ, że zamiast budować drogę po kawałku, możesz "
+"bezpośrednio połączyć flagi i zbudować całą drogę od razu."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:9
+#: ../../campaigns/t01.wmf/scripting/texts.lua:52
+msgid ""
+"* Press SPACE to see where you can build.<br> The red house symbols show you "
+"where a small building - like a lumberjack's hut - may be built.<br>"
+msgstr ""
+"* Naciśnij SPACJĘ aby zobaczyć gdzie można budować.<br> Czerwone punkty "
+"pokazują gdzie można budować małe budynki, takie jak na przykład chata "
+"drwala.<br>"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:43
+msgid "An old man says..."
+msgstr "Stary człowiek mówi..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:111
+msgid "At the tomb"
+msgstr "Przy grobie"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:7
 msgid "Build a lumberjack's hut"
 msgstr "Zbuduj chatę drwala"
 
-#: ../../campaigns/t01.wmf/objective:15
-msgid "Build another lumberjack's hut"
-msgstr "Zbuduj jeszcze jedną chatę drwala"
-
-#: ../../campaigns/t01.wmf/objective:24
+#: ../../campaigns/t01.wmf/scripting/texts.lua:25
 msgid "Build a ranger's hut"
 msgstr "Zbuduj leśniczówkę"
 
-#: ../../campaigns/t01.wmf/objective:32
+#: ../../campaigns/t01.wmf/scripting/texts.lua:17
+msgid "Build another lumberjack's hut"
+msgstr "Zbuduj jeszcze jedną chatę drwala"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:32
 msgid "Build two quarries"
 msgstr "Zbuduj dwa kamieniołomy"
+
+#: ../../campaigns/t01.wmf/elemental:9
+msgid ""
+"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
+"gameplay and control as well as basic production buildings (wood, stone, "
+"etc.) will be introduced."
+msgstr ""
+"Pierwsza misja z Samouczka barbarzyńców. W tej części zostaną przedstawione "
+"podstawowe założenia gry, interfejs oraz podstawowe budynki produkcyjne "
+"(pozyskiwanie drewna, kamieni itp.)."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:101
+msgid "In the night"
+msgstr "W nocy"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:49
+msgid "Khantrukh continues..."
+msgstr "Khantrukh mówi dalej..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:79
+msgid "Khantrukh nods..."
+msgstr "Khantrukh przytakuje..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:65
+msgid "Khantrukh remembers..."
+msgstr "Khantrukh przypomina..."
+
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:65
+msgid "Mission Complete"
+msgstr "Misja zakończona"
+
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:25
+msgid "Somebody comes up to you"
+msgstr "Ktoś do Ciebie podchodzi"
+
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:26
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:32
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:41
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:42
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:59
+msgid "The advisor"
+msgstr "Doradca"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:58
+msgid "The elder remarks..."
+msgstr "Starzec zauważa..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:87
+msgid "The elder speaks..."
+msgstr "Starszy mówi..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:130
+msgid "The oath"
+msgstr "Przysięga"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:72
+msgid "The old man looks to the sky..."
+msgstr "Stary człowiek patrzy w niebo..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:121
+msgid "The other day"
+msgstr "Kolejny dzień..."
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:7
+msgid "The story begins"
+msgstr "Opowieść się rozpoczyna..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:132
+msgid "Thron looks furious..."
+msgstr "Thron wygląda rozwścieczenie..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:123
+msgid "Thron says thoughtfully..."
+msgstr "Thron mówi zamyślony..."
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:9
+msgid "Thron sighs..."
+msgstr "Tron wzdycha..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:103
+#: ../../campaigns/t01.wmf/scripting/texts.lua:113
+msgid "Thron speaks..."
+msgstr "Tron mówi..."
+
+#: ../../campaigns/t01.wmf/elemental:7
+msgid "Tutorial1 - Eyes in the Dark"
+msgstr "Samouczek 1 - Oczy w mroku"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Somebody comes upon to you"
+#~ msgstr "Ktoś do Ciebie podchodzi"
+
+#~ msgid ""
+#~ " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A "
+#~ "crossroads on the way between our site and the lumberjack's hut would ease "
+#~ "the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Jest stare powiedzenie:<br> \"Podzielony ciężar łatwiej jest nosić.\"<br> "
+#~ "Skrzyżowanie na drodze pomiędzy nami i chatką drwala ułatwi drogę naszym "
+#~ "tragarzom. \"<br><br>-- NOWE CELE --<br> "
+
+#~ msgid "At the grave"
+#~ msgstr "Nad grobem"
+
+#~ msgid ""
+#~ " \"Very well done, chieftain. We now have all we need to face the winter and "
+#~ "may prepare ourselves for the battles ahead.<br><br>--------------------- "
+#~ "VICTORY! ----------------------<br><br> You may continue if you wish. "
+#~ "Otherwise, move on to the next mission.\" "
+#~ msgstr ""
+#~ " \"Dobra robota Wodzu. Mamy teraz wszystko co potrzebne by stawić czoła "
+#~ "zimie i możemy się przygotować na czekające nas bitwy.<br><br>---------------"
+#~ "------ ZWYCIĘSTWO! ---------------------<br><br> Możesz kontynuować grę "
+#~ "jeżeli chcesz lub przejść do kolejnej misji.\" "
 
 #~ msgid "* Build two quarries south-west of your headquarters."
 #~ msgstr "* Zbuduj dwa kamieniołomy na południowy zachód od kwatery głównej."
@@ -536,3 +574,191 @@ msgstr "Zbuduj dwa kamieniołomy"
 
 #~ msgid "Order7"
 #~ msgstr "Rozkaz 7"
+
+#~ msgid ""
+#~ "* Build a lumberjack's hut at the red spot directly right of your "
+#~ "headquarters by clicking at it and selecting lumberjack's hut.<br>"
+#~ msgstr ""
+#~ "* Na prawo od swojej kwatery głównej zbuduj chatę drwala. Naciśnij na "
+#~ "czerwony punkt i wybierz odpowiedni budynek.<br>"
+
+#~ msgid ""
+#~ " \"The northern winds tell us that the coming winter will be a long and "
+#~ "cruel one. One lumberjack's hut will not be enough to still the needs of our "
+#~ "people. More trees await our axes south of our new crossroads - let us raise "
+#~ "a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Północne wiatry zwiastują nadejście długiej i srogiej zimy. Jedna chatka "
+#~ "drwala nie zaspokoi naszych potrzeb. Na południe od nowego skrzyżowania "
+#~ "drzewa tylko czekają na nasze topory - postawmy tam nową chatkę "
+#~ "drwala!\"<br><br>--NOWE CELE--<br> "
+
+#~ msgid ""
+#~ " \"Of course, if we intended to build a bigger settlement, much more "
+#~ "lumberjack's huts would be advisable, but this should do for now.<br> But "
+#~ "never forget - these forests are our legacy, entrusted to us by our "
+#~ "ancestors. We must always respect and nourish them. What we take, we must "
+#~ "give back again.<br> So, in order to replace the trees we chop down, we "
+#~ "should build a ranger's hut, preferably close to the lumberjack's "
+#~ "hut.\"<br><br>-- NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Oczywiście, jeżeli chcemy wznieść większą osadę, będziemy potrzebowali "
+#~ "dużo więcej chat drwali, jednak na razie tyle powinno wystarczyć.<br> Nigdy "
+#~ "nie zapomnij, że te lasy to dziedzictwo powierzone nam przez naszych "
+#~ "przodków. Musisz pamiętać, żeby zawsze je szanować: co zabierzemy, musimy i "
+#~ "zwrócić z powrotem.<br> Tak więc, aby zastąpić ścięte drzewa, musimy wznieść "
+#~ "leśniczówkę możliwie jak najbliżej chaty drwala.\"<br><br>--NOWE CELE--<br> "
+
+#~ msgid ""
+#~ "* Place a lumberjack's hut directly south of the flag you just placed on the "
+#~ "road. Connect the implied flag with the new lumberjack's hut afterwards.<br> "
+#~ "Note that instead of building a road step by step, you may also directly "
+#~ "click at the destination to build the entire road at once."
+#~ msgstr ""
+#~ "* Postaw chatkę drwala dokładnie na południe od flagi niedawno umieszczonej "
+#~ "na drodze. Połącz wspomnianą flagę z tą, która znajdzie się przy nowej "
+#~ "chatce drwala.<br> Zauważ, że zamiast budować drogę po kawałku, możesz "
+#~ "bezpośrednio połączyć flagi i zbudować całą drogę od razu."
+
+#~ msgid ""
+#~ " \"In another sleepless night, I went up to the hill and gazed to the north. "
+#~ "The fires are still burning, stilling their hunger upon my father's "
+#~ "legacy.<br> They are a constant reminder why we had to hide here... and why "
+#~ "we must return in the end!\" "
+#~ msgstr ""
+#~ " \"Kolejnej bezsennej nocy poszedłem na wzgórze i spojrzałem na północ. "
+#~ "Ogień wciąż szalał pochłaniając dziedzictwo mego ojca.<br> Ciągle nam "
+#~ "przypomina, dlaczego musimy się tutaj ukrywać...<br> i dlaczego musimy na "
+#~ "koniec wrócić!\" "
+
+#~ msgid ""
+#~ " \"I am well aware, chieftain, that neither you nor your warriors have the "
+#~ "desire to stay in this forsaken place for long. But even so, our war to "
+#~ "conquer back our home might take a long time and it would seem wise to make "
+#~ "preparations.<br> I would advise that we obtain stones for the future - who "
+#~ "knows what fortifications we might be forced to build very soon. And - like "
+#~ "a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
+#~ "NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Zdaję sobie sprawę, wodzu, że ani Ty ani Twoi wojownicy nie chcą długo "
+#~ "pozostawać w tym opuszczonym miejscu. Mimo to nasze zmagania o odzyskanie "
+#~ "domu mogą trwać jeszcze długo, wiec mądrze było by się najpierw "
+#~ "przygotować.<br> Sugeruję, abyśmy nazbierali kamienia na później - kto wie "
+#~ "jakie fortyfikacje będziemy musieli wkrótce wznosić? Cudownym zrządzeniem "
+#~ "losu pokłady skał znajdują się dosyć niedaleko...\"<br><br>--NOWE CELE--<br> "
+
+#~ msgid ""
+#~ "* Press SPACE to see where you can build.<br> The red spots show you where a "
+#~ "small building - like a lumberjack's hut - may be built.<br>"
+#~ msgstr ""
+#~ "* Naciśnij Spację aby zobaczyć gdzie można budować.<br> Czerwone punkty "
+#~ "pokazują gdzie można budować małe budynki, takie jak na przykład chata "
+#~ "drwala.<br>"
+
+#~ msgid ""
+#~ " \"My father's bones lay peacefully in the grounds he cleared from the "
+#~ "senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal "
+#~ "companion and friend is a source of peace and comfort to me in these dark "
+#~ "times. He keeps my spirits high and those of my warriors awake, not to let "
+#~ "greed or despair destroy our bonds as well.\" "
+#~ msgstr ""
+#~ " \"Prochy mojego ojca spoczywają spokojnie w ziemi, którą uwolnił od "
+#~ "panującego tu wcześniej bezsensownego rozlewu krwi.<br> Boldreth, mój "
+#~ "lojalny towarzysz i przyjaciel, jest mi źródłem pokoju w tych mrocznych "
+#~ "czasach. Podtrzymuje mnie i mych wojowników na duchu, by chciwość lub "
+#~ "zwątpienie nie wkradły się w nasze serca.\" "
+
+#~ msgid ""
+#~ " \"None but the gods know how long we have to remain hidden here. The "
+#~ "warriors hope we may march back gloriously any day now, but I strongly doubt "
+#~ "that will happen soon. And the days are already getting shorter and "
+#~ "colder...<br> We should prepare, in case we have to face the winter in these "
+#~ "harsh lands. I believe to the east of our campside are a few places where we "
+#~ "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
+#~ msgstr ""
+#~ " \"Tylko bogowie wiedzą jak długo uda nam się pozostać tutaj w ukryciu. "
+#~ "Wojownicy uważają, że możemy w każdej chwili powrócić w chwale, jednak ja "
+#~ "szczerze wątpię, iż stanie się to niebawem. Dni już teraz robią się coraz "
+#~ "krótsze i zimniejsze...<br> Jeżeli chcemy przetrwać zimę w tej niemiłej "
+#~ "krainie, powinniśmy się wcześniej przygotować. Sądzę, że wschodnia część "
+#~ "obozu będzie idealna by wznieść chatę drwala.\"<br><br>-- NOWE CELE --<br> "
+
+#~ msgid ""
+#~ "* Place a flag in the middle of the road.<br> There is a flag symbol in the "
+#~ "mid of the way you just built. You place a flag there by clicking on the "
+#~ "symbol and then clicking on the flag button in the consequently appearing "
+#~ "menu. This splits the work of carrying the wood between two carriers.<br> "
+#~ "When much wares are being transported between two points, additional flags "
+#~ "in between make them get faster to their destination, thus improving your "
+#~ "infrastructure.<br>"
+#~ msgstr ""
+#~ "* Umieść flagę na środku drogi. <br> Na drodze, która właśnie została "
+#~ "zbudowana, powinien znajdować się symbol flagi. Kiedy na niego klikniesz, a "
+#~ "następnie klikniesz przycisk z flagą, umieścisz w tym miejscu flagę. Zadanie "
+#~ "przenoszenia drzewa zostanie podzielone między dwóch tragarzy. <br> W "
+#~ "sytuacji, gdy konieczne jest przenoszenie dużej ilości surowców między dwoma "
+#~ "punktami, umieszczenie pomiędzy nimi flag przyśpieszy transport. To w "
+#~ "efekcie usprawni całą Twoją infrastrukturę.<br>"
+
+#~ msgid ""
+#~ " \"Some time ago, Boldreth came to me. His advice was to move to a place "
+#~ "closer to home - to strike at the first sign of my brother's forces "
+#~ "wavering.<br> But I look over the forests and I still see black smoke rising "
+#~ "to the sky. I know - it is too early yet, and what he hopes for will not "
+#~ "happen any time soon. He might still be right, but I fear the bloodshed that "
+#~ "too rash a return would cause both on our and the other side...\" "
+#~ msgstr ""
+#~ " \"Jakiś czas temu Boldreth przyszedł do mnie i poradził, aby przenieść się "
+#~ "w jakieś miejsce bliżej domu - by uderzyć, gdy tylko wojska mojego brata się "
+#~ "odsłonią.<br> Spojrzałem jednak nad lasy nad którymi ciągle unosiły się "
+#~ "czarne dymy. Wiem, że jest jeszcze za wcześnie i to, czego z takim "
+#~ "utęsknieniem wyczekujemy, nie nastąpi w najbliższej przyszłości. Może to on "
+#~ "ma rację, ale boje się, że zbyt szybki powrót spowoduje ogromny rozlew krwi "
+#~ "i wielkie straty po obu stronach...\" "
+
+#~ msgid ""
+#~ " \"As father told me, there will be times to fight and times to lie and "
+#~ "wait, trying not to sleep or die before the right time comes. And so I do... "
+#~ "wait.\" "
+#~ msgstr ""
+#~ " \"Jak powiedział mi ojciec, będzie czas na walkę i na odpoczynek, będziesz "
+#~ "się starał nie zasnąć czekając oraz nie zginąć przed czasem. I to właśnie "
+#~ "robię... czekam.\" "
+
+#~ msgid ""
+#~ " \"Obviously, it would be too draining for our people to walk all the way to "
+#~ "the lumberjack's hut through the wilderness. We will have to make a path "
+#~ "between our hall and the lumberjack's hut. It's not a hard guess that the "
+#~ "men would appreciate a way as short and even as possible - the wood surely "
+#~ "will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Przemierzanie całej trasy do chatki drwala przez taką puszczę było by "
+#~ "niewątpliwie zbyt męczące dla naszych ludzi. Będziemy musieli zbudować drogę "
+#~ "łączącą halę z chatką drwala. Nietrudno się domyślić, że ludzie woleli by "
+#~ "drogę tak krótką i prostą jak to tylko możliwe - przenoszenie drzewa na "
+#~ "pewno i tak będzie wystarczająco ciężką pracą.\"<br><br>-- NOWE CELE --<br> "
+
+#~ msgid ""
+#~ "* Build a road between your headquarters and the lumberjack's hut.<br> When "
+#~ "you place the lumberjack's hut, a flag is created for it. You should connect "
+#~ "it to another flag with a road.<br> If you click on a flag, little symbols "
+#~ "will appear around it to show you in which directions you can build the "
+#~ "road.<br> The colour of those symbols indicate how steep the road will be. "
+#~ "Green is flat, yellow is steep and red is very steep. The steeper the step "
+#~ "is, the harder it will be for your people to walk on it.<br> You can click "
+#~ "on any of the symbols to build the first step of the road there. New symbols "
+#~ "will appear to show you where the next step can go, and so on. However, you "
+#~ "can also click further away to build several steps at once. Click on the "
+#~ "flag at the headquarters to finish the road."
+#~ msgstr ""
+#~ "* Zbuduj drogę łączącą kwaterą główną i chatkę drwala.<br> Przy utworzeniu "
+#~ "chatki drwala została automatycznie utworzona również flaga. Należy ją "
+#~ "połączyć drogą z inną flagą. <br> Naciśnięcie na taką flagę (i na ikonę "
+#~ "drogi) spowoduje, że pojawią się wokół niej symbole pokazujące, w którym "
+#~ "kierunku może zostać poprowadzona droga.<br> Kolor tych symboli oznacza jak "
+#~ "stroma będzie droga. Zielona jest płaska, żółta stroma, a czerwona bardzo "
+#~ "stroma. Im bardziej stroma jest droga, tym trudniej będzie po niej chodzić "
+#~ "Twoim ludziom.<br> Klikając na jeden z symboli wybudujesz w tym kierunku "
+#~ "kawałek drogi, a następnie musisz wybrać kolejny kierunek. Poza tym, możesz "
+#~ "kliknąć trochę dalej, aby wybudować dłuższy kawałek na raz. Naciśnij na "
+#~ "flagę przy kwaterze głównej, aby dokończyć drogę."

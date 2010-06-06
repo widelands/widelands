@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 20:32+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"PO-Revision-Date: 2010-04-13 16:42+0000\n"
+"Last-Translator: RasmusBackman <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-04-14 03:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/elemental:7
@@ -41,11 +41,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:320
 msgid "Close to home"
-msgstr ""
+msgstr "Nära hemmet"
 
 #: ../../campaigns/t03.wmf/event:331
 msgid "Boldreth speaks:"
-msgstr ""
+msgstr "Boldreth säger:"
 
 #: ../../campaigns/t03.wmf/event:333
 msgid ""
@@ -62,7 +62,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:346
 msgid "Khantrukh nods"
-msgstr ""
+msgstr "Khantrukh nickar"
 
 #: ../../campaigns/t03.wmf/event:348
 msgid ""
@@ -81,7 +81,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/event:775
 #: ../../campaigns/t03.wmf/event:849
 msgid "-- NEW OBJECTIVE --"
-msgstr ""
+msgstr "-- NYTT UPPDRAG --"
 
 #: ../../campaigns/t03.wmf/event:352
 #: ../../campaigns/t03.wmf/objective:7
@@ -92,7 +92,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:354
 msgid "The advisor"
-msgstr ""
+msgstr "Rådgivaren"
 
 #: ../../campaigns/t03.wmf/event:387
 msgid ""
@@ -102,7 +102,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:389
 msgid "Food economy completed"
-msgstr ""
+msgstr "Matekonomi färdig"
 
 #: ../../campaigns/t03.wmf/event:426
 msgid ""
@@ -118,7 +118,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:432
 msgid "Tracks"
-msgstr ""
+msgstr "Spår"
 
 #: ../../campaigns/t03.wmf/event:458
 msgid ""
@@ -376,13 +376,14 @@ msgid ""
 "but I don’t care now. Shall he flee and be forgotten for all times as a "
 "tribeleader that would not bow before the wooden throne, that is mine to "
 "take now. Even more his flight brought us a big benefit: All year Kalitath "
-"was to busy fighting so that he did not even care to store enough food for "
-"all his men. Now that he fled the hunger brought some of his younger "
-"followers to desert. This group helds a strong fortification on the main "
-"ring. But there is more news: My scouts reported, that the two raging tribes "
-"of my brothers are in chaos and have barely noticed the new danger that is "
-"about to strike them. However they would not care if they noticed I guess, "
-"blinded by rage and hate, there is no sense left in them at all I believe.\" "
+"has been too busy fighting, so that he did not even care to store enough "
+"food for all his men. Now that he fled the hunger brought some of his "
+"younger followers to desert. This group helds a strong fortification on the "
+"main ring. But there is more news: My scouts reported, that the two raging "
+"tribes of my brothers are in chaos and have barely noticed the new danger "
+"that is about to strike them. However they would not care if they noticed I "
+"guess, blinded by rage and hate, there is no sense left in them at all I "
+"believe.\" "
 msgstr ""
 
 #: ../../campaigns/t03.wmf/event:837

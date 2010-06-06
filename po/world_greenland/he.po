@@ -6,27 +6,91 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:24+0000\n"
-"Last-Translator: REAL NAME <Unknown>\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-05-06 13:55+0000\n"
+"Last-Translator: Michael DOUBEZ <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-05-12 04:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/greenland/conf:2
-msgid "The Widelands Development Team"
-msgstr "צוות הפיתוח של ווידלנדס"
+#: ../../worlds/greenland/conf:58
+msgid "Alder"
+msgstr "אלמון"
 
-#: ../../worlds/greenland/conf:3
-msgid "Greenland"
-msgstr "גרינלנד"
+#: ../../worlds/greenland/conf:59
+msgid "Alder medium"
+msgstr "אלמון בינוני"
 
-#: ../../worlds/greenland/conf:4
-msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "אלו הארצות היפים ומלאי טוב של הברברים"
+#: ../../worlds/greenland/conf:60
+msgid "Alder small"
+msgstr "אלמון קטן"
+
+#: ../../worlds/greenland/conf:61
+msgid "Alder tiny"
+msgstr "אלמון זעיר"
+
+#: ../../worlds/greenland/conf:46
+msgid "Aspen"
+msgstr "צפצפה רעדנית"
+
+#: ../../worlds/greenland/conf:47
+msgid "Aspen medium"
+msgstr "צפצפה רעדנית בינוניה"
+
+#: ../../worlds/greenland/conf:48
+msgid "Aspen small"
+msgstr "צפצפה רעדנית קטנה"
+
+#: ../../worlds/greenland/conf:49
+msgid "Aspen tiny"
+msgstr "צפצפה רעדנית זעירה"
+
+#: ../../worlds/greenland/conf:80
+msgid "Badger"
+msgstr "גירית"
+
+#: ../../worlds/greenland/conf:66
+msgid "Beech"
+msgstr "אשור"
+
+#: ../../worlds/greenland/conf:67
+msgid "Beech medium"
+msgstr "אשור בינוני"
+
+#: ../../worlds/greenland/conf:68
+msgid "Beech small"
+msgstr "אשור קטן"
+
+#: ../../worlds/greenland/conf:69
+msgid "Beech tiny"
+msgstr "אשור זעיר"
+
+#: ../../worlds/greenland/conf:62
+msgid "Birch"
+msgstr "ברץ"
+
+#: ../../worlds/greenland/conf:63
+msgid "Birch medium"
+msgstr "ברץ בינוני"
+
+#: ../../worlds/greenland/conf:64
+msgid "Birch small"
+msgstr "ברץ קטן"
+
+#: ../../worlds/greenland/conf:65
+msgid "Birch tiny"
+msgstr "ברץ זעיר"
+
+#: ../../worlds/greenland/conf:81
+msgid "Brownbear"
+msgstr "דוב חום"
+
+#: ../../worlds/greenland/conf:82
+msgid "Bunny"
+msgstr "ארנב"
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -41,6 +105,14 @@ msgstr "שיח"
 msgid "Cactus"
 msgstr "קקטוס"
 
+#: ../../worlds/greenland/conf:83
+msgid "Chamois"
+msgstr "יעל"
+
+#: ../../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr "פיחם"
+
 #: ../../worlds/greenland/conf:14
 #: ../../worlds/greenland/conf:15
 #: ../../worlds/greenland/conf:16
@@ -48,9 +120,37 @@ msgstr "קקטוס"
 msgid "Dead Tree"
 msgstr "עץ מת"
 
+#: ../../worlds/greenland/conf:84
+msgid "Deer"
+msgstr "צבי"
+
+#: ../../worlds/greenland/conf:85
+msgid "Duck"
+msgstr "ברווז"
+
+#: ../../worlds/greenland/conf:86
+msgid "Elk"
+msgstr "דישון"
+
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
-msgstr ""
+msgstr "עץ נפול"
+
+#: ../../worlds/greenland/resconf:41
+msgid "Fish"
+msgstr "דגים"
+
+#: ../../worlds/greenland/conf:87
+msgid "Fox"
+msgstr "שועל"
+
+#: ../../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr "זהב"
+
+#: ../../worlds/greenland/resconf:28
+msgid "Granite"
+msgstr "שחם"
 
 #: ../../worlds/greenland/conf:19
 #: ../../worlds/greenland/conf:20
@@ -58,10 +158,58 @@ msgstr ""
 msgid "Grass"
 msgstr "דשא"
 
+#: ../../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr "גרינלנד"
+
+#: ../../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr "ברזל"
+
+#: ../../worlds/greenland/conf:70
+msgid "Larch"
+msgstr "לגש"
+
+#: ../../worlds/greenland/conf:71
+msgid "Larch medium"
+msgstr "לגש בינוני"
+
+#: ../../worlds/greenland/conf:72
+msgid "Larch small"
+msgstr "לגש קטן"
+
+#: ../../worlds/greenland/conf:73
+msgid "Larch tiny"
+msgstr "לגש זעיר"
+
+#: ../../worlds/greenland/conf:88
+msgid "Lynx"
+msgstr "לינכס"
+
+#: ../../worlds/greenland/conf:89
+msgid "Marten"
+msgstr "נמיה"
+
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
 msgid "Mushroom"
 msgstr "פטריה"
+
+#: ../../worlds/greenland/conf:50
+msgid "Oak"
+msgstr "אלון"
+
+#: ../../worlds/greenland/conf:51
+msgid "Oak medium"
+msgstr "אלון בינוני"
+
+#: ../../worlds/greenland/conf:52
+msgid "Oak small"
+msgstr "אלון קטן"
+
+#: ../../worlds/greenland/conf:53
+msgid "Oak tiny"
+msgstr "אלון זעיר"
 
 #: ../../worlds/greenland/conf:24
 #: ../../worlds/greenland/conf:25
@@ -72,11 +220,51 @@ msgstr "פטריה"
 msgid "Pebble"
 msgstr "אבן קטנה"
 
+#: ../../worlds/greenland/conf:90
+msgid "Reindeer"
+msgstr "צבי גדול"
+
+#: ../../worlds/greenland/conf:74
+msgid "Rowan"
+msgstr "חוזרר"
+
+#: ../../worlds/greenland/conf:75
+msgid "Rowan medium"
+msgstr "חוזרר בינוני"
+
+#: ../../worlds/greenland/conf:76
+msgid "Rowan small"
+msgstr "חוזרר קטן"
+
+#: ../../worlds/greenland/conf:77
+msgid "Rowan tiny"
+msgstr "חוזרר זעיר"
+
+#: ../../worlds/greenland/conf:91
+msgid "Sheep"
+msgstr "כבש"
+
 #: ../../worlds/greenland/conf:30
 #: ../../worlds/greenland/conf:31
 #: ../../worlds/greenland/conf:32
 msgid "Skeleton"
 msgstr "שלד"
+
+#: ../../worlds/greenland/conf:54
+msgid "Spruce"
+msgstr "אשוחית"
+
+#: ../../worlds/greenland/conf:55
+msgid "Spruce medium"
+msgstr "אשוחית בינוניה"
+
+#: ../../worlds/greenland/conf:56
+msgid "Spruce small"
+msgstr "אשוחית קטנה"
+
+#: ../../worlds/greenland/conf:57
+msgid "Spruce tiny"
+msgstr "אשוחית זעירה"
 
 #: ../../worlds/greenland/conf:33
 #: ../../worlds/greenland/conf:34
@@ -97,213 +285,28 @@ msgstr "אבנים עומדות"
 msgid "Stones"
 msgstr "אבנים"
 
-#: ../../worlds/greenland/conf:46
-msgid "Aspen"
-msgstr ""
+#: ../../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr "צוות הפיתוח של ווידלנדס"
 
-#: ../../worlds/greenland/conf:47
-msgid "Aspen medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:48
-msgid "Aspen small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:49
-msgid "Aspen tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:50
-msgid "Oak"
-msgstr ""
-
-#: ../../worlds/greenland/conf:51
-msgid "Oak medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:52
-msgid "Oak small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:53
-msgid "Oak tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:54
-msgid "Spruce"
-msgstr ""
-
-#: ../../worlds/greenland/conf:55
-msgid "Spruce medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:56
-msgid "Spruce small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:57
-msgid "Spruce tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:58
-msgid "Alder"
-msgstr ""
-
-#: ../../worlds/greenland/conf:59
-msgid "Alder medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:60
-msgid "Alder small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:61
-msgid "Alder tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:62
-msgid "Birch"
-msgstr ""
-
-#: ../../worlds/greenland/conf:63
-msgid "Birch medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:64
-msgid "Birch small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:65
-msgid "Birch tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:66
-msgid "Beech"
-msgstr ""
-
-#: ../../worlds/greenland/conf:67
-msgid "Beech medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:68
-msgid "Beech small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:69
-msgid "Beech tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:70
-msgid "Larch"
-msgstr ""
-
-#: ../../worlds/greenland/conf:71
-msgid "Larch medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:72
-msgid "Larch small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:73
-msgid "Larch tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:74
-msgid "Rowan"
-msgstr ""
-
-#: ../../worlds/greenland/conf:75
-msgid "Rowan medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:76
-msgid "Rowan small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:77
-msgid "Rowan tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:80
-msgid "Badger"
-msgstr ""
-
-#: ../../worlds/greenland/conf:81
-msgid "Brownbear"
-msgstr ""
-
-#: ../../worlds/greenland/conf:82
-msgid "Bunny"
-msgstr "ארנב"
-
-#: ../../worlds/greenland/conf:83
-msgid "Chamois"
-msgstr ""
-
-#: ../../worlds/greenland/conf:84
-msgid "Deer"
-msgstr "צבי"
-
-#: ../../worlds/greenland/conf:85
-msgid "Duck"
-msgstr "ברווז"
-
-#: ../../worlds/greenland/conf:86
-msgid "Elk"
-msgstr ""
-
-#: ../../worlds/greenland/conf:87
-msgid "Fox"
-msgstr "שועל"
-
-#: ../../worlds/greenland/conf:88
-msgid "Lynx"
-msgstr ""
-
-#: ../../worlds/greenland/conf:89
-msgid "Marten"
-msgstr ""
-
-#: ../../worlds/greenland/conf:90
-msgid "Reindeer"
-msgstr "צבי גדול"
-
-#: ../../worlds/greenland/conf:91
-msgid "Sheep"
-msgstr "כבש"
-
-#: ../../worlds/greenland/conf:92
-msgid "Wisent"
-msgstr ""
-
-#: ../../worlds/greenland/conf:93
-msgid "Wolf"
-msgstr ""
-
-#: ../../worlds/greenland/resconf:4
-msgid "Coal"
-msgstr "פיחם"
-
-#: ../../worlds/greenland/resconf:12
-msgid "Gold"
-msgstr "זהב"
-
-#: ../../worlds/greenland/resconf:20
-msgid "Iron"
-msgstr "ברזל"
-
-#: ../../worlds/greenland/resconf:28
-msgid "Granit"
-msgstr "אבן גרניט"
+#: ../../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr "אלו הארצות היפים ומלאי טוב של הברברים"
 
 #: ../../worlds/greenland/resconf:36
 msgid "Water"
 msgstr "מים"
 
-#: ../../worlds/greenland/resconf:41
-msgid "Fish"
-msgstr "דגים"
+#: ../../worlds/greenland/conf:92
+msgid "Wisent"
+msgstr "ביזון"
+
+#: ../../worlds/greenland/conf:93
+msgid "Wolf"
+msgstr "זאב"
+
+#~ msgid "Granit"
+#~ msgstr "אבן גרניט"
 
 #~ msgid "Tree"
 #~ msgstr "עץ"
