@@ -497,9 +497,7 @@ bool Game::run
 		enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
 	}
 
-	if (m_writereplay) {
-		log("Starting replay writer\n");
-
+	if (m_writereplay || m_writesyncstream) {
 		// Derive a replay filename from the current time
 		std::string fname(REPLAY_DIR);
 		fname += '/';
@@ -509,11 +507,18 @@ bool Game::run
 			fname += m_ctrl->getGameDescription();
 		}
 		fname += REPLAY_SUFFIX;
-		assert(not m_replaywriter);
-		m_replaywriter = new ReplayWriter(*this, fname);
+
+		if (m_writereplay) {
+			log("Starting replay writer\n");
+
+			assert(not m_replaywriter);
+			m_replaywriter = new ReplayWriter(*this, fname);
+
+			log("Replay writer has started\n");
+		}
+
 		if (m_writesyncstream)
 			m_syncwrapper.StartDump(fname);
-		log("Replay writer has started\n");
 	}
 
 	SyncReset();

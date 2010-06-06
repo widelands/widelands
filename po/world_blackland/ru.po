@@ -6,27 +6,71 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 18:59+0000\n"
-"Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-05-21 17:10+0000\n"
+"Last-Translator: Alexander Maslov <Drakmail@gmail.com>\n"
 "Language-Team: russian <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-05-22 03:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/blackland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Команда разработчиков Widelands"
+#: ../../worlds/blackland/conf:45
+msgid "Aspen"
+msgstr "Осина"
+
+#: ../../worlds/blackland/conf:46
+msgid "Aspen medium"
+msgstr "Средняя осина"
+
+#: ../../worlds/blackland/conf:47
+msgid "Aspen small"
+msgstr "Малая осина"
+
+#: ../../worlds/blackland/conf:48
+msgid "Aspen tiny"
+msgstr "Маленькая осина"
+
+#: ../../worlds/blackland/conf:65
+msgid "Beech"
+msgstr "Бук"
+
+#: ../../worlds/blackland/conf:66
+msgid "Beech medium"
+msgstr "Средний бук"
+
+#: ../../worlds/blackland/conf:67
+msgid "Beech small"
+msgstr "Малый бук"
+
+#: ../../worlds/blackland/conf:68
+msgid "Beech tiny"
+msgstr "Маленький бук"
+
+#: ../../worlds/blackland/conf:61
+msgid "Birch"
+msgstr "Береза"
+
+#: ../../worlds/blackland/conf:62
+msgid "Birch medium"
+msgstr "Средняя береза"
+
+#: ../../worlds/blackland/conf:63
+msgid "Birch small"
+msgstr "Малая береза"
+
+#: ../../worlds/blackland/conf:64
+msgid "Birch tiny"
+msgstr "Маленькая береза"
 
 #: ../../worlds/blackland/conf:3
 msgid "Blackland"
 msgstr "Черные земли"
 
-#: ../../worlds/blackland/conf:4
-msgid "These are the grey, horrible and dangerous blacklands"
-msgstr "Это мрачные, ужасные и опасные черные земли."
+#: ../../worlds/blackland/conf:79
+msgid "Bunny"
+msgstr "Кролик"
 
 #: ../../worlds/blackland/conf:7
 #: ../../worlds/blackland/conf:8
@@ -41,6 +85,10 @@ msgstr "Куст"
 msgid "Cactus"
 msgstr "Кактус"
 
+#: ../../worlds/blackland/resconf:4
+msgid "Coal"
+msgstr "Уголь"
+
 #: ../../worlds/blackland/conf:14
 #: ../../worlds/blackland/conf:15
 #: ../../worlds/blackland/conf:16
@@ -48,16 +96,92 @@ msgstr "Кактус"
 msgid "Dead Tree"
 msgstr "Сухостой"
 
+#: ../../worlds/blackland/conf:80
+msgid "Deer"
+msgstr "Олень"
+
+#: ../../worlds/blackland/conf:81
+msgid "Duck"
+msgstr "Утка"
+
+#: ../../worlds/blackland/resconf:41
+msgid "Fish"
+msgstr "Рыба"
+
+#: ../../worlds/blackland/conf:82
+msgid "Fox"
+msgstr "Лиса"
+
+#: ../../worlds/blackland/resconf:12
+msgid "Gold"
+msgstr "Золото"
+
+#: ../../worlds/blackland/resconf:28
+msgid "Granite"
+msgstr "Гранит"
+
 #: ../../worlds/blackland/conf:18
 #: ../../worlds/blackland/conf:19
 #: ../../worlds/blackland/conf:20
 msgid "Grass"
 msgstr "Трава"
 
+#: ../../worlds/blackland/resconf:20
+msgid "Iron"
+msgstr "Железо"
+
+#: ../../worlds/blackland/conf:69
+msgid "Larch"
+msgstr "Лиственница"
+
+#: ../../worlds/blackland/conf:70
+msgid "Larch medium"
+msgstr "Средняя лиственница"
+
+#: ../../worlds/blackland/conf:71
+msgid "Larch small"
+msgstr "Малая лиственница"
+
+#: ../../worlds/blackland/conf:72
+msgid "Larch tiny"
+msgstr "Маленькая лиственница"
+
+#: ../../worlds/blackland/conf:57
+msgid "Maple"
+msgstr "Клён"
+
+#: ../../worlds/blackland/conf:58
+msgid "Maple medium"
+msgstr "Средний клён"
+
+#: ../../worlds/blackland/conf:59
+msgid "Maple small"
+msgstr "Малый клён"
+
+#: ../../worlds/blackland/conf:60
+msgid "Maple tiny"
+msgstr "Маленький клён"
+
 #: ../../worlds/blackland/conf:21
 #: ../../worlds/blackland/conf:22
 msgid "Mushroom"
 msgstr "Гриб"
+
+#: ../../worlds/blackland/conf:49
+msgid "Oak"
+msgstr "Дуб"
+
+#: ../../worlds/blackland/conf:50
+msgid "Oak medium"
+msgstr "Средний дуб"
+
+#: ../../worlds/blackland/conf:51
+msgid "Oak small"
+msgstr "Малый дуб"
+
+#: ../../worlds/blackland/conf:52
+msgid "Oak tiny"
+msgstr "Маленький дуб"
 
 #: ../../worlds/blackland/conf:23
 #: ../../worlds/blackland/conf:24
@@ -68,11 +192,51 @@ msgstr "Гриб"
 msgid "Pebble"
 msgstr "Галька"
 
+#: ../../worlds/blackland/conf:83
+msgid "Reindeer"
+msgstr "Северный олень"
+
+#: ../../worlds/blackland/conf:73
+msgid "Rowan"
+msgstr "Рябина"
+
+#: ../../worlds/blackland/conf:74
+msgid "Rowan medium"
+msgstr "Средняя рябина"
+
+#: ../../worlds/blackland/conf:75
+msgid "Rowan small"
+msgstr "Малая рябина"
+
+#: ../../worlds/blackland/conf:76
+msgid "Rowan tiny"
+msgstr "Маленькая рябина"
+
+#: ../../worlds/blackland/conf:84
+msgid "Sheep"
+msgstr "Овца"
+
 #: ../../worlds/blackland/conf:29
 #: ../../worlds/blackland/conf:30
 #: ../../worlds/blackland/conf:31
 msgid "Skeleton"
 msgstr "Скелет"
+
+#: ../../worlds/blackland/conf:53
+msgid "Spruce"
+msgstr "Ель"
+
+#: ../../worlds/blackland/conf:54
+msgid "Spruce medium"
+msgstr "Средняя ель"
+
+#: ../../worlds/blackland/conf:55
+msgid "Spruce small"
+msgstr "Малая ель"
+
+#: ../../worlds/blackland/conf:56
+msgid "Spruce tiny"
+msgstr "Маленькая ель"
 
 #: ../../worlds/blackland/conf:32
 #: ../../worlds/blackland/conf:33
@@ -93,181 +257,20 @@ msgstr "Скалы"
 msgid "Stones"
 msgstr "Камни"
 
-#: ../../worlds/blackland/conf:45
-msgid "Aspen"
-msgstr "Осина"
+#: ../../worlds/blackland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Команда разработчиков Widelands"
 
-#: ../../worlds/blackland/conf:46
-msgid "Aspen medium"
-msgstr "Средняя осина"
-
-#: ../../worlds/blackland/conf:47
-msgid "Aspen small"
-msgstr "Малая осина"
-
-#: ../../worlds/blackland/conf:48
-msgid "Aspen tiny"
-msgstr "Маленькая осина"
-
-#: ../../worlds/blackland/conf:49
-msgid "Oak"
-msgstr "Дуб"
-
-#: ../../worlds/blackland/conf:50
-msgid "Oak medium"
-msgstr "Средний дуб"
-
-#: ../../worlds/blackland/conf:51
-msgid "Oak small"
-msgstr "Малый дуб"
-
-#: ../../worlds/blackland/conf:52
-msgid "Oak tiny"
-msgstr "Маленький дуб"
-
-#: ../../worlds/blackland/conf:53
-msgid "Spruce"
-msgstr "Ель"
-
-#: ../../worlds/blackland/conf:54
-msgid "Spruce medium"
-msgstr "Средняя ель"
-
-#: ../../worlds/blackland/conf:55
-msgid "Spruce small"
-msgstr "Малая ель"
-
-#: ../../worlds/blackland/conf:56
-msgid "Spruce tiny"
-msgstr "Маленькая ель"
-
-#: ../../worlds/blackland/conf:57
-msgid "Maple"
-msgstr "Клён"
-
-#: ../../worlds/blackland/conf:58
-msgid "Maple medium"
-msgstr "Средний клён"
-
-#: ../../worlds/blackland/conf:59
-msgid "Maple small"
-msgstr "Малый клён"
-
-#: ../../worlds/blackland/conf:60
-msgid "Maple tiny"
-msgstr "Маленький клён"
-
-#: ../../worlds/blackland/conf:61
-msgid "Birch"
-msgstr "Береза"
-
-#: ../../worlds/blackland/conf:62
-msgid "Birch medium"
-msgstr "Средняя береза"
-
-#: ../../worlds/blackland/conf:63
-msgid "Birch small"
-msgstr "Малая береза"
-
-#: ../../worlds/blackland/conf:64
-msgid "Birch tiny"
-msgstr "Маленькая береза"
-
-#: ../../worlds/blackland/conf:65
-msgid "Beech"
-msgstr "Бук"
-
-#: ../../worlds/blackland/conf:66
-msgid "Beech medium"
-msgstr "Средний бук"
-
-#: ../../worlds/blackland/conf:67
-msgid "Beech small"
-msgstr "Малый бук"
-
-#: ../../worlds/blackland/conf:68
-msgid "Beech tiny"
-msgstr "Маленький бук"
-
-#: ../../worlds/blackland/conf:69
-msgid "Larch"
-msgstr "Лиственница"
-
-#: ../../worlds/blackland/conf:70
-msgid "Larch medium"
-msgstr "Средняя лиственница"
-
-#: ../../worlds/blackland/conf:71
-msgid "Larch small"
-msgstr "Малая лиственница"
-
-#: ../../worlds/blackland/conf:72
-msgid "Larch tiny"
-msgstr "Маленькая лиственница"
-
-#: ../../worlds/blackland/conf:73
-msgid "Rowan"
-msgstr "Рябина"
-
-#: ../../worlds/blackland/conf:74
-msgid "Rowan medium"
-msgstr "Средняя рябина"
-
-#: ../../worlds/blackland/conf:75
-msgid "Rowan small"
-msgstr "Малая рябина"
-
-#: ../../worlds/blackland/conf:76
-msgid "Rowan tiny"
-msgstr "Маленькая рябина"
-
-#: ../../worlds/blackland/conf:79
-msgid "Bunny"
-msgstr "Кролик"
-
-#: ../../worlds/blackland/conf:80
-msgid "Deer"
-msgstr "Олень"
-
-#: ../../worlds/blackland/conf:81
-msgid "Duck"
-msgstr "Утка"
-
-#: ../../worlds/blackland/conf:82
-msgid "Fox"
-msgstr "Лиса"
-
-#: ../../worlds/blackland/conf:83
-msgid "Reindeer"
-msgstr "Северный олень"
-
-#: ../../worlds/blackland/conf:84
-msgid "Sheep"
-msgstr "Овца"
-
-#: ../../worlds/blackland/resconf:4
-msgid "Coal"
-msgstr "Уголь"
-
-#: ../../worlds/blackland/resconf:12
-msgid "Gold"
-msgstr "Золото"
-
-#: ../../worlds/blackland/resconf:20
-msgid "Iron"
-msgstr "Железо"
-
-#: ../../worlds/blackland/resconf:28
-msgid "Granit"
-msgstr "Гранит"
+#: ../../worlds/blackland/conf:4
+msgid "These are the grey, horrible and dangerous blacklands"
+msgstr "Это мрачные, ужасные и опасные черные земли."
 
 #: ../../worlds/blackland/resconf:36
 msgid "Water"
 msgstr "Вода"
 
-#: ../../worlds/blackland/resconf:41
-msgid "Fish"
-msgstr "Рыба"
+#~ msgid "Granit"
+#~ msgstr "Гранит"
 
 #~ msgid "Tree"
 #~ msgstr "Дерево"

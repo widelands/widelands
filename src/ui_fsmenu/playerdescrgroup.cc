@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -259,11 +259,13 @@ void PlayerDescriptionGroup::enable_pdg(bool enable)
 
 
 /**
- * Show/hide player's tribe and init buttons
- * This is useful for multi player savegames, as the tribes can't be changed
+ * Show/hide player's tribe team and init buttons
+ * This is useful for multi player savegames, as these can't be changed there.
  */
 void PlayerDescriptionGroup::show_tribe_button(bool show)
 {
+	d->btnPlayerTeam  ->set_visible(show);
+	d->btnPlayerTeam  ->set_enabled(show);
 	d->btnPlayerTribe ->set_visible(show);
 	d->btnPlayerTribe ->set_enabled(show);
 	d->btnPlayerInit  ->set_visible(show);
