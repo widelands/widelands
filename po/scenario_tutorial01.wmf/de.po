@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-05 12:35+0000\n"
-"Last-Translator: TobiMarg <Unknown>\n"
+"PO-Revision-Date: 2010-06-06 22:18+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-06 03:30+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -592,6 +592,9 @@ msgid ""
 "If you decide you do not want to build a road at this time, you can cancel\n"
 "road building by clicking on the starting flag of the road and selecting"
 msgstr ""
+"Wenn Du Dich entschließt, gerade doch keine Straße zu bauen, kannst Du den "
+"Straßenbau abbrechen, indem Du auf die Startflagge klickst und dann "
+"auswählst:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:268
 msgid ""
@@ -608,6 +611,9 @@ msgid ""
 "here\n"
 "via right-button scrolling or open the minimap by clicking on the"
 msgstr ""
+"Wenn Du zurück zu diesem östlichen Teil Deines Landes willst, bewege einfach "
+"den Bildschirm hierhin, indem Du die rechte Maustaste gedrückt hältst und "
+"die Maus bewegst, oder über die Minikarte, indem Du klickst:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid "Introducing messages"
@@ -679,6 +685,11 @@ msgid ""
 "beneficial\n"
 "close to mountains because you can't build houses in mountains."
 msgstr ""
+"Lass uns dies ausprobieren: Baue ein paar Militärgebäude an Deiner "
+"westlichen Grenze. Wir wollen einen Teil dieses Berges einnehmen, so dass "
+"wir dort nach Ressourcen suchen können. Größere Gebäude erobern mehr land, "
+"was nahe an Bergen sehr nützlich sein kann, da auf dem Berg selbst keine "
+"Häuser gebaut werden können."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:549
 msgid "Let's wait and see what the geologist finds on the mountain."
@@ -702,15 +713,15 @@ msgstr "Nachrichten"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:556
 msgid "Mining conclusion"
-msgstr ""
+msgstr "Abschluss der Minen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "Verschiebe Deinen Sichtbereich mit den Pfeiltasten"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "Verschiebe Deinen Sichtbereich mit der Maus"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
@@ -739,7 +750,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
 msgid "Nice and easy does it all the time"
-msgstr ""
+msgstr "Immer mit der Ruhe - das hilft immer."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:160
 msgid ""
@@ -751,6 +762,11 @@ msgid ""
 "symbol\n"
 "in between the two blue flags we just placed and then click on the"
 msgstr ""
+"Nett wie sie arbeiten, nicht? Aber der arme Träger hat einen langen Weg zu "
+"gehen. Wir können es ihm einfacher machen (und für uns effektiver), indem "
+"wir eine weitere Flagge auf die Straße setzen. Dieses Mal versuch Du es: "
+"Klicke auf das gelbe Flaggensymbol zwischen den beiden blauen Flaggen und "
+"dann klicke:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:563
 msgid ""
@@ -760,6 +776,12 @@ msgid ""
 "well. This infrastructure also varies from tribe to tribe. You'll get them\n"
 "explained in the introduction campaigns for the three tribes."
 msgstr ""
+"Beachte, dass Minen Rationen brauchen, um arbeiten zu können. Rationen "
+"werden in Tavernen hergestellt, die wiederum Fleisch, Fladenbrot und Fisch "
+"benötigen, um sie herzustellen. Du wirst eine weitaus größere Infrastruktur "
+"benötigen, damit die Minen gut arbeiten. Diese Infrastruktur ist außerdem "
+"von Stamm zu Stamm unterschiedlich. Sie werden Dir in der "
+"Einführungskampagne der drei Stämme erklärt werden."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:271
 msgid ""
@@ -767,12 +789,18 @@ msgid ""
 "medium or big building symbol, you will have to select the small buildings\n"
 "tab first to find it. Go on, check it out!"
 msgstr ""
+"Also los, versuche es. Der Steinbruch ist ein kleines Gebäude, wenn Du also "
+"auf ein mittleres oder großes Häusersymbol klickst, musst Du zuerst den "
+"Reiter für die kleinen Gebäude auswählen, um ihn zu finden. Na los, sieh es "
+"Dir an!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:342
 msgid ""
 "Now please rebuild the road between your quarry and your headquarters.\n"
 "We'll wait until the quarry is completed."
 msgstr ""
+"Nun baue bitte die Straße zwischen Steinbruch und Hauptquartier neu. Wir "
+"werden warten, bis der Steinbruch fertiggestellt ist."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:149
 msgid ""
@@ -781,10 +809,15 @@ msgid ""
 "blue\n"
 "flags and carry wares from one blue flag to the other."
 msgstr ""
+"Nun sieh Dir genau an, wie ein Baumeister das Hauptquartier verlässt und zur "
+"Baustelle geht. Außerdem wird ein Träger seine Position zwischen den beiden "
+"blauen Flaggen einnehmen und Waren von einer zur anderen tragen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
 msgstr ""
+"Nun wissen wir, was hier geschieht. Warten wir also die Fertigstellung des "
+"Steinbruchs ab."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""
@@ -796,6 +829,11 @@ msgid ""
 "over\n"
 "the route the road takes like so:"
 msgstr ""
+"Wegen dieser Straße... Erinnere Dich: Wir befinden uns bereits im "
+"Straßenbaumodus, da Du gerade den Steinbruch in Auftrag gegeben hast. Du "
+"kannst sie entweder Feld für Feld verlängern, indem Du mehrere Male auf die "
+"benachbarten Felder linksklickst. Dies gewährt Dir absolute Kontrolle über "
+"die Route, welcher die Straße folgen soll. Etwa so:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:515
 msgid ""
@@ -805,6 +843,10 @@ msgid ""
 "get\n"
 "the resources out of the ground."
 msgstr ""
+"Gut, wir kontrollieren nun ein Stück dieses Berges. Berge sind ausgesprochen "
+"wichtig, da sie Ressourcen enthalten: Kohle, Eisenerz, Golderz und Granit. "
+"Jeder Stamm verwendet die Ressourcen unterschiedlich, aber sie alle "
+"benötigen Minen, um diese zu fördern."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:575
 msgid ""
@@ -822,12 +864,23 @@ msgid ""
 "and a\n"
 "warehouse to the north east of here."
 msgstr ""
+"Aber nun zum letzten Thema. Wir werden über Soldaten, ihre Ausbildung und "
+"ihr Handwerk, die Kriegsführung, sprechen. Wie bereits erwähnt, geht es in "
+"Widelands um den Aufbau, nicht ums Niederreißen. Daher ist die Kriegsführung "
+"mehr auf die Wirtschaft ausgerichtet, als auf militärische Strategien. "
+"Dennoch bietet sie die Möglichkeit, andere Spieler herauszufordern und "
+"einige ihrer Aspekte verdienen eine Erklärung. Die Wirtschaft der Stämme "
+"wird in ihren jeweiligen Einführungskampagnen erklärt. OK, ich erstelle ein "
+"kleines Übungsgelände für uns, mit einem Trainingslager und einem Lagerhaus "
+"nordöstlich von hier."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:327
 msgid ""
 "One more thing: around the field where your road would end you can see\n"
 "different markers. They have the following meaning:"
 msgstr ""
+"Noch etwas: Um das Feld herum, wo Deine Straße enden würde, siehst Du "
+"verschiedene Symbole. Sie haben folgende Bedeutung:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:238
 msgid "Onward to the quarry"
@@ -855,7 +908,7 @@ msgstr "Straßenbau"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:513
 msgid "Searching for resources"
-msgstr ""
+msgstr "Suche nach Rohstoffen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:366
 msgid ""
