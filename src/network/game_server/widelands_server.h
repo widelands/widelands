@@ -59,7 +59,8 @@ class WidelandsPlayer
 			m_tribe(),
 			m_wl_player_number(wl_num),
 			m_ggz_player_number(-1),
-			m_type(playertype_null)
+			m_type(playertype_null),
+			m_team(0)
 			{}
 
 		int wl_player_number() { return m_wl_player_number; }
@@ -68,6 +69,7 @@ class WidelandsPlayer
 		WLGGZPlayerType type() { return m_type; }
 		std::string version() { return m_version; }
 		std::string build() { return m_build; }
+		unsigned int team() { return m_team; }
 		
 		void set_ggz_player_number(int num) 
 			{ m_ggz_player_number=num; }
@@ -75,6 +77,8 @@ class WidelandsPlayer
 		void set_type(WLGGZPlayerType type) { m_type=type; }
 		void set_version(std::string v, std::string b)
 			{ m_build = b; m_version = v; }
+		void set_team(unsigned int t)
+			{ m_team = t; }
 
 		WidelandsPlayerStats stats;
 
@@ -85,6 +89,7 @@ class WidelandsPlayer
 		int m_wl_player_number;
 		WLGGZPlayerType m_type;
 		std::string m_build, m_version;
+		unsigned int m_team;
 };
 
 class WidelandsMap 

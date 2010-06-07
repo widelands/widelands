@@ -276,6 +276,10 @@ void WidelandsServer::read_game_information(int fd, Client * client)
 					"\": " << version << " (" << build << ")\n";
 				break;
 			}
+			case gameinfo_teamnumber:
+				if(player)
+					player->set_team(parlist.front().get_integer());
+				break;
 			default:
 				std::cout << "WidelandsServer: GAMEINFO: error unknown WLGGZGameInfo!" << std::endl;
 		
