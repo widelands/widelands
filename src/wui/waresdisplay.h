@@ -50,7 +50,6 @@ struct WaresDisplay : public UI::Panel {
 		WARE
 	};
 
-public:
 	WaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y, Widelands::Tribe_Descr const &);
@@ -61,6 +60,9 @@ public:
 
 	void add_warelist(Widelands::WareList const &, wdType);
 	void remove_all_warelists();
+
+	Widelands::Ware_Index ware_at_point(int32_t x, int32_t y) const;
+	wdType get_type() const {return m_type;}
 
 protected:
 	virtual void layout();

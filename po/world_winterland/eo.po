@@ -7,97 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 18:14+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-05-07 13:50+0000\n"
+"Last-Translator: Kristjan <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-05-12 04:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: ../../worlds/winterland/conf:2
-msgid "The Widelands Development Team"
-msgstr ""
-
-#: ../../worlds/winterland/conf:3
-msgid "Winterland"
-msgstr ""
-
-#: ../../worlds/winterland/conf:4
-msgid ""
-"These are the white, wide and frosty winterlands, in which the Northmen "
-"dwell."
-msgstr ""
-
-#: ../../worlds/winterland/conf:7
-#: ../../worlds/winterland/conf:8
-#: ../../worlds/winterland/conf:9
-#: ../../worlds/winterland/conf:10
-#: ../../worlds/winterland/conf:11
-msgid "Bush"
-msgstr "Arbusto"
-
-#: ../../worlds/winterland/conf:12
-#: ../../worlds/winterland/conf:13
-#: ../../worlds/winterland/conf:14
-#: ../../worlds/winterland/conf:15
-msgid "Dead Tree"
-msgstr "Morta arbo"
-
-#: ../../worlds/winterland/conf:16
-#: ../../worlds/winterland/conf:17
-#: ../../worlds/winterland/conf:18
-msgid "Grass"
-msgstr "Herbo"
-
-#: ../../worlds/winterland/conf:19
-#: ../../worlds/winterland/conf:20
-msgid "Mushroom"
-msgstr "Fungo"
-
-#: ../../worlds/winterland/conf:21
-#: ../../worlds/winterland/conf:22
-#: ../../worlds/winterland/conf:23
-#: ../../worlds/winterland/conf:24
-#: ../../worlds/winterland/conf:25
-#: ../../worlds/winterland/conf:26
-msgid "Pebble"
-msgstr ""
-
-#: ../../worlds/winterland/conf:27
-#: ../../worlds/winterland/conf:28
-#: ../../worlds/winterland/conf:29
-msgid "Skeleton"
-msgstr "Skeleto"
-
-#: ../../worlds/winterland/conf:30
-msgid "Snowman"
-msgstr ""
-
-#: ../../worlds/winterland/conf:31
-#: ../../worlds/winterland/conf:32
-#: ../../worlds/winterland/conf:33
-#: ../../worlds/winterland/conf:34
-#: ../../worlds/winterland/conf:35
-#: ../../worlds/winterland/conf:36
-#: ../../worlds/winterland/conf:37
-msgid "Standing Stones"
-msgstr ""
-
-#: ../../worlds/winterland/conf:38
-#: ../../worlds/winterland/conf:39
-#: ../../worlds/winterland/conf:40
-#: ../../worlds/winterland/conf:41
-#: ../../worlds/winterland/conf:42
-#: ../../worlds/winterland/conf:43
-msgid "Stones"
-msgstr "Sxtono"
-
-#: ../../worlds/winterland/conf:44
-msgid "Track"
-msgstr ""
 
 #: ../../worlds/winterland/conf:45
 msgid "Aspen"
@@ -115,69 +33,9 @@ msgstr "Tremolo mala"
 msgid "Aspen tiny"
 msgstr "Tremolo nana"
 
-#: ../../worlds/winterland/conf:49
-msgid "Oak"
-msgstr "Kveko"
-
-#: ../../worlds/winterland/conf:50
-msgid "Oak medium"
-msgstr "Kveko meza"
-
-#: ../../worlds/winterland/conf:51
-msgid "Oak small"
-msgstr "Kevko mala"
-
-#: ../../worlds/winterland/conf:52
-msgid "Oak tiny"
-msgstr "Kveko nana"
-
-#: ../../worlds/winterland/conf:53
-msgid "Spruce"
-msgstr "Piceo"
-
-#: ../../worlds/winterland/conf:54
-msgid "Spruce medium"
-msgstr "Piceo meza"
-
-#: ../../worlds/winterland/conf:55
-msgid "Spruce small"
-msgstr "Piceo mala"
-
-#: ../../worlds/winterland/conf:56
-msgid "Spruce tiny"
-msgstr "Piceo nana"
-
-#: ../../worlds/winterland/conf:57
-msgid "Maple"
-msgstr "Acero"
-
-#: ../../worlds/winterland/conf:58
-msgid "Maple medium"
-msgstr "Acero meza"
-
-#: ../../worlds/winterland/conf:59
-msgid "Maple small"
-msgstr "Acero mala"
-
-#: ../../worlds/winterland/conf:60
-msgid "Maple tiny"
-msgstr "Acero nana"
-
-#: ../../worlds/winterland/conf:61
-msgid "Birch"
-msgstr "Betulo"
-
-#: ../../worlds/winterland/conf:62
-msgid "Birch medium"
-msgstr "Betulo meza"
-
-#: ../../worlds/winterland/conf:63
-msgid "Birch small"
-msgstr "Betulo mala"
-
-#: ../../worlds/winterland/conf:64
-msgid "Birch tiny"
-msgstr "Betulo nana"
+#: ../../worlds/winterland/conf:79
+msgid "Badger"
+msgstr "Melo"
 
 #: ../../worlds/winterland/conf:65
 msgid "Beech"
@@ -195,6 +53,83 @@ msgstr "Fago mala"
 msgid "Beech tiny"
 msgstr "Fago nana"
 
+#: ../../worlds/winterland/conf:61
+msgid "Birch"
+msgstr "Betulo"
+
+#: ../../worlds/winterland/conf:62
+msgid "Birch medium"
+msgstr "Betulo meza"
+
+#: ../../worlds/winterland/conf:63
+msgid "Birch small"
+msgstr "Betulo mala"
+
+#: ../../worlds/winterland/conf:64
+msgid "Birch tiny"
+msgstr "Betulo nana"
+
+#: ../../worlds/winterland/conf:80
+msgid "Bunny"
+msgstr "Kuniklo"
+
+#: ../../worlds/winterland/conf:7
+#: ../../worlds/winterland/conf:8
+#: ../../worlds/winterland/conf:9
+#: ../../worlds/winterland/conf:10
+#: ../../worlds/winterland/conf:11
+msgid "Bush"
+msgstr "Arbusto"
+
+#: ../../worlds/winterland/resconf:4
+msgid "Coal"
+msgstr "Karbo"
+
+#: ../../worlds/winterland/conf:12
+#: ../../worlds/winterland/conf:13
+#: ../../worlds/winterland/conf:14
+#: ../../worlds/winterland/conf:15
+msgid "Dead Tree"
+msgstr "Morta arbo"
+
+#: ../../worlds/winterland/conf:81
+msgid "Deer"
+msgstr "Cervo"
+
+#: ../../worlds/winterland/conf:82
+msgid "Duck"
+msgstr "Anaso"
+
+#: ../../worlds/winterland/conf:83
+msgid "Elk"
+msgstr "Kanada cervo"
+
+#: ../../worlds/winterland/resconf:41
+msgid "Fish"
+msgstr "Fiŝo"
+
+#: ../../worlds/winterland/conf:84
+msgid "Fox"
+msgstr "Vulpo"
+
+#: ../../worlds/winterland/resconf:12
+msgid "Gold"
+msgstr "Oro"
+
+#: ../../worlds/winterland/resconf:28
+msgid "Granite"
+msgstr "Granito"
+
+#: ../../worlds/winterland/conf:16
+#: ../../worlds/winterland/conf:17
+#: ../../worlds/winterland/conf:18
+msgid "Grass"
+msgstr "Herbo"
+
+#: ../../worlds/winterland/resconf:20
+msgid "Iron"
+msgstr "Fero"
+
 #: ../../worlds/winterland/conf:69
 msgid "Larch"
 msgstr "Lariko"
@@ -210,6 +145,64 @@ msgstr "Lariko mala"
 #: ../../worlds/winterland/conf:72
 msgid "Larch tiny"
 msgstr "Lariko nana"
+
+#: ../../worlds/winterland/conf:85
+msgid "Lynx"
+msgstr "Linko"
+
+#: ../../worlds/winterland/conf:57
+msgid "Maple"
+msgstr "Acero"
+
+#: ../../worlds/winterland/conf:58
+msgid "Maple medium"
+msgstr "Acero meza"
+
+#: ../../worlds/winterland/conf:59
+msgid "Maple small"
+msgstr "Acero mala"
+
+#: ../../worlds/winterland/conf:60
+msgid "Maple tiny"
+msgstr "Acero nana"
+
+#: ../../worlds/winterland/conf:86
+msgid "Marten"
+msgstr "Marteso"
+
+#: ../../worlds/winterland/conf:19
+#: ../../worlds/winterland/conf:20
+msgid "Mushroom"
+msgstr "Fungo"
+
+#: ../../worlds/winterland/conf:49
+msgid "Oak"
+msgstr "Kveko"
+
+#: ../../worlds/winterland/conf:50
+msgid "Oak medium"
+msgstr "Kveko meza"
+
+#: ../../worlds/winterland/conf:51
+msgid "Oak small"
+msgstr "Kevko mala"
+
+#: ../../worlds/winterland/conf:52
+msgid "Oak tiny"
+msgstr "Kveko nana"
+
+#: ../../worlds/winterland/conf:21
+#: ../../worlds/winterland/conf:22
+#: ../../worlds/winterland/conf:23
+#: ../../worlds/winterland/conf:24
+#: ../../worlds/winterland/conf:25
+#: ../../worlds/winterland/conf:26
+msgid "Pebble"
+msgstr ""
+
+#: ../../worlds/winterland/conf:87
+msgid "Reindeer"
+msgstr "Boaco"
 
 #: ../../worlds/winterland/conf:73
 msgid "Rowan"
@@ -227,45 +220,76 @@ msgstr "Sorbuso mala"
 msgid "Rowan tiny"
 msgstr "Sorbuso nana"
 
-#: ../../worlds/winterland/conf:79
-msgid "Badger"
-msgstr "Badger"
-
-#: ../../worlds/winterland/conf:80
-msgid "Bunny"
-msgstr "Kuniklo"
-
-#: ../../worlds/winterland/conf:81
-msgid "Deer"
-msgstr "Cervo"
-
-#: ../../worlds/winterland/conf:82
-msgid "Duck"
-msgstr "Anaso"
-
-#: ../../worlds/winterland/conf:83
-msgid "Elk"
-msgstr "Kanada cervo"
-
-#: ../../worlds/winterland/conf:84
-msgid "Fox"
-msgstr "Vulpo"
-
-#: ../../worlds/winterland/conf:85
-msgid "Lynx"
-msgstr "Linko"
-
-#: ../../worlds/winterland/conf:86
-msgid "Marten"
-msgstr "Marteso"
-
-#: ../../worlds/winterland/conf:87
-msgid "Reindeer"
-msgstr "Boaco"
-
 #: ../../worlds/winterland/conf:88
 msgid "Sheep"
 msgstr "Ŝafo"
+
+#: ../../worlds/winterland/conf:27
+#: ../../worlds/winterland/conf:28
+#: ../../worlds/winterland/conf:29
+msgid "Skeleton"
+msgstr "Skeleto"
+
+#: ../../worlds/winterland/conf:30
+msgid "Snowman"
+msgstr "Neĝhomo"
+
+#: ../../worlds/winterland/conf:53
+msgid "Spruce"
+msgstr "Piceo"
+
+#: ../../worlds/winterland/conf:54
+msgid "Spruce medium"
+msgstr "Piceo meza"
+
+#: ../../worlds/winterland/conf:55
+msgid "Spruce small"
+msgstr "Piceo mala"
+
+#: ../../worlds/winterland/conf:56
+msgid "Spruce tiny"
+msgstr "Piceo nana"
+
+#: ../../worlds/winterland/conf:31
+#: ../../worlds/winterland/conf:32
+#: ../../worlds/winterland/conf:33
+#: ../../worlds/winterland/conf:34
+#: ../../worlds/winterland/conf:35
+#: ../../worlds/winterland/conf:36
+#: ../../worlds/winterland/conf:37
+msgid "Standing Stones"
+msgstr "Starantaj ŝtonoj"
+
+#: ../../worlds/winterland/conf:38
+#: ../../worlds/winterland/conf:39
+#: ../../worlds/winterland/conf:40
+#: ../../worlds/winterland/conf:41
+#: ../../worlds/winterland/conf:42
+#: ../../worlds/winterland/conf:43
+msgid "Stones"
+msgstr "Sxtono"
+
+#: ../../worlds/winterland/conf:2
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../../worlds/winterland/conf:4
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr ""
+
+#: ../../worlds/winterland/conf:44
+msgid "Track"
+msgstr "Trako"
+
+#: ../../worlds/winterland/resconf:36
+msgid "Water"
+msgstr "Akvo"
+
+#: ../../worlds/winterland/conf:3
+msgid "Winterland"
+msgstr "Vintra kamparo"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"
@@ -275,26 +299,5 @@ msgstr "Bizono"
 msgid "Wolf"
 msgstr "Lupo"
 
-#: ../../worlds/winterland/resconf:4
-msgid "Coal"
-msgstr "Karbo"
-
-#: ../../worlds/winterland/resconf:12
-msgid "Gold"
-msgstr "Oro"
-
-#: ../../worlds/winterland/resconf:20
-msgid "Iron"
-msgstr "Fero"
-
-#: ../../worlds/winterland/resconf:28
-msgid "Granit"
-msgstr "Granito"
-
-#: ../../worlds/winterland/resconf:36
-msgid "Water"
-msgstr "Akvo"
-
-#: ../../worlds/winterland/resconf:41
-msgid "Fish"
-msgstr "Fiŝo"
+#~ msgid "Granit"
+#~ msgstr "Granito"

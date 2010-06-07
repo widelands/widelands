@@ -193,7 +193,9 @@ bool Economy::find_route
  * \param route if non-null, fill in a route to the warehouse
  * \param cost_cutoff if positive, find paths of at most that length (in milliseconds)
  */
-Warehouse * Economy::find_closest_warehouse(Flag & start, bool is_ware, Route * route, uint32_t cost_cutoff)
+Warehouse * Economy::find_closest_warehouse
+	(Flag & start, bool is_ware, Route * route, uint32_t cost_cutoff,
+	 const Economy::WarehouseAcceptFn & acceptfn)
 {
 	if (!warehouses().size())
 		return 0;
@@ -218,16 +220,18 @@ Warehouse * Economy::find_closest_warehouse(Flag & start, bool is_ware, Route * 
 
 		Flag & flag = current->base_flag();
 		if (upcast(Warehouse, warehouse, flag.get_building())) {
-			if (route) {
-				route->init(current->mpf_realcost);
+			if (!acceptfn || acceptfn(*warehouse)) {
+				if (route) {
+					route->init(current->mpf_realcost);
 
-				while (current) {
-					route->insert_as_first(current);
-					current = current->mpf_backlink;
+					while (current) {
+						route->insert_as_first(current);
+						current = current->mpf_backlink;
+					}
 				}
-			}
 
-			return warehouse;
+				return warehouse;
+			}
 		}
 
 		// Loop through all neighbouring nodes
@@ -989,6 +993,14 @@ void Economy::_create_requested_workers(Game & game)
 }
 
 /**
+ * Helper function for \ref _handle_active_supplies
+ */
+static bool accept_warehouse_if_policy(Warehouse & wh, bool isworker, Ware_Index ware, Warehouse::StockPolicy policy)
+{
+	return wh.get_stock_policy(isworker, ware) == policy;
+}
+
+/**
  * Send all active supplies (wares that are outside on the road network without
  * being sent to a specific request) to a warehouse.
  */
@@ -1005,7 +1017,35 @@ void Economy::_handle_active_supplies(Game & game)
 		if (supply.has_storage())
 			continue;
 
-		Warehouse * wh = find_closest_warehouse(supply.get_position(game)->base_flag());
+		bool isworker;
+		Ware_Index ware;
+		supply.get_ware_type(isworker, ware);
+
+		bool haveprefer = false;
+		bool havenormal = false;
+		for (uint32_t nwh = 0; nwh < m_warehouses.size(); ++nwh) {
+			Warehouse * wh = m_warehouses[nwh];
+			Warehouse::StockPolicy policy = wh->get_stock_policy(isworker, ware);
+			if (policy == Warehouse::SP_Prefer) {
+				haveprefer = true;
+				break;
+			}
+			if (policy == Warehouse::SP_Normal)
+				havenormal = true;
+		}
+		if (!havenormal && !haveprefer && !isworker)
+			continue;
+
+		Warehouse * wh = find_closest_warehouse
+			(supply.get_position(game)->base_flag(), !isworker, 0, 0,
+			 (!haveprefer && !havenormal)
+			 ?
+			 WarehouseAcceptFn()
+			 :
+			 boost::bind
+				(&accept_warehouse_if_policy,
+				 _1, isworker, ware,
+				 haveprefer ? Warehouse::SP_Prefer : Warehouse::SP_Normal));
 
 		if (!wh) {
 			log("Warning: Economy::_handle_active_supplies didn't find warehouse\n");

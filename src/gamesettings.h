@@ -25,6 +25,8 @@
 #include <string>
 #include <vector>
 
+#include "logic/widelands.h"
+
 struct PlayerSettings {
 	enum State {
 		stateOpen,
@@ -38,6 +40,7 @@ struct PlayerSettings {
 	std::string name;
 	std::string tribe;
 	std::string ai; /**< Preferred AI provider for this player */
+	Widelands::TeamNumber team;
 
 	bool ready;
 };
@@ -68,7 +71,7 @@ struct GameSettings {
 	/// Name of the selected map
 	std::string mapname;
 	std::string mapfilename;
-	
+
 	/// Win condition to use
 	std::string win_condition;
 
@@ -110,6 +113,7 @@ struct GameSettingsProvider {
 	virtual bool canChangePlayerState(uint8_t number) = 0;
 	virtual bool canChangePlayerTribe(uint8_t number) = 0;
 	virtual bool canChangePlayerInit (uint8_t number) = 0;
+	virtual bool canChangePlayerTeam (uint8_t number) = 0;
 
 	virtual bool canLaunch() = 0;
 
@@ -129,6 +133,7 @@ struct GameSettingsProvider {
 	virtual void setPlayerNumber  (uint8_t number) = 0;
 	virtual void setPlayerReady   (uint8_t number, bool ready) = 0;
 	virtual bool getPlayerReady   (uint8_t number) = 0;
+	virtual void setPlayerTeam    (uint8_t number, Widelands::TeamNumber team) = 0;
 	virtual void setWinCondition  (std::string wc) = 0;
 	virtual std::string getWinCondition() = 0;
 

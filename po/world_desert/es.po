@@ -6,30 +6,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:29+0000\n"
-"Last-Translator: raul.ferriz <raul.ferriz@gmail.com>\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-04-29 16:42+0000\n"
+"Last-Translator: Shay <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-04-30 03:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../../worlds/desert/conf:2
-msgid "The Widelands Development Team"
-msgstr "El Equipo de Desarrollo de Widelands"
+#: ../../worlds/desert/conf:71
+msgid "Beech"
+msgstr "Haya"
 
-#: ../../worlds/desert/conf:3
-msgid "Desert"
-msgstr "Desierto"
+#: ../../worlds/desert/conf:72
+msgid "Beech medium"
+msgstr "Haya mediana"
 
-#: ../../worlds/desert/conf:4
-msgid "This is the wide and sandy country of the bedouins"
-msgstr "Este es el amplio y arenoso mundo de los beduinos"
+#: ../../worlds/desert/conf:73
+msgid "Beech small"
+msgstr "Haya pequeña"
+
+#: ../../worlds/desert/conf:74
+msgid "Beech tiny"
+msgstr "Haya diminuta"
+
+#: ../../worlds/desert/conf:85
+msgid "Bunny"
+msgstr "Conejo"
 
 #: ../../worlds/desert/conf:7
 #: ../../worlds/desert/conf:8
@@ -44,6 +52,10 @@ msgstr "Arbusto"
 msgid "Cactus"
 msgstr "Cacto"
 
+#: ../../worlds/desert/resconf:4
+msgid "Coal"
+msgstr "Carbón"
+
 #: ../../worlds/desert/conf:14
 #: ../../worlds/desert/conf:15
 #: ../../worlds/desert/conf:16
@@ -51,62 +63,64 @@ msgstr "Cacto"
 msgid "Dead Tree"
 msgstr "Árbol muerto"
 
+#: ../../worlds/desert/conf:86
+msgid "Deer"
+msgstr "Ciervo"
+
+#: ../../worlds/desert/conf:3
+msgid "Desert"
+msgstr "Desierto"
+
+#: ../../worlds/desert/conf:87
+msgid "Duck"
+msgstr "Pato"
+
+#: ../../worlds/desert/resconf:41
+msgid "Fish"
+msgstr "Pescado"
+
+#: ../../worlds/desert/conf:88
+msgid "Fox"
+msgstr "Zorro"
+
+#: ../../worlds/desert/resconf:12
+msgid "Gold"
+msgstr "Oro"
+
+#: ../../worlds/desert/resconf:28
+msgid "Granite"
+msgstr "Granito"
+
 #: ../../worlds/desert/conf:18
 #: ../../worlds/desert/conf:19
 #: ../../worlds/desert/conf:20
 msgid "Grass"
 msgstr "Hierba"
 
+#: ../../worlds/desert/resconf:20
+msgid "Iron"
+msgstr "Hierro"
+
+#: ../../worlds/desert/conf:75
+msgid "Larch"
+msgstr "Alerce"
+
+#: ../../worlds/desert/conf:76
+msgid "Larch medium"
+msgstr "Alerce mediano"
+
+#: ../../worlds/desert/conf:77
+msgid "Larch small"
+msgstr "Alerce pequeño"
+
+#: ../../worlds/desert/conf:78
+msgid "Larch tiny"
+msgstr "Alerce diminuto"
+
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
 msgid "Mushroom"
 msgstr "Seta"
-
-#: ../../worlds/desert/conf:23
-#: ../../worlds/desert/conf:24
-#: ../../worlds/desert/conf:25
-#: ../../worlds/desert/conf:26
-#: ../../worlds/desert/conf:27
-#: ../../worlds/desert/conf:28
-msgid "Pebble"
-msgstr "Gravilla"
-
-#: ../../worlds/desert/conf:29
-#: ../../worlds/desert/conf:30
-#: ../../worlds/desert/conf:31
-#: ../../worlds/desert/conf:32
-#: ../../worlds/desert/conf:33
-msgid "ruins"
-msgstr "Ruinas"
-
-#: ../../worlds/desert/conf:34
-#: ../../worlds/desert/conf:35
-#: ../../worlds/desert/conf:36
-msgid "Skeleton"
-msgstr "Esqueleto"
-
-#: ../../worlds/desert/conf:37
-msgid "Shell"
-msgstr "Concha"
-
-#: ../../worlds/desert/conf:38
-#: ../../worlds/desert/conf:39
-#: ../../worlds/desert/conf:40
-#: ../../worlds/desert/conf:41
-#: ../../worlds/desert/conf:42
-#: ../../worlds/desert/conf:43
-#: ../../worlds/desert/conf:44
-msgid "Standing Stones"
-msgstr "Monolito"
-
-#: ../../worlds/desert/conf:45
-#: ../../worlds/desert/conf:46
-#: ../../worlds/desert/conf:47
-#: ../../worlds/desert/conf:48
-#: ../../worlds/desert/conf:49
-#: ../../worlds/desert/conf:50
-msgid "Stones"
-msgstr "Piedras"
 
 #: ../../worlds/desert/conf:51
 #: ../../worlds/desert/conf:55
@@ -140,37 +154,14 @@ msgstr "Palmera pequeña"
 msgid "Palm tiny"
 msgstr "Palmera diminuta"
 
-#: ../../worlds/desert/conf:71
-msgid "Beech"
-msgstr "Haya"
-
-#: ../../worlds/desert/conf:72
-msgid "Beech medium"
-msgstr "Haya mediana"
-
-#: ../../worlds/desert/conf:73
-msgid "Beech small"
-msgstr "Haya pequeña"
-
-#: ../../worlds/desert/conf:74
-msgid "Beech tiny"
-msgstr "Haya diminuta"
-
-#: ../../worlds/desert/conf:75
-msgid "Larch"
-msgstr "Alerce"
-
-#: ../../worlds/desert/conf:76
-msgid "Larch medium"
-msgstr "Alerce mediano"
-
-#: ../../worlds/desert/conf:77
-msgid "Larch small"
-msgstr "Alerce pequeño"
-
-#: ../../worlds/desert/conf:78
-msgid "Larch tiny"
-msgstr "Alerce diminuto"
+#: ../../worlds/desert/conf:23
+#: ../../worlds/desert/conf:24
+#: ../../worlds/desert/conf:25
+#: ../../worlds/desert/conf:26
+#: ../../worlds/desert/conf:27
+#: ../../worlds/desert/conf:28
+msgid "Pebble"
+msgstr "Gravilla"
 
 #: ../../worlds/desert/conf:79
 msgid "Rowan"
@@ -188,49 +179,61 @@ msgstr "Mostajo pequeño"
 msgid "Rowan tiny"
 msgstr "Mostajo diminuto"
 
-#: ../../worlds/desert/conf:85
-msgid "Bunny"
-msgstr "Conejo"
-
-#: ../../worlds/desert/conf:86
-msgid "Deer"
-msgstr "Ciervo"
-
-#: ../../worlds/desert/conf:87
-msgid "Duck"
-msgstr "Pato"
-
-#: ../../worlds/desert/conf:88
-msgid "Fox"
-msgstr "Zorro"
-
 #: ../../worlds/desert/conf:89
 msgid "Sheep"
 msgstr "Oveja"
 
-#: ../../worlds/desert/resconf:4
-msgid "Coal"
-msgstr "Carbón"
+#: ../../worlds/desert/conf:37
+msgid "Shell"
+msgstr "Concha"
 
-#: ../../worlds/desert/resconf:12
-msgid "Gold"
-msgstr "Oro"
+#: ../../worlds/desert/conf:34
+#: ../../worlds/desert/conf:35
+#: ../../worlds/desert/conf:36
+msgid "Skeleton"
+msgstr "Esqueleto"
 
-#: ../../worlds/desert/resconf:20
-msgid "Iron"
-msgstr "Hierro"
+#: ../../worlds/desert/conf:38
+#: ../../worlds/desert/conf:39
+#: ../../worlds/desert/conf:40
+#: ../../worlds/desert/conf:41
+#: ../../worlds/desert/conf:42
+#: ../../worlds/desert/conf:43
+#: ../../worlds/desert/conf:44
+msgid "Standing Stones"
+msgstr "Monolito"
 
-#: ../../worlds/desert/resconf:28
-msgid "Granit"
-msgstr "Granito"
+#: ../../worlds/desert/conf:45
+#: ../../worlds/desert/conf:46
+#: ../../worlds/desert/conf:47
+#: ../../worlds/desert/conf:48
+#: ../../worlds/desert/conf:49
+#: ../../worlds/desert/conf:50
+msgid "Stones"
+msgstr "Piedras"
+
+#: ../../worlds/desert/conf:2
+msgid "The Widelands Development Team"
+msgstr "El Equipo de Desarrollo de Widelands"
+
+#: ../../worlds/desert/conf:4
+msgid "This is the wide and sandy country of the bedouins"
+msgstr "Este es el amplio y arenoso mundo de los beduinos"
 
 #: ../../worlds/desert/resconf:36
 msgid "Water"
 msgstr "Agua"
 
-#: ../../worlds/desert/resconf:41
-msgid "Fish"
-msgstr "Pescado"
+#: ../../worlds/desert/conf:29
+#: ../../worlds/desert/conf:30
+#: ../../worlds/desert/conf:31
+#: ../../worlds/desert/conf:32
+#: ../../worlds/desert/conf:33
+msgid "ruins"
+msgstr "Ruinas"
+
+#~ msgid "Granit"
+#~ msgstr "Granito"
 
 #~ msgid "Tree"
 #~ msgstr "Árbol"
