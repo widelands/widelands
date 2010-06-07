@@ -71,6 +71,14 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	virtual bool canChangePlayerInit(uint8_t const number) {
 		return number < settings().players.size();
 	}
+	virtual bool canChangePlayerTeam(uint8_t number) {
+		if (number >= settings().players.size())
+			return false;
+		if (number == settings().playernum)
+			return true;
+		return
+			settings().players.at(number).state == PlayerSettings::stateComputer;
+	}
 
 	virtual bool canLaunch() {return h->canLaunch();}
 
@@ -140,6 +148,16 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			(number == settings().playernum ||
 			 settings().players.at(number).state == PlayerSettings::stateComputer)
 			h->setPlayerTribe(number, tribe);
+	}
+	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
+	{
+		if (number >= h->settings().players.size())
+			return;
+
+		if
+			(number == settings().playernum ||
+			 settings().players.at(number).state == PlayerSettings::stateComputer)
+			h->setPlayerTeam(number, team);
 	}
 
 	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
@@ -978,6 +996,7 @@ void NetHost::setMap
 		player.state                = PlayerSettings::stateOpen;
 		player.tribe                = d->settings.tribes.at(0).name;
 		player.initialization_index = 0;
+		player.team = 0;
 		++oldplayers;
 	}
 
@@ -1238,7 +1257,6 @@ void NetHost::setPlayerReady
 	s.Unsigned8(number);
 	writeSettingPlayer(s, number);
 	broadcast(s);
-	return;
 }
 
 bool NetHost::getPlayerReady(uint8_t const number)
@@ -1248,6 +1266,20 @@ bool NetHost::getPlayerReady(uint8_t const number)
 		d->settings.players.at(number).state == PlayerSettings::stateComputer ||
 		(d->settings.players.at(number).state == PlayerSettings::stateHuman &&
 		 d->settings.players.at(number).ready);
+}
+
+void NetHost::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
+{
+	if (number >= d->settings.players.size())
+		return;
+	d->settings.players.at(number).team = team;
+
+	// Broadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
+	s.Unsigned8(number);
+	writeSettingPlayer(s, number);
+	broadcast(s);
 }
 
 void NetHost::setMultiplayerGameSettings()
@@ -1302,6 +1334,7 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.Unsigned8(player.initialization_index);
 	packet.String(player.ai);
 	packet.Unsigned8(static_cast<uint8_t>(player.ready));
+	packet.Unsigned8(player.team);
 }
 
 void NetHost::writeSettingAllPlayers(SendPacket & packet)
@@ -1848,6 +1881,12 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	case NETCMD_SETTING_CHANGEREADY:
 		if (!d->game) {
 			setPlayerReady(client.playernum, static_cast<bool>(r.Unsigned8()));
+		}
+		break;
+
+	case NETCMD_SETTING_CHANGETEAM:
+		if (!d->game) {
+			setPlayerTeam(client.playernum, r.Unsigned8());
 		}
 		break;
 

@@ -24,7 +24,9 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "logic/findnode.h"
+#include "logic/game.h"
 #include "logic/map.h"
+#include "logic/player.h"
 
 #include <list>
 
@@ -54,18 +56,22 @@ struct CheckStepRoadAI {
 struct FindNodeUnowned {
 	bool accept (const Map &, const FCoords & fc) const {
 		// when looking for unowned terrain to acquire, we are actually
-		// only interested in fields we can walk on
+		// only interested in fields we can walk on.
+		// Fields should either be completely unowned or owned by an opposing player
 		return
 			fc.field->nodecaps() & MOVECAPS_WALK
-			&& fc.field->get_owned_by() != playernum
+			&& ((fc.field->get_owned_by() == 0) 
+				 || player->is_hostile(*game.get_player(fc.field->get_owned_by())))
 			&& (!onlyenemies || (fc.field->get_owned_by() != 0));
 	}
 
-	int8_t playernum;
+	//int8_t playernum;
+	Player * player;
+	Game & game;
 	bool onlyenemies;
 
-	FindNodeUnowned(int8_t pn, bool oe = false)
-		: playernum(pn), onlyenemies(oe)
+	FindNodeUnowned(Player * p, Game & g, bool oe = false)
+		: player(p), game(g), onlyenemies(oe)
 	{}
 };
 

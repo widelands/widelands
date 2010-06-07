@@ -179,23 +179,23 @@ Player * Editor_Game_Base::add_player
 	(Player_Number       const player_number,
 	 uint8_t             const initialization_index,
 	 std::string const &       tribe,
-	 std::string const &       name)
+	 std::string const &       name,
+	 TeamNumber team)
 {
 	assert(1 <= player_number);
 	assert(player_number <= MAX_PLAYERS);
 
 	Player * & p = m_players[player_number - 1];
 	delete p;
-	return
-		p
-		=
-		new Player
-			(*this,
-			 player_number,
-			 initialization_index,
-			 manually_load_tribe(tribe),
-			 name,
-			 g_playercolors[player_number - 1]);
+	p = new Player
+		(*this,
+		 player_number,
+		 initialization_index,
+		 manually_load_tribe(tribe),
+		 name,
+		 g_playercolors[player_number - 1]);
+	p->set_team_number(team);
+	return p;
 }
 
 /*
