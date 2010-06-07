@@ -278,6 +278,7 @@ install (
   COMPONENT CoreVersionFile
 )
 
+include(CTest)
 enable_testing()
 
 include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
@@ -338,6 +339,12 @@ add_subdirectory(doc)
 add_subdirectory(po)
 #add_subdirectory(pics)
 add_subdirectory(src)
+
+add_custom_target(autotest ALL
+  COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  DEPENDS widelands;test_io_filesystem
+)
 
 # install files to the correct locations here
 install(
