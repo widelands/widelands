@@ -72,6 +72,8 @@ enum WLGGZGameInfo
 	gameinfo_playertype = 7,
 	// two strings: version string, than buildtype 
 	gameinfo_version = 8,
+	// one int: the number of the players team
+	gameinfo_teamnumber = 9,
 };
 
 enum WLGGZPlayerType

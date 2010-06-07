@@ -72,6 +72,7 @@ struct Net_Player_Info {
 	std::string tribe;
 	WLGGZPlayerType type;
 	WLGGZGameStatsResult result;
+	Widelands::TeamNumber team;
 };
 
 /// A MOTD struct for easier output to the chat panel
@@ -159,7 +160,8 @@ struct NetGGZ : public ChatProvider {
 	void send_game_done();
 	void send_game_info();
 	void report_result
-		(int32_t player, int32_t points, bool win, int32_t gametime,
+		(int32_t player, Widelands::TeamNumber team, int32_t points,
+		 bool win, int32_t gametime,
 		 const Widelands::Game::General_Stats_vector & resultvec);
 	void send_game_statistics
 		(int32_t gametime,

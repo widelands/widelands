@@ -2170,8 +2170,11 @@ void NetHost::report_result(int player, int points, bool win, std::string extra)
 	// if this is a ggz game, tell the metaserver that the game is done.
 	if (use_ggz)
 	{
+		
 		NetGGZ::ref().report_result
-			(player, points, win, d->game->get_gametime(), d->game->get_general_statistics());
+			(player, d->game->player(player).team_number(),
+			 points, win, d->game->get_gametime(),
+			 d->game->get_general_statistics());
 	}
 #endif
 }

@@ -1024,6 +1024,11 @@ void NetGGZ::send_game_info()
 			params.push_back(par);
 			wlggz_write(m_fd, gameinfo_playertype, params);
 
+			params.clear();
+			par.set(pit->team);
+			params.push_back(par);
+			wlggz_write(m_fd, gameinfo_teamnumber, params);
+
 			pit++;
 		}
 
@@ -1191,7 +1196,8 @@ void NetGGZ::send_game_statistics
 }
 
 void NetGGZ::report_result
-	(int32_t player, int32_t points, bool win, int32_t gametime,
+	(int32_t player, Widelands::TeamNumber team, int32_t points,
+	 bool win, int32_t gametime,
 	 const Widelands::Game::General_Stats_vector& resultvec)
 {
 	log
@@ -1201,11 +1207,14 @@ void NetGGZ::report_result
 
 	if(player < 1 or player > playerinfo.size())
 	{
-		throw wexception("NetGGZ::report_result: ERROR: player number out of range\n");
+		throw wexception
+			("NetGGZ::report_result: ERROR: player number out of range\n");
 	}
 	
 	playerinfo.at(player-1).points = points;
-	playerinfo.at(player-1).result = (win?gamestatresult_winner:gamestatresult_looser);
+	playerinfo.at(player-1).result =
+		(win?gamestatresult_winner:gamestatresult_looser);
+	playerinfo.at(player-1).team = team;
 
 	bool finished = true;
 
