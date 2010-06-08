@@ -228,7 +228,14 @@ Worker & WarehouseSupply::launch_worker(Game & game, Request const & req)
 }
 
 
-/// Warehouse building
+/*
+==============================
+Warehouse Building
+==============================
+*/
+
+
+/// Warehouse Descr
 Warehouse_Descr::Warehouse_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,

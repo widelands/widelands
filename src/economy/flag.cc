@@ -299,6 +299,16 @@ Road * Flag::get_road(Flag & flag)
 }
 
 
+/// returns the number of roads connected to the flag
+uint8_t Flag::nr_of_roads() const {
+	uint8_t counter = 0;
+	for (uint8_t road_id = 6; road_id; --road_id)
+		if (Road * const road = get_road(road_id))
+			++counter;
+	return counter;
+}
+
+
 bool Flag::is_dead_end() const {
 	if (get_building())
 		return false;
@@ -320,7 +330,7 @@ bool Flag::is_dead_end() const {
 /**
  * Returns true if the flag can hold more items.
 */
-bool Flag::has_capacity()
+bool Flag::has_capacity() const
 {
 	return (m_item_filled < m_item_capacity);
 }
