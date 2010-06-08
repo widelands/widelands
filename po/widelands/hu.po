@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-06-06 20:58+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-06-07 18:57+0000\n"
+"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-06-07 03:35+0000\n"
+"X-Launchpad-Export-Date: 2010-06-08 03:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -487,7 +487,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
-msgstr ""
+msgstr "Fejlesztések"
 
 #: ../../src/writeHTML.cc:462
 #, c-format
@@ -682,7 +682,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:905 ../../src/logic/production_program.cc:389
 #: ../../src/logic/production_program.cc:746
 msgid "failed"
-msgstr ""
+msgstr "sikertelen"
 
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:390
 msgid "completed"
@@ -710,7 +710,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:947 ../../src/writeHTML.cc:969
 msgid "economy"
-msgstr ""
+msgstr "gazdaság"
 
 #: ../../src/writeHTML.cc:949 ../../src/writeHTML.cc:971
 msgid "needs"
@@ -742,7 +742,7 @@ msgstr "szükséges"
 
 #: ../../src/writeHTML.cc:1028
 msgid "experience"
-msgstr ""
+msgstr "tapasztalat"
 
 #: ../../src/writeHTML.cc:1042
 msgid "Documentation for program command call"
@@ -937,7 +937,7 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "gazdaság: %s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
@@ -950,7 +950,7 @@ msgstr "Menü"
 
 #: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
-msgstr ""
+msgstr "Szerszámok"
 
 #: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
@@ -973,7 +973,7 @@ msgstr "Játékosok"
 
 #: ../../src/editor/editorinteractive.cc:151
 msgid "Unsupported format"
-msgstr ""
+msgstr "Nem támogatott formátum"
 
 #: ../../src/editor/editorinteractive.cc:153
 #, c-format
@@ -981,6 +981,8 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
+"Widelands nem tudja betölteni a \"%s\" fájl. Úgy tűnik a fájl nem "
+"kompatibilis ezzel a verzióval."
 
 #: ../../src/editor/editorinteractive.cc:171
 #: ../../src/editor/editorinteractive.cc:576
@@ -1001,7 +1003,7 @@ msgstr "Világ adatainak betöltése"
 #: ../../src/editor/editorinteractive.cc:187
 #: ../../src/editor/editorinteractive.cc:580
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Képek betöltése..."
 
 #: ../../src/editor/editorinteractive.cc:235
 msgid "Map unsaved"
@@ -1039,7 +1041,7 @@ msgstr ""
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
-msgstr ""
+msgstr "A játékban nincs egyetlen játékos sem!"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:80
 #, c-format
@@ -1048,7 +1050,7 @@ msgstr ""
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:67
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "Nincs zászló a megadott helyen"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:69
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
@@ -1161,12 +1163,12 @@ msgstr "nagy"
 #: ../../src/logic/cmd_luacoroutine.cc:62
 #, c-format
 msgid "lua function: %s"
-msgstr ""
+msgstr "lua függvény: %s"
 
 #: ../../src/logic/cmd_luascript.cc:58
 #, c-format
 msgid "lua: %s"
-msgstr ""
+msgstr "lua: %s"
 
 #: ../../src/logic/cmd_queue.cc:173
 #, c-format
@@ -1234,6 +1236,10 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
+"A Widelands nem tudja elindítani a játékot, mert a %u játékosnak nincs kezdő "
+"helye.\n"
+"A hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a "
+"játékosnak a szerkesztőben."
 
 #: ../../src/logic/immovable.cc:140 ../../src/logic/production_program.cc:1378
 #, c-format
@@ -1280,7 +1286,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:643
 #, c-format
 msgid "unknown tribe %s"
-msgstr ""
+msgstr "a %s törzs ismeretlen"
 
 #: ../../src/logic/immovable.cc:649
 #, c-format
@@ -1299,7 +1305,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:732 ../../src/logic/production_program.cc:1323
 msgid "priority"
-msgstr ""
+msgstr "prioritás"
 
 #: ../../src/logic/immovable.cc:766 ../../src/logic/immovable.cc:835
 #: ../../src/logic/immovable.cc:921
@@ -1388,7 +1394,7 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:601
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Támaszpont elveszett!"
 
 #: ../../src/logic/militarysite.cc:674
 #, c-format
@@ -1417,7 +1423,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_building_data_packet.cc:100
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "%u. játékos nem létezik"
 
 #: ../../src/logic/playercommand.cc:134
 #, c-format
@@ -1570,7 +1576,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:131
 msgid "not "
-msgstr ""
+msgstr "nem "
 
 #: ../../src/logic/production_program.cc:153
 #: ../../src/logic/production_program.cc:174
@@ -1583,7 +1589,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:229
 msgid "workers need experience"
-msgstr ""
+msgstr "a munkásoknak tapasztalatra van szükségük"
 
 #: ../../src/logic/production_program.cc:254
 msgid "ware type or worker type"
@@ -1619,16 +1625,16 @@ msgstr ""
 #: ../../src/logic/production_program.cc:397
 #: ../../src/logic/production_program.cc:749
 msgid " because: "
-msgstr ""
+msgstr " mert "
 
 #: ../../src/logic/production_program.cc:408
 #: ../../src/wui/encyclopedia_window.cc:192
 msgid " or "
-msgstr ""
+msgstr " vagy "
 
 #: ../../src/logic/production_program.cc:409
 msgid " because not: "
-msgstr ""
+msgstr " mert nem: "
 
 #: ../../src/logic/production_program.cc:449
 #, c-format
@@ -1646,7 +1652,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:471
 msgid "failure"
-msgstr ""
+msgstr "sikertelen"
 
 #: ../../src/logic/production_program.cc:476
 msgid "completion"
@@ -1654,7 +1660,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:481
 msgid "skip"
-msgstr ""
+msgstr "kihagyás"
 
 #: ../../src/logic/production_program.cc:486
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
@@ -1712,12 +1718,12 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:974
 msgid "distance"
-msgstr ""
+msgstr "távolság"
 
 #: ../../src/logic/production_program.cc:985
 #: ../../src/logic/production_program.cc:996
 msgid "percentage"
-msgstr ""
+msgstr "százalék"
 
 #: ../../src/logic/production_program.cc:1130
 msgid "Mine empty"
@@ -1741,7 +1747,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1171
 #: ../../src/logic/production_program.cc:1239
 msgid "level"
-msgstr ""
+msgstr "szint"
 
 #: ../../src/logic/production_program.cc:1249
 #, c-format
@@ -1764,8 +1770,8 @@ msgstr "(nincs munkás)"
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Munkás hiányzik"
+msgstr[1] "Munkások hiányoznak"
 
 #: ../../src/logic/productionsite.cc:232
 msgid "(stopped)"
@@ -1780,7 +1786,7 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:75
 msgid "positive integer"
-msgstr ""
+msgstr "pozitív egész szám"
 
 #: ../../src/logic/soldier.cc:79
 #, c-format
@@ -1809,7 +1815,7 @@ msgstr ""
 #: ../../src/logic/soldier.cc:1355 ../../src/logic/soldier.cc:1360
 #: ../../src/logic/worker.cc:1638
 msgid "no"
-msgstr ""
+msgstr "nem"
 
 #: ../../src/logic/soldier.cc:1367 ../../src/logic/soldier.cc:1375
 #: ../../src/logic/worker.cc:1650
@@ -1835,7 +1841,7 @@ msgstr ""
 
 #: ../../src/logic/tribe.cc:209 ../../src/logic/tribe.cc:230
 msgid "none found"
-msgstr ""
+msgstr "nincs találat"
 
 #: ../../src/logic/tribe.cc:211
 #, c-format
@@ -1884,7 +1890,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:881
 msgid "A geologist found resources."
-msgstr ""
+msgstr "Geológus ásványkincseket talált."
 
 #: ../../src/logic/worker.cc:1619
 #, c-format
@@ -1905,7 +1911,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:1636
 msgid "nothing"
-msgstr ""
+msgstr "semmi"
 
 #: ../../src/logic/worker.cc:2807
 #, c-format
@@ -2000,7 +2006,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:287
 #, c-format
 msgid "constructionsite: %s"
-msgstr ""
+msgstr "építési terület: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:435
 #, c-format
@@ -2047,7 +2053,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "a csomópont tulajdonosa a %u. játékos"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
@@ -2067,7 +2073,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "zászlók: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
@@ -2077,7 +2083,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr ""
+msgstr "nincs zászló a megadott pozícióban (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
@@ -2244,7 +2250,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:101
 msgid "Could not establish connection to host"
-msgstr ""
+msgstr "Nem sikerült kapcsolatot létesíteni a hoszttal"
 
 #: ../../src/network/netclient.cc:103
 msgid ""
@@ -2252,14 +2258,17 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
+"A Widelands nem tud kapcsolatot létesíteni a megadott címmel.\n"
+"Vagy nem fut Widelands szerver a feltételezett porton, vagy\n"
+"a szerver leállt ahogy csatlakozni próbáltál."
 
 #: ../../src/network/netclient.cc:136
 msgid "Client has left the game."
-msgstr ""
+msgstr "A kliens elhagyta a játékot."
 
 #: ../../src/network/netclient.cc:214
 msgid "Client crashed and performed an emergency save."
-msgstr ""
+msgstr "A kliens összeomlott és elmentette a játék állapotát."
 
 #: ../../src/network/netclient.cc:437
 msgid "Server sent a player update for a player that does not exist."
@@ -2275,10 +2284,12 @@ msgid ""
 "Expected a HELLO packet from server, but received command number %u. Maybe "
 "the server is running a different version of Widelands?"
 msgstr ""
+"HELLO csomagot vártam a szervertől, de %u sorszámú parancsot küldött. "
+"Lehetséges, hogy a szerver más Widelands verziót futtat?"
 
 #: ../../src/network/netclient.cc:539
 msgid "Server uses a different protocol version"
-msgstr ""
+msgstr "A szerver más verziójú protokollt használ"
 
 #: ../../src/network/netclient.cc:680
 msgid "/me 's file failed md5 checksumming."
@@ -2286,7 +2297,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:739
 msgid "Unexpectedly received LAUNCH command from server."
-msgstr ""
+msgstr "Váratlanul LAUNCH parancs érkezett a szervertől."
 
 #: ../../src/network/netclient.cc:759
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
@@ -2295,15 +2306,17 @@ msgstr ""
 #: ../../src/network/netclient.cc:772
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr ""
+"A szerver SYNCREQUEST csomagot küldött annak ellenére, hogy a játék nem is "
+"indult még el."
 
 #: ../../src/network/netclient.cc:799
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
-msgstr ""
+msgstr "A szerver ismeretlen parancsot küldött (parancs sorszáma: %u)"
 
 #: ../../src/network/netclient.cc:833
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Valami hiba történt: "
 
 #: ../../src/network/netclient.cc:864
 msgid " An automatic savegame will be created."
@@ -2311,15 +2324,15 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:342
 msgid "Server has left the game."
-msgstr ""
+msgstr "A szerver elhagyta a játékot."
 
 #: ../../src/network/nethost.cc:418
 msgid "The game has started just after you tried to connect."
-msgstr ""
+msgstr "A játék éppen azután kezdődött el, hogy csatlakozni próbáltál."
 
 #: ../../src/network/nethost.cc:496
 msgid "Server has crashed and performed an emergency save."
-msgstr ""
+msgstr "A szerver összeomlott és elmentette a játék állapotát."
 
 #: ../../src/network/nethost.cc:846
 #, c-format
@@ -2355,27 +2368,27 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1496
 msgid "Client and host have become desynchronized."
-msgstr ""
+msgstr "A kliens és a hoszt nincs többé szinkronban."
 
 #: ../../src/network/nethost.cc:1542
 msgid "New User"
-msgstr ""
+msgstr "Új felhasználó"
 
 #: ../../src/network/nethost.cc:1547
 msgid "The game has already started."
-msgstr ""
+msgstr "A játék már elkezdődött."
 
 #: ../../src/network/nethost.cc:1565
 msgid "Connection to client lost."
-msgstr ""
+msgstr "A kapcsolat megszakadt a klienssel."
 
 #: ../../src/network/nethost.cc:1579
 msgid "Client sent malformed commands: "
-msgstr ""
+msgstr "A kliens hibás parancsot küldött: "
 
 #: ../../src/network/nethost.cc:1612
 msgid "Game is running already, but client has not connected fully"
-msgstr ""
+msgstr "A játék már elindult, de a kliens nem csatlakozott teljesen"
 
 #: ../../src/network/nethost.cc:1616
 #, c-format
@@ -2386,11 +2399,13 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1622
 msgid "Server uses a different protocol version."
-msgstr ""
+msgstr "A szerver más protokollt használ."
 
 #: ../../src/network/nethost.cc:1704
 msgid "Client sent TIME command even though game is not running."
 msgstr ""
+"A klienst TIME parancsot küldött annak ellenére, hogy a játék még nem indult "
+"el."
 
 #: ../../src/network/nethost.cc:1712
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
@@ -2416,12 +2431,12 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1792
 msgid "Client requests file part that does not exist."
-msgstr ""
+msgstr "A kliens olyan fájl darabját kéri amely nem létezik."
 
 #: ../../src/network/nethost.cc:1795
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr ""
+msgstr "A %s fájl átvitele befejeződött a %s játékoshoz"
 
 #: ../../src/network/nethost.cc:1803
 #, c-format
@@ -2431,12 +2446,12 @@ msgstr ""
 #: ../../src/network/nethost.cc:1813
 #, c-format
 msgid "Client sent unknown command number %u"
-msgstr ""
+msgstr "A kliens ismeretlen parancsot küldött, amely sorszáma: %u"
 
 #: ../../src/network/nethost.cc:1869
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr ""
+msgstr "%s elhagyta a (%s) játékot"
 
 #: ../../src/network/network_ggz.cc:275
 msgid "Closed the connection to the metaserver."
@@ -2506,11 +2521,11 @@ msgstr "Felkészülés..."
 
 #: ../../src/ui_basic/spinbox.cc:125
 msgid "Increase the value"
-msgstr ""
+msgstr "Érték növelése"
 
 #: ../../src/ui_basic/spinbox.cc:133
 msgid "Decrease the value"
-msgstr ""
+msgstr "Érték csökkentése"
 
 #: ../../src/ui_basic/spinbox.cc:144
 msgid "Increase the value by 10"
@@ -2530,7 +2545,7 @@ msgstr "Hadjáratok:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:58
 msgid "Difficulty:"
-msgstr "Nehézség:"
+msgstr "Nehézségi szint:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:62
 #: ../../src/ui_fsmenu/campaign_select.cc:272
@@ -3547,7 +3562,7 @@ msgstr "Célkitűzések"
 #: ../../src/wui/interactive_player.cc:193
 #: ../../src/wui/interactive_player.cc:279
 msgid "Messages"
-msgstr ""
+msgstr "Üzenetek"
 
 #: ../../src/wui/interactive_player.cc:197
 msgid "Ware help"
@@ -3557,8 +3572,8 @@ msgstr "Áru súgó"
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u új üzenet"
+msgstr[1] "%u új üzenet"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
@@ -3570,55 +3585,57 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Becenév:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
-msgstr ""
+msgstr "Jelszó:"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr ""
+"FIGYELMEZTETÉS: A jelszó olvashatóan jelenik meg a képernyőn és a program "
+"kódolatlanul tárolja."
 
 #: ../../src/wui/login_box.cc:52
 msgid "Log in to a registered account"
-msgstr ""
+msgstr "Bejelentkezés egy regisztrált fiókba"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Automatically use this login information from now on."
-msgstr ""
+msgstr "Legközelebb a fent megadott bejelentkezési adatokat használja."
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
-msgstr ""
+msgstr "Bejelentkezés"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
-msgstr ""
+msgstr "Üres becenév"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "Kérlek adj meg egy becenevet!"
 
 #: ../../src/wui/login_box.cc:92
 msgid "Space in Nickname"
-msgstr ""
+msgstr "Szóköz a becenévben"
 
 #: ../../src/wui/login_box.cc:93
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr ""
+msgstr "Sajnálom, szóköz nem lehet a becenévben!"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Empty Password"
-msgstr ""
+msgstr "Üres jelszó"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Please enter your password!"
-msgstr ""
+msgstr "Kérlek add meg a jelszót!"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
-msgstr ""
+msgstr "Katonák"
 
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
@@ -3644,23 +3661,23 @@ msgstr ""
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Worker"
-msgstr ""
+msgstr "Munkás"
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
-msgstr ""
+msgstr "TP"
 
 #: ../../src/wui/productionsitewindow.cc:73
 msgid "Next Level"
-msgstr ""
+msgstr "Következő szint"
 
 #: ../../src/wui/productionsitewindow.cc:140
 msgid "(vacant)"
-msgstr ""
+msgstr "(nincs munkás)"
 
 #: ../../src/wui/productionsitewindow.cc:140
 msgid "(coming)"
-msgstr ""
+msgstr "(útban ide)"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid "xx"
@@ -3696,7 +3713,7 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:52
 msgid "Workers (total)"
-msgstr ""
+msgstr "Munkások (összes)"
 
 #: ../../src/wui/stock_menu.cc:59
 msgid "Wares in warehouses"
@@ -3712,7 +3729,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:44
 msgid "Economy options"
-msgstr ""
+msgstr "Gazdaság beállításai"
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:343
 msgid "Decrease permanent target quantity"
@@ -3732,7 +3749,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:267 ../../src/wui/transport_ui.cc:461
 msgid "Reset"
-msgstr ""
+msgstr "Alapállapot"
 
 #: ../../src/wui/transport_ui.cc:268 ../../src/wui/transport_ui.cc:462
 msgid "Reset target quantity to default value"
@@ -3992,11 +4009,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Low"
-msgstr ""
+msgstr "Alacsony"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "High"
-msgstr ""
+msgstr "Magas"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:281
 msgid "Map ID:"
@@ -4041,7 +4058,7 @@ msgstr "névtelen"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 msgid "<Directory>"
-msgstr ""
+msgstr "<Könyvtár>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "<Not a map file>"
@@ -4103,6 +4120,9 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
+"A játékos nem törölhető le amíg valahol máshol létezik rá hivatkozás. "
+"Távolíts el minden épületet és tárgyat amely ettől a játékostól függ, majd "
+"próbáld újra."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
@@ -4241,11 +4261,11 @@ msgstr "nincs leírás"
 
 #: ../../src/wui/game_message_menu.h:67
 msgid "Select"
-msgstr ""
+msgstr "Kiválasztás"
 
 #: ../../src/wui/game_message_menu.h:68
 msgid "Status"
-msgstr ""
+msgstr "Állapot"
 
 #: ../../src/wui/game_message_menu.h:69
 msgid "Title"
@@ -4261,7 +4281,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear selection"
-msgstr ""
+msgstr "A kijelölés megszüntetése"
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert"
@@ -4269,7 +4289,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert selection"
-msgstr ""
+msgstr "Kijelölés megfordítása"
 
 #: ../../src/wui/game_message_menu.h:119 ../../src/wui/game_message_menu.h:152
 msgid "Archive selected messages"
@@ -4289,7 +4309,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:144
 msgid "Show Inbox"
-msgstr ""
+msgstr "Bejövő üzenetek megjelenítése"
 
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-06 20:57+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-06-07 12:28+0000\n"
+"Last-Translator: Jonay <jonay.santana@gmail.com>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-07 03:33+0000\n"
+"X-Launchpad-Export-Date: 2010-06-08 03:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -109,6 +109,8 @@ msgid ""
 " \"Great! Today the building of the quarry was completed. Now we get enough "
 "stone to construct larger buildings.\" "
 msgstr ""
+" \"¡Genial! Hoy se ha completado la construcción de la cantera. Ahora "
+"obtenemos suficiente piedra para construir edificios mayores.\" "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:147
 msgid ""
@@ -223,7 +225,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:148
 msgid "* Build some barracks and sentries around the colony."
-msgstr ""
+msgstr "* Construye algunos cuarteles y centinelas alrededor de la colonia."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:12
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:98
@@ -298,7 +300,7 @@ msgstr "Mientras el tiempo pasa"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:18
 msgid "Build a quarry"
-msgstr ""
+msgstr "Construye una cantera"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:42
 msgid "Build a stonemason and mining infrastructure"
@@ -356,7 +358,7 @@ msgstr "Mármol en la montaña"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:247
 msgid "Our new tavern"
-msgstr ""
+msgstr "Nuestra nueva taberna"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:26
 msgid "Protect your colony"
@@ -384,7 +386,7 @@ msgstr "Saledus sonríe"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Start mining marble"
-msgstr ""
+msgstr "Empieza a minar mármol"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "Stone for the colony"

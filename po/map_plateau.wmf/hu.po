@@ -1,4 +1,4 @@
-# Turkish translation for widelands
+# Hungarian translation for widelands
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-06 21:58+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"PO-Revision-Date: 2010-06-07 18:14+0000\n"
+"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,33 +22,31 @@ msgid ""
 "* Defeat Erwyn. He commands the strongest opposing soldiers left on this\n"
 "island."
 msgstr ""
-"Erwyn 'i yen. Bu adada kalan en güçlü askerleri o\n"
-"yönetiyor."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:40
 msgid "* Defeat Jomo. He takes care about the soldiers food supply."
-msgstr "Jomo' yu yen. Askerlerin yiyecekleriyle ilgileniyor."
+msgstr ""
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:26
 msgid "* Defeat Lanissa and capture the ancient castle."
-msgstr "* Lanissay'ı yen ve kadim kaleyi ele geçir."
+msgstr ""
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:54
 msgid "-- NEW OBJECTIVES --"
-msgstr "--YENİ HEDEFLER"
+msgstr ""
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:86
 msgid "An ancient castle"
-msgstr "Kadim bir kale"
+msgstr "Egy ősi vár"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:102
 msgid "Ancient castle captured"
-msgstr "Kadim kale ele geçirildi"
+msgstr "Elfoglaltad az ősi várat"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:116
 #: ../../maps/Plateau.wmf/scripting/texts.lua:126
 msgid "Another Briefing"
-msgstr "Başka bir brifing"
+msgstr ""
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:87
 msgid ""
@@ -63,39 +61,27 @@ msgid ""
 "fight!<br>However we really have to capture it. It will be our key for our\n"
 "reign over this island!"
 msgstr ""
-"Tanrılar adına! Gözcülerimizden biri eski platonun ortasında devasa bir "
-"kale\n"
-"buldular. Kale çok eski olmalı ve görünüşüne bakılırsa yabancı bir stilde "
-"inşa\n"
-"edilmiş. Açıkça belli ki bu barbar işi değil.<br>Umalım\n"
-"Lanissa-kalenin komutasını elinde tutan savaş lordu- bizi henüz\n"
-"farketmemiştir. Belki de bu devasa yapıyı daha büyük bir savaşa gerek "
-"kalmadan ele geçirme şansımız\n"
-"var!<br>Fakat onu gerçekten ele geçirmeliyiz. Adadaki üstünlüğümüz için\n"
-"anahtar rol oynuyor!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:25
 msgid "Capture the ancient castle"
-msgstr "Kadim kaleyi ele geçir"
+msgstr "Foglald el az ősi várat"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:143
 msgid ""
 "Congratulations! You mastered this scenario. You may play on if you like!"
 msgstr ""
-"Tebrikler! Bu seneryo da ustalaştınız. İsterseniz oynamaya devam "
-"edebilirsiniz!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:31
 msgid "Defeat Erwyn"
-msgstr ""
+msgstr "Győzd le Erwynt"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:38
 msgid "Defeat Jomo"
-msgstr ""
+msgstr "Győzd le Jomót"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:120
 msgid "Erwyn defeated"
-msgstr ""
+msgstr "Legyőzted Erwynt"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:74
 msgid ""
@@ -113,6 +99,9 @@ msgid ""
 "than\n"
 "the warlords did."
 msgstr ""
+"Nagyszerű! Végre, az egész sziget a mienk. Már csak jobban meg kell védenünk "
+"mint\n"
+"ahogy a korábbi hadurak tették."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:69
 msgid "First Briefing"
@@ -124,6 +113,9 @@ msgid ""
 "strong\n"
 "warlord less on this island!"
 msgstr ""
+"Nagyszerű! Erwyn feladta amit látta az utolsó épületeit hamuvá válni. Egy "
+"erős\n"
+"hadúrral kevesebb ezen a szigeten!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:131
 msgid ""
@@ -131,10 +123,13 @@ msgid ""
 "warlord\n"
 "less on this island!"
 msgstr ""
+"Nagyszerű! Jomo feladta amit látta az utolsó épületeit hamuvá válni. Egy "
+"erős\n"
+"hadúrral kevesebb ezen a szigeten!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:130
 msgid "Jomo defeated"
-msgstr ""
+msgstr "Legyőzted Jomot"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:136
 msgid "Last Briefing"
@@ -147,11 +142,11 @@ msgstr ""
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:73
 msgid "The forbidden island"
-msgstr ""
+msgstr "A tiltott sziget"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:140
 msgid "Victory!"
-msgstr ""
+msgstr "Győzelem!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:103
 msgid ""
