@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-06 22:40+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-06-08 09:33+0000\n"
+"Last-Translator: Jonay <jonay.santana@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-08 03:34+0000\n"
+"X-Launchpad-Export-Date: 2010-06-09 03:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -94,6 +94,13 @@ msgid ""
 "time I wait won't be lost. I will further upgrade my soldiers and prepare "
 "for battle.\" "
 msgstr ""
+" \"He enviado hombres a encontrarse con Kalitath en su fortaleza. Ha "
+"construido barricadas en la antigua entrada principal a la capital y está "
+"intentando establecer un anillo de asedio alrededor de Al'thunran. No dejará "
+"a nadie entrar o salir de la ciudad mientras el anillo esté intacto. Hasta "
+"ahora, no ha respondido a ninguno de mis mensajes. Pero el tiempo en que he "
+"esperado no se perderá. Seguiré mejorando a mis soldados y preparándolos "
+"para la batalla.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:298
 msgid ""
@@ -308,6 +315,8 @@ msgid ""
 "* Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"* Construye más edificios militares para explorar el área alrededor del "
+"cuartel general y garantizar la seguridad de tu gente."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
 #: ../../campaigns/t03.wmf/scripting/texts.lua:246
@@ -321,6 +330,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
 msgstr ""
+"* Destruye el ejército de Kalitath y expande tus territorios hacia el este."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
