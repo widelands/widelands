@@ -85,15 +85,17 @@ local function _calc_points(plr)
 
    local points = 0
    local descr = { _("Status for Player %i<br>"):format(plr.number) }
-   for idx,b in ipairs(bs) do
-      for idx, ware in ipairs(point_table[plr.tribe .. "_order"]) do
-         local value = point_table[plr.tribe][ware]
-         local count = b:get_wares(ware)
-         local lpoints = count * value
-         points = points + lpoints
-         descr[#descr+1] = 
-("  %s (%i) x %i = %i<br>"):format(ware, value, count, lpoints)
+   for idx, ware in ipairs(point_table[plr.tribe .. "_order"]) do
+      local value = point_table[plr.tribe][ware]
+      local count = 0
+      for idx,b in ipairs(bs) do
+         count = count + b:get_wares(ware)
       end
+      local lpoints = count * value
+      points = points + lpoints
+      descr[#descr+1] = ("  %s (%i) x %i = %i<br>"):format(
+         ware, value, count, lpoints
+      )
    end
    descr[#descr+1] = _("Total: %i"):format(points)
 
@@ -144,15 +146,16 @@ end
 -- Endless loop
 while true do
    _send_state(remaining_time, plrs)
-
-   sleep(10 * 60 * 1000) -- Sleep 10 minutes
-   remaining_time = remaining_time - 10
-
+   
    -- Game ended?
    if remaining_time <= 0 then
       _game_over(plrs)
       break
    end
+
+   sleep(10 * 60 * 1000) -- Sleep 10 minutes
+   remaining_time = remaining_time - 10
 end
+
 end
 }
