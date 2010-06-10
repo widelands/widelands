@@ -93,18 +93,26 @@ local function _calc_points(plr)
       end
       local lpoints = count * value
       points = points + lpoints
-      descr[#descr+1] = ("  %s (%i) x %i = %i<br>"):format(
+      descr[#descr+1] = ("  %s (%i P) x %i = %i P<br>"):format(
          ware, value, count, lpoints
       )
    end
-   descr[#descr+1] = _("Total: %i"):format(points)
+   descr[#descr+1] = _("Total: %i points"):format(points)
 
    return points, p(table.concat(descr, "\n"))
 end
 
 -- Send all players the momentary game state
 local function _send_state(remaining_time, plrs)
-   local msg = p(_"The game will end in %i minutes."):format(remaining_time)
+   local h = math.floor(remaining_time / 60)
+   local m = remaining_time % 60
+   local time = ""
+   if h > 0 then
+      time = ("%ih%02im"):format(h,m)
+   else
+      time = ("%i minutes"):format(m)
+   end
+   local msg = p(_"The game will end in %s."):format(time)
    msg = msg .. "\n\n"
 
    for idx, plr in ipairs(plrs) do
