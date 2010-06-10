@@ -10,8 +10,8 @@ set_textdomain("win_conditions")
 return {
    name = _ "Collectors",
    description = _ (
-"You get points for wares in your HQ, the one with the highest number " .. 
-"of wares at the end of 4 hours wins the game."
+"You get points for precious wares in your warehouses, the player with the " .. 
+"highest number of wares at the end of 4 hours wins the game."
 ),
    func = function() 
 
