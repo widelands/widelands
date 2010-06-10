@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-07 12:03+0000\n"
+"PO-Revision-Date: 2010-06-09 13:19+0000\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-08 03:34+0000\n"
+"X-Launchpad-Export-Date: 2010-06-10 03:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
-msgstr ""
+msgstr "Egy ebéd amely kielégíti minden bányász igényeit."
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid "A small bite to keep miners strong and working."
@@ -59,7 +59,7 @@ msgstr "Pékség"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Kenyeret süt a munkásoknak."
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
@@ -166,7 +166,7 @@ msgstr "Marha tenyésztő"
 
 #: ../../tribes/barbarians/conf:176
 msgid "Charcoal Burner's House"
-msgstr ""
+msgstr "Faszénégető kunyhója"
 
 #: ../../tribes/barbarians/conf:115
 msgid "Chief Miner"
@@ -235,7 +235,7 @@ msgstr "Szarvas"
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Védekezz és hódíts!"
 
 #: ../../tribes/barbarians/conf:28
 msgid "Destroyed building"
@@ -243,7 +243,7 @@ msgstr "Elpusztított épület"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Ásványok után kutat."
 
 #: ../../tribes/barbarians/conf:145
 msgid "Donjon"
@@ -402,7 +402,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:153
 msgid "Guardhouse"
-msgstr ""
+msgstr "Őrház"
 
 #: ../../tribes/barbarians/conf:74
 msgid "Hammer"
@@ -432,7 +432,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:75
 msgid "Helmet"
-msgstr ""
+msgstr "Sisak"
 
 #: ../../tribes/barbarians/conf:121
 msgid "Helmsmith"
@@ -444,7 +444,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Segít az áru szállításban a forgalmas utakon."
 
 #: ../../tribes/barbarians/conf:154
 msgid "High Tower"
@@ -460,7 +460,7 @@ msgstr "Vadász"
 
 #: ../../tribes/barbarians/conf:192
 msgid "Hunter's Hut"
-msgstr ""
+msgstr "Vadászkunyhó"
 
 #: ../../tribes/barbarians/conf:76
 msgid "Hunting Spear"
@@ -480,7 +480,7 @@ msgstr "Vas"
 
 #: ../../tribes/barbarians/conf:78
 msgid "Iron Ore"
-msgstr ""
+msgstr "Vasérc"
 
 #: ../../tribes/barbarians/conf:198
 msgid "Iron Ore Mine"
@@ -496,7 +496,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:124
 msgid "Lime-Burner"
-msgstr ""
+msgstr "Mészégető"
 
 #: ../../tribes/barbarians/conf:125
 msgid "Lumberjack"
@@ -559,7 +559,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:162
 msgid "Outpost"
-msgstr ""
+msgstr "Előőrs"
 
 #: ../../tribes/barbarians/conf:101
 msgid "Ox"
@@ -587,7 +587,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/farm/conf:14
 msgid "Plant wheat"
-msgstr ""
+msgstr "Búzát vet"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
@@ -595,13 +595,13 @@ msgstr ""
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Fákat ültet"
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/metalworks/conf:33
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr ""
+msgstr "Fejszét készít"
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
@@ -618,27 +618,27 @@ msgstr ""
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr ""
+msgstr "Bronzfejszét készít"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Fogót készít"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
-msgstr ""
+msgstr "Horgászbotot készít"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr ""
+msgstr "Kalapácsot készít"
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr ""
+msgstr "Sisakot készít"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr ""
+msgstr "Vadászlándzsát készít"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
@@ -654,7 +654,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr ""
+msgstr "Csákányt készít"
 
 #: ../../tribes/barbarians/big_inn/conf:24
 #: ../../tribes/barbarians/inn/conf:23
@@ -664,7 +664,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr ""
+msgstr "Kaszát készít"
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
@@ -673,7 +673,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
-msgstr ""
+msgstr "Lapátot készít"
 
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
@@ -690,7 +690,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Szövetet készít a hajó vitorlához és ruhához."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -802,7 +802,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:132
 msgid "Scout"
-msgstr ""
+msgstr "Felderítő"
 
 #: ../../tribes/barbarians/conf:205
 msgid "Scout's Hut"
@@ -833,7 +833,7 @@ msgstr "Lapát"
 #: ../../tribes/barbarians/battlearena/conf:25
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
-msgstr ""
+msgstr "Felfüggesztve"
 
 #: ../../tribes/barbarians/conf:155
 msgid "Small Tower"
@@ -861,7 +861,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "Vasat olvaszt"
 
 #: ../../tribes/barbarians/conf:90
 msgid "Snack"
@@ -894,19 +894,22 @@ msgstr "Nádtető"
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid "Thatch reed is used to make the roofs of buildings waterproof."
-msgstr ""
+msgstr "A nádből készült nádtető megvédi az épülteket az esőtől."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
 "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
 "are equipped with it, but also the lumberjack is using the same model."
 msgstr ""
+"A fejsze a barbároknak fegyver és eszköz is egyben. Minden fiatal harcost "
+"ezzel szerelnek fel, de a favágók is ugyan ezt használják."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
+"A vadőr feladata, hogy a természetben élő állatok ne pusztuljanak ki."
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -927,6 +930,9 @@ msgid ""
 "damage, but it's durability is not the best. Only skilled warriors can use "
 "this. Produced in the axe factory."
 msgstr ""
+"A bronzfejszét nehezen használható fegyvernek tartják, nagy kárt tud tenni, "
+"de nehezen kezelhető. Csak gyakorlott harcosok tudják megfelelően használni. "
+"A fejszekészítő műhelyében készül."
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
@@ -963,6 +969,7 @@ msgstr ""
 msgid ""
 "The scythe is the tool of the farmers. It is produced in the metal works."
 msgstr ""
+"A kasza a farmerek legfontosabb eszköze. A szerszámkovács műhelyében készül."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -979,7 +986,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
-msgstr ""
+msgstr "Ez a vörös kő a vasérc."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -1007,7 +1014,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:156
 #: ../../tribes/barbarians/conf:163
 msgid "Tower"
-msgstr ""
+msgstr "Torony"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Trainer"
@@ -1161,7 +1168,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr ""
+msgstr "A fegyverek és szerszámok vasból készülnek."
 
 #: ../../tribes/barbarians/conf:131
 msgid "Weaver"

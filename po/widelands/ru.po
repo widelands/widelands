@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-06-06 20:55+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-06-09 18:03+0000\n"
+"Last-Translator: Georgiy <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-06-07 03:36+0000\n"
+"X-Launchpad-Export-Date: 2010-06-10 03:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -1397,15 +1397,17 @@ msgstr " завоевать"
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u солдат"
+msgstr[1] "%u солдат(а,ов)"
+msgstr[2] "%u солдат(а,ов)"
 
 #: ../../src/logic/militarysite.cc:118
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u(+%u) солдат(а,ов)"
+msgstr[1] "%u солдат(а,ов)"
+msgstr[2] "%u(+%u) солдат(а,ов)"
 
 #: ../../src/logic/militarysite.cc:594
 #, c-format
@@ -1535,7 +1537,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1052
 #, c-format
 msgid "soldier %u: %s"
-msgstr ""
+msgstr "солдат %u: %s"
 
 #: ../../src/logic/playercommand.cc:1058
 #, c-format
@@ -1550,7 +1552,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1295
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
-msgstr ""
+msgstr "отступление: значение %u вне разрешенных рамок: %u-%u"
 
 #: ../../src/logic/playercommand.cc:1306
 #, c-format
@@ -1587,7 +1589,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:819
 #: ../../src/logic/production_program.cc:904
 msgid "count"
-msgstr ""
+msgstr "количество"
 
 #: ../../src/logic/production_program.cc:101
 #, c-format
@@ -1682,7 +1684,7 @@ msgstr "завершение"
 
 #: ../../src/logic/production_program.cc:481
 msgid "skip"
-msgstr ""
+msgstr "пропустить"
 
 #: ../../src/logic/production_program.cc:486
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
@@ -1708,8 +1710,9 @@ msgstr ""
 #: ../../src/logic/production_program.cc:773
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " отсутствует"
+msgstr[1] " отсутствуют"
+msgstr[2] " отсутствуют"
 
 #: ../../src/logic/production_program.cc:833
 #: ../../src/logic/production_program.cc:918
@@ -1721,7 +1724,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:851
 msgid "Produced "
-msgstr ""
+msgstr "Произведено "
 
 #: ../../src/logic/production_program.cc:860
 #: ../../src/logic/production_program.cc:943
@@ -1736,7 +1739,7 @@ msgstr ", "
 
 #: ../../src/logic/production_program.cc:935
 msgid "Recruited "
-msgstr ""
+msgstr "Подготовлено "
 
 #: ../../src/logic/production_program.cc:974
 msgid "distance"
@@ -1793,8 +1796,9 @@ msgstr "(не занято)"
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Не хватает рабочего"
+msgstr[1] "Не хватает рабочих"
+msgstr[2] "Не хватает рабочих"
 
 #: ../../src/logic/productionsite.cc:232
 msgid "(stopped)"
@@ -1838,7 +1842,7 @@ msgstr ""
 #: ../../src/logic/soldier.cc:1355 ../../src/logic/soldier.cc:1360
 #: ../../src/logic/worker.cc:1638
 msgid "no"
-msgstr ""
+msgstr "нет"
 
 #: ../../src/logic/soldier.cc:1367 ../../src/logic/soldier.cc:1375
 #: ../../src/logic/worker.cc:1650
