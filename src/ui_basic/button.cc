@@ -104,7 +104,7 @@ Button::~Button() {
 void Button::set_pic(PictureID const picid)
 {
 	m_title.clear();
-  
+
 	//log("Button::set_pic\n");
        if(m_pic_custom == picid)
                return;
@@ -126,7 +126,7 @@ void Button::set_pic(PictureID const picid)
 void Button::set_title(std::string const & title) {
 	if(m_title == title)
 		 return;
-  
+
 	m_pic_custom = g_gr->get_no_picture();
 	m_title      = title;
 
@@ -144,7 +144,7 @@ void Button::set_enabled(bool const on)
 {
 	if(m_enabled == on)
 		return;
- 
+
 	m_needredraw=true;
 
 	// disabled buttons should look different...
@@ -176,7 +176,7 @@ void Button::draw(RenderTarget & odst)
 		if (m_cache_pid == g_gr->get_no_picture())
 			m_cache_pid =
 				g_gr->create_surface_a(get_w(), get_h());
-		else if 
+		else if
 			(m_cache_pid->rendertarget->get_w() != get_w() or
 			 m_cache_pid->rendertarget->get_h() != get_h())
 		{
@@ -185,7 +185,7 @@ void Button::draw(RenderTarget & odst)
 				g_gr->create_surface_a(get_w(), get_h());
 		}
 	}
-	
+
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
 
 	// Draw the background
@@ -198,8 +198,8 @@ void Button::draw(RenderTarget & odst)
 	} else
 		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
-	
-			 
+
+
 	if (m_enabled and m_highlighted and not m_flat)
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
@@ -334,7 +334,6 @@ bool Button::handle_mousepress(Uint8 const btn, int32_t, int32_t) {
 		return false;
 
 	if (m_enabled) {
-		assert(m_highlighted);
 		grab_mouse(true);
 		if(!m_pressed)
 			m_needredraw=true;
