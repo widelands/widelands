@@ -232,8 +232,22 @@ int MilitarySite::incorporateSoldier(Game & game, Soldier & s) {
 		s.set_location(this);
 	}
 
-	if (not m_didconquer)
+	if (not m_didconquer) {
 		conquer_area(game);
+
+		char message[256];
+		snprintf
+			(message, sizeof(message),
+			 _("Your soldiers occupied your %s."),
+			 descname().c_str());
+		owner().add_message
+			(game,
+			 create_message
+				("military_occupied",
+				 game.get_gametime(), Forever(),
+				 _("Building occupied"),
+				 std::string("<p font-size=14 font-face=FreeSerif>") + message + "</p>"));
+	}
 
 	// Bind the worker into this house, hide him on the map
 	s.reset_tasks(game);
