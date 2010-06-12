@@ -597,19 +597,17 @@ void Worker::informPlayer
 	// NOTE  AND fish_breeders
 	if (building.name() == "fish_breeders_house")
 		return;
-	owner().add_message_with_timeout
+
+	building.send_message
 		(game,
-		 building.create_message
-		 	("mine",
-		 	 game.get_gametime(),  60 * 30 * 1000,
-		 	 _("Out of ") + res_type,
-		 	 "<p font-size=14 font-face=FreeSerif>" +
-		 	 std::string
-		 	 	(_
-		 	 	 	("The worker of this building cannot find any more resources "
-		 	 	 	 "of the following type: "))
-		 	 +
-		 	 res_type + "</p>"),
+		 "mine",
+		 _("Out of ") + res_type,
+		 std::string
+		 	(_
+		 	 ("The worker of this building cannot find any more resources "
+		 	 "of the following type: "))
+		 +
+		 res_type,
 		 1800000, 0);
 }
 
