@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 23:44+0200\n"
-"PO-Revision-Date: 2010-06-09 18:03+0000\n"
+"PO-Revision-Date: 2010-06-12 16:00+0000\n"
 "Last-Translator: Georgiy <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-06-10 03:32+0000\n"
+"X-Launchpad-Export-Date: 2010-06-13 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -36,7 +36,7 @@ msgstr "ОШИБКА: Не удается подключиться к метас
 
 #: ../../src/wlapplication.cc:862 ../../src/wlapplication.cc:875
 msgid "could not find the path of the main executable"
-msgstr ""
+msgstr "невозможно найти путь к основному исполнимому файлу"
 
 #: ../../src/wlapplication.cc:998
 msgid ""
@@ -89,10 +89,19 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays\n"
 msgstr ""
+" --<имя-параметра-настройки>=значение перезаписывает указанный параметр в "
+"настройках\n"
+"\n"
+" --logfile=ИМЯ_ФАЙЛА   Вывод лога в указанный файл из\n"
+"                      вывода терминала\n"
+" --datadir=ИМЯ_ПАПКИ    Использовать указанную папку для данных\n"
+"                      widelands\n"
+" --homedir=ИМЯ_ПАПКИ    Использовать указанную папку для конфиг-файлов,\n"
+"                      сохранений и повторов widelands\n"
 
 #: ../../src/wlapplication.cc:1300
 msgid "                      Default is ~/.widelands\n"
-msgstr ""
+msgstr "                      По-умолчанию ~/.widelands\n"
 
 #: ../../src/wlapplication.cc:1303
 msgid ""
@@ -111,6 +120,20 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --record=ИМЯ_ФАЙЛА    Записывать все действия в указанный файл для\n"
+"                      дальнейшего пересмотра\n"
+" --playback=ИМЯ_ФАЙЛА  Пересмотреть указанный файл (см. --record)\n"
+"\n"
+" --coredump=[yes|no]  Собирать дамп ядра при ошибках сегментации с\n"
+"                      использованием SDL\n"
+" --language=[de_DE|ru_RU|...]\n"
+"                      Используемая локаль.\n"
+" --localedir=ИМЯ_ПАПКИ  Использовать указанную папку с файлами локали\n"
+" --remove_syncstreams=[true|false]\n"
+"                      Удалить syncstream файлы при запуске\n"
+" --remove_replays=[...]\n"
+"                      Удалить повторы после указанного числа дней.\n"
+"                      Если равно 0 повторы не удаляются.\n"
 
 #: ../../src/wlapplication.cc:1318
 msgid ""
@@ -258,7 +281,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1396
 msgid " --verbose            Enable verbose debug messages\n"
-msgstr ""
+msgstr " --verbose            Включает подробные отладочные сообщения\n"
 
 #: ../../src/wlapplication.cc:1397
 msgid " --help               Show this help\n"
@@ -272,6 +295,11 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
+"Отчет об ошибке? Предложения? Посетите наш вебсайт проекта:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Надеюсь, вам понравится эта игра!\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1552
 msgid "Warning: "
@@ -519,7 +547,7 @@ msgstr "Тип рабочих"
 
 #: ../../src/writeHTML.cc:522
 msgid "Needed<br/>experience"
-msgstr ""
+msgstr "Требуется<br/>опыт"
 
 #: ../../src/writeHTML.cc:524
 msgid "Becomes"
@@ -538,6 +566,7 @@ msgstr "Настройки битвы"
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Очков %u, плюс %u для каждого уровня выше 0 (максимальный уровень %u)."
 
 #: ../../src/writeHTML.cc:600
 #, c-format
@@ -572,7 +601,7 @@ msgstr "Появляются на складе."
 #: ../../src/writeHTML.cc:697
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr ""
+msgstr "Требуется опыт работы %u раз для того чтобы стать"
 
 #: ../../src/writeHTML.cc:705
 #, c-format
@@ -973,7 +1002,7 @@ msgstr "Меню"
 
 #: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
-msgstr ""
+msgstr "Сервис"
 
 #: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
@@ -1015,7 +1044,7 @@ msgstr "Загрузка племени: %s"
 
 #: ../../src/editor/editorinteractive.cc:177
 msgid "Creating players"
-msgstr ""
+msgstr "Создать игроков"
 
 #: ../../src/editor/editorinteractive.cc:184
 #: ../../src/logic/editor_game_base.cc:325
@@ -1078,7 +1107,7 @@ msgstr "в указанной точке нет флага"
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "игрок %u: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:75
 #, c-format
@@ -1822,7 +1851,7 @@ msgstr "ожидалось положительное целое >= %u но об
 
 #: ../../src/logic/soldier.cc:183
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"анимация[,еще_анимация,...]\""
 
 #: ../../src/logic/soldier.cc:1183
 #, c-format
