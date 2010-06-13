@@ -487,17 +487,13 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	char message[2048];
 	snprintf
 		(message, sizeof(message),
-		 _
-		 	("<p font-size=14 font-face=FreeSerif>A new %s was added to your "
-		 	 "economy.</p>"),
+		 _("A new %s was added to your economy."),
 		 descname().c_str());
-	player.add_message
+	send_message
 		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 create_message
-		 	("warehouse",
-		 	 egbase.get_gametime(), 32 * 60 * 1000,
-		 	 descname(),
-		 	 message));
+		 "warehouse",
+		 descname(),
+		 message);
 }
 
 

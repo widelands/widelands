@@ -240,13 +240,11 @@ int MilitarySite::incorporateSoldier(Game & game, Soldier & s) {
 			(message, sizeof(message),
 			 _("Your soldiers occupied your %s."),
 			 descname().c_str());
-		owner().add_message
+		send_message
 			(game,
-			 create_message
-				("military_occupied",
-				 game.get_gametime(), Forever(),
-				 _("Building occupied"),
-				 std::string("<p font-size=14 font-face=FreeSerif>") + message + "</p>"));
+			 "military_occupied",
+			 descname(),
+			 message);
 	}
 
 	// Bind the worker into this house, hide him on the map
@@ -589,32 +587,16 @@ bool MilitarySite::attack(Soldier & enemy)
 		// The enemy has defeated our forces, we should inform the player
 		const Coords coords = get_position();
 		{
-			char formation[256];
-			std::string b_name(name());
-			std::string b_tribe(tribe().name());
-			if (b_name.find('.') <= b_name.size()) {
-				// global militarysite
-				b_tribe = b_name.substr(b_name.find('.'), b_name.size());
-				b_name.resize(b_name.find('.'));
-			}
-			snprintf
-				(formation, sizeof(formation),
-				 "<rt image=tribes/%s/%s/%s_i_00.png>"
-				 "<p font-size=14 font-face=FreeSerif>",
-				 b_tribe.c_str(), b_name.c_str(), b_name.c_str());
 			char message[2048];
 			snprintf
 				(message, sizeof(message),
-				 _("%sThe enemy defeated your soldiers at the %s.</p></rt>"),
-				 formation, descname().c_str());
-			owner().add_message
+				 _("The enemy defeated your soldiers at the %s."),
+				 descname().c_str());
+			send_message
 				(game,
-				 *new Message
-				 	("site_lost",
-				 	 game.get_gametime(), 60 * 60 * 1000,
-				 	 _("Militarysite lost!"),
-				 	 message,
-				 	 coords));
+				 "site_lost",
+				 _("Militarysite lost!"),
+				 message);
 		}
 
 		// Now let's see whether the enemy conquers our militarysite, or whether
@@ -668,34 +650,17 @@ bool MilitarySite::attack(Soldier & enemy)
 		upcast(MilitarySite, newsite, newimm);
 		newsite->reinit_after_conqueration(game);
 
-		// Of course we should inform the victorius player as well
-		char formation[256];
-		std::string b_name(newsite->name());
-		std::string b_tribe(enemytribe.name().c_str());
-		if (b_name.find('.') <= b_name.size()) {
-			// global militarysite
-			b_tribe = b_name.substr(b_name.find('.'), b_name.size());
-			b_name.resize(b_name.find('.'));
-		}
-		snprintf
-			(formation, sizeof(formation),
-			 "<rt image=tribes/%s/%s/%s_i_00.png>"
-			 "<p font-size=14 font-face=FreeSerif>",
-			 b_tribe.c_str(), b_name.c_str(), b_name.c_str());
+		// Of course we should inform the victorious player as well
 		char message[2048];
 		snprintf
 			(message, sizeof(message),
-			 _("%sYour soldiers defeated the enemy at the %s.</p></rt>"),
-			 formation, newsite->descname().c_str());
-		enemyplayer->add_message
+			 _("Your soldiers defeated the enemy at the %s."),
+			 newsite->descname().c_str());
+		newsite->send_message
 			(game,
-			 *new Message
-			 	("site_defeated",
-			 	 game.get_gametime(), 60 * 60 * 1000,
-			 	 _("Enemy at site defeated!"),
-			 	 message,
-			 	 coords));
-
+			 "site_defeated",
+			 _("Enemy at site defeated!"),
+			 message);
 
 		return false;
 	}
@@ -733,27 +698,22 @@ bool MilitarySite::military_presence_kept(Game & game)
 /// Informs the player about an attack of his opponent.
 void MilitarySite::informPlayer(Game & game, bool const discovered)
 {
-	char formation[256];
-	snprintf
-		(formation, sizeof(formation), "<p font-size=14 font-face=FreeSerif>");
 	char message[2048];
 	snprintf
 		(message, sizeof(message),
 		 discovered ?
-		 _("%sYour %s discovered an aggressor.</p>") :
-		 _("%sYour %s is under attack.</p>"),
-		 formation, descname().c_str());
+		 _("Your %s discovered an aggressor.</p>") :
+		 _("Your %s is under attack.</p>"),
+		 descname().c_str());
 
 	// Add a message as long as no previous message was send from a point with
 	// radius <= 5 near the current location in the last 60 seconds
-	owner().add_message_with_timeout
+	send_message
 		(game,
-		 create_message
-		 	("under_attack",
-		 	 game.get_gametime(), 5 * 60 * 1000,
-		 	 _("You are under attack"),
-		 	 message),
-		 60000, 5);
+		 "under_attack",
+		 _("You are under attack"),
+		 message,
+		 60 * 1000, 5);
 }
 
 
