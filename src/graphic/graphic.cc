@@ -1176,7 +1176,6 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 Surface * Graphic::get_road_texture(int32_t const roadtex)
 {
 	if (not m_roadtextures) {
-
 		// Load the road textures
 		m_roadtextures = new Road_Textures();
 		m_roadtextures->pic_road_normal =
@@ -1184,13 +1183,6 @@ Surface * Graphic::get_road_texture(int32_t const roadtex)
 
 		m_roadtextures->pic_road_busy =
 			get_picture(PicMod_Game, ROAD_BUSY_PIC, false);
-
-/*
-		get_picture_surface
-			(m_roadtextures->pic_road_normal)->force_disable_alpha();
-
-		get_picture_surface(m_roadtextures->pic_road_busy)->force_disable_alpha();
-*/
 	}
 
 	return
