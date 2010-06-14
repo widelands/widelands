@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-12 15:42+0000\n"
-"Last-Translator: Christian Groenendijk <Unknown>\n"
+"PO-Revision-Date: 2010-06-13 19:50+0000\n"
+"Last-Translator: PliniusNeo <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-13 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-06-14 03:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Netherlands\n"
 "X-Poedit-Language: Dutch\n"
@@ -540,7 +540,7 @@ msgstr "Khantrukh lijkt opgelucht..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Khantrukh spreekt"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:349
 msgid "Khantrukh speaks..."
@@ -556,7 +556,7 @@ msgstr "Missie Voltooid"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:69
 msgid "New Objectives"
-msgstr ""
+msgstr "Nieuwe Doelen"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:424
 msgid "One fullmoon night"
