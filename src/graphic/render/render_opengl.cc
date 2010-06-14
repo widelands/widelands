@@ -134,16 +134,29 @@ void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
 }
 
 void SurfaceOpenGL::draw_line
-	(int32_t const x1, int32_t const y1,
-	 int32_t const x2, int32_t const y2, RGBColor const color)
+		(int32_t x1,
+		 int32_t y1,
+		 int32_t x2,
+		 int32_t y2,
+		 RGBColor color,
+		 const Rect * clip)
 {
+	if (clip) {
+		glPushAttrib(GL_ENABLE_BIT | GL_SCISSOR_BIT);
+		glScissor
+			(clip->x, g_gr->get_yres() - clip->y - clip->h, clip->w, clip->h);
+		glEnable(GL_SCISSOR_TEST);
+	}
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	glBegin(GL_LINES);
-	glColor3ub(color.r(), color.g(), color.b());
-	glVertex2f(x1 + m_offsx + 0.5f, y1 + m_offsy + 0.5f);
-	glVertex2f(x2 + m_offsx + 0.5f, y2 + m_offsy + 0.5f);
+		glColor3ub(color.r(), color.g(), color.b());
+		glVertex2f(x1 + m_offsx + 0.5f, y1 + m_offsy + 0.5f);
+		glVertex2f(x2 + m_offsx + 0.5f, y2 + m_offsy + 0.5f);
 	glEnd();
+	if (clip) {
+		glPopAttrib();
+	}
 }
 
 /*

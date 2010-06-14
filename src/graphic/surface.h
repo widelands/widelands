@@ -81,6 +81,15 @@ public:
 
 	virtual SurfaceType get_surface_type() { return m_surf_type; }
 
+	virtual void draw_line
+		(int32_t x1,
+		 int32_t y1,
+		 int32_t x2,
+		 int32_t y2,
+		 RGBColor color,
+		 const Rect * clip = NULL)
+		 { throw wexception("draw_line() not implemented"); }
+
 protected:
 	int32_t m_offsx;
 	int32_t m_offsy;

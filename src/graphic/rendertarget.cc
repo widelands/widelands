@@ -130,70 +130,20 @@ int32_t RenderTarget::get_h() const
 }
 
 /**
- * This functions draws a (not horizontal or vertical)
- * line in the target, using Bresenham's algorithm
- *
- * This function is still quite slow, since it draws
- * every pixel as a rectangle. So use it with care
+ * This functions draws a line in the target
  */
 void RenderTarget::draw_line
 	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
 	 RGBColor const color)
 {
-#if USE_OPENGL
-	//use opengl drawing if available
-	/* TODO: The Opengl code does not use the clipping rectangle
-	 *       The opengl code should check if it should draw to screen
-	 *       or if this is a offscreen surface.
-	 */
-	if (g_opengl) {
-		//ToDo Clip against m_rect
-		upcast(SurfaceOpenGL, oglsurf, m_surface);
-		oglsurf->draw_line
-			(x1 + m_offset.x + m_rect.x, y1 + m_offset.y + m_rect.y,
-			 x2 + m_offset.x + m_rect.x, y2 + m_offset.y + m_rect.y, color);
-		return;
-	}
-#endif
+	Rect clipr = Rect
+		(Point(m_rect.x + m_offset.x, m_rect.y + m_offset.y),
+		 m_rect.w, m_rect.h);
 
-	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
-	int32_t dy = y2 - y1;      /* the vertical distance of the line */
-	const uint32_t dxabs = abs(dx);
-	const uint32_t dyabs = abs(dy);
-	int32_t sdx = dx < 0 ? -1 : 1;
-	int32_t sdy = dy < 0 ? -1 : 1;
-	uint32_t x = dyabs / 2;
-	uint32_t y = dxabs / 2;
-	Point p(x1, y1);
-
-	draw_rect(Rect(p, 1, 1), color);
-
-	if (dxabs >= dyabs)
-		for (uint32_t i = 0; i < dxabs; ++i) {
-			//  the line is more horizontal than vertical
-			y += dyabs;
-
-			if (y >= dxabs) {
-				y   -= dxabs;
-				p.y += sdy;
-			}
-
-			p.x += sdx;
-			draw_rect(Rect(p, 1, 1), color);
-		}
-	else
-		for (uint32_t i = 0; i < dyabs; ++i) {
-			//  the line is more vertical than horizontal
-			x += dxabs;
-
-			if (x >= dyabs) {
-				x   -= dyabs;
-				p.x += sdx;
-			}
-
-			p.y += sdy;
-			draw_rect(Rect(p, 1, 1), color);
-		}
+	m_surface->draw_line
+		(x1 + m_offset.x + m_rect.x, y1 + m_offset.y + m_rect.y,
+		 x2 + m_offset.x + m_rect.x, y2 + m_offset.y + m_rect.y, color,
+		 &clipr);
 }
 
 /**

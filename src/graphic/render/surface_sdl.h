@@ -78,6 +78,11 @@ public:
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
 
+	void draw_line
+		(int32_t x1, int32_t y1,
+		 int32_t x2, int32_t y2,
+		 RGBColor color, const Rect * clip = NULL);
+
 	void blit(Point, Surface *, Rect srcrc, bool enable_alpha = true);
 	void fast_blit(Surface *);
 

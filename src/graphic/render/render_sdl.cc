@@ -186,6 +186,66 @@ void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
 	unlock();
 }
 
+#define draw_pixel(p, r, clr)                                              \
+	if ((p).x >= (r).x and (p).x < static_cast<int32_t>((r).x + (r).w) and  \
+		(p).y >= (r).y and (p).y < static_cast<int32_t>((r).y + (r).h))      \
+		set_pixel((p).x, (p).y, (clr).map(format()))
+
+/**
+* This functions draws a (not horizontal or vertical)
+* line in the target, using Bresenham's algorithm
+*
+* This function could be faster by using direct pixel
+* access instead of the set_pixel() function
+*/
+void SurfaceSDL::draw_line
+		(int32_t x1,
+		 int32_t y1,
+		 int32_t x2,
+		 int32_t y2,
+		 RGBColor color,
+		 const Rect * clip)
+{
+	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
+	int32_t dy = y2 - y1;      /* the vertical distance of the line */
+	const uint32_t dxabs = abs(dx);
+	const uint32_t dyabs = abs(dy);
+	int32_t sdx = dx < 0 ? -1 : 1;
+	int32_t sdy = dy < 0 ? -1 : 1;
+	uint32_t x = dyabs / 2;
+	uint32_t y = dxabs / 2;
+	Point p(x1, y1);
+
+	draw_pixel(p, *clip, color);
+
+	if (dxabs >= dyabs)
+		for (uint32_t i = 0; i < dxabs; ++i) {
+		//  the line is more horizontal than vertical
+			y += dyabs;
+
+			if (y >= dxabs) {
+				y   -= dxabs;
+				p.y += sdy;
+			}
+
+			p.x += sdx;
+			draw_pixel(p, *clip, color);
+		}
+	else
+		for (uint32_t i = 0; i < dyabs; ++i) {
+		//  the line is more vertical than horizontal
+		x += dxabs;
+
+		if (x >= dyabs) {
+			x   -= dyabs;
+			p.x += sdx;
+		}
+
+		p.y += sdy;
+		draw_pixel(p, *clip, color);
+	}
+}
+
 
 /*
 ===============
