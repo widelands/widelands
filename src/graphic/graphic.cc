@@ -1180,9 +1180,10 @@ Surface * Graphic::get_road_texture(int32_t const roadtex)
 		// Load the road textures
 		m_roadtextures = new Road_Textures();
 		m_roadtextures->pic_road_normal =
-			get_picture(PicMod_Game, ROAD_NORMAL_PIC);
+			get_picture(PicMod_Game, ROAD_NORMAL_PIC, false);
 
-		m_roadtextures->pic_road_busy = get_picture(PicMod_Game, ROAD_BUSY_PIC);
+		m_roadtextures->pic_road_busy =
+			get_picture(PicMod_Game, ROAD_BUSY_PIC, false);
 
 /*
 		get_picture_surface
