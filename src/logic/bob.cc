@@ -921,10 +921,9 @@ int32_t Bob::start_walk
 bool Bob::checkNodeBlocked(Game & game, FCoords const & field, bool)
 {
 	// Battles always block movement!
-
 	std::vector<Bob *> soldiers;
 	game.map().find_bobs
-		(Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(*get_owner()));
+		(Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
 
 	if (soldiers.size()) {
 		container_iterate(std::vector<Bob *>, soldiers, i) {

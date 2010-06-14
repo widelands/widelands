@@ -1,0 +1,123 @@
+# Hebrew translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-05-12 13:39+0000\n"
+"Last-Translator: Michael DOUBEZ <Unknown>\n"
+"Language-Team: Hebrew <he@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:09+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:8
+msgid "An endless game without rules"
+msgstr "משחק בלי סוף ובלי חוק"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:10
+msgid "Autocrat"
+msgstr "אוֹטוֹקְרָט"
+
+#: ../../scripting/win_conditions/02_collectors.lua:11
+msgid "Collectors"
+msgstr "אספנים"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:39
+msgid "Congratulations!"
+msgstr "כל הכבוד!"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:7
+msgid "Endless Game"
+msgstr "משחק בלי סוף"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:85
+msgid "Game over"
+msgstr "המשחק הסתיים"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:28
+msgid "Sorry, you have lost this game!"
+msgstr "אני מצטער, אתה הפסדת את המשחק הזה!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:49
+msgid "Status"
+msgstr "סטטוס"
+
+#: ../../scripting/win_conditions/02_collectors.lua:40
+msgid "The game will end in %i minutes."
+msgstr "המשחק יסתים בתוך %i דקות"
+
+#: ../../scripting/win_conditions/02_collectors.lua:44
+msgid "The player %i has currently %i points"
+msgstr "לשחקן %i יש %i נקודות"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:11
+msgid ""
+"The three tribes play together vs each other. Vision is granted to all the "
+"players playing together"
+msgstr ""
+"שלושת השבטים משחקים בצותא אולי אחד נגד השני. כל שחקן משחקים בצותא הם נענים "
+"ראות"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:79
+msgid "The tribe %s is no more."
+msgstr "השבט %s כבר לא קיים."
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:11
+msgid "The tribe that can defeat all others wins!"
+msgstr "השבט שיכול להביס כל שחקנים אחרים הוא זוכה"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:79
+msgid "Tribe defeated!"
+msgstr "שבט מובס"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:10
+msgid "Tribes together"
+msgstr "שבט בצותא"
+
+#: ../../scripting/win_conditions/02_collectors.lua:71
+msgid "You are the winner!"
+msgstr "אתה הזוכה"
+
+#: ../../scripting/win_conditions/02_collectors.lua:12
+msgid ""
+"You get points for wares in your HQ, the one with the highest number of "
+"wares at the end of 4 hours wins the game"
+msgstr ""
+"אתה מקבל נקודות לשם הסחורות שהן בתוך המפקדה שלך, ההוא שמלקט את סחורות ביותר "
+"בעת סוף ארבע שעות הוא הזוכה"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:40
+#: ../../scripting/win_conditions/03_tribes_together.lua:85
+msgid "You have won this game!"
+msgstr "אתה ניצחת את המשחק הזה!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:69
+msgid "You lost"
+msgstr "אתה הפסדת"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:27
+msgid "You lost!"
+msgstr "אתה הפסדת!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:71
+msgid "You won!"
+msgstr "אתה ניצחת"
+
+#: ../../scripting/win_conditions/02_collectors.lua:69
+msgid "You've lost this game!"
+msgstr "אתה הפסדת את המשחק הזה!"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:74
+msgid "You've lost!"
+msgstr "אתה הפסדת!"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:74
+msgid "Your tribe is no more. You have lost this game"
+msgstr "השבט שלך כבר לא קיים. אתה הפסדת את המשחק הזה."

@@ -22,6 +22,7 @@
 
 namespace Widelands {
 
+struct Player;
 class Soldier;
 
 enum {
@@ -38,6 +39,11 @@ enum {
  * they can be attacked.
  */
 struct Attackable {
+	/**
+	 * Return the player that owns this attackable.
+	 */
+	virtual Player & owner() const = 0;
+
 	/**
 	 * Determines whether this building can be attacked right now.
 	 *

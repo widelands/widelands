@@ -104,7 +104,7 @@ Button::~Button() {
 void Button::set_pic(PictureID const picid)
 {
 	m_title.clear();
-  
+
 	//log("Button::set_pic\n");
        if(m_pic_custom == picid)
                return;
@@ -126,7 +126,7 @@ void Button::set_pic(PictureID const picid)
 void Button::set_title(std::string const & title) {
 	if(m_title == title)
 		 return;
-  
+
 	m_pic_custom = g_gr->get_no_picture();
 	m_title      = title;
 
@@ -144,7 +144,7 @@ void Button::set_enabled(bool const on)
 {
 	if(m_enabled == on)
 		return;
- 
+
 	m_needredraw=true;
 
 	// disabled buttons should look different...
@@ -190,6 +190,7 @@ void Button::draw(RenderTarget & odst)
 			dst = (g_gr->get_surface_renderer(m_cache_pic));
 		}
 	}
+
 
 	// Draw the background
 	if (not m_flat) {
@@ -345,7 +346,6 @@ bool Button::handle_mousepress(Uint8 const btn, int32_t, int32_t) {
 		return false;
 
 	if (m_enabled) {
-		assert(m_highlighted);
 		grab_mouse(true);
 		if(!m_pressed)
 			m_needredraw=true;

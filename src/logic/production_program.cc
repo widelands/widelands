@@ -1119,21 +1119,14 @@ void ProductionProgram::ActMine::execute
 void ProductionProgram::ActMine::informPlayer
 	(Game & game, ProductionSite & ps) const
 {
-	Player & player = ps.owner();
-	player.add_message_with_timeout
+	ps.send_message
 		(game,
-		 ps.create_message
-		 	("mine",
-		 	 game.get_gametime(), 60 * 60 * 1000,
-		 	 _("Mine empty"),
-		 	 "<p font-size=14 font-face=FreeSerif>" +
-		 	 std::string
-		 	 	(_
-		 	 	 	("This mines has run empty. You should consider to expand or "
-		 	 	 	 "destruct it."))
-		 	 +
-		 	 "</p>"),
-		 3600000, 0);
+		 "mine",
+		 _("Mine empty"),
+		 _("This mines has run empty. You should consider to expand or "
+		   "destruct it."),
+		 60 * 60 * 1000,
+		 0);
 }
 
 

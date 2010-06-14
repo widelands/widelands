@@ -1174,7 +1174,7 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 
 		if (Building const * const building = flag->get_building()) {
 			if
-				(&flag->owner() != &player
+				(player.is_hostile(flag->owner())
 				 and
 				 1
 				 <
@@ -1185,7 +1185,7 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 			else
 				log
 					("Cmd_EnemyFlagAction::execute: ERROR: wrong player target not "
-					 "seen.\n");
+					 "seen or not hostile.\n");
 		} else
 			log("Cmd_EnemyFlagAction::execute: ERROR: flag has no building\n");
 	} else

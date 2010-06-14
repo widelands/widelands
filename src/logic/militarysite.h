@@ -87,6 +87,7 @@ public:
 	// End implementation of SoldierControl
 
 	// Begin implementation of Attackable
+	virtual Player& owner() const {return Building::owner();}
 	virtual bool canAttack();
 	virtual void aggressor(Soldier &);
 	virtual bool attack   (Soldier &);

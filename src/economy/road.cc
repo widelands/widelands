@@ -297,7 +297,8 @@ void Road::_link_into_flags(Game & game) {
 			carrier->update_task_road(game);
 		} else if
 			(not i.current->carrier_request and
-			 i.current->carrier_type == 1)
+			 (i.current->carrier_type == 1 or
+			  m_type == Road_Busy))
 			_request_carrier(game, *i.current);
 }
 
@@ -553,7 +554,8 @@ void Road::postsplit(Game & game, Flag & flag)
 					container_iterate(SlotVector, newroad.m_carrier_slots, k)
 						if
 							(not k.current->carrier.get(game) and
-							 not k.current->carrier_request)
+							 not k.current->carrier_request and
+							 k.current->carrier_type == j.current->carrier_type)
 						{
 							k.current->carrier = &ref_cast<Carrier, Worker> (w);
 							break;
@@ -581,7 +583,8 @@ void Road::postsplit(Game & game, Flag & flag)
 		if
 			(not i.current->carrier.get(game) and
 			 not i.current->carrier_request and
-			 i.current->carrier_type == 1)
+			 (i.current->carrier_type == 1 or
+			  m_type == Road_Busy))
 			_request_carrier(game, *i.current);
 
 	//  Make sure items waiting on the original endpoint flags are dealt with.
