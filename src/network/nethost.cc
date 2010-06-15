@@ -560,9 +560,6 @@ void NetHost::run(bool const autorun)
 	// if this is a ggz game, tell the metaserver that the game started
 	if (use_ggz)
 	{
-		//NetGGZ::ref().set_map(d->settings.mapname, 0, 0);
-		//NetGGZ::ref().set_players(d->settings.players);
-		//NetGGZ::ref().send_game_info();
 		NetGGZ::ref().send_game_playing();
 	}
 #endif
@@ -653,8 +650,6 @@ void NetHost::run(bool const autorun)
 		// if this is a ggz game, tell the metaserver that the game is done.
 		if (use_ggz)
 		{
-			//NetGGZ::ref().send_game_statistics
-			//	(game.get_gametime(), game.get_general_statistics());
 			NetGGZ::ref().send_game_done();
 		}
 #endif

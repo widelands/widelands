@@ -16,6 +16,12 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+/**
+* @file network/game_server/protocol.h
+* @brief in this header file enumerations for the widelands metasever
+* communication protocol are defined
+*/
+
 #ifndef WIDELANDS_PROTOCOL_H
 #define WIDELANDS_PROTOCOL_H
 
@@ -130,9 +136,6 @@ enum WLGGZGameStats
 /*ToDo:
  * game time
  * client version
- * 
- *
+ * game stats: max value + history
  */
-  
 #endif
-

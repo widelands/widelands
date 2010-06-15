@@ -16,12 +16,19 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/**
+ * @file network/game_server/protocol_helpers.h
+ * @brief this header file contains some helper fuction for the widelands
+ * metaserver protocol
+ */
+
 #ifndef WIDELANDS_PROTOCOL_HELPERS_H
 #define WIDELANDS_PROTOCOL_HELPERS_H
 
 #include "protocol.h"
 #include <string>
 #include <cstring>
+#include <cstdarg>
 #include <list>
 #include <ggz.h>
 #include <iostream>
@@ -76,6 +83,14 @@ class WLGGZParameter
 		std::string m_str;
 };
 
+/**
+ * This function reads a parameter list from a filedescriptor. This function
+ * reads pairs of data type and data until the data type is zero. This reads
+ * written with class WLGGZ_writer.
+ *
+ * @param fd The filedescriptor to read from
+ * @return the list of the parameters
+ */
 std::list<WLGGZParameter> wlggz_read_parameter_list(int fd)
 {
 	std::list<WLGGZParameter> list;
@@ -130,35 +145,124 @@ std::list<WLGGZParameter> wlggz_read_parameter_list(int fd)
 	return list;
 }
 
-void wlggz_write_parameter_list(int fd, std::list<WLGGZParameter> l){
-	std::list<WLGGZParameter>::iterator it = l.begin();
-	while (it != l.end())
-	{
-		ggz_write_int(fd, it->get_type());
-		//std::cout << "GGZ: write int (" << it->get_type() << ") parameter type" << std::endl;
-		if(it->is_string())
-		{
-			ggz_write_string(fd, it->get_string().c_str());
-			//std::cout << "GGZ: write string \"" << it->get_string().c_str() << "\" value" << std::endl;
-		}
-		else if (it->is_integer() or it->is_bool())
-		{
-			ggz_write_int(fd, it->get_integer());
-			//std::cout << "GGZ: write int (" << it->get_integer() << ") value" << std::endl;
-		}
-		else 
-			std::cout << "GGZ: ERROR Tried to write unhandled data type" << std::endl;
-		it++;
-	}
-}
+/**
+ * A class to write a list of parameters to a metaserver connection.
+ * This writes the datatype before the data and automatically writes a zero
+ * at the end of the list. Be sure to call flush or delete the object before
+ * writing further data to the stream to be sure that the last zero is written.
+ */
+class WLGGZ_writer {
+	public:
+		/**
+		 * The construtor takes the stream to write to as parameter
+		 *
+		 * @param fd The fd to which the data will be written
+		 */
+		WLGGZ_writer(int fd):
+			m_fd(fd),
+			m_in_cmd(false)
+		{}
 
-void wlggz_write(int fd, int type,std::list<WLGGZParameter> parlist)
-{
-	ggz_write_int(fd, type);
-	//std::cout << "GGZ: write int (" << type << ") is a type" << std::endl;
-	wlggz_write_parameter_list(fd, parlist);
-	ggz_write_int(fd, 0);
-	//std::cout << "GGZ: write int (0) end of type" << std::endl;
-}
+		~WLGGZ_writer()
+		{
+			flush();
+		}
+
+		/**
+		 * This function writes the zero after the last parameter of the list.
+		 * Call this before writing data beside this class. This is called from
+		 * the destructor.
+		 */
+		void flush()
+		{
+			if (m_in_cmd)
+				ggz_write_int(m_fd, 0);
+			m_in_cmd = false;
+		}
+
+		/**
+		 * This sets the type of the parameter list to write. This must be called
+		 * before writing parameters.
+		 *
+		 * @param t The type of the parameterlist
+		 */
+		void type(int t)
+		{
+			if (m_in_cmd)
+				ggz_write_int(m_fd, 0);
+			m_in_cmd = true;
+			ggz_write_int(m_fd, t);
+		}
+
+		/**
+		 * Write a integer to the parameter list.
+		 * type() must be calle before this.
+		 *
+		 * @param d The data to write to the parameter list
+		 * @see type()
+		 */
+		WLGGZ_writer& operator<< (int d)
+		{
+			if (not m_in_cmd)
+				return *this;
+			ggz_write_int(m_fd, ggzdatatype_integer);
+			ggz_write_int(m_fd, d);
+			return *this;
+		}
+
+		/**
+		* Write a std::string to the parameter list.
+		* type() must be calle before this.
+		*
+		* @param d The data to write to the parameter list
+		* @see type()
+		*/
+		WLGGZ_writer& operator<< (const std::string &d)
+		{
+			if (not m_in_cmd)
+				return *this;
+			ggz_write_int(m_fd, ggzdatatype_string);
+			ggz_write_string(m_fd, d.c_str());
+			return *this;
+		}
+
+		/**
+		* Write a single character to the parameter list.
+		* type() must be calle before this.
+		*
+		* @param d The data to write to the parameter list
+		* @see type()
+		*/
+		WLGGZ_writer& operator<< (char d)
+		{
+			if (not m_in_cmd)
+				return *this;
+			ggz_write_int(m_fd, ggzdatatype_char);
+			ggz_write_char(m_fd, d);
+			return *this;
+		}
+
+		/**
+		* Write a bool to the parameter list.
+		* type() must be calle before this.
+		*
+		* @param d The data to write to the parameter list
+		* @see type()
+		*/
+		WLGGZ_writer& operator<< (bool d)
+		{
+			if (not m_in_cmd)
+				return *this;
+			ggz_write_int(m_fd, ggzdatatype_boolean);
+			ggz_write_int(m_fd, d);
+			return *this;
+		}
+
+	private:
+		int m_fd;      ///< the filedescriptor to which all data is written
+		bool m_in_cmd; ///< keep track if a parameter lsi is open to write to
+};
+
+
 
 #endif

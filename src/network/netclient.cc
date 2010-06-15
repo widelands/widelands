@@ -30,12 +30,14 @@
 #include "wui/interactive_spectator.h"
 #include "network_protocol.h"
 #include "network_system.h"
+#include "network_ggz.h"
 #include "logic/playercommand.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
+#include "logic/player.h"
 
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -224,10 +226,7 @@ void NetClient::run ()
 	// if this is a ggz game, tell the metaserver the result of the game
 	if (use_ggz)
 	{
-		// ToDo: NetGGZ::ref().set_results();
-		// ToDo: Feed NetGGZ with some information first
-		// NetGGZ::ref().send_game_statistics
-		//	(game.get_gametime(), game.get_general_statistics());
+		NetGGZ::ref().send_game_done();
 	}
 #endif
 		d->modal = 0;
@@ -535,7 +534,9 @@ void NetClient::report_result(int player, int points, bool win, std::string extr
 	if (use_ggz)
 	{
 		NetGGZ::ref().report_result
-			(player, points, win, d->game->get_gametime(), d->game->get_general_statistics());
+			(player, d->game->player(player).team_number(),
+			 points, win, d->game->get_gametime(),
+			 d->game->get_general_statistics());
 	}
 #endif
 }
