@@ -20,7 +20,6 @@
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "font_handler.h"
 #include "game.h"
 #include "game_data_error.h"
 #include "wui/interactive_gamebase.h"
@@ -31,6 +30,7 @@
 #include "productionsite.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
+#include "graphic/font_handler.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
 #include "upcast.h"
@@ -48,7 +48,7 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 Building_Descr::Building_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _descr, EncodeData const * const encdata)
+	 Tribe_Descr const & _descr)
 	:
 	Map_Object_Descr(_name, _descname),
 	m_tribe         (_descr),
@@ -130,7 +130,7 @@ Building_Descr::Building_Descr
 			if (!is_animation_known("build"))
 				add_animation
 					("build",
-					 g_anim.get(directory.c_str(), *build_s, 0, encdata));
+					 g_anim.get(directory.c_str(), *build_s, 0));
 		}
 
 		// Get costs
@@ -165,7 +165,7 @@ Building_Descr::Building_Descr
 		if (!is_animation_known("idle"))
 			add_animation
 				("idle",
-				 g_anim.get(directory.c_str(), idle_s, 0, encdata));
+				 g_anim.get(directory.c_str(), idle_s, 0));
 	}
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))

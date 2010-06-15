@@ -41,7 +41,7 @@ struct Soldier_Descr : public Worker_Descr {
 	Soldier_Descr
 		(char const * const _name, char const * const _descname,
 		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &, EncodeData const *);
+		 Tribe_Descr const &);
 
 	// NOTE we have to explicitly return Worker_Descr::SOLDIER, as SOLDIER is
 	// NOTE as well defined in an enum in instances.h
@@ -132,7 +132,7 @@ protected:
 
 	std::vector<std::string> load_animations_from_string
 			(std::string const & directory, Profile & prof, Section & global_s,
-			 EncodeData const * const encdata, const char * anim_name);
+			 const char * anim_name);
 
 };
 

@@ -37,7 +37,6 @@
 
 namespace UI {struct Window;}
 struct BuildingHints;
-struct EncodeData;
 struct Interactive_GameBase;
 struct Profile;
 
@@ -61,7 +60,7 @@ struct Building_Descr : public Map_Object_Descr {
 	Building_Descr
 		(char const * _name, char const * _descname,
 		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &, EncodeData const *);
+		 Tribe_Descr const &);
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}

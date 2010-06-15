@@ -22,7 +22,6 @@
 
 #include "economy/route.h"
 #include "graphic/animation.h"
-#include "graphic/encodedata.h"
 #include "point.h"
 #include "writeHTML.h"
 #include "instances.h"
@@ -195,17 +194,13 @@ struct Bob : public Map_Object {
 		Descr
 			(char const * name, char const * descname,
 			 std::string const & directory, Profile &, Section & global_s,
-			 Tribe_Descr const *, EncodeData const *);
+			 Tribe_Descr const *);
 
 		virtual ~Descr() {};
 		Bob & create(Editor_Game_Base &, Player * owner, const Coords &) const;
 		bool is_world_bob() const {return not m_owner_tribe;}
 
 		char const * get_picture() const {return m_picture.c_str();}
-
-		EncodeData const & get_default_encodedata() const {
-			return m_default_encodedata;
-		}
 
 		Tribe_Descr const * get_owner_tribe() const throw () {
 			return m_owner_tribe;
@@ -218,7 +213,6 @@ struct Bob : public Map_Object {
 		virtual Bob & create_object() const = 0;
 
 		std::string         m_picture;
-		EncodeData          m_default_encodedata;
 		const Tribe_Descr * const m_owner_tribe; //  0 if world bob
 	};
 

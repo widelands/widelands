@@ -443,8 +443,7 @@ void WorkerProgram::parse_animation
 			 (g_anim.get
 			  	(parser->directory.c_str(),
 			  	 parser->prof->get_safe_section(cmd[1].c_str()),
-			  	 0,
-			  	 parser->encdata)));
+			  	 0)));
 	}
 	act->iparam1 = descr->get_animation(cmd[1].c_str());
 

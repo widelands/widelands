@@ -613,8 +613,7 @@ void ProductionProgram::ActSleep::execute
 
 ProductionProgram::ActAnimate::ActAnimate
 	(char * parameters, ProductionSite_Descr & descr,
-	 std::string const & directory, Profile & prof,
-	 EncodeData const * const encdata)
+	 std::string const & directory, Profile & prof)
 {
 	try {
 		bool reached_end;
@@ -628,8 +627,7 @@ ProductionProgram::ActAnimate::ActAnimate
 			m_id = g_anim.get
 				(directory.c_str(),
 				 prof.get_safe_section(animation_name),
-				 0,
-				 encdata);
+				 0);
 			descr.add_animation(animation_name, m_id);
 		}
 		if (not reached_end) { //  The next parameter is the duration.
@@ -1334,8 +1332,7 @@ ProductionProgram::ProductionProgram
 	 Profile              & prof,
 	 std::string    const &       _name,
 	 char           const * const _descname,
-	 ProductionSite_Descr * const building,
-	 EncodeData     const * const encdata)
+	 ProductionSite_Descr * const building)
 	: m_name(_name), m_descname(_descname)
 {
 	Section & program_s = prof.get_safe_section(_name.c_str());
@@ -1349,7 +1346,7 @@ ProductionProgram::ProductionProgram
 			action = new ActSleep (v->get_string(),  *building);
 		else if (not strcmp(v->get_name(), "animate"))
 			action = new
-				ActAnimate(v->get_string(), *building, directory, prof, encdata);
+				ActAnimate(v->get_string(), *building, directory, prof);
 		else if (not strcmp(v->get_name(), "consume"))
 			action = new ActConsume(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "produce"))

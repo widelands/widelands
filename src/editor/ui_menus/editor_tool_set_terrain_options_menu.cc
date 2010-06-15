@@ -21,10 +21,8 @@
 
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "editor/editorinteractive.h"
-#include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "graphic/rendertarget.h"
 #include <SDL_keysym.h>
 #include "wlapplication.h"
 #include "logic/world.h"
@@ -33,6 +31,12 @@
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/checkbox.h"
+
+#include "graphic/graphic.h"
+#include "graphic/texture.h"
+#include "graphic/rendertarget.h"
+
+#include "log.h"
 
 Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	(Editor_Interactive         & parent,
@@ -90,45 +94,61 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				pos.y += TEXTURE_HEIGHT + vspacing();
 			}
 
-			//  create a surface for this
-			PictureID surface = g_gr->create_surface(64, 64);
+			PictureID surface;
 
-			//  get the rendertarget for this
-			RenderTarget & target = *g_gr->get_surface_renderer(surface);
+			// If offscreen rendering is not available only the terrain (and not
+			// the terrain type) is shown.
+			// TODO: Find a way to render this without offscreen rendering
+			//       or implement offscreen rendering for opengl
+			if (g_gr->caps().offscreen_rendering)
+			{
+				//  create a surface for this
+				surface = g_gr->create_picture_surface(64, 64);
 
-			//  first, blit the terrain texture
-			target.blit
-				(Point(0, 0),
-				 g_gr->get_picture
-				 	(PicMod_Game,
-				 	 g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
-				 	 ->get_texture_picture()));
+				//  get the rendertarget for this
+				RenderTarget & target = *g_gr->get_surface_renderer(surface);
 
-			Point pic(1, 64 - small_pich - 1);
+				//  first, blit the terrain texture
+				target.blit
+					(Point(0, 0),
+					 g_gr->get_picture
+						(PicMod_Game,
+						 g_gr->get_maptexture_data
+							 (world.terrain_descr(i).get_texture())
+							 ->get_texture_picture()));
 
-			//  check is green
-			if (ter_is == 0) {
-				target.blit(pic, green);
-				pic.x += small_picw + 1;
+				Point pic(1, 64 - small_pich - 1);
+
+				//  check is green
+				if (ter_is == 0) {
+					target.blit(pic, green);
+					pic.x += small_picw + 1;
+				} else {
+					if (ter_is & TERRAIN_WATER) {
+						target.blit(pic, water);
+						pic.x += small_picw + 1;
+					}
+					if (ter_is & TERRAIN_MOUNTAIN) {
+						target.blit(pic, mountain);
+						pic.x += small_picw + 1;
+					}
+					if (ter_is & TERRAIN_ACID) {
+						target.blit(pic, dead);
+						pic.x += small_picw + 1;
+					}
+					if (ter_is & TERRAIN_UNPASSABLE) {
+						target.blit(pic, unpassable);
+						pic.x += small_picw + 1;
+					}
+					if (ter_is & TERRAIN_DRY)
+						target.blit(pic, dry);
+				}
 			} else {
-				if (ter_is & TERRAIN_WATER) {
-					target.blit(pic, water);
-					pic.x += small_picw + 1;
-				}
-				if (ter_is & TERRAIN_MOUNTAIN) {
-					target.blit(pic, mountain);
-					pic.x += small_picw + 1;
-				}
-				if (ter_is & TERRAIN_ACID) {
-					target.blit(pic, dead);
-					pic.x += small_picw + 1;
-				}
-				if (ter_is & TERRAIN_UNPASSABLE) {
-					target.blit(pic, unpassable);
-					pic.x += small_picw + 1;
-				}
-				if (ter_is & TERRAIN_DRY)
-					target.blit(pic, dry);
+				surface = g_gr->get_picture
+					(PicMod_Game,
+					 g_gr->get_maptexture_data
+					 (world.terrain_descr(i).get_texture())
+					 ->get_texture_picture());
 			}
 
 			//  Save this surface, so we can free it later on.
@@ -168,7 +188,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu() {
 	container_iterate_const(std::vector<PictureID>, m_surfaces, i)
-		g_gr->free_surface(*i.current);
+		g_gr->free_picture_surface(*i.current);
 }
 
 
