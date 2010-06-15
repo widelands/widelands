@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,17 @@
  *
  */
 
+#include "io/filesystem/layered_filesystem.h"
+#include "io/fileread.h"
+#include "graphic.h"
 #include "texture.h"
 
-#include "constants.h"
-#include "graphic.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "wexception.h"
-
 #include "log.h"
+#include "constants.h"
+#include "wexception.h"
+#include "container_iterate.h"
+
+#include <SDL_image.h>
 
 /**
  * Create a texture, taking the pixel data from a Pic.
@@ -38,6 +41,7 @@ Texture::Texture
 :
 m_colormap (0),
 m_pixels   (0),
+m_frame_num(0),
 m_nrframes (0),
 m_frametime(frametime),
 is_32bit   (format.BytesPerPixel == 4)
@@ -63,19 +67,24 @@ is_32bit   (format.BytesPerPixel == 4)
 		if (nr) // cycled up to maximum possible frame number
 			break;
 
-		// is the frame actually there?
 		if (!g_fs->FileExists(fname))
 			break;
 
-		// Load it
 		SDL_Surface * surf;
 
 		m_texture_picture = strdup(fname);
 
-		try {
-			surf = LoadImage(fname);
-		} catch (std::exception const & e) {
-			log("WARNING: Failed to load texture frame %s: %s\n", fname, e.what());
+		FileRead fr;
+
+		//fastOpen tries to use mmap
+		fr.fastOpen(*g_fs, fname);
+
+		surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+
+		if (!surf) {
+			log
+				("WARNING: Failed to load texture frame %s: %s\n",
+				 fname, IMG_GetError());
 			break;
 		}
 
@@ -88,6 +97,22 @@ is_32bit   (format.BytesPerPixel == 4)
 				 TEXTURE_HEIGHT);
 			break;
 		}
+
+#ifdef USE_OPENGL
+		if (g_opengl) {
+			SurfaceOpenGL * tsurface =
+				&dynamic_cast<SurfaceOpenGL &>
+				(g_gr->load_image(fname));
+			// SDL_ConvertSurface(surf, &fmt, 0);
+			m_glFrames.push_back(tsurface);
+			tsurface->lock();
+			m_mmap_color = tsurface->get_pixel(0, 0);
+			tsurface->unlock();
+			++m_nrframes;
+			continue;
+		}
+#endif
+
 
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
@@ -139,9 +164,7 @@ is_32bit   (format.BytesPerPixel == 4)
 				(m_curframe + y * TEXTURE_WIDTH,
 				 static_cast<uint8_t *>(cv->pixels) + y * cv->pitch,
 				 TEXTURE_WIDTH);
-
 		SDL_UnlockSurface(cv);
-
 		SDL_FreeSurface(cv);
 		SDL_FreeSurface(surf);
 	}
@@ -156,15 +179,22 @@ Texture::~Texture ()
 	delete m_colormap;
 	free(m_pixels);
 	free(m_texture_picture);
+
+#ifdef USE_OPENGL
+	container_iterate(std::vector<SurfaceOpenGL *>, m_glFrames, it)
+		delete *it.current;
+#endif
 }
 
 /**
  * Return the basic terrain colour to be used in the minimap.
 */
 Uint32 Texture::get_minimap_color(const char shade) {
+	if (not m_pixels)
+		return m_mmap_color;
+
 	uint8_t clr = m_pixels[0]; // just use the top-left pixel
 	uint32_t table = static_cast<uint8_t>(shade);
-
 	return
 		is_32bit ?
 		static_cast<const Uint32 *>(m_colormap->get_colormap())
@@ -179,11 +209,11 @@ Uint32 Texture::get_minimap_color(const char shade) {
  */
 void Texture::animate(uint32_t time)
 {
-	int32_t const frame = (time / m_frametime) % m_nrframes;
+	m_frame_num = (time / m_frametime) % m_nrframes;
 
 	uint8_t * const lastframe = m_curframe;
 
-	m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * frame];
+	m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_frame_num];
 	if (lastframe != m_curframe)
 		m_was_animated = true;
 }

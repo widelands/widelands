@@ -22,18 +22,16 @@
 
 #include "animation_gfx.h"
 #include "picture.h"
+#include "picture_id.h"
 #include "rect.h"
-#include "surface.h"
+//#include "surface.h"
+//#include "texture.h"
 
 #include <png.h>
 
 #include <vector>
+#include <map>
 #include <boost/shared_ptr.hpp>
-
-#ifdef USE_OPENGL
-#define HAS_OPENGL 1
-#include <SDL_opengl.h>
-#endif
 
 /**
  * Names of road terrains
@@ -45,19 +43,40 @@
 
 namespace UI {struct ProgressWindow;}
 
+class Surface;
+class Texture;
 struct RenderTarget;
 class Surface;
 struct Graphic;
 struct Road_Textures;
 struct StreamWrite;
 struct Texture;
+struct SDL_Surface;
+struct SDL_Rect;
 
-///\todo Get rid of this global function
-SDL_Surface * LoadImage(char const * filename);
-
+// This table is used by create_grayed_out_pic() 
+// to map colors to grayscle. It is initialized in Graphic::Graphic()
 extern uint32_t luminance_table_r[0x100];
 extern uint32_t luminance_table_g[0x100];
 extern uint32_t luminance_table_b[0x100];
+
+struct GLCaps
+{
+	int major_version;
+	int minor_version;
+	int tex_max_size;
+	bool tex_power_of_two;
+	int stencil_buffer_bits;
+	int aux_buffers;
+};
+
+struct GraphicCaps
+{
+	bool offscreen_rendering;
+	bool resize_surfaces;
+	bool blit_resized;
+	GLCaps gl;
+};
 
 /**
  * A renderer to get pixels to a 16bit framebuffer.
@@ -72,16 +91,9 @@ extern uint32_t luminance_table_b[0x100];
 */
 
 struct Graphic {
-#if HAS_OPENGL
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool hw_improvements, bool double_buffer, bool opengl);
-#else
-	Graphic
-		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool hw_improvements, bool double_buffer);
-#endif
-
+		 bool fullscreen, bool opengl);
 	~Graphic();
 
 	int32_t get_xres() const;
@@ -98,7 +110,9 @@ struct Graphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	PictureID & get_picture(PicMod module, const std::string & fname)
+	Surface & load_image
+(const std::string & fname, bool alpha = false);
+	PictureID & get_picture(PicMod module, const std::string & fname, bool alpha = true)
 	__attribute__ ((pure));
 	PictureID get_picture
 		(PicMod module, Surface &, const std::string & name = "");
@@ -111,10 +125,15 @@ struct Graphic {
 	void get_picture_size
 		(const PictureID & pic, uint32_t & w, uint32_t & h) const;
 
-	void save_png(const PictureID &, StreamWrite *);
-	PictureID create_surface(int32_t w, int32_t h);
-	PictureID create_surface_a(int32_t w, int32_t h);
-	void free_surface(const PictureID & pic);
+	void save_png(const PictureID &, StreamWrite *) const;
+	void save_png(Surface & surf, StreamWrite *) const;
+
+	PictureID create_picture_surface(int32_t w, int32_t h, bool alpha = false);
+	Surface & create_surface(SDL_Surface &, bool alpha = false);
+	Surface & create_surface(Surface &, bool alpha = false);
+	Surface & create_surface(int32_t w, int32_t h, bool alpha = false);
+	void free_picture_surface(const PictureID & pic);
+
 	PictureID create_grayed_out_pic(const PictureID & picid);
 	RenderTarget * get_surface_renderer(const PictureID & pic);
 
@@ -152,6 +171,9 @@ struct Graphic {
 
 	Surface * get_road_texture(int32_t roadtex);
 
+	const GraphicCaps & caps() const throw()
+		{ return m_caps; }
+
 protected:
 	/// Static function for png writing
 	static void m_png_write_function
@@ -160,11 +182,13 @@ protected:
 		 png_size_t length);
 	static void m_png_flush_function (png_structp png_ptr);
 
-	Surface m_screen;
+	Surface * m_screen;
+	SDL_Surface * m_sdl_screen;
 	RenderTarget * m_rendertarget;
 	SDL_Rect m_update_rects[MAX_RECTS];
 	int32_t m_nr_update_rects;
 	bool m_update_fullscreen;
+	GraphicCaps m_caps;
 
 	/// hash of filename/picture ID pairs
 	std::vector
@@ -178,9 +202,7 @@ protected:
 };
 
 extern Graphic * g_gr;
-#if HAS_OPENGL
 extern bool g_opengl;
-#endif
 
 #endif
 

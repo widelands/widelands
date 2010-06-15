@@ -57,9 +57,9 @@ ProductionSite BUILDING
 ProductionSite_Descr::ProductionSite_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
+	 Tribe_Descr const & _tribe)
 	:
-	Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
+	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
@@ -140,7 +140,7 @@ ProductionSite_Descr::ProductionSite_Descr
 				throw wexception("this program has already been declared");
 			m_programs[program_name] =
 				new ProductionProgram
-					(directory, prof, program_name, v->get_string(), this, encdata);
+					(directory, prof, program_name, v->get_string(), this);
 		} catch (std::exception const & e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}

@@ -17,16 +17,23 @@
  *
  */
 
-#ifndef TERRAIN_H
-#define TERRAIN_H
+#ifndef TERRAIN_SDL_H
+#define TERRAIN_SDL_H
 
 #include "constants.h"
-#include "graphic/graphic.h"
-#include "wui/mapviewpixelconstants.h"
+#include "log.h"
 #include "random.h"
-#include "graphic/surface.h"
-#include "logic/roadtype.h"
 #include "vertex.h"
+
+#include "wui/mapviewpixelconstants.h"
+
+
+#include "logic/roadtype.h"
+
+#include "graphic/render/surface_sdl.h"
+#include "graphic/graphic.h"
+#include "graphic/texture.h"
+
 
 ///Must be a power of two
 #define DITHER_WIDTH 4
@@ -79,7 +86,7 @@ struct RightEdge {
  * The edge lists will be overwritten with undefined values.
  */
 template<typename T> static void render_edge_lists
-	(Surface & dst, Texture const & tex,
+	(SurfaceSDL & dst, Texture const & tex,
 	 int32_t y, int32_t height,
 	 LeftEdge * left, RightEdge * right,
 	 int32_t dbdx, int32_t dtydx)
@@ -208,26 +215,12 @@ struct WLPolygon {
  * texture x coordinates.
  */
 template<typename T> static void render_triangle
-	(Surface & dst,
+	(SurfaceSDL & dst,
 	 Vertex const & p1, Vertex const & p2, Vertex const & p3,
 	 Texture const & tex)
 {
 	if (p1.y == p2.y && p2.y == p3.y)
 		return; // degenerate triangle
-
-#if HAS_OPENGL
-	if (g_opengl) {
-		glBegin(GL_TRIANGLES);
-		glTexCoord2i(p1.tx, p1.ty);
-		glVertex2f(p1.x, p1.y);
-		glTexCoord2i(p2.tx, p2.ty);
-		glVertex2f(p2.x, p2.y);
-		glTexCoord2i(p3.tx, p3.ty);
-		glVertex2f(p3.x, p3.y);
-		glEnd();
-		return;
-	}
-#endif
 
 	// Clip the triangle
 	WLPolygon polygon;
@@ -352,7 +345,7 @@ template<typename T> static void render_triangle
  * rendering could be handled as a special case then.
 */
 template<typename T> static void dither_edge_horiz
-	(Surface & dst,
+	(SurfaceSDL & dst,
 	 Vertex const & start, Vertex const & end,
 	 Texture const & ttex, Texture const & btex)
 {
@@ -449,7 +442,7 @@ template<typename T> static void dither_edge_horiz
  * \see dither_edge_horiz
  */
 template<typename T> static void dither_edge_vert
-	(Surface & dst,
+	(SurfaceSDL & dst,
 	 Vertex const & start, Vertex const & end,
 	 Texture const & ltex, Texture const & rtex)
 {
@@ -539,7 +532,7 @@ template<typename T> static void dither_edge_vert
 }
 
 template<typename T> static void render_road_horiz
-	(Surface & dst, Point const start, Point const end, Surface const & src)
+	(SurfaceSDL & dst, Point const start, Point const end, Surface const & src)
 {
 	int32_t const dstw = dst.get_w();
 	int32_t const dsth = dst.get_h();
@@ -566,7 +559,7 @@ template<typename T> static void render_road_horiz
 }
 
 template<typename T> static void render_road_vert
-	(Surface & dst, Point const start, Point const end, Surface const & src)
+	(SurfaceSDL & dst, Point const start, Point const end, Surface const & src)
 {
 	int32_t const dstw = dst.get_w();
 	int32_t const dsth = dst.get_h();
@@ -593,7 +586,7 @@ template<typename T> static void render_road_vert
 }
 
 template<typename T> static void draw_field_int
-	(Surface       & dst,
+	(SurfaceSDL       & dst,
 	 Vertex  const &  f_vert,
 	 Vertex  const &  r_vert,
 	 Vertex  const & bl_vert,

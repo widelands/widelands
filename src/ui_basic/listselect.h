@@ -149,7 +149,7 @@ private:
 	uint32_t    m_fontsize;
 
 	bool        m_needredraw;
-	PictureID   m_cache_pid;
+	PictureID   m_cache_pic;
 };
 
 template<typename Entry>

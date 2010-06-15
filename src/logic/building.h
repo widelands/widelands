@@ -37,7 +37,6 @@
 
 namespace UI {struct Window;}
 struct BuildingHints;
-struct EncodeData;
 struct Interactive_GameBase;
 struct Profile;
 
@@ -61,7 +60,7 @@ struct Building_Descr : public Map_Object_Descr {
 	Building_Descr
 		(char const * _name, char const * _descname,
 		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &, EncodeData const *);
+		 Tribe_Descr const &);
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
@@ -235,18 +234,13 @@ public:
 	void    add_worker(Worker &);
 	void remove_worker(Worker &);
 
-	/// Creates a message specific to this building. It will have the building's
-	/// coordinates, and display a picture of the building in its description.
-	///
-	/// The message will be allocated with operator new and ownership of it is
-	/// given to the caller.
-	Message & create_message
-		(std::string const & msgsender,
-		 uint32_t            time,
-		 Duration            duration,
-		 std::string const & title,
-		 std::string const & description)
-		const;
+	void send_message
+		(Game & game,
+		 const std::string & msgsender,
+		 const std::string & title,
+		 const std::string & description,
+		 uint32_t throttle_time = 0,
+		 uint32_t throttle_radius = 0);
 
 protected:
 	void start_animation(Editor_Game_Base &, uint32_t anim);
