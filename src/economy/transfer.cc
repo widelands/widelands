@@ -57,7 +57,8 @@ Transfer::Transfer(Game & game, Request & req, Worker & w) :
 }
 
 /**
- * Create a transfer without linking it into the given ware instance and without a request.
+ * Create a transfer without linking it into the
+ * given ware instance and without a request.
  */
 Transfer::Transfer(Game & game, WareInstance & w) :
 	m_game(game),
@@ -68,7 +69,8 @@ Transfer::Transfer(Game & game, WareInstance & w) :
 }
 
 /**
- * Create a transfer without linking it into the given worker and without a request.
+ * Create a transfer without linking it into the given
+ * worker and without a request.
  */
 Transfer::Transfer(Game & game, Worker & w) :
 	m_game(game),
@@ -106,7 +108,8 @@ void Transfer::set_request(Request * req)
 	if (&req->target() != m_destination.get(m_game)) {
 		if (m_destination.is_set())
 			log
-				("WARNING: Transfer::set_request req->target (%u) vs. destination (%u) mismatch\n",
+				("WARNING: Transfer::set_request req->target (%u) "
+				 "vs. destination (%u) mismatch\n",
 				 req->target().serial(), m_destination.serial());
 		m_destination = &req->target();
 	}
@@ -116,7 +119,7 @@ void Transfer::set_request(Request * req)
 /**
  * Set the destination for a transfer that has no associated \ref Request.
  */
-void Transfer::set_destination(PlayerImmovable& imm)
+void Transfer::set_destination(PlayerImmovable & imm)
 {
 	assert(!m_request);
 
@@ -135,7 +138,8 @@ PlayerImmovable * Transfer::get_next_step
 		return 0;
 	}
 
-	PlayerImmovable * destination = m_destination.get(location->get_economy()->owner().egbase());
+	PlayerImmovable * destination =
+		 m_destination.get(location->get_economy()->owner().egbase());
 	if (!destination || destination->get_economy() != location->get_economy()) {
 		tlog("destination disappeared or economy mismatch -> fail\n");
 		success = false;
@@ -204,7 +208,9 @@ void Transfer::has_finished()
 	} else {
 		PlayerImmovable * destination = m_destination.get(m_game);
 		if (!destination)
-			throw wexception("Transfer: claims to have finished successfully, but destination is gone");
+			throw wexception
+				("Transfer: claims to have finished successfully, "
+				 "but destination is gone");
 
 		if (m_worker) {
 			destination->receive_worker(m_game, *m_worker);
@@ -276,13 +282,14 @@ void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
 	rd.destination = fr.Unsigned32();
 }
 
-void Transfer::read_pointers(Map_Map_Object_Loader & mol, const Widelands::Transfer::ReadData & rd)
+void Transfer::read_pointers
+	(Map_Map_Object_Loader & mol, const Widelands::Transfer::ReadData & rd)
 {
 	if (rd.destination)
 		m_destination = &mol.get<PlayerImmovable>(rd.destination);
 }
 
-void Transfer::write(Map_Map_Object_Saver& mos, FileWrite& fw)
+void Transfer::write(Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(TRANSFER_SAVEGAME_VERSION);
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(m_game)));

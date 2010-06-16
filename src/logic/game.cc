@@ -326,7 +326,8 @@ void Game::init_newgame
 	// Check for win_conditions
 	LuaCoroutine * cr = lua().run_script
 		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
-		 ".lua", "win_conditions")->get_coroutine("func");
+		 ".lua", "win_conditions")
+		->get_coroutine("func");
 	enqueue_command(new Cmd_LuaCoroutine(get_gametime(), cr));
 }
 
@@ -927,8 +928,8 @@ void Game::sample_statistics()
  *
  * \param fr file to read from
  * \param version indicates the kind of statistics file; the current version
- *   is 3, support for older versions (used in widelands build <= 12) was dropped
- *   after the release of build 15
+ *   is 3, support for older versions (used in widelands build <= 12) was
+ *   dropped after the release of build 15
  */
 void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 {
