@@ -98,7 +98,7 @@ protected:
 	int32_t m_cursor_pos;         //  cursor position
 	int32_t m_cursor_size;        //  cursor width
 	bool        m_needredraw;
-	PictureID   m_cache_pid;
+	PictureID   m_cache_pic;
 };
 
 

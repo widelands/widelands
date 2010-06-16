@@ -20,7 +20,7 @@
 #include "panel.h"
 
 #include "constants.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
@@ -80,7 +80,7 @@ Panel::~Panel()
 	update();
 
 	if (_cache != g_gr->get_no_picture())
-		g_gr->free_surface(_cache);
+		g_gr->free_picture_surface(_cache);
 
 	// Release pointers to this object
 	if (_g_mousegrab == this)
@@ -254,8 +254,8 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 	_h = nh;
 
 	if (_cache != g_gr->get_no_picture()) {
-		g_gr->free_surface(_cache);
-		_cache = g_gr->create_surface(_w, _h);
+		g_gr->free_picture_surface(_cache);
+		_cache = g_gr->create_picture_surface(_w, _h);
 	}
 
 	if (_parent)

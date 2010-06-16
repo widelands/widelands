@@ -46,8 +46,8 @@ namespace Widelands {
 ConstructionSite_Descr::ConstructionSite_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
-: Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
+	 Tribe_Descr const & _tribe)
+: Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
 
@@ -56,7 +56,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 		if (!is_animation_known("idle_with_worker"))
 			add_animation
 				("idle_with_worker",
-				 g_anim.get(directory.c_str(), sec, 0, encdata));
+				 g_anim.get(directory.c_str(), sec, 0));
 	}
 }
 
