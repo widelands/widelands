@@ -29,8 +29,10 @@
 
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
-static const char pic_tab_wares_warehouse[] = "pics/menu_tab_wares_warehouse.png";
-static const char pic_tab_workers_warehouse[] = "pics/menu_tab_workers_warehouse.png";
+static const char pic_tab_wares_warehouse[] =
+	 "pics/menu_tab_wares_warehouse.png";
+static const char pic_tab_workers_warehouse[] =
+	 "pics/menu_tab_workers_warehouse.png";
 
 Stock_Menu::Stock_Menu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
@@ -38,19 +40,20 @@ Stock_Menu::Stock_Menu
 UI::UniqueWindow(&plr, "stock_menu", &registry, 640, 480, _("Stock")),
 m_player(plr)
 {
-	UI::Tab_Panel * tabs = new UI::Tab_Panel(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+	UI::Tab_Panel * tabs =
+		 new UI::Tab_Panel
+			 (this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	set_center_panel(tabs);
 
 	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
 	tabs->add
 		("total_wares", g_gr->get_picture(PicMod_UI, pic_tab_wares),
-		 m_all_wares, _("Wares (total)")
-	);
+		 m_all_wares, _("Wares (total)"));
 
 	m_all_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
-	tabs->add("workers_total", g_gr->get_picture(PicMod_UI, pic_tab_workers),
-			m_all_workers, _("Workers (total)")
-	);
+	tabs->add
+		("workers_total", g_gr->get_picture(PicMod_UI, pic_tab_workers),
+		 m_all_workers, _("Workers (total)"));
 
 	m_warehouse_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe());
 	tabs->add
@@ -83,10 +86,11 @@ void Stock_Menu::think()
 }
 
 /**
- * Keep the list of wares repositories up-to-date (honoring that the set of \ref Economy
- * of a player may change)
+ * Keep the list of wares repositories up-to-date (honoring that the set of
+ * \ref Economy of a player may change)
  */
-void Stock_Menu::fill_total_waresdisplay(WaresDisplay* waresdisplay, WaresDisplay::wdType type)
+void Stock_Menu::fill_total_waresdisplay
+	(WaresDisplay * waresdisplay, WaresDisplay::wdType type)
 {
 	waresdisplay->remove_all_warelists();
 	Widelands::Player const & player = *m_player.get_player();
@@ -100,23 +104,28 @@ void Stock_Menu::fill_total_waresdisplay(WaresDisplay* waresdisplay, WaresDispla
 }
 
 /**
- * Keep the list of wares repositories up-to-date (consider that the available \ref Warehouse
- * may change)
+ * Keep the list of wares repositories up-to-date (consider that the available
+ * \ref Warehouse may change)
  */
-void Stock_Menu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay, WaresDisplay::wdType type)
+void Stock_Menu::fill_warehouse_waresdisplay
+	(WaresDisplay * waresdisplay, WaresDisplay::wdType type)
 {
 	waresdisplay->remove_all_warelists();
 	Widelands::Player const & player = *m_player.get_player();
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i) {
-		const std::vector<Widelands::Warehouse*> & warehouses = player.get_economy_by_number(i)->warehouses();
+		const std::vector<Widelands::Warehouse *> & warehouses =
+			player.get_economy_by_number(i)->warehouses();
 
 		for
-			(std::vector<Widelands::Warehouse*>::const_iterator it = warehouses.begin();
+			(std::vector<Widelands::Warehouse *>::const_iterator it =
+			 warehouses.begin();
 			 it != warehouses.end();
-			 ++it) {
+			 ++it)
+		{
 			waresdisplay->add_warelist
-				(type == WaresDisplay::WARE ? (*it)->get_wares() : (*it)->get_workers(), type);
+				(type == WaresDisplay::WARE ?
+				 (*it)->get_wares() : (*it)->get_workers(), type);
 		}
 	}
 }

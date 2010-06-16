@@ -657,7 +657,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
 			if (bld->descr().get_ismine()) {
 				++field.mines_nearby;
 			} else if (upcast(ConstructionSite const, cs, bld)) {
-				if(cs->building().get_ismine())
+				if (cs->building().get_ismine())
 					++field.mines_nearby;
 			}
 		}
