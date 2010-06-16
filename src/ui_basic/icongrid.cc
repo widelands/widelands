@@ -40,12 +40,14 @@ struct IconGridButton : public Callback_IDButton<Icon_Grid, uint32_t> {
 		 void (Icon_Grid::*callback_function)(uint32_t),
 	    Icon_Grid & callback_argument_this,
 		 const uint32_t callback_argument_id,
-		 Textarea * ta, std::string descr ) :
-			Callback_IDButton<Icon_Grid, uint32_t>(
-					parent, name, x, y, w, h, background_pictute_id,
-					foreground_picture_id, callback_function,
-					callback_argument_this, callback_argument_id, "", true, true),
-			m_icongrid(parent), m_ta(ta), m_descr(descr) {}
+		 Textarea * ta, std::string descr)
+		:
+		Callback_IDButton<Icon_Grid, uint32_t>
+			(parent, name, x, y, w, h, background_pictute_id,
+			 foreground_picture_id, callback_function,
+			 callback_argument_this, callback_argument_id, "", true, true),
+			 m_icongrid(parent), m_ta(ta), m_descr(descr)
+		{}
 
 private:
 	Icon_Grid * m_icongrid;
@@ -76,8 +78,9 @@ Icon_Grid::Icon_Grid
 	m_columns        (cols),
 	m_cell_width     (cellw),
 	m_cell_height    (cellh),
-	m_ta             (new Textarea
-	(this, 0, 0, 0, g_fh->get_fontheight(UI_FONT_SMALL) + 2))
+	m_ta
+		(new Textarea
+		 (this, 0, 0, 0, g_fh->get_fontheight(UI_FONT_SMALL) + 2))
 {}
 
 
@@ -103,7 +106,8 @@ int32_t Icon_Grid::add
 		m_ta->set_size(get_inner_w(), m_ta->get_h());
 		m_ta->set_pos(Point(0, m_cell_height));
 	} else {
-		set_desired_size(m_cell_width * m_columns, m_cell_height * rows + m_ta->get_h());
+		set_desired_size
+			(m_cell_width * m_columns, m_cell_height * rows + m_ta->get_h());
 		m_ta->set_size(get_inner_w(), m_ta->get_h());
 		m_ta->set_pos(Point(0, m_cell_height * rows));
 	}
@@ -112,10 +116,11 @@ int32_t Icon_Grid::add
 	uint32_t x = (idx % m_columns) * m_cell_width;
 	uint32_t y = (idx / m_columns) * m_cell_height;
 
-	new IconGridButton(this, name,
-		x, y, m_cell_width, m_cell_height,
-		g_gr->get_no_picture(), picid,
-		&Icon_Grid::clicked_button, *this, idx, m_ta, descr);
+	new IconGridButton
+		(this, name,
+		 x, y, m_cell_width, m_cell_height,
+		 g_gr->get_no_picture(), picid,
+		 &Icon_Grid::clicked_button, *this, idx, m_ta, descr);
 
 	return idx;
 }

@@ -142,7 +142,7 @@ void BaseListselect::add
 	m_entry_records.push_back(er);
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
-	
+
 	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 
@@ -352,7 +352,7 @@ void BaseListselect::draw(RenderTarget & odst)
 	// Render Caching is disable because it does not work good with the
 	// transparent background.
 	if (g_gr->caps().offscreen_rendering and false) {
-		if(!m_needredraw)
+		if (!m_needredraw)
 		{
 			odst.blit(Point(0, 0), m_cache_pic);
 			return;
@@ -373,7 +373,8 @@ void BaseListselect::draw(RenderTarget & odst)
 	//if (not g_gr->caps().offscreen_rendering)
 		dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 	//else
-	//	dst->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(20, 20, 20, 80));
+	//dst->fill_rect
+	//(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(20, 20, 20, 80));
 
 	while (idx < m_entry_records.size()) {
 		assert
@@ -389,21 +390,21 @@ void BaseListselect::draw(RenderTarget & odst)
 		// Highlight the current selected entry
 		if (idx == m_selection) {
 			Rect r = Rect(Point(1, y), get_eff_w() - 2, m_lineheight);
-			if( r.x < 0 ) {
-				r.w+=r.x; r.x=0;
+			if (r.x < 0) {
+				r.w += r.x; r.x = 0;
 			}
-			if( r.y < 0 ) {
-				r.h+=r.y; r.y=0;
+			if (r.y < 0) {
+				r.h += r.y; r.y = 0;
 			}
 			assert(2 <= get_eff_w());
 			// Make the area a bit more white and more transparent
-			if( r.w > 0 and r.h > 0 )
+			if (r.w > 0 and r.h > 0)
 			{
 				//if (g_gr->caps().offscreen_rendering and false)
 				//dst->fill_rect(r, RGBAColor(100, 100, 100, 80));
 				//else
 					dst->brighten_rect
-						(r, -ms_darken_value*2);
+						(r, - ms_darken_value * 2);
 						//(Rect(Point(1, y), get_eff_w() - 2,
 						// m_lineheight), -ms_darken_value*2);
 			}
@@ -451,7 +452,7 @@ void BaseListselect::draw(RenderTarget & odst)
 		y += lineheight;
 		++idx;
 	}
-	
+
 	if (g_gr->caps().offscreen_rendering and false)
 		odst.blit(Point(0, 0), m_cache_pic);
 	m_needredraw = false;

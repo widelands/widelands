@@ -232,7 +232,7 @@ int32_t WL_Map_Loader::load_map_complete
 	bool have_oldwares = m_fs.FileExists("binary/ware");
 	if (have_oldwares) {
 		log("Reading Map Ware Data ... ");
-		{Map_Ware_Data_Packet           p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+		{Map_Ware_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 		log("done!\n ");
 	}
 
@@ -252,7 +252,7 @@ int32_t WL_Map_Loader::load_map_complete
 
 	if (have_oldwares) {
 		log("Reading Waredata Data ... ");
-		{Map_Waredata_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+		{Map_Waredata_Data_Packet    p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 		log("done!\n ");
 	}
 

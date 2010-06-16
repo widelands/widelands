@@ -279,9 +279,10 @@ void Panel::set_pos(const Point n) {
 }
 
 /**
- * Set \p w and \p h to the desired width and height of this panel, respectively.
+ * Set \p w and \p h to the desired
+ * width and height of this panel, respectively.
  */
-void Panel::get_desired_size(uint32_t& w, uint32_t& h) const
+void Panel::get_desired_size(uint32_t & w, uint32_t & h) const
 {
 	w = _desired_w;
 	h = _desired_h;
@@ -340,7 +341,7 @@ bool Panel::get_layout_toplevel() const
  * and translate it into the interior coordinate system of the parent
  * and return the result.
  */
-Point Panel::to_parent(const Point& pt) const
+Point Panel::to_parent(const Point & pt) const
 {
 	if (!_parent)
 		return pt;
@@ -427,7 +428,7 @@ void Panel::move_to_top()
  */
 void Panel::set_visible(bool const on)
 {
-	if(((_flags & pf_visible) >1) == on)
+	if (((_flags & pf_visible) > 1) == on)
 		return;
 
 	_flags &= ~pf_visible;

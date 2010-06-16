@@ -1123,8 +1123,9 @@ void ProductionProgram::ActMine::informPlayer
 		(game,
 		 "mine",
 		 _("Mine empty"),
-		 _("This mines has run empty. You should consider to expand or "
-		   "destruct it."),
+		 _
+		 ("This mines has run empty. You should consider to expand or "
+		  "destruct it."),
 		 60 * 60 * 1000,
 		 0);
 }

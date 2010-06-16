@@ -612,10 +612,11 @@ SDL_Surface * Graphic::resize
 	else
 	{
 		SurfaceSDL & origsdl = dynamic_cast<SurfaceSDL &>(orig);
-		return zoomSurface
-			(origsdl.get_sdl_surface(),
-			 double(w) / orig.get_w(), double(h) / orig.get_h(),
-			 1);
+		return
+			zoomSurface
+				(origsdl.get_sdl_surface(),
+				 double(w) / orig.get_w(), double(h) / orig.get_h(),
+				 1);
 	}
 }
 
@@ -839,11 +840,13 @@ Surface & Graphic::create_surface(Surface & surf, bool alpha)
 	if (sdlsurf)
 	{
 		if (alpha)
-			return *new SurfaceSDL
-				(*SDL_DisplayFormatAlpha(sdlsurf->get_sdl_surface()));
+			return
+				*new SurfaceSDL
+					(*SDL_DisplayFormatAlpha(sdlsurf->get_sdl_surface()));
 		else
-			return *new SurfaceSDL
-				(*SDL_DisplayFormat(sdlsurf->get_sdl_surface()));
+			return
+				*new SurfaceSDL
+					(*SDL_DisplayFormat(sdlsurf->get_sdl_surface()));
 	}
 	else
 	{

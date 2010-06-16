@@ -38,12 +38,18 @@ namespace UI {
  * class Tab
  * =================
  */
-Tab::Tab(Tab_Panel * parent, uint32_t id, std::string name, PictureID gpicid,
-			std::string gtooltip, Panel * gpanel) :
-	NamedPanel(parent, name, id * TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH,
-			TP_BUTTON_HEIGHT, gtooltip),
-	m_parent(parent), m_id(id), picid(gpicid),
-		tooltip(gtooltip), panel(gpanel)
+Tab::Tab
+	(Tab_Panel * parent, uint32_t id, std::string name, PictureID gpicid,
+	 std::string gtooltip, Panel * gpanel)
+	:
+	NamedPanel
+		(parent, name, id * TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH,
+		 TP_BUTTON_HEIGHT, gtooltip),
+	m_parent(parent),
+	m_id(id),
+	picid(gpicid),
+	tooltip(gtooltip),
+	panel(gpanel)
 {
 }
 
@@ -117,9 +123,9 @@ void Tab_Panel::update_desired_size()
 
 	set_desired_size(w, h);
 
-	// This is not redundant, because even if all this doesn't change our desired size,
-	// we were typically called because of a child window that changed, and we need
-	// to relayout that.
+	// This is not redundant, because even if all this doesn't change our
+	// desired size, we were typically called because of a child window that
+	// changed, and we need to relayout that.
 	layout();
 }
 
