@@ -68,7 +68,8 @@ Economy::Economy(Player & player) :
 		m_worker_target_quantities[i.value()] = tq;
 	}
 
-	m_router = new Router(boost::bind(&Economy::_reset_all_pathfinding_cycles, this));
+	m_router =
+		 new Router(boost::bind(&Economy::_reset_all_pathfinding_cycles, this));
 }
 
 Economy::~Economy()
@@ -186,12 +187,14 @@ bool Economy::find_route
 /**
  * Find the warehouse closest to the given starting flag.
  *
- * If the search was successful and \p route is non-null, a route is also computed.
+ * If the search was successful and \p route is non-null,
+ * a route is also computed.
  *
  * \param start starting flag
  * \param is_ware whether to path-find as if the path were for a ware
  * \param route if non-null, fill in a route to the warehouse
- * \param cost_cutoff if positive, find paths of at most that length (in milliseconds)
+ * \param cost_cutoff if positive, find paths of at most
+ * that length (in milliseconds)
  */
 Warehouse * Economy::find_closest_warehouse
 	(Flag & start, bool is_ware, Route * route, uint32_t cost_cutoff,
@@ -215,7 +218,9 @@ Warehouse * Economy::find_closest_warehouse
 		RoutingNode * current = open.top();
 		open.pop(current);
 
-		if (cost_cutoff && current->mpf_realcost > static_cast<int32_t>(cost_cutoff))
+		if
+			(cost_cutoff && current->mpf_realcost >
+			 static_cast<int32_t>(cost_cutoff))
 			return 0;
 
 		Flag & flag = current->base_flag();
@@ -243,8 +248,11 @@ Warehouse * Economy::find_closest_warehouse
 			RoutingNode & neighbour = *neighbours[i].get_neighbour();
 			int32_t cost;
 
-			// We have already found the best path to this neighbour, no need to visit it again.
-			if (neighbour.mpf_cycle == mpf_cycle && !neighbour.cookie().is_active())
+			// We have already found the best path to this neighbour,
+			// no need to visit it again.
+			if
+				(neighbour.mpf_cycle == mpf_cycle &&
+				 !neighbour.cookie().is_active())
 				continue;
 
 			cost = current->mpf_realcost + neighbours[i].get_cost();
@@ -321,7 +329,8 @@ void Economy::_remove_flag(Flag & flag)
 }
 
 /**
- * Callback for the incredibly rare case that the \ref Router pathfinding cycle wraps around.
+ * Callback for the incredibly rare case that the \ref Router pathfinding
+ * cycle wraps around.
  */
 void Economy::_reset_all_pathfinding_cycles()
 {
@@ -875,8 +884,8 @@ void Economy::_balance_requestsupply(Game & game)
 }
 
 /**
- * Check whether there is a supply for the given request. If the request is a worker
- * request without supply, attempt to create a new worker in a warehouse.
+ * Check whether there is a supply for the given request. If the request is a
+ * worker request without supply, attempt to create a new worker in a warehouse.
  */
 void Economy::_create_requested_worker(Game & game, Ware_Index index)
 {
@@ -888,8 +897,8 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 		if (req.get_type() != Request::WORKER || req.get_index() != index)
 			continue;
 
-		// need to check for each request separately, because esp. soldier requests
-		// have different specific requirements
+		// need to check for each request separately, because esp. soldier
+		// requests have different specific requirements
 		if (m_supplies.have_supplies(game, req))
 			continue;
 
@@ -922,10 +931,11 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 				return;
 		}
 
-		std::vector<uint32_t> wh_available = wh->calc_available_for_worker(game, index);
+		std::vector<uint32_t> wh_available =
+			wh->calc_available_for_worker(game, index);
 		assert(wh_available.size() == total_available.size());
 
-		for(uint32_t idx = 0; idx < total_available.size(); ++idx)
+		for (uint32_t idx = 0; idx < total_available.size(); ++idx)
 			total_available[idx] += wh_available[idx];
 	}
 
@@ -962,7 +972,8 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 
 		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
 			Warehouse * wh = m_warehouses[n_wh];
-			uint32_t supply = wh->calc_available_for_worker(game, index)[scarcest_idx];
+			uint32_t supply =
+				wh->calc_available_for_worker(game, index)[scarcest_idx];
 
 			total_planned -= wh->get_planned_workers(game, index);
 			uint32_t plan = std::min(supply, plan_goal - total_planned);
@@ -982,7 +993,10 @@ void Economy::_create_requested_workers(Game & game)
 		return;
 
 	Tribe_Descr const & tribe = owner().tribe();
-	for (Ware_Index index = Ware_Index::First(); index < tribe.get_nrworkers(); ++index) {
+	for
+		(Ware_Index index = Ware_Index::First();
+		 index < tribe.get_nrworkers(); ++index)
+	{
 		if (!owner().is_worker_type_allowed(index))
 			continue;
 		if (!tribe.get_worker_descr(index)->is_buildable())
@@ -995,7 +1009,9 @@ void Economy::_create_requested_workers(Game & game)
 /**
  * Helper function for \ref _handle_active_supplies
  */
-static bool accept_warehouse_if_policy(Warehouse & wh, bool isworker, Ware_Index ware, Warehouse::StockPolicy policy)
+static bool accept_warehouse_if_policy
+	(Warehouse & wh, bool isworker,
+	 Ware_Index ware, Warehouse::StockPolicy policy)
 {
 	return wh.get_stock_policy(isworker, ware) == policy;
 }
@@ -1009,10 +1025,10 @@ void Economy::_handle_active_supplies(Game & game)
 	if (!warehouses().size())
 		return;
 
-	typedef std::vector<std::pair<Supply*, Warehouse*> > Assignments;
+	typedef std::vector<std::pair<Supply *, Warehouse *> > Assignments;
 	Assignments assignments;
 
-	for(uint32_t idx = 0; idx < m_supplies.get_nrsupplies(); ++idx) {
+	for (uint32_t idx = 0; idx < m_supplies.get_nrsupplies(); ++idx) {
 		Supply & supply = m_supplies[idx];
 		if (supply.has_storage())
 			continue;
@@ -1048,7 +1064,9 @@ void Economy::_handle_active_supplies(Game & game)
 				 haveprefer ? Warehouse::SP_Prefer : Warehouse::SP_Normal));
 
 		if (!wh) {
-			log("Warning: Economy::_handle_active_supplies didn't find warehouse\n");
+			log
+				("Warning: Economy::_handle_active_supplies "
+				 "didn't find warehouse\n");
 			return;
 		}
 

@@ -34,7 +34,9 @@ static char const * pic_down_train = "pics/menu_down_train.png";
  * via \ref SoldierControl
  */
 struct SoldierCapacityControl : UI::Box {
-	SoldierCapacityControl(UI::Panel* parent, Interactive_GameBase& igb, Widelands::Building& building);
+	SoldierCapacityControl
+		(UI::Panel * parent, Interactive_GameBase & igb,
+		 Widelands::Building & building);
 
 protected:
 	virtual void think();
@@ -53,7 +55,8 @@ private:
 };
 
 SoldierCapacityControl::SoldierCapacityControl
-	(UI::Panel* parent, Interactive_GameBase& igb, Widelands::Building& building)
+	(UI::Panel * parent, Interactive_GameBase & igb,
+	 Widelands::Building & building)
 :
 Box(parent, 0, 0, Horizontal),
 m_igb(igb),
@@ -86,7 +89,7 @@ m_value(this, "", UI::Align_Center)
 
 void SoldierCapacityControl::think()
 {
-	SoldierControl * soldiers = dynamic_cast<SoldierControl*>(&m_building);
+	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&m_building);
 	uint32_t const capacity = soldiers->soldierCapacity();
 	uint32_t const min_capacity = soldiers->minSoldierCapacity();
 	uint32_t const max_capacity = soldiers->maxSoldierCapacity();
@@ -115,8 +118,9 @@ void SoldierCapacityControl::click_increase()
 	change_soldier_capacity(1);
 }
 
-UI::Panel* create_soldier_capacity_control
-	(UI::Panel& parent, Interactive_GameBase& igb, Widelands::Building& building)
+UI::Panel * create_soldier_capacity_control
+	(UI::Panel & parent, Interactive_GameBase & igb,
+	 Widelands::Building & building)
 {
 	return new SoldierCapacityControl(&parent, igb, building);
 }
