@@ -27,10 +27,10 @@ fps=10
 dirpics=walk_!!_??.png
 hotspot=12 23
 playercolor=true
-fps=10
+fps=20
 
 [walkload]
 dirpics=walk_!!_??.png
 hotspot=12 23
 playercolor=true
-fps=10
+fps=20
