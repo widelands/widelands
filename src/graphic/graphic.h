@@ -24,8 +24,6 @@
 #include "picture.h"
 #include "picture_id.h"
 #include "rect.h"
-//#include "surface.h"
-//#include "texture.h"
 
 #include <png.h>
 
@@ -54,27 +52,44 @@ struct Texture;
 struct SDL_Surface;
 struct SDL_Rect;
 
-// This table is used by create_grayed_out_pic() 
-// to map colors to grayscle. It is initialized in Graphic::Graphic()
+//@{
+/// This table is used by create_grayed_out_pic() 
+/// to map colors to grayscle. It is initialized in Graphic::Graphic()
 extern uint32_t luminance_table_r[0x100];
 extern uint32_t luminance_table_g[0x100];
 extern uint32_t luminance_table_b[0x100];
+//@}
 
+/// Stores the capabilities of opengl
 struct GLCaps
 {
+	/// The OpenGL major version
 	int major_version;
+	/// The OpenGL minor version
 	int minor_version;
+	/// The maximum texture size
 	int tex_max_size;
+	/// If true sizes of texture must be a power of two
 	bool tex_power_of_two;
+	/// How many bits the stencil buffer support
 	int stencil_buffer_bits;
+	/// How many Aux Buffers the opengl context support
 	int aux_buffers;
 };
 
+/**
+ * A structure to store the capabilities of the current rendere. This is set
+ * during init() and can be retrieved by g_gr->get_caps()
+ */
 struct GraphicCaps
 {
+	/// The renderer allows rendering (blit, draw_line) to offscreen surfaces
 	bool offscreen_rendering;
+	/// It is possible to resize surfaces with get_resized_picture()
 	bool resize_surfaces;
+	/// It is possible to resize surfaces while bliting
 	bool blit_resized;
+	/// The capabilities of the opengl hardware and drive
 	GLCaps gl;
 };
 
@@ -175,19 +190,30 @@ struct Graphic {
 		{ return m_caps; }
 
 protected:
-	/// Static function for png writing
+	// Static helper function for png writing
 	static void m_png_write_function
 		(png_structp png_ptr,
 		 png_bytep data,
 		 png_size_t length);
 	static void m_png_flush_function (png_structp png_ptr);
 
+	/// This is the main screen Surface.
+	/// A RenderTarget for this can be retrieved with get_render_target()
 	Surface * m_screen;
+	/// This saves a copy of the screen SDL_Surface. This is needed for
+	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
+	/// manipulation the screen context.
 	SDL_Surface * m_sdl_screen;
+	/// A RenderTarget for m_screen. This is initialized during init()
 	RenderTarget * m_rendertarget;
+	/// keeps track which screen regions needs to be redrawn 
+	/// during the next update(). Only used for SDL rendering.
 	SDL_Rect m_update_rects[MAX_RECTS];
+	/// saves how many screen regions need updating. @see m_update_rects
 	int32_t m_nr_update_rects;
+	/// This marks the komplete screen for updating.
 	bool m_update_fullscreen;
+	/// stores which features the current renderer has
 	GraphicCaps m_caps;
 
 	/// hash of filename/picture ID pairs

@@ -525,7 +525,7 @@ PictureID & Graphic::get_no_picture() const {
 /**
  * Produces a resized version of the specified picture
  *
- * This might not work with the rendere. Check g_gr->caps().resize_surfaces
+ * This might not work with the renderer. Check g_gr->caps().resize_surfaces
  * to be sure the resizing is possible.
  * Might return same id if dimensions are the same
  */
@@ -534,8 +534,6 @@ PictureID Graphic::get_resized_picture
 	 uint32_t const w, uint32_t const h,
 	 ResizeMode const mode)
 {
-	//log("Graphic::get_resized_picture()\n");
-
 	// Resizing is not possible with opengl surfaces
 	if (g_opengl)
 		g_gr->get_no_picture();
@@ -595,7 +593,9 @@ PictureID Graphic::get_resized_picture
 }
 
 /**
- * Produces a resized version of the specified picture
+ * Produces a resized version of the specified picture. This works only for
+ * SDL rendering. Check g_gr->caps().resize_surfaces before calling this
+ * function.
  *
  * \param index position of the source picture in the stack
  * \param w target width
@@ -634,6 +634,12 @@ void Graphic::get_picture_size
 	h = bmp.get_h();
 }
 
+/**
+ * Saves a surface to a png. This can be a file or part of a stream.
+ *
+ * @param surf The Surface to save
+ * @param sw a StreamWrite where the png is written to
+ */
 void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 {
 	// Save a png
@@ -692,9 +698,7 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 		png_bytep rowb = NULL;
 		png_bytep rowp = NULL;
 
-		//SDL_PixelFormat & format = const_cast<SDL_PixelFormat &>(surf.format());
-
-	//Write each row
+		//Write each row
 		SDL_PixelFormat * fmt;
 		upcast(SurfaceSDL, sdlsurf, &surf);
 #ifdef USE_OPENGL
@@ -706,7 +710,6 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 			rowb = (new png_byte[row_size]);
 			if (!rowb)
 				throw wexception("Out of memory.");
-			//rowb = new png_byte[row_size];
 		}
 #ifdef USE_OPENGL
 		else if (oglsurf) {
@@ -753,6 +756,14 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 
+/**
+* Saves a PictureID to a png. This can be a file or part of a stream. This
+* function retrieves the Surface for the PictureID and calls
+* save_png(Surface, StreamWrite)
+*
+* @param surf The Surface to save
+* @param sw a StreamWrite where the png is written to
+*/
 void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
 {
 	Surface & surf = const_cast<Surface &>(*get_picture_surface(pic_index));
@@ -760,11 +771,16 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
 }
 
 /**
- * Create an offscreen surface that can be used both as target and as source for
- * rendering operations. The surface is put into a normal slot in the picture
- * array so the surface can be used in normal blit() operations.
- * A RenderTarget for the surface can be obtained using get_surface_renderer().
+ * Create a offscreen surface of specified size and return as PictureID.
+ * The surface is put into a normal slot in the picture array so the surface
+ * can be used in normal blit() operations. A RenderTarget for the surface can
+ * be obtained using get_surface_renderer().
  * \note Surfaces do not belong to a module and must be freed explicitly.
+ *
+ * @param w width of the new surface
+ * @param h height of the new surface
+ * @param alpha if true the surface is created with alpha channel
+ * @return PictureID of the new created offscreen surface
 */
 PictureID Graphic::create_picture_surface(int32_t w, int32_t h, bool alpha)
 {
@@ -783,13 +799,17 @@ PictureID Graphic::create_picture_surface(int32_t w, int32_t h, bool alpha)
 	return id;
 }
 
-/* Create a Surface from a SDL_Surface. This creates a Surfac for OpenGL or
+/**
+ * Create a Surface from a SDL_Surface. This creates a Surface for OpenGL or
  * Software rendering depending on the actual setting. The SDL_Surface must
  * not be used after calling this. Surface takes care of the SDL_Surface.
+ *
+ * @param surf a SDL_Surface from which the Surface will be created
+ * @param alpha if true the surface is created with alpha channel
+ * @return the new Surface created from the SDL_Surface
  */
 Surface & Graphic::create_surface(SDL_Surface & surf, bool alpha)
 {
-	//log("Graphic::create_surface(SDL_Surface&)\n");
 	if (g_opengl)
 	{
 #ifdef USE_OPENGL
@@ -806,22 +826,27 @@ Surface & Graphic::create_surface(SDL_Surface & surf, bool alpha)
 	}
 }
 
+/**
+* Create a Surface from an other Surface. This makes a copy of a Surface.
+*
+* @param surf the surface which will be copied to the new surface
+* @param alpha if true the surface is created with alpha channel
+* @return the new Surface
+*/
 Surface & Graphic::create_surface(Surface & surf, bool alpha)
 {
-	//log("Graphic::create_surface(Surface&)\n");
 	upcast(SurfaceSDL, sdlsurf, &surf);
 	if (sdlsurf)
 	{
 		if (alpha)
-		{
 			return *new SurfaceSDL
 				(*SDL_DisplayFormatAlpha(sdlsurf->get_sdl_surface()));
-		} else
-		{
+		else
 			return *new SurfaceSDL
 				(*SDL_DisplayFormat(sdlsurf->get_sdl_surface()));
-		}
-	} else {
+	}
+	else
+	{
 		Surface & tsurf = create_surface(surf.get_w(), surf.get_h());
 
 		surf.lock();
@@ -838,13 +863,16 @@ Surface & Graphic::create_surface(Surface & surf, bool alpha)
 	}
 }
 
-/* T
- *
- *
- */
+/**
+* Create a empty offscreen surface of specified size.
+*
+* @param w width of the new surface
+* @param h height of the new surface
+* @param alpha if true the surface is created with alpha channel
+* @return the new created surface
+*/
 Surface & Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 {
-	//log(" Graphic::create_surface(%d, %d)\n", w, h);
 	if (g_opengl)
 	{
 #ifdef USE_OPENGL
@@ -869,9 +897,10 @@ Surface & Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 /**
  * Free the given surface.
  * Unlike normal pictures, surfaces are not freed by flush().
+ *
+ * @param picid the PictureID ot to be freed
 */
 void Graphic::free_picture_surface(const PictureID & picid) {
-	//assert(picid < m_pictures.size());
 	if
 		(picid->module != PicMod_Font &&
 		 picid->module != PicSurface)
@@ -898,15 +927,7 @@ void Graphic::free_picture_surface(const PictureID & picid) {
 		delete picid->fname;
 		picid->fname = 0;
 	}
-	//Picture & pic = m_pictures[picid];
 
-	//delete picid->rendertarget;
-	//pic.rendertarget = 0;
-	//delete picid->fname;
-	//pic.fname = 0;
-	//delete pic->surface;
-	//pic.surface = 0;
-	//pic.module = 0;
 	container_iterate(Picturemap, m_picturemap[picid->module], it)
 		if (it.current->second == picid) {
 			m_picturemap[picid->module].erase(it.current);
@@ -914,7 +935,12 @@ void Graphic::free_picture_surface(const PictureID & picid) {
 		}
 }
 
-
+/**
+* create a grayed version.
+*
+* @param picid the PictureID ot to grayed out
+* @return the gray version of the picture
+*/
 PictureID Graphic::create_grayed_out_pic(const PictureID & picid) {
 	if (picid != get_no_picture()) {
 		Surface & s = create_surface(*get_picture_surface(picid), true);
@@ -1080,7 +1106,7 @@ AnimationGfx::Index Graphic::nr_frames(const uint32_t anim) const
 }
 
 /**
- * \return the size of the animation at the given time.
+ * writes the size of an animation frame to w and h
 */
 void Graphic::get_animation_size
 	(uint32_t const anim, uint32_t const time, uint32_t & w, uint32_t & h) const
@@ -1101,7 +1127,7 @@ void Graphic::get_animation_size
 }
 
 /**
- * Save a screenshot in the given file.
+ * Save a screenshot to the given file.
 */
 void Graphic::screenshot(const char & fname) const
 {
@@ -1111,18 +1137,22 @@ void Graphic::screenshot(const char & fname) const
 	delete sw;
 }
 
-
 /**
- * Save and load pictures
+ * A helper function for save_png.
+ * Writes the compressed data to the StreamWrite.
+ * @see save_png()
  */
 void Graphic::m_png_write_function
 	(png_structp png_ptr, png_bytep data, png_size_t length)
 {
 	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Data(data, length);
 }
+
 /**
- * Flush function to avoid crashes with default libpng flush function
- */
+* A helper function for save_png.
+* Flush function to avoid crashes with default libpng flush function
+* @see save_png()
+*/
 void Graphic::m_png_flush_function
 	(png_structp png_ptr)
 {
@@ -1131,13 +1161,11 @@ void Graphic::m_png_flush_function
 
 
 /**
- * Returns the bitmap that belongs to the given picture ID.
- * May return 0 if the given picture does not exist.
+* Returns the bitmap that belongs to the given picture ID.
+* May return 0 if the given picture does not exist.
 */
 Surface * Graphic::get_picture_surface(const PictureID & id)
 {
-	//assert(id != get_no_picture());
-
 	return id->surface;
 }
 
@@ -1147,7 +1175,10 @@ const Surface * Graphic::get_picture_surface(const PictureID & id) const
 }
 
 /**
- * Retrieve the animation graphics
+ * Retrieve the animation with the given number.
+ *
+ * @param anim the number of the animation
+ * @return the AnimationGfs object of the given number
 */
 AnimationGfx * Graphic::get_animation(uint32_t const anim) const
 {
@@ -1158,12 +1189,12 @@ AnimationGfx * Graphic::get_animation(uint32_t const anim) const
 }
 
 /**
+ * Retrieve the map texture with the given number
  * \return the actual texture data associated with the given ID.
 */
 Texture * Graphic::get_maptexture_data(uint32_t id)
 {
 	--id; // ID 1 is at m_maptextures[0]
-	//log("Graphic::get_maptexture_data(%d) of %d\n", id, m_maptextures.size());
 	if (id < m_maptextures.size())
 		return m_maptextures[id];
 	else
@@ -1171,7 +1202,9 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 }
 
 /**
- * \return The road textures
+ * Retrives the texture of the road type. This loads the road texture
+ * if not done yet.
+ * \return The road texture
 */
 Surface * Graphic::get_road_texture(int32_t const roadtex)
 {
