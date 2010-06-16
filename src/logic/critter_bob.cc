@@ -343,7 +343,8 @@ const Bob::Task * Critter_Bob::Loader::get_task(const std::string & name)
 	return Bob::Loader::get_task(name);
 }
 
-const BobProgramBase * Critter_Bob::Loader::get_program(const std::string & name)
+const BobProgramBase * Critter_Bob::Loader::get_program
+	(const std::string & name)
 {
 	Critter_Bob & critter = get<Critter_Bob>();
 	return critter.descr().get_program(name);

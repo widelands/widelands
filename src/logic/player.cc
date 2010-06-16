@@ -110,7 +110,8 @@ void Player::create_default_infrastructure() {
 			LuaCoroutine * cr = game.lua().run_script
 				(*g_fs, "tribes/" + tribe().name() +
 				 "/scripting/" +  initialization.name + ".lua",
-				 "tribe_" + tribe().name())->get_coroutine("func");
+				 "tribe_" + tribe().name())
+				 ->get_coroutine("func");
 			cr->push_arg(this);
 			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
 		} catch (Tribe_Descr::Nonexistent) {
@@ -154,9 +155,11 @@ void Player::set_team_number(TeamNumber team)
  * Returns whether this player and the given other player can attack
  * each other.
  */
-bool Player::is_hostile(const Player& other) const
+bool Player::is_hostile(const Player & other) const
 {
-	return &other != this && (!m_team_number || m_team_number != other.m_team_number);
+	return
+		&other != this &&
+		(!m_team_number || m_team_number != other.m_team_number);
 }
 
 Message_Id Player::add_message
@@ -465,7 +468,8 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 			if (Building * const flagbuilding = flag->get_building())
 				if
 					(!
-					(flagbuilding->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+					 (flagbuilding->get_playercaps() &
+					  (1 << Building::PCap_Bulldoze)))
 				{
 					log
 						("Player trying to rip flag (%u) with undestroyable building "
@@ -476,13 +480,17 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 
 			OPtr<Flag> flagcopy = flag;
 			if (recurse) {
-				for (uint8_t primary_road_id = 6; primary_road_id; --primary_road_id) {
+				for
+					(uint8_t primary_road_id = 6; primary_road_id; --primary_road_id)
+				{
 					// Recursive bulldoze calls may cause flag to disappear
 					if (!flagcopy.get(egbase()))
 						return;
 
-					if (Road * const primary_road = flag->get_road(primary_road_id)) {
-						Flag & primary_start = primary_road->get_flag(Road::FlagStart);
+					if (Road * const primary_road = flag->get_road(primary_road_id))
+					{
+						Flag & primary_start =
+							primary_road->get_flag(Road::FlagStart);
 						Flag & primary_other =
 							flag == &primary_start ?
 							primary_road->get_flag(Road::FlagEnd) : primary_start;

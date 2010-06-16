@@ -434,7 +434,8 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 			}
 
 			if (list.size()) {
-				set_program_objvar(game, state, list[game.logic_rand() % list.size()].object);
+				set_program_objvar
+					(game, state, list[game.logic_rand() % list.size()].object);
 				break;
 			}
 		}
@@ -458,7 +459,8 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 					(area, &list, cstep, FindBobAttribute(action.iparam2));
 
 			if (list.size()) {
-				set_program_objvar(game, state, list[game.logic_rand() % list.size()]);
+				set_program_objvar
+					(game, state, list[game.logic_rand() % list.size()]);
 				break;
 			}
 		}
@@ -958,7 +960,9 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
 		molog("* m_carried_item->get_economy() (): %p\n", ware->get_economy());
 	}
 
-	molog("m_current_exp: %i / %i\n", m_current_exp, descr().get_level_experience());
+	molog
+		("m_current_exp: %i / %i\n",
+		 m_current_exp, descr().get_level_experience());
 
 	molog("m_supply: %p\n", m_supply);
 }
@@ -1166,7 +1170,8 @@ void Worker::create_needed_experience(Game & game)
  */
 Ware_Index Worker::gain_experience(Game & game) {
 	return
-		descr().get_level_experience() == -1 || ++m_current_exp < descr().get_level_experience() ?
+		descr().get_level_experience() == -1 ||
+		++m_current_exp < descr().get_level_experience() ?
 		Ware_Index::Null() : level(game);
 }
 
@@ -1204,7 +1209,9 @@ Ware_Index Worker::level(Game & game) {
  */
 void Worker::init_auto_task(Game & game) {
 	if (PlayerImmovable * location = get_location(game)) {
-		if (get_economy()->warehouses().size() || location->get_type() == BUILDING)
+		if
+			(get_economy()->warehouses().size() ||
+			 location->get_type() == BUILDING)
 			return start_task_gowarehouse(game);
 
 		set_location(0);
@@ -1792,7 +1799,9 @@ void Worker::gowarehouse_update(Game & game, State & state)
 
 	// Always leave buildings in an orderly manner,
 	// even when no warehouses are left to return to
-	if (location->get_type() == BUILDING && get_position() == static_cast<Building*>(location)->get_position())
+	if
+		(location->get_type() == BUILDING &&
+		 get_position() == static_cast<Building *>(location)->get_position())
 		return start_task_leavebuilding(game, true);
 
 	if (!get_economy()->warehouses().size()) {
@@ -2274,7 +2283,7 @@ void Worker::fugitive_update(Game & game, State & state)
 	// but with some luck we see flags that are even further away.
 	std::vector<ImmovableFound> flags;
 	int32_t vision = vision_range();
-	int32_t maxdist = 4*vision;
+	int32_t maxdist = 4 * vision;
 	if
 		(map.find_immovables
 		 	(Area<FCoords>(map.get_fcoords(get_position()), maxdist),
@@ -2696,7 +2705,7 @@ Worker::Loader::Loader()
 {
 }
 
-void Worker::Loader::load(FileRead& fr)
+void Worker::Loader::load(FileRead & fr)
 {
 	Bob::Loader::load(fr);
 
@@ -2704,14 +2713,15 @@ void Worker::Loader::load(FileRead& fr)
 	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
 		throw game_data_error("unknown/unhandled version %u", version);
 
-	Worker& worker = get<Worker>();
+	Worker & worker = get<Worker>();
 	m_location = fr.Unsigned32();
 	m_carried_item = fr.Unsigned32();
 	worker.m_current_exp = fr.Signed32();
 
 	if (version >= 2) {
 		if (fr.Unsigned8()) {
-			worker.m_transfer = new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), worker);
+			worker.m_transfer =
+				new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), worker);
 			worker.m_transfer->read(fr, m_transfer);
 		}
 	}
@@ -2721,7 +2731,7 @@ void Worker::Loader::load_pointers()
 {
 	Bob::Loader::load_pointers();
 
-	Worker& worker = get<Worker>();
+	Worker & worker = get<Worker>();
 
 	if (m_location)
 		worker.set_location(&mol().get<PlayerImmovable>(m_location));
@@ -2736,8 +2746,9 @@ void Worker::Loader::load_finish()
 	Bob::Loader::load_finish();
 
 	// it's not entirely clear whether this is the best place to put this code,
-	// keep an open mind once player immovables are also handled via the new save code
-	Worker& worker = get<Worker>();
+	// keep an open mind once player immovables are also handled via the new
+	// save code
+	Worker & worker = get<Worker>();
 	Economy * economy = 0;
 	if (PlayerImmovable * const location = worker.m_location.get(egbase()))
 		economy = location->get_economy();
@@ -2746,7 +2757,7 @@ void Worker::Loader::load_finish()
 		carried_item->set_economy(economy);
 }
 
-const Bob::Task* Worker::Loader::get_task(const std::string& name)
+const Bob::Task * Worker::Loader::get_task(const std::string & name)
 {
 	if (name == "program") return &taskProgram;
 	if (name == "transfer") return &taskTransfer;
@@ -2764,13 +2775,13 @@ const Bob::Task* Worker::Loader::get_task(const std::string& name)
 	return Bob::Loader::get_task(name);
 }
 
-const BobProgramBase* Worker::Loader::get_program(const std::string& name)
+const BobProgramBase * Worker::Loader::get_program(const std::string & name)
 {
-	Worker& worker = get<Worker>();
+	Worker & worker = get<Worker>();
 	return worker.descr().get_program(name);
 }
 
-Worker::Loader* Worker::create_loader()
+Worker::Loader * Worker::create_loader()
 {
 	return new Loader;
 }
@@ -2781,7 +2792,8 @@ Worker::Loader* Worker::create_loader()
  * Derived classes must override \ref create_loader to make sure
  * the appropriate actual load functions are called.
  */
-Map_Object::Loader* Worker::load(Editor_Game_Base& egbase, Map_Map_Object_Loader& mol, FileRead& fr)
+Map_Object::Loader * Worker::load
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	try {
 		// header has already been read by caller
@@ -2794,9 +2806,10 @@ Map_Object::Loader* Worker::load(Editor_Game_Base& egbase, Map_Map_Object_Loader
 		if (!tribe)
 			throw game_data_error("unknown tribe '%s'", tribename.c_str());
 
-		const Worker_Descr * descr = tribe->get_worker_descr(tribe->safe_worker_index(name));
+		const Worker_Descr * descr =
+			tribe->get_worker_descr(tribe->safe_worker_index(name));
 
-		Worker * worker = static_cast<Worker*>(&descr->create_object());
+		Worker * worker = static_cast<Worker *>(&descr->create_object());
 		std::auto_ptr<Loader> loader(worker->create_loader());
 		loader->init(egbase, mol, *worker);
 		loader->load(fr);
@@ -2811,7 +2824,8 @@ Map_Object::Loader* Worker::load(Editor_Game_Base& egbase, Map_Map_Object_Loader
  *
  * \warning Do not override this function, override \ref do_save instead.
  */
-void Worker::save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+void Worker::save
+	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Worker);
 	fw.CString(tribe().name());
@@ -2827,7 +2841,8 @@ void Worker::save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite
  *
  * Override this function in derived classes.
  */
-void Worker::do_save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+void Worker::do_save
+	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	Bob::save(egbase, mos, fw);
 

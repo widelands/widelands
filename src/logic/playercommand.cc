@@ -1396,7 +1396,8 @@ void Cmd_MessageSetStatusArchived::serialize (StreamWrite & ser)
 /*** struct Cmd_SetStockPolicy ***/
 Cmd_SetStockPolicy::Cmd_SetStockPolicy
 	(int32_t time, Player_Number p,
-	 Warehouse& wh, bool isworker, Ware_Index ware, Warehouse::StockPolicy policy)
+	 Warehouse & wh, bool isworker, Ware_Index ware,
+	 Warehouse::StockPolicy policy)
 : PlayerCommand(time, p)
 {
 	m_warehouse = wh.serial();
@@ -1415,11 +1416,12 @@ uint8_t Cmd_SetStockPolicy::id() const
 	return QUEUE_CMD_SETSTOCKPOLICY;
 }
 
-void Cmd_SetStockPolicy::execute(Game& game)
+void Cmd_SetStockPolicy::execute(Game & game)
 {
 	// Sanitize data that could have come from the network
 	if (Player * plr = game.get_player(sender())) {
-		if (upcast(Warehouse, warehouse, game.objects().get_object(m_warehouse))) {
+		if (upcast(Warehouse, warehouse, game.objects().get_object(m_warehouse)))
+		{
 			if (&warehouse->owner() != plr) {
 				log
 					("Cmd_SetStockPolicy: sender %u, but warehouse owner %u\n",
@@ -1434,7 +1436,9 @@ void Cmd_SetStockPolicy::execute(Game& game)
 			case Warehouse::SP_Remove:
 				break;
 			default:
-				log("Cmd_SetStockPolicy: sender %u, bad policy %u\n", sender(), m_policy);
+				log
+					("Cmd_SetStockPolicy: sender %u, bad policy %u\n",
+					 sender(), m_policy);
 				return;
 			}
 
@@ -1460,7 +1464,7 @@ void Cmd_SetStockPolicy::execute(Game& game)
 	}
 }
 
-Cmd_SetStockPolicy::Cmd_SetStockPolicy(StreamRead& des)
+Cmd_SetStockPolicy::Cmd_SetStockPolicy(StreamRead & des)
 	: PlayerCommand(0, des.Unsigned8())
 {
 	m_warehouse = des.Unsigned32();
@@ -1480,7 +1484,8 @@ void Cmd_SetStockPolicy::serialize(StreamWrite & ser)
 }
 
 #define PLAYER_CMD_SETSTOCKPOLICY_VERSION 1
-void Cmd_SetStockPolicy::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_Object_Loader& mol)
+void Cmd_SetStockPolicy::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint8_t version = fr.Unsigned8();
@@ -1496,7 +1501,8 @@ void Cmd_SetStockPolicy::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_Ob
 	}
 }
 
-void Cmd_SetStockPolicy::Write(FileWrite& fw, Editor_Game_Base& egbase, Map_Map_Object_Saver& mos)
+void Cmd_SetStockPolicy::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	fw.Unsigned8(PLAYER_CMD_SETSTOCKPOLICY_VERSION);
 	PlayerCommand::Write(fw, egbase, mos);
