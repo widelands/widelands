@@ -86,18 +86,20 @@ void Box::update_desired_size()
 			maxbreadth += Scrollbar::Size;
 			needscrollbar = true;
 		}
-		set_desired_size(std::min(totaldepth, m_max_x), std::min(maxbreadth, m_max_y));
+		set_desired_size
+			(std::min(totaldepth, m_max_x), std::min(maxbreadth, m_max_y));
 	} else {
 		if (totaldepth > m_max_y && m_scrolling) {
 			maxbreadth += Scrollbar::Size;
 			needscrollbar = true;
 		}
-		set_desired_size(std::min(maxbreadth, m_max_x), std::min(totaldepth, m_max_y));
+		set_desired_size
+			(std::min(maxbreadth, m_max_x), std::min(totaldepth, m_max_y));
 	}
 
-	// This is not redundant, because even if all this doesn't change our desired size,
-	// we were typically called because of a child window that changed, and we need
-	// to relayout that.
+	// This is not redundant, because even if all this doesn't change our
+	// desired size, we were typically called because of a child window
+	// that changed, and we need to relayout that.
 	layout();
 }
 
@@ -185,7 +187,9 @@ void Box::update_positions()
 		get_item_desired_size(idx, depth, breadth);
 
 		if (m_items[idx].type == Item::ItemPanel) {
-			set_item_size(idx, depth, m_items[idx].u.panel.fullsize ? totalbreadth : breadth);
+			set_item_size
+				(idx, depth, m_items[idx].u.panel.fullsize ?
+				 totalbreadth : breadth);
 			set_item_pos(idx, totaldepth - scrollpos);
 		}
 
@@ -237,8 +241,9 @@ void Box::add_space(uint32_t space)
 
 
 /**
- * Retrieve the given item's desired size. depth is the size of the item along the
- * orientation axis, breadth is the size perpendicular to the orientation axis.
+ * Retrieve the given item's desired size. depth is the size of the
+ * item along the orientation axis, breadth is the size perpendicular
+ * to the orientation axis.
 */
 void Box::get_item_desired_size
 	(uint32_t const idx, uint32_t & depth, uint32_t & breadth)

@@ -365,10 +365,10 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 
 void EditBox::draw(RenderTarget & odst)
 {
-	//if(!m_needredraw)
+	//if (!m_needredraw)
 	//{
-	//	odst.blit(Point(0, 0), m_cache_pid);
-	//	return;
+	//odst.blit(Point(0, 0), m_cache_pid);
+	//return;
 	//}
 
 	//m_cache_pid = g_gr->create_picture_surface(get_w(), get_h());
@@ -454,7 +454,8 @@ void EditBox::check_caret()
 
 	switch (m->align & Align_Horizontal) {
 	case Align_HCenter:
-		caretpos = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2 + m->scrolloffset + leftw;
+		caretpos = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2
+			 + m->scrolloffset + leftw;
 		break;
 	case Align_Right:
 		caretpos = get_w() - 4 + m->scrolloffset - rightw;
@@ -465,9 +466,9 @@ void EditBox::check_caret()
 	}
 
 	if (caretpos < 4)
-		m->scrolloffset += 4 - caretpos + get_w()/5;
+		m->scrolloffset += 4 - caretpos + get_w() / 5;
 	else if (caretpos > get_w() - 4)
-		m->scrolloffset -= caretpos - get_w() + 4 + get_w()/5;
+		m->scrolloffset -= caretpos - get_w() + 4 + get_w() / 5;
 
 	if ((m->align & Align_Horizontal) == Align_Left) {
 		if (m->scrolloffset > 0)
