@@ -1083,6 +1083,48 @@ inline static uint32_t calc_minimap_color
 	return pixelcolor;
 }
 
+
+/*
+===============
+Draw following additions into the minimap:
+- target cross in the center of the display area.
+- dotted map borders.
+===============
+ */
+template<typename T>
+static bool draw_minimap_addition
+	(Widelands::FCoords				     const f,
+	 Uint8							   *	   pix,
+	 SDL_PixelFormat             const &       format,
+	 uint32_t                            const mapwidth,
+	 Rect                                const rc,
+	 Point                               const viewpoint,
+	 uint32_t                            const flags)
+{
+	bool ispixeldone = false;
+	
+	// target cross in the center of the display area
+	uint32_t mapheight = (flags & MiniMap::Zoom2 ? rc.h / 2 : rc.h);
+	for (int32_t j = -2; j <= 2; j++) {
+		if (f.x == viewpoint.x + (mapwidth / 2) + j &&
+			f.y == viewpoint.y + (mapheight / 2) ||
+			f.x == viewpoint.x + (mapwidth / 2) &&
+			f.y == viewpoint.y + (mapheight / 2) + j) {
+			*reinterpret_cast<T *>(pix) = static_cast<T>(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
+			ispixeldone = true;
+			break;
+		}
+	}
+
+	// dotted map borders
+	if (!ispixeldone && (f.x == 0 && f.y % 5 == 0 || f.y == 0 && f.x % 5 == 0)) {
+		*reinterpret_cast<T *>(pix) = static_cast<T>(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255));
+		ispixeldone = true;
+	}
+
+	return ispixeldone;
+}
+
 /*
  *
  *
@@ -1112,37 +1154,41 @@ static void draw_minimap_int
 		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 			if (x % 2 || !(flags & MiniMap::Zoom2))
 				move_r(mapwidth, f, i);
-			*reinterpret_cast<T *>(pix) = static_cast<T>
-				(calc_minimap_color
-				 	(format, egbase, f, flags, f.field->get_owned_by(), true));
+
+			if (!draw_minimap_addition<T>
+					(f, pix, format, mapwidth, rc, viewpoint, flags)) {
+				*reinterpret_cast<T *>(pix) = static_cast<T>
+					(calc_minimap_color
+				 		(format, egbase, f, flags, f.field->get_owned_by(), true));
+			}
 		}
 	} else {
 		Widelands::Player::Field const * const player_fields = player->fields();
 		for (uint32_t y = 0; y < rc.h; ++y) {
 			Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
-			Widelands::FCoords f;
-			if (flags & MiniMap::Zoom2)
-				f = Widelands::FCoords
-					(Widelands::Coords(viewpoint.x, viewpoint.y + y / 2), 0);
-			else
-				f = Widelands::FCoords
-					(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
+			Widelands::FCoords f
+				(Widelands::Coords
+			 		(viewpoint.x, viewpoint.y + (flags & MiniMap::Zoom2 ? y / 2 : y)));
 			map.normalize_coords(f);
 			f.field = &map[f];
 			Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
 			for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
 				if (x % 2 || !(flags & MiniMap::Zoom2))
 					move_r(mapwidth, f, i);
-				Widelands::Player::Field const & player_field = player_fields[i];
-				Widelands::Vision const vision = player_field.vision;
 
-				*reinterpret_cast<T *>(pix) =
-					static_cast<T>
-					(vision ?
-					 calc_minimap_color
-					 	(format, egbase, f, flags, player_field.owner, 1 < vision)
-					 :
-					 0);
+				if (!draw_minimap_addition<T>
+						(f, pix, format, mapwidth, rc, viewpoint, flags)) {
+					Widelands::Player::Field const & player_field = player_fields[i];
+					Widelands::Vision const vision = player_field.vision;
+
+					*reinterpret_cast<T *>(pix) =
+						static_cast<T>
+						(vision ?
+						 calc_minimap_color
+					 		(format, egbase, f, flags, player_field.owner, 1 < vision)
+						 :
+						 0);
+				}
 			}
 		}
 	}
