@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,20 +17,18 @@
  *
  */
 
-#ifndef ENCODEDATA_H
-#define ENCODEDATA_H
+#include "terrain_sdl.h"
 
-#include "rgbcolor.h"
+/// get lambda and mu so that
+/// lambda * u + mu * v = (1 0)^T with u = (u1 u2)^T and v = (v1 v2)^T
+void get_horiz_linearcomb
+	(int32_t const u1, int32_t const u2, int32_t const v1, int32_t const v2,
+	 float & lambda, float & mu)
+{
+	float det;
 
-struct Section;
+	det = u1 * v2 - u2 * v1; //  determinant of (u v)
 
-struct EncodeData {
-	enum {No, Mask, Old} hasplrclrs;
-	RGBColor plrclr[4];
-
-	void clear();
-	void parse(Section &);
-	void add(EncodeData const &);
-};
-
-#endif
+	lambda = v2 / det;       //  by Cramer's rule
+	mu = -u2 / det;
+}

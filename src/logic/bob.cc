@@ -62,21 +62,17 @@ uint32_t Bob::Descr::vision_range() const
 Bob::Descr::Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const * const tribe, EncodeData const * encdata)
+	 Tribe_Descr const * const tribe)
 	:
 	Map_Object_Descr(_name, _descname),
 	m_picture       (directory + global_s.get_string("picture", "menu.png")),
 	m_owner_tribe(tribe)
 {
-	m_default_encodedata.clear();
-
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
 
-		m_default_encodedata.parse(idle_s);
-
 		add_animation
-			("idle", g_anim.get (directory, idle_s, "idle.png", encdata));
+			("idle", g_anim.get (directory, idle_s, "idle.png"));
 	}
 
 	// Parse attributes

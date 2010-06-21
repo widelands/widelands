@@ -144,6 +144,18 @@ bool ZipFilesystem::FileExists(std::string const & path_in) {
 			(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
 			 0, 0, 0, 0);
 
+		/* This is a short hack to try fixing Bug #593356.
+		 * If the savename is copied m_basename might be longer than
+		 * the original filename + the path and complete_filename is
+		 * beyond the end of the string.
+		 * In the function is also the cause for Bug #536189
+		 *
+		 * ToDo: This fuction should strip away the first element of the 
+		 *       path instead just using the zip filename
+		 */
+		if ( m_basename.size() >= strlen(filename_inzip))
+			break;
+
 		std::string complete_filename = &filename_inzip[m_basename.size()];
 		if (*complete_filename.rbegin() == '/')
 			complete_filename.resize(complete_filename.size() - 1);

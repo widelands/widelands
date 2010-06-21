@@ -18,10 +18,11 @@
  */
 
 #include "font_loader.h"
+#include "font_handler.h"
 
 #include "io/fileread.h"
-#include "font_handler.h"
 #include "io/filesystem/layered_filesystem.h"
+
 #include "wexception.h"
 
 #include <SDL_ttf.h>

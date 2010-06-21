@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,105 +21,93 @@
 #define SURFACE_H
 
 #include "rgbcolor.h"
-#include "texture.h"
-
 #include "rect.h"
+#include "wexception.h"
 
-#ifdef _MSC_VER
-#define __attribute__(x)
-#endif
+enum SurfaceType {
+	SURFACE_INVALID,
+	SURFACE_SOURCE,       // This sourface is used as source only
+	SURFACE_OFFSCREEN,    // Use surface as source and destinantion
+	SURFACE_SCREEN        // This draws to screen directly
+};
 
-namespace Widelands {
-struct Editor_Game_Base;
-struct Field;
-struct Player;
-}
-
-namespace UI {
-struct Font_Handler;
-}
-
-struct Vertex;
 
 /**
- * This was formerly called struct Bitmap. But now it manages an
- * SDL_Surface as it's core.
- *
- * Represents a simple bitmap without managing its memory. The rendering
+ * This represents a simple bitmap without managing its memory. The rendering
  * functions do NOT perform any clipping; this is up to the caller.
 */
 class Surface {
-	friend struct AnimationGfx;
-	friend struct UI::Font_Handler; //  needs m_surface for SDL_Blitting
 
-	SDL_Surface * m_surface;
+public:
+	virtual ~Surface() {}
+	/// Get width and height
+	virtual uint32_t get_w() const {return m_w;}
+	virtual uint32_t get_h() const {return m_h;}
+	virtual void update() = 0;
+
+	/// For the slowest: Indirect pixel access
+	virtual uint32_t get_pixel(uint32_t x, uint32_t y)
+		{ throw wexception("get_pixel() not implemented"); }
+	virtual void set_pixel(uint32_t x, uint32_t y, Uint32 clr)
+		{ throw wexception("set_pixel() not implemented"); }
+
+	virtual void lock() {};
+	virtual void unlock() {};
+
+	virtual const SDL_PixelFormat& format() const
+		{ throw wexception("format() not implemented"); }
+	virtual uint16_t get_pitch() const
+		{ throw wexception("get_pitch() not implemented"); }
+	virtual uint8_t * get_pixels() const
+		{ throw wexception("get_pixels() not implemented"); }
+
+	virtual void clear() {
+		fill_rect
+			(Rect(Point(0,0),get_w(), get_h()), 
+			 RGBAColor(255, 255, 255, 255));
+	}
+
+	virtual void draw_rect(Rect, RGBColor) = 0;
+	virtual void fill_rect(Rect, RGBAColor) = 0;
+	virtual void brighten_rect(Rect, int32_t factor) = 0;
+
+	virtual void blit(Point, Surface *, Rect srcrc, bool enable_alpha = false) = 0;
+	virtual void fast_blit(Surface * surface) {
+		blit(Point(0,0), surface, Rect(Point(0, 0), surface->get_w(), surface->get_h()));
+	}
+
+	virtual void set_type(SurfaceType type)
+		{ m_surf_type = type; }
+
+	virtual SurfaceType get_surface_type() { return m_surf_type; }
+
+	virtual void draw_line
+		(int32_t x1,
+		 int32_t y1,
+		 int32_t x2,
+		 int32_t y2,
+		 RGBColor color,
+		 const Rect * clip = NULL)
+		 { throw wexception("draw_line() not implemented"); }
+
+protected:
 	int32_t m_offsx;
 	int32_t m_offsy;
 	uint32_t m_w, m_h;
 
-public:
-	Surface() : m_surface(0), m_offsx(0), m_offsy(0) {}
-	Surface(Surface const &);
-	~Surface();
-
-	/// Set surface, only call once
-	void set_sdl_surface(SDL_Surface & surface);
-	SDL_Surface * get_sdl_surface() {return m_surface;}
-
-	/// Get width and height
-	uint32_t get_w() const {return m_w;}
-	uint32_t get_h() const {return m_h;}
-	void update();
-
-	/// Save a bitmap of this to a file
-	void save_bmp(const char & fname) const;
-
-	// For the bravest: Direct Pixel access. Use carefully
-	/// Needed if you want to blit directly to the screen by memcpy
-	void force_disable_alpha();
-	const SDL_PixelFormat * get_format() const;
-	const SDL_PixelFormat & format() const;
-	uint16_t get_pitch() const {return m_surface->pitch;}
-	void * get_pixels() const throw ();
-
-	/// Lock
-	void lock();
-	void unlock();
-
-	/// For the slowest: Indirect pixel access
-	uint32_t get_pixel(uint32_t x, uint32_t y) __attribute__ ((hot));
-	void set_pixel(uint32_t x, uint32_t y, Uint32 clr) __attribute__ ((hot));
-
-	void clear();
-	void draw_rect(Rect, RGBColor);
-	void fill_rect(Rect, RGBAColor);
-	void brighten_rect(Rect, int32_t factor);
-
-	void blit(Point, Surface *, Rect srcrc);
-	void fast_blit(Surface *);
-
-	void draw_minimap
-		(Widelands::Editor_Game_Base const &,
-		 Widelands::Player           const *,
-		 Rect, Point, uint32_t flags);
-
-
-	/// sw16_terrain.cc
-	void draw_field
-		(Rect &,
-		 Vertex const & f_vert,
-		 Vertex const & r_vert,
-		 Vertex const & bl_vert,
-		 Vertex const & br_vert,
-		 uint8_t roads,
-		 const Texture & tr_d_texture,
-		 const Texture & l_r_texture,
-		 const Texture & f_d_texture,
-		 const Texture & f_r_texture);
-
+	Surface():
+		m_offsx(0), m_offsy(0),
+		m_w(0), m_h(0),
+		m_surf_type(SURFACE_INVALID)
+	{}
+	Surface(int w, int h, SurfaceType t):
+		m_offsx(0), m_offsy(0),
+		m_w(w), m_h(h),
+		m_surf_type(t)
+	{}
+	SurfaceType m_surf_type;
 private:
-	void set_subwin(Rect r);
-	void unset_subwin();
+	Surface & operator= (Surface const &);
 };
 
 #endif

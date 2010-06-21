@@ -126,9 +126,9 @@ bool Critter_Bob::run_remove
 Critter_Bob_Descr::Critter_Bob_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const * const _tribe, EncodeData const * const encdata)
+	 Tribe_Descr const * const _tribe)
 	:
-	Bob::Descr(_name, _descname, directory, prof, global_s, _tribe, encdata),
+	Bob::Descr(_name, _descname, directory, prof, global_s, _tribe),
 	m_swimming(global_s.get_bool("swimming", false))
 {
 	m_walk_anims.parse
@@ -136,8 +136,7 @@ Critter_Bob_Descr::Critter_Bob_Descr
 		 directory,
 		 prof,
 		 (name() + "_walk_??").c_str(),
-		 prof.get_section("walk"),
-		 encdata);
+		 prof.get_section("walk"));
 
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
 		std::string program_name = v->get_string();
@@ -153,7 +152,6 @@ Critter_Bob_Descr::Critter_Bob_Descr
 			parser.descr = this;
 			parser.directory = directory;
 			parser.prof = &prof;
-			parser.encdata = encdata;
 
 			prog = new Critter_BobProgram(v->get_string());
 			prog->parse(&parser, v->get_string());

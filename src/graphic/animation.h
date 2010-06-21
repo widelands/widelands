@@ -20,8 +20,6 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "encodedata.h"
-
 #include "point.h"
 
 #include <cstring>
@@ -37,7 +35,7 @@ struct Section;
 struct AnimationData {
 	uint32_t frametime;
 	Point hotspot;
-	EncodeData encdata;
+	bool hasplrclrs;
 	std::string picnametempl;
 
 	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
@@ -62,16 +60,14 @@ struct AnimationManager {
 	uint32_t get
 		(std::string const & directory,
 		 Section           & s,
-		 char       const * picnametempl = 0,
-		 EncodeData  const * encdata = 0)
+		 char       const * picnametempl = 0)
 	{
-		return get(directory.c_str(), s, picnametempl, encdata);
+		return get(directory.c_str(), s, picnametempl);
 	}
 	uint32_t get
 		(char       const * directory,
 		 Section          &,
-		 char       const * picnametempl = 0,
-		 EncodeData const * = 0);
+		 char       const * picnametempl = 0);
 
 	// for use by the graphics subsystem
 	uint32_t get_nranimations() const;

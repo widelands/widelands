@@ -17,39 +17,39 @@
  *
  */
 
-#include "surface.h"
-
+#include "surface_sdl.h"
 #include "logic/editor_game_base.h"
-#include "terrain.h"
+#include "log.h"
 
 #include <cassert>
 
-Surface::~Surface() {
-	if (m_surface)
+SurfaceSDL::~SurfaceSDL() {
+	//log("SurfaceSDL::~SurfaceSDL()\n");
+	if (m_surface and m_surf_type != SURFACE_SCREEN)
 		SDL_FreeSurface(m_surface);
 }
 
-void Surface::set_sdl_surface(SDL_Surface & surface)
+void SurfaceSDL::set_sdl_surface(SDL_Surface & surface)
 {
+	//log("SurfaceSDL::set_sdl_surface(SDL_Surface&)\n");
 	if (m_surface)
 		SDL_FreeSurface(m_surface);
+
 	m_surface = &surface;
 	m_w = m_surface->w;
 	m_h = m_surface->h;
 }
 
-const SDL_PixelFormat * Surface::get_format() const {
-	assert(m_surface);
-	return m_surface->format;
-}
-
-const SDL_PixelFormat & Surface::format() const {
+const SDL_PixelFormat & SurfaceSDL::format() const {
+	//log("SurfaceSDL::format()\n");
 	assert(m_surface);
 	return *m_surface->format;
 }
 
-void * Surface::get_pixels() const throw () {
+uint8_t * SurfaceSDL::get_pixels() const {
+	//log("SurfaceSDL::get_pixels()\n");
 	assert(m_surface);
+
 	return
 		static_cast<uint8_t *>(m_surface->pixels)
 		+
@@ -58,17 +58,17 @@ void * Surface::get_pixels() const throw () {
 		m_offsx * m_surface->format->BytesPerPixel;
 }
 
-void Surface::lock() {
+void SurfaceSDL::lock() {
 	if (SDL_MUSTLOCK(m_surface))
 		SDL_LockSurface(m_surface);
 }
 
-void Surface::unlock() {
+void SurfaceSDL::unlock() {
 	if (SDL_MUSTLOCK(m_surface))
 		SDL_UnlockSurface(m_surface);
 }
 
-uint32_t Surface::get_pixel(uint32_t x, uint32_t y) {
+uint32_t SurfaceSDL::get_pixel(uint32_t x, uint32_t y) {
 	x += m_offsx;
 	y += m_offsy;
 
@@ -110,7 +110,7 @@ uint32_t Surface::get_pixel(uint32_t x, uint32_t y) {
 	return 0; // Should never be here
 }
 
-void Surface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
+void SurfaceSDL::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
 	x += m_offsx;
 	y += m_offsy;
 
@@ -134,56 +134,16 @@ void Surface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
 		SDL_UnlockSurface(m_surface);
 }
 
-void Surface::set_subwin(Rect r) {
+void SurfaceSDL::set_subwin(Rect r) {
 	m_offsx = r.x;
 	m_offsy = r.y;
 	m_w = r.w;
 	m_h = r.h;
 }
 
-void Surface::unset_subwin() {
+void SurfaceSDL::unset_subwin() {
 	m_offsx = 0;
 	m_offsy = 0;
 	m_w = m_surface->w;
 	m_h = m_surface->h;
-}
-
-/**
- * Draw ground textures and roads for the given parallelogram (two triangles)
- * into the bitmap.
-*/
-void Surface::draw_field
-	(Rect          & subwin,
-	 Vertex  const &  f_vert,
-	 Vertex  const &  r_vert,
-	 Vertex  const & bl_vert,
-	 Vertex  const & br_vert,
-	 uint8_t         roads,
-	 Texture const & tr_d_texture,
-	 Texture const &  l_r_texture,
-	 Texture const &  f_d_texture,
-	 Texture const &  f_r_texture)
-{
-	set_subwin(subwin);
-
-	switch (get_format()->BytesPerPixel) {
-	case 2:
-		draw_field_int<Uint16>
-			(*this,
-			 f_vert, r_vert, bl_vert, br_vert,
-			 roads,
-			 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
-		break;
-	case 4:
-		draw_field_int<Uint32>
-			(*this,
-			 f_vert, r_vert, bl_vert, br_vert,
-			 roads,
-			 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
-		break;
-	default:
-		assert(false);
-	}
-
-	unset_subwin();
 }

@@ -52,8 +52,8 @@ namespace Widelands {
 Soldier_Descr::Soldier_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
-	: Worker_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
+	 Tribe_Descr const & _tribe)
+	: Worker_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(Map_Object::SOLDIER);
 
@@ -137,42 +137,41 @@ Soldier_Descr::Soldier_Descr
 		/// die_*           -> soldier is dying
 		m_attack_success_w_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "attack_success_w");
+				(directory, prof, global_s, "attack_success_w");
 		m_attack_success_e_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "attack_success_e");
+				(directory, prof, global_s, "attack_success_e");
 		m_attack_failure_w_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "attack_failure_w");
+				(directory, prof, global_s, "attack_failure_w");
 		m_attack_failure_e_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "attack_failure_e");
+				(directory, prof, global_s, "attack_failure_e");
 		m_evade_success_w_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "evade_success_w");
+				(directory, prof, global_s, "evade_success_w");
 		m_evade_success_e_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "evade_success_e");
+				(directory, prof, global_s, "evade_success_e");
 		m_evade_failure_w_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "evade_failure_w");
+				(directory, prof, global_s, "evade_failure_w");
 		m_evade_failure_e_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "evade_failure_e");
+				(directory, prof, global_s, "evade_failure_e");
 		m_die_w_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "die_w");
+				(directory, prof, global_s, "die_w");
 		m_die_e_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "die_e");
+				(directory, prof, global_s, "die_e");
 	}
 
 }
 
 std::vector<std::string> Soldier_Descr::load_animations_from_string
 	(std::string const & directory, Profile & prof,
-	 Section & global_s, EncodeData const * const encdata,
-	 const char * anim_name)
+	 Section & global_s, const char * anim_name)
 {
 	try {
 		const char * anim_string = global_s.get_safe_string(anim_name);
@@ -190,11 +189,9 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 			Section &
 				anim_s = prof.get_safe_section((*i.current).c_str());
 
-			m_default_encodedata.parse(anim_s);
-
 			add_animation
 				((*i.current).c_str(),
-				 g_anim.get (directory, anim_s, "idle_00.png", encdata));
+				 g_anim.get (directory, anim_s, "idle_00.png"));
 		}
 		return list;
 	} catch (_wexception const & e) {

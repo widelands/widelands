@@ -245,8 +245,6 @@ private:
 
 	Initializations m_initializations;
 
-	EncodeData m_default_encdata;
-
 	Military_Data   m_military_data;
 
 #ifdef WRITE_GAME_DATA_AS_HTML

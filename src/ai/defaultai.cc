@@ -1290,7 +1290,7 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 	functor.economy = flag.get_economy();
 	Map & map = game().map();
 	map.find_reachable_fields
-		(Area<FCoords>(map.get_fcoords(flag.get_position()), 8),
+		(Area<FCoords>(map.get_fcoords(flag.get_position()), 12),
 		 &reachable,
 		 check,
 		 functor);
@@ -1299,27 +1299,29 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 		return false;
 
 	// then choose the one with the shortest path
-	Path * path;
+	Path & path = *new Path();;
+	bool found = false;
 	check.set_openend(false);
 	Coords closest;
 	container_iterate_const(std::vector<Coords>, reachable, i) {
-		Path * path2 = new Path();
-		if (map.findpath(flag.get_position(), *i.current, 0, *path2, check) < 0)
+		Path & path2 = *new Path();
+		if (map.findpath(flag.get_position(), *i.current, 0, path2, check) < 0)
 			continue;
 
-		if (!path || path->get_nsteps() > path2->get_nsteps()) {
+		if (!found || path.get_nsteps() > path2.get_nsteps()) {
 			path = path2;
 			closest = *i.current;
+			found = true;
 		}
 	}
 
-	if (path) {
+	if (found) {
 		// if we join a road and there is no flag yet, build one
 		if (dynamic_cast<const Road *>(map[closest].get_immovable()))
 			game().send_player_build_flag(player_number(), closest);
 
 		// and finally build the road
-		game().send_player_build_road(player_number(), *path);
+		game().send_player_build_road(player_number(), path);
 		return true;
 	}
 	return false;
@@ -1919,12 +1921,12 @@ BuildingObserver & DefaultAI::get_building_observer (char const * const name)
 /// this is called whenever we gain ownership of a PlayerImmovable
 void DefaultAI::gain_immovable (PlayerImmovable & pi)
 {
-	if      (upcast(Building,       building, &pi))
+	if      (upcast(Building,   building, &pi))
 		gain_building (*building);
-	else if (upcast(Flag     const, flag,     &pi))
-		new_flags.push_back  (flag);
-	else if (upcast(Road     const, road,     &pi))
-		roads    .push_front (road);
+	else if (upcast(Flag const, flag,     &pi))
+		new_flags.push_back (flag);
+	else if (upcast(Road const, road,     &pi))
+		roads    .push_front(road);
 }
 
 /// this is called whenever we lose ownership of a PlayerImmovable
@@ -1955,6 +1957,8 @@ void DefaultAI::gain_building (Building & b)
 				 .building().name().c_str());
 		++target_bo.cnt_under_construction;
 		++total_constructionsites;
+		// Let defaultAI try to directly connect the constructionsite
+		next_road_due = game().get_gametime();
 	}
 	else {
 		++bo.cnt_built;
