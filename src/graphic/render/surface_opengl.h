@@ -41,14 +41,18 @@ struct Font_Handler;
 struct Vertex;
 
 /**
- * This was formerly called struct Bitmap. But now it manages an
- * SDL_Surface as it's core.
- *
- * Represents a simple bitmap without managing its memory. The rendering
- * functions do NOT perform any clipping; this is up to the caller.
+ * This implements OpenGL rendering. Do not use this class directly. The right
+ * way is to use the base class Surface wherever possible. Everything which
+ * needs to know about the underlying renderer should go to the graphics
+ * subdirectory.
+ * Surfaces are created through Graphic::create_surface() functions.
 */
 class SurfaceOpenGL : public Surface {
 public:
+	/**
+	 * Manages a single OpenGL texture. This makes sure the texture is
+	 * freed when the object is destroyed.
+	*/
 	class oglTexture
 	{
 	public:
@@ -65,15 +69,15 @@ public:
 	SurfaceOpenGL(int w = 0, int h = 0);
 	~SurfaceOpenGL();
 
+	//@{
 	/// Get width and height
 	uint32_t get_w() const {return m_w;}
 	uint32_t get_h() const {return m_h;}
 	uint32_t get_tex_w() const {return m_tex_w;}
 	uint32_t get_tex_h() const {return m_tex_h;}
-	void update();
+	//@}
 
-	/// Save a bitmap of this to a file
-	//void save_bmp(const char & fname) const;
+	void update();
 
 	GLuint get_texture() const
 	{
@@ -146,18 +150,23 @@ public:
 private:
 	SurfaceOpenGL & operator= (SurfaceOpenGL const &);
         explicit SurfaceOpenGL(SurfaceOpenGL const &);
-	
+
+	/// stores the opengl texture id and frees if destroyed
 	oglTexture * m_texture;
+	/// Indicates that the texture needs to be updated after pixel access
 	bool m_glTexUpdate;
 
+	//@{
+	/// set/unset a clipping rectangle
 	void set_subwin(Rect r);
 	void unset_subwin();
+	//@}
 
 	uint8_t * m_pixels;
 	bool m_locked;
 
-	// Keep the size of the opengl texture. This is neccesary because some
-	// systems support only a poer of two for texture sizes.
+	/// Keep the size of the opengl texture. This is neccesary because some
+	/// systems support only a poer of two for texture sizes.
 	uint32_t m_tex_w, m_tex_h;
 };
 

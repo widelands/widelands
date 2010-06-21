@@ -288,7 +288,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_language_list.add
 		("English", "en",
 		 g_gr->get_no_picture(), "en" == opt.language);
-		 
+
 	filenameset_t files;
 	Section * s = &g_options.pull_section("global");
 	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
@@ -304,7 +304,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	{
 		char const * const path = pname->c_str();
 
-		if 
+		if
 			(!strcmp(FileSystem::FS_Filename(path), ".") ||
 			 !strcmp(FileSystem::FS_Filename(path), "..") ||
 			 !g_fs->IsDirectory(path))
@@ -319,9 +319,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	// Add currently used language manually
 	if (!own_selected)
 		m_language_list.add
-			(s->get_string(opt.language.c_str(), opt.language.c_str()), opt.language,
-			 g_gr->get_no_picture(), true);
-		
+			(s->get_string(opt.language.c_str(), opt.language.c_str()),
+			 opt.language, g_gr->get_no_picture(), true);
 }
 
 void Fullscreen_Menu_Options::advanced_options() {

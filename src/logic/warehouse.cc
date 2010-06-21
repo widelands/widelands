@@ -171,12 +171,13 @@ bool WarehouseSupply::has_storage() const throw ()
 	return true;
 }
 
-void WarehouseSupply::get_ware_type(bool& isworker, Ware_Index& ware) const
+void WarehouseSupply::get_ware_type(bool & isworker, Ware_Index & ware) const
 {
-	throw wexception("WarehouseSupply::get_ware_type: calling this is nonsensical");
+	throw wexception
+		("WarehouseSupply::get_ware_type: calling this is nonsensical");
 }
 
-void WarehouseSupply::send_to_storage(Game &, Warehouse* wh)
+void WarehouseSupply::send_to_storage(Game &, Warehouse * wh)
 {
 	throw wexception("WarehouseSupply::send_to_storage: should never be called");
 }
@@ -304,7 +305,10 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 	const Worker_Descr::Buildcost & cost = w_desc->buildcost();
 	uint32_t idx = 0;
 
-	for (Worker_Descr::Buildcost::const_iterator cost_it = cost.begin(); cost_it != cost.end(); ++cost_it, ++idx) {
+	for
+		(Worker_Descr::Buildcost::const_iterator cost_it = cost.begin();
+		 cost_it != cost.end(); ++cost_it, ++idx)
+	{
 		Request::Type type;
 		Ware_Index ware;
 
@@ -321,7 +325,8 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 				 pw.requests[idx]->get_index() == ware)
 				continue;
 
-			std::vector<Request*>::iterator req_it = pw.requests.begin() + idx + 1;
+			std::vector<Request *>::iterator req_it =
+				pw.requests.begin() + idx + 1;
 			while (req_it != pw.requests.end()) {
 				if ((*req_it)->get_type() == type && (*req_it)->get_index() == ware)
 					break;
@@ -335,7 +340,8 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 		}
 
 		log
-			("_load_finish_planned_worker: old savegame: need to create new request for '%s'\n",
+			("_load_finish_planned_worker: old savegame: "
+			 "need to create new request for '%s'\n",
 			 cost_it->first.c_str());
 		pw.requests.insert
 			(pw.requests.begin() + idx,
@@ -343,7 +349,9 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 	}
 
 	while (pw.requests.size() > idx) {
-		log("_load_finish_planned_worker: old savegame: removing outdated request.\n");
+		log
+			("_load_finish_planned_worker: old savegame: "
+			 "removing outdated request.\n");
 		delete pw.requests.back();
 		pw.requests.pop_back();
 	}
@@ -609,9 +617,10 @@ void Warehouse::act(Game & game, uint32_t const data)
 		m_next_stock_remove_act = schedule_act(game, 4000);
 	}
 
-	// Update planned workers; this is to update the request amounts and check
-	// whether we suddenly can produce a requested worker. This is mostly because
-	// previously available wares may become unavailable due to secondary requests.
+	// Update planned workers; this is to update the request amounts and
+	// check because whether we suddenly can produce a requested worker. This
+	// is mostly previously available wares may become unavailable due to
+	// secondary requests.
 	_update_all_planned_workers(game);
 
 	Building::act(game, data);
@@ -632,8 +641,11 @@ void Warehouse::set_economy(Economy * const e)
 	m_supply->set_economy(e);
 	Building::set_economy(e);
 
-	container_iterate_const(std::vector<PlannedWorkers>, m_planned_workers, pw_it) {
-		container_iterate_const(std::vector<Request*>, pw_it.current->requests, req_it)
+	container_iterate_const
+		(std::vector<PlannedWorkers>, m_planned_workers, pw_it)
+	{
+		container_iterate_const
+			(std::vector<Request *>, pw_it.current->requests, req_it)
 			(*req_it.current)->set_economy(e);
 	}
 
@@ -745,7 +757,8 @@ uint32_t Warehouse::count_workers
 }
 
 
-/// Start a worker of a given type. The worker will be assigned a job by the caller.
+/// Start a worker of a given type. The worker will
+/// be assigned a job by the caller.
 Worker & Warehouse::launch_worker
 	(Game & game, Ware_Index ware, Requirements const & req)
 {
@@ -855,7 +868,8 @@ void Warehouse::sort_worker_in(Editor_Game_Base & egbase, Worker & w)
 	m_incorporated_workers.insert(i, &w);
 }
 
-/// Create an instance of a ware and make sure it gets carried out of the warehouse.
+/// Create an instance of a ware and make sure it gets
+/// carried out of the warehouse.
 WareInstance & Warehouse::launch_item(Game & game, Ware_Index const ware) {
 	// Create the item
 	WareInstance & item =
@@ -988,8 +1002,8 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 
 	// Update PlannedWorkers::amount here if appropriate, because this function
 	// may have been called directly by the Economy.
-	// Do not update anything else about PlannedWorkers here, because this function
-	// is called by _update_planned_workers, so avoid recursion
+	// Do not update anything else about PlannedWorkers here, because this
+	// function is called by _update_planned_workers, so avoid recursion
 	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, pw_it) {
 		if (pw_it.current->index == worker && pw_it.current->amount)
 			pw_it.current->amount--;
@@ -997,7 +1011,8 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 }
 
 /**
- * Return the number of workers of the given type that we plan to create in this warehouse.
+ * Return the number of workers of the given type that we plan to
+ * create in this warehouse.
  */
 uint32_t Warehouse::get_planned_workers(Game & game, Ware_Index index) const
 {
@@ -1010,12 +1025,13 @@ uint32_t Warehouse::get_planned_workers(Game & game, Ware_Index index) const
 }
 
 /**
- * Calculate the supply of wares available to this warehouse in each of the buildcost
- * items for the given worker.
+ * Calculate the supply of wares available to this warehouse in each of the
+ * buildcost items for the given worker.
  *
  * This is the current stock plus any incoming transfers.
  */
-std::vector<uint32_t> Warehouse::calc_available_for_worker(Game & game, Ware_Index index) const
+std::vector<uint32_t> Warehouse::calc_available_for_worker
+	(Game & game, Ware_Index index) const
 {
 	const Worker_Descr & w_desc = *tribe().get_worker_descr(index);
 	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
@@ -1047,7 +1063,8 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker(Game & game, Ware_Ind
 
 
 /**
- * Set the amount of workers we plan to create of the given \p index to \p amount.
+ * Set the amount of workers we plan to create
+ * of the given \p index to \p amount.
  */
 void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 {
@@ -1076,12 +1093,15 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 
 			if (Ware_Index id_w = tribe().ware_index(input_name)) {
 				pw->requests.push_back
-					(new Request(*this, id_w, &Warehouse::request_cb, Request::WARE));
+					(new Request
+					 (*this, id_w, &Warehouse::request_cb, Request::WARE));
 			} else if ((id_w = tribe().worker_index(input_name))) {
 				pw->requests.push_back
-					(new Request(*this, id_w, &Warehouse::request_cb, Request::WORKER));
+					(new Request
+					 (*this, id_w, &Warehouse::request_cb, Request::WORKER));
 			} else
-				throw wexception("plan_workers: bad buildcost '%s'", input_name.c_str());
+				throw wexception
+					("plan_workers: bad buildcost '%s'", input_name.c_str());
 		}
 	}
 
@@ -1090,14 +1110,16 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 }
 
 /**
- * See if we can create the workers of the given plan, and update requests accordingly.
+ * See if we can create the workers of the given plan,
+ * and update requests accordingly.
  */
-void Warehouse::_update_planned_workers(Game & game, Warehouse::PlannedWorkers& pw)
+void Warehouse::_update_planned_workers
+	(Game & game, Warehouse::PlannedWorkers & pw)
 {
 	const Worker_Descr & w_desc = *tribe().get_worker_descr(pw.index);
 	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
 
-	while(pw.amount && can_create_worker(game, pw.index))
+	while (pw.amount && can_create_worker(game, pw.index))
 		create_worker(game, pw.index);
 
 	uint32_t idx = 0;
@@ -1110,12 +1132,14 @@ void Warehouse::_update_planned_workers(Game & game, Warehouse::PlannedWorkers& 
 		} else if ((id_w = tribe().worker_index(input_name))) {
 			supply = m_supply->stock_workers(id_w);
 		} else
-			throw wexception("_update_planned_workers: bad buildcost '%s'", input_name.c_str());
+			throw wexception
+				("_update_planned_workers: bad buildcost '%s'", input_name.c_str());
 
 		if (supply >= pw.amount * cost_it.current->second)
 			pw.requests[idx]->set_count(0);
 		else
-			pw.requests[idx]->set_count(pw.amount * cost_it.current->second - supply);
+			pw.requests[idx]->set_count
+				(pw.amount * cost_it.current->second - supply);
 		++idx;
 	}
 
@@ -1134,7 +1158,7 @@ void Warehouse::_update_planned_workers(Game & game, Warehouse::PlannedWorkers& 
 void Warehouse::_update_all_planned_workers(Game & game)
 {
 	uint32_t idx = 0;
-	while(idx < m_planned_workers.size()) {
+	while (idx < m_planned_workers.size()) {
 		_update_planned_workers(game, m_planned_workers[idx]);
 
 		if (!m_planned_workers[idx].amount) {
@@ -1243,7 +1267,8 @@ Warehouse::StockPolicy Warehouse::get_worker_policy(Ware_Index ware) const
 	return m_worker_policy[ware.value()];
 }
 
-Warehouse::StockPolicy Warehouse::get_stock_policy(bool isworker, Ware_Index ware) const
+Warehouse::StockPolicy Warehouse::get_stock_policy
+	(bool isworker, Ware_Index ware) const
 {
 	if (isworker)
 		return get_worker_policy(ware);
@@ -1258,7 +1283,8 @@ void Warehouse::set_ware_policy(Ware_Index ware, Warehouse::StockPolicy policy)
 	m_ware_policy[ware.value()] = policy;
 }
 
-void Warehouse::set_worker_policy(Ware_Index ware, Warehouse::StockPolicy policy)
+void Warehouse::set_worker_policy
+	(Ware_Index ware, Warehouse::StockPolicy policy)
 {
 	assert(ware.value() < m_worker_policy.size());
 	m_worker_policy[ware.value()] = policy;
@@ -1271,7 +1297,10 @@ void Warehouse::set_worker_policy(Ware_Index ware, Warehouse::StockPolicy policy
 void Warehouse::check_remove_stock(Game & game)
 {
 	if (base_flag().current_items() < base_flag().total_capacity() / 2) {
-		for (Ware_Index ware = Ware_Index::First(); ware.value() < m_ware_policy.size(); ++ware) {
+		for
+			(Ware_Index ware = Ware_Index::First();
+			 ware.value() < m_ware_policy.size(); ++ware)
+		{
 			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
 				continue;
 
@@ -1280,7 +1309,10 @@ void Warehouse::check_remove_stock(Game & game)
 		}
 	}
 
-	for (Ware_Index widx = Ware_Index::First(); widx.value() < m_worker_policy.size(); ++widx) {
+	for
+		(Ware_Index widx = Ware_Index::First();
+		 widx.value() < m_worker_policy.size(); ++widx)
+	{
 		if (get_worker_policy(widx) != SP_Remove || !get_workers().stock(widx))
 			continue;
 

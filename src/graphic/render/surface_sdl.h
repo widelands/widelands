@@ -26,8 +26,11 @@
 #include "graphic/surface.h"
 
 /**
- * This represents a simple bitmap without managing its memory. The rendering
- * functions do NOT perform any clipping; this is up to the caller.
+* This implements SDL rendering. Do not use this class directly. The right
+* way is to use the base class Surface wherever possible. Everything which
+* needs to know about the underlying renderer should go to the graphics
+* subdirectory.
+* Surfaces are created through Graphic::create_surface() functions.
 */
 class SurfaceSDL : public Surface {
 

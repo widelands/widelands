@@ -105,7 +105,7 @@ void Slider::set_value(int32_t new_value)
  */
 void Slider::set_max_value(int32_t new_max) {
 	assert(m_min_value <= new_max);
-	if(m_max_value != new_max)
+	if (m_max_value != new_max)
 		m_needredraw = true;
 	m_max_value = new_max;
 	set_value(m_value);
@@ -118,7 +118,7 @@ void Slider::set_max_value(int32_t new_max) {
  */
 void Slider::set_min_value(int32_t new_min) {
 	assert(m_max_value >= new_min);
-	if(m_min_value != new_min)
+	if (m_min_value != new_min)
 		m_needredraw = true;
 	m_min_value = new_min;
 	set_value(m_value);
@@ -194,7 +194,7 @@ void Slider::send_value_changed() {changed.call(); changedto.call(m_value);}
  */
 void Slider::set_enabled(const bool enabled) {
 	//  TODO: disabled should look different...
-	if(m_enabled != enabled)
+	if (m_enabled != enabled)
 		m_needredraw = true;
 	m_enabled = enabled;
 	if (not enabled) {m_pressed = false; m_highlighted = false;}
@@ -284,7 +284,7 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 	//  updating
 	if (new_value != m_value) {m_value = new_value; send_value_changed();}
 
-	if(o_cursor_pos != m_cursor_pos)
+	if (o_cursor_pos != m_cursor_pos)
 		m_needredraw = true;
 	update();
 }
@@ -370,7 +370,7 @@ void HorizontalSlider::draw(RenderTarget & odst) {
 			m_cache_pic = g_gr->create_picture_surface
 				(get_w(), get_h(), true);
 		}
-		
+
 		dst = g_gr->get_surface_renderer(m_cache_pic);
 		dst->fill_rect
 			(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
@@ -461,7 +461,7 @@ void VerticalSlider::draw(RenderTarget & odst) {
 	RenderTarget * dst = &odst;
 	if (g_gr->caps().offscreen_rendering)
 	{
-		if(!m_needredraw)
+		if (!m_needredraw)
 		{
 			odst.blit(Point(0, 0), m_cache_pic);
 			return;

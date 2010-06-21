@@ -93,15 +93,15 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 
 	if (g_gr->caps().gl.tex_power_of_two)
 	{
-		unsigned int wexp = log2(surface->w);
-		unsigned int hexp = log2(surface->h);
-		if (pow(2, wexp) < surface->w)
+		int wexp = log(static_cast<float>(surface->w)) / log(2.0f);
+		int hexp = log(static_cast<float>(surface->h)) / log(2.0f);
+		if (pow(2.0f, wexp) < surface->w)
 			wexp++;
-		if (pow(2, hexp) < surface->h)
+		if (pow(2.0f, hexp) < surface->h)
 			hexp++;
 
-		m_tex_w = pow(2, wexp);
-		m_tex_h = pow(2, hexp);
+		m_tex_w = pow(2.0f, wexp);
+		m_tex_h = pow(2.0f, hexp);
 	} else {
 		m_tex_w = surface->w;
 		m_tex_h = surface->h;
@@ -279,15 +279,15 @@ SurfaceOpenGL::SurfaceOpenGL(int w, int h):
 		 * problem with borders of textures and repeated texture but at least it
 		 * works
 		 */
-		unsigned int wexp = log2(w);
-		unsigned int hexp = log2(h);
-		if (pow(2, wexp) < w)
+		int wexp = log(static_cast<float>(w)) / log(2.0f);
+		int hexp = log(static_cast<float>(h)) / log(2.0f);
+		if (pow(2.0f, wexp) < w)
 			wexp++;
-		if (pow(2, hexp) < h)
+		if (pow(2.0f, hexp) < h)
 			hexp++;
 
-		m_tex_w = pow(2, wexp);
-		m_tex_h = pow(2, hexp);
+		m_tex_w = pow(2.0f, wexp);
+		m_tex_h = pow(2.0f, hexp);
 	} else {
 		m_tex_w = w;
 		m_tex_h = h;

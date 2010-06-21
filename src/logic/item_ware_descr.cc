@@ -26,7 +26,8 @@
 namespace Widelands {
 
 Item_Ware_Descr::Item_Ware_Descr
-	(const Tribe_Descr & tribe, char const * const _name, char const * const _descname,
+	(const Tribe_Descr & tribe, char const * const _name,
+	 char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s)
 	:
 	Map_Object_Descr(_name, _descname),

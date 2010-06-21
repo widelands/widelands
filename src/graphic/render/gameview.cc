@@ -50,12 +50,7 @@ using Widelands::Player;
 using Widelands::TCoords;
 using namespace  Widelands;
 
-inline static Sint8 node_brightness
-	(Widelands::Time   gametime,
-	 Widelands::Time   last_seen,
-	 Widelands::Vision vision,
-	 Sint8             result)
-__attribute__((const));
+///This is used by rendermap to calculate the brightness of the terrain.
 inline static Sint8 node_brightness
 	(Widelands::Time   const gametime,
 	 Widelands::Time   const last_seen,

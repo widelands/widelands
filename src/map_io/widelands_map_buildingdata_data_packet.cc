@@ -306,7 +306,8 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			warehouse.m_supply->set_nrwares  (nr_wares);
 			warehouse.m_supply->set_nrworkers(nr_tribe_workers);
 			warehouse.m_ware_policy.resize(nr_wares.value(), Warehouse::SP_Normal);
-			warehouse.m_worker_policy.resize(nr_tribe_workers.value(), Warehouse::SP_Normal);
+			warehouse.m_worker_policy.resize
+				(nr_tribe_workers.value(), Warehouse::SP_Normal);
 			//log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
 			Tribe_Descr const & tribe = warehouse.tribe();
@@ -314,7 +315,8 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				Ware_Index const id = tribe.safe_ware_index(fr.CString());
 				if (packet_version >= 5) {
 					warehouse.insert_wares(id, fr.Unsigned32());
-					warehouse.set_ware_policy(id, static_cast<Warehouse::StockPolicy>(fr.Unsigned8()));
+					warehouse.set_ware_policy
+						(id, static_cast<Warehouse::StockPolicy>(fr.Unsigned8()));
 				} else {
 					warehouse.insert_wares(id, fr.Unsigned16());
 				}
@@ -323,7 +325,8 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				Ware_Index const id = tribe.safe_worker_index(fr.CString());
 				if (packet_version >= 5) {
 					warehouse.insert_workers(id, fr.Unsigned32());
-					warehouse.set_worker_policy(id, static_cast<Warehouse::StockPolicy>(fr.Unsigned8()));
+					warehouse.set_worker_policy
+						(id, static_cast<Warehouse::StockPolicy>(fr.Unsigned8()));
 				} else {
 					warehouse.insert_workers(id, fr.Unsigned16());
 				}
@@ -333,8 +336,9 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				// eat the obsolete idle request structures
 				uint32_t nrrequests = fr.Unsigned16();
 				while (nrrequests--) {
-					boost::scoped_ptr<Request> req(new Request
-						(warehouse,
+					boost::scoped_ptr<Request> req
+						(new Request
+						 (warehouse,
 						 Ware_Index::First(),
 						 &Warehouse::request_cb,
 						 Request::WORKER));
@@ -465,8 +469,10 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				// Consistency checks are in Warehouse::load_finish
 				uint32_t nr_planned_workers = fr.Unsigned32();
 				while (nr_planned_workers--) {
-					warehouse.m_planned_workers.push_back(Warehouse::PlannedWorkers());
-					Warehouse::PlannedWorkers & pw = warehouse.m_planned_workers.back();
+					warehouse.m_planned_workers.push_back
+						(Warehouse::PlannedWorkers());
+					Warehouse::PlannedWorkers & pw =
+						warehouse.m_planned_workers.back();
 					pw.index = tribe.worker_index(fr.CString());
 					pw.amount = fr.Unsigned32();
 
@@ -1103,12 +1109,16 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	fw.Unsigned8(0); //  terminator for spawn times
 
 	fw.Unsigned32(warehouse.m_planned_workers.size());
-	container_iterate_const(std::vector<Warehouse::PlannedWorkers>, warehouse.m_planned_workers, pw_it) {
+	container_iterate_const
+		(std::vector<Warehouse::PlannedWorkers>,
+		 warehouse.m_planned_workers, pw_it)
+	{
 		fw.CString(tribe.get_worker_descr(pw_it.current->index)->name());
 		fw.Unsigned32(pw_it.current->amount);
 
 		fw.Unsigned32(pw_it.current->requests.size());
-		container_iterate_const(std::vector<Request*>, pw_it.current->requests, req_it)
+		container_iterate_const
+			(std::vector<Request *>, pw_it.current->requests, req_it)
 			(*req_it.current)->Write(fw, game, mos);
 	}
 

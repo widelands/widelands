@@ -336,21 +336,23 @@ Critter_Bob::Loader::Loader()
 {
 }
 
-const Bob::Task* Critter_Bob::Loader::get_task(const std::string& name)
+const Bob::Task * Critter_Bob::Loader::get_task(const std::string & name)
 {
 	if (name == "roam") return &taskRoam;
 	if (name == "program") return &taskProgram;
 	return Bob::Loader::get_task(name);
 }
 
-const BobProgramBase* Critter_Bob::Loader::get_program(const std::string& name)
+const BobProgramBase * Critter_Bob::Loader::get_program
+	(const std::string & name)
 {
-	Critter_Bob& critter = get<Critter_Bob>();
+	Critter_Bob & critter = get<Critter_Bob>();
 	return critter.descr().get_program(name);
 }
 
 
-Map_Object::Loader* Critter_Bob::load(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+Map_Object::Loader * Critter_Bob::load
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	std::auto_ptr<Loader> loader(new Loader);
 
@@ -364,16 +366,19 @@ Map_Object::Loader* Critter_Bob::load(Editor_Game_Base & egbase, Map_Map_Object_
 			const Critter_Bob_Descr * descr = 0;
 
 			if (owner == "world") {
-				descr = dynamic_cast<const Critter_Bob_Descr*>(egbase.map().world().get_bob_descr(name));
+				descr = dynamic_cast<const Critter_Bob_Descr *>
+					(egbase.map().world().get_bob_descr(name));
 			} else {
 				egbase.manually_load_tribe(owner);
 
 				if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
-					descr = dynamic_cast<const Critter_Bob_Descr*>(tribe->get_bob_descr(name));
+					descr = dynamic_cast<const Critter_Bob_Descr *>
+						(tribe->get_bob_descr(name));
 			}
 
 			if (!descr)
-				throw game_data_error("undefined critter %s/%s", owner.c_str(), name.c_str());
+				throw game_data_error
+					("undefined critter %s/%s", owner.c_str(), name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
@@ -386,12 +391,14 @@ Map_Object::Loader* Critter_Bob::load(Editor_Game_Base & egbase, Map_Map_Object_
 	return loader.release();
 }
 
-void Critter_Bob::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+void Critter_Bob::save
+	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Critter);
 	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);
 
-	std::string owner = descr().get_owner_tribe() ? descr().get_owner_tribe()->name() : "world";
+	std::string owner =
+		descr().get_owner_tribe() ? descr().get_owner_tribe()->name() : "world";
 	fw.CString(owner);
 	fw.CString(descr().name());
 
