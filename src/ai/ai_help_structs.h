@@ -147,6 +147,7 @@ struct BuildableField {
 	uint8_t tree_consumers_nearby;
 	uint8_t stone_consumers_nearby;
 	uint8_t water_nearby;
+	uint8_t space_consumers_nearby;
 
 	int16_t military_influence;
 
@@ -216,8 +217,9 @@ struct BuildingObserver {
 	bool                              need_trees;  // lumberjack = true
 	bool                              need_stones; // quarry = true
 	bool                              need_water;  // fisher, fish_breeder = true
+	bool                              space_consumer; // farm, vineyard... = true
 
-	bool                              unoccupied;  // >= 1 unoccupied ?
+	bool                              unoccupied;  // >= 1 building unoccupied ?
 
 	int32_t                           mines;       // type of resource it mines
 	uint16_t                          mines_percent; // % of res it can mine
@@ -236,6 +238,7 @@ struct BuildingObserver {
 
 struct ProductionSiteObserver {
 	Widelands::ProductionSite * site;
+	int32_t builttime;
 	BuildingObserver * bo;
 };
 

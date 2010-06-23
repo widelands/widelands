@@ -229,7 +229,7 @@ protected:  // TrainingSite must have access to this stuff
 	char                     m_statistics_buffer[40];
 	char                     m_result_buffer   [213];
 	int8_t                   m_last_stat_percent;
-	bool                      m_is_stopped;
+	bool                     m_is_stopped;
 };
 
 /**
