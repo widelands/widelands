@@ -854,16 +854,18 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// add bonus near buildings outputting production_hint ware
 					prio += 2 * bf->producers_nearby[bo.production_hint];
 					// Add preciousness - makes the defaultAI build foresters earlier
-					prio += 2 * wares[bo.production_hint].preciousness;
+					prio += wares[bo.production_hint].preciousness;
 
 					// Check if the reproduced wares are needed
 					Ware_Index wt(static_cast<size_t>(bo.production_hint));
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						// Don't check if the economy has only one flag.
-						if ((*l.current)->flags.size() < 2)
+						if ((*l.current)->flags.size() < 3)
 							continue;
-						if ((*l.current)->economy.needs_ware(wt))
+						if ((*l.current)->economy.needs_ware(wt)) {
 							prio += 1 + wares[bo.production_hint].preciousness;
+							break;
+						}
 					}
 
 					// Do not build too many of these buildings, but still care

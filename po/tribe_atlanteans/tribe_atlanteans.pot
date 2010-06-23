@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -447,12 +447,12 @@ msgid ""
 "Hammer"
 msgstr ""
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:18
+#: ../../tribes/atlanteans/blackroot_farm/conf:19
 msgid ""
 "Harvest blackroot"
 msgstr ""
 
-#: ../../tribes/atlanteans/farm/conf:21
+#: ../../tribes/atlanteans/farm/conf:22
 msgid ""
 "Harvest corn"
 msgstr ""
@@ -627,12 +627,12 @@ msgid ""
 "Planks are an important build material of the Atlanteans."
 msgstr ""
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:16
+#: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid ""
 "Plant blackroot"
 msgstr ""
 
-#: ../../tribes/atlanteans/farm/conf:19
+#: ../../tribes/atlanteans/farm/conf:20
 msgid ""
 "Plant corn"
 msgstr ""
@@ -1377,14 +1377,14 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armoursmithy/conf:27
 #: ../../tribes/atlanteans/bakery/conf:21
-#: ../../tribes/atlanteans/blackroot_farm/conf:20
+#: ../../tribes/atlanteans/blackroot_farm/conf:21
 #: ../../tribes/atlanteans/burners_house/conf:19
 #: ../../tribes/atlanteans/coalmine/conf:21
 #: ../../tribes/atlanteans/crystalmine/conf:26
-#: ../../tribes/atlanteans/farm/conf:23
+#: ../../tribes/atlanteans/farm/conf:24
 #: ../../tribes/atlanteans/fish_breeders_house/conf:17
 #: ../../tribes/atlanteans/fishers_house/conf:16
-#: ../../tribes/atlanteans/foresters_house/conf:15
+#: ../../tribes/atlanteans/foresters_house/conf:16
 #: ../../tribes/atlanteans/goldmine/conf:22
 #: ../../tribes/atlanteans/goldweaver/conf:19
 #: ../../tribes/atlanteans/horsefarm/conf:22
