@@ -2,6 +2,7 @@ size=medium
 output=grape
 
 [aihints]
+space_consumer=true
 build_material=false
 
 [buildcost]

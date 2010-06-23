@@ -1529,8 +1529,6 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 and not
 		 site.site->get_statistics_percent()) // production stats == 0%
 	{
-		log("\n\nStats: %i\nName: %s\nCoords: (%i, %i)\n", site.site->get_statistics_percent(), site.bo->name, site.site->get_position().x, site.site->get_position().y);
-		assert(strcmp("farm", site.bo->name));
 		// Do not destruct building, if it's basic and the last of this type left.
 		if (site.bo->is_basic && site.bo->cnt_built <= 1)
 			return false;
