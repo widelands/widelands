@@ -1133,7 +1133,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		return false;
 
 	// do not have too many construction sites
-	if (proposed_priority < static_cast<int32_t>(total_constructionsites))
+	if
+		(proposed_priority < static_cast<int32_t>(total_constructionsites)
+		 and not
+		 onlymissing) // only return here, if we do NOT try to build a missing bld
 		return false;
 
 	// send the command to construct a new building
@@ -1521,9 +1524,13 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 site.bo->production_hint == -1 // not a renewing building (forester...)
 		 and
 		 site.builttime + 600000 < game().get_gametime() // > 10 minutes old
+		 and
+		 site.site->can_start_working() // building is occupied
 		 and not
 		 site.site->get_statistics_percent()) // production stats == 0%
 	{
+		log("\n\nStats: %i\nName: %s\nCoords: (%i, %i)\n", site.site->get_statistics_percent(), site.bo->name, site.site->get_position().x, site.site->get_position().y);
+		assert(strcmp("farm", site.bo->name));
 		// Do not destruct building, if it's basic and the last of this type left.
 		if (site.bo->is_basic && site.bo->cnt_built <= 1)
 			return false;
