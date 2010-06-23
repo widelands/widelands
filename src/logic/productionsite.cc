@@ -42,7 +42,7 @@
 
 namespace Widelands {
 
-static const size_t STATISTICS_VECTOR_LENGTH = 10;
+static const size_t STATISTICS_VECTOR_LENGTH = 20;
 
 
 
@@ -289,9 +289,9 @@ void ProductionSite::prefill
  */
 void ProductionSite::calc_statistics()
 {
-	uint32_t pos;
-	uint32_t ok = 0;
-	uint32_t lastOk = 0;
+	uint8_t pos;
+	uint8_t ok = 0;
+	uint8_t lastOk = 0;
 
 	for (pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
 		if (m_statistics[pos]) {
@@ -300,8 +300,8 @@ void ProductionSite::calc_statistics()
 				++lastOk;
 		}
 	}
-	uint32_t const percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	uint32_t const lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
+	uint8_t const percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
+	uint8_t const lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	const std::string trend =
 		lastPercOk > percOk ? "+" : lastPercOk < percOk ? "-" : "=";
@@ -315,7 +315,7 @@ void ProductionSite::calc_statistics()
 			(m_statistics_buffer, sizeof(m_statistics_buffer),
 			 "%d%%",    percOk);
 
-	m_last_stat_percent = static_cast<char>(percOk); //FIXME: ARGH!
+	m_last_stat_percent = static_cast<int8_t>(percOk);
 
 	m_statistics_changed = false;
 }

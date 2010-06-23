@@ -8,6 +8,7 @@ ranger=1
 
 [aihints]
 renews_map_resource=trunk
+space_consumer=true
 
 [programs]
 work=_Work

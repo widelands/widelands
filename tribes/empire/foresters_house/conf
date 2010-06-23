@@ -9,6 +9,7 @@ stone=1
 forester=1
 
 [aihints]
+space_consumer=true
 renews_map_resource=trunk
 
 [programs]
