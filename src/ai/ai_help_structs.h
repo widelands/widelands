@@ -239,6 +239,7 @@ struct BuildingObserver {
 struct ProductionSiteObserver {
 	Widelands::ProductionSite * site;
 	int32_t builttime;
+	uint8_t statszero;
 	BuildingObserver * bo;
 };
 

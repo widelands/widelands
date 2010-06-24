@@ -1527,26 +1527,33 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 and
 		 site.builttime + 600000 < game().get_gametime() // > 10 minutes old
 		 and
-		 site.site->can_start_working() // building is occupied
-		 and not
-		 site.site->get_statistics_percent()) // production stats == 0%
+		 site.site->can_start_working()) // building is occupied
 	{
-		// Do not destruct building, if it's basic and the last of this type left.
-		if (site.bo->is_basic && site.bo->cnt_built <= 1)
-			return false;
+		if (site.site->get_statistics_percent()) { // production stats == 0%
+			++site.statszero;
+			// Only continue here, if at least 3 following times, the stats were 0%
+			if (site.statszero >= 3) {
+				// Do not destruct building, if it's basic and the last of this
+				// type left.
+				if (site.bo->is_basic && site.bo->cnt_built <= 1)
+					return false;
 
-		// If building seems to be useless, think about destructing it and it's
-		// flag (via flag destruction) more or less randomly. The destruction of
-		// the flag avoids that defaultAI will have too many unused roads - if
-		// needed the road will be rebuild directly anyways.
-		//
-		// Add a bonus if one building of this type is still unoccupied
-		if (((game().get_gametime() % 4) + site.bo->unoccupied) > 2) {
-			game().send_player_bulldoze(site.site->base_flag());
-			return true;
-		}
-		else
+				// If building seems to be useless, think about destructing it and
+				// it's flag (via flag destruction) more or less randomly. The
+				// destruction of the flag avoids that defaultAI will have too many
+				// unused roads - if needed the road will be rebuild directly.
+				//
+				// Add a bonus if one building of this type is still unoccupied
+				if (((game().get_gametime() % 4) + site.bo->unoccupied) > 2) {
+					game().send_player_bulldoze(site.site->base_flag());
+					return true;
+				}
+				else
+					return false;
+			}
 			return false;
+		} else
+			site.statszero = 0; // reset zero counter
 	}
 
 	// Do not have too many constructionsites
@@ -2017,6 +2024,7 @@ void DefaultAI::gain_building (Building & b)
 			productionsites.back().site = &ref_cast<ProductionSite, Building>(b);
 			productionsites.back().bo = &bo;
 			productionsites.back().builttime = game().get_gametime();
+			productionsites.back().statszero = 0;
 
 			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
 				++wares[bo.outputs[i]].producers;
