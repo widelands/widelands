@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"POT-Creation-Date: 2010-06-13 19:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -29,7 +29,7 @@ msgid ""
 "Collectors"
 msgstr ""
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:39
+#: ../../scripting/win_conditions/01_defeat_all.lua:56
 msgid ""
 "Congratulations!"
 msgstr ""
@@ -39,12 +39,7 @@ msgid ""
 "Endless Game"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_tribes_together.lua:85
-msgid ""
-"Game over"
-msgstr ""
-
-#: ../../scripting/win_conditions/01_defeat_all.lua:28
+#: ../../scripting/win_conditions/01_defeat_all.lua:45
 msgid ""
 "Sorry, you have lost this game!"
 msgstr ""
@@ -64,29 +59,9 @@ msgid ""
 "The player %i has currently %i points"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_tribes_together.lua:11
-msgid ""
-"The three tribes play together vs each other. Vision is granted to all the players playing together"
-msgstr ""
-
-#: ../../scripting/win_conditions/03_tribes_together.lua:79
-msgid ""
-"The tribe %s is no more."
-msgstr ""
-
 #: ../../scripting/win_conditions/01_defeat_all.lua:11
 msgid ""
-"The tribe that can defeat all others wins!"
-msgstr ""
-
-#: ../../scripting/win_conditions/03_tribes_together.lua:79
-msgid ""
-"Tribe defeated!"
-msgstr ""
-
-#: ../../scripting/win_conditions/03_tribes_together.lua:10
-msgid ""
-"Tribes together"
+"The tribe (or team) that can defeat all others wins!"
 msgstr ""
 
 #: ../../scripting/win_conditions/02_collectors.lua:71
@@ -99,8 +74,7 @@ msgid ""
 "You get points for wares in your HQ, the one with the highest number of wares at the end of 4 hours wins the game"
 msgstr ""
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:40
-#: ../../scripting/win_conditions/03_tribes_together.lua:85
+#: ../../scripting/win_conditions/01_defeat_all.lua:57
 msgid ""
 "You have won this game!"
 msgstr ""
@@ -110,7 +84,7 @@ msgid ""
 "You lost"
 msgstr ""
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:27
+#: ../../scripting/win_conditions/01_defeat_all.lua:44
 msgid ""
 "You lost!"
 msgstr ""
@@ -123,15 +97,5 @@ msgstr ""
 #: ../../scripting/win_conditions/02_collectors.lua:69
 msgid ""
 "You've lost this game!"
-msgstr ""
-
-#: ../../scripting/win_conditions/03_tribes_together.lua:74
-msgid ""
-"You've lost!"
-msgstr ""
-
-#: ../../scripting/win_conditions/03_tribes_together.lua:74
-msgid ""
-"Your tribe is no more. You have lost this game"
 msgstr ""
 
