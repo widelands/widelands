@@ -33,7 +33,7 @@ namespace Widelands {
 /*************************************************************************/
 /*                         Router Implementation                         */
 /*************************************************************************/
-Router::Router(const ResetCycleFn& reset) : m_reset(reset), mpf_cycle(0) {}
+Router::Router(const ResetCycleFn & reset) : m_reset(reset), mpf_cycle(0) {}
 
 uint32_t Router::assign_cycle()
 {
@@ -91,7 +91,7 @@ bool Router::find_route
 
 	Open.push(&start);
 
-	for(;;) {
+	for (;;) {
 		if (Open.empty()) // path not found
 			return false;
 		current = Open.top();
@@ -116,8 +116,11 @@ bool Router::find_route
 			if (&neighbour == &end && !route)
 				return true;
 
-			// We have already found the best path to this neighbour, no need to visit it again.
-			if (neighbour.mpf_cycle == mpf_cycle && !neighbour.cookie().is_active())
+			// We have already found the best path
+			// to this neighbour, no need to visit it again.
+			if
+				(neighbour.mpf_cycle == mpf_cycle &&
+				 !neighbour.cookie().is_active())
 				continue;
 
 			/*

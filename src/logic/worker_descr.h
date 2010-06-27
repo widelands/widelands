@@ -54,7 +54,7 @@ public:
 	Worker_Descr
 		(char const * const name, char const * const descname,
 		 std::string const & directory, Profile &,  Section & global_s,
-		 Tribe_Descr const &, EncodeData const *);
+		 Tribe_Descr const &);
 	virtual ~Worker_Descr();
 
 	virtual Bob & create_object() const;

@@ -67,7 +67,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		 m_fn, m_fs),
 	m_wincondition
 		(this, "win_condition",
-		 m_xres * 7 / 10 , m_yres * 4 / 10, m_butw, m_buth,
+		 m_xres * 7 / 10, m_yres * 4 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_LaunchGame::win_condition_clicked, *this,
 		 "", std::string(), false, false,

@@ -288,7 +288,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_language_list.add
 		("English", "en",
 		 g_gr->get_no_picture(), "en" == opt.language);
-		 
+
 	filenameset_t files;
 	Section * s = &g_options.pull_section("global");
 	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
@@ -304,7 +304,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	{
 		char const * const path = pname->c_str();
 
-		if 
+		if
 			(!strcmp(FileSystem::FS_Filename(path), ".") ||
 			 !strcmp(FileSystem::FS_Filename(path), "..") ||
 			 !g_fs->IsDirectory(path))
@@ -319,9 +319,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	// Add currently used language manually
 	if (!own_selected)
 		m_language_list.add
-			(s->get_string(opt.language.c_str(), opt.language.c_str()), opt.language,
-			 g_gr->get_no_picture(), true);
-		
+			(s->get_string(opt.language.c_str(), opt.language.c_str()),
+			 opt.language, g_gr->get_no_picture(), true);
 }
 
 void Fullscreen_Menu_Options::advanced_options() {
@@ -452,24 +451,18 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this,
 		 m_xres * 1313 / 10000, m_yres * 37 / 50,
 		 _("Distance for windows to snap to borders:"), UI::Align_VCenter),
-	m_hw_improvements (this, Point(m_xres * 19 / 200, m_yres * 7715 / 10000)),
-	m_label_hw_improvements
-		(this,
-		 m_xres * 1313 / 10000, m_yres * 7865 / 10000,
-		 _("Graphics experimental improvements."),
-		 UI::Align_VCenter),
-	m_double_buffer (this, Point(m_xres * 19 / 200, m_yres * 8181 / 10000)),
-	m_label_double_buffer
-		(this,
-		 m_xres * 1313 / 10000, m_yres * 8331 / 10000,
-		 _("Graphics double buffering."),
-		 UI::Align_VCenter),
 
-	m_remove_syncstreams (this, Point(m_xres * 19 / 200, m_yres * 8649 / 10000)),
+	m_remove_syncstreams (this, Point(m_xres * 19 / 200, m_yres * 7715 / 10000)),
 	m_label_remove_syncstreams
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 8799 / 10000,
+		 m_xres * 1313 / 10000, m_yres * 7865 / 10000,
 		 _("Remove Syncstream dumps on startup"), UI::Align_VCenter),
+
+	m_opengl (this, Point(m_xres * 19 / 200, m_yres * 8180 / 10000)),
+	m_label_opengl
+		(this,
+		 m_xres * 1313 / 10000, m_yres * 8330 / 10000,
+		 _("OpenGL rendering *Highly experimental!*"), UI::Align_VCenter),
 
 	os(opt)
 {
@@ -478,15 +471,16 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_message_sound        .set_state(opt.message_sound);
 	m_label_nozip          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_nozip                .set_state(opt.nozip);
-	m_hw_improvements      .set_state(opt.hw_improvements);
-	m_double_buffer        .set_state(opt.double_buffer);
 	m_label_speed          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_snap_dis_border.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_snap_dis_panel .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_hw_improvements.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_double_buffer  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_remove_syncstreams.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
+	m_label_opengl         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_opengl               .set_state(opt.opengl);
+#ifndef USE_OPENGL
+	m_opengl               .set_enabled(false);
+#endif
 	m_sb_speed             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_border        .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_panel         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -544,13 +538,16 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	// Write all remaining data from UI elements
 	os.message_sound        = m_message_sound.get_state();
 	os.nozip                = m_nozip.get_state();
-	os.hw_improvements      = m_hw_improvements.get_state();
-	os.double_buffer        = m_double_buffer.get_state();
 	os.ui_font              = m_ui_font_list.get_selected();
 	os.speed_of_new_game    = m_sb_speed.getValue() * 1000;
 	os.panel_snap_distance  = m_sb_dis_panel.getValue();
 	os.border_snap_distance = m_sb_dis_border.getValue();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
+#ifdef USE_OPENGL
+	os.opengl               = m_opengl.get_state();
+#else
+	os.opengl               = false;
+#endif
 	return os;
 }
 
@@ -620,10 +617,6 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 		("sound_at_message", true);
 	opt.nozip                 =  m_opt_section.get_bool
 		("nozip",            false);
-	opt.hw_improvements       =  m_opt_section.get_bool
-		("hw_improvements",  false);
-	opt.double_buffer         =  m_opt_section.get_bool
-		("double_buffer",    false);
 	opt.ui_font               =  m_opt_section.get_string
 		("ui_font",     "serif");
 	opt.speed_of_new_game     =  m_opt_section.get_int
@@ -636,6 +629,8 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 		("remove_replays", 0);
 	opt.remove_syncstreams    = m_opt_section.get_bool
 		("remove_syncstreams", true);
+	opt.opengl                = m_opt_section.get_bool
+		("opengl", false);
 	return opt;
 }
 
@@ -661,8 +656,6 @@ void Options_Ctrl::save_options() {
 
 	m_opt_section.set_bool("sound_at_message",      opt.message_sound);
 	m_opt_section.set_bool("nozip",                 opt.nozip);
-	m_opt_section.set_bool("hw_improvements",       opt.hw_improvements);
-	m_opt_section.set_bool("double_buffer",         opt.double_buffer);
 	m_opt_section.set_string("ui_font",             opt.ui_font);
 	m_opt_section.set_int("speed_of_new_game",      opt.speed_of_new_game);
 	m_opt_section.set_int("border_snap_distance",   opt.border_snap_distance);
@@ -670,6 +663,7 @@ void Options_Ctrl::save_options() {
 
 	m_opt_section.set_int("remove_replays",         opt.remove_replays);
 	m_opt_section.set_bool("remove_syncstreams",    opt.remove_syncstreams);
+	m_opt_section.set_bool("opengl",                opt.opengl);
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);

@@ -19,12 +19,14 @@
 
 #include "minimap.h"
 
-#include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "logic/map.h"
 #include "mapviewpixelconstants.h"
+
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/render/gameview.h"
 
 
 MiniMap::View::View
@@ -58,7 +60,9 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 
 void MiniMap::View::draw(RenderTarget & dst)
 {
-	dst.renderminimap
+	GameView gameview(dst);
+
+	gameview.renderminimap
 		(m_ibase.egbase(),
 		 m_ibase.get_player(),
 		 (*m_flags) & (MiniMap::Zoom2) ?

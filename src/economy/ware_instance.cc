@@ -52,8 +52,8 @@ struct IdleWareSupply : public Supply {
 	virtual PlayerImmovable * get_position(Game &);
 	virtual bool is_active() const throw ();
 	virtual bool has_storage() const throw ();
-	virtual void get_ware_type(bool& isworker, Ware_Index& ware) const;
-	virtual void send_to_storage(Game &, Warehouse* wh);
+	virtual void get_ware_type(bool & isworker, Ware_Index & ware) const;
+	virtual void send_to_storage(Game &, Warehouse * wh);
 
 	virtual uint32_t nr_supplies(Game const &, Request const &) const;
 	virtual WareInstance & launch_item(Game &, Request const &);
@@ -121,7 +121,7 @@ bool IdleWareSupply::has_storage()  const throw ()
 	return m_ware.is_moving();
 }
 
-void IdleWareSupply::get_ware_type(bool& isworker, Ware_Index& ware) const
+void IdleWareSupply::get_ware_type(bool & isworker, Ware_Index & ware) const
 {
 	isworker = false;
 	ware = m_ware.descr_index();
@@ -159,7 +159,7 @@ Worker & IdleWareSupply::launch_worker(Game &, Request const &)
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
 }
 
-void IdleWareSupply::send_to_storage(Game & game, Warehouse* wh)
+void IdleWareSupply::send_to_storage(Game & game, Warehouse * wh)
 {
 	assert(!has_storage());
 
@@ -471,7 +471,8 @@ void WareInstance::Loader::load(FileRead & fr)
 	m_location = fr.Unsigned32();
 	m_transfer_nextstep = fr.Unsigned32();
 	if (fr.Unsigned8()) {
-		ware.m_transfer = new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), ware);
+		ware.m_transfer =
+			new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), ware);
 		ware.m_transfer->read(fr, m_transfer);
 	}
 }
@@ -500,7 +501,8 @@ void WareInstance::Loader::load_finish()
 }
 
 
-void WareInstance::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+void WareInstance::save
+	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_WareInstance);
 	fw.Unsigned8(WAREINSTANCE_SAVEGAME_VERSION);
@@ -510,7 +512,8 @@ void WareInstance::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, F
 	Map_Object::save(egbase, mos, fw);
 
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_transfer_nextstep.get(egbase)));
+	fw.Unsigned32
+		(mos.get_object_file_index_or_zero(m_transfer_nextstep.get(egbase)));
 	if (m_transfer) {
 		fw.Unsigned8(1);
 		m_transfer->write(mos, fw);
@@ -519,7 +522,8 @@ void WareInstance::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, F
 	}
 }
 
-Map_Object::Loader * WareInstance::load(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+Map_Object::Loader * WareInstance::load
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	try {
 		uint8_t version = fr.Unsigned8();
@@ -543,7 +547,7 @@ Map_Object::Loader * WareInstance::load(Editor_Game_Base & egbase, Map_Map_Objec
 		loader->init(egbase, mol, *new WareInstance(wareindex, descr));
 		loader->load(fr);
 		return loader.release();
-	} catch(const std::exception & e) {
+	} catch (const std::exception & e) {
 		throw wexception("WareInstance: %s", e.what());
 	}
 }

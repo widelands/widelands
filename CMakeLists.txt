@@ -213,6 +213,16 @@ find_package(GGZ_Core REQUIRED)
 include_directories(${GGZ_CORE_INCLUDE_DIR})
 add_definitions("-DUSE_GGZ")
 
+# Check for opengl
+# TODO Check for SDL_opengl.h and add to include path
+find_package(OpenGL)
+if (OPENGL_FOUND)
+  # OpenGL Headers are not needed directly. Instead SDL_opengl.h should be searched
+  add_definitions("-DUSE_OPENGL")
+else (OPENGL_FOUND)
+  message (STATUS "OpenGL support disabled, check your libraries path and installed packages!")
+endif (OPENGL_FOUND)
+
 # ...but using MAJOR, MINOR and PATCH
 if (DEFINED WL_VERSION_MAJOR)
 	set (CPACK_PACKAGE_VERSION_MAJOR ${WL_VERSION_MAJOR})

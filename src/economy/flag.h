@@ -91,6 +91,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 			m_roads[3] or m_roads[4] or m_roads[5];
 	}
 	Road * get_road(uint8_t const dir) const {return m_roads[dir - 1];}
+	uint8_t nr_of_roads() const;
 	void attach_road(int32_t dir, Road *);
 	void detach_road(int32_t dir);
 
@@ -98,7 +99,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	bool is_dead_end() const;
 
-	bool has_capacity();
+	bool has_capacity() const;
 	uint32_t total_capacity() {return m_item_capacity;}
 	uint32_t current_items() const {return m_item_filled;}
 	void wait_for_capacity(Game &, Worker &);
@@ -107,7 +108,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool has_pending_item(Game &, Flag & destflag);
 	bool ack_pending_item(Game &, Flag & destflag);
 	WareInstance * fetch_pending_item(Game &, PlayerImmovable & dest);
-	Wares	get_items();
+	Wares get_items();
 
 	void call_carrier(Game &, WareInstance &, PlayerImmovable * nextstep);
 	void update_items(Game &, Flag * other);

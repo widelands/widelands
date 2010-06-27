@@ -175,7 +175,8 @@ void Request::Read
 
 						if (!transfer) {
 							log
-								("WARNING: loading request, transferred object %u has no transfer\n",
+								("WARNING: loading request, transferred object "
+								 "%u has no transfer\n",
 								 obj->serial());
 						} else {
 							transfer->set_request(this);
@@ -185,8 +186,8 @@ void Request::Read
 						uint8_t const what_is = fr.Unsigned8();
 						if (what_is != WARE and what_is != WORKER and what_is != 2)
 							throw wexception
-								("type is %u but must be one of {%u (WARE), %u (WORKER), "
-								 "%u (SOLDIER)}",
+								("type is %u but must be one of {%u (WARE), %u "
+								 "(WORKER), %u (SOLDIER)}",
 								 what_is, WARE, WORKER, 2);
 						uint32_t const reg = fr.Unsigned32();
 						if (not mol.is_object_known(reg))

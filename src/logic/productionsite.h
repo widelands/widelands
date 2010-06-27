@@ -57,7 +57,7 @@ struct ProductionSite_Descr : public Building_Descr {
 	ProductionSite_Descr
 		(char const * name, char const * descname,
 		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &, EncodeData const *);
+		 Tribe_Descr const &);
 	virtual ~ProductionSite_Descr();
 
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -229,7 +229,7 @@ protected:  // TrainingSite must have access to this stuff
 	char                     m_statistics_buffer[40];
 	char                     m_result_buffer   [213];
 	int8_t                   m_last_stat_percent;
-	bool                      m_is_stopped;
+	bool                     m_is_stopped;
 };
 
 /**

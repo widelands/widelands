@@ -134,6 +134,7 @@ macro(LinkExecutable exe_name is_test)
   target_link_libraries(${exe_name} ${LUA_LIBRARY})
   target_link_libraries(${exe_name} ${SDLGFX_LIBRARY})
   target_link_libraries(${exe_name} ${GGZ_CORE_LIBRARY})
+  target_link_libraries(${exe_name} ${OPENGL_gl_LIBRARY})
 
   if (${is_test} STREQUAL TRUE)
     target_link_libraries(${exe_name} ${Boost_LIBRARIES})

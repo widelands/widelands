@@ -262,6 +262,7 @@ void DefaultAI::late_initialization ()
 		bo.need_stones            = bh.is_stoneproducer();
 		bo.need_water             = bh.get_needs_water();
 		bo.recruitment            = bh.for_recruitment();
+		bo.space_consumer         = bh.is_space_consumer();
 
 		if (char const * const s = bh.get_renews_map_resource())
 			bo.production_hint = tribe->safe_ware_index(s).value();
@@ -503,6 +504,7 @@ void DefaultAI::update_buildable_field
 		field.stones_nearby          = 0;
 		field.tree_consumers_nearby  = 0;
 		field.stone_consumers_nearby = 0;
+		field.space_consumers_nearby = 0;
 		field.producers_nearby.clear();
 		field.producers_nearby.resize(wares.size());
 		field.consumers_nearby.clear();
@@ -657,7 +659,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
 			if (bld->descr().get_ismine()) {
 				++field.mines_nearby;
 			} else if (upcast(ConstructionSite const, cs, bld)) {
-				if(cs->building().get_ismine())
+				if (cs->building().get_ismine())
 					++field.mines_nearby;
 			}
 		}
@@ -852,16 +854,18 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// add bonus near buildings outputting production_hint ware
 					prio += 2 * bf->producers_nearby[bo.production_hint];
 					// Add preciousness - makes the defaultAI build foresters earlier
-					prio += 2 * wares[bo.production_hint].preciousness;
+					prio += wares[bo.production_hint].preciousness;
 
 					// Check if the reproduced wares are needed
 					Ware_Index wt(static_cast<size_t>(bo.production_hint));
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						// Don't check if the economy has only one flag.
-						if ((*l.current)->flags.size() < 2)
+						if ((*l.current)->flags.size() < 3)
 							continue;
-						if ((*l.current)->economy.needs_ware(wt))
+						if ((*l.current)->economy.needs_ware(wt)) {
 							prio += 1 + wares[bo.production_hint].preciousness;
+							break;
+						}
 					}
 
 					// Do not build too many of these buildings, but still care
@@ -989,8 +993,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			if
 				(bo.type != BuildingObserver::PRODUCTIONSITE ||
 				 !bo.is_basic || bo.total_count() > 0)
-				prio -=
-					2 * bo.cnt_under_construction * (bo.cnt_under_construction + 1);
+				prio /=
+					1 + bo.cnt_under_construction * (bo.cnt_under_construction + 1);
 
 			// add big penalty if water is needed, but is not near
 			if (bo.need_water) {
@@ -1004,6 +1008,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					if (bf->producers_nearby[bo.outputs[k]] > 0)
 						prio -= 3;
 			}
+
+			// think of space consuming buildings nearby like farms or vineyards
+			prio /= 1 + bf->space_consumers_nearby;
 
 			// Stop here, if priority is 0 or less.
 			if (prio <= 0)
@@ -1128,7 +1135,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		return false;
 
 	// do not have too many construction sites
-	if (proposed_priority < static_cast<int32_t>(total_constructionsites))
+	if
+		(proposed_priority < static_cast<int32_t>(total_constructionsites)
+		 and not
+		 onlymissing) // only return here, if we do NOT try to build a missing bld
 		return false;
 
 	// send the command to construct a new building
@@ -1249,13 +1259,18 @@ bool DefaultAI::improve_roads (int32_t gametime)
 		EconomyObserver * eco = economies.front();
 		if (!eco->flags.empty()) {
 			bool finish = false;
+			Flag const & flag = *eco->flags.front();
 
 			// try to connect to another economy
 			if (economies.size() > 1)
-				finish = connect_flag_to_another_economy(*eco->flags.front());
+				finish = connect_flag_to_another_economy(flag);
 
-			if (!finish)
-				finish = improve_transportation_ways(*eco->flags.front());
+			// try to improve the roads at this flag
+			// TODO  do this only on useful places - the attempt below unfortunally
+			// TODO  did not work as it should...
+			// // if the flag is full of wares or if it is not yet a fork.
+			if (!finish) //&& (!flag.has_capacity() || flag.nr_of_roads() < 3))
+				finish = improve_transportation_ways(flag);
 
 			// cycle through flags one at a time
 			eco->flags.push_back(eco->flags.front());
@@ -1287,7 +1302,7 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 	functor.economy = flag.get_economy();
 	Map & map = game().map();
 	map.find_reachable_fields
-		(Area<FCoords>(map.get_fcoords(flag.get_position()), 16),
+		(Area<FCoords>(map.get_fcoords(flag.get_position()), 12),
 		 &reachable,
 		 check,
 		 functor);
@@ -1295,33 +1310,33 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 	if (reachable.empty())
 		return false;
 
-	// then choose the one closest to the originating flag
-	int32_t closest_distance = std::numeric_limits<int32_t>::max();
+	// then choose the one with the shortest path
+	Path & path = *new Path();;
+	bool found = false;
+	check.set_openend(false);
 	Coords closest;
 	container_iterate_const(std::vector<Coords>, reachable, i) {
-		int32_t const distance =
-			map.calc_distance(flag.get_position(), *i.current);
-		if (distance < closest_distance) {
+		Path & path2 = *new Path();
+		if (map.findpath(flag.get_position(), *i.current, 0, path2, check) < 0)
+			continue;
+
+		if (!found || path.get_nsteps() > path2.get_nsteps()) {
+			path = path2;
 			closest = *i.current;
-			closest_distance = distance;
+			found = true;
 		}
 	}
-	assert(closest_distance != std::numeric_limits<int32_t>::max());
 
-	// if we join a road and there is no flag yet, build one
-	if (dynamic_cast<const Road *> (map[closest].get_immovable()))
-		game().send_player_build_flag (player_number(), closest);
+	if (found) {
+		// if we join a road and there is no flag yet, build one
+		if (dynamic_cast<const Road *>(map[closest].get_immovable()))
+			game().send_player_build_flag(player_number(), closest);
 
-	// and finally build the road
-	Path & path = *new Path();
-	check.set_openend (false);
-	if (map.findpath(flag.get_position(), closest, 0, path, check) < 0) {
-		delete &path;
-		return false;
+		// and finally build the road
+		game().send_player_build_road(player_number(), path);
+		return true;
 	}
-
-	game().send_player_build_road (player_number(), path);
-	return true;
+	return false;
 }
 
 /// adds alternative ways to already existing ones
@@ -1358,7 +1373,7 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 
 			int32_t dist =
 				map.calc_distance(flag.get_position(), endflag->get_position());
-		if (dist > 16) //  out of range
+		if (dist > 12) //  out of range
 			continue;
 
 			queue.push
@@ -1502,6 +1517,43 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		// unused roads - if needed the road will be rebuild directly.
 		game().send_player_bulldoze(site.site->base_flag());
 		return true;
+	}
+
+	// All other productionsites without input...
+	if
+		(site.bo->inputs.empty() // does not consume anything
+		 and
+		 site.bo->production_hint == -1 // not a renewing building (forester...)
+		 and
+		 site.builttime + 600000 < game().get_gametime() // > 10 minutes old
+		 and
+		 site.site->can_start_working()) // building is occupied
+	{
+		if (site.site->get_statistics_percent()) { // production stats == 0%
+			++site.statszero;
+			// Only continue here, if at least 3 following times, the stats were 0%
+			if (site.statszero >= 3) {
+				// Do not destruct building, if it's basic and the last of this
+				// type left.
+				if (site.bo->is_basic && site.bo->cnt_built <= 1)
+					return false;
+
+				// If building seems to be useless, think about destructing it and
+				// it's flag (via flag destruction) more or less randomly. The
+				// destruction of the flag avoids that defaultAI will have too many
+				// unused roads - if needed the road will be rebuild directly.
+				//
+				// Add a bonus if one building of this type is still unoccupied
+				if (((game().get_gametime() % 4) + site.bo->unoccupied) > 2) {
+					game().send_player_bulldoze(site.site->base_flag());
+					return true;
+				}
+				else
+					return false;
+			}
+			return false;
+		} else
+			site.statszero = 0; // reset zero counter
 	}
 
 	// Do not have too many constructionsites
@@ -1872,13 +1924,20 @@ int32_t DefaultAI::calculate_need_for_ps
 
 
 void DefaultAI::consider_productionsite_influence
-	(BuildableField & field, Coords, BuildingObserver const & bo)
+	(BuildableField & field, Coords coords, BuildingObserver const & bo)
 {
 	if (bo.need_trees)
 		++field.tree_consumers_nearby;
 
 	if (bo.need_stones)
 		++field.stone_consumers_nearby;
+
+	if
+		(bo.space_consumer
+		 and
+		 game().map().calc_distance(coords, field.coords) < 4)
+		++field.space_consumers_nearby;
+
 	for (size_t i = 0; i < bo.inputs.size(); ++i)
 		++field.consumers_nearby[bo.inputs[i]];
 	for (size_t i = 0; i < bo.outputs.size(); ++i)
@@ -1918,12 +1977,12 @@ BuildingObserver & DefaultAI::get_building_observer (char const * const name)
 /// this is called whenever we gain ownership of a PlayerImmovable
 void DefaultAI::gain_immovable (PlayerImmovable & pi)
 {
-	if      (upcast(Building,       building, &pi))
+	if      (upcast(Building,   building, &pi))
 		gain_building (*building);
-	else if (upcast(Flag     const, flag,     &pi))
-		new_flags.push_back  (flag);
-	else if (upcast(Road     const, road,     &pi))
-		roads    .push_front (road);
+	else if (upcast(Flag const, flag,     &pi))
+		new_flags.push_back (flag);
+	else if (upcast(Road const, road,     &pi))
+		roads    .push_front(road);
 }
 
 /// this is called whenever we lose ownership of a PlayerImmovable
@@ -1954,6 +2013,8 @@ void DefaultAI::gain_building (Building & b)
 				 .building().name().c_str());
 		++target_bo.cnt_under_construction;
 		++total_constructionsites;
+		// Let defaultAI try to directly connect the constructionsite
+		next_road_due = game().get_gametime();
 	}
 	else {
 		++bo.cnt_built;
@@ -1962,6 +2023,8 @@ void DefaultAI::gain_building (Building & b)
 			productionsites.push_back (ProductionSiteObserver());
 			productionsites.back().site = &ref_cast<ProductionSite, Building>(b);
 			productionsites.back().bo = &bo;
+			productionsites.back().builttime = game().get_gametime();
+			productionsites.back().statszero = 0;
 
 			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
 				++wares[bo.outputs[i]].producers;

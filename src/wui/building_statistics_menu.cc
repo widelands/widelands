@@ -334,7 +334,7 @@ void Building_Statistics_Menu::table_changed(uint32_t) {update();}
 bool Building_Statistics_Menu::compare_building_size
 	(uint32_t const rowa, uint32_t const rowb)
 {
-	const Widelands::Tribe_Descr& tribe = iplayer().player().tribe();
+	const Widelands::Tribe_Descr & tribe = iplayer().player().tribe();
 	Widelands::Building_Index a = Widelands::Building_Index(m_table[rowa]);
 	Widelands::Building_Index b = Widelands::Building_Index(m_table[rowb]);
 	const Widelands::Building_Descr * descra = tribe.get_building_descr(a);

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-06-13 19:04+0000\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -433,12 +433,12 @@ msgid ""
 "Hammer"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:19
+#: ../../tribes/empire/vineyard/conf:20
 msgid ""
 "Harvest vine"
 msgstr ""
 
-#: ../../tribes/empire/farm/conf:17
+#: ../../tribes/empire/farm/conf:20
 msgid ""
 "Harvest wheat"
 msgstr ""
@@ -663,12 +663,12 @@ msgid ""
 "Piggery"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:17
+#: ../../tribes/empire/vineyard/conf:18
 msgid ""
 "Plant vine"
 msgstr ""
 
-#: ../../tribes/empire/farm/conf:15
+#: ../../tribes/empire/farm/conf:18
 msgid ""
 "Plant wheat"
 msgstr ""
@@ -1405,9 +1405,9 @@ msgstr ""
 #: ../../tribes/empire/deep_marblemine/conf:23
 #: ../../tribes/empire/deep_oremine/conf:22
 #: ../../tribes/empire/donkeyfarm/conf:22
-#: ../../tribes/empire/farm/conf:19
+#: ../../tribes/empire/farm/conf:22
 #: ../../tribes/empire/fishers_house/conf:17
-#: ../../tribes/empire/foresters_house/conf:15
+#: ../../tribes/empire/foresters_house/conf:16
 #: ../../tribes/empire/goldmine/conf:22
 #: ../../tribes/empire/hunters_house/conf:16
 #: ../../tribes/empire/inn/conf:20
@@ -1424,7 +1424,7 @@ msgstr ""
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22
 #: ../../tribes/empire/toolsmithy/conf:45
-#: ../../tribes/empire/vineyard/conf:21
+#: ../../tribes/empire/vineyard/conf:22
 #: ../../tribes/empire/weaponsmithy/conf:34
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16

@@ -49,9 +49,10 @@ void SupplyList::remove_supply(Supply & supp)
 }
 
 /**
- * Return whether there is at least one available supply that can match the given request.
+ * Return whether there is at least one available
+ * supply that can match the given request.
  */
-bool SupplyList::have_supplies(Game & game, const Request& req)
+bool SupplyList::have_supplies(Game & game, const Request & req)
 {
 	for (size_t i = 0; i < m_supplies.size(); ++i)
 		if (m_supplies[i]->nr_supplies(game, req))
