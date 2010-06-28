@@ -1199,11 +1199,32 @@ bool DefaultAI::construct_roads (int32_t gametime)
 	eo_to_connect->flags.push_back(eo_to_connect->flags.front());
 	eo_to_connect->flags.pop_front();
 
-	if (done)
+	if (done) {
+		eo_to_connect->failed_connection_tries = 0;
 		return true;
+	}
 
-	// Unable to connect, so we let this economy wait for 30 seconds if it fails.
+	// If the economy consists of just one constructionsite, and the defaultAI
+	// failed more than 4 times to connect, we remove the constructionsite
+	if
+		(eo_to_connect->failed_connection_tries > 3
+		 and
+		 eo_to_connect->flags.size() == 1)
+	{
+		Building * bld = eo_to_connect->flags.front()->get_building();
+		if (bld) {
+			BuildingObserver & bo = get_building_observer(bld->name().c_str());
+			if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
+				game().send_player_bulldoze
+					(*const_cast<Flag *>(eo_to_connect->flags.front()));
+				eo_to_connect->flags.pop_front();
+			}
+		}
+	}
+
+	// Unable to connect, so we let this economy wait for 30 seconds.
 	eo_to_connect->next_connection_try = gametime + 30000;
+	++eo_to_connect->failed_connection_tries;
 	return false;
 }
 
