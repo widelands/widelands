@@ -315,7 +315,7 @@ void ProductionSite::calc_statistics()
 			(m_statistics_buffer, sizeof(m_statistics_buffer),
 			 "%d%%",    percOk);
 
-	m_last_stat_percent = static_cast<int8_t>(percOk);
+	m_last_stat_percent = percOk;
 
 	m_statistics_changed = false;
 }
