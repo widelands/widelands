@@ -1529,7 +1529,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 and
 		 site.site->can_start_working()) // building is occupied
 	{
-		if (site.site->get_statistics_percent()) { // production stats == 0%
+		if (site.site->get_statistics_percent() == 0) { // production stats == 0%
 			++site.statszero;
 			// Only continue here, if at least 3 following times, the stats were 0%
 			if (site.statszero >= 3) {
