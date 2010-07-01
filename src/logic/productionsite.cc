@@ -315,7 +315,7 @@ void ProductionSite::calc_statistics()
 			(m_statistics_buffer, sizeof(m_statistics_buffer),
 			 "%d%%",    percOk);
 
-	m_last_stat_percent = static_cast<int8_t>(percOk);
+	m_last_stat_percent = percOk;
 
 	m_statistics_changed = false;
 }
@@ -794,6 +794,7 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 		if (result == Completed)
 			for (uint32_t i = descr().nr_working_positions(); i;)
 				m_working_positions[--i].worker->gain_experience(game);
+		calc_statistics();
 		break;
 	case Skipped:
 		m_skipped_programs[program_name] = game.get_gametime();
