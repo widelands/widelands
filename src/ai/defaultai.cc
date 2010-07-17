@@ -894,17 +894,18 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Do not build too many of these buildings, but still care
 					// to build at least one.
 					if (bo.total_count() > 1)
-						prio -= 15 * (bo.total_count());
+						prio -= 15 * bo.total_count();
 					else
 						prio *= 3;
 
+					// Calculate the need for this building
+					prio += wares[bo.production_hint].consumers;
+					prio += (bf->producers_nearby[bo.production_hint] - 1) * 10;
+					prio += wares[bo.production_hint].producers;
+					prio -= bo.total_count() * 2;
+					prio /= bo.total_count() + 1;
 					if (prio < 0)
 						continue;
-
-					// Calculate the need for this building
-					prio += 3 * wares[bo.production_hint].consumers;
-					prio += wares[bo.production_hint].preciousness;
-					prio += (bf->producers_nearby[bo.production_hint] - 1) * 10;
 				} else if (bo.recruitment) {
 					// "recruitment centeres" like the donkey farm should be build up
 					// as soon as a basic infrastructure was completed.
@@ -1335,8 +1336,7 @@ bool DefaultAI::improve_roads (int32_t gametime)
 			economies.push_back(eco);
 			economies.pop_front();
 
-			if (finish)
-				return true;
+			return finish;
 		} else
 			// If the economy has no flag, the observers need to be updated.
 			return check_economies();
