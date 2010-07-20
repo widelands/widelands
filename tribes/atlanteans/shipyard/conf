@@ -1,0 +1,57 @@
+size=medium
+# output=boat # small boats for water roads
+
+[buildcost]
+trunk=3
+planks=2
+stone=3
+spidercloth=2
+
+[working positions]
+shipbuilder=1
+
+[inputs]
+planks=10
+trunk=2
+spidercloth=4
+
+
+[programs]
+work=_Work
+boat=_Constructing boat
+ship=_Constructing ship
+
+[work]
+# call=boat
+sleep=20000
+# call=ship # TODO: instead check the different building states of ships
+            # - (no ship yet, ship that needs planks, ship that needs a trunk
+            #   (mast), ship that needs the sail)
+            # - and continue work on the one that is most complete.
+sleep=15000
+
+[boat]
+consume=trunk:1 planks:2
+animate=working 20000
+# produce=boat
+
+[ship]
+consume=trunk:1 planks:2
+# worker=build_with_planks
+animate=outofhouse 20000
+# produce=boat
+
+[idle]
+pics=shipyard_i_??.png  # ???
+hotspot=55 60
+playercolor=true
+
+[working]
+pics=shipyard_w_??.png  # ???
+hotspot=55 60
+playercolor=true
+
+[outofhouse]
+pics=shipyard_w_??.png  # ???
+hotspot=55 60
+playercolor=true
