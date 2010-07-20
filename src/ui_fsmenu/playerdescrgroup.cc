@@ -186,7 +186,7 @@ void PlayerDescriptionGroup::refresh()
 					d->btnReadyPlayer->set_visible(false);
 			}
 			std::string tribepath("tribes/" + player.tribe);
-			if(!m_tribenames[player.tribe].size())
+			if (!m_tribenames[player.tribe].size())
 			{
 				// get translated tribesname
 				Profile prof

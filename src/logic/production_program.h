@@ -38,8 +38,6 @@
 #include <string>
 #include <vector>
 
-
-struct EncodeData;
 struct Profile;
 
 namespace Widelands {
@@ -323,7 +321,7 @@ struct ProductionProgram {
 	struct ActAnimate : public Action {
 		ActAnimate
 			(char * parameters, ProductionSite_Descr &,
-			 std::string const & directory, Profile &, EncodeData const *);
+			 std::string const & directory, Profile &);
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
@@ -518,8 +516,7 @@ struct ProductionProgram {
 		 Profile              &,
 		 std::string    const & name,
 		 char           const * descname,
-		 ProductionSite_Descr *,
-		 EncodeData     const *);
+		 ProductionSite_Descr *);
 	~ProductionProgram() {
 		container_iterate_const(Actions, m_actions, i)
 			delete *i.current;

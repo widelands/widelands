@@ -6,29 +6,93 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-14 14:51+0000\n"
-"PO-Revision-Date: 2010-03-14 17:54+0000\n"
-"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
+"POT-Creation-Date: 2010-04-27 08:19+0000\n"
+"PO-Revision-Date: 2010-05-01 11:08+0000\n"
+"Last-Translator: Rasmus Olstedt <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-15 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-05-02 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
 
-#: ../../worlds/greenland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Widelands utvecklingslag"
+#: ../../worlds/greenland/conf:58
+msgid "Alder"
+msgstr "Al"
 
-#: ../../worlds/greenland/conf:3
-msgid "Greenland"
-msgstr "Grönland"
+#: ../../worlds/greenland/conf:59
+msgid "Alder medium"
+msgstr "Al mellan"
 
-#: ../../worlds/greenland/conf:4
-msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "Detta är de vackra och rika barbarländerna"
+#: ../../worlds/greenland/conf:60
+msgid "Alder small"
+msgstr "Al liten"
+
+#: ../../worlds/greenland/conf:61
+msgid "Alder tiny"
+msgstr "Al mycket liten"
+
+#: ../../worlds/greenland/conf:46
+msgid "Aspen"
+msgstr "Asp"
+
+#: ../../worlds/greenland/conf:47
+msgid "Aspen medium"
+msgstr "Asp mellan"
+
+#: ../../worlds/greenland/conf:48
+msgid "Aspen small"
+msgstr "Asp liten"
+
+#: ../../worlds/greenland/conf:49
+msgid "Aspen tiny"
+msgstr "Asp mycket liten"
+
+#: ../../worlds/greenland/conf:80
+msgid "Badger"
+msgstr "Grävling"
+
+#: ../../worlds/greenland/conf:66
+msgid "Beech"
+msgstr "Bok"
+
+#: ../../worlds/greenland/conf:67
+msgid "Beech medium"
+msgstr "Bok mellan"
+
+#: ../../worlds/greenland/conf:68
+msgid "Beech small"
+msgstr "Bok liten"
+
+#: ../../worlds/greenland/conf:69
+msgid "Beech tiny"
+msgstr "Bok mycket liten"
+
+#: ../../worlds/greenland/conf:62
+msgid "Birch"
+msgstr "Björk"
+
+#: ../../worlds/greenland/conf:63
+msgid "Birch medium"
+msgstr "Björk mellan"
+
+#: ../../worlds/greenland/conf:64
+msgid "Birch small"
+msgstr "Björk liten"
+
+#: ../../worlds/greenland/conf:65
+msgid "Birch tiny"
+msgstr "Björk mycket liten"
+
+#: ../../worlds/greenland/conf:81
+msgid "Brownbear"
+msgstr "Brunbjörn"
+
+#: ../../worlds/greenland/conf:82
+msgid "Bunny"
+msgstr "Hare"
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -43,6 +107,14 @@ msgstr "Buske"
 msgid "Cactus"
 msgstr "Kaktus"
 
+#: ../../worlds/greenland/conf:83
+msgid "Chamois"
+msgstr "Gems"
+
+#: ../../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr "Kol"
+
 #: ../../worlds/greenland/conf:14
 #: ../../worlds/greenland/conf:15
 #: ../../worlds/greenland/conf:16
@@ -50,9 +122,37 @@ msgstr "Kaktus"
 msgid "Dead Tree"
 msgstr "Dött träd"
 
+#: ../../worlds/greenland/conf:84
+msgid "Deer"
+msgstr "Hjort"
+
+#: ../../worlds/greenland/conf:85
+msgid "Duck"
+msgstr "And"
+
+#: ../../worlds/greenland/conf:86
+msgid "Elk"
+msgstr "Älg"
+
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
 msgstr "Nedfallet träd"
+
+#: ../../worlds/greenland/resconf:41
+msgid "Fish"
+msgstr "Fisk"
+
+#: ../../worlds/greenland/conf:87
+msgid "Fox"
+msgstr "Räv"
+
+#: ../../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr "Guld"
+
+#: ../../worlds/greenland/resconf:28
+msgid "Granite"
+msgstr "Granit"
 
 #: ../../worlds/greenland/conf:19
 #: ../../worlds/greenland/conf:20
@@ -60,10 +160,58 @@ msgstr "Nedfallet träd"
 msgid "Grass"
 msgstr "Gräs"
 
+#: ../../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr "Grönland"
+
+#: ../../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr "Järn"
+
+#: ../../worlds/greenland/conf:70
+msgid "Larch"
+msgstr "Lärkträd"
+
+#: ../../worlds/greenland/conf:71
+msgid "Larch medium"
+msgstr "Lärkträd mellan"
+
+#: ../../worlds/greenland/conf:72
+msgid "Larch small"
+msgstr "Lärkträd litet"
+
+#: ../../worlds/greenland/conf:73
+msgid "Larch tiny"
+msgstr "Lärkträd mycket litet"
+
+#: ../../worlds/greenland/conf:88
+msgid "Lynx"
+msgstr "Lodjur"
+
+#: ../../worlds/greenland/conf:89
+msgid "Marten"
+msgstr "Mård"
+
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
 msgid "Mushroom"
 msgstr "Svamp"
+
+#: ../../worlds/greenland/conf:50
+msgid "Oak"
+msgstr "Ek"
+
+#: ../../worlds/greenland/conf:51
+msgid "Oak medium"
+msgstr "Ek mellan"
+
+#: ../../worlds/greenland/conf:52
+msgid "Oak small"
+msgstr "Ek liten"
+
+#: ../../worlds/greenland/conf:53
+msgid "Oak tiny"
+msgstr "Ek mycket liten"
 
 #: ../../worlds/greenland/conf:24
 #: ../../worlds/greenland/conf:25
@@ -74,11 +222,51 @@ msgstr "Svamp"
 msgid "Pebble"
 msgstr "Småsten"
 
+#: ../../worlds/greenland/conf:90
+msgid "Reindeer"
+msgstr "Ren"
+
+#: ../../worlds/greenland/conf:74
+msgid "Rowan"
+msgstr "Rönn"
+
+#: ../../worlds/greenland/conf:75
+msgid "Rowan medium"
+msgstr "Rönn mellan"
+
+#: ../../worlds/greenland/conf:76
+msgid "Rowan small"
+msgstr "Rönn liten"
+
+#: ../../worlds/greenland/conf:77
+msgid "Rowan tiny"
+msgstr "Rönn mycket liten"
+
+#: ../../worlds/greenland/conf:91
+msgid "Sheep"
+msgstr "Får"
+
 #: ../../worlds/greenland/conf:30
 #: ../../worlds/greenland/conf:31
 #: ../../worlds/greenland/conf:32
 msgid "Skeleton"
 msgstr "Skelett"
+
+#: ../../worlds/greenland/conf:54
+msgid "Spruce"
+msgstr "Gran"
+
+#: ../../worlds/greenland/conf:55
+msgid "Spruce medium"
+msgstr "Gran mellan"
+
+#: ../../worlds/greenland/conf:56
+msgid "Spruce small"
+msgstr "Gran liten"
+
+#: ../../worlds/greenland/conf:57
+msgid "Spruce tiny"
+msgstr "Gran mycket liten"
 
 #: ../../worlds/greenland/conf:33
 #: ../../worlds/greenland/conf:34
@@ -99,181 +287,17 @@ msgstr "Stenblock"
 msgid "Stones"
 msgstr "Stenar"
 
-#: ../../worlds/greenland/conf:46
-msgid "Aspen"
-msgstr "Asp"
+#: ../../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Widelands utvecklingslag"
 
-#: ../../worlds/greenland/conf:47
-msgid "Aspen medium"
-msgstr "Asp mellan"
+#: ../../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr "Detta är de vackra och rika barbarländerna"
 
-#: ../../worlds/greenland/conf:48
-msgid "Aspen small"
-msgstr "Asp liten"
-
-#: ../../worlds/greenland/conf:49
-msgid "Aspen tiny"
-msgstr "Asp mycket liten"
-
-#: ../../worlds/greenland/conf:50
-msgid "Oak"
-msgstr "Ek"
-
-#: ../../worlds/greenland/conf:51
-msgid "Oak medium"
-msgstr "Ek mellan"
-
-#: ../../worlds/greenland/conf:52
-msgid "Oak small"
-msgstr "Ek liten"
-
-#: ../../worlds/greenland/conf:53
-msgid "Oak tiny"
-msgstr "Ek mycket liten"
-
-#: ../../worlds/greenland/conf:54
-msgid "Spruce"
-msgstr "Gran"
-
-#: ../../worlds/greenland/conf:55
-msgid "Spruce medium"
-msgstr "Gran mellan"
-
-#: ../../worlds/greenland/conf:56
-msgid "Spruce small"
-msgstr "Gran liten"
-
-#: ../../worlds/greenland/conf:57
-msgid "Spruce tiny"
-msgstr "Gran mycket liten"
-
-#: ../../worlds/greenland/conf:58
-msgid "Alder"
-msgstr "Al"
-
-#: ../../worlds/greenland/conf:59
-msgid "Alder medium"
-msgstr "Al mellan"
-
-#: ../../worlds/greenland/conf:60
-msgid "Alder small"
-msgstr "Al liten"
-
-#: ../../worlds/greenland/conf:61
-msgid "Alder tiny"
-msgstr "Al mycket liten"
-
-#: ../../worlds/greenland/conf:62
-msgid "Birch"
-msgstr "Björk"
-
-#: ../../worlds/greenland/conf:63
-msgid "Birch medium"
-msgstr "Björk mellan"
-
-#: ../../worlds/greenland/conf:64
-msgid "Birch small"
-msgstr "Björk liten"
-
-#: ../../worlds/greenland/conf:65
-msgid "Birch tiny"
-msgstr "Björk mycket liten"
-
-#: ../../worlds/greenland/conf:66
-msgid "Beech"
-msgstr "Bok"
-
-#: ../../worlds/greenland/conf:67
-msgid "Beech medium"
-msgstr "Bok mellan"
-
-#: ../../worlds/greenland/conf:68
-msgid "Beech small"
-msgstr "Bok liten"
-
-#: ../../worlds/greenland/conf:69
-msgid "Beech tiny"
-msgstr "Bok mycket liten"
-
-#: ../../worlds/greenland/conf:70
-msgid "Larch"
-msgstr "Lärkträd"
-
-#: ../../worlds/greenland/conf:71
-msgid "Larch medium"
-msgstr "Lärkträd mellan"
-
-#: ../../worlds/greenland/conf:72
-msgid "Larch small"
-msgstr "Lärkträd litet"
-
-#: ../../worlds/greenland/conf:73
-msgid "Larch tiny"
-msgstr "Lärkträd mycket litet"
-
-#: ../../worlds/greenland/conf:74
-msgid "Rowan"
-msgstr "Rönn"
-
-#: ../../worlds/greenland/conf:75
-msgid "Rowan medium"
-msgstr "Rönn mellan"
-
-#: ../../worlds/greenland/conf:76
-msgid "Rowan small"
-msgstr "Rönn liten"
-
-#: ../../worlds/greenland/conf:77
-msgid "Rowan tiny"
-msgstr "Rönn mycket liten"
-
-#: ../../worlds/greenland/conf:80
-msgid "Badger"
-msgstr "Grävling"
-
-#: ../../worlds/greenland/conf:81
-msgid "Brownbear"
-msgstr "Brunbjörn"
-
-#: ../../worlds/greenland/conf:82
-msgid "Bunny"
-msgstr "Hare"
-
-#: ../../worlds/greenland/conf:83
-msgid "Chamois"
-msgstr "Gems"
-
-#: ../../worlds/greenland/conf:84
-msgid "Deer"
-msgstr "Hjort"
-
-#: ../../worlds/greenland/conf:85
-msgid "Duck"
-msgstr "And"
-
-#: ../../worlds/greenland/conf:86
-msgid "Elk"
-msgstr "Älg"
-
-#: ../../worlds/greenland/conf:87
-msgid "Fox"
-msgstr "Räv"
-
-#: ../../worlds/greenland/conf:88
-msgid "Lynx"
-msgstr "Lodjur"
-
-#: ../../worlds/greenland/conf:89
-msgid "Marten"
-msgstr "Mård"
-
-#: ../../worlds/greenland/conf:90
-msgid "Reindeer"
-msgstr "Ren"
-
-#: ../../worlds/greenland/conf:91
-msgid "Sheep"
-msgstr "Får"
+#: ../../worlds/greenland/resconf:36
+msgid "Water"
+msgstr "Vatten"
 
 #: ../../worlds/greenland/conf:92
 msgid "Wisent"
@@ -283,29 +307,8 @@ msgstr "Visent"
 msgid "Wolf"
 msgstr "Varg"
 
-#: ../../worlds/greenland/resconf:4
-msgid "Coal"
-msgstr "Kol"
-
-#: ../../worlds/greenland/resconf:12
-msgid "Gold"
-msgstr "Guld"
-
-#: ../../worlds/greenland/resconf:20
-msgid "Iron"
-msgstr "Järn"
-
-#: ../../worlds/greenland/resconf:28
-msgid "Granit"
-msgstr "Granit"
-
-#: ../../worlds/greenland/resconf:36
-msgid "Water"
-msgstr "Vatten"
-
-#: ../../worlds/greenland/resconf:41
-msgid "Fish"
-msgstr "Fisk"
+#~ msgid "Granit"
+#~ msgstr "Granit"
 
 #~ msgid "Tree"
 #~ msgstr "Träd"

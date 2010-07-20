@@ -7,6 +7,7 @@ stone=2
 trunk=4
 
 [aihints]
+space_consumer=true
 build_material=false
 
 [working positions]

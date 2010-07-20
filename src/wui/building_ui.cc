@@ -46,4 +46,3 @@ void Building::hide_options()
 {
 	delete m_optionswindow;
 }
-

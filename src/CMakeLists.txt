@@ -128,6 +128,10 @@ if (GGZ_CORE_FOUND)
   target_link_libraries(widelands ${GGZ_CORE_LIBRARY})
 endif (GGZ_CORE_FOUND)
 
+if (OPENGL_FOUND)
+  target_link_libraries(widelands ${OPENGL_gl_LIBRARY})
+endif (OPENGL_FOUND)
+
 if (APPLE)
   target_link_libraries(widelands ${INTL_LIBRARY})
 endif (APPLE)

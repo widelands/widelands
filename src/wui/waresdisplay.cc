@@ -20,7 +20,7 @@
 #include "waresdisplay.h"
 
 #include "logic/editor_game_base.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "i18n.h"
 #include "logic/player.h"
 #include "graphic/rendertarget.h"
@@ -73,8 +73,8 @@ bool WaresDisplay::handle_mousemove
 }
 
 /**
- * Returns the index of the ware under the given coordinates, or WareIndex::Null()
- * if the given point is outside the range.
+ * Returns the index of the ware under the given coordinates, or
+ * WareIndex::Null() if the given point is outside the range.
  */
 Widelands::Ware_Index WaresDisplay::ware_at_point(int32_t x, int32_t y) const
 {
@@ -115,7 +115,10 @@ void WaresDisplay::update_desired_size()
 	if (m_warelists.size()) {
 		int32_t rows, height;
 
-		rows = (m_warelists[0]->get_nrwareids().value() + WaresPerRow - 1) / WaresPerRow;
+		rows =
+			(m_warelists[0]->get_nrwareids().value() +
+			 WaresPerRow - 1)
+			/ WaresPerRow;
 		height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
 
 		set_desired_size(Width, height + 30);

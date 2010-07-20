@@ -21,7 +21,7 @@
 
 #include "constants.h"
 #include "io/fileread.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "profile/profile.h"

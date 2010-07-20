@@ -21,7 +21,7 @@
 
 #include "mouse_constants.h"
 
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
 
@@ -365,15 +365,15 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 
 void EditBox::draw(RenderTarget & odst)
 {
-	if(!m->needredraw)
-	{
-		odst.blit(Point(0, 0), m->cache_pid);
-		return;
-	}
+	//if (!m_needredraw)
+	//{
+	//odst.blit(Point(0, 0), m_cache_pid);
+	//return;
+	//}
 
-	m->cache_pid = g_gr->create_surface(get_w(), get_h());
+	//m_cache_pid = g_gr->create_picture_surface(get_w(), get_h());
 
-	RenderTarget &dst = *(g_gr->get_surface_renderer(m->cache_pid));
+	RenderTarget &dst = odst; //*(g_gr->get_surface_renderer(m_cache_pid));
 
 	// Draw the background
 	dst.tile
@@ -432,8 +432,8 @@ void EditBox::draw(RenderTarget & odst)
 		 has_focus() ? static_cast<int32_t>(m->caret) :
 		 std::numeric_limits<uint32_t>::max());
 
-	odst.blit(Point(0, 0), m->cache_pid);
-	m->needredraw = false;
+	//odst.blit(Point(0, 0), m_cache_pid);
+	//m_needredraw = false;
 }
 
 /**
@@ -454,7 +454,8 @@ void EditBox::check_caret()
 
 	switch (m->align & Align_Horizontal) {
 	case Align_HCenter:
-		caretpos = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2 + m->scrolloffset + leftw;
+		caretpos = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2
+			 + m->scrolloffset + leftw;
 		break;
 	case Align_Right:
 		caretpos = get_w() - 4 + m->scrolloffset - rightw;
@@ -465,9 +466,9 @@ void EditBox::check_caret()
 	}
 
 	if (caretpos < 4)
-		m->scrolloffset += 4 - caretpos + get_w()/5;
+		m->scrolloffset += 4 - caretpos + get_w() / 5;
 	else if (caretpos > get_w() - 4)
-		m->scrolloffset -= caretpos - get_w() + 4 + get_w()/5;
+		m->scrolloffset -= caretpos - get_w() + 4 + get_w() / 5;
 
 	if ((m->align & Align_Horizontal) == Align_Left) {
 		if (m->scrolloffset > 0)

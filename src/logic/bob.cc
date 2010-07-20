@@ -62,21 +62,17 @@ uint32_t Bob::Descr::vision_range() const
 Bob::Descr::Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const * const tribe, EncodeData const * encdata)
+	 Tribe_Descr const * const tribe)
 	:
 	Map_Object_Descr(_name, _descname),
 	m_picture       (directory + global_s.get_string("picture", "menu.png")),
 	m_owner_tribe(tribe)
 {
-	m_default_encodedata.clear();
-
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
 
-		m_default_encodedata.parse(idle_s);
-
 		add_animation
-			("idle", g_anim.get (directory, idle_s, "idle.png", encdata));
+			("idle", g_anim.get (directory, idle_s, "idle.png"));
 	}
 
 	// Parse attributes
@@ -97,7 +93,8 @@ Bob::Descr::Descr
 Bob & Bob::Descr::create
 	(Editor_Game_Base & egbase,
 	 Player * const owner,
-	 const Coords & coords) const
+	 const Coords & coords)
+	const
 {
 	Bob & bob = create_object();
 	bob.set_owner(owner);
@@ -1085,7 +1082,7 @@ void Bob::Loader::load(FileRead & fr)
 	if (version != BOB_SAVEGAME_VERSION)
 		throw game_data_error("unknown/unhandled version: %u", version);
 
-	Bob& bob = get<Bob>();
+	Bob & bob = get<Bob>();
 
 	if (Player_Number owner_number = fr.Unsigned8()) {
 		if (owner_number > egbase().map().get_nrplayers())
@@ -1117,7 +1114,7 @@ void Bob::Loader::load(FileRead & fr)
 	uint32_t stacksize = fr.Unsigned32();
 	bob.m_stack.resize(stacksize);
 	states.resize(stacksize);
-	for(uint32_t i = 0; i < stacksize; ++i) {
+	for (uint32_t i = 0; i < stacksize; ++i) {
 		State & state = bob.m_stack[i];
 		LoadState & loadstate = states[i];
 
@@ -1131,7 +1128,7 @@ void Bob::Loader::load(FileRead & fr)
 
 		if (fr.Unsigned8()) {
 			uint32_t anims[6];
-			for(int i = 0; i < 6; ++i)
+			for (int i = 0; i < 6; ++i)
 				anims[i] = bob.descr().get_animation(fr.CString());
 			state.diranims = new DirAnimations
 				(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
@@ -1157,8 +1154,8 @@ void Bob::Loader::load_pointers()
 {
 	Map_Object::Loader::load_pointers();
 
-	Bob& bob = get<Bob>();
-	for(uint32_t i = 0; i < bob.m_stack.size(); ++i) {
+	Bob & bob = get<Bob>();
+	for (uint32_t i = 0; i < bob.m_stack.size(); ++i) {
 		State & state = bob.m_stack[i];
 		LoadState & loadstate = states[i];
 
@@ -1175,7 +1172,7 @@ void Bob::Loader::load_finish()
 	Map_Object::Loader::load_finish();
 }
 
-const Bob::Task * Bob::Loader::get_task(const std::string& name)
+const Bob::Task * Bob::Loader::get_task(const std::string & name)
 {
 	if (name == "move") return &taskMove;
 	if (name == "movepath") return &taskMovepath;
@@ -1184,12 +1181,13 @@ const Bob::Task * Bob::Loader::get_task(const std::string& name)
 	throw game_data_error("unknown bob task '%s'", name.c_str());
 }
 
-const BobProgramBase * Bob::Loader::get_program(const std::string& name)
+const BobProgramBase * Bob::Loader::get_program(const std::string & name)
 {
 	throw game_data_error("unknown bob program '%s'", name.c_str());
 }
 
-void Bob::save(Editor_Game_Base & eg, Map_Map_Object_Saver & mos, FileWrite & fw)
+void Bob::save
+	(Editor_Game_Base & eg, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	Map_Object::save(eg, mos, fw);
 
@@ -1212,8 +1210,8 @@ void Bob::save(Editor_Game_Base & eg, Map_Map_Object_Saver & mos, FileWrite & fw
 	fw.CString(m_signal);
 
 	fw.Unsigned32(m_stack.size());
-	for(unsigned int i = 0; i < m_stack.size(); ++i) {
-		const State& state = m_stack[i];
+	for (unsigned int i = 0; i < m_stack.size(); ++i) {
+		const State & state = m_stack[i];
 
 		fw.CString(state.task->name);
 		fw.Signed32(state.ivar1);
@@ -1230,8 +1228,10 @@ void Bob::save(Editor_Game_Base & eg, Map_Map_Object_Saver & mos, FileWrite & fw
 
 		if (state.diranims) {
 			fw.Unsigned8(1);
-			for(int dir = 1; dir <= 6; ++dir)
-				fw.CString(descr().get_animation_name(state.diranims->get_animation(dir)).c_str());
+			for (int dir = 1; dir <= 6; ++dir)
+				fw.CString
+					(descr().get_animation_name
+					 (state.diranims->get_animation(dir)).c_str());
 		} else {
 			fw.Unsigned8(0);
 		}
