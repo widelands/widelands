@@ -18,7 +18,7 @@
  */
 
 #include "economy/economy.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "interactive_gamebase.h"
 #include "logic/item_ware_descr.h"
 #include "logic/player.h"
@@ -44,7 +44,7 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 			 _("Economy options")),
 		m_tabpanel(*this, economy)
 	{
-		fit_inner(m_tabpanel);
+		set_center_panel(&m_tabpanel);
 	}
 
 	virtual void think() {
@@ -495,7 +495,6 @@ private:
 				 g_gr->get_picture(PicMod_UI, "pics/genstats_nrworkers.png"),
 				 &m_worker_target_quantities,
 				 _("Worker type target quantities"));
-			set_snapparent(true);
 			layout();
 		}
 

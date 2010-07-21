@@ -11,29 +11,52 @@ scythe=1
 0=setdescription tribe:cornfield_t
 1=findspace size:any radius:2
 2=walk coords
-3=animation idle 4000
+3=animation planting 4000
 4=plant
-5=animation idle 4000
+5=animation planting 4000
 6=return
 
 [harvest]
 0=findobject attrib:cornfield radius:2
 1=walk object
 2=playFX ../../../sound/farm/scythe 220
-3=animation idle 10000
+3=animation harvesting 10000
 4=object harvest
-5=animation idle 4000
+5=animation gathering 4000
 6=createitem corn
 7=return
 
 [idle]
 pics=idle_??.png
-hotspot=5 13
+hotspot=20 24
+playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=5 13
+hotspot=20 24
+playercolor=true
+fps=10
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=5 13
+hotspot=20 24
+playercolor=true
+fps=10
+
+[planting]
+pics=plant_??.png
+hotspot=14 34
+playercolor=true
+fps=10
+
+[harvesting]
+pics=harvest_??.png
+hotspot=19 34
+playercolor=true
+fps=10
+
+[gathering]
+pics=gather_??.png
+hotspot=12 34
+playercolor=true
+fps=5

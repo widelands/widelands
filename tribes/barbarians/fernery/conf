@@ -2,6 +2,9 @@ size=medium
 output=flax
 output=thatchreed
 
+[aihints]
+space_consumer=true
+
 [buildcost]
 trunk=5
 raw_stone=2

@@ -108,6 +108,7 @@ struct Player :
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 	Player_Number     player_number() const throw () {return m_plnum;}
+	TeamNumber team_number() const {return m_team_number;}
 	RGBColor const * get_playercolor() const {return m_playercolor;}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
@@ -115,11 +116,13 @@ struct Player :
 	void set_name(const std::string & name) {m_name = name;}
 	void set_frontier_style(uint8_t a) {m_frontier_style_index = a;}
 	void set_flag_style(uint8_t a) {m_flag_style_index = a;}
-
+	void set_team_number(TeamNumber team);
 
 	void create_default_infrastructure();
 
 	NodeCaps get_buildcaps(FCoords) const;
+
+	bool is_hostile(const Player& other) const;
 
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
@@ -537,6 +540,7 @@ private:
 	uint8_t                m_initialization_index;
 	uint8_t                m_frontier_style_index;
 	uint8_t                m_flag_style_index;
+	TeamNumber             m_team_number;
 	bool m_see_all;
 	bool                   m_view_changed;
 	const Player_Number    m_plnum;

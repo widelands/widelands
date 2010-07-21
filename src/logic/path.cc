@@ -68,8 +68,8 @@ void Path::save(FileWrite & fw) const
 	// Careful: steps are stored in the reverse order in m_path
 	// However, we save them in the forward order, to make loading easier
 	fw.Unsigned32(m_path.size());
-	for(uint32_t i = m_path.size(); i > 0; --i)
-		fw.Direction8(m_path[i-1]);
+	for (uint32_t i = m_path.size(); i > 0; --i)
+		fw.Direction8(m_path[i - 1]);
 }
 
 /**
@@ -87,7 +87,7 @@ void Path::load(FileRead & fr, Map const & map)
 	m_start = m_end = fr.Coords32(map.extent());
 	m_path.clear();
 	uint32_t steps = fr.Unsigned32();
-	while(steps--)
+	while (steps--)
 		append(map, fr.Direction8());
 }
 

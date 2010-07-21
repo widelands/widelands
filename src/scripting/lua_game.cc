@@ -113,6 +113,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RW(L_Player, retreat_percentage),
 	PROP_RW(L_Player, changing_retreat_percentage_allowed),
 	PROP_RO(L_Player, inbox),
+	PROP_RO(L_Player, team),
 	PROP_RO(L_Player, tribe),
 	PROP_RW(L_Player, see_all),
 	{0, 0, 0},
@@ -290,6 +291,15 @@ int L_Player::get_tribe(lua_State *L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: team
+
+		(RO) The team number of this player (0 means player is not in a team)
+*/
+int L_Player::get_team(lua_State *L) {
+	lua_pushinteger(L, get(L, get_egbase(L)).team_number());
+	return 1;
+}
 
 /* RST
 	.. attribute:: see_all

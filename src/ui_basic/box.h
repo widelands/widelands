@@ -51,7 +51,6 @@ public:
 		 int32_t max_x = 0, int32_t max_y = 0);
 
 	void set_scrolling(bool scroll);
-	virtual void layout();
 
 	int32_t get_nritems() const {return m_items.size();}
 
@@ -59,11 +58,16 @@ public:
 	void add_space(uint32_t space);
 	bool is_snap_target() const {return true;}
 
+protected:
+	virtual void layout();
+	virtual void update_desired_size();
+
 private:
-	void get_item_size(uint32_t idx, uint32_t & depth, uint32_t & breadth);
+	void get_item_desired_size(uint32_t idx, uint32_t & depth, uint32_t & breadth);
+	void set_item_size(uint32_t idx, uint32_t depth, uint32_t breadth);
 	void set_item_pos(uint32_t idx, int32_t pos);
-	void update_positions();
 	void scrollbar_moved(int32_t);
+	void update_positions();
 
 	//don't resize beyond this size
 	uint32_t m_max_x, m_max_y;

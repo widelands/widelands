@@ -315,7 +315,8 @@ void Game::init_newgame
 			(i + 1,
 			 playersettings.initialization_index,
 			 playersettings.tribe,
-			 playersettings.name);
+			 playersettings.name,
+			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
 	}
 
@@ -325,7 +326,8 @@ void Game::init_newgame
 	// Check for win_conditions
 	LuaCoroutine * cr = lua().run_script
 		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
-		 ".lua", "win_conditions")->get_coroutine("func");
+		 ".lua", "win_conditions")
+		->get_coroutine("func");
 	enqueue_command(new Cmd_LuaCoroutine(get_gametime(), cr));
 }
 
@@ -496,9 +498,7 @@ bool Game::run
 		enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
 	}
 
-	if (m_writereplay) {
-		log("Starting replay writer\n");
-
+	if (m_writereplay || m_writesyncstream) {
 		// Derive a replay filename from the current time
 		std::string fname(REPLAY_DIR);
 		fname += '/';
@@ -508,11 +508,18 @@ bool Game::run
 			fname += m_ctrl->getGameDescription();
 		}
 		fname += REPLAY_SUFFIX;
-		assert(not m_replaywriter);
-		m_replaywriter = new ReplayWriter(*this, fname);
+
+		if (m_writereplay) {
+			log("Starting replay writer\n");
+
+			assert(not m_replaywriter);
+			m_replaywriter = new ReplayWriter(*this, fname);
+
+			log("Replay writer has started\n");
+		}
+
 		if (m_writesyncstream)
 			m_syncwrapper.StartDump(fname);
-		log("Replay writer has started\n");
 	}
 
 	SyncReset();
@@ -921,8 +928,8 @@ void Game::sample_statistics()
  *
  * \param fr file to read from
  * \param version indicates the kind of statistics file; the current version
- *   is 3, support for older versions (used in widelands build <= 12) was dropped
- *   after the release of build 15
+ *   is 3, support for older versions (used in widelands build <= 12) was
+ *   dropped after the release of build 15
  */
 void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 {

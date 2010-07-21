@@ -2,6 +2,9 @@ soundfx=../../../sound/farm/farm_animal
 size=big
 output=wheat
 
+[aihints]
+space_consumer=true
+
 [buildcost]
 wood=2
 stone=2

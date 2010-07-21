@@ -1823,7 +1823,9 @@ int32_t Map::findpath
 			Pathfield & neighbpf = pathfields->fields[neighb.field - m_fields];
 
 			// Is the field Closed already?
-			if (neighbpf.cycle == pathfields->cycle && !neighbpf.heap_cookie.is_active())
+			if
+				(neighbpf.cycle == pathfields->cycle &&
+				 !neighbpf.heap_cookie.is_active())
 				continue;
 
 			// Check passability
@@ -2119,14 +2121,11 @@ bool FindBobEnemySoldier::accept(Bob * const imm) const
 	if (upcast(Soldier, soldier, imm))
 		if
 			(soldier->isOnBattlefield() &&
-			 &soldier->owner() != &player &&
+			 (!player || soldier->owner().is_hostile(*player)) &&
 			 soldier->get_current_hitpoints())
 			return true;
 
 	return false;
 }
 
-
-
-}
-
+} // namespace Widelands

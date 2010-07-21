@@ -39,7 +39,16 @@ struct Map_Map_Object_Saver;
  * are in this packet.
  */
 struct Map_Object_Packet {
-	typedef std::set<Map_Object::Loader *> LoaderSet;
+	struct loader_sorter {
+		bool operator()
+			(Map_Object::Loader * const a, Map_Object::Loader * const b) const
+		{
+			assert(a->get_object()->serial() != b->get_object()->serial());
+			return a->get_object()->serial() < b->get_object()->serial();
+		}
+	};
+
+	typedef std::set<Map_Object::Loader *, loader_sorter> LoaderSet;
 	LoaderSet loaders;
 
 	~Map_Object_Packet();

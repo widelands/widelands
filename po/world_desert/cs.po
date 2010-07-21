@@ -8,29 +8,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:29+0000\n"
-"Last-Translator: Markus7cz <Unknown>\n"
+"POT-Creation-Date: 2010-04-21 17:46+0000\n"
+"PO-Revision-Date: 2010-04-25 22:33+0000\n"
+"Last-Translator: Martin Volf <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-04-27 03:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
-#: ../../worlds/desert/conf:2
-msgid "The Widelands Development Team"
-msgstr "Vývojový tým Widelands"
+#: ../../worlds/desert/conf:71
+msgid "Beech"
+msgstr "Buk"
 
-#: ../../worlds/desert/conf:3
-msgid "Desert"
-msgstr "Poušť"
+#: ../../worlds/desert/conf:72
+msgid "Beech medium"
+msgstr "Střední buk"
 
-#: ../../worlds/desert/conf:4
-msgid "This is the wide and sandy country of the bedouins"
-msgstr "Toto jsou otevřené a písečné země beduínů."
+#: ../../worlds/desert/conf:73
+msgid "Beech small"
+msgstr "Malý buk"
+
+#: ../../worlds/desert/conf:74
+msgid "Beech tiny"
+msgstr "Maličký buk"
+
+#: ../../worlds/desert/conf:85
+msgid "Bunny"
+msgstr "Zajíc"
 
 #: ../../worlds/desert/conf:7
 #: ../../worlds/desert/conf:8
@@ -45,6 +53,10 @@ msgstr "Keř"
 msgid "Cactus"
 msgstr "Kaktus"
 
+#: ../../worlds/desert/resconf:4
+msgid "Coal"
+msgstr "Uhlí"
+
 #: ../../worlds/desert/conf:14
 #: ../../worlds/desert/conf:15
 #: ../../worlds/desert/conf:16
@@ -52,62 +64,64 @@ msgstr "Kaktus"
 msgid "Dead Tree"
 msgstr "Uschlý strom"
 
+#: ../../worlds/desert/conf:86
+msgid "Deer"
+msgstr "Jelen"
+
+#: ../../worlds/desert/conf:3
+msgid "Desert"
+msgstr "Poušť"
+
+#: ../../worlds/desert/conf:87
+msgid "Duck"
+msgstr "Kachna"
+
+#: ../../worlds/desert/resconf:41
+msgid "Fish"
+msgstr "Ryba"
+
+#: ../../worlds/desert/conf:88
+msgid "Fox"
+msgstr "Liška"
+
+#: ../../worlds/desert/resconf:12
+msgid "Gold"
+msgstr "Zlato"
+
+#: ../../worlds/desert/resconf:28
+msgid "Granite"
+msgstr "Žula"
+
 #: ../../worlds/desert/conf:18
 #: ../../worlds/desert/conf:19
 #: ../../worlds/desert/conf:20
 msgid "Grass"
 msgstr "Tráva"
 
+#: ../../worlds/desert/resconf:20
+msgid "Iron"
+msgstr "Železo"
+
+#: ../../worlds/desert/conf:75
+msgid "Larch"
+msgstr "Modřín"
+
+#: ../../worlds/desert/conf:76
+msgid "Larch medium"
+msgstr "Střední modřín"
+
+#: ../../worlds/desert/conf:77
+msgid "Larch small"
+msgstr "Malý modřín"
+
+#: ../../worlds/desert/conf:78
+msgid "Larch tiny"
+msgstr "Maličký modřín"
+
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
 msgid "Mushroom"
 msgstr "Houba"
-
-#: ../../worlds/desert/conf:23
-#: ../../worlds/desert/conf:24
-#: ../../worlds/desert/conf:25
-#: ../../worlds/desert/conf:26
-#: ../../worlds/desert/conf:27
-#: ../../worlds/desert/conf:28
-msgid "Pebble"
-msgstr "Oblázek"
-
-#: ../../worlds/desert/conf:29
-#: ../../worlds/desert/conf:30
-#: ../../worlds/desert/conf:31
-#: ../../worlds/desert/conf:32
-#: ../../worlds/desert/conf:33
-msgid "ruins"
-msgstr "zřícenina"
-
-#: ../../worlds/desert/conf:34
-#: ../../worlds/desert/conf:35
-#: ../../worlds/desert/conf:36
-msgid "Skeleton"
-msgstr "Kostlivec"
-
-#: ../../worlds/desert/conf:37
-msgid "Shell"
-msgstr "Mušle"
-
-#: ../../worlds/desert/conf:38
-#: ../../worlds/desert/conf:39
-#: ../../worlds/desert/conf:40
-#: ../../worlds/desert/conf:41
-#: ../../worlds/desert/conf:42
-#: ../../worlds/desert/conf:43
-#: ../../worlds/desert/conf:44
-msgid "Standing Stones"
-msgstr "Menhiry"
-
-#: ../../worlds/desert/conf:45
-#: ../../worlds/desert/conf:46
-#: ../../worlds/desert/conf:47
-#: ../../worlds/desert/conf:48
-#: ../../worlds/desert/conf:49
-#: ../../worlds/desert/conf:50
-msgid "Stones"
-msgstr "Kameny"
 
 #: ../../worlds/desert/conf:51
 #: ../../worlds/desert/conf:55
@@ -141,37 +155,14 @@ msgstr "Malá palma"
 msgid "Palm tiny"
 msgstr "Maličká palma"
 
-#: ../../worlds/desert/conf:71
-msgid "Beech"
-msgstr "Buk"
-
-#: ../../worlds/desert/conf:72
-msgid "Beech medium"
-msgstr "Střední buk"
-
-#: ../../worlds/desert/conf:73
-msgid "Beech small"
-msgstr "Malý buk"
-
-#: ../../worlds/desert/conf:74
-msgid "Beech tiny"
-msgstr "Maličký buk"
-
-#: ../../worlds/desert/conf:75
-msgid "Larch"
-msgstr "Modřín"
-
-#: ../../worlds/desert/conf:76
-msgid "Larch medium"
-msgstr "Střední modřín"
-
-#: ../../worlds/desert/conf:77
-msgid "Larch small"
-msgstr "Malý modřín"
-
-#: ../../worlds/desert/conf:78
-msgid "Larch tiny"
-msgstr "Maličký modřín"
+#: ../../worlds/desert/conf:23
+#: ../../worlds/desert/conf:24
+#: ../../worlds/desert/conf:25
+#: ../../worlds/desert/conf:26
+#: ../../worlds/desert/conf:27
+#: ../../worlds/desert/conf:28
+msgid "Pebble"
+msgstr "Oblázek"
 
 #: ../../worlds/desert/conf:79
 msgid "Rowan"
@@ -189,49 +180,61 @@ msgstr "Malý jeřáb"
 msgid "Rowan tiny"
 msgstr "Maličký jeřáb"
 
-#: ../../worlds/desert/conf:85
-msgid "Bunny"
-msgstr "Zajíc"
-
-#: ../../worlds/desert/conf:86
-msgid "Deer"
-msgstr "Jelen"
-
-#: ../../worlds/desert/conf:87
-msgid "Duck"
-msgstr "Kachna"
-
-#: ../../worlds/desert/conf:88
-msgid "Fox"
-msgstr "Liška"
-
 #: ../../worlds/desert/conf:89
 msgid "Sheep"
 msgstr "Ovce"
 
-#: ../../worlds/desert/resconf:4
-msgid "Coal"
-msgstr "Uhlí"
+#: ../../worlds/desert/conf:37
+msgid "Shell"
+msgstr "Mušle"
 
-#: ../../worlds/desert/resconf:12
-msgid "Gold"
-msgstr "Zlato"
+#: ../../worlds/desert/conf:34
+#: ../../worlds/desert/conf:35
+#: ../../worlds/desert/conf:36
+msgid "Skeleton"
+msgstr "Kostlivec"
 
-#: ../../worlds/desert/resconf:20
-msgid "Iron"
-msgstr "Železo"
+#: ../../worlds/desert/conf:38
+#: ../../worlds/desert/conf:39
+#: ../../worlds/desert/conf:40
+#: ../../worlds/desert/conf:41
+#: ../../worlds/desert/conf:42
+#: ../../worlds/desert/conf:43
+#: ../../worlds/desert/conf:44
+msgid "Standing Stones"
+msgstr "Menhiry"
 
-#: ../../worlds/desert/resconf:28
-msgid "Granit"
-msgstr "Žula"
+#: ../../worlds/desert/conf:45
+#: ../../worlds/desert/conf:46
+#: ../../worlds/desert/conf:47
+#: ../../worlds/desert/conf:48
+#: ../../worlds/desert/conf:49
+#: ../../worlds/desert/conf:50
+msgid "Stones"
+msgstr "Kameny"
+
+#: ../../worlds/desert/conf:2
+msgid "The Widelands Development Team"
+msgstr "Vývojový tým Widelands"
+
+#: ../../worlds/desert/conf:4
+msgid "This is the wide and sandy country of the bedouins"
+msgstr "Toto jsou otevřené a písečné země beduínů."
 
 #: ../../worlds/desert/resconf:36
 msgid "Water"
 msgstr "Voda"
 
-#: ../../worlds/desert/resconf:41
-msgid "Fish"
-msgstr "Ryba"
+#: ../../worlds/desert/conf:29
+#: ../../worlds/desert/conf:30
+#: ../../worlds/desert/conf:31
+#: ../../worlds/desert/conf:32
+#: ../../worlds/desert/conf:33
+msgid "ruins"
+msgstr "zřícenina"
+
+#~ msgid "Granit"
+#~ msgstr "Žula"
 
 #~ msgid "Tree"
 #~ msgstr "Stromy"

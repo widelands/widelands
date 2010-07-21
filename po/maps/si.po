@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 17:59+0000\n"
+"PO-Revision-Date: 2010-04-12 13:51+0000\n"
 "Last-Translator: Samith Sandanayake <sam.the.devel@gmail.com>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-04-13 03:31+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:24
 msgid "(Tutorial) Barbarians - The second Empire"
-msgstr ""
+msgstr "(නිබන්දනය) දෙවන අධිරාජ්‍යයා - බාබේරියානුවෝ"
 
 #: ../../campaigns/cconfig:27
 msgid ""
@@ -36,10 +36,20 @@ msgid ""
 "Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
 "force the tribes to march once again under a common banner."
 msgstr ""
+"චත්'කුරුත් මියයන විට ඔහු ඉතා මහළු වියේ පසුවිය, ඔහුට දාව උපන් පුතුන් "
+"තිදෙනෙකි. ඔවුන් වූ කලී ඉතා රණ ශූර, ශක්තිමත් අසම සම හමුදාවක නායකයන් විය. "
+"ඔවුන් අතර වැඩිමලා වූ ත්රොන් යුද ශිල්පයෙහිද, නායකත්වයෙහිද අග විය, මෙ නිසාම තම "
+"අභාවයෙන් පසු තම අනුගාමිකයා ලෙස චත්'කුරුත් විසින් ත්රොන් නම් කරන ලදී.  නමුත් "
+"නොසිතූ වරිදි මෙය අනිත් සහෝදරයන්ගේ කනස්සල්ලට හේතුවිය. පියා ගේ අවසන් අවවාද මත "
+"අල්'තුරාන් නගරයෙන් පිටවුනු ත්රොන් හා ඔහුත සමීපතම සේනාවෝ වන මැද තම වාසභූමිය "
+"කරගත්හ. තම සහෝදරයන් මෙහෙයවූ අන්ද යුද්ධයෙන් ගැලවී අල්'තුරාන් සීමාවෙන් "
+"නික්මුනු ත්රොන් හා සේනාව කදු මුදුනට වැද තම පියා මිහිදන් කළෝය. එදින ත්රොන් තම "
+"පියාගේ ආත්මයට එක් පොරොන්දුවක් විය. කෙදිනක හෝ අල්'තුරාන් එක ධජයක් යටතට ගෙන එන "
+"බවත්, එහි නීතිය හා සාමය ස්ථාපිත කරන බවත්ය."
 
 #: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
-msgstr "අධ්රාජ්‍යයා - පිටුවහල් යුගය"
+msgstr "අධිරාජ්‍යයා - පිටුවහල් යුගය"
 
 #: ../../campaigns/cconfig:33
 msgid ""
@@ -64,11 +74,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr ""
+msgstr "නිබන්දන 1 - අදුරේ ඇති නෙත්"
 
 #: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
-msgstr ""
+msgstr "නිබන්දන2: නිවහන යයි තැනක්"
 
 #: ../../campaigns/cconfig:67
 msgid "Tutorial3 - This land is our land"

@@ -34,7 +34,9 @@ static char const * pic_down_train = "pics/menu_down_train.png";
  * via \ref SoldierControl
  */
 struct SoldierCapacityControl : UI::Box {
-	SoldierCapacityControl(UI::Panel* parent, Interactive_GameBase& igb, Widelands::Building& building);
+	SoldierCapacityControl
+		(UI::Panel * parent, Interactive_GameBase & igb,
+		 Widelands::Building & building);
 
 protected:
 	virtual void think();
@@ -53,7 +55,8 @@ private:
 };
 
 SoldierCapacityControl::SoldierCapacityControl
-	(UI::Panel* parent, Interactive_GameBase& igb, Widelands::Building& building)
+	(UI::Panel * parent, Interactive_GameBase & igb,
+	 Widelands::Building & building)
 :
 Box(parent, 0, 0, Horizontal),
 m_igb(igb),
@@ -68,12 +71,15 @@ m_increase
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, pic_up_train),
 	 &SoldierCapacityControl::click_increase, *this),
-m_value(this, 0, 0, _("xx"), UI::Align_Center)
+m_value(this, "", UI::Align_Center)
 {
-	add(new UI::Textarea(this, 0, 0, _("Capacity"), UI::Align_Left), AlignCenter);
+	add(new UI::Textarea(this, _("Capacity")), AlignCenter);
 	add(&m_decrease, AlignCenter);
 	add(&m_value, AlignCenter);
 	add(&m_increase, AlignCenter);
+
+	m_value.set_layout_mode(UI::Textarea::Static);
+	m_value.set_fixed_size("199");
 
 	m_decrease.set_repeating(true);
 	m_increase.set_repeating(true);
@@ -83,7 +89,7 @@ m_value(this, 0, 0, _("xx"), UI::Align_Center)
 
 void SoldierCapacityControl::think()
 {
-	SoldierControl * soldiers = dynamic_cast<SoldierControl*>(&m_building);
+	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&m_building);
 	uint32_t const capacity = soldiers->soldierCapacity();
 	uint32_t const min_capacity = soldiers->minSoldierCapacity();
 	uint32_t const max_capacity = soldiers->maxSoldierCapacity();
@@ -112,8 +118,9 @@ void SoldierCapacityControl::click_increase()
 	change_soldier_capacity(1);
 }
 
-UI::Panel* create_soldier_capacity_control
-	(UI::Panel& parent, Interactive_GameBase& igb, Widelands::Building& building)
+UI::Panel * create_soldier_capacity_control
+	(UI::Panel & parent, Interactive_GameBase & igb,
+	 Widelands::Building & building)
 {
 	return new SoldierCapacityControl(&parent, igb, building);
 }

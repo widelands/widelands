@@ -1,0 +1,123 @@
+# German translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-04 12:21+0000\n"
+"Last-Translator: FetteNase <Unknown>\n"
+"Language-Team: German <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-06-05 03:30+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:8
+msgid "An endless game without rules"
+msgstr "Ein Endlosspiel ohne Einschränkungen"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:10
+msgid "Autocrat"
+msgstr "Alleinherrscher"
+
+#: ../../scripting/win_conditions/02_collectors.lua:11
+msgid "Collectors"
+msgstr "Sammler"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:39
+msgid "Congratulations!"
+msgstr "Herzlichen Glückwunsch!"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:7
+msgid "Endless Game"
+msgstr "Endlosspiel"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:85
+msgid "Game over"
+msgstr "Spiel beendet"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:28
+msgid "Sorry, you have lost this game!"
+msgstr "Sie haben das Spiel leider verloren!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:49
+msgid "Status"
+msgstr "Status"
+
+#: ../../scripting/win_conditions/02_collectors.lua:40
+msgid "The game will end in %i minutes."
+msgstr "Das Spiel ended in %i Minuten."
+
+#: ../../scripting/win_conditions/02_collectors.lua:44
+msgid "The player %i has currently %i points"
+msgstr "Spieler %i hat zur Zeit %i Punkte."
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:11
+msgid ""
+"The three tribes play together vs each other. Vision is granted to all the "
+"players playing together"
+msgstr ""
+"Die drei Stämme spielen gemeinsam anstatt gegen einander. Spieler, die "
+"gemeinsam spielen, teilen die Sicht."
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:79
+msgid "The tribe %s is no more."
+msgstr "Stamm %s existiert nicht mehr."
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:11
+msgid "The tribe that can defeat all others wins!"
+msgstr "Der Stamm, der alle andren besiegt, gewinnt!"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:79
+msgid "Tribe defeated!"
+msgstr "Stamm besiegt!"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:10
+msgid "Tribes together"
+msgstr "Stämme zusammen"
+
+#: ../../scripting/win_conditions/02_collectors.lua:71
+msgid "You are the winner!"
+msgstr "Du bist der Sieger!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:12
+msgid ""
+"You get points for wares in your HQ, the one with the highest number of "
+"wares at the end of 4 hours wins the game"
+msgstr ""
+"Du bekommst Punkte für Waren in Deinem HQ; der Spieler mit der höchsten "
+"Warenanzahl nach Ablauf von 4 Stunden gewinnt das Spiel."
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:40
+#: ../../scripting/win_conditions/03_tribes_together.lua:85
+msgid "You have won this game!"
+msgstr "Du hast dieses Spiel gewonnen!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:69
+msgid "You lost"
+msgstr "Du hast verloren"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:27
+msgid "You lost!"
+msgstr "Du hast verloren!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:71
+msgid "You won!"
+msgstr "Du hast gewonnen!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:69
+msgid "You've lost this game!"
+msgstr "Du hast dieses Spiel verloren!"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:74
+msgid "You've lost!"
+msgstr "Du hast verloren!"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:74
+msgid "Your tribe is no more. You have lost this game"
+msgstr "Dein Stamm existiert nicht mehr! Du hast dieses Spiel verloren!"

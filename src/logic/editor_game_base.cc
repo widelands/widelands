@@ -23,7 +23,7 @@
 #include "battle.h"
 #include "building.h"
 #include "economy/flag.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "game.h"
 #include "i18n.h"
 #include "instances.h"
@@ -154,7 +154,7 @@ void Editor_Game_Base::receive(NoteFieldTransformed const & note)
 	Widelands::Map_Index const i = note.fc.field - &(*m_map)[0];
 
 	iterate_players_existing(p, m_map->get_nrplayers(), *this, plr)
-		if(plr->vision(i) > 1) // player currently sees field?
+		if (plr->vision(i) > 1) // player currently sees field?
 			plr->rediscover_node(*m_map, (*m_map)[0], note.fc);
 }
 
@@ -179,23 +179,23 @@ Player * Editor_Game_Base::add_player
 	(Player_Number       const player_number,
 	 uint8_t             const initialization_index,
 	 std::string const &       tribe,
-	 std::string const &       name)
+	 std::string const &       name,
+	 TeamNumber team)
 {
 	assert(1 <= player_number);
 	assert(player_number <= MAX_PLAYERS);
 
 	Player * & p = m_players[player_number - 1];
 	delete p;
-	return
-		p
-		=
-		new Player
-			(*this,
-			 player_number,
-			 initialization_index,
-			 manually_load_tribe(tribe),
-			 name,
-			 g_playercolors[player_number - 1]);
+	p = new Player
+		(*this,
+		 player_number,
+		 initialization_index,
+		 manually_load_tribe(tribe),
+		 name,
+		 g_playercolors[player_number - 1]);
+	p->set_team_number(team);
+	return p;
 }
 
 /*

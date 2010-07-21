@@ -23,7 +23,6 @@
 #include "attackable.h"
 #include "building.h"
 
-struct EncodeData;
 struct Interactive_Player;
 struct Profile;
 
@@ -47,7 +46,7 @@ struct Warehouse_Descr : public Building_Descr {
 	Warehouse_Descr
 		(char const * name, char const * descname,
 		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &, EncodeData const *);
+		 Tribe_Descr const &);
 
 	virtual Building & create_object() const;
 
@@ -64,6 +63,40 @@ class Warehouse : public Building, public Attackable {
 	MO_DESCR(Warehouse_Descr);
 
 public:
+	/**
+	 * Each ware and worker type has an associated per-warehouse
+	 * stock policy that defines whether it will be stocked by this
+	 * warehouse.
+	 *
+	 * \note The values of this enum are written directly into savegames,
+	 * so be careful when changing them.
+	 */
+	enum StockPolicy {
+		/**
+		 * The default policy allows stocking wares without any special priority.
+		 */
+		SP_Normal = 0,
+
+		/**
+		 * As long as there are warehouses with this policy for a ware, all
+		 * available unstocked supplies will be transferred to warehouses
+		 * with this policy.
+		 */
+		SP_Prefer = 1,
+
+		/**
+		 * If a ware has this stock policy, no new items of this ware will enter
+		 * the warehouse.
+		 */
+		SP_DontStock = 2,
+
+		/**
+		 * Like \ref SP_DontStock, but in addition, existing stock of this ware
+		 * will be transported out of the warehouse over time.
+		 */
+		SP_Remove = 3,
+	};
+
 	Warehouse(const Warehouse_Descr &);
 	virtual ~Warehouse();
 
@@ -127,6 +160,7 @@ public:
 	void disable_spawn(uint8_t worker_types_without_cost_index);
 
 	// Begin Attackable implementation
+	virtual Player& owner() const {return Building::owner();}
 	virtual bool canAttack();
 	virtual void aggressor(Soldier &);
 	virtual bool attack   (Soldier &);
@@ -134,6 +168,12 @@ public:
 
 	virtual void receive_ware(Game &, Ware_Index ware);
 	virtual void receive_worker(Game &, Worker & worker);
+
+	StockPolicy get_ware_policy(Ware_Index ware) const;
+	StockPolicy get_worker_policy(Ware_Index ware) const;
+	StockPolicy get_stock_policy(bool isworker, Ware_Index ware) const;
+	void set_ware_policy(Ware_Index ware, StockPolicy policy);
+	void set_worker_policy(Ware_Index ware, StockPolicy policy);
 
 protected:
 
@@ -162,6 +202,7 @@ private:
 	static void request_cb
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 	void sort_worker_in(Editor_Game_Base &, Worker &);
+	void check_remove_stock(Game &);
 
 	bool _load_finish_planned_worker(PlannedWorkers & pw);
 	void _update_planned_workers(Game &, PlannedWorkers & pw);
@@ -169,10 +210,14 @@ private:
 
 	WarehouseSupply       * m_supply;
 
+	std::vector<StockPolicy> m_ware_policy;
+	std::vector<StockPolicy> m_worker_policy;
+
 	// Workers who live here at the moment
 	std::vector<OPtr<Worker> > m_incorporated_workers;
 	uint32_t                 * m_next_worker_without_cost_spawn;
 	uint32_t                   m_next_military_act;
+	uint32_t m_next_stock_remove_act;
 
 	std::vector<PlannedWorkers> m_planned_workers;
 };

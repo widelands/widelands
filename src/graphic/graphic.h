@@ -22,18 +22,14 @@
 
 #include "animation_gfx.h"
 #include "picture.h"
+#include "picture_id.h"
 #include "rect.h"
-#include "surface.h"
 
 #include <png.h>
 
 #include <vector>
+#include <map>
 #include <boost/shared_ptr.hpp>
-
-#ifdef USE_OPENGL
-#define HAS_OPENGL 1
-#include <SDL_opengl.h>
-#endif
 
 /**
  * Names of road terrains
@@ -45,19 +41,57 @@
 
 namespace UI {struct ProgressWindow;}
 
+class Surface;
+class Texture;
 struct RenderTarget;
 class Surface;
 struct Graphic;
 struct Road_Textures;
 struct StreamWrite;
 struct Texture;
+struct SDL_Surface;
+struct SDL_Rect;
 
-///\todo Get rid of this global function
-SDL_Surface * LoadImage(char const * filename);
-
+//@{
+/// This table is used by create_grayed_out_pic() 
+/// to map colors to grayscle. It is initialized in Graphic::Graphic()
 extern uint32_t luminance_table_r[0x100];
 extern uint32_t luminance_table_g[0x100];
 extern uint32_t luminance_table_b[0x100];
+//@}
+
+/// Stores the capabilities of opengl
+struct GLCaps
+{
+	/// The OpenGL major version
+	int major_version;
+	/// The OpenGL minor version
+	int minor_version;
+	/// The maximum texture size
+	int tex_max_size;
+	/// If true sizes of texture must be a power of two
+	bool tex_power_of_two;
+	/// How many bits the stencil buffer support
+	int stencil_buffer_bits;
+	/// How many Aux Buffers the opengl context support
+	int aux_buffers;
+};
+
+/**
+ * A structure to store the capabilities of the current rendere. This is set
+ * during init() and can be retrieved by g_gr->get_caps()
+ */
+struct GraphicCaps
+{
+	/// The renderer allows rendering (blit, draw_line) to offscreen surfaces
+	bool offscreen_rendering;
+	/// It is possible to resize surfaces with get_resized_picture()
+	bool resize_surfaces;
+	/// It is possible to resize surfaces while bliting
+	bool blit_resized;
+	/// The capabilities of the opengl hardware and drive
+	GLCaps gl;
+};
 
 /**
  * A renderer to get pixels to a 16bit framebuffer.
@@ -72,16 +106,9 @@ extern uint32_t luminance_table_b[0x100];
 */
 
 struct Graphic {
-#if HAS_OPENGL
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool hw_improvements, bool double_buffer, bool opengl);
-#else
-	Graphic
-		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool hw_improvements, bool double_buffer);
-#endif
-
+		 bool fullscreen, bool opengl);
 	~Graphic();
 
 	int32_t get_xres() const;
@@ -98,7 +125,9 @@ struct Graphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	PictureID & get_picture(PicMod module, const std::string & fname)
+	Surface & load_image
+(const std::string & fname, bool alpha = false);
+	PictureID & get_picture(PicMod module, const std::string & fname, bool alpha = true)
 	__attribute__ ((pure));
 	PictureID get_picture
 		(PicMod module, Surface &, const std::string & name = "");
@@ -111,10 +140,15 @@ struct Graphic {
 	void get_picture_size
 		(const PictureID & pic, uint32_t & w, uint32_t & h) const;
 
-	void save_png(const PictureID &, StreamWrite *);
-	PictureID create_surface(int32_t w, int32_t h);
-	PictureID create_surface_a(int32_t w, int32_t h);
-	void free_surface(const PictureID & pic);
+	void save_png(const PictureID &, StreamWrite *) const;
+	void save_png(Surface & surf, StreamWrite *) const;
+
+	PictureID create_picture_surface(int32_t w, int32_t h, bool alpha = false);
+	Surface & create_surface(SDL_Surface &, bool alpha = false);
+	Surface & create_surface(Surface &, bool alpha = false);
+	Surface & create_surface(int32_t w, int32_t h, bool alpha = false);
+	void free_picture_surface(const PictureID & pic);
+
 	PictureID create_grayed_out_pic(const PictureID & picid);
 	RenderTarget * get_surface_renderer(const PictureID & pic);
 
@@ -152,19 +186,35 @@ struct Graphic {
 
 	Surface * get_road_texture(int32_t roadtex);
 
+	const GraphicCaps & caps() const throw()
+		{ return m_caps; }
+
 protected:
-	/// Static function for png writing
+	// Static helper function for png writing
 	static void m_png_write_function
 		(png_structp png_ptr,
 		 png_bytep data,
 		 png_size_t length);
 	static void m_png_flush_function (png_structp png_ptr);
 
-	Surface m_screen;
+	/// This is the main screen Surface.
+	/// A RenderTarget for this can be retrieved with get_render_target()
+	Surface * m_screen;
+	/// This saves a copy of the screen SDL_Surface. This is needed for
+	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
+	/// manipulation the screen context.
+	SDL_Surface * m_sdl_screen;
+	/// A RenderTarget for m_screen. This is initialized during init()
 	RenderTarget * m_rendertarget;
+	/// keeps track which screen regions needs to be redrawn 
+	/// during the next update(). Only used for SDL rendering.
 	SDL_Rect m_update_rects[MAX_RECTS];
+	/// saves how many screen regions need updating. @see m_update_rects
 	int32_t m_nr_update_rects;
+	/// This marks the komplete screen for updating.
 	bool m_update_fullscreen;
+	/// stores which features the current renderer has
+	GraphicCaps m_caps;
 
 	/// hash of filename/picture ID pairs
 	std::vector
@@ -178,9 +228,7 @@ protected:
 };
 
 extern Graphic * g_gr;
-#if HAS_OPENGL
 extern bool g_opengl;
-#endif
 
 #endif
 

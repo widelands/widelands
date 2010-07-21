@@ -21,7 +21,7 @@
 #define WIDELANDS_H
 
 #ifdef _MSC_VER
-#define __attribute__(x) 
+#define __attribute__(x)
 #endif
 #include <cassert>
 #include <cstddef>
@@ -49,6 +49,14 @@ typedef uint8_t  Player_Number; /// 5 bits used, so 0 .. 31
 inline Player_Number Neutral() throw () {return 0;}
 #define iterate_player_numbers(p, nr_players) \
    for (Widelands::Player_Number p = 1; p < nr_players + 1; ++p)
+
+/**
+ * Every player has a team number. Team number 0 is special,
+ * indicating that the player is not part of any team.
+ *
+ * Players having the same positive team number are allied.
+ */
+typedef uint8_t TeamNumber;
 
 typedef uint8_t  Terrain_Index;   /// 4 bits used, so 0 .. 15.
 typedef uint8_t  Resource_Index;  /// 4 bits used, so 0 .. 15.

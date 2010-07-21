@@ -156,8 +156,9 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	snprintf(buffer, sizeof(buffer), "%u", m_serial);
 	set_title(buffer);
 
-	m_tabs.set_snapparent(true);
 	obj.create_debug_panels(parent.egbase(), m_tabs);
+
+	set_center_panel(&m_tabs);
 }
 
 

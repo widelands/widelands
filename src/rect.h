@@ -29,6 +29,17 @@ struct Rect : public Point {
 	{}
 	Point bottom_left() const {return *this + Point(w, h);}
 
+	/**
+	 * Returns true if this rectangle contains the given point.
+	 *
+	 * The bottom and right borders of the rectangle are considered to be excluded.
+	 */
+	bool contains(Point pt) const {
+		return
+			pt.x >= x && pt.x < x + static_cast<int32_t>(w) &&
+			pt.y >= y && pt.y < y + static_cast<int32_t>(h);
+	}
+
 	uint32_t w, h;
 };
 

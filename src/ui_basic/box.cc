@@ -60,40 +60,24 @@ void Box::set_scrolling(bool scroll)
 		return;
 
 	m_scrolling = scroll;
-	layout();
+	update_desired_size();
 }
 
-
 /**
- * Adjust all the children and the box's size.
+ * Compute the desired size based on our children.
  */
-void Box::layout()
+void Box::update_desired_size()
 {
 	uint32_t totaldepth = 0;
 	uint32_t maxbreadth = 0;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		uint32_t depth, breadth;
-		get_item_size(idx, depth, breadth);
+		get_item_desired_size(idx, depth, breadth);
 
 		totaldepth += depth;
 		if (breadth > maxbreadth)
 			maxbreadth = breadth;
-	}
-
-	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
-		const Item& it = m_items[idx];
-		if (it.type == Item::ItemPanel && it.u.panel.fullsize) {
-			uint32_t depth, breadth;
-			get_item_size(idx, depth, breadth);
-
-			if (breadth < maxbreadth) {
-				if (m_orientation == Horizontal)
-					it.u.panel.panel->set_size(it.u.panel.panel->get_w(), maxbreadth);
-				else
-					it.u.panel.panel->set_size(maxbreadth, it.u.panel.panel->get_h());
-			}
-		}
 	}
 
 	bool needscrollbar = false;
@@ -102,13 +86,51 @@ void Box::layout()
 			maxbreadth += Scrollbar::Size;
 			needscrollbar = true;
 		}
-		set_size(std::min(totaldepth, m_max_x), std::min(maxbreadth, m_max_y));
+		set_desired_size
+			(std::min(totaldepth, m_max_x), std::min(maxbreadth, m_max_y));
 	} else {
 		if (totaldepth > m_max_y && m_scrolling) {
 			maxbreadth += Scrollbar::Size;
 			needscrollbar = true;
 		}
-		set_size(std::min(maxbreadth, m_max_x), std::min(totaldepth, m_max_y));
+		set_desired_size
+			(std::min(maxbreadth, m_max_x), std::min(totaldepth, m_max_y));
+	}
+
+	// This is not redundant, because even if all this doesn't change our
+	// desired size, we were typically called because of a child window
+	// that changed, and we need to relayout that.
+	layout();
+}
+
+/**
+ * Adjust all the children and the box's size.
+ */
+void Box::layout()
+{
+	uint32_t totalbreadth = m_orientation == Horizontal ? get_w() : get_h();
+
+	// First pass: compute the depth and adjust whether we have a scrollbar
+	uint32_t totaldepth = 0;
+
+	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
+		uint32_t depth, tmp;
+		get_item_desired_size(idx, depth, tmp);
+
+		totaldepth += depth;
+	}
+
+	bool needscrollbar = false;
+	if (m_orientation == Horizontal) {
+		if (totaldepth > m_max_x && m_scrolling) {
+			totalbreadth -= Scrollbar::Size;
+			needscrollbar = true;
+		}
+	} else {
+		if (totaldepth > m_max_y && m_scrolling) {
+			totalbreadth -= Scrollbar::Size;
+			needscrollbar = true;
+		}
 	}
 
 	if (!needscrollbar) {
@@ -147,23 +169,29 @@ void Box::layout()
 		m_scrollbar->set_pagesize(pagesize);
 	}
 
+	// Second pass: Update positions and sizes of all items
 	update_positions();
 }
 
-
-/**
- * Update the position of all children, possibly as a reaction
- * to scrollbar movement.
- */
 void Box::update_positions()
 {
-	uint32_t totaldepth = 0;
 	int32_t scrollpos = m_scrollbar ? m_scrollbar->get_scrollpos() : 0;
+
+	uint32_t totaldepth = 0;
+	uint32_t totalbreadth = m_orientation == Horizontal ? get_h() : get_w();
+	if (m_scrollbar)
+		totalbreadth -= Scrollbar::Size;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		uint32_t depth, breadth;
-		get_item_size(idx, depth, breadth);
-		set_item_pos(idx, totaldepth - scrollpos);
+		get_item_desired_size(idx, depth, breadth);
+
+		if (m_items[idx].type == Item::ItemPanel) {
+			set_item_size
+				(idx, depth, m_items[idx].u.panel.fullsize ?
+				 totalbreadth : breadth);
+			set_item_pos(idx, totaldepth - scrollpos);
+		}
 
 		totaldepth += depth;
 	}
@@ -192,7 +220,7 @@ void Box::add(Panel * const panel, uint32_t const align, bool fullsize)
 
 	m_items.push_back(it);
 
-	layout();
+	update_desired_size();
 }
 
 
@@ -208,15 +236,16 @@ void Box::add_space(uint32_t space)
 
 	m_items.push_back(it);
 
-	layout();
+	update_desired_size();
 }
 
 
 /**
- * Retrieve the given item's size. depth is the size of the item along the
- * orientation axis, breadth is the size perpendicular to the orientation axis.
+ * Retrieve the given item's desired size. depth is the size of the
+ * item along the orientation axis, breadth is the size perpendicular
+ * to the orientation axis.
 */
-void Box::get_item_size
+void Box::get_item_desired_size
 	(uint32_t const idx, uint32_t & depth, uint32_t & breadth)
 {
 	assert(idx < m_items.size());
@@ -226,11 +255,9 @@ void Box::get_item_size
 	switch (it.type) {
 	case Item::ItemPanel:
 		if (m_orientation == Horizontal) {
-			depth   = it.u.panel.panel->get_w();
-			breadth = it.u.panel.panel->get_h();
+			it.u.panel.panel->get_desired_size(depth, breadth);
 		} else {
-			depth   = it.u.panel.panel->get_h();
-			breadth = it.u.panel.panel->get_w();
+			it.u.panel.panel->get_desired_size(breadth, depth);
 		}
 		break;
 
@@ -244,6 +271,22 @@ void Box::get_item_size
 	}
 }
 
+/**
+ * Set the given items actual size.
+ */
+void Box::set_item_size(uint32_t idx, uint32_t depth, uint32_t breadth)
+{
+	assert(idx < m_items.size());
+
+	Item const & it = m_items[idx];
+
+	if (it.type == Item::ItemPanel) {
+		if (m_orientation == Horizontal)
+			it.u.panel.panel->set_size(depth, breadth);
+		else
+			it.u.panel.panel->set_size(breadth, depth);
+	}
+}
 
 /**
  * Position the given item according to its parameters.

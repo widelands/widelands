@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,14 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <boost/shared_ptr.hpp>
-
 #include "colormap.h"
 #include "picture_id.h"
 
+#include "graphic/render/surface_opengl.h"
+
+#include <boost/shared_ptr.hpp>
 #include <stdint.h>
+#include <vector>
 
 /**
  * This contains all the road textures needed to render roads
@@ -60,17 +62,26 @@ struct Texture {
 
 	void animate(uint32_t time);
 	void reset_was_animated() {m_was_animated = false;}
-	bool was_animated() const throw () {return m_was_animated;}
+	bool was_animated() const throw () {return m_was_animated;} 
+#ifdef USE_OPENGL
+	uint32_t getTexture() const
+		{return m_glFrames.at(m_frame_num)->get_texture();}
+#endif
 
 private:
 	Colormap * m_colormap;
 	uint8_t  * m_pixels;
+	uint32_t   m_mmap_color;
 	uint8_t  * m_curframe;
+	int32_t    m_frame_num;
 	char     * m_texture_picture;
 	uint32_t   m_nrframes;
 	uint32_t   m_frametime;
 	bool       is_32bit;
 	bool       m_was_animated;
+#ifdef USE_OPENGL
+	std::vector<SurfaceOpenGL *> m_glFrames;
+#endif
 };
 
 #endif

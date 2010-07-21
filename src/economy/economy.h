@@ -20,6 +20,7 @@
 #ifndef ECONOMY_H
 #define ECONOMY_H
 
+#include <boost/function.hpp>
 #include <vector>
 
 #include "supply_list.h"
@@ -88,7 +89,11 @@ struct Economy {
 		 Route * route,
 		 bool    wait,
 		 int32_t cost_cutoff = -1);
-	Warehouse * find_closest_warehouse(Flag & start, bool is_ware = false, Route * route = 0, uint32_t cost_cutoff = 0);
+
+	typedef boost::function<bool (Warehouse&)> WarehouseAcceptFn;
+	Warehouse * find_closest_warehouse
+		(Flag & start, bool is_ware = false, Route * route = 0, uint32_t cost_cutoff = 0,
+		 const WarehouseAcceptFn & acceptfn = WarehouseAcceptFn());
 
 	std::vector<Flag *>::size_type get_nrflags() const {return m_flags.size();}
 	void    add_flag(Flag &);
