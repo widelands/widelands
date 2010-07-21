@@ -2,8 +2,6 @@ project (widelands)
 
 cmake_minimum_required (VERSION 2.6)
 
-enable_testing()
-
 # Used as versioning, if WL_VERSION_STANDARD is definded.
 if (WL_VERSION_STANDARD)
 	# Set the values below for standard versioning.
@@ -285,6 +283,8 @@ install (
   CONFIGURATIONS Debug;Release
   COMPONENT CoreVersionFile
 )
+
+enable_testing()
 
 include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
