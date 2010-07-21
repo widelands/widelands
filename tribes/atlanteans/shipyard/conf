@@ -8,7 +8,8 @@ stone=3
 spidercloth=2
 
 [working positions]
-shipbuilder=1
+# shipbuilder=1
+carrier=1 # TODO should be a shipbuilder; made to carrier so that scenario launches
 
 [inputs]
 planks=10

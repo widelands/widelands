@@ -144,7 +144,7 @@ function start_water_rising()
 end
 
 
--- run(intro)
+run(intro)
 run(leftover_buildings)
 
 

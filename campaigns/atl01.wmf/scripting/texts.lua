@@ -78,11 +78,11 @@ end
 -- =======================================================================
 --                                Objectives                                
 -- =======================================================================
-obj_be_a_smarty = {
-   name = "just_a_unique_name",
-   title = _ "Summary of what to do",
-   body = obj_text(_"This is the heading!", _
-[[Just be cool and expand west, buddy!]]
+obj_ensure_build_wares_production = {
+   name = _ "obj_build_wares",
+   title = _ "Construct buildings to ensure build wares supply",
+   body = obj_text(_"Ensure build wares supply", _
+[[Build a quarry, two woodcutters house, a  ]]
    ),
 }
 
@@ -137,6 +137,9 @@ first_briefing_messages = {
 }
 
 
+-- =======================================================================
+--                         Leftover buildings found                         
+-- =======================================================================
 first_leftover_building_found = {
 {
    title = _ "Strange buildings",
@@ -166,5 +169,4 @@ this island as we have already conquered and seen so much of it.]]
 }
 
 
--- Add similar dialog queues. To test them use a debug build, press F6 and
--- enter msg_boxes(initial_messages) or similar.
+
