@@ -774,7 +774,8 @@ void MapGenerator::create_random_map()
 					playerstart.y = m_mapInfo.h / 7 + ISLAND_BORDER;
 			} else if (line[0] + line[1] + 1 - n > 0) {
 				// X-Coordinates
-				playerstart.x = (m_mapInfo.w / (line[1] + 2)) * (line[1] + 2 - n);
+				playerstart.x  = (m_mapInfo.w / (line[1] + 2));
+				playerstart.x *= (line[0] + line[1] + 2 - n);
 				// Y-Coordinates
 				if (lines == 3)
 					playerstart.y = m_mapInfo.h / 2;
@@ -782,7 +783,8 @@ void MapGenerator::create_random_map()
 					playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
 			} else{
 				// X-Coordinates
-				playerstart.x = (m_mapInfo.w / (line[2] + 2)) * (line[2] + 2 - n);
+				playerstart.x  = (m_mapInfo.w / (line[2] + 2));
+				playerstart.x *= (line[0] + line[1] + line[2] + 2 - n);
 				// Y-Coordinates
 				playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
 			}
