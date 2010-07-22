@@ -18,6 +18,7 @@
  */
 
 #include "map_generator.h"
+#include "logic/findnode.h"
 #include "logic/map.h"
 #include "logic/editor_game_base.h"
 #include "editor/tools/editor_increase_resources_tool.h"
@@ -733,6 +734,73 @@ void MapGenerator::create_random_map()
 			// set bobs and immovables for this field
 			generate_bobs(random_bobs, fc, rng, terrType);
 		}
+
+		//  Aftermaths...
+		m_map.recalc_whole_map();
+
+		// Care about players and place their start positions
+		const std::string tribe = m_map.get_scenario_player_tribe(1);
+		const std::string ai    = m_map.get_scenario_player_ai(1);
+		m_map.set_nrplayers(m_mapInfo.numPlayers);
+		FindNodeSize functor(FindNodeSize::sizeBig);
+		Coords playerstart;
+
+		// Build a basic structure how player start positions are placed
+		uint8_t line[3];
+		uint8_t rows, lines;
+		rows  = m_mapInfo.numPlayers / 2;
+		lines = m_mapInfo.numPlayers / 2 + m_mapInfo.numPlayers % 2;
+		line[0] = line[1] = line[3] = rows;
+		if (rows * lines > m_mapInfo.numPlayers) {
+			--line[1];
+			if (rows * lines > m_mapInfo.numPlayers)
+				--line[2];
+		}
+
+		for (Player_Number n = 1; n <= m_mapInfo.numPlayers; ++n) {
+			// Set scenario information - needed even if it's not a scenario
+			m_map.set_scenario_player_name(n, "Random Player");
+			m_map.set_scenario_player_tribe(n, tribe);
+			m_map.set_scenario_player_ai(n, ai);
+
+			// Calculate wished coords for player starting position
+			if (line[0] + 1 - n > 0) {
+				// X-Coordinates
+				playerstart.x = (m_mapInfo.w / (line[0] + 2)) * (line[0] + 2 - n);
+				// Y-Coordinates
+				if (lines == 1)
+					playerstart.y = m_mapInfo.h / 2;
+				else
+					playerstart.y = m_mapInfo.h / 7 + ISLAND_BORDER;
+			} else if (line[0] + line[1] + 1 - n > 0) {
+				// X-Coordinates
+				playerstart.x = (m_mapInfo.w / (line[1] + 2)) * (line[1] + 2 - n);
+				// Y-Coordinates
+				if (lines == 3)
+					playerstart.y = m_mapInfo.h / 2;
+				else
+					playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
+			} else{
+				// X-Coordinates
+				playerstart.x = (m_mapInfo.w / (line[2] + 2)) * (line[2] + 2 - n);
+				// Y-Coordinates
+				playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
+			}
+
+			// Now try to find a place as near as possible to the wished
+			// starting position
+			std::vector<Coords> coords;
+			m_map.find_fields
+				(Area<FCoords>(m_map.get_fcoords(playerstart), 15),
+				 &coords, functor);
+
+			if (coords.empty()) // TODO there should be better ways, or?
+				throw wexception("No place for a startingposition!");
+
+			// Finally set the found starting position
+			m_map.set_starting_pos(n, m_map.get_fcoords(coords[0]));
+		}
+
 	} catch (...) {
 		delete[] elevations;
 		delete[] random2;
@@ -761,13 +829,7 @@ void MapGenerator::create_random_map()
 		delete[] random_bobs[ix];
 	}
 	delete[] random_bobs;
-
-	//  Aftermaths...
-
-	m_map.recalc_whole_map();
 }
-
-};
 
 /**
 ===============
@@ -782,7 +844,7 @@ Return value: The resulting number (0-31) or -1 if the character
 ===============
 */
 
-int  Widelands::UniqueRandomMapInfo::mapIdCharToNumber(char ch)
+int  UniqueRandomMapInfo::mapIdCharToNumber(char ch)
 {
 	if ((ch == '0') || (ch == 'o') || (ch == 'O'))
 		return 22;
@@ -828,7 +890,7 @@ num:          Number to convert
 Return value: The converted value as a character
 ===============
 */
-char Widelands::UniqueRandomMapInfo::mapIdNumberToChar(int32_t const num)
+char UniqueRandomMapInfo::mapIdNumberToChar(int32_t const num)
 {
 	if (num == 22)
 		return '0';
@@ -861,7 +923,7 @@ Return value: true if the map-id-string was valid, false otherwise
 ===============
 */
 
-bool Widelands::UniqueRandomMapInfo::setFromIdString
+bool UniqueRandomMapInfo::setFromIdString
 	(UniqueRandomMapInfo & mapInfo_out, std::string const & mapIdString,
 	 std::vector<std::string> const & worlds)
 {
@@ -974,7 +1036,7 @@ mapInfo:     Information about the random map currently
              begin created (map specific info)
 ===============
 */
-void Widelands::UniqueRandomMapInfo::generateIdString
+void UniqueRandomMapInfo::generateIdString
 	(std::string & mapIdsString_out, UniqueRandomMapInfo const & mapInfo)
 {
 	//  Init
@@ -1098,3 +1160,5 @@ uint16_t Widelands::UniqueRandomMapInfo::generateWorldNameHash
 // TODO: MapGen: Display something else than
 // TODO:         "Preparing..." when generating map...
 // TODO: MapGen: Allow up to 3 different water areas
+
+};
