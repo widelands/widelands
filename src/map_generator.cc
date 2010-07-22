@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -234,7 +234,7 @@ uint8_t MapGenerator::make_node_elevation
 	return res_h;
 }
 
-/*
+/**
 ===============
 Generate a "continuous" array of "reasonable" random values.
 The array generated is in fact organized in a two-dimensional
@@ -288,7 +288,7 @@ uint32_t * MapGenerator::generate_random_value_map
 
 		uint32_t step_x  = std::min(16U, w), step_y  = std::min(16U, h);
 		uint32_t max = AVG_ELEVATION, min = AVG_ELEVATION;
-		double    ele_fac  = 0.5;
+		double    ele_fac  = 0.15;
 
 		bool end = false;
 
@@ -360,7 +360,7 @@ uint32_t * MapGenerator::generate_random_value_map
 				step_x = 2;
 			if (step_y <= 1)
 				step_y = 2;
-			ele_fac *= 0.5;
+			ele_fac *= 0.9;
 		}
 
 		//  make a histogram of the heights
@@ -409,7 +409,7 @@ uint32_t * MapGenerator::generate_random_value_map
 }
 
 
-/*
+/**
 ===============
 Figures out terrain info for a field in a random map.
 
@@ -769,7 +769,7 @@ void MapGenerator::create_random_map()
 
 };
 
-/*
+/**
 ===============
 Converts a character out of a mapId-String into an integer value.
 Valid characters are 'a'-'z' (or 'A'-'Z') and '2'-'9'. 'i' and 'o'
@@ -819,7 +819,7 @@ int  Widelands::UniqueRandomMapInfo::mapIdCharToNumber(char ch)
 	return -1;
 }
 
-/*
+/**
 ===============
 Converts an integer number (0-31) to a characted usable in
 a map id string.
@@ -851,7 +851,7 @@ char Widelands::UniqueRandomMapInfo::mapIdNumberToChar(int32_t const num)
 		return '?';
 }
 
-/*
+/**
 ===============
 Fills a UniqueRandomMapInfo structure from a given Map-id-string.
 
@@ -960,7 +960,7 @@ bool Widelands::UniqueRandomMapInfo::setFromIdString
 	return false; // No valid world name found
 }
 
-/*
+/**
 ===============
 Generates an ID-String for map generation.
 The ID-String is an encoded version of the
