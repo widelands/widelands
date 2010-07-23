@@ -18,6 +18,7 @@
  */
 
 #include "map_generator.h"
+#include "log.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
 #include "logic/editor_game_base.h"
@@ -747,13 +748,23 @@ void MapGenerator::create_random_map()
 
 		// Build a basic structure how player start positions are placed
 		uint8_t line[3];
-		uint8_t rows, lines;
-		rows  = m_mapInfo.numPlayers / 2;
-		lines = m_mapInfo.numPlayers / 2 + m_mapInfo.numPlayers % 2;
-		line[0] = line[1] = line[3] = rows;
+		uint8_t rows = 1, lines = 1;
+		if (m_mapInfo.numPlayers > 1) {
+			++rows;
+			if (m_mapInfo.numPlayers > 2) {
+				++lines;
+				if (m_mapInfo.numPlayers > 4) {
+					++rows;
+					if (m_mapInfo.numPlayers > 6) {
+						++lines;
+					}
+				}
+			}
+		}
+		line[0] = line[1] = line[2] = rows;
 		if (rows * lines > m_mapInfo.numPlayers) {
 			--line[1];
-			if (rows * lines > m_mapInfo.numPlayers)
+			if (rows * lines - 1 > m_mapInfo.numPlayers)
 				--line[2];
 		}
 
@@ -764,18 +775,21 @@ void MapGenerator::create_random_map()
 			m_map.set_scenario_player_ai(n, ai);
 
 			// Calculate wished coords for player starting position
-			if (line[0] + 1 - n > 0) {
+			if (line[0] + 1 > n) {
 				// X-Coordinates
-				playerstart.x = (m_mapInfo.w / (line[0] + 2)) * (line[0] + 2 - n);
+				playerstart.x  = m_mapInfo.w * (line[0] * line[0] + 1 - n * n);
+				playerstart.x /= line[0] * line[0] + 1;
 				// Y-Coordinates
 				if (lines == 1)
 					playerstart.y = m_mapInfo.h / 2;
 				else
 					playerstart.y = m_mapInfo.h / 7 + ISLAND_BORDER;
-			} else if (line[0] + line[1] + 1 - n > 0) {
+			} else if (line[0] + line[1] + 1 > n) {
 				// X-Coordinates
-				playerstart.x  = (m_mapInfo.w / (line[1] + 2));
-				playerstart.x *= (line[0] + line[1] + 2 - n);
+				uint8_t pos = n - line[0];
+				playerstart.x  = m_mapInfo.w;
+				playerstart.x *= line[1] * line[1] + 1 - pos * pos;
+				playerstart.x /= line[1] * line[1] + 1;
 				// Y-Coordinates
 				if (lines == 3)
 					playerstart.y = m_mapInfo.h / 2;
@@ -783,8 +797,10 @@ void MapGenerator::create_random_map()
 					playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
 			} else{
 				// X-Coordinates
-				playerstart.x  = (m_mapInfo.w / (line[2] + 2));
-				playerstart.x *= (line[0] + line[1] + line[2] + 2 - n);
+				uint8_t pos = n - line[0] - line[1];
+				playerstart.x  = m_mapInfo.w;
+				playerstart.x *= line[2] * line[2] + 1 - pos * pos;
+				playerstart.x /= line[2] * line[2] + 1;
 				// Y-Coordinates
 				playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
 			}
@@ -793,14 +809,30 @@ void MapGenerator::create_random_map()
 			// starting position
 			std::vector<Coords> coords;
 			m_map.find_fields
-				(Area<FCoords>(m_map.get_fcoords(playerstart), 15),
+				(Area<FCoords>(m_map.get_fcoords(playerstart), 20),
 				 &coords, functor);
 
-			if (coords.empty()) // TODO there should be better ways, or?
-				throw wexception("No place for a startingposition!");
+			// Take the nearest ones
+			uint32_t min_distance = -1;
+			Coords coords2;
+			for (uint16_t i = 0; i < coords.size(); ++i) {
+				uint32_t test = m_map.calc_distance(coords[i], playerstart);
+				if (test < min_distance) {
+					min_distance = test;
+					coords2 = coords[i];
+				}
+			}
+
+			if (coords.empty()) {
+				// TODO inform players via popup
+				log("WARNING: Could not find a suitable place for player %u\n", n);
+				// Let's hope that one is at least on dry ground.
+				coords2 = playerstart;
+			}
+			
 
 			// Finally set the found starting position
-			m_map.set_starting_pos(n, m_map.get_fcoords(coords[0]));
+			m_map.set_starting_pos(n, coords2);
 		}
 
 	} catch (...) {
