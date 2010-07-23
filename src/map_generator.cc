@@ -750,13 +750,13 @@ void MapGenerator::create_random_map()
 		uint8_t line[3];
 		uint8_t rows = 1, lines = 1;
 		if (m_mapInfo.numPlayers > 1) {
-			++rows;
+			++lines;
 			if (m_mapInfo.numPlayers > 2) {
-				++lines;
+				++rows;
 				if (m_mapInfo.numPlayers > 4) {
-					++rows;
+					++lines;
 					if (m_mapInfo.numPlayers > 6) {
-						++lines;
+						++rows;
 					}
 				}
 			}

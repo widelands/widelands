@@ -841,6 +841,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			int32_t prio = 0;
 
 			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
+				// Don't build another building of this type, if there is already
+				// one that is unoccupied at the moment
+				if (bo.unoccupied)
+					continue;
 				if (bo.need_trees) {
 					// Priority of woodcutters depend on the number of near trees
 					prio += bf->trees_nearby * 3;
@@ -874,36 +878,41 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					}
 				} else if (bo.production_hint >= 0) {
 					// production hint (f.e. associate forester with trunks)
-					// add bonus near buildings outputting production_hint ware
-					prio += (5 * bf->producers_nearby[bo.production_hint]) / 2;
-					// Add preciousness - makes the defaultAI build foresters earlier
-					prio += wares[bo.production_hint].preciousness;
 
-					// Check if the reproduced wares are needed
+					// Calculate the need for this building
+					int16_t inout = wares[bo.production_hint].consumers;
+					if
+						(tribe->safe_ware_index("trunk").value()
+						 ==
+						 bo.production_hint)
+						inout += total_constructionsites / 4;
+					inout -= wares[bo.production_hint].producers;
+					if (inout < 1)
+						inout = 1;
 					Ware_Index wt(static_cast<size_t>(bo.production_hint));
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						// Don't check if the economy has no warehouse.
 						if ((*l.current)->economy.warehouses().empty())
 							continue;
 						if ((*l.current)->economy.needs_ware(wt)) {
-							prio += 1 + wares[bo.production_hint].preciousness;
+							prio += wares[bo.production_hint].preciousness * inout;
 							break;
 						}
 					}
 
 					// Do not build too many of these buildings, but still care
 					// to build at least one.
-					if (bo.total_count() > 1)
-						prio -= 15 * bo.total_count();
-					else
-						prio *= 3;
-
-					// Calculate the need for this building
-					prio += wares[bo.production_hint].consumers;
-					prio += (bf->producers_nearby[bo.production_hint] - 1) * 10;
-					prio += wares[bo.production_hint].producers;
+					// And add bonus near buildings outputting production_hint ware.
+					prio += (5 * bf->producers_nearby[bo.production_hint]) / 2;
 					prio -= bo.total_count() * 2;
 					prio /= bo.total_count() + 1;
+					prio += (bf->producers_nearby[bo.production_hint] - 1) * 5;
+					if (bo.total_count() > 1)
+						prio -= bo.total_count();
+					else {
+						prio += wares[bo.production_hint].preciousness;
+						prio *= 3;
+					}
 					if (prio < 0)
 						continue;
 				} else if (bo.recruitment) {
@@ -919,10 +928,6 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// take care about borders and enemies
 					prio = recalc_with_border_range(*bf, prio);
 				} else { // "normal" productionsites
-					// Don't build another building of this type, if there is already
-					// one that is unoccupied at the moment
-					if (bo.unoccupied)
-						continue;
 					if (bo.is_basic && (bo.total_count() == 0))
 						prio += 100; // for very important buildings
 
