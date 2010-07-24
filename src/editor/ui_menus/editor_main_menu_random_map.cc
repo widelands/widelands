@@ -47,7 +47,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	:
 	UI::Window
 		(&parent, "random_map_menu",
-		 (parent.get_w() - 260) / 2, (parent.get_h() - 450) / 2, 260, 450,
+		 (parent.get_w() - 260) / 2, (parent.get_h() - 450) / 2, 260, 490,
 		 _("New Random Map")),
 	m_currentworld(0)
 {
@@ -62,6 +62,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	m_waterval     = 20;
 	m_landval      = 60;
 	m_wastelandval = 0;
+	m_pn = 1;
 
 	// ---------- Random map number edit ----------
 
@@ -102,14 +103,14 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 0);
+		 &Main_Menu_New_Random_Map::button_clicked, *this, MAP_W_PLUS);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
 		(this, "width_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 1);
+		 &Main_Menu_New_Random_Map::button_clicked, *this, MAP_W_MINUS);
 
 	snprintf
 		(buffer, sizeof(buffer), _("Width: %u"), Widelands::MAP_DIMENSIONS[m_w]);
@@ -130,14 +131,14 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 2);
+		 &Main_Menu_New_Random_Map::button_clicked, *this, MAP_H_PLUS);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
 		(this, "height_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 3);
+		 &Main_Menu_New_Random_Map::button_clicked, *this, MAP_H_MINUS);
 
 	posy += 20 + spacing + spacing;
 
@@ -149,14 +150,14 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 4);
+		 &Main_Menu_New_Random_Map::button_clicked, *this, WATER_PLUS);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
 		(this, "water_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 5);
+		 &Main_Menu_New_Random_Map::button_clicked, *this, WATER_MINUS);
 
 	snprintf(buffer, sizeof(buffer), _("Water: %u %%"), m_waterval);
 	m_water = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
@@ -172,14 +173,14 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 6);
+		 &Main_Menu_New_Random_Map::button_clicked, *this, LAND_PLUS);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
 		(this, "land_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 7);
+		 &Main_Menu_New_Random_Map::button_clicked, *this, LAND_MINUS);
 
 	snprintf
 		(buffer, sizeof(buffer), _("Land: %u %%"), m_landval);
@@ -196,14 +197,14 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 10);
+		 &Main_Menu_New_Random_Map::button_clicked, *this, WASTE_PLUS);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
 		(this, "wasteland_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 11);
+		 &Main_Menu_New_Random_Map::button_clicked, *this, WASTE_MINUS);
 
 	snprintf
 		(buffer, sizeof(buffer), _("Wasteland: %u %%"), m_wastelandval);
@@ -229,7 +230,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	Point pos(get_inner_w() - spacing - 20, posy);
 	m_island_mode = new UI::Checkbox(this, pos);
 	m_island_mode->set_state(true);
-	m_island_mode->set_id(9);
+	m_island_mode->set_id(SWITCH_ISLAND_MODE);
 	m_island_mode->changed.set
 		(this, & Main_Menu_New_Random_Map::nr_edit_box_changed);
 
@@ -253,10 +254,11 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		(this, "resources",
 		 posx, posy, width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 12,
+		 &Main_Menu_New_Random_Map::button_clicked, *this, SWITCH_RES,
 		 m_res_amounts[m_res_amount].c_str());
 
 	posy += height + spacing + spacing + spacing;
+
 
 
 	// ---------- Worlds ----------
@@ -271,10 +273,12 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		(this, "world",
 		 posx, posy, width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Main_Menu_New_Random_Map::button_clicked, *this, 8,
+		 &Main_Menu_New_Random_Map::button_clicked, *this, SWITCH_WORLD,
 		 Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 
 	posy += height + spacing + spacing + spacing;
+
+
 
 	// ---------- Map ID String edit ----------
 
@@ -291,6 +295,31 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	m_idEditbox->changed.set
 		(this, & Main_Menu_New_Random_Map::id_edit_box_changed);
 	posy += height + spacing + spacing + spacing;
+
+
+
+	// ---------- Players -----------
+
+	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
+		(this, "player_up",
+		 posx, posy, 20, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Main_Menu_New_Random_Map::button_clicked, *this, PLAYER_PLUS);
+
+	 new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
+		(this, "player_down",
+		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 &Main_Menu_New_Random_Map::button_clicked, *this, PLAYER_MINUS);
+
+	snprintf(buffer, sizeof(buffer), _("Players: %u"), m_pn);
+	m_players = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
+
+	posy += 20 + spacing + spacing;
+
+
 
 	// ---------- "Generate Map" button ----------
 
@@ -314,48 +343,65 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 */
 void Main_Menu_New_Random_Map::button_clicked(int32_t n) {
 	switch (n) {
-	case 0: ++m_w; break;
-	case 1: --m_w; break;
-	case 2: ++m_h; break;
-	case 3: --m_h; break;
-	case 4:
+	case MAP_W_PLUS: ++m_w; break;
+	case MAP_W_MINUS:
+		--m_w;
+		if (m_w >= 0 && m_pn > m_w + 2)
+			--m_pn;
+		break;
+	case MAP_H_PLUS: ++m_h; break;
+	case MAP_H_MINUS:
+		--m_h;
+		if (m_h >= 0 && m_pn > m_h + 2)
+			--m_pn;
+		break;
+	case PLAYER_PLUS:
+		// Only higher the player number, if there is enough space
+		if (m_pn < MAX_PLAYERS && m_pn < m_w + 2 && m_pn < m_h + 2)
+			++m_pn;
+		break;
+	case PLAYER_MINUS:
+		if (m_pn > 1)
+			--m_pn;
+		break;
+	case WATER_PLUS:
 		if (m_waterval < 60)
 			m_waterval += 5;
 		if (m_landval + m_waterval > 100)
 			m_landval -= 5;
 		break;
-	case 5:
+	case WATER_MINUS:
 		if (m_waterval > 0)
 			m_waterval -= 5;
 		break;
-	case 6:
+	case LAND_PLUS:
 		if (m_landval < 100)
 			m_landval += 5;
 		if (m_waterval + m_landval > 100)
 			m_waterval -= 5;
 		break;
-	case 7:
+	case LAND_MINUS:
 		if (m_landval > 0)
 			m_landval -= 5;
 		break;
-	case 8:
+	case SWITCH_WORLD:
 		++ m_currentworld;
 		if (m_currentworld == m_worlds.size())
 			m_currentworld = 0;
 		m_world->set_title
 			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 		break;
-	case 9:
+	case SWITCH_ISLAND_MODE:
 		break;
-	case 10:
+	case WASTE_PLUS:
 		if (m_wastelandval < 70)
 			m_wastelandval += 10;
 		break;
-	case 11:
+	case WASTE_MINUS:
 		if (m_wastelandval > 0)
 			m_wastelandval -= 10;
 		break;
-	case 12:
+	case SWITCH_RES:
 		++ m_res_amount;
 		if (m_res_amount == m_res_amounts.size())
 			m_res_amount = 0;
@@ -377,18 +423,20 @@ void Main_Menu_New_Random_Map::button_clicked(int32_t n) {
 	m_height->set_text(buffer);
 
 	snprintf
-		(buffer, sizeof(buffer), _("Water: %i %%"), m_waterval);
+		(buffer, sizeof(buffer), _("Water: %u %%"), m_waterval);
 	m_water->set_text(buffer);
 	snprintf
-		(buffer, sizeof(buffer), _("Land: %i %%"), m_landval);
+		(buffer, sizeof(buffer), _("Land: %u %%"), m_landval);
 	m_land->set_text(buffer);
 	snprintf
-		(buffer, sizeof(buffer), _("Wasteland: %i %%"), m_wastelandval);
+		(buffer, sizeof(buffer), _("Wasteland: %u %%"), m_wastelandval);
 	m_wasteland->set_text(buffer);
 	snprintf
-		(buffer, sizeof(buffer), _("Mountains: %i %%"),
+		(buffer, sizeof(buffer), _("Mountains: %u %%"),
 		 100 - m_waterval - m_landval);
 	m_mountains->set_text(buffer);
+	snprintf(buffer, sizeof(buffer), _("Players: %u"), m_pn);
+	m_players->set_text(buffer);
 
 	nr_edit_box_changed();  // Update ID String
 }
@@ -406,7 +454,7 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 	if (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
 		eia.change_world();
 
-	Widelands::UniqueRandomMapInfo mapInfo;
+	UniqueRandomMapInfo mapInfo;
 	set_map_info(mapInfo);
 
 	std::stringstream sstrm;
@@ -419,7 +467,7 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 		<< "Resources = " << m_res->get_title() << "\n"
 		<< "ID = " << m_idEditbox->text() << "\n";
 
-	Widelands::MapGenerator gen(map, mapInfo, egbase);
+	MapGenerator gen(map, mapInfo, egbase);
 	map.create_empty_map
 		(mapInfo.w, mapInfo.h,
 		 m_worlds[m_currentworld].c_str(), _("No Name"),
@@ -522,7 +570,7 @@ void Main_Menu_New_Random_Map::set_map_info
 	mapInfo.wastelandRatio = static_cast<double>(m_wastelandval) / 100.0;
 	mapInfo.mapNumber = m_mapNumber;
 	mapInfo.islandMode = m_island_mode->get_state();
-	mapInfo.numPlayers = 1;
+	mapInfo.numPlayers = m_pn;
 	mapInfo.resource_amount = static_cast
 		<Widelands::UniqueRandomMapInfo::Resource_Amount>
 			(m_res_amount);

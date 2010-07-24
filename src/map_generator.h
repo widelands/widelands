@@ -57,11 +57,11 @@ struct UniqueRandomMapInfo {
 	Resource_Amount resource_amount;
 	std::string worldName;
 
-	double   waterRatio;     //  How much of the map is water?
-	double   landRatio;      //  How much of the map is land?
-	double   wastelandRatio; //  How much of the "land" is wasteland?
-	int      numPlayers;     //  number of player to generate
-	bool     islandMode;     //  whether the world will be an island
+	double        waterRatio;     //  How much of the map is water?
+	double        landRatio;      //  How much of the map is land?
+	double        wastelandRatio; //  How much of the "land" is wasteland?
+	Player_Number numPlayers;     //  number of player to generate
+	bool          islandMode;     //  whether the world will be an island
 
 	//  other stuff
 	static bool setFromIdString
