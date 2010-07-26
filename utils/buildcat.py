@@ -97,14 +97,14 @@ RE_ISO639="^[a-z]{2,2}(_[A-Z]{2,2})?$"	# Matches ISO-639 language codes
 					# garantees correctness of code.
 
 #Mac OS X hack to support XCode and macports default path					
-MACPORTSPREFIX = "/opt/local/bin/"
+MACPORTSPATH = "/opt/local/bin/"
 MSGMERGE = "msgmerge"
-if os.path.isfile(MACPORTSPREFIX + MSGMERGE):
-    MSGMERGE = MACPORTSPREFIX + MSGMERGE
+if os.path.isfile(MACPORTSPATH + MSGMERGE) and os.access(MACPORTSPATH + MSGMERGE, os.X_OK):
+    MSGMERGE = MACPORTSPATH + MSGMERGE
 	
 XGETTEXT = "xgettext"
-if os.path.isfile(MACPORTSPREFIX + XGETTEXT):
-    XGETTEXT = MACPORTSPREFIX + XGETTEXT
+if os.path.isfile(MACPORTSPATH + XGETTEXT) and os.access(MACPORTSPATH + XGETTEXT, os.X_OK):
+    XGETTEXT = MACPORTSPATH + XGETTEXT
 
 # Options passed to common external programs
 XGETTEXTOPTS ="-k_ --from-code=UTF-8"

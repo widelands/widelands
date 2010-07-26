@@ -20,10 +20,10 @@ import os.path as p
 import buildcat
 
 #Mac OS X hack to support XCode and macports default path					
-MACPORTSPREFIX = "/opt/local/bin/"
+MACPORTSPATH = "/opt/local/bin/"
 MSGFMT = "msgfmt"
-if os.path.isfile(MACPORTSPREFIX + MSGFMT):
-    MSGFMT = MACPORTSPREFIX + MSGFMT
+if os.path.isfile(MACPORTSPATH + MSGFMT) and os.access(MACPORTSPATH + MSGFMT, os.X_OK):
+    MSGFMT = MACPORTSPATH + MSGFMT
 	
 ##############################################################################
 #
