@@ -19,6 +19,12 @@ import os.path as p
 
 import buildcat
 
+#Mac OS X hack to support XCode and macports default path					
+MACPORTSPREFIX = "/opt/local/bin/"
+MSGFMT = "msgfmt"
+if os.path.isfile(MACPORTSPREFIX + MSGFMT):
+    MSGFMT = MACPORTSPREFIX + MSGFMT
+	
 ##############################################################################
 #
 # Merge & compile every .po file found in 'po/lang' directory
@@ -36,7 +42,7 @@ def do_compile(lang):
 
             if not buildcat.do_buildpo(po, pot, "tmp.po"):
                 buildcat.do_makedirs(os.path.dirname(mo))
-                err_code = os.system("msgfmt -o %s tmp.po" % mo)
+                err_code = os.system(MSGFMT + " -o %s tmp.po" % mo)
                 if not err_code: # Success
                     os.remove("tmp.po")
                     sys.stdout.write(".")

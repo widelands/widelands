@@ -21,6 +21,7 @@ import os
 import re
 import string
 import sys
+import subprocess
 sys.path.append('build/scons-tools')
 from detect_revision import detect_revision
 from time import strftime,gmtime
@@ -93,7 +94,17 @@ ITERATIVEPOTS = [
 RE_NO_DOTFILE="^[^\.]"		# Matches everything but dot-leaded filenames.
 RE_ISO639="^[a-z]{2,2}(_[A-Z]{2,2})?$"	# Matches ISO-639 language codes
                                         # structure. Note that this doesn't
-                                        # garantees correctness of code.
+					# garantees correctness of code.
+
+#Mac OS X hack to support XCode and macports default path					
+MACPORTSPREFIX = "/opt/local/bin/"
+MSGMERGE = "msgmerge"
+if os.path.isfile(MACPORTSPREFIX + MSGMERGE):
+    MSGMERGE = MACPORTSPREFIX + MSGMERGE
+	
+XGETTEXT = "xgettext"
+if os.path.isfile(MACPORTSPREFIX + XGETTEXT):
+    XGETTEXT = MACPORTSPREFIX + XGETTEXT
 
 # Options passed to common external programs
 XGETTEXTOPTS ="-k_ --from-code=UTF-8"
@@ -182,8 +193,8 @@ def do_compile( potfile, srcfiles ):
 ##############################################################################
 def do_compile_src( potfile, srcfiles ):
         # call xgettext and supply source filenames via stdin
-        gettext_input = os.popen("xgettext %s --files-from=- --output=%s" % \
-                (XGETTEXTOPTS, potfile), "w")
+        gettext_input = subprocess.Popen(XGETTEXT + " %s --files-from=- --output=%s" % \
+                (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE).stdin
         try:
             for one_pattern in srcfiles:
                 # 'normpath' is necessary for windows ('/' vs. '\')
@@ -299,7 +310,7 @@ def do_update_potfiles():
 #
 ##############################################################################
 def do_buildpo(po, pot, dst):
-        rv = os.system("msgmerge %s %s %s -o %s" % (MSGMERGEOPTS, po, pot, dst))
+        rv = os.system(MSGMERGE + " %s %s %s -o %s" % (MSGMERGEOPTS, po, pot, dst))
         if rv:
             raise RuntimeError("msgmerge exited with errorcode %i!" % rv)
         return rv
