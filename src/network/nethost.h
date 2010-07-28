@@ -84,6 +84,9 @@ struct NetHost : public GameController, private SyncCallback {
 	// Chat-related stuff
 	void send(ChatMessage msg);
 
+	// Host command releated stuff
+	void kickUser(std::string, std::string);
+
 private:
 	NetTransferFile * file;
 
