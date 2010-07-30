@@ -564,6 +564,9 @@ bool Worker::run_findspace(Game & game, State & state, Action const & action)
 				(FindNodeResource(w->get_resource(action.sparam1.c_str())));
 	}
 
+	if (action.iparam5 > -1)
+		functor.add(FindNodeImmovableAttribute(action.iparam5), true);
+
 	if (action.iparam3)
 		functor.add(FindNodeSpace(get_location(game)));
 

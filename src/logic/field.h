@@ -157,7 +157,7 @@ public:
 	int8_t get_brightness() const {return brightness;}
 
 	/**
-	 * Does not change the border bit of this or neighbouring fileds. That must
+	 * Does not change the border bit of this or neighbouring fields. That must
 	 * be done separately.
 	 */
 	void set_owned_by(const Player_Number n) throw () {

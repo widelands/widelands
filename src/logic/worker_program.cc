@@ -304,6 +304,9 @@ void WorkerProgram::parse_findobject
  * Resource to search for. This is mainly intended for fisher and
  * therelike (non detectable Resources and default resources)
  *
+ * avoid:\<immovable attribute>
+ * a field containing an immovable with that immovable should not be used
+ *
  * space
  * Find only fields that are walkable such that all neighbours
  * are also walkable (an exception is made if one of the neighbouring
@@ -313,6 +316,7 @@ void WorkerProgram::parse_findobject
  * iparam2 = FindNodeSize::sizeXXX
  * iparam3 = whether the "space" flag is set
  * iparam4 = whether the "breed" flag is set
+ * iparam5 = Immovable attribute id
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace
@@ -328,6 +332,7 @@ void WorkerProgram::parse_findspace
 	act->iparam2 = -1;
 	act->iparam3 = 0;
 	act->iparam4 = 0;
+	act->iparam5 = -1;
 	act->sparam1 = "";
 
 	// Parse predicates
@@ -374,6 +379,8 @@ void WorkerProgram::parse_findspace
 			act->sparam1 = value;
 		} else if (key == "space") {
 			act->iparam3 = 1;
+		} else if (key == "avoid") {
+			act->iparam5 = Map_Object_Descr::get_attribute_id(value);
 		} else
 			throw wexception
 				("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
