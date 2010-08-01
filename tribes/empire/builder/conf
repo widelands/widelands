@@ -8,18 +8,18 @@ carrier=1
 [idle]
 pics=work_??.png
 sfx=0 ../../../sound/hammering/hammering
-hotspot=11 22
+hotspot=11 21
 playercolor=true
 fps=10
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=11 25
+hotspot=11 23
 playercolor=true
 fps=10
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=11 25
+hotspot=11 23
 playercolor=true
 fps=10

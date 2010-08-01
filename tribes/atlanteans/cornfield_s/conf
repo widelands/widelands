@@ -9,4 +9,4 @@ transform=cornfield_m
 [small]
 pics=cornfield_s_??.png
 fps=5
-hotspot=35 45
+hotspot=35 34

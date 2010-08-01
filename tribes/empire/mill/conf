@@ -29,9 +29,9 @@ produce=flour
 
 [idle]
 pics=mill_i_??.png  # ???
-hotspot=45 90
+hotspot=37 87
 
 [working]
 pics=mill_w_??.png  # lets see the mill turn!
-hotspot=45 90
+hotspot=39 89
 fps=25

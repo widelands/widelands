@@ -16,35 +16,35 @@ carrier=1
 
 [idle]
 pics=idle_??.png
-hotspot=12 24
+hotspot=8 23
 playercolor=true
 
 [dig]
 pics=dig_??.png
-hotspot=14 25
+hotspot=5 23
 fps=5
 playercolor=true
 
 [crop]
 pics=plant_??.png
-hotspot=20 25
+hotspot=17 21
 fps=10
 playercolor=true
 
 [water]
 pics=water_??.png
-hotspot=19 26
+hotspot=18 25
 fps=5
 playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=12 24
+hotspot=10 23
 fps=10
 playercolor=true
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=12 24
+hotspot=10 23
 fps=10
 playercolor=true

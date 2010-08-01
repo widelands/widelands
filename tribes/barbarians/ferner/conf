@@ -44,35 +44,35 @@ shovel=1
 
 [idle]
 pics=idle_??.png
-hotspot=5 13
+hotspot=-4 11
 playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=9 23
+hotspot=8 23
 playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
-hotspot=9 23
+hotspot=7 23
 playercolor=true
 fps=10
 
 [flaxplanting]
 pics=plantflax_??.png
-hotspot=11 23
+hotspot=11 22
 playercolor=true
 fps=10
 
 [reedplanting]
 pics=plantreed_??.png
-hotspot=11 23
+hotspot=10 21
 playercolor=true
 fps=10
 
 [harvesting]
 pics=harvest_??.png
-hotspot=13 24
+hotspot=10 22
 playercolor=true
 fps=5

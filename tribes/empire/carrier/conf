@@ -4,18 +4,18 @@ help=_Carries items along your roads.
 
 [idle]
 pics=idle_??.png
-hotspot=8 23
+hotspot=7 22
 fps=10
 playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=8 21
+hotspot=7 20
 fps=10
 playercolor=true
 
 [walkload]
 dirpics=walkload_!!_??.png
-hotspot=9 22
+hotspot=8 22
 fps=10
 playercolor=true

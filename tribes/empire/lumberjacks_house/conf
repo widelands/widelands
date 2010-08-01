@@ -21,4 +21,4 @@ worker=chop
 
 [idle]
 pics=lumberjack_i_??.png
-hotspot=42 60
+hotspot=40 59

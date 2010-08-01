@@ -12,8 +12,8 @@ hotspot=5 13
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=5 13
+hotspot=5 11
 
 [walkload]
 dirpics=walkload_!!_??.png
-hotspot=5 13
+hotspot=5 11

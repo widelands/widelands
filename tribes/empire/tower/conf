@@ -12,7 +12,7 @@ marblecolumn=2
 
 [idle]
 pics=tower_i_??.png
-hotspot=55 92
+hotspot=55 91
 
 [build]
 pics=tower_b_??.png

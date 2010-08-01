@@ -27,35 +27,35 @@ scythe=1
 
 [idle]
 pics=idle_??.png
-hotspot=20 24
+hotspot=10 23
 playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=20 24
+hotspot=18 24
 playercolor=true
 fps=10
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=19 23
+hotspot=18 24
 playercolor=true
 fps=10
 
 [planting]
 pics=plant_??.png
-hotspot=15 26
+hotspot=14 25
 playercolor=true
 fps=10
 
 [harvesting]
 pics=harvest_??.png
-hotspot=20 25
+hotspot=19 24
 playercolor=true
 fps=10
 
 [gathering]
 pics=gather_??.png
-hotspot=11 24
+hotspot=10 23
 playercolor=true
 fps=5
