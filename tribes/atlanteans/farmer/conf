@@ -8,13 +8,12 @@ carrier=1
 scythe=1
 
 [plant]
-0=setdescription tribe:cornfield_t
-1=findspace size:any radius:2
-2=walk coords
-3=animation planting 4000
-4=plant
-5=animation planting 4000
-6=return
+0=findspace size:any radius:2
+1=walk coords
+2=animation planting 4000
+3=plant tribe:cornfield_t
+4=animation planting 4000
+5=return
 
 [harvest]
 0=findobject attrib:cornfield radius:2

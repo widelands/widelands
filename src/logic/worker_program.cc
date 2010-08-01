@@ -30,7 +30,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"mine",              &WorkerProgram::parse_mine},
 	{"breed",             &WorkerProgram::parse_breed},
 	{"createitem",        &WorkerProgram::parse_createitem},
-	{"setdescription",    &WorkerProgram::parse_setdescription},
+	{"setdescription",    &WorkerProgram::parse_plant},
 	{"setbobdescription", &WorkerProgram::parse_setbobdescription},
 	{"findobject",        &WorkerProgram::parse_findobject},
 	{"findspace",         &WorkerProgram::parse_findspace},
@@ -173,26 +173,19 @@ void WorkerProgram::parse_breed
 
 
 /**
- * setdescription \<immovable name\> \<immovable name\> ...
+ * OUTDATED - SHOULD NOT BE USED ANYMORE AND DOES NOT DO ANYTHING VALUEABLE
+ *    just kept here for savegame compatibility for Build15 and earlier
  *
- * Randomly select an immovable name that can be used in subsequent commands
- * (e.g. plant).
+ * setdescription \<immovable name\> \<immovable name\> ...
  *
  * sparamv = possible bobs
  */
 void WorkerProgram::parse_setdescription
 	(Worker_Descr                   *,
-	 Worker::Action                 * act,
+	 Worker::Action                 *,
 	 Parser                         *,
-	 std::vector<std::string> const & cmd)
+	 std::vector<std::string> const &)
 {
-	if (cmd.size() < 2)
-		throw wexception("Usage: setdescription <bob name> <bob name> ...");
-
-	act->function = &Worker::run_setdescription;
-
-	for (uint32_t i = 1; i < cmd.size(); ++i)
-		act->sparamv.push_back(cmd[i]);
 }
 
 
@@ -501,16 +494,23 @@ void WorkerProgram::parse_object
 
 
 /**
- * Plant an immovable on the current position. The immovable type must have
- * been selected by a previous command (i.e. setdescription)
+ * plant \<immmovable type\> \<immovable type\> ...
+ *
+ * Plant one of the given immovables on the current position.
+ * Decision is made with inclusion of the terrain affinity.
  */
 void WorkerProgram::parse_plant
 	(Worker_Descr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
-	 std::vector<std::string> const &)
+	 std::vector<std::string> const & cmd)
 {
+	if (cmd.size() < 2)
+		throw wexception("Usage: plant <immovable type> <immovable type> ...");
+
 	act->function = &Worker::run_plant;
+	for (uint32_t i = 1; i < cmd.size(); ++i)
+		act->sparamv.push_back(cmd[i]);
 }
 
 

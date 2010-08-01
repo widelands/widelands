@@ -1,7 +1,7 @@
 ### Build 16 (until now)
 - Improved and added a lot new animations for workers!
 - Give foresters more intelligence - now they do not remove young trees to
-  replant another anymore.
+  replant another anymore + plant the trees that suit the terrain best.
 - Added host commands like /announce, /kick, ... (type /help in chat window
   to get a list of available commands).
 - Improved defaultAI's behaviour.

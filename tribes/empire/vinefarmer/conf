@@ -8,13 +8,12 @@ shovel=1
 basket=1
 
 [plantvine]
-0=setdescription tribe:wine0t
-1=findspace size:any radius:1
-2=walk coords
-3=animation idle 500 # Play a planting animation
-4=plant
-5=animation idle 500
-6=return
+0=findspace size:any radius:1
+1=walk coords
+2=animation idle 500 # Play a planting animation
+3=plant tribe:wine0t
+4=animation idle 500
+5=return
 
 [harvestvine]
 0=findobject attrib:grown_vine radius:1

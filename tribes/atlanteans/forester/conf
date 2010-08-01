@@ -6,14 +6,13 @@ shovel=1
 carrier=1
 
 [plant]
-0=setdescription tree1_t tree2_t tree3_t tree4_t tree5_t tree6_t tree7_t tree8_t
-1=findspace size:any radius:5 avoid:seed
-2=walk coords
-3=animation dig 2000 # Play a planting animation
-4=animation crop 1000 # Play a planting animation
-5=plant
-6=animation water 2000
-7=return
+0=findspace size:any radius:5 avoid:seed
+1=walk coords
+2=animation dig 2000 # Play a planting animation
+3=animation crop 1000 # Play a planting animation
+4=plant tree1_t tree2_t tree3_t tree4_t tree5_t tree6_t tree7_t tree8_t
+5=animation water 2000
+6=return
 
 [idle]
 pics=idle_??.png
