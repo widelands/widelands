@@ -225,6 +225,8 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	}
 
 	// Push the instance of this class into the registry
+	// MSVC2008 requires that stored and retrieved types are
+	// same, so use LuaInterface* on both sides.
 	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(dynamic_cast<LuaInterface*>(this)));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
 
