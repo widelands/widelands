@@ -26,6 +26,8 @@ endif (WIN32)
 file(GLOB_RECURSE WL_SRCS_ALL *.cc)
 
 file(GLOB WL_MAIN_SRCS *.cc)
+file(GLOB WL_MAIN_CC main.cc)
+list(REMOVE_ITEM WL_MAIN_SRCS ${WL_MAIN_CC})
 add_library(widelands_main ${WL_MAIN_SRCS})
 
 #file (GLOB WL_SRCS *.cc economy/*.cc scripting/*.cc)
