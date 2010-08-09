@@ -1,7 +1,7 @@
 ### Build 16 (until now)
 - Improved and added a lot new animations for workers!
-- Give foresters more intelligence - now they do not remove young trees to
-  replant another anymore + plant the trees that suit the terrain best.
+- Gave foresters more intelligence - now they do not remove young trees to
+  replant another anymore and plant the trees that suit the terrain the best.
 - Added host commands like /announce, /kick, ... (type /help in chat window
   to get a list of available commands).
 - Improved defaultAI's behaviour.
@@ -35,6 +35,7 @@
 - Story Message Boxes are nomore closed by right clicking.
 - Added command line option to tell Widelands where to search for translations.
 - Improved some of the exisiting maps.
+- Fixed bug #554290: GGZ game hosting on windows was not working before.
 - Fixed bug #533245: Buildings statistics were not calculated correctly.
 - Fixed some filesystem bugs. 
 - Fixed desync bug #590458 and allowed syncstream writing without replay writing
