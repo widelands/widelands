@@ -53,13 +53,13 @@ return {
       sleep(1000)
 
       while true do
-         _send_state()
-
          sleep(10 * 60 * 1000) -- Sleep 10 minutes
          remaining_time = remaining_time - 10
 
+         _send_state()
+
          -- Game ended?
-         if remaining_time < 0 then
+         if remaining_time <= 0 then
             local points = {}
             for idx,plr in ipairs(plrs) do
                points[#points + 1] = { plr, _calc_points(plr) }
