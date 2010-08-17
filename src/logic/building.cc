@@ -22,7 +22,7 @@
 #include "economy/request.h"
 #include "game.h"
 #include "game_data_error.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_player.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
@@ -781,6 +781,11 @@ void Building::draw_help
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics) {
+		if (upcast(Interactive_Player const, iplayer, &igbase))
+			if (!iplayer->player().see_all()
+				 &&
+				 iplayer->player().is_hostile(*get_owner()))
+				return;
 		UI::g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL,

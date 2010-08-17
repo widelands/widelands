@@ -1,6 +1,7 @@
 ### Build 16 (until now)
 - Improved and added a lot new animations for workers!
 - Implemented teamview for allied players
+- Do not show building statistic informations of opposing players anymore
 - Gave foresters more intelligence - now they do not remove young trees to
   replant another anymore and plant the trees that suit the terrain the best.
 - Added host commands like /announce, /kick, ... (type /help in chat window
