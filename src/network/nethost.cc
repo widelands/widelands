@@ -291,8 +291,8 @@ struct HostChatProvider : public ChatProvider {
 					  "/warn <name> <reason>  -  Warn the user <name> because of"
 					  " <reason><br>"
 					  "/kick <name> <reason>  -  Kick the user <name> because of"
-					  " <reason>"
-					  "/forcePause            -  Force the game to pause."
+					  " <reason><br>"
+					  "/forcePause            -  Force the game to pause.<br>"
 					  "/endForcedPause        -  Puts game back to normal speed.");
 				c.recipient = h->getLocalPlayername();
 			}
