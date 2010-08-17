@@ -270,11 +270,16 @@ m_homedir(FileSystem::GetHomedir() + "/.widelands")
 	UI::g_fh = new UI::Font_Handler();
 
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
-	if (m_default_datadirs) {
-		setup_searchpaths(m_commandline["EXENAME"]);
+
+	if (m_commandline.count("homedir")) {
+		log ("Adding home directory: %s\n", m_commandline["homedir"].c_str());
+		m_homedir = m_commandline["homedir"];
+		m_commandline.erase("homedir");
 	}
 	setup_homedir();
 	init_settings();
+	if (m_default_datadirs)
+		setup_searchpaths(m_commandline["EXENAME"]);
 	cleanup_replays();
 	init_hardware();
 
@@ -1090,11 +1095,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		g_fs->AddFileSystem(FileSystem::Create(m_commandline["datadir"]));
 		m_default_datadirs = false;
 		m_commandline.erase("datadir");
-	}
-	if (m_commandline.count("homedir")) {
-		log ("Adding home directory: %s\n", m_commandline["homedir"].c_str());
-		m_homedir = m_commandline["homedir"];
-		m_commandline.erase("homedir");
 	}
 
 	if (m_commandline.count("double")) {

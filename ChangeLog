@@ -37,6 +37,7 @@
 - Story Message Boxes are nomore closed by right clicking.
 - Added command line option to tell Widelands where to search for translations.
 - Improved some of the exisiting maps.
+- Fixed bug #615891: Commandline parameters homedir and datadir parsing
 - Fixed bug #554290: GGZ game hosting on windows was not working before.
 - Fixed bug #533245: Buildings statistics were not calculated correctly.
 - Fixed some filesystem bugs. 
