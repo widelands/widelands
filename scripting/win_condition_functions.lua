@@ -1,6 +1,6 @@
 -- RST
 -- win_condition_functions.lua
--- -------------
+-- ---------------------------
 --
 -- This script contains functions that are shared by different win conditions.
 
