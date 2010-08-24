@@ -363,9 +363,12 @@ void WareInstance::update(Game & game)
 			}
 
 			throw wexception
-				("MO(%u): ware: can not move from building %u to %u (not a "
-				 "warehouse)",
-				 serial(), location->serial(), nextstep->serial());
+				("MO(%u): ware(%s): can not move from building %u (%s at (%u,%u)) "
+				 "to %u (%s) -> not a warehouse!",
+				 serial(), m_descr->name().c_str(), location->serial(),
+				 building->name().c_str(), building->get_position().x,
+				 building->get_position().y, nextstep->serial(),
+				 nextstep->name().c_str());
 
 		} else if (upcast(Flag, flag, location)) {
 			flag->call_carrier
