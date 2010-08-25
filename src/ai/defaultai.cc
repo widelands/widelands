@@ -255,8 +255,7 @@ void DefaultAI::late_initialization ()
 
 		bo.is_basic               = false;
 
-		bo.is_buildable =
-			bld.is_buildable() && player->is_building_type_allowed(i);
+		bo.is_buildable           = bld.is_buildable();
 
 		bo.need_trees             = bh.is_trunkproducer();
 		bo.need_stones            = bh.is_stoneproducer();
@@ -819,7 +818,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		for (uint32_t j = 0; j < buildings.size(); ++j) {
 			BuildingObserver & bo = buildings[j];
 
-			if (!bo.is_buildable)
+			if (!bo.buildable(player))
 				continue;
 
 			if (bo.type == BuildingObserver::MINE)
@@ -1064,7 +1063,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 	{
 		BuildingObserver & bo = buildings[i];
 
-		if (!bo.is_buildable || bo.type != BuildingObserver::MINE)
+		if (!bo.buildable(player) || bo.type != BuildingObserver::MINE)
 			continue;
 
 		// Don't build another building of this type, if there is already
