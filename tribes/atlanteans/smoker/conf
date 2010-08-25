@@ -6,12 +6,12 @@ hook_pole=1
 
 [idle]
 pics=idle_??.png
-hotspot=20 24
+hotspot=17 22
 playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=20 24
+hotspot=20 22
 playercolor=true
 fps=10
 

@@ -45,13 +45,16 @@
 #include "log.h"
 #include <windows.h>
 #include <io.h>
-#define stat _stat
 #else
 #include <glob.h>
 #include <sys/types.h>
 #endif
 #include <sys/stat.h>
 #include <unistd.h>
+
+#ifdef WIN32
+#define stat _stat
+#endif
 
 #ifdef _MSC_VER
 #define S_ISDIR(x) ((x&_S_IFDIR)?1:0)

@@ -3,4 +3,4 @@ help=_This hook pole is used by the smoker to hang up all the meat and fish to t
 # a pole with a hook
 [idle]
 pics=idle.png
-hotspot=10 17
+hotspot=9 14

@@ -545,9 +545,9 @@ local int32_t unzlocal_GetCurrentFileInfoInternal
 	if (err == UNZ_OK) {
 		if (unzlocal_getLong(&s->z_filefunc, s->filestream, &uMagic) != UNZ_OK)
 			err = UNZ_ERRNO;
-	} else if (uMagic != 0x02014b50)
-		err = UNZ_BADZIPFILE;
-
+		else if (uMagic != 0x02014b50)
+			err = UNZ_BADZIPFILE;
+	}
 	if
 		(unzlocal_getShort(&s->z_filefunc, s->filestream, &file_info.version)
 		 !=

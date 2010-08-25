@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"POT-Creation-Date: 2010-08-24 17:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1416,7 +1416,7 @@ msgstr ""
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
 #: ../../tribes/barbarians/warmill/conf:39
-#: ../../tribes/barbarians/weaving-mill/conf:19
+#: ../../tribes/barbarians/weaving-mill/conf:20
 #: ../../tribes/barbarians/well/conf:14
 msgid ""
 "Work"

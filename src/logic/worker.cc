@@ -292,42 +292,16 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
 
 
 /**
- * setdescription \<immovable name\> \<immovable name\> ...
+ * OUTDATED - SHOULD NOT BE USED ANYMORE AND DOES NOT DO ANYTHING VALUEABLE
+ *    just kept here for savegame compatibility for Build15 and earlier
  *
- * Randomly select an immovable name that can be used in subsequent commands
- * (e.g. plant).
+ * setdescription \<immovable name\> \<immovable name\> ...
  *
  * sparamv = possible bobs
  */
 bool Worker::run_setdescription
-	(Game & game, State & state, Action const & action)
+	(Game & game, State & state, Action const &)
 {
-	assert(action.sparamv.size());
-	uint32_t const idx = game.logic_rand() % action.sparamv.size();
-
-	std::vector<std::string> const list(split_string(action.sparamv[idx], ":"));
-	std::string bob;
-	if (list.size() == 1) {
-		state.svar1 = "world";
-		bob = list[0];
-	} else {
-		state.svar1 = "tribe";
-		bob = list[1];
-	}
-
-	state.ivar2 =
-		state.svar1 == "world" ?
-		game.map().world().get_immovable_index(bob.c_str())
-		:
-		descr ().tribe().get_immovable_index(bob.c_str());
-
-	if (state.ivar2 < 0) {
-		molog("  WARNING: Unknown immovable %s\n", action.sparamv[idx].c_str());
-		send_signal(game, "fail");
-		pop_task(game);
-		return true;
-	}
-
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -564,6 +538,9 @@ bool Worker::run_findspace(Game & game, State & state, Action const & action)
 				(FindNodeResource(w->get_resource(action.sparam1.c_str())));
 	}
 
+	if (action.iparam5 > -1)
+		functor.add(FindNodeImmovableAttribute(action.iparam5), true);
+
 	if (action.iparam3)
 		functor.add(FindNodeSpace(get_location(game)));
 
@@ -776,12 +753,16 @@ bool Worker::run_object(Game & game, State & state, Action const & action)
  * Plant an immovable on the current position. The immovable type must have
  * been selected by a previous command (i.e. setdescription)
  */
-bool Worker::run_plant(Game & game, State & state, Action const &)
+bool Worker::run_plant(Game & game, State & state, Action const & action)
 {
+	assert(action.sparamv.size());
+
+	Map & map = game.map();
 	Coords pos = get_position();
+	FCoords fpos = map.get_fcoords(pos);
 
 	// Check if the map is still free here
-	if (BaseImmovable const * const imm = game.map()[pos].get_immovable())
+	if (BaseImmovable const * const imm = map[pos].get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL) {
 			molog("  field no longer free\n");
 			send_signal(game, "fail");
@@ -789,8 +770,73 @@ bool Worker::run_plant(Game & game, State & state, Action const &)
 			return true;
 		}
 
+	std::vector<int32_t> best_fitting;
+	std::vector<bool> is_tribe_specific;
+	uint32_t terrain_suitability = 0;
+	for (uint8_t i = 0; i < action.sparamv.size(); ++i) {
+		std::vector<std::string> const list(split_string(action.sparamv[i], ":"));
+		std::string immovable;
+
+		if (list.size() == 1) {
+			state.svar1 = "world";
+			immovable = list[0];
+			state.ivar2 = map.world().get_immovable_index(immovable.c_str());
+			if (state.ivar2 > 0) {
+				Immovable_Descr const * imm =
+					map.world().get_immovable_descr(state.ivar2);
+				uint32_t suits = imm->terrain_suitability(fpos, map);
+				// Remove existing, if this immovable suits better
+				if (suits > terrain_suitability) {
+					best_fitting.clear();
+					is_tribe_specific.clear();
+				}
+				if (suits >= terrain_suitability) {
+					terrain_suitability = suits;
+					best_fitting.push_back(state.ivar2);
+					is_tribe_specific.push_back(false);
+				}
+				continue;
+			}
+		} else {
+			state.svar1 = "tribe";
+			immovable = list[1];
+			state.ivar2 = descr().tribe().get_immovable_index(immovable.c_str());
+			if (state.ivar2 > 0) {
+				Immovable_Descr const * imm =
+					descr().tribe().get_immovable_descr(state.ivar2);
+				uint32_t suits = imm->terrain_suitability(fpos, map);
+				// Remove existing, if this immovable suits better
+				if (suits > terrain_suitability) {
+					best_fitting.clear();
+					is_tribe_specific.clear();
+				}
+				if (suits >= terrain_suitability) {
+					terrain_suitability = suits;
+					best_fitting.push_back(state.ivar2);
+					is_tribe_specific.push_back(true);
+				}
+				continue;
+			}
+		}
+
+		// Only here if immovable was not found
+		molog("  WARNING: Unknown immovable %s\n", action.sparamv[i].c_str());
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
+	}
+
+	assert(best_fitting.size() == is_tribe_specific.size());
+	if (best_fitting.empty()) {
+		molog("  WARNING: No suitable immovable found!");
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
+	}
+	uint32_t const idx = game.logic_rand() % best_fitting.size();
+
 	game.create_immovable
-		(pos, state.ivar2, state.svar1 == "world" ? 0 : &descr().tribe());
+		(pos, best_fitting[idx], is_tribe_specific[idx] ? &descr().tribe() : 0);
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -2016,9 +2062,15 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 				 &descr().get_right_walk_anims(does_carry_ware()), true);
 	}
 
-	if (not dynamic_cast<Building const *>(location))
-		throw wexception
-			("MO(%u): [fetchfromflag]: building disappeared", serial());
+	if (not dynamic_cast<Building const *>(location)) {
+		// This can happen "naturally" if the building gets destroyed, but the flag
+		// is still there and the worker tries to enter from that flag.
+		// E.g. the player destroyed the building, it is destroyed, through an enemy
+		// player, or it got destroyed through rising water (atlantean scenario)
+		molog("[fetchfromflag]: building dissappeared - searching for alternative");
+		pop_task(game);
+		return start_task_fugitive(game);
+	}
 
 	assert(location == &employer);
 

@@ -2,4 +2,4 @@ help=_This saw is needed by the sawyer to create all the useful tools. It is pro
 
 [idle]
 pics=idle.png
-hotspot=8 11
+hotspot=7 5

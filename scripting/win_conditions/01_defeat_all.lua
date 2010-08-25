@@ -3,6 +3,7 @@
 -- =======================================================================
 
 use("aux", "coroutine") -- for sleep
+use("aux", "win_condition_functions")
 
 set_textdomain("win_conditions")
 
@@ -12,43 +13,15 @@ return {
    func = function()
       -- Find all valid players
       local plrs = {}
-      for i=1,10 do
-         if pcall(wl.game.Player, i) then
-            plrs[#plrs+1] = wl.game.Player(i)
-         end
-      end
-
-      local function count_factions()
-         local factions = 0
-         local teams = {}
-         for idx,p in ipairs(plrs) do
-            local team = p.team
-            if team == 0 then
-               factions = factions + 1
-            else
-               if not teams[team] then
-                  teams[team] = true
-                  factions = factions + 1
-               end
-            end
-         end
-         return factions
-      end
+      valid_players(plrs)
 
       -- Iterate all players, if one is defeated, remove him
-      -- from the list and send him a defeated message
+      -- from the list, send him a defeated message and give him full vision
       repeat
          sleep(5000)
-         for idx,p in ipairs(plrs) do
-            if p.defeated then
-               p:send_message(_ "You lost!",
-                  _ "Sorry, you have lost this game!",
-                  { popup = true })
-               table.remove(plrs, idx)
-               break
-            end
-         end
-      until count_factions() <= 1
+         check_player_defeated(plrs, _ "You lost!",
+            _ "Sorry, you have lost this game!")
+      until count_factions(plrs) <= 1
 
       -- Send congratulations to all remaining players
       for idx,p in ipairs(plrs) do

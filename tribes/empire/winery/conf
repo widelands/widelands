@@ -28,8 +28,8 @@ produce=wine
 
 [idle]
 pics=vintagery_i_??.png  # ???
-hotspot=40 65
+hotspot=39 62
 
 [working]
 pics=vintagery_i_??.png  # ???
-hotspot=40 65
+hotspot=39 62

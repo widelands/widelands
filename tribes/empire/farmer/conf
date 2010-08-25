@@ -8,13 +8,12 @@ carrier=1
 scythe=1
 
 [plant]
-0=setdescription tribe:field0t
-1=findspace size:any radius:2 space
-2=walk coords
-3=animation planting 4000  
-4=plant
-5=animation planting 4000  
-6=return
+0=findspace size:any radius:2 space
+1=walk coords
+2=animation planting 4000  
+3=plant tribe:field0t
+4=animation planting 4000  
+5=return
 
 [harvest]
 0=findobject attrib:wheat radius:2
@@ -28,35 +27,35 @@ scythe=1
 
 [idle]
 pics=idle_??.png
-hotspot=20 24
+hotspot=10 23
 playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=20 24
+hotspot=18 24
 playercolor=true
 fps=10
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=19 23
+hotspot=18 24
 playercolor=true
 fps=10
 
 [planting]
 pics=plant_??.png
-hotspot=15 26
+hotspot=14 25
 playercolor=true
 fps=10
 
 [harvesting]
 pics=harvest_??.png
-hotspot=20 25
+hotspot=19 24
 playercolor=true
 fps=10
 
 [gathering]
 pics=gather_??.png
-hotspot=11 24
+hotspot=10 23
 playercolor=true
 fps=5

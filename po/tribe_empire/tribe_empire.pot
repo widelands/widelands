@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"POT-Creation-Date: 2010-08-24 17:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -433,7 +433,7 @@ msgid ""
 "Hammer"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:20
+#: ../../tribes/empire/vineyard/conf:21
 msgid ""
 "Harvest vine"
 msgstr ""
@@ -663,7 +663,7 @@ msgid ""
 "Piggery"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:18
+#: ../../tribes/empire/vineyard/conf:19
 msgid ""
 "Plant vine"
 msgstr ""
@@ -1424,7 +1424,7 @@ msgstr ""
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22
 #: ../../tribes/empire/toolsmithy/conf:45
-#: ../../tribes/empire/vineyard/conf:22
+#: ../../tribes/empire/vineyard/conf:23
 #: ../../tribes/empire/weaponsmithy/conf:34
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16

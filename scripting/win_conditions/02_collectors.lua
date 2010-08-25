@@ -4,6 +4,7 @@
 
 use("aux", "coroutine") -- for sleep
 use("aux", "table")
+use("aux", "win_condition_functions")
 
 set_textdomain("win_conditions")
 
@@ -16,11 +17,7 @@ return {
    func = function() 
       -- Find all valid players
       local plrs = {}
-      for i=1,10 do
-         if pcall(wl.game.Player, i) then
-            plrs[#plrs+1] = wl.game.Player(i)
-         end
-      end
+      valid_players(plrs)
 
       local remaining_time = 60 * 4
       function _calc_points(p)
@@ -53,13 +50,21 @@ return {
       sleep(1000)
 
       while true do
-         _send_state()
+         local runs = 0
+         repeat
+            sleep(5000)
+            check_player_defeated(plrs, _ "You are defeated!",
+               _ "You have nothing to command left. If you want, you may " ..
+                 "continue as spectator.")
+            runs = runs + 1
+         until runs >= 120 -- 120 * 5000ms = 600000 ms = 10 min
 
-         sleep(10 * 60 * 1000) -- Sleep 10 minutes
          remaining_time = remaining_time - 10
 
+         _send_state()
+
          -- Game ended?
-         if remaining_time < 0 then
+         if remaining_time <= 0 then
             local points = {}
             for idx,plr in ipairs(plrs) do
                points[#points + 1] = { plr, _calc_points(plr) }
