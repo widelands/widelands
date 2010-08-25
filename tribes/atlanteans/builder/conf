@@ -6,6 +6,12 @@ hammer=1
 carrier=1
 
 [idle]
+pics=walk_w_??.png
+hotspot=8 24
+playercolor=true
+fps=10
+
+[work]
 pics=idle_??.png
 sfx=0 ../../../sound/hammering/hammering
 hotspot=6 22
