@@ -2062,9 +2062,15 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 				 &descr().get_right_walk_anims(does_carry_ware()), true);
 	}
 
-	if (not dynamic_cast<Building const *>(location))
-		throw wexception
-			("MO(%u): [fetchfromflag]: building disappeared", serial());
+	if (not dynamic_cast<Building const *>(location)) {
+		// This can happen "naturally" if the building gets destroyed, but the flag
+		// is still there and the worker tries to enter from that flag.
+		// E.g. the player destroyed the building, it is destroyed, through an enemy
+		// player, or it got destroyed through rising water (atlantean scenario)
+		molog("[fetchfromflag]: building dissappeared - searching for alternative");
+		pop_task(game);
+		return start_task_fugitive(game);
+	}
 
 	assert(location == &employer);
 
