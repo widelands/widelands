@@ -2627,7 +2627,7 @@ void Worker::scout_update(Game & game, State & state)
 		CheckStepDefault cstep(descr().movecaps());
 		FindNodeAnd ffa;
 		ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
-		Area<FCoords> exploring_area(get_position(), state.ivar1);
+		Area<FCoords> exploring_area(map.get_fcoords(get_position()), state.ivar1);
 		Coords oldest_coords = get_position();
 		Time oldest_time = game.get_gametime();
 		uint8_t oldest_distance = 0;
@@ -2675,6 +2675,7 @@ void Worker::scout_update(Game & game, State & state)
 	}
 
 	// time to go home
+	pop_task(game);
 	schedule_act(game, 10);
 	return;
 }
