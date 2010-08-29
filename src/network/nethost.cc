@@ -1782,7 +1782,7 @@ void NetHost::handle_network ()
 #if HAVE_GGZ
 	// if this is a ggz game, handle the ggz network
 	if (use_ggz)
-		NetGGZ::ref().data();
+		NetGGZ::ref().process();
 #endif
 
 	// Check if we hear anything from our clients

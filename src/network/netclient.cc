@@ -867,7 +867,7 @@ void NetClient::handle_network ()
 #if HAVE_GGZ
 	// if this is a ggz game, handle the ggz network
 	if (use_ggz)
-		NetGGZ::ref().data();
+		NetGGZ::ref().process();
 #endif
 	try {
 		while (d->sock != 0 && SDLNet_CheckSockets(d->sockset, 0) > 0) {

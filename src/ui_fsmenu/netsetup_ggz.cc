@@ -18,8 +18,9 @@
  */
 
 #include "netsetup_ggz.h"
+#include "network/network_ggz.h"
 
-#if HAVE_GGZ
+#ifdef HAVE_GGZ
 
 #include <boost/bind.hpp>
 
@@ -27,7 +28,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "network/network.h"
-#include "network/network_ggz.h"
+
 #include "profile/profile.h"
 
 Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
@@ -154,7 +155,7 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 		(this, &Fullscreen_Menu_NetSetupGGZ::server_doubleclicked);
 
 	// try to connect to the metaserver
-	if (!NetGGZ::ref().usedcore())
+	if (!NetGGZ::ref().used())
 		connectToMetaserver();
 #ifdef WIN32
 	//bug in ggz on windows - not able to open a server
@@ -169,7 +170,7 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 	Fullscreen_Menu_Base::think ();
 
 	// If we have no connection try to connect
-	if (!NetGGZ::ref().usedcore()) {
+	if (!NetGGZ::ref().used()) {
 		// Wait two seconds after the user changed the name to avoid reconnecting
 		// after each changed character.
 		if (m_namechange >= time(0) - 1)
@@ -178,7 +179,7 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 	}
 
 	// Check ggz peers for new data
-	NetGGZ::ref().datacore();
+	NetGGZ::ref().process();
 
 	if (NetGGZ::ref().updateForUsers())
 		fillUserList(NetGGZ::ref().users());

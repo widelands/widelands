@@ -380,7 +380,7 @@ void WLApplication::run()
 			//run the network game (autostarts when everyone is ready)
 			netgame.run(true);
 
-			NetGGZ::ref().deinitcore();
+			NetGGZ::ref().deinit();
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -1571,7 +1571,7 @@ void WLApplication::mainmenu_multiplayer()
 
 #if HAVE_GGZ
 		bool ggz = false;
-		NetGGZ::ref().deinitcore(); // cleanup for reconnect to the metaserver
+		NetGGZ::ref().deinit(); // cleanup for reconnect to the metaserver
 		Fullscreen_Menu_MultiPlayer mp;
 		switch (mp.run()) {
 			case Fullscreen_Menu_MultiPlayer::Back:
@@ -1606,13 +1606,13 @@ void WLApplication::mainmenu_multiplayer()
 					NetGGZ::ref().set_local_maxplayers(max);
 					NetHost netgame(playername, true);
 					netgame.run();
-					NetGGZ::ref().deinitcore();
+					NetGGZ::ref().deinit();
 					break;
 				}
 				case Fullscreen_Menu_NetSetupGGZ::JOINGAME: {
 					uint32_t const secs = time(0);
 					while (!NetGGZ::ref().ip()) {
-						NetGGZ::ref().data();
+						NetGGZ::ref().process();
 						if (10 < time(0) - secs)
 							throw warning
 								(_("Connection timeouted"), "%s",
@@ -1647,7 +1647,7 @@ void WLApplication::mainmenu_multiplayer()
 
 					NetClient netgame(&peer, playername, true);
 					netgame.run();
-					NetGGZ::ref().deinitcore();
+					NetGGZ::ref().deinit();
 					break;
 				}
 				default:

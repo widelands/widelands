@@ -23,17 +23,12 @@
 #ifdef USE_GGZ
 #define HAVE_GGZ 1
 
-#define WL_METASERVER "widelands.org"
-#define WL_METASERVER_PORT 5688
-
 #define ERRMSG "</p><p font-size=14 font-color=#ff6633 font-weight=bold>ERROR: "
 
 #include "build_info.h"
 #include "chat.h"
 #include "network_lan_promotion.h"
 
-#include <ggzmod.h>
-#include <ggzcore.h>
 #include <stdint.h>
 #include <string>
 #include <vector>
@@ -46,8 +41,13 @@
 #include <winsock2.h>
 #include <io.h>
 #endif
+#include <ggz_common.h>
 
 #include "game_server/protocol.h"
+
+
+class ggz_ggzcore;
+class ggz_ggzmod;
 
 /// A simply network player struct
 struct Net_Player {
@@ -109,73 +109,84 @@ struct MOTD {
 /**
  * The GGZ implementation
  *
- * It is handling all communication between the Widelands client/server and the
- * metaserver, including metaserver lobbychat.
+ * It handles all widelands related parts and does the communication with
+ * the widelands_server part of ggz. The ggzcore and ggzmod handling is done
+ * in \ref ggz_ggzcore and \ref ggz_ggzmod.
  */
 struct NetGGZ : public ChatProvider {
+	friend class ggz_ggzcore;
+	friend class ggz_ggzmod;
 	static NetGGZ & ref();
 
-	void init();
-	bool connect();
+	/// only sets that ggz is used
+	//void init();
 
+	//bool connect();
+
+	/// returns true if ggz is used
 	bool used();
-	bool host();
-	void data();
+	
+	/// process ggz data (ggzcore and ggzmod)
+	void process();
+	
+	/// returns the ip address of the server we joined
 	char const * ip();
+	
+	//bool logged_in();
 
-	bool updateForTables() {
-		bool temp = tableupdate;
-		tableupdate = false;
-		return temp;
-	}
-	bool updateForUsers() {
-		bool temp = userupdate;
-		userupdate = false;
-		return temp;
-	}
+	bool updateForTables();
+	bool updateForUsers();
 	std::vector<Net_Game_Info> const & tables();
 	std::vector<Net_Player>    const & users();
 
 	// Include the enums to communicate with the server
 
-
-	/* enum Protocol
-	{
-		op_greeting = 1,
-		op_request_ip = 2, // request the IP of the host
-		op_reply_ip = 3, // tell the server, that following package is our IP
-		op_broadcast_ip = 4,
-		op_state_playing = 5, // tell the server that the game was stated
-		op_state_done = 6, // tell the server that the game ended
-		op_game_statistics = 7, // send game statistics
-		op_unreachable = 99 // the metaserver says we are unreachable
-	};*/
-
 	bool initcore(const char *, const char *, const char *, bool);
-	void deinitcore();
-	bool usedcore();
-	void datacore();
-	void launch  ();
+	void deinit();
+
+	/// Modify ggz table state to playing
 	void send_game_playing();
+	/// Modify ggz table state to done
 	void send_game_done();
+
+	/// Set information about the players from @ref GameSettings structure. This
+	/// is transmitted later by @ref send_game_info()
+	void set_players(GameSettings&);
+
+	/// Set map name and size. This is transmitted later by @ref send_game_info()
+	void set_map(std::string, int, int);
+
+	/// Send infortmation about the game to the metaserver.
 	void send_game_info();
+
+	/**
+	 * Report the result of a plyer to ggz. After a result was reported for all
+	 * player the results will be transmitted to the metaserver.
+	 * NOTE: This is called from the win condition script. I think here is a
+	 *       possible bug. I a game is resumed from savegame and one player was
+	 *       defeated earlier (and results reported) the results of this player
+	 *       wont't be reported again and so game results will never be
+	 *       transmitted to metaserver.                timowi, 26.08.2010
+	 */
 	void report_result
 		(int32_t player, Widelands::TeamNumber team, int32_t points,
 		 bool win, int32_t gametime,
 		 const Widelands::Game::General_Stats_vector & resultvec);
-	void send_game_statistics
-		(int32_t gametime,
-		 const Widelands::Game::General_Stats_vector & resultvec);
-	void set_players(GameSettings&);
-	void set_map(std::string, int, int);
-	void join(char const * tablename);
 
-	// functions for local server setup
+	/// join a open table (a open game)
+	void join(char const * tablename);
+	
+	/// launch a new table (open a game)
+	void launch();
+
+	/// functions for local server setup
 	uint32_t max_players();
 	/// sets the maximum number of players that may be in the game
 	void set_local_maxplayers(uint32_t mp) {
+		//std::cout << "set seats: "<< mp << std::endl;
 		tableseats = mp;
 	}
+
 	/// sets the servername shown in the games list
 	void set_local_servername(std::string const & name) {
 		servername  = name.empty() ? "WL-Default" : name;
@@ -184,16 +195,16 @@ struct NetGGZ : public ChatProvider {
 		servername += ')';
 	}
 
-	// ChatProvider: sends a message via GGZnetwork.
+	/// ChatProvider: sends a message via GGZnetwork.
 	void send(std::string const &);
 
-	// ChatProvider: adds the message to the message list and calls parent.
+	/// ChatProvider: adds the message to the message list and calls parent.
 	void receive(ChatMessage const & msg) {
 		messages.push_back(msg);
 		ChatProvider::send(msg);
 	}
 
-	// ChatProvider: returns the list of chatmessages.
+	/// ChatProvider: returns the list of chatmessages.
 	std::vector<ChatMessage> const & getMessages() const {
 		return messages;
 	}
@@ -201,58 +212,45 @@ struct NetGGZ : public ChatProvider {
 	/// Called when a message is received via GGZnetwork.
 	void recievedGGZChat(void const * cbdata);
 
-	// Adds a GGZchatmessage in selected format to the list of chatmessages.
+	/// Adds a GGZchatmessage in selected format to the list of chatmessages.
 	void formatedGGZChat
 		(std::string const &, std::string const &,
 		 bool system = false, std::string recipient = std::string());
 
 private:
 	NetGGZ();
-	static void ggzmod_server(GGZMod *, GGZModEvent, void const * cbdata);
-	static GGZHookReturn
-		callback_server(uint32_t id, void const * cbdata, void const * user);
-	static GGZHookReturn
-		callback_room(uint32_t id, void const * cbdata, void const * user);
-	static GGZHookReturn
-		callback_game(uint32_t id, void const * cbdata, void const * user);
-	void event_server(uint32_t id, void const * cbdata);
-	void event_room(uint32_t id, void const * cbdata);
-	void event_game(uint32_t id, void const * cbdata);
 
-	void write_tablelist();
-	void write_userlist();
+	/// Transmit game statistics to metaserver. This is called from \ref
+	/// report_result() when all player have a result.
+	void send_game_statistics
+		(int32_t gametime,
+		 const Widelands::Game::General_Stats_vector & resultvec);
 
+
+	/// true if ggz is used
 	bool use_ggz;
-	int32_t m_fd;
-	int32_t channelfd;
-	int32_t gamefd;
-	int32_t tableid;
-	char    * server_ip_addr;
-	bool ggzcore_login;
-	bool ggzcore_ready;
-	bool logged_in;
-	bool relogin;
-	GGZRoom * room;
+	
+
+	char * server_ip_addr;
 
 	std::string username;
 	std::string servername;
 	uint32_t tableseats;
 
-	bool userupdate;
-	bool tableupdate;
-	std::vector<Net_Game_Info> tablelist;
-	std::vector<Net_Player>    userlist;
 	std::vector<Net_Player_Info> playerinfo;
 	MOTD motd;
 
+	/// stores information for send_game_info()
+	//@{
 	std::string mapname;
 	int map_w, map_h;
 	WLGGZGameType win_condition;
+	//@}
 
-	// The chat messages
+	/// The chat messages
 	std::vector<ChatMessage> messages;
 };
 
-#endif
+#endif //USE_GGZ
 
-#endif
+#endif //NETWORK_GGZ_H
