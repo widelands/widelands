@@ -70,7 +70,7 @@ Statebox::~Statebox() {
  */
 void Statebox::set_enabled(bool const enabled)
 {
-	if(((m_flags & Is_Enabled) > 1) and enabled)
+	if (((m_flags & Is_Enabled) > 1) and enabled)
 		return;
 
 	set_flags(Is_Enabled, enabled);
@@ -93,7 +93,7 @@ void Statebox::set_enabled(bool const enabled)
  * Args: on  true if the checkbox should be checked
  */
 void Statebox::set_state(bool const on) {
-	if (on xor ((m_flags & Is_Checked)>1)) {
+	if (on xor ((m_flags & Is_Checked) > 1)) {
 		set_flags(Is_Checked, on);
 		changed    .call        ();
 		changedto  .call      (on);

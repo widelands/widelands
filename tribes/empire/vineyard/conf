@@ -2,6 +2,8 @@ size=medium
 output=grape
 
 [aihints]
+space_consumer=true
+is_basic=true
 build_material=false
 
 [buildcost]
@@ -43,4 +45,4 @@ return=skipped
 
 [idle]
 pics=vineyard_i_??.png  # ???
-hotspot=70 70
+hotspot=68 67

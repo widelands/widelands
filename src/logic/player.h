@@ -354,23 +354,19 @@ struct Player :
 	 * triangles and edges.
 	 */
 	void see_node
-		(const Map                  &,
+		(const Map &,
 		 const Widelands::Field & first_map_field,
 		 const FCoords,
-		 const Time)
+		 const Time,
+		 const bool forward = false)
 		throw ();
 
 	/// Decrement this player's vision for a node.
-	void unsee_node(Map_Index const i, Time const gametime) throw () {
-		Field & field = m_fields[i];
-		if(field.vision <= 1) // Already doesn't see this
-			return;
-
-		--field.vision;
-		if (field.vision == 1)
-			field.time_node_last_unseen = gametime;
-		assert(1 <= field.vision);
-	}
+	void unsee_node
+		(const Map_Index,
+		 const Time,
+		 const bool forward = false)
+		throw ();
 
 	/// Call see_node for each node in the area.
 	void see_area(const Area<FCoords> area)
@@ -530,7 +526,7 @@ struct Player :
 
 private:
 	void update_building_statistics(Building &, losegain_t);
-
+	void update_team_players();
 
 private:
 	MessageQueue           m_messages;
@@ -541,7 +537,9 @@ private:
 	uint8_t                m_frontier_style_index;
 	uint8_t                m_flag_style_index;
 	TeamNumber             m_team_number;
-	bool m_see_all;
+	std::vector<Player *>  m_team_player;
+	bool                   m_team_player_uptodate;
+	bool                   m_see_all;
 	bool                   m_view_changed;
 	const Player_Number    m_plnum;
 	Tribe_Descr const    & m_tribe; // buildings, wares, workers, sciences

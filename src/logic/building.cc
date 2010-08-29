@@ -22,7 +22,7 @@
 #include "economy/request.h"
 #include "game.h"
 #include "game_data_error.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_player.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
@@ -781,6 +781,11 @@ void Building::draw_help
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics) {
+		if (upcast(Interactive_Player const, iplayer, &igbase))
+			if (!iplayer->player().see_all()
+				 &&
+				 iplayer->player().is_hostile(*get_owner()))
+				return;
 		UI::g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL,
@@ -887,7 +892,8 @@ void Building::remove_worker(Worker & worker) {
 }
 
 /**
- * Change whether this building sees its vision range based on workers inside the building.
+ * Change whether this building sees its vision range based on workers
+ * inside the building.
  *
  * \note Warehouses always see their surroundings; this is handled separately.
  */
@@ -917,10 +923,11 @@ void Building::set_seeing(bool see)
  *
  * \param msgsender a computer-readable description of why the message was sent
  * \param title user-visible title of the message
- * \param description user-visible message body, will be placed in an appropriate
- *   rich-text paragraph
- * \param throttle_time if non-zero, the minimum time delay in milliseconds between
- *   messages of this type (see \p msgsender) within the given \p throttle_radius
+ * \param description user-visible message body, will be placed in an
+ *   appropriate rich-text paragraph
+ * \param throttle_time if non-zero, the minimum time delay in milliseconds
+ *   between messages of this type (see \p msgsender) within the
+ *   given \p throttle_radius
  */
 void Building::send_message
 	(Game & game,
@@ -956,7 +963,8 @@ void Building::send_message
 		 title, rt_description, get_position());
 
 	if (throttle_time)
-		owner().add_message_with_timeout(game, *msg, throttle_time, throttle_radius);
+		owner().add_message_with_timeout
+			(game, *msg, throttle_time, throttle_radius);
 	else
 		owner().add_message(game, *msg);
 }

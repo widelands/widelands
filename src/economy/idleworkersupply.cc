@@ -77,7 +77,7 @@ bool IdleWorkerSupply::has_storage() const throw ()
 	return m_worker.get_transfer();
 }
 
-void IdleWorkerSupply::get_ware_type(bool& isworker, Ware_Index& ware) const
+void IdleWorkerSupply::get_ware_type(bool & isworker, Ware_Index & ware) const
 {
 	isworker = true;
 	ware = m_worker.worker_index();
@@ -127,7 +127,7 @@ Worker & IdleWorkerSupply::launch_worker(Game &, Request const & req)
 	return m_worker;
 }
 
-void IdleWorkerSupply::send_to_storage(Game & game, Warehouse* wh)
+void IdleWorkerSupply::send_to_storage(Game & game, Warehouse * wh)
 {
 	assert(!has_storage());
 

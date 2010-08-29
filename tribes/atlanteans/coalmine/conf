@@ -13,8 +13,8 @@ miner=3
 mines=coal
 
 [inputs]
-bread=6
-smoked_fish=6
+bread=10
+smoked_fish=10
 smoked_meat=6
 
 [programs]

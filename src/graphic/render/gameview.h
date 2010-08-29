@@ -20,22 +20,30 @@
 #ifndef WIDELANDS_GAMEVIEW_H
 #define WIDELANDS_GAMEVIEW_H
 
-//#include "graphic/graphic.h"
-
-//#include "logic/player.h"
 namespace Widelands {
-struct Player;
-class Editor_Game_Base;
+	struct Player;
+	class Editor_Game_Base;
 };
+
 class Vertex;
 class Texture;
 
 #include "graphic/rendertarget.h"
 
+/**
+ * This class does the game rendering. The class is initialized from a
+ * RenderTarget and can draw views of the game and the minimap. The game
+ * can be rendered to the full screen or to a subwindow. This depends on
+ * the RenderTarget from which it was initialized.
+ *
+ * @todo GameView mixes opengl and software rendering. This shoul be split
+ * properly to have different classes for OpenGL and Software rendering.
+ * Perhaps creating a GameRenderManager where different rendering clases can
+ * be registered so it is easiely possible to create different game rendering?
+ */
 class GameView : public RenderTarget
 {
 public:
-	//GameView();
 	GameView(RenderTarget & rt):
 		RenderTarget(rt) {}
 	~GameView() {}
@@ -71,7 +79,12 @@ public:
 		 Widelands::Player           const * player,
 		 Point                               viewpoint,
 		 uint32_t                            flags);
-		 
+
+private:
+	/**
+	 * Helper function to draw two terrain triangles. This is called from the
+	 * rendermap() functions.
+	 */
 	void draw_field
 		(Rect          & subwin,
 		 Vertex  const &  f_vert,
@@ -83,15 +96,25 @@ public:
 		 Texture const &  l_r_texture,
 		 Texture const &  f_d_texture,
 		 Texture const &  f_r_texture);
-	
+
+	/**
+	 * A helper fuction to draw the minimap. This is called from renderminimap().
+	 */
 	void draw_minimap
 		(Widelands::Editor_Game_Base const &       egbase,
 		 Widelands::Player           const * const player,
 		 Rect                                const rc,
 		 Point                               const viewpt,
 		 uint32_t                            const flags);
-private:
+
+	/**
+	 * This is called before the view of the game is rendered.
+	 */
 	void rendermap_init();
+
+	/**
+	* This is called after the view of the game is rendered.
+	*/
 	void rendermap_deint();
 };
 

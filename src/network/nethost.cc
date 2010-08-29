@@ -241,6 +241,8 @@ struct HostChatProvider : public ChatProvider {
 		 * /announce <msg>      : Send a chatmessage as announcement (system chat)
 		 * /warn <name> <reason>: Warn the user <name> because of <reason>
 		 * /kick <name> <reason>: Kick the user <name> because of <reason>
+		 * /forcePause          : Force the game to pause.
+		 * /endForcedPause      : Puts game back to normal speed.
 		 */
 		else if (c.msg.size() > 1 && *c.msg.begin() == '/') {
 
@@ -289,7 +291,9 @@ struct HostChatProvider : public ChatProvider {
 					  "/warn <name> <reason>  -  Warn the user <name> because of"
 					  " <reason><br>"
 					  "/kick <name> <reason>  -  Kick the user <name> because of"
-					  " <reason>");
+					  " <reason><br>"
+					  "/forcePause            -  Force the game to pause.<br>"
+					  "/endForcedPause        -  Puts game back to normal speed.");
 				c.recipient = h->getLocalPlayername();
 			}
 
@@ -355,6 +359,28 @@ struct HostChatProvider : public ChatProvider {
 				kickUser   = "";
 				kickReason = "";
 				c.recipient = h->getLocalPlayername();
+			}
+
+			// Force Pause
+			else if (cmd == "forcePause") {
+				if (h->forcedPause()) {
+					c.msg = _("Pause was already forced - game should be paused.");
+					c.recipient = h->getLocalPlayername();
+				} else {
+					c.msg = "HOST FORCED THE GAME TO PAUSE!";
+					h->forcePause();
+				}
+			}
+
+			// End Forced Pause
+			else if (cmd == "endForcedPause") {
+				if (!h->forcedPause()) {
+					c.msg = _("There is no forced pause - nothing to end.");
+					c.recipient = h->getLocalPlayername();
+				} else {
+					c.msg = "HOST ENDED THE FORCED GAME PAUSE!";
+					h->endForcedPause();
+				}
 			}
 
 			// Default
@@ -446,7 +472,7 @@ struct NetHostImpl {
 };
 
 NetHost::NetHost (std::string const & playername, bool ggz)
-: d(new NetHostImpl(this)), use_ggz(ggz)
+: d(new NetHostImpl(this)), use_ggz(ggz), m_forced_pause(false)
 {
 	log("[Host] starting up.\n");
 
@@ -1635,25 +1661,47 @@ void NetHost::broadcastRealSpeed(uint32_t const speed)
  *
  * The current implementation picks the median, or the average of
  * lower and upper median.
+ * If only two players are playing (host + 1 client), there is a boundary
+ * so neither the host, nor the players can abuse their setting to get to the
+ * wished speed (e.g. without this boundary, the client might set his/her wished
+ *               speed to 8x - even if the host sets his desired speed to PAUSE
+ *               the median sped would be 4x).
  */
 void NetHost::updateNetworkSpeed()
 {
 	uint32_t const oldnetworkspeed = d->networkspeed;
-	std::vector<uint32_t> speeds;
 
-	speeds.push_back(d->localdesiredspeed);
-	for (uint32_t i = 0; i < d->clients.size(); ++i) {
-		if (d->clients.at(i).playernum <= UserSettings::highestPlayernum())
-			speeds.push_back(d->clients.at(i).desiredspeed);
+	// First check if a pause was forced by the host
+	if (m_forced_pause)
+		d->networkspeed = 0;
+
+	// No pause was forced - normal speed calculation
+	else {
+		std::vector<uint32_t> speeds;
+
+		speeds.push_back(d->localdesiredspeed);
+		for (uint32_t i = 0; i < d->clients.size(); ++i) {
+			if (d->clients.at(i).playernum <= UserSettings::highestPlayernum())
+				speeds.push_back(d->clients.at(i).desiredspeed);
+		}
+		std::sort(speeds.begin(), speeds.end());
+
+		// Abuse prevention for 2 players
+		if (speeds.size() == 2) {
+			if (speeds[0] > speeds[1] + 1000)
+				speeds[0] = speeds[1] + 1000;
+			if (speeds[1] > speeds[0] + 1000)
+				speeds[1] = speeds[0] + 1000;
+		}
+
+
+		d->networkspeed =
+			speeds.size() % 2 ? speeds.at(speeds.size() / 2) :
+			(speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
+
+		if (d->networkspeed > std::numeric_limits<uint16_t>::max())
+			d->networkspeed = std::numeric_limits<uint16_t>::max();
 	}
-	std::sort(speeds.begin(), speeds.end());
-
-	d->networkspeed =
-		speeds.size() % 2 ? speeds.at(speeds.size() / 2) :
-		(speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
-
-	if (d->networkspeed > std::numeric_limits<uint16_t>::max())
-		d->networkspeed = std::numeric_limits<uint16_t>::max();
 
 	if (d->networkspeed != oldnetworkspeed && !d->waiting)
 		broadcastRealSpeed(d->networkspeed);

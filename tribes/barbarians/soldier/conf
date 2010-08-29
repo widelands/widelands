@@ -51,61 +51,61 @@ carrier=1
 
 [idle]
 pics=idle_??.png
-hotspot=14 27
+hotspot=10 27
 playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=13 25
+hotspot=10 27
 fps=10
 playercolor=true
 
 [atk_ok_e]
 pics=walk_e_??.png
-hotspot=13 25
+hotspot=10 27
 playercolor=true
 
 [atk_fail_e]
 pics=walk_ne_??.png
-hotspot=13 25
+hotspot=10 27
 playercolor=true
 
 [eva_ok_e]
 pics=walk_w_??.png
-hotspot=13 25
+hotspot=10 27
 playercolor=true
 
 [eva_fail_e]
 pics=walk_ne_??.png
-hotspot=13 25
+hotspot=10 27
 playercolor=true
 
 [atk_ok_w]
 pics=walk_w_??.png
-hotspot=13 25
+hotspot=10 27
 playercolor=true
 
 [atk_fail_w]
 pics=walk_nw_??.png
-hotspot=13 25
+hotspot=10 27
 playercolor=true
 
 [eva_ok_w]
 pics=walk_e_??.png
-hotspot=13 25
+hotspot=10 27
 playercolor=true
 
 [eva_fail_w]
 pics=walk_nw_??.png
-hotspot=13 25
+hotspot=10 27
 playercolor=true
 
 [die_w]
 pics=idle_??.png
-hotspot=13 25
+hotspot=10 27
 playercolor=true
 
 [die_e]
 pics=idle_??.png
-hotspot=13 25
+hotspot=10 27
 playercolor=true

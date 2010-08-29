@@ -8,6 +8,7 @@ ranger=1
 
 [aihints]
 renews_map_resource=trunk
+space_consumer=true
 
 [programs]
 work=_Work
@@ -18,8 +19,8 @@ worker=plant
 
 [idle]
 pics=b_ranger_i_??.png  # ???
-hotspot=43 43
+hotspot=43 40
 
 [build]
 pics=b_ranger_b_??.png  # ???
-hotspot=43 43
+hotspot=40 33

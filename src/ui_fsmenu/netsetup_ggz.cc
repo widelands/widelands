@@ -145,7 +145,8 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	usersonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Server"));
 	usersonline.set_column_compare
-		(0, boost::bind(&Fullscreen_Menu_NetSetupGGZ::compare_usertype, this, _1, _2));
+		(0, boost::bind(&Fullscreen_Menu_NetSetupGGZ::compare_usertype,
+		 this, _1, _2));
 	usersonline .double_clicked.set
 		(this, &Fullscreen_Menu_NetSetupGGZ::user_doubleclicked);
 	opengames   .set_font(m_fn, m_fs);
@@ -157,10 +158,6 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	// try to connect to the metaserver
 	if (!NetGGZ::ref().used())
 		connectToMetaserver();
-#ifdef WIN32
-	//bug in ggz on windows - not able to open a server
-	hostgame.set_enabled(false);
-#endif
 }
 
 
@@ -211,10 +208,7 @@ void Fullscreen_Menu_NetSetupGGZ::fillServersList
 {
 	// List and button cleanup
 	opengames.clear();
-#ifndef WIN32
-	//bug in ggz on windows - not able to open a server
 	hostgame.set_enabled(true);
-#endif
 	joingame.set_enabled(false);
 	std::string localservername = servername.text();
 	localservername += " (" + build_id() + ")";
@@ -243,7 +237,7 @@ void Fullscreen_Menu_NetSetupGGZ::fillServersList
 
 static int usertype_sortorder(GGZPlayerType type)
 {
-	switch(type) {
+	switch (type) {
 	case GGZ_PLAYER_BOT: return 0;
 	case GGZ_PLAYER_ADMIN: return 1;
 	case GGZ_PLAYER_HOST: return 2;
@@ -254,10 +248,11 @@ static int usertype_sortorder(GGZPlayerType type)
 }
 
 /**
- * \return \c true if the user in row \p rowa should come before the user in row \p rowb
- * when sorted according to usertype
+ * \return \c true if the user in row \p rowa should come before the user in
+ * row \p rowb when sorted according to usertype
  */
-bool Fullscreen_Menu_NetSetupGGZ::compare_usertype(unsigned int rowa, unsigned int rowb)
+bool Fullscreen_Menu_NetSetupGGZ::compare_usertype
+	(unsigned int rowa, unsigned int rowb)
 {
 	const Net_Player * playera = usersonline[rowa];
 	const Net_Player * playerb = usersonline[rowb];
@@ -361,10 +356,6 @@ void Fullscreen_Menu_NetSetupGGZ::server_doubleclicked (uint32_t)
 /// called when the servername was changed
 void Fullscreen_Menu_NetSetupGGZ::change_servername()
 {
-#ifdef WIN32
-	//bug in ggz on windows - not able to open a server
-	return;
-#endif
 	// Allow user to enter a servername manually
 	hostgame.set_enabled(true);
 

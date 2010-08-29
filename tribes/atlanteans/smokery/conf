@@ -48,7 +48,7 @@ return=skipped
 
 [idle]
 pics=smokery_i_??.png  # ???
-hotspot=53 68
+hotspot=53 58
 playercolor=true
 
 [working]

@@ -29,11 +29,11 @@ produce=bread:2
 
 [idle]
 pics=bakery_i_??.png  # ???
-hotspot=55 68
+hotspot=54 55
 playercolor=true
 
 [working]
 pics=bakery_b_??.png  # ???
-hotspot=55 68
+hotspot=54 67
 playercolor=true
 fps=20

@@ -123,7 +123,7 @@ bool Road::get_passable() const throw ()
 }
 
 BaseImmovable::PositionList Road::get_positions
-	(const Editor_Game_Base & egbase) const throw()
+	(const Editor_Game_Base & egbase) const throw ()
 {
 	Map & map = egbase.map();
 	Coords curf = map.get_fcoords(m_path.get_start());

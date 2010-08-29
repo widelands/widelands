@@ -114,11 +114,10 @@ Interactive_Base::Interactive_Base
 		 global_s.get_int("depth", 16),
 		 global_s.get_bool("fullscreen", false),
 #if USE_OPENGL
-		 global_s.get_bool("opengl", false)
+		 global_s.get_bool("opengl", false));
 #else
-		 false
+		 false);
 #endif
-		 );
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
@@ -179,13 +178,15 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 				if (upcast(Interactive_Player const, iplayer, igbase)) {
 					Widelands::Player const & player = iplayer->player();
 					if
-						(not
-						 (player.see_all() or
-						  1
-						  <
-						  player.vision
-						  	(Widelands::Map::get_index
-						  	 	(center.node, map.get_width()))))
+						(not player.see_all()
+						 and
+						  (1
+						   >=
+						   player.vision
+							   (Widelands::Map::get_index
+								   (center.node, map.get_width()))
+						   or
+						   player.is_hostile(*productionsite->get_owner())))
 						return set_tooltip(0);
 				}
 				std::string const s =

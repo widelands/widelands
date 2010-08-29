@@ -117,10 +117,10 @@ void Window::set_title(const std::string & text)
 /**
  * Set the center panel.
  *
- * The center panel is a child panel that will automatically determine the inner size
- * of the window.
+ * The center panel is a child panel that will automatically determine
+ * the inner size of the window.
  */
-void Window::set_center_panel(Panel* panel)
+void Window::set_center_panel(Panel * panel)
 {
 	assert(panel->get_parent() == this);
 
@@ -136,7 +136,9 @@ void Window::update_desired_size()
 	if (m_center_panel) {
 		uint32_t innerw, innerh;
 		m_center_panel->get_desired_size(innerw, innerh);
-		set_desired_size(innerw + get_lborder() + get_rborder(), innerh + get_tborder() + get_bborder());
+		set_desired_size
+			(innerw + get_lborder() + get_rborder(),
+			 innerh + get_tborder() + get_bborder());
 	}
 }
 

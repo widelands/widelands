@@ -24,63 +24,89 @@
 #include "rect.h"
 #include "wexception.h"
 
+/**
+ * The type of a surface. This make it possible to check a bit before drawing.
+ */
 enum SurfaceType {
 	SURFACE_INVALID,
-	SURFACE_SOURCE,       // This sourface is used as source only
-	SURFACE_OFFSCREEN,    // Use surface as source and destinantion
-	SURFACE_SCREEN        // This draws to screen directly
+	SURFACE_SOURCE,       ///< This sourface is used as source only
+	SURFACE_OFFSCREEN,    ///< Use surface as source and destinantion
+	SURFACE_SCREEN        ///< This draws to screen directly
 };
 
-
 /**
- * This represents a simple bitmap without managing its memory. The rendering
- * functions do NOT perform any clipping; this is up to the caller.
+ * A virtual base class for rendering. Objects of Surface are used as Source
+ * or destination for drawing. Surfaces are created with the 
+ * Graphic::create_surface() functions.
 */
 class Surface {
 
 public:
 	virtual ~Surface() {}
+
+	//@{
 	/// Get width and height
 	virtual uint32_t get_w() const {return m_w;}
 	virtual uint32_t get_h() const {return m_h;}
+	//@}
+
+	/// Update the screen. This is only useful for the screen surface.
 	virtual void update() = 0;
 
-	/// For the slowest: Indirect pixel access
+	//@{
+	/**
+    * For the slowest: Indirect pixel access.
+	 * This are save fuction to get and set single pixels. lock() must be called
+	 * before pixel access can be used. get_pixel() and set_pixel() are easier
+	 * and more save to use but also much slower the direct pixel access.
+	 */
 	virtual uint32_t get_pixel(uint32_t x, uint32_t y)
 		{ throw wexception("get_pixel() not implemented"); }
 	virtual void set_pixel(uint32_t x, uint32_t y, Uint32 clr)
 		{ throw wexception("set_pixel() not implemented"); }
+	//@}
 
+	//@{
+	/**
+	 * Locking and unlocking the surface for pixel access. This may be slow. So
+	 * use it with care.
+	 */
+	
 	virtual void lock() {};
 	virtual void unlock() {};
+	//@}
 
+	/// This returns the pixel format for direct pixel access.
 	virtual const SDL_PixelFormat& format() const
 		{ throw wexception("format() not implemented"); }
+
+	//@{
+	/**
+	 * Direct pixel access. lock() must be called before pixles may be access.
+	 * This is faster than indirect pixel access but also more dangerous.
+	 * get_pixels() gives a pointer to the pixel data. get_pitch() returns an
+	 * integer where the next row begins.
+	 */
 	virtual uint16_t get_pitch() const
 		{ throw wexception("get_pitch() not implemented"); }
 	virtual uint8_t * get_pixels() const
 		{ throw wexception("get_pixels() not implemented"); }
+	//@}
 
+	/// Clears the complete surface to black.
 	virtual void clear() {
 		fill_rect
 			(Rect(Point(0,0),get_w(), get_h()), 
 			 RGBAColor(255, 255, 255, 255));
 	}
 
+	/// Draws a rect (frame only) to the surface.
 	virtual void draw_rect(Rect, RGBColor) = 0;
+
+	/// Draws a filled rect to the surface.
 	virtual void fill_rect(Rect, RGBAColor) = 0;
-	virtual void brighten_rect(Rect, int32_t factor) = 0;
 
-	virtual void blit(Point, Surface *, Rect srcrc, bool enable_alpha = false) = 0;
-	virtual void fast_blit(Surface * surface) {
-		blit(Point(0,0), surface, Rect(Point(0, 0), surface->get_w(), surface->get_h()));
-	}
-
-	virtual void set_type(SurfaceType type)
-		{ m_surf_type = type; }
-
-	virtual SurfaceType get_surface_type() { return m_surf_type; }
-
+	/// draw a line to the surface
 	virtual void draw_line
 		(int32_t x1,
 		 int32_t y1,
@@ -89,6 +115,27 @@ public:
 		 RGBColor color,
 		 const Rect * clip = NULL)
 		 { throw wexception("draw_line() not implemented"); }
+
+	/// makes a rectangle on the surface brighter (or darker).
+	/// @note this is slow in SDL mode. Use with care
+	virtual void brighten_rect(Rect, int32_t factor) = 0;
+
+	/// This draws a part aother surface to this surface
+	virtual void blit(Point, Surface *, Rect srcrc, bool enable_alpha = false) = 0;
+	/// This draws another surface completely in the left
+	/// upper corner of this surface
+	virtual void fast_blit(Surface * surface) {
+		blit
+			(Point(0,0), surface,
+			 Rect(Point(0, 0), surface->get_w(), surface->get_h()));
+	}
+
+	/// set the type of the surface
+	virtual void set_type(SurfaceType type)
+		{ m_surf_type = type; }
+
+	/// retrieve the type of the surface
+	virtual SurfaceType get_surface_type() { return m_surf_type; }
 
 protected:
 	int32_t m_offsx;

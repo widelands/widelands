@@ -104,11 +104,32 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
 set (BUILD_SHARED_LIBS OFF)
-set (Boost_USE_STATIC_LIBS   ON)
-set (Boost_USE_MULTITHREADED ON)
-find_package(Boost 1.35.0 REQUIRED)
+
+# Unit tests add dependency to unit_test_framework and are therefore optional.
+set (BUILD_UNIT_TESTS TRUE CACHE BOOL "Build unit tests (requires boost unit test framework)")
+
+if (BUILD_UNIT_TESTS)
+  # we only include Boost Headers to the main executable, no libraries
+  # unit_test_framework is for testing only and can use shared libraries
+  set (Boost_FIND_COMPONENTS unit_test_framework)
+  set (Boost_USE_STATIC_LIBS   ON)
+  set (Boost_USE_MULTITHREADED ON)
+  set (Boost_DETAILED_FAILURE_MSG ON)
+  find_package(Boost 1.35.0 COMPONENTS unit_test_framework)
+  # settle with single threaded libs if multithreaded is not available
+  if (NOT Boost_FOUND)
+    set (Boost_USE_MULTITHREADED OFF)
+    find_package(Boost 1.35.0 COMPONENTS unit_test_framework REQUIRED)
+    # If still not boost found, then hint user to disable BUILD_UNIT_TESTS
+    if (NOT Boost_FOUND)
+      message("Boost unit_test_framework is required for unit tests.\nSet BUILD_UNIT_TESTS to FALSE to build without unit tests.\n")
+    endif()
+  endif (NOT Boost_FOUND)
+else (BUILD_UNIT_TESTS)
+  find_package(Boost 1.35.0 REQUIRED)
+endif (BUILD_UNIT_TESTS)
+
 include_directories(${Boost_INCLUDE_DIR})
-target_link_libraries(widelands ${Boost_LIBRARIES})
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
@@ -176,16 +197,19 @@ if (DEFINED MSVC)
   add_definitions( -Dssize_t=size_t )
   add_definitions( -Dmkdir=_mkdir )
 
+  # Automatic linking for boost requires setting lib dir and clearing Boost_LIBARIES
+  LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+  set(Boost_LIBRARIES "")
 
   find_library(INTL_LIBRARY NAMES intl libintl)
 
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG$" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
   # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
-  set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MD" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MT /GL" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
-  set (CMAKE_EXE_LINKER_FLAGS_DEBUG "/debug /INCREMENTAL:YES /NODEFAULTLIB:msvcrt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_EXE_LINKER_FLAGS_DEBUG "/debug /LTCG /NODEFAULTLIB:libcmt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 else (DEFINED MSVC)
   set (HAVE_VARARRAY TRUE CACHE BOOL "Use variable length arrays to improve performance. Requires gcc." )
@@ -284,6 +308,10 @@ install (
   CONFIGURATIONS Debug;Release
   COMPONENT CoreVersionFile
 )
+
+if (BUILD_UNIT_TESTS)
+enable_testing()
+endif (BUILD_UNIT_TESTS)
 
 include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 

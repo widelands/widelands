@@ -23,24 +23,24 @@ hammer=1
 
 [idle]
 pics=idle_??.png
-hotspot=11 22
+hotspot=9 21
 fps=10
 playercolor=true
 
 [hacking]
 pics=hacking_??.png
-hotspot=12 18
+hotspot=11 18
 fps=10
 playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=10 21
+hotspot=9 21
 fps=10
 playercolor=true
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=10 21
+hotspot=9 21
 fps=10
 playercolor=true

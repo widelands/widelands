@@ -324,7 +324,8 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
-		Building& building = m_building->create(egbase, owner(), m_position, false);
+		Building & building =
+			m_building->create(egbase, owner(), m_position, false);
 		if (Worker * const builder = m_builder.get(egbase)) {
 			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
 			builder->set_location(&building);
@@ -431,7 +432,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) < 0) {
 			worker.start_task_idle
 				(game,
-				 worker.get_animation("idle"),
+				 worker.get_animation("work"),
 				 m_work_steptime - game.get_gametime());
 			return true;
 		} else {
@@ -470,12 +471,13 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 			m_work_steptime = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
 
 			worker.start_task_idle
-				(game, worker.get_animation("idle"), CONSTRUCTIONSITE_STEP_TIME);
+				(game, worker.get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
 			return true;
 		}
 	}
-
-	return false; // sorry, got no work for you
+	// The only work we have got for you, is to run around to look cute ;)
+	worker.start_task_idle(game, worker.get_animation("idle"), 5000);
+	return true;
 }
 
 
