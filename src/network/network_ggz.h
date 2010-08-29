@@ -132,7 +132,7 @@ struct NetGGZ : public ChatProvider {
 	/// returns the ip address of the server we joined
 	char const * ip();
 	
-	//bool logged_in();
+	bool logged_in();
 
 	bool updateForTables();
 	bool updateForUsers();

@@ -48,7 +48,7 @@ ggz_ggzcore::ggz_ggzcore() :
 	m_gamefd      (-1),
 	m_server_fd   (-1),
 	m_room        (NULL),
-	m_roomstate   (ggzcoreroomstate_notinroom),
+	m_tablestate   (ggzcoretablestate_notinroom),
 	m_state       (ggzcorestate_disconnected),
 	m_servername  ("WLDefault"),
 	m_tableseats  (1)
@@ -473,7 +473,7 @@ void ggz_ggzcore::event_server(uint32_t const id, void const * const cbdata)
 		// cbdata is NULL
 		log("GGZCORE/event_server ## -- logged out!\n");
 		m_state = ggzcorestate_disconnected;
-		m_roomstate = ggzcoreroomstate_notinroom;
+		m_tablestate = ggzcoretablestate_notinroom;
 		m_logged_in = false;
 		break;
 	default:
@@ -605,7 +605,7 @@ void ggz_ggzcore::event_game(uint32_t const id, void const * const cbdata)
 		log("GGZCORE/game ## --  launched\n");
 		m_gamefd =
 			ggzcore_game_get_control_fd(ggzcore_server_get_cur_game(ggzserver));
-		m_roomstate = ggzcoreroomstate_launched;
+		m_tablestate = ggzcoretablestate_launched;
 		break;
 	case GGZ_GAME_NEGOTIATED:
 		log("GGZCORE/game ## -- negotiated\n");
@@ -741,6 +741,8 @@ void ggz_ggzcore::write_userlist()
 void ggz_ggzcore::send_message(const char* to, const char* msg)
 {
 	int sent;
+	assert(m_room);
+	log("GGZCORE/room ## send chat message: \"%s\"\n", msg);
 	if (to)
 		sent = ggzcore_room_chat(m_room, GGZ_CHAT_PERSONAL, to, msg);
 	else
@@ -753,3 +755,26 @@ bool ggz_ggzcore::is_in_room()
 {
 	return m_logged_in && ggzserver && ggzcore_server_is_in_room(ggzserver);
 }
+
+bool ggz_ggzcore::data_pending()
+{
+	/*
+	if (m_channelfd != -1 or m_gamefd != -1)
+	{
+		fd_set read_fd_set;
+		int result;
+		struct timeval tv;
+		FD_ZERO(&read_fd_set);
+		FD_SET(m_server_fd, &read_fd_set);
+		tv.tv_sec = tv.tv_usec = 0;
+		if (
+			 select
+				 (((m_channelfd >  m_gamefd)?m_channelfd:m_gamefd) + 1,
+				  &read_fd_set, NULL, NULL, &tv)
+				  > 0)
+			return true;
+	}
+	*/
+	return ggzserver && ggzcore_server_data_is_pending(ggzserver);
+}
+

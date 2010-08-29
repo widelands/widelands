@@ -101,22 +101,24 @@ public:
 	bool logged_in() {
 		return m_logged_in;
 	}
+
+	bool data_pending();
 	
 	enum ggzcore_state {
 		ggzcorestate_disconnected,
 		ggzcorestate_connecting,
 		ggzcorestate_connected
 	};
-	enum ggzcore_roomstate {
-		ggzcoreroomstate_notinroom,
-		ggzcoreroomstate_launching,
-		ggzcoreroomstate_launched,
-		ggzcoreroomstate_playing,
-		ggzcoreroomstate_joined
+	enum ggzcore_tablestate {
+		ggzcoretablestate_notinroom,
+		ggzcoretablestate_launching,
+		ggzcoretablestate_launched,
+		ggzcoretablestate_playing,
+		ggzcoretablestate_joined
 	};
 
-	enum ggzcore_roomstate get_roomstate(){
-		return m_roomstate;
+	enum ggzcore_tablestate get_tablestate(){
+		return m_tablestate;
 	}
 
 	enum ggzcore_state get_state(){
@@ -157,7 +159,7 @@ private:
 	std::string m_servername;
 	uint32_t m_tableseats;
 
-	enum ggzcore_roomstate m_roomstate;
+	enum ggzcore_tablestate m_tablestate;
 	enum ggzcore_state m_state;
 
 	/// \ref userlist was updated \ref updateForUsers

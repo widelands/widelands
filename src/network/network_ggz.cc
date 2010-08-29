@@ -85,6 +85,7 @@ bool NetGGZ::initcore
 	(char const * const metaserver, char const * const nick,
 	 char const * const pwd, bool registered)
 {
+	username = nick;
 	return use_ggz = ggz_ggzcore::ref().init(metaserver, nick, pwd, registered);
 }
 
@@ -93,12 +94,18 @@ void NetGGZ::process()
 	if (!used())
 		return;
 
-	ggz_ggzcore::ref().process();
-	ggz_ggzmod::ref().process();
+	while 
+		(ggz_ggzcore::ref().data_pending()
+		 or ggz_ggzmod::ref().data_pending())
+	{
+		log("GGZ ## process data ...\n");
+		ggz_ggzcore::ref().process();
+		ggz_ggzmod::ref().process();
+	}
 
 	if (
-		 (ggz_ggzcore::ref().get_roomstate() == ggz_ggzcore::ggzcoreroomstate_launched
-		  or ggz_ggzcore::ref().get_roomstate() == ggz_ggzcore::ggzcoreroomstate_joined)
+		 (ggz_ggzcore::ref().get_tablestate() == ggz_ggzcore::ggzcoretablestate_launched
+		  or ggz_ggzcore::ref().get_tablestate() == ggz_ggzcore::ggzcoretablestate_joined)
 		 and not ggz_ggzmod::ref().connected())
 	{
 		ggz_ggzmod::ref().init();
@@ -109,9 +116,10 @@ void NetGGZ::process()
 /// \returns the maximum number of seats in a widelands table (game)
 uint32_t NetGGZ::max_players()
 {
-	return 12;
-	if (!ggz_ggzcore::ref().is_in_room())
+	if (!ggz_ggzcore::ref().is_in_room()) {
+		log("GGZ ## !ggz_ggzcore::ref().is_in_room()\n");
 		return 1;
+	}
 
 	//GGZGameType * const gametype = ggzcore_room_get_gametype(room);
 	//  FIXME problem in ggz - for some reasons only 8 seats are currently
@@ -443,8 +451,10 @@ void NetGGZ::set_map(std::string name, int w, int h)
 /// Sends a chat message via ggz room chat
 void NetGGZ::send(std::string const & msg)
 {
-	if (ggz_ggzcore::ref().logged_in())
+	if (not ggz_ggzcore::ref().logged_in()){
+		log("GGZ ## send chat message: not logged in!\n");
 		return;
+	}
 	if (msg.size() && *msg.begin() == '@') {
 		// Format a personal message
 		std::string::size_type const space = msg.find(' ');

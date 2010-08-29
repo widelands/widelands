@@ -215,3 +215,18 @@ void ggz_ggzmod::process()
 	process_datacon();
 }
 
+bool ggz_ggzmod::data_pending()
+{
+	fd_set read_fd_set;
+	int result;
+	struct timeval tv;
+	FD_ZERO(&read_fd_set);
+	FD_SET(m_server_fd, &read_fd_set);
+	tv.tv_sec = tv.tv_usec = 0;
+	result =
+	select(m_server_fd + 1, &read_fd_set, NULL, NULL, &tv);
+	if (result > 0)
+		return true;
+	return false;
+}
+

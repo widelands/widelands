@@ -39,7 +39,7 @@ public:
 	bool connected() { return m_connected; }
 	void disconnect();
 	void process();
-
+	bool data_pending();
 	int32_t datafd();
 
 private:
