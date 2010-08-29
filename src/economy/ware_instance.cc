@@ -362,8 +362,7 @@ void WareInstance::update(Game & game)
 				return;
 			}
 
-			//throw wexception
-			log
+			throw wexception
 				("MO(%u): ware(%s): can not move from building %u (%s at (%u,%u)) "
 				 "to %u (%s) -> not a warehouse!",
 				 serial(), m_descr->name().c_str(), location->serial(),
