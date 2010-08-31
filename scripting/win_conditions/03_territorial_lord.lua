@@ -112,9 +112,9 @@ return {
 			for idx, p in ipairs(plrs) do
 				if candidateisteam and currentcandidate == _("Team %i"):format(p.team)
 					or not candidateisteam and currentcandidate == p.name then
-					p:send_message(_ "Status", msg2)
+					p:send_message(_ "Status", msg2, {popup = true})
 				else
-					p:send_message(_ "Status", msg1)
+					p:send_message(_ "Status", msg1, {popup = true})
 				end
 			end
 		end
@@ -140,9 +140,9 @@ return {
 					p.see_all = 1
 					if candidateisteam and currentcandidate == _("Team %i"):format(p.team)
 						or not candidateisteam and currentcandidate == p.name then
-						p:send_message(_"You won!", _"You are the winner!")
+						p:send_message(_"You won!", _"You are the winner!", {popup = true})
 					else
-						p:send_message(_"You lost", _"You've lost this game!")
+						p:send_message(_"You lost", _"You've lost this game!", {popup = true})
 					end
 				end
 				break
