@@ -775,6 +775,7 @@ const char L_MapObject::className[] = "MapObject";
 const MethodType<L_MapObject> L_MapObject::Methods[] = {
 	METHOD(L_MapObject, remove),
 	METHOD(L_MapObject, __eq),
+	METHOD(L_MapObject, has_attribute),
 	{0, 0},
 };
 const PropertyType<L_MapObject> L_MapObject::Properties[] = {
@@ -874,6 +875,28 @@ int L_MapObject::remove(lua_State * L) {
 
 	o->remove(egbase);
 	return 0;
+}
+
+/* RST
+	.. method:: has_attribute(string)
+
+		returns true, if the map object has this attribute, else false
+*/
+int L_MapObject::has_attribute(lua_State * L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+	Map_Object * obj = m_get_or_zero(egbase);
+	if (!obj) {
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	// Check if object has the attribute
+	std::string attrib = luaL_checkstring(L, 2);
+	if (obj->has_attribute(Map_Object_Descr::get_attribute_id(attrib)))
+		lua_pushboolean(L, true);
+	else
+		lua_pushboolean(L, false);
+	return 1;
 }
 
 /*

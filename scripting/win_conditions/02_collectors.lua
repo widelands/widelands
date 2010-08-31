@@ -71,9 +71,9 @@ return {
             end
             table.sort(points, function(a,b) return a[2] < b[2] end)
             for i=1,#points-1 do
-               points[i][1]:send_message(_"You lost", _"You've lost this game!")
+               points[i][1]:send_message(_"You lost", _"You've lost this game!",{popup = true})
             end
-            points[#points][1]:send_message(_"You won!", _"You are the winner!")
+            points[#points][1]:send_message(_"You won!", _"You are the winner!",{popup = true})
             break
          end
       end
