@@ -20,7 +20,7 @@ return {
 		local plrs = {}
 		valid_players(plrs)
 
-		local remaining_time = 20 -- 4 hours
+		local remaining_time = 4 * 60 -- 4 hours
 
 		local points = {}
 		local playerpoints = {}
