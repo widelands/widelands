@@ -94,9 +94,6 @@ return {
 
 
 
-		sleep(1000)
-
-
 		-- here is the main loop!!!
 		while true do
 			sleep(10 * 1000) -- Sleep 10 seconds
@@ -106,6 +103,10 @@ return {
 			if remaining_time % 600 == 0 then
 				_send_state()
 			end
+
+			check_player_defeated(plrs, _ "You are defeated!",
+				_ "You have nothing to command left. If you want, you may " ..
+				  "continue as spectator.")
 
 			-- Game ended?
 			if remaining_time == 0 then
