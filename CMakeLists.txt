@@ -204,7 +204,7 @@ if (DEFINED MSVC)
   find_library(INTL_LIBRARY NAMES intl libintl)
 
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG$" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
   # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
   set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MT /GL" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
