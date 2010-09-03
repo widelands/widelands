@@ -8,17 +8,25 @@ use("aux", "win_condition_functions")
 
 set_textdomain("win_conditions")
 
+local wc_name = _ "Wood Gnome"
+local wc_desc = _ (
+	"As wood gnome you like big forests, so your task is, to have more " ..
+	"trees on your territory than any other player. The game will end after 4 " ..
+	"hours of playing. The one with the most trees at that point will win " ..
+	"the game."
+)
 return {
-	name = _ "Wood Gnome",
-	description = _ (
-	"As wood gnome you like big forests, so your task is, to have more trees " ..
-	"on your territory than any other player. The trees will be counted after " ..
-	"4 hours of playing."
-	),
+	name = wc_name,
+	description = wc_desc,
 	func = function()
 		-- Find all valid players
 		local plrs = {}
 		valid_players(plrs)
+
+		-- send a message with the game type to all players
+		for idx, p in ipairs(plrs) do
+			p:send_message(wc_name, wc_desc)
+		end
 
 		local remaining_time = 4 * 60 -- 4 hours
 
@@ -57,8 +65,19 @@ return {
 		end
 
 		function _send_state()
+			_calc_points()
 			local msg = _("The game will end in %i minutes."):format(remaining_time)
 			msg = msg .. "\n\n"
+			msg = msg .. _ ("Player overview:")
+			for idx,plr in ipairs(plrs) do
+				msg = msg .. "\n"
+				msg = msg .. _ ("%s has "):format(plr.name)
+				msg = msg .. _ ("%i trees at the moment ."):format(playerpoints[plr.number])
+			end
+
+			-- reset variables
+			points = {}
+			playerpoints = {}
 
 			for idx, p in ipairs(plrs) do
 				p:send_message(_ "Status", msg)

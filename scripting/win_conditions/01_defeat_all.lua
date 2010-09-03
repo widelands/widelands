@@ -7,30 +7,37 @@ use("aux", "win_condition_functions")
 
 set_textdomain("win_conditions")
 
+local wc_name = _ "Autocrat"
+local wc_desc = _ "The tribe or team that can defeat all others wins the game!"
 return {
-   name = _ "Autocrat",
-   description = _ "The tribe (or team) that can defeat all others wins!",
-   func = function()
-      -- Find all valid players
-      local plrs = {}
-      valid_players(plrs)
+	name = wc_name,
+	description = wc_desc,
+	func = function()
+		-- Find all valid players
+		local plrs = {}
+		valid_players(plrs)
 
-      -- Iterate all players, if one is defeated, remove him
-      -- from the list, send him a defeated message and give him full vision
-      repeat
-         sleep(5000)
-         check_player_defeated(plrs, _ "You lost!",
-            _ "Sorry, you have lost this game!")
-      until count_factions(plrs) <= 1
+		-- send a message with the game type to all players
+		for idx, p in ipairs(plrs) do
+			p:send_message(wc_name, wc_desc)
+		end
 
-      -- Send congratulations to all remaining players
-      for idx,p in ipairs(plrs) do
-         p:send_message(
-            _ "Congratulations!",
-            _ "You have won this game!",
-            {popup = true}
-         )
-      end
+		-- Iterate all players, if one is defeated, remove him
+		-- from the list, send him a defeated message and give him full vision
+		repeat
+			sleep(5000)
+			check_player_defeated(plrs, _ "You lost!",
+				_ "Sorry, you have lost this game!")
+		until count_factions(plrs) <= 1
 
-   end,
+		-- Send congratulations to all remaining players
+		for idx,p in ipairs(plrs) do
+			p:send_message(
+				_ "Congratulations!",
+				_ "You have won this game!",
+				{popup = true}
+			)
+		end
+
+	end,
 }

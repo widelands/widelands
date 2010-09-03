@@ -8,13 +8,15 @@ use("aux", "win_condition_functions")
 
 set_textdomain("win_conditions")
 
+local wc_name = _ "Territorial Lord"
+local wc_desc = _ (
+	"Each player or team tries to obtain more than half of the maps' " ..
+	"area. The winner will be the player or the team that is able to keep " ..
+	"that area for at least 20 minutes."
+)
 return {
-	name = _ "Territorial Lord",
-	description = _ (
-		"Each player or team tries to obtain more than half of the maps' " ..
-		"area. The winner will be the player or the team that is able to keep " ..
-		"that area for at least 20 minutes."
-	),
+	name = wc_name,
+	description = wc_desc,
 	func = function()
 
 		-- Get the size of the map
@@ -31,6 +33,11 @@ return {
 		-- Find all valid players
 		local plrs = {}
 		valid_players(plrs)
+
+		-- send a message with the game type to all players
+		for idx, p in ipairs(plrs) do
+			p:send_message(wc_name, wc_desc)
+		end
 
 		-- Find all valid teams
 		local teamnumbers = {} -- array with team numbers
