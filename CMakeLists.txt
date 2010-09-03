@@ -196,6 +196,7 @@ if (DEFINED MSVC)
   add_definitions( -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS )
   add_definitions( -Dssize_t=size_t )
   add_definitions( -Dmkdir=_mkdir )
+  add_definitions( -DREDIRECT_OUTPUT )
 
   # Automatic linking for boost requires setting lib dir and clearing Boost_LIBARIES
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
