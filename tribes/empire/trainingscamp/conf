@@ -60,56 +60,56 @@ sleep=5000
 check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
 sleep=30000
 check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
-consume=lance bread,fish,meat
+consume=lance bread fish,meat
 train=soldier attack 0 1
 
 [upgrade_attack_0]
 check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
 sleep=30000
 check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
-consume=lance bread,fish,meat
+consume=lance bread fish,meat
 train=soldier attack 0 1
 
 [upgrade_soldier_attack_1]
 check_soldier=soldier attack 1
 sleep=30000
 check_soldier=soldier attack 1
-consume=advanced_lance bread,fish,meat
+consume=advanced_lance bread fish,meat
 train=soldier attack 1 2
 
 [upgrade_attack_1]
 check_soldier=soldier attack 1
 sleep=30000
 check_soldier=soldier attack 1
-consume=advanced_lance bread,fish,meat
+consume=advanced_lance bread fish,meat
 train=soldier attack 1 2
 
 [upgrade_soldier_attack_2]
 check_soldier=soldier attack 2
 sleep=30000
 check_soldier=soldier attack 2
-consume=heavy_lance bread,fish,meat
+consume=heavy_lance bread fish,meat:2
 train=soldier attack 2 3
 
 [upgrade_attack_2]
 check_soldier=soldier attack 2
 sleep=30000
 check_soldier=soldier attack 2
-consume=heavy_lance bread,fish,meat
+consume=heavy_lance bread fish,meat:2
 train=soldier attack 2 3
 
 [upgrade_soldier_attack_3]
 check_soldier=soldier attack 3
 sleep=30000
 check_soldier=soldier attack 3
-consume=war_lance bread,fish,meat:2
+consume=war_lance bread:2 fish,meat
 train=soldier attack 3 4
 
 [upgrade_attack_3]
 check_soldier=soldier attack 3
 sleep=30000
 check_soldier=soldier attack 3
-consume=war_lance bread,fish,meat:2
+consume=war_lance bread:2 fish,meat
 train=soldier attack 3 4
 
 [upgrade_soldier_hp_0]
@@ -130,42 +130,42 @@ train=soldier hp 0 1
 check_soldier=soldier hp 1
 sleep=30000
 check_soldier=soldier hp 1
-consume=armour bread,fish,meat:2
+consume=armour bread fish,meat
 train=soldier hp 1 2
 
 [upgrade_hp_1]
 check_soldier=soldier hp 1
 sleep=30000
 check_soldier=soldier hp 1
-consume=armour bread,fish,meat:2
+consume=armour bread fish,meat
 train=soldier hp 1 2
 
 [upgrade_soldier_hp_2]
 check_soldier=soldier hp 2
 sleep=30000
 check_soldier=soldier hp 2
-consume=chain_armour bread,fish,meat:3
+consume=chain_armour bread fish,meat:2
 train=soldier hp 2 3
 
 [upgrade_hp_2]
 check_soldier=soldier hp 2
 sleep=30000
 check_soldier=soldier hp 2
-consume=chain_armour bread,fish,meat:3
+consume=chain_armour bread:2 fish,meat:1
 train=soldier hp 2 3
 
 [upgrade_soldier_hp_3]
 check_soldier=soldier hp 3
 sleep=30000
 check_soldier=soldier hp 3
-consume=plate_armour bread,fish,meat:4
+consume=plate_armour bread:2 fish,meat:2
 train=soldier hp 3 4
 
 [upgrade_hp_3]
 check_soldier=soldier hp 3
 sleep=30000
 check_soldier=soldier hp 3
-consume=plate_armour bread,fish,meat:4
+consume=plate_armour bread:2 fish,meat:2
 train=soldier hp 3 4
 
 [idle]
