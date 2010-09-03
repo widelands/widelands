@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 17:53+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -172,7 +172,7 @@ msgstr ""
 #: ../../scripting/win_conditions/03_territorial_lord.lua:141
 #: ../../scripting/win_conditions/04_wood_gnome.lua:93
 msgid ""
-"You have nothing to command left. If you want, you may "
+"You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:37

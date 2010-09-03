@@ -90,8 +90,8 @@ return {
 			repeat
 				sleep(5000)
 				check_player_defeated(plrs, _ "You are defeated!",
-					_ "You have nothing to command left. If you want, you may " ..
-					  "continue as spectator.")
+					_ ("You have nothing to command left. If you want, you may " ..
+					   "continue as spectator."))
 				runs = runs + 1
 			until runs >= 60 -- 60 * 5000ms = 300000 ms = 5 minutes
 

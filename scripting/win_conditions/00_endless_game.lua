@@ -29,8 +29,8 @@ return {
 		repeat
 			sleep(5000)
 			check_player_defeated(plrs, _ "You are defeated!",
-				_ "You have nothing to command left. If you want, you may " ..
-				  "continue as spectator.")
+				_ ("You have nothing to command left. If you want, you may " ..
+				   "continue as spectator."))
 		until count_factions(plrs) < 1
 	
 	end

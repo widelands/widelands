@@ -138,8 +138,8 @@ return {
 
 			-- Check whether one of the players got defeated and handle defeats
 			check_player_defeated(plrs, _ "You are defeated!",
-				_ "You have nothing to command left. If you want, you may " ..
-				  "continue as spectator.")
+				_ ("You have nothing to command left. If you want, you may " ..
+				   "continue as spectator."))
 
 			-- Do this stuff, if the game is over
 			if remaining_time == 0 then
