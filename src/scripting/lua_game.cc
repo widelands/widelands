@@ -152,9 +152,9 @@ int L_Player::get_number(lua_State * L) {
 }
 
 /* RST
-.. attribute:: name
+	.. attribute:: name
 
-		(RO) The name of this Player.
+			(RO) The name of this Player.
 */
 int L_Player::get_name(lua_State * L) {
 	Game & game = get_game(L);

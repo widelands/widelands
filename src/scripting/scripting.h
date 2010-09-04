@@ -99,6 +99,8 @@ struct LuaInterface {
 	virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string) = 0;
 	virtual boost::shared_ptr<LuaTable> run_script
 			(FileSystem &, std::string, std::string) = 0;
+
+	virtual boost::shared_ptr<LuaTable> get_hook(std::string name) = 0;
 };
 
 struct LuaGameInterface : public virtual LuaInterface {
