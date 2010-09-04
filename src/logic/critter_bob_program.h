@@ -47,7 +47,6 @@ struct Critter_BobProgram : public BobProgramBase {
 		Critter_Bob_Descr * descr;
 		std::string         directory;
 		Profile           * prof;
-		EncodeData  const * encdata;
 	};
 
 	typedef

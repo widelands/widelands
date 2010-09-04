@@ -157,8 +157,8 @@ return=skipped
 
 [idle]
 pics=toolsmith_i_??.png
-hotspot=63 63
+hotspot=63 60
 
 [working]
 pics=toolsmith_i_??.png
-hotspot=63 63
+hotspot=63 60

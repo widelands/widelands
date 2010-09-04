@@ -23,7 +23,7 @@
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "game_chat_menu.h"
 #include "game_debug_ui.h"
 #include "gamecontroller.h"
@@ -113,12 +113,11 @@ Interactive_Base::Interactive_Base
 		(get_xres(), get_yres(),
 		 global_s.get_int("depth", 16),
 		 global_s.get_bool("fullscreen", false),
-		 global_s.get_bool("hw_improvements", false),
-		 global_s.get_bool("double_buffer", false)
-#if HAS_OPENGL
-		 /**/, global_s.get_bool("opengl", false)
+#if USE_OPENGL
+		 global_s.get_bool("opengl", false));
+#else
+		 false);
 #endif
-		 /**/);
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
@@ -179,13 +178,15 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 				if (upcast(Interactive_Player const, iplayer, igbase)) {
 					Widelands::Player const & player = iplayer->player();
 					if
-						(not
-						 (player.see_all() or
-						  1
-						  <
-						  player.vision
-						  	(Widelands::Map::get_index
-						  	 	(center.node, map.get_width()))))
+						(not player.see_all()
+						 and
+						  (1
+						   >=
+						   player.vision
+							   (Widelands::Map::get_index
+								   (center.node, map.get_width()))
+						   or
+						   player.is_hostile(*productionsite->get_owner())))
 						return set_tooltip(0);
 				}
 				std::string const s =

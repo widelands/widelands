@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,14 +26,7 @@
 
 #include <vector>
 
-//#ifndef PICTURE_ID
-//#define PICTURE_ID
-//struct Picture;
-//typedef boost::shared_ptr<Picture> PictureID;
-//#endif
-
 namespace Widelands {
-struct Editor_Game_Base;
 struct Player;
 };
 class Surface;
@@ -55,6 +48,11 @@ class Surface;
 */
 struct RenderTarget {
 	RenderTarget(Surface *);
+	RenderTarget(RenderTarget & rt):
+		m_surface(rt.m_surface),
+		m_rect(rt.m_rect),
+		m_offset(rt.m_offset)
+	{}
 	void set_window(Rect const & rc, Point const & ofs);
 	bool enter_window(Rect const & rc, Rect * previous, Point * prevofs);
 
@@ -73,41 +71,11 @@ struct RenderTarget {
 	void clear();
 
 	void blit(Point dst, PictureID picture);
-	void blit_a(Point dst, PictureID picture, bool enable_alpha=false);
+	void blit(Rect dst, PictureID picture);
+	void blit_solid(Point dst, PictureID picture);
+	void blit_copy(Point dst, PictureID picture);
 	void blitrect(Point dst, PictureID picture, Rect src);
 	void tile(Rect, PictureID picture, Point ofs);
-
-	/**
-	 * Renders the map from a player's point of view into the current drawing
-	 * window.
-	 *
-	 * Will call the function below when player.see_all().
-	 *
-	 * viewofs is the offset of the upper left corner of the window into the map,
-	 * in pixels.
-	 */
-	void rendermap
-		(Widelands::Editor_Game_Base const &       egbase,
-		 Widelands::Player           const &       player,
-		 Point                                     viewofs);
-
-	/**
-	 * Same as above but not from a player's point of view. Used in game when
-	 * rendering for a player that sees all and the editor.
-	 */
-	void rendermap
-		(Widelands::Editor_Game_Base const & egbase,
-		 Point                               viewofs);
-
-	/**
-	 * Render the minimap. If player is not 0, it renders from that player's
-	 * point of view.
-	 */
-	void renderminimap
-		(Widelands::Editor_Game_Base const & egbase,
-		 Widelands::Player           const * player,
-		 Point                               viewpoint,
-		 uint32_t                            flags);
 
 	void drawanim
 		(Point                     dst,
@@ -124,10 +92,13 @@ struct RenderTarget {
 
 	void reset();
 
+	Surface & get_surface() 
+		{ return *m_surface; }
+
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Point dst, Surface * const src, Rect srcrc);
+	void doblit(Rect dst, Surface * const src, Rect srcrc, bool enable_alpha=true);
 
 	///The target surface
 	Surface * m_surface;

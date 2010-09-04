@@ -6,64 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-04-12 09:11+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-12 15:54+0000\n"
+"Last-Translator: Georgiy <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-13 03:31+0000\n"
+"X-Launchpad-Export-Date: 2010-06-13 03:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
-#: ../../campaigns/emp02.wmf/elemental:9
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Империя Обучение 2 - Форпост для изгнанников"
-
-#: ../../campaigns/emp02.wmf/elemental:11
-msgid ""
-"Finally the ship was repaired, so Lutius and his people again went on the "
-"quest to find a good place for a new beginning. Only few days later they "
-"land on a green, Mediterranean island, looking like paradise."
-msgstr ""
-"Наконец, корабль починили и Лютиус с его людьми отправился на поиски места, "
-"подходящего, чтобы начать всё сначала. Через несколько дней они высадились "
-"на зеленом острове посреди моря, острове, похожем на рай."
-
-#: ../../campaigns/emp02.wmf/event:109
-#: ../../campaigns/emp02.wmf/event:136
-#: ../../campaigns/emp02.wmf/event:169
-#: ../../campaigns/emp02.wmf/event:190
-#: ../../campaigns/emp02.wmf/event:205
-#: ../../campaigns/emp02.wmf/event:422
-#: ../../campaigns/emp02.wmf/event:456
-#: ../../campaigns/emp02.wmf/event:508
-msgid "Diary of Lutius"
-msgstr "Дневник Лютиуса"
-
-#: ../../campaigns/emp02.wmf/event:111
-msgid ""
-" \"Finally! This island appears to be made for us, it is a gift from the "
-"Gods to my people and myself.<br> Until now, we have only seen a small part "
-"of this island, but this part alone is already bringing sunlight in my mind. "
-"I feel as if we have found a priceless treasure, a land like paradise.<br> "
-"On this island, we will start our new life. We will build up an outpost for "
-"our exile, which perhaps will become a new, beautiful home for every one of "
-"us.\" "
-msgstr ""
-" \"Шикарно! Этот остров словно создан для нас, ну просто дар Богов.<br>Мы "
-"пока видели лишь малую его часть, но я уже в восторге. Я чувствую себя так, "
-"словно мы нашли бесценное сокровище, райский уголок.<br>На этом острове мы "
-"начнем новую жизнь и построим форпост, который, надеюсь, станет новым "
-"прекрасным домом для каждого из нас.\" "
-
-#: ../../campaigns/emp02.wmf/event:113
-msgid "A new island"
-msgstr "Новый остров"
-
-#: ../../campaigns/emp02.wmf/event:138
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid ""
 " \"As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
@@ -82,134 +37,32 @@ msgstr ""
 "материалами.<br>Но надо беречь этот дар природы, да будут эти леса вечными, "
 "для чего надо построить и домик лесника.\"<br><br>-- НОВОЕ ЗАДАНИЕ --<br> "
 
-#: ../../campaigns/emp02.wmf/event:139
-#: ../../campaigns/emp02.wmf/objective:9
-msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
-msgstr "* Постройте три хижины дровосеков, домик лесника и лесопилку."
-
-#: ../../campaigns/emp02.wmf/event:141
-msgid "The green forests"
-msgstr "Зеленые леса"
-
-#: ../../campaigns/emp02.wmf/event:171
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:196
 msgid ""
-" \"Later, I walked down to the rocks in the south and looked for a place "
-"where we can build a quarry to get some hard stone for our larger "
-"buildings.<br> Again, I felt like I'm in paradise when I noticed that some "
-"marble-like stones were among the rocks. It seems that we will soon be able "
-"to build strong, luxurious buildings, like those we were accustomed to in "
-"Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
+" \"By the Gods! This is absolutely terrible. It seems as if we stand close "
+"to a test - and it seems as if Saledus was right with his fear concerning "
+"the shipwreck he found.<br> Today, as I walked down to the eastern "
+"shore,<br> I got a shock. I caught sight of one of those hated, evil, "
+"barbarian tribes with whom we have had so many problems before.<br> At "
+"first, I was naive and hoped that they were peaceful, but as soon as one of "
+"them saw me they charged towards me and started attacking me with their "
+"throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide "
+"myself, before retreating back to our colony under cover of darkness.<br> "
+"Anyway, we must build up stronger military buildings as soon as "
+"possible.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Потом я прошел к скалам на юге, выбирая место, где можно построить "
-"каменоломню для добычи строительного камня.<br>И снова я почувствовал себя в "
-"раю, увидев среди скал мраморные глыбы. Чувствую, скоро мы сможем строить "
-"роскошные здания вроде тех, к которым мы привыкли во Фремиле.\"<br><br>-- "
-"НОВОЕ ЗАДАНИЕ --<br> "
+" \"О боги! Это просто невероятно. Это выглядит так будто нам нужно выдержать "
+"испытание - похоже Саледус не зря начал опасаться, когда нашел останки того "
+"корабля на берегу.<br> Сегодня, когда я шел к восточному берегу,<br> Я "
+"испытал шок. Я наткнулся на эти ненавистные, кошмарные, варварские племена, "
+"с которыми мы имели кучу проблем в прошлом.<br> По-началу я наивно полагал, "
+"что они спокойны и миролюбивы, но когда один из них меня увидел, они сразу "
+"бросились за мной и стали нападать, забрасывать своими копьями. Слава "
+"богам<br> Я спасся бегством, дождался темноты и затем под покровом ночи "
+"вернулся в наше поселение.<br> В любом случае мы обязаны построить более "
+"мощные укрепления.\"<br><br>-- НОВАЯ ЦЕЛЬ --<br> "
 
-#: ../../campaigns/emp02.wmf/event:172
-#: ../../campaigns/emp02.wmf/objective:17
-msgid "* Build a quarry to the south of your headquarters."
-msgstr "* Постройте каменоломню на юге от штаба."
-
-#: ../../campaigns/emp02.wmf/event:174
-msgid "The rocks"
-msgstr "Скалы"
-
-#: ../../campaigns/emp02.wmf/event:192
-msgid ""
-" \"Good news! Today our wood economy was completed. Now we can be sure to "
-"have enough wood for our future building projects.\" "
-msgstr ""
-" \"Хорошо! Поставка древесины налажена, теперь ее хватит на все строительные "
-"нужды.\" "
-
-#: ../../campaigns/emp02.wmf/event:194
-msgid "Wood for the colony"
-msgstr "Лес для колонии"
-
-#: ../../campaigns/emp02.wmf/event:207
-msgid ""
-" \"Great, today the building of the quarry was completed. Now we get enough "
-"stone to construct larger buildings.\" "
-msgstr ""
-" \"Отлично, сегодня построили каменоломню, а значит будет камень для больших "
-"зданий.\" "
-
-#: ../../campaigns/emp02.wmf/event:209
-msgid "Stone for the colony"
-msgstr "Камень для колонии"
-
-#: ../../campaigns/emp02.wmf/event:238
-msgid "Saledus looks unhappy"
-msgstr "Саледус выглядит подавленным"
-
-#: ../../campaigns/emp02.wmf/event:240
-msgid ""
-" \"Greetings Lutius, I don't want to start a panic, but I found something "
-"which gives me a sinking feeling in my stomach and spreads waves of fear in "
-"my heart. As I walked down to the southern strands I found the remains of "
-"another ship. I don't know whether these parts are all that is left of that "
-"ship. Inn any case: these parts do not seem to be old.<br> Perhaps the "
-"people aboard that ship were caught in the same storm which brought us to "
-"Malac' Mor - and were brought to this island.<br> I beg you to be cautious "
-"and to build some barracks or sentries around our colony.\"<br><br>-- NEW "
-"OBJECTIVE --<br> "
-msgstr ""
-" \"Здравствуй, Лютиус. Не хочется паниковать, но я обнаружил что-то такое, "
-"от чего меня подташнивает и волны страха проникают в мое сердце. На южном "
-"побережье я нашел остатки другого корабля. Я не знаю, всё ли это, что от "
-"него осталось. В любом случае, обломки не выглядят слишком "
-"старыми.<br>Возможно, люди на этом корабле попали в тот же шторм, что и мы, "
-"когда попали на Малак Мор.<br>Подумай о мерах предосторожности, надо бы "
-"построить казармы или караулки вокруг колонии.\"<br><br>-- НОВОЕ ЗАДАНИЕ --"
-"<br> "
-
-#: ../../campaigns/emp02.wmf/event:241
-#: ../../campaigns/emp02.wmf/objective:25
-msgid "* Build some barracks and sentries around the colony."
-msgstr "* Постройте несколько казарм и караульных вокруг колонии."
-
-#: ../../campaigns/emp02.wmf/event:243
-msgid "Dangerous shipparts"
-msgstr "Опасные останки корабля"
-
-#: ../../campaigns/emp02.wmf/event:276
-msgid "Saledus smiles"
-msgstr "Саледус улыбается"
-
-#: ../../campaigns/emp02.wmf/event:278
-msgid ""
-" \"Lutius, I've got good news for you:<br> As I walked to the east, I found "
-"a larger mountain.<br> I am not absolutely sure - a geologist should check "
-"if I am right - but I believe we could mine marble from some places on the "
-"mountain.<br> It would be a good source to bolster our supply of quality "
-"marble, beyond the meagre quantities available from the quarry. Perhaps you "
-"were right when you said that this island is like paradise.<br> Let us "
-"expand to that mountain and start mining marble.\"<br><br>-- NEW OBJECTIVE --"
-"<br> "
-msgstr ""
-" \"Лютиус, у меня для тебя хорошие новости:<br>На востоке я нашел большую "
-"гору.<br>Я не то, чтобы уверен - пусть геолог проверит - но похоже, из нее "
-"мы сможем добывать мрамор.<br>Это будет неплохим пополнением к тем запасам, "
-"которые мы получаем из каменоломни. Похоже, ты был прав, говоря, что этот "
-"остров похож на рай.<br>Давай-ка расширим наши владения до этой горы и "
-"начнем добывать мрамор.\"<br>-- НОВОЕ ЗАДАНИЕ --<br> "
-
-#: ../../campaigns/emp02.wmf/event:279
-#: ../../campaigns/emp02.wmf/objective:33
-msgid "* Expand to the east, to start mining marble from the mountain."
-msgstr ""
-"* Продвиньтесь на восток, чтобы начать добывать мрамор из шахт в горе."
-
-#: ../../campaigns/emp02.wmf/event:281
-msgid "Marble on the mountain"
-msgstr "Мрамор в горах."
-
-#: ../../campaigns/emp02.wmf/event:321
-msgid "Saledus is amazed"
-msgstr "Саледус в восторге"
-
-#: ../../campaigns/emp02.wmf/event:323
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:171
 msgid ""
 " \"By the Gods, this is an unbelievable strike of fortune! There are two "
 "more mountains and it seems that one has a large quantity of coal and the "
@@ -229,27 +82,72 @@ msgstr ""
 "колонны.<br>И тогда заживем не хуже, чем во Фремиле.\"<br>-- НОВОЕ ЗАДАНИЕ --"
 "<br> "
 
-#: ../../campaigns/emp02.wmf/event:324
-#: ../../campaigns/emp02.wmf/objective:41
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:85
 msgid ""
-"* Build a stonemason and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal burner, iron ore mine, "
-"toolsmith's shop, weapon smithy, armour smithy and smelting works)."
+" \"Finally! This island appears to be made for us, it is a gift from the "
+"Gods to my people and myself.<br> Until now, we have only seen a small part "
+"of this island, but this part alone is already bringing sunlight in my mind. "
+"I feel as if we have found a priceless treasure, a land like paradise.<br> "
+"On this island, we will start our new life. We will build up an outpost for "
+"our exile, which perhaps will become a new, beautiful home for every one of "
+"us.\" "
 msgstr ""
-"* Постройте домик каменщика и затем завершите создание комплекса по добыче и "
-"переработке (угольную шахту или углежога, железорудную шахту, "
-"инструментальную мастерскую, кузницы для изготовления брони и оружия, "
-"плавильню)."
+" \"Шикарно! Этот остров словно создан для нас, ну просто дар Богов.<br>Мы "
+"пока видели лишь малую его часть, но я уже в восторге. Я чувствую себя так, "
+"словно мы нашли бесценное сокровище, райский уголок.<br>На этом острове мы "
+"начнем новую жизнь и построим форпост, который, надеюсь, станет новым "
+"прекрасным домом для каждого из нас.\" "
 
-#: ../../campaigns/emp02.wmf/event:326
-msgid "Further mountains"
-msgstr "Следующие горы"
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:123
+msgid ""
+" \"Good news! Today our wood economy was completed. Now we can be sure to "
+"have enough wood for our future building projects.\" "
+msgstr ""
+" \"Хорошо! Поставка древесины налажена, теперь ее хватит на все строительные "
+"нужды.\" "
 
-#: ../../campaigns/emp02.wmf/event:367
-msgid "Amalea comes in..."
-msgstr "Входит Амалия..."
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:135
+msgid ""
+" \"Great! Today the building of the quarry was completed. Now we get enough "
+"stone to construct larger buildings.\" "
+msgstr ""
+" \"Отлично! Сегодня окончилась постройка каменоломни. Теперь мы можем "
+"добывать камни для постройки больших зданий.\" "
 
-#: ../../campaigns/emp02.wmf/event:369
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:147
+msgid ""
+" \"Greetings Lutius, I don't want to start a panic, but I found something "
+"which gives me a sinking feeling in my stomach and spreads waves of fear in "
+"my heart. As I walked down to the southern shore I found the remains of "
+"another ship. I don't know whether these parts are all that is left of that "
+"ship. In any case, these parts do not seem to be old.<br> Perhaps the people "
+"aboard that ship were caught in the same storm which brought us to Malac' "
+"Mor - and were brought to this island.<br> I beg you to be cautious and to "
+"build some barracks or sentries around our colony.\"<br><br>-- NEW OBJECTIVE "
+"--<br> "
+msgstr ""
+" \"Привет Лютиус, я не хочу нагонять страх, но я нашел то, отчего сводит "
+"живот от страха и тревожит мое сердце. Когда я шел к южному берегу я нашел "
+"останки еще одного корабля. Я не знаю все ли это части, что остались от "
+"этого судна. В любом случае, эти останки явно не старые. <br> Может быть, "
+"люди на борту этого судна попали в ту же бурю, которая привела нас в Малак "
+"Мор - и высадились на этот остров. <br> Я прошу вас быть осторожным и "
+"построить около нашего поселения казармы или посты. <br> <br> - НОВАЯ ЦЕЛЬ - "
+"<br> "
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:253
+msgid ""
+" \"Greetings, my friend, I just visited our new tavern<br> 'At the palms'. "
+"The beer they serve is really tasty. You really should take a drink there, "
+"too.<br> It is good to see that we have now got a warmer and more familiar "
+"environment on our island.<br> Thank you, Lutius.\" "
+msgstr ""
+" \"Приветствую, друг мой! Я только что была в нашей новой таверне<br> 'Под "
+"пальмами'. У них подают отличное пиво, рекомендую попробовать.<br>Сейчас на "
+"острове стало уютно и спокойно, совсем по домашнему.<br> Спасибо тебе, "
+"Лютиус!\" "
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:183
 msgid ""
 " \"Hi Lutius, I hope you forgive my criticism, but it seems to me as if you "
 "forgot something.<br> It's nice, and of course a good idea, to build up "
@@ -266,8 +164,143 @@ msgstr ""
 "приготовления пищи.<br>Не думаешь, что надо бы им помочь?<br>Я не могу точно "
 "сказать, что нам нужно... но вот что я предлагаю:<br>-- НОВОЕ ЗАДАНИЕ --<br> "
 
-#: ../../campaigns/emp02.wmf/event:370
-#: ../../campaigns/emp02.wmf/objective:49
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:110
+msgid ""
+" \"Later, I walked down to the rocks in the south and looked for a place "
+"where we can build a quarry to get some hard stone for our larger "
+"buildings.<br> Again, I felt like I'm in paradise when I noticed that some "
+"marble-like stones were among the rocks. It seems that we will soon be able "
+"to build strong, luxurious buildings, like those we were accustomed to in "
+"Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+" \"Потом я прошел к скалам на юге, выбирая место, где можно построить "
+"каменоломню для добычи строительного камня.<br>И снова я почувствовал себя в "
+"раю, увидев среди скал мраморные глыбы. Чувствую, скоро мы сможем строить "
+"роскошные здания вроде тех, к которым мы привыкли во Фремиле.\"<br><br>-- "
+"НОВОЕ ЗАДАНИЕ --<br> "
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:159
+msgid ""
+" \"Lutius, I've got good news for you:<br> As I walked to the east, I found "
+"a larger mountain.<br> I am not absolutely sure - a geologist should check "
+"if I am right - but I believe we could mine marble from some places on the "
+"mountain.<br> It would be a good source to bolster our supply of quality "
+"marble, beyond the meagre quantities available from the quarry. Perhaps you "
+"were right when you said that this island is like paradise.<br> Let us "
+"expand to that mountain and start mining marble.\"<br><br>-- NEW OBJECTIVE --"
+"<br> "
+msgstr ""
+" \"Лютиус, у меня для тебя хорошие новости:<br>На востоке я нашел большую "
+"гору.<br>Я не то, чтобы уверен - пусть геолог проверит - но похоже, из нее "
+"мы сможем добывать мрамор.<br>Это будет неплохим пополнением к тем запасам, "
+"которые мы получаем из каменоломни. Похоже, ты был прав, говоря, что этот "
+"остров похож на рай.<br>Давай-ка расширим наши владения до этой горы и "
+"начнем добывать мрамор.\"<br>-- НОВОЕ ЗАДАНИЕ --<br> "
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:209
+msgid ""
+" \"That's good. The first large military building is complete and the mining "
+"infrastructure is getting better and better. Now we should think of "
+"preparing ourselves for battle.\"<br><br>-- NEW OBJECTIVES --<br> "
+msgstr ""
+" \"Это хорошо: и укрепление готово, и горнорудный комплекс развивается. "
+"Теперь надо готовиться к бою.\"<br><br>-- НОВОЕ ЗАДАНИЕ --<br> "
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:242
+msgid ""
+" \"Today a pigeon landed on our island.<br> It brought a message which fills "
+"me with dark thoughts and brings back my fears.<br> The message was "
+"addressed to me, begging me to come back to Fremil.<br> It says that the "
+"Empire is at war with the Barbarians. They were attacked from the north by "
+"the tribe I was forbidden to attack.<br> For me, it is clear what I must "
+"do...<br><br> You have completed this mission. You may continue playing if "
+"you wish, otherwise move on to the next mission.\" "
+msgstr ""
+" \"Сегодня на наш остров прилетел голубь.<br>Он принес послание, которое "
+"пробудило мрачные мысли и прошлые страхи.В послании меня умоляли вернуться "
+"во Фремил.<br>Империя воюет с варварами - с севера напало то племя, с "
+"которым мне запретили воевать.<br>Ну, понятно же, что я должен "
+"делать...\"<br><br>Вы выполнили это задание. Можете поиграть в свое "
+"удовольствие или перейти к следующему заданию. "
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:221
+msgid ""
+" \"Today is a proud day. We have fought for our new home and risen "
+"victorious.<br> There are still a few barbarians hiding on our island, but I "
+"am sure that we will find them soon.<br> Every barbarian who doesn't attack "
+"us will be put in a boat with the other peaceful ones, and sent back to "
+"their country.\"<br><br>--------------------- VICTORY! ----------------------"
+msgstr ""
+" \"Сегодня у нас есть повод для гордости. Мы завоевали наш новый дом.<br>На "
+"острове есть еще несколько варваров, но мы скоро их найдем.<br>Любой варвар, "
+"не нападающий на нас, будет посажен вместе со своими миролюбивыми "
+"соплеменниками на корабль, который отвезет их обратно на родину.\"<br><br>---"
+"------------------ ПОБЕДА! ----------------------"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:68
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:210
+msgid ""
+"* As soon as you have enough soldiers, attack and completely destroy the "
+"barbarian buildings.<br>"
+msgstr ""
+"* Как только наберется достаточно солдат, атакуйте и полностью уничтожьте "
+"здания варваров.<br>"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:20
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:111
+msgid "* Build a quarry to the south of your headquarters."
+msgstr "* Постройте каменоломню на юге от штаба."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:44
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:172
+msgid ""
+"* Build a stonemason and then a complete mining and production "
+"infrastructure (coal mine and / or charcoal burner, iron ore mine, "
+"toolsmith's shop, weapon smithy, armour smithy and smelting works)."
+msgstr ""
+"* Постройте домик каменщика и затем завершите создание комплекса по добыче и "
+"переработке (угольную шахту или углежога, железорудную шахту, "
+"инструментальную мастерскую, кузницы для изготовления брони и оружия, "
+"плавильню)."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:28
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:148
+msgid "* Build some barracks and sentries around the colony."
+msgstr "* Постройте несколько казарм и караульных вокруг колонии."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:12
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:98
+msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
+msgstr "* Постройте три хижины дровосеков, домик лесника и лесопилку."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:60
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:197
+msgid ""
+"* Build up stronger military buildings, such as an outpost, a barrier or a "
+"tower, on the eastern frontier. To watch deep inside the enemy territory, "
+"build a tower."
+msgstr ""
+"* Постройте прочное военное сооружение - форпост, заставу или башню - на "
+"восточной границы. С башни обзор заметно лучше."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:36
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:160
+msgid "* Expand to the east, to start mining marble from the mountain."
+msgstr ""
+"* Продвиньтесь на восток, чтобы начать добывать мрамор из шахт в горе."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:69
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:211
+msgid ""
+"* Finally, build up a fortress on the peninsula<br> (near where the "
+"barbarian headquarters stood before), to avoid new settlements of other "
+"tribes in that region."
+msgstr ""
+"* Наконец, постройте укрепление на полуострове<br> (недалеко от того места, "
+"где был штаб варваров), чтобы избежать заселения региона другими племенами."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:52
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:184
 msgid ""
 "* To produce some sustaining food for our miners, we could build up a "
 "tavern. To supply them with some good and strong drinks, we could build up a "
@@ -290,182 +323,147 @@ msgstr ""
 "приискам нужно вино, и всем горнякам нужны хотя бы пайки, которые делаются "
 "из хлеба с ясом или рыбой."
 
-#: ../../campaigns/emp02.wmf/event:372
-msgid "Food for the miners"
-msgstr "Еда для шахтеров"
-
-#: ../../campaigns/emp02.wmf/event:424
-msgid ""
-" \"By the Gods! This is absolutely terrible. It seems as if we stand close "
-"to a test - and it seems as if Saledus was right with his fear concerning "
-"the shipwreck he found.<br> Today, as I walked down to the eastern "
-"strands,<br> I got a shock. I caught sight of one of those hated, evil, "
-"barbarian tribes with whom we have had so many problems before.<br> At "
-"first, I was naive and hoped that they were peaceful, but as soon as one of "
-"them saw me they charged towards me and started attacking me with their "
-"throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide "
-"myself, before retreating back to our colony under cover of darkness.<br> "
-"Anyway, we must build up stronger military buildings as soon as "
-"possible.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" \"Боги! Это ужасно. Похоже, мы на пороге испытания - кажется, Саледуса не "
-"обманули предчувствия насчет найденных обломков корабля.<br>Сегодня на "
-"восточном побережье я был потрясен, увидев следы одного из тех ужасных "
-"варваских племен, от которых мы немало натерпелись.<br>По наивности я "
-"предположил, что они миролюбивы, но как только один из них увидел меня, они "
-"кинулись вперед и атаковали меня дротиками. Слава Богам, что мне удалось "
-"удрать и спрятаться до темноты, чтобы вернуться в колонию.<br>Короче, нам "
-"надо строить надежные укрепления как можно скорее.<br><br>-- НОВОЕ ЗАДАНИЕ --"
-"<br> "
-
-#: ../../campaigns/emp02.wmf/event:425
-#: ../../campaigns/emp02.wmf/objective:57
-msgid ""
-"* Build up stronger military buildings, such as an outpost, a barrier or a "
-"tower, on the eastern frontier. To watch deep inside the enemy territory, "
-"build a tower."
-msgstr ""
-"* Постройте прочное военное сооружение - форпост, заставу или башню - на "
-"восточной границы. С башни обзор заметно лучше."
-
-#: ../../campaigns/emp02.wmf/event:427
-msgid "The Barbarians"
-msgstr "Варвары"
-
-#: ../../campaigns/emp02.wmf/event:458
-msgid ""
-" \"That's good. The first large military building is complete and the mining "
-"infrastructure is getting better and better. Now we should think of "
-"preparing ourselves for battle.\"<br><br>-- NEW OBJECTIVES --<br> "
-msgstr ""
-" \"Это хорошо: и укрепление готово, и горнорудный комплекс развивается. "
-"Теперь надо готовиться к бою.\"<br><br>-- НОВОЕ ЗАДАНИЕ --<br> "
-
-#: ../../campaigns/emp02.wmf/event:459
-#: ../../campaigns/emp02.wmf/objective:65
-msgid ""
-"* As soon as you have enough soldiers, attack and completely destroy the "
-"barbarian buildings.<br>"
-msgstr ""
-"* Как только наберется достаточно солдат, атакуйте и полностью уничтожьте "
-"здания варваров.<br>"
-
-#: ../../campaigns/emp02.wmf/event:460
-#: ../../campaigns/emp02.wmf/objective:66
-msgid ""
-"* Finally, build up a fortress on the peninsula<br> (near where the "
-"barbarian headquarters stood before), to avoid new settlements of other "
-"tribes in that region."
-msgstr ""
-"* Наконец, постройте укрепление на полуострове<br> (недалеко от того места, "
-"где был штаб варваров), чтобы избежать заселения региона другими племенами."
-
-#: ../../campaigns/emp02.wmf/event:462
-msgid "Command for Attack"
-msgstr "В атаку!"
-
-#: ../../campaigns/emp02.wmf/event:483
-msgid ""
-" \"Today is a proud day. We have fought for our new home and risen "
-"victorious.<br> There are still a few barbarians hiding on our island, but I "
-"am sure that we will find them soon.<br> Every barbarian who doesn't attack "
-"us will be put in a boat with the other peaceful ones, and sent back to "
-"their country.\"<br><br>--------------------- VICTORY! ----------------------"
-msgstr ""
-" \"Сегодня у нас есть повод для гордости. Мы завоевали наш новый дом.<br>На "
-"острове есть еще несколько варваров, но мы скоро их найдем.<br>Любой варвар, "
-"не нападающий на нас, будет посажен вместе со своими миролюбивыми "
-"соплеменниками на корабль, который отвезет их обратно на родину.\"<br><br>---"
-"------------------ ПОБЕДА! ----------------------"
-
-#: ../../campaigns/emp02.wmf/event:485
-msgid "Victory"
-msgstr "Победа"
-
-#: ../../campaigns/emp02.wmf/event:496
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:230
 msgid "7 days later..."
 msgstr "7 дней спустя..."
 
-#: ../../campaigns/emp02.wmf/event:498
-msgid "As time is running by"
-msgstr "Время идёт"
-
-#: ../../campaigns/emp02.wmf/event:502
-msgid "OK"
-msgstr "ОК"
-
-#: ../../campaigns/emp02.wmf/event:510
-msgid ""
-" \"Today a pigeon landed on our island.<br> It brought a message which fills "
-"me with dark thoughts and brings back my fears.<br> The message was "
-"addressed to me, begging me to come back to Fremil.<br> It says that the "
-"Empire is at war with the Barbarians. They were attacked from the north by "
-"the tribe I was forbidden to attack.<br> For me, it is clear what I must "
-"do...<br><br> You have completed this mission. You may continue playing if "
-"you wish, otherwise move on to the next mission.\" "
-msgstr ""
-" \"Сегодня на наш остров прилетел голубь.<br>Он принес послание, которое "
-"пробудило мрачные мысли и прошлые страхи."
-"В послании меня умоляли вернуться во Фремил.<br>Империя воюет с варварами - "
-"с севера напало то племя, с которым мне запретили воевать.<br>Ну, понятно "
-"же, что я должен делать...\"<br><br>Вы выполнили это задание. Можете "
-"поиграть в свое удовольствие или перейти к следующему заданию. "
-
-#: ../../campaigns/emp02.wmf/event:512
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:235
 msgid "A Message"
 msgstr "Послание"
 
-#: ../../campaigns/emp02.wmf/event:524
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:78
+msgid "A new island"
+msgstr "Новый остров"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:181
+msgid "Amalea comes in..."
+msgstr "Входит Амалия..."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:251
 msgid "Amalea smiles"
 msgstr "Амалия улыбается"
 
-#: ../../campaigns/emp02.wmf/event:526
-msgid ""
-" \"Greetings, my friend, I just visited our new tavern<br> 'At the palms'. "
-"The beer they serve is really tasty. You really should take a drink there, "
-"too.<br> It is good to see that we have now got a warmer and more familiar "
-"environment on our island.<br> Thank you, Lutius.\" "
-msgstr ""
-" \"Приветствую, друг мой! Я только что была в нашей новой таверне<br> 'Под "
-"пальмами'. У них подают отличное пиво, рекомендую попробовать.<br>Сейчас на "
-"острове стало уютно и спокойно, совсем по домашнему.<br> Спасибо тебе, "
-"Лютиус!\" "
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:226
+msgid "As time is running by"
+msgstr "Время идёт"
 
-#: ../../campaigns/emp02.wmf/event:528
-msgid "Our new tavern"
-msgstr "Наша новая таверна"
-
-#: ../../campaigns/emp02.wmf/objective:7
-msgid "Build up a wood economy"
-msgstr "Наладить поставку древесины"
-
-#: ../../campaigns/emp02.wmf/objective:15
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:18
 msgid "Build a quarry"
 msgstr "Построить каменоломню"
 
-#: ../../campaigns/emp02.wmf/objective:23
-msgid "Protect your colony"
-msgstr "Защитить свою колонию"
-
-#: ../../campaigns/emp02.wmf/objective:31
-msgid "Start mining marble"
-msgstr "Начать добычу мрамора"
-
-#: ../../campaigns/emp02.wmf/objective:39
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:42
 msgid "Build a stonemason and mining infrastructure"
 msgstr "Построить дом каменщика и горнорудную инфраструктуру"
 
-#: ../../campaigns/emp02.wmf/objective:47
-msgid "Provide your miners with food"
-msgstr "Обеспечить шахтеров едой"
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:10
+msgid "Build up a wood economy"
+msgstr "Наладить поставку древесины"
 
-#: ../../campaigns/emp02.wmf/objective:55
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:202
+msgid "Command for Attack"
+msgstr "В атаку!"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:140
+msgid "Dangerous shipparts"
+msgstr "Опасные останки корабля"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:66
+msgid "Destroy the barbarian tribe"
+msgstr "Уничтожить племя варваров"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:83
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:95
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:108
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:121
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:133
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:194
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:207
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:240
+msgid "Diary of Lutius"
+msgstr "Дневник Лютиуса"
+
+#: ../../campaigns/emp02.wmf/elemental:9
+msgid "Empire Tutorial2 - An outpost for exile"
+msgstr "Империя Обучение 2 - Форпост для изгнанников"
+
+#: ../../campaigns/emp02.wmf/elemental:11
+msgid ""
+"Finally the ship was repaired, so Lutius and his people again went on the "
+"quest to find a good place for a new beginning. Only few days later they "
+"land on a green, mediterranean island, looking like paradise."
+msgstr ""
+"В конце концов корабль был отремонтирован, Лютиус и его люди снова "
+"отправились на поиски, чтобы найти хорошее место для новых начинаний. Только "
+"несколько дней спустя они попадут на зеленый, средиземноморский остров, "
+"похожий на рай."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:177
+msgid "Food for the miners"
+msgstr "Еда для шахтеров"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:165
+msgid "Further mountains"
+msgstr "Следующие горы"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:153
+msgid "Marble on the mountain"
+msgstr "Мрамор в горах."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:247
+msgid "Our new tavern"
+msgstr "Наша новая таверна"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:26
+msgid "Protect your colony"
+msgstr "Защитить свою колонию"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:58
 msgid "Protect your eastern frontier"
 msgstr "Защитить восточную границу"
 
-#: ../../campaigns/emp02.wmf/objective:63
-msgid "Destroy the barbarian tribe"
-msgstr "Уничтожить племя варваров"
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:50
+msgid "Provide your miners with food"
+msgstr "Обеспечить шахтеров едой"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:169
+msgid "Saledus is amazed"
+msgstr "Саледус в восторге"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:145
+msgid "Saledus looks unhappy"
+msgstr "Саледус выглядит подавленным"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:157
+msgid "Saledus smiles"
+msgstr "Саледус улыбается"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:34
+msgid "Start mining marble"
+msgstr "Начать добычу мрамора"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:128
+msgid "Stone for the colony"
+msgstr "Камень для колонии"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:189
+msgid "The Barbarians"
+msgstr "Варвары"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:90
+msgid "The green forests"
+msgstr "Зеленые леса"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:103
+msgid "The rocks"
+msgstr "Скалы"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:216
+msgid "Victory"
+msgstr "Победа"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:116
+msgid "Wood for the colony"
+msgstr "Лес для колонии"
 
 #~ msgid "Second mission of the Empire campaign"
 #~ msgstr "Вторая миссия кампании за Империю"
@@ -491,3 +489,65 @@ msgstr "Уничтожить племя варваров"
 
 #~ msgid "A drink at 'At the palms'"
 #~ msgstr "Выпивка 'Под пальмой'"
+
+#~ msgid ""
+#~ " \"Great, today the building of the quarry was completed. Now we get enough "
+#~ "stone to construct larger buildings.\" "
+#~ msgstr ""
+#~ " \"Отлично, сегодня построили каменоломню, а значит будет камень для больших "
+#~ "зданий.\" "
+
+#~ msgid "OK"
+#~ msgstr "ОК"
+
+#~ msgid ""
+#~ "Finally the ship was repaired, so Lutius and his people again went on the "
+#~ "quest to find a good place for a new beginning. Only few days later they "
+#~ "land on a green, Mediterranean island, looking like paradise."
+#~ msgstr ""
+#~ "Наконец, корабль починили и Лютиус с его людьми отправился на поиски места, "
+#~ "подходящего, чтобы начать всё сначала. Через несколько дней они высадились "
+#~ "на зеленом острове посреди моря, острове, похожем на рай."
+
+#~ msgid ""
+#~ " \"Greetings Lutius, I don't want to start a panic, but I found something "
+#~ "which gives me a sinking feeling in my stomach and spreads waves of fear in "
+#~ "my heart. As I walked down to the southern strands I found the remains of "
+#~ "another ship. I don't know whether these parts are all that is left of that "
+#~ "ship. Inn any case: these parts do not seem to be old.<br> Perhaps the "
+#~ "people aboard that ship were caught in the same storm which brought us to "
+#~ "Malac' Mor - and were brought to this island.<br> I beg you to be cautious "
+#~ "and to build some barracks or sentries around our colony.\"<br><br>-- NEW "
+#~ "OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Здравствуй, Лютиус. Не хочется паниковать, но я обнаружил что-то такое, "
+#~ "от чего меня подташнивает и волны страха проникают в мое сердце. На южном "
+#~ "побережье я нашел остатки другого корабля. Я не знаю, всё ли это, что от "
+#~ "него осталось. В любом случае, обломки не выглядят слишком "
+#~ "старыми.<br>Возможно, люди на этом корабле попали в тот же шторм, что и мы, "
+#~ "когда попали на Малак Мор.<br>Подумай о мерах предосторожности, надо бы "
+#~ "построить казармы или караулки вокруг колонии.\"<br><br>-- НОВОЕ ЗАДАНИЕ --"
+#~ "<br> "
+
+#~ msgid ""
+#~ " \"By the Gods! This is absolutely terrible. It seems as if we stand close "
+#~ "to a test - and it seems as if Saledus was right with his fear concerning "
+#~ "the shipwreck he found.<br> Today, as I walked down to the eastern "
+#~ "strands,<br> I got a shock. I caught sight of one of those hated, evil, "
+#~ "barbarian tribes with whom we have had so many problems before.<br> At "
+#~ "first, I was naive and hoped that they were peaceful, but as soon as one of "
+#~ "them saw me they charged towards me and started attacking me with their "
+#~ "throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide "
+#~ "myself, before retreating back to our colony under cover of darkness.<br> "
+#~ "Anyway, we must build up stronger military buildings as soon as "
+#~ "possible.\"<br><br>-- NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Боги! Это ужасно. Похоже, мы на пороге испытания - кажется, Саледуса не "
+#~ "обманули предчувствия насчет найденных обломков корабля.<br>Сегодня на "
+#~ "восточном побережье я был потрясен, увидев следы одного из тех ужасных "
+#~ "варваских племен, от которых мы немало натерпелись.<br>По наивности я "
+#~ "предположил, что они миролюбивы, но как только один из них увидел меня, они "
+#~ "кинулись вперед и атаковали меня дротиками. Слава Богам, что мне удалось "
+#~ "удрать и спрятаться до темноты, чтобы вернуться в колонию.<br>Короче, нам "
+#~ "надо строить надежные укрепления как можно скорее.<br><br>-- НОВОЕ ЗАДАНИЕ --"
+#~ "<br> "

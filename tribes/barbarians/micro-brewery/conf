@@ -30,8 +30,8 @@ produce=beer
 
 [idle]
 pics=micro-brewery_i_??.png  # ???
-hotspot=42 52
+hotspot=42 50
 
 [working]
 pics=micro-brewery_i_??.png  # ???
-hotspot=42 52
+hotspot=42 50

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,15 +33,15 @@ namespace Widelands {
 struct Map;
 struct Editor_Game_Base;
 
-/*
-This helper class repesents the complete map initialization
-info needed by the random map generator
-It can be converted to and from an "Id-String". The Id-String is a
-string-encoded version of the random map info. This Id-String can
-be handelled by the user/player more easily.
-The Id-String also contains some kind of check-sum to prevent ill
-ids to be used.
-*/
+/**
+ * This helper class repesents the complete map initialization
+ * info needed by the random map generator
+ * It can be converted to and from an "Id-String". The Id-String is a
+ * string-encoded version of the random map info. This Id-String can
+ * be handelled by the user/player more easily.
+ * The Id-String also contains some kind of check-sum to prevent ill
+ * ids to be used.
+ */
 struct UniqueRandomMapInfo {
 
 	enum Resource_Amount
@@ -57,11 +57,11 @@ struct UniqueRandomMapInfo {
 	Resource_Amount resource_amount;
 	std::string worldName;
 
-	double   waterRatio;     //  How much of the map is water?
-	double   landRatio;      //  How much of the map is land?
-	double   wastelandRatio; //  How much of the "land" is wasteland?
-	int      numPlayers;     //  number of player to generate
-	bool     islandMode;     //  whether the world will be an island
+	double        waterRatio;     //  How much of the map is water?
+	double        landRatio;      //  How much of the map is land?
+	double        wastelandRatio; //  How much of the "land" is wasteland?
+	Player_Number numPlayers;     //  number of player to generate
+	bool          islandMode;     //  whether the world will be an island
 
 	//  other stuff
 	static bool setFromIdString

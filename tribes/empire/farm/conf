@@ -2,6 +2,9 @@ soundfx=../../../sound/farm/farm_animal
 size=big
 output=wheat
 
+[aihints]
+space_consumer=true
+
 [buildcost]
 wood=2
 stone=2
@@ -42,4 +45,4 @@ return=skipped
 
 [idle]
 pics=farm_i_??.png  # ???
-hotspot=82 95
+hotspot=82 74

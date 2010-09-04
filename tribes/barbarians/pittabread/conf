@@ -4,4 +4,4 @@ default_target_quantity=20
 
 [idle]
 pics=bread_idle.png
-hotspot=7 15
+hotspot=5 11

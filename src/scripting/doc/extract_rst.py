@@ -49,12 +49,21 @@ def extract_rst_from_lua(inname):
         r = re.subn(re.compile(r'^-- ?', re.M | re.DOTALL), "", r)[0]
         out.write(r + '\n')
 
+    return os.path.basename(outname)
+
+def replace_auxilary_toc(aux_fns):
+    aux_in = open("source/auxiliary.rst.in", "r").read()
+    aux_in = aux_in.replace("REPLACE_ME",
+                '\n'.join('   ' + fn for fn in aux_fns))
+    open("source/auxiliary.rst", "w").write(aux_in)
 
 if __name__ == '__main__':
     def main():
         for inf, outf in cpp_pairs:
             extract_rst_from_cpp(inf, outf)
-        for inf in glob("../../../scripting/*.lua"):
-            extract_rst_from_lua(inf)
+
+        replace_auxilary_toc(
+            [extract_rst_from_lua(i) for i in glob("../../../scripting/*.lua")]
+        )
 
     main()

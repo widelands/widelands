@@ -84,6 +84,21 @@ struct NetHost : public GameController, private SyncCallback {
 	// Chat-related stuff
 	void send(ChatMessage msg);
 
+	// Host command releated stuff
+	void kickUser(std::string, std::string);
+
+	void forcePause() {
+		m_forced_pause = true;
+		updateNetworkSpeed();
+	}
+
+	void endForcedPause() {
+		m_forced_pause = false;
+		updateNetworkSpeed();
+	}
+
+	bool forcedPause() {return m_forced_pause;}
+
 private:
 	NetTransferFile * file;
 
@@ -132,6 +147,7 @@ private:
 
 	NetHostImpl * d;
 	bool use_ggz;
+	bool m_forced_pause;
 };
 
 

@@ -4,4 +4,4 @@ default_target_quantity=25
 
 [idle]
 pics=wheat_idle.png
-hotspot=4 12
+hotspot=-1 6

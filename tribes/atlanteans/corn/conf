@@ -5,4 +5,4 @@ default_target_quantity=25
 # Simply corn
 [idle]
 pics=idle.png
-hotspot=10 17
+hotspot=10 13

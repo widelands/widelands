@@ -20,7 +20,7 @@
 #include "panel.h"
 
 #include "constants.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
@@ -80,7 +80,7 @@ Panel::~Panel()
 	update();
 
 	if (_cache != g_gr->get_no_picture())
-		g_gr->free_surface(_cache);
+		g_gr->free_picture_surface(_cache);
 
 	// Release pointers to this object
 	if (_g_mousegrab == this)
@@ -254,8 +254,8 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 	_h = nh;
 
 	if (_cache != g_gr->get_no_picture()) {
-		g_gr->free_surface(_cache);
-		_cache = g_gr->create_surface(_w, _h);
+		g_gr->free_picture_surface(_cache);
+		_cache = g_gr->create_picture_surface(_w, _h);
 	}
 
 	if (_parent)
@@ -279,9 +279,10 @@ void Panel::set_pos(const Point n) {
 }
 
 /**
- * Set \p w and \p h to the desired width and height of this panel, respectively.
+ * Set \p w and \p h to the desired
+ * width and height of this panel, respectively.
  */
-void Panel::get_desired_size(uint32_t& w, uint32_t& h) const
+void Panel::get_desired_size(uint32_t & w, uint32_t & h) const
 {
 	w = _desired_w;
 	h = _desired_h;
@@ -340,7 +341,7 @@ bool Panel::get_layout_toplevel() const
  * and translate it into the interior coordinate system of the parent
  * and return the result.
  */
-Point Panel::to_parent(const Point& pt) const
+Point Panel::to_parent(const Point & pt) const
 {
 	if (!_parent)
 		return pt;
@@ -427,7 +428,7 @@ void Panel::move_to_top()
  */
 void Panel::set_visible(bool const on)
 {
-	if(((_flags & pf_visible) >1) == on)
+	if (((_flags & pf_visible) > 1) == on)
 		return;
 
 	_flags &= ~pf_visible;

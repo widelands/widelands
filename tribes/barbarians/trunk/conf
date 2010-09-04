@@ -7,4 +7,4 @@ default_target_quantity=40
 
 [idle]
 pics=trunk_idle.png
-hotspot=7 11
+hotspot=6 7

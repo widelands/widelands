@@ -40,9 +40,9 @@ namespace Widelands {
 Worker_Descr::Worker_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
+	 Tribe_Descr const & _tribe)
 	:
-	Bob::Descr(_name, _descname, directory, prof, global_s, &_tribe, encdata),
+	Bob::Descr(_name, _descname, directory, prof, global_s, &_tribe),
 	m_helptext(global_s.get_string("help", "")),
 	m_icon_fname(directory + "/menu.png"),
 	m_icon(g_gr->get_no_picture()),
@@ -82,9 +82,14 @@ Worker_Descr::Worker_Descr
 			}
 	}
 
+	// If worker has a work animation load and add it.
+	Section * work_s = prof.get_section("work");
+	if (work_s)
+		add_animation("work", g_anim.get(directory, *work_s, "work.png"));
+
 	// Read the walking animations
 	m_walk_anims.parse
-		(*this, directory, prof, "walk_??", prof.get_section("walk"), encdata);
+		(*this, directory, prof, "walk_??", prof.get_section("walk"));
 
 	//  Soldiers have no walkload.
 	if (not global_s.has_val("max_hp_level"))
@@ -93,8 +98,7 @@ Worker_Descr::Worker_Descr
 			 directory,
 			 prof,
 			 "walkload_??",
-			 prof.get_section("walkload"),
-			 encdata);
+			 prof.get_section("walkload"));
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
 		g_sound_handler.load_fx(directory, v->get_string());
@@ -121,7 +125,6 @@ Worker_Descr::Worker_Descr
 			parser.descr = this;
 			parser.directory = directory;
 			parser.prof = &prof;
-			parser.encdata = encdata;
 
 			program = new WorkerProgram(program_name);
 			program->parse(this, &parser, program_name.c_str());

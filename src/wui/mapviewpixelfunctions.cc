@@ -79,7 +79,8 @@ float MapviewPixelFunctions::calc_brightness
 /**
  * Compute a - b, taking care to handle wrap-around effects properly.
  */
-Point MapviewPixelFunctions::calc_pix_difference(Widelands::Map const & map, Point a, Point b)
+Point MapviewPixelFunctions::calc_pix_difference
+	(Widelands::Map const & map, Point a, Point b)
 {
 	normalize_pix(map, a);
 	normalize_pix(map, b);

@@ -247,7 +247,7 @@ static const std::string tooltip_tab_build[] = {
 	_("Build medium buildings"),
 	_("Build large buildings")
 };
-static const std::string name_tab_build[] = { "small", "medium", "big" };
+static const std::string name_tab_build[] = {"small", "medium", "big"};
 
 
 static char const * const pic_tab_buildmine  = "pics/menu_tab_buildmine.png";
@@ -481,10 +481,11 @@ void FieldActionWindow::add_buttons_auto()
 	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 
 	if (militarybox) {
-		if (militarybox->allowed_change()) {
-			add_tab("military", pic_tab_military,
-					militarybox, _("Military settings")
-			);
+		if (militarybox->allowed_change())
+	{
+			add_tab
+				("military", pic_tab_military,
+				 militarybox, _("Military settings"));
 		} else
 			delete militarybox;
 	}
@@ -496,10 +497,12 @@ void FieldActionWindow::add_buttons_attack ()
 
 	if
 		(upcast
-		 	(Widelands::Attackable, attackable, m_map->get_immovable(m_node))) {
+		 	(Widelands::Attackable, attackable, m_map->get_immovable(m_node)))
+	{
 		if
 			(m_plr && m_plr->is_hostile(attackable->owner()) &&
-			 attackable->canAttack()) {
+			 attackable->canAttack())
+		{
 			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
 			a_box.add(m_attack_box, UI::Box::AlignTop);
 

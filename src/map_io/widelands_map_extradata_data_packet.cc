@@ -74,8 +74,8 @@ throw (_wexception)
 						IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 					if (!surf)
 						continue; //  Illegal pic. Skip it.
-					Surface & picsurf = *new Surface();
-					picsurf.set_sdl_surface(*surf);
+
+					Surface & picsurf = g_gr->create_surface(*surf);
 
 					std::string picname = FileSystem::FS_Filename(pname->c_str());
 					picname = "map:" + picname;

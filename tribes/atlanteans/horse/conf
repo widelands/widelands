@@ -3,15 +3,15 @@ default_target_quantity=5
 
 [idle]
 pics=wildhorse_idle_sw_??.png
-hotspot=26 34
+hotspot=18 23
 fps=10
 
 [walk]
 dirpics=wildhorse_walk_!!_??.png
-hotspot=25 34
+hotspot=19 33
 fps=10
 
 [walkload]
 dirpics=wildhorse_walk_!!_??.png
-hotspot=25 34
+hotspot=19 33
 fps=10

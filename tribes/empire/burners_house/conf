@@ -27,8 +27,8 @@ produce=coal
 
 [idle]
 pics=burner_i_??.png  # ???
-hotspot=54 54
+hotspot=51 48
 
 [working]
 pics=burner_i_??.png  # ???
-hotspot=54 54
+hotspot=51 48

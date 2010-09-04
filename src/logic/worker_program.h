@@ -38,7 +38,6 @@ struct WorkerProgram : public BobProgramBase {
 		Worker_Descr     * descr;
 		std::string        directory;
 		Profile          * prof;
-		const EncodeData * encdata;
 	};
 
 	typedef void (WorkerProgram::*parse_t)

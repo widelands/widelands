@@ -103,7 +103,7 @@ private:
 	std::string m_helptext;   ///< Long descriptive text
 	uint32_t    m_default_target_quantity;
 	std::string m_icon_fname; ///< Filename of ware's main picture
-	PictureID    m_icon;       ///< Index of ware's picture in picture stack
+	PictureID   m_icon;       ///< Index of ware's picture in picture stack
 	uint8_t     m_preciousness;
 };
 

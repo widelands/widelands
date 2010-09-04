@@ -557,7 +557,7 @@ bool Carrier::start_task_walktoflag
 			(game, path, idx, descr().get_right_walk_anims(does_carry_ware()));
 }
 
-void Carrier::log_general_info(const Widelands::Editor_Game_Base& egbase)
+void Carrier::log_general_info(const Widelands::Editor_Game_Base & egbase)
 {
 	molog("Carrier at %i,%i\n", get_position().x, get_position().y);
 
@@ -580,7 +580,7 @@ Carrier::Loader::Loader()
 {
 }
 
-void Carrier::Loader::load(FileRead& fr)
+void Carrier::Loader::load(FileRead & fr)
 {
 	Worker::Loader::load(fr);
 
@@ -588,23 +588,24 @@ void Carrier::Loader::load(FileRead& fr)
 	if (version != CARRIER_SAVEGAME_VERSION)
 		throw game_data_error("unknown/unhandled version %u", version);
 
-	Carrier& carrier = get<Carrier>();
+	Carrier & carrier = get<Carrier>();
 	carrier.m_acked_ware = fr.Signed32();
 }
 
-const Bob::Task* Carrier::Loader::get_task(const std::string& name)
+const Bob::Task * Carrier::Loader::get_task(const std::string & name)
 {
 	if (name == "road") return &taskRoad;
 	if (name == "transport") return &taskTransport;
 	return Worker::Loader::get_task(name);
 }
 
-Carrier::Loader* Carrier::create_loader()
+Carrier::Loader * Carrier::create_loader()
 {
 	return new Loader;
 }
 
-void Carrier::do_save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+void Carrier::do_save
+	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	Worker::do_save(egbase, mos, fw);
 

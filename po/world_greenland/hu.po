@@ -6,27 +6,91 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:24+0000\n"
-"Last-Translator: Varga Dániel <Unknown>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 14:19+0000\n"
+"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/greenland/conf:2
-msgid "The Widelands Development Team"
-msgstr "A Widelands fejlesztőcsapat"
+#: ../../worlds/greenland/conf:58
+msgid "Alder"
+msgstr "Égerfa"
 
-#: ../../worlds/greenland/conf:3
-msgid "Greenland"
-msgstr "Zöld mezők"
+#: ../../worlds/greenland/conf:59
+msgid "Alder medium"
+msgstr "Közepes méretű égerfa"
 
-#: ../../worlds/greenland/conf:4
-msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "A barbárok gyönyörű és gazdag mezői"
+#: ../../worlds/greenland/conf:60
+msgid "Alder small"
+msgstr "Kis égerfa"
+
+#: ../../worlds/greenland/conf:61
+msgid "Alder tiny"
+msgstr "Apró éger palánta"
+
+#: ../../worlds/greenland/conf:46
+msgid "Aspen"
+msgstr "Nyárfa"
+
+#: ../../worlds/greenland/conf:47
+msgid "Aspen medium"
+msgstr "Közepes méretű nyárfa"
+
+#: ../../worlds/greenland/conf:48
+msgid "Aspen small"
+msgstr "Kis nyárfa"
+
+#: ../../worlds/greenland/conf:49
+msgid "Aspen tiny"
+msgstr "Apró nyárfa palánta"
+
+#: ../../worlds/greenland/conf:80
+msgid "Badger"
+msgstr "Borz"
+
+#: ../../worlds/greenland/conf:66
+msgid "Beech"
+msgstr "Bükkfa"
+
+#: ../../worlds/greenland/conf:67
+msgid "Beech medium"
+msgstr "Közepes méretű bükkfa"
+
+#: ../../worlds/greenland/conf:68
+msgid "Beech small"
+msgstr "Kis bükkfa"
+
+#: ../../worlds/greenland/conf:69
+msgid "Beech tiny"
+msgstr "Apró bükkfa palánta"
+
+#: ../../worlds/greenland/conf:62
+msgid "Birch"
+msgstr "Nyírfa"
+
+#: ../../worlds/greenland/conf:63
+msgid "Birch medium"
+msgstr "Közepes méretű nyírfa"
+
+#: ../../worlds/greenland/conf:64
+msgid "Birch small"
+msgstr "Kis nyírfa"
+
+#: ../../worlds/greenland/conf:65
+msgid "Birch tiny"
+msgstr "Apró nyírfa palánta"
+
+#: ../../worlds/greenland/conf:81
+msgid "Brownbear"
+msgstr "Barnamedve"
+
+#: ../../worlds/greenland/conf:82
+msgid "Bunny"
+msgstr "Nyuszi"
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -41,6 +105,14 @@ msgstr "Bokor"
 msgid "Cactus"
 msgstr "Kaktusz"
 
+#: ../../worlds/greenland/conf:83
+msgid "Chamois"
+msgstr "Zerge"
+
+#: ../../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr "Szén"
+
 #: ../../worlds/greenland/conf:14
 #: ../../worlds/greenland/conf:15
 #: ../../worlds/greenland/conf:16
@@ -48,9 +120,37 @@ msgstr "Kaktusz"
 msgid "Dead Tree"
 msgstr "Elpusztult fa"
 
+#: ../../worlds/greenland/conf:84
+msgid "Deer"
+msgstr "Szarvas"
+
+#: ../../worlds/greenland/conf:85
+msgid "Duck"
+msgstr "Kacsa"
+
+#: ../../worlds/greenland/conf:86
+msgid "Elk"
+msgstr "Jávorszarvas"
+
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
-msgstr ""
+msgstr "Kidőlt fa"
+
+#: ../../worlds/greenland/resconf:41
+msgid "Fish"
+msgstr "Hal"
+
+#: ../../worlds/greenland/conf:87
+msgid "Fox"
+msgstr "Róka"
+
+#: ../../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr "Arany"
+
+#: ../../worlds/greenland/resconf:28
+msgid "Granite"
+msgstr "Gránit"
 
 #: ../../worlds/greenland/conf:19
 #: ../../worlds/greenland/conf:20
@@ -58,10 +158,58 @@ msgstr ""
 msgid "Grass"
 msgstr "Fű"
 
+#: ../../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr "Zöld mezők"
+
+#: ../../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr "Vas"
+
+#: ../../worlds/greenland/conf:70
+msgid "Larch"
+msgstr "Vörösfenyő"
+
+#: ../../worlds/greenland/conf:71
+msgid "Larch medium"
+msgstr "Közepes méretű vörösfenyő"
+
+#: ../../worlds/greenland/conf:72
+msgid "Larch small"
+msgstr "Kis vörösfenyő"
+
+#: ../../worlds/greenland/conf:73
+msgid "Larch tiny"
+msgstr "Apró vörösfenyő palánta"
+
+#: ../../worlds/greenland/conf:88
+msgid "Lynx"
+msgstr "Hiúz"
+
+#: ../../worlds/greenland/conf:89
+msgid "Marten"
+msgstr "Nyest"
+
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
 msgid "Mushroom"
 msgstr "Gomba"
+
+#: ../../worlds/greenland/conf:50
+msgid "Oak"
+msgstr "Tölgyfa"
+
+#: ../../worlds/greenland/conf:51
+msgid "Oak medium"
+msgstr "Közepes méretű tölgyfa"
+
+#: ../../worlds/greenland/conf:52
+msgid "Oak small"
+msgstr "Kis tölgyfa"
+
+#: ../../worlds/greenland/conf:53
+msgid "Oak tiny"
+msgstr "Apró tölgyfa palánta"
 
 #: ../../worlds/greenland/conf:24
 #: ../../worlds/greenland/conf:25
@@ -72,11 +220,51 @@ msgstr "Gomba"
 msgid "Pebble"
 msgstr "Kavics"
 
+#: ../../worlds/greenland/conf:90
+msgid "Reindeer"
+msgstr "Rénszarvas"
+
+#: ../../worlds/greenland/conf:74
+msgid "Rowan"
+msgstr "Berkenye"
+
+#: ../../worlds/greenland/conf:75
+msgid "Rowan medium"
+msgstr "Közepes méretű berkenye bokor"
+
+#: ../../worlds/greenland/conf:76
+msgid "Rowan small"
+msgstr "Kis berkenye bokor"
+
+#: ../../worlds/greenland/conf:77
+msgid "Rowan tiny"
+msgstr "Apró berkenye palánta"
+
+#: ../../worlds/greenland/conf:91
+msgid "Sheep"
+msgstr "Bárány"
+
 #: ../../worlds/greenland/conf:30
 #: ../../worlds/greenland/conf:31
 #: ../../worlds/greenland/conf:32
 msgid "Skeleton"
 msgstr "Csontváz"
+
+#: ../../worlds/greenland/conf:54
+msgid "Spruce"
+msgstr "Lucfenyő"
+
+#: ../../worlds/greenland/conf:55
+msgid "Spruce medium"
+msgstr "Közepes méretű lucfenyő"
+
+#: ../../worlds/greenland/conf:56
+msgid "Spruce small"
+msgstr "Kis lucfenyő"
+
+#: ../../worlds/greenland/conf:57
+msgid "Spruce tiny"
+msgstr "Apró lucfenyő palánta"
 
 #: ../../worlds/greenland/conf:33
 #: ../../worlds/greenland/conf:34
@@ -97,181 +285,17 @@ msgstr "Szikla"
 msgid "Stones"
 msgstr "Kő"
 
-#: ../../worlds/greenland/conf:46
-msgid "Aspen"
-msgstr ""
+#: ../../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr "A Widelands fejlesztőcsapat"
 
-#: ../../worlds/greenland/conf:47
-msgid "Aspen medium"
-msgstr ""
+#: ../../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr "A barbárok gyönyörű és gazdag mezői"
 
-#: ../../worlds/greenland/conf:48
-msgid "Aspen small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:49
-msgid "Aspen tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:50
-msgid "Oak"
-msgstr ""
-
-#: ../../worlds/greenland/conf:51
-msgid "Oak medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:52
-msgid "Oak small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:53
-msgid "Oak tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:54
-msgid "Spruce"
-msgstr ""
-
-#: ../../worlds/greenland/conf:55
-msgid "Spruce medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:56
-msgid "Spruce small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:57
-msgid "Spruce tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:58
-msgid "Alder"
-msgstr ""
-
-#: ../../worlds/greenland/conf:59
-msgid "Alder medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:60
-msgid "Alder small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:61
-msgid "Alder tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:62
-msgid "Birch"
-msgstr ""
-
-#: ../../worlds/greenland/conf:63
-msgid "Birch medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:64
-msgid "Birch small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:65
-msgid "Birch tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:66
-msgid "Beech"
-msgstr ""
-
-#: ../../worlds/greenland/conf:67
-msgid "Beech medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:68
-msgid "Beech small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:69
-msgid "Beech tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:70
-msgid "Larch"
-msgstr ""
-
-#: ../../worlds/greenland/conf:71
-msgid "Larch medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:72
-msgid "Larch small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:73
-msgid "Larch tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:74
-msgid "Rowan"
-msgstr ""
-
-#: ../../worlds/greenland/conf:75
-msgid "Rowan medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:76
-msgid "Rowan small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:77
-msgid "Rowan tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:80
-msgid "Badger"
-msgstr "Borz"
-
-#: ../../worlds/greenland/conf:81
-msgid "Brownbear"
-msgstr "Barnamedve"
-
-#: ../../worlds/greenland/conf:82
-msgid "Bunny"
-msgstr "Nyuszi"
-
-#: ../../worlds/greenland/conf:83
-msgid "Chamois"
-msgstr "Zerge"
-
-#: ../../worlds/greenland/conf:84
-msgid "Deer"
-msgstr "Szarvas"
-
-#: ../../worlds/greenland/conf:85
-msgid "Duck"
-msgstr "Kacsa"
-
-#: ../../worlds/greenland/conf:86
-msgid "Elk"
-msgstr "Jávorszarvas"
-
-#: ../../worlds/greenland/conf:87
-msgid "Fox"
-msgstr "Róka"
-
-#: ../../worlds/greenland/conf:88
-msgid "Lynx"
-msgstr "Hiúz"
-
-#: ../../worlds/greenland/conf:89
-msgid "Marten"
-msgstr "Nyest"
-
-#: ../../worlds/greenland/conf:90
-msgid "Reindeer"
-msgstr "Rénszarvas"
-
-#: ../../worlds/greenland/conf:91
-msgid "Sheep"
-msgstr "Bárány"
+#: ../../worlds/greenland/resconf:36
+msgid "Water"
+msgstr "Víz"
 
 #: ../../worlds/greenland/conf:92
 msgid "Wisent"
@@ -281,29 +305,8 @@ msgstr "Bölény"
 msgid "Wolf"
 msgstr "Farkas"
 
-#: ../../worlds/greenland/resconf:4
-msgid "Coal"
-msgstr "Szén"
-
-#: ../../worlds/greenland/resconf:12
-msgid "Gold"
-msgstr "Arany"
-
-#: ../../worlds/greenland/resconf:20
-msgid "Iron"
-msgstr "Vas"
-
-#: ../../worlds/greenland/resconf:28
-msgid "Granit"
-msgstr "Gránit"
-
-#: ../../worlds/greenland/resconf:36
-msgid "Water"
-msgstr "Víz"
-
-#: ../../worlds/greenland/resconf:41
-msgid "Fish"
-msgstr "Hal"
+#~ msgid "Granit"
+#~ msgstr "Gránit"
 
 #~ msgid "Dead tree"
 #~ msgstr "Elpusztult fa"

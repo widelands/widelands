@@ -139,7 +139,7 @@ void set_locale(std::string name) {
 			lang = l;
 	/* Than set the variables */
 	setenv ("LANG",     lang.c_str(), 1);
-	setenv ("LANGUAGE", (lang + ":" + lang.substr(0, 2)).c_str(), 1);
+	setenv ("LANGUAGE", lang.c_str(), 1);
 	log
 		("LANG %s, LANGUAGE %s\n",
 		lang.c_str(),

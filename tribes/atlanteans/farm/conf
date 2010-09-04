@@ -12,6 +12,7 @@ spidercloth=1
 farmer=1
 
 [aihints]
+space_consumer=true
 is_basic=true # farm needs spidercloth to be build and spidercloth needs
               # corn for production -> farm should be build ASAP!
 

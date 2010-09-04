@@ -31,8 +31,8 @@ recruit=ox
 
 [idle]
 pics=cattlefarm_i_??.png  # ???
-hotspot=58 98
+hotspot=57 80
 
 [working]
 pics=cattlefarm_i_??.png  # ???
-hotspot=58 98
+hotspot=57 80

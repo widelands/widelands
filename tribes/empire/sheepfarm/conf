@@ -30,8 +30,8 @@ produce=wool
 
 [idle]
 pics=sheepfarm_i_??.png  # ???
-hotspot=82 95
+hotspot=82 74
 
 [working]
 pics=sheepfarm_i_??.png  # ???
-hotspot=82 95
+hotspot=82 74

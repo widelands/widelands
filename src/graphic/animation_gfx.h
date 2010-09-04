@@ -22,6 +22,7 @@
 
 #include "animation.h"
 #include "logic/widelands.h"
+#include "rgbcolor.h"
 
 class Surface;
 
@@ -46,7 +47,7 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 		assert(1 <= player_number);
 		assert     (player_number <= MAX_PLAYERS);
 		assert(playercolor);
-		if (!m_encodedata.hasplrclrs)
+		if (!m_hasplrclrs)
 			return get_frame(i);
 
 		// Encode for this player
@@ -65,7 +66,7 @@ private:
 
 	Frames m_plrframes[MAX_PLAYERS + 1];
 	Frames m_pcmasks;
-	EncodeData m_encodedata;
+	bool m_hasplrclrs;
 	Point m_hotspot;
 };
 

@@ -23,4 +23,4 @@ worker=scout
 
 [idle]
 pics=scouts_hut_i_??.png
-hotspot=47 48
+hotspot=45 43
