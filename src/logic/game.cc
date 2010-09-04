@@ -1028,6 +1028,7 @@ void Game::WriteStatistics(FileWrite & fw)
 			fw.Unsigned32(m_general_stats[p - 1].nr_civil_blds_lost    [j]);
 			fw.Unsigned32(m_general_stats[p - 1].nr_civil_blds_defeated[j]);
 			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
+			fw.Unsigned32(m_general_stats[p - 1].custom_statistic[j]);
 		}
 }
 

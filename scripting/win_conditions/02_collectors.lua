@@ -142,9 +142,10 @@ end
 if hooks == nil then hooks = {} end
 hooks.custom_statistic = {
    name = _ "Points",
-   pic = "pics/genstats_nrwares.png", -- TODO: that's wrong
+   pic = "pics/genstats_points.png",
    calculator = function(p) 
-      return _calc_points(p)
+      local pts = _calc_points(p)
+      return pts
    end,
 }
 

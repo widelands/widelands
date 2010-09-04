@@ -46,10 +46,6 @@
 // TODO: also big buildings occupy more space: i suggest some occupied fields property
 // TODO: and also a field property
 
-// TODO: document hooks.
-// TODO: visualize custom_statistics in game
-// TODO: write test to see if they are loaded, saved ok
-
 
 /*
 ============================================
