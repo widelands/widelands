@@ -137,6 +137,7 @@ protected:
 		virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string);
 		virtual boost::shared_ptr<LuaTable> run_script
 			(FileSystem &, std::string, std::string);
+		virtual boost::shared_ptr<LuaTable> get_hook(std::string name);
 };
 
 
@@ -306,6 +307,26 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 	}
 	if (not lua_istable(m_L, -1))
 		throw LuaError("Script did not return a table!");
+	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
+}
+
+/*
+ * Returns a given hook if one is defined, otherwise returns 0
+ */
+boost::shared_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
+	lua_getglobal(m_L, "hooks");
+	if(lua_isnil(m_L, -1)) {
+		lua_pop(m_L, 1);
+		return boost::shared_ptr<LuaTable>();
+	}
+
+	lua_getfield(m_L, -1, name.c_str());
+	if(lua_isnil(m_L, -1)) {
+		lua_pop(m_L, 2);
+		return boost::shared_ptr<LuaTable>();
+	}
+	lua_remove(m_L, -2);
+
 	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
 }
 

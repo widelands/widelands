@@ -138,6 +138,16 @@ local function _game_over(plrs)
    points[#points][1]:send_message(_"You won!", _"You are the winner!")
 end
 
+-- Instantiate the hook to calculate points
+if hooks is nil then hooks = {} end
+hooks.custom_statistic = {
+   name = _ "Points",
+   pic = "pics/genstats_nrwares.png", -- TODO: that's wrong
+   calculator = function(p) return _calc_points(p) end,
+}
+end
+
+
 sleep(1000)
 
 
