@@ -64,11 +64,13 @@ public:
 
 		virtual std::string get_string(std::string s) {
 			lua_getfield(m_L, -1, s.c_str());
+			if (lua_isnil(m_L, -1)) {
+				lua_pop(m_L, 1);
+				throw LuaTableKeyError(s);
+			}
 			if (not lua_isstring(m_L, -1)) {
 				lua_pop(m_L, 1);
-				throw LuaError
-					(s + " is not a field in the table returned by the last "
-					 "script or not a string");
+				throw LuaError(s + "is not a string value.");
 			}
 			std::string rv = lua_tostring(m_L, -1);
 			lua_pop(m_L, 1);
@@ -79,6 +81,10 @@ public:
 	virtual LuaCoroutine * get_coroutine(std::string s) {
 		lua_getfield(m_L, -1, s.c_str());
 
+		if (lua_isnil(m_L, -1)) {
+				lua_pop(m_L, 1);
+				throw LuaTableKeyError(s);
+		}
 		if (lua_isfunction(m_L, -1)) {
 			// Oh well, a function, not a coroutine. Let's turn it into one
 			lua_State * t = lua_newthread(m_L);
@@ -91,9 +97,7 @@ public:
 
 		if (not lua_isthread(m_L, -1)) {
 			lua_pop(m_L, 1);
-			throw LuaError
-				(s + "is not a field in the table returned by the last script "
-				 "or not a function");
+			throw LuaError(s + "is not a function value.");
 		}
 		LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(m_L, -1));
 		lua_pop(m_L, 1); // Remove coroutine from stack
