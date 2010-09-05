@@ -276,11 +276,18 @@ void Fullscreen_Menu_LaunchGame::win_condition_clicked()
 void Fullscreen_Menu_LaunchGame::win_condition_update() {
 	boost::shared_ptr<LuaTable> t = m_lua->run_script
 		("win_conditions", m_settings->getWinCondition());
+
+	try {
+
 	std::string n = t->get_string("name");
 	std::string d = t->get_string("description");
 
 	m_wincondition.set_title(_("Type: ") + n);
 	m_wincondition.set_tooltip(d.c_str());
+	} catch(LuaTableKeyError &) {
+		// might be that this is not a win condition after all.
+		win_condition_clicked();
+	}
 }
 
 /**
