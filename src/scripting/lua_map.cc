@@ -1816,6 +1816,7 @@ const char L_Field::className[] = "Field";
 const MethodType<L_Field> L_Field::Methods[] = {
 	METHOD(L_Field, __eq),
 	METHOD(L_Field, region),
+	METHOD(L_Field, has_movecaps_swim),
 	{0, 0},
 };
 const PropertyType<L_Field> L_Field::Properties[] = {
@@ -2160,6 +2161,13 @@ int L_Field::region(lua_State * L) {
 		uint32_t radius = luaL_checkuint32(L, -1);
 		return m_region(L, radius);
 	}
+	return 1;
+}
+
+
+int L_Field::has_movecaps_swim(lua_State * L) {
+	Field * field = fcoords(L).field;
+	lua_pushboolean(L, (field->nodecaps() & MOVECAPS_SWIM));
 	return 1;
 }
 

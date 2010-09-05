@@ -102,7 +102,6 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, set_frontier_style),
 	METHOD(L_Player, get_suitability),
 	METHOD(L_Player, allow_workers),
-	METHOD(L_Player, get_current_land_size),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -1163,28 +1162,6 @@ int L_Player::allow_workers(lua_State * L) {
 	return 0;
 }
 
-
-/* RST
-	.. method:: get_current_land_size()
-
-	returns the current landsize of the player
-
-*/
-int L_Player::get_current_land_size(lua_State * L) {
-	Game & game      = get_game(L);
-	Player_Number pn = get(L, game).player_number();
-	const Game::General_Stats_vector & stats = game.get_general_statistics();
-
-	if (stats[pn - 1].land_size.empty()) {
-		lua_pushuint32(L, 0);
-		log("No statistics for this player. Perhaps the game just started\n");
-		return 1;
-	}
-
-	lua_pushuint32
-			(L, stats[pn - 1].land_size[stats[pn - 1].land_size.size() - 1]);
-	return 1;
-}
 
 /*
  ==========================================================

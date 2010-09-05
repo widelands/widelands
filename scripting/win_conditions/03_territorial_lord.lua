@@ -19,10 +19,21 @@ return {
 	description = wc_desc,
 	func = function()
 
-		-- Get the size of the map
-		-- TODO instead of using all map fields, only count the none water fields
-		-- TODO here and in user land ownership calculation
-		local mapsize = wl.map.get_width() * wl.map.get_height()
+		-- Get all valueable fields of the map
+		local fields = {}
+		local mapwidth  = wl.map.get_width()
+		local mapheight = wl.map.get_height()
+		for x=0,mapwidth-1 do
+			for y=0,mapheight-1 do
+				local f = wl.map.Field(x,y)
+				if f then
+					-- add this field to the list as long as it has not movecaps swim
+					if not f.has_movecaps_swim(f) then
+						fields[#fields+1] = f
+					end
+				end
+			end
+		end
 
 		-- these variables will be used once a player or team owns more than half
 		-- of the map's area
@@ -35,9 +46,7 @@ return {
 		valid_players(plrs)
 
 		-- send a message with the game type to all players
-		for idx, p in ipairs(plrs) do
-			p:send_message(wc_name, wc_desc)
-		end
+		broadcast(plrs, wc_name, wc_desc)
 
 		-- Find all valid teams
 		local teamnumbers = {} -- array with team numbers
@@ -57,27 +66,42 @@ return {
 			end
 		end
 
+		local _landsizes = {}
+		local function _calc_current_landsizes()
+			-- init the landsizes for each player
+			for idx,plr in ipairs(plrs) do
+				_landsizes[plr.number] = 0
+			end
+
+			for idf,f in ipairs(fields) do
+				-- check if field is owned by a player
+				if f.owners[1] then
+					_landsizes[f.owners[1].number] = _landsizes[f.owners[1].number] + 1
+				end
+			end
+		end
+
 		function _calc_points()
 			local teampoints = {}     -- points of teams
 			local maxplayerpoints = 0 -- the highest points of a player without team
 			local maxpointsplayer = 0 -- the player
 			local foundcandidate = false
+			_calc_current_landsizes()
 			for idx, p in ipairs(plrs) do
 				local team = p.team
-				local landsize = p.get_current_land_size(p)
 				if team == 0 then
-					if maxplayerpoints < landsize then
-						maxplayerpoints = landsize
+					if maxplayerpoints < _landsizes[p.number] then
+						maxplayerpoints = _landsizes[p.number]
 						maxpointsplayer = p
 					end
 				else
 					if not teampoints[team] then -- init the value
 						teampoints[team] = 0
 					end
-					teampoints[team] = teampoints[team] + landsize
+					teampoints[team] = teampoints[team] + _landsizes[p.number]
 				end
 			end
-			if maxplayerpoints > ( mapsize / 2 ) then
+			if maxplayerpoints > ( #fields / 2 ) then
 				-- player owns more than half of the map's area
 				foundcandidate = true
 				if candidateisteam == false and currentcandidate == maxpointsplayer.name then
@@ -89,7 +113,7 @@ return {
 				end
 			else
 				for idx, t in ipairs(teamnumbers) do
-					if teampoints[t] > ( mapsize / 2 ) then
+					if teampoints[t] > ( #fields / 2 ) then
 						-- this team owns more than half of the map's area
 						foundcandidate = true
 						if candidateisteam == true and currentcandidate == _("Team %i"):format(t) then
@@ -126,7 +150,13 @@ return {
 			end
 		end
 
-
+		-- Start a new coroutine that checks for defeated players
+		run(function()
+			sleep(5000)
+			check_player_defeated(plrs, _ "You are defeated!",
+				_ ("You have nothing to command left. If you want, you may " ..
+		         "continue as spectator."))
+		end)
 
 		-- here is the main loop!!!
 		while true do
@@ -135,11 +165,6 @@ return {
 
 			-- Check if a player or team is a candidate and update variables
 			_calc_points()
-
-			-- Check whether one of the players got defeated and handle defeats
-			check_player_defeated(plrs, _ "You are defeated!",
-				_ ("You have nothing to command left. If you want, you may " ..
-				   "continue as spectator."))
 
 			-- Do this stuff, if the game is over
 			if remaining_time == 0 then

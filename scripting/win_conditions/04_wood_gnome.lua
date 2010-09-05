@@ -25,6 +25,22 @@ return {
 	broadcast(plrs, wc_name, wc_desc)
 
 	local remaining_time = 4 * 60 -- 4 hours
+
+	-- Get all valueable fields of the map
+	local fields = {}
+	local mapwidth  = wl.map.get_width()
+	local mapheight = wl.map.get_height()
+	for x=0,mapwidth-1 do
+		for y=0,mapheight-1 do
+			local f = wl.map.Field(x,y)
+			if f then
+				-- add this field to the list as long as it has not movecaps swim
+				if not f.has_movecaps_swim(f) then
+					fields[#fields+1] = f
+				end
+			end
+		end
+	end
 	
 	-- The function to calculate the current points.
 	local _last_time_calculated = -100000
@@ -39,20 +55,17 @@ return {
 			_plrpoints[plr.number] = 0
 		end
 
-		for x=0,wl.map.get_width()-1 do
-			for y=0,wl.map.get_height()-1 do
-				local f = wl.map.Field(x,y)
-				-- check if field is owned by a player
-				local owner = 0
-				if f.owners[1] then
-					owner = f.owners[1].number
-					-- check if field has an immovable
-					local imm = f.immovable
-					if imm then
-						-- check if immovable is a tree
-						if imm:has_attribute("tree") then
-						_plrpoints[owner] = _plrpoints[owner] + 1
-						end
+		for idf,f in ipairs(fields) do
+			-- check if field is owned by a player
+			local owner = 0
+			if f.owners[1] then
+				owner = f.owners[1].number
+				-- check if field has an immovable
+				local imm = f.immovable
+				if imm then
+					-- check if immovable is a tree
+					if imm:has_attribute("tree") then
+					_plrpoints[owner] = _plrpoints[owner] + 1
 					end
 				end
 			end
@@ -72,10 +85,7 @@ return {
 			msg = msg .. _ ("%i trees at the moment ."):format(playerpoints[plr.number])
 		end
 
-		-- reset variables
-		for idx, p in ipairs(plrs) do
-			p:send_message(_ "Status", msg)
-		end
+		broadcast(plrs, _ "Status", msg)
 	end
 
 	-- Start a new coroutine that checks for defeated players
