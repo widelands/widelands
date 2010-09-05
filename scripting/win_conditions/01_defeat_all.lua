@@ -13,31 +13,26 @@ return {
 	name = wc_name,
 	description = wc_desc,
 	func = function()
-		-- Find all valid players
 		local plrs = {}
 		valid_players(plrs)
 
-		-- send a message with the game type to all players
-		for idx, p in ipairs(plrs) do
-			p:send_message(wc_name, wc_desc)
-		end
+		broadcast(plrs, wc_name, wc_desc)
 
 		-- Iterate all players, if one is defeated, remove him
 		-- from the list, send him a defeated message and give him full vision
 		repeat
 			sleep(5000)
-			check_player_defeated(plrs, _ "You lost!",
-				_ "Sorry, you have lost this game!")
+			check_player_defeated(plrs, _ "You are defeated!",
+				_ ("You have nothing to command left. If you want, you may " ..
+				   "continue as spectator."))
 		until count_factions(plrs) <= 1
 
 		-- Send congratulations to all remaining players
-		for idx,p in ipairs(plrs) do
-			p:send_message(
+		broadcast(plrs, 
 				_ "Congratulations!",
 				_ "You have won this game!",
 				{popup = true}
-			)
-		end
+		)
 
 	end,
 }
