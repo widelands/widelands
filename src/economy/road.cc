@@ -123,7 +123,7 @@ bool Road::get_passable() const throw ()
 }
 
 BaseImmovable::PositionList Road::get_positions
-	(const Editor_Game_Base & egbase) const throw()
+	(const Editor_Game_Base & egbase) const throw ()
 {
 	Map & map = egbase.map();
 	Coords curf = map.get_fcoords(m_path.get_start());
@@ -291,15 +291,16 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 	 * request a new carrier
 	 */
 	if (upcast(Game, game, &egbase))
-		container_iterate(SlotVector, m_carrier_slots, i)
-			if (Carrier * const carrier = i.current->carrier.get(*game)) {
-				// This happens after a road split. Tell the carrier what's going on
-				carrier->set_location    (this);
-				carrier->update_task_road(*game);
-			} else if
-				(not i.current->carrier_request and
-				 i.current->carrier_type == 1)
-				_request_carrier(*i.current);
+	container_iterate(SlotVector, m_carrier_slots, i)
+		if (Carrier * const carrier = i.current->carrier.get(*game)) {
+			//  This happens after a road split. Tell the carrier what's going on.
+			carrier->set_location    (this);
+			carrier->update_task_road(*game);
+		} else if
+			(not i.current->carrier_request and
+			 (i.current->carrier_type == 1 or
+			  m_type == Road_Busy))
+			_request_carrier(*i.current);
 }
 
 /**
@@ -553,7 +554,8 @@ void Road::postsplit(Game & game, Flag & flag)
 					container_iterate(SlotVector, newroad.m_carrier_slots, k)
 						if
 							(not k.current->carrier.get(game) and
-							 not k.current->carrier_request)
+							 not k.current->carrier_request and
+							 k.current->carrier_type == j.current->carrier_type)
 						{
 							k.current->carrier = &ref_cast<Carrier, Worker> (w);
 							break;
@@ -581,7 +583,8 @@ void Road::postsplit(Game & game, Flag & flag)
 		if
 			(not i.current->carrier.get(game) and
 			 not i.current->carrier_request and
-			 i.current->carrier_type == 1)
+			 (i.current->carrier_type == 1 or
+			  m_type == Road_Busy))
 			_request_carrier(*i.current);
 
 	//  Make sure items waiting on the original endpoint flags are dealt with.

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 16:38+0000\n"
-"Last-Translator: WalterCool <waltercool@slash.cl>\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"PO-Revision-Date: 2010-07-05 15:47+0000\n"
+"Last-Translator: Jonay <jonay.santana@gmail.com>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-07-06 03:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -23,119 +23,13 @@ msgstr ""
 msgid "(Tutorial) Barbarians - The second Empire"
 msgstr "(Tutorial) Bárbaros - El segundo imperio"
 
-#: ../../campaigns/cconfig:27
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons and warlord to an army that could match any enemy willing to "
-"rise against the ancient forests. Though his glorious reign, Chat’Karuth "
-"left his eldest son Thron in the due to succeed him as the tribes warlord – "
-"a decision that left his two brothers unsatisfied. The old warlord knew "
-"that. As his father told him, Thron left the capital of Al’thunran, the home "
-"of the throne among the trees and redrew his forces to the high hills where "
-"he buried the corpse of his father and swore to the gods and his spirit, "
-"that he’d return to re-established order. While his brothers raged in blind "
-"war against Thron and the few forces he left to secure the borders of "
-"Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
-"force the tribes to march once again under a common banner."
-msgstr ""
-"Cuando murió Chat’Karuth, era un anciano, padre de tres hijos fuertes y "
-"ambiciosos y señor de la guerra de un ejército que puede competir con "
-"cualquier enemigo dispuesto a levantarse contra los bosques antiguos. Aunque "
-"su reino glorioso, Chat'Karuth dejó su hijo mayor Thron como el sucesor del "
-"señor de la guerra de las tribus - una decisión que dejó a sus dos hermanos "
-"insatisfechos. El viejo señor de la guerra lo sabía. Como su padre le dijo, "
-"Thron salió de la capital de Al'thunran, la casa del trono entre los árboles "
-"y fue a preparar a sus fuerzas en las altas montañas donde se encontraba el "
-"cadáver de su padre. Este juró a los dioses y a el espíritu de su padre, que "
-"él volverá a restablecer el orden. Mientras sus hermanos se enfrascaban en "
-"una guerra ciega contra Thron y las pocas fuerzas que este dejó para "
-"asegurar las fronteras de Al'thunran. El joven guerrero busca reunir a sus "
-"ambiciosos hermanos y la fuerza de las tribus, para marchar de nuevo bajo "
-"una bandera común."
-
-#: ../../campaigns/cconfig:30
-msgid "Empire - The months of exile"
-msgstr "Imperio - Los meses de exelio"
-
-#: ../../campaigns/cconfig:33
-msgid ""
-"Six month ago, Lutius - a young general of the Empire - was send with 150 "
-"soldiers at the frontier among the northern forests, where Barbarian-tribes "
-"and official Empire-land are crossing. His task was to defend the Empire-"
-"land. First everything was calm, he even talked to few barbarian children "
-"and thought about a peaceful life - side by side with this archaic folk. He "
-"began to feel saver and his army begun to draw off the attention on they "
-"potential enemy - that was their fault. At one night in March his unprepared "
-"army was attacked by 100 barbarian footmen and was completely scattered. "
-"Only with pure life he and a handful of soldiers survived."
-msgstr ""
-"Hace seis meses, Lutius, un joven general del Imperio, fue envíado con 150 "
-"soldados a la frontera entre los bosques del norte, donde las tribus "
-"bárbaras y los dominios del Imperio se cruzan. Su misión era defender el "
-"Imperio. Al principio todo estaba en calma, incluso hablaba con niños "
-"bárbaros y pensaba en una vida pacífica mano a mano con estos arcaicos "
-"amigos. Se comenzó a sentir seguro y su ejército bajó la guardia ante el "
-"potencial enemigo, ese fué su error. Una noche de marzo su desprevenido "
-"ejército fue atacado por 100 soldados bárbaros y fue completamente "
-"derrotado. Sólo él y un puñado de soldados sobrevivieron."
-
-#: ../../campaigns/cconfig:36
-msgid "Atlanteans - the new rise"
-msgstr "Atlantes - el nuevo surgir"
-
-#: ../../campaigns/cconfig:39
-msgid "Some descriptive texts..."
-msgstr "Algunos textos descriptivos..."
-
-#: ../../campaigns/cconfig:57
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Tutorial 1 - Ojos en la Oscuridad"
-
-#: ../../campaigns/cconfig:62
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutorial 2 - Un lugar llamado Hogar"
-
-#: ../../campaigns/cconfig:67
-msgid "Tutorial3 - This land is our land"
-msgstr "Tutorial 3 - Esta es nuestra tierra"
-
-#: ../../campaigns/cconfig:74
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Imperio: Tutorial 1 - Las hebras de Malac' Mor"
-
-#: ../../campaigns/cconfig:79
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Imperio 2: Avanzadilla hacia el exilio"
-
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
 msgstr "01 - Del némesis al génesis"
 
-#: ../../maps/Atoll.wmf/elemental:7
-msgid "Atoll"
-msgstr "El Atolón"
-
-#: ../../maps/Atoll.wmf/elemental:9
-msgid "Who will be the real King of the big atoll?"
-msgstr "¿Quién será el verdadero rey del gran atolón?"
-
-#: ../../maps/Checkmate.wmf/elemental:7
-msgid "Checkmate"
-msgstr "Jaque Mate"
-
-#: ../../maps/Checkmate.wmf/elemental:9
-msgid ""
-"Whether just one of nature's strangest features or the creation of a mad "
-"(and game-hungry) god, this weird battleground awaits two opponents for "
-"another confrontation."
-msgstr ""
-"Sea una de los más extraños caprichos de la naturaleza o la creación de un "
-"dios loco (y jugador), este singular campo de batalla espera a dos oponentes "
-"para otro enfrentamiento."
-
-#: ../../maps/Comet Island.wmf/elemental:7
-msgid "Comet Island"
-msgstr "Isla del Cometa"
+#: ../../maps/Enemy in sight.wmf/elemental:9
+msgid "A Multiplayer-battle-map on a X-Shaped island."
+msgstr "Un mapa de batalla multijugador en una isla con forma de X."
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -151,115 +45,6 @@ msgstr ""
 "Es ésta una señal de los dioses? Cree y mantén la esperanza, que tu tribu "
 "podrá encontrar el tesoro de esta isla, antes de que otras tribus lo hagan."
 
-#: ../../maps/Crater.wmf/elemental:9
-msgid "Crater"
-msgstr "Cráter"
-
-#: ../../maps/Crater.wmf/elemental:11
-msgid ""
-"Long after a meteor crashed into a couple of mountains, life blossoms in the "
-"crater. Two tribes are now fighting for the rich resources."
-msgstr ""
-"Mucho tiempo después de que un meteorito se estrellase en un par de "
-"montañas, la vida surgió en el cráter. Dos tribus están luchado ahora por "
-"los preciados recursos."
-
-#: ../../maps/Dry Riverbed.wmf/elemental:7
-msgid "Dry Riverbed"
-msgstr "Cauce Seco"
-
-#: ../../maps/Dry Riverbed.wmf/elemental:9
-msgid ""
-"It was a long time ago, since the last raindrop touched these grounds. No "
-"wonder, that there is not much water left in this dry riverbed. Everyone "
-"knows: soon there will be a war. A war about the last of water."
-msgstr ""
-"Hace mucho tiempo desde que la última gota de lluvia tocó estas tierras. No "
-"es de extrañar que no quede mucha agua es este cauce seco de río. Todo el "
-"mundo lo sabe: pronto habrá una guerra. Una guerra por la última agua."
-
-#: ../../maps/Elven Forests.wmf/elemental:7
-msgid "Elven Forests"
-msgstr "Bosques Élficos"
-
-#: ../../maps/Elven Forests.wmf/elemental:9
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt of taking them for themselves."
-msgstr ""
-"La asombrosa belleza de estas tierras esmeralda ha inducido a muchas tribus "
-"a intentar conquistarlas."
-
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid "Enemy in sight"
-msgstr "Enemigo a la vista"
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "Un mapa de batalla multijugador en una isla con forma de X."
-
-#: ../../maps/Finlakes.wmf/elemental:9
-msgid "Finnish Lakes"
-msgstr "Lagos Finlandeses"
-
-#: ../../maps/Finlakes.wmf/elemental:11
-msgid ""
-"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
-"forests and mountains. It is up to you, to find a way through these lands."
-msgstr ""
-"Estas son las bellas tierras finlandesas, que tienen lagos, ríos, bosques "
-"antiguos y montañas. Te corresponde, encontrar una manera de atravesar estas "
-"tierras."
-
-#: ../../maps/Firegames.wmf/elemental:7
-msgid "Firegames"
-msgstr "Juegos de fuego"
-
-#: ../../maps/Firegames.wmf/elemental:9
-msgid ""
-"Is this a test by the Gods or an evil plan by someone else, that you and "
-"your tribe woke up on this island among fire and lava? Until now it seems as "
-"if you are alone, but no-one knows, what might happen if you meet an "
-"opponent tribe?"
-msgstr ""
-"¿Es esto una prueba de los dioses o un plan mal de alguien más, que tu y tu "
-"tribu despierten en esta isla entre fuego y lava? Hasta ahora parece que "
-"estás solo, pero nadie sabe, que podría suceder si te encuentras con una "
-"tribu rival?"
-
-#: ../../maps/Four Castles.wmf/elemental:7
-msgid "Four Castles"
-msgstr "Cuatro Castillos"
-
-#: ../../maps/Four Castles.wmf/elemental:9
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
-msgstr ""
-"Bien protegidos en sus poderosas fortalezas, cuatro caudillos hambrientos de "
-"poder están finalizando sus planes para dominar estas tierras ..."
-
-#: ../../maps/Four Mountains.wmf/elemental:9
-msgid "Four Mountains"
-msgstr "Cuatro Montañas"
-
-#: ../../maps/Four Mountains.wmf/elemental:11
-msgid ""
-"Each tribe is surrounded by four mighty mountains. Who will first conquer "
-"them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
-"Each mountain contains only one resource."
-msgstr ""
-"Cada tribu está rodeada por cuatro grandes montañas. Quién será el primero "
-"que las conquistará  y reclamara los recursos para su propia tribu? "
-"Sugerencia I: El agua se puede encontrar a lo largo del río. Sugerencia II: "
-"Los muñecos de nieve marcan fuentes de agua adicionales. Consejo 3: Cada "
-"montaña contiene sólo un recurso."
-
-#: ../../maps/Glacier Lake.wmf/elemental:7
-msgid "Glacier Lake"
-msgstr "Lago Helado"
-
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
 "A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
@@ -272,17 +57,18 @@ msgstr ""
 "hace unos meses otra tribu de las montañas ha llegado y se ha establecido. Y "
 "tu lo sabes, solo hay espacio para una sola tribu."
 
-#: ../../maps/Golden Peninsula.wmf/elemental:7
-msgid "Golden Peninsula"
-msgstr "Península Dorada"
+#: ../../maps/Two frontiers.wmf/elemental:9
+msgid "A multiplayer-battle-map on a small circle-shaped island."
+msgstr ""
+"Un mapa de batalla multijugador situado en una isla pequeña circular."
 
-#: ../../maps/Golden Peninsula.wmf/elemental:9
-msgid "Two empires race for the treasures of a legendary peninsula..."
-msgstr "Dos imperios compiten por los tesoros de una península legendaria..."
-
-#: ../../maps/Impact.wmf/elemental:7
-msgid "Impact"
-msgstr "Impacto"
+#: ../../maps/Riverlands.wmf/elemental:9
+msgid ""
+"A mystical land, full of different landscapes, which are all crossed by a "
+"handful of big rivers."
+msgstr ""
+"Una tierra mística, repleta de diferentes paisajes, todos atravesados por un "
+"puñado de grandes ríos."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -294,9 +80,92 @@ msgstr ""
 "están conectadas por hielo y piedra, fijando el fin a la coexistencia "
 "pacífica de las tres tribus."
 
-#: ../../maps/Islands at war.wmf/elemental:9
-msgid "Islands at war"
-msgstr "Islas en guerra"
+#: ../../maps/The long way.wmf/elemental:9
+msgid ""
+"Another strange test by the Gods. To reach the other side, there seems to be "
+"no other way, than occupying the land of your enemies."
+msgstr ""
+"Otra extraña prueba de los Dioses. Para alcanzar la otra orilla, parece que "
+"no hay otro camino salvo atravesar la tierra de tus enemigos."
+
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid ""
+"Another thaw set in. Three tribes were sheltering form severe winter among "
+"majestic mountains. During solstice they listened to the oracle and went on "
+"to war. The only survivor will sacrifice his enemies' treasures on the "
+"ancient altar, build there a splendid castle and gain goodwill and the "
+"respect of the Gods."
+msgstr ""
+"Otro deshielo se ha colocado. Tres tribus estuvieron en refugio por largos "
+"inviernos entre majestuosas montañas. Durante el solsticio ellos escucharon "
+"al oráculo y fueron a la guerra. El único sobreviviente deberá sacrificar "
+"los tesoros enemigos en el antiguo altar, construir en dicho lugar un "
+"espléndido castillo y ganar la buena voluntad y respeto de los dioses."
+
+#: ../../campaigns/cconfig:36
+msgid "Atlanteans - the new rise"
+msgstr "Atlantes - el nuevo surgir"
+
+#: ../../maps/Atoll.wmf/elemental:7
+msgid "Atoll"
+msgstr "El Atolón"
+
+#: ../../maps/Checkmate.wmf/elemental:7
+msgid "Checkmate"
+msgstr "Jaque Mate"
+
+#: ../../maps/Comet Island.wmf/elemental:7
+msgid "Comet Island"
+msgstr "Isla del Cometa"
+
+#: ../../maps/Crater.wmf/elemental:7
+msgid "Crater"
+msgstr "Cráter"
+
+#: ../../maps/Dry Riverbed.wmf/elemental:7
+msgid "Dry Riverbed"
+msgstr "Cauce Seco"
+
+#: ../../maps/Four Mountains.wmf/elemental:9
+msgid ""
+"Each tribe is surrounded by four mighty mountains. Who will first conquer "
+"them and claim the resources for his own tribe? Hint I: Water can be found "
+"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"Each mountain contains only one resource."
+msgstr ""
+"Cada tribu está rodeada por cuatro grandes montañas. Quién será el primero "
+"que las conquistará  y reclamara los recursos para su propia tribu? "
+"Sugerencia I: El agua se puede encontrar a lo largo del río. Sugerencia II: "
+"Los muñecos de nieve marcan fuentes de agua adicionales. Consejo 3: Cada "
+"montaña contiene sólo un recurso."
+
+#: ../../maps/Elven Forests.wmf/elemental:7
+msgid "Elven Forests"
+msgstr "Bosques Élficos"
+
+#: ../../campaigns/cconfig:30
+msgid "Empire - The months of exile"
+msgstr "Imperio - Los meses de exelio"
+
+#: ../../campaigns/cconfig:74
+msgid "Empire Tutorial1 - The strands of Malac' Mor"
+msgstr "Imperio: Tutorial 1 - Las hebras de Malac' Mor"
+
+#: ../../campaigns/cconfig:79
+msgid "Empire Tutorial2 - An outpost for exile"
+msgstr "Imperio 2: Avanzadilla hacia el exilio"
+
+#: ../../maps/Enemy in sight.wmf/elemental:7
+msgid "Enemy in sight"
+msgstr "Enemigo a la vista"
+
+#: ../../maps/Finlakes.wmf/elemental:9
+msgid "Finnish Lakes"
+msgstr "Lagos Finlandeses"
+
+#: ../../maps/Firegames.wmf/elemental:7
+msgid "Firegames"
+msgstr "Juegos de fuego"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
@@ -306,111 +175,6 @@ msgid ""
 msgstr ""
 "Por siglos has vivido pacíficamente junto a la otra tribu de la isla vecina. "
 "Esta paz parece haber acabado ahora - tu vecino comenzó a expandirse."
-
-#: ../../maps/Lake of tranquility.wmf/elemental:7
-msgid "Lake of Tranquility"
-msgstr "Lago de la Tranquilidad"
-
-#: ../../maps/Lake of tranquility.wmf/elemental:9
-msgid ""
-"This lake, deep in the most ancient forests, has long been known for its "
-"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
-"hostile tribes arrive at its shores..."
-msgstr ""
-"Este lago, en lo más profundo de un antiguo bosque, ha sido siempre conocido "
-"por su belleza y su paz idílica. Más su gloria se ve ahora en peligro, ya "
-"que dos tribus hostiles arriban a sus orillas..."
-
-#: ../../maps/Last Bastion.wmf/elemental:9
-msgid "Last Bastion"
-msgstr "El Último Bastión"
-
-#: ../../maps/Last Bastion.wmf/elemental:11
-msgid ""
-"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
-"Sun heated up the Earth and melted glaciers and people plunged into the "
-"deep. But now - high in the majestic mountains, on the last scrap of land - "
-"two surviving tribes are sheltering. Even though the Gods showed mercy and "
-"the climate thus turned cooler again the water is still rising and rising. "
-"Onto the last secure place - the highest mountain range where the amount of "
-"gold and the space to live merely suffice for one tribe - only two opposite "
-"paths lead. But remember, be careful... this last living space is also a "
-"hard and small place to live. Don't forget to take care about your timber "
-"supplies, you'll need them."
-msgstr ""
-"Los dioses caprichosos no ha respondido nuestras oraciones. En cambio, el "
-"sol mil veces más caliente ha elevado la temperatura de la Tierra, ha "
-"derretido los glaciares y la gente se sumergió en las profundidades. Pero "
-"ahora - en las montañas majestuosas, en el último fragmento de la tierra - "
-"dos tribus sobrevivientes se refugian. A pesar dque los dioses se mostraron "
-"amables y el clima se volvió más fresco de nuevo el agua sigue subiendo y "
-"subiendo. En el último lugar seguro - la montaña más alta, donde la cantidad "
-"de oro y el espacio para vivir es suficiente para una tribu - sólo dos "
-"caminos se oponen. Pero recuerda, ten cuidad ... este último espacio de vida "
-"es también un lugar duro y pequeño para vivir. No te olvides de tener "
-"cuidado acerca de tu suministro de madera,  la necesitarás."
-
-#: ../../maps/Mystical Maze.wmf/elemental:9
-msgid "Mystical Maze"
-msgstr "El Laberinto Místico"
-
-#: ../../maps/Mystical Maze.wmf/elemental:11
-msgid ""
-"There are two big questions around: Who created this unbelievably big maze "
-"and what can be found inside?"
-msgstr ""
-"Hay dos grandes preguntas rodeando: ¿Quién ha creado este increíblemente "
-"gran laberinto y que puede ser encontrado dentro?"
-
-#: ../../maps/Plateau.wmf/elemental:7
-msgid "The Green Plateau"
-msgstr "La Meseta Verde"
-
-#: ../../maps/Plateau.wmf/elemental:9
-msgid ""
-"You are standing on an island, crowned by mighty mountains, which keep a "
-"wonderful and mighty treasure in their middle - The Green Plateau, which is "
-"hard to get, but easy to lose, so if you want it, be aware of the other "
-"clans."
-msgstr ""
-"Estás en pié en una isla, coronada por impresionantes montañas, que esconden "
-"un maravilloso y mágico tesoro en su corazón - La Meseta Verde, que es "
-"difícil de conquistar, pero fácil de perder. Así que, si la quieres, "
-"mantente prevenido de los otros clanes."
-
-#: ../../maps/Rendez-Vous.wmf/elemental:9
-msgid "Rendez-Vous"
-msgstr "Cita"
-
-#: ../../maps/Rendez-Vous.wmf/elemental:11
-msgid ""
-"Only a small hill in the centre of the map connects these four competing "
-"tribes. Lead your army right away to this hill and build a giant stronghold "
-"as a sign of your superiority! Hint: In the centre is only space for one "
-"stronghold. Water can be found everywhere, so there is no need to send out "
-"geologists."
-msgstr ""
-"Sólo una pequeña colina en el centro del mapa conecta estas cuatro tribus "
-"competentes. Guía a tu ejército de inmediato a esta colina y construye una "
-"fortaleza gigante como un signo de su superioridad! Sugerencia: En el centro "
-"sólo hay espacio para una fortaleza. El agua se puede encontrar en todas "
-"partes, lo que no hay necesidad de enviar a los geólogos."
-
-#: ../../maps/Riverlands.wmf/elemental:7
-msgid "Riverlands"
-msgstr "Marismas"
-
-#: ../../maps/Riverlands.wmf/elemental:9
-msgid ""
-"A mystical land, full of different landscapes, which are all crossed by a "
-"handful of big rivers."
-msgstr ""
-"Una tierra mística, repleta de diferentes paisajes, todos atravesados por un "
-"puñado de grandes ríos."
-
-#: ../../maps/Sun of fire.wmf/elemental:9
-msgid "The ancient sun of fire"
-msgstr "El antiguo sol de fuego"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -424,9 +188,71 @@ msgstr ""
 "que una tribu se ha atrevido a establecerse en la costa de esta isla, muchas "
 "otras la siguieron después."
 
-#: ../../maps/Swamp Island.wmf/elemental:9
-msgid "Swamp Island"
-msgstr "Isla Cenagosa"
+#: ../../maps/Four Castles.wmf/elemental:7
+msgid "Four Castles"
+msgstr "Cuatro Castillos"
+
+#: ../../maps/Four Mountains.wmf/elemental:7
+msgid "Four Mountains"
+msgstr "Cuatro Montañas"
+
+#: ../../maps/Glacier Lake.wmf/elemental:7
+msgid "Glacier Lake"
+msgstr "Lago Helado"
+
+#: ../../maps/Golden Peninsula.wmf/elemental:7
+msgid "Golden Peninsula"
+msgstr "Península Dorada"
+
+#: ../../maps/Impact.wmf/elemental:7
+msgid "Impact"
+msgstr "Impacto"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:11
+msgid ""
+"In this mountainous area two princes have settled. Now they are expanding "
+"their territories unaware of the fact that they are not alone!"
+msgstr ""
+"En este área montañosa dos príncipes se han establecido. Ahora están "
+"expandiendo sus territorios sin preocuparse de que no están solos."
+
+#: ../../maps/Firegames.wmf/elemental:9
+msgid ""
+"Is this a test by the Gods or an evil plan by someone else, that you and "
+"your tribe woke up on this island among fire and lava? Until now it seems as "
+"if you are alone, but no-one knows, what might happen if you meet an "
+"opponent tribe?"
+msgstr ""
+"¿Es esto una prueba de los dioses o un plan mal de alguien más, que tu y tu "
+"tribu despierten en esta isla entre fuego y lava? Hasta ahora parece que "
+"estás solo, pero nadie sabe, que podría suceder si te encuentras con una "
+"tribu rival?"
+
+#: ../../maps/Islands at war.wmf/elemental:9
+msgid "Islands at war"
+msgstr "Islas en guerra"
+
+#: ../../maps/War of the Valleys.wmf/elemental:9
+msgid ""
+"It is said that even sun and moon must find their way between the spires of "
+"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
+"Geologists elsewhere."
+msgstr ""
+"Está escrito que incluso el sol y la luna deben encontrar su camino entre "
+"las espirales de estas montañas. PISTA: los monolitos marcan vetas de "
+"mineral. No te molestes en enviar Geólogos a otra parte."
+
+#: ../../maps/Wisent Valley.wmf/elemental:11
+msgid ""
+"It seems as if this magical valley was inhabited by wisents since the "
+"beginning of days. When your tribe came to this place, you were sure that it "
+"offers enough space for a peaceful life. But can your tribe live in peace "
+"with your neighbours?"
+msgstr ""
+"Parece como si este valle mágico fuese habitado por sabios desde el "
+"principio de los tiempos. Cuando tu tribu vino a este lugar, estuviste "
+"seguro de que ofrecería espacio suficiente para una vida en paz. Pero, "
+"¿puede tu tribu vivir en paz con tus vecinos?"
 
 #: ../../maps/Swamp Island.wmf/elemental:11
 msgid ""
@@ -437,9 +263,104 @@ msgstr ""
 "Huele como una ciénaga, lo parece y lo es. Pero es el lugar en el que "
 "naciste y has vivido toda tu vida. Si no quieres perderla, defiéndela. "
 
-#: ../../maps/The Far North.wmf/elemental:9
-msgid "The Far North"
-msgstr "El Lejano Norte"
+#: ../../maps/Dry Riverbed.wmf/elemental:9
+msgid ""
+"It was a long time ago, since the last raindrop touched these grounds. No "
+"wonder, that there is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last of water."
+msgstr ""
+"Hace mucho tiempo desde que la última gota de lluvia tocó estas tierras. No "
+"es de extrañar que no quede mucha agua es este cauce seco de río. Todo el "
+"mundo lo sabe: pronto habrá una guerra. Una guerra por la última agua."
+
+#: ../../maps/Lake of tranquility.wmf/elemental:7
+msgid "Lake of Tranquility"
+msgstr "Lago de la Tranquilidad"
+
+#: ../../maps/Last Bastion.wmf/elemental:9
+msgid "Last Bastion"
+msgstr "El Último Bastión"
+
+#: ../../maps/Crater.wmf/elemental:9
+msgid ""
+"Long after a meteor crashed into a couple of mountains, life blossoms in the "
+"crater. Two tribes are now fighting for the rich resources."
+msgstr ""
+"Mucho tiempo después de que un meteorito se estrellase en un par de "
+"montañas, la vida surgió en el cráter. Dos tribus están luchado ahora por "
+"los preciados recursos."
+
+#: ../../maps/Twinkling Waves.wmf/elemental:11
+msgid ""
+"Many beautiful, green islands await the ones brave enough to pass the "
+"thousand waves, twinkling in the sun."
+msgstr ""
+"Muchas bellas islas verdes esperan a los mas valientes capaces de pasar las "
+"mil olas, brillando en el sol."
+
+#: ../../maps/Three Warriors.wmf/elemental:11
+msgid ""
+"Mighty mountains divide this land into three fertile valleys. But a path "
+"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
+"found around the lakes."
+msgstr ""
+"Poderosas montañas dividen esta tierra en tres fértiles valles. Pero una "
+"caminoconecta los valles y por tanto la lucha parece inevitable. Pista: "
+"Puede encontrase agua alrededor de los lagos."
+
+#: ../../maps/Mystical Maze.wmf/elemental:9
+msgid "Mystical Maze"
+msgstr "El Laberinto Místico"
+
+#: ../../maps/Rendez-Vous.wmf/elemental:9
+msgid ""
+"Only a small hill in the centre of the map connects these four competing "
+"tribes. Lead your army right away to this hill and build a giant stronghold "
+"as a sign of your superiority! Hint: In the centre is only space for one "
+"stronghold. Water can be found everywhere, so there is no need to send out "
+"geologists."
+msgstr ""
+"Sólo una pequeña colina en el centro del mapa conecta estas cuatro tribus "
+"competentes. Guía a tu ejército de inmediato a esta colina y construye una "
+"fortaleza gigante como un signo de su superioridad! Sugerencia: En el centro "
+"sólo hay espacio para una fortaleza. El agua se puede encontrar en todas "
+"partes, lo que no hay necesidad de enviar a los geólogos."
+
+#: ../../maps/Rendez-Vous.wmf/elemental:7
+msgid "Rendez-Vous"
+msgstr "Cita"
+
+#: ../../maps/Riverlands.wmf/elemental:7
+msgid "Riverlands"
+msgstr "Marismas"
+
+#: ../../campaigns/cconfig:33
+msgid ""
+"Six months ago, Lutius - a young general of the Empire - was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire's land. At first, everything was calm. He even talked to a few "
+"barbarian children and thought about a peaceful life - side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr ""
+"Hace seis meses, Lutius, un joven general del Imperio, fue enviado junto con "
+"150 soldados a la frontera más allá de los bosques del norte donde las "
+"tribus Bárbaras cruzaban a las tierras del Imperio. Su misión era defender "
+"las tierras del Imperio. Al principio todo estaba tranquilo. Incluso habló "
+"con algunos niños bárbaros y pensó en una vida tranquila, viviendo en este "
+"pueblo arcaico. Empezó a sentirse más seguro, y su ejército bajó la guardia "
+"ante el potencial enemigo. Este fue su error. Una noche de marzo su "
+"ejército, completamente desprotegido, fue atacado por 100 soldados bárbaros "
+"y fue completamente dispersado. Sólo fue capaz de escapar con lo puesto, al "
+"igual que un puñado de sus soldados."
+
+#: ../../campaigns/cconfig:39
+msgid "Some descriptive texts..."
+msgstr "Algunos textos descriptivos..."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -469,9 +390,57 @@ msgstr ""
 "embargo, muchos murieron separados por los lobos, rodeado por pantanos ... "
 "rodeados por tribus hostiles."
 
+#: ../../maps/Swamp Island.wmf/elemental:9
+msgid "Swamp Island"
+msgstr "Isla Cenagosa"
+
+#: ../../maps/The Far North.wmf/elemental:9
+msgid "The Far North"
+msgstr "El Lejano Norte"
+
+#: ../../maps/Plateau.wmf/elemental:7
+msgid "The Green Plateau"
+msgstr "La Meseta Verde"
+
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
 msgstr "El Triángulo de Oasis"
+
+#: ../../maps/The Thaw.wmf/elemental:9
+msgid "The Thaw"
+msgstr "El Deshielo"
+
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The ancient sun of fire"
+msgstr "El antiguo sol de fuego"
+
+#: ../../maps/The big lake.wmf/elemental:7
+msgid "The big lake"
+msgstr "El gran lago"
+
+#: ../../maps/Elven Forests.wmf/elemental:9
+msgid ""
+"The breath-taking beauty of these emerald lands has lured many tribes into "
+"an attempt of taking them for themselves."
+msgstr ""
+"La asombrosa belleza de estas tierras esmeralda ha inducido a muchas tribus "
+"a intentar conquistarlas."
+
+#: ../../maps/The long way.wmf/elemental:7
+msgid "The long way"
+msgstr "El largo camino"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:9
+msgid "The pass through the mountains"
+msgstr "El paso por las montañas"
+
+#: ../../maps/Mystical Maze.wmf/elemental:11
+msgid ""
+"There are two big questions around: Who created this unbelievably big maze "
+"and what can be found inside?"
+msgstr ""
+"Hay dos grandes preguntas rodeando: ¿Quién ha creado este increíblemente "
+"gran laberinto y que puede ser encontrado dentro?"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid ""
@@ -483,27 +452,14 @@ msgstr ""
 "los cuales nadie ha descubierto todavía. Quizá tu seas el elegido, pero ten "
 "cuidado con los otros, que también están buscando."
 
-#: ../../maps/The Thaw.wmf/elemental:9
-msgid "The Thaw"
-msgstr "El Deshielo"
-
-#: ../../maps/The Thaw.wmf/elemental:11
+#: ../../maps/Finlakes.wmf/elemental:11
 msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
-"majestic mountains. During solstice they listened to the oracle and went on "
-"to war. The only survivor will sacrifice his enemies' treasures on the "
-"ancient altar, build there a splendid castle and gain goodwill and the "
-"respect of the Gods."
+"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
+"forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
-"Otro deshielo se ha colocado. Tres tribus estuvieron en refugio por largos "
-"inviernos entre majestuosas montañas. Durante el solsticio ellos escucharon "
-"al oráculo y fueron a la guerra. El único sobreviviente deberá sacrificar "
-"los tesoros enemigos en el antiguo altar, construir en dicho lugar un "
-"espléndido castillo y ganar la buena voluntad y respeto de los dioses."
-
-#: ../../maps/The big lake.wmf/elemental:7
-msgid "The big lake"
-msgstr "El gran lago"
+"Estas son las bellas tierras finlandesas, que tienen lagos, ríos, bosques "
+"antiguos y montañas. Te corresponde, encontrar una manera de atravesar estas "
+"tierras."
 
 #: ../../maps/The big lake.wmf/elemental:9
 msgid ""
@@ -521,94 +477,141 @@ msgstr ""
 "este anillo de lo que una vez fue una imponente montaña. ¿Crees que será "
 "suficientemente grande para más de una tribu?"
 
-#: ../../maps/The long way.wmf/elemental:7
-msgid "The long way"
-msgstr "El largo camino"
-
-#: ../../maps/The long way.wmf/elemental:9
+#: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid ""
-"Another strange test by the Gods. To reach the other side, there seems to be "
-"no other way, than occupying the land of your enemies."
+"This lake, deep in the most ancient forests, has long been known for its "
+"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
+"hostile tribes arrive at its shores..."
 msgstr ""
-"Otra extraña prueba de los Dioses. Para alcanzar la otra orilla, parece que "
-"no hay otro camino salvo atravesar la tierra de tus enemigos."
-
-#: ../../maps/The pass through the mountains.wmf/elemental:9
-msgid "The pass through the mountains"
-msgstr "El paso por las montañas"
-
-#: ../../maps/The pass through the mountains.wmf/elemental:11
-msgid ""
-"In this mountainous area two princes have settled. Now they are expanding "
-"their territories unaware of the fact that they are not alone!"
-msgstr ""
-"En este área montañosa dos príncipes se han establecido. Ahora están "
-"expandiendo sus territorios sin preocuparse de que no están solos."
+"Este lago, en lo más profundo de un antiguo bosque, ha sido siempre conocido "
+"por su belleza y su paz idílica. Más su gloria se ve ahora en peligro, ya "
+"que dos tribus hostiles arriban a sus orillas..."
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
 msgstr "Tres Guerreros"
 
-#: ../../maps/Three Warriors.wmf/elemental:11
-msgid ""
-"Mighty mountains divide this land into three fertile valleys. But a path "
-"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
-"found around the lakes."
-msgstr ""
-"Poderosas montañas dividen esta tierra en tres fértiles valles. Pero una "
-"caminoconecta los valles y por tanto la lucha parece inevitable. Pista: "
-"Puede encontrase agua alrededor de los lagos."
+#: ../../campaigns/cconfig:57
+msgid "Tutorial1 - Eyes in the Dark"
+msgstr "Tutorial 1 - Ojos en la Oscuridad"
+
+#: ../../campaigns/cconfig:62
+msgid "Tutorial2 - A Place to call Home"
+msgstr "Tutorial 2 - Un lugar llamado Hogar"
+
+#: ../../campaigns/cconfig:67
+msgid "Tutorial3 - This land is our land"
+msgstr "Tutorial 3 - Esta es nuestra tierra"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "aguas parpadeantes"
 
-#: ../../maps/Twinkling Waves.wmf/elemental:11
-msgid ""
-"Many beautiful, green islands await the ones brave enough to pass the "
-"thousand waves, twinkling in the sun."
-msgstr ""
-"Muchas bellas islas verdes esperan a los mas valientes capaces de pasar las "
-"mil olas, brillando en el sol."
-
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
 msgstr "Dos Fronteras"
 
-#: ../../maps/Two frontiers.wmf/elemental:9
-msgid "A multiplayer-battle-map on a small circle-shaped island."
-msgstr ""
-"Un mapa de batalla multijugador situado en una isla pequeña circular."
+#: ../../maps/Golden Peninsula.wmf/elemental:9
+msgid "Two empires race for the treasures of a legendary peninsula..."
+msgstr "Dos imperios compiten por los tesoros de una península legendaria..."
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "Guerra de Valles"
 
-#: ../../maps/War of the Valleys.wmf/elemental:9
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
-"It is said that even sun and moon must find their way between the spires of "
-"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
-"Geologists elsewhere."
+"Well protected in their mighty fortresses, four power-hungry warlords are "
+"completing their schemes to dominate these lands..."
 msgstr ""
-"Está escrito que incluso el sol y la luna deben encontrar su camino entre "
-"las espirales de estas montañas. PISTA: los monolitos marcan vetas de "
-"mineral. No te molestes en enviar Geólogos a otra parte."
+"Bien protegidos en sus poderosas fortalezas, cuatro caudillos hambrientos de "
+"poder están finalizando sus planes para dominar estas tierras ..."
+
+#: ../../campaigns/cconfig:27
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons and warlord to an army that could match any enemy willing to "
+"rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord "
+"knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father's spirit that he’d return to re-established "
+"order. While his brothers raged in blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr ""
+"Cuando murió Chat'Karuth era un hombre viejo, padre de tres hijos fuertes y "
+"ambiciosos, y señor de la guerra de un ejército que podía rivalizar con "
+"cualquier enemigo que quisiera alzarse contra los antiguos bosques. Pero al "
+"final de su glorioso reinado, Chat'Karuth dejó a su hijo mayor, Thron, "
+"ocupando su lugar como señor de la guerra, una decisión que no dejó "
+"satisfechos a sus dos hermanos. El viejo señor de la guerra lo sabía. Tal y "
+"como le aconsejó su padre, Thron dejó la capital de Al'thunran, hogar del "
+"Trono Entre los Árboles, y retiró sus fuerzas a las altas colinas donde "
+"enterró el cuerpo de su padre. Allí jutó a los dioses y al espíritu de su "
+"padre que volvería para restablecer el orden. Mientras sus hermanos se "
+"enzarzaban en una guerra ciega contra Thron y las pocas fuerzas que había "
+"dejado para asegurar las fronteras de Al'thunran, el joven señor de la "
+"guerra trata de reunir a sus ambiciosos hermanos y forzar a las tribus a "
+"marchar una vez más unidas bajo una enseña común."
+
+#: ../../maps/Checkmate.wmf/elemental:9
+msgid ""
+"Whether just one of nature's strangest features or the creation of a mad "
+"(and game-hungry) god, this weird battleground awaits two opponents for "
+"another confrontation."
+msgstr ""
+"Sea una de los más extraños caprichos de la naturaleza o la creación de un "
+"dios loco (y jugador), este singular campo de batalla espera a dos oponentes "
+"para otro enfrentamiento."
+
+#: ../../maps/Last Bastion.wmf/elemental:11
+msgid ""
+"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
+"Sun heated up the Earth and melted glaciers and people plunged into the "
+"deep. But now - high in the majestic mountains, on the last scrap of land - "
+"two surviving tribes are sheltering. Even though the Gods showed mercy and "
+"the climate thus turned cooler again the water is still rising and rising. "
+"Onto the last secure place - the highest mountain range where the amount of "
+"gold and the space to live merely suffice for one tribe - only two opposite "
+"paths lead. But remember, be careful... this last living space is also a "
+"hard and small place to live. Don't forget to take care about your timber "
+"supplies, you'll need them."
+msgstr ""
+"Los dioses caprichosos no ha respondido nuestras oraciones. En cambio, el "
+"sol mil veces más caliente ha elevado la temperatura de la Tierra, ha "
+"derretido los glaciares y la gente se sumergió en las profundidades. Pero "
+"ahora - en las montañas majestuosas, en el último fragmento de la tierra - "
+"dos tribus sobrevivientes se refugian. A pesar dque los dioses se mostraron "
+"amables y el clima se volvió más fresco de nuevo el agua sigue subiendo y "
+"subiendo. En el último lugar seguro - la montaña más alta, donde la cantidad "
+"de oro y el espacio para vivir es suficiente para una tribu - sólo dos "
+"caminos se oponen. Pero recuerda, ten cuidad ... este último espacio de vida "
+"es también un lugar duro y pequeño para vivir. No te olvides de tener "
+"cuidado acerca de tu suministro de madera,  la necesitarás."
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Who will be the real King of the big atoll?"
+msgstr "¿Quién será el verdadero rey del gran atolón?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
 msgstr "Valle Wisent"
 
-#: ../../maps/Wisent Valley.wmf/elemental:11
+#: ../../maps/Plateau.wmf/elemental:9
 msgid ""
-"It seems as if this magical valley was inhabited by wisents since the "
-"beginning of days. When your tribe came to this place, you were sure that it "
-"offers enough space for a peaceful life. But can your tribe live in peace "
-"with your neighbours?"
+"You are standing on an island, crowned by mighty mountains, which keep a "
+"wonderful and mighty treasure in their middle - The Green Plateau, which is "
+"hard to get, but easy to lose, so if you want it, be aware of the other "
+"clans."
 msgstr ""
-"Parece como si este valle mágico fuese habitado por sabios desde el "
-"principio de los tiempos. Cuando tu tribu vino a este lugar, estuviste "
-"seguro de que ofrecería espacio suficiente para una vida en paz. Pero, "
-"¿puede tu tribu vivir en paz con tus vecinos?"
+"Estás en pié en una isla, coronada por impresionantes montañas, que esconden "
+"un maravilloso y mágico tesoro en su corazón - La Meseta Verde, que es "
+"difícil de conquistar, pero fácil de perder. Así que, si la quieres, "
+"mantente prevenido de los otros clanes."
 
 #~ msgid ""
 #~ "It is a long time ago, since the last rain drop touched these grounds. No "
@@ -749,3 +752,75 @@ msgstr ""
 #~ "oráculo y se fueron a la guerra. Sólo los sobrevivientes podrán sacrificar "
 #~ "los tesoros de sus enemigos tesoros en el altar antiguo, construye allí un "
 #~ "magnífico castillo y gánate la buena voluntad y el respeto de los Dioses."
+
+#~ msgid ""
+#~ "When Chat’Karuth died, he was an old man, father to three strong and "
+#~ "ambitious sons and warlord to an army that could match any enemy willing to "
+#~ "rise against the ancient forests. Though his glorious reign, Chat’Karuth "
+#~ "left his eldest son Thron in the due to succeed him as the tribes warlord – "
+#~ "a decision that left his two brothers unsatisfied. The old warlord knew "
+#~ "that. As his father told him, Thron left the capital of Al’thunran, the home "
+#~ "of the throne among the trees and redrew his forces to the high hills where "
+#~ "he buried the corpse of his father and swore to the gods and his spirit, "
+#~ "that he’d return to re-established order. While his brothers raged in blind "
+#~ "war against Thron and the few forces he left to secure the borders of "
+#~ "Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
+#~ "force the tribes to march once again under a common banner."
+#~ msgstr ""
+#~ "Cuando murió Chat’Karuth, era un anciano, padre de tres hijos fuertes y "
+#~ "ambiciosos y señor de la guerra de un ejército que puede competir con "
+#~ "cualquier enemigo dispuesto a levantarse contra los bosques antiguos. Aunque "
+#~ "su reino glorioso, Chat'Karuth dejó su hijo mayor Thron como el sucesor del "
+#~ "señor de la guerra de las tribus - una decisión que dejó a sus dos hermanos "
+#~ "insatisfechos. El viejo señor de la guerra lo sabía. Como su padre le dijo, "
+#~ "Thron salió de la capital de Al'thunran, la casa del trono entre los árboles "
+#~ "y fue a preparar a sus fuerzas en las altas montañas donde se encontraba el "
+#~ "cadáver de su padre. Este juró a los dioses y a el espíritu de su padre, que "
+#~ "él volverá a restablecer el orden. Mientras sus hermanos se enfrascaban en "
+#~ "una guerra ciega contra Thron y las pocas fuerzas que este dejó para "
+#~ "asegurar las fronteras de Al'thunran. El joven guerrero busca reunir a sus "
+#~ "ambiciosos hermanos y la fuerza de las tribus, para marchar de nuevo bajo "
+#~ "una bandera común."
+
+#~ msgid ""
+#~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
+#~ "soldiers at the frontier among the northern forests, where Barbarian-tribes "
+#~ "and official Empire-land are crossing. His task was to defend the Empire-"
+#~ "land. First everything was calm, he even talked to few barbarian children "
+#~ "and thought about a peaceful life - side by side with this archaic folk. He "
+#~ "began to feel saver and his army begun to draw off the attention on they "
+#~ "potential enemy - that was their fault. At one night in March his unprepared "
+#~ "army was attacked by 100 barbarian footmen and was completely scattered. "
+#~ "Only with pure life he and a handful of soldiers survived."
+#~ msgstr ""
+#~ "Hace seis meses, Lutius, un joven general del Imperio, fue envíado con 150 "
+#~ "soldados a la frontera entre los bosques del norte, donde las tribus "
+#~ "bárbaras y los dominios del Imperio se cruzan. Su misión era defender el "
+#~ "Imperio. Al principio todo estaba en calma, incluso hablaba con niños "
+#~ "bárbaros y pensaba en una vida pacífica mano a mano con estos arcaicos "
+#~ "amigos. Se comenzó a sentir seguro y su ejército bajó la guardia ante el "
+#~ "potencial enemigo, ese fué su error. Una noche de marzo su desprevenido "
+#~ "ejército fue atacado por 100 soldados bárbaros y fue completamente "
+#~ "derrotado. Sólo él y un puñado de soldados sobrevivieron."
+
+#~ msgid ""
+#~ "Six months ago, Lutius - a young general of the Empire - was send with 150 "
+#~ "soldiers to the frontier beyond the northern forests where Barbarian-tribes "
+#~ "and official Empire-land are crossing. His task was to defend the Empire-"
+#~ "land. At first, everything was calm. He even talked to a few barbarian "
+#~ "children and thought about a peaceful life - side by side with this archaic "
+#~ "folk. He began to feel safer and his army began to drop their attention off "
+#~ "the potential enemy. That was their fault. At one night in march his "
+#~ "unprepared army was attacked by 100 barbarian footmen and was completely "
+#~ "scattered. Only with his bare life he and a handful of his soldiers survived."
+#~ msgstr ""
+#~ "Hace seis meses, Lutius - un joven general del Imperio - fue enviado con 150 "
+#~ "soldados a la frontera más allá de los bosques del norte donde las tribus "
+#~ "barbaras y la tierra oficial del Imperio se cruzan. Su tarea era defender la "
+#~ "tierras del Imperio. Al principio todo estaba en calma. De vez en cuando, "
+#~ "hablaba con unos pocos niños bárbaros y pensaba en una vida pacifica - al "
+#~ "lado de este arcaico pueblo. Comenzó a sentirse a salvo y su armada comenzó "
+#~ "a perder la atención sobre su enemigo potencial. Este fue su fallo. Una "
+#~ "noche en marzo su armada desprevenida fue atacada por 100 bárbaros a pie y "
+#~ "fueron completamente dispersados. Solo él y un puñado de sus hombres "
+#~ "sobrevivieron."

@@ -1,0 +1,1296 @@
+# Norwegian Bokmal translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"PO-Revision-Date: 2010-07-04 20:17+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
+"Language-Team: Norwegian Bokmal <nb@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-07-05 03:44+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../tribes/barbarians/snack/conf:1
+msgid "A bit bigger, for the advanced miners. They will need a big morsel."
+msgstr ""
+"Litt større, for de avanserte gruvearbeiderne. De har bruk for en større bit."
+
+#: ../../tribes/barbarians/meal/conf:1
+msgid "A real meal which satisfies all miners needs."
+msgstr ""
+
+#: ../../tribes/barbarians/ration/conf:1
+msgid "A small bite to keep miners strong and working."
+msgstr "En liten matbit for å holde gruvearbeiderne sterke og i arbeid."
+
+#: ../../tribes/barbarians/warhelmet/conf:1
+msgid "An enhanced mask for barbarian warriors."
+msgstr "En forbedret maske for barbarkrigerne."
+
+#: ../../tribes/barbarians/mask/conf:1
+msgid "An enhanced version of the helmet."
+msgstr "En forbedret utgave av hjelmen."
+
+#: ../../tribes/barbarians/conf:27
+msgid "Ashes"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:58
+msgid "Axe"
+msgstr "Øks"
+
+#: ../../tribes/barbarians/conf:172
+msgid "Axefactory"
+msgstr "Øksefabrikk"
+
+#: ../../tribes/barbarians/conf:107
+msgid "Baker"
+msgstr "Baker"
+
+#: ../../tribes/barbarians/conf:173
+msgid "Bakery"
+msgstr "Bakeri"
+
+#: ../../tribes/barbarians/baker/conf:1
+msgid "Bakes bread for workers."
+msgstr "Baker brød til arbeiderne."
+
+#: ../../tribes/barbarians/conf:5
+msgid "Barbarians"
+msgstr "Barbarer"
+
+#: ../../tribes/barbarians/conf:158
+msgid "Barracks"
+msgstr "Brakke"
+
+#: ../../tribes/barbarians/conf:143
+#: ../../tribes/barbarians/conf:159
+msgid "Barrier"
+msgstr "Barriere"
+
+#: ../../tribes/barbarians/helm/conf:1
+msgid "Basic defence of a warrior."
+msgstr "Krigerens basisbeskyttelse."
+
+#: ../../tribes/barbarians/conf:139
+msgid "Battle Arena"
+msgstr "Stridsplass"
+
+#: ../../tribes/barbarians/conf:60
+msgid "Battle Axe"
+msgstr "Stridsøks"
+
+#: ../../tribes/barbarians/conf:61
+msgid "Beer"
+msgstr "Øl"
+
+#: ../../tribes/barbarians/fish/conf:1
+msgid ""
+"Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
+msgstr "Ved siden av pitabrød og kjøtt, er fisk et matkilde for barbarene."
+
+#: ../../tribes/barbarians/conf:174
+msgid "Big Inn"
+msgstr "Resturant"
+
+#: ../../tribes/barbarians/conf:109
+msgid "Blacksmith"
+msgstr "Grovsmed"
+
+#: ../../tribes/barbarians/conf:62
+msgid "Blackwood"
+msgstr "Herdet tre"
+
+#: ../../tribes/barbarians/cattlebreeder/conf:1
+msgid "Breeds the strong oxen that help in the transportation of wares."
+msgstr "Aler opp sterke okser som hjelper til med transport av varer."
+
+#: ../../tribes/barbarians/conf:111
+msgid "Brewer"
+msgstr "Brygger"
+
+#: ../../tribes/barbarians/conf:175
+msgid "Brewery"
+msgstr "Bryggeri"
+
+#: ../../tribes/barbarians/conf:63
+msgid "Broad Axe"
+msgstr "Bredøks"
+
+#: ../../tribes/barbarians/conf:64
+msgid "Bronze Axe"
+msgstr "Bronseøks"
+
+#: ../../tribes/barbarians/conf:112
+msgid "Builder"
+msgstr "Bygger"
+
+#: ../../tribes/barbarians/conf:113
+msgid "Burner"
+msgstr ""
+
+#: ../../tribes/barbarians/burner/conf:1
+msgid "Burns coal."
+msgstr "Brenner kull."
+
+#: ../../tribes/barbarians/lime-burner/conf:1
+msgid "Burns lime in the lime kilm."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:100
+msgid "Carrier"
+msgstr "Bærer"
+
+#: ../../tribes/barbarians/carrier/conf:1
+msgid "Carries items along the roads."
+msgstr "Bærer ting langs veiene."
+
+#: ../../tribes/barbarians/conf:151
+#: ../../tribes/barbarians/conf:160
+msgid "Castle"
+msgstr "Slott"
+
+#: ../../tribes/barbarians/conf:133
+msgid "Cattle Breeder"
+msgstr "Kvegoppdretter"
+
+#: ../../tribes/barbarians/conf:206
+msgid "Cattle Farm"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:176
+msgid "Charcoal Burner's House"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:115
+msgid "Chief Miner"
+msgstr "Gruvesjef"
+
+#: ../../tribes/barbarians/conf:144
+msgid "Citadel"
+msgstr "Festning"
+
+#: ../../tribes/barbarians/conf:210
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
+msgid "Citadel village"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:65
+msgid "Cloth"
+msgstr "Tøy"
+
+#: ../../tribes/barbarians/cloth/conf:1
+msgid "Cloth is needed for barbarian ships. It is produced out of flax."
+msgstr "Tøy brukes til seilene på barbarenes skip. Det lages av lin."
+
+#: ../../tribes/barbarians/conf:66
+msgid "Coal"
+msgstr "Kull"
+
+#: ../../tribes/barbarians/conf:179
+msgid "Coal mine"
+msgstr "Kullgruve"
+
+#: ../../tribes/barbarians/conf:136
+msgid "Construction Site"
+msgstr "Byggeplass"
+
+#: ../../tribes/barbarians/stonemason/conf:2
+msgid "Cuts raw pieces of granite out of laying stones."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:178
+msgid "Deep Coal Mine"
+msgstr "Dyp kullgruve"
+
+#: ../../tribes/barbarians/conf:182
+msgid "Deep Gold Mine"
+msgstr "Dyp gullgruve"
+
+#: ../../tribes/barbarians/conf:183
+msgid "Deep Iron Ore Mine"
+msgstr "Dyp jernmalmgruve"
+
+#: ../../tribes/barbarians/conf:177
+msgid "Deeper Coal Mine"
+msgstr "Dypere kullgruve"
+
+#: ../../tribes/barbarians/conf:180
+msgid "Deeper Gold Mine"
+msgstr "Dypere gullgruve"
+
+#: ../../tribes/barbarians/conf:181
+msgid "Deeper Iron Ore Mine"
+msgstr "Dypere jernmalmgruve"
+
+#: ../../tribes/barbarians/conf:54
+msgid "Deer"
+msgstr "Hjort"
+
+#: ../../tribes/barbarians/soldier/conf:1
+msgid "Defend and Conquer!"
+msgstr "Forsvar og erobre!"
+
+#: ../../tribes/barbarians/conf:28
+msgid "Destroyed building"
+msgstr "Ødelagt bygning"
+
+#: ../../tribes/barbarians/geologist/conf:1
+msgid "Discovers resources for mining."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:145
+msgid "Donjon"
+msgstr "Borgtårn"
+
+#: ../../tribes/barbarians/conf:184
+msgid "Farm"
+msgstr "Gård"
+
+#: ../../tribes/barbarians/conf:116
+msgid "Farmer"
+msgstr "Bonde"
+
+#: ../../tribes/barbarians/lumberjack/conf:1
+msgid "Fells trees."
+msgstr "Feller trær."
+
+#: ../../tribes/barbarians/conf:117
+msgid "Ferner"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:185
+msgid "Fernery"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:33
+msgid "Field harvested"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:29
+msgid "Field medium"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:32
+msgid "Field ripe"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:30
+msgid "Field small"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:31
+msgid "Field tiny"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:67
+msgid "Fire Tongs"
+msgstr "Ildtang"
+
+#: ../../tribes/barbarians/blackwood/conf:1
+msgid ""
+"Fire-hardened wood, as hard as iron and cannot burn, used for military "
+"buildings."
+msgstr ""
+"Tre herdet av ild er hardt som jern og brenner ikke. Brukes til militære "
+"bygninger."
+
+#: ../../tribes/barbarians/conf:68
+msgid "Fish"
+msgstr "Fisk"
+
+#: ../../tribes/barbarians/conf:118
+msgid "Fisher"
+msgstr "Fisker"
+
+#: ../../tribes/barbarians/conf:186
+msgid "Fisher's Hut"
+msgstr "Fiskerhytte"
+
+#: ../../tribes/barbarians/conf:69
+msgid "Fishing Rod"
+msgstr "Fiskestang"
+
+#: ../../tribes/barbarians/fishing_rod/conf:1
+msgid "Fishing rods are needed by barbarian fishers for fishing."
+msgstr "Fiskestenger brukes av barbariske fiskere til fisking."
+
+#: ../../tribes/barbarians/conf:70
+msgid "Flax"
+msgstr "Lin"
+
+#: ../../tribes/barbarians/flax/conf:1
+msgid "Flax is a beautiful flower, which is used for making cloth."
+msgstr "Lin er en vakker blomst, som brukes til å lage tøy."
+
+#: ../../tribes/barbarians/conf:34
+msgid "Flax medium"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:37
+msgid "Flax ripe"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:35
+msgid "Flax small"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:36
+msgid "Flax tiny"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:146
+#: ../../tribes/barbarians/conf:161
+msgid "Fortress"
+msgstr "Fort"
+
+#: ../../tribes/barbarians/conf:119
+msgid "Gamekeeper"
+msgstr "Viltforvalter"
+
+#: ../../tribes/barbarians/conf:187
+msgid "Gamekeeper's Hut"
+msgstr "Viltforvalters hytte"
+
+#: ../../tribes/barbarians/conf:120
+msgid "Geologist"
+msgstr "Geolog"
+
+#: ../../tribes/barbarians/fisher/conf:1
+msgid "Gets fish out of the sea."
+msgstr "Får fisk opp av havet."
+
+#: ../../tribes/barbarians/conf:71
+msgid "Gold"
+msgstr "Gull"
+
+#: ../../tribes/barbarians/conf:188
+msgid "Gold Mine"
+msgstr "Gullgruve"
+
+#: ../../tribes/barbarians/gold/conf:1
+msgid ""
+"Gold is the most valuable of all metals; only very important things are "
+"garnished with it."
+msgstr ""
+"Gull er det mest verdifulle av alle metaller, og brukes kun til meget "
+"viktige ting."
+
+#: ../../tribes/barbarians/conf:72
+msgid "Goldstone"
+msgstr "Gullmalm"
+
+#: ../../tribes/barbarians/conf:189
+msgid "Granite Mine"
+msgstr "Granittgruve"
+
+#: ../../tribes/barbarians/conf:73
+msgid "Grout"
+msgstr "Sementmørtel"
+
+#: ../../tribes/barbarians/ferner/conf:1
+msgid "Grows flax and thatch reed."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:152
+msgid "Guardhall"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:153
+msgid "Guardhouse"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:74
+msgid "Hammer"
+msgstr "Hammer"
+
+#: ../../tribes/barbarians/fernery/conf:20
+msgid "Harvest flax"
+msgstr ""
+
+#: ../../tribes/barbarians/fernery/conf:22
+msgid "Harvest reed"
+msgstr ""
+
+#: ../../tribes/barbarians/farm/conf:19
+msgid "Harvest wheat"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:167
+msgid "Headquarters"
+msgstr "Hovedkvarter"
+
+#: ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
+msgid "Headquarters medium"
+msgstr "Mellomstort hovedkvarter"
+
+#: ../../tribes/barbarians/conf:75
+msgid "Helmet"
+msgstr "Hjelm"
+
+#: ../../tribes/barbarians/conf:121
+msgid "Helmsmith"
+msgstr "Hjelmsmed"
+
+#: ../../tribes/barbarians/conf:191
+msgid "Helmsmithy"
+msgstr "Hjelmsmie"
+
+#: ../../tribes/barbarians/ox/conf:1
+msgid "Helps to carry items at heavy used roads."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:154
+msgid "High Tower"
+msgstr "Høyt tårn"
+
+#: ../../tribes/barbarians/kitchen_tools/conf:1
+msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
+msgstr ""
+"Hvordan kan man lage et måltid, matbit eller rasjon, hvis man ikke har "
+"kjøkkenredskaper?"
+
+#: ../../tribes/barbarians/conf:122
+msgid "Hunter"
+msgstr "Jeger"
+
+#: ../../tribes/barbarians/conf:192
+msgid "Hunter's Hut"
+msgstr "Jegerhytte"
+
+#: ../../tribes/barbarians/conf:76
+msgid "Hunting Spear"
+msgstr "Jaktspyd"
+
+#: ../../tribes/barbarians/conf:193
+msgid "Inn"
+msgstr "Vertshus"
+
+#: ../../tribes/barbarians/conf:123
+msgid "Innkeeper"
+msgstr "Vertshusholder"
+
+#: ../../tribes/barbarians/conf:77
+msgid "Iron"
+msgstr "Jern"
+
+#: ../../tribes/barbarians/conf:78
+msgid "Iron Ore"
+msgstr "Jernmalm"
+
+#: ../../tribes/barbarians/conf:198
+msgid "Iron Ore Mine"
+msgstr "Jernmalmgruve"
+
+#: ../../tribes/barbarians/conf:79
+msgid "Kitchen Tools"
+msgstr "Kjøkkenredskaper"
+
+#: ../../tribes/barbarians/conf:194
+msgid "Lime Kiln"
+msgstr "Kalkovn"
+
+#: ../../tribes/barbarians/conf:124
+msgid "Lime-Burner"
+msgstr "Kalkbrenner"
+
+#: ../../tribes/barbarians/conf:125
+msgid "Lumberjack"
+msgstr "Tømmerhugger"
+
+#: ../../tribes/barbarians/conf:195
+msgid "Lumberjack's Hut"
+msgstr "Tømmerhuggers hytte"
+
+#: ../../tribes/barbarians/conf:80
+msgid "Mask"
+msgstr "Maske"
+
+#: ../../tribes/barbarians/conf:108
+msgid "Master Blacksmith"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:110
+msgid "Master Brewer"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:114
+msgid "Master Miner"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:81
+msgid "Meal"
+msgstr "Måltid"
+
+#: ../../tribes/barbarians/conf:82
+msgid "Meat"
+msgstr "Kjøtt"
+
+#: ../../tribes/barbarians/meat/conf:1
+msgid ""
+"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
+"lunch for the miners and in the soldier trainingcamps to keep warriors "
+"strong."
+msgstr ""
+"Kjøtt er veldig energirikt. Det blir brukt i kroer og vertshus til å lage "
+"lunsj for gruvearbeiderne og i soldatenes treningsleire for å holde krigerne "
+"sterke."
+
+#: ../../tribes/barbarians/conf:196
+msgid "Metalwork Shop"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:197
+msgid "Micro Brewery"
+msgstr "Mikrobryggeri"
+
+#: ../../tribes/barbarians/conf:126
+msgid "Miner"
+msgstr "Gruvearbeider"
+
+#: ../../tribes/barbarians/strongbeer/conf:1
+msgid ""
+"Only this beer is acceptable for the old warriors. Some say, the whole power "
+"of the barbarians is in this ale."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:162
+msgid "Outpost"
+msgstr "Utpost"
+
+#: ../../tribes/barbarians/conf:101
+msgid "Ox"
+msgstr "Okse"
+
+#: ../../tribes/barbarians/conf:59
+msgid "Peel"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:83
+msgid "Pick"
+msgstr "Hakke"
+
+#: ../../tribes/barbarians/conf:84
+msgid "Pitta Bread"
+msgstr "Pitabrød"
+
+#: ../../tribes/barbarians/fernery/conf:16
+msgid "Plant flax"
+msgstr ""
+
+#: ../../tribes/barbarians/fernery/conf:18
+msgid "Plant reed"
+msgstr ""
+
+#: ../../tribes/barbarians/farm/conf:17
+msgid "Plant wheat"
+msgstr "Plant hvete"
+
+#: ../../tribes/barbarians/farmer/conf:2
+msgid "Plants fields."
+msgstr ""
+
+#: ../../tribes/barbarians/ranger/conf:1
+msgid "Plants trees."
+msgstr "Planter trær."
+
+#: ../../tribes/barbarians/axefactory/conf:29
+#: ../../tribes/barbarians/metalworks/conf:33
+#: ../../tribes/barbarians/warmill/conf:33
+msgid "Produce axe"
+msgstr "Produser øks"
+
+#: ../../tribes/barbarians/metalworks/conf:34
+msgid "Produce bakingtray"
+msgstr "Produser stekebrett"
+
+#: ../../tribes/barbarians/warmill/conf:37
+msgid "Produce battleaxe"
+msgstr "Produser stridsøks"
+
+#: ../../tribes/barbarians/axefactory/conf:31
+#: ../../tribes/barbarians/warmill/conf:35
+msgid "Produce broadaxe"
+msgstr "Produser bredøks"
+
+#: ../../tribes/barbarians/warmill/conf:36
+msgid "Produce bronzeaxe"
+msgstr "Produser bronseøks"
+
+#: ../../tribes/barbarians/metalworks/conf:35
+msgid "Produce fire tongs"
+msgstr "Produser ildtang"
+
+#: ../../tribes/barbarians/metalworks/conf:36
+msgid "Produce fishing rod"
+msgstr "Produser fiskestang"
+
+#: ../../tribes/barbarians/metalworks/conf:37
+msgid "Produce hammer"
+msgstr "Produser hammer"
+
+#: ../../tribes/barbarians/helmsmithy/conf:25
+msgid "Produce helm"
+msgstr "Produser hjelm"
+
+#: ../../tribes/barbarians/metalworks/conf:42
+msgid "Produce hunting spear"
+msgstr "Produser jaktspyd"
+
+#: ../../tribes/barbarians/metalworks/conf:38
+msgid "Produce kitchen tools"
+msgstr "Produser kjøkkenredskaper"
+
+#: ../../tribes/barbarians/helmsmithy/conf:26
+msgid "Produce mask"
+msgstr "Produser maske"
+
+#: ../../tribes/barbarians/big_inn/conf:26
+msgid "Produce meal"
+msgstr "Produser måltid"
+
+#: ../../tribes/barbarians/metalworks/conf:39
+msgid "Produce pick"
+msgstr "Produser hakke"
+
+#: ../../tribes/barbarians/big_inn/conf:24
+#: ../../tribes/barbarians/inn/conf:23
+#: ../../tribes/barbarians/tavern/conf:23
+msgid "Produce ration"
+msgstr "Produser rasjon"
+
+#: ../../tribes/barbarians/metalworks/conf:40
+msgid "Produce scythe"
+msgstr "Produser ljå"
+
+#: ../../tribes/barbarians/axefactory/conf:30
+#: ../../tribes/barbarians/warmill/conf:34
+msgid "Produce sharpaxe"
+msgstr "Produser skarpøks"
+
+#: ../../tribes/barbarians/metalworks/conf:41
+msgid "Produce shovel"
+msgstr "Produser spade"
+
+#: ../../tribes/barbarians/big_inn/conf:25
+#: ../../tribes/barbarians/inn/conf:24
+msgid "Produce snack"
+msgstr "Produser matbit"
+
+#: ../../tribes/barbarians/helmsmithy/conf:27
+msgid "Produce warhelmet"
+msgstr "Produser krigshjelm"
+
+#: ../../tribes/barbarians/warmill/conf:38
+msgid "Produce warriorsaxe"
+msgstr ""
+
+#: ../../tribes/barbarians/weaver/conf:1
+msgid "Produces cloth for ships and soldiers."
+msgstr "Produserer vevet tøy til skip og soldater."
+
+#: ../../tribes/barbarians/innkeeper/conf:1
+msgid "Produces food for miners."
+msgstr "Produserer mat til gruvearbeiderne."
+
+#: ../../tribes/barbarians/brewer/conf:1
+#: ../../tribes/barbarians/master-brewer/conf:1
+msgid ""
+"Produces the finest ales to keep warriors strong and happy in training."
+msgstr ""
+"Produserer den fineste øl som holder krigerne sterke og glade under trening."
+
+#: ../../tribes/barbarians/blacksmith/conf:1
+#: ../../tribes/barbarians/master-blacksmith/conf:1
+msgid "Produces weapons for soldiers and tools for workers."
+msgstr "Produserer våpen til soldatene og verktøy til arbeiderne."
+
+#: ../../tribes/barbarians/conf:199
+msgid "Quarry"
+msgstr "Steinbrudd"
+
+#: ../../tribes/barbarians/conf:127
+msgid "Ranger"
+msgstr "Skogvokter"
+
+#: ../../tribes/barbarians/conf:200
+msgid "Ranger's Hut"
+msgstr "Skogvokterhytte"
+
+#: ../../tribes/barbarians/conf:85
+msgid "Ration"
+msgstr "Rasjon"
+
+#: ../../tribes/barbarians/conf:86
+msgid "Raw Stone"
+msgstr "Grov stein"
+
+#: ../../tribes/barbarians/raw_stone/conf:1
+msgid "Raw Stones are the secondary build material of the barbarians."
+msgstr "Grov stein er barbarenes nest mest brukte byggemateriale."
+
+#: ../../tribes/barbarians/grout/conf:1
+msgid ""
+"Raw stone can be enhanced to grout which delivers solid, non burning build "
+"material."
+msgstr ""
+"Grov stein kan forbedres til sementmørtel, som er et solid, ikke-brennbart "
+"byggemateriale."
+
+#: ../../tribes/barbarians/sharpaxe/conf:1
+msgid ""
+"Real warriors consider the sharp axe the first real weapon, after being able "
+"to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
+"than the ordinary axe. Build in the axe factory."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:38
+msgid "Reed medium"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:41
+msgid "Reed ripe"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:39
+msgid "Reed small"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:40
+msgid "Reed tiny"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:42
+msgid "Resource indicator coal little"
+msgstr "Ressursindikator kull lite"
+
+#: ../../tribes/barbarians/conf:43
+msgid "Resource indicator coal much"
+msgstr "Ressursindikator kull mye"
+
+#: ../../tribes/barbarians/conf:44
+msgid "Resource indicator gold little"
+msgstr "Ressursindikator gull lite"
+
+#: ../../tribes/barbarians/conf:45
+msgid "Resource indicator gold much"
+msgstr "Ressursindikator gull mye"
+
+#: ../../tribes/barbarians/conf:46
+msgid "Resource indicator granite little"
+msgstr "Ressursindikator granitt lite"
+
+#: ../../tribes/barbarians/conf:47
+msgid "Resource indicator granite much"
+msgstr "Ressursindikator granitt mye"
+
+#: ../../tribes/barbarians/conf:48
+msgid "Resource indicator iron little"
+msgstr "Ressursindikator jern lite"
+
+#: ../../tribes/barbarians/conf:49
+msgid "Resource indicator iron much"
+msgstr "Ressursindikator jern mye"
+
+#: ../../tribes/barbarians/conf:50
+msgid "Resource indicator no resource"
+msgstr "Ressursindikator ingen ressurs"
+
+#: ../../tribes/barbarians/conf:51
+msgid "Resource indicator water"
+msgstr "Ressursindikator vann"
+
+#: ../../tribes/barbarians/conf:132
+msgid "Scout"
+msgstr "Speider"
+
+#: ../../tribes/barbarians/conf:205
+msgid "Scout's Hut"
+msgstr "Speiderhytte"
+
+#: ../../tribes/barbarians/scout/conf:1
+msgid ""
+"Scouts like Scotty the scout scout unscouted area in a scouty fashion."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:87
+msgid "Scythe"
+msgstr "Ljå"
+
+#: ../../tribes/barbarians/conf:147
+#: ../../tribes/barbarians/conf:157
+msgid "Sentry"
+msgstr "Vaktpost"
+
+#: ../../tribes/barbarians/conf:88
+msgid "Sharp Axe"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:89
+msgid "Shovel"
+msgstr "Spade"
+
+#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/trainingscamp/conf:36
+msgid "Sleep"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:155
+msgid "Small Tower"
+msgstr "Lite tårn"
+
+#: ../../tribes/barbarians/smelting_works/conf:25
+msgid "Smelt gold"
+msgstr "Smelt gull"
+
+#: ../../tribes/barbarians/smelting_works/conf:24
+msgid "Smelt iron"
+msgstr "Smelt jern"
+
+#: ../../tribes/barbarians/conf:128
+msgid "Smelter"
+msgstr "Smelter"
+
+#: ../../tribes/barbarians/conf:201
+msgid "Smelting Works"
+msgstr "Smelteverk"
+
+#: ../../tribes/barbarians/helmsmith/conf:1
+msgid "Smelts helmets for soldiers."
+msgstr ""
+
+#: ../../tribes/barbarians/smelter/conf:1
+msgid "Smelts iron."
+msgstr "Smelter jern."
+
+#: ../../tribes/barbarians/conf:90
+msgid "Snack"
+msgstr "Matbit"
+
+#: ../../tribes/barbarians/conf:104
+msgid "Soldier"
+msgstr "Soldat"
+
+#: ../../tribes/barbarians/conf:129
+msgid "Stonemason"
+msgstr "Steinhugger"
+
+#: ../../tribes/barbarians/conf:91
+msgid "Strong Beer"
+msgstr "Sterkt øl"
+
+#: ../../tribes/barbarians/conf:148
+msgid "Stronghold"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:202
+msgid "Tavern"
+msgstr "Kro"
+
+#: ../../tribes/barbarians/conf:92
+msgid "Thatch Reed"
+msgstr ""
+
+#: ../../tribes/barbarians/thatchreed/conf:1
+msgid "Thatch reed is used to make the roofs of buildings waterproof."
+msgstr ""
+
+#: ../../tribes/barbarians/axe/conf:1
+msgid ""
+"The Axe is a basic weapon and tool for the barbarians. All young soldiers "
+"are equipped with it, but also the lumberjack is using the same model."
+msgstr ""
+"Øksen er et grunnleggende våpen og verktøy for barbarene. Alle unge krigere "
+"er utstyrt med en, men også tømmerhuggeren benytter samme modell."
+
+#: ../../tribes/barbarians/gamekeeper/conf:1
+msgid ""
+"The Gamekeeper makes sure that the natural population of animals never drops "
+"too low."
+msgstr ""
+"Viltforvalteren sørger for at den naturlige dyrebestanden ikke synker for "
+"lavt."
+
+#: ../../tribes/barbarians/hunter/conf:1
+msgid "The Hunter brings good meat to the colonists."
+msgstr "Jegeren bringer godt kjøtt til kolonistene."
+
+#: ../../tribes/barbarians/conf:4
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../../tribes/barbarians/pittabread/conf:1
+msgid ""
+"The barbarian bakers are best in making this flat and tasty pitta bread."
+msgstr ""
+"De barbarske bakerene er best på å lage dette flate og gode pitabrødet."
+
+#: ../../tribes/barbarians/bronzeaxe/conf:1
+msgid ""
+"The bronze axe is considered a hard to handle weapon: it makes a lot of "
+"damage, but it's durability is not the best. Only skilled warriors can use "
+"this. Produced in the axe factory."
+msgstr ""
+
+#: ../../tribes/barbarians/fire_tongs/conf:1
+msgid ""
+"The fire tongs are the tool of the smelter, working in the smelting works. "
+"Produced in the metal works."
+msgstr ""
+"Ildtangen er verktøyet smelteren bruker når han jobber i smelteverket. "
+"Produseres på metallverket."
+
+#: ../../tribes/barbarians/coal/conf:1
+msgid ""
+"The fires of the barbarians are usually fed with wood, but sometimes, wood "
+"just does not burn hot enough. Then, coal is used."
+msgstr ""
+"Barbarene bruker som oftest tre som brensel, men noen ganger trenger man "
+"sterkere varme. Da brenner man kull."
+
+#: ../../tribes/barbarians/hammer/conf:1
+msgid ""
+"The hammer is an essential tool. It is needed by the geologist, the worker, "
+"the blacksmiths and the helmsmiths. Make sure you always got some in "
+"reserve! Build at the metal works."
+msgstr ""
+"Hammeren er et essensielt verktøy. Det brukes av geologer, arbeidere, "
+"grovsmeder og hjelmsmeder. Sørg for at du alltid har noen i reserve! "
+"Produseres på metallverket."
+
+#: ../../tribes/barbarians/conf:6
+msgid "The mighty tribes of the east-lands!"
+msgstr ""
+
+#: ../../tribes/barbarians/bakingtray/conf:1
+msgid ""
+"The peel is a tool of the baker and each baker needs his own. It is produced "
+"in the metal works like all other tools."
+msgstr ""
+
+#: ../../tribes/barbarians/scythe/conf:1
+msgid ""
+"The scythe is the tool of the farmers. It is produced in the metal works."
+msgstr "Ljåen er bondens verktøy. Den produseres i metallverket."
+
+#: ../../tribes/barbarians/shovel/conf:1
+msgid ""
+"The shovel is needed for proper handling of plants. Therefore the ferner and "
+"the ranger use it. Build at the metal works."
+msgstr ""
+
+#: ../../tribes/barbarians/warriorsaxe/conf:1
+msgid ""
+"The warriors axe is the most dangerous of all weapons. Only a few warriors "
+"ever were able to handle those huge and powerful axes. Build at the axe "
+"factory."
+msgstr ""
+
+#: ../../tribes/barbarians/ironore/conf:1
+msgid "This is the red iron ore."
+msgstr "Dette er den røde jernmalmen."
+
+#: ../../tribes/barbarians/battleaxe/conf:1
+msgid ""
+"This is the second most dangerous weapon the barbarians are able to produce. "
+"Only trained warriors are able to yield such a weapon. It is produced in the "
+"axe factory."
+msgstr ""
+"Dette er det nest farligste våpnet barbarene er i stand til å lage. Kun "
+"trente krigere er i stand til å håndtere slike våpen. Produseres i "
+"øksefabrikken."
+
+#: ../../tribes/barbarians/goldstone/conf:1
+msgid "This is the yellow goldstone."
+msgstr "Dette er den gylne gullmalmen."
+
+#: ../../tribes/barbarians/pick/conf:1
+msgid ""
+"This pick is used by the stonemasons and the miners. It is produced in the "
+"metal works."
+msgstr ""
+"Denne hakken blir brukt av steinhuggerne og gruvearbeiderne. Den er "
+"produsert i metallverket."
+
+#: ../../tribes/barbarians/hunting_spear/conf:1
+msgid ""
+"This spear is light enough to be thrown, but heavy enough to kill any animal "
+"in one blow. It is only used by the hunters. Produced in the metal works."
+msgstr ""
+"Dette spydet er lett nok til å kastes, men tungt nok til å kunne drepe "
+"ethvert dyr i et kast. Det brukes kun av jegerne. Produseres i metallverket."
+
+#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:163
+msgid "Tower"
+msgstr "Tårn"
+
+#: ../../tribes/barbarians/conf:130
+msgid "Trainer"
+msgstr "Trener"
+
+#: ../../tribes/barbarians/conf:140
+msgid "Trainingscamp"
+msgstr "Treningsleir"
+
+#: ../../tribes/barbarians/trainer/conf:1
+msgid "Trains the soldiers."
+msgstr "Trener soldatene."
+
+#: ../../tribes/barbarians/conf:93
+msgid "Trunk"
+msgstr "Trestamme"
+
+#: ../../tribes/barbarians/trunk/conf:1
+msgid "Trunks are the primary build material of the barbarians."
+msgstr "Trestammer er det mest brukte byggematerialet blant barbarene."
+
+#: ../../tribes/barbarians/trainingscamp/conf:37
+msgid "Upgrade soldier attack 0"
+msgstr "Oppgrader soldat angrep 0"
+
+#: ../../tribes/barbarians/trainingscamp/conf:38
+msgid ""
+"Upgrade soldier attack 0 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Oppgrader soldat angrep 0 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:39
+msgid "Upgrade soldier attack 1"
+msgstr "Oppgrader soldat angrep 1"
+
+#: ../../tribes/barbarians/trainingscamp/conf:40
+msgid ""
+"Upgrade soldier attack 1 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Oppgrader soldat angrep 1 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:41
+msgid "Upgrade soldier attack 2"
+msgstr "Oppgrader soldat angrep 2"
+
+#: ../../tribes/barbarians/trainingscamp/conf:42
+msgid ""
+"Upgrade soldier attack 2 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Oppgrader soldat angrep 2 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:43
+msgid "Upgrade soldier attack 3"
+msgstr "Oppgrader soldat angrep 3"
+
+#: ../../tribes/barbarians/trainingscamp/conf:44
+msgid ""
+"Upgrade soldier attack 3 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Oppgrader soldat angrep 3 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:45
+msgid "Upgrade soldier attack 4"
+msgstr "Oppgrader soldat angrep 4"
+
+#: ../../tribes/barbarians/trainingscamp/conf:46
+msgid ""
+"Upgrade soldier attack 4 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Oppgrader soldat angrep 4 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
+
+#: ../../tribes/barbarians/battlearena/conf:26
+msgid "Upgrade soldier evade 0"
+msgstr "Oppgrader soldat unnvik 0"
+
+#: ../../tribes/barbarians/battlearena/conf:27
+msgid ""
+"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Oppgrader soldat unnvik 0 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
+
+#: ../../tribes/barbarians/battlearena/conf:28
+msgid "Upgrade soldier evade 1"
+msgstr "Oppgrader soldat unnvik 1"
+
+#: ../../tribes/barbarians/battlearena/conf:29
+msgid ""
+"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Oppgrader soldat unnvik 1 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:47
+msgid "Upgrade soldier hitpoints 0"
+msgstr "Oppgrader soldat liv 0"
+
+#: ../../tribes/barbarians/trainingscamp/conf:48
+msgid ""
+"Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Oppgrader soldat liv 0 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:49
+msgid "Upgrade soldier hitpoints 1"
+msgstr "Oppgrader soldat liv 1"
+
+#: ../../tribes/barbarians/trainingscamp/conf:50
+msgid ""
+"Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Oppgrader soldat liv 1 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:51
+msgid "Upgrade soldier hitpoints 2"
+msgstr "Oppgrader soldat liv 2"
+
+#: ../../tribes/barbarians/trainingscamp/conf:52
+msgid ""
+"Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Oppgrader soldat liv 2 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
+
+#: ../../tribes/barbarians/conf:94
+msgid "War Helmet"
+msgstr "Krigshjelm"
+
+#: ../../tribes/barbarians/conf:171
+msgid "War Mill"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:168
+msgid "Warehouse"
+msgstr "Varehus"
+
+#: ../../tribes/barbarians/conf:95
+msgid "Warriors Axe"
+msgstr "Krigerøks"
+
+#: ../../tribes/barbarians/broadaxe/conf:1
+msgid ""
+"Warriors with a fundamental fighting knowledge gain a broad axe. It is "
+"produced in the axe factory."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:96
+msgid "Water"
+msgstr "Vann"
+
+#: ../../tribes/barbarians/water/conf:1
+msgid ""
+"Water is the most essential essence for life! This water is used in many "
+"places, be it to make bread or beer or to produce grout."
+msgstr ""
+
+#: ../../tribes/barbarians/iron/conf:1
+msgid "Weapons and tools are made of iron."
+msgstr "Våpen og redskaper er laget av jern."
+
+#: ../../tribes/barbarians/conf:131
+msgid "Weaver"
+msgstr "Vever"
+
+#: ../../tribes/barbarians/conf:203
+msgid "Weaving-Mill"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:204
+msgid "Well"
+msgstr "Brønn"
+
+#: ../../tribes/barbarians/conf:97
+msgid "Wheat"
+msgstr "Hvete"
+
+#: ../../tribes/barbarians/wheat/conf:1
+msgid ""
+"Wheat is essential for surviving. Delicious pitta bread and strong ales can "
+"be made of this wheat."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:55
+msgid "Wildboar"
+msgstr "Villsvin"
+
+#: ../../tribes/barbarians/conf:190
+msgid "Wood Hardener"
+msgstr "Treherder"
+
+#: ../../tribes/barbarians/axefactory/conf:32
+#: ../../tribes/barbarians/bakery/conf:21
+#: ../../tribes/barbarians/big_inn/conf:27
+#: ../../tribes/barbarians/brewery/conf:20
+#: ../../tribes/barbarians/burners_house/conf:19
+#: ../../tribes/barbarians/cattlefarm/conf:22
+#: ../../tribes/barbarians/coalmine/conf:20
+#: ../../tribes/barbarians/deep_coalmine/conf:23
+#: ../../tribes/barbarians/deep_goldmine/conf:23
+#: ../../tribes/barbarians/deep_oremine/conf:23
+#: ../../tribes/barbarians/deeper_coalmine/conf:22
+#: ../../tribes/barbarians/deeper_goldmine/conf:22
+#: ../../tribes/barbarians/deeper_oremine/conf:22
+#: ../../tribes/barbarians/farm/conf:21
+#: ../../tribes/barbarians/fernery/conf:24
+#: ../../tribes/barbarians/fishers_hut/conf:15
+#: ../../tribes/barbarians/gamekeepers_hut/conf:15
+#: ../../tribes/barbarians/goldmine/conf:21
+#: ../../tribes/barbarians/granitemine/conf:18
+#: ../../tribes/barbarians/hardener/conf:18
+#: ../../tribes/barbarians/helmsmithy/conf:28
+#: ../../tribes/barbarians/hunters_hut/conf:15
+#: ../../tribes/barbarians/inn/conf:25
+#: ../../tribes/barbarians/lime_kiln/conf:18
+#: ../../tribes/barbarians/lumberjacks_hut/conf:15
+#: ../../tribes/barbarians/metalworks/conf:43
+#: ../../tribes/barbarians/micro-brewery/conf:22
+#: ../../tribes/barbarians/oremine/conf:21
+#: ../../tribes/barbarians/quarry/conf:15
+#: ../../tribes/barbarians/rangers_hut/conf:14
+#: ../../tribes/barbarians/scouts_hut/conf:17
+#: ../../tribes/barbarians/smelting_works/conf:26
+#: ../../tribes/barbarians/tavern/conf:24
+#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/weaving-mill/conf:19
+#: ../../tribes/barbarians/well/conf:14
+msgid "Work"
+msgstr "Arbeid"
+
+#: ../../tribes/barbarians/builder/conf:1
+msgid "Works at construction sites to raise a new building."
+msgstr ""
+
+#: ../../tribes/barbarians/chief-miner/conf:1
+#: ../../tribes/barbarians/master-miner/conf:1
+#: ../../tribes/barbarians/miner/conf:1
+msgid "Works deep in the mines to obtain coal, iron or gold."
+msgstr "Arbeider dypt i gruvene for å hente ut kull, jern eller gull."
+
+#: ../../tribes/barbarians/beer/conf:1
+msgid ""
+"Young warriors need some encouragement. This drink makes a man fearless and "
+"strong."
+msgstr ""
+"Unge krigere trenger litt oppmuntring. Denne drikken gjør en mann fryktløs "
+"og sterk."

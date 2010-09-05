@@ -7,27 +7,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 18:23+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 21:42+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-06-08 03:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/desert/conf:2
-msgid "The Widelands Development Team"
-msgstr ""
+#: ../../worlds/desert/conf:71
+msgid "Beech"
+msgstr "Fagus"
 
-#: ../../worlds/desert/conf:3
-msgid "Desert"
-msgstr "Desertus"
+#: ../../worlds/desert/conf:72
+msgid "Beech medium"
+msgstr "Fagus mediocris"
 
-#: ../../worlds/desert/conf:4
-msgid "This is the wide and sandy country of the bedouins"
-msgstr ""
+#: ../../worlds/desert/conf:73
+msgid "Beech small"
+msgstr "Fagus parva"
+
+#: ../../worlds/desert/conf:74
+msgid "Beech tiny"
+msgstr "Fagus parvula"
+
+#: ../../worlds/desert/conf:85
+msgid "Bunny"
+msgstr "Cuniculus"
 
 #: ../../worlds/desert/conf:7
 #: ../../worlds/desert/conf:8
@@ -42,12 +50,44 @@ msgstr "Frutex"
 msgid "Cactus"
 msgstr "Cactus"
 
+#: ../../worlds/desert/resconf:4
+msgid "Coal"
+msgstr "Carbo"
+
 #: ../../worlds/desert/conf:14
 #: ../../worlds/desert/conf:15
 #: ../../worlds/desert/conf:16
 #: ../../worlds/desert/conf:17
 msgid "Dead Tree"
-msgstr ""
+msgstr "Arbor mortua"
+
+#: ../../worlds/desert/conf:86
+msgid "Deer"
+msgstr "Cervus"
+
+#: ../../worlds/desert/conf:3
+msgid "Desert"
+msgstr "Vastitas"
+
+#: ../../worlds/desert/conf:87
+msgid "Duck"
+msgstr "Anas"
+
+#: ../../worlds/desert/resconf:41
+msgid "Fish"
+msgstr "Piscis"
+
+#: ../../worlds/desert/conf:88
+msgid "Fox"
+msgstr "Vulpes"
+
+#: ../../worlds/desert/resconf:12
+msgid "Gold"
+msgstr "Aurum"
+
+#: ../../worlds/desert/resconf:28
+msgid "Granite"
+msgstr "Granitum"
 
 #: ../../worlds/desert/conf:18
 #: ../../worlds/desert/conf:19
@@ -55,56 +95,30 @@ msgstr ""
 msgid "Grass"
 msgstr "Gramen"
 
+#: ../../worlds/desert/resconf:20
+msgid "Iron"
+msgstr "Ferrum"
+
+#: ../../worlds/desert/conf:75
+msgid "Larch"
+msgstr "Larix"
+
+#: ../../worlds/desert/conf:76
+msgid "Larch medium"
+msgstr "Larix mediocris"
+
+#: ../../worlds/desert/conf:77
+msgid "Larch small"
+msgstr "Larix parva"
+
+#: ../../worlds/desert/conf:78
+msgid "Larch tiny"
+msgstr "Larix parvula"
+
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
 msgid "Mushroom"
 msgstr "Fungus"
-
-#: ../../worlds/desert/conf:23
-#: ../../worlds/desert/conf:24
-#: ../../worlds/desert/conf:25
-#: ../../worlds/desert/conf:26
-#: ../../worlds/desert/conf:27
-#: ../../worlds/desert/conf:28
-msgid "Pebble"
-msgstr "Calx"
-
-#: ../../worlds/desert/conf:29
-#: ../../worlds/desert/conf:30
-#: ../../worlds/desert/conf:31
-#: ../../worlds/desert/conf:32
-#: ../../worlds/desert/conf:33
-msgid "ruins"
-msgstr "ruina"
-
-#: ../../worlds/desert/conf:34
-#: ../../worlds/desert/conf:35
-#: ../../worlds/desert/conf:36
-msgid "Skeleton"
-msgstr "Os"
-
-#: ../../worlds/desert/conf:37
-msgid "Shell"
-msgstr "Crusta"
-
-#: ../../worlds/desert/conf:38
-#: ../../worlds/desert/conf:39
-#: ../../worlds/desert/conf:40
-#: ../../worlds/desert/conf:41
-#: ../../worlds/desert/conf:42
-#: ../../worlds/desert/conf:43
-#: ../../worlds/desert/conf:44
-msgid "Standing Stones"
-msgstr ""
-
-#: ../../worlds/desert/conf:45
-#: ../../worlds/desert/conf:46
-#: ../../worlds/desert/conf:47
-#: ../../worlds/desert/conf:48
-#: ../../worlds/desert/conf:49
-#: ../../worlds/desert/conf:50
-msgid "Stones"
-msgstr "Lapis"
 
 #: ../../worlds/desert/conf:51
 #: ../../worlds/desert/conf:55
@@ -120,7 +134,7 @@ msgstr "Palma"
 #: ../../worlds/desert/conf:64
 #: ../../worlds/desert/conf:68
 msgid "Palm medium"
-msgstr ""
+msgstr "Palma mediocris"
 
 #: ../../worlds/desert/conf:53
 #: ../../worlds/desert/conf:57
@@ -128,7 +142,7 @@ msgstr ""
 #: ../../worlds/desert/conf:65
 #: ../../worlds/desert/conf:69
 msgid "Palm small"
-msgstr "Palma parvus"
+msgstr "Palma parva"
 
 #: ../../worlds/desert/conf:54
 #: ../../worlds/desert/conf:58
@@ -136,39 +150,16 @@ msgstr "Palma parvus"
 #: ../../worlds/desert/conf:66
 #: ../../worlds/desert/conf:70
 msgid "Palm tiny"
-msgstr "Palma parvulus"
+msgstr "Palma parvula"
 
-#: ../../worlds/desert/conf:71
-msgid "Beech"
-msgstr "Fagus"
-
-#: ../../worlds/desert/conf:72
-msgid "Beech medium"
-msgstr ""
-
-#: ../../worlds/desert/conf:73
-msgid "Beech small"
-msgstr "Fagus parvus"
-
-#: ../../worlds/desert/conf:74
-msgid "Beech tiny"
-msgstr "Fagus parvulus"
-
-#: ../../worlds/desert/conf:75
-msgid "Larch"
-msgstr "Larix"
-
-#: ../../worlds/desert/conf:76
-msgid "Larch medium"
-msgstr ""
-
-#: ../../worlds/desert/conf:77
-msgid "Larch small"
-msgstr "Larix parvus"
-
-#: ../../worlds/desert/conf:78
-msgid "Larch tiny"
-msgstr "Larix parvulus"
+#: ../../worlds/desert/conf:23
+#: ../../worlds/desert/conf:24
+#: ../../worlds/desert/conf:25
+#: ../../worlds/desert/conf:26
+#: ../../worlds/desert/conf:27
+#: ../../worlds/desert/conf:28
+msgid "Pebble"
+msgstr "Silex"
 
 #: ../../worlds/desert/conf:79
 msgid "Rowan"
@@ -176,56 +167,65 @@ msgstr "Sorbus"
 
 #: ../../worlds/desert/conf:80
 msgid "Rowan medium"
-msgstr ""
+msgstr "Sorbus mediocris"
 
 #: ../../worlds/desert/conf:81
 msgid "Rowan small"
-msgstr "Sorbus parvus"
+msgstr "Sorbus parva"
 
 #: ../../worlds/desert/conf:82
 msgid "Rowan tiny"
-msgstr "Sorbus parvulus"
-
-#: ../../worlds/desert/conf:85
-msgid "Bunny"
-msgstr "Cuniculus"
-
-#: ../../worlds/desert/conf:86
-msgid "Deer"
-msgstr "Cervus"
-
-#: ../../worlds/desert/conf:87
-msgid "Duck"
-msgstr "Anas"
-
-#: ../../worlds/desert/conf:88
-msgid "Fox"
-msgstr "Vulpes"
+msgstr "Sorbus parvula"
 
 #: ../../worlds/desert/conf:89
 msgid "Sheep"
 msgstr "Ovis"
 
-#: ../../worlds/desert/resconf:4
-msgid "Coal"
-msgstr "Carbo"
+#: ../../worlds/desert/conf:37
+msgid "Shell"
+msgstr "Concha"
 
-#: ../../worlds/desert/resconf:12
-msgid "Gold"
-msgstr "Aurum"
+#: ../../worlds/desert/conf:34
+#: ../../worlds/desert/conf:35
+#: ../../worlds/desert/conf:36
+msgid "Skeleton"
+msgstr "Ossa"
 
-#: ../../worlds/desert/resconf:20
-msgid "Iron"
-msgstr "Ferrum"
+#: ../../worlds/desert/conf:38
+#: ../../worlds/desert/conf:39
+#: ../../worlds/desert/conf:40
+#: ../../worlds/desert/conf:41
+#: ../../worlds/desert/conf:42
+#: ../../worlds/desert/conf:43
+#: ../../worlds/desert/conf:44
+msgid "Standing Stones"
+msgstr "Obeliscus"
 
-#: ../../worlds/desert/resconf:28
-msgid "Granit"
-msgstr ""
+#: ../../worlds/desert/conf:45
+#: ../../worlds/desert/conf:46
+#: ../../worlds/desert/conf:47
+#: ../../worlds/desert/conf:48
+#: ../../worlds/desert/conf:49
+#: ../../worlds/desert/conf:50
+msgid "Stones"
+msgstr "Lapis"
+
+#: ../../worlds/desert/conf:2
+msgid "The Widelands Development Team"
+msgstr "Concilium Widelands ludum fingens"
+
+#: ../../worlds/desert/conf:4
+msgid "This is the wide and sandy country of the bedouins"
+msgstr "Haec est lata harenosaque terra Beduinorum."
 
 #: ../../worlds/desert/resconf:36
 msgid "Water"
 msgstr "Aqua"
 
-#: ../../worlds/desert/resconf:41
-msgid "Fish"
-msgstr "Piscis"
+#: ../../worlds/desert/conf:29
+#: ../../worlds/desert/conf:30
+#: ../../worlds/desert/conf:31
+#: ../../worlds/desert/conf:32
+#: ../../worlds/desert/conf:33
+msgid "ruins"
+msgstr "Parietinae"

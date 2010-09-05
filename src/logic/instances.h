@@ -240,7 +240,8 @@ public:
 		header_Legacy_AttackController = 4,
 		header_Battle = 5,
 		header_Critter = 6,
-		header_Worker = 7
+		header_Worker = 7,
+		header_WareInstance = 8
 	};
 
 	/**

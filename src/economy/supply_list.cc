@@ -20,6 +20,7 @@
 #include "supply_list.h"
 
 #include "container_iterate.h"
+#include "request.h"
 #include "supply.h"
 #include "wexception.h"
 
@@ -45,6 +46,19 @@ void SupplyList::remove_supply(Supply & supp)
 		}
 
 	throw wexception("SupplyList::remove: not in list");
+}
+
+/**
+ * Return whether there is at least one available
+ * supply that can match the given request.
+ */
+bool SupplyList::have_supplies(Game & game, const Request & req)
+{
+	for (size_t i = 0; i < m_supplies.size(); ++i)
+		if (m_supplies[i]->nr_supplies(game, req))
+			return true;
+
+	return false;
 }
 
 }

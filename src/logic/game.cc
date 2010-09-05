@@ -311,7 +311,8 @@ void Game::init_newgame
 			(i + 1,
 			 playersettings.initialization_index,
 			 playersettings.tribe,
-			 playersettings.name);
+			 playersettings.name,
+			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
 	}
 
@@ -321,7 +322,8 @@ void Game::init_newgame
 	// Check for win_conditions
 	LuaCoroutine * cr = lua().run_script
 		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
-		 ".lua", "win_conditions")->get_coroutine("func");
+		 ".lua", "win_conditions")
+		->get_coroutine("func");
 	enqueue_command(new Cmd_LuaCoroutine(get_gametime(), cr));
 }
 
@@ -492,9 +494,7 @@ bool Game::run
 		enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
 	}
 
-	if (m_writereplay) {
-		log("Starting replay writer\n");
-
+	if (m_writereplay || m_writesyncstream) {
 		// Derive a replay filename from the current time
 		std::string fname(REPLAY_DIR);
 		fname += '/';
@@ -504,11 +504,18 @@ bool Game::run
 			fname += m_ctrl->getGameDescription();
 		}
 		fname += REPLAY_SUFFIX;
-		assert(not m_replaywriter);
-		m_replaywriter = new ReplayWriter(*this, fname);
+
+		if (m_writereplay) {
+			log("Starting replay writer\n");
+
+			assert(not m_replaywriter);
+			m_replaywriter = new ReplayWriter(*this, fname);
+
+			log("Replay writer has started\n");
+		}
+
 		if (m_writesyncstream)
 			m_syncwrapper.StartDump(fname);
-		log("Replay writer has started\n");
 	}
 
 	SyncReset();
@@ -806,6 +813,7 @@ void Game::sample_statistics()
 	std::vector<uint32_t> nr_wares;
 	std::vector<uint32_t> productivity;
 	std::vector<uint32_t> nr_production_sites;
+	std::vector<uint32_t> custom_statistic;
 	land_size             .resize(nr_plrs);
 	nr_buildings          .resize(nr_plrs);
 	nr_casualties         .resize(nr_plrs);
@@ -819,6 +827,7 @@ void Game::sample_statistics()
 	nr_wares              .resize(nr_plrs);
 	productivity          .resize(nr_plrs);
 	nr_production_sites   .resize(nr_plrs);
+	custom_statistic      .resize(nr_plrs);
 
 	//  We walk the map, to gain all needed information.
 	Map const &  themap = map();
@@ -889,6 +898,17 @@ void Game::sample_statistics()
 			productivity[i] /= nr_production_sites[i];
 	}
 
+	// If there is a hook function defined to sample special statistics in this
+	// game, call the corresponding Lua function
+	boost::shared_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
+	if (hook) {
+		iterate_players_existing(p, nr_plrs, *this, plr) {
+			LuaCoroutine * cr = hook->get_coroutine("calculator");
+			cr->push_arg(plr);
+			cr->resume(&custom_statistic[p-1]);
+		}
+	}
+
 	// Now, push this on the general statistics
 	m_general_stats.resize(map().get_nrplayers());
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
@@ -908,6 +928,7 @@ void Game::sample_statistics()
 		m_general_stats[i].nr_workers      .push_back(nr_workers      [i]);
 		m_general_stats[i].nr_wares        .push_back(nr_wares        [i]);
 		m_general_stats[i].productivity    .push_back(productivity    [i]);
+		m_general_stats[i].custom_statistic.push_back(custom_statistic[i]);
 	}
 }
 
@@ -917,12 +938,12 @@ void Game::sample_statistics()
  *
  * \param fr file to read from
  * \param version indicates the kind of statistics file; the current version
- *   is 3, support for older versions (used in widelands build <= 12) was dropped
- *   after the release of build 15
+ *   is 3, support for older versions (used in widelands build <= 12) was
+ *   dropped after the release of build 15
  */
 void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 {
-	if (version == 3) {
+	if (version >= 3) {
 		m_last_stats_update = fr.Unsigned32();
 
 		// Read general statistics
@@ -943,6 +964,7 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 			m_general_stats[p - 1].nr_civil_blds_lost    .resize(entries);
 			m_general_stats[p - 1].nr_civil_blds_defeated.resize(entries);
 			m_general_stats[p - 1].miltary_strength.resize(entries);
+			m_general_stats[p - 1].custom_statistic.resize(entries);
 		}
 
 		iterate_players_existing_novar(p, nr_players, *this)
@@ -960,6 +982,8 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 				m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.Unsigned32();
 				m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.Unsigned32();
 				m_general_stats[p - 1].miltary_strength[j] = fr.Unsigned32();
+				if (version == 4)
+					m_general_stats[p - 1].custom_statistic[j] = fr.Unsigned32();
 			}
 	} else
 		throw wexception("Unsupported version %i", version);
@@ -1000,6 +1024,7 @@ void Game::WriteStatistics(FileWrite & fw)
 			fw.Unsigned32(m_general_stats[p - 1].nr_civil_blds_lost    [j]);
 			fw.Unsigned32(m_general_stats[p - 1].nr_civil_blds_defeated[j]);
 			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
+			fw.Unsigned32(m_general_stats[p - 1].custom_statistic[j]);
 		}
 }
 

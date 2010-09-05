@@ -20,7 +20,7 @@
 #include "window.h"
 
 #include "constants.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 
@@ -89,7 +89,8 @@ Window::Window
 		m_pic_bottom
 			(g_gr->get_picture(PicMod_UI, "pics/win_bot.png")),
 		m_pic_background
-			(g_gr->get_picture(PicMod_UI, "pics/win_bg.png"))
+			(g_gr->get_picture(PicMod_UI, "pics/win_bg.png")),
+		m_center_panel(0)
 {
 
 	if (title)
@@ -100,6 +101,7 @@ Window::Window
 		 TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_cache(true);
 	set_top_on_click(true);
+	set_layout_toplevel(true);
 }
 
 
@@ -110,6 +112,45 @@ void Window::set_title(const std::string & text)
 {
 	m_title = text;
 	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);
+}
+
+/**
+ * Set the center panel.
+ *
+ * The center panel is a child panel that will automatically determine
+ * the inner size of the window.
+ */
+void Window::set_center_panel(Panel * panel)
+{
+	assert(panel->get_parent() == this);
+
+	m_center_panel = panel;
+	update_desired_size();
+}
+
+/**
+ * Update the window's desired size based on its center panel.
+ */
+void Window::update_desired_size()
+{
+	if (m_center_panel) {
+		uint32_t innerw, innerh;
+		m_center_panel->get_desired_size(innerw, innerh);
+		set_desired_size
+			(innerw + get_lborder() + get_rborder(),
+			 innerh + get_tborder() + get_bborder());
+	}
+}
+
+/**
+ * Change the center panel's size so that it fills the window entirely.
+ */
+void Window::layout()
+{
+	if (m_center_panel) {
+		m_center_panel->set_pos(Point(0, 0));
+		m_center_panel->set_size(get_inner_w(), get_inner_h());
+	}
 }
 
 /**

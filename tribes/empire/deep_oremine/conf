@@ -33,13 +33,13 @@ produce=ironore:2
 
 [idle]
 pics=deep_oremine_i_??.png
-hotspot=49 62
+hotspot=49 61
 
 [working]
 pics=deep_oremine_w_??.png
-hotspot=49 62
+hotspot=49 61
 fps=10
 
 [build]
 pics=deep_oremine_i_??.png
-hotspot=49 62
+hotspot=49 61

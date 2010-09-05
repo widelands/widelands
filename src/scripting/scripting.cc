@@ -45,6 +45,7 @@
 // TODO: get_game should throw an error if not called in the game.
 // Check out what this BaseImmovable <-> Immovable thing is all about.
 
+
 /*
 ============================================
        Lua Table
@@ -62,11 +63,13 @@ public:
 
 		virtual std::string get_string(std::string s) {
 			lua_getfield(m_L, -1, s.c_str());
+			if (lua_isnil(m_L, -1)) {
+				lua_pop(m_L, 1);
+				throw LuaTableKeyError(s);
+			}
 			if (not lua_isstring(m_L, -1)) {
 				lua_pop(m_L, 1);
-				throw LuaError
-					(s + " is not a field in the table returned by the last "
-					 "script or not a string");
+				throw LuaError(s + "is not a string value.");
 			}
 			std::string rv = lua_tostring(m_L, -1);
 			lua_pop(m_L, 1);
@@ -77,6 +80,10 @@ public:
 	virtual LuaCoroutine * get_coroutine(std::string s) {
 		lua_getfield(m_L, -1, s.c_str());
 
+		if (lua_isnil(m_L, -1)) {
+				lua_pop(m_L, 1);
+				throw LuaTableKeyError(s);
+		}
 		if (lua_isfunction(m_L, -1)) {
 			// Oh well, a function, not a coroutine. Let's turn it into one
 			lua_State * t = lua_newthread(m_L);
@@ -89,9 +96,7 @@ public:
 
 		if (not lua_isthread(m_L, -1)) {
 			lua_pop(m_L, 1);
-			throw LuaError
-				(s + "is not a field in the table returned by the last script "
-				 "or not a function");
+			throw LuaError(s + "is not a function value.");
 		}
 		LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(m_L, -1));
 		lua_pop(m_L, 1); // Remove coroutine from stack
@@ -136,6 +141,7 @@ protected:
 		virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string);
 		virtual boost::shared_ptr<LuaTable> run_script
 			(FileSystem &, std::string, std::string);
+		virtual boost::shared_ptr<LuaTable> get_hook(std::string name);
 };
 
 
@@ -224,7 +230,9 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	}
 
 	// Push the instance of this class into the registry
-	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(this));
+	// MSVC2008 requires that stored and retrieved types are
+	// same, so use LuaInterface* on both sides.
+	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(dynamic_cast<LuaInterface*>(this)));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
 
 	// Now our own
@@ -303,6 +311,26 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 	}
 	if (not lua_istable(m_L, -1))
 		throw LuaError("Script did not return a table!");
+	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
+}
+
+/*
+ * Returns a given hook if one is defined, otherwise returns 0
+ */
+boost::shared_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
+	lua_getglobal(m_L, "hooks");
+	if(lua_isnil(m_L, -1)) {
+		lua_pop(m_L, 1);
+		return boost::shared_ptr<LuaTable>();
+	}
+
+	lua_getfield(m_L, -1, name.c_str());
+	if(lua_isnil(m_L, -1)) {
+		lua_pop(m_L, 2);
+		return boost::shared_ptr<LuaTable>();
+	}
+	lua_remove(m_L, -2);
+
 	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
 }
 

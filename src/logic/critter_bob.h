@@ -35,7 +35,7 @@ struct Critter_Bob_Descr : public Bob::Descr {
 	Critter_Bob_Descr
 		(char const * name, char const * descname,
 		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const *, EncodeData const * = 0);
+		 Tribe_Descr const *);
 	virtual ~Critter_Bob_Descr();
 
 	Bob & create_object() const;

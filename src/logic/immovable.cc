@@ -159,7 +159,6 @@ Immovable_Descr IMPLEMENTATION
  * Section [global]:
  * picture (default = $NAME_00.bmp): name of picture used in editor
  * size = none|small|medium|big (default = none): influences build options
- * EncodeData (default for all animations)
  *
  * Section [program] (optional)
  * step = animation [animation name] [duration]
@@ -178,8 +177,6 @@ Immovable_Descr::Immovable_Descr
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {
-	m_default_encodedata.clear();
-	m_default_encodedata.parse(global_s);
 
 	if (char const * const string = global_s.get_string("size"))
 		try {
@@ -680,8 +677,7 @@ ImmovableProgram::ActAnimate::ActAnimate
 				g_anim.get
 					(directory.c_str(),
 					 prof.get_safe_section(animation_name),
-					 0,
-					 &descr.get_default_encodedata());
+					 0);
 
 			descr.add_animation(animation_name, m_id);
 		}
@@ -1089,6 +1085,29 @@ void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 
 	BaseImmovable::cleanup(egbase);
 }
+
+/**
+ * We are the destination of the given ware's transfer, which is not associated
+ * with any request.
+ */
+void PlayerImmovable::receive_ware(Game &, Ware_Index ware)
+{
+	throw wexception
+		("MO(%u): Received a ware(%u), don't know what to do with it",
+		 serial(), ware.value());
+}
+
+/**
+ * We are the destination of the given worker's transfer, which is not
+ * associated with any request.
+ */
+void PlayerImmovable::receive_worker(Game &, Worker & worker)
+{
+	throw wexception
+		("MO(%u): Received a worker(%u), don't know what to do with it",
+		 serial(), worker.serial());
+}
+
 
 /**
  * Dump general information

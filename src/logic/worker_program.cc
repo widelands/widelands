@@ -30,7 +30,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"mine",              &WorkerProgram::parse_mine},
 	{"breed",             &WorkerProgram::parse_breed},
 	{"createitem",        &WorkerProgram::parse_createitem},
-	{"setdescription",    &WorkerProgram::parse_setdescription},
+	{"setdescription",    &WorkerProgram::parse_plant},
 	{"setbobdescription", &WorkerProgram::parse_setbobdescription},
 	{"findobject",        &WorkerProgram::parse_findobject},
 	{"findspace",         &WorkerProgram::parse_findspace},
@@ -173,26 +173,19 @@ void WorkerProgram::parse_breed
 
 
 /**
- * setdescription \<immovable name\> \<immovable name\> ...
+ * OUTDATED - SHOULD NOT BE USED ANYMORE AND DOES NOT DO ANYTHING VALUEABLE
+ *    just kept here for savegame compatibility for Build15 and earlier
  *
- * Randomly select an immovable name that can be used in subsequent commands
- * (e.g. plant).
+ * setdescription \<immovable name\> \<immovable name\> ...
  *
  * sparamv = possible bobs
  */
 void WorkerProgram::parse_setdescription
 	(Worker_Descr                   *,
-	 Worker::Action                 * act,
+	 Worker::Action                 *,
 	 Parser                         *,
-	 std::vector<std::string> const & cmd)
+	 std::vector<std::string> const &)
 {
-	if (cmd.size() < 2)
-		throw wexception("Usage: setdescription <bob name> <bob name> ...");
-
-	act->function = &Worker::run_setdescription;
-
-	for (uint32_t i = 1; i < cmd.size(); ++i)
-		act->sparamv.push_back(cmd[i]);
 }
 
 
@@ -304,6 +297,9 @@ void WorkerProgram::parse_findobject
  * Resource to search for. This is mainly intended for fisher and
  * therelike (non detectable Resources and default resources)
  *
+ * avoid:\<immovable attribute>
+ * a field containing an immovable with that immovable should not be used
+ *
  * space
  * Find only fields that are walkable such that all neighbours
  * are also walkable (an exception is made if one of the neighbouring
@@ -313,6 +309,7 @@ void WorkerProgram::parse_findobject
  * iparam2 = FindNodeSize::sizeXXX
  * iparam3 = whether the "space" flag is set
  * iparam4 = whether the "breed" flag is set
+ * iparam5 = Immovable attribute id
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace
@@ -328,6 +325,7 @@ void WorkerProgram::parse_findspace
 	act->iparam2 = -1;
 	act->iparam3 = 0;
 	act->iparam4 = 0;
+	act->iparam5 = -1;
 	act->sparam1 = "";
 
 	// Parse predicates
@@ -374,6 +372,8 @@ void WorkerProgram::parse_findspace
 			act->sparam1 = value;
 		} else if (key == "space") {
 			act->iparam3 = 1;
+		} else if (key == "avoid") {
+			act->iparam5 = Map_Object_Descr::get_attribute_id(value);
 		} else
 			throw wexception
 				("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
@@ -443,8 +443,7 @@ void WorkerProgram::parse_animation
 			 (g_anim.get
 			  	(parser->directory.c_str(),
 			  	 parser->prof->get_safe_section(cmd[1].c_str()),
-			  	 0,
-			  	 parser->encdata)));
+			  	 0)));
 	}
 	act->iparam1 = descr->get_animation(cmd[1].c_str());
 
@@ -495,16 +494,23 @@ void WorkerProgram::parse_object
 
 
 /**
- * Plant an immovable on the current position. The immovable type must have
- * been selected by a previous command (i.e. setdescription)
+ * plant \<immmovable type\> \<immovable type\> ...
+ *
+ * Plant one of the given immovables on the current position.
+ * Decision is made with inclusion of the terrain affinity.
  */
 void WorkerProgram::parse_plant
 	(Worker_Descr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
-	 std::vector<std::string> const &)
+	 std::vector<std::string> const & cmd)
 {
+	if (cmd.size() < 2)
+		throw wexception("Usage: plant <immovable type> <immovable type> ...");
+
 	act->function = &Worker::run_plant;
+	for (uint32_t i = 1; i < cmd.size(); ++i)
+		act->sparamv.push_back(cmd[i]);
 }
 
 
@@ -587,7 +593,12 @@ void WorkerProgram::parse_geologist_find
 }
 
 /**
- * Have the scout run around scouting the area
+ * scout \<radius\> \<time\>
+ *
+ * Sends the scout out to run around scouting the area
+ *
+ * iparam1 = radius
+ * iparam2 = time
  */
 void WorkerProgram::parse_scout
 	(Worker_Descr                   *,
@@ -595,10 +606,11 @@ void WorkerProgram::parse_scout
 	 Parser                         *,
 	 std::vector<std::string> const & cmd)
 {
-	if (cmd.size() != 2)
-		throw wexception("Usage: scout <time>");
+	if (cmd.size() != 3)
+		throw wexception("Usage: scout <radius> <time>");
 
 	act->iparam1 = atoi(cmd[1].c_str());
+	act->iparam2 = atoi(cmd[2].c_str());
 	act->function = &Worker::run_scout;
 }
 

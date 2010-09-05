@@ -69,6 +69,10 @@ struct Button : public NamedPanel {
 		m_fontsize = size;
 	}
 	bool is_snap_target() const {return true;}
+	void set_size(uint32_t nw, uint32_t nh) {
+		Panel::set_size(nw, nh);
+		m_needredraw = true;
+	}
 
 	// Drawing and event handlers
 	void draw(RenderTarget &)__attribute__((hot));
@@ -88,7 +92,7 @@ private:
 	bool        m_repeating;
 	bool        m_flat;
 	bool        m_needredraw;
-	PictureID   m_cache_pid;
+	PictureID   m_cache_pic;
 	
 
 	int32_t     m_time_nextact;

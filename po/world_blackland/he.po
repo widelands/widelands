@@ -6,27 +6,71 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:56+0000\n"
-"Last-Translator: REAL NAME <Unknown>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 22:31+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-06-08 03:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/blackland/conf:2
-msgid "The Widelands Development Team"
-msgstr "צוות הפיתוח של ווידלנדס"
+#: ../../worlds/blackland/conf:45
+msgid "Aspen"
+msgstr "צפצפה רעדנית"
+
+#: ../../worlds/blackland/conf:46
+msgid "Aspen medium"
+msgstr "צפצפה רעדנית בינוניה"
+
+#: ../../worlds/blackland/conf:47
+msgid "Aspen small"
+msgstr "צפצפה רעדנית קטנה"
+
+#: ../../worlds/blackland/conf:48
+msgid "Aspen tiny"
+msgstr "צפצפה רעדנית זעירה"
+
+#: ../../worlds/blackland/conf:65
+msgid "Beech"
+msgstr "אשור"
+
+#: ../../worlds/blackland/conf:66
+msgid "Beech medium"
+msgstr "אשור בינוני"
+
+#: ../../worlds/blackland/conf:67
+msgid "Beech small"
+msgstr "אשור קטן"
+
+#: ../../worlds/blackland/conf:68
+msgid "Beech tiny"
+msgstr "אשור זעיר"
+
+#: ../../worlds/blackland/conf:61
+msgid "Birch"
+msgstr "ברץ"
+
+#: ../../worlds/blackland/conf:62
+msgid "Birch medium"
+msgstr "ברץ בינוני"
+
+#: ../../worlds/blackland/conf:63
+msgid "Birch small"
+msgstr "ברץ קטן"
+
+#: ../../worlds/blackland/conf:64
+msgid "Birch tiny"
+msgstr "ברץ זעיר"
 
 #: ../../worlds/blackland/conf:3
 msgid "Blackland"
-msgstr ""
+msgstr "ארץ אפלה"
 
-#: ../../worlds/blackland/conf:4
-msgid "These are the grey, horrible and dangerous blacklands"
-msgstr ""
+#: ../../worlds/blackland/conf:79
+msgid "Bunny"
+msgstr "ארנב"
 
 #: ../../worlds/blackland/conf:7
 #: ../../worlds/blackland/conf:8
@@ -41,6 +85,10 @@ msgstr "שיח"
 msgid "Cactus"
 msgstr "קקטוס"
 
+#: ../../worlds/blackland/resconf:4
+msgid "Coal"
+msgstr "פחם"
+
 #: ../../worlds/blackland/conf:14
 #: ../../worlds/blackland/conf:15
 #: ../../worlds/blackland/conf:16
@@ -48,16 +96,92 @@ msgstr "קקטוס"
 msgid "Dead Tree"
 msgstr "עץ מת"
 
+#: ../../worlds/blackland/conf:80
+msgid "Deer"
+msgstr "צבי"
+
+#: ../../worlds/blackland/conf:81
+msgid "Duck"
+msgstr "ברווז"
+
+#: ../../worlds/blackland/resconf:41
+msgid "Fish"
+msgstr "דגים"
+
+#: ../../worlds/blackland/conf:82
+msgid "Fox"
+msgstr "שועל"
+
+#: ../../worlds/blackland/resconf:12
+msgid "Gold"
+msgstr "זהב"
+
+#: ../../worlds/blackland/resconf:28
+msgid "Granite"
+msgstr "שחם"
+
 #: ../../worlds/blackland/conf:18
 #: ../../worlds/blackland/conf:19
 #: ../../worlds/blackland/conf:20
 msgid "Grass"
 msgstr "דשא"
 
+#: ../../worlds/blackland/resconf:20
+msgid "Iron"
+msgstr "ברזל"
+
+#: ../../worlds/blackland/conf:69
+msgid "Larch"
+msgstr "לגש"
+
+#: ../../worlds/blackland/conf:70
+msgid "Larch medium"
+msgstr "לגש בינוני"
+
+#: ../../worlds/blackland/conf:71
+msgid "Larch small"
+msgstr "לגש קטן"
+
+#: ../../worlds/blackland/conf:72
+msgid "Larch tiny"
+msgstr "לגש זעיר"
+
+#: ../../worlds/blackland/conf:57
+msgid "Maple"
+msgstr "אדר"
+
+#: ../../worlds/blackland/conf:58
+msgid "Maple medium"
+msgstr "אדר בינוני"
+
+#: ../../worlds/blackland/conf:59
+msgid "Maple small"
+msgstr "אדר קטן"
+
+#: ../../worlds/blackland/conf:60
+msgid "Maple tiny"
+msgstr "אדר זעיר"
+
 #: ../../worlds/blackland/conf:21
 #: ../../worlds/blackland/conf:22
 msgid "Mushroom"
 msgstr "פטריה"
+
+#: ../../worlds/blackland/conf:49
+msgid "Oak"
+msgstr "אלון"
+
+#: ../../worlds/blackland/conf:50
+msgid "Oak medium"
+msgstr "אלון בינוני"
+
+#: ../../worlds/blackland/conf:51
+msgid "Oak small"
+msgstr "אלון קטן"
+
+#: ../../worlds/blackland/conf:52
+msgid "Oak tiny"
+msgstr "אלון זעיר"
 
 #: ../../worlds/blackland/conf:23
 #: ../../worlds/blackland/conf:24
@@ -68,11 +192,51 @@ msgstr "פטריה"
 msgid "Pebble"
 msgstr "אבן קטנה"
 
+#: ../../worlds/blackland/conf:83
+msgid "Reindeer"
+msgstr "צבי גדול"
+
+#: ../../worlds/blackland/conf:73
+msgid "Rowan"
+msgstr "חוזרר"
+
+#: ../../worlds/blackland/conf:74
+msgid "Rowan medium"
+msgstr "חוזרר בינוני"
+
+#: ../../worlds/blackland/conf:75
+msgid "Rowan small"
+msgstr "חוזרר קטן"
+
+#: ../../worlds/blackland/conf:76
+msgid "Rowan tiny"
+msgstr "חוזרר זעיר"
+
+#: ../../worlds/blackland/conf:84
+msgid "Sheep"
+msgstr "כבש"
+
 #: ../../worlds/blackland/conf:29
 #: ../../worlds/blackland/conf:30
 #: ../../worlds/blackland/conf:31
 msgid "Skeleton"
 msgstr "שלד"
+
+#: ../../worlds/blackland/conf:53
+msgid "Spruce"
+msgstr "אשוחית"
+
+#: ../../worlds/blackland/conf:54
+msgid "Spruce medium"
+msgstr "אשוחית בינוניה"
+
+#: ../../worlds/blackland/conf:55
+msgid "Spruce small"
+msgstr "אשוחית קטנה"
+
+#: ../../worlds/blackland/conf:56
+msgid "Spruce tiny"
+msgstr "אשוחית זעירה"
 
 #: ../../worlds/blackland/conf:32
 #: ../../worlds/blackland/conf:33
@@ -93,181 +257,20 @@ msgstr "אבנים עומדות"
 msgid "Stones"
 msgstr "אבנים"
 
-#: ../../worlds/blackland/conf:45
-msgid "Aspen"
-msgstr ""
+#: ../../worlds/blackland/conf:2
+msgid "The Widelands Development Team"
+msgstr "צוות הפיתוח של ווידלנדס"
 
-#: ../../worlds/blackland/conf:46
-msgid "Aspen medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:47
-msgid "Aspen small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:48
-msgid "Aspen tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:49
-msgid "Oak"
-msgstr ""
-
-#: ../../worlds/blackland/conf:50
-msgid "Oak medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:51
-msgid "Oak small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:52
-msgid "Oak tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:53
-msgid "Spruce"
-msgstr ""
-
-#: ../../worlds/blackland/conf:54
-msgid "Spruce medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:55
-msgid "Spruce small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:56
-msgid "Spruce tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:57
-msgid "Maple"
-msgstr ""
-
-#: ../../worlds/blackland/conf:58
-msgid "Maple medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:59
-msgid "Maple small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:60
-msgid "Maple tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:61
-msgid "Birch"
-msgstr ""
-
-#: ../../worlds/blackland/conf:62
-msgid "Birch medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:63
-msgid "Birch small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:64
-msgid "Birch tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:65
-msgid "Beech"
-msgstr ""
-
-#: ../../worlds/blackland/conf:66
-msgid "Beech medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:67
-msgid "Beech small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:68
-msgid "Beech tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:69
-msgid "Larch"
-msgstr ""
-
-#: ../../worlds/blackland/conf:70
-msgid "Larch medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:71
-msgid "Larch small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:72
-msgid "Larch tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:73
-msgid "Rowan"
-msgstr ""
-
-#: ../../worlds/blackland/conf:74
-msgid "Rowan medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:75
-msgid "Rowan small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:76
-msgid "Rowan tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:79
-msgid "Bunny"
-msgstr "ארנב"
-
-#: ../../worlds/blackland/conf:80
-msgid "Deer"
-msgstr "צבי"
-
-#: ../../worlds/blackland/conf:81
-msgid "Duck"
-msgstr "ברווז"
-
-#: ../../worlds/blackland/conf:82
-msgid "Fox"
-msgstr "שועל"
-
-#: ../../worlds/blackland/conf:83
-msgid "Reindeer"
-msgstr "צבי גדול"
-
-#: ../../worlds/blackland/conf:84
-msgid "Sheep"
-msgstr "כבש"
-
-#: ../../worlds/blackland/resconf:4
-msgid "Coal"
-msgstr "פיחם"
-
-#: ../../worlds/blackland/resconf:12
-msgid "Gold"
-msgstr "זהב"
-
-#: ../../worlds/blackland/resconf:20
-msgid "Iron"
-msgstr "ברזל"
-
-#: ../../worlds/blackland/resconf:28
-msgid "Granit"
-msgstr "אבן גרניט"
+#: ../../worlds/blackland/conf:4
+msgid "These are the grey, horrible and dangerous blacklands"
+msgstr "אלה הן אפל-ארצות האפוריות, המחרידית והמסוכנות"
 
 #: ../../worlds/blackland/resconf:36
 msgid "Water"
 msgstr "מים"
 
-#: ../../worlds/blackland/resconf:41
-msgid "Fish"
-msgstr "דגים"
+#~ msgid "Granit"
+#~ msgstr "אבן גרניט"
 
 #~ msgid "Tree"
 #~ msgstr "עץ"

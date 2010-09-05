@@ -10,10 +10,10 @@ fps=10
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=10 21
+hotspot=10 19
 fps=10
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=10 21
+hotspot=10 19
 fps=10

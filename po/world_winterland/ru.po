@@ -6,30 +6,71 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 18:58+0000\n"
-"Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 22:42+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: russian <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-06-08 03:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/winterland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Команда разработчиков Widelands"
+#: ../../worlds/winterland/conf:45
+msgid "Aspen"
+msgstr "Осина"
 
-#: ../../worlds/winterland/conf:3
-msgid "Winterland"
-msgstr "Арктика"
+#: ../../worlds/winterland/conf:46
+msgid "Aspen medium"
+msgstr "Средняя осина"
 
-#: ../../worlds/winterland/conf:4
-msgid ""
-"These are the white, wide and frosty winterlands, in which the Northmen "
-"dwell."
-msgstr ""
-"Это белые, обширные и холодные земли вечной зимы, в которых живут Северяне."
+#: ../../worlds/winterland/conf:47
+msgid "Aspen small"
+msgstr "Малая осина"
+
+#: ../../worlds/winterland/conf:48
+msgid "Aspen tiny"
+msgstr "Маленькая осина"
+
+#: ../../worlds/winterland/conf:79
+msgid "Badger"
+msgstr "Барсук"
+
+#: ../../worlds/winterland/conf:65
+msgid "Beech"
+msgstr "Бук"
+
+#: ../../worlds/winterland/conf:66
+msgid "Beech medium"
+msgstr "Средний бук"
+
+#: ../../worlds/winterland/conf:67
+msgid "Beech small"
+msgstr "Малый бук"
+
+#: ../../worlds/winterland/conf:68
+msgid "Beech tiny"
+msgstr "Маленький бук"
+
+#: ../../worlds/winterland/conf:61
+msgid "Birch"
+msgstr "Береза"
+
+#: ../../worlds/winterland/conf:62
+msgid "Birch medium"
+msgstr "Средняя береза"
+
+#: ../../worlds/winterland/conf:63
+msgid "Birch small"
+msgstr "Малая береза"
+
+#: ../../worlds/winterland/conf:64
+msgid "Birch tiny"
+msgstr "Маленькая береза"
+
+#: ../../worlds/winterland/conf:80
+msgid "Bunny"
+msgstr "Кролик"
 
 #: ../../worlds/winterland/conf:7
 #: ../../worlds/winterland/conf:8
@@ -39,6 +80,10 @@ msgstr ""
 msgid "Bush"
 msgstr "Куст"
 
+#: ../../worlds/winterland/resconf:4
+msgid "Coal"
+msgstr "Уголь"
+
 #: ../../worlds/winterland/conf:12
 #: ../../worlds/winterland/conf:13
 #: ../../worlds/winterland/conf:14
@@ -46,16 +91,104 @@ msgstr "Куст"
 msgid "Dead Tree"
 msgstr "Сухостой"
 
+#: ../../worlds/winterland/conf:81
+msgid "Deer"
+msgstr "Олень"
+
+#: ../../worlds/winterland/conf:82
+msgid "Duck"
+msgstr "Утка"
+
+#: ../../worlds/winterland/conf:83
+msgid "Elk"
+msgstr "Лось"
+
+#: ../../worlds/winterland/resconf:41
+msgid "Fish"
+msgstr "Рыба"
+
+#: ../../worlds/winterland/conf:84
+msgid "Fox"
+msgstr "Лиса"
+
+#: ../../worlds/winterland/resconf:12
+msgid "Gold"
+msgstr "Золото"
+
+#: ../../worlds/winterland/resconf:28
+msgid "Granite"
+msgstr "Гранит"
+
 #: ../../worlds/winterland/conf:16
 #: ../../worlds/winterland/conf:17
 #: ../../worlds/winterland/conf:18
 msgid "Grass"
 msgstr "Трава"
 
+#: ../../worlds/winterland/resconf:20
+msgid "Iron"
+msgstr "Железо"
+
+#: ../../worlds/winterland/conf:69
+msgid "Larch"
+msgstr "Лиственница"
+
+#: ../../worlds/winterland/conf:70
+msgid "Larch medium"
+msgstr "Средняя лиственница"
+
+#: ../../worlds/winterland/conf:71
+msgid "Larch small"
+msgstr "Малая лиственница"
+
+#: ../../worlds/winterland/conf:72
+msgid "Larch tiny"
+msgstr "Маленькая лиственница"
+
+#: ../../worlds/winterland/conf:85
+msgid "Lynx"
+msgstr "Рысь"
+
+#: ../../worlds/winterland/conf:57
+msgid "Maple"
+msgstr "Клён"
+
+#: ../../worlds/winterland/conf:58
+msgid "Maple medium"
+msgstr "Средний клён"
+
+#: ../../worlds/winterland/conf:59
+msgid "Maple small"
+msgstr "Малый клён"
+
+#: ../../worlds/winterland/conf:60
+msgid "Maple tiny"
+msgstr "Маленький клён"
+
+#: ../../worlds/winterland/conf:86
+msgid "Marten"
+msgstr "Куница"
+
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
 msgid "Mushroom"
 msgstr "Гриб"
+
+#: ../../worlds/winterland/conf:49
+msgid "Oak"
+msgstr "Дуб"
+
+#: ../../worlds/winterland/conf:50
+msgid "Oak medium"
+msgstr "Средний дуб"
+
+#: ../../worlds/winterland/conf:51
+msgid "Oak small"
+msgstr "Малый дуб"
+
+#: ../../worlds/winterland/conf:52
+msgid "Oak tiny"
+msgstr "Маленький дуб"
 
 #: ../../worlds/winterland/conf:21
 #: ../../worlds/winterland/conf:22
@@ -66,6 +199,30 @@ msgstr "Гриб"
 msgid "Pebble"
 msgstr "Галька"
 
+#: ../../worlds/winterland/conf:87
+msgid "Reindeer"
+msgstr "Северный олень"
+
+#: ../../worlds/winterland/conf:73
+msgid "Rowan"
+msgstr "Рябина"
+
+#: ../../worlds/winterland/conf:74
+msgid "Rowan medium"
+msgstr "Средняя рябина"
+
+#: ../../worlds/winterland/conf:75
+msgid "Rowan small"
+msgstr "Малая рябина"
+
+#: ../../worlds/winterland/conf:76
+msgid "Rowan tiny"
+msgstr "Маленькая рябина"
+
+#: ../../worlds/winterland/conf:88
+msgid "Sheep"
+msgstr "Овца"
+
 #: ../../worlds/winterland/conf:27
 #: ../../worlds/winterland/conf:28
 #: ../../worlds/winterland/conf:29
@@ -75,6 +232,22 @@ msgstr "Скелет"
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
 msgstr "Снеговик"
+
+#: ../../worlds/winterland/conf:53
+msgid "Spruce"
+msgstr "Ель"
+
+#: ../../worlds/winterland/conf:54
+msgid "Spruce medium"
+msgstr "Средняя ель"
+
+#: ../../worlds/winterland/conf:55
+msgid "Spruce small"
+msgstr "Малая ель"
+
+#: ../../worlds/winterland/conf:56
+msgid "Spruce tiny"
+msgstr "Маленькая ель"
 
 #: ../../worlds/winterland/conf:31
 #: ../../worlds/winterland/conf:32
@@ -95,177 +268,28 @@ msgstr "Скалы"
 msgid "Stones"
 msgstr "Камни"
 
+#: ../../worlds/winterland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Команда разработчиков Widelands"
+
+#: ../../worlds/winterland/conf:4
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr ""
+"Это белые, обширные и холодные земли вечной зимы, в которых живут Северяне."
+
 #: ../../worlds/winterland/conf:44
 msgid "Track"
 msgstr "Дорожка"
 
-#: ../../worlds/winterland/conf:45
-msgid "Aspen"
-msgstr "Осина"
+#: ../../worlds/winterland/resconf:36
+msgid "Water"
+msgstr "Вода"
 
-#: ../../worlds/winterland/conf:46
-msgid "Aspen medium"
-msgstr "Средняя осина"
-
-#: ../../worlds/winterland/conf:47
-msgid "Aspen small"
-msgstr "Малая осина"
-
-#: ../../worlds/winterland/conf:48
-msgid "Aspen tiny"
-msgstr "Маленькая осина"
-
-#: ../../worlds/winterland/conf:49
-msgid "Oak"
-msgstr "Дуб"
-
-#: ../../worlds/winterland/conf:50
-msgid "Oak medium"
-msgstr "Средний дуб"
-
-#: ../../worlds/winterland/conf:51
-msgid "Oak small"
-msgstr "Малый дуб"
-
-#: ../../worlds/winterland/conf:52
-msgid "Oak tiny"
-msgstr "Маленький дуб"
-
-#: ../../worlds/winterland/conf:53
-msgid "Spruce"
-msgstr "Ель"
-
-#: ../../worlds/winterland/conf:54
-msgid "Spruce medium"
-msgstr "Средняя ель"
-
-#: ../../worlds/winterland/conf:55
-msgid "Spruce small"
-msgstr "Малая ель"
-
-#: ../../worlds/winterland/conf:56
-msgid "Spruce tiny"
-msgstr "Маленькая ель"
-
-#: ../../worlds/winterland/conf:57
-msgid "Maple"
-msgstr "Клён"
-
-#: ../../worlds/winterland/conf:58
-msgid "Maple medium"
-msgstr "Средний клён"
-
-#: ../../worlds/winterland/conf:59
-msgid "Maple small"
-msgstr "Малый клён"
-
-#: ../../worlds/winterland/conf:60
-msgid "Maple tiny"
-msgstr "Маленький клён"
-
-#: ../../worlds/winterland/conf:61
-msgid "Birch"
-msgstr "Береза"
-
-#: ../../worlds/winterland/conf:62
-msgid "Birch medium"
-msgstr "Средняя береза"
-
-#: ../../worlds/winterland/conf:63
-msgid "Birch small"
-msgstr "Малая береза"
-
-#: ../../worlds/winterland/conf:64
-msgid "Birch tiny"
-msgstr "Маленькая береза"
-
-#: ../../worlds/winterland/conf:65
-msgid "Beech"
-msgstr "Бук"
-
-#: ../../worlds/winterland/conf:66
-msgid "Beech medium"
-msgstr "Средний бук"
-
-#: ../../worlds/winterland/conf:67
-msgid "Beech small"
-msgstr "Малый бук"
-
-#: ../../worlds/winterland/conf:68
-msgid "Beech tiny"
-msgstr "Маленький бук"
-
-#: ../../worlds/winterland/conf:69
-msgid "Larch"
-msgstr "Лиственница"
-
-#: ../../worlds/winterland/conf:70
-msgid "Larch medium"
-msgstr "Средняя лиственница"
-
-#: ../../worlds/winterland/conf:71
-msgid "Larch small"
-msgstr "Малая лиственница"
-
-#: ../../worlds/winterland/conf:72
-msgid "Larch tiny"
-msgstr "Маленькая лиственница"
-
-#: ../../worlds/winterland/conf:73
-msgid "Rowan"
-msgstr "Рябина"
-
-#: ../../worlds/winterland/conf:74
-msgid "Rowan medium"
-msgstr "Средняя рябина"
-
-#: ../../worlds/winterland/conf:75
-msgid "Rowan small"
-msgstr "Малая рябина"
-
-#: ../../worlds/winterland/conf:76
-msgid "Rowan tiny"
-msgstr "Маленькая рябина"
-
-#: ../../worlds/winterland/conf:79
-msgid "Badger"
-msgstr "Барсук"
-
-#: ../../worlds/winterland/conf:80
-msgid "Bunny"
-msgstr "Кролик"
-
-#: ../../worlds/winterland/conf:81
-msgid "Deer"
-msgstr "Олень"
-
-#: ../../worlds/winterland/conf:82
-msgid "Duck"
-msgstr "Утка"
-
-#: ../../worlds/winterland/conf:83
-msgid "Elk"
-msgstr "Лось"
-
-#: ../../worlds/winterland/conf:84
-msgid "Fox"
-msgstr "Лиса"
-
-#: ../../worlds/winterland/conf:85
-msgid "Lynx"
-msgstr "Рысь"
-
-#: ../../worlds/winterland/conf:86
-msgid "Marten"
-msgstr "Куница"
-
-#: ../../worlds/winterland/conf:87
-msgid "Reindeer"
-msgstr "Северный олень"
-
-#: ../../worlds/winterland/conf:88
-msgid "Sheep"
-msgstr "Овца"
+#: ../../worlds/winterland/conf:3
+msgid "Winterland"
+msgstr "Арктика"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"
@@ -275,29 +299,8 @@ msgstr "Зубр"
 msgid "Wolf"
 msgstr "Волк"
 
-#: ../../worlds/winterland/resconf:4
-msgid "Coal"
-msgstr "Уголь"
-
-#: ../../worlds/winterland/resconf:12
-msgid "Gold"
-msgstr "Золото"
-
-#: ../../worlds/winterland/resconf:20
-msgid "Iron"
-msgstr "Железо"
-
-#: ../../worlds/winterland/resconf:28
-msgid "Granit"
-msgstr "Гранит"
-
-#: ../../worlds/winterland/resconf:36
-msgid "Water"
-msgstr "Вода"
-
-#: ../../worlds/winterland/resconf:41
-msgid "Fish"
-msgstr "Рыба"
+#~ msgid "Granit"
+#~ msgstr "Гранит"
 
 #~ msgid "Tree"
 #~ msgstr "Дерево"

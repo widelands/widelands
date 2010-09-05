@@ -29,7 +29,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 15,
+	NETWORK_PROTOCOL_VERSION = 16,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -369,7 +369,20 @@ enum {
 	* Attached data is:
 	* \li String: name of the win condition
 	*/
-	NETCMD_WIN_CONDITION = 26
+	NETCMD_WIN_CONDITION = 26,
+
+	/**
+	 * During game setup, this is sent by the client to indicate that the
+	 * client wants to change its team number.
+	 *
+	 * \li Unsigned8: new desired team number
+	 *
+	 * \note The client must not assume that the host will accept this
+	 * request. Change of team number only becomes effective when/if the host
+	 * replies with a \ref NETCMD_SETTING_PLAYER or \ref NETCMD_SETTING_ALLPLAYERS
+	 * indicating the changed team.
+	 */
+	NETCMD_SETTING_CHANGETEAM = 27
 };
 
 #endif

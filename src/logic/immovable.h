@@ -32,6 +32,7 @@ struct Economy;
 struct Flag;
 struct Map;
 struct Tribe_Descr;
+class WareInstance;
 class Worker;
 
 /**
@@ -97,9 +98,6 @@ struct Immovable_Descr : public Map_Object_Descr {
 	int32_t get_size() const throw () {return m_size;}
 	char const * get_picture() const {return m_picture.c_str();}
 	ImmovableProgram const * get_program(std::string const &) const;
-	EncodeData const & get_default_encodedata() const {
-		return m_default_encodedata;
-	}
 
 	Immovable & create(Editor_Game_Base &, Coords) const;
 
@@ -110,8 +108,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 protected:
 	std::string m_picture;
-	int32_t           m_size;
-	EncodeData    m_default_encodedata;
+	int32_t     m_size;
 
 	Programs    m_programs;
 
@@ -238,6 +235,21 @@ struct PlayerImmovable : public BaseImmovable {
 	Workers const & get_workers() const {return m_workers;}
 
 	virtual void log_general_info(Editor_Game_Base const &);
+
+	/**
+	 * These functions are called when a ware or worker arrives at
+	 * this immovable as the destination of a transfer that does not
+	 * have an associated request.
+	 *
+	 * At the time of this writing, this happens only for warehouses.
+	 *
+	 * \note This is independent of the \ref add_worker / \ref remove_worker
+	 * functionality, which has to do with setting up locations.
+	 */
+	/*@{*/
+	virtual void receive_ware(Game &, Ware_Index ware);
+	virtual void receive_worker(Game &, Worker & worker);
+	/*@}*/
 
 protected:
 	void set_owner(Player *);

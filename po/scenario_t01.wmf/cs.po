@@ -8,36 +8,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:13+0000\n"
-"Last-Translator: Markus7cz <Unknown>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 20:56+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Trénink 1 - Oči v temnotě"
-
-#: ../../campaigns/t01.wmf/elemental:9
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
 msgid ""
-"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
-"gameplay and control as well as basic production buildings (wood, stone, "
-"etc.) will be introduced."
+" \"As father told me, there are times to fight and times to lie and wait, "
+"trying not to fall asleep or die before the right time comes. And so I do... "
+"wait.\" "
 msgstr ""
-"První mise výukové kampaně barbarů. V této misi se naučíte základní ovládání "
-"hry a představíme základní výrobní budovy a suroviny (dřevo, kámen, atd...)."
+" \"Jak mi řekl můj otec, jsou časy boje a časy čekání, snahdy neusnout  a "
+"nezemřít dřív než přijde pravý čas. A tak... čekám\" "
 
-#: ../../campaigns/t01.wmf/event:23
-msgid "Thron sighs..."
-msgstr "Thron si povzdechl..."
+#: ../../campaigns/t01.wmf/scripting/texts.lua:45
+msgid ""
+" \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
+"allow me to aid you with my counsel through these darkened days.\" "
+msgstr ""
+" \"Buď pozdraven, veliteli. Jsem Khantrukh a prožil jsem už mnoho zim. Dovol "
+"mi prosím pomoci ti radou v těchto nelehkých dobách.\" "
 
-#: ../../campaigns/t01.wmf/event:25
+#: ../../campaigns/t01.wmf/scripting/texts.lua:89
+msgid ""
+" \"I am well aware, chieftain, that neither you nor your warriors have the "
+"desire to stay in this forsaken place for long. But even so, our war to "
+"reconquer our home might take a long time and it would seem wise to make "
+"preparations.<br> I would advise that we obtain stones for the future - who "
+"knows what fortifications we might be forced to build very soon. And - like "
+"a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
+"NEW OBJECTIVE --<br> "
+msgstr ""
+" \"Je mi jasné náčelníku, že ani vy ani vaši válečníci nemáte v úmyslu "
+"zůstat v této bohem zapovězené krajině příliš dlouho. Ale i tak, naše válka "
+"za znovudobytí našeho domova může zabrat dlouhý čas a bylo by moudré provést "
+"přípravy. <br> Radil bych zaopatřit kameny- kdo ví, jaká opevnění budeme "
+"možná brzy nuceni stavět. A - jako dar osudu - jsou nedaleko právě vhodné "
+"kameny...\"<br><br>-- NOVÝ ÚKOL --<br> "
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:105
+msgid ""
+" \"In another sleepless night, I went up to the hill and gazed to the north. "
+"The fires are still burning, satisfying their hunger upon my father's "
+"legacy.<br> They are a constant reminder why we have to hide here... and why "
+"we must return in the end!\" "
+msgstr ""
+" \"V další bezesné noci jsme vyšel na kopec a pozoroval sever. Ohně stále "
+"hoří, uspokojujíc svůj hlad po otcově díle.<br> Jsou neustálou připomínkou "
+"proč se tu musíme schovávat.... a proč se nakonec musíme vrátit!\" "
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:11
 msgid ""
 " \"It's been months and we are still hiding where the forests are old and "
 "dark.<br> My warriors hunt at day and lie awake at night - listening to the "
@@ -47,308 +75,58 @@ msgstr ""
 "hvozdech.<br> Mí bojovníci ve dne loví a v noci bdí - poslouchají zvuky "
 "krutého vraždění, které k nám doznívají z daleka mezi prastarými stromy.\" "
 
-#: ../../campaigns/t01.wmf/event:27
-#: ../../campaigns/t01.wmf/event:40
-#: ../../campaigns/t01.wmf/event:53
-#: ../../campaigns/t01.wmf/event:66
-msgid "The story begins"
-msgstr "Příběh začíná"
-
-#: ../../campaigns/t01.wmf/event:32
-#: ../../campaigns/t01.wmf/event:45
-#: ../../campaigns/t01.wmf/event:58
-#: ../../campaigns/t01.wmf/event:71
-#: ../../campaigns/t01.wmf/event:106
-#: ../../campaigns/t01.wmf/event:122
-#: ../../campaigns/t01.wmf/event:137
-#: ../../campaigns/t01.wmf/event:153
-#: ../../campaigns/t01.wmf/event:168
-#: ../../campaigns/t01.wmf/event:184
-#: ../../campaigns/t01.wmf/event:199
-#: ../../campaigns/t01.wmf/event:229
-#: ../../campaigns/t01.wmf/event:244
-#: ../../campaigns/t01.wmf/event:259
-#: ../../campaigns/t01.wmf/event:274
-#: ../../campaigns/t01.wmf/event:306
-msgid "OK"
-msgstr "OK"
-
-#: ../../campaigns/t01.wmf/event:38
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:22
 msgid ""
-" \"We can see the raging flames that swallow Al'thunran from here, miles "
-"away.<br> The red lights flash in the darkness and dance to the rhythm of "
-"the wardrums that haunt me even in my nightmares.\" "
+" \"My father's bones rest peacefully in the grounds on which he once ended "
+"the senseless bloodspilling that has risen among us. It pains me that his "
+"peace only endured for one generation.<br> Boldreth, my loyal companion and "
+"friend is a source of peace and comfort to me in these dark times. He keeps "
+"my spirits high and those of my warriors awake, not to let greed or despair "
+"destroy the bonds between us as well.\" "
 msgstr ""
-" \"Míle odsud, míle daleko, stále vidíme zběsilé plameny, které polykají "
-"Al'thunran.<br> Rudé odlesky se blýskají na nočním nebi a tančí v rytmu "
-"válečných bubnů. Jejich zvuk mě děsí i v mých nočních můrách.\" "
 
-#: ../../campaigns/t01.wmf/event:51
-msgid ""
-" \"My father's bones lay peacefully in the grounds he cleared from the "
-"senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal "
-"companion and friend is a source of peace and comfort to me in these dark "
-"times. He keeps my spirits high and those of my warriors awake, not to let "
-"greed or despair destroy our bonds as well.\" "
-msgstr ""
-" \"Kosti mého otce už leží v míru v zemi, kterou očistil od nesmyslného "
-"prolévání krve, které mezi námi kdysi vládlo.<br>Boldreth, můj věrný druh a "
-"přítel, je mi oporou a zdrojem klidu v těchto těžkých dobách. Dodává mi "
-"odvahy a povzbuzuje i mé bojovníky a nedovolí, aby zvůle nebo zoufalství "
-"zničilo naše sliby.\" "
-
-#: ../../campaigns/t01.wmf/event:64
-msgid ""
-" \"As father told me, there will be times to fight and times to lie and "
-"wait, trying not to sleep or die before the right time comes. And so I do... "
-"wait.\" "
-msgstr ""
-" \"Otec mi řekl, že přijdou doby válčení a doby spočinutí a čekání, snahy "
-"nezemdlít a nepadnout před tím, než přijde opět ta chvíle. A tak i já... "
-"čekám.\" "
-
-#: ../../campaigns/t01.wmf/event:98
-msgid "An old man says..."
-msgstr "Starý muž říká..."
-
-#: ../../campaigns/t01.wmf/event:100
-msgid ""
-" \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
-"allow me to aid you with my counsel through these darkened days.\" "
-msgstr ""
-" \"Buď pozdraven, veliteli. Jsem Khantrukh a prožil jsem už mnoho zim. Dovol "
-"mi prosím pomoci ti radou v těchto nelehkých dobách.\" "
-
-#: ../../campaigns/t01.wmf/event:102
-msgid "Somebody comes upon to you"
-msgstr "Kdosi k tobě přistoupil"
-
-#: ../../campaigns/t01.wmf/event:112
-msgid "Khantrukh continues..."
-msgstr "Khantrukh pokračuje..."
-
-#: ../../campaigns/t01.wmf/event:114
+#: ../../campaigns/t01.wmf/scripting/texts.lua:51
 msgid ""
 " \"None but the gods know how long we have to remain hidden here. The "
 "warriors hope we may march back gloriously any day now, but I strongly doubt "
 "that will happen soon. And the days are already getting shorter and "
 "colder...<br> We should prepare, in case we have to face the winter in these "
-"harsh lands. I believe to the east of our campside are a few places where we "
+"harsh lands. I believe to the east of our campsite are a few places where we "
 "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
-" \"Jen sami bohové vědí, jak dlouho tu budeme ještě muset zůstat skryti. Tví "
-"bojovníci sní, že budeme pochodovat vítězně zpět už za pár dní, ale "
-"nemyslím, že k tomu dojde nějak brzy. A dny se už krátí a je stále "
-"chladněji...<br>Připravme se pro případ, že budeme muset čelit zimě v těchto "
-"drsných zemích. Na východ od tábora je pár míst, kde bychom mohli zbudovat "
-"chaty pro dřevorubce.\"<br><br>-- NOVÝ ÚKOL --<br> "
 
-#: ../../campaigns/t01.wmf/event:115
-#: ../../campaigns/t01.wmf/objective:7
+#: ../../campaigns/t01.wmf/scripting/texts.lua:60
 msgid ""
-"* Press SPACE to see where you can build.<br> The red spots show you where a "
-"small building - like a lumberjack's hut - may be built.<br>"
-msgstr ""
-"* Stiskni mezerník pro zobrazení míst ke stavění.<br> Červená místa ukazují, "
-"kde lze vybudovat malou budovu - například chatu pro dřevorubce.<br>"
-
-#: ../../campaigns/t01.wmf/event:116
-#: ../../campaigns/t01.wmf/objective:8
-msgid ""
-"* Build a lumberjack's hut at the red spot directly right of your "
-"headquarters by clicking at it and selecting lumberjack's hut.<br>"
-msgstr ""
-"* Postav chatu pro dřevorubce na červeně vyznačeném místě přímo vpravo od "
-"základny kliknutím a vybráním chaty pro dřevorubce.<br>"
-
-#: ../../campaigns/t01.wmf/event:118
-#: ../../campaigns/t01.wmf/event:133
-#: ../../campaigns/t01.wmf/event:149
-#: ../../campaigns/t01.wmf/event:164
-#: ../../campaigns/t01.wmf/event:180
-#: ../../campaigns/t01.wmf/event:195
-msgid "The advisor"
-msgstr "Rádce"
-
-#: ../../campaigns/t01.wmf/event:128
-msgid "The elder remarks..."
-msgstr "Stařešina přidává..."
-
-#: ../../campaigns/t01.wmf/event:130
-msgid ""
-" \"Obviously, it would be too draining for our people to walk all the way to "
-"the lumberjack's hut through the wilderness. We will have to make a path "
+" \"Obviously, it would be too exhausting for our people to walk all the way "
+"to the lumberjack's hut through the wilderness. We will have to build a road "
 "between our hall and the lumberjack's hut. It's not a hard guess that the "
-"men would appreciate a way as short and even as possible - the wood surely "
-"will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
+"men would appreciate a way as short and plain as possible - the wood will "
+"surely be heavy enough, nevertheless.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Samozřejmě, že kdyby se měli naši lidé ke dřevorubci prodírat divočinou, "
-"bylo by to pro ně příliš namáhavé. Musíme vybudovat stezku mezi naší "
-"základnou a chatou dřevorubce. Není těžké uhádnout, že lidé ocení co možná "
-"nejkratší a nejpřímější cestu - i tak bude dřevo dost těžké samo o "
-"sobě.\"<br><br>-- NOVÝ ÚKOL --<br> "
+" \"Očividně by pro náš lid bylo příliš vyčerpávající chodit celou cestu k "
+"dřevorubci divočinou. budeme muset postavit cestu mezi naší hlavní budovou a "
+"chatou dřevorubce. Není pochyb že lidé ocení cestu krátkou a rovnou, jak jen "
+"to bude možné - už i tak bude dřevo dost těžké.\"<br><br>-- NOVÝ ÚKOL --<br> "
 
-#: ../../campaigns/t01.wmf/event:131
-#: ../../campaigns/t01.wmf/objective:9
+#: ../../campaigns/t01.wmf/scripting/texts.lua:81
 msgid ""
-"* Build a road between your headquarters and the lumberjack's hut.<br> When "
-"you place the lumberjack's hut, a flag is created for it. You should connect "
-"it to another flag with a road.<br> If you click on a flag, little symbols "
-"will appear around it to show you in which directions you can build the "
-"road.<br> The colour of those symbols indicate how steep the road will be. "
-"Green is flat, yellow is steep and red is very steep. The steeper the step "
-"is, the harder it will be for your people to walk on it.<br> You can click "
-"on any of the symbols to build the first step of the road there. New symbols "
-"will appear to show you where the next step can go, and so on. However, you "
-"can also click further away to build several steps at once. Click on the "
-"flag at the headquarters to finish the road."
-msgstr ""
-"* Postav cestu mezi základnou a chatou dřevorubce.<br> Když umístíš chatu "
-"dřevorubce, je u staveniště vztyčena vlajka. Tuto vlajku bys měl propojit "
-"pomocí cesty s jinou vlajkou.<br> Pokud klikneš na vlajku, zobrazí se v "
-"okolí malé symboly, které ukazují, kterými směry můžeš budovat cestu.<br> "
-"Barva těchto symbolů napovídá jak strmý je okolní terén. Zelená je rovný "
-"terén, žlutá je strmý a červená je velmi strmý. Čím strmější, tím těžší bude "
-"pro tvé lidi přes něj přejít.<br> Když na symbol klikneš, postavíš úsek "
-"cesty a symboly se objeví v místě, kudy může vést další úsek cesty. Můžeš "
-"také kliknout dál od původního místa a postavit tak několik úseků najednou. "
-"Kliknutím na vlajku u základny cestu dokončíš."
-
-#: ../../campaigns/t01.wmf/event:144
-msgid "Khantrukh remembers..."
-msgstr "Khantrukh vzpomíná..."
-
-#: ../../campaigns/t01.wmf/event:146
-msgid ""
-" \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A "
-"crossroads on the way between our site and the lumberjack's hut would ease "
-"the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" \"Znám staré přísloví:<br> 'Ve dvou se to lépe táhne.'<br> Křižovatka na "
-"cestě mezi námi a dřevorubcem by nosičům usnadnila práci.\"<br><br>-- NOVÝ "
-"ÚKOL --<br> "
-
-#: ../../campaigns/t01.wmf/event:147
-#: ../../campaigns/t01.wmf/objective:17
-msgid ""
-"* Place a flag in the middle of the road.<br> There is a flag symbol in the "
-"mid of the way you just built. You place a flag there by clicking on the "
-"symbol and then clicking on the flag button in the consequently appearing "
-"menu. This splits the work of carrying the wood between two carriers.<br> "
-"When much wares are being transported between two points, additional flags "
-"in between make them get faster to their destination, thus improving your "
-"infrastructure.<br>"
-msgstr ""
-"* Umísti vlajku doprostřed cesty.<br> Uprostřed právě postavené cesty je "
-"symbol vlajky. Kliknutím na něj otevři menu a vyber symbol vlajky. Tím na "
-"cestu umístíš novou vlajku a rozdělíš tak cestu pro nošení dřeva mezi dva "
-"nosiče.<br> Když je mezi dvěma body přenášeno hodně zboží, přidání dalších "
-"vlajek na takovou cestu zlepší infrastrukturu, protože se zboží rychleji "
-"dostane na místo určení.<br>"
-
-#: ../../campaigns/t01.wmf/event:159
-msgid "The old man looks to the sky..."
-msgstr "Starý muž se zahledí do nebe..."
-
-#: ../../campaigns/t01.wmf/event:161
-msgid ""
-" \"The northern winds tell us that the coming winter will be a long and "
-"cruel one. One lumberjack's hut will not be enough to still the needs of our "
-"people. More trees await our axes south of our new crossroads - let us raise "
-"a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" \"Severní větry nám říkají, že zima před námi bude dlouhá a krutá. Jeden "
-"dřevorubec není dost pro celý náš lid. Na jih od nové křižovatky očekávají "
-"naše sekery další stromy - měli bychom tam poslat další "
-"dřevorubce!\"<br><br>-- NOVÝ ÚKOL --<br> "
-
-#: ../../campaigns/t01.wmf/event:162
-#: ../../campaigns/t01.wmf/objective:18
-msgid ""
-"* Place a lumberjack's hut directly south of the flag you just placed on the "
-"road. Connect the implied flag with the new lumberjack's hut afterwards.<br> "
-"Note that instead of building a road step by step, you may also directly "
-"click at the destination to build the entire road at once."
-msgstr ""
-"* Postav chatu dřevorubce přímo na jih od vlajky, kterou jsi umístil na "
-"cestě. Potom spoj zmíněnou vlajku s novým dřevorubcem.<br> Všimni si, že "
-"místo stavění cesty kousek po kousku, můžeš kliknutím na cílové místo "
-"postavit celou cestu najednou."
-
-#: ../../campaigns/t01.wmf/event:175
-msgid "Khantrukh nods..."
-msgstr "Khantrukh přikyvuje..."
-
-#: ../../campaigns/t01.wmf/event:177
-msgid ""
-" \"Of course, if we intended to build a bigger settlement, much more "
-"lumberjack's huts would be advisable, but this should do for now.<br> But "
-"never forget - these forests are our legacy, entrusted to us by our "
-"ancestors. We must always respect and nourish them. What we take, we must "
+" \"Of course, if we intended to build a bigger settlement, many more "
+"lumberjack's huts would be advisable, but this should suffice for now.<br> "
+"But never forget - these forests are our heritage, entrusted upon us by our "
+"ancestors. We must always respect and care for them. What we take, we must "
 "give back again.<br> So, in order to replace the trees we chop down, we "
 "should build a ranger's hut, preferably close to the lumberjack's "
 "hut.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Samozřejmě, pokud chceme zbudovat větší sídlo, bude lepší mít ještě "
-"mnohem více dřevorubců, ale tohle by prozatím mělo stačit.<br>Ale nikdy "
-"nezapomeň - tyto lesy jsou dědictví, které nám svěřili naši předkové. Musíme "
-"je vždy respektovat a starat se o ně. Co si bereme, musíme jim také "
-"vrátit.<br> Ba, abychom nahradili stromy, které jsme porazili, pošleme tam "
-"lesníka, ať se usídlí co nejblíže dřevorubcům.\"<br><br>-- NOVÝ ÚKOL --<br> "
+" \"Samozřejmě pokud budeme trvat na stavbě větší usedlosti, bude rozumné mít "
+"mnohem víc dřevorubeckých chat, ale przatím to bude stačit.<br> Ale nikdy "
+"nezapomeň - tyto lesy jsou naším dědictvím, svěřené nám našimi předky. "
+"Musíme je respektovata pečovat o ně. Co si vezmeme, musíme navrátit zase "
+"zpět.<br> Takže abychom nahradili pokácené stromy novými. měli bychom "
+"postavit chatu lesníka, nejlépe blízko chaty dřevorubce.\"<br><br>-- NOVÝ "
+"ÚKOL --<br> "
 
-#: ../../campaigns/t01.wmf/event:178
-#: ../../campaigns/t01.wmf/objective:26
-msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
-msgstr "* Postav chatu lesníka na východ od prvního dřevorubce."
-
-#: ../../campaigns/t01.wmf/event:190
-msgid "The elder speaks..."
-msgstr "Stařešina promluvil..."
-
-#: ../../campaigns/t01.wmf/event:192
-msgid ""
-" \"I am well aware, chieftain, that neither you nor your warriors have the "
-"desire to stay in this forsaken place for long. But even so, our war to "
-"conquer back our home might take a long time and it would seem wise to make "
-"preparations.<br> I would advise that we obtain stones for the future - who "
-"knows what fortifications we might be forced to build very soon. And - like "
-"a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
-"NEW OBJECTIVE --<br> "
-msgstr ""
-" \"Vím moc dobře, veliteli, že ani ty, ani tví bojovníci, nechtějí zůstat v "
-"těchto zapomenutých končínách dlouho. Ale přesto, naše cesta k znovudobytí "
-"našich domovů může trvat velmi dlouho a bude moudré se na to připravit.<br> "
-"Navrhuji pro budoucnost shromážit kamení - kdoví, jaké opevnění budeme muset "
-"brzy postavit? A - jakoby to byl dar z nebe - jsou nedaleko odsud vhodné "
-"skály... \"<br><br>-- NOVÝ ÚKOL --<br> "
-
-#: ../../campaigns/t01.wmf/event:193
-#: ../../campaigns/t01.wmf/objective:34
-msgid "* Build two quarries southwest of your headquarters."
-msgstr "* Postav dva lomy jihozápadně od základny."
-
-#: ../../campaigns/t01.wmf/event:220
-#: ../../campaigns/t01.wmf/event:235
-msgid "Thron speaks..."
-msgstr "Mluví Thron..."
-
-#: ../../campaigns/t01.wmf/event:222
-msgid ""
-" \"In another sleepless night, I went up to the hill and gazed to the north. "
-"The fires are still burning, stilling their hunger upon my father's "
-"legacy.<br> They are a constant reminder why we had to hide here... and why "
-"we must return in the end!\" "
-msgstr ""
-" \"Další probdělá noc. Vyšel jsem na kopec a hleděl do oblohy na severu. "
-"Ohně stále hoří, sytí svůj hlad na dědictví mého otce.<br> Jsou stálou "
-"připomínkou proč se tu musíme schovávat.<br> Stálou připomínkou, proč se "
-"nakonec musíme vrátit!\" "
-
-#: ../../campaigns/t01.wmf/event:224
-msgid "In the night"
-msgstr "V noci..."
-
-#: ../../campaigns/t01.wmf/event:237
+#: ../../campaigns/t01.wmf/scripting/texts.lua:115
 msgid ""
 " \"Once again, I went up to my father's tomb, in a sacred grove at the foot "
 "of the great spire of Kal'mavrath. I just stood there and felt neither the "
@@ -362,39 +140,45 @@ msgstr ""
 "jako bych se loučil. Poprvé jsem se zamyslel nad tím, co pro mě budoucnost "
 "připravuje...\" "
 
-#: ../../campaigns/t01.wmf/event:239
-msgid "At the grave"
-msgstr "U hrobu"
-
-#: ../../campaigns/t01.wmf/event:250
-msgid "Thron says thoughtfully..."
-msgstr "Thron zamyšleně říká..."
-
-#: ../../campaigns/t01.wmf/event:252
+#: ../../campaigns/t01.wmf/scripting/texts.lua:125
 msgid ""
 " \"Some time ago, Boldreth came to me. His advice was to move to a place "
-"closer to home - to strike at the first sign of my brother's forces "
-"wavering.<br> But I look over the forests and I still see black smoke rising "
-"to the sky. I know - it is too early yet, and what he hopes for will not "
-"happen any time soon. He might still be right, but I fear the bloodshed that "
-"too rash a return would cause both on our and the other side...\" "
+"closer to home - to strike at the first sign of my brothers' forces "
+"wavering.<br> But I look over the forests and I can still see black smoke "
+"rising to the sky. I know - it is too early yet, and what he hopes for will "
+"not happen any time soon. He might still be right, but I fear the bloodshed "
+"that returning too fast would cause both on our and the other side...\" "
 msgstr ""
-" \"Před nějakou dobou za mnou přišel Boldreth. Radil mi přesunout se někam "
-"blíž k domovu - abychom mohli udeřit rychle, při první známce toho, že síly "
-"mých bratří upadají.<br> Ale já jsem se podíval na oblohu nad vrcholky "
-"stromů směrem k domovu a věděl jsem - ne, ještě je brzy a naše tužby se "
-"ještě nemají naplnit. Přesto měl možná pravdu, ale bojím se zbytečného "
-"krveprolití na obou stranách, které by náš předčasný návrat způsobil...\" "
+" \"Před nějakým časem za mnou přišel Boldreth. Radil přesunout se blíž k "
+"domovu  - a udeřit při prvním náznaku pohybu bratrových vojsk.<br> Ale když "
+"se podívám nad lesy, stále mohu vidět černý dým stoupající k obloze. Vím - "
+"je stále příliš brzy, a to v co doufáme se nestane v blízké době. Stále může "
+"mít pravdu, ale bojím se krveprolití které by zalilo naši i druhou "
+"stranu...\" "
 
-#: ../../campaigns/t01.wmf/event:254
-msgid "The other day"
-msgstr "Další den"
+#: ../../campaigns/t01.wmf/scripting/texts.lua:74
+msgid ""
+" \"The northern winds tell us that the coming winter will be a long and "
+"cruel one. One lumberjack's hut will not be enough to fit the needs of our "
+"people. More trees wait for our axes just south of our new crossroads - let "
+"us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+" \"Severní větry nám říkají že přicházející zima bude dlouhá a krutá. Jedna "
+"chata dřevorubce nebude dostatečná na pokrytí potřeb našich lidí. Další "
+"stromy čekají na naše sekery jižně od nové křižovatky - postavme druhou "
+"dřevorubcovu chatu právě tam!\"<br><br>-- NOVÝ ÚKOL --<br> "
 
-#: ../../campaigns/t01.wmf/event:265
-msgid "Thron looks furious..."
-msgstr "Thron zuří..."
+#: ../../campaigns/t01.wmf/scripting/texts.lua:67
+msgid ""
+" \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A "
+"crossroads on the way between our headquarters and the lumberjack's hut "
+"would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+" \"Je tu stařec říkající:<br> \"Rozdělené břemeno je snazší zvládnout\" <br> "
+"Křižovatka na cestě mezi naší hlavní budovou a chatou dřevorubce by "
+"usnadnila práci našim nosičům.\"<br><br>-- NOVÝ ÚKOL --<br> "
 
-#: ../../campaigns/t01.wmf/event:267
+#: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
 " \"Today, my warriors picked up an old man, wandering sick and wounded "
 "through the dark forest. We listened in horror when he told us of the "
@@ -406,41 +190,439 @@ msgstr ""
 "dějí v Al'thunran.<br>Tady obnovuji svou přísahu - musím zastavit toto "
 "šílenství za jakoukoli cenu!\" "
 
-#: ../../campaigns/t01.wmf/event:269
-msgid "The oath"
-msgstr "Přísaha"
-
-#: ../../campaigns/t01.wmf/event:300
+#: ../../campaigns/t01.wmf/scripting/texts.lua:94
 msgid ""
 " \"Very well done, chieftain. We now have all we need to face the winter and "
 "may prepare ourselves for the battles ahead.<br><br>--------------------- "
-"VICTORY! ----------------------<br><br> You may continue if you wish. "
-"Otherwise, move on to the next mission.\" "
+"VICTORY! ----------------------<br><br> You may continue to play this map if "
+"you wish. Otherwise, move on to the next mission.\" "
 msgstr ""
-" \"Výborně, můj veliteli. Máme teď vše, abychom přečkali zimu a mohli se "
-"připravit na bitvy, které nás očekávají.\"<br><br>-------------------  "
-"VÍTĚZSTVÍ! ------------------- <br><br> Můžeš pokračovat, jestliže chceš. "
-"Pokud ne, přesuň se do další mise. "
+" \"Velmi dobře náčelníku. Teď máme vše, co potřebujeme abychom přečkali zimu "
+"a mohli se připravit na následující bitvy.<br><br>-------------------------"
+"VÍTĚZSTVÍ---------------------------<br><br> Můžeš pokračovat v hraní této "
+"mapy, pokud si to přeješ. Jinak pokračuj k další misi.\" "
 
-#: ../../campaigns/t01.wmf/event:302
-msgid "Mission Complete"
-msgstr "Mise splněna"
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
+msgid ""
+" \"We can see the raging flames that swallow Al'thunran from here, miles "
+"away.<br> The red lights flash in the darkness and dance to the rhythm of "
+"the wardrums that haunt me even in my nightmares.\" "
+msgstr ""
+" \"Míle odsud, míle daleko, stále vidíme zběsilé plameny, které polykají "
+"Al'thunran.<br> Rudé odlesky se blýskají na nočním nebi a tančí v rytmu "
+"válečných bubnů. Jejich zvuk mě děsí i v mých nočních můrách.\" "
 
-#: ../../campaigns/t01.wmf/objective:5
+#: ../../campaigns/t01.wmf/scripting/texts.lua:10
+#: ../../campaigns/t01.wmf/scripting/texts.lua:53
+msgid ""
+"* Build a lumberjack's hut at the red house symbol just right of your "
+"headquarters by clicking on it and selecting a lumberjack's hut.<br>"
+msgstr ""
+"*Postav chatu dřevorubce na červeném symbolu vpravo od tvé hlavní budovy "
+"kliknutím na červený symbol a výběrem chaty dřevorubce.<br>"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:27
+#: ../../campaigns/t01.wmf/scripting/texts.lua:82
+msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
+msgstr "* Postav chatu lesníka na východ od prvního dřevorubce."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:61
+msgid ""
+"* Build a road between your headquarters and the construction site of the "
+"lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created "
+"for it. You need to connect it to another flag by building a road between "
+"them.<br> If you click on a flag and select to build a road, little symbols "
+"will appear around it to show you in which directions you can build it.<br> "
+"The colour of these symbols indicates how steep this part of the road will "
+"be. Green is for flat, yellow means steep and red stands for very steep. The "
+"steeper the road is, the harder it will be for your people to walk on it "
+"(and your wares will be transported more slowly).<br> You can click on any "
+"of the symbols to build the first part of the road there. New symbols will "
+"appear to show you where the next part of the road can go, and so on. "
+"However, you can also click farer away from the flag to build several steps "
+"at once. Click on the flag at the headquarters to finish the road."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:11
+msgid ""
+"* Build a road between your headquarters and the construction site of the "
+"lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created "
+"for it. You need to connect it to another flag by building a road between "
+"them.<br> If you click on a flag and select to build a road, little symbols "
+"will appear around it to show you in which directions you can build it.<br> "
+"The colour of these symbols indicates how steep this part of the road will "
+"be. Green is for flat, yellow means steep and red stands for very steep. The "
+"steeper the road is, the harder it will be for your people to walk on it "
+"(and your wares will be transported more slowly).<br> You can click on any "
+"of the symbols to build the first part of the road there. New symbols will "
+"appear to show you where the next part of the road can go, and so on. "
+"However, you can also click farther away from the flag to build several "
+"steps at once. Click on the flag at the headquarters to finish the road."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:34
+#: ../../campaigns/t01.wmf/scripting/texts.lua:90
+msgid "* Build two quarries southwest of your headquarters."
+msgstr "* Postav dva lomy jihozápadně od základny."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:19
+#: ../../campaigns/t01.wmf/scripting/texts.lua:68
+msgid ""
+"* Place a flag in the middle of the road.<br> There is a flag symbol in the "
+"middle of the way you just built. You create a flag there by clicking on the "
+"symbol and then choosing the flag button in the menu that opens up. This "
+"divides the way the wood is transported into two parts with one carrier "
+"each.<br> When many wares are being transported between two points, "
+"additional flags in between make them arrive at their destination faster, "
+"thus improving your infrastructure.<br>"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:20
+#: ../../campaigns/t01.wmf/scripting/texts.lua:75
+msgid ""
+"* Place a lumberjack's hut just south of the flag you just placed on the "
+"road. Connect the flag you just raised with the flag of the new lumberjack's "
+"hut construction site afterwards.<br> Note that instead of building a road "
+"step by step, you may also click directly at its destination to build the "
+"entire road at once."
+msgstr ""
+"*Umísti chatu dřevorubce jižně od vlajky kterou jsi právě umístil na cestě. "
+"Spoj novou vlajku s vlajkou staveniště nové dřevorubecké chaty.<br>Všimni "
+"si, že místo stavby cesty krok za krokem, můžeš kliknout přímo na tvůj cíl a "
+"postavit ji celou naráz."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:9
+#: ../../campaigns/t01.wmf/scripting/texts.lua:52
+msgid ""
+"* Press SPACE to see where you can build.<br> The red house symbols show you "
+"where a small building - like a lumberjack's hut - may be built.<br>"
+msgstr ""
+"*Stisnku mezerník pro zobrazení míst, kde můžeš stavět.<br> Červené symboly "
+"domů ukazují kde můžeš postavit malou budovu - jako je chata dřevorubce.<br>"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:43
+msgid "An old man says..."
+msgstr "Starý muž říká..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:111
+msgid "At the tomb"
+msgstr "U hrobky"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:7
 msgid "Build a lumberjack's hut"
 msgstr "Postav chatu pro dřevorubce"
 
-#: ../../campaigns/t01.wmf/objective:15
-msgid "Build another lumberjack's hut"
-msgstr "Postav další chatu pro dřevorubce"
-
-#: ../../campaigns/t01.wmf/objective:24
+#: ../../campaigns/t01.wmf/scripting/texts.lua:25
 msgid "Build a ranger's hut"
 msgstr "Postav chatu lesníka"
 
-#: ../../campaigns/t01.wmf/objective:32
+#: ../../campaigns/t01.wmf/scripting/texts.lua:17
+msgid "Build another lumberjack's hut"
+msgstr "Postav další chatu pro dřevorubce"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:32
 msgid "Build two quarries"
 msgstr "Postav dva lomy"
+
+#: ../../campaigns/t01.wmf/elemental:9
+msgid ""
+"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
+"gameplay and control as well as basic production buildings (wood, stone, "
+"etc.) will be introduced."
+msgstr ""
+"První mise výukové kampaně barbarů. V této misi se naučíte základní ovládání "
+"hry a představíme základní výrobní budovy a suroviny (dřevo, kámen, atd...)."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:101
+msgid "In the night"
+msgstr "V noci..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:49
+msgid "Khantrukh continues..."
+msgstr "Khantrukh pokračuje..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:79
+msgid "Khantrukh nods..."
+msgstr "Khantrukh přikyvuje..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:65
+msgid "Khantrukh remembers..."
+msgstr "Khantrukh vzpomíná..."
+
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:65
+msgid "Mission Complete"
+msgstr "Mise splněna"
+
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:25
+msgid "Somebody comes up to you"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:26
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:32
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:41
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:42
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:59
+msgid "The advisor"
+msgstr "Rádce"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:58
+msgid "The elder remarks..."
+msgstr "Stařešina přidává..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:87
+msgid "The elder speaks..."
+msgstr "Stařešina promluvil..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:130
+msgid "The oath"
+msgstr "Přísaha"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:72
+msgid "The old man looks to the sky..."
+msgstr "Starý muž se zahledí do nebe..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:121
+msgid "The other day"
+msgstr "Další den"
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:7
+msgid "The story begins"
+msgstr "Příběh začíná"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:132
+msgid "Thron looks furious..."
+msgstr "Thron zuří..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:123
+msgid "Thron says thoughtfully..."
+msgstr "Thron zamyšleně říká..."
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:9
+msgid "Thron sighs..."
+msgstr "Thron si povzdechl..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:103
+#: ../../campaigns/t01.wmf/scripting/texts.lua:113
+msgid "Thron speaks..."
+msgstr "Mluví Thron..."
+
+#: ../../campaigns/t01.wmf/elemental:7
+msgid "Tutorial1 - Eyes in the Dark"
+msgstr "Trénink 1 - Oči v temnotě"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid ""
+#~ " \"My father's bones lay peacefully in the grounds he cleared from the "
+#~ "senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal "
+#~ "companion and friend is a source of peace and comfort to me in these dark "
+#~ "times. He keeps my spirits high and those of my warriors awake, not to let "
+#~ "greed or despair destroy our bonds as well.\" "
+#~ msgstr ""
+#~ " \"Kosti mého otce už leží v míru v zemi, kterou očistil od nesmyslného "
+#~ "prolévání krve, které mezi námi kdysi vládlo.<br>Boldreth, můj věrný druh a "
+#~ "přítel, je mi oporou a zdrojem klidu v těchto těžkých dobách. Dodává mi "
+#~ "odvahy a povzbuzuje i mé bojovníky a nedovolí, aby zvůle nebo zoufalství "
+#~ "zničilo naše sliby.\" "
+
+#~ msgid ""
+#~ " \"As father told me, there will be times to fight and times to lie and "
+#~ "wait, trying not to sleep or die before the right time comes. And so I do... "
+#~ "wait.\" "
+#~ msgstr ""
+#~ " \"Otec mi řekl, že přijdou doby válčení a doby spočinutí a čekání, snahy "
+#~ "nezemdlít a nepadnout před tím, než přijde opět ta chvíle. A tak i já... "
+#~ "čekám.\" "
+
+#~ msgid "Somebody comes upon to you"
+#~ msgstr "Kdosi k tobě přistoupil"
+
+#~ msgid ""
+#~ " \"None but the gods know how long we have to remain hidden here. The "
+#~ "warriors hope we may march back gloriously any day now, but I strongly doubt "
+#~ "that will happen soon. And the days are already getting shorter and "
+#~ "colder...<br> We should prepare, in case we have to face the winter in these "
+#~ "harsh lands. I believe to the east of our campside are a few places where we "
+#~ "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
+#~ msgstr ""
+#~ " \"Jen sami bohové vědí, jak dlouho tu budeme ještě muset zůstat skryti. Tví "
+#~ "bojovníci sní, že budeme pochodovat vítězně zpět už za pár dní, ale "
+#~ "nemyslím, že k tomu dojde nějak brzy. A dny se už krátí a je stále "
+#~ "chladněji...<br>Připravme se pro případ, že budeme muset čelit zimě v těchto "
+#~ "drsných zemích. Na východ od tábora je pár míst, kde bychom mohli zbudovat "
+#~ "chaty pro dřevorubce.\"<br><br>-- NOVÝ ÚKOL --<br> "
+
+#~ msgid ""
+#~ "* Press SPACE to see where you can build.<br> The red spots show you where a "
+#~ "small building - like a lumberjack's hut - may be built.<br>"
+#~ msgstr ""
+#~ "* Stiskni mezerník pro zobrazení míst ke stavění.<br> Červená místa ukazují, "
+#~ "kde lze vybudovat malou budovu - například chatu pro dřevorubce.<br>"
+
+#~ msgid ""
+#~ "* Build a lumberjack's hut at the red spot directly right of your "
+#~ "headquarters by clicking at it and selecting lumberjack's hut.<br>"
+#~ msgstr ""
+#~ "* Postav chatu pro dřevorubce na červeně vyznačeném místě přímo vpravo od "
+#~ "základny kliknutím a vybráním chaty pro dřevorubce.<br>"
+
+#~ msgid ""
+#~ " \"Obviously, it would be too draining for our people to walk all the way to "
+#~ "the lumberjack's hut through the wilderness. We will have to make a path "
+#~ "between our hall and the lumberjack's hut. It's not a hard guess that the "
+#~ "men would appreciate a way as short and even as possible - the wood surely "
+#~ "will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Samozřejmě, že kdyby se měli naši lidé ke dřevorubci prodírat divočinou, "
+#~ "bylo by to pro ně příliš namáhavé. Musíme vybudovat stezku mezi naší "
+#~ "základnou a chatou dřevorubce. Není těžké uhádnout, že lidé ocení co možná "
+#~ "nejkratší a nejpřímější cestu - i tak bude dřevo dost těžké samo o "
+#~ "sobě.\"<br><br>-- NOVÝ ÚKOL --<br> "
+
+#~ msgid ""
+#~ "* Build a road between your headquarters and the lumberjack's hut.<br> When "
+#~ "you place the lumberjack's hut, a flag is created for it. You should connect "
+#~ "it to another flag with a road.<br> If you click on a flag, little symbols "
+#~ "will appear around it to show you in which directions you can build the "
+#~ "road.<br> The colour of those symbols indicate how steep the road will be. "
+#~ "Green is flat, yellow is steep and red is very steep. The steeper the step "
+#~ "is, the harder it will be for your people to walk on it.<br> You can click "
+#~ "on any of the symbols to build the first step of the road there. New symbols "
+#~ "will appear to show you where the next step can go, and so on. However, you "
+#~ "can also click further away to build several steps at once. Click on the "
+#~ "flag at the headquarters to finish the road."
+#~ msgstr ""
+#~ "* Postav cestu mezi základnou a chatou dřevorubce.<br> Když umístíš chatu "
+#~ "dřevorubce, je u staveniště vztyčena vlajka. Tuto vlajku bys měl propojit "
+#~ "pomocí cesty s jinou vlajkou.<br> Pokud klikneš na vlajku, zobrazí se v "
+#~ "okolí malé symboly, které ukazují, kterými směry můžeš budovat cestu.<br> "
+#~ "Barva těchto symbolů napovídá jak strmý je okolní terén. Zelená je rovný "
+#~ "terén, žlutá je strmý a červená je velmi strmý. Čím strmější, tím těžší bude "
+#~ "pro tvé lidi přes něj přejít.<br> Když na symbol klikneš, postavíš úsek "
+#~ "cesty a symboly se objeví v místě, kudy může vést další úsek cesty. Můžeš "
+#~ "také kliknout dál od původního místa a postavit tak několik úseků najednou. "
+#~ "Kliknutím na vlajku u základny cestu dokončíš."
+
+#~ msgid ""
+#~ " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A "
+#~ "crossroads on the way between our site and the lumberjack's hut would ease "
+#~ "the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Znám staré přísloví:<br> 'Ve dvou se to lépe táhne.'<br> Křižovatka na "
+#~ "cestě mezi námi a dřevorubcem by nosičům usnadnila práci.\"<br><br>-- NOVÝ "
+#~ "ÚKOL --<br> "
+
+#~ msgid ""
+#~ "* Place a flag in the middle of the road.<br> There is a flag symbol in the "
+#~ "mid of the way you just built. You place a flag there by clicking on the "
+#~ "symbol and then clicking on the flag button in the consequently appearing "
+#~ "menu. This splits the work of carrying the wood between two carriers.<br> "
+#~ "When much wares are being transported between two points, additional flags "
+#~ "in between make them get faster to their destination, thus improving your "
+#~ "infrastructure.<br>"
+#~ msgstr ""
+#~ "* Umísti vlajku doprostřed cesty.<br> Uprostřed právě postavené cesty je "
+#~ "symbol vlajky. Kliknutím na něj otevři menu a vyber symbol vlajky. Tím na "
+#~ "cestu umístíš novou vlajku a rozdělíš tak cestu pro nošení dřeva mezi dva "
+#~ "nosiče.<br> Když je mezi dvěma body přenášeno hodně zboží, přidání dalších "
+#~ "vlajek na takovou cestu zlepší infrastrukturu, protože se zboží rychleji "
+#~ "dostane na místo určení.<br>"
+
+#~ msgid ""
+#~ " \"The northern winds tell us that the coming winter will be a long and "
+#~ "cruel one. One lumberjack's hut will not be enough to still the needs of our "
+#~ "people. More trees await our axes south of our new crossroads - let us raise "
+#~ "a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Severní větry nám říkají, že zima před námi bude dlouhá a krutá. Jeden "
+#~ "dřevorubec není dost pro celý náš lid. Na jih od nové křižovatky očekávají "
+#~ "naše sekery další stromy - měli bychom tam poslat další "
+#~ "dřevorubce!\"<br><br>-- NOVÝ ÚKOL --<br> "
+
+#~ msgid ""
+#~ "* Place a lumberjack's hut directly south of the flag you just placed on the "
+#~ "road. Connect the implied flag with the new lumberjack's hut afterwards.<br> "
+#~ "Note that instead of building a road step by step, you may also directly "
+#~ "click at the destination to build the entire road at once."
+#~ msgstr ""
+#~ "* Postav chatu dřevorubce přímo na jih od vlajky, kterou jsi umístil na "
+#~ "cestě. Potom spoj zmíněnou vlajku s novým dřevorubcem.<br> Všimni si, že "
+#~ "místo stavění cesty kousek po kousku, můžeš kliknutím na cílové místo "
+#~ "postavit celou cestu najednou."
+
+#~ msgid ""
+#~ " \"Of course, if we intended to build a bigger settlement, much more "
+#~ "lumberjack's huts would be advisable, but this should do for now.<br> But "
+#~ "never forget - these forests are our legacy, entrusted to us by our "
+#~ "ancestors. We must always respect and nourish them. What we take, we must "
+#~ "give back again.<br> So, in order to replace the trees we chop down, we "
+#~ "should build a ranger's hut, preferably close to the lumberjack's "
+#~ "hut.\"<br><br>-- NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Samozřejmě, pokud chceme zbudovat větší sídlo, bude lepší mít ještě "
+#~ "mnohem více dřevorubců, ale tohle by prozatím mělo stačit.<br>Ale nikdy "
+#~ "nezapomeň - tyto lesy jsou dědictví, které nám svěřili naši předkové. Musíme "
+#~ "je vždy respektovat a starat se o ně. Co si bereme, musíme jim také "
+#~ "vrátit.<br> Ba, abychom nahradili stromy, které jsme porazili, pošleme tam "
+#~ "lesníka, ať se usídlí co nejblíže dřevorubcům.\"<br><br>-- NOVÝ ÚKOL --<br> "
+
+#~ msgid ""
+#~ " \"I am well aware, chieftain, that neither you nor your warriors have the "
+#~ "desire to stay in this forsaken place for long. But even so, our war to "
+#~ "conquer back our home might take a long time and it would seem wise to make "
+#~ "preparations.<br> I would advise that we obtain stones for the future - who "
+#~ "knows what fortifications we might be forced to build very soon. And - like "
+#~ "a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
+#~ "NEW OBJECTIVE --<br> "
+#~ msgstr ""
+#~ " \"Vím moc dobře, veliteli, že ani ty, ani tví bojovníci, nechtějí zůstat v "
+#~ "těchto zapomenutých končínách dlouho. Ale přesto, naše cesta k znovudobytí "
+#~ "našich domovů může trvat velmi dlouho a bude moudré se na to připravit.<br> "
+#~ "Navrhuji pro budoucnost shromážit kamení - kdoví, jaké opevnění budeme muset "
+#~ "brzy postavit? A - jakoby to byl dar z nebe - jsou nedaleko odsud vhodné "
+#~ "skály... \"<br><br>-- NOVÝ ÚKOL --<br> "
+
+#~ msgid ""
+#~ " \"In another sleepless night, I went up to the hill and gazed to the north. "
+#~ "The fires are still burning, stilling their hunger upon my father's "
+#~ "legacy.<br> They are a constant reminder why we had to hide here... and why "
+#~ "we must return in the end!\" "
+#~ msgstr ""
+#~ " \"Další probdělá noc. Vyšel jsem na kopec a hleděl do oblohy na severu. "
+#~ "Ohně stále hoří, sytí svůj hlad na dědictví mého otce.<br> Jsou stálou "
+#~ "připomínkou proč se tu musíme schovávat.<br> Stálou připomínkou, proč se "
+#~ "nakonec musíme vrátit!\" "
+
+#~ msgid "At the grave"
+#~ msgstr "U hrobu"
+
+#~ msgid ""
+#~ " \"Some time ago, Boldreth came to me. His advice was to move to a place "
+#~ "closer to home - to strike at the first sign of my brother's forces "
+#~ "wavering.<br> But I look over the forests and I still see black smoke rising "
+#~ "to the sky. I know - it is too early yet, and what he hopes for will not "
+#~ "happen any time soon. He might still be right, but I fear the bloodshed that "
+#~ "too rash a return would cause both on our and the other side...\" "
+#~ msgstr ""
+#~ " \"Před nějakou dobou za mnou přišel Boldreth. Radil mi přesunout se někam "
+#~ "blíž k domovu - abychom mohli udeřit rychle, při první známce toho, že síly "
+#~ "mých bratří upadají.<br> Ale já jsem se podíval na oblohu nad vrcholky "
+#~ "stromů směrem k domovu a věděl jsem - ne, ještě je brzy a naše tužby se "
+#~ "ještě nemají naplnit. Přesto měl možná pravdu, ale bojím se zbytečného "
+#~ "krveprolití na obou stranách, které by náš předčasný návrat způsobil...\" "
+
+#~ msgid ""
+#~ " \"Very well done, chieftain. We now have all we need to face the winter and "
+#~ "may prepare ourselves for the battles ahead.<br><br>--------------------- "
+#~ "VICTORY! ----------------------<br><br> You may continue if you wish. "
+#~ "Otherwise, move on to the next mission.\" "
+#~ msgstr ""
+#~ " \"Výborně, můj veliteli. Máme teď vše, abychom přečkali zimu a mohli se "
+#~ "připravit na bitvy, které nás očekávají.\"<br><br>-------------------  "
+#~ "VÍTĚZSTVÍ! ------------------- <br><br> Můžeš pokračovat, jestliže chceš. "
+#~ "Pokud ne, přesuň se do další mise. "
 
 #~ msgid ""
 #~ "* Build a lumberjack's hut at the red spot directly right of your "
@@ -551,3 +733,60 @@ msgstr "Postav dva lomy"
 
 #~ msgid "Order7"
 #~ msgstr "Úkol 7"
+
+#~ msgid ""
+#~ " \"My father's bones rest peacefully in the grounds he cleared from the "
+#~ "senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal "
+#~ "companion and friend is a source of peace and comfort to me in these dark "
+#~ "times. He keeps my spirits high and those of my warriors awake, not to let "
+#~ "greed or despair destroy the bonds between us as well.\" "
+#~ msgstr ""
+#~ " Kosti mého otce klidně odpočívají v zemi kterou očistil od nesmyslného "
+#~ "prahnutí po krvi, které nás jednou pohltilo.<br> Boldrteh, můj věrný "
+#~ "společník a přítel je zdrojem mého klidu a pohodlí v těchto temných časech. "
+#~ "Udržuje mého ducha a mé valečníky v pozornosti, nenchává nic náhodě ani "
+#~ "nedovolí zničit pouta mezi námi,\" "
+
+#~ msgid ""
+#~ "* Build a road between your headquarters and the construction site of the "
+#~ "lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created "
+#~ "for it. You need to connect it to another flag by building a road between "
+#~ "them.<br> If you click on a flag and select to build a road, little symbols "
+#~ "will appear around it to show you in which directions you can build it.<br> "
+#~ "The colour of these symbols indicats how steep this part of the road will "
+#~ "be. Green is for flat, yellow means steep and red stands for very steep. The "
+#~ "steeper the road is, the harder it will be for your people to walk on it "
+#~ "(and your wares will be transported more slowly).<br> You can click on any "
+#~ "of the symbols to build the first part of the road there. New symbols will "
+#~ "appear to show you where the next part of the road can go, and so on. "
+#~ "However, you can also click farer away from the flag to build several steps "
+#~ "at once. Click on the flag at the headquarters to finish the road."
+#~ msgstr ""
+#~ "*Postav cestu mezi tvou hlavní budovou a staveništěn dřevorubcovi "
+#~ "chaty.<br>Když postavíš dřevorubcovu chatu, vyvoří se její vlajka. Musíš "
+#~ "tuto vlajku spojit s další, abys postavil cestu mezi nimi.<br>Když vybereš "
+#~ "vlajku a vybereš stavět cestu, malé symboly se objeví okolo, aby ukázaly, "
+#~ "jakým směrem můžeš stavět cestu.<br> Barva těchto symbolů natnačuje jako "
+#~ "strmá bude cesta. Zelená je rovina, žlutá je stoupání a červená je strmé "
+#~ "stoupání. Čím je cesta strmější, tím těžší bude pro naše lidi její zdolání "
+#~ "(a tvoje zboží bude přenášeno pomalu).<br>Klikni na nějaký symbol pro "
+#~ "zbudování první částí cesty. Nové symboly se ukáží aby ukázali, kam může "
+#~ "cesta pokračovat, a tak stále dál. Ale také můžeš kliknout dál od vlajky "
+#~ "abys postavil více částí cesty najednou. Klikni na vlajku u hlavní budovy, "
+#~ "abys dokončil cestu."
+
+#~ msgid ""
+#~ "* Place a flag in the middle of the road.<br> There is a flag symbol in the "
+#~ "middle of the way you just built. You create a flag there by clicking on the "
+#~ "symbol and then choosing the flag button in the menu that opens up. This "
+#~ "divides the way the wood is transported into two parts with one carrier "
+#~ "each.<br> When much wares are being transported between two points, "
+#~ "additional flags in between make them arrive at their destination faster, "
+#~ "thus improving your infrastructure.<br>"
+#~ msgstr ""
+#~ "*Umísti vlajku doprostřed cesty.<br> Je tu symbol vlajky uprostřed cesty, "
+#~ "kterou jsi právě postavil. vytovř vlajku kliknutím na tento symbol a poté "
+#~ "vyber symbol vlajky v novém menu. To rozdělí cestu pro přenos dřeva na dvě "
+#~ "části, každou se svým nosičem.<br> Když je příliš zboží přenášeno mezi dvěma "
+#~ "body, dodatečné vlajky umožní dodat zobží v kratším čase, takto vylepšuješ "
+#~ "svou infrastrukturu.<br>"

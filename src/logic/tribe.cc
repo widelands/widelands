@@ -66,8 +66,6 @@ Tribe_Descr::Tribe_Descr
 		path            += '/';
 		std::string::size_type base_path_size = path.size();
 
-		m_default_encdata.clear();
-
 		path += "conf";
 		Profile root_conf(path.c_str());
 		path.resize(base_path_size);
@@ -84,22 +82,20 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
 				m_bobs.add
 					(new Critter_Bob_Descr
-					 	(_name, _descname, path, prof, global_s,  this,
-					 	 &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s,  this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
 				m_wares.add
 					(new Item_Ware_Descr
-					 	(_name, _descname, path, prof, global_s));
+					 	(*this, _name, _descname, path, prof, global_s));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 #define PARSE_WORKER_TYPES(name, descr_type)                                  \
          PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                   \
             descr_type & worker_descr =                                       \
                *new descr_type                                                \
-                  (_name, _descname, path, prof, global_s, *this,             \
-                   &m_default_encdata);                                       \
+                  (_name, _descname, path, prof, global_s, *this);            \
             Ware_Index const worker_idx = m_workers.add(&worker_descr);       \
             if                                                                \
                (worker_descr.is_buildable() and                               \
@@ -114,8 +110,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("constructionsite")
 				m_buildings.add
 					(new ConstructionSite_Descr
-					 	(_name, _descname, path, prof, global_s, *this,
-					 	 &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 			if (not safe_building_index("constructionsite"))
 				throw game_data_error
@@ -124,8 +119,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")
 				m_buildings.add
 					(new MilitarySite_Descr
-					 	(_name, _descname, path, prof, global_s, *this,
-					 	 &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 
@@ -138,8 +132,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("global militarysite")
 				m_buildings.add
 					(new MilitarySite_Descr
-					 	(_name, _descname, path, prof, global_s, *this,
-					 	 &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			// Reset path and base_path_size
@@ -150,22 +143,19 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("trainingsite")
 				m_buildings.add
 					(new TrainingSite_Descr
-					 	(_name, _descname, path, prof, global_s, *this,
-					 	 &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
 					(new Warehouse_Descr
-					 	(_name, _descname, path, prof, global_s, *this,
-					 	 &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
 				m_buildings.add
 					(new ProductionSite_Descr
-					 	(_name, _descname, path, prof, global_s, *this,
-					 	 &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 		}
 
@@ -186,9 +176,6 @@ Tribe_Descr::Tribe_Descr
 				m_carrier2         = tribe_s.get_string("carrier2");
 			}
 
-			if (Section * const defaults_s = root_conf.get_section("defaults"))
-				m_default_encdata.parse(*defaults_s);
-
 			try {
 				while (Section * const s = root_conf.get_next_section("frontier"))
 				{
@@ -202,7 +189,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_frontier.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, 0, &m_default_encdata)));
+							 	 g_anim.get(path, *s, 0)));
 					}
 				}
 				if (m_anim_frontier.empty())
@@ -223,7 +210,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_flag.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, 0, &m_default_encdata)));
+							 	 g_anim.get(path, *s, 0)));
 					}
 				}
 				if (m_anim_flag.empty())

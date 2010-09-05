@@ -40,10 +40,10 @@ namespace Widelands {
 TrainingSite_Descr::TrainingSite_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
+	 Tribe_Descr const & _tribe)
 	:
 	ProductionSite_Descr
-		(_name, _descname, directory, prof, global_s, _tribe, encdata),
+		(_name, _descname, directory, prof, global_s, _tribe),
 
 	//  FIXME This is currently hardcoded for "soldier" but should allow any
 	//  FIXME soldier type name.

@@ -6,29 +6,71 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-10 19:09+0000\n"
-"PO-Revision-Date: 2010-03-12 22:54+0000\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 21:58+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-14 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-06-08 03:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/winterland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Zespól rozwojowy Widelands"
+#: ../../worlds/winterland/conf:45
+msgid "Aspen"
+msgstr "Topola"
 
-#: ../../worlds/winterland/conf:3
-msgid "Winterland"
-msgstr "Śnieżne krainy"
+#: ../../worlds/winterland/conf:46
+msgid "Aspen medium"
+msgstr "Średnia topola"
 
-#: ../../worlds/winterland/conf:4
-msgid ""
-"These are the white, wide and frosty winterlands, in which the Northmen "
-"dwell."
-msgstr "Oto białe, szerokie i zimne krainy gdzie rządzą Ludzie Północy"
+#: ../../worlds/winterland/conf:47
+msgid "Aspen small"
+msgstr "Mała topola"
+
+#: ../../worlds/winterland/conf:48
+msgid "Aspen tiny"
+msgstr "Malutka topola"
+
+#: ../../worlds/winterland/conf:79
+msgid "Badger"
+msgstr "Borsuk"
+
+#: ../../worlds/winterland/conf:65
+msgid "Beech"
+msgstr "Buk"
+
+#: ../../worlds/winterland/conf:66
+msgid "Beech medium"
+msgstr "Średni buk"
+
+#: ../../worlds/winterland/conf:67
+msgid "Beech small"
+msgstr "Mały buk"
+
+#: ../../worlds/winterland/conf:68
+msgid "Beech tiny"
+msgstr "Malutki buk"
+
+#: ../../worlds/winterland/conf:61
+msgid "Birch"
+msgstr "Brzoza"
+
+#: ../../worlds/winterland/conf:62
+msgid "Birch medium"
+msgstr "Średnia brzoza"
+
+#: ../../worlds/winterland/conf:63
+msgid "Birch small"
+msgstr "Mała brzoza"
+
+#: ../../worlds/winterland/conf:64
+msgid "Birch tiny"
+msgstr "Malutka brzoza"
+
+#: ../../worlds/winterland/conf:80
+msgid "Bunny"
+msgstr "Królik"
 
 #: ../../worlds/winterland/conf:7
 #: ../../worlds/winterland/conf:8
@@ -38,6 +80,10 @@ msgstr "Oto białe, szerokie i zimne krainy gdzie rządzą Ludzie Północy"
 msgid "Bush"
 msgstr "Krzak"
 
+#: ../../worlds/winterland/resconf:4
+msgid "Coal"
+msgstr "Węgiel"
+
 #: ../../worlds/winterland/conf:12
 #: ../../worlds/winterland/conf:13
 #: ../../worlds/winterland/conf:14
@@ -45,16 +91,104 @@ msgstr "Krzak"
 msgid "Dead Tree"
 msgstr "Martwe drzewo"
 
+#: ../../worlds/winterland/conf:81
+msgid "Deer"
+msgstr "Jeleń"
+
+#: ../../worlds/winterland/conf:82
+msgid "Duck"
+msgstr "Kaczka"
+
+#: ../../worlds/winterland/conf:83
+msgid "Elk"
+msgstr "Wapiti"
+
+#: ../../worlds/winterland/resconf:41
+msgid "Fish"
+msgstr "Ryby"
+
+#: ../../worlds/winterland/conf:84
+msgid "Fox"
+msgstr "Lis"
+
+#: ../../worlds/winterland/resconf:12
+msgid "Gold"
+msgstr "Złoto"
+
+#: ../../worlds/winterland/resconf:28
+msgid "Granite"
+msgstr "Granit"
+
 #: ../../worlds/winterland/conf:16
 #: ../../worlds/winterland/conf:17
 #: ../../worlds/winterland/conf:18
 msgid "Grass"
 msgstr "Trawa"
 
+#: ../../worlds/winterland/resconf:20
+msgid "Iron"
+msgstr "Żelazo"
+
+#: ../../worlds/winterland/conf:69
+msgid "Larch"
+msgstr "Modrzew"
+
+#: ../../worlds/winterland/conf:70
+msgid "Larch medium"
+msgstr "Średni modrzew"
+
+#: ../../worlds/winterland/conf:71
+msgid "Larch small"
+msgstr "Mały modrzew"
+
+#: ../../worlds/winterland/conf:72
+msgid "Larch tiny"
+msgstr "Malutki modrzew"
+
+#: ../../worlds/winterland/conf:85
+msgid "Lynx"
+msgstr "Ryś"
+
+#: ../../worlds/winterland/conf:57
+msgid "Maple"
+msgstr "Klon"
+
+#: ../../worlds/winterland/conf:58
+msgid "Maple medium"
+msgstr "Średni klon"
+
+#: ../../worlds/winterland/conf:59
+msgid "Maple small"
+msgstr "Mały klon"
+
+#: ../../worlds/winterland/conf:60
+msgid "Maple tiny"
+msgstr "Malutki klon"
+
+#: ../../worlds/winterland/conf:86
+msgid "Marten"
+msgstr "Kuna"
+
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
 msgid "Mushroom"
 msgstr "Grzyb"
+
+#: ../../worlds/winterland/conf:49
+msgid "Oak"
+msgstr "Dąb"
+
+#: ../../worlds/winterland/conf:50
+msgid "Oak medium"
+msgstr "Średni dąb"
+
+#: ../../worlds/winterland/conf:51
+msgid "Oak small"
+msgstr "Mały dąb"
+
+#: ../../worlds/winterland/conf:52
+msgid "Oak tiny"
+msgstr "Malutki dąb"
 
 #: ../../worlds/winterland/conf:21
 #: ../../worlds/winterland/conf:22
@@ -65,6 +199,30 @@ msgstr "Grzyb"
 msgid "Pebble"
 msgstr "Kamyk"
 
+#: ../../worlds/winterland/conf:87
+msgid "Reindeer"
+msgstr "Renifer"
+
+#: ../../worlds/winterland/conf:73
+msgid "Rowan"
+msgstr "Jarząb"
+
+#: ../../worlds/winterland/conf:74
+msgid "Rowan medium"
+msgstr "Średni jarząb"
+
+#: ../../worlds/winterland/conf:75
+msgid "Rowan small"
+msgstr "Mały jarząb"
+
+#: ../../worlds/winterland/conf:76
+msgid "Rowan tiny"
+msgstr "Malutki jarząb"
+
+#: ../../worlds/winterland/conf:88
+msgid "Sheep"
+msgstr "Owca"
+
 #: ../../worlds/winterland/conf:27
 #: ../../worlds/winterland/conf:28
 #: ../../worlds/winterland/conf:29
@@ -74,6 +232,22 @@ msgstr "Szkielet"
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
 msgstr "Yeti"
+
+#: ../../worlds/winterland/conf:53
+msgid "Spruce"
+msgstr "Świerk"
+
+#: ../../worlds/winterland/conf:54
+msgid "Spruce medium"
+msgstr "Średni świerk"
+
+#: ../../worlds/winterland/conf:55
+msgid "Spruce small"
+msgstr "Mały świerk"
+
+#: ../../worlds/winterland/conf:56
+msgid "Spruce tiny"
+msgstr "Malutki świerk"
 
 #: ../../worlds/winterland/conf:31
 #: ../../worlds/winterland/conf:32
@@ -94,177 +268,27 @@ msgstr "Stojące kamienie"
 msgid "Stones"
 msgstr "Kamienie"
 
+#: ../../worlds/winterland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Zespól rozwojowy Widelands"
+
+#: ../../worlds/winterland/conf:4
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr "Oto białe, szerokie i zimne krainy gdzie rządzą Ludzie Północy"
+
 #: ../../worlds/winterland/conf:44
 msgid "Track"
 msgstr "Ścieżka"
 
-#: ../../worlds/winterland/conf:45
-msgid "Aspen"
-msgstr "Topola"
+#: ../../worlds/winterland/resconf:36
+msgid "Water"
+msgstr "Woda"
 
-#: ../../worlds/winterland/conf:46
-msgid "Aspen medium"
-msgstr "Średnia topola"
-
-#: ../../worlds/winterland/conf:47
-msgid "Aspen small"
-msgstr "Mała topola"
-
-#: ../../worlds/winterland/conf:48
-msgid "Aspen tiny"
-msgstr "Malutka topola"
-
-#: ../../worlds/winterland/conf:49
-msgid "Oak"
-msgstr "Dąb"
-
-#: ../../worlds/winterland/conf:50
-msgid "Oak medium"
-msgstr "Średni dąb"
-
-#: ../../worlds/winterland/conf:51
-msgid "Oak small"
-msgstr "Mały dąb"
-
-#: ../../worlds/winterland/conf:52
-msgid "Oak tiny"
-msgstr "Malutki dąb"
-
-#: ../../worlds/winterland/conf:53
-msgid "Spruce"
-msgstr "Świerk"
-
-#: ../../worlds/winterland/conf:54
-msgid "Spruce medium"
-msgstr "Średni świerk"
-
-#: ../../worlds/winterland/conf:55
-msgid "Spruce small"
-msgstr "Mały świerk"
-
-#: ../../worlds/winterland/conf:56
-msgid "Spruce tiny"
-msgstr "Malutki świerk"
-
-#: ../../worlds/winterland/conf:57
-msgid "Maple"
-msgstr "Klon"
-
-#: ../../worlds/winterland/conf:58
-msgid "Maple medium"
-msgstr "Średni klon"
-
-#: ../../worlds/winterland/conf:59
-msgid "Maple small"
-msgstr "Mały klon"
-
-#: ../../worlds/winterland/conf:60
-msgid "Maple tiny"
-msgstr "Malutki klon"
-
-#: ../../worlds/winterland/conf:61
-msgid "Birch"
-msgstr "Brzoza"
-
-#: ../../worlds/winterland/conf:62
-msgid "Birch medium"
-msgstr "Średnia brzoza"
-
-#: ../../worlds/winterland/conf:63
-msgid "Birch small"
-msgstr "Mała brzoza"
-
-#: ../../worlds/winterland/conf:64
-msgid "Birch tiny"
-msgstr "Malutka brzoza"
-
-#: ../../worlds/winterland/conf:65
-msgid "Beech"
-msgstr "Buk"
-
-#: ../../worlds/winterland/conf:66
-msgid "Beech medium"
-msgstr "Średni buk"
-
-#: ../../worlds/winterland/conf:67
-msgid "Beech small"
-msgstr "Mały buk"
-
-#: ../../worlds/winterland/conf:68
-msgid "Beech tiny"
-msgstr "Malutki buk"
-
-#: ../../worlds/winterland/conf:69
-msgid "Larch"
-msgstr "Modrzew"
-
-#: ../../worlds/winterland/conf:70
-msgid "Larch medium"
-msgstr "Średni modrzew"
-
-#: ../../worlds/winterland/conf:71
-msgid "Larch small"
-msgstr "Mały modrzew"
-
-#: ../../worlds/winterland/conf:72
-msgid "Larch tiny"
-msgstr "Malutki modrzew"
-
-#: ../../worlds/winterland/conf:73
-msgid "Rowan"
-msgstr "Jarząb"
-
-#: ../../worlds/winterland/conf:74
-msgid "Rowan medium"
-msgstr "Średni jarząb"
-
-#: ../../worlds/winterland/conf:75
-msgid "Rowan small"
-msgstr "Mały jarząb"
-
-#: ../../worlds/winterland/conf:76
-msgid "Rowan tiny"
-msgstr "Malutki jarząb"
-
-#: ../../worlds/winterland/conf:79
-msgid "Badger"
-msgstr "Borsuk"
-
-#: ../../worlds/winterland/conf:80
-msgid "Bunny"
-msgstr "Królik"
-
-#: ../../worlds/winterland/conf:81
-msgid "Deer"
-msgstr "Jeleń"
-
-#: ../../worlds/winterland/conf:82
-msgid "Duck"
-msgstr "Kaczka"
-
-#: ../../worlds/winterland/conf:83
-msgid "Elk"
-msgstr "Wapiti"
-
-#: ../../worlds/winterland/conf:84
-msgid "Fox"
-msgstr "Lis"
-
-#: ../../worlds/winterland/conf:85
-msgid "Lynx"
-msgstr "Ryś"
-
-#: ../../worlds/winterland/conf:86
-msgid "Marten"
-msgstr "Kuna"
-
-#: ../../worlds/winterland/conf:87
-msgid "Reindeer"
-msgstr "Renifer"
-
-#: ../../worlds/winterland/conf:88
-msgid "Sheep"
-msgstr "Owca"
+#: ../../worlds/winterland/conf:3
+msgid "Winterland"
+msgstr "Śnieżne krainy"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"
@@ -274,29 +298,8 @@ msgstr "Żubr"
 msgid "Wolf"
 msgstr "Wilk"
 
-#: ../../worlds/winterland/resconf:4
-msgid "Coal"
-msgstr "Węgiel"
-
-#: ../../worlds/winterland/resconf:12
-msgid "Gold"
-msgstr "Złoto"
-
-#: ../../worlds/winterland/resconf:20
-msgid "Iron"
-msgstr "Żelazo"
-
-#: ../../worlds/winterland/resconf:28
-msgid "Granit"
-msgstr "Granit"
-
-#: ../../worlds/winterland/resconf:36
-msgid "Water"
-msgstr "Woda"
-
-#: ../../worlds/winterland/resconf:41
-msgid "Fish"
-msgstr "Ryby"
+#~ msgid "Granit"
+#~ msgstr "Granit"
 
 #~ msgid "Tree"
 #~ msgstr "Drzewo"

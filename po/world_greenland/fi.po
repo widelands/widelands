@@ -6,28 +6,93 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:24+0000\n"
-"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 22:34+0000\n"
+"Last-Translator: Mad_Mac <destroyerko@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-06-08 03:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/greenland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Widelands-kehittäjät"
+#: ../../worlds/greenland/conf:58
+msgid "Alder"
+msgstr "Leppä"
 
-#: ../../worlds/greenland/conf:3
-msgid "Greenland"
-msgstr "Ruohikko"
+#: ../../worlds/greenland/conf:59
+msgid "Alder medium"
+msgstr "Leppä keskikokoinen"
 
-# TODO: beautiful, bountyful, LANDS.
-#: ../../worlds/greenland/conf:4
-msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "Nämä ovat barbaarien kauniita ja hedelmällisiä maita"
+#: ../../worlds/greenland/conf:60
+msgid "Alder small"
+msgstr "Leppä pieni"
+
+#: ../../worlds/greenland/conf:61
+msgid "Alder tiny"
+msgstr "Leppä hyvin pieni"
+
+#: ../../worlds/greenland/conf:46
+msgid "Aspen"
+msgstr "Haapa"
+
+#: ../../worlds/greenland/conf:47
+msgid "Aspen medium"
+msgstr "Haapa keskikokoinen"
+
+#: ../../worlds/greenland/conf:48
+msgid "Aspen small"
+msgstr "Haapa pieni"
+
+#: ../../worlds/greenland/conf:49
+msgid "Aspen tiny"
+msgstr "Haapa hyvin pieni"
+
+#: ../../worlds/greenland/conf:80
+msgid "Badger"
+msgstr "Mäyrä"
+
+#: ../../worlds/greenland/conf:66
+msgid "Beech"
+msgstr "Pyökki"
+
+#: ../../worlds/greenland/conf:67
+msgid "Beech medium"
+msgstr "Pyökki keskikokoinen"
+
+#: ../../worlds/greenland/conf:68
+msgid "Beech small"
+msgstr "Pyökki pieni"
+
+#: ../../worlds/greenland/conf:69
+msgid "Beech tiny"
+msgstr "Pyökki hyvin pieni"
+
+#: ../../worlds/greenland/conf:62
+msgid "Birch"
+msgstr "Koivu"
+
+#: ../../worlds/greenland/conf:63
+msgid "Birch medium"
+msgstr "Koivu keskikokoinen"
+
+#: ../../worlds/greenland/conf:64
+msgid "Birch small"
+msgstr "Koivu pieni"
+
+#: ../../worlds/greenland/conf:65
+msgid "Birch tiny"
+msgstr "Koivu hyvin pieni"
+
+# TODO: space
+#: ../../worlds/greenland/conf:81
+msgid "Brownbear"
+msgstr "Ruskea karhu"
+
+# TODO: Bunny is a dialect word, cf. doggy; use rabbit or hare or cony/coney.
+#: ../../worlds/greenland/conf:82
+msgid "Bunny"
+msgstr "Jänis"
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -42,6 +107,14 @@ msgstr "Pensas"
 msgid "Cactus"
 msgstr "Kaktus"
 
+#: ../../worlds/greenland/conf:83
+msgid "Chamois"
+msgstr "Vuorikauris"
+
+#: ../../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr "Hiili"
+
 #: ../../worlds/greenland/conf:14
 #: ../../worlds/greenland/conf:15
 #: ../../worlds/greenland/conf:16
@@ -49,9 +122,38 @@ msgstr "Kaktus"
 msgid "Dead Tree"
 msgstr "Kuollut puu"
 
+#: ../../worlds/greenland/conf:84
+msgid "Deer"
+msgstr "Peura"
+
+#: ../../worlds/greenland/conf:85
+msgid "Duck"
+msgstr "Ankka"
+
+# Occasionally also hirvi (moose).
+#: ../../worlds/greenland/conf:86
+msgid "Elk"
+msgstr "Vapiti"
+
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
 msgstr "Kaatunut puu"
+
+#: ../../worlds/greenland/resconf:41
+msgid "Fish"
+msgstr "Kala"
+
+#: ../../worlds/greenland/conf:87
+msgid "Fox"
+msgstr "Kettu"
+
+#: ../../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr "Kulta"
+
+#: ../../worlds/greenland/resconf:28
+msgid "Granite"
+msgstr "Graniitti"
 
 #: ../../worlds/greenland/conf:19
 #: ../../worlds/greenland/conf:20
@@ -59,10 +161,59 @@ msgstr "Kaatunut puu"
 msgid "Grass"
 msgstr "Ruohoa"
 
+#: ../../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr "Ruohikko"
+
+#: ../../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr "Rauta"
+
+#: ../../worlds/greenland/conf:70
+msgid "Larch"
+msgstr "Lehtikuusi"
+
+#: ../../worlds/greenland/conf:71
+msgid "Larch medium"
+msgstr "Lehtikuusi keskikokoinen"
+
+#: ../../worlds/greenland/conf:72
+msgid "Larch small"
+msgstr "Lehtikuusi pieni"
+
+#: ../../worlds/greenland/conf:73
+msgid "Larch tiny"
+msgstr "Lehtikuusi hyvin pieni"
+
+#: ../../worlds/greenland/conf:88
+msgid "Lynx"
+msgstr "Ilves"
+
+#: ../../worlds/greenland/conf:89
+msgid "Marten"
+msgstr "Näätä"
+
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
 msgid "Mushroom"
 msgstr "Sieni"
+
+# TODO: for heaven's sake, one "?tree_and_size:%s %s" and a single translation of sizes and species!
+#: ../../worlds/greenland/conf:50
+msgid "Oak"
+msgstr "Tammi"
+
+#: ../../worlds/greenland/conf:51
+msgid "Oak medium"
+msgstr "Tammi keskikokoinen"
+
+#: ../../worlds/greenland/conf:52
+msgid "Oak small"
+msgstr "Tammi pieni"
+
+#: ../../worlds/greenland/conf:53
+msgid "Oak tiny"
+msgstr "Tammi hyvin pieni"
 
 #: ../../worlds/greenland/conf:24
 #: ../../worlds/greenland/conf:25
@@ -73,11 +224,51 @@ msgstr "Sieni"
 msgid "Pebble"
 msgstr "Kivi"
 
+#: ../../worlds/greenland/conf:90
+msgid "Reindeer"
+msgstr "Poro"
+
+#: ../../worlds/greenland/conf:74
+msgid "Rowan"
+msgstr "Pihlaja"
+
+#: ../../worlds/greenland/conf:75
+msgid "Rowan medium"
+msgstr "Pihlaja keskikokoinen"
+
+#: ../../worlds/greenland/conf:76
+msgid "Rowan small"
+msgstr "Pihlaja pieni"
+
+#: ../../worlds/greenland/conf:77
+msgid "Rowan tiny"
+msgstr "Pihlaja hyvin pieni"
+
+#: ../../worlds/greenland/conf:91
+msgid "Sheep"
+msgstr "Lammas"
+
 #: ../../worlds/greenland/conf:30
 #: ../../worlds/greenland/conf:31
 #: ../../worlds/greenland/conf:32
 msgid "Skeleton"
 msgstr "Luuranko"
+
+#: ../../worlds/greenland/conf:54
+msgid "Spruce"
+msgstr "Kuusi"
+
+#: ../../worlds/greenland/conf:55
+msgid "Spruce medium"
+msgstr "Kuusi keskikokoinen"
+
+#: ../../worlds/greenland/conf:56
+msgid "Spruce small"
+msgstr "Kuusi pieni"
+
+#: ../../worlds/greenland/conf:57
+msgid "Spruce tiny"
+msgstr "Kuusi hyvin pieni"
 
 #: ../../worlds/greenland/conf:33
 #: ../../worlds/greenland/conf:34
@@ -98,185 +289,18 @@ msgstr "Pystykiviä"
 msgid "Stones"
 msgstr "Kiviä"
 
-#: ../../worlds/greenland/conf:46
-msgid "Aspen"
-msgstr "Haapa"
+#: ../../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Widelands-kehittäjät"
 
-#: ../../worlds/greenland/conf:47
-msgid "Aspen medium"
-msgstr "Haapa keskikokoinen"
+# TODO: beautiful, bountyful, LANDS.
+#: ../../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr "Nämä ovat barbaarien kauniita ja hedelmällisiä maita"
 
-#: ../../worlds/greenland/conf:48
-msgid "Aspen small"
-msgstr "Haapa pieni"
-
-#: ../../worlds/greenland/conf:49
-msgid "Aspen tiny"
-msgstr "Haapa hyvin pieni"
-
-# TODO: for heaven's sake, one "?tree_and_size:%s %s" and a single translation of sizes and species!
-#: ../../worlds/greenland/conf:50
-msgid "Oak"
-msgstr "Tammi"
-
-#: ../../worlds/greenland/conf:51
-msgid "Oak medium"
-msgstr "Tammi keskikokoinen"
-
-#: ../../worlds/greenland/conf:52
-msgid "Oak small"
-msgstr "Tammi pieni"
-
-#: ../../worlds/greenland/conf:53
-msgid "Oak tiny"
-msgstr "Tammi hyvin pieni"
-
-#: ../../worlds/greenland/conf:54
-msgid "Spruce"
-msgstr "Kuusi"
-
-#: ../../worlds/greenland/conf:55
-msgid "Spruce medium"
-msgstr "Kuusi keskikokoinen"
-
-#: ../../worlds/greenland/conf:56
-msgid "Spruce small"
-msgstr "Kuusi pieni"
-
-#: ../../worlds/greenland/conf:57
-msgid "Spruce tiny"
-msgstr "Kuusi hyvin pieni"
-
-#: ../../worlds/greenland/conf:58
-msgid "Alder"
-msgstr "Leppä"
-
-#: ../../worlds/greenland/conf:59
-msgid "Alder medium"
-msgstr "Leppä keskikokoinen"
-
-#: ../../worlds/greenland/conf:60
-msgid "Alder small"
-msgstr "Leppä pieni"
-
-#: ../../worlds/greenland/conf:61
-msgid "Alder tiny"
-msgstr "Leppä hyvin pieni"
-
-#: ../../worlds/greenland/conf:62
-msgid "Birch"
-msgstr "Koivu"
-
-#: ../../worlds/greenland/conf:63
-msgid "Birch medium"
-msgstr "Koivu keskikokoinen"
-
-#: ../../worlds/greenland/conf:64
-msgid "Birch small"
-msgstr "Koivu pieni"
-
-#: ../../worlds/greenland/conf:65
-msgid "Birch tiny"
-msgstr "Koivu hyvin pieni"
-
-#: ../../worlds/greenland/conf:66
-msgid "Beech"
-msgstr "Pyökki"
-
-#: ../../worlds/greenland/conf:67
-msgid "Beech medium"
-msgstr "Pyökki keskikokoinen"
-
-#: ../../worlds/greenland/conf:68
-msgid "Beech small"
-msgstr "Pyökki pieni"
-
-#: ../../worlds/greenland/conf:69
-msgid "Beech tiny"
-msgstr "Pyökki hyvin pieni"
-
-#: ../../worlds/greenland/conf:70
-msgid "Larch"
-msgstr "Lehtikuusi"
-
-#: ../../worlds/greenland/conf:71
-msgid "Larch medium"
-msgstr "Lehtikuusi keskikokoinen"
-
-#: ../../worlds/greenland/conf:72
-msgid "Larch small"
-msgstr "Lehtikuusi pieni"
-
-#: ../../worlds/greenland/conf:73
-msgid "Larch tiny"
-msgstr "Lehtikuusi hyvin pieni"
-
-#: ../../worlds/greenland/conf:74
-msgid "Rowan"
-msgstr "Pihlaja"
-
-#: ../../worlds/greenland/conf:75
-msgid "Rowan medium"
-msgstr "Pihlaja keskikokoinen"
-
-#: ../../worlds/greenland/conf:76
-msgid "Rowan small"
-msgstr "Pihlaja pieni"
-
-#: ../../worlds/greenland/conf:77
-msgid "Rowan tiny"
-msgstr "Pihlaja hyvin pieni"
-
-#: ../../worlds/greenland/conf:80
-msgid "Badger"
-msgstr "Mäyrä"
-
-# TODO: space
-#: ../../worlds/greenland/conf:81
-msgid "Brownbear"
-msgstr "Ruskea karhu"
-
-# TODO: Bunny is a dialect word, cf. doggy; use rabbit or hare or cony/coney.
-#: ../../worlds/greenland/conf:82
-msgid "Bunny"
-msgstr "Jänis"
-
-#: ../../worlds/greenland/conf:83
-msgid "Chamois"
-msgstr "Vuorikauris"
-
-#: ../../worlds/greenland/conf:84
-msgid "Deer"
-msgstr "Peura"
-
-#: ../../worlds/greenland/conf:85
-msgid "Duck"
-msgstr "Ankka"
-
-# Occasionally also hirvi (moose).
-#: ../../worlds/greenland/conf:86
-msgid "Elk"
-msgstr "Vapiti"
-
-#: ../../worlds/greenland/conf:87
-msgid "Fox"
-msgstr "Kettu"
-
-#: ../../worlds/greenland/conf:88
-msgid "Lynx"
-msgstr "Ilves"
-
-#: ../../worlds/greenland/conf:89
-msgid "Marten"
-msgstr "Näätä"
-
-#: ../../worlds/greenland/conf:90
-msgid "Reindeer"
-msgstr "Poro"
-
-#: ../../worlds/greenland/conf:91
-msgid "Sheep"
-msgstr "Lammas"
+#: ../../worlds/greenland/resconf:36
+msgid "Water"
+msgstr "Vesi"
 
 #: ../../worlds/greenland/conf:92
 msgid "Wisent"
@@ -286,26 +310,5 @@ msgstr "Visentti"
 msgid "Wolf"
 msgstr "Susi"
 
-#: ../../worlds/greenland/resconf:4
-msgid "Coal"
-msgstr "Hiili"
-
-#: ../../worlds/greenland/resconf:12
-msgid "Gold"
-msgstr "Kulta"
-
-#: ../../worlds/greenland/resconf:20
-msgid "Iron"
-msgstr "Rauta"
-
-#: ../../worlds/greenland/resconf:28
-msgid "Granit"
-msgstr "Graniitti"
-
-#: ../../worlds/greenland/resconf:36
-msgid "Water"
-msgstr "Vesi"
-
-#: ../../worlds/greenland/resconf:41
-msgid "Fish"
-msgstr "Kala"
+#~ msgid "Granit"
+#~ msgstr "Graniitti"

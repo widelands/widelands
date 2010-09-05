@@ -78,7 +78,8 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>,
 		(Player_Number,
 		 uint8_t             initialization_index,
 		 const std::string & tribe,
-		 const std::string & name);
+		 const std::string & name,
+		 TeamNumber team = 0);
 	Player * get_player(const int32_t n) const {
 		assert(1 <= n);
 		assert     (n <= MAX_PLAYERS);

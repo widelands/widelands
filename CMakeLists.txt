@@ -104,11 +104,32 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
 set (BUILD_SHARED_LIBS OFF)
-set (Boost_USE_STATIC_LIBS   ON)
-set (Boost_USE_MULTITHREADED ON)
-find_package(Boost 1.35.0 REQUIRED)
+
+# Unit tests add dependency to unit_test_framework and are therefore optional.
+set (BUILD_UNIT_TESTS TRUE CACHE BOOL "Build unit tests (requires boost unit test framework)")
+
+if (BUILD_UNIT_TESTS)
+  # we only include Boost Headers to the main executable, no libraries
+  # unit_test_framework is for testing only and can use shared libraries
+  set (Boost_FIND_COMPONENTS unit_test_framework)
+  set (Boost_USE_STATIC_LIBS   ON)
+  set (Boost_USE_MULTITHREADED ON)
+  set (Boost_DETAILED_FAILURE_MSG ON)
+  find_package(Boost 1.35.0 COMPONENTS unit_test_framework)
+  # settle with single threaded libs if multithreaded is not available
+  if (NOT Boost_FOUND)
+    set (Boost_USE_MULTITHREADED OFF)
+    find_package(Boost 1.35.0 COMPONENTS unit_test_framework REQUIRED)
+    # If still not boost found, then hint user to disable BUILD_UNIT_TESTS
+    if (NOT Boost_FOUND)
+      message("Boost unit_test_framework is required for unit tests.\nSet BUILD_UNIT_TESTS to FALSE to build without unit tests.\n")
+    endif()
+  endif (NOT Boost_FOUND)
+else (BUILD_UNIT_TESTS)
+  find_package(Boost 1.35.0 REQUIRED)
+endif (BUILD_UNIT_TESTS)
+
 include_directories(${Boost_INCLUDE_DIR})
-target_link_libraries(widelands ${Boost_LIBRARIES})
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
@@ -175,17 +196,21 @@ if (DEFINED MSVC)
   add_definitions( -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS )
   add_definitions( -Dssize_t=size_t )
   add_definitions( -Dmkdir=_mkdir )
+  add_definitions( -DREDIRECT_OUTPUT )
 
+  # Automatic linking for boost requires setting lib dir and clearing Boost_LIBARIES
+  LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+  set(Boost_LIBRARIES "")
 
   find_library(INTL_LIBRARY NAMES intl libintl)
 
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
   # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
-  set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MD" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MT /GL" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
-  set (CMAKE_EXE_LINKER_FLAGS_DEBUG "/debug /INCREMENTAL:YES /NODEFAULTLIB:msvcrt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_EXE_LINKER_FLAGS_DEBUG "/debug /LTCG /NODEFAULTLIB:libcmt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 else (DEFINED MSVC)
   set (HAVE_VARARRAY TRUE CACHE BOOL "Use variable length arrays to improve performance. Requires gcc." )
@@ -209,6 +234,16 @@ if (GGZ_CORE_FOUND)
 else (GGZ_CORE_FOUND)
   message (STATUS "GGZ support disabled, check your libraries path and installed packages!")
 endif (GGZ_CORE_FOUND)
+
+# Check for opengl
+# TODO Check for SDL_opengl.h and add to include path
+find_package(OpenGL)
+if (OPENGL_FOUND)
+  # OpenGL Headers are not needed directly. Instead SDL_opengl.h should be searched
+  add_definitions("-DUSE_OPENGL")
+else (OPENGL_FOUND)
+  message (STATUS "OpenGL support disabled, check your libraries path and installed packages!")
+endif (OPENGL_FOUND)
 
 # ...but using MAJOR, MINOR and PATCH
 if (DEFINED WL_VERSION_MAJOR)
@@ -259,12 +294,12 @@ endif (DEFINED WL_VERSION_MAJOR)
 if (NOT DEFINED WL_VERSION)
   add_custom_target (
     BzrRevision ALL
-    COMMAND cmake -DWL_INSTALL_PREFIX=${WL_INSTALL_PREFIX} -DWL_INSTALL_BINDIR=${WL_INSTALL_BINDIR} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DWL_INSTALL_LOCALEDIR=${WL_INSTALL_LOCALEDIR} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/BzrRevision.cmake
+    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_PREFIX=${WL_INSTALL_PREFIX} -DWL_INSTALL_BINDIR=${WL_INSTALL_BINDIR} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DWL_INSTALL_LOCALEDIR=${WL_INSTALL_LOCALEDIR} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/BzrRevision.cmake
   )
 else (NOT DEFINED WL_VERSION)
   add_custom_target (
     InputRevision ALL
-    COMMAND cmake -DWL_INSTALL_PREFIX=${WL_INSTALL_PREFIX} -DWL_INSTALL_BINDIR=${WL_INSTALL_BINDIR} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DWL_INSTALL_LOCALEDIR=${WL_INSTALL_LOCALEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/InputRevision.cmake
+    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_PREFIX=${WL_INSTALL_PREFIX} -DWL_INSTALL_BINDIR=${WL_INSTALL_BINDIR} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DWL_INSTALL_LOCALEDIR=${WL_INSTALL_LOCALEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/InputRevision.cmake
   )
 endif (NOT DEFINED WL_VERSION)
 
@@ -274,6 +309,10 @@ install (
   CONFIGURATIONS Debug;Release
   COMPONENT CoreVersionFile
 )
+
+if (BUILD_UNIT_TESTS)
+enable_testing()
+endif (BUILD_UNIT_TESTS)
 
 include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
@@ -387,48 +426,48 @@ endif (WIN32)
 if (${CMAKE_BUILD_TYPE} STREQUAL Release)
   add_custom_target (
     lang ALL
-    COMMAND cmake -E echo "Preparing directory po"
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
-    COMMAND cmake -E echo "Preparing directory campaigns"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
-    COMMAND cmake -E echo "Preparing directory maps"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
-    COMMAND cmake -E echo "Preparing directory scripting"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/scripting ${CMAKE_CURRENT_BINARY_DIR}/scripting
-    COMMAND cmake -E echo "Preparing directory tribes"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
-    COMMAND cmake -E echo "Preparing directory txts"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
-    COMMAND cmake -E echo "Preparing directory worlds"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
-    COMMAND cmake -E echo "Running the locale generation task"
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory po"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory campaigns"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory maps"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory scripting"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/scripting ${CMAKE_CURRENT_BINARY_DIR}/scripting
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory tribes"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory txts"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory worlds"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+    COMMAND ${CMAKE_COMMAND} -E echo "Running the locale generation task"
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   )
 else (${CMAKE_BUILD_TYPE} STREQUAL Release)
   add_custom_target (
     lang
-    COMMAND cmake -E echo "Preparing directory po"
-    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
-    COMMAND cmake -E echo "Preparing directory campaigns"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
-    COMMAND cmake -E echo "Preparing directory maps"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
-    COMMAND cmake -E echo "Preparing directory scripting"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/scripting ${CMAKE_CURRENT_BINARY_DIR}/scripting
-    COMMAND cmake -E echo "Preparing directory tribes"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
-    COMMAND cmake -E echo "Preparing directory txts"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
-    COMMAND cmake -E echo "Preparing directory worlds"
-    COMMAND cmake -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
-    COMMAND cmake -E echo "Running the locale generation task"
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory po"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory campaigns"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory maps"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory scripting"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/scripting ${CMAKE_CURRENT_BINARY_DIR}/scripting
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory tribes"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory txts"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
+    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory worlds"
+    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+    COMMAND ${CMAKE_COMMAND} -E echo "Running the locale generation task"
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   )
   add_custom_target (
     lang_dummy ALL
-    COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   )
 endif (${CMAKE_BUILD_TYPE} STREQUAL Release)
@@ -445,11 +484,11 @@ install(
   PATTERN "SCons*" EXCLUDE
 )
 
-execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/pics)
+execute_process (COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/pics)
 add_custom_target (
   optimizepics 
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pics
-  COMMAND cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DWL_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/pics -DWL_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/pics -P PicsFunctions.cmake
+  COMMAND ${CMAKE_COMMAND} -DCMAKE_COMMAND=${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DWL_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/pics -DWL_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/pics -P PicsFunctions.cmake
 )
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})

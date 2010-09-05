@@ -247,7 +247,7 @@ static const std::string tooltip_tab_build[] = {
 	_("Build medium buildings"),
 	_("Build large buildings")
 };
-static const std::string name_tab_build[] = { "small", "medium", "big" };
+static const std::string name_tab_build[] = {"small", "medium", "big"};
 
 
 static char const * const pic_tab_buildmine  = "pics/menu_tab_buildmine.png";
@@ -290,7 +290,7 @@ FieldActionWindow::FieldActionWindow
 {
 	ib->set_sel_freeze(true);
 
-	m_tabpanel.set_snapparent(true);
+	set_center_panel(&m_tabpanel);
 
 	char filename[] = "pics/workarea0cumulative.png";
 	compile_assert(NUMBER_OF_WORKAREA_PICS <= 9);
@@ -326,8 +326,6 @@ This mainly deals with mouse placement
 */
 void FieldActionWindow::init()
 {
-	m_tabpanel.layout();
-
 	center_to_parent(); // override UI::UniqueWindow position
 
 	// Move the window away from the current mouse position, i.e.
@@ -477,20 +475,17 @@ void FieldActionWindow::add_buttons_auto()
 		m_plr ? new MilitaryBox(&m_tabpanel, m_plr, 0, 0) : 0;
 
 	// Add tabs
-	if (buildbox && buildbox->get_nritems()) {
-		buildbox->layout();
+	if (buildbox && buildbox->get_nritems())
 		add_tab("roads", pic_tab_buildroad, buildbox, _("Build roads"));
-	}
 
-	watchbox.layout();
 	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 
 	if (militarybox) {
-		if (militarybox->allowed_change()) {
-			militarybox->layout();
-			add_tab("military", pic_tab_military,
-					militarybox, _("Military settings")
-			);
+		if (militarybox->allowed_change())
+	{
+			add_tab
+				("military", pic_tab_military,
+				 militarybox, _("Military settings"));
 		} else
 			delete militarybox;
 	}
@@ -501,27 +496,25 @@ void FieldActionWindow::add_buttons_attack ()
 	UI::Box & a_box = *new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	if
-		(m_plr and
-		 m_plr->player_number() != m_node.field->get_owned_by())
+		(upcast
+		 	(Widelands::Attackable, attackable, m_map->get_immovable(m_node)))
 	{
 		if
-			(upcast
-			 	(Widelands::Attackable, attackable, m_map->get_immovable(m_node)))
-			if (attackable->canAttack()) {
-				m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
-				a_box.add(m_attack_box, UI::Box::AlignTop);
+			(m_plr && m_plr->is_hostile(attackable->owner()) &&
+			 attackable->canAttack())
+		{
+			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
+			a_box.add(m_attack_box, UI::Box::AlignTop);
 
-				add_button
-					(&a_box, "attack",
-					 pic_attack,
-					 &FieldActionWindow::act_attack,
-					 _("Start attack"));
-			}
+			add_button
+				(&a_box, "attack",
+				 pic_attack,
+				 &FieldActionWindow::act_attack,
+				 _("Start attack"));
+		}
 	}
 
 	if (a_box.get_nritems()) { //  add tab
-		m_attack_box->layout();
-		a_box.layout();
 		add_tab("attack", pic_tab_attack, &a_box, _("Attack"));
 	}
 }
@@ -624,7 +617,6 @@ void FieldActionWindow::add_buttons_road(bool const flag)
 		 pic_abort, &FieldActionWindow::act_abort_buildroad, _("Cancel road"));
 
 	// Add the box as tab
-	buildbox.layout();
 	add_tab("roads", pic_tab_buildroad, &buildbox, _("Build roads"));
 }
 
@@ -950,7 +942,7 @@ void show_field_action
 	// Force closing of old fieldaction windows. This is necessary because
 	// show_field_action() does not always open a FieldActionWindow (e.g.
 	// connecting the road we are building to an existing flag)
-		delete registry->window;
+	delete registry->window;
 	*registry = UI::UniqueWindow::Registry();
 
 	if (!ibase->is_building_road()) {

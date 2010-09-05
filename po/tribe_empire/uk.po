@@ -1,0 +1,1297 @@
+# Ukrainian translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"PO-Revision-Date: 2010-08-12 15:35+0000\n"
+"Last-Translator: Fedik <Unknown>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-08-13 05:51+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../tribes/empire/meal/conf:1
+msgid "A real meal which satisfies all miners needs."
+msgstr "Справжня їжа, яка задовільняє всі потреби шахтарів."
+
+#: ../../tribes/empire/ration/conf:1
+msgid "A small bite to keep miners strong and working."
+msgstr "Невеликий набір, для підтримки сил шахтарям."
+
+#: ../../tribes/empire/conf:50
+msgid "Advanced Lance"
+msgstr "Довгий спис"
+
+#: ../../tribes/empire/conf:135
+msgid "Arena"
+msgstr "Арена"
+
+#: ../../tribes/empire/conf:51
+msgid "Armour"
+msgstr "Збруя"
+
+#: ../../tribes/empire/conf:167
+msgid "Armour Smithy"
+msgstr "Цех збруї"
+
+#: ../../tribes/empire/conf:103
+msgid "Armoursmith"
+msgstr "Цех обладунків"
+
+#: ../../tribes/empire/conf:27
+msgid "Ashes"
+msgstr "Попелище"
+
+#: ../../tribes/empire/conf:52
+msgid "Axe"
+msgstr "Сокира"
+
+#: ../../tribes/empire/conf:104
+msgid "Baker"
+msgstr "Пекар"
+
+#: ../../tribes/empire/conf:168
+msgid "Bakery"
+msgstr "Пекарня"
+
+#: ../../tribes/empire/baker/conf:1
+msgid "Bakes bread for workers."
+msgstr "Пече хліб для робочих"
+
+#: ../../tribes/empire/conf:140
+msgid "Barracks"
+msgstr "Казарма"
+
+#: ../../tribes/empire/conf:141
+#: ../../tribes/empire/conf:154
+msgid "Barrier"
+msgstr "Застава"
+
+#: ../../tribes/empire/armour/conf:1
+msgid "Basic armour for Empire soldiers."
+msgstr "Проста збруя для солдат Імперії"
+
+#: ../../tribes/empire/helm/conf:1
+msgid "Basic defence of a warrior"
+msgstr "Простий захист для воїнів"
+
+#: ../../tribes/empire/conf:54
+msgid "Basket"
+msgstr "Кошик"
+
+#: ../../tribes/empire/conf:55
+msgid "Beer"
+msgstr "Пиво"
+
+#: ../../tribes/empire/fish/conf:1
+msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
+msgstr ""
+"Не лише хліб та м'ясо, але й риба - поважний продукт на столах жителів "
+"Імперії."
+
+#: ../../tribes/empire/conf:56
+msgid "Bread"
+msgstr "Хліб"
+
+#: ../../tribes/empire/donkeybreeder/conf:1
+msgid "Breeds cute and helpful donkeys"
+msgstr "Розводить корисних та симпатичних ослів"
+
+#: ../../tribes/empire/pig-breeder/conf:1
+msgid "Breeds pigs."
+msgstr "Розводить свиней"
+
+#: ../../tribes/empire/conf:105
+msgid "Brewer"
+msgstr "Пивовар"
+
+#: ../../tribes/empire/conf:169
+msgid "Brewery"
+msgstr "Пивоварня"
+
+#: ../../tribes/empire/conf:106
+msgid "Builder"
+msgstr "Будівельник"
+
+#: ../../tribes/empire/conf:107
+msgid "Burner"
+msgstr "Випалювач углю"
+
+#: ../../tribes/empire/burner/conf:1
+msgid "Burns coal."
+msgstr "Випалює уголь."
+
+#: ../../tribes/empire/conf:96
+msgid "Carrier"
+msgstr "Носій"
+
+#: ../../tribes/empire/carrier/conf:1
+msgid "Carries items along your roads."
+msgstr "Переносить вантажі по Вашим дорогам."
+
+#: ../../tribes/empire/conf:142
+#: ../../tribes/empire/conf:148
+msgid "Castle"
+msgstr "Замок"
+
+#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
+msgid "Castle village"
+msgstr "Замок з поселенням."
+
+#: ../../tribes/empire/conf:57
+msgid "Chain-Armour"
+msgstr "Кольчуга"
+
+#: ../../tribes/empire/conf:170
+msgid "Charcoal Burner"
+msgstr "Випалювання вуглю"
+
+#: ../../tribes/empire/conf:155
+msgid "Citadel"
+msgstr "Цитадель"
+
+#: ../../tribes/empire/conf:58
+msgid "Cloth"
+msgstr "Тканина"
+
+#: ../../tribes/empire/cloth/conf:1
+msgid ""
+"Cloth is needed for Empire ships and a few bigger buildings. It is produced "
+"out of wool."
+msgstr ""
+"Тканина потрібна кораблям Імперії та для деяких великих будівель. "
+"Виготовляється з шерсті."
+
+#: ../../tribes/empire/conf:59
+msgid "Coal"
+msgstr "Уголь"
+
+#: ../../tribes/empire/conf:172
+msgid "Coal Mine"
+msgstr "Вугільна шахта"
+
+#: ../../tribes/empire/conf:134
+msgid "Colosseum"
+msgstr "Колізей"
+
+#: ../../tribes/empire/conf:131
+msgid "Construction Site"
+msgstr "Будмайданчик"
+
+#: ../../tribes/empire/stonemason/conf:1
+msgid "Cuts raw pieces of granite and marble out of laying stones."
+msgstr "Відділяє куски граніту та мармору від каміння."
+
+#: ../../tribes/empire/conf:171
+msgid "Deep Coal Mine"
+msgstr "Глибока вугільна шахта"
+
+#: ../../tribes/empire/conf:173
+msgid "Deep Gold Mine"
+msgstr "Глибока шахта золота"
+
+#: ../../tribes/empire/conf:175
+msgid "Deep Iron Ore Mine"
+msgstr "Глибокий рудник"
+
+#: ../../tribes/empire/conf:174
+msgid "Deep Marble Mine"
+msgstr "Глибока шахта мармуру"
+
+#: ../../tribes/empire/soldier/conf:1
+msgid "Defend and Conquer!"
+msgstr "Захищай та владарюй!"
+
+#: ../../tribes/empire/conf:33
+msgid "Destroyed building"
+msgstr "Зруйнована будівля."
+
+#: ../../tribes/empire/geologist/conf:1
+msgid "Discovers resources for mining."
+msgstr "Шукає корисні копалини."
+
+#: ../../tribes/empire/conf:156
+msgid "Donjon"
+msgstr "Оглядова вежа"
+
+#: ../../tribes/empire/conf:97
+msgid "Donkey"
+msgstr "Ослик"
+
+#: ../../tribes/empire/conf:128
+msgid "Donkey Breeder"
+msgstr "Розводить віслюків"
+
+#: ../../tribes/empire/conf:200
+msgid "Donkeyfarm"
+msgstr "Ферма віслюків"
+
+#: ../../tribes/empire/conf:5
+msgid "Empire"
+msgstr "Імперія"
+
+#: ../../tribes/empire/conf:176
+msgid "Farm"
+msgstr "Ферма"
+
+#: ../../tribes/empire/conf:108
+msgid "Farmer"
+msgstr "Фермер"
+
+#: ../../tribes/empire/lumberjack/conf:1
+msgid "Fells trees."
+msgstr "Рубає дерева."
+
+#: ../../tribes/empire/conf:32
+msgid "Field harvested"
+msgstr "Прибране поле"
+
+#: ../../tribes/empire/conf:28
+msgid "Field medium"
+msgstr "Середнє поле"
+
+#: ../../tribes/empire/conf:31
+msgid "Field ripe"
+msgstr "Стигле поле"
+
+#: ../../tribes/empire/conf:29
+msgid "Field small"
+msgstr "Мале поле"
+
+#: ../../tribes/empire/conf:30
+msgid "Field tiny"
+msgstr "Крихітне поле"
+
+#: ../../tribes/empire/conf:60
+msgid "Fire Tongs"
+msgstr "Кліщі коваля."
+
+#: ../../tribes/empire/conf:61
+msgid "Fish"
+msgstr "Риба"
+
+#: ../../tribes/empire/conf:109
+msgid "Fisher"
+msgstr "Рибак"
+
+#: ../../tribes/empire/conf:177
+msgid "Fisher's House"
+msgstr "Будиночок рибака"
+
+#: ../../tribes/empire/conf:62
+msgid "Fishing Rod"
+msgstr "Вудка"
+
+#: ../../tribes/empire/fishing_rod/conf:1
+msgid ""
+"Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
+msgstr "Вудочка для лову риби. Виготовляється в Майстерні"
+
+#: ../../tribes/empire/conf:63
+msgid "Flour"
+msgstr "Мука"
+
+#: ../../tribes/empire/flour/conf:1
+msgid ""
+"Flour is produced out of wheat and is needed for the tasty Empire bread."
+msgstr ""
+"Мука виготовляється з пшениці та потрібна для випікання смачного хліба "
+"Імперії."
+
+#: ../../tribes/empire/conf:110
+msgid "Forester"
+msgstr "Лісник"
+
+#: ../../tribes/empire/conf:178
+msgid "Forester's House"
+msgstr "Будиночок лісника"
+
+#: ../../tribes/empire/conf:143
+#: ../../tribes/empire/conf:157
+msgid "Fortress"
+msgstr "Фортеця"
+
+#: ../../tribes/empire/conf:111
+msgid "Geologist"
+msgstr "Геолог"
+
+#: ../../tribes/empire/fisher/conf:1
+msgid "Gets fish out of the sea."
+msgstr "Ловить рибу"
+
+#: ../../tribes/empire/conf:64
+msgid "Gold"
+msgstr "Золото"
+
+#: ../../tribes/empire/conf:179
+msgid "Gold Mine"
+msgstr "Золота копальня"
+
+#: ../../tribes/empire/gold/conf:1
+msgid ""
+"Gold is the most valuable of all metals; only very important things are "
+"garnished with it."
+msgstr ""
+"Золото - це найбільш цінний метал, тільки дуже важливі речі прикрашають "
+"золотом."
+
+#: ../../tribes/empire/conf:65
+msgid "Goldstone"
+msgstr "Золотий злиток"
+
+#: ../../tribes/empire/conf:66
+msgid "Grape"
+msgstr "Виноград"
+
+#: ../../tribes/empire/vinefarmer/conf:1
+msgid "Grows vine."
+msgstr "Вирощує виноград."
+
+#: ../../tribes/empire/conf:149
+msgid "Guardhall"
+msgstr "Форт"
+
+#: ../../tribes/empire/conf:150
+msgid "Guardhouse"
+msgstr "Будиночок гвардії"
+
+#: ../../tribes/empire/conf:67
+msgid "Hammer"
+msgstr "Молот"
+
+#: ../../tribes/empire/vineyard/conf:20
+msgid "Harvest vine"
+msgstr "Збирати виноград"
+
+#: ../../tribes/empire/farm/conf:20
+msgid "Harvest wheat"
+msgstr "Збирає пшеницю"
+
+#: ../../tribes/empire/conf:162
+msgid "Headquarters"
+msgstr "Штаб"
+
+#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
+msgid "Headquarters medium"
+msgstr "Середній штаб"
+
+#: ../../tribes/empire/conf:163
+msgid "Headquarters shipwreck"
+msgstr ""
+
+#: ../../tribes/empire/conf:68
+msgid "Heavy Lance"
+msgstr "Важкий спис"
+
+#: ../../tribes/empire/conf:69
+msgid "Helmet"
+msgstr "Шолом"
+
+#: ../../tribes/empire/donkey/conf:1
+msgid "Helps to carry items at heavy used roads."
+msgstr "Допомагає перевозити вантажі на завантажених дорогах."
+
+#: ../../tribes/empire/conf:151
+msgid "High Tower"
+msgstr "Висока вежа."
+
+#: ../../tribes/empire/kitchen_tools/conf:1
+msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
+msgstr ""
+"Як накажете готувати їжу (пайки, обіди чи ситі обіди) без кухонного приладдя?"
+
+#: ../../tribes/empire/conf:112
+msgid "Hunter"
+msgstr "Мисливець"
+
+#: ../../tribes/empire/conf:180
+msgid "Hunter's House"
+msgstr "Будиночок мисливця"
+
+#: ../../tribes/empire/conf:70
+msgid "Hunting Spear"
+msgstr "Спис мисливця"
+
+#: ../../tribes/empire/conf:181
+msgid "Inn"
+msgstr "Трактир"
+
+#: ../../tribes/empire/conf:113
+msgid "Innkeeper"
+msgstr "Трактирщик"
+
+#: ../../tribes/empire/conf:71
+msgid "Iron"
+msgstr "Залізо"
+
+#: ../../tribes/empire/conf:72
+msgid "Iron Ore"
+msgstr "Залізна руда"
+
+#: ../../tribes/empire/conf:185
+msgid "Iron Ore Mine"
+msgstr "Шахта заліза"
+
+#: ../../tribes/empire/shepherd/conf:1
+msgid "Keeping sheeps."
+msgstr "Доглядає овець."
+
+#: ../../tribes/empire/conf:73
+msgid "Kitchen Tools"
+msgstr "Кухонне приладдя"
+
+#: ../../tribes/empire/conf:74
+msgid "Lance"
+msgstr "Спис"
+
+#: ../../tribes/empire/conf:114
+msgid "Lumberjack"
+msgstr "Лісоруб"
+
+#: ../../tribes/empire/conf:182
+msgid "Lumberjack's House"
+msgstr "Будиночок лісоруба"
+
+#: ../../tribes/empire/conf:76
+msgid "Marble"
+msgstr "Мармур"
+
+#: ../../tribes/empire/conf:75
+msgid "Marble Column"
+msgstr "Колона з мармуру"
+
+#: ../../tribes/empire/conf:183
+msgid "Marble Mine"
+msgstr "Шахта мармуру"
+
+#: ../../tribes/empire/marblecolumn/conf:1
+msgid ""
+"Marble columns present the high culture of the Empire, so they are needed "
+"for nearly every bigger building."
+msgstr ""
+"Колони з мармуру, вважаються в Імперії, ознакою високої культури, тому і "
+"застосовуються практично у всіх будівлях."
+
+#: ../../tribes/empire/marble/conf:1
+msgid ""
+"Marble is the beautiful stone, which is cutted out of the mountains and "
+"which is used for beautiful buildings and columns."
+msgstr ""
+"Мармур - це чудовий камінь, який добувається в горах і використовується для "
+"будівництва красивих будівель."
+
+#: ../../tribes/empire/conf:115
+msgid "Master Miner"
+msgstr "Досвідчений шахтер"
+
+#: ../../tribes/empire/conf:77
+msgid "Meal"
+msgstr "Ситий обід"
+
+#: ../../tribes/empire/conf:78
+msgid "Meat"
+msgstr "М'ясо"
+
+#: ../../tribes/empire/meat/conf:1
+msgid ""
+"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
+"lunch for the miners and in the soldier trainingcamps to keep warriors "
+"strong."
+msgstr ""
+"М'ясо містить велику кількість енергії. Воно використовується в трактирах, "
+"тавернах, щоб приготувати обід шахтарям, а також в тренувальних лагерях для "
+"відновлення енергії воїнів."
+
+#: ../../tribes/empire/conf:184
+msgid "Mill"
+msgstr "Млин"
+
+#: ../../tribes/empire/conf:116
+msgid "Miller"
+msgstr "Мельник"
+
+#: ../../tribes/empire/miller/conf:1
+msgid "Mills the wheat to produce flour."
+msgstr "Меле пшеницю на муку"
+
+#: ../../tribes/empire/marblemine/conf:22
+#: ../../tribes/empire/quarry/conf:19
+msgid "Mine marble"
+msgstr "Добуває мармур"
+
+#: ../../tribes/empire/marblemine/conf:23
+#: ../../tribes/empire/quarry/conf:20
+msgid "Mine marble (only for compatibility with old savegames (build13))"
+msgstr "Добуває мармур (для сумісності із старою версією (build13))"
+
+#: ../../tribes/empire/marblemine/conf:24
+#: ../../tribes/empire/quarry/conf:17
+msgid "Mine stone"
+msgstr "Добувати каміння"
+
+#: ../../tribes/empire/marblemine/conf:25
+#: ../../tribes/empire/quarry/conf:18
+msgid "Mine stone (only for compatibility with old savegames (build13))"
+msgstr "Добувати каміння (для сумісності з сейвами старої версії (build13))"
+
+#: ../../tribes/empire/conf:117
+msgid "Miner"
+msgstr "Шахтер"
+
+#: ../../tribes/empire/conf:144
+msgid "Outpost"
+msgstr "Форпост"
+
+#: ../../tribes/empire/conf:53
+msgid "Peel"
+msgstr "Пекарська лопата"
+
+#: ../../tribes/empire/conf:79
+msgid "Pick"
+msgstr "Кірка"
+
+#: ../../tribes/empire/conf:118
+msgid "Pig Breeder"
+msgstr "Свинар"
+
+#: ../../tribes/empire/conf:186
+msgid "Piggery"
+msgstr "Свинарник"
+
+#: ../../tribes/empire/vineyard/conf:18
+msgid "Plant vine"
+msgstr "Саджати виноград"
+
+#: ../../tribes/empire/farm/conf:18
+msgid "Plant wheat"
+msgstr "Сіяти пшеницю"
+
+#: ../../tribes/empire/farmer/conf:2
+msgid "Plants fields."
+msgstr "Засіває поля."
+
+#: ../../tribes/empire/forester/conf:1
+msgid "Plants trees."
+msgstr "Саджає дерева."
+
+#: ../../tribes/empire/conf:80
+msgid "Plate-Armour"
+msgstr "Пластинчасті обладунки"
+
+#: ../../tribes/empire/weaponsmithy/conf:31
+msgid "Produce advanced lance"
+msgstr "Виготовити покращений спис"
+
+#: ../../tribes/empire/armoursmithy/conf:27
+msgid "Produce armour"
+msgstr "Виготовити броню"
+
+#: ../../tribes/empire/toolsmithy/conf:44
+msgid "Produce axe"
+msgstr "Виготовляє сокири"
+
+#: ../../tribes/empire/toolsmithy/conf:33
+msgid "Produce bakingtray"
+msgstr "Виготовити кухонне приладдя."
+
+#: ../../tribes/empire/toolsmithy/conf:42
+msgid "Produce basket"
+msgstr "Виготовити кошик"
+
+#: ../../tribes/empire/armoursmithy/conf:28
+msgid "Produce chain armour"
+msgstr "Виготовити кольчугу"
+
+#: ../../tribes/empire/toolsmithy/conf:34
+msgid "Produce fire tongs"
+msgstr "Виготовити кліщі коваля."
+
+#: ../../tribes/empire/toolsmithy/conf:35
+msgid "Produce fishing rod"
+msgstr "Виготовити вудку"
+
+#: ../../tribes/empire/toolsmithy/conf:36
+msgid "Produce hammer"
+msgstr "Виготовити молот"
+
+#: ../../tribes/empire/weaponsmithy/conf:32
+msgid "Produce heavy lance"
+msgstr "Виготовити важкий спис"
+
+#: ../../tribes/empire/armoursmithy/conf:26
+msgid "Produce helm"
+msgstr "Виготовити шолом"
+
+#: ../../tribes/empire/toolsmithy/conf:41
+msgid "Produce hunting spear"
+msgstr "Виготовити спис мисливця"
+
+#: ../../tribes/empire/toolsmithy/conf:37
+msgid "Produce kitchen tools"
+msgstr "Виготовити кухонне приладдя"
+
+#: ../../tribes/empire/weaponsmithy/conf:30
+msgid "Produce lance"
+msgstr "Виготовити спис"
+
+#: ../../tribes/empire/toolsmithy/conf:38
+msgid "Produce pick"
+msgstr "Виготовити кирку"
+
+#: ../../tribes/empire/armoursmithy/conf:29
+msgid "Produce plate armour"
+msgstr "Виготовити пластинчасту броню"
+
+#: ../../tribes/empire/toolsmithy/conf:43
+msgid "Produce saw"
+msgstr "Виготовити пилку"
+
+#: ../../tribes/empire/toolsmithy/conf:39
+msgid "Produce scythe"
+msgstr "Виготовити косу"
+
+#: ../../tribes/empire/toolsmithy/conf:40
+msgid "Produce shovel"
+msgstr "Виготовити лопату"
+
+#: ../../tribes/empire/weaponsmithy/conf:29
+msgid "Produce wood lance"
+msgstr "Виготовити дерев'яний спис"
+
+#: ../../tribes/empire/armoursmith/conf:1
+msgid "Produces armour for the soldiers."
+msgstr "Виготовляє броню для солдат"
+
+#: ../../tribes/empire/brewer/conf:1
+msgid "Produces beer or wine."
+msgstr "Виготовляє пива чи вино"
+
+#: ../../tribes/empire/weaver/conf:1
+msgid "Produces cloth for ships and soldiers."
+msgstr "Виготовляє тканину для кораблів та солдат."
+
+#: ../../tribes/empire/innkeeper/conf:1
+msgid "Produces food for miners."
+msgstr "Готує їжу шахтарям."
+
+#: ../../tribes/empire/toolsmith/conf:1
+msgid "Produces tools for the workers."
+msgstr "Виготовляє інструмент для робочих"
+
+#: ../../tribes/empire/weaponsmith/conf:1
+msgid "Produces weapons for the soldiers."
+msgstr "Виготовляє зброю для солдат"
+
+#: ../../tribes/empire/conf:187
+msgid "Quarry"
+msgstr "Кар’єр"
+
+#: ../../tribes/empire/conf:81
+msgid "Ration"
+msgstr "Пайок"
+
+#: ../../tribes/empire/conf:34
+msgid "Resource indicator coal little"
+msgstr "Індикатор ресурсів: мало вугілля"
+
+#: ../../tribes/empire/conf:35
+msgid "Resource indicator coal much"
+msgstr "Індикатор ресурсів: багато вугілля"
+
+#: ../../tribes/empire/conf:36
+msgid "Resource indicator gold little"
+msgstr "Індикатор ресурсів: мало золота"
+
+#: ../../tribes/empire/conf:37
+msgid "Resource indicator gold much"
+msgstr "Індикатор ресурсів: багато золота"
+
+#: ../../tribes/empire/conf:38
+msgid "Resource indicator granite little"
+msgstr "Індикатор ресурсів: мало граніту"
+
+#: ../../tribes/empire/conf:39
+msgid "Resource indicator granite much"
+msgstr "Індикатор ресурсів: багато граніту"
+
+#: ../../tribes/empire/conf:40
+msgid "Resource indicator iron little"
+msgstr "Індикатор ресурсів: мало заліза"
+
+#: ../../tribes/empire/conf:41
+msgid "Resource indicator iron much"
+msgstr "Індикатор ресурсів: багато заліза"
+
+#: ../../tribes/empire/conf:42
+msgid "Resource indicator no resource"
+msgstr "Індикатор ресурсів: пусто"
+
+#: ../../tribes/empire/conf:43
+msgid "Resource indicator water"
+msgstr "Індикатор ресурсів: вода"
+
+#: ../../tribes/empire/conf:82
+msgid "Saw"
+msgstr "Пилка"
+
+#: ../../tribes/empire/conf:188
+msgid "Sawmill"
+msgstr "Лісопилка"
+
+#: ../../tribes/empire/conf:127
+msgid "Scout"
+msgstr "Розвідник"
+
+#: ../../tribes/empire/conf:199
+msgid "Scout's House"
+msgstr "Будиночок розвідника"
+
+#: ../../tribes/empire/scout/conf:1
+msgid ""
+"Scouts like Scotty the scout scout unscouted area in a scouty fashion."
+msgstr "Розвідник, розвідує невідому місцевість, відкриває нові землі."
+
+#: ../../tribes/empire/conf:83
+msgid "Scythe"
+msgstr "Коса"
+
+#: ../../tribes/empire/conf:139
+#: ../../tribes/empire/conf:158
+msgid "Sentry"
+msgstr "Сторожка"
+
+#: ../../tribes/empire/conf:189
+msgid "Sheepfarm"
+msgstr "Ферма овець"
+
+#: ../../tribes/empire/conf:119
+msgid "Shepherd"
+msgstr "Пастух"
+
+#: ../../tribes/empire/conf:84
+msgid "Shovel"
+msgstr "Лопата"
+
+#: ../../tribes/empire/arena/conf:13
+#: ../../tribes/empire/colosseum/conf:27
+#: ../../tribes/empire/trainingscamp/conf:38
+msgid "Sleep"
+msgstr "Сон"
+
+#: ../../tribes/empire/conf:152
+msgid "Small Tower"
+msgstr "Мала вежа"
+
+#: ../../tribes/empire/smelting_works/conf:23
+msgid "Smelt gold"
+msgstr "Плавити золото"
+
+#: ../../tribes/empire/smelting_works/conf:22
+msgid "Smelt iron"
+msgstr "Плавити залізо"
+
+#: ../../tribes/empire/conf:120
+msgid "Smelter"
+msgstr "Ливарник"
+
+#: ../../tribes/empire/conf:190
+msgid "Smelting Works"
+msgstr "Ливарня"
+
+#: ../../tribes/empire/smelter/conf:1
+msgid "Smelts iron."
+msgstr "Плавить залізо"
+
+#: ../../tribes/empire/conf:100
+msgid "Soldier"
+msgstr "Солдат"
+
+#: ../../tribes/empire/conf:121
+msgid "Stonemason"
+msgstr "Каменяр"
+
+#: ../../tribes/empire/conf:191
+msgid "Stonemason's House"
+msgstr "Будиночок каменяра"
+
+#: ../../tribes/empire/conf:85
+msgid "Stones"
+msgstr "Каміння"
+
+#: ../../tribes/empire/stone/conf:1
+#: ../../tribes/empire/wood/conf:1
+msgid "Stones and wood are the basic build material of the Empire."
+msgstr "Каміння та дерево - основні будматеріали Імперії."
+
+#: ../../tribes/empire/conf:159
+msgid "Stronghold"
+msgstr "Опорний пункт"
+
+#: ../../tribes/empire/conf:192
+msgid "Tavern"
+msgstr "Таверна"
+
+#: ../../tribes/empire/hunter/conf:1
+msgid "The Hunter brings good meat to the colonists."
+msgstr "Мисливець добуває смачне м'ясо для колоністів."
+
+#: ../../tribes/empire/scythe/conf:1
+msgid ""
+"The Scythe is the tool of the farmers. It is produced by the toolsmith."
+msgstr "Коса є інструментом фермерів. Виготовляється в майстерні."
+
+#: ../../tribes/empire/conf:4
+msgid "The Widelands Development Team"
+msgstr "Команда розробників Widelands"
+
+#: ../../tribes/empire/axe/conf:1
+msgid ""
+"The axe is the tool for the lumberjack. It is produced by the toolsmith."
+msgstr "Сокира - інструмент лісоруба. Виготовляється в майстерні."
+
+#: ../../tribes/empire/bread/conf:1
+msgid "The bakers of the Empire make really tasty bread."
+msgstr "Пекарі Імперії печуть дуже смачний хліб."
+
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"The fire tongs are the tool of the smelter, working in the smelting works. "
+"They are produced by the toolsmith."
+msgstr "Кліщі коваля - інструмент ливарника. Виготовляється в майстерні."
+
+#: ../../tribes/empire/coal/conf:1
+msgid ""
+"The fires of the Empire are usually fed with wood, but sometimes, wood just "
+"does not burn hot enough. Then, coal is used."
+msgstr ""
+"Вогонь в Імперії за звичай підтримується дровами, та інколи його тепла "
+"замало, тоді використовують вугілля."
+
+#: ../../tribes/empire/hammer/conf:1
+msgid ""
+"The hammer is an essential tool. It is needed by the geologist, the worker, "
+"the armour- and weaponsmith. Make sure you always got some in reserve! It is "
+"produced by the toolsmith."
+msgstr ""
+"Молот - важливий інструмент. Його використовують геологи, працівники, "
+"ковалі. Завжди майте невеликий їх запас. Виготовляється в майстерні."
+
+#: ../../tribes/empire/bakingtray/conf:1
+msgid ""
+"The peel is the tool of the baker, each baker needs its own. It is produced "
+"by the toolsmith."
+msgstr ""
+"Пекарю потрібне кухонне приладдя для приготування їжі. Виготовляється в "
+"майстерні."
+
+#: ../../tribes/empire/shovel/conf:1
+msgid ""
+"The shovel is needed for proper handling of plants. Therefore the forester "
+"uses it. It is produced by the toolsmith."
+msgstr ""
+"Лопата потрібна для догляду за рослинами, її використовують лісники. "
+"Виготовляється в майстерні."
+
+#: ../../tribes/empire/plate_armour/conf:1
+msgid "The strongest armour existing for the Empire soldiers."
+msgstr "Найміцніша броня з усіх, для солдат Імперії."
+
+#: ../../tribes/empire/grape/conf:1
+msgid "These grapes are the basic for tasty wine."
+msgstr "Виноград - це основа для смачного вина."
+
+#: ../../tribes/empire/basket/conf:1
+msgid ""
+"This basket is needed by the winegrower, for harvesting the grapes. It is "
+"produced by the toolsmith."
+msgstr ""
+"Кошик потрібен виноробу для збору врожаю. Виготовляється в майстерні."
+
+#: ../../tribes/empire/heavy_lance/conf:1
+msgid "This is a good warrior lance, with a steel-top and a little blade."
+msgstr ""
+"Це хороший бойовий спис, з залізним наконечником та невеличким лезом."
+
+#: ../../tribes/empire/chain_armour/conf:1
+msgid "This is a medium armour for Empire soldiers."
+msgstr "Середня броня солдат Імперії."
+
+#: ../../tribes/empire/wood_lance/conf:1
+msgid ""
+"This is a wooden lance, which is the basic of the Empires military system."
+msgstr "Дерев'яний спис, базова зброя солдат Імперії."
+
+#: ../../tribes/empire/advanced_lance/conf:1
+msgid "This is an advanced lance, with steel top."
+msgstr "Це довгий спис із залізним наконечником."
+
+#: ../../tribes/empire/war_lance/conf:1
+msgid ""
+"This is the best and sharpest weapon, the Empire weaponsmith creates for "
+"their warriors."
+msgstr ""
+"Це найкраща та найгостріша зброя, яку зброярі Імперії виготовляють для своїх "
+"солдат."
+
+#: ../../tribes/empire/conf:6
+msgid "This is the culture of the roman Empire."
+msgstr ""
+
+#: ../../tribes/empire/ironore/conf:1
+msgid "This is the red iron ore."
+msgstr "Це залізна руда"
+
+#: ../../tribes/empire/goldstone/conf:1
+msgid "This is the yellow goldstone."
+msgstr "Це жовтий золотий злиток"
+
+#: ../../tribes/empire/pick/conf:1
+msgid ""
+"This pick is used by the stonemasons and the miners. It is produced by the "
+"toolsmith."
+msgstr ""
+"Кирка використовується каменярами та шахтарями. Випускається в майстерні."
+
+#: ../../tribes/empire/saw/conf:1
+msgid ""
+"This saw is needed by the sawyer to create all the useful tools. It is "
+"produced by the toolsmith."
+msgstr "Пилка потрібна столяру. Виготовляється в майстерні."
+
+#: ../../tribes/empire/hunting_spear/conf:1
+msgid ""
+"This spear is light enough to be thrown, but heavy enough to kill any animal "
+"in one blow. It is only used by the hunters."
+msgstr ""
+"Цей спис досить легкий, щоб його можна було кинути але й досить важкий, щоб "
+"вбити тварину з першого удару. Його використовують мисливці."
+
+#: ../../tribes/empire/wine/conf:1
+msgid ""
+"This wine gives enough power, to mine marble or gold. And furthermore, our "
+"soldiers like it, too."
+msgstr "Вино надає сили шахтарям, крім того наші солдати його теж люблять."
+
+#: ../../tribes/empire/lance/conf:1
+msgid "This wooden lance has an iron spike."
+msgstr "Цей дерев'яний спис має металевий накінечник."
+
+#: ../../tribes/empire/conf:122
+msgid "Toolsmith"
+msgstr "Коваль"
+
+#: ../../tribes/empire/conf:193
+msgid "Toolsmithy"
+msgstr "Майстерня"
+
+#: ../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:153
+msgid "Tower"
+msgstr "Вежа"
+
+#: ../../tribes/empire/conf:123
+msgid "Trainer"
+msgstr ""
+
+#: ../../tribes/empire/conf:136
+msgid "Trainingscamp"
+msgstr "Казарма"
+
+#: ../../tribes/empire/trainer/conf:1
+msgid "Trains the soldiers."
+msgstr "Тренує солдат"
+
+#: ../../tribes/empire/conf:86
+msgid "Trunk"
+msgstr "Колода"
+
+#: ../../tribes/empire/trunk/conf:1
+msgid "Trunks are one important build material of the Empire."
+msgstr "Колоди - дуже важливий будматеріал Імперії."
+
+#: ../../tribes/empire/trainingscamp/conf:39
+msgid "Upgrade soldier attack 0"
+msgstr "Покращення атаки солдат 0"
+
+#: ../../tribes/empire/trainingscamp/conf:40
+msgid ""
+"Upgrade soldier attack 0 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення атаки солдат 0 (лише для сумісності із старими збереженнями гри  "
+"(build13))"
+
+#: ../../tribes/empire/trainingscamp/conf:41
+msgid "Upgrade soldier attack 1"
+msgstr "Покращення атаки солдат 1"
+
+#: ../../tribes/empire/trainingscamp/conf:42
+msgid ""
+"Upgrade soldier attack 1 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення атаки солдат 1 (лише для сумісності із збереженнями старих версій "
+"(build13))"
+
+#: ../../tribes/empire/trainingscamp/conf:43
+msgid "Upgrade soldier attack 2"
+msgstr "Покращення атаки солдат 2"
+
+#: ../../tribes/empire/trainingscamp/conf:44
+msgid ""
+"Upgrade soldier attack 2 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення атаки солдат 2 (лише для сумісності із збереженнями старих версій "
+"(build13))"
+
+#: ../../tribes/empire/trainingscamp/conf:45
+msgid "Upgrade soldier attack 3"
+msgstr "Покращення атаки солдат 3"
+
+#: ../../tribes/empire/trainingscamp/conf:46
+msgid ""
+"Upgrade soldier attack 3 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення атаки солдат 3 (лише для сумісності із збереженнями старих версій "
+"(build13))"
+
+#: ../../tribes/empire/arena/conf:14
+#: ../../tribes/empire/colosseum/conf:28
+msgid "Upgrade soldier evade 0"
+msgstr "Покращення навику ухилення 0"
+
+#: ../../tribes/empire/arena/conf:15
+#: ../../tribes/empire/colosseum/conf:29
+msgid ""
+"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Покращення навику ухилення 0 (лише для сумісності із збереженнями старих "
+"версій (build13))"
+
+#: ../../tribes/empire/colosseum/conf:30
+msgid "Upgrade soldier evade 1"
+msgstr "Покращення навику ухилення 1"
+
+#: ../../tribes/empire/colosseum/conf:31
+msgid ""
+"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Покращення навику ухилення 1 (лише для сумісності із збереженнями старих "
+"версій (build13))"
+
+#: ../../tribes/empire/trainingscamp/conf:47
+msgid "Upgrade soldier hitpoints 0"
+msgstr "Покращення життєстійкості солдат 0"
+
+#: ../../tribes/empire/trainingscamp/conf:48
+msgid ""
+"Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення життєстійкості солдат 0 (лише для сумісності із збереженнями "
+"старих версій (build13))"
+
+#: ../../tribes/empire/trainingscamp/conf:49
+msgid "Upgrade soldier hitpoints 1"
+msgstr "Покращення життєстійкості солдат 1"
+
+#: ../../tribes/empire/trainingscamp/conf:50
+msgid ""
+"Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення життєстійкості солдат 1 (лише для сумісності із збереженнями "
+"старих версій (build13))"
+
+#: ../../tribes/empire/trainingscamp/conf:51
+msgid "Upgrade soldier hitpoints 2"
+msgstr "Покращення життєстійкості солдат 2"
+
+#: ../../tribes/empire/trainingscamp/conf:52
+msgid ""
+"Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення життєстійкості солдат 2 (лише для сумісності із збереженнями "
+"старих версій (build13))"
+
+#: ../../tribes/empire/trainingscamp/conf:53
+msgid "Upgrade soldier hitpoints 3"
+msgstr "Покращення життєстійкості солдат 3"
+
+#: ../../tribes/empire/trainingscamp/conf:54
+msgid ""
+"Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення життєстійкості солдат 3 (лише для сумісності із збереженнями "
+"старих версій (build13))"
+
+#: ../../tribes/empire/conf:126
+msgid "Vine Farmer"
+msgstr "Винороб"
+
+#: ../../tribes/empire/conf:44
+msgid "Vine medium"
+msgstr "Середня винна лоза"
+
+#: ../../tribes/empire/conf:47
+msgid "Vine ripe"
+msgstr "Стиглий виноград"
+
+#: ../../tribes/empire/conf:45
+msgid "Vine small"
+msgstr "Мала винна лоза"
+
+#: ../../tribes/empire/conf:46
+msgid "Vine tiny"
+msgstr "Крихітна винна лоза"
+
+#: ../../tribes/empire/conf:198
+msgid "Vineyard"
+msgstr "Виноградник"
+
+#: ../../tribes/empire/conf:87
+msgid "War-Lance"
+msgstr "Бойовий спис"
+
+#: ../../tribes/empire/conf:164
+msgid "Warehouse"
+msgstr "Склад"
+
+#: ../../tribes/empire/conf:88
+msgid "Water"
+msgstr "Вода"
+
+#: ../../tribes/empire/water/conf:1
+msgid ""
+"Water is the most essential essence for life! This water is used in many "
+"places, be it to make bread or beer."
+msgstr ""
+"Вода це найважливіша рідина для життя! Вона використовується всюди, будь то "
+"виробництво хліба чи вина."
+
+#: ../../tribes/empire/conf:194
+msgid "Weapon Smithy"
+msgstr "Зброярня"
+
+#: ../../tribes/empire/iron/conf:1
+msgid "Weapons and tools are made of iron."
+msgstr "Зброя та інструмент виготовляється з металу."
+
+#: ../../tribes/empire/conf:124
+msgid "Weaponsmith"
+msgstr "Зброяр"
+
+#: ../../tribes/empire/conf:125
+msgid "Weaver"
+msgstr "Ткач"
+
+#: ../../tribes/empire/conf:195
+msgid "Weaving Mill"
+msgstr "Ткацка фабрика"
+
+#: ../../tribes/empire/conf:196
+msgid "Well"
+msgstr "Криниця"
+
+#: ../../tribes/empire/conf:89
+msgid "Wheat"
+msgstr "Пшениця"
+
+#: ../../tribes/empire/wheat/conf:1
+msgid ""
+"Wheat is essential for surviving. Delicious bread and ales can be made of "
+"this wheat."
+msgstr ""
+"Пшениця важлива для виживання, без неї не спекти хліба, не зварити пива."
+
+#: ../../tribes/empire/conf:90
+msgid "Wine"
+msgstr "Вино"
+
+#: ../../tribes/empire/conf:197
+msgid "Winery"
+msgstr "Винокурня"
+
+#: ../../tribes/empire/conf:91
+msgid "Wood"
+msgstr "Дерево"
+
+#: ../../tribes/empire/conf:92
+msgid "Wood Lance"
+msgstr "Дерев'яний спис"
+
+#: ../../tribes/empire/conf:93
+msgid "Wool"
+msgstr "Вовна"
+
+#: ../../tribes/empire/wool/conf:1
+msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
+msgstr ""
+"Вовна стрижеться з овець, потім в ткацьких цехах з неї виготовляють тканину."
+
+#: ../../tribes/empire/armoursmithy/conf:30
+#: ../../tribes/empire/bakery/conf:20
+#: ../../tribes/empire/brewery/conf:20
+#: ../../tribes/empire/burners_house/conf:19
+#: ../../tribes/empire/coalmine/conf:21
+#: ../../tribes/empire/deep_coalmine/conf:22
+#: ../../tribes/empire/deep_goldmine/conf:22
+#: ../../tribes/empire/deep_marblemine/conf:23
+#: ../../tribes/empire/deep_oremine/conf:22
+#: ../../tribes/empire/donkeyfarm/conf:22
+#: ../../tribes/empire/farm/conf:22
+#: ../../tribes/empire/fishers_house/conf:17
+#: ../../tribes/empire/foresters_house/conf:16
+#: ../../tribes/empire/goldmine/conf:22
+#: ../../tribes/empire/hunters_house/conf:16
+#: ../../tribes/empire/inn/conf:20
+#: ../../tribes/empire/lumberjacks_house/conf:16
+#: ../../tribes/empire/marblemine/conf:26
+#: ../../tribes/empire/mill/conf:20
+#: ../../tribes/empire/oremine/conf:22
+#: ../../tribes/empire/piggery/conf:21
+#: ../../tribes/empire/quarry/conf:21
+#: ../../tribes/empire/sawmill/conf:20
+#: ../../tribes/empire/scouts_house/conf:17
+#: ../../tribes/empire/sheepfarm/conf:21
+#: ../../tribes/empire/smelting_works/conf:24
+#: ../../tribes/empire/stonemasons_house/conf:21
+#: ../../tribes/empire/tavern/conf:22
+#: ../../tribes/empire/toolsmithy/conf:45
+#: ../../tribes/empire/vineyard/conf:22
+#: ../../tribes/empire/weaponsmithy/conf:34
+#: ../../tribes/empire/weaving-mill/conf:16
+#: ../../tribes/empire/well/conf:16
+#: ../../tribes/empire/winery/conf:20
+msgid "Work"
+msgstr "Робота"
+
+#: ../../tribes/empire/builder/conf:1
+msgid "Works at construction sites to create a new building."
+msgstr "Працюють на будмайданчиках, будують нові будівлі."
+
+#: ../../tribes/empire/master-miner/conf:1
+#: ../../tribes/empire/miner/conf:1
+msgid "Works deep in the mines to obtain coal, iron or gold."
+msgstr "Працює в шахтах, добуває вугілля, залізо або золото."
+
+#: ../../tribes/empire/beer/conf:1
+msgid ""
+"Young soldiers and miners need some encouragement. This drink makes a man "
+"fearless and strong."
+msgstr ""
+"Ваші шахтарі та солдати потребують підтримки. Цей напій робить їх "
+"безстрашними та сильними."

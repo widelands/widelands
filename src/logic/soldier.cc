@@ -52,8 +52,8 @@ namespace Widelands {
 Soldier_Descr::Soldier_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
-	: Worker_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
+	 Tribe_Descr const & _tribe)
+	: Worker_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(Map_Object::SOLDIER);
 
@@ -137,42 +137,41 @@ Soldier_Descr::Soldier_Descr
 		/// die_*           -> soldier is dying
 		m_attack_success_w_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "attack_success_w");
+				(directory, prof, global_s, "attack_success_w");
 		m_attack_success_e_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "attack_success_e");
+				(directory, prof, global_s, "attack_success_e");
 		m_attack_failure_w_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "attack_failure_w");
+				(directory, prof, global_s, "attack_failure_w");
 		m_attack_failure_e_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "attack_failure_e");
+				(directory, prof, global_s, "attack_failure_e");
 		m_evade_success_w_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "evade_success_w");
+				(directory, prof, global_s, "evade_success_w");
 		m_evade_success_e_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "evade_success_e");
+				(directory, prof, global_s, "evade_success_e");
 		m_evade_failure_w_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "evade_failure_w");
+				(directory, prof, global_s, "evade_failure_w");
 		m_evade_failure_e_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "evade_failure_e");
+				(directory, prof, global_s, "evade_failure_e");
 		m_die_w_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "die_w");
+				(directory, prof, global_s, "die_w");
 		m_die_e_name =
 			load_animations_from_string
-				(directory, prof, global_s, encdata, "die_e");
+				(directory, prof, global_s, "die_e");
 	}
 
 }
 
 std::vector<std::string> Soldier_Descr::load_animations_from_string
 	(std::string const & directory, Profile & prof,
-	 Section & global_s, EncodeData const * const encdata,
-	 const char * anim_name)
+	 Section & global_s, const char * anim_name)
 {
 	try {
 		const char * anim_string = global_s.get_safe_string(anim_name);
@@ -190,11 +189,9 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 			Section &
 				anim_s = prof.get_safe_section((*i.current).c_str());
 
-			m_default_encodedata.parse(anim_s);
-
 			add_animation
 				((*i.current).c_str(),
-				 g_anim.get (directory, anim_s, "idle_00.png", encdata));
+				 g_anim.get (directory, anim_s, "idle_00.png"));
 		}
 		return list;
 	} catch (_wexception const & e) {
@@ -356,7 +353,12 @@ void Soldier::set_hp_level(const uint32_t hp) {
 	assert(m_hp_level <= hp);
 	assert              (hp <= descr().get_max_hp_level());
 
+	uint32_t oldmax = get_max_hitpoints();
+
 	m_hp_level = hp;
+
+	uint32_t newmax = get_max_hitpoints();
+	m_hp_current = m_hp_current * newmax / oldmax;
 }
 void Soldier::set_attack_level(const uint32_t attack) {
 	assert(m_attack_level <= attack);
@@ -406,32 +408,41 @@ int32_t Soldier::get_tattribute(uint32_t const attr) const
 
 uint32_t Soldier::get_max_hitpoints() const
 {
-	return descr().get_base_hp() + m_hp_level*descr().get_hp_incr_per_level();
+	return descr().get_base_hp() + m_hp_level * descr().get_hp_incr_per_level();
 }
 
 uint32_t Soldier::get_min_attack() const
 {
-	return descr().get_base_min_attack() + m_attack_level*descr().get_attack_incr_per_level();
+	return
+		descr().get_base_min_attack() +
+		m_attack_level * descr().get_attack_incr_per_level();
 }
 
 uint32_t Soldier::get_max_attack() const
 {
-	return descr().get_base_max_attack() + m_attack_level*descr().get_attack_incr_per_level();
+	return
+		descr().get_base_max_attack() +
+		m_attack_level * descr().get_attack_incr_per_level();
 }
 
 uint32_t Soldier::get_defense() const
 {
-	return descr().get_base_defense() + m_defense_level*descr().get_defense_incr_per_level();
+	return
+		descr().get_base_defense() +
+		m_defense_level * descr().get_defense_incr_per_level();
 }
 
 uint32_t Soldier::get_evade() const
 {
-	return descr().get_base_evade() + m_evade_level*descr().get_evade_incr_per_level();
+	return
+		descr().get_base_evade() +
+		m_evade_level * descr().get_evade_incr_per_level();
 }
 
 //  Unsignedness ensures that we can only heal, not hurt through this method.
 void Soldier::heal (const uint32_t hp) {
-	molog ("[soldier] healing (%d+)%d/%d\n", hp, m_hp_current, get_max_hitpoints());
+	molog
+		("[soldier] healing (%d+)%d/%d\n", hp, m_hp_current, get_max_hitpoints());
 	assert(hp);
 	assert(m_hp_current <  get_max_hitpoints());
 	m_hp_current += std::min(hp, get_max_hitpoints() - m_hp_current);
@@ -445,7 +456,9 @@ void Soldier::damage (const uint32_t value)
 {
 	assert (m_hp_current > 0);
 
-	molog ("[soldier] damage %d(-%d)/%d\n", m_hp_current, value, get_max_hitpoints());
+	molog
+		("[soldier] damage %d(-%d)/%d\n",
+		 m_hp_current, value, get_max_hitpoints());
 	if (m_hp_current < value)
 		m_hp_current = 0;
 	else
@@ -533,46 +546,102 @@ void Soldier::draw
 			 w,
 			 h);
 
-	// Draw energy bar
-	// first: draw white sourrounding
-		// Reduces energy bar length, so no overlap between soldiers
-		w = w * 3 / 5;
-		Rect r(Point(drawpos.x - w, drawpos.y - h - 7), w * 2, 5);
-		dst.draw_rect(r, HP_FRAMECOLOR);
-		// Draw the actual bar
-		assert(get_max_hitpoints());
-		const float fraction = static_cast<float>(m_hp_current) / get_max_hitpoints();
-		RGBColor color(owner().get_playercolor()[2]);
-		assert(2 <= r.w);
-		assert(2 <= r.h);
-		dst.fill_rect
-			(Rect
-			 	(r + Point(1, 1),
-			 	 static_cast<int32_t>(fraction * (r.w - 2)), r.h - 2),
-			 color);
-
-		//  Draw information fields about levels. First, gather information.
-		const PictureID hppic = get_hp_level_pic();
-		const PictureID attackpic = get_attack_level_pic();
-		const PictureID defensepic = get_defense_level_pic();
-		const PictureID evadepic = get_evade_level_pic();
-		uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
-		g_gr->get_picture_size(hppic,      hpw, hph);
-		g_gr->get_picture_size(attackpic,  atw, ath);
-		g_gr->get_picture_size(defensepic, dew, deh);
-		g_gr->get_picture_size(evadepic,   evw, evh);
-
-		{
-			const uint32_t w_half = r.w >> 1;
-			dst.blit(r + Point(w_half - atw, -(hph + ath)), attackpic);
-			dst.blit(r + Point(w_half,       -(evh + deh)), defensepic);
-			dst.blit(r + Point(w_half - hpw, -hph),         hppic);
-			dst.blit(r + Point(w_half,       -evh),         evadepic);
-		}
+		draw_info_icon(dst, Point(drawpos.x, drawpos.y - h - 7), true);
 
 		draw_inner(game, dst, drawpos);
 	}
 }
+
+/**
+ * Draw the info icon (level indicators + HP bar) for this soldier.
+ *
+ * \param anchor_below if \c true, the icon is drawn horizontally centered above
+ * \p pt. Otherwise, the icon is drawn below and right of \p pt.
+ */
+void Soldier::draw_info_icon
+	(RenderTarget & dst, Point pt, bool anchor_below) const
+{
+	// Gather information to determine coordinates
+	uint32_t w, h;
+	g_gr->get_animation_size(descr().main_animation(), 0, w, h);
+	w = w * 3 / 5;
+
+	const PictureID hppic = get_hp_level_pic();
+	const PictureID attackpic = get_attack_level_pic();
+	const PictureID defensepic = get_defense_level_pic();
+	const PictureID evadepic = get_evade_level_pic();
+	uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
+	g_gr->get_picture_size(hppic,      hpw, hph);
+	g_gr->get_picture_size(attackpic,  atw, ath);
+	g_gr->get_picture_size(defensepic, dew, deh);
+	g_gr->get_picture_size(evadepic,   evw, evh);
+
+	uint32_t totalwidth = std::max(std::max(atw + dew, hpw + evw), 2 * w);
+	uint32_t totalheight = 5 + std::max(hph + ath, evh + deh);
+
+	if (!anchor_below) {
+		pt.x += totalwidth / 2;
+		pt.y += totalheight - 5;
+	} else {
+		pt.y -= 5;
+	}
+
+	// Draw energy bar
+	Rect energy_outer(Point(pt.x - w, pt.y), w * 2, 5);
+	dst.draw_rect(energy_outer, HP_FRAMECOLOR);
+
+	assert(get_max_hitpoints());
+	uint32_t health_width = 2 * (w - 1) * m_hp_current / get_max_hitpoints();
+	Rect energy_inner(Point(pt.x - w + 1, pt.y + 1), health_width, 3);
+	Rect energy_complement
+		(energy_inner + Point(health_width, 0), 2 * (w - 1) - health_width, 3);
+	RGBColor color(owner().get_playercolor()[2]);
+	RGBColor complement_color;
+
+	if (static_cast<uint32_t>(color.r()) + color.g() + color.b() > 128 * 3)
+		complement_color = RGBColor(32, 32, 32);
+	else
+		complement_color = RGBColor(224, 224, 224);
+
+	dst.fill_rect(energy_inner, color);
+	dst.fill_rect(energy_complement, complement_color);
+
+	// Draw level pictures
+	{
+		dst.blit(pt + Point(-atw, -(hph + ath)), attackpic);
+		dst.blit(pt + Point(0, -(evh + deh)), defensepic);
+		dst.blit(pt + Point(-hpw, -hph), hppic);
+		dst.blit(pt + Point(0, -evh), evadepic);
+	}
+}
+
+/**
+ * Compute the size of the info icon (level indicators + HP bar) for soldiers of
+ * the given tribe.
+ */
+void Soldier::calc_info_icon_size
+	(const Tribe_Descr & tribe, uint32_t & w, uint32_t & h)
+{
+	const Soldier_Descr * soldierdesc = static_cast<const Soldier_Descr *>
+		(tribe.get_worker_descr(tribe.worker_index("soldier")));
+	const PictureID hppic = soldierdesc->get_hp_level_pic(0);
+	const PictureID attackpic = soldierdesc->get_attack_level_pic(0);
+	const PictureID defensepic = soldierdesc->get_defense_level_pic(0);
+	const PictureID evadepic = soldierdesc->get_evade_level_pic(0);
+	uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
+	g_gr->get_picture_size(hppic,      hpw, hph);
+	g_gr->get_picture_size(attackpic,  atw, ath);
+	g_gr->get_picture_size(defensepic, dew, deh);
+	g_gr->get_picture_size(evadepic,   evw, evh);
+
+	uint32_t animw, animh;
+	g_gr->get_animation_size(soldierdesc->main_animation(), 0, animw, animh);
+	animw = animw * 3 / 5;
+
+	w = std::max(std::max(atw + dew, hpw + evw), 2 * animw);
+	h = 5 + std::max(hph + ath, evh + deh);
+}
+
 
 /**
  *
@@ -782,7 +851,7 @@ void Soldier::attack_update(Game & game, State & state)
 			(Area<FCoords>
 			 	(game.map().get_fcoords(enemy->base_flag().get_position()), 0),
 			 &soldiers,
-			 FindBobEnemySoldier(*get_owner()));
+			 FindBobEnemySoldier(get_owner()));
 		defenders += soldiers.size();
 	}
 
@@ -1016,7 +1085,7 @@ void Soldier::defense_update(Game & game, State & state)
 			game.map().find_bobs
 				(Area<FCoords>(get_position(), 0),
 				 &soldiers,
-				 FindBobEnemySoldier(*get_owner()));
+				 FindBobEnemySoldier(get_owner()));
 
 			container_iterate_const(std::vector<Bob *>, soldiers, i) {
 				if (upcast(Soldier, soldier, *i.current)) {
@@ -1500,7 +1569,10 @@ bool Soldier::checkNodeBlocked
 		return Bob::checkNodeBlocked(game, field, commit);
 	}
 
-	if (field.field->get_immovable() && field.field->get_immovable() == get_location(game)) {
+	if
+		(field.field->get_immovable() &&
+		 field.field->get_immovable() == get_location(game))
+	{
 		if (commit)
 			sendSpaceSignals(game);
 		return false; // we can always walk home
@@ -1511,7 +1583,10 @@ bool Soldier::checkNodeBlocked
 	bool foundopponent = false;
 	bool multiplesoldiers = false;
 
-	for (Bob * bob = field.field->get_first_bob(); bob; bob = bob->get_next_on_field()) {
+	for
+		(Bob * bob = field.field->get_first_bob();
+		 bob; bob = bob->get_next_on_field())
+	{
 		if (upcast(Soldier, soldier, bob)) {
 			if (!soldier->isOnBattlefield() || !soldier->get_current_hitpoints())
 				continue;
@@ -1533,7 +1608,10 @@ bool Soldier::checkNodeBlocked
 
 	if (!foundopponent && (foundbattle || foundsoldier)) {
 		if (commit && !foundbattle && !multiplesoldiers) {
-			if (foundsoldier->get_owner() != get_owner() && foundsoldier->canBeChallenged()) {
+			if
+				(foundsoldier->get_owner() != get_owner() &&
+				 foundsoldier->canBeChallenged())
+			{
 				molog
 					("[checkNodeBlocked] attacking a soldier (%u)\n",
 					 foundsoldier->serial());
@@ -1621,7 +1699,7 @@ Soldier::Loader::Loader()
 {
 }
 
-void Soldier::Loader::load(FileRead& fr)
+void Soldier::Loader::load(FileRead & fr)
 {
 	Worker::Loader::load(fr);
 
@@ -1629,12 +1707,16 @@ void Soldier::Loader::load(FileRead& fr)
 	if (version != SOLDIER_SAVEGAME_VERSION)
 		throw game_data_error("unknown/unhandled version %u", version);
 
-	Soldier& soldier = get<Soldier>();
+	Soldier & soldier = get<Soldier>();
 	soldier.m_hp_current = fr.Unsigned32();
-	soldier.m_hp_level = std::min(fr.Unsigned32(), soldier.descr().get_max_hp_level());
-	soldier.m_attack_level = std::min(fr.Unsigned32(), soldier.descr().get_max_attack_level());
-	soldier.m_defense_level = std::min(fr.Unsigned32(), soldier.descr().get_max_defense_level());
-	soldier.m_evade_level = std::min(fr.Unsigned32(), soldier.descr().get_max_evade_level());
+	soldier.m_hp_level =
+		std::min(fr.Unsigned32(), soldier.descr().get_max_hp_level());
+	soldier.m_attack_level =
+		std::min(fr.Unsigned32(), soldier.descr().get_max_attack_level());
+	soldier.m_defense_level =
+		std::min(fr.Unsigned32(), soldier.descr().get_max_defense_level());
+	soldier.m_evade_level =
+		std::min(fr.Unsigned32(), soldier.descr().get_max_evade_level());
 
 	if (soldier.m_hp_current > soldier.get_max_hitpoints())
 		soldier.m_hp_current = soldier.get_max_hitpoints();
@@ -1650,15 +1732,15 @@ void Soldier::Loader::load(FileRead& fr)
 
 void Soldier::Loader::load_pointers()
 {
-    Worker::Loader::load_pointers();
+	Worker::Loader::load_pointers();
 
-	Soldier& soldier = get<Soldier>();
+	Soldier & soldier = get<Soldier>();
 
 	if (m_battle)
 		soldier.m_battle = &mol().get<Battle>(m_battle);
 }
 
-const Bob::Task* Soldier::Loader::get_task(const std::string& name)
+const Bob::Task * Soldier::Loader::get_task(const std::string & name)
 {
 	if (name == "attack") return &taskAttack;
 	if (name == "defense") return &taskDefense;
@@ -1668,12 +1750,13 @@ const Bob::Task* Soldier::Loader::get_task(const std::string& name)
 	return Worker::Loader::get_task(name);
 }
 
-Soldier::Loader* Soldier::create_loader()
+Soldier::Loader * Soldier::create_loader()
 {
 	return new Loader;
 }
 
-void Soldier::do_save(Editor_Game_Base& egbase, Map_Map_Object_Saver& mos, FileWrite& fw)
+void Soldier::do_save
+	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	Worker::do_save(egbase, mos, fw);
 

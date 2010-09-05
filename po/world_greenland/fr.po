@@ -6,27 +6,91 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-15 19:22+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 20:57+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:52+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/greenland/conf:2
-msgid "The Widelands Development Team"
-msgstr "L'équipe de développement de Widelands"
+#: ../../worlds/greenland/conf:58
+msgid "Alder"
+msgstr "Aulne"
 
-#: ../../worlds/greenland/conf:3
-msgid "Greenland"
-msgstr "Greenland"
+#: ../../worlds/greenland/conf:59
+msgid "Alder medium"
+msgstr "Aulne moyen"
 
-#: ../../worlds/greenland/conf:4
-msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "Ce sont les magnifiques et généreuses contrées barbares"
+#: ../../worlds/greenland/conf:60
+msgid "Alder small"
+msgstr "Petit aulne"
+
+#: ../../worlds/greenland/conf:61
+msgid "Alder tiny"
+msgstr "Aulne minuscule"
+
+#: ../../worlds/greenland/conf:46
+msgid "Aspen"
+msgstr "Tremble"
+
+#: ../../worlds/greenland/conf:47
+msgid "Aspen medium"
+msgstr "Tremble moyen"
+
+#: ../../worlds/greenland/conf:48
+msgid "Aspen small"
+msgstr "Petit tremble"
+
+#: ../../worlds/greenland/conf:49
+msgid "Aspen tiny"
+msgstr "Tremble minuscule"
+
+#: ../../worlds/greenland/conf:80
+msgid "Badger"
+msgstr "Blaireau"
+
+#: ../../worlds/greenland/conf:66
+msgid "Beech"
+msgstr "Hêtre"
+
+#: ../../worlds/greenland/conf:67
+msgid "Beech medium"
+msgstr "Hêtre moyen"
+
+#: ../../worlds/greenland/conf:68
+msgid "Beech small"
+msgstr "Petit hêtre"
+
+#: ../../worlds/greenland/conf:69
+msgid "Beech tiny"
+msgstr "Hêtre minuscule"
+
+#: ../../worlds/greenland/conf:62
+msgid "Birch"
+msgstr "Bouleau"
+
+#: ../../worlds/greenland/conf:63
+msgid "Birch medium"
+msgstr "Bouleau moyen"
+
+#: ../../worlds/greenland/conf:64
+msgid "Birch small"
+msgstr "Petit bouleau"
+
+#: ../../worlds/greenland/conf:65
+msgid "Birch tiny"
+msgstr "Bouleau minuscule"
+
+#: ../../worlds/greenland/conf:81
+msgid "Brownbear"
+msgstr "Ours brun"
+
+#: ../../worlds/greenland/conf:82
+msgid "Bunny"
+msgstr "Lapin"
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -41,6 +105,14 @@ msgstr "Buisson"
 msgid "Cactus"
 msgstr "Cactus"
 
+#: ../../worlds/greenland/conf:83
+msgid "Chamois"
+msgstr "Chamois"
+
+#: ../../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr "Charbon"
+
 #: ../../worlds/greenland/conf:14
 #: ../../worlds/greenland/conf:15
 #: ../../worlds/greenland/conf:16
@@ -48,9 +120,37 @@ msgstr "Cactus"
 msgid "Dead Tree"
 msgstr "Arbre mort"
 
+#: ../../worlds/greenland/conf:84
+msgid "Deer"
+msgstr "Cerf"
+
+#: ../../worlds/greenland/conf:85
+msgid "Duck"
+msgstr "Canard"
+
+#: ../../worlds/greenland/conf:86
+msgid "Elk"
+msgstr "Élan"
+
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
 msgstr "Arbre abattu"
+
+#: ../../worlds/greenland/resconf:41
+msgid "Fish"
+msgstr "Poisson"
+
+#: ../../worlds/greenland/conf:87
+msgid "Fox"
+msgstr "Renard"
+
+#: ../../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr "Or"
+
+#: ../../worlds/greenland/resconf:28
+msgid "Granite"
+msgstr "Granit"
 
 #: ../../worlds/greenland/conf:19
 #: ../../worlds/greenland/conf:20
@@ -58,10 +158,58 @@ msgstr "Arbre abattu"
 msgid "Grass"
 msgstr "Herbe"
 
+#: ../../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr "Greenland"
+
+#: ../../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr "Fer"
+
+#: ../../worlds/greenland/conf:70
+msgid "Larch"
+msgstr "Mélèze"
+
+#: ../../worlds/greenland/conf:71
+msgid "Larch medium"
+msgstr "Mélèze moyen"
+
+#: ../../worlds/greenland/conf:72
+msgid "Larch small"
+msgstr "Petit mélèze"
+
+#: ../../worlds/greenland/conf:73
+msgid "Larch tiny"
+msgstr "Mélèze minuscule"
+
+#: ../../worlds/greenland/conf:88
+msgid "Lynx"
+msgstr "Lynx"
+
+#: ../../worlds/greenland/conf:89
+msgid "Marten"
+msgstr "Fouine"
+
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
 msgid "Mushroom"
 msgstr "Champignon"
+
+#: ../../worlds/greenland/conf:50
+msgid "Oak"
+msgstr "Chêne"
+
+#: ../../worlds/greenland/conf:51
+msgid "Oak medium"
+msgstr "Chêne moyen"
+
+#: ../../worlds/greenland/conf:52
+msgid "Oak small"
+msgstr "Petit chêne"
+
+#: ../../worlds/greenland/conf:53
+msgid "Oak tiny"
+msgstr "Chêne minuscule"
 
 #: ../../worlds/greenland/conf:24
 #: ../../worlds/greenland/conf:25
@@ -72,11 +220,51 @@ msgstr "Champignon"
 msgid "Pebble"
 msgstr "Caillou"
 
+#: ../../worlds/greenland/conf:90
+msgid "Reindeer"
+msgstr "Renne"
+
+#: ../../worlds/greenland/conf:74
+msgid "Rowan"
+msgstr "Sorbier"
+
+#: ../../worlds/greenland/conf:75
+msgid "Rowan medium"
+msgstr "Sorbier moyen"
+
+#: ../../worlds/greenland/conf:76
+msgid "Rowan small"
+msgstr "Petit sorbier"
+
+#: ../../worlds/greenland/conf:77
+msgid "Rowan tiny"
+msgstr "Sorbier minuscule"
+
+#: ../../worlds/greenland/conf:91
+msgid "Sheep"
+msgstr "Mouton"
+
 #: ../../worlds/greenland/conf:30
 #: ../../worlds/greenland/conf:31
 #: ../../worlds/greenland/conf:32
 msgid "Skeleton"
 msgstr "Squelette"
+
+#: ../../worlds/greenland/conf:54
+msgid "Spruce"
+msgstr "Sapin"
+
+#: ../../worlds/greenland/conf:55
+msgid "Spruce medium"
+msgstr "Sapin moyen"
+
+#: ../../worlds/greenland/conf:56
+msgid "Spruce small"
+msgstr "Petit sapin"
+
+#: ../../worlds/greenland/conf:57
+msgid "Spruce tiny"
+msgstr "Sapin minuscule"
 
 #: ../../worlds/greenland/conf:33
 #: ../../worlds/greenland/conf:34
@@ -97,181 +285,17 @@ msgstr "Rochers"
 msgid "Stones"
 msgstr "Pierres"
 
-#: ../../worlds/greenland/conf:46
-msgid "Aspen"
-msgstr "Tremble"
+#: ../../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr "L'équipe de développement de Widelands"
 
-#: ../../worlds/greenland/conf:47
-msgid "Aspen medium"
-msgstr "Tremble moyen"
+#: ../../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr "Ce sont les magnifiques et généreuses contrées barbares"
 
-#: ../../worlds/greenland/conf:48
-msgid "Aspen small"
-msgstr "Petit tremble"
-
-#: ../../worlds/greenland/conf:49
-msgid "Aspen tiny"
-msgstr "Tremble minuscule"
-
-#: ../../worlds/greenland/conf:50
-msgid "Oak"
-msgstr "Chêne"
-
-#: ../../worlds/greenland/conf:51
-msgid "Oak medium"
-msgstr "Chêne moyen"
-
-#: ../../worlds/greenland/conf:52
-msgid "Oak small"
-msgstr "Petit chêne"
-
-#: ../../worlds/greenland/conf:53
-msgid "Oak tiny"
-msgstr "Chêne minuscule"
-
-#: ../../worlds/greenland/conf:54
-msgid "Spruce"
-msgstr "Sapin"
-
-#: ../../worlds/greenland/conf:55
-msgid "Spruce medium"
-msgstr "Sapin moyen"
-
-#: ../../worlds/greenland/conf:56
-msgid "Spruce small"
-msgstr "Petit sapin"
-
-#: ../../worlds/greenland/conf:57
-msgid "Spruce tiny"
-msgstr "Sapin minuscule"
-
-#: ../../worlds/greenland/conf:58
-msgid "Alder"
-msgstr "Aulne"
-
-#: ../../worlds/greenland/conf:59
-msgid "Alder medium"
-msgstr "Aulne moyen"
-
-#: ../../worlds/greenland/conf:60
-msgid "Alder small"
-msgstr "Petit aulne"
-
-#: ../../worlds/greenland/conf:61
-msgid "Alder tiny"
-msgstr "Aulne minuscule"
-
-#: ../../worlds/greenland/conf:62
-msgid "Birch"
-msgstr "Bouleau"
-
-#: ../../worlds/greenland/conf:63
-msgid "Birch medium"
-msgstr "Bouleau moyen"
-
-#: ../../worlds/greenland/conf:64
-msgid "Birch small"
-msgstr "Petit bouleau"
-
-#: ../../worlds/greenland/conf:65
-msgid "Birch tiny"
-msgstr "Bouleau minuscule"
-
-#: ../../worlds/greenland/conf:66
-msgid "Beech"
-msgstr "Hêtre"
-
-#: ../../worlds/greenland/conf:67
-msgid "Beech medium"
-msgstr "Hêtre moyen"
-
-#: ../../worlds/greenland/conf:68
-msgid "Beech small"
-msgstr "Petit hêtre"
-
-#: ../../worlds/greenland/conf:69
-msgid "Beech tiny"
-msgstr "Hêtre minuscule"
-
-#: ../../worlds/greenland/conf:70
-msgid "Larch"
-msgstr "Mélèze"
-
-#: ../../worlds/greenland/conf:71
-msgid "Larch medium"
-msgstr "Mélèze moyen"
-
-#: ../../worlds/greenland/conf:72
-msgid "Larch small"
-msgstr "Petit mélèze"
-
-#: ../../worlds/greenland/conf:73
-msgid "Larch tiny"
-msgstr "Mélèze minuscule"
-
-#: ../../worlds/greenland/conf:74
-msgid "Rowan"
-msgstr "Sorbier"
-
-#: ../../worlds/greenland/conf:75
-msgid "Rowan medium"
-msgstr "Sorbier moyen"
-
-#: ../../worlds/greenland/conf:76
-msgid "Rowan small"
-msgstr "Petit sorbier"
-
-#: ../../worlds/greenland/conf:77
-msgid "Rowan tiny"
-msgstr "Sorbier minuscule"
-
-#: ../../worlds/greenland/conf:80
-msgid "Badger"
-msgstr "Blaireau"
-
-#: ../../worlds/greenland/conf:81
-msgid "Brownbear"
-msgstr "Ours brun"
-
-#: ../../worlds/greenland/conf:82
-msgid "Bunny"
-msgstr "Lapin"
-
-#: ../../worlds/greenland/conf:83
-msgid "Chamois"
-msgstr "Chamois"
-
-#: ../../worlds/greenland/conf:84
-msgid "Deer"
-msgstr "Cerf"
-
-#: ../../worlds/greenland/conf:85
-msgid "Duck"
-msgstr "Canard"
-
-#: ../../worlds/greenland/conf:86
-msgid "Elk"
-msgstr "Élan"
-
-#: ../../worlds/greenland/conf:87
-msgid "Fox"
-msgstr "Renard"
-
-#: ../../worlds/greenland/conf:88
-msgid "Lynx"
-msgstr "Lynx"
-
-#: ../../worlds/greenland/conf:89
-msgid "Marten"
-msgstr "Fouine"
-
-#: ../../worlds/greenland/conf:90
-msgid "Reindeer"
-msgstr "Renne"
-
-#: ../../worlds/greenland/conf:91
-msgid "Sheep"
-msgstr "Mouton"
+#: ../../worlds/greenland/resconf:36
+msgid "Water"
+msgstr "Eau"
 
 #: ../../worlds/greenland/conf:92
 msgid "Wisent"
@@ -281,29 +305,8 @@ msgstr "Bison"
 msgid "Wolf"
 msgstr "Loup"
 
-#: ../../worlds/greenland/resconf:4
-msgid "Coal"
-msgstr "Charbon"
-
-#: ../../worlds/greenland/resconf:12
-msgid "Gold"
-msgstr "Or"
-
-#: ../../worlds/greenland/resconf:20
-msgid "Iron"
-msgstr "Fer"
-
-#: ../../worlds/greenland/resconf:28
-msgid "Granit"
-msgstr "Granit"
-
-#: ../../worlds/greenland/resconf:36
-msgid "Water"
-msgstr "Eau"
-
-#: ../../worlds/greenland/resconf:41
-msgid "Fish"
-msgstr "Poisson"
+#~ msgid "Granit"
+#~ msgstr "Granit"
 
 #~ msgid "Dead tree"
 #~ msgstr "Arbre mort"

@@ -72,7 +72,7 @@ void grab_textdomain(std::string const & domain)
 
 	bind_textdomain_codeset(dom, "UTF-8");
 	bindtextdomain(dom, ldir);
-	log("textdomain %s @ %s\n", dom, ldir);
+	// log("textdomain %s @ %s\n", dom, ldir);
 	textdomain(dom);
 	textdomains.push_back(std::make_pair(dom, ldir));
 }
@@ -139,7 +139,7 @@ void set_locale(std::string name) {
 			lang = l;
 	/* Than set the variables */
 	setenv ("LANG",     lang.c_str(), 1);
-	setenv ("LANGUAGE", (lang + ":" + lang.substr(0, 2)).c_str(), 1);
+	setenv ("LANGUAGE", lang.c_str(), 1);
 	log
 		("LANG %s, LANGUAGE %s\n",
 		lang.c_str(),

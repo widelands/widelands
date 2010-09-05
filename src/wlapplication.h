@@ -175,16 +175,9 @@ struct WLApplication {
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
 	//@}
 
-#ifdef USE_OPENGL
 	void init_graphics
 		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool hw_improvements, bool double_buffer, bool opengl);
-#else
-	void init_graphics
-		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool hw_improvements, bool double_buffer);
-
-#endif
+		 bool fullscreen, bool opengl);
 
 	void handle_input(InputCallback const *);
 
@@ -243,6 +236,8 @@ protected:
 
 	void cleanup_replays();
 
+	bool redirect_output(std::string path="");
+
 	/**
 	 * The commandline, conveniently repackaged
 	 * This is usually not empty, it contains at least the tuple
@@ -285,15 +280,15 @@ protected:
 	///If true Widelands is (should be, we never know ;-) running
 	///in a fullscreen window
 	bool   m_gfx_fullscreen;
-	bool   m_gfx_hw_improvements;
-	bool   m_gfx_double_buffer;
-#ifdef USE_OPENGL
+
 	bool   m_gfx_opengl;
-#endif
 
 	//do we want to search the default places for widelands installs
 	bool   m_default_datadirs;
 	std::string m_homedir;
+
+	/// flag indicating if stdout and stderr have been redirected
+	bool m_redirected_stdio;
 private:
 	///Holds this process' one and only instance of WLApplication, if it was
 	///created already. NULL otherwise.

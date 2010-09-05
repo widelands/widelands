@@ -6,27 +6,91 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 18:32+0000\n"
-"Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 21:23+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/greenland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Команда разработчиков Widelands"
+#: ../../worlds/greenland/conf:58
+msgid "Alder"
+msgstr "Ольха"
 
-#: ../../worlds/greenland/conf:3
-msgid "Greenland"
-msgstr "Луга"
+#: ../../worlds/greenland/conf:59
+msgid "Alder medium"
+msgstr "Средняя ольха"
 
-#: ../../worlds/greenland/conf:4
-msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "Это прекрасная и богатая страна варваров"
+#: ../../worlds/greenland/conf:60
+msgid "Alder small"
+msgstr "Малая ольха"
+
+#: ../../worlds/greenland/conf:61
+msgid "Alder tiny"
+msgstr "Маленькая ольха"
+
+#: ../../worlds/greenland/conf:46
+msgid "Aspen"
+msgstr "Осина"
+
+#: ../../worlds/greenland/conf:47
+msgid "Aspen medium"
+msgstr "Средняя осина"
+
+#: ../../worlds/greenland/conf:48
+msgid "Aspen small"
+msgstr "Малая осина"
+
+#: ../../worlds/greenland/conf:49
+msgid "Aspen tiny"
+msgstr "Маленькая осина"
+
+#: ../../worlds/greenland/conf:80
+msgid "Badger"
+msgstr "Барсук"
+
+#: ../../worlds/greenland/conf:66
+msgid "Beech"
+msgstr "Бук"
+
+#: ../../worlds/greenland/conf:67
+msgid "Beech medium"
+msgstr "Средний бук"
+
+#: ../../worlds/greenland/conf:68
+msgid "Beech small"
+msgstr "Малый бук"
+
+#: ../../worlds/greenland/conf:69
+msgid "Beech tiny"
+msgstr "Маленький бук"
+
+#: ../../worlds/greenland/conf:62
+msgid "Birch"
+msgstr "Береза"
+
+#: ../../worlds/greenland/conf:63
+msgid "Birch medium"
+msgstr "Средняя береза"
+
+#: ../../worlds/greenland/conf:64
+msgid "Birch small"
+msgstr "Малая береза"
+
+#: ../../worlds/greenland/conf:65
+msgid "Birch tiny"
+msgstr "Маленькая береза"
+
+#: ../../worlds/greenland/conf:81
+msgid "Brownbear"
+msgstr "Бурый медведь"
+
+#: ../../worlds/greenland/conf:82
+msgid "Bunny"
+msgstr "Кролик"
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -41,6 +105,14 @@ msgstr "Куст"
 msgid "Cactus"
 msgstr "Кактус"
 
+#: ../../worlds/greenland/conf:83
+msgid "Chamois"
+msgstr "Серна"
+
+#: ../../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr "Уголь"
+
 #: ../../worlds/greenland/conf:14
 #: ../../worlds/greenland/conf:15
 #: ../../worlds/greenland/conf:16
@@ -48,9 +120,37 @@ msgstr "Кактус"
 msgid "Dead Tree"
 msgstr "Сухостой"
 
+#: ../../worlds/greenland/conf:84
+msgid "Deer"
+msgstr "Олень"
+
+#: ../../worlds/greenland/conf:85
+msgid "Duck"
+msgstr "Утка"
+
+#: ../../worlds/greenland/conf:86
+msgid "Elk"
+msgstr "Лось"
+
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
 msgstr "Упавшее дерево"
+
+#: ../../worlds/greenland/resconf:41
+msgid "Fish"
+msgstr "Рыба"
+
+#: ../../worlds/greenland/conf:87
+msgid "Fox"
+msgstr "Лиса"
+
+#: ../../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr "Золото"
+
+#: ../../worlds/greenland/resconf:28
+msgid "Granite"
+msgstr "Гранит"
 
 #: ../../worlds/greenland/conf:19
 #: ../../worlds/greenland/conf:20
@@ -58,10 +158,58 @@ msgstr "Упавшее дерево"
 msgid "Grass"
 msgstr "Трава"
 
+#: ../../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr "Луга"
+
+#: ../../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr "Железо"
+
+#: ../../worlds/greenland/conf:70
+msgid "Larch"
+msgstr "Лиственница"
+
+#: ../../worlds/greenland/conf:71
+msgid "Larch medium"
+msgstr "Средняя лиственница"
+
+#: ../../worlds/greenland/conf:72
+msgid "Larch small"
+msgstr "Малая лиственница"
+
+#: ../../worlds/greenland/conf:73
+msgid "Larch tiny"
+msgstr "Маленькая лиственница"
+
+#: ../../worlds/greenland/conf:88
+msgid "Lynx"
+msgstr "Рысь"
+
+#: ../../worlds/greenland/conf:89
+msgid "Marten"
+msgstr "Куница"
+
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
 msgid "Mushroom"
 msgstr "Гриб"
+
+#: ../../worlds/greenland/conf:50
+msgid "Oak"
+msgstr "Дуб"
+
+#: ../../worlds/greenland/conf:51
+msgid "Oak medium"
+msgstr "Средний дуб"
+
+#: ../../worlds/greenland/conf:52
+msgid "Oak small"
+msgstr "Малый дуб"
+
+#: ../../worlds/greenland/conf:53
+msgid "Oak tiny"
+msgstr "Маленький дуб"
 
 #: ../../worlds/greenland/conf:24
 #: ../../worlds/greenland/conf:25
@@ -72,11 +220,51 @@ msgstr "Гриб"
 msgid "Pebble"
 msgstr "Галька"
 
+#: ../../worlds/greenland/conf:90
+msgid "Reindeer"
+msgstr "Северный олень"
+
+#: ../../worlds/greenland/conf:74
+msgid "Rowan"
+msgstr "Рябина"
+
+#: ../../worlds/greenland/conf:75
+msgid "Rowan medium"
+msgstr "Средняя рябина"
+
+#: ../../worlds/greenland/conf:76
+msgid "Rowan small"
+msgstr "Малая рябина"
+
+#: ../../worlds/greenland/conf:77
+msgid "Rowan tiny"
+msgstr "Маленькая рябина"
+
+#: ../../worlds/greenland/conf:91
+msgid "Sheep"
+msgstr "Овца"
+
 #: ../../worlds/greenland/conf:30
 #: ../../worlds/greenland/conf:31
 #: ../../worlds/greenland/conf:32
 msgid "Skeleton"
 msgstr "Скелет"
+
+#: ../../worlds/greenland/conf:54
+msgid "Spruce"
+msgstr "Ель"
+
+#: ../../worlds/greenland/conf:55
+msgid "Spruce medium"
+msgstr "Средняя ель"
+
+#: ../../worlds/greenland/conf:56
+msgid "Spruce small"
+msgstr "Малая ель"
+
+#: ../../worlds/greenland/conf:57
+msgid "Spruce tiny"
+msgstr "Маленькая ель"
 
 #: ../../worlds/greenland/conf:33
 #: ../../worlds/greenland/conf:34
@@ -97,181 +285,17 @@ msgstr "Скалы"
 msgid "Stones"
 msgstr "Камни"
 
-#: ../../worlds/greenland/conf:46
-msgid "Aspen"
-msgstr "Осина"
+#: ../../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Команда разработчиков Widelands"
 
-#: ../../worlds/greenland/conf:47
-msgid "Aspen medium"
-msgstr "Средняя осина"
+#: ../../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr "Это прекрасная и богатая страна варваров"
 
-#: ../../worlds/greenland/conf:48
-msgid "Aspen small"
-msgstr "Малая осина"
-
-#: ../../worlds/greenland/conf:49
-msgid "Aspen tiny"
-msgstr "Маленькая осина"
-
-#: ../../worlds/greenland/conf:50
-msgid "Oak"
-msgstr "Дуб"
-
-#: ../../worlds/greenland/conf:51
-msgid "Oak medium"
-msgstr "Средний дуб"
-
-#: ../../worlds/greenland/conf:52
-msgid "Oak small"
-msgstr "Малый дуб"
-
-#: ../../worlds/greenland/conf:53
-msgid "Oak tiny"
-msgstr "Маленький дуб"
-
-#: ../../worlds/greenland/conf:54
-msgid "Spruce"
-msgstr "Ель"
-
-#: ../../worlds/greenland/conf:55
-msgid "Spruce medium"
-msgstr "Средняя ель"
-
-#: ../../worlds/greenland/conf:56
-msgid "Spruce small"
-msgstr "Малая ель"
-
-#: ../../worlds/greenland/conf:57
-msgid "Spruce tiny"
-msgstr "Маленькая ель"
-
-#: ../../worlds/greenland/conf:58
-msgid "Alder"
-msgstr "Ольха"
-
-#: ../../worlds/greenland/conf:59
-msgid "Alder medium"
-msgstr "Средняя ольха"
-
-#: ../../worlds/greenland/conf:60
-msgid "Alder small"
-msgstr "Малая ольха"
-
-#: ../../worlds/greenland/conf:61
-msgid "Alder tiny"
-msgstr "Маленькая ольха"
-
-#: ../../worlds/greenland/conf:62
-msgid "Birch"
-msgstr "Береза"
-
-#: ../../worlds/greenland/conf:63
-msgid "Birch medium"
-msgstr "Средняя береза"
-
-#: ../../worlds/greenland/conf:64
-msgid "Birch small"
-msgstr "Малая береза"
-
-#: ../../worlds/greenland/conf:65
-msgid "Birch tiny"
-msgstr "Маленькая береза"
-
-#: ../../worlds/greenland/conf:66
-msgid "Beech"
-msgstr "Бук"
-
-#: ../../worlds/greenland/conf:67
-msgid "Beech medium"
-msgstr "Средний бук"
-
-#: ../../worlds/greenland/conf:68
-msgid "Beech small"
-msgstr "Малый бук"
-
-#: ../../worlds/greenland/conf:69
-msgid "Beech tiny"
-msgstr "Маленький бук"
-
-#: ../../worlds/greenland/conf:70
-msgid "Larch"
-msgstr "Лиственница"
-
-#: ../../worlds/greenland/conf:71
-msgid "Larch medium"
-msgstr "Средняя лиственница"
-
-#: ../../worlds/greenland/conf:72
-msgid "Larch small"
-msgstr "Малая лиственница"
-
-#: ../../worlds/greenland/conf:73
-msgid "Larch tiny"
-msgstr "Маленькая лиственница"
-
-#: ../../worlds/greenland/conf:74
-msgid "Rowan"
-msgstr "Рябина"
-
-#: ../../worlds/greenland/conf:75
-msgid "Rowan medium"
-msgstr "Средняя рябина"
-
-#: ../../worlds/greenland/conf:76
-msgid "Rowan small"
-msgstr "Малая рябина"
-
-#: ../../worlds/greenland/conf:77
-msgid "Rowan tiny"
-msgstr "Маленькая рябина"
-
-#: ../../worlds/greenland/conf:80
-msgid "Badger"
-msgstr "Барсук"
-
-#: ../../worlds/greenland/conf:81
-msgid "Brownbear"
-msgstr "Бурый медведь"
-
-#: ../../worlds/greenland/conf:82
-msgid "Bunny"
-msgstr "Кролик"
-
-#: ../../worlds/greenland/conf:83
-msgid "Chamois"
-msgstr "Серна"
-
-#: ../../worlds/greenland/conf:84
-msgid "Deer"
-msgstr "Олень"
-
-#: ../../worlds/greenland/conf:85
-msgid "Duck"
-msgstr "Утка"
-
-#: ../../worlds/greenland/conf:86
-msgid "Elk"
-msgstr "Лось"
-
-#: ../../worlds/greenland/conf:87
-msgid "Fox"
-msgstr "Лиса"
-
-#: ../../worlds/greenland/conf:88
-msgid "Lynx"
-msgstr "Рысь"
-
-#: ../../worlds/greenland/conf:89
-msgid "Marten"
-msgstr "Куница"
-
-#: ../../worlds/greenland/conf:90
-msgid "Reindeer"
-msgstr "Северный олень"
-
-#: ../../worlds/greenland/conf:91
-msgid "Sheep"
-msgstr "Овца"
+#: ../../worlds/greenland/resconf:36
+msgid "Water"
+msgstr "Вода"
 
 #: ../../worlds/greenland/conf:92
 msgid "Wisent"
@@ -281,29 +305,8 @@ msgstr "Зубр"
 msgid "Wolf"
 msgstr "Волк"
 
-#: ../../worlds/greenland/resconf:4
-msgid "Coal"
-msgstr "Уголь"
-
-#: ../../worlds/greenland/resconf:12
-msgid "Gold"
-msgstr "Золото"
-
-#: ../../worlds/greenland/resconf:20
-msgid "Iron"
-msgstr "Железо"
-
-#: ../../worlds/greenland/resconf:28
-msgid "Granit"
-msgstr "Гранит"
-
-#: ../../worlds/greenland/resconf:36
-msgid "Water"
-msgstr "Вода"
-
-#: ../../worlds/greenland/resconf:41
-msgid "Fish"
-msgstr "Рыба"
+#~ msgid "Granit"
+#~ msgstr "Гранит"
 
 #~ msgid "Tree"
 #~ msgstr "Дерево"

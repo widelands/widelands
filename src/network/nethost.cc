@@ -44,6 +44,8 @@
 #include "wlapplication.h"
 
 #include "ui_basic/progresswindow.h"
+#include <boost/format.hpp>
+using boost::format;
 
 
 
@@ -68,6 +70,14 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	}
 	virtual bool canChangePlayerInit(uint8_t const number) {
 		return number < settings().players.size();
+	}
+	virtual bool canChangePlayerTeam(uint8_t number) {
+		if (number >= settings().players.size())
+			return false;
+		if (number == settings().playernum)
+			return true;
+		return
+			settings().players.at(number).state == PlayerSettings::stateComputer;
 	}
 
 	virtual bool canLaunch() {return h->canLaunch();}
@@ -138,6 +148,16 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			(number == settings().playernum ||
 			 settings().players.at(number).state == PlayerSettings::stateComputer)
 			h->setPlayerTribe(number, tribe);
+	}
+	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
+	{
+		if (number >= h->settings().players.size())
+			return;
+
+		if
+			(number == settings().playernum ||
+			 settings().players.at(number).state == PlayerSettings::stateComputer)
+			h->setPlayerTeam(number, team);
 	}
 
 	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
@@ -215,6 +235,160 @@ struct HostChatProvider : public ChatProvider {
 			c.recipient = c.msg.substr(1, space - 1);
 			c.msg = c.msg.substr(space + 1);
 		}
+
+		/* Handle hostcommands like:
+		 * /help                : Shows all available commands
+		 * /announce <msg>      : Send a chatmessage as announcement (system chat)
+		 * /warn <name> <reason>: Warn the user <name> because of <reason>
+		 * /kick <name> <reason>: Kick the user <name> because of <reason>
+		 * /forcePause          : Force the game to pause.
+		 * /endForcedPause      : Puts game back to normal speed.
+		 */
+		else if (c.msg.size() > 1 && *c.msg.begin() == '/') {
+
+			// Split up in "cmd" "arg1" "arg2"
+			std::string cmd, arg1, arg2;
+			std::string::size_type const space = c.msg.find(' ');
+			if (space > c.msg.size())
+				// Only cmd
+				cmd = c.msg.substr(1);
+			else {
+				cmd = c.msg.substr(1, space - 1);
+				std::string::size_type const space2 = c.msg.find(' ', space + 1);
+				if (space2 != std::string::npos) {
+					// cmd + arg1 + arg2
+					arg1 = c.msg.substr(space + 1, space2 - space - 1);
+					arg2 = c.msg.substr(space2 + 1);
+				} else if (space + 1 < c.msg.size())
+					// cmd + arg1
+					arg1 = c.msg.substr(space + 1);
+			}
+			if (arg1.empty())
+				arg1 = "";
+			if (arg2.empty())
+				arg2 = "";
+			log((cmd + " + \"" + arg1 + "\" + \"" + arg2 + "\"\n").c_str());
+
+			// let "/me" pass - handled by chat
+			if (cmd == "me") {
+				h->send(c);
+				return;
+			}
+
+			// Everything handled from now on will be system stuff - an so will be
+			// messages send because of that commands
+			c.playern = -2;
+			c.sender = "";
+
+			// Help
+			if (cmd == "help") {
+				c.msg =
+					_
+					 ("Available host commands are:<br>"
+					  "/help  -  Shows this help<br>"
+					  "/announce <msg>  -  Send a chatmessage as announcement"
+					  " (system chat)<br>"
+					  "/warn <name> <reason>  -  Warn the user <name> because of"
+					  " <reason><br>"
+					  "/kick <name> <reason>  -  Kick the user <name> because of"
+					  " <reason><br>"
+					  "/forcePause            -  Force the game to pause.<br>"
+					  "/endForcedPause        -  Puts game back to normal speed.");
+				c.recipient = h->getLocalPlayername();
+			}
+
+			// Announce
+			else if (cmd == "announce") {
+				if (arg1.empty()) {
+					c.msg = _("Wrong use, should be: /announce <message>");
+					c.recipient = h->getLocalPlayername();
+				} else {
+					if (arg2.size())
+						arg1 += " " + arg2;
+					c.msg = "HOST ANNOUNCEMENT: " + arg1;
+				}
+			}
+
+			// Warn user
+			else if (cmd == "warn") {
+				if (arg1.empty() && arg2.empty()) {
+					c.msg = _("Wrong use, should be: /warn <name> <reason>");
+					c.recipient = h->getLocalPlayername();
+				} else {
+					c.msg  = (format("HOST WARNING FOR %s: ") % arg1).str();
+					c.msg += arg2;
+				}
+			}
+
+			// Kick
+			else if (cmd == "kick") {
+				if (arg1.empty()) {
+					c.msg = _("Wrong use, should be: /kick <name> <reason>");
+				} else {
+					kickUser = arg1;
+					if (arg2.size())
+						kickReason = arg2;
+					else
+						kickReason = "No reason given!";
+					c.msg =
+						(format(_("Are you sure you want to kick %s?<br>"))
+						 % arg1).str();
+					c.msg +=
+						(format(_("The stated reason was: %s<br>"))
+						 % kickReason).str();
+					c.msg +=
+						(format(_("If yes, type: /ack_kick %s")) % arg1).str();
+				}
+				c.recipient = h->getLocalPlayername();
+			}
+
+			// Acknowledge kick
+			else if (cmd == "ack_kick") {
+				std::string name;
+				if (arg1.empty())
+					c.msg = _("kick acknowlegement cancled: No name given!");
+				else if (arg2.size())
+					c.msg = _("Wrong use, should be: /ack_kick <name>");
+				else {
+					if (arg1 == kickUser) {
+						h->kickUser(kickUser, kickReason);
+						return;
+					} else
+						c.msg = _("kick acknowlegement cancled: Wrong name given!");
+				}
+				kickUser   = "";
+				kickReason = "";
+				c.recipient = h->getLocalPlayername();
+			}
+
+			// Force Pause
+			else if (cmd == "forcePause") {
+				if (h->forcedPause()) {
+					c.msg = _("Pause was already forced - game should be paused.");
+					c.recipient = h->getLocalPlayername();
+				} else {
+					c.msg = "HOST FORCED THE GAME TO PAUSE!";
+					h->forcePause();
+				}
+			}
+
+			// End Forced Pause
+			else if (cmd == "endForcedPause") {
+				if (!h->forcedPause()) {
+					c.msg = _("There is no forced pause - nothing to end.");
+					c.recipient = h->getLocalPlayername();
+				} else {
+					c.msg = "HOST ENDED THE FORCED GAME PAUSE!";
+					h->endForcedPause();
+				}
+			}
+
+			// Default
+			else {
+				c.msg = _("Invalid command! Type /help for a list of commands.");
+				c.recipient = h->getLocalPlayername();
+			}
+		}
 		h->send(c);
 	}
 
@@ -230,6 +404,8 @@ struct HostChatProvider : public ChatProvider {
 private:
 	NetHost                * h;
 	std::vector<ChatMessage> messages;
+	std::string              kickUser;
+	std::string              kickReason;
 };
 
 struct Client {
@@ -296,7 +472,7 @@ struct NetHostImpl {
 };
 
 NetHost::NetHost (std::string const & playername, bool ggz)
-: d(new NetHostImpl(this)), use_ggz(ggz)
+: d(new NetHostImpl(this)), use_ggz(ggz), m_forced_pause(false)
 {
 	log("[Host] starting up.\n");
 
@@ -568,11 +744,12 @@ void NetHost::send(ChatMessage msg)
 
 	// Make sure that msg is free of richtext formation tags. Such tags could not
 	// just be abused by the user, but could also break the whole text formation.
-	// FIXME It would be better to escape < as &lt; and then render that as <
-	// FIXME instead of replacing < with { in chat messages.
-	container_iterate(std::string, msg.msg, i)
-		if (*i.current == '<')
-			*i.current = '{';
+	//  FIXME It would be better to escape < as &lt; and then render that as <
+	//  FIXME instead of replacing < with { in chat messages.
+	if (msg.playern != -2) // System messages may have special formations
+		container_iterate(std::string, msg.msg, i)
+			if (*i.current == '<')
+				*i.current = '{';
 
 	if (msg.recipient.empty()) {
 		SendPacket s;
@@ -653,6 +830,8 @@ void NetHost::send(ChatMessage msg)
 			return; //  do not deliver it to him twice
 
 		//Now find the sender and send either the message or the failure notice
+		else if (msg.playern == -2) // private system message
+			return;
 		else if (d->localplayername == msg.sender)
 			d->chat.receive(msg);
 		else { // host is not the sender -> get sender
@@ -679,6 +858,51 @@ void NetHost::send(ChatMessage msg)
 				log("WARNING: sender could not be found!");
 		}
 	}
+}
+
+/**
+* If the host sends a chat message with formation /kick <name> <reason>
+* This function will handle this command and try to kick the user.
+*
+* \note perhaps we should add some kind of user interaction like
+*       "do you really want to kick <name>?", to avoid abuse of this feature.
+*/
+void NetHost::kickUser(std::string name, std::string reason)
+{
+	ChatMessage kickmsg;
+	kickmsg.playern = -2; // System message
+	if (d->localplayername == name) {
+		kickmsg.msg = _("You can not kick yourself!");
+		d->chat.receive(kickmsg);
+		return;
+	}
+
+	// Search for the user
+	uint32_t i = 0;
+	uint32_t client = 0;
+	for (; i < d->settings.users.size(); ++i) {
+		UserSettings const & user = d->settings.users.at(i);
+		if (user.name == name)
+			break;
+	}
+	if (i < d->settings.users.size()) {
+		for (; client < d->clients.size(); ++client)
+			if (d->clients.at(client).usernum == i)
+				break;
+		if (client < d->clients.size())
+			i = d->clients.at(client).playernum;
+		else
+			log("WARNING: user was found but no client is connected to it!\n");
+	} else {
+		kickmsg.msg = _("There is no connected user with that nickname!");
+		d->chat.receive(kickmsg);
+		return;
+	}
+
+	if (i >= 0)
+		disconnectPlayer(i, "Kicked by the host: " + reason);
+	else
+		disconnectClient(client, "Kicked by the host: " + reason);
 }
 
 void NetHost::sendSystemChat(char const * const fmt, ...)
@@ -775,6 +999,7 @@ void NetHost::setMap
 		player.state                = PlayerSettings::stateOpen;
 		player.tribe                = d->settings.tribes.at(0).name;
 		player.initialization_index = 0;
+		player.team = 0;
 		++oldplayers;
 	}
 
@@ -1035,7 +1260,6 @@ void NetHost::setPlayerReady
 	s.Unsigned8(number);
 	writeSettingPlayer(s, number);
 	broadcast(s);
-	return;
 }
 
 bool NetHost::getPlayerReady(uint8_t const number)
@@ -1045,6 +1269,20 @@ bool NetHost::getPlayerReady(uint8_t const number)
 		d->settings.players.at(number).state == PlayerSettings::stateComputer ||
 		(d->settings.players.at(number).state == PlayerSettings::stateHuman &&
 		 d->settings.players.at(number).ready);
+}
+
+void NetHost::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
+{
+	if (number >= d->settings.players.size())
+		return;
+	d->settings.players.at(number).team = team;
+
+	// Broadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
+	s.Unsigned8(number);
+	writeSettingPlayer(s, number);
+	broadcast(s);
 }
 
 void NetHost::setMultiplayerGameSettings()
@@ -1099,6 +1337,7 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.Unsigned8(player.initialization_index);
 	packet.String(player.ai);
 	packet.Unsigned8(static_cast<uint8_t>(player.ready));
+	packet.Unsigned8(player.team);
 }
 
 void NetHost::writeSettingAllPlayers(SendPacket & packet)
@@ -1404,25 +1643,47 @@ void NetHost::broadcastRealSpeed(uint32_t const speed)
  *
  * The current implementation picks the median, or the average of
  * lower and upper median.
+ * If only two players are playing (host + 1 client), there is a boundary
+ * so neither the host, nor the players can abuse their setting to get to the
+ * wished speed (e.g. without this boundary, the client might set his/her wished
+ *               speed to 8x - even if the host sets his desired speed to PAUSE
+ *               the median sped would be 4x).
  */
 void NetHost::updateNetworkSpeed()
 {
 	uint32_t const oldnetworkspeed = d->networkspeed;
-	std::vector<uint32_t> speeds;
 
-	speeds.push_back(d->localdesiredspeed);
-	for (uint32_t i = 0; i < d->clients.size(); ++i) {
-		if (d->clients.at(i).playernum <= UserSettings::highestPlayernum())
-			speeds.push_back(d->clients.at(i).desiredspeed);
+	// First check if a pause was forced by the host
+	if (m_forced_pause)
+		d->networkspeed = 0;
+
+	// No pause was forced - normal speed calculation
+	else {
+		std::vector<uint32_t> speeds;
+
+		speeds.push_back(d->localdesiredspeed);
+		for (uint32_t i = 0; i < d->clients.size(); ++i) {
+			if (d->clients.at(i).playernum <= UserSettings::highestPlayernum())
+				speeds.push_back(d->clients.at(i).desiredspeed);
+		}
+		std::sort(speeds.begin(), speeds.end());
+
+		// Abuse prevention for 2 players
+		if (speeds.size() == 2) {
+			if (speeds[0] > speeds[1] + 1000)
+				speeds[0] = speeds[1] + 1000;
+			if (speeds[1] > speeds[0] + 1000)
+				speeds[1] = speeds[0] + 1000;
+		}
+
+
+		d->networkspeed =
+			speeds.size() % 2 ? speeds.at(speeds.size() / 2) :
+			(speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
+
+		if (d->networkspeed > std::numeric_limits<uint16_t>::max())
+			d->networkspeed = std::numeric_limits<uint16_t>::max();
 	}
-	std::sort(speeds.begin(), speeds.end());
-
-	d->networkspeed =
-		speeds.size() % 2 ? speeds.at(speeds.size() / 2) :
-		(speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
-
-	if (d->networkspeed > std::numeric_limits<uint16_t>::max())
-		d->networkspeed = std::numeric_limits<uint16_t>::max();
 
 	if (d->networkspeed != oldnetworkspeed && !d->waiting)
 		broadcastRealSpeed(d->networkspeed);
@@ -1645,6 +1906,12 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	case NETCMD_SETTING_CHANGEREADY:
 		if (!d->game) {
 			setPlayerReady(client.playernum, static_cast<bool>(r.Unsigned8()));
+		}
+		break;
+
+	case NETCMD_SETTING_CHANGETEAM:
+		if (!d->game) {
+			setPlayerTeam(client.playernum, r.Unsigned8());
 		}
 		break;
 

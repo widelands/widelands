@@ -6,36 +6,121 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-04-11 02:43+0000\n"
-"Last-Translator: AJenbo <anders@jenbo.dk>\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"PO-Revision-Date: 2010-08-20 16:07+0000\n"
+"Last-Translator: Zilvador <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-12 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-08-21 03:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../campaigns/emp01.wmf/elemental:7
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Imperium prøvespil1 - Malac' Mors strande"
-
-#: ../../campaigns/emp01.wmf/elemental:9
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:38
 msgid ""
-"After losing an important battle against the barbarians, which leads to the "
-"forfeiture of a bigger part of Empire's territory, Lutius leaves Fremil, to "
-"start a new life. But his destiny takes his ship into a heavy storm, which "
-"nearly desctroys the ship. Only with lot of luck he can save his people and "
-"the damaged ship on a unknown desert strand."
+" \"Finally, the Gods were with us!<br> We landed on an unknown coast and "
+"found peaceful rest under the palm trees growing at the shore. But that is "
+"about as good as it gets. The truth is:<br> when I woke up this morning, I "
+"saw nothing more than sand around us.<br> It really seems as if we landed "
+"under the only palm trees existing in this far-away sandy desert. I fear we "
+"won't find the help we need to get our ship repaired in good time.\" "
 msgstr ""
 
-#: ../../campaigns/emp01.wmf/event:61
-#: ../../campaigns/emp01.wmf/event:76
-#: ../../campaigns/emp01.wmf/event:91
-msgid "Diary of Lutius"
-msgstr "Lutius dagbog"
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:90
+msgid ""
+" \"Hey Lutius, I got the message that our first lumberjack started his work "
+"today. Perhaps it would be a good idea to wait until he cleans enough space "
+"for building up two further lumberjack's houses, so that we can harvest the "
+"trunks faster.<br> But unfortunately the trunks are useless for repairing "
+"our ship - we need refined lumber, like every ship and every bigger building "
+"needs, too. So we should build up a sawmill - as soon as we have enough "
+"space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
 
-#: ../../campaigns/emp01.wmf/event:63
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:73
+msgid ""
+" \"Hey Lutius, I just met Saledus outside.<br> He told me about the "
+"barracks. Well, I am not one of those girls who think we need more barracks -"
+" instead, we might concentrate on other things now.<br> It is absolutely "
+"clear that we need wood to repair our ship. So, I walked through the forest "
+"yesterday and found a nice place for a lumberjack's house, south of our "
+"headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:126
+msgid ""
+" \"Hey Lutius, today we got a lot closer to our first castle. The quarry to "
+"the south began its work today and will soon provide us with stones and "
+"beautiful marble.<br> Now we truly can look forward to settling down on "
+"another island.\" "
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:114
+msgid ""
+" \"Hey, my good old friend. I just thought about the rocks standing on the "
+"south shore of this land. Perhaps we could cut out some useful hard stones "
+"and beautiful marble.<br> The repair of our ship will take a few weeks, "
+"anyway, and the resources we harvest now might be the base of strong and big "
+"buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:102
+msgid ""
+" \"Hi Lutius, I've got two important things to talk about... First the good "
+"news:<br> I saw that the construction of the sawmill is complete, so we can "
+"begin to refine the trunks that the lumberjacks are harvesting into "
+"lumber.<br> But that's just about the only positive thing I know to talk "
+"about. The bad news is that our lumberjacks harvest at an unbelievable "
+"speed. There are almost no trees left on this island.<br> Lutius, these "
+"trees provide shelter from the sandstorms from the desert, shade on the hot "
+"days and they are the home of so many gentle animals. We shouldn't leave "
+"this island a complete desert.<br> Lutius, I beg you: find someone who takes "
+"care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:26
+msgid ""
+" \"It seems as if sailing on the perl-gulf was one of our biggest mistakes. "
+"Nature was against us and drove us into a dark, wild storm. I really don't "
+"know how many hours have passed since the waves rose higher than our boat, "
+"but still it would be suicide to go outside.<br> Our ship is badly damaged "
+"and is taking in more and more water. We can thank the Gods if we survive "
+"this black night with our lives.\" "
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:50
+msgid ""
+" \"Sire, I fear we are not safe in this foreign land. Who knows what "
+"terrible creatures live beyond this forest, in that mighty desert? What if "
+"these creatures enter the woods and await the time to attack us?<br> Well, "
+"perhaps my fear is misguided, but it can't be wrong to keep watch in the "
+"forests - so that we can be sure to see any potential enemies before they "
+"can see us.<br> We really should build a barracks in the eastern portion of "
+"the forest. Then one of us can keep watch in the darkness and keep us safe "
+"from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:63
+msgid ""
+" \"Sire, I saw that the construction of the barracks was complete, so I "
+"assigned one of my best soldiers to it to keep watch on the desert.<br> This "
+"is a good step forward. Now we can feel a bit safer and can look forward to "
+"repair our ship.\" "
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:135
+msgid ""
+" \"Today I got the message that our ship is completely repaired. At the "
+"moment my people are loading everything onto our newly repaired ship, hoping "
+"it will serve us better than last time.<br> Tonight will be our last night "
+"on this island. Tomorrow morning we will leave, searching for a new place "
+"for our exile.<br> I still wonder if we will ever see Fremil again.<br><br>--"
+"------------------- VICTORY! ----------------------<br><br> You have "
+"completed this mission. You may continue playing if you wish, otherwise move "
+"on to the next mission.\" "
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:14
 msgid ""
 " \"What has become of our Empire? I really ask this question - why did my "
 "king forbid me from fighting against that monsterous barbarian tribe, who "
@@ -60,254 +145,166 @@ msgid ""
 "warriors.\" "
 msgstr ""
 
-#: ../../campaigns/emp01.wmf/event:65
-msgid "A dark night"
-msgstr "En mørk nat"
-
-#: ../../campaigns/emp01.wmf/event:78
-msgid ""
-" \"It seems as if sailing on the perl-gulf was one of our biggest mistakes. "
-"Nature was against us and drove us into a dark, wild storm. I really don't "
-"know how many hours have passed since the waves rose higher than our boat, "
-"but still it would be suicide to go outside.<br> Our ship is badly damaged "
-"and is taking in more and more water. We can thank the Gods if we survive "
-"this black night with our lives.\" "
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:80
-msgid "The rough sea"
-msgstr "En høk sø"
-
-#: ../../campaigns/emp01.wmf/event:93
-msgid ""
-" \"Finally, the Gods were with us!<br> We landed on an unknown coast and "
-"found peaceful rest under the palm trees growing at the strand. But that is "
-"about as good as it gets. The truth is:<br> when I woke up this morning, I "
-"saw nothing more than sand around us.<br> It really seems as if we landed "
-"under the only palm trees existing in this far-away sandy desert. I fear we "
-"won't find the help we need to get our ship repaired in good time.\" "
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:95
-msgid "Survivor"
-msgstr "Overlever"
-
-#: ../../campaigns/emp01.wmf/event:133
-msgid "Saledus looks around nervously..."
-msgstr "Saledus  ser sig navøs omkring"
-
-#: ../../campaigns/emp01.wmf/event:135
-msgid ""
-" \"Sire, I fear we are not safe in this foreign land. Who knows what "
-"terrible creatures live beyond this forest, in that mighty desert? What if "
-"these creatures enter the woods and await the time to attack us?<br> Well, "
-"perhaps my fear is misguided, but it can't be wrong to keep watch in the "
-"forests - so that we can be sure to see any potential enemies before they "
-"can see us.<br> We really should build a barracks in the eastern portion of "
-"the forest. Than one of us will keep watch in the darkness and keep us safe "
-"from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:136
-#: ../../campaigns/emp01.wmf/objective:7
-msgid ""
-"* Build a barracks at the red point on the east side of the forests, to the "
-"right of your headquarters."
-msgstr ""
-"* byg en barrak på det røde punkt ved østsiden at skoven og til højre for "
-"dit hovedkvarter"
-
-#: ../../campaigns/emp01.wmf/event:138
-msgid "A foreboding"
-msgstr "An varsel"
-
-#: ../../campaigns/emp01.wmf/event:142
-#: ../../campaigns/emp01.wmf/event:166
-#: ../../campaigns/emp01.wmf/event:181
-#: ../../campaigns/emp01.wmf/event:201
-#: ../../campaigns/emp01.wmf/event:226
-#: ../../campaigns/emp01.wmf/event:256
-#: ../../campaigns/emp01.wmf/event:280
-#: ../../campaigns/emp01.wmf/event:297
-#: ../../campaigns/emp01.wmf/event:314
-msgid "OK"
-msgstr "O.k."
-
-#: ../../campaigns/emp01.wmf/event:158
-msgid "Saledus speaks with a sigh of relief..."
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:160
-msgid ""
-" \"Sire, I saw that the construction of the barracks was complete, so I "
-"assigned one of my best soldiers to it to keep watch on the desert.<br> This "
-"is a good step forward. Now we can feel a bit safer and can look forward to "
-"repair our ship.\" "
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:162
-msgid "Safe for now"
-msgstr "Sikker for nu"
-
-#: ../../campaigns/emp01.wmf/event:172
-msgid "Amalea smiles..."
-msgstr "Amalea  smiler"
-
-#: ../../campaigns/emp01.wmf/event:174
-msgid ""
-" \"Hey Lutius, I just met Saledus outside.<br> He told me about the "
-"barracks. Well, I am not one of those girls who think we need more barracks -"
-" instead, we might concentrate on other things now.<br> It is absolutely "
-"clear that we need wood to repair our ship. So, I walked through the forest "
-"yesterday and found a nice place for a lumberjack's house, south of our "
-"headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:175
-#: ../../campaigns/emp01.wmf/objective:15
-msgid ""
-"* Build a lumberjack's house at the red point, south of your headquarters."
-msgstr "Byg en skovhugger hus ved det røde punkt syd for did hovedkvarter"
-
-#: ../../campaigns/emp01.wmf/event:177
-#: ../../campaigns/emp01.wmf/event:197
-#: ../../campaigns/emp01.wmf/event:222
-msgid "Young Amalea"
-msgstr "unge Amalea"
-
-#: ../../campaigns/emp01.wmf/event:192
-msgid "Amalea recommends..."
-msgstr "Amalea forslår"
-
-#: ../../campaigns/emp01.wmf/event:194
-msgid ""
-" \"Hey Lutius, I got the message that our first lumberjack started his work "
-"today. Perhaps it would be a good idea to wait until he cleans enough space "
-"for building up two further lumberjack's houses, so that we can faster "
-"harvest the trunks.<br> But unfortunately the trunks are useless for "
-"repairing our ship - we need refined wood, like every ship and every bigger "
-"building needs, too. So we should build up a sawmill - as soon as we have "
-"enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:195
-#: ../../campaigns/emp01.wmf/objective:23
-msgid ""
-"* Build two more lumberjack's houses and a sawmill as soon as there is "
-"enough space for them."
-msgstr ""
-"byg 2 nye skovhuggerhuse og en treværksted så snart der er plads til det"
-
-#: ../../campaigns/emp01.wmf/event:217
-msgid "Amalea comes in..."
-msgstr "Amalea kommer ind ...."
-
-#: ../../campaigns/emp01.wmf/event:219
-msgid ""
-" \"Hi Lutius, I've got two important things to talk about... First the good "
-"news:<br> I saw that the construction of the sawmill is complete, so we can "
-"begin to refine the trunks the lumberjacks are harvesting to wood.<br> But "
-"that's just about the only positive thing I know to talk about. The bad news "
-"is that our lumberjacks harvest at an unbelievable speed. There are almost "
-"no trees left on this island.<br> Lutius, these trees provide shelter from "
-"the sandstorms from the desert, shade on the hot days and they are the home "
-"of so many gentle animals. We shouldn't leave this island a complete "
-"desert.<br> Lutius, I beg you: find someone who takes care about planting "
-"new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:220
-#: ../../campaigns/emp01.wmf/objective:31
-msgid ""
-"* Build a forester's house to preserve the wood resources of this island."
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:247
-msgid "Saledus notes..."
-msgstr "Saledus notere ..."
-
-#: ../../campaigns/emp01.wmf/event:249
-msgid ""
-" \"Hey, my good old friend. I just thought about the rocks standing on the "
-"south strand of this land. Perhaps we could cut out some useful hard stones "
-"and beautiful marble.<br> The repair of our ship will take a few weeks, "
-"anyway, and the resources we harvest now might be the base of strong and big "
-"buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:250
-#: ../../campaigns/emp01.wmf/objective:39
-msgid ""
-"* Build a quarry in the south to cut some stones and marble out of the "
-"rocks.<br> These might be used for future buildings."
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:252
-msgid "Thinking about the future"
-msgstr "Tink på fremtiden"
-
-#: ../../campaigns/emp01.wmf/event:272
-msgid "Saledus looks promising..."
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:274
-msgid ""
-" \"Hey Lutius, today we got a lot closer to our first castle. The quarry to "
-"the south began its work today and will soon provide us with stones and "
-"beautiful marble.<br> Now we truly can look forward to settling down on "
-"another island.\" "
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:276
-msgid "A step forward"
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:292
-msgid ""
-" \"Today I got the message that our ship is completely repaired. At the "
-"moment my people are loading everything onto our newly repaired ship, hoping "
-"it will serve us better than last time.<br> Tonight will be our last night "
-"on this island. Tomorrow morning we will leave, searching for a new place "
-"for our exile.<br> I still wonder if we will ever see Fremil again.<br><br>--"
-"------------------- VICTORY! ----------------------<br><br> You have "
-"completed this mission. You may continue playing if you wish, otherwise move "
-"on to the next mission.\" "
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/event:294
-msgid "Mission Complete"
-msgstr "Mission Fuldført"
-
-#: ../../campaigns/emp01.wmf/event:308
-msgid "Saledus speaks:"
-msgstr "Saledus  siger"
-
-#: ../../campaigns/emp01.wmf/event:310
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
 " \"You have made this peninsula a very secure place. It is time to move "
 "on!\" "
 msgstr ""
 
-#: ../../campaigns/emp01.wmf/event:312
-msgid "Safe Peninsula"
-msgstr "sikker halvø"
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:51
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:156
+msgid ""
+"* Build a barracks at the red point on the east side of the forests, to the "
+"right of your headquarters."
+msgstr ""
+"* Byg en barrak på det røde punkt ved østsiden at skoven og til højre for "
+"dit hovedkvarter."
 
-#: ../../campaigns/emp01.wmf/objective:5
-msgid "Build a barracks"
-msgstr "byg en barrak"
-
-#: ../../campaigns/emp01.wmf/objective:13
-msgid "Build a lumberjack's house"
-msgstr "Byg en skovhugger's hus"
-
-#: ../../campaigns/emp01.wmf/objective:21
-msgid "Build two lumberjack's houses and a sawmill"
-msgstr "Byg 2 skovhugger's huse og en savværk"
-
-#: ../../campaigns/emp01.wmf/objective:29
-msgid "Build a forester's house"
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:103
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:181
+msgid ""
+"* Build a forester's house to preserve the wood resources of this island."
 msgstr ""
 
-#: ../../campaigns/emp01.wmf/objective:37
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:74
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:163
+msgid ""
+"* Build a lumberjack's house at the red point, south of your headquarters. "
+"Cutting down enough trees for more buildings will take a while. You can "
+"speed the game up using PAGE UP and slow it down again with PAGE DOWN."
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:115
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:188
+msgid ""
+"* Build a quarry in the south to cut some stones and marble out of the "
+"rocks.<br> These might be used for future buildings."
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:91
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:174
+msgid ""
+"* Build two more lumberjack's houses and a sawmill as soon as there is "
+"enough space for them."
+msgstr ""
+"* Byg to nye skovhuggerhytter og et savværk, så snart der er plads til det."
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:10
+msgid "A dark night"
+msgstr "En mørk nat"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:46
+msgid "A foreboding"
+msgstr "Et varsel"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:122
+msgid "A step forward"
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/elemental:9
+msgid ""
+"After losing an important battle against the barbarians which lead to the "
+"lost of a big part of the Empire's territory, Lutius leaves Fremil to start "
+"a new life. But his destiny takes his ship into a heavy storm, which nearly "
+"destroys it. Only with a lot of luck he manages to beach his damaged ship on "
+"an unknown desert strand and save his people. For now."
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:100
+msgid "Amalea comes in..."
+msgstr "Amalea kommer ind ...."
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:88
+msgid "Amalea recommends..."
+msgstr "Amalea foreslår..."
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:71
+msgid "Amalea smiles..."
+msgstr "Amalea smiler..."
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:154
+msgid "Build a barracks"
+msgstr "Byg en barrak"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:179
+msgid "Build a forester's house"
+msgstr "Byg en skovfogedhytte"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:161
+msgid "Build a lumberjack's house"
+msgstr "Byg en skovhuggerhytte"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:186
 msgid "Build a quarry"
-msgstr "byg et stedbrud"
+msgstr "Opfør et stenbrud"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:172
+msgid "Build two lumberjack's houses and a sawmill"
+msgstr "Byg to skovhuggerhytter og et savværk"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:12
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:24
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:36
+msgid "Diary of Lutius"
+msgstr "Lutius dagbog"
+
+#: ../../campaigns/emp01.wmf/elemental:7
+msgid "Empire Tutorial1 - The strands of Malac' Mor"
+msgstr "Imperium prøvespil1 - Malac' Mors strande"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:133
+msgid "Mission Complete"
+msgstr "Mission Fuldført"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:141
+msgid "Safe Peninsula"
+msgstr "Sikker halvø"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:59
+msgid "Safe for now"
+msgstr "Sikker ind til videre"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:48
+msgid "Saledus looks around nervously..."
+msgstr "Saledus ser sig nervøst omkring..."
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:124
+msgid "Saledus looks promising..."
+msgstr "Saledus ser lovende ud..."
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:112
+msgid "Saledus notes..."
+msgstr "Saledus noterer..."
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:61
+msgid "Saledus speaks with a sigh of relief..."
+msgstr "Saledus taler med et lettelsens suk..."
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:143
+msgid "Saledus speaks:"
+msgstr "Saledus taler:"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:34
+msgid "Survivor"
+msgstr "Overlever"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:22
+msgid "The rough sea"
+msgstr "Det barske hav"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:110
+msgid "Thinking about the future"
+msgstr "Tink på fremtiden"
+
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:69
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:86
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:98
+msgid "Young Amalea"
+msgstr "Unge Amalea"
+
+#~ msgid ""
+#~ "* Build a lumberjack's house at the red point, south of your headquarters."
+#~ msgstr "Byg en skovhugger hus ved det røde punkt syd for did hovedkvarter"
+
+#~ msgid "OK"
+#~ msgstr "O.k."

@@ -117,6 +117,36 @@ following file as ``/scripting/win_conditions/havest_trunks.lua``.
       end,
    }
 
+Hooks
+^^^^^
+
+Hooks are called by widelands when a certain event happened.  They are a
+rather recent implementation and therefore still limited. More hooks might be
+implemented in the future. 
+
+You set a hook by setting a field in the global variable ``hooks`` which must
+be a dictionary. The only valid hook currently is the ``custom_statistic``
+hook which gives the ability to add one new statistic to the general
+statistics menu.  This is used in win conditions (e.g. collectors) and could
+also be used in some missions in the future. To define a new statistic, use
+something like this:
+
+.. code-block:: lua
+   
+   hooks = {}
+   hooks.custom_statistic = {
+      name = _ "Unchanging statistic",
+      pic = "map:mycool_stat_picture.png", -- For the menu button
+      calculator = function(p)
+         -- Calculate the current value for this player
+         return p.number * 20
+      end,
+   }
+
+Every time widelands samples the current statistics, it will call the
+``calculator`` function for each player and expects an unsigned integer value
+back.
+
 Debug console
 ^^^^^^^^^^^^^
 

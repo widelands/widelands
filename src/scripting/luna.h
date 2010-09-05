@@ -110,7 +110,7 @@ void register_class
 
 	m_create_metatable_for_class<T>(L);
 
-	m_register_properties_in_metatable<T>(L);
+	m_register_properties_in_metatable<T,T>(L);
 	m_register_methods_in_metatable<T, T>(L);
 
 	if(!return_metatable)
@@ -124,7 +124,7 @@ void register_class
 template <class T, class PT>
 void add_parent(lua_State * L)
 {
-	m_register_properties_in_metatable<PT>(L);
+	m_register_properties_in_metatable<T,PT>(L);
 	m_register_methods_in_metatable<T, PT>(L);
 }
 

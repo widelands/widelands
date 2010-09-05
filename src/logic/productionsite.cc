@@ -42,7 +42,7 @@
 
 namespace Widelands {
 
-static const size_t STATISTICS_VECTOR_LENGTH = 10;
+static const size_t STATISTICS_VECTOR_LENGTH = 20;
 
 
 
@@ -57,9 +57,9 @@ ProductionSite BUILDING
 ProductionSite_Descr::ProductionSite_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
+	 Tribe_Descr const & _tribe)
 	:
-	Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
+	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
@@ -140,7 +140,7 @@ ProductionSite_Descr::ProductionSite_Descr
 				throw wexception("this program has already been declared");
 			m_programs[program_name] =
 				new ProductionProgram
-					(directory, prof, program_name, v->get_string(), this, encdata);
+					(directory, prof, program_name, v->get_string(), this);
 		} catch (std::exception const & e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
@@ -249,9 +249,9 @@ WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
  */
 void ProductionSite::calc_statistics()
 {
-	uint32_t pos;
-	uint32_t ok = 0;
-	uint32_t lastOk = 0;
+	uint8_t pos;
+	uint8_t ok = 0;
+	uint8_t lastOk = 0;
 
 	for (pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
 		if (m_statistics[pos]) {
@@ -260,8 +260,8 @@ void ProductionSite::calc_statistics()
 				++lastOk;
 		}
 	}
-	uint32_t const percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	uint32_t const lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
+	uint8_t const percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
+	uint8_t const lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	const std::string trend =
 		lastPercOk > percOk ? "+" : lastPercOk < percOk ? "-" : "=";
@@ -275,7 +275,7 @@ void ProductionSite::calc_statistics()
 			(m_statistics_buffer, sizeof(m_statistics_buffer),
 			 "%d%%",    percOk);
 
-	m_last_stat_percent = static_cast<char>(percOk); //FIXME: ARGH!
+	m_last_stat_percent = percOk;
 
 	m_statistics_changed = false;
 }
@@ -770,6 +770,7 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 		if (result == Completed)
 			for (uint32_t i = descr().nr_working_positions(); i;)
 				m_working_positions[--i].worker->gain_experience(game);
+		calc_statistics();
 		break;
 	case Skipped:
 		m_skipped_programs[program_name] = game.get_gametime();

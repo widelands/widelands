@@ -75,8 +75,13 @@ RealFSImpl::RealFSImpl(std::string const & Directory)
 	// TODO: check OS permissions on whether the directory is writable!
 #ifdef WIN32
 	m_root = Directory;
+	// Replace all slashes with backslashes for FileSystem::pathIsAbsolute
+	// and FileSystem::FS_CanonicalizeName to work properly.
+	for (uint32_t j = 0; j < m_root.size(); ++j) {
+		if (m_root[j] == '/')
+			m_root[j] = '\\';
+	}
 #else
-	m_root = "";
 	m_root = FS_CanonicalizeName(Directory);
 #endif
 }
@@ -86,10 +91,8 @@ RealFSImpl::RealFSImpl(std::string const & Directory)
  * Return true if this directory is writable.
  */
 bool RealFSImpl::IsWritable() const {
-	return true; // should be checked in constructor
-
-	//fweber: no, should be checked here, because the ondisk state might have
-	//changed since then
+	// Should be checked here (ondisk state can change)
+	return true;
 }
 
 /**
@@ -294,23 +297,27 @@ void RealFSImpl::m_unlink_directory(std::string const & file) {
  * Create this directory if it doesn't exist, throws an error
  * if the dir can't be created or if a file with this name exists
  */
-void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
-	FileSystemPath fspath(FS_CanonicalizeName(dirname));
-	if (fspath.m_exists and fspath.m_isDirectory)
-		return; //  ok, dir is already there
+void RealFSImpl::EnsureDirectoryExists(std::string const & dirname)
+{
 	try {
-		MakeDirectory(dirname);
-	} catch (DirectoryCannotCreate_error const & e) {
-		// need more work to do it right
-		//  iterate through all possible directories
-		size_t it = 0;
-		while (it != dirname.size() && it != std::string::npos) {
+		std::string::size_type it = 0;
+		while (it < dirname.size()) {
 			it = dirname.find('/', it);
-			EnsureDirectoryExists(dirname.substr(0, it));
-			++it; //make sure we don't keep finding the same directories
+
+			FileSystemPath fspath(FS_CanonicalizeName(dirname.substr(0, it)));
+			if (fspath.m_exists and !fspath.m_isDirectory)
+				throw wexception
+					("%s exists and is not a directory",
+					dirname.substr(0, it).c_str());
+			if (!fspath.m_exists)
+				MakeDirectory(dirname.substr(0, it));
+
+			if (it == std::string::npos)
+				break;
+			++it;
 		}
-	} catch (_wexception const & e) {
-		throw wexception ("RealFSImpl::EnsureDirectory"); //, e.what());
+	} catch (const std::exception & e) {
+		throw wexception("RealFSImpl::EnsureDirectoryExists(%s): %s", dirname.c_str(), e.what());
 	}
 }
 
@@ -338,8 +345,9 @@ void RealFSImpl::MakeDirectory(std::string const & dirname) {
 		 ==
 		 -1)
 		throw DirectoryCannotCreate_error
-			("could not create directory %s: %s",
-			 dirname.c_str(), strerror(errno));
+			("RealFSImpl::MakeDirectory",
+			 dirname,
+			 strerror(errno));
 }
 
 /**

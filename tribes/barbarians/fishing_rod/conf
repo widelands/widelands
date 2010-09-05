@@ -2,4 +2,4 @@ help=_Fishing rods are needed by barbarian fishers for fishing.
 
 [idle]
 pics=idle.png
-hotspot=8 11
+hotspot=4 5

@@ -26,10 +26,12 @@
 namespace Widelands {
 
 Item_Ware_Descr::Item_Ware_Descr
-	(char const * const _name, char const * const _descname,
+	(const Tribe_Descr & tribe, char const * const _name,
+	 char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s)
 	:
 	Map_Object_Descr(_name, _descname),
+	m_tribe(tribe),
 	m_helptext      (global_s.get_string("help", "")),
 	m_icon_fname(directory + "/menu.png"),
 	m_icon(g_gr->get_picture(PicMod_UI, "pics/but0.png"))

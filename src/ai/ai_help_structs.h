@@ -24,7 +24,9 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "logic/findnode.h"
+#include "logic/game.h"
 #include "logic/map.h"
+#include "logic/player.h"
 
 #include <list>
 
@@ -54,18 +56,22 @@ struct CheckStepRoadAI {
 struct FindNodeUnowned {
 	bool accept (const Map &, const FCoords & fc) const {
 		// when looking for unowned terrain to acquire, we are actually
-		// only interested in fields we can walk on
+		// only interested in fields we can walk on.
+		// Fields should either be completely unowned or owned by an opposing player
 		return
 			fc.field->nodecaps() & MOVECAPS_WALK
-			&& fc.field->get_owned_by() != playernum
+			&& ((fc.field->get_owned_by() == 0) 
+				 || player->is_hostile(*game.get_player(fc.field->get_owned_by())))
 			&& (!onlyenemies || (fc.field->get_owned_by() != 0));
 	}
 
-	int8_t playernum;
+	//int8_t playernum;
+	Player * player;
+	Game & game;
 	bool onlyenemies;
 
-	FindNodeUnowned(int8_t pn, bool oe = false)
-		: playernum(pn), onlyenemies(oe)
+	FindNodeUnowned(Player * p, Game & g, bool oe = false)
+		: player(p), game(g), onlyenemies(oe)
 	{}
 };
 
@@ -123,6 +129,16 @@ struct WalkableSpot {
 
 }
 
+struct BlockedField {
+	Widelands::FCoords coords;
+	int32_t blocked_until;
+
+	BlockedField(Widelands::FCoords c, int32_t until)
+		:
+		coords(c),
+		blocked_until(until)
+	{}
+};
 
 struct BuildableField {
 	Widelands::FCoords coords;
@@ -138,9 +154,8 @@ struct BuildableField {
 
 	uint8_t trees_nearby;
 	uint8_t stones_nearby;
-	uint8_t tree_consumers_nearby;
-	uint8_t stone_consumers_nearby;
 	uint8_t water_nearby;
+	uint8_t space_consumers_nearby;
 
 	int16_t military_influence;
 
@@ -180,9 +195,11 @@ struct EconomyObserver {
 	Widelands::Economy               & economy;
 	std::list<Widelands::Flag const *> flags;
 	int32_t                            next_connection_try;
+	uint32_t                           failed_connection_tries;
 
 	EconomyObserver (Widelands::Economy & e) : economy(e) {
 		next_connection_try = 0;
+		failed_connection_tries = 0;
 	}
 };
 
@@ -210,8 +227,9 @@ struct BuildingObserver {
 	bool                              need_trees;  // lumberjack = true
 	bool                              need_stones; // quarry = true
 	bool                              need_water;  // fisher, fish_breeder = true
+	bool                              space_consumer; // farm, vineyard... = true
 
-	bool                              unoccupied;  // >= 1 unoccupied ?
+	bool                              unoccupied;  // >= 1 building unoccupied ?
 
 	int32_t                           mines;       // type of resource it mines
 	uint16_t                          mines_percent; // % of res it can mine
@@ -226,10 +244,16 @@ struct BuildingObserver {
 	int32_t                           cnt_under_construction;
 
 	int32_t total_count() const {return cnt_built + cnt_under_construction;}
+	bool buildable(Widelands::Player * player) {
+		return is_buildable && player->is_building_type_allowed(id);
+	}
+	
 };
 
 struct ProductionSiteObserver {
 	Widelands::ProductionSite * site;
+	int32_t builttime;
+	uint8_t statszero;
 	BuildingObserver * bo;
 };
 

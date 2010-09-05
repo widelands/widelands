@@ -23,7 +23,7 @@
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "game_chat_menu.h"
 #include "game_debug_ui.h"
 #include "gamecontroller.h"
@@ -72,7 +72,9 @@ Interactive_Base::Interactive_Base
 	:
 	Map_View(0, 0, 0, get_xres(), get_yres(), *this),
 	m_show_workarea_preview(global_s.get_bool("workareapreview", false)),
-	m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, get_w(), get_h()))),
+	m
+		(new InteractiveBaseInternals
+		 (new QuickNavigation(the_egbase, get_w(), get_h()))),
 	m_egbase                      (the_egbase),
 #ifdef DEBUG //  not in releases
 	m_display_flags               (dfDebug),
@@ -90,8 +92,12 @@ Interactive_Base::Interactive_Base
 	m_label_speed
 		(this, get_w(), 0, std::string(), UI::Align_TopRight)
 {
-	m->quicknavigation->set_setview(boost::bind(&Map_View::set_viewpoint, this, _1, true));
-	set_changeview(boost::bind(&QuickNavigation::view_changed, m->quicknavigation.get(), _1, _2));
+	m_toolbar.set_layout_toplevel(true);
+	m->quicknavigation->set_setview
+		(boost::bind(&Map_View::set_viewpoint, this, _1, true));
+	set_changeview
+		(boost::bind(&QuickNavigation::view_changed,
+		 m->quicknavigation.get(), _1, _2));
 
 	changeview.set(this, &Interactive_Base::mainview_move);
 
@@ -107,12 +113,11 @@ Interactive_Base::Interactive_Base
 		(get_xres(), get_yres(),
 		 global_s.get_int("depth", 16),
 		 global_s.get_bool("fullscreen", false),
-		 global_s.get_bool("hw_improvements", false),
-		 global_s.get_bool("double_buffer", false)
-#if HAS_OPENGL
-		 /**/, global_s.get_bool("opengl", false)
+#if USE_OPENGL
+		 global_s.get_bool("opengl", false));
+#else
+		 false);
 #endif
-		 /**/);
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
@@ -121,7 +126,8 @@ Interactive_Base::Interactive_Base
 	m_label_speed.set_visible(false);
 
 	setDefaultCommand (boost::bind(&Interactive_Base::cmdLua, this, _1));
-	addCommand("mapobject", boost::bind(&Interactive_Base::cmdMapObject, this, _1));
+	addCommand
+		("mapobject", boost::bind(&Interactive_Base::cmdMapObject, this, _1));
 }
 
 
@@ -172,13 +178,15 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 				if (upcast(Interactive_Player const, iplayer, igbase)) {
 					Widelands::Player const & player = iplayer->player();
 					if
-						(not
-						 (player.see_all() or
-						  1
-						  <
-						  player.vision
-						  	(Widelands::Map::get_index
-						  	 	(center.node, map.get_width()))))
+						(not player.see_all()
+						 and
+						  (1
+						   >=
+						   player.vision
+							   (Widelands::Map::get_index
+								   (center.node, map.get_width()))
+						   or
+						   player.is_hostile(*productionsite->get_owner())))
 						return set_tooltip(0);
 				}
 				std::string const s =
@@ -885,8 +893,9 @@ void Interactive_Base::cmdLua(std::vector<std::string> const & args)
 	std::string cmd;
 
 	// Drop lua, start with the second word
-	for(wl_const_range<std::vector<std::string> >
-		i(args.begin(), args.end());;)
+	for
+		(wl_const_range<std::vector<std::string> >
+		 i(args.begin(), args.end());;)
 	{
 		cmd += i.front();
 		if (i.advance().empty())
@@ -918,7 +927,8 @@ void Interactive_Base::cmdMapObject(const std::vector<std::string>& args)
 	Map_Object * obj = egbase().objects().get_object(serial);
 
 	if (!obj) {
-		DebugConsole::write(str(format("No Map_Object with serial number %1%") % serial));
+		DebugConsole::write
+			(str(format("No Map_Object with serial number %1%") % serial));
 		return;
 	}
 

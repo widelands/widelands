@@ -19,16 +19,17 @@
 
 #include "table.h"
 
-#include <boost/bind.hpp>
-
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
+#include "graphic/surface.h"
+
 #include "button.h"
 #include "mouse_constants.h"
 #include "scrollbar.h"
 #include "wlapplication.h"
 
 #include "container_iterate.h"
+#include <boost/bind.hpp>
 
 namespace UI {
 
@@ -103,9 +104,13 @@ void Table<void *>::add_column
 		c.is_checkbox_column = is_checkbox_column;
 
 		if (is_checkbox_column) {
-			c.compare = boost::bind(&Table<void*>::default_compare_checkbox, this, m_columns.size(), _1, _2);
+			c.compare = boost::bind
+				(&Table<void *>::default_compare_checkbox,
+				 this, m_columns.size(), _1, _2);
 		} else {
-			c.compare = boost::bind(&Table<void*>::default_compare_string, this, m_columns.size(), _1, _2);
+			c.compare = boost::bind
+				(&Table<void *>::default_compare_string,
+				 this, m_columns.size(), _1, _2);
 		}
 
 		m_columns.push_back(c);
@@ -151,7 +156,8 @@ void Table<void *>::set_column_title
 /**
  * Set a custom comparison function for sorting of the given column.
  */
-void Table<void*>::set_column_compare(uint8_t col, const Table<void*>::CompareFn & fn)
+void Table<void *>::set_column_compare
+	(uint8_t col, const Table<void *>::CompareFn & fn)
 {
 	assert(col < m_columns.size());
 	Column & column = m_columns.at(col);
@@ -277,7 +283,11 @@ void Table<void *>::draw(RenderTarget & dst)
 					 0);
 			if (entry_picture != g_gr->get_no_picture())
 				dst.blit
-					(point + Point(0, (static_cast<int32_t>(lineheight) - static_cast<int32_t>(pich))/2),
+					(point + Point
+						(0,
+						 (static_cast<int32_t>(lineheight)
+						  - static_cast<int32_t>(pich))
+						 / 2),
 					 entry_picture);
 
 			UI::g_fh->draw_string
@@ -285,7 +295,11 @@ void Table<void *>::draw(RenderTarget & dst)
 				 m_fontname, m_fontsize,
 				 col,
 				 RGBColor(107, 87, 55),
-				 point + Point(picw, (static_cast<int32_t>(lineheight) - static_cast<int32_t>(stringh))/2),
+				 point + Point
+				 (picw,
+				  (static_cast<int32_t>(lineheight)
+				   - static_cast<int32_t>(stringh))
+				  / 2),
 				 entry_string, alignment);
 
 			curx += curw;
@@ -436,7 +450,7 @@ void Table<void *>::remove(const uint32_t i) {
 		 (get_h() - m_headerheight - 2));
 }
 
-bool Table<void*>::sort_helper(uint32_t a, uint32_t b)
+bool Table<void *>::sort_helper(uint32_t a, uint32_t b)
 {
 	if (m_sort_descending)
 		return m_columns[m_sort_column].compare(b, a);
@@ -464,17 +478,17 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End)
 
 	indices.reserve(End - Begin);
 	copy.reserve(End - Begin);
-	for(uint32_t i = Begin; i < End; ++i) {
+	for (uint32_t i = Begin; i < End; ++i) {
 		indices.push_back(i);
 		copy.push_back(m_entry_records[i]);
 	}
 
 	std::stable_sort
 		(indices.begin(), indices.end(),
-		 boost::bind(&Table<void*>::sort_helper, this, _1, _2));
+		 boost::bind(&Table<void *>::sort_helper, this, _1, _2));
 
 	uint32_t newselection = m_selection;
-	for(uint32_t i = Begin; i < End; ++i) {
+	for (uint32_t i = Begin; i < End; ++i) {
 		uint32_t from = indices[i - Begin];
 		m_entry_records[i] = copy[from - Begin];
 		if (m_selection == from)
@@ -486,16 +500,19 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End)
 }
 
 /**
- * Default comparison for checkbox columns: checked items come before unchecked ones.
+ * Default comparison for checkbox columns:
+ * checked items come before unchecked ones.
  */
-bool Table<void*>::default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b)
+bool Table<void *>::default_compare_checkbox
+	(uint32_t column, uint32_t a, uint32_t b)
 {
 	Entry_Record & ea = get_record(a);
 	Entry_Record & eb = get_record(b);
 	return ea.is_checked(column) && !eb.is_checked(column);
 }
 
-bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b)
+bool Table<void *>::default_compare_string
+	(uint32_t column, uint32_t a, uint32_t b)
 {
 	Entry_Record & ea = get_record(a);
 	Entry_Record & eb = get_record(b);

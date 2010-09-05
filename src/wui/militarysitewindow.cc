@@ -58,7 +58,7 @@ Building_Window(parent, ms, registry)
 		 _("Soldiers"));
 }
 
-void MilitarySite_Window::create_capsbuttons(UI::Box* buttons)
+void MilitarySite_Window::create_capsbuttons(UI::Box * buttons)
 {
 	Building_Window::create_capsbuttons(buttons);
 

@@ -76,6 +76,8 @@ struct Game : public Editor_Game_Base {
 		std::vector< uint32_t > nr_civil_blds_lost;
 		std::vector< uint32_t > nr_civil_blds_defeated;
 		std::vector< uint32_t > miltary_strength;
+
+		std::vector< uint32_t > custom_statistic;
 	};
 	typedef std::vector<General_Stats> General_Stats_vector;
 

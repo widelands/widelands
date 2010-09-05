@@ -6,836 +6,92 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-04-10 17:20+0000\n"
-"Last-Translator: Juan Eduardo Riva <juaneduardoriva@gmail.com>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 20:54+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-11 04:09+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../../tribes/empire/advanced_lance/conf:1
-msgid "This is an advanced lance, with steel top."
-msgstr "Esta es una lanza mejorada, con punta de acero."
-
-#: ../../tribes/empire/arena/conf:13
-#: ../../tribes/empire/colosseum/conf:27
-#: ../../tribes/empire/trainingscamp/conf:38
-msgid "Sleep"
-msgstr "Dormir"
-
-#: ../../tribes/empire/arena/conf:14
-#: ../../tribes/empire/colosseum/conf:28
-msgid "Upgrade soldier evade 0"
-msgstr "Free-Range"
-
-#: ../../tribes/empire/arena/conf:15
-#: ../../tribes/empire/colosseum/conf:29
-msgid ""
-"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/meal/conf:1
+msgid "A real meal which satisfies all miners needs."
 msgstr ""
-"Mejora la escapada de nivel 0 del soldado (sólo por compatibilidad con "
-"antiguas partidas (build13))"
+"Una comida completa que satisface todas las necesidades de los mineros"
 
-#: ../../tribes/empire/armour/conf:1
-msgid "Basic armour for Empire soldiers."
-msgstr "Armadura simple para los soldados Imperiales."
+#: ../../tribes/empire/ration/conf:1
+msgid "A small bite to keep miners strong and working."
+msgstr "Un pequeño bocado para mantener a los mineros fuertes y trabajando."
 
-#: ../../tribes/empire/armoursmith/conf:1
-msgid "Produces armour for the soldiers."
-msgstr "Produce armaduras para los soldados"
+#: ../../tribes/empire/conf:50
+msgid "Advanced Lance"
+msgstr "Lanza mejorada"
 
-#: ../../tribes/empire/armoursmithy/conf:26
-msgid "Produce helm"
-msgstr "Fabricar casco"
+#: ../../tribes/empire/conf:135
+msgid "Arena"
+msgstr "Campo de batalla"
 
-#: ../../tribes/empire/armoursmithy/conf:27
-msgid "Produce armour"
-msgstr "Fabricar coraza"
+#: ../../tribes/empire/conf:51
+msgid "Armour"
+msgstr "Armadura"
 
-#: ../../tribes/empire/armoursmithy/conf:28
-msgid "Produce chain armour"
-msgstr "Fabricar coraza de anillas"
+#: ../../tribes/empire/conf:167
+msgid "Armour Smithy"
+msgstr "Herrería de armaduras"
 
-#: ../../tribes/empire/armoursmithy/conf:29
-msgid "Produce plate armour"
-msgstr "Fabricar armadura de placas"
+#: ../../tribes/empire/conf:103
+msgid "Armoursmith"
+msgstr "Herrería"
 
-#: ../../tribes/empire/armoursmithy/conf:30
-#: ../../tribes/empire/bakery/conf:20
-#: ../../tribes/empire/brewery/conf:20
-#: ../../tribes/empire/burners_house/conf:19
-#: ../../tribes/empire/coalmine/conf:21
-#: ../../tribes/empire/deep_coalmine/conf:22
-#: ../../tribes/empire/deep_goldmine/conf:22
-#: ../../tribes/empire/deep_marblemine/conf:23
-#: ../../tribes/empire/deep_oremine/conf:22
-#: ../../tribes/empire/donkeyfarm/conf:21
-#: ../../tribes/empire/farm/conf:19
-#: ../../tribes/empire/fishers_house/conf:17
-#: ../../tribes/empire/foresters_house/conf:15
-#: ../../tribes/empire/goldmine/conf:22
-#: ../../tribes/empire/hunters_house/conf:16
-#: ../../tribes/empire/inn/conf:20
-#: ../../tribes/empire/lumberjacks_house/conf:16
-#: ../../tribes/empire/marblemine/conf:26
-#: ../../tribes/empire/mill/conf:20
-#: ../../tribes/empire/oremine/conf:22
-#: ../../tribes/empire/piggery/conf:21
-#: ../../tribes/empire/quarry/conf:21
-#: ../../tribes/empire/sawmill/conf:20
-#: ../../tribes/empire/scouts_house/conf:17
-#: ../../tribes/empire/sheepfarm/conf:21
-#: ../../tribes/empire/smelting_works/conf:24
-#: ../../tribes/empire/stonemasons_house/conf:21
-#: ../../tribes/empire/tavern/conf:22
-#: ../../tribes/empire/toolsmithy/conf:45
-#: ../../tribes/empire/vineyard/conf:21
-#: ../../tribes/empire/weaponsmithy/conf:34
-#: ../../tribes/empire/weaving-mill/conf:16
-#: ../../tribes/empire/well/conf:16
-#: ../../tribes/empire/winery/conf:20
-msgid "Work"
-msgstr "Trabajar"
+#: ../../tribes/empire/conf:27
+msgid "Ashes"
+msgstr "Cenizas"
 
-#: ../../tribes/empire/axe/conf:1
-msgid ""
-"The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "El hacha es la herramienta del leñador. Es producida en la herrería."
+#: ../../tribes/empire/conf:52
+msgid "Axe"
+msgstr "Hacha"
+
+#: ../../tribes/empire/conf:104
+msgid "Baker"
+msgstr "Panadero"
+
+#: ../../tribes/empire/conf:168
+msgid "Bakery"
+msgstr "Panadería"
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
 msgstr "Hace pan para los obreros"
 
-#: ../../tribes/empire/bakingtray/conf:1
-msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
-"by the toolsmith."
-msgstr ""
-"La pala de hornear es la herramienta del panadero. Cada panadero necesita la "
-"suya. Es producida en la herrería."
-
-#: ../../tribes/empire/basket/conf:1
-msgid ""
-"This basket is needed by the winegrower, for harvesting the grapes. It is "
-"produced by the toolsmith."
-msgstr ""
-"El viticultor necesita este cesto para la recogida de uva. Es producida en "
-"la herrería."
-
-#: ../../tribes/empire/beer/conf:1
-msgid ""
-"Young soldiers and miners need some encouragement. This drink makes a man "
-"fearless and strong."
-msgstr ""
-"Los jóvenes soldados y mineros necesitan ser bravos. Esta bebida hace a los "
-"hombres fuertes y valientes."
-
-#: ../../tribes/empire/bread/conf:1
-msgid "The backers of the Empire make really tasty bread."
-msgstr "Los panaderos del Imperio preparan un pan realmente sabroso."
-
-#: ../../tribes/empire/brewer/conf:1
-msgid "Produces beer or wine."
-msgstr "Fabrica cerveza o vino."
-
-#: ../../tribes/empire/builder/conf:1
-msgid "Works at construction sites to create a new building."
-msgstr ""
-"Trabaja en las obras de construcción para construir un nuevo edificio."
-
-#: ../../tribes/empire/burner/conf:1
-msgid "Burns coal."
-msgstr "Quema carbón."
-
-#: ../../tribes/empire/carrier/conf:1
-msgid "Carries items along your roads."
-msgstr "Transporta objetos a lo largo de tus carreteras."
-
-#: ../../tribes/empire/chain_armour/conf:1
-msgid "This is a medium armour for Empire soldiers."
-msgstr "Esta es una armadura media para los soldados del Imperio."
-
-#: ../../tribes/empire/cloth/conf:1
-msgid ""
-"Cloth is needed for Empire ships and few bigger buildings. It is produced "
-"out of wool."
-msgstr ""
-"Se necesita tela para los barcos Imperiales y algunos grandes edificios. Se "
-"produce a partir de la lana."
-
-#: ../../tribes/empire/coal/conf:1
-msgid ""
-"The fires of the Empire are usually fed with wood, but sometimes, wood just "
-"does not burn hot enough. Then, coal is used."
-msgstr ""
-"Las hogueras del Imperio se alimentan habitualmente con madera pero, a "
-"veces, la madera no produce suficiente calor. En este caso se usa carbón."
-
-#: ../../tribes/empire/colosseum/conf:30
-msgid "Upgrade soldier evade 1"
-msgstr "Mejorar escapada de soldado 1"
-
-#: ../../tribes/empire/colosseum/conf:31
-msgid ""
-"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Mejora la escapada  de nivel 1 del soldado (sólo por compatibilidad con "
-"antiguas partidas (build13))"
-
-#: ../../tribes/empire/conf:18
-msgid "The Widelands Development Team"
-msgstr "El Equipo de Desarrollo de Widelands"
-
-#: ../../tribes/empire/conf:19
-msgid "Empire"
-msgstr "Imperio"
-
-#: ../../tribes/empire/conf:20
-msgid "This is the culture of the roman Empire."
-msgstr "Esta es la cultura del Imperio Romano"
-
-#: ../../tribes/empire/conf:39
-msgid "Ashes"
-msgstr "Cenizas"
-
-#: ../../tribes/empire/conf:40
-msgid "Field medium"
-msgstr "Campo a medio crecer"
-
-#: ../../tribes/empire/conf:41
-msgid "Field small"
-msgstr "Campo empezando a crecer"
-
-#: ../../tribes/empire/conf:42
-msgid "Field tiny"
-msgstr "Campo recién plantado"
-
-#: ../../tribes/empire/conf:43
-msgid "Field ripe"
-msgstr "Campo maduro"
-
-#: ../../tribes/empire/conf:44
-msgid "Field harvested"
-msgstr "Campo cosechado"
-
-#: ../../tribes/empire/conf:45
-msgid "Destroyed building"
-msgstr "Edificio destruido"
-
-#: ../../tribes/empire/conf:46
-msgid "Resource indicator coal little"
-msgstr "Indicador recurso poco carbón"
-
-#: ../../tribes/empire/conf:47
-msgid "Resource indicator coal much"
-msgstr "Indicador recurso mucho carbón"
-
-#: ../../tribes/empire/conf:48
-msgid "Resource indicator gold little"
-msgstr "Indicador recurso poco oro"
-
-#: ../../tribes/empire/conf:49
-msgid "Resource indicator gold much"
-msgstr "Indicador recurso mucho oro"
-
-#: ../../tribes/empire/conf:50
-msgid "Resource indicator granit little"
-msgstr "Indicador recurso poco granito"
-
-#: ../../tribes/empire/conf:51
-msgid "Resource indicator granit much"
-msgstr "Indicador recurso mucho granito"
-
-#: ../../tribes/empire/conf:52
-msgid "Resource indicator iron little"
-msgstr "Indicador recurso poco hierro"
-
-#: ../../tribes/empire/conf:53
-msgid "Resource indicator iron much"
-msgstr "Indicador recurso mucho hierro"
-
-#: ../../tribes/empire/conf:54
-msgid "Resource indicator no resource"
-msgstr "Indicador recurso vacío"
-
-#: ../../tribes/empire/conf:55
-msgid "Resource indicator water"
-msgstr "Indicador recurso agua"
-
-#: ../../tribes/empire/conf:56
-msgid "Vine medium"
-msgstr "Parra mediana"
-
-#: ../../tribes/empire/conf:57
-msgid "Vine small"
-msgstr "Parra pequeña"
-
-#: ../../tribes/empire/conf:58
-msgid "Vine tiny"
-msgstr "Parra diminuta"
-
-#: ../../tribes/empire/conf:59
-msgid "Vine ripe"
-msgstr "Parra madura"
-
-#: ../../tribes/empire/conf:62
-msgid "Advanced Lance"
-msgstr "Lanza mejorada"
-
-#: ../../tribes/empire/conf:63
-msgid "Armour"
-msgstr "Armadura"
-
-#: ../../tribes/empire/conf:64
-msgid "Axe"
-msgstr "Hacha"
-
-#: ../../tribes/empire/conf:65
-msgid "Peel"
-msgstr "Pala"
-
-#: ../../tribes/empire/conf:66
-msgid "Basket"
-msgstr "Cesta"
-
-#: ../../tribes/empire/conf:67
-msgid "Beer"
-msgstr "Cerveza"
-
-#: ../../tribes/empire/conf:68
-msgid "Bread"
-msgstr "Pan"
-
-#: ../../tribes/empire/conf:69
-msgid "Chain-Armour"
-msgstr "Cota de malla"
-
-#: ../../tribes/empire/conf:70
-msgid "Cloth"
-msgstr "Tela"
-
-#: ../../tribes/empire/conf:71
-msgid "Coal"
-msgstr "Carbón"
-
-#: ../../tribes/empire/conf:72
-msgid "Fire Tongs"
-msgstr "Tenazas"
-
-#: ../../tribes/empire/conf:73
-msgid "Fish"
-msgstr "Pescado"
-
-#: ../../tribes/empire/conf:74
-msgid "Fishing Rod"
-msgstr "Caña de pescar"
-
-#: ../../tribes/empire/conf:75
-msgid "Flour"
-msgstr "Harina"
-
-#: ../../tribes/empire/conf:76
-msgid "Gold"
-msgstr "Oro"
-
-#: ../../tribes/empire/conf:77
-msgid "Goldstone"
-msgstr "Oro"
-
-#: ../../tribes/empire/conf:78
-msgid "Grape"
-msgstr "Uva"
-
-#: ../../tribes/empire/conf:79
-msgid "Hammer"
-msgstr "Martillo"
-
-#: ../../tribes/empire/conf:80
-msgid "Heavy Lance"
-msgstr "Lanza pesada"
-
-#: ../../tribes/empire/conf:81
-msgid "Helmet"
-msgstr "Casco"
-
-#: ../../tribes/empire/conf:82
-msgid "Hunting Spear"
-msgstr "Lanza de caza"
-
-#: ../../tribes/empire/conf:83
-msgid "Iron"
-msgstr "Hierro"
-
-#: ../../tribes/empire/conf:84
-msgid "Iron Ore"
-msgstr "Mineral de hierro"
-
-#: ../../tribes/empire/conf:85
-msgid "Kitchen Tools"
-msgstr "Utensilios de cocina"
-
-#: ../../tribes/empire/conf:86
-msgid "Lance"
-msgstr "Lanza"
-
-#: ../../tribes/empire/conf:87
-msgid "Marble Column"
-msgstr "Columna de marmol"
-
-#: ../../tribes/empire/conf:88
-msgid "Marble"
-msgstr "Mármol"
-
-#: ../../tribes/empire/conf:89
-msgid "Meal"
-msgstr "Comida"
-
-#: ../../tribes/empire/conf:90
-msgid "Meat"
-msgstr "Carne"
-
-#: ../../tribes/empire/conf:91
-msgid "Pick"
-msgstr "Pico"
-
-#: ../../tribes/empire/conf:92
-msgid "Plate-Armour"
-msgstr "Coraza"
-
-#: ../../tribes/empire/conf:93
-msgid "Ration"
-msgstr "Ración"
-
-#: ../../tribes/empire/conf:94
-msgid "Saw"
-msgstr "Sierra"
-
-#: ../../tribes/empire/conf:95
-msgid "Scythe"
-msgstr "Guadaña"
-
-#: ../../tribes/empire/conf:96
-msgid "Shovel"
-msgstr "Pala"
-
-#: ../../tribes/empire/conf:97
-msgid "Stones"
-msgstr "Piedras"
-
-#: ../../tribes/empire/conf:98
-msgid "Trunk"
-msgstr "Tronco"
-
-#: ../../tribes/empire/conf:99
-msgid "War-Lance"
-msgstr "Lanza de Guerra"
-
-#: ../../tribes/empire/conf:100
-msgid "Water"
-msgstr "Agua"
-
-#: ../../tribes/empire/conf:101
-msgid "Wheat"
-msgstr "Trigo"
-
-#: ../../tribes/empire/conf:102
-msgid "Wine"
-msgstr "Vino"
-
-#: ../../tribes/empire/conf:103
-msgid "Wood"
-msgstr "Madera"
-
-#: ../../tribes/empire/conf:104
-msgid "Wood Lance"
-msgstr "Lanza de madera"
-
-#: ../../tribes/empire/conf:105
-msgid "Wool"
-msgstr "Lana"
-
-#: ../../tribes/empire/conf:108
-msgid "Carrier"
-msgstr "Porteador"
-
-#: ../../tribes/empire/conf:109
-msgid "Donkey"
-msgstr "Burro"
-
-#: ../../tribes/empire/conf:112
-msgid "Soldier"
-msgstr "Soldado"
-
-#: ../../tribes/empire/conf:115
-msgid "Armoursmith"
-msgstr "Herrería"
-
-#: ../../tribes/empire/conf:116
-msgid "Baker"
-msgstr "Panadero"
-
-#: ../../tribes/empire/conf:117
-msgid "Brewer"
-msgstr "Bodeguero"
-
-#: ../../tribes/empire/conf:118
-msgid "Builder"
-msgstr "Constructor"
-
-#: ../../tribes/empire/conf:119
-msgid "Burner"
-msgstr "Hornero"
-
-#: ../../tribes/empire/conf:120
-msgid "Farmer"
-msgstr "Granjero"
-
-#: ../../tribes/empire/conf:121
-msgid "Fisher"
-msgstr "Pescador"
-
-#: ../../tribes/empire/conf:122
-msgid "Forester"
-msgstr "Guardabosques"
-
-#: ../../tribes/empire/conf:123
-msgid "Geologist"
-msgstr "Geólogo"
-
-#: ../../tribes/empire/conf:124
-msgid "Hunter"
-msgstr "Cazador"
-
-#: ../../tribes/empire/conf:125
-msgid "Innkeeper"
-msgstr "Posadero"
-
-#: ../../tribes/empire/conf:126
-msgid "Lumberjack"
-msgstr "Leñador"
-
-#: ../../tribes/empire/conf:127
-msgid "Master Miner"
-msgstr "Maestro minero"
-
-#: ../../tribes/empire/conf:128
-msgid "Miller"
-msgstr "Molinero"
-
-#: ../../tribes/empire/conf:129
-msgid "Miner"
-msgstr "Minero"
-
-#: ../../tribes/empire/conf:130
-msgid "Pig Breeder"
-msgstr "Porquero"
-
-#: ../../tribes/empire/conf:131
-msgid "Shepherd"
-msgstr "Pastor"
-
-#: ../../tribes/empire/conf:132
-msgid "Smelter"
-msgstr "Forjador"
-
-#: ../../tribes/empire/conf:133
-msgid "Stonemason"
-msgstr "Cantero"
-
-#: ../../tribes/empire/conf:134
-msgid "Toolsmith"
-msgstr "Herrería"
-
-#: ../../tribes/empire/conf:135
-msgid "Trainer"
-msgstr "Entrenador"
-
-#: ../../tribes/empire/conf:136
-msgid "Weaponsmith"
-msgstr "Armería"
-
-#: ../../tribes/empire/conf:137
-msgid "Weaver"
-msgstr "Tejedor"
-
-#: ../../tribes/empire/conf:138
-msgid "Vine Farmer"
-msgstr "Vendimiador"
-
-#: ../../tribes/empire/conf:139
-msgid "Scout"
-msgstr "Explorador"
-
 #: ../../tribes/empire/conf:140
-msgid "Donkey Breeder"
-msgstr "Criador de burros"
-
-#: ../../tribes/empire/conf:143
-msgid "Construction Site"
-msgstr "Construcción"
-
-#: ../../tribes/empire/conf:146
-msgid "Colosseum"
-msgstr "Coliseo"
-
-#: ../../tribes/empire/conf:147
-msgid "Arena"
-msgstr "Campo de batalla"
-
-#: ../../tribes/empire/conf:148
-msgid "Trainingscamp"
-msgstr "Campo de entrenamiento"
-
-#: ../../tribes/empire/conf:151
-#: ../../tribes/empire/conf:170
-msgid "Sentry"
-msgstr "Centinela"
-
-#: ../../tribes/empire/conf:152
 msgid "Barracks"
 msgstr "Cuartel"
 
-#: ../../tribes/empire/conf:153
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:141
+#: ../../tribes/empire/conf:154
 msgid "Barrier"
 msgstr "Muralla"
 
-#: ../../tribes/empire/conf:154
-#: ../../tribes/empire/conf:160
-msgid "Castle"
-msgstr "Castillo"
+#: ../../tribes/empire/armour/conf:1
+msgid "Basic armour for Empire soldiers."
+msgstr "Armadura simple para los soldados Imperiales."
 
-#: ../../tribes/empire/conf:155
-#: ../../tribes/empire/conf:169
-msgid "Fortress"
-msgstr "Fortaleza"
+#: ../../tribes/empire/helm/conf:1
+msgid "Basic defence of a warrior"
+msgstr "Defensa básica de un guerrero"
 
-#: ../../tribes/empire/conf:156
-msgid "Outpost"
-msgstr "Avanzadilla"
+#: ../../tribes/empire/conf:54
+msgid "Basket"
+msgstr "Cesta"
 
-#: ../../tribes/empire/conf:157
-#: ../../tribes/empire/conf:165
-msgid "Tower"
-msgstr "Torre"
-
-#: ../../tribes/empire/conf:161
-msgid "Guardhall"
-msgstr "Cuartel"
-
-#: ../../tribes/empire/conf:162
-msgid "Guardhouse"
-msgstr "Casa de guardia"
-
-#: ../../tribes/empire/conf:163
-msgid "High Tower"
-msgstr "Torre Alta"
-
-#: ../../tribes/empire/conf:164
-msgid "Small Tower"
-msgstr "Torre pequeña"
-
-#: ../../tribes/empire/conf:167
-msgid "Citadel"
-msgstr "Ciudadela"
-
-#: ../../tribes/empire/conf:168
-msgid "Donjon"
-msgstr "Torre"
-
-#: ../../tribes/empire/conf:171
-msgid "Stronghold"
-msgstr "Cuartel"
-
-#: ../../tribes/empire/conf:174
-msgid "Headquarters"
-msgstr "Cuartel general"
-
-#: ../../tribes/empire/conf:175
-msgid "Headquarters shipwreck"
-msgstr "Cuartel general naufragio"
-
-#: ../../tribes/empire/conf:176
-msgid "Warehouse"
-msgstr "Almacén"
-
-#: ../../tribes/empire/conf:179
-msgid "Armour Smithy"
-msgstr "Herrería de armaduras"
-
-#: ../../tribes/empire/conf:180
-msgid "Bakery"
-msgstr "Panadería"
-
-#: ../../tribes/empire/conf:181
-msgid "Brewery"
-msgstr "Cervecería"
-
-#: ../../tribes/empire/conf:182
-msgid "Charcoal Burner"
-msgstr "Quemador de turba"
-
-#: ../../tribes/empire/conf:183
-msgid "Deep Coal Mine"
-msgstr "Mina de carbón profunda"
-
-#: ../../tribes/empire/conf:184
-msgid "Coal Mine"
-msgstr "Mina de carbón"
-
-#: ../../tribes/empire/conf:185
-msgid "Deep Gold Mine"
-msgstr "Mina de oro profunda"
-
-#: ../../tribes/empire/conf:186
-msgid "Deep Marble Mine"
-msgstr "Gran cantera de mármol"
-
-#: ../../tribes/empire/conf:187
-msgid "Deep Iron Ore Mine"
-msgstr "Mina de hierro profunda"
-
-#: ../../tribes/empire/conf:188
-msgid "Farm"
-msgstr "Granja"
-
-#: ../../tribes/empire/conf:189
-msgid "Fisher's House"
-msgstr "Casa de pescador"
-
-#: ../../tribes/empire/conf:190
-msgid "Forester's House"
-msgstr "Casa de silvicultor"
-
-#: ../../tribes/empire/conf:191
-msgid "Gold Mine"
-msgstr "Mina de oro"
-
-#: ../../tribes/empire/conf:192
-msgid "Hunter's House"
-msgstr "Casa de cazador"
-
-#: ../../tribes/empire/conf:193
-msgid "Inn"
-msgstr "Posada"
-
-#: ../../tribes/empire/conf:194
-msgid "Lumberjack's House"
-msgstr "Casa de leñador"
-
-#: ../../tribes/empire/conf:195
-msgid "Marble Mine"
-msgstr "Cantera de mármol"
-
-#: ../../tribes/empire/conf:196
-msgid "Mill"
-msgstr "Molino"
-
-#: ../../tribes/empire/conf:197
-msgid "Iron Ore Mine"
-msgstr "Mina de hierro"
-
-#: ../../tribes/empire/conf:198
-msgid "Piggery"
-msgstr "Pocilga"
-
-#: ../../tribes/empire/conf:199
-msgid "Quarry"
-msgstr "Cantera"
-
-#: ../../tribes/empire/conf:200
-msgid "Sawmill"
-msgstr "Aserradero"
-
-#: ../../tribes/empire/conf:201
-msgid "Sheepfarm"
-msgstr "Corral"
-
-#: ../../tribes/empire/conf:202
-msgid "Smelting Works"
-msgstr "Forja"
-
-#: ../../tribes/empire/conf:203
-msgid "Stonemason's House"
-msgstr "Casa de cantero"
-
-#: ../../tribes/empire/conf:204
-msgid "Tavern"
-msgstr "Taberna"
-
-#: ../../tribes/empire/conf:205
-msgid "Toolsmithy"
-msgstr "Herrería"
-
-#: ../../tribes/empire/conf:206
-msgid "Weapon Smithy"
-msgstr "Armería"
-
-#: ../../tribes/empire/conf:207
-msgid "Weaving Mill"
-msgstr "Telar"
-
-#: ../../tribes/empire/conf:208
-msgid "Well"
-msgstr "Pozo"
-
-#: ../../tribes/empire/conf:209
-msgid "Winery"
-msgstr "Bodega"
-
-#: ../../tribes/empire/conf:210
-msgid "Vineyard"
-msgstr "Viñedo"
-
-#: ../../tribes/empire/conf:211
-msgid "Scout's House"
-msgstr "Casa de explorador"
-
-#: ../../tribes/empire/conf:212
-msgid "Donkeyfarm"
-msgstr "Establo"
-
-#: ../../tribes/empire/conf:215
-msgid "Headquarters medium"
-msgstr "Cuartel general mediano"
-
-#: ../../tribes/empire/conf:216
-msgid "Castle village"
-msgstr "Pueblo del Castillo"
-
-#: ../../tribes/empire/donkey/conf:1
-msgid "Helps to carry items at heavy used roads."
-msgstr "Ayuda al transporte en caminos muy concurridos."
-
-#: ../../tribes/empire/donkeybreeder/conf:1
-msgid "Breeds cute and helpful donkeys"
-msgstr "Cría a los preciados y útiles burros"
-
-#: ../../tribes/empire/farm/conf:15
-msgid "Plant wheat"
-msgstr "Plantar trigo"
-
-#: ../../tribes/empire/farm/conf:17
-msgid "Harvest wheat"
-msgstr "Cosechar trigo"
-
-#: ../../tribes/empire/farmer/conf:2
-msgid "Plants fields."
-msgstr "Planta campos."
-
-#: ../../tribes/empire/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"Las tenazas son las herramientas del forjador, trabajando en la forja. Las "
-"fabrica el herrero."
+#: ../../tribes/empire/conf:55
+msgid "Beer"
+msgstr "Cerveza"
 
 #: ../../tribes/empire/fish/conf:1
 msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
@@ -843,9 +99,199 @@ msgstr ""
 "Junto a la carne y el pan, el pescado también es una fuente de comida para "
 "el Imperio."
 
-#: ../../tribes/empire/fisher/conf:1
-msgid "Gets fish out of the sea."
-msgstr "Saca los peces del mar."
+#: ../../tribes/empire/conf:56
+msgid "Bread"
+msgstr "Pan"
+
+#: ../../tribes/empire/donkeybreeder/conf:1
+msgid "Breeds cute and helpful donkeys"
+msgstr "Cría a los preciados y útiles burros"
+
+#: ../../tribes/empire/pig-breeder/conf:1
+msgid "Breeds pigs."
+msgstr "Cría cerdos."
+
+#: ../../tribes/empire/conf:105
+msgid "Brewer"
+msgstr "Bodeguero"
+
+#: ../../tribes/empire/conf:169
+msgid "Brewery"
+msgstr "Cervecería"
+
+#: ../../tribes/empire/conf:106
+msgid "Builder"
+msgstr "Constructor"
+
+#: ../../tribes/empire/conf:107
+msgid "Burner"
+msgstr "Hornero"
+
+#: ../../tribes/empire/burner/conf:1
+msgid "Burns coal."
+msgstr "Quema carbón."
+
+#: ../../tribes/empire/conf:96
+msgid "Carrier"
+msgstr "Porteador"
+
+#: ../../tribes/empire/carrier/conf:1
+msgid "Carries items along your roads."
+msgstr "Transporta objetos a lo largo de tus carreteras."
+
+#: ../../tribes/empire/conf:142
+#: ../../tribes/empire/conf:148
+msgid "Castle"
+msgstr "Castillo"
+
+#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
+msgid "Castle village"
+msgstr "Pueblo del Castillo"
+
+#: ../../tribes/empire/conf:57
+msgid "Chain-Armour"
+msgstr "Cota de malla"
+
+#: ../../tribes/empire/conf:170
+msgid "Charcoal Burner"
+msgstr "Quemador de turba"
+
+#: ../../tribes/empire/conf:155
+msgid "Citadel"
+msgstr "Ciudadela"
+
+#: ../../tribes/empire/conf:58
+msgid "Cloth"
+msgstr "Tela"
+
+#: ../../tribes/empire/cloth/conf:1
+msgid ""
+"Cloth is needed for Empire ships and a few bigger buildings. It is produced "
+"out of wool."
+msgstr ""
+"La tela se necesita para fabricar los barcos del Impero y algunos edificios "
+"más grandes. Se produce a partir de la lana."
+
+#: ../../tribes/empire/conf:59
+msgid "Coal"
+msgstr "Carbón"
+
+#: ../../tribes/empire/conf:172
+msgid "Coal Mine"
+msgstr "Mina de carbón"
+
+#: ../../tribes/empire/conf:134
+msgid "Colosseum"
+msgstr "Coliseo"
+
+#: ../../tribes/empire/conf:131
+msgid "Construction Site"
+msgstr "Construcción"
+
+#: ../../tribes/empire/stonemason/conf:1
+msgid "Cuts raw pieces of granite and marble out of laying stones."
+msgstr "Corta trozos de granito y mármol de piedras sueltas"
+
+#: ../../tribes/empire/conf:171
+msgid "Deep Coal Mine"
+msgstr "Mina de carbón profunda"
+
+#: ../../tribes/empire/conf:173
+msgid "Deep Gold Mine"
+msgstr "Mina de oro profunda"
+
+#: ../../tribes/empire/conf:175
+msgid "Deep Iron Ore Mine"
+msgstr "Mina de hierro profunda"
+
+#: ../../tribes/empire/conf:174
+msgid "Deep Marble Mine"
+msgstr "Gran cantera de mármol"
+
+#: ../../tribes/empire/soldier/conf:1
+msgid "Defend and Conquer!"
+msgstr "¡Defender y conquistar!"
+
+#: ../../tribes/empire/conf:33
+msgid "Destroyed building"
+msgstr "Edificio destruido"
+
+#: ../../tribes/empire/geologist/conf:1
+msgid "Discovers resources for mining."
+msgstr "Descubre recursos para la minería."
+
+#: ../../tribes/empire/conf:156
+msgid "Donjon"
+msgstr "Torre"
+
+#: ../../tribes/empire/conf:97
+msgid "Donkey"
+msgstr "Burro"
+
+#: ../../tribes/empire/conf:128
+msgid "Donkey Breeder"
+msgstr "Criador de burros"
+
+#: ../../tribes/empire/conf:200
+msgid "Donkeyfarm"
+msgstr "Establo"
+
+#: ../../tribes/empire/conf:5
+msgid "Empire"
+msgstr "Imperio"
+
+#: ../../tribes/empire/conf:176
+msgid "Farm"
+msgstr "Granja"
+
+#: ../../tribes/empire/conf:108
+msgid "Farmer"
+msgstr "Granjero"
+
+#: ../../tribes/empire/lumberjack/conf:1
+msgid "Fells trees."
+msgstr "Derriba arboles."
+
+#: ../../tribes/empire/conf:32
+msgid "Field harvested"
+msgstr "Campo cosechado"
+
+#: ../../tribes/empire/conf:28
+msgid "Field medium"
+msgstr "Campo a medio crecer"
+
+#: ../../tribes/empire/conf:31
+msgid "Field ripe"
+msgstr "Campo maduro"
+
+#: ../../tribes/empire/conf:29
+msgid "Field small"
+msgstr "Campo empezando a crecer"
+
+#: ../../tribes/empire/conf:30
+msgid "Field tiny"
+msgstr "Campo recién plantado"
+
+#: ../../tribes/empire/conf:60
+msgid "Fire Tongs"
+msgstr "Tenazas"
+
+#: ../../tribes/empire/conf:61
+msgid "Fish"
+msgstr "Pescado"
+
+#: ../../tribes/empire/conf:109
+msgid "Fisher"
+msgstr "Pescador"
+
+#: ../../tribes/empire/conf:177
+msgid "Fisher's House"
+msgstr "Casa de pescador"
+
+#: ../../tribes/empire/conf:62
+msgid "Fishing Rod"
+msgstr "Caña de pescar"
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
@@ -854,6 +300,10 @@ msgstr ""
 "Las cañas de pescar las necesitan los pescadores, para obtener pescado. "
 "Fabricadas por los carpinteros."
 
+#: ../../tribes/empire/conf:63
+msgid "Flour"
+msgstr "Harina"
+
 #: ../../tribes/empire/flour/conf:1
 msgid ""
 "Flour is produced out of wheat and is needed for the tasty Empire bread."
@@ -861,13 +311,34 @@ msgstr ""
 "La harina se obtiene a partir del trigo, y es imprescindible para preparar "
 "el sabroso pan."
 
-#: ../../tribes/empire/forester/conf:1
-msgid "Plants trees."
-msgstr "Planta árboles."
+#: ../../tribes/empire/conf:110
+msgid "Forester"
+msgstr "Guardabosques"
 
-#: ../../tribes/empire/geologist/conf:1
-msgid "Discovers resources for mining."
-msgstr "Descubre recursos para la minería."
+#: ../../tribes/empire/conf:178
+msgid "Forester's House"
+msgstr "Casa de silvicultor"
+
+#: ../../tribes/empire/conf:143
+#: ../../tribes/empire/conf:157
+msgid "Fortress"
+msgstr "Fortaleza"
+
+#: ../../tribes/empire/conf:111
+msgid "Geologist"
+msgstr "Geólogo"
+
+#: ../../tribes/empire/fisher/conf:1
+msgid "Gets fish out of the sea."
+msgstr "Saca los peces del mar."
+
+#: ../../tribes/empire/conf:64
+msgid "Gold"
+msgstr "Oro"
+
+#: ../../tribes/empire/conf:179
+msgid "Gold Mine"
+msgstr "Mina de oro"
 
 #: ../../tribes/empire/gold/conf:1
 msgid ""
@@ -877,56 +348,66 @@ msgstr ""
 "El oro es el más valioso de los metales; sólo objetos muy importantes son "
 "adornados con él."
 
-#: ../../tribes/empire/goldstone/conf:1
-msgid "This is the yellow goldstone."
-msgstr "Esta es una pepita de oro."
+#: ../../tribes/empire/conf:65
+msgid "Goldstone"
+msgstr "Oro"
 
-#: ../../tribes/empire/grape/conf:1
-msgid "These grapes are the basic for tasty wine."
-msgstr "Las uvas son la base para un delicioso vino."
+#: ../../tribes/empire/conf:66
+msgid "Grape"
+msgstr "Uva"
 
-#: ../../tribes/empire/hammer/conf:1
-msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the worker, "
-"the armour- and weaponsmith. Make sure you always got some in reserve! It is "
-"produced by the toolsmith."
-msgstr ""
-"El martillo es una herramienta esencial, utilizada por los geólogos, los "
-"trabajadores, los carpinteros y los dos tipos de herreros. ¡Asegúrate de "
-"tener siempre alguna de reserva! Se fabrica en las carpinterías."
+#: ../../tribes/empire/vinefarmer/conf:1
+msgid "Grows vine."
+msgstr "Cultiva el viñedo."
 
-#: ../../tribes/empire/heavy_lance/conf:1
-msgid "This is a good warrior lance, with a steel-top and a little blade."
-msgstr ""
-"Una gran lanza de guerrero, con punta de acero y una pequeña hoja afilada."
+#: ../../tribes/empire/conf:149
+msgid "Guardhall"
+msgstr "Cuartel"
 
-#: ../../tribes/empire/helm/conf:1
-msgid "Basic defence of a warrior"
-msgstr "Defensa básica de un guerrero"
+#: ../../tribes/empire/conf:150
+msgid "Guardhouse"
+msgstr "Casa de guardia"
 
-#: ../../tribes/empire/hunter/conf:1
-msgid "The Hunter brings good meat to the colonists."
-msgstr "El cazador trae carne buena para los colonos."
+#: ../../tribes/empire/conf:67
+msgid "Hammer"
+msgstr "Martillo"
 
-#: ../../tribes/empire/hunting_spear/conf:1
-msgid ""
-"This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by the hunters."
-msgstr ""
-"Esta lanza es suficientemente ligera para ser lanzada, pero suficientemente "
-"pesada para matar cualquier animal de un impacto. Sólo los cazadores la usan."
+#: ../../tribes/empire/vineyard/conf:19
+msgid "Harvest vine"
+msgstr "Cosechar parra"
 
-#: ../../tribes/empire/innkeeper/conf:1
-msgid "Produces food for miners."
-msgstr "Fabrica alimento para los mineros."
+#: ../../tribes/empire/farm/conf:17
+msgid "Harvest wheat"
+msgstr "Cosechar trigo"
 
-#: ../../tribes/empire/iron/conf:1
-msgid "Weapons and tools are made of iron."
-msgstr "Las armas y las herramientas se fabrican con hierro."
+#: ../../tribes/empire/conf:162
+msgid "Headquarters"
+msgstr "Cuartel general"
 
-#: ../../tribes/empire/ironore/conf:1
-msgid "This is the red iron ore."
-msgstr "Este es el rojizo mineral de hierro"
+#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
+msgid "Headquarters medium"
+msgstr "Cuartel general mediano"
+
+#: ../../tribes/empire/conf:163
+msgid "Headquarters shipwreck"
+msgstr "Cuartel general naufragio"
+
+#: ../../tribes/empire/conf:68
+msgid "Heavy Lance"
+msgstr "Lanza pesada"
+
+#: ../../tribes/empire/conf:69
+msgid "Helmet"
+msgstr "Casco"
+
+#: ../../tribes/empire/donkey/conf:1
+msgid "Helps to carry items at heavy used roads."
+msgstr "Ayuda al transporte en caminos muy concurridos."
+
+#: ../../tribes/empire/conf:151
+msgid "High Tower"
+msgstr "Torre Alta"
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
@@ -934,13 +415,77 @@ msgstr ""
 "¿Cómo preparar comidas, bocadillos o raciones, si no hay utensilios de "
 "cocina?"
 
-#: ../../tribes/empire/lance/conf:1
-msgid "This wooden lance has an iron spike."
-msgstr "Esta lanza de madera tiene una afilada punta de hierro."
+#: ../../tribes/empire/conf:112
+msgid "Hunter"
+msgstr "Cazador"
 
-#: ../../tribes/empire/lumberjack/conf:1
-msgid "Fells trees."
-msgstr "Derriba arboles."
+#: ../../tribes/empire/conf:180
+msgid "Hunter's House"
+msgstr "Casa de cazador"
+
+#: ../../tribes/empire/conf:70
+msgid "Hunting Spear"
+msgstr "Lanza de caza"
+
+#: ../../tribes/empire/conf:181
+msgid "Inn"
+msgstr "Posada"
+
+#: ../../tribes/empire/conf:113
+msgid "Innkeeper"
+msgstr "Posadero"
+
+#: ../../tribes/empire/conf:71
+msgid "Iron"
+msgstr "Hierro"
+
+#: ../../tribes/empire/conf:72
+msgid "Iron Ore"
+msgstr "Mineral de hierro"
+
+#: ../../tribes/empire/conf:185
+msgid "Iron Ore Mine"
+msgstr "Mina de hierro"
+
+#: ../../tribes/empire/shepherd/conf:1
+msgid "Keeping sheeps."
+msgstr "Guardando ovejas."
+
+#: ../../tribes/empire/conf:73
+msgid "Kitchen Tools"
+msgstr "Utensilios de cocina"
+
+#: ../../tribes/empire/conf:74
+msgid "Lance"
+msgstr "Lanza"
+
+#: ../../tribes/empire/conf:114
+msgid "Lumberjack"
+msgstr "Leñador"
+
+#: ../../tribes/empire/conf:182
+msgid "Lumberjack's House"
+msgstr "Casa de leñador"
+
+#: ../../tribes/empire/conf:76
+msgid "Marble"
+msgstr "Mármol"
+
+#: ../../tribes/empire/conf:75
+msgid "Marble Column"
+msgstr "Columna de marmol"
+
+#: ../../tribes/empire/conf:183
+msgid "Marble Mine"
+msgstr "Cantera de mármol"
+
+#: ../../tribes/empire/marblecolumn/conf:1
+msgid ""
+"Marble columns present the high culture of the Empire, so they are needed "
+"for nearly every bigger building."
+msgstr ""
+"Las columnas de mármol representan la gran cultura del Imperio, por lo que "
+"son necesarias para casi todas las grandes construcciones."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -950,13 +495,39 @@ msgstr ""
 "El mármol es una hermosa piedra, obtenida de las montañas, y que se puede "
 "utilizar para crear bellos edificios y columnas."
 
-#: ../../tribes/empire/marblecolumn/conf:1
+#: ../../tribes/empire/conf:115
+msgid "Master Miner"
+msgstr "Maestro minero"
+
+#: ../../tribes/empire/conf:77
+msgid "Meal"
+msgstr "Comida"
+
+#: ../../tribes/empire/conf:78
+msgid "Meat"
+msgstr "Carne"
+
+#: ../../tribes/empire/meat/conf:1
 msgid ""
-"Marble columns present the high culture of the Empire, so they are needed "
-"for nearly every bigger building."
+"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
+"lunch for the miners and in the soldier trainingcamps to keep warriors "
+"strong."
 msgstr ""
-"Las columnas de mármol representan la gran cultura del Imperio, por lo que "
-"son necesarias para casi todas las grandes construcciones."
+"La carne contiene mucha energía. Es usada en las posadas y tabernas para "
+"preparar el almuerzo para los mineros, y en los campos de entrenamiento para "
+"mantener a los guerreros fuertes."
+
+#: ../../tribes/empire/conf:184
+msgid "Mill"
+msgstr "Molino"
+
+#: ../../tribes/empire/conf:116
+msgid "Miller"
+msgstr "Molinero"
+
+#: ../../tribes/empire/miller/conf:1
+msgid "Mills the wheat to produce flour."
+msgstr "Muele el trigo para obtener harina."
 
 #: ../../tribes/empire/marblemine/conf:22
 #: ../../tribes/empire/quarry/conf:19
@@ -980,115 +551,73 @@ msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
 "Extrae piedra (sólo por compatibilidad con antiguas partidas (build 13))"
 
-#: ../../tribes/empire/master-miner/conf:1
-#: ../../tribes/empire/miner/conf:1
-msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
-"Trabaja a mayor profundidad en las minas para obtener carbón, hierro u oro."
+#: ../../tribes/empire/conf:117
+msgid "Miner"
+msgstr "Minero"
 
-#: ../../tribes/empire/meal/conf:1
-msgid "A real meal which satisfies all miners needs."
-msgstr ""
-"Una comida completa que satisface todas las necesidades de los mineros"
+#: ../../tribes/empire/conf:144
+msgid "Outpost"
+msgstr "Avanzadilla"
 
-#: ../../tribes/empire/meat/conf:1
-msgid ""
-"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-"lunch for the miners and in the soldier trainingcamps to keep warriors "
-"strong."
-msgstr ""
-"La carne contiene mucha energía. Es usada en las posadas y tabernas para "
-"preparar el almuerzo para los mineros, y en los campos de entrenamiento para "
-"mantener a los guerreros fuertes."
+#: ../../tribes/empire/conf:53
+msgid "Peel"
+msgstr "Pala"
 
-#: ../../tribes/empire/miller/conf:1
-msgid "Mills the wheat to produce flour."
-msgstr "Muele el trigo para obtener harina."
+#: ../../tribes/empire/conf:79
+msgid "Pick"
+msgstr "Pico"
 
-#: ../../tribes/empire/pick/conf:1
-msgid ""
-"This pick is used by the stonemasons and the miners. It is produced by the "
-"toolsmith."
-msgstr ""
-"Este pico lo usan los canteros y los mineros. Se fabrica en las herrerías."
+#: ../../tribes/empire/conf:118
+msgid "Pig Breeder"
+msgstr "Porquero"
 
-#: ../../tribes/empire/pig-breeder/conf:1
-msgid "Breeds pigs."
-msgstr "Cría cerdos."
+#: ../../tribes/empire/conf:186
+msgid "Piggery"
+msgstr "Pocilga"
 
-#: ../../tribes/empire/plate_armour/conf:1
-msgid "The strongest armour existing for the Empire soldiers."
-msgstr "La armadura más fuerte existente para los soldados Imperiales."
+#: ../../tribes/empire/vineyard/conf:17
+msgid "Plant vine"
+msgstr "Plantar parra"
 
-#: ../../tribes/empire/ration/conf:1
-msgid "A small bite to keep miners strong and working."
-msgstr "Un pequeño bocado para mantener a los mineros fuertes y trabajando."
+#: ../../tribes/empire/farm/conf:15
+msgid "Plant wheat"
+msgstr "Plantar trigo"
 
-#: ../../tribes/empire/saw/conf:1
-msgid ""
-"This saw is needed by the sawyer to create all the useful tools. It is "
-"produced by the toolsmith."
-msgstr ""
-"El carpintero necesita esta sierra para fabricar herramientas útiles. Se "
-"fabrica en la herrería."
+#: ../../tribes/empire/farmer/conf:2
+msgid "Plants fields."
+msgstr "Planta campos."
 
-#: ../../tribes/empire/scout/conf:1
-msgid ""
-"Scouts like Scotty the scout scout unscouted area in a scouty fashion."
-msgstr "Explora terreno inexplorado."
+#: ../../tribes/empire/forester/conf:1
+msgid "Plants trees."
+msgstr "Planta árboles."
 
-#: ../../tribes/empire/scythe/conf:1
-msgid ""
-"The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
-"La guadaña es la herramienta de los granjeros. Se fabrica en la herrería."
+#: ../../tribes/empire/conf:80
+msgid "Plate-Armour"
+msgstr "Coraza"
 
-#: ../../tribes/empire/shepherd/conf:1
-msgid "Keeping sheeps."
-msgstr "Guardando ovejas."
+#: ../../tribes/empire/weaponsmithy/conf:31
+msgid "Produce advanced lance"
+msgstr "Fabricar lanza mejorada"
 
-#: ../../tribes/empire/shovel/conf:1
-msgid ""
-"The shovel is needed for proper handling of plants. Therefore the forester "
-"uses it. It is produced by the toolsmith."
-msgstr ""
-"La pala es imprescindible para manipular adecuadamente las plantas. Así que "
-"el silvicultor necesita una buena. La fabrica el carpintero."
+#: ../../tribes/empire/armoursmithy/conf:27
+msgid "Produce armour"
+msgstr "Fabricar coraza"
 
-#: ../../tribes/empire/smelter/conf:1
-msgid "Smelts iron."
-msgstr "Forja hierro."
-
-#: ../../tribes/empire/smelting_works/conf:22
-msgid "Smelt iron"
-msgstr "Fundir hierro"
-
-#: ../../tribes/empire/smelting_works/conf:23
-msgid "Smelt gold"
-msgstr "Fundir oro"
-
-#: ../../tribes/empire/soldier/conf:1
-msgid "Defend and Conquer!"
-msgstr "¡Defender y conquistar!"
-
-#: ../../tribes/empire/stone/conf:1
-#: ../../tribes/empire/wood/conf:1
-msgid "Stones and wood are the basic build material of the Empire."
-msgstr ""
-"Las piedras y la madera son los materiales de construcción básicos para el "
-"Imperio."
-
-#: ../../tribes/empire/stonemason/conf:1
-msgid "Cuts raw pieces of granit and marble out of laying stones."
-msgstr "Extrae piezas brutas de granito y mármol de los estratos de roca."
-
-#: ../../tribes/empire/toolsmith/conf:1
-msgid "Produces tools for the workers."
-msgstr "Produce herramientas para los obreros"
+#: ../../tribes/empire/toolsmithy/conf:44
+msgid "Produce axe"
+msgstr "Fabricar hacha"
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
 msgstr "Fabricar pala de hornear"
+
+#: ../../tribes/empire/toolsmithy/conf:42
+msgid "Produce basket"
+msgstr "Fabricar cesta"
+
+#: ../../tribes/empire/armoursmithy/conf:28
+msgid "Produce chain armour"
+msgstr "Fabricar coraza de anillas"
 
 #: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fire tongs"
@@ -1102,13 +631,37 @@ msgstr "Fabricar caña de pescar"
 msgid "Produce hammer"
 msgstr "Fabricar martillo"
 
+#: ../../tribes/empire/weaponsmithy/conf:32
+msgid "Produce heavy lance"
+msgstr "Fabricar lanza pesada"
+
+#: ../../tribes/empire/armoursmithy/conf:26
+msgid "Produce helm"
+msgstr "Fabricar casco"
+
+#: ../../tribes/empire/toolsmithy/conf:41
+msgid "Produce hunting spear"
+msgstr "Fabricar lanza de caza"
+
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce kitchen tools"
 msgstr "Fabricar utensilios de cocina"
 
+#: ../../tribes/empire/weaponsmithy/conf:30
+msgid "Produce lance"
+msgstr "Fabricar lanza"
+
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
 msgstr "Fabricar pico"
+
+#: ../../tribes/empire/armoursmithy/conf:29
+msgid "Produce plate armour"
+msgstr "Fabricar armadura de placas"
+
+#: ../../tribes/empire/toolsmithy/conf:43
+msgid "Produce saw"
+msgstr "Fabricar sierra"
 
 #: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce scythe"
@@ -1118,25 +671,372 @@ msgstr "Fabricar guadaña"
 msgid "Produce shovel"
 msgstr "Fabricar pala"
 
-#: ../../tribes/empire/toolsmithy/conf:41
-msgid "Produce hunting spear"
-msgstr "Fabricar lanza de caza"
+#: ../../tribes/empire/weaponsmithy/conf:29
+msgid "Produce wood lance"
+msgstr "Fabricar lanza de madera"
 
-#: ../../tribes/empire/toolsmithy/conf:42
-msgid "Produce basket"
-msgstr "Fabricar cesta"
+#: ../../tribes/empire/armoursmith/conf:1
+msgid "Produces armour for the soldiers."
+msgstr "Produce armaduras para los soldados"
 
-#: ../../tribes/empire/toolsmithy/conf:43
-msgid "Produce saw"
-msgstr "Fabricar sierra"
+#: ../../tribes/empire/brewer/conf:1
+msgid "Produces beer or wine."
+msgstr "Fabrica cerveza o vino."
 
-#: ../../tribes/empire/toolsmithy/conf:44
-msgid "Produce axe"
-msgstr "Fabricar hacha"
+#: ../../tribes/empire/weaver/conf:1
+msgid "Produces cloth for ships and soldiers."
+msgstr "Fabrica prendas para los barcos y los soldados."
+
+#: ../../tribes/empire/innkeeper/conf:1
+msgid "Produces food for miners."
+msgstr "Fabrica alimento para los mineros."
+
+#: ../../tribes/empire/toolsmith/conf:1
+msgid "Produces tools for the workers."
+msgstr "Produce herramientas para los obreros"
+
+#: ../../tribes/empire/weaponsmith/conf:1
+msgid "Produces weapons for the soldiers."
+msgstr "Produce armas para los soldados"
+
+#: ../../tribes/empire/conf:187
+msgid "Quarry"
+msgstr "Cantera"
+
+#: ../../tribes/empire/conf:81
+msgid "Ration"
+msgstr "Ración"
+
+#: ../../tribes/empire/conf:34
+msgid "Resource indicator coal little"
+msgstr "Indicador recurso poco carbón"
+
+#: ../../tribes/empire/conf:35
+msgid "Resource indicator coal much"
+msgstr "Indicador recurso mucho carbón"
+
+#: ../../tribes/empire/conf:36
+msgid "Resource indicator gold little"
+msgstr "Indicador recurso poco oro"
+
+#: ../../tribes/empire/conf:37
+msgid "Resource indicator gold much"
+msgstr "Indicador recurso mucho oro"
+
+#: ../../tribes/empire/conf:38
+msgid "Resource indicator granite little"
+msgstr "Indicador de recursos poco granito"
+
+#: ../../tribes/empire/conf:39
+msgid "Resource indicator granite much"
+msgstr "Indicador de recursos mucho granito"
+
+#: ../../tribes/empire/conf:40
+msgid "Resource indicator iron little"
+msgstr "Indicador recurso poco hierro"
+
+#: ../../tribes/empire/conf:41
+msgid "Resource indicator iron much"
+msgstr "Indicador recurso mucho hierro"
+
+#: ../../tribes/empire/conf:42
+msgid "Resource indicator no resource"
+msgstr "Indicador recurso vacío"
+
+#: ../../tribes/empire/conf:43
+msgid "Resource indicator water"
+msgstr "Indicador recurso agua"
+
+#: ../../tribes/empire/conf:82
+msgid "Saw"
+msgstr "Sierra"
+
+#: ../../tribes/empire/conf:188
+msgid "Sawmill"
+msgstr "Aserradero"
+
+#: ../../tribes/empire/conf:127
+msgid "Scout"
+msgstr "Explorador"
+
+#: ../../tribes/empire/conf:199
+msgid "Scout's House"
+msgstr "Casa de explorador"
+
+#: ../../tribes/empire/scout/conf:1
+msgid ""
+"Scouts like Scotty the scout scout unscouted area in a scouty fashion."
+msgstr "Explora terreno inexplorado."
+
+#: ../../tribes/empire/conf:83
+msgid "Scythe"
+msgstr "Guadaña"
+
+#: ../../tribes/empire/conf:139
+#: ../../tribes/empire/conf:158
+msgid "Sentry"
+msgstr "Centinela"
+
+#: ../../tribes/empire/conf:189
+msgid "Sheepfarm"
+msgstr "Corral"
+
+#: ../../tribes/empire/conf:119
+msgid "Shepherd"
+msgstr "Pastor"
+
+#: ../../tribes/empire/conf:84
+msgid "Shovel"
+msgstr "Pala"
+
+#: ../../tribes/empire/arena/conf:13
+#: ../../tribes/empire/colosseum/conf:27
+#: ../../tribes/empire/trainingscamp/conf:38
+msgid "Sleep"
+msgstr "Dormir"
+
+#: ../../tribes/empire/conf:152
+msgid "Small Tower"
+msgstr "Torre pequeña"
+
+#: ../../tribes/empire/smelting_works/conf:23
+msgid "Smelt gold"
+msgstr "Fundir oro"
+
+#: ../../tribes/empire/smelting_works/conf:22
+msgid "Smelt iron"
+msgstr "Fundir hierro"
+
+#: ../../tribes/empire/conf:120
+msgid "Smelter"
+msgstr "Forjador"
+
+#: ../../tribes/empire/conf:190
+msgid "Smelting Works"
+msgstr "Forja"
+
+#: ../../tribes/empire/smelter/conf:1
+msgid "Smelts iron."
+msgstr "Forja hierro."
+
+#: ../../tribes/empire/conf:100
+msgid "Soldier"
+msgstr "Soldado"
+
+#: ../../tribes/empire/conf:121
+msgid "Stonemason"
+msgstr "Cantero"
+
+#: ../../tribes/empire/conf:191
+msgid "Stonemason's House"
+msgstr "Casa de cantero"
+
+#: ../../tribes/empire/conf:85
+msgid "Stones"
+msgstr "Piedras"
+
+#: ../../tribes/empire/stone/conf:1
+#: ../../tribes/empire/wood/conf:1
+msgid "Stones and wood are the basic build material of the Empire."
+msgstr ""
+"Las piedras y la madera son los materiales de construcción básicos para el "
+"Imperio."
+
+#: ../../tribes/empire/conf:159
+msgid "Stronghold"
+msgstr "Cuartel"
+
+#: ../../tribes/empire/conf:192
+msgid "Tavern"
+msgstr "Taberna"
+
+#: ../../tribes/empire/hunter/conf:1
+msgid "The Hunter brings good meat to the colonists."
+msgstr "El cazador trae carne buena para los colonos."
+
+#: ../../tribes/empire/scythe/conf:1
+msgid ""
+"The Scythe is the tool of the farmers. It is produced by the toolsmith."
+msgstr ""
+"La guadaña es la herramienta de los granjeros. Se fabrica en la herrería."
+
+#: ../../tribes/empire/conf:4
+msgid "The Widelands Development Team"
+msgstr "El Equipo de Desarrollo de Widelands"
+
+#: ../../tribes/empire/axe/conf:1
+msgid ""
+"The axe is the tool for the lumberjack. It is produced by the toolsmith."
+msgstr "El hacha es la herramienta del leñador. Es producida en la herrería."
+
+#: ../../tribes/empire/bread/conf:1
+msgid "The bakers of the Empire make really tasty bread."
+msgstr "Los panaderos del Imperio hacen buen pan"
+
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"The fire tongs are the tool of the smelter, working in the smelting works. "
+"They are produced by the toolsmith."
+msgstr ""
+"Las tenazas son las herramientas del forjador, trabajando en la forja. Las "
+"fabrica el herrero."
+
+#: ../../tribes/empire/coal/conf:1
+msgid ""
+"The fires of the Empire are usually fed with wood, but sometimes, wood just "
+"does not burn hot enough. Then, coal is used."
+msgstr ""
+"Las hogueras del Imperio se alimentan habitualmente con madera pero, a "
+"veces, la madera no produce suficiente calor. En este caso se usa carbón."
+
+#: ../../tribes/empire/hammer/conf:1
+msgid ""
+"The hammer is an essential tool. It is needed by the geologist, the worker, "
+"the armour- and weaponsmith. Make sure you always got some in reserve! It is "
+"produced by the toolsmith."
+msgstr ""
+"El martillo es una herramienta esencial, utilizada por los geólogos, los "
+"trabajadores, los carpinteros y los dos tipos de herreros. ¡Asegúrate de "
+"tener siempre alguna de reserva! Se fabrica en las carpinterías."
+
+#: ../../tribes/empire/bakingtray/conf:1
+msgid ""
+"The peel is the tool of the baker, each baker needs its own. It is produced "
+"by the toolsmith."
+msgstr ""
+"La pala de hornear es la herramienta del panadero. Cada panadero necesita la "
+"suya. Es producida en la herrería."
+
+#: ../../tribes/empire/shovel/conf:1
+msgid ""
+"The shovel is needed for proper handling of plants. Therefore the forester "
+"uses it. It is produced by the toolsmith."
+msgstr ""
+"La pala es imprescindible para manipular adecuadamente las plantas. Así que "
+"el silvicultor necesita una buena. La fabrica el carpintero."
+
+#: ../../tribes/empire/plate_armour/conf:1
+msgid "The strongest armour existing for the Empire soldiers."
+msgstr "La armadura más fuerte existente para los soldados Imperiales."
+
+#: ../../tribes/empire/grape/conf:1
+msgid "These grapes are the basic for tasty wine."
+msgstr "Las uvas son la base para un delicioso vino."
+
+#: ../../tribes/empire/basket/conf:1
+msgid ""
+"This basket is needed by the winegrower, for harvesting the grapes. It is "
+"produced by the toolsmith."
+msgstr ""
+"El viticultor necesita este cesto para la recogida de uva. Es producida en "
+"la herrería."
+
+#: ../../tribes/empire/heavy_lance/conf:1
+msgid "This is a good warrior lance, with a steel-top and a little blade."
+msgstr ""
+"Una gran lanza de guerrero, con punta de acero y una pequeña hoja afilada."
+
+#: ../../tribes/empire/chain_armour/conf:1
+msgid "This is a medium armour for Empire soldiers."
+msgstr "Esta es una armadura media para los soldados del Imperio."
+
+#: ../../tribes/empire/wood_lance/conf:1
+msgid ""
+"This is a wooden lance, which is the basic of the Empires military system."
+msgstr "Una lanza de madera, el arma básica en el aparato militar Imperial."
+
+#: ../../tribes/empire/advanced_lance/conf:1
+msgid "This is an advanced lance, with steel top."
+msgstr "Esta es una lanza mejorada, con punta de acero."
+
+#: ../../tribes/empire/war_lance/conf:1
+msgid ""
+"This is the best and sharpest weapon, the Empire weaponsmith creates for "
+"their warriors."
+msgstr ""
+"La mejor y más afilada arma, los armeros del Imperio las crean para tus "
+"guerreros."
+
+#: ../../tribes/empire/conf:6
+msgid "This is the culture of the roman Empire."
+msgstr "Esta es la cultura del Imperio Romano"
+
+#: ../../tribes/empire/ironore/conf:1
+msgid "This is the red iron ore."
+msgstr "Este es el rojizo mineral de hierro"
+
+#: ../../tribes/empire/goldstone/conf:1
+msgid "This is the yellow goldstone."
+msgstr "Esta es una pepita de oro."
+
+#: ../../tribes/empire/pick/conf:1
+msgid ""
+"This pick is used by the stonemasons and the miners. It is produced by the "
+"toolsmith."
+msgstr ""
+"Este pico lo usan los canteros y los mineros. Se fabrica en las herrerías."
+
+#: ../../tribes/empire/saw/conf:1
+msgid ""
+"This saw is needed by the sawyer to create all the useful tools. It is "
+"produced by the toolsmith."
+msgstr ""
+"El carpintero necesita esta sierra para fabricar herramientas útiles. Se "
+"fabrica en la herrería."
+
+#: ../../tribes/empire/hunting_spear/conf:1
+msgid ""
+"This spear is light enough to be thrown, but heavy enough to kill any animal "
+"in one blow. It is only used by the hunters."
+msgstr ""
+"Esta lanza es suficientemente ligera para ser lanzada, pero suficientemente "
+"pesada para matar cualquier animal de un impacto. Sólo los cazadores la usan."
+
+#: ../../tribes/empire/wine/conf:1
+msgid ""
+"This wine gives enough power, to mine marble or gold. And furthermore, our "
+"soldiers like it, too."
+msgstr ""
+"Este vino proporciona fuerza para extraer oro o mármol. Además, a nuestros "
+"soldados también les gusta."
+
+#: ../../tribes/empire/lance/conf:1
+msgid "This wooden lance has an iron spike."
+msgstr "Esta lanza de madera tiene una afilada punta de hierro."
+
+#: ../../tribes/empire/conf:122
+msgid "Toolsmith"
+msgstr "Herrería"
+
+#: ../../tribes/empire/conf:193
+msgid "Toolsmithy"
+msgstr "Herrería"
+
+#: ../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:153
+msgid "Tower"
+msgstr "Torre"
+
+#: ../../tribes/empire/conf:123
+msgid "Trainer"
+msgstr "Entrenador"
+
+#: ../../tribes/empire/conf:136
+msgid "Trainingscamp"
+msgstr "Campo de entrenamiento"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
 msgstr "Entrena a los soldados"
+
+#: ../../tribes/empire/conf:86
+msgid "Trunk"
+msgstr "Tronco"
+
+#: ../../tribes/empire/trunk/conf:1
+msgid "Trunks are one important build material of the Empire."
+msgstr ""
+"Los troncos son un importante material de construcción para el Imperio."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1184,6 +1084,30 @@ msgid ""
 "(build13))"
 msgstr ""
 "Mejora el ataque de nivel 3 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
+
+#: ../../tribes/empire/arena/conf:14
+#: ../../tribes/empire/colosseum/conf:28
+msgid "Upgrade soldier evade 0"
+msgstr "Free-Range"
+
+#: ../../tribes/empire/arena/conf:15
+#: ../../tribes/empire/colosseum/conf:29
+msgid ""
+"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Mejora la escapada de nivel 0 del soldado (sólo por compatibilidad con "
+"antiguas partidas (build13))"
+
+#: ../../tribes/empire/colosseum/conf:30
+msgid "Upgrade soldier evade 1"
+msgstr "Mejorar escapada de soldado 1"
+
+#: ../../tribes/empire/colosseum/conf:31
+msgid ""
+"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Mejora la escapada  de nivel 1 del soldado (sólo por compatibilidad con "
 "antiguas partidas (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:47
@@ -1234,30 +1158,41 @@ msgstr ""
 "Mejora la resistencia de nivel 3 del soldado (sólo por compatibilidad con "
 "antiguas partidas (build13))"
 
-#: ../../tribes/empire/trunk/conf:1
-msgid "Trunks are one important build material of the Empire."
-msgstr ""
-"Los troncos son un importante material de construcción para el Imperio."
+#: ../../tribes/empire/conf:126
+msgid "Vine Farmer"
+msgstr "Vendimiador"
 
-#: ../../tribes/empire/vinefarmer/conf:1
-msgid "Grows vine."
-msgstr "Cultiva el viñedo."
+#: ../../tribes/empire/conf:44
+msgid "Vine medium"
+msgstr "Parra mediana"
 
-#: ../../tribes/empire/vineyard/conf:17
-msgid "Plant vine"
-msgstr "Plantar parra"
+#: ../../tribes/empire/conf:47
+msgid "Vine ripe"
+msgstr "Parra madura"
 
-#: ../../tribes/empire/vineyard/conf:19
-msgid "Harvest vine"
-msgstr "Cosechar parra"
+#: ../../tribes/empire/conf:45
+msgid "Vine small"
+msgstr "Parra pequeña"
 
-#: ../../tribes/empire/war_lance/conf:1
-msgid ""
-"This is the best and sharpest weapon, the Empire weaponsmith creates for "
-"their warriors."
-msgstr ""
-"La mejor y más afilada arma, los armeros del Imperio las crean para tus "
-"guerreros."
+#: ../../tribes/empire/conf:46
+msgid "Vine tiny"
+msgstr "Parra diminuta"
+
+#: ../../tribes/empire/conf:198
+msgid "Vineyard"
+msgstr "Viñedo"
+
+#: ../../tribes/empire/conf:87
+msgid "War-Lance"
+msgstr "Lanza de Guerra"
+
+#: ../../tribes/empire/conf:164
+msgid "Warehouse"
+msgstr "Almacén"
+
+#: ../../tribes/empire/conf:88
+msgid "Water"
+msgstr "Agua"
 
 #: ../../tribes/empire/water/conf:1
 msgid ""
@@ -1267,29 +1202,33 @@ msgstr ""
 "¡El agua es la esencia de la vida! Se utiliza de muchas formas, ya sea para "
 "cocinar pan o fermentar cerveza."
 
-#: ../../tribes/empire/weaponsmith/conf:1
-msgid "Produces weapons for the soldiers."
-msgstr "Produce armas para los soldados"
+#: ../../tribes/empire/conf:194
+msgid "Weapon Smithy"
+msgstr "Armería"
 
-#: ../../tribes/empire/weaponsmithy/conf:29
-msgid "Produce wood lance"
-msgstr "Fabricar lanza de madera"
+#: ../../tribes/empire/iron/conf:1
+msgid "Weapons and tools are made of iron."
+msgstr "Las armas y las herramientas se fabrican con hierro."
 
-#: ../../tribes/empire/weaponsmithy/conf:30
-msgid "Produce lance"
-msgstr "Fabricar lanza"
+#: ../../tribes/empire/conf:124
+msgid "Weaponsmith"
+msgstr "Armería"
 
-#: ../../tribes/empire/weaponsmithy/conf:31
-msgid "Produce advanced lance"
-msgstr "Fabricar lanza mejorada"
+#: ../../tribes/empire/conf:125
+msgid "Weaver"
+msgstr "Tejedor"
 
-#: ../../tribes/empire/weaponsmithy/conf:32
-msgid "Produce heavy lance"
-msgstr "Fabricar lanza pesada"
+#: ../../tribes/empire/conf:195
+msgid "Weaving Mill"
+msgstr "Telar"
 
-#: ../../tribes/empire/weaver/conf:1
-msgid "Produces cloth for ships and soldiers."
-msgstr "Fabrica prendas para los barcos y los soldados."
+#: ../../tribes/empire/conf:196
+msgid "Well"
+msgstr "Pozo"
+
+#: ../../tribes/empire/conf:89
+msgid "Wheat"
+msgstr "Trigo"
 
 #: ../../tribes/empire/wheat/conf:1
 msgid ""
@@ -1299,24 +1238,103 @@ msgstr ""
 "El trigo es esencial para la supervivencia. Buen pan y bebidas fuertes se "
 "pueden obtener con este trigo."
 
-#: ../../tribes/empire/wine/conf:1
-msgid ""
-"This wine gives enough power, to mine marble or gold. And furthermore, our "
-"soldiers like it, too."
-msgstr ""
-"Este vino proporciona fuerza para extraer oro o mármol. Además, a nuestros "
-"soldados también les gusta."
+#: ../../tribes/empire/conf:90
+msgid "Wine"
+msgstr "Vino"
 
-#: ../../tribes/empire/wood_lance/conf:1
-msgid ""
-"This is a wooden lance, which is the basic of the Empires military system."
-msgstr "Una lanza de madera, el arma básica en el aparato militar Imperial."
+#: ../../tribes/empire/conf:197
+msgid "Winery"
+msgstr "Bodega"
+
+#: ../../tribes/empire/conf:91
+msgid "Wood"
+msgstr "Madera"
+
+#: ../../tribes/empire/conf:92
+msgid "Wood Lance"
+msgstr "Lanza de madera"
+
+#: ../../tribes/empire/conf:93
+msgid "Wool"
+msgstr "Lana"
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
 msgstr ""
 "La lana es el pelaje de las ovejas. Los telares la utilizan para fabricar "
 "prendas."
+
+#: ../../tribes/empire/armoursmithy/conf:30
+#: ../../tribes/empire/bakery/conf:20
+#: ../../tribes/empire/brewery/conf:20
+#: ../../tribes/empire/burners_house/conf:19
+#: ../../tribes/empire/coalmine/conf:21
+#: ../../tribes/empire/deep_coalmine/conf:22
+#: ../../tribes/empire/deep_goldmine/conf:22
+#: ../../tribes/empire/deep_marblemine/conf:23
+#: ../../tribes/empire/deep_oremine/conf:22
+#: ../../tribes/empire/donkeyfarm/conf:22
+#: ../../tribes/empire/farm/conf:19
+#: ../../tribes/empire/fishers_house/conf:17
+#: ../../tribes/empire/foresters_house/conf:15
+#: ../../tribes/empire/goldmine/conf:22
+#: ../../tribes/empire/hunters_house/conf:16
+#: ../../tribes/empire/inn/conf:20
+#: ../../tribes/empire/lumberjacks_house/conf:16
+#: ../../tribes/empire/marblemine/conf:26
+#: ../../tribes/empire/mill/conf:20
+#: ../../tribes/empire/oremine/conf:22
+#: ../../tribes/empire/piggery/conf:21
+#: ../../tribes/empire/quarry/conf:21
+#: ../../tribes/empire/sawmill/conf:20
+#: ../../tribes/empire/scouts_house/conf:17
+#: ../../tribes/empire/sheepfarm/conf:21
+#: ../../tribes/empire/smelting_works/conf:24
+#: ../../tribes/empire/stonemasons_house/conf:21
+#: ../../tribes/empire/tavern/conf:22
+#: ../../tribes/empire/toolsmithy/conf:45
+#: ../../tribes/empire/vineyard/conf:21
+#: ../../tribes/empire/weaponsmithy/conf:34
+#: ../../tribes/empire/weaving-mill/conf:16
+#: ../../tribes/empire/well/conf:16
+#: ../../tribes/empire/winery/conf:20
+msgid "Work"
+msgstr "Trabajar"
+
+#: ../../tribes/empire/builder/conf:1
+msgid "Works at construction sites to create a new building."
+msgstr ""
+"Trabaja en las obras de construcción para construir un nuevo edificio."
+
+#: ../../tribes/empire/master-miner/conf:1
+#: ../../tribes/empire/miner/conf:1
+msgid "Works deep in the mines to obtain coal, iron or gold."
+msgstr ""
+"Trabaja a mayor profundidad en las minas para obtener carbón, hierro u oro."
+
+#: ../../tribes/empire/beer/conf:1
+msgid ""
+"Young soldiers and miners need some encouragement. This drink makes a man "
+"fearless and strong."
+msgstr ""
+"Los jóvenes soldados y mineros necesitan ser bravos. Esta bebida hace a los "
+"hombres fuertes y valientes."
+
+#~ msgid "The backers of the Empire make really tasty bread."
+#~ msgstr "Los panaderos del Imperio preparan un pan realmente sabroso."
+
+#~ msgid ""
+#~ "Cloth is needed for Empire ships and few bigger buildings. It is produced "
+#~ "out of wool."
+#~ msgstr ""
+#~ "Se necesita tela para los barcos Imperiales y algunos grandes edificios. Se "
+#~ "produce a partir de la lana."
+
+#~ msgid "Resource indicator granit little"
+#~ msgstr "Indicador recurso poco granito"
+
+#~ msgid "Resource indicator granit much"
+#~ msgstr "Indicador recurso mucho granito"
 
 #~ msgid "Works deep in the mines to produce coal, iron or gold."
 #~ msgstr ""
@@ -1343,3 +1361,6 @@ msgstr ""
 
 #~ msgid "Herdsman"
 #~ msgstr "Pastor"
+
+#~ msgid "Cuts raw pieces of granit and marble out of laying stones."
+#~ msgstr "Extrae piezas brutas de granito y mármol de los estratos de roca."

@@ -30,7 +30,7 @@
 #include "economy/flag.h"
 #include "encyclopedia_window.h"
 #include "fieldaction.h"
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 #include "game_chat_menu.h"
 #include "game_io/game_loader.h"
 #include "game_main_menu.h"
@@ -176,8 +176,8 @@ m_toggle_options_menu
 	 	("menu_options_menu", "options_menu", toggle_options_menu, _("Options"))),
 m_toggle_statistics_menu
 	(INIT_BTN
-	 	("menu_toggle_menu", "statistics_menu", toggle_statistics_menu
-		 , _("Statistics"))),
+	 	("menu_toggle_menu", "statistics_menu", toggle_statistics_menu,
+		 _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN
 	 	("menu_objectives", "objectives", toggle_objectives, _("Objectives"))),
@@ -220,7 +220,6 @@ m_toggle_help
 	set_player_number(plyn);
 	fieldclicked.set(this, &Interactive_Player::node_action);
 
-	m_toolbar.layout();
 	adjust_toolbar_position();
 
 	set_display_flag(dfSpeed, true);

@@ -63,6 +63,8 @@ Player::Player
 	m_initialization_index(initialization_index),
 	m_frontier_style_index(0),
 	m_flag_style_index    (0),
+	m_team_number(0),
+	m_team_player_uptodate(false),
 	m_see_all           (false),
 	m_plnum             (plnum),
 	m_tribe             (tribe_descr),
@@ -109,7 +111,8 @@ void Player::create_default_infrastructure() {
 			LuaCoroutine * cr = game.lua().run_script
 				(*g_fs, "tribes/" + tribe().name() +
 				 "/scripting/" +  initialization.name + ".lua",
-				 "tribe_" + tribe().name())->get_coroutine("func");
+				 "tribe_" + tribe().name())
+				 ->get_coroutine("func");
 			cr->push_arg(this);
 			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
 		} catch (Tribe_Descr::Nonexistent) {
@@ -141,6 +144,46 @@ void Player::allocate_map()
 	m_fields = new Field[map.max_index()];
 }
 
+/**
+ * Assign the player the given team number.
+ */
+void Player::set_team_number(TeamNumber team)
+{
+	m_team_number = team;
+	m_team_player_uptodate = false;
+}
+
+/**
+ * Returns whether this player and the given other player can attack
+ * each other.
+ */
+bool Player::is_hostile(const Player & other) const
+{
+	return
+		&other != this &&
+		(!m_team_number || m_team_number != other.m_team_number);
+}
+
+/**
+ * Updates the vector containing allied players
+ */
+void Player::update_team_players() {
+	m_team_player.clear();
+	m_team_player_uptodate = true;
+
+	if (!m_team_number)
+		return;
+
+	for (Player_Number i = 1; i <= MAX_PLAYERS; ++i) {
+		Player * other = egbase().get_player(i);
+		if (!other)
+			continue;
+		if (other == this)
+			continue;
+		if (m_team_number == other->m_team_number)
+			m_team_player.push_back(other);
+	}
+}
 
 Message_Id Player::add_message
 	(Game & game, Message & message, bool const popup)
@@ -414,76 +457,103 @@ void Player::build(Coords c, Building_Index const idx)
 Bulldoze the given road, flag or building.
 ===============
 */
-void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
+void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 {
-	// General security check
-	if (imm.get_owner() != this)
-		return;
+	std::vector<OPtr<PlayerImmovable> > bulldozelist;
+	bulldozelist.push_back(&_imm);
 
-	// Extended security check
-	if (upcast(Building, building, &imm)) {
-		if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+	while (bulldozelist.size()) {
+		PlayerImmovable * imm = bulldozelist.back().get(egbase());
+		bulldozelist.pop_back();
+		if (!imm)
+			continue;
+
+		// General security check
+		if (imm->get_owner() != this)
 			return;
-		if (recurse) {
+
+		// Destroy, after extended security check
+		if (upcast(Building, building, imm)) {
+			if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+				return;
+
 			Flag & flag = building->base_flag();
 			building->destroy(egbase());
 			//  Now imm and building are dangling reference/pointer! Do not use!
-			if (flag.is_dead_end())
-				ref_cast<Game, Editor_Game_Base>(egbase()).send_player_bulldoze
-					(flag, true);
-			return;
-		}
-	} else if (upcast(Flag, flag, &imm)) {
-		if (Building * const flagbuilding = flag->get_building())
-			if
-				(!
-				 (flagbuilding->get_playercaps() & (1 << Building::PCap_Bulldoze)))
-			{
-				log
-					("Player trying to rip flag (%u) with undestroyable building "
-					 "(%u)\n",
-					 flag->serial(), flagbuilding->serial());
-				return;
-			}
-		if (recurse)
-			for (uint8_t primary_road_id = 6; primary_road_id; --primary_road_id)
-				if (Road * const primary_road = flag->get_road(primary_road_id)) {
-					Flag & primary_start = primary_road->get_flag(Road::FlagStart);
-					Flag & primary_other =
-						flag == &primary_start ?
-						primary_road->get_flag(Road::FlagEnd) : primary_start;
-					primary_road->destroy(egbase());
-					log
-						("destroying road from (%i, %i) going in dir %u\n",
-						 flag->get_position().x, flag->get_position().y,
-						 primary_road_id);
-					//  The primary road is gone. Now see if the flag at the other
-					//  end of it is a dead-end.
-					if (primary_other.is_dead_end())
-						ref_cast<Game, Editor_Game_Base>(egbase())
-							.send_player_bulldoze(primary_other, true);
-				}
-	} else if (upcast(Road, road, &imm)) {
-		if (recurse) {
-			Flag & start = road->get_flag(Road::FlagStart);
-			Flag & end   = road->get_flag(Road::FlagEnd);
-			while (Road * const r = start.get_road(end)) //  destroy every road
-				r->destroy(egbase()); //  between start and end, not just selected
-			//  Now imm and road are dangling reference/pointer! Do not use!
-			if (start.is_dead_end())
-				ref_cast<Game, Editor_Game_Base>(egbase()).send_player_bulldoze
-					(start, true);
-			if (end  .is_dead_end())
-				ref_cast<Game, Editor_Game_Base>(egbase()).send_player_bulldoze
-					(end,   true);
-			return;
-		}
-	} else
-		throw wexception
-			("Player::bulldoze(%u): bad immovable type", imm.serial());
 
-	// Now destroy it
-	imm.destroy(egbase());
+			if (recurse && flag.is_dead_end())
+				bulldozelist.push_back(&flag);
+		} else if (upcast(Flag, flag, imm)) {
+			if (Building * const flagbuilding = flag->get_building())
+				if
+					(!
+					 (flagbuilding->get_playercaps() &
+					  (1 << Building::PCap_Bulldoze)))
+				{
+					log
+						("Player trying to rip flag (%u) with undestroyable building "
+						"(%u)\n",
+						flag->serial(), flagbuilding->serial());
+					return;
+				}
+
+			OPtr<Flag> flagcopy = flag;
+			if (recurse) {
+				for
+					(uint8_t primary_road_id = 6; primary_road_id; --primary_road_id)
+				{
+					// Recursive bulldoze calls may cause flag to disappear
+					if (!flagcopy.get(egbase()))
+						return;
+
+					if (Road * const primary_road = flag->get_road(primary_road_id))
+					{
+						Flag & primary_start =
+							primary_road->get_flag(Road::FlagStart);
+						Flag & primary_other =
+							flag == &primary_start ?
+							primary_road->get_flag(Road::FlagEnd) : primary_start;
+						primary_road->destroy(egbase());
+						log
+							("destroying road from (%i, %i) going in dir %u\n",
+							flag->get_position().x, flag->get_position().y,
+							primary_road_id);
+						//  The primary road is gone. Now see if the flag at the other
+						//  end of it is a dead-end.
+						if (primary_other.is_dead_end())
+							bulldozelist.push_back(&primary_other);
+					}
+				}
+			}
+
+			// Recursive bulldoze calls may cause flag to disappear
+			if (flagcopy.get(egbase()))
+				flag->destroy(egbase());
+		} else if (upcast(Road, road, imm)) {
+			Flag & start = road->get_flag(Road::FlagStart);
+			Flag & end = road->get_flag(Road::FlagEnd);
+
+			road->destroy(egbase());
+			//  Now imm and road are dangling reference/pointer! Do not use!
+
+			if (recurse) {
+				// Destroy all roads between the flags, not just selected
+				while (Road * const r = start.get_road(end))
+					r->destroy(egbase());
+
+				OPtr<Flag> endcopy = &end;
+				if (start.is_dead_end())
+					bulldozelist.push_back(&start);
+				// At this point, end may have become dangling
+				if (Flag * pend = endcopy.get(egbase())) {
+					if (pend->is_dead_end())
+						bulldozelist.push_back(&end);
+				}
+			}
+		} else
+			throw wexception
+				("Player::bulldoze(%u): bad immovable type", imm->serial());
+	}
 }
 
 
@@ -728,7 +798,7 @@ void Player::enemyflagaction
 			 attacker, player_number());
 	else if (count == 0)
 		log("enemyflagaction: count is 0\n");
-	else if (&flag.owner() != this)
+	else if (is_hostile(flag.owner()))
 		if (Building * const building = flag.get_building())
 			if (upcast(Attackable, attackable, building))
 				if (attackable->canAttack()) {
@@ -749,7 +819,7 @@ void Player::enemyflagaction
 }
 
 
-inline void Player::rediscover_node
+void Player::rediscover_node
 	(Map              const &       map,
 	 Widelands::Field const &       first_map_field,
 	 FCoords          const f)
@@ -822,7 +892,8 @@ void Player::see_node
 	(Map              const &       map,
 	 Widelands::Field const &       first_map_field,
 	 FCoords                  const f,
-	 Time                     const gametime)
+	 Time                     const gametime,
+	 bool                     const forward)
 throw ()
 {
 	assert(0 <= f.x);
@@ -831,6 +902,15 @@ throw ()
 	assert(f.y < map.get_height());
 	assert(&map[0] <= f.field);
 	assert           (f.field < &first_map_field + map.max_index());
+
+	// If this is not already a forwarded call, we should informa allied players
+	// as well of this change
+	if (!m_team_player_uptodate)
+		update_team_players();
+	if (!forward && m_team_player.size()) {
+		for (uint8_t j = 0; j < m_team_player.size(); ++j)
+			m_team_player[j]->see_node(map, first_map_field, f, gametime, true);
+	}
 
 	Field & field = m_fields[f.field - &first_map_field];
 	assert(m_fields <= &field);
@@ -842,6 +922,29 @@ throw ()
 		rediscover_node(map, first_map_field, f);
 	fvision ++;
 	field.vision = fvision;
+}
+
+void Player::unsee_node
+	(Map_Index const i, Time const gametime, bool const forward)
+throw ()
+{
+	Field & field = m_fields[i];
+	if(field.vision <= 1) // Already doesn't see this
+		return;
+
+	// If this is not already a forwarded call, we should informa allied players
+	// as well of this change
+	if (!m_team_player_uptodate)
+		update_team_players();
+	if (!forward && m_team_player.size()) {
+		for (uint8_t j = 0; j < m_team_player.size(); ++j)
+			m_team_player[j]->unsee_node(i, gametime, true);
+	}
+
+		--field.vision;
+	if (field.vision == 1)
+		field.time_node_last_unseen = gametime;
+	assert(1 <= field.vision);
 }
 
 

@@ -106,6 +106,7 @@ const MethodType<L_Player> L_Player::Methods[] = {
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, number),
+	PROP_RO(L_Player, name),
 	PROP_RO(L_Player, allowed_buildings),
 	PROP_RO(L_Player, objectives),
 	PROP_RO(L_Player, defeated),
@@ -113,6 +114,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RW(L_Player, retreat_percentage),
 	PROP_RW(L_Player, changing_retreat_percentage_allowed),
 	PROP_RO(L_Player, inbox),
+	PROP_RW(L_Player, team),
 	PROP_RO(L_Player, tribe),
 	PROP_RW(L_Player, see_all),
 	{0, 0, 0},
@@ -147,6 +149,19 @@ int L_Player::get_number(lua_State * L) {
 	lua_pushuint32(L, m_pl);
 	return 1;
 }
+
+/* RST
+	.. attribute:: name
+
+			(RO) The name of this Player.
+*/
+int L_Player::get_name(lua_State * L) {
+	Game & game = get_game(L);
+	Player & p = get(L, game);
+	lua_pushstring(L, p.get_name());
+	return 1;
+}
+
 /* RST
 	.. attribute:: allowed_buildings
 
@@ -289,6 +304,22 @@ int L_Player::get_tribe(lua_State *L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: team
+
+		(RW) The team number of this player (0 means player is not in a team)
+
+		normally only reading should be enough, however it's a nice idea to have
+		a modular scenario, where teams form during the game.
+*/
+int L_Player::set_team(lua_State * L) {
+	get(L, get_egbase(L)).set_team_number(luaL_checkinteger(L, -1));
+	return 0;
+}
+int L_Player::get_team(lua_State * L) {
+	lua_pushinteger(L, get(L, get_egbase(L)).team_number());
+	return 1;
+}
 
 /* RST
 	.. attribute:: see_all
@@ -1129,6 +1160,7 @@ int L_Player::allow_workers(lua_State * L) {
 	}
 	return 0;
 }
+
 
 /*
  ==========================================================

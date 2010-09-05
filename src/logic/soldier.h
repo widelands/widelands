@@ -41,7 +41,7 @@ struct Soldier_Descr : public Worker_Descr {
 	Soldier_Descr
 		(char const * const _name, char const * const _descname,
 		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &, EncodeData const *);
+		 Tribe_Descr const &);
 
 	// NOTE we have to explicitly return Worker_Descr::SOLDIER, as SOLDIER is
 	// NOTE as well defined in an enum in instances.h
@@ -132,7 +132,7 @@ protected:
 
 	std::vector<std::string> load_animations_from_string
 			(std::string const & directory, Profile & prof, Section & global_s,
-			 EncodeData const * const encdata, const char * anim_name);
+			 const char * anim_name);
 
 };
 
@@ -199,6 +199,9 @@ public:
 	/// Draw this soldier
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const Point) const;
+
+	static void calc_info_icon_size(const Tribe_Descr & tribe, uint32_t& w, uint32_t& h);
+	void draw_info_icon(RenderTarget &, Point pt, bool anchor_below) const;
 
 	//  Information function from description.
 	uint32_t get_max_hp_level     () const {

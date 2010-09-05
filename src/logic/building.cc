@@ -20,10 +20,9 @@
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "font_handler.h"
 #include "game.h"
 #include "game_data_error.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_player.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
@@ -31,6 +30,7 @@
 #include "productionsite.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
+#include "graphic/font_handler.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
 #include "upcast.h"
@@ -48,7 +48,7 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 Building_Descr::Building_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _descr, EncodeData const * const encdata)
+	 Tribe_Descr const & _descr)
 	:
 	Map_Object_Descr(_name, _descname),
 	m_tribe         (_descr),
@@ -130,7 +130,7 @@ Building_Descr::Building_Descr
 			if (!is_animation_known("build"))
 				add_animation
 					("build",
-					 g_anim.get(directory.c_str(), *build_s, 0, encdata));
+					 g_anim.get(directory.c_str(), *build_s, 0));
 		}
 
 		// Get costs
@@ -165,7 +165,7 @@ Building_Descr::Building_Descr
 		if (!is_animation_known("idle"))
 			add_animation
 				("idle",
-				 g_anim.get(directory.c_str(), idle_s, 0, encdata));
+				 g_anim.get(directory.c_str(), idle_s, 0));
 	}
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
@@ -268,7 +268,8 @@ PlayerImmovable(building_descr),
 m_optionswindow(0),
 m_flag         (0),
 m_defeating_player(0),
-m_priority (DEFAULT_PRIORITY)
+m_priority (DEFAULT_PRIORITY),
+m_seeing(false)
 {}
 
 Building::~Building()
@@ -761,6 +762,11 @@ void Building::draw_help
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics) {
+		if (upcast(Interactive_Player const, iplayer, &igbase))
+			if (!iplayer->player().see_all()
+				 &&
+				 iplayer->player().is_hostile(*get_owner()))
+				return;
 		UI::g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL,
@@ -853,11 +859,8 @@ void Building::log_general_info(Editor_Game_Base const & egbase) {
 
 void Building::add_worker(Worker & worker) {
 	if (not get_workers().size()) {
-		//  The first worker will enter the building so it should start seeing.
-		Player & player = owner();
-		Map    & map    = player.egbase().map();
-		player.see_area
-			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+		if (worker.descr().name() != "builder")
+			set_seeing(true);
 	}
 	PlayerImmovable::add_worker(worker);
 }
@@ -865,28 +868,63 @@ void Building::add_worker(Worker & worker) {
 
 void Building::remove_worker(Worker & worker) {
 	PlayerImmovable::remove_worker(worker);
-	if (not get_workers().size()) {
-		//  The last worker has left the building so it should stop seeing.
-		Player & player = owner();
-		Map    & map    = player.egbase().map();
-		player.unsee_area
-			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
-	}
+	if (not get_workers().size())
+		set_seeing(false);
 }
 
-Message & Building::create_message
-	(std::string const &       msgsender,
-	 uint32_t            const time,
-	 Duration            const duration,
-	 std::string const &       title,
-	 std::string const &       description)
-	const
+/**
+ * Change whether this building sees its vision range based on workers
+ * inside the building.
+ *
+ * \note Warehouses always see their surroundings; this is handled separately.
+ */
+void Building::set_seeing(bool see)
+{
+	if (see == m_seeing)
+		return;
+
+	Player & player = owner();
+	Map    & map    = player.egbase().map();
+
+	if (see)
+		player.see_area
+			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+	else
+		player.unsee_area
+			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+
+	m_seeing = see;
+}
+
+/**
+ * Send a message about this building to the owning player.
+ *
+ * It will have the building's coordinates, and display a picture of the
+ * building in its description.
+ *
+ * \param msgsender a computer-readable description of why the message was sent
+ * \param title user-visible title of the message
+ * \param description user-visible message body, will be placed in an
+ *   appropriate rich-text paragraph
+ * \param throttle_time if non-zero, the minimum time delay in milliseconds
+ *   between messages of this type (see \p msgsender) within the
+ *   given \p throttle_radius
+ */
+void Building::send_message
+	(Game & game,
+	 std::string const & msgsender,
+	 std::string const & title,
+	 std::string const & description,
+	 uint32_t throttle_time,
+	 uint32_t throttle_radius)
 {
 	std::string const & picnametempl =
 		g_anim.get_animation(descr().get_ui_anim())->picnametempl;
 	std::string rt_description;
 	rt_description.reserve
-		(strlen("<rt image=") + picnametempl.size() + 1 + description.size() +
+		(strlen("<rt image=") + picnametempl.size() + 1 +
+		 strlen("<p font-size=14 font-face=FreeSerif></p>") +
+		 description.size() +
 		 strlen("</rt>"));
 	rt_description  = "<rt image=";
 	rt_description += picnametempl;
@@ -897,12 +935,19 @@ Message & Building::create_message
 			*it = '0';
 	}
 	rt_description += ".png";
-	rt_description += '>';
+	rt_description += "><p font-size=14 font-face=FreeSerif>";
 	rt_description += description;
-	rt_description += "</rt>";
-	return
-		*new Message
-			(msgsender, time, duration, title, rt_description, get_position());
+	rt_description += "</p></rt>";
+
+	Message * msg = new Message
+		(msgsender, game.get_gametime(), 60 * 60 * 1000,
+		 title, rt_description, get_position());
+
+	if (throttle_time)
+		owner().add_message_with_timeout
+			(game, *msg, throttle_time, throttle_radius);
+	else
+		owner().add_message(game, *msg);
 }
 
 }

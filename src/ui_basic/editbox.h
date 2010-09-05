@@ -56,11 +56,7 @@ struct EditBox : public Panel {
 	void setMaxLength(uint32_t);
 	Align align() const;
 	void setAlign(Align);
-	void set_font(std::string const & name, int32_t size, RGBColor color) {
-		m_fontname = name;
-		m_fontsize = size;
-		m_fontcolor = color;
-	}
+	void set_font(std::string const & name, int32_t size, RGBColor color);
 
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
@@ -69,13 +65,6 @@ struct EditBox : public Panel {
 	void draw(RenderTarget &);
 
 private:
-	std::string                    m_fontname;
-	uint32_t                       m_fontsize;
-	RGBColor                       m_fontcolor;
-
-	bool        m_needredraw;
-	PictureID   m_cache_pid;
-
 	boost::scoped_ptr<EditBoxImpl> m;
 
 	void check_caret();

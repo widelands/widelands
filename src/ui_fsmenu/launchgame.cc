@@ -67,7 +67,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		 m_fn, m_fs),
 	m_wincondition
 		(this, "win_condition",
-		 m_xres * 7 / 10 , m_yres * 4 / 10, m_butw, m_buth,
+		 m_xres * 7 / 10, m_yres * 4 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_LaunchGame::win_condition_clicked, *this,
 		 "", std::string(), false, false,
@@ -107,13 +107,17 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		(this,
 		 m_xres * 19 / 100, m_yres * 53 / 200,
 		 _("Player's type"), UI::Align_Left),
+	m_team
+		(this,
+		 m_xres * 31 / 100, m_yres * 53 / 200,
+		 _("Team"), UI::Align_Left),
 	m_tribe
 		(this,
-		 m_xres * 8 / 25, m_yres * 53 / 200,
+		 m_xres * 36 / 100, m_yres * 53 / 200,
 		 _("Player's tribe"), UI::Align_Left),
 	m_init
 		(this,
-		 m_xres * 9 / 20, m_yres * 53 / 200,
+		 m_xres * 51 / 100, m_yres * 53 / 200,
 		 _("Start type"), UI::Align_Left),
 	m_ready
 		(this,
@@ -145,6 +149,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_name   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	m_type   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
+	m_team   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	m_tribe  .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	m_init   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	m_notes  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -271,11 +276,18 @@ void Fullscreen_Menu_LaunchGame::win_condition_clicked()
 void Fullscreen_Menu_LaunchGame::win_condition_update() {
 	boost::shared_ptr<LuaTable> t = m_lua->run_script
 		("win_conditions", m_settings->getWinCondition());
+
+	try {
+
 	std::string n = t->get_string("name");
 	std::string d = t->get_string("description");
 
 	m_wincondition.set_title(_("Type: ") + n);
 	m_wincondition.set_tooltip(d.c_str());
+	} catch(LuaTableKeyError &) {
+		// might be that this is not a win condition after all.
+		win_condition_clicked();
+	}
 }
 
 /**

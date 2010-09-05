@@ -33,9 +33,9 @@ produce=goldstone:2
 
 [idle]
 pics=deep_goldmine_i_??.png
-hotspot=49 62
+hotspot=49 61
 
 [working]
 pics=deep_goldmine_w_??.png
-hotspot=49 62
+hotspot=49 61
 fps=10

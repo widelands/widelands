@@ -64,6 +64,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	virtual ~Flag();
 
 	void load_finish(Editor_Game_Base &);
+	virtual void destroy(Editor_Game_Base &);
 
 	virtual int32_t  get_type    () const throw ();
 	char const * type_name() const throw () {return "flag";}
@@ -90,6 +91,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 			m_roads[3] or m_roads[4] or m_roads[5];
 	}
 	Road * get_road(uint8_t const dir) const {return m_roads[dir - 1];}
+	uint8_t nr_of_roads() const;
 	void attach_road(int32_t dir, Road *);
 	void detach_road(int32_t dir);
 
@@ -97,15 +99,16 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	bool is_dead_end() const;
 
-	bool has_capacity();
+	bool has_capacity() const;
 	uint32_t total_capacity() {return m_item_capacity;}
+	uint32_t current_items() const {return m_item_filled;}
 	void wait_for_capacity(Game &, Worker &);
 	void skip_wait_for_capacity(Game &, Worker &);
 	void add_item(Editor_Game_Base &, WareInstance &);
 	bool has_pending_item(Game &, Flag & destflag);
 	bool ack_pending_item(Game &, Flag & destflag);
 	WareInstance * fetch_pending_item(Game &, PlayerImmovable & dest);
-	Wares	get_items();
+	Wares get_items();
 
 	void call_carrier(Game &, WareInstance &, PlayerImmovable * nextstep);
 	void update_items(Game &, Flag * other);
@@ -120,7 +123,6 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 protected:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
-	virtual void destroy(Editor_Game_Base &);
 
 	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 

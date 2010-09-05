@@ -123,8 +123,8 @@ struct default_cookie_accessor {
 
 template<typename _T, typename _C, typename _CA>
 cookie_priority_queue<_T, _C, _CA>::cookie_priority_queue(
-	const cookie_priority_queue<_T, _C, _CA>::compare& _c,
-	const cookie_priority_queue<_T, _C, _CA>::cookie_accessor& _a)
+	const typename cookie_priority_queue<_T, _C, _CA>::compare& _c,
+	const typename cookie_priority_queue<_T, _C, _CA>::cookie_accessor& _a)
 : c(_c), ca(_a)
 {
 }
@@ -155,7 +155,7 @@ typename cookie_priority_queue<_T, _C, _CA>::type* cookie_priority_queue<_T, _C,
 }
 
 template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::push(cookie_priority_queue<_T, _C, _CA>::type* elt)
+void cookie_priority_queue<_T, _C, _CA>::push(typename cookie_priority_queue<_T, _C, _CA>::type* elt)
 {
 	cookie& elt_cookie(ca(elt));
 
@@ -168,7 +168,7 @@ void cookie_priority_queue<_T, _C, _CA>::push(cookie_priority_queue<_T, _C, _CA>
 }
 
 template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::pop(cookie_priority_queue<_T, _C, _CA>::type* elt)
+void cookie_priority_queue<_T, _C, _CA>::pop(typename cookie_priority_queue<_T, _C, _CA>::type* elt)
 {
 	cookie& elt_cookie(ca(elt));
 
@@ -191,7 +191,7 @@ void cookie_priority_queue<_T, _C, _CA>::pop(cookie_priority_queue<_T, _C, _CA>:
 }
 
 template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::decrease_key(cookie_priority_queue<_T, _C, _CA>::type* elt)
+void cookie_priority_queue<_T, _C, _CA>::decrease_key(typename cookie_priority_queue<_T, _C, _CA>::type* elt)
 {
 	cookie& elt_cookie(ca(elt));
 
@@ -214,7 +214,7 @@ void cookie_priority_queue<_T, _C, _CA>::decrease_key(cookie_priority_queue<_T, 
 }
 
 template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::increase_key(cookie_priority_queue<_T, _C, _CA>::type* elt)
+void cookie_priority_queue<_T, _C, _CA>::increase_key(typename cookie_priority_queue<_T, _C, _CA>::type* elt)
 {
 	cookie& elt_cookie(ca(elt));
 
@@ -257,7 +257,7 @@ void cookie_priority_queue<_T, _C, _CA>::increase_key(cookie_priority_queue<_T, 
 }
 
 template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::swap(cookie_priority_queue<_T, _C, _CA>::cookie& a, cookie_priority_queue<_T, _C, _CA>::cookie& b)
+void cookie_priority_queue<_T, _C, _CA>::swap(typename cookie_priority_queue<_T, _C, _CA>::cookie& a, typename cookie_priority_queue<_T, _C, _CA>::cookie& b)
 {
 	std::swap(d[cookie_pos(a)], d[cookie_pos(b)]);
 	std::swap(cookie_pos(a), cookie_pos(b));

@@ -56,7 +56,7 @@ struct SoldierControl {
 	virtual uint32_t minSoldierCapacity() const = 0;
 
 	/**
-	 * \return the minimum number of soldiers that this building can be
+	 * \return the maximum number of soldiers that this building can be
 	 * configured to hold.
 	 */
 	virtual uint32_t maxSoldierCapacity() const = 0;

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 13:56+0000\n"
-"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"PO-Revision-Date: 2010-07-03 12:12+0000\n"
+"Last-Translator: David Spanel <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-07-04 03:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -22,119 +22,13 @@ msgstr ""
 msgid "(Tutorial) Barbarians - The second Empire"
 msgstr "(Trénink) Barbaři - Druhé impérium"
 
-#: ../../campaigns/cconfig:27
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons and warlord to an army that could match any enemy willing to "
-"rise against the ancient forests. Though his glorious reign, Chat’Karuth "
-"left his eldest son Thron in the due to succeed him as the tribes warlord – "
-"a decision that left his two brothers unsatisfied. The old warlord knew "
-"that. As his father told him, Thron left the capital of Al’thunran, the home "
-"of the throne among the trees and redrew his forces to the high hills where "
-"he buried the corpse of his father and swore to the gods and his spirit, "
-"that he’d return to re-established order. While his brothers raged in blind "
-"war against Thron and the few forces he left to secure the borders of "
-"Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
-"force the tribes to march once again under a common banner."
-msgstr ""
-"Chat’Karuth zemřel jako starý muž. Otec tří silných, ambiciózních synů a "
-"velitel armády, připravené postavit se každému nepříteli, který by se "
-"pokusil zaútočit na prastaré lesy. Po letech prosperity a slavné vlády se "
-"Chat’Karuth rozhodl jmenoval svého nejstaršího syna Throna jako svého "
-"nástupce v postavení náčelníka – rozhodnutí, které se pranic nezamlouvalo "
-"jeho dvěma bratrům. A starý válečník to věděl, ale přál si skonat v pokoji. "
-"Thron vyplnil poslední přání svého otce, opustil hlavní město Al’thunran, "
-"domov trůnu mezi stromy, a přesunul své síly do hor, kde svého otce pohřbil. "
-"Při jeho hrobě přísahal bohům, že se vrátí a znovu nastolí pořádek. A "
-"zatímco jeho bratři vedli zuřivou a nesmyslnou válku proti Thronovi a jeho "
-"jednotkám zanechným na obranu hranic Al’thunran, mladý válečník se pokouší "
-"znovu sjednotit své ambiciózní bratry a přinutit kmeny opět pochodovat pod "
-"jednou zástavou."
-
-#: ../../campaigns/cconfig:30
-msgid "Empire - The months of exile"
-msgstr "Císařství - Měsíce ve vyhnanství"
-
-#: ../../campaigns/cconfig:33
-msgid ""
-"Six month ago, Lutius - a young general of the Empire - was send with 150 "
-"soldiers at the frontier among the northern forests, where Barbarian-tribes "
-"and official Empire-land are crossing. His task was to defend the Empire-"
-"land. First everything was calm, he even talked to few barbarian children "
-"and thought about a peaceful life - side by side with this archaic folk. He "
-"began to feel saver and his army begun to draw off the attention on they "
-"potential enemy - that was their fault. At one night in March his unprepared "
-"army was attacked by 100 barbarian footmen and was completely scattered. "
-"Only with pure life he and a handful of soldiers survived."
-msgstr ""
-"Před šesti měsíci byl Lucius - mladý generál císařské armády - vyslán se 150 "
-"vojáky do lesů na severní hranici, kde končí území Císařství a začíná území "
-"ovládané barbarskými kmeny. Jeho úkolem bylo bránit hranice Císařství. "
-"Zpočátku bylo vše klidné, dokonce mluvil s několika barbarskými dětmi a "
-"přemýšlel o životě vedle těchto sice primitivních, ale přesto mírumilovných "
-"sousedů. Začal se cítit v bezpečí a jeho armáda polevila v ostražitosti a "
-"přestala hlídat potenciálního nepřítele. To se ukázalo jako osudová chyba. "
-"Jedné březnové noci stovka barbarů bez varování zaútočila na jeho "
-"nepřipravenou armádu a zcela ji rozprášila. Lucius vyvázl pouze s holým "
-"životem a s hrstkou věrných vojáků."
-
-#: ../../campaigns/cconfig:36
-msgid "Atlanteans - the new rise"
-msgstr "Atlantiďané - nový vzestup"
-
-#: ../../campaigns/cconfig:39
-msgid "Some descriptive texts..."
-msgstr "Nějaké popisné texty..."
-
-#: ../../campaigns/cconfig:57
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Trénink 1 - Oči v temnotě"
-
-#: ../../campaigns/cconfig:62
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Trénink 2 - Budování domova"
-
-#: ../../campaigns/cconfig:67
-msgid "Tutorial3 - This land is our land"
-msgstr "Trénink 3 - Tato země je naše"
-
-#: ../../campaigns/cconfig:74
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Císařství - Trénink 1 - Pobřeží Malac' Mor"
-
-#: ../../campaigns/cconfig:79
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Císařství - Trénink 2 - Základna v exilu"
-
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
 msgstr "01 - Ze záhuby ke zrodu"
 
-#: ../../maps/Atoll.wmf/elemental:7
-msgid "Atoll"
-msgstr "Atol"
-
-#: ../../maps/Atoll.wmf/elemental:9
-msgid "Who will be the real King of the big atoll?"
-msgstr "Kdo se stane pravým vládcem mohutného atolu?"
-
-#: ../../maps/Checkmate.wmf/elemental:7
-msgid "Checkmate"
-msgstr "Šachovnice"
-
-#: ../../maps/Checkmate.wmf/elemental:9
-msgid ""
-"Whether just one of nature's strangest features or the creation of a mad "
-"(and game-hungry) god, this weird battleground awaits two opponents for "
-"another confrontation."
-msgstr ""
-"Ať už jen z nejbláznivějších výstřelků přírody, nebo výtvor šíleného (ale "
-"hravého) boha, toto podivné bojiště očekává dva soupeře, aby na něm změřili "
-"své síly."
-
-#: ../../maps/Comet Island.wmf/elemental:7
-msgid "Comet Island"
-msgstr "Ostrov komety"
+#: ../../maps/Enemy in sight.wmf/elemental:9
+msgid "A Multiplayer-battle-map on a X-Shaped island."
+msgstr "Multiplayerová bitevní mapa na ostrově ve tvaru X."
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -150,67 +44,172 @@ msgstr ""
 "znamení bohů? Věříš že ano a doufáš, že na tomto ostrově tvůj kmen nalezne "
 "jeho bohatství dříve, než jej objeví ostatní."
 
-#: ../../maps/Crater.wmf/elemental:9
+#: ../../maps/Glacier Lake.wmf/elemental:9
+msgid ""
+"A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
+"one disturbed you and the resources were enough for your whole tribe, but a "
+"few months ago another tribe came over the mountains and settled down. And "
+"you are sure, that there is only enough place for one tribe."
+msgstr ""
+"Dlouhé věky tvůj kmen sídlil na břehu krásného a osamoceného horského plesa. "
+"Užívali jste, nikým nerušeni, bohatých darů přírody. To všechno skončilo "
+"před pár měsíci, kdy přes hory přišel cizí kmen, aby se zde usadil. Ale ty "
+"si jsi jistý, že je zde místo pouze pro jeden z kmenů."
+
+#: ../../maps/Two frontiers.wmf/elemental:9
+msgid "A multiplayer-battle-map on a small circle-shaped island."
+msgstr "Multiplayerová bitevní mapa na malém ostrově ve tvaru kruhu."
+
+#: ../../maps/Riverlands.wmf/elemental:9
+msgid ""
+"A mystical land, full of different landscapes, which are all crossed by a "
+"handful of big rivers."
+msgstr ""
+"Mystická země plná různorodých krajin, které jsou všechny protkány několika "
+"velkými řekami."
+
+#: ../../maps/Impact.wmf/elemental:9
+msgid ""
+"After an impact of an asteroid and the following harsh winter, three isles "
+"are connected by ice and stone, setting an end to the peaceful coexistence "
+"of three tribes."
+msgstr ""
+"Po dopadu asteroidu a následné kruté zimě zůstaly tři ostrovy spojené ledem "
+"a kamením. Pokojné soužití tří kmenů právě skončilo."
+
+#: ../../maps/The long way.wmf/elemental:9
+msgid ""
+"Another strange test by the Gods. To reach the other side, there seems to be "
+"no other way, than occupying the land of your enemies."
+msgstr ""
+"Další podivný test bohů. Vypadá to, že na druhou stranu ostrova nevede jiná "
+"cesta, než podmanit si země svých nepřátel."
+
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid ""
+"Another thaw set in. Three tribes were sheltering form severe winter among "
+"majestic mountains. During solstice they listened to the oracle and went on "
+"to war. The only survivor will sacrifice his enemies' treasures on the "
+"ancient altar, build there a splendid castle and gain goodwill and the "
+"respect of the Gods."
+msgstr ""
+"Začíná další obleva. Zatímco řádila krutá zima, zůstávaly tři kmeny ve svých "
+"úkrytech v mohutných horách. Za slunovratu uposlechli bojovníci věštce a "
+"vydali se do války. Pouze ten, kdo přežije, bude moci obětovat na prastarém "
+"oltáři poklady svých nepřátel, postavit velkolepý hrad a vydobýt si tak "
+"uznání a přízeň bohů."
+
+#: ../../campaigns/cconfig:36
+msgid "Atlanteans - the new rise"
+msgstr "Atlantiďané - nový vzestup"
+
+#: ../../maps/Atoll.wmf/elemental:7
+msgid "Atoll"
+msgstr "Atol"
+
+#: ../../maps/Checkmate.wmf/elemental:7
+msgid "Checkmate"
+msgstr "Šachovnice"
+
+#: ../../maps/Comet Island.wmf/elemental:7
+msgid "Comet Island"
+msgstr "Ostrov komety"
+
+#: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
 msgstr "Kráter"
-
-#: ../../maps/Crater.wmf/elemental:11
-msgid ""
-"Long after a meteor crashed into a couple of mountains, life blossoms in the "
-"crater. Two tribes are now fighting for the rich resources."
-msgstr ""
-"Před dávnými dobami spadl do pohoří meteor. Nyní se kráter opět zabydluje a "
-"dva kmeny bojují o nerostné bohatství."
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
 msgstr "Vyschlé řečiště"
 
-#: ../../maps/Dry Riverbed.wmf/elemental:9
+#: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
-"It was a long time ago, since the last raindrop touched these grounds. No "
-"wonder, that there is not much water left in this dry riverbed. Everyone "
-"knows: soon there will be a war. A war about the last of water."
+"Each tribe is surrounded by four mighty mountains. Who will first conquer "
+"them and claim the resources for his own tribe? Hint I: Water can be found "
+"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"Each mountain contains only one resource."
 msgstr ""
-"Je to již velmi dávno, co se země dotkla poslední dešťová kapka. Není divu, "
-"že ve vyprahlém řečišti nezbyla skoro žádná voda. Každý už ví, že bude "
-"válka. Válka o poslední zbytky vody."
+"Každý kmen je obklopen čtyřmi vysokými horami. Kdo je pokoří jako první a "
+"získá z nich nerostné bohatství pro svůj kmen? Nápověda I: Vodu lze nalézt v "
+"okolí řeky. Nápověda II: Sněhuláci označují další vodní zdroje. Nápověda "
+"III: Každá hora ukrývá pouze jeden nerost."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Elfí les"
 
-#: ../../maps/Elven Forests.wmf/elemental:9
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt of taking them for themselves."
-msgstr ""
-"Omračující krása těchto bájných zemí přivábila už mnohé kmeny, které se "
-"rozhodly zabrat si je jen pro sebe."
+#: ../../campaigns/cconfig:30
+msgid "Empire - The months of exile"
+msgstr "Císařství - Měsíce ve vyhnanství"
+
+#: ../../campaigns/cconfig:74
+msgid "Empire Tutorial1 - The strands of Malac' Mor"
+msgstr "Císařství - Trénink 1 - Pobřeží Malac' Mor"
+
+#: ../../campaigns/cconfig:79
+msgid "Empire Tutorial2 - An outpost for exile"
+msgstr "Císařství - Trénink 2 - Základna v exilu"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
 msgstr "Nepřítel na dohled"
 
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "Multiplayerová bitevní mapa na ostrově ve tvaru X."
-
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
 msgstr "Finská jezera"
 
-#: ../../maps/Finlakes.wmf/elemental:11
-msgid ""
-"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
-"forests and mountains. It is up to you, to find a way through these lands."
-msgstr ""
-"Toto je nádherná finská krajina, plná jezerních ploch, řek, prastarých "
-"hvozdů a hor. Je jen na tobě, jak si jimi najdeš cestu."
-
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
 msgstr "Hrátky s ohněm"
+
+#: ../../maps/Islands at war.wmf/elemental:11
+msgid ""
+"For centuries you've lived peacefully together with the other tribe on the "
+"neighboured island. This peace seems to end now - your neighbour begins to "
+"expand."
+msgstr ""
+"Po staletí jste žili se sousedním kmenem z nedalekého ostrova v míru. Ale "
+"pokojné časy právě končí - tví sousedé začínají rozšiřovat své hranice."
+
+#: ../../maps/Sun of fire.wmf/elemental:11
+msgid ""
+"For hundreds of years this island was kept as sanctuary of the Gods. No "
+"human ever ventured to set a foot on it. But now, that a tribe was finally "
+"barefaced enough to settle on the coast of that island, a lot others "
+"followed afterwards."
+msgstr ""
+"Po stovky let byl tento ostrov svatyní samotných Bohů. Žádný člověk na něj "
+"nikdy nevstoupil. Až nyní vzrostla nestydatost jednoho kmene natolik, že se "
+"usadili přímo na pobřeží tohoto ostrova. A spousta dalších je následovala."
+
+#: ../../maps/Four Castles.wmf/elemental:7
+msgid "Four Castles"
+msgstr "Čtyři hrady"
+
+#: ../../maps/Four Mountains.wmf/elemental:7
+msgid "Four Mountains"
+msgstr "Čtyři hory"
+
+#: ../../maps/Glacier Lake.wmf/elemental:7
+msgid "Glacier Lake"
+msgstr "Ledovcové pleso"
+
+#: ../../maps/Golden Peninsula.wmf/elemental:7
+msgid "Golden Peninsula"
+msgstr "Zlatý poloostrov"
+
+#: ../../maps/Impact.wmf/elemental:7
+msgid "Impact"
+msgstr "Dopad"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:11
+msgid ""
+"In this mountainous area two princes have settled. Now they are expanding "
+"their territories unaware of the fact that they are not alone!"
+msgstr ""
+"Dva princové se usadili na různých stranách tohoto pohoří. Nyní rozšiřují "
+"své země a ani jeden z nich netuší, že v této krajině nejsou sami!"
 
 #: ../../maps/Firegames.wmf/elemental:9
 msgid ""
@@ -224,158 +223,90 @@ msgstr ""
 "na něm osamocen, ale kdoví co všechno se může stát, jestli se střetneš se "
 "soupeřícím klanem?"
 
-#: ../../maps/Four Castles.wmf/elemental:7
-msgid "Four Castles"
-msgstr "Čtyři hrady"
-
-#: ../../maps/Four Castles.wmf/elemental:9
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
-msgstr ""
-"Dobře ukrytí ve svých tvrzích, čtyři vládychtiví vladykové spřádají své "
-"plány na ovládnutí těchto zemí..."
-
-#: ../../maps/Four Mountains.wmf/elemental:9
-msgid "Four Mountains"
-msgstr "Čtyři hory"
-
-#: ../../maps/Four Mountains.wmf/elemental:11
-msgid ""
-"Each tribe is surrounded by four mighty mountains. Who will first conquer "
-"them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
-"Each mountain contains only one resource."
-msgstr ""
-"Každý kmen je obklopen čtyřmi vysokými horami. Kdo je pokoří jako první a "
-"získá z nich nerostné bohatství pro svůj kmen? Nápověda I: Vodu lze nalézt v "
-"okolí řeky. Nápověda II: Sněhuláci označují další vodní zdroje. Nápověda "
-"III: Každá hora ukrývá pouze jeden nerost."
-
-#: ../../maps/Glacier Lake.wmf/elemental:7
-msgid "Glacier Lake"
-msgstr "Ledovcové pleso"
-
-#: ../../maps/Glacier Lake.wmf/elemental:9
-msgid ""
-"A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
-"one disturbed you and the resources were enough for your whole tribe, but a "
-"few months ago another tribe came over the mountains and settled down. And "
-"you are sure, that there is only enough place for one tribe."
-msgstr ""
-"Dlouhé věky tvůj kmen sídlil na břehu krásného a osamoceného horského plesa. "
-"Užívali jste, nikým nerušeni, bohatých darů přírody. To všechno skončilo "
-"před pár měsíci, kdy přes hory přišel cizí kmen, aby se zde usadil. Ale ty "
-"si jsi jistý, že je zde místo pouze pro jeden z kmenů."
-
-#: ../../maps/Golden Peninsula.wmf/elemental:7
-msgid "Golden Peninsula"
-msgstr "Zlatý poloostrov"
-
-#: ../../maps/Golden Peninsula.wmf/elemental:9
-msgid "Two empires race for the treasures of a legendary peninsula..."
-msgstr "Dvě říše soupeří o poklady bájného poloostrova..."
-
-#: ../../maps/Impact.wmf/elemental:7
-msgid "Impact"
-msgstr "Dopad"
-
-#: ../../maps/Impact.wmf/elemental:9
-msgid ""
-"After an impact of an asteroid and the following harsh winter, three isles "
-"are connected by ice and stone, setting an end to the peaceful coexistence "
-"of three tribes."
-msgstr ""
-"Po dopadu asteroidu a následné kruté zimě zůstaly tři ostrovy spojené ledem "
-"a kamením. Pokojné soužití tří kmenů právě skončilo."
-
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
 msgstr "Ostrovy ve válce"
 
-#: ../../maps/Islands at war.wmf/elemental:11
+#: ../../maps/War of the Valleys.wmf/elemental:9
 msgid ""
-"For centuries you've lived peacefully together with the other tribe on the "
-"neighboured island. This peace seems to end now - your neighbour begins to "
-"expand."
+"It is said that even sun and moon must find their way between the spires of "
+"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
+"Geologists elsewhere."
 msgstr ""
-"Po staletí jste žili se sousedním kmenem z nedalekého ostrova v míru. Ale "
-"pokojné časy právě končí - tví sousedé začínají rozšiřovat své hranice."
+"Říká se, že dokonce i Slunce a Měsíc si musí hledat cestu mezi vrcholky "
+"těchto velehor. Nápověda: Monolity označují území bohatá na rudu. Je "
+"zbytečné posílat geology jinam."
+
+#: ../../maps/Wisent Valley.wmf/elemental:11
+msgid ""
+"It seems as if this magical valley was inhabited by wisents since the "
+"beginning of days. When your tribe came to this place, you were sure that it "
+"offers enough space for a peaceful life. But can your tribe live in peace "
+"with your neighbours?"
+msgstr ""
+"Toto magické údolí bylo od počátku času obydleno zubry. Když sem tvůj kmen "
+"přišel, byli si jisti, že nabízí spoustu místa pro mírumilovný život. Ale "
+"může tvůj kmen žít v míru s ostatními sousedy?"
+
+#: ../../maps/Swamp Island.wmf/elemental:11
+msgid ""
+"It smells like swamp, it looks like swamp and it is swamp. But it is the "
+"place you were born and you lived your whole life. If you don't want to lose "
+"it, defend it! "
+msgstr ""
+"Páchne to jako bažina, vypadá to jako bažina a je to bažina. Ale je to "
+"místo, kde ses narodil a prožil celý svůj život. A pokud ho nechceš ztratit, "
+"musíš ho bránit! "
+
+#: ../../maps/Dry Riverbed.wmf/elemental:9
+msgid ""
+"It was a long time ago, since the last raindrop touched these grounds. No "
+"wonder, that there is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last of water."
+msgstr ""
+"Je to již velmi dávno, co se země dotkla poslední dešťová kapka. Není divu, "
+"že ve vyprahlém řečišti nezbyla skoro žádná voda. Každý už ví, že bude "
+"válka. Válka o poslední zbytky vody."
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
 msgstr "Jezero klidu"
 
-#: ../../maps/Lake of tranquility.wmf/elemental:9
-msgid ""
-"This lake, deep in the most ancient forests, has long been known for its "
-"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
-"hostile tribes arrive at its shores..."
-msgstr ""
-"Jezero klidu, ukryto v nejhlubších hvozdech, bylo odedávna znáno svou "
-"čarovnou krásou a nerušeným tichem. Avšak teď byla jeho klidná hladina "
-"zčeřena, když se na jeho břehu objevily dva neprátelské kmeny..."
-
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
 msgstr "Poslední pevnost"
 
-#: ../../maps/Last Bastion.wmf/elemental:11
+#: ../../maps/Crater.wmf/elemental:9
 msgid ""
-"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
-"Sun heated up the Earth and melted glaciers and people plunged into the "
-"deep. But now - high in the majestic mountains, on the last scrap of land - "
-"two surviving tribes are sheltering. Even though the Gods showed mercy and "
-"the climate thus turned cooler again the water is still rising and rising. "
-"Onto the last secure place - the highest mountain range where the amount of "
-"gold and the space to live merely suffice for one tribe - only two opposite "
-"paths lead. But remember, be careful... this last living space is also a "
-"hard and small place to live. Don't forget to take care about your timber "
-"supplies, you'll need them."
+"Long after a meteor crashed into a couple of mountains, life blossoms in the "
+"crater. Two tribes are now fighting for the rich resources."
 msgstr ""
-"Vrtkaví bohové neodpověděli na vaše modlitby. Místo toho stále parnější "
-"Slunce zahřálo Zemi, rozpustilo ledovce a lidé se ukryli hluboko v podzemí. "
-"Vysoko v majestátních horách se nyní na posledním kousku země ukrývají dva "
-"poslední přeživší kmeny. I přesto, že se bohové smilovali a klima se začalo "
-"opět ochlazovat, voda stále stoupá. Na poslední bezpečné místo - do "
-"nejvyšších hor, kde množství zlata a a místo postačuje sotva pro přežití "
-"jednoho kmene - vedou dvě stezky. Ale pamatuj, buď opatrný... život na tomto "
-"posledním malém kousku země bude tvrdý. Nezapomeň se starat o své zásoby "
-"dřeva, budeš je potřebovat."
+"Před dávnými dobami spadl do pohoří meteor. Nyní se kráter opět zabydluje a "
+"dva kmeny bojují o nerostné bohatství."
+
+#: ../../maps/Twinkling Waves.wmf/elemental:11
+msgid ""
+"Many beautiful, green islands await the ones brave enough to pass the "
+"thousand waves, twinkling in the sun."
+msgstr ""
+"Mnoho nádherných zelených ostrovů očekává hrdiny, kteří odvážně proplují "
+"tisícem vln třpytících se v záři slunce."
+
+#: ../../maps/Three Warriors.wmf/elemental:11
+msgid ""
+"Mighty mountains divide this land into three fertile valleys. But a path "
+"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
+"found around the lakes."
+msgstr ""
+"Mohutné pohoří rozděluje tuto zemi do tří úrodných nížin. Přesto jsou údolí "
+"spojena stezkami a takže boj je nevyhnutelný! Nápověda: Vodu lze najít v "
+"okolí jezer."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
 msgstr "Mystický labyrint"
 
-#: ../../maps/Mystical Maze.wmf/elemental:11
-msgid ""
-"There are two big questions around: Who created this unbelievably big maze "
-"and what can be found inside?"
-msgstr ""
-"Vše se soustředí na dvě základní otázky: Kdo stvořil toto neuvěřitelně "
-"rozlehlé bludiště a co se skrývá uvnitř?"
-
-#: ../../maps/Plateau.wmf/elemental:7
-msgid "The Green Plateau"
-msgstr "Zelená pláň"
-
-#: ../../maps/Plateau.wmf/elemental:9
-msgid ""
-"You are standing on an island, crowned by mighty mountains, which keep a "
-"wonderful and mighty treasure in their middle - The Green Plateau, which is "
-"hard to get, but easy to lose, so if you want it, be aware of the other "
-"clans."
-msgstr ""
-"Stojíš na ostrově korunovaném mohutnými velehorami, které ve svém srdci "
-"ukrývají nádherný a mocný poklad - Zelenou pláň. Je nesmírně těžké ji dobýt, "
-"ale tak snadné zas ztratit. Jestli ji chceš pro sebe, musís se o ní utkat s "
-"ostatními."
-
 #: ../../maps/Rendez-Vous.wmf/elemental:9
-msgid "Rendez-Vous"
-msgstr "Rendez-Vous"
-
-#: ../../maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army right away to this hill and build a giant stronghold "
@@ -388,50 +319,39 @@ msgstr ""
 "Nápověda: Uprostřed je místo pouze pro jednu pevnost. Voda je všude, není "
 "potřeba posílat geology."
 
+#: ../../maps/Rendez-Vous.wmf/elemental:7
+msgid "Rendez-Vous"
+msgstr "Rendez-Vous"
+
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
 msgstr "Země řek"
 
-#: ../../maps/Riverlands.wmf/elemental:9
+#: ../../campaigns/cconfig:33
 msgid ""
-"A mystical land, full of different landscapes, which are all crossed by a "
-"handful of big rivers."
+"Six months ago, Lutius - a young general of the Empire - was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire's land. At first, everything was calm. He even talked to a few "
+"barbarian children and thought about a peaceful life - side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
 msgstr ""
-"Mystická země plná různorodých krajin, které jsou všechny protkány několika "
-"velkými řekami."
+"Před šesti měsíci, Lucius - mladý generál Impéria - byl vyslán se 150 muži "
+"na hranici za severními lesy, kde barbaské kmeny přecházely do zemí Impéria. "
+"Jeho úkol byl tuto zem ubránit. Ze začátku bylo vše klidné. Dokonce hovořil "
+"s několika barbarskými dětmi a doufal v mírumilovný život po boku tohoto "
+"starobylého lidu. Cítil se bezpečně a jeho armáda přestala dávat pozor na "
+"potenciálního nepřítele. To byla jejich zkáza. Jedné březnové noci byla jeho "
+"nepřipravená armáda napadena stem barbarských pěšáků a rozprášena. S holým "
+"životem vyvázl pouze on a hrstka jeho vojáků"
 
-#: ../../maps/Sun of fire.wmf/elemental:9
-msgid "The ancient sun of fire"
-msgstr "Pradávné ohnivé slunce"
-
-#: ../../maps/Sun of fire.wmf/elemental:11
-msgid ""
-"For hundreds of years this island was kept as sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now, that a tribe was finally "
-"barefaced enough to settle on the coast of that island, a lot others "
-"followed afterwards."
-msgstr ""
-"Po stovky let byl tento ostrov svatyní samotných Bohů. Žádný člověk na něj "
-"nikdy nevstoupil. Až nyní vzrostla nestydatost jednoho kmene natolik, že se "
-"usadili přímo na pobřeží tohoto ostrova. A spousta dalších je následovala."
-
-#: ../../maps/Swamp Island.wmf/elemental:9
-msgid "Swamp Island"
-msgstr "Bažiny"
-
-#: ../../maps/Swamp Island.wmf/elemental:11
-msgid ""
-"It smells like swamp, it looks like swamp and it is swamp. But it is the "
-"place you were born and you lived your whole life. If you don't want to lose "
-"it, defend it! "
-msgstr ""
-"Páchne to jako bažina, vypadá to jako bažina a je to bažina. Ale je to "
-"místo, kde ses narodil a prožil celý svůj život. A pokud ho nechceš ztratit, "
-"musíš ho bránit! "
-
-#: ../../maps/The Far North.wmf/elemental:9
-msgid "The Far North"
-msgstr "Daleký sever"
+#: ../../campaigns/cconfig:39
+msgid "Some descriptive texts..."
+msgstr "Nějaké popisné texty..."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -460,9 +380,57 @@ msgstr ""
 "bohatství ukrývajícímu se na severu je volná. Přesto mnozí zahynou roztrháni "
 "vlky, pohlceni bažinami... a obklíčeni nepřátelskými kmeny."
 
+#: ../../maps/Swamp Island.wmf/elemental:9
+msgid "Swamp Island"
+msgstr "Bažiny"
+
+#: ../../maps/The Far North.wmf/elemental:9
+msgid "The Far North"
+msgstr "Daleký sever"
+
+#: ../../maps/Plateau.wmf/elemental:7
+msgid "The Green Plateau"
+msgstr "Zelená pláň"
+
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
 msgstr "Oázy v trojúhelníku"
+
+#: ../../maps/The Thaw.wmf/elemental:9
+msgid "The Thaw"
+msgstr "Obleva"
+
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The ancient sun of fire"
+msgstr "Pradávné ohnivé slunce"
+
+#: ../../maps/The big lake.wmf/elemental:7
+msgid "The big lake"
+msgstr "Velké jezero"
+
+#: ../../maps/Elven Forests.wmf/elemental:9
+msgid ""
+"The breath-taking beauty of these emerald lands has lured many tribes into "
+"an attempt of taking them for themselves."
+msgstr ""
+"Omračující krása těchto bájných zemí přivábila už mnohé kmeny, které se "
+"rozhodly zabrat si je jen pro sebe."
+
+#: ../../maps/The long way.wmf/elemental:7
+msgid "The long way"
+msgstr "Dlouhá cesta"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:9
+msgid "The pass through the mountains"
+msgstr "Horský průsmyk"
+
+#: ../../maps/Mystical Maze.wmf/elemental:11
+msgid ""
+"There are two big questions around: Who created this unbelievably big maze "
+"and what can be found inside?"
+msgstr ""
+"Vše se soustředí na dvě základní otázky: Kdo stvořil toto neuvěřitelně "
+"rozlehlé bludiště a co se skrývá uvnitř?"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid ""
@@ -474,27 +442,13 @@ msgstr ""
 "ještě nikdo neobjevil. Možná to budeš právě ty. Ale měj se na pozoru před "
 "ostatními, kteří také hledají!"
 
-#: ../../maps/The Thaw.wmf/elemental:9
-msgid "The Thaw"
-msgstr "Obleva"
-
-#: ../../maps/The Thaw.wmf/elemental:11
+#: ../../maps/Finlakes.wmf/elemental:11
 msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
-"majestic mountains. During solstice they listened to the oracle and went on "
-"to war. The only survivor will sacrifice his enemies' treasures on the "
-"ancient altar, build there a splendid castle and gain goodwill and the "
-"respect of the Gods."
+"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
+"forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
-"Začíná další obleva. Zatímco řádila krutá zima, zůstávaly tři kmeny ve svých "
-"úkrytech v mohutných horách. Za slunovratu uposlechli bojovníci věštce a "
-"vydali se do války. Pouze ten, kdo přežije, bude moci obětovat na prastarém "
-"oltáři poklady svých nepřátel, postavit velkolepý hrad a vydobýt si tak "
-"uznání a přízeň bohů."
-
-#: ../../maps/The big lake.wmf/elemental:7
-msgid "The big lake"
-msgstr "Velké jezero"
+"Toto je nádherná finská krajina, plná jezerních ploch, řek, prastarých "
+"hvozdů a hor. Je jen na tobě, jak si jimi najdeš cestu."
 
 #: ../../maps/The big lake.wmf/elemental:9
 msgid ""
@@ -512,92 +466,137 @@ msgstr ""
 "jediné, co zbylo z kdysi mohutné ohnivé hory. Myslíš, že je dost veliký na "
 "to, aby zde našel domov více než jeden kmen?"
 
-#: ../../maps/The long way.wmf/elemental:7
-msgid "The long way"
-msgstr "Dlouhá cesta"
-
-#: ../../maps/The long way.wmf/elemental:9
+#: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid ""
-"Another strange test by the Gods. To reach the other side, there seems to be "
-"no other way, than occupying the land of your enemies."
+"This lake, deep in the most ancient forests, has long been known for its "
+"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
+"hostile tribes arrive at its shores..."
 msgstr ""
-"Další podivný test bohů. Vypadá to, že na druhou stranu ostrova nevede jiná "
-"cesta, než podmanit si země svých nepřátel."
-
-#: ../../maps/The pass through the mountains.wmf/elemental:9
-msgid "The pass through the mountains"
-msgstr "Horský průsmyk"
-
-#: ../../maps/The pass through the mountains.wmf/elemental:11
-msgid ""
-"In this mountainous area two princes have settled. Now they are expanding "
-"their territories unaware of the fact that they are not alone!"
-msgstr ""
-"Dva princové se usadili na různých stranách tohoto pohoří. Nyní rozšiřují "
-"své země a ani jeden z nich netuší, že v této krajině nejsou sami!"
+"Jezero klidu, ukryto v nejhlubších hvozdech, bylo odedávna znáno svou "
+"čarovnou krásou a nerušeným tichem. Avšak teď byla jeho klidná hladina "
+"zčeřena, když se na jeho břehu objevily dva neprátelské kmeny..."
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
 msgstr "Tři válečníci"
 
-#: ../../maps/Three Warriors.wmf/elemental:11
-msgid ""
-"Mighty mountains divide this land into three fertile valleys. But a path "
-"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
-"found around the lakes."
-msgstr ""
-"Mohutné pohoří rozděluje tuto zemi do tří úrodných nížin. Přesto jsou údolí "
-"spojena stezkami a takže boj je nevyhnutelný! Nápověda: Vodu lze najít v "
-"okolí jezer."
+#: ../../campaigns/cconfig:57
+msgid "Tutorial1 - Eyes in the Dark"
+msgstr "Trénink 1 - Oči v temnotě"
+
+#: ../../campaigns/cconfig:62
+msgid "Tutorial2 - A Place to call Home"
+msgstr "Trénink 2 - Budování domova"
+
+#: ../../campaigns/cconfig:67
+msgid "Tutorial3 - This land is our land"
+msgstr "Trénink 3 - Tato země je naše"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Třpytivé vlny"
 
-#: ../../maps/Twinkling Waves.wmf/elemental:11
-msgid ""
-"Many beautiful, green islands await the ones brave enough to pass the "
-"thousand waves, twinkling in the sun."
-msgstr ""
-"Mnoho nádherných zelených ostrovů očekává hrdiny, kteří odvážně proplují "
-"tisícem vln třpytících se v záři slunce."
-
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
 msgstr "Dvě hranice"
 
-#: ../../maps/Two frontiers.wmf/elemental:9
-msgid "A multiplayer-battle-map on a small circle-shaped island."
-msgstr "Multiplayerová bitevní mapa na malém ostrově ve tvaru kruhu."
+#: ../../maps/Golden Peninsula.wmf/elemental:9
+msgid "Two empires race for the treasures of a legendary peninsula..."
+msgstr "Dvě říše soupeří o poklady bájného poloostrova..."
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "Válka v údolích"
 
-#: ../../maps/War of the Valleys.wmf/elemental:9
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
-"It is said that even sun and moon must find their way between the spires of "
-"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
-"Geologists elsewhere."
+"Well protected in their mighty fortresses, four power-hungry warlords are "
+"completing their schemes to dominate these lands..."
 msgstr ""
-"Říká se, že dokonce i Slunce a Měsíc si musí hledat cestu mezi vrcholky "
-"těchto velehor. Nápověda: Monolity označují území bohatá na rudu. Je "
-"zbytečné posílat geology jinam."
+"Dobře ukrytí ve svých tvrzích, čtyři vládychtiví vladykové spřádají své "
+"plány na ovládnutí těchto zemí..."
+
+#: ../../campaigns/cconfig:27
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons and warlord to an army that could match any enemy willing to "
+"rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord "
+"knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father's spirit that he’d return to re-established "
+"order. While his brothers raged in blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr ""
+"Když Chat'Karuth zemřel, byl to již starý muž, otec tří silných a "
+"cílevědomých synů a velitem armády schopné se postavi kterémukoliv "
+"nepříteli, který by pozvedl zbraň proti prastarým lesům. Avšak když skončila "
+"doba jeho slavné vlády, Chat’Karuth předal vládu nad svým kmenem svému "
+"nejstaršímu synu Thronovi - jehož bratři s tímto rozhodnutím ovšem "
+"nesouhlasili. Starý náčelník to věděl. Podle otcových pokynů Thron opustil "
+"Al'thuranu, kde se nacházel Trůn mezi Stromy, a stáhl se se svými vojsky do "
+"vysokých kopců, kde pohřbil svého otce. Tam přísahal při bozích a duchu "
+"svého otce, že se vrátí a znovunastolí pořádek. Zatímco jeho bratři zuřivě "
+"vedli válku proti Thronovi a slabým vojskům, které zanechal střežit hranice, "
+"mladý náčelník se snaží sjednotit své bratry a přimět kmeny znovu pochodovat "
+"pod společným praporcem."
+
+#: ../../maps/Checkmate.wmf/elemental:9
+msgid ""
+"Whether just one of nature's strangest features or the creation of a mad "
+"(and game-hungry) god, this weird battleground awaits two opponents for "
+"another confrontation."
+msgstr ""
+"Ať už jen z nejbláznivějších výstřelků přírody, nebo výtvor šíleného (ale "
+"hravého) boha, toto podivné bojiště očekává dva soupeře, aby na něm změřili "
+"své síly."
+
+#: ../../maps/Last Bastion.wmf/elemental:11
+msgid ""
+"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
+"Sun heated up the Earth and melted glaciers and people plunged into the "
+"deep. But now - high in the majestic mountains, on the last scrap of land - "
+"two surviving tribes are sheltering. Even though the Gods showed mercy and "
+"the climate thus turned cooler again the water is still rising and rising. "
+"Onto the last secure place - the highest mountain range where the amount of "
+"gold and the space to live merely suffice for one tribe - only two opposite "
+"paths lead. But remember, be careful... this last living space is also a "
+"hard and small place to live. Don't forget to take care about your timber "
+"supplies, you'll need them."
+msgstr ""
+"Vrtkaví bohové neodpověděli na vaše modlitby. Místo toho stále parnější "
+"Slunce zahřálo Zemi, rozpustilo ledovce a lidé se ukryli hluboko v podzemí. "
+"Vysoko v majestátních horách se nyní na posledním kousku země ukrývají dva "
+"poslední přeživší kmeny. I přesto, že se bohové smilovali a klima se začalo "
+"opět ochlazovat, voda stále stoupá. Na poslední bezpečné místo - do "
+"nejvyšších hor, kde množství zlata a a místo postačuje sotva pro přežití "
+"jednoho kmene - vedou dvě stezky. Ale pamatuj, buď opatrný... život na tomto "
+"posledním malém kousku země bude tvrdý. Nezapomeň se starat o své zásoby "
+"dřeva, budeš je potřebovat."
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Who will be the real King of the big atoll?"
+msgstr "Kdo se stane pravým vládcem mohutného atolu?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
 msgstr "Zubří údolí"
 
-#: ../../maps/Wisent Valley.wmf/elemental:11
+#: ../../maps/Plateau.wmf/elemental:9
 msgid ""
-"It seems as if this magical valley was inhabited by wisents since the "
-"beginning of days. When your tribe came to this place, you were sure that it "
-"offers enough space for a peaceful life. But can your tribe live in peace "
-"with your neighbours?"
+"You are standing on an island, crowned by mighty mountains, which keep a "
+"wonderful and mighty treasure in their middle - The Green Plateau, which is "
+"hard to get, but easy to lose, so if you want it, be aware of the other "
+"clans."
 msgstr ""
-"Toto magické údolí bylo od počátku času obydleno zubry. Když sem tvůj kmen "
-"přišel, byli si jisti, že nabízí spoustu místa pro mírumilovný život. Ale "
-"může tvůj kmen žít v míru s ostatními sousedy?"
+"Stojíš na ostrově korunovaném mohutnými velehorami, které ve svém srdci "
+"ukrývají nádherný a mocný poklad - Zelenou pláň. Je nesmírně těžké ji dobýt, "
+"ale tak snadné zas ztratit. Jestli ji chceš pro sebe, musís se o ní utkat s "
+"ostatními."
 
 #~ msgid ""
 #~ "It is a long time ago, since the last rain drop touched these grounds. No "
@@ -626,6 +625,34 @@ msgstr ""
 #~ "Nikým nerušeni užívali jste bohatých darů, kterých byla přehršel. To všechno "
 #~ "skončilo před pár měsíci, kdy přes hory přišel cizí kmen, aby se zde usadil. "
 #~ "Ale ty si jsi jistý, že zde je místo pouze pro jeden klan."
+
+#~ msgid ""
+#~ "When Chat’Karuth died, he was an old man, father to three strong and "
+#~ "ambitious sons and warlord to an army that could match any enemy willing to "
+#~ "rise against the ancient forests. Though his glorious reign, Chat’Karuth "
+#~ "left his eldest son Thron in the due to succeed him as the tribes warlord – "
+#~ "a decision that left his two brothers unsatisfied. The old warlord knew "
+#~ "that. As his father told him, Thron left the capital of Al’thunran, the home "
+#~ "of the throne among the trees and redrew his forces to the high hills where "
+#~ "he buried the corpse of his father and swore to the gods and his spirit, "
+#~ "that he’d return to re-established order. While his brothers raged in blind "
+#~ "war against Thron and the few forces he left to secure the borders of "
+#~ "Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
+#~ "force the tribes to march once again under a common banner."
+#~ msgstr ""
+#~ "Chat’Karuth zemřel jako starý muž. Otec tří silných, ambiciózních synů a "
+#~ "velitel armády, připravené postavit se každému nepříteli, který by se "
+#~ "pokusil zaútočit na prastaré lesy. Po letech prosperity a slavné vlády se "
+#~ "Chat’Karuth rozhodl jmenoval svého nejstaršího syna Throna jako svého "
+#~ "nástupce v postavení náčelníka – rozhodnutí, které se pranic nezamlouvalo "
+#~ "jeho dvěma bratrům. A starý válečník to věděl, ale přál si skonat v pokoji. "
+#~ "Thron vyplnil poslední přání svého otce, opustil hlavní město Al’thunran, "
+#~ "domov trůnu mezi stromy, a přesunul své síly do hor, kde svého otce pohřbil. "
+#~ "Při jeho hrobě přísahal bohům, že se vrátí a znovu nastolí pořádek. A "
+#~ "zatímco jeho bratři vedli zuřivou a nesmyslnou válku proti Thronovi a jeho "
+#~ "jednotkám zanechným na obranu hranic Al’thunran, mladý válečník se pokouší "
+#~ "znovu sjednotit své ambiciózní bratry a přinutit kmeny opět pochodovat pod "
+#~ "jednou zástavou."
 
 #~ msgid ""
 #~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
@@ -774,3 +801,46 @@ msgstr ""
 #~ "Loď byla konečně opravena a tak se Lucius a jeho lidé mohli opět vydat na "
 #~ "cesty a pokračovat v hledání dobrého místa pro nový začátek. Po několika "
 #~ "málo dnech zakotvili u zelených břehů ostrova, který vypadal jako ráj."
+
+#~ msgid ""
+#~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
+#~ "soldiers at the frontier among the northern forests, where Barbarian-tribes "
+#~ "and official Empire-land are crossing. His task was to defend the Empire-"
+#~ "land. First everything was calm, he even talked to few barbarian children "
+#~ "and thought about a peaceful life - side by side with this archaic folk. He "
+#~ "began to feel saver and his army begun to draw off the attention on they "
+#~ "potential enemy - that was their fault. At one night in March his unprepared "
+#~ "army was attacked by 100 barbarian footmen and was completely scattered. "
+#~ "Only with pure life he and a handful of soldiers survived."
+#~ msgstr ""
+#~ "Před šesti měsíci byl Lucius - mladý generál císařské armády - vyslán se 150 "
+#~ "vojáky do lesů na severní hranici, kde končí území Císařství a začíná území "
+#~ "ovládané barbarskými kmeny. Jeho úkolem bylo bránit hranice Císařství. "
+#~ "Zpočátku bylo vše klidné, dokonce mluvil s několika barbarskými dětmi a "
+#~ "přemýšlel o životě vedle těchto sice primitivních, ale přesto mírumilovných "
+#~ "sousedů. Začal se cítit v bezpečí a jeho armáda polevila v ostražitosti a "
+#~ "přestala hlídat potenciálního nepřítele. To se ukázalo jako osudová chyba. "
+#~ "Jedné březnové noci stovka barbarů bez varování zaútočila na jeho "
+#~ "nepřipravenou armádu a zcela ji rozprášila. Lucius vyvázl pouze s holým "
+#~ "životem a s hrstkou věrných vojáků."
+
+#~ msgid ""
+#~ "Six months ago, Lutius - a young general of the Empire - was send with 150 "
+#~ "soldiers to the frontier beyond the northern forests where Barbarian-tribes "
+#~ "and official Empire-land are crossing. His task was to defend the Empire-"
+#~ "land. At first, everything was calm. He even talked to a few barbarian "
+#~ "children and thought about a peaceful life - side by side with this archaic "
+#~ "folk. He began to feel safer and his army began to drop their attention off "
+#~ "the potential enemy. That was their fault. At one night in march his "
+#~ "unprepared army was attacked by 100 barbarian footmen and was completely "
+#~ "scattered. Only with his bare life he and a handful of his soldiers survived."
+#~ msgstr ""
+#~ "Před šesti měsíci, Lutius - mladý genrál Imperia - byl poslán spolu se 150 "
+#~ "vojáky ba hranici za severními lesy, kde se stýkají Barbarské kmeny a "
+#~ "oficiální země Impéria. Jeho úkolem bylo bránit země Impéria. Nejdříve byl "
+#~ "všude klid. Dokonce mluvil s několika barbarskými dětmi a uvažoval o "
+#~ "mírumilovném životě, bok po boku s tímto prastarým lidem. Začak se cítit "
+#~ "bezpečněji a jeho armáda ztratila pozornost, kterou měla věnovat nepřiteli. "
+#~ "A to byla jejich chyba. Jedné březnové noci byla jeho nepřipravená armáda "
+#~ "napadena 100 barbarských pěšáků a byla kompletně rozdrcena. Mladý generál "
+#~ "vyvázl jen s holým životem a hrstkou svých vojáků."

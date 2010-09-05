@@ -19,15 +19,18 @@
 
 #include "mapview.h"
 
-#include "graphic/graphic.h"
+
 #include "interactive_base.h"
 #include "interactive_player.h"
-#include "logic/map.h"
 #include "mapviewpixelfunctions.h"
 #include "overlay_manager.h"
-#include "logic/player.h"
-#include "graphic/rendertarget.h"
 #include "wlapplication.h"
+#include "logic/player.h"
+#include "logic/map.h"
+
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
+#include "graphic/render/gameview.h"
 
 #include "upcast.h"
 
@@ -90,17 +93,19 @@ void Map_View::draw(RenderTarget & dst)
 
 	egbase.map().overlay_manager().load_graphics();
 
+	GameView gameview(dst);
+
 	if (upcast(Interactive_Player const, interactive_player, &intbase()))
-		dst.rendermap(egbase, interactive_player->player(), m_viewpoint);
+		gameview.rendermap(egbase, interactive_player->player(), m_viewpoint);
 	else
-		dst.rendermap(egbase, m_viewpoint);
+		gameview.rendermap(egbase, m_viewpoint);
 
 	m_complete_redraw_needed = false;
 	if (char const * const text = tooltip())
 		draw_tooltip(dst, text);
 }
 
-void Map_View::set_changeview(const Map_View::ChangeViewFn& fn)
+void Map_View::set_changeview(const Map_View::ChangeViewFn & fn)
 {
 	m_changeview = fn;
 }
@@ -118,7 +123,8 @@ void Map_View::set_viewpoint(Point vp, bool jump)
 	MapviewPixelFunctions::normalize_pix(intbase().egbase().map(), vp);
 	m_viewpoint = vp;
 
-	m_changeview(vp, jump);
+	if (m_changeview)
+		m_changeview(vp, jump);
 	changeview.call(m_viewpoint.x, m_viewpoint.y);
 
 	m_complete_redraw_needed = true;

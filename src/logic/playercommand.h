@@ -21,11 +21,11 @@
 #define PLAYERCOMMAND_H
 
 #include "cmd_queue.h"
+#include "economy/flag.h"
 #include "message_id.h"
 #include "path.h"
 #include "trainingsite.h"
-
-#include "economy/flag.h"
+#include "warehouse.h"
 
 namespace Widelands {
 
@@ -539,6 +539,35 @@ struct Cmd_MessageSetStatusArchived : public PlayerMessageCommand {
 	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 };
+
+/**
+ * Command to change the stock policy for a ware or worker in a warehouse.
+ */
+struct Cmd_SetStockPolicy : PlayerCommand {
+	Cmd_SetStockPolicy
+		(int32_t time, Player_Number p,
+		 Warehouse & wh, bool isworker, Ware_Index ware, Warehouse::StockPolicy policy);
+
+	virtual uint8_t id() const;
+
+	virtual void execute(Game & game);
+
+	// Network (de-)serialization
+	Cmd_SetStockPolicy(StreamRead & des);
+	virtual void serialize(StreamWrite & ser);
+
+	// Savegame functions
+	Cmd_SetStockPolicy();
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+private:
+	Serial m_warehouse;
+	bool m_isworker;
+	Ware_Index m_ware;
+	Warehouse::StockPolicy m_policy;
+};
+
 }
 
 #endif

@@ -19,7 +19,7 @@
 
 #include "textarea.h"
 
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 
 namespace UI {
 
@@ -29,6 +29,7 @@ Textarea::Textarea
 	 const std::string & text, const Align align, const bool multiline)
 	:
 		Panel      (parent, x, y, 0, 0),
+		m_layoutmode(AutoMove),
 		m_align    (align),
 		m_multiline(multiline)
 {
@@ -44,6 +45,7 @@ Textarea::Textarea
 	 const Align align, const bool multiline)
 	:
 		Panel      (parent, x, y, w, h),
+		m_layoutmode(AutoMove),
 		m_align    (align),
 		m_multiline(multiline),
 		m_fontname (UI_FONT_NAME),
@@ -61,6 +63,7 @@ Textarea:: Textarea
 	 const bool multiline)
 	:
 		Panel      (parent, x, y, w, h),
+		m_layoutmode(AutoMove),
 		m_align    (align),
 		m_multiline(multiline),
 		m_fontname (UI_FONT_NAME),
@@ -72,17 +75,68 @@ Textarea:: Textarea
 	set_text(text);
 }
 
+Textarea::Textarea
+	(Panel * parent,
+	 const std::string & text,
+	 Align align, bool multiline, uint32_t width)
+:
+Panel(parent, 0, 0, width, 0),
+m_layoutmode(Layouted),
+m_align(align),
+m_multiline(multiline),
+m_fontname(UI_FONT_NAME),
+m_fontsize(UI_FONT_SIZE_SMALL),
+m_fcolor(UI_FONT_CLR_FG)
+{
+	set_handle_mouse(false);
+	set_think(false);
+	set_text(text);
+}
+
 /**
- * Set the text of the Textarea. Size is automatically adjusted
+ * Set the layout mode of this textarea.
+ *
+ * See the description of this class for the different modes.
+ */
+void Textarea::set_layout_mode(Textarea::LayoutMode lm)
+{
+	m_layoutmode = lm;
+}
+
+
+/**
+ * Set the font of the textarea.
+ */
+void Textarea::set_font(const std::string & name, int32_t size, RGBColor fg)
+{
+	if (m_layoutmode == AutoMove)
+		collapse();
+	m_fontname = name;
+	m_fontsize = size;
+	m_fcolor   = fg;
+	set_text(m_text);
+	if (m_layoutmode == AutoMove)
+		expand();
+	else if (m_layoutmode == Layouted)
+		update_desired_size();
+}
+
+/**
+ * Set the text of the Textarea. Size (or desired size) is automatically
+ * adjusted depending on the Textarea mode.
  */
 void Textarea::set_text(const std::string & text) {
-	if(m_text == text)
+	if (m_text == text)
 		return;
 
-	collapse(); // collapse() implicitly updates
+	if (m_layoutmode == AutoMove)
+		collapse(); // collapse() implicitly updates
 
 	m_text = text;
-	expand();
+	if (m_layoutmode == AutoMove)
+		expand();
+	else if (m_layoutmode == Layouted)
+		update_desired_size();
 }
 
 std::string Textarea::get_text() {
@@ -93,10 +147,13 @@ std::string Textarea::get_text() {
 /**
  * Change the alignment
  */
-void Textarea::set_align(const Align align) {
-	collapse();
+void Textarea::set_align(const Align align)
+{
+	if (m_layoutmode == AutoMove)
+		collapse();
 	m_align = align;
-	expand();
+	if (m_layoutmode == AutoMove)
+		expand();
 }
 
 
@@ -180,6 +237,38 @@ void Textarea::expand()
 
 	set_pos(Point(x, y));
 	set_size(m_multiline ? get_w() : w, h);
+}
+
+/**
+ * Recompute the desired size based on the size of the text.
+ */
+void Textarea::update_desired_size()
+{
+	uint32_t olddesiredw, tmp;
+
+	get_desired_size(olddesiredw, tmp);
+
+	uint32_t w, h;
+	UI::g_fh->get_size
+		(m_fontname,
+		 m_fontsize,
+		 m_text,
+		 w, h,
+		 m_multiline ? olddesiredw : -1);
+
+	set_desired_size(m_multiline ? olddesiredw : w, h);
+}
+
+/**
+ * Set both the actual and the desired size to the
+ * size needed to fit the given \p text.
+ */
+void Textarea::set_fixed_size(const std::string & text)
+{
+	uint32_t w, h;
+	UI::g_fh->get_size(m_fontname, m_fontsize, text, w, h);
+	set_size(w, h);
+	set_desired_size(w, h);
 }
 
 }

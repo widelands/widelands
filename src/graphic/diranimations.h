@@ -26,7 +26,6 @@
 
 namespace Widelands {struct Map_Object_Descr;}
 
-struct EncodeData;
 struct Profile;
 struct Section;
 
@@ -41,8 +40,7 @@ struct DirAnimations {
 		 std::string           const & directory,
 		 Profile                     &,
 		 char                  const * sectnametempl,
-		 Section                     * defaults    = 0,
-		 EncodeData            const * encdefaults = 0);
+		 Section                     * defaults    = 0);
 
 	uint32_t get_animation(int32_t const dir) const {
 		return m_animations[dir - 1];

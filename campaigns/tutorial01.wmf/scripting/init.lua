@@ -302,8 +302,6 @@ function bad_boy_sentry()
             -- Give the callback a chance to veto the deletion. Maybe
             -- we expect the player to build something at the moment
             if not illegal_immovable_found(f.immovable) then
-               print ("Killing", f.x .. '_' .. f.y)
-
                -- scould the player
                if not sent_msg then
                   msg_box(scould_player)

@@ -75,6 +75,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayerNumber(uint8_t number);
 	void setPlayerReady (uint8_t number, bool ready);
 	bool getPlayerReady (uint8_t number);
+	void setPlayerTeam  (uint8_t number, Widelands::TeamNumber team);
 	void setWinCondition(std::string);
 
 	// just visible stuff for the select mapmenu
@@ -82,6 +83,21 @@ struct NetHost : public GameController, private SyncCallback {
 
 	// Chat-related stuff
 	void send(ChatMessage msg);
+
+	// Host command releated stuff
+	void kickUser(std::string, std::string);
+
+	void forcePause() {
+		m_forced_pause = true;
+		updateNetworkSpeed();
+	}
+
+	void endForcedPause() {
+		m_forced_pause = false;
+		updateNetworkSpeed();
+	}
+
+	bool forcedPause() {return m_forced_pause;}
 
 private:
 	NetTransferFile * file;
@@ -131,6 +147,7 @@ private:
 
 	NetHostImpl * d;
 	bool use_ggz;
+	bool m_forced_pause;
 };
 
 

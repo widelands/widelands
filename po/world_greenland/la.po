@@ -7,27 +7,91 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-03-25 18:02+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 20:56+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/greenland/conf:2
-msgid "The Widelands Development Team"
-msgstr ""
+#: ../../worlds/greenland/conf:58
+msgid "Alder"
+msgstr "Alnus"
 
-#: ../../worlds/greenland/conf:3
-msgid "Greenland"
-msgstr ""
+#: ../../worlds/greenland/conf:59
+msgid "Alder medium"
+msgstr "Alnus mediocris"
 
-#: ../../worlds/greenland/conf:4
-msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr ""
+#: ../../worlds/greenland/conf:60
+msgid "Alder small"
+msgstr "Alnus parva"
+
+#: ../../worlds/greenland/conf:61
+msgid "Alder tiny"
+msgstr "Alnus parvula"
+
+#: ../../worlds/greenland/conf:46
+msgid "Aspen"
+msgstr "Populus"
+
+#: ../../worlds/greenland/conf:47
+msgid "Aspen medium"
+msgstr "Populus mediocris"
+
+#: ../../worlds/greenland/conf:48
+msgid "Aspen small"
+msgstr "Populus parva"
+
+#: ../../worlds/greenland/conf:49
+msgid "Aspen tiny"
+msgstr "Populus parvula"
+
+#: ../../worlds/greenland/conf:80
+msgid "Badger"
+msgstr "Meles"
+
+#: ../../worlds/greenland/conf:66
+msgid "Beech"
+msgstr "Fagus"
+
+#: ../../worlds/greenland/conf:67
+msgid "Beech medium"
+msgstr "Fagus mediocris"
+
+#: ../../worlds/greenland/conf:68
+msgid "Beech small"
+msgstr "Fagus parva"
+
+#: ../../worlds/greenland/conf:69
+msgid "Beech tiny"
+msgstr "Fagus parvula"
+
+#: ../../worlds/greenland/conf:62
+msgid "Birch"
+msgstr "Betula"
+
+#: ../../worlds/greenland/conf:63
+msgid "Birch medium"
+msgstr "Betula mediocris"
+
+#: ../../worlds/greenland/conf:64
+msgid "Birch small"
+msgstr "Betula parva"
+
+#: ../../worlds/greenland/conf:65
+msgid "Birch tiny"
+msgstr "Betula parvula"
+
+#: ../../worlds/greenland/conf:81
+msgid "Brownbear"
+msgstr "Ursus"
+
+#: ../../worlds/greenland/conf:82
+msgid "Bunny"
+msgstr "Cuniculus"
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -42,205 +106,20 @@ msgstr "Frutex"
 msgid "Cactus"
 msgstr "Cactus"
 
+#: ../../worlds/greenland/conf:83
+msgid "Chamois"
+msgstr "Rupicapra"
+
+#: ../../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr "Carbo"
+
 #: ../../worlds/greenland/conf:14
 #: ../../worlds/greenland/conf:15
 #: ../../worlds/greenland/conf:16
 #: ../../worlds/greenland/conf:17
 msgid "Dead Tree"
-msgstr ""
-
-#: ../../worlds/greenland/conf:18
-msgid "Fallen Tree"
-msgstr ""
-
-#: ../../worlds/greenland/conf:19
-#: ../../worlds/greenland/conf:20
-#: ../../worlds/greenland/conf:21
-msgid "Grass"
-msgstr "Gramen"
-
-#: ../../worlds/greenland/conf:22
-#: ../../worlds/greenland/conf:23
-msgid "Mushroom"
-msgstr "Fungus"
-
-#: ../../worlds/greenland/conf:24
-#: ../../worlds/greenland/conf:25
-#: ../../worlds/greenland/conf:26
-#: ../../worlds/greenland/conf:27
-#: ../../worlds/greenland/conf:28
-#: ../../worlds/greenland/conf:29
-msgid "Pebble"
-msgstr "Calx"
-
-#: ../../worlds/greenland/conf:30
-#: ../../worlds/greenland/conf:31
-#: ../../worlds/greenland/conf:32
-msgid "Skeleton"
-msgstr "Os"
-
-#: ../../worlds/greenland/conf:33
-#: ../../worlds/greenland/conf:34
-#: ../../worlds/greenland/conf:35
-#: ../../worlds/greenland/conf:36
-#: ../../worlds/greenland/conf:37
-#: ../../worlds/greenland/conf:38
-#: ../../worlds/greenland/conf:39
-msgid "Standing Stones"
-msgstr ""
-
-#: ../../worlds/greenland/conf:40
-#: ../../worlds/greenland/conf:41
-#: ../../worlds/greenland/conf:42
-#: ../../worlds/greenland/conf:43
-#: ../../worlds/greenland/conf:44
-#: ../../worlds/greenland/conf:45
-msgid "Stones"
-msgstr "Lapis"
-
-#: ../../worlds/greenland/conf:46
-msgid "Aspen"
-msgstr ""
-
-#: ../../worlds/greenland/conf:47
-msgid "Aspen medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:48
-msgid "Aspen small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:49
-msgid "Aspen tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:50
-msgid "Oak"
-msgstr "Robur"
-
-#: ../../worlds/greenland/conf:51
-msgid "Oak medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:52
-msgid "Oak small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:53
-msgid "Oak tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:54
-msgid "Spruce"
-msgstr ""
-
-#: ../../worlds/greenland/conf:55
-msgid "Spruce medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:56
-msgid "Spruce small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:57
-msgid "Spruce tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:58
-msgid "Alder"
-msgstr "Alnus"
-
-#: ../../worlds/greenland/conf:59
-msgid "Alder medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:60
-msgid "Alder small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:61
-msgid "Alder tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:62
-msgid "Birch"
-msgstr ""
-
-#: ../../worlds/greenland/conf:63
-msgid "Birch medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:64
-msgid "Birch small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:65
-msgid "Birch tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:66
-msgid "Beech"
-msgstr ""
-
-#: ../../worlds/greenland/conf:67
-msgid "Beech medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:68
-msgid "Beech small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:69
-msgid "Beech tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:70
-msgid "Larch"
-msgstr ""
-
-#: ../../worlds/greenland/conf:71
-msgid "Larch medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:72
-msgid "Larch small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:73
-msgid "Larch tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:74
-msgid "Rowan"
-msgstr "Sorbus"
-
-#: ../../worlds/greenland/conf:75
-msgid "Rowan medium"
-msgstr ""
-
-#: ../../worlds/greenland/conf:76
-msgid "Rowan small"
-msgstr ""
-
-#: ../../worlds/greenland/conf:77
-msgid "Rowan tiny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:80
-msgid "Badger"
-msgstr ""
-
-#: ../../worlds/greenland/conf:81
-msgid "Brownbear"
-msgstr "Ursus"
-
-#: ../../worlds/greenland/conf:82
-msgid "Bunny"
-msgstr "Cuniculus"
-
-#: ../../worlds/greenland/conf:83
-msgid "Chamois"
-msgstr "Capreolus"
+msgstr "Arbor mortua"
 
 #: ../../worlds/greenland/conf:84
 msgid "Deer"
@@ -254,9 +133,55 @@ msgstr "Anas"
 msgid "Elk"
 msgstr "Alces"
 
+#: ../../worlds/greenland/conf:18
+msgid "Fallen Tree"
+msgstr "Arbor caesa"
+
+#: ../../worlds/greenland/resconf:41
+msgid "Fish"
+msgstr "Piscis"
+
 #: ../../worlds/greenland/conf:87
 msgid "Fox"
 msgstr "Vulpes"
+
+#: ../../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr "Aurum"
+
+#: ../../worlds/greenland/resconf:28
+msgid "Granite"
+msgstr "Granitum"
+
+#: ../../worlds/greenland/conf:19
+#: ../../worlds/greenland/conf:20
+#: ../../worlds/greenland/conf:21
+msgid "Grass"
+msgstr "Gramen"
+
+#: ../../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr "Mundus graminis"
+
+#: ../../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr "Ferrum"
+
+#: ../../worlds/greenland/conf:70
+msgid "Larch"
+msgstr "Larix"
+
+#: ../../worlds/greenland/conf:71
+msgid "Larch medium"
+msgstr "Larix mediocris"
+
+#: ../../worlds/greenland/conf:72
+msgid "Larch small"
+msgstr "Larix parva"
+
+#: ../../worlds/greenland/conf:73
+msgid "Larch tiny"
+msgstr "Larix parvula"
 
 #: ../../worlds/greenland/conf:88
 msgid "Lynx"
@@ -266,42 +191,117 @@ msgstr "Lynx"
 msgid "Marten"
 msgstr "Martes"
 
+#: ../../worlds/greenland/conf:22
+#: ../../worlds/greenland/conf:23
+msgid "Mushroom"
+msgstr "Fungus"
+
+#: ../../worlds/greenland/conf:50
+msgid "Oak"
+msgstr "Quercus"
+
+#: ../../worlds/greenland/conf:51
+msgid "Oak medium"
+msgstr "Quercus mediocris"
+
+#: ../../worlds/greenland/conf:52
+msgid "Oak small"
+msgstr "Quercus parva"
+
+#: ../../worlds/greenland/conf:53
+msgid "Oak tiny"
+msgstr "Quercus parvula"
+
+#: ../../worlds/greenland/conf:24
+#: ../../worlds/greenland/conf:25
+#: ../../worlds/greenland/conf:26
+#: ../../worlds/greenland/conf:27
+#: ../../worlds/greenland/conf:28
+#: ../../worlds/greenland/conf:29
+msgid "Pebble"
+msgstr "Calx"
+
 #: ../../worlds/greenland/conf:90
 msgid "Reindeer"
-msgstr ""
+msgstr "Rangifer"
+
+#: ../../worlds/greenland/conf:74
+msgid "Rowan"
+msgstr "Sorbus"
+
+#: ../../worlds/greenland/conf:75
+msgid "Rowan medium"
+msgstr "Sorbus mediocris"
+
+#: ../../worlds/greenland/conf:76
+msgid "Rowan small"
+msgstr "Sorbus parva"
+
+#: ../../worlds/greenland/conf:77
+msgid "Rowan tiny"
+msgstr "Sorbus parvula"
 
 #: ../../worlds/greenland/conf:91
 msgid "Sheep"
 msgstr "Ovis"
 
-#: ../../worlds/greenland/conf:92
-msgid "Wisent"
-msgstr ""
+#: ../../worlds/greenland/conf:30
+#: ../../worlds/greenland/conf:31
+#: ../../worlds/greenland/conf:32
+msgid "Skeleton"
+msgstr "Ossa"
 
-#: ../../worlds/greenland/conf:93
-msgid "Wolf"
-msgstr "Lupus"
+#: ../../worlds/greenland/conf:54
+msgid "Spruce"
+msgstr "Picea"
 
-#: ../../worlds/greenland/resconf:4
-msgid "Coal"
-msgstr "Carbo"
+#: ../../worlds/greenland/conf:55
+msgid "Spruce medium"
+msgstr "Picea mediocris"
 
-#: ../../worlds/greenland/resconf:12
-msgid "Gold"
-msgstr "Aurum"
+#: ../../worlds/greenland/conf:56
+msgid "Spruce small"
+msgstr "Picea parva"
 
-#: ../../worlds/greenland/resconf:20
-msgid "Iron"
-msgstr "Ferrum"
+#: ../../worlds/greenland/conf:57
+msgid "Spruce tiny"
+msgstr "Picea parvula"
 
-#: ../../worlds/greenland/resconf:28
-msgid "Granit"
-msgstr ""
+#: ../../worlds/greenland/conf:33
+#: ../../worlds/greenland/conf:34
+#: ../../worlds/greenland/conf:35
+#: ../../worlds/greenland/conf:36
+#: ../../worlds/greenland/conf:37
+#: ../../worlds/greenland/conf:38
+#: ../../worlds/greenland/conf:39
+msgid "Standing Stones"
+msgstr "Obeliscus"
+
+#: ../../worlds/greenland/conf:40
+#: ../../worlds/greenland/conf:41
+#: ../../worlds/greenland/conf:42
+#: ../../worlds/greenland/conf:43
+#: ../../worlds/greenland/conf:44
+#: ../../worlds/greenland/conf:45
+msgid "Stones"
+msgstr "Lapis"
+
+#: ../../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Concilium Widelands ludum fingens"
+
+#: ../../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr "Hic est saeva frugiferaque terra Barbarorum."
 
 #: ../../worlds/greenland/resconf:36
 msgid "Water"
 msgstr "Aqua"
 
-#: ../../worlds/greenland/resconf:41
-msgid "Fish"
-msgstr "Piscis"
+#: ../../worlds/greenland/conf:92
+msgid "Wisent"
+msgstr "Bos indomitus"
+
+#: ../../worlds/greenland/conf:93
+msgid "Wolf"
+msgstr "Lupus"

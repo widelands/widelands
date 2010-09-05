@@ -1,0 +1,123 @@
+# Portuguese translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-08-02 20:58+0000\n"
+"Last-Translator: trewe <Unknown>\n"
+"Language-Team: Portuguese <pt@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-08-03 03:33+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:8
+msgid "An endless game without rules"
+msgstr "Jogo sem final nem regras"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:10
+msgid "Autocrat"
+msgstr "Autocrata"
+
+#: ../../scripting/win_conditions/02_collectors.lua:11
+msgid "Collectors"
+msgstr "Colectores"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:39
+msgid "Congratulations!"
+msgstr "Parabéns!"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:7
+msgid "Endless Game"
+msgstr "Jogo infinito"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:85
+msgid "Game over"
+msgstr "Fim do jogo"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:28
+msgid "Sorry, you have lost this game!"
+msgstr "Desculpa, perdeu o jogo!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:49
+msgid "Status"
+msgstr "Estado"
+
+#: ../../scripting/win_conditions/02_collectors.lua:40
+msgid "The game will end in %i minutes."
+msgstr "O jogo terminará em %i minutos."
+
+#: ../../scripting/win_conditions/02_collectors.lua:44
+msgid "The player %i has currently %i points"
+msgstr "O jogador %i tem no momento %i pontos."
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:11
+msgid ""
+"The three tribes play together vs each other. Vision is granted to all the "
+"players playing together"
+msgstr ""
+"As três tribos jogam em conjunto uns contra outros. Visão no mapa é "
+"partilhado entre os jogadores aliados."
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:79
+msgid "The tribe %s is no more."
+msgstr "A tribo %s já não existe."
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:11
+msgid "The tribe that can defeat all others wins!"
+msgstr "A tribo que derrota todas as outras vence!"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:79
+msgid "Tribe defeated!"
+msgstr "Tribo derrotada!"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:10
+msgid "Tribes together"
+msgstr "Tribos aliadas"
+
+#: ../../scripting/win_conditions/02_collectors.lua:71
+msgid "You are the winner!"
+msgstr "Você é o vencedor!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:12
+msgid ""
+"You get points for wares in your HQ, the one with the highest number of "
+"wares at the end of 4 hours wins the game"
+msgstr ""
+"Recebe pontos por mercadorias no seu quartel-general, quem tenha mais ao fim "
+"de 4 horas vence o jogo"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:40
+#: ../../scripting/win_conditions/03_tribes_together.lua:85
+msgid "You have won this game!"
+msgstr "Venceu o jogo!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:69
+msgid "You lost"
+msgstr "Perdeu"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:27
+msgid "You lost!"
+msgstr "Perdeu!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:71
+msgid "You won!"
+msgstr "Venceu!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:69
+msgid "You've lost this game!"
+msgstr "Perdeu o jogo!"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:74
+msgid "You've lost!"
+msgstr "Derrotado!"
+
+#: ../../scripting/win_conditions/03_tribes_together.lua:74
+msgid "Your tribe is no more. You have lost this game"
+msgstr "A sua tribo já não existe. Perdeu este jogo"

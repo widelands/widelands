@@ -57,7 +57,7 @@ struct ProductionSite_Descr : public Building_Descr {
 	ProductionSite_Descr
 		(char const * name, char const * descname,
 		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &, EncodeData const *);
+		 Tribe_Descr const &);
 	virtual ~ProductionSite_Descr();
 
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -135,7 +135,7 @@ public:
 	}
 
 	virtual std::string get_statistics_string();
-	int8_t get_statistics_percent() {return m_last_stat_percent;}
+	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	char const * result_string() const {return m_result_buffer;}
 
 	virtual WaresQueue & waresqueue(Ware_Index);
@@ -225,8 +225,8 @@ protected:  // TrainingSite must have access to this stuff
 	bool                     m_statistics_changed;
 	char                     m_statistics_buffer[40];
 	char                     m_result_buffer   [213];
-	int8_t                   m_last_stat_percent;
-	bool                      m_is_stopped;
+	uint8_t                  m_last_stat_percent;
+	bool                     m_is_stopped;
 };
 
 /**
