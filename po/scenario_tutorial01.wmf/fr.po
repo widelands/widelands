@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-08-08 09:08+0000\n"
-"Last-Translator: Arthur <Unknown>\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"PO-Revision-Date: 2010-09-04 21:08+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-08-09 03:37+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -323,10 +323,13 @@ msgid ""
 "for\n"
 "a level 0 evade barbarian and increases in steps of 15% for each level."
 msgstr ""
+"L'évasion est la probabilité qu'un soldat esquive un assaut. Elle est de 25% "
+"pour un\n"
+"niveau 0 et augmente de 15% à chaque niveau."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid "Evade:"
-msgstr ""
+msgstr "Évasion :"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
@@ -433,7 +436,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:620
 msgid "Hitpoints:"
-msgstr ""
+msgstr "Points de vie :"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:248
 msgid "How to build a quarry"
@@ -474,6 +477,9 @@ msgid ""
 "If you decide you do not want to build a road at this time, you can cancel\n"
 "road building by clicking on the starting flag of the road and selecting"
 msgstr ""
+"Si vous décidez de en pas construire cette route maintenant, vous pouvez en "
+"annuler\n"
+"la construction en cliquant sur le drapeau de départ et en séléctionnant"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:268
 msgid ""
@@ -491,6 +497,9 @@ msgid ""
 "here\n"
 "via right-button scrolling or open the minimap by clicking on the"
 msgstr ""
+"Si vous voulez revenir à la partie orientale de votre domaine, défilez "
+"jusque là avec le\n"
+"bouton droit, ou bien ouvrez la mini-carte en cliquant sur le"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid "Introducing messages"
@@ -502,6 +511,9 @@ msgid ""
 "buildings\n"
 "tab in the window that opens up, then click on the quarry symbol."
 msgstr ""
+"Cliquez sur n'importe quel symbole \"maison\" à coté des roches, "
+"sélectionnez les petits bâtiments dans la fen^tre qui s'ouvre, puis cliquez "
+"sur le symbole de la carrière."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:338
 msgid ""
@@ -513,6 +525,8 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:88
 msgid "Left-click the \"OK\" button to close this box and then try it."
 msgstr ""
+"Faites un clique-gauche sur le bouton \"OK\" pour fermer cette fenêtre puis "
+"essayez."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:371
 msgid ""
@@ -548,6 +562,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:549
 msgid "Let's wait and see what the geologist finds on the mountain."
 msgstr ""
+"Attendonc un peu de voir ce que le géologue va trouver dans ces montagnes."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:188
 msgid "Lumberjack is done"
@@ -567,19 +582,19 @@ msgstr "Messages"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:556
 msgid "Mining conclusion"
-msgstr ""
+msgstr "Conclusion de mineur"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "Bougez votre vue avec les touches du curseur"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "Bougez votre vue avec le souris"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
-msgstr ""
+msgstr "Bougez votre vue"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:215
 msgid ""
@@ -641,6 +656,8 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
 msgstr ""
+"A présent nous savons ce qu'il se passe. Attendons que la carrière soit "
+"achevée."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""
@@ -711,7 +728,7 @@ msgstr "Construire les routes"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:513
 msgid "Searching for resources"
-msgstr ""
+msgstr "Chercher des ressources"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:366
 msgid ""
@@ -730,7 +747,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
 msgid "Soldiers and Warfare"
-msgstr ""
+msgstr "Les soldats et la guerre"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:199
 msgid "Some stones were found"
@@ -751,6 +768,8 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember\n"
 "to visit us at"
 msgstr ""
+"Merci d'avoir joué à ce tutoriel. Amusez-vous bien avec Widelands et\n"
+"rendez-vous sur"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:137
 msgid ""
@@ -838,6 +857,9 @@ msgid ""
 "hitpoints,\n"
 "with each hitpoint level he gains 28 hitpoints."
 msgstr ""
+"Le total de point de vie d'un soldat. Un soldat barbare débute avec ~130 "
+"points de vie,\n"
+"et en gagne 28 par niveau de vie."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:279
 msgid ""
@@ -923,7 +945,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:602
 msgid "Trainings camp and soldier stats"
-msgstr ""
+msgstr "Camps d'entraînement et caractéristiques des soldats"
 
 #: ../../campaigns/tutorial01.wmf/elemental:7
 msgid "Tutorial01"
@@ -931,7 +953,7 @@ msgstr "Tutorial01"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:529
 msgid "Waiting for the geologist"
-msgstr ""
+msgstr "En attendant le géologue"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:177
 msgid "Waiting for the hut to be finished"
@@ -943,7 +965,7 @@ msgstr "En attente du bûcheron"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:573
 msgid "Warfare and Training"
-msgstr ""
+msgstr "La guerre et l'entraînement"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:83
 msgid ""
@@ -997,6 +1019,9 @@ msgid ""
 "construction,\n"
 "not destruction. This tutorial will get you through the basics of the game."
 msgstr ""
+"Widelands est un jeu de stratégie au rythme lent, insistant sur la "
+"construction,\n"
+"et non sur la destruction. Ce tutoriel vous apprendra les bases du jeux."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:256
 msgid ""
@@ -1024,6 +1049,9 @@ msgid ""
 "like.\n"
 "To leave this game and return to the main menu click on the"
 msgstr ""
+"Vous pouvez continuer de jouer sur cette carte, ou vous pouvez arrêter la "
+"partie quand vous le souhaitez.\n"
+"Pour quitter la partie et retourner au menu, cliquez sur le"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:59
 msgid "You can dismiss this box by left-clicking on the button below."
@@ -1051,35 +1079,35 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:535
 msgid "a bit of coal"
-msgstr ""
+msgstr "un peu de charbon"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:539
 msgid "a bit of gold"
-msgstr ""
+msgstr "un peu d'or"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:542
 msgid "a bit of granite"
-msgstr ""
+msgstr "un peu de granite"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:537
 msgid "a bit of iron"
-msgstr ""
+msgstr "un peu de fer"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:536
 msgid "a lot of coal"
-msgstr ""
+msgstr "beaucoup de charbon"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:540
 msgid "a lot of gold"
-msgstr ""
+msgstr "beaucoup d'or"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:544
 msgid "a lot of granite"
-msgstr ""
+msgstr "beaucoup de granite"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:538
 msgid "a lot of iron"
-msgstr ""
+msgstr "beaucoup de fer"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
@@ -1099,16 +1127,20 @@ msgid ""
 "press\n"
 "'m' on your keyboard"
 msgstr ""
+"bouton de minicarte en bas de l'écran. Il est également possible de taper "
+"\"m\" sur le clavier."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:547
 msgid "nothing was found here"
-msgstr ""
+msgstr "rien n'a été trouvé ici"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:711
 msgid ""
 "options menu button on the very left at the bottom of the screen.\n"
 "Then click the"
 msgstr ""
+"bouton du menu des options en bas à gauche de votre écran.\n"
+"Cliquez ensuite sur le"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid "the abort symbol."
@@ -1120,11 +1152,11 @@ msgstr "le symbole de construction de routes."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:561
 msgid "this one."
-msgstr ""
+msgstr "celui-ci."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
-msgstr ""
+msgstr "eau"
 
 #~ msgid ""
 #~ "Let's try it out now: Build a military building on your eastern border."

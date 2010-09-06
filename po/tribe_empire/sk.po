@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
 "PO-Revision-Date: 2010-06-06 20:59+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-07 03:34+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -360,11 +360,11 @@ msgstr "Strážnica"
 msgid "Hammer"
 msgstr "Kladivo"
 
-#: ../../tribes/empire/vineyard/conf:19
+#: ../../tribes/empire/vineyard/conf:21
 msgid "Harvest vine"
 msgstr ""
 
-#: ../../tribes/empire/farm/conf:17
+#: ../../tribes/empire/farm/conf:20
 msgid "Harvest wheat"
 msgstr ""
 
@@ -552,11 +552,11 @@ msgstr ""
 msgid "Piggery"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:17
+#: ../../tribes/empire/vineyard/conf:19
 msgid "Plant vine"
 msgstr "Zasadiť révu"
 
-#: ../../tribes/empire/farm/conf:15
+#: ../../tribes/empire/farm/conf:18
 msgid "Plant wheat"
 msgstr ""
 
@@ -1198,9 +1198,9 @@ msgstr ""
 #: ../../tribes/empire/deep_marblemine/conf:23
 #: ../../tribes/empire/deep_oremine/conf:22
 #: ../../tribes/empire/donkeyfarm/conf:22
-#: ../../tribes/empire/farm/conf:19
+#: ../../tribes/empire/farm/conf:22
 #: ../../tribes/empire/fishers_house/conf:17
-#: ../../tribes/empire/foresters_house/conf:15
+#: ../../tribes/empire/foresters_house/conf:16
 #: ../../tribes/empire/goldmine/conf:22
 #: ../../tribes/empire/hunters_house/conf:16
 #: ../../tribes/empire/inn/conf:20
@@ -1217,7 +1217,7 @@ msgstr ""
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22
 #: ../../tribes/empire/toolsmithy/conf:45
-#: ../../tribes/empire/vineyard/conf:21
+#: ../../tribes/empire/vineyard/conf:23
 #: ../../tribes/empire/weaponsmithy/conf:34
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16

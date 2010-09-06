@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-23 22:12+0200\n"
-"PO-Revision-Date: 2010-08-02 17:43+0000\n"
-"Last-Translator: Fedik <Unknown>\n"
+"POT-Creation-Date: 2010-09-03 22:16+0200\n"
+"PO-Revision-Date: 2010-08-30 23:14+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-08-03 03:33+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/writeHTML.cc:43
@@ -90,7 +90,7 @@ msgstr "Мала"
 
 #: ../../src/writeHTML.cc:327 ../../src/writeHTML.cc:385
 #: ../../src/logic/building.cc:540
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "Medium"
 msgstr "Середня"
 
@@ -538,15 +538,15 @@ msgstr "Типи товарів"
 msgid "ware_types.xhtml"
 msgstr "ware_types_uk_UA.xhtml"
 
-#: ../../src/wlapplication.cc:350
+#: ../../src/wlapplication.cc:355
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr "Помилка: Не вдалось підключитись до сервера (помилка вище)!\\n\n"
 
-#: ../../src/wlapplication.cc:848 ../../src/wlapplication.cc:861
+#: ../../src/wlapplication.cc:853 ../../src/wlapplication.cc:866
 msgid "could not find the path of the main executable"
 msgstr "не можливо найти шлях до основного виконуваного файлу"
 
-#: ../../src/wlapplication.cc:963
+#: ../../src/wlapplication.cc:968
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
@@ -867,12 +867,12 @@ msgstr "Widelands не вдалось підключитись до хосту."
 msgid "The address of the game server is invalid"
 msgstr "Не вірна адреса ігрового сервера"
 
-#: ../../src/wlapplication.cc:1796 ../../src/network/nethost.cc:1241
+#: ../../src/wlapplication.cc:1796 ../../src/network/nethost.cc:1447
 msgid "Player"
 msgstr "Гравець"
 
 #: ../../src/wlapplication.cc:1953 ../../src/network/netclient.cc:179
-#: ../../src/network/nethost.cc:459
+#: ../../src/network/nethost.cc:617
 msgid "Preparing game"
 msgstr "Підготовка гри"
 
@@ -917,7 +917,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadreplay.cc:51
 #: ../../src/ui_fsmenu/campaign_select.cc:74
 #: ../../src/ui_fsmenu/campaign_select.cc:283
-#: ../../src/scripting/lua_game.cc:560
+#: ../../src/scripting/lua_game.cc:582
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:121
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
@@ -1494,7 +1494,7 @@ msgstr "Щось не так: "
 msgid " An automatic savegame will be created."
 msgstr " Автозбереження."
 
-#: ../../src/network/network_ggz.cc:275
+#: ../../src/network/network_ggz.cc:273
 msgid "Closed the connection to the metaserver."
 msgstr "З'єднання з сервером закрите."
 
@@ -1506,159 +1506,228 @@ msgid ""
 "be advantageous."
 msgstr ""
 
-#: ../../src/network/network_ggz.cc:493
+#: ../../src/network/network_ggz.cc:569
 msgid "Connected to the metaserver of:"
 msgstr ""
 
-#: ../../src/network/network_ggz.cc:504
+#: ../../src/network/network_ggz.cc:580
 msgid "Server MOTD:"
 msgstr "Сервер MOTD:"
 
-#: ../../src/network/network_ggz.cc:510
+#: ../../src/network/network_ggz.cc:586
 msgid "Reconnected to the metaserver."
 msgstr "Перепід'днатись до сервера."
 
-#: ../../src/network/network_ggz.cc:515
+#: ../../src/network/network_ggz.cc:591
 msgid "NOTE: The Internet gaming implementation is in very early state."
 msgstr ""
 
-#: ../../src/network/network_ggz.cc:519
+#: ../../src/network/network_ggz.cc:595
 msgid "Please take a look at the notes at:"
 msgstr "Будь ласка, зверніть увагу на примітки за адресою:"
 
-#: ../../src/network/network_ggz.cc:658
+#: ../../src/network/network_ggz.cc:734
 msgid " joined the metaserver."
 msgstr " під'єднано до сервера."
 
-#: ../../src/network/network_ggz.cc:667
+#: ../../src/network/network_ggz.cc:743
 msgid " left the metaserver."
 msgstr " покинув сервер."
 
-#: ../../src/network/nethost.cc:360
+#: ../../src/network/nethost.cc:287
+msgid ""
+"Available host commands are:<br>/help  -  Shows this help<br>/announce <msg> "
+" -  Send a chatmessage as announcement (system chat)<br>/warn <name> "
+"<reason>  -  Warn the user <name> because of <reason><br>/kick <name> "
+"<reason>  -  Kick the user <name> because of <reason><br>/forcePause         "
+"   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
+"to normal speed."
+msgstr ""
+
+#: ../../src/network/nethost.cc:303
+msgid "Wrong use, should be: /announce <message>"
+msgstr ""
+
+#: ../../src/network/nethost.cc:315
+msgid "Wrong use, should be: /warn <name> <reason>"
+msgstr ""
+
+#: ../../src/network/nethost.cc:326
+msgid "Wrong use, should be: /kick <name> <reason>"
+msgstr ""
+
+#: ../../src/network/nethost.cc:334
+#, c-format
+msgid "Are you sure you want to kick %s?<br>"
+msgstr ""
+
+#: ../../src/network/nethost.cc:337
+#, c-format
+msgid "The stated reason was: %s<br>"
+msgstr ""
+
+#: ../../src/network/nethost.cc:340
+#, c-format
+msgid "If yes, type: /ack_kick %s"
+msgstr ""
+
+#: ../../src/network/nethost.cc:349
+msgid "kick acknowlegement cancled: No name given!"
+msgstr ""
+
+#: ../../src/network/nethost.cc:351
+msgid "Wrong use, should be: /ack_kick <name>"
+msgstr ""
+
+#: ../../src/network/nethost.cc:357
+msgid "kick acknowlegement cancled: Wrong name given!"
+msgstr ""
+
+#: ../../src/network/nethost.cc:367
+msgid "Pause was already forced - game should be paused."
+msgstr ""
+
+#: ../../src/network/nethost.cc:378
+msgid "There is no forced pause - nothing to end."
+msgstr ""
+
+#: ../../src/network/nethost.cc:388
+msgid "Invalid command! Type /help for a list of commands."
+msgstr ""
+
+#: ../../src/network/nethost.cc:518
 msgid "Server has left the game."
 msgstr "Сервер закінчив гру."
 
-#: ../../src/network/nethost.cc:436
+#: ../../src/network/nethost.cc:594
 msgid "The game has started just after you tried to connect."
 msgstr ""
 
-#: ../../src/network/nethost.cc:514
+#: ../../src/network/nethost.cc:672
 msgid "Server has crashed and performed an emergency save."
 msgstr ""
 
-#: ../../src/network/nethost.cc:865
+#: ../../src/network/nethost.cc:875
+msgid "You can not kick yourself!"
+msgstr ""
+
+#: ../../src/network/nethost.cc:897
+msgid "There is no connected user with that nickname!"
+msgstr ""
+
+#: ../../src/network/nethost.cc:1071
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1190
+#: ../../src/network/nethost.cc:1396
 #, c-format
 msgid "Computer %u"
 msgstr "Комп'ютер %u"
 
-#: ../../src/network/nethost.cc:1266
+#: ../../src/network/nethost.cc:1472
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr "Увага: %s ваша версія: %s, хост використовує версію: %s"
 
-#: ../../src/network/nethost.cc:1318
+#: ../../src/network/nethost.cc:1524
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s під'єднався до гри"
 
-#: ../../src/network/nethost.cc:1342
+#: ../../src/network/nethost.cc:1548
 msgid "Client reports time to host that is running backwards."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1345
+#: ../../src/network/nethost.cc:1551
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1349
+#: ../../src/network/nethost.cc:1555
 msgid "Client did not submit sync report in time."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1529
+#: ../../src/network/nethost.cc:1757
 msgid "Client and host have become desynchronized."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1575
+#: ../../src/network/nethost.cc:1803
 msgid "New User"
 msgstr "Новий користувач"
 
-#: ../../src/network/nethost.cc:1580
+#: ../../src/network/nethost.cc:1808
 msgid "The game has already started."
 msgstr "Гра вже запущена."
 
-#: ../../src/network/nethost.cc:1598
+#: ../../src/network/nethost.cc:1826
 msgid "Connection to client lost."
 msgstr "З'єднання втрачено."
 
-#: ../../src/network/nethost.cc:1612
+#: ../../src/network/nethost.cc:1840
 msgid "Client sent malformed commands: "
 msgstr ""
 
-#: ../../src/network/nethost.cc:1645
+#: ../../src/network/nethost.cc:1873
 msgid "Game is running already, but client has not connected fully"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1649
+#: ../../src/network/nethost.cc:1877
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
 "is running an incompatible version."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1655
+#: ../../src/network/nethost.cc:1883
 msgid "Server uses a different protocol version."
 msgstr "Сервер використовує іншу версію протоколу."
 
-#: ../../src/network/nethost.cc:1743
+#: ../../src/network/nethost.cc:1971
 msgid "Client sent TIME command even though game is not running."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1751
+#: ../../src/network/nethost.cc:1979
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1763
+#: ../../src/network/nethost.cc:1991
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1772
+#: ../../src/network/nethost.cc:2000
 msgid "Client sent unexpected synchronization report."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1808 ../../src/network/nethost.cc:1820
+#: ../../src/network/nethost.cc:2036 ../../src/network/nethost.cc:2048
 msgid "Client requests file altough none is available to send."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1810
+#: ../../src/network/nethost.cc:2038
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr "Почато передачу файла %s для %s!"
 
-#: ../../src/network/nethost.cc:1831
+#: ../../src/network/nethost.cc:2059
 msgid "Client requests file part that does not exist."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1834
+#: ../../src/network/nethost.cc:2062
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr "Передачу файлу %s для %s завершено"
 
-#: ../../src/network/nethost.cc:1842
+#: ../../src/network/nethost.cc:2070
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1852
+#: ../../src/network/nethost.cc:2080
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Клієнт надіслав невідому команду номер %u"
 
-#: ../../src/network/nethost.cc:1908
+#: ../../src/network/nethost.cc:2136
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s покинув гру (%s)"
@@ -2046,21 +2115,21 @@ msgstr "Коли поранені"
 msgid "Soldiers in training"
 msgstr "Солдати тренуються"
 
-#: ../../src/wui/interactive_base.cc:267
+#: ../../src/wui/interactive_base.cc:269
 #, c-format
 msgid "%u.%ux"
 msgstr "%u.%ux"
 
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:272
 msgid "PAUSE"
 msgstr "ПАУЗА"
 
-#: ../../src/wui/interactive_base.cc:290
+#: ../../src/wui/interactive_base.cc:292
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../../src/wui/interactive_base.cc:295
+#: ../../src/wui/interactive_base.cc:297
 msgid "NO GAME CONTROLLER"
 msgstr "ІГРОВИ КОНТРОЛЕР ВІДСУТНІЙ"
 
@@ -2419,7 +2488,7 @@ msgid "The Map is unsaved, do you really want to quit?"
 msgstr "Мапа не збережена, Ви впевнені, що хочете вийти?"
 
 #: ../../src/editor/editorinteractive.cc:567
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:425
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:473
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:184
 #: ../../src/logic/map.h:177
@@ -2428,7 +2497,7 @@ msgstr "Без назви"
 
 #: ../../src/editor/editorinteractive.cc:569
 #: ../../src/ui_fsmenu/netsetup_lan.cc:185
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:474
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:181
 #: ../../src/logic/map.h:178
 msgid "Unknown"
@@ -2681,11 +2750,11 @@ msgstr "Завантаження мапи"
 msgid "Creating player infrastructure"
 msgstr "Створити інфраструктуру гравця"
 
-#: ../../src/logic/game.cc:469 ../../src/logic/player.cc:125
+#: ../../src/logic/game.cc:469 ../../src/logic/player.cc:126
 msgid "Missing starting position"
 msgstr "Стартова позиція відсутня"
 
-#: ../../src/logic/game.cc:471 ../../src/logic/player.cc:127
+#: ../../src/logic/game.cc:471 ../../src/logic/player.cc:128
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -2988,12 +3057,12 @@ msgid ""
 msgstr ""
 
 #: ../../src/logic/soldier.cc:1424 ../../src/logic/soldier.cc:1429
-#: ../../src/logic/worker.cc:1643
+#: ../../src/logic/worker.cc:1689
 msgid "no"
 msgstr "ні"
 
 #: ../../src/logic/soldier.cc:1436 ../../src/logic/soldier.cc:1444
-#: ../../src/logic/worker.cc:1655
+#: ../../src/logic/worker.cc:1701
 msgid "Logic error"
 msgstr "Логічна помилка"
 
@@ -3012,21 +3081,21 @@ msgid ""
 msgstr ""
 "має отримати %s, що не існує в цьому світі; плем'я не сумісне з цією картою"
 
-#: ../../src/logic/worker.cc:606
+#: ../../src/logic/worker.cc:583
 msgid "Out of "
 msgstr ""
 
-#: ../../src/logic/worker.cc:609
+#: ../../src/logic/worker.cc:586
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr "Робітник цієї будівлі більше не може знайти ресурсів: "
 
-#: ../../src/logic/worker.cc:881
+#: ../../src/logic/worker.cc:927
 msgid "A geologist found resources."
 msgstr "Геолог знайшов ресурси."
 
-#: ../../src/logic/worker.cc:1624
+#: ../../src/logic/worker.cc:1670
 #, c-format
 msgid ""
 "The game engine has encountered a logic error. The %s #%u of player %u "
@@ -3043,11 +3112,11 @@ msgid ""
 "working. (bug #1796611) (The game has been paused.)"
 msgstr ""
 
-#: ../../src/logic/worker.cc:1641
+#: ../../src/logic/worker.cc:1687
 msgid "nothing"
 msgstr "нічого"
 
-#: ../../src/logic/worker.cc:2818
+#: ../../src/logic/worker.cc:2838
 #, c-format
 msgid "loading worker: %s"
 msgstr "завантаження працівника: %s"
@@ -3923,91 +3992,81 @@ msgstr ""
 msgid "New Random Map"
 msgstr "Нова випадкова мапа"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:68
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:69
 msgid "Random Number:"
 msgstr "Випадковий номер:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:115
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:372
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:116
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:418
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:157
 #, c-format
 msgid "Width: %u"
 msgstr "Ширина: %u"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:125
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:376
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:126
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:422
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:161
 #, c-format
 msgid "Height: %u"
 msgstr "Висота: %u"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:161
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:162
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
 #, c-format
 msgid "Water: %u %%"
 msgstr "Вода: %u %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:185
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:186
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Land: %u %%"
 msgstr "Суходіл: %u %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:209
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:210
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
 #, c-format
 msgid "Wasteland: %u %%"
 msgstr "Пустир: %u %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:219
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:220
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
 #, c-format
 msgid "Mountains: %u %%"
 msgstr "Гори: %u %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:236
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:237
 msgid "Island mode:"
 msgstr "Режим острова:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:243
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:244
 msgid "Resources:"
 msgstr "Ресурси:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Low"
 msgstr "Низько"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:249
 msgid "High"
 msgstr "Високо"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:281
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:285
 msgid "Map ID:"
 msgstr "ID мапи:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:302
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:317
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
+#, c-format
+msgid "Players: %u"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
 msgstr "Згенерувати мапу:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:380
-#, c-format
-msgid "Water: %i %%"
-msgstr "Вода: %i %%"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:383
-#, c-format
-msgid "Land: %i %%"
-msgstr "Суходіл: %i %%"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:386
-#, c-format
-msgid "Wasteland: %i %%"
-msgstr "Пустир: %i %%"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:389
-#, c-format
-msgid "Mountains: %i %%"
-msgstr "Гори: %i %%"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:428
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:476
 msgid "Generating random map..."
 msgstr "Генерую випадкову мапу..."
 
@@ -4337,3 +4396,19 @@ msgstr "без опису"
 #: ../../src/logic/map.h:179
 msgid "no description defined"
 msgstr "без опису"
+
+#, c-format
+#~ msgid "Wasteland: %i %%"
+#~ msgstr "Пустир: %i %%"
+
+#, c-format
+#~ msgid "Mountains: %i %%"
+#~ msgstr "Гори: %i %%"
+
+#, c-format
+#~ msgid "Water: %i %%"
+#~ msgstr "Вода: %i %%"
+
+#, c-format
+#~ msgid "Land: %i %%"
+#~ msgstr "Суходіл: %i %%"

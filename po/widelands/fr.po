@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-06-23 22:12+0200\n"
-"PO-Revision-Date: 2010-08-22 16:47+0000\n"
-"Last-Translator: Emmanuel Andry <Unknown>\n"
+"POT-Creation-Date: 2010-09-03 22:16+0200\n"
+"PO-Revision-Date: 2010-09-03 06:39+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-08-23 03:51+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/writeHTML.cc:43
@@ -88,7 +88,7 @@ msgstr "Petit"
 
 #: ../../src/writeHTML.cc:327 ../../src/writeHTML.cc:385
 #: ../../src/logic/building.cc:540
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "Medium"
 msgstr "Moyen"
 
@@ -541,16 +541,16 @@ msgstr "Types de marchandises"
 msgid "ware_types.xhtml"
 msgstr "ware_types_fr_FR.xhtml"
 
-#: ../../src/wlapplication.cc:350
+#: ../../src/wlapplication.cc:355
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
 "Erreur : Impossible de se connecter au méta-serveur (raison ci-dessus)!\n"
 
-#: ../../src/wlapplication.cc:848 ../../src/wlapplication.cc:861
+#: ../../src/wlapplication.cc:853 ../../src/wlapplication.cc:866
 msgid "could not find the path of the main executable"
 msgstr "le chemin d'accès du programme principal est introuvable"
 
-#: ../../src/wlapplication.cc:963
+#: ../../src/wlapplication.cc:968
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
@@ -717,6 +717,9 @@ msgid ""
 "                      Enables opengl rendering\n"
 "                      *EXPERIMENTAL*\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Autorise le rendu par OpenGL\n"
+"                      *EXPERIMENTAL*\n"
 
 #: ../../src/wlapplication.cc:1308
 msgid ""
@@ -857,12 +860,12 @@ msgstr "Widelands n'a pas réussi à contacter l'hôte."
 msgid "The address of the game server is invalid"
 msgstr "L'adresse du serveur du jeu est incorrecte"
 
-#: ../../src/wlapplication.cc:1796 ../../src/network/nethost.cc:1241
+#: ../../src/wlapplication.cc:1796 ../../src/network/nethost.cc:1447
 msgid "Player"
 msgstr "Joueur"
 
 #: ../../src/wlapplication.cc:1953 ../../src/network/netclient.cc:179
-#: ../../src/network/nethost.cc:459
+#: ../../src/network/nethost.cc:617
 msgid "Preparing game"
 msgstr "Préparation de la partie"
 
@@ -907,7 +910,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadreplay.cc:51
 #: ../../src/ui_fsmenu/campaign_select.cc:74
 #: ../../src/ui_fsmenu/campaign_select.cc:283
-#: ../../src/scripting/lua_game.cc:560
+#: ../../src/scripting/lua_game.cc:582
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:121
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
@@ -1506,7 +1509,7 @@ msgstr "Quelque chose a raté : "
 msgid " An automatic savegame will be created."
 msgstr " Une sauvegarde automatique sera créée."
 
-#: ../../src/network/network_ggz.cc:275
+#: ../../src/network/network_ggz.cc:273
 msgid "Closed the connection to the metaserver."
 msgstr "Fermé la connexion au méta-serveur."
 
@@ -1522,106 +1525,175 @@ msgstr ""
 "sur http://wl.widelands.org/wiki/InternetGaming peut\\n\n"
 "vous aider."
 
-#: ../../src/network/network_ggz.cc:493
+#: ../../src/network/network_ggz.cc:569
 msgid "Connected to the metaserver of:"
 msgstr "Connecté au méta-serveur de :"
 
-#: ../../src/network/network_ggz.cc:504
+#: ../../src/network/network_ggz.cc:580
 msgid "Server MOTD:"
 msgstr "Serveur MOTD:"
 
-#: ../../src/network/network_ggz.cc:510
+#: ../../src/network/network_ggz.cc:586
 msgid "Reconnected to the metaserver."
 msgstr "Reconnecté au méta-serveur."
 
-#: ../../src/network/network_ggz.cc:515
+#: ../../src/network/network_ggz.cc:591
 msgid "NOTE: The Internet gaming implementation is in very early state."
 msgstr "NB : les fonction de jeu en ligne sont à un stade très préliminaire."
 
-#: ../../src/network/network_ggz.cc:519
+#: ../../src/network/network_ggz.cc:595
 msgid "Please take a look at the notes at:"
 msgstr "Veuillez jeter un coup d'œil à :"
 
-#: ../../src/network/network_ggz.cc:658
+#: ../../src/network/network_ggz.cc:734
 msgid " joined the metaserver."
 msgstr " a rejoint le méta-serveur."
 
-#: ../../src/network/network_ggz.cc:667
+#: ../../src/network/network_ggz.cc:743
 msgid " left the metaserver."
 msgstr " a quitté le méta-serveur."
 
-#: ../../src/network/nethost.cc:360
+#: ../../src/network/nethost.cc:287
+msgid ""
+"Available host commands are:<br>/help  -  Shows this help<br>/announce <msg> "
+" -  Send a chatmessage as announcement (system chat)<br>/warn <name> "
+"<reason>  -  Warn the user <name> because of <reason><br>/kick <name> "
+"<reason>  -  Kick the user <name> because of <reason><br>/forcePause         "
+"   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
+"to normal speed."
+msgstr ""
+
+#: ../../src/network/nethost.cc:303
+msgid "Wrong use, should be: /announce <message>"
+msgstr "Mauvaise utilisation. Devrait être : /announce <message>"
+
+#: ../../src/network/nethost.cc:315
+msgid "Wrong use, should be: /warn <name> <reason>"
+msgstr "Mauvaise utilisation. Devrait être : /warn <name> <reason>"
+
+#: ../../src/network/nethost.cc:326
+msgid "Wrong use, should be: /kick <name> <reason>"
+msgstr "Mauvaise utilisation. Devrait être : /kick <name> <reason>"
+
+#: ../../src/network/nethost.cc:334
+#, c-format
+msgid "Are you sure you want to kick %s?<br>"
+msgstr "Etes vous sûr de vouloir chasser %s ? <br>"
+
+#: ../../src/network/nethost.cc:337
+#, c-format
+msgid "The stated reason was: %s<br>"
+msgstr "La raison indiquée est :%s<br>"
+
+#: ../../src/network/nethost.cc:340
+#, c-format
+msgid "If yes, type: /ack_kick %s"
+msgstr "Si oui, entrez :/ack_kick %s"
+
+#: ../../src/network/nethost.cc:349
+msgid "kick acknowlegement cancled: No name given!"
+msgstr ""
+
+#: ../../src/network/nethost.cc:351
+msgid "Wrong use, should be: /ack_kick <name>"
+msgstr "Mauvaise utilisation. Devrait être : /ack_kick <name>"
+
+#: ../../src/network/nethost.cc:357
+msgid "kick acknowlegement cancled: Wrong name given!"
+msgstr ""
+
+#: ../../src/network/nethost.cc:367
+msgid "Pause was already forced - game should be paused."
+msgstr "La pause a déja été mise de force - le jeu devrait être arrété."
+
+#: ../../src/network/nethost.cc:378
+msgid "There is no forced pause - nothing to end."
+msgstr "Il n'y a pas de pause forcée - rien à stopper."
+
+#: ../../src/network/nethost.cc:388
+msgid "Invalid command! Type /help for a list of commands."
+msgstr "Commande invalide. Entrez /help pour la liste des commandes."
+
+#: ../../src/network/nethost.cc:518
 msgid "Server has left the game."
 msgstr "Le serveur a quitté le jeu."
 
-#: ../../src/network/nethost.cc:436
+#: ../../src/network/nethost.cc:594
 msgid "The game has started just after you tried to connect."
 msgstr "Le jeu a démarré juste après votre tentative de connexion."
 
-#: ../../src/network/nethost.cc:514
+#: ../../src/network/nethost.cc:672
 msgid "Server has crashed and performed an emergency save."
 msgstr "Le serveur a planté et fait une sauvegarde d'urgence."
 
-#: ../../src/network/nethost.cc:865
+#: ../../src/network/nethost.cc:875
+msgid "You can not kick yourself!"
+msgstr "Vous ne pouvez pas vous chasser vous-même !"
+
+#: ../../src/network/nethost.cc:897
+msgid "There is no connected user with that nickname!"
+msgstr "Il n'y a pas d'utilisateur portant ce surnom !"
+
+#: ../../src/network/nethost.cc:1071
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "L'hôte a envoyé le joueur %s dans le couloir !"
 
-#: ../../src/network/nethost.cc:1190
+#: ../../src/network/nethost.cc:1396
 #, c-format
 msgid "Computer %u"
 msgstr "Ordinateur %u"
 
-#: ../../src/network/nethost.cc:1266
+#: ../../src/network/nethost.cc:1472
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
 "ATTENTION : %s utilise la version %s, alors que l'hôte utilise la version %s"
 
-#: ../../src/network/nethost.cc:1318
+#: ../../src/network/nethost.cc:1524
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s a rejoint la partie"
 
-#: ../../src/network/nethost.cc:1342
+#: ../../src/network/nethost.cc:1548
 msgid "Client reports time to host that is running backwards."
 msgstr "Le client signale que le temps à l'hôte diminue."
 
-#: ../../src/network/nethost.cc:1345
+#: ../../src/network/nethost.cc:1551
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Le client simule au-delà du temps autorisé par l'hôte."
 
-#: ../../src/network/nethost.cc:1349
+#: ../../src/network/nethost.cc:1555
 msgid "Client did not submit sync report in time."
 msgstr ""
 "Le client n'a pas soumis son rapport de synchronisation dans les temps."
 
-#: ../../src/network/nethost.cc:1529
+#: ../../src/network/nethost.cc:1757
 msgid "Client and host have become desynchronized."
 msgstr "Le client et l'hôte ont été désynchronisés."
 
-#: ../../src/network/nethost.cc:1575
+#: ../../src/network/nethost.cc:1803
 msgid "New User"
 msgstr "Nouvel Utilisateur"
 
-#: ../../src/network/nethost.cc:1580
+#: ../../src/network/nethost.cc:1808
 msgid "The game has already started."
 msgstr "Le jeu a déjà commencé."
 
-#: ../../src/network/nethost.cc:1598
+#: ../../src/network/nethost.cc:1826
 msgid "Connection to client lost."
 msgstr "Connexion au client perdue."
 
-#: ../../src/network/nethost.cc:1612
+#: ../../src/network/nethost.cc:1840
 msgid "Client sent malformed commands: "
 msgstr "Le client a envoyé une commande mal formée : "
 
-#: ../../src/network/nethost.cc:1645
+#: ../../src/network/nethost.cc:1873
 msgid "Game is running already, but client has not connected fully"
 msgstr ""
 "Le jeu est déjà en cours, mais le client n'est pas complètement connecté."
 
-#: ../../src/network/nethost.cc:1649
+#: ../../src/network/nethost.cc:1877
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
@@ -1630,62 +1702,62 @@ msgstr ""
 "La première commande envoyée par le client est %u à la place de HELLO. Le "
 "client a sûrement une version incompatible."
 
-#: ../../src/network/nethost.cc:1655
+#: ../../src/network/nethost.cc:1883
 msgid "Server uses a different protocol version."
 msgstr "Le serveur utilise une version différente du protocole."
 
-#: ../../src/network/nethost.cc:1743
+#: ../../src/network/nethost.cc:1971
 msgid "Client sent TIME command even though game is not running."
 msgstr ""
 "Le client a envoyé une commande TIME alors que le jeu n'est pas lancé."
 
-#: ../../src/network/nethost.cc:1751
+#: ../../src/network/nethost.cc:1979
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 "Le client a envoyé une commande PLAYERCOMMAND alors que le jeu n'est pas "
 "lancé."
 
-#: ../../src/network/nethost.cc:1763
+#: ../../src/network/nethost.cc:1991
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 "Client %u(%u) a envoyé une commande joueur (%i) pour un joueur différent "
 "(%i)."
 
-#: ../../src/network/nethost.cc:1772
+#: ../../src/network/nethost.cc:2000
 msgid "Client sent unexpected synchronization report."
 msgstr "Le client a envoyé un rapport de synchronisation inattendu."
 
-#: ../../src/network/nethost.cc:1808 ../../src/network/nethost.cc:1820
+#: ../../src/network/nethost.cc:2036 ../../src/network/nethost.cc:2048
 msgid "Client requests file altough none is available to send."
 msgstr ""
 "Le client demande des fichiers, mais aucun n'est disponible à l'envoi."
 
-#: ../../src/network/nethost.cc:1810
+#: ../../src/network/nethost.cc:2038
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr "Commencé à envoyer le fichier %s à %s !"
 
-#: ../../src/network/nethost.cc:1831
+#: ../../src/network/nethost.cc:2059
 msgid "Client requests file part that does not exist."
 msgstr "Le client demande des fichiers qui n'existent pas."
 
-#: ../../src/network/nethost.cc:1834
+#: ../../src/network/nethost.cc:2062
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr "Transfert du fichier %s à %s terminé"
 
-#: ../../src/network/nethost.cc:1842
+#: ../../src/network/nethost.cc:2070
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr "Envoi de la partie %u/%u du fichier %s à %s"
 
-#: ../../src/network/nethost.cc:1852
+#: ../../src/network/nethost.cc:2080
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Le client a envoyé le numéro de commande inconnu %u"
 
-#: ../../src/network/nethost.cc:1908
+#: ../../src/network/nethost.cc:2136
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s a quitté la partie (%s)"
@@ -1877,7 +1949,7 @@ msgstr "(bientôt)"
 
 #: ../../src/wui/soldierlist.cc:338 ../../src/wui/soldierlist.cc:358
 msgid "Click soldier to send away"
-msgstr ""
+msgstr "Cliquez sur un soldat pour le renvoyer"
 
 #: ../../src/wui/general_statistics_menu.cc:46
 #: ../../src/wui/game_main_menu.cc:47
@@ -2075,21 +2147,21 @@ msgstr "Déja blessé"
 msgid "Soldiers in training"
 msgstr "Soldats en cours d'entrainement"
 
-#: ../../src/wui/interactive_base.cc:267
+#: ../../src/wui/interactive_base.cc:269
 #, c-format
 msgid "%u.%ux"
 msgstr "%u.%ux"
 
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:272
 msgid "PAUSE"
 msgstr "PAUSE"
 
-#: ../../src/wui/interactive_base.cc:290
+#: ../../src/wui/interactive_base.cc:292
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../../src/wui/interactive_base.cc:295
+#: ../../src/wui/interactive_base.cc:297
 msgid "NO GAME CONTROLLER"
 msgstr "PAS DE CONTROLEUR DE JEU"
 
@@ -2448,7 +2520,7 @@ msgid "The Map is unsaved, do you really want to quit?"
 msgstr "La carte n'a pas été enregistrée, voulez vous vraiment quitter ?"
 
 #: ../../src/editor/editorinteractive.cc:567
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:425
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:473
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:184
 #: ../../src/logic/map.h:177
@@ -2457,7 +2529,7 @@ msgstr "Sans Nom"
 
 #: ../../src/editor/editorinteractive.cc:569
 #: ../../src/ui_fsmenu/netsetup_lan.cc:185
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:474
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:181
 #: ../../src/logic/map.h:178
 msgid "Unknown"
@@ -2677,7 +2749,7 @@ msgstr "probabilité entre [1,254"
 #: ../../src/logic/critter_bob.cc:388
 #, c-format
 msgid "loading critter: %s"
-msgstr ""
+msgstr "loading critter: %s"
 
 #: ../../src/logic/game.cc:229
 msgid "Preloading a map"
@@ -2713,11 +2785,11 @@ msgstr "Chargement de la carte"
 msgid "Creating player infrastructure"
 msgstr "Création de l'infrastructure des joueurs"
 
-#: ../../src/logic/game.cc:469 ../../src/logic/player.cc:125
+#: ../../src/logic/game.cc:469 ../../src/logic/player.cc:126
 msgid "Missing starting position"
 msgstr "Il manque la position de départ"
 
-#: ../../src/logic/game.cc:471 ../../src/logic/player.cc:127
+#: ../../src/logic/game.cc:471 ../../src/logic/player.cc:128
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -3040,12 +3112,12 @@ msgstr ""
 "jeu est en pause)"
 
 #: ../../src/logic/soldier.cc:1424 ../../src/logic/soldier.cc:1429
-#: ../../src/logic/worker.cc:1643
+#: ../../src/logic/worker.cc:1689
 msgid "no"
 msgstr "non"
 
 #: ../../src/logic/soldier.cc:1436 ../../src/logic/soldier.cc:1444
-#: ../../src/logic/worker.cc:1655
+#: ../../src/logic/worker.cc:1701
 msgid "Logic error"
 msgstr "Erreur logique"
 
@@ -3067,22 +3139,22 @@ msgstr ""
 "devrait produire la ressource %s, qui n'existe pas dans ce monde. La tribu "
 "n'est pas compatible avec ce monde"
 
-#: ../../src/logic/worker.cc:606
+#: ../../src/logic/worker.cc:583
 msgid "Out of "
 msgstr "En manque de "
 
-#: ../../src/logic/worker.cc:609
+#: ../../src/logic/worker.cc:586
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr ""
 "L'ouvrier de ce bâtiment ne peut plus trouver de ressource de ce type : "
 
-#: ../../src/logic/worker.cc:881
+#: ../../src/logic/worker.cc:927
 msgid "A geologist found resources."
 msgstr "Un géologue a trouvé des ressources"
 
-#: ../../src/logic/worker.cc:1624
+#: ../../src/logic/worker.cc:1670
 #, c-format
 msgid ""
 "The game engine has encountered a logic error. The %s #%u of player %u "
@@ -3111,11 +3183,11 @@ msgstr ""
 "quand un objet, tel un champ, est placé sur la carte alors qu'un ouvrier est "
 "dehors. (bug #1796611) (Le jeux a été mis en pause)"
 
-#: ../../src/logic/worker.cc:1641
+#: ../../src/logic/worker.cc:1687
 msgid "nothing"
 msgstr "rien"
 
-#: ../../src/logic/worker.cc:2818
+#: ../../src/logic/worker.cc:2838
 #, c-format
 msgid "loading worker: %s"
 msgstr ""
@@ -4011,91 +4083,81 @@ msgstr ""
 msgid "New Random Map"
 msgstr "Nouvelle carte aléatoire"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:68
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:69
 msgid "Random Number:"
 msgstr "Nombre aléatoire"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:115
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:372
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:116
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:418
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:157
 #, c-format
 msgid "Width: %u"
 msgstr "Largeur : %u"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:125
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:376
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:126
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:422
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:161
 #, c-format
 msgid "Height: %u"
 msgstr "Hauteur : %u"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:161
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:162
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
 #, c-format
 msgid "Water: %u %%"
 msgstr "Eau : %u %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:185
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:186
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Land: %u %%"
 msgstr "Terrain : %u %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:209
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:210
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
 #, c-format
 msgid "Wasteland: %u %%"
 msgstr "Terre en friche : %u %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:219
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:220
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
 #, c-format
 msgid "Mountains: %u %%"
 msgstr "Montagnes : %u %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:236
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:237
 msgid "Island mode:"
 msgstr "Type d'île :"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:243
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:244
 msgid "Resources:"
 msgstr "Ressources :"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Low"
 msgstr "Faible"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:249
 msgid "High"
 msgstr "Élevée"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:281
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:285
 msgid "Map ID:"
 msgstr "ID de la carte :"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:302
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:317
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
+#, c-format
+msgid "Players: %u"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
 msgstr "Générer la carte"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:380
-#, c-format
-msgid "Water: %i %%"
-msgstr "Eau : %i %%"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:383
-#, c-format
-msgid "Land: %i %%"
-msgstr "Terrain : %i %%"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:386
-#, c-format
-msgid "Wasteland: %i %%"
-msgstr "Terre en friche : %i %%"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:389
-#, c-format
-msgid "Mountains: %i %%"
-msgstr "Montagnes : %i %%"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:428
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:476
 msgid "Generating random map..."
 msgstr "Génération de carte aléatoire en cours..."
 
@@ -5256,6 +5318,10 @@ msgstr "pas de description"
 #~ "de ce joueur puis essayez à nouveau."
 
 #, c-format
+#~ msgid "Mountains: %i %%"
+#~ msgstr "Montagnes : %i %%"
+
+#, c-format
 #~ msgid "No building types are selected. Select at least one."
 #~ msgstr "Aucun type de bâtiment sélectionné. Sélectionnez-en au moins un."
 
@@ -5285,12 +5351,24 @@ msgstr "pas de description"
 #~ msgid "Nothing selected"
 #~ msgstr "Aucune sélection"
 
+#, c-format
+#~ msgid "Land: %i %%"
+#~ msgstr "Terrain : %i %%"
+
 #~ msgid ""
 #~ "The objective was deleted, but not its trigger, because it is still "
 #~ "referenced by:\n"
 #~ msgstr ""
 #~ "L'objectif a été effacé, mais pas son déclencheur, car il est toujours "
 #~ "référencé par :\n"
+
+#, c-format
+#~ msgid "Wasteland: %i %%"
+#~ msgstr "Terre en friche : %i %%"
+
+#, c-format
+#~ msgid "Water: %i %%"
+#~ msgstr "Eau : %i %%"
 
 #~ msgid "Event Chains"
 #~ msgstr "Chaînes d'événements"

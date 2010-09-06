@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-08-24 19:33+0200\n"
-"PO-Revision-Date: 2010-08-25 17:37+0000\n"
+"POT-Creation-Date: 2010-09-03 22:16+0200\n"
+"PO-Revision-Date: 2010-08-31 16:49+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-08-26 03:50+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:1991
@@ -933,7 +933,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadreplay.cc:51
 #: ../../src/ui_fsmenu/campaign_select.cc:74
 #: ../../src/ui_fsmenu/campaign_select.cc:283
-#: ../../src/scripting/lua_game.cc:560
+#: ../../src/scripting/lua_game.cc:582
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:121
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
@@ -2598,7 +2598,7 @@ msgstr " erobern"
 #: ../../src/logic/warehouse.cc:505
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr "Eine(e) neue(s) %s ist deiner Wirtschaft hinzugefügt worden."
+msgstr "Ein neues %s ist deiner Wirtschaft hinzugefügt worden."
 
 #: ../../src/logic/militarysite.cc:113
 #, c-format
@@ -3224,7 +3224,7 @@ msgstr ""
 msgid "nothing"
 msgstr "nichts"
 
-#: ../../src/logic/worker.cc:2864
+#: ../../src/logic/worker.cc:2838
 #, c-format
 msgid "loading worker: %s"
 msgstr "Lade Arbeiter: %s"

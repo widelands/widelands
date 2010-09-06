@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-08-24 19:33+0200\n"
+"POT-Creation-Date: 2010-09-03 22:16+0200\n"
 "PO-Revision-Date: 2010-08-26 12:33+0000\n"
 "Last-Translator: Marek Hám <marek.ham@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2010-08-27 03:35+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -808,7 +808,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadreplay.cc:51
 #: ../../src/ui_fsmenu/campaign_select.cc:74
 #: ../../src/ui_fsmenu/campaign_select.cc:283
-#: ../../src/scripting/lua_game.cc:560
+#: ../../src/scripting/lua_game.cc:582
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:121
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
@@ -2996,7 +2996,7 @@ msgstr ""
 msgid "nothing"
 msgstr ""
 
-#: ../../src/logic/worker.cc:2864
+#: ../../src/logic/worker.cc:2838
 #, c-format
 msgid "loading worker: %s"
 msgstr ""

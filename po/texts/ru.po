@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-06-23 20:12+0000\n"
-"PO-Revision-Date: 2010-08-04 03:43+0000\n"
-"Last-Translator: Papazu <Unknown>\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"PO-Revision-Date: 2010-08-30 23:37+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-08-05 03:33+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -897,7 +897,7 @@ msgstr ""
 msgid "Online Help"
 msgstr "Помощь On-Line"
 
-#: ../../txts/developers:339
+#: ../../txts/developers:340
 msgid "Other"
 msgstr "Прочее"
 
@@ -1031,7 +1031,7 @@ msgstr ""
 "Если здание будет окружено деревьями и дорогами то производство остановится."
 
 #: ../../txts/developers:29
-#: ../../txts/developers:327
+#: ../../txts/developers:328
 msgid "Sound"
 msgstr "Звук"
 
@@ -1315,7 +1315,7 @@ msgstr ""
 "Чтобы минимизировать / максимизировать окно, щелкните на строке заголовка "
 "этого окна или средней  / левой кнопкой мыши, удерживая CTRL."
 
-#: ../../txts/developers:332
+#: ../../txts/developers:333
 msgid "Translation"
 msgstr "Перевод"
 

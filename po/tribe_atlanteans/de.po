@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-06 20:55+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"PO-Revision-Date: 2010-09-05 15:49+0000\n"
+"Last-Translator: Kristin <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-07 03:34+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: German\n"
 
@@ -23,7 +23,7 @@ msgstr "Ein spezieller Wappenrock für atlanter Soldaten."
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Advanced Shield"
-msgstr "Verbessertes Schild"
+msgstr "Verbesserter Schild"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -388,11 +388,11 @@ msgstr "Wachhaus"
 msgid "Hammer"
 msgstr "Hammer"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:18
+#: ../../tribes/atlanteans/blackroot_farm/conf:19
 msgid "Harvest blackroot"
 msgstr "Schwarzwurzelernte"
 
-#: ../../tribes/atlanteans/farm/conf:21
+#: ../../tribes/atlanteans/farm/conf:22
 msgid "Harvest corn"
 msgstr "Erntet Mais"
 
@@ -540,11 +540,11 @@ msgstr "Bretter"
 msgid "Planks are an important build material of the Atlanteans."
 msgstr "Bretter sind ein wichtiges Baumaterial der Atlanter"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:16
+#: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
 msgstr "Schwarzwurzelanbau"
 
-#: ../../tribes/atlanteans/farm/conf:19
+#: ../../tribes/atlanteans/farm/conf:20
 msgid "Plant corn"
 msgstr "Baut Mais an."
 
@@ -562,13 +562,13 @@ msgstr "Pflanzt Bäume."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
-msgstr "Produziert verbessertes Schild"
+msgstr "Produziert verbesserten Schild"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:26
 msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
 msgstr ""
-"Produziert verbessertes Schild (nur für Abwärtskompatiblität mit "
+"Produziert verbesserten Schild (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
@@ -1264,14 +1264,14 @@ msgstr "Holzfällerhütte"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:27
 #: ../../tribes/atlanteans/bakery/conf:21
-#: ../../tribes/atlanteans/blackroot_farm/conf:20
+#: ../../tribes/atlanteans/blackroot_farm/conf:21
 #: ../../tribes/atlanteans/burners_house/conf:19
 #: ../../tribes/atlanteans/coalmine/conf:21
 #: ../../tribes/atlanteans/crystalmine/conf:26
-#: ../../tribes/atlanteans/farm/conf:23
+#: ../../tribes/atlanteans/farm/conf:24
 #: ../../tribes/atlanteans/fish_breeders_house/conf:17
 #: ../../tribes/atlanteans/fishers_house/conf:16
-#: ../../tribes/atlanteans/foresters_house/conf:15
+#: ../../tribes/atlanteans/foresters_house/conf:16
 #: ../../tribes/atlanteans/goldmine/conf:22
 #: ../../tribes/atlanteans/goldweaver/conf:19
 #: ../../tribes/atlanteans/horsefarm/conf:22

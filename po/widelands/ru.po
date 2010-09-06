@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-08-24 19:33+0200\n"
-"PO-Revision-Date: 2010-08-24 08:58+0000\n"
+"POT-Creation-Date: 2010-09-03 22:16+0200\n"
+"PO-Revision-Date: 2010-09-05 17:56+0000\n"
 "Last-Translator: CupIvan <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-08-25 03:47+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -250,15 +250,15 @@ msgstr "mine"
 
 #: ../../src/writeHTML.cc:754
 msgid "breed"
-msgstr "breed"
+msgstr "племя"
 
 #: ../../src/writeHTML.cc:755
 msgid "createitem"
-msgstr "createitem"
+msgstr "создать"
 
 #: ../../src/writeHTML.cc:756
 msgid "setdescription"
-msgstr "setdescription"
+msgstr "описание"
 
 #: ../../src/writeHTML.cc:757
 msgid "setbobdescription"
@@ -266,7 +266,7 @@ msgstr "setbobdescription"
 
 #: ../../src/writeHTML.cc:758
 msgid "findobject"
-msgstr "findobject"
+msgstr "найти объект"
 
 #: ../../src/writeHTML.cc:759
 msgid "findspace"
@@ -298,7 +298,7 @@ msgstr "create_bob"
 
 #: ../../src/writeHTML.cc:766
 msgid "removeobject"
-msgstr "removeobject"
+msgstr "удалить объект"
 
 #: ../../src/writeHTML.cc:767
 msgid "geologist"
@@ -913,7 +913,7 @@ msgstr "Ошибка: запущено несколько экземпляров
 #: ../../src/ui_fsmenu/loadreplay.cc:51
 #: ../../src/ui_fsmenu/campaign_select.cc:74
 #: ../../src/ui_fsmenu/campaign_select.cc:283
-#: ../../src/scripting/lua_game.cc:560
+#: ../../src/scripting/lua_game.cc:582
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:121
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:136
@@ -3116,7 +3116,7 @@ msgstr ""
 msgid "nothing"
 msgstr "ничего"
 
-#: ../../src/logic/worker.cc:2864
+#: ../../src/logic/worker.cc:2838
 #, c-format
 msgid "loading worker: %s"
 msgstr ""
