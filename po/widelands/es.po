@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-03 22:16+0200\n"
-"PO-Revision-Date: 2010-08-30 23:33+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-09-06 17:56+0000\n"
+"Last-Translator: Ivan <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-09-07 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -1591,57 +1591,65 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"Los comandos de anfitrión disponibles son:<br>/help  -  Muestra esta "
+"ayuda<br>/announce <mensaje>  -  Envia un mensaje de chat como anuncio "
+"(sistema de chat)<br>/warn <nombre> <razón>  -  Advierte al usuario <nombre> "
+"porque <razón><br>/kick <nombre> <razón>  -  Hecha al usuario <nombre> "
+"porque <razón><br>/forcePause  -  Fuerza al juego a una "
+"pausa.<br>/endForcedPause  -  Saca al juego de la pausa."
 
 #: ../../src/network/nethost.cc:303
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "Uso incorrecto, debería ser: /announce <mensaje>"
 
 #: ../../src/network/nethost.cc:315
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "Uso incorrecto, debería ser: /warn <nombre> <razón>"
 
 #: ../../src/network/nethost.cc:326
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "Uso incorrecto, debería ser: /kick <nombre> <razón>"
 
 #: ../../src/network/nethost.cc:334
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Estás seguro que quieres hechar a %s?<br>"
 
 #: ../../src/network/nethost.cc:337
 #, c-format
 msgid "The stated reason was: %s<br>"
-msgstr ""
+msgstr "La razón de comienzo fue: %s<br>"
 
 #: ../../src/network/nethost.cc:340
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "Si es Sí, tipea: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:349
 msgid "kick acknowlegement cancled: No name given!"
 msgstr ""
+"Reconocimiento para hechar ha sido cancelado: Ningun nombre ha sido dado!"
 
 #: ../../src/network/nethost.cc:351
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Uso incorrecto, debería ser: /ack_kick <nombre>"
 
 #: ../../src/network/nethost.cc:357
 msgid "kick acknowlegement cancled: Wrong name given!"
 msgstr ""
+"Reconocimiento para hechar ha sido cancelado: El nombre dado es incorrecto!"
 
 #: ../../src/network/nethost.cc:367
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Ya se forzó la pausa en el juego - el juego deberia estar en pausa."
 
 #: ../../src/network/nethost.cc:378
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "No hay pausa en el juego - nada que terminar."
 
 #: ../../src/network/nethost.cc:388
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Comando invalido! Tipea /help para una lista de comandos."
 
 #: ../../src/network/nethost.cc:518
 msgid "Server has left the game."
@@ -1657,11 +1665,11 @@ msgstr "El servidor ha fallado e hizo un guardado de emergencia."
 
 #: ../../src/network/nethost.cc:875
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "No puedes hecharte a ti mismo!"
 
 #: ../../src/network/nethost.cc:897
 msgid "There is no connected user with that nickname!"
-msgstr ""
+msgstr "No hay ningun usuario conectado con ese sobrenombre!"
 
 #: ../../src/network/nethost.cc:1071
 #, c-format
@@ -4176,7 +4184,7 @@ msgstr "Id. Mapa:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Jugadores: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
