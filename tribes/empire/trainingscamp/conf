@@ -144,14 +144,14 @@ train=soldier hp 1 2
 check_soldier=soldier hp 2
 sleep=30000
 check_soldier=soldier hp 2
-consume=chain_armour bread fish,meat:2
+consume=chain_armour bread:2 fish,meat:2
 train=soldier hp 2 3
 
 [upgrade_hp_2]
 check_soldier=soldier hp 2
 sleep=30000
 check_soldier=soldier hp 2
-consume=chain_armour bread:2 fish,meat:1
+consume=chain_armour bread:2 fish,meat:2
 train=soldier hp 2 3
 
 [upgrade_soldier_hp_3]
