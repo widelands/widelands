@@ -6,27 +6,71 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:56+0000\n"
-"Last-Translator: Varga Dániel <Unknown>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 14:10+0000\n"
+"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/blackland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Widelands fejlesztőcsapat"
+#: ../../worlds/blackland/conf:45
+msgid "Aspen"
+msgstr "Nyárfa"
+
+#: ../../worlds/blackland/conf:46
+msgid "Aspen medium"
+msgstr "Közepes méretű nyárfa"
+
+#: ../../worlds/blackland/conf:47
+msgid "Aspen small"
+msgstr "Kis nyárfa"
+
+#: ../../worlds/blackland/conf:48
+msgid "Aspen tiny"
+msgstr "Apró nyárfa palánta"
+
+#: ../../worlds/blackland/conf:65
+msgid "Beech"
+msgstr "Bükkfa"
+
+#: ../../worlds/blackland/conf:66
+msgid "Beech medium"
+msgstr "Közepes méretű bükkfa"
+
+#: ../../worlds/blackland/conf:67
+msgid "Beech small"
+msgstr "Kis bükkfa"
+
+#: ../../worlds/blackland/conf:68
+msgid "Beech tiny"
+msgstr "Apró bükkfa palánta"
+
+#: ../../worlds/blackland/conf:61
+msgid "Birch"
+msgstr "Nyírfa"
+
+#: ../../worlds/blackland/conf:62
+msgid "Birch medium"
+msgstr "Közepes méretű nyírfa"
+
+#: ../../worlds/blackland/conf:63
+msgid "Birch small"
+msgstr "Kis nyírfa"
+
+#: ../../worlds/blackland/conf:64
+msgid "Birch tiny"
+msgstr "Apró nyírfa palánta"
 
 #: ../../worlds/blackland/conf:3
 msgid "Blackland"
 msgstr "Sötétföld"
 
-#: ../../worlds/blackland/conf:4
-msgid "These are the grey, horrible and dangerous blacklands"
-msgstr "Ez a sötét vidék a veszélyes félelmetes sötétföld."
+#: ../../worlds/blackland/conf:79
+msgid "Bunny"
+msgstr "Nyuszi"
 
 #: ../../worlds/blackland/conf:7
 #: ../../worlds/blackland/conf:8
@@ -41,6 +85,10 @@ msgstr "Bokor"
 msgid "Cactus"
 msgstr "Kaktusz"
 
+#: ../../worlds/blackland/resconf:4
+msgid "Coal"
+msgstr "Szén"
+
 #: ../../worlds/blackland/conf:14
 #: ../../worlds/blackland/conf:15
 #: ../../worlds/blackland/conf:16
@@ -48,16 +96,92 @@ msgstr "Kaktusz"
 msgid "Dead Tree"
 msgstr "Elpusztult fa"
 
+#: ../../worlds/blackland/conf:80
+msgid "Deer"
+msgstr "Szarvas"
+
+#: ../../worlds/blackland/conf:81
+msgid "Duck"
+msgstr "Kacsa"
+
+#: ../../worlds/blackland/resconf:41
+msgid "Fish"
+msgstr "Hal"
+
+#: ../../worlds/blackland/conf:82
+msgid "Fox"
+msgstr "Róka"
+
+#: ../../worlds/blackland/resconf:12
+msgid "Gold"
+msgstr "Arany"
+
+#: ../../worlds/blackland/resconf:28
+msgid "Granite"
+msgstr "Gránit"
+
 #: ../../worlds/blackland/conf:18
 #: ../../worlds/blackland/conf:19
 #: ../../worlds/blackland/conf:20
 msgid "Grass"
 msgstr "Fű"
 
+#: ../../worlds/blackland/resconf:20
+msgid "Iron"
+msgstr "Vas"
+
+#: ../../worlds/blackland/conf:69
+msgid "Larch"
+msgstr "Vörösfenyő"
+
+#: ../../worlds/blackland/conf:70
+msgid "Larch medium"
+msgstr "Közepes méretű vörösfenyő"
+
+#: ../../worlds/blackland/conf:71
+msgid "Larch small"
+msgstr "Kis vörösfenyő"
+
+#: ../../worlds/blackland/conf:72
+msgid "Larch tiny"
+msgstr "Apró vörösfenyő palánta"
+
+#: ../../worlds/blackland/conf:57
+msgid "Maple"
+msgstr "Juharfa"
+
+#: ../../worlds/blackland/conf:58
+msgid "Maple medium"
+msgstr "Közepes méretű juharfa"
+
+#: ../../worlds/blackland/conf:59
+msgid "Maple small"
+msgstr "Kis juharfa"
+
+#: ../../worlds/blackland/conf:60
+msgid "Maple tiny"
+msgstr "Apró juharfa palánta"
+
 #: ../../worlds/blackland/conf:21
 #: ../../worlds/blackland/conf:22
 msgid "Mushroom"
 msgstr "Gomba"
+
+#: ../../worlds/blackland/conf:49
+msgid "Oak"
+msgstr "Tölgyfa"
+
+#: ../../worlds/blackland/conf:50
+msgid "Oak medium"
+msgstr "Közepes méretű tölgyfa"
+
+#: ../../worlds/blackland/conf:51
+msgid "Oak small"
+msgstr "Kis tölgyfa"
+
+#: ../../worlds/blackland/conf:52
+msgid "Oak tiny"
+msgstr "Apró tölgyfa palánta"
 
 #: ../../worlds/blackland/conf:23
 #: ../../worlds/blackland/conf:24
@@ -68,11 +192,51 @@ msgstr "Gomba"
 msgid "Pebble"
 msgstr "Kavics"
 
+#: ../../worlds/blackland/conf:83
+msgid "Reindeer"
+msgstr "Rénszarvas"
+
+#: ../../worlds/blackland/conf:73
+msgid "Rowan"
+msgstr "Berkenye"
+
+#: ../../worlds/blackland/conf:74
+msgid "Rowan medium"
+msgstr "Közepes méretű berkenye bokor"
+
+#: ../../worlds/blackland/conf:75
+msgid "Rowan small"
+msgstr "Kis berkenye bokor"
+
+#: ../../worlds/blackland/conf:76
+msgid "Rowan tiny"
+msgstr "Apró berkenye palánta"
+
+#: ../../worlds/blackland/conf:84
+msgid "Sheep"
+msgstr "Bárány"
+
 #: ../../worlds/blackland/conf:29
 #: ../../worlds/blackland/conf:30
 #: ../../worlds/blackland/conf:31
 msgid "Skeleton"
 msgstr "Csotváz"
+
+#: ../../worlds/blackland/conf:53
+msgid "Spruce"
+msgstr "Lucfenyő"
+
+#: ../../worlds/blackland/conf:54
+msgid "Spruce medium"
+msgstr "Közepes méretű lucfenyő"
+
+#: ../../worlds/blackland/conf:55
+msgid "Spruce small"
+msgstr "Kis lucfenyő"
+
+#: ../../worlds/blackland/conf:56
+msgid "Spruce tiny"
+msgstr "Apró lucfenyő palánta"
 
 #: ../../worlds/blackland/conf:32
 #: ../../worlds/blackland/conf:33
@@ -93,181 +257,20 @@ msgstr "Szikla"
 msgid "Stones"
 msgstr "Kő"
 
-#: ../../worlds/blackland/conf:45
-msgid "Aspen"
-msgstr ""
+#: ../../worlds/blackland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Widelands fejlesztőcsapat"
 
-#: ../../worlds/blackland/conf:46
-msgid "Aspen medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:47
-msgid "Aspen small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:48
-msgid "Aspen tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:49
-msgid "Oak"
-msgstr ""
-
-#: ../../worlds/blackland/conf:50
-msgid "Oak medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:51
-msgid "Oak small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:52
-msgid "Oak tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:53
-msgid "Spruce"
-msgstr ""
-
-#: ../../worlds/blackland/conf:54
-msgid "Spruce medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:55
-msgid "Spruce small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:56
-msgid "Spruce tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:57
-msgid "Maple"
-msgstr ""
-
-#: ../../worlds/blackland/conf:58
-msgid "Maple medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:59
-msgid "Maple small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:60
-msgid "Maple tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:61
-msgid "Birch"
-msgstr ""
-
-#: ../../worlds/blackland/conf:62
-msgid "Birch medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:63
-msgid "Birch small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:64
-msgid "Birch tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:65
-msgid "Beech"
-msgstr ""
-
-#: ../../worlds/blackland/conf:66
-msgid "Beech medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:67
-msgid "Beech small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:68
-msgid "Beech tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:69
-msgid "Larch"
-msgstr ""
-
-#: ../../worlds/blackland/conf:70
-msgid "Larch medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:71
-msgid "Larch small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:72
-msgid "Larch tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:73
-msgid "Rowan"
-msgstr ""
-
-#: ../../worlds/blackland/conf:74
-msgid "Rowan medium"
-msgstr ""
-
-#: ../../worlds/blackland/conf:75
-msgid "Rowan small"
-msgstr ""
-
-#: ../../worlds/blackland/conf:76
-msgid "Rowan tiny"
-msgstr ""
-
-#: ../../worlds/blackland/conf:79
-msgid "Bunny"
-msgstr "Nyuszi"
-
-#: ../../worlds/blackland/conf:80
-msgid "Deer"
-msgstr "Szarvas"
-
-#: ../../worlds/blackland/conf:81
-msgid "Duck"
-msgstr "Kacsa"
-
-#: ../../worlds/blackland/conf:82
-msgid "Fox"
-msgstr "Róka"
-
-#: ../../worlds/blackland/conf:83
-msgid "Reindeer"
-msgstr "Rénszarvas"
-
-#: ../../worlds/blackland/conf:84
-msgid "Sheep"
-msgstr "Bárány"
-
-#: ../../worlds/blackland/resconf:4
-msgid "Coal"
-msgstr "Szén"
-
-#: ../../worlds/blackland/resconf:12
-msgid "Gold"
-msgstr "Arany"
-
-#: ../../worlds/blackland/resconf:20
-msgid "Iron"
-msgstr "Vas"
-
-#: ../../worlds/blackland/resconf:28
-msgid "Granit"
-msgstr "Gránit"
+#: ../../worlds/blackland/conf:4
+msgid "These are the grey, horrible and dangerous blacklands"
+msgstr "Ez a sötét vidék a veszélyes félelmetes sötétföld."
 
 #: ../../worlds/blackland/resconf:36
 msgid "Water"
 msgstr "Víz"
 
-#: ../../worlds/blackland/resconf:41
-msgid "Fish"
-msgstr "Hal"
+#~ msgid "Granit"
+#~ msgstr "Gránit"
 
 #~ msgid "Tree"
 #~ msgstr "Fa"

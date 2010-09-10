@@ -49,6 +49,11 @@ struct LuaValueError : public LuaError {
 		LuaError("Variable not of expected type: " + wanted)
 	{}
 };
+struct LuaTableKeyError : public LuaError {
+	LuaTableKeyError(std::string const & wanted) :
+		LuaError(wanted + " is not a field in this table.")
+	{}
+};
 struct LuaScriptNotExistingError : public LuaError {
 	LuaScriptNotExistingError(std::string ns, std::string name) :
 		LuaError("The script '" + ns + ":" + name + "' was not found!") {}
@@ -99,6 +104,8 @@ struct LuaInterface {
 	virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string) = 0;
 	virtual boost::shared_ptr<LuaTable> run_script
 			(FileSystem &, std::string, std::string) = 0;
+
+	virtual boost::shared_ptr<LuaTable> get_hook(std::string name) = 0;
 };
 
 struct LuaGameInterface : public virtual LuaInterface {

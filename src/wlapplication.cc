@@ -264,7 +264,8 @@ m_gfx_w(0), m_gfx_h(0),
 m_gfx_fullscreen       (false),
 m_gfx_opengl           (false),
 m_default_datadirs     (true),
-m_homedir(FileSystem::GetHomedir() + "/.widelands")
+m_homedir(FileSystem::GetHomedir() + "/.widelands"),
+m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();
 	UI::g_fh = new UI::Font_Handler();
@@ -276,6 +277,11 @@ m_homedir(FileSystem::GetHomedir() + "/.widelands")
 		m_homedir = m_commandline["homedir"];
 		m_commandline.erase("homedir");
 	}
+#ifdef REDIRECT_OUTPUT
+	if (!redirect_output())
+		redirect_output(m_homedir);
+#endif
+
 	setup_homedir();
 	init_settings();
 	if (m_default_datadirs)
@@ -305,6 +311,14 @@ WLApplication::~WLApplication()
 	assert(g_fs);
 	delete g_fs;
 	g_fs = 0;
+
+	if (m_redirected_stdio)
+	{
+		std::cout.flush();
+		fclose(stdout);
+		std::cerr.flush();
+		fclose(stderr);
+	}
 }
 
 /**
@@ -2237,4 +2251,33 @@ void WLApplication::cleanup_replays()
 			}
 		}
 	}
+}
+
+bool WLApplication::redirect_output(std::string path)
+{
+	if (path.empty()) {
+#ifdef WIN32
+		char module_name[MAX_PATH];
+		unsigned int name_length = GetModuleFileName(NULL, module_name, MAX_PATH);
+		path = module_name;
+		size_t pos = path.find_last_of("/\\");
+		if (pos == std::string::npos) return false;
+		path.resize(pos);
+#else
+		path = ".";
+#endif
+	}
+	std::string stdoutfile = path + "/stdout.txt";
+	/* Redirect standard output */
+	FILE *newfp = freopen(stdoutfile.c_str(), "w", stdout);
+	if (!newfp) return false;
+	/* Redirect standard error */
+	std::string stderrfile = path + "/stderr.txt";
+	newfp = freopen(stderrfile.c_str(), "w", stderr);
+
+	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);	/* Line buffered */
+	setbuf(stderr, NULL);			/* No buffering */
+
+	m_redirected_stdio = true;
+	return true;
 }

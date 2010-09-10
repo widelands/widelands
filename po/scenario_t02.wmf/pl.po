@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-05-26 13:49+0000\n"
-"Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"PO-Revision-Date: 2010-08-18 09:59+0000\n"
+"Last-Translator: Bartosz Wiśniewski <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-27 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-08-19 03:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
@@ -231,6 +231,15 @@ msgid ""
 "breed\n"
 "them and they will do their work on the roads loyally and reliably.\""
 msgstr ""
+"\"Z biegiem czasu, gdy nasze królestwo powiększa się, zwiększa się też ruch "
+"na drogach.\n"
+"Nasi biedni tragarza nie są w stanie transportować tak szybko, jak byśmy "
+"tego chcieli.\n"
+"Sugeruję, aby wspomóc ich trochę, hodując woły.To niesamowite zwierzęta. "
+"Woły są tak \n"
+"samo szybkie jak ludzie, lecz o wiele silniejsze i wszystkożerne: jedyne, "
+"czego potrzebujemy\n"
+"do hodowli to ziarno i woda, a będą nam wiernie służyć.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:380
 msgid ""
@@ -273,6 +282,11 @@ msgid ""
 "once in a while! Let us send out some of those who understand the stone's\n"
 "tongue to unravel the mountain's secrets!\""
 msgstr ""
+"\"Spójrz! Na wschodzie znajduje się wieka góra Kal'mavrath!\n"
+"Pomyśleć tylko jakie skarby skrywa pod powierzchnią...\n"
+"Zdobądźmy tereny na wschodzie. W końcu starszyzna do czegoś się przyda!\n"
+"Wyślijmy zwiadowców, obeznanych w sztuce kamieniarskiej aby odkryć \n"
+"sekrety wzgórza!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:350
 msgid ""
@@ -337,6 +351,12 @@ msgid ""
 "could,\n"
 "in times of need, build a fortress as the world has not seen before!\""
 msgstr ""
+"Tak, przyjacielu, to powinno zapewnić odpowiednią wytrzymałość naszych "
+"fortyfikacji!\n"
+"Teraz możemy bezpiecznie poszerzać terytorium. Nie zaszkodzi jednak "
+"zgromadzić\n"
+"trochę cementu na przyszłość, abyśmy mogli, gdy potrzeba, budować fortece\n"
+"jakich świat nie widział!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:251
 msgid ""
@@ -484,7 +504,7 @@ msgstr "Zbuduj paprociarnię"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr ""
+msgstr "Zbuduj chatę łowcy, leśnika i tawernę."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
@@ -493,14 +513,16 @@ msgstr "Zbuduj piec do fugi i gospodarkę węgla"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:174
 msgid "Build a lime kiln, a well and a charcoal burner or coal mine"
 msgstr ""
+"Zbuduj piec do wyplania kamienia, studnię, wypalarnie węgla drzewnego lub "
+"kopalnię węgla."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Zbuduj hutę."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Zbuduj studnię, farmę i pierkarnię."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
@@ -509,23 +531,25 @@ msgstr "Zbuduj lakiernię drzewa"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
-msgstr ""
+msgstr "Zbuduj kopalnie węgla i żelaza."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
 "Build military buildings (like sentries and strongholds) to expand your\n"
 "territory. Get to the rocks northeast from you and build a quarry there."
 msgstr ""
+"Wznieś budynki wojskowe (jak wartownia, czy twierdza) aby poszerzyć swoje\n"
+"terytorium. Dostań się do skał na północnym wschodzie i zbuduj kamieniołom."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:139
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Ulepsz budynki i zbuduj mały browar"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
 "Enhance the coal mine and the tavern to the better versions of their\n"
 "buildings respectively. Also build a micro brewery."
-msgstr ""
+msgstr "Ulepsz kopalnię węgla i tawernę. Zbuduj także mały browar."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Expand north-east and build a quarry"
@@ -533,7 +557,7 @@ msgstr "Rozszerz się na północny-wschód i zbuduj kamieniołom"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:84
 msgid "Expand north-east to the stones"
-msgstr ""
+msgstr "Zyskaj dostęp do kamieni na północnym wschodzie"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
 msgid ""
@@ -544,6 +568,11 @@ msgid ""
 "first example of a ware which has to be refined before being used in a\n"
 "secondary building - others will follow."
 msgstr ""
+"Twoje kopalnie do pracy potrzebują jedzenie.\n"
+"Myśliwy może polować na zwierzęta, podczas gdy leśnik dopilnuje,\n"
+"by nie wyginęły. Mięso zostanie przetworzone w tawernie na posiłki\n"
+"dla górników. To tylko jeden z przykładów przetwarzania produktów w\n"
+"kilku budynkach. Następne przykłady poznasz wkrótce."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
@@ -559,7 +588,7 @@ msgstr "Khantrukh przerywa..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:242
 msgid "Khantrukh joins in ..."
-msgstr ""
+msgstr "Khantrukh dołącza..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:268
 msgid "Khantrukh nods satisfied..."
@@ -571,7 +600,7 @@ msgstr "Khantrukh odetchnął z ulgą..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Khantrukh mówi"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:349
 msgid "Khantrukh speaks..."
@@ -587,7 +616,7 @@ msgstr "Misja wykonana!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:69
 msgid "New Objectives"
-msgstr ""
+msgstr "Nowe cele."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:424
 msgid "One fullmoon night"
@@ -600,6 +629,11 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well at a spot\n"
 "where your geologists find a water source."
 msgstr ""
+"Inne sposoby na otrzymywanie jedzenie - różnego rodzaju, to połowy rybaków i "
+"\n"
+"polowania myśliwego. Ziarno z gospodarstwa musi być przetworzone w piekarni\n"
+"z dodatkiem wody, zanim będzie zdatne do jedzenia. Wodę możesz otrzymywać\n"
+"ze studni zbudowanej w miejscu, gdzie twój geolog znajdzie jej źródło."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:107
 msgid "Provide your miners with food"
@@ -644,6 +678,9 @@ msgid ""
 "The iron ore your miners bring up is not usable yet - it has to be melted\n"
 "into iron first."
 msgstr ""
+"Ruda żelaza, którą wydobywają twoi górnicy na razie do niczego się nie "
+"nadaje - najpierw\n"
+"musi zostać przetopiona na sztabki."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:210
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:217
@@ -657,6 +694,9 @@ msgid ""
 "cover roofs. Thatch reed is planted by a ferner around his building, the\n"
 "fernery."
 msgstr ""
+"Trzecim elementem do ulepszania budynków jest strzecha, używana do "
+"pokrywania dachu.\n"
+"Strzecha jest wysiewana przez farmera wokół jego gospodarstwa."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."
@@ -681,11 +721,11 @@ msgstr "Samouczek 2 - Miejsce, które można nazwać domem"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
-msgstr ""
+msgstr "Zwycięstwo"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:412
 msgid "We need oxen!"
-msgstr ""
+msgstr "Potrzebujemy wołów!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:197
 msgid ""
@@ -697,12 +737,20 @@ msgid ""
 "doubles the transport capacity.<br>Oxen are bred in cattle farms\n"
 "out of wheat and water."
 msgstr ""
+"Gdy drogi są przeciążone przez dłuższy czas, jeden tragarz nie jest w stanie "
+"szybko \n"
+"przenosić towarów. W konsekwencji tworzą się korki. Na takich drogach "
+"przydaje się drugi\n"
+"tragarz: wół, który pomaga w transporcie. To podwaja pojemność tragarza.\n"
+"Woły są hodowane w szopach, na których potrzebne jest ziarno i woda."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:405
 msgid ""
 "You have completed this mission. You may continue playing if you wish,\n"
 "otherwise move on to the next mission."
 msgstr ""
+"Ukończyłeś misję. Możesz kontynuować grę na obecnej mapie, lub przejść\n"
+"do następnej misji."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:233
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:248

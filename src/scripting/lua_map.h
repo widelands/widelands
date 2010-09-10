@@ -97,6 +97,7 @@ public:
 	 */
 	int __eq(lua_State * L);
 	int remove(lua_State * L);
+	int has_attribute(lua_State * L);
 
 	/*
 	 * C Methods
@@ -553,6 +554,7 @@ public:
 	 */
 	int __eq(lua_State * L);
 	int region(lua_State * L);
+	int has_movecaps_swim(lua_State *);
 
 	/*
 	 * C methods

@@ -196,6 +196,7 @@ if (DEFINED MSVC)
   add_definitions( -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS )
   add_definitions( -Dssize_t=size_t )
   add_definitions( -Dmkdir=_mkdir )
+  add_definitions( -DREDIRECT_OUTPUT )
 
   # Automatic linking for boost requires setting lib dir and clearing Boost_LIBARIES
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
@@ -204,7 +205,7 @@ if (DEFINED MSVC)
   find_library(INTL_LIBRARY NAMES intl libintl)
 
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG$" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
   # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
   set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MT /GL" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)

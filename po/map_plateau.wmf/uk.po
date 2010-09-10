@@ -1,0 +1,196 @@
+# Ukrainian translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"PO-Revision-Date: 2010-08-07 14:19+0000\n"
+"Last-Translator: Fedik <Unknown>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-08-08 03:37+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:33
+msgid ""
+"* Defeat Erwyn. He commands the strongest opposing soldiers left on this\n"
+"island."
+msgstr ""
+"* Перемогти Ервіна. Під його командуванням найсильніші солдати на цьому\n"
+"острові."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:40
+msgid "* Defeat Jomo. He takes care about the soldiers food supply."
+msgstr "* Перемогти Йомо. В нього солдати завжди добре нагодовані."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:26
+msgid "* Defeat Lanissa and capture the ancient castle."
+msgstr "* Перемогти Лінасс та захопити старовинний замок."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:54
+msgid "-- NEW OBJECTIVES --"
+msgstr "-- Нові Завдання --"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:86
+msgid "An ancient castle"
+msgstr "Старовинний замок"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:102
+msgid "Ancient castle captured"
+msgstr "Старовинний замок захвачено"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:116
+#: ../../maps/Plateau.wmf/scripting/texts.lua:126
+msgid "Another Briefing"
+msgstr "Нова нарада"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:87
+msgid ""
+"By the Gods! One of our scouts found a mighty castle at the middle of the "
+"old\n"
+"plateau. The castle must be quite old and seems to be build in a foreign\n"
+"style. It's quite obvious, that this is not barbarian craft.<br>Let's hope\n"
+"Lanissa - the warlord holding command over that castle - still has not "
+"observed\n"
+"us. Perhaps we have a chance to conquer that mighty building without a "
+"bigger\n"
+"fight!<br>However we really have to capture it. It will be our key for our\n"
+"reign over this island!"
+msgstr ""
+"за волею Богів!Наш розвідник помітив добре захищений замок в середині\n"
+"старого плато. Замок досить старий та побудований в незвичному\n"
+"стилі. Відразу видно, що його будували не варвари.\n"
+"<br>Маємо надію, що Лінасс - тамтешня воєначальниця - ще не помітила\n"
+"нас. Можливо вдасться захватити цю міцну будівлю без шума та пилу.\n"
+"<br>Так чи інакше нам його потрібно брати, то, що це ключ\n"
+" до всього острова!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:25
+msgid "Capture the ancient castle"
+msgstr "Захватити старовинний замок"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:143
+msgid ""
+"Congratulations! You mastered this scenario. You may play on if you like!"
+msgstr ""
+"Вітаємо! Ви перемогли в цьому сценарії, можете продовжити вільну гру, якщо "
+"бажаєте!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:31
+msgid "Defeat Erwyn"
+msgstr "Перемогти Ервіна"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:38
+msgid "Defeat Jomo"
+msgstr "Перемогти Йомо"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:120
+msgid "Erwyn defeated"
+msgstr "Ервина переможено"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:74
+msgid ""
+"Finally! Our first step to victory was just done! Last night, we landed on\n"
+"the forbidden island and defeated the few guards that sentineled the north\n"
+"western part of the island. I am quite sure, that none of the other "
+"warlords\n"
+"has detected us so far, so we should keep quiet and build up our\n"
+"infrastructure. Soon we will be strong enough to raid their positions."
+msgstr ""
+"Відбулося! Перший крок до перемоги! Минулої ночі ми висадились на "
+"забороненому острові\n"
+"та перемогли декількох охоронців на північно-західній його частині.\n"
+"Я впевнений, що ніхто з воєначальників нас не помітив,\n"
+"тому ми маємо тихенько підготовити інфраструктуру,\n"
+"щоб набратись сил для нападу."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:141
+msgid ""
+"Finally! The complete island is ours. Now we just have to defend it better "
+"than\n"
+"the warlords did."
+msgstr ""
+"Чудово! Весь острів наш! Ми ж то зможемо його захистити\n"
+"краще ніж попередні власники."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:69
+msgid "First Briefing"
+msgstr "Перша нарада"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:121
+msgid ""
+"Great! Erwyn gave up, when he saw his last buildings burning down. One "
+"strong\n"
+"warlord less on this island!"
+msgstr ""
+"Чудово! Побачивши як догоряють останні будівлі, Ервін здався.\n"
+"Тепер на острові менше на одного воєначальника!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:131
+msgid ""
+"Great! Jomo gave up, when he saw his last buildings burning down. One "
+"warlord\n"
+"less on this island!"
+msgstr ""
+"Чудово! Побачивши як догоряють останні будівлі, Йомо здався.\n"
+"Тепер на острові менше на одного воєначальника!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:130
+msgid "Jomo defeated"
+msgstr "Йомо переможено"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:136
+msgid "Last Briefing"
+msgstr "Остання нарада"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:82
+#: ../../maps/Plateau.wmf/scripting/texts.lua:98
+msgid "Second Briefing"
+msgstr "Додаткова нарада"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:73
+msgid "The forbidden island"
+msgstr "Заборонений острів"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:140
+msgid "Victory!"
+msgstr "Перемога!"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:103
+msgid ""
+"Wonderful! Our troops finally defeated Lanissa and her soldiers. The "
+"ancient\n"
+"castle is ours!<br> It is amazing, how far one can see from the highest "
+"tower\n"
+"of the castle. We can watch the whole island. So now I wonder, why Lanissa "
+"has\n"
+"not seen us and thus did not prepare. But well, some things will never come "
+"to\n"
+"the light of day. The only important things at the moment are the left "
+"opposing\n"
+"troops. We observed enemy's positions from Erwyn north and eastwards of the\n"
+"castle. He is known to be a strong warlord and surely commands the "
+"strongest\n"
+"warriors. In the south we caught sight of some guarded food infrastructures "
+"of Jomo -\n"
+"a younger warlord - we should take care about that infrastructures and cut "
+"of\n"
+"the food supply."
+msgstr ""
+"Вражаюче! Наші війська повністю розбили Лінасс та її солдат. Старовинний\n"
+"замок наш!<br>Неймовірно, як далеко можна побачити із найвищої вежі замка.\n"
+"Ми можемо оглянути весь острів. Тепер мені цікаво, чому Лінасс не побачила "
+"нас\n"
+" і не підготовилась. Та в будь якому випадку добре, коли деякі речі\n"
+"не трапляються. Єдина важлива річ зараз - це військо ворога.\n"
+"Ми спостерігали позиції нашого ворога Ервіна на півночі та сході від замку.\n"
+"Він відомий як сильний та впевнений полководець, не менш сильних солдат.\n"
+"На півдні ми бачили джерело харчів Йомо - молодшого польового\n"
+"командира - яке охороняється, лише, частково. Ми повинні відрізати\n"
+" їм постачання продуктів."

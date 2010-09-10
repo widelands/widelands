@@ -3,59 +3,36 @@
 -- =======================================================================
 
 use("aux", "coroutine") -- for sleep
-use("aux", "metaserver")
 use("aux", "win_condition_functions")
 
 set_textdomain("win_conditions")
 
+local wc_name = _ "Autocrat"
+local wc_desc = _ "The tribe or team that can defeat all others wins the game!"
 return {
-   name = _ "Autocrat",
-   description = _ "The tribe (or team) that can defeat all others wins!",
-   func = function()
+	name = wc_name,
+	description = wc_desc,
+	func = function()
+		local plrs = {}
+		valid_players(plrs)
 
-      -- =========================================                                                                                               
-      -- Report the result back to the metaserver                                                                                                
-      -- =========================================
-      local function _report_result(p, has_won)
-         if has_won then
-            p:send_message(_"Congratulations!",
-               _ "You have won this game!", 
-               {popup = true}
-            )
-         else
-            p:send_message(_ "You lost!",
-               _ "Sorry, you have lost this game!",
-               { popup = true }
-            )
-         end
-         wl.game.report_result(p, has_won, 0, make_extra_data(p, "defeat_all", 1))
-      end
+		broadcast(plrs, wc_name, wc_desc)
 
-      -- Find all valid players
-      local plrs = {}
-      valid_players(plrs)
+		-- Iterate all players, if one is defeated, remove him
+		-- from the list, send him a defeated message and give him full vision
+		repeat
+			sleep(5000)
+			check_player_defeated(plrs, _ "You are defeated!",
+				_ ("You have nothing to command left. If you want, you may " ..
+				   "continue as spectator."))
+		until count_factions(plrs) <= 1
 
-      -- Iterate all players, if one is defeated, remove him
-      -- from the list, send him a defeated message and give him full vision
-      repeat
-         sleep(5000)
+		-- Send congratulations to all remaining players
+		broadcast(plrs, 
+				_ "Congratulations!",
+				_ "You have won this game!",
+				{popup = true}
+		)
 
-         for idx,p in ipairs(plrs) do
-            if p.defeated then
-               _report_result(p, false)
-               table.remove(plrs, idx)
-               break
-            end
-         end
-
-         check_player_defeated(plrs, _ "You lost!",
-            _ "Sorry, you have lost this game!")
-      until count_factions(plrs) <= 1
-
-      -- Send congratulations to all remaining players
-      for idx,p in ipairs(plrs) do
-         _report_result(p, true)
-      end
-
-   end,
+	end,
 }
