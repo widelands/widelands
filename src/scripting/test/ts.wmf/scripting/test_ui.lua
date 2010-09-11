@@ -169,6 +169,7 @@ function tab_panel_tests:setup()
    self.w = mv.windows.field_action
 end
 function tab_panel_tests:teardown()
+   local mv = wl.ui.MapView()
    for n,w in pairs(mv.windows) do w:close() end
    self.w = nil
 end
