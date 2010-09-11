@@ -29,7 +29,7 @@ return {
    -- 2) The player is in a team with another player who's number is smaller
    --    than p.number and the other player has the same tribe
 
-   local sf = p.starting_field
+   local sf = wl.Map().player_slots[p.number].starting_field
    -- Do not call twice for teammate
    p:allow_workers("all")
 

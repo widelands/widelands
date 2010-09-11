@@ -12,7 +12,7 @@ return {
 
    p:allow_workers("all")
    
-   local sf = wl.Map().player_slots[plr.number].starting_field
+   local sf = wl.Map().player_slots[p.number].starting_field
    local h = p:place_building("citadel", sf)
    h:set_soldiers{[{0,0,0,0}] = 12}
 

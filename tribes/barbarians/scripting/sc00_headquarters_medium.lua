@@ -9,7 +9,7 @@ set_textdomain("tribe_barbarians")
 init = {
    name = _ "Headquarters medium",
    func = function(player) 
-   local sf = wl.Map().player_slots[plr.number].starting_field
+   local sf = wl.Map().player_slots[player.number].starting_field
 
    player:allow_workers("all")
 
