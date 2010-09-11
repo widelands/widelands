@@ -100,6 +100,7 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, set_frontier_style),
 	METHOD(L_Player, get_suitability),
 	METHOD(L_Player, allow_workers),
+	METHOD(L_Player, switchplayer),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -1137,6 +1138,25 @@ int L_Player::allow_workers(lua_State * L) {
 						(game, worker_types_without_cost_index);
 			}
 		}
+	}
+	return 0;
+}
+
+
+/* RST
+	.. method:: switchplayer(playernumber)
+
+		If *this* is the local player (the player set in interactive player)
+		switch to the player with playernumber
+*/
+int L_Player::switchplayer(lua_State * L) {
+	Game & game = get_game(L);
+	Player & player = get(L, game);
+	uint8_t newplayer = luaL_checkinteger(L, -1);
+	Interactive_Player * ipl = game.get_ipl();
+	// only switch, if this is our player!
+	if (ipl->player_number() == m_pl) {
+		ipl->set_player_number(newplayer);
 	}
 	return 0;
 }

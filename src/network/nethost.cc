@@ -346,7 +346,7 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "ack_kick") {
 				std::string name;
 				if (arg1.empty())
-					c.msg = _("kick acknowlegement cancled: No name given!");
+					c.msg = _("kick acknowledgement cancelled: No name given!");
 				else if (arg2.size())
 					c.msg = _("Wrong use, should be: /ack_kick <name>");
 				else {
@@ -354,7 +354,7 @@ struct HostChatProvider : public ChatProvider {
 						h->kickUser(kickUser, kickReason);
 						return;
 					} else
-						c.msg = _("kick acknowlegement cancled: Wrong name given!");
+						c.msg = _("kick acknowledgement cancelled: Wrong name given!");
 				}
 				kickUser   = "";
 				kickReason = "";
