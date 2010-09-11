@@ -4,6 +4,8 @@
 --
 -- This script contains functions that are shared by different win conditions.
 
+use("aux", "metaserver")
+
 -- =======================================================================
 --                             PUBLIC FUNCTIONS
 -- =======================================================================
@@ -17,14 +19,16 @@
 --    :arg plrs:    List of Players to be checked
 --    :arg heading: Heading of the message the defeated player will get
 --    :arg msg:     Message the defeated player will get
+--    :arg wc_name  Name of the win condition
+--    :arg wc_ver   Version of the win condition
 --
 --    :returns: :const:`nil`
-function check_player_defeated(plrs, heading, msg)
+function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
    for idx,p in ipairs(plrs) do
       if p.defeated then
          p:send_message(heading, msg, { popup = true })
          p.see_all = 1
-         wl.game.report_result(p, false, 0, make_extra_data(p, "defeat_all", 1))
+         wl.game.report_result(p, false, 0, make_extradata(p, wc_name, wc_ver))
          table.remove(plrs, idx)
          break
       end
@@ -87,3 +91,10 @@ function broadcast(plrs, header, msg, goptions)
    end
 end
 
+function broadcast_win(plrs, header, msg, goptions, wc_name, wc_ver)
+   local options = goptions or {}
+   for idx, p in ipairs(plrs) do
+       p:send_message(header, msg, options)
+       wl.game.report_result(p, false, 0, make_extradata(p, wc_name, wc_ver))
+   end
+end

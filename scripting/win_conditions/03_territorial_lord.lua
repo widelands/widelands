@@ -9,6 +9,7 @@ use("aux", "win_condition_functions")
 set_textdomain("win_conditions")
 
 local wc_name = _ "Territorial Lord"
+local wc_version = 2
 local wc_desc = _ (
 	"Each player or team tries to obtain more than half of the maps' " ..
 	"area. The winner will be the player or the team that is able to keep " ..
@@ -155,7 +156,7 @@ return {
 			sleep(5000)
 			check_player_defeated(plrs, _ "You are defeated!",
 				_ ("You have nothing to command left. If you want, you may " ..
-		         "continue as spectator."))
+		         "continue as spectator."), wc_name, wc_version)
 		end)
 
 		-- here is the main loop!!!
@@ -173,8 +174,10 @@ return {
 					if candidateisteam and currentcandidate == _("Team %i"):format(p.team)
 						or not candidateisteam and currentcandidate == p.name then
 						p:send_message(_"You won!", _"You are the winner!", {popup = true})
+						wl.game.report_result(p, true, _landsizes[p.number], make_extra_data(p, wc_name, wc_version))
 					else
 						p:send_message(_"You lost", _"You've lost this game!", {popup = true})
+						wl.game.report_result(p, false, _landsizes[p.number], make_extra_data(p, wc_name, wc_version))
 					end
 				end
 				break

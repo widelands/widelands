@@ -9,6 +9,7 @@ use("aux", "win_condition_functions")
 set_textdomain("win_conditions")
 
 local wc_name = _ "Collectors"
+local wc_version = 2
 local wc_desc = _ (
 	"You get points for precious wares in your warehouses, the player with " .. 
 	"the highest number of wares at the end of 4 hours wins the game."
@@ -137,8 +138,10 @@ local function _game_over(plrs)
 	table.sort(points, function(a,b) return a[2] < b[2] end)
 	for i=1,#points-1 do
 		points[i][1]:send_message(_"You lost", _"You've lost this game!")
+		wl.game.report_result(points[i][1], false, points[i][2], make_extra_data(p, wc_name, wc_version))
 	end
 	points[#points][1]:send_message(_"You won!", _"You are the winner!")
+	wl.game.report_result(points[#points][1], true, points[#points][2], make_extra_data(p, wc_name, wc_version))
 end
 
 -- Instantiate the hook to calculate points
@@ -181,7 +184,7 @@ while true do
 		sleep(5000)
 		check_player_defeated(plrs, _ "You are defeated!",
 			_ ("You have nothing to command left. If you want, you may " ..
-			   "continue as spectator."))
+			   "continue as spectator."), wc_name, wc_version)
 		runs = runs + 1
 	until runs >= 120 -- 120 * 5000ms = 600000 ms = 10 minutes
 	remaining_time = remaining_time - 10
