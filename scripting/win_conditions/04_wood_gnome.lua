@@ -146,11 +146,11 @@ return {
 		privmsg = _ ("You have lost this game!")
 		privmsg = privmsg .. msg
 		points[i][1]:send_message(_"You lost!", privmsg, {popup = true})
-		wl.game.report_result(points[i][1], false, points[i][2], make_extra_data(p, wc_name, wc_version))
+		wl.game.report_result(points[i][1], false, points[i][2], make_extra_data(points[i][1], wc_name, wc_version))
 	end
 	privmsg = _ ("You are the winner of this game!")
 	privmsg = privmsg .. msg
 	points[#points][1]:send_message(_"You won!", privmsg, {popup = true})
-	wl.game.report_result(points[#points][1], true, points[#points][2], make_extra_data(p, wc_name, wc_version))
+	wl.game.report_result(points[#points][1], true, points[#points][2], make_extra_data(points[#points][1], wc_name, wc_version))
 end
 }

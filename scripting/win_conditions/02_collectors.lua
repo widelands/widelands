@@ -138,10 +138,10 @@ local function _game_over(plrs)
 	table.sort(points, function(a,b) return a[2] < b[2] end)
 	for i=1,#points-1 do
 		points[i][1]:send_message(_"You lost", _"You've lost this game!")
-		wl.game.report_result(points[i][1], false, points[i][2], make_extra_data(p, wc_name, wc_version))
+		wl.game.report_result(points[i][1], false, points[i][2], make_extra_data(points[i][1], wc_name, wc_version))
 	end
 	points[#points][1]:send_message(_"You won!", _"You are the winner!")
-	wl.game.report_result(points[#points][1], true, points[#points][2], make_extra_data(p, wc_name, wc_version))
+	wl.game.report_result(points[#points][1], true, points[#points][2], make_extra_data(points[#points][1], wc_name, wc_version))
 end
 
 -- Instantiate the hook to calculate points
