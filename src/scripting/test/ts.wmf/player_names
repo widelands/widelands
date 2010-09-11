@@ -4,16 +4,16 @@
 packet_version="1"
 
 [player_1]
-name="Player 1"
+name="Barbarian Bouncer"
 tribe="barbarians"
 ai=
 
 [player_2]
-name="Player 2"
+name="Epic Empire"
 tribe="empire"
 ai=
 
 [player_3]
-name="Player 3"
+name="Awesome Atlantean"
 tribe="atlanteans"
 ai=

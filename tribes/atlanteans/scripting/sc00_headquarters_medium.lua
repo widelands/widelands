@@ -11,7 +11,7 @@ return {
    func =  function(plr) 
    plr:allow_workers("all")
 
-   local sf = plr.starting_field
+   local sf = wl.Map().player_slots[plr.number].starting_field
    prefilled_buildings(plr, { "headquarters", sf.x, sf.y, 
       wares = {
          diamond = 7,

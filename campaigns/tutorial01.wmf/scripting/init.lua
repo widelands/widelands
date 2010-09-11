@@ -291,13 +291,14 @@ function register_immovable_as_allowed(i)
       registered_player_immovables[_fmt(i.fields[1].brn)] = true
    end
 end
-register_immovable_as_allowed(plr.starting_field.immovable)
+register_immovable_as_allowed(wl.Map().player_slots[1].starting_field.immovable)
 
 function bad_boy_sentry()
+   local sf = wl.Map().player_slots[1].starting_field
    while not terminate_bad_boy_sentinel do
       -- Check all fields.
       local sent_msg = false
-      for idx,f in ipairs(plr.starting_field:region(8)) do
+      for idx,f in ipairs(sf:region(8)) do
          if f.immovable and f.immovable.player == plr and
                not registered_player_immovables[_fmt(f)] then
 
@@ -385,7 +386,7 @@ function build_lumberjack()
    msg_box(lumberjack_message_03)
    sleep(500)
 
-   click_on_field(plr.starting_field.brn)
+   click_on_field(wl.Map().player_slots[1].starting_field.brn)
 
    msg_box(lumberjack_message_04)
    
@@ -503,7 +504,7 @@ function build_a_quarry()
    -- Showoff direct roadbuilding
    click_on_field(cs.fields[1].brn)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
-   click_on_field(plr.starting_field.brn)
+   click_on_field(wl.Map().player_slots[1].starting_field.brn)
    
    sleep(3000)
 

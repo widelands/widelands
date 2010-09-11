@@ -561,6 +561,38 @@ private:
 	int m_hollow_region(lua_State * L, uint32_t radius, uint32_t inner_radius);
 };
 
+class L_PlayerSlot : public L_MapModuleClass {
+	Widelands::Player_Number m_plr;
+
+public:
+	LUNA_CLASS_HEAD(L_PlayerSlot);
+
+	L_PlayerSlot() {}
+	L_PlayerSlot(Widelands::Player_Number plr) : m_plr(plr) {}
+	L_PlayerSlot(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'PlayerSlot' directly!");
+	}
+	virtual ~L_PlayerSlot() {}
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_tribe(lua_State *);
+	int get_name(lua_State *);
+	int get_starting_field(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+};
+
 int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
 
 #endif

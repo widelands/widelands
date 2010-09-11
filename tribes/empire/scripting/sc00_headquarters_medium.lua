@@ -12,7 +12,7 @@ return {
 
    p:allow_workers("all")
 
-   local sf = p.starting_field
+   local sf = wl.Map().player_slots[plr.number].starting_field
    prefilled_buildings(p, { "headquarters", sf.x, sf.y, 
       wares = {
          helm = 4,

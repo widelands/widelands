@@ -63,7 +63,7 @@ not destruction. This tutorial will get you through the basics of the game.]]
 initial_message_02 = {
    title = _ "Diving in",
    pos = "topright",
-   field = plr.starting_field,
+   field = wl.Map().player_slots[1].starting_field,
    body = rt(
       h1(_"Let's dive right in!") ..
       p(_

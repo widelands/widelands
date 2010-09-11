@@ -43,9 +43,12 @@ static void m_instantiate_new_lua_class(lua_State * L) {
 	// get this classes instantiator
 	lua_getglobal(L, "wl"); // table wl
 	if (module != "")
-		lua_getfield(L, -1, module.c_str()); // table wl module?
+		lua_getfield(L, -1, module.c_str()); // table wl module
+	else
+		lua_pushvalue(L, -1); // table wl wl
+
 	std::string instantiator = "__" + klass;
-	lua_getfield(L, -1, instantiator.c_str()); // table wl module? func
+	lua_getfield(L, -1, instantiator.c_str()); // table wl module func
 
 	// Hopefully this is a function!
 	luaL_checktype(L, -1, LUA_TFUNCTION);
@@ -56,8 +59,8 @@ static void m_instantiate_new_lua_class(lua_State * L) {
 static LunaClass ** m_get_new_empty_user_data(lua_State * L) {
 	m_instantiate_new_lua_class(L);
 
-	lua_pushint32(L, 0); // table wl module lua_obj int
-	lua_gettable(L, -2); // table wl module lua_obj obj
+	lua_pushint32(L, 0); // table wl module? lua_obj int
+	lua_gettable(L, -2); // table wl module? lua_obj obj
 
 	LunaClass ** obj = static_cast<LunaClass ** >(lua_touserdata(L, - 1));
 	lua_pop(L, 1); // table wl module lua_obj

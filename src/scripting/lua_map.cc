@@ -46,7 +46,7 @@ using namespace Widelands;
 =============
 
 .. module:: wl.map
-   :synopsis: Provides access on maps and fields
+   :synopsis: Provides access to Fields and Objects on the map
 
 .. moduleauthor:: The Widelands development team
 
@@ -2210,6 +2210,88 @@ const Widelands::FCoords L_Field::fcoords(lua_State * L) {
 	return get_egbase(L).map().get_fcoords(m_c);
 }
 
+
+/* RST
+PlayerSlot
+----------
+
+.. class:: PlayerSlot
+
+	A player description as it is in the map. This contains information
+	about the start position, the name of the player if this map is played
+	as scenario and it's tribe. Note that these information can be different
+	than the players actually valid in the game as in single player games,
+	the player can choose most parameters freely.
+*/
+const char L_PlayerSlot::className[] = "PlayerSlot";
+const MethodType<L_PlayerSlot> L_PlayerSlot::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_PlayerSlot> L_PlayerSlot::Properties[] = {
+	PROP_RO(L_PlayerSlot, tribe),
+	PROP_RO(L_PlayerSlot, name),
+	PROP_RO(L_PlayerSlot, starting_field),
+	{0, 0, 0},
+};
+
+void L_PlayerSlot::__persist(lua_State * L) {
+	PERS_UINT32("player", m_plr);
+}
+void L_PlayerSlot::__unpersist(lua_State * L) {
+	UNPERS_UINT32("player", m_plr);
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: tribe
+
+		(RO) The name of the tribe suggested for this player in this map
+*/
+int L_PlayerSlot::get_tribe(lua_State * L) {
+	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_tribe(m_plr));
+	return 1;
+}
+
+/* RST
+	.. attribute:: name
+
+		(RO) The name for this player as suggested in this map
+*/
+int L_PlayerSlot::get_name(lua_State * L) {
+	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_name(m_plr));
+	return 1;
+}
+
+/* RST
+	.. attribute:: starting_field
+
+		(RO) The starting_field for this player as set in the map.
+		Note that it is not guaranteed that the HQ of the player is on this
+		field as scenarios and starting conditions are free to place the HQ
+		wherever it want. This field is only centered when the game starts.
+*/
+int L_PlayerSlot::get_starting_field(lua_State * L) {
+	to_lua<L_Field>(L, new L_Field(get_egbase(L).map().get_starting_pos(m_plr)));
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
 /*
  * ========================================================================
  *                            MODULE FUNCTIONS
@@ -2225,6 +2307,7 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // pop the table from the stack
 
 	register_class<L_Field>(L, "map");
+	register_class<L_PlayerSlot>(L, "map");
 	register_class<L_MapObject>(L, "map");
 
 	register_class<L_BaseImmovable>(L, "map", true);

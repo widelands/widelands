@@ -207,6 +207,7 @@ const MethodType<L_Map> L_Map::Methods[] = {
 const PropertyType<L_Map> L_Map::Properties[] = {
 	PROP_RO(L_Map, width),
 	PROP_RO(L_Map, height),
+	PROP_RO(L_Map, player_slots),
 	{0, 0, 0},
 };
 
@@ -240,6 +241,25 @@ int L_Map::get_width(lua_State * L) {
 */
 int L_Map::get_height(lua_State * L) {
 	lua_pushuint32(L, get_egbase(L).map().get_height());
+	return 1;
+}
+
+/* RST
+	.. attribute:: player_slots
+
+		(RO) This is an :class:`array` that contains :class:`~wl.map.PlayerSlots`
+		for each player defined in the map.
+*/
+int L_Map::get_player_slots(lua_State * L) {
+	Map & m = get_egbase(L).map();
+
+	lua_createtable(L, m.get_nrplayers(), 0);
+	for(uint32_t i = 0; i < m.get_nrplayers(); i++) {
+		lua_pushuint32(L, i+1);
+		to_lua<L_PlayerSlot>(L, new L_PlayerSlot(i+1));
+		lua_settable(L, -3);
+	}
+
 	return 1;
 }
 

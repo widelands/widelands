@@ -34,6 +34,9 @@ objective.done = true
 
 p:send_message("dummy msg1", "dummy msg 1")
 msg = p:send_message("hello nice", "World", {sender="blah", field = field })
+game = wl.Game()
+map = wl.Map()
+player_slot = map.player_slots[1]
 
 -- ========================
 -- Test after unpersisting 
@@ -85,6 +88,15 @@ assert_equal("World", msg.body)
 assert_equal("blah", msg.sender)
 assert_equal(field, msg.field)
 
+assert_table(map)
+assert_equal(64, map.width)
+assert_equal(64, map.height)
+
+assert_table(player_slot)
+assert_equal("barbarians", player_slot.tribe)
+assert_equal("Player 1", player_slot.name)
+assert_equal(player_slot.name, map.player_slots[1].name)
+assert_equal(player_slot.tribe, map.player_slots[1].tribe)
 
 print("################### ALL TEST PASS!")
 wl.debug.exit()
