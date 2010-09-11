@@ -17,7 +17,7 @@
  *
  */
 
-#include <lua.hpp>
+#include "logic/game.h"
 
 #include "lua_root.h"
 
@@ -61,6 +61,7 @@ const MethodType<L_Game> L_Game::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_Game> L_Game::Properties[] = {
+	PROP_RO(L_Game, time),
 	{0, 0, 0},
 };
 
@@ -86,9 +87,8 @@ void L_Game::__unpersist(lua_State * L) {
 	(RO) This returns the absolute time elapsed since the game was started in
 	milliseconds.
 */
-static int L_Game::get_time(lua_State * L) {
-	Game & game = get_game(L);
-	lua_pushint32(L, game.get_gametime());
+int L_Game::get_time(lua_State * L) {
+	lua_pushint32(L, get_game(L).get_gametime());
 	return 1;
 }
 
