@@ -1,7 +1,8 @@
 -- =======================================================================
---                    Start conditions for Citadel Village
+--                    Start conditions for Share Kingdom
 -- =======================================================================
 
+use("aux", "coroutine")
 use("aux", "infrastructure")
 
 set_textdomain("tribe_barbarians")
@@ -45,9 +46,15 @@ return {
    end
    if (teammate == nil) then
       teammate = p
+   else
+      -- Start a new coroutine that checks for defeated players
+      run(function()
+         while true do
+            p:switchplayer(teammate.number)
+            sleep(1000)
+         end
+      end)
    end
-
-   p:switchplayer(teammate.number)
 
    if (teammate.tribe == "barbarians") then
       prefilled_buildings(teammate, { "headquarters_interim", sf.x, sf.y,
