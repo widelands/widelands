@@ -26,7 +26,7 @@ function run(func, ...)
    success, sleeptime = coroutine.resume(c, ...)
    if success then
       if coroutine.status(c) ~= "dead" then 
-         wl.game.run_coroutine(c, sleeptime)
+         wl.Game():launch_coroutine(c, sleeptime)
       end
    else
       error(sleeptime) 

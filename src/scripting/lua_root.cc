@@ -18,9 +18,12 @@
  */
 
 #include "logic/game.h"
+#include "logic/cmd_luacoroutine.h"
 #include "gamecontroller.h"
+#include "log.h"
 
 #include "lua_root.h"
+#include "coroutine_impl.h"
 
 
 /* RST
@@ -59,6 +62,7 @@ Game
 */
 const char L_Game::className[] = "Game";
 const MethodType<L_Game> L_Game::Methods[] = {
+	METHOD(L_Game, launch_coroutine),
 	{0, 0},
 };
 const PropertyType<L_Game> L_Game::Properties[] = {
@@ -139,6 +143,41 @@ int L_Game::get_allow_autosaving(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
+/* RST
+	.. method:: launch_coroutine(func[, when = now])
+
+		Hands a Lua coroutine object over to widelands for execution. The object
+		must have been created via :func:`coroutine.create`. The coroutine is
+		expected to :func:`coroutine.yield` at regular intervals with the
+		absolute game time on which the function should be awakened again. You
+		should also have a look at :mod:`core.cr`.
+
+		:arg func: coroutine object to run
+		:type func: :class:`thread`
+		:arg when: absolute time when this coroutine should run
+		:type when: :class:`integer`
+
+		:returns: :const:`nil`
+*/
+int L_Game::launch_coroutine(lua_State * L) {
+	int nargs = lua_gettop(L);
+	uint32_t runtime = get_game(L).get_gametime();
+	if (nargs < 2)
+		report_error(L, "Too little arguments!");
+	if (nargs == 3) {
+		runtime = luaL_checkuint32(L, 3);
+		lua_pop(L, 1);
+	}
+
+	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(L, 2));
+	lua_pop(L, 2); // Remove coroutine and Game object from stack
+
+	get_game(L).enqueue_command(new Widelands::Cmd_LuaCoroutine(runtime, cr));
+
+	return 0;
+}
+
+
 
 /*
  ==========================================================

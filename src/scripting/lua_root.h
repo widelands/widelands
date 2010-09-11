@@ -54,6 +54,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int launch_coroutine(lua_State *);
 
 	/*
 	 * C methods

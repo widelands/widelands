@@ -6,7 +6,6 @@ use("map", "texts")
 use("aux", "coroutine")
 use("aux", "objective_utils")
 
-
 function check_quarries() 
    while not check_for_buildings(p, {quarry = 2},
       wl.map.Field(8,13):region(3)) do sleep(5000) end
@@ -47,8 +46,8 @@ function tutorial_thread()
    p:allow_buildings{"rangers_hut", "quarry"}
    start_quarries(p)
    start_ranger(p)
-   wl.game.run_coroutine(coroutine.create(check_ranger))
-   wl.game.run_coroutine(coroutine.create(check_quarries))
+   run(check_ranger)
+   run(check_quarries)
 
    p:message_box(_"The advisor", khantrukh_7)
    while not (p.objectives.ranger.done and p.objectives.quarries.done) do
@@ -59,7 +58,5 @@ function tutorial_thread()
    p:message_box(_"Mission Complete", khantrukh_8)
 end
 
-k = coroutine.create(tutorial_thread)
-
-wl.game.run_coroutine(k)
+run(tutorial_thread)
 
