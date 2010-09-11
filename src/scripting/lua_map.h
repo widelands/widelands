@@ -226,7 +226,6 @@ struct L_HasSoldiers {
 		  bool hp_eq = hp == ot.hp;
 		  bool at_eq = at == ot.at;
 		  bool de_eq = de == ot.de;
-		  bool ev_eq = ev == ot.ev;
 		  if (hp_eq && at_eq && de_eq)
 			  return ev < ot.ev;
 		  if (hp_eq && at_eq)
