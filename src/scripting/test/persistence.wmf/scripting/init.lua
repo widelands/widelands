@@ -39,7 +39,7 @@ msg = p:send_message("hello nice", "World", {sender="blah", field = field })
 -- Test after unpersisting 
 -- ========================
 function check_persistence()
-coroutine.yield(wl.game.get_time() + 2000)
+coroutine.yield(wl.Game().time + 2000)
 
 use("map", "lunit")
 lunit.import "assertions"

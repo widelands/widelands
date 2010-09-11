@@ -54,8 +54,9 @@ end
 
 function foottracks() 
    -- Hunter build and some time passed or expanded east
+   local game = wl.Game()
    while true do
-      if (wl.game.get_time() > 240000 and #p1:get_buildings("hunters_hut") >0)
+      if (game.time > 240000 and #p1:get_buildings("hunters_hut") > 0)
          or p1:seen_field(wl.map.Field(65, 28)) 
       then break end
       sleep(4239)

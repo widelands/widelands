@@ -3,21 +3,19 @@
 -- ======================
 
 use("map", "texts")
+use("aux", "coroutine")
 use("aux", "objective_utils")
+
 
 function check_quarries() 
    while not check_for_buildings(p, {quarry = 2},
-      wl.map.Field(8,13):region(3)) do
-         coroutine.yield(wl.game.get_time() + 5000)
-   end
+      wl.map.Field(8,13):region(3)) do sleep(5000) end
    p.objectives.quarries.done = true
 end
 
 function check_ranger() 
    while not check_for_buildings(p, {rangers_hut = 1},
-      wl.map.Field(17,11):region(3)) do
-         coroutine.yield(wl.game.get_time() + 5000)
-   end
+      wl.map.Field(17,11):region(3)) do sleep(5000) end
    p.objectives.ranger.done = true
 end
 
@@ -33,9 +31,7 @@ function tutorial_thread()
 
    -- Wait till the hut is build.
    while not check_for_buildings(p, {lumberjacks_hut = 1},
-      wl.map.Field(15,11):region(2)) do
-         coroutine.yield(wl.game.get_time() + 5000)
-   end
+      wl.map.Field(15,11):region(2)) do sleep(5000) end
    o.done = true
 
    p:message_box(_"The advisor", khantrukh_4)
@@ -44,9 +40,7 @@ function tutorial_thread()
 
    -- Wait till the hut is build.
    while not check_for_buildings(p, {lumberjacks_hut = 1},
-         wl.map.Field(12,13):region(2)) do
-      coroutine.yield(wl.game.get_time() + 5000)
-   end
+         wl.map.Field(12,13):region(2)) do sleep(5000) end
    o.done = true
 
    p:message_box(_"The advisor", khantrukh_6)
@@ -58,7 +52,7 @@ function tutorial_thread()
 
    p:message_box(_"The advisor", khantrukh_7)
    while not (p.objectives.ranger.done and p.objectives.quarries.done) do
-      coroutine.yield(wl.game.get_time() + 5000)
+      sleep(5000)
    end
 
    p:reveal_scenario("barbariantut01")

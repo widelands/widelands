@@ -1553,21 +1553,6 @@ Module Functions
 */
 
 /* RST
-.. method:: get_game
-
-	This returns the absolute time elapsed since the game was started.
-
-	:returns: the current gametime in milliseconds
-	:rtype: :class:`integer`
-*/
-static int L_get_time(lua_State * L) {
-	Game & game = get_game(L);
-	lua_pushint32(L, game.get_gametime());
-	return 1;
-}
-
-
-/* RST
 .. method:: run_coroutine(func[, when = now])
 
 	Hands a Lua coroutine object over to widelands for execution. The object
@@ -1662,7 +1647,6 @@ static int L_get_allow_autosaving(lua_State * L) {
 
 const static struct luaL_reg wlgame [] = {
 	{"run_coroutine", &L_run_coroutine},
-	{"get_time", &L_get_time},
 	{"get_speed", &L_get_speed},
 	{"set_speed", &L_set_speed},
 	{"set_allow_autosaving", &L_set_allow_autosaving},

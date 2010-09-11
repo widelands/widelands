@@ -46,7 +46,9 @@ return {
 	local _last_time_calculated = -100000
 	local _plrpoints = {}
 	local function _calc_points()
-		if _last_time_calculated > wl.game.get_time() - 5000 then
+      local game = wl.Game()
+
+		if _last_time_calculated > game.time - 5000 then
 			return _plrpoints
 		end
 
@@ -70,7 +72,7 @@ return {
 				end
 			end
 		end
-		_last_time_calculated = wl.game.get_time()
+		_last_time_calculated = game.time
 		return _plrpoints
 	end
 

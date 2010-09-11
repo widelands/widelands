@@ -84,8 +84,7 @@ void L_Game::__unpersist(lua_State * L) {
 /* RST
 	.. attribute:: time
 
-	(RO) This returns the absolute time elapsed since the game was started in
-	milliseconds.
+	(RO) The absolute time elapsed since the game was started in milliseconds.
 */
 int L_Game::get_time(lua_State * L) {
 	lua_pushint32(L, get_game(L).get_gametime());
