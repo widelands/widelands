@@ -690,9 +690,6 @@ int L_Player::seen_field(lua_State * L) {
 	Widelands::Map_Index const i =
 		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	log("Vision: %i\n", get(L, egbase).vision(i));
-	log("See all: %i\n", get(L, egbase).see_all());
-
 	lua_pushboolean(L, get(L, egbase).vision(i) >= 1);
 	return 1;
 }
