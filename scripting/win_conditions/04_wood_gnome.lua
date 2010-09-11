@@ -28,10 +28,8 @@ return {
 
 	-- Get all valueable fields of the map
 	local fields = {}
-	local mapwidth  = wl.map.get_width()
-	local mapheight = wl.map.get_height()
-	for x=0,mapwidth-1 do
-		for y=0,mapheight-1 do
+	for x=0,wl.Map().width-1 do
+		for y=0,wl.Map().height-1 do
 			local f = wl.Map():get_field(x,y)
 			if f then
 				-- add this field to the list as long as it has not movecaps swim
