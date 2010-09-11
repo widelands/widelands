@@ -32,7 +32,7 @@ return {
 	local mapheight = wl.map.get_height()
 	for x=0,mapwidth-1 do
 		for y=0,mapheight-1 do
-			local f = wl.map.Field(x,y)
+			local f = wl.Map():get_field(x,y)
 			if f then
 				-- add this field to the list as long as it has not movecaps swim
 				if not f.has_movecaps_swim(f) then

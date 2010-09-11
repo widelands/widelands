@@ -80,7 +80,7 @@ end
 --       use("aux", "table") -- for reverse() 
 --
 --       -- Move there in one second
---       pts = scroll_smoothly_to(wl.map.Field(23, 42))
+--       pts = scroll_smoothly_to(wl.Map():get_field(23, 42))
 --       -- Move back in one second
 --       timed_scroll(array_reverse(pts))
 --

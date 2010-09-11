@@ -13,7 +13,7 @@ plr:allow_buildings{
 }
 
 -- Place hq and fill it with wares
-hq_pos = wl.map.Field(12,10)
+hq_pos = wl.Map():get_field(12,10)
 hq = plr:place_building("headquarters_interim", hq_pos)
 hq:set_wares{
    axe=6,

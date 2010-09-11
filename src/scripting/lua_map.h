@@ -509,7 +509,9 @@ public:
 	L_Field (Widelands::Coordinate x, Widelands::Coordinate y) :
 		m_c(Widelands::Coords(x, y)) {}
 	L_Field (Widelands::Coords c) : m_c(c) {}
-	L_Field(lua_State * L);
+	L_Field(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'Field' directly!");
+	}
 	virtual ~L_Field() {}
 
 	virtual void __persist(lua_State * L);

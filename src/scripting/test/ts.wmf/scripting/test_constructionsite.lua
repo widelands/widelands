@@ -3,8 +3,8 @@
 -- =========================
 constructionsite_tests = lunit.TestCase("constructionsite tests")
 function constructionsite_tests:setup()
-   self.f1 = wl.map.Field(8,10)
-   self.f2 = wl.map.Field(12,10)
+   self.f1 = wl.Map():get_field(8,10)
+   self.f2 = wl.Map():get_field(12,10)
    self.p = wl.game.Player(1)
 
    self.p:place_building("lumberjacks_hut", self.f1, true)

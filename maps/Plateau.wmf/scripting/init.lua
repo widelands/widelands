@@ -23,20 +23,20 @@ function mission_thread()
 
    send_msg(briefing_1_the_forbidden_island)
 
-   while not p1:seen_field(wl.map.Field(5,8)) do sleep(2345) end
+   while not p1:seen_field(wl.Map():get_field(5,8)) do sleep(2345) end
 
    -- Unhide the castle and keep it unhidden so that it can be attacked
-   local castle = wl.map.Field(23, 19)
+   local castle = wl.Map():get_field(23, 19)
    p1:reveal_fields(castle:region(4))
 
    -- Show the way to the castle very briefly
    local way = array_combine(
-      wl.map.Field( 5,  8):region(2), 
-      wl.map.Field( 9, 10):region(2), 
-      wl.map.Field(12, 12):region(2), 
-      wl.map.Field(15, 14):region(2), 
-      wl.map.Field(18, 16):region(2), 
-      wl.map.Field(20, 17):region(2)
+      wl.Map():get_field( 5,  8):region(2), 
+      wl.Map():get_field( 9, 10):region(2), 
+      wl.Map():get_field(12, 12):region(2), 
+      wl.Map():get_field(15, 14):region(2), 
+      wl.Map():get_field(18, 16):region(2), 
+      wl.Map():get_field(20, 17):region(2)
    )
    p1:reveal_fields(way)
    sleep(100)

@@ -31,13 +31,13 @@ function player_tests:test_ok_val_for_non_existing()
 end
 
 function player_tests:test_create_flag()
-   f = wl.map.Field(10,10)
+   f = wl.Map():get_field(10,10)
    k = wl.game.Player(1):place_flag(f, true)
    assert_equal(k.player.number, 1)
    k:remove()
 end
 function player_tests:test_create_flag_non_forcing()
-   f = wl.map.Field(10,10)
+   f = wl.Map():get_field(10,10)
    -- First force the flag, then remove them again
    k = wl.game.Player(1):place_flag(f, true)
    k:remove()
@@ -47,7 +47,7 @@ function player_tests:test_create_flag_non_forcing()
    k:remove()
 end
 function player_tests:test_create_flag_non_forcing_too_close()
-   f = wl.map.Field(10,10)
+   f = wl.Map():get_field(10,10)
    -- First force the flag, then remove them again
    wl.game.Player(1):place_flag(f, true):remove()
    wl.game.Player(1):place_flag(f.rn, true):remove()
@@ -62,14 +62,14 @@ function player_tests:test_create_flag_non_forcing_too_close()
 end
 -- This test is currently disabled because of bug lp:536366
 -- function player_tests:test_create_flag2()
---    f = wl.map.Field(20,10)
+--    f = wl.Map():get_field(20,10)
 --    k = wl.game.Player(2):place_flag(f, true)
 --    assert_equal(k.player.number, 2)
 --    k:remove()
 -- end
 
 function player_tests:test_force_building()
-   f = wl.map.Field(10,10)
+   f = wl.Map():get_field(10,10)
    k = wl.game.Player(1):place_building("headquarters", f)
    assert_equal(1, k.player.number)
    assert_equal("warehouse", k.building_type)
@@ -77,7 +77,7 @@ function player_tests:test_force_building()
 end
 function player_tests:test_force_building_illegal_name()
    assert_error("Illegal building", function()
-      wl.game.Player(1):place_building("kjhsfjkh", wl.map.Field(10,10))
+      wl.game.Player(1):place_building("kjhsfjkh", wl.Map():get_field(10,10))
    end)
 end
 
@@ -87,7 +87,7 @@ end
 -- -- =======================================================================
 player_vision_tests = lunit.TestCase("Player vision tests")
 function player_vision_tests:setup()
-   self.f = wl.map.Field(50, 20)
+   self.f = wl.Map():get_field(50, 20)
    self.p = wl.game.Player(1)
    self.p.see_all = false
 end
@@ -195,18 +195,18 @@ function player_building_access:teardown()
 end
 function player_building_access:test_single()
    self.bs = {
-      self.p:place_building("lumberjacks_hut", wl.map.Field(10,10)),
-      self.p:place_building("lumberjacks_hut", wl.map.Field(13,10)),
-      self.p:place_building("quarry", wl.map.Field(8,10)),
+      self.p:place_building("lumberjacks_hut", wl.Map():get_field(10,10)),
+      self.p:place_building("lumberjacks_hut", wl.Map():get_field(13,10)),
+      self.p:place_building("quarry", wl.Map():get_field(8,10)),
    }
    assert_equal(2, #self.p:get_buildings("lumberjacks_hut"))
    assert_equal(1, #self.p:get_buildings("quarry"))
 end
 function player_building_access:test_multi()
    self.bs = {
-      self.p:place_building("lumberjacks_hut", wl.map.Field(10,10)),
-      self.p:place_building("lumberjacks_hut", wl.map.Field(13,10)),
-      self.p:place_building("quarry", wl.map.Field(8,10)),
+      self.p:place_building("lumberjacks_hut", wl.Map():get_field(10,10)),
+      self.p:place_building("lumberjacks_hut", wl.Map():get_field(13,10)),
+      self.p:place_building("quarry", wl.Map():get_field(8,10)),
    }
    rv = self.p:get_buildings{"lumberjacks_hut", "quarry"}
 
@@ -214,9 +214,9 @@ function player_building_access:test_multi()
    assert_equal(1, #rv.quarry)
 end
 function player_building_access:test_access()
-   local b1 = self.p:place_building("lumberjacks_hut", wl.map.Field(10,10))
-   local b2 = self.p:place_building("lumberjacks_hut", wl.map.Field(13,10))
-   local b3 = self.p:place_building("quarry", wl.map.Field(8,10))
+   local b1 = self.p:place_building("lumberjacks_hut", wl.Map():get_field(10,10))
+   local b2 = self.p:place_building("lumberjacks_hut", wl.Map():get_field(13,10))
+   local b3 = self.p:place_building("quarry", wl.Map():get_field(8,10))
    self.bs = { b1, b2, b3 }
    rv = self.p:get_buildings{"lumberjacks_hut", "quarry"}
 

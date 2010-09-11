@@ -1812,6 +1812,9 @@ Field
 	This class represents one Field in Widelands. The field may contain
 	immovables like Flags or Buildings and can be connected via Roads. Every
 	Field has two Triangles associated with itself: the right and the down one.
+
+	You cannot instantiate this class directly, instead use
+	:meth:`wl.Map.get_field`.
 */
 
 const char L_Field::className[] = "Field";
@@ -1842,18 +1845,6 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	{0, 0, 0},
 };
 
-
-L_Field::L_Field(lua_State * L) {
-	Map & m = get_egbase(L).map();
-	uint32_t rv = luaL_checkuint32(L, 1);
-	if (rv >= static_cast<uint32_t>(m.get_width()))
-		report_error(L, "x coordinate out of range!");
-	m_c.x = rv;
-	rv = luaL_checkuint32(L, 2);
-	if (rv >= static_cast<uint32_t>(m.get_height()))
-		report_error(L, "y coordinate out of range!");
-	m_c.y = rv;
-}
 
 void L_Field::__persist(lua_State * L) {
 	PERS_INT32("x", m_c.x); PERS_INT32("y", m_c.y);

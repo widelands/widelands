@@ -20,9 +20,9 @@ is_false = false
 p = wl.game.Player(1)
 a = { "Hallo", "Welt" }
 c = { func = function(a) return "I say " .. a .. "!" end }
-field = wl.map.Field(32,34)
+field = wl.Map():get_field(32,34)
 tree = wl.Map():place_immovable("tree3", field)
-removed_tree = wl.Map():place_immovable("tree4", wl.map.Field(34,34))
+removed_tree = wl.Map():place_immovable("tree4", wl.Map():get_field(34,34))
 removed_tree:remove()
 corout = coroutine.create(function()
    local a = 100

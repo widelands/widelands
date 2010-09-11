@@ -288,7 +288,7 @@ tab in the window that opens up, then click on the quarry symbol.]]
 
 talk_about_roadbuilding_00 = {
    pos = "topright",
-   field = wl.map.Field(9,12),
+   field = wl.Map():get_field(9,12),
    title = _ "Road building",
    body = rt(p(_
 [[Excellent! Directly after you placed a building, you are in road building
@@ -312,7 +312,7 @@ the route the road takes like so:]]
 
 talk_about_roadbuilding_01 = {
    pos = "topright",
-   field = wl.map.Field(9,12),
+   field = wl.Map():get_field(9,12),
    title = _ "Road building",
    body = rt(p(_
 [[Alternatively, you can directly click the flag where

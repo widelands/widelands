@@ -12,7 +12,7 @@ end
 -- ===================
 road_construction_tests = lunit.TestCase("road construction tests")
 function road_construction_tests:setup()
-   self.f = wl.map.Field(10,10)
+   self.f = wl.Map():get_field(10,10)
    self.p = wl.game.Player(1)
    self.p:conquer(f, 6)
 
@@ -69,7 +69,7 @@ end
 -- ============
 road_tests = lunit.TestCase("road tests")
 function road_tests:setup()
-   self.f = wl.map.Field(10,10)
+   self.f = wl.Map():get_field(10,10)
    self.p = wl.game.Player(1)
    self.p:conquer(f, 6)
 

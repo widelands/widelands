@@ -14,9 +14,9 @@
 --
 --    .. code-block:: lua
 --       
---       connected_road(wl.game.Player(1), wl.map.Field(20,20).immovable, "r,r|br,r|r,r")
+--       connected_road(wl.game.Player(1), wl.Map():get_field(20,20).immovable, "r,r|br,r|r,r")
 --
---    This would create a road starting from the Flag standing at Field(20,20)
+--    This would create a road starting from the Flag standing at field(20,20)
 --    which must exist and goes from there 2 steps right (east), places a new
 --    flag. Then it goes one step bottom-right and one step right, places the 
 --    next flag and then goes two steps right again and places the last flag.
@@ -90,7 +90,7 @@ end
 --    :type b1_descr: :class:`array`
 function prefilled_buildings(p, ...)
    for idx,bdescr in ipairs({...}) do
-      b = p:place_building(bdescr[1], wl.map.Field(bdescr[2],bdescr[3]))
+      b = p:place_building(bdescr[1], wl.Map():get_field(bdescr[2],bdescr[3]))
       -- Fill with workers
       if b.valid_workers then b:set_workers(b.valid_workers) end
       if bdescr.workers then b:set_workers(bdescr.workers) end

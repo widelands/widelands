@@ -3,7 +3,8 @@ function mission_thread()
    sleep(100) -- This is needed for yet unknown reasons
    
    -- Initial messages
-   local sea = wl.map.Field(47,25)
+   local map = wl.Map()
+   local sea = map.get_field(47,25)
    local pts = scroll_smoothly_to(sea)
 
    send_msg(diary_page_1)

@@ -20,10 +20,10 @@ use("aux", "ui")
 use("aux", "table")
 
 -- Constants
-first_lumberjack_field = wl.map.Field(16,10)
-first_quarry_field = wl.map.Field(8,12)
-conquer_field = wl.map.Field(6,18)
-trainings_ground = wl.map.Field(33,57)
+first_lumberjack_field = wl.Map():get_field(16,10)
+first_quarry_field = wl.Map():get_field(8,12)
+conquer_field = wl.Map():get_field(6,18)
+trainings_ground = wl.Map():get_field(33,57)
 
 -- Global variables
 registered_player_immovables = {}
@@ -145,7 +145,7 @@ function warp_houses(descriptions)
 
    for idx, d in ipairs(descriptions) do 
       local name, x, y = d[1], d[2], d[3]
-      mouse_smoothly_to(wl.map.Field(x, y))
+      mouse_smoothly_to(wl.Map():get_field(x, y))
       sleep(300)
       prefilled_buildings(plr, d)
       sleep(300)
@@ -192,7 +192,7 @@ function build_eastern_trainings_area(citadel_field)
    local blocker = UserInputDisabler:new()
    
    plr:reveal_fields(citadel_field:region(8))
-   scroll_smoothly_to(wl.map.Field(21,9))
+   scroll_smoothly_to(wl.Map():get_field(21,9))
    scroll_smoothly_to(citadel_field)
 
    warp_houses{
@@ -230,16 +230,16 @@ function build_eastern_trainings_area(citadel_field)
       {"sentry", 37, 61, soldiers = {[{3,5,0,2}] = 2 }},
    }
    -- Build the roads
-   build_road(wl.map.Field(31,57), "bl", "bl", "|", "br", "br", "|",
+   build_road(wl.Map():get_field(31,57), "bl", "bl", "|", "br", "br", "|",
       "r", "r", "|", "tr", "tr", "tl", ".")
-   build_road(wl.map.Field(29,58), "r", "br", ".")
-   build_road(wl.map.Field(38,62), "l", "l", "|", "l", "bl",
+   build_road(wl.Map():get_field(29,58), "r", "br", ".")
+   build_road(wl.Map():get_field(38,62), "l", "l", "|", "l", "bl",
       "|", "tl", "tl", ".")
-   build_road(wl.map.Field(32, 0), "tr", "tr", "tr", '.')
+   build_road(wl.Map():get_field(32, 0), "tr", "tr", "tr", '.')
 
    -- Add wares to the trainingssite so that it does something. Also
    -- add buildwares to the warehouse
-   local ts = wl.map.Field(31,56).immovable
+   local ts = wl.Map():get_field(31,56).immovable
    ts:set_wares(ts.valid_wares)
 
    blocker:lift_blocks()
@@ -391,7 +391,7 @@ function build_lumberjack()
    
    register_immovable_as_allowed(first_lumberjack_field.immovable) -- hut + flag
 
-   local f = wl.map.Field(14,11)
+   local f = wl.Map():get_field(14,11)
    register_immovable_as_allowed(f.immovable) -- road + everything on it
 
    illegal_immovable_found = function(i) return false end
@@ -404,7 +404,7 @@ function build_lumberjack()
 
    local blocker = UserInputDisabler:new()
    
-   local f = wl.map.Field(14,11)
+   local f = wl.Map():get_field(14,11)
    scroll_smoothly_to(f)
    mouse_smoothly_to(f)
    
@@ -489,11 +489,11 @@ function build_a_quarry()
 
    msg_box(talk_about_roadbuilding_00)
    -- Showoff one-by-one roadbuilding
-   click_on_field(wl.map.Field(9,12))
-   click_on_field(wl.map.Field(10,12))
-   click_on_field(wl.map.Field(11,12))
-   click_on_field(wl.map.Field(12,12))
-   click_on_field(wl.map.Field(12,11))
+   click_on_field(wl.Map():get_field(9,12))
+   click_on_field(wl.Map():get_field(10,12))
+   click_on_field(wl.Map():get_field(11,12))
+   click_on_field(wl.Map():get_field(12,12))
+   click_on_field(wl.Map():get_field(12,11))
    
    sleep(3000)
 
@@ -688,7 +688,7 @@ function training()
    
    msg_box(warfare_and_training_00)
 
-   local citadel_field = wl.map.Field(31, 63)
+   local citadel_field = wl.Map():get_field(31, 63)
 
    build_eastern_trainings_area(citadel_field)
    sleep(8000)

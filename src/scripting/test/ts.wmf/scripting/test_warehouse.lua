@@ -3,7 +3,7 @@
 -- =========================
 warehouse_tests = lunit.TestCase("warehouse tests")
 function warehouse_tests:setup()
-   self.f = wl.map.Field(10,10)
+   self.f = wl.Map():get_field(10,10)
    self.p = wl.game.Player(1)
    self.w = self.p:place_building("warehouse", self.f)
 end
