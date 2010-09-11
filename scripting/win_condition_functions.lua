@@ -28,7 +28,7 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
       if p.defeated then
          p:send_message(heading, msg, { popup = true })
          p.see_all = 1
-         wl.game.report_result(p, false, 0, make_extradata(p, wc_name, wc_ver))
+         wl.game.report_result(p, false, 0, make_extra_data(p, wc_name, wc_ver))
          table.remove(plrs, idx)
          break
       end
@@ -95,6 +95,6 @@ function broadcast_win(plrs, header, msg, goptions, wc_name, wc_ver)
    local options = goptions or {}
    for idx, p in ipairs(plrs) do
        p:send_message(header, msg, options)
-       wl.game.report_result(p, false, 0, make_extradata(p, wc_name, wc_ver))
+       wl.game.report_result(p, false, 0, make_extra_data(p, wc_name, wc_ver))
    end
 end
