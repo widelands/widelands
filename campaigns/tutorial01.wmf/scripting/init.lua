@@ -49,14 +49,15 @@ function UserInputDisabler:new()
 end
 function UserInputDisabler:establish_blocks()
    self._ui_state = wl.ui.get_user_input_allowed()
-   self._as_state = wl.game.get_allow_autosaving()
+   local game = wl.Game()
+   self._as_state = game.allow_autosaving
 
    wl.ui.set_user_input_allowed(false)
-   wl.game.set_allow_autosaving(false)
+   wl.Game().allow_autosaving = false
 end
 function UserInputDisabler:lift_blocks()
    wl.ui.set_user_input_allowed(self._ui_state)
-   wl.game.set_allow_autosaving(self._as_state)
+   wl.Game().allow_autosaving= self._as_state
 end
 
 function _try_add_objective(i)
@@ -70,7 +71,7 @@ function _try_add_objective(i)
    return o
 end
 function msg_box(i)
-   wl.game.set_speed(1000)
+   wl.Game().desired_speed = 1000
 
    local blocker = UserInputDisabler:new()
 

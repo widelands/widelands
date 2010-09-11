@@ -1587,70 +1587,8 @@ static int L_run_coroutine(lua_State * L) {
 	return 0;
 }
 
-/* RST
-.. function:: set_speed(speed)
-
-	Sets the desired speed of the game in ms per real second, so a speed of
-	1000 means the game runs at 1x speed. Note that this will not work in
-	network games.
-
-	:returns: :const:`nil`
-*/
-// UNTESTED
-static int L_set_speed(lua_State * L) {
-	get_game(L).gameController()->setDesiredSpeed(luaL_checkuint32(L, -1));
-	return 1;
-}
-
-/* RST
-.. function:: get_speed(speed)
-
-	Gets the current game speed
-
-	:returns: :const:`nil`
-*/
-// UNTESTED
-static int L_get_speed(lua_State * L) {
-	lua_pushuint32(L, get_game(L).gameController()->desiredSpeed());
-	return 1;
-}
-
-/* RST
-	.. function:: set_allow_autosaving(b)
-
-		Disable or enable auto-saving. When you show off UI features in a
-		tutorial or scenario, you have to disallow auto-saving because UI
-		elements can now be saved.
-
-		:arg b: allow autosaving or disallow it
-		:type b: :class:`boolean`
-*/
-// UNTESTED
-static int L_set_allow_autosaving(lua_State * L) {
-	get_game(L).save_handler().set_allow_autosaving
-		(luaL_checkboolean(L, -1));
-	return 0;
-}
-
-/* RST
-	.. function:: get_allow_autosaving
-
-		Returns the current state of autosaving.
-
-		:returns: :class:`boolean`
-*/
-// UNTESTED
-static int L_get_allow_autosaving(lua_State * L) {
-	lua_pushboolean(L, get_game(L).save_handler().get_allow_autosaving());
-	return 1;
-}
-
 const static struct luaL_reg wlgame [] = {
 	{"run_coroutine", &L_run_coroutine},
-	{"get_speed", &L_get_speed},
-	{"set_speed", &L_set_speed},
-	{"set_allow_autosaving", &L_set_allow_autosaving},
-	{"get_allow_autosaving", &L_get_allow_autosaving},
 	{0, 0}
 };
 

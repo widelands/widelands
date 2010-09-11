@@ -18,6 +18,7 @@
  */
 
 #include "logic/game.h"
+#include "gamecontroller.h"
 
 #include "lua_root.h"
 
@@ -62,6 +63,8 @@ const MethodType<L_Game> L_Game::Methods[] = {
 };
 const PropertyType<L_Game> L_Game::Properties[] = {
 	PROP_RO(L_Game, time),
+	PROP_RW(L_Game, desired_speed),
+	PROP_RW(L_Game, allow_autosaving),
 	{0, 0, 0},
 };
 
@@ -90,6 +93,46 @@ int L_Game::get_time(lua_State * L) {
 	lua_pushint32(L, get_game(L).get_gametime());
 	return 1;
 }
+
+
+/* RST
+	.. attribute:: desired_speed
+
+	(RW) Sets the desired speed of the game in ms per real second, so a speed of
+	1000 means the game runs at 1x speed. Note that this will not work in
+	network games as expected.
+*/
+// UNTESTED
+int L_Game::set_desired_speed(lua_State * L) {
+	get_game(L).gameController()->setDesiredSpeed(luaL_checkuint32(L, -1));
+	return 1;
+}
+// UNTESTED
+int L_Game::get_desired_speed(lua_State * L) {
+	lua_pushuint32(L, get_game(L).gameController()->desiredSpeed());
+	return 1;
+}
+
+/* RST
+	.. attribute:: allow_autosaving
+
+		(RW) Disable or enable auto-saving. When you show off UI features in a
+		tutorial or scenario, you have to disallow auto-saving because UI
+		elements can not be saved and therefore reloading a game saved in the
+		meantime would crash the game.
+*/
+// UNTESTED
+int L_Game::set_allow_autosaving(lua_State * L) {
+	get_game(L).save_handler().set_allow_autosaving
+		(luaL_checkboolean(L, -1));
+	return 0;
+}
+// UNTESTED
+int L_Game::get_allow_autosaving(lua_State * L) {
+	lua_pushboolean(L, get_game(L).save_handler().get_allow_autosaving());
+	return 1;
+}
+
 
 /*
  ==========================================================
