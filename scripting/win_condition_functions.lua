@@ -95,6 +95,6 @@ function broadcast_win(plrs, header, msg, goptions, wc_name, wc_ver)
    local options = goptions or {}
    for idx, p in ipairs(plrs) do
        p:send_message(header, msg, options)
-       wl.game.report_result(p, false, 0, make_extra_data(p, wc_name, wc_ver))
+       wl.game.report_result(p, true, 0, make_extra_data(p, wc_name, wc_ver))
    end
 end

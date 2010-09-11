@@ -8,6 +8,7 @@ use("aux", "win_condition_functions")
 set_textdomain("win_conditions")
 
 local wc_name = _ "Endless Game"
+local wc_version = 1
 local wc_desc = _"This is an endless game without rules."
 return {
 	name = wc_name,
@@ -24,7 +25,7 @@ return {
 			sleep(5000)
 			check_player_defeated(plrs, _ "You are defeated!",
 				_ ("You have nothing to command left. If you want, you may " ..
-				   "continue as spectator."))
+				   "continue as spectator."), wc_name, wc_version)
 		until count_factions(plrs) < 1
 	
 	end
