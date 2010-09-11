@@ -81,6 +81,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int place_immovable(lua_State *);
 
 	/*
 	 * C methods

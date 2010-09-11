@@ -249,6 +249,7 @@ end
 -- in a loop for a nice optical effect
 function remove_all_stones(fields, g_sleeptime)
    local sleeptime = g_sleeptime or 150 
+   local map = wl.Map()
    while #fields > 0 do
       local idx = math.random(#fields)
       local f = fields[idx]
@@ -261,7 +262,7 @@ function remove_all_stones(fields, g_sleeptime)
             f.immovable:remove()
             if n > 1 then 
                remove_field = false
-               wl.map.create_immovable("stones" .. n-1, f)
+               map:place_immovable("stones" .. n-1, f)
             end
             sleep(sleeptime)
          end

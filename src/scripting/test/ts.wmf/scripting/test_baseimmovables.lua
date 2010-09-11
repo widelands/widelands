@@ -9,8 +9,8 @@
 -- works because serial is a property of a MapObject.
 immovable_creation_tests = lunit.TestCase("Immovable Creation")
 function immovable_creation_tests:test_create()
-   imm = wl.map.create_immovable("tree1", wl.map.Field(9, 10))
-   imm2 = wl.map.create_immovable("tree2", wl.map.Field(10, 10))
+   imm = wl.Map():place_immovable("tree1", wl.map.Field(9, 10))
+   imm2 = wl.Map():place_immovable("tree2", wl.map.Field(10, 10))
    assert_table(imm)
    assert_table(imm2)
    assert_true(imm.serial > 0)
@@ -21,34 +21,34 @@ function immovable_creation_tests:test_create()
    imm2:remove()
 end
 function immovable_creation_tests:test_create_tribe_immovables()
-   imm = wl.map.create_immovable("field2", wl.map.Field(10,10), "barbarians")
+   imm = wl.Map():place_immovable("field2", wl.map.Field(10,10), "barbarians")
    imm:remove()
 end
 function immovable_creation_tests:test_create_world_immovables()
-   imm = wl.map.create_immovable("tree1", wl.map.Field(10,10), "world")
+   imm = wl.Map():place_immovable("tree1", wl.map.Field(10,10), "world")
    imm:remove()
 end
 function immovable_creation_tests:test_create_world_immovables1()
-   imm = wl.map.create_immovable("tree1", wl.map.Field(10,10), nil)
+   imm = wl.Map():place_immovable("tree1", wl.map.Field(10,10), nil)
    imm:remove()
 end
 function immovable_creation_tests:test_create_tribe_immovables_ill_tribe()
    assert_error("Illegal tribe!", function()
-      imm = wl.map.create_immovable("field2", wl.map.Field(10,10), "blablub")
+      imm = wl.Map():place_immovable("field2", wl.map.Field(10,10), "blablub")
    end)
 end
 function immovable_creation_tests:test_create_tribe_immovables_ill_immovable()
    assert_error("Illegal tribe!", function()
-      imm = wl.map.create_immovable("b", wl.map.Field(10,10), "barbarians")
+      imm = wl.Map():place_immovable("b", wl.map.Field(10,10), "barbarians")
    end)
 end
 function immovable_creation_tests:test_create_wrong_usage()
    assert_error("Needs table, not integer", function()
-      wl.map.create_immovable("tree1", 9, 10) end)
+      wl.Map():place_immovable("tree1", 9, 10) end)
 end
 function immovable_creation_tests:test_create_wrong_usage()
    assert_error("Needs table, not integer", function()
-      wl.map.create_immovable("tree1", 9, 10) end)
+      wl.Map():place_immovable("tree1", 9, 10) end)
 end
 
 -- ===================
@@ -56,7 +56,7 @@ end
 -- ===================
 immovable_tests = lunit.TestCase("Immovable usage")
 function immovable_tests:setup()
-   self.i = wl.map.create_immovable("tree1", wl.map.Field(9, 10))
+   self.i = wl.Map():place_immovable("tree1", wl.map.Field(9, 10))
 end
 function immovable_tests:teardown()
    pcall(self.i.remove, self.i)
@@ -96,12 +96,12 @@ end
 -- -- ==============
 immovable_property_tests = lunit.TestCase("Immovable sizes")
 function immovable_property_tests:setup()
-   self.none = wl.map.create_immovable("pebble1", wl.map.Field(19, 10))
-   self.small = wl.map.create_immovable("tree1", wl.map.Field(18, 10))
+   self.none = wl.Map():place_immovable("pebble1", wl.map.Field(19, 10))
+   self.small = wl.Map():place_immovable("tree1", wl.map.Field(18, 10))
    self.medium = wl.game.Player(1):place_building(
       "burners_house", wl.map.Field(10,10)
    )
-   self.big = wl.map.create_immovable("stones4", wl.map.Field(20, 10))
+   self.big = wl.Map():place_immovable("stones4", wl.map.Field(20, 10))
    self.big_building = wl.game.Player(1):place_building(
       "fortress", wl.map.Field(15,11)
    )

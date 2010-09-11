@@ -310,12 +310,13 @@ end
 --]]
 function reveal_village()
    function force_map_immovables(list)
+      local map = wl.Map()
       for idx, id in ipairs(list) do
          local f = wl.map.Field(id[2], id[3])
          if f.immovable then
             pcall(f.immovable.remove, f.immovable)
          end
-         wl.map.create_immovable(id[1], f, id[4])
+         map:place_immovable(id[1], f, id[4])
       end
    end
 
