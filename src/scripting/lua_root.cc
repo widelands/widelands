@@ -177,13 +177,76 @@ int L_Game::launch_coroutine(lua_State * L) {
 	return 0;
 }
 
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
 
+/* RST
+Map
+---
+
+.. class:: Map()
+
+	Access to the map and it's objects. You can construct as many instances of
+	this class as you like, but they all will access the same internal object.
+*/
+const char L_Map::className[] = "Map";
+const MethodType<L_Map> L_Map::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Map> L_Map::Properties[] = {
+	PROP_RO(L_Map, width),
+	PROP_RO(L_Map, height),
+	{0, 0, 0},
+};
+
+L_Map::L_Map(lua_State * L) {
+	// Nothing to do.
+}
+
+void L_Map::__persist(lua_State * L) {
+}
+void L_Map::__unpersist(lua_State * L) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: width
+
+		(RO) The width of the map in fields.
+*/
+int L_Map::get_width(lua_State * L) {
+	lua_pushuint32(L, get_egbase(L).map().get_width());
+	return 1;
+}
+/* RST
+	.. attribute:: height
+
+		(RO) The height of the map in fields.
+*/
+int L_Map::get_height(lua_State * L) {
+	lua_pushuint32(L, get_egbase(L).map().get_height());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
 
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
+
 
 const static struct luaL_reg wlroot [] = {
 	{0, 0}
@@ -194,5 +257,6 @@ void luaopen_wlroot(lua_State * L) {
 	lua_pop(L, 1); // pop the table
 
 	register_class<L_Game>(L, "");
+	register_class<L_Map>(L, "");
 }
 

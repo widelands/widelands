@@ -62,6 +62,32 @@ public:
 private:
 };
 
+class L_Map : public L_RootModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_Map);
+
+	L_Map() {}
+	L_Map(lua_State * L);
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_width(lua_State *);
+	int get_height(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+private:
+};
+
 void luaopen_wlroot(lua_State *);
 
 #endif

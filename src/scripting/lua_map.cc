@@ -2296,35 +2296,9 @@ static int L_create_immovable(lua_State * const L) {
 	return upcasted_immovable_to_lua(L, m);
 }
 
-/* RST
-.. function:: get_width()
-
-	Returns the width of the map in fields
-
-	:returns: width of map in nr of fields
-	:rtype: :class:`integer`
-*/
-int L_get_width(lua_State * L) {
-	lua_pushuint32(L, get_egbase(L).map().get_width());
-	return 1;
-}
-/* RST
-.. function:: get_height()
-
-	Returns the height of the map in fields
-
-	:returns: height of map in nr of fields
-	:rtype: :class:`integer`
-*/
-int L_get_height(lua_State * L) {
-	lua_pushuint32(L, get_egbase(L).map().get_height());
-	return 1;
-}
 
 const static struct luaL_reg wlmap [] = {
 	{"create_immovable", &L_create_immovable},
-	{"get_width", &L_get_width},
-	{"get_height", &L_get_height},
 	{0, 0}
 };
 
