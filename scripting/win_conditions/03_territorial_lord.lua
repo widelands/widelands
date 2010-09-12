@@ -40,8 +40,7 @@ return {
 		local remaining_time = 10 -- (dummy) -- time in secs, if == 0 -> victory
 
 		-- Find all valid players
-		local plrs = {}
-		valid_players(plrs)
+      local plrs = wl.Game().players
 
 		-- send a message with the game type to all players
 		broadcast(plrs, wc_name, wc_desc)

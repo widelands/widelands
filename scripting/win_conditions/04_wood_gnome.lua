@@ -18,8 +18,7 @@ return {
 	name = wc_name,
 	description = wc_desc,
 	func = function()
-	local plrs = {}
-	valid_players(plrs)
+   local plrs = wl.Game().players
 
 	-- send a message with the game type to all players
 	broadcast(plrs, wc_name, wc_desc)

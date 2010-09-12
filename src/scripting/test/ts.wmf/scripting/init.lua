@@ -2,6 +2,7 @@ use("map", "common_init")
 
 include "test_math_random"
 include "test_map"
+include "test_game"
 include "test_field"
 include "test_immovables"
 include "test_player"
