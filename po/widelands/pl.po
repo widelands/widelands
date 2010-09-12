@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-03 22:16+0200\n"
-"PO-Revision-Date: 2010-08-30 23:41+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-09-11 14:15+0000\n"
+"Last-Translator: Szymon Gackowski <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-09-12 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/logic/worker.cc:1670
@@ -1601,57 +1601,63 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"Dostępne komendy:<br>/help  -  Wyświetla tę pomoc<br>/announce <wiadomosc>  -"
+"  Wyślij wiadomość jako obwieszczenie (czat systemowy)<br>/warn <nazwa> "
+"<powód>  -  Ostrzeż użytkownika <nazwa> z powodu <powód><br>/kick <nazwa> "
+"<powód>  -  Wyrzuć użytkownika <nazwa> z powodu <powód><br>/forcePause       "
+"     -  Wymuś pauzę w grze.<br>/endForcedPause        -  Przywraca grę do "
+"normalnej prędkości."
 
 #: ../../src/network/nethost.cc:303
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "Błędne użycie. Powinno być: /announce <wiadomość>"
 
 #: ../../src/network/nethost.cc:315
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "Błędne użycie, powinno być: /warn <imię> <powód>"
 
 #: ../../src/network/nethost.cc:326
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "Błędne użycie, powinno być: /kick <imię> <powód>"
 
 #: ../../src/network/nethost.cc:334
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Czy na pewno wyrzucić %s?<br>"
 
 #: ../../src/network/nethost.cc:337
 #, c-format
 msgid "The stated reason was: %s<br>"
-msgstr ""
+msgstr "Podano powód: %s<br>"
 
 #: ../../src/network/nethost.cc:340
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "Jeśli tak, wpisz /ack_kick %s"
 
 #: ../../src/network/nethost.cc:349
 msgid "kick acknowlegement cancled: No name given!"
-msgstr ""
+msgstr "powiadomienie o usunięciu odrzucone: Brak podanej nazwy użytkownika!"
 
 #: ../../src/network/nethost.cc:351
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Błędne użycie, powinno być: /ack_kick <imię>"
 
 #: ../../src/network/nethost.cc:357
 msgid "kick acknowlegement cancled: Wrong name given!"
-msgstr ""
+msgstr "powiadomienie o usunięciu odrzucone: Błędna nazwa użytkownika!"
 
 #: ../../src/network/nethost.cc:367
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Pauza została wymuszona wcześniej - gra powinna być już wstrzymana."
 
 #: ../../src/network/nethost.cc:378
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Brak wymuszonej pauzy - nie ma nic do zakończenia."
 
 #: ../../src/network/nethost.cc:388
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Błędna komenda. Wpisz /help aby wyświetlić listę komend."
 
 #: ../../src/network/nethost.cc:518
 msgid "Server has left the game."
@@ -1667,11 +1673,11 @@ msgstr "Serwer zawiesił się i awaryjnie zapisał grę."
 
 #: ../../src/network/nethost.cc:875
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "Nie możesz wyrzucić siebie!"
 
 #: ../../src/network/nethost.cc:897
 msgid "There is no connected user with that nickname!"
-msgstr ""
+msgstr "Brak podłączonego użytkownika o takiej nazwie!"
 
 #: ../../src/network/nethost.cc:1071
 #, c-format
@@ -4149,7 +4155,7 @@ msgstr "ID mapy:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Gracze: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
