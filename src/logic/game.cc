@@ -316,7 +316,8 @@ void Game::init_newgame
 			 playersettings.initialization_index,
 			 playersettings.tribe,
 			 playersettings.name,
-			 playersettings.team);
+			 playersettings.team,
+			 playersettings.partner);
 		get_player(i + 1)->setAI(playersettings.ai);
 	}
 
@@ -389,7 +390,9 @@ bool Game::run_load_game(std::string filename) {
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
-		player_nr = gpdp.get_player_nr();
+		player_nr = gpdp.get_partner();
+		if (player_nr == 0)
+			player_nr = gpdp.get_player_nr();
 
 		set_ibase
 			(new Interactive_Player
@@ -489,9 +492,11 @@ bool Game::run
 			const std::string &  tribe_name = plr ? plr->tribe().name() : no_name;
 			const std::string & player_name = plr ? plr->    get_name() : no_name;
 			const std::string & player_ai   = plr ? plr->    getAI()    : no_name;
+			const Player_Number partner     = plr ? plr->    partner()  : 0;
 			map().set_scenario_player_tribe(p,  tribe_name);
 			map().set_scenario_player_name (p, player_name);
 			map().set_scenario_player_ai   (p, player_ai);
+			map().set_player_partner       (p, partner);
 		}
 
 		// Run the init script, if the map provides one.

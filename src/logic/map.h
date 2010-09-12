@@ -220,9 +220,11 @@ struct Map :
 	const std::string & get_scenario_player_tribe(Player_Number) const;
 	const std::string & get_scenario_player_name (Player_Number) const;
 	const std::string & get_scenario_player_ai   (Player_Number) const;
+	const Player_Number get_player_partner       (Player_Number) const;
 	void set_scenario_player_tribe(Player_Number, const std::string &);
 	void set_scenario_player_name (Player_Number, const std::string &);
 	void set_scenario_player_ai   (Player_Number, const std::string &);
+	void set_player_partner       (Player_Number, Player_Number);
 
 	BaseImmovable * get_immovable(Coords) const;
 	uint32_t find_bobs
@@ -388,9 +390,10 @@ private:
 	Overlay_Manager * m_overlay_manager;
 
 	boost::scoped_ptr<PathfieldManager> m_pathfieldmgr;
-	std::vector<std::string> m_scenario_tribes; // only alloced when needed
-	std::vector<std::string> m_scenario_names;
-	std::vector<std::string> m_scenario_ais;
+	std::vector<std::string>   m_scenario_tribes; // only alloced when needed
+	std::vector<std::string>   m_scenario_names;
+	std::vector<std::string>   m_scenario_ais;
+	std::vector<Player_Number> m_player_partners; // share kingdom partners
 
 	Manager<Objective>  m_mom;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/player.h"
 #include "wui/interactive_player.h"
 #include "logic/map.h"
 #include "profile/profile.h"
@@ -47,6 +48,7 @@ void Game_Preload_Data_Packet::Read
 			if (packet_version >= 2) {
 				m_background = s.get_safe_string("background");
 				m_player_nr  = s.get_safe_int   ("player_nr");
+				m_partner    = s.get_natural    ("partner", 0);
 			} else {
 				m_background = "pics/progress.png";
 				// Of course this is wrong, but at least player 1 is always in game
@@ -80,6 +82,7 @@ void Game_Preload_Data_Packet::Write
 	if (ipl) {
 		// player that saved the game.
 		s.set_int("player_nr", ipl->player_number());
+		s.set_int("partner", game.get_player(ipl->player_number())->partner());
 	} else {
 		// pretend that the first player that is actually
 		// there has saved the game

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,13 +38,15 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 	char const * get_mapname() {return m_mapname.c_str();}
 	std::string get_background() {return m_background;}
 	uint32_t get_gametime() {return m_gametime;}
-	uint32_t get_player_nr() {return m_player_nr;}
+	uint8_t get_player_nr() {return m_player_nr;}
+	uint8_t get_partner()   {return m_partner;}
 
 private:
 	std::string m_mapname;
 	std::string m_background;
 	uint32_t m_gametime;
-	uint8_t m_player_nr;
+	uint8_t  m_player_nr;
+	uint8_t  m_partner;
 };
 
 }
