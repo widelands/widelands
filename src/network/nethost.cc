@@ -160,6 +160,23 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerTeam(number, team);
 	}
 
+	virtual void setPlayerPartner(uint8_t number, uint8_t partner)
+	{
+		if
+			(number >= h->settings().players.size()
+			 or
+			 partner >= h->settings().players.size()
+			 or
+			 number == partner)
+			return;
+		
+		if
+			(number == settings().playernum
+			 or
+			 settings().players.at(number).state == PlayerSettings::stateComputer)
+			h->setPlayerPartner(number, partner);
+	}
+
 	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
 		if (number >= h->settings().players.size())
 			return;
@@ -616,7 +633,11 @@ void NetHost::run(bool const autorun)
 
 		loaderUI.step(_("Preparing game"));
 
-		uint8_t const pn = d->settings.playernum + 1;
+		// If our player is in shared kingdom mode - set the iabase accordingly.
+		uint8_t const pn =
+			(d->settings.players.at(d->settings.playernum).partner > 0) ?
+			 d->settings.players.at(d->settings.playernum).partner :
+			 d->settings.playernum + 1;
 		d->game = &game;
 		game.set_game_controller(this);
 		Interactive_GameBase * igb;
@@ -1285,6 +1306,20 @@ void NetHost::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	broadcast(s);
 }
 
+void NetHost::setPlayerPartner(uint8_t number, uint8_t partner)
+{
+	if (number >= d->settings.players.size())
+		return;
+	d->settings.players.at(number).partner = partner;
+	
+	// Broadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
+	s.Unsigned8(number);
+	writeSettingPlayer(s, number);
+	broadcast(s);
+}
+
 void NetHost::setMultiplayerGameSettings()
 {
 	d->settings.scenario = false;
@@ -1338,6 +1373,7 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.String(player.ai);
 	packet.Unsigned8(static_cast<uint8_t>(player.ready));
 	packet.Unsigned8(player.team);
+	packet.Unsigned8(player.partner);
 }
 
 void NetHost::writeSettingAllPlayers(SendPacket & packet)
@@ -1915,6 +1951,12 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		}
 		break;
 
+	case NETCMD_SETTING_CHANGEPARTNER:
+		if (!d->game) {
+			setPlayerPartner(client.playernum, r.Unsigned8());
+		}
+		break;
+
 	case NETCMD_SETTING_CHANGEPOSITION:
 		if (!d->game) {
 			uint8_t const pos = r.Unsigned8();
@@ -1985,12 +2027,21 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			("[Host] client %u (%u) sent player command %i for %i, time = %i\n",
 			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
 		recvClientTime(i, time);
-		if (plcmd.sender() != client.playernum + 1)
+		if 
+			((d->settings.players[client.playernum].partner > 0
+			  &&
+			  d->settings.players[client.playernum].partner != plcmd.sender())
+			 ||
+			 (d->settings.players[client.playernum].partner == 0
+			  &&
+			  plcmd.sender() != client.playernum + 1))
+		{
 			throw DisconnectException
 				(_
 				 	("Client %u (%u) sent a playercommand (%i) for a different "
 				 	 "player (%i)."),
 				 i, client.playernum, plcmd.id(), plcmd.sender());
+		}
 		sendPlayerCommand(plcmd);
 	} break;
 

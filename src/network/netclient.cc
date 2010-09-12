@@ -180,7 +180,10 @@ void NetClient::run ()
 
 		d->game = &game;
 		game.set_game_controller(this);
-		uint8_t pn = d->playernum + 1;
+		// If our player is in shared kingdom mode - set the iabase accordingly.
+		uint8_t const pn =
+			(d->settings.players.at(d->playernum).partner > 0) ?
+			 d->settings.players.at(d->playernum).partner : d->playernum + 1;
 		Interactive_GameBase * igb;
 		if (pn > 0)
 			igb =
@@ -247,7 +250,15 @@ void NetClient::think()
 void NetClient::sendPlayerCommand(Widelands::PlayerCommand & pc)
 {
 	assert(d->game);
-	if (pc.sender() != d->playernum + 1) { // TODO check for kooperative players
+	if
+		((d->settings.players[d->playernum].partner > 0
+		  &&
+		  d->settings.players[d->playernum].partner != pc.sender())
+		 ||
+		 (d->settings.players[d->playernum].partner == 0
+		  &&
+		  pc.sender() != d->playernum + 1))
+	{
 		delete &pc;
 		return;
 	}
@@ -360,6 +371,17 @@ void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	s.send(d->sock);
 }
 
+void NetClient::setPlayerPartner(uint8_t number, uint8_t partner)
+{
+	if (number != d->playernum)
+		return;
+
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_CHANGEPARTNER);
+	s.Unsigned8(partner);
+	s.send(d->sock);
+}
+
 void NetClient::setPlayerInit(uint8_t, uint8_t)
 {
 	//  client is not allowed to do this
@@ -460,6 +482,7 @@ void NetClient::recvOnePlayer
 	player.ai = packet.String();
 	player.ready = static_cast<bool>(packet.Unsigned8());
 	player.team = packet.Unsigned8();
+	player.partner = packet.Unsigned8();
 
 	if (number == d->playernum)
 		d->localplayername = player.name;

@@ -42,6 +42,10 @@ struct PlayerSettings {
 	std::string ai; /**< Preferred AI provider for this player */
 	Widelands::TeamNumber team;
 
+	/// if this is > 0, the player does not use it's own player number,
+	/// but is a copartner of this player in shared kingdom mode
+	uint8_t partner;
+
 	bool ready;
 };
 
@@ -134,6 +138,7 @@ struct GameSettingsProvider {
 	virtual void setPlayerReady   (uint8_t number, bool ready) = 0;
 	virtual bool getPlayerReady   (uint8_t number) = 0;
 	virtual void setPlayerTeam    (uint8_t number, Widelands::TeamNumber team) = 0;
+	virtual void setPlayerPartner (uint8_t number, uint8_t partner) = 0;
 	virtual void setWinCondition  (std::string wc) = 0;
 	virtual std::string getWinCondition() = 0;
 
