@@ -1,5 +1,5 @@
 execute_process(
-  COMMAND /usr/bin/cppcheck ${sourcefile} --suppressions ${WL_SOURCES_BINARY_ROOT}/CppCheckSuppressions --enable=exceptNew,exceptRealloc,possibleError,unusedFunctions --force --quiet -v --template gcc -I ${includedir}
+  COMMAND /usr/bin/cppcheck ${sourcefile} --suppressions ${WL_SOURCES_BINARY_ROOT}/CppCheckSuppressions --enable=exceptNew,exceptRealloc,unusedFunctions --force --quiet -v --template gcc -I ${includedir}
   OUTPUT_VARIABLE checkresult
   ERROR_VARIABLE checkresult2
   OUTPUT_STRIP_TRAILING_WHITESPACE
