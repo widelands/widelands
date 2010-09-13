@@ -129,6 +129,16 @@ struct WalkableSpot {
 
 }
 
+struct BlockedField {
+	Widelands::FCoords coords;
+	int32_t blocked_until;
+
+	BlockedField(Widelands::FCoords c, int32_t until)
+		:
+		coords(c),
+		blocked_until(until)
+	{}
+};
 
 struct BuildableField {
 	Widelands::FCoords coords;
@@ -144,8 +154,6 @@ struct BuildableField {
 
 	uint8_t trees_nearby;
 	uint8_t stones_nearby;
-	uint8_t tree_consumers_nearby;
-	uint8_t stone_consumers_nearby;
 	uint8_t water_nearby;
 	uint8_t space_consumers_nearby;
 
@@ -187,9 +195,11 @@ struct EconomyObserver {
 	Widelands::Economy               & economy;
 	std::list<Widelands::Flag const *> flags;
 	int32_t                            next_connection_try;
+	uint32_t                           failed_connection_tries;
 
 	EconomyObserver (Widelands::Economy & e) : economy(e) {
 		next_connection_try = 0;
+		failed_connection_tries = 0;
 	}
 };
 
@@ -234,6 +244,10 @@ struct BuildingObserver {
 	int32_t                           cnt_under_construction;
 
 	int32_t total_count() const {return cnt_built + cnt_under_construction;}
+	bool buildable(Widelands::Player * player) {
+		return is_buildable && player->is_building_type_allowed(id);
+	}
+	
 };
 
 struct ProductionSiteObserver {

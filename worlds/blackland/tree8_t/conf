@@ -1,5 +1,6 @@
 program=program
 picture=tree8_t_00.png
+attrib=seed
 
 [terrain affinity]
 strand=       32

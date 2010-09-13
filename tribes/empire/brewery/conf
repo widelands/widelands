@@ -29,8 +29,8 @@ produce=beer
 
 [idle]
 pics=brewery_i_??.png  # ???
-hotspot=40 65
+hotspot=39 62
 
 [working]
 pics=brewery_i_??.png  # ???
-hotspot=40 65
+hotspot=39 62

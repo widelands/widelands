@@ -45,8 +45,8 @@ return=skipped
 
 [idle]
 pics=smelting_works_i_??.png  # ???
-hotspot=45 45
+hotspot=44 42
 
 [working]
 pics=smelting_works_i_??.png  # ???
-hotspot=45 45
+hotspot=44 42

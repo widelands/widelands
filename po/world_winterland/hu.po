@@ -6,29 +6,71 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:19+0000\n"
-"Last-Translator: Varga Dániel <Unknown>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 13:38+0000\n"
+"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/winterland/conf:2
-msgid "The Widelands Development Team"
-msgstr "A Widelands fejlesztő csapat"
+#: ../../worlds/winterland/conf:45
+msgid "Aspen"
+msgstr "Nyárfa"
 
-#: ../../worlds/winterland/conf:3
-msgid "Winterland"
-msgstr "Jégmezők"
+#: ../../worlds/winterland/conf:46
+msgid "Aspen medium"
+msgstr "Közepes méretű nyárfa"
 
-#: ../../worlds/winterland/conf:4
-msgid ""
-"These are the white, wide and frosty winterlands, in which the Northmen "
-"dwell."
-msgstr "Az örök jég birodalma, ahol az északi törzsek élnek."
+#: ../../worlds/winterland/conf:47
+msgid "Aspen small"
+msgstr "Kis nyárfa"
+
+#: ../../worlds/winterland/conf:48
+msgid "Aspen tiny"
+msgstr "Apró nyárfa palánta"
+
+#: ../../worlds/winterland/conf:79
+msgid "Badger"
+msgstr "Borz"
+
+#: ../../worlds/winterland/conf:65
+msgid "Beech"
+msgstr "Bükkfa"
+
+#: ../../worlds/winterland/conf:66
+msgid "Beech medium"
+msgstr "Közepes méretű bükkfa"
+
+#: ../../worlds/winterland/conf:67
+msgid "Beech small"
+msgstr "Kis bükkfa"
+
+#: ../../worlds/winterland/conf:68
+msgid "Beech tiny"
+msgstr "Apró bükkfa palánta"
+
+#: ../../worlds/winterland/conf:61
+msgid "Birch"
+msgstr "Nyírfa"
+
+#: ../../worlds/winterland/conf:62
+msgid "Birch medium"
+msgstr "Közepes méretű nyírfa"
+
+#: ../../worlds/winterland/conf:63
+msgid "Birch small"
+msgstr "Kis nyírfa"
+
+#: ../../worlds/winterland/conf:64
+msgid "Birch tiny"
+msgstr "Apró nyírfa palánta"
+
+#: ../../worlds/winterland/conf:80
+msgid "Bunny"
+msgstr "Nyuszi"
 
 #: ../../worlds/winterland/conf:7
 #: ../../worlds/winterland/conf:8
@@ -38,6 +80,10 @@ msgstr "Az örök jég birodalma, ahol az északi törzsek élnek."
 msgid "Bush"
 msgstr "Bokor"
 
+#: ../../worlds/winterland/resconf:4
+msgid "Coal"
+msgstr "Szén"
+
 #: ../../worlds/winterland/conf:12
 #: ../../worlds/winterland/conf:13
 #: ../../worlds/winterland/conf:14
@@ -45,16 +91,104 @@ msgstr "Bokor"
 msgid "Dead Tree"
 msgstr "Elpusztult fa"
 
+#: ../../worlds/winterland/conf:81
+msgid "Deer"
+msgstr "Szarvas"
+
+#: ../../worlds/winterland/conf:82
+msgid "Duck"
+msgstr "Kacsa"
+
+#: ../../worlds/winterland/conf:83
+msgid "Elk"
+msgstr "Jávorszarvas"
+
+#: ../../worlds/winterland/resconf:41
+msgid "Fish"
+msgstr "Hal"
+
+#: ../../worlds/winterland/conf:84
+msgid "Fox"
+msgstr "Róka"
+
+#: ../../worlds/winterland/resconf:12
+msgid "Gold"
+msgstr "Arany"
+
+#: ../../worlds/winterland/resconf:28
+msgid "Granite"
+msgstr "Gránit"
+
 #: ../../worlds/winterland/conf:16
 #: ../../worlds/winterland/conf:17
 #: ../../worlds/winterland/conf:18
 msgid "Grass"
 msgstr "Fű"
 
+#: ../../worlds/winterland/resconf:20
+msgid "Iron"
+msgstr "Vas"
+
+#: ../../worlds/winterland/conf:69
+msgid "Larch"
+msgstr "Vörösfenyő"
+
+#: ../../worlds/winterland/conf:70
+msgid "Larch medium"
+msgstr "Közepes méretű vörösfenyő"
+
+#: ../../worlds/winterland/conf:71
+msgid "Larch small"
+msgstr "Kis vörösfenyő"
+
+#: ../../worlds/winterland/conf:72
+msgid "Larch tiny"
+msgstr "Apró vörösfenyő palánta"
+
+#: ../../worlds/winterland/conf:85
+msgid "Lynx"
+msgstr "Hiúz"
+
+#: ../../worlds/winterland/conf:57
+msgid "Maple"
+msgstr "Juharfa"
+
+#: ../../worlds/winterland/conf:58
+msgid "Maple medium"
+msgstr "Közepes méretű juharfa"
+
+#: ../../worlds/winterland/conf:59
+msgid "Maple small"
+msgstr "Kis juharfa"
+
+#: ../../worlds/winterland/conf:60
+msgid "Maple tiny"
+msgstr "Apró juharfa palánta"
+
+#: ../../worlds/winterland/conf:86
+msgid "Marten"
+msgstr "Nyest"
+
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
 msgid "Mushroom"
 msgstr "Gomba"
+
+#: ../../worlds/winterland/conf:49
+msgid "Oak"
+msgstr "Tölgyfa"
+
+#: ../../worlds/winterland/conf:50
+msgid "Oak medium"
+msgstr "Közepes méretű tölgyfa"
+
+#: ../../worlds/winterland/conf:51
+msgid "Oak small"
+msgstr "Kis tölgyfa"
+
+#: ../../worlds/winterland/conf:52
+msgid "Oak tiny"
+msgstr "Apró tölgyfa palánta"
 
 #: ../../worlds/winterland/conf:21
 #: ../../worlds/winterland/conf:22
@@ -65,6 +199,30 @@ msgstr "Gomba"
 msgid "Pebble"
 msgstr "Hegyikristály"
 
+#: ../../worlds/winterland/conf:87
+msgid "Reindeer"
+msgstr "Rénszarvas"
+
+#: ../../worlds/winterland/conf:73
+msgid "Rowan"
+msgstr "Berkenye"
+
+#: ../../worlds/winterland/conf:74
+msgid "Rowan medium"
+msgstr "Közepes méretű berkenye bokor"
+
+#: ../../worlds/winterland/conf:75
+msgid "Rowan small"
+msgstr "Kis berkenye bokor"
+
+#: ../../worlds/winterland/conf:76
+msgid "Rowan tiny"
+msgstr "Apró berkenye palánta"
+
+#: ../../worlds/winterland/conf:88
+msgid "Sheep"
+msgstr "Bárány"
+
 #: ../../worlds/winterland/conf:27
 #: ../../worlds/winterland/conf:28
 #: ../../worlds/winterland/conf:29
@@ -73,7 +231,23 @@ msgstr "Csontváz"
 
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
-msgstr ""
+msgstr "Hóember"
+
+#: ../../worlds/winterland/conf:53
+msgid "Spruce"
+msgstr "Lucfenyő"
+
+#: ../../worlds/winterland/conf:54
+msgid "Spruce medium"
+msgstr "Közepes méretű lucfenyő"
+
+#: ../../worlds/winterland/conf:55
+msgid "Spruce small"
+msgstr "Kis lucfenyő"
+
+#: ../../worlds/winterland/conf:56
+msgid "Spruce tiny"
+msgstr "Apró lucfenyő palánta"
 
 #: ../../worlds/winterland/conf:31
 #: ../../worlds/winterland/conf:32
@@ -94,177 +268,27 @@ msgstr "Szikla"
 msgid "Stones"
 msgstr "Kő"
 
+#: ../../worlds/winterland/conf:2
+msgid "The Widelands Development Team"
+msgstr "A Widelands fejlesztő csapat"
+
+#: ../../worlds/winterland/conf:4
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr "Az örök jég birodalma, ahol az északi törzsek élnek."
+
 #: ../../worlds/winterland/conf:44
 msgid "Track"
-msgstr ""
+msgstr "Lábnyomok a hóban"
 
-#: ../../worlds/winterland/conf:45
-msgid "Aspen"
-msgstr ""
+#: ../../worlds/winterland/resconf:36
+msgid "Water"
+msgstr "Víz"
 
-#: ../../worlds/winterland/conf:46
-msgid "Aspen medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:47
-msgid "Aspen small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:48
-msgid "Aspen tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:49
-msgid "Oak"
-msgstr ""
-
-#: ../../worlds/winterland/conf:50
-msgid "Oak medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:51
-msgid "Oak small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:52
-msgid "Oak tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:53
-msgid "Spruce"
-msgstr ""
-
-#: ../../worlds/winterland/conf:54
-msgid "Spruce medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:55
-msgid "Spruce small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:56
-msgid "Spruce tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:57
-msgid "Maple"
-msgstr ""
-
-#: ../../worlds/winterland/conf:58
-msgid "Maple medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:59
-msgid "Maple small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:60
-msgid "Maple tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:61
-msgid "Birch"
-msgstr ""
-
-#: ../../worlds/winterland/conf:62
-msgid "Birch medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:63
-msgid "Birch small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:64
-msgid "Birch tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:65
-msgid "Beech"
-msgstr ""
-
-#: ../../worlds/winterland/conf:66
-msgid "Beech medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:67
-msgid "Beech small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:68
-msgid "Beech tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:69
-msgid "Larch"
-msgstr ""
-
-#: ../../worlds/winterland/conf:70
-msgid "Larch medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:71
-msgid "Larch small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:72
-msgid "Larch tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:73
-msgid "Rowan"
-msgstr ""
-
-#: ../../worlds/winterland/conf:74
-msgid "Rowan medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:75
-msgid "Rowan small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:76
-msgid "Rowan tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:79
-msgid "Badger"
-msgstr "Borz"
-
-#: ../../worlds/winterland/conf:80
-msgid "Bunny"
-msgstr "Nyuszi"
-
-#: ../../worlds/winterland/conf:81
-msgid "Deer"
-msgstr "Szarvas"
-
-#: ../../worlds/winterland/conf:82
-msgid "Duck"
-msgstr "Kacsa"
-
-#: ../../worlds/winterland/conf:83
-msgid "Elk"
-msgstr "Jávorszarvas"
-
-#: ../../worlds/winterland/conf:84
-msgid "Fox"
-msgstr "Róka"
-
-#: ../../worlds/winterland/conf:85
-msgid "Lynx"
-msgstr "Hiúz"
-
-#: ../../worlds/winterland/conf:86
-msgid "Marten"
-msgstr "Nyest"
-
-#: ../../worlds/winterland/conf:87
-msgid "Reindeer"
-msgstr "Rénszarvas"
-
-#: ../../worlds/winterland/conf:88
-msgid "Sheep"
-msgstr "Bárány"
+#: ../../worlds/winterland/conf:3
+msgid "Winterland"
+msgstr "Jégmezők"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"
@@ -274,29 +298,8 @@ msgstr "Bölény"
 msgid "Wolf"
 msgstr "Farkas"
 
-#: ../../worlds/winterland/resconf:4
-msgid "Coal"
-msgstr "Szén"
-
-#: ../../worlds/winterland/resconf:12
-msgid "Gold"
-msgstr "Arany"
-
-#: ../../worlds/winterland/resconf:20
-msgid "Iron"
-msgstr "Vas"
-
-#: ../../worlds/winterland/resconf:28
-msgid "Granit"
-msgstr "Gránit"
-
-#: ../../worlds/winterland/resconf:36
-msgid "Water"
-msgstr "Víz"
-
-#: ../../worlds/winterland/resconf:41
-msgid "Fish"
-msgstr "Hal"
+#~ msgid "Granit"
+#~ msgstr "Gránit"
 
 #~ msgid "Tree"
 #~ msgstr "Fa"

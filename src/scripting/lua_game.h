@@ -61,6 +61,7 @@ public:
 	 * Properties
 	 */
 	int get_number(lua_State * L);
+	int get_name(lua_State * L);
 	int get_allowed_buildings(lua_State * L);
 	int get_objectives(lua_State * L);
 	int get_defeated(lua_State * L);
@@ -71,6 +72,7 @@ public:
 	int set_changing_retreat_percentage_allowed(lua_State * L);
 	int get_inbox(lua_State * L);
 	int get_team(lua_State * L);
+	int set_team(lua_State * L);
 	int get_tribe(lua_State * L);
 	int get_see_all(lua_State * L);
 	int set_see_all(lua_State * L);
@@ -99,6 +101,7 @@ public:
 	int set_frontier_style(lua_State * L);
 	int get_suitability(lua_State * L);
 	int allow_workers(lua_State * L);
+	int switchplayer(lua_State * L);
 
 
 

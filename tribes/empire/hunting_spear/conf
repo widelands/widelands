@@ -2,4 +2,4 @@ help=_This spear is light enough to be thrown, but heavy enough to kill any anim
 
 [idle]
 pics=idle.png
-hotspot=7 9
+hotspot=6 5

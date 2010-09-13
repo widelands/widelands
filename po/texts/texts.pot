@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -543,7 +543,7 @@ msgid ""
 "Online Help"
 msgstr ""
 
-#: ../../txts/developers:339
+#: ../../txts/developers:340
 msgid ""
 "Other"
 msgstr ""
@@ -676,7 +676,7 @@ msgid ""
 msgstr ""
 
 #: ../../txts/developers:29
-#: ../../txts/developers:327
+#: ../../txts/developers:328
 msgid ""
 "Sound"
 msgstr ""
@@ -781,7 +781,7 @@ msgid ""
 "To minimize/maximize a window, click on the titlebar of that window either with middle mousebutton or with left mousebutton while holding down CTRL."
 msgstr ""
 
-#: ../../txts/developers:332
+#: ../../txts/developers:333
 msgid ""
 "Translation"
 msgstr ""

@@ -1,5 +1,6 @@
 program=program
 picture=s1tree2_00.png
+attrib=seed
 
 [terrain affinity]
 desert1=             10

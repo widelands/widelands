@@ -2,4 +2,4 @@ help=_The shovel is needed for proper handling of plants. Therefore the forester
 
 [idle]
 pics=idle.png
-hotspot=6 10
+hotspot=4 5

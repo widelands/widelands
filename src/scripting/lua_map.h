@@ -97,6 +97,7 @@ public:
 	 */
 	int __eq(lua_State * L);
 	int remove(lua_State * L);
+	int has_attribute(lua_State * L);
 
 	/*
 	 * C Methods
@@ -230,11 +231,17 @@ struct L_HasSoldiers {
 		uint8_t ev;
 
 		bool operator<(const SoldierDescr & ot) const {
-		  if (hp < ot.hp) return true;
-		  if (at < ot.at) return true;
-		  if (de < ot.de) return true;
-		  if (ev < ot.ev) return true;
-		  return false;
+		  bool hp_eq = hp == ot.hp;
+		  bool at_eq = at == ot.at;
+		  bool de_eq = de == ot.de;
+		  bool ev_eq = ev == ot.ev;
+		  if (hp_eq && at_eq && de_eq)
+			  return ev < ot.ev;
+		  if (hp_eq && at_eq)
+			  return de < ot.de;
+		  if (hp_eq)
+			  return at < ot.at;
+		  return hp < ot.hp;
 		}
 		bool operator==(const SoldierDescr & ot) const {
 		  if (hp == ot.hp and at == ot.at and de == ot.de and ev == ot.ev)
@@ -547,6 +554,7 @@ public:
 	 */
 	int __eq(lua_State * L);
 	int region(lua_State * L);
+	int has_movecaps_swim(lua_State *);
 
 	/*
 	 * C methods

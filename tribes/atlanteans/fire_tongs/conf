@@ -2,4 +2,4 @@ help=_The fire tongs are the tools of the smelter, working in the smelting works
 
 [idle]
 pics=idle.png
-hotspot=8 11
+hotspot=5 5

@@ -28,8 +28,8 @@ produce=bread
 
 [idle]
 pics=bakery_i_??.png  # ???
-hotspot=55 55
+hotspot=54 52
 
 [working]
 pics=bakery_i_??.png  # ???
-hotspot=55 55
+hotspot=54 52

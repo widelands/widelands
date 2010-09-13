@@ -135,7 +135,7 @@ public:
 	}
 
 	virtual std::string get_statistics_string();
-	int8_t get_statistics_percent() {return m_last_stat_percent;}
+	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	char const * result_string() const {return m_result_buffer;}
 
 	virtual WaresQueue & waresqueue(Ware_Index);
@@ -228,7 +228,7 @@ protected:  // TrainingSite must have access to this stuff
 	bool                     m_statistics_changed;
 	char                     m_statistics_buffer[40];
 	char                     m_result_buffer   [213];
-	int8_t                   m_last_stat_percent;
+	uint8_t                  m_last_stat_percent;
 	bool                     m_is_stopped;
 };
 

@@ -1,13 +1,14 @@
 size=big
 output=cloth
+buildable=no
 
 [aihints]
 build_material=false
 
-[buildcost]
-trunk=5
-raw_stone=2
-thatchreed=2
+# [buildcost]
+# trunk=5
+# raw_stone=2
+# thatchreed=2
 
 [working positions]
 weaver=1
@@ -28,9 +29,9 @@ produce=cloth
 pics=i_??.png
 hotspot=33 76
 
-[build]
-pics=b_??.png
-hotspot=33 76
+# [build]
+# pics=b_??.png
+# hotspot=33 76
 
 [working]
 pics=w_??.png
