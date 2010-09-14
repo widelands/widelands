@@ -1023,6 +1023,7 @@ void NetHost::setMap
 		player.tribe                = d->settings.tribes.at(0).name;
 		player.initialization_index = 0;
 		player.team = 0;
+		player.partner = 0;
 		++oldplayers;
 	}
 
@@ -1320,6 +1321,8 @@ void NetHost::setPlayerPartner(uint8_t number, uint8_t partner)
 	s.Unsigned8(number);
 	writeSettingPlayer(s, number);
 	broadcast(s);
+
+	log("Player %u has Partner %u\n", number, partner);
 }
 
 void NetHost::setMultiplayerGameSettings()

@@ -332,6 +332,7 @@ int L_Player::get_team(lua_State * L) {
 */
 int L_Player::get_partner(lua_State * L) {
 	lua_pushinteger(L, get(L, get_egbase(L)).partner());
+	log("     Partner is:%i\n", get(L, get_egbase(L)).partner());
 	return 1;
 }
 
@@ -1185,7 +1186,6 @@ int L_Player::allow_workers(lua_State * L) {
 */
 int L_Player::switchplayer(lua_State * L) {
 	Game & game = get_game(L);
-	Player & player = get(L, game);
 	uint8_t newplayer = luaL_checkinteger(L, -1);
 	Interactive_Player * ipl = game.get_ipl();
 	// only switch, if this is our player!
