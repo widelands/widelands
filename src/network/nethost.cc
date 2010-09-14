@@ -101,7 +101,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	virtual void nextPlayerState(uint8_t const number) {
 		if
 			(number == settings().playernum ||
-			 number >= settings().players.size())
+			 number > settings().players.size())
 			return;
 
 		PlayerSettings::State newstate = PlayerSettings::stateClosed;
@@ -110,6 +110,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			newstate = PlayerSettings::stateOpen;
 			break;
 		case PlayerSettings::stateOpen:
+			h->setPlayerPartner(number, 0);
+			// Fallthrough
 		case PlayerSettings::stateHuman:
 		case PlayerSettings::stateComputer:
 			Computer_Player::ImplementationVector const & impls =

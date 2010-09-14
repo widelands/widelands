@@ -554,6 +554,7 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t const pos)
 			m_settings->setPlayerNumber(pos);
 			m_settings->setPlayerName
 				(pos, settings.users.at(settings.usernum).name);
+			m_settings->setPlayerPartner(pos, 0);
 		}
 		return;
 	}
