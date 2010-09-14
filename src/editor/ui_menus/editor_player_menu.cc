@@ -164,6 +164,9 @@ void Editor_Player_Menu::update() {
 		// Set default AI
 		map.set_scenario_player_ai(p, "");
 
+		// Set empty partner
+		map.set_player_partner(p, 0);
+
 		//  Set Starting pos button.
 		if (!m_plr_set_pos_buts[p - 1]) {
 			m_plr_set_pos_buts[p - 1] =

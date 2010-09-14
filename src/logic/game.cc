@@ -390,9 +390,7 @@ bool Game::run_load_game(std::string filename) {
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
-		player_nr = gpdp.get_partner();
-		if (player_nr == 0)
-			player_nr = gpdp.get_player_nr();
+		player_nr = gpdp.get_player_nr();
 
 		set_ibase
 			(new Interactive_Player
@@ -526,6 +524,12 @@ bool Game::run
 		if (m_writesyncstream)
 			m_syncwrapper.StartDump(fname);
 	}
+
+	// If we are in shared kingdom mode, switch the played player in the
+	// local interactive player.
+	if (get_ipl())
+		if (uint8_t p = map().get_player_partner(get_ipl()->player_number()) > 0)
+			get_ipl()->set_player_number(p);
 
 	SyncReset();
 

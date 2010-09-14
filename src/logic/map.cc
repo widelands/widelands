@@ -316,6 +316,7 @@ void Map::cleanup() {
 	m_scenario_tribes.clear();
 	m_scenario_names.clear();
 	m_scenario_ais.clear();
+	m_player_partners.clear();
 
 	if (m_overlay_manager)
 		m_overlay_manager->reset();

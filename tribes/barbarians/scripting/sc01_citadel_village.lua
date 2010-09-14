@@ -3,6 +3,7 @@
 -- =======================================================================
 
 use("aux", "infrastructure")
+use("aux", "shared_kingdom_functions")
 
 set_textdomain("tribe_barbarians")
 
@@ -13,6 +14,9 @@ return {
    p:allow_workers("all")
    
    local sf = p.starting_field
+
+   p = actual_player(p)
+
    local h = p:place_building("citadel", sf)
    h:set_soldiers{[{0,0,0,0}] = 12}
 

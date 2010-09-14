@@ -773,6 +773,7 @@ void MapGenerator::create_random_map()
 			m_map.set_scenario_player_name(n, "Random Player");
 			m_map.set_scenario_player_tribe(n, tribe);
 			m_map.set_scenario_player_ai(n, ai);
+			m_map.set_player_partner(n, 0);
 
 			// Calculate wished coords for player starting position
 			if (line[0] + 1 > n) {

@@ -69,9 +69,9 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				Section & s = prof.get_safe_section(buffer);
-				map->set_scenario_player_name (p, s.get_string("name",    ""));
-				map->set_scenario_player_tribe(p, s.get_string("tribe",   ""));
-				map->set_scenario_player_ai   (p, s.get_string("ai",      ""));
+				map->set_scenario_player_name (p, s.get_string ("name",   ""));
+				map->set_scenario_player_tribe(p, s.get_string ("tribe",  ""));
+				map->set_scenario_player_ai   (p, s.get_string ("ai",     ""));
 				map->set_player_partner       (p, s.get_natural("partner", 0));
 			}
 		} else

@@ -3,6 +3,7 @@
 -- =======================================================================
 
 use("aux", "infrastructure")
+use("aux", "shared_kingdom_functions")
 
 set_textdomain("tribe_empire")
 
@@ -12,6 +13,9 @@ return {
    plr:allow_workers("all")
 
    local sf = plr.starting_field
+
+   plr = actual_player(plr)
+
    local h = plr:place_building("castle", sf)
    h:set_soldiers{[{0,0,0,0}] = 12}
 

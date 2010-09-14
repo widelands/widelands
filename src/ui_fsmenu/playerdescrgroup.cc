@@ -200,13 +200,15 @@ void PlayerDescriptionGroup::refresh()
 			} else
 				// Check if everything is still valid
 				if
-					((settings.players.at(player.partner).team
+					((settings.players.at(player.partner - 1).team
 					  != settings.players.at(d->plnum).team)
 					 ||
-					 (settings.players.at(player.partner).state
+					 settings.players.at(player.partner - 1).partner != 0
+					 ||
+					 (settings.players.at(player.partner - 1).state
 					  == PlayerSettings::stateClosed)
 					 ||
-					 (settings.players.at(player.partner).state
+					 (settings.players.at(player.partner - 1).state
 					  == PlayerSettings::stateOpen))
 				{
 					d->settings->setPlayerPartner(d->plnum, 0);
@@ -214,14 +216,15 @@ void PlayerDescriptionGroup::refresh()
 						(d->plnum, settings.tribes.at(0).name);
 				} else {
 					if
-						(settings.players.at(player.partner).tribe
+						(settings.players.at(player.partner - 1).tribe
 						 != settings.players.at(d->plnum).tribe)
 						{
 							d->settings->setPlayerTribe
-								(d->plnum, settings.players.at(player.partner).tribe);
+								(d->plnum, settings.players.at
+									(player.partner - 1).tribe);
 						}
 					d->btnPlayerTribe->set_title
-						(_("Help ") + settings.players.at(player.partner).name);
+						(_("Help ") + settings.players.at(player.partner - 1).name);
 				}
 			{
 				i18n::Textdomain td(tribepath); // for translated initialisation
@@ -354,10 +357,9 @@ void PlayerDescriptionGroup::toggle_playertribe()
 	std::string nexttribe = settings.tribes.at(0).name;
 
 	if (pl.at(d->plnum).partner > 0) {
-		d->settings->setPlayerPartner(d->plnum, 0);
 		// Check if other players are in players team and are *not*
 		// in shared kingdom mode
-		uint8_t p = pl.at(d->plnum).partner + 1;
+		uint8_t p = pl.at(d->plnum).partner;
 		for (; p < settings.players.size(); ++p) {
 			if (p == d->plnum)
 				continue;
@@ -366,12 +368,14 @@ void PlayerDescriptionGroup::toggle_playertribe()
 				 &&
 				 pl.at(p).partner == 0)
 			{
-				d->settings->setPlayerPartner(d->plnum, p);
+				d->settings->setPlayerPartner(d->plnum, p + 1);
 				d->settings->setPlayerTribe
 					(d->plnum, settings.players.at(p).tribe);
 				return;
 			}
 		}
+		// No other partner found -> set to 0
+		d->settings->setPlayerPartner(d->plnum, 0);
 	} else {
 		bool nextset = false;
 		for (uint32_t i = 0; i < settings.tribes.size() - 1; ++i)
@@ -391,7 +395,7 @@ void PlayerDescriptionGroup::toggle_playertribe()
 					 &&
 					 pl.at(p).partner == 0)
 				{
-					d->settings->setPlayerPartner(d->plnum, p);
+					d->settings->setPlayerPartner(d->plnum, p + 1);
 					d->settings->setPlayerTribe
 						(d->plnum, settings.players.at(p).tribe);
 					return;
