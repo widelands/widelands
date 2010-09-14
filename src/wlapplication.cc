@@ -1896,7 +1896,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 	virtual void setPlayerPartner(uint8_t number, uint8_t partner) {
 		if (number < s.players.size())
-			if (partner < s.players.size()) {
+			if (partner <= s.players.size()) {
 				s.players[number].partner = partner;
 			}
 	}

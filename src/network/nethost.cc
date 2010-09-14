@@ -165,9 +165,9 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if
 			(number >= h->settings().players.size()
 			 or
-			 partner >= h->settings().players.size()
+			 partner > h->settings().players.size()
 			 or
-			 number == partner)
+			 number + 1 == partner)
 			return;
 		
 		if
