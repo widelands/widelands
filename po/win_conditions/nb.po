@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-06-06 22:37+0000\n"
-"Last-Translator: Fredrik Sudmann <fsudmann@gmail.com>\n"
+"PO-Revision-Date: 2010-09-14 20:29+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-09-15 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:75
@@ -23,15 +23,15 @@ msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:114
 msgid "%i trees."
-msgstr ""
+msgstr "%i trær."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:113
 msgid "%s had "
-msgstr ""
+msgstr "%s hadde "
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:74
 msgid "%s has "
-msgstr ""
+msgstr "%s har "
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:111
 msgid "%s owns more than half of the maps area."
@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:118
 msgid "The winner is %s "
-msgstr ""
+msgstr "Vinneren er %s "
 
 #: ../../scripting/win_conditions/00_endless_game.lua:11
 msgid "This is an endless game without rules."
@@ -192,7 +192,7 @@ msgstr "Du har tapt spillet!"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:119
 msgid "with %i trees."
-msgstr ""
+msgstr "med %i trær."
 
 #~ msgid "Game over"
 #~ msgstr "Spillet er slutt"
