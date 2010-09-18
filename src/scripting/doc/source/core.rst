@@ -9,9 +9,10 @@ which are implemented in C++ and provide the glue between Lua and Widelands.
 
    globals
    wl
-   wl_map
-   wl_game
-   wl_ui
+   wl_bases
    wl_debug
+   wl_game
+   wl_map
+   wl_ui
 
 

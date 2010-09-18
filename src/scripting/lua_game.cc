@@ -71,6 +71,8 @@ Player
 
 .. class:: Player(n)
 
+	Child of: :class:`wl.bases.PlayerBase`
+
 	This class represents one of the players in the game. You can access
 	information about this player or act on his behalf.
 
@@ -104,7 +106,6 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
-	PROP_RO(L_Player, number),
 	PROP_RO(L_Player, name),
 	PROP_RO(L_Player, allowed_buildings),
 	PROP_RO(L_Player, objectives),
@@ -118,18 +119,11 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	{0, 0, 0},
 };
 
-L_Player::L_Player(lua_State * L) {
-	m_pl = luaL_checkuint32(L, -1);
-
+L_Player::L_Player(lua_State * L) : 
+	L_PlayerBase(luaL_checkuint32(L, -1))
+{
 	// checks that this is a valid Player
 	get(L, get_egbase(L));
-}
-
-void L_Player::__persist(lua_State * L) {
-	PERS_UINT32("player", m_pl);
-}
-void L_Player::__unpersist(lua_State * L) {
-	UNPERS_UINT32("player", m_pl);
 }
 
 
@@ -138,16 +132,6 @@ void L_Player::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: number
-
-		(RO) The number of this Player.
-*/
-int L_Player::get_number(lua_State * L) {
-	lua_pushuint32(L, m_pl);
-	return 1;
-}
-
 /* RST
 	.. attribute:: name
 
@@ -209,7 +193,7 @@ int L_Player::get_objectives(lua_State * L) {
 */
 int L_Player::get_defeated(lua_State * L) {
 	const std::vector<uint32_t> & nr_workers =
-		get_game(L).get_general_statistics()[m_pl - 1].nr_workers;
+		get_game(L).get_general_statistics()[player_number() - 1].nr_workers;
 
 	if (not nr_workers.empty() and *nr_workers.rbegin() == 0)
 		lua_pushboolean(L, true);
@@ -271,7 +255,7 @@ int L_Player::get_inbox(lua_State * L) {
 			continue;
 
 		lua_pushuint32(L, cidx ++);
-		to_lua<L_Message>(L, new L_Message(m_pl, m.current->first));
+		to_lua<L_Message>(L, new L_Message(player_number(), m.current->first));
 		lua_rawset(L, -3);
 	}
 
@@ -515,7 +499,7 @@ int L_Player::send_message(lua_State * L) {
 				 st),
 			popup);
 
-	return to_lua<L_Message>(L, new L_Message(m_pl, message));
+	return to_lua<L_Message>(L, new L_Message(player_number(), message));
 }
 
 /* RST
@@ -634,7 +618,7 @@ int L_Player::conquer(lua_State * L) {
 
 	get_egbase(L).conquer_area_no_building
 		(Player_Area<Area<FCoords> >
-			(m_pl, Area<FCoords>
+			(player_number(), Area<FCoords>
 				((*get_user_class<L_Field>(L, 2))->fcoords(L), radius))
 	);
 	return 0;
@@ -825,7 +809,7 @@ int L_Player::hide_fields(lua_State * L) {
 */
 // UNTESTED
 int L_Player::reveal_scenario(lua_State * L) {
-	if (get_game(L).get_ipl()->player_number() != m_pl)
+	if (get_game(L).get_ipl()->player_number() != player_number())
 		return report_error(L, "Can only be called for interactive player!");
 
 	Campaign_visibility_save cvs;
@@ -845,7 +829,7 @@ int L_Player::reveal_scenario(lua_State * L) {
 */
 // UNTESTED
 int L_Player::reveal_campaign(lua_State * L) {
-	if (get_game(L).get_ipl()->player_number() != m_pl)
+	if (get_game(L).get_ipl()->player_number() != player_number())
 		return report_error(L, "Can only be called for interactive player!");
 
 	Campaign_visibility_save cvs;
@@ -1151,11 +1135,11 @@ int L_Player::allow_workers(lua_State * L) {
 */
 int L_Player::switchplayer(lua_State * L) {
 	Game & game = get_game(L);
-	Player & player = get(L, game);
+
 	uint8_t newplayer = luaL_checkinteger(L, -1);
 	Interactive_Player * ipl = game.get_ipl();
 	// only switch, if this is our player!
-	if (ipl->player_number() == m_pl) {
+	if (ipl->player_number() == player_number()) {
 		ipl->set_player_number(newplayer);
 	}
 	return 0;
@@ -1207,15 +1191,6 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 
 	return 0;
 }
-Player & L_Player::get(lua_State * L, Widelands::Editor_Game_Base & egbase) {
-	if (m_pl > MAX_PLAYERS)
-		report_error(L, "Illegal player number %i",  m_pl);
-	Player * rv = egbase.get_player(m_pl);
-	if (!rv)
-		report_error(L, "Player with the number %i does not exist", m_pl);
-	return *rv;
-}
-
 
 /* RST
 Objective
@@ -1554,7 +1529,10 @@ void luaopen_wlgame(lua_State * L) {
 	luaL_register(L, "wl.game", wlgame);
 	lua_pop(L, 1); // pop the table
 
-	register_class<L_Player>(L, "game");
+	register_class<L_Player>(L, "game", true);
+	add_parent<L_Player, L_PlayerBase>(L);
+	lua_pop(L, 1); // Pop the meta table
+
 	register_class<L_Objective>(L, "game");
 	register_class<L_Message>(L, "game");
 }

@@ -25,6 +25,7 @@
 #include "logic/building.h"
 #include "logic/message_id.h"
 
+#include "lua_bases.h"
 #include "luna.h"
 
 namespace Widelands {
@@ -41,26 +42,22 @@ class L_GameModuleClass : public LunaClass {
 		const char * get_modulename() {return "game";}
 };
 
-class L_Player : public L_GameModuleClass {
-	Widelands::Player_Number m_pl;
-	enum {NONE = -1};
-
+class L_Player : public L_PlayerBase {
 public:
+	// Overwritten from L_PlayerBase, avoid ambiguity when deriving from 
+	// L_GameModuleClass and L_PlayerBase
+	const char * get_modulename() {return "game";}
+
 	LUNA_CLASS_HEAD(L_Player);
 
-	L_Player() : m_pl(NONE) {}
-	L_Player(Widelands::Player_Number n) {
-		m_pl = n;
-	}
+	L_Player() : L_PlayerBase() {}
+	// TODO: is this constructor needed?
+	L_Player(Widelands::Player_Number n) : L_PlayerBase(n)  {}
 	L_Player(lua_State * L);
-
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
 
 	/*
 	 * Properties
 	 */
-	int get_number(lua_State * L);
 	int get_name(lua_State * L);
 	int get_allowed_buildings(lua_State * L);
 	int get_objectives(lua_State * L);
@@ -102,12 +99,9 @@ public:
 	int allow_workers(lua_State * L);
 	int switchplayer(lua_State * L);
 
-
-
 	/*
 	 * C methods
 	 */
-	Widelands::Player & get(lua_State * L, Widelands::Editor_Game_Base &);
 private:
 	void m_parse_building_list
 		(lua_State *, const Widelands::Tribe_Descr &,

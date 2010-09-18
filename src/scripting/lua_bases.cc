@@ -19,7 +19,11 @@
 
 #include <lua.hpp>
 
+#include "logic/player.h"
+
 #include "lua_bases.h"
+
+using namespace Widelands;
 
 /* RST
 :mod:`wl.bases`
@@ -38,12 +42,92 @@ to create any of the functions in this module directly, but you might
 use their functionality via the child classes.
 */
 
+/*
+ * ========================================================================
+ *                         MODULE CLASSES
+ * ========================================================================
+ */
+
+/* RST
+PlayerBase
+----------
+
+.. class:: PlayerBase
+
+	The Base class for the Player objects in Editor and Game
+*/
+
+const char L_PlayerBase::className[] = "PlayerBase";
+const MethodType<L_PlayerBase> L_PlayerBase::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_PlayerBase> L_PlayerBase::Properties[] = {
+	PROP_RO(L_PlayerBase, number),
+	{0, 0, 0},
+};
+
+void L_PlayerBase::__persist(lua_State * L) {
+	PERS_UINT32("player", m_pl);
+}
+void L_PlayerBase::__unpersist(lua_State * L) {
+	UNPERS_UINT32("player", m_pl);
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: number
+
+		(RO) The number of this Player.
+*/
+int L_PlayerBase::get_number(lua_State * L) {
+	lua_pushuint32(L, m_pl);
+	return 1;
+}
+
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+Player & L_PlayerBase::get
+		(lua_State * L, Widelands::Editor_Game_Base & egbase)
+{
+	if (m_pl > MAX_PLAYERS)
+		report_error(L, "Illegal player number %i",  m_pl);
+	Player * rv = egbase.get_player(m_pl);
+	if (!rv)
+		report_error(L, "Player with the number %i does not exist", m_pl);
+	return *rv;
+}
+
+
+/*
+ * ========================================================================
+ *                            MODULE FUNCTIONS
+ * ========================================================================
+ */
+
+
 const static struct luaL_reg wlbases [] = {
 	{0, 0}
 };
 
-void luaopen_wlbases(lua_State * const l) {
-	luaL_register(l, "wl.bases", wlbases);
-	lua_pop(l, 1); // pop the table from the stack again
+void luaopen_wlbases(lua_State * const L) {
+	luaL_register(L, "wl.bases", wlbases);
+	lua_pop(L, 1); // pop the table from the stack again
+	
+	
+	register_class<L_PlayerBase>(L, "bases");
 }
 
