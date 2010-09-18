@@ -65,6 +65,20 @@ Module Classes
 
 */
 
+
+/*
+ * ========================================================================
+ *                         MODULE CLASSES
+ * ========================================================================
+ */
+
+/* RST
+Module Classes
+^^^^^^^^^^^^^^^^
+
+*/
+
+
 /* RST
 Player
 ------
@@ -81,7 +95,6 @@ Player
 */
 const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {
-	METHOD(L_Player, __eq),
 	METHOD(L_Player, place_flag),
 	METHOD(L_Player, place_building),
 	METHOD(L_Player, send_message),
@@ -299,16 +312,6 @@ int L_Player::get_see_all(lua_State * const L) {
  LUA METHODS
  ==========================================================
  */
-int L_Player::__eq(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	const Player & me = get(L, egbase);
-	const Player & you = (*get_user_class<L_Player>(L, 2))->get(L, egbase);
-
-	lua_pushboolean
-		(L, (me.player_number() == you.player_number()));
-	return 1;
-}
-
 /* RST
 	.. function:: place_flag(field[, force])
 

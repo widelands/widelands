@@ -22,4 +22,5 @@ function test_game:test_players()
    assert_equal(3, p.number)
    assert_equal("Awesome Atlantean", p.name)
 end
+   
 

@@ -232,6 +232,7 @@ function field_resources_tests:test_set_resource_type_illegal_resource()
    assert_error("Illegal name!", function() self.f.resource = "ksjdjhsdf" end)
 end
 
+-- TODO: do not make differences inside a test suite
 function field_resources_tests:test_default_resource()
    -- In game, default resources are set. In the editor, no
    -- default resources are set

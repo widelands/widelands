@@ -62,6 +62,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int __eq(lua_State * L);
 
 	/*
 	 * C methods

@@ -175,7 +175,7 @@ function tab_panel_tests:teardown()
 end
 
 function tab_panel_tests:test_tabs()
-   assert_equal(4, self:_cnt(self.w.tabs))
+   assert_equal(5, self:_cnt(self.w.tabs))
 end
 function tab_panel_tests:test_active()
    assert_equal(true, self.w.tabs.big.active)

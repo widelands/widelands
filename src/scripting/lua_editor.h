@@ -22,6 +22,36 @@
 
 #include <lua.hpp>
 
+#include "lua_bases.h"
+
+class L_EPlayer : public L_PlayerBase {
+public:
+	// Overwritten from L_PlayerBase, avoid ambiguity when deriving from 
+	// L_GameModuleClass and L_PlayerBase
+	const char * get_modulename() {return "game";}
+
+	LUNA_CLASS_HEAD(L_EPlayer);
+
+	L_EPlayer() : L_PlayerBase() {}
+	// TODO: is this constructor needed?
+	L_EPlayer(Widelands::Player_Number n) : L_PlayerBase(n)  {}
+	L_EPlayer(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+private:
+};
+
 void luaopen_wleditor(lua_State *);
+
 
 #endif

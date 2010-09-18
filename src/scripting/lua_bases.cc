@@ -49,6 +49,13 @@ use their functionality via the child classes.
  */
 
 /* RST
+Module Classes
+^^^^^^^^^^^^^^^^
+
+*/
+
+
+/* RST
 PlayerBase
 ----------
 
@@ -59,6 +66,7 @@ PlayerBase
 
 const char L_PlayerBase::className[] = "PlayerBase";
 const MethodType<L_PlayerBase> L_PlayerBase::Methods[] = {
+	METHOD(L_PlayerBase, __eq),
 	{0, 0},
 };
 const PropertyType<L_PlayerBase> L_PlayerBase::Properties[] = {
@@ -105,6 +113,16 @@ int L_PlayerBase::get_tribe(lua_State *L) {
  LUA METHODS
  ==========================================================
  */
+int L_PlayerBase::__eq(lua_State * L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+	const Player & me = get(L, egbase);
+	const Player & you =
+		(*get_base_user_class<L_PlayerBase>(L, 2))->get(L, egbase);
+
+	lua_pushboolean
+		(L, (me.player_number() == you.player_number()));
+	return 1;
+}
 
 /*
  ==========================================================
