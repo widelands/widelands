@@ -40,7 +40,7 @@ end
 --
 --    .. code-block:: lua
 --
---       check_for_buildings(wl.game.Player(1), {lumberjacks_hut=2, quarry=1})
+--       check_for_buildings(wl.Game().players[1], {lumberjacks_hut=2, quarry=1})
 --
 --    :arg plr: Player to check for
 --    :type plr: :class:`wl.game.Player`

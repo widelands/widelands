@@ -4,8 +4,7 @@
 warehouse_tests = lunit.TestCase("warehouse tests")
 function warehouse_tests:setup()
    self.f = wl.Map():get_field(10,10)
-   self.p = wl.game.Player(1)
-   self.w = self.p:place_building("warehouse", self.f)
+   self.w = player1:place_building("warehouse", self.f)
 end
 function warehouse_tests:teardown()
    pcall(self.f.brn.remove, self.w)

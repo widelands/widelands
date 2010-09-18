@@ -151,7 +151,7 @@ int L_Game::get_allow_autosaving(lua_State * L) {
 		(RO) An :class:`array` with the players currently in the game. Note that
 		this might be less then defined in :attr:`wl.Map.player_slots` because
 		some slots might not be taken. Also note that for the same reason you
-		cannot index this array with :attr:`wl.game.Player.number`, but the
+		cannot index this array with :attr:`wl.bases.PlayerBase.number`, but the
 		players are ordered with increasing number in this array.
 */
 int L_Game::get_players(lua_State * L) {

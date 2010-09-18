@@ -14,9 +14,8 @@ end
 militarysite_tests = lunit.TestCase("MilitarySite Tests")
 function militarysite_tests:setup()
    self.f1 = wl.Map():get_field(10,10)
-   self.p = wl.game.Player(1)
 
-   self.fortress = self.p:place_building("fortress", self.f1)
+   self.fortress = player1:place_building("fortress", self.f1)
 end
 function militarysite_tests:teardown()
    pcall(function()

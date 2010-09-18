@@ -7,7 +7,7 @@ set_textdomain("scenario_tutorial.wmf")
 -- ===============
 -- Initialization
 -- ===============
-plr = wl.game.Player(1)
+plr = wl.Game().players[1]
 plr:allow_buildings("all")
 
 -- A default headquarters
@@ -723,7 +723,7 @@ function training()
    end
 
    -- Create enemy tribe
-   prefilled_buildings(wl.game.Player(2),
+   prefilled_buildings(wl.Game().players[2],
       {"barrier", 25, 6},
       {"sentry", 29, 16},
       {"tower", 30, 21},
@@ -740,7 +740,7 @@ function training()
    scroll_smoothly_to(citadel_field)
    local o = msg_box(attack_enemey)
 
-   local plr2 = wl.game.Player(2)
+   local plr2 = wl.Game().players[2]
    while #plr2:get_buildings("headquarters") > 0 or not plr2.defeated do
       sleep(3000)
    end

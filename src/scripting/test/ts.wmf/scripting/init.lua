@@ -6,6 +6,9 @@ include "test_cplayer"
 
 if not wl.editor then
    include "test_game"
+
+   include "gconstants"
+
    include "test_objectives"
    include "test_messages"
 
@@ -26,5 +29,5 @@ rv = lunit:run()
 if rv == 0 then -- No errors in the testsuite. Exit.
    wl.debug.exit()
 elseif not wl.editor then
-   wl.game.Player(1).see_all = true -- Reveal everything, easier for debugging
+   player1.see_all = true -- Reveal everything, easier for debugging
 end

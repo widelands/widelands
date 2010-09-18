@@ -13,10 +13,9 @@ end
 road_construction_tests = lunit.TestCase("road construction tests")
 function road_construction_tests:setup()
    self.f = wl.Map():get_field(10,10)
-   self.p = wl.game.Player(1)
-   self.p:conquer(f, 6)
+   player1:conquer(f, 6)
 
-   self.start_flag = self.p:place_flag(self.f)
+   self.start_flag = player1:place_flag(self.f)
    self.flags = {
       self.start_flag
    }
@@ -29,38 +28,38 @@ function road_construction_tests:teardown()
    end)
 end
 function road_construction_tests:test_simple()
-   r = self.p:place_road(self.start_flag, "r", "br", "r")
+   r = player1:place_road(self.start_flag, "r", "br", "r")
    self.flags[#self.flags+1] = self.f.rn.brn.rn.immovable
    assert_equal(3, r.length)
 end
 function road_construction_tests:test_too_short()
    assert_error("can't place flag", function()
-      self.p:place_road(self.start_flag, "r")
+      player1:place_road(self.start_flag, "r")
    end)
 end
 function road_construction_tests:test_connect_two_flags()
-   self.flags[#self.flags+1] = self.p:place_flag(self.f.rn.rn)
-   r = self.p:place_road(self.start_flag,"r", "r")
+   self.flags[#self.flags+1] = player1:place_flag(self.f.rn.rn)
+   r = player1:place_road(self.start_flag,"r", "r")
    assert_equal(2, r.length)
 end
 function road_construction_tests:test_road_crosses_another()
-   self.flags[#self.flags+1] = self.p:place_flag(self.f.rn.rn.rn.rn)
-   r = self.p:place_road(self.start_flag,"r", "r", "r", "r")
+   self.flags[#self.flags+1] = player1:place_flag(self.f.rn.rn.rn.rn)
+   r = player1:place_road(self.start_flag,"r", "r", "r", "r")
    assert_equal(4, r.length)
-   self.flags[#self.flags+1] = self.p:place_flag(self.f.rn.rn.tln.tln)
-   self.flags[#self.flags+1] = self.p:place_flag(self.f.rn.rn.brn.brn)
+   self.flags[#self.flags+1] = player1:place_flag(self.f.rn.rn.tln.tln)
+   self.flags[#self.flags+1] = player1:place_flag(self.f.rn.rn.brn.brn)
    assert_error("Immovable in the way", function()
-      r = self.p:place_road(self.flags[3],"br", "br", "br", "br")
+      r = player1:place_road(self.flags[3],"br", "br", "br", "br")
    end)
 end
 function road_construction_tests:test_road_is_closed_loop()
    assert_error("Cannot build closed loop", function()
-      self.p:place_road(self.start_flag,"r", "r", "tl", "tl", "bl", "bl")
+      player1:place_road(self.start_flag,"r", "r", "tl", "tl", "bl", "bl")
    end)
 end
 function road_construction_tests:test_road_crosses_itself()
    assert_error("The road crosses itself", function()
-      self.p:place_road(self.start_flag,"r", "r", "r", "tl", "bl", "bl")
+      player1:place_road(self.start_flag,"r", "r", "r", "tl", "bl", "bl")
    end)
 end
 
@@ -70,12 +69,11 @@ end
 road_tests = lunit.TestCase("road tests")
 function road_tests:setup()
    self.f = wl.Map():get_field(10,10)
-   self.p = wl.game.Player(1)
-   self.p:conquer(f, 6)
+   player1:conquer(f, 6)
 
-   self.start_flag = self.p:place_flag(self.f)
+   self.start_flag = player1:place_flag(self.f)
 
-   self.r = self.p:place_road(self.start_flag, "r", "r", "br", "br")
+   self.r = player1:place_road(self.start_flag, "r", "r", "br", "br")
    self.end_flag = self.f.rn.rn.brn.brn.immovable
 end
 function road_tests:teardown()

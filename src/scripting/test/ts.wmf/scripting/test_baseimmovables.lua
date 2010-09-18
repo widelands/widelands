@@ -98,11 +98,11 @@ immovable_property_tests = lunit.TestCase("Immovable sizes")
 function immovable_property_tests:setup()
    self.none = wl.Map():place_immovable("pebble1", wl.Map():get_field(19, 10))
    self.small = wl.Map():place_immovable("tree1", wl.Map():get_field(18, 10))
-   self.medium = wl.game.Player(1):place_building(
+   self.medium = player1:place_building(
       "burners_house", wl.Map():get_field(10,10)
    )
    self.big = wl.Map():place_immovable("stones4", wl.Map():get_field(20, 10))
-   self.big_building = wl.game.Player(1):place_building(
+   self.big_building = player1:place_building(
       "fortress", wl.Map():get_field(15,11)
    )
 end
@@ -193,15 +193,14 @@ end
 -- ================
 plr_immovables_test = lunit.TestCase("Player Immovables")
 function plr_immovables_test:setup()
-   self.p = wl.game.Player(1)
-   self.f = self.p:place_flag(wl.Map():get_field(13,10), 1)
+   self.f = player1:place_flag(wl.Map():get_field(13,10), 1)
 end
 function plr_immovables_test:teardown()
    pcall(self.f.remove, self.f)
 end
 
 function plr_immovables_test:test_owner()
-   assert_equal(self.p.number, self.f.player.number)
-   assert_equal(self.p, self.f.player)
+   assert_equal(player1.number, self.f.player.number)
+   assert_equal(player1, self.f.player)
 end
 

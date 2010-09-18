@@ -131,15 +131,6 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	{0, 0, 0},
 };
 
-
-L_Player::L_Player(lua_State * L) : 
-	L_PlayerBase(luaL_checkuint32(L, -1))
-{
-	// checks that this is a valid Player
-	get(L, get_egbase(L));
-}
-
-
 /*
  ==========================================================
  PROPERTIES

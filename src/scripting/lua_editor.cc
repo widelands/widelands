@@ -68,14 +68,6 @@ const PropertyType<L_EPlayer> L_EPlayer::Properties[] = {
 };
 
 
-L_EPlayer::L_EPlayer(lua_State * L) : 
-	L_PlayerBase(luaL_checkuint32(L, -1))
-{
-	// checks that this is a valid Player
-	get(L, get_egbase(L));
-}
-
-
 /*
  * ========================================================================
  *                            MODULE FUNCTIONS

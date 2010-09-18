@@ -8,9 +8,8 @@ end
 -- ===================
 flag_tests = lunit.TestCase("flag tests")
 function flag_tests:setup()
-   self.p = wl.game.Player(1)
    self.field = wl.Map():get_field(13,10)
-   self.f = self.p:place_flag(self.field, 1)
+   self.f = player1:place_flag(self.field, 1)
 end
 function flag_tests:teardown()
    pcall(self.f.remove, self.f)
@@ -91,8 +90,7 @@ end
 -- =========
 flag_tests_get_ware = lunit.TestCase("flag tests: get_ware")
 function flag_tests_get_ware:setup()
-   self.p = wl.game.Player(1)
-   self.f = self.p:place_flag(wl.Map():get_field(13,10), 1)
+   self.f = player1:place_flag(wl.Map():get_field(13,10), 1)
    self.f:set_wares{trunk = 2, raw_stone = 2, coal = 1}
 end
 function flag_tests_get_ware:teardown()

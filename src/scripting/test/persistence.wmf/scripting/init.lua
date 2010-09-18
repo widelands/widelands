@@ -17,7 +17,7 @@ eight = 8
 is_true = true
 is_false = false
 
-p = wl.game.Player(1)
+p = wl.Game().players[1]
 a = { "Hallo", "Welt" }
 c = { func = function(a) return "I say " .. a .. "!" end }
 field = wl.Map():get_field(32,34)

@@ -33,9 +33,10 @@ public:
 	LUNA_CLASS_HEAD(L_EPlayer);
 
 	L_EPlayer() : L_PlayerBase() {}
-	// TODO: is this constructor needed?
 	L_EPlayer(Widelands::Player_Number n) : L_PlayerBase(n)  {}
-	L_EPlayer(lua_State * L);
+	L_EPlayer(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'EPlayer' directly!");
+	}
 
 	/*
 	 * Properties

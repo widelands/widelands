@@ -180,7 +180,7 @@ end
 -- Better building materials thread
 -- =================================
 function build_materials_thread()
-   local plr = wl.game.Player(1)
+   local plr = wl.Game().players[1]
 
    -- Wait for a barrier or a sentry to be build
    while true do
@@ -273,7 +273,7 @@ end
 -- Village thread
 -- ===============
 function village_thread()
-   local plr = wl.game.Player(1)
+   local plr = wl.Game().players[1]
    while not (plr:seen_field(wl.Map():get_field(52,39)) or
               plr:seen_field(wl.Map():get_field(58,10))) do
          sleep(6534)
@@ -361,7 +361,7 @@ function reveal_village()
       { "field2", 55, 35, "barbarians" },
    }
 
-   local plr = wl.game.Player(1)
+   local plr = wl.Game().players[1]
    prefilled_buildings(plr,
       {"sentry", 57, 9},
       {"sentry", 52, 39},

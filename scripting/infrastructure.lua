@@ -14,7 +14,7 @@
 --
 --    .. code-block:: lua
 --       
---       connected_road(wl.game.Player(1), wl.Map():get_field(20,20).immovable, "r,r|br,r|r,r")
+--       connected_road(wl.Game().players[1], wl.Map():get_field(20,20).immovable, "r,r|br,r|r,r")
 --
 --    This would create a road starting from the Flag standing at field(20,20)
 --    which must exist and goes from there 2 steps right (east), places a new
@@ -61,7 +61,7 @@ end
 --
 --    .. code-block:: lua
 --
---       prefilled_buildings(wl.game.Player(1),
+--       prefilled_buildings(wl.Game().players[1],
 --          {"sentry", 57, 9}, -- Sentry completely full with soldiers
 --          {"sentry", 57, 9, soldier={[{0,0,0,0}]=1}}, -- Sentry with one soldier
 --          {"bakery", 55, 20, wares = {wheat=6, water=6}}, -- bakery with wares and workers

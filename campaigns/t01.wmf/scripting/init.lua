@@ -8,7 +8,7 @@ set_textdomain("scenario_t01.wmf")
 -- Initialization
 -- ===============
 
-p = wl.game.Player(1)
+p = wl.Game().players[1]
 
 -- Only lumberjack buildings are allowed
 p:forbid_buildings("all")
@@ -37,7 +37,7 @@ grave = wl.Map():get_field(25,22)
 
 -- This function can move to a place, display a modal message box and return
 function show_story_box(t, m, pos, gposx, gposy)
-   plr = wl.game.Player(1)
+   plr = wl.Game().players[1]
    posx = gposx
    posy = gposy
    local pts = nil

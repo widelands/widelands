@@ -51,9 +51,10 @@ public:
 	LUNA_CLASS_HEAD(L_Player);
 
 	L_Player() : L_PlayerBase() {}
-	// TODO: is this constructor needed?
 	L_Player(Widelands::Player_Number n) : L_PlayerBase(n)  {}
-	L_Player(lua_State * L);
+	L_Player(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'Player' directly!");
+	}
 
 	/*
 	 * Properties
