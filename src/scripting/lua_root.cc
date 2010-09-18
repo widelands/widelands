@@ -33,6 +33,8 @@
 
 using namespace Widelands;
 
+namespace LuaRoot {
+
 /* RST
 :mod:`wl`
 ======================
@@ -166,7 +168,7 @@ int L_Game::get_players(lua_State * L) {
 			continue;
 
 		lua_pushuint32(L, idx++);
-		to_lua<L_Player>(L, new L_Player(i));
+		to_lua<LuaGame::L_Player>(L, new LuaGame::L_Player(i));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -284,7 +286,7 @@ int L_Map::get_player_slots(lua_State * L) {
 	lua_createtable(L, m.get_nrplayers(), 0);
 	for(uint32_t i = 0; i < m.get_nrplayers(); i++) {
 		lua_pushuint32(L, i+1);
-		to_lua<L_PlayerSlot>(L, new L_PlayerSlot(i+1));
+		to_lua<LuaMap::L_PlayerSlot>(L, new LuaMap::L_PlayerSlot(i+1));
 		lua_settable(L, -3);
 	}
 
@@ -317,7 +319,7 @@ int L_Map::place_immovable(lua_State * const L) {
 	std::string from_where = "world";
 
 	char const * const objname = luaL_checkstring(L, 2);
-	L_Field * c = *get_user_class<L_Field>(L, 3);
+	LuaMap::L_Field * c = *get_user_class<LuaMap::L_Field>(L, 3);
 	if (lua_gettop(L) > 3 and not lua_isnil(L, 4))
 		from_where = luaL_checkstring(L, 4);
 
@@ -357,7 +359,7 @@ int L_Map::place_immovable(lua_State * const L) {
 		m = &egbase.create_immovable(c->coords(), imm_idx, 0);
 	}
 
-	return upcasted_immovable_to_lua(L, m);
+	return LuaMap::upcasted_immovable_to_lua(L, m);
 }
 
 /* RST
@@ -410,7 +412,7 @@ int L_Map::get_field(lua_State * L) {
 	if (y >= static_cast<uint32_t>(m.get_height()))
 		report_error(L, "y coordinate out of range!");
 
-	return to_lua<L_Field>(L, new L_Field(x, y));
+	return to_lua<LuaMap::L_Field>(L, new LuaMap::L_Field(x, y));
 }
 
 
@@ -432,4 +434,6 @@ void luaopen_wlroot(lua_State * L) {
 	register_class<L_Game>(L, "");
 	register_class<L_Map>(L, "");
 }
+
+};
 

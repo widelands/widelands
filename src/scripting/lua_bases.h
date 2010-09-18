@@ -24,6 +24,8 @@
 
 #include "luna.h"
 
+namespace LuaBases {
+
 /*
  * Base class for all classes in wl.base
  */
@@ -74,5 +76,7 @@ protected:
 };
 
 void luaopen_wlbases(lua_State *);
+
+};
 
 #endif

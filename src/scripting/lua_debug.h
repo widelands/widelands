@@ -22,6 +22,10 @@
 
 #include <lua.hpp>
 
+namespace LuaDebug {
+
 void luaopen_wldebug(lua_State *);
+
+};
 
 #endif

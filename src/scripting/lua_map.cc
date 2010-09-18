@@ -41,6 +41,8 @@
 
 using namespace Widelands;
 
+namespace LuaMap {
+
 /* RST
 :mod:`wl.map`
 =============
@@ -1058,8 +1060,9 @@ const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
 */
 int L_PlayerImmovable::get_player(lua_State * L) {
 	return
-		to_lua<L_Player>
-			(L, new L_Player (get(L, get_egbase(L))->get_owner()->player_number())
+		to_lua<LuaGame::L_Player>
+			(L, new LuaGame::L_Player
+			 (get(L, get_egbase(L))->get_owner()->player_number())
 	);
 }
 
@@ -2100,8 +2103,8 @@ int L_Field::get_owners(lua_State * L) {
 			continue;
 
 		lua_pushuint32(L, cidx ++);
-		to_lua<L_Player>
-			(L, new L_Player (i.current->first));
+		to_lua<LuaGame::L_Player>
+			(L, new LuaGame::L_Player (i.current->first));
 		lua_rawset(L, -3);
 	}
 
@@ -2373,4 +2376,6 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_TrainingSite, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 }
+
+};
 

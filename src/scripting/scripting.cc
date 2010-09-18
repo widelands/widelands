@@ -41,7 +41,6 @@
 #include <ctype.h> // for tolower
 #endif
 
-// TODO: add wl.editor to documentation
 // TODO: Roads are not rendered in the Editor. Fixe mark_map, post and presplit
 // TODO: remove wl.debug
 // TODO: get_game should throw an error if not called in the game.
@@ -238,8 +237,8 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
 
 	// Now our own
-	luaopen_wlroot(m_L);
-	luaopen_globals(m_L);
+	LuaRoot::luaopen_wlroot(m_L);
+	LuaGlobals::luaopen_globals(m_L);
 
 	register_scripts(*g_fs, "aux");
 }
@@ -352,11 +351,11 @@ LuaEditorGameBaseInterface_Impl::LuaEditorGameBaseInterface_Impl
 	(Widelands::Editor_Game_Base * g) :
 LuaInterface()
 {
-	luaopen_wldebug(m_L);
-	luaopen_wlbases(m_L);
-	luaopen_wlmap(m_L);
-	luaopen_wlgame(m_L);
-	luaopen_wlui(m_L);
+	LuaDebug::luaopen_wldebug(m_L);
+	LuaBases::luaopen_wlbases(m_L);
+	LuaMap::luaopen_wlmap(m_L);
+	LuaGame::luaopen_wlgame(m_L);
+	LuaUi::luaopen_wlui(m_L);
 
 	// Push the editor game base
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));
@@ -379,7 +378,7 @@ LuaEditorInterface_Impl::LuaEditorInterface_Impl
 	(Widelands::Editor_Game_Base * g) :
 LuaEditorGameBaseInterface_Impl(g)
 {
-	luaopen_wleditor(m_L);
+	LuaEditor::luaopen_wleditor(m_L);
 }
 
 

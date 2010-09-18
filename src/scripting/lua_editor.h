@@ -24,18 +24,20 @@
 
 #include "lua_bases.h"
 
-class L_EPlayer : public L_PlayerBase {
+namespace LuaEditor {
+
+class L_Player : public LuaBases::L_PlayerBase {
 public:
-	// Overwritten from L_PlayerBase, avoid ambiguity when deriving from 
+	// Overwritten from L_PlayerBase, avoid ambiguity when deriving from
 	// L_GameModuleClass and L_PlayerBase
 	const char * get_modulename() {return "game";}
 
-	LUNA_CLASS_HEAD(L_EPlayer);
+	LUNA_CLASS_HEAD(L_Player);
 
-	L_EPlayer() : L_PlayerBase() {}
-	L_EPlayer(Widelands::Player_Number n) : L_PlayerBase(n)  {}
-	L_EPlayer(lua_State * L) {
-		report_error(L, "Cannot instantiate a 'EPlayer' directly!");
+	L_Player() : LuaBases::L_PlayerBase() {}
+	L_Player(Widelands::Player_Number n) : LuaBases::L_PlayerBase(n)  {}
+	L_Player(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'Player' directly!");
 	}
 
 	/*
@@ -53,6 +55,8 @@ private:
 };
 
 void luaopen_wleditor(lua_State *);
+
+};
 
 
 #endif

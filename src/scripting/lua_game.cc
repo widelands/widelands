@@ -39,7 +39,9 @@
 #include "lua_game.h"
 
 using namespace Widelands;
+using namespace LuaMap;
 
+namespace LuaGame {
 
 /* RST
 :mod:`wl.game`
@@ -66,32 +68,18 @@ Module Classes
 */
 
 
-/*
- * ========================================================================
- *                         MODULE CLASSES
- * ========================================================================
- */
-
-/* RST
-Module Classes
-^^^^^^^^^^^^^^^^
-
-*/
-
-
 /* RST
 Player
 ------
 
-.. class:: Player(n)
+.. class:: Player
 
 	Child of: :class:`wl.bases.PlayerBase`
 
 	This class represents one of the players in the game. You can access
-	information about this player or act on his behalf.
-
-	:arg n: player number, range is 1 - :const:`number of players`
-	:type n: Integer
+	information about this player or act on his behalf. Note that you cannot
+	instantiate a class of this type directly, use the :attr:`wl.Game.players`
+	insteadl
 */
 const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {
@@ -1514,10 +1502,12 @@ void luaopen_wlgame(lua_State * L) {
 	lua_pop(L, 1); // pop the table
 
 	register_class<L_Player>(L, "game", true);
-	add_parent<L_Player, L_PlayerBase>(L);
+	add_parent<L_Player, LuaBases::L_PlayerBase>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_Objective>(L, "game");
 	register_class<L_Message>(L, "game");
 }
+
+};
 

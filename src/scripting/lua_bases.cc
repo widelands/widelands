@@ -25,6 +25,8 @@
 
 using namespace Widelands;
 
+namespace LuaBases {
+
 /* RST
 :mod:`wl.bases`
 ==================
@@ -155,8 +157,10 @@ const static struct luaL_reg wlbases [] = {
 void luaopen_wlbases(lua_State * const L) {
 	luaL_register(L, "wl.bases", wlbases);
 	lua_pop(L, 1); // pop the table from the stack again
-	
-	
+
+
 	register_class<L_PlayerBase>(L, "bases");
 }
+
+};
 

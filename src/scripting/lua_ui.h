@@ -29,7 +29,7 @@
 
 #include "luna.h"
 
-void luaopen_wlui(lua_State *);
+namespace LuaUi {
 
 /*
  * Base class for all classes in wl.ui
@@ -204,4 +204,9 @@ public:
 	 */
    Interactive_Base * get() { return static_cast<Interactive_Base *>(m_panel); }
 };
+
+void luaopen_wlui(lua_State *);
+
+};
+
 #endif

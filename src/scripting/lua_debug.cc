@@ -27,6 +27,7 @@
 #include "logic/player.h"
 #include "wui/interactive_player.h"
 
+namespace LuaDebug {
 
 /* RST
 :mod:`wl.debug`
@@ -108,4 +109,6 @@ void luaopen_wldebug(lua_State * const l) {
 
 	lua_pop(l, 1); // pop the table from the stack again
 }
+
+};
 

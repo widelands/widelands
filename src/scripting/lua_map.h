@@ -35,11 +35,11 @@
 
 #include "luna.h"
 
-void luaopen_wlmap(lua_State *);
-
 namespace Widelands {
 	struct Soldier_Descr;
 }
+
+namespace LuaMap {
 
 /*
  * Base class for all classes in wl.map
@@ -594,5 +594,10 @@ public:
 };
 
 int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
+
+void luaopen_wlmap(lua_State *);
+
+
+};
 
 #endif

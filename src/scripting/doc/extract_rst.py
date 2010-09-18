@@ -12,6 +12,7 @@ import sys
 cpp_pairs = (
     ("../lua_root.cc", "source/wl.rst"),
     ("../lua_bases.cc", "source/wl_bases.rst"),
+    ("../lua_editor.cc", "source/wl_editor.rst"),
     ("../lua_map.cc", "source/wl_map.rst"),
     ("../lua_game.cc", "source/wl_game.rst"),
     ("../lua_debug.cc", "source/wl_debug.rst"),

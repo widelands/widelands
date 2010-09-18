@@ -24,6 +24,8 @@
 
 #include "luna.h"
 
+namespace LuaRoot {
+
 /*
  * Base class for all classes in wl
  */
@@ -95,4 +97,6 @@ private:
 void luaopen_wlroot(lua_State *);
 
 #endif
+};
+
 
