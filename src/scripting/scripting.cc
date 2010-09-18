@@ -25,6 +25,7 @@
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
+#include "lua_bases.h"
 #include "lua_debug.h"
 #include "lua_editor.h"
 #include "lua_game.h"
@@ -41,6 +42,7 @@
 #endif
 
 // TODO: add wl.editor to documentation
+// TODO: add wl.bases to documentation
 // TODO: Roads are not rendered in the Editor. Fixe mark_map, post and presplit
 // TODO: remove wl.debug
 // TODO: get_game should throw an error if not called in the game.
@@ -200,7 +202,7 @@ bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	m_L = lua_open();
 
-	// Open the lua libraries
+	// Open the Lua libraries
 #ifdef DEBUG
 	static const luaL_Reg lualibs[] = {
 		{"", luaopen_base},
@@ -352,6 +354,7 @@ LuaEditorGameBaseInterface_Impl::LuaEditorGameBaseInterface_Impl
 LuaInterface()
 {
 	luaopen_wldebug(m_L);
+	luaopen_wlbases(m_L);
 	luaopen_wlmap(m_L);
 	luaopen_wlgame(m_L);
 	luaopen_wlui(m_L);
@@ -409,13 +412,13 @@ struct LuaGameInterface_Impl : public LuaEditorGameBaseInterface_Impl,
 /*
  * Special handling of math.random.
  *
- * We inject this function to make sure that lua uses our random number
+ * We inject this function to make sure that Lua uses our random number
  * generator.  This guarantees that the game stays in sync over the network and
  * in replays. Obviously, we only do this for LuaGameInterface, not for
  * the others.
  *
  * The function was designed to simulate the standard math.random function and
- * was therefore nearly verbatimly copied from the lua sources.
+ * was therefore copied nearly verbatim from the Lua sources.
  */
 static int L_math_random(lua_State * L) {
 	Widelands::Game & game = get_game(L);
@@ -534,7 +537,7 @@ uint32_t LuaGameInterface_Impl::write_global_env
 ============================================
 */
 /*
- * Factory Function, create lua interfaces for the following use cases:
+ * Factory Function, create Lua interfaces for the following use cases:
  *
  * "game": load all libraries needed for the game to run properly
  */
