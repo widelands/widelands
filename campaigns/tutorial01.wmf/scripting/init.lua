@@ -310,6 +310,9 @@ function bad_boy_sentry()
 
                -- Remove the object again
                f.immovable:remove()
+
+               -- Make sure that the user is not building a road at the moment.
+               wl.ui.MapView():abort_road_building()
             end
          end
       end
@@ -353,6 +356,7 @@ function starting_infos()
       sleep(200)
    end
    o.done = true
+   wl.ui.MapView():abort_road_building()
 
    sleep(500)
 
@@ -465,7 +469,7 @@ function build_a_quarry()
    end
 
    -- Wait for the constructionsite to be placed
-   while not cs do sleep(300) end
+   while not cs do sleep(200) end
    o.done = true
    register_immovable_as_allowed(cs)
 
@@ -533,6 +537,8 @@ function census_and_statistics(field)
 
    wl.ui.MapView().census = false
    wl.ui.MapView().statistics = false
+               
+   wl.ui.MapView():abort_road_building()
   
    msg_box(census_and_statistics_00)
    -- Pick any empty field

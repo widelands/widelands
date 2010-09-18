@@ -497,6 +497,7 @@ MapView
 const char L_MapView::className[] = "MapView";
 const MethodType<L_MapView> L_MapView::Methods[] = {
 	METHOD(L_MapView, click),
+	METHOD(L_MapView, abort_road_building),
 	{0, 0},
 };
 const PropertyType<L_MapView> L_MapView::Properties[] = {
@@ -610,6 +611,18 @@ int L_MapView::click(lua_State * L) {
 	get()->warp_mouse_to_node((*get_user_class<L_Field>(L, 2))->coords());
 	get()->fieldclicked.call();
 	return 0;
+}
+
+/* RST
+	.. method:: abort_road_building
+
+		If the player is currently in road building mode, this will cancel it.
+		If he wasn't, this will do nothing.
+*/
+int L_MapView::abort_road_building(lua_State * L) {
+	Interactive_Base* me = get();
+	if (me->is_building_road())
+		me->abort_build_road();
 }
 
 /*
