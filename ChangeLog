@@ -1,7 +1,5 @@
 ### Build 16 (until now)
 - Improved and added a lot new animations for workers!
-- Added a "Share kingdom" starting condition to share a kingdom with other
-  players.
 - Implemented teamview for allied players
 - Do not show building statistic informations of opposing players anymore
 - Gave foresters more intelligence - now they do not remove young trees to
