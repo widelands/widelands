@@ -152,7 +152,7 @@ objects that are in the global scope:
 .. code-block:: lua
 
    print("Hello World!")
-   map = wl.Map()
+   map = wl.Game().map
    hq = map.player_slots[1].starting_field.immovable -- If this is a normal map
    hq:set_workers("builder", 100)
 

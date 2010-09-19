@@ -21,9 +21,10 @@ return {
 
 		-- Get all valueable fields of the map
 		local fields = {}
-		for x=0,wl.Map().width-1 do
-			for y=0,wl.Map().height-1 do
-				local f = wl.Map():get_field(x,y)
+      local map = wl.Game().map
+		for x=0,map.width-1 do
+			for y=0,map.height-1 do
+				local f = map:get_field(x,y)
 				if f then
 					-- add this field to the list as long as it has not movecaps swim
 					if not f.has_movecaps_swim(f) then

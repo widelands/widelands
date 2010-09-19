@@ -165,7 +165,7 @@ end
 function tab_panel_tests:setup()
    local mv = wl.ui.MapView()
    for n,w in pairs(mv.windows) do w:close() end
-   mv:click(wl.Map():get_field(10,10))
+   mv:click(map:get_field(10,10))
    self.w = mv.windows.field_action
 end
 function tab_panel_tests:teardown()
@@ -197,7 +197,7 @@ function mv_tests:setup()
 end
 
 function mv_tests:test_click()
-   self.mv:click(wl.Map():get_field(10,10))
+   self.mv:click(map:get_field(10,10))
    assert_not_equal(nil, self.mv.windows.field_action)
 end
 

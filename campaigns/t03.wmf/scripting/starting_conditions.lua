@@ -12,7 +12,7 @@ p1:allow_buildings{
    "sentry",
 }
 
-hq = p1:place_building("headquarters", wl.Map():get_field(52, 33))
+hq = p1:place_building("headquarters", wl.Game().map:get_field(52, 33))
 hq:set_wares{
    axe=6,
    bakingtray=2,
@@ -62,7 +62,7 @@ hq:set_soldiers({0,0,0,0}, 45)
 p2:forbid_buildings("all")
 p2:allow_buildings{"lumberjacks_hut"}
 
-wh = p2:place_building("warehouse", wl.Map():get_field(100,25))
+wh = p2:place_building("warehouse", wl.Game().map:get_field(100,25))
 wh:set_wares{trunk=200}
 wh:set_workers{ carrier=40, builder=1, lumberjack=4 }
 
@@ -109,7 +109,7 @@ prefilled_buildings(p3,
 --                                 Player 4                                 
 -- =======================================================================
 p4:forbid_buildings("all")
-wh = p4:place_building("warehouse", wl.Map():get_field(132,110))
+wh = p4:place_building("warehouse", wl.Game().map:get_field(132,110))
 wh:set_wares{trunk=10}
 wh:set_workers{carrier=40, builder=1, blacksmith=1, ["master-blacksmith"]=1}
 

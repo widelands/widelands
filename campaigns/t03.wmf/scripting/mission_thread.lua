@@ -3,10 +3,10 @@
 -- =======================================================================
 
 -- Mountain and frontier fields
-mountain = wl.Map():get_field(71,14)
-fr1 = wl.Map():get_field(81,108)
-fr2 = wl.Map():get_field(85,1)
-fr3 = wl.Map():get_field(85,11)
+mountain = wl.Game().map:get_field(71,14)
+fr1 = wl.Game().map:get_field(81,108)
+fr2 = wl.Game().map:get_field(85,1)
+fr3 = wl.Game().map:get_field(85,11)
 
 function remember_cattlefarm()
    sleep(100)
@@ -57,19 +57,19 @@ function foottracks()
    local game = wl.Game()
    while true do
       if (game.time > 240000 and #p1:get_buildings("hunters_hut") > 0)
-         or p1:seen_field(wl.Map():get_field(65, 28)) 
+         or p1:seen_field(wl.Game().map:get_field(65, 28)) 
       then break end
       sleep(4239)
    end
 
    local fields = array_combine(
-      wl.Map():get_field(67, 19):region(2),
-      wl.Map():get_field(65, 19):region(2),
-      wl.Map():get_field(69, 18):region(2)
+      wl.Game().map:get_field(67, 19):region(2),
+      wl.Game().map:get_field(65, 19):region(2),
+      wl.Game().map:get_field(69, 18):region(2)
    )
    p1:reveal_fields(fields)
    
-   local pts = scroll_smoothly_to(wl.Map():get_field(67,19))
+   local pts = scroll_smoothly_to(wl.Game().map:get_field(67,19))
 
    send_msg(order_msg_2_build_a_donjon)
    local o = add_obj(obj_build_a_donjon)
@@ -107,12 +107,12 @@ function mining_and_trainingsites()
 
    -- Show the other mountains permanently
    p1:reveal_fields(array_combine(
-      wl.Map():get_field(77, 98):region(7),
-      wl.Map():get_field(79, 6):region(5),
-      wl.Map():get_field(82, 20):region(6))
+      wl.Game().map:get_field(77, 98):region(7),
+      wl.Game().map:get_field(79, 6):region(5),
+      wl.Game().map:get_field(82, 20):region(6))
    )
 
-   local pts = scroll_smoothly_to(wl.Map():get_field(82,20))
+   local pts = scroll_smoothly_to(wl.Game().map:get_field(82,20))
 
    send_msg(order_msg_4_build_mining_economy)
    local o = add_obj(obj_build_mining_economy) 
@@ -215,10 +215,10 @@ end
 function expansion()
    -- While enemy has not been seen
    while not (
-      p1:seen_field(wl.Map():get_field(95, 91)) or
-      p1:seen_field(wl.Map():get_field(96, 107)) or
-      p1:seen_field(wl.Map():get_field(96, 8)) or
-      p1:seen_field(wl.Map():get_field(96, 19))
+      p1:seen_field(wl.Game().map:get_field(95, 91)) or
+      p1:seen_field(wl.Game().map:get_field(96, 107)) or
+      p1:seen_field(wl.Game().map:get_field(96, 8)) or
+      p1:seen_field(wl.Game().map:get_field(96, 19))
       )
    do sleep(8374) end
 
@@ -233,13 +233,14 @@ end
 
 function kalitath()
    -- While no contact with kalithat
+   local map = wl.Game().map
    while not (
-      p1:seen_field(wl.Map():get_field( 92,  91)) or
-      p1:seen_field(wl.Map():get_field(102, 103)) or
-      p1:seen_field(wl.Map():get_field(103,   0)) or
-      p1:seen_field(wl.Map():get_field(103,  11)) or
-      p1:seen_field(wl.Map():get_field(103,  17)) or
-      p1:seen_field(wl.Map():get_field( 96,  30))
+      p1:seen_field(map:get_field( 92,  91)) or
+      p1:seen_field(map:get_field(102, 103)) or
+      p1:seen_field(map:get_field(103,   0)) or
+      p1:seen_field(map:get_field(103,  11)) or
+      p1:seen_field(map:get_field(103,  17)) or
+      p1:seen_field(map:get_field( 96,  30))
       )
    do sleep(7834) end
 
@@ -252,13 +253,14 @@ end
 
 function renegade_fortresses()
    -- Wait till we see the fortresses
+   local map = wl.Game().map
    while not (
-      p1:seen_field(wl.Map():get_field(111, 88 )) or
-      p1:seen_field(wl.Map():get_field(110, 97 )) or
-      p1:seen_field(wl.Map():get_field(111, 110)) or
-      p1:seen_field(wl.Map():get_field(111, 7  )) or
-      p1:seen_field(wl.Map():get_field(114, 14 )) or
-      p1:seen_field(wl.Map():get_field(116, 21 ))
+      p1:seen_field(map:get_field(111, 88 )) or
+      p1:seen_field(map:get_field(110, 97 )) or
+      p1:seen_field(map:get_field(111, 110)) or
+      p1:seen_field(map:get_field(111, 7  )) or
+      p1:seen_field(map:get_field(114, 14 )) or
+      p1:seen_field(map:get_field(116, 21 ))
       )
    do sleep(6834) end
 
@@ -274,9 +276,9 @@ function renegade_fortresses()
    )
 
    -- Some something of the enemy land
-   p1:reveal_fields(wl.Map():get_field(129,97):region(12))
+   p1:reveal_fields(map:get_field(129,97):region(12))
 
-   local pts = scroll_smoothly_to(wl.Map():get_field(117,92))
+   local pts = scroll_smoothly_to(map:get_field(117,92))
 
    send_msg(order_msg_7_renegade_fortification)
    send_msg(order_msg_7_free_althunran)
@@ -297,9 +299,9 @@ function mission_complete()
       sleep(8923)
    end
 
-   p1:reveal_fields(wl.Map():get_field(4,9):region(6))
+   p1:reveal_fields(map:get_field(4,9):region(6))
 
-   local pts = scroll_smoothly_to(wl.Map():get_field(4,5))
+   local pts = scroll_smoothly_to(map:get_field(4,5))
 
    send_msg(story_msg_7)
 

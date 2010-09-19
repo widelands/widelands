@@ -15,7 +15,7 @@ p:forbid_buildings("all")
 p:allow_buildings{"lumberjacks_hut"}
 
 -- Place the headquarters & fill it with wares
-hq = p:place_building("headquarters_interim", wl.Map():get_field(12,10))
+hq = p:place_building("headquarters_interim", wl.Game().map:get_field(12,10))
 hq:set_wares{
    trunk = 80
 }
@@ -31,9 +31,9 @@ hq:set_workers{
 -- ==========
 -- Constants 
 -- ==========
-home = wl.Map():get_field(12,10)
-al_thunran = wl.Map():get_field(53, 43)
-grave = wl.Map():get_field(25,22)
+home = wl.Game().map:get_field(12,10)
+al_thunran = wl.Game().map:get_field(53, 43)
+grave = wl.Game().map:get_field(25,22)
 
 -- This function can move to a place, display a modal message box and return
 function show_story_box(t, m, pos, gposx, gposy)

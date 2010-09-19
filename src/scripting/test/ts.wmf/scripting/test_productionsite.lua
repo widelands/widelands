@@ -13,9 +13,9 @@ end
 -- ================
 productionsite_tests = lunit.TestCase("Productionsite Tests")
 function productionsite_tests:setup()
-   self.f1 = wl.Map():get_field(10,10)
-   self.f2 = wl.Map():get_field(12,10)
-   self.f3 = wl.Map():get_field(14,10)
+   self.f1 = map:get_field(10,10)
+   self.f2 = map:get_field(12,10)
+   self.f3 = map:get_field(14,10)
    player1:conquer(f, 6)
 
    self.inn = player1:place_building("big_inn", self.f1)

@@ -80,6 +80,7 @@ const PropertyType<L_Game> L_Game::Properties[] = {
 	PROP_RW(L_Game, desired_speed),
 	PROP_RW(L_Game, allow_autosaving),
 	PROP_RO(L_Game, players),
+	PROP_RO(L_Game, map),
 	{0, 0, 0},
 };
 
@@ -175,6 +176,17 @@ int L_Game::get_players(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: map
+
+		(RO) The :class:`~wl.Map` the game is played on.
+*/
+int L_Game::get_map(lua_State * L) {
+	to_lua<L_Map>(L, new L_Map());
+	return 1;
+}
+
+
 /*
  ==========================================================
  LUA METHODS
@@ -258,8 +270,8 @@ Map
 
 .. class:: Map()
 
-	Access to the map and it's objects. You can construct as many instances of
-	this class as you like, but they all will access the same internal object.
+	Access to the map and it's objects. You cannot instantiate this directly,
+	instead access it via :attr:`wl.Game.map`.
 */
 const char L_Map::className[] = "Map";
 const MethodType<L_Map> L_Map::Methods[] = {
@@ -273,10 +285,6 @@ const PropertyType<L_Map> L_Map::Properties[] = {
 	PROP_RO(L_Map, player_slots),
 	{0, 0, 0},
 };
-
-L_Map::L_Map(lua_State * L) {
-	// Nothing to do.
-}
 
 void L_Map::__persist(lua_State * L) {
 }

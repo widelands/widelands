@@ -38,7 +38,7 @@ function messages_tests:test_sender()
    assert_equal("i am you", m.sender)
 end
 function messages_tests:test_field() 
-   local f = wl.Map():get_field(23,28)
+   local f = map:get_field(23,28)
    local m = player1:send_message("Hallo", "World!", {field = f})
    assert_equal(f, m.field)
 end

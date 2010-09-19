@@ -3,13 +3,13 @@
 -- ======================================================
 
 function player_tests:test_create_flag()
-   local f = wl.Map():get_field(10,10)
+   local f = map:get_field(10,10)
    local k = player1:place_flag(f, true)
    assert_equal(k.player.number, 1)
    k:remove()
 end
 function player_tests:test_create_flag_non_forcing()
-   local f = wl.Map():get_field(10,10)
+   local f = map:get_field(10,10)
    -- First force the flag, then remove them again
    local k = player1:place_flag(f, true)
    k:remove()
@@ -19,7 +19,7 @@ function player_tests:test_create_flag_non_forcing()
    k:remove()
 end
 function player_tests:test_create_flag_non_forcing_too_close()
-   f = wl.Map():get_field(10,10)
+   f = map:get_field(10,10)
    -- First force the flag, then remove them again
    player1:place_flag(f, true):remove()
    player1:place_flag(f.rn, true):remove()
@@ -31,14 +31,14 @@ function player_tests:test_create_flag_non_forcing_too_close()
 end
 -- This test is currently disabled because of bug lp:536366
 -- function player_tests:test_create_flag2()
---    local f = wl.Map():get_field(20,10)
+--    local f = map:get_field(20,10)
 --    local k = wl.Game().players[2]:place_flag(f, true)
 --    assert_equal(k.player.number, 2)
 --    k:remove()
 -- end
 
 function player_tests:test_force_building()
-   local f = wl.Map():get_field(10,10)
+   local f = map:get_field(10,10)
    local k = player1:place_building("headquarters", f)
    assert_equal(1, k.player.number)
    assert_equal("warehouse", k.building_type)
@@ -46,7 +46,7 @@ function player_tests:test_force_building()
 end
 function player_tests:test_force_building_illegal_name()
    assert_error("Illegal building", function()
-      player1:place_building("kjhsfjkh", wl.Map():get_field(10,10))
+      player1:place_building("kjhsfjkh", map:get_field(10,10))
    end)
 end
 
@@ -56,7 +56,7 @@ end
 -- -- =======================================================================
 player_vision_tests = lunit.TestCase("Player vision tests")
 function player_vision_tests:setup()
-   self.f = wl.Map():get_field(50, 20)
+   self.f = map:get_field(50, 20)
    player1.see_all = false
 end
 function player_vision_tests:teardown()
@@ -158,18 +158,18 @@ function player_building_access:teardown()
 end
 function player_building_access:test_single()
    self.bs = {
-      player1:place_building("lumberjacks_hut", wl.Map():get_field(10,10)),
-      player1:place_building("lumberjacks_hut", wl.Map():get_field(13,10)),
-      player1:place_building("quarry", wl.Map():get_field(8,10)),
+      player1:place_building("lumberjacks_hut", map:get_field(10,10)),
+      player1:place_building("lumberjacks_hut", map:get_field(13,10)),
+      player1:place_building("quarry", map:get_field(8,10)),
    }
    assert_equal(2, #player1:get_buildings("lumberjacks_hut"))
    assert_equal(1, #player1:get_buildings("quarry"))
 end
 function player_building_access:test_multi()
    self.bs = {
-      player1:place_building("lumberjacks_hut", wl.Map():get_field(10,10)),
-      player1:place_building("lumberjacks_hut", wl.Map():get_field(13,10)),
-      player1:place_building("quarry", wl.Map():get_field(8,10)),
+      player1:place_building("lumberjacks_hut", map:get_field(10,10)),
+      player1:place_building("lumberjacks_hut", map:get_field(13,10)),
+      player1:place_building("quarry", map:get_field(8,10)),
    }
    rv = player1:get_buildings{"lumberjacks_hut", "quarry"}
 
@@ -177,9 +177,9 @@ function player_building_access:test_multi()
    assert_equal(1, #rv.quarry)
 end
 function player_building_access:test_access()
-   local b1 = player1:place_building("lumberjacks_hut", wl.Map():get_field(10,10))
-   local b2 = player1:place_building("lumberjacks_hut", wl.Map():get_field(13,10))
-   local b3 = player1:place_building("quarry", wl.Map():get_field(8,10))
+   local b1 = player1:place_building("lumberjacks_hut", map:get_field(10,10))
+   local b2 = player1:place_building("lumberjacks_hut", map:get_field(13,10))
+   local b3 = player1:place_building("quarry", map:get_field(8,10))
    self.bs = { b1, b2, b3 }
    rv = player1:get_buildings{"lumberjacks_hut", "quarry"}
 

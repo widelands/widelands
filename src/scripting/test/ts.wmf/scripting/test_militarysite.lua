@@ -13,7 +13,7 @@ end
 
 militarysite_tests = lunit.TestCase("MilitarySite Tests")
 function militarysite_tests:setup()
-   self.f1 = wl.Map():get_field(10,10)
+   self.f1 = map:get_field(10,10)
 
    self.fortress = player1:place_building("fortress", self.f1)
 end

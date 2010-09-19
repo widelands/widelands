@@ -17,12 +17,14 @@ eight = 8
 is_true = true
 is_false = false
 
-p = wl.Game().players[1]
+game = wl.Game()
+p = game.players[1]
+map = game.map
 a = { "Hallo", "Welt" }
 c = { func = function(a) return "I say " .. a .. "!" end }
-field = wl.Map():get_field(32,34)
-tree = wl.Map():place_immovable("tree3", field)
-removed_tree = wl.Map():place_immovable("tree4", wl.Map():get_field(34,34))
+field = map:get_field(32,34)
+tree = map:place_immovable("tree3", field)
+removed_tree = map:place_immovable("tree4", map:get_field(34,34))
 removed_tree:remove()
 corout = coroutine.create(function()
    local a = 100
@@ -34,8 +36,6 @@ objective.done = true
 
 p:send_message("dummy msg1", "dummy msg 1")
 msg = p:send_message("hello nice", "World", {sender="blah", field = field })
-game = wl.Game()
-map = wl.Map()
 player_slot = map.player_slots[1]
 
 -- ========================
