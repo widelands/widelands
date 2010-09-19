@@ -26,7 +26,6 @@
 #include "c_utils.h"
 #include "coroutine_impl.h"
 #include "lua_bases.h"
-#include "lua_debug.h"
 #include "lua_editor.h"
 #include "lua_game.h"
 #include "lua_globals.h"
@@ -42,7 +41,6 @@
 #endif
 
 // TODO: Roads are not rendered in the Editor. Fixe mark_map, post and presplit
-// TODO: remove wl.debug
 // TODO: get_game should throw an error if not called in the game.
 // Check out what this BaseImmovable <-> Immovable thing is all about.
 
@@ -351,7 +349,6 @@ LuaEditorGameBaseInterface_Impl::LuaEditorGameBaseInterface_Impl
 	(Widelands::Editor_Game_Base * g) :
 LuaInterface()
 {
-	LuaDebug::luaopen_wldebug(m_L);
 	LuaBases::luaopen_wlbases(m_L);
 	LuaMap::luaopen_wlmap(m_L);
 	LuaGame::luaopen_wlgame(m_L);

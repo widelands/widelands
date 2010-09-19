@@ -99,7 +99,8 @@ assert_equal(player_slot.name, map.player_slots[1].name)
 assert_equal(player_slot.tribe, map.player_slots[1].tribe)
 
 print("################### ALL TEST PASS!")
-wl.debug.exit()
+
+wl.ui.MapView():close()
 end
 
 
@@ -112,5 +113,5 @@ end
 game = wl.Game()
 game:launch_coroutine(coroutine.create(check_persistence))
 game:save("lua_persistence")
-wl.debug.exit()
+wl.ui.MapView():close()
 

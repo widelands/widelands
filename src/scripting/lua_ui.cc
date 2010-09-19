@@ -506,6 +506,7 @@ const char L_MapView::className[] = "MapView";
 const MethodType<L_MapView> L_MapView::Methods[] = {
 	METHOD(L_MapView, click),
 	METHOD(L_MapView, abort_road_building),
+	METHOD(L_MapView, close),
 	{0, 0},
 };
 const PropertyType<L_MapView> L_MapView::Properties[] = {
@@ -634,6 +635,21 @@ int L_MapView::abort_road_building(lua_State * L) {
 		me->abort_build_road();
 	return 0;
 }
+
+/* RST
+	.. method:: close
+
+		Closes the MapView. Note that this is the equivalent as clicking on
+		the exit button in the game; that is the game will be exited.
+
+		This is especially useful for automated testing of features and is for
+		example used in the widelands Lua test suite.
+*/
+int L_MapView::close(lua_State * l) {
+	get()->end_modal(0);
+	return 0;
+}
+
 
 /*
  * C Functions

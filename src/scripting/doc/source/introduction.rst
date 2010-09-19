@@ -159,6 +159,6 @@ objects that are in the global scope:
 This makes for excellent cheating in debug builds, but note that this is for
 debug purposes only -- in network games running Lua commands this way will
 desync and therefore crash the game and also replays where you changed the
-game state via the debug console will not replay properly. It is very useful
+game state via the debug console will not work. It is very useful
 for debugging scenarios though. 
 

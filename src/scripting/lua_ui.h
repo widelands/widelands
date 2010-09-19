@@ -196,6 +196,7 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int close(lua_State * L);
 	int click(lua_State * L);
 	int abort_road_building(lua_State * L);
 
