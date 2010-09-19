@@ -26,6 +26,7 @@
 #include "logic/tribe.h"
 
 #include "lua_game.h"
+#include "lua_editor.h"
 #include "lua_map.h"
 #include "coroutine_impl.h"
 
@@ -80,7 +81,6 @@ const PropertyType<L_Game> L_Game::Properties[] = {
 	PROP_RW(L_Game, desired_speed),
 	PROP_RW(L_Game, allow_autosaving),
 	PROP_RO(L_Game, players),
-	PROP_RO(L_Game, map),
 	{0, 0, 0},
 };
 
@@ -176,17 +176,6 @@ int L_Game::get_players(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: map
-
-		(RO) The :class:`~wl.Map` the game is played on.
-*/
-int L_Game::get_map(lua_State * L) {
-	to_lua<L_Map>(L, new L_Map());
-	return 1;
-}
-
-
 /*
  ==========================================================
  LUA METHODS
@@ -263,6 +252,79 @@ int L_Game::save(lua_State * const L) {
  C METHODS
  ==========================================================
  */
+
+/* RST
+Editor
+------
+
+.. class:: Editor
+
+	The Editor object; it is the correspondence of the :class:`wl.Game`
+	that is used in a Game.
+*/
+
+const char L_Editor::className[] = "Editor";
+const MethodType<L_Editor> L_Editor::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Editor> L_Editor::Properties[] = {
+	PROP_RO(L_Editor, players),
+	{0, 0, 0},
+};
+
+L_Editor::L_Editor(lua_State * L) {
+	// Nothing to do.
+}
+
+void L_Editor::__persist(lua_State * L) {
+}
+void L_Editor::__unpersist(lua_State * L) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: players
+
+		(RO) An :class:`array` with the players defined on the current map.
+		The editor always creates all players that are defined by the map.
+*/
+// TODO: this is too similar to L_Game::get_players.
+int L_Editor::get_players(lua_State * L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+
+	lua_newtable(L);
+
+	uint32_t idx = 1;
+	for(Player_Number i = 1; i <= MAX_PLAYERS; i++) {
+		Player * rv = egbase.get_player(i);
+		if (not rv)
+			continue;
+
+		lua_pushuint32(L, idx++);
+		to_lua<LuaEditor::L_Player>(L, new LuaEditor::L_Player(i));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
 
 /* RST
 Map
@@ -471,7 +533,14 @@ void luaopen_wlroot(lua_State * L) {
 	luaL_register(L, "wl", wlroot);
 	lua_pop(L, 1); // pop the table
 
-	register_class<L_Game>(L, "");
+	register_class<L_Game>(L, "", true);
+	add_parent<L_Game, LuaBases::L_EditorGameBase>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Editor>(L, "", true);
+	add_parent<L_Editor, LuaBases::L_EditorGameBase>(L);
+	lua_pop(L, 1); // Pop the meta table
+
 	register_class<L_Map>(L, "");
 }
 

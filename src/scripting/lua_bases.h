@@ -35,6 +35,34 @@ class L_BasesModuleClass : public LunaClass {
 };
 
 
+class L_EditorGameBase : public L_BasesModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_EditorGameBase);
+
+	L_EditorGameBase() {}
+	L_EditorGameBase(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'EditorGameBase' directly!");
+	}
+	virtual ~L_EditorGameBase() {}
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_map(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+};
+
+
 class L_PlayerBase : public L_BasesModuleClass {
 	Widelands::Player_Number m_pl;
 	enum {NONE = -1};

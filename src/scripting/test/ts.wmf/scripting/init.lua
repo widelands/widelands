@@ -1,14 +1,31 @@
 use("map", "common_init")
+   
+-- ==========
+-- Constants 
+-- ==========
+if not wl.editor then
+   game = wl.Game()
+   egbase = game
+else
+   editor = wl.Editor()
+   egbase = editor
+end
+map = egbase.map
 
+player1 = egbase.players[1]
+player2 = egbase.players[2]
+player3 = egbase.players[3]
+
+-- ======
+-- Tests 
+-- ======
 include "test_math_random"
 include "test_map"
 include "test_cplayer"
 
 if not wl.editor then
-   include "test_game"
-
-   include "gconstants"
-
+   -- TODO: test_egbase should work in editor and game, but crashes atm
+   include "test_egbase"
    include "test_objectives"
    include "test_messages"
 
@@ -23,7 +40,6 @@ include "test_field"
 include "test_ui"
 
 include "test_table"
-
 
 rv = lunit:run()
 if rv == 0 then -- No errors in the testsuite. Exit.

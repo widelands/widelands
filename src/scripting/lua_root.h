@@ -34,9 +34,10 @@ class L_RootModuleClass : public LunaClass {
 		const char * get_modulename() {return "";}
 };
 
-class L_Game : public L_RootModuleClass {
+class L_Game : public LuaBases::L_EditorGameBase {
 public:
 	LUNA_CLASS_HEAD(L_Game);
+	const char * get_modulename() {return "";}
 
 	L_Game() {}
 	L_Game(lua_State * L);
@@ -53,7 +54,6 @@ public:
 	int get_allow_autosaving(lua_State *);
 	int set_allow_autosaving(lua_State *);
 	int get_players(lua_State *);
-	int get_map(lua_State *);
 
 	/*
 	 * Lua methods
@@ -67,6 +67,33 @@ public:
 private:
 };
 
+class L_Editor : public LuaBases::L_EditorGameBase {
+public:
+	LUNA_CLASS_HEAD(L_Editor);
+	const char * get_modulename() {return "";}
+
+	L_Editor() {}
+	L_Editor(lua_State * L);
+	virtual ~L_Editor() {}
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_players(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+};
+
+// TODO: move this to wl.map
 class L_Map : public L_RootModuleClass {
 public:
 	LUNA_CLASS_HEAD(L_Map);

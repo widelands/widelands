@@ -23,6 +23,9 @@
 
 #include "lua_bases.h"
 
+// TODO: when map is moved, remove this
+#include "lua_root.h"
+
 using namespace Widelands;
 
 namespace LuaBases {
@@ -55,6 +58,59 @@ Module Classes
 ^^^^^^^^^^^^^^^^
 
 */
+
+
+/* RST
+EditorGameBase
+--------------
+
+.. class:: EditorGameBase
+
+	Common functionality between Editor and Game.
+*/
+
+const char L_EditorGameBase::className[] = "EditorGameBase";
+const MethodType<L_EditorGameBase> L_EditorGameBase::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_EditorGameBase> L_EditorGameBase::Properties[] = {
+	PROP_RO(L_EditorGameBase, map),
+	{0, 0, 0},
+};
+
+
+void L_EditorGameBase::__persist(lua_State * L) {
+}
+void L_EditorGameBase::__unpersist(lua_State * L) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: map
+
+		(RO) The :class:`~wl.Map` the game is played on.
+*/
+int L_EditorGameBase::get_map(lua_State * L) {
+	to_lua<LuaRoot::L_Map>(L, new LuaRoot::L_Map());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
 
 
 /* RST
@@ -158,7 +214,7 @@ void luaopen_wlbases(lua_State * const L) {
 	luaL_register(L, "wl.bases", wlbases);
 	lua_pop(L, 1); // pop the table from the stack again
 
-
+	register_class<L_EditorGameBase>(L, "bases");
 	register_class<L_PlayerBase>(L, "bases");
 }
 
