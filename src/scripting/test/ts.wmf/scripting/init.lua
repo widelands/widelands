@@ -24,6 +24,8 @@ include "test_map"
 include "test_cplayer"
 
 if not wl.editor then
+   include "test_game"
+
    -- TODO: test_egbase should work in editor and game, but crashes atm
    include "test_egbase"
    include "test_objectives"
@@ -33,6 +35,8 @@ if not wl.editor then
 
    -- TODO: most of these tests should also run in the editor
    include "test_immovables"
+else
+   include "test_editor"
 end
 
 include "test_field"

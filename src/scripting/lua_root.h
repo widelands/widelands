@@ -125,7 +125,7 @@ public:
 private:
 };
 
-void luaopen_wlroot(lua_State *);
+void luaopen_wlroot(lua_State *, bool in_editor);
 
 #endif
 };

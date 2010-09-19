@@ -235,7 +235,6 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
 
 	// Now our own
-	LuaRoot::luaopen_wlroot(m_L);
 	LuaGlobals::luaopen_globals(m_L);
 
 	register_scripts(*g_fs, "aux");
@@ -351,7 +350,6 @@ LuaInterface()
 {
 	LuaBases::luaopen_wlbases(m_L);
 	LuaMap::luaopen_wlmap(m_L);
-	LuaGame::luaopen_wlgame(m_L);
 	LuaUi::luaopen_wlui(m_L);
 
 	// Push the editor game base
@@ -375,6 +373,7 @@ LuaEditorInterface_Impl::LuaEditorInterface_Impl
 	(Widelands::Editor_Game_Base * g) :
 LuaEditorGameBaseInterface_Impl(g)
 {
+	LuaRoot::luaopen_wlroot(m_L, true);
 	LuaEditor::luaopen_wleditor(m_L);
 }
 
@@ -457,6 +456,9 @@ LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
 	lua_pushcfunction(m_L, L_math_random);
 	lua_setfield(m_L, -2, "random");
 	lua_pop(m_L, 1); // pop "math"
+
+	LuaRoot::luaopen_wlroot(m_L, false);
+	LuaGame::luaopen_wlgame(m_L);
 
 	// Push the game onto the stack
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));

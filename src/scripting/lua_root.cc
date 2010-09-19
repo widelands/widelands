@@ -64,7 +64,9 @@ Module Classes
 Game
 -----
 
-.. class:: Game()
+.. class:: Game
+
+	Child of: :class:`wl.bases.EditorGameBase`
 
 	The root class to access the game internals. You can
 	construct as many instances of this class as you like, but
@@ -259,6 +261,8 @@ Editor
 
 .. class:: Editor
 
+	Child of: :class:`wl.bases.EditorGameBase`
+
 	The Editor object; it is the correspondence of the :class:`wl.Game`
 	that is used in a Game.
 */
@@ -330,7 +334,7 @@ int L_Editor::get_players(lua_State * L) {
 Map
 ---
 
-.. class:: Map()
+.. class:: Map
 
 	Access to the map and it's objects. You cannot instantiate this directly,
 	instead access it via :attr:`wl.Game.map`.
@@ -529,17 +533,19 @@ const static struct luaL_reg wlroot [] = {
 	{0, 0}
 };
 
-void luaopen_wlroot(lua_State * L) {
+void luaopen_wlroot(lua_State * L, bool in_editor) {
 	luaL_register(L, "wl", wlroot);
 	lua_pop(L, 1); // pop the table
 
-	register_class<L_Game>(L, "", true);
-	add_parent<L_Game, LuaBases::L_EditorGameBase>(L);
-	lua_pop(L, 1); // Pop the meta table
-
-	register_class<L_Editor>(L, "", true);
-	add_parent<L_Editor, LuaBases::L_EditorGameBase>(L);
-	lua_pop(L, 1); // Pop the meta table
+	if (in_editor) {
+		register_class<L_Editor>(L, "", true);
+		add_parent<L_Editor, LuaBases::L_EditorGameBase>(L);
+		lua_pop(L, 1); // Pop the meta table
+	} else {
+		register_class<L_Game>(L, "", true);
+		add_parent<L_Game, LuaBases::L_EditorGameBase>(L);
+		lua_pop(L, 1); // Pop the meta table
+	}
 
 	register_class<L_Map>(L, "");
 }
