@@ -72,6 +72,7 @@ Game
 const char L_Game::className[] = "Game";
 const MethodType<L_Game> L_Game::Methods[] = {
 	METHOD(L_Game, launch_coroutine),
+	METHOD(L_Game, save),
 	{0, 0},
 };
 const PropertyType<L_Game> L_Game::Properties[] = {
@@ -212,6 +213,38 @@ int L_Game::launch_coroutine(lua_State * L) {
 
 	return 0;
 }
+
+/* RST
+	.. method:: save(name)
+
+		Saves the game exactly as if the player had entered the save dialog and
+		entered name as an argument. If some error occurred while saving, this
+		will throw an Lua error. Note that this currently doesn't work when
+		called from inside a Coroutine.
+
+		:arg name: name of save game. If this game already exists, it will be
+			silently overwritten
+		:type name: :class:`string`
+		:returns: :const:`nil`
+*/
+int L_Game::save(lua_State * const L) {
+	Widelands::Game & game = get_game(L);
+
+	std::string const complete_filename =
+		game.save_handler().create_file_name
+			(SaveHandler::get_base_dir(), luaL_checkstring(L, -1));
+
+	lua_pop(L, 2); // Make stack empty before persistence starts.
+
+	if (g_fs->FileExists(complete_filename))
+		g_fs->Unlink(complete_filename);
+	std::string error;
+	if (!game.save_handler().save_game(game, complete_filename, &error))
+		return report_error(L, "save error: %s", error.c_str());
+
+	return 0;
+}
+
 
 /*
  ==========================================================
@@ -414,7 +447,6 @@ int L_Map::get_field(lua_State * L) {
 
 	return to_lua<LuaMap::L_Field>(L, new LuaMap::L_Field(x, y));
 }
-
 
 /*
  ==========================================================

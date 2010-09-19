@@ -109,7 +109,8 @@ end
 -- This starts the test routine, saves the game and exits.
 -- Loading the saved game will check that all objects are 
 -- correctly unpersisted
-wl.Game():launch_coroutine(coroutine.create(check_persistence))
-wl.debug.save("lua_persistence")
+game = wl.Game()
+game:launch_coroutine(coroutine.create(check_persistence))
+game:save("lua_persistence")
 wl.debug.exit()
 
