@@ -50,6 +50,11 @@ function player_tests:test_force_building_illegal_name()
    end)
 end
 
+function player_tests:test_name_property()
+   assert_equal("Barbarian Bouncer", egbase.players[1].name)
+   assert_equal("Epic Empire", egbase.players[2].name)
+   assert_equal("Awesome Atlantean", egbase.players[3].name)
+end
 
 -- -- =======================================================================
 -- --                          See Fields/Hide Fields

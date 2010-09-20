@@ -22,12 +22,12 @@ player3 = egbase.players[3]
 include "test_math_random"
 include "test_map"
 include "test_cplayer"
+   
+include "test_egbase"
 
 if not wl.editor then
    include "test_game"
 
-   -- TODO: test_egbase should work in editor and game, but crashes atm
-   include "test_egbase"
    include "test_objectives"
    include "test_messages"
 

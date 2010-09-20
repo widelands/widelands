@@ -7,16 +7,9 @@ function test_egbase:test_players_len()
    assert_equal(3, #egbase.players)
 end
 
-function test_egbase:test_players()
-   local p = egbase.players[1]
-   assert_equal(1, p.number)
-   assert_equal("Barbarian Bouncer", p.name)
-   local p = egbase.players[2]
-   assert_equal(2, p.number)
-   assert_equal("Epic Empire", p.name)
-   local p = egbase.players[3]
-   assert_equal(3, p.number)
-   assert_equal("Awesome Atlantean", p.name)
+function test_egbase:test_player_numbers()
+   assert_equal(1, egbase.players[1].number)
+   assert_equal(2, egbase.players[2].number)
+   assert_equal(3, egbase.players[3].number)
 end
    
-
