@@ -22,6 +22,7 @@ player3 = egbase.players[3]
 include "test_math_random"
 include "test_map"
 include "test_cplayer"
+include "test_cfield"
    
 include "test_egbase"
 
@@ -32,14 +33,16 @@ if not wl.editor then
    include "test_messages"
 
    include "test_gplayer"
+   include "test_gfield"
 
    -- TODO: most of these tests should also run in the editor
    include "test_immovables"
 else
    include "test_editor"
+
+   include "test_efield"
 end
 
-include "test_field"
 -- TODO: ui need some love. There is too much if editor stuff inside it
 include "test_ui"
 
