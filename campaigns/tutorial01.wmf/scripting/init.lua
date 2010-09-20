@@ -155,6 +155,18 @@ end
 
 function build_road(field, ...)
    -- Build a road by clicking the UI. A little faster than before
+   
+   -- Make sure that there is room for the road: Rip all immovables
+   local cf = field
+   for idx, d in ipairs{...} do
+      if not (d == '|' or d == '.') then
+         if cf.immovable and cf.immovable.player ~= plr then
+            cf.immovable:remove()
+         end
+         cf = cf[d .. 'n']
+      end
+   end
+
    mouse_smoothly_to(field, 400, 200)
 
    local function _start_road(field)
@@ -167,9 +179,6 @@ function build_road(field, ...)
    _start_road(field)
 
    for idx, d in ipairs{...} do
-      if field.immovable and field.immovable.player ~= plr then
-         field.immovable:remove()
-      end
       if d == '|' or d == '.' then
          mouse_smoothly_to(field, 400, 200)
          wl.ui.MapView():click(field)
