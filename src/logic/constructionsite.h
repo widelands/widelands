@@ -121,6 +121,7 @@ private:
 	uint32_t m_work_steptime;  // time when next step is completed
 	uint32_t m_work_completed; // how many steps have we done so far?
 	uint32_t m_work_steps;     // how many steps (= items) until we're done?
+	bool m_builder_idle;       // used to determine whether the builder is idle
 };
 
 }
