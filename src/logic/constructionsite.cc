@@ -84,7 +84,8 @@ m_fetchfromflag  (0),
 m_working        (false),
 m_work_steptime  (0),
 m_work_completed (0),
-m_work_steps     (0)
+m_work_steps     (0),
+m_builder_idle   (false)
 {}
 
 
@@ -434,6 +435,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 				(game,
 				 worker.get_animation("work"),
 				 m_work_steptime - game.get_gametime());
+			m_builder_idle = false;
 			return true;
 		} else {
 			//TODO(fweber): cause "construction sounds" to be played -
@@ -450,6 +452,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 	// Fetch items from flag
 	if (m_fetchfromflag) {
 		--m_fetchfromflag;
+		m_builder_idle = false;
 		worker.start_task_fetchfromflag(game);
 		return true;
 	}
@@ -472,11 +475,16 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 
 			worker.start_task_idle
 				(game, worker.get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
+			m_builder_idle = false;
 			return true;
 		}
 	}
 	// The only work we have got for you, is to run around to look cute ;)
-	worker.start_task_idle(game, worker.get_animation("idle"), 5000);
+	if (!m_builder_idle) {
+		worker.set_animation(game, worker.get_animation("idle"));
+		m_builder_idle = true;
+	}
+	worker.schedule_act(game, 2000);
 	return true;
 }
 
