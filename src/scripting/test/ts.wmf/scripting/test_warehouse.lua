@@ -7,7 +7,7 @@ function warehouse_tests:setup()
    self.w = player1:place_building("warehouse", self.f)
 end
 function warehouse_tests:teardown()
-   pcall(self.f.brn.remove, self.w)
+   pcall(function() self.f.brn.immovable:remove() end)
 end
 
 function warehouse_tests:test_name()

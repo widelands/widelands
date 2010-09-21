@@ -3,8 +3,7 @@
 -- ======================================================
 
 function player_tests:test_create_flag()
-   local f = map:get_field(10,10)
-   local k = player1:place_flag(f, true)
+   local k = player1:place_flag(map:get_field(10,10), true)
    assert_equal(k.player.number, 1)
    k:remove()
 end
@@ -14,12 +13,12 @@ function player_tests:test_create_flag_non_forcing()
    local k = player1:place_flag(f, true)
    k:remove()
    -- Now, try again, but non forcing
-   k = player1:place_flag(f)
+   local k = player1:place_flag(f)
    assert_equal(k.player.number, 1)
    k:remove()
 end
 function player_tests:test_create_flag_non_forcing_too_close()
-   f = map:get_field(10,10)
+   local f = map:get_field(10,10)
    -- First force the flag, then remove them again
    player1:place_flag(f, true):remove()
    player1:place_flag(f.rn, true):remove()
@@ -42,7 +41,7 @@ function player_tests:test_force_building()
    local k = player1:place_building("headquarters", f)
    assert_equal(1, k.player.number)
    assert_equal("warehouse", k.building_type)
-   f.brn.immovable:remove() -- removing map also removes building
+   f.brn.immovable:remove() -- removing flag also removes building
 end
 function player_tests:test_force_building_illegal_name()
    assert_error("Illegal building", function()
@@ -158,7 +157,7 @@ end
 player_building_access = lunit.TestCase("Access to Player buildings")
 function player_building_access:teardown()
    for temp,b in ipairs(self.bs) do
-      pcall(b.remove, b)
+      pcall(function() b.fields[1].brn.immovable:remove() end)
    end
 end
 function player_building_access:test_single()
@@ -189,7 +188,7 @@ function player_building_access:test_access()
    rv = player1:get_buildings{"lumberjacks_hut", "quarry"}
 
    assert_equal(b3, rv.quarry[1])
-   b1:remove()
+   b1.fields[1].brn.immovable:remove()
    assert_equal(1, #player1:get_buildings("lumberjacks_hut"))
 end
 

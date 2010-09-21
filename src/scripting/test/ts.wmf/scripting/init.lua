@@ -1,7 +1,7 @@
 use("map", "common_init")
-   
+
 -- ==========
--- Constants 
+-- Constants
 -- ==========
 if not wl.editor then
    game = wl.Game()
@@ -17,13 +17,13 @@ player2 = egbase.players[2]
 player3 = egbase.players[3]
 
 -- ======
--- Tests 
+-- Tests
 -- ======
 include "test_math_random"
 include "test_map"
 include "test_cplayer"
 include "test_cfield"
-   
+
 include "test_egbase"
 
 if not wl.editor then

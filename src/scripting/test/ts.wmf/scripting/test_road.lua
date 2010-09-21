@@ -13,7 +13,7 @@ end
 road_construction_tests = lunit.TestCase("road construction tests")
 function road_construction_tests:setup()
    self.f = map:get_field(10,10)
-   player1:conquer(f, 6)
+   player1:conquer(self.f, 6)
 
    self.start_flag = player1:place_flag(self.f)
    self.flags = {
@@ -69,7 +69,7 @@ end
 road_tests = lunit.TestCase("road tests")
 function road_tests:setup()
    self.f = map:get_field(10,10)
-   player1:conquer(f, 6)
+   player1:conquer(self.f, 6)
 
    self.start_flag = player1:place_flag(self.f)
 
