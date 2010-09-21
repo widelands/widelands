@@ -422,44 +422,38 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	// we let warehouse see always for simplicity's sake (since there's
 	// almost always going to be a carrier inside, that shouldn't hurt).
 	Player & player = owner();
-	player.see_area
-		(Area<FCoords>
-		 (egbase.map().get_fcoords(get_position()), vision_range()));
+	if (upcast(Game, game, &egbase)) {
+		player.see_area
+			(Area<FCoords>
+			 (egbase.map().get_fcoords(get_position()), vision_range()));
 
-	{
-		uint32_t const act_time =
+		{
+			uint32_t const act_time =
+				schedule_act(
+					 *game,
+					 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			std::vector<Ware_Index> const & worker_types_without_cost =
+				tribe().worker_types_without_cost();
+
+			for
+				(wl_index_range<uint32_t> i
+				(0, worker_types_without_cost.size());
+				i; ++i)
+				if
+					(owner().is_worker_type_allowed
+						(worker_types_without_cost.at(i.current)))
+					m_next_worker_without_cost_spawn[i.current] = act_time;
+		}
+		// m_next_military_act is not touched in the loading code. Is only needed if
+		// there warehous is created in the game?
+		// I assume it's for the conquer_radius thing
+		m_next_military_act =
 			schedule_act
-				(ref_cast<Game, Editor_Game_Base>(egbase),
-				 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
-		std::vector<Ware_Index> const & worker_types_without_cost =
-			tribe().worker_types_without_cost();
+				(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
 
-		for
-			(wl_index_range<uint32_t> i
-			(0, worker_types_without_cost.size());
-			i; ++i)
-			if
-				(owner().is_worker_type_allowed
-				 	(worker_types_without_cost.at(i.current)))
-				m_next_worker_without_cost_spawn[i.current] = act_time;
-	}
-	// m_next_military_act is not touched in the loading code. Is only needed if
-	// there warehous is created in the game?
-	// I assume it's for the conquer_radius thing
-	m_next_military_act =
-		schedule_act
-			(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
-
-	m_next_stock_remove_act =
-		schedule_act
-			(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
-
-	if (uint32_t const conquer_radius = get_conquers())
-		ref_cast<Game, Editor_Game_Base>(egbase).conquer_area
-			(Player_Area<Area<FCoords> >
-			 	(player.player_number(),
-			 	 Area<FCoords>
-			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
+		m_next_stock_remove_act =
+			schedule_act
+				(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
 
 	log("Message: adding (wh) (%s) %i \n", type_name(), player.player_number());
 	char message[2048];
@@ -472,6 +466,15 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		 "warehouse",
 		 descname(),
 		 message);
+	}
+
+	if (uint32_t const conquer_radius = get_conquers())
+		egbase.conquer_area
+			(Player_Area<Area<FCoords> >
+			 	(player.player_number(),
+			 	 Area<FCoords>
+			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
+
 }
 
 

@@ -78,8 +78,6 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int place_flag(lua_State * L);
-	int place_building(lua_State * L);
 	int send_message(lua_State * L);
 	int message_box(lua_State * L);
 	int sees_field(lua_State * L);
@@ -87,12 +85,10 @@ public:
 	int allow_buildings(lua_State * L);
 	int forbid_buildings(lua_State * L);
 	int add_objective(lua_State * L);
-	int conquer(lua_State * L);
 	int reveal_fields(lua_State * L);
 	int hide_fields(lua_State * L);
 	int reveal_scenario(lua_State * L);
 	int reveal_campaign(lua_State * L);
-	int place_road(lua_State * L);
 	int get_buildings(lua_State * L);
 	int set_flag_style(lua_State * L);
 	int set_frontier_style(lua_State * L);

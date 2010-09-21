@@ -90,10 +90,9 @@ function immovable_tests:test_field_immovable_is_read_only()
    end)
 end
 
---
--- -- ==============
--- -- Property tests
--- -- ==============
+-- ==============
+-- Property tests
+-- ==============
 immovable_property_tests = lunit.TestCase("Immovable sizes")
 function immovable_property_tests:setup()
    self.none = map:place_immovable("pebble1", map:get_field(19, 10))

@@ -24,7 +24,6 @@
 #include "economy/flag.h"
 #include "gamecontroller.h"
 #include "i18n.h"
-#include "logic/checkstep.h"
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
@@ -83,8 +82,6 @@ Player
 */
 const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {
-	METHOD(L_Player, place_flag),
-	METHOD(L_Player, place_building),
 	METHOD(L_Player, send_message),
 	METHOD(L_Player, message_box),
 	METHOD(L_Player, sees_field),
@@ -92,12 +89,10 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, allow_buildings),
 	METHOD(L_Player, forbid_buildings),
 	METHOD(L_Player, add_objective),
-	METHOD(L_Player, conquer),
 	METHOD(L_Player, reveal_fields),
 	METHOD(L_Player, hide_fields),
 	METHOD(L_Player, reveal_scenario),
 	METHOD(L_Player, reveal_campaign),
-	METHOD(L_Player, place_road),
 	METHOD(L_Player, get_buildings),
 	METHOD(L_Player, set_flag_style),
 	METHOD(L_Player, set_frontier_style),
@@ -291,87 +286,6 @@ int L_Player::get_see_all(lua_State * const L) {
  LUA METHODS
  ==========================================================
  */
-/* RST
-	.. function:: place_flag(field[, force])
-
-		Builds a flag on a given field if it is legal to do so. If not,
-		reports an error
-
-		:arg field: where the flag should be created
-		:type field: :class:`wl.map.Field`
-		:arg force: If this is :const:`true` then the map is created with
-			pure force:
-
-				* if there is an immovable on this field, it will be
-				  removed
-				* if there are flags too close by to this field, they will be
-				  ripped
-				* if the player does not own the territory, it is conquered
-				  for him.
-		:type force: :class:`boolean`
-		:returns: :class:`wl.map.Flag` object created or :const:`nil`.
-*/
-int L_Player::place_flag(lua_State * L) {
-	uint32_t n = lua_gettop(L);
-	L_Field * c = *get_user_class<L_Field>(L, 2);
-	bool force = false;
-	if (n > 2)
-		force = luaL_checkboolean(L, 3);
-
-	Flag * f;
-	if (not force) {
-		f = get(L, get_egbase(L)).build_flag(c->fcoords(L));
-		if (!f)
-			return report_error(L, "Couldn't build flag!");
-	} else {
-		f = &get(L, get_egbase(L)).force_flag(c->fcoords(L));
-	}
-
-	return to_lua<L_Flag>(L, new L_Flag(*f));
-}
-
-/* RST
-	.. method:: place_building(name, field[, constructionsite = false])
-
-		Immediately creates a building on the given field. The building starts
-		out completely empty. If :const:`constructionsite` is set, the building
-		is not created directly, instead a constructionsite for this building is
-		placed. Note that this implies: force = false.
-
-		If :const:`constructionsite` is not set, the buildings i is forced to be
-		at this position, the same action is taken as for :meth:`place_flag` when
-		force is :const:`true`. Additionally, all buildings that are too close to
-		the new one are ripped.
-
-		:returns: :class:`wl.map.Building` object created or :const:`nil` if
-			a constructionsite is created.
-*/
-// TODO: this function should take a force parameter as any other
-// TODO: this function should return a wrapped constructionsite
-// TODO: add tests for the constructionsite functionality
-int L_Player::place_building(lua_State * L) {
-	const char * name = luaL_checkstring(L, 2);
-	L_Field * c = *get_user_class<L_Field>(L, 3);
-	bool constructionsite = false;
-
-	if (lua_gettop(L) >= 4)
-		constructionsite = luaL_checkboolean(L, 4);
-
-	Building_Index i = get(L, get_egbase(L)).tribe().building_index(name);
-	if (i == Building_Index::Null())
-		return report_error(L, "Unknown Building: '%s'", name);
-
-	if (not constructionsite) {
-		Building & b = get(L, get_egbase(L)).force_building
-			(c->coords(), i);
-
-		return upcasted_immovable_to_lua(L, &b);
-	} else {
-		get(L, get_egbase(L)).build(c->coords(), i);
-		lua_pushnil(L);
-		return 1;
-	}
-}
 
 /* RST
 	.. method:: send_message(t, m[, opts])
@@ -567,35 +481,6 @@ int L_Player::message_box(lua_State * L) {
 
 	return 1;
 }
-
-/* RST
-	.. method:: conquer(f[, radius=1])
-
-		Conquer this area around the given field if it does not belong to the
-		player already. This will conquer the fields no matter who owns it at the
-		moment.
-
-		:arg f: center field for conquering
-		:type f: :class:`wl.map.Field`
-		:arg radius: radius to conquer around. Default value makes this call
-			conquer 7 fields
-		:type radius: :class:`integer`
-		:returns: :const:`nil`
-*/
-// UNTESTED
-int L_Player::conquer(lua_State * L) {
-	uint32_t radius = 1;
-	if (lua_gettop(L) > 2)
-		radius = luaL_checkuint32(L, 3);
-
-	get_egbase(L).conquer_area_no_building
-		(Player_Area<Area<FCoords> >
-			(player_number(), Area<FCoords>
-				((*get_user_class<L_Field>(L, 2))->fcoords(L), radius))
-	);
-	return 0;
-}
-
 
 /* RST
 	.. method:: sees_field(f)
@@ -810,102 +695,6 @@ int L_Player::reveal_campaign(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: place_road(f1, dir1, dir2, ...[, force=false])
-
-		Start a road at the given field, then walk the directions
-		given. Places a flag at the last field.
-
-		If the last argument to this function is :const:`true` the road will
-		be created by force: all immovables in the way are removed and land
-		is conquered.
-
-		:arg f1: fields to connect with this road
-		:type f1: :class:`wl.map.Field`
-		:arg dirs: direction, can be either ("r", "l", "br", "bl", "tr", "tl") or
-			("e", "w", "ne", "nw", "se", "sw").
-		:type dirs: :class:`string`
-
-		:returns: the road created
-*/
-int L_Player::place_road(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	Map & map = egbase.map();
-
-	Flag * starting_flag = (*get_user_class<L_Flag>(L, 2))->get(L, egbase);
-	Coords current = starting_flag->get_position();
-	Path path(current);
-
-	bool force_road = false;
-	if (lua_isboolean(L, -1)) {
-		force_road = luaL_checkboolean(L, -1);
-		lua_pop(L, 1);
-	}
-
-	// Construct the path
-	CheckStepLimited cstep;
-	for (int32_t i = 3; i <= lua_gettop(L); i++) {
-		std::string d = luaL_checkstring(L, i);
-
-		if (d == "ne" or d == "tr") {
-			path.append(map, 1);
-			map.get_trn(current, &current);
-		} else if (d == "e" or d == "r") {
-			path.append(map, 2);
-			map.get_rn(current, &current);
-		} else if (d == "se" or d == "br") {
-			path.append(map, 3);
-			map.get_brn(current, &current);
-		} else if (d == "sw" or d == "bl") {
-			path.append(map, 4);
-			map.get_bln(current, &current);
-		} else if (d == "w" or d == "l") {
-			path.append(map, 5);
-			map.get_ln(current, &current);
-		} else if (d == "nw" or d == "tl") {
-			path.append(map, 6);
-			map.get_tln(current, &current);
-		} else
-			return report_error(L, "Illegal direction: %s", d.c_str());
-
-		cstep.add_allowed_location(current);
-	}
-
-	// Make sure that the road cannot cross itself
-	Path optimal_path;
-	map.findpath
-		(path.get_start(), path.get_end(),
-		 0,
-		 optimal_path,
-		 cstep,
-		 Map::fpBidiCost);
-	if (optimal_path.get_nsteps() != path.get_nsteps())
-		return report_error(L, "Cannot build a road that crosses itself!");
-
-	Road * r = 0;
-	if (force_road) {
-		r = &get(L, egbase).force_road(path);
-	} else {
-		BaseImmovable * bi = map.get_immovable(current);
-		if (!bi or bi->get_type() != Map_Object::FLAG) {
-			if (!get(L, egbase).build_flag(current))
-				return report_error(L, "Could not place end flag!");
-		}
-		if (bi and bi == starting_flag)
-		  return report_error(L, "Cannot build a closed loop!");
-
-		r = get(L, egbase).build_road(path);
-	}
-
-	if (!r)
-		return
-			report_error
-			  (L, "Error while creating Road. May be: something is in "
-					"the way or you do not own the territory were you want to build "
-					"the road");
-
-	return to_lua<L_Road>(L, new L_Road(*r));
-}
 
 /* RST
 	.. method:: get_buildings(which)
