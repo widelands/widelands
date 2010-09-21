@@ -26,11 +26,7 @@ include "test_map"
 include "test_cplayer"
 include "test_cfield"
 
-include "test_baseimmovables"
-   
--- Player immovables
-include "test_flag"
-include "test_road"
+include "test_immovables"
 
 if not wl.editor then
    include "test_game"
@@ -41,13 +37,6 @@ if not wl.editor then
    include "test_gplayer"
    include "test_gfield"
 
-   -- Player immovables
-   -- TODO: most of these tests should also run in the editor
-   include "test_constructionsite"
-   include "test_warehouse"
-   include "test_productionsite"
-   include "test_militarysite"
-   include "test_trainingsite"
 else
    include "test_editor"
 
