@@ -1,25 +1,12 @@
 -- =======================================================================
 --                      User Interface scripting tests                      
 -- =======================================================================
-
 ui_tests = lunit.TestCase("Game User Interface tests")
 function ui_tests:setup()
    self.mv = wl.ui.MapView()
 
    for name,win in pairs(self.mv.windows) do
       win:close()
-   end
-
-   if wl.editor then
-      self.b1 = "menu"
-      self.w1 = "main_menu"
-      self.b2 = "players"
-      self.w2 = "players_menu"
-   else
-      self.b1 = "messages"
-      self.w1 = "messages"
-      self.b2 = "objectives"
-      self.w2 = "objectives"
    end
 end
 
@@ -35,58 +22,48 @@ end
 
 function ui_tests:test_buttons_property()
    assert_not_equal(nil, self.mv.buttons.buildhelp)
-
-   if wl.editor then
-      assert_equal(6, self:_cnt(self.mv.buttons)) -- Editor has 6 buttons
-   else
-      assert_equal(7, self:_cnt(self.mv.buttons)) -- a scenario game, so 7
-   end
+   assert_equal(7, self:_cnt(self.mv.buttons)) -- a scenario game, so 7
 end
 
 function ui_tests:test_window_property()
    -- No window to start with
    assert_equal(0, self:_cnt(self.mv.windows))
 
-   self.mv.buttons[self.b1]:click()
+   self.mv.buttons.messages:click()
    assert_equal(1, self:_cnt(self.mv.windows))
    
-   assert_not_equal(nil, self.mv.windows[self.w1])
+   assert_not_equal(nil, self.mv.windows.messages)
 end
 
 function ui_tests:test_window_property1()
    assert_equal(0, self:_cnt(self.mv.windows))
 
-   self.mv.buttons[self.b2]:click()
+   self.mv.buttons.objectives:click()
    assert_equal(1, self:_cnt(self.mv.windows))
    
-   assert_not_equal(nil, self.mv.windows[self.w2])
-   assert_equal(nil, self.mv.windows[self.w1])
+   assert_not_equal(nil, self.mv.windows.objectives)
+   assert_equal(nil, self.mv.windows.messages)
 end
 
 function ui_tests:test_position_x()
-   self.mv.buttons[self.b1]:click()
-   local w = self.mv.windows[self.w1]
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
 
    w.position_x = 50
    assert_equal(50, w.position_x)
 end
 function ui_tests:test_position_y()
-   self.mv.buttons[self.b1]:click()
-   local w = self.mv.windows[self.w1]
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
 
    w.position_y = 60
    assert_equal(60, w.position_y)
 end
 
 function ui_tests:test_descendant_position()
-   self.mv.buttons[self.b1]:click()
-   local w = self.mv.windows[self.w1]
-   local b
-   if not wl.editor then 
-      b = w.buttons.invert_selection
-   else
-      b = w.buttons.exit
-   end
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
+   local b = w.buttons.invert_selection
 
    w.position_x = 50
    w.position_y = 50
@@ -98,8 +75,8 @@ function ui_tests:test_descendant_position()
 end
 
 function ui_tests:test_descendant_position_not_child()
-   self.mv.buttons[self.b1]:click()
-   local w = self.mv.windows[self.w1]
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
    local b = self.mv.buttons.buildhelp
 
    assert_error("Not a descendant!", function()
@@ -108,15 +85,15 @@ function ui_tests:test_descendant_position_not_child()
 end
 
 function ui_tests:test_width(x)
-   self.mv.buttons[self.b1]:click()
-   local w = self.mv.windows[self.w1]
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
 
    w.width = 300
    assert_equal(300, w.width)
 end
 function ui_tests:test_height(x)
-   self.mv.buttons[self.b1]:click()
-   local w = self.mv.windows[self.w1]
+   self.mv.buttons.messages:click()
+   local w = self.mv.windows.messages
 
    w.height = 200
    assert_equal(200, w.height)
@@ -149,8 +126,6 @@ function button_tests:test_click()
    assert_equal(true, wl.ui.MapView().buildhelp)
 end
 
--- TODO: this is not proper, all tests should run and editor/game seperation should be cleaner
-if not wl.editor then 
 -- =========
 -- TabPanel
 -- =========
@@ -213,5 +188,4 @@ function mv_tests:test_statistics()
    assert_equal(false, self.mv.census)
 end
 
-end
 

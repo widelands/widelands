@@ -36,14 +36,15 @@ if not wl.editor then
 
    include "test_objectives"
    include "test_messages"
+
+   -- The functionality of UI scripting is identical but we only test it in game
+   -- though as it is cumbersome to make those tests work also in the editor.
+   include "test_ui"
 else
    include "test_editor"
 
    include "test_efield"
 end
-
--- TODO: ui need some love. There is too much if editor stuff inside it
-include "test_ui"
 
 -- ===========================
 -- Test for auxiliary scripts 
