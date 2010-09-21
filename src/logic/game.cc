@@ -268,7 +268,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, 1));
 	try {
-		bool const result = run(loaderUI, NewScenario);
+		bool const result = run(loaderUI, NewSPScenario);
 		delete m_ctrl;
 		m_ctrl = 0;
 		return result;
@@ -463,6 +463,7 @@ bool Game::run
 
 			}
 		} else
+			// Is a scenario!
 			iterate_players_existing(p, nr_players, *this, plr)
 				if (not map().get_starting_pos(p))
 				throw warning
@@ -495,7 +496,11 @@ bool Game::run
 		}
 
 		// Run the init script, if the map provides one.
-		enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
+		if (start_game_type == NewSPScenario)
+			enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
+		else if (start_game_type == NewMPScenario)
+			enqueue_command(new Cmd_LuaScript(get_gametime(),
+						"map", "multiplayer_init"));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
