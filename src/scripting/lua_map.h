@@ -85,7 +85,7 @@ private:
 #define CASTED_GET(klass) \
 Widelands:: klass * get(lua_State * L, Widelands::Editor_Game_Base & egbase) { \
 	return static_cast<Widelands:: klass *> \
-		(L_MapObject::get(egbase, L, #klass)); \
+		(L_MapObject::get(L, egbase, #klass)); \
 }
 
 class L_MapObject : public L_MapModuleClass {
@@ -127,9 +127,8 @@ public:
 	/*
 	 * C Methods
 	 */
-	// TODO: lua_State should be first, as always
 	Widelands::Map_Object * get
-		(Widelands::Editor_Game_Base &, lua_State *, std::string = "MapObject");
+		(lua_State *, Widelands::Editor_Game_Base &, std::string = "MapObject");
 	Widelands::Map_Object * m_get_or_zero(Widelands::Editor_Game_Base &);
 };
 

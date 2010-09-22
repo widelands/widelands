@@ -1021,7 +1021,7 @@ void L_MapObject::__unpersist(lua_State * L) {
 		constant after saving/loading.
 */
 int L_MapObject::get_serial(lua_State * L) {
-	lua_pushuint32(L, get(get_egbase(L), L)->serial());
+	lua_pushuint32(L, get(L, get_egbase(L))->serial());
 	return 1;
 }
 
@@ -1033,7 +1033,7 @@ int L_MapObject::get_serial(lua_State * L) {
 		immovable, flag, road, productionsite, warehouse, militarysite...
 */
 int L_MapObject::get_type(lua_State * L) {
-	lua_pushstring(L, get(get_egbase(L), L)->type_name());
+	lua_pushstring(L, get(L, get_egbase(L))->type_name());
 	return 1;
 }
 
@@ -1056,7 +1056,7 @@ int L_MapObject::__eq(lua_State * L) {
 		lua_pushboolean(L, false);
 	else // Compare them
 		lua_pushboolean
-			(L, other->get(egbase, L)->serial() == get(egbase, L)->serial());
+			(L, other->get(L, egbase)->serial() == get(L, egbase)->serial());
 
 	return 1;
 }
@@ -1069,7 +1069,7 @@ int L_MapObject::__eq(lua_State * L) {
 */
 int L_MapObject::remove(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	Map_Object * o = get(egbase, L);
+	Map_Object * o = get(L, egbase);
 
 	if (!o)
 		return 0;
@@ -1106,7 +1106,7 @@ int L_MapObject::has_attribute(lua_State * L) {
  ==========================================================
  */
 Map_Object * L_MapObject::get
-	(Editor_Game_Base & egbase, lua_State * L, std::string name)
+	(lua_State * L, Editor_Game_Base & egbase, std::string name)
 {
 	Map_Object * o = m_get_or_zero(egbase);
 	if (!o)
