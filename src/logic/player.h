@@ -429,8 +429,9 @@ struct Player :
 	Road * build_road(Path const &); /// Build a road if it is allowed.
 	Building& force_building
 		(Coords,
-		 Building_Index);
-	void build(Coords, Building_Index);
+		 Building_Index,
+		 bool = false);
+	Building * build(Coords, Building_Index, bool = true);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);

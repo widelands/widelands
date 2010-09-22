@@ -253,7 +253,7 @@ end
 
 function field_owner_tests:test_blue_first()
    local f = map:get_field(10,10)
-   local s1 = player1:place_building("sentry", f)
+   local s1 = player1:place_building("sentry", f, false, true)
    s1:set_soldiers({0,0,0,0}, 1)
 
    self.pis[#self.pis + 1] = f.brn.immovable
@@ -263,7 +263,7 @@ function field_owner_tests:test_blue_first()
    assert_equal(player1, o[1])
 
    local f = map:get_field(14, 10)
-   local s2 = player2:place_building("sentry", f)
+   local s2 = player2:place_building("sentry", f, false, true)
    s2:set_soldiers({0,0,0,0}, 1)
 
    self.pis[#self.pis + 1] = f.brn.immovable
@@ -277,7 +277,7 @@ end
 
 function field_owner_tests:test_red_first()
    local f = map:get_field(10,10)
-   local s1 = player2:place_building("sentry", f)
+   local s1 = player2:place_building("sentry", f, false, true)
    s1:set_soldiers({0,0,0,0}, 1)
 
    self.pis[#self.pis + 1] = f.brn.immovable
@@ -287,7 +287,7 @@ function field_owner_tests:test_red_first()
    assert_equal(player2, o[1])
 
    local f = map:get_field(14, 10)
-   local s2 = player1:place_building("sentry", f)
+   local s2 = player1:place_building("sentry", f, false, true)
    s2:set_soldiers({0,0,0,0}, 1)
 
    self.pis[#self.pis + 1] = f.brn.immovable
@@ -301,7 +301,7 @@ end
 
 function field_owner_tests:test_no_military_influence()
    local f = map:get_field(10,10)
-   local s1 = player2:place_building("sentry", f)
+   local s1 = player2:place_building("sentry", f, false, true)
    s1:set_soldiers({0,0,0,0}, 1)
    f.brn.immovable:remove()
 

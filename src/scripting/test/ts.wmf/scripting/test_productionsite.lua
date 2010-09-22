@@ -20,9 +20,9 @@ function productionsite_tests:setup()
    player1:conquer(self.f2, 4)
    player1:conquer(self.f3, 4)
 
-   self.inn = player1:place_building("big_inn", self.f1)
-   self.warmill = player1:place_building("warmill", self.f2)
-   self.lumberjack = player1:place_building("lumberjacks_hut", self.f3)
+   self.inn = player1:place_building("big_inn", self.f1, false, true)
+   self.warmill = player1:place_building("warmill", self.f2, false, true)
+   self.lumberjack = player1:place_building("lumberjacks_hut", self.f3, false, true)
 end
 function productionsite_tests:teardown()
    pcall(function()

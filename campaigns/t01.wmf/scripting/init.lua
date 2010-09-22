@@ -15,7 +15,8 @@ p:forbid_buildings("all")
 p:allow_buildings{"lumberjacks_hut"}
 
 -- Place the headquarters & fill it with wares
-hq = p:place_building("headquarters_interim", wl.Game().map:get_field(12,10))
+hq = p:place_building("headquarters_interim", wl.Game().map:get_field(12,10),
+   false, true)
 hq:set_wares{
    trunk = 80
 }

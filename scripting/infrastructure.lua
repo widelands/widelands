@@ -91,7 +91,7 @@ end
 --    :type b1_descr: :class:`array`
 function prefilled_buildings(p, ...)
    for idx,bdescr in ipairs({...}) do
-      b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]))
+      b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]), false, true)
       -- Fill with workers
       if b.valid_workers then b:set_workers(b.valid_workers) end
       if bdescr.workers then b:set_workers(bdescr.workers) end

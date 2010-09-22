@@ -1021,7 +1021,7 @@ void L_MapObject::__unpersist(lua_State * L) {
 		constant after saving/loading.
 */
 int L_MapObject::get_serial(lua_State * L) {
-	lua_pushuint32(L, m_ptr->get(get_egbase(L))->serial());
+	lua_pushuint32(L, get(get_egbase(L), L)->serial());
 	return 1;
 }
 
@@ -1033,7 +1033,7 @@ int L_MapObject::get_serial(lua_State * L) {
 		immovable, flag, road, productionsite, warehouse, militarysite...
 */
 int L_MapObject::get_type(lua_State * L) {
-	lua_pushstring(L, m_ptr->get(get_egbase(L))->type_name());
+	lua_pushstring(L, get(get_egbase(L), L)->type_name());
 	return 1;
 }
 

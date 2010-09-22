@@ -127,6 +127,7 @@ public:
 	/*
 	 * C Methods
 	 */
+	// TODO: lua_State should be first, as always
 	Widelands::Map_Object * get
 		(Widelands::Editor_Game_Base &, lua_State *, std::string = "MapObject");
 	Widelands::Map_Object * m_get_or_zero(Widelands::Editor_Game_Base &);

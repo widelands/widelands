@@ -356,46 +356,48 @@ int L_PlayerBase::place_road(lua_State * L) {
 }
 
 /* RST
-	.. method:: place_building(name, field[, constructionsite = false])
+	.. method:: place_building(name, field[, cs = false, force = false])
 
 		Immediately creates a building on the given field. The building starts
-		out completely empty. If :const:`constructionsite` is set, the building
+		out completely empty. If :const:`cs` is set, the building
 		is not created directly, instead a constructionsite for this building is
-		placed. Note that this implies: force = false.
+		placed.
 
-		If :const:`constructionsite` is not set, the buildings i is forced to be
-		at this position, the same action is taken as for :meth:`place_flag` when
-		force is :const:`true`. Additionally, all buildings that are too close to
-		the new one are ripped.
+		If the :const:`force` argument is set, the building is forced into
+		existence: the same action is taken as for :meth:`place_flag` when force
+		is :const:`true`. Additionally, all buildings that are too close to the
+		new one are ripped.
 
-		:returns: :class:`wl.map.Building` object created or :const:`nil` if
-			a constructionsite is created.
+		:returns: a subclass of :class:`wl.map.Building`
 */
-// TODO: this function should take a force parameter as any other
-// TODO: this function should return a wrapped constructionsite
-// TODO: add tests for the constructionsite functionality
 int L_PlayerBase::place_building(lua_State * L) {
 	const char * name = luaL_checkstring(L, 2);
 	LuaMap::L_Field * c = *get_user_class<LuaMap::L_Field>(L, 3);
 	bool constructionsite = false;
+	bool force = false;
 
 	if (lua_gettop(L) >= 4)
 		constructionsite = luaL_checkboolean(L, 4);
+	if (lua_gettop(L) >= 5)
+		force = luaL_checkboolean(L, 5);
 
 	Building_Index i = get(L, get_egbase(L)).tribe().building_index(name);
 	if (i == Building_Index::Null())
 		return report_error(L, "Unknown Building: '%s'", name);
 
-	if (not constructionsite) {
-		Building & b = get(L, get_egbase(L)).force_building
-			(c->coords(), i);
+	Building * b = 0;
+	if (force)
+		b = &get(L, get_egbase(L)).force_building
+			(c->coords(), i, constructionsite);
+	else
+		b = get(L, get_egbase(L)).build
+			(c->coords(), i, constructionsite);
 
-		return LuaMap::upcasted_immovable_to_lua(L, &b);
-	} else {
-		get(L, get_egbase(L)).build(c->coords(), i);
-		lua_pushnil(L);
-		return 1;
-	}
+	if (not b)
+		return report_error(L, "Couldn't place building!");
+
+	LuaMap::upcasted_immovable_to_lua(L, b);
+	return 1;
 }
 
 /* RST

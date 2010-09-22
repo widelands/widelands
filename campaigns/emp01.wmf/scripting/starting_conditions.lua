@@ -3,7 +3,8 @@
 -- =======================================================================
 p1:forbid_buildings("all")
 
-hq = p1:place_building("headquarters_shipwreck", wl.Game().map:get_field(6, 62))
+hq = p1:place_building("headquarters_shipwreck",
+   wl.Game().map:get_field(6, 62), false, true)
 hq:set_wares{
    helm = 4,
    wood_lance = 5,

@@ -98,11 +98,11 @@ function immovable_property_tests:setup()
    self.none = map:place_immovable("pebble1", map:get_field(19, 10))
    self.small = map:place_immovable("tree1", map:get_field(18, 10))
    self.medium = player1:place_building(
-      "burners_house", map:get_field(10,10)
+      "burners_house", map:get_field(10,10), false, true
    )
    self.big = map:place_immovable("stones4", map:get_field(20, 10))
    self.big_building = player1:place_building(
-      "fortress", map:get_field(15,11)
+      "fortress", map:get_field(15,11), false, true
    )
 end
 function immovable_property_tests:teardown()

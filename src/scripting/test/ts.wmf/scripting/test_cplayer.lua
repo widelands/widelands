@@ -117,14 +117,76 @@ end
 -- =====================
 -- place_building tests 
 -- =====================
-function player_tests:test_force_building()
-   local f = map:get_field(10,10)
-   local k = player1:place_building("headquarters", f)
+place_building_tests = lunit.TestCase("Player.place_building tests")
+function place_building_tests:setup() 
+   self.pis = {}
+   self.f = map:get_field(10,10)
+
+   player1:conquer(self.f, 5)
+end
+function place_building_tests:teardown()
+      for idx, b in ipairs(self.pis) do
+         pcall(function() 
+         if b.type == "flag" then
+            b:remove()
+         else
+            -- removing flag also removes building
+            b.fields[1].brn.immovable:remove()
+         end
+      end)
+   end
+end
+
+
+function place_building_tests:test_place_building_no_cs()
+   local k = player1:place_building("warehouse", self.f)
+   self.pis[#self.pis + 1] = k
    assert_equal(1, k.owner.number)
    assert_equal("warehouse", k.building_type)
-   f.brn.immovable:remove() -- removing flag also removes building
 end
-function player_tests:test_force_building_illegal_name()
+
+function place_building_tests:test_something_in_the_way_no_cs()
+   local f = player1:place_flag(self.f)
+   self.pis[#self.pis + 1] = f
+   assert_error("Something in the way!", function()
+      local k = player1:place_building("lumberjacks_hut", self.f)
+      self.pis[#self.pis + 1] = k
+   end)
+end
+
+function place_building_tests:test_force_building_no_cs()
+   local f = player1:place_flag(self.f)
+   self.pis[#self.pis + 1] = f
+   local k = player1:place_building("lumberjacks_hut", self.f, false, true)
+   self.pis[#self.pis + 1] = k
+   assert_equal("productionsite", k.building_type)
+end
+
+function place_building_tests:test_place_building_cs()
+   local k = player1:place_building("warehouse", self.f, true)
+   self.pis[#self.pis + 1] = k
+   assert_equal(1, k.owner.number)
+   assert_equal("constructionsite", k.building_type)
+end
+
+function place_building_tests:test_something_in_the_way_cs()
+   local f = player1:place_flag(self.f)
+   self.pis[#self.pis + 1] = f
+   assert_error("Something in the way!", function()
+      local k = player1:place_building("lumberjacks_hut", self.f, true)
+      self.pis[#self.pis + 1] = k
+   end)
+end
+
+function place_building_tests:test_force_building_cs()
+   local f = player1:place_flag(self.f)
+   self.pis[#self.pis + 1] = f
+   local k = player1:place_building("lumberjacks_hut", self.f, true, true)
+   self.pis[#self.pis + 1] = k
+   assert_equal("constructionsite", k.building_type)
+end
+
+function place_building_tests:test_force_building_illegal_name()
    assert_error("Illegal building", function()
       player1:place_building("kjhsfjkh", map:get_field(10,10))
    end)

@@ -381,7 +381,8 @@ Road & Player::force_road(Path const & path) {
 
 Building & Player::force_building
 	(Coords                const location,
-	 Building_Index        const idx)
+	 Building_Index        const idx,
+	 bool                  constructionsite)
 {
 	Map & map = egbase().map();
 	FCoords c[4]; //  Big buildings occupy 4 locations.
@@ -410,28 +411,31 @@ Building & Player::force_building
 				immovable->remove(egbase());
 		}
 	}
-	return
-		descr.create
-		(egbase(), *this, c[0], false);
+
+	if (constructionsite)
+		return egbase().warp_constructionsite(c[0], m_plnum, idx);
+	else
+		return descr.create (egbase(), *this, c[0], false);
 }
 
 
 /*
 ===============
-Place a construction site, checking that it's legal to do so.
+Place a construction site or building, checking that it's legal to do so.
 ===============
 */
-void Player::build(Coords c, Building_Index const idx)
+Building * Player::build
+	(Coords c, Building_Index const idx, bool constructionsite)
 {
 	int32_t buildcaps;
 
 	// Validate building type
 	if (not (idx and idx < tribe().get_nrbuildings()))
-		return;
+		return 0;
 	Building_Descr const & descr = *tribe().get_building_descr(idx);
 
 	if (!descr.is_buildable())
-		return;
+		return 0;
 
 
 	// Validate build position
@@ -441,14 +445,18 @@ void Player::build(Coords c, Building_Index const idx)
 
 	if (descr.get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE))
-			return;
+			return 0;
 	} else if
 		((buildcaps & BUILDCAPS_SIZEMASK)
 		 <
 		 descr.get_size() - BaseImmovable::SMALL + 1)
-		return;
+		return 0;
 
-	egbase().warp_constructionsite(c, m_plnum, idx);
+	if (constructionsite)
+		return &egbase().warp_constructionsite(c, m_plnum, idx);
+	else {
+		return &descr.create(egbase(), *this, c, false);
+	}
 }
 
 
