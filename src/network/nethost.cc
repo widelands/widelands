@@ -52,7 +52,7 @@ using boost::format;
 struct HostGameSettingsProvider : public GameSettingsProvider {
 	HostGameSettingsProvider(NetHost * const _h) : h(_h) {}
 
-	virtual void setScenario(bool) {}; //  FIXME no scenario for multiplayer
+	virtual void setScenario(bool is_scenario) {h->setScenario(is_scenario);}
 
 	virtual GameSettings const & settings() {return h->settings();}
 
@@ -61,6 +61,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		return number != settings().playernum;
 	}
 	virtual bool canChangePlayerTribe(uint8_t const number) {
+		if (settings().scenario)
+			return false;
 		if (number == settings().playernum)
 			return true;
 		if (number >= settings().players.size())
@@ -69,9 +71,13 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			settings().players.at(number).state == PlayerSettings::stateComputer;
 	}
 	virtual bool canChangePlayerInit(uint8_t const number) {
+		if (settings().scenario)
+			return false;
 		return number < settings().players.size();
 	}
 	virtual bool canChangePlayerTeam(uint8_t number) {
+		if (settings().scenario)
+			return false;
 		if (number >= settings().players.size())
 			return false;
 		if (number == settings().playernum)
@@ -678,7 +684,9 @@ void NetHost::run(bool const autorun)
 		game.run
 			(loaderUI,
 			 d->settings.savegame ?
-			 Widelands::Game::Loaded : Widelands::Game::NewNonScenario);
+			 Widelands::Game::Loaded
+			 : d->settings.scenario ?
+			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
 #if HAVE_GGZ
 		// if this is a ggz game, tell the metaserver that the game is done.
 		if (use_ggz)
@@ -1331,6 +1339,10 @@ void NetHost::setMultiplayerGameSettings()
 	d->settings.multiplayer = true;
 }
 
+void NetHost::setScenario(bool is_scenario)
+{
+	d->settings.scenario = is_scenario;
+}
 
 uint32_t NetHost::realSpeed()
 {
@@ -1366,6 +1378,7 @@ void NetHost::writeSettingMap(SendPacket & packet)
 	packet.String(d->settings.mapname);
 	packet.String(d->settings.mapfilename);
 	packet.Unsigned8(d->settings.savegame ? 1 : 0);
+	packet.Unsigned8(d->settings.scenario ? 1 : 0);
 }
 
 void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)

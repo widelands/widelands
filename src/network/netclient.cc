@@ -150,7 +150,7 @@ void NetClient::run ()
 	s.send(d->sock);
 
 	d->settings.multiplayer = true;
-	setScenario(false); //  FIXME no scenario for multiplayer
+	d->settings.scenario = false;
 	{
 		Fullscreen_Menu_LaunchGame lgm(this, this);
 		lgm.setChatProvider(*this);
@@ -207,7 +207,9 @@ void NetClient::run ()
 		game.run
 			(loaderUI,
 			 d->settings.savegame ?
-			 Widelands::Game::Loaded : Widelands::Game::NewNonScenario);
+			 Widelands::Game::Loaded
+			 : d->settings.scenario ?
+			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
 		d->modal = 0;
 		d->game = 0;
 	} catch (...) {
@@ -294,9 +296,9 @@ GameSettings const & NetClient::settings()
 	return d->settings;
 }
 
-void NetClient::setScenario(bool set)
+void NetClient::setScenario(bool)
 {
-	d->settings.scenario = set;
+	// Client is not allowed to do this
 }
 
 bool NetClient::canChangeMap()
@@ -311,12 +313,12 @@ bool NetClient::canChangePlayerState(uint8_t)
 
 bool NetClient::canChangePlayerTribe(uint8_t number)
 {
-	return number == d->playernum;
+	return (number == d->playernum) && !d->settings.scenario;
 }
 
 bool NetClient::canChangePlayerTeam(uint8_t number)
 {
-	return number == d->playernum;
+	return (number == d->playernum) && !d->settings.scenario;
 }
 
 bool NetClient::canChangePlayerInit(uint8_t)
@@ -597,6 +599,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->settings.mapfilename =
 			g_fs->FileSystem::fixCrossFile(packet.String());
 		d->settings.savegame = packet.Unsigned8() == 1;
+		d->settings.scenario = packet.Unsigned8() == 1;
 		log
 			("[Client] SETTING_MAP '%s' '%s'\n",
 			 d->settings.mapname.c_str(), d->settings.mapfilename.c_str());

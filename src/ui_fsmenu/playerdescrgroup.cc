@@ -180,7 +180,10 @@ void PlayerDescriptionGroup::refresh()
 				title = _("Human");
 				if (settings.multiplayer) {
 					d->btnReadyPlayer->set_visible(true);
-					d->btnReadyPlayer->set_enabled(tribeaccess);
+					d->btnReadyPlayer->set_enabled
+						(tribeaccess
+						 || ((d->plnum == d->settings->settings().playernum)
+						      && d->settings->settings().scenario));
 					d->btnReadyPlayer->set_state(player.ready);
 				} else
 					d->btnReadyPlayer->set_visible(false);

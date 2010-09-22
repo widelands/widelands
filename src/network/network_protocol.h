@@ -156,6 +156,7 @@ enum {
 	 * \li String: human readable mapname
 	 * \li String: map filename
 	 * \li bool:   is_savegame
+	 * \li bool:   is_scenario
 	 */
 	NETCMD_SETTING_MAP = 5,
 

@@ -57,7 +57,7 @@ struct NetHost : public GameController, private SyncCallback {
 	// Pregame-related stuff
 	GameSettings const & settings();
 	bool canLaunch();
-	void setScenario(bool); //  no scenario for multiplayer
+	void setScenario(bool);
 	void setMap
 		(std::string const & mapname,
 		 std::string const & mapfilename,
