@@ -764,6 +764,205 @@ Module Classes
 */
 
 /* RST
+Map
+---
+
+.. class:: Map
+
+	Access to the map and it's objects. You cannot instantiate this directly,
+	instead access it via :attr:`wl.Game.map`.
+*/
+const char L_Map::className[] = "Map";
+const MethodType<L_Map> L_Map::Methods[] = {
+	METHOD(L_Map, place_immovable),
+	METHOD(L_Map, get_field),
+	{0, 0},
+};
+const PropertyType<L_Map> L_Map::Properties[] = {
+	PROP_RO(L_Map, width),
+	PROP_RO(L_Map, height),
+	PROP_RO(L_Map, player_slots),
+	{0, 0, 0},
+};
+
+void L_Map::__persist(lua_State * L) {
+}
+void L_Map::__unpersist(lua_State * L) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: width
+
+		(RO) The width of the map in fields.
+*/
+int L_Map::get_width(lua_State * L) {
+	lua_pushuint32(L, get_egbase(L).map().get_width());
+	return 1;
+}
+/* RST
+	.. attribute:: height
+
+		(RO) The height of the map in fields.
+*/
+int L_Map::get_height(lua_State * L) {
+	lua_pushuint32(L, get_egbase(L).map().get_height());
+	return 1;
+}
+
+/* RST
+	.. attribute:: player_slots
+
+		(RO) This is an :class:`array` that contains :class:`~wl.map.PlayerSlots`
+		for each player defined in the map.
+*/
+int L_Map::get_player_slots(lua_State * L) {
+	Map & m = get_egbase(L).map();
+
+	lua_createtable(L, m.get_nrplayers(), 0);
+	for(uint32_t i = 0; i < m.get_nrplayers(); i++) {
+		lua_pushuint32(L, i+1);
+		to_lua<LuaMap::L_PlayerSlot>(L, new LuaMap::L_PlayerSlot(i+1));
+		lua_settable(L, -3);
+	}
+
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+/* RST
+	.. method:: place_immovable(name, field[, from_where = "world"])
+
+		Creates an immovable that is defined by the world (e.g. trees, stones...)
+		or a tribe (field) on a given field. If there is already an immovable on
+		the field, an error is reported.
+
+		:arg name: The name of the immovable to create
+		:type name: :class:`string`
+		:arg field: The immovable is created on this field.
+		:type field: :class:`wl.map.Field`
+		:arg from_where: a tribe name or "world" that defines where the immovable
+			is defined
+		:type from_where: :class:`string`
+
+		:returns: The created immovable.
+*/
+int L_Map::place_immovable(lua_State * const L) {
+	std::string from_where = "world";
+
+	char const * const objname = luaL_checkstring(L, 2);
+	LuaMap::L_Field * c = *get_user_class<LuaMap::L_Field>(L, 3);
+	if (lua_gettop(L) > 3 and not lua_isnil(L, 4))
+		from_where = luaL_checkstring(L, 4);
+
+	// Check if the map is still free here
+	if
+	 (BaseImmovable const * const imm = c->fcoords(L).field->get_immovable())
+		if (imm->get_size() >= BaseImmovable::SMALL)
+			return report_error(L, "Node is no longer free!");
+
+	Editor_Game_Base & egbase = get_egbase(L);
+
+	BaseImmovable * m = 0;
+	if (from_where != "world") {
+		try {
+			Widelands::Tribe_Descr const & tribe =
+				egbase.manually_load_tribe(from_where);
+
+			int32_t const imm_idx = tribe.get_immovable_index(objname);
+			if (imm_idx < 0)
+				return
+					report_error
+					(L, "Unknown immovable <%s> for tribe <%s>",
+					 objname, from_where.c_str());
+
+			m = &egbase.create_immovable(c->coords(), imm_idx, &tribe);
+		} catch (game_data_error & gd) {
+			return
+				report_error
+					(L, "Problem loading tribe <%s>. Maybe not existent?",
+					 from_where.c_str());
+		}
+	} else {
+		int32_t const imm_idx = egbase.map().world().get_immovable_index(objname);
+		if (imm_idx < 0)
+			return report_error(L, "Unknown immovable <%s>", objname);
+
+		m = &egbase.create_immovable(c->coords(), imm_idx, 0);
+	}
+
+	return LuaMap::upcasted_immovable_to_lua(L, m);
+}
+
+/* RST
+	.. method:: get_field(x_or_table[, y])
+
+		Returns a :class:`wl.map.Field` object of the given index.
+		The function either takes two arguments: the x and y index
+		of the field or a :class:`table` as argument. If you pass in a table, it
+		will first be checked for the fields :const:`x` and :const:`y`, then for
+		the index 1 and 2.
+
+		:returns: :const:`nil`
+*/
+int L_Map::get_field(lua_State * L) {
+	uint32_t x = 4294967295; // 2^32 - 1
+	uint32_t y = 4294967295; // 2^32 - 1
+
+	if (lua_gettop(L) == 3) { // x, y arguments
+		x = luaL_checkuint32(L, 2);
+		y = luaL_checkuint32(L, 3);
+	} else {
+		luaL_checktype(L, 2, LUA_TTABLE);
+
+		lua_getfield(L, 2, "x");
+		if lua_isnil(L, -1) {
+			lua_pop(L, 1); // pop the nil
+			lua_pushuint32(L, 1);
+			lua_gettable(L, 2);
+			if lua_isnil(L, -1)
+				return report_error(L, "No 'x' or first key in table");
+		}
+		x = luaL_checkuint32(L, -1);
+		lua_pop(L, 1);
+
+		lua_getfield(L, 2, "y");
+		if lua_isnil(L, -1) {
+			lua_pop(L, 1); // pop the nil
+			lua_pushuint32(L, 2);
+			lua_gettable(L, 2);
+			if lua_isnil(L, -1)
+				return report_error(L, "No 'y' or second key in table");
+		}
+		y = luaL_checkuint32(L, -1);
+		lua_pop(L, 1);
+	}
+
+	Map & m = get_egbase(L).map();
+	if (x >= static_cast<uint32_t>(m.get_width()))
+		report_error(L, "x coordinate out of range!");
+	if (y >= static_cast<uint32_t>(m.get_height()))
+		report_error(L, "y coordinate out of range!");
+
+	return to_lua<LuaMap::L_Field>(L, new LuaMap::L_Field(x, y));
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+/* RST
 MapObject
 ----------
 
@@ -1817,7 +2016,7 @@ Field
 	Field has two Triangles associated with itself: the right and the down one.
 
 	You cannot instantiate this class directly, instead use
-	:meth:`wl.Map.get_field`.
+	:meth:`wl.map.Map.get_field`.
 */
 
 const char L_Field::className[] = "Field";
@@ -2309,6 +2508,7 @@ void luaopen_wlmap(lua_State * L) {
 	luaL_register(L, "wl.map", wlmap);
 	lua_pop(L, 1); // pop the table from the stack
 
+	register_class<L_Map>(L, "map");
 	register_class<L_Field>(L, "map");
 	register_class<L_PlayerSlot>(L, "map");
 	register_class<L_MapObject>(L, "map");

@@ -26,9 +26,6 @@
 
 #include "lua_bases.h"
 
-// TODO: when map is moved, remove this
-#include "lua_root.h"
-
 using namespace Widelands;
 
 namespace LuaBases {
@@ -95,10 +92,10 @@ void L_EditorGameBase::__unpersist(lua_State * L) {
 /* RST
 	.. attribute:: map
 
-		(RO) The :class:`~wl.Map` the game is played on.
+		(RO) The :class:`~wl.map.Map` the game is played on.
 */
 int L_EditorGameBase::get_map(lua_State * L) {
-	to_lua<LuaRoot::L_Map>(L, new LuaRoot::L_Map());
+	to_lua<LuaMap::L_Map>(L, new LuaMap::L_Map());
 	return 1;
 }
 

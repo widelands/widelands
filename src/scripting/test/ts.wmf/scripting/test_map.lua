@@ -1,11 +1,11 @@
--- ============================
--- Test functionality in wl.Map 
--- ============================
+-- ================================
+-- Test functionality in wl.map.Map 
+-- ================================
 
 test_map = lunit.TestCase("Map functions test")
 function test_map:test_instantiation_forbidden()
    assert_error("Cannot instantiate", function()
-      wl.Map()
+      wl.map.Map()
    end)
 end
 

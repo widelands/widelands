@@ -49,6 +49,39 @@ class L_MapModuleClass : public LunaClass {
 		const char * get_modulename() {return "map";}
 };
 
+
+class L_Map : public L_MapModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_Map);
+
+	L_Map() {}
+	L_Map(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'Map' directly!");
+	}
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_width(lua_State *);
+	int get_height(lua_State *);
+	int get_player_slots(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+	int place_immovable(lua_State *);
+	int get_field(lua_State *);
+
+	/*
+	 * C methods
+	 */
+private:
+};
+
+
 #define CASTED_GET(klass) \
 Widelands:: klass * get(lua_State * L, Widelands::Editor_Game_Base & egbase) { \
 	return static_cast<Widelands:: klass *> \
