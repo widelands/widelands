@@ -29,7 +29,7 @@
 
 #include "luna.h"
 
-void luaopen_wlui(lua_State *);
+namespace LuaUi {
 
 /*
  * Base class for all classes in wl.ui
@@ -196,6 +196,7 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int close(lua_State * L);
 	int click(lua_State * L);
 	int abort_road_building(lua_State * L);
 
@@ -204,4 +205,9 @@ public:
 	 */
    Interactive_Base * get() { return static_cast<Interactive_Base *>(m_panel); }
 };
+
+void luaopen_wlui(lua_State *);
+
+};
+
 #endif

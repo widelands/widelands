@@ -21,11 +21,10 @@ return {
 
 		-- Get all valueable fields of the map
 		local fields = {}
-		local mapwidth  = wl.map.get_width()
-		local mapheight = wl.map.get_height()
-		for x=0,mapwidth-1 do
-			for y=0,mapheight-1 do
-				local f = wl.map.Field(x,y)
+      local map = wl.Game().map
+		for x=0,map.width-1 do
+			for y=0,map.height-1 do
+				local f = map:get_field(x,y)
 				if f then
 					-- add this field to the list as long as it has not movecaps swim
 					if not f.has_movecaps_swim(f) then
@@ -42,8 +41,7 @@ return {
 		local remaining_time = 10 -- (dummy) -- time in secs, if == 0 -> victory
 
 		-- Find all valid players
-		local plrs = {}
-		valid_players(plrs)
+      local plrs = wl.Game().players
 
 		-- send a message with the game type to all players
 		broadcast(plrs, wc_name, wc_desc)

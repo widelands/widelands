@@ -1,7 +1,6 @@
 -- =======================================================================
 --                      User Interface scripting tests                      
 -- =======================================================================
-
 ui_tests = lunit.TestCase("Game User Interface tests")
 function ui_tests:setup()
    self.mv = wl.ui.MapView()
@@ -23,7 +22,7 @@ end
 
 function ui_tests:test_buttons_property()
    assert_not_equal(nil, self.mv.buttons.buildhelp)
-   assert_equal(7, self:_cnt(self.mv.buttons)) -- a scenario game, so 7 buttons
+   assert_equal(7, self:_cnt(self.mv.buttons)) -- a scenario game, so 7
 end
 
 function ui_tests:test_window_property()
@@ -65,6 +64,7 @@ function ui_tests:test_descendant_position()
    self.mv.buttons.messages:click()
    local w = self.mv.windows.messages
    local b = w.buttons.invert_selection
+
    w.position_x = 50
    w.position_y = 50
 
@@ -78,7 +78,7 @@ function ui_tests:test_descendant_position_not_child()
    self.mv.buttons.messages:click()
    local w = self.mv.windows.messages
    local b = self.mv.buttons.buildhelp
-   
+
    assert_error("Not a descendant!", function()
       w:get_descendant_position(b)
    end)
@@ -100,16 +100,16 @@ function ui_tests:test_height(x)
 end
 
 function ui_tests:test_mouse_pos_x(x)
-   self.mv.mouse_position_x = 200 
+   self.mv.mouse_position_x = 200
    assert_equal(200, self.mv.mouse_position_x)
 end
 function ui_tests:test_mouse_pos_y(x)
-   self.mv.mouse_position_y = 100 
+   self.mv.mouse_position_y = 100
    assert_equal(100, self.mv.mouse_position_y)
 end
 
 -- ========
--- Buttons 
+-- Buttons
 -- ========
 button_tests = lunit.TestCase("Button tests")
 function button_tests:setup()
@@ -122,15 +122,15 @@ function button_tests:test_name()
 end
 function button_tests:test_click()
    self.b:click()
-   
+
    assert_equal(true, wl.ui.MapView().buildhelp)
 end
 
 -- =========
--- TabPanel 
+-- TabPanel
 -- =========
 tab_panel_tests = lunit.TestCase("TabPanel Unit Tests")
-function tab_panel_tests:_cnt(t) 
+function tab_panel_tests:_cnt(t)
    local rv = 0
    for k,v in pairs(t) do
       rv = rv + 1 end
@@ -140,8 +140,13 @@ end
 function tab_panel_tests:setup()
    local mv = wl.ui.MapView()
    for n,w in pairs(mv.windows) do w:close() end
-   mv:click(wl.map.Field(10,10))
+   mv:click(map:get_field(10,10))
    self.w = mv.windows.field_action
+end
+function tab_panel_tests:teardown()
+   local mv = wl.ui.MapView()
+   for n,w in pairs(mv.windows) do w:close() end
+   self.w = nil
 end
 
 function tab_panel_tests:test_tabs()
@@ -156,7 +161,7 @@ function tab_panel_tests:test_activate()
 end
 
 -- ========
--- MapView 
+-- MapView
 -- ========
 mv_tests = lunit.TestCase("MapView tests")
 function mv_tests:setup()
@@ -167,7 +172,7 @@ function mv_tests:setup()
 end
 
 function mv_tests:test_click()
-   self.mv:click(wl.map.Field(10,10))
+   self.mv:click(map:get_field(10,10))
    assert_not_equal(nil, self.mv.windows.field_action)
 end
 
@@ -182,7 +187,5 @@ function mv_tests:test_statistics()
    assert_equal(true, self.mv.statistics)
    assert_equal(false, self.mv.census)
 end
-
-
 
 

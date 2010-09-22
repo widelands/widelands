@@ -1509,7 +1509,9 @@ void WLApplication::mainmenu()
 		} catch (Widelands::game_data_error const & e) {
 			messagetitle = _("Game data error");
 			message = e.what();
-		} catch (std::exception const & e) {
+		}
+#ifndef DEBUG
+		catch (std::exception const & e) {
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
 			message +=
@@ -1525,7 +1527,7 @@ void WLApplication::mainmenu()
 					 "during the game. It is often - though not always - possible "
 					 "to load it and continue playing.\n");
 		}
-
+#endif
 	}
 }
 

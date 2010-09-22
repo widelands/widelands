@@ -156,10 +156,7 @@ hooks.custom_statistic = {
 sleep(1000)
 
 local remaining_time = 60 * 4
-
--- Find all valid players
-local plrs = {}
-valid_players(plrs)
+local plrs = wl.Game().players
 
 -- send a message with the game type to all players
 for idx, p in ipairs(plrs) do

@@ -17,29 +17,29 @@
  *
  */
 
-#include "editor_player_menu.h"
 
-#include "editor/editorinteractive.h"
-#include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "wui/overlay_manager.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "wexception.h"
-
+#include "wui/overlay_manager.h"
+#include "editor/editorinteractive.h"
+#include "editor/tools/editor_set_starting_pos_tool.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
+
+#include "editor_player_menu.h"
 
 
 Editor_Player_Menu::Editor_Player_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 	:
 	UI::UniqueWindow
-		(&parent, "player_menu", &registry, 340, 400, _("Player Options")),
+		(&parent, "players_menu", &registry, 340, 400, _("Player Options")),
 	m_add_player
 		(this, "add_player",
 		 5, 5, 20, 20,
@@ -72,6 +72,7 @@ Editor_Player_Menu::Editor_Player_Menu
 	m_nr_of_players_ta = new UI::Textarea(this, 0, 0, "5");
 	m_nr_of_players_ta->set_pos
 		(Point((get_inner_w() - m_nr_of_players_ta->get_w()) / 2, posy + 5));
+
 	posy += width + spacing + spacing;
 
 	m_posy = posy;
@@ -80,10 +81,12 @@ Editor_Player_Menu::Editor_Player_Menu
 		m_plr_names          [i] = 0;
 		m_plr_set_pos_buts   [i] = 0;
 		m_plr_set_tribes_buts[i] = 0;
+		m_plr_make_infrastructure_buts[i] = 0;
 	}
 	update();
 
 	set_think(true);
+
 }
 
 /**
@@ -182,6 +185,24 @@ void Editor_Player_Menu::update() {
 		text[29] += p % 10;
 		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->get_picture(PicMod_Game, text));
 		posy += size + spacing;
+
+      // Build infrastructure but
+		// Still disabled at the moment.
+      // if(!m_plr_make_infrastructure_buts[p - 1]) {
+      //                   m_plr_make_infrastructure_buts[p - 1] =
+      //                           new UI::Callback_IDButton
+      //                           <Editor_Player_Menu, Widelands::Player_Number const>
+      //                                   (this, "build_infrastructure",
+      //                                    posx, posy, size, size,
+      //                                    g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+      //                                    g_gr->get_no_picture(), //  set below
+      //                                    &Editor_Player_Menu::make_infrastructure_clicked, *this, p,
+      //                                    std::string());
+      //                                    // _("I"), //  SirVer, TODO come up with a picture for this
+      //                                    // _("Make infrastructure"));
+      //    posx+=size+spacing;
+      // }
+      //           m_plr_make_infrastructure_buts[p - 1]->set_enabled(true);
 	}
 	set_inner_size(get_inner_w(), posy + spacing);
 }
@@ -216,52 +237,87 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	Widelands::Player_Number const old_nr_players = map.get_nrplayers();
 	Widelands::Player_Number const nr_players     = old_nr_players - 1;
 	assert(1 <= nr_players);
-	if (not menu.is_player_tribe_referenced(old_nr_players)) {
-		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
-			//  Remove starting position marker.
-			char picsname[] = "pics/editor_player_00_starting_pos.png";
-			picsname[19] += old_nr_players / 10;
-			picsname[20] += old_nr_players % 10;
-			map.overlay_manager().remove_overlay
-				(sp, g_gr->get_picture(PicMod_Game, picsname));
-		}
-		std::string const & name  = map.get_scenario_player_name (nr_players);
-		std::string const & tribe = map.get_scenario_player_tribe(nr_players);
-		map.set_nrplayers(nr_players);
-		map.set_scenario_player_name(nr_players, name);   //  ???
-		map.set_scenario_player_tribe(nr_players, tribe); //  ???
-		menu.set_need_save(true);
-		m_add_player        .set_enabled(true);
-		m_remove_last_player.set_enabled(1 < nr_players);
-		if
-			(&menu.tools.current() == &menu.tools.set_starting_pos
-			 and
-			 menu.tools.set_starting_pos.get_current_player() == old_nr_players)
-			//  The starting position tool is the currently active editor tool and
-			//  the sel picture is the one with the color of
-			//  the player that is being removed. Make sure that it is fixed in
-			//  that case by by switching the tool to the previous player and
-			//  reselecting the tool.
-			set_starting_pos_clicked(nr_players); //  This calls update().
-		else
-			update();
-	} else {
-		UI::WLMessageBox mmb
-			(&menu,
-			 _("Error!"),
-			 _
-			 	("Can not remove player. It is referenced in some place. Remove all"
-			 	 " buildings and bobs that depend on this player and try again."),
-			 UI::WLMessageBox::OK);
-		mmb.run();
-	}
+	// SirVer TODO: this must be back in
+   //      if (not menu.is_player_tribe_referenced(old_nr_players)) {
+   //              if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
+   //                      //  Remove starting position marker.
+   //                      char picsname[] = "pics/editor_player_00_starting_pos.png";
+   //                      picsname[19] += old_nr_players / 10;
+   //                      picsname[20] += old_nr_players % 10;
+   //                      map.overlay_manager().remove_overlay
+   //                              (sp, g_gr->get_picture(PicMod_Game, picsname));
+   //              }
+   //              std::string const & name  = map.get_scenario_player_name (nr_players);
+   //              std::string const & tribe = map.get_scenario_player_tribe(nr_players);
+   //
+   //    posx = spacing;
+   //    posy+=size+spacing;
+   // }
+   // set_inner_size(get_inner_w(),posy+spacing);
 }
+
+/*
+==============
+Editor_Player_Menu::clicked_up_down()
+
+called when a button is clicked
+==============
+*/
+// void Editor_Player_Menu::clicked_up_down(int8_t change) {
+//         Editor_Interactive & parent =
+//                 dynamic_cast<Editor_Interactive &>(*get_parent());
+//         Widelands::Map & map = parent.egbase().map();
+//         Widelands::Player_Number nr_players = map.get_nrplayers();
+//    // Up down button
+//         nr_players += change;
+//    if(nr_players<1) nr_players=1;
+//    if(nr_players>MAX_PLAYERS) nr_players=MAX_PLAYERS;
+//         if (nr_players > map.get_nrplayers()) {
+//       // register new default name for this players
+//       char c1=  (nr_players/10) ? (nr_players/10) + 0x30 : 0;
+//       char c2= (nr_players%10) + 0x30;
+//       std::string name=_("Player ");
+//       if(c1) name.append(1,c1);
+//       name.append(1,c2);
+//
+//                 map.set_nrplayers(nr_players);
+//                 map.set_scenario_player_name(nr_players, name);   //  ???
+//                 // SirVer TODO: next lines were commented without a clue
+//                 // map.set_scenario_player_tribe(nr_players, tribe); //  ???
+//                 // menu.set_need_save(true);
+//                 m_add_player        .set_enabled(true);
+//                 m_remove_last_player.set_enabled(1 < nr_players);
+//                 // SirVer TODO: next lines were commented without a clue
+//                 // if
+//                 //         (&menu.tools.current() == &menu.tools.set_starting_pos
+//                 //          and
+//                 //          menu.tools.set_starting_pos.get_current_player() == old_nr_players)
+//                 //         //  The starting position tool is the currently active editor tool and
+//                 //         //  the sel picture is the one with the color of
+//                 //         //  the player that is being removed. Make sure that it is fixed in
+//                 //         //  that case by by switching the tool to the previous player and
+//                 //         //  reselecting the tool.
+//                 //         set_starting_pos_clicked(nr_players); //  This calls update().
+//                 // else
+//                         update();
+//         } else {
+//                 // SirVer, TODO: this error was commented without a clue
+//                 // UI::WLMessageBox mmb
+//                 //         (&menu,
+//                 //          _("Error!"),
+//                 //          _
+//                 //                 ("Can not remove player. It is referenced in some place. Remove all"
+//                 //                  " buildings and bobs that depend on this player and try again."),
+//                 //          UI::WLMessageBox::OK);
+//                 // mmb.run();
+//         }
+// }
 
 
 /**
  * Player Tribe Button clicked
  */
-void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
+void Editor_Player_Menu::player_tribe_clicked(uint8_t n) {
 	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	if (not menu.is_player_tribe_referenced(n + 1)) {
@@ -293,7 +349,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 /**
  * Set Current Start Position button selected
  */
-void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
+void Editor_Player_Menu::set_starting_pos_clicked(uint8_t n) {
 	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	//  jump to the current node
@@ -333,3 +389,71 @@ void Editor_Player_Menu::name_changed(int32_t m) {
 	m_plr_names[m]->setText(map.get_scenario_player_name(m + 1));
 	menu.set_need_save(true);
 }
+
+/*
+ * Make infrastructure button clicked
+ */
+void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
+	Editor_Interactive & parent =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
+   // Check if starting position is valid (was checked before
+   // so must be true)
+	Widelands::Editor_Game_Base & egbase = parent.egbase();
+	Widelands::Map & map = egbase.map();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
+	const Widelands::Coords start_pos = map.get_starting_pos(n);
+   assert(start_pos);
+
+	Widelands::Player * p = egbase.get_player(n);
+   if(!p) {
+      // This player is unknown, register it, place a hq and reference the tribe
+      // so that this tribe can not be changed
+		egbase.add_player
+			(n, 0, // SirVer, TODO: initialization index makes no sense here
+			 m_plr_set_tribes_buts[n - 1]->get_title(),
+			 m_plr_names[n - 1]->text());
+
+		p = egbase.get_player(n);
+   }
+
+   // If the player is already created in the editor, this means
+   // that there might be already a hq placed somewhere. This needs to be
+   // deleted before a starting position change can occure
+	const Widelands::Player_Number player_number = p->player_number();
+	const Widelands::Coords starting_pos = map.get_starting_pos(player_number);
+	Widelands::BaseImmovable * const imm = map[starting_pos].get_immovable();
+	if (not imm) {
+      // place HQ
+		const Widelands::Tribe_Descr & tribe = p->tribe();
+      const Widelands::Building_Index idx =
+			tribe.building_index("headquarters");
+      if (not idx)
+         throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
+                // Widelands::Warehouse & headquarter = dynamic_cast<Widelands::Warehouse &>
+                //         (egbase.warp_building(starting_pos, player_number, idx));
+                // egbase.conquer_area
+                //         (Player_Area
+                //          (player_number, Area(starting_pos, headquarter.get_conquers())));
+                // tribe.load_warehouse_with_start_wares(editor, headquarter);
+
+		parent.reference_player_tribe(n, &tribe);
+
+      // Remove the player overlay from this starting pos.
+      // A HQ is overlay enough
+      std::string picsname="pics/editor_player_";
+      picsname+=static_cast<char>((n/10) + 0x30);
+      picsname+=static_cast<char>((n%10) + 0x30);
+      picsname+="_starting_pos.png";
+		overlay_manager.remove_overlay
+			(start_pos, g_gr->get_picture(PicMod_Game,  picsname));
+   }
+
+	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);
+	parent.tools.make_infrastructure.set_player(n);
+	overlay_manager.register_overlay_callback_function
+		(&Editor_Make_Infrastructure_Tool_Callback,
+		 static_cast<void *>(&egbase),
+		 n);
+	map.recalc_whole_map();
+}
+

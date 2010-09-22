@@ -9,7 +9,7 @@ use("aux", "infrastructure")
 use("aux", "table")
 use("aux", "ui")
 
-p1 = wl.game.Player(1)
+p1 = wl.Game().players[1]
 
 use("map", "starting_conditions")
 use("map", "texts")

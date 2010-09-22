@@ -50,7 +50,7 @@ private:
 	UI::Callback_Button<Editor_Player_Menu>
 		m_add_player, m_remove_last_player;
 	UI::Callback_IDButton<Editor_Player_Menu, Widelands::Player_Number const>
-		//* m_plr_allowed_buildings       [MAX_PLAYERS],
+		* m_plr_make_infrastructure_buts[MAX_PLAYERS],
 		* m_plr_set_pos_buts            [MAX_PLAYERS],
 		* m_plr_set_tribes_buts         [MAX_PLAYERS];
 	std::vector<std::string> m_tribes;
@@ -67,6 +67,7 @@ private:
 	void set_starting_pos_clicked   (uint8_t);
 	void update();
 	void think();
+	void make_infrastructure_clicked(uint8_t);
 };
 
 #endif

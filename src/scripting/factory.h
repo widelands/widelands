@@ -17,11 +17,36 @@
  *
  */
 
-#ifndef LUA_DEBUG_H
-#define LUA_DEBUG_H
+#ifndef FACTORY_H
+#define FACTORY_H
 
 #include <lua.hpp>
 
-void luaopen_wldebug(lua_State *);
+#include "logic/widelands.h"
 
-#endif
+/*
+ * Class to create the correct type for types shared between Editor and Game.
+ */
+class Factory {
+public:
+	virtual void push_player(lua_State * L, Widelands::Player_Number) = 0;
+	virtual ~Factory() {}
+
+};
+
+class GameFactory : public Factory {
+public:
+	virtual ~GameFactory() {}
+
+	virtual void push_player(lua_State * L, Widelands::Player_Number plr);
+};
+
+class EditorFactory  : public Factory{
+public:
+	virtual ~EditorFactory() {}
+
+	virtual void push_player(lua_State * L, Widelands::Player_Number plr);
+};
+
+#endif /* end of include guard: FACTORY_H */
+

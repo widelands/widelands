@@ -244,46 +244,6 @@ WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
 		 name().c_str(), serial(), wi.value());
 }
 
-
-void ProductionSite::prefill
-	(Game                 &       game,
-	 uint32_t       const * const ware_counts,
-	 uint32_t       const *       worker_counts,
-	 Soldier_Counts const * const soldier_counts)
-{
-	Building::prefill(game, ware_counts, worker_counts, soldier_counts);
-	{ //  init input ware queues
-		Ware_Types const & inputs = descr().inputs();
-		m_input_queues.resize(inputs.size());
-		for (ware_range i(inputs); i; ++i)
-			m_input_queues[i.i] =
-				new WaresQueue
-					(*this,
-					 i.current->first,
-					 i.current->second,
-					 ware_counts ? ware_counts[i.i] : 0);
-	}
-	if (worker_counts) {
-		Working_Position * wp = m_working_positions;
-	Ware_Types const & descr_working_positions = descr().working_positions();
-		container_iterate_const(Ware_Types, descr_working_positions, i) {
-			uint32_t nr_workers = *worker_counts;
-			assert(nr_workers <= i.current->second);
-			wp += i.current->second - nr_workers;
-			Worker_Descr const & wdes =
-				*tribe().get_worker_descr(i.current->first);
-			while (nr_workers--) {
-				Worker & worker = wdes.create(game, owner(), 0, get_position());
-				worker.start_task_idle(game, 0, -1);
-				wp->worker = &worker;
-				++wp;
-			}
-			++worker_counts;
-		}
-	}
-}
-
-
 /**
  * Calculate statistic.
  */
@@ -328,7 +288,16 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
 
-	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
+
+	Ware_Types const & inputs = descr().inputs();
+	m_input_queues.resize(inputs.size());
+	for (ware_range i(inputs); i; ++i)
+		m_input_queues[i.i] =
+			new WaresQueue
+			(*this,
+			 i.current->first,
+			 i.current->second, 0);
+	// TODO SirVer: likely WaresQueue no longer needs last param
 
 	//  Request missing wares.
 	container_iterate_const(std::vector<WaresQueue *>, m_input_queues, i)
@@ -345,7 +314,8 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 				wp->worker_request = &request_worker(worker_index);
 	}
 
-	try_start_working(game);
+	if (upcast(Game, game, &egbase))
+		try_start_working(*game);
 }
 
 /**
@@ -404,7 +374,9 @@ void ProductionSite::cleanup(Editor_Game_Base & egbase)
  *
  * returns 0 on success -1 if there is no room for this worker
  */
-int ProductionSite::warp_worker(Game & game, const Worker_Descr & wdes) {
+int ProductionSite::warp_worker
+	(Editor_Game_Base & egbase, const Worker_Descr & wdes)
+{
 	bool assigned = false;
 	Working_Position * current = m_working_positions;
 	for
@@ -420,8 +392,10 @@ int ProductionSite::warp_worker(Game & game, const Worker_Descr & wdes) {
 			continue;
 
 		// Okay, space is free and worker is fitting. Let's create him
-		Worker & worker = wdes.create(game, owner(), this, get_position());
-		worker.start_task_idle(game, 0, -1);
+		Worker & worker = wdes.create(egbase, owner(), this, get_position());
+
+		if(upcast(Game, game, &egbase))
+			worker.start_task_idle(*game, 0, -1);
 		current->worker = &worker;
 		delete current->worker_request;
 		current->worker_request = 0;
@@ -431,7 +405,9 @@ int ProductionSite::warp_worker(Game & game, const Worker_Descr & wdes) {
 	if (not assigned)
 		return -1;
 
-	try_start_working(game);
+	if(upcast(Game, game, &egbase))
+		try_start_working(*game);
+
 	return 0;
 }
 

@@ -84,14 +84,8 @@ following file as ``/scripting/win_conditions/havest_trunks.lua``.
       name = _ "Harvest trunks",
       description = _ "The first player with 200 trunks wins!",
       func = function() 
-         -- Find all valid players. Some slots may be empty, so we have to collect
-         -- valid players and not trust to the player numbers.
-         local plrs = {}
-         for i=1,10 do
-            if pcall(wl.game.Player, i) then -- Note: pcall catches errors
-               plrs[#plrs+1] = wl.game.Player(i)
-            end
-         end
+         -- Find all valid players.
+         local plrs = wl.Game().players
 
          -- Iterate all players, check if he is the winner
          local winner = nil
@@ -153,18 +147,18 @@ Debug console
 In widelands debug builds you can open a debug console by pressing ``F6``. You
 can enter Lua commands here that act in the global environment: That is if you
 are in a scenario you can access the global variables and alter all Lua
-objects that are in the global scope. All you have to do is to prefix the
-commands with ``lua``:
+objects that are in the global scope:
 
 .. code-block:: lua
 
-   lua print("Hello World!")
-   lua hq = wl.game.Player(1).starting_field.immovable -- If this is a normal map
-   lua hq:set_workers("builder", 100)
+   print("Hello World!")
+   map = wl.Game().map
+   hq = map.player_slots[1].starting_field.immovable -- If this is a normal map
+   hq:set_workers("builder", 100)
 
 This makes for excellent cheating in debug builds, but note that this is for
 debug purposes only -- in network games running Lua commands this way will
 desync and therefore crash the game and also replays where you changed the
-game state via the debug console will not replay properly. It is very useful
+game state via the debug console will not work. It is very useful
 for debugging scenarios though. 
 

@@ -36,8 +36,8 @@ function introduction_thread()
    -- Reveal the rocks
    local obj = add_obj(obj_claim_northeastern_rocks)
 
-   local rocks = wl.map.Field(27, 48)
-   local intermediate_point = wl.map.Field(31,12)
+   local rocks = wl.Game().map:get_field(27, 48)
+   local intermediate_point = wl.Game().map:get_field(31,12)
    plr:reveal_fields(rocks:region(6))
    local way1 = scroll_smoothly_to(intermediate_point, 1500)
    local way2 = scroll_smoothly_to(rocks, 1500)
@@ -50,7 +50,7 @@ function introduction_thread()
    timed_scroll(array_reverse(way1), 10)
 
    -- Now, wait till the quarry comes up
-   local f = wl.map.Field(27,48):region(6)
+   local f = wl.Game().map:get_field(27,48):region(6)
    while not check_for_buildings(plr, { quarry = 1 }, f) do 
       sleep(5000)
    end
@@ -65,8 +65,8 @@ end
 -- How to mine & produce food thread
 -- ==================================
 function mines_and_food_thread()
-   local f1 = wl.map.Field(30, 15)
-   local f2 = wl.map.Field(24, 61)
+   local f1 = wl.Game().map:get_field(30, 15)
+   local f2 = wl.Game().map:get_field(24, 61)
 
    -- Sleep until we see the mountains
    while not plr:seen_field(f1) and not plr:seen_field(f2) do
@@ -180,7 +180,7 @@ end
 -- Better building materials thread
 -- =================================
 function build_materials_thread()
-   local plr = wl.game.Player(1)
+   local plr = wl.Game().players[1]
 
    -- Wait for a barrier or a sentry to be build
    while true do
@@ -273,15 +273,15 @@ end
 -- Village thread
 -- ===============
 function village_thread()
-   local plr = wl.game.Player(1)
-   while not (plr:seen_field(wl.map.Field(52,39)) or
-              plr:seen_field(wl.map.Field(58,10))) do
+   local plr = wl.Game().players[1]
+   while not (plr:seen_field(wl.Game().map:get_field(52,39)) or
+              plr:seen_field(wl.Game().map:get_field(58,10))) do
          sleep(6534)
    end
 
    reveal_village()
 
-   pts = scroll_smoothly_to(wl.map.Field(55, 25), 3000)
+   pts = scroll_smoothly_to(wl.Game().map:get_field(55, 25), 3000)
 
    send_msg(msg_village)
 
@@ -310,12 +310,13 @@ end
 --]]
 function reveal_village()
    function force_map_immovables(list)
+      local map = wl.Game().map
       for idx, id in ipairs(list) do
-         local f = wl.map.Field(id[2], id[3])
+         local f = map:get_field(id[2], id[3])
          if f.immovable then
             pcall(f.immovable.remove, f.immovable)
          end
-         wl.map.create_immovable(id[1], f, id[4])
+         map:place_immovable(id[1], f, id[4])
       end
    end
 
@@ -360,7 +361,7 @@ function reveal_village()
       { "field2", 55, 35, "barbarians" },
    }
 
-   local plr = wl.game.Player(1)
+   local plr = wl.Game().players[1]
    prefilled_buildings(plr,
       {"sentry", 57, 9},
       {"sentry", 52, 39},
@@ -385,33 +386,34 @@ function reveal_village()
    )
 
    -- Adjust the borders so that the village owns everything green
-   plr:conquer(wl.map.Field(59, 16), 2)
-   plr:conquer(wl.map.Field(57, 18), 2)
-   plr:conquer(wl.map.Field(58, 19), 1)
-   plr:conquer(wl.map.Field(58, 20), 1)
-   plr:conquer(wl.map.Field(54, 15), 1)
-   plr:conquer(wl.map.Field(54, 16), 1)
-   plr:conquer(wl.map.Field(54, 20), 1)
-   plr:conquer(wl.map.Field(54, 22), 1)
-   plr:conquer(wl.map.Field(57, 23), 1)
-   plr:conquer(wl.map.Field(58, 24), 1)
-   plr:conquer(wl.map.Field(57, 27), 1)
-   plr:conquer(wl.map.Field(56, 31), 1)
-   plr:conquer(wl.map.Field(56, 33), 1)
-   plr:conquer(wl.map.Field(52, 32), 1)
+   local map = wl.Game().map
+   plr:conquer(map:get_field(59, 16), 2)
+   plr:conquer(map:get_field(57, 18), 2)
+   plr:conquer(map:get_field(58, 19), 1)
+   plr:conquer(map:get_field(58, 20), 1)
+   plr:conquer(map:get_field(54, 15), 1)
+   plr:conquer(map:get_field(54, 16), 1)
+   plr:conquer(map:get_field(54, 20), 1)
+   plr:conquer(map:get_field(54, 22), 1)
+   plr:conquer(map:get_field(57, 23), 1)
+   plr:conquer(map:get_field(58, 24), 1)
+   plr:conquer(map:get_field(57, 27), 1)
+   plr:conquer(map:get_field(56, 31), 1)
+   plr:conquer(map:get_field(56, 33), 1)
+   plr:conquer(map:get_field(52, 32), 1)
 
    -- Build roads
    -- Start at northern sentry
-   connected_road(plr, wl.map.Field(58, 10).immovable,
+   connected_road(plr, map:get_field(58, 10).immovable,
       "w,sw|se,sw|e,se|se,se|sw,sw|sw,w|sw,sw|se,sw|sw,sw|se,sw|" ..
       "sw,sw|sw,sw|sw,sw|se,se,sw|e,e|sw,sw|se,sw|")
 
-   connected_road(plr, wl.map.Field(57, 25).immovable, "sw,w|sw,w")
-   connected_road(plr, wl.map.Field(57, 29).immovable, "w,w|w,w")
-   connected_road(plr, wl.map.Field(55, 34).immovable, "sw,sw")
-   connected_road(plr, wl.map.Field(57, 22).immovable, "sw,w")
-   connected_road(plr, wl.map.Field(54, 19).immovable, "sw,se,e")
-   connected_road(plr, wl.map.Field(56, 17).immovable, "sw,se")
+   connected_road(plr, map:get_field(57, 25).immovable, "sw,w|sw,w")
+   connected_road(plr, map:get_field(57, 29).immovable, "w,w|w,w")
+   connected_road(plr, map:get_field(55, 34).immovable, "sw,sw")
+   connected_road(plr, map:get_field(57, 22).immovable, "sw,w")
+   connected_road(plr, map:get_field(54, 19).immovable, "sw,se,e")
+   connected_road(plr, map:get_field(56, 17).immovable, "sw,se")
 end
 
 run(introduction_thread)

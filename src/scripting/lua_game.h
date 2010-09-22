@@ -25,6 +25,7 @@
 #include "logic/building.h"
 #include "logic/message_id.h"
 
+#include "lua_bases.h"
 #include "luna.h"
 
 namespace Widelands {
@@ -32,6 +33,8 @@ namespace Widelands {
 	struct Objective;
 	struct Message;
 };
+
+namespace LuaGame {
 
 /*
  * Base class for all classes in wl.game
@@ -41,31 +44,27 @@ class L_GameModuleClass : public LunaClass {
 		const char * get_modulename() {return "game";}
 };
 
-class L_Player : public L_GameModuleClass {
-	Widelands::Player_Number m_pl;
-	enum {NONE = -1};
-
+class L_Player : public LuaBases::L_PlayerBase {
 public:
+	// Overwritten from L_PlayerBase, avoid ambiguity when deriving from
+	// L_GameModuleClass and L_PlayerBase
+	const char * get_modulename() {return "game";}
+
 	LUNA_CLASS_HEAD(L_Player);
 
-	L_Player() : m_pl(NONE) {}
-	L_Player(Widelands::Player_Number n) {
-		m_pl = n;
+	L_Player() : LuaBases::L_PlayerBase() {}
+	L_Player(Widelands::Player_Number n) : LuaBases::L_PlayerBase(n)  {}
+	L_Player(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'Player' directly!");
 	}
-	L_Player(lua_State * L);
-
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
 
 	/*
 	 * Properties
 	 */
-	int get_number(lua_State * L);
 	int get_name(lua_State * L);
 	int get_allowed_buildings(lua_State * L);
 	int get_objectives(lua_State * L);
 	int get_defeated(lua_State * L);
-	int get_starting_field(lua_State * L);
 	int get_retreat_percentage(lua_State * L);
 	int set_retreat_percentage(lua_State * L);
 	int get_changing_retreat_percentage_allowed(lua_State * L);
@@ -73,16 +72,12 @@ public:
 	int get_inbox(lua_State * L);
 	int get_team(lua_State * L);
 	int set_team(lua_State * L);
-	int get_tribe(lua_State * L);
 	int get_see_all(lua_State * L);
 	int set_see_all(lua_State * L);
 
 	/*
 	 * Lua methods
 	 */
-	int __eq(lua_State * L);
-	int place_flag(lua_State * L);
-	int place_building(lua_State * L);
 	int send_message(lua_State * L);
 	int message_box(lua_State * L);
 	int sees_field(lua_State * L);
@@ -90,12 +85,10 @@ public:
 	int allow_buildings(lua_State * L);
 	int forbid_buildings(lua_State * L);
 	int add_objective(lua_State * L);
-	int conquer(lua_State * L);
 	int reveal_fields(lua_State * L);
 	int hide_fields(lua_State * L);
 	int reveal_scenario(lua_State * L);
 	int reveal_campaign(lua_State * L);
-	int place_road(lua_State * L);
 	int get_buildings(lua_State * L);
 	int set_flag_style(lua_State * L);
 	int set_frontier_style(lua_State * L);
@@ -103,17 +96,15 @@ public:
 	int allow_workers(lua_State * L);
 	int switchplayer(lua_State * L);
 
-
-
 	/*
 	 * C methods
 	 */
-	Widelands::Player & get(lua_State * L, Widelands::Editor_Game_Base &);
 private:
 	void m_parse_building_list
 		(lua_State *, const Widelands::Tribe_Descr &,
 		 std::vector<Widelands::Building_Index> &);
 	int m_allow_forbid_buildings(lua_State * L, bool);
+
 };
 
 class L_Objective : public L_GameModuleClass {
@@ -199,4 +190,6 @@ public:
 void luaopen_wlgame(lua_State *);
 
 #endif
+};
+
 

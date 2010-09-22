@@ -9,10 +9,10 @@ use("aux", "infrastructure")
 use("aux", "table")
 use("aux", "ui")
 
-p1 = wl.game.Player(1)
-p2 = wl.game.Player(2)
-p3 = wl.game.Player(3)
-p4 = wl.game.Player(4)
+p1 = wl.Game().players[1]
+p2 = wl.Game().players[2]
+p3 = wl.Game().players[3]
+p4 = wl.Game().players[4]
 
 use("map", "texts")
 use("map", "initial_conditions")
@@ -23,20 +23,21 @@ function mission_thread()
 
    send_msg(briefing_1_the_forbidden_island)
 
-   while not p1:seen_field(wl.map.Field(5,8)) do sleep(2345) end
+   local map = wl.Game().map
+   while not p1:seen_field(map:get_field(5,8)) do sleep(2345) end
 
    -- Unhide the castle and keep it unhidden so that it can be attacked
-   local castle = wl.map.Field(23, 19)
+   local castle = map:get_field(23, 19)
    p1:reveal_fields(castle:region(4))
 
    -- Show the way to the castle very briefly
    local way = array_combine(
-      wl.map.Field( 5,  8):region(2), 
-      wl.map.Field( 9, 10):region(2), 
-      wl.map.Field(12, 12):region(2), 
-      wl.map.Field(15, 14):region(2), 
-      wl.map.Field(18, 16):region(2), 
-      wl.map.Field(20, 17):region(2)
+      map:get_field( 5,  8):region(2), 
+      map:get_field( 9, 10):region(2), 
+      map:get_field(12, 12):region(2), 
+      map:get_field(15, 14):region(2), 
+      map:get_field(18, 16):region(2), 
+      map:get_field(20, 17):region(2)
    )
    p1:reveal_fields(way)
    sleep(100)
