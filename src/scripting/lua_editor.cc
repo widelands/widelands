@@ -68,8 +68,9 @@ Player
 	Child of: :class:`wl.bases.PlayerBase`
 
 	This class represents one of the players in the editor.
+	Note that you cannot instantiate a class of this type directly, use the
+	:attr:`wl.Editor.players`.
 
-	TODO: add help how to access a player in the editor
 */
 const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {

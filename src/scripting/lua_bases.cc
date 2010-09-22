@@ -380,7 +380,6 @@ int L_PlayerBase::place_building(lua_State * L) {
 		:type radius: :class:`integer`
 		:returns: :const:`nil`
 */
-// TODO: reconsider this. Conquer might not make sense in the editor.
 int L_PlayerBase::conquer(lua_State * L) {
 	uint32_t radius = 1;
 	if (lua_gettop(L) > 2)
