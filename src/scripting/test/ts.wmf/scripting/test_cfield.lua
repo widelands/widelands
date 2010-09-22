@@ -233,4 +233,88 @@ function field_resources_tests:test_set_resource_type_illegal_resource()
 end
 
 
+-- =======
+-- owners 
+-- =======
+field_owner_tests = lunit.TestCase("Field ownage tests")
+function field_owner_tests:setup()
+   self.pis = {}
+end
+function field_owner_tests:teardown()
+   for idx, b in ipairs(self.pis) do
+      pcall(function() b:remove() end)
+   end
+end
+
+function field_owner_tests:test_no_owners()
+   local o = map:get_field(15,35).owners
+   assert_equal(0, #o)
+end
+
+function field_owner_tests:test_blue_first()
+   local f = map:get_field(10,10)
+   local s1 = player1:place_building("sentry", f)
+   s1:set_soldiers({0,0,0,0}, 1)
+
+   self.pis[#self.pis + 1] = f.brn.immovable
+
+   local o = map:get_field(10,10).owners
+   assert_equal(1, #o)
+   assert_equal(player1, o[1])
+
+   local f = map:get_field(14, 10)
+   local s2 = player2:place_building("sentry", f)
+   s2:set_soldiers({0,0,0,0}, 1)
+
+   self.pis[#self.pis + 1] = f.brn.immovable
+   
+   -- Still owned by first player
+   local o = map:get_field(10,10).owners
+   assert_equal(2, #o)
+   assert_equal(player1, o[1])
+   assert_equal(player2, o[2])
+end
+
+function field_owner_tests:test_red_first()
+   local f = map:get_field(10,10)
+   local s1 = player2:place_building("sentry", f)
+   s1:set_soldiers({0,0,0,0}, 1)
+
+   self.pis[#self.pis + 1] = f.brn.immovable
+
+   local o = map:get_field(10,10).owners
+   assert_equal(1, #o)
+   assert_equal(player2, o[1])
+
+   local f = map:get_field(14, 10)
+   local s2 = player1:place_building("sentry", f)
+   s2:set_soldiers({0,0,0,0}, 1)
+
+   self.pis[#self.pis + 1] = f.brn.immovable
+   
+   -- Still owned by first player
+   local o = map:get_field(10,10).owners
+   assert_equal(2, #o)
+   assert_equal(player2, o[1])
+   assert_equal(player1, o[2])
+end
+
+function field_owner_tests:test_no_military_influence()
+   local f = map:get_field(10,10)
+   local s1 = player2:place_building("sentry", f)
+   s1:set_soldiers({0,0,0,0}, 1)
+   f.brn.immovable:remove()
+
+   local o = map:get_field(10,10).owners
+   assert_equal(1, #o)
+   assert_equal(player2, o[1])
+end
+
+function field_owner_tests:test_just_one_flag()
+   local f = map:get_field(15,37)
+   player1:place_flag(f, true):remove()
+
+   assert_equal(1, #f.owners)
+   assert_equal(player1, f.owners[1])
+end
 

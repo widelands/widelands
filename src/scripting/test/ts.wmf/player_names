@@ -11,9 +11,9 @@ ai=
 [player_2]
 name="Epic Empire"
 tribe="empire"
-ai=
+ai="Defensive"
 
 [player_3]
 name="Awesome Atlantean"
 tribe="atlanteans"
-ai=
+ai="Defensive"

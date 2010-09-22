@@ -25,6 +25,7 @@ include "test_math_random"
 include "test_map"
 include "test_cplayer"
 include "test_cfield"
+include "test_cplr_access"
 
 include "test_immovables"
 
@@ -33,6 +34,7 @@ if not wl.editor then
 
    include "test_gplayer"
    include "test_gfield"
+   include "test_gplr_access"
 
    include "test_objectives"
    include "test_messages"
@@ -42,6 +44,7 @@ if not wl.editor then
    include "test_ui"
 else
    include "test_editor"
+   include "test_eplr_access"
 
    include "test_efield"
 end

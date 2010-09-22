@@ -126,8 +126,7 @@ int L_EditorGameBase::get_players(lua_State * L) {
 			continue;
 
 		lua_pushuint32(L, idx++);
-
-		player_to_lua(L, i);
+		get_factory(L).push_player(L, i);
 		lua_settable(L, -3);
 	}
 	return 1;

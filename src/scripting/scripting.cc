@@ -33,6 +33,7 @@
 #include "lua_root.h"
 #include "lua_ui.h"
 #include "persistence.h"
+#include "factory.h"
 
 #include "scripting.h"
 
@@ -365,6 +366,9 @@ struct LuaEditorInterface_Impl : public LuaEditorGameBaseInterface_Impl
 {
 	LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g);
 	virtual ~LuaEditorInterface_Impl() {}
+
+private:
+	EditorFactory m_factory;
 };
 
 LuaEditorInterface_Impl::LuaEditorInterface_Impl
@@ -373,6 +377,11 @@ LuaEditorGameBaseInterface_Impl(g)
 {
 	LuaRoot::luaopen_wlroot(m_L, true);
 	LuaEditor::luaopen_wleditor(m_L);
+
+	// Push the factory class into the registry
+	lua_pushlightuserdata
+		(m_L, reinterpret_cast<void*>(dynamic_cast<Factory*>(&m_factory)));
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
 }
 
 
@@ -399,6 +408,9 @@ struct LuaGameInterface_Impl : public LuaEditorGameBaseInterface_Impl,
 		 uint32_t);
 	virtual uint32_t write_global_env
 		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&);
+
+private:
+	GameFactory m_factory;
 };
 
 /*
@@ -458,9 +470,14 @@ LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
 	LuaRoot::luaopen_wlroot(m_L, false);
 	LuaGame::luaopen_wlgame(m_L);
 
-	// Push the game onto the stack
+	// Push the game into the registry
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "game");
+
+	// Push the factory class into the registry
+	lua_pushlightuserdata
+		(m_L, reinterpret_cast<void*>(dynamic_cast<Factory*>(&m_factory)));
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
 }
 
 LuaCoroutine * LuaGameInterface_Impl::read_coroutine

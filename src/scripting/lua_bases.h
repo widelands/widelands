@@ -61,13 +61,6 @@ public:
 	/*
 	 * C methods
 	 */
-protected:
-
-	// Factory functions. Overwrite in Children. They are not pure
-	// virtual as the classes must be instantiated for the Lua binding.
-	virtual void player_to_lua(lua_State *, Widelands::Player_Number) {
-		assert(0);
-	}
 };
 
 

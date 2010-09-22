@@ -17,11 +17,24 @@
  *
  */
 
-#include "c_utils.h"
 
 #include <cstdarg>
 #include <cstdio>
 #include <iostream>
+
+#include "factory.h"
+
+#include "c_utils.h"
+
+Factory & get_factory(lua_State * const L) {
+	lua_getfield(L, LUA_REGISTRYINDEX, "factory");
+	Factory * fac = static_cast<Factory *>(lua_touserdata(L, -1));
+	lua_pop(L, 1); // pop this userdata
+
+	assert(fac);
+
+	return *fac;
+}
 
 Widelands::Game & get_game(lua_State * const L) {
 	lua_getfield(L, LUA_REGISTRYINDEX, "game");

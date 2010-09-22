@@ -63,10 +63,6 @@ public:
 	/*
 	 * C methods
 	 */
-protected:
-	virtual void player_to_lua(lua_State * L, Widelands::Player_Number plr) {
-		to_lua<LuaGame::L_Player>(L, new LuaGame::L_Player(plr));
-	}
 };
 
 class L_Editor : public LuaBases::L_EditorGameBase {
@@ -92,10 +88,6 @@ public:
 	/*
 	 * C methods
 	 */
-protected:
-	virtual void player_to_lua(lua_State * L, Widelands::Player_Number plr) {
-		to_lua<LuaEditor::L_Player>(L, new LuaEditor::L_Player(plr));
-	}
 };
 
 void luaopen_wlroot(lua_State *, bool in_editor);

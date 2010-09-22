@@ -1257,13 +1257,10 @@ const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
 
 		(RO) The :class:`wl.game.Player` who owns this object.
 */
-// TODO: this should return an Editor Player in the Editor
 int L_PlayerImmovable::get_owner(lua_State * L) {
-	return
-		to_lua<LuaGame::L_Player>
-			(L, new LuaGame::L_Player
-			 (get(L, get_egbase(L))->get_owner()->player_number())
-	);
+	get_factory(L).push_player
+		(L, get(L, get_egbase(L))->get_owner()->player_number());
+	return 1;
 }
 
 /*
@@ -2273,7 +2270,6 @@ GET_X_NEIGHBOUR(brn);
 		influence. That is owners[1] will really own the fields. This can
 		also return an empty list if the field is neutral at the moment.
 */
-// UNTESTED
 typedef std::pair<uint8_t, uint32_t> _PlrInfluence;
 static int _sort_owners
 		(const _PlrInfluence & first,
@@ -2281,7 +2277,6 @@ static int _sort_owners
 {
 	return first.second > second.second;
 }
-// TODO: this should return EditorPlayers in the editor
 int L_Field::get_owners(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	Map & map = egbase.map();
@@ -2298,14 +2293,23 @@ int L_Field::get_owners(lua_State * L) {
 	std::sort (owners.begin(), owners.end(), _sort_owners);
 
 	lua_newtable(L);
+
+	// Push the real owner.
 	uint32_t cidx = 1;
+	Player_Number current_owner = fcoords(L).field->get_owned_by();
+	if (current_owner) {
+		lua_pushuint32(L, cidx ++);
+		get_factory(L).push_player(L, current_owner);
+		lua_rawset(L, -3);
+	}
+
+	// Push the remaining players with military influence
 	container_iterate_const (std::vector<_PlrInfluence>, owners, i) {
-		if (i.current->second <= 0)
+		if (i.current->second <= 0 or i.current->first == current_owner)
 			continue;
 
 		lua_pushuint32(L, cidx ++);
-		to_lua<LuaGame::L_Player>
-			(L, new LuaGame::L_Player (i.current->first));
+		get_factory(L).push_player(L, i.current->first);
 		lua_rawset(L, -3);
 	}
 

@@ -623,9 +623,13 @@ void Editor_Game_Base::unconquer_area
 	//  Therefore the area must be enlarged before calling
 	//  cleanup_playerimmovables_area, so that those new border locations are
 	//  covered.
-	++player_area.radius;
-	player_area.player_number = destroying_player;
-	cleanup_playerimmovables_area(player_area);
+	// SirVer, TODO: In the editor, no buildings should burn down when a military
+	// building is removed. Check this again though
+	if (upcast(Game, game, this)) {
+		++player_area.radius;
+		player_area.player_number = destroying_player;
+		cleanup_playerimmovables_area(player_area);
+	}
 }
 
 /// This conquers a given area because of a new (military) building that is set
