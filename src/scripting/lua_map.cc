@@ -1536,7 +1536,6 @@ int L_Road::_new_worker
 	Carrier & carrier = ref_cast<Carrier, Worker>
 		(wdes->create (egbase, r.owner(), &r, idle_position));
 
-	// TODO: this whole stuff should be in a Road function
 	if(upcast(Game, game, &egbase))
 		carrier.start_task_road(*game);
 
