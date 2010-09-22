@@ -161,7 +161,7 @@ function build_road(field, ...)
    local cf = field
    for idx, d in ipairs{...} do
       if not (d == '|' or d == '.') then
-         if cf.immovable and cf.immovable.player ~= plr then
+         if cf.immovable and cf.immovable.owner ~= plr then
             cf.immovable:remove()
          end
          cf = cf[d .. 'n']
@@ -309,7 +309,7 @@ function bad_boy_sentry()
       -- Check all fields.
       local sent_msg = false
       for idx,f in ipairs(sf:region(8)) do
-         if f.immovable and f.immovable.player == plr and
+         if f.immovable and f.immovable.owner == plr and
                not registered_player_immovables[_fmt(f)] then
 
             -- Give the callback a chance to veto the deletion. Maybe

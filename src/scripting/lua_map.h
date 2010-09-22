@@ -172,7 +172,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_player(lua_State* L);
+	int get_owner(lua_State* L);
 
 	/*
 	 * Lua Methods

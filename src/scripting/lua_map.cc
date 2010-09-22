@@ -1243,7 +1243,7 @@ const MethodType<L_PlayerImmovable> L_PlayerImmovable::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
-	PROP_RO(L_PlayerImmovable, player),
+	PROP_RO(L_PlayerImmovable, owner),
 	{0, 0, 0},
 };
 
@@ -1253,11 +1253,12 @@ const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
  ==========================================================
  */
 /* RST
-	.. attribute:: player
+	.. attribute:: owner
 
 		(RO) The :class:`wl.game.Player` who owns this object.
 */
-int L_PlayerImmovable::get_player(lua_State * L) {
+// TODO: this should return an Editor Player in the Editor
+int L_PlayerImmovable::get_owner(lua_State * L) {
 	return
 		to_lua<LuaGame::L_Player>
 			(L, new LuaGame::L_Player
@@ -2280,6 +2281,7 @@ static int _sort_owners
 {
 	return first.second > second.second;
 }
+// TODO: this should return EditorPlayers in the editor
 int L_Field::get_owners(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	Map & map = egbase.map();

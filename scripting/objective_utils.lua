@@ -11,7 +11,7 @@
 function _check_for_region(plr, which, region)
    local carr = {}
    for idx,f in ipairs(region) do
-      if f.immovable and f.immovable.player == plr then
+      if f.immovable and f.immovable.owner == plr then
          if carr[f.immovable.name] == nil then
             carr[f.immovable.name] = 1
          else

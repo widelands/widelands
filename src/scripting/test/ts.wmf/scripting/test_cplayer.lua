@@ -26,7 +26,7 @@ end
 -- =================
 function player_tests:test_create_flag()
    local k = player1:place_flag(map:get_field(10,10), true)
-   assert_equal(k.player.number, 1)
+   assert_equal(k.owner.number, 1)
    k:remove()
 end
 function player_tests:test_create_flag_non_forcing()
@@ -36,7 +36,7 @@ function player_tests:test_create_flag_non_forcing()
    k:remove()
    -- Now, try again, but non forcing
    local k = player1:place_flag(f)
-   assert_equal(k.player.number, 1)
+   assert_equal(k.owner.number, 1)
    k:remove()
 end
 function player_tests:test_create_flag_non_forcing_too_close()
@@ -54,7 +54,7 @@ end
 -- function player_tests:test_create_flag2()
 --    local f = map:get_field(20,10)
 --    local k = wl.Game().players[2]:place_flag(f, true)
---    assert_equal(k.player.number, 2)
+--    assert_equal(k.owner.number, 2)
 --    k:remove()
 -- end
 
@@ -120,7 +120,7 @@ end
 function player_tests:test_force_building()
    local f = map:get_field(10,10)
    local k = player1:place_building("headquarters", f)
-   assert_equal(1, k.player.number)
+   assert_equal(1, k.owner.number)
    assert_equal("warehouse", k.building_type)
    f.brn.immovable:remove() -- removing flag also removes building
 end

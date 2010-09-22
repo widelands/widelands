@@ -199,7 +199,7 @@ function plr_immovables_test:teardown()
 end
 
 function plr_immovables_test:test_owner()
-   assert_equal(player1.number, self.f.player.number)
-   assert_equal(player1, self.f.player)
+   assert_equal(player1.number, self.f.owner.number)
+   assert_equal(player1, self.f.owner)
 end
 
