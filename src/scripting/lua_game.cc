@@ -111,7 +111,6 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, inbox),
 	PROP_RW(L_Player, team),
 	PROP_RO(L_Player, partner),
-	PROP_RO(L_Player, tribe),
 	PROP_RW(L_Player, see_all),
 	{0, 0, 0},
 };
