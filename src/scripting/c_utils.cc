@@ -23,6 +23,7 @@
 #include <iostream>
 
 #include "factory.h"
+#include "scripting.h"
 
 #include "c_utils.h"
 
@@ -31,7 +32,8 @@ Factory & get_factory(lua_State * const L) {
 	Factory * fac = static_cast<Factory *>(lua_touserdata(L, -1));
 	lua_pop(L, 1); // pop this userdata
 
-	assert(fac);
+	if (not fac)
+		throw LuaError("\"factory\" field was nil, which should be impossible!");
 
 	return *fac;
 }
@@ -41,7 +43,9 @@ Widelands::Game & get_game(lua_State * const L) {
 	Widelands::Game * g = static_cast<Widelands::Game *>(lua_touserdata(L, -1));
 	lua_pop(L, 1); // pop this userdata
 
-	assert(g);
+	if (not g)
+		throw LuaError
+			("\"game\" field was nil. get_game was not called in a game.");
 
 	return *g;
 }
@@ -52,7 +56,10 @@ Widelands::Editor_Game_Base & get_egbase(lua_State * const L) {
 		(lua_touserdata(L, -1));
 	lua_pop(L, 1); // pop this userdata
 
-	assert(g);
+	if (not g)
+		throw LuaError
+			("\"egbase\" field was nil. This should be impossible.");
+
 
 	return *g;
 }
@@ -66,6 +73,10 @@ Widelands::Map_Map_Object_Loader * get_mol(lua_State * const L) {
 
 	lua_pop(L, 1); // pop this userdata
 
+	if (not mol)
+		throw LuaError
+			("\"mol\" field was nil. This should be impossible.");
+
 	return mol;
 }
 
@@ -78,10 +89,12 @@ Widelands::Map_Map_Object_Saver * get_mos(lua_State * const L) {
 
 	lua_pop(L, 1); // pop this userdata
 
+	if (not mos)
+		throw LuaError
+			("\"mos\" field was nil. This should be impossible.");
+
 	return mos;
 }
-
-
 
 /*
  * Returns an error to lua. Returns 0
