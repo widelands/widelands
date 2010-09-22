@@ -41,8 +41,6 @@
 #include <ctype.h> // for tolower
 #endif
 
-// TODO: Roads are not rendered in the Editor. Fixe mark_map, post and presplit
-
 /*
 ============================================
        Lua Table
