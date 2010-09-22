@@ -159,6 +159,12 @@ struct Map :
 
 	};
 
+	// ORed bits for scenario types
+	typedef size_t ScenarioTypes;
+	const static ScenarioTypes NO_SCENARIO = 0;
+	const static ScenarioTypes SP_SCENARIO = 1;
+	const static ScenarioTypes MP_SCENARIO = 2;
+
 	Map ();
 	virtual ~Map();
 
@@ -198,7 +204,7 @@ struct Map :
 	void set_name       (char const *);
 	void set_description(char const *);
 	void set_background (char const *);
-	void set_as_scenario_playable(bool s) {m_scenario = s;}
+	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
 
 	// informational functions
 	const char * get_filename()    const {return m_filename;}
@@ -208,7 +214,7 @@ struct Map :
 	const char * get_world_name()  const {return m_worldname;}
 	const std::string & get_background() const {return m_background;}
 	Player_Number get_nrplayers() const throw () {return m_nrplayers;}
-	bool as_scenario_playable() const throw () {return m_scenario;}
+	ScenarioTypes scenario_types() const throw () {return m_scenario_types;}
 	Extent extent() const throw () {return Extent(m_width, m_height);}
 	X_Coordinate get_width   () const throw () {return m_width;}
 	Y_Coordinate get_height  () const throw () {return m_height;}
@@ -372,7 +378,7 @@ private:
 
 	/// # of players this map supports (!= Game's number of players!)
 	Player_Number m_nrplayers;
-	bool          m_scenario; // whether the map is playable as scenario
+	ScenarioTypes  m_scenario_types; // whether the map is playable as scenario
 
 	X_Coordinate m_width;
 	Y_Coordinate m_height;

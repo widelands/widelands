@@ -105,7 +105,7 @@ struct Game : public Editor_Game_Base {
 	void init_savegame(UI::ProgressWindow &, GameSettings const &);
 	bool run_splayer_scenario_direct(char const * mapname);
 	bool run_load_game (std::string filename);
-	enum Start_Game_Type {NewScenario, NewNonScenario, Loaded};
+	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
 	bool run(UI::ProgressWindow & loader_ui, Start_Game_Type);
 
 	virtual void postload();

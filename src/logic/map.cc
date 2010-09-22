@@ -52,6 +52,10 @@
 
 namespace Widelands {
 
+const Map::ScenarioTypes Map::NO_SCENARIO;
+const Map::ScenarioTypes Map::SP_SCENARIO;
+const Map::ScenarioTypes Map::MP_SCENARIO;
+
 /*
 ==============================================================================
 
@@ -68,7 +72,7 @@ Map IMPLEMENTATION
 
 Map::Map() :
 m_nrplayers      (0),
-m_scenario       (false),
+m_scenario_types (NO_SCENARIO),
 m_width          (0),
 m_height         (0),
 m_world          (0),
