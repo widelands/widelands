@@ -1,6 +1,6 @@
 file(GLOB WL_SCRIPTING_TEST_SRCS *.cc)
 
-add_executable(test_widelands_scripting ${WL_SCRIPTING_TEST_SRCS} ../../build_info.cc)
+add_executable(test_widelands_scripting ${WL_SCRIPTING_TEST_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/../../build_info.cc)
 
 set(SDL_LIBRARY_NOMAIN ${SDL_LIBRARY})
 list(REMOVE_ITEM SDL_LIBRARY_NOMAIN  ${SDLMAIN_LIBRARY}) 
