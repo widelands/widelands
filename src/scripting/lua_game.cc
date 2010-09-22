@@ -332,7 +332,6 @@ int L_Player::get_team(lua_State * L) {
 */
 int L_Player::get_partner(lua_State * L) {
 	lua_pushinteger(L, get(L, get_egbase(L)).partner());
-	log("     Partner is:%i\n", get(L, get_egbase(L)).partner());
 	return 1;
 }
 
