@@ -75,6 +75,7 @@ const MethodType<L_EditorGameBase> L_EditorGameBase::Methods[] = {
 };
 const PropertyType<L_EditorGameBase> L_EditorGameBase::Properties[] = {
 	PROP_RO(L_EditorGameBase, map),
+	PROP_RO(L_EditorGameBase, players),
 	{0, 0, 0},
 };
 
@@ -99,6 +100,39 @@ int L_EditorGameBase::get_map(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: players
+
+		(RO) An :class:`array` with the defined players. The players are
+		either of type :class:`wl.game.Player` or :class:`wl.editor.Player`.
+
+		In game, there might be less players then defined in
+		:attr:`wl.map.Map.player_slots` because some slots might not be taken.
+		Also note that for the same reason you cannot index this array with
+		:attr:`wl.bases.PlayerBase.number`, but the players are ordered with
+		increasing number in this array.
+
+		The editor always creates all players that are defined by the map.
+*/
+int L_EditorGameBase::get_players(lua_State * L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+
+	lua_newtable(L);
+
+	uint32_t idx = 1;
+	for(Player_Number i = 1; i <= MAX_PLAYERS; i++) {
+		Player * rv = egbase.get_player(i);
+		if (not rv)
+			continue;
+
+		lua_pushuint32(L, idx++);
+
+		player_to_lua(L, i);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
 /*
  ==========================================================
  LUA METHODS
@@ -110,7 +144,6 @@ int L_EditorGameBase::get_map(lua_State * L) {
  C METHODS
  ==========================================================
  */
-
 
 
 /* RST

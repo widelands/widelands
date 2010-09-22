@@ -82,7 +82,6 @@ const PropertyType<L_Game> L_Game::Properties[] = {
 	PROP_RO(L_Game, time),
 	PROP_RW(L_Game, desired_speed),
 	PROP_RW(L_Game, allow_autosaving),
-	PROP_RO(L_Game, players),
 	{0, 0, 0},
 };
 
@@ -148,33 +147,6 @@ int L_Game::set_allow_autosaving(lua_State * L) {
 // UNTESTED
 int L_Game::get_allow_autosaving(lua_State * L) {
 	lua_pushboolean(L, get_game(L).save_handler().get_allow_autosaving());
-	return 1;
-}
-
-/* RST
-	.. attribute:: players
-
-		(RO) An :class:`array` with the players currently in the game. Note that
-		this might be less then defined in :attr:`wl.map.Map.player_slots` because
-		some slots might not be taken. Also note that for the same reason you
-		cannot index this array with :attr:`wl.bases.PlayerBase.number`, but the
-		players are ordered with increasing number in this array.
-*/
-int L_Game::get_players(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-
-	lua_newtable(L);
-
-	uint32_t idx = 1;
-	for(Player_Number i = 1; i <= MAX_PLAYERS; i++) {
-		Player * rv = egbase.get_player(i);
-		if (not rv)
-			continue;
-
-		lua_pushuint32(L, idx++);
-		to_lua<LuaGame::L_Player>(L, new LuaGame::L_Player(i));
-		lua_settable(L, -3);
-	}
 	return 1;
 }
 
@@ -272,7 +244,6 @@ const MethodType<L_Editor> L_Editor::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_Editor> L_Editor::Properties[] = {
-	PROP_RO(L_Editor, players),
 	{0, 0, 0},
 };
 
@@ -290,31 +261,6 @@ void L_Editor::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: players
-
-		(RO) An :class:`array` with the players defined on the current map.
-		The editor always creates all players that are defined by the map.
-*/
-// TODO: this is too similar to L_Game::get_players.
-int L_Editor::get_players(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-
-	lua_newtable(L);
-
-	uint32_t idx = 1;
-	for(Player_Number i = 1; i <= MAX_PLAYERS; i++) {
-		Player * rv = egbase.get_player(i);
-		if (not rv)
-			continue;
-
-		lua_pushuint32(L, idx++);
-		to_lua<LuaEditor::L_Player>(L, new LuaEditor::L_Player(i));
-		lua_settable(L, -3);
-	}
-	return 1;
-}
-
 
 /*
  ==========================================================
