@@ -1812,6 +1812,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
 			player.name = buf;
 			player.team = 0;
+			player.partner = 0;
 			// Set default computerplayer ai type
 			if (player.state == PlayerSettings::stateComputer) {
 				Computer_Player::ImplementationVector const & impls =
@@ -1893,6 +1894,13 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) {
 		if (number < s.players.size())
 			s.players[number].team = team;
+	}
+
+	virtual void setPlayerPartner(uint8_t number, uint8_t partner) {
+		if (number < s.players.size())
+			if (partner <= s.players.size()) {
+				s.players[number].partner = partner;
+			}
 	}
 
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {

@@ -187,7 +187,8 @@ Player * Editor_Game_Base::add_player
 	 uint8_t             const initialization_index,
 	 std::string const &       tribe,
 	 std::string const &       name,
-	 TeamNumber team)
+	 TeamNumber                team,
+	 uint8_t                   partner)
 {
 	assert(1 <= player_number);
 	assert(player_number <= MAX_PLAYERS);
@@ -202,6 +203,7 @@ Player * Editor_Game_Base::add_player
 		 name,
 		 g_playercolors[player_number - 1]);
 	p->set_team_number(team);
+	p->set_partner(partner);
 	return p;
 }
 

@@ -1,6 +1,9 @@
 ### Build 16 (until now)
 - Improved and added a lot new animations for workers!
 - Implemented teamview for allied players
+- Implemented shared kingdom mode, where two or more players play the same
+  player.
+- Added possibility to create and play multiplayer scenarios.
 - Do not show building statistic informations of opposing players anymore
 - Gave foresters more intelligence - now they do not remove young trees to
   replant another anymore and plant the trees that suit the terrain the best.
