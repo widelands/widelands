@@ -539,7 +539,6 @@ bool Game::run
 	if (get_ipl())
 		if (get_player(get_ipl()->player_number())->partner() > 0) {
 			Player_Number p = get_player(get_ipl()->player_number())->partner();
-			log("Locale Player: %u; Partner: %u\n", get_ipl()->player_number(), p);
 			get_ipl()->set_player_number(p);
 		}
 

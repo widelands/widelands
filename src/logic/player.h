@@ -26,7 +26,6 @@
 #include "mapregion.h"
 #include "message_queue.h"
 #include "notification.h"
-#include "log.h"
 #include "rgbcolor.h"
 #include "tribe.h"
 
