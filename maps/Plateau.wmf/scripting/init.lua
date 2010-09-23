@@ -2,7 +2,7 @@
 --                             The Green Plateau                            
 -- =======================================================================
 
-set_textdomain("map_Plateau.wmf")
+set_textdomain("map_plateau.wmf")
 
 use("aux", "coroutine")
 use("aux", "infrastructure")
