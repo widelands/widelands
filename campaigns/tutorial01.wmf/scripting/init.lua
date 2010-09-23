@@ -2,8 +2,6 @@
 --                       Barbarians Campaign Mission 1
 -- =======================================================================
 
-set_textdomain("scenario_tutorial.wmf")
-
 -- ===============
 -- Initialization
 -- ===============
@@ -14,6 +12,7 @@ plr:allow_buildings("all")
 use("tribe_barbarians", "sc00_headquarters_medium")
 init.func(plr) -- defined in sc00_headquarters_medium
 
+set_textdomain("scenario_tutorial01.wmf")
 
 use("aux", "coroutine")
 use("aux", "ui")
