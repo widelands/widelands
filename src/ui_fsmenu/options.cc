@@ -463,6 +463,11 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this,
 		 m_xres * 1313 / 10000, m_yres * 8330 / 10000,
 		 _("OpenGL rendering *Highly experimental!*"), UI::Align_VCenter),
+	m_transparent_chat (this, Point(m_xres * 19 / 200, m_yres * 8645 / 10000)),
+	m_label_transparent_chat
+		(this,
+		 m_xres * 1313 / 10000, m_yres * 8795 / 10000,
+		 _("Show in game chat with transparent background"), UI::Align_VCenter),
 
 	os(opt)
 {
@@ -481,6 +486,8 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 #ifndef USE_OPENGL
 	m_opengl               .set_enabled(false);
 #endif
+	m_label_transparent_chat.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_transparent_chat     .set_state(opt.transparent_chat);
 	m_sb_speed             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_border        .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_panel         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -548,6 +555,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 #else
 	os.opengl               = false;
 #endif
+	os.transparent_chat     = m_transparent_chat.get_state();
 	return os;
 }
 
@@ -631,6 +639,8 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 		("remove_syncstreams", true);
 	opt.opengl                = m_opt_section.get_bool
 		("opengl", false);
+	opt.transparent_chat      = m_opt_section.get_bool
+		("transparent_chat", true);
 	return opt;
 }
 
@@ -664,6 +674,7 @@ void Options_Ctrl::save_options() {
 	m_opt_section.set_int("remove_replays",         opt.remove_replays);
 	m_opt_section.set_bool("remove_syncstreams",    opt.remove_syncstreams);
 	m_opt_section.set_bool("opengl",                opt.opengl);
+	m_opt_section.set_bool("transparent_chat",      opt.transparent_chat);
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
