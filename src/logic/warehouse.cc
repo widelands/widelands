@@ -373,9 +373,9 @@ void Warehouse::load_finish(Editor_Game_Base & egbase) {
 		Ware_Index const worker_index = worker_types_without_cost.at(--i);
 		if
 			(owner().is_worker_type_allowed(worker_index) and
-			 m_next_worker_without_cost_spawn[i] == Never())
+			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(Never()))
 		{
-			if (next_spawn == Never())
+			if (next_spawn == static_cast<uint32_t>(Never()))
 				next_spawn =
 					schedule_act
 						(ref_cast<Game, Editor_Game_Base>(egbase),
@@ -1142,7 +1142,7 @@ void Warehouse::enable_spawn
 	assert
 		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
 		 ==
-		 Never());
+		 static_cast<uint32_t>(Never()));
 	m_next_worker_without_cost_spawn[worker_types_without_cost_index] =
 		schedule_act(game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 }
@@ -1151,7 +1151,7 @@ void Warehouse::disable_spawn(uint8_t const worker_types_without_cost_index)
 	assert
 		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
 		 !=
-		 Never());
+		 static_cast<uint32_t>(Never()));
 	m_next_worker_without_cost_spawn[worker_types_without_cost_index] = Never();
 }
 

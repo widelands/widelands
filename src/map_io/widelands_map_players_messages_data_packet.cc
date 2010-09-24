@@ -171,13 +171,15 @@ throw (_wexception)
 		container_iterate_const(MessageQueue, messages, i) {
 			message_saver.add         (i.current->first);
 			Message const & message = *i.current->second;
-			assert(message.sent() <= egbase.get_gametime());
+			assert(message.sent() <= static_cast<uint32_t>(egbase.get_gametime()));
 			assert
 				(message.duration() == Forever() or
 				 message.sent() < message.sent() + message.duration());
 			if
 				(message.duration() != Forever() and
-				 message.sent() + message.duration() < egbase.get_gametime())
+				 message.sent() + message.duration()
+				 <
+				 static_cast<uint32_t>(egbase.get_gametime()))
 				log
 					("ERROR: Trying to save a message that should have expired:\n"
 					 "\tsent = %u, duration = %u, expiry = %u, gametime = %u\n"
@@ -196,7 +198,9 @@ throw (_wexception)
 					 message.status() == Message::Archived ? "archived" : "ERROR");
 			assert
 				(message.duration() == Forever() or
-				 egbase.get_gametime() <= message.sent() + message.duration());
+				 static_cast<uint32_t>(egbase.get_gametime())
+				 <=
+				 message.sent() + message.duration());
 			Section & s = prof.create_section_duplicate(message.title().c_str());
 			if (message.sender().size())
 				s.set_string("sender",    message.sender  ());

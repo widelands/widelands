@@ -437,7 +437,7 @@ struct Client {
 	TCPsocket sock;
 	Deserializer deserializer;
 	uint8_t playernum;
-	uint8_t usernum;
+	int16_t usernum;
 	std::string build_id;
 	md5_checksum syncreport;
 	bool syncreport_arrived;
@@ -641,23 +641,22 @@ void NetHost::run(bool const autorun)
 
 		loaderUI.step(_("Preparing game"));
 
-		// If our player is in shared kingdom mode - set the iabase accordingly.
-		uint8_t const pn =
-			(d->settings.players.at(d->settings.playernum).partner > 0) ?
-			 d->settings.players.at(d->settings.playernum).partner :
-			 d->settings.playernum + 1;
 		d->game = &game;
 		game.set_game_controller(this);
 		Interactive_GameBase * igb;
-		if (0 < pn and pn <= UserSettings::highestPlayernum())
+		// If our player is in shared kingdom mode - set the iabase accordingly.
+		uint8_t pn = d->settings.playernum + 1;
+		if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
+			if (d->settings.players.at(d->settings.playernum).partner > 0)
+				pn = d->settings.players.at(d->settings.playernum).partner;
 			igb =
 				new Interactive_Player
 					(game, g_options.pull_section("global"), pn, false, true);
-		else if (!autorun)
+		} else if (!autorun) {
 			igb =
 				new Interactive_Spectator
 					(*d->game, g_options.pull_section("global"), true);
-		else
+		} else
 			igb =
 				new Interactive_DServer
 					(*d->game, g_options.pull_section("global"));
@@ -809,7 +808,7 @@ void NetHost::send(ChatMessage msg)
 			s.Unsigned8(1);
 			s.String(msg.recipient);
 		} else { //find the recipient
-			uint32_t i = 0;
+			uint16_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
 				UserSettings const & user = d->settings.users.at(i);
 				if (user.name == msg.recipient)
@@ -823,7 +822,7 @@ void NetHost::send(ChatMessage msg)
 							("WARNING: user was found but no client is connected to "
 							 "it!\n");
 						break;
-					} else if (j->usernum == i) {
+					} else if (j->usernum == static_cast<int16_t>(i)) {
 						s.Signed16(msg.playern);
 						s.String(msg.sender);
 						s.String(msg.msg);
@@ -866,7 +865,7 @@ void NetHost::send(ChatMessage msg)
 		else if (d->localplayername == msg.sender)
 			d->chat.receive(msg);
 		else { // host is not the sender -> get sender
-			uint32_t i = 0;
+			uint16_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
 				UserSettings const & user = d->settings.users.at(i);
 				if (user.name == msg.sender)
@@ -875,7 +874,7 @@ void NetHost::send(ChatMessage msg)
 			if (i < d->settings.users.size()) {
 				uint32_t j = 0;
 				for (; j < d->clients.size(); ++j)
-					if (d->clients.at(j).usernum == i)
+					if (d->clients.at(j).usernum == static_cast<int16_t>(i))
 						break;
 				if (j < d->clients.size())
 					s.send(d->clients.at(j).sock);
@@ -909,7 +908,7 @@ void NetHost::kickUser(std::string name, std::string reason)
 	}
 
 	// Search for the user
-	uint32_t i = 0;
+	uint16_t i = 0;
 	uint32_t client = 0;
 	for (; i < d->settings.users.size(); ++i) {
 		UserSettings const & user = d->settings.users.at(i);
@@ -918,7 +917,7 @@ void NetHost::kickUser(std::string name, std::string reason)
 	}
 	if (i < d->settings.users.size()) {
 		for (; client < d->clients.size(); ++client)
-			if (d->clients.at(client).usernum == i)
+			if (d->clients.at(client).usernum == static_cast<int16_t>(i))
 				break;
 		if (client < d->clients.size())
 			i = d->clients.at(client).playernum;
@@ -1003,14 +1002,14 @@ void NetHost::setMap
 
 	while (oldplayers > maxplayers) {
 		--oldplayers;
-		for (uint32_t i = 1; i < d->settings.users.size(); ++i)
+		for (uint16_t i = 1; i < d->settings.users.size(); ++i)
 			if (d->settings.users.at(i).position == oldplayers) {
 				d->settings.users.at(i).position = UserSettings::none();
 
 				// for local settings
 				uint32_t j = 0;
 				for (; j < d->clients.size(); ++j)
-					if (d->clients.at(j).usernum == i)
+					if (d->clients.at(j).usernum == static_cast<int16_t>(i))
 						break;
 				d->clients.at(j).playernum = UserSettings::none();
 
@@ -1846,18 +1845,12 @@ void NetHost::handle_network ()
 		peer.playernum = UserSettings::notConnected();
 		peer.syncreport_arrived = false;
 		peer.desiredspeed = 1000;
+		peer.usernum = -1; // == no user assigned for now.
 		d->clients.push_back(peer);
 
 		// Now we wait for the client to say Hi in the right language,
 		// unless the game has already started
 		if (d->game) {
-			// the following lines are needed to avoid segfaults in
-			// disconnectClient
-			UserSettings newuser;
-			newuser.name = _("New User"); // shown in later disconnect msg.
-			d->clients.rbegin()->usernum = d->settings.users.size();
-			d->settings.users.push_back(newuser);
-
 			disconnectClient
 				(d->clients.size() - 1, _("The game has already started."));
 		}
@@ -2201,29 +2194,33 @@ void NetHost::disconnectClient
 		return;
 	}
 
-	sendSystemChat
-		(_("%s has left the game (%s)"),
-		 d->settings.users.at(client.usernum).name.c_str(),
-		 reason.c_str());
+	// If the client was completely connected before the disconnect, free the
+	// user settings and send changes to the clients
+	if (client.usernum >= 0) {
+		sendSystemChat
+			(_("%s has left the game (%s)"),
+			 d->settings.users.at(client.usernum).name.c_str(),
+			 reason.c_str());
+		d->settings.users.at(client.usernum).name     = std::string();
+		d->settings.users.at(client.usernum).position =
+			UserSettings::notConnected();
+			client.playernum = UserSettings::notConnected();
 
-	d->settings.users.at(client.usernum).name     = std::string();
-	d->settings.users.at(client.usernum).position =
-		UserSettings::notConnected();
-	client.playernum = UserSettings::notConnected();
-
-
-	// Broadcast the user changes to everybody
-	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_USER);
-	s.Unsigned32(client.usernum);
-	writeSettingUser(s, client.usernum);
-	broadcast(s);
+		// Broadcast the user changes to everybody
+		SendPacket s;
+		s.Unsigned8(NETCMD_SETTING_USER);
+		s.Unsigned32(client.usernum);
+		writeSettingUser(s, client.usernum);
+		broadcast(s);
+	} else
+		sendSystemChat
+			(_("Unknown user has left the game (%s)"), reason.c_str());
 
 	log("[Host]: disconnectClient(%u, %s)\n", number, reason.c_str());
 
 	if (client.sock) {
 		if (sendreason) {
-			s.reset();
+			SendPacket s;
 			s.Unsigned8(NETCMD_DISCONNECT);
 			s.String(reason);
 			s.send(client.sock);
