@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4410\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-03 22:16+0200\n"
-"PO-Revision-Date: 2010-08-30 23:31+0000\n"
-"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
+"PO-Revision-Date: 2010-09-23 13:09+0000\n"
+"Last-Translator: Nikolaj Sejergaard <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-09-24 04:31+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/writeHTML.cc:43
@@ -77,7 +77,7 @@ msgstr "Erobre<br/>afstand"
 
 #: ../../src/writeHTML.cc:292 ../../src/writeHTML.cc:520
 msgid "Vision<br/>range"
-msgstr "Udsyn<br/>afstand"
+msgstr "synsvidde"
 
 # If you follow the source links you see that it belongs to the set
 # {"Mine", "Small", "Medium", "Big"}, which are the build capabilities of
@@ -157,7 +157,7 @@ msgstr "Udsynslængde er %u."
 
 #: ../../src/writeHTML.cc:430 ../../src/writeHTML.cc:655
 msgid "Build cost"
-msgstr "Byggeomkostning"
+msgstr "Byggepris"
 
 #: ../../src/writeHTML.cc:440
 #, c-format
@@ -179,7 +179,7 @@ msgstr "Arbejdertyper"
 
 #: ../../src/writeHTML.cc:522
 msgid "Needed<br/>experience"
-msgstr ""
+msgstr "Mangler<br/>erfaring"
 
 #: ../../src/writeHTML.cc:524
 msgid "Becomes"
@@ -236,7 +236,7 @@ msgstr "%ss skabelse"
 
 #: ../../src/writeHTML.cc:688
 msgid "Spawns in warehouses."
-msgstr ""
+msgstr "Opstår i lagerbygninger"
 
 #: ../../src/writeHTML.cc:697
 #, c-format
@@ -341,7 +341,7 @@ msgstr "Arbejdere"
 #: ../../src/writeHTML.cc:792
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "%ss ansat"
 
 #: ../../src/writeHTML.cc:802
 msgid "Inputs"
@@ -350,7 +350,7 @@ msgstr "Tilførsel"
 #: ../../src/writeHTML.cc:813
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "%ss input"
 
 #: ../../src/writeHTML.cc:825
 msgid "Output"
@@ -688,6 +688,14 @@ msgid ""
 " --xres=[...]         Width of the window in pixel.\n"
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
+" --speed_of_new_game Hastigheden, som det nye spil vil køre med ved "
+"begyndelse, angivet ved faktor 1000 (0 er pause,1000 er normal hastighed).--"
+"auto_roadbuild_mode=[yes|no]Angiver om vejbygning skal påbegyndes af sig "
+"selv efter at sætte et flag uden for vejnetværket.--write_HTML=[yes|no]Skriv "
+"HTML-hjælpefiler til oversatte spildata.Grafikindstillinger:--"
+"fullscreen=[yes|no]Angiver om hele skærmen skal bruges somspilleskærm.--"
+"depth=[16|32] Farvedybe angivet ved antal bits per pixel.--xres=[...] "
+"Bredden af vinduet i pixel.--yres=[...] Højden af vinduet i pixel.\n"
 
 #: ../../src/wlapplication.cc:1302
 msgid ""
@@ -1025,7 +1033,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:602
 #, c-format
 msgid "militarysite: %s"
-msgstr ""
+msgstr "militært område: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:716
 #, c-format
@@ -4300,11 +4308,11 @@ msgstr "Nulstil valg"
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert"
-msgstr "Invertér"
+msgstr "Omvend"
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert selection"
-msgstr ""
+msgstr "Vend valgte om"
 
 #: ../../src/wui/game_message_menu.h:119 ../../src/wui/game_message_menu.h:152
 msgid "Archive selected messages"

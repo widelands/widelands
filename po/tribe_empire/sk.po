@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-06-06 20:59+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-09-22 19:01+0000\n"
+"Last-Translator: Miroslav R. <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-09-24 04:31+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -93,7 +93,7 @@ msgstr "Pivo"
 
 #: ../../tribes/empire/fish/conf:1
 msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-msgstr ""
+msgstr "Okrem chleba a mäsa sú aj ryby potravinami impéria."
 
 #: ../../tribes/empire/conf:56
 msgid "Bread"
@@ -166,6 +166,8 @@ msgid ""
 "Cloth is needed for Empire ships and a few bigger buildings. It is produced "
 "out of wool."
 msgstr ""
+"Látka je potrebná pre lode a niektoré väčšie budovy impéria. Vyrába sa z "
+"vlny."
 
 #: ../../tribes/empire/conf:59
 msgid "Coal"
@@ -300,6 +302,7 @@ msgstr "Múka"
 msgid ""
 "Flour is produced out of wheat and is needed for the tasty Empire bread."
 msgstr ""
+"Múka sa vyrába z pšenice a je potrebná pri výrobe chutného chleba v impériu."
 
 #: ../../tribes/empire/conf:110
 msgid "Forester"
@@ -470,6 +473,8 @@ msgid ""
 "Marble columns present the high culture of the Empire, so they are needed "
 "for nearly every bigger building."
 msgstr ""
+"Mramorové piliere vyjadrujú vysokú kultúru impéria, preto musia byť takmer "
+"pri každej väčšej budove."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -815,7 +820,7 @@ msgstr "Kamene"
 #: ../../tribes/empire/stone/conf:1
 #: ../../tribes/empire/wood/conf:1
 msgid "Stones and wood are the basic build material of the Empire."
-msgstr ""
+msgstr "Kamene a drevo sú základné stavebné materiály impéria."
 
 #: ../../tribes/empire/conf:159
 msgid "Stronghold"
@@ -845,7 +850,7 @@ msgstr ""
 
 #: ../../tribes/empire/bread/conf:1
 msgid "The bakers of the Empire make really tasty bread."
-msgstr ""
+msgstr "Pekári impéria pečú naozaj chutný chlieb."
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""
@@ -880,7 +885,7 @@ msgstr ""
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid "The strongest armour existing for the Empire soldiers."
-msgstr ""
+msgstr "Najlepšia zbroj, aká existuje pre vojakov impéria."
 
 #: ../../tribes/empire/grape/conf:1
 msgid "These grapes are the basic for tasty wine."

@@ -7,18 +7,18 @@ msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-02-10 22:38+0000\n"
-"Last-Translator: Erik Soe Sorensen <Unknown>\n"
+"PO-Revision-Date: 2010-09-23 13:02+0000\n"
+"Last-Translator: Nikolaj Sejergaard <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-09-24 04:31+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9 Husk og gå til tidligere huskede lokationer"
 
 #: ../../txts/README:67
 msgid ", / .       Go to previous / next location"
