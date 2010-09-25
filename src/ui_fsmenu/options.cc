@@ -277,8 +277,16 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		did_select_a_res |= selected;
 		m_reslist.add(buf, 0, g_gr->get_no_picture(), selected);
 	}
-	if (not did_select_a_res)
-		m_reslist.select(m_reslist.size() - 1);
+	if (not did_select_a_res) {
+		char buf[32];
+		sprintf(buf, "%ix%i %i bit", opt.xres, opt.yres, opt.depth);
+		m_reslist.add(buf, 0, g_gr->get_no_picture(), true);
+		uint32_t entry = m_resolutions.size();
+		m_resolutions.resize(entry + 1);
+		m_resolutions[entry].xres  = opt.xres;
+		m_resolutions[entry].yres  = opt.yres;
+		m_resolutions[entry].depth = opt.depth;
+	}
 
 	// Fill language list
 	m_language_list.add
