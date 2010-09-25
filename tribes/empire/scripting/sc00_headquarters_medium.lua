@@ -5,7 +5,7 @@
 use("aux", "infrastructure")
 use("aux", "shared_kingdom_functions")
 
-set_textdomain("tribe", "empire")
+set_textdomain("tribe_empire")
 
 return {
    name = _ "Headquarters medium",

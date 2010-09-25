@@ -732,11 +732,22 @@ void NetClient::handle_packet(RecvPacket & packet)
 		for (uint8_t i = packet.Unsigned8(); i; --i) {
 			TribeBasicInfo info;
 			info.name = packet.String();
+
+			// Get initializations (we have to do this localy, for translations)
+			LuaInterface * lua = create_LuaInterface();
+			std::string path = "tribes/" + info.name + "/scripting";
+			if (g_fs->IsDirectory(path))
+				lua->register_scripts
+					(g_fs->MakeSubFileSystem(path), "tribe_" + info.name, "");
+
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
 				std::string const name = packet.String();
+				boost::shared_ptr<LuaTable> t = lua->run_script
+					("tribe_" + info.name, name);
 				info.initializations.push_back
-					(TribeBasicInfo::Initialization(name, name));
+					(TribeBasicInfo::Initialization(name, t->get_string("name")));
 			}
+
 			d->settings.tribes.push_back(info);
 		}
 		break;
