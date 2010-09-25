@@ -110,7 +110,6 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RW(L_Player, changing_retreat_percentage_allowed),
 	PROP_RO(L_Player, inbox),
 	PROP_RW(L_Player, team),
-	PROP_RO(L_Player, partner),
 	PROP_RW(L_Player, see_all),
 	{0, 0, 0},
 };
@@ -264,17 +263,6 @@ int L_Player::set_team(lua_State * L) {
 }
 int L_Player::get_team(lua_State * L) {
 	lua_pushinteger(L, get(L, get_egbase(L)).team_number());
-	return 1;
-}
-
-/* RST
-	.. attribute:: partner
-
-		(RO) The playernumber of this player's partner (shared kingdom mode)
-		     0 means there is no partner.
-*/
-int L_Player::get_partner(lua_State * L) {
-	lua_pushinteger(L, get(L, get_egbase(L)).partner());
 	return 1;
 }
 

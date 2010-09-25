@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 11
+#define CURRENT_PACKET_VERSION 12
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -56,9 +56,11 @@ void Game_Player_Info_Data_Packet::Read
 					Widelands::TeamNumber team = 0;
 					if (packet_version >= 9)
 						team = fr.Unsigned8();
-					Widelands::Player_Number partner = 0;
-					if (packet_version >= 11)
-						partner = fr.Unsigned8();
+					// Partner id in older shared kingdom feature was saved here in
+					// packet version 11. (between Build15 and Build16)
+					// Sorry for the mess -- nasenbaer
+					if (packet_version == 11)
+						fr.Unsigned8();
 					char const * const tribe_name = fr.CString();
 					char const * const frontier_style_name =
 						packet_version < 7 ? 0 : fr.CString();
@@ -76,7 +78,7 @@ void Game_Player_Info_Data_Packet::Read
 
 					std::string const name = fr.CString();
 
-					game.add_player(plnum, 0, tribe_name, name, team, partner);
+					game.add_player(plnum, 0, tribe_name, name, team);
 					Player & player = game.player(plnum);
 					{
 						Tribe_Descr const & tribe = player.tribe();
@@ -159,7 +161,6 @@ void Game_Player_Info_Data_Packet::Write
 
 		fw.Player_Number8(plr->m_plnum);
 		fw.Unsigned8(plr->team_number());
-		fw.Unsigned8(plr->partner());
 
 		{
 			Tribe_Descr const & tribe = plr->tribe();
