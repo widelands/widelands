@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-30 23:24+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-09-24 07:39+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-09-25 04:31+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Netherlands\n"
 "X-Poedit-Language: Dutch\n"
@@ -352,6 +352,17 @@ msgid ""
 "he\n"
 "was.<br> The news he brought changed everything...\""
 msgstr ""
+"\"Gisteren vroeg Boldreth me om met hem mee te gaan naar de nieuwe herberg. "
+"\n"
+"Het zou me opvrolijken, zei hij.<br> Toen ik rondkeek, zag ik hoopvolle "
+"gezichten,\n"
+"erop vertrouwend dat ik ze door deze donkere dagen kon leiden. Maar voordat "
+"ik \n"
+"enige woorden van dank of aanmoediging kon spreken, rende een van mijn "
+"krijgers\n"
+"de herberg in. Hij was de afgelopen dagen diep in het woud geweest en ik kon "
+"zien\n"
+"hoe vermoeid hij was.<br> Het nieuws dat hij bracht veranderde alles...\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:370
 msgid ""
@@ -362,6 +373,13 @@ msgid ""
 "could,\n"
 "in times of need, build a fortress as the world has not seen before!\""
 msgstr ""
+"\"Nou, oude vriend, dit moet ervoor zorgen dat onze verdedigingen niet "
+"zullen\n"
+"vallen bij de oorlogskreet van onze vijand! Nu kunnen we veilig "
+"uitbreiden!<br> \n"
+"Toch zou het niet schaden om wat specie te produceren voor onze verdere\n"
+"veldtocht; Dan zouden we, als we het nodig hebben, een fort kunnen bouwen\n"
+"zoals de wereld nog nooit gezien heeft!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:251
 msgid ""
@@ -372,6 +390,14 @@ msgid ""
 "Kal'mavrath - maybe we will find some more big stones to please the old "
 "man?\""
 msgstr ""
+"\"Het mag dan zeker geen waardige taak zijn voor een krijger, maar het is "
+"tenminste\n"
+"iets dat gedaan moet worden! Thron, wat zeg je ervan als ik een paar van "
+"onze\n"
+"onrustigste krijgers meeneem en wat dichter afreis naar de grote berg\n"
+"Kal'mavrath - misschien zullen we nog wat grote stenen vinden om de oude "
+"man\n"
+"een plezier te doen?\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:310
 msgid ""
@@ -381,6 +407,10 @@ msgid ""
 "I\n"
 "sure would enjoy a freshly baken pitta bread for a change...\""
 msgstr ""
+"\"Wijsheid vraagt om afwisseling.<br> Ten noorden van de grote berg is een\n"
+"grote vlakte - waarom gebruiken we de ruimte die moeder natuur ons gegeven\n"
+"heeft niet en bouwen we een boederij? Ik zou vers gebakken pita brood zeker\n"
+"waarderen als afwisseling...\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
@@ -413,6 +443,32 @@ msgid ""
 "you\n"
 "prefer."
 msgstr ""
+"Een normale mijn kan slechts een derde van de grondstoffen die eronder "
+"liggen\n"
+"opgraven; daarna moet hij verbeterd worden tot een diepe mijn zodat hij goed "
+"blijft\n"
+"werken. Om een gebouw te verbeteren, moet je het selecteren en dan op de "
+"bijbehorende\n"
+"knop in het opkomende venster klikken.<br> Arbeiders krijgen ervaring door "
+"succesvol werk.\n"
+"Met genoeg ervaring zullen het geavanceerde arbeiders worden, die nodig zijn "
+"om\n"
+"verbeterde gebouwen te beheren. Verbeter je gebouw niet voordat je genoeg "
+"geavanceerde\n"
+"arbeiders hebt om het verbeterde gebouw te bedienen! Zulke gebouwen hebben "
+"vaak\n"
+"grotere eisen dan de basis versie van het gebouw - bijvoorbeeld, diepe "
+"mijnen hebben\n"
+"tussendoortjes nodig in plaats van porties. Je zal je taverne moeten "
+"uitbreiden\n"
+"naar een herberg om tussendoortjes te maken uit pita brood EN een tweede\n"
+"soort voedsel (vlees of vis) EN bier. Je kan natuurlijk alle mijnen meteen "
+"verbeteren\n"
+"tot diepe mijnen als je genoeg arbeiders hebt - grotere mijnen werken iets "
+"sneller\n"
+"kleinere mijnen gebruiken goedkoper voedsel. Het is aan jou welke strategie "
+"je\n"
+"voorkeur heeft."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:431
 msgid "Another cold day"
@@ -434,6 +490,15 @@ msgid ""
 "a\n"
 "mountain. Coal can be obtained by building a charcoal burner or a coal mine."
 msgstr ""
+"Betere gebouwen kunnen naast rozenhout ook andere verbeterde materialen\n"
+"nodig hebben. Één daarvan is specie, die geproduceerd wordt uit ruwe steen,\n"
+"water en kolen door een kalkbrander. Je kan water verkrijgen door een "
+"waterput\n"
+"op een waterbron te bouwen, die ontdekt kan worden door je geologen als je "
+"ze\n"
+"naar een vlag stuurt die niet op een berg staat. Kolen kunnen verkregen "
+"worden\n"
+"door een houtskoolbrander of een kolenmijn te bouwen."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:164
 msgid ""
@@ -444,6 +509,13 @@ msgid ""
 "wood\n"
 "hardener before you run out of blackwood, as without it you cannot expand."
 msgstr ""
+"Grotere en betere gebouwen - inclusief alle van militaire aard - vereisen "
+"betere\n"
+"bouwmaterialen. Ze kunnen niet gemaakt worden van normaal hout - het hout "
+"moet\n"
+"verfijnd worden tot rozenhout door een houtverharder. Vergeet nooit om een\n"
+"houtverharder te maken voordat je rozenhout op is, zonder kan je niet "
+"uitbreiden."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:318
 msgid "Boldreth cheers up..."
@@ -484,7 +556,7 @@ msgstr "Dappere Boldreth gaat naast je staan..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:195
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:196
 msgid "Build a cattlefarm"
-msgstr ""
+msgstr "Bouw een veeboerderij"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 msgid ""
@@ -501,6 +573,19 @@ msgid ""
 "ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on\n"
 "mountain terrain. Suitable places for mines are displayed as hammer and pick."
 msgstr ""
+"Bouw een kolenmijn en een ijzermijn. Om dat te doen plaats je een vlag op "
+"de\n"
+"flank van de berg in het oosten (wel op bergterrein, niet op de berg "
+"weide).\n"
+"Wanneer je op de nieuwe vlag klikt kan je er geologen heen sturen. Omdat de\n"
+"vlag op de berg staat, zullen de geologen naar ertsen zoeken; anders zullen\n"
+"ze naar water zoeken. Bouw vervolgens een mijn voor beide grondstoffen die\n"
+"hij zal vinden, terwijl je de bijbehorende mijn kiest:<br> Zwart - "
+"kolen<br>\n"
+"Rood - ijzer erts<br> Geel - goud<br> Grijs - graniet<br> Mijnen kunnen "
+"alleen\n"
+"gebouwd worden op bergterrein. Geschikte plaatsen voor mijnen worden\n"
+"weergegeven met een hamer en een houweel."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:185
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:186
@@ -509,7 +594,7 @@ msgstr "Bouw een varenkwekerij"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr ""
+msgstr "Bouw een jager, een jachtopzichter en een kroeg"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
@@ -518,14 +603,15 @@ msgstr "Bouw een kalkoven en een koleneconomie"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:174
 msgid "Build a lime kiln, a well and a charcoal burner or coal mine"
 msgstr ""
+"Bouw een kalkoven, een waterput en een houtskoolbrander of een kolenmijn"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Bouw een hoogoven"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Bouw een waterput, een boerderij en een bakkerij"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
@@ -534,23 +620,28 @@ msgstr "Bouw een houtverharder"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
-msgstr ""
+msgstr "Bouw kolen- en ijzermijnen"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
 "Build military buildings (like sentries and strongholds) to expand your\n"
 "territory. Get to the rocks northeast from you and build a quarry there."
 msgstr ""
+"Bouw militaire gebouwen (zoals wachtposten en burchten) om je gebied\n"
+"uit te breiden. Ga naar de rotsen ten noord-oosten van je en bouw daar\n"
+"een steengroeve."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:139
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Verbeter gebouwen en bouw een kleine brouwerij"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
 "Enhance the coal mine and the tavern to the better versions of their\n"
 "buildings respectively. Also build a micro brewery."
 msgstr ""
+"Verbeter de kolenmijn en de kroeg tot de respectievelijk betere\n"
+"versies van hun gebouwen. Bouw ook een kleine brouwerij."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Expand north-east and build a quarry"
@@ -558,7 +649,7 @@ msgstr "Breid noordoostelijk uit en bouw een steengroeve"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:84
 msgid "Expand north-east to the stones"
-msgstr ""
+msgstr "Breidt naar het noord-oosten uit naar de stenen"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
 msgid ""
@@ -569,6 +660,14 @@ msgid ""
 "first example of a ware which has to be refined before being used in a\n"
 "secondary building - others will follow."
 msgstr ""
+"Om te kunnen werken, hebben je mijnwerkers voedsel nodig.<br> Een jager\n"
+"kan dieren jagen terwijl een jachtopzichter ervoor zorgt dat ze niet "
+"uitsterven.\n"
+"Het vlees wordt dan verwerkt in een kroeg tot lunches voor je "
+"mijnwerkers.<br> \n"
+"Dit is slechts het eerste voorbeeld van een waar dat verwerkt moet worden "
+"voordat\n"
+"deze gebruikt kan worden in een secundair gebouw - anderen zullen volgen."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
@@ -584,7 +683,7 @@ msgstr "Khanturkh onderbreekt..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:242
 msgid "Khantrukh joins in ..."
-msgstr ""
+msgstr "Khantrukh voegt zich erbij ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:268
 msgid "Khantrukh nods satisfied..."
@@ -625,6 +724,11 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well at a spot\n"
 "where your geologists find a water source."
 msgstr ""
+"Andere manieren om voedsel te maken - verschillende soorten voedsel - zijn\n"
+"vissers en jagers. Het tarwe van de boerderijen moet verwerkt worden met\n"
+"water bij een bakker voordat het eetbaar wordt. Je kan water verkrijgen "
+"door\n"
+"een waterput te bouwen op een plaats waar je geologen een waterbron vinden."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:107
 msgid "Provide your miners with food"
@@ -669,6 +773,8 @@ msgid ""
 "The iron ore your miners bring up is not usable yet - it has to be melted\n"
 "into iron first."
 msgstr ""
+"Het ijzererts dat je mijnwerkers opgraven is nog niet bruikbaar - het\n"
+"moet eerst omgesmolten worden tot ijzer."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:210
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:217
@@ -682,6 +788,11 @@ msgid ""
 "cover roofs. Thatch reed is planted by a ferner around his building, the\n"
 "fernery."
 msgstr ""
+"Het derde benodigde materiaal om gebouwen te verbeteren is dakstro, gebruikt "
+"voor\n"
+"het bedekken van daken. Dakstro wordt verbouwd door een varenkweker rond "
+"zijn gebouw,\n"
+"de varenkwekerij."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."
@@ -706,11 +817,11 @@ msgstr "Oefencampagne 2 - Een plek om thuis te noemen"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
-msgstr ""
+msgstr "Overwinning"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:412
 msgid "We need oxen!"
-msgstr ""
+msgstr "We hebben ossen nodig!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:197
 msgid ""
@@ -722,12 +833,22 @@ msgid ""
 "doubles the transport capacity.<br>Oxen are bred in cattle farms\n"
 "out of wheat and water."
 msgstr ""
+"Wanneer wegen langere tijd druk gebruikt worden is een drager meestal niet "
+"genoeg\n"
+"om goederen snel te vervoeren. Files zijn het resultaat. Zulke wegen "
+"gebruiken daarom\n"
+"een tweede drager: een os die helpt met het vervoeren van de waren. Dit "
+"verdubbeld de\n"
+"vervoerscapaciteit.<br>Ossen worden gefokt in veeboerderijen uit tarwe en "
+"water."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:405
 msgid ""
 "You have completed this mission. You may continue playing if you wish,\n"
 "otherwise move on to the next mission."
 msgstr ""
+"Je hebt de missie voltooid. Als je wilt mag je verder spelen, anders\n"
+"kan je doorgaan naar de volgende missie."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:233
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:248

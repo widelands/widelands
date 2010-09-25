@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-03 22:16+0200\n"
-"PO-Revision-Date: 2010-09-14 17:10+0000\n"
-"Last-Translator: Vladimir <Unknown>\n"
+"PO-Revision-Date: 2010-09-25 02:33+0000\n"
+"Last-Translator: Miroslav R. <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2010-09-15 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-09-25 04:31+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -33,11 +33,11 @@ msgstr "Potomkovia"
 
 #: ../../src/writeHTML.cc:88
 msgid "Predecessors"
-msgstr ""
+msgstr "Predkovia"
 
 #: ../../src/writeHTML.cc:103
 msgid "Employers"
-msgstr "Zamestnanci"
+msgstr "Zamestnávatelia"
 
 #: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:272
 msgid "Building types"
@@ -227,7 +227,7 @@ msgstr "Objaví sa v skladoch."
 #: ../../src/writeHTML.cc:697
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr ""
+msgstr "Potrebuje pracovať %u-krát, a tak získať skúsenosti, aby sa stal"
 
 #: ../../src/writeHTML.cc:705
 #, c-format
@@ -1298,7 +1298,7 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "neznáma verzia %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
@@ -1321,7 +1321,7 @@ msgstr "číslo snímku"
 
 #: ../../src/network/netclient.cc:101
 msgid "Could not establish connection to host"
-msgstr ""
+msgstr "Nepodarilo sa nadviazať spojenie s hostiteľom"
 
 #: ../../src/network/netclient.cc:103
 msgid ""
@@ -1329,10 +1329,13 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
+"Widelands nemohol nadviazať spojenie s danou adresou.\n"
+"Buď nebežal žiadny Widelands server na príslušnom porte,\n"
+"alebo bol server ukončený, keď ste sa naň pokúsili pripojiť."
 
 #: ../../src/network/netclient.cc:136
 msgid "Client has left the game."
-msgstr ""
+msgstr "Klient opustil hru."
 
 #: ../../src/network/netclient.cc:214
 msgid "Client crashed and performed an emergency save."
@@ -1352,10 +1355,12 @@ msgid ""
 "Expected a HELLO packet from server, but received command number %u. Maybe "
 "the server is running a different version of Widelands?"
 msgstr ""
+"Od servera sa očakával HELLO paket, ale bol prijatý príkaz číslo %u. Možno "
+"beží na serveri iná verzia Widelands?"
 
 #: ../../src/network/netclient.cc:556
 msgid "Server uses a different protocol version"
-msgstr ""
+msgstr "Server používa inú verziu protokolu"
 
 #: ../../src/network/netclient.cc:697
 msgid "/me 's file failed md5 checksumming."
@@ -1363,32 +1368,32 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:756
 msgid "Unexpectedly received LAUNCH command from server."
-msgstr ""
+msgstr "Od servera bol neočakávane prijatý príkaz LAUNCH."
 
 #: ../../src/network/netclient.cc:776
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
-msgstr ""
+msgstr "Server poslal PLAYERCOMMAND aj napriek tomu, že nebeží žiadna hra."
 
 #: ../../src/network/netclient.cc:789
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
+msgstr "Server poslal SYNCREQUEST aj napriek tomu, že nebeží žiadna hra."
 
 #: ../../src/network/netclient.cc:816
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
-msgstr ""
+msgstr "Server poslal neznámy príkaz (príkaz číslo %u)"
 
 #: ../../src/network/netclient.cc:850
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Niečo sa pokazilo: "
 
 #: ../../src/network/netclient.cc:881
 msgid " An automatic savegame will be created."
-msgstr ""
+msgstr " Hra sa uloží automaticky."
 
 #: ../../src/network/network_ggz.cc:273
 msgid "Closed the connection to the metaserver."
-msgstr ""
+msgstr "Spojenie s metaserverom zatvorené."
 
 #: ../../src/network/network_ggz.cc:369
 msgid ""
@@ -1412,7 +1417,7 @@ msgstr ""
 
 #: ../../src/network/network_ggz.cc:591
 msgid "NOTE: The Internet gaming implementation is in very early state."
-msgstr ""
+msgstr "POZNÁMKA: Hranie po internete je vo veľmi včasnom stave."
 
 #: ../../src/network/network_ggz.cc:595
 msgid "Please take a look at the notes at:"
@@ -1420,11 +1425,11 @@ msgstr ""
 
 #: ../../src/network/network_ggz.cc:734
 msgid " joined the metaserver."
-msgstr ""
+msgstr " sa pripojil(a) k metaserveru."
 
 #: ../../src/network/network_ggz.cc:743
 msgid " left the metaserver."
-msgstr ""
+msgstr " opustil(a) metaserver."
 
 #: ../../src/network/nethost.cc:287
 msgid ""
@@ -1438,30 +1443,30 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:303
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "Nesprávne použité, malo by byť: /announce <správa>"
 
 #: ../../src/network/nethost.cc:315
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "Nesprávne použité, malo by byť: /warn <meno> <dôvod>"
 
 #: ../../src/network/nethost.cc:326
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "Nesprávne použité, malo by byť: /kick <meno> <dôvod>"
 
 #: ../../src/network/nethost.cc:334
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Ste si istý(á), že chcete vykopnúť %s?<br>"
 
 #: ../../src/network/nethost.cc:337
 #, c-format
 msgid "The stated reason was: %s<br>"
-msgstr ""
+msgstr "Uvedený dôvod bol: %s<br>"
 
 #: ../../src/network/nethost.cc:340
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "Ak áno, napíšte: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:349
 msgid "kick acknowlegement cancled: No name given!"
@@ -1469,7 +1474,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:351
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Nesprávne použité, malo by byť: /ack_kick <meno>"
 
 #: ../../src/network/nethost.cc:357
 msgid "kick acknowlegement cancled: Wrong name given!"
@@ -1477,23 +1482,23 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:367
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Pauza už bola vynútená - hra by mala byť pozastavená."
 
 #: ../../src/network/nethost.cc:378
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Nebola vynútená žiadna pauza - niet čo skončiť."
 
 #: ../../src/network/nethost.cc:388
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Neplatný príkaz! Napíšte /help, ak chcete vidieť zoznam príkazov."
 
 #: ../../src/network/nethost.cc:518
 msgid "Server has left the game."
-msgstr ""
+msgstr "Server opustil hru."
 
 #: ../../src/network/nethost.cc:594
 msgid "The game has started just after you tried to connect."
-msgstr ""
+msgstr "Hra sa začala práve po tom, ako ste sa pokúsili pripojiť."
 
 #: ../../src/network/nethost.cc:672
 msgid "Server has crashed and performed an emergency save."
@@ -1501,11 +1506,11 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:875
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "Nemôžte sa vykopnúť!"
 
 #: ../../src/network/nethost.cc:897
 msgid "There is no connected user with that nickname!"
-msgstr ""
+msgstr "Neexistuje žiaden pripojený užívateľ s takouto prezývkou!"
 
 #: ../../src/network/nethost.cc:1071
 #, c-format
@@ -1515,7 +1520,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1396
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Počítač %u"
 
 #: ../../src/network/nethost.cc:1472
 #, c-format
@@ -1525,7 +1530,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1524
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "%s sa pripojil(a) do hry"
 
 #: ../../src/network/nethost.cc:1548
 msgid "Client reports time to host that is running backwards."
@@ -1545,23 +1550,23 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1803
 msgid "New User"
-msgstr ""
+msgstr "Nový používateľ"
 
 #: ../../src/network/nethost.cc:1808
 msgid "The game has already started."
-msgstr ""
+msgstr "Hra sa už začala."
 
 #: ../../src/network/nethost.cc:1826
 msgid "Connection to client lost."
-msgstr ""
+msgstr "Spojenie s klientom stratené."
 
 #: ../../src/network/nethost.cc:1840
 msgid "Client sent malformed commands: "
-msgstr ""
+msgstr "Klient poslal chybné príkazy: "
 
 #: ../../src/network/nethost.cc:1873
 msgid "Game is running already, but client has not connected fully"
-msgstr ""
+msgstr "Hra už beží, ale klient sa nepripojil úplne"
 
 #: ../../src/network/nethost.cc:1877
 #, c-format
@@ -1569,31 +1574,34 @@ msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
 "is running an incompatible version."
 msgstr ""
+"Prvý príkaz, ktorý poslal klient, bol %u namiesto HELLO. "
+"Najpravdepodobnejšie má klient nekompatibilnú verziu."
 
 #: ../../src/network/nethost.cc:1883
 msgid "Server uses a different protocol version."
-msgstr ""
+msgstr "Server používa inú verziu protokolu."
 
 #: ../../src/network/nethost.cc:1971
 msgid "Client sent TIME command even though game is not running."
-msgstr ""
+msgstr "Klient poslal príkaz TIME aj napriek tomu, že hra nebeží."
 
 #: ../../src/network/nethost.cc:1979
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
-msgstr ""
+msgstr "Klient poslal príkaz PLAYERCOMMAND aj napriek tomu, že hra nebeží."
 
 #: ../../src/network/nethost.cc:1991
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
+"Klient %u (%u) poslal príkaz playercommand (%i) pre iného hráča (%i)."
 
 #: ../../src/network/nethost.cc:2000
 msgid "Client sent unexpected synchronization report."
-msgstr ""
+msgstr "Klient poslal neočakávanú správu o synchronizácii."
 
 #: ../../src/network/nethost.cc:2036 ../../src/network/nethost.cc:2048
 msgid "Client requests file altough none is available to send."
-msgstr ""
+msgstr "Klient požaduje súbor, hoci žiaden nie je dostupný na odoslanie."
 
 #: ../../src/network/nethost.cc:2038
 #, c-format
@@ -1617,12 +1625,12 @@ msgstr ""
 #: ../../src/network/nethost.cc:2080
 #, c-format
 msgid "Client sent unknown command number %u"
-msgstr ""
+msgstr "Klient poslal neznámy príkaz číslo %u"
 
 #: ../../src/network/nethost.cc:2136
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr ""
+msgstr "%s opustil(a) hru (%s)"
 
 #: ../../src/wui/interactive_dedicated_server.cc:53
 #: ../../src/wui/interactive_player.cc:173
@@ -1641,35 +1649,35 @@ msgstr "Nastavenia"
 #: ../../src/wui/interactive_player.cc:180
 #: ../../src/wui/interactive_spectator.cc:64
 msgid "Statistics"
-msgstr ""
+msgstr "Štatistiky"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
-msgstr ""
+msgstr "Prihlásenie sa na metaserver"
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Prezývka:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
-msgstr ""
+msgstr "Heslo:"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr ""
+msgstr "VAROVANIE: Heslo sa zobrazí a uloží čitateľne!"
 
 #: ../../src/wui/login_box.cc:52
 msgid "Log in to a registered account"
-msgstr ""
+msgstr "Prihlásiť sa na registrovaný účet"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Automatically use this login information from now on."
-msgstr ""
+msgstr "Odteraz automaticky používať tieto prihlasovacie údaje"
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
-msgstr ""
+msgstr "Prihlásiť sa"
 
 #: ../../src/wui/login_box.cc:70 ../../src/ui_fsmenu/options.cc:61
 #: ../../src/ui_fsmenu/options.cc:383
@@ -1691,7 +1699,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:85
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "Prosím, zadajte vašu prezývku!"
 
 #: ../../src/wui/login_box.cc:92
 msgid "Space in Nickname"
@@ -1699,15 +1707,15 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:93
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr ""
+msgstr "Ľutujem, ale v prezývkach nie je povolené používať medzery."
 
 #: ../../src/wui/login_box.cc:100
 msgid "Empty Password"
-msgstr ""
+msgstr "Prádzne heslo"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Please enter your password!"
-msgstr ""
+msgstr "Prosím, zadajte vaše heslo!"
 
 #: ../../src/wui/buildingwindow.cc:187
 msgid "Continue"
@@ -1716,7 +1724,7 @@ msgstr "Pokračuj"
 #: ../../src/wui/buildingwindow.cc:202
 #, c-format
 msgid "Enhance to %s"
-msgstr ""
+msgstr "Zlepšiť na %s"
 
 #: ../../src/wui/buildingwindow.cc:224
 msgid "Destroy"
@@ -1736,7 +1744,7 @@ msgstr ""
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
-msgstr ""
+msgstr "Vojaci"
 
 #: ../../src/wui/minimap.cc:138 ../../src/ui_fsmenu/netsetup_lan.cc:115
 msgid "Map"
@@ -1745,11 +1753,11 @@ msgstr "Mapa"
 #: ../../src/wui/minimap.cc:147
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Terrain"
-msgstr ""
+msgstr "Terén"
 
 #: ../../src/wui/minimap.cc:154
 msgid "Owner"
-msgstr ""
+msgstr "Vlastník"
 
 #: ../../src/wui/minimap.cc:161
 msgid "Flags"
@@ -1757,11 +1765,11 @@ msgstr ""
 
 #: ../../src/wui/minimap.cc:168
 msgid "Roads"
-msgstr ""
+msgstr "Cesty"
 
 #: ../../src/wui/minimap.cc:175 ../../src/wui/general_statistics_menu.cc:152
 msgid "Buildings"
-msgstr ""
+msgstr "Budovy"
 
 #: ../../src/wui/minimap.cc:182
 msgid "Zoom"
@@ -1777,7 +1785,7 @@ msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
-msgstr ""
+msgstr "Opakovať misiu"
 
 #: ../../src/wui/productionsitewindow.cc:62
 #: ../../src/wui/general_statistics_menu.cc:158
@@ -1800,11 +1808,11 @@ msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:140
 msgid "(vacant)"
-msgstr ""
+msgstr "(nečinný)"
 
 #: ../../src/wui/productionsitewindow.cc:140
 msgid "(coming)"
-msgstr ""
+msgstr "(prichádza)"
 
 #: ../../src/wui/soldierlist.cc:338 ../../src/wui/soldierlist.cc:358
 msgid "Click soldier to send away"
@@ -1817,35 +1825,35 @@ msgstr "Všeobecná štatistika"
 
 #: ../../src/wui/general_statistics_menu.cc:140
 msgid "Land"
-msgstr ""
+msgstr "Územie"
 
 #: ../../src/wui/general_statistics_menu.cc:164
 msgid "Productivity"
-msgstr ""
+msgstr "Produktivita"
 
 #: ../../src/wui/general_statistics_menu.cc:170
 msgid "Casualties"
-msgstr ""
+msgstr "Straty na životoch"
 
 #: ../../src/wui/general_statistics_menu.cc:176
 msgid "Kills"
-msgstr ""
+msgstr "Zabitia"
 
 #: ../../src/wui/general_statistics_menu.cc:182
 msgid "Military buildings lost"
-msgstr ""
+msgstr "Stratených vojenských budov"
 
 #: ../../src/wui/general_statistics_menu.cc:188
 msgid "Military buildings defeated"
-msgstr ""
+msgstr "Porazených vojenských budov"
 
 #: ../../src/wui/general_statistics_menu.cc:194
 msgid "Civilian buildings lost"
-msgstr ""
+msgstr "Stratených civilných budov"
 
 #: ../../src/wui/general_statistics_menu.cc:200
 msgid "Military"
-msgstr ""
+msgstr "Vojsko"
 
 #: ../../src/wui/general_statistics_menu.cc:218
 #: ../../src/wui/ware_statistics_menu.cc:421
@@ -1900,12 +1908,12 @@ msgstr "Minimapa"
 #: ../../src/wui/interactive_player.cc:189
 #: ../../src/editor/editorinteractive.cc:76
 msgid "Buildhelp"
-msgstr ""
+msgstr "Pomôcka pri stavaní"
 
 #: ../../src/wui/interactive_player.cc:193
 #: ../../src/wui/interactive_player.cc:278
 msgid "Messages"
-msgstr ""
+msgstr "Správy"
 
 #: ../../src/wui/interactive_player.cc:197
 msgid "Ware help"
@@ -1915,8 +1923,9 @@ msgstr ""
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u nových správ"
+msgstr[1] "%u nová správa"
+msgstr[2] "%u nové správy"
 
 #: ../../src/wui/game_main_menu.cc:38
 #: ../../src/editor/ui_menus/editor_main_menu.cc:50
@@ -4149,7 +4158,7 @@ msgstr "Zakázať"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "<-"
-msgstr ""
+msgstr "<-"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:95
 msgid "Allow"
@@ -4161,11 +4170,11 @@ msgstr "Volby hráča"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:49
 msgid "Add player"
-msgstr ""
+msgstr "Pridať hráča"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:57
 msgid "Remove last player"
-msgstr ""
+msgstr "Odstrániť posledného hráča"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:68
 msgid "Number of Players"
@@ -4201,7 +4210,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:67
 msgid "Select"
-msgstr ""
+msgstr "Vybrať"
 
 #: ../../src/wui/game_message_menu.h:68
 msgid "Status"
@@ -4209,35 +4218,35 @@ msgstr "Stav"
 
 #: ../../src/wui/game_message_menu.h:69
 msgid "Title"
-msgstr ""
+msgstr "Názov"
 
 #: ../../src/wui/game_message_menu.h:70
 msgid "Time sent"
-msgstr ""
+msgstr "Čas odoslania"
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear"
-msgstr ""
+msgstr "Zrušiť"
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear selection"
-msgstr ""
+msgstr "Zrušiť výber"
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert"
-msgstr ""
+msgstr "Invertovať"
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert selection"
-msgstr ""
+msgstr "Invertovať výber"
 
 #: ../../src/wui/game_message_menu.h:119 ../../src/wui/game_message_menu.h:152
 msgid "Archive selected messages"
-msgstr ""
+msgstr "Archivovať vybrané správy"
 
 #: ../../src/wui/game_message_menu.h:130 ../../src/wui/game_message_menu.h:153
 msgid "Show Archive"
-msgstr ""
+msgstr "Zobraziť archív"
 
 #: ../../src/wui/game_message_menu.h:139
 msgid "Message Menu: Archive"
@@ -4245,15 +4254,15 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:143
 msgid "Restore selected messages"
-msgstr ""
+msgstr "Obnoviť vybrané správy"
 
 #: ../../src/wui/game_message_menu.h:144
 msgid "Show Inbox"
-msgstr ""
+msgstr "Zobraziť schránku"
 
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"
-msgstr ""
+msgstr "ísť na lokáciu"
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"

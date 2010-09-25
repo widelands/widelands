@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-09-10 10:08+0000\n"
+"PO-Revision-Date: 2010-09-24 07:45+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-11 04:46+0000\n"
+"X-Launchpad-Export-Date: 2010-09-25 04:31+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:75
 msgid "%i trees at the moment ."
-msgstr ""
+msgstr "%i bomen op het moment."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:114
 msgid "%i trees."
-msgstr ""
+msgstr "%i bomen."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:113
 msgid "%s had "
@@ -35,7 +35,7 @@ msgstr "%s heeft "
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:111
 msgid "%s owns more than half of the maps area."
-msgstr ""
+msgstr "%s bezit meer dan de helft van het kaartgebeid."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:12
 msgid ""
@@ -74,7 +74,7 @@ msgstr ""
 #: ../../scripting/win_conditions/04_wood_gnome.lua:71
 #: ../../scripting/win_conditions/04_wood_gnome.lua:110
 msgid "Player overview:"
-msgstr ""
+msgstr "Speleroverzicht:"
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:30
 msgid "Sorry, you have lost this game!"
@@ -92,7 +92,7 @@ msgstr "Status"
 #: ../../scripting/win_conditions/03_territorial_lord.lua:120
 #: ../../scripting/win_conditions/03_territorial_lord.lua:148
 msgid "Team %i"
-msgstr ""
+msgstr "Team %i"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:11
 msgid "Territorial Lord"
@@ -109,15 +109,15 @@ msgstr "De speler %i heeft nu %i punten"
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:11
 msgid "The tribe or team that can defeat all others wins the game!"
-msgstr ""
+msgstr "De stam of team die alle anderen verslaat wint het spel!"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:118
 msgid "The winner is %s "
-msgstr ""
+msgstr "De winnaar is %s "
 
 #: ../../scripting/win_conditions/00_endless_game.lua:11
 msgid "This is an endless game without rules."
-msgstr ""
+msgstr "Dit is een eindeloos spel zonder regels."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:11
 msgid "Wood Gnome"
@@ -128,12 +128,12 @@ msgstr ""
 #: ../../scripting/win_conditions/03_territorial_lord.lua:140
 #: ../../scripting/win_conditions/04_wood_gnome.lua:92
 msgid "You are defeated!"
-msgstr ""
+msgstr "Je bent verslagen!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:84
 #: ../../scripting/win_conditions/04_wood_gnome.lua:126
 msgid "You are the winner of this game!"
-msgstr ""
+msgstr "Je bent de winnaar van dit spel!"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:150
 msgid "You are the winner!"
@@ -148,7 +148,7 @@ msgstr ""
 #: ../../scripting/win_conditions/02_collectors.lua:82
 #: ../../scripting/win_conditions/04_wood_gnome.lua:122
 msgid "You have lost this game!"
-msgstr ""
+msgstr "Je hebt dit spel verloren!"
 
 #: ../../scripting/win_conditions/00_endless_game.lua:32
 #: ../../scripting/win_conditions/02_collectors.lua:65
@@ -174,11 +174,11 @@ msgstr "Je hebt verloren!"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:115
 msgid "You own more than half of the maps area."
-msgstr ""
+msgstr "Je bezit meer dan de helft van het kaartgebied."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:113
 msgid "You still got %i minutes to prevent a victory."
-msgstr ""
+msgstr "Je hebt nog %i minuten om een overwinning te voorkomen."
 
 #: ../../scripting/win_conditions/02_collectors.lua:84
 #: ../../scripting/win_conditions/03_territorial_lord.lua:150
@@ -192,7 +192,7 @@ msgstr "Je hebt dit spel verloren!"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:119
 msgid "with %i trees."
-msgstr ""
+msgstr "met %i bomen."
 
 #~ msgid "An endless game without rules"
 #~ msgstr "Een eindeloos spel zonder regels"
