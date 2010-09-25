@@ -1,0 +1,9 @@
+[global]
+packet_version="1"
+map_w="112"
+map_h="80"
+nr_players="4"
+world="desert"
+name="Desert Tournament"
+author="ivh"
+descr="Four tribes struggle with their nearest neighbour to be the first to reach the mountain of gold that primises riches beyond belief. But can the two remaining ones share the resources wisely?"
