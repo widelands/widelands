@@ -2,15 +2,28 @@
 -- set.lua
 -- -------------
 --
--- This adds a new data type Set. It works with all types
--- that are either unique (strings) or provide a __hash property. 
--- :class:`wl.map.Field` implements such a property
+-- This adds a new data type Set. 
 
--- Prototype
+-- RST
+-- Set
+-- ---
+-- 
+-- .. class:: Set(iteratable)
+-- 
+--    A set is a collection of items. Each item must compare uniquely
+--    in the set, otherwise it is discarded; that is a Set never contains
+--    the same item more than once.
+--
+--    It works with all types that are either unique (strings) or provide a
+--    __hash property. :class:`wl.map.Field` implements such a property
+
+-- RST
+--    .. attribute:: size
+--    
+--       (RO) Due to a bug in Lua 5.1, one cannot use the '#' operator to get
+--       the number of items in a set. Use this property instead.
+-- 
 Set = {}
-
--- SirVer, TODO: document all of these
--- SirVer, TODO: add a persistence test
 
 function Set:new(l)
    local set = {
@@ -28,6 +41,10 @@ function Set:new(l)
    return set
 end
 
+-- RST
+--    .. method:: add(item)
+--     
+--       Add this item to the set
 function Set:add(item)
    local hash = item.__hash or item
    if not self[hash] then
@@ -36,6 +53,11 @@ function Set:add(item)
    end
 end
 
+-- RST
+--    .. method:: discard(item)
+--     
+--       Remove this item from the set. Does nothing if the item is not in the
+--       set.
 function Set:discard(item)
    local hash = item.__hash or item
    if self[hash] then
@@ -44,11 +66,22 @@ function Set:discard(item)
    end
 end
 
+-- RST
+--    .. method:: contains(item)
+--    
+--       Returns :const:`true` if the item is contained in this set,
+--       :const:`false` otherwise
 function Set:contains(item)
    local hash = item.__hash or item
    return self[hash] ~= nil
 end
 
+-- RST
+--    .. method:: pop_at(n)
+--    
+--       Returns the n-th item of this set and removes it. Note that the only
+--       way to get to this item is by iterating, so this function scales
+--       linearly with n.
 function Set:pop_at(n)
    assert(n <= self.size) 
    assert(n >= 1)
@@ -66,6 +99,15 @@ function Set:pop_at(n)
    return gitem
 end
 
+-- RST
+--    .. method:: items
+--    
+--       Iterator function that allows easy iterating of all items.
+--
+--       .. code-block:: lua
+--
+--          s = Set:new{"a","b","c"}
+--          for i in s:items() do print(i) end
 function Set:items()
    local co = coroutine.create(function ()
       for hash, v in pairs(self) do
@@ -80,6 +122,11 @@ function Set:items()
    end
 end
 
+-- RST
+--    .. method:: union(other_set)
+--    
+--       Returns a new set that is the union of both sets. This is
+--       also overloaded to the '+' operator
 function Set:union(b)
    local rv = Set:new()
    for hash,item in pairs(self) do 
@@ -92,6 +139,11 @@ function Set:union(b)
 end
 Set.__add = Set.union
 
+-- RST
+--    .. method:: subtract(other_set)
+--    
+--       Returns a new set that contains all values of this set that 
+--       are not in other_set. This is also overloaded to the '-' operator.
 function Set:substract(b)
    local rv = Set:new()
    for hash, value in pairs(self) do
@@ -104,6 +156,11 @@ function Set:substract(b)
 end
 Set.__sub = Set.substract
 
+-- RST
+--    .. method:: intersection(other_set)
+--    
+--       Returns a new set that contains all values of this set that are also
+--       in other_set. This is also overloaded to the '*' operator.
 function Set:intersection(b)
    local rv = Set:new{}
    for hash,value in pairs(self) do
@@ -130,6 +187,5 @@ function Set:__tostring()
    table.sort(l)
    return '{' .. table.concat(l, ", ") .. '}'
 end
-
 
 
