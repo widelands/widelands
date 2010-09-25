@@ -69,6 +69,7 @@ struct Multiline_Textarea : public Panel {
 	}
 
 	void set_color(RGBColor fg) {m_fcolor = fg;}
+	void set_bg_color(RGBColor bgc) {m_bg_color = bgc;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget &);
@@ -94,6 +95,7 @@ protected:
 	std::string  m_fontname;
 	int32_t  m_fontsize;
 	RGBColor m_fcolor;
+	RGBColor m_bg_color;    ///< background color of the text.
 	uint32_t m_textheight;  ///< total height of wrapped text, in pixels
 	uint32_t m_textpos;     ///< current scrolling position in pixels (0 is top)
 
