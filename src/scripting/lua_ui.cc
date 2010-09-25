@@ -27,6 +27,8 @@
 
 #include "lua_ui.h"
 
+namespace LuaUi {
+
 /* RST
 :mod:`wl.ui`
 =============
@@ -51,9 +53,15 @@
 
 /*
  * ========================================================================
- *                            MODULE CLASSES
+ *                         MODULE CLASSES
  * ========================================================================
  */
+
+/* RST
+Module Classes
+^^^^^^^^^^^^^^^^
+
+*/
 
 /* RST
 Panel
@@ -498,6 +506,7 @@ const char L_MapView::className[] = "MapView";
 const MethodType<L_MapView> L_MapView::Methods[] = {
 	METHOD(L_MapView, click),
 	METHOD(L_MapView, abort_road_building),
+	METHOD(L_MapView, close),
 	{0, 0},
 };
 const PropertyType<L_MapView> L_MapView::Properties[] = {
@@ -608,7 +617,8 @@ int L_MapView::set_statistics(lua_State * L) {
 		:type field: :class:`wl.map.Field`
 */
 int L_MapView::click(lua_State * L) {
-	get()->warp_mouse_to_node((*get_user_class<L_Field>(L, 2))->coords());
+	get()->warp_mouse_to_node((*get_user_class<LuaMap::L_Field>
+				(L, 2))->coords());
 	get()->fieldclicked.call();
 	return 0;
 }
@@ -623,7 +633,23 @@ int L_MapView::abort_road_building(lua_State * L) {
 	Interactive_Base* me = get();
 	if (me->is_building_road())
 		me->abort_build_road();
+	return 0;
 }
+
+/* RST
+	.. method:: close
+
+		Closes the MapView. Note that this is the equivalent as clicking on
+		the exit button in the game; that is the game will be exited.
+
+		This is especially useful for automated testing of features and is for
+		example used in the widelands Lua test suite.
+*/
+int L_MapView::close(lua_State * l) {
+	get()->end_modal(0);
+	return 0;
+}
+
 
 /*
  * C Functions
@@ -692,4 +718,6 @@ void luaopen_wlui(lua_State * L) {
 	lua_pop(L, 1); // Pop the meta table
 }
 
+
+};
 

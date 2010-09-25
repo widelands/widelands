@@ -5,7 +5,7 @@
 use("aux", "infrastructure")
 use("aux", "shared_kingdom_functions")
 
-set_textdomain("tribe", "empire")
+set_textdomain("tribe_empire")
 
 return {
    name = _ "Headquarters medium",
@@ -13,7 +13,7 @@ return {
 
    p:allow_workers("all")
 
-   local sf = p.starting_field
+   local sf = wl.Game().map.player_slots[p.number].starting_field
 
    p = actual_player(p)
 

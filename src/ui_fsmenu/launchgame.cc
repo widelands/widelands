@@ -234,6 +234,8 @@ void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider & chat)
 			(this,
 			 m_xres * 5 / 100, m_yres * 13 / 20, m_xres * 25 / 40, m_yres * 3 / 10,
 			 chat);
+	// For better readability
+	m_chat->set_bg_color(RGBColor(50, 50, 50));
 }
 
 

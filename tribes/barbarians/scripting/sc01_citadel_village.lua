@@ -13,11 +13,10 @@ return {
 
    plr:allow_workers("all")
 
-   local sf = plr.starting_field
-
+   local sf = wl.Game().map.player_slots[plr.number].starting_field
    plr = actual_player(plr)
 
-   local h = plr:place_building("citadel", sf)
+   local h = plr:place_building("citadel", sf, false, true)
    h:set_soldiers{[{0,0,0,0}] = 12}
 
    if not pcall(function()

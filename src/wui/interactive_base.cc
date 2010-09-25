@@ -561,12 +561,6 @@ void Interactive_Base::start_build_road
 
 	m_road_build_player = player;
 
-	//  If we are a game, we obviously build for the Interactive Player.
-	assert
-		(player
-		 ==
-		 dynamic_cast<Interactive_Player const &>(*this).player_number());
-
 	roadb_add_overlay();
 	need_complete_redraw();
 }
@@ -604,9 +598,16 @@ void Interactive_Base::finish_build_road()
 	need_complete_redraw();
 
 	if (m_buildroad->get_nsteps()) {
+		upcast(Game, game, &egbase());
+
 		// Build the path as requested
-		ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_road
-			(m_road_build_player, *new Widelands::Path(*m_buildroad));
+		if (game)
+			game->send_player_build_road
+				(m_road_build_player, *new Widelands::Path(*m_buildroad));
+		else
+			egbase().get_player(m_road_build_player)->build_road
+				(*new Widelands::Path(*m_buildroad));
+
 		if
 			(allow_user_input() and
 			 (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)))
@@ -625,15 +626,24 @@ void Interactive_Base::finish_build_road()
 					(std::vector<Coords>::const_iterator it = first;
 					 it <= last;
 					 ++it)
-					ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_flag
-						(m_road_build_player, map.get_fcoords(*it));
+						if (game)
+							game->send_player_build_flag
+								(m_road_build_player, map.get_fcoords(*it));
+						else
+							egbase().get_player(m_road_build_player)->build_flag
+								(map.get_fcoords(*it));
+
 			} else {
 				for //  end to start
 					(std::vector<Coords>::const_iterator it = last;
 					 first <= it;
 					 --it)
-					ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_flag
-						(m_road_build_player, map.get_fcoords(*it));
+						if (game)
+							game->send_player_build_flag
+								(m_road_build_player, map.get_fcoords(*it));
+						else
+							egbase().get_player(m_road_build_player)->build_flag
+								(map.get_fcoords(*it));
 			}
 		}
 	}

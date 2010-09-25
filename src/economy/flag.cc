@@ -105,7 +105,7 @@ void Flag::load_finish(Editor_Game_Base & egbase) {
  * Create a flag at the given location
 */
 Flag::Flag
-	(Game & game, Player & owning_player, Coords const coords)
+	(Editor_Game_Base & egbase, Player & owning_player, Coords const coords)
 	:
 	PlayerImmovable       (g_flag_descr),
 	m_building            (0),
@@ -121,15 +121,21 @@ Flag::Flag
 	set_flag_position(coords);
 
 
-	upcast(Road, road, game.map().get_immovable(coords));
-	//  we split a road, or a new, standalone flag is created
-	(road ? road->get_economy() : new Economy(owning_player))->add_flag(*this);
+	upcast(Road, road, egbase.map().get_immovable(coords));
+	upcast(Game, game, &egbase);
 
-	if (road)
-		road->presplit(game, coords);
-	init(game);
-	if (road)
-		road->postsplit(game, *this);
+	if(game) {
+		//  we split a road, or a new, standalone flag is created
+		(road ? road->get_economy() : new Economy(owning_player))->add_flag(*this);
+
+		if (road)
+			road->presplit(*game, coords);
+	}
+
+	init(egbase);
+
+	if (road and game)
+			road->postsplit(*game, *this);
 }
 
 void Flag::set_flag_position(Coords coords) {
@@ -358,7 +364,7 @@ void Flag::skip_wait_for_capacity(Game &, Worker & w)
 }
 
 
-void Flag::add_item(Game & game, WareInstance & item)
+void Flag::add_item(Editor_Game_Base & egbase, WareInstance & item)
 {
 
 	assert(m_item_filled < m_item_capacity);
@@ -368,8 +374,10 @@ void Flag::add_item(Game & game, WareInstance & item)
 	pi.pending  = false;
 	pi.nextstep = 0;
 
-	item.set_location(game, this);
-	item.update(game); //  will call call_carrier() if necessary
+	item.set_location(egbase, this);
+
+	if(upcast(Game, game, &egbase))
+		item.update(*game); //  will call call_carrier() if necessary
 }
 
 /**
@@ -480,7 +488,7 @@ Flag::Wares Flag::get_items() {
  * Force a removal of the given item from this flag.
  * Called by \ref WareInstance::cleanup()
 */
-void Flag::remove_item(Game & game, WareInstance * const item)
+void Flag::remove_item(Editor_Game_Base & egbase, WareInstance * const item)
 {
 	for (int32_t i = 0; i < m_item_filled; ++i) {
 		if (m_items[i].item != item)
@@ -491,7 +499,8 @@ void Flag::remove_item(Game & game, WareInstance * const item)
 			(&m_items[i], &m_items[i + 1],
 			 sizeof(m_items[0]) * (m_item_filled - i));
 
-		wake_up_capacity_queue(game);
+		if(upcast(Game, game, &egbase))
+			wake_up_capacity_queue(*game);
 
 		return;
 	}
@@ -639,8 +648,8 @@ void Flag::cleanup(Editor_Game_Base & egbase)
 	while (m_item_filled) {
 		WareInstance & item = *m_items[--m_item_filled].item;
 
-		item.set_location(ref_cast<Game, Editor_Game_Base>(egbase), 0);
-		item.destroy     (ref_cast<Game, Editor_Game_Base>(egbase));
+		item.set_location(egbase, 0);
+		item.destroy     (egbase);
 	}
 
 	//molog("  items destroyed\n");
@@ -657,7 +666,8 @@ void Flag::cleanup(Editor_Game_Base & egbase)
 		}
 	}
 
-	get_economy()->remove_flag(*this);
+	if(Economy* e = get_economy())
+		e->remove_flag(*this);
 
 	unset_position(egbase, m_position);
 

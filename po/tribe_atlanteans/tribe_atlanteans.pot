@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -201,7 +201,7 @@ msgid ""
 "Castle"
 msgstr ""
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
 msgid ""
 "Castle village"
 msgstr ""
@@ -462,7 +462,7 @@ msgid ""
 "Headquarters"
 msgstr ""
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:11
 msgid ""
 "Headquarters medium"
 msgstr ""
@@ -600,6 +600,11 @@ msgstr ""
 #: ../../tribes/atlanteans/conf:116
 msgid ""
 "Miner"
+msgstr ""
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+msgid ""
+"Not enough space"
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:157
@@ -997,6 +1002,13 @@ msgstr ""
 #: ../../tribes/atlanteans/conf:101
 msgid ""
 "Soldier"
+msgstr ""
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:120

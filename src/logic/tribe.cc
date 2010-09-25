@@ -437,8 +437,8 @@ uint32_t Tribe_Descr::get_resource_indicator
 			 name().c_str(),
 			 res->name().c_str());
 
-	uint32_t bestmatch =
-		static_cast<uint32_t>
+	int32_t bestmatch =
+		static_cast<int32_t>
 			((static_cast<float>(amount) / res->get_max_amount())
 			 *
 			 num_indicators);

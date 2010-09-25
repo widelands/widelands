@@ -156,10 +156,13 @@ void Economy::check_split(Flag & f1, Flag & f2)
 	assert(&f1 != &f2);
 	assert(f1.get_economy() == f2.get_economy());
 
-	Economy & e = *f1.get_economy();
+	Economy * e = f1.get_economy();
+	// No economy in the editor.
+	if (not e)
+		return;
 
-	if (not e.find_route(f1, f2, 0, false))
-		e._split(f2);
+	if (not e->find_route(f1, f2, 0, false))
+		e->_split(f2);
 }
 
 

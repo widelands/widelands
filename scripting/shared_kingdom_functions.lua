@@ -19,7 +19,7 @@
 --    :returns: :const: Player (either plr or the partner player)
 function actual_player(plr)
    if (plr.partner > 0) then
-      return wl.game.Player(plr.partner)
+      return wl.Game().players[plr.partner]
    end
    return plr
 end

@@ -7,7 +7,7 @@ carrier=1
 
 [idle]
 pics=waiting_???.png
-hotspot=7 22
+hotspot=11 21
 playercolor=true
 fps=10
 

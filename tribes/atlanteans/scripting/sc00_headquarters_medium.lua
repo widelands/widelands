@@ -12,7 +12,7 @@ return {
    func =  function(plr) 
    plr:allow_workers("all")
 
-   local sf = plr.starting_field
+   local sf = wl.Game().map.player_slots[plr.number].starting_field
 
    plr = actual_player(plr)
 
