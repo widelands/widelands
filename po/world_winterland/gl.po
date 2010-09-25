@@ -7,33 +7,74 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
-"PO-Revision-Date: 2010-04-10 17:29+0000\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"PO-Revision-Date: 2010-07-19 15:21+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-11 04:10+0000\n"
+"X-Launchpad-Export-Date: 2010-07-20 03:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../../worlds/winterland/conf:2
-msgid "The Widelands Development Team"
-msgstr "O equipo de desenvolvemento do Widelands"
+#: ../../worlds/winterland/conf:45
+msgid "Aspen"
+msgstr "Álamo"
 
-#: ../../worlds/winterland/conf:3
-msgid "Winterland"
-msgstr "Tundra"
+#: ../../worlds/winterland/conf:46
+msgid "Aspen medium"
+msgstr "Álamo mediano"
 
-#: ../../worlds/winterland/conf:4
-msgid ""
-"These are the white, wide and frosty winterlands, in which the Northmen "
-"dwell."
-msgstr ""
-"Estas son as brancas, amplas e xeadas tundras, onde loitan os nórdicos."
+#: ../../worlds/winterland/conf:47
+msgid "Aspen small"
+msgstr "Álamo pequeno"
+
+#: ../../worlds/winterland/conf:48
+msgid "Aspen tiny"
+msgstr "Álamo anano"
+
+#: ../../worlds/winterland/conf:79
+msgid "Badger"
+msgstr "Teixo"
+
+#: ../../worlds/winterland/conf:65
+msgid "Beech"
+msgstr "Faia"
+
+#: ../../worlds/winterland/conf:66
+msgid "Beech medium"
+msgstr "Faia mediana"
+
+#: ../../worlds/winterland/conf:67
+msgid "Beech small"
+msgstr "Faia pequena"
+
+#: ../../worlds/winterland/conf:68
+msgid "Beech tiny"
+msgstr "Faia anana"
+
+#: ../../worlds/winterland/conf:61
+msgid "Birch"
+msgstr "Bidueiro"
+
+#: ../../worlds/winterland/conf:62
+msgid "Birch medium"
+msgstr "Bidueiro mediano"
+
+#: ../../worlds/winterland/conf:63
+msgid "Birch small"
+msgstr "Bidueiro pequeno"
+
+#: ../../worlds/winterland/conf:64
+msgid "Birch tiny"
+msgstr "Bidueiro anano"
+
+#: ../../worlds/winterland/conf:80
+msgid "Bunny"
+msgstr "Coello"
 
 #: ../../worlds/winterland/conf:7
 #: ../../worlds/winterland/conf:8
@@ -43,6 +84,10 @@ msgstr ""
 msgid "Bush"
 msgstr "Mato"
 
+#: ../../worlds/winterland/resconf:4
+msgid "Coal"
+msgstr "Carbón"
+
 #: ../../worlds/winterland/conf:12
 #: ../../worlds/winterland/conf:13
 #: ../../worlds/winterland/conf:14
@@ -50,16 +95,104 @@ msgstr "Mato"
 msgid "Dead Tree"
 msgstr "Árbore morta"
 
+#: ../../worlds/winterland/conf:81
+msgid "Deer"
+msgstr "Cervo"
+
+#: ../../worlds/winterland/conf:82
+msgid "Duck"
+msgstr "Parrulo"
+
+#: ../../worlds/winterland/conf:83
+msgid "Elk"
+msgstr "Cervo canadense"
+
+#: ../../worlds/winterland/resconf:41
+msgid "Fish"
+msgstr "Peixe"
+
+#: ../../worlds/winterland/conf:84
+msgid "Fox"
+msgstr "Raposo"
+
+#: ../../worlds/winterland/resconf:12
+msgid "Gold"
+msgstr "Ouro"
+
+#: ../../worlds/winterland/resconf:28
+msgid "Granite"
+msgstr "Granito"
+
 #: ../../worlds/winterland/conf:16
 #: ../../worlds/winterland/conf:17
 #: ../../worlds/winterland/conf:18
 msgid "Grass"
 msgstr "Herba"
 
+#: ../../worlds/winterland/resconf:20
+msgid "Iron"
+msgstr "Ferro"
+
+#: ../../worlds/winterland/conf:69
+msgid "Larch"
+msgstr "Alerce"
+
+#: ../../worlds/winterland/conf:70
+msgid "Larch medium"
+msgstr "Alerce mediano"
+
+#: ../../worlds/winterland/conf:71
+msgid "Larch small"
+msgstr "Alerce pequeno"
+
+#: ../../worlds/winterland/conf:72
+msgid "Larch tiny"
+msgstr "Alerce anano"
+
+#: ../../worlds/winterland/conf:85
+msgid "Lynx"
+msgstr "Lince"
+
+#: ../../worlds/winterland/conf:57
+msgid "Maple"
+msgstr "Pradairo"
+
+#: ../../worlds/winterland/conf:58
+msgid "Maple medium"
+msgstr "Pradairo mediano"
+
+#: ../../worlds/winterland/conf:59
+msgid "Maple small"
+msgstr "Pradairo pequeno"
+
+#: ../../worlds/winterland/conf:60
+msgid "Maple tiny"
+msgstr "Pradairo anano"
+
+#: ../../worlds/winterland/conf:86
+msgid "Marten"
+msgstr "Marta"
+
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
 msgid "Mushroom"
 msgstr "Cogomelo"
+
+#: ../../worlds/winterland/conf:49
+msgid "Oak"
+msgstr "Carballo"
+
+#: ../../worlds/winterland/conf:50
+msgid "Oak medium"
+msgstr "Carballo mediano"
+
+#: ../../worlds/winterland/conf:51
+msgid "Oak small"
+msgstr "Carballo pequeno"
+
+#: ../../worlds/winterland/conf:52
+msgid "Oak tiny"
+msgstr "Carballo anano"
 
 #: ../../worlds/winterland/conf:21
 #: ../../worlds/winterland/conf:22
@@ -70,6 +203,30 @@ msgstr "Cogomelo"
 msgid "Pebble"
 msgstr "Grava"
 
+#: ../../worlds/winterland/conf:87
+msgid "Reindeer"
+msgstr "Reno"
+
+#: ../../worlds/winterland/conf:73
+msgid "Rowan"
+msgstr "Sobreira"
+
+#: ../../worlds/winterland/conf:74
+msgid "Rowan medium"
+msgstr "Sobreira mediana"
+
+#: ../../worlds/winterland/conf:75
+msgid "Rowan small"
+msgstr "Sobreira pequena"
+
+#: ../../worlds/winterland/conf:76
+msgid "Rowan tiny"
+msgstr "Sobreira anana"
+
+#: ../../worlds/winterland/conf:88
+msgid "Sheep"
+msgstr "Ovella"
+
 #: ../../worlds/winterland/conf:27
 #: ../../worlds/winterland/conf:28
 #: ../../worlds/winterland/conf:29
@@ -79,6 +236,22 @@ msgstr "Esqueleto"
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
 msgstr "Boneco de neve"
+
+#: ../../worlds/winterland/conf:53
+msgid "Spruce"
+msgstr "Abeto"
+
+#: ../../worlds/winterland/conf:54
+msgid "Spruce medium"
+msgstr "Abeto mediano"
+
+#: ../../worlds/winterland/conf:55
+msgid "Spruce small"
+msgstr "Abeto pequeno"
+
+#: ../../worlds/winterland/conf:56
+msgid "Spruce tiny"
+msgstr "Abeto anano"
 
 #: ../../worlds/winterland/conf:31
 #: ../../worlds/winterland/conf:32
@@ -99,177 +272,28 @@ msgstr "Monolito"
 msgid "Stones"
 msgstr "Pedras"
 
+#: ../../worlds/winterland/conf:2
+msgid "The Widelands Development Team"
+msgstr "O equipo de desenvolvemento do Widelands"
+
+#: ../../worlds/winterland/conf:4
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr ""
+"Estas son as brancas, amplas e xeadas tundras, onde loitan os nórdicos."
+
 #: ../../worlds/winterland/conf:44
 msgid "Track"
 msgstr "Pegada"
 
-#: ../../worlds/winterland/conf:45
-msgid "Aspen"
-msgstr "Álamo"
+#: ../../worlds/winterland/resconf:36
+msgid "Water"
+msgstr "Auga"
 
-#: ../../worlds/winterland/conf:46
-msgid "Aspen medium"
-msgstr "Álamo mediano"
-
-#: ../../worlds/winterland/conf:47
-msgid "Aspen small"
-msgstr "Álamo pequeno"
-
-#: ../../worlds/winterland/conf:48
-msgid "Aspen tiny"
-msgstr "Álamo anano"
-
-#: ../../worlds/winterland/conf:49
-msgid "Oak"
-msgstr "Carballo"
-
-#: ../../worlds/winterland/conf:50
-msgid "Oak medium"
-msgstr "Carballo mediano"
-
-#: ../../worlds/winterland/conf:51
-msgid "Oak small"
-msgstr "Carballo pequeno"
-
-#: ../../worlds/winterland/conf:52
-msgid "Oak tiny"
-msgstr "Carballo anano"
-
-#: ../../worlds/winterland/conf:53
-msgid "Spruce"
-msgstr "Abeto"
-
-#: ../../worlds/winterland/conf:54
-msgid "Spruce medium"
-msgstr "Abeto mediano"
-
-#: ../../worlds/winterland/conf:55
-msgid "Spruce small"
-msgstr "Abeto pequeno"
-
-#: ../../worlds/winterland/conf:56
-msgid "Spruce tiny"
-msgstr "Abeto anano"
-
-#: ../../worlds/winterland/conf:57
-msgid "Maple"
-msgstr "Pradairo"
-
-#: ../../worlds/winterland/conf:58
-msgid "Maple medium"
-msgstr "Pradairo mediano"
-
-#: ../../worlds/winterland/conf:59
-msgid "Maple small"
-msgstr "Pradairo pequeno"
-
-#: ../../worlds/winterland/conf:60
-msgid "Maple tiny"
-msgstr "Pradairo anano"
-
-#: ../../worlds/winterland/conf:61
-msgid "Birch"
-msgstr "Bidueiro"
-
-#: ../../worlds/winterland/conf:62
-msgid "Birch medium"
-msgstr "Bidueiro mediano"
-
-#: ../../worlds/winterland/conf:63
-msgid "Birch small"
-msgstr "Bidueiro pequeno"
-
-#: ../../worlds/winterland/conf:64
-msgid "Birch tiny"
-msgstr "Bidueiro anano"
-
-#: ../../worlds/winterland/conf:65
-msgid "Beech"
-msgstr "Faia"
-
-#: ../../worlds/winterland/conf:66
-msgid "Beech medium"
-msgstr "Faia mediana"
-
-#: ../../worlds/winterland/conf:67
-msgid "Beech small"
-msgstr "Faia pequena"
-
-#: ../../worlds/winterland/conf:68
-msgid "Beech tiny"
-msgstr "Faia anana"
-
-#: ../../worlds/winterland/conf:69
-msgid "Larch"
-msgstr "Alerce"
-
-#: ../../worlds/winterland/conf:70
-msgid "Larch medium"
-msgstr "Alerce mediano"
-
-#: ../../worlds/winterland/conf:71
-msgid "Larch small"
-msgstr "Alerce pequeno"
-
-#: ../../worlds/winterland/conf:72
-msgid "Larch tiny"
-msgstr "Alerce anano"
-
-#: ../../worlds/winterland/conf:73
-msgid "Rowan"
-msgstr "Sobreira"
-
-#: ../../worlds/winterland/conf:74
-msgid "Rowan medium"
-msgstr "Sobreira mediana"
-
-#: ../../worlds/winterland/conf:75
-msgid "Rowan small"
-msgstr "Sobreira pequena"
-
-#: ../../worlds/winterland/conf:76
-msgid "Rowan tiny"
-msgstr "Sobreira anana"
-
-#: ../../worlds/winterland/conf:79
-msgid "Badger"
-msgstr "Teixo"
-
-#: ../../worlds/winterland/conf:80
-msgid "Bunny"
-msgstr "Coello"
-
-#: ../../worlds/winterland/conf:81
-msgid "Deer"
-msgstr "Cervo"
-
-#: ../../worlds/winterland/conf:82
-msgid "Duck"
-msgstr "Parrulo"
-
-#: ../../worlds/winterland/conf:83
-msgid "Elk"
-msgstr "Cervo canadense"
-
-#: ../../worlds/winterland/conf:84
-msgid "Fox"
-msgstr "Raposo"
-
-#: ../../worlds/winterland/conf:85
-msgid "Lynx"
-msgstr "Lince"
-
-#: ../../worlds/winterland/conf:86
-msgid "Marten"
-msgstr "Marta"
-
-#: ../../worlds/winterland/conf:87
-msgid "Reindeer"
-msgstr "Reno"
-
-#: ../../worlds/winterland/conf:88
-msgid "Sheep"
-msgstr "Ovella"
+#: ../../worlds/winterland/conf:3
+msgid "Winterland"
+msgstr "Tundra"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"
@@ -279,29 +303,8 @@ msgstr "Bisonte"
 msgid "Wolf"
 msgstr "Lobo"
 
-#: ../../worlds/winterland/resconf:4
-msgid "Coal"
-msgstr "Carbón"
-
-#: ../../worlds/winterland/resconf:12
-msgid "Gold"
-msgstr "Ouro"
-
-#: ../../worlds/winterland/resconf:20
-msgid "Iron"
-msgstr "Ferro"
-
-#: ../../worlds/winterland/resconf:28
-msgid "Granit"
-msgstr "Granito"
-
-#: ../../worlds/winterland/resconf:36
-msgid "Water"
-msgstr "Auga"
-
-#: ../../worlds/winterland/resconf:41
-msgid "Fish"
-msgstr "Peixe"
+#~ msgid "Granit"
+#~ msgstr "Granito"
 
 #~ msgid "Tree"
 #~ msgstr "Árbore"

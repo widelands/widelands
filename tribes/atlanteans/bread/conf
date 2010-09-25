@@ -5,4 +5,4 @@ default_target_quantity=20
 # No description yet
 [idle]
 pics=idle.png
-hotspot=10 17
+hotspot=9 13

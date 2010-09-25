@@ -27,7 +27,6 @@
 #include "cmd_luascript.h"
 #include "computer_player.h"
 #include "economy/economy.h"
-#include "findimmovable.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "gamecontroller.h"
@@ -131,13 +130,10 @@ Game::Game() :
 	m_replaywriter     (0),
 	m_last_stats_update(0)
 {
-	g_sound_handler.m_the_game = this;
 }
 
 Game::~Game()
 {
-	assert(this == g_sound_handler.m_the_game);
-	g_sound_handler.m_the_game = 0;
 	delete m_replaywriter;
 }
 
@@ -251,6 +247,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
 		get_player(p)->setAI(map().get_scenario_player_ai(p));
+		get_player(p)->set_partner(map().get_player_partner(p));
 	}
 
 	set_ibase
@@ -268,7 +265,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, 1));
 	try {
-		bool const result = run(loaderUI, NewScenario);
+		bool const result = run(loaderUI, NewSPScenario);
 		delete m_ctrl;
 		m_ctrl = 0;
 		return result;
@@ -316,7 +313,8 @@ void Game::init_newgame
 			 playersettings.initialization_index,
 			 playersettings.tribe,
 			 playersettings.name,
-			 playersettings.team);
+			 playersettings.team,
+			 playersettings.partner);
 		get_player(i + 1)->setAI(playersettings.ai);
 	}
 
@@ -463,6 +461,7 @@ bool Game::run
 
 			}
 		} else
+			// Is a scenario!
 			iterate_players_existing(p, nr_players, *this, plr)
 				if (not map().get_starting_pos(p))
 				throw warning
@@ -489,13 +488,19 @@ bool Game::run
 			const std::string &  tribe_name = plr ? plr->tribe().name() : no_name;
 			const std::string & player_name = plr ? plr->    get_name() : no_name;
 			const std::string & player_ai   = plr ? plr->    getAI()    : no_name;
+			const Player_Number partner     = plr ? plr->    partner()  : 0;
 			map().set_scenario_player_tribe(p,  tribe_name);
 			map().set_scenario_player_name (p, player_name);
 			map().set_scenario_player_ai   (p, player_ai);
+			map().set_player_partner       (p, partner);
 		}
 
 		// Run the init script, if the map provides one.
-		enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
+		if (start_game_type == NewSPScenario)
+			enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
+		else if (start_game_type == NewMPScenario)
+			enqueue_command(new Cmd_LuaScript(get_gametime(),
+						"map", "multiplayer_init"));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
@@ -529,6 +534,14 @@ bool Game::run
 	g_sound_handler.change_music("ingame", 1000, 0);
 
 	m_state = gs_running;
+
+	// If we are in shared kingdom mode, switch the played player in the
+	// local interactive player.
+	if (get_ipl())
+		if (get_player(get_ipl()->player_number())->partner() > 0) {
+			Player_Number p = get_player(get_ipl()->player_number())->partner();
+			get_ipl()->set_player_number(p);
+		}
 
 	get_ibase()->run();
 
@@ -817,6 +830,7 @@ void Game::sample_statistics()
 	std::vector<uint32_t> nr_wares;
 	std::vector<uint32_t> productivity;
 	std::vector<uint32_t> nr_production_sites;
+	std::vector<uint32_t> custom_statistic;
 	land_size             .resize(nr_plrs);
 	nr_buildings          .resize(nr_plrs);
 	nr_casualties         .resize(nr_plrs);
@@ -830,6 +844,7 @@ void Game::sample_statistics()
 	nr_wares              .resize(nr_plrs);
 	productivity          .resize(nr_plrs);
 	nr_production_sites   .resize(nr_plrs);
+	custom_statistic      .resize(nr_plrs);
 
 	//  We walk the map, to gain all needed information.
 	Map const &  themap = map();
@@ -900,6 +915,17 @@ void Game::sample_statistics()
 			productivity[i] /= nr_production_sites[i];
 	}
 
+	// If there is a hook function defined to sample special statistics in this
+	// game, call the corresponding Lua function
+	boost::shared_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
+	if (hook) {
+		iterate_players_existing(p, nr_plrs, *this, plr) {
+			LuaCoroutine * cr = hook->get_coroutine("calculator");
+			cr->push_arg(plr);
+			cr->resume(&custom_statistic[p-1]);
+		}
+	}
+
 	// Now, push this on the general statistics
 	m_general_stats.resize(map().get_nrplayers());
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
@@ -919,6 +945,7 @@ void Game::sample_statistics()
 		m_general_stats[i].nr_workers      .push_back(nr_workers      [i]);
 		m_general_stats[i].nr_wares        .push_back(nr_wares        [i]);
 		m_general_stats[i].productivity    .push_back(productivity    [i]);
+		m_general_stats[i].custom_statistic.push_back(custom_statistic[i]);
 	}
 }
 
@@ -933,7 +960,7 @@ void Game::sample_statistics()
  */
 void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 {
-	if (version == 3) {
+	if (version >= 3) {
 		m_last_stats_update = fr.Unsigned32();
 
 		// Read general statistics
@@ -954,6 +981,7 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 			m_general_stats[p - 1].nr_civil_blds_lost    .resize(entries);
 			m_general_stats[p - 1].nr_civil_blds_defeated.resize(entries);
 			m_general_stats[p - 1].miltary_strength.resize(entries);
+			m_general_stats[p - 1].custom_statistic.resize(entries);
 		}
 
 		iterate_players_existing_novar(p, nr_players, *this)
@@ -971,6 +999,8 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 				m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.Unsigned32();
 				m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.Unsigned32();
 				m_general_stats[p - 1].miltary_strength[j] = fr.Unsigned32();
+				if (version == 4)
+					m_general_stats[p - 1].custom_statistic[j] = fr.Unsigned32();
 			}
 	} else
 		throw wexception("Unsupported version %i", version);
@@ -1011,234 +1041,8 @@ void Game::WriteStatistics(FileWrite & fw)
 			fw.Unsigned32(m_general_stats[p - 1].nr_civil_blds_lost    [j]);
 			fw.Unsigned32(m_general_stats[p - 1].nr_civil_blds_defeated[j]);
 			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
+			fw.Unsigned32(m_general_stats[p - 1].custom_statistic[j]);
 		}
-}
-
-/// This unconquers an area. This is only possible, when there is a building
-/// placed on this node.
-void Game::unconquer_area
-	(Player_Area<Area<FCoords> > player_area,
-	 Player_Number         const destroying_player)
-{
-	assert(0 <= player_area.x);
-	assert     (player_area.x < map().get_width());
-	assert(0 <= player_area.y);
-	assert     (player_area.y < map().get_height());
-	assert(&map()[0] <= player_area.field);
-	assert             (player_area.field < &map()[map().max_index()]);
-	assert(0 < player_area.player_number);
-	assert    (player_area.player_number <= map().get_nrplayers());
-
-	//  Here must be a building.
-	assert
-		(dynamic_cast<Building const &>(*map().get_immovable(player_area))
-		 .owner().player_number()
-		 ==
-		 player_area.player_number);
-
-	//  step 1: unconquer area of this building
-	do_conquer_area(player_area, false, destroying_player);
-
-	//  step 5: deal with player immovables in the lost area
-	//  Players are not allowed to have their immovables on their borders.
-	//  Therefore the area must be enlarged before calling
-	//  cleanup_playerimmovables_area, so that those new border locations are
-	//  covered.
-	++player_area.radius;
-	player_area.player_number = destroying_player;
-	cleanup_playerimmovables_area(player_area);
-}
-
-/// This conquers a given area because of a new (military) building that is set
-/// there.
-void Game::conquer_area(Player_Area<Area<FCoords> > player_area) {
-	assert(0 <= player_area.x);
-	assert     (player_area.x < map().get_width());
-	assert(0 <= player_area.y);
-	assert     (player_area.y < map().get_height());
-	assert(&map()[0] <= player_area.field);
-	assert             (player_area.field < &map()[map().max_index()]);
-	assert(0 < player_area.player_number);
-	assert    (player_area.player_number <= map().get_nrplayers());
-
-	do_conquer_area(player_area, true);
-
-	//  Players are not allowed to have their immovables on their borders.
-	//  Therefore the area must be enlarged before calling
-	//  cleanup_playerimmovables_area, so that those new border locations are
-	//  covered.
-	++player_area.radius;
-	cleanup_playerimmovables_area(player_area);
-}
-
-
-void Game::conquer_area_no_building(Player_Area<Area<FCoords> > player_area) {
-	assert(0 <= player_area.x);
-	assert     (player_area.x < map().get_width());
-	assert(0 <= player_area.y);
-	assert     (player_area.y < map().get_height());
-	Field const & first_field = map()[0];
-	assert(&first_field <= player_area.field);
-	assert(player_area.field < &first_field + map().max_index());
-	assert(0 < player_area.player_number);
-	assert    (player_area.player_number <= map().get_nrplayers());
-	MapRegion<Area<FCoords> > mr(map(), player_area);
-	do {
-		Player_Number const owner = mr.location().field->get_owned_by();
-		if (owner != player_area.player_number) {
-			if (owner)
-				receive(NoteFieldPossession(mr.location(), LOSE));
-			mr.location().field->set_owned_by(player_area.player_number);
-			inform_players_about_ownership
-				(mr.location().field - &first_field, player_area.player_number);
-			receive (NoteFieldPossession(mr.location(), GAIN));
-		}
-	} while (mr.advance(map()));
-
-	//  This must reach one step beyond the conquered area to adjust the borders
-	//  of neighbour players.
-	++player_area.radius;
-	map().recalc_for_field_area(player_area);
-}
-
-
-/// Conquers the given area for that player; does the actual work.
-/// Additionally, it updates the visible area for that player.
-// TODO: this needs a more fine grained refactoring
-// for example scripts will want to (un)conquer area of non oval shape
-// or give area back to the neutral player (this is very important for the Lua
-// testsuite).
-void Game::do_conquer_area
-	(Player_Area<Area<FCoords> > player_area,
-	 bool          const conquer,
-	 Player_Number const preferred_player,
-	 bool          const neutral_when_no_influence,
-	 bool          const neutral_when_competing_influence,
-	 bool          const conquer_guarded_location_by_superior_influence)
-{
-	assert(0 <= player_area.x);
-	assert(player_area.x < map().get_width());
-	assert(0 <= player_area.y);
-	assert(player_area.y < map().get_height());
-	Field const & first_field = map()[0];
-	assert(&first_field <= player_area.field);
-	assert                (player_area.field < &first_field + map().max_index());
-	assert(0 < player_area.player_number);
-	assert    (player_area.player_number <= map().get_nrplayers());
-	assert    (preferred_player          <= map().get_nrplayers());
-	assert(preferred_player != player_area.player_number);
-	assert(not conquer or not preferred_player);
-	Player & conquering_player = player(player_area.player_number);
-	MapRegion<Area<FCoords> > mr(map(), player_area);
-	do {
-		Map_Index const index = mr.location().field - &first_field;
-		Military_Influence const influence =
-			map().calc_influence
-				(mr.location(), Area<>(player_area, player_area.radius));
-
-		Player_Number const owner = mr.location().field->get_owned_by();
-		if (conquer) {
-			//  adds the influence
-			Military_Influence new_influence_modified =
-				conquering_player.military_influence(index) += influence;
-			if (owner and not conquer_guarded_location_by_superior_influence)
-				new_influence_modified = 1;
-			if
-				(not owner
-				 or
-				 player(owner).military_influence(index) < new_influence_modified)
-			{
-				if (owner)
-					receive(NoteFieldPossession(mr.location(), LOSE));
-				mr.location().field->set_owned_by(player_area.player_number);
-				inform_players_about_ownership(index, player_area.player_number);
-				receive (NoteFieldPossession(mr.location(), GAIN));
-			}
-		} else if
-			(not (conquering_player.military_influence(index) -= influence)
-			 and
-			 owner == player_area.player_number)
-		{
-			//  The player completely lost influence over the location, which he
-			//  owned. Now we must see if some other player has influence and if
-			//  so, transfer the ownership to that player.
-			Player_Number best_player;
-			if
-				(preferred_player
-				 and
-				 player(preferred_player).military_influence(index))
-				best_player = preferred_player;
-			else {
-				best_player =
-					neutral_when_no_influence ? 0 : player_area.player_number;
-				Military_Influence highest_military_influence = 0;
-				Player_Number const nr_players = map().get_nrplayers();
-				iterate_players_existing_const(p, nr_players, *this, plr) {
-					if
-						(Military_Influence const value =
-						 	plr->military_influence(index))
-					{
-						if        (value >  highest_military_influence) {
-							highest_military_influence = value;
-							best_player = p;
-						} else if (value == highest_military_influence) {
-							Coords const c = map().get_fcoords(map()[index]);
-							best_player = neutral_when_competing_influence ?
-								0 : player_area.player_number;
-						}
-					}
-				}
-			}
-			if (best_player != player_area.player_number) {
-				receive (NoteFieldPossession(mr.location(), LOSE));
-				mr.location().field->set_owned_by (best_player);
-				inform_players_about_ownership(index, best_player);
-				if (best_player)
-					receive (NoteFieldPossession(mr.location(), GAIN));
-			}
-		}
-	} while (mr.advance(map()));
-
-	//  This must reach one step beyond the conquered area to adjust the borders
-	//  of neighbour players.
-	++player_area.radius;
-	map().recalc_for_field_area(player_area);
-}
-
-
-/// Makes sure that buildings cannot exist outside their owner's territory.
-void Game::cleanup_playerimmovables_area
-	(Player_Area<Area<FCoords> > const area)
-{
-	std::vector<ImmovableFound> immovables;
-	std::vector<PlayerImmovable *> burnlist;
-	Map & m = map();
-
-	//  find all immovables that need fixing
-	m.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
-
-	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {
-		PlayerImmovable & imm =
-			ref_cast<PlayerImmovable, BaseImmovable>(*i.current->object);
-		if
-			(not
-			 m[i.current->coords].is_interior(imm.owner().player_number()))
-			if
-				(std::find(burnlist.begin(), burnlist.end(), &imm)
-				 ==
-				 burnlist.end())
-				burnlist.push_back(&imm);
-	}
-
-	//  fix all immovables
-	container_iterate_const(std::vector<PlayerImmovable *>, burnlist, i) {
-		if (upcast(Building, building, *i.current))
-			building->set_defeating_player(area.player_number);
-		else if (upcast(Flag,     flag,     *i.current))
-			if (Building * const flag_building = flag->get_building())
-				flag_building->set_defeating_player(area.player_number);
-		(*i.current)->schedule_destroy(*this);
-	}
 }
 
 }

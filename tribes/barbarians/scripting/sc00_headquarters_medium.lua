@@ -3,15 +3,18 @@
 -- =======================================================================
 
 use("aux", "infrastructure")
+use("aux", "shared_kingdom_functions")
 
 set_textdomain("tribe_barbarians")
 
 init = {
    name = _ "Headquarters medium",
    func = function(player) 
-   local sf = player.starting_field
+   local sf = wl.Game().map.player_slots[player.number].starting_field
 
    player:allow_workers("all")
+
+   player = actual_player(player)
 
    hq = prefilled_buildings(player, { "headquarters", sf.x, sf.y,
       wares = {

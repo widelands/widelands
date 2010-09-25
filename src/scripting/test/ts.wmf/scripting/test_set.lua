@@ -6,9 +6,9 @@ use("aux", "set")
 set_basic_tests = lunit.TestCase("Set Basics")
 function set_basic_tests:test_creation()
    local s = Set:new{
-      wl.map.Field(10,12), wl.map.Field(11, 12),
-      wl.map.Field(11,12), wl.map.Field(13, 12),
-      wl.map.Field(14, 12)
+      map:get_field(10,12), map:get_field(11, 12),
+      map:get_field(11,12), map:get_field(13, 12),
+      map:get_field(14, 12)
    }
 
    assert_equal(4, s.size)
@@ -16,12 +16,12 @@ end
 
 set_tests = lunit.TestCase("Set Tests")
 function set_tests:setup()
-   local f1 = wl.map.Field(10,12); self.f1 = f1
-   local f2 = wl.map.Field(11,12); self.f2 = f2
-   local f3 = wl.map.Field(13,12); self.f3 = f3
-   local f4 = wl.map.Field(13,15); self.f4 = f4
-   local f5 = wl.map.Field(15,16); self.f5 = f5
-   local f6 = wl.map.Field(1 ,16); self.f6 = f6
+   local f1 = map:get_field(10,12); self.f1 = f1
+   local f2 = map:get_field(11,12); self.f2 = f2
+   local f3 = map:get_field(13,12); self.f3 = f3
+   local f4 = map:get_field(13,15); self.f4 = f4
+   local f5 = map:get_field(15,16); self.f5 = f5
+   local f6 = map:get_field(1 ,16); self.f6 = f6
 
    self.s1 = Set:new{ f1, f2, f2, f3, f4 }
    self.s2 = Set:new{ f4, f3, f4, f4, f5, f6 }
@@ -36,11 +36,11 @@ function set_tests:test_size()
 end
 
 function set_tests:test_add()
-   self.empty:add(wl.map.Field(10,12))
+   self.empty:add(map:get_field(10,12))
    assert_equal(1, self.empty.size)
-   self.empty:add(wl.map.Field(10,12))
+   self.empty:add(map:get_field(10,12))
    assert_equal(1, self.empty.size)
-   self.empty:add(wl.map.Field(11,12))
+   self.empty:add(map:get_field(11,12))
    assert_equal(2, self.empty.size)
 end
 
@@ -57,8 +57,8 @@ function set_tests:test_discard()
 end
 
 function set_tests:test_contains()
-   assert_equal(true, self.s1:contains(wl.map.Field(10,12)))
-   assert_equal(false, self.s1:contains(wl.map.Field(20,12)))
+   assert_equal(true, self.s1:contains(map:get_field(10,12)))
+   assert_equal(false, self.s1:contains(map:get_field(20,12)))
 end
 
 function set_tests:test_equality()

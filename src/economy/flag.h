@@ -60,7 +60,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Map_Flagdata_Data_Packet; // has to read/write this to a file
 
 	Flag(); /// empty flag for savegame loading
-	Flag(Game &, Player & owner, Coords); /// create a new flag
+	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
 	virtual ~Flag();
 
 	void load_finish(Editor_Game_Base &);
@@ -104,7 +104,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	uint32_t current_items() const {return m_item_filled;}
 	void wait_for_capacity(Game &, Worker &);
 	void skip_wait_for_capacity(Game &, Worker &);
-	void add_item(Game &, WareInstance &);
+	void add_item(Editor_Game_Base &, WareInstance &);
 	bool has_pending_item(Game &, Flag & destflag);
 	bool ack_pending_item(Game &, Flag & destflag);
 	WareInstance * fetch_pending_item(Game &, PlayerImmovable & dest);
@@ -113,7 +113,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void call_carrier(Game &, WareInstance &, PlayerImmovable * nextstep);
 	void update_items(Game &, Flag * other);
 
-	void remove_item(Game &, WareInstance * const);
+	void remove_item(Editor_Game_Base &, WareInstance * const);
 
 	void add_flag_job
 		(Game &, Ware_Index workerware, std::string const & programname);

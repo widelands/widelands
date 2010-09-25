@@ -12,4 +12,4 @@ transform=cornfield_harvested
 
 [idle]
 pics=cornfield_b_??.png
-hotspot=35 45
+hotspot=31 41

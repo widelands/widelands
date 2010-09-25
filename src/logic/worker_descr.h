@@ -118,14 +118,14 @@ protected:
 	void writeHTML(::FileWrite &) const;
 #endif
 
-	std::string   m_helptext;       ///< Short (tooltip-like) help text
-	uint32_t    m_default_target_quantity;
+	std::string       m_helptext;   ///< Short (tooltip-like) help text
+	uint32_t          m_default_target_quantity;
 	std::string const m_icon_fname; ///< Filename of worker's icon
 	PictureID         m_icon;       ///< Pointer to icon into picture stack
-	DirAnimations m_walk_anims;
-	DirAnimations m_walkload_anims;
+	DirAnimations     m_walk_anims;
+	DirAnimations     m_walkload_anims;
 	bool              m_buildable;
-	Buildcost     m_buildcost;
+	Buildcost         m_buildcost;
 
 	/**
 	 * Number of experience points required for leveling up,
@@ -136,7 +136,7 @@ protected:
 	/**
 	 * Type that this worker can become, i.e. level up to (or Null).
 	 */
-	Ware_Index    m_becomes;
+	Ware_Index  m_becomes;
 	Programs    m_programs;
 };
 

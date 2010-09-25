@@ -3,12 +3,13 @@
 -- =========================
 constructionsite_tests = lunit.TestCase("constructionsite tests")
 function constructionsite_tests:setup()
-   self.f1 = wl.map.Field(8,10)
-   self.f2 = wl.map.Field(12,10)
-   self.p = wl.game.Player(1)
+   self.f1 = map:get_field(8,10)
+   self.f2 = map:get_field(12,10)
+   player1:conquer(self.f1, 3)
+   player1:conquer(self.f2, 3)
 
-   self.p:place_building("lumberjacks_hut", self.f1, true)
-   self.p:place_building("fortress", self.f2, true)
+   player1:place_building("lumberjacks_hut", self.f1, true)
+   player1:place_building("fortress", self.f2, true)
 
    self.l = self.f1.immovable
    self.f = self.f2.immovable

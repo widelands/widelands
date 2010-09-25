@@ -178,13 +178,15 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 				if (upcast(Interactive_Player const, iplayer, igbase)) {
 					Widelands::Player const & player = iplayer->player();
 					if
-						(not
-						 (player.see_all() or
-						  1
-						  <
-						  player.vision
-						  	(Widelands::Map::get_index
-						  	 	(center.node, map.get_width()))))
+						(not player.see_all()
+						 and
+						  (1
+						   >=
+						   player.vision
+							   (Widelands::Map::get_index
+								   (center.node, map.get_width()))
+						   or
+						   player.is_hostile(*productionsite->get_owner())))
 						return set_tooltip(0);
 				}
 				std::string const s =
@@ -559,12 +561,6 @@ void Interactive_Base::start_build_road
 
 	m_road_build_player = player;
 
-	//  If we are a game, we obviously build for the Interactive Player.
-	assert
-		(player
-		 ==
-		 dynamic_cast<Interactive_Player const &>(*this).player_number());
-
 	roadb_add_overlay();
 	need_complete_redraw();
 }
@@ -602,9 +598,16 @@ void Interactive_Base::finish_build_road()
 	need_complete_redraw();
 
 	if (m_buildroad->get_nsteps()) {
+		upcast(Game, game, &egbase());
+
 		// Build the path as requested
-		ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_road
-			(m_road_build_player, *new Widelands::Path(*m_buildroad));
+		if (game)
+			game->send_player_build_road
+				(m_road_build_player, *new Widelands::Path(*m_buildroad));
+		else
+			egbase().get_player(m_road_build_player)->build_road
+				(*new Widelands::Path(*m_buildroad));
+
 		if
 			(allow_user_input() and
 			 (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)))
@@ -623,15 +626,24 @@ void Interactive_Base::finish_build_road()
 					(std::vector<Coords>::const_iterator it = first;
 					 it <= last;
 					 ++it)
-					ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_flag
-						(m_road_build_player, map.get_fcoords(*it));
+						if (game)
+							game->send_player_build_flag
+								(m_road_build_player, map.get_fcoords(*it));
+						else
+							egbase().get_player(m_road_build_player)->build_flag
+								(map.get_fcoords(*it));
+
 			} else {
 				for //  end to start
 					(std::vector<Coords>::const_iterator it = last;
 					 first <= it;
 					 --it)
-					ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_flag
-						(m_road_build_player, map.get_fcoords(*it));
+						if (game)
+							game->send_player_build_flag
+								(m_road_build_player, map.get_fcoords(*it));
+						else
+							egbase().get_player(m_road_build_player)->build_flag
+								(map.get_fcoords(*it));
 			}
 		}
 	}

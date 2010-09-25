@@ -124,15 +124,17 @@ void ChatDisplay::draw(RenderTarget & dst)
 
 	uint32_t y = 0;
 
+	Section & s = g_options.pull_section("global");
+	bool transparent_chat = s.get_bool("transparent_chat", true);
 	container_iterate_const(std::vector<Displayed>, displaylist, i) {
 		PictureID picid;
 		UI::g_fh->draw_richtext
 			(dst,
-			 RGBColor(55, 55, 55),
-			 Point(0, get_inner_h() -55 -y),
+			 RGBColor(50, 50, 50),
+			 Point(0, get_inner_h() -60 -y),
 			 "<rt>" + i.current->text + "</rt>",
 			 get_w(),
-			 m_cache_mode, picid);
+			 m_cache_mode, picid, transparent_chat);
 		y += i.current->h;
 		m_cache_id.push_back(picid);
 	}

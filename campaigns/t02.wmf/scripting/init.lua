@@ -11,7 +11,7 @@ use("aux", "infrastructure")
 -- ==========
 -- Constants 
 -- ==========
-plr = wl.game.Player(1)
+plr = wl.Game().players[1]
 
 -- ===============
 -- Initialization 

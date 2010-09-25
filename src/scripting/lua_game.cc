@@ -24,8 +24,6 @@
 #include "economy/flag.h"
 #include "gamecontroller.h"
 #include "i18n.h"
-#include "logic/checkstep.h"
-#include "logic/cmd_luacoroutine.h"
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
@@ -34,14 +32,15 @@
 #include "wui/story_message_box.h"
 
 #include "c_utils.h"
-#include "coroutine_impl.h"
 #include "lua_map.h"
 #include "scripting.h"
 
 #include "lua_game.h"
 
 using namespace Widelands;
+using namespace LuaMap;
 
+namespace LuaGame {
 
 /* RST
 :mod:`wl.game`
@@ -67,23 +66,22 @@ Module Classes
 
 */
 
+
 /* RST
 Player
 ------
 
-.. class:: Player(n)
+.. class:: Player
+
+	Child of: :class:`wl.bases.PlayerBase`
 
 	This class represents one of the players in the game. You can access
-	information about this player or act on his behalf.
-
-	:arg n: player number, range is 1 - :const:`number of players`
-	:type n: Integer
+	information about this player or act on his behalf. Note that you cannot
+	instantiate a class of this type directly, use the :attr:`wl.Game.players`
+	insteadl
 */
 const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {
-	METHOD(L_Player, __eq),
-	METHOD(L_Player, place_flag),
-	METHOD(L_Player, place_building),
 	METHOD(L_Player, send_message),
 	METHOD(L_Player, message_box),
 	METHOD(L_Player, sees_field),
@@ -91,48 +89,31 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, allow_buildings),
 	METHOD(L_Player, forbid_buildings),
 	METHOD(L_Player, add_objective),
-	METHOD(L_Player, conquer),
 	METHOD(L_Player, reveal_fields),
 	METHOD(L_Player, hide_fields),
 	METHOD(L_Player, reveal_scenario),
 	METHOD(L_Player, reveal_campaign),
-	METHOD(L_Player, place_road),
 	METHOD(L_Player, get_buildings),
 	METHOD(L_Player, set_flag_style),
 	METHOD(L_Player, set_frontier_style),
 	METHOD(L_Player, get_suitability),
 	METHOD(L_Player, allow_workers),
+	METHOD(L_Player, switchplayer),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
-	PROP_RO(L_Player, number),
+	PROP_RO(L_Player, name),
 	PROP_RO(L_Player, allowed_buildings),
 	PROP_RO(L_Player, objectives),
 	PROP_RO(L_Player, defeated),
-	PROP_RO(L_Player, starting_field),
 	PROP_RW(L_Player, retreat_percentage),
 	PROP_RW(L_Player, changing_retreat_percentage_allowed),
 	PROP_RO(L_Player, inbox),
-	PROP_RO(L_Player, team),
-	PROP_RO(L_Player, tribe),
+	PROP_RW(L_Player, team),
+	PROP_RO(L_Player, partner),
 	PROP_RW(L_Player, see_all),
 	{0, 0, 0},
 };
-
-L_Player::L_Player(lua_State * L) {
-	m_pl = luaL_checkuint32(L, -1);
-
-	// checks that this is a valid Player
-	get(L, get_egbase(L));
-}
-
-void L_Player::__persist(lua_State * L) {
-	PERS_UINT32("player", m_pl);
-}
-void L_Player::__unpersist(lua_State * L) {
-	UNPERS_UINT32("player", m_pl);
-}
-
 
 /*
  ==========================================================
@@ -140,14 +121,17 @@ void L_Player::__unpersist(lua_State * L) {
  ==========================================================
  */
 /* RST
-	.. attribute:: number
+	.. attribute:: name
 
-		(RO) The number of this Player.
+			(RO) The name of this Player.
 */
-int L_Player::get_number(lua_State * L) {
-	lua_pushuint32(L, m_pl);
+int L_Player::get_name(lua_State * L) {
+	Game & game = get_game(L);
+	Player & p = get(L, game);
+	lua_pushstring(L, p.get_name());
 	return 1;
 }
+
 /* RST
 	.. attribute:: allowed_buildings
 
@@ -157,8 +141,7 @@ int L_Player::get_number(lua_State * L) {
 		:meth:`allow_buildings` or :meth:`forbid_buildings` for that.
 */
 int L_Player::get_allowed_buildings(lua_State * L) {
-	Game & game = get_game(L);
-	Player & p = get(L, game);
+	Player & p = get(L, get_egbase(L));
 	const Tribe_Descr & t = p.tribe();
 
 	lua_newtable(L);
@@ -180,7 +163,7 @@ int L_Player::get_allowed_buildings(lua_State * L) {
 		a new item, use :meth:`add_objective`.
 */
 int L_Player::get_objectives(lua_State * L) {
-	Manager<Objective> const & mom = get_game(L).map().mom();
+	Manager<Objective> const & mom = get_egbase(L).map().mom();
 
 	lua_newtable(L);
 	for (Manager<Objective>::Index i = 0; i < mom.size(); i++) {
@@ -198,7 +181,7 @@ int L_Player::get_objectives(lua_State * L) {
 */
 int L_Player::get_defeated(lua_State * L) {
 	const std::vector<uint32_t> & nr_workers =
-		get_game(L).get_general_statistics()[m_pl - 1].nr_workers;
+		get_game(L).get_general_statistics()[player_number() - 1].nr_workers;
 
 	if (not nr_workers.empty() and *nr_workers.rbegin() == 0)
 		lua_pushboolean(L, true);
@@ -206,20 +189,6 @@ int L_Player::get_defeated(lua_State * L) {
 		lua_pushboolean(L, false);
 	return 1;
 }
-
-/* RST
-	.. attribute:: starting_field
-
-		(RO) The starting_field for this player as set in the map.
-		Note that it is not guaranteed that the HQ of the player is on this
-		field as a scenario is free to place the HQ wherever it want. This
-		field is only centered when the game starts.
-*/
-int L_Player::get_starting_field(lua_State * L) {
-	to_lua<L_Field>(L, new L_Field(get_game(L).map().get_starting_pos(m_pl)));
-	return 1;
-}
-
 
 /* RST
 	.. attribute:: retreat_percentage
@@ -230,7 +199,7 @@ int L_Player::get_starting_field(lua_State * L) {
 */
 // UNTESTED
 int L_Player::get_retreat_percentage(lua_State * L) {
-	lua_pushuint32(L, get(L, get_game(L)).get_retreat_percentage());
+	lua_pushuint32(L, get(L, get_egbase(L)).get_retreat_percentage());
 	return 1;
 }
 int L_Player::set_retreat_percentage(lua_State * L) {
@@ -238,7 +207,7 @@ int L_Player::set_retreat_percentage(lua_State * L) {
 	if (value > 100)
 		return report_error(L, "%i is not a valid percentage!", value);
 
-	get(L, get_game(L)).set_retreat_percentage(value);
+	get(L, get_egbase(L)).set_retreat_percentage(value);
 	return 0;
 }
 
@@ -250,11 +219,11 @@ int L_Player::set_retreat_percentage(lua_State * L) {
 */
 // UNTESTED
 int L_Player::get_changing_retreat_percentage_allowed(lua_State * L) {
-	lua_pushuint32(L, get(L, get_game(L)).is_retreat_change_allowed());
+	lua_pushuint32(L, get(L, get_egbase(L)).is_retreat_change_allowed());
 	return 1;
 }
 int L_Player::set_changing_retreat_percentage_allowed(lua_State * L) {
-	get(L, get_game(L)).allow_retreat_change(luaL_checkboolean(L, -1));
+	get(L, get_egbase(L)).allow_retreat_change(luaL_checkboolean(L, -1));
 	return 0;
 }
 
@@ -265,7 +234,7 @@ int L_Player::set_changing_retreat_percentage_allowed(lua_State * L) {
 		can't add messages to this array, use :meth:`send_message` for that.
 */
 int L_Player::get_inbox(lua_State * L) {
-	Player & p = get(L, get_game(L));
+	Player & p = get(L, get_egbase(L));
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
@@ -274,7 +243,7 @@ int L_Player::get_inbox(lua_State * L) {
 			continue;
 
 		lua_pushuint32(L, cidx ++);
-		to_lua<L_Message>(L, new L_Message(m_pl, m.current->first));
+		to_lua<L_Message>(L, new L_Message(player_number(), m.current->first));
 		lua_rawset(L, -3);
 	}
 
@@ -282,24 +251,33 @@ int L_Player::get_inbox(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: tribe
+	.. attribute:: team
 
-		(RO) The name of the tribe of this player.
+		(RW) The team number of this player (0 means player is not in a team)
+
+		normally only reading should be enough, however it's a nice idea to have
+		a modular scenario, where teams form during the game.
 */
-int L_Player::get_tribe(lua_State *L) {
-	lua_pushstring(L, get(L, get_egbase(L)).tribe().name());
+int L_Player::set_team(lua_State * L) {
+	get(L, get_egbase(L)).set_team_number(luaL_checkinteger(L, -1));
+	return 0;
+}
+int L_Player::get_team(lua_State * L) {
+	lua_pushinteger(L, get(L, get_egbase(L)).team_number());
 	return 1;
 }
 
 /* RST
-	.. attribute:: team
+	.. attribute:: partner
 
-		(RO) The team number of this player (0 means player is not in a team)
+		(RO) The playernumber of this player's partner (shared kingdom mode)
+		     0 means there is no partner.
 */
-int L_Player::get_team(lua_State *L) {
-	lua_pushinteger(L, get(L, get_egbase(L)).team_number());
+int L_Player::get_partner(lua_State * L) {
+	lua_pushinteger(L, get(L, get_egbase(L)).partner());
 	return 1;
 }
+
 
 /* RST
 	.. attribute:: see_all
@@ -307,12 +285,12 @@ int L_Player::get_team(lua_State *L) {
 		(RW) If you set this to true, the map will be completely visible for this
 		player.
 */
-int L_Player::set_see_all(lua_State * L) {
-	get(L, get_game(L)).set_see_all(luaL_checkboolean(L, -1));
+int L_Player::set_see_all(lua_State * const L) {
+	get(L, get_egbase(L)).set_see_all(luaL_checkboolean(L, -1));
 	return 0;
 }
-int L_Player::get_see_all(lua_State * L) {
-	lua_pushboolean(L, get(L, get_game(L)).see_all());
+int L_Player::get_see_all(lua_State * const L) {
+	lua_pushboolean(L, get(L, get_egbase(L)).see_all());
 	return 1;
 }
 
@@ -321,97 +299,6 @@ int L_Player::get_see_all(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
-int L_Player::__eq(lua_State * L) {
-	Game & g = get_game(L);
-	const Player & me = get(L, g);
-	const Player & you = (*get_user_class<L_Player>(L, 2))->get(L, g);
-
-	lua_pushboolean
-		(L, (me.player_number() == you.player_number()));
-	return 1;
-}
-
-/* RST
-	.. function:: place_flag(field[, force])
-
-		Builds a flag on a given field if it is legal to do so. If not,
-		reports an error
-
-		:arg field: where the flag should be created
-		:type field: :class:`wl.map.Field`
-		:arg force: If this is :const:`true` then the map is created with
-			pure force:
-
-				* if there is an immovable on this field, it will be
-				  removed
-				* if there are flags too close by to this field, they will be
-				  ripped
-				* if the player does not own the territory, it is conquered
-				  for him.
-		:type force: :class:`boolean`
-		:returns: :class:`wl.map.Flag` object created or :const:`nil`.
-*/
-int L_Player::place_flag(lua_State * L) {
-	uint32_t n = lua_gettop(L);
-	L_Field * c = *get_user_class<L_Field>(L, 2);
-	bool force = false;
-	if (n > 2)
-		force = luaL_checkboolean(L, 3);
-
-	Flag * f;
-	if (not force) {
-		f = get(L, get_game(L)).build_flag(c->fcoords(L));
-		if (!f)
-			return report_error(L, "Couldn't build flag!");
-	} else {
-		f = &get(L, get_game(L)).force_flag(c->fcoords(L));
-	}
-
-	return to_lua<L_Flag>(L, new L_Flag(*f));
-}
-
-/* RST
-	.. method:: place_building(name, field[, constructionsite = false])
-
-		Immediately creates a building on the given field. The building starts
-		out completely empty. If :const:`constructionsite` is set, the building
-		is not created directly, instead a constructionsite for this building is
-		placed. Note that this implies: force = false.
-
-		If :const:`constructionsite` is not set, the buildings i is forced to be
-		at this position, the same action is taken as for :meth:`place_flag` when
-		force is :const:`true`. Additionally, all buildings that are too close to
-		the new one are ripped.
-
-		:returns: :class:`wl.map.Building` object created or :const:`nil` if
-			a constructionsite is created.
-*/
-// TODO: this function should take a force parameter as any other
-// TODO: this function should return a wrapped constructionsite
-// TODO: add tests for the constructionsite functionality
-int L_Player::place_building(lua_State * L) {
-	const char * name = luaL_checkstring(L, 2);
-	L_Field * c = *get_user_class<L_Field>(L, 3);
-	bool constructionsite = false;
-
-	if (lua_gettop(L) >= 4)
-		constructionsite = luaL_checkboolean(L, 4);
-
-	Building_Index i = get(L, get_egbase(L)).tribe().building_index(name);
-	if (i == Building_Index::Null())
-		return report_error(L, "Unknown Building: '%s'", name);
-
-	if (not constructionsite) {
-		Building & b = get(L, get_egbase(L)).force_building
-			(c->coords(), i, 0, 0, Soldier_Counts());
-
-		return upcasted_immovable_to_lua(L, &b);
-	} else {
-		get(L, get_egbase(L)).build(c->coords(), i);
-		lua_pushnil(L);
-		return 1;
-	}
-}
 
 /* RST
 	.. method:: send_message(t, m[, opts])
@@ -511,7 +398,7 @@ int L_Player::send_message(lua_State * L) {
 				 st),
 			popup);
 
-	return to_lua<L_Message>(L, new L_Message(m_pl, message));
+	return to_lua<L_Message>(L, new L_Message(player_number(), message));
 }
 
 /* RST
@@ -609,36 +496,6 @@ int L_Player::message_box(lua_State * L) {
 }
 
 /* RST
-	.. method:: conquer(f[, radius=1])
-
-		Conquer this area around the given field if it does not belong to the
-		player already. This will conquer the fields no matter who owns it at the
-		moment.
-
-		:arg f: center field for conquering
-		:type f: :class:`wl.map.Field`
-		:arg radius: radius to conquer around. Default value makes this call
-			conquer 7 fields
-		:type radius: :class:`integer`
-		:returns: :const:`nil`
-*/
-// UNTESTED
-int L_Player::conquer(lua_State * L) {
-	Game & game = get_game(L);
-	uint32_t radius = 1;
-	if (lua_gettop(L) > 2)
-		radius = luaL_checkuint32(L, 3);
-
-	game.conquer_area_no_building
-		(Player_Area<Area<FCoords> >
-			(m_pl, Area<FCoords>
-				((*get_user_class<L_Field>(L, 2))->fcoords(L), radius))
-	);
-	return 0;
-}
-
-
-/* RST
 	.. method:: sees_field(f)
 
 		Returns true if this field is currently seen by this player
@@ -647,12 +504,12 @@ int L_Player::conquer(lua_State * L) {
 		:rtype: :class:`bool`
 */
 int L_Player::sees_field(lua_State * L) {
-	Game & game = get_game(L);
+	Editor_Game_Base & egbase = get_egbase(L);
 
 	Widelands::Map_Index const i =
-		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &game.map()[0];
+		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	lua_pushboolean(L, get(L, game).vision(i) > 1);
+	lua_pushboolean(L, get(L, egbase).vision(i) > 1);
 	return 1;
 }
 
@@ -666,12 +523,12 @@ int L_Player::sees_field(lua_State * L) {
 		:rtype: :class:`bool`
 */
 int L_Player::seen_field(lua_State * L) {
-	Game & game = get_game(L);
+	Editor_Game_Base & egbase = get_egbase(L);
 
 	Widelands::Map_Index const i =
-		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &game.map()[0];
+		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	lua_pushboolean(L, get(L, game).vision(i) >= 1);
+	lua_pushboolean(L, get(L, egbase).vision(i) >= 1);
 	return 1;
 }
 
@@ -765,9 +622,9 @@ int L_Player::add_objective(lua_State * L) {
 		:returns: :const:`nil`
 */
 int L_Player::reveal_fields(lua_State * L) {
-	Game & g = get_game(L);
-	Player & p = get(L, g);
-	Map & m = g.map();
+	Editor_Game_Base & egbase = get_egbase(L);
+	Player & p = get(L, egbase);
+	Map & m = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
@@ -775,7 +632,7 @@ int L_Player::reveal_fields(lua_State * L) {
 	while (lua_next(L, 2) != 0) {
 		p.see_node
 			(m, m[0], (*get_user_class<L_Field>(L, -1))->fcoords(L),
-			g.get_gametime());
+			egbase.get_gametime());
 		lua_pop(L, 1);
 	}
 
@@ -794,9 +651,9 @@ int L_Player::reveal_fields(lua_State * L) {
 		:returns: :const:`nil`
 */
 int L_Player::hide_fields(lua_State * L) {
-	Game & g = get_game(L);
-	Player & p = get(L, g);
-	Map & m = g.map();
+	Editor_Game_Base & egbase = get_egbase(L);
+	Player & p = get(L, egbase);
+	Map & m = egbase.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
@@ -804,7 +661,7 @@ int L_Player::hide_fields(lua_State * L) {
 	while (lua_next(L, 2) != 0) {
 		p.unsee_node
 			((*get_user_class<L_Field>(L, -1))->fcoords(L).field - &m[0],
-			g.get_gametime());
+			egbase.get_gametime());
 		lua_pop(L, 1);
 	}
 
@@ -822,7 +679,7 @@ int L_Player::hide_fields(lua_State * L) {
 */
 // UNTESTED
 int L_Player::reveal_scenario(lua_State * L) {
-	if (get_game(L).get_ipl()->player_number() != m_pl)
+	if (get_game(L).get_ipl()->player_number() != player_number())
 		return report_error(L, "Can only be called for interactive player!");
 
 	Campaign_visibility_save cvs;
@@ -842,7 +699,7 @@ int L_Player::reveal_scenario(lua_State * L) {
 */
 // UNTESTED
 int L_Player::reveal_campaign(lua_State * L) {
-	if (get_game(L).get_ipl()->player_number() != m_pl)
+	if (get_game(L).get_ipl()->player_number() != player_number())
 		return report_error(L, "Can only be called for interactive player!");
 
 	Campaign_visibility_save cvs;
@@ -851,102 +708,6 @@ int L_Player::reveal_campaign(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: place_road(f1, dir1, dir2, ...[, force=false])
-
-		Start a road at the given field, then walk the directions
-		given. Places a flag at the last field.
-
-		If the last argument to this function is :const:`true` the road will
-		be created by force: all immovables in the way are removed and land
-		is conquered.
-
-		:arg f1: fields to connect with this road
-		:type f1: :class:`wl.map.Field`
-		:arg dirs: direction, can be either ("r", "l", "br", "bl", "tr", "tl") or
-			("e", "w", "ne", "nw", "se", "sw").
-		:type dirs: :class:`string`
-
-		:returns: the road created
-*/
-int L_Player::place_road(lua_State * L) {
-	Game & g = get_game(L);
-	Map & map = g.map();
-
-	Flag * starting_flag = (*get_user_class<L_Flag>(L, 2))->get(L, g);
-	Coords current = starting_flag->get_position();
-	Path path(current);
-
-	bool force_road = false;
-	if (lua_isboolean(L, -1)) {
-		force_road = luaL_checkboolean(L, -1);
-		lua_pop(L, 1);
-	}
-
-	// Construct the path
-	CheckStepLimited cstep;
-	for (int32_t i = 3; i <= lua_gettop(L); i++) {
-		std::string d = luaL_checkstring(L, i);
-
-		if (d == "ne" or d == "tr") {
-			path.append(map, 1);
-			map.get_trn(current, &current);
-		} else if (d == "e" or d == "r") {
-			path.append(map, 2);
-			map.get_rn(current, &current);
-		} else if (d == "se" or d == "br") {
-			path.append(map, 3);
-			map.get_brn(current, &current);
-		} else if (d == "sw" or d == "bl") {
-			path.append(map, 4);
-			map.get_bln(current, &current);
-		} else if (d == "w" or d == "l") {
-			path.append(map, 5);
-			map.get_ln(current, &current);
-		} else if (d == "nw" or d == "tl") {
-			path.append(map, 6);
-			map.get_tln(current, &current);
-		} else
-			return report_error(L, "Illegal direction: %s", d.c_str());
-
-		cstep.add_allowed_location(current);
-	}
-
-	// Make sure that the road cannot cross itself
-	Path optimal_path;
-	map.findpath
-		(path.get_start(), path.get_end(),
-		 0,
-		 optimal_path,
-		 cstep,
-		 Map::fpBidiCost);
-	if (optimal_path.get_nsteps() != path.get_nsteps())
-		return report_error(L, "Cannot build a road that crosses itself!");
-
-	Road * r = 0;
-	if (force_road) {
-		r = &get(L, g).force_road(path);
-	} else {
-		BaseImmovable * bi = map.get_immovable(current);
-		if (!bi or bi->get_type() != Map_Object::FLAG) {
-			if (!get(L, g).build_flag(current))
-				return report_error(L, "Could not place end flag!");
-		}
-		if (bi and bi == starting_flag)
-		  return report_error(L, "Cannot build a closed loop!");
-
-		r = get(L, g).build_road(path);
-	}
-
-	if (!r)
-		return
-			report_error
-			  (L, "Error while creating Road. May be: something is in "
-					"the way or you do not own the territory were you want to build "
-					"the road");
-
-	return to_lua<L_Road>(L, new L_Road(*r));
-}
 
 /* RST
 	.. method:: get_buildings(which)
@@ -962,9 +723,9 @@ int L_Player::place_road(lua_State * L) {
 		:rtype: :class:`array` or :class:`table`
 */
 int L_Player::get_buildings(lua_State * L) {
-	Game & g = get_game(L);
-	Map * map = g.get_map();
-	Player & p = get(L, g);
+	Editor_Game_Base & egbase = get_egbase(L);
+	Map * map = egbase.get_map();
+	Player & p = get(L, egbase);
 
 	// if only one string, convert to array so that we can use
 	// m_parse_building_list
@@ -1139,6 +900,26 @@ int L_Player::allow_workers(lua_State * L) {
 	return 0;
 }
 
+
+/* RST
+	.. method:: switchplayer(playernumber)
+
+		If *this* is the local player (the player set in interactive player)
+		switch to the player with playernumber
+*/
+int L_Player::switchplayer(lua_State * L) {
+	Game & game = get_game(L);
+
+	uint8_t newplayer = luaL_checkinteger(L, -1);
+	Interactive_Player * ipl = game.get_ipl();
+	// only switch, if this is our player!
+	if (ipl->player_number() == player_number()) {
+		ipl->set_player_number(newplayer);
+	}
+	return 0;
+}
+
+
 /*
  ==========================================================
  C METHODS
@@ -1174,7 +955,7 @@ void L_Player::m_parse_building_list
 }
 int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 {
-	Player & p = get(L, get_game(L));
+	Player & p = get(L, get_egbase(L));
 
 	std::vector<Building_Index> houses;
 	m_parse_building_list(L, p.tribe(), houses);
@@ -1184,15 +965,6 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 
 	return 0;
 }
-Player & L_Player::get(lua_State * L, Widelands::Editor_Game_Base & egbase) {
-	if (m_pl > MAX_PLAYERS)
-		report_error(L, "Illegal player number %i",  m_pl);
-	Player * rv = egbase.get_player(m_pl);
-	if (!rv)
-		report_error(L, "Player with the number %i does not exist", m_pl);
-	return *rv;
-}
-
 
 /* RST
 Objective
@@ -1523,127 +1295,7 @@ const Message & L_Message::get(lua_State * L, Widelands::Game & game) {
  *                            MODULE FUNCTIONS
  * ========================================================================
  */
-/* RST
-Module Functions
-^^^^^^^^^^^^^^^^
-
-*/
-
-/* RST
-.. method:: get_game
-
-	This returns the absolute time elapsed since the game was started.
-
-	:returns: the current gametime in milliseconds
-	:rtype: :class:`integer`
-*/
-static int L_get_time(lua_State * L) {
-	Game & game = get_game(L);
-	lua_pushint32(L, game.get_gametime());
-	return 1;
-}
-
-
-/* RST
-.. method:: run_coroutine(func[, when = now])
-
-	Hands a Lua coroutine object over to widelands for execution. The object
-	must have been created via :func:`coroutine.create`. The coroutine is
-	expected to :func:`coroutine.yield` at regular intervals with the
-	absolute game time on which the function should be awakened again. You
-	should also have a look at :mod:`core.cr`.
-
-	:arg func: coroutine object to run
-	:type func: :class:`thread`
-	:arg when: absolute time when this coroutine should run
-	:type when: :class:`integer`
-
-	:returns: :const:`nil`
-*/
-static int L_run_coroutine(lua_State * L) {
-	int nargs = lua_gettop(L);
-	uint32_t runtime = get_game(L).get_gametime();
-	if (nargs < 1)
-		report_error(L, "Too little arguments!");
-	if (nargs == 2)
-		runtime = luaL_checkuint32(L, 2);
-
-
-	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(L, 1));
-	Game & game = get_game(L);
-
-	lua_pop(L, 1); // Remove coroutine from stack
-
-	game.enqueue_command(new Widelands::Cmd_LuaCoroutine(runtime, cr));
-
-	return 0;
-}
-
-/* RST
-.. function:: set_speed(speed)
-
-	Sets the desired speed of the game in ms per real second, so a speed of
-	1000 means the game runs at 1x speed. Note that this will not work in
-	network games.
-
-	:returns: :const:`nil`
-*/
-// UNTESTED
-static int L_set_speed(lua_State * L) {
-	get_game(L).gameController()->setDesiredSpeed(luaL_checkuint32(L, -1));
-	return 1;
-}
-
-/* RST
-.. function:: get_speed(speed)
-
-	Gets the current game speed
-
-	:returns: :const:`nil`
-*/
-// UNTESTED
-static int L_get_speed(lua_State * L) {
-	lua_pushuint32(L, get_game(L).gameController()->desiredSpeed());
-	return 1;
-}
-
-/* RST
-	.. function:: set_allow_autosaving(b)
-
-		Disable or enable auto-saving. When you show off UI features in a
-		tutorial or scenario, you have to disallow auto-saving because UI
-		elements can now be saved.
-
-		:arg b: allow autosaving or disallow it
-		:type b: :class:`boolean`
-*/
-// UNTESTED
-static int L_set_allow_autosaving(lua_State * L) {
-	get_game(L).save_handler().set_allow_autosaving
-		(luaL_checkboolean(L, -1));
-	return 0;
-}
-
-/* RST
-	.. function:: get_allow_autosaving
-
-		Returns the current state of autosaving.
-
-		:returns: :class:`boolean`
-*/
-// UNTESTED
-static int L_get_allow_autosaving(lua_State * L) {
-	lua_pushboolean(L, get_game(L).save_handler().get_allow_autosaving());
-	return 1;
-}
-
 const static struct luaL_reg wlgame [] = {
-	{"run_coroutine", &L_run_coroutine},
-	{"get_time", &L_get_time},
-	{"get_speed", &L_get_speed},
-	{"set_speed", &L_set_speed},
-	{"set_allow_autosaving", &L_set_allow_autosaving},
-	{"get_allow_autosaving", &L_get_allow_autosaving},
 	{0, 0}
 };
 
@@ -1651,8 +1303,13 @@ void luaopen_wlgame(lua_State * L) {
 	luaL_register(L, "wl.game", wlgame);
 	lua_pop(L, 1); // pop the table
 
-	register_class<L_Player>(L, "game");
+	register_class<L_Player>(L, "game", true);
+	add_parent<L_Player, LuaBases::L_PlayerBase>(L);
+	lua_pop(L, 1); // Pop the meta table
+
 	register_class<L_Objective>(L, "game");
 	register_class<L_Message>(L, "game");
 }
+
+};
 

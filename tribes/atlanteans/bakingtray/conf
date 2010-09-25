@@ -2,4 +2,4 @@ help=_The bakingtray is the tool of the baker, each baker needs its own. It is p
 
 [idle]
 pics=idle.png
-hotspot=8 11
+hotspot=6 6

@@ -31,8 +31,8 @@ produce=meat
 
 [idle]
 pics=piggery_i_??.png  # ???
-hotspot=82 95
+hotspot=82 74
 
 [working]
 pics=piggery_i_??.png  # ???
-hotspot=82 95
+hotspot=82 74

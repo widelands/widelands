@@ -244,6 +244,10 @@ struct BuildingObserver {
 	int32_t                           cnt_under_construction;
 
 	int32_t total_count() const {return cnt_built + cnt_under_construction;}
+	bool buildable(Widelands::Player * player) {
+		return is_buildable && player->is_building_type_allowed(id);
+	}
+	
 };
 
 struct ProductionSiteObserver {

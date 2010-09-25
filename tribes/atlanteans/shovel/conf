@@ -3,4 +3,4 @@ default_target_quantity=2
 
 [idle]
 pics=idle.png
-hotspot=6 10
+hotspot=5 8

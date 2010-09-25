@@ -1170,6 +1170,17 @@ void Bob::Loader::load_pointers()
 void Bob::Loader::load_finish()
 {
 	Map_Object::Loader::load_finish();
+
+	// Care about new mapobject saving / loading - map objects don't get a task,
+	// if created in the editor, so we give them one here.
+	// See bug #537392 for more informations:
+	//   https://bugs.launchpad.net/widelands/+bug/537392
+	Bob & bob = get<Bob>();
+	if (!bob.m_stack.size() && !egbase().get_gametime())
+		if (upcast(Game, game, &egbase())) {
+			bob.init_auto_task(*game);
+		}
+
 }
 
 const Bob::Task * Bob::Loader::get_task(const std::string & name)

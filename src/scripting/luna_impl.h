@@ -54,22 +54,45 @@ template <class T> int to_lua(lua_State * L, T * obj);
 template <class T> T * * get_user_class(lua_State * const L, int narg);
 
 template <class T>
-PropertyType<T> const * m_lookup_property_in_metatable(lua_State * const L) {
-	// stack: table name
-
+int m_dispatch_property_in_metatable(lua_State * const L, bool setter) {
+	// stack for getter: table name
+	// stack for setter: table name value
+	int ret = 0;
 	// Look up the key in the metatable
-	lua_getmetatable(L,  1); // table name mt
-	lua_pushvalue   (L,  2); // table name mt name
-	lua_rawget      (L, -2); // table name mt mt_val
+	lua_getmetatable(L,  1); // table name <value> mt
+	lua_pushvalue   (L,  2); // table name <value> mt name
+	lua_rawget      (L, -2); // table name <value> mt mt_val
+	lua_remove(L, -2); // table name <value> mt_val
+	if (lua_istable(L, -1))
+	{	
+		// dispatcher 
+		
+		lua_pushstring(L, "dispatcher"); // table name <value> mt_val "dispatcher"
+		lua_gettable(L, -2); // table name <value> mt_val dispatcher_val
+		if (!lua_iscfunction(L, -1))
+		{
+			lua_pop(L, 2); //  table name <value>
+			return report_error(L, "invalid property without dispatcher function");
+		}
+		lua_CFunction dispatcher = lua_tocfunction(L, -1);
+		lua_pop(L, 1); // table name <value> mt_val 
 
-	const PropertyType<T> * rv = 0;
+		// get property method to stack
+		lua_pushstring(L, setter ? "setter" : "getter");
+		lua_gettable(L, -2); // table name <value> mt_val getter_val/setter_val
+		lua_remove(L, -2); // table name <value> getter_val/setter_val
+		// dispatcher pops off getter/setter and returns whatever get/set property functions returns
+		ret = dispatcher(L); // table name value
+	} else {
+		if (setter) {
+			lua_rawset(L, 1);
+		} else {
+			// leave the value to stack
+			ret = 1;
+		}
+	}
 
-	if (lua_islightuserdata(L, -1))
-		rv = static_cast<const PropertyType<T> *>(lua_touserdata(L, -1));
-
-	lua_remove(L, -2); // table name mt_val
-
-	return rv;
+	return ret;
 }
 
 /**
@@ -94,42 +117,13 @@ int m_property_getter(lua_State * const L) {
 	}
 	lua_pop(L, 1); // table name
 
-	const PropertyType<T>* list = m_lookup_property_in_metatable<T>(L);
-	// stack: table name list
-
-	// Not in metatable?, return it
-	if (!list) {
-		return 1;
-	}
-	lua_pop(L, 1); // table name
-
-	T * * const obj = get_user_class<T>(L, 1);
-	// table name
-
-	// push value on top of the stack for the method call
-	return ((*obj)->*(list->getter))(L);
+	return m_dispatch_property_in_metatable<T>(L, false);
 }
 
 template <class T>
 int m_property_setter(lua_State * const L) {
 	// stack: table name value
-	PropertyType<T> const * list = m_lookup_property_in_metatable<T>(L);
-	lua_pop(L, 1); // table name value
-	// table name value rv
-
-	if (!list) {
-		// Not in metatable?
-		// do a normal set on the table
-		lua_rawset(L, 1);
-		return 0;
-	}
-
-	T * * const obj = get_user_class<T>(L, 1);
-
-	if (list->setter == 0)
-		return report_error(L, "The property '%s' is read-only!\n", list->name);
-
-	return ((*obj)->*(list->setter))(L);
+	return  m_dispatch_property_in_metatable<T>(L, true);
 }
 
 /**
@@ -138,7 +132,37 @@ int m_property_setter(lua_State * const L) {
  * make sure that the method is called correctly: obj.method(obj) or
  * obj:method(). We also check that we are not called with another object
  */
-template <class T>
+template <class T, class PT>
+int m_property_dispatch(lua_State * const L) {
+	// Check for invalid: obj.method()
+	int const n = lua_gettop(L);
+	if (!n)
+		return report_error(L, "Property needs at least the object as argument!");
+
+	// Check for invalid: obj.method(plainOldDatatype)
+	luaL_checktype(L, 1, LUA_TTABLE);
+
+	typedef int (PT::* const * ConstMethodPtr)(lua_State *);
+	ConstMethodPtr pfunc = reinterpret_cast<ConstMethodPtr>(lua_touserdata(L, -1));
+	lua_pop(L, 1); 
+
+	T * * const obj = get_user_class<T>(L, 1);
+
+	if (!*pfunc)
+	{
+		return report_error(L, "The property is read-only!\n");
+	}
+	// Call it on our instance
+	return ((*obj)->*(*pfunc))(L);
+}
+
+/**
+ * This function calls a lua method in our given object.  we can already be
+ * sure that the called method is registered in our metatable, but we have to
+ * make sure that the method is called correctly: obj.method(obj) or
+ * obj:method(). We also check that we are not called with another object
+ */
+template <class T, class PT>
 int m_method_dispatch(lua_State * const L) {
 	// Check for invalid: obj.method()
 	int const n = lua_gettop(L);
@@ -149,7 +173,7 @@ int m_method_dispatch(lua_State * const L) {
 	luaL_checktype(L, 1, LUA_TTABLE);
 
 	// Get the method pointer from the closure
-	typedef int (T::* const * ConstMethod)(lua_State *);
+	typedef int (PT::* const * ConstMethod)(lua_State *);
 	ConstMethod func = reinterpret_cast<ConstMethod>
 		(lua_touserdata(L, lua_upvalueindex(1)));
 
@@ -250,17 +274,33 @@ int m_create_metatable_for_class(lua_State * const L) {
 	return metatable;
 }
 
-template <class T>
+template <class T, class PT>
 void m_register_properties_in_metatable
 	(lua_State * const L)
 {
-	for (int i = 0; T::Properties[i].name; ++i) {
+	for (int i = 0; PT::Properties[i].name; ++i) {
 		// metatable[prop_name] = Pointer to getter setter
-		lua_pushstring(L, T::Properties[i].name);
+		lua_pushstring(L, PT::Properties[i].name);
+		lua_newtable(L);
+		lua_pushstring(L, "getter");
 		lua_pushlightuserdata
 			(L,
 			 const_cast<void *>
-			 	(reinterpret_cast<void const *>(&T::Properties[i])));
+			 	(reinterpret_cast<const void *>
+					(&(PT::Properties[i].getter))));
+		lua_settable(L, -3);
+		lua_pushstring(L, "setter");
+		lua_pushlightuserdata
+			(L,
+			 const_cast<void *>
+			 	(reinterpret_cast<const void *>
+					(&(PT::Properties[i].setter))));
+		lua_settable(L, -3);
+
+		lua_pushstring(L, "dispatcher");
+		lua_pushcfunction(L, &(m_property_dispatch<T, PT>));
+		lua_settable(L, -3);
+
 		lua_settable(L, -3); // Metatable is directly before our pushed stuff
 	}
 }
@@ -279,7 +319,7 @@ void m_register_methods_in_metatable(lua_State * const L)
 			(L,
 			 const_cast<void *>
 			 	(reinterpret_cast<void const *>(&PT::Methods[i].method)));
-		lua_pushcclosure(L, &(m_method_dispatch<T>), 1);
+		lua_pushcclosure(L, &(m_method_dispatch<T, PT>), 1);
 		lua_settable(L, -3); // Metatable is directly before our pushed stuff
 	}
 }

@@ -112,9 +112,6 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 public:
 	TrainingSite(TrainingSite_Descr const &);
 
-	void prefill
-		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
-
 	char const * type_name() const throw () {return "trainingsite";}
 	virtual std::string get_statistics_string();
 
@@ -146,7 +143,7 @@ public:
 	virtual uint32_t soldierCapacity() const;
 	virtual void setSoldierCapacity(uint32_t capacity);
 	virtual void dropSoldier(Soldier &);
-	int incorporateSoldier(Game &, Soldier &);
+	int incorporateSoldier(Editor_Game_Base &, Soldier &);
 	// End implementation of SoldierControl
 
 	int32_t get_pri(enum tAttribute atr);

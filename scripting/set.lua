@@ -9,9 +9,8 @@
 -- Prototype
 Set = {}
 
--- TODO: add this to the documentation. 
--- TODO: document all of these
--- TODO: add a persistence test
+-- SirVer, TODO: document all of these
+-- SirVer, TODO: add a persistence test
 
 function Set:new(l)
    local set = {

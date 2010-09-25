@@ -17,12 +17,14 @@ eight = 8
 is_true = true
 is_false = false
 
-p = wl.game.Player(1)
+game = wl.Game()
+p = game.players[1]
+map = game.map
 a = { "Hallo", "Welt" }
 c = { func = function(a) return "I say " .. a .. "!" end }
-field = wl.map.Field(32,34)
-tree = wl.map.create_immovable("tree3", field)
-removed_tree = wl.map.create_immovable("tree4", wl.map.Field(34,34))
+field = map:get_field(32,34)
+tree = map:place_immovable("tree3", field)
+removed_tree = map:place_immovable("tree4", map:get_field(34,34))
 removed_tree:remove()
 corout = coroutine.create(function()
    local a = 100
@@ -34,12 +36,13 @@ objective.done = true
 
 p:send_message("dummy msg1", "dummy msg 1")
 msg = p:send_message("hello nice", "World", {sender="blah", field = field })
+player_slot = map.player_slots[1]
 
 -- ========================
 -- Test after unpersisting 
 -- ========================
 function check_persistence()
-coroutine.yield(wl.game.get_time() + 2000)
+coroutine.yield(wl.Game().time + 2000)
 
 use("map", "lunit")
 lunit.import "assertions"
@@ -85,9 +88,19 @@ assert_equal("World", msg.body)
 assert_equal("blah", msg.sender)
 assert_equal(field, msg.field)
 
+assert_table(map)
+assert_equal(64, map.width)
+assert_equal(64, map.height)
+
+assert_table(player_slot)
+assert_equal("barbarians", player_slot.tribe)
+assert_equal("Player 1", player_slot.name)
+assert_equal(player_slot.name, map.player_slots[1].name)
+assert_equal(player_slot.tribe, map.player_slots[1].tribe)
 
 print("################### ALL TEST PASS!")
-wl.debug.exit()
+
+wl.ui.MapView():close()
 end
 
 
@@ -97,7 +110,8 @@ end
 -- This starts the test routine, saves the game and exits.
 -- Loading the saved game will check that all objects are 
 -- correctly unpersisted
-wl.game.run_coroutine(coroutine.create(check_persistence))
-wl.debug.save("lua_persistence")
-wl.debug.exit()
+game = wl.Game()
+game:launch_coroutine(coroutine.create(check_persistence))
+game:save("lua_persistence")
+wl.ui.MapView():close()
 

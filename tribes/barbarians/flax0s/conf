@@ -9,4 +9,4 @@ transform=flax0
 [small]
 pics=field0s_??.png
 fps=5
-hotspot=15 18
+hotspot=13 11

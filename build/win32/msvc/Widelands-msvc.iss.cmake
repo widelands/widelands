@@ -102,7 +102,7 @@ Source: @CMAKE_CURRENT_SOURCE_DIR@\..\tribes\*;    Excludes: .svn, Sconscript; D
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\txts\*;      Excludes: .svn, Sconscript; DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\worlds\*;    Excludes: .svn, Sconscript; DestDir: {app}\worlds\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\global\*;    Excludes: .svn, Sconscript; DestDir: {app}\global\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: @WL_3RDPARTY_DIR@\bin\*.dll;                                           DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: @CMAKE_CURRENT_SOURCE_DIR@\..\scripting\*; Excludes: .svn, Sconscript; DestDir: {app}\scripting\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: @CMAKE_CURRENT_BINARY_DIR@\@CMAKE_BUILD_TYPE@\widelands.exe;           DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\ChangeLog;                               DestDir: {app};            Flags: ignoreversion; DestName: ChangeLog.txt;                              Components: " Widelands"
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\COPYING;                                 DestDir: {app};            Flags: ignoreversion; DestName: COPYING.txt;                                Components: " Widelands"

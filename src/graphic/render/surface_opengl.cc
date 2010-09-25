@@ -148,7 +148,8 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 			} else {
 				pixels_format = GL_RGBA; //log(" RGB 8880 ");
 				// Read four bytes per pixel but ignore the alpha value
-				glPixelTransferi(GL_ALPHA_SCALE, 0);
+				glPixelTransferi(GL_ALPHA_SCALE, 0.0f);
+				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
 			}
 		} else if
 			(fmt.Bmask == 0x000000ff and fmt.Gmask == 0x0000ff00 and
@@ -160,7 +161,8 @@ SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 			} else {
 				pixels_format = GL_BGRA; //log(" BGR 8880 ");
 				// Read four bytes per pixel but ignore the alpha value
-				glPixelTransferi(GL_ALPHA_SCALE, 0);
+				glPixelTransferi(GL_ALPHA_SCALE, 0.0f);
+				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
 			}
 		} else
 			throw wexception("OpenGL: Unknown pixel format");

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -167,7 +167,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/empire/conf:204
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:11
 msgid ""
 "Castle village"
 msgstr ""
@@ -433,7 +433,7 @@ msgid ""
 "Hammer"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:20
+#: ../../tribes/empire/vineyard/conf:21
 msgid ""
 "Harvest vine"
 msgstr ""
@@ -449,7 +449,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/empire/conf:203
-#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:11
 msgid ""
 "Headquarters medium"
 msgstr ""
@@ -638,6 +638,11 @@ msgid ""
 "Miner"
 msgstr ""
 
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:117
+msgid ""
+"Not enough space"
+msgstr ""
+
 #: ../../tribes/empire/conf:144
 msgid ""
 "Outpost"
@@ -663,7 +668,7 @@ msgid ""
 "Piggery"
 msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:18
+#: ../../tribes/empire/vineyard/conf:19
 msgid ""
 "Plant vine"
 msgstr ""
@@ -969,6 +974,13 @@ msgstr ""
 #: ../../tribes/empire/conf:100
 msgid ""
 "Soldier"
+msgstr ""
+
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:118
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
 msgstr ""
 
 #: ../../tribes/empire/conf:121
@@ -1424,7 +1436,7 @@ msgstr ""
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22
 #: ../../tribes/empire/toolsmithy/conf:45
-#: ../../tribes/empire/vineyard/conf:22
+#: ../../tribes/empire/vineyard/conf:23
 #: ../../tribes/empire/weaponsmithy/conf:34
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16

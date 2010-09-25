@@ -35,11 +35,11 @@
 
 #include "luna.h"
 
-void luaopen_wlmap(lua_State *);
-
 namespace Widelands {
 	struct Soldier_Descr;
 }
+
+namespace LuaMap {
 
 /*
  * Base class for all classes in wl.map
@@ -49,18 +49,44 @@ class L_MapModuleClass : public LunaClass {
 		const char * get_modulename() {return "map";}
 };
 
-// TODO: should take Editor_Game_Base
+
+class L_Map : public L_MapModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_Map);
+
+	L_Map() {}
+	L_Map(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'Map' directly!");
+	}
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_width(lua_State *);
+	int get_height(lua_State *);
+	int get_player_slots(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+	int place_immovable(lua_State *);
+	int get_field(lua_State *);
+	int recalculate(lua_State *);
+
+	/*
+	 * C methods
+	 */
+private:
+};
+
 
 #define CASTED_GET(klass) \
-Widelands:: klass * get(lua_State * L, Widelands::Game & game) { \
-	return static_cast<Widelands:: klass *> \
-		(L_MapObject::get(game, L, #klass)); \
-}
-// TODO REMOVE ME
-#define CASTED_NEW_GET(klass) \
 Widelands:: klass * get(lua_State * L, Widelands::Editor_Game_Base & egbase) { \
 	return static_cast<Widelands:: klass *> \
-		(L_MapObject::get(egbase, L, #klass)); \
+		(L_MapObject::get(L, egbase, #klass)); \
 }
 
 class L_MapObject : public L_MapModuleClass {
@@ -97,12 +123,13 @@ public:
 	 */
 	int __eq(lua_State * L);
 	int remove(lua_State * L);
+	int has_attribute(lua_State * L);
 
 	/*
 	 * C Methods
 	 */
 	Widelands::Map_Object * get
-		(Widelands::Editor_Game_Base &, lua_State *, std::string = "MapObject");
+		(lua_State *, Widelands::Editor_Game_Base &, std::string = "MapObject");
 	Widelands::Map_Object * m_get_or_zero(Widelands::Editor_Game_Base &);
 };
 
@@ -130,7 +157,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_NEW_GET(BaseImmovable);
+	CASTED_GET(BaseImmovable);
 };
 
 class L_PlayerImmovable : public L_BaseImmovable {
@@ -146,7 +173,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_player(lua_State* L);
+	int get_owner(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -230,11 +257,16 @@ struct L_HasSoldiers {
 		uint8_t ev;
 
 		bool operator<(const SoldierDescr & ot) const {
-		  if (hp < ot.hp) return true;
-		  if (at < ot.at) return true;
-		  if (de < ot.de) return true;
-		  if (ev < ot.ev) return true;
-		  return false;
+		  bool hp_eq = hp == ot.hp;
+		  bool at_eq = at == ot.at;
+		  bool de_eq = de == ot.de;
+		  if (hp_eq && at_eq && de_eq)
+			  return ev < ot.ev;
+		  if (hp_eq && at_eq)
+			  return de < ot.de;
+		  if (hp_eq)
+			  return at < ot.at;
+		  return hp < ot.hp;
 		}
 		bool operator==(const SoldierDescr & ot) const {
 		  if (hp == ot.hp and at == ot.at and de == ot.de and ev == ot.ev)
@@ -296,12 +328,13 @@ struct _WorkerEmployer : public L_HasWorkers {
 
 	int get_valid_workers(lua_State * L);
 
-	virtual Widelands::PlayerImmovable * get(lua_State *, Widelands::Game &) = 0;
+	virtual Widelands::PlayerImmovable * get
+		(lua_State *, Widelands::Editor_Game_Base &) = 0;
 
 protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &) = 0;
 	virtual int _new_worker
-		(Widelands::PlayerImmovable &, Widelands::Game &,
+		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
 		 const Widelands::Worker_Descr*) = 0;
 };
 
@@ -311,9 +344,10 @@ struct _SoldierEmployer : public L_HasSoldiers {
 
 	int get_max_soldiers(lua_State * L);
 
-	virtual Widelands::Building * get(lua_State *, Widelands::Game &) = 0;
+	virtual Widelands::Building * get
+		(lua_State *, Widelands::Editor_Game_Base &) = 0;
 	virtual Widelands::SoldierControl * get_sc
-		(lua_State *, Widelands::Game &) = 0;
+		(lua_State *, Widelands::Editor_Game_Base &) = 0;
 };
 
 class L_Road : public L_PlayerImmovable, public _WorkerEmployer {
@@ -345,8 +379,8 @@ public:
 protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
 	virtual int _new_worker
-		(Widelands::PlayerImmovable &, Widelands::Game &,
-		 const Widelands::Worker_Descr*);
+		(Widelands::PlayerImmovable &,
+		 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr*);
 };
 
 
@@ -440,7 +474,7 @@ public:
 protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
 	virtual int _new_worker
-		(Widelands::PlayerImmovable &, Widelands::Game &,
+		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
 		 const Widelands::Worker_Descr*);
 };
 
@@ -466,7 +500,7 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(MilitarySite);
-	Widelands::SoldierControl * get_sc(lua_State * L, Widelands::Game & g) {
+	Widelands::SoldierControl * get_sc(lua_State * L, Widelands::Editor_Game_Base & g) {
 		return get(L, g);
 	}
 };
@@ -494,13 +528,9 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(TrainingSite);
-	Widelands::SoldierControl * get_sc(lua_State * L, Widelands::Game & g) {
-		return get(L, g);
-	}
+	Widelands::SoldierControl * get_sc
+		(lua_State * L, Widelands::Editor_Game_Base & g) {return get(L, g);}
 };
-
-#undef CASTED_GET
-
 
 class L_Bob : public L_MapObject {
 public:
@@ -522,9 +552,10 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_NEW_GET(Bob);
+	CASTED_GET(Bob);
 };
 
+#undef CASTED_GET
 
 class L_Field : public L_MapModuleClass {
 	Widelands::Coords m_c;
@@ -535,7 +566,9 @@ public:
 	L_Field (Widelands::Coordinate x, Widelands::Coordinate y) :
 		m_c(Widelands::Coords(x, y)) {}
 	L_Field (Widelands::Coords c) : m_c(c) {}
-	L_Field(lua_State * L);
+	L_Field(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'Field' directly!");
+	}
 	virtual ~L_Field() {}
 
 	virtual void __persist(lua_State * L);
@@ -577,6 +610,7 @@ public:
 	int __tostring(lua_State * L);
 	int __eq(lua_State * L);
 	int region(lua_State * L);
+	int has_movecaps_swim(lua_State *);
 
 	/*
 	 * C methods
@@ -589,6 +623,43 @@ private:
 	int m_hollow_region(lua_State * L, uint32_t radius, uint32_t inner_radius);
 };
 
+class L_PlayerSlot : public L_MapModuleClass {
+	Widelands::Player_Number m_plr;
+
+public:
+	LUNA_CLASS_HEAD(L_PlayerSlot);
+
+	L_PlayerSlot() {}
+	L_PlayerSlot(Widelands::Player_Number plr) : m_plr(plr) {}
+	L_PlayerSlot(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'PlayerSlot' directly!");
+	}
+	virtual ~L_PlayerSlot() {}
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_tribe(lua_State *);
+	int get_name(lua_State *);
+	int get_starting_field(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+};
+
 int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
+
+void luaopen_wlmap(lua_State *);
+
+
+};
 
 #endif

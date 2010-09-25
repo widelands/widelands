@@ -18,20 +18,25 @@ fishing_rod=1
 7=return
 
 [idle]
-pics=fishing_??.png
-hotspot=12 25
+pics=idle_??.png
+hotspot=19 41
+playercolor=true
+fps=10
 
 [fishing]
 pics=fishing_??.png
-hotspot=12 25
-fps=20
+hotspot=14 41
+playercolor=true
+fps=10
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=12 25
+hotspot=19 41
+playercolor=true
 fps=20
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=12 25
+hotspot=19 41
+playercolor=true
 fps=20

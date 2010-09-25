@@ -15,18 +15,18 @@ hunting_bow=1
 
 [idle]
 pics=shooting_??.png
-hotspot=6 30
+hotspot=6 29
 playercolor=true
 fps=10
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=14 27
+hotspot=14 22
 playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
-hotspot=14 27
+hotspot=13 23
 playercolor=true
 fps=10

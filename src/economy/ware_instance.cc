@@ -204,13 +204,13 @@ void WareInstance::cleanup(Editor_Game_Base & egbase)
 {
 	// Unlink from our current location, if necessary
 	if (upcast(Flag, flag, m_location.get(egbase)))
-		flag->remove_item(ref_cast<Game, Editor_Game_Base>(egbase), this);
+		flag->remove_item(egbase, this);
 
 	delete m_supply;
 	m_supply = 0;
 
 	cancel_moving();
-	set_location(ref_cast<Game, Editor_Game_Base>(egbase), 0);
+	set_location(egbase, 0);
 
 	Map_Object::cleanup(egbase);
 }
@@ -363,9 +363,12 @@ void WareInstance::update(Game & game)
 			}
 
 			throw wexception
-				("MO(%u): ware: can not move from building %u to %u (not a "
-				 "warehouse)",
-				 serial(), location->serial(), nextstep->serial());
+				("MO(%u): ware(%s): can not move from building %u (%s at (%u,%u)) "
+				 "to %u (%s) -> not a warehouse!",
+				 serial(), m_descr->name().c_str(), location->serial(),
+				 building->name().c_str(), building->get_position().x,
+				 building->get_position().y, nextstep->serial(),
+				 nextstep->name().c_str());
 
 		} else if (upcast(Flag, flag, location)) {
 			flag->call_carrier
