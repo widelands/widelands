@@ -9,8 +9,6 @@ use("aux", "ui")
 
 use("map", "water_rising")
 
--- TODO: remove table_unique 
-
 -- ===================
 -- Constants & Config
 -- ===================
