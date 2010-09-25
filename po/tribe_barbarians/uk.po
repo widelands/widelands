@@ -1,0 +1,1311 @@
+# Ukrainian translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-06-23 20:12+0000\n"
+"PO-Revision-Date: 2010-08-12 15:33+0000\n"
+"Last-Translator: Fedik <Unknown>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-08-13 05:51+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../tribes/barbarians/snack/conf:1
+msgid "A bit bigger, for the advanced miners. They will need a big morsel."
+msgstr ""
+"Трошки більший раціон для досвідчених шахтарів. Їм потрібні великі порції."
+
+#: ../../tribes/barbarians/meal/conf:1
+msgid "A real meal which satisfies all miners needs."
+msgstr "Справжня їжа, яка задовільняє всі потреби шахтарів."
+
+#: ../../tribes/barbarians/ration/conf:1
+msgid "A small bite to keep miners strong and working."
+msgstr "Невеликий набір, для підтримки сил шахтарям."
+
+#: ../../tribes/barbarians/warhelmet/conf:1
+msgid "An enhanced mask for barbarian warriors."
+msgstr "Покращена військова маска для наших воїнів."
+
+#: ../../tribes/barbarians/mask/conf:1
+msgid "An enhanced version of the helmet."
+msgstr "Покращена версія шолома."
+
+#: ../../tribes/barbarians/conf:27
+msgid "Ashes"
+msgstr "Попелище"
+
+#: ../../tribes/barbarians/conf:58
+msgid "Axe"
+msgstr "Сокира"
+
+#: ../../tribes/barbarians/conf:172
+msgid "Axefactory"
+msgstr "Фабрика сокир"
+
+#: ../../tribes/barbarians/conf:107
+msgid "Baker"
+msgstr "Пекар"
+
+#: ../../tribes/barbarians/conf:173
+msgid "Bakery"
+msgstr "Пекарня"
+
+#: ../../tribes/barbarians/baker/conf:1
+msgid "Bakes bread for workers."
+msgstr "Пече хліб для робочих"
+
+#: ../../tribes/barbarians/conf:5
+msgid "Barbarians"
+msgstr "Варвари"
+
+#: ../../tribes/barbarians/conf:158
+msgid "Barracks"
+msgstr "Казарма"
+
+#: ../../tribes/barbarians/conf:143
+#: ../../tribes/barbarians/conf:159
+msgid "Barrier"
+msgstr "Застава"
+
+#: ../../tribes/barbarians/helm/conf:1
+msgid "Basic defence of a warrior."
+msgstr "Базовий захист воїна"
+
+#: ../../tribes/barbarians/conf:139
+msgid "Battle Arena"
+msgstr "Бойова арена"
+
+#: ../../tribes/barbarians/conf:60
+msgid "Battle Axe"
+msgstr "Бойова сокира"
+
+#: ../../tribes/barbarians/conf:61
+msgid "Beer"
+msgstr "Пиво"
+
+#: ../../tribes/barbarians/fish/conf:1
+msgid ""
+"Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
+msgstr "Крім лаваша та м'яса, варвари з задоволенням їдять рибу."
+
+#: ../../tribes/barbarians/conf:174
+msgid "Big Inn"
+msgstr "Трактир"
+
+#: ../../tribes/barbarians/conf:109
+msgid "Blacksmith"
+msgstr "Коваль"
+
+#: ../../tribes/barbarians/conf:62
+msgid "Blackwood"
+msgstr "Доски"
+
+#: ../../tribes/barbarians/cattlebreeder/conf:1
+msgid "Breeds the strong oxen that help in the transportation of wares."
+msgstr "Розводить сильних биків, котрі допомагають в перевезенні товарі."
+
+#: ../../tribes/barbarians/conf:111
+msgid "Brewer"
+msgstr "Пивовар"
+
+#: ../../tribes/barbarians/conf:175
+msgid "Brewery"
+msgstr "Пивоварня"
+
+#: ../../tribes/barbarians/conf:63
+msgid "Broad Axe"
+msgstr "Широка сокира"
+
+#: ../../tribes/barbarians/conf:64
+msgid "Bronze Axe"
+msgstr "Бронзова сокира"
+
+#: ../../tribes/barbarians/conf:112
+msgid "Builder"
+msgstr "Будівельник"
+
+#: ../../tribes/barbarians/conf:113
+msgid "Burner"
+msgstr "Випалювач углю"
+
+#: ../../tribes/barbarians/burner/conf:1
+msgid "Burns coal."
+msgstr "Випалює уголь."
+
+#: ../../tribes/barbarians/lime-burner/conf:1
+msgid "Burns lime in the lime kilm."
+msgstr "Виготовляє бетон."
+
+#: ../../tribes/barbarians/conf:100
+msgid "Carrier"
+msgstr "Носій"
+
+#: ../../tribes/barbarians/carrier/conf:1
+msgid "Carries items along the roads."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:151
+#: ../../tribes/barbarians/conf:160
+msgid "Castle"
+msgstr "Замок"
+
+#: ../../tribes/barbarians/conf:133
+msgid "Cattle Breeder"
+msgstr "Скотар"
+
+#: ../../tribes/barbarians/conf:206
+msgid "Cattle Farm"
+msgstr "Ферма великої рогатої худоби"
+
+#: ../../tribes/barbarians/conf:176
+msgid "Charcoal Burner's House"
+msgstr "Будиночок випалювача углю"
+
+#: ../../tribes/barbarians/conf:115
+msgid "Chief Miner"
+msgstr "Досвідчений шахтар"
+
+#: ../../tribes/barbarians/conf:144
+msgid "Citadel"
+msgstr "Цитадель"
+
+#: ../../tribes/barbarians/conf:210
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
+msgid "Citadel village"
+msgstr "Цитадель з поселенням"
+
+#: ../../tribes/barbarians/conf:65
+msgid "Cloth"
+msgstr "Тканина"
+
+#: ../../tribes/barbarians/cloth/conf:1
+msgid "Cloth is needed for barbarian ships. It is produced out of flax."
+msgstr "Тканина потрібна кораблям варварів. Виготовляється з льону."
+
+#: ../../tribes/barbarians/conf:66
+msgid "Coal"
+msgstr "Уголь"
+
+#: ../../tribes/barbarians/conf:179
+msgid "Coal mine"
+msgstr "Вугільна шахта"
+
+#: ../../tribes/barbarians/conf:136
+msgid "Construction Site"
+msgstr "Будівельний майданчик"
+
+#: ../../tribes/barbarians/stonemason/conf:2
+msgid "Cuts raw pieces of granite out of laying stones."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:178
+msgid "Deep Coal Mine"
+msgstr "Глибока вугільна шахта"
+
+#: ../../tribes/barbarians/conf:182
+msgid "Deep Gold Mine"
+msgstr "Глибока шахта золота"
+
+#: ../../tribes/barbarians/conf:183
+msgid "Deep Iron Ore Mine"
+msgstr "Глибокий рудник"
+
+#: ../../tribes/barbarians/conf:177
+msgid "Deeper Coal Mine"
+msgstr "Дуже глибока вугільна шахта"
+
+#: ../../tribes/barbarians/conf:180
+msgid "Deeper Gold Mine"
+msgstr "Дуже глибока шахта золота"
+
+#: ../../tribes/barbarians/conf:181
+msgid "Deeper Iron Ore Mine"
+msgstr "Дуже глибокий рудник"
+
+#: ../../tribes/barbarians/conf:54
+msgid "Deer"
+msgstr "Олень"
+
+#: ../../tribes/barbarians/soldier/conf:1
+msgid "Defend and Conquer!"
+msgstr "Захищай та владарюй!"
+
+#: ../../tribes/barbarians/conf:28
+msgid "Destroyed building"
+msgstr "Зруйнована будівля."
+
+#: ../../tribes/barbarians/geologist/conf:1
+msgid "Discovers resources for mining."
+msgstr "Шукає корисні копалини."
+
+#: ../../tribes/barbarians/conf:145
+msgid "Donjon"
+msgstr "Оглядова вежа"
+
+#: ../../tribes/barbarians/conf:184
+msgid "Farm"
+msgstr "Ферма"
+
+#: ../../tribes/barbarians/conf:116
+msgid "Farmer"
+msgstr "Фермер"
+
+#: ../../tribes/barbarians/lumberjack/conf:1
+msgid "Fells trees."
+msgstr "Рубає дерева."
+
+#: ../../tribes/barbarians/conf:117
+msgid "Ferner"
+msgstr "Садівник"
+
+#: ../../tribes/barbarians/conf:185
+msgid "Fernery"
+msgstr "Оранжерея"
+
+#: ../../tribes/barbarians/conf:33
+msgid "Field harvested"
+msgstr "Прибране поле"
+
+#: ../../tribes/barbarians/conf:29
+msgid "Field medium"
+msgstr "Середнє поле"
+
+#: ../../tribes/barbarians/conf:32
+msgid "Field ripe"
+msgstr "Стигле поле"
+
+#: ../../tribes/barbarians/conf:30
+msgid "Field small"
+msgstr "Мале поле"
+
+#: ../../tribes/barbarians/conf:31
+msgid "Field tiny"
+msgstr "Крихітне поле"
+
+#: ../../tribes/barbarians/conf:67
+msgid "Fire Tongs"
+msgstr "Кліщі коваля."
+
+#: ../../tribes/barbarians/blackwood/conf:1
+msgid ""
+"Fire-hardened wood, as hard as iron and cannot burn, used for military "
+"buildings."
+msgstr ""
+
+#: ../../tribes/barbarians/conf:68
+msgid "Fish"
+msgstr "Риба"
+
+#: ../../tribes/barbarians/conf:118
+msgid "Fisher"
+msgstr "Рибак"
+
+#: ../../tribes/barbarians/conf:186
+msgid "Fisher's Hut"
+msgstr "Хатинка рибака"
+
+#: ../../tribes/barbarians/conf:69
+msgid "Fishing Rod"
+msgstr "Вудка"
+
+#: ../../tribes/barbarians/fishing_rod/conf:1
+msgid "Fishing rods are needed by barbarian fishers for fishing."
+msgstr "Вудочки потрібні рибакам варварів, для лову риби"
+
+#: ../../tribes/barbarians/conf:70
+msgid "Flax"
+msgstr "Льон"
+
+#: ../../tribes/barbarians/flax/conf:1
+msgid "Flax is a beautiful flower, which is used for making cloth."
+msgstr "Льон - це чудова квітка, використовується для виготовлення тканин."
+
+#: ../../tribes/barbarians/conf:34
+msgid "Flax medium"
+msgstr "Середній льон"
+
+#: ../../tribes/barbarians/conf:37
+msgid "Flax ripe"
+msgstr "Стиглий льон"
+
+#: ../../tribes/barbarians/conf:35
+msgid "Flax small"
+msgstr "Малий льон"
+
+#: ../../tribes/barbarians/conf:36
+msgid "Flax tiny"
+msgstr "Крихітний льон"
+
+#: ../../tribes/barbarians/conf:146
+#: ../../tribes/barbarians/conf:161
+msgid "Fortress"
+msgstr "Фортеця"
+
+#: ../../tribes/barbarians/conf:119
+msgid "Gamekeeper"
+msgstr "Лісник"
+
+#: ../../tribes/barbarians/conf:187
+msgid "Gamekeeper's Hut"
+msgstr "Хатинка лісника"
+
+#: ../../tribes/barbarians/conf:120
+msgid "Geologist"
+msgstr "Геолог"
+
+#: ../../tribes/barbarians/fisher/conf:1
+msgid "Gets fish out of the sea."
+msgstr "Ловить рибу"
+
+#: ../../tribes/barbarians/conf:71
+msgid "Gold"
+msgstr "Золото"
+
+#: ../../tribes/barbarians/conf:188
+msgid "Gold Mine"
+msgstr "Золота копальня"
+
+#: ../../tribes/barbarians/gold/conf:1
+msgid ""
+"Gold is the most valuable of all metals; only very important things are "
+"garnished with it."
+msgstr ""
+"Золото - це найбільш цінний метал, тільки дуже важливі речі прикрашають "
+"золотом."
+
+#: ../../tribes/barbarians/conf:72
+msgid "Goldstone"
+msgstr "Золотий злиток"
+
+#: ../../tribes/barbarians/conf:189
+msgid "Granite Mine"
+msgstr "Гранітна шахта"
+
+#: ../../tribes/barbarians/conf:73
+msgid "Grout"
+msgstr "Бетон"
+
+#: ../../tribes/barbarians/ferner/conf:1
+msgid "Grows flax and thatch reed."
+msgstr "Вирощую льон та солом'яну тростину."
+
+#: ../../tribes/barbarians/conf:152
+msgid "Guardhall"
+msgstr "Форт"
+
+#: ../../tribes/barbarians/conf:153
+msgid "Guardhouse"
+msgstr "Будиночок гвардії"
+
+#: ../../tribes/barbarians/conf:74
+msgid "Hammer"
+msgstr "Молот"
+
+#: ../../tribes/barbarians/fernery/conf:20
+msgid "Harvest flax"
+msgstr "Збирає льон"
+
+#: ../../tribes/barbarians/fernery/conf:22
+msgid "Harvest reed"
+msgstr "Збирає солом'яну тростину"
+
+#: ../../tribes/barbarians/farm/conf:19
+msgid "Harvest wheat"
+msgstr "Збирає пшеницю"
+
+#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:167
+msgid "Headquarters"
+msgstr "Штаб"
+
+#: ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
+msgid "Headquarters medium"
+msgstr "Середній штаб"
+
+#: ../../tribes/barbarians/conf:75
+msgid "Helmet"
+msgstr "Шолом"
+
+#: ../../tribes/barbarians/conf:121
+msgid "Helmsmith"
+msgstr "Шоломний майстер"
+
+#: ../../tribes/barbarians/conf:191
+msgid "Helmsmithy"
+msgstr "Кузня шоломів"
+
+#: ../../tribes/barbarians/ox/conf:1
+msgid "Helps to carry items at heavy used roads."
+msgstr "Допомагає перевозити вантажі на завантажених дорогах."
+
+#: ../../tribes/barbarians/conf:154
+msgid "High Tower"
+msgstr "Висока вежа."
+
+#: ../../tribes/barbarians/kitchen_tools/conf:1
+msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
+msgstr ""
+"Як накажете готувати їжу - пайки, обіди чи ситі обіди - без кухонного "
+"приладдя?"
+
+#: ../../tribes/barbarians/conf:122
+msgid "Hunter"
+msgstr "Мисливець"
+
+#: ../../tribes/barbarians/conf:192
+msgid "Hunter's Hut"
+msgstr "Хаинка мисливця"
+
+#: ../../tribes/barbarians/conf:76
+msgid "Hunting Spear"
+msgstr "Спис мисливця"
+
+#: ../../tribes/barbarians/conf:193
+msgid "Inn"
+msgstr "Трактир"
+
+#: ../../tribes/barbarians/conf:123
+msgid "Innkeeper"
+msgstr "Трактирщик"
+
+#: ../../tribes/barbarians/conf:77
+msgid "Iron"
+msgstr "Залізо"
+
+#: ../../tribes/barbarians/conf:78
+msgid "Iron Ore"
+msgstr "Залізна руда"
+
+#: ../../tribes/barbarians/conf:198
+msgid "Iron Ore Mine"
+msgstr "Шахта заліза"
+
+#: ../../tribes/barbarians/conf:79
+msgid "Kitchen Tools"
+msgstr "Кухонне приладдя"
+
+#: ../../tribes/barbarians/conf:194
+msgid "Lime Kiln"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:124
+msgid "Lime-Burner"
+msgstr "Бетонщик"
+
+#: ../../tribes/barbarians/conf:125
+msgid "Lumberjack"
+msgstr "Лісоруб"
+
+#: ../../tribes/barbarians/conf:195
+msgid "Lumberjack's Hut"
+msgstr "Хатинка лісоруба"
+
+#: ../../tribes/barbarians/conf:80
+msgid "Mask"
+msgstr "Захисна маска"
+
+#: ../../tribes/barbarians/conf:108
+msgid "Master Blacksmith"
+msgstr "Досвідчений коваль"
+
+#: ../../tribes/barbarians/conf:110
+msgid "Master Brewer"
+msgstr "Досвідчений пивовар"
+
+#: ../../tribes/barbarians/conf:114
+msgid "Master Miner"
+msgstr "Досвідчений шахтер"
+
+#: ../../tribes/barbarians/conf:81
+msgid "Meal"
+msgstr "Ситий обід"
+
+#: ../../tribes/barbarians/conf:82
+msgid "Meat"
+msgstr "М'ясо"
+
+#: ../../tribes/barbarians/meat/conf:1
+msgid ""
+"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
+"lunch for the miners and in the soldier trainingcamps to keep warriors "
+"strong."
+msgstr ""
+"М'ясо містить велику кількість енергії. Воно використовується в трактирах, "
+"тавернах, щоб приготувати обід шахтарям, також в тренувальних лагерях для "
+"відновлення енергії воїнів."
+
+#: ../../tribes/barbarians/conf:196
+msgid "Metalwork Shop"
+msgstr "Металообробна майстерня"
+
+#: ../../tribes/barbarians/conf:197
+msgid "Micro Brewery"
+msgstr "Мала пивоварня"
+
+#: ../../tribes/barbarians/conf:126
+msgid "Miner"
+msgstr "Шахтер"
+
+#: ../../tribes/barbarians/strongbeer/conf:1
+msgid ""
+"Only this beer is acceptable for the old warriors. Some say, the whole power "
+"of the barbarians is in this ale."
+msgstr ""
+"Лише це пиво підходить досвідченим воїнам. Дехто каже, що сила варварів в "
+"пиві."
+
+#: ../../tribes/barbarians/conf:162
+msgid "Outpost"
+msgstr "Форпост"
+
+#: ../../tribes/barbarians/conf:101
+msgid "Ox"
+msgstr "Віл"
+
+#: ../../tribes/barbarians/conf:59
+msgid "Peel"
+msgstr "Пекарська лопата"
+
+#: ../../tribes/barbarians/conf:83
+msgid "Pick"
+msgstr "Кірка"
+
+#: ../../tribes/barbarians/conf:84
+msgid "Pitta Bread"
+msgstr "Пляцок"
+
+#: ../../tribes/barbarians/fernery/conf:16
+msgid "Plant flax"
+msgstr "Саджати льон"
+
+#: ../../tribes/barbarians/fernery/conf:18
+msgid "Plant reed"
+msgstr "Саджати солом'яну тростину"
+
+#: ../../tribes/barbarians/farm/conf:17
+msgid "Plant wheat"
+msgstr "Сіяти пшеницю"
+
+#: ../../tribes/barbarians/farmer/conf:2
+msgid "Plants fields."
+msgstr "Засіває поля."
+
+#: ../../tribes/barbarians/ranger/conf:1
+msgid "Plants trees."
+msgstr "Саджає дерева."
+
+#: ../../tribes/barbarians/axefactory/conf:29
+#: ../../tribes/barbarians/metalworks/conf:33
+#: ../../tribes/barbarians/warmill/conf:33
+msgid "Produce axe"
+msgstr "Виготовляє сокири"
+
+#: ../../tribes/barbarians/metalworks/conf:34
+msgid "Produce bakingtray"
+msgstr "Виготовити кухонне приладдя."
+
+#: ../../tribes/barbarians/warmill/conf:37
+msgid "Produce battleaxe"
+msgstr "Виготовити бойову сокиру"
+
+#: ../../tribes/barbarians/axefactory/conf:31
+#: ../../tribes/barbarians/warmill/conf:35
+msgid "Produce broadaxe"
+msgstr "Виготовити сокиру"
+
+#: ../../tribes/barbarians/warmill/conf:36
+msgid "Produce bronzeaxe"
+msgstr "Виготовити бронзову сокиру"
+
+#: ../../tribes/barbarians/metalworks/conf:35
+msgid "Produce fire tongs"
+msgstr "Виготовити кліщі коваля."
+
+#: ../../tribes/barbarians/metalworks/conf:36
+msgid "Produce fishing rod"
+msgstr "Виготовити вудку"
+
+#: ../../tribes/barbarians/metalworks/conf:37
+msgid "Produce hammer"
+msgstr "Виготовити молот"
+
+#: ../../tribes/barbarians/helmsmithy/conf:25
+msgid "Produce helm"
+msgstr "Виготовити шолом"
+
+#: ../../tribes/barbarians/metalworks/conf:42
+msgid "Produce hunting spear"
+msgstr "Виготовити спис мисливця"
+
+#: ../../tribes/barbarians/metalworks/conf:38
+msgid "Produce kitchen tools"
+msgstr "Виготовити кухонне приладдя"
+
+#: ../../tribes/barbarians/helmsmithy/conf:26
+msgid "Produce mask"
+msgstr "Виготовити бойову маску"
+
+#: ../../tribes/barbarians/big_inn/conf:26
+msgid "Produce meal"
+msgstr "Приготувати їжу"
+
+#: ../../tribes/barbarians/metalworks/conf:39
+msgid "Produce pick"
+msgstr "Виготовити кирку"
+
+#: ../../tribes/barbarians/big_inn/conf:24
+#: ../../tribes/barbarians/inn/conf:23
+#: ../../tribes/barbarians/tavern/conf:23
+msgid "Produce ration"
+msgstr "Приготувати раціон"
+
+#: ../../tribes/barbarians/metalworks/conf:40
+msgid "Produce scythe"
+msgstr "Виготовити косу"
+
+#: ../../tribes/barbarians/axefactory/conf:30
+#: ../../tribes/barbarians/warmill/conf:34
+msgid "Produce sharpaxe"
+msgstr "Виготовити гостру сокиру"
+
+#: ../../tribes/barbarians/metalworks/conf:41
+msgid "Produce shovel"
+msgstr "Виготовити лопату"
+
+#: ../../tribes/barbarians/big_inn/conf:25
+#: ../../tribes/barbarians/inn/conf:24
+msgid "Produce snack"
+msgstr "Приготувати закуску"
+
+#: ../../tribes/barbarians/helmsmithy/conf:27
+msgid "Produce warhelmet"
+msgstr "Виготовити бойовий шолом"
+
+#: ../../tribes/barbarians/warmill/conf:38
+msgid "Produce warriorsaxe"
+msgstr "Виготовити сокиру воїна"
+
+#: ../../tribes/barbarians/weaver/conf:1
+msgid "Produces cloth for ships and soldiers."
+msgstr "Виготовляє тканину для кораблів та солдат."
+
+#: ../../tribes/barbarians/innkeeper/conf:1
+msgid "Produces food for miners."
+msgstr "Готує їжу шахтарям."
+
+#: ../../tribes/barbarians/brewer/conf:1
+#: ../../tribes/barbarians/master-brewer/conf:1
+msgid ""
+"Produces the finest ales to keep warriors strong and happy in training."
+msgstr ""
+"Варить відмінне пиво, для підтримки сили та духу солдат, під час бойового "
+"навчання."
+
+#: ../../tribes/barbarians/blacksmith/conf:1
+#: ../../tribes/barbarians/master-blacksmith/conf:1
+msgid "Produces weapons for soldiers and tools for workers."
+msgstr "Виготовляє зброю солдатам, та інструменти робочим."
+
+#: ../../tribes/barbarians/conf:199
+msgid "Quarry"
+msgstr "Кар’єр"
+
+#: ../../tribes/barbarians/conf:127
+msgid "Ranger"
+msgstr "Лісник"
+
+#: ../../tribes/barbarians/conf:200
+msgid "Ranger's Hut"
+msgstr "Хатинка лісника"
+
+#: ../../tribes/barbarians/conf:85
+msgid "Ration"
+msgstr "Пайок"
+
+#: ../../tribes/barbarians/conf:86
+msgid "Raw Stone"
+msgstr "Каміння"
+
+#: ../../tribes/barbarians/raw_stone/conf:1
+msgid "Raw Stones are the secondary build material of the barbarians."
+msgstr "Каміння - додатковий будматеріал варварів."
+
+#: ../../tribes/barbarians/grout/conf:1
+msgid ""
+"Raw stone can be enhanced to grout which delivers solid, non burning build "
+"material."
+msgstr "Із каміння можна виготовити бетон - міцний та негорючий матеріал."
+
+#: ../../tribes/barbarians/sharpaxe/conf:1
+msgid ""
+"Real warriors consider the sharp axe the first real weapon, after being able "
+"to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
+"than the ordinary axe. Build in the axe factory."
+msgstr ""
+"Справжні воїни вважають гостру сокиру першою справжньою зброєю, після "
+"звичайної сокири. Гостра сокира важче та гостріша звичайної. Виготовляється "
+"на Фабриці сокир"
+
+#: ../../tribes/barbarians/conf:38
+msgid "Reed medium"
+msgstr "Середня солом'яна тростина"
+
+#: ../../tribes/barbarians/conf:41
+msgid "Reed ripe"
+msgstr "Стигла солом'яна тростина"
+
+#: ../../tribes/barbarians/conf:39
+msgid "Reed small"
+msgstr "Мала солом'яна тростина"
+
+#: ../../tribes/barbarians/conf:40
+msgid "Reed tiny"
+msgstr "Крихітна солом'яна тростина"
+
+#: ../../tribes/barbarians/conf:42
+msgid "Resource indicator coal little"
+msgstr "Індикатор ресурсів: мало вугілля"
+
+#: ../../tribes/barbarians/conf:43
+msgid "Resource indicator coal much"
+msgstr "Індикатор ресурсів: багато вугілля"
+
+#: ../../tribes/barbarians/conf:44
+msgid "Resource indicator gold little"
+msgstr "Індикатор ресурсів: мало золота"
+
+#: ../../tribes/barbarians/conf:45
+msgid "Resource indicator gold much"
+msgstr "Індикатор ресурсів: багато золота"
+
+#: ../../tribes/barbarians/conf:46
+msgid "Resource indicator granite little"
+msgstr "Індикатор ресурсів: мало граніту"
+
+#: ../../tribes/barbarians/conf:47
+msgid "Resource indicator granite much"
+msgstr "Індикатор ресурсів: багато граніту"
+
+#: ../../tribes/barbarians/conf:48
+msgid "Resource indicator iron little"
+msgstr "Індикатор ресурсів: мало заліза"
+
+#: ../../tribes/barbarians/conf:49
+msgid "Resource indicator iron much"
+msgstr "Індикатор ресурсів: багато заліза"
+
+#: ../../tribes/barbarians/conf:50
+msgid "Resource indicator no resource"
+msgstr "Індикатор ресурсів: пусто"
+
+#: ../../tribes/barbarians/conf:51
+msgid "Resource indicator water"
+msgstr "Індикатор ресурсів: вода"
+
+#: ../../tribes/barbarians/conf:132
+msgid "Scout"
+msgstr "Розвідник"
+
+#: ../../tribes/barbarians/conf:205
+msgid "Scout's Hut"
+msgstr "Хатинка розвідника"
+
+#: ../../tribes/barbarians/scout/conf:1
+msgid ""
+"Scouts like Scotty the scout scout unscouted area in a scouty fashion."
+msgstr "Розвідник, розвідує невідому місцевість, відкриває нові землі."
+
+#: ../../tribes/barbarians/conf:87
+msgid "Scythe"
+msgstr "Коса"
+
+#: ../../tribes/barbarians/conf:147
+#: ../../tribes/barbarians/conf:157
+msgid "Sentry"
+msgstr "Сторожа"
+
+#: ../../tribes/barbarians/conf:88
+msgid "Sharp Axe"
+msgstr "Гостра сокира"
+
+#: ../../tribes/barbarians/conf:89
+msgid "Shovel"
+msgstr "Лопата"
+
+#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/trainingscamp/conf:36
+msgid "Sleep"
+msgstr "Сон"
+
+#: ../../tribes/barbarians/conf:155
+msgid "Small Tower"
+msgstr "Мала вежа"
+
+#: ../../tribes/barbarians/smelting_works/conf:25
+msgid "Smelt gold"
+msgstr "Плавити золото"
+
+#: ../../tribes/barbarians/smelting_works/conf:24
+msgid "Smelt iron"
+msgstr "Плавити залізо"
+
+#: ../../tribes/barbarians/conf:128
+msgid "Smelter"
+msgstr "Ливарник"
+
+#: ../../tribes/barbarians/conf:201
+msgid "Smelting Works"
+msgstr "Ливарня"
+
+#: ../../tribes/barbarians/helmsmith/conf:1
+msgid "Smelts helmets for soldiers."
+msgstr "Виготовляє шоломи для солдат"
+
+#: ../../tribes/barbarians/smelter/conf:1
+msgid "Smelts iron."
+msgstr "Плавить залізо"
+
+#: ../../tribes/barbarians/conf:90
+msgid "Snack"
+msgstr "Обід"
+
+#: ../../tribes/barbarians/conf:104
+msgid "Soldier"
+msgstr "Солдат"
+
+#: ../../tribes/barbarians/conf:129
+msgid "Stonemason"
+msgstr "Каменяр"
+
+#: ../../tribes/barbarians/conf:91
+msgid "Strong Beer"
+msgstr "Міцне пиво"
+
+#: ../../tribes/barbarians/conf:148
+msgid "Stronghold"
+msgstr "Опорний пункт"
+
+#: ../../tribes/barbarians/conf:202
+msgid "Tavern"
+msgstr "Таверна"
+
+#: ../../tribes/barbarians/conf:92
+msgid "Thatch Reed"
+msgstr "Солом'яна тростина"
+
+#: ../../tribes/barbarians/thatchreed/conf:1
+msgid "Thatch reed is used to make the roofs of buildings waterproof."
+msgstr "Без солом'яної тростини Ваш дах буде протікати."
+
+#: ../../tribes/barbarians/axe/conf:1
+msgid ""
+"The Axe is a basic weapon and tool for the barbarians. All young soldiers "
+"are equipped with it, but also the lumberjack is using the same model."
+msgstr ""
+"Сокира є основною зброєю та інструментом варварів. Її використовують як "
+"молоді солдати так і лісоруби."
+
+#: ../../tribes/barbarians/gamekeeper/conf:1
+msgid ""
+"The Gamekeeper makes sure that the natural population of animals never drops "
+"too low."
+msgstr "Лісник гарантує, що природня популяція тварин не знизиться."
+
+#: ../../tribes/barbarians/hunter/conf:1
+msgid "The Hunter brings good meat to the colonists."
+msgstr "Мисливець добуває добре м'ясо для колоністів."
+
+#: ../../tribes/barbarians/conf:4
+msgid "The Widelands Development Team"
+msgstr "Команда розробників Widelands"
+
+#: ../../tribes/barbarians/pittabread/conf:1
+msgid ""
+"The barbarian bakers are best in making this flat and tasty pitta bread."
+msgstr "Пекарі варварів, найкращі у випікання смачних пляцків - лавашів"
+
+#: ../../tribes/barbarians/bronzeaxe/conf:1
+msgid ""
+"The bronze axe is considered a hard to handle weapon: it makes a lot of "
+"damage, but it's durability is not the best. Only skilled warriors can use "
+"this. Produced in the axe factory."
+msgstr ""
+"Бронзова сокира вважається зброєю, якій важко протистояти - вона наносить "
+"великі пошкодження, проте її міцність слабка. Тільки досвідчені воїни можуть "
+"використовувати її. Виготовляється на фабриці сокир."
+
+#: ../../tribes/barbarians/fire_tongs/conf:1
+msgid ""
+"The fire tongs are the tool of the smelter, working in the smelting works. "
+"Produced in the metal works."
+msgstr ""
+"Кліщі коваля - інструмент ливарника, що працює в ливарні. Випускається в "
+"майстерні по обробці металу."
+
+#: ../../tribes/barbarians/coal/conf:1
+msgid ""
+"The fires of the barbarians are usually fed with wood, but sometimes, wood "
+"just does not burn hot enough. Then, coal is used."
+msgstr ""
+"За звичай варвари підтримують вогонь дровами. Та дерево не дає потрібної "
+"температури, тоді використовують вугілля."
+
+#: ../../tribes/barbarians/hammer/conf:1
+msgid ""
+"The hammer is an essential tool. It is needed by the geologist, the worker, "
+"the blacksmiths and the helmsmiths. Make sure you always got some in "
+"reserve! Build at the metal works."
+msgstr ""
+"Молот є важливим інструментом. Він потрібен геологам, робочим, ковалям. "
+"Переконайтесь, що він завжди в достатній кількості! Виготовляється в "
+"майстерні по металу."
+
+#: ../../tribes/barbarians/conf:6
+msgid "The mighty tribes of the east-lands!"
+msgstr "Могутні племена із східних земель"
+
+#: ../../tribes/barbarians/bakingtray/conf:1
+msgid ""
+"The peel is a tool of the baker and each baker needs his own. It is produced "
+"in the metal works like all other tools."
+msgstr ""
+"Пекарська лопата - інструмент пекаря, кожному пекарю потрібна своя. "
+"Виготовляється на металургійному заводі, як і всі інші інструменти."
+
+#: ../../tribes/barbarians/scythe/conf:1
+msgid ""
+"The scythe is the tool of the farmers. It is produced in the metal works."
+msgstr ""
+"Коса є інструментом фермерів. Виготовляється на металургійному заводі."
+
+#: ../../tribes/barbarians/shovel/conf:1
+msgid ""
+"The shovel is needed for proper handling of plants. Therefore the ferner and "
+"the ranger use it. Build at the metal works."
+msgstr ""
+"Лопата потрібна для догляду за рослинами, її використовують садівники та "
+"лісники. Виготовляється на металургійному заводі."
+
+#: ../../tribes/barbarians/warriorsaxe/conf:1
+msgid ""
+"The warriors axe is the most dangerous of all weapons. Only a few warriors "
+"ever were able to handle those huge and powerful axes. Build at the axe "
+"factory."
+msgstr ""
+"Сокира воїна - найнебезпечніша зброя. Не кожен воїн зможе, хоча б, підняти "
+"цю важку сокиру. Виготовляється в майстерні сокир."
+
+#: ../../tribes/barbarians/ironore/conf:1
+msgid "This is the red iron ore."
+msgstr "Це залізна руда"
+
+#: ../../tribes/barbarians/battleaxe/conf:1
+msgid ""
+"This is the second most dangerous weapon the barbarians are able to produce. "
+"Only trained warriors are able to yield such a weapon. It is produced in the "
+"axe factory."
+msgstr ""
+"Це друга грізна зброя варварів, лише для досвідчених воїнів. Виготовляється "
+"в майстерні сокир."
+
+#: ../../tribes/barbarians/goldstone/conf:1
+msgid "This is the yellow goldstone."
+msgstr "Це жовтий золотий злиток"
+
+#: ../../tribes/barbarians/pick/conf:1
+msgid ""
+"This pick is used by the stonemasons and the miners. It is produced in the "
+"metal works."
+msgstr ""
+"Кірка використовується каменярами та шахтарями. Виготовляється в майстерні "
+"по металу."
+
+#: ../../tribes/barbarians/hunting_spear/conf:1
+msgid ""
+"This spear is light enough to be thrown, but heavy enough to kill any animal "
+"in one blow. It is only used by the hunters. Produced in the metal works."
+msgstr ""
+"Цей спис досить легкий, щоб його можна було кидати, і достатньо важкий, щоб "
+"вбити будь яку тварину одним ударом. Використовується лише мисливцями. "
+"Випускається в Майстерні."
+
+#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:163
+msgid "Tower"
+msgstr "Вежа"
+
+#: ../../tribes/barbarians/conf:130
+msgid "Trainer"
+msgstr "Тренер"
+
+#: ../../tribes/barbarians/conf:140
+msgid "Trainingscamp"
+msgstr "Казарма"
+
+#: ../../tribes/barbarians/trainer/conf:1
+msgid "Trains the soldiers."
+msgstr "Тренує солдат"
+
+#: ../../tribes/barbarians/conf:93
+msgid "Trunk"
+msgstr "Колода"
+
+#: ../../tribes/barbarians/trunk/conf:1
+msgid "Trunks are the primary build material of the barbarians."
+msgstr "Колода - основний будматеріал варварів."
+
+#: ../../tribes/barbarians/trainingscamp/conf:37
+msgid "Upgrade soldier attack 0"
+msgstr "Покращення атаки солдат 0"
+
+#: ../../tribes/barbarians/trainingscamp/conf:38
+msgid ""
+"Upgrade soldier attack 0 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення атаки солдат 0 (лише для сумісності із старими збереженнями гри  "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:39
+msgid "Upgrade soldier attack 1"
+msgstr "Покращення атаки солдат 1"
+
+#: ../../tribes/barbarians/trainingscamp/conf:40
+msgid ""
+"Upgrade soldier attack 1 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення атаки солдат 1 (лише для сумісності із збереженнями старих версій "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:41
+msgid "Upgrade soldier attack 2"
+msgstr "Покращення атаки солдат 2"
+
+#: ../../tribes/barbarians/trainingscamp/conf:42
+msgid ""
+"Upgrade soldier attack 2 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення атаки солдат 2 (лише для сумісності із збереженнями старих версій "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:43
+msgid "Upgrade soldier attack 3"
+msgstr "Покращення атаки солдат 3"
+
+#: ../../tribes/barbarians/trainingscamp/conf:44
+msgid ""
+"Upgrade soldier attack 3 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення атаки солдат 3 (лише для сумісності із збереженнями старих версій "
+"(build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:45
+msgid "Upgrade soldier attack 4"
+msgstr "Покращення атаки солдат 4"
+
+#: ../../tribes/barbarians/trainingscamp/conf:46
+msgid ""
+"Upgrade soldier attack 4 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення атаки солдат 4 (лише для сумісності із збереженнями старих версій "
+"(build13))"
+
+#: ../../tribes/barbarians/battlearena/conf:26
+msgid "Upgrade soldier evade 0"
+msgstr "Покращення навику ухилення 0"
+
+#: ../../tribes/barbarians/battlearena/conf:27
+msgid ""
+"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Покращення навику ухилення 0 (лише для сумісності із збереженнями старих "
+"версій (build13))"
+
+#: ../../tribes/barbarians/battlearena/conf:28
+msgid "Upgrade soldier evade 1"
+msgstr "Покращення навику ухилення 1"
+
+#: ../../tribes/barbarians/battlearena/conf:29
+msgid ""
+"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Покращення навику ухилення 1 (лише для сумісності із збереженнями старих "
+"версій (build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:47
+msgid "Upgrade soldier hitpoints 0"
+msgstr "Покращення життєстійкості солдат 0"
+
+#: ../../tribes/barbarians/trainingscamp/conf:48
+msgid ""
+"Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення життєстійкості солдат 0 (лише для сумісності із збереженнями "
+"старих версій (build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:49
+msgid "Upgrade soldier hitpoints 1"
+msgstr "Покращення життєстійкості солдат 1"
+
+#: ../../tribes/barbarians/trainingscamp/conf:50
+msgid ""
+"Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення життєстійкості солдат 1 (лише для сумісності із збереженнями "
+"старих версій (build13))"
+
+#: ../../tribes/barbarians/trainingscamp/conf:51
+msgid "Upgrade soldier hitpoints 2"
+msgstr "Покращення життєстійкості солдат 2"
+
+#: ../../tribes/barbarians/trainingscamp/conf:52
+msgid ""
+"Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Покращення життєстійкості солдат 2 (лише для сумісності із збереженнями "
+"старих версій (build13))"
+
+#: ../../tribes/barbarians/conf:94
+msgid "War Helmet"
+msgstr "Військовий шолом"
+
+#: ../../tribes/barbarians/conf:171
+msgid "War Mill"
+msgstr "Зброярня"
+
+#: ../../tribes/barbarians/conf:168
+msgid "Warehouse"
+msgstr "Склад"
+
+#: ../../tribes/barbarians/conf:95
+msgid "Warriors Axe"
+msgstr "Сокира воїна"
+
+#: ../../tribes/barbarians/broadaxe/conf:1
+msgid ""
+"Warriors with a fundamental fighting knowledge gain a broad axe. It is "
+"produced in the axe factory."
+msgstr ""
+"Добре треновані бійці отримують в якості зброї широку сокиру. Виготовляється "
+"фабрикою сокир."
+
+#: ../../tribes/barbarians/conf:96
+msgid "Water"
+msgstr "Вода"
+
+#: ../../tribes/barbarians/water/conf:1
+msgid ""
+"Water is the most essential essence for life! This water is used in many "
+"places, be it to make bread or beer or to produce grout."
+msgstr ""
+"Вода - це життя. Вона використовується для різних потреб, наприклад, "
+"пекарями, пивоварами, бетонярами..."
+
+#: ../../tribes/barbarians/iron/conf:1
+msgid "Weapons and tools are made of iron."
+msgstr "Зброя та інструмент виготовляється з металу."
+
+#: ../../tribes/barbarians/conf:131
+msgid "Weaver"
+msgstr "Ткач"
+
+#: ../../tribes/barbarians/conf:203
+msgid "Weaving-Mill"
+msgstr "Ткацький цех"
+
+#: ../../tribes/barbarians/conf:204
+msgid "Well"
+msgstr "Криниця"
+
+#: ../../tribes/barbarians/conf:97
+msgid "Wheat"
+msgstr "Пшениця"
+
+#: ../../tribes/barbarians/wheat/conf:1
+msgid ""
+"Wheat is essential for surviving. Delicious pitta bread and strong ales can "
+"be made of this wheat."
+msgstr ""
+"Пшениця потрібна для виживання. Без неї неможливо випекти смачні пляцкі, або "
+"зварити чудове пиво."
+
+#: ../../tribes/barbarians/conf:55
+msgid "Wildboar"
+msgstr "Вепр"
+
+#: ../../tribes/barbarians/conf:190
+msgid "Wood Hardener"
+msgstr "Тесляр"
+
+#: ../../tribes/barbarians/axefactory/conf:32
+#: ../../tribes/barbarians/bakery/conf:21
+#: ../../tribes/barbarians/big_inn/conf:27
+#: ../../tribes/barbarians/brewery/conf:20
+#: ../../tribes/barbarians/burners_house/conf:19
+#: ../../tribes/barbarians/cattlefarm/conf:22
+#: ../../tribes/barbarians/coalmine/conf:20
+#: ../../tribes/barbarians/deep_coalmine/conf:23
+#: ../../tribes/barbarians/deep_goldmine/conf:23
+#: ../../tribes/barbarians/deep_oremine/conf:23
+#: ../../tribes/barbarians/deeper_coalmine/conf:22
+#: ../../tribes/barbarians/deeper_goldmine/conf:22
+#: ../../tribes/barbarians/deeper_oremine/conf:22
+#: ../../tribes/barbarians/farm/conf:21
+#: ../../tribes/barbarians/fernery/conf:24
+#: ../../tribes/barbarians/fishers_hut/conf:15
+#: ../../tribes/barbarians/gamekeepers_hut/conf:15
+#: ../../tribes/barbarians/goldmine/conf:21
+#: ../../tribes/barbarians/granitemine/conf:18
+#: ../../tribes/barbarians/hardener/conf:18
+#: ../../tribes/barbarians/helmsmithy/conf:28
+#: ../../tribes/barbarians/hunters_hut/conf:15
+#: ../../tribes/barbarians/inn/conf:25
+#: ../../tribes/barbarians/lime_kiln/conf:18
+#: ../../tribes/barbarians/lumberjacks_hut/conf:15
+#: ../../tribes/barbarians/metalworks/conf:43
+#: ../../tribes/barbarians/micro-brewery/conf:22
+#: ../../tribes/barbarians/oremine/conf:21
+#: ../../tribes/barbarians/quarry/conf:15
+#: ../../tribes/barbarians/rangers_hut/conf:14
+#: ../../tribes/barbarians/scouts_hut/conf:17
+#: ../../tribes/barbarians/smelting_works/conf:26
+#: ../../tribes/barbarians/tavern/conf:24
+#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/weaving-mill/conf:19
+#: ../../tribes/barbarians/well/conf:14
+msgid "Work"
+msgstr "Робота"
+
+#: ../../tribes/barbarians/builder/conf:1
+msgid "Works at construction sites to raise a new building."
+msgstr ""
+
+#: ../../tribes/barbarians/chief-miner/conf:1
+#: ../../tribes/barbarians/master-miner/conf:1
+#: ../../tribes/barbarians/miner/conf:1
+msgid "Works deep in the mines to obtain coal, iron or gold."
+msgstr "Працює в шахтах, добуває вугілля, залізо або золото."
+
+#: ../../tribes/barbarians/beer/conf:1
+msgid ""
+"Young warriors need some encouragement. This drink makes a man fearless and "
+"strong."
+msgstr ""
+"Молоді воїни потребують зміцнення духу. Цей напій робить їх безстрашними та "
+"сильними."

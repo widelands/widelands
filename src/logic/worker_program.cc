@@ -593,7 +593,12 @@ void WorkerProgram::parse_geologist_find
 }
 
 /**
- * Have the scout run around scouting the area
+ * scout \<radius\> \<time\>
+ *
+ * Sends the scout out to run around scouting the area
+ *
+ * iparam1 = radius
+ * iparam2 = time
  */
 void WorkerProgram::parse_scout
 	(Worker_Descr                   *,
@@ -601,10 +606,11 @@ void WorkerProgram::parse_scout
 	 Parser                         *,
 	 std::vector<std::string> const & cmd)
 {
-	if (cmd.size() != 2)
-		throw wexception("Usage: scout <time>");
+	if (cmd.size() != 3)
+		throw wexception("Usage: scout <radius> <time>");
 
 	act->iparam1 = atoi(cmd[1].c_str());
+	act->iparam2 = atoi(cmd[2].c_str());
 	act->function = &Worker::run_scout;
 }
 

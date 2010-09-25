@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-08-24 17:33+0000\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -195,22 +195,22 @@ msgid ""
 "Khantrukh remembers..."
 msgstr ""
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:65
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:58
 msgid ""
 "Mission Complete"
 msgstr ""
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:25
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid ""
 "Somebody comes up to you"
 msgstr ""
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:26
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:32
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:41
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:42
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:36
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:37
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:45
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:59
 msgid ""
 "The advisor"
 msgstr ""

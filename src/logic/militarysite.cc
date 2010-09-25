@@ -129,52 +129,26 @@ std::string MilitarySite::get_statistics_string()
 }
 
 
-void MilitarySite::prefill
-	(Game                 &       game,
-	 uint32_t       const *       ware_counts,
-	 uint32_t       const *       worker_counts,
-	 Soldier_Counts const * const soldier_counts)
-{
-	ProductionSite::prefill(game, ware_counts, worker_counts, soldier_counts);
-	if (soldier_counts and soldier_counts->size()) {
-		Soldier_Descr const & soldier_descr =
-			ref_cast<Soldier_Descr const, Worker_Descr const>
-				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
-		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
-			Soldier_Strength const ss = i.current->first;
-			for (uint32_t j = i.current->second; j; --j) {
-				Soldier & soldier =
-					ref_cast<Soldier, Worker>
-						(soldier_descr.create(game, owner(), 0, get_position()));
-				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
-				Building::add_worker(soldier);
-				log
-					("MilitarySite::prefill: added soldier (economy = %p)\n",
-					 soldier.get_economy());
-			}
-		}
-		conquer_area(game);
-	}
-}
-
-
 void MilitarySite::init(Editor_Game_Base & egbase)
 {
 	ProductionSite::init(egbase);
 
-	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
+	upcast(Game, game, &egbase);
+
 	std::vector<Worker *> const & ws = get_workers();
 	container_iterate_const(std::vector<Worker *>, ws, i)
 		if (upcast(Soldier, soldier, *i.current)) {
 			soldier->set_location_initially(*this);
 			assert(not soldier->get_state()); //  Should be newly created.
-			soldier->start_task_buildingwork(game);
+			if (game)
+				soldier->start_task_buildingwork(*game);
 		}
 	update_soldier_request();
 
 	//  schedule the first healing
-	m_nexthealtime = game.get_gametime() + 1000;
-	schedule_act(game, 1000);
+	m_nexthealtime = egbase.get_gametime() + 1000;
+	if (game)
+		schedule_act(*game, 1000);
 }
 
 
@@ -201,7 +175,7 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 {
 	// unconquer land
 	if (m_didconquer)
-		ref_cast<Game, Editor_Game_Base>(egbase).unconquer_area
+		egbase.unconquer_area
 			(Player_Area<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>
@@ -224,8 +198,8 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int MilitarySite::incorporateSoldier(Game & game, Soldier & s) {
-	if (s.get_location(game) != this) {
+int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
+	if (s.get_location(egbase) != this) {
 		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
 			return -1;
 
@@ -233,23 +207,27 @@ int MilitarySite::incorporateSoldier(Game & game, Soldier & s) {
 	}
 
 	if (not m_didconquer) {
-		conquer_area(game);
+		conquer_area(egbase);
 
-		char message[256];
-		snprintf
-			(message, sizeof(message),
-			 _("Your soldiers occupied your %s."),
-			 descname().c_str());
-		send_message
-			(game,
-			 "military_occupied",
-			 descname(),
-			 message);
+		if (upcast(Game, game, &egbase)) {
+			char message[256];
+			snprintf
+				(message, sizeof(message),
+				 _("Your soldiers occupied your %s."),
+				 descname().c_str());
+			send_message
+				(*game,
+				 "military_occupied",
+				 descname(),
+				 message);
+		}
 	}
 
-	// Bind the worker into this house, hide him on the map
-	s.reset_tasks(game);
-	s.start_task_buildingwork(game);
+	if (upcast(Game, game, &egbase)) {
+		// Bind the worker into this house, hide him on the map
+		s.reset_tasks(*game);
+		s.start_task_buildingwork(*game);
+	}
 
 	// Make sure the request count is reduced or the request is deleted.
 	update_soldier_request();
@@ -482,13 +460,13 @@ void MilitarySite::dropSoldier(Soldier & soldier)
 }
 
 
-void MilitarySite::conquer_area(Game & game) {
+void MilitarySite::conquer_area(Editor_Game_Base & egbase) {
 	assert(not m_didconquer);
-	game.conquer_area
+	egbase.conquer_area
 		(Player_Area<Area<FCoords> >
 		 	(owner().player_number(),
 		 	 Area<FCoords>
-		 	 	(game.map().get_fcoords(get_position()), get_conquers())));
+		 	 	(egbase.map().get_fcoords(get_position()), get_conquers())));
 	m_didconquer = true;
 }
 
@@ -628,24 +606,11 @@ bool MilitarySite::attack(Soldier & enemy)
 			bldname = bldname.substr(0, dot);
 		Building_Index bldi = enemytribe.safe_building_index(bldname.c_str());
 
-		uint32_t     * wares;    // just empty dummies
-		uint32_t     * worker;   // "    "     "
-		Soldier_Counts soldiers; // "    "     "
-
-		Ware_Index const nr_of_wares   = enemytribe.get_nrwares();
-		Ware_Index const nr_of_workers = enemytribe.get_nrworkers();
-		wares  = new uint32_t[nr_of_wares.value()];
-		worker = new uint32_t[nr_of_workers.value()];
-		for (Ware_Index i = Ware_Index::First(); i < nr_of_wares; ++i)
-			wares[i.value()] = 0;
-		for (Ware_Index i = Ware_Index::First(); i < nr_of_workers; ++i)
-			worker[i.value()] = 0;
-
 		// Now we destroy the old building before we place the new one.
 		set_defeating_player(enemy.owner().player_number());
 		schedule_destroy(game);
 
-		enemyplayer->force_building(coords, bldi, wares, worker, soldiers);
+		enemyplayer->force_building(coords, bldi);
 		BaseImmovable * const newimm = game.map()[coords].get_immovable();
 		upcast(MilitarySite, newsite, newimm);
 		newsite->reinit_after_conqueration(game);

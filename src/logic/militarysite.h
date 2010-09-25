@@ -61,9 +61,6 @@ public:
 	MilitarySite(MilitarySite_Descr const &);
 	virtual ~MilitarySite();
 
-	void prefill
-		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
-
 	char const * type_name() const throw () {return "militarysite";}
 	virtual std::string get_statistics_string();
 
@@ -83,7 +80,7 @@ public:
 	virtual uint32_t soldierCapacity() const;
 	virtual void setSoldierCapacity(uint32_t capacity);
 	virtual void dropSoldier(Soldier &);
-	virtual int incorporateSoldier(Game & game, Soldier & s);
+	virtual int incorporateSoldier(Editor_Game_Base & game, Soldier & s);
 	// End implementation of SoldierControl
 
 	// Begin implementation of Attackable
@@ -111,7 +108,7 @@ public:
 	void update_soldier_request();
 
 protected:
-	void conquer_area(Game &);
+	void conquer_area(Editor_Game_Base &);
 
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);

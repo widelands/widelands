@@ -22,6 +22,41 @@
 
 #include <lua.hpp>
 
+#include "lua_bases.h"
+
+namespace LuaEditor {
+
+class L_Player : public LuaBases::L_PlayerBase {
+public:
+	// Overwritten from L_PlayerBase, avoid ambiguity when deriving from
+	// L_GameModuleClass and L_PlayerBase
+	const char * get_modulename() {return "game";}
+
+	LUNA_CLASS_HEAD(L_Player);
+
+	L_Player() : LuaBases::L_PlayerBase() {}
+	L_Player(Widelands::Player_Number n) : LuaBases::L_PlayerBase(n)  {}
+	L_Player(lua_State * L) {
+		report_error(L, "Cannot instantiate a 'Player' directly!");
+	}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+private:
+};
+
 void luaopen_wleditor(lua_State *);
+
+};
+
 
 #endif

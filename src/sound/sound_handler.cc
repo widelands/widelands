@@ -320,16 +320,16 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 	if (m_nosound)
 		return -1;
 
-	assert(m_the_game);
+	assert(m_egbase);
 	assert(position);
 
-	Interactive_Base const & ibase = *m_the_game->get_ibase();
+	Interactive_Base const & ibase = *m_egbase->get_ibase();
 	Point const vp = ibase.get_viewpoint();
 
 	int32_t const xres = ibase.get_xres();
 	int32_t const yres = ibase.get_yres();
 
-	MapviewPixelFunctions::get_pix(m_the_game->map(), position, sx, sy);
+	MapviewPixelFunctions::get_pix(m_egbase->map(), position, sx, sy);
 	sx -= vp.x;
 	sy -= vp.y;
 

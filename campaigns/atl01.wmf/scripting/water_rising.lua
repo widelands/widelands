@@ -172,7 +172,7 @@ function WaterRiser:rise(level)
       self._water_level = self._water_level + 1
    
       print(("Beginning rise to: %i"):format(self._water_level))
-      local st = wl.game.get_time()
+      local st = game.time
 
       -- Relevel the ocean over 5 mins
       local scnt = math.floor(self._ocean.size / 300)
@@ -193,9 +193,9 @@ function WaterRiser:rise(level)
             sleep(1000)
          end
       end
-      wl.map.recalculate()
+      map:recalculate()
 
-      local delta = wl.game.get_time() - st
+      local delta = game.time - st
       print(("Done with normalization, took %s"):format(_format_time(delta)))
 
       -- Check for all shore fields if they remain shore or
@@ -210,7 +210,7 @@ function WaterRiser:rise(level)
       -- Launch the raising function
       self:_rise_water()
 
-      local delta = wl.game.get_time() - st
+      local delta = game.time - st
       print(("Raising to %i took %s"):format(self._water_level,
          _format_time(delta)))
    end

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-04-21 17:46+0000\n"
-"PO-Revision-Date: 2010-04-22 14:14+0000\n"
-"Last-Translator: PliniusNeo <Unknown>\n"
+"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"PO-Revision-Date: 2010-06-06 21:09+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-23 03:42+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -36,23 +36,23 @@ msgstr "Een verbeterd masker voor barbarenstrijders."
 msgid "An enhanced version of the helmet."
 msgstr "Een verbeterde versie van de helm."
 
-#: ../../tribes/barbarians/conf:40
+#: ../../tribes/barbarians/conf:27
 msgid "Ashes"
 msgstr "As"
 
-#: ../../tribes/barbarians/conf:71
+#: ../../tribes/barbarians/conf:58
 msgid "Axe"
 msgstr "Bijl"
 
-#: ../../tribes/barbarians/conf:185
+#: ../../tribes/barbarians/conf:172
 msgid "Axefactory"
 msgstr "Bijlenfabriek"
 
-#: ../../tribes/barbarians/conf:120
+#: ../../tribes/barbarians/conf:107
 msgid "Baker"
 msgstr "Bakker"
 
-#: ../../tribes/barbarians/conf:186
+#: ../../tribes/barbarians/conf:173
 msgid "Bakery"
 msgstr "Bakkerij"
 
@@ -60,16 +60,16 @@ msgstr "Bakkerij"
 msgid "Bakes bread for workers."
 msgstr "Bakt broden voor de werkers."
 
-#: ../../tribes/barbarians/conf:19
+#: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
 msgstr "Barbaren"
 
-#: ../../tribes/barbarians/conf:171
+#: ../../tribes/barbarians/conf:158
 msgid "Barracks"
 msgstr "Barakken"
 
-#: ../../tribes/barbarians/conf:156
-#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:143
+#: ../../tribes/barbarians/conf:159
 msgid "Barrier"
 msgstr "Barrière"
 
@@ -77,15 +77,15 @@ msgstr "Barrière"
 msgid "Basic defence of a warrior."
 msgstr "Standaardverdeding voor een strijder."
 
-#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:139
 msgid "Battle Arena"
 msgstr "Arena"
 
-#: ../../tribes/barbarians/conf:73
+#: ../../tribes/barbarians/conf:60
 msgid "Battle Axe"
 msgstr "Slagbijl"
 
-#: ../../tribes/barbarians/conf:74
+#: ../../tribes/barbarians/conf:61
 msgid "Beer"
 msgstr "Bier"
 
@@ -95,15 +95,15 @@ msgid ""
 msgstr ""
 "Naast pitabrood en vlees, is vis ook een bron van voedsel voor de barbaren."
 
-#: ../../tribes/barbarians/conf:187
+#: ../../tribes/barbarians/conf:174
 msgid "Big Inn"
 msgstr "Grote herberg"
 
-#: ../../tribes/barbarians/conf:122
+#: ../../tribes/barbarians/conf:109
 msgid "Blacksmith"
 msgstr "Smid"
 
-#: ../../tribes/barbarians/conf:75
+#: ../../tribes/barbarians/conf:62
 msgid "Blackwood"
 msgstr "Rozenhout"
 
@@ -111,27 +111,27 @@ msgstr "Rozenhout"
 msgid "Breeds the strong oxen that help in the transportation of wares."
 msgstr "Fokt de sterke ossen die helpen bij het goederenvervoer."
 
-#: ../../tribes/barbarians/conf:124
+#: ../../tribes/barbarians/conf:111
 msgid "Brewer"
 msgstr "Brouwer"
 
-#: ../../tribes/barbarians/conf:188
+#: ../../tribes/barbarians/conf:175
 msgid "Brewery"
 msgstr "Brouwerij"
 
-#: ../../tribes/barbarians/conf:76
+#: ../../tribes/barbarians/conf:63
 msgid "Broad Axe"
 msgstr "Brede bijl"
 
-#: ../../tribes/barbarians/conf:77
+#: ../../tribes/barbarians/conf:64
 msgid "Bronze Axe"
 msgstr "Bronzen bijl"
 
-#: ../../tribes/barbarians/conf:125
+#: ../../tribes/barbarians/conf:112
 msgid "Builder"
 msgstr "Bouwvakker"
 
-#: ../../tribes/barbarians/conf:126
+#: ../../tribes/barbarians/conf:113
 msgid "Burner"
 msgstr "Brander"
 
@@ -143,7 +143,7 @@ msgstr "Brandt kolen."
 msgid "Burns lime in the lime kilm."
 msgstr "Brandt kalk in de kalkoven."
 
-#: ../../tribes/barbarians/conf:113
+#: ../../tribes/barbarians/conf:100
 msgid "Carrier"
 msgstr "Drager"
 
@@ -151,36 +151,37 @@ msgstr "Drager"
 msgid "Carries items along the roads."
 msgstr "Draagt voorwerpen over de wegen."
 
-#: ../../tribes/barbarians/conf:164
-#: ../../tribes/barbarians/conf:173
+#: ../../tribes/barbarians/conf:151
+#: ../../tribes/barbarians/conf:160
 msgid "Castle"
 msgstr "Kasteel"
 
-#: ../../tribes/barbarians/conf:146
+#: ../../tribes/barbarians/conf:133
 msgid "Cattle Breeder"
 msgstr "Veefokker"
 
-#: ../../tribes/barbarians/conf:219
+#: ../../tribes/barbarians/conf:206
 msgid "Cattle Farm"
 msgstr "Veeboerderij"
 
-#: ../../tribes/barbarians/conf:189
+#: ../../tribes/barbarians/conf:176
 msgid "Charcoal Burner's House"
 msgstr "Houtskoolbrandershuis"
 
-#: ../../tribes/barbarians/conf:128
+#: ../../tribes/barbarians/conf:115
 msgid "Chief Miner"
 msgstr "Hoofdmijnwerker"
 
-#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/conf:144
 msgid "Citadel"
 msgstr "Citadel"
 
+#: ../../tribes/barbarians/conf:210
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
 msgstr "Citadeldorp"
 
-#: ../../tribes/barbarians/conf:78
+#: ../../tribes/barbarians/conf:65
 msgid "Cloth"
 msgstr "Doek"
 
@@ -188,47 +189,47 @@ msgstr "Doek"
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
 msgstr "Doek is nodig voor barbarenschepen. Gemaakt uit vlas."
 
-#: ../../tribes/barbarians/conf:79
+#: ../../tribes/barbarians/conf:66
 msgid "Coal"
 msgstr "Kolen"
 
-#: ../../tribes/barbarians/conf:192
+#: ../../tribes/barbarians/conf:179
 msgid "Coal mine"
 msgstr "Kolenmijn"
 
-#: ../../tribes/barbarians/conf:149
+#: ../../tribes/barbarians/conf:136
 msgid "Construction Site"
 msgstr "Bouwplaats"
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr ""
+msgstr "Hakt ruwe stukken graniet uit rondliggende stenen."
 
-#: ../../tribes/barbarians/conf:191
+#: ../../tribes/barbarians/conf:178
 msgid "Deep Coal Mine"
 msgstr "Diepe kolenmijn"
 
-#: ../../tribes/barbarians/conf:195
+#: ../../tribes/barbarians/conf:182
 msgid "Deep Gold Mine"
 msgstr "Diepe goudmijn"
 
-#: ../../tribes/barbarians/conf:196
+#: ../../tribes/barbarians/conf:183
 msgid "Deep Iron Ore Mine"
 msgstr "Diepe ijzerertsmijn"
 
-#: ../../tribes/barbarians/conf:190
+#: ../../tribes/barbarians/conf:177
 msgid "Deeper Coal Mine"
 msgstr "Diepere kolenmijn"
 
-#: ../../tribes/barbarians/conf:193
+#: ../../tribes/barbarians/conf:180
 msgid "Deeper Gold Mine"
 msgstr "Diepere goudmijn"
 
-#: ../../tribes/barbarians/conf:194
+#: ../../tribes/barbarians/conf:181
 msgid "Deeper Iron Ore Mine"
 msgstr "Diepere ijzerertsmijn"
 
-#: ../../tribes/barbarians/conf:67
+#: ../../tribes/barbarians/conf:54
 msgid "Deer"
 msgstr "Herten"
 
@@ -236,7 +237,7 @@ msgstr "Herten"
 msgid "Defend and Conquer!"
 msgstr "Verdedig en Verover!"
 
-#: ../../tribes/barbarians/conf:41
+#: ../../tribes/barbarians/conf:28
 msgid "Destroyed building"
 msgstr "Vernietigd gebouw"
 
@@ -244,15 +245,15 @@ msgstr "Vernietigd gebouw"
 msgid "Discovers resources for mining."
 msgstr "Ontdekt bodemschatten."
 
-#: ../../tribes/barbarians/conf:158
+#: ../../tribes/barbarians/conf:145
 msgid "Donjon"
 msgstr "Verdedigingstoren"
 
-#: ../../tribes/barbarians/conf:197
+#: ../../tribes/barbarians/conf:184
 msgid "Farm"
 msgstr "Boerderij"
 
-#: ../../tribes/barbarians/conf:129
+#: ../../tribes/barbarians/conf:116
 msgid "Farmer"
 msgstr "Boer"
 
@@ -260,35 +261,35 @@ msgstr "Boer"
 msgid "Fells trees."
 msgstr "Velt bomen."
 
-#: ../../tribes/barbarians/conf:130
+#: ../../tribes/barbarians/conf:117
 msgid "Ferner"
 msgstr "Varenkweker"
 
-#: ../../tribes/barbarians/conf:198
+#: ../../tribes/barbarians/conf:185
 msgid "Fernery"
 msgstr "Varenkwekerij"
 
-#: ../../tribes/barbarians/conf:46
+#: ../../tribes/barbarians/conf:33
 msgid "Field harvested"
 msgstr "Geoogst veld"
 
-#: ../../tribes/barbarians/conf:42
+#: ../../tribes/barbarians/conf:29
 msgid "Field medium"
 msgstr "Groeiend veld"
 
-#: ../../tribes/barbarians/conf:45
+#: ../../tribes/barbarians/conf:32
 msgid "Field ripe"
 msgstr "Rijp veld"
 
-#: ../../tribes/barbarians/conf:43
+#: ../../tribes/barbarians/conf:30
 msgid "Field small"
 msgstr "Jong veld"
 
-#: ../../tribes/barbarians/conf:44
+#: ../../tribes/barbarians/conf:31
 msgid "Field tiny"
 msgstr "Klein veld"
 
-#: ../../tribes/barbarians/conf:80
+#: ../../tribes/barbarians/conf:67
 msgid "Fire Tongs"
 msgstr "Brandtang"
 
@@ -300,23 +301,19 @@ msgstr ""
 "Vuur-gehard hout, zo hard als ijzer en het kan niet branden, gebruikt voor "
 "militaire gebouwen."
 
-#: ../../tribes/barbarians/conf:81
+#: ../../tribes/barbarians/conf:68
 msgid "Fish"
 msgstr "Vis"
 
-#: ../../tribes/barbarians/conf:131
+#: ../../tribes/barbarians/conf:118
 msgid "Fisher"
 msgstr "Visser"
 
-#: ../../tribes/barbarians/conf:199
+#: ../../tribes/barbarians/conf:186
 msgid "Fisher's Hut"
 msgstr "Vissershut"
 
-#: ../../tribes/barbarians/fisher/conf:1
-msgid "Fishes in the sea."
-msgstr "Vist in de zee."
-
-#: ../../tribes/barbarians/conf:82
+#: ../../tribes/barbarians/conf:69
 msgid "Fishing Rod"
 msgstr "Vishengel"
 
@@ -324,52 +321,56 @@ msgstr "Vishengel"
 msgid "Fishing rods are needed by barbarian fishers for fishing."
 msgstr "Barbaarse vissers hebben hengels nodig om te vissen."
 
-#: ../../tribes/barbarians/conf:83
+#: ../../tribes/barbarians/conf:70
 msgid "Flax"
 msgstr "Vlas"
 
 #: ../../tribes/barbarians/flax/conf:1
 msgid "Flax is a beautiful flower, which is used for making cloth."
-msgstr ""
+msgstr "Vlas is een mooie bloem, die gebruikt wordt om doek van te maken."
 
-#: ../../tribes/barbarians/conf:47
+#: ../../tribes/barbarians/conf:34
 msgid "Flax medium"
 msgstr "Groeiend vlas"
 
-#: ../../tribes/barbarians/conf:50
+#: ../../tribes/barbarians/conf:37
 msgid "Flax ripe"
 msgstr "Rijp vlas"
 
-#: ../../tribes/barbarians/conf:48
+#: ../../tribes/barbarians/conf:35
 msgid "Flax small"
 msgstr "Jong vlas"
 
-#: ../../tribes/barbarians/conf:49
+#: ../../tribes/barbarians/conf:36
 msgid "Flax tiny"
 msgstr "Klein vlas"
 
-#: ../../tribes/barbarians/conf:159
-#: ../../tribes/barbarians/conf:174
+#: ../../tribes/barbarians/conf:146
+#: ../../tribes/barbarians/conf:161
 msgid "Fortress"
 msgstr "Vesting"
 
-#: ../../tribes/barbarians/conf:132
+#: ../../tribes/barbarians/conf:119
 msgid "Gamekeeper"
 msgstr "Jachtopzichter"
 
-#: ../../tribes/barbarians/conf:200
+#: ../../tribes/barbarians/conf:187
 msgid "Gamekeeper's Hut"
 msgstr "Jachtopzichtershut"
 
-#: ../../tribes/barbarians/conf:133
+#: ../../tribes/barbarians/conf:120
 msgid "Geologist"
 msgstr "Geoloog"
 
-#: ../../tribes/barbarians/conf:84
+#: ../../tribes/barbarians/fisher/conf:1
+msgid "Gets fish out of the sea."
+msgstr "Haalt vis uit de zee."
+
+#: ../../tribes/barbarians/conf:71
 msgid "Gold"
 msgstr "Goud"
 
-#: ../../tribes/barbarians/conf:201
+#: ../../tribes/barbarians/conf:188
 msgid "Gold Mine"
 msgstr "Goudmijn"
 
@@ -381,15 +382,15 @@ msgstr ""
 "Goud is het meest waardevolle metaal; alleen heel belangrijke zaken worden "
 "ermee opgeluisterd."
 
-#: ../../tribes/barbarians/conf:85
+#: ../../tribes/barbarians/conf:72
 msgid "Goldstone"
 msgstr "Goudsteen"
 
-#: ../../tribes/barbarians/conf:202
+#: ../../tribes/barbarians/conf:189
 msgid "Granite Mine"
 msgstr "Granietmijn"
 
-#: ../../tribes/barbarians/conf:86
+#: ../../tribes/barbarians/conf:73
 msgid "Grout"
 msgstr "Specie"
 
@@ -397,15 +398,15 @@ msgstr "Specie"
 msgid "Grows flax and thatch reed."
 msgstr "Teelt vlas en dakstro."
 
-#: ../../tribes/barbarians/conf:165
+#: ../../tribes/barbarians/conf:152
 msgid "Guardhall"
 msgstr "Wachtlokaal"
 
-#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:153
 msgid "Guardhouse"
 msgstr "Wachthuis"
 
-#: ../../tribes/barbarians/conf:87
+#: ../../tribes/barbarians/conf:74
 msgid "Hammer"
 msgstr "Hamer"
 
@@ -421,24 +422,25 @@ msgstr "Oogst stro"
 msgid "Harvest wheat"
 msgstr "Oogst tarwe"
 
-#: ../../tribes/barbarians/conf:179
-#: ../../tribes/barbarians/conf:180
+#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:167
 msgid "Headquarters"
 msgstr "Hoofdkwartier"
 
+#: ../../tribes/barbarians/conf:209
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Gemiddeld hoofdkwartier"
 
-#: ../../tribes/barbarians/conf:88
+#: ../../tribes/barbarians/conf:75
 msgid "Helmet"
 msgstr "Helm"
 
-#: ../../tribes/barbarians/conf:134
+#: ../../tribes/barbarians/conf:121
 msgid "Helmsmith"
 msgstr "Helmsmid"
 
-#: ../../tribes/barbarians/conf:204
+#: ../../tribes/barbarians/conf:191
 msgid "Helmsmithy"
 msgstr "Helmsmid"
 
@@ -446,7 +448,7 @@ msgstr "Helmsmid"
 msgid "Helps to carry items at heavy used roads."
 msgstr "Helpt items te sjouwen op veel gebruikte wegen."
 
-#: ../../tribes/barbarians/conf:167
+#: ../../tribes/barbarians/conf:154
 msgid "High Tower"
 msgstr "Hoge Toren"
 
@@ -455,79 +457,79 @@ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 msgstr ""
 "Hoe kun je een maaltijd, hapje of portie bereiden zonder keukengerei?"
 
-#: ../../tribes/barbarians/conf:135
+#: ../../tribes/barbarians/conf:122
 msgid "Hunter"
 msgstr "Jager"
 
-#: ../../tribes/barbarians/conf:205
+#: ../../tribes/barbarians/conf:192
 msgid "Hunter's Hut"
 msgstr "Jagershut"
 
-#: ../../tribes/barbarians/conf:89
+#: ../../tribes/barbarians/conf:76
 msgid "Hunting Spear"
 msgstr "Jagersspeer"
 
-#: ../../tribes/barbarians/conf:206
+#: ../../tribes/barbarians/conf:193
 msgid "Inn"
 msgstr "Herberg"
 
-#: ../../tribes/barbarians/conf:136
+#: ../../tribes/barbarians/conf:123
 msgid "Innkeeper"
 msgstr "Herbergier"
 
-#: ../../tribes/barbarians/conf:90
+#: ../../tribes/barbarians/conf:77
 msgid "Iron"
 msgstr "IJzer"
 
-#: ../../tribes/barbarians/conf:91
+#: ../../tribes/barbarians/conf:78
 msgid "Iron Ore"
 msgstr "IJzererts"
 
-#: ../../tribes/barbarians/conf:211
+#: ../../tribes/barbarians/conf:198
 msgid "Iron Ore Mine"
 msgstr "IJzerertsmijn"
 
-#: ../../tribes/barbarians/conf:92
+#: ../../tribes/barbarians/conf:79
 msgid "Kitchen Tools"
 msgstr "Keukengerei"
 
-#: ../../tribes/barbarians/conf:207
+#: ../../tribes/barbarians/conf:194
 msgid "Lime Kiln"
 msgstr "Kalkoven"
 
-#: ../../tribes/barbarians/conf:137
+#: ../../tribes/barbarians/conf:124
 msgid "Lime-Burner"
 msgstr "Kalkoven"
 
-#: ../../tribes/barbarians/conf:138
+#: ../../tribes/barbarians/conf:125
 msgid "Lumberjack"
 msgstr "Houthakker"
 
-#: ../../tribes/barbarians/conf:208
+#: ../../tribes/barbarians/conf:195
 msgid "Lumberjack's Hut"
 msgstr "Houthakkershut"
 
-#: ../../tribes/barbarians/conf:93
+#: ../../tribes/barbarians/conf:80
 msgid "Mask"
 msgstr "Masker"
 
-#: ../../tribes/barbarians/conf:121
+#: ../../tribes/barbarians/conf:108
 msgid "Master Blacksmith"
 msgstr "Meestersmid"
 
-#: ../../tribes/barbarians/conf:123
+#: ../../tribes/barbarians/conf:110
 msgid "Master Brewer"
 msgstr "Meesterbrouwer"
 
-#: ../../tribes/barbarians/conf:127
+#: ../../tribes/barbarians/conf:114
 msgid "Master Miner"
 msgstr "Meestermijnwerker"
 
-#: ../../tribes/barbarians/conf:94
+#: ../../tribes/barbarians/conf:81
 msgid "Meal"
 msgstr "Maaltijd"
 
-#: ../../tribes/barbarians/conf:95
+#: ../../tribes/barbarians/conf:82
 msgid "Meat"
 msgstr "Vlees"
 
@@ -541,15 +543,15 @@ msgstr ""
 "lunch voor de mijnwerkers te maken en in trainingskampen om strijders sterk "
 "te houden."
 
-#: ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/conf:196
 msgid "Metalwork Shop"
 msgstr "Metaalbewerkerij"
 
-#: ../../tribes/barbarians/conf:210
+#: ../../tribes/barbarians/conf:197
 msgid "Micro Brewery"
 msgstr "Kleine brouwerij"
 
-#: ../../tribes/barbarians/conf:139
+#: ../../tribes/barbarians/conf:126
 msgid "Miner"
 msgstr "Mijnwerker"
 
@@ -561,23 +563,23 @@ msgstr ""
 "De oude strijders accepteren alleen dit bier. Er wordt wel gezegd dat alle "
 "macht van de barbaren in deze eel verborgen zit."
 
-#: ../../tribes/barbarians/conf:175
+#: ../../tribes/barbarians/conf:162
 msgid "Outpost"
 msgstr "Voorpost"
 
-#: ../../tribes/barbarians/conf:114
+#: ../../tribes/barbarians/conf:101
 msgid "Ox"
 msgstr "Os"
 
-#: ../../tribes/barbarians/conf:72
+#: ../../tribes/barbarians/conf:59
 msgid "Peel"
 msgstr "Schieter"
 
-#: ../../tribes/barbarians/conf:96
+#: ../../tribes/barbarians/conf:83
 msgid "Pick"
 msgstr "Punthouweel"
 
-#: ../../tribes/barbarians/conf:97
+#: ../../tribes/barbarians/conf:84
 msgid "Pitta Bread"
 msgstr "Pitabrood"
 
@@ -713,23 +715,23 @@ msgstr ""
 msgid "Produces weapons for soldiers and tools for workers."
 msgstr "Produceert wapens voor soldaten en gereedschap voor werkers."
 
-#: ../../tribes/barbarians/conf:212
+#: ../../tribes/barbarians/conf:199
 msgid "Quarry"
 msgstr "Steengroeve"
 
-#: ../../tribes/barbarians/conf:140
+#: ../../tribes/barbarians/conf:127
 msgid "Ranger"
 msgstr "Boswachter"
 
-#: ../../tribes/barbarians/conf:213
+#: ../../tribes/barbarians/conf:200
 msgid "Ranger's Hut"
 msgstr "Boswachtershut"
 
-#: ../../tribes/barbarians/conf:98
+#: ../../tribes/barbarians/conf:85
 msgid "Ration"
 msgstr "Portie"
 
-#: ../../tribes/barbarians/conf:99
+#: ../../tribes/barbarians/conf:86
 msgid "Raw Stone"
 msgstr "Ruwe steen"
 
@@ -755,67 +757,67 @@ msgstr ""
 "ze met een gewone bijl om kunnen gaan, gaan ze met deze aan de slag. Deze is "
 "zwaarder en scherper dan de gewone bijl. Gebouwd in de bijlenfabriek."
 
-#: ../../tribes/barbarians/conf:51
+#: ../../tribes/barbarians/conf:38
 msgid "Reed medium"
 msgstr "Groeiend dakstro"
 
-#: ../../tribes/barbarians/conf:54
+#: ../../tribes/barbarians/conf:41
 msgid "Reed ripe"
 msgstr "Rijp dakstro"
 
-#: ../../tribes/barbarians/conf:52
+#: ../../tribes/barbarians/conf:39
 msgid "Reed small"
 msgstr "Klein dakstro"
 
-#: ../../tribes/barbarians/conf:53
+#: ../../tribes/barbarians/conf:40
 msgid "Reed tiny"
 msgstr "Jong dakstro"
 
-#: ../../tribes/barbarians/conf:55
+#: ../../tribes/barbarians/conf:42
 msgid "Resource indicator coal little"
 msgstr "Bronindicator weinig kool"
 
-#: ../../tribes/barbarians/conf:56
+#: ../../tribes/barbarians/conf:43
 msgid "Resource indicator coal much"
 msgstr "Bronindicator veel kool"
 
-#: ../../tribes/barbarians/conf:57
+#: ../../tribes/barbarians/conf:44
 msgid "Resource indicator gold little"
 msgstr "Bronindicator weinig goud"
 
-#: ../../tribes/barbarians/conf:58
+#: ../../tribes/barbarians/conf:45
 msgid "Resource indicator gold much"
 msgstr "Bronindicator veel goud"
 
-#: ../../tribes/barbarians/conf:59
+#: ../../tribes/barbarians/conf:46
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Bronindicator weinig graniet"
 
-#: ../../tribes/barbarians/conf:60
+#: ../../tribes/barbarians/conf:47
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Bronindicator veel graniet"
 
-#: ../../tribes/barbarians/conf:61
+#: ../../tribes/barbarians/conf:48
 msgid "Resource indicator iron little"
 msgstr "Bronindicator weinig ijzer"
 
-#: ../../tribes/barbarians/conf:62
+#: ../../tribes/barbarians/conf:49
 msgid "Resource indicator iron much"
 msgstr "Bronindicator veel ijzer"
 
-#: ../../tribes/barbarians/conf:63
+#: ../../tribes/barbarians/conf:50
 msgid "Resource indicator no resource"
 msgstr "Bronindicator geen grondstof"
 
-#: ../../tribes/barbarians/conf:64
+#: ../../tribes/barbarians/conf:51
 msgid "Resource indicator water"
 msgstr "Bronindicator water"
 
-#: ../../tribes/barbarians/conf:145
+#: ../../tribes/barbarians/conf:132
 msgid "Scout"
 msgstr "Verkenner"
 
-#: ../../tribes/barbarians/conf:218
+#: ../../tribes/barbarians/conf:205
 msgid "Scout's Hut"
 msgstr "Verkennershut"
 
@@ -826,20 +828,20 @@ msgstr ""
 "Verkenners als Ken de Verkenner verkennen niet verkend gebied op een "
 "verkennersmanier."
 
-#: ../../tribes/barbarians/conf:100
+#: ../../tribes/barbarians/conf:87
 msgid "Scythe"
 msgstr "Zeis"
 
-#: ../../tribes/barbarians/conf:160
-#: ../../tribes/barbarians/conf:170
+#: ../../tribes/barbarians/conf:147
+#: ../../tribes/barbarians/conf:157
 msgid "Sentry"
 msgstr "Wachtpost"
 
-#: ../../tribes/barbarians/conf:101
+#: ../../tribes/barbarians/conf:88
 msgid "Sharp Axe"
 msgstr "Scherpe bijl"
 
-#: ../../tribes/barbarians/conf:102
+#: ../../tribes/barbarians/conf:89
 msgid "Shovel"
 msgstr "Schop"
 
@@ -848,7 +850,7 @@ msgstr "Schop"
 msgid "Sleep"
 msgstr "Rust"
 
-#: ../../tribes/barbarians/conf:168
+#: ../../tribes/barbarians/conf:155
 msgid "Small Tower"
 msgstr "Kleine Toren"
 
@@ -860,11 +862,11 @@ msgstr "Smelt goud"
 msgid "Smelt iron"
 msgstr "Smelt ijzer"
 
-#: ../../tribes/barbarians/conf:141
+#: ../../tribes/barbarians/conf:128
 msgid "Smelter"
 msgstr "Smelter"
 
-#: ../../tribes/barbarians/conf:214
+#: ../../tribes/barbarians/conf:201
 msgid "Smelting Works"
 msgstr "Hoogoven"
 
@@ -876,31 +878,31 @@ msgstr "Giet helmen voor soldaten"
 msgid "Smelts iron."
 msgstr "Smelt ijzer."
 
-#: ../../tribes/barbarians/conf:103
+#: ../../tribes/barbarians/conf:90
 msgid "Snack"
 msgstr "Hapje"
 
-#: ../../tribes/barbarians/conf:117
+#: ../../tribes/barbarians/conf:104
 msgid "Soldier"
 msgstr "Soldaat"
 
-#: ../../tribes/barbarians/conf:142
+#: ../../tribes/barbarians/conf:129
 msgid "Stonemason"
 msgstr "Steenhouwer"
 
-#: ../../tribes/barbarians/conf:104
+#: ../../tribes/barbarians/conf:91
 msgid "Strong Beer"
 msgstr "Sterk bier"
 
-#: ../../tribes/barbarians/conf:161
+#: ../../tribes/barbarians/conf:148
 msgid "Stronghold"
 msgstr "Burcht"
 
-#: ../../tribes/barbarians/conf:215
+#: ../../tribes/barbarians/conf:202
 msgid "Tavern"
 msgstr "Kroeg"
 
-#: ../../tribes/barbarians/conf:105
+#: ../../tribes/barbarians/conf:92
 msgid "Thatch Reed"
 msgstr "Dakstro"
 
@@ -913,6 +915,9 @@ msgid ""
 "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
 "are equipped with it, but also the lumberjack is using the same model."
 msgstr ""
+"De Bijl is een basis-wapen en -gereedschap voor de barbaren. Alle jonge "
+"soldaten zijn er mee uitgerust, maar ook de houthakker gebruikt hetzelfde "
+"model."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -926,7 +931,7 @@ msgstr ""
 msgid "The Hunter brings good meat to the colonists."
 msgstr "De jager brengt goed vlees naar de kolonisten."
 
-#: ../../tribes/barbarians/conf:18
+#: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"
 msgstr "Het Widelands Ontwikkelteam"
 
@@ -973,9 +978,9 @@ msgstr ""
 "arbeider, de smid en de helmsmid. Zorg dat je er altijd op voorraad hebt! "
 "Gemaakt in de metaalbewerkerij."
 
-#: ../../tribes/barbarians/conf:20
-msgid "The mighty tribes of the eastern lands!"
-msgstr "De machtige stammen van de oostelijke landen!"
+#: ../../tribes/barbarians/conf:6
+msgid "The mighty tribes of the east-lands!"
+msgstr "De machtige stammen van het oosten!"
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -1020,6 +1025,9 @@ msgid ""
 "Only trained warriors are able to yield such a weapon. It is produced in the "
 "axe factory."
 msgstr ""
+"Dit is het op één na gevaarlijkste wapen dat de barbaren kunnen maken. "
+"Alleen getrainde krijgers kunnen zo'n wapen hanteren. Hij wordt geproduceerd "
+"in de bijlenfabriek."
 
 #: ../../tribes/barbarians/goldstone/conf:1
 msgid "This is the yellow goldstone."
@@ -1042,16 +1050,16 @@ msgstr ""
 "één klap te doden. Wordt alleen gebruikt door de jagers. Gemaakt in de "
 "metaalbewerkerij."
 
-#: ../../tribes/barbarians/conf:169
-#: ../../tribes/barbarians/conf:176
+#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:163
 msgid "Tower"
 msgstr "Toren"
 
-#: ../../tribes/barbarians/conf:143
+#: ../../tribes/barbarians/conf:130
 msgid "Trainer"
 msgstr "Trainer"
 
-#: ../../tribes/barbarians/conf:153
+#: ../../tribes/barbarians/conf:140
 msgid "Trainingscamp"
 msgstr "Trainingskamp"
 
@@ -1059,7 +1067,7 @@ msgstr "Trainingskamp"
 msgid "Trains the soldiers."
 msgstr "Traint de soldaten."
 
-#: ../../tribes/barbarians/conf:106
+#: ../../tribes/barbarians/conf:93
 msgid "Trunk"
 msgstr "Boomstam"
 
@@ -1185,19 +1193,19 @@ msgstr ""
 "Opwaarderen soldatenlevenspunten 2 (alleen voor compatibiliteit met oude "
 "opgeslagen spellen (build 13))"
 
-#: ../../tribes/barbarians/conf:107
+#: ../../tribes/barbarians/conf:94
 msgid "War Helmet"
 msgstr "Oorlogshelm"
 
-#: ../../tribes/barbarians/conf:184
+#: ../../tribes/barbarians/conf:171
 msgid "War Mill"
 msgstr "Oorlogsfabriek"
 
-#: ../../tribes/barbarians/conf:181
+#: ../../tribes/barbarians/conf:168
 msgid "Warehouse"
 msgstr "Magazijn"
 
-#: ../../tribes/barbarians/conf:108
+#: ../../tribes/barbarians/conf:95
 msgid "Warriors Axe"
 msgstr "Oorlogsbijl"
 
@@ -1209,7 +1217,7 @@ msgstr ""
 "Strijders met een fundamentele kennis over de krijgskunst krijgen een brede "
 "bijl. Deze wordt gemaakt in de bijlenfabriek."
 
-#: ../../tribes/barbarians/conf:109
+#: ../../tribes/barbarians/conf:96
 msgid "Water"
 msgstr "Water"
 
@@ -1225,19 +1233,19 @@ msgstr ""
 msgid "Weapons and tools are made of iron."
 msgstr "Wapens en gereedschap worden gemaakt van ijzer."
 
-#: ../../tribes/barbarians/conf:144
+#: ../../tribes/barbarians/conf:131
 msgid "Weaver"
 msgstr "Wever"
 
-#: ../../tribes/barbarians/conf:216
+#: ../../tribes/barbarians/conf:203
 msgid "Weaving-Mill"
 msgstr "Weverij"
 
-#: ../../tribes/barbarians/conf:217
+#: ../../tribes/barbarians/conf:204
 msgid "Well"
 msgstr "Put"
 
-#: ../../tribes/barbarians/conf:110
+#: ../../tribes/barbarians/conf:97
 msgid "Wheat"
 msgstr "Tarwe"
 
@@ -1249,11 +1257,11 @@ msgstr ""
 "Tarwe is essentieel voor overleven, goed brood en lekkere bieren kunnen met "
 "deze tarwe gemaakt worden."
 
-#: ../../tribes/barbarians/conf:68
+#: ../../tribes/barbarians/conf:55
 msgid "Wildboar"
 msgstr "Everzwijn"
 
-#: ../../tribes/barbarians/conf:203
+#: ../../tribes/barbarians/conf:190
 msgid "Wood Hardener"
 msgstr "Houtverharder"
 
@@ -1298,7 +1306,7 @@ msgstr "Werk"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
-msgstr ""
+msgstr "Werkt op bouwplaatsen om een nieuw gebouw te bouwen"
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -1352,17 +1360,11 @@ msgstr ""
 #~ msgid "Carries items along your roads."
 #~ msgstr "Draagt voorwerpen over je wegen."
 
-#~ msgid "The mighty tribes of the east-lands!"
-#~ msgstr "De machtige stammen van het oosten!"
-
 #~ msgid "Resource indicator granit little"
 #~ msgstr "Bronindicator weinig graniet"
 
 #~ msgid "Resource indicator granit much"
 #~ msgstr "Bronindicator veel graniet"
-
-#~ msgid "Gets fish out of the sea."
-#~ msgstr "Haalt vis uit de zee."
 
 #~ msgid "Fishing rods are needed by barbarian fishers, to catch fish."
 #~ msgstr "Vishengels zijn nodig voor vissers om vis te vangen."
@@ -1394,3 +1396,9 @@ msgstr ""
 #~ msgstr ""
 #~ "Deze aarde wordt diep in kolenmijnen gevonden. Het moet bewerkt worden om "
 #~ "echte steenkool te krijgen."
+
+#~ msgid "The mighty tribes of the eastern lands!"
+#~ msgstr "De machtige stammen van de oostelijke landen!"
+
+#~ msgid "Fishes in the sea."
+#~ msgstr "Vist in de zee."

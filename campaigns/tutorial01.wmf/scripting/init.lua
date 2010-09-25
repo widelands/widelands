@@ -2,28 +2,27 @@
 --                            Tutorial Mission
 -- =======================================================================
 
-set_textdomain("scenario_tutorial.wmf")
-
 -- ===============
 -- Initialization
 -- ===============
-plr = wl.game.Player(1)
+plr = wl.Game().players[1]
 plr:allow_buildings("all")
 
 -- A default headquarters
 use("tribe_barbarians", "sc00_headquarters_medium")
 init.func(plr) -- defined in sc00_headquarters_medium
 
+set_textdomain("scenario_tutorial01.wmf")
 
 use("aux", "coroutine")
 use("aux", "ui")
 use("aux", "table")
 
 -- Constants
-first_lumberjack_field = wl.map.Field(16,10)
-first_quarry_field = wl.map.Field(8,12)
-conquer_field = wl.map.Field(6,18)
-trainings_ground = wl.map.Field(33,57)
+first_lumberjack_field = wl.Game().map:get_field(16,10)
+first_quarry_field = wl.Game().map:get_field(8,12)
+conquer_field = wl.Game().map:get_field(6,18)
+trainings_ground = wl.Game().map:get_field(33,57)
 
 -- Global variables
 registered_player_immovables = {}
@@ -49,14 +48,15 @@ function UserInputDisabler:new()
 end
 function UserInputDisabler:establish_blocks()
    self._ui_state = wl.ui.get_user_input_allowed()
-   self._as_state = wl.game.get_allow_autosaving()
+   local game = wl.Game()
+   self._as_state = game.allow_autosaving
 
    wl.ui.set_user_input_allowed(false)
-   wl.game.set_allow_autosaving(false)
+   wl.Game().allow_autosaving = false
 end
 function UserInputDisabler:lift_blocks()
    wl.ui.set_user_input_allowed(self._ui_state)
-   wl.game.set_allow_autosaving(self._as_state)
+   wl.Game().allow_autosaving= self._as_state
 end
 
 function _try_add_objective(i)
@@ -70,7 +70,7 @@ function _try_add_objective(i)
    return o
 end
 function msg_box(i)
-   wl.game.set_speed(1000)
+   wl.Game().desired_speed = 1000
 
    local blocker = UserInputDisabler:new()
 
@@ -144,7 +144,7 @@ function warp_houses(descriptions)
 
    for idx, d in ipairs(descriptions) do 
       local name, x, y = d[1], d[2], d[3]
-      mouse_smoothly_to(wl.map.Field(x, y))
+      mouse_smoothly_to(wl.Game().map:get_field(x, y))
       sleep(300)
       prefilled_buildings(plr, d)
       sleep(300)
@@ -155,6 +155,18 @@ end
 
 function build_road(field, ...)
    -- Build a road by clicking the UI. A little faster than before
+   
+   -- Make sure that there is room for the road: Rip all immovables
+   local cf = field
+   for idx, d in ipairs{...} do
+      if not (d == '|' or d == '.') then
+         if cf.immovable and cf.immovable.owner ~= plr then
+            cf.immovable:remove()
+         end
+         cf = cf[d .. 'n']
+      end
+   end
+
    mouse_smoothly_to(field, 400, 200)
 
    local function _start_road(field)
@@ -167,9 +179,6 @@ function build_road(field, ...)
    _start_road(field)
 
    for idx, d in ipairs{...} do
-      if field.immovable and field.immovable.player ~= plr then
-         field.immovable:remove()
-      end
       if d == '|' or d == '.' then
          mouse_smoothly_to(field, 400, 200)
          wl.ui.MapView():click(field)
@@ -191,7 +200,7 @@ function build_eastern_trainings_area(citadel_field)
    local blocker = UserInputDisabler:new()
    
    plr:reveal_fields(citadel_field:region(8))
-   scroll_smoothly_to(wl.map.Field(21,9))
+   scroll_smoothly_to(wl.Game().map:get_field(21,9))
    scroll_smoothly_to(citadel_field)
 
    warp_houses{
@@ -229,16 +238,17 @@ function build_eastern_trainings_area(citadel_field)
       {"sentry", 37, 61, soldiers = {[{3,5,0,2}] = 2 }},
    }
    -- Build the roads
-   build_road(wl.map.Field(31,57), "bl", "bl", "|", "br", "br", "|",
+   local map = wl.Game().map
+   build_road(map:get_field(31,57), "bl", "bl", "|", "br", "br", "|",
       "r", "r", "|", "tr", "tr", "tl", ".")
-   build_road(wl.map.Field(29,58), "r", "br", ".")
-   build_road(wl.map.Field(38,62), "l", "l", "|", "l", "bl",
+   build_road(map:get_field(29,58), "r", "br", ".")
+   build_road(map:get_field(38,62), "l", "l", "|", "l", "bl",
       "|", "tl", "tl", ".")
-   build_road(wl.map.Field(32, 0), "tr", "tr", "tr", '.')
+   build_road(map:get_field(32, 0), "tr", "tr", "tr", '.')
 
    -- Add wares to the trainingssite so that it does something. Also
    -- add buildwares to the warehouse
-   local ts = wl.map.Field(31,56).immovable
+   local ts = map:get_field(31,56).immovable
    ts:set_wares(ts.valid_wares)
 
    blocker:lift_blocks()
@@ -248,6 +258,7 @@ end
 -- in a loop for a nice optical effect
 function remove_all_stones(fields, g_sleeptime)
    local sleeptime = g_sleeptime or 150 
+   local map = wl.Game().map
    while #fields > 0 do
       local idx = math.random(#fields)
       local f = fields[idx]
@@ -260,7 +271,7 @@ function remove_all_stones(fields, g_sleeptime)
             f.immovable:remove()
             if n > 1 then 
                remove_field = false
-               wl.map.create_immovable("stones" .. n-1, f)
+               map:place_immovable("stones" .. n-1, f)
             end
             sleep(sleeptime)
          end
@@ -289,14 +300,15 @@ function register_immovable_as_allowed(i)
       registered_player_immovables[_fmt(i.fields[1].brn)] = true
    end
 end
-register_immovable_as_allowed(plr.starting_field.immovable)
+register_immovable_as_allowed(wl.Game().map.player_slots[1].starting_field.immovable)
 
 function bad_boy_sentry()
+   local sf = wl.Game().map.player_slots[1].starting_field
    while not terminate_bad_boy_sentinel do
       -- Check all fields.
       local sent_msg = false
-      for idx,f in ipairs(plr.starting_field:region(8)) do
-         if f.immovable and f.immovable.player == plr and
+      for idx,f in ipairs(sf:region(8)) do
+         if f.immovable and f.immovable.owner == plr and
                not registered_player_immovables[_fmt(f)] then
 
             -- Give the callback a chance to veto the deletion. Maybe
@@ -310,6 +322,9 @@ function bad_boy_sentry()
 
                -- Remove the object again
                f.immovable:remove()
+
+               -- Make sure that the user is not building a road at the moment.
+               wl.ui.MapView():abort_road_building()
             end
          end
       end
@@ -353,6 +368,7 @@ function starting_infos()
       sleep(200)
    end
    o.done = true
+   wl.ui.MapView():abort_road_building()
 
    sleep(500)
 
@@ -383,13 +399,13 @@ function build_lumberjack()
    msg_box(lumberjack_message_03)
    sleep(500)
 
-   click_on_field(plr.starting_field.brn)
+   click_on_field(wl.Game().map.player_slots[1].starting_field.brn)
 
    msg_box(lumberjack_message_04)
    
    register_immovable_as_allowed(first_lumberjack_field.immovable) -- hut + flag
 
-   local f = wl.map.Field(14,11)
+   local f = wl.Game().map:get_field(14,11)
    register_immovable_as_allowed(f.immovable) -- road + everything on it
 
    illegal_immovable_found = function(i) return false end
@@ -402,7 +418,7 @@ function build_lumberjack()
 
    local blocker = UserInputDisabler:new()
    
-   local f = wl.map.Field(14,11)
+   local f = wl.Game().map:get_field(14,11)
    scroll_smoothly_to(f)
    mouse_smoothly_to(f)
    
@@ -465,7 +481,7 @@ function build_a_quarry()
    end
 
    -- Wait for the constructionsite to be placed
-   while not cs do sleep(300) end
+   while not cs do sleep(200) end
    o.done = true
    register_immovable_as_allowed(cs)
 
@@ -487,11 +503,12 @@ function build_a_quarry()
 
    msg_box(talk_about_roadbuilding_00)
    -- Showoff one-by-one roadbuilding
-   click_on_field(wl.map.Field(9,12))
-   click_on_field(wl.map.Field(10,12))
-   click_on_field(wl.map.Field(11,12))
-   click_on_field(wl.map.Field(12,12))
-   click_on_field(wl.map.Field(12,11))
+   local map = wl.Game().map
+   click_on_field(map:get_field(9,12))
+   click_on_field(map:get_field(10,12))
+   click_on_field(map:get_field(11,12))
+   click_on_field(map:get_field(12,12))
+   click_on_field(map:get_field(12,11))
    
    sleep(3000)
 
@@ -501,7 +518,7 @@ function build_a_quarry()
    -- Showoff direct roadbuilding
    click_on_field(cs.fields[1].brn)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
-   click_on_field(plr.starting_field.brn)
+   click_on_field(map.player_slots[1].starting_field.brn)
    
    sleep(3000)
 
@@ -533,6 +550,8 @@ function census_and_statistics(field)
 
    wl.ui.MapView().census = false
    wl.ui.MapView().statistics = false
+               
+   wl.ui.MapView():abort_road_building()
   
    msg_box(census_and_statistics_00)
    -- Pick any empty field
@@ -686,7 +705,7 @@ function training()
    
    msg_box(warfare_and_training_00)
 
-   local citadel_field = wl.map.Field(31, 63)
+   local citadel_field = wl.Game().map:get_field(31, 63)
 
    build_eastern_trainings_area(citadel_field)
    sleep(8000)
@@ -714,7 +733,7 @@ function training()
    end
 
    -- Create enemy tribe
-   prefilled_buildings(wl.game.Player(2),
+   prefilled_buildings(wl.Game().players[2],
       {"barrier", 25, 6},
       {"sentry", 29, 16},
       {"tower", 30, 21},
@@ -731,7 +750,7 @@ function training()
    scroll_smoothly_to(citadel_field)
    local o = msg_box(attack_enemey)
 
-   local plr2 = wl.game.Player(2)
+   local plr2 = wl.Game().players[2]
    while #plr2:get_buildings("headquarters") > 0 or not plr2.defeated do
       sleep(3000)
    end

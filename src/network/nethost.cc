@@ -52,7 +52,7 @@ using boost::format;
 struct HostGameSettingsProvider : public GameSettingsProvider {
 	HostGameSettingsProvider(NetHost * const _h) : h(_h) {}
 
-	virtual void setScenario(bool) {}; //  FIXME no scenario for multiplayer
+	virtual void setScenario(bool is_scenario) {h->setScenario(is_scenario);}
 
 	virtual GameSettings const & settings() {return h->settings();}
 
@@ -61,6 +61,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		return number != settings().playernum;
 	}
 	virtual bool canChangePlayerTribe(uint8_t const number) {
+		if (settings().scenario)
+			return false;
 		if (number == settings().playernum)
 			return true;
 		if (number >= settings().players.size())
@@ -69,9 +71,13 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			settings().players.at(number).state == PlayerSettings::stateComputer;
 	}
 	virtual bool canChangePlayerInit(uint8_t const number) {
+		if (settings().scenario)
+			return false;
 		return number < settings().players.size();
 	}
 	virtual bool canChangePlayerTeam(uint8_t number) {
+		if (settings().scenario)
+			return false;
 		if (number >= settings().players.size())
 			return false;
 		if (number == settings().playernum)
@@ -101,7 +107,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	virtual void nextPlayerState(uint8_t const number) {
 		if
 			(number == settings().playernum ||
-			 number >= settings().players.size())
+			 number > settings().players.size())
 			return;
 
 		PlayerSettings::State newstate = PlayerSettings::stateClosed;
@@ -110,6 +116,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			newstate = PlayerSettings::stateOpen;
 			break;
 		case PlayerSettings::stateOpen:
+			h->setPlayerPartner(number, 0);
+			// Fallthrough
 		case PlayerSettings::stateHuman:
 		case PlayerSettings::stateComputer:
 			Computer_Player::ImplementationVector const & impls =
@@ -158,6 +166,23 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			(number == settings().playernum ||
 			 settings().players.at(number).state == PlayerSettings::stateComputer)
 			h->setPlayerTeam(number, team);
+	}
+
+	virtual void setPlayerPartner(uint8_t number, uint8_t partner)
+	{
+		if
+			(number >= h->settings().players.size()
+			 or
+			 partner > h->settings().players.size()
+			 or
+			 number + 1 == partner)
+			return;
+		
+		if
+			(number == settings().playernum
+			 or
+			 settings().players.at(number).state == PlayerSettings::stateComputer)
+			h->setPlayerPartner(number, partner);
 	}
 
 	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
@@ -346,7 +371,7 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "ack_kick") {
 				std::string name;
 				if (arg1.empty())
-					c.msg = _("kick acknowlegement cancled: No name given!");
+					c.msg = _("kick acknowledgement cancelled: No name given!");
 				else if (arg2.size())
 					c.msg = _("Wrong use, should be: /ack_kick <name>");
 				else {
@@ -354,7 +379,7 @@ struct HostChatProvider : public ChatProvider {
 						h->kickUser(kickUser, kickReason);
 						return;
 					} else
-						c.msg = _("kick acknowlegement cancled: Wrong name given!");
+						c.msg = _("kick acknowledgement cancelled: Wrong name given!");
 				}
 				kickUser   = "";
 				kickReason = "";
@@ -412,7 +437,7 @@ struct Client {
 	TCPsocket sock;
 	Deserializer deserializer;
 	uint8_t playernum;
-	uint8_t usernum;
+	int16_t usernum;
 	std::string build_id;
 	md5_checksum syncreport;
 	bool syncreport_arrived;
@@ -616,19 +641,22 @@ void NetHost::run(bool const autorun)
 
 		loaderUI.step(_("Preparing game"));
 
-		uint8_t const pn = d->settings.playernum + 1;
 		d->game = &game;
 		game.set_game_controller(this);
 		Interactive_GameBase * igb;
-		if (0 < pn and pn <= UserSettings::highestPlayernum())
+		// If our player is in shared kingdom mode - set the iabase accordingly.
+		uint8_t pn = d->settings.playernum + 1;
+		if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
+			if (d->settings.players.at(d->settings.playernum).partner > 0)
+				pn = d->settings.players.at(d->settings.playernum).partner;
 			igb =
 				new Interactive_Player
 					(game, g_options.pull_section("global"), pn, false, true);
-		else if (!autorun)
+		} else if (!autorun) {
 			igb =
 				new Interactive_Spectator
 					(*d->game, g_options.pull_section("global"), true);
-		else
+		} else
 			igb =
 				new Interactive_DServer
 					(*d->game, g_options.pull_section("global"));
@@ -655,7 +683,9 @@ void NetHost::run(bool const autorun)
 		game.run
 			(loaderUI,
 			 d->settings.savegame ?
-			 Widelands::Game::Loaded : Widelands::Game::NewNonScenario);
+			 Widelands::Game::Loaded
+			 : d->settings.scenario ?
+			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
 #if HAVE_GGZ
 		// if this is a ggz game, tell the metaserver that the game is done.
 		if (use_ggz)
@@ -778,7 +808,7 @@ void NetHost::send(ChatMessage msg)
 			s.Unsigned8(1);
 			s.String(msg.recipient);
 		} else { //find the recipient
-			uint32_t i = 0;
+			uint16_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
 				UserSettings const & user = d->settings.users.at(i);
 				if (user.name == msg.recipient)
@@ -792,7 +822,7 @@ void NetHost::send(ChatMessage msg)
 							("WARNING: user was found but no client is connected to "
 							 "it!\n");
 						break;
-					} else if (j->usernum == i) {
+					} else if (j->usernum == static_cast<int16_t>(i)) {
 						s.Signed16(msg.playern);
 						s.String(msg.sender);
 						s.String(msg.msg);
@@ -835,7 +865,7 @@ void NetHost::send(ChatMessage msg)
 		else if (d->localplayername == msg.sender)
 			d->chat.receive(msg);
 		else { // host is not the sender -> get sender
-			uint32_t i = 0;
+			uint16_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
 				UserSettings const & user = d->settings.users.at(i);
 				if (user.name == msg.sender)
@@ -844,7 +874,7 @@ void NetHost::send(ChatMessage msg)
 			if (i < d->settings.users.size()) {
 				uint32_t j = 0;
 				for (; j < d->clients.size(); ++j)
-					if (d->clients.at(j).usernum == i)
+					if (d->clients.at(j).usernum == static_cast<int16_t>(i))
 						break;
 				if (j < d->clients.size())
 					s.send(d->clients.at(j).sock);
@@ -878,7 +908,7 @@ void NetHost::kickUser(std::string name, std::string reason)
 	}
 
 	// Search for the user
-	uint32_t i = 0;
+	uint16_t i = 0;
 	uint32_t client = 0;
 	for (; i < d->settings.users.size(); ++i) {
 		UserSettings const & user = d->settings.users.at(i);
@@ -887,7 +917,7 @@ void NetHost::kickUser(std::string name, std::string reason)
 	}
 	if (i < d->settings.users.size()) {
 		for (; client < d->clients.size(); ++client)
-			if (d->clients.at(client).usernum == i)
+			if (d->clients.at(client).usernum == static_cast<int16_t>(i))
 				break;
 		if (client < d->clients.size())
 			i = d->clients.at(client).playernum;
@@ -972,14 +1002,14 @@ void NetHost::setMap
 
 	while (oldplayers > maxplayers) {
 		--oldplayers;
-		for (uint32_t i = 1; i < d->settings.users.size(); ++i)
+		for (uint16_t i = 1; i < d->settings.users.size(); ++i)
 			if (d->settings.users.at(i).position == oldplayers) {
 				d->settings.users.at(i).position = UserSettings::none();
 
 				// for local settings
 				uint32_t j = 0;
 				for (; j < d->clients.size(); ++j)
-					if (d->clients.at(j).usernum == i)
+					if (d->clients.at(j).usernum == static_cast<int16_t>(i))
 						break;
 				d->clients.at(j).playernum = UserSettings::none();
 
@@ -1000,6 +1030,7 @@ void NetHost::setMap
 		player.tribe                = d->settings.tribes.at(0).name;
 		player.initialization_index = 0;
 		player.team = 0;
+		player.partner = 0;
 		++oldplayers;
 	}
 
@@ -1285,12 +1316,32 @@ void NetHost::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	broadcast(s);
 }
 
+void NetHost::setPlayerPartner(uint8_t number, uint8_t partner)
+{
+	if (number >= d->settings.players.size())
+		return;
+	d->settings.players.at(number).partner = partner;
+	
+	// Broadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
+	s.Unsigned8(number);
+	writeSettingPlayer(s, number);
+	broadcast(s);
+
+	log("Player %u has Partner %u\n", number, partner);
+}
+
 void NetHost::setMultiplayerGameSettings()
 {
 	d->settings.scenario = false;
 	d->settings.multiplayer = true;
 }
 
+void NetHost::setScenario(bool is_scenario)
+{
+	d->settings.scenario = is_scenario;
+}
 
 uint32_t NetHost::realSpeed()
 {
@@ -1326,6 +1377,7 @@ void NetHost::writeSettingMap(SendPacket & packet)
 	packet.String(d->settings.mapname);
 	packet.String(d->settings.mapfilename);
 	packet.Unsigned8(d->settings.savegame ? 1 : 0);
+	packet.Unsigned8(d->settings.scenario ? 1 : 0);
 }
 
 void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
@@ -1338,6 +1390,7 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.String(player.ai);
 	packet.Unsigned8(static_cast<uint8_t>(player.ready));
 	packet.Unsigned8(player.team);
+	packet.Unsigned8(player.partner);
 }
 
 void NetHost::writeSettingAllPlayers(SendPacket & packet)
@@ -1792,18 +1845,12 @@ void NetHost::handle_network ()
 		peer.playernum = UserSettings::notConnected();
 		peer.syncreport_arrived = false;
 		peer.desiredspeed = 1000;
+		peer.usernum = -1; // == no user assigned for now.
 		d->clients.push_back(peer);
 
 		// Now we wait for the client to say Hi in the right language,
 		// unless the game has already started
 		if (d->game) {
-			// the following lines are needed to avoid segfaults in
-			// disconnectClient
-			UserSettings newuser;
-			newuser.name = _("New User"); // shown in later disconnect msg.
-			d->clients.rbegin()->usernum = d->settings.users.size();
-			d->settings.users.push_back(newuser);
-
 			disconnectClient
 				(d->clients.size() - 1, _("The game has already started."));
 		}
@@ -1915,6 +1962,12 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		}
 		break;
 
+	case NETCMD_SETTING_CHANGEPARTNER:
+		if (!d->game) {
+			setPlayerPartner(client.playernum, r.Unsigned8());
+		}
+		break;
+
 	case NETCMD_SETTING_CHANGEPOSITION:
 		if (!d->game) {
 			uint8_t const pos = r.Unsigned8();
@@ -1985,12 +2038,21 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			("[Host] client %u (%u) sent player command %i for %i, time = %i\n",
 			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
 		recvClientTime(i, time);
-		if (plcmd.sender() != client.playernum + 1)
+		if 
+			((d->settings.players[client.playernum].partner > 0
+			  &&
+			  d->settings.players[client.playernum].partner != plcmd.sender())
+			 ||
+			 (d->settings.players[client.playernum].partner == 0
+			  &&
+			  plcmd.sender() != client.playernum + 1))
+		{
 			throw DisconnectException
 				(_
 				 	("Client %u (%u) sent a playercommand (%i) for a different "
 				 	 "player (%i)."),
 				 i, client.playernum, plcmd.id(), plcmd.sender());
+		}
 		sendPlayerCommand(plcmd);
 	} break;
 
@@ -2132,29 +2194,33 @@ void NetHost::disconnectClient
 		return;
 	}
 
-	sendSystemChat
-		(_("%s has left the game (%s)"),
-		 d->settings.users.at(client.usernum).name.c_str(),
-		 reason.c_str());
+	// If the client was completely connected before the disconnect, free the
+	// user settings and send changes to the clients
+	if (client.usernum >= 0) {
+		sendSystemChat
+			(_("%s has left the game (%s)"),
+			 d->settings.users.at(client.usernum).name.c_str(),
+			 reason.c_str());
+		d->settings.users.at(client.usernum).name     = std::string();
+		d->settings.users.at(client.usernum).position =
+			UserSettings::notConnected();
+			client.playernum = UserSettings::notConnected();
 
-	d->settings.users.at(client.usernum).name     = std::string();
-	d->settings.users.at(client.usernum).position =
-		UserSettings::notConnected();
-	client.playernum = UserSettings::notConnected();
-
-
-	// Broadcast the user changes to everybody
-	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_USER);
-	s.Unsigned32(client.usernum);
-	writeSettingUser(s, client.usernum);
-	broadcast(s);
+		// Broadcast the user changes to everybody
+		SendPacket s;
+		s.Unsigned8(NETCMD_SETTING_USER);
+		s.Unsigned32(client.usernum);
+		writeSettingUser(s, client.usernum);
+		broadcast(s);
+	} else
+		sendSystemChat
+			(_("Unknown user has left the game (%s)"), reason.c_str());
 
 	log("[Host]: disconnectClient(%u, %s)\n", number, reason.c_str());
 
 	if (client.sock) {
 		if (sendreason) {
-			s.reset();
+			SendPacket s;
 			s.Unsigned8(NETCMD_DISCONNECT);
 			s.String(reason);
 			s.send(client.sock);

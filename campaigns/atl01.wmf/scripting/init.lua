@@ -9,17 +9,16 @@ use("aux", "ui")
 
 use("map", "water_rising")
 
--- TODO: document Set class
--- TODO: remove table_unique 
-
 -- ===================
 -- Constants & Config
 -- ===================
 set_textdomain("scenario_atl01.wmf")
 
-plr = wl.game.Player(1)
-first_tower_field = wl.map.Field(94, 149)
-second_tower_field = wl.map.Field(79, 150)
+game = wl.Game()
+map = game.map
+p1 = game.players[1]
+first_tower_field = map:get_field(94, 149)
+second_tower_field = map:get_field(79, 150)
 
 use("map", "texts")
 
@@ -34,7 +33,7 @@ function msg_box(i)
       i.field = nil -- Otherwise message box jumps back
    end
 
-   plr:message_box(i.title, i.body, i)
+   p1:message_box(i.title, i.body, i)
 
    sleep(130)
 end
@@ -48,7 +47,7 @@ end
 
 -- Add an objective
 function add_obj(o)
-   return plr:add_objective(o.name, o.title, o.body)
+   return p1:add_objective(o.name, o.title, o.body)
 end
 
 
@@ -56,14 +55,15 @@ end
 -- Initialization
 -- ===============
 function initialize()
-   plr:allow_buildings("all")
+   p1:allow_buildings("all")
 
    -- A default headquarters
    use("tribe_atlanteans", "sc00_headquarters_medium")
-   init.func(plr) -- defined in sc00_headquarters_medium
+   init.func(p1) -- defined in sc00_headquarters_medium
+   set_textdomain("scenario_atl01.wmf")
 
    -- Place some buildings
-   prefilled_buildings(plr,
+   prefilled_buildings(p1,
       {"high_tower", first_tower_field.x, first_tower_field.y, 
          soldiers = { [{0,0,0,0}] = 1 }
       },
@@ -91,7 +91,7 @@ function build_environment()
    msg_boxes(first_briefing_messages)
    local o = add_obj(obj_build_environment)
    
-   while not check_for_buildings(plr, {
+   while not check_for_buildings(p1, {
       woodcutters_house = 3,
       foresters_house = 3,
       quarry = 1,
@@ -104,10 +104,10 @@ end
 function leftover_buildings()
    -- All fields with left over buildings
    local lob_fields = Set:new{
-      wl.map.Field( 59, 86),
-      wl.map.Field( 72, 89),
-      wl.map.Field(111,137),
-      wl.map.Field(121,144),
+      map:get_field( 59, 86),
+      map:get_field( 72, 89),
+      map:get_field(111,137),
+      map:get_field(121,144),
    }
 
    local msgs = {
@@ -118,7 +118,7 @@ function leftover_buildings()
 
    while lob_fields.size > 0 and #msgs > 0 do
       for f in lob_fields:items() do
-         if plr:sees_field(f) then
+         if p1:sees_field(f) then
             scroll_smoothly_to(f)
 
             msg_boxes(msgs[1])
@@ -133,18 +133,18 @@ function leftover_buildings()
 end
 
 
-wr = WaterRiser:new(wl.map.Field(92,19))
+wr = WaterRiser:new(map:get_field(92,19))
 
 -- TODO: remove/reuse this debug function 
 function start_water_rising()
    -- TODO: remove this again
-   plr.see_all = 1
+   p1.see_all = 1
 
    wr:rise(25) -- Rise the water to level 25
 end
+function swr() start_water_rising() end
 
-
--- run(intro)
+run(intro)
 run(leftover_buildings)
 
 

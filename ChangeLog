@@ -1,12 +1,18 @@
 ### Build 16 (until now)
 - Improved and added a lot new animations for workers!
 - Implemented teamview for allied players
+- Implemented shared kingdom mode, where two or more players play the same
+  player.
+- Added two new maps.
+- Added possibility to create and play multiplayer scenarios.
 - Do not show building statistic informations of opposing players anymore
 - Gave foresters more intelligence - now they do not remove young trees to
   replant another anymore and plant the trees that suit the terrain the best.
 - Added host commands like /announce, /kick, ... (type /help in chat window
   to get a list of available commands).
 - Improved defaultAI's behaviour.
+- Added "real" work animations for builders and play "idle" animation, if
+  the builder has nothing to do.
 - Made Empire baracks more useful.
 - Added player number user interface and automatic start position placement in
   random generated maps.
@@ -24,7 +30,8 @@
 - Improved all exisiting campaigns to use lua.
 - Added an interactive "start from no knowledge" tutorial.
 - Added new music tracks.
-- Added winning conditions.
+- Added winning conditions (endless game, autocrat, collectors, land lord,
+  wood gnome).
 - Added basic opengl rendering support.
 - Added many new and improved exisiting translations.
 - Removed unused medic code.
@@ -37,7 +44,14 @@
 - Story Message Boxes are nomore closed by right clicking.
 - Added command line option to tell Widelands where to search for translations.
 - Improved some of the exisiting maps.
-- Fixed bug #615891: Commandline parameters homedir and datadir parsing
+- Improved the "user friendly" compile script and moved it to compile.sh
+- Fixed bug #583985 and #573863: Scout did not work as it was supposed to.
+- Fixed bug #618449: [fetchfromflag] - building dissappeared.
+- Fixed bug #537392: Computerplayer does not adhere to currently allowed
+  buildings.
+- Fixed bug #547090: Make barbarian weaving mill not buildable.
+- Fixed bug #577891: Make atlantean small tower less strong.
+- Fixed bug #615891: Commandline parameters homedir and datadir parsing.
 - Fixed bug #554290: GGZ game hosting on windows was not working before.
 - Fixed bug #533245: Buildings statistics were not calculated correctly.
 - Fixed some filesystem bugs. 

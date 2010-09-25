@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-08-24 17:33+0000\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -212,7 +212,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/conf:210
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:11
 msgid ""
 "Citadel village"
 msgstr ""
@@ -515,7 +515,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/conf:209
-#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:11
 msgid ""
 "Headquarters medium"
 msgstr ""
@@ -663,6 +663,11 @@ msgstr ""
 #: ../../tribes/barbarians/conf:126
 msgid ""
 "Miner"
+msgstr ""
+
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
+msgid ""
+"Not enough space"
 msgstr ""
 
 #: ../../tribes/barbarians/strongbeer/conf:1
@@ -1049,6 +1054,13 @@ msgstr ""
 #: ../../tribes/barbarians/conf:104
 msgid ""
 "Soldier"
+msgstr ""
+
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:92
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
 msgstr ""
 
 #: ../../tribes/barbarians/conf:129

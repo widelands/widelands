@@ -11,7 +11,7 @@
 function _check_for_region(plr, which, region)
    local carr = {}
    for idx,f in ipairs(region) do
-      if f.immovable and f.immovable.player == plr then
+      if f.immovable and f.immovable.owner == plr then
          if carr[f.immovable.name] == nil then
             carr[f.immovable.name] = 1
          else
@@ -40,7 +40,7 @@ end
 --
 --    .. code-block:: lua
 --
---       check_for_buildings(wl.game.Player(1), {lumberjacks_hut=2, quarry=1})
+--       check_for_buildings(wl.Game().players[1], {lumberjacks_hut=2, quarry=1})
 --
 --    :arg plr: Player to check for
 --    :type plr: :class:`wl.game.Player`

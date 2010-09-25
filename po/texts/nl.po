@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-05-28 13:56+0000\n"
-"Last-Translator: PliniusNeo <Unknown>\n"
+"PO-Revision-Date: 2010-06-06 20:54+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-29 03:47+0000\n"
+"X-Launchpad-Export-Date: 2010-06-07 03:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Netherlands\n"
 "X-Poedit-Language: Dutch\n"
@@ -765,6 +765,7 @@ msgstr ""
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
+"In het berichten scherm zijn de volgende extra sneltoetsen beschikbaar:"
 
 #: ../../txts/README:9
 #: ../../txts/editor_readme:7
@@ -853,7 +854,7 @@ msgstr "Musici"
 
 #: ../../txts/README:55
 msgid "N               Toggle messages ('news')"
-msgstr ""
+msgstr "N               Zet berichten aan ('nieuws')"
 
 #: ../../txts/developers:150
 msgid ""
@@ -1410,6 +1411,13 @@ msgid ""
 "lands around you and face enemies who are trying to rule the world just like "
 "you."
 msgstr ""
+"Widelands is een strategiespel dat mikt op een gameplay die lijkt op die van "
+"Settlers II van BlueByte.<br>In dit spel begin je met een klein stuk land "
+"met niets meer dan een paar nuttige grondstoffen. Door deze te gebruiken kan "
+"je een rijk bouwen met vele duizenden inwoners. Op je weg naar dit doel, zul "
+"je een economische infrastructuur op moeten zetten, het land rond je moeten "
+"ontdekken en de confrontatie aan moeten gaan met vijanden die net als jij de "
+"wereld willen regeren."
 
 #: ../../txts/README:22
 msgid ""

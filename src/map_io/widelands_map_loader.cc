@@ -92,7 +92,12 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 		p.Pre_Read(m_fs, &m_map, !scenario);
 	}
 	// No scripting/init.lua file -> not playable as scenario
-	m_map.set_as_scenario_playable(m_fs.FileExists("scripting/init.lua"));
+	Map::ScenarioTypes m = Map::NO_SCENARIO;
+	if (m_fs.FileExists("scripting/init.lua"))
+		m |= Map::SP_SCENARIO;
+	if (m_fs.FileExists("scripting/multiplayer_init.lua"))
+		m |= Map::MP_SCENARIO;
+	m_map.set_scenario_types(m);
 
 	set_state(STATE_PRELOADED);
 

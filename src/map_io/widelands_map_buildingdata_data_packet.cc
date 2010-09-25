@@ -398,7 +398,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 							if
 								(warehouse.m_next_worker_without_cost_spawn[i]
 								 !=
-								 Never())
+								 static_cast<uint32_t>(Never()))
 							{
 								warehouse.molog
 									("read_warehouse: "
@@ -408,7 +408,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 							assert
 								(warehouse.m_next_worker_without_cost_spawn[i]
 								 ==
-								 Never());
+								 static_cast<uint32_t>(Never()));
 							warehouse.m_next_worker_without_cost_spawn[i] =
 								next_spawn;
 							break;
@@ -445,7 +445,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 							if
 								(warehouse.m_next_worker_without_cost_spawn[i]
 								 !=
-								 Never())
+								 static_cast<uint32_t>(Never()))
 								throw game_data_error
 									(_
 									 	("%s %u has a next_spawn time for worker type "
@@ -1098,7 +1098,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 		for (uint8_t i = worker_types_without_cost.size(); i;) {
 			uint32_t const next_spawn =
 				warehouse.m_next_worker_without_cost_spawn[--i];
-			if (next_spawn != Never()) {
+			if (next_spawn != static_cast<uint32_t>(Never())) {
 				fw.String
 					(tribe.get_worker_descr(tribe.worker_types_without_cost().at(i))
 					 ->name());

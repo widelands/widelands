@@ -119,8 +119,8 @@ public:
 	{
 		return m_carried_item.get(egbase);
 	}
-	void set_carried_item(Game &, WareInstance *);
-	WareInstance * fetch_carried_item(Game &);
+	void set_carried_item(Editor_Game_Base &, WareInstance *);
+	WareInstance * fetch_carried_item(Editor_Game_Base &);
 
 	void schedule_incorporate(Game &);
 	void incorporate(Game &);
@@ -175,7 +175,7 @@ public:
 		 uint8_t attempts, uint8_t radius,
 		 std::string const & subcommand);
 
-	void start_task_scout(Game &, uint32_t duration);
+	void start_task_scout(Game &, uint16_t, uint32_t);
 
 protected:
 	void draw_inner(Editor_Game_Base const &, RenderTarget &, Point) const;

@@ -31,22 +31,6 @@ function check_player_defeated(plrs, heading, msg)
 end
 
 -- RST
--- .. function:: valid_players(plrs)
---
---    Fills a list with all valid players currently in game.
---
---    :arg plrs: List the players will be saved to
---
---    :returns: :const:`nil`
-function valid_players(plrs)
-   for i=1,10 do
-      if pcall(wl.game.Player, i) then
-         plrs[#plrs+1] = wl.game.Player(i)
-      end
-   end
-end
-
--- RST
 -- .. function:: count_factions(plrs)
 --
 --    Calculates and returns the number of factions that are still involved in
@@ -72,3 +56,17 @@ function count_factions(plrs)
    end
    return factions
 end
+
+-- RST
+-- .. function:: broadcast(plrs, header, msg[, options])
+--
+--    broadcast a message to all players using
+--    :meth:`~wl.game.Player.send_message`. All parameters are passed
+--    literally.
+function broadcast(plrs, header, msg, goptions)
+   local options = goptions or {}
+   for idx, p in ipairs(plrs) do
+      p:send_message(header, msg, options)
+   end
+end
+
