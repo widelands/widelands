@@ -74,6 +74,7 @@ public:
 	 */
 	int place_immovable(lua_State *);
 	int get_field(lua_State *);
+	int foreach(lua_State *);
 
 	/*
 	 * C methods

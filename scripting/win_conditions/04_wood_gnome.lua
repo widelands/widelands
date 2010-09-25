@@ -45,6 +45,7 @@ return {
 	local _plrpoints = {}
 	local function _calc_points()
       local game = wl.Game()
+      local st = os.clock()
 
 		if _last_time_calculated > game.time - 5000 then
 			return _plrpoints
@@ -71,6 +72,7 @@ return {
 			end
 		end
 		_last_time_calculated = game.time
+      print(("## Calc points took: %f"):format(os.clock() - st))
 		return _plrpoints
 	end
 

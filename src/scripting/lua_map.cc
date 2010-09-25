@@ -776,6 +776,7 @@ const char L_Map::className[] = "Map";
 const MethodType<L_Map> L_Map::Methods[] = {
 	METHOD(L_Map, place_immovable),
 	METHOD(L_Map, get_field),
+	METHOD(L_Map, foreach),
 	{0, 0},
 };
 const PropertyType<L_Map> L_Map::Properties[] = {
@@ -953,6 +954,25 @@ int L_Map::get_field(lua_State * L) {
 		report_error(L, "y coordinate out of range!");
 
 	return to_lua<LuaMap::L_Field>(L, new LuaMap::L_Field(x, y));
+}
+
+/* RST
+	.. method:: foreach(func)
+
+		Calls func for each field on this map. This is significantly faster
+		then iterating the whole map in a loop.
+*/
+int L_Map::foreach(lua_State * L) {
+	luaL_checktype(L, 2, LUA_TFUNCTION);
+	Map & map = get_egbase(L).map();
+
+	for(uint32_t x = 0; x < map.get_width(); x++) {
+		for(uint32_t y = 0; y < map.get_height(); y++) {
+			to_lua<L_Field>(L, new L_Field(x, y));
+			lua_call(L, 1, 0);
+		}
+	}
+	return 0;
 }
 
 /*

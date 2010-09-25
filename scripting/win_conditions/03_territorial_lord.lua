@@ -84,6 +84,9 @@ return {
 			local maxplayerpoints = 0 -- the highest points of a player without team
 			local maxpointsplayer = 0 -- the player
 			local foundcandidate = false
+         local st = os.clock()
+         print(("st: %s"):format(st))
+         
 			_calc_current_landsizes()
 			for idx, p in ipairs(plrs) do
 				local team = p.team
@@ -127,6 +130,9 @@ return {
 			if not foundcandidate then
 				remaining_time = 10
 			end
+         print(("os.clock(): %s"):format(os.clock()))
+         print(("## Calc points took: %f"):format(os.clock() - st))
+         
 		end
 
 		function _send_state()
