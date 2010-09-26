@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-09-05 15:49+0000\n"
-"Last-Translator: Kristin <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-09-25 10:02+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-09-26 04:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: German\n"
 
@@ -183,7 +183,7 @@ msgstr "Trägt Waren über deine Straßen."
 msgid "Castle"
 msgstr "Burg"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Burgdorf"
 
@@ -400,7 +400,7 @@ msgstr "Erntet Mais"
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "normales Hauptquartier"
 
@@ -515,6 +515,10 @@ msgstr "Baut Stein ab."
 #: ../../tribes/atlanteans/conf:116
 msgid "Miner"
 msgstr "Bergarbeiter"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+msgid "Not enough space"
+msgstr "Nicht ausreichend Platz"
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
@@ -855,6 +859,16 @@ msgstr "Räuchert Fleisch und Fisch."
 #: ../../tribes/atlanteans/conf:101
 msgid "Soldier"
 msgstr "Soldat"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Ein paar deiner Startgebäude konnten nicht gesetzt werden, da kein Platz für "
+"sie gefunden wurde. Dadurch bist du benachteiligt und solltest in Betracht "
+"ziehen, die Karte noch einmal mit einer anderen Startbedingung neuzustarten."
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Spiderbreeder"

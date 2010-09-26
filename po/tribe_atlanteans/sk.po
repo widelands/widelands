@@ -6,19 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-06-06 21:07+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-09-25 22:31+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-09-26 04:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid "A special tabard for atlantian soldiers."
-msgstr ""
+msgstr "Špeciálny kabátec pre atlantských vojakov."
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Advanced Shield"
@@ -28,21 +28,23 @@ msgstr "Pokročilý štít"
 msgid ""
 "All atlantean soldiers have to wear the sign of their country on their "
 "chests."
-msgstr ""
+msgstr "Všetci atlantskí vojaci musia na hrudi nosiť znak ich krajiny."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
 "Already one of the best tridents of the Atlanteans. Only used by very good "
 "fighters."
 msgstr ""
+"Jeden z najlepších trojzubcov Atlanťanov. Používajú ho len veľmi dobrí "
+"bojovníci."
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Armoursmith"
-msgstr ""
+msgstr "Kováč zbrojí"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Armoursmithy"
-msgstr ""
+msgstr "Vyhňa na výrobu zbrojí"
 
 #: ../../tribes/atlanteans/conf:27
 msgid "Ashes"
@@ -62,7 +64,7 @@ msgstr "Pekáreň"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Pečie chleba pre robotníkov"
+msgstr "Pečie chlieb pre robotníkov."
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Bakingtray"
@@ -135,15 +137,15 @@ msgstr "Chlieb"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
-msgstr ""
+msgstr "Chová ryby."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "Chová pavúkov pre vlákno."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr ""
+msgstr "Chová silné atlantské kone"
 
 #: ../../tribes/atlanteans/conf:56
 msgid "Buckets"
@@ -167,20 +169,20 @@ msgstr "Nosič"
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr "Nosí veci po tvojich cestách."
+msgstr "Nosí veci po vašich cestách."
 
 #: ../../tribes/atlanteans/conf:138
 #: ../../tribes/atlanteans/conf:155
 msgid "Castle"
 msgstr "Hrad"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:168
 msgid "Charcoal Burner's House"
-msgstr ""
+msgstr "Sídlo uhliara"
 
 #: ../../tribes/atlanteans/conf:147
 msgid "Citadel"
@@ -188,7 +190,7 @@ msgstr "Citadela"
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid "Cloth made out of spideryarn."
-msgstr ""
+msgstr "Látka utkaná z pavúčieho vlákna."
 
 #: ../../tribes/atlanteans/conf:57
 msgid "Coal"
@@ -196,7 +198,7 @@ msgstr "Uhlie"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Coal Mine"
-msgstr "Uholná baňa"
+msgstr "Uhoľná baňa"
 
 #: ../../tribes/atlanteans/conf:131
 msgid "Construction Site"
@@ -212,7 +214,7 @@ msgstr "Kukuričné pole"
 
 #: ../../tribes/atlanteans/conf:34
 msgid "Cornfield harvested"
-msgstr ""
+msgstr "Pozberané kukuričné pole"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Cornfield medium"
@@ -228,25 +230,27 @@ msgstr "Maličké kukuričné pole"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Cornflour"
-msgstr "Kukuřičná múka"
+msgstr "Kukuričná múka"
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
 "Cornflour is produced out of corn and is one of three parts of the atlantian "
 "bread."
 msgstr ""
+"Kukuričná múka sa vyrába z kukurice a je jednou z troch častí atlantského "
+"chleba."
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Crystal Mine"
-msgstr "Krystáľová baňa"
+msgstr "Kryštálová baňa"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr ""
+msgstr "Orezáva čisté kusy žuly z kameňov."
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Obraňuj a panuj!"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Destroyed building"
@@ -262,7 +266,7 @@ msgstr "Objavuje zdroje pre ťažbu."
 
 #: ../../tribes/atlanteans/conf:148
 msgid "Donjon"
-msgstr ""
+msgstr "Donžon"
 
 #: ../../tribes/atlanteans/conf:61
 msgid "Double Trident"
@@ -282,11 +286,11 @@ msgstr "Farmár"
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
-msgstr "Kácá stromy."
+msgstr "Rúbe stromy."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Kliešte na uhlie"
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Fish"
@@ -294,15 +298,15 @@ msgstr "Ryby"
 
 #: ../../tribes/atlanteans/conf:110
 msgid "Fish Breeder"
-msgstr ""
+msgstr "Chovateľ rýb"
 
 #: ../../tribes/atlanteans/conf:172
 msgid "Fish Breeder's House"
-msgstr ""
+msgstr "Sídlo chovateľa rýb"
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
-msgstr ""
+msgstr "Ryby sú jedným z najväčších zdrojov jedla Atlanťanov."
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Fisher"
@@ -310,7 +314,7 @@ msgstr "Rybár"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Fisher's House"
-msgstr ""
+msgstr "Sídlo rybára"
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Fishing Net"
@@ -322,7 +326,7 @@ msgstr "Horár"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Forester's House"
-msgstr ""
+msgstr "Sídlo horára"
 
 #: ../../tribes/atlanteans/conf:149
 #: ../../tribes/atlanteans/conf:156
@@ -343,21 +347,23 @@ msgstr "Zlatá baňa"
 
 #: ../../tribes/atlanteans/conf:66
 msgid "Gold Ore"
-msgstr ""
+msgstr "Zlatá ruda"
 
 #: ../../tribes/atlanteans/conf:68
 msgid "Gold Yarn"
-msgstr ""
+msgstr "Zlaté vlákno"
 
 #: ../../tribes/atlanteans/gold/conf:1
 msgid ""
 "Gold is one of the most valuable materials. Only important things are "
 "garnished with it."
 msgstr ""
+"Zlato je jedným z najhodnotnejších materiálov. Ozdobujú sa ním len dôležité "
+"veci."
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Golden Tabard"
-msgstr ""
+msgstr "Zlatý kabátec"
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Goldweaver"
@@ -381,15 +387,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/farm/conf:22
 msgid "Harvest corn"
-msgstr ""
+msgstr "Zberať kukuricu"
 
 #: ../../tribes/atlanteans/conf:161
 msgid "Headquarters"
 msgstr "Základňa"
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Stredná základňa"
 
 #: ../../tribes/atlanteans/conf:70
 msgid "Heavy Double Trident"
@@ -397,7 +403,7 @@ msgstr "Ťažký dvojitý trojzubec"
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Pomáha nosiť predmety na veľmi využívaných cestách."
 
 #: ../../tribes/atlanteans/conf:141
 msgid "High Tower"
@@ -413,7 +419,7 @@ msgstr "Kôň"
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Horse Breeder"
-msgstr ""
+msgstr "Chovateľ koní"
 
 #: ../../tribes/atlanteans/conf:191
 msgid "Horse Farm"
@@ -421,11 +427,11 @@ msgstr "Stajňa"
 
 #: ../../tribes/atlanteans/conf:114
 msgid "Hunter"
-msgstr "Polovník"
+msgstr "Lovec"
 
 #: ../../tribes/atlanteans/conf:177
 msgid "Hunter's House"
-msgstr ""
+msgstr "Sídlo lovca"
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Hunting Bow"
@@ -437,7 +443,7 @@ msgstr "Železo"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Iron Mine"
-msgstr ""
+msgstr "Železná baňa"
 
 #: ../../tribes/atlanteans/conf:73
 msgid "Iron Ore"
@@ -461,7 +467,7 @@ msgstr "Mäso"
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid "Meat is one food-resource of the Atlanteans."
-msgstr ""
+msgstr "Mäso je jedným zo zdrojov jedla Atlanťanov."
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Milking Tongs"
@@ -491,15 +497,19 @@ msgstr "Ťažiť diamanty"
 
 #: ../../tribes/atlanteans/crystalmine/conf:24
 msgid "Mine quartz"
-msgstr ""
+msgstr "Ťažiť kremeň"
 
 #: ../../tribes/atlanteans/crystalmine/conf:23
 msgid "Mine stone"
-msgstr "Ťažiť kamen"
+msgstr "Ťažiť kameň"
 
 #: ../../tribes/atlanteans/conf:116
 msgid "Miner"
 msgstr "Baník"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+msgid "Not enough space"
+msgstr "Nedostatok miesta"
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
@@ -513,7 +523,7 @@ msgstr "Krompáč"
 msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
-msgstr ""
+msgstr "Krompáče používajú kamenári a baníci. Vyrába ich kováč nástrojov."
 
 #: ../../tribes/atlanteans/conf:81
 msgid "Planks"
@@ -521,7 +531,7 @@ msgstr "Dosky"
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid "Planks are an important build material of the Atlanteans."
-msgstr ""
+msgstr "Dosky sú dôležitým stavebným materiálom Atlanťanov."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -529,7 +539,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/farm/conf:20
 msgid "Plant corn"
-msgstr ""
+msgstr "Sadiť kukuricu"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
@@ -537,20 +547,22 @@ msgstr ""
 
 #: ../../tribes/atlanteans/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Sadí polia."
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
-msgstr "Sadí stromy"
+msgstr "Sadí stromy."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
-msgstr "Vyrába pokročilé štíty"
+msgstr "Vyrábať pokročilé štíty"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:26
 msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
 msgstr ""
+"Vyrábať pokročilé štíty (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -566,11 +578,11 @@ msgstr "Vyrobiť luk"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:34
 msgid "Produce bucket"
-msgstr ""
+msgstr "Vyrobiť vedro"
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
-msgstr ""
+msgstr "Vyrobiť kukuričnú múku"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:33
 msgid "Produce double trident"
@@ -578,7 +590,7 @@ msgstr "Vyrobiť dvojitý trojzubec"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:35
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Vyrobiť kliešte na uhlie"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce fishing net"
@@ -586,7 +598,7 @@ msgstr "Vyrobiť rybársku sieť"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:21
 msgid "Produce golden tabard"
-msgstr ""
+msgstr "Vyrobiť zlatý kabátec"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:37
 msgid "Produce hammer"
@@ -618,7 +630,7 @@ msgstr "Vyrobiť krompáč"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:42
 msgid "Produce saw"
-msgstr "Vyrobiť pilku"
+msgstr "Vyrobiť pílku"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:43
 msgid "Produce scythe"
@@ -634,12 +646,14 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
-msgstr "Vyrába ocelové stíty"
+msgstr "Vyrábať oceľové štíty"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:24
 msgid ""
 "Produce steel shield (only for compatibility with old savegames (build13))"
 msgstr ""
+"Vyrábať oceľové štíty (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:32
 msgid "Produce steel trident"
@@ -647,7 +661,7 @@ msgstr "Vyrobiť oceľový trojzubec"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:20
 msgid "Produce tabard"
-msgstr ""
+msgstr "Vyrobiť kabátec"
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
@@ -655,11 +669,11 @@ msgstr "Vyrába zbroj pre vojakov."
 
 #: ../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "Vyrába látky pre budovy, lode a vojakov."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Vyrába nástroje pre robotníkov."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
@@ -671,7 +685,7 @@ msgstr "Kameňolom"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Quartz"
-msgstr ""
+msgstr "Kremeň"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Resource indicator coal little"
@@ -715,7 +729,7 @@ msgstr "Ukazovateľ zdroja vody"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Saw"
-msgstr "Pilka"
+msgstr "Pílka"
 
 #: ../../tribes/atlanteans/conf:181
 msgid "Sawmill"
@@ -733,7 +747,7 @@ msgstr "Píli drevo na dosky."
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Sawyer"
-msgstr ""
+msgstr "Pilčík"
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Scout"
@@ -741,7 +755,7 @@ msgstr "Prieskumník"
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Scout's House"
-msgstr ""
+msgstr "Sídlo prieskumníka"
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
@@ -778,11 +792,11 @@ msgstr "Malá veža"
 
 #: ../../tribes/atlanteans/smelting_works/conf:24
 msgid "Smelt gold"
-msgstr ""
+msgstr "Taviť zlato"
 
 #: ../../tribes/atlanteans/smelting_works/conf:23
 msgid "Smelt iron"
-msgstr ""
+msgstr "Taviť železo"
 
 #: ../../tribes/atlanteans/conf:118
 msgid "Smelter"
@@ -794,7 +808,7 @@ msgstr "Zlievareň"
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "Taví železo."
 
 #: ../../tribes/atlanteans/smokery/conf:26
 msgid "Smoke fish"
@@ -802,7 +816,7 @@ msgstr "Údiť rybu"
 
 #: ../../tribes/atlanteans/smokery/conf:25
 msgid "Smoke meat"
-msgstr ""
+msgstr "Údiť mäso"
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Smoked fish"
@@ -810,11 +824,11 @@ msgstr "Údená ryba"
 
 #: ../../tribes/atlanteans/conf:86
 msgid "Smoked meat"
-msgstr "Údené maso"
+msgstr "Údené mäso"
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Smoker"
-msgstr ""
+msgstr "Údiar"
 
 #: ../../tribes/atlanteans/conf:183
 msgid "Smokery"
@@ -822,15 +836,25 @@ msgstr "Udiareň"
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
-msgstr "Údi mäso a ryby"
+msgstr "Údi mäso a ryby."
 
 #: ../../tribes/atlanteans/conf:101
 msgid "Soldier"
 msgstr "Vojak"
 
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Niektoré z vašich počiatočných budov nemali dostatok miesta \n"
+"a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie\n"
+"tejto mapy s férovými počiatočnými podmienkami."
+
 #: ../../tribes/atlanteans/conf:120
 msgid "Spiderbreeder"
-msgstr ""
+msgstr "Chovateľ pavúkov"
 
 #: ../../tribes/atlanteans/conf:87
 msgid "Spidercloth"
@@ -838,11 +862,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Spiderfarm"
-msgstr ""
+msgstr "Pavúčia farma"
 
 #: ../../tribes/atlanteans/conf:88
 msgid "Spideryarn"
-msgstr ""
+msgstr "Pavúčie vlákno"
 
 #: ../../tribes/atlanteans/conf:89
 msgid "Steel Shield"
@@ -858,11 +882,11 @@ msgstr "Kameň"
 
 #: ../../tribes/atlanteans/stone/conf:1
 msgid "Stone is one basic build ware type of the Atlanteans."
-msgstr ""
+msgstr "Kameň je jedným zo základných typov tovaru Atlanťanov."
 
 #: ../../tribes/atlanteans/conf:121
 msgid "Stonecutter"
-msgstr "Kamenník"
+msgstr "Kamenár"
 
 #: ../../tribes/atlanteans/conf:151
 msgid "Stronghold"
@@ -870,16 +894,16 @@ msgstr "Opevnenie"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Tabard"
-msgstr ""
+msgstr "Kabátec"
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-msgstr ""
+msgstr "Lovec prináša Atlanťanom čerstvé surové mäso."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
+msgstr "Kosa je nástroj farmárov. Vyrába ju kováč nástrojov."
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
@@ -890,20 +914,24 @@ msgid ""
 "The bakingtray is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"Pekáč je nástroj pekára, každý pekár potrebuje vlastný. Vyrába ho kováč "
+"nástrojov."
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""
 "The fire tongs are the tools of the smelter, working in the smelting works. "
 "They are produced by the toolsmith."
 msgstr ""
+"Kliešte na uhlie sú nástroje zlievača pracujúceho v zlievarni. Vyrába ich "
+"kováč nástrojov."
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
-msgstr ""
+msgstr "Rybár loví chutné ryby."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr ""
+msgstr "Rybársku sieť používa rybár a vyrába ju kováč nástrojov."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -911,25 +939,31 @@ msgid ""
 "and all smiths. Make sure you always got some in reserve! It is produced by "
 "the toolsmith."
 msgstr ""
+"Kladivo je dôležitý nástroj. Potrebuje ho geológ, stavbár a všetci kováči. "
+"Uistite sa, že vždy máte nejaké v rezerve! Vyrába ho kováč nástrojov."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid "These shields are used by the best soldiers of the Atlanteans."
-msgstr ""
+msgstr "Tieto štíty používajú najlepší vojaci Atlanťanov."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
 "These transparent quartz' are used for some exclusive buildings and tools."
 msgstr ""
+"Tieto priehľadné kremene sa používajú na niektoré špeciálne budovy a "
+"nástroje."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid "This bow is used by the atlantian hunter."
-msgstr ""
+msgstr "Tento luk používa atlantský lovec."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
 "This corn is the base of the fine cornflour, that every atlantian baker "
 "needs for a good bread."
 msgstr ""
+"Táto kukurica je základom pre dobrú kukuričnú múku, ktorú potrebuje každý "
+"atlantský pekár na výrobu dobrého chleba."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
@@ -943,19 +977,23 @@ msgstr "Toto je pokročilý trojzubec pre skúsenejších vojakov."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid "This is red iron ore."
-msgstr ""
+msgstr "Toto je červená železná ruda."
 
 #: ../../tribes/atlanteans/smoked_fish/conf:1
 msgid ""
 "This is smoked fish - As no Atlantid likes raw fish, smoking is the most "
 "common way to make it eatable."
 msgstr ""
+"Toto je údená ryba - keďže žiadny Atlanťan nemá rád surové ryby, údenie je "
+"najčastejší spôsob, ako ich urobiť jedlými."
 
 #: ../../tribes/atlanteans/smoked_meat/conf:1
 msgid ""
 "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is "
 "a common way to make it eatable."
 msgstr ""
+"Toto je údené mäso - keďže žiadny Atlanťan nemá rád surové mäso, údenie je "
+"najčastejší spôsob, ako ho urobiť jedlým."
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid "This is the basic weapon for atlantian soldiers."
@@ -970,14 +1008,16 @@ msgid ""
 "This is the most dangerous weapon of the atlantian military. Only the best "
 "of the best soldiers may use it."
 msgstr ""
+"Toto je najnebezpečnejšia zbraň atlantskej armády. Len najlepší z najlepších "
+"vojakov ju smú používať."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid "This is the yellow gold ore."
-msgstr ""
+msgstr "Toto je žltá zlatá ruda."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid "This steel shield is used by experienced soldiers."
-msgstr "Tento oceľový štít je používaný skúsenejšími vojakmi."
+msgstr "Tento oceľový štít používajú skúsení vojaci."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
@@ -996,28 +1036,32 @@ msgstr ""
 msgid ""
 "This wonderful diamonds are used for some exclusive buildings and tools."
 msgstr ""
+"Tieto nádherné diamanty sa používajú pre niektoré špeciálne budovy a "
+"nástroje."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid "This yarn is produced by spiders, which are bred on spiderfarms."
-msgstr ""
+msgstr "Toto vlákno vyrábajú pavúky, ktoré sa chovajú na pavúčich farmách."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid "This yarn, made of gold, is used for weaving exclusive cloth."
-msgstr ""
+msgstr "Toto vlákno vyrobené zo zlata sa používa na tkanie špeciálnej látky."
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
 "To make the fine atlantian steel a hot fire is needed. But a fire of wood "
 "isn't hot enough -this coal brings the needed heat."
 msgstr ""
+"Na výrobu dobrej atlantskej ocele je potrebný horúci oheň. Ale oheň z dreva "
+"nie je dostatočne horúci - toto uhlie zabezpečí potrebné teplo."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Toolsmith"
-msgstr ""
+msgstr "Kováč nástrojov"
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Toolsmithy"
-msgstr ""
+msgstr "Vyhňa nástrojov"
 
 #: ../../tribes/atlanteans/conf:143
 #: ../../tribes/atlanteans/conf:158
@@ -1041,6 +1085,8 @@ msgid ""
 "Trunks are the base for planks, which are used in nearly every building of "
 "the Atlanteans."
 msgstr ""
+"Kmene sú základom pre dosky, ktoré sa používajú na stavbu takmer všetkých "
+"budov Atlanťanov."
 
 #: ../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
@@ -1143,26 +1189,28 @@ msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, for example to make bread."
 msgstr ""
+"Voda je najdôležitejšia látka pre život. Táto voda sa používa pri mnohých "
+"činnostiach, napríklad na výrobu chleba."
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Vyhňa zbraní"
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid "Weapons and Tools are made of iron."
-msgstr "Zbrane a náradie sú vyrobené zo železa."
+msgstr "Zbrane a nástroje sú vyrobené zo železa."
 
 #: ../../tribes/atlanteans/conf:124
 msgid "Weaponsmith"
-msgstr ""
+msgstr "Kováč zbraní"
 
 #: ../../tribes/atlanteans/conf:125
 msgid "Weaver"
-msgstr ""
+msgstr "Tkáč"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Weaving-Mill"
-msgstr ""
+msgstr "Tkací závod"
 
 #: ../../tribes/atlanteans/conf:188
 msgid "Well"
@@ -1174,7 +1222,7 @@ msgstr "Drevorubač"
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Woodcutter's House"
-msgstr ""
+msgstr "Sídlo drevorubača"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:27
 #: ../../tribes/atlanteans/bakery/conf:21
@@ -1212,4 +1260,4 @@ msgstr "Pracuje na stavenisku, aby postavil novú budovu."
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
-msgstr ""
+msgstr "Pracuje hlboko v baniach, aby vyrobil uhlie, železo a zlato."
