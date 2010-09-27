@@ -52,8 +52,6 @@ Building_Window::Building_Window
 	delete m_registry;
 	m_registry = this;
 
-	m_center_mouse = this;
-
 	m_capscache_player_number = 0;
 	m_capsbuttons = 0;
 	m_capscache = 0;
@@ -69,8 +67,6 @@ Building_Window::Building_Window
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 
-	move_to_mouse();
-
 	set_center_panel(vbox);
 	set_think(true);
 
@@ -82,6 +78,8 @@ Building_Window::Building_Window
 	}
 
 	show_workarea();
+
+	set_fastclick_panel(this);
 }
 
 
@@ -124,35 +122,13 @@ void Building_Window::think()
 		 building().get_playercaps() != m_capscache) {
 		m_capsbuttons->free_children();
 		create_capsbuttons(m_capsbuttons);
-		move_inside_parent();
+		move_out_of_the_way();
+		warp_mouse_to_fastclick_panel();
 	}
 
-	if (m_center_mouse) {
-		Point pt(m_center_mouse->get_w() / 2, m_center_mouse->get_h() / 2);
-		UI::Panel * p = m_center_mouse;
-
-		while(p->get_parent() && p != this) {
-			pt = p->to_parent(pt);
-			p = p->get_parent();
-		}
-
-		move_to_mouse(pt);
-
-		m_center_mouse = 0;
-	}
 
 	UI::Window::think();
 }
-
-/**
- * Arrange for the given child panel to be moved under the mouse pointer
- * at the end of the next \ref think
- */
-void Building_Window::set_center_mouse(UI::Panel* panel)
-{
-	m_center_mouse = panel;
-}
-
 
 /**
  * Fill caps buttons into the given box.
@@ -236,7 +212,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				 &Building_Window::toggle_workarea, *this,
 				 _("Hide workarea"));
 			capsbuttons->add(m_toggle_workarea, UI::Box::AlignCenter);
-			set_center_mouse(m_toggle_workarea);
+			set_fastclick_panel(m_toggle_workarea);
 		}
 
 		if (igbase().get_display_flag(Interactive_Base::dfDebug)) {

@@ -209,7 +209,7 @@ private:
 		 const char * picname,
 		 UI::Panel * panel,
 		 const std::string & tooltip_text = std::string());
-	void add_button
+	UI::Button & add_button
 		(UI::Box *,
 		 char const * name,
 		 char const * picname,
@@ -636,7 +636,7 @@ uint32_t FieldActionWindow::add_tab
 }
 
 
-void FieldActionWindow::add_button
+UI::Button & FieldActionWindow::add_button
 	(UI::Box           * const box,
 	 char        const * const name,
 	 char        const * const picname,
@@ -654,6 +654,8 @@ void FieldActionWindow::add_button
 	button.set_repeating(repeating);
 	box->add
 		(&button, UI::Box::AlignTop);
+
+	return button;
 }
 
 /*
