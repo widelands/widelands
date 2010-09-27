@@ -250,6 +250,8 @@ function build_eastern_trainings_area(citadel_field)
    -- add buildwares to the warehouse
    local ts = map:get_field(31,56).immovable
    ts:set_wares(ts.valid_wares)
+   
+   scroll_smoothly_to(citadel_field)
 
    blocker:lift_blocks()
 end
