@@ -64,10 +64,11 @@ struct Window : public NamedPanel {
 	const std::string get_title() const throw() {return m_title;}
 
 	void set_center_panel(Panel * panel);
-	void move_to_mouse();
-	void move_to_mouse(const Point & pt);
+	void move_out_of_the_way();
 	virtual void move_inside_parent();
 	void center_to_parent();
+	void warp_mouse_to_fastclick_panel();
+	void set_fastclick_panel(Panel * p) {m_fastclick_panel = p;}
 
 	bool is_minimal() const throw () {return _is_minimal;}
 	void restore ();
@@ -110,6 +111,7 @@ private:
 	PictureID m_pic_background;
 
 	Panel * m_center_panel;
+	Panel * m_fastclick_panel;
 };
 
 }
