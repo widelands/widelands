@@ -327,29 +327,15 @@ This mainly deals with mouse placement
 void FieldActionWindow::init()
 {
 	center_to_parent(); // override UI::UniqueWindow position
-
-	// Move the window away from the current mouse position, i.e.
-	// where the field is, to allow better view
-	const Point mouse = get_mouse_position();
-	if
-		(0 <= mouse.x and mouse.x < get_w()
-		 and
-		 0 <= mouse.y and mouse.y < get_h())
-	{
-		set_pos
-			(Point(get_x(), get_y())
-			 +
-			 Point
-			 	(0, (mouse.y < get_h() / 2 ? 1 : -1)
-			 	 *
-			 	 get_h()));
-		move_inside_parent();
-	}
+	move_out_of_the_way();
 
 	// Now force the mouse onto the first button
-	// TODO: should be on first tab button if we're building
 	set_mouse_pos
 		(Point(17 + BG_CELL_WIDTH * m_best_tab, m_fastclick ? 51 : 17));
+
+	// Will only do something if we explicitly set another fast click panel
+	// than the first button
+	warp_mouse_to_fastclick_panel();
 }
 
 
@@ -506,11 +492,11 @@ void FieldActionWindow::add_buttons_attack ()
 			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
 			a_box.add(m_attack_box, UI::Box::AlignTop);
 
-			add_button
+			set_fastclick_panel(&add_button
 				(&a_box, "attack",
 				 pic_attack,
 				 &FieldActionWindow::act_attack,
-				 _("Start attack"));
+				 _("Start attack")));
 		}
 	}
 
