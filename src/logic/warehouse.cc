@@ -119,7 +119,8 @@ void WarehouseSupply::add_wares     (Ware_Index const id, uint32_t const count)
 	if (!count)
 		return;
 
-	m_economy->add_wares(id, count);
+	if (m_economy) // No economies in the editor
+		m_economy->add_wares(id, count);
 	m_wares.add(id, count);
 }
 
@@ -131,7 +132,8 @@ void WarehouseSupply::remove_wares  (Ware_Index const id, uint32_t const count)
 		return;
 
 	m_wares.remove(id, count);
-	m_economy->remove_wares(id, count);
+	if (m_economy) // No economies in the editor
+		m_economy->remove_wares(id, count);
 }
 
 
@@ -141,7 +143,8 @@ void WarehouseSupply::add_workers   (Ware_Index const id, uint32_t const count)
 	if (!count)
 		return;
 
-	m_economy->add_workers(id, count);
+	if (m_economy) // No economies in the editor
+		m_economy->add_workers(id, count);
 	m_workers.add(id, count);
 }
 
@@ -156,7 +159,8 @@ void WarehouseSupply::remove_workers(Ware_Index const id, uint32_t const count)
 		return;
 
 	m_workers.remove(id, count);
-	m_economy->remove_workers(id, count);
+	if (m_economy) // No economies in the editor
+		m_economy->remove_workers(id, count);
 }
 
 /// Return the position of the Supply, i.e. the owning Warehouse.
@@ -369,9 +373,9 @@ void Warehouse::load_finish(Editor_Game_Base & egbase) {
 		Ware_Index const worker_index = worker_types_without_cost.at(--i);
 		if
 			(owner().is_worker_type_allowed(worker_index) and
-			 m_next_worker_without_cost_spawn[i] == Never())
+			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(Never()))
 		{
-			if (next_spawn == Never())
+			if (next_spawn == static_cast<uint32_t>(Never()))
 				next_spawn =
 					schedule_act
 						(ref_cast<Game, Editor_Game_Base>(egbase),
@@ -402,47 +406,6 @@ void Warehouse::load_finish(Editor_Game_Base & egbase) {
 	}
 }
 
-void Warehouse::prefill
-	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
-{}
-void Warehouse::postfill
-	(Game                &       game,
-	 uint32_t      const *       ware_types,
-	 uint32_t      const *       worker_types,
-	 Soldier_Counts const * const soldier_counts)
-{
-	Building::postfill(game, ware_types, worker_types, soldier_counts);
-	if (ware_types)
-		for
-			(wl_index_range<Ware_Index> i
-			(Ware_Index::First(), tribe().get_nrwares());
-			 i; ++i, ++ware_types)
-			if (uint32_t const count = *ware_types)
-				insert_wares  (i.current, count);
-	if (worker_types)
-		for
-			(wl_index_range<Ware_Index> i
-			(Ware_Index::First(), tribe().get_nrworkers());
-			 i; ++i, ++worker_types)
-			if (uint32_t const count = *worker_types)
-				insert_workers(i.current, count);
-	if (soldier_counts) {
-		Soldier_Descr const & soldier_descr =
-			ref_cast<Soldier_Descr const, Worker_Descr const>
-				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
-		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
-			Soldier_Strength const ss = i.current->first;
-			for (uint32_t j = i.current->second; j; --j) {
-				Soldier & soldier =
-					ref_cast<Soldier, Worker>
-						(soldier_descr.create(game, owner(), this, get_position()));
-				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
-				incorporate_worker(game, soldier);
-			}
-		}
-	}
-}
-
 void Warehouse::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
@@ -459,44 +422,38 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	// we let warehouse see always for simplicity's sake (since there's
 	// almost always going to be a carrier inside, that shouldn't hurt).
 	Player & player = owner();
-	player.see_area
-		(Area<FCoords>
-		 (egbase.map().get_fcoords(get_position()), vision_range()));
+	if (upcast(Game, game, &egbase)) {
+		player.see_area
+			(Area<FCoords>
+			 (egbase.map().get_fcoords(get_position()), vision_range()));
 
-	{
-		uint32_t const act_time =
+		{
+			uint32_t const act_time =
+				schedule_act(
+					 *game,
+					 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			std::vector<Ware_Index> const & worker_types_without_cost =
+				tribe().worker_types_without_cost();
+
+			for
+				(wl_index_range<uint32_t> i
+				(0, worker_types_without_cost.size());
+				i; ++i)
+				if
+					(owner().is_worker_type_allowed
+						(worker_types_without_cost.at(i.current)))
+					m_next_worker_without_cost_spawn[i.current] = act_time;
+		}
+		// m_next_military_act is not touched in the loading code. Is only needed if
+		// there warehous is created in the game?
+		// I assume it's for the conquer_radius thing
+		m_next_military_act =
 			schedule_act
-				(ref_cast<Game, Editor_Game_Base>(egbase),
-				 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
-		std::vector<Ware_Index> const & worker_types_without_cost =
-			tribe().worker_types_without_cost();
+				(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
 
-		for
-			(wl_index_range<uint32_t> i
-			(0, worker_types_without_cost.size());
-			i; ++i)
-			if
-				(owner().is_worker_type_allowed
-				 	(worker_types_without_cost.at(i.current)))
-				m_next_worker_without_cost_spawn[i.current] = act_time;
-	}
-	// m_next_military_act is not touched in the loading code. Is only needed if
-	// there warehous is created in the game?
-	// I assume it's for the conquer_radius thing
-	m_next_military_act =
-		schedule_act
-			(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
-
-	m_next_stock_remove_act =
-		schedule_act
-			(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
-
-	if (uint32_t const conquer_radius = get_conquers())
-		ref_cast<Game, Editor_Game_Base>(egbase).conquer_area
-			(Player_Area<Area<FCoords> >
-			 	(player.player_number(),
-			 	 Area<FCoords>
-			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
+		m_next_stock_remove_act =
+			schedule_act
+				(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
 
 	log("Message: adding (wh) (%s) %i \n", type_name(), player.player_number());
 	char message[2048];
@@ -509,6 +466,15 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		 "warehouse",
 		 descname(),
 		 message);
+	}
+
+	if (uint32_t const conquer_radius = get_conquers())
+		egbase.conquer_area
+			(Player_Area<Area<FCoords> >
+			 	(player.player_number(),
+			 	 Area<FCoords>
+			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
+
 }
 
 
@@ -525,13 +491,15 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 	while (m_incorporated_workers.size()) {
 		//  If the game ends and this worker has been created before this
 		//  warehouse, it might already be deleted. So do not try and free him
-		if (upcast(Worker, worker, m_incorporated_workers.begin()->get(egbase)))
-			worker->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+		if (upcast(Worker, worker, m_incorporated_workers.begin()->get(egbase))) {
+			if (upcast(Game, game, &egbase))
+				worker->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+		}
 		m_incorporated_workers.erase(m_incorporated_workers.begin());
 	}
 	Map & map = egbase.map();
 	if (const uint32_t conquer_radius = get_conquers())
-		ref_cast<Game, Editor_Game_Base>(egbase).unconquer_area
+		egbase.unconquer_area
 			(Player_Area<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
@@ -682,7 +650,6 @@ std::vector<const Soldier *> Warehouse::get_soldiers
 /// Magically create wares in this warehouse. Updates the economy accordingly.
 void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
 {
-	assert(get_economy());
 	m_supply->add_wares(id, count);
 }
 
@@ -690,7 +657,6 @@ void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
 /// Magically destroy wares.
 void Warehouse::remove_wares(Ware_Index const id, uint32_t const count)
 {
-	assert(get_economy());
 	m_supply->remove_wares(id, count);
 }
 
@@ -698,7 +664,6 @@ void Warehouse::remove_wares(Ware_Index const id, uint32_t const count)
 /// Magically create workers in this warehouse. Updates the economy accordingly.
 void Warehouse::insert_workers(Ware_Index const id, uint32_t const count)
 {
-	assert(get_economy());
 	m_supply->add_workers(id, count);
 }
 
@@ -706,7 +671,6 @@ void Warehouse::insert_workers(Ware_Index const id, uint32_t const count)
 /// Magically destroy workers.
 void Warehouse::remove_workers(Ware_Index const id, uint32_t const count)
 {
-	assert(get_economy());
 	m_supply->remove_workers(id, count);
 }
 
@@ -812,12 +776,12 @@ Worker & Warehouse::launch_worker
  * This is the opposite of launch_worker: destroy the worker and add the
  * appropriate ware to our warelist
  */
-void Warehouse::incorporate_worker(Game & game, Worker & w)
+void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 {
 	assert(w.get_owner() == &owner());
 
-	if (WareInstance * const item = w.fetch_carried_item(game))
-		incorporate_item(game, *item); //  rescue an item
+	if (WareInstance * const item = w.fetch_carried_item(egbase))
+		incorporate_item(egbase, *item); //  rescue an item
 
 	m_supply->add_workers(tribe().worker_index(w.name().c_str()), 1);
 
@@ -827,16 +791,18 @@ void Warehouse::incorporate_worker(Game & game, Worker & w)
 	//  FIXME with the experience (and possibly other data that must survive)
 	//  FIXME may be kept.
 	if (dynamic_cast<Carrier const *>(&w)) {
-		w.remove(game);
+		w.remove(egbase);
 		return;
 	}
 
-	sort_worker_in(game, w);
+	sort_worker_in(egbase, w);
 	w.set_location(0); //  no longer in an economy
-	w.reset_tasks(game);
 
-	//  Bind the worker into this house, hide him on the map.
-	w.start_task_idle(game, 0, -1);
+	if (upcast(Game, game, &egbase)) {
+		//  Bind the worker into this house, hide him on the map.
+		w.reset_tasks(*game);
+		w.start_task_idle(*game, 0, -1);
+	}
 }
 
 
@@ -903,10 +869,10 @@ void Warehouse::do_launch_item(Game & game, WareInstance & item)
 
 
 /// Swallow the item, adding it to out inventory.
-void Warehouse::incorporate_item(Game & game, WareInstance & item)
+void Warehouse::incorporate_item(Editor_Game_Base & egbase, WareInstance & item)
 {
 	m_supply->add_wares(item.descr_index(), 1);
-	return item.destroy(game);
+	return item.destroy(egbase);
 }
 
 
@@ -1176,7 +1142,7 @@ void Warehouse::enable_spawn
 	assert
 		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
 		 ==
-		 Never());
+		 static_cast<uint32_t>(Never()));
 	m_next_worker_without_cost_spawn[worker_types_without_cost_index] =
 		schedule_act(game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 }
@@ -1185,7 +1151,7 @@ void Warehouse::disable_spawn(uint8_t const worker_types_without_cost_index)
 	assert
 		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
 		 !=
-		 Never());
+		 static_cast<uint32_t>(Never()));
 	m_next_worker_without_cost_spawn[worker_types_without_cost_index] = Never();
 }
 

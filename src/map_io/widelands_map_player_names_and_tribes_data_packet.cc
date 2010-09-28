@@ -27,7 +27,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 Map_Player_Names_And_Tribes_Data_Packet::
@@ -63,15 +63,16 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 	try {
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_int("packet_version");
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version <= CURRENT_PACKET_VERSION) {
 			Player_Number const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				Section & s = prof.get_safe_section(buffer);
-				map->set_scenario_player_name (p, s.get_string("name",  ""));
-				map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
-				map->set_scenario_player_ai   (p, s.get_string("ai",    ""));
+				map->set_scenario_player_name (p, s.get_string ("name",   ""));
+				map->set_scenario_player_tribe(p, s.get_string ("tribe",  ""));
+				map->set_scenario_player_ai   (p, s.get_string ("ai",     ""));
+				map->set_player_partner       (p, s.get_natural("partner", 0));
 			}
 		} else
 			throw game_data_error
@@ -98,9 +99,10 @@ throw (_wexception)
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
 		Section & s = prof.create_section(buffer);
-		s.set_string("name",  map.get_scenario_player_name (p));
-		s.set_string("tribe", map.get_scenario_player_tribe(p));
-		s.set_string("ai",    map.get_scenario_player_ai   (p));
+		s.set_string ("name",    map.get_scenario_player_name (p));
+		s.set_string ("tribe",   map.get_scenario_player_tribe(p));
+		s.set_string ("ai",      map.get_scenario_player_ai   (p));
+		s.set_int    ("partner", map.get_player_partner       (p));
 	}
 
 	prof.write("player_names", false, fs);

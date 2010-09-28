@@ -26,6 +26,9 @@
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 
+#include "factory.h"
+
+Factory & get_factory(lua_State *);
 Widelands::Game & get_game(lua_State *);
 Widelands::Editor_Game_Base & get_egbase(lua_State *);
 Widelands::Map_Map_Object_Loader * get_mol(lua_State *);

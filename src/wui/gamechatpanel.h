@@ -52,6 +52,7 @@ struct GameChatPanel :
 
 	std::string const & get_edit_text() const {return editbox.text();}
 	void set_edit_text(std::string const & text) {editbox.setText(text);}
+	void set_bg_color(RGBColor bgc) {chatbox.set_bg_color(bgc);}
 
 	void focusEdit();
 

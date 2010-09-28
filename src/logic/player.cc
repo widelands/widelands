@@ -286,7 +286,7 @@ Flag * Player::build_flag(Coords const c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
-		return new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+		return new Flag(egbase(), *this, c);
 	return 0;
 }
 
@@ -307,9 +307,9 @@ Flag & Player::force_flag(FCoords const c) {
 	while (mr.advance(map));
 
 	//  Make sure that the player owns the area around.
-	ref_cast<Game, Editor_Game_Base>(egbase()).conquer_area_no_building
+	egbase().conquer_area_no_building
 		(Player_Area<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
-	return *new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+	return *new Flag(egbase(), *this, c);
 }
 
 /*
@@ -382,9 +382,7 @@ Road & Player::force_road(Path const & path) {
 Building & Player::force_building
 	(Coords                const location,
 	 Building_Index        const idx,
-	 uint32_t      const *       ware_counts,
-	 uint32_t      const *       worker_counts,
-	 Soldier_Counts const &       soldier_counts)
+	 bool                  constructionsite)
 {
 	Map & map = egbase().map();
 	FCoords c[4]; //  Big buildings occupy 4 locations.
@@ -405,7 +403,7 @@ Building & Player::force_building
 		for (size_t i = 0; i < nr_locations; ++i) {
 
 			//  Make sure that the player owns the area around.
-			ref_cast<Game, Editor_Game_Base>(egbase()).conquer_area_no_building
+			egbase().conquer_area_no_building
 				(Player_Area<Area<FCoords> >
 				 	(player_number(), Area<FCoords>(c[i], 1)));
 
@@ -413,29 +411,31 @@ Building & Player::force_building
 				immovable->remove(egbase());
 		}
 	}
-	return
-		descr.create
-		(egbase(), *this, c[0], false, ware_counts,
-		 worker_counts, &soldier_counts);
+
+	if (constructionsite)
+		return egbase().warp_constructionsite(c[0], m_plnum, idx);
+	else
+		return descr.create (egbase(), *this, c[0], false);
 }
 
 
 /*
 ===============
-Place a construction site, checking that it's legal to do so.
+Place a construction site or building, checking that it's legal to do so.
 ===============
 */
-void Player::build(Coords c, Building_Index const idx)
+Building * Player::build
+	(Coords c, Building_Index const idx, bool constructionsite)
 {
 	int32_t buildcaps;
 
 	// Validate building type
 	if (not (idx and idx < tribe().get_nrbuildings()))
-		return;
+		return 0;
 	Building_Descr const & descr = *tribe().get_building_descr(idx);
 
 	if (!descr.is_buildable())
-		return;
+		return 0;
 
 
 	// Validate build position
@@ -445,14 +445,18 @@ void Player::build(Coords c, Building_Index const idx)
 
 	if (descr.get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE))
-			return;
+			return 0;
 	} else if
 		((buildcaps & BUILDCAPS_SIZEMASK)
 		 <
 		 descr.get_size() - BaseImmovable::SMALL + 1)
-		return;
+		return 0;
 
-	egbase().warp_constructionsite(c, m_plnum, idx);
+	if (constructionsite)
+		return &egbase().warp_constructionsite(c, m_plnum, idx);
+	else {
+		return &descr.create(egbase(), *this, c, false);
+	}
 }
 
 

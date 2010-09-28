@@ -41,12 +41,14 @@
 
 using namespace Widelands;
 
+namespace LuaMap {
+
 /* RST
 :mod:`wl.map`
 =============
 
 .. module:: wl.map
-   :synopsis: Provides access on maps and fields
+   :synopsis: Provides access to Fields and Objects on the map
 
 .. moduleauthor:: The Widelands development team
 
@@ -108,8 +110,8 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
  */
 int _WorkerEmployer::set_workers(lua_State * L)
 {
-	Game & g = get_game(L);
-	PlayerImmovable * pi = get(L, g);
+	Editor_Game_Base & egbase = get_egbase(L);
+	PlayerImmovable * pi = get(L, egbase);
 	const Tribe_Descr & tribe = pi->owner().tribe();
 
 	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
@@ -148,7 +150,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 				{
 					Ware_Index i = tribe.worker_index((*w.current)->descr().name());
 					if(i == sp->first) {
-						const_cast<Worker *>(*w.current)->remove(g);
+						const_cast<Worker *>(*w.current)->remove(egbase);
 						++d;
 						break;
 					}
@@ -156,7 +158,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 			}
 		} else if (d > 0) {
 			for ( ; d; --d)
-				if (_new_worker(*pi, g, wdes))
+				if (_new_worker(*pi, egbase, wdes))
 						return report_error(L, "No space left for this worker");
 		}
 	}
@@ -165,7 +167,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 
 int _WorkerEmployer::get_workers(lua_State * L)
 {
-	PlayerImmovable * pi = get(L, get_game(L));
+	PlayerImmovable * pi = get(L, get_egbase(L));
 	Tribe_Descr const & tribe = pi->owner().tribe();
 
 	bool return_number = false;
@@ -209,7 +211,7 @@ int _WorkerEmployer::get_workers(lua_State * L)
 }
 
 int _WorkerEmployer::get_valid_workers(lua_State * L) {
-	PlayerImmovable * pi = get(L, get_game(L));
+	PlayerImmovable * pi = get(L, get_egbase(L));
 	Tribe_Descr const & tribe = pi->owner().tribe();
 
 	WorkersMap valid_workers = _valid_workers(*pi);
@@ -229,13 +231,13 @@ int _WorkerEmployer::get_valid_workers(lua_State * L) {
  * _SoldierEmployer
  */
 int _SoldierEmployer::get_max_soldiers(lua_State * L) {
-	lua_pushuint32(L, get_sc(L, get_game(L))->maxSoldierCapacity());
+	lua_pushuint32(L, get_sc(L, get_egbase(L))->maxSoldierCapacity());
 	return 1;
 }
 int _SoldierEmployer::get_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	SoldierControl * sc = get_sc(L, game);
-	Tribe_Descr const & tribe = get(L, game)->owner().tribe();
+	Editor_Game_Base & egbase = get_egbase(L);
+	SoldierControl * sc = get_sc(L, egbase);
+	Tribe_Descr const & tribe = get(L, egbase)->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
 			 ref_cast<Soldier_Descr const, Worker_Descr const>
@@ -249,9 +251,9 @@ int _SoldierEmployer::get_soldiers(lua_State * L) {
 	return m_handle_get_soldiers(L, soldier_descr, current_soldiers);
 }
 int _SoldierEmployer::set_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	SoldierControl * sc = get_sc(L, game);
-	Building * building = get(L, game);
+	Editor_Game_Base & egbase = get_egbase(L);
+	SoldierControl * sc = get_sc(L, egbase);
+	Building * building = get(L, egbase);
 	Tribe_Descr const & tribe = building->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
@@ -299,7 +301,7 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 						 (*s.current)->get_evade_level());
 
 					if (is == sp->first) {
-						(*s.current)->remove(game);
+						(*s.current)->remove(egbase);
 						++d;
 						break;
 					}
@@ -310,15 +312,15 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 				Soldier & soldier =
 					ref_cast<Soldier, Worker>
 					(soldier_descr.create
-					 (game, building->owner(), 0, building->get_position()));
+					 (egbase, building->owner(), 0, building->get_position()));
 
 				soldier.set_level
 					(sp.current->first.hp, sp.current->first.at,
 					 sp.current->first.de, sp.current->first.ev);
 
-				if (sc->incorporateSoldier(game, soldier)) {
+				if (sc->incorporateSoldier(egbase, soldier)) {
 					return report_error(L, "No space left for soldier!");
-					soldier.remove(game);
+					soldier.remove(egbase);
 				}
 			}
 		}
@@ -762,6 +764,205 @@ Module Classes
 */
 
 /* RST
+Map
+---
+
+.. class:: Map
+
+	Access to the map and it's objects. You cannot instantiate this directly,
+	instead access it via :attr:`wl.Game.map`.
+*/
+const char L_Map::className[] = "Map";
+const MethodType<L_Map> L_Map::Methods[] = {
+	METHOD(L_Map, place_immovable),
+	METHOD(L_Map, get_field),
+	{0, 0},
+};
+const PropertyType<L_Map> L_Map::Properties[] = {
+	PROP_RO(L_Map, width),
+	PROP_RO(L_Map, height),
+	PROP_RO(L_Map, player_slots),
+	{0, 0, 0},
+};
+
+void L_Map::__persist(lua_State * L) {
+}
+void L_Map::__unpersist(lua_State * L) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: width
+
+		(RO) The width of the map in fields.
+*/
+int L_Map::get_width(lua_State * L) {
+	lua_pushuint32(L, get_egbase(L).map().get_width());
+	return 1;
+}
+/* RST
+	.. attribute:: height
+
+		(RO) The height of the map in fields.
+*/
+int L_Map::get_height(lua_State * L) {
+	lua_pushuint32(L, get_egbase(L).map().get_height());
+	return 1;
+}
+
+/* RST
+	.. attribute:: player_slots
+
+		(RO) This is an :class:`array` that contains :class:`~wl.map.PlayerSlots`
+		for each player defined in the map.
+*/
+int L_Map::get_player_slots(lua_State * L) {
+	Map & m = get_egbase(L).map();
+
+	lua_createtable(L, m.get_nrplayers(), 0);
+	for(uint32_t i = 0; i < m.get_nrplayers(); i++) {
+		lua_pushuint32(L, i+1);
+		to_lua<LuaMap::L_PlayerSlot>(L, new LuaMap::L_PlayerSlot(i+1));
+		lua_settable(L, -3);
+	}
+
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+/* RST
+	.. method:: place_immovable(name, field[, from_where = "world"])
+
+		Creates an immovable that is defined by the world (e.g. trees, stones...)
+		or a tribe (field) on a given field. If there is already an immovable on
+		the field, an error is reported.
+
+		:arg name: The name of the immovable to create
+		:type name: :class:`string`
+		:arg field: The immovable is created on this field.
+		:type field: :class:`wl.map.Field`
+		:arg from_where: a tribe name or "world" that defines where the immovable
+			is defined
+		:type from_where: :class:`string`
+
+		:returns: The created immovable.
+*/
+int L_Map::place_immovable(lua_State * const L) {
+	std::string from_where = "world";
+
+	char const * const objname = luaL_checkstring(L, 2);
+	LuaMap::L_Field * c = *get_user_class<LuaMap::L_Field>(L, 3);
+	if (lua_gettop(L) > 3 and not lua_isnil(L, 4))
+		from_where = luaL_checkstring(L, 4);
+
+	// Check if the map is still free here
+	if
+	 (BaseImmovable const * const imm = c->fcoords(L).field->get_immovable())
+		if (imm->get_size() >= BaseImmovable::SMALL)
+			return report_error(L, "Node is no longer free!");
+
+	Editor_Game_Base & egbase = get_egbase(L);
+
+	BaseImmovable * m = 0;
+	if (from_where != "world") {
+		try {
+			Widelands::Tribe_Descr const & tribe =
+				egbase.manually_load_tribe(from_where);
+
+			int32_t const imm_idx = tribe.get_immovable_index(objname);
+			if (imm_idx < 0)
+				return
+					report_error
+					(L, "Unknown immovable <%s> for tribe <%s>",
+					 objname, from_where.c_str());
+
+			m = &egbase.create_immovable(c->coords(), imm_idx, &tribe);
+		} catch (game_data_error & gd) {
+			return
+				report_error
+					(L, "Problem loading tribe <%s>. Maybe not existent?",
+					 from_where.c_str());
+		}
+	} else {
+		int32_t const imm_idx = egbase.map().world().get_immovable_index(objname);
+		if (imm_idx < 0)
+			return report_error(L, "Unknown immovable <%s>", objname);
+
+		m = &egbase.create_immovable(c->coords(), imm_idx, 0);
+	}
+
+	return LuaMap::upcasted_immovable_to_lua(L, m);
+}
+
+/* RST
+	.. method:: get_field(x_or_table[, y])
+
+		Returns a :class:`wl.map.Field` object of the given index.
+		The function either takes two arguments: the x and y index
+		of the field or a :class:`table` as argument. If you pass in a table, it
+		will first be checked for the fields :const:`x` and :const:`y`, then for
+		the index 1 and 2.
+
+		:returns: :const:`nil`
+*/
+int L_Map::get_field(lua_State * L) {
+	uint32_t x = 4294967295; // 2^32 - 1
+	uint32_t y = 4294967295; // 2^32 - 1
+
+	if (lua_gettop(L) == 3) { // x, y arguments
+		x = luaL_checkuint32(L, 2);
+		y = luaL_checkuint32(L, 3);
+	} else {
+		luaL_checktype(L, 2, LUA_TTABLE);
+
+		lua_getfield(L, 2, "x");
+		if lua_isnil(L, -1) {
+			lua_pop(L, 1); // pop the nil
+			lua_pushuint32(L, 1);
+			lua_gettable(L, 2);
+			if lua_isnil(L, -1)
+				return report_error(L, "No 'x' or first key in table");
+		}
+		x = luaL_checkuint32(L, -1);
+		lua_pop(L, 1);
+
+		lua_getfield(L, 2, "y");
+		if lua_isnil(L, -1) {
+			lua_pop(L, 1); // pop the nil
+			lua_pushuint32(L, 2);
+			lua_gettable(L, 2);
+			if lua_isnil(L, -1)
+				return report_error(L, "No 'y' or second key in table");
+		}
+		y = luaL_checkuint32(L, -1);
+		lua_pop(L, 1);
+	}
+
+	Map & m = get_egbase(L).map();
+	if (x >= static_cast<uint32_t>(m.get_width()))
+		report_error(L, "x coordinate out of range!");
+	if (y >= static_cast<uint32_t>(m.get_height()))
+		report_error(L, "y coordinate out of range!");
+
+	return to_lua<LuaMap::L_Field>(L, new LuaMap::L_Field(x, y));
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+/* RST
 MapObject
 ----------
 
@@ -820,7 +1021,7 @@ void L_MapObject::__unpersist(lua_State * L) {
 		constant after saving/loading.
 */
 int L_MapObject::get_serial(lua_State * L) {
-	lua_pushuint32(L, m_ptr->get(get_egbase(L))->serial());
+	lua_pushuint32(L, get(L, get_egbase(L))->serial());
 	return 1;
 }
 
@@ -832,7 +1033,7 @@ int L_MapObject::get_serial(lua_State * L) {
 		immovable, flag, road, productionsite, warehouse, militarysite...
 */
 int L_MapObject::get_type(lua_State * L) {
-	lua_pushstring(L, m_ptr->get(get_egbase(L))->type_name());
+	lua_pushstring(L, get(L, get_egbase(L))->type_name());
 	return 1;
 }
 
@@ -855,7 +1056,7 @@ int L_MapObject::__eq(lua_State * L) {
 		lua_pushboolean(L, false);
 	else // Compare them
 		lua_pushboolean
-			(L, other->get(egbase, L)->serial() == get(egbase, L)->serial());
+			(L, other->get(L, egbase)->serial() == get(L, egbase)->serial());
 
 	return 1;
 }
@@ -868,7 +1069,7 @@ int L_MapObject::__eq(lua_State * L) {
 */
 int L_MapObject::remove(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	Map_Object * o = get(egbase, L);
+	Map_Object * o = get(L, egbase);
 
 	if (!o)
 		return 0;
@@ -905,7 +1106,7 @@ int L_MapObject::has_attribute(lua_State * L) {
  ==========================================================
  */
 Map_Object * L_MapObject::get
-	(Editor_Game_Base & egbase, lua_State * L, std::string name)
+	(lua_State * L, Editor_Game_Base & egbase, std::string name)
 {
 	Map_Object * o = m_get_or_zero(egbase);
 	if (!o)
@@ -1042,7 +1243,7 @@ const MethodType<L_PlayerImmovable> L_PlayerImmovable::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
-	PROP_RO(L_PlayerImmovable, player),
+	PROP_RO(L_PlayerImmovable, owner),
 	{0, 0, 0},
 };
 
@@ -1052,15 +1253,14 @@ const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
  ==========================================================
  */
 /* RST
-	.. attribute:: player
+	.. attribute:: owner
 
 		(RO) The :class:`wl.game.Player` who owns this object.
 */
-int L_PlayerImmovable::get_player(lua_State * L) {
-	return
-		to_lua<L_Player>
-			(L, new L_Player (get(L, get_game(L))->get_owner()->player_number())
-	);
+int L_PlayerImmovable::get_owner(lua_State * L) {
+	get_factory(L).push_player
+		(L, get(L, get_egbase(L))->get_owner()->player_number());
+	return 1;
 }
 
 /*
@@ -1122,8 +1322,8 @@ static L_Flag::WaresMap _count_wares(Flag & f, Tribe_Descr const & tribe) {
 // Documented in ParentClass
 int L_Flag::set_wares(lua_State * L)
 {
-	Game & game = get_game(L);
-	Flag * f = get(L, game);
+	Editor_Game_Base & egbase = get_egbase(L);
+	Flag * f = get(L, egbase);
 	Tribe_Descr const & tribe = f->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
@@ -1156,7 +1356,7 @@ int L_Flag::set_wares(lua_State * L)
 				container_iterate_const(Flag::Wares, current_items, w) {
 					Ware_Index i = tribe.ware_index((*w.current)->descr().name());
 					if(i == sp->first) {
-						const_cast<WareInstance *>(*w.current)->remove(game);
+						const_cast<WareInstance *>(*w.current)->remove(egbase);
 						++d;
 						break;
 					}
@@ -1167,8 +1367,8 @@ int L_Flag::set_wares(lua_State * L)
 			Item_Ware_Descr const & wd = *tribe.get_ware_descr(sp->first);
 			for (int32_t i = 0; i < d; i++) {
 				WareInstance & item = *new WareInstance(sp->first, &wd);
-				item.init(game);
-				f->add_item(game, item);
+				item.init(egbase);
+				f->add_item(egbase, item);
 			}
 		}
 
@@ -1178,12 +1378,12 @@ int L_Flag::set_wares(lua_State * L)
 
 // Documented in parent Class
 int L_Flag::get_wares(lua_State * L) {
-	Tribe_Descr const & tribe = get(L, get_game(L))->owner().tribe();
+	Tribe_Descr const & tribe = get(L, get_egbase(L))->owner().tribe();
 
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
-	WaresMap items = _count_wares(*get(L, get_game(L)), tribe);
+	WaresMap items = _count_wares(*get(L, get_egbase(L)), tribe);
 
 	if (wares_set.size() == tribe.get_nrwares().value()) { // Want all returned
 		wares_set.clear();
@@ -1255,7 +1455,7 @@ const PropertyType<L_Road> L_Road::Properties[] = {
 		(RO) The length of the roads in number of edges.
 */
 int L_Road::get_length(lua_State * L) {
-	lua_pushuint32(L, get(L, get_game(L))->get_path().get_nsteps());
+	lua_pushuint32(L, get(L, get_egbase(L))->get_path().get_nsteps());
 	return 1;
 }
 
@@ -1267,7 +1467,7 @@ int L_Road::get_length(lua_State * L) {
 int L_Road::get_start_flag(lua_State * L) {
 	return
 		to_lua<L_Flag>
-			(L, new L_Flag(get(L, get_game(L))->get_flag(Road::FlagStart)));
+			(L, new L_Flag(get(L, get_egbase(L))->get_flag(Road::FlagStart)));
 }
 
 /* RST
@@ -1278,7 +1478,7 @@ int L_Road::get_start_flag(lua_State * L) {
 int L_Road::get_end_flag(lua_State * L) {
 	return
 		to_lua<L_Flag>
-			(L, new L_Flag(get(L, get_game(L))->get_flag(Road::FlagEnd)));
+			(L, new L_Flag(get(L, get_egbase(L))->get_flag(Road::FlagEnd)));
 }
 
 /* RST
@@ -1290,7 +1490,7 @@ int L_Road::get_end_flag(lua_State * L) {
 		* busy
 */
 int L_Road::get_road_type(lua_State * L) {
-	switch (get(L, get_game(L))->get_roadtype()) {
+	switch (get(L, get_egbase(L))->get_roadtype()) {
 		case Road_Normal:
 			lua_pushstring(L, "normal"); break;
 		case Road_Busy:
@@ -1318,7 +1518,7 @@ L_HasWorkers::WorkersMap L_Road::_valid_workers
 	return valid_workers;
 }
 int L_Road::_new_worker
-	(PlayerImmovable & pi, Game & g, const Worker_Descr * wdes)
+	(PlayerImmovable & pi, Editor_Game_Base & egbase, const Worker_Descr * wdes)
 {
 	Road & r = static_cast<Road &>(pi);
 
@@ -1331,11 +1531,13 @@ int L_Road::_new_worker
 	const Path & path = r.get_path();
 	Path::Step_Vector::size_type idle_index = r.get_idle_index();
 	for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
-		g.map().get_neighbour(idle_position, path[i], &idle_position);
+		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 
 	Carrier & carrier = ref_cast<Carrier, Worker>
-		(wdes->create (g, r.owner(), &r, idle_position));
-	carrier.start_task_road(g);
+		(wdes->create (egbase, r.owner(), &r, idle_position));
+
+	if(upcast(Game, game, &egbase))
+		carrier.start_task_road(*game);
 
 	r.assign_carrier(carrier, 0);
 	return 0;
@@ -1384,7 +1586,7 @@ const PropertyType<L_Building> L_Building::Properties[] = {
 		* warehouse
 */
 int L_Building::get_building_type(lua_State * L) {
-	lua_pushstring(L, get(L, get_game(L))->type_name());
+	lua_pushstring(L, get(L, get_egbase(L))->type_name());
 	return 1;
 }
 
@@ -1431,7 +1633,7 @@ const PropertyType<L_ConstructionSite> L_ConstructionSite::Properties[] = {
 		(RO) The name of the building that is constructed here
 */
 int L_ConstructionSite::get_building(lua_State * L) {
-	lua_pushstring(L, get(L, get_game(L))->building().name());
+	lua_pushstring(L, get(L, get_egbase(L))->building().name());
 	return 1;
 }
 
@@ -1488,7 +1690,7 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
  */
 #define WH_SET(type, btype) \
 int L_Warehouse::set_##type##s(lua_State * L) { \
-	Warehouse * wh = get(L, get_game(L)); \
+	Warehouse * wh = get(L, get_egbase(L)); \
 	Tribe_Descr const & tribe = wh->owner().tribe(); \
 	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, tribe); \
  \
@@ -1509,7 +1711,7 @@ WH_SET(worker, Worker);
 
 #define WH_GET(type, btype) \
 int L_Warehouse::get_##type##s(lua_State * L) { \
-	Warehouse * wh = get(L, get_game(L)); \
+	Warehouse * wh = get(L, get_egbase(L)); \
 	Tribe_Descr const & tribe = wh->owner().tribe(); \
 	bool return_number = false; \
 	btype##sSet set = m_parse_get_##type##s_arguments(L, tribe, &return_number); \
@@ -1534,8 +1736,8 @@ WH_GET(worker, Worker);
 
 // documented in parent class
 int L_Warehouse::set_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	Warehouse * wh = get(L, game);
+	Editor_Game_Base & egbase = get_egbase(L);
+	Warehouse * wh = get(L, egbase);
 	Tribe_Descr const & tribe = wh->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
@@ -1548,11 +1750,11 @@ int L_Warehouse::set_soldiers(lua_State * L) {
 		for (uint32_t i = 0; i < s.current->second; i++) {
 			Soldier & soldier =
 				ref_cast<Soldier, Worker>
-				(soldier_descr.create(game, wh->owner(), wh, wh->get_position()));
+				(soldier_descr.create(egbase, wh->owner(), wh, wh->get_position()));
 			soldier.set_level
 				(s.current->first.hp, s.current->first.at,
 				 s.current->first.de, s.current->first.ev);
-			wh->incorporate_worker(game, soldier);
+			wh->incorporate_worker(egbase, soldier);
 		}
 	}
 	return 0;
@@ -1560,17 +1762,17 @@ int L_Warehouse::set_soldiers(lua_State * L) {
 
 // documented in parent class
 int L_Warehouse::get_soldiers(lua_State * L) {
-	Game & game = get_game(L);
-	Warehouse * wh = get(L, game);
+	Editor_Game_Base & egbase = get_egbase(L);
+	Warehouse * wh = get(L, egbase);
 	Tribe_Descr const & tribe = wh->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
 			 ref_cast<Soldier_Descr const, Worker_Descr const>
 						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
-	SoldiersList in_warehouse = wh->get_soldiers(game);
-	return m_handle_get_soldiers(L, soldier_descr, in_warehouse);
+	SoldiersList in_warehouse = wh->get_soldiers(egbase);
 
+	return m_handle_get_soldiers(L, soldier_descr, in_warehouse);
 }
 
 /*
@@ -1611,8 +1813,7 @@ const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
  */
 // documented in parent class
 int L_ProductionSite::get_valid_wares(lua_State * L) {
-	Game & g = get_game(L);
-	ProductionSite * ps = get(L, g);
+	ProductionSite * ps = get(L, get_egbase(L));
 
 	Tribe_Descr const & tribe = ps->owner().tribe();
 
@@ -1642,15 +1843,15 @@ L_HasWorkers::WorkersMap L_ProductionSite::_valid_workers
 	return rv;
 }
 int L_ProductionSite::_new_worker
-	(PlayerImmovable & pi, Game & g, const Worker_Descr * wdes)
+	(PlayerImmovable & pi, Editor_Game_Base & egbase, const Worker_Descr * wdes)
 {
 	ProductionSite & ps = static_cast<ProductionSite &>(pi);
-	return ps.warp_worker(g, *wdes);
+	return ps.warp_worker(egbase, *wdes);
 }
 
 // documented in parent class
 int L_ProductionSite::set_wares(lua_State * L) {
-	ProductionSite * ps = get(L, get_game(L));
+	ProductionSite * ps = get(L, get_egbase(L));
 	const Tribe_Descr & tribe = ps->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
@@ -1682,7 +1883,7 @@ int L_ProductionSite::set_wares(lua_State * L) {
 
 // documented in parent class
 int L_ProductionSite::get_wares(lua_State * L) {
-	ProductionSite * ps = get(L, get_game(L));
+	ProductionSite * ps = get(L, get_egbase(L));
 	Tribe_Descr const & tribe = ps->owner().tribe();
 
 	bool return_number = false;
@@ -1810,6 +2011,9 @@ Field
 	This class represents one Field in Widelands. The field may contain
 	immovables like Flags or Buildings and can be connected via Roads. Every
 	Field has two Triangles associated with itself: the right and the down one.
+
+	You cannot instantiate this class directly, instead use
+	:meth:`wl.map.Map.get_field`.
 */
 
 const char L_Field::className[] = "Field";
@@ -1840,18 +2044,6 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	{0, 0, 0},
 };
 
-
-L_Field::L_Field(lua_State * L) {
-	Map & m = get_egbase(L).map();
-	uint32_t rv = luaL_checkuint32(L, 1);
-	if (rv >= static_cast<uint32_t>(m.get_width()))
-		report_error(L, "x coordinate out of range!");
-	m_c.x = rv;
-	rv = luaL_checkuint32(L, 2);
-	if (rv >= static_cast<uint32_t>(m.get_height()))
-		report_error(L, "y coordinate out of range!");
-	m_c.y = rv;
-}
 
 void L_Field::__persist(lua_State * L) {
 	PERS_INT32("x", m_c.x); PERS_INT32("y", m_c.y);
@@ -2077,7 +2269,6 @@ GET_X_NEIGHBOUR(brn);
 		influence. That is owners[1] will really own the fields. This can
 		also return an empty list if the field is neutral at the moment.
 */
-// UNTESTED
 typedef std::pair<uint8_t, uint32_t> _PlrInfluence;
 static int _sort_owners
 		(const _PlrInfluence & first,
@@ -2101,14 +2292,23 @@ int L_Field::get_owners(lua_State * L) {
 	std::sort (owners.begin(), owners.end(), _sort_owners);
 
 	lua_newtable(L);
+
+	// Push the real owner.
 	uint32_t cidx = 1;
+	Player_Number current_owner = fcoords(L).field->get_owned_by();
+	if (current_owner) {
+		lua_pushuint32(L, cidx ++);
+		get_factory(L).push_player(L, current_owner);
+		lua_rawset(L, -3);
+	}
+
+	// Push the remaining players with military influence
 	container_iterate_const (std::vector<_PlrInfluence>, owners, i) {
-		if (i.current->second <= 0)
+		if (i.current->second <= 0 or i.current->first == current_owner)
 			continue;
 
 		lua_pushuint32(L, cidx ++);
-		to_lua<L_Player>
-			(L, new L_Player (i.current->first));
+		get_factory(L).push_player(L, i.current->first);
 		lua_rawset(L, -3);
 	}
 
@@ -2217,112 +2417,95 @@ const Widelands::FCoords L_Field::fcoords(lua_State * L) {
 	return get_egbase(L).map().get_fcoords(m_c);
 }
 
+
+/* RST
+PlayerSlot
+----------
+
+.. class:: PlayerSlot
+
+	A player description as it is in the map. This contains information
+	about the start position, the name of the player if this map is played
+	as scenario and it's tribe. Note that these information can be different
+	than the players actually valid in the game as in single player games,
+	the player can choose most parameters freely.
+*/
+const char L_PlayerSlot::className[] = "PlayerSlot";
+const MethodType<L_PlayerSlot> L_PlayerSlot::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_PlayerSlot> L_PlayerSlot::Properties[] = {
+	PROP_RO(L_PlayerSlot, tribe),
+	PROP_RO(L_PlayerSlot, name),
+	PROP_RO(L_PlayerSlot, starting_field),
+	{0, 0, 0},
+};
+
+void L_PlayerSlot::__persist(lua_State * L) {
+	PERS_UINT32("player", m_plr);
+}
+void L_PlayerSlot::__unpersist(lua_State * L) {
+	UNPERS_UINT32("player", m_plr);
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: tribe
+
+		(RO) The name of the tribe suggested for this player in this map
+*/
+int L_PlayerSlot::get_tribe(lua_State * L) {
+	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_tribe(m_plr));
+	return 1;
+}
+
+/* RST
+	.. attribute:: name
+
+		(RO) The name for this player as suggested in this map
+*/
+int L_PlayerSlot::get_name(lua_State * L) {
+	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_name(m_plr));
+	return 1;
+}
+
+/* RST
+	.. attribute:: starting_field
+
+		(RO) The starting_field for this player as set in the map.
+		Note that it is not guaranteed that the HQ of the player is on this
+		field as scenarios and starting conditions are free to place the HQ
+		wherever it want. This field is only centered when the game starts.
+*/
+int L_PlayerSlot::get_starting_field(lua_State * L) {
+	to_lua<L_Field>(L, new L_Field(get_egbase(L).map().get_starting_pos(m_plr)));
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
 /*
  * ========================================================================
  *                            MODULE FUNCTIONS
  * ========================================================================
  */
 
-/* RST
-Module Functions
-^^^^^^^^^^^^^^^^
-
-*/
-
-/* RST
-.. function:: create_immovable(name, field[, from_where = "world"])
-
-	Creates an immovable that is defined by the world (e.g. trees, stones...) or
-	a tribe (field) on a given field. If there is already an immovable on the
-	field, an error is reported.
-
-	:arg name: The name of the immovable to create
-	:type name: :class:`string`
-	:arg field: The immovable is created on this field.
-	:type field: :class:`wl.map.Field`
-	:arg from_where: a tribe name or "world" that defines where the immovable
-		is defined
-	:type from_where: :class:`string`
-
-	:returns: The created immovable object, most likely a
-		:class:`wl.map.BaseImmovable`
-*/
-static int L_create_immovable(lua_State * const L) {
-	std::string from_where = "world";
-
-	char const * const objname = luaL_checkstring(L, 1);
-	L_Field * c = *get_user_class<L_Field>(L, 2);
-	if (lua_gettop(L) > 2 and not lua_isnil(L, 3))
-		from_where = luaL_checkstring(L, 3);
-
-	// Check if the map is still free here
-	if
-	 (BaseImmovable const * const imm = c->fcoords(L).field->get_immovable())
-		if (imm->get_size() >= BaseImmovable::SMALL)
-			return report_error(L, "Node is no longer free!");
-
-	Editor_Game_Base & egbase = get_egbase(L);
-
-	BaseImmovable * m = 0;
-	if (from_where != "world") {
-		try {
-			Widelands::Tribe_Descr const & tribe =
-				egbase.manually_load_tribe(from_where);
-
-			int32_t const imm_idx = tribe.get_immovable_index(objname);
-			if (imm_idx < 0)
-				return
-					report_error
-					(L, "Unknown immovable <%s> for tribe <%s>",
-					 objname, from_where.c_str());
-
-			m = &egbase.create_immovable(c->coords(), imm_idx, &tribe);
-		} catch (game_data_error & gd) {
-			return
-				report_error
-					(L, "Problem loading tribe <%s>. Maybe not existent?",
-					 from_where.c_str());
-		}
-	} else {
-		int32_t const imm_idx = egbase.map().world().get_immovable_index(objname);
-		if (imm_idx < 0)
-			return report_error(L, "Unknown immovable <%s>", objname);
-
-		m = &egbase.create_immovable(c->coords(), imm_idx, 0);
-	}
-
-	return upcasted_immovable_to_lua(L, m);
-}
-
-/* RST
-.. function:: get_width()
-
-	Returns the width of the map in fields
-
-	:returns: width of map in nr of fields
-	:rtype: :class:`integer`
-*/
-int L_get_width(lua_State * L) {
-	lua_pushuint32(L, get_egbase(L).map().get_width());
-	return 1;
-}
-/* RST
-.. function:: get_height()
-
-	Returns the height of the map in fields
-
-	:returns: height of map in nr of fields
-	:rtype: :class:`integer`
-*/
-int L_get_height(lua_State * L) {
-	lua_pushuint32(L, get_egbase(L).map().get_height());
-	return 1;
-}
-
 const static struct luaL_reg wlmap [] = {
-	{"create_immovable", &L_create_immovable},
-	{"get_width", &L_get_width},
-	{"get_height", &L_get_height},
 	{0, 0}
 };
 
@@ -2330,7 +2513,9 @@ void luaopen_wlmap(lua_State * L) {
 	luaL_register(L, "wl.map", wlmap);
 	lua_pop(L, 1); // pop the table from the stack
 
+	register_class<L_Map>(L, "map");
 	register_class<L_Field>(L, "map");
+	register_class<L_PlayerSlot>(L, "map");
 	register_class<L_MapObject>(L, "map");
 
 	register_class<L_BaseImmovable>(L, "map", true);
@@ -2396,4 +2581,6 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_TrainingSite, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 }
+
+};
 

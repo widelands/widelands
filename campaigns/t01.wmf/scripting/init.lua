@@ -8,14 +8,15 @@ set_textdomain("scenario_t01.wmf")
 -- Initialization
 -- ===============
 
-p = wl.game.Player(1)
+p = wl.Game().players[1]
 
 -- Only lumberjack buildings are allowed
 p:forbid_buildings("all")
 p:allow_buildings{"lumberjacks_hut"}
 
 -- Place the headquarters & fill it with wares
-hq = p:place_building("headquarters_interim", wl.map.Field(12,10))
+hq = p:place_building("headquarters_interim", wl.Game().map:get_field(12,10),
+   false, true)
 hq:set_wares{
    trunk = 80
 }
@@ -31,13 +32,13 @@ hq:set_workers{
 -- ==========
 -- Constants 
 -- ==========
-home = wl.map.Field(12,10)
-al_thunran = wl.map.Field(53, 43)
-grave = wl.map.Field(25,22)
+home = wl.Game().map:get_field(12,10)
+al_thunran = wl.Game().map:get_field(53, 43)
+grave = wl.Game().map:get_field(25,22)
 
 -- This function can move to a place, display a modal message box and return
 function show_story_box(t, m, pos, gposx, gposy)
-   plr = wl.game.Player(1)
+   plr = wl.Game().players[1]
    posx = gposx
    posy = gposy
    local pts = nil

@@ -28,6 +28,7 @@
 
 #include "lua_globals.h"
 
+namespace LuaGlobals {
 
 /* RST
 Global functions
@@ -156,4 +157,6 @@ void luaopen_globals(lua_State * L) {
 
 }
 
+
+};
 

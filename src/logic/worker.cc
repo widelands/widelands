@@ -1023,6 +1023,7 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
 void Worker::set_location(PlayerImmovable * const location)
 {
 	assert(not location or Object_Ptr(location).get(owner().egbase()));
+
 	PlayerImmovable * const oldlocation = get_location(owner().egbase());
 	if (oldlocation == location)
 		return;
@@ -1053,8 +1054,9 @@ void Worker::set_location(PlayerImmovable * const location)
 		// Interrupt whatever we've been doing.
 		set_economy(0);
 
-		send_signal
-			(ref_cast<Game, Editor_Game_Base>(owner().egbase()), "location");
+		Editor_Game_Base & egbase = owner().egbase();
+		if (upcast(Game, game, &egbase))
+			send_signal (*game, "location");
 	}
 }
 
@@ -1097,7 +1099,8 @@ void Worker::init(Editor_Game_Base & egbase)
 	// is unknown to this worker till he is initialized
 	//  assert(get_location(egbase));
 
-	create_needed_experience(ref_cast<Game, Editor_Game_Base>(egbase));
+	if(upcast(Game, game, &egbase))
+		create_needed_experience(*game);
 }
 
 
@@ -1108,8 +1111,10 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 {
 	WareInstance * const item = get_carried_item(egbase);
 
-	delete m_supply;
-	m_supply = 0;
+	if (m_supply) {
+		delete m_supply;
+		m_supply = 0;
+	}
 
 	if (item)
 		if (egbase.objects().object_still_available(item))
@@ -1119,7 +1124,8 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 	// or doing something else. Get Location might
 	// init a gowarehouse task or something and this results
 	// in a dirty stack. Nono, we do not want to end like this
-	reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+	if(upcast(Game, game, &egbase))
+		reset_tasks(*game);
 
 	if (get_location(egbase))
 		set_location(0);
@@ -1135,23 +1141,25 @@ void Worker::cleanup(Editor_Game_Base & egbase)
  * If we carry an item right now, it will be destroyed (see
  * fetch_carried_item()).
  */
-void Worker::set_carried_item(Game & game, WareInstance * const item)
+void Worker::set_carried_item
+	(Editor_Game_Base & egbase, WareInstance * const item)
 {
-	if (WareInstance * const olditem = get_carried_item(game)) {
-		olditem->cleanup(game);
+	if (WareInstance * const olditem = get_carried_item(egbase)) {
+		olditem->cleanup(egbase);
 		delete olditem;
 	}
 
 	m_carried_item = item;
-	item->set_location(game, this);
-	item->update(game);
+	item->set_location(egbase, this);
+	if (upcast(Game, game, &egbase))
+		item->update(*game);
 }
 
 
 /**
  * Stop carrying the current item, and return a pointer to it.
  */
-WareInstance * Worker::fetch_carried_item(Game & game)
+WareInstance * Worker::fetch_carried_item(Editor_Game_Base & game)
 {
 	WareInstance * const item = get_carried_item(game);
 

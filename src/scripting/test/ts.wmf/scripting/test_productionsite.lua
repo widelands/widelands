@@ -13,15 +13,16 @@ end
 -- ================
 productionsite_tests = lunit.TestCase("Productionsite Tests")
 function productionsite_tests:setup()
-   self.f1 = wl.map.Field(10,10)
-   self.f2 = wl.map.Field(12,10)
-   self.f3 = wl.map.Field(14,10)
-   self.p = wl.game.Player(1)
-   self.p:conquer(f, 6)
+   self.f1 = map:get_field(10,10)
+   self.f2 = map:get_field(12,10)
+   self.f3 = map:get_field(14,10)
+   player1:conquer(self.f1, 4)
+   player1:conquer(self.f2, 4)
+   player1:conquer(self.f3, 4)
 
-   self.inn = self.p:place_building("big_inn", self.f1)
-   self.warmill = self.p:place_building("warmill", self.f2)
-   self.lumberjack = self.p:place_building("lumberjacks_hut", self.f3)
+   self.inn = player1:place_building("big_inn", self.f1, false, true)
+   self.warmill = player1:place_building("warmill", self.f2, false, true)
+   self.lumberjack = player1:place_building("lumberjacks_hut", self.f3, false, true)
 end
 function productionsite_tests:teardown()
    pcall(function()
@@ -113,9 +114,9 @@ function productionsite_tests:test_no_space()
   end)
 end
 
--- -- ==============
--- -- Ware creation
--- -- ==============
+-- ==============
+-- Ware creation
+-- ==============
 function productionsite_tests:test_valid_wares()
    ww = self.warmill.valid_wares
    assert_equal(8, ww.iron)

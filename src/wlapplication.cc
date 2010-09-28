@@ -816,6 +816,7 @@ bool WLApplication::init_settings() {
 	s.get_bool("remove_syncstreams");
 	s.get_bool("sound_at_message");
 	s.get_bool("voice_at_message");
+	s.get_bool("transparent_chat");
 	s.get_string("registered");
 	s.get_string("nickname");
 	s.get_string("password");
@@ -1509,7 +1510,9 @@ void WLApplication::mainmenu()
 		} catch (Widelands::game_data_error const & e) {
 			messagetitle = _("Game data error");
 			message = e.what();
-		} catch (std::exception const & e) {
+		}
+#ifndef DEBUG
+		catch (std::exception const & e) {
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
 			message +=
@@ -1525,7 +1528,7 @@ void WLApplication::mainmenu()
 					 "during the game. It is often - though not always - possible "
 					 "to load it and continue playing.\n");
 		}
-
+#endif
 	}
 }
 
@@ -1810,6 +1813,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
 			player.name = buf;
 			player.team = 0;
+			player.partner = 0;
 			// Set default computerplayer ai type
 			if (player.state == PlayerSettings::stateComputer) {
 				Computer_Player::ImplementationVector const & impls =
@@ -1891,6 +1895,13 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) {
 		if (number < s.players.size())
 			s.players[number].team = team;
+	}
+
+	virtual void setPlayerPartner(uint8_t number, uint8_t partner) {
+		if (number < s.players.size())
+			if (partner <= s.players.size()) {
+				s.players[number].partner = partner;
+			}
 	}
 
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {

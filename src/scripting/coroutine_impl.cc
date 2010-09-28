@@ -64,7 +64,7 @@ int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
  * resumed
  */
 void LuaCoroutine_Impl::push_arg(const Widelands::Player * plr) {
-	to_lua<L_Player>(m_L, new L_Player(plr->player_number()));
+	to_lua<LuaGame::L_Player>(m_L, new LuaGame::L_Player(plr->player_number()));
 	m_nargs++;
 }
 

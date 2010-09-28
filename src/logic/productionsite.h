@@ -140,16 +140,13 @@ public:
 
 	virtual WaresQueue & waresqueue(Ware_Index);
 
-	void prefill
-		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
-
 	char const * type_name() const throw () {return "productionsite";}
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 
 	virtual void remove_worker(Worker &);
-	int warp_worker(Game &, const Worker_Descr & wd);
+	int warp_worker(Editor_Game_Base &, const Worker_Descr & wd);
 
 	virtual bool fetch_from_flag(Game &);
 	virtual bool get_building_work(Game &, Worker &, bool success);

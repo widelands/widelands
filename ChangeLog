@@ -1,6 +1,10 @@
 ### Build 16 (until now)
 - Improved and added a lot new animations for workers!
 - Implemented teamview for allied players
+- Implemented shared kingdom mode, where two or more players play the same
+  player.
+- Added two new maps.
+- Added possibility to create and play multiplayer scenarios.
 - Do not show building statistic informations of opposing players anymore
 - Gave foresters more intelligence - now they do not remove young trees to
   replant another anymore and plant the trees that suit the terrain the best.
@@ -26,7 +30,8 @@
 - Improved all exisiting campaigns to use lua.
 - Added an interactive "start from no knowledge" tutorial.
 - Added new music tracks.
-- Added winning conditions.
+- Added winning conditions (endless game, autocrat, collectors, land lord,
+  wood gnome).
 - Added basic opengl rendering support.
 - Added many new and improved exisiting translations.
 - Removed unused medic code.

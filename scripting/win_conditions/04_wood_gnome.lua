@@ -19,8 +19,7 @@ return {
 	name = wc_name,
 	description = wc_desc,
 	func = function()
-	local plrs = {}
-	valid_players(plrs)
+   local plrs = wl.Game().players
 
 	-- send a message with the game type to all players
 	broadcast(plrs, wc_name, wc_desc)
@@ -29,11 +28,10 @@ return {
 
 	-- Get all valueable fields of the map
 	local fields = {}
-	local mapwidth  = wl.map.get_width()
-	local mapheight = wl.map.get_height()
-	for x=0,mapwidth-1 do
-		for y=0,mapheight-1 do
-			local f = wl.map.Field(x,y)
+   local map = wl.Game().map
+	for x=0,map.width-1 do
+		for y=0,map.height-1 do
+			local f = map:get_field(x,y)
 			if f then
 				-- add this field to the list as long as it has not movecaps swim
 				if not f.has_movecaps_swim(f) then
@@ -47,7 +45,9 @@ return {
 	local _last_time_calculated = -100000
 	local _plrpoints = {}
 	local function _calc_points()
-		if _last_time_calculated > wl.game.get_time() - 5000 then
+      local game = wl.Game()
+
+		if _last_time_calculated > game.time - 5000 then
 			return _plrpoints
 		end
 
@@ -71,7 +71,7 @@ return {
 				end
 			end
 		end
-		_last_time_calculated = wl.game.get_time()
+		_last_time_calculated = game.time
 		return _plrpoints
 	end
 

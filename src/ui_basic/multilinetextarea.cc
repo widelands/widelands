@@ -37,6 +37,7 @@ Multiline_Textarea::Multiline_Textarea
 	m_scrollmode(ScrollNormal),
 	m_cache_id  (g_gr->get_no_picture()),
 	m_cache_mode(Widget_Cache_New),
+	m_bg_color(RGBColor(107, 87, 55)),
 	m_textheight(0),
 	m_textpos   (0)
 {
@@ -126,7 +127,7 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 				(dst,
 				 m_fontname,
 				 m_fontsize,
-				 m_fcolor, RGBColor(107, 87, 55),
+				 m_fcolor, m_bg_color,
 				 Point(get_halign(), 0 - m_textpos),
 				 m_text,
 				 m_align,
@@ -135,7 +136,7 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 		else
 			UI::g_fh->draw_richtext
 				(dst,
-				 RGBColor(107, 87, 55),
+				 m_bg_color,
 				 Point(get_halign(), 0 - m_textpos),
 				 m_text,
 				 get_eff_w(),

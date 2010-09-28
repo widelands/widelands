@@ -180,9 +180,6 @@ Building & Building_Descr::create
 	 Player               &       owner,
 	 Coords                 const pos,
 	 bool                   const construct,
-	 uint32_t       const * const ware_counts,
-	 uint32_t       const * const worker_counts,
-	 Soldier_Counts const * const soldier_counts,
 	 Building_Descr const * const old,
 	 bool                         loading)
 	const
@@ -194,13 +191,7 @@ Building & Building_Descr::create
 		b.Building::init(egbase);
 		return b;
 	}
-	b.prefill
-		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 ware_counts, worker_counts, soldier_counts);
 	b.init(egbase);
-	b.postfill
-		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 ware_counts, worker_counts, soldier_counts);
 	return b;
 }
 
@@ -396,8 +387,7 @@ void Building::init(Editor_Game_Base & egbase)
 		Flag * flag = dynamic_cast<Flag *>(map.get_immovable(neighb));
 		if (not flag)
 			flag =
-				new Flag
-					(ref_cast<Game, Editor_Game_Base>(egbase), owner(), neighb);
+				new Flag (egbase, owner(), neighb);
 		m_flag = flag;
 		flag->attach_building(egbase, *this);
 	}
@@ -591,15 +581,6 @@ WaresQueue & Building::waresqueue(Ware_Index const wi) {
 		("%s (%u) has no WaresQueue for %u",
 		 name().c_str(), serial(), wi.value());
 }
-
-
-void Building::prefill
-	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
-{}
-void Building::postfill
-	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
-{}
-
 
 /*
 ===============
