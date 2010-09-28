@@ -1290,12 +1290,46 @@ const Message & L_Message::get(lua_State * L, Widelands::Game & game) {
 }
 
 
+/* RST
+.. function:: report_result(plr, has_won[, points = 0, extra = ""])
+
+	Reports the game ending to the metaserver if this is an Internet
+	network game. Otherwise, does nothing.
+
+	:arg plr: The Player to report results for.
+	:type plr: :class:`~wl.game.Player`
+	:arg has_won: :const:`true` if this player has won
+	:type has_won: :class:`boolean`
+	:type points: number of points the player should be rewarded for this game
+	:arg points: :class:`integer`
+	:arg extra: a string containing extra data for this particular win
+		condition. This will vary from game type to game type.
+	:type extra: :class:`string`
+
+*/
+static int L_report_result(lua_State * L) {
+	int32_t points = 0;
+	if (lua_gettop(L) >= 3)
+		points = luaL_checkint32(L, 3);
+
+	std::string extra = "";
+	if (lua_gettop(L) >= 4)
+		extra = luaL_checkstring(L, 4);
+
+	get_game(L).gameController()->report_result
+		((*get_user_class<L_Player>(L, 1))->get(L, get_game(L)).player_number(),
+		 points, luaL_checkboolean(L, 2), extra
+	);
+	return 0;
+}
+
 /*
  * ========================================================================
  *                            MODULE FUNCTIONS
  * ========================================================================
  */
 const static struct luaL_reg wlgame [] = {
+	{"report_result", &L_report_result},
 	{0, 0}
 };
 
