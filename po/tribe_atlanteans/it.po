@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-02-15 19:48+0000\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-09-28 00:49+0000\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-09-28 04:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -185,7 +185,7 @@ msgstr "Porta gli oggetti lungo le strade."
 msgid "Castle"
 msgstr "Castello"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Castello del villaggio"
 
@@ -402,7 +402,7 @@ msgstr "Raccolto di mais"
 msgid "Headquarters"
 msgstr "Quartier generale"
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Quartier generale medio"
 
@@ -517,6 +517,10 @@ msgstr "Miniera di pietra"
 #: ../../tribes/atlanteans/conf:116
 msgid "Miner"
 msgstr "Minatore"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+msgid "Not enough space"
+msgstr "Non c'è abbastanza spazio"
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
@@ -714,11 +718,11 @@ msgstr "L'indicatore di risorse segna tanto oro"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "L'indicatore di risorse segna poco granito"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "L'indicatore di risorse segna molto granito"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator iron little"
@@ -857,6 +861,13 @@ msgstr "Affumica carne e pesce."
 #: ../../tribes/atlanteans/conf:101
 msgid "Soldier"
 msgstr "Soldato"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Spiderbreeder"
