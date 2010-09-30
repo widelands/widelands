@@ -250,6 +250,9 @@ function field_owner_tests:test_no_owners()
    local o = map:get_field(15,35).owners
    assert_equal(0, #o)
 end
+function field_owner_tests:test_no_owner()
+   assert_equal(nil, map:get_field(15,35).owner)
+end
 
 function field_owner_tests:test_blue_first()
    local f = map:get_field(10,10)
@@ -261,6 +264,7 @@ function field_owner_tests:test_blue_first()
    local o = map:get_field(10,10).owners
    assert_equal(1, #o)
    assert_equal(player1, o[1])
+   assert_equal(player1, map:get_field(10,10).owner)
 
    local f = map:get_field(14, 10)
    local s2 = player2:place_building("sentry", f, false, true)
@@ -273,6 +277,7 @@ function field_owner_tests:test_blue_first()
    assert_equal(2, #o)
    assert_equal(player1, o[1])
    assert_equal(player2, o[2])
+   assert_equal(player1, map:get_field(10,10).owner)
 end
 
 function field_owner_tests:test_red_first()
@@ -285,6 +290,7 @@ function field_owner_tests:test_red_first()
    local o = map:get_field(10,10).owners
    assert_equal(1, #o)
    assert_equal(player2, o[1])
+   assert_equal(player2, map:get_field(10,10).owner)
 
    local f = map:get_field(14, 10)
    local s2 = player1:place_building("sentry", f, false, true)
@@ -297,6 +303,7 @@ function field_owner_tests:test_red_first()
    assert_equal(2, #o)
    assert_equal(player2, o[1])
    assert_equal(player1, o[2])
+   assert_equal(player2, map:get_field(10,10).owner)
 end
 
 function field_owner_tests:test_no_military_influence()
@@ -308,6 +315,7 @@ function field_owner_tests:test_no_military_influence()
    local o = map:get_field(10,10).owners
    assert_equal(1, #o)
    assert_equal(player2, o[1])
+   assert_equal(player2, map:get_field(10,10).owner)
 end
 
 function field_owner_tests:test_just_one_flag()
@@ -316,5 +324,6 @@ function field_owner_tests:test_just_one_flag()
 
    assert_equal(1, #f.owners)
    assert_equal(player1, f.owners[1])
+   assert_equal(player1, map:get_field(15,37).owner)
 end
 

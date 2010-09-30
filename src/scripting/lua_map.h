@@ -74,7 +74,6 @@ public:
 	 */
 	int place_immovable(lua_State *);
 	int get_field(lua_State *);
-	int foreach(lua_State *);
 
 	/*
 	 * C methods
@@ -576,6 +575,7 @@ public:
 	int get_resource_amount(lua_State *);
 	int set_resource_amount(lua_State *);
 	int get_owners(lua_State *);
+	int get_owner(lua_State *);
 
 	/*
 	 * Lua methods

@@ -776,7 +776,6 @@ const char L_Map::className[] = "Map";
 const MethodType<L_Map> L_Map::Methods[] = {
 	METHOD(L_Map, place_immovable),
 	METHOD(L_Map, get_field),
-	METHOD(L_Map, foreach),
 	{0, 0},
 };
 const PropertyType<L_Map> L_Map::Properties[] = {
@@ -954,25 +953,6 @@ int L_Map::get_field(lua_State * L) {
 		report_error(L, "y coordinate out of range!");
 
 	return to_lua<LuaMap::L_Field>(L, new LuaMap::L_Field(x, y));
-}
-
-/* RST
-	.. method:: foreach(func)
-
-		Calls func for each field on this map. This is significantly faster
-		then iterating the whole map in a loop.
-*/
-int L_Map::foreach(lua_State * L) {
-	luaL_checktype(L, 2, LUA_TFUNCTION);
-	Map & map = get_egbase(L).map();
-
-	for(uint32_t x = 0; x < map.get_width(); x++) {
-		for(uint32_t y = 0; y < map.get_height(); y++) {
-			to_lua<L_Field>(L, new L_Field(x, y));
-			lua_call(L, 1, 0);
-		}
-	}
-	return 0;
 }
 
 /*
@@ -2061,6 +2041,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RW(L_Field, resource),
 	PROP_RW(L_Field, resource_amount),
 	PROP_RO(L_Field, owners),
+	PROP_RO(L_Field, owner),
 	{0, 0, 0},
 };
 
@@ -2283,11 +2264,33 @@ GET_X_NEIGHBOUR(bln);
 GET_X_NEIGHBOUR(brn);
 
 /* RST
+	.. attribute:: owner
+
+		(RO) The current owner of the field or :const:`nil` if noone owns it. See
+		also :attr:`owners`.
+*/
+int L_Field::get_owner(lua_State * L) {
+	// Push the real owner.
+	uint32_t cidx = 1;
+	Player_Number current_owner = fcoords(L).field->get_owned_by();
+	if (current_owner) {
+		get_factory(L).push_player(L, current_owner);
+		return 1;
+	}
+	return 0;
+}
+
+/* RST
 	.. attribute:: owners
 
 		(RO) An :class:`array` of owners of this field sorted by their military
 		influence. That is owners[1] will really own the fields. This can
 		also return an empty list if the field is neutral at the moment.
+
+		Note that the access to this field can be rather slow as a lot of
+		calculation need to be done to determine the real military access order.
+		If you are only interested in the one really owning the field currently,
+		use :attr:`owner`.
 */
 typedef std::pair<uint8_t, uint32_t> _PlrInfluence;
 static int _sort_owners
@@ -2311,7 +2314,7 @@ int L_Field::get_owners(lua_State * L) {
 
 	std::sort (owners.begin(), owners.end(), _sort_owners);
 
-	lua_newtable(L);
+	lua_createtable(L, 1, 0); // We mostly expect one owner per field.
 
 	// Push the real owner.
 	uint32_t cidx = 1;
