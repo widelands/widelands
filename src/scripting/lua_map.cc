@@ -903,50 +903,16 @@ int L_Map::place_immovable(lua_State * const L) {
 }
 
 /* RST
-	.. method:: get_field(x_or_table[, y])
+	.. method:: get_field(x, y)
 
 		Returns a :class:`wl.map.Field` object of the given index.
-		The function either takes two arguments: the x and y index
-		of the field or a :class:`table` as argument. If you pass in a table, it
-		will first be checked for the fields :const:`x` and :const:`y`, then for
-		the index 1 and 2.
-
-		:returns: :const:`nil`
 */
 int L_Map::get_field(lua_State * L) {
-	uint32_t x = 4294967295; // 2^32 - 1
-	uint32_t y = 4294967295; // 2^32 - 1
-
-	if (lua_gettop(L) == 3) { // x, y arguments
-		x = luaL_checkuint32(L, 2);
-		y = luaL_checkuint32(L, 3);
-	} else {
-		luaL_checktype(L, 2, LUA_TTABLE);
-
-		lua_getfield(L, 2, "x");
-		if lua_isnil(L, -1) {
-			lua_pop(L, 1); // pop the nil
-			lua_pushuint32(L, 1);
-			lua_gettable(L, 2);
-			if lua_isnil(L, -1)
-				return report_error(L, "No 'x' or first key in table");
-		}
-		x = luaL_checkuint32(L, -1);
-		lua_pop(L, 1);
-
-		lua_getfield(L, 2, "y");
-		if lua_isnil(L, -1) {
-			lua_pop(L, 1); // pop the nil
-			lua_pushuint32(L, 2);
-			lua_gettable(L, 2);
-			if lua_isnil(L, -1)
-				return report_error(L, "No 'y' or second key in table");
-		}
-		y = luaL_checkuint32(L, -1);
-		lua_pop(L, 1);
-	}
+	uint32_t x = luaL_checkuint32(L, 2);
+	uint32_t y = luaL_checkuint32(L, 3);
 
 	Map & m = get_egbase(L).map();
+
 	if (x >= static_cast<uint32_t>(m.get_width()))
 		report_error(L, "x coordinate out of range!");
 	if (y >= static_cast<uint32_t>(m.get_height()))

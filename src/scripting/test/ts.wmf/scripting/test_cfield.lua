@@ -7,44 +7,10 @@ function field_tests:test_access()
    assert_equal(c.x, 25)
    assert_equal(c.y, 32)
 end
-function field_tests:test_access_array()
-   c = map:get_field{25,32}
-   assert_equal(c.x, 25)
-   assert_equal(c.y, 32)
-end
-function field_tests:test_access_array_with_strings()
-   c = map:get_field{x=25,y=32}
-   assert_equal(c.x, 25)
-   assert_equal(c.y, 32)
-end
-function field_tests:test_access_no_x()
-   assert_error("no x in table", function()
-      map:get_field{z=5,y=32}
-   end)
-end
-function field_tests:test_access_no_y()
-   assert_error("no y in table", function()
-      map:get_field{x=5,z=32}
-   end)
-end
-function field_tests:test_access_no_y1()
-   assert_error("no y in table", function()
-      map:get_field{5,z=32}
-   end)
-end
+
 function field_tests:test_access_xistobig()
    assert_error("x should be too big", function()
       map:get_field(64, 23)
-   end)
-end
-function field_tests:test_access_xistobig1()
-   assert_error("x should be too big", function()
-      map:get_field{64, 23}
-   end)
-end
-function field_tests:test_access_xistobig2()
-   assert_error("x should be too big", function()
-      map:get_field{x=64, y=23}
    end)
 end
 function field_tests:test_access_yistobig()
@@ -52,14 +18,9 @@ function field_tests:test_access_yistobig()
       map:get_field(25, 80)
    end)
 end
-function field_tests:test_access_yistobig1()
-   assert_error("y should be too big", function()
-      map:get_field{25, 80}
-   end)
-end
-function field_tests:test_access_yistobig2()
-   assert_error("y should be too big", function()
-      map:get_field{x=25, y=80}
+function field_tests:test_access_yismissing()
+   assert_error("y is missing", function()
+      map:get_field(64)
    end)
 end
 function field_tests:test_access_xisnegativ()
