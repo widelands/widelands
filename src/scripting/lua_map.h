@@ -575,6 +575,7 @@ public:
 	int get_resource_amount(lua_State *);
 	int set_resource_amount(lua_State *);
 	int get_owners(lua_State *);
+	int get_owner(lua_State *);
 
 	/*
 	 * Lua methods
