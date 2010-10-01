@@ -157,6 +157,7 @@ PlayerBase
 const char L_PlayerBase::className[] = "PlayerBase";
 const MethodType<L_PlayerBase> L_PlayerBase::Methods[] = {
 	METHOD(L_PlayerBase, __eq),
+	METHOD(L_PlayerBase, __tostring),
 	METHOD(L_PlayerBase, place_flag),
 	METHOD(L_PlayerBase, place_road),
 	METHOD(L_PlayerBase, place_building),
@@ -218,6 +219,13 @@ int L_PlayerBase::__eq(lua_State * L) {
 	return 1;
 }
 
+int L_PlayerBase::__tostring(lua_State * L) {
+	char rv[40];
+	snprintf
+		(rv, sizeof(rv), "Player(%i)", get(L, get_egbase(L)).player_number());
+	lua_pushstring(L, rv);
+	return 1;
+}
 /* RST
 	.. function:: place_flag(field[, force])
 

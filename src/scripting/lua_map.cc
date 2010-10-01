@@ -2006,7 +2006,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RO(L_Field, viewpoint_y),
 	PROP_RW(L_Field, resource),
 	PROP_RW(L_Field, resource_amount),
-	PROP_RO(L_Field, owners),
+	PROP_RO(L_Field, claimers),
 	PROP_RO(L_Field, owner),
 	{0, 0, 0},
 };
@@ -2233,11 +2233,9 @@ GET_X_NEIGHBOUR(brn);
 	.. attribute:: owner
 
 		(RO) The current owner of the field or :const:`nil` if noone owns it. See
-		also :attr:`owners`.
+		also :attr:`claimers`.
 */
 int L_Field::get_owner(lua_State * L) {
-	// Push the real owner.
-	uint32_t cidx = 1;
 	Player_Number current_owner = fcoords(L).field->get_owned_by();
 	if (current_owner) {
 		get_factory(L).push_player(L, current_owner);
@@ -2247,55 +2245,45 @@ int L_Field::get_owner(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: owners
+	.. attribute:: claimers
 
-		(RO) An :class:`array` of owners of this field sorted by their military
-		influence. That is owners[1] will really own the fields. This can
-		also return an empty list if the field is neutral at the moment.
+		(RO) An :class:`array` of players that have military influence over this
+		field sorted by the amount of influence they have. Note that this does
+		not necessarily mean that claimers[1] is also the owner of the field, as
+		a field that houses a surrounded military building is owned by the
+		surrounded player, but others have more military influence over it.
 
-		Note that the access to this field can be rather slow as a lot of
-		calculation need to be done to determine the real military access order.
-		If you are only interested in the one really owning the field currently,
-		use :attr:`owner`.
+		Note: The one currently owning the field is in :attr:`owner`.
 */
 typedef std::pair<uint8_t, uint32_t> _PlrInfluence;
-static int _sort_owners
+static int _sort_claimers
 		(const _PlrInfluence & first,
 		 const _PlrInfluence & second)
 {
 	return first.second > second.second;
 }
-int L_Field::get_owners(lua_State * L) {
+int L_Field::get_claimers(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	Map & map = egbase.map();
 
-	std::vector<_PlrInfluence> owners;
+	std::vector<_PlrInfluence> claimers;
 
 	iterate_players_existing(other_p, map.get_nrplayers(), egbase, plr)
-		owners.push_back
+		claimers.push_back
 			(_PlrInfluence(plr->player_number(), plr->military_influence
 					(map.get_index(m_c, map.get_width()))
 			)
 		);
 
-	std::sort (owners.begin(), owners.end(), _sort_owners);
+	std::stable_sort (claimers.begin(), claimers.end(), _sort_claimers);
 
-	lua_createtable(L, 1, 0); // We mostly expect one owner per field.
+	lua_createtable(L, 1, 0); // We mostly expect one claimer per field.
 
-	// Push the real owner.
+	// Push the players with military influence
 	uint32_t cidx = 1;
-	Player_Number current_owner = fcoords(L).field->get_owned_by();
-	if (current_owner) {
-		lua_pushuint32(L, cidx ++);
-		get_factory(L).push_player(L, current_owner);
-		lua_rawset(L, -3);
-	}
-
-	// Push the remaining players with military influence
-	container_iterate_const (std::vector<_PlrInfluence>, owners, i) {
-		if (i.current->second <= 0 or i.current->first == current_owner)
+	container_iterate_const (std::vector<_PlrInfluence>, claimers, i) {
+		if (i.current->second <= 0)
 			continue;
-
 		lua_pushuint32(L, cidx ++);
 		get_factory(L).push_player(L, i.current->first);
 		lua_rawset(L, -3);
