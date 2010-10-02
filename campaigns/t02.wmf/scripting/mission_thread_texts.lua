@@ -290,7 +290,7 @@ order_msg_7_mines_up = {
 order_msg_8_mines_up = {
    title=_"The advisor",
    body =khantrukh(_"Khantrukh interrupts...", _
-[[ "While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not be easy." ]]
+[[ "While this is true, we should consider it later, for now other obstacles are at hand. The miners will definitely demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not be easy." ]]
    )
 }
 
