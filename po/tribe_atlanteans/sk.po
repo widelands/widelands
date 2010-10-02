@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-09-25 22:31+0000\n"
+"PO-Revision-Date: 2010-10-01 19:11+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-26 04:33+0000\n"
+"X-Launchpad-Export-Date: 2010-10-02 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -977,7 +977,7 @@ msgstr "Toto je pokročilý trojzubec pre skúsenejších vojakov."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid "This is red iron ore."
-msgstr "Toto je červená železná ruda."
+msgstr "Toto je krveľ."
 
 #: ../../tribes/atlanteans/smoked_fish/conf:1
 msgid ""
@@ -1061,7 +1061,7 @@ msgstr "Kováč nástrojov"
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Toolsmithy"
-msgstr "Vyhňa nástrojov"
+msgstr "Vyhňa na výrobu nástrojov"
 
 #: ../../tribes/atlanteans/conf:143
 #: ../../tribes/atlanteans/conf:158
@@ -1194,7 +1194,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Weapon Smithy"
-msgstr "Vyhňa zbraní"
+msgstr "Vyhňa na výrobu zbraní"
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid "Weapons and Tools are made of iron."

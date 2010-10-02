@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-09-26 02:24+0000\n"
+"PO-Revision-Date: 2010-10-01 18:42+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-27 04:32+0000\n"
+"X-Launchpad-Export-Date: 2010-10-02 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -114,7 +114,7 @@ msgstr "Chová silné voly, ktoré pomáhajú pri prevoze výrobkov."
 
 #: ../../tribes/barbarians/conf:111
 msgid "Brewer"
-msgstr "Pivár"
+msgstr "Pivovarník"
 
 #: ../../tribes/barbarians/conf:175
 msgid "Brewery"
@@ -1030,7 +1030,7 @@ msgstr "Výcvikový tábor"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr "Cvičí vojakov"
+msgstr "Trénuje vojakov."
 
 #: ../../tribes/barbarians/conf:93
 msgid "Trunk"

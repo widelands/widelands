@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-09-25 02:25+0000\n"
+"PO-Revision-Date: 2010-10-01 23:05+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-26 04:33+0000\n"
+"X-Launchpad-Export-Date: 2010-10-02 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:24
@@ -109,7 +109,7 @@ msgstr "Šachmat"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
-msgstr ""
+msgstr "Ostrov kométy"
 
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
@@ -317,7 +317,7 @@ msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
-msgstr ""
+msgstr "Rendez-Vous"
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
@@ -398,7 +398,7 @@ msgstr "Odmäk"
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The ancient sun of fire"
-msgstr ""
+msgstr "Starobylé ohnivé slnko"
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
