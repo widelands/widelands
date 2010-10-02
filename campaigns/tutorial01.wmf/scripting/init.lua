@@ -250,6 +250,8 @@ function build_eastern_trainings_area(citadel_field)
    -- add buildwares to the warehouse
    local ts = map:get_field(31,56).immovable
    ts:set_wares(ts.valid_wares)
+   
+   scroll_smoothly_to(citadel_field)
 
    blocker:lift_blocks()
 end
@@ -620,7 +622,7 @@ function expansion()
 
    local o = msg_box(introduce_expansion)
 
-   while #conquer_field.owners < 1 do sleep(100) end
+   while not conquer_field.owner do sleep(100) end
    o.done = true
 
    mining()

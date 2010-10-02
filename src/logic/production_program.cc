@@ -1200,8 +1200,12 @@ void ProductionProgram::ActCheck_Soldier::execute
 	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);
 
 	for (std::vector<Soldier *>::const_iterator it = soldiers.begin();; ++it) {
-		if (it == soldiers_end)
+		if (it == soldiers_end) {
+			snprintf
+				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+				 _("No soldier for this training level found!"));
 			return ps.program_end(game, Failed);
+		}
 		if        (attribute == atrHP)      {
 			if ((*it)->get_hp_level()      == level)
 				break;
@@ -1283,8 +1287,12 @@ void ProductionProgram::ActTrain::execute
 		 attribute, level, target_level);
 
 	for (;; ++it) {
-		if (it == soldiers_end)
+		if (it == soldiers_end) {
+			snprintf
+				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+				 _("No soldier for this training level found!"));
 			return ps.program_end(game, Failed);
+		}
 		if        (attribute == atrHP)      {
 			if ((*it)->get_hp_level     () == level)
 				break;

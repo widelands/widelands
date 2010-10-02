@@ -904,50 +904,16 @@ int L_Map::place_immovable(lua_State * const L) {
 }
 
 /* RST
-	.. method:: get_field(x_or_table[, y])
+	.. method:: get_field(x, y)
 
 		Returns a :class:`wl.map.Field` object of the given index.
-		The function either takes two arguments: the x and y index
-		of the field or a :class:`table` as argument. If you pass in a table, it
-		will first be checked for the fields :const:`x` and :const:`y`, then for
-		the index 1 and 2.
-
-		:returns: :const:`nil`
 */
 int L_Map::get_field(lua_State * L) {
-	uint32_t x = 4294967295; // 2^32 - 1
-	uint32_t y = 4294967295; // 2^32 - 1
-
-	if (lua_gettop(L) == 3) { // x, y arguments
-		x = luaL_checkuint32(L, 2);
-		y = luaL_checkuint32(L, 3);
-	} else {
-		luaL_checktype(L, 2, LUA_TTABLE);
-
-		lua_getfield(L, 2, "x");
-		if lua_isnil(L, -1) {
-			lua_pop(L, 1); // pop the nil
-			lua_pushuint32(L, 1);
-			lua_gettable(L, 2);
-			if lua_isnil(L, -1)
-				return report_error(L, "No 'x' or first key in table");
-		}
-		x = luaL_checkuint32(L, -1);
-		lua_pop(L, 1);
-
-		lua_getfield(L, 2, "y");
-		if lua_isnil(L, -1) {
-			lua_pop(L, 1); // pop the nil
-			lua_pushuint32(L, 2);
-			lua_gettable(L, 2);
-			if lua_isnil(L, -1)
-				return report_error(L, "No 'y' or second key in table");
-		}
-		y = luaL_checkuint32(L, -1);
-		lua_pop(L, 1);
-	}
+	uint32_t x = luaL_checkuint32(L, 2);
+	uint32_t y = luaL_checkuint32(L, 3);
 
 	Map & m = get_egbase(L).map();
+
 	if (x >= static_cast<uint32_t>(m.get_width()))
 		report_error(L, "x coordinate out of range!");
 	if (y >= static_cast<uint32_t>(m.get_height()))
@@ -2095,7 +2061,8 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RO(L_Field, viewpoint_y),
 	PROP_RW(L_Field, resource),
 	PROP_RW(L_Field, resource_amount),
-	PROP_RO(L_Field, owners),
+	PROP_RO(L_Field, claimers),
+	PROP_RO(L_Field, owner),
 	{0, 0, 0},
 };
 
@@ -2381,50 +2348,60 @@ GET_X_NEIGHBOUR(bln);
 GET_X_NEIGHBOUR(brn);
 
 /* RST
-	.. attribute:: owners
+	.. attribute:: owner
 
-		(RO) An :class:`array` of owners of this field sorted by their military
-		influence. That is owners[1] will really own the fields. This can
-		also return an empty list if the field is neutral at the moment.
+		(RO) The current owner of the field or :const:`nil` if noone owns it. See
+		also :attr:`claimers`.
+*/
+int L_Field::get_owner(lua_State * L) {
+	Player_Number current_owner = fcoords(L).field->get_owned_by();
+	if (current_owner) {
+		get_factory(L).push_player(L, current_owner);
+		return 1;
+	}
+	return 0;
+}
+
+/* RST
+	.. attribute:: claimers
+
+		(RO) An :class:`array` of players that have military influence over this
+		field sorted by the amount of influence they have. Note that this does
+		not necessarily mean that claimers[1] is also the owner of the field, as
+		a field that houses a surrounded military building is owned by the
+		surrounded player, but others have more military influence over it.
+
+		Note: The one currently owning the field is in :attr:`owner`.
 */
 typedef std::pair<uint8_t, uint32_t> _PlrInfluence;
-static int _sort_owners
+static int _sort_claimers
 		(const _PlrInfluence & first,
 		 const _PlrInfluence & second)
 {
 	return first.second > second.second;
 }
-int L_Field::get_owners(lua_State * L) {
+int L_Field::get_claimers(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	Map & map = egbase.map();
 
-	std::vector<_PlrInfluence> owners;
+	std::vector<_PlrInfluence> claimers;
 
 	iterate_players_existing(other_p, map.get_nrplayers(), egbase, plr)
-		owners.push_back
+		claimers.push_back
 			(_PlrInfluence(plr->player_number(), plr->military_influence
 					(map.get_index(m_c, map.get_width()))
 			)
 		);
 
-	std::sort (owners.begin(), owners.end(), _sort_owners);
+	std::stable_sort (claimers.begin(), claimers.end(), _sort_claimers);
 
-	lua_newtable(L);
+	lua_createtable(L, 1, 0); // We mostly expect one claimer per field.
 
-	// Push the real owner.
+	// Push the players with military influence
 	uint32_t cidx = 1;
-	Player_Number current_owner = fcoords(L).field->get_owned_by();
-	if (current_owner) {
-		lua_pushuint32(L, cidx ++);
-		get_factory(L).push_player(L, current_owner);
-		lua_rawset(L, -3);
-	}
-
-	// Push the remaining players with military influence
-	container_iterate_const (std::vector<_PlrInfluence>, owners, i) {
-		if (i.current->second <= 0 or i.current->first == current_owner)
+	container_iterate_const (std::vector<_PlrInfluence>, claimers, i) {
+		if (i.current->second <= 0)
 			continue;
-
 		lua_pushuint32(L, cidx ++);
 		get_factory(L).push_player(L, i.current->first);
 		lua_rawset(L, -3);

@@ -767,9 +767,11 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(result == Completed);
-		if (result == Completed)
+		if (result == Completed) {
 			for (uint32_t i = descr().nr_working_positions(); i;)
 				m_working_positions[--i].worker->gain_experience(game);
+			m_result_buffer[0] = '\0';
+		}
 		calc_statistics();
 		break;
 	case Skipped:

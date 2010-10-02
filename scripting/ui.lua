@@ -212,8 +212,8 @@ function mouse_smoothly_to_pos(x, y, g_T)
       x = wl.ui.MapView().mouse_position_x,
       y = wl.ui.MapView().mouse_position_y
    }
+   
    local dest = { x = x, y = y }
-
    pts = _calc_move(start, dest, g_T)
    
    timed_mouse(pts)
@@ -248,7 +248,12 @@ function mouse_smoothly_to(f, g_T)
    if dx < 0 then dx = dx + map.width * 64 end
    if dy < 0 then dy = dy + map.height * 32 end
    
-   return mouse_smoothly_to_pos(dx, dy, g_T)
+   if dx > mv.width or dy > mv.height then
+      scroll_smoothly_to(f, g_T)
+      return mouse_smoothly_to(f, g_T)
+   else
+      return mouse_smoothly_to_pos(dx, dy, g_T)
+   end
 end
 
 -- RST

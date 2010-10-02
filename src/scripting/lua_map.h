@@ -557,31 +557,6 @@ public:
 
 #undef CASTED_GET
 
-
-class L_Bob : public L_MapObject {
-public:
-	LUNA_CLASS_HEAD(L_Bob);
-
-	L_Bob() {}
-	L_Bob(Widelands::Bob & mo) : L_MapObject(mo) {}
-	L_Bob(lua_State * L) : L_MapObject(L) {}
-	virtual ~L_Bob() {}
-
-	/*
-	 * Properties
-	 */
-
-	/*
-	 * Lua Methods
-	 */
-
-	/*
-	 * C Methods
-	 */
-	CASTED_NEW_GET(Bob);
-};
-
-
 class L_Field : public L_MapModuleClass {
 	Widelands::Coords m_c;
 public:
@@ -627,7 +602,8 @@ public:
 	int set_resource(lua_State *);
 	int get_resource_amount(lua_State *);
 	int set_resource_amount(lua_State *);
-	int get_owners(lua_State *);
+	int get_claimers(lua_State *);
+	int get_owner(lua_State *);
 
 	/*
 	 * Lua methods

@@ -7,44 +7,10 @@ function field_tests:test_access()
    assert_equal(c.x, 25)
    assert_equal(c.y, 32)
 end
-function field_tests:test_access_array()
-   c = map:get_field{25,32}
-   assert_equal(c.x, 25)
-   assert_equal(c.y, 32)
-end
-function field_tests:test_access_array_with_strings()
-   c = map:get_field{x=25,y=32}
-   assert_equal(c.x, 25)
-   assert_equal(c.y, 32)
-end
-function field_tests:test_access_no_x()
-   assert_error("no x in table", function()
-      map:get_field{z=5,y=32}
-   end)
-end
-function field_tests:test_access_no_y()
-   assert_error("no y in table", function()
-      map:get_field{x=5,z=32}
-   end)
-end
-function field_tests:test_access_no_y1()
-   assert_error("no y in table", function()
-      map:get_field{5,z=32}
-   end)
-end
+
 function field_tests:test_access_xistobig()
    assert_error("x should be too big", function()
       map:get_field(64, 23)
-   end)
-end
-function field_tests:test_access_xistobig1()
-   assert_error("x should be too big", function()
-      map:get_field{64, 23}
-   end)
-end
-function field_tests:test_access_xistobig2()
-   assert_error("x should be too big", function()
-      map:get_field{x=64, y=23}
    end)
 end
 function field_tests:test_access_yistobig()
@@ -52,14 +18,9 @@ function field_tests:test_access_yistobig()
       map:get_field(25, 80)
    end)
 end
-function field_tests:test_access_yistobig1()
-   assert_error("y should be too big", function()
-      map:get_field{25, 80}
-   end)
-end
-function field_tests:test_access_yistobig2()
-   assert_error("y should be too big", function()
-      map:get_field{x=25, y=80}
+function field_tests:test_access_yismissing()
+   assert_error("y is missing", function()
+      map:get_field(64)
    end)
 end
 function field_tests:test_access_xisnegativ()
@@ -237,9 +198,9 @@ function field_resources_tests:test_set_resource_type_illegal_resource()
 end
 
 
--- =======
--- owners 
--- =======
+-- ===============
+-- owner/claimers
+-- ===============
 field_owner_tests = lunit.TestCase("Field ownage tests")
 function field_owner_tests:setup()
    self.pis = {}
@@ -250,57 +211,57 @@ function field_owner_tests:teardown()
    end
 end
 
-function field_owner_tests:test_no_owners()
-   local o = map:get_field(15,35).owners
+function field_owner_tests:test_no_claimers()
+   local o = map:get_field(15,35).claimers
    assert_equal(0, #o)
 end
-
-function field_owner_tests:test_blue_first()
-   local f = map:get_field(10,10)
-   local s1 = player1:place_building("sentry", f, false, true)
-   s1:set_soldiers({0,0,0,0}, 1)
-
-   self.pis[#self.pis + 1] = f.brn.immovable
-
-   local o = map:get_field(10,10).owners
-   assert_equal(1, #o)
-   assert_equal(player1, o[1])
-
-   local f = map:get_field(14, 10)
-   local s2 = player2:place_building("sentry", f, false, true)
-   s2:set_soldiers({0,0,0,0}, 1)
-
-   self.pis[#self.pis + 1] = f.brn.immovable
-   
-   -- Still owned by first player
-   local o = map:get_field(10,10).owners
-   assert_equal(2, #o)
-   assert_equal(player1, o[1])
-   assert_equal(player2, o[2])
+function field_owner_tests:test_no_owner()
+   assert_equal(nil, map:get_field(15,35).owner)
 end
 
-function field_owner_tests:test_red_first()
+
+
+function field_owner_tests:_owner_ship_helper_func(p1, p2)
    local f = map:get_field(10,10)
-   local s1 = player2:place_building("sentry", f, false, true)
+   local s1 = p1:place_building("sentry", f, false, true)
    s1:set_soldiers({0,0,0,0}, 1)
 
    self.pis[#self.pis + 1] = f.brn.immovable
 
-   local o = map:get_field(10,10).owners
+   local o = map:get_field(10,10).claimers
    assert_equal(1, #o)
-   assert_equal(player2, o[1])
+   assert_equal(p1, o[1])
+   assert_equal(p1, map:get_field(10,10).owner)
 
    local f = map:get_field(14, 10)
-   local s2 = player1:place_building("sentry", f, false, true)
+   local s2 = p2:place_building("sentry", f, false, true)
    s2:set_soldiers({0,0,0,0}, 1)
-
    self.pis[#self.pis + 1] = f.brn.immovable
    
-   -- Still owned by first player
-   local o = map:get_field(10,10).owners
+   -- Still owned by first player, second player has same military influence
+   local o = map:get_field(10,10).claimers
    assert_equal(2, #o)
-   assert_equal(player2, o[1])
-   assert_equal(player1, o[2])
+   assert_equal(p1, o[1])
+   assert_equal(p2, o[2])
+   assert_equal(p1, map:get_field(10,10).owner)
+
+	-- player 2 has now more influence, but player 1 still owns it
+   local f = map:get_field(14, 12)
+   local s3 = p2:place_building("sentry", f, false, true)
+   s3:set_soldiers({0,0,0,0}, 1)
+   self.pis[#self.pis + 1] = f.brn.immovable
+
+   local o = map:get_field(10,10).claimers
+	assert_equal(2, #o)
+   assert_equal(p2, o[1])
+   assert_equal(p1, o[2])
+   assert_equal(p1, map:get_field(10,10).owner)
+end
+function field_owner_tests:test_blue_first()
+	self:_owner_ship_helper_func(player1, player2)
+end
+function field_owner_tests:test_red_first()
+	self:_owner_ship_helper_func(player2, player1)
 end
 
 function field_owner_tests:test_no_military_influence()
@@ -309,16 +270,15 @@ function field_owner_tests:test_no_military_influence()
    s1:set_soldiers({0,0,0,0}, 1)
    f.brn.immovable:remove()
 
-   local o = map:get_field(10,10).owners
-   assert_equal(1, #o)
-   assert_equal(player2, o[1])
+   assert_equal(0, #map:get_field(10,10).claimers)
+   assert_equal(player2, map:get_field(10,10).owner)
 end
 
 function field_owner_tests:test_just_one_flag()
    local f = map:get_field(15,37)
    player1:place_flag(f, true):remove()
 
-   assert_equal(1, #f.owners)
-   assert_equal(player1, f.owners[1])
+   assert_equal(0, #f.claimers)
+   assert_equal(player1, map:get_field(15,37).owner)
 end
 
