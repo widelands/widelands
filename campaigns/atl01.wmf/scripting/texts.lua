@@ -103,12 +103,12 @@ initial_messages = {
 {
    title = _ "Proudest to the death",
    body = rt(
-      h1(_"TODO") ..
+      h1(_"Favored by the god") ..
       p(_
 [[On the hidden and lost island of Atlantis, a proud tribe settled since the
  world was very young. Ruled by the bloodline of King Ajanthul - the first human
  to be empowered by the sea god Lutas to breath above the sea level - and the
- wise clerics keeping the connection to Lutas they prospered and became
+ wise clerics - keeping the connection to Lutas - they prospered and became
  civilized.]]
       ) .. p(
 [[This story happens during the regency of King Askandor, the 43th successor of
@@ -132,8 +132,8 @@ their stable was rising in an ever accelerating speed.]]
 [[The clerics went into their meditation and the reason for the rising water
  was soon to be found: The god lost faith in the atlanteans because of the
  boldness of their king. He decided to withdraw the rights that were
- granted to King Ajanthul and his children. And so, he calls them now back
- below the sea.]]
+ granted to King Ajanthul and his children. And so, he called them back
+ below the sea again.]]
    )
 )
 },
@@ -147,10 +147,10 @@ their stable was rising in an ever accelerating speed.]]
  fate, others tried to change the god's mind by offering animals in his
  temple. But to no avail...]]
    ) .. p(_
-[[Jundlina, the late king's daughter and the highest priestess of the god 
+[[Jundlina, the late king's daughter and the highest priestess of the god
  was the most determined cleric. As countless offerings didn't change the
- situation, she convinced herself, that the god needed an offer of big 
- personal value to be soothed. So she offered him her most beloved: 
+ situation, she convinced herself, that the god needed an offer of big
+ personal value to be soothed. So she offered him her most beloved:
  her husband, father of her only child.]]
    ) .. p(_
 [[But not even this changed the mind of the god. The water kept on rising.
