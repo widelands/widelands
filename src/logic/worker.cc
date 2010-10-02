@@ -2653,19 +2653,25 @@ void Worker::scout_update(Game & game, State & state)
 
 				// If the field is not yet discovered, go there
 				if (!visible) {
+					molog("[scout]: Go to interessting field (%i, %i)\n",
+					 coord.x, coord.y);
 					if (!start_task_movepath(game, coord, 0,
 						 descr().get_right_walk_anims(does_carry_ware())))
-						molog("[scout]: failed to reach destination");
-					return;
+						molog("[scout]: failed to reach destination\n");
+					else
+						return; //start_task_movepath was successfull.
 				}
 
 				// Else evaluate for best second target
 				int dist = map.calc_distance(coord, get_position());
 				Time time = owner().fields()[idx].time_node_last_unseen;
+				// time is only valid if visible is 1
+				if (visible != 1)
+					time = oldest_time;
 
 				if
 					(dist > oldest_distance
-					 || (dist == oldest_distance && time < oldest_time))
+					 || (dist == oldest_distance and time < oldest_time))
 				{
 					oldest_distance = dist;
 					oldest_time = time;
@@ -2673,16 +2679,26 @@ void Worker::scout_update(Game & game, State & state)
 				}
 			}
 			// All fields discovered, go to second choice target
-			if (!start_task_movepath(game, oldest_coords, 0,
-				 descr().get_right_walk_anims(does_carry_ware())))
-				molog("[scout]: Failed to reach destination");
-			return;
+			
+				 
+			if (oldest_coords != get_position()) {
+				molog
+				("[scout]: All fields discovered. Go to (%i, %i)\n",
+				 oldest_coords.x, oldest_coords.y);
+				 
+				if (!start_task_movepath
+						 (game, oldest_coords, 0,
+						  descr().get_right_walk_anims(does_carry_ware())))
+					molog("[scout]: Failed to reach destination\n");
+				else
+					return; //Start task movepath success.
+				//if failed go home
+			}
 		}
 		// No reachable fields found.
-		molog("[scout]: nowhere to go!");
+		molog("[scout]: nowhere to go!\n");
 	}
-
-	// time to go home
+	// time to go home or found nothing to go to
 	pop_task(game);
 	schedule_act(game, 10);
 	return;
