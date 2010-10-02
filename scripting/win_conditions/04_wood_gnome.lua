@@ -82,7 +82,7 @@ return {
 		for idx,plr in ipairs(plrs) do
 			msg = msg .. "\n"
 			msg = msg .. _ ("%s has "):format(plr.name)
-			msg = msg .. _ ("%i trees at the moment ."):format(playerpoints[plr.number])
+			msg = msg .. _ ("%i trees at the moment."):format(playerpoints[plr.number])
 		end
 
 		broadcast(plrs, _ "Status", msg)

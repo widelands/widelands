@@ -313,7 +313,7 @@ void Fullscreen_Menu_LaunchGame::start_clicked()
 			 	 "If this happens in a network game, the host might have selected "
 			 	 "a file that you do not own. Normally such a file should be send "
 			 	 "from the host to you, but perhaps the transfer was not yet "
-			 	 "finnished!?!"),
+			 	 "finished!?!"),
 			 m_filename.c_str());
 	if (m_settings->canLaunch()) {
 		if (!m_is_savegame)
