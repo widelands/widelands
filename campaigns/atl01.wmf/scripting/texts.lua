@@ -103,7 +103,7 @@ initial_messages = {
 {
    title = _ "Proudest to the death",
    body = rt(
-      h1(_"This is a caption. And it is translated") ..
+      h1(_"TODO") ..
       p(_
 [[On the hidden and lost island of Atlantis, a proud tribe settled since the
  world was very young. Ruled by the bloodline of King Ajanthul - the first human
@@ -125,7 +125,7 @@ initial_messages = {
       h1("The god's punishment") ..
       p(_
 [[But all seemed well, and only the horses seemed to feel something.
-In the nights, the went crazy and were full of fear. Not before long, the
+In the nights, they went crazy and were full of fear. Not before long, the
 horsebreeder Xydra figured out what was wrong with them: The sea level before
 their stable was rising in an ever accelerating speed.]]
    ) .. p(_
