@@ -53,8 +53,15 @@ function speech(img, clr, g_title, g_text)
    return s .. rt(("image=%s"):format(img), p(text))
 end
 
-function princess(title, text)
+function jundlina(title, text)
    return speech("map:princess.png", "2F9131", title, text)
+end
+
+function loftomor(text)
+   return speech("map:loftomor.png", "FDD53D", "Lofotomor", text)
+end
+function sidolus(text)
+   return speech("map:sidolus.png", "FF1A30", "Sidolus", text)
 end
 
 -- Nice formatting for objective texts: A header and one paragraph
@@ -79,18 +86,21 @@ end
 --                                Objectives
 -- =======================================================================
 obj_ensure_build_wares_production = {
-   name = _ "obj_build_wares",
-   title = _ "Construct buildings to ensure build wares supply",
-   body = obj_text(_"Ensure build wares supply", _
-[[Build a quarry, two woodcutters house, a  ]]
+   name = "obj_ensure_build_wares_production",
+   title = _ "Ensure the supply of build wares",
+   body = obj_text(_"The supply of build wares", _
+[[Build a quarry, two woodcutter's houses, two forester's houses and a
+ sawmill.]]
    ),
 }
 
-obj_build_environment = {
-   name = "build_environment",
-   title = _ "Build 3 wood cutters, 3 foresters, sawmill and quarry",
-   body = obj_text(_"Build environment", _
-[[Build 3 wood cutters, 3 foresters, sawmill and quarry]]
+obj_expand = {
+   name = "obj_expand",
+   title = _ "Expand your territory and explore the island",
+   body = obj_text(_"Expand and Explore", _
+[[The island is huge and as long as we are not sure that we are alone
+ here, we cannot relax. Explore and conquer it, this is the
+ only way to protect us from threats on the island and from Atlantis.]]
    ),
 }
 
@@ -170,13 +180,58 @@ their stable was rising in an ever accelerating speed.]]
 
 first_briefing_messages = {
 {
-   title = _ "The princess orders",
-   body = princess(_ "The princess speaks", _
-[[Build environment first]]
-   ) .. new_objectives(obj_build_environment)
+   title = _ "The princess' memoir",
+   body = jundlina(_ "Day 21 after Enlightenment", _
+[[We left Atlantis and sailed east. We entered the forbidden sea on the sixth
+ day without noticing any chasers from Atlantis and without Lutus having smash
+ our ship. Now, we are out of his reach. One day later, we sighted an island
+ which seems to have one of these fire spitting mountains on it. I deemed this
+ a sign from the fire god and we landed on its shore.]]
+   ) .. p(_
+[[We spent the last week building two vision towers on the mountains close to
+ our landing zone. And of course a hall for us all. We have very talented
+ constructors in our group - still, the buildings do not match the art we
+ had on Atlantis. I hope they will withstand the next rain. Still, the towers
+ will warn us if a ship from Atlantis follows us and if the island is inhabited,
+ we will see attackers a long time before they arrive.]]
+   ) .. p(_
+[[We have established ourselves on this island, the next step is now to make it
+ a home. I reckon we need to establish a sustainable economy and explore our
+ surroundings. I called for specialist and will follow their advise]]
+   )
+},
+{
+   title = _ "Loftomor and Sidolus arrive",
+   body = jundlina( "Jundlina", _
+[[May Satul warm you both. Loftomor, you have been the islands most renowned
+ architect. Sidolus, you are a seasoned warrior and strategist. If have called
+ you before me to seek your counsel: What needs to be done to make this our new
+ home?]]
+   )
+},
+{
+   title = _ "Loftomor speaks",
+   body = loftomor(_
+[[May Satul warm you, Jundlina! The most important things for building a
+ settlement are the build materials. There are some trees here, so we should
+ build housings for some woodcutters and of course also for some forester, so
+ we do not run out of trees. Oh and we mustn't forget the sawmill, for most
+ buildings can't be made out of trunks alone. Stronger buildings also need
+ stone, but there is plenty to the north-east of here; we just need to build a
+ quarry and my stonemasons will go to work promptly.]]
+   ) .. new_objectives(obj_ensure_build_wares_production)
+},
+{
+   title = _ "Sidolus speaks",
+   body = sidolus(_
+[[May Satul warm you, Jundlina! I agree to what Loftomor proposes. We need
+ a good supply of build materials for we have to expand our territory swiflty.
+ I will not feel safe on this island as long as we have not seen all shores
+ on it. I brought plenty of good men from Atlantis, the military might is
+ available, we only need some housings to life in.]]
+   ) ..  new_objectives(obj_expand)
 }
 }
-
 
 -- =======================================================================
 --                         Leftover buildings found
@@ -184,7 +239,7 @@ first_briefing_messages = {
 first_leftover_building_found = {
 {
    title = _ "Strange buildings",
-   body = princess(_ "I say",
+   body = jundlina(_ "I say",
 [[Maybe we are not alone here..]]
    )
 }
@@ -193,7 +248,7 @@ first_leftover_building_found = {
 second_leftover_building_found = {
 {
    title = _ "Strange buildings",
-   body = princess(_ "I say",
+   body = jundlina(_ "I say",
 [[Yet another of those]]
    )
 }
@@ -202,7 +257,7 @@ second_leftover_building_found = {
 third_leftover_building_found = {
 {
    title = _ "Strange buildings",
-   body = princess(_ "I say",
+   body = jundlina(_ "I say",
 [[And Yet another of those. But i am confident that we are alone on
 this island as we have already conquered and seen so much of it.]]
    )

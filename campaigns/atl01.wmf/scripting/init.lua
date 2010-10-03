@@ -89,7 +89,9 @@ end
 
 function build_environment()
    msg_boxes(first_briefing_messages)
-   local o = add_obj(obj_build_environment)
+   local o = add_obj(obj_ensure_build_wares_production)
+   -- TODO: this doesn't really belong here
+   local o1 = add_obj(obj_expand)
    
    while not check_for_buildings(p1, {
       woodcutters_house = 3,
