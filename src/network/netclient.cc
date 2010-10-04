@@ -20,7 +20,7 @@
 #include "netclient.h"
 
 #include "build_info.h"
-#include "ui_fsmenu/launchgame.h"
+#include "ui_fsmenu/launchMPG.h"
 #include "logic/game.h"
 #include "wui/game_tips.h"
 #include "i18n.h"
@@ -152,7 +152,7 @@ void NetClient::run ()
 	d->settings.multiplayer = true;
 	d->settings.scenario = false;
 	{
-		Fullscreen_Menu_LaunchGame lgm(this, this);
+		Fullscreen_Menu_LaunchMPG lgm(this, this);
 		lgm.setChatProvider(*this);
 		d->modal = &lgm;
 		int32_t code = lgm.run();

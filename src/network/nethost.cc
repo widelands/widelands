@@ -22,7 +22,7 @@
 #include "build_info.h"
 #include "chat.h"
 #include "computer_player.h"
-#include "ui_fsmenu/launchgame.h"
+#include "ui_fsmenu/launchMPG.h"
 #include "logic/game.h"
 #include "wui/game_tips.h"
 #include "i18n.h"
@@ -599,7 +599,7 @@ void NetHost::run(bool const autorun)
 {
 	HostGameSettingsProvider hp(this);
 	{
-		Fullscreen_Menu_LaunchGame lgm(&hp, this, autorun);
+		Fullscreen_Menu_LaunchMPG lgm(&hp, this, autorun);
 		lgm.setChatProvider(d->chat);
 		const int32_t code = lgm.run();
 

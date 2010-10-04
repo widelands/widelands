@@ -3,7 +3,6 @@
 -- =======================================================================
 
 use("aux", "infrastructure")
-use("aux", "shared_kingdom_functions")
 
 set_textdomain("tribe_empire")
 
@@ -14,7 +13,6 @@ return {
 
 
    local sf = wl.Game().map.player_slots[plr.number].starting_field
-   plr = actual_player(plr)
 
    local h = plr:place_building("castle", sf, false, true)
    h:set_soldiers{[{0,0,0,0}] = 12}

@@ -3,7 +3,6 @@
 -- =======================================================================
 
 use("aux", "infrastructure")
-use("aux", "shared_kingdom_functions")
 
 set_textdomain("tribe_barbarians")
 
@@ -13,8 +12,6 @@ init = {
    local sf = wl.Game().map.player_slots[player.number].starting_field
 
    player:allow_workers("all")
-
-   player = actual_player(player)
 
    hq = prefilled_buildings(player, { "headquarters", sf.x, sf.y,
       wares = {

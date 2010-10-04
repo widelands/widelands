@@ -29,7 +29,7 @@
 #include "ui_fsmenu/editor_mapselect.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/intro.h"
-#include "ui_fsmenu/launchgame.h"
+#include "ui_fsmenu/launchSPG.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
@@ -1945,7 +1945,7 @@ private:
 bool WLApplication::new_game()
 {
 	SinglePlayerGameSettingsProvider sp;
-	Fullscreen_Menu_LaunchGame lgm(&sp);
+	Fullscreen_Menu_LaunchSPG lgm(&sp);
 	const int32_t code = lgm.run();
 	Widelands::Game game;
 

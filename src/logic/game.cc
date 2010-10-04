@@ -48,7 +48,6 @@
 #include "trainingsite.h"
 #include "tribe.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launchgame.h"
 #include "upcast.h"
 #include "warning.h"
 #include "widelands_fileread.h"
