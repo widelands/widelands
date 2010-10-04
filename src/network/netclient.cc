@@ -181,9 +181,7 @@ void NetClient::run ()
 		d->game = &game;
 		game.set_game_controller(this);
 		// If our player is in shared kingdom mode - set the iabase accordingly.
-		uint8_t const pn =
-			(d->settings.players.at(d->playernum).partner > 0) ?
-			 d->settings.players.at(d->playernum).partner : d->playernum + 1;
+		uint8_t const pn = d->playernum + 1;
 		Interactive_GameBase * igb;
 		if (pn > 0)
 			igb =
@@ -252,14 +250,7 @@ void NetClient::think()
 void NetClient::sendPlayerCommand(Widelands::PlayerCommand & pc)
 {
 	assert(d->game);
-	if
-		((d->settings.players[d->playernum].partner > 0
-		  &&
-		  d->settings.players[d->playernum].partner != pc.sender())
-		 ||
-		 (d->settings.players[d->playernum].partner == 0
-		  &&
-		  pc.sender() != d->playernum + 1))
+	if (pc.sender() != d->playernum + 1)
 	{
 		delete &pc;
 		return;

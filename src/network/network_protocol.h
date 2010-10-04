@@ -29,7 +29,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 17,
+	NETWORK_PROTOCOL_VERSION = 18,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -383,20 +383,7 @@ enum {
 	 * replies with a \ref NETCMD_SETTING_PLAYER or \ref NETCMD_SETTING_ALLPLAYERS
 	 * indicating the changed team.
 	 */
-	NETCMD_SETTING_CHANGETEAM = 27,
-
-	/**
-	 * During game setup, this is sent by the client to indicate that the
-	 * client wants to change its share kingdom partner.
-	 *
-	 * \li Unsigned8: new desired share kingdom partner player number
-	 *
-	 * \note The client must not assume that the host will accept this
-	 * request. Change of partner number only becomes effective when/if the host
-	 * replies with a \ref NETCMD_SETTING_PLAYER or \ref NETCMD_SETTING_ALLPLAYERS
-	 * indicating the changed partner.
-	 */
-	NETCMD_SETTING_CHANGEPARTNER = 28
+	NETCMD_SETTING_CHANGETEAM = 27
 };
 
 #endif

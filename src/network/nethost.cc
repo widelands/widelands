@@ -116,8 +116,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			newstate = PlayerSettings::stateOpen;
 			break;
 		case PlayerSettings::stateOpen:
-			h->setPlayerPartner(number, 0);
-			// Fallthrough
 		case PlayerSettings::stateHuman:
 		case PlayerSettings::stateComputer:
 			Computer_Player::ImplementationVector const & impls =
@@ -166,23 +164,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			(number == settings().playernum ||
 			 settings().players.at(number).state == PlayerSettings::stateComputer)
 			h->setPlayerTeam(number, team);
-	}
-
-	virtual void setPlayerPartner(uint8_t number, uint8_t partner)
-	{
-		if
-			(number >= h->settings().players.size()
-			 or
-			 partner > h->settings().players.size()
-			 or
-			 number + 1 == partner)
-			return;
-		
-		if
-			(number == settings().playernum
-			 or
-			 settings().players.at(number).state == PlayerSettings::stateComputer)
-			h->setPlayerPartner(number, partner);
 	}
 
 	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
@@ -644,11 +625,8 @@ void NetHost::run(bool const autorun)
 		d->game = &game;
 		game.set_game_controller(this);
 		Interactive_GameBase * igb;
-		// If our player is in shared kingdom mode - set the iabase accordingly.
 		uint8_t pn = d->settings.playernum + 1;
 		if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
-			if (d->settings.players.at(d->settings.playernum).partner > 0)
-				pn = d->settings.players.at(d->settings.playernum).partner;
 			igb =
 				new Interactive_Player
 					(game, g_options.pull_section("global"), pn, false, true);
@@ -1030,7 +1008,6 @@ void NetHost::setMap
 		player.tribe                = d->settings.tribes.at(0).name;
 		player.initialization_index = 0;
 		player.team = 0;
-		player.partner = 0;
 		++oldplayers;
 	}
 
@@ -1316,22 +1293,6 @@ void NetHost::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	broadcast(s);
 }
 
-void NetHost::setPlayerPartner(uint8_t number, uint8_t partner)
-{
-	if (number >= d->settings.players.size())
-		return;
-	d->settings.players.at(number).partner = partner;
-	
-	// Broadcast changes
-	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_PLAYER);
-	s.Unsigned8(number);
-	writeSettingPlayer(s, number);
-	broadcast(s);
-
-	log("Player %u has Partner %u\n", number, partner);
-}
-
 void NetHost::setMultiplayerGameSettings()
 {
 	d->settings.scenario = false;
@@ -1390,7 +1351,6 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.String(player.ai);
 	packet.Unsigned8(static_cast<uint8_t>(player.ready));
 	packet.Unsigned8(player.team);
-	packet.Unsigned8(player.partner);
 }
 
 void NetHost::writeSettingAllPlayers(SendPacket & packet)
@@ -1962,12 +1922,6 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		}
 		break;
 
-	case NETCMD_SETTING_CHANGEPARTNER:
-		if (!d->game) {
-			setPlayerPartner(client.playernum, r.Unsigned8());
-		}
-		break;
-
 	case NETCMD_SETTING_CHANGEPOSITION:
 		if (!d->game) {
 			uint8_t const pos = r.Unsigned8();
@@ -2038,14 +1992,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			("[Host] client %u (%u) sent player command %i for %i, time = %i\n",
 			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
 		recvClientTime(i, time);
-		if 
-			((d->settings.players[client.playernum].partner > 0
-			  &&
-			  d->settings.players[client.playernum].partner != plcmd.sender())
-			 ||
-			 (d->settings.players[client.playernum].partner == 0
-			  &&
-			  plcmd.sender() != client.playernum + 1))
+		if (plcmd.sender() != client.playernum + 1)
 		{
 			throw DisconnectException
 				(_
