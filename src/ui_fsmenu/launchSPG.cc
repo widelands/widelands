@@ -330,7 +330,6 @@ void Fullscreen_Menu_LaunchSPG::select_map()
 
 	safe_place_for_host(m_nr_players);
 	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
-	enable_all_pdgs();
 }
 
 
@@ -373,17 +372,6 @@ void Fullscreen_Menu_LaunchSPG::switch_to_position(uint8_t const pos)
 		m_settings->setPlayer(settings.playernum, position);
 		m_settings->setPlayerNumber(pos);
 	}
-}
-
-/**
- * enables all player description groups.
- * This is a cleanup for the pdgs. Used f.e. if user selects a map after a
- * savegame was selected, so all free player positions are reopened.
- */
-void Fullscreen_Menu_LaunchSPG::enable_all_pdgs()
-{
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
-		m_players[i]->enable_pdg(true);
 }
 
 

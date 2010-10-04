@@ -70,7 +70,6 @@ private:
 	void win_condition_update();
 	void set_scenario_values();
 	void switch_to_position(uint8_t);
-	void enable_all_pdgs();
 	void safe_place_for_host(uint8_t);
 
 	uint32_t    m_butw;

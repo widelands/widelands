@@ -218,47 +218,6 @@ void PlayerDescriptionGroup::refresh()
 
 
 /**
- * Enables/Disables a playerposition completely
- * This is useful for multi player savegames, where specific player positions
- * were not used in the saved game.
- */
-void PlayerDescriptionGroup::enable_pdg(bool enable)
-{
-	GameSettings const & settings = d->settings->settings();
-
-	if (d->plnum >= settings.players.size())
-		return;
-
-	enable_player(enable);
-	d->btnEnablePlayer->set_enabled(enable);
-	d->btnEnablePlayer->set_visible(enable);
-	d->btnPlayerType  ->set_enabled(enable);
-	d->btnPlayerType  ->set_visible(enable);
-	d->btnPlayerTribe ->set_visible(enable);
-	d->btnPlayerTribe ->set_enabled(enable);
-	d->btnPlayerInit  ->set_visible(enable);
-	d->btnPlayerInit  ->set_enabled(enable);
-	if (!enable)
-		d->plr_name->set_text(std::string());
-}
-
-
-/**
- * Show/hide player's tribe team and init buttons
- * This is useful for multi player savegames, as these can't be changed there.
- */
-void PlayerDescriptionGroup::show_tribe_button(bool show)
-{
-	d->btnPlayerTeam  ->set_visible(show);
-	d->btnPlayerTeam  ->set_enabled(show);
-	d->btnPlayerTribe ->set_visible(show);
-	d->btnPlayerTribe ->set_enabled(show);
-	d->btnPlayerInit  ->set_visible(show);
-	d->btnPlayerInit  ->set_enabled(show);
-}
-
-
-/**
  * The checkbox to open/close a player position has been pressed.
  */
 void PlayerDescriptionGroup::enable_player(bool on)
