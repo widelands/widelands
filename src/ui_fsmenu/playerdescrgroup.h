@@ -50,7 +50,6 @@ struct PlayerDescriptionGroup : public UI::Panel {
 
 private:
 	void enable_player(bool);
-	void ready_player(bool);
 	void toggle_playertype();
 	void toggle_playertribe();
 	void toggle_playerinit();

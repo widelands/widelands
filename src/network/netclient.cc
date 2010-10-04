@@ -364,17 +364,6 @@ void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	s.send(d->sock);
 }
 
-void NetClient::setPlayerPartner(uint8_t number, uint8_t partner)
-{
-	if (number != d->playernum)
-		return;
-
-	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_CHANGEPARTNER);
-	s.Unsigned8(partner);
-	s.send(d->sock);
-}
-
 void NetClient::setPlayerInit(uint8_t, uint8_t)
 {
 	//  client is not allowed to do this
@@ -475,7 +464,6 @@ void NetClient::recvOnePlayer
 	player.ai = packet.String();
 	player.ready = static_cast<bool>(packet.Unsigned8());
 	player.team = packet.Unsigned8();
-	player.partner = packet.Unsigned8();
 
 	if (number == d->playernum)
 		d->localplayername = player.name;

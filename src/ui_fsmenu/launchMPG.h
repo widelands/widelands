@@ -33,7 +33,7 @@ struct ChatProvider;
 struct GameChatPanel;
 struct GameController;
 struct GameSettingsProvider;
-struct PlayerDescriptionGroup;
+struct MultiPlayerSetupBox;
 struct LuaInterface;
 
 /**
@@ -97,7 +97,7 @@ private:
 	GameSettingsProvider    * m_settings;
 	GameController          * m_ctrl; // optional
 	GameChatPanel           * m_chat;
-	PlayerDescriptionGroup  * m_players[MAX_PLAYERS];
+	MultiPlayerSetupBox     * m_players[MAX_PLAYERS];
 	std::string               m_filename;
 	std::string            m_filename_proof; // local variable to check UI state
 	std::string               m_player_save_name[MAX_PLAYERS];

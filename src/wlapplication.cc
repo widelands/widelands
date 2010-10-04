@@ -1813,7 +1813,6 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
 			player.name = buf;
 			player.team = 0;
-			player.partner = 0;
 			// Set default computerplayer ai type
 			if (player.state == PlayerSettings::stateComputer) {
 				Computer_Player::ImplementationVector const & impls =
@@ -1897,13 +1896,6 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			s.players[number].team = team;
 	}
 
-	virtual void setPlayerPartner(uint8_t number, uint8_t partner) {
-		if (number < s.players.size())
-			if (partner <= s.players.size()) {
-				s.players[number].partner = partner;
-			}
-	}
-
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {
 		if (number < s.players.size())
 			s.players[number].name = name;
@@ -1949,8 +1941,6 @@ bool WLApplication::new_game()
 	const int32_t code = lgm.run();
 	Widelands::Game game;
 
-	if (code > 2) // code > 2 is a multi player savegame.
-		throw wexception("Something went wrong! a savegame was selected");
 	if (code <= 0)
 		return false;
 	if (code == 2) { // scenario

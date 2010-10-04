@@ -30,7 +30,7 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "mapselect.h"
-#include "playerdescrgroup.h"
+#include "multiplayersetupbox.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "warning.h"
@@ -167,7 +167,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 				 &Fullscreen_Menu_LaunchMPG::switch_to_position, *this, i,
 				 _("Switch to position"), false);
 		m_players[i] =
-			new PlayerDescriptionGroup
+			new MultiPlayerSetupBox
 				(this,
 				 m_xres / 25, y, m_xres * 16 / 25, m_yres * 17 / 500,
 				 settings, i,
@@ -565,7 +565,6 @@ void Fullscreen_Menu_LaunchMPG::switch_to_position(uint8_t const pos)
 			m_settings->setPlayerNumber(pos);
 			m_settings->setPlayerName
 				(pos, settings.users.at(settings.usernum).name);
-			m_settings->setPlayerPartner(pos, 0);
 		}
 		return;
 	}
