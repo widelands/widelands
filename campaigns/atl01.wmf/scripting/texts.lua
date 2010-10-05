@@ -63,6 +63,9 @@ end
 function sidolus(text)
    return speech("map:sidolus.png", "FF1A30", "Sidolus", text)
 end
+function colionder(text)
+   return speech("map:colionder.png", "33A9FD", "Colionder", text)
+end
 
 -- Nice formatting for objective texts: A header and one paragraph
 -- of text
@@ -102,6 +105,32 @@ obj_expand = {
  here, we cannot relax. Explore and conquer it, this is the
  only way to protect us from threats on the island and from Atlantis.]]
    ),
+}
+
+--- TODO: this should be started when build wares are done
+obj_make_food_infrastructure = {
+   name = "obj_make_food_infrastructure",
+   title = _ "Establish a solid food production",
+   body = obj_text(_"Establish a food production", _
+[[Food is very important for mines and military training areas. Establish
+ a well working food environment by building at least one farm, one blackroot
+ farm and a mill. The two kinds of flour together with water from a well 
+ will be baked to bread in a bakery, so build a bakery and a well too.<br><br>
+ The other two important food wares are smoked fish and smoked meat. Raw meat
+ is delivered from a hunter. A fisher gets the fish out of the sea while a 
+ fish breeder makes sure that a school of fish does not go extinct by breeding
+ more. Make sure that there are always fish left, otherwise the fish breeder
+ won't be able to breed new ones. The smoking happens in a smokery, you
+ will need at least two of those.<br><br>
+ - Build a Farm and a Blackroot farm
+ - Build a sawmill to make flour and blackroot flour
+ - Build a well
+ - Build a bakery to bake bread from flour, blackroot flour and water.
+ - Build a hunter's house to get raw meat
+ - Build a fisher's house close to water to get raw fish
+ - Build a fishbreeder's house close to the fisher to make sure the fish do not die out
+ - Build two smokeries to smoke raw meat and fish.]]
+   )
 }
 
 -- =======================================================================
@@ -231,6 +260,59 @@ first_briefing_messages = {
  available, we only need some housings to life in.]]
    ) ..  new_objectives(obj_expand)
 }
+}
+
+food_story_message = {
+{
+   title = _ "Jundlina is satisfied",
+   body = jundlina("Jundlina", _
+[[I just received word that our build infrastructure is well established and
+ running good - only spider cloth production is still missing in our arsenal.
+ But there seem to be more pressing matters. I called Culionder before me, my
+ personal cook to speak some things through with him.]]
+   )
+},
+{
+   title = _ "Colionder arrvives",
+   body = colionder(_
+[[May Satul warm you, Jundlina. Can I be to of any service to you or the
+ god?]]
+   )
+},
+{
+   title = _ "Jundlina replies",
+   body = colionder(_
+[[May Satul warm you too, Colionder. Yes, I wondered if there is not a way
+ that we can centralize our food production. We loose a lot of productivity
+ because our people are accustomed to make their own food. I feel if we
+ could split responsibilities, it would be better for us all. I want your
+ thoughts on this.]]
+   )
+},
+{
+   title = _ "Colionder is in thought",
+   body = colionder(_
+[[Ahh, but I think this is impossible to change. The preparing and eating of
+ food is something deep ingrained in the Atlanteans - it is just a ceremony
+ that we need for our well being. So I guess we cannot take this away from 
+ the individuals completely. But we might find a compromise in between: For me,
+ making break is a troublesome task: TODO malen the blackroot and corn to flour,
+ than baking the bread is TODO: langweilig/wiederholend. I feel a more
+ industrial approach would be helpful here. I for one would love to just have
+ fresh bread delivered to my house every day. Oooh and even more important: the
+ smoking of fish and meat to cleanse them and improve their taste is terrible.
+ My house is full of smoke and stinks for weeks after it. Don't you think that
+ this could be done in a special building were the side effects do not matter?
+ I think those two things would be accepted by the people and would reduce the
+ cooking times without taking away the ritual.]]
+ )
+},
+{
+   title _ "Jundlina agrees",
+   body = jundlina(_
+[[Your words sound wise to me, Colionder. So be it then.]]
+   ) .. new_objectives(obj_make_food_infrastructure)
+},
 }
 
 -- =======================================================================
