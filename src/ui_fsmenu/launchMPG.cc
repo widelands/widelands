@@ -99,32 +99,6 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_lobby
 		(this,
 		 m_xres * 7 / 10, m_yres * 11 / 20),
-	m_name
-		(this,
-		 m_xres * 1 / 25, m_yres * 53 / 200,
-		 _("Player's name"), UI::Align_Left),
-	m_type
-		(this,
-		 m_xres * 19 / 100, m_yres * 53 / 200,
-		 _("Player's type"), UI::Align_Left),
-	m_team
-		(this,
-		 m_xres * 31 / 100, m_yres * 53 / 200,
-		 _("Team"), UI::Align_Left),
-	m_tribe
-		(this,
-		 m_xres * 36 / 100, m_yres * 53 / 200,
-		 _("Player's tribe"), UI::Align_Left),
-	m_init
-		(this,
-		 m_xres * 51 / 100, m_yres * 53 / 200,
-		 _("Start type"), UI::Align_Left),
-	m_ready
-		(this,
-		 m_xres * 16 / 25, m_yres * 53 / 200),
-	m_notes
-		(this,
-		 m_xres * 2 / 25, m_yres * 9 / 50, m_xres * 21 / 25, m_yres / 11),
 
 // Variables and objects used in the menu
 	m_settings     (settings),
@@ -147,32 +121,14 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_name   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
-	m_type   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
-	m_team   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
-	m_tribe  .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
-	m_init   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
-	m_notes  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	uint32_t y = m_yres / 4;
-	char posIco[42];
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
-		m_pos[i] =
-			new UI::Callback_IDButton<Fullscreen_Menu_LaunchMPG, uint8_t>
-				(this, "switch_to_position",
-				 m_xres / 100, y += m_buth, m_yres * 17 / 500, m_yres * 17 / 500,
-				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-				 g_gr->get_picture(PicMod_Game, posIco),
-				 &Fullscreen_Menu_LaunchMPG::switch_to_position, *this, i,
-				 _("Switch to position"), false);
-		m_players[i] =
-			new MultiPlayerSetupBox
-				(this,
-				 m_xres / 25, y, m_xres * 16 / 25, m_yres * 17 / 500,
-				 settings, i,
-				 m_fn, m_fs);
-	}
+	m_mpsb =
+		new MultiPlayerSetupBox
+			(this,
+			 m_xres / 25, y, m_xres * 16 / 25, m_yres * 17 / 500,
+			 settings, 0, // FIXME client number from initialization
+			 m_fn, m_fs);
 
 	if (m_settings->settings().multiplayer) {
 		m_lobby_list =
@@ -181,8 +137,6 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		m_lobby_list->set_font(m_fn, m_fs);
 		m_lobby.set_text(_("Lobby:"));
 		m_lobby.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-		m_ready.set_text(_("Ready"));
-		m_ready.set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	}
 }
 
@@ -356,25 +310,8 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 	if (settings.scenario)
 		set_scenario_values();
 
-	// "Choose Position" Buttons in frond of PDG
-	for (uint8_t i = 0; i < m_nr_players; ++i) {
-		m_pos[i]->set_visible(true);
-		PlayerSettings const & player = settings.players[i];
-		if
-			(player.state == PlayerSettings::stateOpen or
-			 (player.state == PlayerSettings::stateComputer and
-			  !settings.multiplayer)
-			 or
-			 (settings.playernum == i and settings.multiplayer))
-			m_pos[i]->set_enabled(true);
-		else
-			m_pos[i]->set_enabled(false);
-	}
-	for (uint32_t i = m_nr_players; i < MAX_PLAYERS; ++i)
-		m_pos[i]->set_visible(false);
-
 	// Print warnings and information between title and player desc. group
-	if (!g_fs->FileExists(m_filename)) {
+	if (!g_fs->FileExists(m_filename)) {/*
 		m_notes.set_text
 			(_("WARNING!!! Host selected the file \"") +
 			 m_filename +
@@ -382,16 +319,10 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			 	("\" for this game, which you do not own. If the transfer of that "
 			 	 "file does not start automatically, please add it manually to "
 			 	 "your filesystem."));
-		for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
-			m_players[i]->refresh();
-		m_notes.set_color(UI_FONT_CLR_WARNING);
+		m_notes.set_color(UI_FONT_CLR_WARNING);*/
 	} else {
 		if (!m_is_savegame) {
-			m_notes.set_text(std::string());
-
-			// update the player description groups
-			for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
-				m_players[i]->refresh();
+			//m_notes.set_text(std::string());
 
 		} else { // Multi player savegame information starts here.
 
@@ -403,35 +334,9 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			char buf[32];
 			int8_t i = 1;
 
-			// Print information about last players
-			for (; i <= m_nr_players; ++i) {
-				snprintf(buf, sizeof(buf), "  [%i] ", i);
-				notetext += buf;
-
-				if (m_player_save_name[i - 1].empty()) {
-					notetext += "--";
-					//  set player description group disabled so that no-one can
-					//  take this place
-					m_players[i - 1]->enable_pdg(false);
-					continue;
-				}
-
-				// Refresh player description group of this player
-				m_players[i - 1]->refresh();
-				m_players[i - 1]->show_tribe_button(false);
-				notetext += m_player_save_name[i - 1] + " (";
-				if (m_player_save_name[i - 1].empty())
-					throw wexception("Player has a name but no tribe");
-				notetext += m_player_save_tribe[i - 1] + ")";
-			}
-
-			// update remaining player description groups
-			for (; i <= MAX_PLAYERS; ++i)
-				m_players[i - 1]->refresh();
-
 			// Finally set the notes
-			m_notes.set_text(notetext);
-			m_notes.set_color(UI_FONT_CLR_FG);
+			/*m_notes.set_text(notetext);
+			m_notes.set_color(UI_FONT_CLR_FG);*/
 		}
 	}
 
@@ -476,7 +381,6 @@ void Fullscreen_Menu_LaunchMPG::select_map()
 	safe_place_for_host(m_nr_players);
 	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
 	m_is_savegame = false;
-	enable_all_pdgs();
 }
 
 
@@ -510,7 +414,6 @@ void Fullscreen_Menu_LaunchMPG::select_savegame()
 	safe_place_for_host(m_nr_players);
 	m_settings->setMap(mapname, m_filename, m_nr_players, true);
 	m_is_savegame = true;
-	enable_all_pdgs();
 }
 
 
@@ -613,18 +516,6 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		m_player_save_tribe[i - 1] = global.get_safe_string("name");
 	}
 	m_filename_proof = m_filename;
-}
-
-
-/**
- * enables all player description groups.
- * This is a cleanup for the pdgs. Used f.e. if user selects a map after a
- * savegame was selected, so all free player positions are reopened.
- */
-void Fullscreen_Menu_LaunchMPG::enable_all_pdgs()
-{
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
-		m_players[i]->enable_pdg(true);
 }
 
 

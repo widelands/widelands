@@ -78,7 +78,6 @@ private:
 	void set_scenario_values();
 	void switch_to_position(uint8_t);
 	void load_previous_playerdata();
-	void enable_all_pdgs();
 	void safe_place_for_host(uint8_t);
 
 	uint32_t    m_butw;
@@ -91,13 +90,11 @@ private:
 	UI::Callback_IDButton<Fullscreen_Menu_LaunchMPG, uint8_t> *
 		m_pos[MAX_PLAYERS];
 	UI::Textarea              m_title, m_mapname, m_lobby;
-	UI::Textarea              m_name, m_type, m_team, m_tribe, m_init, m_ready;
-	UI::Multiline_Textarea    m_notes;
 	UI::Listselect<int32_t> * m_lobby_list;
 	GameSettingsProvider    * m_settings;
 	GameController          * m_ctrl; // optional
 	GameChatPanel           * m_chat;
-	MultiPlayerSetupBox     * m_players[MAX_PLAYERS];
+	MultiPlayerSetupBox     * m_mpsb;
 	std::string               m_filename;
 	std::string            m_filename_proof; // local variable to check UI state
 	std::string               m_player_save_name[MAX_PLAYERS];
