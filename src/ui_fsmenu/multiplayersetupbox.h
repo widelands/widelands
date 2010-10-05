@@ -21,13 +21,15 @@
 #define MULTIPLAYERSETUPBOX_H
 
 #include "constants.h"
-#include "ui_basic/panel.h"
+#include "ui_basic/tabpanel.h"
 
 #include <string>
 
 struct GameSettingsProvider;
 
 struct MultiPlayerSetupBoxOptions;
+struct MultiPlayerClientGroup;
+struct PlayerSettingGroup;
 
 /**
  * struct MultiPlayerSetupBox
@@ -74,7 +76,7 @@ struct MultiPlayerSetupBox : public UI::Panel {
 		(UI::Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 GameSettingsProvider * settings,
-		 uint32_t clientnr,
+		 uint32_t usernum,
 		 std::string const & fname = UI_FONT_NAME,
 		 uint32_t fsize = UI_FONT_SIZE_SMALL);
 	~MultiPlayerSetupBox();
@@ -83,6 +85,10 @@ struct MultiPlayerSetupBox : public UI::Panel {
 
 private:
 	MultiPlayerSetupBoxOptions * d;
+	MultiPlayerClientGroup     * c[64];
+	PlayerSettingGroup         * p[MAX_PLAYERS];
+
+	UI::Tab_Panel                tp;
 };
 
 

@@ -30,7 +30,7 @@ Editor_Tool_Options_Menu::Editor_Tool_Options_Menu
 	m_current_pointer(parent.tools.current_pointer)
 {
 	if (get_usedefaultpos())
-		move_to_mouse();
+		center_to_parent();
 }
 
 

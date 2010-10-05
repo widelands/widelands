@@ -910,6 +910,7 @@ void Game::sample_statistics()
 			LuaCoroutine * cr = hook->get_coroutine("calculator");
 			cr->push_arg(plr);
 			cr->resume(&custom_statistic[p-1]);
+			delete cr;
 		}
 	}
 
@@ -942,7 +943,7 @@ void Game::sample_statistics()
  *
  * \param fr file to read from
  * \param version indicates the kind of statistics file; the current version
- *   is 3, support for older versions (used in widelands build <= 12) was
+ *   is 4, support for older versions (used in widelands build <= 12) was
  *   dropped after the release of build 15
  */
 void Game::ReadStatistics(FileRead & fr, uint32_t const version)

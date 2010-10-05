@@ -249,7 +249,6 @@ bool Slider::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
  */
 void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 	int32_t o_cursor_pos = m_cursor_pos;
-	bool    o_highlighted = m_highlighted;
 
 	if (not m_enabled)
 		return;

@@ -40,7 +40,7 @@
 
 Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,
-	 uint32_t clientid, bool autolaunch)
+	 uint32_t usernum, bool autolaunch)
 	:
 	Fullscreen_Menu_Base("launchgamemenu.jpg"),
 
@@ -50,7 +50,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
 
-	m_clientid(clientid),
+	m_usernum(usernum),
 
 // Buttons
 	m_select_map
@@ -124,12 +124,11 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
-	uint32_t y = m_yres / 4;
 	m_mpsb =
 		new MultiPlayerSetupBox
 			(this,
-			 m_xres / 25, y, m_xres * 16 / 25, m_yres * 17 / 500,
-			 settings, m_clientid, m_fn, m_fs);
+			 m_xres / 25, m_yres / 4, m_xres * 16 / 25, m_yres * 3 / 5,
+			 settings, m_usernum, m_fn, m_fs);
 
 	if (m_settings->settings().multiplayer) {
 		m_lobby_list =
@@ -287,6 +286,8 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 {
 	GameSettings const & settings = m_settings->settings();
 
+	m_mpsb->refresh();
+
 	m_mapname.set_text
 		(settings.mapname.size() != 0 ? settings.mapname : _("(no map)"));
 	m_is_savegame = settings.savegame;
@@ -330,14 +331,6 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			if (m_filename != m_filename_proof)
 				// load all playerdata from savegame
 				load_previous_playerdata();
-			std::string notetext = _("Original:");
-
-			char buf[32];
-			int8_t i = 1;
-
-			// Finally set the notes
-			/*m_notes.set_text(notetext);
-			m_notes.set_color(UI_FONT_CLR_FG);*/
 		}
 	}
 
