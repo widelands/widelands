@@ -29,10 +29,45 @@ struct GameSettingsProvider;
 
 struct MultiPlayerSetupBoxImpl;
 
-/** class MultiPlayerSetupBox
+/**
+ * struct MultiPlayerSetupBox
  *
- * - checkbox to enable/disable player
- * - button to switch between: Human, Remote, AI
+ * This struct should give an (as best as possible) intuitive user interface, to
+ * set up a multi player game.
+ * Depending on the initialization (host/client) and the currently selected game
+ * type (normal/savegame/scenario) some parts of the user interface will be
+ * disabled and some will be invisible (e.g. the host tab for clients).
+ * 
+ * The user interface is made up with tabs:
+ * - (1) "Clients" tab:
+ *      This tab contains n \ref MultiPlayerClientGroup , where n is the maximum
+ *      number of clients in the game.
+ *      Every newly connected user (including the host) will be placed in the
+ *      first unocupied slot - the number is the same as the client number used
+ *      on host side.
+ * - (2) "Options" tab:
+ *      This tab contains UI elements to set up the selected map, savegame or 
+ *      scenario.
+ *      On the left side m \ref PlayerSettingGroup let the host set up the
+ *      players (m is the maximum number of players in the selected map or save)
+ *      Information about the selected map and game type is shown on the right
+ *      side:
+ *        - map name
+ *        - game type (normal, savegame, scenario)
+ *        - win condition
+ * - (3) "Host" tab:
+ *      This tab contains the following UI elements:
+ *        - A button to load a map
+ *        - A button to load a savegame
+ *        - A button to start the game
+ *        - A button to close the server
+ *        - A label + spinbox to set the maximum number of client slots
+ *        - A Checkbox with label to close the server temporary to disallow
+ *          user connections
+ *        - A text area showing, what needs to be done until the game can be
+ *          started (e.g. "Client ’Siegfried’ is not yet ready",
+ *                        "Player 2 has neither a human player nor an AI") 
+ * 
  */
 struct MultiPlayerSetupBox : public UI::Panel {
 	MultiPlayerSetupBox
