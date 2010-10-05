@@ -52,9 +52,6 @@
 
 namespace Widelands {
 
-//const Map::ScenarioTypes Map::NO_SCENARIO;
-//const Map::ScenarioTypes Map::SP_SCENARIO;
-//const Map::ScenarioTypes Map::MP_SCENARIO;
 
 /*
 ==============================================================================
