@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-09-25 18:37+0000\n"
-"Last-Translator: UndiFineD <k.dejong@undifined.nl>\n"
+"PO-Revision-Date: 2010-10-04 09:48+0000\n"
+"Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-09-26 04:34+0000\n"
+"X-Launchpad-Export-Date: 2010-10-05 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/writeHTML.cc:43
@@ -174,7 +174,7 @@ msgstr "Worker types"
 
 #: ../../src/writeHTML.cc:522
 msgid "Needed<br/>experience"
-msgstr "Benodigde<br/>ervaring"
+msgstr "Needed<br/>experience"
 
 #: ../../src/writeHTML.cc:524
 msgid "Becomes"
@@ -193,7 +193,7 @@ msgstr "Combat Properties"
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"Hitpoints is %u plus %u voor elk niveau boven 0 (het maximale niveau is %u)."
+"Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 
 #: ../../src/writeHTML.cc:600
 #, c-format
@@ -226,7 +226,7 @@ msgstr "Spawns in warehouses."
 #: ../../src/writeHTML.cc:697
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr "Heeft %u keer ervaring nodig van werken om te worden"
+msgstr "Needs experience from working %u times to become"
 
 #: ../../src/writeHTML.cc:705
 #, c-format
@@ -510,7 +510,7 @@ msgstr "attack"
 
 #: ../../src/writeHTML.cc:1331 ../../src/writeHTML.cc:1355
 msgid "defense"
-msgstr "defense"
+msgstr "defence"
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "evade"
@@ -848,8 +848,8 @@ msgid ""
 "of the server.\n"
 msgstr ""
 "Widelands has not been able to get the IP address of the server in time.\n"
-"There seems to be a network problem, either on your side or on side\n"
-"of the server.\n"
+"There seems to be a network problem, either on your side or on the\n"
+"server side.\n"
 
 #: ../../src/wlapplication.cc:1659 ../../src/network/network_ggz.cc:367
 msgid "Connection problem"
@@ -904,8 +904,7 @@ msgstr "Sound_Handler closing times %i, freq %i, format %i, chan %i\n"
 
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"
-msgstr ""
-"PROBLEEM: geluidsapparaat meerdere keren geopend, aan het proberen te sluiten"
+msgstr "PROBLEM: sound device opened multiple times, trying to close"
 
 #: ../../src/ui_basic/messagebox.cc:91
 #: ../../src/ui_fsmenu/editor_mapselect.cc:98
@@ -1533,7 +1532,7 @@ msgstr "Reconnected to the metaserver."
 
 #: ../../src/network/network_ggz.cc:591
 msgid "NOTE: The Internet gaming implementation is in very early state."
-msgstr "NOTE: The Internet gaming implementation is in very early state."
+msgstr "NOTE: The Internet gaming implementation is in a very early state."
 
 #: ../../src/network/network_ggz.cc:595
 msgid "Please take a look at the notes at:"
@@ -1556,57 +1555,62 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"Available host commands are:<br>/help - Shows this help<br>/announce <msg> - "
+"Send a chatmessage as announcement (system chat)<br>/warn <name> <reason> - "
+"Warn the user <name> because of <reason><br>/kick <name> <reason> - Kick the "
+"user <name> because of <reason><br>/forcePause - Force the game to "
+"pause.<br>/endForcedPause - Puts game back to normal speed."
 
 #: ../../src/network/nethost.cc:328
 msgid "Wrong use, should be: /announce <message>"
-msgstr "Verkeerd gebruik, moet zijn /announce <bericht>"
+msgstr "Wrong use, should be: /announce <message>"
 
 #: ../../src/network/nethost.cc:340
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr "Verkeerd gebruik, moet zijn /warn <naam> <reden>"
+msgstr "Wrong use, should be: /warn <name> <reason>"
 
 #: ../../src/network/nethost.cc:351
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr "Verkeerd gebruik, moet zijn /kick <naam> <reden>"
+msgstr "Wrong use, should be: /kick <name> <reason>"
 
 #: ../../src/network/nethost.cc:359
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Are you sure you want to kick %s?<br>"
 
 #: ../../src/network/nethost.cc:362
 #, c-format
 msgid "The stated reason was: %s<br>"
-msgstr ""
+msgstr "The stated reason was: %s<br>"
 
 #: ../../src/network/nethost.cc:365
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "If yes, type: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:374
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "kick acknowledgement cancelled: No name given!"
 
 #: ../../src/network/nethost.cc:376
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Wrong use, should be: /ack_kick <name>"
 
 #: ../../src/network/nethost.cc:382
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "kick acknowledgement cancelled: Wrong name given!"
 
 #: ../../src/network/nethost.cc:392
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Pause was already forced - game should be paused."
 
 #: ../../src/network/nethost.cc:403
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "There is no forced pause - nothing to end."
 
 #: ../../src/network/nethost.cc:413
 msgid "Invalid command! Type /help for a list of commands."
-msgstr "Onbekend commando! Tiep /help voor een lijst van commando's."
+msgstr "Invalid command! Type /help for a list of commands."
 
 #: ../../src/network/nethost.cc:543
 msgid "Server has left the game."
@@ -1614,7 +1618,7 @@ msgstr "Server has left the game."
 
 #: ../../src/network/nethost.cc:619
 msgid "The game has started just after you tried to connect."
-msgstr "The game has started just after you tried to connect."
+msgstr "The game started just after you tried to connect."
 
 #: ../../src/network/nethost.cc:702
 msgid "Server has crashed and performed an emergency save."
@@ -1622,11 +1626,11 @@ msgstr "Server has crashed and performed an emergency save."
 
 #: ../../src/network/nethost.cc:905
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "You cannot kick yourself!"
 
 #: ../../src/network/nethost.cc:927
 msgid "There is no connected user with that nickname!"
-msgstr "Er is geen gebruiker verbonden met die naam!"
+msgstr "There is no connected user with that nickname!"
 
 #: ../../src/network/nethost.cc:1102
 #, c-format
@@ -1662,7 +1666,7 @@ msgstr "Client did not submit sync report in time."
 
 #: ../../src/network/nethost.cc:1810
 msgid "Client and host have become desynchronized."
-msgstr "Client and host have become desynchronized."
+msgstr "Client and host have become desynchronised."
 
 #: ../../src/network/nethost.cc:1855
 msgid "The game has already started."
@@ -1709,11 +1713,11 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:2062
 msgid "Client sent unexpected synchronization report."
-msgstr "Client sent unexpected synchronization report."
+msgstr "Client sent unexpected synchronisation report."
 
 #: ../../src/network/nethost.cc:2098 ../../src/network/nethost.cc:2110
 msgid "Client requests file altough none is available to send."
-msgstr "Client requests file altough none is available to send."
+msgstr "Client requests file although none is available to send."
 
 #: ../../src/network/nethost.cc:2100
 #, c-format
@@ -1747,7 +1751,7 @@ msgstr "%s has left the game (%s)"
 #: ../../src/network/nethost.cc:2217
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr "Onbekende gebruiker heeft het spel verlaten (%s)"
+msgstr "Unknown user has left the game (%s)"
 
 #: ../../src/wui/interactive_dedicated_server.cc:53
 #: ../../src/wui/interactive_player.cc:175
@@ -2155,7 +2159,7 @@ msgstr "Capacity"
 
 #: ../../src/wui/encyclopedia_window.cc:70
 msgid "Tribe ware encyclopedia"
-msgstr "Tribe ware encyclopedia"
+msgstr "Tribe ware encyclopaedia"
 
 #: ../../src/wui/encyclopedia_window.cc:87
 msgid "Consumed ware type(s)"
@@ -2550,7 +2554,7 @@ msgstr " conquer"
 #: ../../src/logic/warehouse.cc:462
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr "Een nieuwe %s is aan je economie toegevoegd."
+msgstr "A new %s was added to your economy."
 
 #: ../../src/logic/militarysite.cc:113
 #, c-format
@@ -2569,12 +2573,12 @@ msgstr[1] "%u(+%u) soldiers"
 #: ../../src/logic/militarysite.cc:216
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr "Je soldaten hebben je %s bezet."
+msgstr "Your soldiers occupied your %s."
 
 #: ../../src/logic/militarysite.cc:571
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr "De vijand heeft je soldaten verslagen bij de %s."
+msgstr "The enemy defeated your soldiers at the %s."
 
 #: ../../src/logic/militarysite.cc:576
 msgid "Militarysite lost!"
@@ -2583,7 +2587,7 @@ msgstr "Military site lost!"
 #: ../../src/logic/militarysite.cc:622
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr "Je soldaten hebben de vijand bij de %s verslagen."
+msgstr "Your soldiers defeated the enemy at the %s."
 
 #: ../../src/logic/militarysite.cc:627
 msgid "Enemy at site defeated!"
@@ -2592,12 +2596,12 @@ msgstr "Enemy at site defeated!"
 #: ../../src/logic/militarysite.cc:670
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr "Je %s heeft een aggressor ontdekt.</p>"
+msgstr "Your %s discovered an aggressor.</p>"
 
 #: ../../src/logic/militarysite.cc:671
 #, c-format
 msgid "Your %s is under attack.</p>"
-msgstr "Je %s wordt aangevallen.</p>"
+msgstr "Your %s is under attack.</p>"
 
 #: ../../src/logic/militarysite.cc:679
 msgid "You are under attack"
@@ -2730,7 +2734,7 @@ msgstr "probability in range [1, 254]"
 #: ../../src/logic/critter_bob.cc:388
 #, c-format
 msgid "loading critter: %s"
-msgstr "beest aan het laden: %s"
+msgstr "loading critter: %s"
 
 #: ../../src/logic/game.cc:225
 msgid "Preloading a map"
@@ -2778,9 +2782,10 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
-"Widelands could not start the game, because player %u has no starting "
+"Widelands could not start the game because player %u has no starting "
 "position.\n"
-"You can manually add a starting position with Widelands Editor, to fix this "
+"You can manually add a starting position with the Widelands Editor to fix "
+"this\n"
 "problem."
 
 #: ../../src/logic/cmd_luacoroutine.cc:62
@@ -2977,7 +2982,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:886
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Produced %s"
 
 #: ../../src/logic/production_program.cc:953
 msgid "Recruited "
@@ -3005,7 +3010,8 @@ msgstr "Mine empty"
 msgid ""
 "This mines has run empty. You should consider to expand or destruct it."
 msgstr ""
-"This mines has run empty. You should consider to expand or destruct it."
+"This mine has been exhausted. You should consider expanding it or destroying "
+"it."
 
 #: ../../src/logic/production_program.cc:1165
 #: ../../src/logic/production_program.cc:1234
@@ -3130,8 +3136,7 @@ msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr ""
-"The worker of this building cannot find any more resources of the following "
-"type: "
+"This building's worker cannot find any more resources of the following type: "
 
 #: ../../src/logic/worker.cc:927
 msgid "A geologist found resources."
@@ -3173,7 +3178,7 @@ msgstr "nothing"
 #: ../../src/logic/worker.cc:2846
 #, c-format
 msgid "loading worker: %s"
-msgstr ""
+msgstr "loading worker: %s"
 
 #: ../../src/logic/tribe.cc:117
 msgid "constructionsite type \"constructionsite\" is missing"
@@ -3530,7 +3535,7 @@ msgstr "Do you really want to delete "
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:101
 msgid "Initialization"
-msgstr "Initialization"
+msgstr "Initialisation"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:159
 #: ../../src/ui_fsmenu/netsetup_lan.cc:183
@@ -3551,7 +3556,7 @@ msgstr "Human"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:230
 msgid "Help "
-msgstr ""
+msgstr "Help "
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
@@ -3623,11 +3628,11 @@ msgstr "Ready"
 
 #: ../../src/ui_fsmenu/launchgame.cc:280
 msgid "Scenario"
-msgstr ""
+msgstr "Scenario"
 
 #: ../../src/ui_fsmenu/launchgame.cc:282
 msgid "Win condition is set through the scenario"
-msgstr ""
+msgstr "Win condition is set through the scenario"
 
 #: ../../src/ui_fsmenu/launchgame.cc:292
 msgid "Type: "
@@ -3647,11 +3652,11 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finnished!?!"
 msgstr ""
-"Widelands tried to start a game with a file that could not be found at given "
-"path.\n"
+"Widelands tried to start a game with a file that could not be found at the "
+"given path.\n"
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that "
-"you do not own. Normally such a file should be send from the host to you, "
+"you do not own. Normally such a file should be sent from the host to you, "
 "but perhaps the transfer was not yet finished."
 
 #: ../../src/ui_fsmenu/launchgame.cc:336
@@ -3915,7 +3920,7 @@ msgstr "Main menu font:"
 
 #: ../../src/ui_fsmenu/options.cc:432
 msgid "Play a sound at message arrival."
-msgstr "Play a sound at message arrival."
+msgstr "Play a sound on message arrival."
 
 #: ../../src/ui_fsmenu/options.cc:440
 msgid "Do not zip widelands data files (maps, replays and savegames)."
@@ -3943,7 +3948,7 @@ msgstr "OpenGL rendering *Highly experimental!*"
 
 #: ../../src/ui_fsmenu/options.cc:470
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Show in-game chat with transparent background"
 
 #: ../../src/ui_fsmenu/options.cc:495
 msgid "Pause"
@@ -4146,7 +4151,7 @@ msgstr "Map ID:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Players: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"

@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-30 23:31+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-04 13:13+0000\n"
+"Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-10-05 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
-msgstr "A real meal which satisfies all miners needs."
+msgstr "A real meal which satisfies all miners' needs."
 
 #: ../../tribes/empire/ration/conf:1
 msgid "A small bite to keep miners strong and working."
@@ -76,11 +76,11 @@ msgstr "Barrier"
 
 #: ../../tribes/empire/armour/conf:1
 msgid "Basic armour for Empire soldiers."
-msgstr "Basic armour for Empire soldiers."
+msgstr "Basic armour for Imperial soldiers"
 
 #: ../../tribes/empire/helm/conf:1
 msgid "Basic defence of a warrior"
-msgstr "Basic defence of a warrior"
+msgstr "Basic defensive headgear for Imperial soldiers"
 
 #: ../../tribes/empire/conf:54
 msgid "Basket"
@@ -100,7 +100,7 @@ msgstr "Bread"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr "Breeds cute and helpful donkeys"
+msgstr "Breeds cute and helpful donkeys."
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
@@ -140,13 +140,13 @@ msgid "Castle"
 msgstr "Castle"
 
 #: ../../tribes/empire/conf:204
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Castle village"
 
 #: ../../tribes/empire/conf:57
 msgid "Chain-Armour"
-msgstr "Chain-Armour"
+msgstr "Chainmail Armour"
 
 #: ../../tribes/empire/conf:170
 msgid "Charcoal Burner"
@@ -165,6 +165,8 @@ msgid ""
 "Cloth is needed for Empire ships and a few bigger buildings. It is produced "
 "out of wool."
 msgstr ""
+"Cloth is needed for Imperial ships and some of the bigger buildings. It is "
+"produced from wool."
 
 #: ../../tribes/empire/conf:59
 msgid "Coal"
@@ -184,7 +186,7 @@ msgstr "Construction Site"
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of laying stones."
-msgstr "Cuts raw pieces of granite and marble out of laying stones."
+msgstr "Shapes raw marble into columns."
 
 #: ../../tribes/empire/conf:171
 msgid "Deep Coal Mine"
@@ -196,7 +198,7 @@ msgstr "Deep Gold Mine"
 
 #: ../../tribes/empire/conf:175
 msgid "Deep Iron Ore Mine"
-msgstr "Deep Iron Ore Mine"
+msgstr "Deep Iron Mine"
 
 #: ../../tribes/empire/conf:174
 msgid "Deep Marble Mine"
@@ -228,7 +230,7 @@ msgstr "Donkey Breeder"
 
 #: ../../tribes/empire/conf:200
 msgid "Donkeyfarm"
-msgstr "Donkeyfarm"
+msgstr "Donkey Farm"
 
 #: ../../tribes/empire/conf:5
 msgid "Empire"
@@ -244,7 +246,7 @@ msgstr "Farmer"
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
-msgstr "Fells trees."
+msgstr "Fells trees and cuts them to lumber."
 
 #: ../../tribes/empire/conf:32
 msgid "Field harvested"
@@ -280,7 +282,7 @@ msgstr "Fisherman"
 
 #: ../../tribes/empire/conf:177
 msgid "Fisher's House"
-msgstr "Fisher's House"
+msgstr "Fisherman's House"
 
 #: ../../tribes/empire/conf:62
 msgid "Fishing Rod"
@@ -290,7 +292,8 @@ msgstr "Fishing Rod"
 msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
 msgstr ""
-"Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
+"Fishing rods are needed by fisherman to catch fish. Produced by the "
+"Toolsmith."
 
 #: ../../tribes/empire/conf:63
 msgid "Flour"
@@ -300,7 +303,7 @@ msgstr "Flour"
 msgid ""
 "Flour is produced out of wheat and is needed for the tasty Empire bread."
 msgstr ""
-"Flour is produced out of wheat and is needed for the tasty Empire bread."
+"Flour is ground from wheat and is needed for the tasty Imperial bread."
 
 #: ../../tribes/empire/conf:110
 msgid "Forester"
@@ -321,7 +324,7 @@ msgstr "Geologist"
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr "Gets fish out of the sea."
+msgstr "Catches fish from the sea."
 
 #: ../../tribes/empire/conf:64
 msgid "Gold"
@@ -336,8 +339,8 @@ msgid ""
 "Gold is the most valuable of all metals; only very important things are "
 "garnished with it."
 msgstr ""
-"Gold is the most valuable of all metals; only very important things are "
-"garnished with it."
+"Gold is the most valuable of all metals; only the most important items are "
+"adorned with it."
 
 #: ../../tribes/empire/conf:65
 msgid "Goldstone"
@@ -345,11 +348,11 @@ msgstr "Goldstone"
 
 #: ../../tribes/empire/conf:66
 msgid "Grape"
-msgstr "Grape"
+msgstr "Grapes"
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."
-msgstr "Grows vine."
+msgstr "Cultivates vines."
 
 #: ../../tribes/empire/conf:149
 msgid "Guardhall"
@@ -376,7 +379,7 @@ msgid "Headquarters"
 msgstr "Headquarters"
 
 #: ../../tribes/empire/conf:203
-#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Headquarters medium"
 
@@ -394,7 +397,7 @@ msgstr "Helmet"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr "Helps to carry items at heavy used roads."
+msgstr "Helps carry items on busy roads."
 
 #: ../../tribes/empire/conf:151
 msgid "High Tower"
@@ -435,11 +438,11 @@ msgstr "Iron Ore"
 
 #: ../../tribes/empire/conf:185
 msgid "Iron Ore Mine"
-msgstr "Iron Ore Mine"
+msgstr "Iron Mine"
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
-msgstr "Keeping sheeps."
+msgstr "Herds sheep."
 
 #: ../../tribes/empire/conf:73
 msgid "Kitchen Tools"
@@ -474,16 +477,16 @@ msgid ""
 "Marble columns present the high culture of the Empire, so they are needed "
 "for nearly every bigger building."
 msgstr ""
-"Marble columns present the high culture of the Empire, so they are needed "
-"for nearly every bigger building."
+"Marble columns represent the advanced culture of the Empire, so they are "
+"found in nearly all the larger buildings."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
 "Marble is the beautiful stone, which is cutted out of the mountains and "
 "which is used for beautiful buildings and columns."
 msgstr ""
-"Marble is the beautiful stone, which is cut from the mountains and is used "
-"for beautiful buildings and columns."
+"Marble is cut from mines in the mountains and used extensively in the "
+"beautiful and impressive Imperial architecture."
 
 #: ../../tribes/empire/conf:115
 msgid "Master Miner"
@@ -504,8 +507,7 @@ msgid ""
 "strong."
 msgstr ""
 "Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-"lunch for the miners and in the soldier training camps to keep warriors "
-"strong."
+"lunch for miners and in the soldiers' training camps to keep warriors strong."
 
 #: ../../tribes/empire/conf:184
 msgid "Mill"
@@ -517,7 +519,7 @@ msgstr "Miller"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr "Mills the wheat to produce flour."
+msgstr "Mills wheat to produce flour."
 
 #: ../../tribes/empire/marblemine/conf:22
 #: ../../tribes/empire/quarry/conf:19
@@ -542,6 +544,10 @@ msgstr "Mine stone (only for compatibility with old savegames (build13))"
 #: ../../tribes/empire/conf:117
 msgid "Miner"
 msgstr "Miner"
+
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:117
+msgid "Not enough space"
+msgstr "Not enough space"
 
 #: ../../tribes/empire/conf:144
 msgid "Outpost"
@@ -581,7 +587,7 @@ msgstr "Plants trees."
 
 #: ../../tribes/empire/conf:80
 msgid "Plate-Armour"
-msgstr "Plate-Armour"
+msgstr "Plate Armour"
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
@@ -768,7 +774,7 @@ msgstr "Sentry"
 
 #: ../../tribes/empire/conf:189
 msgid "Sheepfarm"
-msgstr "Sheepfarm"
+msgstr "Sheep Farm"
 
 #: ../../tribes/empire/conf:119
 msgid "Shepherd"
@@ -812,6 +818,16 @@ msgstr "Smelts iron."
 msgid "Soldier"
 msgstr "Soldier"
 
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:118
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Some of your starting buildings didn't have enough room and weren't\n"
+"built. You are at a disadvantage with this; consider restarting this\n"
+"map with a fair starting condition."
+
 #: ../../tribes/empire/conf:121
 msgid "Stonemason"
 msgstr "Stonemason"
@@ -845,7 +861,7 @@ msgstr "The Hunter brings good meat to the colonists."
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
 msgstr ""
-"The Scythe is the tool of the farmers. It is produced by the toolsmith."
+"The Scythe is the tool of the farmer. It is produced by the toolsmith."
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -855,11 +871,11 @@ msgstr "The Widelands Development Team"
 msgid ""
 "The axe is the tool for the lumberjack. It is produced by the toolsmith."
 msgstr ""
-"The axe is the tool for the lumberjack. It is produced by the toolsmith."
+"The axe is the tool of the lumberjack. It is produced by the toolsmith."
 
 #: ../../tribes/empire/bread/conf:1
 msgid "The bakers of the Empire make really tasty bread."
-msgstr "The bakers of the Empire make really tasty bread."
+msgstr "The Imperial bakers make really tasty bread."
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""
@@ -874,8 +890,8 @@ msgid ""
 "The fires of the Empire are usually fed with wood, but sometimes, wood just "
 "does not burn hot enough. Then, coal is used."
 msgstr ""
-"The fires of the Empire are usually fed with wood, but sometimes, wood just "
-"does not burn hot enough. Then, coal is used."
+"The fires of the Empire are usually fed with wood, but for when wood just "
+"does not burn hot enough, coal is used."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -884,7 +900,7 @@ msgid ""
 "produced by the toolsmith."
 msgstr ""
 "The hammer is an essential tool. It is needed by the geologist, the worker, "
-"the armoursmith and weaponsmith. Make sure you always got some in reserve! "
+"the armoursmith and weaponsmith. Make sure you always have some in reserve! "
 "It is produced by the toolsmith."
 
 #: ../../tribes/empire/bakingtray/conf:1
@@ -892,7 +908,7 @@ msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
 msgstr ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
+"The peel is the tool of the baker, each baker needs his own. It is produced "
 "by the toolsmith."
 
 #: ../../tribes/empire/shovel/conf:1
@@ -900,12 +916,12 @@ msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "uses it. It is produced by the toolsmith."
 msgstr ""
-"The shovel is needed for proper handling of plants. Therefore the forester "
-"uses it. It is produced by the toolsmith."
+"The shovel is used be the forester for planting trees. It is produced by the "
+"toolsmith."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid "The strongest armour existing for the Empire soldiers."
-msgstr "The strongest armour existing for the Empire soldiers."
+msgstr "The strongest armour worn by Imperial soldiers."
 
 #: ../../tribes/empire/grape/conf:1
 msgid "These grapes are the basic for tasty wine."
@@ -916,34 +932,33 @@ msgid ""
 "This basket is needed by the winegrower, for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
-"This basket is needed by the winegrower, for harvesting the grapes. It is "
+"This basket is needed by the winegrower, for harvesting grapes. It is "
 "produced by the toolsmith."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid "This is a good warrior lance, with a steel-top and a little blade."
-msgstr "This is a good warrior lance, with a steel-top and a little blade."
+msgstr "This is a good warrior's lance, with a short, steel-tipped blade."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid "This is a medium armour for Empire soldiers."
-msgstr "This is a medium armour for Empire soldiers."
+msgstr "This is medium armour for Imperial soldiers."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
 "This is a wooden lance, which is the basic of the Empires military system."
-msgstr ""
-"This is a wooden lance, which is the basic of the Empires military system."
+msgstr "This is a wooden lance, the basic weapon of the Imperial soldier."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
-msgstr "This is an advanced lance, with steel top."
+msgstr "This is an advanced lance, with steel tip."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
 "This is the best and sharpest weapon, the Empire weaponsmith creates for "
 "their warriors."
 msgstr ""
-"This is the best and sharpest weapon, the Empire weaponsmith creates for "
-"their warriors."
+"This is the best and sharpest weapon, created by the Empire's weaponsmiths "
+"for their warriors."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
@@ -978,20 +993,20 @@ msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters."
 msgstr ""
-"This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by the hunters."
+"This spear is light enough to be thrown, but heavy enough to kill an animal "
+"with one blow. It is only used by the hunters."
 
 #: ../../tribes/empire/wine/conf:1
 msgid ""
 "This wine gives enough power, to mine marble or gold. And furthermore, our "
 "soldiers like it, too."
 msgstr ""
-"This wine gives enough power, to mine marble or gold. And furthermore, our "
-"soldiers like it, too."
+"This wine gives enough power to mine marble or gold. And furthermore, our "
+"soldiers like it too."
 
 #: ../../tribes/empire/lance/conf:1
 msgid "This wooden lance has an iron spike."
-msgstr "This wooden lance has an iron spike."
+msgstr "This wooden lance has a spiked iron tip."
 
 #: ../../tribes/empire/conf:122
 msgid "Toolsmith"
@@ -1024,7 +1039,7 @@ msgstr "Trunk"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid "Trunks are one important build material of the Empire."
-msgstr "Trunks are one of the important build materials for the Empire."
+msgstr "Trunks are one of the important building materials of the Empire."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1185,8 +1200,8 @@ msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer."
 msgstr ""
-"Water is the most essential essence for life! This water is used in many "
-"places, be it to make bread or beer."
+"Water is essential for life! It has many uses, including making bread and "
+"beer."
 
 #: ../../tribes/empire/conf:194
 msgid "Weapon Smithy"
@@ -1221,7 +1236,7 @@ msgid ""
 "Wheat is essential for surviving. Delicious bread and ales can be made of "
 "this wheat."
 msgstr ""
-"Wheat is essential for surviving. Delicious bread and ales can be made from "
+"Wheat is essential for survival. Delicious bread and ales can be made from "
 "this wheat."
 
 #: ../../tribes/empire/conf:90
@@ -1246,7 +1261,9 @@ msgstr "Wool"
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
-msgstr "Wool is the hair of sheeps. Weaving mills use it to make cloth."
+msgstr ""
+"Wool is obtained by shearing the fleeces from sheep. Weaving mills use it to "
+"make cloth."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20
