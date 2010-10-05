@@ -58,11 +58,17 @@ private:
  * to the top.
  *
  * The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
+ * 
 */
 struct Tab_Panel : public Panel {
 	friend class Tab;
 
 	Tab_Panel(Panel * parent, int32_t x, int32_t y, PictureID background);
+	// For Fullscreen menus
+	Tab_Panel
+		(Panel * parent,
+		 int32_t x, int32_t y, int32_t w, int32_t h,
+		 PictureID background);
 
 	uint32_t add
 		(std::string const & name,

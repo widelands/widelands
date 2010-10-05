@@ -54,12 +54,13 @@ MultiPlayerSetupBox::MultiPlayerSetupBox
 :
 UI::Panel(parent, x, y, w, h),
 d(new MultiPlayerSetupBoxOptions),
-tp(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"))
+tp(this, 0, 0, w, h, g_gr->get_picture(PicMod_UI, "pics/win_bg.png"))
 {
 	d->settings = settings;
 	d->usernum = usernum;
 
 	// Add the tabs
+	tp.set_size(get_w(), get_h());
 	UI::Panel * tab1 = new UI::Panel(&tp, 0, 0, w, h - 38);
 	UI::Textarea * t = new UI::Textarea(tab1, 20, 10, 50, 20);
 	t->set_text("Test");

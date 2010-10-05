@@ -92,7 +92,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 // Text labels
 	m_title
 		(this,
-		 m_xres / 2, m_yres / 10,
+		 m_xres / 2, m_yres / 18,
 		 _("Multiplayer Game Setup"), UI::Align_HCenter),
 	m_mapname
 		(this,
@@ -127,17 +127,15 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_mpsb =
 		new MultiPlayerSetupBox
 			(this,
-			 m_xres / 25, m_yres / 4, m_xres * 16 / 25, m_yres * 3 / 5,
+			 m_xres / 25, m_yres / 8, m_xres * 16 / 25, m_yres * 1 / 2,
 			 settings, m_usernum, m_fn, m_fs);
 
-	if (m_settings->settings().multiplayer) {
-		m_lobby_list =
-			new UI::Listselect<int32_t>
-				(this, m_xres * 7 / 10, m_yres * 6 / 10, m_butw, m_yres * 7 / 20);
-		m_lobby_list->set_font(m_fn, m_fs);
-		m_lobby.set_text(_("Lobby:"));
-		m_lobby.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	}
+	m_lobby_list =
+		new UI::Listselect<int32_t>
+			(this, m_xres * 7 / 10, m_yres * 13 / 20, m_butw, m_yres * 3 / 10);
+	m_lobby_list->set_font(m_fn, m_fs);
+	m_lobby.set_text(_("Lobby:"));
+	m_lobby.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 }
 
 Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
@@ -186,7 +184,7 @@ void Fullscreen_Menu_LaunchMPG::setChatProvider(ChatProvider & chat)
 	m_chat =
 		new GameChatPanel
 			(this,
-			 m_xres * 5 / 100, m_yres * 13 / 20, m_xres * 25 / 40, m_yres * 3 / 10,
+			 m_xres * 5 / 100, m_yres * 13 / 20, m_xres * 51 / 80, m_yres * 3 / 10,
 			 chat);
 	// For better readability
 	m_chat->set_bg_color(RGBColor(50, 50, 50));
