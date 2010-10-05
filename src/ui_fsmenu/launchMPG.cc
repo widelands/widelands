@@ -40,7 +40,7 @@
 
 Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,
-	 bool autolaunch)
+	 uint32_t clientid, bool autolaunch)
 	:
 	Fullscreen_Menu_Base("launchgamemenu.jpg"),
 
@@ -49,6 +49,8 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_buth (m_yres * 9 / 200),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
+
+	m_clientid(clientid),
 
 // Buttons
 	m_select_map
@@ -91,7 +93,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_title
 		(this,
 		 m_xres / 2, m_yres / 10,
-		 _("Launch Game"), UI::Align_HCenter),
+		 _("Multiplayer Game Setup"), UI::Align_HCenter),
 	m_mapname
 		(this,
 		 m_xres * 7 / 10 + m_butw / 2, m_yres * 5 / 20,
@@ -127,8 +129,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		new MultiPlayerSetupBox
 			(this,
 			 m_xres / 25, y, m_xres * 16 / 25, m_yres * 17 / 500,
-			 settings, 0, // FIXME client number from initialization
-			 m_fn, m_fs);
+			 settings, m_clientid, m_fn, m_fs);
 
 	if (m_settings->settings().multiplayer) {
 		m_lobby_list =

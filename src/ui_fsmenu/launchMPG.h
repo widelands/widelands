@@ -56,7 +56,8 @@ struct LuaInterface;
  */
 struct Fullscreen_Menu_LaunchMPG : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LaunchMPG
-		(GameSettingsProvider *, GameController * = 0, bool autolaunch = false);
+		(GameSettingsProvider *, GameController *, uint32_t clientid,
+		 bool autolaunch = false);
 	~Fullscreen_Menu_LaunchMPG();
 
 	void setChatProvider(ChatProvider &);
@@ -84,6 +85,8 @@ private:
 	uint32_t    m_buth;
 	uint32_t    m_fs;
 	std::string m_fn;
+
+	uint32_t    m_clientid;
 
 	UI::Callback_Button<Fullscreen_Menu_LaunchMPG> m_select_map, m_select_save;
 	UI::Callback_Button<Fullscreen_Menu_LaunchMPG> m_wincondition, m_back, m_ok;

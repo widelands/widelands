@@ -580,7 +580,7 @@ void NetHost::run(bool const autorun)
 {
 	HostGameSettingsProvider hp(this);
 	{
-		Fullscreen_Menu_LaunchMPG lgm(&hp, this, autorun);
+		Fullscreen_Menu_LaunchMPG lgm(&hp, this, 0, autorun);
 		lgm.setChatProvider(d->chat);
 		const int32_t code = lgm.run();
 
