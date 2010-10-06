@@ -30,7 +30,7 @@
 #define WIDELANDS_PROTOCOL_EXT_MAJOR 1
 #define WIDELANDS_PROTOCOL_EXT_MINOR 0
 
-#define WLGGZ_OLD_OPCODE(x) (x > 0 and x <= 6 or x == 99)
+#define WLGGZ_OLD_OPCODE(x) ((x > 0 and x <= 6) or x == 99 or x == 9)
 #define WLGGZ_NEW_OPCODE(x) (x > 0 and not WLGGZ_OLD_OPCODE(x))
 
 enum WLGGZNetworkOpcodes

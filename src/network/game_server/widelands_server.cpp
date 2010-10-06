@@ -59,9 +59,13 @@ void wllog (int level, const char * fmt, ...)
 	va_end(va);
 
 	if (send_debug > 0) {
-		ggz_write_int(send_debug, op_debug_string);
+		//ggz_write_int(send_debug, op_debug_string);
 		WLGGZ_writer wr(send_debug);
-		wr << buf;
+		std::string sbuf = buf;
+		wr.type(op_debug_string);
+		wr << sbuf;
+		wr.flush();
+		//ggz_write_int(send_debug, 0);
 	}
 
 	std::cout << "[WLServer]: " << buf << std::endl;
@@ -722,32 +726,35 @@ void WidelandsServer::dataEvent(Client * const client)
 				<< opcode << ")! not a handled old opcode" << std::endl;
 			return;
 		}
-		switch(opcode) {
-		case op_game_statistics:
-			std::cout << "WidelandsServer: GAME: read stats!" << std::endl;
-			read_game_statistics(channel);
-			break;
-		case op_game_information:
-			std::cout << "WidelandsServer: GAME: read game info!" << std::endl;
-			read_game_information(channel, client);
-			break;
-		case op_set_debug:
-			wlggz_read_parameter_list(channel);
-			if (client->number == 0)
-			{
-				std::cout << 
-					"WidelandsServer: debug request from host: " <<
-					"enable sending of debug messages\n" << std::endl;
-				send_debug = true;
-			}
-			break;
-		default:
-			//  Discard
-			std::cerr << "WidelandsServer: Data error. Unhandled opcode(" <<
-				opcode << ")!" << std::endl;
-			wlggz_read_parameter_list(channel);
+	}
+	if(WLGGZ_OLD_OPCODE(opcode))
+		return;
+
+	switch(opcode) {
+	case op_game_statistics:
+		std::cout << "WidelandsServer: GAME: read stats!" << std::endl;
+		read_game_statistics(channel);
 		break;
-		}
+	case op_game_information:
+		std::cout << "WidelandsServer: GAME: read game info!" << std::endl;
+		read_game_information(channel, client);
+		break;
+	case op_set_debug:
+		wlggz_read_parameter_list(channel);
+		if (client->number == 0)
+		{
+			std::cout << 
+				"WidelandsServer: debug request from host: " <<
+				"enable sending of debug messages\n" << std::endl;
+			send_debug = client->fd;
+			}
+		break;
+	default:
+		//  Discard
+		std::cerr << "WidelandsServer: Data error. Unhandled opcode(" <<
+			opcode << ")!" << std::endl;
+		wlggz_read_parameter_list(channel);
+	break;
 	}
 }
 
