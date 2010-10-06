@@ -176,7 +176,7 @@ void WidelandsServer::stateEvent()
 			statestr = "restored";
 			break;
 	}
-	wllog(DL_DEBUG, "WidelandsServer: stateEvent: %s", statestr.c_str());
+	wllog(DL_DEBUG, "stateEvent: %s", statestr.c_str());
 }
 
 // Player join hook
@@ -198,34 +198,34 @@ void WidelandsServer::joinEvent(Client * const client)
 		ggz_write_string(channel, m_wlserver_ip);
 	}
 	wllog
-		(DL_DUMP, "WidelandsServer: Player %i \"%s\" (%s)", client->number,
+		(DL_DUMP, "Player %i \"%s\" (%s)", client->number,
 		 client->name.c_str(), (client->spectator?"spectator":"player"));
 }
 
 // Player leave event
 void WidelandsServer::leaveEvent(Client * client)
 {
-	wllog(DL_INFO, "WidelandsServer: leaveEvent \"%s\"", client->name.c_str());
+	wllog(DL_INFO, "leaveEvent \"%s\"", client->name.c_str());
 }
 
 // Spectator join event (ignored)
 void WidelandsServer::spectatorJoinEvent(Client * client)
 {
 	wllog
-		(DL_INFO, "WidelandsServer: spectatorJoinEvent \"%s\"",
+		(DL_INFO, "spectatorJoinEvent \"%s\"",
 		 client->name.c_str());
 }
 
 // Spectator leave event (ignored)
 void WidelandsServer::spectatorLeaveEvent(Client *)
 {
-	wllog(DL_INFO, "WidelandsServer: spectatorLeaveEvent");
+	wllog(DL_INFO, "spectatorLeaveEvent");
 }
 
 // Spectator data event (ignored)
 void WidelandsServer::spectatorDataEvent(Client *)
 {
-	wllog(DL_INFO, "WidelandsServer: spectatorDataEvent");
+	wllog(DL_INFO, "spectatorDataEvent");
 }
 
 void WidelandsServer::read_game_information(int fd, Client * client)
@@ -644,7 +644,7 @@ void WidelandsServer::dataEvent(Client * const client)
 		player = 0;
 	}
 
-	wllog(DL_DEBUG, "WidelandsServer: data event from %s", client->name.c_str());
+	wllog(DL_DEBUG, "data event from %s", client->name.c_str());
 
 	// Read data
 	int const channel = fd(client->number);
