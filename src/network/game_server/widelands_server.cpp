@@ -234,7 +234,13 @@ void WidelandsServer::read_game_information(int fd, Client * client)
 	std::string playername="";
 	WidelandsPlayer * player = NULL;
 
-	ggz_read_int(fd, &gameinfo);
+	if (ggz_read_int(fd, &gameinfo) < 0)
+	{
+		wllog
+			(DL_ERROR, "read_game_information: failed to read int from client %s",
+			 client->name.c_str());
+		return;
+	}
 	while(gameinfo)
 	{
 		std::list<WLGGZParameter> parlist = wlggz_read_parameter_list(fd);
@@ -330,7 +336,13 @@ void WidelandsServer::read_game_information(int fd, Client * client)
 				wllog(DL_ERROR, "GAMEINFO: error unknown WLGGZGameInfo!");
 		
 		}
-		ggz_read_int(fd, &gameinfo);
+		if (ggz_read_int(fd, &gameinfo) < 0)
+		{
+			wllog
+				(DL_ERROR, "read_game_information: failed to read int from client %s",
+				 client->name.c_str());
+				 return;
+		}
 	}
 
 	if (m_players.find(client->name) != m_players.end())
@@ -372,7 +384,12 @@ void WidelandsServer::read_game_statistics(int fd)
 	std::string playername="";
 	WidelandsPlayer * player = NULL;
 
-	ggz_read_int(fd, &gameinfo);
+	if (ggz_read_int(fd, &gameinfo) < 0)
+	{
+		wllog
+			(DL_ERROR, "read_game_statistics: failed to read int from client");
+			 return;
+	}
 	while(gameinfo)
 	{
 		std::list<WLGGZParameter> parlist = wlggz_read_parameter_list(fd);
@@ -530,7 +547,12 @@ void WidelandsServer::read_game_statistics(int fd)
 			default:
 				wllog(DL_WARN,  "GAMESTATISTICS: Warning unknown WLGGZGameStats!");
 		}
-	ggz_read_int(fd, &gameinfo);
+	if (ggz_read_int(fd, &gameinfo) < 0)
+	{
+		wllog
+			(DL_ERROR, "read_game_statistics: failed to read int from client");
+			 return;
+	}
 	}
 
 	GGZGameResult results[players()];
@@ -649,7 +671,13 @@ void WidelandsServer::dataEvent(Client * const client)
 	// Read data
 	int const channel = fd(client->number);
 
-	ggz_read_int(channel, &opcode);
+	if (ggz_read_int(channel, &opcode) < 0)
+	{
+		wllog
+			(DL_ERROR, "dataEvent but read fro client \"%s\" failed",
+			 client->name.c_str());
+		return;
+	}
 
 	switch (opcode) {
 	case op_reply_ip:
