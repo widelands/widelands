@@ -130,10 +130,27 @@ void ggz_wlmodule::process()
 						("GGZMOD/WLDATA/process ## %i parameters left\n",
 						 parlist.size());
 			}
+			ggz_write_int(m_data_fd, op_set_debug);
+			ggz_write_int(m_data_fd, 0);
 		}
 		break;
 	default: 
-		log("GGZMOD/WLDATA/process ## opcode unknown!\n");
+		if (m_server_ver > 0)
+			switch(op) {
+			case op_debug_string:
+			{
+				std::list<WLGGZParameter> parlist =
+					wlggz_read_parameter_list(m_data_fd);
+				if(parlist.size())
+					log("server module ## %s\n", parlist.front().get_string().c_str());
+			}
+				break;
+			default:
+				log("GGZWLMODULE ## opcode unknown - extended protocol\n");
+				wlggz_read_parameter_list(m_data_fd);
+			}
+		else
+			log("GGZWLMODULE ## opcode unknown! - old protocol path\n");
 	}
 }
 

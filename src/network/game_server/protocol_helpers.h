@@ -135,7 +135,8 @@ std::list<WLGGZParameter> wlggz_read_parameter_list(int fd)
 				delete[] d_str;
 				break;
 			default:
-				std::cout << "GGZ: ERROR Received unknow data type" << std::endl;
+				std::cout << "GGZ: ERROR Received unknow data type: " <<
+				datatype << std::endl;
 		}
 		list.push_back(data);
 		ggz_read_int(fd, &datatype);

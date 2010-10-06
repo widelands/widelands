@@ -85,6 +85,9 @@ enum WLGGZNetworkOpcodes
 	/// Similiar to the above op_game_statistics just for GameInfo
 	op_game_information = 8,
 
+	op_set_debug = 11,
+	op_debug_string = 12,
+
 	op_unreachable = 99
 };
 

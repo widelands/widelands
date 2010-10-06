@@ -36,6 +36,38 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
+#define DL_FATAL 1
+#define DL_ERROR 2
+#define DL_WARN 3
+#define DL_INFO 4
+#define DL_DEBUG 5
+#define DL_DUMP 6
+
+int send_debug = -1;
+int debug_level = 9;
+
+void wllog (int level, const char * fmt, ...)
+{
+	char buf[2048];
+	va_list va;
+
+	if (debug_level < level)
+		return;
+
+	va_start(va, fmt);
+	vsnprintf(buf, sizeof(buf), fmt, va);
+	va_end(va);
+
+	if (send_debug > 0) {
+		ggz_write_int(send_debug, op_debug_string);
+		WLGGZ_writer wr(send_debug);
+		wr << buf;
+	}
+
+	std::cout << "[WLServer]: " << buf << std::endl;
+	
+}
+
 // Constructor: inherit from ggzgameserver
 WidelandsServer::WidelandsServer():
 	GGZGameServer(),
@@ -46,52 +78,56 @@ WidelandsServer::WidelandsServer():
 	m_reported(false),
 	m_map()
 {
-	std::cout << std::endl << "WidelandsServer: launched!" << std::endl;
+	wllog(DL_INFO, "");
+	wllog(DL_INFO, "launched!");
 }
 
 // Destructor
 WidelandsServer::~WidelandsServer()
 {
-	std::cout << "WidelandsServer: closing!" << std::endl << std::endl;
-	std::cout << "WidelandsServer: Map \"" << m_map.name() << "\" (" << m_map.w() <<
-		", " << m_map.h() << ")" << std::endl;
-	std::cout << "WidelandsServer: GameTime: " << m_result_gametime << std::endl;
-	std::cout << "WidelandsServer: Win Condition: ";
+	wllog(DL_INFO, "closing!");
+	wllog(DL_DUMP, "Map %s (%i, %i)", m_map.name(), m_map.w(), m_map.h());
+	wllog(DL_DUMP, "GameTime: %i", m_result_gametime);
 
+	std::string wincond = "unknown (ERROR)";
 	switch(m_map.gametype())
 	{
 		case gametype_endless:
-			std::cout << "endless" << std::endl;
+			wincond = "endless";
 			break;
 		case gametype_defeatall:
-			std::cout << "defeat all" << std::endl;
+			wincond = "defeat all";
 			break;
 		case gametype_collectors:
-			std::cout << "collectors" << std::endl;
+			wincond = "collectors";
 			break;
 		case gametype_tribes_together:
-			std::cout << "tribes together" << std::endl;
-			break;
-		default:
-			std::cout << "unknown (ERROR)" << std::endl;
+			wincond = "tribes together";
 			break;
 	}
-
+	wllog(DL_DUMP, "Win Condition: %s", wincond.c_str());
 	std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
 	while(it != m_players.end())
 	{
-		std::cout << "WidelandsServer: Player (ggz: " << it->second->ggz_player_number() << 
-			", wl: " <<  it->second->wl_player_number() << " , \"" << it->first << 
-			"\") " << it->second->tribe() << std::endl;
-			
-		std::cout << "WidelandsServer:      Stats: land: " << it->second->stats.land << ", buildings: " <<
-			it->second->stats.buildings << ", economy-strength: " << it->second->stats.economystrength << std::endl;
-		std::cout << "WidelandsServer:             points: " << it->second->stats.points << ", milbuildingslost: " <<
-			it->second->stats.milbuildingslost << ", civbuildingslost: " << it->second->stats.civbuildingslost << std::endl;
+		wllog
+			(DL_DUMP, "Player (ggz: %i, wl: %i) %s, %s",
+			 it->second->ggz_player_number(), it->second->wl_player_number(),
+			 it->first.c_str(), it->second->tribe().c_str());
+
+		wllog
+			(DL_DUMP, "     Stats: land: %i, buildings: %i, economy-strength: %i",
+			 it->second->stats.land, it->second->stats.buildings,
+			 it->second->stats.economystrength);
+
+		wllog
+			(DL_DUMP, "            points: %i, milbuildingslost: %i, "
+			 "civbuildingslost: %i",
+			 it->second->stats.points, it->second->stats.milbuildingslost,
+			 it->second->stats.civbuildingslost);
 		it++;
 	}
 
-	std::cout << std::endl;
+	wllog(DL_DUMP, "");
 
 	if(m_wlserver_ip)
 		ggz_free(m_wlserver_ip);
@@ -116,33 +152,33 @@ result;
 // State change hook
 void WidelandsServer::stateEvent()
 {
-	std::cout << "WidelandsServer: stateEvent: ";
+	
+	char * state = "unkown state";
 	switch(state())
 	{
 		case created:
-			std::cout << "created" << std::endl;
+			state = "created";
 			break;
 		case waiting:
-			std::cout << "waiting" << std::endl;
+			state = "waiting";
 			break;
 		case playing:
-			std::cout << "playing" << std::endl;
+			state = "playing";
 			break;
 		case done:
-			std::cout << "done" << std::endl;
+			state = "done";
 			break;
 		case restored:
-			std::cout << "restored" << std::endl;
+			state = "restored";
 			break;
-		default:
-			std::cout << "unkown state" << std::endl;
 	}
+	wllog(DL_DEBUG, "WidelandsServer: stateEvent: %s", state);
 }
 
 // Player join hook
 void WidelandsServer::joinEvent(Client * const client)
 {
-	std::cout << "WidelandsServer: joinEvent: " << client->name << std::endl;
+	wllog(DL_INFO, "joinEvent: %s", client->name);
 
 	// Send greeter
 	int const channel = fd(client->number);
@@ -675,6 +711,9 @@ void WidelandsServer::dataEvent(Client * const client)
 			wr.type(op_reply_protocol_ext);
 			wr << WIDELANDS_PROTOCOL_EXT_MAJOR << WIDELANDS_PROTOCOL_EXT_MINOR;
 		}
+		std::cout << "WidelandsServer: got ext proto request from " <<
+			client->name << std::endl;
+		ggz_write_int(client->fd, op_request_protocol_ext);
 		break;
 	default:
 		if (WLGGZ_OLD_OPCODE(opcode) or not SUPPORT_B16_PROTOCOL(player))
@@ -692,6 +731,16 @@ void WidelandsServer::dataEvent(Client * const client)
 			std::cout << "WidelandsServer: GAME: read game info!" << std::endl;
 			read_game_information(channel, client);
 			break;
+		case op_set_debug:
+			wlggz_read_parameter_list(channel);
+			if (client->number == 0)
+			{
+				std::cout << 
+					"WidelandsServer: debug request from host: " <<
+					"enable sending of debug messages\n" << std::endl;
+				send_debug = true;
+			}
+			break;
 		default:
 			//  Discard
 			std::cerr << "WidelandsServer: Data error. Unhandled opcode(" <<
@@ -700,9 +749,6 @@ void WidelandsServer::dataEvent(Client * const client)
 		break;
 		}
 	}
-
-
-
 }
 
 // Error handling event
