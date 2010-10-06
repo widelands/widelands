@@ -683,25 +683,25 @@ void WidelandsServer::dataEvent(Client * const client)
 				<< opcode << ")! not a handled old opcode" << std::endl;
 			return;
 		}
+		switch(opcode) {
+		case op_game_statistics:
+			std::cout << "WidelandsServer: GAME: read stats!" << std::endl;
+			read_game_statistics(channel);
+			break;
+		case op_game_information:
+			std::cout << "WidelandsServer: GAME: read game info!" << std::endl;
+			read_game_information(channel, client);
+			break;
+		default:
+			//  Discard
+			std::cerr << "WidelandsServer: Data error. Unhandled opcode(" <<
+				opcode << ")!" << std::endl;
+			wlggz_read_parameter_list(channel);
+		break;
+		}
 	}
 
-	if(WLGGZ_OLD_OPCODE(opcode))
-		return;
 
-	switch(opcode) {
-	case op_game_statistics:
-		std::cout << "WidelandsServer: GAME: read stats!" << std::endl;
-		read_game_statistics(channel);
-		break;
-	case op_game_information:
-		std::cout << "WidelandsServer: GAME: read game info!" << std::endl;
-		read_game_information(channel, client);
-		break;
-	default:
-		//  Discard
-		std::cerr << "WidelandsServer: Data error. Unhandled opcode(" << opcode << ")!" << std::endl;
-		break;
-	}
 
 }
 
