@@ -1,8 +1,8 @@
 help=_Thatch reed is used to make the roofs of buildings waterproof.
-preciousness=2
+preciousness=5
 
 # Reed is growing near by watersides.
 
 [idle]
 pics=idle.png
-hotspot=8 18
+hotspot=3 12

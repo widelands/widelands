@@ -234,6 +234,8 @@ void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider & chat)
 			(this,
 			 m_xres * 5 / 100, m_yres * 13 / 20, m_xres * 25 / 40, m_yres * 3 / 10,
 			 chat);
+	// For better readability
+	m_chat->set_bg_color(RGBColor(50, 50, 50));
 }
 
 
@@ -274,13 +276,26 @@ void Fullscreen_Menu_LaunchGame::win_condition_clicked()
  * update win conditions information
  */
 void Fullscreen_Menu_LaunchGame::win_condition_update() {
-	boost::shared_ptr<LuaTable> t = m_lua->run_script
-		("win_conditions", m_settings->getWinCondition());
-	std::string n = t->get_string("name");
-	std::string d = t->get_string("description");
+	if (m_settings->settings().scenario) {
+		m_wincondition.set_title(_("Scenario"));
+		m_wincondition.set_tooltip
+			(_("Win condition is set through the scenario"));
+	} else {
+		boost::shared_ptr<LuaTable> t = m_lua->run_script
+			("win_conditions", m_settings->getWinCondition());
 
-	m_wincondition.set_title(_("Type: ") + n);
-	m_wincondition.set_tooltip(d.c_str());
+		try {
+
+			std::string n = t->get_string("name");
+			std::string d = t->get_string("description");
+
+			m_wincondition.set_title(_("Type: ") + n);
+			m_wincondition.set_tooltip(d.c_str());
+		} catch(LuaTableKeyError &) {
+			// might be that this is not a win condition after all.
+			win_condition_clicked();
+		}
+	}
 }
 
 /**
@@ -298,7 +313,7 @@ void Fullscreen_Menu_LaunchGame::start_clicked()
 			 	 "If this happens in a network game, the host might have selected "
 			 	 "a file that you do not own. Normally such a file should be send "
 			 	 "from the host to you, but perhaps the transfer was not yet "
-			 	 "finnished!?!"),
+			 	 "finished!?!"),
 			 m_filename.c_str());
 	if (m_settings->canLaunch()) {
 		if (!m_is_savegame)
@@ -335,7 +350,8 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		(settings.multiplayer && m_settings->canChangeMap());
 	m_select_save.set_enabled
 		(settings.multiplayer && m_settings->canChangeMap());
-	m_wincondition.set_enabled(m_settings->canChangeMap() && !m_is_savegame);
+	m_wincondition.set_enabled
+		(m_settings->canChangeMap() && !m_is_savegame && !settings.scenario);
 
 	if (settings.scenario)
 		set_scenario_values();
@@ -420,14 +436,14 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	}
 
 	// Care about Multiplayer clients, lobby and players
-	// As well as win_conditions (in SP they may only change, if clicked)
+	// As well as win_conditions
 	if (settings.multiplayer) {
 		m_lobby_list->clear();
 		container_iterate_const(std::vector<UserSettings>, settings.users, i)
 			if (i.current->position == UserSettings::none())
 				m_lobby_list->add(i.current->name.c_str(), 0);
-		win_condition_update();
 	}
+	win_condition_update();
 }
 
 
@@ -440,8 +456,9 @@ void Fullscreen_Menu_LaunchGame::select_map()
 		return;
 
 	GameSettings const & settings = m_settings->settings();
-	Fullscreen_Menu_MapSelect msm;
-	msm.setScenarioSelectionVisible(!settings.multiplayer);
+
+	Fullscreen_Menu_MapSelect msm
+		(settings.multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO);
 	int code = msm.run();
 
 	if (code <= 0) {
@@ -514,7 +531,8 @@ void Fullscreen_Menu_LaunchGame::set_scenario_values()
 	ml->preload_map(true);
 	Widelands::Player_Number const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
-		m_settings->setPlayerName (i, map.get_scenario_player_name (i + 1));
+		if (!m_settings->settings().multiplayer)
+			m_settings->setPlayerName (i, map.get_scenario_player_name (i + 1));
 		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i + 1));
 	}
 }
@@ -547,6 +565,7 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t const pos)
 			m_settings->setPlayerNumber(pos);
 			m_settings->setPlayerName
 				(pos, settings.users.at(settings.usernum).name);
+			m_settings->setPlayerPartner(pos, 0);
 		}
 		return;
 	}

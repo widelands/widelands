@@ -236,6 +236,8 @@ protected:
 
 	void cleanup_replays();
 
+	bool redirect_output(std::string path="");
+
 	/**
 	 * The commandline, conveniently repackaged
 	 * This is usually not empty, it contains at least the tuple
@@ -284,6 +286,9 @@ protected:
 	//do we want to search the default places for widelands installs
 	bool   m_default_datadirs;
 	std::string m_homedir;
+
+	/// flag indicating if stdout and stderr have been redirected
+	bool m_redirected_stdio;
 private:
 	///Holds this process' one and only instance of WLApplication, if it was
 	///created already. NULL otherwise.

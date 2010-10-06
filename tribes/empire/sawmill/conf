@@ -29,8 +29,8 @@ produce=wood
 
 [idle]
 pics=sawmill_i_??.png  # ???
-hotspot=56 80
+hotspot=54 70
 
 [working]
 pics=sawmill_i_??.png  # ???
-hotspot=56 80
+hotspot=54 70

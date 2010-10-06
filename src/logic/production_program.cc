@@ -37,10 +37,15 @@
 #include "worker_program.h"
 
 #include <libintl.h>
+#include <boost/format.hpp>
 
 #include "config.h"
 
 namespace Widelands {
+
+// For formation of better translateable texts
+using boost::format;
+
 
 ProductionProgram::Action::~Action() {}
 
@@ -385,6 +390,10 @@ ProductionProgram::ActReturn::~ActReturn() {
 void ProductionProgram::ActReturn::execute
 	(Game & game, ProductionSite & ps) const
 {
+	// TODO  Fix this part with boost::format, so translators are able
+	// TODO  to translate these texts.
+	// TODO  Unfortunally gramatics are not as easy as mathematics in most
+	// TODO  languages.
 	std::string statistics_string =
 		m_result == Failed    ? _("failed")    :
 		m_result == Completed ? _("completed") : _("skipped");
@@ -421,9 +430,18 @@ void ProductionProgram::ActReturn::execute
 			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 			 "%s", result_string.c_str());
 	}
+	// Commented out, as the information is already given in the hover text and
+	// should *not* be shown in general statistics string, as:
+	// 1) the strings are that long, that they clutter the screen (especially
+	//    if you build up an "industry park" ;)
+	// 2) in many cases the "real" statistics (in percent) are nearly no more
+	//    shown, so the user has no idea if "skipped because .. is missing" is
+	//    an exception or the normal case at the moment.
+	/*
 	snprintf
 		(ps.m_statistics_buffer, sizeof(ps.m_statistics_buffer),
 		 "%s", statistics_string.c_str());
+	*/
 	return ps.program_end(game, m_result);
 }
 
@@ -846,7 +864,7 @@ void ProductionProgram::ActProduce::execute
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	Tribe_Descr const & tribe = ps.owner().tribe();
-	std::string result_string = _("Produced ");
+	std::string result_string = "";
 	assert(m_items.size());
 
 	for (wl_const_range<Items> i(m_items); i;)
@@ -864,6 +882,8 @@ void ProductionProgram::ActProduce::execute
 			break;
 		result_string += _(", ");
 	}
+	// Keep translateability in mind!
+	result_string = str(format(_("Produced %s")) % result_string);
 	snprintf
 		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 		 "%s", result_string.c_str());
@@ -1102,8 +1122,12 @@ void ProductionProgram::ActMine::execute
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
-		if (m_chance <= game.logic_rand() % 100)
+		if (m_chance <= game.logic_rand() % 100) {
+			snprintf
+				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+				 _("No left resources found!"));
 			return ps.program_end(game, Failed);
+		}
 	}
 
 	//  done successful
@@ -1176,8 +1200,12 @@ void ProductionProgram::ActCheck_Soldier::execute
 	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);
 
 	for (std::vector<Soldier *>::const_iterator it = soldiers.begin();; ++it) {
-		if (it == soldiers_end)
+		if (it == soldiers_end) {
+			snprintf
+				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+				 _("No soldier for this training level found!"));
 			return ps.program_end(game, Failed);
+		}
 		if        (attribute == atrHP)      {
 			if ((*it)->get_hp_level()      == level)
 				break;
@@ -1259,8 +1287,12 @@ void ProductionProgram::ActTrain::execute
 		 attribute, level, target_level);
 
 	for (;; ++it) {
-		if (it == soldiers_end)
+		if (it == soldiers_end) {
+			snprintf
+				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+				 _("No soldier for this training level found!"));
 			return ps.program_end(game, Failed);
+		}
 		if        (attribute == atrHP)      {
 			if ((*it)->get_hp_level     () == level)
 				break;

@@ -75,6 +75,12 @@ RealFSImpl::RealFSImpl(std::string const & Directory)
 	// TODO: check OS permissions on whether the directory is writable!
 #ifdef WIN32
 	m_root = Directory;
+	// Replace all slashes with backslashes for FileSystem::pathIsAbsolute
+	// and FileSystem::FS_CanonicalizeName to work properly.
+	for (uint32_t j = 0; j < m_root.size(); ++j) {
+		if (m_root[j] == '/')
+			m_root[j] = '\\';
+	}
 #else
 	m_root = FS_CanonicalizeName(Directory);
 #endif

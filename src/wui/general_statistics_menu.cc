@@ -19,15 +19,17 @@
 
 #include "general_statistics_menu.h"
 
-#include "logic/editor_game_base.h"
-#include "logic/game.h"
+
 #include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "interactive_player.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
 #include "logic/player.h"
-#include "graphic/rendertarget.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
+#include "scripting/scripting.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -36,7 +38,7 @@
 using namespace Widelands;
 
 #define PLOT_HEIGHT 130
-#define NR_DIFFERENT_DATASETS 11
+#define NR_BASE_DATASETS 11
 
 General_Statistics_Menu::General_Statistics_Menu
 	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
@@ -54,11 +56,22 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	m_plot.set_plotmode(WUIPlot_Area::PLOTMODE_ABSOLUTE);
 	pos.y += PLOT_HEIGHT + spacing + spacing;
 
-	const Game & game = *parent.get_game();
+	Game & game = *parent.get_game();
 	const Game::General_Stats_vector & genstats =
 		game.get_general_statistics();
 	const Game::General_Stats_vector::size_type
 		general_statistics_size = genstats.size();
+
+	// Is there a hook dataset?
+	m_ndatasets = NR_BASE_DATASETS;
+	boost::shared_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
+	std::string cs_name, cs_pic;
+	if (hook) {
+		cs_name = hook->get_string("name");
+		cs_pic = hook->get_string("pic");
+		m_ndatasets++;
+	}
+
 	for
 		(Game::General_Stats_vector::size_type i = 0;
 		 i < general_statistics_size;
@@ -67,40 +80,45 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 		const uint8_t * colors = g_playercolors[i];
 		const RGBColor color(colors[9], colors[10], colors[11]);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS +  0, &genstats[i].land_size,
+			(i * m_ndatasets +  0, &genstats[i].land_size,
 			 color);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS +  1, &genstats[i].nr_workers,
+			(i * m_ndatasets +  1, &genstats[i].nr_workers,
 			 color);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS +  2, &genstats[i].nr_buildings,
+			(i * m_ndatasets +  2, &genstats[i].nr_buildings,
 			 color);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS +  3, &genstats[i].nr_wares,
+			(i * m_ndatasets +  3, &genstats[i].nr_wares,
 			 color);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS +  4, &genstats[i].productivity,
+			(i * m_ndatasets +  4, &genstats[i].productivity,
 			 color);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS +  5, &genstats[i].nr_casualties,
+			(i * m_ndatasets +  5, &genstats[i].nr_casualties,
 			 color);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS +  6, &genstats[i].nr_kills,
+			(i * m_ndatasets +  6, &genstats[i].nr_kills,
 			 color);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS +  7, &genstats[i].nr_msites_lost,
+			(i * m_ndatasets +  7, &genstats[i].nr_msites_lost,
 			 color);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS +  8, &genstats[i].nr_msites_defeated,
+			(i * m_ndatasets +  8, &genstats[i].nr_msites_defeated,
 			 color);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS +  9, &genstats[i].nr_civil_blds_lost,
+			(i * m_ndatasets +  9, &genstats[i].nr_civil_blds_lost,
 			 color);
 		m_plot.register_plot_data
-			(i * NR_DIFFERENT_DATASETS + 10, &genstats[i].miltary_strength,
+			(i * m_ndatasets + 10, &genstats[i].miltary_strength,
 			 color);
+		if (hook) {
+			m_plot.register_plot_data
+				(i * m_ndatasets + 11, &genstats[i].custom_statistic,
+				 color);
+		}
 		if (game.get_player(i + 1)) // Show area plot
-			m_plot.show_plot(i * NR_DIFFERENT_DATASETS, 1);
+			m_plot.show_plot(i * m_ndatasets, 1);
 	}
 
 
@@ -130,9 +148,9 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	pos.y += 25 + spacing + spacing;
 
 	button_size =
-		(get_inner_w() - spacing * (NR_DIFFERENT_DATASETS + 1))
+		(get_inner_w() - spacing * (m_ndatasets + 1))
 		/
-		NR_DIFFERENT_DATASETS;
+		m_ndatasets;
 	m_radiogroup.add_button
 		(this,
 		 pos,
@@ -198,6 +216,14 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 		 pos,
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_militarystrength.png"),
 		 _("Military"));
+	if (hook) {
+		pos.x += button_size + spacing;
+		m_radiogroup.add_button
+			(this,
+			 pos,
+			 g_gr->get_picture(PicMod_Game, cs_pic),
+			 cs_name.c_str());
+	}
 	m_radiogroup.set_state(0);
 	m_selected_information = 0;
 	m_radiogroup.changedto.set
@@ -302,7 +328,7 @@ void General_Statistics_Menu::cb_changed_to(int32_t const id, bool const what)
 {
 	// This represents our player number
 	m_plot.show_plot
-		((id - 1) * NR_DIFFERENT_DATASETS + m_selected_information, what);
+		((id - 1) * m_ndatasets + m_selected_information, what);
 }
 
 /*
@@ -315,9 +341,9 @@ void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (m_cbs[i]) {
 			m_plot.show_plot
-				(i * NR_DIFFERENT_DATASETS + id, m_cbs[i]->get_state());
+				(i * m_ndatasets + id, m_cbs[i]->get_state());
 			m_plot.show_plot
-				(i * NR_DIFFERENT_DATASETS + m_selected_information, false);
+				(i * m_ndatasets + m_selected_information, false);
 		}
 	m_selected_information = id;
 };

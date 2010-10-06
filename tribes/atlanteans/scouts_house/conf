@@ -27,10 +27,10 @@ worker=scout
 
 [idle]
 pics=scouts_house_i_??.png  # ???
-hotspot=39 49
+hotspot=39 42
 playercolor=true
 
 [build]
 pics=scouts_house_b_??.png  # ???
-hotspot=39 49
+hotspot=39 42
 playercolor=true

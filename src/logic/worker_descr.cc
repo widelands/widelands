@@ -82,6 +82,11 @@ Worker_Descr::Worker_Descr
 			}
 	}
 
+	// If worker has a work animation load and add it.
+	Section * work_s = prof.get_section("work");
+	if (work_s)
+		add_animation("work", g_anim.get(directory, *work_s, "work.png"));
+
 	// Read the walking animations
 	m_walk_anims.parse
 		(*this, directory, prof, "walk_??", prof.get_section("walk"));

@@ -22,7 +22,7 @@
 #include "economy/request.h"
 #include "game.h"
 #include "game_data_error.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_player.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
@@ -180,9 +180,6 @@ Building & Building_Descr::create
 	 Player               &       owner,
 	 Coords                 const pos,
 	 bool                   const construct,
-	 uint32_t       const * const ware_counts,
-	 uint32_t       const * const worker_counts,
-	 Soldier_Counts const * const soldier_counts,
 	 Building_Descr const * const old,
 	 bool                         loading)
 	const
@@ -194,13 +191,7 @@ Building & Building_Descr::create
 		b.Building::init(egbase);
 		return b;
 	}
-	b.prefill
-		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 ware_counts, worker_counts, soldier_counts);
 	b.init(egbase);
-	b.postfill
-		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 ware_counts, worker_counts, soldier_counts);
 	return b;
 }
 
@@ -396,8 +387,7 @@ void Building::init(Editor_Game_Base & egbase)
 		Flag * flag = dynamic_cast<Flag *>(map.get_immovable(neighb));
 		if (not flag)
 			flag =
-				new Flag
-					(ref_cast<Game, Editor_Game_Base>(egbase), owner(), neighb);
+				new Flag (egbase, owner(), neighb);
 		m_flag = flag;
 		flag->attach_building(egbase, *this);
 	}
@@ -592,15 +582,6 @@ WaresQueue & Building::waresqueue(Ware_Index const wi) {
 		 name().c_str(), serial(), wi.value());
 }
 
-
-void Building::prefill
-	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
-{}
-void Building::postfill
-	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
-{}
-
-
 /*
 ===============
 This function is called by workers in the buildingwork task.
@@ -781,6 +762,11 @@ void Building::draw_help
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics) {
+		if (upcast(Interactive_Player const, iplayer, &igbase))
+			if (!iplayer->player().see_all()
+				 &&
+				 iplayer->player().is_hostile(*get_owner()))
+				return;
 		UI::g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL,

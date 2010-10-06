@@ -135,13 +135,10 @@ public:
 	}
 
 	virtual std::string get_statistics_string();
-	int8_t get_statistics_percent() {return m_last_stat_percent;}
+	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	char const * result_string() const {return m_result_buffer;}
 
 	virtual WaresQueue & waresqueue(Ware_Index);
-
-	void prefill
-		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
 
 	char const * type_name() const throw () {return "productionsite";}
 	virtual void init(Editor_Game_Base &);
@@ -149,7 +146,7 @@ public:
 	virtual void act(Game &, uint32_t data);
 
 	virtual void remove_worker(Worker &);
-	int warp_worker(Game &, const Worker_Descr & wd);
+	int warp_worker(Editor_Game_Base &, const Worker_Descr & wd);
 
 	virtual bool fetch_from_flag(Game &);
 	virtual bool get_building_work(Game &, Worker &, bool success);
@@ -228,8 +225,8 @@ protected:  // TrainingSite must have access to this stuff
 	bool                     m_statistics_changed;
 	char                     m_statistics_buffer[40];
 	char                     m_result_buffer   [213];
-	int8_t                   m_last_stat_percent;
-	bool                      m_is_stopped;
+	uint8_t                  m_last_stat_percent;
+	bool                     m_is_stopped;
 };
 
 /**

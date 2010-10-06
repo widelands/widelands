@@ -254,7 +254,7 @@ void Road::init(Editor_Game_Base & egbase)
 	PlayerImmovable::init(egbase);
 
 	if (2 <= m_path.get_nsteps())
-		_link_into_flags(ref_cast<Game, Editor_Game_Base>(egbase));
+		_link_into_flags(egbase);
 }
 
 /**
@@ -264,7 +264,7 @@ void Road::init(Editor_Game_Base & egbase)
  * we needed to have this road already registered
  * as Map Object, thats why this is moved
  */
-void Road::_link_into_flags(Game & game) {
+void Road::_link_into_flags(Editor_Game_Base & egbase) {
 	assert(m_path.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)
@@ -283,23 +283,24 @@ void Road::_link_into_flags(Game & game) {
 	Economy::check_merge(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
 	// Mark Fields
-	_mark_map(game);
+	_mark_map(egbase);
 
 	/*
 	 * Iterate over all Carrierslots
 	 * If a carrier is set assign it to this road, else
 	 * request a new carrier
 	 */
+	if (upcast(Game, game, &egbase))
 	container_iterate(SlotVector, m_carrier_slots, i)
-		if (Carrier * const carrier = i.current->carrier.get(game)) {
+		if (Carrier * const carrier = i.current->carrier.get(*game)) {
 			//  This happens after a road split. Tell the carrier what's going on.
 			carrier->set_location    (this);
-			carrier->update_task_road(game);
+			carrier->update_task_road(*game);
 		} else if
 			(not i.current->carrier_request and
 			 (i.current->carrier_type == 1 or
 			  m_type == Road_Busy))
-			_request_carrier(game, *i.current);
+			_request_carrier(*i.current);
 }
 
 /**
@@ -307,7 +308,6 @@ void Road::_link_into_flags(Game & game) {
 */
 void Road::cleanup(Editor_Game_Base & egbase)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 
 	container_iterate(SlotVector, m_carrier_slots, i) {
 		delete i.current->carrier_request;
@@ -318,7 +318,7 @@ void Road::cleanup(Editor_Game_Base & egbase)
 	}
 
 	// Unmark Fields
-	_unmark_map(game);
+	_unmark_map(egbase);
 
 	// Unlink from flags (also clears the economy)
 	m_flags[FlagStart]->detach_road(m_flagidx[FlagStart]);
@@ -326,10 +326,12 @@ void Road::cleanup(Editor_Game_Base & egbase)
 
 	Economy::check_split(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
-	m_flags[FlagStart]->update_items(game, m_flags[FlagEnd]);
-	m_flags[FlagEnd]->update_items(game, m_flags[FlagStart]);
+	if(upcast(Game, game, &egbase)) {
+		m_flags[FlagStart]->update_items(*game, m_flags[FlagEnd]);
+		m_flags[FlagEnd]->update_items(*game, m_flags[FlagStart]);
+	}
 
-	PlayerImmovable::cleanup(game);
+	PlayerImmovable::cleanup(egbase);
 }
 
 /**
@@ -351,7 +353,7 @@ void Road::set_economy(Economy * const e)
  * Only call this if the road can handle a new carrier, and if no request has
  * been issued.
 */
-void Road::_request_carrier(Game &, CarrierSlot & slot)
+void Road::_request_carrier(CarrierSlot & slot)
 {
 	if (slot.carrier_type == 1)
 		slot.carrier_request =
@@ -410,15 +412,15 @@ void Road::_request_carrier_callback
 */
 void Road::remove_worker(Worker & w)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Editor_Game_Base & egbase = owner().egbase();
 
 	container_iterate(SlotVector, m_carrier_slots, i) {
-		Carrier const * carrier = i.current->carrier.get(game);
+		Carrier const * carrier = i.current->carrier.get(egbase);
 
 		if (carrier == &w) {
 			i.current->carrier = 0;
 			carrier            = 0;
-			_request_carrier(game, *i.current);
+			_request_carrier(*i.current);
 		}
 	}
 
@@ -433,8 +435,6 @@ void Road::assign_carrier(Carrier & c, uint8_t slot)
 {
 	assert(slot <= 1);
 
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
-
 	// Send the worker home if it occupies our slot
 	CarrierSlot & s = m_carrier_slots[slot];
 
@@ -442,7 +442,7 @@ void Road::assign_carrier(Carrier & c, uint8_t slot)
 		delete s.carrier_request;
 		s.carrier_request = 0;
 	}
-	Carrier * current_carrier = s.carrier.get(game);
+	Carrier * current_carrier = s.carrier.get(owner().egbase());
 	if (current_carrier)
 		current_carrier->set_location(0);
 
@@ -465,9 +465,9 @@ void Road::presplit(Game & game, Coords) {_unmark_map(game);}
  * After the split, this road will span [start...new flag]. A new road will
  * be created to span [new flag...end]
 */
+// TODO SirVer: This need to take an Editor_Game_Base as well.
 void Road::postsplit(Game & game, Flag & flag)
 {
-
 	Flag & oldend = *m_flags[FlagEnd];
 
 	// detach from end
@@ -585,7 +585,7 @@ void Road::postsplit(Game & game, Flag & flag)
 			 not i.current->carrier_request and
 			 (i.current->carrier_type == 1 or
 			  m_type == Road_Busy))
-			_request_carrier(game, *i.current);
+			_request_carrier(*i.current);
 
 	//  Make sure items waiting on the original endpoint flags are dealt with.
 	m_flags[FlagStart]->update_items(game, &oldend);
@@ -631,7 +631,7 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 					(not i.current->carrier.get(game) and
 					 not i.current->carrier_request and
 					 i.current->carrier_type != 1)
-				_request_carrier(game, *i.current);
+				_request_carrier(*i.current);
 		}
 	}
 	return false;

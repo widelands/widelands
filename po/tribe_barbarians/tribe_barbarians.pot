@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -212,7 +212,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/conf:210
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:11
 msgid ""
 "Citadel village"
 msgstr ""
@@ -493,17 +493,17 @@ msgid ""
 "Hammer"
 msgstr ""
 
-#: ../../tribes/barbarians/fernery/conf:17
+#: ../../tribes/barbarians/fernery/conf:20
 msgid ""
 "Harvest flax"
 msgstr ""
 
-#: ../../tribes/barbarians/fernery/conf:19
+#: ../../tribes/barbarians/fernery/conf:22
 msgid ""
 "Harvest reed"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:16
+#: ../../tribes/barbarians/farm/conf:19
 msgid ""
 "Harvest wheat"
 msgstr ""
@@ -515,7 +515,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/conf:209
-#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:11
 msgid ""
 "Headquarters medium"
 msgstr ""
@@ -665,6 +665,11 @@ msgid ""
 "Miner"
 msgstr ""
 
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
+msgid ""
+"Not enough space"
+msgstr ""
+
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
 "Only this beer is acceptable for the old warriors. Some say, the whole power of the barbarians is in this ale."
@@ -695,17 +700,17 @@ msgid ""
 "Pitta Bread"
 msgstr ""
 
-#: ../../tribes/barbarians/fernery/conf:13
+#: ../../tribes/barbarians/fernery/conf:16
 msgid ""
 "Plant flax"
 msgstr ""
 
-#: ../../tribes/barbarians/fernery/conf:15
+#: ../../tribes/barbarians/fernery/conf:18
 msgid ""
 "Plant reed"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:14
+#: ../../tribes/barbarians/farm/conf:17
 msgid ""
 "Plant wheat"
 msgstr ""
@@ -1049,6 +1054,13 @@ msgstr ""
 #: ../../tribes/barbarians/conf:104
 msgid ""
 "Soldier"
+msgstr ""
+
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:92
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
 msgstr ""
 
 #: ../../tribes/barbarians/conf:129
@@ -1395,8 +1407,8 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_coalmine/conf:22
 #: ../../tribes/barbarians/deeper_goldmine/conf:22
 #: ../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../tribes/barbarians/farm/conf:18
-#: ../../tribes/barbarians/fernery/conf:21
+#: ../../tribes/barbarians/farm/conf:21
+#: ../../tribes/barbarians/fernery/conf:24
 #: ../../tribes/barbarians/fishers_hut/conf:15
 #: ../../tribes/barbarians/gamekeepers_hut/conf:15
 #: ../../tribes/barbarians/goldmine/conf:21
@@ -1411,12 +1423,12 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/conf:22
 #: ../../tribes/barbarians/oremine/conf:21
 #: ../../tribes/barbarians/quarry/conf:15
-#: ../../tribes/barbarians/rangers_hut/conf:13
+#: ../../tribes/barbarians/rangers_hut/conf:14
 #: ../../tribes/barbarians/scouts_hut/conf:17
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
 #: ../../tribes/barbarians/warmill/conf:39
-#: ../../tribes/barbarians/weaving-mill/conf:19
+#: ../../tribes/barbarians/weaving-mill/conf:20
 #: ../../tribes/barbarians/well/conf:14
 msgid ""
 "Work"

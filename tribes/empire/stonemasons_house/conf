@@ -30,8 +30,8 @@ produce=marblecolumn
 
 [idle]
 pics=stonemason_i_??.png  # ???
-hotspot=63 63
+hotspot=63 60
 
 [working]
 pics=stonemason_i_??.png  # ???
-hotspot=63 63
+hotspot=63 60

@@ -21,4 +21,4 @@ worker=hunt
 
 [idle]
 pics=hunter_i_??.png
-hotspot=55 60
+hotspot=54 55

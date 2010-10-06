@@ -92,7 +92,7 @@ Here is a small example of a fancy message send to the user via the
 
 .. code-block:: lua
 
-   wl.game.Player(1):send_message(
+   wl.Game().players[1]:send_message(
       "Hi",
       "<rt image=pics/wl-ico-128.png image-align=center></rt>" ..
       "<rt text-align=center>" ..

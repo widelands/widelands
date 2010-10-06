@@ -10,10 +10,11 @@ use("aux", "infrastructure")
 use("aux", "table")
 use("aux", "ui")
 
-p1 = wl.game.Player(1)
-p2 = wl.game.Player(2)
-p3 = wl.game.Player(3)
-p4 = wl.game.Player(4)
+game = wl.Game()
+p1 = game.players[1]
+p2 = game.players[2]
+p3 = game.players[3]
+p4 = game.players[4]
 
 use("map", "starting_conditions")
 use("map", "texts")

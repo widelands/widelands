@@ -64,6 +64,7 @@ Player::Player
 	m_frontier_style_index(0),
 	m_flag_style_index    (0),
 	m_team_number(0),
+	m_team_player_uptodate(false),
 	m_see_all           (false),
 	m_plnum             (plnum),
 	m_tribe             (tribe_descr),
@@ -149,6 +150,7 @@ void Player::allocate_map()
 void Player::set_team_number(TeamNumber team)
 {
 	m_team_number = team;
+	m_team_player_uptodate = false;
 }
 
 /**
@@ -160,6 +162,27 @@ bool Player::is_hostile(const Player & other) const
 	return
 		&other != this &&
 		(!m_team_number || m_team_number != other.m_team_number);
+}
+
+/**
+ * Updates the vector containing allied players
+ */
+void Player::update_team_players() {
+	m_team_player.clear();
+	m_team_player_uptodate = true;
+
+	if (!m_team_number)
+		return;
+
+	for (Player_Number i = 1; i <= MAX_PLAYERS; ++i) {
+		Player * other = egbase().get_player(i);
+		if (!other)
+			continue;
+		if (other == this)
+			continue;
+		if (m_team_number == other->m_team_number)
+			m_team_player.push_back(other);
+	}
 }
 
 Message_Id Player::add_message
@@ -263,7 +286,7 @@ Flag * Player::build_flag(Coords const c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
-		return new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+		return new Flag(egbase(), *this, c);
 	return 0;
 }
 
@@ -284,9 +307,9 @@ Flag & Player::force_flag(FCoords const c) {
 	while (mr.advance(map));
 
 	//  Make sure that the player owns the area around.
-	ref_cast<Game, Editor_Game_Base>(egbase()).conquer_area_no_building
+	egbase().conquer_area_no_building
 		(Player_Area<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
-	return *new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+	return *new Flag(egbase(), *this, c);
 }
 
 /*
@@ -359,9 +382,7 @@ Road & Player::force_road(Path const & path) {
 Building & Player::force_building
 	(Coords                const location,
 	 Building_Index        const idx,
-	 uint32_t      const *       ware_counts,
-	 uint32_t      const *       worker_counts,
-	 Soldier_Counts const &       soldier_counts)
+	 bool                  constructionsite)
 {
 	Map & map = egbase().map();
 	FCoords c[4]; //  Big buildings occupy 4 locations.
@@ -382,7 +403,7 @@ Building & Player::force_building
 		for (size_t i = 0; i < nr_locations; ++i) {
 
 			//  Make sure that the player owns the area around.
-			ref_cast<Game, Editor_Game_Base>(egbase()).conquer_area_no_building
+			egbase().conquer_area_no_building
 				(Player_Area<Area<FCoords> >
 				 	(player_number(), Area<FCoords>(c[i], 1)));
 
@@ -390,29 +411,31 @@ Building & Player::force_building
 				immovable->remove(egbase());
 		}
 	}
-	return
-		descr.create
-		(egbase(), *this, c[0], false, ware_counts,
-		 worker_counts, &soldier_counts);
+
+	if (constructionsite)
+		return egbase().warp_constructionsite(c[0], m_plnum, idx);
+	else
+		return descr.create (egbase(), *this, c[0], false);
 }
 
 
 /*
 ===============
-Place a construction site, checking that it's legal to do so.
+Place a construction site or building, checking that it's legal to do so.
 ===============
 */
-void Player::build(Coords c, Building_Index const idx)
+Building * Player::build
+	(Coords c, Building_Index const idx, bool constructionsite)
 {
 	int32_t buildcaps;
 
 	// Validate building type
 	if (not (idx and idx < tribe().get_nrbuildings()))
-		return;
+		return 0;
 	Building_Descr const & descr = *tribe().get_building_descr(idx);
 
 	if (!descr.is_buildable())
-		return;
+		return 0;
 
 
 	// Validate build position
@@ -422,14 +445,18 @@ void Player::build(Coords c, Building_Index const idx)
 
 	if (descr.get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE))
-			return;
+			return 0;
 	} else if
 		((buildcaps & BUILDCAPS_SIZEMASK)
 		 <
 		 descr.get_size() - BaseImmovable::SMALL + 1)
-		return;
+		return 0;
 
-	egbase().warp_constructionsite(c, m_plnum, idx);
+	if (constructionsite)
+		return &egbase().warp_constructionsite(c, m_plnum, idx);
+	else {
+		return &descr.create(egbase(), *this, c, false);
+	}
 }
 
 
@@ -873,7 +900,8 @@ void Player::see_node
 	(Map              const &       map,
 	 Widelands::Field const &       first_map_field,
 	 FCoords                  const f,
-	 Time                     const gametime)
+	 Time                     const gametime,
+	 bool                     const forward)
 throw ()
 {
 	assert(0 <= f.x);
@@ -882,6 +910,15 @@ throw ()
 	assert(f.y < map.get_height());
 	assert(&map[0] <= f.field);
 	assert           (f.field < &first_map_field + map.max_index());
+
+	// If this is not already a forwarded call, we should informa allied players
+	// as well of this change
+	if (!m_team_player_uptodate)
+		update_team_players();
+	if (!forward && m_team_player.size()) {
+		for (uint8_t j = 0; j < m_team_player.size(); ++j)
+			m_team_player[j]->see_node(map, first_map_field, f, gametime, true);
+	}
 
 	Field & field = m_fields[f.field - &first_map_field];
 	assert(m_fields <= &field);
@@ -893,6 +930,29 @@ throw ()
 		rediscover_node(map, first_map_field, f);
 	fvision ++;
 	field.vision = fvision;
+}
+
+void Player::unsee_node
+	(Map_Index const i, Time const gametime, bool const forward)
+throw ()
+{
+	Field & field = m_fields[i];
+	if(field.vision <= 1) // Already doesn't see this
+		return;
+
+	// If this is not already a forwarded call, we should informa allied players
+	// as well of this change
+	if (!m_team_player_uptodate)
+		update_team_players();
+	if (!forward && m_team_player.size()) {
+		for (uint8_t j = 0; j < m_team_player.size(); ++j)
+			m_team_player[j]->unsee_node(i, gametime, true);
+	}
+
+		--field.vision;
+	if (field.vision == 1)
+		field.time_node_last_unseen = gametime;
+	assert(1 <= field.vision);
 }
 
 

@@ -150,7 +150,7 @@ void NetClient::run ()
 	s.send(d->sock);
 
 	d->settings.multiplayer = true;
-	setScenario(false); //  FIXME no scenario for multiplayer
+	d->settings.scenario = false;
 	{
 		Fullscreen_Menu_LaunchGame lgm(this, this);
 		lgm.setChatProvider(*this);
@@ -180,7 +180,10 @@ void NetClient::run ()
 
 		d->game = &game;
 		game.set_game_controller(this);
-		uint8_t pn = d->playernum + 1;
+		// If our player is in shared kingdom mode - set the iabase accordingly.
+		uint8_t const pn =
+			(d->settings.players.at(d->playernum).partner > 0) ?
+			 d->settings.players.at(d->playernum).partner : d->playernum + 1;
 		Interactive_GameBase * igb;
 		if (pn > 0)
 			igb =
@@ -204,7 +207,9 @@ void NetClient::run ()
 		game.run
 			(loaderUI,
 			 d->settings.savegame ?
-			 Widelands::Game::Loaded : Widelands::Game::NewNonScenario);
+			 Widelands::Game::Loaded
+			 : d->settings.scenario ?
+			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
 		d->modal = 0;
 		d->game = 0;
 	} catch (...) {
@@ -247,7 +252,15 @@ void NetClient::think()
 void NetClient::sendPlayerCommand(Widelands::PlayerCommand & pc)
 {
 	assert(d->game);
-	if (pc.sender() != d->playernum + 1) { // TODO check for kooperative players
+	if
+		((d->settings.players[d->playernum].partner > 0
+		  &&
+		  d->settings.players[d->playernum].partner != pc.sender())
+		 ||
+		 (d->settings.players[d->playernum].partner == 0
+		  &&
+		  pc.sender() != d->playernum + 1))
+	{
 		delete &pc;
 		return;
 	}
@@ -283,9 +296,9 @@ GameSettings const & NetClient::settings()
 	return d->settings;
 }
 
-void NetClient::setScenario(bool set)
+void NetClient::setScenario(bool)
 {
-	d->settings.scenario = set;
+	// Client is not allowed to do this
 }
 
 bool NetClient::canChangeMap()
@@ -300,12 +313,12 @@ bool NetClient::canChangePlayerState(uint8_t)
 
 bool NetClient::canChangePlayerTribe(uint8_t number)
 {
-	return number == d->playernum;
+	return (number == d->playernum) && !d->settings.scenario;
 }
 
 bool NetClient::canChangePlayerTeam(uint8_t number)
 {
-	return number == d->playernum;
+	return (number == d->playernum) && !d->settings.scenario;
 }
 
 bool NetClient::canChangePlayerInit(uint8_t)
@@ -357,6 +370,17 @@ void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_CHANGETEAM);
 	s.Unsigned8(team);
+	s.send(d->sock);
+}
+
+void NetClient::setPlayerPartner(uint8_t number, uint8_t partner)
+{
+	if (number != d->playernum)
+		return;
+
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_CHANGEPARTNER);
+	s.Unsigned8(partner);
 	s.send(d->sock);
 }
 
@@ -460,6 +484,7 @@ void NetClient::recvOnePlayer
 	player.ai = packet.String();
 	player.ready = static_cast<bool>(packet.Unsigned8());
 	player.team = packet.Unsigned8();
+	player.partner = packet.Unsigned8();
 
 	if (number == d->playernum)
 		d->localplayername = player.name;
@@ -574,6 +599,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->settings.mapfilename =
 			g_fs->FileSystem::fixCrossFile(packet.String());
 		d->settings.savegame = packet.Unsigned8() == 1;
+		d->settings.scenario = packet.Unsigned8() == 1;
 		log
 			("[Client] SETTING_MAP '%s' '%s'\n",
 			 d->settings.mapname.c_str(), d->settings.mapfilename.c_str());
@@ -706,11 +732,26 @@ void NetClient::handle_packet(RecvPacket & packet)
 		for (uint8_t i = packet.Unsigned8(); i; --i) {
 			TribeBasicInfo info;
 			info.name = packet.String();
+
+			// Get initializations (we have to do this locally, for translations)
+			LuaInterface * lua = create_LuaInterface();
+			std::string path = "tribes/" + info.name;
+			log("Trying to create SubFileSystem:: %s\n", path.c_str());
+			if (g_fs->IsDirectory(path)) {
+				log("This worked. Now registering scripts!\n");
+				lua->register_scripts
+					(g_fs->MakeSubFileSystem(path), "tribe_" + info.name);
+			}
+
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
 				std::string const name = packet.String();
+				log("Got name send: %s\n", name.c_str());
+				boost::shared_ptr<LuaTable> t = lua->run_script
+					("tribe_" + info.name, name);
 				info.initializations.push_back
-					(TribeBasicInfo::Initialization(name, name));
+					(TribeBasicInfo::Initialization(name, t->get_string("name")));
 			}
+
 			d->settings.tribes.push_back(info);
 		}
 		break;

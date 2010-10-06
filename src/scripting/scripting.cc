@@ -25,26 +25,21 @@
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
-#include "lua_debug.h"
+#include "lua_bases.h"
 #include "lua_editor.h"
 #include "lua_game.h"
 #include "lua_globals.h"
 #include "lua_map.h"
+#include "lua_root.h"
 #include "lua_ui.h"
 #include "persistence.h"
+#include "factory.h"
 
 #include "scripting.h"
 
 #ifdef _MSC_VER
 #include <ctype.h> // for tolower
 #endif
-
-// TODO: add wl.editor to documentation
-// TODO: position or field should be on the immovable classes.
-// Check out what this BaseImmovable <-> Immovable thing is all about.
-// TODO: road must offer some access to it's fields for this to work.
-// TODO: also big buildings occupy more space: i suggest some occupied fields property
-// TODO: and also a field property
 
 /*
 ============================================
@@ -63,11 +58,13 @@ public:
 
 		virtual std::string get_string(std::string s) {
 			lua_getfield(m_L, -1, s.c_str());
+			if (lua_isnil(m_L, -1)) {
+				lua_pop(m_L, 1);
+				throw LuaTableKeyError(s);
+			}
 			if (not lua_isstring(m_L, -1)) {
 				lua_pop(m_L, 1);
-				throw LuaError
-					(s + " is not a field in the table returned by the last "
-					 "script or not a string");
+				throw LuaError(s + "is not a string value.");
 			}
 			std::string rv = lua_tostring(m_L, -1);
 			lua_pop(m_L, 1);
@@ -78,6 +75,10 @@ public:
 	virtual LuaCoroutine * get_coroutine(std::string s) {
 		lua_getfield(m_L, -1, s.c_str());
 
+		if (lua_isnil(m_L, -1)) {
+				lua_pop(m_L, 1);
+				throw LuaTableKeyError(s);
+		}
 		if (lua_isfunction(m_L, -1)) {
 			// Oh well, a function, not a coroutine. Let's turn it into one
 			lua_State * t = lua_newthread(m_L);
@@ -90,9 +91,7 @@ public:
 
 		if (not lua_isthread(m_L, -1)) {
 			lua_pop(m_L, 1);
-			throw LuaError
-				(s + "is not a field in the table returned by the last script "
-				 "or not a function");
+			throw LuaError(s + "is not a function value.");
 		}
 		LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(m_L, -1));
 		lua_pop(m_L, 1); // Remove coroutine from stack
@@ -137,6 +136,7 @@ protected:
 		virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string);
 		virtual boost::shared_ptr<LuaTable> run_script
 			(FileSystem &, std::string, std::string);
+		virtual boost::shared_ptr<LuaTable> get_hook(std::string name);
 };
 
 
@@ -194,7 +194,7 @@ bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	m_L = lua_open();
 
-	// Open the lua libraries
+	// Open the Lua libraries
 #ifdef DEBUG
 	static const luaL_Reg lualibs[] = {
 		{"", luaopen_base},
@@ -225,11 +225,13 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	}
 
 	// Push the instance of this class into the registry
+	// MSVC2008 requires that stored and retrieved types are
+	// same, so use LuaInterface* on both sides.
 	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(dynamic_cast<LuaInterface*>(this)));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
 
 	// Now our own
-	luaopen_globals(m_L);
+	LuaGlobals::luaopen_globals(m_L);
 
 	register_scripts(*g_fs, "aux");
 }
@@ -308,6 +310,26 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 }
 
 /*
+ * Returns a given hook if one is defined, otherwise returns 0
+ */
+boost::shared_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
+	lua_getglobal(m_L, "hooks");
+	if(lua_isnil(m_L, -1)) {
+		lua_pop(m_L, 1);
+		return boost::shared_ptr<LuaTable>();
+	}
+
+	lua_getfield(m_L, -1, name.c_str());
+	if(lua_isnil(m_L, -1)) {
+		lua_pop(m_L, 2);
+		return boost::shared_ptr<LuaTable>();
+	}
+	lua_remove(m_L, -2);
+
+	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
+}
+
+/*
  * ===========================
  * LuaEditorGameBaseInterface_Impl
  * ===========================
@@ -322,10 +344,9 @@ LuaEditorGameBaseInterface_Impl::LuaEditorGameBaseInterface_Impl
 	(Widelands::Editor_Game_Base * g) :
 LuaInterface()
 {
-	luaopen_wldebug(m_L);
-	luaopen_wlmap(m_L);
-	luaopen_wlgame(m_L);
-	luaopen_wlui(m_L);
+	LuaBases::luaopen_wlbases(m_L);
+	LuaMap::luaopen_wlmap(m_L);
+	LuaUi::luaopen_wlui(m_L);
 
 	// Push the editor game base
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));
@@ -342,13 +363,22 @@ struct LuaEditorInterface_Impl : public LuaEditorGameBaseInterface_Impl
 {
 	LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g);
 	virtual ~LuaEditorInterface_Impl() {}
+
+private:
+	EditorFactory m_factory;
 };
 
 LuaEditorInterface_Impl::LuaEditorInterface_Impl
 	(Widelands::Editor_Game_Base * g) :
 LuaEditorGameBaseInterface_Impl(g)
 {
-	luaopen_wleditor(m_L);
+	LuaRoot::luaopen_wlroot(m_L, true);
+	LuaEditor::luaopen_wleditor(m_L);
+
+	// Push the factory class into the registry
+	lua_pushlightuserdata
+		(m_L, reinterpret_cast<void*>(dynamic_cast<Factory*>(&m_factory)));
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
 }
 
 
@@ -375,18 +405,21 @@ struct LuaGameInterface_Impl : public LuaEditorGameBaseInterface_Impl,
 		 uint32_t);
 	virtual uint32_t write_global_env
 		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&);
+
+private:
+	GameFactory m_factory;
 };
 
 /*
  * Special handling of math.random.
  *
- * We inject this function to make sure that lua uses our random number
+ * We inject this function to make sure that Lua uses our random number
  * generator.  This guarantees that the game stays in sync over the network and
  * in replays. Obviously, we only do this for LuaGameInterface, not for
  * the others.
  *
  * The function was designed to simulate the standard math.random function and
- * was therefore nearly verbatimly copied from the lua sources.
+ * was therefore copied nearly verbatim from the Lua sources.
  */
 static int L_math_random(lua_State * L) {
 	Widelands::Game & game = get_game(L);
@@ -431,9 +464,17 @@ LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
 	lua_setfield(m_L, -2, "random");
 	lua_pop(m_L, 1); // pop "math"
 
-	// Push the game onto the stack
+	LuaRoot::luaopen_wlroot(m_L, false);
+	LuaGame::luaopen_wlgame(m_L);
+
+	// Push the game into the registry
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "game");
+
+	// Push the factory class into the registry
+	lua_pushlightuserdata
+		(m_L, reinterpret_cast<void*>(dynamic_cast<Factory*>(&m_factory)));
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
 }
 
 LuaCoroutine * LuaGameInterface_Impl::read_coroutine
@@ -505,7 +546,7 @@ uint32_t LuaGameInterface_Impl::write_global_env
 ============================================
 */
 /*
- * Factory Function, create lua interfaces for the following use cases:
+ * Factory Function, create Lua interfaces for the following use cases:
  *
  * "game": load all libraries needed for the game to run properly
  */

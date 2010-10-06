@@ -5,15 +5,18 @@ carrier=1
 
 [idle]
 pics=idle_??.png
-hotspot=11 22
-fps=10
+hotspot=33 29
+playercolor=true
+fps=20
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=10 21
-fps=10
+hotspot=33 29
+playercolor=true
+fps=20
 
 [walkload]
 dirpics=walk_!!_??.png
-hotspot=10 21
-fps=10
+hotspot=33 29
+playercolor=true
+fps=20

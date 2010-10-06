@@ -17,26 +17,25 @@
  *
  */
 
-#include "mapselect.h"
-
+#include <cstdio>
 
 #include "logic/editor_game_base.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/map.h"
 #include "profile/profile.h"
 #include "s2map.h"
 #include "wexception.h"
 #include "map_io/widelands_map_loader.h"
-
 #include "log.h"
 
-#include <cstdio>
+#include "mapselect.h"
+
 
 using Widelands::WL_Map_Loader;
 
-Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect() :
+Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
+		(Map::ScenarioTypes allowed_scenario_types) :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
@@ -143,18 +142,21 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect() :
 	m_list.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
 	m_list.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
 
+	m_scenario_types = allowed_scenario_types;
+	if (m_scenario_types) {
+		m_load_map_as_scenario.set_visible(true);
+		m_label_load_map_as_scenario.set_visible(true);
+	} else {
+		m_load_map_as_scenario.set_visible(false);
+		m_label_load_map_as_scenario.set_visible(false);
+	}
+
 	fill_list();
 }
 
 bool Fullscreen_Menu_MapSelect::is_scenario()
 {
 	return m_load_map_as_scenario.get_state();
-}
-
-void Fullscreen_Menu_MapSelect::setScenarioSelectionVisible(bool vis)
-{
-	m_load_map_as_scenario.set_visible(vis);
-	m_label_load_map_as_scenario.set_visible(vis);
 }
 
 MapData const * Fullscreen_Menu_MapSelect::get_map() const
@@ -323,7 +325,8 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();
 				mapdata.height = map.get_height();
-				mapdata.scenario = map.as_scenario_playable();
+				mapdata.scenario = map.scenario_types() & m_scenario_types;
+
 				if (!mapdata.width || !mapdata.height)
 					continue;
 

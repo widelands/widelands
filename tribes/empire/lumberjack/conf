@@ -20,16 +20,24 @@ axe=1
 
 [hacking]
 pics=hacking_??.png
-hotspot=5 13
+hotspot=23 23
+playercolor=true
+fps=10
 
 [idle]
 pics=idle_??.png
-hotspot=5 13
+hotspot=6 24
+playercolor=true
+fps=10
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=5 13
+hotspot=10 22
+playercolor=true
+fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
-hotspot=5 13
+hotspot=10 22
+playercolor=true
+fps=10

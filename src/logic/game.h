@@ -76,6 +76,8 @@ struct Game : public Editor_Game_Base {
 		std::vector< uint32_t > nr_civil_blds_lost;
 		std::vector< uint32_t > nr_civil_blds_defeated;
 		std::vector< uint32_t > miltary_strength;
+
+		std::vector< uint32_t > custom_statistic;
 	};
 	typedef std::vector<General_Stats> General_Stats_vector;
 
@@ -103,15 +105,10 @@ struct Game : public Editor_Game_Base {
 	void init_savegame(UI::ProgressWindow &, GameSettings const &);
 	bool run_splayer_scenario_direct(char const * mapname);
 	bool run_load_game (std::string filename);
-	enum Start_Game_Type {NewScenario, NewNonScenario, Loaded};
+	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
 	bool run(UI::ProgressWindow & loader_ui, Start_Game_Type);
 
 	virtual void postload();
-
-	void unconquer_area
-		(Player_Area<Area<FCoords> >, Player_Number destroying_player = 0);
-	void   conquer_area            (Player_Area<Area<FCoords> >);
-	void   conquer_area_no_building(Player_Area<Area<FCoords> > const);
 
 	void think();
 
@@ -177,39 +174,6 @@ struct Game : public Editor_Game_Base {
 	void WriteStatistics(FileWrite &);
 
 private:
-	/// \param preferred_player
-	///  When conquer is false, this can be used to prefer a player over other
-	///  players, when lost land is reassigned. This can for example be used to
-	///  reward the player who actually destroyed a MilitarySite by giving an
-	///  unconquered location that he has influence over to him, instead of some
-	///  other player who has higher influence over that location. If 0, land is
-	///  simply assigned by influence.
-	///
-	/// \param neutral_when_no_influence
-	///  If true and the player completely loses influence over a location, it
-	///  becomes neutral unless some other player claims it by having positive
-	///  influence.
-	///
-	/// \param neutral_when_competing_influence
-	///  If true and the player completely loses influence over a location and
-	///  several players have positive and equal influence, the location becomes
-	///  becomes neutral unless some other player claims it by having higher
-	///  influence.
-	///
-	/// \param conquer_guarded_location_by_superior_influence
-	///  If true, the conquering player will (automatically, without actually
-	///  attacking) conquer a location even if another player already owns and
-	///  covers the location with a militarysite, if the conquering player's
-	///  influence becomes greater than the owner's influence.
-	virtual void do_conquer_area
-		(Player_Area<Area<FCoords> > player_area,
-		 bool          conquer,
-		 Player_Number preferred_player                               = 0,
-		 bool          neutral_when_no_influence                      = false,
-		 bool          neutral_when_competing_influence               = false,
-		 bool          conquer_guarded_location_by_superior_influence = false);
-
-	void cleanup_playerimmovables_area(Player_Area<Area<FCoords> >);
 	void sample_statistics();
 
 private:

@@ -61,7 +61,7 @@ WaresQueue::WaresQueue
 void WaresQueue::cleanup() {
 	assert(m_ware);
 
-	if (uint8_t const count = m_filled)
+	if (uint8_t const count = m_filled && m_owner.get_economy())
 		m_owner.get_economy()->remove_wares(m_ware, count);
 
 	m_filled = 0;
@@ -80,7 +80,8 @@ void WaresQueue::update() {
 	assert(m_ware);
 
 	if (m_filled > m_size) {
-		m_owner.get_economy()->remove_wares(m_ware, m_filled - m_size);
+		if (m_owner.get_economy())
+			m_owner.get_economy()->remove_wares(m_ware, m_filled - m_size);
 		m_filled = m_size;
 	}
 
@@ -184,10 +185,12 @@ void WaresQueue::set_size(const uint32_t size) throw ()
  * \todo Why not call update from here?
  */
 void WaresQueue::set_filled(const uint32_t filled) throw () {
-	if (filled > m_filled)
-		m_owner.get_economy()->add_wares(m_ware, filled - m_filled);
-	else if (filled < m_filled)
-		m_owner.get_economy()->remove_wares(m_ware, m_filled - filled);
+	if (m_owner.get_economy()) {
+		if (filled > m_filled)
+			m_owner.get_economy()->add_wares(m_ware, filled - m_filled);
+		else if (filled < m_filled)
+			m_owner.get_economy()->remove_wares(m_ware, m_filled - filled);
+	}
 
 	m_filled = filled;
 }
@@ -248,7 +251,8 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 				m_request = 0;
 
 			//  Now Economy stuff. We have to add our filled items to the economy.
-			add_to_economy(*m_owner.get_economy());
+			if (m_owner.get_economy())
+				add_to_economy(*m_owner.get_economy());
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);

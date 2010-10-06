@@ -20,16 +20,19 @@
 #ifndef FULLSCREEN_MENU_MAPSELECT_H
 #define FULLSCREEN_MENU_MAPSELECT_H
 
-#include "base.h"
+#include <string>
 
+#include "base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-#include <string>
+#include "logic/map.h"
 
+
+using Widelands::Map;
 
 /**
  * Data about a map that we're interested in.
@@ -43,7 +46,7 @@ struct MapData {
 	uint32_t width;
 	uint32_t height;
 	uint32_t nrplayers;
-	bool scenario; // whether this map can be played as scenario
+	bool scenario; // is this a scenario we should list?
 
 	MapData()
 		: width(0), height(0), nrplayers(0) {}
@@ -54,11 +57,10 @@ struct MapData {
  */
 
 struct Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_MapSelect();
+	Fullscreen_Menu_MapSelect(Map::ScenarioTypes allowed_scenarios);
 
 	bool is_scenario();
 	MapData const * get_map() const;
-	void setScenarioSelectionVisible(bool);
 
 private:
 	void ok();
@@ -85,6 +87,7 @@ private:
 	UI::Checkbox                                     m_load_map_as_scenario;
 	UI::Listselect<MapData>                          m_list;
 	std::string                                      m_curdir, m_basedir;
+	Map::ScenarioTypes  m_scenario_types;
 };
 
 #endif

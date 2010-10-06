@@ -57,6 +57,7 @@ struct Options_Ctrl {
 		uint32_t remove_replays;
 		bool remove_syncstreams;
 		bool opengl;
+		bool transparent_chat;
 
 		// advanced options
 		bool message_sound;
@@ -175,6 +176,8 @@ private:
 	UI::Textarea                m_label_remove_syncstreams;
 	UI::Checkbox                m_opengl;
 	UI::Textarea                m_label_opengl;
+	UI::Checkbox                m_transparent_chat;
+	UI::Textarea                m_label_transparent_chat;
 
 	Options_Ctrl::Options_Struct os;
 };

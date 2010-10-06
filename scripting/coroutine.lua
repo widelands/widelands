@@ -26,7 +26,7 @@ function run(func, ...)
    success, sleeptime = coroutine.resume(c, ...)
    if success then
       if coroutine.status(c) ~= "dead" then 
-         wl.game.run_coroutine(c, sleeptime)
+         wl.Game():launch_coroutine(c, sleeptime)
       end
    else
       error(sleeptime) 
@@ -44,7 +44,7 @@ end
 --
 --    :returns: :const:`nil`
 function sleep(time)
-   coroutine.yield(wl.game.get_time() + time)
+   coroutine.yield(wl.Game().time + time)
 end
 
 -- RST
@@ -52,7 +52,7 @@ end
 --    
 --    This must be called inside a coroutine. This will put the coroutine to
 --    sleep. Widelands will wake it at the absolute time given. If this time is
---    already in the past (that is at < :func:`wl.game.get_time()`) the
+--    already in the past (that is at < :func:`wl.Game().time`) the
 --    behaviour is undefined.
 --
 --    :arg at: when to wake this coroutine

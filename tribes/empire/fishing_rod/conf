@@ -2,4 +2,4 @@ help=_Fishing rods are needed by fishers, to catch fish. Produced by the toolsmi
 
 [idle]
 pics=idle.png
-hotspot=8 11
+hotspot=4 5

@@ -42,6 +42,7 @@ private:
 	UI::Radiogroup       m_radiogroup;
 	int32_t              m_selected_information;
 	UI::Checkbox       * m_cbs[MAX_PLAYERS];
+	uint32_t             m_ndatasets;
 
 	void clicked_help();
 	void cb_changed_to(int32_t, bool);

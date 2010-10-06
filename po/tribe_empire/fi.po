@@ -7,850 +7,291 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-15 18:32+0000\n"
+"POT-Creation-Date: 2010-08-24 17:33+0000\n"
+"PO-Revision-Date: 2010-08-28 09:22+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-08-29 03:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-# TODO: a tip
-#: ../../tribes/empire/advanced_lance/conf:1
-msgid "This is an advanced lance, with steel top."
-msgstr "Tämän keihään kärki on terästä ja on siksi puista kestävämpi."
+#: ../../tribes/empire/meal/conf:1
+msgid "A real meal which satisfies all miners needs."
+msgstr "Kunnon ateria, joka täyttää nälkäisimmänkin kaivostyöläisen vatsan."
 
-#: ../../tribes/empire/arena/conf:13
-#: ../../tribes/empire/colosseum/conf:27
-#: ../../tribes/empire/trainingscamp/conf:38
-msgid "Sleep"
-msgstr "Lepää"
+#: ../../tribes/empire/ration/conf:1
+msgid "A small bite to keep miners strong and working."
+msgstr "Pieni perusannos, joka pitää kaivostyöläiset hakun varressa kiinni."
 
-#: ../../tribes/empire/arena/conf:14
-#: ../../tribes/empire/colosseum/conf:28
-msgid "Upgrade soldier evade 0"
-msgstr "Paranna sotilaan välttökykyä (0)"
+#: ../../tribes/empire/conf:50
+msgid "Advanced Lance"
+msgstr "Vahvistettu keihäs"
 
-#: ../../tribes/empire/arena/conf:15
-#: ../../tribes/empire/colosseum/conf:29
-msgid ""
-"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Paranna sotilaan välttökykyä (0) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
+#: ../../tribes/empire/conf:135
+msgid "Arena"
+msgstr "Areena"
 
-#: ../../tribes/empire/armour/conf:1
-msgid "Basic armour for Empire soldiers."
-msgstr "Perushaarniska Keisarikunnan sotilaille."
+#: ../../tribes/empire/conf:51
+msgid "Armour"
+msgstr "Haarniska"
 
-#: ../../tribes/empire/armoursmith/conf:1
-msgid "Produces armour for the soldiers."
-msgstr "Tuottaa haarniskoja sotilaille."
+#: ../../tribes/empire/conf:167
+msgid "Armour Smithy"
+msgstr "Haarniskaseppä"
 
-#: ../../tribes/empire/armoursmithy/conf:26
-msgid "Produce helm"
-msgstr "Valmista kypärä"
+#: ../../tribes/empire/conf:103
+msgid "Armoursmith"
+msgstr "Haarniskaseppä"
 
-#: ../../tribes/empire/armoursmithy/conf:27
-msgid "Produce armour"
-msgstr "Valmista haarniska"
+#: ../../tribes/empire/conf:27
+msgid "Ashes"
+msgstr "Tuhkaa"
 
-#: ../../tribes/empire/armoursmithy/conf:28
-msgid "Produce chain armour"
-msgstr "Valmista ketjupanssari"
+#: ../../tribes/empire/conf:52
+msgid "Axe"
+msgstr "Kirves"
 
-#: ../../tribes/empire/armoursmithy/conf:29
-msgid "Produce plate armour"
-msgstr "Valmista levyhaarniska"
+#: ../../tribes/empire/conf:104
+msgid "Baker"
+msgstr "Leipuri"
 
-#: ../../tribes/empire/armoursmithy/conf:30
-#: ../../tribes/empire/bakery/conf:20
-#: ../../tribes/empire/brewery/conf:20
-#: ../../tribes/empire/burners_house/conf:19
-#: ../../tribes/empire/coalmine/conf:21
-#: ../../tribes/empire/deep_coalmine/conf:22
-#: ../../tribes/empire/deep_goldmine/conf:22
-#: ../../tribes/empire/deep_marblemine/conf:23
-#: ../../tribes/empire/deep_oremine/conf:22
-#: ../../tribes/empire/donkeyfarm/conf:21
-#: ../../tribes/empire/farm/conf:19
-#: ../../tribes/empire/fishers_house/conf:17
-#: ../../tribes/empire/foresters_house/conf:15
-#: ../../tribes/empire/goldmine/conf:22
-#: ../../tribes/empire/hunters_house/conf:16
-#: ../../tribes/empire/inn/conf:20
-#: ../../tribes/empire/lumberjacks_house/conf:16
-#: ../../tribes/empire/marblemine/conf:26
-#: ../../tribes/empire/mill/conf:20
-#: ../../tribes/empire/oremine/conf:22
-#: ../../tribes/empire/piggery/conf:21
-#: ../../tribes/empire/quarry/conf:21
-#: ../../tribes/empire/sawmill/conf:20
-#: ../../tribes/empire/scouts_house/conf:17
-#: ../../tribes/empire/sheepfarm/conf:21
-#: ../../tribes/empire/smelting_works/conf:24
-#: ../../tribes/empire/stonemasons_house/conf:21
-#: ../../tribes/empire/tavern/conf:22
-#: ../../tribes/empire/toolsmithy/conf:45
-#: ../../tribes/empire/vineyard/conf:21
-#: ../../tribes/empire/weaponsmithy/conf:34
-#: ../../tribes/empire/weaving-mill/conf:16
-#: ../../tribes/empire/well/conf:16
-#: ../../tribes/empire/winery/conf:20
-msgid "Work"
-msgstr "Työskentele (pääohjelma)"
-
-#: ../../tribes/empire/axe/conf:1
-msgid ""
-"The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "Kirves on puunhakkaajan työväline. Työkaluseppä valmistaa sen."
+#: ../../tribes/empire/conf:168
+msgid "Bakery"
+msgstr "Leipomo"
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
 msgstr "Leipoo leipää työntekijöille."
 
-#: ../../tribes/empire/bakingtray/conf:1
-msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
-"by the toolsmith."
-msgstr ""
-"Leipälapio on leipurin työkalu, ja jokainen leipuri tarvitsee omansa. "
-"Työkaluseppä valmistaa sen."
-
-#: ../../tribes/empire/basket/conf:1
-msgid ""
-"This basket is needed by the winegrower, for harvesting the grapes. It is "
-"produced by the toolsmith."
-msgstr ""
-"Tätä koria tarvitaan viinitarhassa rypäleiden keräämiseen. Työkaluseppä "
-"valmistaa sen."
-
-#: ../../tribes/empire/beer/conf:1
-msgid ""
-"Young soldiers and miners need some encouragement. This drink makes a man "
-"fearless and strong."
-msgstr ""
-"Nuoret sotilaat ja kaivostyöläiset tarvitsevat kannustimia. Tämä juoma tekee "
-"sotilaista pelottomia ja vahvoja."
-
-#: ../../tribes/empire/bread/conf:1
-msgid "The backers of the Empire make really tasty bread."
-msgstr "Keisarikunnan leipurit leipovat suussasulavaa leipää."
-
-#: ../../tribes/empire/brewer/conf:1
-msgid "Produces beer or wine."
-msgstr "Valmistaa olutta tai viiniä."
-
-#: ../../tribes/empire/builder/conf:1
-msgid "Works at construction sites to create a new building."
-msgstr "Työskentelee rakennustyömailla rakentaen uusia rakennuksia."
-
-#: ../../tribes/empire/burner/conf:1
-msgid "Burns coal."
-msgstr "Polttaa hiiliä."
-
-#: ../../tribes/empire/carrier/conf:1
-msgid "Carries items along your roads."
-msgstr "Kantaa tavaroita teilläsi."
-
-#: ../../tribes/empire/chain_armour/conf:1
-msgid "This is a medium armour for Empire soldiers."
-msgstr "Tämä on keskitason haarniska Keisarikunnan sotilaalle."
-
-#: ../../tribes/empire/cloth/conf:1
-msgid ""
-"Cloth is needed for Empire ships and few bigger buildings. It is produced "
-"out of wool."
-msgstr ""
-"Kangasta tarvitaan Keisarikunnan aluksille ja suurempia rakennuksia varten. "
-"Sitä kudotaan villasta."
-
-#: ../../tribes/empire/coal/conf:1
-msgid ""
-"The fires of the Empire are usually fed with wood, but sometimes, wood just "
-"does not burn hot enough. Then, coal is used."
-msgstr ""
-"Keisarikunnassa tulia ruokitaan yleensä puulla, mutta joskus tällainen "
-"liekki ei ole riittävän kuuma. Tällöin käytetään hiiltä."
-
-#: ../../tribes/empire/colosseum/conf:30
-msgid "Upgrade soldier evade 1"
-msgstr "Paranna sotilaan välttökykyä (1)"
-
-#: ../../tribes/empire/colosseum/conf:31
-msgid ""
-"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Paranna sotilaan välttökykyä (1) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
-
-#: ../../tribes/empire/conf:18
-msgid "The Widelands Development Team"
-msgstr "Widelands-kehittäjät"
-
-#: ../../tribes/empire/conf:19
-msgid "Empire"
-msgstr "Keisarikunta"
-
-# TODO: Roman empire, not roman Empire
-#: ../../tribes/empire/conf:20
-msgid "This is the culture of the roman Empire."
-msgstr "Tämä on Rooman keisarikunnan kansa ja kulttuuri."
-
-#: ../../tribes/empire/conf:39
-msgid "Ashes"
-msgstr "Tuhkaa"
-
-#: ../../tribes/empire/conf:40
-msgid "Field medium"
-msgstr "Pelto keskikokoinen"
-
-#: ../../tribes/empire/conf:41
-msgid "Field small"
-msgstr "Pelto pieni"
-
-#: ../../tribes/empire/conf:42
-msgid "Field tiny"
-msgstr "Pelto hyvin pieni"
-
-#: ../../tribes/empire/conf:43
-msgid "Field ripe"
-msgstr "Pelto kypsä"
-
-#: ../../tribes/empire/conf:44
-msgid "Field harvested"
-msgstr "Pelto korjattu"
-
-#: ../../tribes/empire/conf:45
-msgid "Destroyed building"
-msgstr "Tuhoutunut rakennus"
-
-#: ../../tribes/empire/conf:46
-msgid "Resource indicator coal little"
-msgstr "Resurssimerkki hiili vähän"
-
-#: ../../tribes/empire/conf:47
-msgid "Resource indicator coal much"
-msgstr "Resurssimerkki hiili paljon"
-
-#: ../../tribes/empire/conf:48
-msgid "Resource indicator gold little"
-msgstr "Resurssimerkki kulta vähän"
-
-#: ../../tribes/empire/conf:49
-msgid "Resource indicator gold much"
-msgstr "Resurssimerkki kulta paljon"
-
-# TODO: granite
-#: ../../tribes/empire/conf:50
-msgid "Resource indicator granit little"
-msgstr "Resurssimerkki graniitti vähän"
-
-#: ../../tribes/empire/conf:51
-msgid "Resource indicator granit much"
-msgstr "Resurssimerkki graniitti paljon"
-
-#: ../../tribes/empire/conf:52
-msgid "Resource indicator iron little"
-msgstr "Resurssimerkki rauta vähän"
-
-#: ../../tribes/empire/conf:53
-msgid "Resource indicator iron much"
-msgstr "Resurssimerkki rauta paljon"
-
-#: ../../tribes/empire/conf:54
-msgid "Resource indicator no resource"
-msgstr "Resurssimerkki ei mitään"
-
-#: ../../tribes/empire/conf:55
-msgid "Resource indicator water"
-msgstr "Resurssimerkki vettä"
-
-#: ../../tribes/empire/conf:56
-msgid "Vine medium"
-msgstr "Viiniköynnös, keskikokoinen"
-
-#: ../../tribes/empire/conf:57
-msgid "Vine small"
-msgstr "Viiniköynnös, pieni"
-
-#: ../../tribes/empire/conf:58
-msgid "Vine tiny"
-msgstr "Viiniköynnös, hyvin pieni"
-
-#: ../../tribes/empire/conf:59
-msgid "Vine ripe"
-msgstr "Viiniköynnös, kypsä"
-
-#: ../../tribes/empire/conf:62
-msgid "Advanced Lance"
-msgstr "Vahvistettu keihäs"
-
-#: ../../tribes/empire/conf:63
-msgid "Armour"
-msgstr "Haarniska"
-
-#: ../../tribes/empire/conf:64
-msgid "Axe"
-msgstr "Kirves"
-
-#: ../../tribes/empire/conf:65
-msgid "Peel"
-msgstr "Leipälapio"
-
-#: ../../tribes/empire/conf:66
-msgid "Basket"
-msgstr "Kori"
-
-#: ../../tribes/empire/conf:67
-msgid "Beer"
-msgstr "Olut"
-
-#: ../../tribes/empire/conf:68
-msgid "Bread"
-msgstr "Leipä"
-
-# TODO: Chainmail!
-#: ../../tribes/empire/conf:69
-msgid "Chain-Armour"
-msgstr "Ketjupanssari"
-
-#: ../../tribes/empire/conf:70
-msgid "Cloth"
-msgstr "Kangas"
-
-#: ../../tribes/empire/conf:71
-msgid "Coal"
-msgstr "Hiili"
-
-#: ../../tribes/empire/conf:72
-msgid "Fire Tongs"
-msgstr "Pihdit"
-
-#: ../../tribes/empire/conf:73
-msgid "Fish"
-msgstr "Kala"
-
-#: ../../tribes/empire/conf:74
-msgid "Fishing Rod"
-msgstr "Onki"
-
-#: ../../tribes/empire/conf:75
-msgid "Flour"
-msgstr "Jauho"
-
-#: ../../tribes/empire/conf:76
-msgid "Gold"
-msgstr "Kulta"
-
-#: ../../tribes/empire/conf:77
-msgid "Goldstone"
-msgstr "Kultakivi"
-
-#: ../../tribes/empire/conf:78
-msgid "Grape"
-msgstr "Viinirypäle"
-
-#: ../../tribes/empire/conf:79
-msgid "Hammer"
-msgstr "Vasara"
-
-#: ../../tribes/empire/conf:80
-msgid "Heavy Lance"
-msgstr "Raskas keihäs"
-
-#: ../../tribes/empire/conf:81
-msgid "Helmet"
-msgstr "Kypärä"
-
-#: ../../tribes/empire/conf:82
-msgid "Hunting Spear"
-msgstr "Metsästyskeihäs"
-
-#: ../../tribes/empire/conf:83
-msgid "Iron"
-msgstr "Rauta"
-
-#: ../../tribes/empire/conf:84
-msgid "Iron Ore"
-msgstr "Rautamalmi"
-
-#: ../../tribes/empire/conf:85
-msgid "Kitchen Tools"
-msgstr "Keittiövälineet"
-
-# TODO: it would be more clear if these sticks were called spears - judging by the "blade" in the heavy lance we are not talking about a jousting lance at all (i.e. what a mounted knight would use), While nowadays lance can be used for any spearlike object, it's originally meant the javelin, which is a sport equipment. Another word for a spear which is used for poking and never throwing is a pike, if we want to make a difference to throwing spears - this is used by infantry, not by mounted knights like lance generally is understood to be.
-#: ../../tribes/empire/conf:86
-msgid "Lance"
-msgstr "Keihäs"
-
-#: ../../tribes/empire/conf:87
-msgid "Marble Column"
-msgstr "Marmoripaasi"
-
-#: ../../tribes/empire/conf:88
-msgid "Marble"
-msgstr "Marmori"
-
-#: ../../tribes/empire/conf:89
-msgid "Meal"
-msgstr "Annos"
-
-#: ../../tribes/empire/conf:90
-msgid "Meat"
-msgstr "Liha"
-
-#: ../../tribes/empire/conf:91
-msgid "Pick"
-msgstr "Poimi"
-
-# TODO: platemail
-#: ../../tribes/empire/conf:92
-msgid "Plate-Armour"
-msgstr "Levyhaarniska"
-
-#: ../../tribes/empire/conf:93
-msgid "Ration"
-msgstr "Ruoka-annos"
-
-#: ../../tribes/empire/conf:94
-msgid "Saw"
-msgstr "Saha"
-
-#: ../../tribes/empire/conf:95
-msgid "Scythe"
-msgstr "Viikate"
-
-#: ../../tribes/empire/conf:96
-msgid "Shovel"
-msgstr "Lapio"
-
-#: ../../tribes/empire/conf:97
-msgid "Stones"
-msgstr "Kiviä"
-
-#: ../../tribes/empire/conf:98
-msgid "Trunk"
-msgstr "Tukki"
-
-#: ../../tribes/empire/conf:99
-msgid "War-Lance"
-msgstr "Sotakeihäs"
-
-#: ../../tribes/empire/conf:100
-msgid "Water"
-msgstr "Vesi"
-
-#: ../../tribes/empire/conf:101
-msgid "Wheat"
-msgstr "Vehnä"
-
-#: ../../tribes/empire/conf:102
-msgid "Wine"
-msgstr "Viini"
-
-#: ../../tribes/empire/conf:103
-msgid "Wood"
-msgstr "Lautatavara"
-
-#: ../../tribes/empire/conf:104
-msgid "Wood Lance"
-msgstr "Puukeihäs"
-
-#: ../../tribes/empire/conf:105
-msgid "Wool"
-msgstr "Villa"
-
-#: ../../tribes/empire/conf:108
-msgid "Carrier"
-msgstr "Kantaja"
-
-#: ../../tribes/empire/conf:109
-msgid "Donkey"
-msgstr "Aasi"
-
-#: ../../tribes/empire/conf:112
-msgid "Soldier"
-msgstr "Sotilas"
-
-#: ../../tribes/empire/conf:115
-msgid "Armoursmith"
-msgstr "Haarniskaseppä"
-
-#: ../../tribes/empire/conf:116
-msgid "Baker"
-msgstr "Leipomo"
-
-#: ../../tribes/empire/conf:117
-msgid "Brewer"
-msgstr "Oluenpanija"
-
-#: ../../tribes/empire/conf:118
-msgid "Builder"
-msgstr "Rakentaja"
-
-#: ../../tribes/empire/conf:119
-msgid "Burner"
-msgstr "Hiilenpolttaja"
-
-#: ../../tribes/empire/conf:120
-msgid "Farmer"
-msgstr "Viljelijä"
-
-#: ../../tribes/empire/conf:121
-msgid "Fisher"
-msgstr "Kalastaja"
-
-#: ../../tribes/empire/conf:122
-msgid "Forester"
-msgstr "Puunistuttaja"
-
-#: ../../tribes/empire/conf:123
-msgid "Geologist"
-msgstr "Geologi"
-
-#: ../../tribes/empire/conf:124
-msgid "Hunter"
-msgstr "Metsästäjä"
-
-#: ../../tribes/empire/conf:125
-msgid "Innkeeper"
-msgstr "Majatalonpitäjä"
-
-#: ../../tribes/empire/conf:126
-msgid "Lumberjack"
-msgstr "Puunhakkaaja"
-
-#: ../../tribes/empire/conf:127
-msgid "Master Miner"
-msgstr "Kaivosmestari"
-
-#: ../../tribes/empire/conf:128
-msgid "Miller"
-msgstr "Mylläri"
-
-#: ../../tribes/empire/conf:129
-msgid "Miner"
-msgstr "Kaivostyöläinen"
-
-#: ../../tribes/empire/conf:130
-msgid "Pig Breeder"
-msgstr "Siankasvattaja"
-
-#: ../../tribes/empire/conf:131
-msgid "Shepherd"
-msgstr "Lammaspaimen"
-
-#: ../../tribes/empire/conf:132
-msgid "Smelter"
-msgstr "Sulattaja"
-
-#: ../../tribes/empire/conf:133
-msgid "Stonemason"
-msgstr "Kivenhakkaaja"
-
-#: ../../tribes/empire/conf:134
-msgid "Toolsmith"
-msgstr "Työkaluseppä"
-
-#: ../../tribes/empire/conf:135
-msgid "Trainer"
-msgstr "Kouluttaja"
-
-#: ../../tribes/empire/conf:136
-msgid "Weaponsmith"
-msgstr "Aseseppä"
-
-#: ../../tribes/empire/conf:137
-msgid "Weaver"
-msgstr "Kutoja"
-
-#: ../../tribes/empire/conf:138
-msgid "Vine Farmer"
-msgstr "Rypäleenkasvattaja"
-
-#: ../../tribes/empire/conf:139
-msgid "Scout"
-msgstr "Tiedustelija"
-
 #: ../../tribes/empire/conf:140
-msgid "Donkey Breeder"
-msgstr "Aasinkasvattaja"
-
-#: ../../tribes/empire/conf:143
-msgid "Construction Site"
-msgstr "Rakennustyömaa"
-
-#: ../../tribes/empire/conf:146
-msgid "Colosseum"
-msgstr "Colosseum"
-
-#: ../../tribes/empire/conf:147
-msgid "Arena"
-msgstr "Areena"
-
-#: ../../tribes/empire/conf:148
-msgid "Trainingscamp"
-msgstr "Harjoitteluleiri"
-
-#: ../../tribes/empire/conf:151
-#: ../../tribes/empire/conf:170
-msgid "Sentry"
-msgstr "Vartiopaikka"
-
-#: ../../tribes/empire/conf:152
 msgid "Barracks"
 msgstr "Parakki"
 
-#: ../../tribes/empire/conf:153
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:141
+#: ../../tribes/empire/conf:154
 msgid "Barrier"
 msgstr "Rajalinnake"
 
-#: ../../tribes/empire/conf:154
-#: ../../tribes/empire/conf:160
-msgid "Castle"
-msgstr "Linna"
+#: ../../tribes/empire/armour/conf:1
+msgid "Basic armour for Empire soldiers."
+msgstr "Perushaarniska Keisarikunnan sotilaille."
 
-#: ../../tribes/empire/conf:155
-#: ../../tribes/empire/conf:169
-msgid "Fortress"
-msgstr "Linnoitus"
+# TODO: defense +.
+#: ../../tribes/empire/helm/conf:1
+msgid "Basic defence of a warrior"
+msgstr "Sotilaan perussuojaus."
 
-#: ../../tribes/empire/conf:156
-msgid "Outpost"
-msgstr "Etuvartioasema"
+#: ../../tribes/empire/conf:54
+msgid "Basket"
+msgstr "Kori"
 
-#: ../../tribes/empire/conf:157
-#: ../../tribes/empire/conf:165
-msgid "Tower"
-msgstr "Torni"
-
-#: ../../tribes/empire/conf:161
-msgid "Guardhall"
-msgstr "Linnake"
-
-#: ../../tribes/empire/conf:162
-msgid "Guardhouse"
-msgstr "Vartiotupa"
-
-#: ../../tribes/empire/conf:163
-msgid "High Tower"
-msgstr "Suurtorni"
-
-#: ../../tribes/empire/conf:164
-msgid "Small Tower"
-msgstr "Pieni torni"
-
-#: ../../tribes/empire/conf:167
-msgid "Citadel"
-msgstr "Kastelli"
-
-#: ../../tribes/empire/conf:168
-msgid "Donjon"
-msgstr "Keskustorni"
-
-#: ../../tribes/empire/conf:171
-msgid "Stronghold"
-msgstr "Linnake"
-
-#: ../../tribes/empire/conf:174
-msgid "Headquarters"
-msgstr "Päämaja"
-
-#: ../../tribes/empire/conf:175
-msgid "Headquarters shipwreck"
-msgstr "Päämaja-haaksirikko"
-
-#: ../../tribes/empire/conf:176
-msgid "Warehouse"
-msgstr "Varasto"
-
-#: ../../tribes/empire/conf:179
-msgid "Armour Smithy"
-msgstr "Haarniskaseppä"
-
-#: ../../tribes/empire/conf:180
-msgid "Bakery"
-msgstr "Leipomo"
-
-#: ../../tribes/empire/conf:181
-msgid "Brewery"
-msgstr "Panimo"
-
-#: ../../tribes/empire/conf:182
-msgid "Charcoal Burner"
-msgstr "Hiilenpolttamo"
-
-#: ../../tribes/empire/conf:183
-msgid "Deep Coal Mine"
-msgstr "Syvä hiilikaivos"
-
-#: ../../tribes/empire/conf:184
-msgid "Coal Mine"
-msgstr "Hiilikaivos"
-
-#: ../../tribes/empire/conf:185
-msgid "Deep Gold Mine"
-msgstr "Syvä kultakaivos"
-
-#: ../../tribes/empire/conf:186
-msgid "Deep Marble Mine"
-msgstr "Syvä marmorikaivos"
-
-#: ../../tribes/empire/conf:187
-msgid "Deep Iron Ore Mine"
-msgstr "Syvä rautakaivos"
-
-#: ../../tribes/empire/conf:188
-msgid "Farm"
-msgstr "Maatila"
-
-#: ../../tribes/empire/conf:189
-msgid "Fisher's House"
-msgstr "Kalastajan mökki"
-
-#: ../../tribes/empire/conf:190
-msgid "Forester's House"
-msgstr "Puunistuttajan mökki"
-
-#: ../../tribes/empire/conf:191
-msgid "Gold Mine"
-msgstr "Kultakaivos"
-
-#: ../../tribes/empire/conf:192
-msgid "Hunter's House"
-msgstr "Metsästysmökki"
-
-#: ../../tribes/empire/conf:193
-msgid "Inn"
-msgstr "Majatalo"
-
-#: ../../tribes/empire/conf:194
-msgid "Lumberjack's House"
-msgstr "Puunhakkaajan mökki"
-
-#: ../../tribes/empire/conf:195
-msgid "Marble Mine"
-msgstr "Marmorikaivos"
-
-#: ../../tribes/empire/conf:196
-msgid "Mill"
-msgstr "Mylly"
-
-#: ../../tribes/empire/conf:197
-msgid "Iron Ore Mine"
-msgstr "Rautakaivos"
-
-#: ../../tribes/empire/conf:198
-msgid "Piggery"
-msgstr "Sikala"
-
-#: ../../tribes/empire/conf:199
-msgid "Quarry"
-msgstr "Kivilouhos"
-
-#: ../../tribes/empire/conf:200
-msgid "Sawmill"
-msgstr "Saha"
-
-#: ../../tribes/empire/conf:201
-msgid "Sheepfarm"
-msgstr "Lammastila"
-
-#: ../../tribes/empire/conf:202
-msgid "Smelting Works"
-msgstr "Sulattamo"
-
-#: ../../tribes/empire/conf:203
-msgid "Stonemason's House"
-msgstr "Kivenhakkaajan mökki"
-
-#: ../../tribes/empire/conf:204
-msgid "Tavern"
-msgstr "Krouvi"
-
-#: ../../tribes/empire/conf:205
-msgid "Toolsmithy"
-msgstr "Työkaluseppä"
-
-#: ../../tribes/empire/conf:206
-msgid "Weapon Smithy"
-msgstr "Asepaja"
-
-#: ../../tribes/empire/conf:207
-msgid "Weaving Mill"
-msgstr "Kutomo"
-
-#: ../../tribes/empire/conf:208
-msgid "Well"
-msgstr "Kaivo"
-
-# TODO: Winery is actually a vineyard too, too easy to misunderstand.
-#: ../../tribes/empire/conf:209
-msgid "Winery"
-msgstr "Viinikellari"
-
-#: ../../tribes/empire/conf:210
-msgid "Vineyard"
-msgstr "Viinitarha"
-
-#: ../../tribes/empire/conf:211
-msgid "Scout's House"
-msgstr "Tiedustelijan talo"
-
-#: ../../tribes/empire/conf:212
-msgid "Donkeyfarm"
-msgstr "Aasifarmi"
-
-#: ../../tribes/empire/conf:215
-msgid "Headquarters medium"
-msgstr "Keskikokoinen päämaja"
-
-#: ../../tribes/empire/conf:216
-msgid "Castle village"
-msgstr "Linnakylä"
-
-#: ../../tribes/empire/donkey/conf:1
-msgid "Helps to carry items at heavy used roads."
-msgstr "Auttaa tavaroiden kuljettamisessa teillä."
-
-#: ../../tribes/empire/donkeybreeder/conf:1
-msgid "Breeds cute and helpful donkeys"
-msgstr "Siittää nättejä ja avuliaita aaseja"
-
-#: ../../tribes/empire/farm/conf:15
-msgid "Plant wheat"
-msgstr "Istuta vehnää"
-
-#: ../../tribes/empire/farm/conf:17
-msgid "Harvest wheat"
-msgstr "Korjaa vehnää"
-
-#: ../../tribes/empire/farmer/conf:2
-msgid "Plants fields."
-msgstr "Istuttaa peltoja."
-
-#: ../../tribes/empire/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"Sulattaja käyttää tultakestäviä pihtejä sulattamossa työskennellessään. "
-"Työkaluseppä valmistaa ne."
+#: ../../tribes/empire/conf:55
+msgid "Beer"
+msgstr "Olut"
 
 #: ../../tribes/empire/fish/conf:1
 msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
 msgstr "Kala on Keisarikunnan asukkaiden ruokaa lihan ja leivän ohella."
 
-#: ../../tribes/empire/fisher/conf:1
-msgid "Gets fish out of the sea."
-msgstr "Kiskoo kalaa vedestä."
+#: ../../tribes/empire/conf:56
+msgid "Bread"
+msgstr "Leipä"
+
+#: ../../tribes/empire/donkeybreeder/conf:1
+msgid "Breeds cute and helpful donkeys"
+msgstr "Siittää nättejä ja avuliaita aaseja"
+
+#: ../../tribes/empire/pig-breeder/conf:1
+msgid "Breeds pigs."
+msgstr "Kasvattaa sikoja."
+
+#: ../../tribes/empire/conf:105
+msgid "Brewer"
+msgstr "Oluenpanija"
+
+#: ../../tribes/empire/conf:169
+msgid "Brewery"
+msgstr "Panimo"
+
+#: ../../tribes/empire/conf:106
+msgid "Builder"
+msgstr "Rakentaja"
+
+#: ../../tribes/empire/conf:107
+msgid "Burner"
+msgstr "Hiilenpolttaja"
+
+#: ../../tribes/empire/burner/conf:1
+msgid "Burns coal."
+msgstr "Polttaa hiiliä."
+
+#: ../../tribes/empire/conf:96
+msgid "Carrier"
+msgstr "Kantaja"
+
+#: ../../tribes/empire/carrier/conf:1
+msgid "Carries items along your roads."
+msgstr "Kantaa tavaroita teilläsi."
+
+#: ../../tribes/empire/conf:142
+#: ../../tribes/empire/conf:148
+msgid "Castle"
+msgstr "Linna"
+
+#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
+msgid "Castle village"
+msgstr "Linnakylä"
+
+# TODO: Chainmail!
+#: ../../tribes/empire/conf:57
+msgid "Chain-Armour"
+msgstr "Ketjupanssari"
+
+#: ../../tribes/empire/conf:170
+msgid "Charcoal Burner"
+msgstr "Hiilenpolttamo"
+
+#: ../../tribes/empire/conf:155
+msgid "Citadel"
+msgstr "Kastelli"
+
+#: ../../tribes/empire/conf:58
+msgid "Cloth"
+msgstr "Kangas"
+
+#: ../../tribes/empire/cloth/conf:1
+msgid ""
+"Cloth is needed for Empire ships and a few bigger buildings. It is produced "
+"out of wool."
+msgstr ""
+"Kangasta tarvitaan laivoissa ja muutamissa isommissa rakennuksissa. Sitä "
+"tuotetaan villasta."
+
+#: ../../tribes/empire/conf:59
+msgid "Coal"
+msgstr "Hiili"
+
+#: ../../tribes/empire/conf:172
+msgid "Coal Mine"
+msgstr "Hiilikaivos"
+
+#: ../../tribes/empire/conf:134
+msgid "Colosseum"
+msgstr "Colosseum"
+
+#: ../../tribes/empire/conf:131
+msgid "Construction Site"
+msgstr "Rakennustyömaa"
+
+#: ../../tribes/empire/stonemason/conf:1
+msgid "Cuts raw pieces of granite and marble out of laying stones."
+msgstr "Leikkaa raakagraniittia ja -marmoria rakennuskiviksi"
+
+#: ../../tribes/empire/conf:171
+msgid "Deep Coal Mine"
+msgstr "Syvä hiilikaivos"
+
+#: ../../tribes/empire/conf:173
+msgid "Deep Gold Mine"
+msgstr "Syvä kultakaivos"
+
+#: ../../tribes/empire/conf:175
+msgid "Deep Iron Ore Mine"
+msgstr "Syvä rautakaivos"
+
+#: ../../tribes/empire/conf:174
+msgid "Deep Marble Mine"
+msgstr "Syvä marmorikaivos"
+
+#: ../../tribes/empire/soldier/conf:1
+msgid "Defend and Conquer!"
+msgstr "Puolusta ja valloita!"
+
+#: ../../tribes/empire/conf:33
+msgid "Destroyed building"
+msgstr "Tuhoutunut rakennus"
+
+#: ../../tribes/empire/geologist/conf:1
+msgid "Discovers resources for mining."
+msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
+
+#: ../../tribes/empire/conf:156
+msgid "Donjon"
+msgstr "Keskustorni"
+
+#: ../../tribes/empire/conf:97
+msgid "Donkey"
+msgstr "Aasi"
+
+#: ../../tribes/empire/conf:128
+msgid "Donkey Breeder"
+msgstr "Aasinkasvattaja"
+
+#: ../../tribes/empire/conf:200
+msgid "Donkeyfarm"
+msgstr "Aasifarmi"
+
+#: ../../tribes/empire/conf:5
+msgid "Empire"
+msgstr "Keisarikunta"
+
+#: ../../tribes/empire/conf:176
+msgid "Farm"
+msgstr "Maatila"
+
+#: ../../tribes/empire/conf:108
+msgid "Farmer"
+msgstr "Viljelijä"
+
+#: ../../tribes/empire/lumberjack/conf:1
+msgid "Fells trees."
+msgstr "Kaataa puita."
+
+#: ../../tribes/empire/conf:32
+msgid "Field harvested"
+msgstr "Pelto korjattu"
+
+#: ../../tribes/empire/conf:28
+msgid "Field medium"
+msgstr "Pelto keskikokoinen"
+
+#: ../../tribes/empire/conf:31
+msgid "Field ripe"
+msgstr "Pelto kypsä"
+
+#: ../../tribes/empire/conf:29
+msgid "Field small"
+msgstr "Pelto pieni"
+
+#: ../../tribes/empire/conf:30
+msgid "Field tiny"
+msgstr "Pelto hyvin pieni"
+
+#: ../../tribes/empire/conf:60
+msgid "Fire Tongs"
+msgstr "Pihdit"
+
+#: ../../tribes/empire/conf:61
+msgid "Fish"
+msgstr "Kala"
+
+#: ../../tribes/empire/conf:109
+msgid "Fisher"
+msgstr "Kalastaja"
+
+#: ../../tribes/empire/conf:177
+msgid "Fisher's House"
+msgstr "Kalastajan mökki"
+
+#: ../../tribes/empire/conf:62
+msgid "Fishing Rod"
+msgstr "Onki"
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
@@ -858,19 +299,44 @@ msgid ""
 msgstr ""
 "Kalastajat käyttävät onkia kalojen narraamiseen. Työkaluseppä valmistaa ne."
 
+#: ../../tribes/empire/conf:63
+msgid "Flour"
+msgstr "Jauho"
+
 #: ../../tribes/empire/flour/conf:1
 msgid ""
 "Flour is produced out of wheat and is needed for the tasty Empire bread."
 msgstr ""
 "Vehnästä jauhettua jauhoa käytetään Keisarikunnan maukkaan leivän leivontaan."
 
-#: ../../tribes/empire/forester/conf:1
-msgid "Plants trees."
-msgstr "Istuttaa puita."
+#: ../../tribes/empire/conf:110
+msgid "Forester"
+msgstr "Puunistuttaja"
 
-#: ../../tribes/empire/geologist/conf:1
-msgid "Discovers resources for mining."
-msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
+#: ../../tribes/empire/conf:178
+msgid "Forester's House"
+msgstr "Puunistuttajan mökki"
+
+#: ../../tribes/empire/conf:143
+#: ../../tribes/empire/conf:157
+msgid "Fortress"
+msgstr "Linnoitus"
+
+#: ../../tribes/empire/conf:111
+msgid "Geologist"
+msgstr "Geologi"
+
+#: ../../tribes/empire/fisher/conf:1
+msgid "Gets fish out of the sea."
+msgstr "Kiskoo kalaa vedestä."
+
+#: ../../tribes/empire/conf:64
+msgid "Gold"
+msgstr "Kulta"
+
+#: ../../tribes/empire/conf:179
+msgid "Gold Mine"
+msgstr "Kultakaivos"
 
 #: ../../tribes/empire/gold/conf:1
 msgid ""
@@ -880,61 +346,66 @@ msgstr ""
 "Kulta on arvokkain kaikista metalleista, ja vain tärkeät esineet "
 "koristellaan sillä."
 
-#: ../../tribes/empire/goldstone/conf:1
-msgid "This is the yellow goldstone."
-msgstr "Tämä on kellertävää kultakiveä."
+#: ../../tribes/empire/conf:65
+msgid "Goldstone"
+msgstr "Kultakivi"
 
-# TODO: basic what
-#: ../../tribes/empire/grape/conf:1
-msgid "These grapes are the basic for tasty wine."
-msgstr "Nämä rypäleet ovat hehkeän viinin raaka-aine."
+#: ../../tribes/empire/conf:66
+msgid "Grape"
+msgstr "Viinirypäle"
 
-# TODO: workers, eh?
-#: ../../tribes/empire/hammer/conf:1
-msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the worker, "
-"the armour- and weaponsmith. Make sure you always got some in reserve! It is "
-"produced by the toolsmith."
-msgstr ""
-"Vasara on keskeinen työkalu. Sitä tarvitsevat geologit, rakentajat sekä "
-"haarniska- ja asesepät. Varmista, että sinulla on aina pari vasaraa varalla! "
-"Työkaluseppä valmistaa sen."
+#: ../../tribes/empire/vinefarmer/conf:1
+msgid "Grows vine."
+msgstr "Kasvattaa viinirypäleitä."
 
-# TODO: steel tip, and blade where exactly if not in the tip?
-#: ../../tribes/empire/heavy_lance/conf:1
-msgid "This is a good warrior lance, with a steel-top and a little blade."
-msgstr ""
-"Tämä on hyvä soturin keihäs, jonka teräksisessä kärjessä on pieni terä."
+#: ../../tribes/empire/conf:149
+msgid "Guardhall"
+msgstr "Linnake"
 
-# TODO: defense +.
-#: ../../tribes/empire/helm/conf:1
-msgid "Basic defence of a warrior"
-msgstr "Sotilaan perussuojaus."
+#: ../../tribes/empire/conf:150
+msgid "Guardhouse"
+msgstr "Vartiotupa"
 
-#: ../../tribes/empire/hunter/conf:1
-msgid "The Hunter brings good meat to the colonists."
-msgstr "Metsästäjä tuo hyvää lihaa väellesi."
+#: ../../tribes/empire/conf:67
+msgid "Hammer"
+msgstr "Vasara"
 
-#: ../../tribes/empire/hunting_spear/conf:1
-msgid ""
-"This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by the hunters."
-msgstr ""
-"Tämä keihäs on riittävän kevyt heitettäväksi, mutta riittävän raskas "
-"tappamaan minkä tahansa eläimen yhdellä iskulla. Vain metsästäjät käyttävät "
-"sitä."
+#: ../../tribes/empire/vineyard/conf:21
+msgid "Harvest vine"
+msgstr "Korjaa viinirypäleitä"
 
-#: ../../tribes/empire/innkeeper/conf:1
-msgid "Produces food for miners."
-msgstr "Valmistaa ruokaa kaivostyöläisille."
+#: ../../tribes/empire/farm/conf:20
+msgid "Harvest wheat"
+msgstr "Korjaa vehnää"
 
-#: ../../tribes/empire/iron/conf:1
-msgid "Weapons and tools are made of iron."
-msgstr "Aseet ja työkalut valmistetaan raudasta."
+#: ../../tribes/empire/conf:162
+msgid "Headquarters"
+msgstr "Päämaja"
 
-#: ../../tribes/empire/ironore/conf:1
-msgid "This is the red iron ore."
-msgstr "Tämä on punaista rautamalmia."
+#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
+msgid "Headquarters medium"
+msgstr "Keskikokoinen päämaja"
+
+#: ../../tribes/empire/conf:163
+msgid "Headquarters shipwreck"
+msgstr "Päämaja-haaksirikko"
+
+#: ../../tribes/empire/conf:68
+msgid "Heavy Lance"
+msgstr "Raskas keihäs"
+
+#: ../../tribes/empire/conf:69
+msgid "Helmet"
+msgstr "Kypärä"
+
+#: ../../tribes/empire/donkey/conf:1
+msgid "Helps to carry items at heavy used roads."
+msgstr "Auttaa tavaroiden kuljettamisessa teillä."
+
+#: ../../tribes/empire/conf:151
+msgid "High Tower"
+msgstr "Suurtorni"
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
@@ -942,13 +413,79 @@ msgstr ""
 "Mitenkäs sitä majatalonpitäjä loihtisi erilaisia ruoka-annoksia, jos ei "
 "olisi keittiövälineitä?"
 
-#: ../../tribes/empire/lance/conf:1
-msgid "This wooden lance has an iron spike."
-msgstr "Tässä puukeihäässä on rautapiikki."
+#: ../../tribes/empire/conf:112
+msgid "Hunter"
+msgstr "Metsästäjä"
 
-#: ../../tribes/empire/lumberjack/conf:1
-msgid "Fells trees."
-msgstr "Kaataa puita."
+#: ../../tribes/empire/conf:180
+msgid "Hunter's House"
+msgstr "Metsästysmökki"
+
+#: ../../tribes/empire/conf:70
+msgid "Hunting Spear"
+msgstr "Metsästyskeihäs"
+
+#: ../../tribes/empire/conf:181
+msgid "Inn"
+msgstr "Majatalo"
+
+#: ../../tribes/empire/conf:113
+msgid "Innkeeper"
+msgstr "Majatalonpitäjä"
+
+#: ../../tribes/empire/conf:71
+msgid "Iron"
+msgstr "Rauta"
+
+#: ../../tribes/empire/conf:72
+msgid "Iron Ore"
+msgstr "Rautamalmi"
+
+#: ../../tribes/empire/conf:185
+msgid "Iron Ore Mine"
+msgstr "Rautakaivos"
+
+# TODO: sheep. And really prolly herding.
+#: ../../tribes/empire/shepherd/conf:1
+msgid "Keeping sheeps."
+msgstr "Lammaspaimen nimensä mukaisesti paimentaa lampaita."
+
+#: ../../tribes/empire/conf:73
+msgid "Kitchen Tools"
+msgstr "Keittiövälineet"
+
+# TODO: it would be more clear if these sticks were called spears - judging by the "blade" in the heavy lance we are not talking about a jousting lance at all (i.e. what a mounted knight would use), While nowadays lance can be used for any spearlike object, it's originally meant the javelin, which is a sport equipment. Another word for a spear which is used for poking and never throwing is a pike, if we want to make a difference to throwing spears - this is used by infantry, not by mounted knights like lance generally is understood to be.
+#: ../../tribes/empire/conf:74
+msgid "Lance"
+msgstr "Keihäs"
+
+#: ../../tribes/empire/conf:114
+msgid "Lumberjack"
+msgstr "Puunhakkaaja"
+
+#: ../../tribes/empire/conf:182
+msgid "Lumberjack's House"
+msgstr "Puunhakkaajan mökki"
+
+#: ../../tribes/empire/conf:76
+msgid "Marble"
+msgstr "Marmori"
+
+#: ../../tribes/empire/conf:75
+msgid "Marble Column"
+msgstr "Marmoripaasi"
+
+#: ../../tribes/empire/conf:183
+msgid "Marble Mine"
+msgstr "Marmorikaivos"
+
+#: ../../tribes/empire/marblecolumn/conf:1
+msgid ""
+"Marble columns present the high culture of the Empire, so they are needed "
+"for nearly every bigger building."
+msgstr ""
+"Marmoripaasit edustavat Keisarikunnan korkeakulttuuria, ja niitä "
+"tarvitaankin lähes jokaiseen kookkaaseen rakennukseen."
 
 # TODO: cut; mountains AND boulders.
 #: ../../tribes/empire/marble/conf:1
@@ -959,13 +496,38 @@ msgstr ""
 "Marmori on koristeellista kiveä, jota louhitaan vuorista ja irtolohkareista "
 "käytettäväksi komeissa rakennuksissa ja kivipaaseissa."
 
-#: ../../tribes/empire/marblecolumn/conf:1
+#: ../../tribes/empire/conf:115
+msgid "Master Miner"
+msgstr "Kaivosmestari"
+
+#: ../../tribes/empire/conf:77
+msgid "Meal"
+msgstr "Annos"
+
+#: ../../tribes/empire/conf:78
+msgid "Meat"
+msgstr "Liha"
+
+#: ../../tribes/empire/meat/conf:1
 msgid ""
-"Marble columns present the high culture of the Empire, so they are needed "
-"for nearly every bigger building."
+"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
+"lunch for the miners and in the soldier trainingcamps to keep warriors "
+"strong."
 msgstr ""
-"Marmoripaasit edustavat Keisarikunnan korkeakulttuuria, ja niitä "
-"tarvitaankin lähes jokaiseen kookkaaseen rakennukseen."
+"Lihassa on paljon energiaa. Sitä käytetään majataloissa ja krouveissa osana "
+"kaivostyöläisten lounaita, ja koulutettavien sotureiden vahvistamiseen."
+
+#: ../../tribes/empire/conf:184
+msgid "Mill"
+msgstr "Mylly"
+
+#: ../../tribes/empire/conf:116
+msgid "Miller"
+msgstr "Mylläri"
+
+#: ../../tribes/empire/miller/conf:1
+msgid "Mills the wheat to produce flour."
+msgstr "Jauhaa vehnää jauhoksi."
 
 #: ../../tribes/empire/marblemine/conf:22
 #: ../../tribes/empire/quarry/conf:19
@@ -991,117 +553,74 @@ msgstr ""
 "Louhi kiveä (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta "
 "(build13))"
 
-#: ../../tribes/empire/master-miner/conf:1
-#: ../../tribes/empire/miner/conf:1
-msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
-"Työskentelee syvällä kaivoksissa saadakseen hiiltä, rautaa tai kultaa."
+#: ../../tribes/empire/conf:117
+msgid "Miner"
+msgstr "Kaivostyöläinen"
 
-#: ../../tribes/empire/meal/conf:1
-msgid "A real meal which satisfies all miners needs."
-msgstr "Kunnon ateria, joka täyttää nälkäisimmänkin kaivostyöläisen vatsan."
+#: ../../tribes/empire/conf:144
+msgid "Outpost"
+msgstr "Etuvartioasema"
 
-#: ../../tribes/empire/meat/conf:1
-msgid ""
-"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-"lunch for the miners and in the soldier trainingcamps to keep warriors "
-"strong."
-msgstr ""
-"Lihassa on paljon energiaa. Sitä käytetään majataloissa ja krouveissa osana "
-"kaivostyöläisten lounaita, ja koulutettavien sotureiden vahvistamiseen."
+#: ../../tribes/empire/conf:53
+msgid "Peel"
+msgstr "Leipälapio"
 
-#: ../../tribes/empire/miller/conf:1
-msgid "Mills the wheat to produce flour."
-msgstr "Jauhaa vehnää jauhoksi."
+#: ../../tribes/empire/conf:79
+msgid "Pick"
+msgstr "Hakku"
 
-#: ../../tribes/empire/pick/conf:1
-msgid ""
-"This pick is used by the stonemasons and the miners. It is produced by the "
-"toolsmith."
-msgstr ""
-"Hakkua käyttävät kivenhakkaajat ja kaivostyöläiset. Työkaluseppä valmistaa "
-"hakut."
+#: ../../tribes/empire/conf:118
+msgid "Pig Breeder"
+msgstr "Siankasvattaja"
 
-#: ../../tribes/empire/pig-breeder/conf:1
-msgid "Breeds pigs."
-msgstr "Kasvattaa sikoja."
+#: ../../tribes/empire/conf:186
+msgid "Piggery"
+msgstr "Sikala"
 
-#: ../../tribes/empire/plate_armour/conf:1
-msgid "The strongest armour existing for the Empire soldiers."
-msgstr "Kaikista vahvoin haarniska Keisarikunnan sotilaille."
+#: ../../tribes/empire/vineyard/conf:19
+msgid "Plant vine"
+msgstr "Istuta viiniköynnös"
 
-#: ../../tribes/empire/ration/conf:1
-msgid "A small bite to keep miners strong and working."
-msgstr "Pieni perusannos, joka pitää kaivostyöläiset hakun varressa kiinni."
+#: ../../tribes/empire/farm/conf:18
+msgid "Plant wheat"
+msgstr "Istuta vehnää"
 
-# TODO: sawyer, toolsmith in same entry even!
-#: ../../tribes/empire/saw/conf:1
-msgid ""
-"This saw is needed by the sawyer to create all the useful tools. It is "
-"produced by the toolsmith."
-msgstr ""
-"Saha on työkalusepän keskeinen työkalu. Hän on myös ainoa, joka osaa "
-"valmistaa niitä lisää."
+#: ../../tribes/empire/farmer/conf:2
+msgid "Plants fields."
+msgstr "Istuttaa peltoja."
 
-#: ../../tribes/empire/scout/conf:1
-msgid ""
-"Scouts like Scotty the scout scout unscouted area in a scouty fashion."
-msgstr ""
-"Tiedustelija kuten Teemu Tiedustelija tiedustelee tiedostelemattomia alueita "
-"tiedustelun malliin."
+#: ../../tribes/empire/forester/conf:1
+msgid "Plants trees."
+msgstr "Istuttaa puita."
 
-#: ../../tribes/empire/scythe/conf:1
-msgid ""
-"The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
-"Viikate on maanviljelijän työkalu. Työkaluseppä valmistaa viikatteet."
+# TODO: platemail
+#: ../../tribes/empire/conf:80
+msgid "Plate-Armour"
+msgstr "Levyhaarniska"
 
-# TODO: sheep. And really prolly herding.
-#: ../../tribes/empire/shepherd/conf:1
-msgid "Keeping sheeps."
-msgstr "Lammaspaimen nimensä mukaisesti paimentaa lampaita."
+#: ../../tribes/empire/weaponsmithy/conf:31
+msgid "Produce advanced lance"
+msgstr "Valmista vahvistettu keihäs"
 
-#: ../../tribes/empire/shovel/conf:1
-msgid ""
-"The shovel is needed for proper handling of plants. Therefore the forester "
-"uses it. It is produced by the toolsmith."
-msgstr ""
-"Lapioita tarvitaan kasvien käsittelyyn, joten puunistuttaja käyttää sitä "
-"työssään. Työkaluseppä valmistaa lapiot."
+#: ../../tribes/empire/armoursmithy/conf:27
+msgid "Produce armour"
+msgstr "Valmista haarniska"
 
-#: ../../tribes/empire/smelter/conf:1
-msgid "Smelts iron."
-msgstr "Sulattaa rautaa ja kultaa."
-
-#: ../../tribes/empire/smelting_works/conf:22
-msgid "Smelt iron"
-msgstr "Sulata rautaa"
-
-#: ../../tribes/empire/smelting_works/conf:23
-msgid "Smelt gold"
-msgstr "Sulata kultaa"
-
-#: ../../tribes/empire/soldier/conf:1
-msgid "Defend and Conquer!"
-msgstr "Puolusta ja valloita!"
-
-#: ../../tribes/empire/stone/conf:1
-#: ../../tribes/empire/wood/conf:1
-msgid "Stones and wood are the basic build material of the Empire."
-msgstr "Kivet ja lautatavara ovat Keisarikunnan perusrakennusaineita."
-
-# TODO: granite, and dunno about laying stones or raw pieces...
-#: ../../tribes/empire/stonemason/conf:1
-msgid "Cuts raw pieces of granit and marble out of laying stones."
-msgstr "Hakkaa raakakiveä ja ajoittain marmoria irtolohkareista."
-
-#: ../../tribes/empire/toolsmith/conf:1
-msgid "Produces tools for the workers."
-msgstr "Tuottaa työkaluja työmiehille."
+#: ../../tribes/empire/toolsmithy/conf:44
+msgid "Produce axe"
+msgstr "Valmista kirves"
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
 msgstr "Valmista leipälapio"
+
+#: ../../tribes/empire/toolsmithy/conf:42
+msgid "Produce basket"
+msgstr "Valmista kori"
+
+#: ../../tribes/empire/armoursmithy/conf:28
+msgid "Produce chain armour"
+msgstr "Valmista ketjupanssari"
 
 #: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fire tongs"
@@ -1115,13 +634,37 @@ msgstr "Valmista onki"
 msgid "Produce hammer"
 msgstr "Valmista vasara"
 
+#: ../../tribes/empire/weaponsmithy/conf:32
+msgid "Produce heavy lance"
+msgstr "Valmista raskas keihäs"
+
+#: ../../tribes/empire/armoursmithy/conf:26
+msgid "Produce helm"
+msgstr "Valmista kypärä"
+
+#: ../../tribes/empire/toolsmithy/conf:41
+msgid "Produce hunting spear"
+msgstr "Valmista metsästyskeihäs"
+
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce kitchen tools"
 msgstr "Valmista keittiövälineet"
 
+#: ../../tribes/empire/weaponsmithy/conf:30
+msgid "Produce lance"
+msgstr "Valmista keihäs"
+
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
 msgstr "Valmista hakku"
+
+#: ../../tribes/empire/armoursmithy/conf:29
+msgid "Produce plate armour"
+msgstr "Valmista levyhaarniska"
+
+#: ../../tribes/empire/toolsmithy/conf:43
+msgid "Produce saw"
+msgstr "Valmista saha"
 
 #: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce scythe"
@@ -1131,25 +674,382 @@ msgstr "Valmista viikate"
 msgid "Produce shovel"
 msgstr "Valmista lapio"
 
-#: ../../tribes/empire/toolsmithy/conf:41
-msgid "Produce hunting spear"
-msgstr "Valmista metsästyskeihäs"
+#: ../../tribes/empire/weaponsmithy/conf:29
+msgid "Produce wood lance"
+msgstr "Valmista puukeihäs"
 
-#: ../../tribes/empire/toolsmithy/conf:42
-msgid "Produce basket"
-msgstr "Valmista kori"
+#: ../../tribes/empire/armoursmith/conf:1
+msgid "Produces armour for the soldiers."
+msgstr "Tuottaa haarniskoja sotilaille."
 
-#: ../../tribes/empire/toolsmithy/conf:43
-msgid "Produce saw"
-msgstr "Valmista saha"
+#: ../../tribes/empire/brewer/conf:1
+msgid "Produces beer or wine."
+msgstr "Valmistaa olutta tai viiniä."
 
-#: ../../tribes/empire/toolsmithy/conf:44
-msgid "Produce axe"
-msgstr "Valmista kirves"
+#: ../../tribes/empire/weaver/conf:1
+msgid "Produces cloth for ships and soldiers."
+msgstr "Kutoo kangasta aluksia ja sotilaita varten."
+
+#: ../../tribes/empire/innkeeper/conf:1
+msgid "Produces food for miners."
+msgstr "Valmistaa ruokaa kaivostyöläisille."
+
+#: ../../tribes/empire/toolsmith/conf:1
+msgid "Produces tools for the workers."
+msgstr "Tuottaa työkaluja työmiehille."
+
+#: ../../tribes/empire/weaponsmith/conf:1
+msgid "Produces weapons for the soldiers."
+msgstr "Tuottaa aseita sotilaille."
+
+#: ../../tribes/empire/conf:187
+msgid "Quarry"
+msgstr "Kivilouhos"
+
+#: ../../tribes/empire/conf:81
+msgid "Ration"
+msgstr "Ruoka-annos"
+
+#: ../../tribes/empire/conf:34
+msgid "Resource indicator coal little"
+msgstr "Resurssimerkki hiili vähän"
+
+#: ../../tribes/empire/conf:35
+msgid "Resource indicator coal much"
+msgstr "Resurssimerkki hiili paljon"
+
+#: ../../tribes/empire/conf:36
+msgid "Resource indicator gold little"
+msgstr "Resurssimerkki kulta vähän"
+
+#: ../../tribes/empire/conf:37
+msgid "Resource indicator gold much"
+msgstr "Resurssimerkki kulta paljon"
+
+#: ../../tribes/empire/conf:38
+msgid "Resource indicator granite little"
+msgstr "Resurssimittari graniitti loppumassa"
+
+#: ../../tribes/empire/conf:39
+msgid "Resource indicator granite much"
+msgstr "Resurssimittari graniittia tarpeeksi"
+
+#: ../../tribes/empire/conf:40
+msgid "Resource indicator iron little"
+msgstr "Resurssimerkki rauta vähän"
+
+#: ../../tribes/empire/conf:41
+msgid "Resource indicator iron much"
+msgstr "Resurssimerkki rauta paljon"
+
+#: ../../tribes/empire/conf:42
+msgid "Resource indicator no resource"
+msgstr "Resurssimerkki ei mitään"
+
+#: ../../tribes/empire/conf:43
+msgid "Resource indicator water"
+msgstr "Resurssimerkki vettä"
+
+#: ../../tribes/empire/conf:82
+msgid "Saw"
+msgstr "Saha"
+
+#: ../../tribes/empire/conf:188
+msgid "Sawmill"
+msgstr "Saha"
+
+#: ../../tribes/empire/conf:127
+msgid "Scout"
+msgstr "Tiedustelija"
+
+#: ../../tribes/empire/conf:199
+msgid "Scout's House"
+msgstr "Tiedustelijan talo"
+
+#: ../../tribes/empire/scout/conf:1
+msgid ""
+"Scouts like Scotty the scout scout unscouted area in a scouty fashion."
+msgstr ""
+"Tiedustelija kuten Teemu Tiedustelija tiedustelee tiedostelemattomia alueita "
+"tiedustelun malliin."
+
+#: ../../tribes/empire/conf:83
+msgid "Scythe"
+msgstr "Viikate"
+
+#: ../../tribes/empire/conf:139
+#: ../../tribes/empire/conf:158
+msgid "Sentry"
+msgstr "Vartiopaikka"
+
+#: ../../tribes/empire/conf:189
+msgid "Sheepfarm"
+msgstr "Lammastila"
+
+#: ../../tribes/empire/conf:119
+msgid "Shepherd"
+msgstr "Lammaspaimen"
+
+#: ../../tribes/empire/conf:84
+msgid "Shovel"
+msgstr "Lapio"
+
+#: ../../tribes/empire/arena/conf:13
+#: ../../tribes/empire/colosseum/conf:27
+#: ../../tribes/empire/trainingscamp/conf:38
+msgid "Sleep"
+msgstr "Lepää"
+
+#: ../../tribes/empire/conf:152
+msgid "Small Tower"
+msgstr "Pieni torni"
+
+#: ../../tribes/empire/smelting_works/conf:23
+msgid "Smelt gold"
+msgstr "Sulata kultaa"
+
+#: ../../tribes/empire/smelting_works/conf:22
+msgid "Smelt iron"
+msgstr "Sulata rautaa"
+
+#: ../../tribes/empire/conf:120
+msgid "Smelter"
+msgstr "Sulattaja"
+
+#: ../../tribes/empire/conf:190
+msgid "Smelting Works"
+msgstr "Sulattamo"
+
+#: ../../tribes/empire/smelter/conf:1
+msgid "Smelts iron."
+msgstr "Sulattaa rautaa ja kultaa."
+
+#: ../../tribes/empire/conf:100
+msgid "Soldier"
+msgstr "Sotilas"
+
+#: ../../tribes/empire/conf:121
+msgid "Stonemason"
+msgstr "Kivenhakkaaja"
+
+#: ../../tribes/empire/conf:191
+msgid "Stonemason's House"
+msgstr "Kivenhakkaajan mökki"
+
+#: ../../tribes/empire/conf:85
+msgid "Stones"
+msgstr "Kiviä"
+
+#: ../../tribes/empire/stone/conf:1
+#: ../../tribes/empire/wood/conf:1
+msgid "Stones and wood are the basic build material of the Empire."
+msgstr "Kivet ja lautatavara ovat Keisarikunnan perusrakennusaineita."
+
+#: ../../tribes/empire/conf:159
+msgid "Stronghold"
+msgstr "Linnake"
+
+#: ../../tribes/empire/conf:192
+msgid "Tavern"
+msgstr "Krouvi"
+
+#: ../../tribes/empire/hunter/conf:1
+msgid "The Hunter brings good meat to the colonists."
+msgstr "Metsästäjä tuo hyvää lihaa väellesi."
+
+#: ../../tribes/empire/scythe/conf:1
+msgid ""
+"The Scythe is the tool of the farmers. It is produced by the toolsmith."
+msgstr ""
+"Viikate on maanviljelijän työkalu. Työkaluseppä valmistaa viikatteet."
+
+#: ../../tribes/empire/conf:4
+msgid "The Widelands Development Team"
+msgstr "Widelands-kehittäjät"
+
+#: ../../tribes/empire/axe/conf:1
+msgid ""
+"The axe is the tool for the lumberjack. It is produced by the toolsmith."
+msgstr "Kirves on puunhakkaajan työväline. Työkaluseppä valmistaa sen."
+
+#: ../../tribes/empire/bread/conf:1
+msgid "The bakers of the Empire make really tasty bread."
+msgstr "Valtakunnan leipurit leipovat todella hyvää leipää."
+
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"The fire tongs are the tool of the smelter, working in the smelting works. "
+"They are produced by the toolsmith."
+msgstr ""
+"Sulattaja käyttää tultakestäviä pihtejä sulattamossa työskennellessään. "
+"Työkaluseppä valmistaa ne."
+
+#: ../../tribes/empire/coal/conf:1
+msgid ""
+"The fires of the Empire are usually fed with wood, but sometimes, wood just "
+"does not burn hot enough. Then, coal is used."
+msgstr ""
+"Keisarikunnassa tulia ruokitaan yleensä puulla, mutta joskus tällainen "
+"liekki ei ole riittävän kuuma. Tällöin käytetään hiiltä."
+
+# TODO: workers, eh?
+#: ../../tribes/empire/hammer/conf:1
+msgid ""
+"The hammer is an essential tool. It is needed by the geologist, the worker, "
+"the armour- and weaponsmith. Make sure you always got some in reserve! It is "
+"produced by the toolsmith."
+msgstr ""
+"Vasara on keskeinen työkalu. Sitä tarvitsevat geologit, rakentajat sekä "
+"haarniska- ja asesepät. Varmista, että sinulla on aina pari vasaraa varalla! "
+"Työkaluseppä valmistaa sen."
+
+#: ../../tribes/empire/bakingtray/conf:1
+msgid ""
+"The peel is the tool of the baker, each baker needs its own. It is produced "
+"by the toolsmith."
+msgstr ""
+"Leipälapio on leipurin työkalu, ja jokainen leipuri tarvitsee omansa. "
+"Työkaluseppä valmistaa sen."
+
+#: ../../tribes/empire/shovel/conf:1
+msgid ""
+"The shovel is needed for proper handling of plants. Therefore the forester "
+"uses it. It is produced by the toolsmith."
+msgstr ""
+"Lapioita tarvitaan kasvien käsittelyyn, joten puunistuttaja käyttää sitä "
+"työssään. Työkaluseppä valmistaa lapiot."
+
+#: ../../tribes/empire/plate_armour/conf:1
+msgid "The strongest armour existing for the Empire soldiers."
+msgstr "Kaikista vahvoin haarniska Keisarikunnan sotilaille."
+
+# TODO: basic what
+#: ../../tribes/empire/grape/conf:1
+msgid "These grapes are the basic for tasty wine."
+msgstr "Nämä rypäleet ovat hehkeän viinin raaka-aine."
+
+#: ../../tribes/empire/basket/conf:1
+msgid ""
+"This basket is needed by the winegrower, for harvesting the grapes. It is "
+"produced by the toolsmith."
+msgstr ""
+"Tätä koria tarvitaan viinitarhassa rypäleiden keräämiseen. Työkaluseppä "
+"valmistaa sen."
+
+# TODO: steel tip, and blade where exactly if not in the tip?
+#: ../../tribes/empire/heavy_lance/conf:1
+msgid "This is a good warrior lance, with a steel-top and a little blade."
+msgstr ""
+"Tämä on hyvä soturin keihäs, jonka teräksisessä kärjessä on pieni terä."
+
+#: ../../tribes/empire/chain_armour/conf:1
+msgid "This is a medium armour for Empire soldiers."
+msgstr "Tämä on keskitason haarniska Keisarikunnan sotilaalle."
+
+# TODO: basic what, Empire's (rather of the E.), and system is unnecessary
+#: ../../tribes/empire/wood_lance/conf:1
+msgid ""
+"This is a wooden lance, which is the basic of the Empires military system."
+msgstr "Tämä on puinen keihäs, Keisarikunnan armeijan perusase."
+
+# TODO: a tip
+#: ../../tribes/empire/advanced_lance/conf:1
+msgid "This is an advanced lance, with steel top."
+msgstr "Tämän keihään kärki on terästä ja on siksi puista kestävämpi."
+
+# TODO: no ,
+#: ../../tribes/empire/war_lance/conf:1
+msgid ""
+"This is the best and sharpest weapon, the Empire weaponsmith creates for "
+"their warriors."
+msgstr ""
+"Tämä on paras ja terävin Keisarikunnan aseseppien sotilailleen valmistama "
+"ase."
+
+# TODO: Roman empire, not roman Empire
+#: ../../tribes/empire/conf:6
+msgid "This is the culture of the roman Empire."
+msgstr "Tämä on Rooman keisarikunnan kansa ja kulttuuri."
+
+#: ../../tribes/empire/ironore/conf:1
+msgid "This is the red iron ore."
+msgstr "Tämä on punaista rautamalmia."
+
+#: ../../tribes/empire/goldstone/conf:1
+msgid "This is the yellow goldstone."
+msgstr "Tämä on kellertävää kultakiveä."
+
+#: ../../tribes/empire/pick/conf:1
+msgid ""
+"This pick is used by the stonemasons and the miners. It is produced by the "
+"toolsmith."
+msgstr ""
+"Hakkua käyttävät kivenhakkaajat ja kaivostyöläiset. Työkaluseppä valmistaa "
+"hakut."
+
+# TODO: sawyer, toolsmith in same entry even!
+#: ../../tribes/empire/saw/conf:1
+msgid ""
+"This saw is needed by the sawyer to create all the useful tools. It is "
+"produced by the toolsmith."
+msgstr ""
+"Saha on työkalusepän keskeinen työkalu. Hän on myös ainoa, joka osaa "
+"valmistaa niitä lisää."
+
+#: ../../tribes/empire/hunting_spear/conf:1
+msgid ""
+"This spear is light enough to be thrown, but heavy enough to kill any animal "
+"in one blow. It is only used by the hunters."
+msgstr ""
+"Tämä keihäs on riittävän kevyt heitettäväksi, mutta riittävän raskas "
+"tappamaan minkä tahansa eläimen yhdellä iskulla. Vain metsästäjät käyttävät "
+"sitä."
+
+# TODO: no comma
+#: ../../tribes/empire/wine/conf:1
+msgid ""
+"This wine gives enough power, to mine marble or gold. And furthermore, our "
+"soldiers like it, too."
+msgstr ""
+"Tämä viini antaa voimia louhia marmoria tai kultaa. Sotilaatkin pitävät "
+"siitä."
+
+#: ../../tribes/empire/lance/conf:1
+msgid "This wooden lance has an iron spike."
+msgstr "Tässä puukeihäässä on rautapiikki."
+
+#: ../../tribes/empire/conf:122
+msgid "Toolsmith"
+msgstr "Työkaluseppä"
+
+#: ../../tribes/empire/conf:193
+msgid "Toolsmithy"
+msgstr "Työkaluseppä"
+
+#: ../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:153
+msgid "Tower"
+msgstr "Torni"
+
+#: ../../tribes/empire/conf:123
+msgid "Trainer"
+msgstr "Kouluttaja"
+
+#: ../../tribes/empire/conf:136
+msgid "Trainingscamp"
+msgstr "Harjoitteluleiri"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
 msgstr "Kouluttaa sotilaita."
+
+#: ../../tribes/empire/conf:86
+msgid "Trunk"
+msgstr "Tukki"
+
+#: ../../tribes/empire/trunk/conf:1
+msgid "Trunks are one important build material of the Empire."
+msgstr "Tukit ovat yksi keskeinen Keisarikunnan rakennusmateriaali."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1197,6 +1097,30 @@ msgid ""
 "(build13))"
 msgstr ""
 "Paranna sotilaan hyökkäystä (3) (vain tallennustiedostojen taaksepäin "
+"yhteensopivuuden varalta (build13))"
+
+#: ../../tribes/empire/arena/conf:14
+#: ../../tribes/empire/colosseum/conf:28
+msgid "Upgrade soldier evade 0"
+msgstr "Paranna sotilaan välttökykyä (0)"
+
+#: ../../tribes/empire/arena/conf:15
+#: ../../tribes/empire/colosseum/conf:29
+msgid ""
+"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Paranna sotilaan välttökykyä (0) (vain tallennustiedostojen taaksepäin "
+"yhteensopivuuden varalta (build13))"
+
+#: ../../tribes/empire/colosseum/conf:30
+msgid "Upgrade soldier evade 1"
+msgstr "Paranna sotilaan välttökykyä (1)"
+
+#: ../../tribes/empire/colosseum/conf:31
+msgid ""
+"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Paranna sotilaan välttökykyä (1) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:47
@@ -1247,30 +1171,41 @@ msgstr ""
 "Paranna sotilaan voimapisteitä (3) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/empire/trunk/conf:1
-msgid "Trunks are one important build material of the Empire."
-msgstr "Tukit ovat yksi keskeinen Keisarikunnan rakennusmateriaali."
+#: ../../tribes/empire/conf:126
+msgid "Vine Farmer"
+msgstr "Rypäleenkasvattaja"
 
-#: ../../tribes/empire/vinefarmer/conf:1
-msgid "Grows vine."
-msgstr "Kasvattaa viinirypäleitä."
+#: ../../tribes/empire/conf:44
+msgid "Vine medium"
+msgstr "Viiniköynnös, keskikokoinen"
 
-#: ../../tribes/empire/vineyard/conf:17
-msgid "Plant vine"
-msgstr "Istuta viiniköynnös"
+#: ../../tribes/empire/conf:47
+msgid "Vine ripe"
+msgstr "Viiniköynnös, kypsä"
 
-#: ../../tribes/empire/vineyard/conf:19
-msgid "Harvest vine"
-msgstr "Korjaa viinirypäleitä"
+#: ../../tribes/empire/conf:45
+msgid "Vine small"
+msgstr "Viiniköynnös, pieni"
 
-# TODO: no ,
-#: ../../tribes/empire/war_lance/conf:1
-msgid ""
-"This is the best and sharpest weapon, the Empire weaponsmith creates for "
-"their warriors."
-msgstr ""
-"Tämä on paras ja terävin Keisarikunnan aseseppien sotilailleen valmistama "
-"ase."
+#: ../../tribes/empire/conf:46
+msgid "Vine tiny"
+msgstr "Viiniköynnös, hyvin pieni"
+
+#: ../../tribes/empire/conf:198
+msgid "Vineyard"
+msgstr "Viinitarha"
+
+#: ../../tribes/empire/conf:87
+msgid "War-Lance"
+msgstr "Sotakeihäs"
+
+#: ../../tribes/empire/conf:164
+msgid "Warehouse"
+msgstr "Varasto"
+
+#: ../../tribes/empire/conf:88
+msgid "Water"
+msgstr "Vesi"
 
 #: ../../tribes/empire/water/conf:1
 msgid ""
@@ -1280,29 +1215,33 @@ msgstr ""
 "Vesi on elämän eliksiiriä! Vettä käytetään moneen, muun muassa leivän "
 "leipomiseen ja oluen panemiseen."
 
-#: ../../tribes/empire/weaponsmith/conf:1
-msgid "Produces weapons for the soldiers."
-msgstr "Tuottaa aseita sotilaille."
+#: ../../tribes/empire/conf:194
+msgid "Weapon Smithy"
+msgstr "Asepaja"
 
-#: ../../tribes/empire/weaponsmithy/conf:29
-msgid "Produce wood lance"
-msgstr "Valmista puukeihäs"
+#: ../../tribes/empire/iron/conf:1
+msgid "Weapons and tools are made of iron."
+msgstr "Aseet ja työkalut valmistetaan raudasta."
 
-#: ../../tribes/empire/weaponsmithy/conf:30
-msgid "Produce lance"
-msgstr "Valmista keihäs"
+#: ../../tribes/empire/conf:124
+msgid "Weaponsmith"
+msgstr "Aseseppä"
 
-#: ../../tribes/empire/weaponsmithy/conf:31
-msgid "Produce advanced lance"
-msgstr "Valmista vahvistettu keihäs"
+#: ../../tribes/empire/conf:125
+msgid "Weaver"
+msgstr "Kutoja"
 
-#: ../../tribes/empire/weaponsmithy/conf:32
-msgid "Produce heavy lance"
-msgstr "Valmista raskas keihäs"
+#: ../../tribes/empire/conf:195
+msgid "Weaving Mill"
+msgstr "Kutomo"
 
-#: ../../tribes/empire/weaver/conf:1
-msgid "Produces cloth for ships and soldiers."
-msgstr "Kutoo kangasta aluksia ja sotilaita varten."
+#: ../../tribes/empire/conf:196
+msgid "Well"
+msgstr "Kaivo"
+
+#: ../../tribes/empire/conf:89
+msgid "Wheat"
+msgstr "Vehnä"
 
 #: ../../tribes/empire/wheat/conf:1
 msgid ""
@@ -1312,24 +1251,106 @@ msgstr ""
 "Vehnä on elintärkeää; siitä valmistetaan olutta ja siitä jauhetuista "
 "jauhoista leivotaan herkullista leipää."
 
-# TODO: no comma
-#: ../../tribes/empire/wine/conf:1
-msgid ""
-"This wine gives enough power, to mine marble or gold. And furthermore, our "
-"soldiers like it, too."
-msgstr ""
-"Tämä viini antaa voimia louhia marmoria tai kultaa. Sotilaatkin pitävät "
-"siitä."
+#: ../../tribes/empire/conf:90
+msgid "Wine"
+msgstr "Viini"
 
-# TODO: basic what, Empire's (rather of the E.), and system is unnecessary
-#: ../../tribes/empire/wood_lance/conf:1
-msgid ""
-"This is a wooden lance, which is the basic of the Empires military system."
-msgstr "Tämä on puinen keihäs, Keisarikunnan armeijan perusase."
+# TODO: Winery is actually a vineyard too, too easy to misunderstand.
+#: ../../tribes/empire/conf:197
+msgid "Winery"
+msgstr "Viinikellari"
+
+#: ../../tribes/empire/conf:91
+msgid "Wood"
+msgstr "Lautatavara"
+
+#: ../../tribes/empire/conf:92
+msgid "Wood Lance"
+msgstr "Puukeihäs"
+
+#: ../../tribes/empire/conf:93
+msgid "Wool"
+msgstr "Villa"
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
 msgstr "Villa keritään lampaista. Kutomot valmistavat siitä kangasta."
 
+#: ../../tribes/empire/armoursmithy/conf:30
+#: ../../tribes/empire/bakery/conf:20
+#: ../../tribes/empire/brewery/conf:20
+#: ../../tribes/empire/burners_house/conf:19
+#: ../../tribes/empire/coalmine/conf:21
+#: ../../tribes/empire/deep_coalmine/conf:22
+#: ../../tribes/empire/deep_goldmine/conf:22
+#: ../../tribes/empire/deep_marblemine/conf:23
+#: ../../tribes/empire/deep_oremine/conf:22
+#: ../../tribes/empire/donkeyfarm/conf:22
+#: ../../tribes/empire/farm/conf:22
+#: ../../tribes/empire/fishers_house/conf:17
+#: ../../tribes/empire/foresters_house/conf:16
+#: ../../tribes/empire/goldmine/conf:22
+#: ../../tribes/empire/hunters_house/conf:16
+#: ../../tribes/empire/inn/conf:20
+#: ../../tribes/empire/lumberjacks_house/conf:16
+#: ../../tribes/empire/marblemine/conf:26
+#: ../../tribes/empire/mill/conf:20
+#: ../../tribes/empire/oremine/conf:22
+#: ../../tribes/empire/piggery/conf:21
+#: ../../tribes/empire/quarry/conf:21
+#: ../../tribes/empire/sawmill/conf:20
+#: ../../tribes/empire/scouts_house/conf:17
+#: ../../tribes/empire/sheepfarm/conf:21
+#: ../../tribes/empire/smelting_works/conf:24
+#: ../../tribes/empire/stonemasons_house/conf:21
+#: ../../tribes/empire/tavern/conf:22
+#: ../../tribes/empire/toolsmithy/conf:45
+#: ../../tribes/empire/vineyard/conf:23
+#: ../../tribes/empire/weaponsmithy/conf:34
+#: ../../tribes/empire/weaving-mill/conf:16
+#: ../../tribes/empire/well/conf:16
+#: ../../tribes/empire/winery/conf:20
+msgid "Work"
+msgstr "Työskentele (pääohjelma)"
+
+#: ../../tribes/empire/builder/conf:1
+msgid "Works at construction sites to create a new building."
+msgstr "Työskentelee rakennustyömailla rakentaen uusia rakennuksia."
+
+#: ../../tribes/empire/master-miner/conf:1
+#: ../../tribes/empire/miner/conf:1
+msgid "Works deep in the mines to obtain coal, iron or gold."
+msgstr ""
+"Työskentelee syvällä kaivoksissa saadakseen hiiltä, rautaa tai kultaa."
+
+#: ../../tribes/empire/beer/conf:1
+msgid ""
+"Young soldiers and miners need some encouragement. This drink makes a man "
+"fearless and strong."
+msgstr ""
+"Nuoret sotilaat ja kaivostyöläiset tarvitsevat kannustimia. Tämä juoma tekee "
+"sotilaista pelottomia ja vahvoja."
+
+#~ msgid "The backers of the Empire make really tasty bread."
+#~ msgstr "Keisarikunnan leipurit leipovat suussasulavaa leipää."
+
+#~ msgid ""
+#~ "Cloth is needed for Empire ships and few bigger buildings. It is produced "
+#~ "out of wool."
+#~ msgstr ""
+#~ "Kangasta tarvitaan Keisarikunnan aluksille ja suurempia rakennuksia varten. "
+#~ "Sitä kudotaan villasta."
+
+# TODO: granite
+#~ msgid "Resource indicator granit little"
+#~ msgstr "Resurssimerkki graniitti vähän"
+
+#~ msgid "Resource indicator granit much"
+#~ msgstr "Resurssimerkki graniitti paljon"
+
 #~ msgid "Works deep in the mines to produce coal, iron or gold."
 #~ msgstr "Työskentelee syvällä kaivoksissa louhien hiiltä, rautaa tai kultaa."
+
+# TODO: granite, and dunno about laying stones or raw pieces...
+#~ msgid "Cuts raw pieces of granit and marble out of laying stones."
+#~ msgstr "Hakkaa raakakiveä ja ajoittain marmoria irtolohkareista."

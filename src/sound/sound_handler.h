@@ -34,7 +34,7 @@
 #include <unistd.h>
 #endif
 
-namespace Widelands {struct Game;}
+namespace Widelands {struct Editor_Game_Base;}
 struct Songset;
 struct SDL_mutex;
 
@@ -222,7 +222,7 @@ public:
 	/** The game logic where we can get a mapping from logical to screen
 	 * coordinates and vice vers
 	*/
-	Widelands::Game * m_the_game;
+	Widelands::Editor_Game_Base * m_egbase;
 
 	/** Only for buffering the command line option --nosound until real
 	 * initialization is done.
