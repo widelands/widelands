@@ -30,7 +30,7 @@
 #define WIDELANDS_PROTOCOL_EXT_MAJOR 1
 #define WIDELANDS_PROTOCOL_EXT_MINOR 0
 
-#define WLGGZ_OLD_OPCODE(x) ((x > 0 and x <= 6) or x == 99 or x == 9)
+#define WLGGZ_OLD_OPCODE(x) ((x > 0 and x <= 7) or x == 99)
 #define WLGGZ_NEW_OPCODE(x) (x > 0 and not WLGGZ_OLD_OPCODE(x))
 
 enum WLGGZNetworkOpcodes
@@ -59,7 +59,7 @@ enum WLGGZNetworkOpcodes
 	 *  opcodes before getting a op_reply_protocol_ext.
 	 *  @notice This opcode does bot hava a null terminated parameter list
 	 */
-	op_request_protocol_ext = 9,
+	op_request_protocol_ext = 7,
 
 	// All following opcodes have a null terminated parameter list. This allows
 	// the server to read the stream correctly without knowing the opcodes.
@@ -71,7 +71,7 @@ enum WLGGZNetworkOpcodes
 	 *  meaning or dropping opcodes.
 	 *  @notice The parameters are send as a null terminated parameter list.
 	 */
-	op_reply_protocol_ext = 10,
+	op_reply_protocol_ext = 8,
 
 	/**
 	 * Opcode to transmit statistics and game results tu the server
@@ -80,10 +80,10 @@ enum WLGGZNetworkOpcodes
 	 * and then the argument. A argument type of 0 indicates the end of
 	 * the argument list.
 	 */
-	op_game_statistics = 7,
+	op_game_statistics = 9,
 
 	/// Similiar to the above op_game_statistics just for GameInfo
-	op_game_information = 8,
+	op_game_information = 10,
 
 	op_set_debug = 11,
 	op_debug_string = 12,
