@@ -66,6 +66,9 @@ end
 function colionder(text)
    return speech("map:colionder.png", "33A9FD", "Colionder", text)
 end
+function opol(text)
+   return speech("map:colionder.png", "FF3FFB", "Opol", text)
+end
 
 -- Nice formatting for objective texts: A header and one paragraph
 -- of text
@@ -132,6 +135,21 @@ obj_make_food_infrastructure = {
  - Build two smokeries to smoke raw meat and fish.]]
    )
 }
+
+obj_spidercloth_production = {
+   name = "obj_spidercloth_production",
+   title = _ "Build a spiderfarm and a weaving mill"
+   body = obj_text(_"Establish a spidercloth production",
+[[The weavers produce spidercloth and tabards in the weaving-mill. Spidercloth
+ is needed for the construction of some buildings and clothing while tabards
+ are the uniforms of soldiers. The weaving-mill needs gold yarn and spider yarn
+ as inputs. Spider yarn is produced by the spiderfarm while gold yarn is
+ produced by the gold weaver out of gold.<br><br>
+
+ - Build a Weaving-Mill
+ - Build a Spiderfarm
+ - Build a Goldweaver
+]]
 
 -- =======================================================================
 --                                  Texts
@@ -313,6 +331,31 @@ food_story_message = {
 [[Your words sound wise to me, Colionder. So be it then.]]
    ) .. new_objectives(obj_make_food_infrastructure)
 },
+}
+
+-- TODO: start this after build wares and as soon as there are 0 spidercloth in warehouses
+spidercloth_messages = {
+   {
+      title = _"A man comes to Jundlina",
+      body = opol(_
+[[May Satul warm you, Jundlina. My Name is Opol and I am the highest weaver of
+ the guild abandoning Atlantis and Lutas with you. I come with sad news indeed:
+ We have no more spidercloth. Not a single one is to be found in our warehouses.
+ Could you not help the weaver guild by TODO veranlassen a weaving-mill and a
+ spiderfarm? The spiders deliver the finest silk and we will produce the finest
+ spidercloth from it. We offer to also produce the tabards for young soldiers
+ and the golden tabards for officers for you in exchange. You will need them
+ for sure as soon as you want to recruit new soldiers.]])
+    ..  new_objectives(obj_spidercloth_production)
+ },
+ {
+    title = _ "Jundlina replies",
+    body = jundlina(_ "Jundline replies", _
+[[May Satul warm you too, Opol. Your suggestion sounds fair to me, I will build
+your weaving-mill and spiderfarm. I will also build a goldweaver so that the
+golden tabards you make will not be golden by name alone.]]
+    )
+ }
 }
 
 -- =======================================================================

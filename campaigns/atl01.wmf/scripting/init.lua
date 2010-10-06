@@ -3,6 +3,7 @@
 -- =======================================================================
 
 use("aux", "coroutine")
+use("aux", "array")
 use("aux", "infrastructure")
 use("aux", "objective_utils")
 use("aux", "ui")
@@ -50,6 +51,19 @@ function add_obj(o)
    return p1:add_objective(o.name, o.title, o.body)
 end
 
+-- Return the total number of items in warehouses of the given
+-- ware.
+function count_in_warehouses(ware)
+   local whs = array_concat(
+      player1:get_buildings("headquarters"),
+      player1:get_buildings("warehouse")
+   )
+   rv = 0
+   for idx,wh in ipairs(whs) do
+      rv = rv + wh:get_ware(wares)
+   end
+   return rv
+end
 
 -- ===============
 -- Initialization
@@ -105,6 +119,7 @@ end
 
 function leftover_buildings()
    -- All fields with left over buildings
+   -- TODO: one is missing to the left
    local lob_fields = Set:new{
       map:get_field( 59, 86),
       map:get_field( 72, 89),
