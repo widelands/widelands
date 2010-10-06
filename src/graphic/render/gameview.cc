@@ -24,6 +24,7 @@
 #include "economy/flag.h"
 
 #include "wui/minimap.h"
+#include "wui/mapviewpixelconstants.h"
 
 #include "logic/field.h"
 #include "logic/map.h"
@@ -1086,13 +1087,11 @@ inline static uint32_t calc_minimap_color
 
 /*
 ===============
-Draw following additions into the minimap:
-- target cross in the center of the display area.
-- dotted map borders.
+Draws a dotted frame border on the mini map.
 ===============
  */
 template<typename T>
-static bool draw_minimap_addition
+static bool draw_minimap_frameborder
 	(Widelands::FCoords				     const f,
 	 Uint8							   *	   pix,
 	 SDL_PixelFormat             const &       format,
@@ -1102,25 +1101,49 @@ static bool draw_minimap_addition
 	 uint32_t                            const flags)
 {
 	bool ispixeldone = false;
-	
-	// target cross in the center of the display area
+
 	uint32_t mapheight = (flags & MiniMap::Zoom2 ? rc.h / 2 : rc.h);
-	for (int32_t j = -2; j <= 2; j++) {
-		if (f.x == viewpoint.x + (mapwidth / 2) + j &&
-			f.y == viewpoint.y + (mapheight / 2) ||
-			f.x == viewpoint.x + (mapwidth / 2) &&
-			f.y == viewpoint.y + (mapheight / 2) + j) {
-			*reinterpret_cast<T *>(pix) = static_cast<T>(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
+
+	int32_t xsize= g_gr->get_xres() / TRIANGLE_WIDTH / 2;
+	int32_t ysize = g_gr->get_yres() / TRIANGLE_HEIGHT / 2;
+
+	Point ptopleft;
+	ptopleft.x = viewpoint.x + mapwidth / 2 - xsize;
+	if (ptopleft.x < 0) ptopleft.x += mapwidth;
+	ptopleft.y = viewpoint.y + mapheight / 2 - ysize;
+	if (ptopleft.y < 0) ptopleft.y += mapheight;
+
+	Point pbottomright;
+	pbottomright.x = viewpoint.x + mapwidth / 2 + xsize;
+	if (pbottomright.x >= mapwidth) pbottomright.x -= mapwidth;
+	pbottomright.y = viewpoint.y + mapheight / 2 + ysize;
+	if (pbottomright.y >= mapheight) pbottomright.y -= mapheight;
+
+	if (ptopleft.x <= pbottomright.x) {
+		if (f.x >= ptopleft.x && f.x <= pbottomright.x
+			&& (f.y == ptopleft.y || f.y == pbottomright.y)
+			&& f.x % 2 == 0)
 			ispixeldone = true;
-			break;
-		}
+	} else {
+		if ((f.x >= ptopleft.x && f.x <= mapwidth || f.x >= 0 && f.x <= pbottomright.x)
+			&& (f.y == ptopleft.y || f.y == pbottomright.y)
+			&& f.x % 2 == 0)
+			ispixeldone = true;
+	}
+	if (ptopleft.y <= pbottomright.y) {
+		if (f.y >= ptopleft.y && f.y <= pbottomright.y
+			&& (f.x == ptopleft.x || f.x == pbottomright.x)
+			&& f.y % 2 == 0)
+			ispixeldone = true;
+	} else {
+		if ((f.y >= ptopleft.y && f.y <= mapheight || f.y >= 0 && f.y <= pbottomright.y)
+			&& (f.x == ptopleft.x || f.x == pbottomright.x)
+			&& f.y % 2 == 0)
+			ispixeldone = true;
 	}
 
-	// dotted map borders
-	if (!ispixeldone && (f.x == 0 && f.y % 5 == 0 || f.y == 0 && f.x % 5 == 0)) {
-		*reinterpret_cast<T *>(pix) = static_cast<T>(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255));
-		ispixeldone = true;
-	}
+	if (ispixeldone)
+		*reinterpret_cast<T *>(pix) = static_cast<T>(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
 
 	return ispixeldone;
 }
@@ -1155,7 +1178,7 @@ static void draw_minimap_int
 			if (x % 2 || !(flags & MiniMap::Zoom2))
 				move_r(mapwidth, f, i);
 
-			if (!draw_minimap_addition<T>
+			if (!draw_minimap_frameborder<T>
 					(f, pix, format, mapwidth, rc, viewpoint, flags)) {
 				*reinterpret_cast<T *>(pix) = static_cast<T>
 					(calc_minimap_color
@@ -1176,8 +1199,8 @@ static void draw_minimap_int
 				if (x % 2 || !(flags & MiniMap::Zoom2))
 					move_r(mapwidth, f, i);
 
-				if (!draw_minimap_addition<T>
-						(f, pix, format, mapwidth, rc, viewpoint, flags)) {
+				if (!draw_minimap_frameborder<T>
+					(f, pix, format, mapwidth, rc, viewpoint, flags)) {
 					Widelands::Player::Field const & player_field = player_fields[i];
 					Widelands::Vision const vision = player_field.vision;
 
