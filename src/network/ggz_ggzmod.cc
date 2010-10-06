@@ -47,7 +47,8 @@ ggz_ggzmod & ggz_ggzmod::ref() {
 }
 
 ggz_ggzmod::ggz_ggzmod():
-	m_connected(false)
+	m_connected(false),
+	server_ip_addr(0)
 {
 
 }
@@ -145,12 +146,18 @@ void ggz_ggzmod::disconnect()
 }
 
 void ggz_ggzmod::process_datacon() {
-		int32_t op;
+	int32_t op;
 	char * ipstring;
 	char * greeter;
 	int32_t greeterversion;
 	char ipaddress[17];
 	int32_t fd = datafd();
+
+	if (not m_connected)
+		return;
+	
+	if (fd < 0 or fd > FD_SETSIZE)
+		return;
 
 	struct timeval timeout;
 	timeout.tv_sec = 0;
@@ -158,7 +165,7 @@ void ggz_ggzmod::process_datacon() {
 	fd_set fdset;
 	FD_ZERO(&fdset);
 	FD_SET(fd, &fdset);
-	
+
 	{
 		int32_t const ret = select(fd + 1, &fdset, 0, 0, &timeout);
 		if (ret <= 0)
@@ -185,6 +192,7 @@ void ggz_ggzmod::process_datacon() {
 		ggz_free(greeter);
 		break;
 	case op_request_ip:
+		// This it not used (anymore?). Return 255.255.255.255 to the server
 		log("GGZMOD/WLDATA/process ## ip request!\n");
 		snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 255, 255, 255, 255);
 		ggz_write_int(fd, op_reply_ip);
@@ -192,7 +200,7 @@ void ggz_ggzmod::process_datacon() {
 		break;
 	case op_broadcast_ip:
 		ggz_read_string_alloc(fd, &ipstring);
-		log("GGZMOD/WLDATA/process ## ip broadcast: '%s'\n", ipstring);
+		log("GGZMOD/WLDATA/process ## got ip broadcast: '%s'\n", ipstring);
 		server_ip_addr = ggz_strdup(ipstring);
 		ggz_free(ipstring);
 		break;
@@ -211,6 +219,8 @@ void ggz_ggzmod::process_datacon() {
 
 void ggz_ggzmod::process()
 {
+	if (not m_connected)
+		return;
 	ggzmod_dispatch(mod);
 	process_datacon();
 }
@@ -220,11 +230,20 @@ bool ggz_ggzmod::data_pending()
 	fd_set read_fd_set;
 	int result;
 	struct timeval tv;
+
+	if (not m_connected)
+		return false;
+
+	if (m_server_fd < 0 or m_server_fd > FD_SETSIZE)
+		return false;
+
 	FD_ZERO(&read_fd_set);
-	FD_SET(m_server_fd, &read_fd_set);
+	if (m_server_fd > 0 and m_server_fd <= FD_SETSIZE)
+		FD_SET(m_server_fd, &read_fd_set);
+	if (m_data_fd > 0 and m_data_fd <= FD_SETSIZE)
+		FD_SET(m_data_fd, &read_fd_set);
 	tv.tv_sec = tv.tv_usec = 0;
-	result =
-	select(m_server_fd + 1, &read_fd_set, NULL, NULL, &tv);
+	result = select(FD_SETSIZE, &read_fd_set, NULL, NULL, &tv);
 	if (result > 0)
 		return true;
 	return false;

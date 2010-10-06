@@ -156,7 +156,7 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 		(this, &Fullscreen_Menu_NetSetupGGZ::server_doubleclicked);
 
 	// try to connect to the metaserver
-	if (!NetGGZ::ref().used())
+	if (!NetGGZ::ref().logged_in())
 		connectToMetaserver();
 }
 
@@ -167,7 +167,7 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 	Fullscreen_Menu_Base::think ();
 
 	// If we have no connection try to connect
-	if (!NetGGZ::ref().used()) {
+	if (not NetGGZ::ref().logged_in() and not NetGGZ::ref().is_connecting()) {
 		// Wait two seconds after the user changed the name to avoid reconnecting
 		// after each changed character.
 		if (m_namechange >= time(0) - 1)

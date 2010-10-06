@@ -118,21 +118,23 @@ struct NetGGZ : public ChatProvider {
 	friend class ggz_ggzmod;
 	static NetGGZ & ref();
 
-	/// only sets that ggz is used
-	//void init();
-
-	//bool connect();
-
-	/// returns true if ggz is used
-	bool used();
-	
-	/// process ggz data (ggzcore and ggzmod)
+	/// process ggz data (ggzcore and ggzmod). This must be called on a regular
+	/// basis
 	void process();
 	
 	/// returns the ip address of the server we joined
 	char const * ip();
-	
+
+	/// returns true if ggz is connected to the metaserver
+	bool connected();
+
+	/// true if ggz is logged in to the metaserver
 	bool logged_in();
+
+	/// only true while logging in
+	bool is_connecting();
+
+
 
 	bool updateForTables();
 	bool updateForUsers();
@@ -141,7 +143,19 @@ struct NetGGZ : public ChatProvider {
 
 	// Include the enums to communicate with the server
 
-	bool initcore(const char *, const char *, const char *, bool);
+	/**
+	 * initialize ggz core. Set up internal strucures and set metaserver settings
+	 *
+	 * @param metaserv Name of the server to connect to
+	 * @param nick Nickname of the playerinfo
+	 * @param pwd Password of the player. Only needed if registered is true
+	 * @param registered If true log in as registered player else log in as a
+	 *                   guest
+	 */
+	bool initcore
+		(const char * metaserver, const char * nick,
+		 const char * pwd, bool registered);
+	/// deinit ggz completely. Disconnect from server
 	void deinit();
 
 	/// Modify ggz table state to playing
@@ -189,7 +203,7 @@ struct NetGGZ : public ChatProvider {
 
 	/// sets the servername shown in the games list
 	void set_local_servername(std::string const & name) {
-		servername  = name.empty() ? "WL-Default" : name;
+		servername = name.empty() ? "WL-Default" : name;
 		servername += " (";
 		servername += build_id();
 		servername += ')';
@@ -228,8 +242,7 @@ private:
 
 
 	/// true if ggz is used
-	bool use_ggz;
-	
+	// bool use_ggz;
 
 	char * server_ip_addr;
 

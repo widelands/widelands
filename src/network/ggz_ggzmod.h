@@ -41,6 +41,8 @@ public:
 	void process();
 	bool data_pending();
 	int32_t datafd();
+	
+	char * get_server_ip() { return server_ip_addr; }
 
 private:
 	ggz_ggzmod();

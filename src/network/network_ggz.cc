@@ -41,7 +41,6 @@ static NetGGZ    * ggzobj    = 0;
 /// Constructor of NetGGZ.
 /// It is private to avoid the creation of more than one ggz object.
 NetGGZ::NetGGZ() :
-	use_ggz       (false),
 	tableseats    (1),
 	motd          (),
 	mapname       (),
@@ -59,23 +58,20 @@ NetGGZ & NetGGZ::ref() {
 	return *ggzobj;
 }
 
-/// \returns true, if ggz is used
-bool NetGGZ::used()
-{
-	return use_ggz;
-}
-
 void NetGGZ::deinit()
 {
-#warning to implement
+	ggz_ggzmod::ref().disconnect();
+	ggz_ggzcore::ref().deinit();
+	
 }
 
 
 /// \returns the ip of the server, if connected
 char const * NetGGZ::ip()
 {
-	#warning implement this!
-	return "";
+	while (!ggz_ggzmod::ref().get_server_ip())
+		process();
+	return ggz_ggzmod::ref().get_server_ip();;
 }
 
 
@@ -86,22 +82,27 @@ bool NetGGZ::initcore
 	 char const * const pwd, bool registered)
 {
 	username = nick;
-	return use_ggz = ggz_ggzcore::ref().init(metaserver, nick, pwd, registered);
+	ggz_ggzcore::ref().init(metaserver, nick, pwd, registered);
+	while
+		(ggz_ggzcore::ref().is_connecting() or (ggz_ggzcore::ref().logged_in()
+		 and not ggz_ggzcore::ref().is_in_room()))
+	{
+		ggz_ggzcore::ref().process();
+	}
+
+	return ggz_ggzcore::ref().logged_in();
 }
 
 void NetGGZ::process()
 {
-	if (!used())
-		return;
-
-	while 
-		(ggz_ggzcore::ref().data_pending()
-		 or ggz_ggzmod::ref().data_pending())
+	do
 	{
-		log("GGZ ## process data ...\n");
+		//log("GGZ ## process data ...\n");
 		ggz_ggzcore::ref().process();
 		ggz_ggzmod::ref().process();
-	}
+	} while
+		(ggz_ggzcore::ref().data_pending()
+		 or ggz_ggzmod::ref().data_pending());
 
 	if (
 		 (ggz_ggzcore::ref().get_tablestate() == ggz_ggzcore::ggzcoretablestate_launched
@@ -141,7 +142,7 @@ uint32_t NetGGZ::max_players()
 /// Tells the metaserver that the game started
 void NetGGZ::send_game_playing()
 {
-	if (used()) {
+	if (ggz_ggzcore::ref().is_in_table()) {
 		int fd = ggz_ggzmod::ref().datafd();
 		if (ggz_write_int(fd, op_state_playing) < 0)
 			log("GGZMOD ERROR: Game state could not be send!\n");
@@ -153,7 +154,7 @@ void NetGGZ::send_game_playing()
 /// Tells the metaserver that the game is done
 void NetGGZ::send_game_done()
 {
-	if (used()) {
+	if (ggz_ggzcore::ref().is_in_table()) {
 		int fd = ggz_ggzmod::ref().datafd();
 		if (ggz_write_int(fd, op_state_done) < 0)
 			log("GGZMOD ERROR: Game state could not be send!\n");
@@ -165,7 +166,7 @@ void NetGGZ::send_game_done()
 void NetGGZ::send_game_info()
 {
 	log("GGZMOD NetGGZ::send_game_info()\n");
-	if (used()) {
+	if (ggz_ggzcore::ref().is_in_table()) {
 		int fd = ggz_ggzmod::ref().datafd();
 		if (ggz_write_int(fd, op_game_information) < 0)
 			log("GGZMOD ERROR: Game information could not be send!\n");
@@ -212,7 +213,7 @@ void NetGGZ::send_game_statistics
 	(int32_t gametime,
 	 const Widelands::Game::General_Stats_vector & resultvec)
 {
-	if (used()) {
+	if (ggz_ggzcore::ref().is_in_table()) {
 		int fd = ggz_ggzmod::ref().datafd();
 		log("NetGGZ::send_game_statistics: send statistics to metaserver now!\n");
 		ggz_write_int(fd, op_game_statistics);
@@ -522,5 +523,16 @@ std::vector<Net_Game_Info> const & NetGGZ::tables() {
 std::vector<Net_Player>    const & NetGGZ::users() {
 	return ggz_ggzcore::ref().userlist;
 }
+
+bool NetGGZ::is_connecting()
+{
+	return ggz_ggzcore::ref().is_connecting();
+}
+
+bool NetGGZ::logged_in()
+{
+	return ggz_ggzcore::ref().logged_in();
+}
+
 
 #endif

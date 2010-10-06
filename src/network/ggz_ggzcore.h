@@ -98,6 +98,7 @@ public:
 	void send_message(const char *, const char *);
 
 	bool is_in_room();
+	bool is_in_table();
 	bool logged_in() {
 		return m_logged_in;
 	}
@@ -123,6 +124,10 @@ public:
 
 	enum ggzcore_state get_state(){
 		return m_state;
+	}
+
+	bool is_connecting() {
+		return ggzcore_login and not ggzcore_ready and not m_logged_in;
 	}
 
 private:
