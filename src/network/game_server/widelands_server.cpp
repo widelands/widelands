@@ -86,7 +86,8 @@ WidelandsServer::WidelandsServer():
 WidelandsServer::~WidelandsServer()
 {
 	wllog(DL_INFO, "closing!");
-	wllog(DL_DUMP, "Map %s (%i, %i)", m_map.name(), m_map.w(), m_map.h());
+	wllog
+		(DL_DUMP, "Map %s (%i, %i)", m_map.name().c_str(), m_map.w(), m_map.h());
 	wllog(DL_DUMP, "GameTime: %i", m_result_gametime);
 
 	std::string wincond = "unknown (ERROR)";
@@ -152,33 +153,32 @@ result;
 // State change hook
 void WidelandsServer::stateEvent()
 {
-	
-	char * state = "unkown state";
+	char * statestr = "unkown state";
 	switch(state())
 	{
 		case created:
-			state = "created";
+			statestr = "created";
 			break;
 		case waiting:
-			state = "waiting";
+			statestr = "waiting";
 			break;
 		case playing:
-			state = "playing";
+			statestr = "playing";
 			break;
 		case done:
-			state = "done";
+			statestr = "done";
 			break;
 		case restored:
-			state = "restored";
+			statestr = "restored";
 			break;
 	}
-	wllog(DL_DEBUG, "WidelandsServer: stateEvent: %s", state);
+	wllog(DL_DEBUG, "WidelandsServer: stateEvent: %s", statestr);
 }
 
 // Player join hook
 void WidelandsServer::joinEvent(Client * const client)
 {
-	wllog(DL_INFO, "joinEvent: %s", client->name);
+	wllog(DL_INFO, "joinEvent: %s", client->name.c_str());
 
 	// Send greeter
 	int const channel = fd(client->number);
