@@ -51,6 +51,8 @@ class WidelandsPlayerStats
 		int kills;
 };
 
+#define SUPPORT_B16_PROTOCOL(p) (p != 0 and p->support_build16_proto())
+
 class WidelandsPlayer
 {
 	public:
@@ -60,7 +62,8 @@ class WidelandsPlayer
 			m_wl_player_number(wl_num),
 			m_ggz_player_number(-1),
 			m_type(playertype_null),
-			m_team(0)
+			m_team(0),
+			m_build16_protocol(false)
 			{}
 
 		int wl_player_number() { return m_wl_player_number; }
@@ -70,6 +73,7 @@ class WidelandsPlayer
 		std::string version() { return m_version; }
 		std::string build() { return m_build; }
 		unsigned int team() { return m_team; }
+		bool support_build16_proto() { return m_build16_protocol; }
 		
 		void set_ggz_player_number(int num) 
 			{ m_ggz_player_number=num; }
@@ -79,6 +83,7 @@ class WidelandsPlayer
 			{ m_build = b; m_version = v; }
 		void set_team(unsigned int t)
 			{ m_team = t; }
+		void set_build16_proto(bool b) { m_build16_protocol = b; }
 
 		WidelandsPlayerStats stats;
 
@@ -90,6 +95,8 @@ class WidelandsPlayer
 		WLGGZPlayerType m_type;
 		std::string m_build, m_version;
 		unsigned int m_team;
+		/// This client supports the new (after build16) protocol
+ 		bool m_build16_protocol;
 };
 
 class WidelandsMap 

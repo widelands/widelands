@@ -325,6 +325,16 @@ GGZHookReturn ggz_ggzcore::callback_server
 	return GGZ_HOOK_OK;
 }
 
+int ggz_ggzcore::get_max_players()
+{
+	if (!is_in_room() or m_room == NULL)
+	{
+		log("GGZCORE ## max_player: no valid room. Allow only one player\n");
+		return 1;
+	}
+	return ggzcore_gametype_get_max_players(ggzcore_room_get_gametype(m_room));
+}
+
 
 /// callback function for all important room events
 /// calls \ref event_room()

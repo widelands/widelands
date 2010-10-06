@@ -35,8 +35,6 @@
 #endif
 #include <warning.h>
 
-
-
 static GGZMod    * mod       = 0;
 ggz_ggzmod       * ggzmodobj = 0;
 
@@ -47,8 +45,7 @@ ggz_ggzmod & ggz_ggzmod::ref() {
 }
 
 ggz_ggzmod::ggz_ggzmod():
-	m_connected(false),
-	server_ip_addr(0)
+	m_connected(false)
 {
 
 }
@@ -91,24 +88,10 @@ bool ggz_ggzmod::connect()
 
 	m_connected = true;
 
+	// This is the fd to the ggzcore of this process
 	m_server_fd = ggzmod_get_fd(mod);
-	log("GGZMOD ## connection fd %i\n", m_server_fd);
+	log("GGZMOD ## server fd %i\n", m_server_fd);
 
-/*
-	struct timeval timeout;
-	timeout.tv_sec = 0;
-	timeout.tv_usec = 999 * 1000;
-	fd_set fdset;
-	FD_ZERO(&fdset);
-	FD_SET(fd, &fdset);
-	while (ggzmod_get_state(mod) != GGZMOD_STATE_PLAYING) {
-		select(fd + 1, &fdset, 0, 0, &timeout);
-		ggzmod_dispatch(mod);
-		//log("GGZ ## timeout!\n");
-		if (usedcore())
-			datacore();
-	}
-*/
 	return true;
 }
 
@@ -120,19 +103,20 @@ void ggz_ggzmod::ggzmod_server
 	if (e == GGZMOD_EVENT_SERVER) {
 		int32_t const fd = *static_cast<int32_t const *>(cbdata);
 		ggzmodobj->m_data_fd = fd;
-		log("GGZMOD ## got fd: %i\n", fd);
+		log("GGZMOD ## got data fd: %i\n", fd);
 		ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
 	} else if (e == GGZMOD_EVENT_ERROR) {
 		const char * msg = static_cast<const char * >(cbdata);
 		log("GGZMOD ## ERROR: %s\n", msg);
 	} else
 		log("GGZMOD ## HANDLE ERROR: %i\n", e);
+	NetGGZ::ref().ggzmod_statechange();
 }
 
 int32_t ggz_ggzmod::datafd()
 {
-	if (m_data_fd < 0)
-		wexception("GGZMOD ## Tried to get datafd but it is not valid\n");
+//	if (m_data_fd < 0)
+//		wexception("GGZMOD ## Tried to get datafd but it is not valid\n");
 	return m_data_fd;
 }
 
@@ -140,81 +124,10 @@ void ggz_ggzmod::disconnect()
 {
 	if (m_data_fd > 0)
 		close(m_data_fd);
+	m_data_fd = -1;
 	ggzmod_disconnect(mod);
 	ggzmod_free(mod);
 	m_connected = false;
-}
-
-void ggz_ggzmod::process_datacon() {
-	int32_t op;
-	char * ipstring;
-	char * greeter;
-	int32_t greeterversion;
-	char ipaddress[17];
-	int32_t fd = datafd();
-
-	if (not m_connected)
-		return;
-	
-	if (fd < 0 or fd > FD_SETSIZE)
-		return;
-
-	struct timeval timeout;
-	timeout.tv_sec = 0;
-	timeout.tv_usec = 0;
-	fd_set fdset;
-	FD_ZERO(&fdset);
-	FD_SET(fd, &fdset);
-
-	{
-		int32_t const ret = select(fd + 1, &fdset, 0, 0, &timeout);
-		if (ret <= 0)
-			return;
-		log("GGZMOD/WLDATA/process ## select() returns: %i for fd %i\n", ret, fd);
-	}
-	
-	{
-		int32_t const ret = ggz_read_int(fd, &op);
-		log("GGZMOD/WLDATA/process ## received opcode: %i (%i)\n", op, ret);
-		if (ret < 0) {
-			ggz_ggzmod::ref().disconnect();
-#warning TODO Handle read error from ggzmod datafd
-//				use_ggz = false;
-			return;
-		}
-	}
-		
-	switch (op) {
-	case op_greeting:
-		ggz_read_string_alloc(fd, &greeter);
-		ggz_read_int(fd, &greeterversion);
-		log("GGZMOD/WLDATA/process ## server is: '%s' '%i'\n", greeter, greeterversion);
-		ggz_free(greeter);
-		break;
-	case op_request_ip:
-		// This it not used (anymore?). Return 255.255.255.255 to the server
-		log("GGZMOD/WLDATA/process ## ip request!\n");
-		snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 255, 255, 255, 255);
-		ggz_write_int(fd, op_reply_ip);
-		ggz_write_string(fd, ipaddress);
-		break;
-	case op_broadcast_ip:
-		ggz_read_string_alloc(fd, &ipstring);
-		log("GGZMOD/WLDATA/process ## got ip broadcast: '%s'\n", ipstring);
-		server_ip_addr = ggz_strdup(ipstring);
-		ggz_free(ipstring);
-		break;
-	case op_unreachable:
-		NetGGZ::ref().deinit();
-		throw warning
-					(_("Connection problem"), "%s",
-					 _
-					  ("Your Server was not reachable from the Internet.\n"
-					   "Please try to solve the problem - Reading the notes\n"
-					   "at http://wl.widelands.org/wiki/InternetGaming can\n"
-					   "be advantageous."));
-	default: log("GGZMOD/WLDATA/process ## opcode unknown!\n");
-	}
 }
 
 void ggz_ggzmod::process()
@@ -222,7 +135,6 @@ void ggz_ggzmod::process()
 	if (not m_connected)
 		return;
 	ggzmod_dispatch(mod);
-	process_datacon();
 }
 
 bool ggz_ggzmod::data_pending()
@@ -240,9 +152,7 @@ bool ggz_ggzmod::data_pending()
 	FD_ZERO(&read_fd_set);
 	if (m_server_fd > 0 and m_server_fd <= FD_SETSIZE)
 		FD_SET(m_server_fd, &read_fd_set);
-	if (m_data_fd > 0 and m_data_fd <= FD_SETSIZE)
-		FD_SET(m_data_fd, &read_fd_set);
-	tv.tv_sec = tv.tv_usec = 0;
+		tv.tv_sec = tv.tv_usec = 0;
 	result = select(FD_SETSIZE, &read_fd_set, NULL, NULL, &tv);
 	if (result > 0)
 		return true;

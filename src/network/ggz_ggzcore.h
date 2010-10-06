@@ -76,7 +76,7 @@ public:
 	 */
 	void launch(uint32_t tableseats, std::string tablename);
 
-	
+	int get_max_players();
 
 	bool updateForTables() {
 		bool temp = tableupdate;

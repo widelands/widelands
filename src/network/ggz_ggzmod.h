@@ -41,17 +41,15 @@ public:
 	void process();
 	bool data_pending();
 	int32_t datafd();
-	
-	char * get_server_ip() { return server_ip_addr; }
 
 private:
 	ggz_ggzmod();
-	void process_datacon();
 	static void ggzmod_server(GGZMod *, GGZModEvent, void const * cbdata);
-	/// filedescriptor to communicate with the widelands_server module
+	/// filedescriptor to communicate with the widelands_server module of ggzd
 	int32_t m_data_fd;
+	/// fd to communicate with the ggzcore object of this process. With that we
+	/// talk to ourself. No a good idea.
 	int32_t m_server_fd;
-	char * server_ip_addr;
 	bool m_connected;
 };
 

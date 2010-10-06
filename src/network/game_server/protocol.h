@@ -19,24 +19,62 @@
 /**
 * @file network/game_server/protocol.h
 * @brief in this header file enumerations for the widelands metasever
-* communication protocol are defined
+* communication protocol are defined. This file is included by the widelands
+* game and the ggz game server module.
 */
 
 #ifndef WIDELANDS_PROTOCOL_H
 #define WIDELANDS_PROTOCOL_H
 
 #define WIDELANDS_PROTOCOL 1
+#define WIDELANDS_PROTOCOL_EXT_MAJOR 1
+#define WIDELANDS_PROTOCOL_EXT_MINOR 0
+
+#define WLGGZ_OLD_OPCODE(x) (x > 0 and x <= 6 or x == 99)
+#define WLGGZ_NEW_OPCODE(x) (x > 0 and not WLGGZ_OLD_OPCODE(x))
 
 enum WLGGZNetworkOpcodes
 {
+	// The first six opcodes are "old ones"
+
+	/// Server sends greeting after client connects.
+	/// One ggz string "widelands server" and one integer (1) follows this opcode
+	/// @notice This opcode does bot hava a null terminated parameter list
 	op_greeting = 1,
+	/// @notice This opcode does bot hava a null terminated parameter list
 	op_request_ip = 2,
+	/// @notice This opcode does bot hava a null terminated parameter list
 	op_reply_ip = 3,
+	/// @notice This opcode does bot hava a null terminated parameter list
 	op_broadcast_ip = 4,
+	/// @notice This opcode does bot hava a null terminated parameter list
 	op_state_playing = 5,
+	/// @notice This opcode does bot hava a null terminated parameter list
 	op_state_done = 6,
 
-	/* Opcode to transmit statistics and game results tu the server
+	/** This opcode is part of the new protocol. It has no parameter and
+	 *  is ignored by old metaserver versions. The server replies with
+	 *  @ref op_reply_protocol_ext to this opcode. The server must not use
+	 *  new opcodes before getting this opcode. The client must not get new
+	 *  opcodes before getting a op_reply_protocol_ext.
+	 *  @notice This opcode does bot hava a null terminated parameter list
+	 */
+	op_request_protocol_ext = 9,
+
+	// All following opcodes have a null terminated parameter list. This allows
+	// the server to read the stream correctly without knowing the opcodes.
+
+	/** This is the answer to the @ref op_request_protocol_ext opcode. It returns
+	 *  the version of the extension protocol in two integers. First the major
+	 *  then minor version. A minor version change indicates a extension of
+	 *  the opcode set. A major version change indicates a change in the opcode
+	 *  meaning or dropping opcodes.
+	 *  @notice The parameters are send as a null terminated parameter list.
+	 */
+	op_reply_protocol_ext = 10,
+
+	/**
+	 * Opcode to transmit statistics and game results tu the server
 	 * For each argument ther comes first integer to indicate which data
 	 * it is (GameInfo) then a second integer to indicate the dataype
 	 * and then the argument. A argument type of 0 indicates the end of
@@ -44,12 +82,13 @@ enum WLGGZNetworkOpcodes
 	 */
 	op_game_statistics = 7,
 
-	// Similiar to the above op_game_statistics just for GameInfo
+	/// Similiar to the above op_game_statistics just for GameInfo
 	op_game_information = 8,
 
 	op_unreachable = 99
 };
 
+/// Data types for the null terminated parameter list for opcodes.
 enum WLGGZDataType
 {
 	ggzdatatype_null = 0,

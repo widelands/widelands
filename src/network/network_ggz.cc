@@ -26,13 +26,13 @@
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
-#include "game_server/protocol_helpers.h"
 #include "container_iterate.h"
 #include "build_info.h"
 
 
 #include "ggz_ggzcore.h"
 #include "ggz_ggzmod.h"
+#include "ggz_wlmodule.h"
 
 #include <cstring>
 
@@ -62,16 +62,16 @@ void NetGGZ::deinit()
 {
 	ggz_ggzmod::ref().disconnect();
 	ggz_ggzcore::ref().deinit();
-	
 }
 
 
 /// \returns the ip of the server, if connected
 char const * NetGGZ::ip()
 {
-	while (!ggz_ggzmod::ref().get_server_ip())
+#warning improve this loop. use select with timeout.
+	while (!ggz_wlmodule::ref().get_server_ip())
 		process();
-	return ggz_ggzmod::ref().get_server_ip();;
+	return ggz_wlmodule::ref().get_server_ip();;
 }
 
 
@@ -97,12 +97,13 @@ void NetGGZ::process()
 {
 	do
 	{
-		//log("GGZ ## process data ...\n");
 		ggz_ggzcore::ref().process();
 		ggz_ggzmod::ref().process();
+		ggz_wlmodule::ref().process();
 	} while
 		(ggz_ggzcore::ref().data_pending()
-		 or ggz_ggzmod::ref().data_pending());
+		 or ggz_ggzmod::ref().data_pending()
+		 or ggz_wlmodule::ref().data_pending());
 
 	if (
 		 (ggz_ggzcore::ref().get_tablestate() == ggz_ggzcore::ggzcoretablestate_launched
@@ -117,16 +118,10 @@ void NetGGZ::process()
 /// \returns the maximum number of seats in a widelands table (game)
 uint32_t NetGGZ::max_players()
 {
-	if (!ggz_ggzcore::ref().is_in_room()) {
-		log("GGZ ## !ggz_ggzcore::ref().is_in_room()\n");
-		return 1;
-	}
-
-	//GGZGameType * const gametype = ggzcore_room_get_gametype(room);
 	//  FIXME problem in ggz - for some reasons only 8 seats are currently
 	//  FIXME available. I already posted this problem to the ggz
 	//  FIXME mailinglist. -- nasenbaer
-	//return gametype ? ggzcore_gametype_get_max_players(gametype) : 1;
+	//
 	//  FIXME due to a bug in ggz 0.14.1 we may even only support <= 7 seats
 	//  FIXME this should be changed once the next official ggz version is
 	//  FIXME released and support for ggz 0.14.1 is removed from widelands src
@@ -134,8 +129,8 @@ uint32_t NetGGZ::max_players()
 	//  FIXME it is not a bug in 0.14.1 but a general problem in ggz. Using
 	//  FIXME ggzcore and ggzmod from the same thread causes a deadlock between
 	//  FIXME the ggz libs. -- timowi
-	return 12;
-
+	int maxplayers = ggz_ggzcore::ref().get_max_players();
+	return (maxplayers > 7)?7:maxplayers;
 }
 
 
@@ -165,167 +160,15 @@ void NetGGZ::send_game_done()
 
 void NetGGZ::send_game_info()
 {
-	log("GGZMOD NetGGZ::send_game_info()\n");
-	if (ggz_ggzcore::ref().is_in_table()) {
-		int fd = ggz_ggzmod::ref().datafd();
-		if (ggz_write_int(fd, op_game_information) < 0)
-			log("GGZMOD ERROR: Game information could not be send!\n");
-
-		WLGGZ_writer w = WLGGZ_writer(fd);
-
-		w.type(gameinfo_mapname);
-		w << mapname;
-
-		w.type(gameinfo_mapsize);
-		w << map_w << map_h;
-
-		w.type(gameinfo_gametype);
-		w << static_cast<int>(win_condition);
-
-		w.type(gameinfo_version);
-		w << build_id() << build_type();
-
-		log("Iterate Players\n");
-		std::vector<Net_Player_Info>::iterator pit = playerinfo.begin();
-		while (pit != playerinfo.end())
-		{
-			w.type(gameinfo_playerid);
-			w << pit->playernum;
-			w.type(gameinfo_playername);
-			w << pit->name;
-			w.type(gameinfo_tribe);
-			w << pit->tribe;
-			w.type(gameinfo_playertype);
-			w << static_cast<int>(pit->type);
-			w.type(gameinfo_teamnumber);
-			w << pit->team;
-			pit++;
-		}
-		log("Player Iterate finished\n");
-		w.flush();
-		ggz_write_int(fd, 0);
-	} else
-		log("GGZMOD ERROR: GGZ not used!\n");
-	log("GGZMOD NetGGZ::send_game_info(): ende\n");
+	ggz_wlmodule::ref().send_game_info
+		(mapname, map_w, map_h, win_condition, playerinfo);
 }
 
 void NetGGZ::send_game_statistics
 	(int32_t gametime,
 	 const Widelands::Game::General_Stats_vector & resultvec)
 {
-	if (ggz_ggzcore::ref().is_in_table()) {
-		int fd = ggz_ggzmod::ref().datafd();
-		log("NetGGZ::send_game_statistics: send statistics to metaserver now!\n");
-		ggz_write_int(fd, op_game_statistics);
-
-		WLGGZ_writer w = WLGGZ_writer(fd);
-		
-		w.type(gamestat_gametime);
-		w << gametime;
-
-		log
-			("resultvec size: %d, playerinfo size: %d\n",
-			 resultvec.size(), playerinfo.size());
-
-		for (unsigned int i = 0; i < playerinfo.size(); i++)
-		{
-			w.type(gamestat_playernumber);
-			w << static_cast<int>(i);
-
-			w.type(gamestat_result);
-			w << playerinfo.at(i).result;
-
-			w.type(gamestat_points);
-			w << playerinfo.at(i).points;
-
-			w.type(gamestat_land);
-			if (resultvec.at(i).land_size.size())
-				w << static_cast<int>(resultvec.at(i).land_size.back());
-			else
-				w << 0;
-
-			w.type(gamestat_buildings);
-			if (resultvec.at(i).nr_buildings.size())
-				w << static_cast<int>(resultvec.at(i).nr_buildings.back());
-			else
-				w << 0;
-
-			w.type(gamestat_militarystrength);
-			if (resultvec.at(i).miltary_strength.size())
-				w << static_cast<int>(resultvec.at(i).miltary_strength.back());
-			else
-				w << 0;
-
-			w.type(gamestat_casualties);
-			if (resultvec.at(i).nr_casualties.size())
-				w << static_cast<int>(resultvec.at(i).nr_casualties.back());
-			else
-				w << 0;
-
-			w.type(gamestat_land);
-			w << static_cast<int>(resultvec[i].nr_civil_blds_defeated.back());
-
-			w.type(gamestat_civbuildingslost);
-			if (resultvec.at(i).nr_civil_blds_lost.size())
-				w << static_cast<int>(resultvec.at(i).nr_civil_blds_lost.back());
-			else
-				w << 0;
-
-			w.type(gamestat_kills);
-			if (resultvec.at(i).nr_kills.size())
-				w << static_cast<int>(resultvec.at(i).nr_kills.back());
-			else
-				w << 0;
-
-			w.type(gamestat_buildingsdefeat);
-			w << static_cast<int>(resultvec[i].nr_msites_defeated.back());
-
-			w.type(gamestat_milbuildingslost);
-			if (resultvec.at(i).nr_msites_lost.size())
-				w << static_cast<int>(resultvec.at(i).nr_msites_lost.back());
-			else
-				w << 0;
-
-			w.type(gamestat_wares);
-			if (resultvec.at(i).nr_wares.size())
-				w << static_cast<int>(resultvec.at(i).nr_wares.back());
-			else
-				w << (0);
-
-			w.type(gamestat_workers);
-			if (resultvec.at(i).nr_workers.size())
-				w << static_cast<int>(resultvec.at(i).nr_workers.back());
-			else
-				w << (0);
-
-			w.type(gamestat_productivity);
-			if (resultvec.at(i).productivity.size())
-				w << static_cast<int>(resultvec.at(i).productivity.back());
-			else
-				w << (0);
-		}
-
-		/*
-		- gamestat_playernumber
-		gamestat_result
-		gamestat_points
-		- gamestat_land
-		- gamestat_buildings
-		- gamestat_milbuildingslost
-		- gamestat_civbuildingslost
-		gamestat_buildingsdefeat
-		gamestat_milbuildingsconq
-		gamestat_economystrength
-		gamestat_militarystrength
-		- gamestat_workers
-		- gamestat_wares
-		- gamestat_productivity
-		- gamestat_casualties
-		- gamestat_kills */
-		w.flush();
-		ggz_write_int(fd, 0);
-	} else
-		log("GGZMOD ERROR: GGZ not used!\n");
+	ggz_wlmodule::ref().send_statistics(gametime, resultvec, playerinfo);
 }
 
 void NetGGZ::report_result
@@ -338,7 +181,7 @@ void NetGGZ::report_result
 		 win?"won":"lost");
 	//log("NetGGZ::report_result: player %i/%i\n", player, playerinfo.size());
 
-	if(player < 1 or player > playerinfo.size())
+	if(player < 1 or player > static_cast<int32_t>(playerinfo.size()))
 	{
 		throw wexception
 			("NetGGZ::report_result: ERROR: player number out of range\n");
@@ -532,6 +375,16 @@ bool NetGGZ::is_connecting()
 bool NetGGZ::logged_in()
 {
 	return ggz_ggzcore::ref().logged_in();
+}
+
+void NetGGZ::ggzcore_statechange()
+{
+
+}
+
+void NetGGZ::ggzmod_statechange()
+{
+	ggz_wlmodule::ref().set_datafd(ggz_ggzmod::ref().datafd());
 }
 
 

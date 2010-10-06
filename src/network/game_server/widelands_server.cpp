@@ -32,6 +32,7 @@
 #include <cstdio>
 #include <cstring>
 #include <netdb.h>
+#include <stdexcept>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
@@ -582,6 +583,12 @@ void WidelandsServer::dataEvent(Client * const client)
 	int ret;
 	struct sockaddr* addr;
 	socklen_t addrsize;
+	WidelandsPlayer * player;
+	try {
+		player = m_players.at(client->name);
+	} catch (std::out_of_range) {
+		player = 0;
+	}
 
 	std::cout << "WidelandsServer: data event from " << client->name << std::endl;
 
@@ -589,11 +596,6 @@ void WidelandsServer::dataEvent(Client * const client)
 	int const channel = fd(client->number);
 
 	ggz_read_int(channel, &opcode);
-	//std::cout << "WidelandsServer: dataEvent: read opcode ("<< opcode <<")"<< std::endl;
-
-	//int teams[2] = {0, 1};
-	//GGZGameResult gr[2] = {GGZ_GAME_WIN, GGZ_GAME_LOSS};
-	//int scores[2] = {100, 10};
 
 	switch (opcode) {
 	case op_reply_ip:
@@ -663,6 +665,30 @@ void WidelandsServer::dataEvent(Client * const client)
 		 * a timeout */
 		changeState(GGZGameServer::done);
 		break;
+	case op_request_protocol_ext:
+		if (not player)
+			m_players[client->name] = player =
+				new WidelandsPlayer(client->name, client->number);
+		player->set_build16_proto(true);
+		{
+			WLGGZ_writer wr(client->fd);
+			wr.type(op_reply_protocol_ext);
+			wr << WIDELANDS_PROTOCOL_EXT_MAJOR << WIDELANDS_PROTOCOL_EXT_MINOR;
+		}
+		break;
+	default:
+		if (WLGGZ_OLD_OPCODE(opcode) or not SUPPORT_B16_PROTOCOL(player))
+		{
+			std::cerr << "WidelandsServer: Data error. Unhandled opcode("
+				<< opcode << ")! not a handled old opcode" << std::endl;
+			return;
+		}
+	}
+
+	if(WLGGZ_OLD_OPCODE(opcode))
+		return;
+
+	switch(opcode) {
 	case op_game_statistics:
 		std::cout << "WidelandsServer: GAME: read stats!" << std::endl;
 		read_game_statistics(channel);
