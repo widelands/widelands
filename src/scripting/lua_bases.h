@@ -94,6 +94,7 @@ public:
 	 * Lua methods
 	 */
 	int __eq(lua_State * L);
+	int __tostring(lua_State * L);
 	int place_flag(lua_State * L);
 	int place_road(lua_State * L);
 	int place_building(lua_State * L);

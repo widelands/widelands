@@ -128,7 +128,7 @@ void Game_Player_Info_Data_Packet::Read
 				}
 			}
 
-			if (packet_version == 10)
+			if (packet_version <= 10)
 				game.ReadStatistics(fr, 3);
 			else
 				game.ReadStatistics(fr, 4);

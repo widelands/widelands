@@ -178,7 +178,7 @@ function expand_and_build_marblemine()
    timed_scroll(array_reverse(pts))
 
    -- sleep while not owning 26, 21
-   while wl.Game().map:get_field(26,21).owners[1] ~= p1 do sleep(3243) end
+   while wl.Game().map:get_field(26,21).owner ~= p1 do sleep(3243) end
    o.done = true
    
    -- Marble Mountains

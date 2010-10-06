@@ -923,6 +923,7 @@ void Game::sample_statistics()
 			LuaCoroutine * cr = hook->get_coroutine("calculator");
 			cr->push_arg(plr);
 			cr->resume(&custom_statistic[p-1]);
+			delete cr;
 		}
 	}
 
