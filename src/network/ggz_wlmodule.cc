@@ -82,21 +82,21 @@ void ggz_wlmodule::process()
 		ggz_read_string_alloc(m_data_fd, &greeter);
 		ggz_read_int(m_data_fd, &greeterversion);
 		log
-			("GGZMOD/WLDATA/process ## server is: '%s' '%i'\n",
+			("GGZWLMODULE/process ## server is: '%s' '%i'\n",
 			 greeter, greeterversion);
 		ggz_free(greeter);
 		ggz_write_int(m_data_fd, op_request_protocol_ext);
 		break;
 	case op_request_ip:
 		// This it not used (anymore?). Return 255.255.255.255 to the server
-		log("GGZMOD/WLDATA/process ## ip request!\n");
+		log("GGZWLMODULE/process ## ip request!\n");
 		snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 255, 255, 255, 255);
 		ggz_write_int(m_data_fd, op_reply_ip);
 		ggz_write_string(m_data_fd, ipaddress);
 		break;
 	case op_broadcast_ip:
 		ggz_read_string_alloc(m_data_fd, &ipstring);
-		log("GGZMOD/WLDATA/process ## got ip broadcast: '%s'\n", ipstring);
+		log("GGZWLMODULE/process ## got ip broadcast: '%s'\n", ipstring);
 		server_ip_addr = ggz_strdup(ipstring);
 		ggz_free(ipstring);
 		break;
@@ -113,12 +113,14 @@ void ggz_wlmodule::process()
 #warning TODO
 		break;
 	case op_reply_protocol_ext:
-		log("GGZMOD/WLDATA/process ## got extended protocol version: ");
+		log("GGZWLMODULE/process ## got extended protocol version: ");
 		{
 			std::list<WLGGZParameter> parlist = 
 			wlggz_read_parameter_list(m_data_fd);
 			if (parlist.size() < 2) {
-				log("invalid data: %i parameters\n", parlist.size());
+				log
+					("\nGGZWLMODULE ## invalid data: %i parameters\n",
+					 parlist.size());
 			} else {
 				m_server_ver = parlist.front().get_integer() << 16;
 				parlist.pop_front();
@@ -127,7 +129,7 @@ void ggz_wlmodule::process()
 				log("%X\n", m_server_ver);
 				if (parlist.size())
 					log
-						("GGZMOD/WLDATA/process ## %i parameters left\n",
+						("GGZWLMODULE/process ## %i parameters left\n",
 						 parlist.size());
 			}
 			ggz_write_int(m_data_fd, op_set_debug);
@@ -142,7 +144,7 @@ void ggz_wlmodule::process()
 				std::list<WLGGZParameter> parlist =
 					wlggz_read_parameter_list(m_data_fd);
 				if(parlist.size())
-					log("server module ## %s\n", parlist.front().get_string().c_str());
+					log("GGZ server ## %s\n", parlist.front().get_string().c_str());
 			}
 				break;
 			default:
@@ -182,7 +184,7 @@ bool ggz_wlmodule::send_game_info
 		w.type(gameinfo_version);
 		w << build_id() << build_type();
 			
-		log("Iterate Players\n");
+		log("GGZWLMODULE ## Iterate Players\n");
 		std::vector<Net_Player_Info>::iterator pit = playerinfo.begin();
 		while (pit != playerinfo.end())
 		{
@@ -198,7 +200,7 @@ bool ggz_wlmodule::send_game_info
 			w << pit->team;
 			pit++;
 		}
-		log("Player Iterate finished\n");
+		log("GGZWLMODULE ## Player Iterate finished\n");
 		w.flush();
 		ggz_write_int(m_data_fd, 0); // why this???
 	} else
@@ -214,12 +216,14 @@ bool ggz_wlmodule::send_statistics
 {
 	if (get_ext_proto_ver() == 0)
 	{
-		log("GGZMOD not supported by server\n");
+		log("GGZWLMODULE ##  not supported by server\n");
 		return false;
 	}
 
 	if (ggz_ggzcore::ref().is_in_table()) {
-		log("NetGGZ::send_game_statistics: send statistics to metaserver now!\n");
+		log
+			("GGZWLMODULE ## NetGGZ::send_game_statistics: "
+			 "send statistics to metaserver now!\n");
 		ggz_write_int(m_data_fd, op_game_statistics);
 
 		WLGGZ_writer w = WLGGZ_writer(m_data_fd);
@@ -228,7 +232,7 @@ bool ggz_wlmodule::send_statistics
 		w << gametime;
 
 		log
-			("resultvec size: %d, playerinfo size: %d\n",
+			("GGZWLMODULE ## resultvec size: %d, playerinfo size: %d\n",
 			 resultvec.size(), playerinfo.size());
 
 		for (unsigned int i = 0; i < playerinfo.size(); i++) {
@@ -328,6 +332,6 @@ bool ggz_wlmodule::send_statistics
 		w.flush();
 		ggz_write_int(m_data_fd, 0);
 		} else
-			log("GGZMOD ERROR: not in table!\n");
+			log("GGZWLMODULE ## ERROR: not in table!\n");
 		return true;
 }
