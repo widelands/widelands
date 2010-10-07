@@ -391,6 +391,9 @@ WidelandsPlayer* WidelandsServer::get_player_by_ggzid(int id)
 	Seat * s = seat(id);
 	if (not s or not s->client)
 		return 0;
-	return m_players[seat(id)->client->name];
+	WidelandsPlayer * p = m_players[seat(id)->client->name];
+	if (p and p->ggz_player_number() < 0)
+		p->set_ggz_player_number(id);
+	return p;
 }
 
