@@ -22,6 +22,7 @@
 
 #include "constants.h"
 #include "ui_basic/tabpanel.h"
+#include "ui_basic/button.h"
 
 #include <string>
 
@@ -77,6 +78,7 @@ struct MultiPlayerSetupBox : public UI::Panel {
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 GameSettingsProvider * settings,
 		 uint32_t usernum,
+		 uint32_t butw, uint32_t buth,
 		 std::string const & fname = UI_FONT_NAME,
 		 uint32_t fsize = UI_FONT_SIZE_SMALL);
 	~MultiPlayerSetupBox();
@@ -84,9 +86,17 @@ struct MultiPlayerSetupBox : public UI::Panel {
 	void refresh();
 
 private:
+	void select_map();
+	void select_savegame();
+	void start_clicked();
+
 	MultiPlayerSetupBoxOptions * d;
 	MultiPlayerClientGroup     * c[64];
 	PlayerSettingGroup         * p[MAX_PLAYERS];
+
+	UI::Callback_Button<MultiPlayerSetupBox> * m_select_map;
+	UI::Callback_Button<MultiPlayerSetupBox> * m_select_save;
+	UI::Callback_Button<MultiPlayerSetupBox> * m_ok;
 
 	UI::Tab_Panel                tp;
 };

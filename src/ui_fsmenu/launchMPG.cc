@@ -53,19 +53,12 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_usernum(usernum),
 
 // Buttons
-	m_select_map
-		(this, "select_map",
-		 m_xres * 7 / 10, m_yres * 3 / 10, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Fullscreen_Menu_LaunchMPG::select_map, *this,
-		 _("Select map"), std::string(), false, false,
-		 m_fn, m_fs),
-	m_select_save
-		(this, "select_savegame",
-		 m_xres * 7 / 10, m_yres * 7 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Fullscreen_Menu_LaunchMPG::select_savegame, *this,
-		 _("Select Savegame"), std::string(), false, false,
+	m_back
+		(this, "back",
+		 m_xres * 7 / 10, m_yres * 218 / 240, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Fullscreen_Menu_LaunchMPG::back_clicked, *this,
+		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_wincondition
 		(this, "win_condition",
@@ -73,20 +66,6 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_LaunchMPG::win_condition_clicked, *this,
 		 "", std::string(), false, false,
-		 m_fn, m_fs),
-	m_back
-		(this, "back",
-		 m_xres * 7 / 10, m_yres * 9 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Fullscreen_Menu_LaunchMPG::back_clicked, *this,
-		 _("Back"), std::string(), true, false,
-		 m_fn, m_fs),
-	m_ok
-		(this, "ok",
-		 m_xres * 7 / 10, m_yres * 1 / 2, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 &Fullscreen_Menu_LaunchMPG::start_clicked, *this,
-		 _("Start game"), std::string(), false, false,
 		 m_fn, m_fs),
 
 // Text labels
@@ -127,12 +106,12 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_mpsb =
 		new MultiPlayerSetupBox
 			(this,
-			 m_xres / 25, m_yres / 8, m_xres * 16 / 25, m_yres * 1 / 2,
-			 settings, m_usernum, m_fn, m_fs);
+			 m_xres / 20, m_yres / 10, m_xres * 9 / 10, m_yres * 6 / 11,
+			 settings, m_usernum, m_butw, m_buth, m_fn, m_fs);
 
 	m_lobby_list =
 		new UI::Listselect<int32_t>
-			(this, m_xres * 7 / 10, m_yres * 13 / 20, m_butw, m_yres * 3 / 10);
+			(this, m_xres * 7 / 10, m_yres * 13 / 20, m_butw, m_yres * 5 / 20);
 	m_lobby_list->set_font(m_fn, m_fs);
 	m_lobby.set_text(_("Lobby:"));
 	m_lobby.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -140,27 +119,6 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 
 Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
 	delete m_lua;
-}
-
-/**
- * In singleplayer:
- * Select a map as a first step in launching a game, before
- * showing the actual setup menu.
- */
-void Fullscreen_Menu_LaunchMPG::start()
-{
-	if
-		(m_settings->settings().mapname.empty()
-		 &&
-		 m_settings->canChangeMap()
-		 &&
-		 not m_settings->settings().multiplayer)
-	{
-		select_map();
-
-		if (m_settings->settings().mapname.empty())
-			end_modal(0); // back was pressed
-	}
 }
 
 
@@ -184,7 +142,7 @@ void Fullscreen_Menu_LaunchMPG::setChatProvider(ChatProvider & chat)
 	m_chat =
 		new GameChatPanel
 			(this,
-			 m_xres * 5 / 100, m_yres * 13 / 20, m_xres * 51 / 80, m_yres * 3 / 10,
+			 m_xres / 20, m_yres * 13 / 20, m_xres * 51 / 80, m_yres * 3 / 10,
 			 chat);
 	// For better readability
 	m_chat->set_bg_color(RGBColor(50, 50, 50));
@@ -255,6 +213,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
  */
 void Fullscreen_Menu_LaunchMPG::start_clicked()
 {
+	// TODO move to MPSB
 	if (!g_fs->FileExists(m_filename))
 		throw warning
 			(_("File not found"),
@@ -293,17 +252,10 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 	m_nr_players = settings.players.size();
 
 	bool launch = m_settings->canLaunch();
-	m_ok.set_enabled(launch);
 	//check if we want to autolaunch
 	if (m_autolaunch && launch)
 		start_clicked();
 
-	m_select_map.set_visible(m_settings->canChangeMap());
-	m_select_map.set_enabled(m_settings->canChangeMap());
-	m_select_save.set_visible
-		(settings.multiplayer && m_settings->canChangeMap());
-	m_select_save.set_enabled
-		(settings.multiplayer && m_settings->canChangeMap());
 	m_wincondition.set_enabled
 		(m_settings->canChangeMap() && !m_is_savegame && !settings.scenario);
 

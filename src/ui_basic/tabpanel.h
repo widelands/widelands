@@ -81,6 +81,7 @@ struct Tab_Panel : public Panel {
 	const TabList & tabs();
 	void activate(uint32_t idx);
 	void activate(std::string const &);
+	uint32_t active() {return m_active;}
 
 protected:
 	virtual void layout();

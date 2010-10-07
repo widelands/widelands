@@ -62,7 +62,6 @@ struct Fullscreen_Menu_LaunchMPG : public Fullscreen_Menu_Base {
 
 	void setChatProvider(ChatProvider &);
 
-	void start();
 	void think();
 
 	void refresh();
@@ -88,8 +87,7 @@ private:
 
 	uint32_t    m_usernum;
 
-	UI::Callback_Button<Fullscreen_Menu_LaunchMPG> m_select_map, m_select_save;
-	UI::Callback_Button<Fullscreen_Menu_LaunchMPG> m_wincondition, m_back, m_ok;
+	UI::Callback_Button<Fullscreen_Menu_LaunchMPG> m_back, m_wincondition;
 	UI::Callback_IDButton<Fullscreen_Menu_LaunchMPG, uint8_t> *
 		m_pos[MAX_PLAYERS];
 	UI::Textarea              m_title, m_mapname, m_lobby;
