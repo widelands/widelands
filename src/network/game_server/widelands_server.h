@@ -19,115 +19,42 @@
 #ifndef WIDELANDS_SERVER_H
 #define WIDELANDS_SERVER_H
 
-// GGZ includes
+#include "protocol.h"
+#include "widelands_player.h"
+#include "widelands_map.h"
+
+// GGZ includes. class GGZGameServer
 #include "ggzgameserver.h"
 
 #include <string>
 #include <vector>
 #include <map>
 
-// Definitions
-#define ARRAY_WIDTH 20
-#define ARRAY_HEIGHT 10
-#include "protocol.h"
-
-class WidelandsPlayerStats
-{
-	public:
-		int result;
-		int points;
-		int land;
-		int buildings;
-		int milbuildingslost;
-		int civbuildingslost;
-		int buildingsdefeat;
-		int milbuildingsconq;
-		int economystrength;
-		int militarystrength;
-		int workers;
-		int wares;
-		int productivity;
-		int casualties;
-		int kills;
-};
-
-#define SUPPORT_B16_PROTOCOL(p) (p != 0 and p->support_build16_proto())
-
-class WidelandsPlayer
-{
-	public:
-		WidelandsPlayer(std::string playername, int wl_num):
-			m_name(playername),
-			m_tribe(),
-			m_wl_player_number(wl_num),
-			m_ggz_player_number(-1),
-			m_type(playertype_null),
-			m_team(0),
-			m_build16_protocol(false)
-			{}
-
-		int wl_player_number() { return m_wl_player_number; }
-		int ggz_player_number() { return m_ggz_player_number; }
-		std::string tribe() { return m_tribe; }
-		WLGGZPlayerType type() { return m_type; }
-		std::string version() { return m_version; }
-		std::string build() { return m_build; }
-		unsigned int team() { return m_team; }
-		bool support_build16_proto() { return m_build16_protocol; }
-		
-		void set_ggz_player_number(int num) 
-			{ m_ggz_player_number=num; }
-		void set_tribe(std::string tribe) { m_tribe=tribe; }
-		void set_type(WLGGZPlayerType type) { m_type=type; }
-		void set_version(std::string v, std::string b)
-			{ m_build = b; m_version = v; }
-		void set_team(unsigned int t)
-			{ m_team = t; }
-		void set_build16_proto(bool b) { m_build16_protocol = b; }
-
-		WidelandsPlayerStats stats;
-
-	private:
-		std::string m_name;
-		std::string m_tribe;
-		int m_ggz_player_number;
-		int m_wl_player_number;
-		WLGGZPlayerType m_type;
-		std::string m_build, m_version;
-		unsigned int m_team;
-		/// This client supports the new (after build16) protocol
- 		bool m_build16_protocol;
-};
-
-class WidelandsMap 
-{
-	public:
-		WidelandsMap():
-			m_name(""),
-			m_w(0),
-			m_h(0)
-			{}
-		unsigned int w() {return m_w; } 
-		unsigned int h() {return m_w; }
-		std::string name() {return m_name; }
-		WLGGZGameType gametype() { return m_gametype; }
-		
-		void set_name(std::string name) { m_name = name; }
-		void set_size(int w, int h) { m_w = w; m_h = h; }
-		void set_gametype(WLGGZGameType type) { m_gametype=type; }
-
-	private:
-		std::string m_name;
-		unsigned int m_w, m_h;
-		WLGGZGameType m_gametype;
-};
-
-// WidelandsServer server object
+/// WidelandsServer server object. This class does the interaction with ggzd
 class WidelandsServer : public GGZGameServer
 {
 	public:
 		WidelandsServer();
 		~WidelandsServer();
+		const char * get_host_ip() { return m_wlserver_ip; }
+
+		/// @{
+		/// change the game state
+		void set_state_playing() { changeState(GGZGameServer::playing); }
+		void set_state_done();
+		/// @}
+
+		/// Game ended. report the results if possible
+		void game_done();
+
+		/// get player structure by name. If id is given create if not existing
+		WidelandsPlayer * get_player_by_name(std::string name, bool create = false);
+		WidelandsPlayer * get_player_by_wlid(int);
+		WidelandsPlayer * get_player_by_ggzid(int);
+
+	private:
+		// @{
+		/// These event functions are invoked by ggzd
 		void stateEvent();
 		void joinEvent(Client *client);
 		void leaveEvent(Client *client);
@@ -136,21 +63,16 @@ class WidelandsServer : public GGZGameServer
 		void spectatorDataEvent(Client *client);
 		void dataEvent(Client *client);
 		void errorEvent();
+		// @}
 
-	private:
-		void read_game_information(int fd, Client * client);
-		void read_game_statistics(int fd);
-
-		WidelandsMap m_map;
-
-		std::map<std::string,WidelandsPlayer *> m_players;
-
+		/// The ip address of the widelands client hosting the game
 		char * m_wlserver_ip;
-
-		int m_result_gametime;
-		std::string host_version, host_build;
+		/// Results of the game have been reported to ggzd
 		bool m_reported;
+		std::map<std::string,WidelandsPlayer *> m_players;
 };
+
+extern WidelandsServer * g_wls;
 
 #endif
 

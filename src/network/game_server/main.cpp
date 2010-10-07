@@ -29,6 +29,8 @@
 // Version information
 #define WIDELANDS_SERVER_VERSION "0.5"
 
+WidelandsServer * g_wls;
+
 // Main function: parse arguments and start server
 int main(int argc, char** argv)
 {
@@ -62,6 +64,7 @@ int main(int argc, char** argv)
 
 	{
 		WidelandsServer wls;
+		g_wls = &wls;
 		wls.connect(false);
 	}
 

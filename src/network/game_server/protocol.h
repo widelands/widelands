@@ -140,7 +140,9 @@ enum WLGGZGameType
 	gametype_endless = 1,
 	gametype_defeatall = 2,
 	gametype_collectors = 3,
-	gametype_tribes_together =4
+	gametype_tribes_together = 4,
+	gametype_territorial_lord = 5,
+	gametype_wood_gnome = 6
 };
 
 enum WLGGZGameStatsResult
@@ -180,4 +182,5 @@ enum WLGGZGameStats
  * client version
  * game stats: max value + history
  */
+
 #endif
