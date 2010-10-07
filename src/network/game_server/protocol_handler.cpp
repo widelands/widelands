@@ -103,7 +103,6 @@ void ProtocolHandler::process_data(Client * const client)
 		// And finally request the protocol version from the client
 		wllog(DL_DEBUG, "got ext proto request from %s", client->name.c_str());
 		ggz_write_int(client->fd, op_request_protocol_ext);
-		ggz_write_int(client->fd, 0);
 		break;
 	default:
 		if (WLGGZ_OLD_OPCODE(opcode) or not SUPPORT_B16_PROTOCOL(player))
