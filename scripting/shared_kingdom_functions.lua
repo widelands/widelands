@@ -1,6 +1,6 @@
 -- RST
 -- shared_kingdom_functions.lua
--- ---------------------------
+-- -----------------------------
 --
 -- This script contains functions that are used for the shared kingdom feature.
 

@@ -622,7 +622,7 @@ function expansion()
 
    local o = msg_box(introduce_expansion)
 
-   while #conquer_field.owners < 1 do sleep(100) end
+   while not conquer_field.owner do sleep(100) end
    o.done = true
 
    mining()
