@@ -185,7 +185,7 @@ void ProtocolHandler::read_game_information(Client * const client)
 				playername = parlist.front().get_string();
 				wllog
 					(DL_DEBUG, "GAMEINFO: add player \"%s\" (wl: %i)",
-					 playername, playernum);
+					 playername.c_str(), playernum);
 				player = g_wls->get_player_by_name(playername, true);
 				player->set_wl_player_number(playernum);
 			}
