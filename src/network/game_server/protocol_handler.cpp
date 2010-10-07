@@ -178,15 +178,14 @@ void ProtocolHandler::read_game_information(Client * const client)
 			break;
 		case gameinfo_playername:
 		{
-			parlist.front().get_string();
-
 			if
 				(playername.empty() and not
 				 parlist.front().get_string().empty() and player == NULL)
 			{
 				playername = parlist.front().get_string();
+				wllog
+					("GAMEINFO: add player \"%s\" (wl: %i)", playername, playernum);
 				player = g_wls->get_player_by_name(playername, true);
-				player->set_ggz_player_number(client->number);
 				player->set_wl_player_number(playernum);
 			}
 			else
