@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-09-25 10:02+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-10-07 13:20+0000\n"
+"Last-Translator: Venatrix <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-26 04:33+0000\n"
+"X-Launchpad-Export-Date: 2010-10-08 04:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -64,15 +64,15 @@ msgstr "Bäckerei"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Backt Brot für Arbeiter."
+msgstr "Bäckt Brot für Arbeiter."
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
-msgstr "Barbaren"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:158
 msgid "Barracks"
-msgstr "Baracke"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:143
 #: ../../tribes/barbarians/conf:159
@@ -81,7 +81,7 @@ msgstr "Barriere"
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid "Basic defence of a warrior."
-msgstr "Die grundlegende Verteidigungsausrüstung eines Kriegers"
+msgstr "Die grundlegende Verteidigungsausrüstung eines Kriegers."
 
 #: ../../tribes/barbarians/conf:139
 msgid "Battle Arena"
@@ -142,7 +142,7 @@ msgstr "Köhler"
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr "Brennt Kohle"
+msgstr "Brennt Kohle."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kilm."
@@ -455,7 +455,7 @@ msgstr "Helmschmiede"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr "Hilft an viel benutzten Straßen Waren zu transportieren."
+msgstr "Hilft, Waren auf viel benutzten Straßen zu transportieren."
 
 #: ../../tribes/barbarians/conf:154
 msgid "High Tower"

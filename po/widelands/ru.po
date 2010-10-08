@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-09-28 22:08+0000\n"
-"Last-Translator: egor panfilov <atom8bit@yandex.ru>\n"
+"PO-Revision-Date: 2010-10-07 22:08+0000\n"
+"Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-09-29 04:33+0000\n"
+"X-Launchpad-Export-Date: 2010-10-08 04:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -1493,7 +1493,7 @@ msgstr ""
 
 #: ../../src/network/network_ggz.cc:273
 msgid "Closed the connection to the metaserver."
-msgstr ""
+msgstr "Соединение с метасервером закрыто."
 
 #: ../../src/network/network_ggz.cc:369
 msgid ""
@@ -1505,31 +1505,32 @@ msgstr ""
 
 #: ../../src/network/network_ggz.cc:569
 msgid "Connected to the metaserver of:"
-msgstr ""
+msgstr "Подключение к метасерверу:"
 
 #: ../../src/network/network_ggz.cc:580
 msgid "Server MOTD:"
-msgstr ""
+msgstr "MOTD сервера:"
 
 #: ../../src/network/network_ggz.cc:586
 msgid "Reconnected to the metaserver."
-msgstr ""
+msgstr "Переподключение к метасерверу."
 
 #: ../../src/network/network_ggz.cc:591
 msgid "NOTE: The Internet gaming implementation is in very early state."
 msgstr ""
+"ЗАМЕЧАНИЕ: Реализация игры через Интернет находиться на ранней стадии."
 
 #: ../../src/network/network_ggz.cc:595
 msgid "Please take a look at the notes at:"
-msgstr ""
+msgstr "Пожалуйста, ознакомтесь с комментариями на:"
 
 #: ../../src/network/network_ggz.cc:734
 msgid " joined the metaserver."
-msgstr ""
+msgstr " подключился к метасерверу."
 
 #: ../../src/network/network_ggz.cc:743
 msgid " left the metaserver."
-msgstr ""
+msgstr " покинул метасервер."
 
 #: ../../src/network/nethost.cc:312
 msgid ""
@@ -1620,7 +1621,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1449
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Компьютер %u"
 
 #: ../../src/network/nethost.cc:1525
 #, c-format
@@ -1751,31 +1752,31 @@ msgstr "Статистика"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
-msgstr ""
+msgstr "Вход на метасервер"
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Ник:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
-msgstr ""
+msgstr "Пароль:"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr ""
+msgstr "ВНИМАНИЕ: Пароль будет показан и сохранён открытым текстом!"
 
 #: ../../src/wui/login_box.cc:52
 msgid "Log in to a registered account"
-msgstr ""
+msgstr "Использовать зарегистрированную учётную запись"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Automatically use this login information from now on."
-msgstr ""
+msgstr "Автоматически входить используя эту информацию"
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
-msgstr ""
+msgstr "Вход"
 
 #: ../../src/wui/login_box.cc:70 ../../src/ui_fsmenu/options.cc:61
 #: ../../src/ui_fsmenu/options.cc:383
@@ -1793,11 +1794,11 @@ msgstr "никого"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
-msgstr ""
+msgstr "Имя не введено"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "Пожалуйста, введите имя!"
 
 #: ../../src/wui/login_box.cc:92
 msgid "Space in Nickname"
@@ -1813,7 +1814,7 @@ msgstr "Пустой пароль"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Please enter your password!"
-msgstr ""
+msgstr "Пожалуйста, введите пароль!"
 
 #: ../../src/wui/buildingwindow.cc:187
 msgid "Continue"
@@ -3397,7 +3398,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:51
 msgid "Metaserver Lobby"
-msgstr "Metaserver Lobby"
+msgstr "Прихожая метасервера"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:55
 msgid "Users online:"
@@ -3409,24 +3410,24 @@ msgstr "Список игр:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:63
 msgid "Name of your server:"
-msgstr "Имя вашего сервера:"
+msgstr "Имя Вашего сервера:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:67
 msgid "Maximum of players:"
-msgstr "Максимально игроков:"
+msgstr "Максимум игроков:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:81
 #: ../../src/ui_fsmenu/netsetup_lan.cc:62
 msgid "Join this game"
-msgstr "Присоединиться к этой игре"
+msgstr "Присоединиться к игре"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:88
 msgid "Open a new game"
-msgstr ""
+msgstr "Открыть новую игру"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:144
 msgid "Points"
-msgstr ""
+msgstr "Очки"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:145
 msgid "Server"
@@ -3496,7 +3497,7 @@ msgstr "Компьютер"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:175
 msgid "AI: "
-msgstr ""
+msgstr "ИИ: "
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:180
 msgid "Human"
@@ -3504,7 +3505,7 @@ msgstr "Человек"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:230
 msgid "Help "
-msgstr ""
+msgstr "Помощь "
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
@@ -3548,27 +3549,27 @@ msgstr "Имя игрока"
 
 #: ../../src/ui_fsmenu/launchgame.cc:109
 msgid "Player's type"
-msgstr ""
+msgstr "Тип игрока"
 
 #: ../../src/ui_fsmenu/launchgame.cc:113
 msgid "Team"
-msgstr ""
+msgstr "Команда"
 
 #: ../../src/ui_fsmenu/launchgame.cc:117
 msgid "Player's tribe"
-msgstr "Племя игрока"
+msgstr "Племя"
 
 #: ../../src/ui_fsmenu/launchgame.cc:121
 msgid "Start type"
-msgstr ""
+msgstr "Начальные условия"
 
 #: ../../src/ui_fsmenu/launchgame.cc:168
 msgid "Switch to position"
-msgstr ""
+msgstr "Переключиться в эту позицию"
 
 #: ../../src/ui_fsmenu/launchgame.cc:182
 msgid "Lobby:"
-msgstr ""
+msgstr "Прихожая:"
 
 #: ../../src/ui_fsmenu/launchgame.cc:184
 msgid "Ready"
@@ -3629,7 +3630,7 @@ msgstr "Выберите тип игры"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:51
 msgid "Internet game"
-msgstr "Internet"
+msgstr "Интернет"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:58
 msgid "LAN / Direct IP"
@@ -3645,7 +3646,7 @@ msgstr "Начать сетевую игру"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
-msgstr "Список игр на вашем локальном сервере:"
+msgstr "Список игр в Вашей локальной сети:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:50
 msgid "Your nickname:"
@@ -3653,15 +3654,15 @@ msgstr "Ваш ник:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Host to connect:"
-msgstr ""
+msgstr "Хост для подключения:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:69
 msgid "Host a new game"
-msgstr ""
+msgstr "Создать новую игру"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:84
 msgid "Load previous host"
-msgstr ""
+msgstr "Загрузить предыдущий хост"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:114
 msgid "Host"
@@ -3677,7 +3678,7 @@ msgstr "Закрыто"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr "Нажмите ESC или щелкните мышью для продолжения..."
+msgstr "Нажмите ESC или щёлкните мышью для продолжения..."
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
@@ -3796,7 +3797,7 @@ msgstr "Звук"
 
 #: ../../src/ui_fsmenu/options.cc:123
 msgid "Maximum FPS:"
-msgstr ""
+msgstr "Максимум FPS:"
 
 #: ../../src/ui_fsmenu/options.cc:133
 msgid "In-game resolution"
@@ -3812,19 +3813,19 @@ msgstr "Настройки Игры"
 
 #: ../../src/ui_fsmenu/options.cc:156
 msgid "Use single Watchwindow Mode"
-msgstr "Использовать оконный режим"
+msgstr "Использовать общее окно наблюдения"
 
 #: ../../src/ui_fsmenu/options.cc:162
 msgid "Start roadbuilding after placing flag"
-msgstr ""
+msgstr "Начинать строительство дороги после установки флага"
 
 #: ../../src/ui_fsmenu/options.cc:169
 msgid "Show buildings area preview"
-msgstr "Предпросмотр зоны строений"
+msgstr "Предпросмотр рабочей области строений"
 
 #: ../../src/ui_fsmenu/options.cc:176
 msgid "Snap windows only when overlapping"
-msgstr "Выравнивать окна только при наложении"
+msgstr "Стыковать окна только при наложении"
 
 #: ../../src/ui_fsmenu/options.cc:182
 msgid "Dock windows to edges"
@@ -3836,15 +3837,15 @@ msgstr "Автосохранение каждые"
 
 #: ../../src/ui_fsmenu/options.cc:191
 msgid "Remove Replays older than:"
-msgstr "Удалить  повтор старше чем:"
+msgstr "Удалять повторы старше чем:"
 
 #: ../../src/ui_fsmenu/options.cc:195
 msgid "Off"
-msgstr ""
+msgstr "Откл."
 
 #: ../../src/ui_fsmenu/options.cc:285
 msgid "Try system language"
-msgstr ""
+msgstr "Язык системы"
 
 #: ../../src/ui_fsmenu/options.cc:397
 msgid "x"
@@ -3852,7 +3853,7 @@ msgstr "x"
 
 #: ../../src/ui_fsmenu/options.cc:402 ../../src/ui_fsmenu/options.cc:407
 msgid "px."
-msgstr ""
+msgstr "пикс."
 
 #: ../../src/ui_fsmenu/options.cc:426
 msgid "Main menu font:"
@@ -3860,11 +3861,11 @@ msgstr "Шрифт главного меню:"
 
 #: ../../src/ui_fsmenu/options.cc:432
 msgid "Play a sound at message arrival."
-msgstr ""
+msgstr "Звуковой сигнал при получении сообщения"
 
 #: ../../src/ui_fsmenu/options.cc:440
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr "Не сжимать данные игры (карты, сохранения)."
+msgstr "Не сжимать файлы данных (карты, повторы и сохранения)"
 
 #: ../../src/ui_fsmenu/options.cc:445
 msgid "Speed of a new game:"
@@ -3872,23 +3873,23 @@ msgstr "Скорость новой игры:"
 
 #: ../../src/ui_fsmenu/options.cc:449
 msgid "Distance for windows to snap to other panels:"
-msgstr ""
+msgstr "Дистанция стыковки окон между собой:"
 
 #: ../../src/ui_fsmenu/options.cc:453
 msgid "Distance for windows to snap to borders:"
-msgstr ""
+msgstr "Дистанция стыковки окон к границам:"
 
 #: ../../src/ui_fsmenu/options.cc:459
 msgid "Remove Syncstream dumps on startup"
-msgstr ""
+msgstr "Удалять дампы синхронизации при запуске"
 
 #: ../../src/ui_fsmenu/options.cc:465
 msgid "OpenGL rendering *Highly experimental!*"
-msgstr ""
+msgstr "OpenGL рендеринг *Экспериментальная функция!*"
 
 #: ../../src/ui_fsmenu/options.cc:470
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Прозрачный фон в сообщениях чата"
 
 #: ../../src/ui_fsmenu/options.cc:495
 msgid "Pause"
@@ -3896,7 +3897,7 @@ msgstr "Пауза"
 
 #: ../../src/ui_fsmenu/options.cc:506
 msgid "FreeSerif (Default)"
-msgstr ""
+msgstr "FreeSerif (по умолчанию)"
 
 #: ../../src/editor/tools/editor_info_tool.cc:43
 msgid "Field Information"

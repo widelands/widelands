@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-06-06 22:42+0000\n"
-"Last-Translator: Jonay <jonay.santana@gmail.com>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-05 15:47+0000\n"
+"Last-Translator: Roberto López <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-10-08 04:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -182,7 +182,7 @@ msgstr "Transporta objetos a lo largo de tus caminos."
 msgid "Castle"
 msgstr "Castillo"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Pueblo del Castillo"
 
@@ -399,7 +399,7 @@ msgstr "Cosechar maiz"
 msgid "Headquarters"
 msgstr "Cuartel general"
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Cuartel general mediano"
 
@@ -514,6 +514,10 @@ msgstr "Extraer piedra"
 #: ../../tribes/atlanteans/conf:116
 msgid "Miner"
 msgstr "Minero"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+msgid "Not enough space"
+msgstr "No hay espacio suficiente"
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
@@ -852,6 +856,13 @@ msgstr "Ahuma carne y pescado."
 #: ../../tribes/atlanteans/conf:101
 msgid "Soldier"
 msgstr "Soldado"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Spiderbreeder"

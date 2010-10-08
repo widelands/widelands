@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-04 13:26+0000\n"
+"PO-Revision-Date: 2010-10-05 15:35+0000\n"
 "Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-05 04:52+0000\n"
+"X-Launchpad-Export-Date: 2010-10-08 04:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -31,7 +31,7 @@ msgstr "A small bite to keep miners strong and working."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid "An enhanced mask for barbarian warriors."
-msgstr "An enhanced mask for barbarian warriors."
+msgstr "An enhanced mask for Barbarian warriors."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid "An enhanced version of the helmet."
@@ -110,7 +110,7 @@ msgstr "Blackwood"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr "Breeds the strong oxen that help in the transportation of wares."
+msgstr "Breeds the strong oxen that help transport wares."
 
 #: ../../tribes/barbarians/conf:111
 msgid "Brewer"
@@ -321,7 +321,7 @@ msgstr "Fishing Rod"
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid "Fishing rods are needed by barbarian fishers for fishing."
-msgstr "Fishing rods are needed by barbarian fishermen for fishing."
+msgstr "Fishing rods are needed by Barbarian fishermen for fishing."
 
 #: ../../tribes/barbarians/conf:70
 msgid "Flax"
@@ -457,7 +457,7 @@ msgstr "High Tower"
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 msgstr ""
-"How do you create a meal, snack or ration, if there are no kitchen tools?"
+"How do you make a meal, snack or ration, if there are no kitchen tools?"
 
 #: ../../tribes/barbarians/conf:122
 msgid "Hunter"
@@ -566,7 +566,7 @@ msgid ""
 "of the barbarians is in this ale."
 msgstr ""
 "Only good strong beer is acceptable for the older warriors. Some say this is "
-"the source of the Barbarians' strength in battle."
+"the source of all the Barbarians' great strength in battle."
 
 #: ../../tribes/barbarians/conf:162
 msgid "Outpost"
@@ -927,19 +927,20 @@ msgid ""
 "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
 "are equipped with it, but also the lumberjack is using the same model."
 msgstr ""
-"The Axe is a basic weapon and tool of the barbarians. Lumberjacks and young "
-"soldiers are equipped with it."
+"The Axe is the basic weapon and tool of the Barbarians. Lumberjacks and "
+"young soldiers are equipped with it."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
-"The Gamekeeper manages the land to ensure good, sustainable, hunting."
+"The Gamekeeper manages the land and its flora and fauna to ensure good, "
+"sustainable, hunting."
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr "The Hunter brings good meat to the colonists."
+msgstr "The Hunter catches game and brings meat to the warehouses."
 
 #: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"
@@ -949,7 +950,7 @@ msgstr "The Widelands Development Team"
 msgid ""
 "The barbarian bakers are best in making this flat and tasty pitta bread."
 msgstr ""
-"The barbarian bakers are the best at making this flat and tasty pitta bread."
+"The Barbarian bakers are the best at making this flat and tasty pitta bread."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
