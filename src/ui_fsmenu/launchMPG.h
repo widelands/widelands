@@ -69,8 +69,6 @@ struct Fullscreen_Menu_LaunchMPG : public Fullscreen_Menu_Base {
 private:
 	LuaInterface * m_lua;
 
-	void select_map();
-	void select_savegame();
 	void back_clicked();
 	void start_clicked();
 	void win_condition_clicked();

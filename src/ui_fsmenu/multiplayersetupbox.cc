@@ -22,9 +22,12 @@
 #include "constants.h"
 #include "gamesettings.h"
 #include "i18n.h"
+#include "loadgame.h"
+#include "logic/game.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "logic/tribe.h"
+#include "profile/profile.h"
+#include "mapselect.h"
 #include "wexception.h"
 
 #include "ui_basic/checkbox.h"
@@ -81,7 +84,7 @@ tp(this, 0, 0, w, h, g_gr->get_picture(PicMod_UI, "pics/but1.png"))
 			 x, y, butw, buth,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 &MultiPlayerSetupBox::select_map, *this,
-			 _("Select map"), std::string(), false, false,
+			 _("Select map"), std::string(), true, false,
 			 fname, fsize);
 		y += buth * 12 / 10;
 		m_select_save = new UI::Callback_Button<MultiPlayerSetupBox>
@@ -89,7 +92,7 @@ tp(this, 0, 0, w, h, g_gr->get_picture(PicMod_UI, "pics/but1.png"))
 			 x, y, butw, buth,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 &MultiPlayerSetupBox::select_savegame, *this,
-			 _("Select Savegame"), std::string(), false, false,
+			 _("Select Savegame"), std::string(), true, false,
 			 fname, fsize);
 		y += buth * 22 / 10;
 		m_ok = new UI::Callback_Button<MultiPlayerSetupBox>
@@ -137,10 +140,6 @@ void MultiPlayerSetupBox::refresh()
 				throw wexception("Host tab active although not host!");
 
 			// m_ok.set_enabled(launch);
-			m_select_map ->set_visible(d->settings->canChangeMap());
-			m_select_map ->set_enabled(d->settings->canChangeMap());
-			m_select_save->set_visible(d->settings->canChangeMap());
-			m_select_save->set_enabled(d->settings->canChangeMap());
 			break;
 		} 
 		default:
@@ -149,9 +148,64 @@ void MultiPlayerSetupBox::refresh()
 
 }
 
+
+/**
+ * Select a map and send all information to the user interface.
+ */
 void MultiPlayerSetupBox::select_map() {
+	if (!d->settings->canChangeMap())
+		return;
+
+	GameSettings const & settings = d->settings->settings();
+
+	Fullscreen_Menu_MapSelect msm
+		(settings.multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO);
+	int code = msm.run();
+
+	if (code <= 0) {
+		// Set scenario = false, else the menu might crash when back is pressed.
+		d->settings->setScenario(false);
+		return;  // back was pressed
+	}
+
+	d->settings->setScenario(code == 2);
+
+	MapData const & mapdata = *msm.get_map();
+	uint8_t nr_players = mapdata.nrplayers;
+
+	//safe_place_for_host(nr_players);
+	d->settings->setMap(mapdata.name, mapdata.filename, nr_players);
 }
+
+/**
+ * Select a multi player savegame and send all information to the user
+ * interface.
+ */
 void MultiPlayerSetupBox::select_savegame() {
+	if (!d->settings->canChangeMap())
+		return;
+
+	Widelands::Game game; // The place all data is saved to.
+	Fullscreen_Menu_LoadGame lsgm(game);
+	int code = lsgm.run();
+
+	if (code <= 0)
+		return; // back was pressed
+
+
+	std::string m_filename = lsgm.filename();
+
+	// Read the needed data from file "elemental" of the used map.
+	FileSystem & l_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
+	Profile prof;
+	prof.read("map/elemental", 0, l_fs);
+	Section & s = prof.get_safe_section("global");
+
+	std::string mapname = _("(Save): ") + std::string(s.get_safe_string("name"));
+	uint8_t nr_players = s.get_safe_int("nr_players");
+
+	// safe_place_for_host(nr_players);
+	d->settings->setMap(mapname, m_filename, nr_players, true);
 }
 void MultiPlayerSetupBox::start_clicked() {
 }

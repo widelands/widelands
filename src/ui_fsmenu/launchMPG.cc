@@ -154,18 +154,7 @@ void Fullscreen_Menu_LaunchMPG::setChatProvider(ChatProvider & chat)
  */
 void Fullscreen_Menu_LaunchMPG::back_clicked()
 {
-	if (! m_settings->settings().multiplayer) {
-		//  The following behaviour might look strange at first view, but for the
-		//  user it seems as if the launchgame-menu is a child of mapselect and
-		//  not the other way around - just end_modal(0); will be seen as bug
-		//  from user point of view, so we reopen the mapselect-menu.
-		m_settings->setMap(std::string(), std::string(), 0);
-		select_map();
-		if (m_settings->settings().mapname.empty())
-			end_modal(0);
-		refresh();
-	} else
-		end_modal(0);
+	end_modal(0);
 }
 
 /**
@@ -262,102 +251,18 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 	if (settings.scenario)
 		set_scenario_values();
 
-	// Print warnings and information between title and player desc. group
-	if (!g_fs->FileExists(m_filename)) {/*
-		m_notes.set_text
-			(_("WARNING!!! Host selected the file \"") +
-			 m_filename +
-			 _
-			 	("\" for this game, which you do not own. If the transfer of that "
-			 	 "file does not start automatically, please add it manually to "
-			 	 "your filesystem."));
-		m_notes.set_color(UI_FONT_CLR_WARNING);*/
-	} else {
-		if (!m_is_savegame) {
-			//m_notes.set_text(std::string());
-
-		} else { // Multi player savegame information starts here.
-
-			if (m_filename != m_filename_proof)
-				// load all playerdata from savegame
-				load_previous_playerdata();
-		}
+	if (m_is_savegame) {
+		if (m_filename != m_filename_proof)
+			// load all playerdata from savegame
+			load_previous_playerdata();
 	}
 
 	// Care about Multiplayer clients, lobby and players
 	// As well as win_conditions
-	if (settings.multiplayer) {
-		m_lobby_list->clear();
-		container_iterate_const(std::vector<UserSettings>, settings.users, i)
-			if (i.current->position == UserSettings::none())
-				m_lobby_list->add(i.current->name.c_str(), 0);
-	}
+	m_lobby_list->clear();
+	container_iterate_const(std::vector<UserSettings>, settings.users, i)
+		m_lobby_list->add(i.current->name.c_str(), 0);
 	win_condition_update();
-}
-
-
-/**
- * Select a map and send all information to the user interface.
- */
-void Fullscreen_Menu_LaunchMPG::select_map()
-{
-	if (!m_settings->canChangeMap())
-		return;
-
-	GameSettings const & settings = m_settings->settings();
-
-	Fullscreen_Menu_MapSelect msm
-		(settings.multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO);
-	int code = msm.run();
-
-	if (code <= 0) {
-		// Set scenario = false, else the menu might crash when back is pressed.
-		m_settings->setScenario(false);
-		return;  // back was pressed
-	}
-
-	m_is_scenario = code == 2;
-	m_settings->setScenario(m_is_scenario);
-
-	MapData const & mapdata = *msm.get_map();
-	m_nr_players = mapdata.nrplayers;
-
-	safe_place_for_host(m_nr_players);
-	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
-	m_is_savegame = false;
-}
-
-
-/**
- * Select a multi player savegame and send all information to the user
- * interface.
- */
-void Fullscreen_Menu_LaunchMPG::select_savegame()
-{
-	if (!m_settings->canChangeMap())
-		return;
-
-	Widelands::Game game; // The place all data is saved to.
-	Fullscreen_Menu_LoadGame lsgm(game);
-	int code = lsgm.run();
-
-	if (code <= 0)
-		return; // back was pressed
-
-	m_filename = lsgm.filename();
-
-	// Read the needed data from file "elemental" of the used map.
-	FileSystem & l_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
-	Profile prof;
-	prof.read("map/elemental", 0, l_fs);
-	Section & s = prof.get_safe_section("global");
-
-	std::string mapname = _("(Save): ") + std::string(s.get_safe_string("name"));
-	m_nr_players = s.get_safe_int("nr_players");
-
-	safe_place_for_host(m_nr_players);
-	m_settings->setMap(mapname, m_filename, m_nr_players, true);
-	m_is_savegame = true;
 }
 
 
