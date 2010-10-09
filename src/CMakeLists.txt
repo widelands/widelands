@@ -122,7 +122,6 @@ target_link_libraries(widelands ${PNG_LIBRARY})
 target_link_libraries(widelands ${JPEG_LIBRARY})
 target_link_libraries(widelands ${TIFF_LIBRARY})
 target_link_libraries(widelands ${ZLIB_LIBRARY})
-target_link_libraries(widelands ${Boost_unit_test_framework_LIBRARIES})
 
 if (GGZ_CORE_FOUND)
   target_link_libraries(widelands ${GGZ_CORE_LIBRARY})
