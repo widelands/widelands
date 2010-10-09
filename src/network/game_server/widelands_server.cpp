@@ -372,10 +372,9 @@ WidelandsPlayer* WidelandsServer::get_player_by_name
 				p->set_ggz_player_number(s->client->number);
 			}
 		}
+		if (p->ggz_player_number() < 0)
+			wllog(DL_DEBUG, "%s still has no ggz player number", name.c_str());
 	}
-
-	if (p->ggz_player_number() < 0)
-		wllog(DL_DEBUG, "%s still has no ggz player number", name.c_str());
 	return p;
 }
 
