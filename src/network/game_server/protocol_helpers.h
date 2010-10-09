@@ -248,6 +248,7 @@ class WLGGZ_writer {
 					std::cout << "parameter_list_writer: close list\n";
 					// sublist closed nothing. So we close our list
 					delete m_sub; // will flush on destroy
+					m_sub = 0;
 					ggz_write_int(m_fd, 0); // termination of list
 					return true;
 				}
