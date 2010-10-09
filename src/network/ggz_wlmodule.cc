@@ -20,6 +20,7 @@
 #include "ggz_wlmodule.h"
 #include "game_server/protocol.h"
 #include "game_server/protocol_helpers.h"
+#include "game_server/protocol_helper_read_list.h"
 #include "log.h"
 #include "ggz_ggzmod.h"
 #include "ggz_ggzcore.h"
@@ -167,46 +168,100 @@ bool ggz_wlmodule::send_game_info
 		return false;
 	}
 	if (ggz_ggzcore::ref().is_in_table()) {
-		if (ggz_write_int(m_data_fd, op_game_information) < 0)
-			log("GGZWLMODULE ERROR: Game information could not be send!\n");
-
 		WLGGZ_writer w = WLGGZ_writer(m_data_fd);
+		
+		w.type(op_game_information);
 
+		w.open_list();
 		w.type(gameinfo_mapname);
 		w << mapname;
+		w.close_list();
 
+		w.open_list();
 		w.type(gameinfo_mapsize);
 		w << map_w << map_h;
-			
+		w.close_list();
+
+		w.open_list();
 		w.type(gameinfo_gametype);
 		w << win_condition;
-			
+		w.close_list();
+
+		w.open_list();
 		w.type(gameinfo_version);
 		w << build_id() << build_type();
-			
+		w.close_list();
+
+		
 		log("GGZWLMODULE ## Iterate Players\n");
 		std::vector<Net_Player_Info>::iterator pit = playerinfo.begin();
 		while (pit != playerinfo.end())
 		{
+			w.open_list();
 			w.type(gameinfo_playerid);
 			w << pit->playernum;
+			w.close_list();
+			
+			w.open_list();
 			w.type(gameinfo_playername);
 			w << pit->name;
+			w.close_list();
+			
+			w.open_list();
 			w.type(gameinfo_tribe);
 			w << pit->tribe;
+			w.close_list();
+			
+			w.open_list();
 			w.type(gameinfo_playertype);
 			w << static_cast<int>(pit->type);
+			w.close_list();
+			
+			w.open_list();
 			w.type(gameinfo_teamnumber);
 			w << pit->team;
+			w.close_list();
 			pit++;
 		}
 		log("GGZWLMODULE ## Player Iterate finished\n");
 		w.flush();
-		ggz_write_int(m_data_fd, 0); // why this???
 	} else
 		log("GGZWLMODULE ERROR: GGZ not used!\n");
 	log("GGZWLMODULE NetGGZ::send_game_info(): ende\n");
 	return true;
+}
+
+// how may statistic samples do we have in five minutes
+#define sample_count (5 * 60 * 1000 / STATISTICS_SAMPLE_TIME)
+
+void send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
+{
+	uint32_t c = 0;
+	uint32_t cur = 0;
+	uint32_t min, max;
+	double avg;
+	for (; c < stat.size(); c++)
+	{
+		if(cur == 0) {
+			min = max = stat.at(c);
+			avg = static_cast<double>(stat.at(c));
+		}
+		if (stat.at(c) > max)
+			max = stat.at(c);
+		if (stat.at(c) < min)
+			min = stat.at(c);
+		avg = (avg + stat.at(c) / 2.0);
+		if (cur == sample_count or c == (stat.size() -1 ))
+		{
+			wr.open_list();
+			wr.type(c);
+			wr << static_cast<int>(avg);
+			wr << static_cast<int>(min);
+			wr << static_cast<int>(max);
+			wr.close_list();
+			cur = 0;
+		}
+	}
 }
 
 bool ggz_wlmodule::send_statistics
@@ -224,92 +279,93 @@ bool ggz_wlmodule::send_statistics
 		log
 			("GGZWLMODULE ## NetGGZ::send_game_statistics: "
 			 "send statistics to metaserver now!\n");
-		ggz_write_int(m_data_fd, op_game_statistics);
-
 		WLGGZ_writer w = WLGGZ_writer(m_data_fd);
 
+		w.type(op_game_statistics);
+
+		w.open_list();
 		w.type(gamestat_gametime);
 		w << gametime;
+		w.close_list();
 
 		log
 			("GGZWLMODULE ## resultvec size: %d, playerinfo size: %d\n",
 			 resultvec.size(), playerinfo.size());
-
+ 
 		for (unsigned int i = 0; i < playerinfo.size(); i++) {
+			w.open_list();
 			w.type(gamestat_playernumber);
 			w << static_cast<int>(i);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_result);
 			w << playerinfo.at(i).result;
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_points);
 			w << playerinfo.at(i).points;
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_land);
-			if (resultvec.at(i).land_size.size())
-				w << static_cast<int>(resultvec.at(i).land_size.back());
-			else
-				w << 0;
+			send_stat(w, resultvec.at(i).land_size);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_buildings);
-			if (resultvec.at(i).nr_buildings.size())
-				w << static_cast<int>(resultvec.at(i).nr_buildings.back());
-			else
-				w << 0;
+			send_stat(w, resultvec.at(i).nr_buildings);
 
+			w.open_list();
 			w.type(gamestat_militarystrength);
-			if (resultvec.at(i).miltary_strength.size())
-				w << static_cast<int>(resultvec.at(i).miltary_strength.back());
-			else
-				w << 0;
+			send_stat(w, resultvec.at(i).miltary_strength);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_casualties);
-			if (resultvec.at(i).nr_casualties.size())
-				w << static_cast<int>(resultvec.at(i).nr_casualties.back());
-			else
-				w << 0;
+			send_stat(w, resultvec.at(i).nr_casualties);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_land);
-			w << static_cast<int>(resultvec[i].nr_civil_blds_defeated.back());
+			send_stat(w, resultvec[i].nr_civil_blds_defeated);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_civbuildingslost);
-			if (resultvec.at(i).nr_civil_blds_lost.size())
-				w << static_cast<int>(resultvec.at(i).nr_civil_blds_lost.back());
-			else
-				w << 0;
+			send_stat(w, resultvec.at(i).nr_civil_blds_lost);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_kills);
-			if (resultvec.at(i).nr_kills.size())
-				w << static_cast<int>(resultvec.at(i).nr_kills.back());
-			else
-				w << 0;
+			send_stat(w, resultvec.at(i).nr_kills);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_buildingsdefeat);
-			w << static_cast<int>(resultvec[i].nr_msites_defeated.back());
+			send_stat(w, resultvec[i].nr_msites_defeated);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_milbuildingslost);
-			if (resultvec.at(i).nr_msites_lost.size())
-				w << static_cast<int>(resultvec.at(i).nr_msites_lost.back());
-			else
-				w << 0;
+			send_stat(w, resultvec.at(i).nr_msites_lost);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_wares);
-			if (resultvec.at(i).nr_wares.size())
-				w << static_cast<int>(resultvec.at(i).nr_wares.back());
-			else
-				w << (0);
+			send_stat(w, resultvec.at(i).nr_wares);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_workers);
-			if (resultvec.at(i).nr_workers.size())
-				w << static_cast<int>(resultvec.at(i).nr_workers.back());
-			else
-				w << (0);
+			send_stat(w, resultvec.at(i).nr_workers);
+			w.close_list();
 
+			w.open_list();
 			w.type(gamestat_productivity);
-			if (resultvec.at(i).productivity.size())
-				w << static_cast<int>(resultvec.at(i).productivity.back());
-			else
-				w << (0);
+			send_stat(w, resultvec.at(i).productivity);
+			w.close_list();
 		}
 
 		/*
@@ -330,7 +386,6 @@ bool ggz_wlmodule::send_statistics
 		- gamestat_casualties
 		- gamestat_kills */
 		w.flush();
-		ggz_write_int(m_data_fd, 0);
 		} else
 			log("GGZWLMODULE ## ERROR: not in table!\n");
 		return true;

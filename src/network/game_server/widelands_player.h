@@ -23,6 +23,7 @@
 #include <stdint.h>
 #include <vector>
 #include "protocol.h"
+#include "widelands_server.h"
 
 struct WidelandsPlayerStats
 {
@@ -53,13 +54,15 @@ class WidelandsPlayer
 			m_tribe(),
 			m_wl_player_number(-1),
 			m_ggz_player_number(-1),
+			m_ggz_spectator_number(-1),
 			m_type(playertype_null),
 			m_team(0),
 			m_build16_protocol(false)
 			{}
 
 		int wl_player_number() { return m_wl_player_number; }
-		int ggz_player_number() { return m_ggz_player_number; }
+		int ggz_player_number() { 
+			return m_ggz_player_number; }
 		std::string tribe() { return m_tribe; }
 		WLGGZPlayerType type() { return m_type; }
 		std::string version() { return m_version; }
@@ -78,6 +81,30 @@ class WidelandsPlayer
 		void set_team(unsigned int t)
 			{ m_team = t; }
 		void set_build16_proto(bool b) { m_build16_protocol = b; }
+		
+		bool is_spectator() { return m_ggz_spectator_number >= 0; }
+		/*
+		bool is_player()
+		{
+			return m_ggz_player_number >= 0 and
+		}
+		*/
+		/*
+		bool is_bot() 
+		*/
+		bool is_player_or_bot() { return m_ggz_player_number >= 0; }
+
+		bool is_host() {
+			if
+				(m_host_username.empty() and m_name.length() > 0 and
+				 (m_ggz_player_number == 0 or m_ggz_spectator_number == 0))
+			{
+				m_host_username = m_name;
+				return true;
+			}
+			return
+				not m_host_username.empty() and m_host_username == m_name;
+		}
 
 		WidelandsPlayerStats last_stats;
 		std::vector<WidelandsPlayerStats> stats_min, stats_max, stats_avg;
@@ -92,7 +119,10 @@ class WidelandsPlayer
 		std::string m_build, m_version;
 		unsigned int m_team;
 		/// This client supports the new (after build16) protocol
- 		bool m_build16_protocol;
+		bool m_build16_protocol;
+		int m_ggz_spectator_number;
+
+		static std::string m_host_username;
 };
 
 #endif //__WIDELANDS_PLAYER_H__

@@ -24,6 +24,7 @@
 
 #include "protocol_handler.h"
 #include "statistics_handler.h"
+#include "wlggz_exception.h"
 
 // GGZ includes
 #include <ggz.h>
@@ -140,6 +141,7 @@ void WidelandsServer::joinEvent(Client * const client)
 	wllog(DL_INFO, "joinEvent: %s", client->name.c_str());
 
 	wlproto.send_greeter(client);
+
 	if (not client->spectator and client->number == 0)
 	{
 		// This is the host
@@ -409,3 +411,35 @@ WidelandsPlayer* WidelandsServer::get_player_by_ggzid(int id)
 	return p;
 }
 
+
+#include <cstdarg>
+#include <cstdio>
+#include <sstream>
+
+/*
+* class _wexception implementation
+*/
+#undef wexception
+_wlggzexception::_wlggzexception
+	(char const * const file, uint32_t const line, char const * const fmt, ...)
+	throw ()
+	{
+		char buffer[512];
+		{
+			va_list va;
+			va_start(va, fmt);
+			vsnprintf(buffer, sizeof(buffer), fmt, va);
+			va_end(va);
+		}
+			std::ostringstream ost;
+			ost << '[' << file << ':' << line << "] " << buffer;
+			m_what = ost.str();
+	}
+	
+	_wlggzexception::~_wlggzexception() throw () {}
+	
+	char const * _wlggzexception::what() const throw ()
+	{
+		return m_what.c_str();
+	}
+	

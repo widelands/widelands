@@ -88,6 +88,28 @@ enum WLGGZNetworkOpcodes
 	op_set_debug = 11,
 	op_debug_string = 12,
 
+	/**
+	 * This is used to transmit a part of a file. For example a map or a
+	 * savegame.
+	 * opcode is followed by a parameter list.
+	 * one integer - file id
+	 * one integer - number of packets
+	 * one integer - packet number
+	 * one raw field - up to 10KB file dataype
+	 */
+	op_file_packet = 13,
+	
+	/** 
+	 * 
+	 * one integer - file id
+	 * one integer - 
+	 */
+	op_file_packet_recv = 14,
+	
+	op_send_savegame = 15,
+	
+	op_savegame_received = 16,
+
 	op_unreachable = 99
 };
 
@@ -99,6 +121,7 @@ enum WLGGZDataType
 	ggzdatatype_char = 2,
 	ggzdatatype_string = 3,
 	ggzdatatype_boolean = 4,
+	ggzdatatype_list = 5,
 	ggzdatatype_raw = 99
 };
 

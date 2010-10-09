@@ -21,6 +21,7 @@
 #include "widelands_server.h"
 #include "log.h"
 #include "protocol_helpers.h"
+#include "protocol_helper_read_list.h"
 
 #include <stdexcept>
 #include <cassert>
@@ -123,18 +124,18 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 	WidelandsPlayer * player = g_wls->get_player_by_name(client->name);
 	assert(player);
 	assert(SUPPORT_B16_PROTOCOL(player));
+	std::list<WLGGZParameter> parlist = wlggz_read_parameter_list(client->fd);
 	
 	switch(opcode) {
 		case op_game_statistics:
 			wllog(DL_DEBUG, "GAME: read stats!");
-			read_game_statistics(client);
+			//read_game_statistics(client);
 			break;
 		case op_game_information:
 			wllog(DL_DUMP, "GAME: read game info!");
-			read_game_information(client);
+			//read_game_information(client);
 			break;
 		case op_set_debug:
-			wlggz_read_parameter_list(client->fd);
 			if (not client->spectator and client->number == 0)
 			{
 				wllog
@@ -146,7 +147,6 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 		default:
 			//  Discard
 			wllog(DL_ERROR, "Data error. Unhandled opcode (%i)!", opcode);
-			wlggz_read_parameter_list(client->fd);
 			break;
 	}
 }

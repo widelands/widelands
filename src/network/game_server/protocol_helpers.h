@@ -33,6 +33,8 @@
 #include <ggz.h>
 #include <iostream>
 
+
+
 class WLGGZParameter
 {
 	public:
@@ -63,6 +65,8 @@ class WLGGZParameter
 			{ m_type=ggzdatatype_integer; m_i=d; }
 		void set(std::string d)
 			{ m_type=ggzdatatype_string; m_str=d; }
+		void set(std::list<WLGGZParameter> list)
+			{ m_list = list; }
 		//void set(char d);
 
 		bool is_string() {return m_type==ggzdatatype_string; }
@@ -81,70 +85,10 @@ class WLGGZParameter
 		int m_i;
 		char m_ch;
 		std::string m_str;
+		std::list<WLGGZParameter> m_list;
 };
 
-/**
- * This function reads a parameter list from a filedescriptor. This function
- * reads pairs of data type and data until the data type is zero. This reads
- * written with class WLGGZ_writer.
- *
- * @param fd The filedescriptor to read from
- * @return the list of the parameters
- */
-std::list<WLGGZParameter> wlggz_read_parameter_list(int fd)
-{
-	std::list<WLGGZParameter> list;
-	int datatype;
-	ggz_read_int(fd, &datatype);
-	//std::cout << "GGZ: read_int ("<< datatype <<") datatype\n";
-	while(datatype)
-	{	
-		WLGGZParameter data;
-		int d_i;
-		char * d_str;
-		char d_ch;
-		
-		switch(datatype)
-		{
-			case ggzdatatype_integer:
-				ggz_read_int(fd, &d_i);
-				//std::cout << "GGZ: read_parameter_list: read_integer ("<< d_i <<")\n";
-				data.set(d_i);
-				break;
-			case ggzdatatype_char:
-				ggz_read_char(fd, &d_ch);
-				//std::cout << "GGZ: read_parameter_list: read_char ("<< d_ch <<")\n";
-				data.set(d_ch);
-			case ggzdatatype_string:
-				ggz_read_string_alloc(fd, &d_str);
-				//std::cout << "GGZ: read_parameter_string: read_string ("<< d_str <<")\n";
-				data.set(std::string(strdup(d_str)));
-				ggz_free(d_str);
-				break;
-			case ggzdatatype_boolean:
-				ggz_read_int(fd, &d_i);
-				//std::cout << "GGZ: read_parameter_list: read_boolean ("<< d_i <<")\n";
-				data.set(static_cast<bool>(d_i));
-				break;
-			case ggzdatatype_raw:
-				ggz_read_int(fd, &d_i);
-				d_str = new char[d_i];
-				ggz_readn(fd, d_str, d_i);
-				std::cout << "GGZ: read_parameter_list: read_raw ("<< d_i <<" bytes)\n"<< 
-					"WARNING: This is not implemented yet\n";
-				delete[] d_str;
-				break;
-			default:
-				std::cout << "GGZ: ERROR Received unknow data type: " <<
-				datatype << std::endl;
-		}
-		list.push_back(data);
-		ggz_read_int(fd, &datatype);
-		//std::cout << "GGZ: read_int ("<< datatype <<") datatype\n";
-	}
-	//std::cout << "GGZ: read_parameter_list: leave\n";
-	return list;
-}
+
 
 /**
  * A class to write a list of parameters to a metaserver connection.
@@ -160,6 +104,7 @@ class WLGGZ_writer {
 		 * @param fd The fd to which the data will be written
 		 */
 		WLGGZ_writer(int fd):
+			m_sub(0),
 			m_fd(fd),
 			m_in_cmd(false)
 		{}
@@ -176,8 +121,12 @@ class WLGGZ_writer {
 		 */
 		void flush()
 		{
-			if (m_in_cmd)
+			// call close_list() until it returns false
+			while(m_sub->close_list());
+			if (m_in_cmd) {
+				std::cout << "parameter_list_writer: flush write zero\n";
 				ggz_write_int(m_fd, 0);
+			}
 			m_in_cmd = false;
 		}
 
@@ -204,8 +153,14 @@ class WLGGZ_writer {
 		 */
 		WLGGZ_writer& operator<< (int d)
 		{
-			if (not m_in_cmd)
+			if (not m_in_cmd) {
+				std::cout << "parameter_list_writer: warning: not in cmd\n";
 				return *this;
+			}
+			if (m_sub) {
+				*m_sub << d;
+				return *this;
+			}
 			ggz_write_int(m_fd, ggzdatatype_integer);
 			ggz_write_int(m_fd, d);
 			return *this;
@@ -220,8 +175,14 @@ class WLGGZ_writer {
 		*/
 		WLGGZ_writer& operator<< (const std::string &d)
 		{
-			if (not m_in_cmd)
+			if (not m_in_cmd) {
+				std::cout << "parameter_list_writer: warning: not in cmd\n";
 				return *this;
+			}
+			if (m_sub) {
+				*m_sub << d;
+				return *this;
+			}
 			ggz_write_int(m_fd, ggzdatatype_string);
 			ggz_write_string(m_fd, d.c_str());
 			return *this;
@@ -236,8 +197,14 @@ class WLGGZ_writer {
 		*/
 		WLGGZ_writer& operator<< (char d)
 		{
-			if (not m_in_cmd)
+			if (not m_in_cmd) {
+				std::cout << "parameter_list_writer: warning: not in cmd\n";
 				return *this;
+			}
+			if (m_sub) {
+				*m_sub << d;
+				return *this;
+			}
 			ggz_write_int(m_fd, ggzdatatype_char);
 			ggz_write_char(m_fd, d);
 			return *this;
@@ -252,14 +219,46 @@ class WLGGZ_writer {
 		*/
 		WLGGZ_writer& operator<< (bool d)
 		{
-			if (not m_in_cmd)
+			if (not m_in_cmd) {
+				std::cout << "parameter_list_writer: warning: not in cmd\n";
 				return *this;
+			}
+			if (m_sub) {
+				*m_sub << d;
+				return *this;
+			}
 			ggz_write_int(m_fd, ggzdatatype_boolean);
 			ggz_write_int(m_fd, d);
 			return *this;
 		}
 
+		void open_list(){
+			if (not m_sub) {
+				std::cout << "parameter_list_writer: open a list\n";
+				ggz_write_int(m_fd, ggzdatatype_list);
+				m_sub = new WLGGZ_writer(m_fd);
+			}
+			else
+				m_sub->open_list();
+		}
+
+		bool close_list() {
+			if (m_sub) {
+				if (not m_sub->close_list()) {
+					std::cout << "parameter_list_writer: close list\n";
+					// sublist closed nothing. So we close our list
+					delete m_sub; // will flush on destroy
+					ggz_write_int(m_fd, 0); // termination of list
+					return true;
+				}
+				// sublist closed something
+				return true;
+			} else  // nothing closed
+				return false;
+		}
+
 	private:
+		WLGGZ_writer * m_sub;
 		int m_fd;      ///< the filedescriptor to which all data is written
 		bool m_in_cmd; ///< keep track if a parameter lsi is open to write to
 };
