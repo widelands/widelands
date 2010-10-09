@@ -107,7 +107,8 @@ class WLGGZ_writer {
 			m_sub(0),
 			m_fd(fd),
 			m_in_cmd(false)
-		{}
+		{
+		}
 
 		~WLGGZ_writer()
 		{
@@ -122,7 +123,7 @@ class WLGGZ_writer {
 		void flush()
 		{
 			// call close_list() until it returns false
-			while(m_sub->close_list());
+			while(close_list());
 			if (m_in_cmd) {
 				std::cout << "parameter_list_writer: flush write zero\n";
 				ggz_write_int(m_fd, 0);
