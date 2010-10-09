@@ -30,7 +30,10 @@ std::list<WLGGZParameter> wlggz_read_parameter_list(int fd)
 {
 	std::list<WLGGZParameter> list;
 	int datatype;
-	ggz_read_int(fd, &datatype);
+	if( ggz_read_int(fd, &datatype) < 0 ){
+		std::cout << "wlggz_read_parameter_list: ERROR on read\n";
+		return list;
+	}
 	//std::cout << "GGZ: read_int ("<< datatype <<") datatype\n";
 	while(datatype)
 	{	
