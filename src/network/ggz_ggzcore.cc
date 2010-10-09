@@ -187,17 +187,23 @@ void ggz_ggzcore::process()
 		if (!m_room)
 			m_room = ggzcore_server_get_cur_room(ggzserver);
 		if (m_tableid == -1) {
+			// The table do not exist. Create it now.
 			GGZTable    * const table    = ggzcore_table_new        ();
 			GGZGameType * const gametype = ggzcore_room_get_gametype(m_room);
-			log("GGZCORE/game ## ggzcore_table_init(name: %s, seats: %d)\n", m_servername.c_str(), m_tableseats);
-			ggzcore_table_init(table, gametype, m_servername.c_str(), m_tableseats);
+			log
+				("GGZCORE/game ## ggzcore_table_init(name: %s, seats: %d)\n",
+				 m_servername.c_str(), m_tableseats);
+			ggzcore_table_init
+				(table, gametype, m_servername.c_str(), m_tableseats);
 			for (uint32_t i = 0; i < m_tableseats; ++i)
 				ggzcore_table_set_seat(table, i, GGZ_SEAT_OPEN, 0);
 			ggzcore_room_launch_table(m_room, table);
 			ggzcore_table_free(table);
 			m_tablestate = ggzcoretablestate_launched;
 		} else {
-			if (ggzcore_room_join_table(m_room, m_tableid, 0) < 0) {
+			// The table exists. This means we join a existing table. Join the
+			// table a spectator now.
+			if (ggzcore_room_join_table(m_room, m_tableid, true) < 0) {
 			// Throw an errorcode - this can be removed once everything works
 			// stable. ggzcore_room_join_table() is always returning -1 if an
 			//  error occurred, so we need to check ourselves, what the problem
@@ -227,12 +233,15 @@ void ggz_ggzcore::process()
 }
 
 /// Called by the client, to join an existing table (game) and to add all
-/// hooks to get informed about all important events
+/// hooks to get informed about all important events. This function does not
+/// join the table but launches a new game (ggzmod object). After the game
+/// event GGZ_GAME_PLAYING the next run of process() will join the table
+/// m_tableid
 void ggz_ggzcore::join(const char* tablename)
 {
 	log("GGZCORE ## join()\n");
 
-	if (!ggzcore_ready) {
+	if (not ggzcore_ready or not is_in_room()) {
 		log("GGZCORE ## not ready!\n");
 		return;
 	}
@@ -283,7 +292,9 @@ void ggz_ggzcore::join(const char* tablename)
 
 
 /// Called by the host, to launch a new table (game) and to add all
-/// hooks to get informed about all important events
+/// hooks to get informed about all important events. This function does not
+/// create the table but launches a new game (ggzmod object). After the game
+/// event GGZ_GAME_PLAYING the next run of process() will create the table
 void ggz_ggzcore::launch(uint32_t tableseats, std::string tablename)
 {
 	log("GGZCORE ## launch table\n");

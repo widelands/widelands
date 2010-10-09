@@ -387,5 +387,12 @@ void NetGGZ::ggzmod_statechange()
 	ggz_wlmodule::ref().set_datafd(ggz_ggzmod::ref().datafd());
 }
 
+bool NetGGZ::set_spectator(bool spec)
+{
+	if(spec)
+		ggz_ggzmod::ref().set_spectator();
+	else
+		ggz_ggzmod::ref().set_player();
+}
 
 #endif

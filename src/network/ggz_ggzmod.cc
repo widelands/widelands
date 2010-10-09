@@ -34,6 +34,7 @@
 #include <io.h>
 #endif
 #include <warning.h>
+#include "network_ggz.h"
 
 static GGZMod    * mod       = 0;
 ggz_ggzmod       * ggzmodobj = 0;
@@ -71,14 +72,15 @@ bool ggz_ggzmod::connect()
 	// Set handler for ggzmod events:
 	ggzmod_set_handler(mod, GGZMOD_EVENT_SERVER, &ggz_ggzmod::ggzmod_server);
 	ggzmod_set_handler(mod, GGZMOD_EVENT_ERROR, &ggz_ggzmod::ggzmod_server);
+	ggzmod_set_handler(mod, GGZMOD_EVENT_STATE, &ggz_ggzmod::ggzmod_server);
+	ggzmod_set_handler(mod, GGZMOD_EVENT_PLAYER, &ggz_ggzmod::ggzmod_server);
+	ggzmod_set_handler(mod, GGZMOD_EVENT_SEAT, &ggz_ggzmod::ggzmod_server);
+	ggzmod_set_handler
+		(mod, GGZMOD_EVENT_SPECTATOR_SEAT, &ggz_ggzmod::ggzmod_server);
+	ggzmod_set_handler(mod, GGZMOD_EVENT_STATS, &ggz_ggzmod::ggzmod_server);
+	ggzmod_set_handler(mod, GGZMOD_EVENT_INFO, &ggz_ggzmod::ggzmod_server);
+	ggzmod_set_handler(mod, GGZMOD_EVENT_CHAT, &ggz_ggzmod::ggzmod_server);
 	// not handled / not used events of the GGZMOD Server:
-	// * GGZMOD_EVENT_STATE
-	// * GGZMOD_EVENT_PLAYER
-	// * GGZMOD_EVENT_SEAT
-	// * GGZMOD_EVENT_SPECTATOR_SEAT
-	// * GGZMOD_EVENT_CHAT
-	// * GGZMOD_EVENT_STATS
-	// * GGZMOD_EVENT_INFO
 	// * GGZMOD_EVENT_RANKINGS
 
 	if (ggzmod_connect(mod)) {
@@ -90,6 +92,7 @@ bool ggz_ggzmod::connect()
 
 	// This is the fd to the ggzcore of this process
 	m_server_fd = ggzmod_get_fd(mod);
+
 	log("GGZMOD ## server fd %i\n", m_server_fd);
 
 	return true;
@@ -100,17 +103,88 @@ void ggz_ggzmod::ggzmod_server
 	(GGZMod * const cbmod, GGZModEvent const e, void const * const cbdata)
 {
 	log("GGZMOD ## ggzmod_server\n");
-	if (e == GGZMOD_EVENT_SERVER) {
-		int32_t const fd = *static_cast<int32_t const *>(cbdata);
-		ggzmodobj->m_data_fd = fd;
-		log("GGZMOD ## got data fd: %i\n", fd);
-		ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
-	} else if (e == GGZMOD_EVENT_ERROR) {
-		const char * msg = static_cast<const char * >(cbdata);
-		log("GGZMOD ## ERROR: %s\n", msg);
-	} else
-		log("GGZMOD ## HANDLE ERROR: %i\n", e);
-	NetGGZ::ref().ggzmod_statechange();
+	switch (e) {
+		case GGZMOD_EVENT_SERVER:
+		{
+			int32_t const fd = *static_cast<int32_t const *>(cbdata);
+			ggzmodobj->m_data_fd = fd;
+			log("GGZMOD ## got data fd: %i\n", fd);
+			//ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
+			int is_spectator, seatnum;
+			const char * name = ggzmod_get_player(mod, &is_spectator, &seatnum);
+			log
+				("GGZMOD ## I am \"%s\" at seat %i and I am %s spectator\n",
+				 name, seatnum, is_spectator?"a":"not a");
+			ggzmodobj->statechange();
+			break;
+		}
+		case GGZMOD_EVENT_ERROR:
+		{
+			const char * msg = static_cast<const char * >(cbdata);
+			log("GGZMOD ## ERROR: %s\n", msg);
+			break;
+		}
+		case GGZMOD_EVENT_CHAT:
+		{
+			// This should not happen. We do not use ggz chat inside table.
+			const GGZChat * chat = static_cast<const GGZChat *>(cbdata);
+			log
+				("GGZMOD ## ERROR: Received EVENT_CHAT from %s: \"%s\"\n",
+				 chat->player, chat->message);
+				 break;
+		}
+		case GGZMOD_EVENT_INFO:
+		{
+			const GGZPlayerInfo * pi = static_cast<const GGZPlayerInfo*>(cbdata);
+			log("GGZMOD ## received EVENT_INFO\n");
+			break;
+		}
+		case GGZMOD_EVENT_PLAYER:
+		{
+			// seat changed status
+			/* data is a int[2] pair consisting of the old
+			 *  {is_spectator, seat_num}. */
+			const int * data = static_cast<const int *>(cbdata);
+			log
+				("GGZMOD ## EVENT_PLAYER: is_spectator: %i, seat_num: %i\n",
+				 data[0], data[1]);
+			break;
+		}
+		case GGZMOD_EVENT_SEAT:
+		{
+			/* This event occurs when a seat change occurs.  The old seat
+			*  (a GGZSeat*) is passed as the event's data.  The seat
+			*  information will be updated before the event is invoked. */
+			break;
+		}
+		case GGZMOD_EVENT_SPECTATOR_SEAT:
+		{
+			/* This event occurs when a spectator seat change occurs.  The
+			*  old spectator (a GGZSpectator*) is passed as the event's data.
+			*  The spectator information will be updated before the event is
+			*  invoked. */
+			break;
+		}
+		case GGZMOD_EVENT_STATE:
+		{
+			/* This event occurs when the game's status changes.  The old
+			*  state (a GGZModState*) is passed as the event's data.
+			*  @see GGZModState */
+			const GGZModState oldstate = *static_cast<const GGZModState*>(cbdata);
+			log
+				("GGZMOD ## state change from %i to %i\n",
+				 oldstate, ggzmod_get_state(mod));
+			ggzmodobj->statechange();
+			break;
+		}
+		case GGZMOD_EVENT_STATS:
+		{
+			log("GGZMOD ## A players' stats have been updated.");
+			break;
+		}
+		default:
+			log("GGZMOD ## HANDLE ERROR: %i\n", e);
+	}
 }
 
 int32_t ggz_ggzmod::datafd()
@@ -157,5 +231,67 @@ bool ggz_ggzmod::data_pending()
 	if (result > 0)
 		return true;
 	return false;
+}
+
+bool ggz_ggzmod::set_player()
+{
+	int state = ggzmod_get_state(mod);
+	
+	if (state != GGZMOD_STATE_WAITING and state !=GGZMOD_STATE_PLAYING)
+	{
+		log
+			("GGZMOD ## set_spectator(): Can not change seat in state %i\n",
+			 state);
+			return false;
+	}
+
+	int is_spectator, seatnum;
+	const char * name = ggzmod_get_player(mod, &is_spectator, &seatnum);
+	log
+		("GGZMOD ## set_spectator():"
+		 "I am \"%s\" at seat %i and I am %s spectator\n",
+ 		 name, seatnum, is_spectator?"a":"not a");
+
+	if (not is_spectator)
+	{
+		for (int i=0; i < ggzmod_get_num_seats(mod); i++)
+		{
+			GGZSeat seat = ggzmod_get_seat(mod, i);
+			if (seat.type == GGZ_SEAT_OPEN) {
+				ggzmod_request_sit(mod, seat.num);
+				break;
+			}
+		}
+	}
+}
+
+bool ggz_ggzmod::set_spectator()
+{
+	int state = ggzmod_get_state(mod);
+	
+	if (state != GGZMOD_STATE_WAITING and state !=GGZMOD_STATE_PLAYING)
+	{
+		log
+			("GGZMOD ## set_spectator(): Can not change seat in state %i\n",
+			 state);
+		return false;
+	}
+	
+	int is_spectator, seatnum;
+	const char * name = ggzmod_get_player(mod, &is_spectator, &seatnum);
+	log
+		("GGZMOD ## set_spectator():"
+		 "I am \"%s\" at seat %i and I am %s spectator\n",
+		 name, seatnum, is_spectator?"a":"not a");
+		 
+	if (not is_spectator)
+	{
+		ggzmod_request_stand(mod);
+	}
+}
+
+void ggz_ggzmod::statechange()
+{
+	NetGGZ::ref().ggzmod_statechange();
 }
 

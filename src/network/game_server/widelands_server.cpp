@@ -140,7 +140,7 @@ void WidelandsServer::joinEvent(Client * const client)
 	wllog(DL_INFO, "joinEvent: %s", client->name.c_str());
 
 	wlproto.send_greeter(client);
-	if (client->number == 0)
+	if (not client->spectator and client->number == 0)
 	{
 		// This is the host
 		// Take peer ip as host ip

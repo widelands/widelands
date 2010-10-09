@@ -41,9 +41,12 @@ public:
 	void process();
 	bool data_pending();
 	int32_t datafd();
+	bool set_spectator();
+	bool set_player();
 
 private:
 	ggz_ggzmod();
+	void statechange();
 	static void ggzmod_server(GGZMod *, GGZModEvent, void const * cbdata);
 	/// filedescriptor to communicate with the widelands_server module of ggzd
 	int32_t m_data_fd;

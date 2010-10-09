@@ -35,6 +35,7 @@
 #include "scripting/scripting.h"
 #include "warning.h"
 #include "wui/gamechatpanel.h"
+#include "network/network_ggz.h"
 
 #include "launchgame.h"
 
@@ -549,6 +550,7 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t const pos)
 	if ((settings.playernum == pos) & settings.multiplayer) {
 		m_settings->setPlayerState(pos, PlayerSettings::stateOpen);
 		m_settings->setPlayerNumber(UserSettings::none());
+		NetGGZ::ref().set_spectator(true);
 		return;
 	}
 
@@ -566,6 +568,7 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t const pos)
 			m_settings->setPlayerName
 				(pos, settings.users.at(settings.usernum).name);
 			m_settings->setPlayerPartner(pos, 0);
+			NetGGZ::ref().set_spectator(false);
 		}
 		return;
 	}

@@ -135,7 +135,7 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 			break;
 		case op_set_debug:
 			wlggz_read_parameter_list(client->fd);
-			if (client->number == 0)
+			if (not client->spectator and client->number == 0)
 			{
 				wllog
 					(DL_DEBUG, "debug request from host: "
@@ -238,7 +238,7 @@ void ProtocolHandler::read_game_information(Client * const client)
 			std::string version = parlist.front().get_string();
 			parlist.pop_front();
 			std::string build = parlist.front().get_string();
-			if (client->number == 0)
+			if (not client->spectator and client->number == 0)
 			{
 				host_version = version;
 				parlist.pop_front();

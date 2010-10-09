@@ -232,6 +232,8 @@ struct NetGGZ : public ChatProvider {
 		(std::string const &, std::string const &,
 		 bool system = false, std::string recipient = std::string());
 
+	bool set_spectator(bool spec);
+
 private:
 	NetGGZ();
 
