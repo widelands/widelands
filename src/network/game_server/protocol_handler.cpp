@@ -41,7 +41,7 @@ bool ProtocolHandler::send_greeter(Client * const client)
 	ggz_write_string(channel, "widelands server");
 	ggz_write_int(channel, WIDELANDS_PROTOCOL);
 
-	if (client->number != 0) {
+	if (g_wls->get_host_ip()) {
 		ggz_write_int(channel, op_broadcast_ip);
 		ggz_write_string(channel, g_wls->get_host_ip());
 	}
