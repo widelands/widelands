@@ -360,9 +360,20 @@ WidelandsPlayer* WidelandsServer::get_player_by_name
 	WidelandsPlayer * p = m_players[name];
 	if (not p and create)
 	{
+		wllog(DL_DEBUG, "create new player structure for %s", name.c_str());
 		p = new WidelandsPlayer(name);
 		m_players[name] = p;
 	}
+	for(int i=0; i < players(); i++)
+	{
+		Seat * s;
+		if ((s = seat(i)) and s->client and s->client->name == name)
+		{
+			p->set_ggz_player_number(s->client->number);
+		}
+	}
+	if (p->ggz_player_number() < 0)
+		wllog(DL_DEBUG, "%s still has no ggz player number", name.c_str());
 	return p;
 }
 
