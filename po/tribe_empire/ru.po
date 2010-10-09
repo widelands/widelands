@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-07 22:34+0000\n"
+"PO-Revision-Date: 2010-10-09 04:55+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-08 04:32+0000\n"
+"X-Launchpad-Export-Date: 2010-10-09 12:07+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -64,7 +64,7 @@ msgstr "Пекарня"
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Печет хлеб для рабочих."
+msgstr "Печёт хлеб для рабочих."
 
 #: ../../tribes/empire/conf:140
 msgid "Barracks"
@@ -73,7 +73,7 @@ msgstr "Бараки"
 #: ../../tribes/empire/conf:141
 #: ../../tribes/empire/conf:154
 msgid "Barrier"
-msgstr "Застава"
+msgstr "Форпост"
 
 #: ../../tribes/empire/armour/conf:1
 msgid "Basic armour for Empire soldiers."
@@ -135,7 +135,7 @@ msgstr "Носильщик"
 
 #: ../../tribes/empire/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr "Переносит грузы по вашим дорогам."
+msgstr "Переносят грузы по Вашим дорогам."
 
 #: ../../tribes/empire/conf:142
 #: ../../tribes/empire/conf:148
@@ -189,7 +189,7 @@ msgstr "Строительная площадка"
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of laying stones."
-msgstr "Отделение кусков гранита и мрамора от валяющихся камней"
+msgstr "Обтёсывают куски гранита и мрамора, добытые из залежей камней."
 
 #: ../../tribes/empire/conf:171
 msgid "Deep Coal Mine"
@@ -317,7 +317,7 @@ msgstr "Домик лесника"
 #: ../../tribes/empire/conf:143
 #: ../../tribes/empire/conf:157
 msgid "Fortress"
-msgstr "Укрепление"
+msgstr "Крепость"
 
 #: ../../tribes/empire/conf:111
 msgid "Geologist"
@@ -551,15 +551,15 @@ msgstr "Шахтёр"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:117
 msgid "Not enough space"
-msgstr ""
+msgstr "Недостаточно места"
 
 #: ../../tribes/empire/conf:144
 msgid "Outpost"
-msgstr "Форпост"
+msgstr "Застава"
 
 #: ../../tribes/empire/conf:53
 msgid "Peel"
-msgstr "Кухонная утварь"
+msgstr "Лопатка пекаря"
 
 #: ../../tribes/empire/conf:79
 msgid "Pick"
@@ -607,7 +607,7 @@ msgstr "Производит топор"
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr "Создать кухонный инвентарь"
+msgstr "сделать лопатку пекаря"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce basket"
@@ -707,43 +707,43 @@ msgstr "Паёк"
 
 #: ../../tribes/empire/conf:34
 msgid "Resource indicator coal little"
-msgstr "Залежи ресурсов мало угля"
+msgstr "Указатель небольших залежей угля"
 
 #: ../../tribes/empire/conf:35
 msgid "Resource indicator coal much"
-msgstr "Залежи ресурсов много угля"
+msgstr "Указатель больших залежей угля"
 
 #: ../../tribes/empire/conf:36
 msgid "Resource indicator gold little"
-msgstr "Залежи ресурсов мало золота"
+msgstr "Указатель небольших залежей золота"
 
 #: ../../tribes/empire/conf:37
 msgid "Resource indicator gold much"
-msgstr "Залежи ресурсов много золота"
+msgstr "Указатель больших залежей золота"
 
 #: ../../tribes/empire/conf:38
 msgid "Resource indicator granite little"
-msgstr "Индикатор ресурсов гранита низкий"
+msgstr "Указатель небольших залежей гранита"
 
 #: ../../tribes/empire/conf:39
 msgid "Resource indicator granite much"
-msgstr "Индикатор ресурсов гранита высокий"
+msgstr "Указатель больших залежей гранита"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator iron little"
-msgstr "Залежи ресурсов мало железа"
+msgstr "Указатель небольших залежей железа"
 
 #: ../../tribes/empire/conf:41
 msgid "Resource indicator iron much"
-msgstr "Залежи ресурсов много железа"
+msgstr "Указатель больших залежей железа"
 
 #: ../../tribes/empire/conf:42
 msgid "Resource indicator no resource"
-msgstr "Залежи ресурсов пусто"
+msgstr "Указатель отсутствия ресурсов"
 
 #: ../../tribes/empire/conf:43
 msgid "Resource indicator water"
-msgstr "Залежи ресурсов вода"
+msgstr "Указатель залежей воды"
 
 #: ../../tribes/empire/conf:82
 msgid "Saw"
@@ -827,6 +827,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
+"Некоторые из Ваших начальных строений не были установлены, так как для них\n"
+"недостаточно места. Это ставит Вас в невыгодное положение. Рассмотрите\n"
+"возможность перезапуска карты, чтобы обеспечить равные начальные условия."
 
 #: ../../tribes/empire/conf:121
 msgid "Stonemason"
@@ -906,8 +909,8 @@ msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
 msgstr ""
-"Пекарю нужна кухонная утварь для приготовления пищи. Она изготовлена в "
-"мастерской."
+"Пекарская лопатка основной инструмент пекаря и каждому пекарю нужна своя "
+"собственная. Изготавливается кузнецом."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""

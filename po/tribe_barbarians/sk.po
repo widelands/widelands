@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-01 18:42+0000\n"
+"PO-Revision-Date: 2010-10-08 20:54+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-02 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-10-09 12:07+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -21,6 +21,7 @@ msgstr ""
 #: ../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
 msgstr ""
+"Trochu väčší pokrm, pre pokročilých baníkov. Potrebujú veľké množstvo."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -94,7 +95,7 @@ msgstr "Pivo"
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-msgstr ""
+msgstr "Okrem pita chleba a mäsa, ryby sú tiež potravinami barbarov."
 
 #: ../../tribes/barbarians/conf:174
 msgid "Big Inn"
@@ -180,7 +181,7 @@ msgstr "Citadela"
 #: ../../tribes/barbarians/conf:210
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:11
 msgid "Citadel village"
-msgstr ""
+msgstr "Dedina s pevnosťou"
 
 #: ../../tribes/barbarians/conf:65
 msgid "Cloth"
@@ -389,11 +390,11 @@ msgstr "Zlatý nuget"
 
 #: ../../tribes/barbarians/conf:189
 msgid "Granite Mine"
-msgstr ""
+msgstr "Žulový lom"
 
 #: ../../tribes/barbarians/conf:73
 msgid "Grout"
-msgstr ""
+msgstr "Malta"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
@@ -443,7 +444,7 @@ msgstr "Zbrojár"
 
 #: ../../tribes/barbarians/conf:191
 msgid "Helmsmithy"
-msgstr ""
+msgstr "Vyhňa na výrobu heliem"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
@@ -548,7 +549,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:197
 msgid "Micro Brewery"
-msgstr ""
+msgstr "Mikropivovar"
 
 #: ../../tribes/barbarians/conf:126
 msgid "Miner"
@@ -563,6 +564,8 @@ msgid ""
 "Only this beer is acceptable for the old warriors. Some say, the whole power "
 "of the barbarians is in this ale."
 msgstr ""
+"Starí bojovníci uznávajú len toto pivo. Niektorí hovoria, že v tomto pive je "
+"celá sila barbarov."
 
 #: ../../tribes/barbarians/conf:162
 msgid "Outpost"
@@ -574,7 +577,7 @@ msgstr "Vôl"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Peel"
-msgstr ""
+msgstr "Pekárska lopata"
 
 #: ../../tribes/barbarians/conf:83
 msgid "Pick"
@@ -582,7 +585,7 @@ msgstr "Krompáč"
 
 #: ../../tribes/barbarians/conf:84
 msgid "Pitta Bread"
-msgstr ""
+msgstr "Pita chlieb"
 
 #: ../../tribes/barbarians/fernery/conf:16
 msgid "Plant flax"
@@ -598,7 +601,7 @@ msgstr "Sadiť pšenicu"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Sadí polia."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -612,11 +615,11 @@ msgstr "vyrobiť sekeru"
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Vyrobiť pekáč"
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"
-msgstr ""
+msgstr "Vyrobiť bojovú sekeru"
 
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
@@ -629,7 +632,7 @@ msgstr "Vyrobiť bronzovú sekeru"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Vyrobiť kliešte na uhlie"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
@@ -649,7 +652,7 @@ msgstr "Vyrobiť lovecký oštep"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr ""
+msgstr "Vyrobiť kuchynské nástroje"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
@@ -697,7 +700,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Vyrába látku pre lode a vojakov."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -708,11 +711,12 @@ msgstr "Pripravuje jedlo pre baníkov."
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
+"Vyrába tie najlepšie pivá, aby boli bojovníci silní a šťastní počas tréningu."
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Vyrába zbrane pre vojakov a nástroje pre robotníkov."
 
 #: ../../tribes/barbarians/conf:199
 msgid "Quarry"
@@ -720,11 +724,11 @@ msgstr "Kameňolom"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Ranger"
-msgstr ""
+msgstr "Lesník"
 
 #: ../../tribes/barbarians/conf:200
 msgid "Ranger's Hut"
-msgstr ""
+msgstr "Lesníkova chatrč"
 
 #: ../../tribes/barbarians/conf:85
 msgid "Ration"
@@ -736,7 +740,7 @@ msgstr "Hrubý kameň"
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid "Raw Stones are the secondary build material of the barbarians."
-msgstr ""
+msgstr "Nespracované kamene sú sekundárne stavebné materiály barbarov."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""

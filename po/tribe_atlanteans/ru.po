@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-07 22:27+0000\n"
+"PO-Revision-Date: 2010-10-09 03:38+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-08 04:32+0000\n"
+"X-Launchpad-Export-Date: 2010-10-09 12:07+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -63,11 +63,11 @@ msgstr "Пекарня"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Печет хлеб для рабочих."
+msgstr "Печёт хлеб для рабочих."
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Bakingtray"
-msgstr "Кухонная утварь"
+msgstr "Лопатка пекаря"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "Barracks"
@@ -170,7 +170,7 @@ msgstr "Носильщик"
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr "Переносит грузы по вашим дорогам."
+msgstr "Переносят грузы по Вашим дорогам."
 
 #: ../../tribes/atlanteans/conf:138
 #: ../../tribes/atlanteans/conf:155
@@ -247,7 +247,7 @@ msgstr "Кристальная шахта"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr ""
+msgstr "Обтёсывают куски гранита, добытые из залежей камней."
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -513,7 +513,7 @@ msgstr "Шахтёр"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
 msgid "Not enough space"
-msgstr ""
+msgstr "Недостаточно места"
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
@@ -571,7 +571,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr "Создать кухонный инвентарь"
+msgstr "сделать лопатку пекаря"
 
 #: ../../tribes/atlanteans/mill/conf:22
 msgid "Produce blackrootflour"
@@ -694,43 +694,43 @@ msgstr "Кварц"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Resource indicator coal little"
-msgstr "Залежи ресурсов мало угля"
+msgstr "Указатель небольших залежей угля"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Resource indicator coal much"
-msgstr "Залежи ресурсов много угля"
+msgstr "Указатель больших залежей угля"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Resource indicator gold little"
-msgstr "Залежи ресурсов мало золота"
+msgstr "Указатель небольших залежей золота"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Resource indicator gold much"
-msgstr "Залежи ресурсов много золота"
+msgstr "Указатель больших залежей золота"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Resource indicator granite little"
-msgstr "Индикатор ресурсов гранита низкий"
+msgstr "Указатель небольших залежей гранита"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Resource indicator granite much"
-msgstr "Индикатор ресурсов гранита высокий"
+msgstr "Указатель больших залежей гранита"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator iron little"
-msgstr "Залежи ресурсов мало железа"
+msgstr "Указатель небольших залежей железа"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator iron much"
-msgstr "Залежи ресурсов много железа"
+msgstr "Указатель больших залежей железа"
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator no resource"
-msgstr "Залежи ресурсов пусто"
+msgstr "Указатель отсутствия ресурсов"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator water"
-msgstr "Залежи ресурсов вода"
+msgstr "Указатель залежей воды"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Saw"
@@ -855,6 +855,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
+"Некоторые из Ваших начальных строений не были установлены, так как для них\n"
+"недостаточно места. Это ставит Вас в невыгодное положение. Рассмотрите\n"
+"возможность перезапуска карты, чтобы обеспечить равные начальные условия."
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Spiderbreeder"
@@ -918,8 +921,8 @@ msgid ""
 "The bakingtray is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
-"Кухонная утварь является инструментом пекаря, каждый пекарь нуждается в "
-"своей собственной. Она изготовлена в кузне."
+"Пекарская лопатка основной инструмент пекаря и каждому пекарю нужна своя "
+"собственная. Изготавливается кузнецом."
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""

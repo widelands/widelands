@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-01 21:28+0000\n"
+"PO-Revision-Date: 2010-10-09 11:23+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-02 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-10-09 12:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -99,6 +99,8 @@ msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
 msgstr ""
+"Napadnite a dobyte všetky armádne budovy nepriateľa a zničte jeho\n"
+"základňu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
@@ -110,19 +112,19 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid "Build a flag on the road"
-msgstr ""
+msgstr "Postavte vlajku na ceste"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:167
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr ""
+msgstr "Postavte vlajku, aby sa rozdelila cesta k drevorubačovi"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:278
 msgid "Build a quarry"
-msgstr ""
+msgstr "Postavte kameňolom"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
 msgid "Build a quarry next to the stones"
-msgstr ""
+msgstr "Postavte kameňolom pri kameňoch"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:250
 msgid ""
@@ -135,6 +137,11 @@ msgid ""
 "activated\n"
 "earlier."
 msgstr ""
+"Postavte kameňolom, tu, pri týchto kameňoch. Pamätáte si, ako som to\n"
+"predtým urobil? Uistite sa, že máte zapnutú pomoc pri stavaní, potom len\n"
+"kliknite na miesto, kde chcete, aby táto budova stála. Vyberte ju z okna,\n"
+"ktoré sa zobrazí, a bude umiestnená. Možno je čas na objasnenie všetkých\n"
+"tých symbolov pomoci pri stavaní, ktoré sme už skôr aktivovali."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid "Building a connecting road"
@@ -150,6 +157,8 @@ msgid ""
 "to\n"
 "build a small training scenario for you. Let's do that now."
 msgstr ""
+"Ale odbočil som od témy. Späť k vojakom. Čo som to len chcel urobiť?\n"
+"Aha, áno, chcel som pre vás vytvoriť tréningový scenár. Urobme to teraz."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:379
