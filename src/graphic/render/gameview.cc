@@ -1087,65 +1087,44 @@ inline static uint32_t calc_minimap_color
 
 /*
 ===============
-Draws a dotted frame border on the mini map.
+Used to draw a dotted frame border on the mini map.
 ===============
  */
 template<typename T>
 static bool draw_minimap_frameborder
 	(Widelands::FCoords				     const f,
-	 Uint8							   *	   pix,
-	 SDL_PixelFormat             const &       format,
+	 Point							     const ptopleft,
+	 Point							     const pbottomright,
 	 uint32_t                            const mapwidth,
-	 Rect                                const rc,
-	 Point                               const viewpoint,
-	 uint32_t                            const flags)
+	 uint32_t                            const mapheight)
 {
-	bool ispixeldone = false;
-
-	uint32_t mapheight = (flags & MiniMap::Zoom2 ? rc.h / 2 : rc.h);
-
-	int32_t xsize= g_gr->get_xres() / TRIANGLE_WIDTH / 2;
-	int32_t ysize = g_gr->get_yres() / TRIANGLE_HEIGHT / 2;
-
-	Point ptopleft;
-	ptopleft.x = viewpoint.x + mapwidth / 2 - xsize;
-	if (ptopleft.x < 0) ptopleft.x += mapwidth;
-	ptopleft.y = viewpoint.y + mapheight / 2 - ysize;
-	if (ptopleft.y < 0) ptopleft.y += mapheight;
-
-	Point pbottomright;
-	pbottomright.x = viewpoint.x + mapwidth / 2 + xsize;
-	if (pbottomright.x >= mapwidth) pbottomright.x -= mapwidth;
-	pbottomright.y = viewpoint.y + mapheight / 2 + ysize;
-	if (pbottomright.y >= mapheight) pbottomright.y -= mapheight;
+	bool isframepixel = false;
 
 	if (ptopleft.x <= pbottomright.x) {
 		if (f.x >= ptopleft.x && f.x <= pbottomright.x
 			&& (f.y == ptopleft.y || f.y == pbottomright.y)
 			&& f.x % 2 == 0)
-			ispixeldone = true;
+			isframepixel = true;
 	} else {
 		if ((f.x >= ptopleft.x && f.x <= mapwidth || f.x >= 0 && f.x <= pbottomright.x)
 			&& (f.y == ptopleft.y || f.y == pbottomright.y)
 			&& f.x % 2 == 0)
-			ispixeldone = true;
+			isframepixel = true;
 	}
+
 	if (ptopleft.y <= pbottomright.y) {
 		if (f.y >= ptopleft.y && f.y <= pbottomright.y
 			&& (f.x == ptopleft.x || f.x == pbottomright.x)
 			&& f.y % 2 == 0)
-			ispixeldone = true;
+			isframepixel = true;
 	} else {
 		if ((f.y >= ptopleft.y && f.y <= mapheight || f.y >= 0 && f.y <= pbottomright.y)
 			&& (f.x == ptopleft.x || f.x == pbottomright.x)
 			&& f.y % 2 == 0)
-			ispixeldone = true;
+			isframepixel = true;
 	}
 
-	if (ispixeldone)
-		*reinterpret_cast<T *>(pix) = static_cast<T>(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
-
-	return ispixeldone;
+	return isframepixel;
 }
 
 /*
@@ -1166,6 +1145,25 @@ static void draw_minimap_int
 	 uint32_t                            const flags)
 {
 	Widelands::Map const & map = egbase.map();
+
+	uint32_t mapheight = (flags & MiniMap::Zoom2 ? rc.h / 2 : rc.h);
+
+	// size of the display frame
+	int32_t xsize = g_gr->get_xres() / TRIANGLE_WIDTH / 2;
+	int32_t ysize = g_gr->get_yres() / TRIANGLE_HEIGHT / 2;
+
+	Point ptopleft; // top left point of the current display frame
+	ptopleft.x = viewpoint.x + mapwidth / 2 - xsize;
+	if (ptopleft.x < 0) ptopleft.x += mapwidth;
+	ptopleft.y = viewpoint.y + mapheight / 2 - ysize;
+	if (ptopleft.y < 0) ptopleft.y += mapheight;
+
+	Point pbottomright; // bottom right point of the current display frame
+	pbottomright.x = viewpoint.x + mapwidth / 2 + xsize;
+	if (pbottomright.x >= mapwidth) pbottomright.x -= mapwidth;
+	pbottomright.y = viewpoint.y + mapheight / 2 + ysize;
+	if (pbottomright.y >= mapheight) pbottomright.y -= mapheight;
+
 	if (not player or player->see_all()) for (uint32_t y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 		Widelands::FCoords f
@@ -1178,8 +1176,11 @@ static void draw_minimap_int
 			if (x % 2 || !(flags & MiniMap::Zoom2))
 				move_r(mapwidth, f, i);
 
-			if (!draw_minimap_frameborder<T>
-					(f, pix, format, mapwidth, rc, viewpoint, flags)) {
+			if (draw_minimap_frameborder<T>
+					(f, ptopleft, pbottomright, mapwidth, mapheight)) {
+				*reinterpret_cast<T *>(pix) = static_cast<T>
+					(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
+			} else {
 				*reinterpret_cast<T *>(pix) = static_cast<T>
 					(calc_minimap_color
 				 		(format, egbase, f, flags, f.field->get_owned_by(), true));
@@ -1199,8 +1200,11 @@ static void draw_minimap_int
 				if (x % 2 || !(flags & MiniMap::Zoom2))
 					move_r(mapwidth, f, i);
 
-				if (!draw_minimap_frameborder<T>
-					(f, pix, format, mapwidth, rc, viewpoint, flags)) {
+				if (draw_minimap_frameborder<T>
+					(f, ptopleft, pbottomright, mapwidth, mapheight)) {
+					*reinterpret_cast<T *>(pix) = static_cast<T>
+						(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
+				} else {
 					Widelands::Player::Field const & player_field = player_fields[i];
 					Widelands::Vision const vision = player_field.vision;
 
