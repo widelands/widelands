@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-09 03:38+0000\n"
+"PO-Revision-Date: 2010-10-10 01:21+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-09 12:07+0000\n"
+"X-Launchpad-Export-Date: 2010-10-10 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -203,7 +203,7 @@ msgstr "Угольная шахта"
 
 #: ../../tribes/atlanteans/conf:131
 msgid "Construction Site"
-msgstr "Строительная площадка"
+msgstr "Стройка"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Corn"
@@ -247,7 +247,7 @@ msgstr "Кристальная шахта"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr "Обтёсывают куски гранита, добытые из залежей камней."
+msgstr "Обтёсывает куски гранита, добытые из залежей камней."
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -1081,11 +1081,11 @@ msgstr "Башня"
 
 #: ../../tribes/atlanteans/conf:123
 msgid "Trainer"
-msgstr "Тренер"
+msgstr "Инструктор"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr "Тренирует солдат."
+msgstr "Обучает солдат."
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Trunk"

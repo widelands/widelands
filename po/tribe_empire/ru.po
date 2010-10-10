@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-09 04:55+0000\n"
+"PO-Revision-Date: 2010-10-10 02:01+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-09 12:07+0000\n"
+"X-Launchpad-Export-Date: 2010-10-10 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -40,11 +40,11 @@ msgstr "Доспехи"
 
 #: ../../tribes/empire/conf:167
 msgid "Armour Smithy"
-msgstr "Бронный цех"
+msgstr "Латная мастерская"
 
 #: ../../tribes/empire/conf:103
 msgid "Armoursmith"
-msgstr "Цех доспехов"
+msgstr "Латный мастер"
 
 #: ../../tribes/empire/conf:27
 msgid "Ashes"
@@ -68,7 +68,7 @@ msgstr "Печёт хлеб для рабочих."
 
 #: ../../tribes/empire/conf:140
 msgid "Barracks"
-msgstr "Бараки"
+msgstr "Казарма"
 
 #: ../../tribes/empire/conf:141
 #: ../../tribes/empire/conf:154
@@ -153,7 +153,7 @@ msgstr "Кольчуга"
 
 #: ../../tribes/empire/conf:170
 msgid "Charcoal Burner"
-msgstr "Обжиг угля"
+msgstr "Домик угольщика"
 
 #: ../../tribes/empire/conf:155
 msgid "Citadel"
@@ -185,27 +185,27 @@ msgstr "Колизей"
 
 #: ../../tribes/empire/conf:131
 msgid "Construction Site"
-msgstr "Строительная площадка"
+msgstr "Стройка"
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of laying stones."
-msgstr "Обтёсывают куски гранита и мрамора, добытые из залежей камней."
+msgstr "Обтёсывает куски гранита и мрамора, добытые из залежей камней."
 
 #: ../../tribes/empire/conf:171
 msgid "Deep Coal Mine"
-msgstr "Глубокая Угольная шахта"
+msgstr "Глубокая угольная шахта"
 
 #: ../../tribes/empire/conf:173
 msgid "Deep Gold Mine"
-msgstr "Глубокая Золотоносная шахта"
+msgstr "Глубокий золотой прииск"
 
 #: ../../tribes/empire/conf:175
 msgid "Deep Iron Ore Mine"
-msgstr "Глубокая Железоносная шахта"
+msgstr "Глубокий рудник"
 
 #: ../../tribes/empire/conf:174
 msgid "Deep Marble Mine"
-msgstr "Глубокая Мраморная шахта"
+msgstr "Глубокая мраморная шахта"
 
 #: ../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -233,7 +233,7 @@ msgstr "Ословод"
 
 #: ../../tribes/empire/conf:200
 msgid "Donkeyfarm"
-msgstr "Ослиная ферма"
+msgstr "Ослоферма"
 
 #: ../../tribes/empire/conf:5
 msgid "Empire"
@@ -281,11 +281,11 @@ msgstr "Рыба"
 
 #: ../../tribes/empire/conf:109
 msgid "Fisher"
-msgstr "Рыбак"
+msgstr "Рыболов"
 
 #: ../../tribes/empire/conf:177
 msgid "Fisher's House"
-msgstr "Домик рыбака"
+msgstr "Домик рыболова"
 
 #: ../../tribes/empire/conf:62
 msgid "Fishing Rod"
@@ -333,7 +333,7 @@ msgstr "Золото"
 
 #: ../../tribes/empire/conf:179
 msgid "Gold Mine"
-msgstr "Золотоносная шахта"
+msgstr "Золотой прииск"
 
 #: ../../tribes/empire/gold/conf:1
 msgid ""
@@ -440,7 +440,7 @@ msgstr "Железная руда"
 
 #: ../../tribes/empire/conf:185
 msgid "Iron Ore Mine"
-msgstr "Железоносная шахта"
+msgstr "Рудник"
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -456,7 +456,7 @@ msgstr "Пика"
 
 #: ../../tribes/empire/conf:114
 msgid "Lumberjack"
-msgstr "Дровосек"
+msgstr "Лесоруб"
 
 #: ../../tribes/empire/conf:182
 msgid "Lumberjack's House"
@@ -571,7 +571,7 @@ msgstr "Свиновод"
 
 #: ../../tribes/empire/conf:186
 msgid "Piggery"
-msgstr "Свинарник"
+msgstr "Свиноферма"
 
 #: ../../tribes/empire/vineyard/conf:19
 msgid "Plant vine"
@@ -777,7 +777,7 @@ msgstr "Караульная"
 
 #: ../../tribes/empire/conf:189
 msgid "Sheepfarm"
-msgstr "Овечья ферма"
+msgstr "Овцеферма"
 
 #: ../../tribes/empire/conf:119
 msgid "Shepherd"
@@ -872,7 +872,7 @@ msgstr "Команда разработчиков Widelands"
 #: ../../tribes/empire/axe/conf:1
 msgid ""
 "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "Топор - инструмент дровосека. Он изготовлен в мастерской."
+msgstr "Топор основной инструмент лесоруба. Изготавливается в мастерской."
 
 #: ../../tribes/empire/bread/conf:1
 msgid "The bakers of the Empire make really tasty bread."
@@ -1024,15 +1024,15 @@ msgstr "Башня"
 
 #: ../../tribes/empire/conf:123
 msgid "Trainer"
-msgstr "Пастух"
+msgstr "Инструктор"
 
 #: ../../tribes/empire/conf:136
 msgid "Trainingscamp"
-msgstr "Казарма"
+msgstr "Тренировочный лагерь"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr "Тренирует солдат."
+msgstr "Обучает солдат."
 
 #: ../../tribes/empire/conf:86
 msgid "Trunk"
@@ -1164,7 +1164,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:126
 msgid "Vine Farmer"
-msgstr "Винодел"
+msgstr "Виноградарь"
 
 #: ../../tribes/empire/conf:44
 msgid "Vine medium"
@@ -1208,7 +1208,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:194
 msgid "Weapon Smithy"
-msgstr "Оружейня"
+msgstr "Оружейная мастерская"
 
 #: ../../tribes/empire/iron/conf:1
 msgid "Weapons and tools are made of iron."

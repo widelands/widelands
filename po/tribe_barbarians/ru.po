@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-09 11:58+0000\n"
+"PO-Revision-Date: 2010-10-10 01:19+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-09 12:07+0000\n"
+"X-Launchpad-Export-Date: 2010-10-10 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -164,7 +164,7 @@ msgstr "Скотовод"
 
 #: ../../tribes/barbarians/conf:206
 msgid "Cattle Farm"
-msgstr "Животноводческая ферма"
+msgstr "Ранчо"
 
 #: ../../tribes/barbarians/conf:176
 msgid "Charcoal Burner's House"
@@ -201,15 +201,15 @@ msgstr "Угольная шахта"
 
 #: ../../tribes/barbarians/conf:136
 msgid "Construction Site"
-msgstr "Строительная площадка"
+msgstr "Стройка"
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr "Обтёсывают куски гранита, добытые из залежей камней."
+msgstr "Обтёсывает куски гранита, добытые из залежей камней."
 
 #: ../../tribes/barbarians/conf:178
 msgid "Deep Coal Mine"
-msgstr "Глубокая Угольная шахта"
+msgstr "Глубокая угольная шахта"
 
 #: ../../tribes/barbarians/conf:182
 msgid "Deep Gold Mine"
@@ -221,7 +221,7 @@ msgstr "Глубокий рудник"
 
 #: ../../tribes/barbarians/conf:177
 msgid "Deeper Coal Mine"
-msgstr "Глубинная Угольная шахта"
+msgstr "Глубинная угольная шахта"
 
 #: ../../tribes/barbarians/conf:180
 msgid "Deeper Gold Mine"
@@ -1064,7 +1064,7 @@ msgstr "Башня"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Trainer"
-msgstr "Тренер"
+msgstr "Инструктор"
 
 #: ../../tribes/barbarians/conf:140
 msgid "Trainingscamp"
@@ -1072,7 +1072,7 @@ msgstr "Тренировочный лагерь"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr "Тренирует солдат."
+msgstr "Обучает солдат."
 
 #: ../../tribes/barbarians/conf:93
 msgid "Trunk"
