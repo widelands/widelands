@@ -69,6 +69,7 @@ function _try_add_objective(i)
    end
    return o
 end
+
 function msg_box(i)
    wl.Game().desired_speed = 1000
 
@@ -151,6 +152,17 @@ function warp_houses(descriptions)
    end
 
    blocker:lift_blocks()
+end
+
+-- Make sure the user is in road building mode starting from the given flag
+function enter_road_building_mode(flag)
+   local mv = wl.ui.MapView()
+
+   if mv.is_building_road then
+      mv:abort_road_building()
+   end
+
+   mv:start_road_building(flag)
 end
 
 function build_road(field, ...)
@@ -397,6 +409,8 @@ function build_lumberjack()
    click_on_panel(wl.ui.MapView().windows.field_action.tabs.small)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.lumberjacks_hut)
 
+   enter_road_building_mode(first_lumberjack_field.brn.immovable)
+
    sleep(500)
    msg_box(lumberjack_message_03)
    sleep(500)
@@ -486,6 +500,8 @@ function build_a_quarry()
    while not cs do sleep(200) end
    o.done = true
    register_immovable_as_allowed(cs)
+
+   enter_road_building_mode(cs.fields[1].brn.immovable)
 
    local function _rip_road()
       for idx,f in ipairs(cs.fields[1].brn:region(2)) do
