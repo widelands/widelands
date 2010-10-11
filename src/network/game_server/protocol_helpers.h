@@ -140,6 +140,8 @@ class WLGGZ_writer {
 		 */
 		void type(int t)
 		{
+			if (m_sub)
+				m_sub->type(t);
 			if (m_in_cmd)
 				ggz_write_int(m_fd, 0);
 			m_in_cmd = true;
