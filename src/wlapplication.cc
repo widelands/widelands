@@ -356,6 +356,56 @@ void WLApplication::run()
 			throw;
 		}
 #if HAVE_GGZ
+	} else if (NetGGZ::ref().ggz_mode()) {
+		/* Widelands was started from a ggz core program. Connect to this ggzcore
+		* instance and go directly to the game setup screen */
+		NetGGZ::ref().join("");
+		if( NetGGZ::ref().is_host())
+		{
+			NetHost netgame(NetGGZ::ref().playername(), true);
+			netgame.run();
+			NetGGZ::ref().deinit();
+		} else {
+			//NetGGZ::ref().
+			uint32_t const secs = time(0);
+			while (!NetGGZ::ref().ip()) {
+				NetGGZ::ref().process();
+				if (10 < time(0) - secs)
+					throw warning
+						(_("Connection timeouted"), "%s",
+						 _
+						 ("Widelands has not been able to get the IP "
+						  "address of the server in time.\n"
+						  "There seems to be a network problem, either on "
+						  "your side or on side\n"
+						  "of the server.\n"));
+			}
+			std::string ip = NetGGZ::ref().ip();
+
+			//  convert IPv6 addresses returned by ggzd to IPv4 addresses.
+			//  At the moment SDL_net does not support IPv6 anyways.
+			if (not ip.compare(0, 7, "::ffff:")) {
+				ip = ip.substr(7);
+				log("GGZClient ## cut IPv6 address: %s\n", ip.c_str());
+			}
+
+			IPaddress peer;
+			if (hostent * const he = gethostbyname(ip.c_str())) {
+			peer.host =
+				(reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
+				 peer.port = htons(WIDELANDS_PORT);
+			} else
+				throw warning
+					(_("Connection problem"), "%s",
+					 _
+					 ("Widelands has not been able to connect to the "
+					  "host."));
+			SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);
+
+			NetClient netgame(&peer, NetGGZ::ref().playername(), true);
+			netgame.run();
+			NetGGZ::ref().deinit();
+		}
 	} else if (m_game_type == GGZ) {
 		Widelands::Game game;
 		try {

@@ -44,6 +44,12 @@ public:
 	bool set_spectator();
 	bool set_player();
 
+	/**
+	 * Returns the ggz nick name of the player. The returned string is alocated
+	 * woth strdup and must be freed by caller 
+	 */
+	std::string playername();
+
 private:
 	ggz_ggzmod();
 	void statechange();

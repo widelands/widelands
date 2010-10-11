@@ -78,7 +78,8 @@ bool ggz_ggzcore::init
 	ggzcore_login = true;
 	ggzcore_ready = false;
 
-	opt.flags = static_cast<GGZOptionFlags>(GGZ_OPT_EMBEDDED);
+	opt.flags =
+		static_cast<GGZOptionFlags>(GGZ_OPT_EMBEDDED);
 	ggzcore_init(opt);
 
 	//  Register callback functions for server events.
@@ -147,13 +148,29 @@ bool ggz_ggzcore::init
 	#endif
 
 	// Login to registered account:
-	if (registered)
-		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN, nick, pwd, 0);
+	if (registered) {
+		if (ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN, nick, pwd, 0) < 0)
+		{
+			log("GGZCORE init ## ggzcore_server_set_login_info() failed (registered)\n");
+			return false;
+		}
 	// Login anonymously:
-	else
-		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, nick, 0, 0);
+	} else
+		if
+			(ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, nick, 0, 0)
+			 < 0)
+		{
+			log("GGZCORE init ## ggzcore_server_set_login_info() failed (guest)\n");
+			return false;
+		}
 
-	ggzcore_server_connect(ggzserver);
+	log("GGZCORE init ## after server_set_logininfo\n");
+
+	if (ggzcore_server_connect(ggzserver) < 0)
+	{
+		log("GGZCORE init ## ggzcore_server_connect() failed\n");
+		return false;
+	}
 
 	return true;
 }
@@ -166,12 +183,12 @@ bool ggz_ggzcore::init
 void ggz_ggzcore::process()
 {
 	if (!ggzserver) {
-		//log("ggz_ggzcore::process(): not ggzserver\n");
+		log("ggz_ggzcore::process(): not ggzserver\n");
 		return;
 	}
 
 	if (ggzcore_server_data_is_pending(ggzserver)) {
-		//log("ggz_ggzcore::process(): server_data_is_pending\n");
+		log("ggz_ggzcore::process(): server_data_is_pending\n");
 		ggzcore_server_read_data(ggzserver, ggzcore_server_get_fd(ggzserver));
 	}
 

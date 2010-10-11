@@ -234,6 +234,12 @@ struct NetGGZ : public ChatProvider {
 
 	bool set_spectator(bool spec);
 
+	bool ggz_mode();
+
+	bool is_host() { return false; }
+	
+	std::string playername();
+
 private:
 	NetGGZ();
 
@@ -252,6 +258,8 @@ private:
 	std::string username;
 	std::string servername;
 	uint32_t tableseats;
+	/// If true widelands was started 
+	bool m_started_from_ggzclient;
 
 	std::vector<Net_Player_Info> playerinfo;
 	MOTD motd;

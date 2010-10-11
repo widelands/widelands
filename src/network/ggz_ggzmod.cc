@@ -67,8 +67,11 @@ bool ggz_ggzmod::connect()
 		return false;
 	
 	log("GGZMOD ## connect to GGZCORE\n");
+	if (mod) {
+		ggzmod_free(mod);
+	}
 	mod = ggzmod_new(GGZMOD_GAME);
-	
+
 	// Set handler for ggzmod events:
 	ggzmod_set_handler(mod, GGZMOD_EVENT_SERVER, &ggz_ggzmod::ggzmod_server);
 	ggzmod_set_handler(mod, GGZMOD_EVENT_ERROR, &ggz_ggzmod::ggzmod_server);
@@ -109,7 +112,7 @@ void ggz_ggzmod::ggzmod_server
 			int32_t const fd = *static_cast<int32_t const *>(cbdata);
 			ggzmodobj->m_data_fd = fd;
 			log("GGZMOD ## got data fd: %i\n", fd);
-			//ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
+			ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
 			int is_spectator, seatnum;
 			const char * name = ggzmod_get_player(mod, &is_spectator, &seatnum);
 			log
@@ -198,9 +201,12 @@ void ggz_ggzmod::disconnect()
 {
 	if (m_data_fd > 0)
 		close(m_data_fd);
+
 	m_data_fd = -1;
-	ggzmod_disconnect(mod);
-	ggzmod_free(mod);
+	if (mod) {
+		ggzmod_disconnect(mod);
+		ggzmod_free(mod);
+	}
 	m_connected = false;
 }
 
@@ -294,4 +300,22 @@ void ggz_ggzmod::statechange()
 {
 	NetGGZ::ref().ggzmod_statechange();
 }
+
+std::string ggz_ggzmod::playername()
+{
+	std::string name;
+	const char * plrname;
+	int spectator, seat_num;
+	plrname = ggzmod_get_player(mod, &spectator, &seat_num);
+	if (plrname) {
+		name = plrname;
+		ggz_free(plrname);
+		return name;
+	}
+	else
+		return "";
+}
+
+
+
 
