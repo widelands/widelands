@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-07 13:02+0000\n"
-"Last-Translator: Venatrix <Unknown>\n"
+"PO-Revision-Date: 2010-10-10 16:21+0000\n"
+"Last-Translator: Andreas Breitschopp <a-breitschopp@ab-tools.de>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-08 04:32+0000\n"
+"X-Launchpad-Export-Date: 2010-10-11 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: German\n"
 
@@ -75,7 +75,7 @@ msgstr "Backblech"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "Barracks"
-msgstr "Baracke"
+msgstr "Baracken"
 
 #: ../../tribes/atlanteans/conf:146
 #: ../../tribes/atlanteans/conf:154
@@ -795,11 +795,14 @@ msgid ""
 "Shovels are needed for proper handling of plants. Therefore the forester and "
 "the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
+"Schaufeln werden zum richtigen Umgang mit Pflanzen gebraucht. Daher "
+"verwenden sie die Förster und Schwarzwurzelbauern. Sie werden vom "
+"Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 #: ../../tribes/atlanteans/labyrinth/conf:36
 msgid "Sleep"
-msgstr "Sleep"
+msgstr "Schläft"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Small Tower"
@@ -971,11 +974,11 @@ msgid ""
 "These transparent quartz' are used for some exclusive buildings and tools."
 msgstr ""
 "Diese durchscheinenden Bergkristalle werden für einige exklusive Gebäude und "
-"Werkzeuge verwendet."
+"Werkzeuge verwandt."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid "This bow is used by the atlantian hunter."
-msgstr "Dieser Bogen wird vom atlantischen Jäger verwendet."
+msgstr "Dieser Bogen wird vom atlantischen Jäger verwandt."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
@@ -1075,8 +1078,8 @@ msgstr ""
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid "This yarn, made of gold, is used for weaving exclusive cloth."
 msgstr ""
-"Dieses Garn, das aus Gold hergestellt wird, wird zum Weben exklusiver "
-"Kleidung verwendet."
+"Dieses Garn, das aus Gold hergestellt wird, wird zum weben exklusiver "
+"Kleidung verwandt."
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -1240,7 +1243,7 @@ msgid ""
 "places, for example to make bread."
 msgstr ""
 "Wasser ist der Hauptbestandteil des Lebens! Es wird für viele Dinge, wie zum "
-"Beispiel zum Brotbacken, verwendet."
+"Beispiel zum Brotbacken, verwandt."
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Weapon Smithy"

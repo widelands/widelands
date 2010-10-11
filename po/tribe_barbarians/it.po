@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-06-06 20:58+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-10 16:12+0000\n"
+"Last-Translator: simone.sandri <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-10-11 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -155,7 +155,7 @@ msgstr "Trasportatore"
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
-msgstr ""
+msgstr "Trasporta oggetti lungo la starda"
 
 #: ../../tribes/barbarians/conf:151
 #: ../../tribes/barbarians/conf:160
@@ -183,7 +183,7 @@ msgid "Citadel"
 msgstr "Cittadella"
 
 #: ../../tribes/barbarians/conf:210
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:11
 msgid "Citadel village"
 msgstr "Roccaforte del villaggio"
 
@@ -432,7 +432,7 @@ msgid "Headquarters"
 msgstr "Quartier generale"
 
 #: ../../tribes/barbarians/conf:209
-#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Quartier generale medio"
 
@@ -559,6 +559,10 @@ msgstr "Mircobirreria"
 #: ../../tribes/barbarians/conf:126
 msgid "Miner"
 msgstr "Minatore"
+
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
+msgid "Not enough space"
+msgstr "Spazio Insufficente"
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -797,11 +801,11 @@ msgstr "L'indicatore di risorse segna tanto oro"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "L'indicatore di risorse segna poco granito"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "L'indicatore di risorse segna molto granito"
 
 #: ../../tribes/barbarians/conf:48
 msgid "Resource indicator iron little"
@@ -891,6 +895,16 @@ msgstr "Spuntino"
 #: ../../tribes/barbarians/conf:104
 msgid "Soldier"
 msgstr "Soldato"
+
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:92
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Alcuni dei vostri edifici di partenza non ha avuto abbastanza spazio e \n"
+"non saranno costruiti. Questo ti svantaggia; considera il riavvio\n"
+"di questa mappa con una equa condizione di partenza."
 
 #: ../../tribes/barbarians/conf:129
 msgid "Stonemason"

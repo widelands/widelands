@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-09-27 11:05+0000\n"
-"Last-Translator: Dr Gregory House <housegregory299@gmail.com>\n"
+"PO-Revision-Date: 2010-10-10 10:17+0000\n"
+"Last-Translator: egor panfilov <atom8bit@yandex.ru>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-28 04:32+0000\n"
+"X-Launchpad-Export-Date: 2010-10-11 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -24,11 +24,11 @@ msgstr "(CTRL+) 0-9  Запоминание и переход к ранее за
 
 #: ../../txts/README:67
 msgid ", / .       Go to previous / next location"
-msgstr ", / .       Переход к предудущей / следующей локации"
+msgstr ", / . Переход к предыдущей / следующей локации"
 
 #: ../../txts/README:121
 msgid "- how to reproduce the bug"
-msgstr "- как повторить ошибку (баг)"
+msgstr "- как воспроизвести ошибку (баг)"
 
 #: ../../txts/README:125
 msgid ""

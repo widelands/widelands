@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-10-07 22:08+0000\n"
-"Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
+"PO-Revision-Date: 2010-10-10 10:14+0000\n"
+"Last-Translator: egor panfilov <atom8bit@yandex.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-10-08 04:32+0000\n"
+"X-Launchpad-Export-Date: 2010-10-11 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -24,11 +24,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:43
 msgid "Requesters"
-msgstr "Запрашивающие"
+msgstr "Требующие"
 
 #: ../../src/writeHTML.cc:58
 msgid "Providers"
-msgstr "Провайдеры"
+msgstr "Предоставляющие"
 
 #: ../../src/writeHTML.cc:73
 msgid "Successors"
@@ -1151,7 +1151,7 @@ msgstr "принадлежит игроку %u"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "имеет флаг (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
@@ -1161,7 +1161,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "флаги: %s"
 
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:96
 #, c-format
@@ -1176,7 +1176,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr ""
+msgstr "нет флага в указанной позиции (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
@@ -1186,7 +1186,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "строение (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:212
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
@@ -1283,7 +1283,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
 msgid "ownership: %s"
-msgstr ""
+msgstr "владелец: (%s)"
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:81
 #, c-format
@@ -1299,7 +1299,7 @@ msgstr "игрок %u: %s"
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:61
 #, c-format
 msgid "player positions: %s"
-msgstr ""
+msgstr "позиции игроков: (%s)"
 
 #: ../../src/map_io/widelands_map_building_data_packet.cc:100
 #: ../../src/logic/playercommand.cc:130
@@ -1310,7 +1310,7 @@ msgstr "игрок %u не существует"
 #: ../../src/map_io/widelands_map_building_data_packet.cc:106
 #, c-format
 msgid "buildings: %s"
-msgstr ""
+msgstr "строения: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:227
 #, c-format
@@ -1437,7 +1437,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:136
 msgid "Client has left the game."
-msgstr ""
+msgstr "Клиент покинул игру"
 
 #: ../../src/network/netclient.cc:219
 msgid "Client crashed and performed an emergency save."
@@ -1445,11 +1445,11 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:477
 msgid "Server sent a player update for a player that does not exist."
-msgstr ""
+msgstr "Сервер выслал обновления для игрока, которого не существует."
 
 #: ../../src/network/netclient.cc:498
 msgid "Server sent an user update for a user that does not exist."
-msgstr ""
+msgstr "Сервер выслал обновления для пользователя, которого не существует."
 
 #: ../../src/network/netclient.cc:574
 #, c-format
@@ -1460,7 +1460,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:581
 msgid "Server uses a different protocol version"
-msgstr ""
+msgstr "Сервер использую другую версию протокола"
 
 #: ../../src/network/netclient.cc:723
 msgid "/me 's file failed md5 checksumming."
@@ -1481,7 +1481,7 @@ msgstr ""
 #: ../../src/network/netclient.cc:853
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
-msgstr ""
+msgstr "Сервер послал неизвестную команду (команда номер %u)"
 
 #: ../../src/network/netclient.cc:887
 msgid "Something went wrong: "
@@ -1489,7 +1489,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:918
 msgid " An automatic savegame will be created."
-msgstr ""
+msgstr " Игра будет автоматически сохраняться."
 
 #: ../../src/network/network_ggz.cc:273
 msgid "Closed the connection to the metaserver."
@@ -1502,6 +1502,10 @@ msgid ""
 "at http://wl.widelands.org/wiki/InternetGaming can\n"
 "be advantageous."
 msgstr ""
+"Ваш сервер не доступен из Интернета.\n"
+"Пожалуйста, попробуйте решить проблему - Чтение\n"
+"http://wl.widelands.org/wiki/InternetGaming может\n"
+"быть полезным."
 
 #: ../../src/network/network_ggz.cc:569
 msgid "Connected to the metaserver of:"
@@ -1544,20 +1548,20 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:328
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "Некорректное использование, должно быть: /announce <текст>"
 
 #: ../../src/network/nethost.cc:340
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "Некорректное использование, должно быть: /warn <имя> <причина>"
 
 #: ../../src/network/nethost.cc:351
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "Некорректное использование, должно быть: /kick <имя> <причина>"
 
 #: ../../src/network/nethost.cc:359
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Вы точно хотите кикнуть %s?<br>"
 
 #: ../../src/network/nethost.cc:362
 #, c-format
@@ -1567,7 +1571,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:365
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "Если да, наберите: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:374
 msgid "kick acknowledgement cancelled: No name given!"
@@ -1575,7 +1579,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:376
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Некорректное использование, должно быть: /ack_kick <имя>"
 
 #: ../../src/network/nethost.cc:382
 msgid "kick acknowledgement cancelled: Wrong name given!"
@@ -1592,10 +1596,11 @@ msgstr ""
 #: ../../src/network/nethost.cc:413
 msgid "Invalid command! Type /help for a list of commands."
 msgstr ""
+"Неправильная команда! Наберите /help для просмотра списка допустимых."
 
 #: ../../src/network/nethost.cc:543
 msgid "Server has left the game."
-msgstr ""
+msgstr "Сервер покинул игру"
 
 #: ../../src/network/nethost.cc:619
 msgid "The game has started just after you tried to connect."
@@ -1607,7 +1612,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:905
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "Вы не можете кикнуть себя!"
 
 #: ../../src/network/nethost.cc:927
 msgid "There is no connected user with that nickname!"
@@ -1627,11 +1632,12 @@ msgstr "Компьютер %u"
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
+"Внимание: %s использует версию: %s, в то время, как Хост использует: %s"
 
 #: ../../src/network/nethost.cc:1577
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "%s присоединился к игре"
 
 #: ../../src/network/nethost.cc:1601
 msgid "Client reports time to host that is running backwards."
@@ -1651,11 +1657,11 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1855
 msgid "The game has already started."
-msgstr ""
+msgstr "Игра началась."
 
 #: ../../src/network/nethost.cc:1873
 msgid "Connection to client lost."
-msgstr ""
+msgstr "Соединения с клиентом потеряно."
 
 #: ../../src/network/nethost.cc:1887
 msgid "Client sent malformed commands: "
@@ -1674,7 +1680,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1930
 msgid "Server uses a different protocol version."
-msgstr ""
+msgstr "Сервер использует другую версию протокола."
 
 #: ../../src/network/nethost.cc:2024
 msgid "Client sent TIME command even though game is not running."
@@ -1700,7 +1706,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:2100
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr ""
+msgstr "Передача файла %s к %s!"
 
 #: ../../src/network/nethost.cc:2121
 msgid "Client requests file part that does not exist."
@@ -1709,12 +1715,12 @@ msgstr ""
 #: ../../src/network/nethost.cc:2124
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr ""
+msgstr "Передача файла %s к %s завершена"
 
 #: ../../src/network/nethost.cc:2132
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
-msgstr ""
+msgstr "Передача части %u/%u файла %s к %s"
 
 #: ../../src/network/nethost.cc:2142
 #, c-format
@@ -1872,7 +1878,7 @@ msgstr "Строения"
 
 #: ../../src/wui/minimap.cc:182
 msgid "Zoom"
-msgstr ""
+msgstr "Масштаб"
 
 #: ../../src/wui/game_objectives_menu.cc:45
 msgid "Objectives Menu"
@@ -1895,7 +1901,7 @@ msgstr "Товары"
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Worker"
-msgstr ""
+msgstr "Рабочий"
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
@@ -1903,7 +1909,7 @@ msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:73
 msgid "Next Level"
-msgstr ""
+msgstr "Следующий уровень"
 
 #: ../../src/wui/productionsitewindow.cc:140
 msgid "(vacant)"
@@ -2067,7 +2073,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:267 ../../src/wui/transport_ui.cc:461
 msgid "Reset"
-msgstr ""
+msgstr "Сбросить"
 
 #: ../../src/wui/transport_ui.cc:268 ../../src/wui/transport_ui.cc:462
 msgid "Reset target quantity to default value"
@@ -2125,7 +2131,7 @@ msgstr "ПАУЗА"
 #: ../../src/wui/interactive_base.cc:292
 #, c-format
 msgid "%s (%s)"
-msgstr ""
+msgstr "%s (%s)"
 
 #: ../../src/wui/interactive_base.cc:297
 msgid "NO GAME CONTROLLER"
@@ -2186,11 +2192,11 @@ msgstr "Действие"
 
 #: ../../src/wui/fieldaction.cc:385
 msgid "Build road"
-msgstr ""
+msgstr "Построить дорогу"
 
 #: ../../src/wui/fieldaction.cc:397
 msgid "Destroy this flag"
-msgstr ""
+msgstr "Уничтожить этот флаг"
 
 #: ../../src/wui/fieldaction.cc:405
 msgid "Configure economy"
@@ -2202,11 +2208,11 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:429
 msgid "Put a flag"
-msgstr ""
+msgstr "Установить флаг"
 
 #: ../../src/wui/fieldaction.cc:436
 msgid "Destroy a road"
-msgstr ""
+msgstr "Разрушить дорогу"
 
 #: ../../src/wui/fieldaction.cc:454
 msgid "Watch field in a separate window"
@@ -2250,7 +2256,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:617
 msgid "Cancel road"
-msgstr ""
+msgstr "Отменить дорогу"
 
 #: ../../src/wui/game_debug_ui.cc:236
 msgid "Debug Field"
@@ -2262,7 +2268,7 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:56
 msgid "Workers (total)"
-msgstr ""
+msgstr "Рабочие (всего)"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Wares in warehouses"
@@ -2305,7 +2311,7 @@ msgstr "Звук FX"
 
 #: ../../src/wui/game_options_sound_menu.cc:43
 msgid "Ingame Music Volume"
-msgstr ""
+msgstr "Громкость музыки в игре"
 
 #: ../../src/wui/game_options_sound_menu.cc:57
 msgid "Sound FX Volume"
@@ -2326,7 +2332,7 @@ msgstr "Низкий приоритет"
 #: ../../src/wui/bulldozeconfirm.cc:58
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr ""
+msgstr "Вы точно хотите разрушить %s?"
 
 #: ../../src/wui/bulldozeconfirm.cc:106
 msgid "Destroy building?"
@@ -2403,13 +2409,13 @@ msgstr "Строить"
 #: ../../src/wui/building_statistics_menu.cc:152
 #: ../../src/wui/building_statistics_menu.cc:172
 msgid "Show previous"
-msgstr ""
+msgstr "Показать предыдущий"
 
 #: ../../src/wui/building_statistics_menu.cc:142
 #: ../../src/wui/building_statistics_menu.cc:162
 #: ../../src/wui/building_statistics_menu.cc:182
 msgid "Show next"
-msgstr ""
+msgstr "Показать следующий"
 
 #: ../../src/wui/game_options_menu.cc:52
 msgid "README"

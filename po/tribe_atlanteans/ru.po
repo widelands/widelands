@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-10 01:21+0000\n"
+"PO-Revision-Date: 2010-10-11 03:37+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-10 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-10-11 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -76,7 +76,7 @@ msgstr "Казарма"
 #: ../../tribes/atlanteans/conf:146
 #: ../../tribes/atlanteans/conf:154
 msgid "Barrier"
-msgstr "Застава"
+msgstr "Форпост"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
@@ -267,7 +267,7 @@ msgstr "Занимается геологоразведкой."
 
 #: ../../tribes/atlanteans/conf:148
 msgid "Donjon"
-msgstr "Донжон"
+msgstr "Дозорная башня"
 
 #: ../../tribes/atlanteans/conf:61
 msgid "Double Trident"
@@ -291,7 +291,7 @@ msgstr "Рубит деревья."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Fire Tongs"
-msgstr "Клещи кузнеца"
+msgstr "Щипцы"
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Fish"
@@ -333,7 +333,7 @@ msgstr "Домик лесника"
 #: ../../tribes/atlanteans/conf:149
 #: ../../tribes/atlanteans/conf:156
 msgid "Fortress"
-msgstr "Укрепление"
+msgstr "Крепость"
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Geologist"
@@ -409,7 +409,7 @@ msgstr "Помогает перовозить грузы на сильно ис�
 
 #: ../../tribes/atlanteans/conf:141
 msgid "High Tower"
-msgstr "Высокая башня"
+msgstr "Большая башня"
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Hook pole"
@@ -517,7 +517,7 @@ msgstr "Недостаточно места"
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
-msgstr "Форпост"
+msgstr "Застава"
 
 #: ../../tribes/atlanteans/conf:80
 msgid "Pick"
@@ -885,7 +885,7 @@ msgstr "Стальной трезубец"
 
 #: ../../tribes/atlanteans/conf:91
 msgid "Stone"
-msgstr "Камень"
+msgstr "Камни"
 
 #: ../../tribes/atlanteans/stone/conf:1
 msgid "Stone is one basic build ware type of the Atlanteans."
@@ -897,7 +897,7 @@ msgstr "Каменотес"
 
 #: ../../tribes/atlanteans/conf:151
 msgid "Stronghold"
-msgstr "Твердыня"
+msgstr "Застава"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Tabard"
@@ -928,9 +928,7 @@ msgstr ""
 msgid ""
 "The fire tongs are the tools of the smelter, working in the smelting works. "
 "They are produced by the toolsmith."
-msgstr ""
-"Кузнечные клещи являются инструментами плавильшика, работающего в плавильне. "
-"Они производятся в кузне."
+msgstr "Щипцы основной инструмент плавильщика. Изготавливаются кузнецом."
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
@@ -1089,7 +1087,7 @@ msgstr "Обучает солдат."
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Trunk"
-msgstr "Бревно"
+msgstr "Брёвна"
 
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""
