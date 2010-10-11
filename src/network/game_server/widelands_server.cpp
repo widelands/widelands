@@ -138,8 +138,12 @@ void WidelandsServer::stateEvent()
 // Player join hook
 void WidelandsServer::joinEvent(Client * const client)
 {
-	wllog(DL_INFO, "joinEvent: %s", client->name.c_str());
+	if (not client) {
+		wllog(DL_INFO, "joinEvent without client ?!?\n"); 
+		return;
+	}
 
+	wllog(DL_INFO, "joinEvent: %s", client->name.c_str());
 	wlproto.send_greeter(client);
 
 	if (not client->spectator and client->number == 0)
@@ -204,19 +208,31 @@ void WidelandsServer::joinEvent(Client * const client)
 
 void WidelandsServer::dataEvent(Client* client)
 {
-    wlproto.process_data(client);
+	if (not client) {
+		wllog(DL_INFO, "dataEvent without client ?!?\n");
+		return;
+	}
+	wlproto.process_data(client);
 }
 
 
 // Player leave event
 void WidelandsServer::leaveEvent(Client * client)
 {
+	if (not client) {
+		wllog(DL_INFO, "leaveEvent without client ?!?\n");
+		return;
+	}
 	wllog(DL_INFO, "leaveEvent \"%s\"", client->name.c_str());
 }
 
 // Spectator join event (ignored)
 void WidelandsServer::spectatorJoinEvent(Client * client)
 {
+	if (not client) {
+		wllog(DL_INFO, "spectatorJoinEvent without client ?!?\n");
+		return;
+	}
 	wllog
 		(DL_INFO, "spectatorJoinEvent \"%s\"", client->name.c_str());
 }
@@ -224,12 +240,20 @@ void WidelandsServer::spectatorJoinEvent(Client * client)
 // Spectator leave event (ignored)
 void WidelandsServer::spectatorLeaveEvent(Client * client)
 {
+	if (not client) {
+		wllog(DL_INFO, "spectatorLeaveEvent without client ?!?\n");
+		return;
+	}
 	wllog(DL_INFO, "spectatorLeaveEvent \"%s\"", client->name.c_str());
 }
 
 // Spectator data event (ignored)
 void WidelandsServer::spectatorDataEvent(Client * client)
 {
+	if (not client) {
+		wllog(DL_INFO, "spectatorDataEvent without client ?!?\n");
+		return;
+	}
 	wllog(DL_INFO, "spectatorDataEvent  \"%s\"", client->name.c_str());
 }
 

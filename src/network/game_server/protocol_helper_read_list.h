@@ -65,7 +65,8 @@ std::list<WLGGZParameter> wlggz_read_parameter_list(int fd)
 				data.set(static_cast<bool>(d_i));
 				break;
 			case ggzdatatype_list:
-				data.set(wlggz_read_parameter_list(fd));
+				ggz_read_int(fd, &d_i);
+				data.set(d_i, wlggz_read_parameter_list(fd));
 				break;
 			case ggzdatatype_raw:
 				ggz_read_int(fd, &d_i);

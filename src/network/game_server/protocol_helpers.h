@@ -65,8 +65,8 @@ class WLGGZParameter
 			{ m_type=ggzdatatype_integer; m_i=d; }
 		void set(std::string d)
 			{ m_type=ggzdatatype_string; m_str=d; }
-		void set(std::list<WLGGZParameter> list)
-			{ m_list = list; }
+		void set(int i, std::list<WLGGZParameter> list)
+			{ m_list = list; m_list_type = i; }
 		//void set(char d);
 
 		bool is_string() {return m_type==ggzdatatype_string; }
@@ -86,6 +86,7 @@ class WLGGZParameter
 		char m_ch;
 		std::string m_str;
 		std::list<WLGGZParameter> m_list;
+		int m_list_type;
 };
 
 
