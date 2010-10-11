@@ -24,6 +24,8 @@
 #include "scripting/scripting.h"
 #include "upcast.h"
 #include "log.h"
+#include <gamecontroller.h>
+#include "player.h"
 
 namespace Widelands {
 
@@ -41,7 +43,17 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 			delete m_cr;
 		}
 	} catch (LuaError & e) {
-		throw wexception("%s", e.what());
+		log("Error in Lua Coroutine\n");
+		log("%s\n", e.what());
+		log("Send message to all players and pause game");
+		for (int i = 1; i<=game.map().get_nrplayers(); i++) {
+			Widelands::Message & msg =
+				*new Widelands::Message
+				("Game Logic", game.get_gametime(),
+				 -1, "Lua Coroutine Failed", e.what());
+			game.player(i).add_message(game, msg, true);
+		}
+		game.gameController()->setDesiredSpeed(0);
 	}
 	log(" done with Cmd_LuaCoroutine::execute\n");
 }
