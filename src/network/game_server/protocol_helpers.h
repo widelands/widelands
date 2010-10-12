@@ -1,4 +1,5 @@
-/*
+
+struct x;/*
  * Copyright (C) 2010 The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,6 +26,16 @@
 #ifndef WIDELANDS_PROTOCOL_HELPERS_H
 #define WIDELANDS_PROTOCOL_HELPERS_H
 
+// Enable this to print a lot of information about what is written to
+// ggzd game server module
+#define DEBGUG_WLGGZMETA_PROTO
+
+#ifdef DEBGUG_WLGGZMETA_PROTO
+#define DBG(x) x
+#else
+#define DBG(x)
+#endif
+
 #include "protocol.h"
 #include <string>
 #include <cstring>
@@ -32,8 +43,6 @@
 #include <list>
 #include <ggz.h>
 #include <iostream>
-
-
 
 class WLGGZParameter
 {
@@ -90,6 +99,7 @@ class WLGGZParameter
 };
 
 
+DBG(std::string level;)
 
 /**
  * A class to write a list of parameters to a metaserver connection.
@@ -104,12 +114,20 @@ class WLGGZ_writer {
 		 *
 		 * @param fd The fd to which the data will be written
 		 */
-		WLGGZ_writer(int fd):
+		WLGGZ_writer(int fd, int list_type):
 			m_sub(0),
 			m_fd(fd),
 			m_in_cmd(false)
 		{
+			type(list_type);
 		}
+		
+		/*
+		WLGGZ_writer(int fd, int list_type):
+			m_sub(0),
+			m_fd(fd),
+			m_in_cmd(false)
+		{}*/
 
 		~WLGGZ_writer()
 		{
@@ -126,7 +144,12 @@ class WLGGZ_writer {
 			// call close_list() until it returns false
 			while(close_list());
 			if (m_in_cmd) {
-				std::cout << "parameter_list_writer: flush write zero\n";
+
+				DBG(level = level.substr(0, level.length() - 2);)
+				DBG(
+					std::cout <<
+						"parameter_list_writer: " << level << "- flush write zero\n";)
+
 				ggz_write_int(m_fd, 0);
 			}
 			m_in_cmd = false;
@@ -136,17 +159,30 @@ class WLGGZ_writer {
 		 * This sets the type of the parameter list to write. This must be called
 		 * before writing parameters.
 		 *
-		 * @param t The type of the parameterlist
+		 * @param t The type of the parameterlist. For example a 
+		 *          @ref WLGGZNetworkOpcodes on top level. Other types
+		 *          (@ref WLGGZGameInfo, @ref WLGGZPlayerType, @ref WLGGZGameType)
+		 *          are only allowed as subtypes.
 		 */
+	private:
 		void type(int t)
 		{
-			if (m_sub)
+			if (m_sub) {
 				m_sub->type(t);
+				return;
+			}
 			if (m_in_cmd)
 				ggz_write_int(m_fd, 0);
 			m_in_cmd = true;
+
+			DBG(std::cout << "parameter_list_writer: " << level <<
+				"- write parameterlist type code\n";)
+			DBG(level += "  ";)
+
 			ggz_write_int(m_fd, t);
 		}
+
+	public:
 
 		/**
 		 * Write a integer to the parameter list.
@@ -158,13 +194,18 @@ class WLGGZ_writer {
 		WLGGZ_writer& operator<< (int d)
 		{
 			if (not m_in_cmd) {
-				std::cout << "parameter_list_writer: warning: not in cmd\n";
+				DBG(std::cout << "parameter_list_writer: " << level <<
+					"- warning: not in cmd\n";)
 				return *this;
 			}
 			if (m_sub) {
 				*m_sub << d;
 				return *this;
 			}
+
+			DBG(std::cout << "parameter_list_writer: " << level << "- write datatype integer\n";)
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(int)\n";)
+
 			ggz_write_int(m_fd, ggzdatatype_integer);
 			ggz_write_int(m_fd, d);
 			return *this;
@@ -180,13 +221,17 @@ class WLGGZ_writer {
 		WLGGZ_writer& operator<< (const std::string &d)
 		{
 			if (not m_in_cmd) {
-				std::cout << "parameter_list_writer: warning: not in cmd\n";
+				DBG(std::cout << "parameter_list_writer: " << level << "- warning: not in cmd\n";)
 				return *this;
 			}
 			if (m_sub) {
 				*m_sub << d;
 				return *this;
 			}
+
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist datatype string\n";)
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(string)\n";)
+
 			ggz_write_int(m_fd, ggzdatatype_string);
 			ggz_write_string(m_fd, d.c_str());
 			return *this;
@@ -202,13 +247,17 @@ class WLGGZ_writer {
 		WLGGZ_writer& operator<< (char d)
 		{
 			if (not m_in_cmd) {
-				std::cout << "parameter_list_writer: warning: not in cmd\n";
+				DBG(std::cout << "parameter_list_writer: " << level << "- warning: not in cmd\n";)
 				return *this;
 			}
 			if (m_sub) {
 				*m_sub << d;
 				return *this;
 			}
+
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist datatype char\n";)
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(int)\n";)
+
 			ggz_write_int(m_fd, ggzdatatype_char);
 			ggz_write_char(m_fd, d);
 			return *this;
@@ -224,36 +273,44 @@ class WLGGZ_writer {
 		WLGGZ_writer& operator<< (bool d)
 		{
 			if (not m_in_cmd) {
-				std::cout << "parameter_list_writer: warning: not in cmd\n";
+				DBG(std::cout << "parameter_list_writer: " << level << "- warning: not in cmd\n";)
 				return *this;
 			}
 			if (m_sub) {
 				*m_sub << d;
 				return *this;
 			}
+
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist datatype boolean\n";)
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(int)\n";)
+
 			ggz_write_int(m_fd, ggzdatatype_boolean);
 			ggz_write_int(m_fd, d);
 			return *this;
 		}
 
-		void open_list(){
+		void open_list(int list_type){
 			if (not m_sub) {
-				std::cout << "parameter_list_writer: open a list\n";
+
+				DBG(std::cout << "parameter_list_writer: " << level << 
+					"- open a list - write datatype list\n";)
+				DBG(level += "    ";)
+
 				ggz_write_int(m_fd, ggzdatatype_list);
-				m_sub = new WLGGZ_writer(m_fd);
+				m_sub = new WLGGZ_writer(m_fd, list_type);
 			}
 			else
-				m_sub->open_list();
+				m_sub->open_list(list_type);
 		}
 
 		bool close_list() {
 			if (m_sub) {
 				if (not m_sub->close_list()) {
-					std::cout << "parameter_list_writer: close list\n";
 					// sublist closed nothing. So we close our list
 					delete m_sub; // will flush on destroy
 					m_sub = 0;
-					ggz_write_int(m_fd, 0); // termination of list
+					DBG(level = level.substr(0, level.length() - 4);)
+					DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist: close list\n";)
 					return true;
 				}
 				// sublist closed something
@@ -265,7 +322,7 @@ class WLGGZ_writer {
 	private:
 		WLGGZ_writer * m_sub;
 		int m_fd;      ///< the filedescriptor to which all data is written
-		bool m_in_cmd; ///< keep track if a parameter lsi is open to write to
+		bool m_in_cmd; ///< keep track if a parameter list is open to write to
 };
 
 

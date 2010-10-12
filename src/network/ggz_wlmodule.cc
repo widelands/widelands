@@ -168,27 +168,21 @@ bool ggz_wlmodule::send_game_info
 		return false;
 	}
 	if (ggz_ggzcore::ref().is_in_table()) {
-		WLGGZ_writer w = WLGGZ_writer(m_data_fd);
-		
-		w.type(op_game_information);
+		WLGGZ_writer w = WLGGZ_writer(m_data_fd, op_game_information);
 
-		w.open_list();
-		w.type(gameinfo_mapname);
+		w.open_list(gameinfo_mapname);
 		w << mapname;
 		w.close_list();
 
-		w.open_list();
-		w.type(gameinfo_mapsize);
+		w.open_list(gameinfo_mapsize);
 		w << map_w << map_h;
 		w.close_list();
 
-		w.open_list();
-		w.type(gameinfo_gametype);
+		w.open_list(gameinfo_gametype);
 		w << win_condition;
 		w.close_list();
 
-		w.open_list();
-		w.type(gameinfo_version);
+		w.open_list(gameinfo_version);
 		w << build_id() << build_type();
 		w.close_list();
 
@@ -197,28 +191,23 @@ bool ggz_wlmodule::send_game_info
 		std::vector<Net_Player_Info>::iterator pit = playerinfo.begin();
 		while (pit != playerinfo.end())
 		{
-			w.open_list();
-			w.type(gameinfo_playerid);
+			w.open_list(gameinfo_playerid);
 			w << pit->playernum;
 			w.close_list();
 			
-			w.open_list();
-			w.type(gameinfo_playername);
+			w.open_list(gameinfo_playername);
 			w << pit->name;
 			w.close_list();
 			
-			w.open_list();
-			w.type(gameinfo_tribe);
+			w.open_list(gameinfo_tribe);
 			w << pit->tribe;
 			w.close_list();
 			
-			w.open_list();
-			w.type(gameinfo_playertype);
+			w.open_list(gameinfo_playertype);
 			w << static_cast<int>(pit->type);
 			w.close_list();
 			
-			w.open_list();
-			w.type(gameinfo_teamnumber);
+			w.open_list(gameinfo_teamnumber);
 			w << pit->team;
 			w.close_list();
 			pit++;
@@ -253,8 +242,7 @@ void send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 		avg = (avg + stat.at(c) / 2.0);
 		if (cur == sample_count or c == (stat.size() -1 ))
 		{
-			wr.open_list();
-			wr.type(c);
+			wr.open_list(c);
 			wr << static_cast<int>(avg);
 			wr << static_cast<int>(min);
 			wr << static_cast<int>(max);
@@ -279,12 +267,9 @@ bool ggz_wlmodule::send_statistics
 		log
 			("GGZWLMODULE ## NetGGZ::send_game_statistics: "
 			 "send statistics to metaserver now!\n");
-		WLGGZ_writer w = WLGGZ_writer(m_data_fd);
+		WLGGZ_writer w = WLGGZ_writer(m_data_fd, op_game_statistics);
 
-		w.type(op_game_statistics);
-
-		w.open_list();
-		w.type(gamestat_gametime);
+		w.open_list(gamestat_gametime);
 		w << gametime;
 		w.close_list();
 
@@ -293,77 +278,62 @@ bool ggz_wlmodule::send_statistics
 			 resultvec.size(), playerinfo.size());
  
 		for (unsigned int i = 0; i < playerinfo.size(); i++) {
-			w.open_list();
-			w.type(gamestat_playernumber);
+			w.open_list(gamestat_playernumber);
 			w << static_cast<int>(i);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_result);
+			w.open_list(gamestat_result);
 			w << playerinfo.at(i).result;
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_points);
+			w.open_list(gamestat_points);
 			w << playerinfo.at(i).points;
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_land);
+			w.open_list(gamestat_land);
 			send_stat(w, resultvec.at(i).land_size);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_buildings);
+			w.open_list(gamestat_buildings);
 			send_stat(w, resultvec.at(i).nr_buildings);
 
-			w.open_list();
-			w.type(gamestat_militarystrength);
+			w.open_list(gamestat_militarystrength);
 			send_stat(w, resultvec.at(i).miltary_strength);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_casualties);
+			w.open_list(gamestat_casualties);
 			send_stat(w, resultvec.at(i).nr_casualties);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_land);
+			w.open_list(gamestat_land);
 			send_stat(w, resultvec[i].nr_civil_blds_defeated);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_civbuildingslost);
+			w.open_list(gamestat_civbuildingslost);
 			send_stat(w, resultvec.at(i).nr_civil_blds_lost);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_kills);
+			w.open_list(gamestat_kills);
 			send_stat(w, resultvec.at(i).nr_kills);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_buildingsdefeat);
+			w.open_list(gamestat_buildingsdefeat);
 			send_stat(w, resultvec[i].nr_msites_defeated);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_milbuildingslost);
+			w.open_list(gamestat_milbuildingslost);
 			send_stat(w, resultvec.at(i).nr_msites_lost);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_wares);
+			w.open_list(gamestat_wares);
 			send_stat(w, resultvec.at(i).nr_wares);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_workers);
+			w.open_list(gamestat_workers);
 			send_stat(w, resultvec.at(i).nr_workers);
 			w.close_list();
 
-			w.open_list();
-			w.type(gamestat_productivity);
+			w.open_list(gamestat_productivity);
 			send_stat(w, resultvec.at(i).productivity);
 			w.close_list();
 		}
