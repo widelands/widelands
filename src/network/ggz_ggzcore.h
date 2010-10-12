@@ -24,6 +24,7 @@
 #include <stdint.h>
 #include <string>
 #include <vector>
+#include <sys/stat.h>
 
 struct Net_Player;
 struct Net_Game_Info;
@@ -41,7 +42,8 @@ struct Net_Game_Info;
 class ggz_ggzcore
 {
 public:
-	static ggz_ggzcore & ref();
+	ggz_ggzcore();
+	~ggz_ggzcore();
 
 	/**
 	 * Initialize the ggzcore object. This prepares for a login into
@@ -148,7 +150,8 @@ public:
 	}
 
 private:
-	ggz_ggzcore();
+	ggz_ggzcore(const ggz_ggzcore &) {}
+	ggz_ggzcore & operator=(const ggz_ggzcore &) {}
 
 	static GGZHookReturn
 		callback_server(uint32_t id, void const * cbdata, void const * user);
@@ -189,6 +192,9 @@ private:
 	bool userupdate;
 	/// \ref tablelist was updated \ref updateForTables
 	bool tableupdate;
+
+	GGZServer * ggzserver;
+	static ggz_ggzcore * ggzcoreobj;
 };
 
 #endif // GGZ_GGZCORE_H

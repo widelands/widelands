@@ -40,14 +40,26 @@ static NetGGZ    * ggzobj    = 0;
 
 /// Constructor of NetGGZ.
 /// It is private to avoid the creation of more than one ggz object.
-NetGGZ::NetGGZ() :
+NetGGZ::NetGGZ():
 	tableseats    (1),
 	motd          (),
 	mapname       (),
 	map_w         (-1),
 	map_h         (-1),
 	win_condition (gametype_endless)
-{}
+{
+m_ggzcore  = new ggz_ggzcore;
+m_ggzmod   = new ggz_ggzmod;
+m_wlmodule = new ggz_wlmodule;
+}
+
+NetGGZ::~NetGGZ()
+{
+	deinit();
+	delete m_wlmodule;
+	delete m_ggzmod;
+	delete m_ggzcore;
+}
 
 
 /// \returns the _one_ ggzobject. There should be only this one object and it
@@ -60,15 +72,15 @@ NetGGZ & NetGGZ::ref() {
 
 void NetGGZ::deinit()
 {
-	ggz_ggzmod::ref().disconnect();
-	ggz_ggzcore::ref().deinit();
+	ggzmod().disconnect();
+	core().deinit();
 }
 
 
 /// \returns the ip of the server, if connected
 char const * NetGGZ::ip()
 {
-	return ggz_wlmodule::ref().get_server_ip();;
+	return wlmodule().get_server_ip();;
 }
 
 #include "ggzmod.h"
@@ -103,15 +115,15 @@ bool NetGGZ::initcore
 	//ggz_debug_set_func();
 	//ggz_debug_enable();
 	
-	ggz_ggzcore::ref().init(metaserver, nick, pwd, registered);
+	core().init(metaserver, nick, pwd, registered);
 	while
-		(ggz_ggzcore::ref().is_connecting() or (ggz_ggzcore::ref().logged_in()
-		 and not ggz_ggzcore::ref().is_in_room()))
+		(core().is_connecting() or (core().logged_in()
+		 and not core().is_in_room()))
 	{
-		ggz_ggzcore::ref().process();
+		core().process();
 	}
 
-	return ggz_ggzcore::ref().logged_in();
+	return core().logged_in();
 }
 
 int NetGGZ::process(int timeout)
@@ -122,9 +134,9 @@ int NetGGZ::process(int timeout)
 
 	// Do at least on processing step. This may set new filedescriptors.
 	if (not ggz_mode())
-		ggz_ggzcore::ref().process();
-	ggz_ggzmod::ref().process();
-	ggz_wlmodule::ref().process();
+		core().process();
+	ggzmod().process();
+	wlmodule().process();
 
 	int i = 100;
 	if (timeout > 0) {
@@ -133,28 +145,28 @@ int NetGGZ::process(int timeout)
 
 		FD_ZERO(&read_fd_set);
 
-		ggz_ggzcore::ref().set_fds(read_fd_set);
-		ggz_ggzmod::ref().set_fds(read_fd_set);
+		core().set_fds(read_fd_set);
+		ggzmod().set_fds(read_fd_set);
 
 		result = select(FD_SETSIZE, &read_fd_set, NULL, NULL, &tv);
 	}
 
 	// now process all pending data
 	while
-		((ggz_ggzcore::ref().data_pending()
-		  or ggz_ggzmod::ref().data_pending()
-		  or ggz_wlmodule::ref().data_pending())
+		((core().data_pending()
+		  or ggzmod().data_pending()
+		  or wlmodule().data_pending())
 		 and i)
 	{
 		if (not ggz_mode())
-			ggz_ggzcore::ref().process();
-		ggz_ggzmod::ref().process();
-		ggz_wlmodule::ref().process();
+			core().process();
+		ggzmod().process();
+		wlmodule().process();
 		//log
 		//	("GGZ ## process loop: %i, %i, %i\n",
-		//	 ggz_ggzcore::ref().data_pending(),
-		//	 ggz_ggzmod::ref().data_pending(),
-		//	 ggz_wlmodule::ref().data_pending());
+		//	 core().data_pending(),
+		//	 ggzmod().data_pending(),
+		//	 wlmodule().data_pending());
 		i--;
 	} 
 
@@ -162,12 +174,12 @@ int NetGGZ::process(int timeout)
 		log("GGZ ## ERROR process loop exited by limit\n");
 
 	if (
-		 (ggz_ggzcore::ref().get_tablestate() == ggz_ggzcore::ggzcoretablestate_launched
-		  or ggz_ggzcore::ref().get_tablestate() == ggz_ggzcore::ggzcoretablestate_joined)
-		 and not ggz_ggzmod::ref().connected())
+		 (core().get_tablestate() == ggz_ggzcore::ggzcoretablestate_launched
+		  or core().get_tablestate() == ggz_ggzcore::ggzcoretablestate_joined)
+		 and not ggzmod().connected())
 	{
-		ggz_ggzmod::ref().init();
-		ggz_ggzmod::ref().connect();
+		ggzmod().init();
+		ggzmod().connect();
 	}
 
 	return tv.tv_sec * 1000 + tv.tv_usec / 1000;
@@ -187,7 +199,7 @@ uint32_t NetGGZ::max_players()
 	//  FIXME it is not a bug in 0.14.1 but a general problem in ggz. Using
 	//  FIXME ggzcore and ggzmod from the same thread causes a deadlock between
 	//  FIXME the ggz libs. -- timowi
-	int maxplayers = ggz_ggzcore::ref().get_max_players();
+	int maxplayers = core().get_max_players();
 	return maxplayers;
 	//return (maxplayers > 7)?7:maxplayers;
 }
@@ -196,8 +208,8 @@ uint32_t NetGGZ::max_players()
 /// Tells the metaserver that the game started
 void NetGGZ::send_game_playing()
 {
-	if (ggz_mode() or ggz_ggzcore::ref().is_in_table()) {
-		int fd = ggz_ggzmod::ref().datafd();
+	if (ggz_mode() or core().is_in_table()) {
+		int fd = ggzmod().datafd();
 		if (ggz_write_int(fd, op_state_playing) < 0)
 			log("GGZMOD ERROR: Game state could not be send!\n");
 	} else
@@ -208,8 +220,8 @@ void NetGGZ::send_game_playing()
 /// Tells the metaserver that the game is done
 void NetGGZ::send_game_done()
 {
-	if (ggz_mode() or ggz_ggzcore::ref().is_in_table()) {
-		int fd = ggz_ggzmod::ref().datafd();
+	if (ggz_mode() or core().is_in_table()) {
+		int fd = ggzmod().datafd();
 		if (ggz_write_int(fd, op_state_done) < 0)
 			log("GGZMOD ERROR: Game state could not be send!\n");
 	} else
@@ -219,7 +231,7 @@ void NetGGZ::send_game_done()
 
 void NetGGZ::send_game_info()
 {
-	ggz_wlmodule::ref().send_game_info
+	wlmodule().send_game_info
 		(mapname, map_w, map_h, win_condition, playerinfo);
 }
 
@@ -227,7 +239,7 @@ void NetGGZ::send_game_statistics
 	(int32_t gametime,
 	 const Widelands::Game::General_Stats_vector & resultvec)
 {
-	ggz_wlmodule::ref().send_statistics(gametime, resultvec, playerinfo);
+	wlmodule().send_statistics(gametime, resultvec, playerinfo);
 }
 
 void NetGGZ::report_result
@@ -358,7 +370,7 @@ void NetGGZ::send(std::string const & msg)
 		throw wexception
 			("NetGGZ::send tried to send chat message but we are in ggz mode");
 
-	if (not ggz_ggzcore::ref().logged_in()){
+	if (not core().logged_in()){
 		log("GGZ ## send chat message: not logged in!\n");
 		return;
 	}
@@ -369,11 +381,11 @@ void NetGGZ::send(std::string const & msg)
 			return;
 		std::string const to = msg.substr(1, space - 1);
 		std::string const pm = msg.substr(space + 1);
-		ggz_ggzcore::ref().send_message(to.c_str(), pm.c_str());
+		core().send_message(to.c_str(), pm.c_str());
 		// Add the pm to own message list
 		formatedGGZChat(pm, username, false, to);
 	} else
-		ggz_ggzcore::ref().send_message(NULL, msg.c_str());
+		core().send_message(NULL, msg.c_str());
 }
 
 
@@ -414,40 +426,40 @@ void NetGGZ::launch()
 	if (ggz_mode())
 		throw wexception
 			("NetGGZ::launch tried to launch a game but we are in ggz mode");
-	ggz_ggzcore::ref().launch(tableseats, servername);
+	core().launch(tableseats, servername);
 }
 
 void NetGGZ::join(char const * tablename)
 {
 	if (ggz_mode())
-		ggz_ggzmod::ref().connect();
+		ggzmod().connect();
 	else
-		ggz_ggzcore::ref().join(tablename);
+		core().join(tablename);
 }
 
 bool NetGGZ::updateForTables() {
-	return ggz_ggzcore::ref().updateForTables();
+	return core().updateForTables();
 }
 bool NetGGZ::updateForUsers() {
-	return ggz_ggzcore::ref().updateForUsers();
+	return core().updateForUsers();
 }
 
 std::vector<Net_Game_Info> const & NetGGZ::tables() {
-	return ggz_ggzcore::ref().tablelist;
+	return core().tablelist;
 }
 
 std::vector<Net_Player>    const & NetGGZ::users() {
-	return ggz_ggzcore::ref().userlist;
+	return core().userlist;
 }
 
 bool NetGGZ::is_connecting()
 {
-	return ggz_ggzcore::ref().is_connecting();
+	return core().is_connecting();
 }
 
 bool NetGGZ::logged_in()
 {
-	return ggz_ggzcore::ref().logged_in();
+	return core().logged_in();
 }
 
 void NetGGZ::ggzcore_statechange()
@@ -457,15 +469,15 @@ void NetGGZ::ggzcore_statechange()
 
 void NetGGZ::ggzmod_statechange()
 {
-	ggz_wlmodule::ref().set_datafd(ggz_ggzmod::ref().datafd());
+	wlmodule().set_datafd(ggzmod().datafd());
 }
 
 bool NetGGZ::set_spectator(bool spec)
 {
 	if(spec)
-		ggz_ggzmod::ref().set_spectator();
+		ggzmod().set_spectator();
 	else
-		ggz_ggzmod::ref().set_player();
+		ggzmod().set_player();
 }
 
 bool NetGGZ::ggz_mode()
@@ -482,7 +494,7 @@ bool NetGGZ::ggz_mode()
 
 std::string NetGGZ::playername()
 {
-	return ggz_ggzmod::ref().playername();
+	return ggzmod().playername();
 }
 
 

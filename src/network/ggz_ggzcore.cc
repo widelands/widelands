@@ -34,11 +34,9 @@
 #include <io.h>
 #endif
 
-static GGZServer * ggzserver = 0;
+ggz_ggzcore * ggz_ggzcore::ggzcoreobj = NULL;
 
-ggz_ggzcore * ggzcoreobj = 0;
-
-ggz_ggzcore::ggz_ggzcore() :
+ggz_ggzcore::ggz_ggzcore():
 	ggzcore_login (false),
 	ggzcore_ready (false),
 	m_logged_in   (false),
@@ -51,15 +49,22 @@ ggz_ggzcore::ggz_ggzcore() :
 	m_tablestate   (ggzcoretablestate_notinroom),
 	m_state       (ggzcorestate_disconnected),
 	m_servername  ("WLDefault"),
-	m_tableseats  (1)
-{}
-
-
-ggz_ggzcore & ggz_ggzcore::ref() {
-	if (!ggzcoreobj)
-		ggzcoreobj = new ggz_ggzcore();
-	return *ggzcoreobj;
+	m_tableseats  (1),
+	ggzserver     (0)
+{
+	if (ggzcoreobj)
+		throw wexception
+			("Created a new ggz_ggzcore instance but ggzcoreobj already exists");
+	log ("ggz_ggzcore::ggz_ggzcore(): initialize ggzcoreobj to %X\n", this);
+	ggzcoreobj = this;
 }
+
+ggz_ggzcore::~ggz_ggzcore()
+{
+	log("ggz_ggzcore::~ggz_ggzcore()");
+	ggzcoreobj = NULL;
+}
+
 
 bool ggz_ggzcore::init
 	(char const * const metaserver, char const * const nick,
@@ -697,13 +702,15 @@ void ggz_ggzcore::deinit()
 
 	tablelist.clear();
 	userlist.clear();
-	if (ggzcore_server_is_at_table(ggzserver))
-		ggzcore_room_leave_table(m_room, true);
-	ggzcore_server_logout(ggzserver);
-	ggzcore_server_disconnect(ggzserver);
-	ggzcore_server_free(ggzserver);
-	ggzserver = 0;
-	ggzcore_destroy();
+	if (ggzserver) {
+		if (ggzcore_server_is_at_table(ggzserver))
+			ggzcore_room_leave_table(m_room, true);
+		ggzcore_server_logout(ggzserver);
+		ggzcore_server_disconnect(ggzserver);
+		ggzcore_server_free(ggzserver);
+		ggzcore_destroy();
+	}
+	ggzserver    = 0;
 	m_logged_in  = false;
 	ggzcore_login= false;
 	ggzcore_ready= false;

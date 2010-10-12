@@ -36,24 +36,29 @@
 #include <warning.h>
 #include "network_ggz.h"
 
-static GGZMod    * mod       = 0;
-ggz_ggzmod       * ggzmodobj = 0;
-
-ggz_ggzmod & ggz_ggzmod::ref() {
-	if (!ggzmodobj)
-		ggzmodobj = new ggz_ggzmod();
-	return *ggzmodobj;
-}
+ggz_ggzmod * ggzmodobj = NULL;
 
 ggz_ggzmod::ggz_ggzmod():
-	m_connected(false)
+	m_data_fd(-1),
+	m_server_fd(-1),
+	m_connected(false),
+	m_mod(NULL)
 {
-
+	if (ggzmodobj)
+		throw wexception("created instance of ggz_ggzmod but ggzmodobj exists");
+	ggzmodobj = this;
 }
+
+ggz_ggzmod::~ggz_ggzmod()
+{
+	disconnect();
+	ggzmodobj = 0;
+}
+
 
 void ggz_ggzmod::init()
 {
-#warning TODO
+	log("GGZMOD ## ggz_ggzmod::init(): nothing to do here\n");
 }
 
 
@@ -67,26 +72,26 @@ bool ggz_ggzmod::connect()
 		return false;
 	
 	log("GGZMOD ## connect to GGZCORE\n");
-	if (mod) {
-		ggzmod_free(mod);
+	if (m_mod) {
+		ggzmod_free(m_mod);
 	}
-	mod = ggzmod_new(GGZMOD_GAME);
+	m_mod = ggzmod_new(GGZMOD_GAME);
 
 	// Set handler for ggzmod events:
-	ggzmod_set_handler(mod, GGZMOD_EVENT_SERVER, &ggz_ggzmod::ggzmod_server);
-	ggzmod_set_handler(mod, GGZMOD_EVENT_ERROR, &ggz_ggzmod::ggzmod_server);
-	ggzmod_set_handler(mod, GGZMOD_EVENT_STATE, &ggz_ggzmod::ggzmod_server);
-	ggzmod_set_handler(mod, GGZMOD_EVENT_PLAYER, &ggz_ggzmod::ggzmod_server);
-	ggzmod_set_handler(mod, GGZMOD_EVENT_SEAT, &ggz_ggzmod::ggzmod_server);
+	ggzmod_set_handler(m_mod, GGZMOD_EVENT_SERVER, &ggz_ggzmod::eventServer);
+	ggzmod_set_handler(m_mod, GGZMOD_EVENT_ERROR, &ggz_ggzmod::eventServer);
+	ggzmod_set_handler(m_mod, GGZMOD_EVENT_STATE, &ggz_ggzmod::eventServer);
+	ggzmod_set_handler(m_mod, GGZMOD_EVENT_PLAYER, &ggz_ggzmod::eventServer);
+	ggzmod_set_handler(m_mod, GGZMOD_EVENT_SEAT, &ggz_ggzmod::eventServer);
 	ggzmod_set_handler
-		(mod, GGZMOD_EVENT_SPECTATOR_SEAT, &ggz_ggzmod::ggzmod_server);
-	ggzmod_set_handler(mod, GGZMOD_EVENT_STATS, &ggz_ggzmod::ggzmod_server);
-	ggzmod_set_handler(mod, GGZMOD_EVENT_INFO, &ggz_ggzmod::ggzmod_server);
-	ggzmod_set_handler(mod, GGZMOD_EVENT_CHAT, &ggz_ggzmod::ggzmod_server);
+		(m_mod, GGZMOD_EVENT_SPECTATOR_SEAT, &ggz_ggzmod::eventServer);
+	ggzmod_set_handler(m_mod, GGZMOD_EVENT_STATS, &ggz_ggzmod::eventServer);
+	ggzmod_set_handler(m_mod, GGZMOD_EVENT_INFO, &ggz_ggzmod::eventServer);
+	ggzmod_set_handler(m_mod, GGZMOD_EVENT_CHAT, &ggz_ggzmod::eventServer);
 	// not handled / not used events of the GGZMOD Server:
 	// * GGZMOD_EVENT_RANKINGS
 
-	if (ggzmod_connect(mod)) {
+	if (ggzmod_connect(m_mod)) {
 		log("GGZMOD ## connection failed\n");
 		return false;
 	}
@@ -94,12 +99,18 @@ bool ggz_ggzmod::connect()
 	m_connected = true;
 
 	// This is the fd to the ggzcore of this process
-	m_server_fd = ggzmod_get_fd(mod);
+	m_server_fd = ggzmod_get_fd(m_mod);
 
 	log("GGZMOD ## server fd %i\n", m_server_fd);
 
 	return true;
 }
+
+void ggz_ggzmod::eventServer(GGZMod* cbmod, GGZModEvent e, const void* cbdata)
+{
+	ggzmodobj->ggzmod_server(cbmod, e, cbdata);
+}
+
 
 /// handles the events of the ggzmod server
 void ggz_ggzmod::ggzmod_server
@@ -114,7 +125,7 @@ void ggz_ggzmod::ggzmod_server
 			log("GGZMOD ## got data fd: %i\n", fd);
 			ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
 			int is_spectator, seatnum;
-			const char * name = ggzmod_get_player(mod, &is_spectator, &seatnum);
+			const char * name = ggzmod_get_player(m_mod, &is_spectator, &seatnum);
 			log
 				("GGZMOD ## I am \"%s\" at seat %i and I am %s spectator\n",
 				 name, seatnum, is_spectator?"a":"not a");
@@ -176,7 +187,7 @@ void ggz_ggzmod::ggzmod_server
 			const GGZModState oldstate = *static_cast<const GGZModState*>(cbdata);
 			log
 				("GGZMOD ## state change from %i to %i\n",
-				 oldstate, ggzmod_get_state(mod));
+				 oldstate, ggzmod_get_state(m_mod));
 			ggzmodobj->statechange();
 			break;
 		}
@@ -201,12 +212,14 @@ void ggz_ggzmod::disconnect()
 {
 	if (m_data_fd > 0)
 		close(m_data_fd);
-
 	m_data_fd = -1;
-	if (mod) {
-		ggzmod_disconnect(mod);
-		ggzmod_free(mod);
+
+	if (m_mod) {
+		ggzmod_disconnect(m_mod);
+		ggzmod_free(m_mod);
 	}
+	m_mod = 0;
+	m_server_fd = 0;
 	m_connected = false;
 }
 
@@ -214,7 +227,7 @@ void ggz_ggzmod::process()
 {
 	if (not m_connected)
 		return;
-	ggzmod_dispatch(mod);
+	ggzmod_dispatch(m_mod);
 }
 
 bool ggz_ggzmod::data_pending()
@@ -241,7 +254,7 @@ bool ggz_ggzmod::data_pending()
 
 bool ggz_ggzmod::set_player()
 {
-	int state = ggzmod_get_state(mod);
+	int state = ggzmod_get_state(m_mod);
 	
 	if (state != GGZMOD_STATE_WAITING and state !=GGZMOD_STATE_PLAYING)
 	{
@@ -252,7 +265,7 @@ bool ggz_ggzmod::set_player()
 	}
 
 	int is_spectator, seatnum;
-	const char * name = ggzmod_get_player(mod, &is_spectator, &seatnum);
+	const char * name = ggzmod_get_player(m_mod, &is_spectator, &seatnum);
 	log
 		("GGZMOD ## set_spectator():"
 		 "I am \"%s\" at seat %i and I am %s spectator\n",
@@ -260,11 +273,11 @@ bool ggz_ggzmod::set_player()
 
 	if (not is_spectator)
 	{
-		for (int i=0; i < ggzmod_get_num_seats(mod); i++)
+		for (int i=0; i < ggzmod_get_num_seats(m_mod); i++)
 		{
-			GGZSeat seat = ggzmod_get_seat(mod, i);
+			GGZSeat seat = ggzmod_get_seat(m_mod, i);
 			if (seat.type == GGZ_SEAT_OPEN) {
-				ggzmod_request_sit(mod, seat.num);
+				ggzmod_request_sit(m_mod, seat.num);
 				break;
 			}
 		}
@@ -273,7 +286,7 @@ bool ggz_ggzmod::set_player()
 
 bool ggz_ggzmod::set_spectator()
 {
-	int state = ggzmod_get_state(mod);
+	int state = ggzmod_get_state(m_mod);
 	
 	if (state != GGZMOD_STATE_WAITING and state !=GGZMOD_STATE_PLAYING)
 	{
@@ -284,7 +297,7 @@ bool ggz_ggzmod::set_spectator()
 	}
 	
 	int is_spectator, seatnum;
-	const char * name = ggzmod_get_player(mod, &is_spectator, &seatnum);
+	const char * name = ggzmod_get_player(m_mod, &is_spectator, &seatnum);
 	log
 		("GGZMOD ## set_spectator():"
 		 "I am \"%s\" at seat %i and I am %s spectator\n",
@@ -292,7 +305,7 @@ bool ggz_ggzmod::set_spectator()
 		 
 	if (not is_spectator)
 	{
-		ggzmod_request_stand(mod);
+		ggzmod_request_stand(m_mod);
 	}
 }
 
@@ -306,7 +319,7 @@ std::string ggz_ggzmod::playername()
 	std::string name;
 	const char * plrname;
 	int spectator, seat_num;
-	plrname = ggzmod_get_player(mod, &spectator, &seat_num);
+	plrname = ggzmod_get_player(m_mod, &spectator, &seat_num);
 	if (plrname) {
 		name = plrname;
 		ggz_free(plrname);

@@ -33,7 +33,9 @@
 class ggz_ggzmod
 {
 public:
-	static ggz_ggzmod & ref();
+	ggz_ggzmod();
+	~ggz_ggzmod();
+
 	void init();
 	bool connect();
 	bool connected() { return m_connected; }
@@ -58,15 +60,17 @@ public:
 	}
 
 private:
-	ggz_ggzmod();
+	ggz_ggzmod(const ggz_ggzmod &) {}
 	void statechange();
-	static void ggzmod_server(GGZMod *, GGZModEvent, void const * cbdata);
+	static void eventServer(GGZMod *, GGZModEvent, void const * cbdata);
+	void ggzmod_server(GGZMod *, GGZModEvent, void const * cbdata);
 	/// filedescriptor to communicate with the widelands_server module of ggzd
 	int32_t m_data_fd;
 	/// fd to communicate with the ggzcore object of this process. With that we
 	/// talk to ourself. No a good idea.
 	int32_t m_server_fd;
 	bool m_connected;
+	GGZMod * m_mod;
 };
 
 #endif // GGZ_GGZMOD_H

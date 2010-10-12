@@ -35,7 +35,7 @@
 class ggz_wlmodule
 {
 public:
-	static ggz_wlmodule & ref();
+	ggz_wlmodule();
 	void process();
 	bool data_pending() {return false;}
 
@@ -53,7 +53,9 @@ public:
 		 std::vector<Net_Player_Info> playerinfo);
 
 private:
-	ggz_wlmodule();
+	ggz_wlmodule(const ggz_wlmodule &) {}
+	ggz_wlmodule & operator= (const ggz_wlmodule &) {}
+
 	int32_t m_data_fd;
 	char * server_ip_addr;
 	uint32_t m_server_ver;

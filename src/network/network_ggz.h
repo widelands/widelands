@@ -46,9 +46,6 @@
 #include "game_server/protocol.h"
 
 
-class ggz_ggzcore;
-class ggz_ggzmod;
-
 /// A simply network player struct
 struct Net_Player {
 	std::string   table;
@@ -106,6 +103,10 @@ struct MOTD {
 	}
 };
 
+class ggz_ggzcore;
+class ggz_ggzmod;
+class ggz_wlmodule;
+
 /**
  * The GGZ implementation
  *
@@ -117,6 +118,7 @@ struct NetGGZ : public ChatProvider {
 	friend class ggz_ggzcore;
 	friend class ggz_ggzmod;
 	static NetGGZ & ref();
+	~NetGGZ();
 
 	/// process ggz data (ggzcore and ggzmod). This must be called on a regular
 	/// basis. If timeout is 0 this method return imediately after all pending
@@ -242,8 +244,28 @@ struct NetGGZ : public ChatProvider {
 	
 	std::string playername();
 
+	ggz_ggzcore & core() {
+		if (m_ggzcore)
+			return *m_ggzcore;
+		throw wexception ("Accessed ggz core object but it does not exist");
+	}
+	ggz_ggzmod & ggzmod() {
+		if (m_ggzmod)
+			return *m_ggzmod;
+		throw wexception ("Accessed ggzmod object but it does not exist");
+	}
+	ggz_wlmodule & wlmodule() {
+		if (m_wlmodule)
+			return *m_wlmodule;
+		throw wexception ("Accessed ggz wlmodule object but it does not exist");
+	}
+	
 private:
 	NetGGZ();
+	NetGGZ(const NetGGZ &)
+		{ throw wexception("Tried to copy NetGGZ class. This is not allowd"); }
+	NetGGZ & operator= (const NetGGZ & old)
+		{ throw wexception("Tried to copy NetGGZ class. This is not allowd"); }
 
 	/// Transmit game statistics to metaserver. This is called from \ref
 	/// report_result() when all player have a result.
@@ -275,6 +297,10 @@ private:
 
 	/// The chat messages
 	std::vector<ChatMessage> messages;
+
+	ggz_ggzcore * m_ggzcore;
+	ggz_ggzmod * m_ggzmod;
+	ggz_wlmodule * m_wlmodule;
 };
 
 #endif //USE_GGZ

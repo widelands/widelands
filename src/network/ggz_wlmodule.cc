@@ -26,14 +26,6 @@
 #include "ggz_ggzcore.h"
 #include "warning.h"
 
-ggz_wlmodule       * ggzwlmodule = 0;
-
-ggz_wlmodule & ggz_wlmodule::ref() {
-	if (!ggzwlmodule)
-		ggzwlmodule = new ggz_wlmodule();
-	return *ggzwlmodule;
-}
-
 ggz_wlmodule::ggz_wlmodule():
 	m_data_fd     (0),
 	server_ip_addr(0),
@@ -71,7 +63,6 @@ void ggz_wlmodule::process()
 		int32_t const ret = ggz_read_int(m_data_fd, &op);
 		log("GGZWLMODULE/process ## received opcode: %i (%i)\n", op, ret);
 		if (ret < 0) {
-			ggz_ggzmod::ref().disconnect();
 			#warning TODO Handle read error from ggzmod datafd
 			//				use_ggz = false;
 			return;
@@ -162,12 +153,13 @@ bool ggz_wlmodule::send_game_info
 	 int win_condition, std::vector<Net_Player_Info> playerinfo)
 {
 	log("GGZWLMODULE NetGGZ::send_game_info()\n");
-	if (ggz_wlmodule::ref().get_ext_proto_ver() == 0)
+	if (get_ext_proto_ver() == 0)
 	{
 		log("GGZWLMODULE not supported by server\n");
 		return false;
 	}
-	if (ggz_ggzcore::ref().is_in_table()) {
+	// 
+	if (NetGGZ::ref().core().is_in_table()) {
 		WLGGZ_writer w = WLGGZ_writer(m_data_fd, op_game_information);
 
 		w.open_list(gameinfo_mapname);
@@ -263,7 +255,7 @@ bool ggz_wlmodule::send_statistics
 		return false;
 	}
 
-	if (ggz_ggzcore::ref().is_in_table()) {
+	if (NetGGZ::ref().core().is_in_table()) {
 		log
 			("GGZWLMODULE ## NetGGZ::send_game_statistics: "
 			 "send statistics to metaserver now!\n");
