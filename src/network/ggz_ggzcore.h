@@ -141,11 +141,11 @@ public:
 	}
 
 	inline void set_fds (fd_set & set) {
-		if (m_server_fd)
+		if (m_server_fd >= 0 and m_server_fd < FD_SETSIZE)
 			FD_SET(m_server_fd, &set);
-		if (m_channelfd)
+		if (m_channelfd >= 0 and m_channelfd < FD_SETSIZE)
 			FD_SET(m_channelfd, &set);
-		if (m_gamefd)
+		if (m_gamefd >= 0 and m_gamefd < FD_SETSIZE)
 			FD_SET(m_gamefd, &set);
 	}
 

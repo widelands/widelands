@@ -53,9 +53,9 @@ public:
 	std::string playername();
 
 	inline void set_fds (fd_set & set) {
-		if (m_server_fd)
+		if (m_server_fd >= 0 and m_server_fd < FD_SETSIZE)
 			FD_SET(m_server_fd, &set);
-		if (m_data_fd)
+		if (m_data_fd >= 0 and m_data_fd < FD_SETSIZE)
 			FD_SET(m_data_fd, &set);
 	}
 
