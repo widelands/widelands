@@ -267,16 +267,17 @@ bool ggz_ggzmod::set_player()
 	int is_spectator, seatnum;
 	const char * name = ggzmod_get_player(m_mod, &is_spectator, &seatnum);
 	log
-		("GGZMOD ## set_spectator():"
+		("GGZMOD ## set_player():"
 		 "I am \"%s\" at seat %i and I am %s spectator\n",
  		 name, seatnum, is_spectator?"a":"not a");
 
-	if (not is_spectator)
+	if (is_spectator)
 	{
 		for (int i=0; i < ggzmod_get_num_seats(m_mod); i++)
 		{
 			GGZSeat seat = ggzmod_get_seat(m_mod, i);
 			if (seat.type == GGZ_SEAT_OPEN) {
+				log("GGZMOD ## found open seat. request sit");
 				ggzmod_request_sit(m_mod, seat.num);
 				break;
 			}
