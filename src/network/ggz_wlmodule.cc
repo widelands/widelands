@@ -61,12 +61,15 @@ void ggz_wlmodule::process()
 
 	{
 		int32_t const ret = ggz_read_int(m_data_fd, &op);
-		log("GGZWLMODULE/process ## received opcode: %i (%i)\n", op, ret);
 		if (ret < 0) {
 			#warning TODO Handle read error from ggzmod datafd
-			//				use_ggz = false;
+			log("GGZWLMODULE/process ## read error. Exit ggz\n");
+			NetGGZ::ref().deinit();
+			//	use_ggz = false;
 			return;
 		}
+		log("GGZWLMODULE/process ## received opcode: %i (%i)\n", op, ret);
+		
 	}
 
 	switch (op) {
