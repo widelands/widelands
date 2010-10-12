@@ -104,11 +104,19 @@ public:
 	}
 
 	bool data_pending();
+
+	enum ggzcore_error {
+		ggzcoreerror_no_error,
+		ggzcoreerror_login_failed,
+		ggzcoreerror_unreachable,
+		ggzcoreerror_unknown
+	};
 	
 	enum ggzcore_state {
 		ggzcorestate_disconnected,
 		ggzcorestate_connecting,
-		ggzcorestate_connected
+		ggzcorestate_connected,
+		ggzcorestate_error_disconnecting
 	};
 	enum ggzcore_tablestate {
 		ggzcoretablestate_notinroom,
@@ -128,6 +136,15 @@ public:
 
 	bool is_connecting() {
 		return ggzcore_login and not ggzcore_ready and not m_logged_in;
+	}
+
+	inline void set_fds (fd_set & set) {
+		if (m_server_fd)
+			FD_SET(m_server_fd, &set);
+		if (m_channelfd)
+			FD_SET(m_channelfd, &set);
+		if (m_gamefd)
+			FD_SET(m_gamefd, &set);
 	}
 
 private:
@@ -166,6 +183,7 @@ private:
 
 	enum ggzcore_tablestate m_tablestate;
 	enum ggzcore_state m_state;
+	enum ggzcore_error m_error;
 
 	/// \ref userlist was updated \ref updateForUsers
 	bool userupdate;

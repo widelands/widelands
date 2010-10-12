@@ -50,6 +50,13 @@ public:
 	 */
 	std::string playername();
 
+	inline void set_fds (fd_set & set) {
+		if (m_server_fd)
+			FD_SET(m_server_fd, &set);
+		if (m_data_fd)
+			FD_SET(m_data_fd, &set);
+	}
+
 private:
 	ggz_ggzmod();
 	void statechange();

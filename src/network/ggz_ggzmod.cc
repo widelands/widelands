@@ -134,12 +134,12 @@ void ggz_ggzmod::ggzmod_server
 			log
 				("GGZMOD ## ERROR: Received EVENT_CHAT from %s: \"%s\"\n",
 				 chat->player, chat->message);
-				 break;
+			 break;
 		}
 		case GGZMOD_EVENT_INFO:
 		{
 			const GGZPlayerInfo * pi = static_cast<const GGZPlayerInfo*>(cbdata);
-			log("GGZMOD ## received EVENT_INFO\n");
+			//log("GGZMOD ## received EVENT_INFO\n");
 			break;
 		}
 		case GGZMOD_EVENT_PLAYER:
@@ -182,7 +182,7 @@ void ggz_ggzmod::ggzmod_server
 		}
 		case GGZMOD_EVENT_STATS:
 		{
-			log("GGZMOD ## A players' stats have been updated.");
+			//log("GGZMOD ## A players' stats have been updated.\n");
 			break;
 		}
 		default:

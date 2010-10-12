@@ -369,7 +369,7 @@ void WLApplication::run()
 			//NetGGZ::ref().
 			uint32_t const secs = time(0);
 			while (!NetGGZ::ref().ip()) {
-				NetGGZ::ref().process();
+				NetGGZ::ref().process(1000);
 				if (10 < time(0) - secs)
 					throw warning
 						(_("Connection timeouted"), "%s",
@@ -1679,7 +1679,7 @@ void WLApplication::mainmenu_multiplayer()
 				case Fullscreen_Menu_NetSetupGGZ::JOINGAME: {
 					uint32_t const secs = time(0);
 					while (!NetGGZ::ref().ip()) {
-						NetGGZ::ref().process();
+						NetGGZ::ref().process(1000);
 						if (10 < time(0) - secs)
 							throw warning
 								(_("Connection timeouted"), "%s",

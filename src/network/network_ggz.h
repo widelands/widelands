@@ -119,8 +119,10 @@ struct NetGGZ : public ChatProvider {
 	static NetGGZ & ref();
 
 	/// process ggz data (ggzcore and ggzmod). This must be called on a regular
-	/// basis
-	void process();
+	/// basis. If timeout is 0 this method return imediately after all pending
+	/// data is processed. Else this function wait for incomming data timeout
+	/// milliseconds
+	int process(int timeout = 0);
 	
 	/// returns the ip address of the server we joined
 	char const * ip();

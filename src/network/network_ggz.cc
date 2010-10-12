@@ -95,7 +95,7 @@ bool NetGGZ::initcore
 		 GGZCORE_DBG_ROOM,
 		 GGZCORE_DBG_STATE,
 		 GGZCORE_DBG_TABLE,
-		 GGZCORE_DBG_XML,
+		 //GGZCORE_DBG_XML,
 		 //GGZ_SOCKET_DEBUG,
 		 "GGZMOD",
 		NULL};
@@ -114,10 +114,37 @@ bool NetGGZ::initcore
 	return ggz_ggzcore::ref().logged_in();
 }
 
-void NetGGZ::process()
+int NetGGZ::process(int timeout)
 {
+	fd_set read_fd_set;
+	int result;
+	struct timeval tv;
+
+	// Do at least on processing step. This may set new filedescriptors.
+	if (not ggz_mode())
+		ggz_ggzcore::ref().process();
+	ggz_ggzmod::ref().process();
+	ggz_wlmodule::ref().process();
+
 	int i = 100;
-	do
+	if (timeout > 0) {
+		tv.tv_usec = (timeout % 1000) * 1000;
+		tv.tv_sec = timeout / 1000;
+
+		FD_ZERO(&read_fd_set);
+
+		ggz_ggzcore::ref().set_fds(read_fd_set);
+		ggz_ggzmod::ref().set_fds(read_fd_set);
+
+		result = select(FD_SETSIZE, &read_fd_set, NULL, NULL, &tv);
+	}
+
+	// now process all pending data
+	while
+		((ggz_ggzcore::ref().data_pending()
+		  or ggz_ggzmod::ref().data_pending()
+		  or ggz_wlmodule::ref().data_pending())
+		 and i)
 	{
 		if (not ggz_mode())
 			ggz_ggzcore::ref().process();
@@ -129,14 +156,10 @@ void NetGGZ::process()
 		//	 ggz_ggzmod::ref().data_pending(),
 		//	 ggz_wlmodule::ref().data_pending());
 		i--;
-	} while
-		((ggz_ggzcore::ref().data_pending()
-		  or ggz_ggzmod::ref().data_pending()
-		  or ggz_wlmodule::ref().data_pending())
-		 and i);
+	} 
 
 	if (i <= 0)
-		log("GGZ ## process loop exited by limit\n");
+		log("GGZ ## ERROR process loop exited by limit\n");
 
 	if (
 		 (ggz_ggzcore::ref().get_tablestate() == ggz_ggzcore::ggzcoretablestate_launched
@@ -146,6 +169,8 @@ void NetGGZ::process()
 		ggz_ggzmod::ref().init();
 		ggz_ggzmod::ref().connect();
 	}
+
+	return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 
 /// \returns the maximum number of seats in a widelands table (game)
