@@ -121,7 +121,8 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 // Login information
 	nickname(nick),
 	password(pwd),
-	reg(registered)
+	reg(registered),
+	tried_login(false)
 {
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
@@ -167,7 +168,9 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 	Fullscreen_Menu_Base::think ();
 
 	// If we have no connection try to connect
-	if (not NetGGZ::ref().logged_in() and not NetGGZ::ref().is_connecting()) {
+	if 
+		(not NetGGZ::ref().logged_in() and not NetGGZ::ref().is_connecting()
+		 and not tried_login) {
 		// Wait two seconds after the user changed the name to avoid reconnecting
 		// after each changed character.
 		if (m_namechange >= time(0) - 1)
@@ -199,6 +202,7 @@ void Fullscreen_Menu_NetSetupGGZ::connectToMetaserver()
 
 		// Only one time registration
 	}
+	tried_login = true;
 }
 
 

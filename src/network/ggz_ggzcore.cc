@@ -183,7 +183,7 @@ bool ggz_ggzcore::init
 void ggz_ggzcore::process()
 {
 	if (!ggzserver) {
-		log("ggz_ggzcore::process(): not ggzserver\n");
+		//log("ggz_ggzcore::process(): not ggzserver\n");
 		return;
 	}
 
@@ -195,7 +195,7 @@ void ggz_ggzcore::process()
 	if (m_channelfd != -1)
 		ggzcore_server_read_data
 			(ggzserver, ggzcore_server_get_channel(ggzserver));
-					
+
 	if (m_gamefd != -1)
 		ggzcore_game_read_data(ggzcore_server_get_cur_game(ggzserver));
 	
@@ -247,6 +247,8 @@ void ggz_ggzcore::process()
 			}
 		}
 	}
+	if (m_state == ggzcorestate_error_disconnecting)
+		deinit();
 }
 
 /// Called by the client, to join an existing table (game) and to add all
@@ -522,22 +524,35 @@ void ggz_ggzcore::event_server(uint32_t const id, void const * const cbdata)
 		break;
 	case GGZ_LOGIN_FAIL:
 	case GGZ_ENTER_FAIL:
+		{
+			GGZErrorEventData const * const eed =
+				static_cast<GGZErrorEventData const *>(cbdata);
+			assert(eed != 0);
+			log("GGZCORE/event_server ## -- error! (%s)\n", eed->message);
+			std::string formated = ERRMSG;
+			formated += eed->message;
+				NetGGZ::ref().formatedGGZChat(formated, "", true);
+			NetGGZ::ref().formatedGGZChat("*** *** ***", "", true);
+			m_state = ggzcorestate_error_disconnecting;
+			break;
+		}
+	case GGZ_NET_ERROR:
 	case GGZ_PROTOCOL_ERROR:
 	case GGZ_CHANNEL_FAIL:
 	case GGZ_NEGOTIATE_FAIL:
 	case GGZ_CONNECT_FAIL:
-	case GGZ_NET_ERROR:
 		{
-			GGZErrorEventData const * eed =
-			static_cast<GGZErrorEventData const *>(cbdata);
-				log("GGZCORE/event_server ## -- error! (%s)\n", eed->message);
+			const char * errstr = static_cast<const char *>(cbdata);
+			assert(errstr != 0);
+			log("GGZCORE/event_server ## -- error! (%s)\n", errstr);
 			std::string formated = ERRMSG;
-			formated += eed->message;
+			formated += errstr;
 			NetGGZ::ref().formatedGGZChat(formated, "", true);
 			NetGGZ::ref().formatedGGZChat("*** *** ***", "", true);
 			ggzcore_login = false;
+			m_state = ggzcorestate_error_disconnecting;
+			break;
 		}
-		break;
 	case GGZ_MOTD_LOADED:
 		{
 			log("GGZCORE/event_server ## -- motd loaded!\n");
@@ -671,9 +686,15 @@ void ggz_ggzcore::deinit()
 {
 	if (!ggzcoreobj)
 		return;
-	NetGGZ::ref().formatedGGZChat(_("Closed the connection to the metaserver."), "", true);
-	NetGGZ::ref().formatedGGZChat("*** *** ***", "", true);
-	relogin = true;
+	if (m_state == ggzcorestate_connected)
+	{
+		NetGGZ::ref().formatedGGZChat(_("Closed the connection to the metaserver."), "", true);
+		NetGGZ::ref().formatedGGZChat("*** *** ***", "", true);
+		relogin = true;
+	}
+
+	log("ggz_ggzcore::deinit()\n");
+
 	tablelist.clear();
 	userlist.clear();
 	if (ggzcore_server_is_at_table(ggzserver))
@@ -683,7 +704,7 @@ void ggz_ggzcore::deinit()
 	ggzcore_server_free(ggzserver);
 	ggzserver = 0;
 	ggzcore_destroy();
-	m_logged_in = false;
+	m_logged_in  = false;
 	ggzcore_login= false;
 	ggzcore_ready= false;
 	m_logged_in  = false;
