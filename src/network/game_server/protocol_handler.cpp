@@ -134,7 +134,7 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 			try {
 				g_wls->stat_handler().report_game_result(client, parlist);
 			}
-				catch (parameterError e) {
+				catch (_parameterError e) {
 					wllog(DL_ERROR, "Catched parameterError %s", e.what());
 			}
 			//read_game_statistics(client);
@@ -144,7 +144,7 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 			try {
 				g_wls->stat_handler().report_gameinfo(client, parlist);
 			}
-			catch (parameterError e) {
+			catch (_parameterError e) {
 				wllog(DL_ERROR, "Catched parameterError %s", e.what());
 			}
 			//read_game_information(client);

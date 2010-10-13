@@ -34,7 +34,7 @@ StatisticsHandler::~StatisticsHandler()
 {}
 
 #define CHECKTYPE(list, type) if ((list).empty() or not (list).front().is_##type ()) \
-	throw parameterError();
+	throw _parameterError(__FILE__, __LINE__);
 
 bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterList & p)
 {

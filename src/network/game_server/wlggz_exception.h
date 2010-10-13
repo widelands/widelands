@@ -50,9 +50,12 @@ struct _wlggzexception : public std::exception {
 
 #define wlggzexception(...) _wlggzexception(__FILE__, __LINE__, __VA_ARGS__)
 
-struct parameterError : public _wlggzexception {
-	parameterError(std::string const & reason = ""):
-		wlggzexception("%s", reason.c_str()) {}
+struct _parameterError : public _wlggzexception {
+	_parameterError
+		(const char * f, uint32_t l, std::string const & reason = ""):
+		_wlggzexception(f, l, "parameterError: %s", reason.c_str()) {}
 };
+
+#define parameterError(...) _parameterError(__FILE__, __LINE__, __VA_ARGS__)
 
 #endif
