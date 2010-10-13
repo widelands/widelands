@@ -106,7 +106,7 @@ set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 set (BUILD_SHARED_LIBS OFF)
 
 # Unit tests add dependency to unit_test_framework and are therefore optional.
-set (BUILD_UNIT_TESTS TRUE CACHE BOOL "Build unit tests (requires boost unit test framework)")
+option (BUILD_UNIT_TESTS "Build unit tests (requires boost unit test framework)")
 
 if (BUILD_UNIT_TESTS)
   # we only include Boost Headers to the main executable, no libraries

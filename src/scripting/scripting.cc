@@ -159,12 +159,8 @@ std::string LuaInterface_Impl::m_register_script
 		std::string data(static_cast<char *>(fs.Load(path, length)));
 		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
 
-		for (size_t i = name.size() - 1; i; i--) {
-			if (name[i] == '/' or name[i] == '\\') {
-				name = name.substr(i + 1, name.size());
-				break;
-			}
-		}
+		size_t pos = name.find_last_of("/\\");
+		if (pos != std::string::npos)  name = name.substr(pos+1);
 
 		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
 		m_scripts[ns][name] = data;

@@ -35,8 +35,6 @@
 struct Fullscreen_Menu_Options;
 struct Section;
 
-#define NUM_RESOLUTIONS 6
-
 struct Options_Ctrl {
 	struct Options_Struct {
 		int32_t xres;

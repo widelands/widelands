@@ -610,7 +610,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	opt.auto_roadbuild_mode = m_opt_section.get_bool
 		("auto_roadbuild_mode", true);
 	opt.show_warea          = m_opt_section.get_bool
-		("workareapreview",    false);
+		("workareapreview",    true);
 	opt.snap_windows_only_when_overlapping
 		= m_opt_section.get_bool
 			("snap_windows_only_when_overlapping",      false);

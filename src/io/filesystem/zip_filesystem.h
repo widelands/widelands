@@ -81,6 +81,7 @@ private:
 	void m_OpenUnzip();
 	void m_OpenZip();
 	void m_Close();
+	std::string strip_basename(std::string);
 
 private:
 	enum State {
@@ -92,6 +93,9 @@ private:
 	State       m_state;
 	zipFile     m_zipfile;
 	unzFile     m_unzipfile;
+	/// if true data is in a directory named as the zipfile. This is set by
+	/// strip_basename()
+	bool        m_oldzip;
 	std::string m_zipfilename;
 	std::string m_basename;
 
