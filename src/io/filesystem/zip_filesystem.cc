@@ -40,7 +40,8 @@ m_zipfile    (0),
 m_unzipfile  (0),
 m_oldzip     (false),
 m_zipfilename(zipfile),
-m_basename   (FS_Filename(zipfile.c_str()))
+m_basenamezip(FS_Filename(zipfile.c_str())),
+m_basename   ()
 {
 	// TODO: check OS permissions on whether the file is writable
 }
@@ -121,7 +122,7 @@ int32_t ZipFilesystem::FindFiles
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::FileExists(std::string const & path_in) {
+bool ZipFilesystem::FileExists(std::string const & path) {
 	try {
 		m_OpenUnzip(); //  FIXME check return value
 	} catch (...) {
@@ -131,6 +132,11 @@ bool ZipFilesystem::FileExists(std::string const & path_in) {
 	unz_file_info file_info;
 	char filename_inzip[256];
 	memset(filename_inzip, ' ', 256);
+
+	std::string path_in = m_basename + "/" + path;
+
+	if (*path_in.begin() == '/')
+		path_in = path_in.substr(1);
 
 	assert(path_in.size());
 
@@ -183,11 +189,13 @@ FileSystem & ZipFilesystem::MakeSubFileSystem(std::string const & path) {
 
 	m_Close();
 
+	std::string localpath = path;
+
+	if (*localpath.begin() == '/')
+		localpath = localpath.substr(1);
+
 	ZipFilesystem & newfs = *new ZipFilesystem(m_zipfilename);
-	if (m_oldzip)
-		newfs.m_basename = m_basename + "/" + path;
-	else
-		newfs.m_basename = path;
+	newfs.m_basename = m_basename + "/" + localpath;
 
 	return newfs;
 }
@@ -212,11 +220,14 @@ FileSystem & ZipFilesystem::CreateSubFileSystem
 
 	m_Close();
 
+	std::string localpath = path;
+
+	if (*localpath.begin() == '/')
+		localpath = localpath.substr(1);
+
 	ZipFilesystem & newfs = *new ZipFilesystem(*this);
-	if (m_oldzip)
-		newfs.m_basename = m_basename + "/" + path;
-	else
-		newfs.m_basename = path;
+
+	newfs.m_basename = m_basename + "/" + localpath;
 
 	return newfs;
 }
@@ -262,15 +273,18 @@ void ZipFilesystem::MakeDirectory(std::string const & dirname) {
 	zi.internal_fa = 0;
 	zi.external_fa = 0;
 
+	std::string complete_filename = m_basename;
+	complete_filename += "/";
+	complete_filename += dirname;
+	
 	assert(dirname.size());
-	std::string path = dirname;
-	if (*path.rbegin() != '/')
-		path += '/';
+	if (*complete_filename.rbegin() != '/')
+		complete_filename += '/';
 
 	switch
 		(zipOpenNewFileInZip3
 		 	(m_zipfile,
-		 	 path.c_str(),
+			 complete_filename.c_str(),
 		 	 &zi,
 		 	 0, 0, 0, 0, 0 /* comment*/,
 		 	 Z_DEFLATED,
@@ -286,10 +300,10 @@ void ZipFilesystem::MakeDirectory(std::string const & dirname) {
 		break;
 	case ZIP_ERRNO:
 		throw File_error
-			("ZipFilesystem::MakeDirectory", path, strerror(errno));
+			("ZipFilesystem::MakeDirectory", complete_filename, strerror(errno));
 	default:
 		throw File_error
-			("ZipFilesystem::MakeDirectory", path);
+			("ZipFilesystem::MakeDirectory", complete_filename);
 	}
 
 	zipCloseFileInZip(m_zipfile);
@@ -368,10 +382,12 @@ void ZipFilesystem::Write
 	zi.internal_fa = 0;
 	zi.external_fa = 0;
 
+	std::string complete_filename = m_basename + "/" + fname;
+	
 	//  create file
 	switch
 		(zipOpenNewFileInZip3
-		 	(m_zipfile, fname.c_str(), &zi,
+			(m_zipfile, complete_filename.c_str(), &zi,
 		 	 0, 0, 0, 0, 0 /* comment*/,
 		 	 Z_DEFLATED,
 		 	 Z_BEST_COMPRESSION, 0,
@@ -382,7 +398,7 @@ void ZipFilesystem::Write
 		break;
 	default:
 		throw ZipOperation_error
-			("ZipFilesystem::Write", fname, m_zipfilename);
+			("ZipFilesystem::Write", complete_filename, m_zipfilename);
 	}
 
 	switch (zipWriteInFileInZip (m_zipfile, data, length)) {
@@ -390,10 +406,10 @@ void ZipFilesystem::Write
 		break;
 	case ZIP_ERRNO:
 		throw File_error
-			("ZipFilesystem::Write", fname, strerror(errno));
+			("ZipFilesystem::Write", complete_filename, strerror(errno));
 	default:
 		throw File_error
-			("ZipFilesystem::Write", fname);
+			("ZipFilesystem::Write", complete_filename);
 	}
 
 	zipCloseFileInZip(m_zipfile);
@@ -471,18 +487,20 @@ unsigned long long ZipFilesystem::DiskSpace() {
 std::string ZipFilesystem::strip_basename(std::string filename)
 {
 
-	if(filename.compare(0, m_basename.length(), m_basename) == 0) 
+	if(filename.compare(0, m_basenamezip.length(), m_basenamezip) == 0) 
 	{
 		// filename contains the name of the zip file as first element. This means
 		// this is an old zip file where all data were in a directory named as the
 		// file inside the zip file.
 		// return the filename without the first element
 		m_oldzip = true;
-		return filename.substr(m_basename.length() + 1);
+		return filename.substr(m_basenamezip.length() + 1);
 	}
 
 	// seems to be a new zipfile without directory or a old zipfile was renamed
 	m_oldzip = false;
+	if (*filename.begin() == '/')
+		return filename.substr(1);
 	return filename;
 }
 
