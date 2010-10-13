@@ -203,7 +203,8 @@ bool StatisticsHandler::report_game_result
 		CHECKTYPE(p, list);
 		gameinfo = p.front().get_list_type();
 		WLGGZParameterList l = p.front().get_list();
-
+		p.pop_front();
+		//wllog(DL_DEBUG, "gameinfo: %i, l.size: %i", gameinfo, l.size());
 		switch(gameinfo)
 		{
 			case gamestat_playernumber:
@@ -260,14 +261,17 @@ bool StatisticsHandler::report_game_result
 				CHECKTYPE(l, integer);
 				wllog
 					(DL_DEBUG, "game end time by %s(%i): %i",
-					 client->name, client->number, l.front().get_integer());
+					 client->name.c_str(), client->number, l.front().get_integer());
 				if (m_result_gametime == 0)
 					m_result_gametime = l.front().get_integer();
 				else
 					if (m_result_gametime != l.front().get_integer())
 						wllog(DL_WARN, "client report at different gametimes");
+				break;
 			default:
-				wllog(DL_WARN, "GAMESTATISTICS: Warning unknown WLGGZGameStats!");
+				wllog
+					(DL_WARN, "GAMESTATISTICS: Warning unknown WLGGZGameStats: %i (%i)",
+					 gameinfo, l.size());
 		}
 	}
 }
