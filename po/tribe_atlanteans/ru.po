@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-11 10:12+0000\n"
+"PO-Revision-Date: 2010-10-12 04:56+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-12 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-10-13 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -1287,7 +1287,8 @@ msgstr "Работает на строительных площадках."
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
-msgstr "Работает в глубине шахты для добычи угля, железа и золота."
+msgstr ""
+"Работает глубоко под землей, в шахтах, добывая уголь, железо или золото."
 
 #~ msgid "Resource indicator granit little"
 #~ msgstr "Залежи ресурсов мало гранита"

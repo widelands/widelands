@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-02-10 21:26+0000\n"
-"Last-Translator: Joe Hansen <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-12 19:08+0000\n"
+"Last-Translator: Zilvador <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-10-13 04:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/greenland/conf:58
@@ -151,7 +151,7 @@ msgstr "Guld"
 
 #: ../../worlds/greenland/resconf:28
 msgid "Granite"
-msgstr ""
+msgstr "Granit"
 
 #: ../../worlds/greenland/conf:19
 #: ../../worlds/greenland/conf:20

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-03-13 01:27+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-12 19:04+0000\n"
+"Last-Translator: Zilvador <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-10-13 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -34,6 +34,11 @@ msgid ""
 "of our farmers seems to be very clever he already got some crops to grow in "
 "this cold soil.\" "
 msgstr ""
+" \"Boldreth har ret! Vi har ikke nok mad til at overleve en lang og kold "
+"vinter. Vi må bygge en brønd, en fisker- og en jægerhytte. Hvis vi har nok "
+"plads, burde vi også bygge en gård og et bageri! En af vores landmænd er "
+"vist meget snedig, og har allerede fået nogle afgrøder til at vokse i den "
+"kolde jord\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:372
 msgid ""
@@ -84,12 +89,19 @@ msgid ""
 "remember, most of the mountains west to Al'thunran hold coal and some metal "
 "ores.\" "
 msgstr ""
+" \"Jeg har lige talt med lederen af vores patrulje. Han fortalte mig, at de "
+"fandt nogle bjerge mod nordøst og øst for vores område. Med en smule held "
+"vil det betyde at vi har en ny mulighed for at opruste vores mænd, fordi så "
+"vidt som jeg husker, indeholder de fleste af bjergene vest for Al'thunran "
+"kul og noget metalmalm.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:254
 msgid ""
 " \"Khantrukh just informed me, that our basic food economy was built up "
 "successfully. Finally none of us has to fear starvation anymore."
 msgstr ""
+" \"Khantrukh har netop meddelt mig, at vores grundlæggende fødevareindustri "
+"fungerer. Endelig behøver vi ikke længere at frygte hungersnød."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:348
 msgid ""
@@ -263,6 +275,8 @@ msgid ""
 "* Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"* Byg flere militære bygninger for at udforske området omkring "
+"hovedkvarteret og for at sikre dine undersåtters sikkerhed."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
 #: ../../campaigns/t03.wmf/scripting/texts.lua:246
@@ -270,6 +284,8 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
+"* Sæt en grundlæggende fødevareindustri - en fiskerhytte, en jægerhytte, en "
+"brønd, en gård og et bageri, så du kan levere mad til dine mænd."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
@@ -361,7 +377,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:230
 msgid "Boldreth speaks:"
-msgstr ""
+msgstr "Boldreth taler:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:57
 msgid "Build a donjon"
@@ -521,7 +537,7 @@ msgstr "Prøvespil 3 - Dette land er vores land"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
-msgstr ""
+msgstr "Vinteren kommer snart"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:352
 msgid ""

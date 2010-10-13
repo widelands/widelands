@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-11 10:12+0000\n"
+"PO-Revision-Date: 2010-10-12 04:57+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-12 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-10-13 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -1317,7 +1317,8 @@ msgstr "Работает на строительных площадках, во�
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr "Работает в шахтах, добывая уголь, железо или золото."
+msgstr ""
+"Работает глубоко под землей, в шахтах, добывая уголь, железо или золото."
 
 #: ../../tribes/barbarians/beer/conf:1
 msgid ""
