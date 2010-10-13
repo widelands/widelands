@@ -34,21 +34,25 @@
 #endif
 
 struct _wlggzexception : public std::exception {
-	explicit _wlggzexception
+		explicit _wlggzexception
 			(const char * file, uint32_t line, const char * fmt, ...)
-					throw () PRINTF_FORMAT(4, 5);
-					virtual ~_wlggzexception() throw ();
-					
-					/**
-					* The target of the returned pointer remains valid during the lifetime of
-					* the _wexception object.
-					*/
-					virtual const char * what() const throw ();
+			throw () PRINTF_FORMAT(4, 5);
+		virtual ~_wlggzexception() throw ();
+		/**
+		* The target of the returned pointer remains valid during the lifetime of
+		* the _wexception object.
+		*/
+		virtual const char * what() const throw ();
 	protected:
 		_wlggzexception() {};
 		std::string m_what;
 };
 
 #define wlggzexception(...) _wlggzexception(__FILE__, __LINE__, __VA_ARGS__)
+
+struct parameterError : public _wlggzexception {
+	parameterError(std::string const & reason = ""):
+		wlggzexception("%s", reason.c_str()) {}
+};
 
 #endif

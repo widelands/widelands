@@ -29,6 +29,8 @@ extern int debug_level;
 #define DL_DEBUG 5
 #define DL_DUMP 6
 
+#define DL_DUMPDATA 9
+
 void wllog (int level, const char * fmt, ...);
 
 #endif // __LOG_H__

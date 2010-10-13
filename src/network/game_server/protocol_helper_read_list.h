@@ -72,9 +72,7 @@ std::list<WLGGZParameter> wlggz_read_parameter_list(int fd)
 				ggz_read_int(fd, &d_i);
 				d_str = new char[d_i];
 				ggz_readn(fd, d_str, d_i);
-				std::cout << "GGZ: read_parameter_list: read_raw ("<< d_i <<" bytes)\n"<< 
-					"WARNING: This is not implemented yet\n";
-				delete[] d_str;
+				data.set_raw(d_i, d_str);
 				break;
 			default:
 				std::cout << "GGZ: ERROR Received unknow data type: " <<

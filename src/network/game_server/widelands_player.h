@@ -83,6 +83,8 @@ class WidelandsPlayer
 		void set_build16_proto(bool b) { m_build16_protocol = b; }
 		
 		bool is_spectator() { return m_ggz_spectator_number >= 0; }
+		
+		std::string name() { return m_name; }
 		/*
 		bool is_player()
 		{

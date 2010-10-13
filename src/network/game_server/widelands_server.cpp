@@ -25,6 +25,7 @@
 #include "protocol_handler.h"
 #include "statistics_handler.h"
 #include "wlggz_exception.h"
+#include "widelands_player.h"
 
 // GGZ includes
 #include <ggz.h>
@@ -37,8 +38,21 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
+std::string WidelandsPlayer::m_host_username("");
+
 ProtocolHandler wlproto;
 StatisticsHandler wlstat;
+
+ProtocolHandler& WidelandsServer::proto_handler()
+{
+	return wlproto;
+}
+
+StatisticsHandler& WidelandsServer::stat_handler()
+{
+	return wlstat;
+}
+
 
 // Constructor: inherit from ggzgameserver
 WidelandsServer::WidelandsServer():
@@ -55,12 +69,12 @@ WidelandsServer::~WidelandsServer()
 {
 	wllog(DL_INFO, "closing!");
 	wllog
-		(DL_DUMP, "Map %s (%i, %i)", wlproto.m_map.name().c_str(),
-		 wlproto.m_map.w(), wlproto.m_map.h());
+		(DL_DUMP, "Map %s (%i, %i)", wlstat.map().name().c_str(),
+		 wlstat.map().w(), wlstat.map().h());
 	wllog(DL_DUMP, "GameTime: %i", wlproto.m_result_gametime);
 
 	std::string wincond = "unknown (ERROR)";
-	switch(wlproto.m_map.gametype())
+	switch(wlstat.map().gametype())
 	{
 		case gametype_endless:
 			wincond = "endless";
@@ -223,6 +237,10 @@ void WidelandsServer::leaveEvent(Client * client)
 		wllog(DL_INFO, "leaveEvent without client ?!?\n");
 		return;
 	}
+	std::map<std::string, WidelandsPlayer *>::iterator it =
+		m_players.find(client->name);
+	if (it != m_players.end())
+		m_players.erase(it);
 	wllog(DL_INFO, "leaveEvent \"%s\"", client->name.c_str());
 }
 
@@ -244,6 +262,10 @@ void WidelandsServer::spectatorLeaveEvent(Client * client)
 		wllog(DL_INFO, "spectatorLeaveEvent without client ?!?\n");
 		return;
 	}
+	std::map<std::string, WidelandsPlayer *>::iterator it =
+		m_players.find(client->name);
+	if (it != m_players.end())
+		m_players.erase(it);
 	wllog(DL_INFO, "spectatorLeaveEvent \"%s\"", client->name.c_str());
 }
 
@@ -283,7 +305,7 @@ void WidelandsServer::game_done()
 	if (m_reported)
 		return;
 
-	if (wlproto.m_map.gametype() == gametype_defeatall)
+	if (wlstat.map().gametype() == gametype_defeatall)
 	{
 		wllog(DL_INFO, "gametype defeat all");
 		std::map<std::string, WidelandsPlayer*>::iterator it =
@@ -325,11 +347,11 @@ void WidelandsServer::game_done()
 		if (number > 1 and wlproto.m_result_gametime > (30 * 60 * 1000))
 			reportGame(NULL, results, score);
 	}
-	else if (wlproto.m_map.gametype() == gametype_tribes_together)
+	else if (wlstat.map().gametype() == gametype_tribes_together)
 	{
 		wllog(DL_WARN, "gametype tribes together. deprecated");
 	}
-	else if (wlproto.m_map.gametype() == gametype_collectors)
+	else if (wlstat.map().gametype() == gametype_collectors)
 	{
 		wllog(DL_INFO, "gametype collectors");
 
@@ -369,11 +391,11 @@ void WidelandsServer::game_done()
 		if(number > 1)
 			reportGame(NULL, results, score);
 	}
-	else if (wlproto.m_map.gametype() == gametype_endless)
+	else if (wlstat.map().gametype() == gametype_endless)
 		wllog(DL_INFO, "gametype_endless");
-	else if (wlproto.m_map.gametype() == gametype_territorial_lord)
+	else if (wlstat.map().gametype() == gametype_territorial_lord)
 		wllog(DL_WARN, "gametype: territorial lord - no reporting for this one");
-	else if (wlproto.m_map.gametype() == gametype_wood_gnome)
+	else if (wlstat.map().gametype() == gametype_wood_gnome)
 		wllog(DL_WARN, "gametype: wood gnome - no reporting for this one");
 	else
 		wllog(DL_ERROR, "Error: Unknow gametype! cannot report game");

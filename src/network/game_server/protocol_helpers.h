@@ -27,7 +27,7 @@
 
 // Enable this to print a lot of information about what is written to
 // ggzd game server module
-#define DEBGUG_WLGGZMETA_PROTO
+//#define DEBGUG_WLGGZMETA_PROTO
 
 #ifdef DEBGUG_WLGGZMETA_PROTO
 #define DBG(x) x
@@ -46,8 +46,13 @@
 class WLGGZParameter
 {
 	public:
+		~WLGGZParameter()
+		{
+			if(pdata)
+				delete static_cast<char *>(pdata);
+		}
 		WLGGZParameter():
-			m_type(ggzdatatype_null), m_str(std::string("")) {}
+			m_type(ggzdatatype_null), m_str(std::string("")), pdata(0) {}
 		WLGGZParameter(int d):
 			m_type(ggzdatatype_integer), m_i(d), m_str(std::string("")) {}
 		WLGGZParameter(std::string d):
@@ -58,10 +63,12 @@ class WLGGZParameter
 		
 		WLGGZDataType get_type() { return m_type; }
 
-		bool get_bool() {return m_i; }
-		int get_integer() {return m_i; }
+		bool get_bool()          {return m_i; }
+		int get_integer()        {return m_i; }
 		//char get_char();
 		std::string get_string() {return m_str; }
+		int get_list_type()      { return m_list_type; }
+		std::list<WLGGZParameter> get_list() { return m_list; }
 		
 		void set(bool d)
 			{ m_type=ggzdatatype_boolean; m_i=d; }
@@ -74,13 +81,15 @@ class WLGGZParameter
 		void set(std::string d)
 			{ m_type=ggzdatatype_string; m_str=d; }
 		void set(int i, std::list<WLGGZParameter> list)
-			{ m_list = list; m_list_type = i; }
+			{ m_list = list; m_list_type = i; m_type = ggzdatatype_list; }
+		void set_raw(int size, void * p) { m_type=ggzdatatype_raw; pdata = p; }
 		//void set(char d);
 
-		bool is_string() {return m_type==ggzdatatype_string; }
-		bool is_integer() {return m_type==ggzdatatype_integer; }
-		bool is_char() {return m_type==ggzdatatype_char; }
-		bool is_bool() {return m_type==ggzdatatype_boolean; }
+		bool is_string()  { return m_type==ggzdatatype_string; }
+		bool is_integer() { return m_type==ggzdatatype_integer; }
+		bool is_char()    { return m_type==ggzdatatype_char; }
+		bool is_bool()    { return m_type==ggzdatatype_boolean; }
+		bool is_list()    { return m_type==ggzdatatype_list; }
 		
 		bool is_valid() 
 			{ return m_type == ggzdatatype_string or
@@ -95,8 +104,10 @@ class WLGGZParameter
 		std::string m_str;
 		std::list<WLGGZParameter> m_list;
 		int m_list_type;
+		void * pdata;
 };
 
+typedef std::list<WLGGZParameter> WLGGZParameterList;
 
 DBG(std::string level;)
 
@@ -286,6 +297,25 @@ class WLGGZ_writer {
 			ggz_write_int(m_fd, ggzdatatype_boolean);
 			ggz_write_int(m_fd, d);
 			return *this;
+		}
+		
+		void write_raw_data(int size, void * data) {
+			if (not m_in_cmd) {
+				DBG(std::cout << "parameter_list_writer: " << level << "- warning: not in cmd\n";)
+				return;
+			}
+			if (m_sub) {
+				m_sub->write_raw_data(size, data);
+				return;
+			}
+
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist datatype raw\n";)
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist size\n";)
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist data\n";)
+
+			ggz_write_int(m_fd, ggzdatatype_raw);
+			ggz_write_int(m_fd, size);
+			ggz_writen(m_fd, data, size);
 		}
 
 		void open_list(int list_type){

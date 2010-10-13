@@ -19,14 +19,24 @@
 #ifndef __STATISITCS_HANDLER_H__
 #define __STATISITCS_HANDLER_H__
 
+#include "protocol_helpers.h"
 
+class Client;
+class WidelandsMap;
 
 class StatisticsHandler {
 	public:
 		StatisticsHandler();
 		~StatisticsHandler();
+		bool report_gameinfo (Client const * client, WLGGZParameterList & p);
+		bool report_game_result (Client const * client, WLGGZParameterList & p);
 
 		bool have_stats() { return false; }
+		WidelandsMap & map() {return m_map; }
+	private:
+		WidelandsMap m_map;
+		std::string m_host_version, m_host_build;
+		int m_result_gametime;
 };
 
 #endif //__STATISITCS_HANDLER_H__

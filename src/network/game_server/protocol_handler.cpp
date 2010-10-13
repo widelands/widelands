@@ -25,6 +25,9 @@
 
 #include <stdexcept>
 #include <cassert>
+#include "widelands_player.h"
+#include "statistics_handler.h"
+#include "wlggz_exception.h"
 
 ProtocolHandler::ProtocolHandler()
 {
@@ -97,8 +100,7 @@ void ProtocolHandler::process_data(Client * const client)
 		player->set_build16_proto(true);
 		{
 			// Answer this request.
-			WLGGZ_writer wr(client->fd);
-			wr.type(op_reply_protocol_ext);
+			WLGGZ_writer wr(client->fd, op_reply_protocol_ext);
 			wr << WIDELANDS_PROTOCOL_EXT_MAJOR << WIDELANDS_PROTOCOL_EXT_MINOR;
 		}
 		// And finally request the protocol version from the client
@@ -129,14 +131,26 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 	switch(opcode) {
 		case op_game_statistics:
 			wllog(DL_DEBUG, "GAME: read stats!");
+			try {
+				g_wls->stat_handler().report_game_result(client, parlist);
+			}
+				catch (parameterError e) {
+					wllog(DL_ERROR, "Catched parameterError %s", e.what());
+			}
 			//read_game_statistics(client);
 			break;
 		case op_game_information:
 			wllog(DL_DUMP, "GAME: read game info!");
+			try {
+				g_wls->stat_handler().report_gameinfo(client, parlist);
+			}
+			catch (parameterError e) {
+				wllog(DL_ERROR, "Catched parameterError %s", e.what());
+			}
 			//read_game_information(client);
 			break;
 		case op_set_debug:
-			if (not client->spectator and client->number == 0)
+			if (player->is_host())
 			{
 				wllog
 					(DL_DEBUG, "debug request from host: "
@@ -151,324 +165,4 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 	}
 }
 
-void ProtocolHandler::read_game_information(Client * const client)
-{
-	int gameinfo, playernum=-1;
-	std::string playername="";
-	WidelandsPlayer * player = NULL;
-
-	if (ggz_read_int(client->fd, &gameinfo) < 0)
-	{
-		wllog
-			(DL_ERROR, "read_game_information: failed to read int from client %s",
-			 client->name.c_str());
-		return;
-	}
-
-	while(gameinfo)
-	{
-		std::list<WLGGZParameter> parlist = wlggz_read_parameter_list(client->fd);
-
-		switch(gameinfo)
-		{
-		case gameinfo_playerid:
-			playernum = parlist.front().get_integer();
-			playername.erase();
-			player = NULL;
-			break;
-		case gameinfo_playername:
-		{
-			if
-				(playername.empty() and not
-				 parlist.front().get_string().empty() and player == NULL)
-			{
-				playername = parlist.front().get_string();
-				wllog
-					(DL_DEBUG, "GAMEINFO: add player \"%s\" (wl: %i)",
-					 playername.c_str(), playernum);
-				player = g_wls->get_player_by_name(playername, true);
-				player->set_wl_player_number(playernum);
-			}
-			else
-				wllog
-					(DL_ERROR,
-					 "GAMEINFO: error playername \"%s\" %i: %s",
-					 playername.c_str(), parlist.front().get_string().size(),
-					 parlist.front().get_string().c_str());
-		}
-			break;
-		case gameinfo_tribe:
-			if( player->tribe().empty())
-				player->set_tribe(parlist.front().get_string());
-			if( player->tribe().compare(parlist.front().get_string()))
-				wllog
-					(DL_WARN,
-					 "GAMEINFO: readinfo tribe: "
-					 "clients disagree about tribe: %s, %s",
-					 player->tribe().c_str(),
-					 parlist.front().get_string().c_str());
-				 break; 
-		case gameinfo_gametype:
-			m_map.set_gametype
-				(static_cast<WLGGZGameType>(parlist.front().get_integer()));
-			break;
-		case gameinfo_mapname:
-			if(m_map.name().empty())
-			{
-				std::string mapname = parlist.front().get_string();
-				m_map.set_name(mapname);
-			}
-			break;
-		case gameinfo_mapsize:
-		{
-			int width, height;
-			width = parlist.front().get_integer();
-			parlist.pop_front();
-			height = parlist.front().get_integer();
-			m_map.set_size(width, height);
-		}
-			break;
-		case gameinfo_playertype:
-			if(player)
-				player->set_type
-					(static_cast<WLGGZPlayerType>(parlist.front().get_integer()));
-			break;
-		case gameinfo_version:
-		{
-			std::string version = parlist.front().get_string();
-			parlist.pop_front();
-			std::string build = parlist.front().get_string();
-			if (not client->spectator and client->number == 0)
-			{
-				host_version = version;
-				parlist.pop_front();
-				host_build = build;
-			}
-			player = g_wls->get_player_by_name(client->name);
-			if (not player) {
-				player = g_wls->get_player_by_name(client->name, true);
-				player->set_ggz_player_number(client->number);
-			}
-			player->set_version(version, build);
-			wllog
-				(DL_DUMP, "GAMEINFO: Player \"%s\": %s(%s)",
-				 client->name.c_str(), version.c_str(), build.c_str());
-			break;
-		}
-		case gameinfo_teamnumber:
-			if(player)
-				player->set_team(parlist.front().get_integer());
-			break;
-		default:
-			wllog(DL_ERROR, "GAMEINFO: error unknown WLGGZGameInfo!");
-		}
-		if (ggz_read_int(client->fd, &gameinfo) < 0)
-		{
-			wllog
-				(DL_ERROR, "read_game_information: failed to read int from client %s",
-				 client->name.c_str());
-			return;
-		}
-	}
-
-
-	/*
-	int num = playercount(Seat::player);
-	wllog(DL_INFO, "GAMEINFO: number of players %i", num);
-
-	for (int i=0; i<num; i++)
-	{
-		wllog(DL_INFO, "GAMEINFO: seat i: %i");
-		if (seat(i))
-		{
-			if (seat(i)->client)
-			{
-				wllog
-					(DL_INFO, ", s: %i, c: %i, Name: %s", seat(i)->number,
-					 seat(i)->client->number, seat(i)->client->name.c_str());
-				if(g_wls->m_players.find(seat(i)->client->name) != g_wls->m_players.end())
-				{
-					 if(g_wls->m_players[seat(i)->client->name]->ggz_player_number()==-1)
-						g_wls->m_players[seat(i)->client->name]->
-							set_ggz_player_number(seat(i)->client->number);
-				}
-			} else {
-				wllog(DL_INFO, "client* does not exist");
-			}
-		} else {
-			wllog(DL_INFO, "does not exist ...");
-		}
-	}
-	*/
-}
-
-void ProtocolHandler::read_game_statistics(Client * const client)
-{
-	int gameinfo, playernum=-1;
-	std::string playername="";
-	WidelandsPlayer * player = NULL;
-	
-	if (ggz_read_int(client->fd, &gameinfo) < 0)
-	{
-		wllog
-			(DL_ERROR, "read_game_statistics: failed to read int from client");
-			 return;
-	}
-
-	while(gameinfo)
-	{
-		std::list<WLGGZParameter> parlist = wlggz_read_parameter_list(client->fd);
-
-		switch(gameinfo)
-		{
-		case gamestat_playernumber:
-		{
-			if ( not parlist.size() or not parlist.front().is_integer())
-			{
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: ERROR: "
-					 "got playernumber but parameter error");
-				break;
-			}
-			playernum = parlist.front().get_integer();
-			player = g_wls->get_player_by_wlid(playernum);
-			if(not player)
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: ERROR: "
-					 "got playernumber but could no find the player %i",
-					 parlist.front().get_integer());
-			break;
-		}
-		case gamestat_result:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.result=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: got result but catched a error");
-				break;
-		case gamestat_points:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.points=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: got points but catched a error");
-				break;
-		case gamestat_land:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.land=parlist.front().get_integer();
-			else
-				wllog(DL_ERROR, "GAMESTATISTICS: got land but catched a error");
-			break;
-		case gamestat_buildings:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.buildings=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: "
-					 "got buildings but catched a error");
-			break;
-		case gamestat_milbuildingslost:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.milbuildingslost=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: "
-					 "got milbuildingslost but catched a error");
-			break;
-		case gamestat_civbuildingslost:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.civbuildingslost=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: "
-					 "got civbuildingslost but catched a error");
-			break;
-		case gamestat_buildingsdefeat:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.buildingsdefeat=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: "
-					 "got buildingsdefeat but catched a error");
-			break;
-		case gamestat_milbuildingsconq:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.milbuildingsconq=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: "
-					 "got milbuildingsconq but catched a error");
-			break;
-		case gamestat_economystrength:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.economystrength=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: "
-					 "got economystrength but catched a error");
-			break;
-		case gamestat_militarystrength:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.militarystrength=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: "
-					 "got militarystrength but catched a error");
-			break;
-		case gamestat_workers:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.workers=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: got workers but catched a error");
-			break;
-		case gamestat_wares:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.wares=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: got wares but catched a error");
-			break;
-		case gamestat_productivity:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.productivity=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR,
-					 "GAMESTATISTICS: got productivity but catched a error");
-			break;
-		case gamestat_casualties:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.casualties=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR,
-					 "GAMESTATISTICS: got casulties but catched a error");
-			break;
-		case gamestat_kills:
-			if(player and parlist.size() and parlist.front().is_integer())
-				player->last_stats.kills=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR, "GAMESTATISTICS: got kills but catched a error");
-			break;
-		case gamestat_gametime:
-			if (parlist.size() and parlist.front().is_integer())
-				m_result_gametime=parlist.front().get_integer();
-			else
-				wllog
-					(DL_ERROR,
-					 "GAMESTATISTICS: got gametime but catched a error");
-			break;
-		default:
-			wllog(DL_WARN,  "GAMESTATISTICS: Warning unknown WLGGZGameStats!");
-		}
-		if (ggz_read_int(client->fd, &gameinfo) < 0)
-		{
-			wllog
-				(DL_ERROR, "read_game_statistics: failed to read int from client");
-			return;
-		}
-	}
-}
 

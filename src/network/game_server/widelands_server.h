@@ -30,6 +30,9 @@
 #include <vector>
 #include <map>
 
+class StatisticsHandler;
+class ProtocolHandler;
+
 /// WidelandsServer server object. This class does the interaction with ggzd
 class WidelandsServer : public GGZGameServer
 {
@@ -51,6 +54,13 @@ class WidelandsServer : public GGZGameServer
 		WidelandsPlayer * get_player_by_name(std::string name, bool create = false);
 		WidelandsPlayer * get_player_by_wlid(int);
 		WidelandsPlayer * get_player_by_ggzid(int);
+		
+		int numberofplayers() 
+			{ return playercount(Seat::player) + playercount(Seat::bot); }
+		
+		
+		StatisticsHandler & stat_handler();
+		ProtocolHandler & proto_handler();
 
 	private:
 		// @{

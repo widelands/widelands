@@ -33,6 +33,9 @@
 #define WLGGZ_OLD_OPCODE(x) ((x > 0 and x <= 7) or x == 99)
 #define WLGGZ_NEW_OPCODE(x) (x > 0 and not WLGGZ_OLD_OPCODE(x))
 
+#define SYNCCODE0 0xDE
+#define SYNCCODE1 0xAD
+
 enum WLGGZNetworkOpcodes
 {
 	// The first six opcodes are "old ones"
@@ -102,15 +105,56 @@ enum WLGGZNetworkOpcodes
 	/** 
 	 * 
 	 * one integer - file id
-	 * one integer - 
+	 * one integer - status recieved and accepted, resend, denied
 	 */
 	op_file_packet_recv = 14,
-	
-	op_send_savegame = 15,
-	
-	op_savegame_received = 16,
 
-	op_unreachable = 99
+	/**
+	 * indicates a savegame shoul be saved. file must be save prior with
+	 * @ref op_file_packet
+	 * one integer - file id
+	 * one integer - gametime
+	 */
+	op_send_savegame = 15,
+
+	/**
+	 * indicates a read error ocurred. The connection is desyncronized. Host
+	 * should send 100 x value zero (as single bytes, not ggz_write_* followed
+	 * by @ref SYNCCODE0 and SYNCCODE1
+	 */
+	op_desync = 16,
+
+	/**
+	 * indicates the last opcode was not understood by server
+	 */
+	op_unsupported = 17,
+
+	/**
+	 * player leave the game.
+	 * integer - widelands player number
+	 * integer - gametime
+	 */
+	op_leave = 18,
+
+	/**
+	 * request to check if the client is host or not.
+	 * a @ref op_acknowledge is send back. With one boolean after the request
+	 * code
+	 */
+	op_i_am_host = 19,
+
+	/**
+	 * a opcode to answer simple requests.
+	 * intger - opcode which is answerded
+	 * the following depends on the request
+	 */
+	op_acknowledge = 20,
+
+	/**
+	 * old opcode - send on connect if the server could not reach the game
+	 * server
+	 */
+	op_unreachable = 99,
 };
 
 /// Data types for the null terminated parameter list for opcodes.
