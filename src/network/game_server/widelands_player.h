@@ -27,8 +27,6 @@
 
 struct WidelandsPlayerStats
 {
-		uint32_t result;
-		uint32_t points;
 		uint32_t land;
 		uint32_t buildings;
 		uint32_t milbuildingslost;
@@ -110,6 +108,9 @@ class WidelandsPlayer
 
 		WidelandsPlayerStats last_stats;
 		std::vector<WidelandsPlayerStats> stats_min, stats_max, stats_avg;
+
+		uint32_t result;
+		uint32_t points;
 
 	private:
 		WidelandsPlayer();

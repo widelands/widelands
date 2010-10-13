@@ -112,7 +112,7 @@ WidelandsServer::~WidelandsServer()
 		wllog
 			(DL_DUMP, "            points: %i, milbuildingslost: %i, "
 			 "civbuildingslost: %i",
-			 it->second->last_stats.points, it->second->last_stats.milbuildingslost,
+			 it->second->points, it->second->last_stats.milbuildingslost,
 			 it->second->last_stats.civbuildingslost);
 		it++;
 	}
@@ -324,12 +324,12 @@ void WidelandsServer::game_done()
 				if (it->second->ggz_player_number() >= players())
 					wllog(DL_ERROR, "ERROR: ggz_player_number() >= players()");
 				else {
-					if (it->second->last_stats.result == gamestatresult_winner) {
+					if (it->second->result == gamestatresult_winner) {
 						results[it->second->ggz_player_number()] = GGZ_GAME_WIN;
 						score[it->second->ggz_player_number()] = 7;
 					}
 					else if
-						(it->second->last_stats.result == gamestatresult_looser)
+						(it->second->result == gamestatresult_looser)
 					{
 						results[it->second->ggz_player_number()] = GGZ_GAME_LOSS;
 						score[it->second->ggz_player_number()] = -3;
@@ -371,12 +371,12 @@ void WidelandsServer::game_done()
 					wllog(DL_ERROR, "ERROR: ggz_player_number() >= players()");
 				else
 				{
-					if (it->second->last_stats.result == gamestatresult_winner) {
+					if (it->second->result == gamestatresult_winner) {
 						results[it->second->ggz_player_number()] = GGZ_GAME_WIN;
 						score[it->second->ggz_player_number()] = 1;
 					}
 					else if
-						(it->second->last_stats.result == gamestatresult_looser)
+						(it->second->result == gamestatresult_looser)
 					{
 						results[it->second->ggz_player_number()] = GGZ_GAME_LOSS;
 						score[it->second->ggz_player_number()] = -1;

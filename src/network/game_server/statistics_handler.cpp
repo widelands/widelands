@@ -210,6 +210,7 @@ bool StatisticsHandler::report_game_result
 			{
 				CHECKTYPE(l, integer)
 				playernum = l.front().get_integer();
+				wllog(DL_DUMP, "got playernumber %i", playernum);
 				player = g_wls->get_player_by_wlid(playernum);
 					if(not player)
 						wllog
@@ -220,16 +221,22 @@ bool StatisticsHandler::report_game_result
 			}
 			case gamestat_result:
 				CHECKTYPE(l, integer);
+				wllog
+					(DL_DUMP, "got player result for %i: %i", playernum,
+					 l.front().get_integer());
 				if(player)
-					player->last_stats.result=l.front().get_integer();
+					player->result=l.front().get_integer();
 				else
 					wllog
-					(DL_ERROR, "GAMESTATISTICS: got result but have no player");
+						(DL_ERROR, "GAMESTATISTICS: got result but have no player");
 				break;
 			case gamestat_points:
 				CHECKTYPE(l, integer);
+				wllog
+					(DL_DUMP, "got player points for %i: %i", playernum,
+					 l.front().get_integer());
 				if(player)
-					player->last_stats.points=l.front().get_integer();
+					player->points=l.front().get_integer();
 				else
 					wllog
 						(DL_ERROR, "GAMESTATISTICS: got points but have no player");
@@ -260,7 +267,7 @@ bool StatisticsHandler::report_game_result
 					if (m_result_gametime != l.front().get_integer())
 						wllog(DL_WARN, "client report at different gametimes");
 			default:
-				wllog(DL_WARN,  "GAMESTATISTICS: Warning unknown WLGGZGameStats!");
+				wllog(DL_WARN, "GAMESTATISTICS: Warning unknown WLGGZGameStats!");
 		}
 	}
 }
