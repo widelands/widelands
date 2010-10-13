@@ -229,13 +229,17 @@ void send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 	{
 		if(cur == 0) {
 			min = max = stat.at(c);
-			avg = static_cast<double>(stat.at(c));
+			avg = 0; //static_cast<double>(stat.at(c));
 		}
+
 		if (stat.at(c) > max)
 			max = stat.at(c);
 		if (stat.at(c) < min)
 			min = stat.at(c);
-		avg = (avg + stat.at(c) / 2.0);
+
+		avg +=
+			static_cast<double>(stat.at(c)) / static_cast<double>(sample_count);
+
 		if (++cur >= sample_count or c == (stat.size() -1 ))
 		{
 			wr.open_list(c);

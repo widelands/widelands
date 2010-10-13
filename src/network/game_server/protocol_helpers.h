@@ -186,7 +186,7 @@ class WLGGZ_writer {
 			m_in_cmd = true;
 
 			DBG(std::cout << "parameter_list_writer: " << level <<
-				"- write parameterlist type code\n";)
+				"- write parameterlist type code: " << t << std::endl;)
 			DBG(level += "  ";)
 
 			ggz_write_int(m_fd, t);
@@ -214,7 +214,7 @@ class WLGGZ_writer {
 			}
 
 			DBG(std::cout << "parameter_list_writer: " << level << "- write datatype integer\n";)
-			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(int)\n";)
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(int): " << d << std::endl;)
 
 			ggz_write_int(m_fd, ggzdatatype_integer);
 			ggz_write_int(m_fd, d);
@@ -240,7 +240,7 @@ class WLGGZ_writer {
 			}
 
 			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist datatype string\n";)
-			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(string)\n";)
+			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(string): " << d << std::endl;;)
 
 			ggz_write_int(m_fd, ggzdatatype_string);
 			ggz_write_string(m_fd, d.c_str());
