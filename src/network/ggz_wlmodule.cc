@@ -220,6 +220,7 @@ bool ggz_wlmodule::send_game_info
 
 void send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 {
+	int i = 0;
 	uint32_t c = 0;
 	uint32_t cur = 0;
 	uint32_t min, max;
@@ -235,7 +236,7 @@ void send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 		if (stat.at(c) < min)
 			min = stat.at(c);
 		avg = (avg + stat.at(c) / 2.0);
-		if (cur == sample_count or c == (stat.size() -1 ))
+		if (++cur >= sample_count or c == (stat.size() -1 ))
 		{
 			wr.open_list(c);
 			wr << static_cast<int>(avg);
@@ -243,8 +244,10 @@ void send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 			wr << static_cast<int>(max);
 			wr.close_list();
 			cur = 0;
+			i++;
 		}
 	}
+	log("wrote %i stat points. statsize: %i/%i\n", i, stat.size(), sample_count);
 }
 
 bool ggz_wlmodule::send_statistics
@@ -291,6 +294,7 @@ bool ggz_wlmodule::send_statistics
 
 			w.open_list(gamestat_buildings);
 			send_stat(w, resultvec.at(i).nr_buildings);
+			w.close_list();
 
 			w.open_list(gamestat_militarystrength);
 			send_stat(w, resultvec.at(i).miltary_strength);
