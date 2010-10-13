@@ -97,6 +97,7 @@ private:
 	/// strip_basename()
 	bool        m_oldzip;
 	std::string m_zipfilename;
+	std::string m_basenamezip;
 	std::string m_basename;
 
 };
