@@ -48,7 +48,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 	{
 		CHECKTYPE(p, list)
 
-		int type = p.front().get_type();
+		int type = p.front().get_list_type();
 		WLGGZParameterList l = p.front().get_list();
 		p.pop_front();
 		switch(type)
@@ -63,6 +63,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 				break;
 			case gameinfo_playername:
 			{
+				wllog(DL_DUMPDATA, "gameinfo_playername");
 				CHECKTYPE(l, string)
 				if
 					(playername.empty() and not
@@ -84,6 +85,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 			}
 				break;
 			case gameinfo_tribe:
+				wllog(DL_DUMPDATA, "gameinfo_tribe");
 				CHECKTYPE(l, string)
 				if (player->tribe().empty())
 					player->set_tribe(l.front().get_string());
@@ -99,20 +101,24 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 				}		
 				break; 
 			case gameinfo_gametype:
+				wllog(DL_DUMPDATA, "gameinfo_gametype");
 				CHECKTYPE(l, integer)
 					m_map.set_gametype
 						(static_cast<WLGGZGameType>(l.front().get_integer()));
 				break;
 			case gameinfo_mapname:
+				wllog(DL_DUMPDATA, "gameinfo_mapname");
+				wllog(DL_DUMPDATA, "list.size(): %i", l.size());
 				CHECKTYPE(l, string)
 				if(m_map.name().empty())
 				{
 					std::string mapname = l.front().get_string();
 					m_map.set_name(mapname);
-					break;
 				}
+				break;
 			case gameinfo_mapsize:
 			{
+				wllog(DL_DUMPDATA, "gameinfo_mapsize");
 				int width, height;
 				CHECKTYPE(l, integer)
 				width = l.front().get_integer();
