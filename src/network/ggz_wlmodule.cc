@@ -161,7 +161,7 @@ bool ggz_wlmodule::send_game_info
 		log("GGZWLMODULE not supported by server\n");
 		return false;
 	}
-	// 
+
 	if (NetGGZ::ref().core().is_in_table()) {
 		WLGGZ_writer w = WLGGZ_writer(m_data_fd, op_game_information);
 
@@ -170,7 +170,7 @@ bool ggz_wlmodule::send_game_info
 		w.close_list();
 
 		w.open_list(gameinfo_mapsize);
-		w << map_w << map_h;
+		w << map_w << map_h << static_cast<int>(playerinfo.size());
 		w.close_list();
 
 		w.open_list(gameinfo_gametype);

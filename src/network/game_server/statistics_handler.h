@@ -31,7 +31,7 @@ class StatisticsHandler {
 		bool report_gameinfo (Client const * client, WLGGZParameterList & p);
 		bool report_game_result (Client const * client, WLGGZParameterList & p);
 
-		bool have_stats() { return false; }
+		bool have_stats() { return m_result_gametime != 0; }
 		WidelandsMap & map() {return m_map; }
 	private:
 		WidelandsMap m_map;

@@ -251,7 +251,14 @@ bool StatisticsHandler::report_game_result
 				break;
 			case gamestat_gametime:
 				CHECKTYPE(l, integer);
+				wllog
+					(DL_DEBUG, "game end time by %s(%i): %i",
+					 client->name, client->number, l.front().get_integer());
+				if (m_result_gametime == 0)
 					m_result_gametime = l.front().get_integer();
+				else
+					if (m_result_gametime != l.front().get_integer())
+						wllog(DL_WARN, "client report at different gametimes");
 			default:
 				wllog(DL_WARN,  "GAMESTATISTICS: Warning unknown WLGGZGameStats!");
 		}
