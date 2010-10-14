@@ -256,7 +256,7 @@ void ggz_wlmodule::send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 		if (++cur >= sample_count or c == (stat.size() -1 ))
 		{
 			if (cur < sample_count)
-				avg *= sample_count / cur;
+				avg *= sample_count / (cur - 1);
 			
 			wr.open_list(c / sample_count);
 			wr << static_cast<int>(avg);
@@ -324,7 +324,7 @@ bool ggz_wlmodule::send_statistics
 			send_stat(w, resultvec.at(i).nr_casualties);
 			w.close_list();
 
-			w.open_list(gamestat_land);
+			w.open_list(gamestat_buildingsdefeat);
 			send_stat(w, resultvec[i].nr_civil_blds_defeated);
 			w.close_list();
 
