@@ -357,10 +357,13 @@ void StatisticsHandler::read_stat_vector
 			throw parameterError();
 		CHECKTYPE(l, integer);
 		int avg = l.front().get_integer();
+		l.pop_front();
 		CHECKTYPE(l, integer);
 		int min = l.front().get_integer();
+		l.pop_front();
 		CHECKTYPE(l, integer);
 		int max = l.front().get_integer();
+		l.pop_front();
 		std::cout << "sample "<< sample << ": avg: " << avg << ", min: " <<
 			min << ", max: " << max << std::endl;
 		if (sample > lastsample++)
