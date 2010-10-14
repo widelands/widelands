@@ -61,7 +61,8 @@ struct Net_Player_Info {
 		name(),
 		tribe(),
 		type(playertype_null),
-		result(gamestatresult_null)
+		result(gamestatresult_null),
+		team(0)
 		{}
 	int playernum;
 	int points;

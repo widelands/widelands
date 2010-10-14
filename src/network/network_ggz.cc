@@ -261,7 +261,8 @@ void NetGGZ::report_result
 	playerinfo.at(player-1).points = points;
 	playerinfo.at(player-1).result =
 		(win?gamestatresult_winner:gamestatresult_looser);
-	playerinfo.at(player-1).team = team;
+	// A bit late to set team of a player ?!? Game is already over
+	//playerinfo.at(player-1).team = team;
 
 	bool finished = true;
 
@@ -307,6 +308,10 @@ void NetGGZ::set_players(GameSettings & settings)
 		win_condition = gametype_collectors;
 	else if (settings.win_condition.compare("03_tribes_together") == 0)
 		win_condition = gametype_tribes_together;
+	else if (settings.win_condition.compare("03_territorial_lord") == 0)
+		win_condition = gametype_territorial_lord;
+	else if (settings.win_condition.compare("03_wood_gnome") == 0)
+		win_condition = gametype_wood_gnome;
 	else
 		win_condition = gametype_endless;
 
@@ -324,6 +329,7 @@ void NetGGZ::set_players(GameSettings & settings)
 		Net_Player_Info player;
 		player.name = pit->name;
 		player.tribe = pit->tribe;
+		player.team = pit->team;
 		player.playernum = i;
 		if (pit->ai.compare("Aggressive") == 0)
 			player.type = playertype_ai_aggressive;
