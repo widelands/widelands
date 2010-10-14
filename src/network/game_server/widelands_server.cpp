@@ -77,7 +77,7 @@ WidelandsServer::~WidelandsServer()
 	wllog
 		(DL_DUMP, "Map %s (%i, %i)", wlstat.map().name().c_str(),
 		 wlstat.map().w(), wlstat.map().h());
-	wllog(DL_DUMP, "GameTime: %i", wlproto.m_result_gametime);
+	wllog(DL_DUMP, "GameTime: %i", wlstat.game_end_time());
 
 	std::string wincond = "unknown (ERROR)";
 	switch(wlstat.map().gametype())
@@ -347,7 +347,7 @@ void WidelandsServer::game_done()
 		mfile << "Map: " << wlstat.map().name() << std::endl;
 		mfile << "Map size: " << wlstat.map().w() << "x" << wlstat.map().h();
 		mfile << std::endl;
-		mfile << "Duration: " << (wlproto.m_result_gametime) << std::endl;
+		mfile << "Duration: " << (wlstat.game_end_time() / 1000) << std::endl;
 
 		std::string wincond = "unknown (ERROR)";
 		switch(wlstat.map().gametype())
@@ -372,7 +372,7 @@ void WidelandsServer::game_done()
 				break;
 		}
 		
-		mfile << "Win condition: " << wincond << std::endl;
+		mfile << "Win condition: " << wincond << " (" << wlstat.map().gametype() << ")" << std::endl;
 
 		mfile << std::endl << 
 			"#################################################################" <<
@@ -411,8 +411,9 @@ void WidelandsServer::game_done()
 					mfile << "left the game";
 					break;
 				default:
-					mfile << "unknown result" << std::endl;
+					mfile << "unknown result";
 			}
+			mfile << " (" << player.result << ")"<< std::endl;
 
 			mfile << "Points: " << player.points << std::endl;
 
@@ -533,10 +534,10 @@ void WidelandsServer::game_done()
 		}
 		if (number < 2)
 			wllog(DL_INFO, "Less than two ggz players in game. Do not report");
-		if (wlproto.m_result_gametime < (30 * 60 * 1000))
+		if (wlstat.game_end_time() < (30 * 60 * 1000))
 			wllog(DL_INFO, "Game lasted less than 30 minutes. Do not report");
 		// TODO feed teams to reportGame
-		if (number > 1 and wlproto.m_result_gametime > (30 * 60 * 1000))
+		if (number > 1 and wlstat.game_end_time() > (30 * 60 * 1000))
 			reportGame(NULL, results, score);
 	}
 	else if (wlstat.map().gametype() == gametype_tribes_together)

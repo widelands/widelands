@@ -30,7 +30,6 @@ class ProtocolHandler {
 		void process_post_b16_data(int opcode, Client * const client);
 		bool send_greeter(Client * const client);
 
-		int m_result_gametime;
 		std::string host_version, host_build;
 };
 

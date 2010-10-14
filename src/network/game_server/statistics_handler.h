@@ -34,6 +34,7 @@ class StatisticsHandler {
 
 		bool have_stats() { return m_result_gametime != 0; }
 		WidelandsMap & map() {return m_map; }
+		int game_end_time() { return m_result_gametime; }
 	private:
 		void read_stat_vector
 			(WidelandsPlayer & plr, WLGGZGameStats type,
