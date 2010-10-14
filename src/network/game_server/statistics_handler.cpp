@@ -265,6 +265,9 @@ bool StatisticsHandler::report_game_result
 					CHECKTYPE(l, integer);
 					int count = l.front().is_integer();
 					l.pop_front();
+					wllog
+						(DL_DUMP, "got statistic vector %i. Size: %i, last: %i",
+						 gameinfo, count, last);
 					switch(gameinfo){
 						case gamestat_land:
 							player->last_stats.land = last;
