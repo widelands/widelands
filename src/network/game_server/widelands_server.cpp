@@ -37,6 +37,12 @@
 #include <netdb.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <fstream>
+#include <ctime>
+
+#ifndef WLGGZ_GAME_FILES_DIRECTORY
+#define WLGGZ_GAME_FILES_DIRECTORY "/var/ggzd/gamedata/Widelands"
+#endif
 
 std::string WidelandsPlayer::m_host_username("");
 
@@ -302,9 +308,169 @@ void WidelandsServer::game_done()
 		score[p] = 0;
 	}
 
-	if (m_reported)
+	if (m_reported) {
+		wllog(DL_INFO, "Game already reported. Do not report again");
 		return;
+	}
 
+	std::time_t curtime = time(0);
+
+	std::string gamefile(WLGGZ_GAME_FILES_DIRECTORY);
+	if (*(gamefile.end()) != '/')
+		gamefile += "/";
+	std::time_t t = std::time(0);
+	gamefile += asctime(localtime(&curtime));
+	gamefile += ".wlgame";
+
+	std::fstream mfile;
+	mfile.open(gamefile.c_str(), std::ios::in);
+	if (mfile) {
+		wllog
+			(DL_WARN,
+			 "File %s already exists. Do not write anything.", gamefile.c_str());
+		mfile.close();
+	} else {
+		mfile.close();
+		wllog(DL_INFO, "Writing game information to %s", gamefile.c_str());
+		mfile.open(gamefile.c_str(), std::ios::out);
+		if (not mfile)
+			wllog(DL_INFO, "failed to open %s", gamefile.c_str());
+	}
+
+	if (mfile)
+	{
+		mfile << "Widelands game on " << localtime(&curtime) << std::endl;
+		mfile << "Map: " << wlstat.map().name() << std::endl;
+		mfile << "Map size: " << wlstat.map().w() << "x" << wlstat.map().h();
+		mfile << std::endl;
+		mfile << "Duration: " << (wlproto.m_result_gametime / 1000) << std::endl;
+
+		std::string wincond = "unknown (ERROR)";
+		switch(wlstat.map().gametype())
+		{
+			case gametype_endless:
+				wincond = "endless";
+				break;
+			case gametype_defeatall:
+				wincond = "defeat all";
+				break;
+			case gametype_collectors:
+				wincond = "collectors";
+				break;
+			case gametype_tribes_together:
+				wincond = "tribes together (deprecated)";
+				break;
+			case gametype_territorial_lord:
+				wincond = "territorial lord";
+				break;
+			case gametype_wood_gnome:
+				wincond = "wood gnome";
+				break;
+		}
+		
+		mfile << "Win condition: " << wincond << std::endl;
+
+		mfile << std::endl << 
+			"#################################################################" <<
+			std::endl << "Players:" << std::endl << std::endl;
+
+		std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
+		while(it != m_players.end())
+		{
+			WidelandsPlayer & player = *(it->second);
+			std::string playername = it->first;
+
+			mfile << "Player \"" << playername << "\"" << std::endl;
+			mfile << "Widelands number: " << player.wl_player_number() << std::endl;
+			mfile << "GGZ seat number: " << player.ggz_player_number() << std::endl;
+			mfile << "Player type: ";
+			if (player.is_spectator())
+				mfile << "spectator ";
+			if (player.is_player_or_bot())
+				mfile << "player ";
+			if (player.is_host())
+				mfile << "host";
+			mfile << std::endl;
+			mfile << "Tribe: " << player.tribe() << std::endl;
+
+			mfile << "Result: ";
+			switch(player.result) {
+				default:
+					mfile << "unknown result" << std::endl;
+			}
+
+			mfile << "Points: " << player.points << std::endl;
+			mfile << std::endl <<
+				"(land, buildings, milbuildingslost, civbuildingslost, "
+				"buildingsdefeat, milbuildingsconq, economystrength, "
+				"militarystrength, workers, wares, productivity, casualties, kills)"
+				<< std::endl << std::endl;
+			mfile << "Last values:" << std::endl << "(";
+			mfile << player.last_stats.land << ", ";
+			mfile << player.last_stats.buildings << ", ";
+			mfile << player.last_stats.milbuildingslost << ", ";
+			mfile << player.last_stats.civbuildingslost << ", ";
+			mfile << player.last_stats.buildingsdefeat << ", ";
+			mfile << player.last_stats.milbuildingsconq << ", ";
+			mfile << player.last_stats.economystrength << ", ";
+			mfile << player.last_stats.militarystrength << ", ";
+			mfile << player.last_stats.workers << ", ";
+			mfile << player.last_stats.wares << ", ";
+			mfile << player.last_stats.productivity << ", ";
+			mfile << player.last_stats.casualties << ", ";
+			mfile << player.last_stats.kills << ")" << std::endl;
+			
+			mfile << std::endl << "Statistics (avg, min, max) every five minutes:"
+				<< std::endl;
+
+			for (int i = 0; i < player.stats_avg.size(); i++)
+			{
+				mfile << i << ": (";
+				mfile << player.stats_avg.at(i).land << " (" <<
+					player.stats_min.at(i).land << ", " <<
+					player.stats_max.at(i).land << "), ";
+				mfile << player.stats_avg.at(i).buildings << " (" <<
+					player.stats_min.at(i).buildings << ", " <<
+					player.stats_max.at(i).buildings << "), ";
+				mfile << player.stats_avg.at(i).milbuildingslost << " (" <<
+					player.stats_min.at(i).milbuildingslost << ", " <<
+					player.stats_max.at(i).milbuildingslost << "), ";
+				mfile << player.stats_avg.at(i).civbuildingslost << " (" <<
+					player.stats_min.at(i).civbuildingslost << ", " <<
+					player.stats_max.at(i).civbuildingslost << "), ";
+				mfile << player.stats_avg.at(i).buildingsdefeat << " (" <<
+					player.stats_min.at(i).buildingsdefeat << ", " <<
+					player.stats_max.at(i).buildingsdefeat << "), ";
+				mfile << player.stats_avg.at(i).milbuildingsconq << " (" <<
+					player.stats_min.at(i).milbuildingsconq << ", " <<
+					player.stats_max.at(i).milbuildingsconq << "), ";
+				mfile << player.stats_avg.at(i).economystrength << " (" <<
+					player.stats_min.at(i).economystrength << ", " <<
+					player.stats_max.at(i).economystrength << "), ";
+				mfile << player.stats_avg.at(i).militarystrength << " (" <<
+					player.stats_min.at(i).militarystrength << ", " <<
+					player.stats_max.at(i).militarystrength << "), ";
+				mfile << player.stats_avg.at(i).workers << " (" <<
+					player.stats_min.at(i).workers << ", " <<
+					player.stats_max.at(i).workers << "), ";
+				mfile << player.stats_avg.at(i).wares << " (" <<
+					player.stats_min.at(i).wares << ", " <<
+					player.stats_max.at(i).wares << "), ";
+				mfile << player.stats_avg.at(i).productivity << " (" <<
+					player.stats_min.at(i).productivity << ", " <<
+					player.stats_max.at(i).productivity << "), ";
+				mfile << player.stats_avg.at(i).casualties << " (" <<
+					player.stats_min.at(i).casualties << ", " <<
+					player.stats_max.at(i).casualties << "), ";
+				mfile << player.stats_avg.at(i).kills << " (" <<
+					player.stats_min.at(i).kills << ", " <<
+					player.stats_max.at(i).kills << "))" << std::endl;
+			}
+			mfile << std::endl << std::endl;
+		}
+		mfile.close();
+	}
+	
 	if (wlstat.map().gametype() == gametype_defeatall)
 	{
 		wllog(DL_INFO, "gametype defeat all");
