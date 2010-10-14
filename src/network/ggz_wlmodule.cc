@@ -233,7 +233,10 @@ void ggz_wlmodule::send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 	}
 
 	wr << static_cast<int>(stat.back());
-	wr << static_cast<int>(stat.size() / sample_count);
+	if (stat.size() % sample_count)
+		wr << static_cast<int>(stat.size() / sample_count) + 1;
+	else
+		wr << static_cast<int>(stat.size() / sample_count);
 
 	for (; c < stat.size(); c++)
 	{
@@ -252,6 +255,9 @@ void ggz_wlmodule::send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 
 		if (++cur >= sample_count or c == (stat.size() -1 ))
 		{
+			if (cur < sample_count)
+				avg *= sample_count / cur;
+			
 			wr.open_list(c / sample_count);
 			wr << static_cast<int>(avg);
 			wr << static_cast<int>(min);

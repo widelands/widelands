@@ -397,14 +397,28 @@ void WidelandsServer::game_done()
 				mfile << "host";
 			mfile << std::endl;
 			mfile << "Tribe: " << player.tribe() << std::endl;
+			mfile << "Team: " << player.team() << std::endl;
 
 			mfile << "Result: ";
 			switch(player.result) {
+				case gamestatresult_looser:
+					mfile << "lost";
+					break;
+				case gamestatresult_winner:
+					mfile << "won";
+					break;
+				case gamestatresult_leave:
+					mfile << "left the game";
+					break;
 				default:
 					mfile << "unknown result" << std::endl;
 			}
 
 			mfile << "Points: " << player.points << std::endl;
+
+			mfile << "Version: " << player.version() << std::endl;
+			mfile << "Build: " << player.build() << std::endl;
+			
 			mfile << std::endl <<
 				"(land, buildings, milbuildingslost, civbuildingslost, "
 				"buildingsdefeat, milbuildingsconq, economystrength, "

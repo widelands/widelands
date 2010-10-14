@@ -319,6 +319,11 @@ bool StatisticsHandler::report_game_result
 							(DL_ERROR,
 							 "Catched parameter error while "
 							 "reading statisitcs vector: %s", e.what());
+					} catch (std::exception e) {
+						wllog
+							(DL_FATAL,
+							 "oops catched std::exception while "
+							 "reading stat vector: %s", e.what());
 					}
 				}
 				break;
@@ -369,7 +374,8 @@ void StatisticsHandler::read_stat_vector
 			wllog(DL_ERROR, "got non continous stats");
 			return;
 		}
-		if (sample > count) {
+
+		if (sample >= count) {
 			wllog(DL_ERROR, "got a statistic sample with number > count");
 			return;
 		}
@@ -378,71 +384,72 @@ void StatisticsHandler::read_stat_vector
 			plr.stats_min.resize((count>1024)?1024:count);
 			plr.stats_max.resize((count>1024)?1024:count);
 		}
+
 		switch(type) {
 			case gamestat_land:
-				plr.stats_avg[sample].land = avg;
-				plr.stats_min[sample].land = min;
-				plr.stats_max[sample].land = max;
+				plr.stats_avg.at(sample).land = avg;
+				plr.stats_min.at(sample).land = min;
+				plr.stats_max.at(sample).land = max;
 				break;
 			case gamestat_buildings:
-				plr.stats_avg[sample].buildings = avg;
-				plr.stats_min[sample].buildings = min;
-				plr.stats_max[sample].buildings = max;
+				plr.stats_avg.at(sample).buildings = avg;
+				plr.stats_min.at(sample).buildings = min;
+				plr.stats_max.at(sample).buildings = max;
 				break;
 			case gamestat_milbuildingslost:
-				plr.stats_avg[sample].milbuildingslost = avg;
-				plr.stats_min[sample].milbuildingslost = min;
-				plr.stats_max[sample].milbuildingslost = max;
+				plr.stats_avg.at(sample).milbuildingslost = avg;
+				plr.stats_min.at(sample).milbuildingslost = min;
+				plr.stats_max.at(sample).milbuildingslost = max;
 				break;
 			case gamestat_civbuildingslost:
-				plr.stats_avg[sample].civbuildingslost = avg;
-				plr.stats_min[sample].civbuildingslost = min;
-				plr.stats_max[sample].civbuildingslost = max;
+				plr.stats_avg.at(sample).civbuildingslost = avg;
+				plr.stats_min.at(sample).civbuildingslost = min;
+				plr.stats_max.at(sample).civbuildingslost = max;
 				break;
 			case gamestat_buildingsdefeat:
-				plr.stats_avg[sample].buildingsdefeat = avg;
-				plr.stats_min[sample].buildingsdefeat = min;
-				plr.stats_max[sample].buildingsdefeat = max;
+				plr.stats_avg.at(sample).buildingsdefeat = avg;
+				plr.stats_min.at(sample).buildingsdefeat = min;
+				plr.stats_max.at(sample).buildingsdefeat = max;
 				break;
 			case gamestat_milbuildingsconq:
-				plr.stats_avg[sample].milbuildingsconq = avg;
-				plr.stats_min[sample].milbuildingsconq = min;
-				plr.stats_max[sample].milbuildingsconq = max;
+				plr.stats_avg.at(sample).milbuildingsconq = avg;
+				plr.stats_min.at(sample).milbuildingsconq = min;
+				plr.stats_max.at(sample).milbuildingsconq = max;
 				break;
 			case gamestat_economystrength:
-				plr.stats_avg[sample].economystrength = avg;
-				plr.stats_min[sample].economystrength = min;
-				plr.stats_max[sample].economystrength = max;
+				plr.stats_avg.at(sample).economystrength = avg;
+				plr.stats_min.at(sample).economystrength = min;
+				plr.stats_max.at(sample).economystrength = max;
 				break;
 			case gamestat_militarystrength:
-				plr.stats_avg[sample].militarystrength = avg;
-				plr.stats_min[sample].militarystrength = min;
-				plr.stats_max[sample].militarystrength = max;
+				plr.stats_avg.at(sample).militarystrength = avg;
+				plr.stats_min.at(sample).militarystrength = min;
+				plr.stats_max.at(sample).militarystrength = max;
 				break;
 			case gamestat_workers:
-				plr.stats_avg[sample].workers = avg;
-				plr.stats_min[sample].workers = min;
-				plr.stats_max[sample].workers = max;
+				plr.stats_avg.at(sample).workers = avg;
+				plr.stats_min.at(sample).workers = min;
+				plr.stats_max.at(sample).workers = max;
 				break;
 			case gamestat_wares:
-				plr.stats_avg[sample].wares = avg;
-				plr.stats_min[sample].wares = min;
-				plr.stats_max[sample].wares = max;
+				plr.stats_avg.at(sample).wares = avg;
+				plr.stats_min.at(sample).wares = min;
+				plr.stats_max.at(sample).wares = max;
 				break;
 			case gamestat_productivity:
-				plr.stats_avg[sample].productivity = avg;
-				plr.stats_min[sample].productivity = min;
-				plr.stats_max[sample].productivity = max;
+				plr.stats_avg.at(sample).productivity = avg;
+				plr.stats_min.at(sample).productivity = min;
+				plr.stats_max.at(sample).productivity = max;
 				break;
 			case gamestat_casualties:
-				plr.stats_avg[sample].casualties = avg;
-				plr.stats_min[sample].casualties = min;
-				plr.stats_max[sample].casualties = max;
+				plr.stats_avg.at(sample).casualties = avg;
+				plr.stats_min.at(sample).casualties = min;
+				plr.stats_max.at(sample).casualties = max;
 				break;
 			case gamestat_kills:
-				plr.stats_avg[sample].kills = avg;
-				plr.stats_min[sample].kills = min;
-				plr.stats_max[sample].kills = max;
+				plr.stats_avg.at(sample).kills = avg;
+				plr.stats_min.at(sample).kills = min;
+				plr.stats_max.at(sample).kills = max;
 				break;
 			default:
 				wllog(DL_ERROR, "unknown stat");
