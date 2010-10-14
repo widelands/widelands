@@ -168,6 +168,8 @@ void WidelandsServer::joinEvent(Client * const client)
 
 	if (not m_wlserver_ip and client->number == 0)
 	{
+		WidelandsPlayer & player = *get_player_by_name(client->name, true);
+		player.is_host();
 		// This is the host
 		// Take peer ip as host ip
 		char * ip;
@@ -299,6 +301,41 @@ void WidelandsServer::set_state_done()
 		game_done();
 	changeState(GGZGameServer::done); 
 }
+
+void WidelandsServer::seatEvent(Seat* seat)
+{
+	if (not seat) {
+		wllog(DL_FATAL, "seatEvent but seat is NULL");
+		return;
+	}
+	if (not seat->client) {
+		wllog(DL_FATAL, "seatEvent but seat->client is NULL");
+		return;
+	}
+	WidelandsPlayer & player = *get_player_by_name(seat->client->name);
+	if (&player) {
+		player.set_ggz_player_number(seat->client->number);
+		player.set_ggz_spectator_number(-1);
+	}
+}
+
+void WidelandsServer::spectatorEvent(Spectator* spectator)
+{
+	if (not spectator) {
+		wllog(DL_FATAL, "spectatorEvent but spectator is NULL");
+		return;
+	}
+	if (not spectator->client) {
+		wllog(DL_FATAL, "spectatorEvent but spectator->client is NULL");
+		return;
+	}
+   WidelandsPlayer & player = *get_player_by_name(spectator->client->name);
+	if (&player) {
+		player.set_ggz_player_number(-1);
+		player.set_ggz_spectator_number(spectator->client->number);
+	}
+}
+
 
 void WidelandsServer::game_done()
 {

@@ -72,6 +72,8 @@ class WidelandsServer : public GGZGameServer
 		void spectatorLeaveEvent(Client *client);
 		void spectatorDataEvent(Client *client);
 		void dataEvent(Client *client);
+		void seatEvent(Seat * seat);
+		void spectatorEvent(Spectator * spectator);
 		void errorEvent();
 		// @}
 

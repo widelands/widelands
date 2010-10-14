@@ -72,6 +72,8 @@ class WidelandsPlayer
 			{ m_ggz_player_number = num; }
 		void set_wl_player_number(int num)
 			{ m_wl_player_number = num; }
+		void set_ggz_spectator_number(int num)
+			{ m_ggz_spectator_number = num; }
 		void set_tribe(std::string tribe) { m_tribe=tribe; }
 		void set_type(WLGGZPlayerType type) { m_type=type; }
 		void set_version(std::string v, std::string b)
