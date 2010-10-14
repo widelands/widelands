@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-10-10 16:05+0000\n"
-"Last-Translator: Andreas Breitschopp <a-breitschopp@ab-tools.de>\n"
+"PO-Revision-Date: 2010-10-13 12:21+0000\n"
+"Last-Translator: Venatrix <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-10-11 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-10-14 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:2052
@@ -171,7 +171,7 @@ msgstr "Baukosten"
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "%s Baustelle"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
