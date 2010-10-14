@@ -360,7 +360,7 @@ void StatisticsHandler::read_stat_vector
 		int max = l.front().get_integer();
 		std::cout << "sample "<< sample << ": avg: " << avg << ", min: " <<
 			min << ", max: " << max << std::endl;
-		if (sample > (plr.stats_avg.size() + 1));
+		if (sample > (plr.stats_avg.size() + 1))
 		{
 			wllog(DL_ERROR, "got non continous stats");
 			return;
