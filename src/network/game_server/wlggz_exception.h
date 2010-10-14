@@ -52,10 +52,10 @@ struct _wlggzexception : public std::exception {
 
 struct _parameterError : public _wlggzexception {
 	_parameterError
-		(const char * f, uint32_t l, std::string const & reason = ""):
-		_wlggzexception(f, l, "parameterError: %s", reason.c_str()) {}
+		(const char * f, uint32_t l, const char * fmt = ""):
+		_wlggzexception(f, l, "parameterError: %s", fmt) {}
 };
 
-#define parameterError(...) _parameterError(__FILE__, __LINE__, __VA_ARGS__)
+#define parameterError() _parameterError(__FILE__, __LINE__)
 
 #endif

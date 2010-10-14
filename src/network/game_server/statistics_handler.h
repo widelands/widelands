@@ -23,6 +23,7 @@
 
 class Client;
 class WidelandsMap;
+class WidelandsPlayer;
 
 class StatisticsHandler {
 	public:
@@ -34,6 +35,9 @@ class StatisticsHandler {
 		bool have_stats() { return m_result_gametime != 0; }
 		WidelandsMap & map() {return m_map; }
 	private:
+		void read_stat_vector
+			(WidelandsPlayer & plr, WLGGZGameStats type,
+			 WLGGZParameterList & p, int count);
 		WidelandsMap m_map;
 		std::string m_host_version, m_host_build;
 		int m_result_gametime;

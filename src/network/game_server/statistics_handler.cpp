@@ -192,7 +192,8 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 bool StatisticsHandler::report_game_result
 	(Client const * client, WLGGZParameterList & p)
 {
-	int gameinfo, playernum=-1;
+	WLGGZGameStats gameinfo;
+	int playernum=-1;
 	std::string playername="";
 	WidelandsPlayer * player = NULL;
 
@@ -201,7 +202,7 @@ bool StatisticsHandler::report_game_result
 	while(p.size())
 	{
 		CHECKTYPE(p, list);
-		gameinfo = p.front().get_list_type();
+		gameinfo = static_cast<WLGGZGameStats>(p.front().get_list_type());
 		WLGGZParameterList l = p.front().get_list();
 		p.pop_front();
 		//wllog(DL_DEBUG, "gameinfo: %i, l.size: %i", gameinfo, l.size());
@@ -255,7 +256,68 @@ bool StatisticsHandler::report_game_result
 			case gamestat_productivity:
 			case gamestat_casualties:
 			case gamestat_kills:
-				wllog(DL_WARN, "Got a statistic vector. Reading not implemented");
+				if (not player)
+					wllog(DL_ERROR, "Got a statistic vector but have no player");
+				else {
+					CHECKTYPE(l, integer)
+					int last = l.front().is_integer();
+					l.pop_front();
+					CHECKTYPE(l, integer);
+					int count = l.front().is_integer();
+					l.pop_front();
+					switch(gameinfo){
+						case gamestat_land:
+							player->last_stats.land = last;
+							break;
+						case gamestat_buildings:
+							player->last_stats.buildings = last;
+							break;
+						case gamestat_milbuildingslost:
+							player->last_stats.milbuildingslost = last;
+							break;
+						case gamestat_civbuildingslost:
+							player->last_stats.civbuildingslost = last;
+							break;
+						case gamestat_buildingsdefeat:
+							player->last_stats.buildingsdefeat = last;
+							break;
+						case gamestat_milbuildingsconq:
+							player->last_stats.milbuildingsconq = last;
+							break;
+						case gamestat_economystrength:
+							player->last_stats.economystrength = last;
+							break;
+						case gamestat_militarystrength:
+							player->last_stats.militarystrength = last;
+							break;
+						case gamestat_workers:
+							player->last_stats.workers = last;
+							break;
+						case gamestat_wares:
+							player->last_stats.wares = last;
+							break;
+						case gamestat_productivity:
+							player->last_stats.productivity = last;
+							break;
+						case gamestat_casualties:
+							player->last_stats.casualties = last;
+							break;
+						case gamestat_kills:
+							player->last_stats.kills = last;
+							break;
+						default:
+							wllog(DL_ERROR, "unknown statistic vector");
+					}
+
+					try {
+						read_stat_vector(*player, gameinfo, l, count);
+					} catch(_parameterError e) {
+						wllog
+							(DL_ERROR,
+							 "Catched parameter error while "
+							 "reading statisitcs vector: %s", e.what());
+					}
+				}
 				break;
 			case gamestat_gametime:
 				CHECKTYPE(l, integer);
@@ -274,4 +336,108 @@ bool StatisticsHandler::report_game_result
 					 gameinfo, l.size());
 		}
 	}
+}
+
+void StatisticsHandler::read_stat_vector
+	(WidelandsPlayer& plr, WLGGZGameStats type, WLGGZParameterList& p, int count)
+{
+	if (count > 1024)
+		wllog(DL_WARN, "statistic vector longer than 1024 samples");
+	
+	int i = 0;
+	while(p.size() and i++ < 1024) {
+		CHECKTYPE(p, list)
+		WLGGZParameterList l = p.front().get_list();
+		int sample = p.front().get_list_type();
+		p.pop_front();
+		if (l.size() < 3)
+			throw parameterError();
+		CHECKTYPE(l, integer);
+		int avg = l.front().get_integer();
+		CHECKTYPE(l, integer);
+		int min = l.front().get_integer();
+		CHECKTYPE(l, integer);
+		int max = l.front().get_integer();
+		std::cout << "sample "<< sample << ": avg: " << avg << ", min: " <<
+			min << ", max: " << max << std::endl;
+		if (sample > (plr.stats_avg.size() + 1));
+		{
+			wllog(DL_ERROR, "got non continous stats");
+			return;
+		}
+		if (sample > count) {
+			wllog(DL_ERROR, "got a statistic sample with number > count");
+			return;
+		}
+		switch(type) {
+			case gamestat_land:
+				plr.stats_avg[sample].land = avg;
+				plr.stats_min[sample].land = min;
+				plr.stats_max[sample].land = max;
+				break;
+			case gamestat_buildings:
+				plr.stats_avg[sample].buildings = avg;
+				plr.stats_min[sample].buildings = min;
+				plr.stats_max[sample].buildings = max;
+				break;
+			case gamestat_milbuildingslost:
+				plr.stats_avg[sample].milbuildingslost = avg;
+				plr.stats_min[sample].milbuildingslost = min;
+				plr.stats_max[sample].milbuildingslost = max;
+				break;
+			case gamestat_civbuildingslost:
+				plr.stats_avg[sample].civbuildingslost = avg;
+				plr.stats_min[sample].civbuildingslost = min;
+				plr.stats_max[sample].civbuildingslost = max;
+				break;
+			case gamestat_buildingsdefeat:
+				plr.stats_avg[sample].buildingsdefeat = avg;
+				plr.stats_min[sample].buildingsdefeat = min;
+				plr.stats_max[sample].buildingsdefeat = max;
+				break;
+			case gamestat_milbuildingsconq:
+				plr.stats_avg[sample].milbuildingsconq = avg;
+				plr.stats_min[sample].milbuildingsconq = min;
+				plr.stats_max[sample].milbuildingsconq = max;
+				break;
+			case gamestat_economystrength:
+				plr.stats_avg[sample].economystrength = avg;
+				plr.stats_min[sample].economystrength = min;
+				plr.stats_max[sample].economystrength = max;
+				break;
+			case gamestat_militarystrength:
+				plr.stats_avg[sample].militarystrength = avg;
+				plr.stats_min[sample].militarystrength = min;
+				plr.stats_max[sample].militarystrength = max;
+				break;
+			case gamestat_workers:
+				plr.stats_avg[sample].workers = avg;
+				plr.stats_min[sample].workers = min;
+				plr.stats_max[sample].workers = max;
+				break;
+			case gamestat_wares:
+				plr.stats_avg[sample].wares = avg;
+				plr.stats_min[sample].wares = min;
+				plr.stats_max[sample].wares = max;
+				break;
+			case gamestat_productivity:
+				plr.stats_avg[sample].productivity = avg;
+				plr.stats_min[sample].productivity = min;
+				plr.stats_max[sample].productivity = max;
+				break;
+			case gamestat_casualties:
+				plr.stats_avg[sample].casualties = avg;
+				plr.stats_min[sample].casualties = min;
+				plr.stats_max[sample].casualties = max;
+				break;
+			case gamestat_kills:
+				plr.stats_avg[sample].kills = avg;
+				plr.stats_min[sample].kills = min;
+				plr.stats_max[sample].kills = max;
+				break;
+			default:
+				wllog(DL_ERROR, "unknown stat");
+		}
+	}
+	wllog(DL_DUMP, "read %i/%i statistic samples for %i", i, count, type);
 }
