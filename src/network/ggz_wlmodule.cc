@@ -232,7 +232,7 @@ void ggz_wlmodule::send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 		return;
 	}
 
-	wr << static_cast<int>(*(stat.end()));
+	wr << static_cast<int>(stat.back());
 	wr << static_cast<int>(stat.size() / sample_count);
 
 	for (; c < stat.size(); c++)

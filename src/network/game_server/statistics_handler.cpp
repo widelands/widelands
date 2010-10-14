@@ -260,10 +260,10 @@ bool StatisticsHandler::report_game_result
 					wllog(DL_ERROR, "Got a statistic vector but have no player");
 				else {
 					CHECKTYPE(l, integer)
-					int last = l.front().is_integer();
+					int last = l.front().get_integer();
 					l.pop_front();
 					CHECKTYPE(l, integer);
-					int count = l.front().is_integer();
+					int count = l.front().get_integer();
 					l.pop_front();
 					wllog
 						(DL_DUMP, "got statistic vector %i. Size: %i, last: %i",
