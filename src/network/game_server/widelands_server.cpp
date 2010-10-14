@@ -320,6 +320,7 @@ void WidelandsServer::game_done()
 		gamefile += "/";
 	std::time_t t = std::time(0);
 	gamefile += asctime(localtime(&curtime));
+	gamefile = gamefile.substr(0, gamefile.length() - 1);
 	gamefile += ".wlgame";
 
 	std::fstream mfile;
@@ -425,6 +426,7 @@ void WidelandsServer::game_done()
 
 			for (int i = 0; i < player.stats_avg.size(); i++)
 			{
+				try {
 				mfile << i << ": (";
 				mfile << player.stats_avg.at(i).land << " (" <<
 					player.stats_min.at(i).land << ", " <<
@@ -465,6 +467,10 @@ void WidelandsServer::game_done()
 				mfile << player.stats_avg.at(i).kills << " (" <<
 					player.stats_min.at(i).kills << ", " <<
 					player.stats_max.at(i).kills << "))" << std::endl;
+				} catch (std::exception e) {
+					wllog(DL_ERROR, "catched std::exception: %s", e.what());
+					mfile << "Error: catched exception" << std::endl;
+				}
 			}
 			mfile << std::endl << std::endl;
 		}
