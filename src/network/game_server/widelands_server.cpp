@@ -233,6 +233,8 @@ void WidelandsServer::dataEvent(Client* client)
 		return;
 	}
 	wlproto.process_data(client);
+	if (g_wls->stat_handler().have_stats())
+		g_wls->game_done();
 }
 
 
