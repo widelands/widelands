@@ -475,6 +475,7 @@ void WidelandsServer::game_done()
 				}
 			}
 			mfile << std::endl << std::endl;
+			it++;
 		}
 		mfile.close();
 	}
