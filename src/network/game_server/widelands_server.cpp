@@ -342,11 +342,12 @@ void WidelandsServer::game_done()
 
 	if (mfile)
 	{
-		mfile << "Widelands game on " << localtime(&curtime) << std::endl;
+		mfile << "Widelands game on " <<
+			asctime(localtime(&curtime)) << std::endl;
 		mfile << "Map: " << wlstat.map().name() << std::endl;
 		mfile << "Map size: " << wlstat.map().w() << "x" << wlstat.map().h();
 		mfile << std::endl;
-		mfile << "Duration: " << (wlproto.m_result_gametime / 1000) << std::endl;
+		mfile << "Duration: " << (wlproto.m_result_gametime) << std::endl;
 
 		std::string wincond = "unknown (ERROR)";
 		switch(wlstat.map().gametype())
@@ -382,6 +383,7 @@ void WidelandsServer::game_done()
 		{
 			WidelandsPlayer & player = *(it->second);
 			std::string playername = it->first;
+			wllog(DL_DEBUG, "Write player to file: %s", playername);
 
 			mfile << "Player \"" << playername << "\"" << std::endl;
 			mfile << "Widelands number: " << player.wl_player_number() << std::endl;
@@ -477,6 +479,7 @@ void WidelandsServer::game_done()
 			mfile << std::endl << std::endl;
 			it++;
 		}
+		wllog(DL_DEBUG, "Game Information written to file");
 		mfile.close();
 	}
 	

@@ -364,8 +364,6 @@ void StatisticsHandler::read_stat_vector
 		CHECKTYPE(l, integer);
 		int max = l.front().get_integer();
 		l.pop_front();
-		std::cout << "sample "<< sample << ": avg: " << avg << ", min: " <<
-			min << ", max: " << max << std::endl;
 		if (sample > lastsample++)
 		{
 			wllog(DL_ERROR, "got non continous stats");
