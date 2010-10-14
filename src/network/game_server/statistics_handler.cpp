@@ -344,7 +344,7 @@ void StatisticsHandler::read_stat_vector
 	if (count > 1024)
 		wllog(DL_WARN, "statistic vector longer than 1024 samples");
 	
-	int i = 0;
+	int i = 0, lastsample = 0;
 	while(p.size() and i++ < 1024) {
 		CHECKTYPE(p, list)
 		WLGGZParameterList l = p.front().get_list();
@@ -360,7 +360,7 @@ void StatisticsHandler::read_stat_vector
 		int max = l.front().get_integer();
 		std::cout << "sample "<< sample << ": avg: " << avg << ", min: " <<
 			min << ", max: " << max << std::endl;
-		if (sample > (plr.stats_avg.size() + 1))
+		if (sample > lastsample++)
 		{
 			wllog(DL_ERROR, "got non continous stats");
 			return;
@@ -368,6 +368,11 @@ void StatisticsHandler::read_stat_vector
 		if (sample > count) {
 			wllog(DL_ERROR, "got a statistic sample with number > count");
 			return;
+		}
+		if (count > plr.stats_avg.size()) {
+			plr.stats_avg.resize((count>1024)?1024:count);
+			plr.stats_min.resize((count>1024)?1024:count);
+			plr.stats_max.resize((count>1024)?1024:count);
 		}
 		switch(type) {
 			case gamestat_land:
