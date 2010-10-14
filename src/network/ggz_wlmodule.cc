@@ -218,13 +218,23 @@ bool ggz_wlmodule::send_game_info
 // how may statistic samples do we have in five minutes
 #define sample_count (5 * 60 * 1000 / STATISTICS_SAMPLE_TIME)
 
-void send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
+void ggz_wlmodule::send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 {
 	int i = 0;
 	uint32_t c = 0;
 	uint32_t cur = 0;
 	uint32_t min, max;
 	double avg;
+
+	if (stat.size() == 0) {
+		wr << 0;
+		wr << 0;
+		return;
+	}
+
+	wr << static_cast<int>(*(stat.end()));
+	wr << static_cast<int>(stat.size() / sample_count);
+
 	for (; c < stat.size(); c++)
 	{
 		if(cur == 0) {
@@ -242,7 +252,7 @@ void send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 
 		if (++cur >= sample_count or c == (stat.size() -1 ))
 		{
-			wr.open_list(c);
+			wr.open_list((c + 1) / sample_count);
 			wr << static_cast<int>(avg);
 			wr << static_cast<int>(min);
 			wr << static_cast<int>(max);

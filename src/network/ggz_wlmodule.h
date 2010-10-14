@@ -27,6 +27,7 @@
 #include "network_ggz.h"
 #include "logic/game.h"
 
+class WLGGZ_writer;
 
 /**
  * The third part of ggz. This communicates with the widelands game server
@@ -54,7 +55,9 @@ public:
 
 private:
 	ggz_wlmodule(const ggz_wlmodule &) {}
-	ggz_wlmodule & operator= (const ggz_wlmodule &) {}
+	ggz_wlmodule & operator= (const ggz_wlmodule &) { return *this; }
+
+	void send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat);
 
 	int32_t m_data_fd;
 	char * server_ip_addr;
