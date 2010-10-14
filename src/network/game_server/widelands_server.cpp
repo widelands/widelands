@@ -383,7 +383,7 @@ void WidelandsServer::game_done()
 		{
 			WidelandsPlayer & player = *(it->second);
 			std::string playername = it->first;
-			wllog(DL_DEBUG, "Write player to file: %s", playername);
+			wllog(DL_DEBUG, "Write player to file: %s", playername.c_str());
 
 			mfile << "Player \"" << playername << "\"" << std::endl;
 			mfile << "Widelands number: " << player.wl_player_number() << std::endl;
