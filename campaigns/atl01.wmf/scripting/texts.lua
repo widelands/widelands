@@ -116,10 +116,10 @@ obj_make_food_infrastructure = {
    body = obj_text(_"Establish a food production", _
 [[Food is very important for mines and military training areas. Establish
  a well working food environment by building at least one farm, one blackroot
- farm and a mill. The two kinds of flour together with water from a well 
+ farm and a mill. The two kinds of flour together with water from a well
  will be baked to bread in a bakery, so build a bakery and a well too.<br><br>
  The other two important food wares are smoked fish and smoked meat. Raw meat
- is delivered from a hunter. A fisher gets the fish out of the sea while a 
+ is delivered from a hunter. A fisher gets the fish out of the sea while a
  fish breeder makes sure that a school of fish does not go extinct by breeding
  more. Make sure that there are always fish left, otherwise the fish breeder
  won't be able to breed new ones. The smoking happens in a smokery, you
@@ -145,9 +145,9 @@ obj_spidercloth_production = {
  as inputs. Spider yarn is produced by the spiderfarm while gold yarn is
  produced by the gold weaver out of gold.<br><br>
 
- - Build a Weaving-Mill
- - Build a Spiderfarm
- - Build a Goldweaver
+ - Build a Weaving-Mill<br>
+ - Build a Spiderfarm<br>
+ - Build a Goldweaver<br>
 ]]
 
 -- =======================================================================
@@ -311,7 +311,7 @@ food_story_message = {
    body = colionder(_
 [[Ahh, but I think this is impossible to change. The preparing and eating of
  food is something deep ingrained in the Atlanteans - it is just a ceremony
- that we need for our well being. So I guess we cannot take this away from 
+ that we need for our well being. So I guess we cannot take this away from
  the individuals completely. But we might find a compromise in between: For me,
  making bread is a troublesome task: grinding the blackroot and corn to flour
  than baking the bread is lacklustre: I feel a more industrial approach would
@@ -389,28 +389,49 @@ spidercloth_story_ended_messages = {
 -- =======================================================================
 first_leftover_building_found = {
 {
-   title = _ "Strange buildings",
-   body = jundlina(_ "I say",
-[[Maybe we are not alone here..]]
+   title = _ "A dangerous finding",
+   body = jundlina(_ "Jundlina is in thought", _
+[[We found an old building, destroyed and burned by flames. I am very worried
+ about this finding. The building is not of any kind, I've ever seen. It is
+ certainly not designed by any atlantean architect I've ever heard about. The
+ building is crude, the assemblage is sloppy. But the materials are very
+ enduring: the wood used for it seemed to have been burned in a strange way
+ before it was used as build material - it is hard as stone.<br><br>
+ The implications frighten me. Are there others on this island? Where are they
+ then? They work with fire, are they praying to Satul too? Are they friends or
+ foe? And why is the building burned down. Has this island seen war? Is a
+ war being waged on it right now?<br><br>
+ We must improve our military capabilities. If there are foes on the island, we
+ have to be prepared when we meet them. We should also enforce the foritfication
+ of our borders.
+ ]]
    )
 }
 }
 
 second_leftover_building_found = {
 {
-   title = _ "Strange buildings",
-   body = jundlina(_ "I say",
-[[Yet another of those]]
+   title = _ "Another building.",
+   body = jundlina(_ "Jundlina is worried", _
+[[We found one more building of this strange making. We have yet to see any of
+ its builders. But obviously there has been a community on this island before
+ and obviously it has been militarized. I have to check on our military status
+ with my generals. I will not allow that a potential enemy will find us
+ unprepared.]]
    )
 }
 }
 
 third_leftover_building_found = {
 {
-   title = _ "Strange buildings",
-   body = jundlina(_ "I say",
-[[And Yet another of those. But i am confident that we are alone on
-this island as we have already conquered and seen so much of it.]]
+   title = _ "One more building",
+   body = jundlina(_
+[[And yet another of these buildings. We know now that the tribe that build
+ them once had complete control over the island. But I am no longer so scared of
+ potential enemies. We know so much of this island already and there is no trace
+ of this old economy to be found. I am starting to relax, but I will not let
+ our guard down as we continue to explore this beautiful island. But without 
+ obvious dangers I am feeling very much at home here already.]]
    )
 }
 }
