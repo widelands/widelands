@@ -1,4 +1,4 @@
--- RST
+- RST
 -- win_condition_functions.lua
 -- ---------------------------
 --
@@ -28,7 +28,7 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
       if p.defeated then
          p:send_message(heading, msg, { popup = true })
          p.see_all = 1
-         wl.game.report_result(p, true, 0, make_extra_data(p, wc_name, wc_ver))
+         wl.game.report_result(p, false, 0, make_extra_data(p, wc_name, wc_ver))
          table.remove(plrs, idx)
          break
       end
