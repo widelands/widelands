@@ -20,6 +20,8 @@
 #ifndef GGZ_GGZMOD_H
 #define GGZ_GGZMOD_H
 
+#ifdef USE_GGZ
+
 #include <ggzmod.h>
 #include <stdint.h>
 #include <string>
@@ -73,4 +75,5 @@ private:
 	GGZMod * m_mod;
 };
 
+#endif // USE_GGZ
 #endif // GGZ_GGZMOD_H

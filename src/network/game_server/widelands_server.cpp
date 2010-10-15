@@ -534,7 +534,7 @@ void WidelandsServer::game_done()
 		wllog(DL_DEBUG, "Game Information written to file");
 		mfile.close();
 	}
-	
+
 	if (wlstat.map().gametype() == gametype_defeatall)
 	{
 		wllog(DL_INFO, "gametype defeat all");

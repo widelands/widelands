@@ -17,6 +17,9 @@
 *
 */
 
+
+#ifdef USE_GGZ
+
 #include "ggz_ggzmod.h"
 #include "network_ggz.h"
 #include "log.h"
@@ -330,6 +333,4 @@ std::string ggz_ggzmod::playername()
 		return "";
 }
 
-
-
-
+#endif // USE_GGZ

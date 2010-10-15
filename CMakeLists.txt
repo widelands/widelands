@@ -227,13 +227,13 @@ if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 endif (DEFINED WL_3RDPARTY_DIR)
 
-find_package(GGZ_Core)
-if (GGZ_CORE_FOUND)
-  include_directories(${GGZ_CORE_INCLUDE_DIR})
-  add_definitions("-DUSE_GGZ")
-else (GGZ_CORE_FOUND)
-  message (STATUS "GGZ support disabled, check your libraries path and installed packages!")
-endif (GGZ_CORE_FOUND)
+#find_package(GGZ_Core)
+#if (GGZ_CORE_FOUND)
+#  include_directories(${GGZ_CORE_INCLUDE_DIR})
+#  add_definitions("-DUSE_GGZ")
+#else (GGZ_CORE_FOUND)
+#  message (STATUS "GGZ support disabled, check your libraries path and installed packages!")
+#endif (GGZ_CORE_FOUND)
 
 # Check for opengl
 # TODO Check for SDL_opengl.h and add to include path

@@ -550,7 +550,9 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t const pos)
 	if ((settings.playernum == pos) & settings.multiplayer) {
 		m_settings->setPlayerState(pos, PlayerSettings::stateOpen);
 		m_settings->setPlayerNumber(UserSettings::none());
+#ifdef USE_GGZ
 		NetGGZ::ref().set_spectator(true);
+#endif
 		return;
 	}
 
@@ -568,7 +570,9 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t const pos)
 			m_settings->setPlayerName
 				(pos, settings.users.at(settings.usernum).name);
 			m_settings->setPlayerPartner(pos, 0);
+#ifdef USE_GGZ
 			NetGGZ::ref().set_spectator(false);
+#endif
 		}
 		return;
 	}

@@ -19,7 +19,7 @@
 
 #include "network_ggz.h"
 
-#ifdef HAVE_GGZ
+#ifdef USE_GGZ
 
 #include "log.h"
 #include "i18n.h"
@@ -504,4 +504,4 @@ std::string NetGGZ::playername()
 }
 
 
-#endif
+#endif //USE_GGZ

@@ -17,8 +17,11 @@
 *
 */
 
+
 #ifndef GGZ_WLMODULE_H
 #define GGZ_WLMODULE_H
+
+#ifdef USE_GGZ
 
 #include <ggzmod.h>
 #include <stdint.h>
@@ -64,4 +67,5 @@ private:
 	uint32_t m_server_ver;
 };
 
+#endif //USE_GGZ
 #endif // GGZ_WLMODULE_H
