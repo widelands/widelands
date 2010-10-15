@@ -342,8 +342,6 @@ food_story_ended_messages = {
    }
 }
 
-
--- TODO: start this after build wares and as soon as there are 0 spidercloth in warehouses
 spidercloth_messages = {
    {
       title = _"A man comes to Jundlina",
