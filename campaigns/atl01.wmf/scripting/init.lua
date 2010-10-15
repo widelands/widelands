@@ -101,10 +101,58 @@ function intro()
    build_environment()
 end
 
+function build_heavy_industries_and_mining()
+   -- TODO: make this
+end
+
+function build_food_environment()
+   msg_boxes(food_story_message)
+
+   run(function()
+      sleep(60000)
+      run(build_heavy_industries_and_mining)
+   end)
+
+   local o = add_obj(obj_make_food_infrastructure)
+   while not check_for_buildings(p1, {
+      farm = 1, blackroot_farm = 1,
+      sawmill = 1, well = 1, bakery = 1,
+      hunters_house = 1, fishers_house = 1,
+      fish_breeders_house = 1, smokery = 2,
+   }) do sleep(2789) end
+
+   msg_boxes(food_story_ended_messages)
+end
+
+function make_spidercloth_production()
+   local scloth = 0
+   while true do
+      for bname,buildings in
+            pairs(p1:get_buildings{"headquarters", "warehouse"}) do
+         for idx,b in ipairs(buildings) do
+            scloth += b:get_wares("spidercloth")
+         end
+      end
+      if scloth == 0 then break end
+   end
+
+   -- There is no spidercloth in any warehouse!
+   message_box(spidercloth_messages)
+   local o1 = add_obj(obj_spidercloth_production)
+
+   while not check_for_buildings(p1, {
+      spiderfarm = 1, goldweaver = 1, ["weaving-mill"] = 1
+   }) do sleep(6273) end
+   o1.done = true
+
+   msg_boxes(spidercloth_story_ended_messages)
+
+end
+
 function build_environment()
    msg_boxes(first_briefing_messages)
    local o = add_obj(obj_ensure_build_wares_production)
-   -- TODO: this doesn't really belong here
+   -- TODO: o1 is never marked as completed
    local o1 = add_obj(obj_expand)
    
    while not check_for_buildings(p1, {
@@ -113,15 +161,19 @@ function build_environment()
       quarry = 1,
       sawmill = 1,
    }) do sleep(3731) end
-
    o.done = true
+
+   run(make_spidercloth_production)
+
+   sleep(45000) -- Sleep a while
+   run(build_food_environment)
 end
 
 function leftover_buildings()
    -- All fields with left over buildings
-   -- TODO: one is missing to the left
    local lob_fields = Set:new{
       map:get_field( 59, 86),
+      map:get_field( 60,151),
       map:get_field( 72, 89),
       map:get_field(111,137),
       map:get_field(121,144),

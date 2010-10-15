@@ -110,7 +110,6 @@ obj_expand = {
    ),
 }
 
---- TODO: this should be started when build wares are done
 obj_make_food_infrastructure = {
    name = "obj_make_food_infrastructure",
    title = _ "Establish a solid food production",
@@ -125,13 +124,13 @@ obj_make_food_infrastructure = {
  more. Make sure that there are always fish left, otherwise the fish breeder
  won't be able to breed new ones. The smoking happens in a smokery, you
  will need at least two of those.<br><br>
- - Build a Farm and a Blackroot farm
- - Build a sawmill to make flour and blackroot flour
- - Build a well
- - Build a bakery to bake bread from flour, blackroot flour and water.
- - Build a hunter's house to get raw meat
- - Build a fisher's house close to water to get raw fish
- - Build a fishbreeder's house close to the fisher to make sure the fish do not die out
+ - Build a Farm and a Blackroot farm<br>
+ - Build a sawmill to make flour and blackroot flour<br>
+ - Build a well<br>
+ - Build a bakery to bake bread from flour, blackroot flour and water.<br>
+ - Build a hunter's house to get raw meat<br>
+ - Build a fisher's house close to water to get raw fish<br>
+ - Build a fishbreeder's house close to the fisher to make sure the fish do not die out<br>
  - Build two smokeries to smoke raw meat and fish.]]
    )
 }
@@ -314,15 +313,15 @@ food_story_message = {
  food is something deep ingrained in the Atlanteans - it is just a ceremony
  that we need for our well being. So I guess we cannot take this away from 
  the individuals completely. But we might find a compromise in between: For me,
- making break is a troublesome task: TODO malen the blackroot and corn to flour,
- than baking the bread is TODO: langweilig/wiederholend. I feel a more
- industrial approach would be helpful here. I for one would love to just have
- fresh bread delivered to my house every day. Oooh and even more important: the
- smoking of fish and meat to cleanse them and improve their taste is terrible.
- My house is full of smoke and stinks for weeks after it. Don't you think that
- this could be done in a special building were the side effects do not matter?
- I think those two things would be accepted by the people and would reduce the
- cooking times without taking away the ritual.]]
+ making bread is a troublesome task: grinding the blackroot and corn to flour
+ than baking the bread is lacklustre: I feel a more industrial approach would
+ be helpful here. I for one would love to just have fresh bread delivered to my
+ house every day. Oooh and even more important: the smoking of fish and meat to
+ cleanse them and improve their taste is terrible.  My house is full of smoke
+ and stinks for weeks after it. Don't you think that this could be done in a
+ special building were the side effects do not matter?  I think those two
+ things would be accepted by the people and would reduce the cooking times
+ without taking away the ritual.]]
  )
 },
 {
@@ -333,6 +332,17 @@ food_story_message = {
 },
 }
 
+food_story_ended_messages = {
+   {
+      title = _ "Jundlina is satisfied",
+      body = jundlina(_ "Jundlina is reviewing the reports", _
+[[Seems like our food production is finished and everybody is working together
+ nicely. It is really starting to feel like home here.]]
+      )
+   }
+}
+
+
 -- TODO: start this after build wares and as soon as there are 0 spidercloth in warehouses
 spidercloth_messages = {
    {
@@ -341,21 +351,39 @@ spidercloth_messages = {
 [[May Satul warm you, Jundlina. My Name is Opol and I am the highest weaver of
  the guild abandoning Atlantis and Lutas with you. I come with sad news indeed:
  We have no more spidercloth. Not a single one is to be found in our warehouses.
- Could you not help the weaver guild by TODO veranlassen a weaving-mill and a
- spiderfarm? The spiders deliver the finest silk and we will produce the finest
- spidercloth from it. We offer to also produce the tabards for young soldiers
- and the golden tabards for officers for you in exchange. You will need them
- for sure as soon as you want to recruit new soldiers.]])
+ Could you not help the weaver guild by arranging the building of a
+ weaving-mill and a spiderfarm? The spiders deliver the finest silk and we will
+ produce the finest spidercloth from it. We offer to also produce the tabards
+ for young soldiers and the golden tabards for officers for you in exchange.
+    You will need them for sure as soon as you want to recruit new soldiers.]])
     ..  new_objectives(obj_spidercloth_production)
  },
  {
     title = _ "Jundlina replies",
-    body = jundlina(_ "Jundline replies", _
+    body = jundlina(_ "Jundlina replies", _
 [[May Satul warm you too, Opol. Your suggestion sounds fair to me, I will build
 your weaving-mill and spiderfarm. I will also build a goldweaver so that the
 golden tabards you make will not be golden by name alone.]]
     )
  }
+}
+
+spidercloth_story_ended_messages = {
+   {
+      title = _ "Opol seeks out Jundlina",
+      body = opol(_
+[[May Satul warm you, Jundlina!. The weaving-mill, goldweaver and spiderfarm
+ buildings are complete and are starting their work at this very moment. The
+ weaving guild is very grateful for your support and we will stand by our word
+ and deliver the first tabard very soon.]]
+      )
+   },
+   {
+      title = _ "Jundlina replies",
+      body = jundlina(_
+[[This is good news indeed, Opol. Our economy is developing very well. Go back
+ to your work now, Opol and may Satul warm you and all your guild members!]]
+      )
 }
 
 -- =======================================================================
