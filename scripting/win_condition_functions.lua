@@ -1,4 +1,4 @@
-- RST
+-- RST
 -- win_condition_functions.lua
 -- ---------------------------
 --
