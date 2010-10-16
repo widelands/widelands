@@ -572,7 +572,7 @@ shore they will vanish in the sea before they can float. I fear we are doomed!]]
 {
    title = _ "Jundlina replies",
    body = jundlina(_ [[
-Your red hair is a signal from the fire good. I will trust you and support your
+Your red hair is a signal from the fire god. I will trust you and support your
  plan. Our survival lays in your hand now, Ostur.]]
    ) .. new_objectives(obj_build_ships)
 }

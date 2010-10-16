@@ -60,13 +60,13 @@ end
 -- Return the total number of items in warehouses of the given
 -- ware.
 function count_in_warehouses(ware)
-   local whs = array_concat(
+   local whs = array_combine(
       p1:get_buildings("headquarters"),
       p1:get_buildings("warehouse")
    )
-   rv = 0
+   local rv = 0
    for idx,wh in ipairs(whs) do
-      rv = rv + wh:get_ware(wares)
+      rv = rv + wh:get_wares(ware)
    end
    return rv
 end
@@ -179,7 +179,7 @@ function make_spidercloth_production()
    while count_in_warehouses("spidercloth") > 0 do sleep(2323) end
 
    -- There is no spidercloth in any warehouse!
-   message_box(spidercloth_messages)
+   msg_boxes(spidercloth_messages)
    local o = add_obj(obj_spidercloth_production)
 
    while not check_for_buildings(p1, {
@@ -260,6 +260,13 @@ function water_rising()
          end)
       end
 
+      -- TODO: remove this
+      print("In callback: ", f.x, f.y, f.immovable)
+      if f.immovable then
+         print(f.immovable.type)
+      end
+      -- end of remove
+
       if not f.owner == p1 then return end
       if not f.immovable then return end
 
@@ -279,6 +286,8 @@ function water_rising()
    wr:rise(25)
 
 end
+
+-- TODO: field callback is not called for all fields. Check this again.
 
 run(intro)
 run(leftover_buildings)
