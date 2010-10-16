@@ -141,6 +141,10 @@ function WaterRiser:_rise_water()
       tr:set_ter("wasser")
       for idx,f in ipairs(tr:fields()) do
          if _fully_flooded(f) then
+            if self.field_flooded_callback then
+               self.field_flooded_callback(f)
+            end
+
             f.height = self._water_level
             if f.immovable then f.immovable:remove() end
             for idx,b in ipairs(f.bobs) do

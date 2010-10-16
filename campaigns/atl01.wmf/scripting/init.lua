@@ -3,7 +3,7 @@
 -- =======================================================================
 
 use("aux", "coroutine")
-use("aux", "array")
+use("aux", "table")
 use("aux", "infrastructure")
 use("aux", "objective_utils")
 use("aux", "ui")
@@ -20,6 +20,12 @@ map = game.map
 p1 = game.players[1]
 first_tower_field = map:get_field(94, 149)
 second_tower_field = map:get_field(79, 150)
+
+-- =================
+-- global variables 
+-- =================
+expand_objective = nil 
+let_the_water_rise = false -- If set to true, the water will begin to rise
 
 use("map", "texts")
 
@@ -55,14 +61,21 @@ end
 -- ware.
 function count_in_warehouses(ware)
    local whs = array_concat(
-      player1:get_buildings("headquarters"),
-      player1:get_buildings("warehouse")
+      p1:get_buildings("headquarters"),
+      p1:get_buildings("warehouse")
    )
    rv = 0
    for idx,wh in ipairs(whs) do
       rv = rv + wh:get_ware(wares)
    end
    return rv
+end
+
+function send_building_lost_message(f)
+   p1:send_message(_"Building lost!", 
+([[<rt image=tribes/atlanteans/%s/idle_00.png><p>
+We lost a building to the ocean.
+</rt>]]):format(f.immovable.name), { field = f })
 end
 
 -- ===============
@@ -101,8 +114,45 @@ function intro()
    build_environment()
 end
 
+function build_warehouse_and_horsefarm()
+   local fields = {
+      map:get_field(96, 126),
+      map:get_field(28, 91),
+   }
+
+   local fowned = nil 
+   while not fowned do
+      for idx, f in ipairs(fields) do
+         if f.owner == p1 then
+            fowned = f
+            break
+         end
+      end
+   end
+   -- Has been started from the very beginning
+   expand_objective.done = true
+   let_the_water_rise = true
+   
+   scroll_smoothly_to(fowned)
+   msg_boxes(horsefarm_and_warehouse_story)
+
+   local o = add_obj(obj_horsefarm_and_warehouse)
+   while not check_for_buildings(p1, {
+      horsefarm = 1, warehouse = 1,
+   }) do sleep(2384) end
+   o.done = true
+end
+
 function build_heavy_industries_and_mining()
-   -- TODO: make this
+   msg_boxes(heavy_industry_story)
+
+   local o = add_obj(obj_make_heavy_industrie_and_mining)
+   while not check_for_buildings(p1, {
+      coalmine = 1, ironmine = 1, goldmine = 1, crystalmine = 1,
+      smelting_works = 1, weaponsmithy = 1, armoursmithy = 1,
+      toolsmithy = 1, dungeon = 1, labyrinth = 1,
+   }) do sleep(3478) end
+   o.done = true
 end
 
 function build_food_environment()
@@ -120,30 +170,22 @@ function build_food_environment()
       hunters_house = 1, fishers_house = 1,
       fish_breeders_house = 1, smokery = 2,
    }) do sleep(2789) end
+   o.done = true
 
    msg_boxes(food_story_ended_messages)
 end
 
 function make_spidercloth_production()
-   local scloth = 0
-   while true do
-      for bname,buildings in
-            pairs(p1:get_buildings{"headquarters", "warehouse"}) do
-         for idx,b in ipairs(buildings) do
-            scloth += b:get_wares("spidercloth")
-         end
-      end
-      if scloth == 0 then break end
-   end
+   while count_in_warehouses("spidercloth") > 0 do sleep(2323) end
 
    -- There is no spidercloth in any warehouse!
    message_box(spidercloth_messages)
-   local o1 = add_obj(obj_spidercloth_production)
+   local o = add_obj(obj_spidercloth_production)
 
    while not check_for_buildings(p1, {
       spiderfarm = 1, goldweaver = 1, ["weaving-mill"] = 1
    }) do sleep(6273) end
-   o1.done = true
+   o.done = true
 
    msg_boxes(spidercloth_story_ended_messages)
 
@@ -152,12 +194,12 @@ end
 function build_environment()
    msg_boxes(first_briefing_messages)
    local o = add_obj(obj_ensure_build_wares_production)
-   -- TODO: o1 is never marked as completed
-   local o1 = add_obj(obj_expand)
+
+   expand_objective = add_obj(obj_expand)
    
    while not check_for_buildings(p1, {
-      woodcutters_house = 3,
-      foresters_house = 3,
+      woodcutters_house = 2,
+      foresters_house = 2,
       quarry = 1,
       sawmill = 1,
    }) do sleep(3731) end
@@ -201,20 +243,46 @@ function leftover_buildings()
    end
 end
 
-
 wr = WaterRiser:new(map:get_field(92,19))
+function water_rising()
+   while not let_the_water_rise do sleep(3243) end
 
--- TODO: remove/reuse this debug function 
-function start_water_rising()
-   -- TODO: remove this again
-   p1.see_all = 1
+   first_message_send = nil
+   local _callback_function = function(f)
+      if p1:sees_field(f) and not first_message_send then
+         first_message_send = true
+         run(function()
+            sleep(200)
+            scroll_smoothly_to(f)
+            msg_boxes(field_flooded_msg)
+            add_obj(obj_build_ships)
+            -- TODO: check that these are completed
+         end)
+      end
 
-   wr:rise(25) -- Rise the water to level 25
+      if not f.owner == p1 then return end
+      if not f.immovable then return end
+
+      -- Flags are not so interesting
+      if f.immovable.type == "flag" and 
+         (f.tln.immovable and f.tln.immovable.type == "building") then
+         f = f.tln 
+      end
+
+      if f.immovable.type == "building" then
+         send_building_lost_message(f)
+      end
+   end
+
+   wr.field_flooded_callback = _callback_function
+
+   wr:rise(25)
+
 end
-function swr() start_water_rising() end
 
 run(intro)
 run(leftover_buildings)
 
+run(water_rising)
 
 

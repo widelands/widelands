@@ -67,7 +67,10 @@ function colionder(text)
    return speech("map:colionder.png", "33A9FD", "Colionder", text)
 end
 function opol(text)
-   return speech("map:colionder.png", "FF3FFB", "Opol", text)
+   return speech("map:opol.png", "FF3FFB", "Opol", text)
+end
+function ostur(text)
+   return speech("map:ostur.png", "375FFC", "Ostur", text)
 end
 
 -- Nice formatting for objective texts: A header and one paragraph
@@ -125,7 +128,7 @@ obj_make_food_infrastructure = {
  won't be able to breed new ones. The smoking happens in a smokery, you
  will need at least two of those.<br><br>
  - Build a Farm and a Blackroot farm<br>
- - Build a sawmill to make flour and blackroot flour<br>
+ - Build a mill to make flour and blackroot flour<br>
  - Build a well<br>
  - Build a bakery to bake bread from flour, blackroot flour and water.<br>
  - Build a hunter's house to get raw meat<br>
@@ -137,7 +140,7 @@ obj_make_food_infrastructure = {
 
 obj_spidercloth_production = {
    name = "obj_spidercloth_production",
-   title = _ "Build a spiderfarm and a weaving mill"
+   title = _ "Build a spiderfarm and a weaving mill",
    body = obj_text(_"Establish a spidercloth production",
 [[The weavers produce spidercloth and tabards in the weaving-mill. Spidercloth
  is needed for the construction of some buildings and clothing while tabards
@@ -147,8 +150,53 @@ obj_spidercloth_production = {
 
  - Build a Weaving-Mill<br>
  - Build a Spiderfarm<br>
- - Build a Goldweaver<br>
-]]
+ - Build a Goldweaver<br>]]
+ )
+}
+
+obj_make_heavy_industrie_and_mining = {
+   name = "obj_make_heavy_industrie_and_mining",
+   title = _ "Build industry and mines",
+   body = obj_text(_"Build industry and processing industrie",
+[[Ironore and goldore, coal are mined in the respective mines. The crystal mine
+ is digging for crystal, quartz and diamond - all of them are rare materials and
+ very seldom found. While it searches for them, it produces a lot of stone.<br>
+ The ores have to be smelted before they can be used in smelting works. The
+ refined materials are then used in the weapon smithy, the armor smithy and the
+ toolsmithy.<br>
+ As all other tribes, the atlanteans are also able to train soldiers: the
+ dungeon trains attack - the major attribute of the atlanteans - and the
+ labyrinth trains evade, health points and defense. The items produced by the
+ industry are used to train better soldiers in the two training buildings.
+
+ - Build a mine of each kind. Make sure to send geologists to the mountain first.<br>
+ - Build a smelting works.<br>
+ - Build an armor smithy and a weapon smithy.<br>
+ - Build a toolsmithy.<br>
+ - Build a dungeon and a labyrinth.<br>.
+]])
+}
+
+obj_horsefarm_and_warehouse = {
+   name = "obj_horsefarm_and_warehouse",
+   title = _"Build a warehouse and a horsefarm",
+   body = obj_text(_"Build a warehouse and a horsefarm",
+[[As your road network gets longer and more complicated, you should employ
+ horses to help out your carrier. Horses are bred in horsefarms using water and
+ corn. A warehouse will also help to ensure your transportation system does not
+ collapse.]])
+}
+
+obj_build_ships = {
+   name = "obj_build_ships",
+   title = _ "Build 3 ships to escape from the island",
+   body = obj_text(_"Escape from the island",
+[[There is a lake at the top of the island. Build 3 ships in these waters
+ and you might be able to rescue your people when the island is swallowed
+ completely by the ocean. Build a shipyard close to the lake to start
+ building ships.]]
+   )
+}
 
 -- =======================================================================
 --                                  Texts
@@ -227,7 +275,7 @@ their stable was rising in an ever accelerating speed.]]
 first_briefing_messages = {
 {
    title = _ "The princess' memoir",
-   body = jundlina(_ "Day 21 after Enlightenment", _
+   body = jundlina(_ "Jundlina writes down her memories", _
 [[We left Atlantis and sailed east. We entered the forbidden sea on the sixth
  day without noticing any chasers from Atlantis and without Lutus having smash
  our ship. Now, we are out of his reach. One day later, we sighted an island
@@ -282,7 +330,7 @@ first_briefing_messages = {
 food_story_message = {
 {
    title = _ "Jundlina is satisfied",
-   body = jundlina("Jundlina", _
+   body = jundlina("Jundlina's Memoirs", _
 [[I just received word that our build infrastructure is well established and
  running good - only spider cloth production is still missing in our arsenal.
  But there seem to be more pressing matters. I called Culionder before me, my
@@ -325,7 +373,7 @@ food_story_message = {
  )
 },
 {
-   title _ "Jundlina agrees",
+   title = _ "Jundlina agrees",
    body = jundlina(_
 [[Your words sound wise to me, Colionder. So be it then.]]
    ) .. new_objectives(obj_make_food_infrastructure)
@@ -382,6 +430,52 @@ spidercloth_story_ended_messages = {
 [[This is good news indeed, Opol. Our economy is developing very well. Go back
  to your work now, Opol and may Satul warm you and all your guild members!]]
       )
+   }
+}
+
+
+heavy_industry_story = {
+   {
+      title = _ "Sidolus seeks out Jundlina",
+      body = sidolus(_
+[[May Satul warm you, Jundlina. Have you considered mining for goods in the
+ mountains around us? We are running short of quarzy, crystal and diamonds for
+ our buildings. Also we could use more iron, gold and especially coal. If we
+ find an ample supply of those commodities, we could start producing weapons
+ and tools: this would help enormously. Of course, we would need smelters, 
+ a weapon smithy, a armor smithy and a tool smithy. And maybe even more.]]
+      )
+   },
+   {
+      title = _ "Jundlina replies",
+      body = jundlina(_"Jundlina nods", 
+[[I have considered this, Sidolus. We will make this a priority for now. Good
+ that you came, for I have something else to discuss with you: I received words
+ about your soldiers misbehaving and bullying the common folk. What is this
+ nonsense all about, they are servants for the common good and must not misuse
+ their powers. Explain this, if you will!]]
+      )
+   },
+   {
+      title = _ "Sidolus seems contrite",
+      body = sidolus(_
+[[I agree with you and I have punished the trouble makers severely. But it is
+ very difficult to keep my men quite: they are bored and have nothing to do. I
+ would like to ramp up their drill. I think more routine in their life would
+ keep them occupied and focused on their duties. I would need a dungeon and a
+ labyrinth for them.  I have the plans ready, but I guess they won't come
+ cheap.]]
+      )
+   },
+   {
+      title = _"Jundlina replies",
+      body = jundlina(_
+[[I do not fear the cost and labor as long as it keeps your people at bay. You
+ shall get your buildings. But note that I will not tolerate any rogue soldier;
+ it similar things will happen again, I will make you responsible for them.
+ Dismissed.]]
+      ) .. new_objectives(obj_make_heavy_industrie_and_mining)
+   }
 }
 
 -- =======================================================================
@@ -433,6 +527,54 @@ third_leftover_building_found = {
  our guard down as we continue to explore this beautiful island. But without 
  obvious dangers I am feeling very much at home here already.]]
    )
+}
+}
+
+-- =======================
+-- Flooding of the island 
+-- =======================
+-- TODO: reveal the lake on the top of the island
+field_flooded_msg = {
+{
+   title = _ "The water is rising!",
+   body = jundlina(_
+[[May Satul save us! Lutas is still trying to get to us. A scout informed me
+ that the ocean is rising quickly. We have to reach higher ground and evacuate
+ everybody and as much wares from the headquarters up the mountains. How can we
+ escape?]]
+   )
+},
+{
+   title = _ "A young man approaches",
+   body = ostur(_
+[[May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have
+ invented a new kind of ship: smaller than those we are used to, but much
+ sturdier. If we build them correctly, I am confident that we can go with them 
+ a much longer distance and maybe escape from Lutas influence.
+]])
+},
+{
+   title = _ "Jundlina replies",
+   body = jundlina(_
+[[Ostur, we have no time. The water rises too fast and if we build the ships on
+shore they will vanish in the sea before they can float. I fear we are doomed!]]
+   ),
+},
+{
+   title = _"Ostur seems confident",
+   body = ostur(_
+[[A friend of mine explored the island on its own and he told me of a big lake
+ at the top of the mountain. I suggest we build the ships in this lake and wait
+ till the island drowns below us. Then we can sail away. It is a bold plan,
+ but I think, it could work]]
+   )
+},
+{
+   title = _ "Jundlina replies",
+   body = jundlina(_ [[
+Your red hair is a signal from the fire good. I will trust you and support your
+ plan. Our survival lays in your hand now, Ostur.]]
+   ) .. new_objectives(obj_build_ships)
 }
 }
 
