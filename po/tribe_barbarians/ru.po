@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-12 04:57+0000\n"
+"PO-Revision-Date: 2010-10-15 18:08+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-13 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-10-16 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -99,7 +99,7 @@ msgstr "Кроме лепёшек и мяса, варвары охотно ед�
 
 #: ../../tribes/barbarians/conf:174
 msgid "Big Inn"
-msgstr "Трактир"
+msgstr "Гостиница"
 
 #: ../../tribes/barbarians/conf:109
 msgid "Blacksmith"
@@ -309,7 +309,7 @@ msgstr "Рыба"
 
 #: ../../tribes/barbarians/conf:118
 msgid "Fisher"
-msgstr "Рыбак"
+msgstr "Рыболов"
 
 #: ../../tribes/barbarians/conf:186
 msgid "Fisher's Hut"
@@ -394,7 +394,7 @@ msgstr "Гранитная шахта"
 
 #: ../../tribes/barbarians/conf:73
 msgid "Grout"
-msgstr "Бетон"
+msgstr "Цемент"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
@@ -498,11 +498,11 @@ msgstr "Кухонная утварь"
 
 #: ../../tribes/barbarians/conf:194
 msgid "Lime Kiln"
-msgstr "Растворный узел"
+msgstr "Цементная печь"
 
 #: ../../tribes/barbarians/conf:124
 msgid "Lime-Burner"
-msgstr "Бетонщик"
+msgstr "Цементник"
 
 #: ../../tribes/barbarians/conf:125
 msgid "Lumberjack"
@@ -548,7 +548,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:196
 msgid "Metalwork Shop"
-msgstr "Мастерская"
+msgstr "Кузница"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Micro Brewery"
@@ -1200,11 +1200,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:94
 msgid "War Helmet"
-msgstr "Военный шлем"
+msgstr "Боевой шлем"
 
 #: ../../tribes/barbarians/conf:171
 msgid "War Mill"
-msgstr "Оружейная"
+msgstr "Военная фабрика"
 
 #: ../../tribes/barbarians/conf:168
 msgid "Warehouse"
@@ -1244,7 +1244,7 @@ msgstr "Ткач"
 
 #: ../../tribes/barbarians/conf:203
 msgid "Weaving-Mill"
-msgstr "Ткацкий цех"
+msgstr "Ткацкая фабрика"
 
 #: ../../tribes/barbarians/conf:204
 msgid "Well"
@@ -1264,11 +1264,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:55
 msgid "Wildboar"
-msgstr "Вепрь"
+msgstr "Кабан"
 
 #: ../../tribes/barbarians/conf:190
 msgid "Wood Hardener"
-msgstr "Мастерская плотника"
+msgstr "Лесопилка"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/bakery/conf:21
