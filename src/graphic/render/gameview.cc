@@ -1096,31 +1096,33 @@ static bool draw_minimap_frameborder
 	 Point							     const ptopleft,
 	 Point							     const pbottomright,
 	 uint32_t                            const mapwidth,
-	 uint32_t                            const mapheight)
+	 uint32_t                            const mapheight,
+	 uint32_t                            const modx,
+	 uint32_t                            const mody)
 {
 	bool isframepixel = false;
 
 	if (ptopleft.x <= pbottomright.x) {
 		if (f.x >= ptopleft.x && f.x <= pbottomright.x
 			&& (f.y == ptopleft.y || f.y == pbottomright.y)
-			&& f.x % 2 == 0)
+			&& f.x % 2 == modx)
 			isframepixel = true;
 	} else {
 		if ((f.x >= ptopleft.x && f.x <= mapwidth || f.x >= 0 && f.x <= pbottomright.x)
 			&& (f.y == ptopleft.y || f.y == pbottomright.y)
-			&& f.x % 2 == 0)
+			&& f.x % 2 == modx)
 			isframepixel = true;
 	}
 
 	if (ptopleft.y <= pbottomright.y) {
 		if (f.y >= ptopleft.y && f.y <= pbottomright.y
 			&& (f.x == ptopleft.x || f.x == pbottomright.x)
-			&& f.y % 2 == 0)
+			&& f.y % 2 == mody)
 			isframepixel = true;
 	} else {
 		if ((f.y >= ptopleft.y && f.y <= mapheight || f.y >= 0 && f.y <= pbottomright.y)
 			&& (f.x == ptopleft.x || f.x == pbottomright.x)
-			&& f.y % 2 == 0)
+			&& f.y % 2 == mody)
 			isframepixel = true;
 	}
 
@@ -1164,6 +1166,9 @@ static void draw_minimap_int
 	pbottomright.y = viewpoint.y + mapheight / 2 + ysize;
 	if (pbottomright.y >= mapheight) pbottomright.y -= mapheight;
 
+	uint32_t modx = pbottomright.x % 2;
+	uint32_t mody = pbottomright.y % 2;
+
 	if (not player or player->see_all()) for (uint32_t y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 		Widelands::FCoords f
@@ -1177,7 +1182,7 @@ static void draw_minimap_int
 				move_r(mapwidth, f, i);
 
 			if (draw_minimap_frameborder<T>
-					(f, ptopleft, pbottomright, mapwidth, mapheight)) {
+					(f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody)) {
 				*reinterpret_cast<T *>(pix) = static_cast<T>
 					(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
 			} else {
@@ -1201,7 +1206,7 @@ static void draw_minimap_int
 					move_r(mapwidth, f, i);
 
 				if (draw_minimap_frameborder<T>
-					(f, ptopleft, pbottomright, mapwidth, mapheight)) {
+					(f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody)) {
 					*reinterpret_cast<T *>(pix) = static_cast<T>
 						(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
 				} else {
