@@ -71,7 +71,7 @@ Interactive_Base::Interactive_Base
 	(Editor_Game_Base & the_egbase, Section & global_s)
 	:
 	Map_View(0, 0, 0, get_xres(), get_yres(), *this),
-	m_show_workarea_preview(global_s.get_bool("workareapreview", false)),
+	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
 	m
 		(new InteractiveBaseInternals
 		 (new QuickNavigation(the_egbase, get_w(), get_h()))),

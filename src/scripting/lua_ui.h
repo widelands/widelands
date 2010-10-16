@@ -192,6 +192,7 @@ public:
 	int set_census(lua_State * L);
 	int get_statistics(lua_State * L);
 	int set_statistics(lua_State * L);
+	int get_is_building_road(lua_State * L);
 
 	/*
 	 * Lua Methods
@@ -199,6 +200,7 @@ public:
 	int close(lua_State * L);
 	int click(lua_State * L);
 	int abort_road_building(lua_State * L);
+	int start_road_building(lua_State * L);
 
 	/*
 	 * C Methods
