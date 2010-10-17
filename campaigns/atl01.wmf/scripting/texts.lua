@@ -442,13 +442,13 @@ heavy_industry_story = {
  mountains around us? We are running short of quarzy, crystal and diamonds for
  our buildings. Also we could use more iron, gold and especially coal. If we
  find an ample supply of those commodities, we could start producing weapons
- and tools: this would help enormously. Of course, we would need smelters, 
+ and tools: this would help enormously. Of course, we would need smelters,
  a weapon smithy, a armor smithy and a tool smithy. And maybe even more.]]
       )
    },
    {
       title = _ "Jundlina replies",
-      body = jundlina(_"Jundlina nods", 
+      body = jundlina(_"Jundlina nods",
 [[I have considered this, Sidolus. We will make this a priority for now. Good
  that you came, for I have something else to discuss with you: I received words
  about your soldiers misbehaving and bullying the common folk. What is this
@@ -484,8 +484,8 @@ horsefarm_and_warehouse_story = {
       body = jundlina(_"Jundlina", _
 [[People are complaining about crowded streets and slow transportation. We
  need to help out our carriers on the roads. I decided to build a horsefarm
- so that the horses can help with the heavy wares<br>
- Another way to take load from our roads is to build warhouses. We are about
+ so that the horses can help with the heavy wares.<br>
+ Another way to take load from our roads is to build warehouses. We are about
  to expand up the mountain; it would be wise to have a base camp with a warehouse
  at its foot.]]
       ) .. new_objectives(obj_horsefarm_and_warehouse)
@@ -538,14 +538,14 @@ third_leftover_building_found = {
  them once had complete control over the island. But I am no longer so scared of
  potential enemies. We know so much of this island already and there is no trace
  of this old economy to be found. I am starting to relax, but I will not let
- our guard down as we continue to explore this beautiful island. But without 
+ our guard down as we continue to explore this beautiful island. But without
  obvious dangers I am feeling very much at home here already.]]
    )
 }
 }
 
 -- =======================
--- Flooding of the island 
+-- Flooding of the island
 -- =======================
 -- TODO: reveal the lake on the top of the island
 field_flooded_msg = {
@@ -563,7 +563,7 @@ field_flooded_msg = {
    body = ostur(_
 [[May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have
  invented a new kind of ship: smaller than those we are used to, but much
- sturdier. If we build them correctly, I am confident that we can go with them 
+ sturdier. If we build them correctly, I am confident that we can go with them
  a much longer distance and maybe escape from Lutas influence.
 ]])
 },
