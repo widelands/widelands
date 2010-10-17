@@ -20,6 +20,8 @@
 #ifndef UI_BUTTON_H
 #define UI_BUTTON_H
 
+#include <boost/function.hpp>
+
 #include "constants.h"
 #include "panel.h"
 #include "m_signal.h"
@@ -110,6 +112,63 @@ protected:
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"
 	bool        m_draw_caret;
+};
+
+
+/// A verion of Button that uses a function object to the the callback.
+struct Callback_Fun_Button : public Button {
+	Callback_Fun_Button /// for textual buttons
+		(Panel * const parent,
+		 std::string const & name,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const PictureID background_pictute_id,
+		 boost::function<void()> callback_function,
+		 const std::string & title_text,
+		 std::string const & tooltip_text = std::string(),
+		 bool const _enabled = true,
+		 bool const flat     = false,
+		 const std::string & fontname = UI_FONT_NAME,
+		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
+		:
+		Button
+			(parent, name,
+			 x, y, w, h,
+			 background_pictute_id,
+			 title_text,
+			 tooltip_text,
+			 _enabled, flat,
+			 fontname,
+			 fontsize),
+		_callback_function     (callback_function)
+	{}
+	Callback_Fun_Button /// for pictorial buttons
+		(Panel * const parent,
+		 std::string const & name,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const PictureID background_pictute_id,
+		 const PictureID foreground_picture_id,
+		 boost::function<void()> callback_function,
+		 std::string const & tooltip_text = std::string(),
+		 bool const _enabled = true,
+		 bool const flat     = false,
+		 const std::string & fontname = UI_FONT_NAME,
+		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
+		:
+		Button
+			(parent, name,
+			 x, y, w, h,
+			 background_pictute_id,
+			 foreground_picture_id,
+			 tooltip_text,
+			 _enabled, flat,
+			 fontname,
+			 fontsize),
+		_callback_function     (callback_function)
+	{}
+
+protected:
+	boost::function<void()> _callback_function;
+	void clicked() {_callback_function();}
 };
 
 
