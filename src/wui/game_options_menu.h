@@ -65,9 +65,6 @@ private:
 		return hmargin() + nr * (buttonw(nr_buttons) + hspacing());
 	}
 
-	void clicked_readme   ();
-	void clicked_license  ();
-	void clicked_authors  ();
 	void clicked_sound    ();
 	void clicked_save_game();
 	void clicked_exit_game();
