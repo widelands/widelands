@@ -72,6 +72,7 @@ stock
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
  registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+ if (registry.window) btn.set_perm_pressed(true);                            \
 
 	INIT_BTN_HOOKS(m_windows.general_stats, general_stats)
 	INIT_BTN_HOOKS(m_windows.ware_stats, ware_stats)

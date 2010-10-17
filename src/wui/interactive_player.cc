@@ -229,6 +229,7 @@ m_toggle_help
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
  registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+ if (registry.window) btn.set_perm_pressed(true);                            \
 
 	INIT_BTN_HOOKS(m_chat, m_toggle_chat)
 	INIT_BTN_HOOKS(m_options, m_toggle_options_menu)
