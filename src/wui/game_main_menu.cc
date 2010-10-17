@@ -47,28 +47,28 @@ general_stats
 	 posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
-	 boost::bind(&GameMainMenu::clicked_general_stats, boost::ref(*this)),
+	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.general_stats)),
 	 _("General Statistics")),
 ware_stats
 	(this, "ware_stats",
 	 posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
-	 boost::bind(&GameMainMenu::clicked_ware_stats, boost::ref(*this)),
+	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.ware_stats)),
 	 _("Ware Statistics")),
 building_stats
 	(this, "building_stats",
 	 posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
-	 boost::bind(&GameMainMenu::clicked_building_stats, boost::ref(*this)),
+	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.building_stats)),
 	 _("Building Statistics")),
 stock
 	(this, "stock",
 	 posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),
-	 boost::bind(&GameMainMenu::clicked_stock, boost::ref(*this)),
+	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.stock)),
 	 _("Stock"))
 {
 #define INIT_BTN_HOOKS(registry, btn)                                        \
@@ -88,18 +88,4 @@ stock
 
 	if (get_usedefaultpos())
 		center_to_parent();
-}
-
-
-void GameMainMenu::clicked_general_stats() {
-	m_windows.general_stats.toggle();
-}
-void GameMainMenu::clicked_ware_stats() {
-	m_windows.ware_stats.toggle();
-}
-void GameMainMenu::clicked_building_stats() {
-	m_windows.building_stats.toggle();
-}
-void GameMainMenu::clicked_stock() {
-	m_windows.stock.toggle();
 }

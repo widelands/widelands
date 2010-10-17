@@ -54,14 +54,7 @@ struct Interactive_Player : public Interactive_GameBase
 
 	void start();
 
-	void toggle_statistics_menu();
 	void toggle_chat        ();
-	void toggle_options_menu();
-	void toggle_objectives();
-
-	void toggle_resources ();
-	void toggle_help      ();
-	void toggle_message_menu();
 
 	virtual bool can_see(Widelands::Player_Number) const;
 	virtual bool can_act(Widelands::Player_Number) const;

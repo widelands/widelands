@@ -68,11 +68,6 @@ private:
 	uint32_t posy(uint32_t const nr, uint32_t const nr_rows) const {
 		return vmargin() + nr * (buttonh(nr_rows) + vspacing());
 	}
-
-	void clicked_general_stats ();
-	void clicked_ware_stats    ();
-	void clicked_building_stats();
-	void clicked_stock         ();
 };
 
 #endif

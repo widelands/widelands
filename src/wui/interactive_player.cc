@@ -166,39 +166,46 @@ Interactive_Player::Interactive_Player
 	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
 m_flag_to_connect(Widelands::Coords::Null()),
 
-#define INIT_BTN(picture, name, callback, tooltip)                            \
+// Chat is different, as m_chatProvider needs to be checked when toggling
+// Buildhelp is different as it does not toggle a UniqueWindow
+// Minimap is different as it warps and stuff
+#define INIT_BTN_this(picture, name, callback, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
  boost::bind(&Interactive_Player::callback, boost::ref(*this)),               \
  tooltip                                                                      \
 
+m_toggle_buildhelp
+	(INIT_BTN_this
+	 	("menu_toggle_buildhelp", "buildhelp", toggle_buildhelp, _("Buildhelp"))),
 m_toggle_chat
-	(INIT_BTN
+	(INIT_BTN_this
 	 	("menu_chat", "chat", toggle_chat, _("Chat"))),
+m_toggle_minimap
+	(INIT_BTN_this
+	 	("menu_toggle_minimap", "minimap", toggle_minimap, _("Minimap"))),
+
+#define INIT_BTN(picture, name, registry, tooltip)                            \
+ TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
+ g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
+ boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)),      \
+ tooltip                                                                      \
+
 m_toggle_options_menu
 	(INIT_BTN
-	 	("menu_options_menu", "options_menu", toggle_options_menu, _("Options"))),
+	 	("menu_options_menu", "options_menu", m_options, _("Options"))),
 m_toggle_statistics_menu
 	(INIT_BTN
-	 	("menu_toggle_menu", "statistics_menu", toggle_statistics_menu,
-		 _("Statistics"))),
+	 	("menu_toggle_menu", "statistics_menu", m_statisticsmenu, _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN
-	 	("menu_objectives", "objectives", toggle_objectives, _("Objectives"))),
-m_toggle_minimap
-	(INIT_BTN
-	 	("menu_toggle_minimap", "minimap", toggle_minimap, _("Minimap"))),
-m_toggle_buildhelp
-	(INIT_BTN
-	 	("menu_toggle_buildhelp", "buildhelp", toggle_buildhelp, _("Buildhelp"))),
+	 	("menu_objectives", "objectives", m_objectives, _("Objectives"))),
 m_toggle_message_menu
 	(INIT_BTN
-	 	("menu_toggle_oldmessage_menu", "messages", toggle_message_menu,
-		  _("Messages"))
-	),
+	 	("menu_toggle_oldmessage_menu", "messages", m_message_menu, _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 	("menu_help", "help", toggle_help, _("Ware help")))
+	 	("menu_help", "help", m_encyclopedia, _("Ware help")))
 {
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
@@ -241,6 +248,7 @@ m_toggle_help
 	INIT_BTN_HOOKS(m_encyclopedia, m_toggle_help)
 	INIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
 
+	m_encyclopedia.constr = boost::lambda::bind(boost::lambda::new_ptr<EncyclopediaWindow>(), boost::ref(*this), boost::lambda::_1);
 	m_options.constr = boost::lambda::bind(boost::lambda::new_ptr<GameOptionsMenu>(), boost::ref(*this), boost::lambda::_1, boost::ref(m_mainm_windows));
 	m_statisticsmenu.constr = boost::lambda::bind(boost::lambda::new_ptr<GameMainMenu>(), boost::ref(*this), boost::lambda::_1, boost::ref(m_mainm_windows));
 	m_objectives.constr = boost::lambda::bind(boost::lambda::new_ptr<GameObjectivesMenu>(), boost::ref(*this), boost::lambda::_1);
@@ -354,28 +362,6 @@ void Interactive_Player::toggle_chat() {
 	else if (m_chatProvider)
 		new GameChatMenu(this, m_chat, *m_chatProvider);
 }
-void Interactive_Player::toggle_options_menu() {
-	m_options.toggle();	
-}
-void Interactive_Player::toggle_statistics_menu() {
-	m_statisticsmenu.toggle();
-}
-void Interactive_Player::toggle_objectives() {
-	m_objectives.toggle();
-}
-void Interactive_Player::toggle_message_menu() {
-	m_message_menu.toggle();
-}
-
-void Interactive_Player::toggle_resources   () {
-}
-void Interactive_Player::toggle_help        () {
-	if (m_encyclopedia.window)
-		delete m_encyclopedia.window;
-	else
-		new EncyclopediaWindow(*this, m_encyclopedia);
-}
-
 
 bool Interactive_Player::can_see(Widelands::Player_Number const p) const
 {
@@ -433,11 +419,11 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 			return true;
 
 		case SDLK_n:
-			toggle_message_menu();
+			m_message_menu.toggle();
 			return true;
 
 		case SDLK_o:
-			toggle_objectives();
+			m_objectives.toggle();
 			return true;
 
 		case SDLK_c:
