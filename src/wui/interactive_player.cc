@@ -233,6 +233,7 @@ m_toggle_help
 	INIT_BTN_HOOKS(m_chat, m_toggle_chat)
 	INIT_BTN_HOOKS(m_options, m_toggle_options_menu)
 	INIT_BTN_HOOKS(m_statisticsmenu, m_toggle_statistics_menu)
+	INIT_BTN_HOOKS(minimap_registry(), m_toggle_minimap)
 	INIT_BTN_HOOKS(m_objectives, m_toggle_objectives)
 	INIT_BTN_HOOKS(m_encyclopedia, m_toggle_help)
 	INIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
