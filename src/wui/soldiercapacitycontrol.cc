@@ -49,8 +49,8 @@ private:
 	Interactive_GameBase & m_igb;
 	Widelands::Building & m_building;
 
-	UI::Callback_Fun_Button m_decrease;
-	UI::Callback_Fun_Button m_increase;
+	UI::Callback_Button m_decrease;
+	UI::Callback_Button m_increase;
 	UI::Textarea m_value;
 };
 

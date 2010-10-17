@@ -71,7 +71,7 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 	m_auto_log = s.get_bool("auto_log", false);
 	if (m_auto_log)
 		showloginbox =
-			new UI::Callback_Fun_Button
+			new UI::Callback_Button
 				(this, "login_dialog",
 				 m_butx + m_butw + m_buth / 4, m_yres * 6 / 25, m_buth, m_buth,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),

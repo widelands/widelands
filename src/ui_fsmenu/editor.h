@@ -39,9 +39,9 @@ private:
 	uint32_t                                      m_buth;
 	uint32_t                                      m_butx;
 	UI::Textarea                                  title;
-	UI::Callback_Fun_Button                       new_map;
-	UI::Callback_Fun_Button                       load_map;
-	UI::Callback_Fun_Button                       back;
+	UI::Callback_Button                       new_map;
+	UI::Callback_Button                       load_map;
+	UI::Callback_Button                       back;
 };
 
 #endif

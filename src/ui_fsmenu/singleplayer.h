@@ -41,10 +41,10 @@ private:
 	uint32_t                                            m_fs;
 	std::string                                         m_fn;
 	UI::Textarea                                        title;
-	UI::Callback_Fun_Button                             new_game;
-	UI::Callback_Fun_Button                             campaign;
-	UI::Callback_Fun_Button                             load_game;
-	UI::Callback_Fun_Button                             back;
+	UI::Callback_Button                             new_game;
+	UI::Callback_Button                             campaign;
+	UI::Callback_Button                             load_game;
+	UI::Callback_Button                             back;
 };
 
 #endif

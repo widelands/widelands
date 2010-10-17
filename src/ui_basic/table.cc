@@ -92,7 +92,7 @@ void Table<void *>::add_column
 		c.btn = 0;
 		if (title.size()) {
 			c.btn =
-				new Callback_Fun_Button
+				new Callback_Button
 					(this, title,
 					 complete_width, 0, width, m_headerheight,
 					 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
@@ -140,7 +140,7 @@ void Table<void *>::set_column_title
 		for (uint8_t i = 0; i < col; ++i)
 			complete_width += m_columns.at(i).width;
 		column.btn =
-			new Callback_Fun_Button
+			new Callback_Button
 				(this, title,
 				 complete_width, 0, column.width, m_headerheight,
 				 g_gr->get_picture(PicMod_UI, "pics/but3.png"),

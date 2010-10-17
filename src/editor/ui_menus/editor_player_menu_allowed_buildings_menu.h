@@ -43,7 +43,7 @@ private:
 	Widelands::Player & m_player;
 	UI::Textarea              m_allowed_label, m_forbidden_label;
 	UI::Listselect<Widelands::Building_Index> m_allowed, m_forbidden;
-	UI::Callback_Fun_Button   m_forbid_button, m_allow_button;
+	UI::Callback_Button   m_forbid_button, m_allow_button;
 	void allowed_selected        (uint32_t);
 	void forbidden_selected      (uint32_t);
 	void allowed_double_clicked  (uint32_t);

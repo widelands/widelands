@@ -38,10 +38,10 @@ struct PlayerDescriptionGroupImpl {
 
 	UI::Textarea     * plr_name;
 	UI::Checkbox     * btnEnablePlayer;
-	UI::Callback_Fun_Button * btnPlayerTeam;
-	UI::Callback_Fun_Button * btnPlayerType;
-	UI::Callback_Fun_Button * btnPlayerTribe;
-	UI::Callback_Fun_Button * btnPlayerInit;
+	UI::Callback_Button * btnPlayerTeam;
+	UI::Callback_Button * btnPlayerType;
+	UI::Callback_Button * btnPlayerTribe;
+	UI::Callback_Button * btnPlayerInit;
 	UI::Checkbox     * btnReadyPlayer;
 };
 
@@ -69,7 +69,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0));
 	d->btnEnablePlayer->changedto.set
 		(this, &PlayerDescriptionGroup::enable_player);
-	d->btnPlayerType = new UI::Callback_Fun_Button
+	d->btnPlayerType = new UI::Callback_Button
 		(this, "player_type",
 		 xplayertype, 0, xplayerteam - xplayertype - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
@@ -77,7 +77,7 @@ d(new PlayerDescriptionGroupImpl)
 		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerTeam = new UI::Callback_Fun_Button
+	d->btnPlayerTeam = new UI::Callback_Button
 		(this, "player_team",
 		 xplayerteam, 0, xplayertribe - xplayerteam - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
@@ -85,7 +85,7 @@ d(new PlayerDescriptionGroupImpl)
 		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerTribe = new UI::Callback_Fun_Button
+	d->btnPlayerTribe = new UI::Callback_Button
 		(this, "player_tribe",
 		 xplayertribe, 0, xplayerinit - xplayertribe - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
@@ -93,7 +93,7 @@ d(new PlayerDescriptionGroupImpl)
 		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerInit = new UI::Callback_Fun_Button
+	d->btnPlayerInit = new UI::Callback_Button
 		(this, "player_initialization",
 		 xplayerinit, 0, xplayerready - xplayerinit - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),

@@ -152,7 +152,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			if (not dynamic_cast<Widelands::MilitarySite const *>(productionsite)) {
 				bool const is_stopped = productionsite->is_stopped();
 				capsbuttons->add
-					(new UI::Callback_Fun_Button
+					(new UI::Callback_Button
 						(capsbuttons, is_stopped ? "continue" : "stop",
 						 0, 0, 34, 34,
 						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -177,7 +177,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						(buffer, sizeof(buffer),
 						 _("Enhance to %s"), building_descr.descname().c_str());
 					capsbuttons->add
-						(new UI::Callback_Fun_Button
+						(new UI::Callback_Button
 							(capsbuttons, "enhance",
 							 0, 0, 34, 34,
 							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -190,7 +190,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 		if (m_capscache & (1 << Widelands::Building::PCap_Bulldoze)) {
 			capsbuttons->add
-				(new UI::Callback_Fun_Button
+				(new UI::Callback_Button
 					(capsbuttons, "destroy",
 					 0, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -203,7 +203,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 	if (can_see) {
 		if (m_building.descr().m_workarea_info.size()) {
-			m_toggle_workarea = new UI::Callback_Fun_Button
+			m_toggle_workarea = new UI::Callback_Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -216,7 +216,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 		if (igbase().get_display_flag(Interactive_Base::dfDebug)) {
 			capsbuttons->add
-				(new UI::Callback_Fun_Button
+				(new UI::Callback_Button
 					(capsbuttons, "debug",
 					 0, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -227,7 +227,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		}
 
 		capsbuttons->add
-			(new UI::Callback_Fun_Button
+			(new UI::Callback_Button
 				(capsbuttons, "goto",
 				 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),

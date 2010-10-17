@@ -128,21 +128,21 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 	posx = 5;
 	posy = get_inner_h() - 30;
 
-	m_ok_btn = new UI::Callback_Fun_Button
+	m_ok_btn = new UI::Callback_Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind(&Main_Menu_Save_Map::clicked_ok, boost::ref(*this)),
 		 _("OK"));
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 boost::bind(&Main_Menu_Save_Map::die, boost::ref(*this)),
 		 _("Cancel"));
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "make_directory",
 		 spacing, posy, 120, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),

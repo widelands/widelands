@@ -147,7 +147,7 @@ void Editor_Player_Menu::update() {
 
 		if (!m_plr_set_tribes_buts[p - 1]) {
 			m_plr_set_tribes_buts[p - 1] =
-				new UI::Callback_Fun_Button
+				new UI::Callback_Button
 					(this, "tribe",
 					 posx, posy, 140, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
@@ -172,7 +172,7 @@ void Editor_Player_Menu::update() {
 		//  Set Starting pos button.
 		if (!m_plr_set_pos_buts[p - 1]) {
 			m_plr_set_pos_buts[p - 1] =
-				new UI::Callback_Fun_Button
+				new UI::Callback_Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
@@ -191,7 +191,7 @@ void Editor_Player_Menu::update() {
 		// Still disabled at the moment.
       // if(!m_plr_make_infrastructure_buts[p - 1]) {
       //                   m_plr_make_infrastructure_buts[p - 1] =
-      //                           new UI::Callback_Fun_Button
+      //                           new UI::Callback_Button
       //                                   (this, "build_infrastructure",
       //                                    posx, posy, size, size,
       //                                    g_gr->get_picture(PicMod_UI, "pics/but0.png"),

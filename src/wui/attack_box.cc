@@ -101,14 +101,14 @@ UI::Textarea & AttackBox::add_text
 	return result;
 }
 
-UI::Callback_Fun_Button & AttackBox::add_button
+UI::Callback_Button & AttackBox::add_button
 	(UI::Box           & parent,
 	 char        const * const text,
 	 void         (AttackBox::*fn)(),
 	 std::string const & tooltip_text)
 {
-	UI::Callback_Fun_Button & button =
-		*new UI::Callback_Fun_Button
+	UI::Callback_Button & button =
+		*new UI::Callback_Button
 			(&parent, text,
 			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),

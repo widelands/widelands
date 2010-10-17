@@ -60,7 +60,7 @@ Story_Message_Box::Story_Message_Box
 	posx = spacing;
 	posy = get_inner_h() - 30;
 	posx += space;
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "ok",
 		 posx, posy, but_width, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),

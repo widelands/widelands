@@ -64,10 +64,10 @@ struct SpinBoxImpl {
 
 	/// The UI parts
 	Textarea * text;
-	Callback_Fun_Button * butPlus;
-	Callback_Fun_Button * butMinus;
-	Callback_Fun_Button * butTenPlus;
-	Callback_Fun_Button * butTenMinus;
+	Callback_Button * butPlus;
+	Callback_Button * butMinus;
+	Callback_Button * butTenPlus;
+	Callback_Button * butTenMinus;
 };
 
 /**
@@ -117,7 +117,7 @@ SpinBox::SpinBox
 		(this, butw * 16 / 5, 0, textw, h, buf, Align_Center);
 	sbi->text->set_font(sbi->fontname, sbi->fontsize, sbi->fontcolor);
 	sbi->butPlus =
-		new Callback_Fun_Button
+		new Callback_Button
 			(this, "+",
 			 butw * 21 / 10, 0, butw, butw,
 			 sbi->background,
@@ -125,7 +125,7 @@ SpinBox::SpinBox
 			 "+", _("Increase the value"),
 			 true, false, sbi->fontname, sbi->fontsize);
 	sbi->butMinus =
-		new Callback_Fun_Button
+		new Callback_Button
 			(this, "-",
 			 w - butw * 31 / 10, 0, butw, butw,
 			 sbi->background,
@@ -136,7 +136,7 @@ SpinBox::SpinBox
 	sbi->butMinus->set_repeating(true);
 	if (m_big) {
 		sbi->butTenPlus =
-			new Callback_Fun_Button
+			new Callback_Button
 				(this, "++",
 				 0, 0, butw * 2, butw,
 				 sbi->background,
@@ -144,7 +144,7 @@ SpinBox::SpinBox
 				 "++", _("Increase the value by 10"),
 				 true, false, sbi->fontname, sbi->fontsize);
 		sbi->butTenMinus =
-			new Callback_Fun_Button
+			new Callback_Button
 				(this, "--",
 				 w - 2 * butw, 0, butw * 2, butw,
 				 sbi->background,

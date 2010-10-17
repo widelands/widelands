@@ -69,7 +69,7 @@ private:
 	std::string                                 m_fn;
 	UI::Textarea                                title, m_opengames;
 	UI::Textarea                                m_playername, m_hostname;
-	UI::Callback_Fun_Button                     joingame, hostgame, back, loadlasthost;
+	UI::Callback_Button                     joingame, hostgame, back, loadlasthost;
 	UI::EditBox                                 playername;
 	UI::EditBox                                 hostname;
 	UI::Table<const Net_Open_Game * const>      opengames;

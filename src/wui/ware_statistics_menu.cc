@@ -413,7 +413,7 @@ m_parent(&parent)
 	pos.x  = spacing;
 	pos.y += spacing + spacing;
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "15m",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -422,7 +422,7 @@ m_parent(&parent)
 
 	pos.x += button_size + spacing;
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "30m",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -431,7 +431,7 @@ m_parent(&parent)
 
 	pos.x += button_size + spacing;
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "1h",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -440,7 +440,7 @@ m_parent(&parent)
 
 	pos.x += button_size + spacing;
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "2h",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -450,7 +450,7 @@ m_parent(&parent)
 	pos.y += 25 + spacing;
 	pos.x  =      spacing;
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "help",
 		 pos.x, pos.y, 32, 32,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -460,7 +460,7 @@ m_parent(&parent)
 
 	pos.x += button_size + spacing;
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "4h",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -469,7 +469,7 @@ m_parent(&parent)
 
 	pos.x += button_size + spacing;
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "8h",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
@@ -478,7 +478,7 @@ m_parent(&parent)
 
 	pos.x += button_size + spacing;
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "16h",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),

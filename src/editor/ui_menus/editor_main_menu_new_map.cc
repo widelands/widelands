@@ -65,14 +65,14 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		(buffer, sizeof(buffer), _("Width: %u"), Widelands::MAP_DIMENSIONS[m_w]);
 	m_width = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "width_up",
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 boost::bind(&Main_Menu_New_Map::button_clicked, boost::ref(*this), 0));
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "width_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
@@ -86,14 +86,14 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		 _("Height: %u"), Widelands::MAP_DIMENSIONS[m_h]);
 	m_height = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "height_up",
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 boost::bind(&Main_Menu_New_Map::button_clicked, boost::ref(*this), 2));
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "height_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
@@ -108,7 +108,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 	while (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
 		++m_currentworld;
 
-	m_world = new UI::Callback_Fun_Button
+	m_world = new UI::Callback_Button
 		(this, "world",
 		 posx, posy, width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
@@ -117,7 +117,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 
 	posy += height + spacing + spacing + spacing;
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "create_map",
 		 posx, posy, width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),

@@ -46,7 +46,7 @@ private:
 	uint32_t    m_fs;
 	std::string m_fn;
 
-	UI::Callback_Fun_Button m_back, m_ok;
+	UI::Callback_Button m_back, m_ok;
 	UI::Listselect<std::string> m_list;
 	UI::Textarea m_title;
 	std::string m_filename;

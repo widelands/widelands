@@ -53,7 +53,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	posy = get_inner_h() - 30;
 
 	m_ok_button = new
-		UI::Callback_Fun_Button
+		UI::Callback_Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
@@ -62,7 +62,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 		 std::string(),
 		 m_dirname.size());
 
-	new UI::Callback_Fun_Button
+	new UI::Callback_Button
 		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),

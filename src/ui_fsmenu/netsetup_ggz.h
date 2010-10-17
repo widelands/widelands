@@ -70,7 +70,7 @@ private:
 	UI::Textarea                                m_servername;
 	UI::Textarea                                m_maxplayers;
 	UI::SpinBox                                 maxplayers;
-	UI::Callback_Fun_Button                     joingame, hostgame, back;
+	UI::Callback_Button                     joingame, hostgame, back;
 	UI::EditBox                                 servername;
 	UI::Table<const Net_Player * const>         usersonline;
 	UI::Listselect<Net_Open_Game>               opengames;

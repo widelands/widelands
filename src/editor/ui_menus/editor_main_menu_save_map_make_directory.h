@@ -27,7 +27,7 @@
 
 namespace UI {
 struct EditBox;
-struct Callback_Fun_Button;
+struct Callback_Button;
 }
 
 /**
@@ -44,7 +44,7 @@ struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
 private:
 	std::string               m_dirname;
 	UI::EditBox             * m_edit;
-	UI::Callback_Fun_Button * m_ok_button;
+	UI::Callback_Button * m_ok_button;
 	void edit_changed();
 };
 

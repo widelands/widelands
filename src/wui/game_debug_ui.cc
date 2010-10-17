@@ -225,7 +225,7 @@ private:
 	Widelands::FCoords const     m_coords;
 
 	UI::Multiline_Textarea       m_ui_field;
-	UI::Callback_Fun_Button m_ui_immovable;
+	UI::Callback_Button m_ui_immovable;
 	UI::Listselect<intptr_t>    m_ui_bobs;
 };
 

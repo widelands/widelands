@@ -159,7 +159,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
 		m_pos[i] =
-			new UI::Callback_Fun_Button
+			new UI::Callback_Button
 				(this, "switch_to_position",
 				 m_xres / 100, y += m_buth, m_yres * 17 / 500, m_yres * 17 / 500,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),

@@ -54,9 +54,9 @@ private:
 	virtual void node_action();
 
 private:
-	UI::Callback_Fun_Button m_toggle_chat;
-	UI::Callback_Fun_Button m_toggle_options_menu;
-	UI::Callback_Fun_Button m_toggle_statistics;
+	UI::Callback_Button m_toggle_chat;
+	UI::Callback_Button m_toggle_options_menu;
+	UI::Callback_Button m_toggle_statistics;
 
 	UI::UniqueWindow::Registry m_chat;
 	UI::UniqueWindow::Registry m_options;

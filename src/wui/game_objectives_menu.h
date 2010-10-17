@@ -45,7 +45,7 @@ private:
 	typedef UI::Listselect<Widelands::Objective &> list_type;
 	list_type              list;
 	UI::Multiline_Textarea objectivetext;
-	//UI::Callback_Fun_Button m_claim_victory, m_restart_mission;
+	//UI::Callback_Button m_claim_victory, m_restart_mission;
 public:
 	bool victorious(bool const v = false) {
 		static bool m_victory = v;

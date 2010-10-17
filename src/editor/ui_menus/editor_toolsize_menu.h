@@ -39,7 +39,7 @@ private:
 	void increase_radius();
 
 	UI::Textarea                                   m_textarea;
-	UI::Callback_Fun_Button m_increase, m_decrease;
+	UI::Callback_Button m_increase, m_decrease;
 };
 
 

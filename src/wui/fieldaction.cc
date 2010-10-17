@@ -630,8 +630,8 @@ UI::Button & FieldActionWindow::add_button
 	 std::string const & tooltip_text,
 	 bool                const repeating)
 {
-	UI::Callback_Fun_Button & button =
-		*new UI::Callback_Fun_Button
+	UI::Callback_Button & button =
+		*new UI::Callback_Button
 			(box, name,
 			 0, 0, 34, 34,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),

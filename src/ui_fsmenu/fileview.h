@@ -47,7 +47,7 @@ protected:
 private:
 	UI::Textarea                                title;
 	UI::Multiline_Textarea                      textview;
-	UI::Callback_Fun_Button                     close_button;
+	UI::Callback_Button                     close_button;
 };
 
 /**

@@ -30,7 +30,7 @@
 
 namespace UI {
 
-struct IconGridButton : public Callback_Fun_Button {
+struct IconGridButton : public Callback_Button {
 	IconGridButton
 		(Icon_Grid * const parent,
 		 std::string const & name,
@@ -42,7 +42,7 @@ struct IconGridButton : public Callback_Fun_Button {
 		 const uint32_t callback_argument_id,
 		 Textarea * ta, std::string descr)
 		:
-		Callback_Fun_Button
+		Callback_Button
 			(parent, name, x, y, w, h, background_pictute_id,
 			 foreground_picture_id,
 			 boost::bind(callback_function, boost::ref(callback_argument_this), callback_argument_id),
@@ -65,7 +65,7 @@ private:
 			m_icongrid->mouseout.call(_callback_argument_id);
 			m_ta->set_text("");
 		}
-		Callback_Fun_Button::handle_mousein(inside);
+		Callback_Button::handle_mousein(inside);
 	}
 };
 

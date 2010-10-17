@@ -82,7 +82,7 @@ private:
 	UI::Textarea m_label_nr_players, m_nr_players;
 	UI::Textarea m_label_descr;
 	UI::Multiline_Textarea m_descr;
-	UI::Callback_Fun_Button m_back, m_ok;
+	UI::Callback_Button m_back, m_ok;
 	UI::Checkbox                                     m_load_map_as_scenario;
 	UI::Listselect<MapData>                          m_list;
 	std::string                                      m_curdir, m_basedir;
