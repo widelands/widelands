@@ -82,12 +82,15 @@ struct Button : public NamedPanel {
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t);
+	
+	void set_perm_pressed(bool state); // Set the permanently pressed state of the button
 
-private:
+protected:
 	virtual void clicked() = 0; /// Override this to react on the click.
 
 	bool        m_highlighted;    //  mouse is over the button
-	bool        m_pressed;
+	bool        m_pressed;        //  mouse is clicked over the button
+	bool        m_permpressed;    //  button should appear  pressed
 	bool        m_enabled;
 	bool        m_repeating;
 	bool        m_flat;

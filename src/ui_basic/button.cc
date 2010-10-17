@@ -43,6 +43,7 @@ Button::Button //  for textual buttons
 	NamedPanel           (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
 	m_pressed       (false),
+	m_permpressed   (false),
 	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
@@ -75,6 +76,7 @@ Button::Button //  for pictorial buttons
 	NamedPanel      (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
 	m_pressed       (false),
+	m_permpressed   (false),
 	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
@@ -248,11 +250,15 @@ void Button::draw(RenderTarget & odst)
 	//  stays pressed when it is pressed once
 	RGBAColor black(0, 0, 0, 255);
 
+	// m_permpressed is true, we invert the behaviour on m_pressed
+	bool draw_pressed = m_permpressed ? not (m_pressed and m_highlighted)
+	                                  :     (m_pressed and m_highlighted);
+
 	if (not m_flat) {
 		assert(2 <= get_w());
 		assert(2 <= get_h());
 		//  button is a normal one, not flat
-		if (not m_pressed or not m_highlighted) {
+		if (not draw_pressed) {
 			//  top edge
 			dst->brighten_rect
 				(Rect(Point(0, 0), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
@@ -385,5 +391,12 @@ bool Button::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t) {
 	return true; // We handle this always by lighting up
 }
 
+void Button::set_perm_pressed(bool state) {
+	if (state != m_permpressed) {
+		m_permpressed = state;
+		m_needredraw = true;
+		update();
+	}
+}
 
 }
