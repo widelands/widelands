@@ -17,6 +17,8 @@
  *
  */
 
+#include <boost/bind.hpp>
+
 #include "game_main_menu.h"
 
 #include "building_statistics_menu.h"
@@ -67,6 +69,15 @@ stock
 	 &GameMainMenu::clicked_stock, *this,
 	 _("Stock"))
 {
+#define INIT_BTN_HOOKS(registry, btn)                                        \
+ registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
+ registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+
+	INIT_BTN_HOOKS(m_windows.general_stats, general_stats)
+	INIT_BTN_HOOKS(m_windows.ware_stats, ware_stats)
+	INIT_BTN_HOOKS(m_windows.building_stats, building_stats)
+	INIT_BTN_HOOKS(m_windows.stock, stock)
+
 	if (get_usedefaultpos())
 		center_to_parent();
 }
