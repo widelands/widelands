@@ -169,11 +169,11 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_mapname .set_text(_("(no map)"));
 	m_map_info.set_text(_("The host has not yet selected a map or saved game"));
 
-	m_mpsb =
+	m_mpsg =
 		new MultiPlayerSetupGroup
 			(this,
 			 m_xres / 20, m_yres / 10, m_xres * 9 / 10, m_yres * 6 / 11,
-			 settings, m_usernum, m_butw, m_buth, m_fn, m_fs);*/
+			 settings, m_butw, m_buth, m_fn, m_fs);
 }
 
 Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
@@ -406,7 +406,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 		set_scenario_values();
 
 	win_condition_update();
-	m_mbsp->refresh();
+	m_mpsg->refresh();
 }
 
 

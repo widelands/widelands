@@ -27,6 +27,9 @@
 
 #include "coroutine_impl.h"
 
+#include "setjmp.h"
+#include "log.h"
+
 LuaCoroutine_Impl::LuaCoroutine_Impl(lua_State * ms)
 	: m_L(ms), m_idx(LUA_REFNIL), m_nargs(0)
 {
@@ -53,8 +56,12 @@ int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 	if (sleeptime)
 		*sleeptime = sleep_for;
 
-	if (rv != 0 && rv != YIELDED)
-		return lua_error(m_L);
+	if (rv != 0 && rv != YIELDED) {
+		// lua_error() never returns. prints error and exit program imediately
+		//return  lua_error(m_L);
+		const char * err = lua_tostring(m_L, -1);
+		throw LuaError(err);
+	}
 
 	return rv;
 }

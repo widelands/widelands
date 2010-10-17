@@ -10,28 +10,51 @@ basket=1
 [plantvine]
 0=findspace size:any radius:1
 1=walk coords
-2=animation idle 500 # Play a planting animation
+2=animation dig 2000 # Play a planting animation
 3=plant tribe:wine0t
-4=animation idle 500
+4=animation plant 3000
 5=return
 
 [harvestvine]
 0=findobject attrib:grown_vine radius:1
 1=walk object
-2=animation idle 10000
+2=animation gather 10000
 3=object harvestvine
-4=animation idle 2000
+4=animation gather 2000
 5=createitem grape
 6=return
 
 [idle]
 pics=idle_??.png
-hotspot=3 12
+hotspot=10 24
+playercolor=true
+
+[dig]
+pics=dig_??.png
+hotspot=18 24
+playercolor=true
+fps=10
+
+[plant]
+pics=plant_??.png
+hotspot=18 24
+playercolor=true
+fps=10
+
+[gather]
+pics=gather_??.png
+hotspot=9 25
+playercolor=true
+fps=10
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=5 11
+hotspot=10 24
+playercolor=true
+fps=10
 
 [walkload]
-dirpics=walk_!!_??.png
-hotspot=5 11
+dirpics=walkload_!!_??.png
+hotspot=10 24
+playercolor=true
+fps=10

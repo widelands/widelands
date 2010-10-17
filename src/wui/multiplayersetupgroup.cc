@@ -34,21 +34,19 @@
 
 struct MultiPlayerSetupGroupOptions {
 	GameSettingsProvider * settings;
-	int32_t usernum;
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup
 	(UI::Panel            * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 	 GameSettingsProvider * const settings,
-	 int32_t               const usernum,
+	 uint32_t butw, uint32_t buth,
 	 std::string const & fname, uint32_t const fsize)
 :
 UI::Panel(parent, x, y, w, h),
 d(new MultiPlayerSetupGroupOptions)
 {
 	d->settings = settings;
-	d->usernum = usernum;
 
 	refresh();
 }

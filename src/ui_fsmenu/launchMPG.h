@@ -86,7 +86,7 @@ private:
 	GameSettingsProvider    * m_settings;
 	GameController          * m_ctrl; // optional
 	GameChatPanel           * m_chat;
-	MultiPlayerSetupGroup   * m_mpsb;
+	MultiPlayerSetupGroup   * m_mpsg;
 	std::string               m_filename_proof; // local variable to check state
 	int8_t                    m_nr_players;
 	bool                      m_autolaunch;
