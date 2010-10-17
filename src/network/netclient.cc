@@ -147,6 +147,7 @@ void NetClient::run ()
 
 	d->settings.multiplayer = true;
 	d->settings.scenario = false;
+	uint16_t counter = 0;
 	{
 		Fullscreen_Menu_LaunchMPG lgm(this, this, d->settings.usernum);
 		lgm.setChatProvider(*this);
@@ -176,7 +177,6 @@ void NetClient::run ()
 
 		d->game = &game;
 		game.set_game_controller(this);
-		// If our player is in shared kingdom mode - set the iabase accordingly.
 		uint8_t const pn = d->settings.playernum + 1;
 		Interactive_GameBase * igb;
 		if (pn > 0)
@@ -537,7 +537,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		return;
 	}
 
-	if (d->settings.playernum == -2) {
+	if (d->settings.usernum == -2) {
 		if (cmd != NETCMD_HELLO)
 			throw DisconnectException
 				(_

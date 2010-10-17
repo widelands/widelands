@@ -30,11 +30,10 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "mapselect.h"
-#include "playerdescrgroup.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "warning.h"
-#include "wui/gamechatpanel.h"
+#include "wui/playerdescrgroup.h"
 
 #include "launchSPG.h"
 
@@ -272,8 +271,7 @@ void Fullscreen_Menu_LaunchSPG::refresh()
 	m_filename = settings.mapfilename;
 	m_nr_players = settings.players.size();
 
-	bool launch = m_settings->canLaunch();
-	m_ok.set_enabled(launch);
+	m_ok.set_enabled(m_settings->canLaunch());
 
 	m_select_map.set_visible(m_settings->canChangeMap());
 	m_select_map.set_enabled(m_settings->canChangeMap());
