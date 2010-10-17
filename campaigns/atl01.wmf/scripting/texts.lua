@@ -478,6 +478,20 @@ heavy_industry_story = {
    }
 }
 
+horsefarm_and_warehouse_story = {
+   {
+      title = _ "Jundlina considers the economy",
+      body = jundlina(_"Jundlina", _
+[[People are complaining about crowded streets and slow transportation. We
+ need to help out our carriers on the roads. I decided to build a horsefarm
+ so that the horses can help with the heavy wares<br>
+ Another way to take load from our roads is to build warhouses. We are about
+ to expand up the mountain; it would be wise to have a base camp with a warehouse
+ at its foot.]]
+      ) .. new_objectives(obj_horsefarm_and_warehouse)
+   }
+}
+
 -- =======================================================================
 --                         Leftover buildings found
 -- =======================================================================

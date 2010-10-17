@@ -291,6 +291,7 @@ end
 
 run(intro)
 run(leftover_buildings)
+run(build_warehouse_and_horsefarm)
 
 run(water_rising)
 
