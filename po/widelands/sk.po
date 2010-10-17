@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-10-08 13:13+0000\n"
+"PO-Revision-Date: 2010-10-17 01:23+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2010-10-09 12:07+0000\n"
+"X-Launchpad-Export-Date: 2010-10-17 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -1979,7 +1979,7 @@ msgstr "Minimapa"
 #: ../../src/wui/interactive_player.cc:191
 #: ../../src/editor/editorinteractive.cc:76
 msgid "Buildhelp"
-msgstr "Pomôcka pri stavaní"
+msgstr "Pomoc pri stavaní"
 
 #: ../../src/wui/interactive_player.cc:195
 #: ../../src/wui/interactive_player.cc:280
@@ -1988,7 +1988,7 @@ msgstr "Správy"
 
 #: ../../src/wui/interactive_player.cc:199
 msgid "Ware help"
-msgstr ""
+msgstr "O výrobkoch"
 
 #: ../../src/wui/interactive_player.cc:288
 #, c-format
@@ -2006,12 +2006,12 @@ msgstr "Hlavné menu"
 #: ../../src/wui/game_main_menu.cc:54
 #: ../../src/wui/ware_statistics_menu.cc:349
 msgid "Ware Statistics"
-msgstr "Bojová štatistika"
+msgstr "Štatistika výrobkov"
 
 #: ../../src/wui/game_main_menu.cc:61
 #: ../../src/wui/building_statistics_menu.cc:79
 msgid "Building Statistics"
-msgstr "Štatistika stavby"
+msgstr "Štatistika budov"
 
 #: ../../src/wui/game_main_menu.cc:68 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/waresdisplay.cc:43

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-08 20:54+0000\n"
+"PO-Revision-Date: 2010-10-17 00:47+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-09 12:07+0000\n"
+"X-Launchpad-Export-Date: 2010-10-17 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -440,7 +440,7 @@ msgstr "Helma"
 
 #: ../../tribes/barbarians/conf:121
 msgid "Helmsmith"
-msgstr "Zbrojár"
+msgstr "Kováč heliem"
 
 #: ../../tribes/barbarians/conf:191
 msgid "Helmsmithy"
@@ -545,7 +545,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:196
 msgid "Metalwork Shop"
-msgstr ""
+msgstr "Kovodielňa"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Micro Brewery"
@@ -736,7 +736,7 @@ msgstr "Porcia"
 
 #: ../../tribes/barbarians/conf:86
 msgid "Raw Stone"
-msgstr "Hrubý kameň"
+msgstr "Nespracovaný kameň"
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid "Raw Stones are the secondary build material of the barbarians."
@@ -747,6 +747,8 @@ msgid ""
 "Raw stone can be enhanced to grout which delivers solid, non burning build "
 "material."
 msgstr ""
+"Nespracovaný kameň možno vylepšiť na maltu, ktorá dodáva pevný nehorľavý "
+"stavebný materiál."
 
 #: ../../tribes/barbarians/sharpaxe/conf:1
 msgid ""
@@ -817,7 +819,7 @@ msgstr "Prieskumník"
 
 #: ../../tribes/barbarians/conf:205
 msgid "Scout's Hut"
-msgstr ""
+msgstr "Prieskumníkova chatrč"
 
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
@@ -895,7 +897,7 @@ msgstr "Kamennár"
 
 #: ../../tribes/barbarians/conf:91
 msgid "Strong Beer"
-msgstr "Silnejšie pivo"
+msgstr "Silné pivo"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Stronghold"
@@ -1042,7 +1044,7 @@ msgstr "Kmeň"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid "Trunks are the primary build material of the barbarians."
-msgstr ""
+msgstr "Kmene stromov sú primárnym stavebným materiálom barbarov."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -1148,7 +1150,7 @@ msgstr "Vojenská helma"
 
 #: ../../tribes/barbarians/conf:171
 msgid "War Mill"
-msgstr "Vojenská akadémia"
+msgstr "Vojenský závod"
 
 #: ../../tribes/barbarians/conf:168
 msgid "Warehouse"
@@ -1184,7 +1186,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:203
 msgid "Weaving-Mill"
-msgstr ""
+msgstr "Tkací závod"
 
 #: ../../tribes/barbarians/conf:204
 msgid "Well"

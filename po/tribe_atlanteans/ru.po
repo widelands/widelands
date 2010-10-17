@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-15 21:26+0000\n"
+"PO-Revision-Date: 2010-10-16 14:49+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-16 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-10-17 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -142,7 +142,7 @@ msgstr "Разводит рыбу."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr "Разводит пауков для паутины."
+msgstr "Разводит пауков для получения паутины."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -251,7 +251,7 @@ msgstr "Обтёсывает куски гранита, добытые из за
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "Защищать и покорять!"
+msgstr "Защищать и завоёвывать!"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Destroyed building"
@@ -263,7 +263,7 @@ msgstr "Алмаз"
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "Занимается геологоразведкой."
+msgstr "Находит месторождения полезных ископаемых."
 
 #: ../../tribes/atlanteans/conf:148
 msgid "Donjon"
@@ -405,7 +405,7 @@ msgstr "Тяжёлый трезубец"
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr "Помогает перовозить грузы на сильно используюмых дорогах."
+msgstr "Помогает перевозить грузы на сильно загруженных дорогах."
 
 #: ../../tribes/atlanteans/conf:141
 msgid "High Tower"
@@ -493,7 +493,7 @@ msgstr "Мельник"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid "Mills wheat to produce flour."
-msgstr "Перемалывает для производства муки."
+msgstr "Мелет пшеницу в муку."
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -548,11 +548,11 @@ msgstr "Посадить кукурузу"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr "Разводит черный корнень."
+msgstr "Сажает и собирает урожай чёрного корня."
 
 #: ../../tribes/atlanteans/farmer/conf:2
 msgid "Plants fields."
-msgstr "Сажает поля."
+msgstr "Засевает поля."
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
@@ -670,7 +670,7 @@ msgstr "Создать накидку"
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr "Производит броню для солдат."
+msgstr "Изготавливает доспехи для солдат."
 
 #: ../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
@@ -748,7 +748,7 @@ msgstr "Пилы нужны пильщику, дровосеку и кузнец
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
-msgstr "Пилит древесину для производства доскок."
+msgstr "Распиливает брёвна на доски."
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Sawyer"
@@ -815,7 +815,7 @@ msgstr "Плавильня"
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
-msgstr "Плавит железо."
+msgstr "Выплавляет железо."
 
 #: ../../tribes/atlanteans/smokery/conf:26
 msgid "Smoke fish"
@@ -905,7 +905,7 @@ msgstr "Накидка"
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-msgstr "Охотник приносит свежее, сырое мясо атлантам."
+msgstr "Охотник добывает атлантам свежее мясо."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
@@ -932,7 +932,7 @@ msgstr "Щипцы основной инструмент плавильщика.
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
-msgstr "Рыбак кормит вкусную рыбу."
+msgstr "Рыболов ловит очень вкусную рыбу."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
@@ -1283,7 +1283,7 @@ msgstr "Работа"
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr "Работает на строительных площадках."
+msgstr "Работает на строительных площадках, создавая новые здания."
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-15 18:08+0000\n"
+"PO-Revision-Date: 2010-10-16 10:59+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-16 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-10-17 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -139,11 +139,11 @@ msgstr "Углежог"
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr "Пережигает дерево в древесный уголь"
+msgstr "Жжёт уголь."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kilm."
-msgstr "Готовит бетон из составляющих"
+msgstr "Обжигает известняк в цементной печи."
 
 #: ../../tribes/barbarians/conf:100
 msgid "Carrier"
@@ -151,7 +151,7 @@ msgstr "Носильщик"
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
-msgstr "Переносят грузы по дорогам."
+msgstr "Переносит грузы по дорогам."
 
 #: ../../tribes/barbarians/conf:151
 #: ../../tribes/barbarians/conf:160
@@ -237,7 +237,7 @@ msgstr "Олень"
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "Защищать и покорять!"
+msgstr "Защищать и завоёвывать!"
 
 #: ../../tribes/barbarians/conf:28
 msgid "Destroyed building"
@@ -245,7 +245,7 @@ msgstr "Разрушенное здание"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "Ищет полезные ископаемые"
+msgstr "Находит месторождения полезных ископаемых."
 
 #: ../../tribes/barbarians/conf:145
 msgid "Donjon"
@@ -366,7 +366,7 @@ msgstr "Геолог"
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr "Ловит рыбу"
+msgstr "Добывает рыбу из моря."
 
 #: ../../tribes/barbarians/conf:71
 msgid "Gold"
@@ -448,7 +448,7 @@ msgstr "Шлемная мастерская"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr "Помогает перовозить грузы на сильно загруженных дорогах."
+msgstr "Помогает перевозить грузы на сильно загруженных дорогах."
 
 #: ../../tribes/barbarians/conf:154
 msgid "High Tower"
@@ -604,7 +604,7 @@ msgstr "сеять пшеницу"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr "Засевает поля"
+msgstr "Засевает поля."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -714,12 +714,12 @@ msgstr "Готовит еду для шахтёров."
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
-"Варит отличное пиво для поддержания силы и духа солдат во время боевой учебы."
+"Варит отличное пиво для поддержания сил и духа солдат во время обучения."
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr "Выпускает оружие для солдат и инструменты для работников"
+msgstr "Изготавливает оружие для солдат и инструменты для рабочих."
 
 #: ../../tribes/barbarians/conf:199
 msgid "Quarry"
@@ -880,7 +880,7 @@ msgstr "Производит шлемы для солдат."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr "Плавит железо."
+msgstr "Выплавляет железо."
 
 #: ../../tribes/barbarians/conf:90
 msgid "Snack"
@@ -937,7 +937,8 @@ msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
-"Егерь гарантирует, что природная популяция животных не снизится чрезмерно."
+"Егерь заботится о том, чтобы популяция животных в природе не снижалась "
+"чрезмерно."
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."

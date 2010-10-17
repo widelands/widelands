@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-13 12:15+0000\n"
-"Last-Translator: Venatrix <Unknown>\n"
+"PO-Revision-Date: 2010-10-16 08:01+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-14 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-10-17 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: German\n"
 
@@ -67,7 +67,7 @@ msgstr "Bäckerei"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Bäckt Brot für Arbeiter."
+msgstr "Backt Brot für Arbeiter."
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Bakingtray"
@@ -75,7 +75,7 @@ msgstr "Backblech"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "Barracks"
-msgstr "Baracken"
+msgstr "Baracke"
 
 #: ../../tribes/atlanteans/conf:146
 #: ../../tribes/atlanteans/conf:154
@@ -973,8 +973,8 @@ msgstr ""
 msgid ""
 "These transparent quartz' are used for some exclusive buildings and tools."
 msgstr ""
-"Diese durchscheinenden Bergkristalle werden für einige exklusive Gebäude und "
-"Werkzeuge verwandt."
+"Diese durchscheinenden Bergkristalle werden für einige exclusive Gebäude und "
+"Werkzeuge verwendet."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid "This bow is used by the atlantian hunter."
