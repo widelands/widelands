@@ -20,6 +20,7 @@
 #ifndef UI_BUTTON_H
 #define UI_BUTTON_H
 
+#include <boost/bind.hpp>
 #include <boost/function.hpp>
 
 #include "constants.h"

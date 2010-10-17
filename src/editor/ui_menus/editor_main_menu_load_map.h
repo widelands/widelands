@@ -30,7 +30,7 @@ struct EditBox;
 template <typename T> struct Listselect;
 struct Textarea;
 struct Multiline_Textarea;
-template <typename T> struct Callback_Button;
+struct Callback_Fun_Button;
 };
 
 /**
@@ -49,7 +49,7 @@ private:
 	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
 	UI::Multiline_Textarea * m_descr;
 	UI::Listselect<const char *> * m_ls;
-	UI::Callback_Button<Main_Menu_Load_Map> * m_ok_btn;
+	UI::Callback_Fun_Button * m_ok_btn;
 
 	std::string m_basedir;
 	std::string m_curdir;

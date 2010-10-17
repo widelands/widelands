@@ -70,9 +70,7 @@ private:
 	UI::Textarea                                m_servername;
 	UI::Textarea                                m_maxplayers;
 	UI::SpinBox                                 maxplayers;
-	UI::Callback_Button<Fullscreen_Menu_NetSetupGGZ>            joingame;
-	UI::Callback_Button<Fullscreen_Menu_NetSetupGGZ>            hostgame;
-	UI::Callback_IDButton<Fullscreen_Menu_NetSetupGGZ, int32_t> back;
+	UI::Callback_Fun_Button                     joingame, hostgame, back;
 	UI::EditBox                                 servername;
 	UI::Table<const Net_Player * const>         usersonline;
 	UI::Listselect<Net_Open_Game>               opengames;

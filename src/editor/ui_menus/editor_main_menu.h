@@ -33,13 +33,13 @@ struct Editor_Main_Menu : public UI::UniqueWindow {
 
 private:
 	Editor_Interactive & eia();
-	UI::Callback_Button<Editor_Main_Menu> m_button_new_map;
-	UI::Callback_Button<Editor_Main_Menu> m_button_new_random_map;
-	UI::Callback_Button<Editor_Main_Menu> m_button_load_map;
-	UI::Callback_Button<Editor_Main_Menu> m_button_save_map;
-	UI::Callback_Button<Editor_Main_Menu> m_button_map_options;
-	UI::Callback_Button<Editor_Main_Menu> m_button_view_readme;
-	UI::Callback_Button<Editor_Main_Menu> m_button_exit_editor;
+	UI::Callback_Fun_Button m_button_new_map;
+	UI::Callback_Fun_Button m_button_new_random_map;
+	UI::Callback_Fun_Button m_button_load_map;
+	UI::Callback_Fun_Button m_button_save_map;
+	UI::Callback_Fun_Button m_button_map_options;
+	UI::Callback_Fun_Button m_button_view_readme;
+	UI::Callback_Fun_Button m_button_exit_editor;
 
 	UI::UniqueWindow::Registry m_window_readme;
 

@@ -77,7 +77,7 @@ private:
 	UI::Tab_Panel * m_tabs;
 
 	UI::Box * m_capsbuttons; ///< \ref UI::Box that contains capabilities buttons
-	UI::Callback_Button<Building_Window> * m_toggle_workarea;
+	UI::Callback_Fun_Button * m_toggle_workarea;
 
 	//  capabilities that were last used in setting up the caps panel
 	uint32_t m_capscache;

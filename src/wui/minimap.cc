@@ -143,42 +143,42 @@ MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 		 but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_terrn.png"),
-		 &MiniMap::toggle, *this, Terrn,
+		 boost::bind(&MiniMap::toggle, boost::ref(*this), Terrn),
 		 _("Terrain")),
 	button_owner
 		(this, "owner",
 		 but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_owner.png"),
-		 &MiniMap::toggle, *this, Owner,
+		 boost::bind(&MiniMap::toggle, boost::ref(*this), Owner),
 		 _("Owner")),
 	button_flags
 		(this, "flags",
 		 but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_flags.png"),
-		 &MiniMap::toggle, *this, Flags,
+		 boost::bind(&MiniMap::toggle, boost::ref(*this), Flags),
 		 _("Flags")),
 	button_roads
 		(this, "roads",
 		 but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_roads.png"),
-		 &MiniMap::toggle, *this, Roads,
+		 boost::bind(&MiniMap::toggle, boost::ref(*this), Roads),
 		 _("Roads")),
 	button_bldns
 		(this, "buildings",
 		 but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"),
-		 &MiniMap::toggle, *this, Bldns,
+		 boost::bind(&MiniMap::toggle, boost::ref(*this), Bldns),
 		 _("Buildings")),
 	button_zoom
 		(this, "zoom",
 		 but_w() * 2, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_zoom.png"),
-		 &MiniMap::toggle, *this, Zoom2,
+		 boost::bind(&MiniMap::toggle, boost::ref(*this), Zoom2),
 		 _("Zoom"))
 {
 	resize();

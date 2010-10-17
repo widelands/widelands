@@ -56,17 +56,17 @@ Window(&parent, "login_box", 0, 0, 500, 210, _("Metaserver login"))
 		(this, 40, 135,
 		 _("Automatically use this login information from now on."));
 
-	new UI::Callback_Button<LoginBox>
+	new UI::Callback_Fun_Button
 		(this, "login",
 		 (get_inner_w() / 2 - 200) / 2, 175, 200, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &LoginBox::pressedLogin, *this,
+		 boost::bind(&LoginBox::pressedLogin, boost::ref(*this)),
 		 _("Login"));
-	new UI::Callback_Button<LoginBox>
+	new UI::Callback_Fun_Button
 		(this, "cancel",
 		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, 175, 200, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &LoginBox::pressedCancel, *this,
+		 boost::bind(&LoginBox::pressedCancel, boost::ref(*this)),
 		 _("Cancel"));
 
 	Section & s = g_options.pull_section("global");

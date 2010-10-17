@@ -83,20 +83,19 @@ UI::Textarea & MilitaryBox::add_text
 	return result;
 }
 
-UI::Callback_Button<MilitaryBox> & MilitaryBox::add_button
+UI::Callback_Fun_Button & MilitaryBox::add_button
 	(UI::Box           & parent,
 	 char        const * const name,
 	 char        const * const text,
 	 void         (MilitaryBox::*fn)(),
 	 std::string const & tooltip_text)
 {
-	UI::Callback_Button<MilitaryBox> & button =
-		*new UI::Callback_Button<MilitaryBox>
+	UI::Callback_Fun_Button & button =
+		*new UI::Callback_Fun_Button
 			(&parent, name,
 			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-			 fn,
-			 *this,
+			 boost::bind(fn,boost::ref(*this)),
 			 text,
 			 tooltip_text);
 	parent.add(&button, Box::AlignTop);

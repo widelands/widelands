@@ -57,9 +57,9 @@ private:
 	std::string m_fn;
 
 	Widelands::Game &                               m_game;
-	UI::Callback_IDButton<Fullscreen_Menu_LoadGame, int32_t> m_back;
-	UI::Callback_Button<Fullscreen_Menu_LoadGame>            m_ok;
-	UI::Callback_Button<Fullscreen_Menu_LoadGame>            m_delete;
+	UI::Callback_Fun_Button                         m_back;
+	UI::Callback_Fun_Button                         m_ok;
+	UI::Callback_Fun_Button                         m_delete;
 	UI::Listselect<const char *>                    m_list;
 	UI::Textarea                                    m_title;
 	UI::Textarea                                    m_label_mapname;

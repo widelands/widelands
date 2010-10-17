@@ -57,8 +57,7 @@ private:
 	UI::Textarea                                      tadifficulty;
 	UI::Textarea                                      label_campdescr;
 	UI::Multiline_Textarea                            tacampdescr;
-	UI::Callback_Button<Fullscreen_Menu_CampaignSelect> b_ok;
-	UI::Callback_IDButton<Fullscreen_Menu_CampaignSelect, int32_t> back;
+	UI::Callback_Fun_Button                           b_ok, back;
 	UI::Listselect<const char *>                      m_list;
 
 	/// Variables used for exchange between the two Campaign UIs and
@@ -94,8 +93,7 @@ private:
 	UI::Textarea                                         taauthor;
 	UI::Textarea                                         label_mapdescr;
 	UI::Multiline_Textarea                               tamapdescr;
-	UI::Callback_Button<Fullscreen_Menu_CampaignMapSelect> b_ok;
-	UI::Callback_IDButton<Fullscreen_Menu_CampaignMapSelect, int32_t> back;
+	UI::Callback_Fun_Button                              b_ok, back;
 	UI::Listselect<std::string>                          m_list;
 	uint32_t                                             campaign;
 	std::string                                          campmapfile;

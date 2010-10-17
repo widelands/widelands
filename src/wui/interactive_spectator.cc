@@ -47,7 +47,7 @@ Interactive_Spectator::Interactive_Spectator
 #define INIT_BTN(picture, name, callback, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
- &Interactive_Spectator::callback, *this,                                     \
+ boost::bind(&Interactive_Spectator::callback, boost::ref(*this)),            \
  tooltip                                                                      \
 
 	m_toggle_chat

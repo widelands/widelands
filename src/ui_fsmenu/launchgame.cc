@@ -55,35 +55,35 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		(this, "select_map",
 		 m_xres * 7 / 10, m_yres * 3 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Fullscreen_Menu_LaunchGame::select_map, *this,
+		 boost::bind(&Fullscreen_Menu_LaunchGame::select_map, boost::ref(*this)),
 		 _("Select map"), std::string(), false, false,
 		 m_fn, m_fs),
 	m_select_save
 		(this, "select_savegame",
 		 m_xres * 7 / 10, m_yres * 7 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Fullscreen_Menu_LaunchGame::select_savegame, *this,
+		 boost::bind(&Fullscreen_Menu_LaunchGame::select_savegame, boost::ref(*this)),
 		 _("Select Savegame"), std::string(), false, false,
 		 m_fn, m_fs),
 	m_wincondition
 		(this, "win_condition",
 		 m_xres * 7 / 10, m_yres * 4 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Fullscreen_Menu_LaunchGame::win_condition_clicked, *this,
+		 boost::bind(&Fullscreen_Menu_LaunchGame::win_condition_clicked, boost::ref(*this)),
 		 "", std::string(), false, false,
 		 m_fn, m_fs),
 	m_back
 		(this, "back",
 		 m_xres * 7 / 10, m_yres * 9 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Fullscreen_Menu_LaunchGame::back_clicked, *this,
+		 boost::bind(&Fullscreen_Menu_LaunchGame::back_clicked, boost::ref(*this)),
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_ok
 		(this, "ok",
 		 m_xres * 7 / 10, m_yres * 1 / 2, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 &Fullscreen_Menu_LaunchGame::start_clicked, *this,
+		 boost::bind(&Fullscreen_Menu_LaunchGame::start_clicked, boost::ref(*this)),
 		 _("Start game"), std::string(), false, false,
 		 m_fn, m_fs),
 
@@ -159,12 +159,12 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
 		m_pos[i] =
-			new UI::Callback_IDButton<Fullscreen_Menu_LaunchGame, uint8_t>
+			new UI::Callback_Fun_Button
 				(this, "switch_to_position",
 				 m_xres / 100, y += m_buth, m_yres * 17 / 500, m_yres * 17 / 500,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 g_gr->get_picture(PicMod_Game, posIco),
-				 &Fullscreen_Menu_LaunchGame::switch_to_position, *this, i,
+				 boost::bind(&Fullscreen_Menu_LaunchGame::switch_to_position, boost::ref(*this), i),
 				 _("Switch to position"), false);
 		m_players[i] =
 			new PlayerDescriptionGroup

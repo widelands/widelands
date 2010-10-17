@@ -55,8 +55,7 @@ private:
 	UI::Textarea    m_size,             m_label_world,      m_world;
 	UI::Textarea    m_label_nr_players, m_nr_players,       m_label_descr;
 	UI::Multiline_Textarea              m_descr;
-	UI::Callback_IDButton<Fullscreen_Menu_Editor_MapSelect, int32_t> m_back;
-	UI::Callback_Button<Fullscreen_Menu_Editor_MapSelect>            m_ok;
+	UI::Callback_Fun_Button             m_back,             m_ok;
 	UI::Listselect<std::string>                             m_list;
 	std::string     m_parentdir,        m_curdir,           m_basedir;
 	filenameset_t   m_mapfiles;

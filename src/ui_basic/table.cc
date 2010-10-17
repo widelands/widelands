@@ -92,11 +92,11 @@ void Table<void *>::add_column
 		c.btn = 0;
 		if (title.size()) {
 			c.btn =
-				new Callback_IDButton<Table, Columns::size_type>
+				new Callback_Fun_Button
 					(this, title,
 					 complete_width, 0, width, m_headerheight,
 					 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-					 &Table::header_button_clicked, *this, m_columns.size(),
+					 boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()),
 					 title, "", true, false, m_fontname, m_fontsize);
 		}
 		c.width = width;
@@ -140,11 +140,11 @@ void Table<void *>::set_column_title
 		for (uint8_t i = 0; i < col; ++i)
 			complete_width += m_columns.at(i).width;
 		column.btn =
-			new Callback_IDButton<Table, Columns::size_type>
+			new Callback_Fun_Button
 				(this, title,
 				 complete_width, 0, column.width, m_headerheight,
 				 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-				 &Table::header_button_clicked, *this, col,
+				 boost::bind(&Table::header_button_clicked, boost::ref(*this), col),
 				 title, "", true, false, m_fontname, m_fontsize);
 	} else if (column.btn and title.empty()) { //  had title before, not now
 		delete column.btn;

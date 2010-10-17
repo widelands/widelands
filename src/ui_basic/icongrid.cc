@@ -30,7 +30,7 @@
 
 namespace UI {
 
-struct IconGridButton : public Callback_IDButton<Icon_Grid, uint32_t> {
+struct IconGridButton : public Callback_Fun_Button {
 	IconGridButton
 		(Icon_Grid * const parent,
 		 std::string const & name,
@@ -38,21 +38,24 @@ struct IconGridButton : public Callback_IDButton<Icon_Grid, uint32_t> {
 		 const PictureID background_pictute_id,
 		 const PictureID foreground_picture_id,
 		 void (Icon_Grid::*callback_function)(uint32_t),
-	    Icon_Grid & callback_argument_this,
+	         Icon_Grid & callback_argument_this,
 		 const uint32_t callback_argument_id,
 		 Textarea * ta, std::string descr)
 		:
-		Callback_IDButton<Icon_Grid, uint32_t>
+		Callback_Fun_Button
 			(parent, name, x, y, w, h, background_pictute_id,
-			 foreground_picture_id, callback_function,
-			 callback_argument_this, callback_argument_id, "", true, true),
-			 m_icongrid(parent), m_ta(ta), m_descr(descr)
+			 foreground_picture_id,
+			 boost::bind(callback_function, boost::ref(callback_argument_this), callback_argument_id),
+			 "", true, true),
+			 m_icongrid(parent), m_ta(ta), m_descr(descr),
+			 _callback_argument_id(callback_argument_id)
 		{}
 
 private:
 	Icon_Grid * m_icongrid;
 	Textarea * m_ta;
 	std::string m_descr;
+	const uint32_t _callback_argument_id;
 
 	void handle_mousein(bool inside) {
 		if (inside) {
@@ -62,7 +65,7 @@ private:
 			m_icongrid->mouseout.call(_callback_argument_id);
 			m_ta->set_text("");
 		}
-		Callback_IDButton<Icon_Grid, uint32_t>::handle_mousein(inside);
+		Callback_Fun_Button::handle_mousein(inside);
 	}
 };
 

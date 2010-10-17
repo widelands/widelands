@@ -51,10 +51,10 @@ private:
 	uint32_t                                            m_fs;
 	std::string                                         m_fn;
 	UI::Textarea                                        title;
-	UI::Callback_Button<Fullscreen_Menu_MultiPlayer>    metaserver;
-	UI::Callback_Button<Fullscreen_Menu_MultiPlayer>  * showloginbox;
-	UI::Callback_IDButton<Fullscreen_Menu_MultiPlayer, int32_t> lan;
-	UI::Callback_IDButton<Fullscreen_Menu_MultiPlayer, int32_t> back;
+	UI::Callback_Fun_Button                             metaserver;
+	UI::Callback_Fun_Button                           * showloginbox;
+	UI::Callback_Fun_Button                             lan;
+	UI::Callback_Fun_Button                             back;
 
 	// Values from ggz login window
 	std::string m_nickname;

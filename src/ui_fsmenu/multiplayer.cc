@@ -47,21 +47,21 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 		(this, "metaserver",
 		 m_butx, m_yres * 6 / 25, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Fullscreen_Menu_MultiPlayer::ggzLogin, *this,
+		 boost::bind(&Fullscreen_Menu_MultiPlayer::ggzLogin, boost::ref(*this)),
 		 _("Internet game"), std::string(), true, false,
 		 m_fn, m_fs),
 	lan
 		(this, "lan",
 		 m_butx, m_yres * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Lan,
+		 boost::bind(&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this), Lan),
 		 _("LAN / Direct IP"), std::string(), true, false,
 		 m_fn, m_fs),
 	back
 		(this, "back",
 		 m_butx, m_yres * 3 / 4, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Back,
+		 boost::bind(&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this), Back),
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs)
 {
@@ -71,12 +71,12 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 	m_auto_log = s.get_bool("auto_log", false);
 	if (m_auto_log)
 		showloginbox =
-			new UI::Callback_Button<Fullscreen_Menu_MultiPlayer>
+			new UI::Callback_Fun_Button
 				(this, "login_dialog",
 				 m_butx + m_butw + m_buth / 4, m_yres * 6 / 25, m_buth, m_buth,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 g_gr->get_picture(PicMod_UI, "pics/continue.png"),
-				 &Fullscreen_Menu_MultiPlayer::showGGZLogin, *this,
+				 boost::bind(&Fullscreen_Menu_MultiPlayer::showGGZLogin, boost::ref(*this)),
 				 _("Show login dialog"), true, false,
 				 m_fn, m_fs);
 }

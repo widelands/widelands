@@ -69,10 +69,7 @@ private:
 	std::string                                 m_fn;
 	UI::Textarea                                title, m_opengames;
 	UI::Textarea                                m_playername, m_hostname;
-	UI::Callback_Button<Fullscreen_Menu_NetSetupLAN>        joingame;
-	UI::Callback_Button<Fullscreen_Menu_NetSetupLAN>        hostgame;
-	UI::Callback_IDButton<Fullscreen_Menu_NetSetupLAN, int32_t> back;
-	UI::Callback_Button<Fullscreen_Menu_NetSetupLAN>        loadlasthost;
+	UI::Callback_Fun_Button                     joingame, hostgame, back, loadlasthost;
 	UI::EditBox                                 playername;
 	UI::EditBox                                 hostname;
 	UI::Table<const Net_Open_Game * const>      opengames;

@@ -48,7 +48,7 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 &GameOptionsMenu::clicked_readme, *this,
+		 boost::bind(&GameOptionsMenu::clicked_readme, boost::ref(*this)),
 		 _("README")),
 	license
 		(this, "license",
@@ -56,7 +56,7 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 &GameOptionsMenu::clicked_license, *this,
+		 boost::bind(&GameOptionsMenu::clicked_license, boost::ref(*this)),
 		 _("License")),
 	authors
 		(this, "authors",
@@ -64,7 +64,7 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 &GameOptionsMenu::clicked_authors, *this,
+		 boost::bind(&GameOptionsMenu::clicked_authors, boost::ref(*this)),
 		 _("Authors")),
 	sound
 		(this, "sound_options",
@@ -72,7 +72,7 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 &GameOptionsMenu::clicked_sound, *this,
+		 boost::bind(&GameOptionsMenu::clicked_sound, boost::ref(*this)),
 		 _("Sound Options")),
 	save_game
 		(this, "save_game",
@@ -81,7 +81,7 @@ GameOptionsMenu::GameOptionsMenu
 		 buttonw(1), 35,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"),
-		 &GameOptionsMenu::clicked_save_game, *this,
+		 boost::bind(&GameOptionsMenu::clicked_save_game, boost::ref(*this)),
 		 _("Save Game")),
 	exit_game
 		(this, "exit_game",
@@ -91,7 +91,7 @@ GameOptionsMenu::GameOptionsMenu
 		 buttonw(1), 35,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"),
-		 &GameOptionsMenu::clicked_exit_game, *this,
+		 boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)),
 		 _("Exit Game"))
 {
 	set_inner_size
