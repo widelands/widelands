@@ -225,6 +225,17 @@ m_toggle_help
 	adjust_toolbar_position();
 
 	set_display_flag(dfSpeed, true);
+	
+#define INIT_BTN_HOOKS(registry, btn)                                        \
+ registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
+ registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+
+	INIT_BTN_HOOKS(m_chat, m_toggle_chat)
+	INIT_BTN_HOOKS(m_options, m_toggle_options_menu)
+	INIT_BTN_HOOKS(m_statisticsmenu, m_toggle_statistics_menu)
+	INIT_BTN_HOOKS(m_objectives, m_toggle_objectives)
+	INIT_BTN_HOOKS(m_encyclopedia, m_toggle_help)
+	INIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
 
 #ifdef DEBUG //  only in debug builds
 	addCommand
