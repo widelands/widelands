@@ -169,7 +169,7 @@ m_flag_to_connect(Widelands::Coords::Null()),
 #define INIT_BTN(picture, name, callback, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
- &Interactive_Player::callback, *this,                                        \
+ boost::bind(&Interactive_Player::callback, boost::ref(*this)),               \
  tooltip                                                                      \
 
 m_toggle_chat

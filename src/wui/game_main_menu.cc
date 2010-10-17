@@ -47,28 +47,28 @@ general_stats
 	 posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
-	 &GameMainMenu::clicked_general_stats, *this,
+	 boost::bind(&GameMainMenu::clicked_general_stats, boost::ref(*this)),
 	 _("General Statistics")),
 ware_stats
 	(this, "ware_stats",
 	 posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
-	 &GameMainMenu::clicked_ware_stats, *this,
+	 boost::bind(&GameMainMenu::clicked_ware_stats, boost::ref(*this)),
 	 _("Ware Statistics")),
 building_stats
 	(this, "building_stats",
 	 posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
-	 &GameMainMenu::clicked_building_stats, *this,
+	 boost::bind(&GameMainMenu::clicked_building_stats, boost::ref(*this)),
 	 _("Building Statistics")),
 stock
 	(this, "stock",
 	 posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),
-	 &GameMainMenu::clicked_stock, *this,
+	 boost::bind(&GameMainMenu::clicked_stock, boost::ref(*this)),
 	 _("Stock"))
 {
 #define INIT_BTN_HOOKS(registry, btn)                                        \

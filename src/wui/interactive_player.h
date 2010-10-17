@@ -100,14 +100,14 @@ private:
 	bool                     m_auto_roadbuild_mode;
 	Widelands::Coords        m_flag_to_connect;
 
-	UI::Callback_Button<Interactive_Player> m_toggle_chat;
-	UI::Callback_Button<Interactive_Player> m_toggle_options_menu;
-	UI::Callback_Button<Interactive_Player> m_toggle_statistics_menu;
-	UI::Callback_Button<Interactive_Player> m_toggle_objectives;
-	UI::Callback_Button<Interactive_Player> m_toggle_minimap;
-	UI::Callback_Button<Interactive_Player> m_toggle_buildhelp;
-	UI::Callback_Button<Interactive_Player> m_toggle_message_menu;
-	UI::Callback_Button<Interactive_Player> m_toggle_help;
+	UI::Callback_Fun_Button m_toggle_chat;
+	UI::Callback_Fun_Button m_toggle_options_menu;
+	UI::Callback_Fun_Button m_toggle_statistics_menu;
+	UI::Callback_Fun_Button m_toggle_objectives;
+	UI::Callback_Fun_Button m_toggle_minimap;
+	UI::Callback_Fun_Button m_toggle_buildhelp;
+	UI::Callback_Fun_Button m_toggle_message_menu;
+	UI::Callback_Fun_Button m_toggle_help;
 
 	UI::UniqueWindow::Registry m_chat;
 	UI::UniqueWindow::Registry m_options;
