@@ -20,6 +20,8 @@
 #include "interactive_player.h"
 
 #include <boost/bind.hpp>
+#include <boost/lambda/construct.hpp>
+#include <boost/lambda/bind.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 #include <libintl.h>
@@ -239,6 +241,11 @@ m_toggle_help
 	INIT_BTN_HOOKS(m_encyclopedia, m_toggle_help)
 	INIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
 
+	m_options.constr = boost::lambda::bind(boost::lambda::new_ptr<GameOptionsMenu>(), boost::ref(*this), boost::lambda::_1, boost::ref(m_mainm_windows));
+	m_statisticsmenu.constr = boost::lambda::bind(boost::lambda::new_ptr<GameMainMenu>(), boost::ref(*this), boost::lambda::_1, boost::ref(m_mainm_windows));
+	m_objectives.constr = boost::lambda::bind(boost::lambda::new_ptr<GameObjectivesMenu>(), boost::ref(*this), boost::lambda::_1);
+	m_message_menu.constr = boost::lambda::bind(boost::lambda::new_ptr<GameMessageMenu>(), boost::ref(*this), boost::lambda::_1);
+
 #ifdef DEBUG //  only in debug builds
 	addCommand
 		("switchplayer",
@@ -334,8 +341,7 @@ void Interactive_Player::postload()
 void Interactive_Player::popup_message
 	(Widelands::Message_Id const id, Widelands::Message const & message)
 {
-	if (not m_message_menu.window)
-		new GameMessageMenu(*this, m_message_menu);
+	m_message_menu.create();
 	ref_cast<GameMessageMenu, UI::UniqueWindow>(*m_message_menu.window)
 	.show_new_message(id, message);
 }
@@ -349,28 +355,16 @@ void Interactive_Player::toggle_chat() {
 		new GameChatMenu(this, m_chat, *m_chatProvider);
 }
 void Interactive_Player::toggle_options_menu() {
-	if (m_options.window)
-		delete m_options.window;
-	else
-		new GameOptionsMenu(*this, m_options, m_mainm_windows);
+	m_options.toggle();	
 }
 void Interactive_Player::toggle_statistics_menu() {
-	if (m_statisticsmenu.window)
-		delete m_statisticsmenu.window;
-	else
-		new GameMainMenu(*this, m_statisticsmenu, m_mainm_windows);
+	m_statisticsmenu.toggle();
 }
 void Interactive_Player::toggle_objectives() {
-	if (m_objectives.window)
-		delete m_objectives.window;
-	else
-		new GameObjectivesMenu(*this, m_objectives);
+	m_objectives.toggle();
 }
 void Interactive_Player::toggle_message_menu() {
-	if (m_message_menu.window)
-		delete m_message_menu.window;
-	else
-		new GameMessageMenu(*this, m_message_menu);
+	m_message_menu.toggle();
 }
 
 void Interactive_Player::toggle_resources   () {

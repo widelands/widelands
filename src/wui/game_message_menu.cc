@@ -54,6 +54,8 @@ GameMessageMenu::GameMessageMenu
 	center_main_mapview_on_location     (*this),
 	mode                                (Inbox)
 {
+	printf("GameMessageMenu::GameMessageMenu\n");
+
 	if (get_usedefaultpos())
 		center_to_parent();
 
@@ -63,6 +65,7 @@ GameMessageMenu::GameMessageMenu
 
 	set_can_focus(true);
 	focus();
+	printf("GameMessageMenu::GameMessageMenu 2\n");
 }
 
 /**

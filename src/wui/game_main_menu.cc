@@ -18,6 +18,8 @@
  */
 
 #include <boost/bind.hpp>
+#include <boost/lambda/construct.hpp>
+#include <boost/lambda/bind.hpp>
 
 #include "game_main_menu.h"
 
@@ -78,6 +80,11 @@ stock
 	INIT_BTN_HOOKS(m_windows.ware_stats, ware_stats)
 	INIT_BTN_HOOKS(m_windows.building_stats, building_stats)
 	INIT_BTN_HOOKS(m_windows.stock, stock)
+	
+	m_windows.general_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<General_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+	m_windows.ware_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<Ware_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+	m_windows.building_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<Building_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+	m_windows.stock.constr = boost::lambda::bind(boost::lambda::new_ptr<Stock_Menu>(), boost::ref(m_player), boost::lambda::_1);
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -85,26 +92,14 @@ stock
 
 
 void GameMainMenu::clicked_general_stats() {
-	if (m_windows.general_stats.window)
-		delete m_windows.general_stats.window;
-	else
-		new General_Statistics_Menu(m_player, m_windows.general_stats);
+	m_windows.general_stats.toggle();
 }
 void GameMainMenu::clicked_ware_stats() {
-	if (m_windows.ware_stats.window)
-		delete m_windows.ware_stats.window;
-	else
-		new Ware_Statistics_Menu(m_player, m_windows.ware_stats);
+	m_windows.ware_stats.toggle();
 }
 void GameMainMenu::clicked_building_stats() {
-	if (m_windows.building_stats.window)
-		delete m_windows.building_stats.window;
-	else
-		new Building_Statistics_Menu(m_player, m_windows.building_stats);
+	m_windows.building_stats.toggle();
 }
 void GameMainMenu::clicked_stock() {
-	if (m_windows.stock.window)
-		delete m_windows.stock.window;
-	else
-		new Stock_Menu(m_player, m_windows.stock);
+	m_windows.stock.toggle();
 }

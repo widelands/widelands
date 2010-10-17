@@ -40,6 +40,12 @@ struct UniqueWindow : public Window {
 		UniqueWindow * window;
 		boost::function<void()> onCreate;
 		boost::function<void()> onDelete;
+		boost::function<void(Registry&)> constr;
+
+		void create();
+		void destroy();
+		void toggle();
+
 		int32_t x, y;
 
 		Registry() : window(0), x(-1), y(-1) {}
