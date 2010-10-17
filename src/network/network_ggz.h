@@ -139,8 +139,7 @@ struct NetGGZ : public ChatProvider {
 	/// only true while logging in
 	bool is_connecting();
 
-	void ggzmod_statechange();
-	void ggzcore_statechange();
+	void statechange();
 
 	bool updateForTables();
 	bool updateForUsers();

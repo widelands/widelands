@@ -138,6 +138,8 @@ int NetGGZ::process(int timeout)
 	ggzmod().process();
 	wlmodule().process();
 
+	wlmodule().set_datafd(ggzmod().datafd());
+
 	int i = 100;
 	if (timeout > 0) {
 		tv.tv_usec = (timeout % 1000) * 1000;
@@ -178,7 +180,6 @@ int NetGGZ::process(int timeout)
 		  or core().get_tablestate() == ggz_ggzcore::ggzcoretablestate_joined)
 		 and not ggzmod().connected())
 	{
-		ggzmod().init();
 		ggzmod().connect();
 	}
 
@@ -199,9 +200,16 @@ uint32_t NetGGZ::max_players()
 	//  FIXME it is not a bug in 0.14.1 but a general problem in ggz. Using
 	//  FIXME ggzcore and ggzmod from the same thread causes a deadlock between
 	//  FIXME the ggz libs. -- timowi
+	//
+	// I have added experimental support for threadded ggzmod by using
+	// boost::threads. With threads enabled it shoulb be possible to host
+	// and join games with more than 7 seats -- timowi
 	int maxplayers = core().get_max_players();
+#ifdef USE_BOOST_THREADS
 	return maxplayers;
-	//return (maxplayers > 7)?7:maxplayers;
+#else
+	return (maxplayers > 7)?7:maxplayers;
+#endif
 }
 
 
@@ -468,14 +476,9 @@ bool NetGGZ::logged_in()
 	return core().logged_in();
 }
 
-void NetGGZ::ggzcore_statechange()
+void NetGGZ::statechange()
 {
-
-}
-
-void NetGGZ::ggzmod_statechange()
-{
-	wlmodule().set_datafd(ggzmod().datafd());
+	
 }
 
 bool NetGGZ::set_spectator(bool spec)

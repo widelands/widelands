@@ -851,23 +851,6 @@ bool ggz_ggzcore::is_in_table()
 
 bool ggz_ggzcore::data_pending()
 {
-	/*
-	if (m_channelfd != -1 or m_gamefd != -1)
-	{
-		fd_set read_fd_set;
-		int result;
-		struct timeval tv;
-		FD_ZERO(&read_fd_set);
-		FD_SET(m_server_fd, &read_fd_set);
-		tv.tv_sec = tv.tv_usec = 0;
-		if (
-			 select
-				 (((m_channelfd >  m_gamefd)?m_channelfd:m_gamefd) + 1,
-				  &read_fd_set, NULL, NULL, &tv)
-				  > 0)
-			return true;
-	}
-	*/
 	return ggzserver && ggzcore_server_data_is_pending(ggzserver);
 }
 

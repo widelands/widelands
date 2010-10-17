@@ -108,13 +108,24 @@ set (BUILD_SHARED_LIBS OFF)
 # Unit tests add dependency to unit_test_framework and are therefore optional.
 option (BUILD_UNIT_TESTS "Build unit tests (requires boost unit test framework)")
 
+set (Boost_FIND_COMPONENTS thread)
+#set (Boost_DEBUG on)
+find_package(Boost 1.35.0 COMPONENTS thread)
+IF (Boost_THREAD_FOUND AND ENABLE_THREADS)
+  set (USE_BOOST_THREADS True)
+  set (BOOST_THREADS thread)
+  add_definitions( -DUSE_BOOST_THREADS )	
+ENDIF (Boost_THREAD_FOUND AND ENABLE_THREADS)
+
 if (BUILD_UNIT_TESTS)
+  message("Build with Boost unit_test_framework\n")
   # we only include Boost Headers to the main executable, no libraries
   # unit_test_framework is for testing only and can use shared libraries
   set (Boost_FIND_COMPONENTS unit_test_framework)
   set (Boost_USE_STATIC_LIBS   ON)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
+  find_package(Boost 1.35.0 REQUIRED COMPONENTS unit_test_framework ${BOOST_THREADS})
   find_package(Boost 1.35.0 COMPONENTS unit_test_framework)
   # settle with single threaded libs if multithreaded is not available
   if (NOT Boost_FOUND)
@@ -126,8 +137,15 @@ if (BUILD_UNIT_TESTS)
     endif()
   endif (NOT Boost_FOUND)
 else (BUILD_UNIT_TESTS)
-  find_package(Boost 1.35.0 REQUIRED)
+    find_package(Boost 1.35.0 REQUIRED COMPONENTS ${BOOST_THREADS})
 endif (BUILD_UNIT_TESTS)
+
+IF (USE_BOOST_THREADS)
+  message("Boost threads enabled")
+  message("Boost_thread_LIBRARY ${Boost_THREAD_LIBRARY}\n")
+ELSE (USE_BOOST_THREADS)
+  message("Compile without boost threads")
+ENDIF (USE_BOOST_THREADS)
 
 include_directories(${Boost_INCLUDE_DIR})
 
@@ -227,13 +245,13 @@ if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 endif (DEFINED WL_3RDPARTY_DIR)
 
-#find_package(GGZ_Core)
-#if (GGZ_CORE_FOUND)
-#  include_directories(${GGZ_CORE_INCLUDE_DIR})
-#  add_definitions("-DUSE_GGZ")
-#else (GGZ_CORE_FOUND)
-#  message (STATUS "GGZ support disabled, check your libraries path and installed packages!")
-#endif (GGZ_CORE_FOUND)
+find_package(GGZ_Core)
+if (GGZ_CORE_FOUND)
+  include_directories(${GGZ_CORE_INCLUDE_DIR})
+  add_definitions("-DUSE_GGZ")
+else (GGZ_CORE_FOUND)
+  message (STATUS "GGZ support disabled, check your libraries path and installed packages!")
+endif (GGZ_CORE_FOUND)
 
 # Check for opengl
 # TODO Check for SDL_opengl.h and add to include path
