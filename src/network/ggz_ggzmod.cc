@@ -39,6 +39,11 @@
 #include <warning.h>
 #include "network_ggz.h"
 
+#ifdef USE_BOOST_THREADS
+#include <boost/bind.hpp>
+#endif
+
+
 ggz_ggzmod * ggzmodobj = NULL;
 
 ggz_ggzmod::ggz_ggzmod():
@@ -119,7 +124,7 @@ bool ggz_ggzmod::connect()
 #ifdef USE_BOOST_THREADS
 	m_requested_exit = false;
 	log("GGZMOD ## start ggzmod processing thread ...\n");
-	ggzmodthread = boost::thread(&ggz_ggzmod::_thread_main, this);
+	ggzmodthread = boost::thread(boost::bind(&ggz_ggzmod::_thread_main, this));
 #endif
 
 	return true;
