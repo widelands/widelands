@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-17 00:47+0000\n"
+"PO-Revision-Date: 2010-10-17 18:06+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-17 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-10-18 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -41,7 +41,7 @@ msgstr "Vylepšená verzia helmy."
 
 #: ../../tribes/barbarians/conf:27
 msgid "Ashes"
-msgstr ""
+msgstr "Popol"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Axe"
@@ -406,7 +406,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:153
 msgid "Guardhouse"
-msgstr ""
+msgstr "Strážnica"
 
 #: ../../tribes/barbarians/conf:74
 msgid "Hammer"
@@ -457,6 +457,8 @@ msgstr "Vysoká veža"
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 msgstr ""
+"Ako vytvoriť stravu, desiatu alebo prídel, keď nemáte žiadne kuchynské "
+"nástroje?"
 
 #: ../../tribes/barbarians/conf:122
 msgid "Hunter"
@@ -569,7 +571,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:162
 msgid "Outpost"
-msgstr ""
+msgstr "Pozorovateľňa"
 
 #: ../../tribes/barbarians/conf:101
 msgid "Ox"
@@ -611,7 +613,7 @@ msgstr "Sadí stromy"
 #: ../../tribes/barbarians/metalworks/conf:33
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr "vyrobiť sekeru"
+msgstr "Vyrobiť sekeru"
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
@@ -624,7 +626,7 @@ msgstr "Vyrobiť bojovú sekeru"
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce broadaxe"
-msgstr ""
+msgstr "Vyrobiť širokú sekeru"
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
@@ -660,7 +662,7 @@ msgstr "Vytvoriť masku"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr ""
+msgstr "Vyrobiť stravu"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
@@ -670,7 +672,7 @@ msgstr "Vyrobiť krompáč"
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr ""
+msgstr "Vyrobiť prídel"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
@@ -688,7 +690,7 @@ msgstr "Vyrobiť lopatu"
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr ""
+msgstr "Vyrobiť desiatu"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
@@ -696,7 +698,7 @@ msgstr "Vytvoriť vojenskú helmu"
 
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce warriorsaxe"
-msgstr ""
+msgstr "Vyrobiť bojovnícku sekeru"
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
@@ -850,15 +852,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:155
 msgid "Small Tower"
-msgstr ""
+msgstr "Malá veža"
 
 #: ../../tribes/barbarians/smelting_works/conf:25
 msgid "Smelt gold"
-msgstr ""
+msgstr "Taviť zlato"
 
 #: ../../tribes/barbarians/smelting_works/conf:24
 msgid "Smelt iron"
-msgstr ""
+msgstr "Taviť železo"
 
 #: ../../tribes/barbarians/conf:128
 msgid "Smelter"
@@ -874,7 +876,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "Taví železo."
 
 #: ../../tribes/barbarians/conf:90
 msgid "Snack"
@@ -890,6 +892,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
+"Niektoré z vašich počiatočných budov nemali dostatok miesta \n"
+"a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie\n"
+"tejto mapy s férovými počiatočnými podmienkami."
 
 #: ../../tribes/barbarians/conf:129
 msgid "Stonemason"
@@ -920,6 +925,8 @@ msgid ""
 "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
 "are equipped with it, but also the lumberjack is using the same model."
 msgstr ""
+"Sekera je základnou zbraňou a nástrojom barbarov. Vyzbrojení sú ňou všetci "
+"mladí vojaci, ale ten istý model používajú aj drevorubači."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -929,7 +936,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "Lovec prináša osadníkom dobré mäso."
 
 #: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"
@@ -939,6 +946,7 @@ msgstr "Vývojový tím Widelands"
 msgid ""
 "The barbarian bakers are best in making this flat and tasty pitta bread."
 msgstr ""
+"Barbarskí pekári sú najlepší v pečení tohto plochého a chutného pita chleba."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -958,6 +966,8 @@ msgid ""
 "The fires of the barbarians are usually fed with wood, but sometimes, wood "
 "just does not burn hot enough. Then, coal is used."
 msgstr ""
+"Do ohňov barbarov sa zvyčajne pridáva drevo, ale niekedy jednoducho drevo "
+"nehorí dosť horúco. V takom prípade sa použije uhlie."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -975,17 +985,21 @@ msgid ""
 "The peel is a tool of the baker and each baker needs his own. It is produced "
 "in the metal works like all other tools."
 msgstr ""
+"Pekárska lopata je nástrojom pekára a každý pekár potrebuje svoju vlastnú. "
+"Vyrába sa v kovodielni ako všetky iné nástroje."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
 "The scythe is the tool of the farmers. It is produced in the metal works."
-msgstr ""
+msgstr "Kosa je nástrojom farmárov. Vyrába sa v kovodielni."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
 "the ranger use it. Build at the metal works."
 msgstr ""
+"Lopata je potrebná na správne zaobchádzanie s rastlinami. A tak ju používajú "
+"papradinári a lesníci. Vyrába sa v kovodielni."
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -993,10 +1007,13 @@ msgid ""
 "ever were able to handle those huge and powerful axes. Build at the axe "
 "factory."
 msgstr ""
+"Bojovnícka sekera je najnebezpečnejšia zo všetkých zbraní. Len pár "
+"bojovníkov v histórii vedelo narábať s týmito obrovskými a silnými sekerami. "
+"Vyrábajú sa v továrni na sekery."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
-msgstr ""
+msgstr "Toto je krveľ."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -1007,13 +1024,13 @@ msgstr ""
 
 #: ../../tribes/barbarians/goldstone/conf:1
 msgid "This is the yellow goldstone."
-msgstr ""
+msgstr "Toto je žltý zlatý nuget."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metal works."
-msgstr ""
+msgstr "Krompáč používajú kamenári a baníci. Vyrába sa v kovodielni."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""

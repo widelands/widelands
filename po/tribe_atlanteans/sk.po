@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-16 19:27+0000\n"
+"PO-Revision-Date: 2010-10-17 14:08+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-17 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-10-18 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -81,57 +81,59 @@ msgstr "Hradba"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr ""
+msgstr "Veľké vedrá pre chovateľa rýb - vyrába ich kováč nástrojov."
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Blackroot"
-msgstr "Culverov koreň"
+msgstr "Čierny koreň"
 
 #: ../../tribes/atlanteans/conf:167
 msgid "Blackroot Farm"
-msgstr "Farma s Culverovým koreňom"
+msgstr "Farma s čiernym koreňom"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Blackroot Flour"
-msgstr "Prášok z Culverovho koreňa"
+msgstr "Prášok z čierneho koreňa"
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
 "Blackroot Flour is produced out of blackroots and is one of three parts of "
 "the atlantian bread."
 msgstr ""
-"Prášok z Culverovho koreňa sa vyrába z Culverových koreňov a je jedným z "
-"troch častí atlantstkého chleba."
+"Prášok z čierneho koreňa sa vyrába z čiernych koreňov a je jedným z troch "
+"častí atlantstkého chleba."
 
 #: ../../tribes/atlanteans/conf:106
 msgid "Blackroot farmer"
-msgstr "Pestovateľ Culverových koreňov"
+msgstr "Pestovateľ čiernych koreňov"
 
 #: ../../tribes/atlanteans/conf:28
 msgid "Blackrootfield"
-msgstr "Pole Culverových koreňov"
+msgstr "Pole čiernych koreňov"
 
 #: ../../tribes/atlanteans/conf:29
 msgid "Blackrootfield harvested"
-msgstr "Pozberané pole Culverových koreňov"
+msgstr "Pozberané pole čiernych koreňov"
 
 #: ../../tribes/atlanteans/conf:30
 msgid "Blackrootfield medium"
-msgstr "Stredné pole Culverových koreňov"
+msgstr "Stredné pole čiernych koreňov"
 
 #: ../../tribes/atlanteans/conf:31
 msgid "Blackrootfield small"
-msgstr "Malé pole Culverových koreňov"
+msgstr "Malé pole čiernych koreňov"
 
 #: ../../tribes/atlanteans/conf:32
 msgid "Blackrootfield tiny"
-msgstr "Maličké pole Culverových koreňov"
+msgstr "Maličké pole čiernych koreňov"
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
 "Blackroots are a special kind of roots. The Atlanteans like their strong "
 "taste and use its flour for making bread."
 msgstr ""
+"Čierne korene sú špeciálne druhy koreňov. Atlanťania majú radi ich štipľavú "
+"chuť a prášok z nich používajú na výrobu chleba."
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Bread"
@@ -180,7 +182,7 @@ msgstr "Hrad"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
-msgstr ""
+msgstr "Dedina s hradom"
 
 #: ../../tribes/atlanteans/conf:168
 msgid "Charcoal Burner's House"
@@ -385,7 +387,7 @@ msgstr "Kladivo"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:19
 msgid "Harvest blackroot"
-msgstr ""
+msgstr "Zberať čierny koreň"
 
 #: ../../tribes/atlanteans/farm/conf:22
 msgid "Harvest corn"
@@ -473,13 +475,15 @@ msgstr "Mäso je jedným zo zdrojov jedla Atlanťanov."
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Milking Tongs"
-msgstr ""
+msgstr "Kliešte na dojenie"
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
 "Milking tongs are used by the spider breeder, to milk the spiders. They are "
 "produced by the toolsmith."
 msgstr ""
+"Kliešte na dojenie používa chovateľ pavúkov na dojenie pavúkov. Vyrába ich "
+"kováč nástrojov."
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Mill"
@@ -515,7 +519,7 @@ msgstr "Nedostatok miesta"
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
-msgstr ""
+msgstr "Pozorovateľňa"
 
 #: ../../tribes/atlanteans/conf:80
 msgid "Pick"
@@ -537,7 +541,7 @@ msgstr "Dosky sú dôležitým stavebným materiálom Atlanťanov."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
-msgstr ""
+msgstr "Sadiť čierny koreň"
 
 #: ../../tribes/atlanteans/farm/conf:20
 msgid "Plant corn"
@@ -545,7 +549,7 @@ msgstr "Sadiť kukuricu"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr ""
+msgstr "Sadí a zberá čierne korene."
 
 #: ../../tribes/atlanteans/farmer/conf:2
 msgid "Plants fields."
@@ -572,7 +576,7 @@ msgstr "Vyrobiť pekáč"
 
 #: ../../tribes/atlanteans/mill/conf:22
 msgid "Produce blackrootflour"
-msgstr ""
+msgstr "Vyrobiť prášok z čierneho koreňa"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bow"
@@ -624,7 +628,7 @@ msgstr "Vyrobiť dlhý trojzubec"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce milking tongs"
-msgstr ""
+msgstr "Vyrobiť kliešte na dojenie"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce pick"
@@ -644,7 +648,7 @@ msgstr "Vyrobiť lopatu"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:19
 msgid "Produce spidercloth"
-msgstr ""
+msgstr "Vyrobiť pavúčiu látku"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
@@ -742,6 +746,8 @@ msgid ""
 "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is "
 "produced by the toolsmith."
 msgstr ""
+"Pílky potrebujú pilčíci, drevorubači a kováči nástrojov. Vyrábajú ich kováči "
+"nástrojov."
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
@@ -782,6 +788,9 @@ msgid ""
 "Shovels are needed for proper handling of plants. Therefore the forester and "
 "the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
+"Lopaty sú potrebné na správne zaobchádzanie s rastlinami. A tak ich "
+"používajú horári aj pestovatelia čiernych koreňov. Vyrába ich kováč "
+"nástrojov."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 #: ../../tribes/atlanteans/labyrinth/conf:36
@@ -860,7 +869,7 @@ msgstr "Chovateľ pavúkov"
 
 #: ../../tribes/atlanteans/conf:87
 msgid "Spidercloth"
-msgstr ""
+msgstr "Pavúčia látka"
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Spiderfarm"
@@ -1026,6 +1035,8 @@ msgid ""
 "This tasty bread is made out of corn- and blackrootflour and is one part of "
 "miners meal."
 msgstr ""
+"Tento chutný chlieb je vyrobený z kukuričnej múky a prášku z čierneho koreňa "
+"a je jednou časťou jedla baníkov."
 
 #: ../../tribes/atlanteans/conf:6
 msgid ""
