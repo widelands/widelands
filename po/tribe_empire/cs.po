@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-06-23 20:12+0000\n"
-"PO-Revision-Date: 2010-08-23 13:28+0000\n"
-"Last-Translator: Martin Volf <Unknown>\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"PO-Revision-Date: 2010-08-30 23:36+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-08-24 03:33+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -363,7 +363,7 @@ msgstr "Strážnice"
 msgid "Hammer"
 msgstr "Kladivo"
 
-#: ../../tribes/empire/vineyard/conf:20
+#: ../../tribes/empire/vineyard/conf:21
 msgid "Harvest vine"
 msgstr "Sklidit révu"
 
@@ -563,7 +563,7 @@ msgstr "Pasáček vepřů"
 msgid "Piggery"
 msgstr "Chov vepřů"
 
-#: ../../tribes/empire/vineyard/conf:18
+#: ../../tribes/empire/vineyard/conf:19
 msgid "Plant vine"
 msgstr "Zasadit révu"
 
@@ -1271,7 +1271,7 @@ msgstr "Vlna je srstí ovcí. V císařských tkalcovnách se z ní tká plátno
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22
 #: ../../tribes/empire/toolsmithy/conf:45
-#: ../../tribes/empire/vineyard/conf:22
+#: ../../tribes/empire/vineyard/conf:23
 #: ../../tribes/empire/weaponsmithy/conf:34
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16

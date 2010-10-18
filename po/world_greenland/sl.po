@@ -7,27 +7,91 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
 "PO-Revision-Date: 2010-03-13 01:09+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-14 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/greenland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Widelandsova razvojna ekipa"
+#: ../../worlds/greenland/conf:58
+msgid "Alder"
+msgstr "Jelša"
 
-#: ../../worlds/greenland/conf:3
-msgid "Greenland"
-msgstr "Gozdnati svet"
+#: ../../worlds/greenland/conf:59
+msgid "Alder medium"
+msgstr "Srednje velika jelša"
 
-#: ../../worlds/greenland/conf:4
-msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "To so prelepe in radodarne dežele barbarov"
+#: ../../worlds/greenland/conf:60
+msgid "Alder small"
+msgstr "Majhna jelša"
+
+#: ../../worlds/greenland/conf:61
+msgid "Alder tiny"
+msgstr "Zelo majhna jelša"
+
+#: ../../worlds/greenland/conf:46
+msgid "Aspen"
+msgstr "Trepetlika"
+
+#: ../../worlds/greenland/conf:47
+msgid "Aspen medium"
+msgstr "Srednja velika trepetlika"
+
+#: ../../worlds/greenland/conf:48
+msgid "Aspen small"
+msgstr "Majhna trepetlika"
+
+#: ../../worlds/greenland/conf:49
+msgid "Aspen tiny"
+msgstr "Zelo majhna trepetlika"
+
+#: ../../worlds/greenland/conf:80
+msgid "Badger"
+msgstr "Jazbec"
+
+#: ../../worlds/greenland/conf:66
+msgid "Beech"
+msgstr "Bukev"
+
+#: ../../worlds/greenland/conf:67
+msgid "Beech medium"
+msgstr "Srednje velika bukev"
+
+#: ../../worlds/greenland/conf:68
+msgid "Beech small"
+msgstr "Majhna bukev"
+
+#: ../../worlds/greenland/conf:69
+msgid "Beech tiny"
+msgstr "Zelo majhna bukev"
+
+#: ../../worlds/greenland/conf:62
+msgid "Birch"
+msgstr "Breza"
+
+#: ../../worlds/greenland/conf:63
+msgid "Birch medium"
+msgstr "Srednje velika breza"
+
+#: ../../worlds/greenland/conf:64
+msgid "Birch small"
+msgstr "Majhna breza"
+
+#: ../../worlds/greenland/conf:65
+msgid "Birch tiny"
+msgstr "Zelo majhna breza"
+
+#: ../../worlds/greenland/conf:81
+msgid "Brownbear"
+msgstr "Rjavi medved"
+
+#: ../../worlds/greenland/conf:82
+msgid "Bunny"
+msgstr "Zajec"
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -42,6 +106,14 @@ msgstr "Grm"
 msgid "Cactus"
 msgstr "Kaktus"
 
+#: ../../worlds/greenland/conf:83
+msgid "Chamois"
+msgstr "Gams"
+
+#: ../../worlds/greenland/resconf:4
+msgid "Coal"
+msgstr "Premog"
+
 #: ../../worlds/greenland/conf:14
 #: ../../worlds/greenland/conf:15
 #: ../../worlds/greenland/conf:16
@@ -49,9 +121,37 @@ msgstr "Kaktus"
 msgid "Dead Tree"
 msgstr "Odmrlo drevo"
 
+#: ../../worlds/greenland/conf:84
+msgid "Deer"
+msgstr "Jelen"
+
+#: ../../worlds/greenland/conf:85
+msgid "Duck"
+msgstr "Raca"
+
+#: ../../worlds/greenland/conf:86
+msgid "Elk"
+msgstr "Los"
+
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
 msgstr "Padlo drevo"
+
+#: ../../worlds/greenland/resconf:41
+msgid "Fish"
+msgstr "Riba"
+
+#: ../../worlds/greenland/conf:87
+msgid "Fox"
+msgstr "Lisica"
+
+#: ../../worlds/greenland/resconf:12
+msgid "Gold"
+msgstr "Zlato"
+
+#: ../../worlds/greenland/resconf:28
+msgid "Granite"
+msgstr ""
 
 #: ../../worlds/greenland/conf:19
 #: ../../worlds/greenland/conf:20
@@ -59,10 +159,58 @@ msgstr "Padlo drevo"
 msgid "Grass"
 msgstr "Trava"
 
+#: ../../worlds/greenland/conf:3
+msgid "Greenland"
+msgstr "Gozdnati svet"
+
+#: ../../worlds/greenland/resconf:20
+msgid "Iron"
+msgstr "Železo"
+
+#: ../../worlds/greenland/conf:70
+msgid "Larch"
+msgstr "Macesen"
+
+#: ../../worlds/greenland/conf:71
+msgid "Larch medium"
+msgstr "Srednje velik macesen"
+
+#: ../../worlds/greenland/conf:72
+msgid "Larch small"
+msgstr "Majhen macesen"
+
+#: ../../worlds/greenland/conf:73
+msgid "Larch tiny"
+msgstr "Zelo majhen macesen"
+
+#: ../../worlds/greenland/conf:88
+msgid "Lynx"
+msgstr "Ris"
+
+#: ../../worlds/greenland/conf:89
+msgid "Marten"
+msgstr "Kuna"
+
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
 msgid "Mushroom"
 msgstr "Goba"
+
+#: ../../worlds/greenland/conf:50
+msgid "Oak"
+msgstr "Hrast"
+
+#: ../../worlds/greenland/conf:51
+msgid "Oak medium"
+msgstr "Srednje velik hrast"
+
+#: ../../worlds/greenland/conf:52
+msgid "Oak small"
+msgstr "Majhen hrast"
+
+#: ../../worlds/greenland/conf:53
+msgid "Oak tiny"
+msgstr "Zelo majhen hrast"
 
 #: ../../worlds/greenland/conf:24
 #: ../../worlds/greenland/conf:25
@@ -73,11 +221,51 @@ msgstr "Goba"
 msgid "Pebble"
 msgstr "Prodni kamen"
 
+#: ../../worlds/greenland/conf:90
+msgid "Reindeer"
+msgstr "Severni jelen"
+
+#: ../../worlds/greenland/conf:74
+msgid "Rowan"
+msgstr "Jerebika"
+
+#: ../../worlds/greenland/conf:75
+msgid "Rowan medium"
+msgstr "Srednje velika jerebika"
+
+#: ../../worlds/greenland/conf:76
+msgid "Rowan small"
+msgstr "Majhna jerebika"
+
+#: ../../worlds/greenland/conf:77
+msgid "Rowan tiny"
+msgstr "Zelo majhna jerebika"
+
+#: ../../worlds/greenland/conf:91
+msgid "Sheep"
+msgstr "Ovca"
+
 #: ../../worlds/greenland/conf:30
 #: ../../worlds/greenland/conf:31
 #: ../../worlds/greenland/conf:32
 msgid "Skeleton"
 msgstr "Okostnjak"
+
+#: ../../worlds/greenland/conf:54
+msgid "Spruce"
+msgstr "Smreka"
+
+#: ../../worlds/greenland/conf:55
+msgid "Spruce medium"
+msgstr "Srednje velika smreka"
+
+#: ../../worlds/greenland/conf:56
+msgid "Spruce small"
+msgstr "Majhna smreka"
+
+#: ../../worlds/greenland/conf:57
+msgid "Spruce tiny"
+msgstr "Zelo majhna smreka"
 
 #: ../../worlds/greenland/conf:33
 #: ../../worlds/greenland/conf:34
@@ -98,181 +286,17 @@ msgstr "Stoječi kamni"
 msgid "Stones"
 msgstr "Kamni"
 
-#: ../../worlds/greenland/conf:46
-msgid "Aspen"
-msgstr "Trepetlika"
+#: ../../worlds/greenland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Widelandsova razvojna ekipa"
 
-#: ../../worlds/greenland/conf:47
-msgid "Aspen medium"
-msgstr "Srednja velika trepetlika"
+#: ../../worlds/greenland/conf:4
+msgid "These are the beauty and bountifull countries of the barbarians"
+msgstr "To so prelepe in radodarne dežele barbarov"
 
-#: ../../worlds/greenland/conf:48
-msgid "Aspen small"
-msgstr "Majhna trepetlika"
-
-#: ../../worlds/greenland/conf:49
-msgid "Aspen tiny"
-msgstr "Zelo majhna trepetlika"
-
-#: ../../worlds/greenland/conf:50
-msgid "Oak"
-msgstr "Hrast"
-
-#: ../../worlds/greenland/conf:51
-msgid "Oak medium"
-msgstr "Srednje velik hrast"
-
-#: ../../worlds/greenland/conf:52
-msgid "Oak small"
-msgstr "Majhen hrast"
-
-#: ../../worlds/greenland/conf:53
-msgid "Oak tiny"
-msgstr "Zelo majhen hrast"
-
-#: ../../worlds/greenland/conf:54
-msgid "Spruce"
-msgstr "Smreka"
-
-#: ../../worlds/greenland/conf:55
-msgid "Spruce medium"
-msgstr "Srednje velika smreka"
-
-#: ../../worlds/greenland/conf:56
-msgid "Spruce small"
-msgstr "Majhna smreka"
-
-#: ../../worlds/greenland/conf:57
-msgid "Spruce tiny"
-msgstr "Zelo majhna smreka"
-
-#: ../../worlds/greenland/conf:58
-msgid "Alder"
-msgstr "Jelša"
-
-#: ../../worlds/greenland/conf:59
-msgid "Alder medium"
-msgstr "Srednje velika jelša"
-
-#: ../../worlds/greenland/conf:60
-msgid "Alder small"
-msgstr "Majhna jelša"
-
-#: ../../worlds/greenland/conf:61
-msgid "Alder tiny"
-msgstr "Zelo majhna jelša"
-
-#: ../../worlds/greenland/conf:62
-msgid "Birch"
-msgstr "Breza"
-
-#: ../../worlds/greenland/conf:63
-msgid "Birch medium"
-msgstr "Srednje velika breza"
-
-#: ../../worlds/greenland/conf:64
-msgid "Birch small"
-msgstr "Majhna breza"
-
-#: ../../worlds/greenland/conf:65
-msgid "Birch tiny"
-msgstr "Zelo majhna breza"
-
-#: ../../worlds/greenland/conf:66
-msgid "Beech"
-msgstr "Bukev"
-
-#: ../../worlds/greenland/conf:67
-msgid "Beech medium"
-msgstr "Srednje velika bukev"
-
-#: ../../worlds/greenland/conf:68
-msgid "Beech small"
-msgstr "Majhna bukev"
-
-#: ../../worlds/greenland/conf:69
-msgid "Beech tiny"
-msgstr "Zelo majhna bukev"
-
-#: ../../worlds/greenland/conf:70
-msgid "Larch"
-msgstr "Macesen"
-
-#: ../../worlds/greenland/conf:71
-msgid "Larch medium"
-msgstr "Srednje velik macesen"
-
-#: ../../worlds/greenland/conf:72
-msgid "Larch small"
-msgstr "Majhen macesen"
-
-#: ../../worlds/greenland/conf:73
-msgid "Larch tiny"
-msgstr "Zelo majhen macesen"
-
-#: ../../worlds/greenland/conf:74
-msgid "Rowan"
-msgstr "Jerebika"
-
-#: ../../worlds/greenland/conf:75
-msgid "Rowan medium"
-msgstr "Srednje velika jerebika"
-
-#: ../../worlds/greenland/conf:76
-msgid "Rowan small"
-msgstr "Majhna jerebika"
-
-#: ../../worlds/greenland/conf:77
-msgid "Rowan tiny"
-msgstr "Zelo majhna jerebika"
-
-#: ../../worlds/greenland/conf:80
-msgid "Badger"
-msgstr "Jazbec"
-
-#: ../../worlds/greenland/conf:81
-msgid "Brownbear"
-msgstr "Rjavi medved"
-
-#: ../../worlds/greenland/conf:82
-msgid "Bunny"
-msgstr "Zajec"
-
-#: ../../worlds/greenland/conf:83
-msgid "Chamois"
-msgstr "Gams"
-
-#: ../../worlds/greenland/conf:84
-msgid "Deer"
-msgstr "Jelen"
-
-#: ../../worlds/greenland/conf:85
-msgid "Duck"
-msgstr "Raca"
-
-#: ../../worlds/greenland/conf:86
-msgid "Elk"
-msgstr "Los"
-
-#: ../../worlds/greenland/conf:87
-msgid "Fox"
-msgstr "Lisica"
-
-#: ../../worlds/greenland/conf:88
-msgid "Lynx"
-msgstr "Ris"
-
-#: ../../worlds/greenland/conf:89
-msgid "Marten"
-msgstr "Kuna"
-
-#: ../../worlds/greenland/conf:90
-msgid "Reindeer"
-msgstr "Severni jelen"
-
-#: ../../worlds/greenland/conf:91
-msgid "Sheep"
-msgstr "Ovca"
+#: ../../worlds/greenland/resconf:36
+msgid "Water"
+msgstr "Voda"
 
 #: ../../worlds/greenland/conf:92
 msgid "Wisent"
@@ -282,26 +306,5 @@ msgstr "Evropski bizon"
 msgid "Wolf"
 msgstr "Volk"
 
-#: ../../worlds/greenland/resconf:4
-msgid "Coal"
-msgstr "Premog"
-
-#: ../../worlds/greenland/resconf:12
-msgid "Gold"
-msgstr "Zlato"
-
-#: ../../worlds/greenland/resconf:20
-msgid "Iron"
-msgstr "Železo"
-
-#: ../../worlds/greenland/resconf:28
-msgid "Granit"
-msgstr "Granit"
-
-#: ../../worlds/greenland/resconf:36
-msgid "Water"
-msgstr "Voda"
-
-#: ../../worlds/greenland/resconf:41
-msgid "Fish"
-msgstr "Riba"
+#~ msgid "Granit"
+#~ msgstr "Granit"

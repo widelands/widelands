@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-06 22:42+0000\n"
-"Last-Translator: Jonay <jonay.santana@gmail.com>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-05 15:47+0000\n"
+"Last-Translator: Roberto López <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-08 03:34+0000\n"
+"X-Launchpad-Export-Date: 2010-10-08 04:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -182,7 +182,7 @@ msgstr "Transporta objetos a lo largo de tus caminos."
 msgid "Castle"
 msgstr "Castillo"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Pueblo del Castillo"
 
@@ -387,11 +387,11 @@ msgstr "Casa de guardia"
 msgid "Hammer"
 msgstr "Martillo"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:18
+#: ../../tribes/atlanteans/blackroot_farm/conf:19
 msgid "Harvest blackroot"
 msgstr "Recolectar raíces negras"
 
-#: ../../tribes/atlanteans/farm/conf:21
+#: ../../tribes/atlanteans/farm/conf:22
 msgid "Harvest corn"
 msgstr "Cosechar maiz"
 
@@ -399,7 +399,7 @@ msgstr "Cosechar maiz"
 msgid "Headquarters"
 msgstr "Cuartel general"
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Cuartel general mediano"
 
@@ -515,6 +515,10 @@ msgstr "Extraer piedra"
 msgid "Miner"
 msgstr "Minero"
 
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+msgid "Not enough space"
+msgstr "No hay espacio suficiente"
+
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
 msgstr "Puesto de avanzada"
@@ -539,11 +543,11 @@ msgid "Planks are an important build material of the Atlanteans."
 msgstr ""
 "Las tablas son un importante material de construcción para los atlantes."
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:16
+#: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
 msgstr "Plantación de raíces negras"
 
-#: ../../tribes/atlanteans/farm/conf:19
+#: ../../tribes/atlanteans/farm/conf:20
 msgid "Plant corn"
 msgstr "Plantar maiz"
 
@@ -852,6 +856,13 @@ msgstr "Ahuma carne y pescado."
 #: ../../tribes/atlanteans/conf:101
 msgid "Soldier"
 msgstr "Soldado"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Spiderbreeder"
@@ -1255,14 +1266,14 @@ msgstr "Casa de leñador"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:27
 #: ../../tribes/atlanteans/bakery/conf:21
-#: ../../tribes/atlanteans/blackroot_farm/conf:20
+#: ../../tribes/atlanteans/blackroot_farm/conf:21
 #: ../../tribes/atlanteans/burners_house/conf:19
 #: ../../tribes/atlanteans/coalmine/conf:21
 #: ../../tribes/atlanteans/crystalmine/conf:26
-#: ../../tribes/atlanteans/farm/conf:23
+#: ../../tribes/atlanteans/farm/conf:24
 #: ../../tribes/atlanteans/fish_breeders_house/conf:17
 #: ../../tribes/atlanteans/fishers_house/conf:16
-#: ../../tribes/atlanteans/foresters_house/conf:15
+#: ../../tribes/atlanteans/foresters_house/conf:16
 #: ../../tribes/atlanteans/goldmine/conf:22
 #: ../../tribes/atlanteans/goldweaver/conf:19
 #: ../../tribes/atlanteans/horsefarm/conf:22

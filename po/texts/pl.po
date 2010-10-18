@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
 "PO-Revision-Date: 2010-06-06 20:57+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-07 03:33+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/README:69
@@ -893,7 +893,7 @@ msgstr ""
 msgid "Online Help"
 msgstr "Pomoc on-line"
 
-#: ../../txts/developers:339
+#: ../../txts/developers:340
 msgid "Other"
 msgstr "Inne"
 
@@ -1029,7 +1029,7 @@ msgstr ""
 "budynek jest otoczony drzewami albo drogami, produkacje się zatrzyma."
 
 #: ../../txts/developers:29
-#: ../../txts/developers:327
+#: ../../txts/developers:328
 msgid "Sound"
 msgstr "Dźwięk"
 
@@ -1314,7 +1314,7 @@ msgstr ""
 "Aby zminimalizować/zmaksymalizować okno, naciśnij na pasku tytułu środkowym "
 "lub prawym przyciskiem myszy, trzymając jednocześnie Ctrl."
 
-#: ../../txts/developers:332
+#: ../../txts/developers:333
 msgid "Translation"
 msgstr "Tłumaczenie"
 

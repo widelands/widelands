@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-06-23 20:12+0000\n"
-"PO-Revision-Date: 2010-07-20 20:34+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"PO-Revision-Date: 2010-08-30 23:33+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-21 03:39+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -367,7 +367,7 @@ msgstr "Casa do vixilante"
 msgid "Hammer"
 msgstr "Martelo"
 
-#: ../../tribes/empire/vineyard/conf:20
+#: ../../tribes/empire/vineyard/conf:21
 msgid "Harvest vine"
 msgstr "Recoller vide"
 
@@ -569,7 +569,7 @@ msgstr "Criador de porcos"
 msgid "Piggery"
 msgstr "Cortello"
 
-#: ../../tribes/empire/vineyard/conf:18
+#: ../../tribes/empire/vineyard/conf:19
 msgid "Plant vine"
 msgstr "Sementar unha vide"
 
@@ -1281,7 +1281,7 @@ msgstr "A la é o cabelo das ovellas. Úsase nos teares para producir tea."
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22
 #: ../../tribes/empire/toolsmithy/conf:45
-#: ../../tribes/empire/vineyard/conf:22
+#: ../../tribes/empire/vineyard/conf:23
 #: ../../tribes/empire/weaponsmithy/conf:34
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16
