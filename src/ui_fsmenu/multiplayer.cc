@@ -54,14 +54,14 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 		(this, "lan",
 		 m_butx, m_yres * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this), Lan),
+		 boost::bind(&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this), (int32_t)Lan),
 		 _("LAN / Direct IP"), std::string(), true, false,
 		 m_fn, m_fs),
 	back
 		(this, "back",
 		 m_butx, m_yres * 3 / 4, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this), Back),
+		 boost::bind(&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this), (int32_t)Back),
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs)
 {
