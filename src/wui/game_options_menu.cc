@@ -18,6 +18,7 @@
  */
 
 #include <boost/bind.hpp>
+#include <boost/type_traits.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>
 

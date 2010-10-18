@@ -20,6 +20,7 @@
 #include "interactive_player.h"
 
 #include <boost/bind.hpp>
+#include <boost/type_traits.hpp>
 #include <boost/lambda/construct.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lexical_cast.hpp>
