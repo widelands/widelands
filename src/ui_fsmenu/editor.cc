@@ -39,21 +39,21 @@ Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
 		(this, "new_map",
 		 m_butx, m_yres * 6 / 25, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), (int32_t)New_Map),
+		 boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(New_Map)),
 		 _("New Map"), std::string(), true, false,
 		 ui_fn(), fs_small()),
 	load_map
 		(this, "load_map",
 		 m_butx, m_yres * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), (int32_t)Load_Map),
+		 boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(Load_Map)),
 		 _("Load Map"), std::string(), true, false,
 		 ui_fn(), fs_small()),
 	back
 		(this, "back",
 		 m_butx, m_yres * 3 / 4, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), (int32_t)Back),
+		 boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(Back)),
 		 _("Back"), std::string(), true, false,
 		 ui_fn(), fs_small())
 {

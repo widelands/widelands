@@ -72,7 +72,7 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 		(this, "back",
 		 m_xres * 16 / 25, m_yres * 8333 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_NetSetupLAN::end_modal, boost::ref(*this), (int32_t)CANCEL),
+		 boost::bind(&Fullscreen_Menu_NetSetupLAN::end_modal, boost::ref(*this), static_cast<int32_t>(CANCEL)),
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	loadlasthost

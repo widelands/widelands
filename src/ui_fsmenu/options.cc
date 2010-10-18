@@ -57,14 +57,14 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(this, "cancel",
 		 m_xres * 51 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), (int32_t)om_cancel),
+		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_cancel)),
 		 _("Cancel"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_apply
 		(this, "apply",
 		 m_xres * 3 / 8, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), (int32_t)om_ok),
+		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_ok)),
 		 _("Apply"), std::string(), true, false,
 		 m_fn, m_fs),
 
@@ -387,14 +387,14 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this, "cancel",
 		 m_xres * 41 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_Advanced_Options::end_modal, boost::ref(*this), (int32_t)om_cancel),
+		 boost::bind(&Fullscreen_Menu_Advanced_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_cancel)),
 		 _("Cancel"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_apply
 		(this, "apply",
 		 m_xres / 4,   m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_Advanced_Options::end_modal, boost::ref(*this), (int32_t)om_ok),
+		 boost::bind(&Fullscreen_Menu_Advanced_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_ok)),
 		 _("Apply"), std::string(), true, false,
 		 m_fn, m_fs),
 
