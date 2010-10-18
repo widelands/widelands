@@ -335,6 +335,12 @@ void Interactive_Player::postload()
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
 			(&Int_Player_overlay_callback_function, static_cast<void *>(this));
+	
+	// Connect buildhelp button to reflect build help state. Needs to be
+	// done here rather than in the constructor as the map is not present then.
+	egbase().map().overlay_manager().onBuildHelpToggle =
+		boost::bind(&UI::Button::set_perm_pressed,&m_toggle_buildhelp,_1);
+	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 
 	// Recalc whole map for changed owner stuff
 	map.recalc_whole_map();
