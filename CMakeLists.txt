@@ -112,18 +112,19 @@ if (BUILD_UNIT_TESTS)
   # we only include Boost Headers to the main executable, no libraries
   # unit_test_framework is for testing only and can use shared libraries
   set (Boost_FIND_COMPONENTS unit_test_framework)
-  set (Boost_USE_STATIC_LIBS   ON)
+  if (WIN32)
+    # use static libs on windows to avoid DLL problems
+    set (Boost_USE_STATIC_LIBS   ON)
+  else (WIN32)
+    # Use shared libs on another plaforms because for example opensuse 
+    # doesn't ship with static unit test library.
+    add_definitions(-DBOOST_TEST_DYN_LINK)
+  endif(WIN32)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
   find_package(Boost 1.35.0 COMPONENTS unit_test_framework)
-  # settle with single threaded libs if multithreaded is not available
   if (NOT Boost_FOUND)
-    set (Boost_USE_MULTITHREADED OFF)
-    find_package(Boost 1.35.0 COMPONENTS unit_test_framework REQUIRED)
-    # If still not boost found, then hint user to disable BUILD_UNIT_TESTS
-    if (NOT Boost_FOUND)
-      message("Boost unit_test_framework is required for unit tests.\nSet BUILD_UNIT_TESTS to FALSE to build without unit tests.\n")
-    endif()
+    message("Boost unit_test_framework is required for unit tests.\nSet BUILD_UNIT_TESTS to OFF to build without unit tests.\n")
   endif (NOT Boost_FOUND)
 else (BUILD_UNIT_TESTS)
   find_package(Boost 1.35.0 REQUIRED)
