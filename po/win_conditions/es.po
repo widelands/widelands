@@ -7,49 +7,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-09-06 16:14+0000\n"
-"Last-Translator: Ivan <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-18 20:04+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-07 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-10-19 04:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:75
+#: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment ."
 msgstr "%i árboles al momento."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:114
+#: ../../scripting/win_conditions/04_wood_gnome.lua:138
 msgid "%i trees."
 msgstr "%i árboles"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:113
+#: ../../scripting/win_conditions/04_wood_gnome.lua:137
 msgid "%s had "
 msgstr "%s tubo "
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:74
+#: ../../scripting/win_conditions/04_wood_gnome.lua:84
 msgid "%s has "
 msgstr "%s tiene "
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:111
+#: ../../scripting/win_conditions/03_territorial_lord.lua:133
 msgid "%s owns more than half of the maps area."
 msgstr "%s posea más de la mitad del área del mapa."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:12
+#: ../../scripting/win_conditions/04_wood_gnome.lua:13
 msgid ""
-"As wood gnome you like big forests, so your task is, to have more trees on "
-"your territory than any other player. The game will end after 4 hours of "
+"As wood gnome you like big forests, so your task is, to have more trees on\n"
+"your territory than any other player. The game will end after 4 hours of\n"
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
-"Te gustan los bosques como a los gnomos de madera, entonces tu tarea es, "
-"tener mas árboles en tu territorio que cualquier otro jugador. El juego "
-"terminará después de 4 horas de juego. El que tenga mas árboles al final "
-"ganará el juego.\r\n"
-"As wood gnome you like big forests, so your task is, to have more trees on "
-"your territory than any other player. The game will end after 4 hours of "
-"playing. The one with the most trees at that point will win the game."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:10
 msgid "Autocrat"
@@ -59,7 +52,7 @@ msgstr "Autócrata"
 msgid "Collectors"
 msgstr "Coleccionistas"
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:36
+#: ../../scripting/win_conditions/01_defeat_all.lua:31
 msgid "Congratulations!"
 msgstr "¡Felicidades!"
 
@@ -77,30 +70,34 @@ msgstr ""
 msgid "Endless Game"
 msgstr "Juego sin fin"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:117
+#: ../../scripting/win_conditions/03_territorial_lord.lua:139
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Mantenlo por %i minutos para ganar el juego."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:71
-#: ../../scripting/win_conditions/04_wood_gnome.lua:110
+#: ../../scripting/win_conditions/04_wood_gnome.lua:81
+#: ../../scripting/win_conditions/04_wood_gnome.lua:134
 msgid "Player overview:"
 msgstr "Visión general del Jugador:"
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:30
-msgid "Sorry, you have lost this game!"
-msgstr "Lo siento, has perdido!"
+#: ../../scripting/win_conditions/02_collectors.lua:147
+msgid "Points"
+msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:54
-#: ../../scripting/win_conditions/03_territorial_lord.lua:122
-#: ../../scripting/win_conditions/03_territorial_lord.lua:124
-#: ../../scripting/win_conditions/04_wood_gnome.lua:83
+#: ../../scripting/win_conditions/02_collectors.lua:128
+#: ../../scripting/win_conditions/03_territorial_lord.lua:144
+#: ../../scripting/win_conditions/03_territorial_lord.lua:146
+#: ../../scripting/win_conditions/04_wood_gnome.lua:88
 msgid "Status"
 msgstr "Estado"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:95
-#: ../../scripting/win_conditions/03_territorial_lord.lua:98
+#: ../../scripting/win_conditions/02_collectors.lua:90
+msgid "Status for Player %i<br>"
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:117
 #: ../../scripting/win_conditions/03_territorial_lord.lua:120
-#: ../../scripting/win_conditions/03_territorial_lord.lua:148
+#: ../../scripting/win_conditions/03_territorial_lord.lua:142
+#: ../../scripting/win_conditions/03_territorial_lord.lua:171
 msgid "Team %i"
 msgstr "Equipo %i"
 
@@ -108,20 +105,19 @@ msgstr "Equipo %i"
 msgid "Territorial Lord"
 msgstr "Lord Territorial"
 
-#: ../../scripting/win_conditions/02_collectors.lua:45
-#: ../../scripting/win_conditions/04_wood_gnome.lua:69
+#: ../../scripting/win_conditions/04_wood_gnome.lua:79
 msgid "The game will end in %i minutes."
 msgstr "El juego terminara en %i minutos."
 
-#: ../../scripting/win_conditions/02_collectors.lua:49
-msgid "The player %i has currently %i points"
-msgstr "El jugador %i tiene %i puntos"
+#: ../../scripting/win_conditions/02_collectors.lua:118
+msgid "The game will end in %s."
+msgstr ""
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:11
 msgid "The tribe or team that can defeat all others wins the game!"
 msgstr "La tribu o equipo que pueda derrotar a los otros ganará el juego!"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:118
+#: ../../scripting/win_conditions/04_wood_gnome.lua:141
 msgid "The winner is %s "
 msgstr "El ganador es %s "
 
@@ -129,82 +125,88 @@ msgstr "El ganador es %s "
 msgid "This is an endless game without rules."
 msgstr "Éste es un juego sin fin sin reglas."
 
+#: ../../scripting/win_conditions/02_collectors.lua:103
+msgid "Total: %i points"
+msgstr ""
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:102
+msgid "Trees owned"
+msgstr ""
+
 #: ../../scripting/win_conditions/04_wood_gnome.lua:11
 msgid "Wood Gnome"
 msgstr "Gnomo de madera"
 
-#: ../../scripting/win_conditions/00_endless_game.lua:31
-#: ../../scripting/win_conditions/02_collectors.lua:64
-#: ../../scripting/win_conditions/03_territorial_lord.lua:140
-#: ../../scripting/win_conditions/04_wood_gnome.lua:92
+#: ../../scripting/win_conditions/00_endless_game.lua:24
+#: ../../scripting/win_conditions/01_defeat_all.lua:24
+#: ../../scripting/win_conditions/02_collectors.lua:179
+#: ../../scripting/win_conditions/03_territorial_lord.lua:154
+#: ../../scripting/win_conditions/04_wood_gnome.lua:94
 msgid "You are defeated!"
 msgstr "Fuiste derrotado!"
 
-#: ../../scripting/win_conditions/02_collectors.lua:84
-#: ../../scripting/win_conditions/04_wood_gnome.lua:126
+#: ../../scripting/win_conditions/04_wood_gnome.lua:149
 msgid "You are the winner of this game!"
 msgstr "Eres el ganador de este juego!"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:150
+#: ../../scripting/win_conditions/02_collectors.lua:141
+#: ../../scripting/win_conditions/03_territorial_lord.lua:173
 msgid "You are the winner!"
 msgstr "¡Eres el ganador!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:12
 msgid ""
-"You get points for all wares stored in your headquarters or warehouses. The "
-"player with the highest number of wares at the end of 4 hours wins the game."
+"You get points for precious wares in your warehouses, the player with the "
+"highest number of wares at the end of 4 hours wins the game."
 msgstr ""
-"Obtienes puntos por todas las mercaderías en tus cuarteles principales o "
-"depósitos. El jugador con el mayor numero de mercaderías al final de 4 horas "
-"ganará el juego."
 
-#: ../../scripting/win_conditions/02_collectors.lua:82
-#: ../../scripting/win_conditions/04_wood_gnome.lua:122
+#: ../../scripting/win_conditions/04_wood_gnome.lua:145
 msgid "You have lost this game!"
 msgstr "Has perdido el juego!"
 
-#: ../../scripting/win_conditions/00_endless_game.lua:32
-#: ../../scripting/win_conditions/02_collectors.lua:65
-#: ../../scripting/win_conditions/03_territorial_lord.lua:141
-#: ../../scripting/win_conditions/04_wood_gnome.lua:93
+#: ../../scripting/win_conditions/00_endless_game.lua:25
+#: ../../scripting/win_conditions/01_defeat_all.lua:25
+#: ../../scripting/win_conditions/02_collectors.lua:180
+#: ../../scripting/win_conditions/03_territorial_lord.lua:155
+#: ../../scripting/win_conditions/04_wood_gnome.lua:95
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
 "No tienes nada que comandar. Si quieres, puedes continuar como espectador."
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:37
+#: ../../scripting/win_conditions/01_defeat_all.lua:32
 msgid "You have won this game!"
 msgstr "¡Has ganado la partida!"
 
-#: ../../scripting/win_conditions/02_collectors.lua:82
-#: ../../scripting/win_conditions/03_territorial_lord.lua:152
+#: ../../scripting/win_conditions/02_collectors.lua:139
+#: ../../scripting/win_conditions/03_territorial_lord.lua:175
 msgid "You lost"
 msgstr "Has perdido"
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:29
-#: ../../scripting/win_conditions/04_wood_gnome.lua:124
+#: ../../scripting/win_conditions/04_wood_gnome.lua:147
 msgid "You lost!"
 msgstr "¡Has perdido!"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:115
+#: ../../scripting/win_conditions/03_territorial_lord.lua:137
 msgid "You own more than half of the maps area."
 msgstr "Posees mas de la mitad del área del mapa."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:113
+#: ../../scripting/win_conditions/03_territorial_lord.lua:135
 msgid "You still got %i minutes to prevent a victory."
 msgstr "Todavía tienes %i minutos para prevenir una victoria."
 
-#: ../../scripting/win_conditions/02_collectors.lua:84
-#: ../../scripting/win_conditions/03_territorial_lord.lua:150
-#: ../../scripting/win_conditions/04_wood_gnome.lua:128
+#: ../../scripting/win_conditions/02_collectors.lua:141
+#: ../../scripting/win_conditions/03_territorial_lord.lua:173
+#: ../../scripting/win_conditions/04_wood_gnome.lua:151
 msgid "You won!"
 msgstr "¡Has ganado!"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:152
+#: ../../scripting/win_conditions/02_collectors.lua:139
+#: ../../scripting/win_conditions/03_territorial_lord.lua:175
 msgid "You've lost this game!"
 msgstr "¡Has perdido esta partida!"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:119
+#: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "with %i trees."
 msgstr "con %i árboles."
 
@@ -213,6 +215,9 @@ msgstr "con %i árboles."
 
 #~ msgid "An endless game without rules"
 #~ msgstr "Juego sin fin, sin reglas"
+
+#~ msgid "The player %i has currently %i points"
+#~ msgstr "El jugador %i tiene %i puntos"
 
 #~ msgid "The tribe that can defeat all others wins!"
 #~ msgstr "¡La tribu que derrote a las otras gana!"
@@ -245,3 +250,27 @@ msgstr "con %i árboles."
 #~ msgstr ""
 #~ "Obtén puntos por los bienes en tu cuartel general. Quien tenga el mayor "
 #~ "numero de bienes al final de 4 horas, gana el juego"
+
+#~ msgid ""
+#~ "As wood gnome you like big forests, so your task is, to have more trees on "
+#~ "your territory than any other player. The game will end after 4 hours of "
+#~ "playing. The one with the most trees at that point will win the game."
+#~ msgstr ""
+#~ "Te gustan los bosques como a los gnomos de madera, entonces tu tarea es, "
+#~ "tener mas árboles en tu territorio que cualquier otro jugador. El juego "
+#~ "terminará después de 4 horas de juego. El que tenga mas árboles al final "
+#~ "ganará el juego.\r\n"
+#~ "As wood gnome you like big forests, so your task is, to have more trees on "
+#~ "your territory than any other player. The game will end after 4 hours of "
+#~ "playing. The one with the most trees at that point will win the game."
+
+#~ msgid "Sorry, you have lost this game!"
+#~ msgstr "Lo siento, has perdido!"
+
+#~ msgid ""
+#~ "You get points for all wares stored in your headquarters or warehouses. The "
+#~ "player with the highest number of wares at the end of 4 hours wins the game."
+#~ msgstr ""
+#~ "Obtienes puntos por todas las mercaderías en tus cuarteles principales o "
+#~ "depósitos. El jugador con el mayor numero de mercaderías al final de 4 horas "
+#~ "ganará el juego."
