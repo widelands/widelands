@@ -408,7 +408,7 @@ You will need them for sure as soon as you want to recruit new soldiers.]])
  {
     title = _ "Jundlina replies",
     body = jundlina(_ "Jundlina replies", _
-[[May Satul warm you too, Opol. I wanted to delay production of spider cloth, 
+[[May Satul warm you too, Opol. I wanted to delay production of spider cloth,
 but I understand your urgency. Your suggestion sounds fair to me, I will build
 your weaving-mill and spiderfarm. I will also build a goldweaver so that the
 golden tabards you make will not be golden by name alone.]]
