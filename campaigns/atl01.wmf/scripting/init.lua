@@ -144,6 +144,19 @@ function build_warehouse_and_horsefarm()
    o.done = true
 end
 
+function build_training()
+   sleep(15* 60 * 1000) -- sleep 15 minutes
+   msg_boxes(training_story)
+
+   local o = add_obj(obj_make_training_buildings)
+   while not check_for_buildings(p1, {
+      dungeon = 1, labyrinth = 1 
+   }) do sleep(3874) end
+   o.done = true
+
+   msg_boxes(training_story_end)
+end
+
 function build_heavy_industries_and_mining()
    msg_boxes(heavy_industry_story)
 
@@ -151,9 +164,11 @@ function build_heavy_industries_and_mining()
    while not check_for_buildings(p1, {
       coalmine = 1, ironmine = 1, goldmine = 1, crystalmine = 1,
       smelting_works = 1, weaponsmithy = 1, armoursmithy = 1,
-      toolsmithy = 1, dungeon = 1, labyrinth = 1,
+      toolsmithy = 1,
    }) do sleep(3478) end
    o.done = true
+
+   run(build_training)
 end
 
 function build_food_environment()

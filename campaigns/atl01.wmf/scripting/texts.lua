@@ -163,16 +163,24 @@ is digging for crystal, quartz and diamond - all of them are rare materials and
 very seldom found. While it searches for them, it produces a lot of stone.<br>
 The ores have to be smelted before they can be used in smelting works. The
 refined materials are then used in the weapon smithy, the armor smithy and the
-toolsmithy.<br>
-As all other tribes, the atlanteans are also able to train soldiers: the
-dungeon trains attack - the major attribute of the atlanteans - and the
-labyrinth trains evade, health points and defense. The items produced by the
-industry are used to train better soldiers in the two training buildings.
+toolsmithy.<br><br>
 
 - Build a mine of each kind. Make sure to send geologists to the mountain first.<br>
 - Build a smelting works.<br>
 - Build an armor smithy and a weapon smithy.<br>
 - Build a toolsmithy.<br>
+]])
+}
+
+obj_make_training_buildings = {
+   name = "obj_make_training_buildings",
+   title = _"Build training buildings",
+   body = obj_text(_"Build training buildings to improve your soldiers", _
+[[As all other tribes, the atlanteans are also able to train soldiers: the
+dungeon trains attack - the major attribute of the atlanteans - and the
+labyrinth trains evade, health points and defense. The items produced by the
+industry are used to train better soldiers in the two training buildings.<br><br>
+
 - Build a dungeon and a labyrinth.<br>.
 ]])
 }
@@ -444,18 +452,27 @@ heavy_industry_story = {
 mountains around us? We are running short of quartz, crystal and diamonds for
 our buildings. Also we could use more iron, gold and especially coal. If we
 find an ample supply of those commodities, we could start producing weapons
-and tools: this would help enormously. Of course, we would need smelters,
+and tools; this would help enormously. Of course, we would need smelters,
 a weapon smithy, a armor smithy and a tool smithy. And maybe even more.]]
       )
    },
    {
       title = _ "Jundlina replies",
       body = jundlina(_"Jundlina nods",
-[[I have considered this, Sidolus. We will make this a priority for now. Good
-that you came, for I have something else to discuss with you: I received words
-about your soldiers misbehaving and bullying the common folk. What is this
-nonsense all about, they are servants for the common good and must not misuse
-their powers. Explain this, if you will!]]
+[[I have considered this, Sidolus. I think, it is about time. We will make this
+a priority for now. You shall get your industry and soon!]]
+      ) .. new_objectives(obj_make_heavy_industrie_and_mining)
+   },
+}
+
+training_story = {
+   {
+      title = _ "Jundlina summons Sidolus",
+      body = jundlina(_ "Jundlina is angry", _
+[[What is this I hear, Sidolus? I received words about your soldiers
+misbehaving and bullying the common folk. What is this nonsense all about, they
+are servants for the common good and must not misuse their powers. This is
+unexpectable.  Explain this, if you will!]]
       )
    },
    {
@@ -477,6 +494,19 @@ shall get your buildings. But note that I will not tolerate any rogue soldier;
 it similar things will happen again, I will make you responsible for them.
 Dismissed.]]
       ) .. new_objectives(obj_make_heavy_industrie_and_mining)
+   }
+}
+
+training_story_end = {
+   {
+      title = _ "Jundlina received a letter",
+      body = jundlina("Jundlina", _
+[[I received an invitation from Sidolus. The first day of training in the newly
+finished labyrinth will be tomorrow. The dungeon is done as well and will start
+its work soon. I am looking forward to tomorrow; I am very interested how our
+soldiers are trained and I wonder if the additional workload will keep them from
+bullying the civil population.]]
+      )
    }
 }
 
