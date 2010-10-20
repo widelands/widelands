@@ -280,7 +280,7 @@ function water_rising()
       end
       -- end of remove
 
-      if not f.owner == p1 then return end
+      if f.owner ~= p1 then return end
       if not f.immovable then return end
 
       -- Flags are not so interesting
@@ -307,5 +307,3 @@ run(leftover_buildings)
 run(build_warehouse_and_horsefarm)
 
 run(water_rising)
-
-

@@ -1,17 +1,17 @@
 -- =======================================================================
---                        Water rising Functionality                        
+--                        Water rising Functionality
 -- =======================================================================
 
 use("aux", "set")
 
 -- ================
--- Helper function 
+-- Helper function
 -- ================
 function _format_time(t)
    local mins = math.floor(t/1000 / 60)
    t = t - mins * 1000 * 60
    local secs = math.floor(t/1000)
-   
+
    if mins > 0 then
       return ("%im%isec"):format(mins,secs)
    else
@@ -30,7 +30,7 @@ function _fully_flooded(f)
 end
 
 -- =================
--- A Field Triangle 
+-- A Field Triangle
 -- =================
 Triangle = {}
 function Triangle:new(f, which)
@@ -112,18 +112,18 @@ function WaterRiser:new(ocean_seed)
    setmetatable(rv, self)
    self.__index = self
 
-   local check_fields = Set:new{
+   local triangles_to_check = Set:new{
       Triangle:new(ocean_seed, "r"),
       Triangle:new(ocean_seed, "d"),
    }
 
-   while check_fields.size > 0 do
-      local tr = check_fields:pop_at(1)
+   while triangles_to_check.size > 0 do
+      local tr = triangles_to_check:pop_at(1)
       if tr:get_ter() == "wasser" and tr:get_height() <= rv._water_level then
          rv._ocean:add(tr)
          for idx, ntr in ipairs(tr:neighbours()) do
             if not (rv._ocean:contains(ntr) or rv._shore:contains(ntr)) then
-               check_fields:add(ntr)
+               triangles_to_check:add(ntr)
             end
          end
       else
@@ -134,7 +134,62 @@ function WaterRiser:new(ocean_seed)
    return rv
 end
 
+function WaterRiser:rise(level)
+   run(function()
+   while self._water_level < level do
+      self._water_level = self._water_level + 1
+
+      print(("Beginning rise to: %i"):format(self._water_level))
+      local st = game.time
+
+      self:_relevel_ocean()
+
+      local delta = game.time - st
+      print(("Done with normalization, took %s"):format(_format_time(delta)))
+
+      self:_reevaluate_shore()
+
+      self:_rise_water()
+
+      local delta = game.time - st
+      print(("Raising to %i took %s"):format(self._water_level,
+         _format_time(delta)))
+   end
+   end)
+end
+
+function WaterRiser:_relevel_ocean()
+   -- Relevels the ocean over 5 mins
+   local scnt = math.floor(self._ocean.size / 300)
+   local cnt = scnt
+   for tr in self._ocean:items() do
+      for idx,f in ipairs(tr:fields()) do
+         if _fully_flooded(f) then
+            f.raw_height = self._water_level
+         end
+      end
+      cnt = cnt - 1
+      if cnt == 0 then
+         cnt = scnt
+         sleep(1000)
+      end
+   end
+   map:recalculate()
+end
+
+function WaterRiser:_reevaluate_shore()
+   -- Check for all shore fields if they remain shore or are going to be
+   -- reflooded
+   for tr in self._shore:items() do
+      if tr:get_height() <= self._water_level then
+         self._shore:discard(tr)
+         self._to_flood:add(tr)
+      end
+   end
+end
+
 function WaterRiser:_rise_water()
+   -- Rises the water, floods the land up to the current water level
    while self._to_flood.size > 0 do
       local tr = self._to_flood:pop_at(math.random(self._to_flood.size))
 
@@ -147,12 +202,10 @@ function WaterRiser:_rise_water()
 
             f.height = self._water_level
             if f.immovable then f.immovable:remove() end
-            for idx,b in ipairs(f.bobs) do
-               b:remove()
-            end
+            for idx,b in ipairs(f.bobs) do b:remove() end
          end
       end
-         
+
       self._ocean:add(tr)
 
       -- Check the neighbours
@@ -167,59 +220,6 @@ function WaterRiser:_rise_water()
       end
       sleep(300)
    end
-end
-
-function WaterRiser:rise(level)
-
-   run(function() 
-   while self._water_level < level do
-      self._water_level = self._water_level + 1
-   
-      print(("Beginning rise to: %i"):format(self._water_level))
-      local st = game.time
-
-      -- Relevel the ocean over 5 mins
-      local scnt = math.floor(self._ocean.size / 300)
-      local cnt = scnt
-      for tr in self._ocean:items() do
-         for idx,f in ipairs(tr:fields()) do
-            if _fully_flooded(f) then
-               f.raw_height = self._water_level
-               if f.immovable then f.immovable:remove() end
-               for idx,b in ipairs(f.bobs) do
-                  b:remove()
-               end
-            end
-         end
-         cnt = cnt - 1
-         if cnt == 0 then
-            cnt = scnt
-            sleep(1000)
-         end
-      end
-      map:recalculate()
-
-      local delta = game.time - st
-      print(("Done with normalization, took %s"):format(_format_time(delta)))
-
-      -- Check for all shore fields if they remain shore or
-      -- are going to be reflooded
-      for tr in self._shore:items() do
-         if tr:get_height() <= self._water_level then
-            self._shore:discard(tr)
-            self._to_flood:add(tr)
-         end
-      end
-
-      -- Launch the raising function
-      self:_rise_water()
-
-      local delta = game.time - st
-      print(("Raising to %i took %s"):format(self._water_level,
-         _format_time(delta)))
-   end
-   end)
-
 end
 
 
