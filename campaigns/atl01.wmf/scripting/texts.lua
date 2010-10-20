@@ -230,8 +230,8 @@ initial_messages = {
       p(_
 [[But all seemed well, and only the horses seemed to feel something.
 In the nights, they went crazy and were full of fear. Not before long, the
-horsebreeder Xydra figured out what was wrong with them: The sea level before
-their stable was rising in an ever accelerating speed.]]
+horsebreeder Xydra figured out what was wrong with them: The sea level in front
+of their stable was rising in an ever accelerating speed.]]
    ) .. p(_
 [[The clerics went into their meditation and the reason for the rising water
  was soon to be found: The god lost faith in the atlanteans because of the
@@ -277,7 +277,7 @@ first_briefing_messages = {
    title = _ "The princess' memoir",
    body = jundlina(_ "Jundlina writes down her memories", _
 [[We left Atlantis and sailed east. We entered the forbidden sea on the sixth
- day without noticing any chasers from Atlantis and without Lutus having smash
+ day without noticing any chasers from Atlantis and without Lutus having smashed
  our ship. Now, we are out of his reach. One day later, we sighted an island
  which seems to have one of these fire spitting mountains on it. I deemed this
  a sign from the fire god and we landed on its shore.]]
@@ -298,7 +298,7 @@ first_briefing_messages = {
    title = _ "Loftomor and Sidolus arrive",
    body = jundlina( "Jundlina", _
 [[May Satul warm you both. Loftomor, you have been the islands most renowned
- architect. Sidolus, you are a seasoned warrior and strategist. If have called
+ architect. Sidolus, you are a seasoned warrior and strategist. I have called
  you before me to seek your counsel: What needs to be done to make this our new
  home?]]
    )
@@ -308,7 +308,7 @@ first_briefing_messages = {
    body = loftomor(_
 [[May Satul warm you, Jundlina! The most important things for building a
  settlement are the build materials. There are some trees here, so we should
- build housings for some woodcutters and of course also for some forester, so
+ build housings for some woodcutters and of course also for foresters, so
  we do not run out of trees. Oh and we mustn't forget the sawmill, for most
  buildings can't be made out of trunks alone. Stronger buildings also need
  stone, but there is plenty to the north-east of here; we just need to build a
@@ -439,7 +439,7 @@ heavy_industry_story = {
       title = _ "Sidolus seeks out Jundlina",
       body = sidolus(_
 [[May Satul warm you, Jundlina. Have you considered mining for goods in the
- mountains around us? We are running short of quarzy, crystal and diamonds for
+ mountains around us? We are running short of quartz, crystal and diamonds for
  our buildings. Also we could use more iron, gold and especially coal. If we
  find an ample supply of those commodities, we could start producing weapons
  and tools: this would help enormously. Of course, we would need smelters,
@@ -500,14 +500,14 @@ first_leftover_building_found = {
    title = _ "A dangerous finding",
    body = jundlina(_ "Jundlina is in thought", _
 [[We found an old building, destroyed and burned by flames. I am very worried
- about this finding. The building is not of any kind, I've ever seen. It is
+ about this finding. The building is not of any kind I've ever seen. It is
  certainly not designed by any atlantean architect I've ever heard about. The
  building is crude, the assemblage is sloppy. But the materials are very
  enduring: the wood used for it seemed to have been burned in a strange way
  before it was used as build material - it is hard as stone.<br><br>
  The implications frighten me. Are there others on this island? Where are they
  then? They work with fire, are they praying to Satul too? Are they friends or
- foe? And why is the building burned down. Has this island seen war? Is a
+ foe? And why is the building burned down? Has this island seen war? Is a
  war being waged on it right now?<br><br>
  We must improve our military capabilities. If there are foes on the island, we
  have to be prepared when we meet them. We should also enforce the foritfication
