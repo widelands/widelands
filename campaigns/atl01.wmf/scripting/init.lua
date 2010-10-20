@@ -173,7 +173,7 @@ function build_food_environment()
    msg_boxes(food_story_message)
 
    run(function()
-      sleep(60000)
+      sleep(10 * 60 * 1000)
       run(build_heavy_industries_and_mining)
    end)
 

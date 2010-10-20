@@ -339,11 +339,11 @@ food_story_message = {
 {
    title = _ "Jundlina is satisfied",
    body = jundlina("Jundlina's Memoirs", _
-[[I just received word that our build infrastructure is done and taking up
-their work - only spider cloth production is still missing in our arsenal,
-we must not forget about this. But there seem to be more pressing matters. I
-called Culionder before me, my personal cook to get his help with sorting
-some things out.]]
+[[Our build infrastructure is done and I spend some days making sure that
+they work well together. Now only spider cloth production is missing in our
+arsenal, we must not forget about this in the future. But there seem to be more
+pressing matters. I called Culionder before me, my personal cook to get his
+help with sorting some things out.]]
    )
 },
 {
@@ -355,7 +355,7 @@ god?]]
 },
 {
    title = _ "Jundlina replies",
-   body = colionder(_
+   body = jundlina(_"Jundlina", _
 [[May Satul warm you too, Colionder. Yes, I wondered if there is not a way
 that we can centralize our food production. We loose a lot of productivity
 because our people are accustomed to make their own food. I feel if we
