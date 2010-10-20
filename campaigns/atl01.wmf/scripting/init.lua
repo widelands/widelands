@@ -145,7 +145,6 @@ function build_warehouse_and_horsefarm()
 end
 
 function build_training()
-   sleep(15* 60 * 1000) -- sleep 15 minutes
    msg_boxes(training_story)
 
    local o = add_obj(obj_make_training_buildings)
@@ -168,6 +167,7 @@ function build_heavy_industries_and_mining()
    }) do sleep(3478) end
    o.done = true
 
+   sleep(15 * 60 * 1000) -- sleep a while
    run(build_training)
 end
 
@@ -223,7 +223,7 @@ function build_environment()
 
    run(make_spidercloth_production)
 
-   sleep(45000) -- Sleep a while
+   sleep(15 * 60 * 1000) -- Sleep a while
    run(build_food_environment)
 end
 
