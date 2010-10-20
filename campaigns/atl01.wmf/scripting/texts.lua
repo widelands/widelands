@@ -579,11 +579,10 @@ obvious dangers I am feeling very much at home here already.]]
 -- =======================
 -- Flooding of the island
 -- =======================
--- TODO: reveal the lake on the top of the island
 field_flooded_msg = {
 {
    title = _ "The water is rising!",
-   body = jundlina(_
+   body = jundlina(_"Jundlina", _
 [[May Satul save us! Lutas is still trying to get to us. A scout informed me
 that the ocean is rising quickly. We have to reach higher ground and evacuate
 everybody and as much wares from the headquarters up the mountains. How can we
@@ -601,13 +600,19 @@ a much longer distance and maybe escape from Lutas influence.
 },
 {
    title = _ "Jundlina replies",
-   body = jundlina(_
+   body = jundlina(_ "Jundlina", _
 [[Ostur, we have no time. The water rises too fast and if we build the ships on
 shore they will vanish in the sea before they can float. I fear we are doomed!]]
    ),
 },
 {
    title = _"Ostur seems confident",
+   pre_func = function()
+      local lake_field = map:get_field(75,80)
+      p1:reveal_fields(lake_field:region(10))
+      scroll_smoothly_to(lake_field)
+      sleep(200)
+   end,
    body = ostur(_
 [[A friend of mine explored the island on its own and he told me of a big lake
 at the top of the mountain. I suggest we build the ships in this lake and wait
