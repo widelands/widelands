@@ -161,9 +161,10 @@ struct Map :
 
 	// ORed bits for scenario types
 	typedef size_t ScenarioTypes;
-	const static ScenarioTypes NO_SCENARIO = 0;
-	const static ScenarioTypes SP_SCENARIO = 1;
-	const static ScenarioTypes MP_SCENARIO = 2;
+	enum {
+		NO_SCENARIO = 0,
+		SP_SCENARIO = 1,
+		MP_SCENARIO = 2 };
 
 	Map ();
 	virtual ~Map();

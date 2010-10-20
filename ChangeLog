@@ -1,4 +1,8 @@
 ### Build 16 (until now)
+- Changed the way compressed files are generated (maps, savegames) and read.
+  Now it is possible to rename maps and savegames but it is not possible
+  to load maps from version after this change with versions before this change
+- Added a dotted frame border to the mini map.
 - Improved and added a lot new animations for workers!
 - Implemented teamview for allied players
 - Implemented shared kingdom mode, where two or more players play the same

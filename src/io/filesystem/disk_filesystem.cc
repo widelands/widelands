@@ -135,8 +135,9 @@ int32_t RealFSImpl::FindFiles
 		m_root = m_root_save; // reset m_root
 	}
 
+	if (!realpath.empty()) realpath.append("\\");
 	do {
-		results->insert(realpath + '\\' + c_file.name);
+		results->insert(realpath + c_file.name);
 	} while (_findnext(hFile, &c_file) == 0);
 
 	_findclose(hFile);

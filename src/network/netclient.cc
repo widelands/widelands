@@ -181,9 +181,13 @@ void NetClient::run ()
 		d->game = &game;
 		game.set_game_controller(this);
 		// If our player is in shared kingdom mode - set the iabase accordingly.
-		uint8_t const pn =
+		uint8_t pn;
+		if (d->playernum < d->settings.players.size()) {
+		pn =
 			(d->settings.players.at(d->playernum).partner > 0) ?
 			 d->settings.players.at(d->playernum).partner : d->playernum + 1;
+		} else
+			pn = 0;
 		Interactive_GameBase * igb;
 		if (pn > 0)
 			igb =
@@ -736,16 +740,13 @@ void NetClient::handle_packet(RecvPacket & packet)
 			// Get initializations (we have to do this locally, for translations)
 			LuaInterface * lua = create_LuaInterface();
 			std::string path = "tribes/" + info.name;
-			log("Trying to create SubFileSystem:: %s\n", path.c_str());
 			if (g_fs->IsDirectory(path)) {
-				log("This worked. Now registering scripts!\n");
 				lua->register_scripts
 					(g_fs->MakeSubFileSystem(path), "tribe_" + info.name);
 			}
 
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
 				std::string const name = packet.String();
-				log("Got name send: %s\n", name.c_str());
 				boost::shared_ptr<LuaTable> t = lua->run_script
 					("tribe_" + info.name, name);
 				info.initializations.push_back

@@ -295,6 +295,7 @@ function renegade_fortresses()
 end
 
 function mission_complete()
+   local map = wl.Game().map
    while not (p2.defeated and p3.defeated and p4.defeated) do
       sleep(8923)
    end

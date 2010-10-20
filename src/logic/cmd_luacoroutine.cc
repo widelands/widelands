@@ -24,26 +24,33 @@
 #include "scripting/scripting.h"
 #include "upcast.h"
 #include "log.h"
+#include <gamecontroller.h>
+#include "player.h"
 
 namespace Widelands {
 
 void Cmd_LuaCoroutine::execute (Game & game) {
-	log("Cmd_LuaCoroutine::execute\n");
 	try {
 		uint32_t sleeptime;
 		int rv = m_cr->resume(&sleeptime);
-		log(" Called resume: sleeptime: %u\n", sleeptime);
 		if (rv == LuaCoroutine::YIELDED) {
-			log("   yielded!");
 			game.enqueue_command(new Widelands::Cmd_LuaCoroutine(sleeptime, m_cr));
 		} else if (rv == LuaCoroutine::DONE) {
-			log("   done. Deleting Coroutine!");
 			delete m_cr;
 		}
 	} catch (LuaError & e) {
-		throw wexception("%s", e.what());
+		log("Error in Lua Coroutine\n");
+		log("%s\n", e.what());
+		log("Send message to all players and pause game");
+		for (int i = 1; i<=game.map().get_nrplayers(); i++) {
+			Widelands::Message & msg =
+				*new Widelands::Message
+				("Game Logic", game.get_gametime(),
+				 -1, "Lua Coroutine Failed", e.what());
+			game.player(i).add_message(game, msg, true);
+		}
+		game.gameController()->setDesiredSpeed(0);
 	}
-	log(" done with Cmd_LuaCoroutine::execute\n");
 }
 
 #define CMD_LUACOROUTINE_VERSION 1

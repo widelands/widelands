@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-06 20:55+0000\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-16 08:01+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-07 03:34+0000\n"
+"X-Launchpad-Export-Date: 2010-10-17 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: German\n"
 
@@ -23,7 +23,7 @@ msgstr "Ein spezieller Wappenrock für atlanter Soldaten."
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Advanced Shield"
-msgstr "Verbessertes Schild"
+msgstr "Verbesserter Schild"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -47,7 +47,7 @@ msgstr "Rüstungsschmied"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Armoursmithy"
-msgstr "Rüstungsschmied"
+msgstr "Rüstungsschmiede"
 
 #: ../../tribes/atlanteans/conf:27
 msgid "Ashes"
@@ -183,7 +183,7 @@ msgstr "Trägt Waren über deine Straßen."
 msgid "Castle"
 msgstr "Burg"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Burgdorf"
 
@@ -388,11 +388,11 @@ msgstr "Wachhaus"
 msgid "Hammer"
 msgstr "Hammer"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:18
+#: ../../tribes/atlanteans/blackroot_farm/conf:19
 msgid "Harvest blackroot"
 msgstr "Schwarzwurzelernte"
 
-#: ../../tribes/atlanteans/farm/conf:21
+#: ../../tribes/atlanteans/farm/conf:22
 msgid "Harvest corn"
 msgstr "Erntet Mais"
 
@@ -400,7 +400,7 @@ msgstr "Erntet Mais"
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "normales Hauptquartier"
 
@@ -485,8 +485,8 @@ msgid ""
 "Milking tongs are used by the spider breeder, to milk the spiders. They are "
 "produced by the toolsmith."
 msgstr ""
-"Die Melkzange wird vom Spinnenzüchter, zum Melken der Spinnen, verwendet. "
-"Sie wird vom Werkzeugmacher hergestellt."
+"Die Melkzange wird vom Spinnenzüchter zum Melken der Spinnen verwendet. Sie "
+"wird vom Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Mill"
@@ -516,6 +516,10 @@ msgstr "Baut Stein ab."
 msgid "Miner"
 msgstr "Bergarbeiter"
 
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+msgid "Not enough space"
+msgstr "Nicht ausreichend Platz"
+
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
 msgstr "Außenposten"
@@ -540,11 +544,11 @@ msgstr "Bretter"
 msgid "Planks are an important build material of the Atlanteans."
 msgstr "Bretter sind ein wichtiges Baumaterial der Atlanter"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:16
+#: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
 msgstr "Schwarzwurzelanbau"
 
-#: ../../tribes/atlanteans/farm/conf:19
+#: ../../tribes/atlanteans/farm/conf:20
 msgid "Plant corn"
 msgstr "Baut Mais an."
 
@@ -562,13 +566,13 @@ msgstr "Pflanzt Bäume."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
-msgstr "Produziert verbessertes Schild"
+msgstr "Produziert verbesserten Schild"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:26
 msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
 msgstr ""
-"Produziert verbessertes Schild (nur für Abwärtskompatiblität mit "
+"Produziert verbesserten Schild (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
@@ -826,11 +830,11 @@ msgstr "Verhüttet Eisenerz."
 
 #: ../../tribes/atlanteans/smokery/conf:26
 msgid "Smoke fish"
-msgstr "Räucherfisch"
+msgstr "Räuchert Fisch."
 
 #: ../../tribes/atlanteans/smokery/conf:25
 msgid "Smoke meat"
-msgstr "Räucherfleisch"
+msgstr "Räuchert Fleisch."
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Smoked fish"
@@ -855,6 +859,16 @@ msgstr "Räuchert Fleisch und Fisch."
 #: ../../tribes/atlanteans/conf:101
 msgid "Soldier"
 msgstr "Soldat"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Ein paar deiner Startgebäude konnten nicht gesetzt werden, da kein Platz für "
+"sie gefunden wurde. Dadurch bist du benachteiligt und solltest in Betracht "
+"ziehen, die Karte noch einmal mit einer anderen Startbedingung neuzustarten."
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Spiderbreeder"
@@ -971,16 +985,17 @@ msgid ""
 "This corn is the base of the fine cornflour, that every atlantian baker "
 "needs for a good bread."
 msgstr ""
-"Mais ist die Basis für Maismehl, was wiederum von jedem atlanter Bäcker "
-"verwandt wird um Brot zu backen."
+"Mais ist die Basis für Maismehl, das wiederum von jedem atlanter Bäcker "
+"benötigt wird, um Brot zu backen."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
 "This hook pole is used by the smoker to hang up all the meat and fish to the "
 "top of the smoke-house. It is created by the toolsmith."
 msgstr ""
-"Die Hakenstange wird vom Räucherer verwendet um das Fleisch und den Fisch in "
-"die Spitze der Räucherei zu hängen. Sie wird vom Werkzeugmacher hergestellt."
+"Die Hakenstange wird vom Räucherer verwendet, um das Fleisch und den Fisch "
+"in die Spitze der Räucherei zu hängen. Sie wird vom Werkzeugmacher "
+"hergestellt."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid "This is an advanced trident for more experienced soldiers."
@@ -1051,7 +1066,7 @@ msgstr ""
 msgid ""
 "This wonderful diamonds are used for some exclusive buildings and tools."
 msgstr ""
-"Diese wundervollen Diamanten werden beim Bau einiger, exklusiver Gebäude und "
+"Diese wundervollen Diamanten werden beim Bau einiger exklusiver Gebäude und "
 "Werkzeuge verwandt."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
@@ -1071,7 +1086,7 @@ msgid ""
 "To make the fine atlantian steel a hot fire is needed. But a fire of wood "
 "isn't hot enough -this coal brings the needed heat."
 msgstr ""
-"Um den vorzüglichen atlantanischen Stahl herzustellen wird ein heißes Feuer "
+"Um den vorzüglichen atlantischen Stahl herzustellen, wird ein heißes Feuer "
 "benötigt, doch ein Holzfeuer ist nicht heiß genug - diese Kohle bringt die "
 "benötigte Hitze."
 
@@ -1228,7 +1243,7 @@ msgid ""
 "places, for example to make bread."
 msgstr ""
 "Wasser ist der Hauptbestandteil des Lebens! Es wird für viele Dinge, wie zum "
-"Beispiel das Backen von Brot, verwandt."
+"Beispiel zum Brotbacken, verwandt."
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Weapon Smithy"
@@ -1264,14 +1279,14 @@ msgstr "Holzfällerhütte"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:27
 #: ../../tribes/atlanteans/bakery/conf:21
-#: ../../tribes/atlanteans/blackroot_farm/conf:20
+#: ../../tribes/atlanteans/blackroot_farm/conf:21
 #: ../../tribes/atlanteans/burners_house/conf:19
 #: ../../tribes/atlanteans/coalmine/conf:21
 #: ../../tribes/atlanteans/crystalmine/conf:26
-#: ../../tribes/atlanteans/farm/conf:23
+#: ../../tribes/atlanteans/farm/conf:24
 #: ../../tribes/atlanteans/fish_breeders_house/conf:17
 #: ../../tribes/atlanteans/fishers_house/conf:16
-#: ../../tribes/atlanteans/foresters_house/conf:15
+#: ../../tribes/atlanteans/foresters_house/conf:16
 #: ../../tribes/atlanteans/goldmine/conf:22
 #: ../../tribes/atlanteans/goldweaver/conf:19
 #: ../../tribes/atlanteans/horsefarm/conf:22

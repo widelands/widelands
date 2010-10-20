@@ -38,8 +38,10 @@ ZipFilesystem::ZipFilesystem(std::string const & zipfile)
 m_state      (STATE_IDLE),
 m_zipfile    (0),
 m_unzipfile  (0),
+m_oldzip     (false),
 m_zipfilename(zipfile),
-m_basename   (FS_Filename(zipfile.c_str()))
+m_basenamezip(FS_Filename(zipfile.c_str())),
+m_basename   ()
 {
 	// TODO: check OS permissions on whether the file is writable
 }
@@ -79,14 +81,16 @@ int32_t ZipFilesystem::FindFiles
 	// If you need something else, implement a proper glob() here. I do not want
 	// to! -- Holger
 	assert(pattern == "*");
-
-	std::string path;
 	assert(path_in.size()); //  prevent invalid read below
-	if (path_in[0] != '/')
-		path = '/';
+
+	std::string path = m_basename;
+	if (*path_in.begin() != '/')
+		path += "/";
 	path += path_in;
 	if (*path.rbegin() != '/')
 		path += '/';
+	if (*path.begin() == '/')
+		path = path.substr(1);
 
 	unzCloseCurrentFile(m_unzipfile);
 	unzGoToFirstFile(m_unzipfile);
@@ -98,7 +102,7 @@ int32_t ZipFilesystem::FindFiles
 			(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
 			 0, 0, 0, 0);
 
-		std::string complete_filename = &filename_inzip[m_basename.size()];
+		std::string complete_filename = strip_basename(filename_inzip);
 		std::string filename = FS_Filename(complete_filename.c_str());
 		std::string filepath =
 			complete_filename.substr
@@ -107,13 +111,14 @@ int32_t ZipFilesystem::FindFiles
 		//  FIXME Something strange is going on with regard to the leading slash!
 		//  FIXME This is just an ugly workaround and does not solve the real
 		//  FIXME problem (which remains undiscovered)
-		if (('/' + path == filepath || path == filepath) && filename.size())
-			results->insert(complete_filename);
+		if
+			(('/' + path == filepath || path == filepath || path.length() == 1)
+			 && filename.size())
+		results->insert(complete_filename.substr(m_basename.size()));
 
 		if (unzGoToNextFile(m_unzipfile) == UNZ_END_OF_LIST_OF_FILE)
 			break;
 	}
-
 	return results->size();
 }
 
@@ -121,52 +126,40 @@ int32_t ZipFilesystem::FindFiles
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::FileExists(std::string const & path_in) {
+bool ZipFilesystem::FileExists(std::string const & path) {
 	try {
 		m_OpenUnzip(); //  FIXME check return value
 	} catch (...) {
 		return false;
 	}
-
 	unzGoToFirstFile(m_unzipfile);
 	unz_file_info file_info;
 	char filename_inzip[256];
 	memset(filename_inzip, ' ', 256);
 
-	std::string path;
-	assert(path_in.size()); //  prevent invalid read below
-	if (path_in[0] != '/')
-		path = '/';
-	path += path_in;
+	std::string path_in = m_basename + "/" + path;
+
+	if (*path_in.begin() == '/')
+		path_in = path_in.substr(1);
+
+	assert(path_in.size());
 
 	for (;;) {
 		unzGetCurrentFileInfo
 			(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
 			 0, 0, 0, 0);
 
-		/* This is a short hack to try fixing Bug #593356.
-		 * If the savename is copied m_basename might be longer than
-		 * the original filename + the path and complete_filename is
-		 * beyond the end of the string.
-		 * In the function is also the cause for Bug #536189
-		 *
-		 * ToDo: This fuction should strip away the first element of the 
-		 *       path instead just using the zip filename
-		 */
-		if ( m_basename.size() >= strlen(filename_inzip))
-			break;
+		std::string complete_filename = strip_basename(filename_inzip);
 
-		std::string complete_filename = &filename_inzip[m_basename.size()];
 		if (*complete_filename.rbegin() == '/')
 			complete_filename.resize(complete_filename.size() - 1);
 
-		if (path == complete_filename)
+		if (path_in == complete_filename)
 			return true;
 
 		if (unzGoToNextFile(m_unzipfile) == UNZ_END_OF_LIST_OF_FILE)
 			break;
 	}
-
 	return false;
 }
 
@@ -200,8 +193,13 @@ FileSystem & ZipFilesystem::MakeSubFileSystem(std::string const & path) {
 
 	m_Close();
 
+	std::string localpath = path;
+
+	if (*localpath.begin() == '/')
+		localpath = localpath.substr(1);
+
 	ZipFilesystem & newfs = *new ZipFilesystem(m_zipfilename);
-	newfs.m_basename = m_basename + '/' + path;
+	newfs.m_basename = m_basename + "/" + localpath;
 
 	return newfs;
 }
@@ -226,8 +224,14 @@ FileSystem & ZipFilesystem::CreateSubFileSystem
 
 	m_Close();
 
+	std::string localpath = path;
+
+	if (*localpath.begin() == '/')
+		localpath = localpath.substr(1);
+
 	ZipFilesystem & newfs = *new ZipFilesystem(*this);
-	newfs.m_basename = m_basename + '/' + path;
+
+	newfs.m_basename = m_basename + "/" + localpath;
 
 	return newfs;
 }
@@ -273,17 +277,18 @@ void ZipFilesystem::MakeDirectory(std::string const & dirname) {
 	zi.internal_fa = 0;
 	zi.external_fa = 0;
 
-	std::string complete_file = m_basename;
-	complete_file            += '/';
-	complete_file            += dirname;
+	std::string complete_filename = m_basename;
+	complete_filename += "/";
+	complete_filename += dirname;
+	
 	assert(dirname.size());
-	if (*complete_file.rbegin() != '/')
-		complete_file += '/';
+	if (*complete_filename.rbegin() != '/')
+		complete_filename += '/';
 
 	switch
 		(zipOpenNewFileInZip3
 		 	(m_zipfile,
-		 	 complete_file.c_str(),
+			 complete_filename.c_str(),
 		 	 &zi,
 		 	 0, 0, 0, 0, 0 /* comment*/,
 		 	 Z_DEFLATED,
@@ -299,10 +304,10 @@ void ZipFilesystem::MakeDirectory(std::string const & dirname) {
 		break;
 	case ZIP_ERRNO:
 		throw File_error
-			("ZipFilesystem::MakeDirectory", complete_file, strerror(errno));
+			("ZipFilesystem::MakeDirectory", complete_filename, strerror(errno));
 	default:
 		throw File_error
-			("ZipFilesystem::MakeDirectory", complete_file);
+			("ZipFilesystem::MakeDirectory", complete_filename);
 	}
 
 	zipCloseFileInZip(m_zipfile);
@@ -381,11 +386,12 @@ void ZipFilesystem::Write
 	zi.internal_fa = 0;
 	zi.external_fa = 0;
 
+	std::string complete_filename = m_basename + "/" + fname;
+	
 	//  create file
-	std::string const complete_file = m_basename + '/' + fname;
 	switch
 		(zipOpenNewFileInZip3
-		 	(m_zipfile, complete_file.c_str(), &zi,
+			(m_zipfile, complete_filename.c_str(), &zi,
 		 	 0, 0, 0, 0, 0 /* comment*/,
 		 	 Z_DEFLATED,
 		 	 Z_BEST_COMPRESSION, 0,
@@ -396,7 +402,7 @@ void ZipFilesystem::Write
 		break;
 	default:
 		throw ZipOperation_error
-			("ZipFilesystem::Write", complete_file, m_zipfilename);
+			("ZipFilesystem::Write", complete_filename, m_zipfilename);
 	}
 
 	switch (zipWriteInFileInZip (m_zipfile, data, length)) {
@@ -404,10 +410,10 @@ void ZipFilesystem::Write
 		break;
 	case ZIP_ERRNO:
 		throw File_error
-			("ZipFilesystem::Write", complete_file, strerror(errno));
+			("ZipFilesystem::Write", complete_filename, strerror(errno));
 	default:
 		throw File_error
-			("ZipFilesystem::Write", complete_file);
+			("ZipFilesystem::Write", complete_filename);
 	}
 
 	zipCloseFileInZip(m_zipfile);
@@ -481,3 +487,24 @@ void ZipFilesystem::Rename(std::string const &, std::string const &) {
 unsigned long long ZipFilesystem::DiskSpace() {
 	return 0; //  FIXME
 }
+
+std::string ZipFilesystem::strip_basename(std::string filename)
+{
+
+	if(filename.compare(0, m_basenamezip.length(), m_basenamezip) == 0) 
+	{
+		// filename contains the name of the zip file as first element. This means
+		// this is an old zip file where all data were in a directory named as the
+		// file inside the zip file.
+		// return the filename without the first element
+		m_oldzip = true;
+		return filename.substr(m_basenamezip.length() + 1);
+	}
+
+	// seems to be a new zipfile without directory or a old zipfile was renamed
+	m_oldzip = false;
+	if (*filename.begin() == '/')
+		return filename.substr(1);
+	return filename;
+}
+
