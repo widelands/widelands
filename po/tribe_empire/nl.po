@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-30 23:31+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-20 00:26+0000\n"
+"Last-Translator: fireprog <daandeweerdt@gmail.com>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-10-20 04:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -140,7 +140,7 @@ msgid "Castle"
 msgstr "Kasteel"
 
 #: ../../tribes/empire/conf:204
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Kasteeldorp"
 
@@ -379,7 +379,7 @@ msgid "Headquarters"
 msgstr "Hoofdkwartier"
 
 #: ../../tribes/empire/conf:203
-#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Gemiddeld hoofdkwartier"
 
@@ -550,6 +550,10 @@ msgstr ""
 #: ../../tribes/empire/conf:117
 msgid "Miner"
 msgstr "Mijnwerker"
+
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:117
+msgid "Not enough space"
+msgstr ""
 
 #: ../../tribes/empire/conf:144
 msgid "Outpost"
@@ -820,6 +824,13 @@ msgstr "Smelt ijzer."
 #: ../../tribes/empire/conf:100
 msgid "Soldier"
 msgstr "Soldaat"
+
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:118
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
 
 #: ../../tribes/empire/conf:121
 msgid "Stonemason"
