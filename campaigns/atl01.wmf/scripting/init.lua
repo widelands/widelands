@@ -128,6 +128,7 @@ function build_warehouse_and_horsefarm()
             break
          end
       end
+      sleep(3213)
    end
    -- Has been started from the very beginning
    expand_objective.done = true
