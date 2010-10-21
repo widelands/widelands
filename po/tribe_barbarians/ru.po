@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-20 00:16+0000\n"
+"PO-Revision-Date: 2010-10-21 02:07+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-20 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-10-21 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -272,23 +272,23 @@ msgstr "Оранжерея"
 
 #: ../../tribes/barbarians/conf:33
 msgid "Field harvested"
-msgstr "Сжатое поле"
+msgstr "Убранное поле"
 
 #: ../../tribes/barbarians/conf:29
 msgid "Field medium"
-msgstr "Среднее поле"
+msgstr "Молодая пшеница"
 
 #: ../../tribes/barbarians/conf:32
 msgid "Field ripe"
-msgstr "Спелое поле"
+msgstr "Созревшая пшеница"
 
 #: ../../tribes/barbarians/conf:30
 msgid "Field small"
-msgstr "Малое поле"
+msgstr "Всходы пшеницы"
 
 #: ../../tribes/barbarians/conf:31
 msgid "Field tiny"
-msgstr "Крошечное поле"
+msgstr "Засеянное поле"
 
 #: ../../tribes/barbarians/conf:67
 msgid "Fire Tongs"
@@ -332,7 +332,7 @@ msgstr "Лён - прекрасное растение, используемое
 
 #: ../../tribes/barbarians/conf:34
 msgid "Flax medium"
-msgstr "Средний лён"
+msgstr "Молодой лён"
 
 #: ../../tribes/barbarians/conf:37
 msgid "Flax ripe"
@@ -340,11 +340,11 @@ msgstr "Созревший лён"
 
 #: ../../tribes/barbarians/conf:35
 msgid "Flax small"
-msgstr "Малый лён"
+msgstr "Всходы льна"
 
 #: ../../tribes/barbarians/conf:36
 msgid "Flax tiny"
-msgstr "Крошечный лён"
+msgstr "Засеянный лён"
 
 #: ../../tribes/barbarians/conf:146
 #: ../../tribes/barbarians/conf:161
@@ -413,15 +413,15 @@ msgstr "Молоток"
 
 #: ../../tribes/barbarians/fernery/conf:20
 msgid "Harvest flax"
-msgstr "собирать лён"
+msgstr "собрать урожай льна"
 
 #: ../../tribes/barbarians/fernery/conf:22
 msgid "Harvest reed"
-msgstr "собирать тростник"
+msgstr "собрать урожай тростника"
 
 #: ../../tribes/barbarians/farm/conf:19
 msgid "Harvest wheat"
-msgstr "жать пшеницу"
+msgstr "собрать урожай пшеницы"
 
 #: ../../tribes/barbarians/conf:166
 #: ../../tribes/barbarians/conf:167
@@ -589,15 +589,15 @@ msgstr "Лепёшка"
 
 #: ../../tribes/barbarians/fernery/conf:16
 msgid "Plant flax"
-msgstr "сажать лён"
+msgstr "посадить лён"
 
 #: ../../tribes/barbarians/fernery/conf:18
 msgid "Plant reed"
-msgstr "сажать тростник"
+msgstr "посадить тростник"
 
 #: ../../tribes/barbarians/farm/conf:17
 msgid "Plant wheat"
-msgstr "сеять пшеницу"
+msgstr "посадить пшеницу"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
@@ -628,11 +628,11 @@ msgstr "сделать секиру"
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr "сделать бронсовый топор"
+msgstr "сделать бронзовый топор"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr "сделать кузнечные клещи"
+msgstr "сделать щипцы"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
@@ -640,7 +640,7 @@ msgstr "сделать удочку"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr "сделать молот"
+msgstr "сделать молоток"
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
@@ -648,19 +648,19 @@ msgstr "сделать шлем"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr "сделать охотничьё копьё"
+msgstr "сделать копьё охотника"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr "сделать кухоную утварь"
+msgstr "сделать кухонную утварь"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr "сделать боевую маску"
+msgstr "сделать защитную маску"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr "Приготовить еду"
+msgstr "приготовить сытный обед"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
@@ -670,7 +670,7 @@ msgstr "сделать кирку"
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr "Приготовить рацион"
+msgstr "приготовить паёк"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
@@ -688,7 +688,7 @@ msgstr "сделать лопату"
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr "Приготовить закуску"
+msgstr "приготовить обед"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
@@ -761,7 +761,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:38
 msgid "Reed medium"
-msgstr "Средний тростник"
+msgstr "Молодой тростник"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Reed ripe"
@@ -769,11 +769,11 @@ msgstr "Созревший тростник"
 
 #: ../../tribes/barbarians/conf:39
 msgid "Reed small"
-msgstr "Малый тростник"
+msgstr "Всходы тростника"
 
 #: ../../tribes/barbarians/conf:40
 msgid "Reed tiny"
-msgstr "Маленький тростник"
+msgstr "Засеянный тростник"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Resource indicator coal little"
@@ -857,11 +857,11 @@ msgstr "Малая башня"
 
 #: ../../tribes/barbarians/smelting_works/conf:25
 msgid "Smelt gold"
-msgstr "Плавить золото"
+msgstr "выплавить золото"
 
 #: ../../tribes/barbarians/smelting_works/conf:24
 msgid "Smelt iron"
-msgstr "плавить железо"
+msgstr "выплавить железо"
 
 #: ../../tribes/barbarians/conf:128
 msgid "Smelter"
@@ -1079,121 +1079,121 @@ msgstr "Брёвна - основной строительный материа�
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
-msgstr "Улучшает навыки атаки 0"
+msgstr "улучшить навык атаки 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:38
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить атаку солдат 0 (только для поддержки старых сохранений игры "
+"улучшить навык атаки 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
-msgstr "Улучшает навыки атаки 1"
+msgstr "улучшить навык атаки 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:40
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить атаку солдат 1 (только для поддержки старых сохранений игры "
+"улучшить навык атаки 1 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
-msgstr "Улучшает навыки атаки 2"
+msgstr "улучшить навык атаки 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:42
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить атаку солдат 2 (только для поддержки старых сохранений игры "
+"улучшить навык атаки 2 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
-msgstr "Улучшает навыки атаки 3"
+msgstr "улучшить навык атаки 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить атаку солдат 3 (только для поддержки старых сохранений игры "
+"улучшить навык атаки 3 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr "Улучшает навыки атаки 4"
+msgstr "улучшить навык атаки 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить атаку солдат 4 (только для поддержки старых сохранений игры "
+"улучшить навык атаки 4 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
-msgstr "Улучшить навык уклонения: 0"
+msgstr "улучшить навык уклонения 0"
 
 #: ../../tribes/barbarians/battlearena/conf:27
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Улучшить уклончивость солдат 0 (только для поддержки старых сохранений игры "
+"улучшить навык уклонения 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/barbarians/battlearena/conf:28
 msgid "Upgrade soldier evade 1"
-msgstr "Улучшить навык уклонения: 1"
+msgstr "улучшить навык уклонения 1"
 
 #: ../../tribes/barbarians/battlearena/conf:29
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Улучшить уклончивость солдат 1 (только для поддержки старых сохранений игры "
+"улучшить навык уклонения 1 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Улучшить жизнестойкость солдат 0"
+msgstr "улучшить уровень здоровья 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить жизнестойкость солдат 0 (только для поддержки старых сохранений "
-"игры (build13))"
+"улучшить уровень здоровья 0 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Улучшить жизнестойкость солдат 1"
+msgstr "улучшить уровень здоровья 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить жизнестойкость солдат 1 (только для поддержки старых сохранений "
-"игры (build13))"
+"улучшить уровень здоровья 1 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Улучшить жизнестойкость солдат 2"
+msgstr "улучшить уровень здоровья 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить жизнестойкость солдат 2 (только для поддержки старых сохранений "
-"игры (build13))"
+"улучшить уровень здоровья 2 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/barbarians/conf:94
 msgid "War Helmet"
@@ -1304,7 +1304,7 @@ msgstr "Лесопилка"
 #: ../../tribes/barbarians/weaving-mill/conf:20
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
-msgstr "Работа"
+msgstr "работа"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."

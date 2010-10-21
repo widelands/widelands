@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-20 01:41+0000\n"
+"PO-Revision-Date: 2010-10-21 03:09+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-20 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-10-21 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -251,23 +251,23 @@ msgstr "Рубит деревья."
 
 #: ../../tribes/empire/conf:32
 msgid "Field harvested"
-msgstr "Убраное поле"
+msgstr "Убранное поле"
 
 #: ../../tribes/empire/conf:28
 msgid "Field medium"
-msgstr "Среднее поле"
+msgstr "Молодая пшеница"
 
 #: ../../tribes/empire/conf:31
 msgid "Field ripe"
-msgstr "Спелое поле"
+msgstr "Созревшая пшеница"
 
 #: ../../tribes/empire/conf:29
 msgid "Field small"
-msgstr "Малое поле"
+msgstr "Всходы пшеницы"
 
 #: ../../tribes/empire/conf:30
 msgid "Field tiny"
-msgstr "Крошечное поле"
+msgstr "Засеянное поле"
 
 #: ../../tribes/empire/conf:60
 msgid "Fire Tongs"
@@ -369,11 +369,11 @@ msgstr "Молоток"
 
 #: ../../tribes/empire/vineyard/conf:21
 msgid "Harvest vine"
-msgstr "Собирать виноград"
+msgstr "собрать урожай винограда"
 
 #: ../../tribes/empire/farm/conf:20
 msgid "Harvest wheat"
-msgstr "Собрать пшеницу"
+msgstr "собрать урожай пшеницы"
 
 #: ../../tribes/empire/conf:162
 msgid "Headquarters"
@@ -525,23 +525,24 @@ msgstr "Мелет пшеницу в муку."
 #: ../../tribes/empire/marblemine/conf:22
 #: ../../tribes/empire/quarry/conf:19
 msgid "Mine marble"
-msgstr "Добывает мрамор"
+msgstr "добыть мрамор"
 
 #: ../../tribes/empire/marblemine/conf:23
 #: ../../tribes/empire/quarry/conf:20
 msgid "Mine marble (only for compatibility with old savegames (build13))"
-msgstr "Добывает мрамор"
+msgstr ""
+"добыть мрамор (только для совместимости со старыми сохранениями (build13))"
 
 #: ../../tribes/empire/marblemine/conf:24
 #: ../../tribes/empire/quarry/conf:17
 msgid "Mine stone"
-msgstr "Добывать камень"
+msgstr "добыть камень"
 
 #: ../../tribes/empire/marblemine/conf:25
 #: ../../tribes/empire/quarry/conf:18
 msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
-"Добывать камень (только для поддержки старых сохранений игры (build13))"
+"добыть камень (только для совместимости со старыми сохранениями (build13))"
 
 #: ../../tribes/empire/conf:117
 msgid "Miner"
@@ -573,11 +574,11 @@ msgstr "Свиноферма"
 
 #: ../../tribes/empire/vineyard/conf:19
 msgid "Plant vine"
-msgstr "Сажать виноград"
+msgstr "посадить виноград"
 
 #: ../../tribes/empire/farm/conf:18
 msgid "Plant wheat"
-msgstr "Посадить пшеницу"
+msgstr "посадить пшеницу"
 
 #: ../../tribes/empire/farmer/conf:2
 msgid "Plants fields."
@@ -593,15 +594,15 @@ msgstr "Латы"
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
-msgstr "Сделать улучшенную пику"
+msgstr "сделать длинную пику"
 
 #: ../../tribes/empire/armoursmithy/conf:27
 msgid "Produce armour"
-msgstr "Производит броню"
+msgstr "сделать кирасу"
 
 #: ../../tribes/empire/toolsmithy/conf:44
 msgid "Produce axe"
-msgstr "Производит топор"
+msgstr "сделать топор"
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -609,67 +610,67 @@ msgstr "сделать лопатку пекаря"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce basket"
-msgstr "Сделать корзину"
+msgstr "сделать корзину"
 
 #: ../../tribes/empire/armoursmithy/conf:28
 msgid "Produce chain armour"
-msgstr "Создать кольчугу"
+msgstr "сделать кольчугу"
 
 #: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fire tongs"
-msgstr "Создать кузнечные клещи"
+msgstr "сделать щипцы"
 
 #: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce fishing rod"
-msgstr "Создать удочку"
+msgstr "сделать удочку"
 
 #: ../../tribes/empire/toolsmithy/conf:36
 msgid "Produce hammer"
-msgstr "Создать молот"
+msgstr "сделать молоток"
 
 #: ../../tribes/empire/weaponsmithy/conf:32
 msgid "Produce heavy lance"
-msgstr "Сделать тяжелую пику"
+msgstr "сделать тяжёлую пику"
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
-msgstr "Производит шлем"
+msgstr "сделать шлем"
 
 #: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce hunting spear"
-msgstr "Создать охотничьё копьё"
+msgstr "сделать копьё охотника"
 
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce kitchen tools"
-msgstr "Создать кухоную утварь"
+msgstr "сделать кухонную утварь"
 
 #: ../../tribes/empire/weaponsmithy/conf:30
 msgid "Produce lance"
-msgstr "Сделать пику"
+msgstr "сделать пику"
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
-msgstr "Создать кирку"
+msgstr "сделать кирку"
 
 #: ../../tribes/empire/armoursmithy/conf:29
 msgid "Produce plate armour"
-msgstr "Создать пластинчатую броню"
+msgstr "сделать латы"
 
 #: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce saw"
-msgstr "Создать пилу"
+msgstr "сделать пилу"
 
 #: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce scythe"
-msgstr "Создать косу"
+msgstr "сделать косу"
 
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce shovel"
-msgstr "Создать лопату"
+msgstr "сделать лопату"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
-msgstr "Сделать деревянную пику"
+msgstr "сделать деревянное копьё"
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
@@ -797,11 +798,11 @@ msgstr "Малая башня"
 
 #: ../../tribes/empire/smelting_works/conf:23
 msgid "Smelt gold"
-msgstr "Плавить золото"
+msgstr "выплавить золото"
 
 #: ../../tribes/empire/smelting_works/conf:22
 msgid "Smelt iron"
-msgstr "Плавить железо"
+msgstr "выплавить железо"
 
 #: ../../tribes/empire/conf:120
 msgid "Smelter"
@@ -1039,123 +1040,123 @@ msgstr "Брёвна - один из важнейших строительных
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
-msgstr "Улучшить атаку солдат 0"
+msgstr "улучшить навык атаки 0"
 
 #: ../../tribes/empire/trainingscamp/conf:40
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить атаку солдат 0 (только для поддержки старых сохранений игры "
+"улучшить навык атаки 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:41
 msgid "Upgrade soldier attack 1"
-msgstr "Улучшить атаку солдат 1"
+msgstr "улучшить навык атаки 1"
 
 #: ../../tribes/empire/trainingscamp/conf:42
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить атаку солдат 1 (только для поддержки старых сохранений игры "
+"улучшить навык атаки 1 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:43
 msgid "Upgrade soldier attack 2"
-msgstr "Улучшить атаку солдат 2"
+msgstr "улучшить навык атаки 2"
 
 #: ../../tribes/empire/trainingscamp/conf:44
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить атаку солдат 2 (только для поддержки старых сохранений игры "
+"улучшить навык атаки 2 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:45
 msgid "Upgrade soldier attack 3"
-msgstr "Улучшить атаку солдат 3"
+msgstr "улучшить навык атаки 3"
 
 #: ../../tribes/empire/trainingscamp/conf:46
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить атаку солдат 3 (только для поддержки старых сохранений игры "
+"улучшить навык атаки 3 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/empire/arena/conf:14
 #: ../../tribes/empire/colosseum/conf:28
 msgid "Upgrade soldier evade 0"
-msgstr "Улучшить уклончивость солдат 0"
+msgstr "улучшить навык уклонения 0"
 
 #: ../../tribes/empire/arena/conf:15
 #: ../../tribes/empire/colosseum/conf:29
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Улучшить уклончивость солдат 0 (только для поддержки старых сохранений игры "
+"улучшить навык уклонения 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/empire/colosseum/conf:30
 msgid "Upgrade soldier evade 1"
-msgstr "Улучшить уклончивость солдат 1"
+msgstr "улучшить навык уклонения 1"
 
 #: ../../tribes/empire/colosseum/conf:31
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Улучшить уклончивость солдат 1 (только для поддержки старых сохранений игры "
+"улучшить навык уклонения 1 (только для совместимости со старыми сохранениями "
 "(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Улучшить жизнестойкость солдат 0"
+msgstr "улучшить уровень здоровья 0"
 
 #: ../../tribes/empire/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить жизнестойкость солдат 0 (только для поддержки старых сохранений "
-"игры (build13))"
+"улучшить уровень здоровья 0 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Улучшить жизнестойкость солдат 1"
+msgstr "улучшить уровень здоровья 1"
 
 #: ../../tribes/empire/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить жизнестойкость солдат 1 (только для поддержки старых сохранений "
-"игры (build13))"
+"улучшить уровень здоровья 1 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Улучшить жизнестойкость солдат 2"
+msgstr "улучшить уровень здоровья 2"
 
 #: ../../tribes/empire/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить жизнестойкость солдат 2 (только для поддержки старых сохранений "
-"игры (build13))"
+"улучшить уровень здоровья 2 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier hitpoints 3"
-msgstr "Улучшить жизнестойкость солдат 3"
+msgstr "улучшить уровень здоровья 3"
 
 #: ../../tribes/empire/trainingscamp/conf:54
 msgid ""
 "Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить жизнестойкость солдат 3 (только для поддержки старых сохранений "
-"игры (build13))"
+"улучшить уровень здоровья 3 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/empire/conf:126
 msgid "Vine Farmer"
@@ -1163,7 +1164,7 @@ msgstr "Виноградарь"
 
 #: ../../tribes/empire/conf:44
 msgid "Vine medium"
-msgstr "Средняя винная лоза"
+msgstr "Молодой виноград"
 
 #: ../../tribes/empire/conf:47
 msgid "Vine ripe"
@@ -1171,11 +1172,11 @@ msgstr "Спелый виноград"
 
 #: ../../tribes/empire/conf:45
 msgid "Vine small"
-msgstr "Малая винная лоза"
+msgstr "Цветущий виноград"
 
 #: ../../tribes/empire/conf:46
 msgid "Vine tiny"
-msgstr "Маленькая винная лоза"
+msgstr "Саженцы винограда"
 
 #: ../../tribes/empire/conf:198
 msgid "Vineyard"
@@ -1297,7 +1298,7 @@ msgstr ""
 #: ../../tribes/empire/well/conf:16
 #: ../../tribes/empire/winery/conf:20
 msgid "Work"
-msgstr "Работа"
+msgstr "работа"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
