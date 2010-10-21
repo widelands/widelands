@@ -52,6 +52,8 @@ struct Interactive_Player : public Interactive_GameBase
 		 bool              scenario,
 		 bool              multiplayer);
 
+	~Interactive_Player();
+
 	void start();
 
 	void toggle_chat        ();

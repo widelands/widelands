@@ -73,6 +73,8 @@ stock
 	 _("Stock"))
 {
 #define INIT_BTN_HOOKS(registry, btn)                                        \
+ assert (not registry.onCreate);                                             \
+ assert (not registry.onDelete);                                             \
  registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
  registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
@@ -89,4 +91,22 @@ stock
 
 	if (get_usedefaultpos())
 		center_to_parent();
+}
+
+GameMainMenu::~GameMainMenu() {
+	// We need to remove these callbacks because the opened window might
+	// live longer than 'this' window, and thus the buttons. The assertions
+	// are safeguards in case somewhere else in the code someone would
+	// overwrite our hooks.
+
+#define DEINIT_BTN_HOOKS(registry, btn)                                                \
+ assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed,&btn, true));  \
+ assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed,&btn, false)); \
+ registry.onCreate = 0;                                                                \
+ registry.onDelete = 0;                                                                \
+
+	DEINIT_BTN_HOOKS(m_windows.general_stats, general_stats)
+	DEINIT_BTN_HOOKS(m_windows.ware_stats, ware_stats)
+	DEINIT_BTN_HOOKS(m_windows.building_stats, building_stats)
+	DEINIT_BTN_HOOKS(m_windows.stock, stock)
 }

@@ -262,6 +262,27 @@ m_toggle_help
 #endif
 }
 
+Interactive_Player::~Interactive_Player() {
+	// We need to remove these callbacks because the opened window might
+	// (theoretically) live longer than 'this' window, and thus the
+	// buttons. The assertions are safeguards in case somewhere else in the
+	// code someone would overwrite our hooks. 
+
+#define DEINIT_BTN_HOOKS(registry, btn)                                                \
+ assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed,&btn, true));  \
+ assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed,&btn, false)); \
+ registry.onCreate = 0;                                                                \
+ registry.onDelete = 0;                                                                \
+
+	DEINIT_BTN_HOOKS(m_chat, m_toggle_chat)
+	DEINIT_BTN_HOOKS(m_options, m_toggle_options_menu)
+	DEINIT_BTN_HOOKS(m_statisticsmenu, m_toggle_statistics_menu)
+	DEINIT_BTN_HOOKS(minimap_registry(), m_toggle_minimap)
+	DEINIT_BTN_HOOKS(m_objectives, m_toggle_objectives)
+	DEINIT_BTN_HOOKS(m_encyclopedia, m_toggle_help)
+	DEINIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
+}
+
 
 /*
 ===============
@@ -338,6 +359,8 @@ void Interactive_Player::postload()
 	
 	// Connect buildhelp button to reflect build help state. Needs to be
 	// done here rather than in the constructor as the map is not present then.
+	// This code assumes that the Interactive_Player object lives longer than
+	// the overlay_manager. Otherwise remove the hook in the deconstructor. 
 	egbase().map().overlay_manager().onBuildHelpToggle =
 		boost::bind(&UI::Button::set_perm_pressed,&m_toggle_buildhelp,_1);
 	m_toggle_buildhelp.set_perm_pressed(buildhelp());
