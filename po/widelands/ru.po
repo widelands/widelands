@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-10-20 08:07+0000\n"
-"Last-Translator: Denis <Unknown>\n"
+"PO-Revision-Date: 2010-10-22 04:22+0000\n"
+"Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-10-21 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-10-22 04:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -369,7 +369,7 @@ msgstr "не удалось"
 
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:399
 msgid "completed"
-msgstr "готово"
+msgstr "выполнено"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:399
 msgid "skipped"
@@ -1824,7 +1824,7 @@ msgstr "Пожалуйста, введите пароль!"
 
 #: ../../src/wui/buildingwindow.cc:187
 msgid "Continue"
-msgstr "Далее"
+msgstr "Возобновить"
 
 #: ../../src/wui/buildingwindow.cc:202
 #, c-format
@@ -1849,7 +1849,7 @@ msgstr "Показать рабочую область"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
-msgstr ""
+msgstr "Солдаты"
 
 #: ../../src/wui/minimap.cc:138 ../../src/ui_fsmenu/netsetup_lan.cc:115
 msgid "Map"
@@ -1901,11 +1901,11 @@ msgstr "Товары"
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Worker"
-msgstr "Рабочий"
+msgstr "Работник"
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
-msgstr ""
+msgstr "Опыт"
 
 #: ../../src/wui/productionsitewindow.cc:73
 msgid "Next Level"
@@ -1913,15 +1913,15 @@ msgstr "Следующий уровень"
 
 #: ../../src/wui/productionsitewindow.cc:140
 msgid "(vacant)"
-msgstr ""
+msgstr "(вакантно)"
 
 #: ../../src/wui/productionsitewindow.cc:140
 msgid "(coming)"
-msgstr ""
+msgstr "(идёт)"
 
 #: ../../src/wui/soldierlist.cc:338 ../../src/wui/soldierlist.cc:358
 msgid "Click soldier to send away"
-msgstr ""
+msgstr "Щёлкните чтобы отозвать солдата"
 
 #: ../../src/wui/general_statistics_menu.cc:48
 #: ../../src/wui/game_main_menu.cc:47
@@ -1938,7 +1938,7 @@ msgstr "Производительность"
 
 #: ../../src/wui/general_statistics_menu.cc:188
 msgid "Casualties"
-msgstr ""
+msgstr "Потери солдат"
 
 #: ../../src/wui/general_statistics_menu.cc:194
 msgid "Kills"
@@ -1946,15 +1946,15 @@ msgstr "Убито"
 
 #: ../../src/wui/general_statistics_menu.cc:200
 msgid "Military buildings lost"
-msgstr ""
+msgstr "Потеряно военных строений"
 
 #: ../../src/wui/general_statistics_menu.cc:206
 msgid "Military buildings defeated"
-msgstr "Военные строения разрушены"
+msgstr "Захвачено военных строений"
 
 #: ../../src/wui/general_statistics_menu.cc:212
 msgid "Civilian buildings lost"
-msgstr ""
+msgstr "Потеряно гражданских строений"
 
 #: ../../src/wui/general_statistics_menu.cc:218
 msgid "Military"
@@ -2013,7 +2013,7 @@ msgstr "Миникарта"
 #: ../../src/wui/interactive_player.cc:191
 #: ../../src/editor/editorinteractive.cc:76
 msgid "Buildhelp"
-msgstr "Возможности строительства"
+msgstr "Подсказки по типам строений"
 
 #: ../../src/wui/interactive_player.cc:195
 #: ../../src/wui/interactive_player.cc:280
@@ -2044,32 +2044,32 @@ msgstr "Статистика товаров"
 #: ../../src/wui/game_main_menu.cc:61
 #: ../../src/wui/building_statistics_menu.cc:79
 msgid "Building Statistics"
-msgstr "Статистика здания"
+msgstr "Статистика построек"
 
 #: ../../src/wui/game_main_menu.cc:68 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/waresdisplay.cc:43
 msgid "Stock"
-msgstr "Склад"
+msgstr "Запасы"
 
 #: ../../src/wui/transport_ui.cc:44
 msgid "Economy options"
-msgstr ""
+msgstr "Настройки экономики"
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:343
 msgid "Decrease permanent target quantity"
-msgstr ""
+msgstr "Уменьшить постоянное целевое количество"
 
 #: ../../src/wui/transport_ui.cc:180 ../../src/wui/transport_ui.cc:374
 msgid "Increase permanent target quantity"
-msgstr ""
+msgstr "Увеличить постоянное целевое количество"
 
 #: ../../src/wui/transport_ui.cc:209 ../../src/wui/transport_ui.cc:403
 msgid "Decrease temporary target quantity"
-msgstr ""
+msgstr "Уменьшить временное целевое количество"
 
 #: ../../src/wui/transport_ui.cc:240 ../../src/wui/transport_ui.cc:434
 msgid "Increase temporary target quantity"
-msgstr ""
+msgstr "Увеличить временное целевое количество"
 
 #: ../../src/wui/transport_ui.cc:267 ../../src/wui/transport_ui.cc:461
 msgid "Reset"
@@ -2077,15 +2077,15 @@ msgstr "Сбросить"
 
 #: ../../src/wui/transport_ui.cc:268 ../../src/wui/transport_ui.cc:462
 msgid "Reset target quantity to default value"
-msgstr ""
+msgstr "Вернуть значение по умолчанию"
 
 #: ../../src/wui/transport_ui.cc:492
 msgid "Ware type target quantities"
-msgstr ""
+msgstr "Планирование количества товаров"
 
 #: ../../src/wui/transport_ui.cc:497
 msgid "Worker type target quantities"
-msgstr ""
+msgstr "Планирование количества работников"
 
 #: ../../src/wui/attack_box.cc:171
 msgid "Soldiers:"
@@ -2097,7 +2097,7 @@ msgstr "Послать меньше солдат"
 
 #: ../../src/wui/attack_box.cc:196
 msgid "Number of soldiers"
-msgstr "Количесво солдат"
+msgstr "Количество солдат"
 
 #: ../../src/wui/attack_box.cc:206
 msgid "Send more soldiers"
@@ -2109,7 +2109,7 @@ msgstr "Отступать: никогда!"
 
 #: ../../src/wui/attack_box.cc:236 ../../src/wui/military_box.cc:149
 msgid "Supported damage before retreat"
-msgstr "Повреждения перед отступлнием"
+msgstr "Повреждения перед отступлением"
 
 #: ../../src/wui/attack_box.cc:238 ../../src/wui/military_box.cc:151
 msgid "Once injured"
@@ -2117,7 +2117,7 @@ msgstr "Когда ранены"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
-msgstr ""
+msgstr "Солдаты на обучении"
 
 #: ../../src/wui/interactive_base.cc:269
 #, c-format
@@ -2164,7 +2164,7 @@ msgstr "Следовать"
 
 #: ../../src/wui/watchwindow.cc:156
 msgid "Center mainview on this"
-msgstr "Центрировать экран на  этом"
+msgstr "Центрировать экран на этом"
 
 #: ../../src/wui/watchwindow.cc:181 ../../src/ui_fsmenu/fileview.cc:45
 msgid "Close"
@@ -2172,11 +2172,11 @@ msgstr "Закрыть"
 
 #: ../../src/wui/watchwindow.cc:236 ../../src/wui/fieldaction.cc:481
 msgid "Watch"
-msgstr "Просмотр"
+msgstr "Наблюдение"
 
 #: ../../src/wui/fieldaction.cc:246
 msgid "Build small buildings"
-msgstr "Строить маленькие здания"
+msgstr "Строить малые здания"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build medium buildings"
@@ -2200,11 +2200,11 @@ msgstr "Уничтожить этот флаг"
 
 #: ../../src/wui/fieldaction.cc:405
 msgid "Configure economy"
-msgstr ""
+msgstr "Настроить экономику"
 
 #: ../../src/wui/fieldaction.cc:411
 msgid "Send geologist to explore site"
-msgstr ""
+msgstr "Отправить геолога исследовать район"
 
 #: ../../src/wui/fieldaction.cc:429
 msgid "Put a flag"
@@ -2216,19 +2216,19 @@ msgstr "Разрушить дорогу"
 
 #: ../../src/wui/fieldaction.cc:454
 msgid "Watch field in a separate window"
-msgstr ""
+msgstr "Наблюдать за участком в отдельном окне"
 
 #: ../../src/wui/fieldaction.cc:459
 msgid "Toggle building statistics display"
-msgstr "Процент постройки"
+msgstr "Переключить показ статистики построек"
 
 #: ../../src/wui/fieldaction.cc:465
 msgid "Toggle building label display"
-msgstr "Название зданий"
+msgstr "Переключить показ названий построек"
 
 #: ../../src/wui/fieldaction.cc:472
 msgid "Debug window"
-msgstr ""
+msgstr "Окно отладки"
 
 #: ../../src/wui/fieldaction.cc:479 ../../src/wui/fieldaction.cc:620
 msgid "Build roads"
@@ -2236,11 +2236,11 @@ msgstr "Строить дороги"
 
 #: ../../src/wui/fieldaction.cc:488
 msgid "Military settings"
-msgstr ""
+msgstr "Военные установки"
 
 #: ../../src/wui/fieldaction.cc:513
 msgid "Start attack"
-msgstr ""
+msgstr "Начать атаку"
 
 #: ../../src/wui/fieldaction.cc:518
 msgid "Attack"
@@ -2252,7 +2252,7 @@ msgstr "Строить шахты"
 
 #: ../../src/wui/fieldaction.cc:613
 msgid "Build flag"
-msgstr ""
+msgstr "Установить флаг"
 
 #: ../../src/wui/fieldaction.cc:617
 msgid "Cancel road"
@@ -2264,19 +2264,19 @@ msgstr "Отладочное поле"
 
 #: ../../src/wui/stock_menu.cc:51
 msgid "Wares (total)"
-msgstr ""
+msgstr "Товары (всего)"
 
 #: ../../src/wui/stock_menu.cc:56
 msgid "Workers (total)"
-msgstr "Рабочие (всего)"
+msgstr "Работники (всего)"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Wares in warehouses"
-msgstr ""
+msgstr "Товары на складах"
 
 #: ../../src/wui/stock_menu.cc:69
 msgid "Workers in warehouses"
-msgstr ""
+msgstr "Работники на складах"
 
 #: ../../src/wui/game_chat_menu.cc:37
 msgid "Chat Menu"
@@ -2294,12 +2294,12 @@ msgstr "Сохранить игру"
 
 #: ../../src/wui/game_message_menu.cc:44 ../../src/wui/game_message_menu.h:148
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Меню сообщений: Входящие"
 
 #: ../../src/wui/game_options_sound_menu.cc:28
 #: ../../src/wui/game_options_menu.cc:76
 msgid "Sound Options"
-msgstr "Настройка звуков"
+msgstr "Настройки звука"
 
 #: ../../src/wui/game_options_sound_menu.cc:33
 msgid "Ingame Music"
@@ -2307,15 +2307,15 @@ msgstr "Музыка в игре"
 
 #: ../../src/wui/game_options_sound_menu.cc:39
 msgid "Sound FX"
-msgstr "Звук FX"
+msgstr "Звуковые эффекты"
 
 #: ../../src/wui/game_options_sound_menu.cc:43
 msgid "Ingame Music Volume"
-msgstr "Громкость музыки в игре"
+msgstr "Громкость музыки"
 
 #: ../../src/wui/game_options_sound_menu.cc:57
 msgid "Sound FX Volume"
-msgstr ""
+msgstr "Громкость звуков"
 
 #: ../../src/wui/waresqueuedisplay.cc:274
 msgid "Highest priority"
@@ -2535,42 +2535,42 @@ msgstr " завоевать"
 #: ../../src/logic/warehouse.cc:462
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr "Новое здание '%s' было добавлено в вашу экономику."
+msgstr "Новое здание '%s' было добавлено в Ваше поселение."
 
 #: ../../src/logic/militarysite.cc:113
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] "%u солдат"
-msgstr[1] "%u солдат(а,ов)"
-msgstr[2] "%u солдат(а,ов)"
+msgstr[1] "%u солдата"
+msgstr[2] "%u солдат"
 
 #: ../../src/logic/militarysite.cc:118
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
-msgstr[0] "%u(+%u) солдат(а,ов)"
-msgstr[1] "%u солдат(а,ов)"
-msgstr[2] "%u(+%u) солдат(а,ов)"
+msgstr[0] "%u(+%u) солдат"
+msgstr[1] "%u(+%u) солдата"
+msgstr[2] "%u(+%u) солдат"
 
 #: ../../src/logic/militarysite.cc:216
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr ""
+msgstr "Ваши солдаты заняли Вашу постройку: %s."
 
 #: ../../src/logic/militarysite.cc:571
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr "Враги уничтожили ваших солдат в %s."
+msgstr "Враг разгромил Ваших солдат в здании: %s."
 
 #: ../../src/logic/militarysite.cc:576
 msgid "Militarysite lost!"
-msgstr "Военая постройка потеряна!"
+msgstr "Здание потеряно!"
 
 #: ../../src/logic/militarysite.cc:622
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr "Ваши солдаты разгромили врага в %s."
+msgstr "Ваши солдаты разгромили врага в здании: %s."
 
 #: ../../src/logic/militarysite.cc:627
 msgid "Enemy at site defeated!"
@@ -2579,12 +2579,12 @@ msgstr "Враг разбит!"
 #: ../../src/logic/militarysite.cc:670
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "Обнаружен агрессор вблизи здания: %s.</p>"
 
 #: ../../src/logic/militarysite.cc:671
 #, c-format
 msgid "Your %s is under attack.</p>"
-msgstr ""
+msgstr "Атаковано Ваше строение: %s.</p>"
 
 #: ../../src/logic/militarysite.cc:679
 msgid "You are under attack"
@@ -2873,11 +2873,11 @@ msgstr " и "
 #: ../../src/logic/production_program.cc:406
 #: ../../src/logic/production_program.cc:765
 msgid " because: "
-msgstr " ,потому что: "
+msgstr " , так как "
 
 #: ../../src/logic/production_program.cc:418
 msgid " because not: "
-msgstr " потому что не: "
+msgstr " , потому что не "
 
 #: ../../src/logic/production_program.cc:467
 #, c-format
@@ -4357,31 +4357,31 @@ msgstr "Оборонительный"
 
 #: ../../src/wui/game_message_menu.h:67
 msgid "Select"
-msgstr "Выберите"
+msgstr "выбор"
 
 #: ../../src/wui/game_message_menu.h:68
 msgid "Status"
-msgstr "Статус"
+msgstr "статус"
 
 #: ../../src/wui/game_message_menu.h:69
 msgid "Title"
-msgstr ""
+msgstr "заголовок"
 
 #: ../../src/wui/game_message_menu.h:70
 msgid "Time sent"
-msgstr ""
+msgstr "время"
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear"
-msgstr "Очистка"
+msgstr "Снять"
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear selection"
-msgstr "Очистить выделенное"
+msgstr "Убрать выделение"
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert"
-msgstr "Инвертировать"
+msgstr "Инверт."
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert selection"
@@ -4393,7 +4393,7 @@ msgstr "Архивировать выбранные сообщения"
 
 #: ../../src/wui/game_message_menu.h:130 ../../src/wui/game_message_menu.h:153
 msgid "Show Archive"
-msgstr "Показать архив"
+msgstr "Архив"
 
 #: ../../src/wui/game_message_menu.h:139
 msgid "Message Menu: Archive"
@@ -4405,11 +4405,11 @@ msgstr "Восстановить выбранные сообщения"
 
 #: ../../src/wui/game_message_menu.h:144
 msgid "Show Inbox"
-msgstr ""
+msgstr "Входящие"
 
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"
-msgstr ""
+msgstr "Центрировать экран на местоположении"
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
