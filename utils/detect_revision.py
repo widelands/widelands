@@ -66,7 +66,7 @@ def detect_bzr_revision():
         # parse the output of bzr then directly
         run_bzr = lambda subcmd: subprocess.Popen(
                 ["bzr",subcmd], stdout=subprocess.PIPE, cwd=base_path
-            ).stdout.read().strip()
+            ).stdout.read().strip().decode("utf-8")
         revno = run_bzr("revno")
         nick = run_bzr("nick")
     return "bzr%s[%s] " % (revno,nick)
@@ -86,5 +86,5 @@ def detect_revision():
     return revstring
 
 if __name__ == "__main__":
-    print detect_revision()
+    print(detect_revision())
 
