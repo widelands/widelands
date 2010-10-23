@@ -183,6 +183,8 @@ MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 {
 	resize();
 
+	update_button_permpressed();
+
 	if (get_usedefaultpos())
 		center_to_parent();
 }
@@ -192,6 +194,7 @@ void MiniMap::toggle(Layers const button) {
 	*m_view.m_flags ^= button;
 	if (button == Zoom2)
 		resize();
+	update_button_permpressed();
 }
 
 void MiniMap::resize() {
@@ -212,3 +215,14 @@ void MiniMap::resize() {
 	button_zoom .set_size(but_w(), but_h());
 	move_inside_parent();
 }
+
+// Makes the buttons reflect the selected layers
+void MiniMap::update_button_permpressed() {
+	button_terrn.set_perm_pressed(*m_view.m_flags & Terrn);
+	button_owner.set_perm_pressed(*m_view.m_flags & Owner);
+	button_flags.set_perm_pressed(*m_view.m_flags & Flags);
+	button_roads.set_perm_pressed(*m_view.m_flags & Roads);
+	button_bldns.set_perm_pressed(*m_view.m_flags & Bldns);
+	button_zoom .set_perm_pressed(*m_view.m_flags & Zoom2);
+}
+	

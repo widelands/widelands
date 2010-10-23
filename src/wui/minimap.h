@@ -44,6 +44,7 @@ struct MiniMap : public UI::UniqueWindow {
 
 private:
 	void toggle(Layers);
+	void update_button_permpressed();
 	void resize();
 
 	/**
