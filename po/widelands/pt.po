@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-10-18 21:13+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-10-22 23:26+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-10-23 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/writeHTML.cc:43
 msgid "Requesters"
-msgstr "Requestadores"
+msgstr "Requerentes"
 
 #: ../../src/writeHTML.cc:58
 msgid "Providers"
@@ -40,7 +40,7 @@ msgstr "Empregados"
 
 #: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:272
 msgid "Building types"
-msgstr "Tipos de construção"
+msgstr "Tipos de edíficios"
 
 #: ../../src/writeHTML.cc:277 ../../src/writeHTML.cc:514
 #: ../../src/writeHTML.cc:1417
@@ -59,7 +59,7 @@ msgstr "Tamanho"
 
 #: ../../src/writeHTML.cc:283 ../../src/writeHTML.cc:518
 msgid "Buildable"
-msgstr "edificativo"
+msgstr "Construível"
 
 #: ../../src/writeHTML.cc:285
 msgid "Enhanced"
@@ -134,7 +134,7 @@ msgstr "É pequeno."
 
 #: ../../src/writeHTML.cc:400
 msgid "Is not buildable."
-msgstr "Não é edificativo."
+msgstr "Não é construível"
 
 #: ../../src/writeHTML.cc:407
 msgid "Is enhanced."
@@ -143,12 +143,12 @@ msgstr "É melhorado."
 #: ../../src/writeHTML.cc:414
 #, c-format
 msgid "Conquer range is %u."
-msgstr ""
+msgstr "Alcançe da conquista é de %u."
 
 #: ../../src/writeHTML.cc:422 ../../src/writeHTML.cc:648
 #, c-format
 msgid "Vision range is %u."
-msgstr ""
+msgstr "Alcançe da visão é de %u."
 
 #: ../../src/writeHTML.cc:430 ../../src/writeHTML.cc:655
 msgid "Build cost"
@@ -157,7 +157,7 @@ msgstr "Custo de construção"
 #: ../../src/writeHTML.cc:440
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "Estaleiro de obra de %s"
 
 #: ../../src/writeHTML.cc:452
 msgid "Enhancements"
@@ -166,7 +166,7 @@ msgstr "Melhoramentos"
 #: ../../src/writeHTML.cc:462
 #, c-format
 msgid "%s's enhancement"
-msgstr "%s melhoramento"
+msgstr "Melhoramentos de %s"
 
 #: ../../src/writeHTML.cc:503 ../../src/writeHTML.cc:509
 msgid "Worker types"
@@ -174,7 +174,7 @@ msgstr "Tipos de trabalhadores"
 
 #: ../../src/writeHTML.cc:522
 msgid "Needed<br/>experience"
-msgstr "Precisa<br/>experiência"
+msgstr "Experiência<br/>necessária"
 
 #: ../../src/writeHTML.cc:524
 msgid "Becomes"
@@ -192,7 +192,7 @@ msgstr "Propriedades de Combate"
 #, c-format
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr ""
+msgstr "Golpes é %u, mais %u por cada nível acima de 0 (nível máximo é %u)."
 
 #: ../../src/writeHTML.cc:600
 #, c-format
@@ -200,35 +200,37 @@ msgid ""
 "Attack is between %u and %u, plus %u for each level above 0 (maximum level "
 "is %u)."
 msgstr ""
+"Ataque é entre %u e %u, mais %u por cada nível acima de 0 (nível máximo é "
+"%u)."
 
 #: ../../src/writeHTML.cc:610
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr ""
+msgstr "Defesa é %u, mais %u por cada nível acima de 0 (nível máximo é %u)."
 
 #: ../../src/writeHTML.cc:620
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr ""
+msgstr "Evasão é %u, mais %u por cada nível acima de 0 (nível máximo é %u)."
 
 #: ../../src/writeHTML.cc:666 ../../src/writeHTML.cc:677
 #, c-format
 msgid "%s's creation"
-msgstr "%s criação"
+msgstr "criação de %s"
 
 #: ../../src/writeHTML.cc:688
 msgid "Spawns in warehouses."
-msgstr ""
+msgstr "Ovas nos armazéns"
 
 #: ../../src/writeHTML.cc:697
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr "Precisa experiência de trabalho %u vezes para ser"
+msgstr "Precisa de %u vezes de experiência de trabalho para ser"
 
 #: ../../src/writeHTML.cc:705
 #, c-format
 msgid "%s's promotion"
-msgstr "%s promoção"
+msgstr "promoção de %s"
 
 #: ../../src/writeHTML.cc:716 ../../src/writeHTML.cc:861
 msgid "Programs"
@@ -245,23 +247,23 @@ msgstr "criação"
 
 #: ../../src/writeHTML.cc:755
 msgid "createitem"
-msgstr "criar item"
+msgstr "criar_item"
 
 #: ../../src/writeHTML.cc:756
 msgid "setdescription"
-msgstr ""
+msgstr "define_desc"
 
 #: ../../src/writeHTML.cc:757
 msgid "setbobdescription"
-msgstr ""
+msgstr "define_bob_desc"
 
 #: ../../src/writeHTML.cc:758
 msgid "findobject"
-msgstr ""
+msgstr "encontrar_objecto"
 
 #: ../../src/writeHTML.cc:759
 msgid "findspace"
-msgstr ""
+msgstr "encontrar_espaço"
 
 #: ../../src/writeHTML.cc:760
 msgid "walk"
@@ -273,7 +275,7 @@ msgstr "animação"
 
 #: ../../src/writeHTML.cc:762 ../../src/writeHTML.cc:901
 msgid "return"
-msgstr "voltar"
+msgstr "retornar"
 
 #: ../../src/writeHTML.cc:763
 msgid "object"
@@ -285,11 +287,11 @@ msgstr "planta"
 
 #: ../../src/writeHTML.cc:765
 msgid "create_bob"
-msgstr ""
+msgstr "criar_bob"
 
 #: ../../src/writeHTML.cc:766
 msgid "removeobject"
-msgstr ""
+msgstr "remove_objecto"
 
 #: ../../src/writeHTML.cc:767
 msgid "geologist"
@@ -297,11 +299,11 @@ msgstr "geólogo"
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist_find"
-msgstr ""
+msgstr "geologista_busca"
 
 #: ../../src/writeHTML.cc:769 ../../src/writeHTML.cc:1371
 msgid "playFX"
-msgstr ""
+msgstr "playFX"
 
 #: ../../src/writeHTML.cc:770
 msgid "UNKNOWN"
@@ -320,16 +322,16 @@ msgstr "Trabalhadores"
 #: ../../src/writeHTML.cc:792
 #, c-format
 msgid "%s's employee"
-msgstr "%s empregados"
+msgstr "empregados de %s"
 
 #: ../../src/writeHTML.cc:802
 msgid "Inputs"
-msgstr "Entrada"
+msgstr "Entradas"
 
 #: ../../src/writeHTML.cc:813
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "Entradas de %s"
 
 #: ../../src/writeHTML.cc:825
 msgid "Output"
@@ -338,7 +340,7 @@ msgstr "Saída"
 #: ../../src/writeHTML.cc:836 ../../src/writeHTML.cc:850
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "Saída de %s"
 
 #: ../../src/writeHTML.cc:897 ../../src/writeHTML.cc:1040
 #: ../../src/writeHTML.cc:1102 ../../src/writeHTML.cc:1130
@@ -347,11 +349,11 @@ msgstr ""
 #: ../../src/writeHTML.cc:1292 ../../src/writeHTML.cc:1319
 #: ../../src/writeHTML.cc:1343 ../../src/writeHTML.cc:1367
 msgid "productionsite_program_reference.xhtml"
-msgstr ""
+msgstr "productionsite_program_reference.xhtml"
 
 #: ../../src/writeHTML.cc:899
 msgid "Documentation for program command return"
-msgstr ""
+msgstr "Documentação do programa para comandos return"
 
 #: ../../src/writeHTML.cc:905 ../../src/logic/production_program.cc:398
 #: ../../src/logic/production_program.cc:762
@@ -360,11 +362,11 @@ msgstr "falhou"
 
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:399
 msgid "completed"
-msgstr "completado"
+msgstr "concluído"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:399
 msgid "skipped"
-msgstr "retornado"
+msgstr "omitido"
 
 #: ../../src/writeHTML.cc:912
 msgid "and"
@@ -380,7 +382,7 @@ msgstr "ou"
 
 #: ../../src/writeHTML.cc:916
 msgid "unless"
-msgstr "senão"
+msgstr "excepto"
 
 #: ../../src/writeHTML.cc:947 ../../src/writeHTML.cc:969
 msgid "economy"
@@ -388,11 +390,11 @@ msgstr "economia"
 
 #: ../../src/writeHTML.cc:949 ../../src/writeHTML.cc:971
 msgid "needs"
-msgstr "precisam"
+msgstr "necessidades"
 
 #: ../../src/writeHTML.cc:989
 msgid "site"
-msgstr "lado"
+msgstr "obra"
 
 #: ../../src/writeHTML.cc:991
 msgid "has"
@@ -400,7 +402,7 @@ msgstr "tem"
 
 #: ../../src/writeHTML.cc:1022
 msgid "workers of this site"
-msgstr "trabalhadores na área"
+msgstr "trabalhadores na obra"
 
 #: ../../src/writeHTML.cc:1024
 msgid "workers"
@@ -408,7 +410,7 @@ msgstr "trabalhadores"
 
 #: ../../src/writeHTML.cc:1025
 msgid "</span></a> <span class=\"keyword\">"
-msgstr ""
+msgstr "</span></a> <span class=\"keyword\">"
 
 #: ../../src/writeHTML.cc:1026
 msgid "need"
@@ -420,20 +422,20 @@ msgstr "experiência"
 
 #: ../../src/writeHTML.cc:1042
 msgid "Documentation for program command call"
-msgstr ""
+msgstr "Documentação do programa para comandos call"
 
 #: ../../src/writeHTML.cc:1044
 msgid "call"
-msgstr "chamar"
+msgstr "chamada"
 
 #: ../../src/writeHTML.cc:1051
 #, c-format
 msgid "site's program %s"
-msgstr ""
+msgstr "programa %s da obra"
 
 #: ../../src/writeHTML.cc:1104
 msgid "Documentation for program command worker"
-msgstr ""
+msgstr "Documentação do programa para comandos worker"
 
 #: ../../src/writeHTML.cc:1106
 msgid "worker"
@@ -442,15 +444,15 @@ msgstr "trabalhador"
 #: ../../src/writeHTML.cc:1117
 #, c-format
 msgid "%s's program %s"
-msgstr ""
+msgstr "programa %s de %s"
 
 #: ../../src/writeHTML.cc:1132
 msgid "Documentation for program command sleep"
-msgstr ""
+msgstr "Documentação do programa para comandos sleep"
 
 #: ../../src/writeHTML.cc:1134
 msgid "sleep"
-msgstr "hibernação"
+msgstr "dormir"
 
 #: ../../src/writeHTML.cc:1140 ../../src/writeHTML.cc:1160
 #, c-format
@@ -459,7 +461,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1152
 msgid "Documentation for program command animate"
-msgstr ""
+msgstr "Documentação do programa para comandos animate"
 
 #: ../../src/writeHTML.cc:1154
 msgid "animate"
@@ -467,19 +469,19 @@ msgstr "animar"
 
 #: ../../src/writeHTML.cc:1173
 msgid "Documentation for program command consume"
-msgstr ""
+msgstr "Documentação do programa para comandos consume"
 
 #: ../../src/writeHTML.cc:1175
 msgid "consume"
-msgstr "consome"
+msgstr "consumir"
 
 #: ../../src/writeHTML.cc:1216 ../../src/writeHTML.cc:1253
 msgid "Documentation for program command produce"
-msgstr ""
+msgstr "Documentação do programa para comandos produce"
 
 #: ../../src/writeHTML.cc:1218
 msgid "produce"
-msgstr "produz"
+msgstr "produzir"
 
 #: ../../src/writeHTML.cc:1255
 msgid "recruit"
@@ -487,19 +489,19 @@ msgstr "recrutar"
 
 #: ../../src/writeHTML.cc:1294
 msgid "Documentation for program command mine"
-msgstr ""
+msgstr "Documentação do programa para comandos mine"
 
 #: ../../src/writeHTML.cc:1321
 msgid "Documentation for program command check_soldier"
-msgstr ""
+msgstr "Documentação do programa para comandos check_soldier"
 
 #: ../../src/writeHTML.cc:1323
 msgid "check soldier"
-msgstr "verifica guerreiro"
+msgstr "verificar soldado"
 
 #: ../../src/writeHTML.cc:1329 ../../src/writeHTML.cc:1353
 msgid "hp"
-msgstr ""
+msgstr "hp"
 
 #: ../../src/writeHTML.cc:1330 ../../src/writeHTML.cc:1354
 msgid "attack"
@@ -511,11 +513,11 @@ msgstr "defesa"
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "evade"
-msgstr "defesa"
+msgstr "evasão"
 
 #: ../../src/writeHTML.cc:1345
 msgid "Documentation for program command train"
-msgstr ""
+msgstr "Documentação do programa para comandos train"
 
 #: ../../src/writeHTML.cc:1347
 msgid "train"
@@ -523,11 +525,11 @@ msgstr "treinar"
 
 #: ../../src/writeHTML.cc:1369
 msgid "Documentation for program command playFX"
-msgstr ""
+msgstr "Documentação do programa para comandos playFX"
 
 #: ../../src/writeHTML.cc:1406 ../../src/writeHTML.cc:1412
 msgid "Ware types"
-msgstr "tipo de produções"
+msgstr "Tipo de produtos"
 
 #: ../../src/writeHTML.cc:1446
 msgid "ware_types.xhtml"
@@ -535,17 +537,19 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:369
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr ""
+msgstr "ERRO: não foi possivel ligar ao metaserver (razão acima)!\n"
 
 #: ../../src/wlapplication.cc:868 ../../src/wlapplication.cc:881
 msgid "could not find the path of the main executable"
-msgstr ""
+msgstr "não foi possivel encontrar caminho para o executável principal"
 
 #: ../../src/wlapplication.cc:983
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Esperei 5 secs para fechar audio. Há problemas por isso matando widelands. "
+"Actualiza o driver de som e/ou SDL para resolver este problema.\n"
 
 #: ../../src/wlapplication.cc:1120
 msgid ""
@@ -553,10 +557,13 @@ msgid ""
 "Sorry, no double-instance debugging on WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Desculpe, não há double-instance debugging em WIN32.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1123
 msgid "--double is disabled. This is not a debug build!"
-msgstr ""
+msgstr "--double está desactivado. Esta não é uma versão de debug!"
 
 #: ../../src/wlapplication.cc:1246
 msgid "This is Widelands-"
@@ -567,6 +574,8 @@ msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
+"Uso: widelands <opção0>=<valor0> ... <opçãoN>=<valorN>\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1249
 msgid ""
@@ -587,10 +596,19 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays\n"
 msgstr ""
+" --<config-entry-name>=valor  sobreescreve qualquer definição \n"
+"                                do ficheiro de config.\n"
+"\n"
+" --logfile=FICHEIRO    Registar saida para o FICHEIRO nomeado em vez\n"
+"                        de enviar para o terminal de saida.\n"
+" --datadir=DIRECTORIO  Usar o directorio para indicar onde estão os\n"
+"                        ficheiros de dados do Widelands.\n"
+" --homedir=DIRECTORIO  Usar este directorio para guardar os ficheros\n"
+"                        de configuração, jogos guardados e repetições.\n"
 
 #: ../../src/wlapplication.cc:1261
 msgid "                      Default is ~/.widelands\n"
-msgstr ""
+msgstr "                      A predefinição é ~/.widelands\n"
 
 #: ../../src/wlapplication.cc:1264
 msgid ""
@@ -739,10 +757,15 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
+". Por favor adicione esta informação ao seu relatório.\n"
+"\n"
+"O Widelands tenta guardar o estado do jogo quando ocorrem erros durante o "
+"jogo. É possível, na maior parte  das vezes carregá-lo novamente e continuar "
+"a jogar.\n"
 
 #: ../../src/wlapplication.cc:1635
 msgid "Connection timeouted"
-msgstr ""
+msgstr "A tentativa de conexão expirou"
 
 #: ../../src/wlapplication.cc:1637
 msgid ""
@@ -750,6 +773,8 @@ msgid ""
 "There seems to be a network problem, either on your side or on side\n"
 "of the server.\n"
 msgstr ""
+"O Widelands não conseguiu obter o IP do servidor em tempo útil.\n"
+"Parece haver um problema de rede do seu lado ou no do servidor.\n"
 
 #: ../../src/wlapplication.cc:1659 ../../src/network/network_ggz.cc:367
 msgid "Connection problem"
@@ -761,7 +786,7 @@ msgstr "Widelands não conseguiu ligar-se ao host."
 
 #: ../../src/wlapplication.cc:1707
 msgid "The address of the game server is invalid"
-msgstr ""
+msgstr "O endereço do servidor do jogo é inválido."
 
 #: ../../src/wlapplication.cc:1813 ../../src/network/nethost.cc:1500
 msgid "Player"
@@ -774,13 +799,15 @@ msgstr "Preparando jogo"
 
 #: ../../src/wlapplication.cc:2085
 msgid "End of replay"
-msgstr ""
+msgstr "Fim da repetição"
 
 #: ../../src/wlapplication.cc:2087
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
+"A repetição acabou e o jogo foi pausado. Podes tirar o jogo da pausa e "
+"continuar a vê-la se quiseres."
 
 #: ../../src/wlapplication.cc:2167 ../../src/logic/game.cc:357
 #: ../../src/logic/game.cc:396
@@ -803,6 +830,7 @@ msgstr ""
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"
 msgstr ""
+"PROBLEMA: o dispositivo de som abriu multiplas vezes, a tentar fechar"
 
 #: ../../src/ui_basic/messagebox.cc:91
 #: ../../src/ui_fsmenu/editor_mapselect.cc:98
@@ -890,12 +918,12 @@ msgstr "Diminuir o valor por 10"
 #: ../../src/game_io/game_player_info_data_packet.cc:137
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "Versão %u desconhecida/não manuseada"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:94
 #, c-format
 msgid "unknown object header %u"
-msgstr ""
+msgstr "Cabeçalho de objecto %u desconhecido"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:97
 #, c-format
@@ -1308,7 +1336,7 @@ msgstr "economia: %s"
 #: ../../src/economy/wares_queue.cc:260
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "fila_mercadorias: %s"
 
 #: ../../src/graphic/graphic.cc:1083
 #, c-format
@@ -1785,7 +1813,7 @@ msgstr "Recomeça missão"
 #: ../../src/wui/general_statistics_menu.cc:176
 #: ../../src/wui/warehousewindow.cc:143
 msgid "Wares"
-msgstr ""
+msgstr "Mercadorias"
 
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
@@ -2153,7 +2181,7 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:51
 msgid "Wares (total)"
-msgstr "produções (total)"
+msgstr "Mercadorias (total)"
 
 #: ../../src/wui/stock_menu.cc:56
 msgid "Workers (total)"
@@ -2161,11 +2189,11 @@ msgstr "Trabalhadores (total)"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Wares in warehouses"
-msgstr "Mercadorias em armazéns"
+msgstr "Mercadorias nos armazéns"
 
 #: ../../src/wui/stock_menu.cc:69
 msgid "Workers in warehouses"
-msgstr "Trabalhadores em armazéns"
+msgstr "Trabalhadores nos armazéns"
 
 #: ../../src/wui/game_chat_menu.cc:37
 msgid "Chat Menu"
@@ -3009,6 +3037,18 @@ msgid ""
 "object, such as a farm field, is placed on the map while the worker is out "
 "working. (bug #1796611) (The game has been paused.)"
 msgstr ""
+"O motor do jogo encontrou um erro lógico. O %s #%u do jogador %u (carregando "
+"%s) não consegui encontrar o caminho para casa a partir de (%i, %i) (com %s "
+"imóvel) para a bandeira-base (%i, %i) do seu %s em (%i, %i). O %s ficará sem-"
+"abrigo e provavelmente morrerá a menos que o objecto seja retirado depressa "
+"e o %s encontre o caminho para a bandeira ligada ao armazém. O %s irá de "
+"imediato requerer um novo trabalhador. Infelizmente isto continuará a "
+"acontecer até que se esgotem os trabalhadores (ferramentas). Nenhuma solução "
+"para este problema foi ainda implementada. Será melhor destruir %s  e não "
+"voltar a construir ai nenhum edifício que envie trabalhadores. Isto acontece "
+"habitualmente ao pé de terreno impassável, tipo água, ou quando um objecto "
+"como um campo de cereais é colocado no mapa quando o trabalhador está fora a "
+"trabalhar.  (bug #1796611) (O jogo entrou em pausa.)"
 
 #: ../../src/logic/worker.cc:1695
 msgid "nothing"

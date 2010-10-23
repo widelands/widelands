@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 20:53+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-10-22 22:46+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-10-23 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -50,6 +50,19 @@ msgid ""
 "level 2 evade. This is one fearsome warrior then! The individual statistics\n"
 "have the following meaning:"
 msgstr ""
+"Vojak sa tvorí ako normálny robotník: nosič zoberie nástroj v sklade,\n"
+"akonáhle nie je splnená požiadavka pre istú profesiu. Nástroj na vytvorenie\n"
+"barbarského vojaka je sekera. Novo vytvorený vojak je na úrovni 0. Aby sa\n"
+"vojak zdokonalil v hociktorej zo štyroch kategórií, potrebuje výcvik. "
+"Výcvik\n"
+"sa vykonáva v miestach na tréning ako výcvikový tábor alebo bojová aréna:\n"
+"vojaci tam pôjdu (ako to momentálne robia naši malí priatelia), spotrebujú "
+"niekoľko\n"
+"tovarov a postúpia na úroveň v jednej kategórii. Ak je barbarský vojak "
+"úplne\n"
+"vytrénovaný, má 3 body zdravia, úroveň útoku 5, úroveň obrany 0 a úroveň\n"
+"uhýbania 2. To je ale hrôzostrašný bojovník! Individuálne štatistiky\n"
+"znamenajú toto:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:438
 msgid ""
@@ -58,6 +71,9 @@ msgid ""
 "screen.\n"
 "Close the messages window now by right clicking into it."
 msgstr ""
+"Všetky okná vo Widelands možno zavrieť pravým kliknutím na ne.\n"
+"Niektoré okná možno prepnúť s tlačidlami na úplnom spodku obrazovky\n"
+"Teraz zavrite okno správ pravým kliknutím na neho."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
 msgid ""
@@ -73,17 +89,19 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:412
 msgid "Archive all messages in your inbox"
-msgstr ""
+msgstr "Archivujte všetky správy vo svojej schránke"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:407
 msgid ""
 "Archive all messages, including this one, that you currently have in your\n"
 " inbox."
 msgstr ""
+"Archivujte všetky správy vrátane tejto, ktorú práve máte vo svojej\n"
+" schránke."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:413
 msgid "Archive our inbox messages"
-msgstr ""
+msgstr "Archivujte naše prijaté správy"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:484
 msgid ""
@@ -93,6 +111,11 @@ msgid ""
 "vulnerable: any military site from another player can conquer the land. You\n"
 "therefore need military sites to keep military influence over your land."
 msgstr ""
+"Akonáhle sa obsadí vaša vojenská budova, rozšíri sa vaše územie. Potom je,\n"
+"ak potrebujete miesto, možné ju vypáliť. Všimnite si ale, že vaše územie "
+"bude\n"
+"nechránené: každá vojenská stavba iného hráča môže dobyť toto územie. Preto\n"
+"potrebujete vojenské stavby, aby ste udržali armádny vplyv na svojom území."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:683
 msgid ""
@@ -109,6 +132,7 @@ msgstr "Útok:"
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
 msgstr ""
+"Základný tréning - mapa založená na tréningu 1 pre barbarov vo Winterwind."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid "Build a flag on the road"
@@ -145,11 +169,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid "Building a connecting road"
-msgstr ""
+msgstr "Stavanie spojovacej cesty"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:118
 msgid "Building the lumberjack"
-msgstr ""
+msgstr "Stavenie drevorubačovej chatrče"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:593
 msgid ""
@@ -428,6 +452,12 @@ msgid ""
 "also\n"
 "vary in their vision range: buildings with a tower see farther than others."
 msgstr ""
+"Expanzia je jednoduchá ako stavanie vojenskej budovy na rohu vášho\n"
+"územia. Barbari majú pár odlišných vojenských budov:\n"
+"stráže, hradby, donžony, bašty, pevnosti a citadely. Čím väčšia je\n"
+"budova, tým drahšie je ju vybudovať, tým viac územia okolo seba si\n"
+"podmaní a tým viac vojakov tu možno umiestniť. Budovy sa tiež\n"
+"líšia v dohľade: budovy s vežou vidia ďalej než ostatné."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:470
 msgid "Expanding your territory!"
@@ -536,6 +566,8 @@ msgid ""
 "If you decide you do not want to build a road at this time, you can cancel\n"
 "road building by clicking on the starting flag of the road and selecting"
 msgstr ""
+"Ak sa rozhodnete, že tentoraz nechcete postaviť cestu, môžete ju zrušiť\n"
+"kliknutím na počiatočnú vlajku cesty a vybraním"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:268
 msgid ""
@@ -560,6 +592,9 @@ msgid ""
 "buildings\n"
 "tab in the window that opens up, then click on the quarry symbol."
 msgstr ""
+"Len kliknite na hociktorý symbol domu v blízkosti kameňov, vyberte záložku "
+"malé budovy\n"
+"v okne, ktoré sa otvorí, potom kliknite na symbol kameňolomu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:338
 msgid ""
@@ -567,10 +602,16 @@ msgid ""
 "Also try to keep roads as short as possible and always remember to place as\n"
 "many flags as you can on road segments to share the load better."
 msgstr ""
+"Keď umiestňujete cesty, majte napamäti strmosť a využite ju vo svoj "
+"prospech.\n"
+"Tiež skúste udržiavať cesty čo najkrajšie, ako je to možné, a nezabudnite "
+"umiestniť\n"
+"toľko vlajok, koľko sa dá na úsekoch cesty, aby sa náklad rozdelil lepšie."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:88
 msgid "Left-click the \"OK\" button to close this box and then try it."
 msgstr ""
+"Ľavým kliknutím na tlačidlo 'OK' zavrite toto okno a potom to vyskúšajte."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:371
 msgid ""

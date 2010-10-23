@@ -7,32 +7,34 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 21:11+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-10-23 00:47+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-10-23 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9  Pamätať si a ísť na skôr zapamätané miesta"
 
 #: ../../txts/README:67
 msgid ", / .       Go to previous / next location"
-msgstr ""
+msgstr ", / .       Ísť na predošlé / nasledujúce miesto"
 
 #: ../../txts/README:121
 msgid "- how to reproduce the bug"
-msgstr ""
+msgstr "- ako napodobniť chybu"
 
 #: ../../txts/README:125
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
 msgstr ""
+"- pošlite nám skomprimovanú (zip, gzip, bzip2) nahrávku, ak sa chyba "
+"objavila počas hry. Pre viac vysvetlenia viz. sekciu Nahrávky nižšie."
 
 #: ../../txts/README:127
 msgid ""
@@ -41,12 +43,18 @@ msgid ""
 "record<br>your sessions in case a bug surfaces. For more explanation, see "
 "below."
 msgstr ""
+"- pošlite nám skomprimovanú (zip, gzip, bzip2) nahrávku relácie, ak je to "
+"možné, pokiaľ<br>chybu nie je triviálne napodobniť. V skutočnosti to môže "
+"byť dobrý nápad vždy nahrávať<br>relácie v prípade, že sa objaví chyba. Viz. "
+"dole pre viac vysvetlenia."
 
 #: ../../txts/README:119
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
 msgstr ""
+"- akú verziu Widelands ste používali (napr. číslo zostavenia alebo či je "
+"to<br>vlastná skompilovaná verzia zo SVN)"
 
 #: ../../txts/README:123
 msgid "- which map you were playing"
@@ -272,10 +280,11 @@ msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
+"Vždy postavte sídlo horára a chovateľa rýb, aby vám nedošlo drevo a jedlo."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
-msgstr ""
+msgstr "Vždy postavte sídlo horára, aby vám nedošlo drevo."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
@@ -299,6 +308,8 @@ msgstr "Barbari"
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
+"Predtým než postavíte studňu alebo baňu, pošlite na preskúmanie oblasti "
+"geológa."
 
 #: ../../txts/README:57
 msgid "C               Toggle census"
@@ -358,7 +369,7 @@ msgstr "DELETE      Archivovať aktuálnu správu"
 
 #: ../../txts/developers:162
 msgid "Dansk"
-msgstr "Dánština"
+msgstr "Dánčina"
 
 #: ../../txts/developers:1
 msgid "Development"
@@ -382,7 +393,7 @@ msgstr "Rada starších"
 
 #: ../../txts/developers:141
 msgid "Empire"
-msgstr "Cisárstvo"
+msgstr "Impérium"
 
 #: ../../txts/COPYING:82
 msgid "End of Terms and Conditions"
@@ -418,7 +429,7 @@ msgstr "Francúzština"
 
 #: ../../txts/README:88
 msgid "G           Go to location corresponding to current message"
-msgstr ""
+msgstr "G Ísť na miesto zodpovedajúceho aktuálnej správe"
 
 #: ../../txts/COPYING:3
 msgid "GNU general public licence"
@@ -432,7 +443,7 @@ msgstr ""
 
 #: ../../txts/developers:188
 msgid "Galician"
-msgstr "Galština"
+msgstr "Galčina"
 
 #: ../../txts/README:36
 msgid "General game control"
@@ -440,7 +451,7 @@ msgstr ""
 
 #: ../../txts/developers:193
 msgid "German"
-msgstr ""
+msgstr "Nemčina"
 
 #: ../../txts/developers:70
 msgid "Graphicians"
@@ -533,6 +544,8 @@ msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
 msgstr ""
+"Ak potrebujete dokumentáciu alebo pomoc pre Widelands alebo Widelands "
+"Editor, iste navštívte našu stránku. Najnovšiu online pomoc môžno nájsť na:"
 
 #: ../../txts/README:111
 msgid ""
@@ -574,6 +587,8 @@ msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop to fish."
 msgstr ""
+"Dávajte si pozor na rybárov. Keď sa zdroje rýb v ich pracovnej oblasti "
+"vyčerpajú, prestanú rybárčiť."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -585,7 +600,7 @@ msgstr "Klávesové zkratky (počas hry)"
 
 #: ../../txts/COPYING:1
 msgid "License"
-msgstr ""
+msgstr "Licencia"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -611,7 +626,7 @@ msgstr "Mapy a misie"
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
-msgstr ""
+msgstr "Baníci pracujú, len ak sú zásobovaní jedlom."
 
 #: ../../txts/developers:98
 msgid "Musicians"
@@ -626,6 +641,8 @@ msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
 msgstr ""
+"POZNÁMKA: v tomto zozname sú ľudia, ktorí preložili Widelands predtým, ako "
+"sme sa presunuli na launchpad.net. "
 
 #: ../../txts/COPYING:70
 msgid "No warranty"
@@ -681,7 +698,7 @@ msgstr "P        Prepne menu hráča"
 
 #: ../../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr ""
+msgstr "PAGEDOWN    Zníži rýchlosť hry"
 
 #: ../../txts/README:72
 msgid "PAGEUP         Increase gamespeed"

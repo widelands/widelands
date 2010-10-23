@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-10-22 04:22+0000\n"
+"PO-Revision-Date: 2010-10-22 16:39+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-10-22 04:36+0000\n"
+"X-Launchpad-Export-Date: 2010-10-23 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -3449,7 +3449,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:39
 msgid "Single Player Menu"
-msgstr "Меню Одиночной игры"
+msgstr "Меню одиночной игры"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:47
 msgid "New Game"
@@ -3515,23 +3515,23 @@ msgstr "Помощь "
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
-msgstr ""
+msgstr "Меню редактора карт"
 
 #: ../../src/ui_fsmenu/editor.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 msgid "New Map"
-msgstr "Новая Карта"
+msgstr "Новая карта"
 
 #: ../../src/ui_fsmenu/editor.cc:50
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:50
 #: ../../src/editor/ui_menus/editor_main_menu.cc:68
 msgid "Load Map"
-msgstr "Загрузить Карту"
+msgstr "Загрузить карту"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:63
 msgid "Choose a replay!"
-msgstr "Выбрерите  повтор!"
+msgstr "Выберите повтор"
 
 #: ../../src/ui_fsmenu/launchgame.cc:59
 msgid "Select map"
@@ -3696,7 +3696,7 @@ msgstr "Кампания:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:58
 msgid "Difficulty:"
-msgstr "Трудность:"
+msgstr "Сложность:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:62
 #: ../../src/ui_fsmenu/campaign_select.cc:272
@@ -3734,11 +3734,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:42
 msgid "Play Tutorial"
-msgstr "Обучающая игра"
+msgstr "Обучение"
 
 #: ../../src/ui_fsmenu/main.cc:49
 msgid "Single Player"
-msgstr "Один Игрок"
+msgstr "Один игрок"
 
 #: ../../src/ui_fsmenu/main.cc:56
 msgid "Multi Player"
@@ -3783,7 +3783,7 @@ msgstr "дней"
 
 #: ../../src/ui_fsmenu/options.cc:93
 msgid "General Options"
-msgstr "Общие Настройки"
+msgstr "Основные настройки"
 
 #: ../../src/ui_fsmenu/options.cc:100
 msgid "Fullscreen"
@@ -3815,7 +3815,7 @@ msgstr "Язык"
 
 #: ../../src/ui_fsmenu/options.cc:149
 msgid "In-game Options"
-msgstr "Настройки Игры"
+msgstr "Настройки игры"
 
 #: ../../src/ui_fsmenu/options.cc:156
 msgid "Use single Watchwindow Mode"
