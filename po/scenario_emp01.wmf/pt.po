@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-23 00:39+0000\n"
+"PO-Revision-Date: 2010-10-23 23:38+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-23 04:46+0000\n"
+"X-Launchpad-Export-Date: 2010-10-24 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
@@ -177,6 +177,14 @@ msgid ""
 "completed this mission. You may continue playing if you wish, otherwise move "
 "on to the next mission.\" "
 msgstr ""
+" \"Hoje recebi uma mensagem que dizia que o nosso navio está finalmente "
+"reparado. De momento, o meu pessoal já está a carregar mercadorias para o "
+"navio, com a esperança que ele se porte melhor do que da última vez.<br> "
+"Esta vai ser a nossa ultima noite na ilha. Amanhã de manhã vamos zarpar, à "
+"procura de um novo local para o nosso exílio.<br> Ainda penso se vamor rever "
+"Freemil outra vez.<br><br>--------------------- VICTÓRIA! -------------------"
+"---<br><br> Completaste esta missão ! Se desejares podes continuar a jogar "
+"ou partir já para uma nova missão.\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:14
 msgid ""
@@ -202,12 +210,36 @@ msgid ""
 "perl-gulf with my family, some of my friends and a few of my best "
 "warriors.\" "
 msgstr ""
+" \"Em que é que o nosso Império se tornou ? Interrogo-me sobre o porquê do "
+"nosso Rei ter-me proibido de lutar contra a monstruosa tribo dos bárbaros, "
+"que primeiro se agiram como amigos para depois nos atacarem pela calada da "
+"noite ?<br>   Com um exército de 150 homens, fui destacado para patrulhar a "
+"fronteira Norte, perto das Montanhas Galdim, numa grande e bela floresta. "
+"Depressa fizemos contactos amistosos com a tribo bárbara. Alguns dos meus "
+"homens até fizeram comércio com eles e os filhos deles vieram ver os nossos  "
+"aprumados uniformes e armas reluzentes.<br> Mas na 5a noite na região, eles "
+"atacaram-nos sem razão. Perdi dúzias de bons soldados, eu fui aprisionado e "
+"levado perante o Grande Chefe. Ele humilhou-me e gozou comigo e ordenou-me "
+"que deixasse aquela terra para sempre. Ele não queria nem novas nem as "
+"nossas terras, apenas queria que deixássemos a floresta, dizendo  \"- Será "
+"nossa até que os espíritos que lá habitam me levem a mim e ao última pessoa "
+"da minha tribo !\".<br> 3 semanas depois fui libertado e regressei a Fremil "
+"para falar com o meu Rei. Ele estava furioso com os Bárbaros, mas mesmo "
+"assim proibiu um ataque aos Bárbaros. O Rei acreditava que os nossos "
+"exércitos eram fracos demais para sobreviver a uma guerra contra eles.<br> "
+"Eu não via outra maneira para restaurar a minha honra que não fosse lutar "
+"contra os Bárbaros. Por isso deixei Fremil e parti em busca de um novo "
+"mundo, uma nova vida algures mais a Sul. Agora estou a navegar no Golfo das "
+"Pérolas com a minha familia, alguns dos meus amigos e um punhado dos meus "
+"melhores soldados.\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
 " \"You have made this peninsula a very secure place. It is time to move "
 "on!\" "
 msgstr ""
+" \"Tornaste esta península um local muito seguro. É hora de seguir em "
+"frente!\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:51
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:156
@@ -215,6 +247,8 @@ msgid ""
 "* Build a barracks at the red point on the east side of the forests, to the "
 "right of your headquarters."
 msgstr ""
+"* Constrói uma Caserna no ponto vermelho no lado este da floresta, à direita "
+"do teu quartel-general."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:103
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:181
@@ -231,6 +265,10 @@ msgid ""
 "Cutting down enough trees for more buildings will take a while. You can "
 "speed the game up using PAGE UP and slow it down again with PAGE DOWN."
 msgstr ""
+"* Constrói uma casa de Lenhador no ponto vermelho, a sul do teu quartel-"
+"general. Abrir uma clareira para ter espaço para construir vai demorar um "
+"bocado. Podes aumentar a velocidade do jogo usando PAGE UP e diminuir a "
+"velocidade usando PAGE DOWN."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:115
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:188
@@ -256,7 +294,7 @@ msgstr "Uma noite escura"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "A foreboding"
-msgstr ""
+msgstr "Um presságio"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:122
 msgid "A step forward"
@@ -270,6 +308,12 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on "
 "an unknown desert strand and save his people. For now."
 msgstr ""
+"Depois de perder uma batalha importante contra os Bárbaros que resultou na "
+"perda de grande parte do território do Império, Lutius deixa Fremil para "
+"começar uma nova vida. Mas o destino levou o seu navio para o meio de uma "
+"grande tempestade e quase que o afunda. Apenas por sorte, Lutius consegue "
+"naufragar o navio danificado numa praia deserta e salvar a sua gente. Por "
+"agora."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:100
 msgid "Amalea comes in..."
@@ -301,7 +345,7 @@ msgstr "Construir uma Pedreira"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:172
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
+msgstr "Constrói duas casas de Lenhador e uma Serração"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:12
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:24
