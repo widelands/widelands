@@ -493,7 +493,7 @@ cheap.]]
 shall get your buildings. But note that I will not tolerate any rogue soldier;
 it similar things will happen again, I will make you responsible for them.
 Dismissed.]]
-      ) .. new_objectives(obj_make_heavy_industrie_and_mining)
+      ) .. new_objectives(obj_make_training_buildings)
    }
 }
 

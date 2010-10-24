@@ -229,9 +229,11 @@ function leftover_buildings()
    -- All fields with left over buildings
    local lob_fields = Set:new{
       map:get_field( 59, 86),
-      map:get_field( 72, 89),
+      map:get_field( 72, 91),
+      map:get_field(106,102),
       map:get_field(111,137),
       map:get_field(121,144),
+      map:get_field(147,121),
    }
 
    local msgs = {
