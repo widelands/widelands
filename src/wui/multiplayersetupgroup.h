@@ -21,13 +21,14 @@
 #define MULTIPLAYERSETUPGROUP_H
 
 #include "constants.h"
-#include "ui_basic/tabpanel.h"
-#include "ui_basic/button.h"
+#include "ui_basic/box.h"
+#include "ui_basic/panel.h"
 
 #include <string>
 
 struct GameSettingsProvider;
 struct MultiPlayerSetupGroupOptions;
+struct MultiPlayerClientGroup;
 
 /**
  * struct MultiPlayerSetupGroup
@@ -49,7 +50,9 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 	void refresh();
 
 private:
-	MultiPlayerSetupGroupOptions * d;
+	GameSettingsProvider   * const s;
+	MultiPlayerClientGroup * c[64];
+	UI::Box                  clientbox;
 };
 
 

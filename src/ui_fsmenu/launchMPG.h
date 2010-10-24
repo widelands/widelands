@@ -48,8 +48,7 @@ struct LuaInterface;
  *    4  - multi player scenario savegame <- not yet implemented
  */
 struct Fullscreen_Menu_LaunchMPG : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LaunchMPG
-		(GameSettingsProvider *, GameController *, bool autolaunch = false);
+	Fullscreen_Menu_LaunchMPG(GameSettingsProvider *, GameController *);
 	~Fullscreen_Menu_LaunchMPG();
 
 	void setChatProvider(ChatProvider &);
@@ -88,8 +87,7 @@ private:
 	GameChatPanel           * m_chat;
 	MultiPlayerSetupGroup   * m_mpsg;
 	std::string               m_filename_proof; // local variable to check state
-	int8_t                    m_nr_players;
-	bool                      m_autolaunch;
+	int16_t                   m_nr_players;
 	std::vector<std::string>  m_win_conditions;
 	uint8_t                   m_cur_wincondition;
 };

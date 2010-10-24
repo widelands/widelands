@@ -360,7 +360,7 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 
-			//setup some ggz details about a dedicated server
+			// setup some ggz details about a dedicated server
 			Section & s = g_options.pull_section("global");
 			char const * const meta = s.get_string("metaserver", WL_METASERVER);
 			char const * const name = s.get_string("nickname", "dedicated");
@@ -374,7 +374,7 @@ void WLApplication::run()
 
 			NetHost netgame(name, true);
 
-			//Load the requested map
+			// Load the requested map
 			Widelands::Map map;
 			i18n::Textdomain td("maps");
 			map.set_filename(m_filename.c_str());
@@ -382,7 +382,7 @@ void WLApplication::run()
 				(m_filename.c_str());
 			ml->preload_map(true);
 
-			//fill in the mapdata structure
+			// fill in the mapdata structure
 			MapData mapdata;
 			mapdata.filename = m_filename;
 			mapdata.name = map.get_name();
@@ -393,10 +393,11 @@ void WLApplication::run()
 			mapdata.width = map.get_width();
 			mapdata.height = map.get_height();
 
-			//set the map
+			// set the map
 			netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
 
-			//run the network game (autostarts when everyone is ready)
+			// run the network game
+			// -> autostarts when a player sends "/start" as pm to the server.
 			netgame.run(true);
 
 			NetGGZ::ref().deinitcore();
@@ -1909,15 +1910,6 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	virtual void setPlayerNumber(uint8_t const number) {
 		if (number < s.players.size())
 			s.playernum = number;
-	}
-
-	virtual void setPlayerReady(uint8_t const, bool const) {
-		//ignore, a single player is always ready to start the game if he wants to
-	}
-
-	virtual bool getPlayerReady(uint8_t) {
-		//a single player is always ready
-		return true;
 	}
 
 	virtual std::string getWinCondition() { return s.win_condition; }

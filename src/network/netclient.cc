@@ -149,7 +149,7 @@ void NetClient::run ()
 	d->settings.scenario = false;
 	uint16_t counter = 0;
 	{
-		Fullscreen_Menu_LaunchMPG lgm(this, this, d->settings.usernum);
+		Fullscreen_Menu_LaunchMPG lgm(this, this);
 		lgm.setChatProvider(*this);
 		d->modal = &lgm;
 		int32_t code = lgm.run();
@@ -373,26 +373,6 @@ void NetClient::setPlayer(uint8_t, PlayerSettings)
 	//  setPlayerNumber(uint8_t) to the host.
 }
 
-void NetClient::setPlayerReady
-	(uint8_t const number, bool const ready)
-{
-	//only if we have a valid player number set readyness
-	if (number == d->settings.playernum) {
-		SendPacket s;
-		s.Unsigned8(NETCMD_SETTING_CHANGEREADY);
-		s.Unsigned8(static_cast<uint8_t>(ready));
-		s.send(d->sock);
-	}
-}
-
-bool NetClient::getPlayerReady(uint8_t const number) {
-	return
-		d->settings.players.at(number).state == PlayerSettings::stateClosed ||
-		d->settings.players.at(number).state == PlayerSettings::stateComputer ||
-		(d->settings.players.at(number).state == PlayerSettings::stateHuman &&
-		 d->settings.players.at(number).ready);
-}
-
 std::string NetClient::getWinCondition() {
 	return d->settings.win_condition;
 }
@@ -454,7 +434,6 @@ void NetClient::recvOnePlayer
 	player.tribe = packet.String();
 	player.initialization_index = packet.Unsigned8();
 	player.ai = packet.String();
-	player.ready = static_cast<bool>(packet.Unsigned8());
 	player.team = packet.Unsigned8();
 
 	if (number == d->settings.playernum)

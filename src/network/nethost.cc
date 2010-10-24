@@ -189,22 +189,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayer(number, ps);
 	}
 
-	virtual void setPlayerReady
-		(uint8_t const number, bool const ready)
-	{
-		if (number >= h->settings().players.size())
-			return;
-
-		if (number == settings().playernum)
-			h->setPlayerReady(number, ready);
-	}
-
-	virtual bool getPlayerReady(uint8_t const number) {
-		if (number >= h->settings().players.size())
-			return false;
-		return h->getPlayerReady(number);
-	}
-
 	virtual void setPlayerNumber(uint8_t const number) {
 		if
 			(number == UserSettings::none() or
@@ -440,6 +424,9 @@ struct NetHostImpl {
 	/// order as players. In fact, a client must not be assigned to a player.
 	std::vector<Client> clients;
 
+	/// Currently active modal panel.
+	UI::Panel * modal;
+
 	/// The game itself; only non-null while game is running
 	Widelands::Game * game;
 
@@ -478,7 +465,8 @@ struct NetHostImpl {
 };
 
 NetHost::NetHost (std::string const & playername, bool ggz)
-: d(new NetHostImpl(this)), use_ggz(ggz), m_forced_pause(false)
+: d(new NetHostImpl(this)), use_ggz(ggz),
+  m_autolaunch(false), m_forced_pause(false)
 {
 	log("[Host] starting up.\n");
 
@@ -578,11 +566,14 @@ void NetHost::initComputerPlayers()
 
 void NetHost::run(bool const autorun)
 {
+	m_autolaunch = autorun;
 	HostGameSettingsProvider hp(this);
 	{
-		Fullscreen_Menu_LaunchMPG lgm(&hp, this, autorun);
-		lgm.setChatProvider(d->chat);
-		const int32_t code = lgm.run();
+		Fullscreen_Menu_LaunchMPG * lm = new Fullscreen_Menu_LaunchMPG(&hp, this);
+		if (m_autolaunch)
+			d->modal = lm;
+		lm->setChatProvider(d->chat);
+		const int32_t code = lm->run();
 
 		if (code <= 0)
 			return;
@@ -777,6 +768,9 @@ void NetHost::send(ChatMessage msg)
 
 		// Is this pm for the host player?
 		if (d->localplayername == msg.recipient) {
+			// If this is a dedicated server, handle commands
+			if (m_autolaunch)
+				handle_dserver_command(msg.msg, msg.sender);
 			d->chat.receive(msg);
 			// Write the SendPacket - will be used below to show that the message
 			// was received.
@@ -913,6 +907,32 @@ void NetHost::kickUser(std::string name, std::string reason)
 		disconnectClient(client, "Kicked by the host: " + reason);
 }
 
+/// This function is used to handle commands for the dedicated server
+///
+/// TODO add more functions, like register one player to have admin rights,
+/// TODO and give that player access to the host commands
+void NetHost::handle_dserver_command(std::string cmd, std::string sender)
+{
+	assert(m_autolaunch);
+
+	if (cmd == "/start") {
+		if (!canLaunch()) {
+			// The Server is not yet ready
+			sendSystemChat
+				(_("%s tried to start the game, but the server is not launchable."),
+				 sender.c_str());
+		} else {
+			sendSystemChat
+				(_("%s send the signal to start the game."), sender.c_str());
+			assert(!d->modal);
+			if (d->settings.savegame)
+				d->modal->end_modal(1 + d->settings.scenario);
+			else
+				d->modal->end_modal(3 + d->settings.scenario);
+		}
+	}
+}
+
 void NetHost::sendSystemChat(char const * const fmt, ...)
 {
 	char buffer[500];
@@ -955,10 +975,18 @@ bool NetHost::canLaunch()
 		return false;
 	if (d->settings.players.size() < 1)
 		return false;
+	if (d->game)
+		return false;
+	// all players must be connected to a controller (human/ai) or be closed.
 	for (size_t i = 0; i < d->settings.players.size(); ++i) {
-		if (!getPlayerReady(i)) {
+		if
+			(d->settings.players.at(i).state == PlayerSettings::stateClosed ||
+			 d->settings.players.at(i).state == PlayerSettings::stateComputer)
+			continue;
+		if
+			(d->settings.players.at(i).state == PlayerSettings::stateHuman &&
+			 d->settings.players.at(i).name.empty())
 			return false;
-		}
 	}
 	return true;
 }
@@ -1240,8 +1268,6 @@ void NetHost::setPlayerNumber(uint8_t const number)
 	s.Unsigned32(0);
 	writeSettingUser(s, 0);
 	broadcast(s);
-
-	setPlayerReady(number, false);
 }
 
 void NetHost::setWinCondition(std::string wc)
@@ -1253,30 +1279,6 @@ void NetHost::setWinCondition(std::string wc)
 	s.Unsigned8(NETCMD_WIN_CONDITION);
 	s.String(wc);
 	broadcast(s);
-}
-
-void NetHost::setPlayerReady
-	(uint8_t const number, bool const ready)
-{
-	if (number >= d->settings.players.size())
-		return;
-	d->settings.players.at(number).ready = ready;
-
-	// broadcast changes
-	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_PLAYER);
-	s.Unsigned8(number);
-	writeSettingPlayer(s, number);
-	broadcast(s);
-}
-
-bool NetHost::getPlayerReady(uint8_t const number)
-{
-	return
-		d->settings.players.at(number).state == PlayerSettings::stateClosed ||
-		d->settings.players.at(number).state == PlayerSettings::stateComputer ||
-		(d->settings.players.at(number).state == PlayerSettings::stateHuman &&
-		 d->settings.players.at(number).ready);
 }
 
 void NetHost::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
@@ -1349,7 +1351,6 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.String(player.tribe);
 	packet.Unsigned8(player.initialization_index);
 	packet.String(player.ai);
-	packet.Unsigned8(static_cast<uint8_t>(player.ready));
 	packet.Unsigned8(player.team);
 }
 
@@ -1910,12 +1911,6 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		}
 		break;
 
-	case NETCMD_SETTING_CHANGEREADY:
-		if (!d->game) {
-			setPlayerReady(client.playernum, static_cast<bool>(r.Unsigned8()));
-		}
-		break;
-
 	case NETCMD_SETTING_CHANGETEAM:
 		if (!d->game) {
 			setPlayerTeam(client.playernum, r.Unsigned8());
@@ -1935,7 +1930,6 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 				if (position.state == PlayerSettings::stateOpen) {
 					setPlayerState(pos, PlayerSettings::stateHuman);
 					setPlayerName(pos, d->settings.users.at(client.usernum).name);
-					setPlayerReady(pos, false);
 					log("[Host] client %u switched to position %u.\n", i, pos);
 				}
 			} else {
@@ -1948,7 +1942,6 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					const PlayerSettings oldOnPos = position;
 					setPlayer(pos, player);
 					setPlayer(client.playernum, oldOnPos);
-					setPlayerReady(pos, false);
 					log("[Host] client %u switched to position %i.\n", i, pos);
 				} else
 					break;

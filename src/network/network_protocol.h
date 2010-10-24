@@ -292,13 +292,6 @@ enum {
 	NETCMD_SET_PLAYERNUMBER = 19,
 
 	/**
-	 * During game setup, this send by the client to a host signals1
-	 * the player is ready (or not). Playload is
-	 * \li Unsigned8: new state
-	 */
-	NETCMD_SETTING_CHANGEREADY = 20,
-
-	/**
 	 * Sent by the client to reply to a \ref NETCMD_SYNCREQUEST command,
 	 * with the following payload:
 	 * \li Signed32: game time at which the hash was taken
@@ -307,7 +300,7 @@ enum {
 	 * It is solely the host's responsibility to act when desyncs are
 	 * detected.
 	 */
-	NETCMD_SYNCREPORT = 21,
+	NETCMD_SYNCREPORT = 20,
 
 	/**
 	 * Sent by both host and client to exchange chat messages, though with
@@ -325,7 +318,7 @@ enum {
 	 * \li Unsigned8: whether this is a personal message (0 / 1)
 	 * \li String: the recipient (only filled as personal message)
 	 */
-	NETCMD_CHAT = 22,
+	NETCMD_CHAT = 21,
 
 	/**
 	 * Sent by the host to indicate that a desync has been detected. This command
@@ -336,7 +329,7 @@ enum {
 	 * when receiving this packet. It is the host's job to decide how to proceed
 	 * after a desync has been detected.
 	 */
-	NETCMD_INFO_DESYNC = 23,
+	NETCMD_INFO_DESYNC = 22,
 
 	/**
 	 * Sent by the host to tell a client that a file transfer will start soon.
@@ -348,7 +341,7 @@ enum {
 	 *
 	 * Sent by the client as answer on the same message of the host as request.
 	 */
-	NETCMD_NEW_FILE_AVAILABLE = 24,
+	NETCMD_NEW_FILE_AVAILABLE = 23,
 
 	/**
 	 * Sent by the host to transfer a part of the file.
@@ -362,7 +355,7 @@ enum {
 	 * \li Unsigned32: number of the last received part
 	 * \li String: md5sum - to ensure client and host are talking about the same
 	 */
-	NETCMD_FILE_PART = 25,
+	NETCMD_FILE_PART = 24,
 
 	/**
 	* Sent by the host to change the win condition.
@@ -370,7 +363,7 @@ enum {
 	* Attached data is:
 	* \li String: name of the win condition
 	*/
-	NETCMD_WIN_CONDITION = 26,
+	NETCMD_WIN_CONDITION = 25,
 
 	/**
 	 * During game setup, this is sent by the client to indicate that the
@@ -383,7 +376,7 @@ enum {
 	 * replies with a \ref NETCMD_SETTING_PLAYER or \ref NETCMD_SETTING_ALLPLAYERS
 	 * indicating the changed team.
 	 */
-	NETCMD_SETTING_CHANGETEAM = 27
+	NETCMD_SETTING_CHANGETEAM = 26
 };
 
 #endif

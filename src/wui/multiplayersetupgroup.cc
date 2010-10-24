@@ -28,12 +28,46 @@
 #include "profile/profile.h"
 #include "wexception.h"
 
+#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
 
+struct MultiPlayerClientGroup : public UI::Box {
+	MultiPlayerClientGroup
+		(UI::Panel            * const parent, uint8_t id,
+		 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
+		 GameSettingsProvider * const settings,
+		 std::string const & fname, uint32_t const fsize)
+		 :
+		 UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
+		 s(settings),
+		 m_id(id)
+	{
+		set_size(w, h);
+		name = new UI::Textarea
+			(this, 0, 0, w - h - UI::Scrollbar::Size * 11 / 5, h);
+		name->set_font(fname, fsize, UI_FONT_CLR_FG);
+		name->set_text("Test");
+		add(name, 1);
+		type = new UI::Callback_Button<MultiPlayerClientGroup>
+			(this, "client_type",
+			 0, 0, h, h,
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+			 &MultiPlayerClientGroup::toggle_type, *this,
+			 std::string(), std::string(), true, false, fname, fsize);
+		add(type, 0);
+	}
 
-struct MultiPlayerSetupGroupOptions {
-	GameSettingsProvider * settings;
+	void toggle_type() {
+	}
+
+	void toggle_ready(bool ready) {}
+
+	UI::Textarea         * name;
+	UI::Button           * type;
+	GameSettingsProvider * const s;
+	uint8_t                const m_id;
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup
@@ -44,9 +78,19 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup
 	 std::string const & fname, uint32_t const fsize)
 :
 UI::Panel(parent, x, y, w, h),
-d(new MultiPlayerSetupGroupOptions)
+s(settings),
+clientbox(this, 0, buth, UI::Box::Vertical, w / 3, h - buth)
 {
-	d->settings = settings;
+	clientbox.set_size(w / 3, h - buth);
+	clientbox.set_scrolling(true);
+	for (uint32_t i = 0; i < 64; ++i) {
+		c[i] =
+			new MultiPlayerClientGroup
+				(&clientbox, i,
+				 0, 0, w / 3, buth,
+				 settings, fname, fsize);
+		clientbox.add(&*c[i], 1);
+	}
 
 	refresh();
 }
@@ -54,8 +98,7 @@ d(new MultiPlayerSetupGroupOptions)
 
 MultiPlayerSetupGroup::~MultiPlayerSetupGroup()
 {
-	delete d;
-	d = 0;
+
 }
 
 
@@ -64,7 +107,7 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup()
  */
 void MultiPlayerSetupGroup::refresh()
 {
-	//GameSettings const & settings = d->settings->settings();
+	//GameSettings const & settings = s->settings();
 
 	// Only update the user interface for the visible tab
 // 	switch(tp.active()) {

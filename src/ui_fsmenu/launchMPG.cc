@@ -87,8 +87,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 };
 
 Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
-	(GameSettingsProvider * const settings, GameController * const ctrl,
-	 bool autolaunch)
+	(GameSettingsProvider * const settings, GameController * const ctrl)
 	:
 	Fullscreen_Menu_Base("launchgamemenu.jpg"),
 
@@ -148,8 +147,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 // Variables and objects used in the menu
 	m_settings     (settings),
 	m_ctrl         (ctrl),
-	m_chat         (0),
-	m_autolaunch   (autolaunch)
+	m_chat         (0)
 {
 	// Register win condition scripts
 	m_lua = create_LuaInterface();
@@ -167,13 +165,17 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_map_info   .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	m_mapname .set_text(_("(no map)"));
-	m_map_info.set_text(_("The host has not yet selected a map or saved game"));
+	m_map_info.set_text(_("The host has not yet selected a map or saved game."));
 
 	m_mpsg =
 		new MultiPlayerSetupGroup
 			(this,
-			 m_xres / 20, m_yres / 10, m_xres * 9 / 10, m_yres * 6 / 11,
+			 m_xres / 50, m_yres / 10, m_xres * 57 / 80, m_yres * 21 / 40,
 			 settings, m_butw, m_buth, m_fn, m_fs);
+
+	// If we are the host, open the map or save selection menu at startup
+	if (m_settings->settings().usernum == 0)
+		change_map_or_save();
 }
 
 Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
@@ -298,9 +300,9 @@ void Fullscreen_Menu_LaunchMPG::select_map() {
 	m_settings->setScenario(code == 2);
 
 	MapData const & mapdata = *msm.get_map();
-	uint8_t nr_players = mapdata.nrplayers;
+	m_nr_players = mapdata.nrplayers;
 
-	m_settings->setMap(mapdata.name, mapdata.filename, nr_players);
+	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
 }
 
 /**
@@ -318,7 +320,6 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 	if (code <= 0)
 		return; // back was pressed
 
-
 	std::string filename = lsgm.filename();
 
 	// Read the needed data from file "elemental" of the used map.
@@ -328,9 +329,9 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 	Section & s = prof.get_safe_section("global");
 
 	std::string mapname = s.get_safe_string("name");
-	uint8_t nr_players = s.get_safe_int("nr_players");
+	m_nr_players = s.get_safe_int("nr_players");
 
-	m_settings->setMap(mapname, filename, nr_players, true);
+	m_settings->setMap(mapname, filename, m_nr_players, true);
 }
 
 /**
@@ -377,6 +378,9 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			// Reset font color
 			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
+			// Update local nr of players - needed for the client UI
+			m_nr_players = settings.players.size();
+
 			// Care about the newly selected file. This has to be done here and not
 			// after selection of a new map / saved game, as the clients user
 			// interface can only notice the change after the host broadcasted it.
@@ -388,13 +392,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 		}
 	}
 
-	m_nr_players  = settings.players.size();
-
-	bool launch = m_settings->canLaunch();
-	//check if we want to autolaunch
-	if (m_autolaunch && launch)
-		start_clicked();
-	m_ok.set_enabled(launch);
+	m_ok.set_enabled(m_settings->canLaunch());
 
 	m_change_map_or_save.set_enabled(m_settings->canChangeMap());
 	m_change_map_or_save.set_visible(m_settings->canChangeMap());
@@ -502,11 +500,20 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 	std::string infotext = _("Map informations:\n");
 	infotext +=
 		(format(_("* Size: %ux%u\n")) % map.get_width() % map.get_height()).str();
-	infotext += (format(_("* %u Players\n")) % map.get_nrplayers()).str();
-	infotext += (format(_("* World type: \"%s\"")) % map.get_world_name()).str();
+	infotext += (format(_("* %i Players\n")) % m_nr_players).str();
+
+	// get translated worldsname
+	std::string worldpath((format("worlds/%s") % map.get_world_name()).str());
+	Profile prof
+		((worldpath + "/conf").c_str(), 0,
+		 (format("world_%s") % map.get_world_name()).str());
+	Section & global = prof.get_safe_section("world");
+	std::string world(global.get_safe_string("name"));
+	infotext += (format(_("* World type: %s\n")) % world).str();
+
 	if (m_settings->settings().scenario)
-		infotext += (format(_("* Scenario mode selected"))).str();
-	infotext += "\n\n";
+		infotext += (format(_("* Scenario mode selected\n"))).str();
+	infotext += "\n";
 	infotext += map.get_description();
 
 	m_map_info.set_text(infotext);
