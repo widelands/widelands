@@ -62,9 +62,9 @@ struct GameSettings {
 	GameSettings() : savegame(false) {}
 
 	/// Number of player position
-	uint8_t playernum;
+	int8_t playernum;
 	/// Number of users entry
-	uint8_t usernum;
+	int8_t usernum;
 
 	/// Name of the selected map
 	std::string mapname;

@@ -174,7 +174,8 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 			 settings, m_butw, m_buth, m_fn, m_fs);
 
 	// If we are the host, open the map or save selection menu at startup
-	if (m_settings->settings().usernum == 0)
+	if (m_settings->settings().usernum == 0
+		 && m_settings->settings().mapname.empty())
 		change_map_or_save();
 }
 
@@ -425,8 +426,6 @@ void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 	ml->preload_map(true);
 	Widelands::Player_Number const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
-		if (!m_settings->settings().multiplayer)
-			m_settings->setPlayerName (i, map.get_scenario_player_name (i + 1));
 		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i + 1));
 	}
 }

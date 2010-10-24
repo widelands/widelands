@@ -274,7 +274,7 @@ struct HostChatProvider : public ChatProvider {
 			if (cmd == "help") {
 				c.msg =
 					_
-					 ("Available host commands are:<br>"
+					 ("<br>Available host commands are:<br>"
 					  "/help  -  Shows this help<br>"
 					  "/announce <msg>  -  Send a chatmessage as announcement"
 					  " (system chat)<br>"
@@ -574,7 +574,7 @@ void NetHost::run(bool const autorun)
 			d->modal = lm;
 		lm->setChatProvider(d->chat);
 		const int32_t code = lm->run();
-
+		d->modal = 0;
 		if (code <= 0)
 			return;
 	}
@@ -831,12 +831,14 @@ void NetHost::send(ChatMessage msg)
 		if (msg.sender == msg.recipient) //  he sent himself a private message
 			return; //  do not deliver it to him twice
 
-		//Now find the sender and send either the message or the failure notice
+		// Now find the sender and send either the message or the failure notice
 		else if (msg.playern == -2) // private system message
 			return;
 		else if (d->localplayername == msg.sender)
 			d->chat.receive(msg);
 		else { // host is not the sender -> get sender
+			if (d->localplayername == msg.recipient && m_autolaunch)
+				return; // There will be an immediate answer from the host
 			uint16_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
 				UserSettings const & user = d->settings.users.at(i);
@@ -924,12 +926,29 @@ void NetHost::handle_dserver_command(std::string cmd, std::string sender)
 		} else {
 			sendSystemChat
 				(_("%s send the signal to start the game."), sender.c_str());
-			assert(!d->modal);
+			assert(d->modal);
 			if (d->settings.savegame)
 				d->modal->end_modal(1 + d->settings.scenario);
 			else
 				d->modal->end_modal(3 + d->settings.scenario);
 		}
+	} else {
+		ChatMessage c;
+		c.time = time(0);
+		c.playern = -2;
+		c.sender = d->localplayername;
+		c.recipient = sender;
+		if (cmd == "/help") {
+			c.msg =
+				_
+				 ("<br>Available host commands are:<br>"
+				  "/help  - Shows this help<br>"
+				  "/start - Starts the server.");
+		} else { // default
+			c.msg =
+				(format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
+		}
+		send(c);
 	}
 }
 
@@ -1536,6 +1555,21 @@ void NetHost::welcomeClient
 	broadcast(s);
 
 	sendSystemChat(_("%s has joined the game"), effective_name.c_str());
+
+	// If this is a dedicated server, tell the player about the net commands
+	if (m_autolaunch) {
+		ChatMessage c;
+		c.time = time(0);
+		c.playern = -2;
+		c.sender = d->localplayername;
+		c.msg =
+			(format
+				(_("This is a dedicated server send \"@%s /help\" to get a full "
+				   "list of available commands. \"@%s /start\" starts the server."))
+				% d->localplayername % d->localplayername).str();
+		c.recipient = d->settings.users.at(client.usernum).name;
+		send(c);
+	}
 }
 
 void NetHost::committedNetworkTime(int32_t const time)

@@ -105,7 +105,7 @@ NetClient::NetClient
 	d->sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (d->sockset, d->sock);
 
-	d->settings.playernum = -2; // ""
+	d->settings.playernum = UserSettings::notConnected(); // ""
 	d->settings.usernum = -2; // ""
 	d->localplayername = playername;
 	d->modal = 0;
@@ -147,7 +147,6 @@ void NetClient::run ()
 
 	d->settings.multiplayer = true;
 	d->settings.scenario = false;
-	uint16_t counter = 0;
 	{
 		Fullscreen_Menu_LaunchMPG lgm(this, this);
 		lgm.setChatProvider(*this);
