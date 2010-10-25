@@ -23,7 +23,7 @@ return {
          wood_lance = 5,
          axe = 6,
          bakingtray = 2,
-         basket = 1,
+         basket = 2,
          bread = 8,
          cloth = 5,
          coal = 12,
