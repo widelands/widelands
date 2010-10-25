@@ -2067,7 +2067,8 @@ struct ReplayGameController : public GameController {
 		m_game     (game),
 		m_lastframe(WLApplication::get()->get_time()),
 		m_time     (m_game.get_gametime()),
-		m_speed    (1000)
+		m_speed    (1000),
+		m_paused   (false)
 	{
 		m_game.set_game_controller(this);
 

@@ -47,8 +47,8 @@ private:
 	bool m_useai;
 	int32_t m_lastframe;
 	int32_t m_time;
-	bool m_paused;
 	uint32_t m_speed; ///< current game speed, in milliseconds per second
+	bool m_paused;
 	uint32_t m_player_cmdserial;
 	Widelands::Player_Number m_local;
 	std::vector<Computer_Player *> m_computerplayers;
@@ -66,6 +66,7 @@ SinglePlayerGameController::SinglePlayerGameController
 	m_speed
 		(g_options.pull_section("global").get_natural
 		 	("speed_of_new_game", 1000)),
+	m_paused(false),
 	m_player_cmdserial(0),
 	m_local           (local)
 {
