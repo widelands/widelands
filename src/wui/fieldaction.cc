@@ -630,13 +630,13 @@ UI::Button & FieldActionWindow::add_button
 	 std::string const & tooltip_text,
 	 bool                const repeating)
 {
-	UI::Callback_Button<FieldActionWindow> & button =
-		*new UI::Callback_Button<FieldActionWindow>
+	UI::Callback_Button & button =
+		*new UI::Callback_Button
 			(box, name,
 			 0, 0, 34, 34,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 			 g_gr->get_picture(PicMod_Game, picname),
-			 fn, *this, tooltip_text);
+			 boost::bind(fn, boost::ref(*this)), tooltip_text);
 	button.set_repeating(repeating);
 	box->add
 		(&button, UI::Box::AlignTop);

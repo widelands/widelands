@@ -1,11 +1,13 @@
 ### Build 16 (until now)
+- Buttons that represent a toggable state are now really toggable buttons in
+  the user interface.
 - Changed the way compressed files are generated (maps, savegames) and read.
   Now it is possible to rename maps and savegames but it is not possible
   to load maps from version after this change with versions before this change
 - Added a dotted frame border to the mini map.
-- Improved and added a lot new animations for workers!
+- Improved and added many new animations for workers!
 - Implemented teamview for allied players
-- Implemented shared kingdom mode, where two or more players play the same
+- Implemented shared kingdom mode, where two or more players control the same
   player.
 - Added two new maps.
 - Added possibility to create and play multiplayer scenarios.

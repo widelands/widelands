@@ -54,7 +54,7 @@ m_realtime      (WLApplication::get()->get_time()),
 #define INIT_BUTTON(picture, name, callback, tooltip)                         \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
- &Editor_Interactive::callback, *this,                                        \
+ boost::bind(&Editor_Interactive::callback, boost::ref(*this)),               \
  tooltip                                                                      \
 
 m_toggle_main_menu

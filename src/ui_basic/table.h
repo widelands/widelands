@@ -33,7 +33,7 @@
 
 namespace UI {
 struct Scrollbar;
-template <typename T, typename ID> struct Callback_IDButton;
+struct Callback_Button;
 
 /// A table with columns and lines. The entries can be sorted by columns by
 /// clicking on the column header button.
@@ -246,7 +246,7 @@ private:
 	struct Column;
 	typedef std::vector<Column> Columns;
 	struct Column {
-		Callback_IDButton<Table, Columns::size_type> * btn;
+		Callback_Button                 * btn;
 		uint32_t                              width;
 		Align                                 alignment;
 		bool                                           is_checkbox_column;

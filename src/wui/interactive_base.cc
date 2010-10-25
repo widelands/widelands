@@ -493,7 +493,6 @@ void Interactive_Base::toggle_minimap() {
 	}
 }
 
-
 /**
  * Hide the minimap if it is currently shown; otherwise, do nothing.
  */
@@ -502,6 +501,16 @@ void Interactive_Base::hide_minimap()
 	delete m->minimap.window;
 }
 
+/**
+===========
+Interactive_Base::minimap_registry()
+
+Exposes the Registry object of the minimap to derived classes
+===========
+*/
+UI::UniqueWindow::Registry &Interactive_Base::minimap_registry() {
+	return m->minimap;
+}
 
 /*
 ===============

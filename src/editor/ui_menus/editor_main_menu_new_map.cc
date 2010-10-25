@@ -65,19 +65,19 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		(buffer, sizeof(buffer), _("Width: %u"), Widelands::MAP_DIMENSIONS[m_w]);
 	m_width = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
-	new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
+	new UI::Callback_Button
 		(this, "width_up",
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Main_Menu_New_Map::button_clicked, *this, 0);
+		 boost::bind(&Main_Menu_New_Map::button_clicked, boost::ref(*this), 0));
 
-	new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
+	new UI::Callback_Button
 		(this, "width_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Main_Menu_New_Map::button_clicked, *this, 1);
+		 boost::bind(&Main_Menu_New_Map::button_clicked, boost::ref(*this), 1));
 
 	posy += 20 + spacing + spacing;
 
@@ -86,19 +86,19 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		 _("Height: %u"), Widelands::MAP_DIMENSIONS[m_h]);
 	m_height = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
-	new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
+	new UI::Callback_Button
 		(this, "height_up",
 		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Main_Menu_New_Map::button_clicked, *this, 2);
+		 boost::bind(&Main_Menu_New_Map::button_clicked, boost::ref(*this), 2));
 
-	new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
+	new UI::Callback_Button
 		(this, "height_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Main_Menu_New_Map::button_clicked, *this, 3);
+		 boost::bind(&Main_Menu_New_Map::button_clicked, boost::ref(*this), 3));
 
 	posy += 20 + spacing + spacing;
 
@@ -108,20 +108,20 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 	while (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
 		++m_currentworld;
 
-	m_world = new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
+	m_world = new UI::Callback_Button
 		(this, "world",
 		 posx, posy, width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Main_Menu_New_Map::button_clicked, *this, 4,
+		 boost::bind(&Main_Menu_New_Map::button_clicked, boost::ref(*this), 4),
 		 Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 
 	posy += height + spacing + spacing + spacing;
 
-	new UI::Callback_Button<Main_Menu_New_Map>
+	new UI::Callback_Button
 		(this, "create_map",
 		 posx, posy, width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Main_Menu_New_Map::clicked_create_map, *this,
+		 boost::bind(&Main_Menu_New_Map::clicked_create_map, boost::ref(*this)),
 		 _("Create Map"));
 
 	posy += height + spacing;

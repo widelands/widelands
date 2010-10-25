@@ -21,6 +21,10 @@
 #define UI_UNIQUE_WINDOW_H
 
 #include "window.h"
+#include "button.h"
+
+#include <boost/function.hpp>
+
 
 namespace UI {
 struct Panel;
@@ -34,6 +38,14 @@ struct UniqueWindow : public Window {
 
 	struct Registry {
 		UniqueWindow * window;
+		boost::function<void()> onCreate;
+		boost::function<void()> onDelete;
+		boost::function<void(Registry&)> constr;
+
+		void create();
+		void destroy();
+		void toggle();
+
 		int32_t x, y;
 
 		Registry() : window(0), x(-1), y(-1) {}

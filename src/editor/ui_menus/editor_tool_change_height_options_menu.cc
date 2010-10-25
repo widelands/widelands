@@ -50,8 +50,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment,
-		 *this,
+		 boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment, boost::ref(*this)),
 		 std::string(),
 		 increase_tool.get_change_by() < MAX_FIELD_HEIGHT_DIFF),
 	m_change_by_decrease
@@ -60,8 +59,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement,
-		 *this,
+		 boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement, boost::ref(*this)),
 		 std::string(),
 		 1 < increase_tool.get_change_by()),
 	m_change_by_value
@@ -88,7 +86,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, *this,
+		 boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, boost::ref(*this)),
 		 std::string(),
 		 increase_tool.set_tool().get_interval().min < MAX_FIELD_HEIGHT),
 	m_set_to_decrease
@@ -96,7 +94,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 		 m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, *this,
+		 boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, boost::ref(*this)),
 		 std::string(),
 		 0 < increase_tool.set_tool().get_interval().min),
 	m_set_to_value
