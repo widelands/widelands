@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 20:48+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-10-25 01:59+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-10-25 04:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid "A special tabard for atlantian soldiers."
-msgstr "Uma túnica especial para guerreiros Atlântidas."
+msgstr "Uma túnica especial para guerreiros Atlântas"
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Advanced Shield"
@@ -30,14 +30,16 @@ msgid ""
 "All atlantean soldiers have to wear the sign of their country on their "
 "chests."
 msgstr ""
-"Todos os guerreiros têm que vestir o signo da sua nação no seus troncos."
+"Todos os guerreiros Atlântas têm que usar no seu peito o símbolo da sua "
+"nação."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
 "Already one of the best tridents of the Atlanteans. Only used by very good "
 "fighters."
 msgstr ""
-"Um dos melhores tridentes atlântida. Usado apenas para guerreiros muito bons."
+"Um dos melhores tridentes dos habitantes da Atlântida. Usado apenas para "
+"guerreiros muito bons."
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Armoursmith"
@@ -53,7 +55,7 @@ msgstr "Cinzas"
 
 #: ../../tribes/atlanteans/conf:5
 msgid "Atlanteans"
-msgstr "Atlântidas"
+msgstr "Atlântas"
 
 #: ../../tribes/atlanteans/conf:105
 msgid "Baker"
@@ -82,8 +84,7 @@ msgstr "Barreira"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr ""
-"Grandes baldes para o piscicultor - produzido na pequena manufactura."
+msgstr "Grandes baldes para o piscicultor - produzido no Ferramenteiro"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Blackroot"
@@ -91,7 +92,7 @@ msgstr "Raiz negra"
 
 #: ../../tribes/atlanteans/conf:167
 msgid "Blackroot Farm"
-msgstr "Cultivo de raiz negras"
+msgstr "Quinta das raizes negras"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Blackroot Flour"
@@ -103,11 +104,11 @@ msgid ""
 "the atlantian bread."
 msgstr ""
 "A Farinha da Raiz negra é produzida da mesma e é um dos três ingredientes do "
-"pão atlântida."
+"pão da Atlântida."
 
 #: ../../tribes/atlanteans/conf:106
 msgid "Blackroot farmer"
-msgstr "Silvicultor"
+msgstr "Agricultor"
 
 #: ../../tribes/atlanteans/conf:28
 msgid "Blackrootfield"
@@ -115,7 +116,7 @@ msgstr "Campo de Raiz negra"
 
 #: ../../tribes/atlanteans/conf:29
 msgid "Blackrootfield harvested"
-msgstr "Raízes negras ceifados"
+msgstr "Campo de Raízes negras ceifado"
 
 #: ../../tribes/atlanteans/conf:30
 msgid "Blackrootfield medium"
@@ -134,8 +135,8 @@ msgid ""
 "Blackroots are a special kind of roots. The Atlanteans like their strong "
 "taste and use its flour for making bread."
 msgstr ""
-"Raízes negras são um tipo especial de raiz. Os atlântidas gostam do seu "
-"sabor forte e usam a sua farinha para pão."
+"As Raízes negras são um tipo especial de raiz. Os Atlântas gostam do seu "
+"sabor forte e usam a sua farinha para fazer pão."
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Bread"
@@ -143,15 +144,15 @@ msgstr "Pão"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
-msgstr "Cria peixe."
+msgstr "Faz criação de peixe."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr "Cria aranhas pela sua seda"
+msgstr "Faz criação de seda de aranhas"
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr "Cria os fortes cavalos atlântidas"
+msgstr "Faz criação dos fortes cavalos Atlântas"
 
 #: ../../tribes/atlanteans/conf:56
 msgid "Buckets"
@@ -312,7 +313,7 @@ msgstr "Casa do piscicultor"
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
-msgstr "Peixe é o principal viver dos Atlântidas."
+msgstr "Peixe é o principal viver dos Atlântas."
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Fisher"
@@ -328,11 +329,11 @@ msgstr "Rede de pesca"
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Forester"
-msgstr "Guarda-Florestal"
+msgstr "Silvicultor"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Forester's House"
-msgstr "Casa do guarda-florestal"
+msgstr "Casa do Silvicultor"
 
 #: ../../tribes/atlanteans/conf:149
 #: ../../tribes/atlanteans/conf:156
@@ -364,8 +365,8 @@ msgid ""
 "Gold is one of the most valuable materials. Only important things are "
 "garnished with it."
 msgstr ""
-"Ouro é o mais valioso dos metais; só coisas muito importantes são forjados "
-"com ele."
+"Ouro é o mais valioso dos metais; só coisas muito importantes são "
+"guarnecidas com ele."
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Golden Tabard"
@@ -413,7 +414,7 @@ msgstr "Ajuda transportar itens em estradas muito movimentadas"
 
 #: ../../tribes/atlanteans/conf:141
 msgid "High Tower"
-msgstr "Torre elevada"
+msgstr "Torre Alta"
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Hook pole"
@@ -473,7 +474,7 @@ msgstr "Carne"
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid "Meat is one food-resource of the Atlanteans."
-msgstr "Carne é um dos viveres dos atlântidas"
+msgstr "Carne é um dos viveres dos Atlântas"
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Milking Tongs"
@@ -485,7 +486,7 @@ msgid ""
 "produced by the toolsmith."
 msgstr ""
 "Pinças de ordenha são utilizadas pelo criador de aranhas para obter a sua "
-"seda. Produzido na pequena manufactura."
+"seda. - produzido no Ferramenteiro."
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Mill"
@@ -533,7 +534,7 @@ msgid ""
 "toolsmith."
 msgstr ""
 "Picaretas são utilizadas pelos mineiros e escultores. São produzidas pelo "
-"Ferreiro."
+"Ferramenteiro"
 
 #: ../../tribes/atlanteans/conf:81
 msgid "Planks"
@@ -553,7 +554,7 @@ msgstr "Cultiva trigo"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr "Planta e cultiva raiz negra."
+msgstr "Planta e colhe as raizes negras."
 
 #: ../../tribes/atlanteans/farmer/conf:2
 msgid "Plants fields."
@@ -751,7 +752,7 @@ msgid ""
 "produced by the toolsmith."
 msgstr ""
 "Serras são necessárias para o lenhador, o serrador e o ferreiro. É produzida "
-"no Ferreiro."
+"no Ferramenteiro."
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
@@ -792,9 +793,9 @@ msgid ""
 "Shovels are needed for proper handling of plants. Therefore the forester and "
 "the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
-"A pá é precisa para um uso adequado com as plantas. Portanto tanto o "
-"plantador como o guarda-florestal usam-a. Produzido nos trabalhos "
-"metalúrgicos."
+"As pás são necessárias para a produção de plantas. Portanto tanto o "
+"Silvicultor como o Agricultor das Raizes negras usam-as. É produzida no "
+"Ferramenteiro"
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 #: ../../tribes/atlanteans/labyrinth/conf:36
@@ -918,8 +919,7 @@ msgstr "O Caçador traz carne fresca e crua para os Atlântidas."
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
-"A foice é a ferramenta do agricultor. É produzido nos trabalhos Metalúrgicos."
+msgstr "A foice é a ferramenta do Agricultor. É produzido no Ferramenteiro."
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
@@ -930,16 +930,16 @@ msgid ""
 "The bakingtray is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
-"A Pá de Forno é a ferramenta do padeiro, cada padeiro precisa de sua "
-"própria. É produzida na ferraria."
+"A Pá-de-Forno é a ferramenta do Padeiro, cada padeiro precisa de sua "
+"própria. É produzida no Ferramenteiro."
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""
 "The fire tongs are the tools of the smelter, working in the smelting works. "
 "They are produced by the toolsmith."
 msgstr ""
-"As pinças de fogo são o utensílio usado na fundição. Produzido nos trabalhos "
-"metalúrgicos."
+"As pinças de fogo são o utensílio usado na Fundição. É produzida no "
+"Ferramenteiro."
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
@@ -947,7 +947,8 @@ msgstr "O pescador pesca delicioso peixe."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr "A rede de pesca é usado pelo pescador e produzido na manufactura."
+msgstr ""
+"A rede de pesca é usado pelo Pescador e é produzida no Ferramenteiro."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -955,9 +956,9 @@ msgid ""
 "and all smiths. Make sure you always got some in reserve! It is produced by "
 "the toolsmith."
 msgstr ""
-"O martelo é uma ferramenta essencial. É preciso pelo geólogo, o trabalhador "
-"e os ferreiros. Tenha a certeza que tenha sempre alguns em reserva! "
-"Produzido nos trabalhos metalúrgicos."
+"O martelo é uma ferramenta essencial. É usado pelo geólogo, pelo construtor "
+"e pelos ferreiros. Assegura-te que tens sempre alguns de reserva! É "
+"produzido no Ferramenteiro."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid "These shields are used by the best soldiers of the Atlanteans."
@@ -986,8 +987,8 @@ msgid ""
 "This hook pole is used by the smoker to hang up all the meat and fish to the "
 "top of the smoke-house. It is created by the toolsmith."
 msgstr ""
-"O gancho é utilizado pelo fumegante para pendurar toda a carne e peixe no "
-"cimo da casa de fumo. Produzido na pequena manufactura."
+"O gancho é utilizado pelo Fumeiro para pendurar toda a carne e peixe no cimo "
+"da casa de fumo. É produzido no Ferramenteiro."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid "This is an advanced trident for more experienced soldiers."
@@ -1042,8 +1043,8 @@ msgid ""
 "This tasty bread is made out of corn- and blackrootflour and is one part of "
 "miners meal."
 msgstr ""
-"Este pão saboroso é feito a partir de farinha de trigo e raiz negra e é uma "
-"parte duma refeição do mineiro."
+"Este pão saboroso é feito a partir de farinhas de trigo e de raiz negra e é "
+"uma das partes da refeição do mineiro."
 
 #: ../../tribes/atlanteans/conf:6
 msgid ""
@@ -1079,11 +1080,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Toolsmith"
-msgstr "Ferreiro"
+msgstr "Ferramenteiro"
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Toolsmithy"
-msgstr "Pequena manufactura"
+msgstr "Loja do Ferramenteiro"
 
 #: ../../tribes/atlanteans/conf:143
 #: ../../tribes/atlanteans/conf:158
@@ -1242,7 +1243,7 @@ msgstr "Armas e utensílios são feitos de ferro."
 
 #: ../../tribes/atlanteans/conf:124
 msgid "Weaponsmith"
-msgstr "Ferreiro"
+msgstr "Ferreiro de armas"
 
 #: ../../tribes/atlanteans/conf:125
 msgid "Weaver"
