@@ -411,6 +411,7 @@ void Interactive_Player::node_action()
  * \li s: toggle building statistics
  * \li Home: go to starting position
  * \li PageUp/PageDown: change game speed
+ * \li Pause: pauses the game
  * \li Return: write chat message
 */
 bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)

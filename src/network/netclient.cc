@@ -472,6 +472,15 @@ void NetClient::setDesiredSpeed(uint32_t speed)
 	}
 }
 
+// Network games cannot be paused
+bool NetClient::isPaused()
+{
+	return false;
+}
+
+void NetClient::setPaused(bool const paused)
+{
+}
 
 void NetClient::recvOnePlayer
 	(uint8_t const number, Widelands::StreamRead & packet)

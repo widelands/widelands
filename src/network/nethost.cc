@@ -1363,6 +1363,15 @@ void NetHost::setDesiredSpeed(uint32_t const speed)
 	}
 }
 
+// Network games cannot be paused
+bool NetHost::isPaused()
+{
+	return false;
+}
+
+void NetHost::setPaused(bool const paused)
+{
+}
 
 // Send the packet to all properly connected clients
 void NetHost::broadcast(SendPacket & packet)
@@ -1701,6 +1710,10 @@ void NetHost::broadcastRealSpeed(uint32_t const speed)
  * wished speed (e.g. without this boundary, the client might set his/her wished
  *               speed to 8x - even if the host sets his desired speed to PAUSE
  *               the median sped would be 4x).
+ * 
+ * The immediate pausing (with the Pause key) is disabled completely in the
+ * network games, as sudden pauses would be distracting to other players. A
+ * hard interruption of the game can be achieved with the forced pause.
  */
 void NetHost::updateNetworkSpeed()
 {

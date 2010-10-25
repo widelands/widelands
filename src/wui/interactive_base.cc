@@ -859,6 +859,13 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 				if (GameController * const ctrl = game->gameController())
 					ctrl->setDesiredSpeed(ctrl->desiredSpeed() + 1000);
 		return true;
+	
+	case SDLK_PAUSE:
+		if (down)
+			if (upcast(Game, game, &m_egbase))
+				if (GameController * const ctrl = game->gameController())
+					ctrl->togglePaused();
+		return true;
 
 	case SDLK_PAGEDOWN:
 		if (!get_display_flag(dfSpeed))

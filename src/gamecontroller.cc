@@ -39,12 +39,15 @@ struct SinglePlayerGameController : public GameController {
 	uint32_t realSpeed();
 	uint32_t desiredSpeed();
 	void setDesiredSpeed(uint32_t speed);
+	bool isPaused();
+	void setPaused(const bool paused);
 
 private:
 	Widelands::Game & m_game;
 	bool m_useai;
 	int32_t m_lastframe;
 	int32_t m_time;
+	bool m_paused;
 	uint32_t m_speed; ///< current game speed, in milliseconds per second
 	uint32_t m_player_cmdserial;
 	Widelands::Player_Number m_local;
@@ -87,7 +90,7 @@ void SinglePlayerGameController::think()
 	else if (frametime > 1000)
 		frametime = 1000;
 
-	frametime = frametime * m_speed / 1000;
+	frametime = frametime * realSpeed() / 1000;
 
 	m_time = m_game.get_gametime() + frametime;
 
@@ -126,7 +129,10 @@ std::string SinglePlayerGameController::getGameDescription()
 
 uint32_t SinglePlayerGameController::realSpeed()
 {
-	return m_speed;
+	if (m_paused)
+		return 0;
+	else
+		return m_speed;
 }
 
 uint32_t SinglePlayerGameController::desiredSpeed()
@@ -139,6 +145,15 @@ void SinglePlayerGameController::setDesiredSpeed(uint32_t const speed)
 	m_speed = speed;
 }
 
+bool SinglePlayerGameController::isPaused()
+{
+	return m_paused;
+}
+
+void SinglePlayerGameController::setPaused(bool const paused)
+{
+	m_paused = paused;
+}
 
 GameController * GameController::createSinglePlayer
 	(Widelands::Game        &       game,
