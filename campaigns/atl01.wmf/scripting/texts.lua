@@ -516,9 +516,9 @@ horsefarm_and_warehouse_story = {
 [[People are complaining about crowded streets and slow transportation. We
 need to help out our carriers on the roads. I decided to build a horsefarm
 so that the horses can help with the heavy wares.<br>
-Another way to take load from our roads is to build warehouses. We are about
-to expand up the mountain; it would be wise to have a base camp with a warehouse
-at its foot.]]
+Another way to take load from our roads is to build warehouses. We have claimed
+the mountain now, it seems a good idea to have a warehouse on the plateau to
+avoid having to transport everything up and down the slopes.]]
       ) .. new_objectives(obj_horsefarm_and_warehouse)
    }
 }

@@ -114,8 +114,10 @@ end
 
 function build_warehouse_and_horsefarm()
    local fields = {
-      map:get_field(96, 126),
-      map:get_field(28, 91),
+      map:get_field(42, 88),
+      map:get_field(64, 105),
+      map:get_field(93, 89),
+      map:get_field(90, 66),
    }
 
    local fowned = nil 
