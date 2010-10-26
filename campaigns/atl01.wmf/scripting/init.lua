@@ -280,7 +280,7 @@ function water_rising()
       -- TODO: remove this
       print("In callback: ", f.x, f.y, f.immovable)
       if f.immovable then
-         print(f.immovable.type)
+         print(("f.immovable.type: %s"):format(tostring(f.immovable.type)))
       end
       print(("f.owner: %s"):format(tostring(f.owner)))
       -- end of remove
