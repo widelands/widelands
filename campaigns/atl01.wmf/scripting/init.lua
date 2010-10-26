@@ -282,6 +282,7 @@ function water_rising()
       if f.immovable then
          print(f.immovable.type)
       end
+      print(("f.owner: %s"):format(tostring(f.owner)))
       -- end of remove
 
       if f.owner ~= p1 then return end
