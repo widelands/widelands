@@ -159,8 +159,8 @@ function WaterRiser:rise(level)
 end
 
 function WaterRiser:_relevel_ocean()
-   -- Relevels the ocean over 5 mins
-   local scnt = math.floor(self._ocean.size / 300)
+   -- Relevels the ocean over 7.5 mins
+   local scnt = math.floor(self._ocean.size / 450)
    local cnt = scnt
    for tr in self._ocean:items() do
       for idx,f in ipairs(tr:fields()) do
