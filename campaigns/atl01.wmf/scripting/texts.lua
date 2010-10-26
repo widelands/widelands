@@ -147,7 +147,6 @@ is needed for the construction of some buildings and clothing while tabards
 are the uniforms of soldiers. The weaving-mill needs gold yarn and spider yarn
 as inputs. Spider yarn is produced by the spiderfarm while gold yarn is
 produced by the gold weaver out of gold.<br><br>
-
 - Build a Weaving-Mill<br>
 - Build a Spiderfarm<br>
 - Build a Goldweaver<br>]]
@@ -164,7 +163,6 @@ very seldom found. While it searches for them, it produces a lot of stone.<br>
 The ores have to be smelted before they can be used in smelting works. The
 refined materials are then used in the weapon smithy, the armor smithy and the
 toolsmithy.<br><br>
-
 - Build a mine of each kind. Make sure to send geologists to the mountain first.<br>
 - Build a smelting works.<br>
 - Build an armor smithy and a weapon smithy.<br>
@@ -180,9 +178,7 @@ obj_make_training_buildings = {
 dungeon trains attack - the major attribute of the atlanteans - and the
 labyrinth trains evade, health points and defense. The items produced by the
 industry are used to train better soldiers in the two training buildings.<br><br>
-
-- Build a dungeon and a labyrinth.<br>.
-]])
+- Build a dungeon and a labyrinth.<br>]])
 }
 
 obj_horsefarm_and_warehouse = {
@@ -478,7 +474,7 @@ unexpectable.  Explain this, if you will!]]
       title = _ "Sidolus seems contrite",
       body = sidolus(_
 [[I agree with you and I have punished the trouble makers severely. But it is
-very difficult to keep my men quite: they are bored and have nothing to do. I
+very difficult to keep my men quiet: they are bored and have nothing to do. I
 would like to ramp up their drill. I think more routine in their life would
 keep them occupied and focused on their duties. I would need a dungeon and a
 labyrinth for them.  I have the plans ready, but I guess they won't come
