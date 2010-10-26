@@ -411,7 +411,6 @@ weaving-mill and a spiderfarm? The spiders deliver the finest silk and we will
 produce the finest spidercloth from it. We offer to also produce the tabards
 for young soldiers and the golden tabards for officers for you in exchange.
 You will need them for sure as soon as you want to recruit new soldiers.]])
-    ..  new_objectives(obj_spidercloth_production)
  },
  {
     title = _ "Jundlina replies",
@@ -420,7 +419,7 @@ You will need them for sure as soon as you want to recruit new soldiers.]])
 but I understand your urgency. Your suggestion sounds fair to me, I will build
 your weaving-mill and spiderfarm. I will also build a goldweaver so that the
 golden tabards you make will not be golden by name alone.]]
-    )
+    ) ..  new_objectives(obj_spidercloth_production)
  }
 }
 
