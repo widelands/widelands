@@ -71,9 +71,10 @@ end
 
 function send_building_lost_message(f)
    p1:send_message(_"Building lost!", 
-([[<rt image=tribes/atlanteans/%s/idle_00.png><p>
-We lost a building to the ocean.
-</rt>]]):format(f.immovable.name), { field = f })
+      rt(p(
+         (_"We lost a %s to the ocean!"):format(f.immovable.name)
+      )), { field = f, popup = true }
+   )
 end
 
 -- ===============
@@ -81,6 +82,7 @@ end
 -- ===============
 function initialize()
    p1:allow_buildings("all")
+   p1:forbid_buildings{"shipyard"}
 
    -- A default headquarters
    use("tribe_atlanteans", "sc00_headquarters_medium")
@@ -273,39 +275,29 @@ function water_rising()
             scroll_smoothly_to(f)
             msg_boxes(field_flooded_msg)
             add_obj(obj_build_ships)
+            p1:allow_buildings{"shipyard"}
             -- TODO: check that these are completed
          end)
       end
 
-      -- TODO: remove this
-      print("In callback: ", f.x, f.y, f.immovable)
-      if f.immovable then
-         print(("f.immovable.type: %s"):format(tostring(f.immovable.type)))
-      end
-      print(("f.owner: %s"):format(tostring(f.owner)))
-      -- end of remove
-
       if f.owner ~= p1 then return end
       if not f.immovable then return end
-
+      
       -- Flags are not so interesting
       if f.immovable.type == "flag" and 
-         (f.tln.immovable and f.tln.immovable.type == "building") then
+         (f.tln.immovable and f.tln.immovable.building_type) then
          f = f.tln 
       end
-
-      if f.immovable.type == "building" then
+      if f.immovable.building_type then
          send_building_lost_message(f)
       end
    end
 
    wr.field_flooded_callback = _callback_function
 
-   wr:rise(25)
+   wr:rise(51)
 
 end
-
--- TODO: field callback is not called for all fields. Check this again.
 
 run(intro)
 run(leftover_buildings)
