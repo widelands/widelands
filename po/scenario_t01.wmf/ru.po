@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-03-13 00:49+0000\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-26 06:23+0000\n"
 "Last-Translator: Vampire Hunter D <sudo.vhd@gmail.com>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-10-27 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -24,14 +24,17 @@ msgid ""
 "trying not to fall asleep or die before the right time comes. And so I do... "
 "wait.\" "
 msgstr ""
+" \"Как говорил мне отец... Бывает время, когда нужно сражаться, и время, "
+"когда нужно лежать и ждать, постарайся не проспать и не умереть до прихода "
+"правильного времени... И поэтому... я жду.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:45
 msgid ""
 " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days.\" "
 msgstr ""
-" \"Приветствую, вождь. Я Хантрух, и видел много зимних троп. Прошу, позволь "
-"помочь тебе советом в эти темные времена.\" "
+" \"Приветствую, вождь. Меня зовут Хантрух, и я видел много зимних троп. "
+"Прошу, позволь помочь тебе советом в эти тёмные времена.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:89
 msgid ""
@@ -43,6 +46,13 @@ msgid ""
 "a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
 "NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Вождь, я прекрасно понимаю, что ни Вы, ни Ваши воины, не имеете желания "
+"задерживаться в этих заброшенных землях надолго. Но все-таки, война по "
+"возвращению нашего дома может затянуться и в этом случае было бы разумно "
+"подготовиться к этому.<br> Я бы посоветовал, чтоб мы заготовили камни на "
+"будущее - кто знает, какие укрепления нам придётся построить вскоре. И как "
+"подарок судьбы, здесь недалеко есть большие залежи камней...\"<br><br>-- "
+"НОВОЕ ЗАДАНИЕ --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:105
 msgid ""
@@ -51,6 +61,10 @@ msgid ""
 "legacy.<br> They are a constant reminder why we have to hide here... and why "
 "we must return in the end!\" "
 msgstr ""
+" \"В одну из бессонных ночей я поднялся на холм и пристально вглядывался на "
+"север. Огни продолжают полыхать, удовлетворяя жажду наследия моего отца.<br> "
+"Они, постоянное напоминание, почему мы скрываемся здесь... и, почему мы "
+"должны вернуться!\" "
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:11
 msgid ""
@@ -58,9 +72,9 @@ msgid ""
 "dark.<br> My warriors hunt at day and lie awake at night - listening to the "
 "sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr ""
-" \"Шли месяцы и мы по-прежнему скрывались в старом и темном лесу.<br> Мои "
-"воины днем охотятся и не спят по ночам - прислушиваясь к жестокой бойне, "
-"которая эхом доносится издалека сквозь древние деревья.\" "
+" \"Проходят месяцы, а мы по-прежнему скрываемся в старых и тёмных лесах.<br> "
+"Мои воины днём охотятся, а по ночам прислушиваются к звукам жестокой бойни, "
+"эхом доносящихся издалека, среди древних деревьев.\" "
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:22
 msgid ""
@@ -71,6 +85,13 @@ msgid ""
 "my spirits high and those of my warriors awake, not to let greed or despair "
 "destroy the bonds between us as well.\" "
 msgstr ""
+" \"Кости моего отца покоятся в земле на которой он некогда положил конец "
+"бессмысленному кровопролитию развернувшемуся среди нашего народа. И то, что "
+"его мир продлился только на одно поколение, доставляет мне боль.<br> В эти "
+"тёмные времена, мой верный товарищ и друг, Болдред, стал для меня источником "
+"утешения и спокойствия. Он поддерживает во мне приподнятое настроение, и это "
+"пробуждает моих воинов, не позволяя жадности и отчаянию разорвать узы "
+"связывающие нас.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:51
 msgid ""
@@ -81,6 +102,12 @@ msgid ""
 "harsh lands. I believe to the east of our campsite are a few places where we "
 "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
+" \"Только боги знают как долго мы будем скрываться здесь. Воины надеются что "
+"мы двинемся назад в ближайшие дни, но я сильно сомневаюсь что это "
+"произойдёт. А дни становятся всё короче и холоднее...<br> Мы должны "
+"подготовиться, на случай если нам придётся встретить зиму в этих суровых "
+"землях. Я полагаю, что к востоку от нашего лагеря есть несколько мест где мы "
+"можем поставить хижину лесоруба.\"<br><br>-- НОВЫЕ ЗАДАНИЯ --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:60
 msgid ""
@@ -90,6 +117,12 @@ msgid ""
 "men would appreciate a way as short and plain as possible - the wood will "
 "surely be heavy enough, nevertheless.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Очевидно, что было бы слишком утомительно для наших людей, идти весь путь "
+"до хижины лесоруба через заросшую местность. Поэтому мы проложим дорогу "
+"между нашим штабом и хижиной лесоруба. Тем не менее, как не трудно "
+"догадаться, люди предпочтут путь как можно более ровный и короткий, так как "
+"древесина несомненно будет достаточно тяжёлой.\"<br><br>-- НОВОЕ ЗАДАНИЕ --"
+"<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:81
 msgid ""
@@ -101,6 +134,13 @@ msgid ""
 "should build a ranger's hut, preferably close to the lumberjack's "
 "hut.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" Конечно, если мы намерены построить большое поселение, то потребуется "
+"намного больше хижин лесоруба, но пока достаточно и этих.<br> Только никогда "
+"не забывайте, что эти леса наше наследие, вверенное нам нашими предками. Мы "
+"должны их уважать и заботиться о них. И всё, что мы взяли, мы должны вернуть "
+"обратно.<br> Поэтому, чтобы восстановить деревья которые мы срубили, мы "
+"должны построить хижину лесника, желательно как можно ближе к хижине "
+"лесоруба.\"<br><br>-- НОВОЕ ЗАДАНИЕ --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:115
 msgid ""
@@ -110,11 +150,11 @@ msgid ""
 "it felt like a farewell. For the first time, I wondered what the future "
 "might hold for me...\" "
 msgstr ""
-" \"Еще раз, я подошел к могиле своего отца, в священной роще у подножия "
-"большого шпиля Кальмаврат. Я просто стоял там и не замечал ни уходящего "
-"времени, ни холодного дождя, льющегося вниз из пасмурного неба...<br> Так "
-"или иначе, это было похоже на прощание. Впервые, я задался вопросом, что "
-"приготовило для меня будущее...\" "
+" \"Однажды я снова пришёл к могиле своего отца в священной роще, находящейся "
+"у подножия вершины Кальмаврат. Я просто стоял там и не замечал ни уходящего "
+"времени, ни холодного дождя, льющего с потемневшего неба...<br> Почему-то "
+"это было похоже на прощание. Впервые, я задался вопросом, что приготовило "
+"для меня будущее...\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:125
 msgid ""
@@ -125,6 +165,13 @@ msgid ""
 "not happen any time soon. He might still be right, but I fear the bloodshed "
 "that returning too fast would cause both on our and the other side...\" "
 msgstr ""
+" \"Недавно, ко мне подходил Болдред. Он посоветовал переместиться ближе к "
+"дому, чтобы нанести удар при первых же признаках неуверенности в войсках "
+"моих братьев.<br> Но взглянув поверх лесов я по-прежнему вижу чёрный дым "
+"поднимающийся в небо. Я знаю, ещё слишком рано, и то на что он надеется не "
+"случится в ближайшее время. Он может быть прав, но я боюсь что слишком "
+"поспешное возвращение вызовет кровопролитие и большие потери с обеих "
+"сторон...\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:74
 msgid ""
@@ -133,6 +180,11 @@ msgid ""
 "people. More trees wait for our axes just south of our new crossroads - let "
 "us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Северные ветра говорят нам что грядущая зима будет долгой и суровой. "
+"Одной хижины лесоруба будет не достаточно, чтобы удовлетворить потребности "
+"нашего народа. Множество деревьев, южнее нашего нового перекрёстка, ждут "
+"наших топоров. Давайте поставим там вторую хижину лесоруба.\"<br><br>-- "
+"НОВОЕ ЗАДАНИЕ --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:67
 msgid ""
@@ -140,6 +192,9 @@ msgid ""
 "crossroads on the way between our headquarters and the lumberjack's hut "
 "would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Есть старая пословица:<br> 'Разделённое бремя легче вынести.'<br> "
+"Перекрёсток, на дороге между нашим штабом и хижиной лесоруба, облегчил бы "
+"работу наших носильщиков.\"<br><br>-- НОВОЕ ЗАДАНИЕ --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
@@ -148,10 +203,10 @@ msgid ""
 "atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will "
 "stop this madness at any cost!\" "
 msgstr ""
-" \"Сегодня мои воины подобрали старика, который блуждал больной и раненный в "
-"темном лесу. Мы слушали в ужасе, когда он сказал нам о злодеяниях, "
-"творящихся в Альтунране.<br> Тем самым я даю присягу - остановить это "
-"безумие любой ценой!\" "
+" \"Сегодня, мои воины подобрали раненного, больного старика, блуждавшего в "
+"тёмном лесу. Мы слушали в ужасе, когда он рассказывал нам о зверствах "
+"творящихся в Альтунране.<br> После этого, я дополнил свою клятву - я "
+"остановлю это безумие любой ценой!\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:94
 msgid ""
@@ -160,6 +215,10 @@ msgid ""
 "VICTORY! ----------------------<br><br> You may continue to play this map if "
 "you wish. Otherwise, move on to the next mission.\" "
 msgstr ""
+" \"Отлично, вождь! Теперь у нас есть всё необходимое для предстоящей зимы и "
+"возможности подготовиться к грядущим битвам.\"<br><br>------------------ "
+"ПОБЕДА! ------------------<br><br> Если хотите, можете продолжить игру на "
+"этой карте. Иначе, переходите к следующей миссии. "
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
 msgid ""
@@ -167,9 +226,9 @@ msgid ""
 "away.<br> The red lights flash in the darkness and dance to the rhythm of "
 "the wardrums that haunt me even in my nightmares.\" "
 msgstr ""
-" \"Даже отсюда мы видим устрашающее пламя, поглощающее Al'thunran, находясь "
-"при этом так далеко.<br> Красные огни вспыхивающие в темноте и танцующие в "
-"ритме барабанного боя, которые преследуют меня даже в ночных кошмарах.\" "
+" \"Даже находясь так далеко, мы видим отблески бушующего пламени, "
+"поглощающего Альтунран.<br> Красные огни вспыхивающие в темноте и танцующие "
+"в ритме барабанного боя, преследуют меня даже в ночных кошмарах.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:10
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
@@ -177,11 +236,14 @@ msgid ""
 "* Build a lumberjack's hut at the red house symbol just right of your "
 "headquarters by clicking on it and selecting a lumberjack's hut.<br>"
 msgstr ""
+"* Постройте хижину лесоруба на месте значка красного домика, находящегося "
+"справа от Вашего штаба. Для этого щёлкните мышью по домику и выберите хижину "
+"лесоруба.<br>"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:27
 #: ../../campaigns/t01.wmf/scripting/texts.lua:82
 msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
-msgstr "* Постройте хижину лесника восточней первой хижины дровосека."
+msgstr "* Постройте хижину лесника к востоку от первой хижины лесоруба."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:61
 msgid ""
@@ -199,6 +261,21 @@ msgid ""
 "However, you can also click farer away from the flag to build several steps "
 "at once. Click on the flag at the headquarters to finish the road."
 msgstr ""
+"* Постройте дорогу между Вашим штабом и местом постройки хижины "
+"лесоруба.<br> Когда Вы разместите хижину лесоруба, для неё будет установлен "
+"флажок. Вам нужно соединить его с другим флажком, построив между ними "
+"дорогу.<br> Если Вы щёлкните мышью по флажку и затем по кнопке строительства "
+"дороги, то небольшие значки появившиеся вокруг него покажут Вам в каких "
+"направлениях можно строить дорогу.<br> Цвет этих значков показывает "
+"насколько крутым будет соответствующий участок дороги. Зелёный для ровных "
+"участков, жёлтый для крутых и красный для очень крутых участков. Чем круче "
+"дорога, тем тяжелее будет Вашим носильщикам двигаться по ней (и тем "
+"медленнее будут транспортироваться Ваши товары).<br> Вы можете щёлкнуть "
+"мышью по любому из значков, чтобы построить там первый участок дороги. "
+"Появившиеся новые значки покажут Вам где можно построить следующий участок "
+"дороги, и так далее. В тоже время, Вы можете щёлкнуть и дальше от флага, "
+"построив таким образом сразу несколько участков за раз. Щелчок по флажку "
+"штаба закончит постройку дороги."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:11
 msgid ""
@@ -216,11 +293,26 @@ msgid ""
 "However, you can also click farther away from the flag to build several "
 "steps at once. Click on the flag at the headquarters to finish the road."
 msgstr ""
+"* Постройте дорогу между Вашим штабом и местом постройки хижины "
+"лесоруба.<br> Когда Вы разместите хижину лесоруба, для неё будет установлен "
+"флажок. Вам нужно соединить его с другим флажком, построив между ними "
+"дорогу.<br> Если Вы щёлкните мышью по флажку и затем по кнопке строительства "
+"дороги, то небольшие значки появившиеся вокруг него покажут Вам в каких "
+"направлениях можно строить дорогу.<br> Цвет этих значков показывает "
+"насколько крутым будет соответствующий участок дороги. Зелёный для ровных "
+"участков, жёлтый для крутых и красный для очень крутых участков. Чем круче "
+"дорога, тем тяжелее будет Вашим носильщикам двигаться по ней (и тем "
+"медленнее будут транспортироваться Ваши товары).<br> Вы можете щёлкнуть "
+"мышью по любому из значков, чтобы построить там первый участок дороги. "
+"Появившиеся новые значки покажут Вам где можно построить следующий участок "
+"дороги, и так далее. В тоже время, Вы можете щёлкнуть и дальше от флага, "
+"построив таким образом сразу несколько участков за раз. Щелчок по флажку "
+"штаба закончит постройку дороги."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:34
 #: ../../campaigns/t01.wmf/scripting/texts.lua:90
 msgid "* Build two quarries southwest of your headquarters."
-msgstr "* Постройте два карьера к юго-западу от штаба."
+msgstr "* Постройте две каменоломни к юго-западу от штаба."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:19
 #: ../../campaigns/t01.wmf/scripting/texts.lua:68
@@ -233,6 +325,13 @@ msgid ""
 "additional flags in between make them arrive at their destination faster, "
 "thus improving your infrastructure.<br>"
 msgstr ""
+"* Установите флажок в середине дороги.<br> В середине построенной Вами "
+"дороги есть значок флага. Вы можете установить флажок щёлкнув мышью по этому "
+"значку и затем по кнопке установки флага в появившемся окне. Это разделит "
+"путь транспортировки древесины на два участка, с отдельным носильщиком в "
+"каждом.<br> Когда множество товаров транспортируются между двумя пунктами, "
+"то дополнительные флажки, между ними, позволят товарам быстрее достичь места "
+"назначения, тем самым улучшив Вашу инфраструктуру.<br>"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:20
 #: ../../campaigns/t01.wmf/scripting/texts.lua:75
@@ -243,6 +342,11 @@ msgid ""
 "step by step, you may also click directly at its destination to build the "
 "entire road at once."
 msgstr ""
+"* Постройте хижину лесоруба южнее флага, который Вы только что установили на "
+"дороге. Затем соедините дорогой этот флаг с флагом стройплощадки новой "
+"хижины лесоруба.<br> Помните, что вместо строительства дороги вручную, шаг "
+"за шагом, Вы можете щёлкнуть мышью прямо по месту назначения, построив тем "
+"самым всю дорогу сразу."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:9
 #: ../../campaigns/t01.wmf/scripting/texts.lua:52
@@ -250,6 +354,9 @@ msgid ""
 "* Press SPACE to see where you can build.<br> The red house symbols show you "
 "where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr ""
+"* Нажмите ПРОБЕЛ чтобы увидеть где можно строить.<br> Значок красного домика "
+"покажет Вам где могут быть построены малые строения, такие как хижина "
+"лесоруба.<br>"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
@@ -257,23 +364,23 @@ msgstr "Старик говорит..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:111
 msgid "At the tomb"
-msgstr ""
+msgstr "У могилы"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:7
 msgid "Build a lumberjack's hut"
-msgstr "Постройте хижину дровосека"
+msgstr "Построить хижину лесоруба"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:25
 msgid "Build a ranger's hut"
-msgstr "Постройте хижину лесничего"
+msgstr "Построить хижину лесника"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:17
 msgid "Build another lumberjack's hut"
-msgstr "Постройте вторую хижину дровосека"
+msgstr "Построить ещё одну хижину лесоруба"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:32
 msgid "Build two quarries"
-msgstr "Постройте две каменоломни"
+msgstr "Построить две каменоломни"
 
 #: ../../campaigns/t01.wmf/elemental:9
 msgid ""
@@ -300,20 +407,20 @@ msgstr "Хантрух кивнул..."
 msgid "Khantrukh remembers..."
 msgstr "Хантрух вспоминает..."
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:65
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:58
 msgid "Mission Complete"
 msgstr "Миссия завершена"
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:25
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid "Somebody comes up to you"
-msgstr ""
+msgstr "Кто-то приблизился к Вам"
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:26
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:32
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:41
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:42
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:36
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:37
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:45
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:59
 msgid "The advisor"
 msgstr "Советник"
 
@@ -327,7 +434,7 @@ msgstr "Старик говорит..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:130
 msgid "The oath"
-msgstr "Присяга"
+msgstr "Клятва"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:72
 msgid "The old man looks to the sky..."
@@ -343,7 +450,7 @@ msgstr "История начинается"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:132
 msgid "Thron looks furious..."
-msgstr "Трон выглядит разъяренным..."
+msgstr "Трон в ярости..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:123
 msgid "Thron says thoughtfully..."
@@ -360,7 +467,7 @@ msgstr "Трон говорит..."
 
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Обучение I - Глаза во Тьме"
+msgstr "Глаза во тьме (Обучение 1)"
 
 #~ msgid "OK"
 #~ msgstr "OK"
