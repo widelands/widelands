@@ -75,9 +75,9 @@ fps=10
 
 [eva_ok_e]
 pics=eva_ok_e_??.png
-hotspot=30 36
+hotspot=18 34
 playercolor=true
-fps=10
+fps=20
 
 [eva_fail_e]
 pics=eva_fail_e_??.png
@@ -99,9 +99,9 @@ fps=10
 
 [eva_ok_w]
 pics=eva_ok_w_??.png
-hotspot=30 36
+hotspot=18 34
 playercolor=true
-fps=10
+fps=20
 
 [eva_fail_w]
 pics=eva_fail_w_??.png
@@ -113,10 +113,10 @@ fps=10
 pics=die_??.png
 hotspot=16 31
 playercolor=true
-fps=10
+fps=20
 
 [die_e]
 pics=die_??.png
 hotspot=16 31
 playercolor=true
-fps=10
+fps=20
