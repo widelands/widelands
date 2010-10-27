@@ -38,6 +38,8 @@ struct Interactive_Spectator : public Interactive_GameBase {
 	Interactive_Spectator
 		(Widelands::Game &, Section & global_s, bool multiplayer = false);
 
+	~Interactive_Spectator();
+
 	void start();
 
 	Widelands::Player * get_player() const throw ();
