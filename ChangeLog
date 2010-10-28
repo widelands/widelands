@@ -1,4 +1,6 @@
 ### Build 16 (until now)
+- Give Empire +1 basket so that two vineyards can be build right away to fully
+  saturate the first marble mine.
 - Buttons that represent a toggable state are now really toggable buttons in
   the user interface.
 - Changed the way compressed files are generated (maps, savegames) and read.
