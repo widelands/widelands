@@ -344,6 +344,7 @@ bool StatisticsHandler::report_game_result
 					 gameinfo, l.size());
 		}
 	}
+	g_wls->check_reports();
 }
 
 void StatisticsHandler::read_stat_vector

@@ -18,6 +18,11 @@
 
 #include "protocol_helpers.h"
 
+#ifndef WLGGZEXCEPTION
+#include "wlggz_exception.h"
+#define WLGGZEXCEPTION parameterError()
+#endif
+
 /**
  * This function reads a parameter list from a filedescriptor. This function
  * reads pairs of data type and data until the data type is zero. This reads
@@ -26,62 +31,108 @@
  * @param fd The filedescriptor to read from
  * @return the list of the parameters
  */
-std::list<WLGGZParameter> wlggz_read_parameter_list(int fd)
+std::list<WLGGZParameter> wlggz_read_parameter_list(int fd, bool re = false)
 {
+	// prevent creating too deep lists. This is most probably a client error
+	// or a denial of service attack.
+	static int call_level;
+	call_level++;
+	if (not re)
+		call_level = 0;
+	if (call_level > 20) {
+		call_level = 0;
+		throw WLGGZEXCEPTION;
+	}
+	// prevent looping to often. The longest list currently are the statistic
+	// vectors. 1000 samples should be enough for these.
+	int length = 0;
+
 	std::list<WLGGZParameter> list;
 	int datatype;
+
 	if( ggz_read_int(fd, &datatype) < 0 ){
-		std::cout << "wlggz_read_parameter_list: ERROR on read\n";
-		return list;
+		call_level--;
+		throw WLGGZEXCEPTION;
 	}
-	//std::cout << "GGZ: read_int ("<< datatype <<") datatype\n";
+
 	while(datatype)
 	{	
 		WLGGZParameter data;
 		int d_i;
 		char * d_str;
 		char d_ch;
-		
+
+		if (length++ > 1000) {
+			call_level = 0;
+			throw WLGGZEXCEPTION;
+		}
+
 		switch(datatype)
 		{
 			case ggzdatatype_integer:
-				ggz_read_int(fd, &d_i);
-				//std::cout << "GGZ: read_parameter_list: read_integer ("<< d_i <<")\n";
+				if (ggz_read_int(fd, &d_i) < 0) {
+					call_level = 0;
+					throw WLGGZEXCEPTION;
+				}
 				data.set(d_i);
 				break;
 			case ggzdatatype_char:
-				ggz_read_char(fd, &d_ch);
-				//std::cout << "GGZ: read_parameter_list: read_char ("<< d_ch <<")\n";
+				if (ggz_read_char(fd, &d_ch) < 0) {
+					call_level = 0;
+					throw WLGGZEXCEPTION;
+				}
 				data.set(d_ch);
 			case ggzdatatype_string:
-				ggz_read_string_alloc(fd, &d_str);
-				//std::cout << "GGZ: read_parameter_string: read_string ("<< d_str <<")\n";
+				if (ggz_read_string_alloc(fd, &d_str) < 0) {
+					call_level = 0;
+					throw WLGGZEXCEPTION;
+				}
 				data.set(std::string(strdup(d_str)));
 				ggz_free(d_str);
 				break;
 			case ggzdatatype_boolean:
-				ggz_read_int(fd, &d_i);
-				//std::cout << "GGZ: read_parameter_list: read_boolean ("<< d_i <<")\n";
+				if (ggz_read_int(fd, &d_i) < 0) {
+					call_level = 0;
+					throw WLGGZEXCEPTION;
+				}
 				data.set(static_cast<bool>(d_i));
 				break;
 			case ggzdatatype_list:
-				ggz_read_int(fd, &d_i);
-				data.set(d_i, wlggz_read_parameter_list(fd));
+				if (ggz_read_int(fd, &d_i) < 0) {
+					call_level = 0;
+					throw WLGGZEXCEPTION;
+				}
+				data.set(d_i, wlggz_read_parameter_list(fd, true));
 				break;
 			case ggzdatatype_raw:
-				ggz_read_int(fd, &d_i);
+				if (ggz_read_int(fd, &d_i) < 0) {
+					call_level = 0;
+					throw WLGGZEXCEPTION;
+				}
+				// do not accept raw data with more than 10KiB
+				if (d_i > 10240) {
+					call_level = 0;
+					throw WLGGZEXCEPTION;
+				}
 				d_str = new char[d_i];
-				ggz_readn(fd, d_str, d_i);
+				if (ggz_readn(fd, d_str, d_i) < 0) {
+					call_level = 0;
+					throw WLGGZEXCEPTION;
+				}
+				// prevent getting lot of lists with raw data elements.
+				length += 200;
 				data.set_raw(d_i, d_str);
 				break;
 			default:
-				std::cout << "GGZ: ERROR Received unknow data type: " <<
+				std::cerr << "GGZ: ERROR Received unknow data type: " <<
 				datatype << std::endl;
 		}
 		list.push_back(data);
-		ggz_read_int(fd, &datatype);
-		//std::cout << "GGZ: read_int ("<< datatype <<") datatype\n";
+		if (ggz_read_int(fd, &datatype) < 0) {
+			call_level = 0;
+			throw WLGGZEXCEPTION;
+		}
 	}
-	//std::cout << "GGZ: read_parameter_list: leave\n";
+	call_level--;
 	return list;
 }

@@ -55,12 +55,17 @@ class WidelandsServer : public GGZGameServer
 		WidelandsPlayer * get_player_by_wlid(int);
 		WidelandsPlayer * get_player_by_ggzid(int);
 		
+		GGZGameServer::State game_state() { return state(); }
+		
 		int numberofplayers() 
 			{ return playercount(Seat::player) + playercount(Seat::bot); }
 		
 		
 		StatisticsHandler & stat_handler();
 		ProtocolHandler & proto_handler();
+
+		void check_reports();
+		bool is_playing() { return state() == GGZGameServer::waiting; }
 
 	private:
 		// @{

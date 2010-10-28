@@ -114,6 +114,23 @@ class WidelandsPlayer
 		uint32_t result;
 		uint32_t points;
 
+		/// client communication error counter. This are recoverable error like
+		/// invalid opcodes.
+		int soft_error_count;
+
+		/// client communication error counter. This are hard errors like not
+		/// being able to read from socket.
+		int hard_error_count;
+
+		/// set to true if soft_error_count was to high or if we had an error
+		/// while reading parameter list
+		bool desync;
+
+		/// set to true if communication to client is broken.
+		bool connection_failed;
+		/// set to true if this client send a game report.
+		bool reported_game;
+		/// set to true if this clint has send game information.
 	private:
 		WidelandsPlayer();
 		std::string m_name;
