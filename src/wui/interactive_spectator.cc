@@ -98,6 +98,37 @@ Interactive_Spectator::Interactive_Spectator
 	fieldclicked.set(this, &Interactive_Spectator::node_action);
 
 	set_display_flag(dfSpeed, true);
+
+#define INIT_BTN_HOOKS(registry, btn)                                        \
+ registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
+ registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+ if (registry.window) btn.set_perm_pressed(true);                            \
+
+        INIT_BTN_HOOKS(m_chat, m_toggle_chat)
+        INIT_BTN_HOOKS(m_options, m_toggle_options_menu)
+        INIT_BTN_HOOKS(m_mainm_windows.general_stats, m_toggle_statistics)
+        INIT_BTN_HOOKS(m_mainm_windows.savegame, m_save)
+        INIT_BTN_HOOKS(minimap_registry(), m_toggle_minimap)
+
+}
+
+Interactive_Spectator::~Interactive_Spectator() {
+	// We need to remove these callbacks because the opened window might
+        // (theoretically) live longer than 'this' window, and thus the
+        // buttons. The assertions are safeguards in case somewhere else in the
+        // code someone would overwrite our hooks. 
+
+#define DEINIT_BTN_HOOKS(registry, btn)                                                \
+ assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed,&btn, true));  \
+ assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed,&btn, false)); \
+ registry.onCreate = 0;                                                                \
+ registry.onDelete = 0;                                                                \
+
+        DEINIT_BTN_HOOKS(m_chat, m_toggle_chat)
+        DEINIT_BTN_HOOKS(m_options, m_toggle_options_menu)
+        DEINIT_BTN_HOOKS(m_mainm_windows.general_stats, m_toggle_statistics)
+        DEINIT_BTN_HOOKS(m_mainm_windows.savegame, m_save)
+        DEINIT_BTN_HOOKS(minimap_registry(), m_toggle_minimap)
 }
 
 
