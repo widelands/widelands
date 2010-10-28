@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-10-18 21:03+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-10-27 07:01+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-10-28 04:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -1608,6 +1608,12 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"Beschikbare opdrachten zijn:<br>/help - Toont deze hulp<br>/announce "
+"<bericht> - Stuurt een chatbericht als mededeling (systeem chat)<br>/warn "
+"<naam> <reden> - Waarschuwt de gebruiker <naam> vanwege <reden><br>/kick "
+"<naam> - Verwijder de gebruiker <naam> vanwege <reden><br>/forcePause - "
+"Dwingt het spel tot een pauze.<br>/endForcedPause - Vervat het spel met "
+"normale snelheid."
 
 #: ../../src/network/nethost.cc:328
 msgid "Wrong use, should be: /announce <message>"
@@ -1624,41 +1630,41 @@ msgstr "Verkeerd gebruik, moet zijn /kick <naam> <reden>"
 #: ../../src/network/nethost.cc:359
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Weet u zeker dat u %s wilt verwijderen?<br>"
 
 #: ../../src/network/nethost.cc:362
 #, c-format
 msgid "The stated reason was: %s<br>"
-msgstr ""
+msgstr "De genoemde reden was: %s<br>"
 
 #: ../../src/network/nethost.cc:365
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "Indien ja, type: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:374
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "verwijderbevestiging geannuleerd: Geen naam opgegeven!"
 
 #: ../../src/network/nethost.cc:376
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Verkeerd gebruik, moet zijn: /ack_kick <naam>"
 
 #: ../../src/network/nethost.cc:382
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "verwijderbevestiging geannuleerd: Verkeerde naam opgegeven!"
 
 #: ../../src/network/nethost.cc:392
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Pauze was al geforceerd - spel zou gepauzeerd moeten zijn."
 
 #: ../../src/network/nethost.cc:403
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Er is geen geforceerde pauze - niets te stoppen."
 
 #: ../../src/network/nethost.cc:413
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Ongeldige opdracht! Type /help voor een opdrachtenlijst."
 
 #: ../../src/network/nethost.cc:543
 msgid "Server has left the game."
@@ -1674,11 +1680,11 @@ msgstr "Server is gecrashed en heeft een reddingsbestand opgeslagen."
 
 #: ../../src/network/nethost.cc:905
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "Het is niet mogelijk jezelf te verwijderen!"
 
 #: ../../src/network/nethost.cc:927
 msgid "There is no connected user with that nickname!"
-msgstr ""
+msgstr "Er is geen verbonden speler met die bijnaam!"
 
 #: ../../src/network/nethost.cc:1102
 #, c-format
@@ -1803,7 +1809,7 @@ msgstr "%s heeft het spel verlaten (%s)"
 #: ../../src/network/nethost.cc:2217
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Onbekende gebruiker heeft het spel verlaten (%s)"
 
 #: ../../src/wui/interactive_dedicated_server.cc:53
 #: ../../src/wui/interactive_player.cc:175
@@ -3036,7 +3042,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:886
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "%s geproduceerd"
 
 #: ../../src/logic/production_program.cc:953
 msgid "Recruited "
@@ -3054,7 +3060,7 @@ msgstr "percentage"
 #: ../../src/logic/production_program.cc:1128
 #, c-format
 msgid "No left resources found!"
-msgstr ""
+msgstr "Geen overgebleven bronnen gevonden!"
 
 #: ../../src/logic/production_program.cc:1149
 msgid "Mine empty"
@@ -3584,7 +3590,7 @@ msgstr "Mens"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:230
 msgid "Help "
-msgstr ""
+msgstr "Help "
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
@@ -3656,11 +3662,11 @@ msgstr "Klaar"
 
 #: ../../src/ui_fsmenu/launchgame.cc:280
 msgid "Scenario"
-msgstr ""
+msgstr "Scenario"
 
 #: ../../src/ui_fsmenu/launchgame.cc:282
 msgid "Win condition is set through the scenario"
-msgstr ""
+msgstr "Winconditie wordt tijdens het scenario gesteld"
 
 #: ../../src/ui_fsmenu/launchgame.cc:292
 msgid "Type: "
@@ -3979,7 +3985,7 @@ msgstr "OpenGL rendering *Bijzonder experimenteel!*"
 
 #: ../../src/ui_fsmenu/options.cc:470
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Toon chat tijdens het spel met doorzichtige achtergrond"
 
 #: ../../src/ui_fsmenu/options.cc:495
 msgid "Pause"

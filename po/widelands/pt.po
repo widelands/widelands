@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-10-22 23:26+0000\n"
+"PO-Revision-Date: 2010-10-27 23:16+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-10-24 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-10-28 04:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/writeHTML.cc:43
@@ -982,7 +982,7 @@ msgstr ""
 #: ../../src/logic/soldier.cc:74 ../../src/logic/soldier.cc:181
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr ""
+msgstr "esperava %s mas encontrei \"%s\""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:451
 #, c-format
@@ -1004,7 +1004,7 @@ msgstr "sitio militar: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:716
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
-msgstr ""
+msgstr "programa %s foi saltado no tempo %u, mas o tempo só é %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:894
 #, c-format
@@ -1024,12 +1024,12 @@ msgstr "alturas: %s"
 #: ../../src/game_io/game_preload_data_packet.cc:58
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "versão desconhecida/não manuseada %i"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
 msgid "elemental data: %s"
-msgstr ""
+msgstr "Dados elementares: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:134
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:198
@@ -1040,11 +1040,11 @@ msgstr "item %u: %s"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:205
 #, c-format
 msgid "waredata: %s"
-msgstr ""
+msgstr "dados do armazém: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
-msgstr ""
+msgstr "Nenhum lugar para o carregador"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:134
 #, c-format
@@ -1052,6 +1052,8 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"esperava 1 mas encontrei %u lugares de carrregador na estrada guardados com "
+"a versão 2 (antiga)"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
@@ -1061,12 +1063,12 @@ msgstr "estrada: %u %s"
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
 msgid "roaddata: %s"
-msgstr ""
+msgstr "dados da estrada: %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "o nó é do jogador %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
@@ -1076,17 +1078,17 @@ msgstr "pertence ao jogador %u"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "tem uma bandeira (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr ""
+msgstr "nó vizinho (%i, %i): %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "bandeiras: %s"
 
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:96
 #, c-format
@@ -1096,12 +1098,12 @@ msgstr "construções permitidas: %s"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
 msgid "wrong flag (%u) at given position (%i, %i)"
-msgstr ""
+msgstr "bandeira errada (%u) na posição dada (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr ""
+msgstr "nenhuma bandeira na posição dada (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
@@ -1117,17 +1119,19 @@ msgstr "construindo (%u): %s"
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:219
 #, c-format
 msgid "flagdata: %s"
-msgstr ""
+msgstr "dados da bandeira: %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:88
 #, c-format
 msgid "messages are not ordered: sent at %u but previous message sent at %u"
 msgstr ""
+"as mensagens não estão ordenadas: enviada em %u mas a mensagem anterior foi "
+"enviada em %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:94
 #, c-format

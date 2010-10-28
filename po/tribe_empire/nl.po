@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-20 00:26+0000\n"
-"Last-Translator: fireprog <daandeweerdt@gmail.com>\n"
+"PO-Revision-Date: 2010-10-27 07:07+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-21 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-10-28 04:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -486,8 +486,8 @@ msgid ""
 "Marble is the beautiful stone, which is cutted out of the mountains and "
 "which is used for beautiful buildings and columns."
 msgstr ""
-"Marmer is prachtige steen die wordt gekerfd uit de bergen en deze wordt "
-"gebruikt voor prachtige gebouwen en zuilten."
+"Marmer is prachtige steen die wordt gewonnen uit de bergen en wordt gebruikt "
+"voor prachtige gebouwen en zuilen."
 
 #: ../../tribes/empire/conf:115
 msgid "Master Miner"
@@ -553,7 +553,7 @@ msgstr "Mijnwerker"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:117
 msgid "Not enough space"
-msgstr ""
+msgstr "Niet genoeg ruimte"
 
 #: ../../tribes/empire/conf:144
 msgid "Outpost"

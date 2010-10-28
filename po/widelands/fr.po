@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-10-19 09:59+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-10-27 14:48+0000\n"
+"Last-Translator: Tarou <pierre.salagnac@gmail.com>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-10-20 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-10-28 04:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/writeHTML.cc:43
@@ -39,7 +39,7 @@ msgstr "Employeurs"
 
 #: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:272
 msgid "Building types"
-msgstr "Types de construction(s)"
+msgstr "Types de bâtiments"
 
 #: ../../src/writeHTML.cc:277 ../../src/writeHTML.cc:514
 #: ../../src/writeHTML.cc:1417
@@ -1301,7 +1301,7 @@ msgstr "propriétaire : %s"
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:81
 #, c-format
 msgid "player names and tribes: %s"
-msgstr "nom et tribu des joueurs : %s"
+msgstr "nom et des joueurs tribues  : %s"
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
 #: ../../src/game_io/game_player_economies_data_packet.cc:69
@@ -1323,7 +1323,7 @@ msgstr "le joueur %u n'existe pas"
 #: ../../src/map_io/widelands_map_building_data_packet.cc:106
 #, c-format
 msgid "buildings: %s"
-msgstr "Constructions: %s"
+msgstr "bâtiments: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:227
 #, c-format
@@ -1363,7 +1363,7 @@ msgstr "soldat: %s"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:502
 #, c-format
 msgid "carrier: %s"
-msgstr "carrière: %s"
+msgstr "porteur: %s"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
@@ -1420,7 +1420,7 @@ msgstr "Version inconnue %u"
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
 msgid "economy: %s"
-msgstr "economie: %s"
+msgstr "économie: %s"
 
 #: ../../src/economy/wares_queue.cc:260
 #, c-format
@@ -1434,7 +1434,7 @@ msgstr "Chargement des animations : %d%% terminé"
 
 #: ../../src/graphic/animation.cc:139
 msgid "frame number"
-msgstr "nombre d'image"
+msgstr "nombre d'images"
 
 #: ../../src/network/netclient.cc:101
 msgid "Could not establish connection to host"
@@ -1447,8 +1447,8 @@ msgid ""
 "the server shut down as you tried to connect."
 msgstr ""
 "Widelands n'a pas pu établir une connexion vers l'adresse indiquée.\n"
-"Ou bien il n'y a aucun serveur Widelands en route sur le port prévu \n"
-"ou bien le serveur a été éteint pendant que vous tentiez le contact."
+"Soit il n'y a aucun serveur Widelands en route sur le port prévu \n"
+"ou bien le serveur a été éteint pendant que vous tentiez de vous y connecter."
 
 #: ../../src/network/netclient.cc:136
 msgid "Client has left the game."
@@ -1736,7 +1736,7 @@ msgstr "Commencé à envoyer le fichier %s à %s !"
 
 #: ../../src/network/nethost.cc:2121
 msgid "Client requests file part that does not exist."
-msgstr "Le client demande des fichiers qui n'existent pas."
+msgstr "Le client demande un morceau de fichier qui n'existe pas."
 
 #: ../../src/network/nethost.cc:2124
 #, c-format
@@ -2998,7 +2998,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:886
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "%s produit"
 
 #: ../../src/logic/production_program.cc:953
 msgid "Recruited "
@@ -3575,7 +3575,7 @@ msgstr "Humain"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:230
 msgid "Help "
-msgstr ""
+msgstr "Aide "
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
@@ -3647,11 +3647,11 @@ msgstr "Prêt"
 
 #: ../../src/ui_fsmenu/launchgame.cc:280
 msgid "Scenario"
-msgstr ""
+msgstr "Scénario"
 
 #: ../../src/ui_fsmenu/launchgame.cc:282
 msgid "Win condition is set through the scenario"
-msgstr ""
+msgstr "Conditionde victoire déterminée dans le scénario"
 
 #: ../../src/ui_fsmenu/launchgame.cc:292
 msgid "Type: "
@@ -3971,7 +3971,7 @@ msgstr "Rendu OpenGL *Hautement expérimental !*"
 
 #: ../../src/ui_fsmenu/options.cc:470
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Afficher le chat avec un fond transparent"
 
 #: ../../src/ui_fsmenu/options.cc:495
 msgid "Pause"
@@ -4174,7 +4174,7 @@ msgstr "ID de la carte :"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Joueurs: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
@@ -4503,11 +4503,11 @@ msgstr "Afficher la boîte de réception"
 
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"
-msgstr "centrer la carte principale sur la localisation"
+msgstr "centrer la carte principale sur la position"
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
-msgstr "pas de description"
+msgstr "pas de descr."
 
 #: ../../src/logic/map.h:185
 msgid "no description defined"
