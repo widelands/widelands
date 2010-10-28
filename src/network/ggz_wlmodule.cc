@@ -21,13 +21,17 @@
 #ifdef USE_GGZ
 
 #include "ggz_wlmodule.h"
-#include "game_server/protocol.h"
-#include "game_server/protocol_helpers.h"
-#include "game_server/protocol_helper_read_list.h"
+
 #include "log.h"
 #include "ggz_ggzmod.h"
 #include "ggz_ggzcore.h"
 #include "warning.h"
+
+#include "wexception.h"
+#define WLGGZEXCEPTION wexception("parameterError in wlggz_read_list()")
+#include "game_server/protocol.h"
+#include "game_server/protocol_helpers.h"
+#include "game_server/protocol_helper_read_list.h"
 
 ggz_wlmodule::ggz_wlmodule():
 	m_data_fd     (0),
@@ -258,8 +262,9 @@ void ggz_wlmodule::send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 
 		if (++cur >= sample_count or c == (stat.size() -1 ))
 		{
+			assert(cur > 0);
 			if (cur < sample_count)
-				avg *= sample_count / (cur - 1);
+				avg *= sample_count / (cur);
 			
 			wr.open_list(c / sample_count);
 			wr << static_cast<int>(avg);
