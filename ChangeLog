@@ -1,4 +1,10 @@
 ### Build 16 (until now)
+- Barbarian lumberjacks now need a felling_axe which is produce in the metal
+  workshop. The axe is now only produced in the war mill and the axe factory.
+  This delays barbarian soldier production in the early game, giving the other
+  tribes more time to equalize their military production. (bug #667286)
+- Give Empire +1 basket so that two vineyards can be build right away to fully
+  saturate the first marble mine.
 - Buttons that represent a toggable state are now really toggable buttons in
   the user interface.
 - Changed the way compressed files are generated (maps, savegames) and read.

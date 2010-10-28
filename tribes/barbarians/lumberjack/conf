@@ -5,7 +5,7 @@ soundfx=../../../sound/woodcutting/woodcutting
 
 [buildcost]
 carrier=1
-axe=1
+felling_axe=1
 
 [chop]
 0=findobject attrib:tree radius:10

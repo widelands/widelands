@@ -22,11 +22,12 @@ return {
    if not pcall(function()
        place_building_in_region(plr, "warehouse", sf:region(7), {
          wares = {
-            axe = 6,
+            axe = 5,
             bakingtray = 2,
             blackwood = 32,
             cloth = 5,
             coal = 1,
+            felling_axe = 4,
             fire_tongs = 2,
             fishing_rod = 2,
             grout = 12,

@@ -1,6 +1,6 @@
 soundfx=../../../sound/smiths/toolsmith
 size=medium
-output=axe
+output=felling_axe
 output=bakingtray
 output=fire_tongs
 output=fishing_rod
@@ -30,7 +30,7 @@ trunk=8
 build_material=false
 
 [programs]
-produce_axe=_Produce axe
+produce_felling_axe=_Produce felling axe
 produce_bakingtray=_Produce bakingtray
 produce_fire_tongs=_Produce fire tongs
 produce_fishing_rod=_Produce fishing rod
@@ -42,13 +42,13 @@ produce_shovel=_Produce shovel
 produce_hunting_spear=_Produce hunting spear
 work=_Work
 
-[produce_axe]
-return=skipped unless economy needs axe
+[produce_felling_axe]
+return=skipped unless economy needs felling_axe
 consume=iron trunk
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
-produce=axe
+produce=felling_axe
 
 [produce_bakingtray]
 return=skipped unless economy needs bakingtray
@@ -132,7 +132,7 @@ call=produce_pick
 call=produce_scythe
 call=produce_shovel
 call=produce_hunting_spear
-call=produce_axe
+call=produce_felling_axe
 return=skipped
 
 [idle]
