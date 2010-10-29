@@ -41,7 +41,7 @@ struct WarehouseWaresDisplay : WaresDisplay {
 	WarehouseWaresDisplay(UI::Panel * parent, uint32_t width, Interactive_GameBase &, Warehouse &, wdType type);
 
 protected:
-	virtual void draw_ware(RenderTarget& dst, Widelands::Ware_Index ware, uint32_t stock, bool is_worker);
+	virtual void draw_ware(RenderTarget& dst, Widelands::Ware_Index ware, uint32_t stock);
 	virtual bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
 
 private:
@@ -62,11 +62,11 @@ m_warehouse(wh)
 		 type);
 }
 
-void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::Ware_Index ware, uint32_t stock, bool is_worker)
+void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::Ware_Index ware, uint32_t stock)
 {
-	WaresDisplay::draw_ware(dst, ware, stock, is_worker);
+	WaresDisplay::draw_ware(dst, ware, stock);
 
-	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(is_worker, ware);
+	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(get_type() == WORKER, ware);
 	PictureID picid;
 
 	switch (policy) {

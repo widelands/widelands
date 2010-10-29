@@ -135,13 +135,11 @@ void WaresDisplay::remove_all_warelists() {
 
 void WaresDisplay::draw(RenderTarget & dst)
 {
-	Widelands::Ware_Index number = m_tribe.get_nrwares();
-	bool is_worker = false;
+	Widelands::Ware_Index number = 
+		m_type == WORKER ? 
+		m_tribe.get_nrworkers() :
+		m_tribe.get_nrwares();
 
-	if (m_type == WORKER) {
-		number = m_tribe.get_nrworkers();
-		is_worker = true;
-	}
 	uint8_t totid = 0;
 	for
 		(Widelands::Ware_Index id = Widelands::Ware_Index::First();
@@ -155,7 +153,7 @@ void WaresDisplay::draw(RenderTarget & dst)
 			 ++i)
 			totalstock += m_warelists[i]->stock(id);
 
-		draw_ware(dst, id, totalstock, is_worker);
+		draw_ware(dst, id, totalstock);
 	}
 }
 
@@ -198,11 +196,8 @@ Draw one ware icon + additional information.
 void WaresDisplay::draw_ware
 	(RenderTarget        &       dst,
 	 Widelands::Ware_Index const id,
-	 uint32_t              const stock,
-	 bool                  const is_worker)
+	 uint32_t              const stock)
 {
-	assert(is_worker == (m_type == WORKER));
-
 	Point p = ware_position(id);
 
 	//  draw a background
@@ -217,7 +212,7 @@ void WaresDisplay::draw_ware
 	// Draw it
 	dst.blit
 		(pos,
-		 is_worker ?
+		 m_type == WORKER ?
 		 m_tribe.get_worker_descr(id)->icon()
 		 :
 		 m_tribe.get_ware_descr  (id)->icon());

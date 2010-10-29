@@ -69,8 +69,7 @@ protected:
 	virtual void draw_ware
 		(RenderTarget &,
 		 Widelands::Ware_Index,
-		 uint32_t stock,
-		 bool     is_worker);
+		 uint32_t stock);
 
 private:
 	typedef std::vector<Widelands::WareList const *> vector_type;
