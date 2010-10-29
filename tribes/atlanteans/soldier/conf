@@ -54,7 +54,7 @@ playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=10 27
+hotspot=20 34
 fps=10
 playercolor=true
 
