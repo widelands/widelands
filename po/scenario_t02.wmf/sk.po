@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-22 23:49+0000\n"
+"PO-Revision-Date: 2010-10-28 19:26+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-24 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-10-29 05:18+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -125,6 +125,13 @@ msgid ""
 "Throne Among the Trees, the symbol of unity and peace among our kin, became "
 "the wedge that drives us apart.\" "
 msgstr ""
+" \"Vojna pokračuje. Viac a viac našich bratov a sestier sa vyhýba brutálnej "
+"vojne, ktorá zúri pod stromami.<br> Príbehy o skutkoch nášho rodu, ktoré nám "
+"rozprávajú, sa ťažko počúvajú. Ležiac som prebdel veľa nocí, nepokojný a "
+"viac unavený, než  by som bol schopný uveriť, že niekto môže byť. No "
+"kedykoľvek zavriem oči, vidím v plameňoch pevnosť, ktorú postavil môj otec. "
+"Trón medzi stromami, symbol jednoty a pokoja nášho rodu, sa stal klinom "
+"vrazeným medzi nás.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:433
 msgid ""
@@ -163,6 +170,9 @@ msgid ""
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
+" \"Hoci je tak, mali by sme to zvážiť neskôr, zatiaľ sú poruke iné prekážky. "
+"Baníci budú určite požadovať väčšie prídely jedla za prácu vysoko v horách v "
+"tejto krutej zime, a poskytnúť tieto zásoby nemusí byť ľahké.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:391
 msgid ""
@@ -226,6 +236,14 @@ msgid ""
 "once in a while! Let us send out some of those who understand the stone's\n"
 "tongue to unravel the mountain's secrets!\""
 msgstr ""
+"\"Len sa na to pozrite! Na východe je veľká hora v Kal'mavrath!\n"
+"Som zvedavý, aké poklady mohla príroda ukryť pod jej majestátnymi "
+"úbočiami!<br>\n"
+"Rozšírme územie na východ. O chvíľu majú starší aspoň raz šancu byť "
+"užitoční!\n"
+"Vyšlime niektorých z tých, ktorí rozumejú reči kameňov, aby objasnili "
+"tajomstvá\n"
+"hory!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:350
 msgid ""
@@ -238,6 +256,12 @@ msgid ""
 "pint\n"
 "of beer or two will keep their spirits high.\""
 msgstr ""
+"\"Naši baníci dosahujú čoraz menšie hĺbky. Musíme ísť hlbšie, bližšie k "
+"jadru\n"
+"pohoria, ak chceme viac z jeho pokladov!<br> Samozrejme, v takých\n"
+"hĺbkach je tma a zima a len málokto sa odváži dobrovoľne vstúpiť do\n"
+"týchto miest. Túto statočnosť by sme mali odmeniť väčším prídelom jedla.\n"
+"A krčah piva alebo dva ho udržia v dobrej nálade.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:340
 msgid ""
@@ -249,6 +273,10 @@ msgid ""
 "we\n"
 "want. And we need the coal to keep the smelter's ovens burning.\""
 msgstr ""
+"\"Takže teraz, keď máme aj bane, aj jedlo na obživu, mali by sme to, čo\n"
+"pre nás naši statoční baníci získavajú, zmeniť na užitočnejší stav. Železná\n"
+"ruda sa musí taviť na železo, ktoré možno okovať, kedykoľvek chceme.\n"
+"A uhlie je potrebné do pece zlievača.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:398
 msgid ""
@@ -263,6 +291,15 @@ msgid ""
 "he\n"
 "was.<br> The news he brought changed everything...\""
 msgstr ""
+"\"Na ďalší deň ma Boldreth požiadal, aby som ho vyprevadil do nového "
+"hostinca.\n"
+"'Rozveselilo by ma to,' povedal.<br> Keď som sa obzrel okolo, uvidel som\n"
+"verné tváre, dôverujúc, že by som ich mohol sprevádzať v týchto temných\n"
+"časoch. Ešte predtým, ako som mohol povedať nejaké slová vďačnosti alebo\n"
+"povzbudenia, jeden z mojich vojakov bežal do hostinca. Posledné dni bol "
+"preč\n"
+"ďaleko v lese a videl som, aký bol ustatý.<br>\n"
+"Novinky, ktoré priniesol, zmenili všetko...\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:370
 msgid ""
@@ -358,7 +395,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:318
 msgid "Boldreth cheers up..."
-msgstr ""
+msgstr "Boldreth sa rozveselí..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:275
 msgid "Boldreth exclaims..."
@@ -366,7 +403,7 @@ msgstr "Bolreth prehovorí..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:250
 msgid "Boldreth jumps up..."
-msgstr ""
+msgstr "Boldreth vyskočí..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:285
 msgid "Boldreth laughs..."
@@ -378,7 +415,7 @@ msgstr "Boldreth prikyvuje..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:339
 msgid "Boldreth remarks..."
-msgstr ""
+msgstr "Boldreth poznamenáva..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:360
 msgid "Boldreth seems concerned..."
@@ -390,12 +427,12 @@ msgstr "Boldreth sa usmieva..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:234
 msgid "Brave Boldreth steps aside you..."
-msgstr ""
+msgstr "Statočný Boldreth prejde na bok od vás..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:195
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:196
 msgid "Build a cattlefarm"
-msgstr ""
+msgstr "Postavte kravín"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 msgid ""
@@ -416,7 +453,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:185
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:186
 msgid "Build a fernery"
-msgstr ""
+msgstr "Postavte skleník s papradinami"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
@@ -424,19 +461,19 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Postavte vápenku a uhoľné hospodárstvo"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:174
 msgid "Build a lime kiln, a well and a charcoal burner or coal mine"
-msgstr ""
+msgstr "Postavte vápenku, studňu a sídlo uhliara alebo uhoľnú baňu"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Postavte zlievareň"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Postavte studňu, farmu a pekáreň"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
@@ -445,31 +482,36 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
-msgstr ""
+msgstr "Postavte uhoľné a železnorudné bane"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
 "Build military buildings (like sentries and strongholds) to expand your\n"
 "territory. Get to the rocks northeast from you and build a quarry there."
 msgstr ""
+"Postavte vojenské budovy (ako strážnice a bašty) k rozšíreniu svojho\n"
+"územia. Dostaňte sa ku kameňom severovýchodne od vás a postavte\n"
+"tam kameňolom."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:139
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Vylepšite budovy a postavte mikropivovar"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
 "Enhance the coal mine and the tavern to the better versions of their\n"
 "buildings respectively. Also build a micro brewery."
 msgstr ""
+"Vylepšite uhoľnú baňu a krčmu na lepšie verzie budov jednotlivo.\n"
+"Taktiež postavte mikropivovar."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Rozšírte územie na severovýchod a postavte kameňolom"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:84
 msgid "Expand north-east to the stones"
-msgstr ""
+msgstr "Rozšírte územie na severovýchod ku kameňom"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
 msgid ""
@@ -480,10 +522,14 @@ msgid ""
 "first example of a ware which has to be refined before being used in a\n"
 "secondary building - others will follow."
 msgstr ""
+"Aby vaši baníci mohli pracovať, potrebujú jedlo.<br> Lovec loví zvieratá,\n"
+"kým hájnik bráni ich vymretiu. Mäso sa potom spracuje v krčme na obedy\n"
+"pre vašich baníkov.<br> Toto je len prvý príklad tovaru, ktorý sa musí\n"
+"vylepšiť pred použitím v sekundárnej budove - budú nasledovať ďalšie."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
-msgstr ""
+msgstr "Khantrukh sa zahľadí na pláne..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:261
 msgid "Khantrukh grumbles..."
@@ -495,7 +541,7 @@ msgstr "Do reči vstúpi Khantrukh ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:242
 msgid "Khantrukh joins in ..."
-msgstr ""
+msgstr "Khantrukh sa pridá ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:268
 msgid "Khantrukh nods satisfied..."
@@ -507,7 +553,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Khantrukh hovorí"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:349
 msgid "Khantrukh speaks..."
@@ -523,11 +569,11 @@ msgstr "Misia splnená."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:69
 msgid "New Objectives"
-msgstr ""
+msgstr "Nové úlohy"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:424
 msgid "One fullmoon night"
-msgstr ""
+msgstr "Jedna noc splnu Mesiaca"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:121
 msgid ""
@@ -539,11 +585,11 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:107
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Poskytnite baníkom jedlo"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:130
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Vylepšite vyťažené zdroje"
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -551,10 +597,12 @@ msgid ""
 "higher production buildings, including mining and the military expansions "
 "will be introduced."
 msgstr ""
+"Druhá misia tréningovej kampane barbarov. Oboznámite sa tu s vyššími "
+"produkčnými budovami, vrátane ťažby a s vojenskými expanziami."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Začnite stavať bane na hore"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:241
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:259
@@ -570,13 +618,15 @@ msgstr "Radca"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:309
 msgid "The elder jumps into the air..."
-msgstr ""
+msgstr "Starec vyskočí do vzduchu..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:132
 msgid ""
 "The iron ore your miners bring up is not usable yet - it has to be melted\n"
 "into iron first."
 msgstr ""
+"Železnú rudu, ktorú vytiahnu vaši baníci, nemožno hneď použiť - musí\n"
+"sa najprv roztaviť na železo."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:210
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:217
@@ -597,11 +647,11 @@ msgstr "Thron má obavy..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:332
 msgid "Thron recognizes..."
-msgstr ""
+msgstr "Thron pripúšťa..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:211
 msgid "Thron shakes his head..."
-msgstr ""
+msgstr "Thron trasie hlavou..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:425
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:439
@@ -614,11 +664,11 @@ msgstr "Tutorál2 - Miesto, ktoré možno nazvať domovom"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
-msgstr ""
+msgstr "Víťazstvo"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:412
 msgid "We need oxen!"
-msgstr ""
+msgstr "Potrebujeme voly!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:197
 msgid ""
@@ -630,6 +680,11 @@ msgid ""
 "doubles the transport capacity.<br>Oxen are bred in cattle farms\n"
 "out of wheat and water."
 msgstr ""
+"Keď sú cesty vo veľkom zaťažení dlhý čas, jeden nosič zvyčajne nestačí\n"
+"na rýchly transport tovarov. Dôsledkom sú dopravné zápchy. Také cesty\n"
+"preto zamestnávajú druhého nosiča - vola, ktorý pomáha nosiť tovary. Tak\n"
+"sa zdvojnásobí prepravná kapacita.<br>Voly sa chovajú v kravínoch, ktoré\n"
+"potrebujú pšenicu a vodu."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:405
 msgid ""
