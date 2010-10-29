@@ -26,10 +26,12 @@ class Client;
 class WidelandsMap;
 class WidelandsPlayer;
 
-struct team {
+struct team_t {
 	int ais;
 	int players;
 	std::list<WidelandsPlayer*> members;
+
+	team_t(): ais(0), players(0), members() {}
 };
 
 class StatisticsHandler {
@@ -42,6 +44,7 @@ class StatisticsHandler {
 		bool have_stats() { return m_result_gametime != 0; }
 		WidelandsMap & map() {return m_map; }
 		int game_end_time() { return m_result_gametime; }
+		void evaluate();
 	private:
 		void read_stat_vector
 			(WidelandsPlayer & plr, WLGGZGameStats type,
@@ -50,13 +53,14 @@ class StatisticsHandler {
 		std::string m_host_version, m_host_build;
 		int m_result_gametime;
 
-		void evaluate();
-
-		std::map<int, team> m_teams;
+		std::map<int, team_t> m_teams;
 		int winning_team;
 		std::list<int> looser_teams;
 		int plr_max_wares, plr_max_army, plr_max_workers, plr_max_buildings;
 		int defeated_players, defeated_ais;
+		int hours_without_fights;
 };
+
+
 
 #endif //__STATISITCS_HANDLER_H__

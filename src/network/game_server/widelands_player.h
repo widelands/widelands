@@ -48,6 +48,14 @@ class WidelandsPlayer
 {
 	public:
 		WidelandsPlayer(std::string playername):
+			result(0),
+			points(0),
+			bonus(0),
+			soft_error_count(0),
+			hard_error_count(0),
+			desync(false),
+			connection_failed(false),
+			reported_game(false),
 			m_name(playername),
 			m_tribe(),
 			m_wl_player_number(-1),
@@ -116,6 +124,9 @@ class WidelandsPlayer
 
 		uint32_t result;
 		uint32_t points;
+		uint32_t bonus;
+
+		int max_wares, max_workers, max_military, max_buildings;
 
 		/// client communication error counter. This are recoverable error like
 		/// invalid opcodes.

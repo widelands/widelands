@@ -332,7 +332,7 @@ bool StatisticsHandler::report_game_result
 				if (player) {
 					wllog
 						(DL_DEBUG, "gametime for player %s(%i)",
-						 player->name(), player->wl_player_number());
+						 player->name().c_str(), player->wl_player_number());
 						if(player->end_time() == 0)
 							player->set_end_time(l.front().get_integer());
 						else
@@ -342,7 +342,7 @@ bool StatisticsHandler::report_game_result
 									 "Clients disagree about player (%i) end time. "
 									 "Have: %i, %s reported: %i",
 									 player->wl_player_number(), player->end_time(),
-									 client->name, l.front().get_integer());
+									 client->name.c_str(), l.front().get_integer());
 					break;
 				}
 				wllog
@@ -484,9 +484,101 @@ void StatisticsHandler::evaluate()
 	plr_max_army = -1;
 	plr_max_workers = -1;
 	plr_max_buildings = -1;
-	defeated_players = -1;
-	defeated_ais = -1;
-	
-	
-	
+	defeated_players = 0;
+	defeated_ais = 0;
+	hours_without_fights = 0;
+
+	if (not have_stats())
+		return;
+
+	std::map<std::string,WidelandsPlayer*>::iterator it = g_wls->m_players.begin();
+	while(it != g_wls->m_players.end())
+	{
+		WidelandsPlayer & player = *it->second;
+		
+		player.max_buildings = -1;
+		player.max_workers = -1;
+		player.max_military = -1;
+		player.max_wares = -1;
+		std::vector<WidelandsPlayerStats>::iterator it;
+		it = player.stats_max.begin();
+		while (it != player.stats_max.end()) {
+			if (it->wares > player.max_wares)
+				player.max_wares = it->wares;
+			if (it->workers > player.max_workers)
+				player.max_workers = it->workers;
+			if (it->militarystrength > player.max_military)
+				player.max_military = it->militarystrength;
+			if (it->buildings > player.max_buildings)
+				player.max_buildings = it->buildings;
+			it++;
+		}
+		
+		if (plr_max_wares < player.max_wares) {
+			plr_max_wares = player.max_wares;
+		}
+		if (plr_max_workers < player.max_workers) {
+			plr_max_workers = player.max_workers;
+		}
+		if (plr_max_army >= player.max_military) {
+			plr_max_army = player.max_military;
+		}
+		if (plr_max_buildings >= player.max_buildings) {
+			plr_max_buildings = player.max_buildings;
+		}
+
+		if (player.type() == playertype_human) {
+			m_teams[player.team()].players++;
+			m_teams[player.team()].members.push_back(&player);
+			if (player.result == gamestatresult_looser)
+				defeated_players++;
+
+		} else if 
+			(player.type() == playertype_ai_aggressive or
+			 player.type() == playertype_ai_defensive or
+			 player.type() == playertype_ai_normal)
+		{
+			m_teams[player.team()].ais++;
+			m_teams[player.team()].members.push_back(&player);
+			if (player.result == gamestatresult_looser)
+				defeated_ais++;
+		} else
+		{
+			wllog
+				(DL_WARN, "Unknown Player type. %s (%i, %s)",
+				 player.name().c_str(), player.wl_player_number(),
+				 player.ggz_player_number());
+		}
+		it++;
+	}
+
+	// If game run longer than three hours we have to check for time hours
+	// without military activity
+	if (m_result_gametime > (3 * 60 * 60 * 1000)) {
+		int last_change = 23;
+		int last_val[g_wls->m_players.size()];
+		// go through all statistic samples. There are 12 samples per hour.
+		// Skip the first 2 hours (24 samples). Gametime is given in miliseconds
+		// one sampe every 5 minutes.
+		for (int i = 23; i <= (m_result_gametime / (1000 * 60 * 5)); i++) {
+			bool change = false;
+			int pc = 0;
+			std::map<std::string,WidelandsPlayer*>::iterator it = g_wls->m_players.begin();
+			while(it != g_wls->m_players.end()) {
+				WidelandsPlayer & player = *it->second;
+				if (i < player.stats_max.size()) {
+					if (player.stats_max.at(i).casualties != last_val[pc]) {
+						last_change = i;
+						last_val[pc] = player.stats_max.at(i).casualties;
+					}
+				}
+				pc++;
+				it++;
+			}
+			if ((i - last_change) > 11) {
+				hours_without_fights;
+				last_change = i;
+			}
+		}
+	}
 }

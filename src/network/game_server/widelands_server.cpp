@@ -390,6 +390,8 @@ void WidelandsServer::game_done()
 		return;
 	}
 
+	stat_handler().evaluate();
+
 	std::time_t curtime = time(0);
 
 	std::string gamefile(WLGGZ_GAME_FILES_DIRECTORY);
