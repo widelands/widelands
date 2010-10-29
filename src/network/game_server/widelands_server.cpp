@@ -338,10 +338,13 @@ void WidelandsServer::seatEvent(Seat* seat)
 		wllog(DL_FATAL, "seatEvent but seat->client is NULL");
 		return;
 	}
+
+	wllog(DL_DEBUG, "seatEvent for %s(%d) fd=%i ", seat->client->name.c_str(), seat->number, seat->client->fd);
+
 	WidelandsPlayer & player = *get_player_by_name(seat->client->name);
 	if (&player) {
 		wllog(DL_DEBUG, "Player \"%s\" sit down", player.name().c_str());
-		player.set_ggz_player_number(seat->client->number);
+		player.set_ggz_player_number(seat->number);
 		player.set_ggz_spectator_number(-1);
 	}
 	else
@@ -358,12 +361,16 @@ void WidelandsServer::spectatorEvent(Spectator* spectator)
 		wllog(DL_FATAL, "spectatorEvent but spectator->client is NULL");
 		return;
 	}
-   WidelandsPlayer & player = *get_player_by_name(spectator->client->name);
+
+	wllog(DL_DEBUG, "spectatorEvent for %s(%i) fd=%i ", spectator->client->name.c_str(), spectator->number, spectator->client->fd);
+
+	WidelandsPlayer & player = *get_player_by_name(spectator->client->name);
 	if (&player) {
 		wllog(DL_DEBUG, "Player \"%s\" stand up", player.name().c_str());
 		player.set_ggz_player_number(-1);
-		player.set_ggz_spectator_number(spectator->client->number);
+		player.set_ggz_spectator_number(spectator->number);
 	}
+	else
 		wllog(DL_DEBUG, "Unknown player stand up");
 }
 
