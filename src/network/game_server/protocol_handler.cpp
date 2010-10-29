@@ -247,10 +247,12 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 			break;
 		case op_game_information:
 			wllog(DL_DUMP, "GAME: read game info!");
-			if (not g_wls->is_playing()) {
-				wllog(DL_ERROR, "got game info but not in waiting state");
-				return;
-			}
+			// game is set to playing before sending game info. This is necessary
+			// as game is open as long as state is waiting.
+			//if (not g_wls->is_playing()) {
+			//	wllog(DL_ERROR, "got game info but not in waiting state");
+			//	return;
+			//}
 			try {
 				g_wls->stat_handler().report_gameinfo(client, parlist);
 			}
