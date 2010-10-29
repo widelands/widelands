@@ -7,29 +7,71 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
 "PO-Revision-Date: 2010-03-12 22:38+0000\n"
 "Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-13 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/winterland/conf:2
-msgid "The Widelands Development Team"
+#: ../../worlds/winterland/conf:45
+msgid "Aspen"
+msgstr "アスペン"
+
+#: ../../worlds/winterland/conf:46
+msgid "Aspen medium"
 msgstr ""
 
-#: ../../worlds/winterland/conf:3
-msgid "Winterland"
+#: ../../worlds/winterland/conf:47
+msgid "Aspen small"
 msgstr ""
 
-#: ../../worlds/winterland/conf:4
-msgid ""
-"These are the white, wide and frosty winterlands, in which the Northmen "
-"dwell."
+#: ../../worlds/winterland/conf:48
+msgid "Aspen tiny"
 msgstr ""
+
+#: ../../worlds/winterland/conf:79
+msgid "Badger"
+msgstr "穴熊"
+
+#: ../../worlds/winterland/conf:65
+msgid "Beech"
+msgstr "樗"
+
+#: ../../worlds/winterland/conf:66
+msgid "Beech medium"
+msgstr ""
+
+#: ../../worlds/winterland/conf:67
+msgid "Beech small"
+msgstr ""
+
+#: ../../worlds/winterland/conf:68
+msgid "Beech tiny"
+msgstr ""
+
+#: ../../worlds/winterland/conf:61
+msgid "Birch"
+msgstr "白樺"
+
+#: ../../worlds/winterland/conf:62
+msgid "Birch medium"
+msgstr ""
+
+#: ../../worlds/winterland/conf:63
+msgid "Birch small"
+msgstr ""
+
+#: ../../worlds/winterland/conf:64
+msgid "Birch tiny"
+msgstr ""
+
+#: ../../worlds/winterland/conf:80
+msgid "Bunny"
+msgstr "バニー"
 
 #: ../../worlds/winterland/conf:7
 #: ../../worlds/winterland/conf:8
@@ -39,6 +81,10 @@ msgstr ""
 msgid "Bush"
 msgstr ""
 
+#: ../../worlds/winterland/resconf:4
+msgid "Coal"
+msgstr "石炭"
+
 #: ../../worlds/winterland/conf:12
 #: ../../worlds/winterland/conf:13
 #: ../../worlds/winterland/conf:14
@@ -46,16 +92,104 @@ msgstr ""
 msgid "Dead Tree"
 msgstr "枯れ木"
 
+#: ../../worlds/winterland/conf:81
+msgid "Deer"
+msgstr "鹿"
+
+#: ../../worlds/winterland/conf:82
+msgid "Duck"
+msgstr "鴨"
+
+#: ../../worlds/winterland/conf:83
+msgid "Elk"
+msgstr ""
+
+#: ../../worlds/winterland/resconf:41
+msgid "Fish"
+msgstr "魚"
+
+#: ../../worlds/winterland/conf:84
+msgid "Fox"
+msgstr "狐"
+
+#: ../../worlds/winterland/resconf:12
+msgid "Gold"
+msgstr "金"
+
+#: ../../worlds/winterland/resconf:28
+msgid "Granite"
+msgstr ""
+
 #: ../../worlds/winterland/conf:16
 #: ../../worlds/winterland/conf:17
 #: ../../worlds/winterland/conf:18
 msgid "Grass"
 msgstr "くさ"
 
+#: ../../worlds/winterland/resconf:20
+msgid "Iron"
+msgstr "鉄"
+
+#: ../../worlds/winterland/conf:69
+msgid "Larch"
+msgstr "唐松"
+
+#: ../../worlds/winterland/conf:70
+msgid "Larch medium"
+msgstr ""
+
+#: ../../worlds/winterland/conf:71
+msgid "Larch small"
+msgstr ""
+
+#: ../../worlds/winterland/conf:72
+msgid "Larch tiny"
+msgstr ""
+
+#: ../../worlds/winterland/conf:85
+msgid "Lynx"
+msgstr "やまねこ"
+
+#: ../../worlds/winterland/conf:57
+msgid "Maple"
+msgstr "松楓"
+
+#: ../../worlds/winterland/conf:58
+msgid "Maple medium"
+msgstr ""
+
+#: ../../worlds/winterland/conf:59
+msgid "Maple small"
+msgstr ""
+
+#: ../../worlds/winterland/conf:60
+msgid "Maple tiny"
+msgstr ""
+
+#: ../../worlds/winterland/conf:86
+msgid "Marten"
+msgstr ""
+
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
 msgid "Mushroom"
 msgstr "キノコ"
+
+#: ../../worlds/winterland/conf:49
+msgid "Oak"
+msgstr "柏"
+
+#: ../../worlds/winterland/conf:50
+msgid "Oak medium"
+msgstr ""
+
+#: ../../worlds/winterland/conf:51
+msgid "Oak small"
+msgstr ""
+
+#: ../../worlds/winterland/conf:52
+msgid "Oak tiny"
+msgstr ""
 
 #: ../../worlds/winterland/conf:21
 #: ../../worlds/winterland/conf:22
@@ -66,6 +200,30 @@ msgstr "キノコ"
 msgid "Pebble"
 msgstr ""
 
+#: ../../worlds/winterland/conf:87
+msgid "Reindeer"
+msgstr ""
+
+#: ../../worlds/winterland/conf:73
+msgid "Rowan"
+msgstr "七竈"
+
+#: ../../worlds/winterland/conf:74
+msgid "Rowan medium"
+msgstr ""
+
+#: ../../worlds/winterland/conf:75
+msgid "Rowan small"
+msgstr ""
+
+#: ../../worlds/winterland/conf:76
+msgid "Rowan tiny"
+msgstr ""
+
+#: ../../worlds/winterland/conf:88
+msgid "Sheep"
+msgstr "羊"
+
 #: ../../worlds/winterland/conf:27
 #: ../../worlds/winterland/conf:28
 #: ../../worlds/winterland/conf:29
@@ -75,6 +233,22 @@ msgstr "骸骨"
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
 msgstr "雪だるま"
+
+#: ../../worlds/winterland/conf:53
+msgid "Spruce"
+msgstr ""
+
+#: ../../worlds/winterland/conf:54
+msgid "Spruce medium"
+msgstr ""
+
+#: ../../worlds/winterland/conf:55
+msgid "Spruce small"
+msgstr ""
+
+#: ../../worlds/winterland/conf:56
+msgid "Spruce tiny"
+msgstr ""
 
 #: ../../worlds/winterland/conf:31
 #: ../../worlds/winterland/conf:32
@@ -95,177 +269,27 @@ msgstr ""
 msgid "Stones"
 msgstr "石"
 
+#: ../../worlds/winterland/conf:2
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../../worlds/winterland/conf:4
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr ""
+
 #: ../../worlds/winterland/conf:44
 msgid "Track"
 msgstr "トラック"
 
-#: ../../worlds/winterland/conf:45
-msgid "Aspen"
-msgstr "アスペン"
+#: ../../worlds/winterland/resconf:36
+msgid "Water"
+msgstr "水"
 
-#: ../../worlds/winterland/conf:46
-msgid "Aspen medium"
+#: ../../worlds/winterland/conf:3
+msgid "Winterland"
 msgstr ""
-
-#: ../../worlds/winterland/conf:47
-msgid "Aspen small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:48
-msgid "Aspen tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:49
-msgid "Oak"
-msgstr "柏"
-
-#: ../../worlds/winterland/conf:50
-msgid "Oak medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:51
-msgid "Oak small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:52
-msgid "Oak tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:53
-msgid "Spruce"
-msgstr ""
-
-#: ../../worlds/winterland/conf:54
-msgid "Spruce medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:55
-msgid "Spruce small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:56
-msgid "Spruce tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:57
-msgid "Maple"
-msgstr "松楓"
-
-#: ../../worlds/winterland/conf:58
-msgid "Maple medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:59
-msgid "Maple small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:60
-msgid "Maple tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:61
-msgid "Birch"
-msgstr "白樺"
-
-#: ../../worlds/winterland/conf:62
-msgid "Birch medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:63
-msgid "Birch small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:64
-msgid "Birch tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:65
-msgid "Beech"
-msgstr "樗"
-
-#: ../../worlds/winterland/conf:66
-msgid "Beech medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:67
-msgid "Beech small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:68
-msgid "Beech tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:69
-msgid "Larch"
-msgstr "唐松"
-
-#: ../../worlds/winterland/conf:70
-msgid "Larch medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:71
-msgid "Larch small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:72
-msgid "Larch tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:73
-msgid "Rowan"
-msgstr "七竈"
-
-#: ../../worlds/winterland/conf:74
-msgid "Rowan medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:75
-msgid "Rowan small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:76
-msgid "Rowan tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:79
-msgid "Badger"
-msgstr "穴熊"
-
-#: ../../worlds/winterland/conf:80
-msgid "Bunny"
-msgstr "バニー"
-
-#: ../../worlds/winterland/conf:81
-msgid "Deer"
-msgstr "鹿"
-
-#: ../../worlds/winterland/conf:82
-msgid "Duck"
-msgstr "鴨"
-
-#: ../../worlds/winterland/conf:83
-msgid "Elk"
-msgstr ""
-
-#: ../../worlds/winterland/conf:84
-msgid "Fox"
-msgstr "狐"
-
-#: ../../worlds/winterland/conf:85
-msgid "Lynx"
-msgstr "やまねこ"
-
-#: ../../worlds/winterland/conf:86
-msgid "Marten"
-msgstr ""
-
-#: ../../worlds/winterland/conf:87
-msgid "Reindeer"
-msgstr ""
-
-#: ../../worlds/winterland/conf:88
-msgid "Sheep"
-msgstr "羊"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"
@@ -275,26 +299,5 @@ msgstr ""
 msgid "Wolf"
 msgstr "狼"
 
-#: ../../worlds/winterland/resconf:4
-msgid "Coal"
-msgstr "石炭"
-
-#: ../../worlds/winterland/resconf:12
-msgid "Gold"
-msgstr "金"
-
-#: ../../worlds/winterland/resconf:20
-msgid "Iron"
-msgstr "鉄"
-
-#: ../../worlds/winterland/resconf:28
-msgid "Granit"
-msgstr "グラニット"
-
-#: ../../worlds/winterland/resconf:36
-msgid "Water"
-msgstr "水"
-
-#: ../../worlds/winterland/resconf:41
-msgid "Fish"
-msgstr "魚"
+#~ msgid "Granit"
+#~ msgstr "グラニット"

@@ -77,10 +77,8 @@ private:
 	uint32_t    m_fs;
 	std::string m_fn;
 
-	UI::Callback_Button<Fullscreen_Menu_LaunchSPG> m_select_map;
-	UI::Callback_Button<Fullscreen_Menu_LaunchSPG> m_wincondition, m_back, m_ok;
-	UI::Callback_IDButton<Fullscreen_Menu_LaunchSPG, uint8_t> *
-		m_pos[MAX_PLAYERS];
+	UI::Callback_Button       m_select_map, m_wincondition, m_back, m_ok;
+	UI::Callback_Button     * m_pos[MAX_PLAYERS];
 	UI::Textarea              m_title, m_mapname;
 	UI::Textarea              m_name, m_type, m_team, m_tribe, m_init;
 	GameSettingsProvider    * m_settings;

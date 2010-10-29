@@ -158,6 +158,7 @@ private:
 protected:
 	void toggle_minimap();
 	void hide_minimap();
+	UI::UniqueWindow::Registry &minimap_registry();
 
 	void mainview_move(int32_t x, int32_t y);
 	void minimap_warp(int32_t x, int32_t y);

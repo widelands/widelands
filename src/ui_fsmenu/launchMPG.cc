@@ -57,25 +57,28 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t space = get_inner_w() / 40;
 		uint32_t butw  = get_inner_w() * 3 / 10;
 		uint32_t buth  = get_inner_h() * 8 / 10;
-		new UI::Callback_IDButton<MapOrSaveSelectionWindow, uint8_t>
+		new UI::Callback_Button
 			(this, "map",
 			 space, y, butw, buth,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 &MapOrSaveSelectionWindow::pressedButton, *this, 1,
+			 boost::bind
+				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 1),
 			 _("Map"), _("Select a map"), true, false,
 			 fontname, fontsize);
-		new UI::Callback_IDButton<MapOrSaveSelectionWindow, uint8_t>
+		new UI::Callback_Button
 			(this, "saved_game",
 			 2 * space + butw, y, butw, buth,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 &MapOrSaveSelectionWindow::pressedButton, *this, 2,
+			 boost::bind
+				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 2),
 			 _("Saved game"), _("Select a saved game"), true, false,
 			 fontname, fontsize);
-		new UI::Callback_IDButton<MapOrSaveSelectionWindow, uint8_t>
+		new UI::Callback_Button
 			(this, "cancel",
 			 3 * space + 2 * butw, y, butw, buth,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 &MapOrSaveSelectionWindow::pressedButton, *this, 0,
+			 boost::bind
+				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 0),
 			 _("Cancel"), _("Cancel selection"), true, false,
 			 fontname, fontsize);
 	}
@@ -103,28 +106,32 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		 m_xres * 37 / 50 + m_butw - m_buth, m_yres * 3 / 20, m_buth, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/menu_toggle_minimap.png"),
-		 &Fullscreen_Menu_LaunchMPG::change_map_or_save, *this,
+		 boost::bind
+			 (&Fullscreen_Menu_LaunchMPG::change_map_or_save, boost::ref(*this)),
 		 _("Change map or saved game"), false, false,
 		 m_fn, m_fs),
 	m_ok
 		(this, "ok",
 		 m_xres * 37 / 50, m_yres * 12 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 &Fullscreen_Menu_LaunchMPG::start_clicked, *this,
+		 boost::bind
+			 (&Fullscreen_Menu_LaunchMPG::start_clicked, boost::ref(*this)),
 		 _("Start game"), std::string(), false, false,
 		 m_fn, m_fs),
 	m_back
 		(this, "back",
 		 m_xres * 37 / 50, m_yres * 218 / 240, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Fullscreen_Menu_LaunchMPG::back_clicked, *this,
+		 boost::bind(&Fullscreen_Menu_LaunchMPG::back_clicked, boost::ref(*this)),
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_wincondition
 		(this, "win_condition",
 		 m_xres * 37 / 50, m_yres * 11 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Fullscreen_Menu_LaunchMPG::win_condition_clicked, *this,
+		 boost::bind
+			 (&Fullscreen_Menu_LaunchMPG::win_condition_clicked,
+			  boost::ref(*this)),
 		 "", std::string(), false, false,
 		 m_fn, m_fs),
 

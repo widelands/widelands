@@ -1504,7 +1504,11 @@ void Soldier::start_task_die(Game & game)
 	// Dead soldier is not owned by a location
 	set_location(0);
 
-	start_task_idle(game, descr().get_animation("idle"), 1000);
+	start_task_idle
+			(game,
+			 descr().get_animation
+				 (m_combat_walking == CD_COMBAT_W ? "die_w" : "die_e"),
+			 1000);
 }
 
 void Soldier::die_update(Game & game, State & state)

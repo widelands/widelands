@@ -101,19 +101,18 @@ UI::Textarea & AttackBox::add_text
 	return result;
 }
 
-UI::Callback_Button<AttackBox> & AttackBox::add_button
+UI::Callback_Button & AttackBox::add_button
 	(UI::Box           & parent,
 	 char        const * const text,
 	 void         (AttackBox::*fn)(),
 	 std::string const & tooltip_text)
 {
-	UI::Callback_Button<AttackBox> & button =
-		*new UI::Callback_Button<AttackBox>
+	UI::Callback_Button & button =
+		*new UI::Callback_Button
 			(&parent, text,
 			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-			 fn,
-			 *this,
+			 boost::bind(fn, boost::ref(*this)),
 			 text,
 			 tooltip_text);
 	parent.add(&button, Box::AlignCenter);

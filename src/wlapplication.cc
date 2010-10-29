@@ -2049,7 +2049,8 @@ struct ReplayGameController : public GameController {
 		m_game     (game),
 		m_lastframe(WLApplication::get()->get_time()),
 		m_time     (m_game.get_gametime()),
-		m_speed    (1000)
+		m_speed    (1000),
+		m_paused   (false)
 	{
 		m_game.set_game_controller(this);
 
@@ -2086,7 +2087,7 @@ struct ReplayGameController : public GameController {
 		else if (frametime > 1000)
 			frametime = 1000;
 
-		frametime = frametime * m_speed / 1000;
+		frametime = frametime * realSpeed() / 1000;
 
 		m_time = m_game.get_gametime() + frametime;
 
@@ -2114,9 +2115,11 @@ struct ReplayGameController : public GameController {
 	std::string getGameDescription() {
 		return "replay";
 	}
-	uint32_t realSpeed() {return m_speed;}
+	uint32_t realSpeed() {return m_paused ? 0 : m_speed;}
 	uint32_t desiredSpeed() {return m_speed;}
 	void setDesiredSpeed(uint32_t const speed) {m_speed = speed;}
+	bool isPaused() {return m_paused;}
+	void setPaused(bool const paused) { m_paused = paused;}
 
 private:
 	Widelands::Game & m_game;
@@ -2124,6 +2127,7 @@ private:
 	int32_t m_lastframe;
 	int32_t m_time;
 	uint32_t m_speed;
+	bool m_paused;
 };
 
 /**

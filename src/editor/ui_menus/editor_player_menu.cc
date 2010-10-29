@@ -45,7 +45,7 @@ Editor_Player_Menu::Editor_Player_Menu
 		 5, 5, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Editor_Player_Menu::clicked_add_player, *this,
+		 boost::bind(&Editor_Player_Menu::clicked_add_player, boost::ref(*this)),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
@@ -53,7 +53,7 @@ Editor_Player_Menu::Editor_Player_Menu
 		 get_inner_w() - 5 - 20, 5, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Editor_Player_Menu::clicked_remove_last_player, *this,
+		 boost::bind(&Editor_Player_Menu::clicked_remove_last_player, boost::ref(*this)),
 		 _("Remove last player"),
 		 1 < parent.egbase().map().get_nrplayers())
 {
@@ -147,12 +147,11 @@ void Editor_Player_Menu::update() {
 
 		if (!m_plr_set_tribes_buts[p - 1]) {
 			m_plr_set_tribes_buts[p - 1] =
-				new UI::Callback_IDButton
-				<Editor_Player_Menu, Widelands::Player_Number const>
+				new UI::Callback_Button
 					(this, "tribe",
 					 posx, posy, 140, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-					 &Editor_Player_Menu::player_tribe_clicked, *this, p - 1,
+					 boost::bind(&Editor_Player_Menu::player_tribe_clicked, boost::ref(*this), p - 1),
 					 std::string());
 			posx += 140 + spacing;
 		}
@@ -170,13 +169,12 @@ void Editor_Player_Menu::update() {
 		//  Set Starting pos button.
 		if (!m_plr_set_pos_buts[p - 1]) {
 			m_plr_set_pos_buts[p - 1] =
-				new UI::Callback_IDButton
-				<Editor_Player_Menu, Widelands::Player_Number const>
+				new UI::Callback_Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 g_gr->get_no_picture(), //  set below
-					 &Editor_Player_Menu::set_starting_pos_clicked, *this, p,
+					 boost::bind(&Editor_Player_Menu::set_starting_pos_clicked, boost::ref(*this), p),
 					 std::string());
 			posx += size + spacing;
 		}
@@ -190,13 +188,12 @@ void Editor_Player_Menu::update() {
 		// Still disabled at the moment.
       // if(!m_plr_make_infrastructure_buts[p - 1]) {
       //                   m_plr_make_infrastructure_buts[p - 1] =
-      //                           new UI::Callback_IDButton
-      //                           <Editor_Player_Menu, Widelands::Player_Number const>
+      //                           new UI::Callback_Button
       //                                   (this, "build_infrastructure",
       //                                    posx, posy, size, size,
       //                                    g_gr->get_picture(PicMod_UI, "pics/but0.png"),
       //                                    g_gr->get_no_picture(), //  set below
-      //                                    &Editor_Player_Menu::make_infrastructure_clicked, *this, p,
+      //                                    boost::bind(&Editor_Player_Menu::make_infrastructure_clicked, boost::ref(*this), p),
       //                                    std::string());
       //                                    // _("I"), //  SirVer, TODO come up with a picture for this
       //                                    // _("Make infrastructure"));

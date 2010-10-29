@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-23 20:12+0000\n"
-"PO-Revision-Date: 2010-07-10 10:42+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"PO-Revision-Date: 2010-08-30 23:49+0000\n"
 "Last-Translator: sefirotsama <sefirotsama@gmail.com>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-11 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/README:69
@@ -873,7 +873,7 @@ msgstr ""
 msgid "Online Help"
 msgstr "Online Help"
 
-#: ../../txts/developers:339
+#: ../../txts/developers:340
 msgid "Other"
 msgstr "Other"
 
@@ -1004,7 +1004,7 @@ msgstr ""
 "building is surrounded with trees or roads, production will stop."
 
 #: ../../txts/developers:29
-#: ../../txts/developers:327
+#: ../../txts/developers:328
 msgid "Sound"
 msgstr "Sound"
 
@@ -1274,7 +1274,7 @@ msgstr ""
 "To minimize/maximize a window, click on the title bar of that window either "
 "with middle mouse button or with left mouse button while holding down CTRL."
 
-#: ../../txts/developers:332
+#: ../../txts/developers:333
 msgid "Translation"
 msgstr "Translation"
 

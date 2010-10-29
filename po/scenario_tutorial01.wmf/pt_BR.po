@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-08-10 21:10+0000\n"
-"Last-Translator: Fabio Garz <Unknown>\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"PO-Revision-Date: 2010-08-31 22:56+0000\n"
+"Last-Translator: Cleverton <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-08-11 03:44+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:55+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -25,10 +25,11 @@ msgid ""
 "no longer of any use and is just blocking space. To do that, click on the\n"
 "quarry and select the destroy button."
 msgstr ""
-"A mensagem foi enviada para você. Veja como o botão na parte inferior da\n"
-"tela mudou a aparência? Agora você deve queimar essa mina, pois isto é\n"
-"não de qualquer uso e é apenas o bloqueio do espaço. Para fazer isso, clique "
-"no\n"
+"Uma mensagem foi enviada para você. Viu como o botão na parte inferior da\n"
+"tela mudou de aparência? Você agora deveria queimar essa pedreira, já que "
+"ela\n"
+"não tem mais nenhuma utilidade e está apenas ocupando espaço. Para fazer "
+"isso, clique na\n"
 "pedreira e selecione o botão de destruir."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:610
@@ -75,18 +76,19 @@ msgid ""
 "screen.\n"
 "Close the messages window now by right clicking into it."
 msgstr ""
-"Todas as janelas em Widelands pode ser fechada com o botão direito em si. "
-"Algumas\n"
-"janelas também pode ser alternado com os botões na parte inferior da tela.\n"
-"Feche a janela de mensagens agora com o botão direito nele."
+"Todas as janelas em Widelands podem ser fechadas clicando com o botão "
+"direito do mouse nelas. Algumas\n"
+"janelas também podem ser alternadas usando os botões situados na parte "
+"inferior da tela.\n"
+"Feche a janela de mensagens agora clicando nela com o botão direito do mouse."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
 msgid ""
 "Alternatively, you can directly click the flag where\n"
 "the road should end like so."
 msgstr ""
-"Alternativamente, você pode clicar diretamente no pavilhão onde\n"
-"o caminho deve terminar assim o desejar."
+"Outra forma de fazer isso é clicar diretamente na bandeira onde\n"
+"você deseja que o caminho termine."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:266
 msgid "And finally the yellow flag symbol only allows for flags."
@@ -101,12 +103,12 @@ msgid ""
 "Archive all messages, including this one, that you currently have in your\n"
 " inbox."
 msgstr ""
-"Arquivar todas as mensagens, incluindo este, que você tem atualmente em sua\n"
+"Arquivar todas as mensagens, incluindo esta, que você tem atualmente em sua\n"
 " inbox."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:413
 msgid "Archive our inbox messages"
-msgstr "Arquive nossas mensagens na caixa de entrada."
+msgstr "Arquivar nossas mensagens da caixa de entrada."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:484
 msgid ""
@@ -130,8 +132,8 @@ msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
 msgstr ""
-"Ataque e conquiste todos os edifícios militares do inimigo e destrua o sua\n"
-"sede"
+"Ataque e conquiste todos os edifícios militares do inimigo e destrua o\n"
+"quartel-general deles."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
@@ -169,6 +171,15 @@ msgid ""
 "activated\n"
 "earlier."
 msgstr ""
+"Construa uma pedreira próximo dessas pedras aqui. Lembra-se de como eu fiz "
+"antes?\n"
+"Certifique-se se a ajuda para construir está habilitada, então apenas clique "
+"no local onde você deseja que\n"
+"a construção fique, escolha a construção na janela que irá aparecer e "
+"pronto. Talvez\n"
+"seja uma boa hora para explicar todos esses símbolos de ajuda para construir "
+"que ativamos\n"
+"anteriormente."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid "Building a connecting road"
@@ -184,6 +195,10 @@ msgid ""
 "to\n"
 "build a small training scenario for you. Let's do that now."
 msgstr ""
+"Mas agora estou desviando do assunto. Voltemos aos soldados. O que eu iria "
+"fazer mesmo? Ah, sim, eu queria\n"
+"construir um pequeno cenário de treinamento para você. Vamos fazer isso "
+"agora."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:379
@@ -201,16 +216,28 @@ msgid ""
 "military influence any more. If an enemy builds a military building nearby,\n"
 "your construction site could burn down. No sweat, that won't happen here."
 msgstr ""
+"Cidadelas não podem ser construídas diretamente. Em vez disso, você deve "
+"construir uma fortaleza\n"
+"primeiro e então evoluí-la em uma cidadela. Para fazer isso, clique na "
+"fortaleza, então\n"
+"selecione o botão \"Evoluir para cidadela\". Seus soldados irão sair da "
+"cidadela\n"
+"enquanto ela está sendo construída. Isso significa que sua fortaleza não "
+"tem\n"
+"mais influência militar. Se um adversário construir uma construção militar "
+"por perto,\n"
+"o local da sua construção poderá ser destruído. Mas não se preocupe, isso "
+"não irá acontecer aqui."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:437
 msgid "Close the messages window"
-msgstr "Feche a janela de mensagens"
+msgstr "Fechar a janela de mensagens"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:427
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:448
 msgid "Closing windows"
-msgstr "Cerrando janelas"
+msgstr "Fechando janelas"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:697
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:698
@@ -219,11 +246,11 @@ msgstr "Conclusão"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:346
 msgid "Connect the quarry to the headquarters"
-msgstr "Conecte a pedreira com a sede"
+msgstr "Conecte a pedreira com o quartel-general"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:347
 msgid "Connect your construction site"
-msgstr "Conecte sua construação"
+msgstr "Conecte sua construção"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:348
 msgid ""
@@ -236,6 +263,15 @@ msgid ""
 "front\n"
 "of your headquarters."
 msgstr ""
+"Conecte o local de construção de sua pedreira ao seu quartel-general com uma "
+"estrada. Você\n"
+"entra diretamente no modo de construção de estradas quando inicia uma "
+"construção. Mas agora, esse\n"
+"não é o seu caso. Para construir uma estrada completamente nova basta clicar "
+"na bandeira na frente do\n"
+"local da sua construção, clicar no ícone de construir estradas e então "
+"clicar na bandeira na frente\n"
+"do seu quartel-general."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
@@ -255,14 +291,20 @@ msgid ""
 "so\n"
 "that they get a tick-symbol in front of them. Then, you can click the"
 msgstr ""
+"Agora, você tem duas mensagens. Essa que você está lendo, e\n"
+"a mensagem que te informou que um novo quartel-general foi adicionado a sua "
+"economia.\n"
+"Vamos aprender a como arquivar mensagens: Você pode selecioná-las na sua "
+"caixa de entrada,\n"
+"ativando a caixa de seleção na frente delas. Então, você pode clicar no"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid "Defeat the enemy"
-msgstr "Vença o inimigo"
+msgstr "Derrote o inimigo"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
 msgid "Defeat the enemy tribe"
-msgstr "Vença a tribo inimiga"
+msgstr "Derrote a tribo inimiga"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:690
 msgid ""
@@ -270,8 +312,8 @@ msgid ""
 "the\n"
 "number of attacking soldiers, then send them via the attack button."
 msgstr ""
-"Derrote os inimigos que estão pertos. Para atacar uma construção, clique nas "
-"portas, escolha o \n"
+"Derrote os inimigos próximos. Para atacar uma construção, clique nas portas, "
+"escolha o\n"
 "número de soldados para atacar, então mande-os via o botão de ataque."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
@@ -292,6 +334,16 @@ msgid ""
 "subtracted\n"
 "are because of the defense ability."
 msgstr ""
+"A defesa é um valor que é subtraído do valor de ataque. Os bárbaros\n"
+"não podem treinar nessa habilidade e por causa disso sempre possuem defesa "
+"nível 0, o que\n"
+"significa que eles sempre tem 3 pontos de vida subtraídos do dano causado. "
+"Se\n"
+"um atacante com um valor de ataque de 15 pontos acerta um soldado bárbaro, "
+"esse\n"
+"bárbaro iria perder 15 - 3 = 12 pontos de vida. Os 3 pontos de vida que são "
+"subtraídos\n"
+"são por causa da capacidade de defesa."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
 msgid "Defense:"
@@ -304,7 +356,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
 msgid "Enable the build help"
-msgstr ""
+msgstr "Habilite a ajuda para construções"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhance this fortress"
@@ -323,6 +375,9 @@ msgid ""
 "Enhance your fortress to a citadel now. Remember that you can speed time up\n"
 "by using PAGE_UP, building a citadel takes a while."
 msgstr ""
+"Evolua sua fortaleza para uma cidadela agora. Lembre-se que você pode "
+"acelerar o jogo\n"
+"usando a tecla PAGE_UP, construir uma cidadela demora um pouco."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:664
 msgid ""
@@ -334,10 +389,17 @@ msgid ""
 "strategically\n"
 "important points like constricted points or mountains."
 msgstr ""
+"Evolua sua fortaleza para uma poderosa cidadela. A cidadela pode abrigar 12 "
+"soldados\n"
+"e é o maior edifício militar que os bárbaros podem construir. Além disso, "
+"custa\n"
+"muito caro e leva muito tempo para ser construída. É mais adequada para "
+"guardar pontos\n"
+"estratégicos importantes como pontos estreitos ou montanhas."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid "Enhancing buildings"
-msgstr ""
+msgstr "Evoluindo costruções"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
 msgid ""
@@ -345,10 +407,13 @@ msgid ""
 "for\n"
 "a level 0 evade barbarian and increases in steps of 15% for each level."
 msgstr ""
+"Evasão é a chance que o soldado tem de se esquivar de um ataque. É de 25% "
+"para\n"
+"um bárbaro com nível 0 de evasão e aumenta em 15% a cada nível."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid "Evade:"
-msgstr "Escapar:"
+msgstr "Evasão:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
@@ -358,7 +423,7 @@ msgstr "Tudo pode ser construido no simbolo da casa verde."
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
 msgstr ""
-"Tudo exceto grande construções, que podem ser construidas no simbolo da casa "
+"Tudo, exceto grandes construções, podem ser construídos no símbolo da casa "
 "amarela."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:294
@@ -368,6 +433,13 @@ msgid ""
 "construction site. You can enter road building mode for any flag by\n"
 "left-clicking on a flag and selecting"
 msgstr ""
+"Excelente! Logo após você iniciar a construção, você está no modo de "
+"construção\n"
+"de estradas. A nova estrada irá começar na bandeira na frente do seu "
+"recente\n"
+"local de construção. Você pode entrar no modo de construção de estradas para "
+"qualquer bandeira\n"
+"clicando com o botão esquerdo do mouse na bandeira e selecionando"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:429
 msgid ""
@@ -378,6 +450,13 @@ msgid ""
 "pressing\n"
 "the button below, then right click into the messages window to close it."
 msgstr ""
+"Excelente. Falando nisso: fechar janelas em Widelands é tão fácil quanto\n"
+"clicar com o botão direito do mouse nelas. Isso funciona com todas as "
+"janelas, exceto\n"
+"janelas de história, como essa aqui. Vá em frente e faça isso. Primeiro, "
+"feche essa janela apertando\n"
+"o botão abaixo, então clique com o botão esquerdo na janela de mensagens "
+"para fechá-la."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:227
 msgid ""
@@ -386,6 +465,11 @@ msgid ""
 "right-click-and-hold anywhere on the map, then drag the mouse and instead\n"
 "of the cursor, the view will be moved. Try it."
 msgstr ""
+"Excelente. Agora há uma forma mais rápida de se mover, dessa vez utilizando "
+"o mouse: Basta\n"
+"clicar e manter o botão direito do mouse clicado em qualquer lugar do mapa, "
+"então arrastar o mouse.\n"
+"A visão da tela irá se mover ao invés do cursor. Faça um teste."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:191
 msgid ""

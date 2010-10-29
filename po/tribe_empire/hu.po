@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-06-23 20:12+0000\n"
-"PO-Revision-Date: 2010-08-20 22:52+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"PO-Revision-Date: 2010-08-30 23:41+0000\n"
 "Last-Translator: Papp Bence <papp.bence89@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-08-22 03:42+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -359,7 +359,7 @@ msgstr ""
 msgid "Hammer"
 msgstr "Kalapács"
 
-#: ../../tribes/empire/vineyard/conf:20
+#: ../../tribes/empire/vineyard/conf:21
 msgid "Harvest vine"
 msgstr ""
 
@@ -553,7 +553,7 @@ msgstr ""
 msgid "Piggery"
 msgstr "Disznóól"
 
-#: ../../tribes/empire/vineyard/conf:18
+#: ../../tribes/empire/vineyard/conf:19
 msgid "Plant vine"
 msgstr ""
 
@@ -1226,7 +1226,7 @@ msgstr ""
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22
 #: ../../tribes/empire/toolsmithy/conf:45
-#: ../../tribes/empire/vineyard/conf:22
+#: ../../tribes/empire/vineyard/conf:23
 #: ../../tribes/empire/weaponsmithy/conf:34
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16

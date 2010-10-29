@@ -76,10 +76,7 @@ private:
 	uint32_t    m_fs;
 	std::string m_fn;
 
-	UI::Callback_Button<Fullscreen_Menu_LaunchMPG> m_change_map_or_save, m_ok;
-	UI::Callback_Button<Fullscreen_Menu_LaunchMPG> m_back, m_wincondition;
-	UI::Callback_IDButton<Fullscreen_Menu_LaunchMPG, uint8_t> *
-		m_pos[MAX_PLAYERS];
+	UI::Callback_Button       m_change_map_or_save, m_ok, m_back, m_wincondition;
 	UI::Textarea              m_title, m_mapname;
 	UI::Multiline_Textarea    m_map_info, m_client_info;
 	GameSettingsProvider    * m_settings;

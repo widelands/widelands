@@ -53,20 +53,20 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	posy = get_inner_h() - 30;
 
 	m_ok_button = new
-		UI::Callback_IDButton<Main_Menu_Save_Map_Make_Directory, int32_t>
+		UI::Callback_Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Main_Menu_Save_Map_Make_Directory::end_modal, *this, 1,
+		 boost::bind(&Main_Menu_Save_Map_Make_Directory::end_modal, boost::ref(*this), 1),
 		 _("OK"),
 		 std::string(),
 		 m_dirname.size());
 
-	new UI::Callback_IDButton<Main_Menu_Save_Map_Make_Directory, int32_t>
+	new UI::Callback_Button
 		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Main_Menu_Save_Map_Make_Directory::end_modal, *this, 0,
+		 boost::bind(&Main_Menu_Save_Map_Make_Directory::end_modal, boost::ref(*this), 0),
 		 _("Cancel"));
 
 	center_to_parent();

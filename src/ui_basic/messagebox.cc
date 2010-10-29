@@ -83,25 +83,25 @@ WLMessageBox::WLMessageBox
 	d->textarea->set_size(width - 10, height - 50);
 
 	if (type == OK) {
-		new Callback_Button<WLMessageBox>
+		new Callback_Button
 			(this, "ok",
 			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 &WLMessageBox::pressedOk, *this,
+			 boost::bind(&WLMessageBox::pressedOk, boost::ref(*this)),
 			 _("OK"));
 	} else if (type == YESNO) {
-		new Callback_Button<WLMessageBox>
+		new Callback_Button
 			(this, "yes",
 			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 &WLMessageBox::pressedYes, *this,
+			 boost::bind(&WLMessageBox::pressedYes, boost::ref(*this)),
 			 _("Yes"));
-		new Callback_Button<WLMessageBox>
+		new Callback_Button
 			(this, "no",
 			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 &WLMessageBox::pressedNo, *this,
+			 boost::bind(&WLMessageBox::pressedNo, boost::ref(*this)),
 			 _("No"));
 	}
 }

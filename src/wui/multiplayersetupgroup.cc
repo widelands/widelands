@@ -50,11 +50,12 @@ struct MultiPlayerClientGroup : public UI::Box {
 		name->set_font(fname, fsize, UI_FONT_CLR_FG);
 		name->set_text("Test");
 		add(name, 1);
-		type = new UI::Callback_Button<MultiPlayerClientGroup>
+		type = new UI::Callback_Button
 			(this, "client_type",
 			 0, 0, h, h,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 &MultiPlayerClientGroup::toggle_type, *this,
+			 boost::bind
+				 (&MultiPlayerClientGroup::toggle_type, boost::ref(*this)),
 			 std::string(), std::string(), true, false, fname, fsize);
 		add(type, 0);
 	}

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-06 22:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-09-25 15:41+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-08 03:34+0000\n"
+"X-Launchpad-Export-Date: 2010-09-26 04:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -182,7 +182,7 @@ msgstr "Porte des élements sur tes routes."
 msgid "Castle"
 msgstr "Château"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Village fortifié"
 
@@ -388,11 +388,11 @@ msgstr "Poste de garde"
 msgid "Hammer"
 msgstr "Marteau"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:18
+#: ../../tribes/atlanteans/blackroot_farm/conf:19
 msgid "Harvest blackroot"
 msgstr "Récolte des racines noires"
 
-#: ../../tribes/atlanteans/farm/conf:21
+#: ../../tribes/atlanteans/farm/conf:22
 msgid "Harvest corn"
 msgstr "Récolte le maïs"
 
@@ -400,7 +400,7 @@ msgstr "Récolte le maïs"
 msgid "Headquarters"
 msgstr "Quartier Général"
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Quartier Général Moyen"
 
@@ -516,6 +516,10 @@ msgstr "Mine de pierre"
 msgid "Miner"
 msgstr "Mineur"
 
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+msgid "Not enough space"
+msgstr "Pas assez de place"
+
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
 msgstr "Poste avancé"
@@ -541,11 +545,11 @@ msgid "Planks are an important build material of the Atlanteans."
 msgstr ""
 "Les planches sont un materiau important pour les constructions Atlantes"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:16
+#: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
 msgstr "Plante des racines noires"
 
-#: ../../tribes/atlanteans/farm/conf:19
+#: ../../tribes/atlanteans/farm/conf:20
 msgid "Plant corn"
 msgstr "Plante du maïs"
 
@@ -857,6 +861,16 @@ msgstr "Fume la viande et le poisson"
 msgid "Soldier"
 msgstr "Soldat"
 
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Certains de vos bâtiments initiaux n'ont pas trouvé assez de place et n'ont\n"
+"pas pu être construits. Vous avez maintenant un net désavantage. Pensez\n"
+"à recommencer cette carte avec une position de départ plus juste."
+
 #: ../../tribes/atlanteans/conf:120
 msgid "Spiderbreeder"
 msgstr "Eleveur d'araignées"
@@ -892,7 +906,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:121
 msgid "Stonecutter"
-msgstr "Coupeur de pierres."
+msgstr "Coupeur de pierres"
 
 #: ../../tribes/atlanteans/conf:151
 msgid "Stronghold"
@@ -1262,14 +1276,14 @@ msgstr "Cabane de coupeur de bois"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:27
 #: ../../tribes/atlanteans/bakery/conf:21
-#: ../../tribes/atlanteans/blackroot_farm/conf:20
+#: ../../tribes/atlanteans/blackroot_farm/conf:21
 #: ../../tribes/atlanteans/burners_house/conf:19
 #: ../../tribes/atlanteans/coalmine/conf:21
 #: ../../tribes/atlanteans/crystalmine/conf:26
-#: ../../tribes/atlanteans/farm/conf:23
+#: ../../tribes/atlanteans/farm/conf:24
 #: ../../tribes/atlanteans/fish_breeders_house/conf:17
 #: ../../tribes/atlanteans/fishers_house/conf:16
-#: ../../tribes/atlanteans/foresters_house/conf:15
+#: ../../tribes/atlanteans/foresters_house/conf:16
 #: ../../tribes/atlanteans/goldmine/conf:22
 #: ../../tribes/atlanteans/goldweaver/conf:19
 #: ../../tribes/atlanteans/horsefarm/conf:22
