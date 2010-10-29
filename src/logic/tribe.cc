@@ -205,7 +205,7 @@ Tribe_Descr::Tribe_Descr
 							}
 						}
 						if (not found) {
-							log("Did not find ware %s in wares_order field!\n", get_ware_descr(ware)->name().c_str());
+							log("Did not find ware %s in wares_order field of tribe %s!\n", get_ware_descr(ware)->name().c_str(), name().c_str());
 						}
 					}
 				}
@@ -238,7 +238,7 @@ Tribe_Descr::Tribe_Descr
 							}
 						}
 						if (not found) {
-							log("Did not find ware %s in wares_order field!\n", get_worker_descr(worker)->name().c_str());
+							log("Did not find ware %s in wares_order field of tribe %s!\n", get_worker_descr(worker)->name().c_str(), name().c_str());
 						}
 					}
 				}
