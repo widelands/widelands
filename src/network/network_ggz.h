@@ -71,6 +71,7 @@ struct Net_Player_Info {
 	WLGGZPlayerType type;
 	WLGGZGameStatsResult result;
 	Widelands::TeamNumber team;
+	int report_time;
 };
 
 /// A MOTD struct for easier output to the chat panel

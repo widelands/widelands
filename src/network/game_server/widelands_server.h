@@ -67,6 +67,8 @@ class WidelandsServer : public GGZGameServer
 		void check_reports();
 		bool is_playing() { return state() == GGZGameServer::waiting; }
 
+		std::map<std::string,WidelandsPlayer *> m_players;
+
 	private:
 		// @{
 		/// These event functions are invoked by ggzd
@@ -86,10 +88,8 @@ class WidelandsServer : public GGZGameServer
 		char * m_wlserver_ip;
 		/// Results of the game have been reported to ggzd
 		bool m_reported;
-		std::map<std::string,WidelandsPlayer *> m_players;
 };
 
 extern WidelandsServer * g_wls;
 
-#endif
-
+#endif //WIDELANDS_SERVER_H

@@ -265,12 +265,11 @@ void NetGGZ::report_result
 		throw wexception
 			("NetGGZ::report_result: ERROR: player number out of range\n");
 	}
-	
+
 	playerinfo.at(player-1).points = points;
 	playerinfo.at(player-1).result =
 		(win?gamestatresult_winner:gamestatresult_looser);
-	// A bit late to set team of a player ?!? Game is already over
-	//playerinfo.at(player-1).team = team;
+	playerinfo.at(player-1).report_time = gametime;
 
 	bool finished = true;
 

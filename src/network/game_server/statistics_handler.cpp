@@ -329,6 +329,22 @@ bool StatisticsHandler::report_game_result
 				break;
 			case gamestat_gametime:
 				CHECKTYPE(l, integer);
+				if (player) {
+					wllog
+						(DL_DEBUG, "gametime for player %s(%i)",
+						 player->name(), player->wl_player_number());
+						if(player->end_time() == 0)
+							player->set_end_time(l.front().get_integer());
+						else
+							if (l.front().get_integer() != player->end_time())
+								wllog
+									(DL_WARN,
+									 "Clients disagree about player (%i) end time. "
+									 "Have: %i, %s reported: %i",
+									 player->wl_player_number(), player->end_time(),
+									 client->name, l.front().get_integer());
+					break;
+				}
 				wllog
 					(DL_DEBUG, "game end time by %s(%i): %i",
 					 client->name.c_str(), client->number, l.front().get_integer());
@@ -457,4 +473,20 @@ void StatisticsHandler::read_stat_vector
 		}
 	}
 	wllog(DL_DUMP, "read %i/%i statistic samples for %i", i, count, type);
+}
+
+void StatisticsHandler::evaluate()
+{
+	//std::map<int, team> m_teams;
+	winning_team = -1;
+	//std::list<int> looser_teams;
+	plr_max_wares = -1;
+	plr_max_army = -1;
+	plr_max_workers = -1;
+	plr_max_buildings = -1;
+	defeated_players = -1;
+	defeated_ais = -1;
+	
+	
+	
 }

@@ -111,6 +111,9 @@ class WidelandsPlayer
 		WidelandsPlayerStats last_stats;
 		std::vector<WidelandsPlayerStats> stats_min, stats_max, stats_avg;
 
+		void set_end_time(int d) { m_end_time = d; }
+		int end_time() { return m_end_time; }
+
 		uint32_t result;
 		uint32_t points;
 
@@ -145,6 +148,7 @@ class WidelandsPlayer
 		int m_ggz_spectator_number;
 
 		static std::string m_host_username;
+		int m_end_time;
 };
 
 #endif //__WIDELANDS_PLAYER_H__

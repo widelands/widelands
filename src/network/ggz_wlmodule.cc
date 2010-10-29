@@ -196,22 +196,23 @@ bool ggz_wlmodule::send_game_info
 			w.open_list(gameinfo_playerid);
 			w << pit->playernum;
 			w.close_list();
-			
+
 			w.open_list(gameinfo_playername);
 			w << pit->name;
 			w.close_list();
-			
+
 			w.open_list(gameinfo_tribe);
 			w << pit->tribe;
 			w.close_list();
-			
+
 			w.open_list(gameinfo_playertype);
 			w << static_cast<int>(pit->type);
 			w.close_list();
-			
+
 			w.open_list(gameinfo_teamnumber);
 			w << pit->team;
 			w.close_list();
+
 			pit++;
 		}
 		log("GGZWLMODULE ## Player Iterate finished\n");
@@ -295,6 +296,8 @@ bool ggz_wlmodule::send_statistics
 			 "send statistics to metaserver now!\n");
 		WLGGZ_writer w = WLGGZ_writer(m_data_fd, op_game_statistics);
 
+		// In this context (before sending a gamestat_playernumber)
+		// gamestat_gametime means the game end time
 		w.open_list(gamestat_gametime);
 		w << gametime;
 		w.close_list();
@@ -310,6 +313,12 @@ bool ggz_wlmodule::send_statistics
 
 			w.open_list(gamestat_result);
 			w << playerinfo.at(i).result;
+			w.close_list();
+
+			// In context of a gamestat_playernumber
+			// gamestat_gametime means the game end time
+			w.open_list(gamestat_gametime);
+			w << playerinfo.at(i).report_time;
 			w.close_list();
 
 			w.open_list(gamestat_points);

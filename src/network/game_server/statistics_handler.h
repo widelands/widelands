@@ -20,10 +20,17 @@
 #define __STATISITCS_HANDLER_H__
 
 #include "protocol_helpers.h"
+#include <map>
 
 class Client;
 class WidelandsMap;
 class WidelandsPlayer;
+
+struct team {
+	int ais;
+	int players;
+	std::list<WidelandsPlayer*> members;
+};
 
 class StatisticsHandler {
 	public:
@@ -42,6 +49,14 @@ class StatisticsHandler {
 		WidelandsMap m_map;
 		std::string m_host_version, m_host_build;
 		int m_result_gametime;
+
+		void evaluate();
+
+		std::map<int, team> m_teams;
+		int winning_team;
+		std::list<int> looser_teams;
+		int plr_max_wares, plr_max_army, plr_max_workers, plr_max_buildings;
+		int defeated_players, defeated_ais;
 };
 
 #endif //__STATISITCS_HANDLER_H__
