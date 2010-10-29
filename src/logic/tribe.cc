@@ -45,6 +45,7 @@
 #include "upcast.h"
 
 #include <iostream>
+#include <boost/algorithm/string.hpp>
 
 using namespace std;
 
@@ -174,6 +175,74 @@ Tribe_Descr::Tribe_Descr
 				tribe_s.get_string("descr"); // long description
 				m_bob_vision_range = tribe_s.get_int("bob_vision_range");
 				m_carrier2         = tribe_s.get_string("carrier2");
+
+				/// Load and parse ware type categorization
+				{ // Wares
+					std::string categories_s(tribe_s.get_safe_string("wares_order"));
+					vector<std::string> categories;
+					boost::split(categories, categories_s, boost::is_any_of(";"));
+					m_wares_order = WaresOrder(categories.size());
+					for (unsigned int i=0; i < categories.size(); i++) {
+						vector<std::string> wares;
+						boost::split(wares, categories[i], boost::is_any_of(","));
+						m_wares_order[i] = std::vector<Ware_Index>(wares.size());
+						for (unsigned int j=0; j < wares.size(); j++) {
+							boost::trim(wares[j]);
+							m_wares_order[i][j] = safe_ware_index(wares[j]);
+						}
+						wares.clear();
+					}
+
+					// Search each ware in the array, and be verbose about missing wares.
+					// Algorithmically slow, but this is only run once.
+					for (Ware_Index ware = Ware_Index::First(); ware < m_wares.get_nitems(); ++ware) {
+						bool found = false;
+						for (unsigned int i=0; i < m_wares_order.size(); i++) {
+							for (unsigned int j=0; j < m_wares_order[i].size(); j++) {
+								if (m_wares_order[i][i] == ware) {
+									found = true;
+								}
+							}
+						}
+						if (not found) {
+							log("Did not find ware %s in wares_order field!\n", get_ware_descr(ware)->name().c_str());
+						}
+					}
+				}
+
+				{ // Workers
+					std::string categories_s(tribe_s.get_safe_string("workers_order"));
+					vector<std::string> categories;
+					boost::split(categories, categories_s, boost::is_any_of(";"));
+					m_workers_order = WaresOrder(categories.size());
+					for (unsigned int i=0; i < categories.size(); i++) {
+						vector<std::string> workers;
+						boost::split(workers, categories[i], boost::is_any_of(","));
+						m_workers_order[i] = std::vector<Ware_Index>(workers.size());
+						for (unsigned int j=0; j < workers.size(); j++) {
+							boost::trim(workers[j]);
+							m_workers_order[i][j] = safe_worker_index(workers[j]);
+						}
+						workers.clear();
+					}
+
+					// Search each worker in the array, and be verbose about missing workers.
+					// Algorithmically slow, but this is only run once.
+					for (Ware_Index worker = Ware_Index::First(); worker < m_workers.get_nitems(); ++worker) {
+						bool found = false;
+						for (unsigned int i=0; i < m_workers_order.size(); i++) {
+							for (unsigned int j=0; j < m_workers_order[i].size(); j++) {
+								if (m_workers_order[i][i] == worker) {
+									found = true;
+								}
+							}
+						}
+						if (not found) {
+							log("Did not find ware %s in wares_order field!\n", get_worker_descr(worker)->name().c_str());
+						}
+					}
+				}
+
 			}
 
 			try {

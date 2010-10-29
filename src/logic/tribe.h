@@ -211,6 +211,10 @@ struct Tribe_Descr {
 			throw Nonexistent();
 		return m_initializations[index];
 	}
+	
+	typedef std::vector<std::vector<Widelands::Ware_Index> > WaresOrder;
+	WaresOrder const & wares_order() const {return m_wares_order;}
+	WaresOrder const & workers_order() const {return m_workers_order;}
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void referenceBuilding
@@ -240,6 +244,9 @@ private:
 	Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
 	Descr_Maintainer<Bob::Descr>      m_bobs;  // The player critters
 	std::string                       m_carrier2;
+	// Order and positioning of wares in the warehouse display
+	WaresOrder                        m_wares_order;
+	WaresOrder                        m_workers_order;
 
 	std::vector<Ware_Index> m_worker_types_without_cost;
 
