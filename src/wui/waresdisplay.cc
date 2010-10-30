@@ -110,16 +110,16 @@ void WaresDisplay::add_warelist
 
 void WaresDisplay::update_desired_size()
 {
+	// Find out geometry from icons_order 
 	unsigned int columns = icons_order().size();	
 	unsigned int rows = 0;
-	// Find out geometry from icons_order 
 	for (unsigned int i = 0; i < icons_order().size(); i++)
 		if (icons_order()[i].size() > rows) 
 			rows = icons_order()[i].size();
 
-	// Plus one row to cater for tooltip text
-	set_desired_size(columns   * (WARE_MENU_PIC_WIDTH  +     3) + 1,
-	                (rows + 1) * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1);
+	// 25 is height of m_curware text
+	set_desired_size(columns * (WARE_MENU_PIC_WIDTH  +     3) + 1,
+	                 rows    * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1 + 25);
 }
 
 void WaresDisplay::layout()
