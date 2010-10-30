@@ -47,6 +47,8 @@ WaresDisplay::WaresDisplay
 	m_type (WORKER),
 	m_selected(m_type == WORKER ? m_tribe.get_nrworkers()
 	                            : m_tribe.get_nrwares(), false),
+	m_hidden  (m_type == WORKER ? m_tribe.get_nrworkers()
+	                            : m_tribe.get_nrwares(), false),
 	m_selectable(selectable)				    
 {
 }
@@ -91,7 +93,7 @@ bool WaresDisplay::handle_mousepress
 		return true;
 	}
 
-	UI::Panel::handle_mousepress(btn, x, y);
+	return UI::Panel::handle_mousepress(btn, x, y);
 }
 
 /**
@@ -107,7 +109,10 @@ Widelands::Ware_Index WaresDisplay::ware_at_point(int32_t x, int32_t y) const
 	unsigned int i = x / (WARE_MENU_PIC_WIDTH + 4);
 	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + 8 + 3);
 	if (i < icons_order().size() && j < icons_order()[i].size()) {
-		return icons_order()[i][j];
+		Widelands::Ware_Index ware = icons_order()[i][j];
+		if (not m_hidden[ware]) {
+			return ware;
+		}
 	}
 
 	return Widelands::Ware_Index::Null();
@@ -167,6 +172,8 @@ void WaresDisplay::draw(RenderTarget & dst)
 		 id < number;
 		 ++id, ++totid)
 	{
+		if (m_hidden[id]) continue;
+
 		uint32_t totalstock = 0;
 		for
 			(Widelands::Ware_Index i = Widelands::Ware_Index::First();
@@ -269,4 +276,15 @@ void WaresDisplay::unselect_ware(Widelands::Ware_Index ware) {
 }
 bool WaresDisplay::ware_selected(Widelands::Ware_Index ware) {
 	return	m_selected[ware];
+}
+
+// Wares hiding
+void WaresDisplay::hide_ware(Widelands::Ware_Index ware) {
+	m_hidden[ware] = true;
+}
+void WaresDisplay::unhide_ware(Widelands::Ware_Index ware) {
+	m_hidden[ware] = false;
+}
+bool WaresDisplay::ware_hidden(Widelands::Ware_Index ware) {
+	return	m_hidden[ware];
 }
