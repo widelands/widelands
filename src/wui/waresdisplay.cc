@@ -34,16 +34,17 @@ WaresDisplay::WaresDisplay
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe)
 	:
-	UI::Panel(parent, x, y, Width, 0),
+	// Size is set when add_warelist is called, as it depends on the m_type.
+	UI::Panel(parent, x, y, 0, 0),
 	m_tribe (tribe),
 
 	m_curware
 		(this,
 		 0, get_inner_h() - 25, get_inner_w(), 20,
-		 _("Stock"), UI::Align_Center)
+		 _("Stock"), UI::Align_Center),
+	m_type (WORKER)
 
 {
-	set_size(Width, 100);
 }
 
 
@@ -81,15 +82,12 @@ Widelands::Ware_Index WaresDisplay::ware_at_point(int32_t x, int32_t y) const
 	if (x < 0 || y < 0)
 		return Widelands::Ware_Index::Null();
 
-	Widelands::Ware_Index const index =
-		Widelands::Ware_Index
-			(static_cast<Widelands::Ware_Index::value_t>
-			 	(y / (WARE_MENU_PIC_HEIGHT + 8 + 3) * WaresPerRow
-			 	 +
-			 	 x / (WARE_MENU_PIC_WIDTH + 4)));
 
-	if (index < m_warelists[0]->get_nrwareids())
-		return index;
+	unsigned int i = x / (WARE_MENU_PIC_WIDTH + 4);
+	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + 8 + 3);
+	if (i < icons_order().size() && j < icons_order()[i].size()) {
+		return icons_order()[i][j];
+	}
 
 	return Widelands::Ware_Index::Null();
 }
@@ -112,17 +110,16 @@ void WaresDisplay::add_warelist
 
 void WaresDisplay::update_desired_size()
 {
-	if (m_warelists.size()) {
-		int32_t rows, height;
+	// Find out geometry from icons_order 
+	unsigned int columns = icons_order().size();	
+	unsigned int rows = 0;
+	for (unsigned int i = 0; i < icons_order().size(); i++)
+		if (icons_order()[i].size() > rows) 
+			rows = icons_order()[i].size();
 
-		rows =
-			(m_warelists[0]->get_nrwareids().value() +
-			 WaresPerRow - 1)
-			/ WaresPerRow;
-		height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
-
-		set_desired_size(Width, height + 30);
-	}
+	// 25 is height of m_curware text
+	set_desired_size(columns * (WARE_MENU_PIC_WIDTH  +     3) + 1,
+	                 rows    * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1 + 25);
 }
 
 void WaresDisplay::layout()
@@ -138,15 +135,11 @@ void WaresDisplay::remove_all_warelists() {
 
 void WaresDisplay::draw(RenderTarget & dst)
 {
-	Point p(2, 2);
+	Widelands::Ware_Index number = 
+		m_type == WORKER ? 
+		m_tribe.get_nrworkers() :
+		m_tribe.get_nrwares();
 
-	Widelands::Ware_Index number = m_tribe.get_nrwares();
-	bool is_worker = false;
-
-	if (m_type == WORKER) {
-		number = m_tribe.get_nrworkers();
-		is_worker = true;
-	}
 	uint8_t totid = 0;
 	for
 		(Widelands::Ware_Index id = Widelands::Ware_Index::First();
@@ -160,13 +153,42 @@ void WaresDisplay::draw(RenderTarget & dst)
 			 ++i)
 			totalstock += m_warelists[i]->stock(id);
 
-		draw_ware(dst, p, id, totalstock, is_worker);
-
-		if ((totid + 1) % WaresPerRow) {p.x += WARE_MENU_PIC_WIDTH + 3;}
-		else {p.x = 2; p.y += WARE_MENU_PIC_HEIGHT + 8 + 3;}
+		draw_ware(dst, id, totalstock);
 	}
 }
 
+Widelands::Tribe_Descr::WaresOrder const & WaresDisplay::icons_order() const
+{
+	switch(m_type) {
+		case WARE:
+			return m_tribe.wares_order();
+			break;
+		case WORKER:
+			return m_tribe.workers_order();
+			break;
+	}
+}
+
+Widelands::Tribe_Descr::WaresOrderCoords const & WaresDisplay::icons_order_coords() const
+{
+	switch(m_type) {
+		case WARE:
+			return m_tribe.wares_order_coords();
+			break;
+		case WORKER:
+			return m_tribe.workers_order_coords();
+			break;
+	}
+}
+
+
+Point WaresDisplay::ware_position(Widelands::Ware_Index const id) const
+{
+	Point p(2,2);
+	p.x += icons_order_coords()[id].first  * (WARE_MENU_PIC_WIDTH + 3);
+	p.y += icons_order_coords()[id].second * (WARE_MENU_PIC_HEIGHT + 3 + 8);
+	return p;
+}
 
 /*
 ===============
@@ -177,11 +199,11 @@ Draw one ware icon + additional information.
 */
 void WaresDisplay::draw_ware
 	(RenderTarget        &       dst,
-	 Point                 const p,
 	 Widelands::Ware_Index const id,
-	 uint32_t              const stock,
-	 bool                  const is_worker)
+	 uint32_t              const stock)
 {
+	Point p = ware_position(id);
+
 	//  draw a background
 	const PictureID picid =
 		g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");
@@ -194,7 +216,7 @@ void WaresDisplay::draw_ware
 	// Draw it
 	dst.blit
 		(pos,
-		 is_worker ?
+		 m_type == WORKER ?
 		 m_tribe.get_worker_descr(id)->icon()
 		 :
 		 m_tribe.get_ware_descr  (id)->icon());
