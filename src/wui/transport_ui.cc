@@ -30,6 +30,8 @@
 #include "ui_basic/unique_window.h"
 #include "wui/waresdisplay.h"
 
+#include <boost/lexical_cast.hpp>
+
 using Widelands::Economy;
 using Widelands::Editor_Game_Base;
 using Widelands::Game;
@@ -64,31 +66,53 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 private:
 	UI::Tab_Panel m_tabpanel;
 
+	struct TargetWaresDisplay : public AbstractWaresDisplay {
+		typedef AbstractWaresDisplay::wdType wdType;
+
+		TargetWaresDisplay
+			(UI::Panel * const parent,
+			 int32_t const x, int32_t const y,
+			 Widelands::Tribe_Descr const & tribe,
+			 wdType type,
+			 bool selectable,
+			 Economy & economy):
+			 AbstractWaresDisplay(parent, x, y, tribe, type, selectable) ,
+			 m_economy(economy)
+		{
+			Ware_Index nr_wares = m_economy.owner().tribe().get_nrwares();
+			for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
+				if (not m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
+					hide_ware(i);
+				}
+			}
+		}
+	protected:
+		std::string info_for_ware(Widelands::Ware_Index const ware) {
+			return boost::lexical_cast<std::string>(
+				get_type() == WaresDisplay::WORKER
+				? m_economy.worker_target_quantity(ware).permanent
+				: m_economy.ware_target_quantity(ware).permanent
+			);
+		}
+	private:
+		Economy & m_economy;
+	};
+
+
 	/**
 	 * Wraps the wares display together with some buttons
 	 */
 	struct Economy_Options_Ware_Panel : UI::Box {
 		bool m_can_act;
-		WaresDisplay m_display;
+		TargetWaresDisplay m_display;
 		Economy & m_economy;
-		// Wares list representing the current target
-		Widelands::WareList m_wares;
 
 		Economy_Options_Ware_Panel(UI::Panel * parent, Interactive_GameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
-			m_display(this, 0, 0, economy.owner().tribe(), WaresDisplay::WARE, m_can_act),
+			m_display(this, 0, 0, economy.owner().tribe(), WaresDisplay::WARE, m_can_act,economy),
 			m_economy(economy)
 		{
-			Ware_Index nr_wares = m_economy.owner().tribe().get_nrwares();
-			m_wares.set_nrwares(nr_wares);
-			m_display.add_warelist(m_wares);
-			for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
-				if (not m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
-					m_display.hide_ware(i);
-				}
-			}
-
 			add(&m_display, UI::Box::AlignLeft, true);
 
 			UI::Box *buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
@@ -107,19 +131,6 @@ private:
 			ADD_WARE_BUTTON(decrease_target, "-", _("Decrease target"))
 			ADD_WARE_BUTTON(reset_target, "R", _("Reset to default"))
 		}
-
-		virtual void think() {
-			Ware_Index nr_wares = m_economy.owner().tribe().get_nrwares();
-			// Set wares list with values from ecenomoy
-			for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
-				m_wares.remove(i, m_wares.stock(i));
-				m_wares.add(i, m_economy.ware_target_quantity(i).permanent);
-				if (not m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
-					m_display.hide_ware(i);
-				}
-			}
-		}
-
 
 		void decrease_target() {
 			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrwares();
@@ -179,26 +190,15 @@ private:
 	};
 	struct Economy_Options_Worker_Panel : UI::Box {
 		bool m_can_act;
-		WaresDisplay m_display;
+		TargetWaresDisplay m_display;
 		Economy & m_economy;
-		// Wares list representing the current target
-		Widelands::WareList m_wares;
 
 		Economy_Options_Worker_Panel(UI::Panel * parent, Interactive_GameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
-			m_display(this, 0, 0, economy.owner().tribe(), WaresDisplay::WORKER, m_can_act),
+			m_display(this, 0, 0, economy.owner().tribe(), WaresDisplay::WORKER, m_can_act,economy),
 			m_economy(economy)
 		{
-			Ware_Index nr_wares = m_economy.owner().tribe().get_nrworkers();
-			m_wares.set_nrwares(nr_wares);
-			m_display.add_warelist(m_wares);
-			for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
-				if (not m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
-					m_display.hide_ware(i);
-				}
-			}
-
 			add(&m_display, UI::Box::AlignLeft, true);
 
 			UI::Box *buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
@@ -216,18 +216,6 @@ private:
 			ADD_WORKER_BUTTON(increase_target, "+", _("Increase target"))
 			ADD_WORKER_BUTTON(decrease_target, "-", _("Decrease target"))
 			ADD_WORKER_BUTTON(reset_target, "R", _("Reset to default"))
-		}
-
-		virtual void think() {
-			Ware_Index nr_wares = m_economy.owner().tribe().get_nrworkers();
-			// Initialize wares list with values from ecenomoy
-			for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
-				m_wares.remove(i, m_wares.stock(i));
-				m_wares.add(i, m_economy.worker_target_quantity(i).permanent);
-				if (not m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
-					m_display.hide_ware(i);
-				}
-			}
 		}
 
 
