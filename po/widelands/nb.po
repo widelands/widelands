@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 11:43+0200\n"
-"PO-Revision-Date: 2010-10-18 20:51+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-10-29 19:12+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-10-30 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/writeHTML.cc:43
@@ -1357,7 +1357,7 @@ msgstr "varekø: %s"
 #: ../../src/graphic/graphic.cc:1083
 #, c-format
 msgid "Loading animations: %d%% complete"
-msgstr "Laster animasjoner: %d%% komplett"
+msgstr "Laster animasjoner: %d%% ferdig"
 
 #: ../../src/graphic/animation.cc:139
 msgid "frame number"

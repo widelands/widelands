@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-05-05 13:25+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-29 20:24+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-10-30 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -26,6 +26,12 @@ msgid ""
 "chance to secure the mountains from enemy hands: We must build a fortress to "
 "the east of the mountains!\" "
 msgstr ""
+" \"O Bolderado e eu estivemos a explorar a região das três montanhas. Um dos "
+"maiores problemas estratégicos com esta região é que apenas existem duas "
+"grandes passagens para o meio da montanha: uma a Norte e outra a Sul. Estas "
+"passagens são muito difíceis de controlar pelo que me parece que só existe "
+"uma forma de defender o local para que não caia em mais inimigas: Temos de "
+"construir uma Fortaleza a Este das montanhas !\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:242
 msgid ""
@@ -35,6 +41,12 @@ msgid ""
 "of our farmers seems to be very clever he already got some crops to grow in "
 "this cold soil.\" "
 msgstr ""
+" \"O Bolderado tem razão ! Não temos comida suficiente para sobreviver a "
+"este longo e frio inverno. Devemos começar por construir cabanas para o "
+"Pescador e para o Caçador. E, se tivermos espaço suficiente, construir "
+"também uma Quinta de Cereais e uma Padaria ! Um dos nosso Agricultores é "
+"muito inteligente e já arranjou uma espécie de plantas que se vai dar bem "
+"nestes solos.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:372
 msgid ""
@@ -44,6 +56,11 @@ msgid ""
 "to\n"
 " make their work lighter and our transportation more efficient.\" "
 msgstr ""
+" \"Grande-chefe, lembra-te dos pobre carregadores: As nossas estradas estão\n"
+" cada vez maiores e o peso sobre os seus ombros é cada vez maior. Temos de\n"
+" fazer criação de bois para tornar o seu trabalho mais leve e o nosso "
+"sistema de\n"
+" transportes mais eficiente.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:318
 msgid ""
@@ -123,6 +140,14 @@ msgid ""
 "newborn lamb in the honour of my father whose eyes are set upon me "
 "today.<br>So be it!\" "
 msgstr ""
+" \"Assim seja ! Os generais estão a preparar as tropas e o Bolderado irá em "
+"pessoa liderar o primeiro ataque. Eu marcharei a seu lado para libertar "
+"Al’thunran desta guerra e trazer de novo a paz à capital. Quando o sol "
+"começar a despontar por entre as árvores, irei ordenar o primeiro assalto. "
+"No lusco-fusco do crepúsculo, espero já estar a celebrar a minha vitória no "
+"casa do senhor da guerra e, para comemorar esse feito, sacrificarei um "
+"cordeiro recém-nascido em honra de meu Pai cujos olhos estão de certo postos "
+"em mim neste dia.<br> Assim seja !\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:274
 msgid ""
@@ -354,15 +379,15 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 msgid "Boldreth shakes his head."
-msgstr ""
+msgstr "O Boderado abana a cabeça."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:204
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "O Boderado grita !"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:230
 msgid "Boldreth speaks:"
-msgstr ""
+msgstr "O Boderado diz:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:57
 msgid "Build a donjon"

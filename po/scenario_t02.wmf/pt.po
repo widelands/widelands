@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-29 00:52+0000\n"
+"PO-Revision-Date: 2010-10-29 20:00+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-29 05:18+0000\n"
+"X-Launchpad-Export-Date: 2010-10-30 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
@@ -141,6 +141,13 @@ msgid ""
 "Throne Among the Trees, the symbol of unity and peace among our kin, became "
 "the wedge that drives us apart.\" "
 msgstr ""
+" \"A guerra continua ! Cada vez mais irmãos e irmãs fogem à guerra brutal "
+"que assola a capital sob as árvores.<br> As histórias que eles contam acerca "
+"dos nossos parentes entristecem-nos. Tenho passado noites inteiras acordado, "
+"inquieto, mais cansado do que imaginava possível. E depois cada vez que "
+"fecho os olhos vejo a fortaleza do meu pai ser consumida pelas chamas. O "
+"Trono-entre-as-árvores outrora o símbolo da unidade e da paz entre os nossos "
+"é agora a cunha que nos separa.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:433
 msgid ""
@@ -150,6 +157,11 @@ msgid ""
 "would finally come to an end.<br> So far, it seems that neither prayer was "
 "fulfilled.\" "
 msgstr ""
+" \"O inverno vem ai. Alguns de nós estão sofrendo com o frio, porém teremos "
+"de aguentar. O dia do nosso regresso já não pode estar muito longe, melhor "
+"tem de estar cada vez mais perto.<br /> Rezei para que o calor regressasse, "
+"como roguei também para que a guerra acabasse de vez.<br /> Até agora parece "
+"que nenhuma das minhas súplicas foi escutada !\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:219
 msgid ""
@@ -163,12 +175,24 @@ msgid ""
 "whoever threatens our very existence, may it even be one of your blood or "
 "mind?\" "
 msgstr ""
+" \"Hoje os meus caçadores trouxeram homens, mulheres e crianças que estavam "
+"escondidas na floresta, tentando escapar à guerra, ao ódio e à vingança das "
+"tribos que lutam entre si, agora como dantes quando éramos nada mais que "
+"animais selvagens guiados apenas pelo instinto. Nenhum dos meus irmãos "
+"conseguirá ganhar o controlo do trono de madeira e nenhuma das tribos será "
+"suficientemente forte para subjugar a outra. Não haverá fim para a matança a "
+"não ser que ... e se eu fizer como o meu pai me disse um dia ?<br> Enfrenta "
+"quem quer ameace a nossa existência, mesmo que com eles compartilhes o teu "
+"sangue ou os teus ideiais !\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:440
 msgid ""
 " \"We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength.<br> They have decided to join us!\" "
 msgstr ""
+" \"Encontramos uma aldeia com pessoas amigáveis e produtivas que ficaram "
+"impressionadas com a nossa riqueza, tecnologia e força.<br> Eles decidiram "
+"juntar-se a nós!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:293
 msgid ""
@@ -177,12 +201,19 @@ msgid ""
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
+" \"Apesar disto ser verdade, devemos de ter isso em conta mais tarde porque "
+"agora existem muitos obstáculos. Os mineiros irão exigir melhores rações "
+"para continuar a trabalhar lá no cima da montanha com este frio horrível. "
+"Mas fornecer esses mantimentos não será fácil!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:391
 msgid ""
 " \"Wonderful! Our roofs are not dripping anymore, and we have all the "
 "material we need for, well, whichever monumental building we see fit!\" "
 msgstr ""
+" \"Que fixe ! Os nossos telhados deixaram de pingar e já temos os materiais "
+"necessários para ... bem ... digamos para um qualquer tipo de edifício que "
+"julguemos necessário!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:361
 msgid ""
@@ -192,6 +223,10 @@ msgid ""
 "as\n"
 "ours!<br> We need a wood hardener, and we need one now!\""
 msgstr ""
+"\"Descobri agora mesmo que estamos com falta de barrotes de madeira ! \n"
+"Não podemos por os nossos guerreiros a viver em cabanas e mais ainda\n"
+"por causa dos tempos perigosos em que vivemos!<br> Precisamos de uma\n"
+"Serração e já !\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:414
 msgid ""
@@ -205,6 +240,15 @@ msgid ""
 "breed\n"
 "them and they will do their work on the roads loyally and reliably.\""
 msgstr ""
+"\"À medida que o nosso reino fica cada vez maior, o transito nas estradas "
+"está a\n"
+"ficar insuportável. Os pobres carregadores já não conseguem transportar as \n"
+"mercadorias tão depressa como é necessário. Sugiro que comecemos a criar \n"
+"bois.<br> São animais espectaculares: o boi é tão ágil como os humanos mas "
+"muito mais\n"
+" forte e frugal. Tudo o que precisamos é de trigo e água para os criar e "
+"depois \n"
+"eles trabalharão leal e incansavelmente nas estradas.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:380
 msgid ""
@@ -217,6 +261,11 @@ msgid ""
 "my\n"
 "face!<br> Now this is a problem we should do something about!\""
 msgstr ""
+"\"Que desgraça, Grande-chefe ! É certo que já podemos produzir argamassa \n"
+"para as nossas poderosas fortificações porém isto não impede que os nossos\n"
+"telhados deixem entrar água ! Até pode ser que os jovens gostem de passar a\n"
+"noite à chuva, mas eu não consigo pregar olho por causa das gotas a pingar \n"
+"na minha cara!<br> isto é um problema que precisamos de resolver !\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:301
 msgid ""
@@ -228,6 +277,11 @@ msgid ""
 "it\n"
 "'Thron's Pride' or so if you want!\""
 msgstr ""
+"\"Tenho que dar a mão à palmatória: tinhas toda a razão, meu velho !<br> \n"
+"Parece que existem imensos animais na floresta, por isso temos caça "
+"bastante.\n"
+"E as pessoas darão vivas a uma nova taberna ... que tal chamar-lhe \n"
+"'O orgulho do Thron\" o coisa parecida?\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:276
 msgid ""
@@ -238,6 +292,15 @@ msgid ""
 "once in a while! Let us send out some of those who understand the stone's\n"
 "tongue to unravel the mountain's secrets!\""
 msgstr ""
+"\"Olha-me para isto ! A Este está a grande montanha Kal'mavrath !  Estou a "
+"pensar\n"
+"nas riquezas que s natureza escondeu nela por baixo dos seus majestosos "
+"flancos!<br>\n"
+"Temos de nos expandir para Este. Há a possibilidade dos mais velhos se "
+"tornarem\n"
+"úteis de vez em quando ! Vamos enviar para lá aqueles que entendem a língua "
+"das \n"
+"pedras para que desvendem os segredos da montanha\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:350
 msgid ""
@@ -250,6 +313,14 @@ msgid ""
 "pint\n"
 "of beer or two will keep their spirits high.\""
 msgstr ""
+"\"Os nosso mineiros estão a extrair menos de dia para dia ! Temos de ir mais "
+"fundo,\n"
+"ir mais perto do coração da montanha se quisermos mais dos seus tesouros "
+"!<br>\n"
+"Mas atenção que a essas profundidades apenas alguns se voluntariam a ir. "
+"Temos\n"
+"de recompensar essa coragem com maiores rações para eles. E uma ou duas \n"
+"canecas de cerveja manterão a sua motivação elevada.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:340
 msgid ""
@@ -261,6 +332,11 @@ msgid ""
 "we\n"
 "want. And we need the coal to keep the smelter's ovens burning.\""
 msgstr ""
+"\"Então agora que temos as minas e os mantimentos para as sustentar,\n"
+"devíamos transformar em coisas úteis os que os nossos bravos mineiros\n"
+"trazem ao cimo. O minério de ferro tem de ser derretido para fazer o ferro\n"
+"que irá ser levado para o forjado nas coisas que quisermos. E precisamos\n"
+"de carvão para manter o forno da Fundição a trabalhar.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:398
 msgid ""
@@ -275,6 +351,15 @@ msgid ""
 "he\n"
 "was.<br> The news he brought changed everything...\""
 msgstr ""
+"\"No outro dia o Bolderado pediu-me que o acompanhasse à nova Estalagem. \n"
+"Isso deixaria-me muito feliz - disse-me ele.<br> Quando olhei em volta, \n"
+"vi as pessoas cheias de confiança e certeza de que eu os poderei guiar\n"
+"através destes negros dias. Mas antes que eu pudesse dizer umas palavras\n"
+"de gratidão e incentivo um dos meus guerreiros entrou de rompante na \n"
+"Estalagem. Ele tinha estado nos últimos dias embrenhado lá longe na floresta "
+"\n"
+"e eu conseguia ver o quão preocupado ele estava.<br> As notícias que ele \n"
+"trouxe mudaram tudo ...\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:370
 msgid ""
@@ -285,6 +370,13 @@ msgid ""
 "could,\n"
 "in times of need, build a fortress as the world has not seen before!\""
 msgstr ""
+"\"Bem, velho amigo, isto deve ser o suficiente para tornar as nossas\n"
+"fortificações mais resistentes às investidas dos nossos inimigos ! Agora já "
+"nos\n"
+"podemos expandir com segurança ! <br> Não seria mal pensado armazenar\n"
+"alguma argamassa de reserva para usar desta longa campanha, para assim\n"
+"podermos construir, quando necessário, uma fortaleza como o mundo inteiro\n"
+"nunca viu !\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:251
 msgid ""
@@ -295,6 +387,11 @@ msgid ""
 "Kal'mavrath - maybe we will find some more big stones to please the old "
 "man?\""
 msgstr ""
+"\"Apesar de isto não ser uma tarefa digna de um guerreiro, pelo menos\n"
+"mantém-os entretidos ! Thron, o que dirias a nós levarmos alguns dos nosso\n"
+"mais guerreiros mais inquietos  e nos aventurássemos um pouco mais perto\n"
+"da grande montanha Kal'mavrath ... talvez encontremos ai alguma pedra para\n"
+"satisfazer o nosso velho chefe?\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:310
 msgid ""
@@ -304,14 +401,21 @@ msgid ""
 "I\n"
 "sure would enjoy a freshly baken pitta bread for a change...\""
 msgstr ""
+"something to be done! Thron, what do you say about me taking a few of our "
+"most\n"
+"\"A sabedoria diz que devemos procurar ter variedade.<br> A Norte da Grande\n"
+"Montanha existe uma planície ! Porque não usar essa criação da Mãe Natureza\n"
+"para construir ai uma Quinta de cereais ? Para variar, eu já comia uma "
+"sandes\n"
+"de pão pita acabado de cozer ...\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
-msgstr ""
+msgstr "Um linda manhã"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:438
 msgid "A friendly village joined us!"
-msgstr ""
+msgstr "Um aldeia amigável juntou-se a nós !"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:143
 msgid ""
@@ -336,14 +440,40 @@ msgid ""
 "you\n"
 "prefer."
 msgstr ""
+"Um mina normal apenas pode extrair um terço de todos os recursos que houver "
+"sob\n"
+"ela. Depois terá de ser aumentada para Mina funda para poder continuar a "
+"trabalhar\n"
+"devidamente. Para melhorar um edifício, escolhe-o e clica no botão "
+"apropriado na\n"
+"janela que foi aberta.<br> Os trabalhadores ganham experiência com o sucesso "
+"do\n"
+"seu trabalho, e com a acumulação dela tornam-se Trabalhadores "
+"especializados, os\n"
+"quais são necessários para operar os edifícios melhorados. Não melhores um\n"
+"edifício antes de teres trabalhadores especializados em número suficiente "
+"para os\n"
+"operar. Estes edifícios em geral têm maiores exigências do que os edifícios "
+"básicos,\n"
+"por exemplo as Minas fundas precisam de lanches em vez de rações. Para isso "
+"a\n"
+"Taberna terá de ser transformada em Estalagem para poder produzir Lanches\n"
+"compostos por pão pita MAIS um segundo tipo de comida (carne ou peixe) MAIS\n"
+"cerveja. Podem sempre melhorar todas as Minas para Minas fundas de uma vez "
+"se\n"
+"para isso tiveres os trabalhadores: as minas maiores extraem mais "
+"rapidamente\n"
+"enquanto que as minas menores precisam de menos comida. Cabe a ti definir "
+"qual\n"
+"a estratégia que preferes."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:431
 msgid "Another cold day"
-msgstr ""
+msgstr "Mais um dia frio"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:119
 msgid "Bake bread"
-msgstr ""
+msgstr "Cozer o Pão"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:175
 msgid ""
@@ -357,6 +487,14 @@ msgid ""
 "a\n"
 "mountain. Coal can be obtained by building a charcoal burner or a coal mine."
 msgstr ""
+"Edifícios melhores também precisam de melhores materiais de construção para "
+"além\n"
+"dos Barrotes de madeira. Um deles é a Argamassa que é produzida a partir da\n"
+"mistura de pedra e água e queimada com carvão no Forno da Cal. Podes obter "
+"água\n"
+"construindo um poço nos locais fora das montanhas indicados pelos geólogos "
+"como\n"
+"tendo água. O Carvão pode ser obtido com o Carvoeiro ou numa mina de carvão."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:164
 msgid ""
@@ -367,47 +505,52 @@ msgid ""
 "wood\n"
 "hardener before you run out of blackwood, as without it you cannot expand."
 msgstr ""
+"Maiores e melhores edifícios - incluindo os de cariz militar - requerem "
+"melhores materiais de construção. Não podem ser construídos a partir de "
+"simples troncos de árvores: os troncos têm antes de ser refinados em "
+"Barrotes pela Serração. Não te esqueças de construir uma Serração antes de "
+"se esgotarem o estoque de Barrotes, pois sem eles não te podes expandir."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:318
 msgid "Boldreth cheers up..."
-msgstr ""
+msgstr "O Bolderano anima-se ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:275
 msgid "Boldreth exclaims..."
-msgstr ""
+msgstr "O Bolderano exclama ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:250
 msgid "Boldreth jumps up..."
-msgstr ""
+msgstr "O Bolderano dá saltos ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:285
 msgid "Boldreth laughs..."
-msgstr ""
+msgstr "O Bolderano desata a rir ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:300
 msgid "Boldreth nods..."
-msgstr ""
+msgstr "O Bolderano anui ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:339
 msgid "Boldreth remarks..."
-msgstr ""
+msgstr "O Bolderano faz um comentário ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:360
 msgid "Boldreth seems concerned..."
-msgstr ""
+msgstr "O Bolderano parece preocupado ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:369
 msgid "Boldreth smiles..."
-msgstr ""
+msgstr "O Bolderano sorri ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:234
 msgid "Brave Boldreth steps aside you..."
-msgstr ""
+msgstr "O valente Bolderano põe-se a teu lado ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:195
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:196
 msgid "Build a cattlefarm"
-msgstr ""
+msgstr "Construir uma criação de animais"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 msgid ""
@@ -424,64 +567,83 @@ msgid ""
 "ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on\n"
 "mountain terrain. Suitable places for mines are displayed as hammer and pick."
 msgstr ""
+"Construindo uma mina de carvão e uma mina de minério de ferro. Para as\n"
+"construir, primeiro coloca uma bandeira no flanco Este da montanha (em "
+"terreno\n"
+"montanhoso e não de prado). Ao clicares na bandeira podes enviar para ai os\n"
+"teus geólogos. Quando a bandeira for colocada numa montanha, os geólogos\n"
+"procurarão por minerais porque de outro modo procurariam água. Assim que\n"
+"aparecerem os resultados das pesquisas constrói uma mina de cada um dos\n"
+"recursos encontrados: <br> Preto - Carvão<br> Vermelho - minério de\n"
+"Ferro<br> Amarelo - Ouro<br> Cinzento - Granito<br> As mina só podem ser\n"
+"construídas em terreno montanhoso. Locais apropriados à construção de\n"
+"minas estão indicados com um martelo e uma picareta."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:185
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:186
 msgid "Build a fernery"
-msgstr ""
+msgstr "Contruir uma plantação de colmo"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr ""
+msgstr "Contruir as casas do Caçador, do Criador de caça e uma Taberna"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Construir o Fono da cal e a economia do carvão"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:174
 msgid "Build a lime kiln, a well and a charcoal burner or coal mine"
 msgstr ""
+"Construir o Fono da cal, um poço e um Carvoeiro ou uma mina de carvão"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Construir a Fundição"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Construir um poço, uma quinta e uma Padaria"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Construir uma Serração"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
-msgstr ""
+msgstr "Construir minas de carvão e de minério de ferro"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
 "Build military buildings (like sentries and strongholds) to expand your\n"
 "territory. Get to the rocks northeast from you and build a quarry there."
 msgstr ""
+"Constrói edifícios militares (como a Sentinela e a Praça-forte) para "
+"expandires o\n"
+"teu território. Expande-te até aos rochedos a Nordeste e constrói uma "
+"Pedreira ai."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:139
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Melhora os edificios e constrói uma mini-cervejeira"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
 "Enhance the coal mine and the tavern to the better versions of their\n"
 "buildings respectively. Also build a micro brewery."
 msgstr ""
+"Melhora a Mina de carvão e a Taberna para as versões melhoradas de cada "
+"uma.\n"
+"Constrói também uma Mini-cervejeira."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Expande-te para Nordeste e constrói ai uma Pedreira"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:84
 msgid "Expand north-east to the stones"
-msgstr ""
+msgstr "Expande-te para Nordeste até aos rochedos"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
 msgid ""
@@ -492,54 +654,60 @@ msgid ""
 "first example of a ware which has to be refined before being used in a\n"
 "secondary building - others will follow."
 msgstr ""
+"Para trabalharem, os teus mineiros precisam de comida.<br> Um Caçador pode\n"
+"caçar animais enquanto o Tratador da caça impede que eles se extingam.\n"
+"A carne é então processada na Taberna em refeições para os teus "
+"mineiros.<br>\n"
+"Isto é um primeiro exemplo da transformação que os produtos sofrem antes de\n"
+"ser usados num segundo edifício. Outros tipos de refinamento se seguirão."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
-msgstr ""
+msgstr "O Khantrukh olha para as planícies ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:261
 msgid "Khantrukh grumbles..."
-msgstr ""
+msgstr "O Khantrukh resmunga ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:292
 msgid "Khantrukh interrupts..."
-msgstr ""
+msgstr "O Khantrukh interrompe ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:242
 msgid "Khantrukh joins in ..."
-msgstr ""
+msgstr "O Khantrukh junta-se ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:268
 msgid "Khantrukh nods satisfied..."
-msgstr ""
+msgstr "O Khantrukh acena de satisfação ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:390
 msgid "Khantrukh seems relieved..."
-msgstr ""
+msgstr "O Khantrukh parece aliviado ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "O Khantrukh fala"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:349
 msgid "Khantrukh speaks..."
-msgstr ""
+msgstr "O Khantrukh diz que ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:379
 msgid "Khantrukh steps in..."
-msgstr ""
+msgstr "O Khantrukh entra ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:396
 msgid "Mission Complete"
-msgstr ""
+msgstr "Missão Terminada"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:69
 msgid "New Objectives"
-msgstr ""
+msgstr "Novos Objectivos"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:424
 msgid "One fullmoon night"
-msgstr ""
+msgstr "Numa noite de lua cheia"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:121
 msgid ""
@@ -548,14 +716,18 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well at a spot\n"
 "where your geologists find a water source."
 msgstr ""
+"Outras formas de produzir comida e de diferentes tipos, é o recurso aos\n"
+"Pescadores e aos Caçadores. O trigo das quintas pode ser processado na\n"
+"Padaria, juntando-lhe água para ser comestível. Podes obter água\n"
+"construindo um poço onde os geólogos encontrarem água."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:107
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Fornce alimentos aos mineiros"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:130
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Refina os teus recursos minerais"
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -563,10 +735,13 @@ msgid ""
 "higher production buildings, including mining and the military expansions "
 "will be introduced."
 msgstr ""
+"Segunda Missão da Campanha Tutorial dos Bárbaros. Neste tutorial serão "
+"explicados os edifícios de maior produção, incluindo a mineração e as "
+"expansões dos edifícios militares."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Começa a construir minas na montanha"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:241
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:259
@@ -578,23 +753,25 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:378
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:389
 msgid "The advisor"
-msgstr ""
+msgstr "O conselheiro"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:309
 msgid "The elder jumps into the air..."
-msgstr ""
+msgstr "O ancião salta para o ar ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:132
 msgid ""
 "The iron ore your miners bring up is not usable yet - it has to be melted\n"
 "into iron first."
 msgstr ""
+"O minério de ferro que os mineiros trazem à superfície ainda não é usável :\n"
+"tem de ser fundido para se transformar em Ferro."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:210
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:217
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:225
 msgid "The story continues"
-msgstr ""
+msgstr "A história continua"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:187
 msgid ""
@@ -602,35 +779,40 @@ msgid ""
 "cover roofs. Thatch reed is planted by a ferner around his building, the\n"
 "fernery."
 msgstr ""
+"O terceiro material necessário para melhorar os edifícios é o Colmo que é "
+"usado\n"
+"para cobrir os telhados. O Colmo é plantado pelo Plantador de Colmo à volta "
+"da \n"
+"sua quinta, que se chama Colmeiro."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "O Thron parece preocupado ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:332
 msgid "Thron recognizes..."
-msgstr ""
+msgstr "O Thron reconhece que ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:211
 msgid "Thron shakes his head..."
-msgstr ""
+msgstr "O Thron acena com a cabeça ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:425
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:439
 msgid "Thron speaks..."
-msgstr ""
+msgstr "O Thron diz ..."
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "Tutorial2 - A Place to call Home"
-msgstr ""
+msgstr "Tutorial2 - Chamar Casa a este lugar"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
-msgstr ""
+msgstr "Victória"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:412
 msgid "We need oxen!"
-msgstr ""
+msgstr "Precisamos de Bois !"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:197
 msgid ""
@@ -642,12 +824,24 @@ msgid ""
 "doubles the transport capacity.<br>Oxen are bred in cattle farms\n"
 "out of wheat and water."
 msgstr ""
+"enough to transport goods swiftly. Traffic jams are the consequence. Such "
+"roads\n"
+"Quando as estradas têm um tráfego intenso durante muito tempo, um "
+"carregador\n"
+"apenas não é suficiente para transportar as mercadorias rapidamente. Quando\n"
+"ocorrerem engarrafamentos, essas estradas empregam um segundo carregador:\n"
+"uma besta de carga que ajuda a carregar as mercadorias. Isto duplica a\n"
+"capacidade de transporte.<br> Os bois de carga são criados nas Criação de "
+"bois\n"
+"com recurso a trigo e água."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:405
 msgid ""
 "You have completed this mission. You may continue playing if you wish,\n"
 "otherwise move on to the next mission."
 msgstr ""
+"Terminaste esta missão. Podes continuar a jogar se o desejares ou podes\n"
+"terminar o jogo e seguir para a próxima missão."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:233
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:248
@@ -659,4 +853,4 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:359
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:368
 msgid "Your loyal companion"
-msgstr ""
+msgstr "O teu leal companheiro"

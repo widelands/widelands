@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 21:12+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-10-29 23:28+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-10-30 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -706,39 +706,39 @@ msgstr "Porcia"
 
 #: ../../tribes/empire/conf:34
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo uhlia"
 
 #: ../../tribes/empire/conf:35
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa uhlia"
 
 #: ../../tribes/empire/conf:36
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo zlata"
 
 #: ../../tribes/empire/conf:37
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa zlata"
 
 #: ../../tribes/empire/conf:38
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo žuly"
 
 #: ../../tribes/empire/conf:39
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa žuly"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo železa"
 
 #: ../../tribes/empire/conf:41
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa železa"
 
 #: ../../tribes/empire/conf:42
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Ukazovateľ zdroja - žiadny zdroj"
 
 #: ../../tribes/empire/conf:43
 msgid "Resource indicator water"
@@ -790,7 +790,7 @@ msgstr "Lopata"
 #: ../../tribes/empire/colosseum/conf:27
 #: ../../tribes/empire/trainingscamp/conf:38
 msgid "Sleep"
-msgstr ""
+msgstr "Spať"
 
 #: ../../tribes/empire/conf:152
 msgid "Small Tower"
@@ -1041,103 +1041,123 @@ msgstr "Kmene stromov sú jedným z dôležitých stavebných materiálov impér
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 0"
 
 #: ../../tribes/empire/trainingscamp/conf:40
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 0 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:41
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 1"
 
 #: ../../tribes/empire/trainingscamp/conf:42
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 1 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:43
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 2"
 
 #: ../../tribes/empire/trainingscamp/conf:44
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 2 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:45
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 3"
 
 #: ../../tribes/empire/trainingscamp/conf:46
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 3 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/empire/arena/conf:14
 #: ../../tribes/empire/colosseum/conf:28
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Vylepšiť uhýbanie vojakov 0"
 
 #: ../../tribes/empire/arena/conf:15
 #: ../../tribes/empire/colosseum/conf:29
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Vylepšiť uhýbanie vojakov 0 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/empire/colosseum/conf:30
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Vylepšiť uhýbanie vojakov 1"
 
 #: ../../tribes/empire/colosseum/conf:31
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Vylepšiť uhýbanie vojakov 1 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Vylepšiť body zdravia vojakov 0"
 
 #: ../../tribes/empire/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť body zdravia vojakov 0 (len pre kompatibilitu so starými verziami "
+"hry (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr ""
+msgstr "Vylepšiť body zdravia vojakov 1"
 
 #: ../../tribes/empire/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť body zdravia vojakov 1 (len pre kompatibilitu so starými verziami "
+"hry (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr ""
+msgstr "Vylepšiť body zdravia vojakov 2"
 
 #: ../../tribes/empire/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť body zdravia vojakov 2 (len pre kompatibilitu so starými verziami "
+"hry (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier hitpoints 3"
-msgstr ""
+msgstr "Vylepšiť body zdravia vojakov 3"
 
 #: ../../tribes/empire/trainingscamp/conf:54
 msgid ""
 "Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť body zdravia vojakov 3 (len pre kompatibilitu so starými verziami "
+"hry (build13))"
 
 #: ../../tribes/empire/conf:126
 msgid "Vine Farmer"
@@ -1180,6 +1200,8 @@ msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer."
 msgstr ""
+"Voda je najpodstatnejším základom pre život! Má veľa využití, napr. na "
+"výrobu chleba alebo piva."
 
 #: ../../tribes/empire/conf:194
 msgid "Weapon Smithy"
@@ -1214,6 +1236,7 @@ msgid ""
 "Wheat is essential for surviving. Delicious bread and ales can be made of "
 "this wheat."
 msgstr ""
+"Pšenica je nevyhnutné na prežitie. Možno z nej vyrobiť chutný chlieb a pivá."
 
 #: ../../tribes/empire/conf:90
 msgid "Wine"

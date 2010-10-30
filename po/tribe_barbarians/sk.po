@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 20:57+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-10-29 23:23+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-10-30 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -398,7 +398,7 @@ msgstr "Malta"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
-msgstr ""
+msgstr "Pestuje ľan a tŕstie."
 
 #: ../../tribes/barbarians/conf:152
 msgid "Guardhall"
@@ -761,59 +761,59 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:38
 msgid "Reed medium"
-msgstr ""
+msgstr "Stredné tŕstie"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Reed ripe"
-msgstr ""
+msgstr "Zrelé tŕstie"
 
 #: ../../tribes/barbarians/conf:39
 msgid "Reed small"
-msgstr ""
+msgstr "Malé tŕstie"
 
 #: ../../tribes/barbarians/conf:40
 msgid "Reed tiny"
-msgstr ""
+msgstr "Maličké tŕstie"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo uhlia"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa uhlia"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo zlata"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa zlata"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo žuly"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa žuly"
 
 #: ../../tribes/barbarians/conf:48
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo železa"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa železa"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Ukazovateľ zdroja - žiadny zdroj"
 
 #: ../../tribes/barbarians/conf:51
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Ukazovateľ zdroja - voda"
 
 #: ../../tribes/barbarians/conf:132
 msgid "Scout"
@@ -848,7 +848,7 @@ msgstr "Lopata"
 #: ../../tribes/barbarians/battlearena/conf:25
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
-msgstr ""
+msgstr "Spať"
 
 #: ../../tribes/barbarians/conf:155
 msgid "Small Tower"
@@ -872,7 +872,7 @@ msgstr "Zlievareň"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr ""
+msgstr "Zlieva helmy pre vojakov."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
@@ -918,7 +918,7 @@ msgstr "Papradie na dosky"
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid "Thatch reed is used to make the roofs of buildings waterproof."
-msgstr ""
+msgstr "Trstená krytina sa používa na tesnenie striech proti vode."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
@@ -933,6 +933,8 @@ msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
+"Hájnik zabezpečuje, aby prirodzená populácia zvierat neklesla nikdy príliš "
+"nízko."
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -954,12 +956,17 @@ msgid ""
 "damage, but it's durability is not the best. Only skilled warriors can use "
 "this. Produced in the axe factory."
 msgstr ""
+"Bronzová sekera sa považuje za zbraň ťažkú na zvládnutie: spôsobí veľa "
+"škody, ale jej životnosť nie je najlepšia. Používajú ju len skúsení "
+"bojovníci. Vyrába sa v továrni na sekery."
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "Produced in the metal works."
 msgstr ""
+"Kliešte na uhlie sú nástrojom zlievača, ktorý pracuje v zlievarni. Vyrába sa "
+"v kovodielni."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -975,6 +982,9 @@ msgid ""
 "the blacksmiths and the helmsmiths. Make sure you always got some in "
 "reserve! Build at the metal works."
 msgstr ""
+"Kladivo je nevyhnutný nástroj. Potrebujú ho geológovia, pracovníci, kováči a "
+"kováči heliem. Uistite sa, že máte vždy nejaké v rezerve! Vyrába sa v "
+"kovodielni."
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
@@ -1021,6 +1031,9 @@ msgid ""
 "Only trained warriors are able to yield such a weapon. It is produced in the "
 "axe factory."
 msgstr ""
+"Toto je druhá najnebezpečnejšia zbraň, ktorú sú barbari schopní vyrobiť. Len "
+"vycvičení bojovníci dokážu narábať s takou zbraňou. Vyrába sa v továrni na "
+"sekery."
 
 #: ../../tribes/barbarians/goldstone/conf:1
 msgid "This is the yellow goldstone."
@@ -1037,6 +1050,8 @@ msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters. Produced in the metal works."
 msgstr ""
+"Tento oštep je dosť ľahký, aby sa dal vrhnúť, ale aj dosť ťažký, aby zabil "
+"zviera na jeden úder. Používajú ho len lovci. Vyrába sa v kovodielni."
 
 #: ../../tribes/barbarians/conf:156
 #: ../../tribes/barbarians/conf:163
@@ -1065,101 +1080,121 @@ msgstr "Kmene stromov sú primárnym stavebným materiálom barbarov."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:38
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 0 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:40
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 1 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:42
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 2 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 3 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 4 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Vylepšiť uhýbanie vojakov 0"
 
 #: ../../tribes/barbarians/battlearena/conf:27
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Vylepšiť uhýbanie vojakov 0 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/barbarians/battlearena/conf:28
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Vylepšiť uhýbanie vojakov 1"
 
 #: ../../tribes/barbarians/battlearena/conf:29
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Vylepšiť uhýbanie vojakov 1 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Vylepšiť body zdravia vojakov 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť body zdravia vojakov 0 (len pre kompatibilitu so starými verziami "
+"hry (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr ""
+msgstr "Vylepšiť body zdravia vojakov 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť body zdravia vojakov 1 (len pre kompatibilitu so starými verziami "
+"hry (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr ""
+msgstr "Vylepšiť body zdravia vojakov 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť body zdravia vojakov 2 (len pre kompatibilitu so starými verziami "
+"hry (build13))"
 
 #: ../../tribes/barbarians/conf:94
 msgid "War Helmet"
@@ -1182,6 +1217,8 @@ msgid ""
 "Warriors with a fundamental fighting knowledge gain a broad axe. It is "
 "produced in the axe factory."
 msgstr ""
+"Bojovníci so základnými znalosťami o boji dostávajú širokú sekeru. Vyrába sa "
+"v továrni na sekery."
 
 #: ../../tribes/barbarians/conf:96
 msgid "Water"
@@ -1192,6 +1229,8 @@ msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer or to produce grout."
 msgstr ""
+"Voda je najpodstatnejším základom na život! Voda má mnohé využitia, napr. na "
+"výrobu chleba, piva alebo malty."
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid "Weapons and tools are made of iron."
@@ -1199,7 +1238,7 @@ msgstr "Zbrane a nástroje sú vyrobené zo železa."
 
 #: ../../tribes/barbarians/conf:131
 msgid "Weaver"
-msgstr ""
+msgstr "Tkáč"
 
 #: ../../tribes/barbarians/conf:203
 msgid "Weaving-Mill"
@@ -1218,6 +1257,8 @@ msgid ""
 "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
 "be made of this wheat."
 msgstr ""
+"Pšenica je nevyhnutná na prežitie. Možno z nej vyrobiť chutný pita chlieb "
+"alebo silné pivá."
 
 #: ../../tribes/barbarians/conf:55
 msgid "Wildboar"
@@ -1268,7 +1309,7 @@ msgstr "Práca"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
-msgstr ""
+msgstr "Pracuje na stavenisku, aby postavil novú budovu."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -1281,6 +1322,8 @@ msgid ""
 "Young warriors need some encouragement. This drink makes a man fearless and "
 "strong."
 msgstr ""
+"Mladí bojovníci potrebujú nejaké povzbudenie. Tento nápoj spôsobí, že je muž "
+"nebojácny a silný."
 
 #~ msgid "Forester"
 #~ msgstr "Horár"
