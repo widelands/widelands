@@ -175,74 +175,44 @@ Tribe_Descr::Tribe_Descr
 				tribe_s.get_string("descr"); // long description
 				m_bob_vision_range = tribe_s.get_int("bob_vision_range");
 				m_carrier2         = tribe_s.get_string("carrier2");
+ 
+				/// Load and parse ware and worker categorization                                                                                     
+#define PARSE_ORDER_INFORMATION(w) /* w is ware or worker */                                                                                                    \
+				{                                                                                                                               \
+					m_##w##s_order_coords.resize(m_##w##s.get_nitems());                                                                    \
+                                                                                                                                                                \
+					std::string categories_s(tribe_s.get_safe_string(#w "s_order"));                                                      \
+					for(boost::split_iterator<string::iterator> It1=                                                                        \
+						boost::make_split_iterator(categories_s, boost::token_finder(boost::is_any_of(";")));                           \
+						It1 != boost::split_iterator<string::iterator>();                                                               \
+						++It1) {                                                                                                        \
+						vector<Ware_Index> column;                                                                                      \
+						std::string column_s = boost::copy_range<std::string>(*It1);                                                    \
+						for(boost::split_iterator<string::iterator> It2=                                                                \
+							boost::make_split_iterator(column_s, boost::token_finder(boost::is_any_of(",")));                       \
+							It2 != boost::split_iterator<string::iterator>();                                                       \
+							++It2) {                                                                                                \
+							std::string name = boost::copy_range<std::string>(*It2);                                                \
+							boost::trim(name);                                                                                      \
+							Ware_Index id = safe_##w##_index(name);                                                                 \
+							column.push_back(id);                                                                                   \
+							/* note that it has been added to the column yet, but the column not yet to the whole array */          \
+							m_##w##s_order_coords[id] = std::pair<uint32_t,uint32_t>(m_##w##s_order.size(), column.size()-1);       \
+						}                                                                                                               \
+						if (column.size()) m_##w##s_order.push_back(column);                                                            \
+					}                                                                                                                       \
+                                                                                                                                                                \
+					/* Check that every ##w## has been added */                                                                             \
+					for (Ware_Index id = Ware_Index::First(); id < m_##w##s.get_nitems(); ++id) {                                           \
+						if (id != m_##w##s_order[m_##w##s_order_coords[id].first][m_##w##s_order_coords[id].second]) {                  \
+							log("Did not find " #w " %s in " #w "s_order field of tribe %s!\n",                                     \
+							     get_##w##_descr(id)->name().c_str(), name().c_str());                                              \
+						}                                                                                                               \
+					}                                                                                                                       \
+				}                                                                                                                               \
 
-				/// Load and parse ware type categorization
-				{ // Wares
-					std::string categories_s(tribe_s.get_safe_string("wares_order"));
-					vector<std::string> categories;
-					boost::split(categories, categories_s, boost::is_any_of(";"));
-					m_wares_order = WaresOrder(categories.size());
-					for (unsigned int i=0; i < categories.size(); i++) {
-						vector<std::string> wares;
-						boost::split(wares, categories[i], boost::is_any_of(","));
-						m_wares_order[i] = std::vector<Ware_Index>(wares.size());
-						for (unsigned int j=0; j < wares.size(); j++) {
-							boost::trim(wares[j]);
-							m_wares_order[i][j] = safe_ware_index(wares[j]);
-						}
-						wares.clear();
-					}
-
-					// Search each ware in the array, and be verbose about missing wares.
-					// Algorithmically slow, but this is only run once.
-					for (Ware_Index ware = Ware_Index::First(); ware < m_wares.get_nitems(); ++ware) {
-						bool found = false;
-						for (unsigned int i=0; i < m_wares_order.size(); i++) {
-							for (unsigned int j=0; j < m_wares_order[i].size(); j++) {
-								if (m_wares_order[i][i] == ware) {
-									found = true;
-								}
-							}
-						}
-						if (not found) {
-							log("Did not find ware %s in wares_order field of tribe %s!\n", get_ware_descr(ware)->name().c_str(), name().c_str());
-						}
-					}
-				}
-
-				{ // Workers
-					std::string categories_s(tribe_s.get_safe_string("workers_order"));
-					vector<std::string> categories;
-					boost::split(categories, categories_s, boost::is_any_of(";"));
-					m_workers_order = WaresOrder(categories.size());
-					for (unsigned int i=0; i < categories.size(); i++) {
-						vector<std::string> workers;
-						boost::split(workers, categories[i], boost::is_any_of(","));
-						m_workers_order[i] = std::vector<Ware_Index>(workers.size());
-						for (unsigned int j=0; j < workers.size(); j++) {
-							boost::trim(workers[j]);
-							m_workers_order[i][j] = safe_worker_index(workers[j]);
-						}
-						workers.clear();
-					}
-
-					// Search each worker in the array, and be verbose about missing workers.
-					// Algorithmically slow, but this is only run once.
-					for (Ware_Index worker = Ware_Index::First(); worker < m_workers.get_nitems(); ++worker) {
-						bool found = false;
-						for (unsigned int i=0; i < m_workers_order.size(); i++) {
-							for (unsigned int j=0; j < m_workers_order[i].size(); j++) {
-								if (m_workers_order[i][i] == worker) {
-									found = true;
-								}
-							}
-						}
-						if (not found) {
-							log("Did not find ware %s in wares_order field of tribe %s!\n", get_worker_descr(worker)->name().c_str(), name().c_str());
-						}
-					}
-				}
-
+				PARSE_ORDER_INFORMATION(ware);
+				PARSE_ORDER_INFORMATION(worker);
 			}
 
 			try {

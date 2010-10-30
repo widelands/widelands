@@ -213,8 +213,11 @@ struct Tribe_Descr {
 	}
 	
 	typedef std::vector<std::vector<Widelands::Ware_Index> > WaresOrder;
+	typedef std::vector<std::pair<uint32_t, uint32_t> > WaresOrderCoords;
 	WaresOrder const & wares_order() const {return m_wares_order;}
+	WaresOrderCoords const & wares_order_coords() const {return m_wares_order_coords;}
 	WaresOrder const & workers_order() const {return m_workers_order;}
+	WaresOrderCoords const & workers_order_coords() const {return m_workers_order_coords;}
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void referenceBuilding
@@ -246,7 +249,9 @@ private:
 	std::string                       m_carrier2;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;
+	WaresOrderCoords                  m_wares_order_coords;
 	WaresOrder                        m_workers_order;
+	WaresOrderCoords                  m_workers_order_coords;
 
 	std::vector<Ware_Index> m_worker_types_without_cost;
 
