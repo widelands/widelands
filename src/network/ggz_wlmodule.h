@@ -50,12 +50,12 @@ public:
 
 	bool send_game_info
 		(std::string mapname, int map_w, int map_h, int win_condition,
-		 std::vector<Net_Player_Info> playerinfo);
+		 std::vector<Net_Player_Info> playerinfo,
+		 int pnum);
 	bool send_statistics
 		(int32_t gametime,
 		 const Widelands::Game::General_Stats_vector & resultvec,
-		 std::vector<Net_Player_Info> playerinfo,
-		 int pnum);
+		 std::vector<Net_Player_Info> playerinfo);
 
 private:
 	ggz_wlmodule(const ggz_wlmodule &) {}

@@ -240,7 +240,7 @@ void NetGGZ::send_game_done()
 void NetGGZ::send_game_info()
 {
 	wlmodule().send_game_info
-		(mapname, map_w, map_h, win_condition, playerinfo);
+		(mapname, map_w, map_h, win_condition, playerinfo, playernum);
 }
 
 void NetGGZ::send_game_statistics
