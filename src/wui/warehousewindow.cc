@@ -108,22 +108,22 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel * parent, uint32_t width, Int
 	add(buttons, UI::Box::AlignLeft);
 		
 	if (m_gb.can_act(m_wh.owner().player_number())) {
-#define ADD_POLICY_BUTTON(policy, policyname)                             \
+#define ADD_POLICY_BUTTON(policy, policyname, tooltip)                    \
         	buttons->add(new UI::Callback_Button(                     \
-			buttons, "workarea",                              \
+			buttons, #policy,                                 \
 			0, 0, 34, 34,                                     \
 			g_gr->get_picture(PicMod_UI,"pics/but4.png"),     \
 			g_gr->get_picture(PicMod_Game,                    \
 		              "pics/stock_policy_button_" #policy ".png"),\
 			boost::bind(&WarehouseWaresPanel::set_policy,     \
 			            this, Warehouse::SP_##policyname),    \
-			_("Normal policy"))                               \
+			tooltip)                                          \
 		, UI::Box::AlignCenter);                                  \
 	
-		ADD_POLICY_BUTTON(normal, Normal)
-		ADD_POLICY_BUTTON(prefer, Prefer)
-		ADD_POLICY_BUTTON(dontstock, DontStock)
-		ADD_POLICY_BUTTON(remove, Remove)
+		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
+		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
+		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
+		ADD_POLICY_BUTTON(remove, Remove, _("Remove selected wares from here"))
 	}
 }
 
