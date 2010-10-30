@@ -94,10 +94,10 @@ Graphic::Graphic
 	fr.fastOpen(*g_fs, "pics/wl-ico-128.png");
 #else
 	fr.fastOpen(*g_fs, "pics/wl-ico-32.png");
+#endif
 	SDL_Surface * s = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 	SDL_WM_SetIcon(s, 0);
 	SDL_FreeSurface(s);
-#endif
 
 #ifndef USE_OPENGL
 	assert(not opengl);
