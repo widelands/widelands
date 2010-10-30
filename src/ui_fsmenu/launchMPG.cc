@@ -473,6 +473,8 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		if (player_save_tribe[i - 1].empty()) {
 			infotext += ":\n    ";
 			infotext += _("<closed>");
+			// Close the player
+			m_settings->setPlayerState(i - 1, PlayerSettings::stateClosed);
 			continue; // if tribe is empty, the player does not exist
 		}
 
@@ -486,6 +488,12 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		infotext += player_save_tribe[i - 1];
 		infotext += "):\n    ";
 		infotext += player_save_name[i - 1];
+		// Assure that player is open
+		if
+			(m_settings->settings().players.at(i - 1).state
+			 !=
+			 PlayerSettings::stateHuman)
+			m_settings->setPlayerState(i - 1, PlayerSettings::stateOpen);
 	}
 	m_map_info.set_text(infotext);
 	m_filename_proof = m_settings->settings().mapfilename;
