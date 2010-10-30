@@ -50,7 +50,12 @@ public:
 	int wl_player_number() const { return m_wl_number; }
 	std::string name() const { return m_name; }
 	bool reported_game() const {return m_reported; }
-	bool support_build16_proto() const { return m_proto_maj > 0; }
+	bool support_build16_proto() const {
+		wllog   
+                        (DL_DUMP, "get support post build 16 for \"%s\": %b (%i)",
+                         name().c_str(), m_proto_maj > 0, m_proto_maj);
+			 return m_proto_maj > 0;
+		}
 	std::string version() const { return m_version; }
 	std::string build() const { return m_build; }
 
@@ -89,11 +94,6 @@ public:
 		 m_playertype = t;
 	}
 	
-	void set_build16_proto(int maj, int min) {
-		m_proto_maj = maj;
-		m_proto_min = min;
-	}
-
 	bool connection_failed, desync;
 	int hard_error_count, soft_error_count;
 

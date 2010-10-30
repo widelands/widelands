@@ -156,7 +156,7 @@ void ProtocolHandler::process_data(Client * const client)
 		break;
 	case op_request_protocol_ext:
 		// This opcode is part of the post build16 protocol.
-		wlclient.set_build16_proto(1, 0);
+		wlclient.set_proto(1, 0);
 		{
 			// Answer this request.
 			WLGGZ_writer wr(client->fd, op_reply_protocol_ext);
@@ -267,7 +267,7 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 				if ((parlist).empty() or not (parlist).front().is_integer())
 					break;
 				int min = parlist.front().get_integer();
-				wlclient.set_build16_proto(maj, min);
+				wlclient.set_proto(maj, min);
 			}
 			break;
 		default:

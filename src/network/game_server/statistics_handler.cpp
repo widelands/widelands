@@ -69,7 +69,6 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 					player = new WidelandsPlayer(playernum);
 					m_players[playernum] = player;
 				}
-				player = NULL;
 				break;
 			case gameinfo_ownplayerid:
 				CHECKTYPE(l, integer)
@@ -84,12 +83,13 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 			case gameinfo_playername:
 			{
 				wllog(DL_DUMPDATA, "gameinfo_playername");
+				assert(player);
 				CHECKTYPE(l, string)
 				if
 					(playername.empty() and not
 					 l.front().get_string().empty())
 				{
-					playername = l.front().get_string().empty();
+					playername = l.front().get_string();
 					player->set_name(playername);
 					wllog
 						(DL_DEBUG, "GAMEINFO: add player \"%s\" (wl: %i)",
@@ -195,7 +195,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 		{
 			wllog
 				(DL_INFO,
-				 "GAMEINFO: player %i: Name: %s(%i) \"%s\"",
+				 "GAMEINFO: player %i(%i): Name: %s(%i) \"%s\"",
 				 i, plr->wlid(),
 				 plr->name().c_str(), plr->team(), plr->tribe().c_str());
 		}

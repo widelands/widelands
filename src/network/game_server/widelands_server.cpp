@@ -35,6 +35,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
+#include <cassert>
 #include <netdb.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -166,6 +167,8 @@ void WidelandsServer::joinEvent(Client * const client)
 	wllog(DL_INFO, "joinEvent: %s", client->name.c_str());
 	wlproto.send_greeter(client);
 
+	m_clients[client->name] = new WidelandsClient(client->name, client->number);
+
 	if (not m_wlserver_ip and client->number == 0)
 	{
 		WidelandsClient & player = *get_client_by_name(client->name, true);
@@ -276,6 +279,7 @@ void WidelandsServer::spectatorJoinEvent(Client * client)
 		wllog(DL_INFO, "spectatorJoinEvent without client ?!?\n");
 		return;
 	}
+	m_clients[client->name] = new WidelandsClient(client->name, client->number);
 	wllog
 		(DL_INFO, "spectatorJoinEvent \"%s\"", client->name.c_str());
 }
@@ -292,6 +296,9 @@ void WidelandsServer::spectatorLeaveEvent(Client * client)
 		send_debug = -1;
 		set_state_done();
 	}
+	assert(m_clients[client->name]);
+	delete m_clients[client->name];
+	m_clients[client->name] = NULL;
 }
 
 // Spectator data event (ignored)
@@ -330,7 +337,7 @@ void WidelandsServer::seatEvent(Seat* seat)
 
 	wllog(DL_DEBUG, "seatEvent for %s(%d) fd=%i ", seat->client->name.c_str(), seat->number, seat->client->fd);
 
-	if (seat->client->name.length()) {
+/*	if (seat->client->name.length()) {
 		if (m_clients[seat->client->name])
 			delete m_clients[seat->client->name];
 		m_clients[seat->client->name] = new WidelandsClient(seat->client->name, seat->client->number);
@@ -343,6 +350,7 @@ void WidelandsServer::seatEvent(Seat* seat)
 			} else 
 				it++;
 	}
+*/
 }
 
 void WidelandsServer::spectatorEvent(Spectator* spectator)
@@ -357,7 +365,7 @@ void WidelandsServer::spectatorEvent(Spectator* spectator)
 	}
 
 	wllog(DL_DEBUG, "spectatorEvent for %s(%i) fd=%i ", spectator->client->name.c_str(), spectator->number, spectator->client->fd);
-
+/*
 	if (spectator->client->name.length()) {
 		wllog(DL_DEBUG, "Player \"%s\" stand up", spectator->client->name.c_str());
 		if(m_clients[spectator->client->name])
@@ -365,6 +373,7 @@ void WidelandsServer::spectatorEvent(Spectator* spectator)
 	}
 	else
 		wllog(DL_DEBUG, "Unknown player stand up");
+*/
 }
 
 
