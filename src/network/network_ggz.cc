@@ -247,7 +247,7 @@ void NetGGZ::send_game_statistics
 	(int32_t gametime,
 	 const Widelands::Game::General_Stats_vector & resultvec)
 {
-	wlmodule().send_statistics(gametime, resultvec, playerinfo);
+// 	wlmodule().send_statistics(gametime, resultvec, playerinfo, playernum);
 }
 
 void NetGGZ::report_result
@@ -321,7 +321,7 @@ void NetGGZ::set_players(GameSettings & settings)
 		win_condition = gametype_wood_gnome;
 	else
 		win_condition = gametype_endless;
-
+	playernum = settings.playernum;
 	std::vector<PlayerSettings>::iterator pit = settings.players.begin();
 	int i = 0;
 	playerinfo.clear();
@@ -338,6 +338,7 @@ void NetGGZ::set_players(GameSettings & settings)
 		player.tribe = pit->tribe;
 		player.team = pit->team;
 		player.playernum = i;
+
 		if (pit->ai.compare("Aggressive") == 0)
 			player.type = playertype_ai_aggressive;
 		else if (pit->ai.compare("Normal") == 0)

@@ -189,6 +189,8 @@ enum WLGGZGameInfo
 	gameinfo_version = 8,
 	// one int: the number of the players team
 	gameinfo_teamnumber = 9,
+	// one int: the wl playernumber of the sender
+	gameinfo_ownplayerid = 10
 };
 
 enum WLGGZPlayerType

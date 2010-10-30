@@ -20,7 +20,10 @@
 #define __STATISITCS_HANDLER_H__
 
 #include "protocol_helpers.h"
+#include "widelands_player.h"
 #include <map>
+#include <stdint.h>
+#include <vector>
 
 class Client;
 class WidelandsMap;
@@ -29,7 +32,7 @@ class WidelandsPlayer;
 struct team_t {
 	int ais;
 	int players;
-	std::list<WidelandsPlayer*> members;
+	std::list<int> members;
 
 	team_t(): ais(0), players(0), members() {}
 };
@@ -45,10 +48,16 @@ class StatisticsHandler {
 		WidelandsMap & map() {return m_map; }
 		int game_end_time() { return m_result_gametime; }
 		void evaluate();
+		
+		WidelandsPlayer * get_player(int wlnum) {
+			return m_players[wlnum];
+		}
 	private:
-		void read_stat_vector
+		std::map<int, WidelandsPlayer *> m_players;
+		uint32_t read_stat_vector
 			(WidelandsPlayer & plr, WLGGZGameStats type,
-			 WLGGZParameterList & p, int count);
+			 WLGGZParameterList & p,
+			 std::vector<WidelandsStatSample> *statvec);
 		WidelandsMap m_map;
 		std::string m_host_version, m_host_build;
 		int m_result_gametime;

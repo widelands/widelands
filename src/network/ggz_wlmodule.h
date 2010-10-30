@@ -54,7 +54,8 @@ public:
 	bool send_statistics
 		(int32_t gametime,
 		 const Widelands::Game::General_Stats_vector & resultvec,
-		 std::vector<Net_Player_Info> playerinfo);
+		 std::vector<Net_Player_Info> playerinfo,
+		 int pnum);
 
 private:
 	ggz_wlmodule(const ggz_wlmodule &) {}

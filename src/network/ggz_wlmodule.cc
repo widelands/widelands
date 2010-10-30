@@ -160,7 +160,8 @@ void ggz_wlmodule::process()
 
 bool ggz_wlmodule::send_game_info
 	(std::string mapname, int map_w, int map_h,
-	 int win_condition, std::vector<Net_Player_Info> playerinfo)
+	 int win_condition, std::vector<Net_Player_Info> playerinfo,
+	 int pnum)
 {
 	log("GGZWLMODULE NetGGZ::send_game_info()\n");
 	if (get_ext_proto_ver() == 0)
@@ -188,7 +189,10 @@ bool ggz_wlmodule::send_game_info
 		w << build_id() << build_type();
 		w.close_list();
 
-		
+		w.open_list(gameinfo_ownplayerid);
+		w << pnum;
+		w.close_list();
+
 		log("GGZWLMODULE ## Iterate Players\n");
 		std::vector<Net_Player_Info>::iterator pit = playerinfo.begin();
 		while (pit != playerinfo.end())

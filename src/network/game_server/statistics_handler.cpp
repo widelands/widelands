@@ -20,8 +20,11 @@
 #include "statistics_handler.h"
 #include "widelands_map.h"
 #include "widelands_player.h"
+#include "widelands_client.h"
 #include "log.h"
 #include "wlggz_exception.h"
+
+#include <cassert>
 
 StatisticsHandler::StatisticsHandler():
 m_result_gametime(0),
@@ -41,6 +44,8 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 	int gameinfo, playernum=-1;
 	std::string playername="";
 	WidelandsPlayer * player = NULL;
+	WidelandsClient & wlclient = *g_wls->get_client_by_name(client->name);
+	assert(&wlclient);
 
 	wllog(DL_DEBUG, "StatisticsHandler::report_gameinfo");
 
@@ -59,7 +64,22 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 				playernum = l.front().get_integer();
 				wllog(DL_DUMPDATA, "playerid: %i", playernum);
 				playername.erase();
+				player = get_player(playernum);
+				if (not player) {
+					player = new WidelandsPlayer(playernum);
+					m_players[playernum] = player;
+				}
 				player = NULL;
+				break;
+			case gameinfo_ownplayerid:
+				CHECKTYPE(l, integer)
+				{
+					wllog
+						(DL_DUMP, "Got playerid %i for client %s",
+						 l.front().get_integer(),
+						 wlclient.name().c_str());
+					wlclient.set_wl_number(l.front().get_integer());
+				}
 				break;
 			case gameinfo_playername:
 			{
@@ -67,14 +87,13 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 				CHECKTYPE(l, string)
 				if
 					(playername.empty() and not
-					 l.front().get_string().empty() and player == NULL)
+					 l.front().get_string().empty())
 				{
-					playername = l.front().get_string();
+					playername = l.front().get_string().empty();
+					player->set_name(playername);
 					wllog
 						(DL_DEBUG, "GAMEINFO: add player \"%s\" (wl: %i)",
 						 playername.c_str(), playernum);
-						 player = g_wls->get_player_by_name(playername, true);
-						 player->set_wl_player_number(playernum);
 				}
 				else
 					wllog
@@ -87,6 +106,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 			case gameinfo_tribe:
 				wllog(DL_DUMPDATA, "gameinfo_tribe");
 				CHECKTYPE(l, string)
+				assert(player);
 				if (player->tribe().empty())
 					player->set_tribe(l.front().get_string());
 				if (player->tribe().compare(l.front().get_string())) {
@@ -96,7 +116,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 						 "clients disagree about tribe: %s, %s",
 						 player->tribe().c_str(),
 						 l.front().get_string().c_str());
-					if (g_wls->get_player_by_name(client->name)->is_host())
+					if (g_wls->is_host(client))
 						player->set_tribe(l.front().get_string());
 				}		
 				break; 
@@ -130,8 +150,8 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 			}
 			case gameinfo_playertype:
 				CHECKTYPE(l, integer)
-				if(player)
-					player->set_type
+				if(&wlclient)
+					wlclient.set_type
 						(static_cast<WLGGZPlayerType>(l.front().get_integer()));
 				break;
 			case gameinfo_version:
@@ -142,22 +162,16 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 				CHECKTYPE(l, string)
 				std::string build = l.front().get_string();
 
-				player = g_wls->get_player_by_name(client->name);
-				if (not player) {
-					player = g_wls->get_player_by_name(client->name, true);
-					player->set_ggz_player_number(client->number);
-				}
-
-				if (player->is_host())
+				if (g_wls->is_host(&wlclient))
 				{
 					m_host_version = version;
 					m_host_build = build;
 				}
 				
-				player->set_version(version, build);
+				wlclient.set_version(version, build);
 				wllog
 					(DL_DUMP, "GAMEINFO: Player \"%s\": %s(%s)",
-					 client->name.c_str(), version.c_str(), build.c_str());
+					 wlclient.name().c_str(), version.c_str(), build.c_str());
 				break;
 			}
 			case gameinfo_teamnumber:
@@ -170,21 +184,20 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 		}
 	}
 
-	int num = g_wls->numberofplayers();
-	wllog(DL_INFO, "GAMEINFO: number of players %i", num);
+	wllog(DL_INFO, "GAMEINFO: number of players %i", m_players.size());
 
-	for (int i=0; i < num; i++)
+
+#warning need highest player number here
+	for (int i=0; i < m_players.size(); i++)
 	{
-		WidelandsPlayer * plr = g_wls->get_player_by_ggzid(i);
+		WidelandsPlayer * plr = get_player(i);
 		if (plr)
 		{
 			wllog
 				(DL_INFO,
-				 "GAMEINFO: seat %i(%i): %i Name: %s(%i) \"%s\" (%s - %s) %s",
-				 i, plr->ggz_player_number(), plr->wl_player_number(),
-				 plr->name().c_str(), plr->team(), plr->tribe().c_str(),
-				 plr->version().c_str(), plr->build().c_str(),
-				 plr->is_host()?"Host":"");
+				 "GAMEINFO: player %i: Name: %s(%i) \"%s\"",
+				 i, plr->wlid(),
+				 plr->name().c_str(), plr->team(), plr->tribe().c_str());
 		}
 	}
 }
@@ -196,6 +209,8 @@ bool StatisticsHandler::report_game_result
 	int playernum=-1;
 	std::string playername="";
 	WidelandsPlayer * player = NULL;
+	WidelandsClient & wlclient = *g_wls->get_client_by_name(client->name);
+	std::vector<WidelandsStatSample> *statvec = NULL;
 
 	wllog(DL_DEBUG, "StatisticsHandler::report_game_result");
 
@@ -213,7 +228,7 @@ bool StatisticsHandler::report_game_result
 				CHECKTYPE(l, integer)
 				playernum = l.front().get_integer();
 				wllog(DL_DUMP, "got playernumber %i", playernum);
-				player = g_wls->get_player_by_wlid(playernum);
+				player = get_player(playernum);
 					if(not player)
 						wllog
 							(DL_ERROR, "GAMESTATISTICS: ERROR: "
@@ -244,95 +259,99 @@ bool StatisticsHandler::report_game_result
 						(DL_ERROR, "GAMESTATISTICS: got points but have no player");
 				break;
 			case gamestat_land:
+				player->last_stats.land =
+					read_stat_vector(*player, gameinfo, l, &player->stats.land);
+				break;
 			case gamestat_buildings:
+				player->last_stats.buildings =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.buildings);
+				break;
 			case gamestat_milbuildingslost:
+				player->last_stats.milbuildingslost =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.milbuildingslost);
+				break;
 			case gamestat_civbuildingslost:
+				player->last_stats.civbuildingslost =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.civbuildingslost);
+				break;
 			case gamestat_buildingsdefeat:
+				player->last_stats.buildingsdefeat =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.buildingsdefeat);
+				break;
 			case gamestat_milbuildingsconq:
+				player->last_stats.milbuildingsconq =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.milbuildingsconq);
+				break;
 			case gamestat_economystrength:
+				player->last_stats.economystrength =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.economystrength);
+				break;
 			case gamestat_militarystrength:
-			case gamestat_workers:
-			case gamestat_wares:
-			case gamestat_productivity:
-			case gamestat_casualties:
-			case gamestat_kills:
-				if (not player)
+				if (not player) {
 					wllog(DL_ERROR, "Got a statistic vector but have no player");
-				else {
-					CHECKTYPE(l, integer)
-					int last = l.front().get_integer();
-					l.pop_front();
-					CHECKTYPE(l, integer);
-					int count = l.front().get_integer();
-					l.pop_front();
-					wllog
-						(DL_DUMP, "got statistic vector %i. Size: %i, last: %i",
-						 gameinfo, count, last);
-					switch(gameinfo){
-						case gamestat_land:
-							player->last_stats.land = last;
-							break;
-						case gamestat_buildings:
-							player->last_stats.buildings = last;
-							break;
-						case gamestat_milbuildingslost:
-							player->last_stats.milbuildingslost = last;
-							break;
-						case gamestat_civbuildingslost:
-							player->last_stats.civbuildingslost = last;
-							break;
-						case gamestat_buildingsdefeat:
-							player->last_stats.buildingsdefeat = last;
-							break;
-						case gamestat_milbuildingsconq:
-							player->last_stats.milbuildingsconq = last;
-							break;
-						case gamestat_economystrength:
-							player->last_stats.economystrength = last;
-							break;
-						case gamestat_militarystrength:
-							player->last_stats.militarystrength = last;
-							break;
-						case gamestat_workers:
-							player->last_stats.workers = last;
-							break;
-						case gamestat_wares:
-							player->last_stats.wares = last;
-							break;
-						case gamestat_productivity:
-							player->last_stats.productivity = last;
-							break;
-						case gamestat_casualties:
-							player->last_stats.casualties = last;
-							break;
-						case gamestat_kills:
-							player->last_stats.kills = last;
-							break;
-						default:
-							wllog(DL_ERROR, "unknown statistic vector");
-					}
-
-					try {
-						read_stat_vector(*player, gameinfo, l, count);
-					} catch(_parameterError e) {
-						wllog
-							(DL_ERROR,
-							 "Catched parameter error while "
-							 "reading statisitcs vector: %s", e.what());
-					} catch (std::exception e) {
-						wllog
-							(DL_FATAL,
-							 "oops catched std::exception while "
-							 "reading stat vector: %s", e.what());
-					}
+					break;
 				}
+				player->last_stats.militarystrength =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.militarystrength);
+				break;
+			case gamestat_workers:
+				if (not player) {
+					wllog(DL_ERROR, "Got a statistic vector but have no player");
+					break;
+				}
+				player->last_stats.workers =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.workers);
+				break;
+			case gamestat_wares:
+				if (not player) {
+					wllog(DL_ERROR, "Got a statistic vector but have no player");
+					break;
+				}
+				player->last_stats.wares =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.wares);
+				break;
+			case gamestat_productivity:
+				if (not player) {
+					wllog(DL_ERROR, "Got a statistic vector but have no player");
+					break;
+				}
+				player->last_stats.productivity =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.productivity);
+				break;
+			case gamestat_casualties:
+				if (not player) {
+					wllog(DL_ERROR, "Got a statistic vector but have no player");
+					break;
+				}
+				player->last_stats.casualties =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.casualties);
+				break;
+			case gamestat_kills:
+				if (not player) {
+					wllog(DL_ERROR, "Got a statistic vector but have no player");
+					break;
+				}
+				player->last_stats.kills =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.kills);
 				break;
 			case gamestat_gametime:
 				CHECKTYPE(l, integer);
 				if (player) {
 					wllog
 						(DL_DEBUG, "gametime for player %s(%i)",
-						 player->name().c_str(), player->wl_player_number());
+						 player->name().c_str(), player->wlid());
 						if(player->end_time() == 0)
 							player->set_end_time(l.front().get_integer());
 						else
@@ -341,7 +360,7 @@ bool StatisticsHandler::report_game_result
 									(DL_WARN,
 									 "Clients disagree about player (%i) end time. "
 									 "Have: %i, %s reported: %i",
-									 player->wl_player_number(), player->end_time(),
+									 player->wlid(), player->end_time(),
 									 client->name.c_str(), l.front().get_integer());
 					break;
 				}
@@ -363,116 +382,75 @@ bool StatisticsHandler::report_game_result
 	g_wls->check_reports();
 }
 
-void StatisticsHandler::read_stat_vector
-	(WidelandsPlayer& plr, WLGGZGameStats type, WLGGZParameterList& p, int count)
+uint32_t StatisticsHandler::read_stat_vector
+	(WidelandsPlayer& plr, WLGGZGameStats type, WLGGZParameterList& p,
+	 std::vector<WidelandsStatSample> *statvec)
 {
-	if (count > 1024)
-		wllog(DL_WARN, "statistic vector longer than 1024 samples");
-	
-	int i = 0, lastsample = 0;
-	while(p.size() and i++ < 1024) {
-		CHECKTYPE(p, list)
-		WLGGZParameterList l = p.front().get_list();
-		int sample = p.front().get_list_type();
-		p.pop_front();
-		if (l.size() < 3)
-			throw parameterError();
-		CHECKTYPE(l, integer);
-		int avg = l.front().get_integer();
-		l.pop_front();
-		CHECKTYPE(l, integer);
-		int min = l.front().get_integer();
-		l.pop_front();
-		CHECKTYPE(l, integer);
-		int max = l.front().get_integer();
-		l.pop_front();
-		if (sample > lastsample++)
-		{
-			wllog(DL_ERROR, "got non continous stats");
-			return;
-		}
+	CHECKTYPE(p, integer)
+	int last = p.front().get_integer();
+	p.pop_front();
+	CHECKTYPE(p, integer);
+	int count = p.front().get_integer();
+	p.pop_front();
+	wllog
+		(DL_DUMP, "got statistic vector %i. Size: %i, last: %i",
+		 type, count, last);
+	try {
+		if (count > 1024)
+			wllog(DL_WARN, "statistic vector longer than 1024 samples");
+		
+		int i = 0, lastsample = 0;
+		while(p.size() and i++ < 1024) {
+			CHECKTYPE(p, list)
+			WLGGZParameterList l = p.front().get_list();
+			int sample = p.front().get_list_type();
+			p.pop_front();
+			if (l.size() < 3)
+				throw parameterError();
+			CHECKTYPE(l, integer);
+			int avg = l.front().get_integer();
+			l.pop_front();
+			CHECKTYPE(l, integer);
+			int min = l.front().get_integer();
+			l.pop_front();
+			CHECKTYPE(l, integer);
+			int max = l.front().get_integer();
+			l.pop_front();
+			if (sample > lastsample++)
+			{
+				wllog(DL_ERROR, "got non continous stats");
+				return last;
+			}
 
-		if (sample >= count) {
-			wllog(DL_ERROR, "got a statistic sample with number > count");
-			return;
-		}
-		if (count > plr.stats_avg.size()) {
-			plr.stats_avg.resize((count>1024)?1024:count);
-			plr.stats_min.resize((count>1024)?1024:count);
-			plr.stats_max.resize((count>1024)?1024:count);
-		}
+			if (sample >= count) {
+				wllog(DL_ERROR, "got a statistic sample with number > count");
+				return last;
+			}
 
-		switch(type) {
-			case gamestat_land:
-				plr.stats_avg.at(sample).land = avg;
-				plr.stats_min.at(sample).land = min;
-				plr.stats_max.at(sample).land = max;
-				break;
-			case gamestat_buildings:
-				plr.stats_avg.at(sample).buildings = avg;
-				plr.stats_min.at(sample).buildings = min;
-				plr.stats_max.at(sample).buildings = max;
-				break;
-			case gamestat_milbuildingslost:
-				plr.stats_avg.at(sample).milbuildingslost = avg;
-				plr.stats_min.at(sample).milbuildingslost = min;
-				plr.stats_max.at(sample).milbuildingslost = max;
-				break;
-			case gamestat_civbuildingslost:
-				plr.stats_avg.at(sample).civbuildingslost = avg;
-				plr.stats_min.at(sample).civbuildingslost = min;
-				plr.stats_max.at(sample).civbuildingslost = max;
-				break;
-			case gamestat_buildingsdefeat:
-				plr.stats_avg.at(sample).buildingsdefeat = avg;
-				plr.stats_min.at(sample).buildingsdefeat = min;
-				plr.stats_max.at(sample).buildingsdefeat = max;
-				break;
-			case gamestat_milbuildingsconq:
-				plr.stats_avg.at(sample).milbuildingsconq = avg;
-				plr.stats_min.at(sample).milbuildingsconq = min;
-				plr.stats_max.at(sample).milbuildingsconq = max;
-				break;
-			case gamestat_economystrength:
-				plr.stats_avg.at(sample).economystrength = avg;
-				plr.stats_min.at(sample).economystrength = min;
-				plr.stats_max.at(sample).economystrength = max;
-				break;
-			case gamestat_militarystrength:
-				plr.stats_avg.at(sample).militarystrength = avg;
-				plr.stats_min.at(sample).militarystrength = min;
-				plr.stats_max.at(sample).militarystrength = max;
-				break;
-			case gamestat_workers:
-				plr.stats_avg.at(sample).workers = avg;
-				plr.stats_min.at(sample).workers = min;
-				plr.stats_max.at(sample).workers = max;
-				break;
-			case gamestat_wares:
-				plr.stats_avg.at(sample).wares = avg;
-				plr.stats_min.at(sample).wares = min;
-				plr.stats_max.at(sample).wares = max;
-				break;
-			case gamestat_productivity:
-				plr.stats_avg.at(sample).productivity = avg;
-				plr.stats_min.at(sample).productivity = min;
-				plr.stats_max.at(sample).productivity = max;
-				break;
-			case gamestat_casualties:
-				plr.stats_avg.at(sample).casualties = avg;
-				plr.stats_min.at(sample).casualties = min;
-				plr.stats_max.at(sample).casualties = max;
-				break;
-			case gamestat_kills:
-				plr.stats_avg.at(sample).kills = avg;
-				plr.stats_min.at(sample).kills = min;
-				plr.stats_max.at(sample).kills = max;
-				break;
-			default:
-				wllog(DL_ERROR, "unknown stat");
+			if (statvec) {
+				if (count > statvec->size()) {
+					statvec->resize((count>1024)?1024:count);
+				}
+				statvec->at(sample).min = min;
+				statvec->at(sample).max = max;
+				statvec->at(sample).avg = avg;
+			}
 		}
+		wllog(DL_DUMP, "read %i/%i statistic samples for %i", i, count, type);
+		return last;
+	} catch(_parameterError e) {
+		wllog
+			(DL_ERROR,
+			 "Catched parameter error while "
+			 "reading statisitcs vector: %s", e.what());
+		return 0;
+	} catch (std::exception e) {
+		wllog
+			(DL_FATAL,
+			 "oops catched std::exception while "
+			 "reading stat vector: %s", e.what());
+		return 0;
 	}
-	wllog(DL_DUMP, "read %i/%i statistic samples for %i", i, count, type);
 }
 
 void StatisticsHandler::evaluate()
@@ -491,8 +469,8 @@ void StatisticsHandler::evaluate()
 	if (not have_stats())
 		return;
 
-	std::map<std::string,WidelandsPlayer*>::iterator it = g_wls->m_players.begin();
-	while(it != g_wls->m_players.end())
+	std::map<int,WidelandsPlayer*>::iterator it = m_players.begin();
+	while(it != m_players.end())
 	{
 		WidelandsPlayer & player = *it->second;
 		
@@ -500,20 +478,35 @@ void StatisticsHandler::evaluate()
 		player.max_workers = -1;
 		player.max_military = -1;
 		player.max_wares = -1;
-		std::vector<WidelandsPlayerStats>::iterator it;
-		it = player.stats_max.begin();
-		while (it != player.stats_max.end()) {
-			if (it->wares > player.max_wares)
-				player.max_wares = it->wares;
-			if (it->workers > player.max_workers)
-				player.max_workers = it->workers;
-			if (it->militarystrength > player.max_military)
-				player.max_military = it->militarystrength;
-			if (it->buildings > player.max_buildings)
-				player.max_buildings = it->buildings;
+		std::vector<WidelandsStatSample>::iterator it;
+		it = player.stats.wares.begin();
+		while (it != player.stats.wares.end()) {
+			if (it->max > player.max_wares)
+				player.max_wares = it->max;
 			it++;
 		}
-		
+
+		it = player.stats.workers.begin();
+		while (it != player.stats.workers.end()) {
+			if (it->max > player.max_workers)
+				player.max_wares = it->max;
+			it++;
+		}
+
+		it = player.stats.militarystrength.begin();
+		while (it != player.stats.militarystrength.end()) {
+			if (it->max > player.max_military)
+				player.max_wares = it->max;
+			it++;
+		}
+
+		it = player.stats.buildings.begin();
+		while (it != player.stats.buildings.end()) {
+			if (it->max > player.max_buildings)
+				player.max_wares = it->max;
+			it++;
+		}
+
 		if (plr_max_wares < player.max_wares) {
 			plr_max_wares = player.max_wares;
 		}
@@ -527,6 +520,7 @@ void StatisticsHandler::evaluate()
 			plr_max_buildings = player.max_buildings;
 		}
 
+/*
 		if (player.type() == playertype_human) {
 			m_teams[player.team()].players++;
 			m_teams[player.team()].members.push_back(&player);
@@ -545,10 +539,10 @@ void StatisticsHandler::evaluate()
 		} else
 		{
 			wllog
-				(DL_WARN, "Unknown Player type. %s (%i, %s)",
-				 player.name().c_str(), player.wl_player_number(),
-				 player.ggz_player_number());
+				(DL_WARN, "Unknown Player type. %s (%i)",
+				 player.name().c_str(), player.wlid());
 		}
+*/
 		it++;
 	}
 
@@ -556,20 +550,20 @@ void StatisticsHandler::evaluate()
 	// without military activity
 	if (m_result_gametime > (3 * 60 * 60 * 1000)) {
 		int last_change = 23;
-		int last_val[g_wls->m_players.size()];
+		int last_val[m_players.size()];
 		// go through all statistic samples. There are 12 samples per hour.
 		// Skip the first 2 hours (24 samples). Gametime is given in miliseconds
 		// one sampe every 5 minutes.
 		for (int i = 23; i <= (m_result_gametime / (1000 * 60 * 5)); i++) {
 			bool change = false;
 			int pc = 0;
-			std::map<std::string,WidelandsPlayer*>::iterator it = g_wls->m_players.begin();
-			while(it != g_wls->m_players.end()) {
+			std::map<int, WidelandsPlayer*>::iterator it = m_players.begin();
+			while(it != m_players.end()) {
 				WidelandsPlayer & player = *it->second;
-				if (i < player.stats_max.size()) {
-					if (player.stats_max.at(i).casualties != last_val[pc]) {
+				if (i < player.stats.casualties.size()) {
+					if (player.stats.casualties.at(i).max != last_val[pc]) {
 						last_change = i;
-						last_val[pc] = player.stats_max.at(i).casualties;
+						last_val[pc] = player.stats.casualties.at(i).max;
 					}
 				}
 				pc++;

@@ -25,6 +25,28 @@
 #include "protocol.h"
 #include "widelands_server.h"
 
+struct WidelandsStatSample {
+	uint32_t min, max, avg;
+};
+
+struct WidelandsPlayerStatVecs
+{
+		std::vector<WidelandsStatSample> land;
+		std::vector<WidelandsStatSample> buildings;
+		std::vector<WidelandsStatSample> milbuildingslost;
+		std::vector<WidelandsStatSample> civbuildingslost;
+		std::vector<WidelandsStatSample> buildingsdefeat;
+		std::vector<WidelandsStatSample> milbuildingsconq;
+		std::vector<WidelandsStatSample> economystrength;
+		std::vector<WidelandsStatSample> militarystrength;
+		std::vector<WidelandsStatSample> workers;
+		std::vector<WidelandsStatSample> wares;
+		std::vector<WidelandsStatSample> productivity;
+		std::vector<WidelandsStatSample> casualties;
+		std::vector<WidelandsStatSample> kills;
+		std::vector<WidelandsStatSample> custom;
+};
+
 struct WidelandsPlayerStats
 {
 		uint32_t land;
@@ -40,6 +62,7 @@ struct WidelandsPlayerStats
 		uint32_t productivity;
 		uint32_t casualties;
 		uint32_t kills;
+		uint32_t custom;
 };
 
 #define SUPPORT_B16_PROTOCOL(p) (p != 0 and p->support_build16_proto())
@@ -47,77 +70,33 @@ struct WidelandsPlayerStats
 class WidelandsPlayer
 {
 	public:
-		WidelandsPlayer(std::string playername):
+		WidelandsPlayer(int id):
 			result(0),
 			points(0),
 			bonus(0),
-			soft_error_count(0),
-			hard_error_count(0),
-			desync(false),
-			connection_failed(false),
-			reported_game(false),
-			m_name(playername),
+			m_name(),
+			m_wlid(id),
 			m_tribe(),
-			m_wl_player_number(-1),
-			m_ggz_player_number(-1),
-			m_ggz_spectator_number(-1),
-			m_type(playertype_null),
-			m_team(0),
-			m_build16_protocol(false)
+			m_team(0)
 			{}
 
-		int wl_player_number() { return m_wl_player_number; }
-		int ggz_player_number() { 
-			return m_ggz_player_number; }
 		std::string tribe() { return m_tribe; }
-		WLGGZPlayerType type() { return m_type; }
-		std::string version() { return m_version; }
-		std::string build() { return m_build; }
+
 		unsigned int team() { return m_team; }
-		bool support_build16_proto() { return m_build16_protocol; }
-		
-		void set_ggz_player_number(int num) 
-			{ m_ggz_player_number = num; }
-		void set_wl_player_number(int num)
-			{ m_wl_player_number = num; }
-		void set_ggz_spectator_number(int num)
-			{ m_ggz_spectator_number = num; }
+
 		void set_tribe(std::string tribe) { m_tribe=tribe; }
-		void set_type(WLGGZPlayerType type) { m_type=type; }
-		void set_version(std::string v, std::string b)
-			{ m_build = b; m_version = v; }
+
 		void set_team(unsigned int t)
 			{ m_team = t; }
-		void set_build16_proto(bool b) { m_build16_protocol = b; }
-		
-		bool is_spectator() { return m_ggz_spectator_number >= 0; }
-		
-		std::string name() { return m_name; }
-		/*
-		bool is_player()
-		{
-			return m_ggz_player_number >= 0 and
-		}
-		*/
-		/*
-		bool is_bot() 
-		*/
-		bool is_player_or_bot() { return m_ggz_player_number >= 0; }
+			
+		void set_name(std::string name)
+			{ m_name = name; }
 
-		bool is_host() {
-			if
-				(m_host_username.empty() and m_name.length() > 0 and
-				 (m_ggz_player_number == 0 or m_ggz_spectator_number == 0))
-			{
-				m_host_username = m_name;
-				return true;
-			}
-			return
-				not m_host_username.empty() and m_host_username == m_name;
-		}
+		std::string name() { return m_name; }
+		int wlid() { return m_wlid; }
 
 		WidelandsPlayerStats last_stats;
-		std::vector<WidelandsPlayerStats> stats_min, stats_max, stats_avg;
+		WidelandsPlayerStatVecs stats;
 
 		void set_end_time(int d) { m_end_time = d; }
 		int end_time() { return m_end_time; }
@@ -128,37 +107,14 @@ class WidelandsPlayer
 
 		int max_wares, max_workers, max_military, max_buildings;
 
-		/// client communication error counter. This are recoverable error like
-		/// invalid opcodes.
-		int soft_error_count;
-
-		/// client communication error counter. This are hard errors like not
-		/// being able to read from socket.
-		int hard_error_count;
-
-		/// set to true if soft_error_count was to high or if we had an error
-		/// while reading parameter list
-		bool desync;
-
-		/// set to true if communication to client is broken.
-		bool connection_failed;
-		/// set to true if this client send a game report.
-		bool reported_game;
-		/// set to true if this clint has send game information.
 	private:
 		WidelandsPlayer();
 		std::string m_name;
+		int m_wlid;
 		std::string m_tribe;
-		int m_ggz_player_number;
-		int m_wl_player_number;
-		WLGGZPlayerType m_type;
-		std::string m_build, m_version;
-		unsigned int m_team;
-		/// This client supports the new (after build16) protocol
-		bool m_build16_protocol;
-		int m_ggz_spectator_number;
 
-		static std::string m_host_username;
+		unsigned int m_team;
+
 		int m_end_time;
 };
 

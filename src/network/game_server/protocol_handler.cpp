@@ -26,6 +26,7 @@
 #include <stdexcept>
 #include <cassert>
 #include "widelands_player.h"
+#include "widelands_client.h"
 #include "statistics_handler.h"
 #include "wlggz_exception.h"
 
@@ -56,14 +57,15 @@ void ProtocolHandler::process_data(Client * const client)
 	int opcode;
 	int ret;
 
-	WidelandsPlayer * player = g_wls->get_player_by_name(client->name);
+	WidelandsClient & wlclient = *g_wls->get_client_by_name(client->name);
+	assert(&wlclient);
 
-	if (player and player->connection_failed)
+	if (wlclient.connection_failed)
 		return;
 	
-	if (player and player->desync) {
-		if (not SUPPORT_B16_PROTOCOL(player)) {
-			player->connection_failed = true;
+	if (wlclient.desync) {
+		if (not SUPPORT_B16_PROTOCOL((&wlclient))) {
+			wlclient.connection_failed = true;
 			return;
 		}
 
@@ -73,7 +75,7 @@ void ProtocolHandler::process_data(Client * const client)
 		{
 			char c;
 			if ( read(client->fd, &c, 1) < 1) {
-				player->connection_failed = true;
+				wlclient.connection_failed = true;
 				if (client->fd >=0)
 					close(client->fd);
 			}
@@ -87,32 +89,32 @@ void ProtocolHandler::process_data(Client * const client)
 			}
 		}
 		if (it < 1) {
-			player->hard_error_count++;
-			if (player->hard_error_count > 100) {
+			wlclient.hard_error_count++;
+			if (wlclient.hard_error_count > 100) {
 				close(client->fd);
-				player->connection_failed = true;
+				wlclient.connection_failed = true;
 			}
 			return;
 		}
 		char c;
 		if ( read(client->fd, &c, 1) < 1) {
-			player->connection_failed = true;
+			wlclient.connection_failed = true;
 			if (client->fd >=0)
 			close(client->fd);
 			return;
 		}
 		if (c != SYNCCODE1) {
 			
-			player->hard_error_count++;
-			if (player->hard_error_count > 100) {
+			wlclient.hard_error_count++;
+			if (wlclient.hard_error_count > 100) {
 				close(client->fd);
-				player->connection_failed = true;
+				wlclient.connection_failed = true;
 			}
 			return;
 		}
-		player->soft_error_count = 0;
-		player->desync = false;
-		wllog(DL_DEBUG, "Resynced player %s", player->name().c_str());
+		wlclient.soft_error_count = 0;
+		wlclient.desync = false;
+		wllog(DL_DEBUG, "Resynced client %s", wlclient.name().c_str());
 	}
 
 	wllog(DL_DEBUG, "data event from %s", client->name.c_str());
@@ -123,8 +125,8 @@ void ProtocolHandler::process_data(Client * const client)
 		wllog
 			(DL_ERROR, "dataEvent but read from client \"%s\" failed",
 			 client->name.c_str());
-		if (player)
-			player->connection_failed = true;
+		if (&wlclient)
+			wlclient.connection_failed = true;
 		if (client->fd >=0)
 			close(client->fd);
 		return;
@@ -153,12 +155,8 @@ void ProtocolHandler::process_data(Client * const client)
 		g_wls->set_state_done();
 		break;
 	case op_request_protocol_ext:
-		if (not player) {
-			player = g_wls->get_player_by_name(client->name, true);
-			player->set_ggz_player_number(client->number);
-		}
 		// This opcode is part of the post build16 protocol.
-		player->set_build16_proto(true);
+		wlclient.set_build16_proto(1, 0);
 		{
 			// Answer this request.
 			WLGGZ_writer wr(client->fd, op_reply_protocol_ext);
@@ -169,7 +167,7 @@ void ProtocolHandler::process_data(Client * const client)
 		ggz_write_int(client->fd, op_request_protocol_ext);
 		break;
 	default:
-		if (WLGGZ_OLD_OPCODE(opcode) or not SUPPORT_B16_PROTOCOL(player))
+		if (WLGGZ_OLD_OPCODE(opcode) or not SUPPORT_B16_PROTOCOL((&wlclient)))
 		{
 			wllog
 				(DL_ERROR,
@@ -180,25 +178,24 @@ void ProtocolHandler::process_data(Client * const client)
 			process_post_b16_data(opcode, client);
 	}
 
-	if (player and player->hard_error_count > 100)
+	if (wlclient.hard_error_count > 100)
 	{
 		wllog
 			(DL_ERROR, "too much fatal errors from %s(%i)",
 			 client->name.c_str(), client->number);
-		player->connection_failed = true;
+		wlclient.connection_failed = true;
 		// TODO: kick player from table?
 		if (client->fd >=0)
 			close(client->fd);
 		return;
 	}
 
-	
-	if (player and (player->desync or player->soft_error_count > 1000)) {
+	if (wlclient.desync or wlclient.soft_error_count > 1000) {
 		// we had a problem reading from the client. That probably means the
 		// connection is no longer in sync.
-		player->desync = true;
-		player->soft_error_count = 0;
-		if (SUPPORT_B16_PROTOCOL(player)) {
+		wlclient.desync = true;
+		wlclient.soft_error_count = 0;
+		if (SUPPORT_B16_PROTOCOL((&wlclient))) {
 			ggz_write_int(client->fd, op_desync);
 		}
 	}
@@ -207,30 +204,22 @@ void ProtocolHandler::process_data(Client * const client)
 
 void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 {
-	WidelandsPlayer * player = g_wls->get_player_by_name(client->name);
-	assert(player);
-	assert(SUPPORT_B16_PROTOCOL(player));
+	WidelandsClient & wlclient = *g_wls->get_client_by_name(client->name);
+	assert(&wlclient);
+	assert(SUPPORT_B16_PROTOCOL((&wlclient)));
 	std::list<WLGGZParameter> parlist;
 	try {
 		parlist = wlggz_read_parameter_list(client->fd);
 	} catch (_parameterError e) {
-		player->hard_error_count++;
-		player->desync = true;
+		wlclient.hard_error_count++;
+		wlclient.desync = true;
 		wllog(DL_ERROR, "error whil reading parameters: %s", e.what());
 	}
 
 	switch(opcode) {
 		case op_game_statistics:
 			wllog(DL_DEBUG, "GAME: read stats!");
-			if ( not player ) {
-				wllog
-					(DL_ERROR,
-					 "got game_statistics from %s(%i) but have "
-					 "no player structure for this player",
-					 client->name.c_str(), client->number);
-				return;
-			}
-			if (player->reported_game) {
+			if (wlclient.reported_game()) {
 				wllog
 					(DL_ERROR,
 					 "got game_statistics from %s(%i) but already "
@@ -261,7 +250,7 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 			}
 			break;
 		case op_set_debug:
-			if (player->is_host())
+			if (g_wls->is_host(&wlclient))
 			{
 				wllog
 					(DL_DEBUG, "debug request from host: "
@@ -269,10 +258,22 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 					 send_debug = client->fd;
 			}
 			break;
+		case op_reply_protocol_ext:
+			{
+				if ((parlist).empty() or not (parlist).front().is_integer())
+					break;
+				int maj = parlist.front().get_integer();
+				parlist.pop_front();
+				if ((parlist).empty() or not (parlist).front().is_integer())
+					break;
+				int min = parlist.front().get_integer();
+				wlclient.set_build16_proto(maj, min);
+			}
+			break;
 		default:
 			//  Discard
 			wllog(DL_ERROR, "Data error. Unhandled opcode (%i)!", opcode);
-			player->soft_error_count++;
+			wlclient.soft_error_count++;
 			break;
 	}
 }

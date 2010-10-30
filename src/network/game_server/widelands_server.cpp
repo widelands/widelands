@@ -26,6 +26,7 @@
 #include "statistics_handler.h"
 #include "wlggz_exception.h"
 #include "widelands_player.h"
+#include "widelands_client.h"
 
 // GGZ includes
 #include <ggz.h>
@@ -43,8 +44,6 @@
 #ifndef WLGGZ_GAME_FILES_DIRECTORY
 #define WLGGZ_GAME_FILES_DIRECTORY "/var/ggzd/gamedata/Widelands"
 #endif
-
-std::string WidelandsPlayer::m_host_username("");
 
 ProtocolHandler wlproto;
 StatisticsHandler wlstat;
@@ -102,14 +101,14 @@ WidelandsServer::~WidelandsServer()
 			break;
 	}
 	wllog(DL_DUMP, "Win Condition: %s", wincond.c_str());
-	std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
-	while(it != m_players.end())
+	std::map<std::string,WidelandsClient*>::iterator it = m_clients.begin();
+	while(it != m_clients.end())
 	{
 		wllog
-			(DL_DUMP, "Player (ggz: %i, wl: %i) %s, %s",
-			 it->second->ggz_player_number(), it->second->wl_player_number(),
-			 it->first.c_str(), it->second->tribe().c_str());
-
+			(DL_DUMP, "Client (ggz: %i, wl: %i) %s",
+			 it->second->ggz_number(), it->second->wl_player_number(),
+			 it->first.c_str());
+/*
 		wllog
 			(DL_DUMP, "     Stats: land: %i, buildings: %i, economy-strength: %i",
 			 it->second->last_stats.land, it->second->last_stats.buildings,
@@ -120,6 +119,7 @@ WidelandsServer::~WidelandsServer()
 			 "civbuildingslost: %i",
 			 it->second->points, it->second->last_stats.milbuildingslost,
 			 it->second->last_stats.civbuildingslost);
+*/
 		it++;
 	}
 
@@ -168,8 +168,8 @@ void WidelandsServer::joinEvent(Client * const client)
 
 	if (not m_wlserver_ip and client->number == 0)
 	{
-		WidelandsPlayer & player = *get_player_by_name(client->name, true);
-		player.is_host();
+		WidelandsClient & player = *get_client_by_name(client->name, true);
+		m_host_username = client->name;
 		// This is the host
 		// Take peer ip as host ip
 		char * ip;
@@ -202,7 +202,7 @@ void WidelandsServer::joinEvent(Client * const client)
 			ip = NULL;
 			wllog(DL_ERROR, "GAME: unreachable -> done!");
 			ggz_write_int(client->fd, op_unreachable);
-			changeState(GGZGameServer::done);
+			set_state_done();
 		}
 
 		m_wlserver_ip = ggz_strdup(ip);
@@ -235,8 +235,8 @@ void WidelandsServer::dataEvent(Client* client)
 		return;
 	}
 	wlproto.process_data(client);
-	if (g_wls->stat_handler().have_stats())
-		g_wls->game_done();
+	if (stat_handler().have_stats())
+		game_done();
 }
 
 
@@ -249,16 +249,18 @@ void WidelandsServer::leaveEvent(Client * client)
 	}
 
 	bool host = false;
-	WidelandsPlayer * plr = get_player_by_name(client->name);
-	if (plr and plr->is_host()) {
+	WidelandsClient * plr = get_client_by_name(client->name);
+	if (client->name == m_host_username) {
 		send_debug = -1;
 		host = true;
 	}
 	if (state() == GGZGameServer::waiting) {
-		std::map<std::string, WidelandsPlayer *>::iterator it =
-			m_players.find(client->name);
-		if (it != m_players.end())
-			m_players.erase(it);
+		std::map<std::string, WidelandsClient *>::iterator it =
+			m_clients.find(client->name);
+		if (it != m_clients.end())
+			m_clients.erase(it);
+		else
+			it++;
 	}
 	wllog
 		(DL_INFO, "leaveEvent \"%s\" (%i), fd=%i",
@@ -285,24 +287,11 @@ void WidelandsServer::spectatorLeaveEvent(Client * client)
 		wllog(DL_INFO, "spectatorLeaveEvent without client ?!?\n");
 		return;
 	}
-	
-	bool host = false;
-	WidelandsPlayer * plr = get_player_by_name(client->name);
-	if (plr and plr->is_host()) {
+
+	if (client->name == m_host_username) {
 		send_debug = -1;
-		host = true;
-	}
-
-	std::map<std::string, WidelandsPlayer *>::iterator it =
-		m_players.find(client->name);
-	if (it != m_players.end())
-		m_players.erase(it);
-	wllog
-		(DL_INFO, "spectatorLeaveEvent \"%s\" (%i), fd=%i", client->name.c_str(),
-		 client->name.c_str(), client->number, client->fd);
-
-	if (host)
 		set_state_done();
+	}
 }
 
 // Spectator data event (ignored)
@@ -341,14 +330,19 @@ void WidelandsServer::seatEvent(Seat* seat)
 
 	wllog(DL_DEBUG, "seatEvent for %s(%d) fd=%i ", seat->client->name.c_str(), seat->number, seat->client->fd);
 
-	WidelandsPlayer & player = *get_player_by_name(seat->client->name);
-	if (&player) {
-		wllog(DL_DEBUG, "Player \"%s\" sit down", player.name().c_str());
-		player.set_ggz_player_number(seat->number);
-		player.set_ggz_spectator_number(-1);
+	if (seat->client->name.length()) {
+		if (m_clients[seat->client->name])
+			delete m_clients[seat->client->name];
+		m_clients[seat->client->name] = new WidelandsClient(seat->client->name, seat->client->number);
+	} else {
+		std::map<std::string,WidelandsClient *>::iterator it = m_clients.begin();
+		while (it != m_clients.end())
+			if (it->second->ggz_number() == seat->client->number) {
+				delete it->second;
+				m_clients.erase(it);
+			} else 
+				it++;
 	}
-	else
-		wllog(DL_DEBUG, "Unknown player sit down");
 }
 
 void WidelandsServer::spectatorEvent(Spectator* spectator)
@@ -364,11 +358,10 @@ void WidelandsServer::spectatorEvent(Spectator* spectator)
 
 	wllog(DL_DEBUG, "spectatorEvent for %s(%i) fd=%i ", spectator->client->name.c_str(), spectator->number, spectator->client->fd);
 
-	WidelandsPlayer & player = *get_player_by_name(spectator->client->name);
-	if (&player) {
-		wllog(DL_DEBUG, "Player \"%s\" stand up", player.name().c_str());
-		player.set_ggz_player_number(-1);
-		player.set_ggz_spectator_number(spectator->number);
+	if (spectator->client->name.length()) {
+		wllog(DL_DEBUG, "Player \"%s\" stand up", spectator->client->name.c_str());
+		if(m_clients[spectator->client->name])
+			wllog(DL_FATAL, "spectator SeatEvent dor \"%s\" by client still in client list", spectator->client->name.c_str());
 	}
 	else
 		wllog(DL_DEBUG, "Unknown player stand up");
@@ -377,6 +370,7 @@ void WidelandsServer::spectatorEvent(Spectator* spectator)
 
 void WidelandsServer::game_done()
 {
+/*
 	GGZGameResult results[g_wls->players()];
 	int score[players()], teams[players()];
 	for (int p = 0; p < players(); p++) {
@@ -670,31 +664,32 @@ void WidelandsServer::game_done()
 	else
 		wllog(DL_ERROR, "Error: Unknow gametype! cannot report game");
 	m_reported = true;
+	*/
 	set_state_done();
 }
 
 void WidelandsServer::check_reports()
 {
 	bool all_reported = true;
-	std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
-	while(it != m_players.end())
-		if (SUPPORT_B16_PROTOCOL(it->second) and not it->second->reported_game)
+	std::map<std::string,WidelandsClient*>::iterator it = m_clients.begin();
+	while(it != m_clients.end())
+		if (SUPPORT_B16_PROTOCOL(it->second) and not it->second->reported_game())
 			all_reported = false;
 	if (all_reported)
 		game_done();
 }
 
 
-WidelandsPlayer* WidelandsServer::get_player_by_name
+WidelandsClient* WidelandsServer::get_client_by_name
 	(std::string name, bool create)
 {
-	WidelandsPlayer * p = m_players[name];
+	WidelandsClient * p = m_clients[name];
 	if (not p and create)
 	{
-		wllog(DL_DEBUG, "create new player structure for %s", name.c_str());
-		p = new WidelandsPlayer(name);
-		m_players[name] = p;
-
+		wllog(DL_DEBUG, "*****try to create new player structure for %s. This should not happen", name.c_str());
+		//p = new WidelandsClient(name);
+		//m_clients[name] = p;
+/*
 		for(int i=0; i < players(); i++)
 		{
 			Seat * s;
@@ -705,11 +700,13 @@ WidelandsPlayer* WidelandsServer::get_player_by_name
 		}
 		if (p->ggz_player_number() < 0)
 			wllog(DL_DEBUG, "%s still has no ggz player number", name.c_str());
+*/
 	}
 	return p;
 }
 
-WidelandsPlayer* WidelandsServer::get_player_by_wlid(int id)
+/*
+WidelandsClient* WidelandsServer::get_client_by_wlid(int id)
 {
 	if (id < 0)
 		return NULL;
@@ -739,7 +736,22 @@ WidelandsPlayer* WidelandsServer::get_player_by_ggzid(int id)
 		p->set_ggz_player_number(id);
 	return p;
 }
+*/
 
+
+bool WidelandsServer::is_host(const WidelandsClient* client)
+{
+	if (not client)
+		return false;
+	return client->name() == m_host_username;
+}
+
+bool WidelandsServer::is_host(const Client* client)
+{
+	 if (not client)
+		return false;
+	 return client->name == m_host_username;
+}
 
 #include <cstdarg>
 #include <cstdio>

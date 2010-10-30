@@ -294,6 +294,7 @@ private:
 	std::string mapname;
 	int map_w, map_h;
 	WLGGZGameType win_condition;
+	int playernum;
 	//@}
 
 	/// The chat messages

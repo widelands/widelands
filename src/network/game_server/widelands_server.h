@@ -20,7 +20,7 @@
 #define WIDELANDS_SERVER_H
 
 #include "protocol.h"
-#include "widelands_player.h"
+//#include "widelands_client.h"
 #include "widelands_map.h"
 
 // GGZ includes. class GGZGameServer
@@ -32,6 +32,7 @@
 
 class StatisticsHandler;
 class ProtocolHandler;
+class WidelandsClient;
 
 /// WidelandsServer server object. This class does the interaction with ggzd
 class WidelandsServer : public GGZGameServer
@@ -51,23 +52,23 @@ class WidelandsServer : public GGZGameServer
 		void game_done();
 
 		/// get player structure by name. If id is given create if not existing
-		WidelandsPlayer * get_player_by_name(std::string name, bool create = false);
-		WidelandsPlayer * get_player_by_wlid(int);
-		WidelandsPlayer * get_player_by_ggzid(int);
+		WidelandsClient * get_client_by_name(std::string name, bool create = false);
+		//WidelandsPlayer * get_player_by_wlid(int);
+		//WidelandsClient * get_client_by_ggzid(int);
 		
 		GGZGameServer::State game_state() { return state(); }
 		
 		int numberofplayers() 
 			{ return playercount(Seat::player) + playercount(Seat::bot); }
 		
+		bool is_host(const WidelandsClient * client);
+		bool is_host(const Client * client);
 		
 		StatisticsHandler & stat_handler();
 		ProtocolHandler & proto_handler();
 
 		void check_reports();
 		bool is_playing() { return state() == GGZGameServer::waiting; }
-
-		std::map<std::string,WidelandsPlayer *> m_players;
 
 	private:
 		// @{
@@ -88,6 +89,9 @@ class WidelandsServer : public GGZGameServer
 		char * m_wlserver_ip;
 		/// Results of the game have been reported to ggzd
 		bool m_reported;
+		std::string m_host_username;
+
+		std::map<std::string,WidelandsClient *> m_clients;
 };
 
 extern WidelandsServer * g_wls;
