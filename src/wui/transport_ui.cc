@@ -77,12 +77,12 @@ private:
 		Economy_Options_Ware_Panel(UI::Panel * parent, Interactive_GameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
-			m_display(this, 0, 0, economy.owner().tribe(), m_can_act),
+			m_display(this, 0, 0, economy.owner().tribe(), WaresDisplay::WARE, m_can_act),
 			m_economy(economy)
 		{
 			Ware_Index nr_wares = m_economy.owner().tribe().get_nrwares();
 			m_wares.set_nrwares(nr_wares);
-			m_display.add_warelist(m_wares, WaresDisplay::WARE);
+			m_display.add_warelist(m_wares);
 			for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 				if (not m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
 					m_display.hide_ware(i);
@@ -187,12 +187,12 @@ private:
 		Economy_Options_Worker_Panel(UI::Panel * parent, Interactive_GameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
-			m_display(this, 0, 0, economy.owner().tribe(), m_can_act),
+			m_display(this, 0, 0, economy.owner().tribe(), WaresDisplay::WORKER, m_can_act),
 			m_economy(economy)
 		{
 			Ware_Index nr_wares = m_economy.owner().tribe().get_nrworkers();
 			m_wares.set_nrwares(nr_wares);
-			m_display.add_warelist(m_wares, WaresDisplay::WORKER);
+			m_display.add_warelist(m_wares);
 			for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 				if (not m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
 					m_display.hide_ware(i);
