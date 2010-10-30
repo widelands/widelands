@@ -181,7 +181,7 @@ Tribe_Descr::Tribe_Descr
 				{                                                                                                                               \
 					m_##w##s_order_coords.resize(m_##w##s.get_nitems());                                                                    \
                                                                                                                                                                 \
-					std::string categories_s(tribe_s.get_safe_string(#w "s_order"));                                                      \
+					std::string categories_s(tribe_s.get_safe_string(#w "s_order"));                                                        \
 					for(boost::split_iterator<string::iterator> It1=                                                                        \
 						boost::make_split_iterator(categories_s, boost::token_finder(boost::is_any_of(";")));                           \
 						It1 != boost::split_iterator<string::iterator>();                                                               \
