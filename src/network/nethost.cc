@@ -1275,18 +1275,7 @@ void NetHost::setPlayer(uint8_t const number, PlayerSettings const ps)
 
 void NetHost::setPlayerNumber(uint8_t const number)
 {
-	if (number != UserSettings::none() and d->settings.players.size() <= number)
-		return;
-
-	d->settings.playernum = number;
-	d->settings.users.at(0).position = number;
-
-	// Broadcast changes
-	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_USER);
-	s.Unsigned32(0);
-	writeSettingUser(s, 0);
-	broadcast(s);
+	switchToPlayer(0, number);
 }
 
 void NetHost::setWinCondition(std::string wc)
@@ -1297,6 +1286,42 @@ void NetHost::setWinCondition(std::string wc)
 	SendPacket s;
 	s.Unsigned8(NETCMD_WIN_CONDITION);
 	s.String(wc);
+	broadcast(s);
+}
+
+void NetHost::switchToPlayer(uint32_t user, uint8_t number)
+{
+	if (number < d->settings.players.size()
+		 &&
+		 (d->settings.players.at(number).state == PlayerSettings::stateClosed
+		  ||
+		  d->settings.players.at(number).state == PlayerSettings::stateComputer))
+		return;
+
+	uint32_t old = d->settings.users.at(user).position;
+	std::string name = d->settings.users.at(user).name;
+	// Remove users name from old player slot
+	if (old < d->settings.players.size()) {
+		PlayerSettings & op = d->settings.players.at(old);
+		std::string temp(" ");
+		temp += name;
+		temp += " ";
+		setPlayerName(old, op.name.erase(op.name.find(temp), temp.size()));
+		//if (op.name.empty())
+			
+	}
+
+	if (number < d->settings.players.size()) {
+		// Add hosts name to new player slot
+		PlayerSettings & op = d->settings.players.at(number);
+		setPlayerName(number, op.name + " " + name + " ");
+	}
+	d->settings.users.at(user).position = number;
+	// Broadcast the user changes to everybody
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_USER);
+	s.Unsigned32(user);
+	writeSettingUser(s, user);
 	broadcast(s);
 }
 
@@ -1977,48 +2002,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	case NETCMD_SETTING_CHANGEPOSITION:
 		if (!d->game) {
 			uint8_t const pos = r.Unsigned8();
-			if (pos == UserSettings::none()) {
-				setPlayerState(client.playernum, PlayerSettings::stateOpen);
-				log("[Host] client %u went to lobby.\n", i);
-			} else if (client.playernum == UserSettings::none()) {
-				if (d->settings.players.size() <= pos)
-					break;
-				PlayerSettings position = d->settings.players.at(pos);
-				if (position.state == PlayerSettings::stateOpen) {
-					setPlayerState(pos, PlayerSettings::stateHuman);
-					setPlayerName(pos, d->settings.users.at(client.usernum).name);
-					log("[Host] client %u switched to position %u.\n", i, pos);
-				}
-			} else {
-				PlayerSettings position = d->settings.players.at(pos);
-				PlayerSettings player   = d->settings.players.at(client.playernum);
-				if
-					((pos < d->settings.players.size()) &
-					 (position.state == PlayerSettings::stateOpen))
-				{
-					const PlayerSettings oldOnPos = position;
-					setPlayer(pos, player);
-					setPlayer(client.playernum, oldOnPos);
-					log("[Host] client %u switched to position %i.\n", i, pos);
-				} else
-					break;
-			}
-			// local settings
-			d->settings.users.at(client.usernum).position = pos;
-			client.playernum = pos;
-
-			// Send new user information
-			SendPacket s;
-			s.Unsigned8(NETCMD_SET_PLAYERNUMBER);
-			s.Signed32(pos);
-			s.send(client.sock);
-
-			// Broadcast new information about the User to everybody
-			s.reset();
-			s.Unsigned8(NETCMD_SETTING_USER);
-			s.Unsigned32(client.usernum);
-			writeSettingUser(s, client.usernum);
-			broadcast(s);
+			switchToPlayer(client.usernum, pos);
 		}
 		break;
 

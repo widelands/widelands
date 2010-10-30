@@ -131,7 +131,6 @@ struct GameSettingsProvider {
 	virtual void setPlayerNumber(uint8_t number) = 0;
 	virtual void setPlayerTeam  (uint8_t number, Widelands::TeamNumber team) = 0;
 	virtual void setWinCondition(std::string wc) = 0;
-//	virtual void switchToPlayer (uint8_t number) = 0; // 0:spectator, 1-8:players
 	virtual std::string getWinCondition() = 0;
 
 	struct No_Tribe {};

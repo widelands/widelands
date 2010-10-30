@@ -31,6 +31,7 @@
 
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
 
@@ -42,27 +43,54 @@ struct MultiPlayerClientGroup : public UI::Box {
 		 std::string const & fname, uint32_t const fsize)
 		 :
 		 UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
+		 type_icon(0),
+		 type(0),
 		 s(settings),
-		 m_id(id)
+		 m_id(id),
+		 m_save(-2)
 	{
 		set_size(w, h);
 		name = new UI::Textarea
 			(this, 0, 0, w - h - UI::Scrollbar::Size * 11 / 5, h);
 		name->set_font(fname, fsize, UI_FONT_CLR_FG);
-		add(name, 1);
-		type = new UI::Callback_Button
-			(this, "client_type",
-			 0, 0, h, h,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 boost::bind
-				 (&MultiPlayerClientGroup::toggle_type, boost::ref(*this)),
-			 std::string(), std::string(), true, false, fname, fsize);
-		add(type, 0);
+		add(name, UI::Box::AlignCenter);
+		// Either Button if changeable OR text if not
+		if (id == settings->settings().usernum) { // Our Client
+			type = new UI::Callback_Button
+				(this, "client_type",
+				 0, 0, h, h,
+				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+				 boost::bind
+					 (&MultiPlayerClientGroup::toggle_type, boost::ref(*this)),
+				 std::string(), std::string(), true, false, fname, fsize);
+			add(type, UI::Box::AlignCenter);
+		} else { // just a shown client
+			type_icon = new UI::Icon
+				(this, 0, 0, 14 * h / 10, h,
+				 g_gr->get_picture(PicMod_UI, "pics/menu_tab_watch.png"));
+			add(type_icon, UI::Box::AlignCenter);
+		}
+
 	}
 
-	/// Switch human players and spectator and set the picture accordingly
+	/// Switch human players and spectator
 	void toggle_type() {
-		
+		UserSettings us = s->settings().users.at(m_id);
+		int16_t p = us.position;
+		if (p == UserSettings::none())
+			p = -1;
+
+		for (++p; p < s->settings().players.size(); ++p) {
+			if
+				(s->settings().players.at(p).state == PlayerSettings::stateHuman
+				 ||
+				 s->settings().players.at(p).state == PlayerSettings::stateOpen)
+			{
+				s->setPlayerNumber(p);
+				return;
+			}
+		}
+		s->setPlayerNumber(UserSettings::none());
 	}
 
 	/// Care about visibility and current values
@@ -70,19 +98,42 @@ struct MultiPlayerClientGroup : public UI::Box {
 		UserSettings us = s->settings().users[m_id];
 		if (us.position == UserSettings::notConnected()) {
 			name->set_text(_("<free>"));
-			type->set_visible(false);
+			if (type)
+				type->set_visible(false);
+			else
+				type_icon->set_visible(false);
 		} else {
 			name->set_text(us.name);
-			type->set_visible(true);
+			if (m_save != us.position) {
+				char buf[42] = "pics/menu_tab_watch.png";
+				char buf2[128];
+				if (us.position < UserSettings::highestPlayernum()) {
+					snprintf
+						(buf, sizeof(buf),
+						 "pics/genstats_enable_plr_0%i.png", us.position + 1);
+					snprintf(buf2, sizeof(buf2), _("Player %i"), us.position + 1);
+				} else
+					snprintf(buf2, sizeof(buf2), _("Spectator"));
+
+				// Either Button if changeable OR text if not
+				if (m_id == s->settings().usernum) {
+					type->set_pic(g_gr->get_picture(PicMod_Game, buf));
+					type->set_tooltip(buf2);
+					type->set_visible(true);
+				} else {
+					type_icon->setIcon(g_gr->get_picture(PicMod_UI, buf));
+				}
+				m_save = us.position;
+			}
 		}
 	}
 
-	void toggle_ready(bool ready) {}
-
-	UI::Textarea         * name;
-	UI::Button           * type;
-	GameSettingsProvider * const s;
-	uint8_t                const m_id;
+	UI::Textarea           * name;
+	UI::Icon               * type_icon;
+	UI::Button             * type;
+	GameSettingsProvider   * const s;
+	uint8_t                  const m_id;
+	int16_t                  m_save; // saved position to check rewrite need.
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup

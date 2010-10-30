@@ -1908,8 +1908,19 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	virtual void setPlayerNumber(uint8_t const number) {
-		if (number < s.players.size())
+		if (number >= s.players.size())
+			return;
+		PlayerSettings const position = settings().players.at(number);
+		PlayerSettings const player = settings().players.at(settings().playernum);
+		if
+			(number < settings().players.size() and
+			 (position.state == PlayerSettings::stateOpen or
+			  position.state == PlayerSettings::stateComputer))
+		{
+			setPlayer(number, player);
+			setPlayer(settings().playernum, position);
 			s.playernum = number;
+		}
 	}
 
 	virtual std::string getWinCondition() { return s.win_condition; }

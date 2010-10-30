@@ -386,6 +386,13 @@ void NetClient::setPlayerNumber(uint8_t const number)
 	// for sending a request to the host.
 	if (number == d->settings.playernum)
 		return;
+	// Same if the player is not selectable
+	if (number < d->settings.players.size()
+		 &&
+		 (d->settings.players.at(number).state == PlayerSettings::stateClosed
+		  ||
+		  d->settings.players.at(number).state == PlayerSettings::stateComputer))
+		return;
 
 	// Send request
 	SendPacket s;

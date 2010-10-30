@@ -363,18 +363,7 @@ void Fullscreen_Menu_LaunchSPG::set_scenario_values()
  */
 void Fullscreen_Menu_LaunchSPG::switch_to_position(uint8_t const pos)
 {
-	GameSettings settings = m_settings->settings();
-	PlayerSettings const position = settings.players.at(pos);
-	PlayerSettings const player   = settings.players.at(settings.playernum);
-	if
-		(pos < m_nr_players and
-		 (position.state == PlayerSettings::stateOpen or
-		  position.state == PlayerSettings::stateComputer))
-	{
-		m_settings->setPlayer(pos, player);
-		m_settings->setPlayer(settings.playernum, position);
-		m_settings->setPlayerNumber(pos);
-	}
+	m_settings->setPlayerNumber(pos);
 }
 
 

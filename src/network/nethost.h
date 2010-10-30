@@ -76,6 +76,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayer       (uint8_t number, PlayerSettings);
 	void setPlayerNumber (uint8_t number);
 	void setPlayerTeam   (uint8_t number, Widelands::TeamNumber team);
+	void switchToPlayer  (uint32_t user, uint8_t number);
 	void setWinCondition (std::string);
 
 	// just visible stuff for the select mapmenu

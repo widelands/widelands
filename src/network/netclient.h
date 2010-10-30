@@ -61,12 +61,12 @@ struct NetClient :
 	// GameSettingsProvider interface
 	virtual GameSettings const & settings();
 
-	virtual void setScenario(bool); //  FIXME no scenario for multiplayer
+	virtual void setScenario(bool);
 	virtual bool canChangeMap();
 	virtual bool canChangePlayerState(uint8_t number);
 	virtual bool canChangePlayerTribe(uint8_t number);
 	virtual bool canChangePlayerInit (uint8_t number);
-	virtual bool canChangePlayerTeam(uint8_t number);
+	virtual bool canChangePlayerTeam (uint8_t number);
 
 	virtual bool canLaunch();
 
