@@ -47,9 +47,6 @@ endif (DEFINED MSVC)
 
 add_library (widelands_all ${WIN32_ICON_O} ${WL_SRCS_CC} ${WL_SRCS_H})
 
-execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
-set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
-
 set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 
@@ -65,7 +62,6 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
     endif (WIN32)
     get_filename_component(sourcename ${sourcefile} NAME) 
     set(stamp ${sourcename}_)
-    set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/${stamp})
     add_custom_command(
       OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash}"
       COMMAND ${CMAKE_COMMAND} -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
@@ -75,12 +71,12 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
     list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash})
     if (WL_EXTRAWARNINGS)
       add_custom_command(
-	OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}"
-	COMMAND ${CMAKE_COMMAND} -DWL_SOURCES_BINARY_ROOT=${WL_SOURCES_BINARY_ROOT} -Dincludedir=${CMAKE_SOURCE_DIR}/src -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${stamp} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
+	OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${sourcenoslash}"
+	COMMAND ${CMAKE_COMMAND} -DWL_SOURCES_BINARY_ROOT=${WL_SOURCES_BINARY_ROOT} -Dincludedir=${CMAKE_SOURCE_DIR}/src -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
 	DEPENDS ${sourcefile}
 	COMMENT "Checking ${sourcewithoutpath} with CppCheck"
       )
-      list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp})
+      list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${sourcenoslash})
 #        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp};${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}")
     else (WL_EXTRAWARNINGS)
 #        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}")
