@@ -700,10 +700,10 @@ Cmd_SetWareTargetQuantity::Cmd_SetWareTargetQuantity
 	(int32_t const _duetime, Player_Number const _sender,
 	 uint32_t const _economy,
 	 Ware_Index const _ware_type,
-	 uint32_t const _permanent, uint32_t const _temporary)
+	 uint32_t const _permanent)
 	:
 	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
-	m_permanent(_permanent), m_temporary(_temporary)
+	m_permanent(_permanent)
 {}
 
 void Cmd_SetWareTargetQuantity::execute(Game & game)
@@ -713,10 +713,10 @@ void Cmd_SetWareTargetQuantity::execute(Game & game)
 		(economy  () < player.get_nr_economies() and
 		 ware_type() < player.tribe().get_nrwares())
 		player.get_economy_by_number(economy())->set_ware_target_quantity
-			(ware_type(),  m_permanent, m_temporary, duetime());
+			(ware_type(),  m_permanent, duetime());
 }
 
-#define PLAYER_CMD_SETWARETARGETQUANTITY_VERSION 1
+#define PLAYER_CMD_SETWARETARGETQUANTITY_VERSION 2
 
 void Cmd_SetWareTargetQuantity::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
@@ -724,7 +724,6 @@ void Cmd_SetWareTargetQuantity::Write
 	fw.Unsigned16(PLAYER_CMD_SETWARETARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
 	fw.Unsigned32(m_permanent);
-	fw.Unsigned32(m_temporary);
 }
 
 void Cmd_SetWareTargetQuantity::Read
@@ -732,10 +731,11 @@ void Cmd_SetWareTargetQuantity::Read
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == PLAYER_CMD_SETWARETARGETQUANTITY_VERSION) {
+		if (packet_version <= PLAYER_CMD_SETWARETARGETQUANTITY_VERSION) {
 			Cmd_ChangeTargetQuantity::Read(fr, egbase, mol);
 			m_permanent = fr.Unsigned32();
-			m_temporary = fr.Unsigned32();
+			if (packet_version == 1)
+				fr.Unsigned32();
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -747,16 +747,16 @@ void Cmd_SetWareTargetQuantity::Read
 Cmd_SetWareTargetQuantity::Cmd_SetWareTargetQuantity(StreamRead & des)
 	:
 	Cmd_ChangeTargetQuantity(des),
-	m_permanent             (des.Unsigned32()),
-	m_temporary             (des.Unsigned32())
-{}
+	m_permanent             (des.Unsigned32())
+{
+	if (cmdserial() == 1) des.Unsigned32();
+}
 
 void Cmd_SetWareTargetQuantity::serialize(StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_SETWARETARGETQUANTITY);
 	Cmd_ChangeTargetQuantity::serialize(ser);
 	ser.Unsigned32(m_permanent);
-	ser.Unsigned32(m_temporary);
 }
 
 
@@ -779,7 +779,7 @@ void Cmd_ResetWareTargetQuantity::execute(Game & game)
 		int32_t const count =
 			tribe.get_ware_descr(ware_type())->default_target_quantity();
 		player.get_economy_by_number(economy())->set_ware_target_quantity
-			(ware_type(),  count, count, 0);
+			(ware_type(),  count, 0);
 	}
 }
 
@@ -822,10 +822,10 @@ Cmd_SetWorkerTargetQuantity::Cmd_SetWorkerTargetQuantity
 	(int32_t const _duetime, Player_Number const _sender,
 	 uint32_t const _economy,
 	 Ware_Index const _ware_type,
-	 uint32_t const _permanent, uint32_t const _temporary)
+	 uint32_t const _permanent)
 	:
 	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
-	m_permanent(_permanent), m_temporary(_temporary)
+	m_permanent(_permanent)
 {}
 
 void Cmd_SetWorkerTargetQuantity::execute(Game & game)
@@ -835,10 +835,10 @@ void Cmd_SetWorkerTargetQuantity::execute(Game & game)
 		(economy  () < player.get_nr_economies() and
 		 ware_type() < player.tribe().get_nrwares())
 		player.get_economy_by_number(economy())->set_worker_target_quantity
-			(ware_type(),  m_permanent, m_temporary, duetime());
+			(ware_type(),  m_permanent, duetime());
 }
 
-#define PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION 1
+#define PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION 2
 
 void Cmd_SetWorkerTargetQuantity::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
@@ -846,7 +846,6 @@ void Cmd_SetWorkerTargetQuantity::Write
 	fw.Unsigned16(PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
 	fw.Unsigned32(m_permanent);
-	fw.Unsigned32(m_temporary);
 }
 
 void Cmd_SetWorkerTargetQuantity::Read
@@ -854,10 +853,11 @@ void Cmd_SetWorkerTargetQuantity::Read
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION) {
+		if (packet_version <= PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION) {
 			Cmd_ChangeTargetQuantity::Read(fr, egbase, mol);
 			m_permanent = fr.Unsigned32();
-			m_temporary = fr.Unsigned32();
+			if (packet_version == 1)
+				fr.Unsigned32();
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -869,16 +869,16 @@ void Cmd_SetWorkerTargetQuantity::Read
 Cmd_SetWorkerTargetQuantity::Cmd_SetWorkerTargetQuantity(StreamRead & des)
 	:
 	Cmd_ChangeTargetQuantity(des),
-	m_permanent             (des.Unsigned32()),
-	m_temporary             (des.Unsigned32())
-{}
+	m_permanent             (des.Unsigned32())
+{
+	if (cmdserial() == 1) des.Unsigned32();
+}
 
 void Cmd_SetWorkerTargetQuantity::serialize(StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_SETWORKERTARGETQUANTITY);
 	Cmd_ChangeTargetQuantity::serialize(ser);
 	ser.Unsigned32(m_permanent);
-	ser.Unsigned32(m_temporary);
 }
 
 
@@ -901,7 +901,7 @@ void Cmd_ResetWorkerTargetQuantity::execute(Game & game)
 		int32_t const count =
 			tribe.get_ware_descr(ware_type())->default_target_quantity();
 		player.get_economy_by_number(economy())->set_worker_target_quantity
-			(ware_type(),  count, count, 0);
+			(ware_type(),  count, 0);
 	}
 }
 
