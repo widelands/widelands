@@ -116,6 +116,18 @@ Tribe_Descr::Tribe_Descr
 			if (not safe_building_index("constructionsite"))
 				throw game_data_error
 					(_("constructionsite type \"constructionsite\" is missing"));
+			
+			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
+				m_buildings.add
+					(new Warehouse_Descr
+					 	(_name, _descname, path, prof, global_s, *this));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
+				m_buildings.add
+					(new ProductionSite_Descr
+					 	(_name, _descname, path, prof, global_s, *this));
+			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")
 				m_buildings.add
@@ -147,17 +159,6 @@ Tribe_Descr::Tribe_Descr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
-			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
-				m_buildings.add
-					(new Warehouse_Descr
-					 	(_name, _descname, path, prof, global_s, *this));
-			PARSE_MAP_OBJECT_TYPES_END;
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
-				m_buildings.add
-					(new ProductionSite_Descr
-					 	(_name, _descname, path, prof, global_s, *this));
-			PARSE_MAP_OBJECT_TYPES_END;
 		}
 
 		{
