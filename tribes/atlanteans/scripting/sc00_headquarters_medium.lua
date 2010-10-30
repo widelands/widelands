@@ -7,7 +7,7 @@ use("aux", "shared_kingdom_functions")
 
 set_textdomain("tribe_atlanteans")
 
-return {
+init = {
    name = _ "Headquarters medium", 
    func =  function(plr) 
    plr:allow_workers("all")
@@ -77,3 +77,6 @@ return {
    })
 end
 }
+
+return init
+

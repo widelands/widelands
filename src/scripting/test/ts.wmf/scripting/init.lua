@@ -53,6 +53,7 @@ end
 -- Test for auxiliary scripts 
 -- ===========================
 include "test_table"
+include "test_set"
 
 -- ============
 -- Test Runner 

@@ -22,8 +22,8 @@
 --
 --    :returns: :const:`nil`
 function run(func, ...) 
-   c = coroutine.create(func)
-   success, sleeptime = coroutine.resume(c, ...)
+   local c = coroutine.create(func)
+   local success, sleeptime = coroutine.resume(c, ...)
    if success then
       if coroutine.status(c) ~= "dead" then 
          wl.Game():launch_coroutine(c, sleeptime)

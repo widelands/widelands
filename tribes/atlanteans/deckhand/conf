@@ -1,0 +1,19 @@
+help=_Works at the shipyard and constructs new ships and boats.
+soundfx=../../../sound/hammering/hammering
+
+[buildcost]
+hammer=1
+carrier=1
+
+[idle]
+pics=idle_??.png
+sfx=0 ../../../sound/hammering/hammering
+hotspot=7 23
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=9 23
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=9 23

@@ -776,6 +776,7 @@ const char L_Map::className[] = "Map";
 const MethodType<L_Map> L_Map::Methods[] = {
 	METHOD(L_Map, place_immovable),
 	METHOD(L_Map, get_field),
+	METHOD(L_Map, recalculate),
 	{0, 0},
 };
 const PropertyType<L_Map> L_Map::Properties[] = {
@@ -919,6 +920,19 @@ int L_Map::get_field(lua_State * L) {
 		report_error(L, "y coordinate out of range!");
 
 	return to_lua<LuaMap::L_Field>(L, new LuaMap::L_Field(x, y));
+}
+
+/* RST
+	.. method:: recalculate()
+
+		This map recalculates the whole map state: height of fields, buildcaps
+		and so on. You only need to call this function if you changed
+		Field.raw_height in any way.
+*/
+// TODO: do we really want this function?
+int L_Map::recalculate(lua_State * L) {
+	get_egbase(L).map().recalc_whole_map();
+	return 0;
 }
 
 /*
@@ -1969,6 +1983,43 @@ const PropertyType<L_TrainingSite> L_TrainingSite::Properties[] = {
 
 
 /* RST
+Bob
+---
+
+.. class:: Bob
+
+	Child of: :class:`MapObject`
+
+	This is the base class for all Bobs in widelands.
+*/
+const char L_Bob::className[] = "Bob";
+const MethodType<L_Bob> L_Bob::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Bob> L_Bob::Properties[] = {
+	{0, 0, 0},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+/* RST
 Field
 -----
 
@@ -1985,11 +2036,13 @@ Field
 const char L_Field::className[] = "Field";
 const MethodType<L_Field> L_Field::Methods[] = {
 	METHOD(L_Field, __eq),
+	METHOD(L_Field, __tostring),
 	METHOD(L_Field, region),
 	METHOD(L_Field, has_movecaps_swim),
 	{0, 0},
 };
 const PropertyType<L_Field> L_Field::Properties[] = {
+	PROP_RO(L_Field, __hash),
 	PROP_RO(L_Field, x),
 	PROP_RO(L_Field, y),
 	PROP_RO(L_Field, rn),
@@ -1999,9 +2052,11 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RO(L_Field, bln),
 	PROP_RO(L_Field, brn),
 	PROP_RO(L_Field, immovable),
+	PROP_RO(L_Field, bobs),
 	PROP_RW(L_Field, terr),
 	PROP_RW(L_Field, terd),
 	PROP_RW(L_Field, height),
+	PROP_RW(L_Field, raw_height),
 	PROP_RO(L_Field, viewpoint_x),
 	PROP_RO(L_Field, viewpoint_y),
 	PROP_RW(L_Field, resource),
@@ -2024,6 +2079,14 @@ void L_Field::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
+// Hash is used to identify a class in a Set
+int L_Field::get___hash(lua_State * L) {
+	char buf[25];
+	snprintf(buf, sizeof(buf), "%i_%i", m_c.x, m_c.y);
+	lua_pushstring(L, buf);
+	return 1;
+}
+
 /* RST
 	.. attribute:: x, y
 
@@ -2046,13 +2109,47 @@ int L_Field::get_height(lua_State * L) {
 }
 int L_Field::set_height(lua_State * L) {
 	uint32_t height = luaL_checkuint32(L, -1);
+	FCoords f = fcoords(L);
+
+	if (f.field->get_height() == height)
+		return 0;
+
 	if (height > MAX_FIELD_HEIGHT)
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
-	get_egbase(L).map().set_height(fcoords(L), height);
+	get_egbase(L).map().set_height(f, height);
 
-	return get_height(L);
+	return 0;
 }
+
+/* RST
+	.. attribute:: raw_height
+
+		(RW The same as :attr:`height`, but setting this will not trigger a
+		recalculation of the surrounding fields. You can use this field to
+		change the height of many fields on a map quickly, then use
+		:func:`wl.map.recalculate()` to make sure that everything is in order.
+*/
+// UNTESTED
+int L_Field::get_raw_height(lua_State * L) {
+	lua_pushuint32(L, fcoords(L).field->get_height());
+	return 1;
+}
+int L_Field::set_raw_height(lua_State * L) {
+	uint32_t height = luaL_checkuint32(L, -1);
+	FCoords f = fcoords(L);
+
+	if (f.field->get_height() == height)
+		return 0;
+
+	if (height > MAX_FIELD_HEIGHT)
+		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
+
+	f.field->set_height(height);
+
+	return 0;
+}
+
 
 /* RST
 	.. attribute:: viewpoint_x, viewpoint_y
@@ -2142,6 +2239,27 @@ int L_Field::get_immovable(lua_State * L) {
 		return 0;
 	else
 		upcasted_immovable_to_lua(L, bi);
+	return 1;
+}
+
+/* RST
+	.. attribute:: bobs
+
+		(RO) An :class:`array` of :class:`~wl.map.Bob` that are associated
+		with this field
+*/
+// UNTESTED
+int L_Field::get_bobs(lua_State * L) {
+	Bob * b = fcoords(L).field->get_first_bob();
+
+	lua_newtable(L);
+	uint32_t cidx = 1;
+	while (b) {
+		lua_pushuint32(L, cidx++);
+		to_lua<L_Bob>(L, new L_Bob(*b));
+		lua_rawset(L, -3);
+		b = b->get_next_bob();
+	}
 	return 1;
 }
 
@@ -2299,6 +2417,12 @@ int L_Field::get_claimers(lua_State * L) {
  */
 int L_Field::__eq(lua_State * L) {
 	lua_pushboolean(L, (*get_user_class<L_Field>(L, -1))->m_c == m_c);
+	return 1;
+}
+int L_Field::__tostring(lua_State * L) {
+	char buf[100];
+	snprintf(buf, sizeof(buf), "Field(%i,%i)", m_c.x, m_c.y);
+	lua_pushstring(L, buf);
 	return 1;
 }
 
@@ -2494,6 +2618,11 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<L_Field>(L, "map");
 	register_class<L_PlayerSlot>(L, "map");
 	register_class<L_MapObject>(L, "map");
+
+
+	register_class<L_Bob>(L, "map", true);
+	add_parent<L_Bob, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_BaseImmovable>(L, "map", true);
 	add_parent<L_BaseImmovable, L_MapObject>(L);

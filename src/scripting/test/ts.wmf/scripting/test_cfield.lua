@@ -33,6 +33,10 @@ function field_tests:test_direct_change_impossible()
    assert_error("c.x should be read only", function() c.x = 12 end) 
    assert_error("c.y should be read only", function() c.y = 12 end) 
 end
+function field_tests:test_hash()
+   assert_equal("25_40", map:get_field(25,40).__hash)
+end
+
 function field_tests:test_r_neighbour()
    c = map:get_field(25,40)
    assert_equal(map:get_field(26,40), c.rn)
