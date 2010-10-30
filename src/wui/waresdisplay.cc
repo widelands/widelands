@@ -52,10 +52,6 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	                            : m_tribe.get_nrwares(), false),
 	m_selectable(selectable)				    
 {
-}
-
-void AbstractWaresDisplay::update_desired_size()
-{
 	// Find out geometry from icons_order 
 	unsigned int columns = icons_order().size();	
 	unsigned int rows = 0;
@@ -290,6 +286,4 @@ void WaresDisplay::add_warelist
 {
 	//  If you register something twice, it is counted twice. Not my problem.
 	m_warelists.push_back(&wares);
-
-	update_desired_size();
 }

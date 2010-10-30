@@ -79,7 +79,6 @@ struct AbstractWaresDisplay : public UI::Panel {
 
 protected:
 	virtual void layout();
-	virtual void update_desired_size();
 
 	virtual std::string info_for_ware(Widelands::Ware_Index const) = 0;
 
