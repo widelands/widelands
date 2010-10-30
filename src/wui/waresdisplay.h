@@ -21,6 +21,7 @@
 #define WARESDISPLAY_H
 
 #include "logic/warelist.h"
+#include "logic/tribe.h"
 
 #include "ui_basic/textarea.h"
 
@@ -39,12 +40,6 @@ class WaresDisplay
 Panel that displays the contents of a WareList.
 */
 struct WaresDisplay : public UI::Panel {
-	enum {
-		Width = 5 * 24 + 4 * 4, //  (5 wares icons) + space in between
-
-		WaresPerRow = 5,
-	};
-
 	enum wdType {
 		WORKER,
 		WARE
@@ -68,13 +63,14 @@ protected:
 	virtual void layout();
 	virtual void update_desired_size();
 
+	Widelands::Tribe_Descr::WaresOrder const & icons_order() const;
+	Widelands::Tribe_Descr::WaresOrderCoords const & icons_order_coords() const;
+	virtual Point ware_position(Widelands::Ware_Index const) const;
 	virtual void draw(RenderTarget &);
 	virtual void draw_ware
 		(RenderTarget &,
-		 Point,
 		 Widelands::Ware_Index,
-		 uint32_t stock,
-		 bool     is_worker);
+		 uint32_t stock);
 
 private:
 	typedef std::vector<Widelands::WareList const *> vector_type;
