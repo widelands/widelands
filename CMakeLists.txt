@@ -101,6 +101,21 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
+# Unit tests are built per default in Debug and not build in Release
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  option (WL_UNIT_TESTS "build and run unit tests (requires boost_unit_test_framework)" ON)
+else (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  option (WL_UNIT_TESTS "build and run unit tests (requires boost_unit_test_framework)" OFF)
+endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
+
+if (WL_UNIT_TESTS)
+  message(STATUS "Enabled unit tests")
+  include(CTest)
+  enable_testing()
+else (WL_UNIT_TESTS)
+  message(STATUS "Disabled unit tests")
+endif (WL_UNIT_TESTS)
+
 set (BUILD_SHARED_LIBS OFF)
 # we only include Boost Headers to the main executable, no libraries
 # unit_test_framework is for testing only
@@ -292,9 +307,6 @@ install (
   COMPONENT CoreVersionFile
 )
 
-include(CTest)
-enable_testing()
-
 include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
 include(CheckIncludeFile)
@@ -395,12 +407,6 @@ install(
 )
 
 find_package (PythonInterp REQUIRED)
-
-if (WIN32)
-  set (WL_CREATE_SYMLINK_COMMAND "copy_directory")
-else (WIN32)
-  set (WL_CREATE_SYMLINK_COMMAND "create_symlink")
-endif (WIN32)
 
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES locale)
 
