@@ -108,22 +108,31 @@ else (CMAKE_BUILD_TYPE STREQUAL "Debug")
   option (WL_UNIT_TESTS "build and run unit tests (requires boost_unit_test_framework)" OFF)
 endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
+# we only include Boost Headers to the main executable, no libraries
+# unit_test_framework is for testing only
 if (WL_UNIT_TESTS)
   message(STATUS "Enabled unit tests")
+
+  set (BUILD_SHARED_LIBS OFF)
+  set (Boost_FIND_COMPONENTS unit_test_framework)
+  set (Boost_USE_STATIC_LIBS   ON)
+  set (Boost_USE_MULTITHREADED ON)
+  set (Boost_DETAILED_FAILURE_MSG ON)
+  find_package(Boost 1.35.0 COMPONENTS unit_test_framework REQUIRED)
+
+  if (NOT DEFINED MSVC)
+    string( REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+    if (NOT BOOST_STATIC_UNIT_TEST_LIB)
+      add_definitions(-DBOOST_TEST_DYN_LINK)
+    endif (NOT BOOST_STATIC_UNIT_TEST_LIB)
+  endif(NOT DEFINED MSVC)
+
   include(CTest)
   enable_testing()
 else (WL_UNIT_TESTS)
   message(STATUS "Disabled unit tests")
+  find_package(Boost 1.35.0 REQUIRED)
 endif (WL_UNIT_TESTS)
-
-set (BUILD_SHARED_LIBS OFF)
-# we only include Boost Headers to the main executable, no libraries
-# unit_test_framework is for testing only
-set (Boost_FIND_COMPONENTS unit_test_framework)
-set (Boost_USE_STATIC_LIBS   ON)
-set (Boost_USE_MULTITHREADED ON)
-set (Boost_DETAILED_FAILURE_MSG ON)
-find_package(Boost 1.35.0 COMPONENTS unit_test_framework REQUIRED)
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
