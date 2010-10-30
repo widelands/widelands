@@ -80,7 +80,7 @@ end
 --       use("aux", "table") -- for reverse() 
 --
 --       -- Move there in one second
---       pts = scroll_smoothly_to(wl.map.fields(23, 42))
+--       pts = scroll_smoothly_to(wl.Game().map:get_field(23, 42))
 --       -- Move back in one second
 --       timed_scroll(array_reverse(pts))
 --
@@ -147,21 +147,22 @@ end
 function scroll_smoothly_to(f, g_T)
    local mv = wl.ui.MapView()
    local x, y
+   local map = wl.Game().map
    if math.abs(f.viewpoint_x - mv.viewpoint_x) <
-      math.abs(f.viewpoint_x + 64 * wl.map.get_width() - mv.viewpoint_x)
+      math.abs(f.viewpoint_x + 64 * map.width - mv.viewpoint_x)
    then
       x = f.viewpoint_x
    else
-      x = f.viewpoint_x + wl.map.get_width() * 64
+      x = f.viewpoint_x + map.width * 64
    end
    
    
    if math.abs(f.viewpoint_y - mv.viewpoint_y) <
-      math.abs(f.viewpoint_y + 32 * wl.map.get_height() - mv.viewpoint_y)
+      math.abs(f.viewpoint_y + 32 * map.height - mv.viewpoint_y)
    then
       y = f.viewpoint_y
    else
-      y = f.viewpoint_y + wl.map.get_height() * 32
+      y = f.viewpoint_y + map.height * 32
    end
 
    return scroll_smoothly_to_pos(x - mv.width / 2, y - mv.height / 2, g_T)
@@ -211,8 +212,8 @@ function mouse_smoothly_to_pos(x, y, g_T)
       x = wl.ui.MapView().mouse_position_x,
       y = wl.ui.MapView().mouse_position_y
    }
+   
    local dest = { x = x, y = y }
-
    pts = _calc_move(start, dest, g_T)
    
    timed_mouse(pts)
@@ -243,10 +244,16 @@ function mouse_smoothly_to(f, g_T)
    -- these functions are not used very often, I decided to enter them here
    -- directly instead of wrapping this up properly. I hope this will not
    -- lead to problems in the future.
-   if dx < 0 then dx = dx + wl.map.get_width() * 64 end
-   if dy < 0 then dy = dy + wl.map.get_height() * 32 end
+   local map = wl.Game().map
+   if dx < 0 then dx = dx + map.width * 64 end
+   if dy < 0 then dy = dy + map.height * 32 end
    
-   return mouse_smoothly_to_pos(dx, dy, g_T)
+   if dx > mv.width or dy > mv.height then
+      scroll_smoothly_to(f, g_T)
+      return mouse_smoothly_to(f, g_T)
+   else
+      return mouse_smoothly_to_pos(dx, dy, g_T)
+   end
 end
 
 -- RST

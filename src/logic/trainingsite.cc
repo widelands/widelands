@@ -175,35 +175,6 @@ std::string TrainingSite::get_statistics_string()
 		return _("Not Working");
 }
 
-
-void TrainingSite::prefill
-	(Game                 &       game,
-	 uint32_t       const *       ware_counts,
-	 uint32_t       const *       worker_counts,
-	 Soldier_Counts const * const soldier_counts)
-{
-	ProductionSite::prefill(game, ware_counts, worker_counts, soldier_counts);
-	if (soldier_counts and soldier_counts->size()) {
-		Soldier_Descr const & soldier_descr =
-			ref_cast<Soldier_Descr const, Worker_Descr const>
-				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
-		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
-			Soldier_Strength const ss = i.current->first;
-			for (uint32_t j = i.current->second; j; --j) {
-				Soldier & soldier =
-					ref_cast<Soldier, Worker>
-						(soldier_descr.create(game, owner(), 0, get_position()));
-				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
-				Building::add_worker(soldier);
-				m_soldiers.push_back(&soldier);
-				log
-					("TrainingSite::prefill: added soldier (economy = %p)\n",
-					 soldier.get_economy());
-			}
-		}
-	}
-}
-
 /**
  * Setup the building and request soldiers
  */
@@ -211,11 +182,14 @@ void TrainingSite::init(Editor_Game_Base & egbase)
 {
 	ProductionSite::init(egbase);
 
-	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
+	upcast(Game, game, &egbase);
+
 	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
 		(*i.current)->set_location_initially(*this);
 		assert(not (*i.current)->get_state()); //  Should be newly created.
-		(*i.current)->start_task_idle(game, 0, -1);
+
+		if (game)
+			(*i.current)->start_task_idle(*game, 0, -1);
 	}
 	update_soldier_request();
 }
@@ -259,18 +233,24 @@ void TrainingSite::add_worker(Worker & w)
 			(std::find(m_soldiers.begin(), m_soldiers.end(), soldier) ==
 			 m_soldiers.end())
 			m_soldiers.push_back(soldier);
-		schedule_act(ref_cast<Game, Editor_Game_Base>(owner().egbase()), 100);
+
+		if (upcast(Game, game, &owner().egbase()))
+			schedule_act(*game, 100);
 	}
 }
 
 void TrainingSite::remove_worker(Worker & w)
 {
+	upcast(Game, game, &owner().egbase());
+
 	if (upcast(Soldier, soldier, &w)) {
 		std::vector<Soldier *>::iterator const it =
 			std::find(m_soldiers.begin(), m_soldiers.end(), soldier);
 		if (it != m_soldiers.end()) {
 			m_soldiers.erase(it);
-			schedule_act(ref_cast<Game, Editor_Game_Base>(owner().egbase()), 100);
+
+			if (game)
+				schedule_act(*game, 100);
 		}
 	}
 
@@ -364,8 +344,8 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int TrainingSite::incorporateSoldier(Game & game, Soldier & s) {
-	if (s.get_location(game) != this) {
+int TrainingSite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
+	if (s.get_location(egbase) != this) {
 		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
 			return -1;
 
@@ -373,7 +353,8 @@ int TrainingSite::incorporateSoldier(Game & game, Soldier & s) {
 	}
 
 	// Bind the worker into this house, hide him on the map
-	s.start_task_idle(game, 0, -1);
+	if (upcast(Game, game, &egbase))
+		s.start_task_idle(*game, 0, -1);
 
 	// Make sure the request count is reduced or the request is deleted.
 	update_soldier_request();

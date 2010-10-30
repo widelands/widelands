@@ -29,7 +29,7 @@
 
 #include "luna.h"
 
-void luaopen_wlui(lua_State *);
+namespace LuaUi {
 
 /*
  * Base class for all classes in wl.ui
@@ -192,15 +192,24 @@ public:
 	int set_census(lua_State * L);
 	int get_statistics(lua_State * L);
 	int set_statistics(lua_State * L);
+	int get_is_building_road(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
+	int close(lua_State * L);
 	int click(lua_State * L);
+	int abort_road_building(lua_State * L);
+	int start_road_building(lua_State * L);
 
 	/*
 	 * C Methods
 	 */
    Interactive_Base * get() { return static_cast<Interactive_Base *>(m_panel); }
 };
+
+void luaopen_wlui(lua_State *);
+
+};
+
 #endif

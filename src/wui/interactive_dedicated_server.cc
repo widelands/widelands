@@ -46,7 +46,7 @@ Interactive_DServer::Interactive_DServer
 #define INIT_BTN(picture, name, callback, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
- &Interactive_DServer::callback, *this,                                       \
+ boost::bind(&Interactive_DServer::callback, boost::ref(*this)),              \
  tooltip                                                                      \
 
 	m_toggle_chat

@@ -1,0 +1,9 @@
+[global]
+packet_version="1"
+map_w="176"
+map_h="112"
+nr_players="4"
+world="greenland"
+name=_"Swamp Monks"
+author="Nasenbaer"
+descr=_"It is said, that the old war monks, living in the even older swamps are the key to the control of the whole island."

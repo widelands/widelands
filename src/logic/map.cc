@@ -52,6 +52,7 @@
 
 namespace Widelands {
 
+
 /*
 ==============================================================================
 
@@ -68,7 +69,7 @@ Map IMPLEMENTATION
 
 Map::Map() :
 m_nrplayers      (0),
-m_scenario       (false),
+m_scenario_types (NO_SCENARIO),
 m_width          (0),
 m_height         (0),
 m_world          (0),
@@ -316,6 +317,7 @@ void Map::cleanup() {
 	m_scenario_tribes.clear();
 	m_scenario_names.clear();
 	m_scenario_ais.clear();
+	m_player_partners.clear();
 
 	if (m_overlay_manager)
 		m_overlay_manager->reset();
@@ -360,6 +362,7 @@ void Map::create_empty_map
 	set_scenario_player_tribe(1, tribes[0]);
 	set_scenario_player_name(1, _("Player 1"));
 	set_scenario_player_ai(1, "");
+	set_player_partner(1, 0);
 
 	{
 		Field::Terrains default_terrains;
@@ -566,6 +569,14 @@ const std::string & Map::get_scenario_player_ai(const Player_Number p) const
 	return m_scenario_ais[p - 1];
 }
 
+const Player_Number Map::get_player_partner(const Player_Number p) const
+{
+	assert(m_player_partners.size() == get_nrplayers());
+	assert(p);
+	assert(p <= get_nrplayers());
+	return m_player_partners[p - 1];
+}
+
 void Map::set_scenario_player_tribe
 	(Player_Number const p, std::string const & tribename)
 {
@@ -591,6 +602,15 @@ void Map::set_scenario_player_ai
 	assert(p <= get_nrplayers());
 	m_scenario_ais.resize(get_nrplayers());
 	m_scenario_ais[p - 1] = ainame;
+}
+
+void Map::set_player_partner(Player_Number p, Player_Number partner)
+{
+	assert(p);
+	assert(p <= get_nrplayers());
+	assert(partner <= get_nrplayers());
+	m_player_partners.resize(get_nrplayers());
+	m_player_partners[p - 1] = partner;
 }
 
 /*

@@ -20,19 +20,21 @@
 #ifndef EDITORINTERACTIVE_H
 #define EDITORINTERACTIVE_H
 
+#include "ui_basic/button.h"
+#include "ui_basic/unique_window.h"
+#include "wui/interactive_base.h"
+
 #include "tools/editor_increase_height_tool.h"
 #include "tools/editor_increase_resources_tool.h"
 #include "tools/editor_info_tool.h"
+#include "tools/editor_make_infrastructure_tool.h"
 #include "tools/editor_noise_height_tool.h"
-#include "tools/editor_place_immovable_tool.h"
 #include "tools/editor_place_bob_tool.h"
+#include "tools/editor_place_immovable_tool.h"
 #include "tools/editor_set_origin_tool.h"
-#include "tools/editor_set_terrain_tool.h"
 #include "tools/editor_set_starting_pos_tool.h"
-#include "wui/interactive_base.h"
+#include "tools/editor_set_terrain_tool.h"
 
-#include "ui_basic/button.h"
-#include "ui_basic/unique_window.h"
 
 class Editor;
 struct Editor_Tool;
@@ -96,6 +98,7 @@ public:
 		Editor_Set_Resources_Tool       set_resources;
 		Editor_Increase_Resources_Tool  increase_resources;
 		Editor_Set_Origin_Tool          set_origin;
+		Editor_Make_Infrastructure_Tool make_infrastructure;
 	} tools;
 
 	void select_tool(Editor_Tool &, Editor_Tool::Tool_Index);
@@ -144,12 +147,12 @@ private:
 	UI::UniqueWindow::Registry m_bobmenu;
 	UI::UniqueWindow::Registry m_resourcesmenu;
 
-	UI::Callback_Button<Editor_Interactive> m_toggle_main_menu;
-	UI::Callback_Button<Editor_Interactive> m_toggle_tool_menu;
-	UI::Callback_Button<Editor_Interactive> m_toggle_toolsize_menu;
-	UI::Callback_Button<Editor_Interactive> m_toggle_minimap;
-	UI::Callback_Button<Editor_Interactive> m_toggle_buildhelp;
-	UI::Callback_Button<Editor_Interactive> m_toggle_player_menu;
+	UI::Callback_Button m_toggle_main_menu;
+	UI::Callback_Button m_toggle_tool_menu;
+	UI::Callback_Button m_toggle_toolsize_menu;
+	UI::Callback_Button m_toggle_minimap;
+	UI::Callback_Button m_toggle_buildhelp;
+	UI::Callback_Button m_toggle_player_menu;
 };
 
 #endif

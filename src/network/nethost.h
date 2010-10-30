@@ -52,12 +52,14 @@ struct NetHost : public GameController, private SyncCallback {
 	uint32_t realSpeed();
 	uint32_t desiredSpeed();
 	void setDesiredSpeed(uint32_t speed);
+	bool isPaused();
+	void setPaused(const bool paused);
 	// End GameController interface
 
 	// Pregame-related stuff
 	GameSettings const & settings();
 	bool canLaunch();
-	void setScenario(bool); //  no scenario for multiplayer
+	void setScenario(bool);
 	void setMap
 		(std::string const & mapname,
 		 std::string const & mapfilename,
@@ -67,16 +69,17 @@ struct NetHost : public GameController, private SyncCallback {
 		(uint8_t number,
 		 PlayerSettings::State state,
 		 bool host = false);
-	void setPlayerTribe (uint8_t number, std::string const & tribe);
-	void setPlayerInit  (uint8_t number, uint8_t index);
-	void setPlayerAI    (uint8_t number, std::string const & name);
-	void setPlayerName  (uint8_t number, std::string const & name);
-	void setPlayer      (uint8_t number, PlayerSettings);
-	void setPlayerNumber(uint8_t number);
-	void setPlayerReady (uint8_t number, bool ready);
-	bool getPlayerReady (uint8_t number);
-	void setPlayerTeam  (uint8_t number, Widelands::TeamNumber team);
-	void setWinCondition(std::string);
+	void setPlayerTribe  (uint8_t number, std::string const & tribe);
+	void setPlayerInit   (uint8_t number, uint8_t index);
+	void setPlayerAI     (uint8_t number, std::string const & name);
+	void setPlayerName   (uint8_t number, std::string const & name);
+	void setPlayer       (uint8_t number, PlayerSettings);
+	void setPlayerNumber (uint8_t number);
+	void setPlayerReady  (uint8_t number, bool ready);
+	bool getPlayerReady  (uint8_t number);
+	void setPlayerTeam   (uint8_t number, Widelands::TeamNumber team);
+	void setPlayerPartner(uint8_t number, uint8_t partner);
+	void setWinCondition (std::string);
 
 	// just visible stuff for the select mapmenu
 	void setMultiplayerGameSettings();

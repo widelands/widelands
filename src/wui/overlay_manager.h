@@ -20,6 +20,8 @@
 #ifndef OVERLAY_MANAGER_H
 #define OVERLAY_MANAGER_H
 
+#include "boost/bind.hpp"
+#include "boost/function.hpp"
 #include "logic/field.h"
 #include "logic/widelands_geometry.h"
 #include "graphic/graphic.h"
@@ -132,9 +134,18 @@ struct Overlay_Manager {
 	uint8_t get_overlays(Widelands::FCoords c, Overlay_Info *) const;
 	uint8_t get_overlays(Widelands::TCoords<>, Overlay_Info *) const;
 
+	boost::function<void(bool)> onBuildHelpToggle;
 	bool buildhelp(void) {return m_showbuildhelp;}
-	void show_buildhelp(bool const t) {m_showbuildhelp = t;}
-	void toggle_buildhelp() {m_showbuildhelp = !m_showbuildhelp;}
+	void show_buildhelp(bool const t) {
+		if (m_showbuildhelp != t) {
+			m_showbuildhelp = t;
+			if (onBuildHelpToggle) onBuildHelpToggle(m_showbuildhelp);
+		}
+	}
+	void toggle_buildhelp() {
+		m_showbuildhelp = !m_showbuildhelp;
+		if (onBuildHelpToggle) onBuildHelpToggle(m_showbuildhelp);
+	}
 
 	void recalc_field_overlays(Widelands::FCoords);
 

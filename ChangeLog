@@ -1,6 +1,22 @@
 ### Build 16 (until now)
-- Improved and added a lot new animations for workers!
+- Barbarian lumberjacks now need a felling_axe which is produce in the metal
+  workshop. The axe is now only produced in the war mill and the axe factory.
+  This delays barbarian soldier production in the early game, giving the other
+  tribes more time to equalize their military production. (bug #667286)
+- Give Empire +1 basket so that two vineyards can be build right away to fully
+  saturate the first marble mine.
+- Buttons that represent a toggable state are now really toggable buttons in
+  the user interface.
+- Changed the way compressed files are generated (maps, savegames) and read.
+  Now it is possible to rename maps and savegames but it is not possible
+  to load maps from version after this change with versions before this change
+- Added a dotted frame border to the mini map.
+- Improved and added many new animations for workers!
 - Implemented teamview for allied players
+- Implemented shared kingdom mode, where two or more players control the same
+  player.
+- Added two new maps.
+- Added possibility to create and play multiplayer scenarios.
 - Do not show building statistic informations of opposing players anymore
 - Gave foresters more intelligence - now they do not remove young trees to
   replant another anymore and plant the trees that suit the terrain the best.

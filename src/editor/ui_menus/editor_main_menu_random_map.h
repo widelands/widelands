@@ -44,7 +44,7 @@ struct Textarea;
 struct Main_Menu_New_Random_Map : public UI::Window {
 	Main_Menu_New_Random_Map(Editor_Interactive &);
 
-	enum {
+	typedef enum {
 		MAP_W_PLUS,
 		MAP_W_MINUS,
 		MAP_H_PLUS,
@@ -60,15 +60,15 @@ struct Main_Menu_New_Random_Map : public UI::Window {
 		SWITCH_ISLAND_MODE,
 		SWITCH_RES,
 		SWITCH_WORLD
-	};
+	} ButtonID;
 
 private:
 	UI::Textarea * m_width, * m_height, * m_land;
 	UI::Textarea * m_water, * m_mountains, * m_wasteland, * m_players;
-	UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t> * m_res;
-	UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t> * m_world;
+	UI::Callback_Button * m_res;
+	UI::Callback_Button * m_world;
 	UI::Checkbox * m_island_mode;
-	UI::Callback_Button<Main_Menu_New_Random_Map>* m_goButton;
+	UI::Callback_Button* m_goButton;
 	int32_t m_w, m_h, m_landval, m_waterval, m_wastelandval;
 	uint8_t m_pn;
 	uint32_t m_mapNumber;
@@ -80,7 +80,7 @@ private:
 	UI::EditBox * m_nrEditbox;
 	UI::EditBox * m_idEditbox;
 
-	void button_clicked(int32_t);
+	void button_clicked(ButtonID);
 	void clicked_create_map();
 	void id_edit_box_changed();
 	void nr_edit_box_changed();

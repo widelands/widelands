@@ -71,7 +71,7 @@ Interactive_Base::Interactive_Base
 	(Editor_Game_Base & the_egbase, Section & global_s)
 	:
 	Map_View(0, 0, 0, get_xres(), get_yres(), *this),
-	m_show_workarea_preview(global_s.get_bool("workareapreview", false)),
+	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
 	m
 		(new InteractiveBaseInternals
 		 (new QuickNavigation(the_egbase, get_w(), get_h()))),
@@ -493,7 +493,6 @@ void Interactive_Base::toggle_minimap() {
 	}
 }
 
-
 /**
  * Hide the minimap if it is currently shown; otherwise, do nothing.
  */
@@ -502,6 +501,16 @@ void Interactive_Base::hide_minimap()
 	delete m->minimap.window;
 }
 
+/**
+===========
+Interactive_Base::minimap_registry()
+
+Exposes the Registry object of the minimap to derived classes
+===========
+*/
+UI::UniqueWindow::Registry &Interactive_Base::minimap_registry() {
+	return m->minimap;
+}
 
 /*
 ===============
@@ -561,12 +570,6 @@ void Interactive_Base::start_build_road
 
 	m_road_build_player = player;
 
-	//  If we are a game, we obviously build for the Interactive Player.
-	assert
-		(player
-		 ==
-		 dynamic_cast<Interactive_Player const &>(*this).player_number());
-
 	roadb_add_overlay();
 	need_complete_redraw();
 }
@@ -604,9 +607,16 @@ void Interactive_Base::finish_build_road()
 	need_complete_redraw();
 
 	if (m_buildroad->get_nsteps()) {
+		upcast(Game, game, &egbase());
+
 		// Build the path as requested
-		ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_road
-			(m_road_build_player, *new Widelands::Path(*m_buildroad));
+		if (game)
+			game->send_player_build_road
+				(m_road_build_player, *new Widelands::Path(*m_buildroad));
+		else
+			egbase().get_player(m_road_build_player)->build_road
+				(*new Widelands::Path(*m_buildroad));
+
 		if
 			(allow_user_input() and
 			 (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)))
@@ -625,15 +635,24 @@ void Interactive_Base::finish_build_road()
 					(std::vector<Coords>::const_iterator it = first;
 					 it <= last;
 					 ++it)
-					ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_flag
-						(m_road_build_player, map.get_fcoords(*it));
+						if (game)
+							game->send_player_build_flag
+								(m_road_build_player, map.get_fcoords(*it));
+						else
+							egbase().get_player(m_road_build_player)->build_flag
+								(map.get_fcoords(*it));
+
 			} else {
 				for //  end to start
 					(std::vector<Coords>::const_iterator it = last;
 					 first <= it;
 					 --it)
-					ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_flag
-						(m_road_build_player, map.get_fcoords(*it));
+						if (game)
+							game->send_player_build_flag
+								(m_road_build_player, map.get_fcoords(*it));
+						else
+							egbase().get_player(m_road_build_player)->build_flag
+								(map.get_fcoords(*it));
 			}
 		}
 	}
@@ -848,6 +867,13 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 			if (upcast(Game, game, &m_egbase))
 				if (GameController * const ctrl = game->gameController())
 					ctrl->setDesiredSpeed(ctrl->desiredSpeed() + 1000);
+		return true;
+	
+	case SDLK_PAUSE:
+		if (down)
+			if (upcast(Game, game, &m_egbase))
+				if (GameController * const ctrl = game->gameController())
+					ctrl->togglePaused();
 		return true;
 
 	case SDLK_PAGEDOWN:

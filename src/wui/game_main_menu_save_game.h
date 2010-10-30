@@ -39,6 +39,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 	Game_Main_Menu_Save_Game
 		(Interactive_GameBase &, UI::UniqueWindow::Registry & registry);
 
+	void fill_list();
 private:
 	Interactive_GameBase & igbase();
 	void die() {UI::UniqueWindow::die();}
@@ -46,7 +47,6 @@ private:
 	void double_clicked(uint32_t);
 	void edit_box_changed();
 
-	void fill_list();
 	bool save_game(std::string);
 
 	UI::Listselect<std::string> m_ls;
@@ -95,6 +95,19 @@ private:
 			ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent()).die();
 		}
 	} m_button_cancel;
+	struct Delete : public UI::Button {
+		Delete
+			(Game_Main_Menu_Save_Game & parent,
+			 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h)
+			:
+			UI::Button
+				(&parent, "delete",
+				 x, y, w, h,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 _("Delete"))
+		{}
+		void clicked();
+	} m_button_delete;
 	std::string m_curdir;
 	std::string m_parentdir;
 	std::string m_filename;

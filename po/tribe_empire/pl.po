@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-06 20:57+0000\n"
-"Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-09-30 19:30+0000\n"
+"Last-Translator: Wojtek <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-07 03:34+0000\n"
+"X-Launchpad-Export-Date: 2010-10-01 08:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -141,7 +141,7 @@ msgid "Castle"
 msgstr "Zamek"
 
 #: ../../tribes/empire/conf:204
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Wioska z zamekiem (duża)"
 
@@ -364,11 +364,11 @@ msgstr "Wartownia"
 msgid "Hammer"
 msgstr "Młotek"
 
-#: ../../tribes/empire/vineyard/conf:19
+#: ../../tribes/empire/vineyard/conf:21
 msgid "Harvest vine"
 msgstr "Harvest vine (Zbieraj winorośla)"
 
-#: ../../tribes/empire/farm/conf:17
+#: ../../tribes/empire/farm/conf:20
 msgid "Harvest wheat"
 msgstr "Harvest wheat (Zbieraj pszenicę)"
 
@@ -377,7 +377,7 @@ msgid "Headquarters"
 msgstr "Kwatera główna"
 
 #: ../../tribes/empire/conf:203
-#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Wioska z kwaterą główną (średnia)"
 
@@ -547,6 +547,10 @@ msgstr ""
 msgid "Miner"
 msgstr "Górnik"
 
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:117
+msgid "Not enough space"
+msgstr "Brak wystarczającej ilości miejsca"
+
 #: ../../tribes/empire/conf:144
 msgid "Outpost"
 msgstr "Placówka"
@@ -567,11 +571,11 @@ msgstr "Świniopas"
 msgid "Piggery"
 msgstr "Chlew"
 
-#: ../../tribes/empire/vineyard/conf:17
+#: ../../tribes/empire/vineyard/conf:19
 msgid "Plant vine"
 msgstr "Plant vine (Sadź winorośla)"
 
-#: ../../tribes/empire/farm/conf:15
+#: ../../tribes/empire/farm/conf:18
 msgid "Plant wheat"
 msgstr "Plant wheat (Śiej pszenicę)"
 
@@ -816,6 +820,16 @@ msgstr "Wytapia żelazo."
 #: ../../tribes/empire/conf:100
 msgid "Soldier"
 msgstr "Żołnierz"
+
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:118
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Brak miejsca na jeden z budynków wymaganych na początku gry. \n"
+"Jesteś na straconej pozycji; rozważ restart tej mapy ze sprawiedliwymi\n"
+"warunkami początkowymi."
 
 #: ../../tribes/empire/conf:121
 msgid "Stonemason"
@@ -1269,9 +1283,9 @@ msgstr ""
 #: ../../tribes/empire/deep_marblemine/conf:23
 #: ../../tribes/empire/deep_oremine/conf:22
 #: ../../tribes/empire/donkeyfarm/conf:22
-#: ../../tribes/empire/farm/conf:19
+#: ../../tribes/empire/farm/conf:22
 #: ../../tribes/empire/fishers_house/conf:17
-#: ../../tribes/empire/foresters_house/conf:15
+#: ../../tribes/empire/foresters_house/conf:16
 #: ../../tribes/empire/goldmine/conf:22
 #: ../../tribes/empire/hunters_house/conf:16
 #: ../../tribes/empire/inn/conf:20
@@ -1288,7 +1302,7 @@ msgstr ""
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22
 #: ../../tribes/empire/toolsmithy/conf:45
-#: ../../tribes/empire/vineyard/conf:21
+#: ../../tribes/empire/vineyard/conf:23
 #: ../../tribes/empire/weaponsmithy/conf:34
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16

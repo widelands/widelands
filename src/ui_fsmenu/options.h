@@ -35,8 +35,6 @@
 struct Fullscreen_Menu_Options;
 struct Section;
 
-#define NUM_RESOLUTIONS 6
-
 struct Options_Ctrl {
 	struct Options_Struct {
 		int32_t xres;
@@ -57,6 +55,7 @@ struct Options_Ctrl {
 		uint32_t remove_replays;
 		bool remove_syncstreams;
 		bool opengl;
+		bool transparent_chat;
 
 		// advanced options
 		bool message_sound;
@@ -96,8 +95,7 @@ private:
 	uint32_t                          m_buth;
 	uint32_t                          m_fs;
 	std::string                       m_fn;
-	UI::Callback_Button<Fullscreen_Menu_Options> m_advanced_options;
-	UI::Callback_IDButton<Fullscreen_Menu_Options, int32_t> m_cancel, m_apply;
+	UI::Callback_Button           m_advanced_options, m_cancel, m_apply;
 	UI::SpinBox                       m_sb_maxfps, m_sb_autosave;
 	UI::SpinBox                       m_sb_remove_replays;
 	UI::Textarea                      m_title;
@@ -158,8 +156,7 @@ private:
 	uint32_t                    m_fs;
 	std::string                 m_fn;
 
-	UI::Callback_IDButton<Fullscreen_Menu_Advanced_Options, int32_t> m_cancel;
-	UI::Callback_IDButton<Fullscreen_Menu_Advanced_Options, int32_t> m_apply;
+	UI::Callback_Button     m_cancel, m_apply;
 	UI::SpinBox                 m_sb_speed, m_sb_dis_panel, m_sb_dis_border;
 	UI::Textarea                m_title;
 	UI::Listselect<std::string> m_ui_font_list;
@@ -175,6 +172,8 @@ private:
 	UI::Textarea                m_label_remove_syncstreams;
 	UI::Checkbox                m_opengl;
 	UI::Textarea                m_label_opengl;
+	UI::Checkbox                m_transparent_chat;
+	UI::Textarea                m_label_transparent_chat;
 
 	Options_Ctrl::Options_Struct os;
 };

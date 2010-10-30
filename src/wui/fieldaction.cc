@@ -209,7 +209,7 @@ private:
 		 const char * picname,
 		 UI::Panel * panel,
 		 const std::string & tooltip_text = std::string());
-	void add_button
+	UI::Button & add_button
 		(UI::Box *,
 		 char const * name,
 		 char const * picname,
@@ -327,29 +327,15 @@ This mainly deals with mouse placement
 void FieldActionWindow::init()
 {
 	center_to_parent(); // override UI::UniqueWindow position
-
-	// Move the window away from the current mouse position, i.e.
-	// where the field is, to allow better view
-	const Point mouse = get_mouse_position();
-	if
-		(0 <= mouse.x and mouse.x < get_w()
-		 and
-		 0 <= mouse.y and mouse.y < get_h())
-	{
-		set_pos
-			(Point(get_x(), get_y())
-			 +
-			 Point
-			 	(0, (mouse.y < get_h() / 2 ? 1 : -1)
-			 	 *
-			 	 get_h()));
-		move_inside_parent();
-	}
+	move_out_of_the_way();
 
 	// Now force the mouse onto the first button
-	// TODO: should be on first tab button if we're building
 	set_mouse_pos
 		(Point(17 + BG_CELL_WIDTH * m_best_tab, m_fastclick ? 51 : 17));
+
+	// Will only do something if we explicitly set another fast click panel
+	// than the first button
+	warp_mouse_to_fastclick_panel();
 }
 
 
@@ -364,11 +350,11 @@ void FieldActionWindow::add_buttons_auto()
 	UI::Box & watchbox = *new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	// Add road-building actions
-	Interactive_GameBase const & igbase =
-		ref_cast<Interactive_GameBase, Interactive_Base>(ibase());
-	Widelands::Player_Number const owner = m_node.field->get_owned_by();
-	if (igbase.can_see(owner)) {
+	upcast(Interactive_GameBase, igbase, &ibase());
 
+	Widelands::Player_Number const owner = m_node.field->get_owned_by();
+
+	if (not igbase or igbase->can_see(owner)) {
 		Widelands::BaseImmovable * const imm = m_map->get_immovable(m_node);
 
 		// The box with road-building buttons
@@ -376,7 +362,7 @@ void FieldActionWindow::add_buttons_auto()
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
-			bool const can_act = igbase.can_act(owner);
+			bool const can_act = igbase ? igbase->can_act(owner) : true;
 			if (can_act) {
 				add_button
 					(buildbox, "build_road",
@@ -506,11 +492,11 @@ void FieldActionWindow::add_buttons_attack ()
 			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
 			a_box.add(m_attack_box, UI::Box::AlignTop);
 
-			add_button
+			set_fastclick_panel(&add_button
 				(&a_box, "attack",
 				 pic_attack,
 				 &FieldActionWindow::act_attack,
-				 _("Start attack"));
+				 _("Start attack")));
 		}
 	}
 
@@ -636,7 +622,7 @@ uint32_t FieldActionWindow::add_tab
 }
 
 
-void FieldActionWindow::add_button
+UI::Button & FieldActionWindow::add_button
 	(UI::Box           * const box,
 	 char        const * const name,
 	 char        const * const picname,
@@ -644,16 +630,18 @@ void FieldActionWindow::add_button
 	 std::string const & tooltip_text,
 	 bool                const repeating)
 {
-	UI::Callback_Button<FieldActionWindow> & button =
-		*new UI::Callback_Button<FieldActionWindow>
+	UI::Callback_Button & button =
+		*new UI::Callback_Button
 			(box, name,
 			 0, 0, 34, 34,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 			 g_gr->get_picture(PicMod_Game, picname),
-			 fn, *this, tooltip_text);
+			 boost::bind(fn, boost::ref(*this)), tooltip_text);
 	button.set_repeating(repeating);
 	box->add
 		(&button, UI::Box::AlignTop);
+
+	return button;
 }
 
 /*
@@ -721,13 +709,18 @@ Build a flag at this field
 */
 void FieldActionWindow::act_buildflag()
 {
-	ref_cast<Game, Editor_Game_Base>(ibase().egbase()).send_player_build_flag
-		(m_plr->player_number(), m_node);
+	upcast(Game, game, &ibase().egbase());
+	if (game)
+		game->send_player_build_flag(m_plr->player_number(), m_node);
+	else
+		m_plr->build_flag(m_node);
+
 	if (ibase().is_building_road())
 		ibase().finish_build_road();
-	else
+	else if (game)
 		ref_cast<Interactive_Player, Interactive_Base>(ibase())
 			.set_flag_to_connect(m_node);
+
 	okdialog();
 }
 

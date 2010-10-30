@@ -7,19 +7,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-06 22:33+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-08 10:07+0000\n"
+"Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-08 03:37+0000\n"
+"X-Launchpad-Export-Date: 2010-10-09 12:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../scripting/win_conditions/00_endless_game.lua:8
-msgid "An endless game without rules"
-msgstr "Бесконечная игра без правил"
+#: ../../scripting/win_conditions/04_wood_gnome.lua:85
+msgid "%i trees at the moment ."
+msgstr "%i деревьев на данный момент."
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:138
+msgid "%i trees."
+msgstr "%i деревьев."
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:137
+msgid "%s had "
+msgstr "У %s "
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:84
+msgid "%s has "
+msgstr "%s имеет "
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:133
+msgid "%s owns more than half of the maps area."
+msgstr "%s владеет более чем половиной площади карты."
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:13
+msgid ""
+"As wood gnome you like big forests, so your task is, to have more trees on\n"
+"your territory than any other player. The game will end after 4 hours of\n"
+"playing. The one with the most trees at that point will win the game."
+msgstr ""
+"Как лесной гном, Вы любите большие леса, так что Ваша задача, иметь на\n"
+"своей территории больше деревьев, чем у других игроков. Игра длится 4 часа.\n"
+"Выигрывает игрок имеющий больше деревьев к моменту окончания игры."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:10
 msgid "Autocrat"
@@ -27,97 +53,208 @@ msgstr "Тиран"
 
 #: ../../scripting/win_conditions/02_collectors.lua:11
 msgid "Collectors"
-msgstr "Коллекционеры"
+msgstr "Коллекционер"
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:39
+#: ../../scripting/win_conditions/01_defeat_all.lua:31
 msgid "Congratulations!"
 msgstr "Поздравляем!"
 
-#: ../../scripting/win_conditions/00_endless_game.lua:7
+#: ../../scripting/win_conditions/03_territorial_lord.lua:12
+msgid ""
+"Each player or team tries to obtain more than half of the maps' area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes."
+msgstr ""
+"Каждый игрок или команда пытаются захватить более половины всей площади "
+"карты. Победит игрок или команда, сумевшие удержать эти земли не менее 20 "
+"минут."
+
+#: ../../scripting/win_conditions/00_endless_game.lua:10
 msgid "Endless Game"
-msgstr "Бесконечная игра"
+msgstr "Свободная игра"
 
-#: ../../scripting/win_conditions/03_tribes_together.lua:85
-msgid "Game over"
-msgstr "Игра окончена"
+#: ../../scripting/win_conditions/03_territorial_lord.lua:139
+msgid "Keep it for %i more minutes to win the game."
+msgstr "Чтобы выиграть игру, удерживайте её ещё %i минут."
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:28
-msgid "Sorry, you have lost this game!"
-msgstr "Сожалеем, вы потерпели поражение в этой игре!"
+#: ../../scripting/win_conditions/04_wood_gnome.lua:81
+#: ../../scripting/win_conditions/04_wood_gnome.lua:134
+msgid "Player overview:"
+msgstr "Достижения игроков:"
 
-#: ../../scripting/win_conditions/02_collectors.lua:49
+#: ../../scripting/win_conditions/02_collectors.lua:147
+msgid "Points"
+msgstr "Очки"
+
+#: ../../scripting/win_conditions/02_collectors.lua:128
+#: ../../scripting/win_conditions/03_territorial_lord.lua:144
+#: ../../scripting/win_conditions/03_territorial_lord.lua:146
+#: ../../scripting/win_conditions/04_wood_gnome.lua:88
 msgid "Status"
-msgstr "Состояние"
+msgstr "Статус"
 
-#: ../../scripting/win_conditions/02_collectors.lua:40
+#: ../../scripting/win_conditions/02_collectors.lua:90
+msgid "Status for Player %i<br>"
+msgstr "Достижения Игрока %i<br>"
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:117
+#: ../../scripting/win_conditions/03_territorial_lord.lua:120
+#: ../../scripting/win_conditions/03_territorial_lord.lua:142
+#: ../../scripting/win_conditions/03_territorial_lord.lua:171
+msgid "Team %i"
+msgstr "Команда %i"
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:11
+msgid "Territorial Lord"
+msgstr "Владыка земель"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:79
 msgid "The game will end in %i minutes."
 msgstr "Игра закончится через %i минут."
 
-#: ../../scripting/win_conditions/02_collectors.lua:44
-msgid "The player %i has currently %i points"
-msgstr "Игрок %i в данный момент имеет %i очков"
-
-#: ../../scripting/win_conditions/03_tribes_together.lua:11
-msgid ""
-"The three tribes play together vs each other. Vision is granted to all the "
-"players playing together"
-msgstr ""
-"Три племени играют вместе друг против друга. Игроки, играющие вместе видят "
-"друг друга"
-
-#: ../../scripting/win_conditions/03_tribes_together.lua:79
-msgid "The tribe %s is no more."
-msgstr "Племени %s больше нет."
+#: ../../scripting/win_conditions/02_collectors.lua:118
+msgid "The game will end in %s."
+msgstr "Игра закончится через %s."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:11
-msgid "The tribe that can defeat all others wins!"
-msgstr "Племя, победившее все остальные племена побеждает!"
+msgid "The tribe or team that can defeat all others wins the game!"
+msgstr "Выигрывает команда или племя разгромившие всех остальных."
 
-#: ../../scripting/win_conditions/03_tribes_together.lua:79
-msgid "Tribe defeated!"
-msgstr "Племя проиграло!"
+#: ../../scripting/win_conditions/04_wood_gnome.lua:141
+msgid "The winner is %s "
+msgstr "Победитель %s, "
 
-#: ../../scripting/win_conditions/03_tribes_together.lua:10
-msgid "Tribes together"
-msgstr "Племена вместе"
+#: ../../scripting/win_conditions/00_endless_game.lua:11
+msgid "This is an endless game without rules."
+msgstr "Эта игра не имеет ни правил, ни ограничений по времени."
 
-#: ../../scripting/win_conditions/02_collectors.lua:71
+#: ../../scripting/win_conditions/02_collectors.lua:103
+msgid "Total: %i points"
+msgstr "Всего: %i очков"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:102
+msgid "Trees owned"
+msgstr "Принадлежащих деревьев"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:11
+msgid "Wood Gnome"
+msgstr "Лесной гном"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:24
+#: ../../scripting/win_conditions/01_defeat_all.lua:24
+#: ../../scripting/win_conditions/02_collectors.lua:179
+#: ../../scripting/win_conditions/03_territorial_lord.lua:154
+#: ../../scripting/win_conditions/04_wood_gnome.lua:94
+msgid "You are defeated!"
+msgstr "Вы разгромлены!"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:149
+msgid "You are the winner of this game!"
+msgstr "Вы победитель в этой игре!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:141
+#: ../../scripting/win_conditions/03_territorial_lord.lua:173
 msgid "You are the winner!"
-msgstr "Вы победили!"
+msgstr "Вы победитель!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:12
 msgid ""
-"You get points for wares in your HQ, the one with the highest number of "
-"wares at the end of 4 hours wins the game"
+"You get points for precious wares in your warehouses, the player with the "
+"highest number of wares at the end of 4 hours wins the game."
 msgstr ""
-"Вы получаете очки за товары в вашей штаб-квартире. Тот, кто соберет "
-"наибольшее число товаров к окончанию 4 часов побеждает в игре"
+"Вы получаете очки за ценные товары на Ваших складах. Выигрывает игрок "
+"имеющий наибольшее количество очков по истечении 4 часов."
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:40
-#: ../../scripting/win_conditions/03_tribes_together.lua:85
+#: ../../scripting/win_conditions/04_wood_gnome.lua:145
+msgid "You have lost this game!"
+msgstr "Вы проиграли в этой игре!"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:25
+#: ../../scripting/win_conditions/01_defeat_all.lua:25
+#: ../../scripting/win_conditions/02_collectors.lua:180
+#: ../../scripting/win_conditions/03_territorial_lord.lua:155
+#: ../../scripting/win_conditions/04_wood_gnome.lua:95
+msgid ""
+"You have nothing to command left. If you want, you may continue as spectator."
+msgstr ""
+"Вам больше нечем командовать. Если хотите, можете продолжить как наблюдатель."
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:32
 msgid "You have won this game!"
 msgstr "Вы победили в этой игре!"
 
-#: ../../scripting/win_conditions/02_collectors.lua:69
+#: ../../scripting/win_conditions/02_collectors.lua:139
+#: ../../scripting/win_conditions/03_territorial_lord.lua:175
 msgid "You lost"
-msgstr "Вы проиграли"
+msgstr "Вы проиграли!"
 
-#: ../../scripting/win_conditions/01_defeat_all.lua:27
+#: ../../scripting/win_conditions/04_wood_gnome.lua:147
 msgid "You lost!"
 msgstr "Вы проиграли!"
 
-#: ../../scripting/win_conditions/02_collectors.lua:71
-msgid "You won!"
-msgstr "Вы победили!"
+#: ../../scripting/win_conditions/03_territorial_lord.lua:137
+msgid "You own more than half of the maps area."
+msgstr "Вы владеете более чем половиной площади карты."
 
-#: ../../scripting/win_conditions/02_collectors.lua:69
+#: ../../scripting/win_conditions/03_territorial_lord.lua:135
+msgid "You still got %i minutes to prevent a victory."
+msgstr "У Вас осталось %i минут, чтобы предотвратить его победу."
+
+#: ../../scripting/win_conditions/02_collectors.lua:141
+#: ../../scripting/win_conditions/03_territorial_lord.lua:173
+#: ../../scripting/win_conditions/04_wood_gnome.lua:151
+msgid "You won!"
+msgstr "Вы выиграли!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:139
+#: ../../scripting/win_conditions/03_territorial_lord.lua:175
 msgid "You've lost this game!"
 msgstr "Вы проиграли эту игру!"
 
-#: ../../scripting/win_conditions/03_tribes_together.lua:74
-msgid "You've lost!"
-msgstr "Вы проиграли!"
+#: ../../scripting/win_conditions/04_wood_gnome.lua:142
+msgid "with %i trees."
+msgstr "с результатом %i деревьев."
 
-#: ../../scripting/win_conditions/03_tribes_together.lua:74
-msgid "Your tribe is no more. You have lost this game"
-msgstr "Вашего племени больше нет. Вы проиграли эту игру"
+#~ msgid "Game over"
+#~ msgstr "Игра окончена"
+
+#~ msgid "An endless game without rules"
+#~ msgstr "Бесконечная игра без правил"
+
+#~ msgid "Sorry, you have lost this game!"
+#~ msgstr "Сожалеем, вы потерпели поражение в этой игре!"
+
+#~ msgid "The player %i has currently %i points"
+#~ msgstr "Игрок %i в данный момент имеет %i очков"
+
+#~ msgid ""
+#~ "You get points for wares in your HQ, the one with the highest number of "
+#~ "wares at the end of 4 hours wins the game"
+#~ msgstr ""
+#~ "Вы получаете очки за товары в вашей штаб-квартире. Тот, кто соберет "
+#~ "наибольшее число товаров к окончанию 4 часов побеждает в игре"
+
+#~ msgid "The tribe that can defeat all others wins!"
+#~ msgstr "Племя, победившее все остальные племена побеждает!"
+
+#~ msgid "Tribe defeated!"
+#~ msgstr "Племя проиграло!"
+
+#~ msgid ""
+#~ "The three tribes play together vs each other. Vision is granted to all the "
+#~ "players playing together"
+#~ msgstr ""
+#~ "Три племени играют вместе друг против друга. Игроки, играющие вместе видят "
+#~ "друг друга"
+
+#~ msgid "The tribe %s is no more."
+#~ msgstr "Племени %s больше нет."
+
+#~ msgid "Tribes together"
+#~ msgstr "Племена вместе"
+
+#~ msgid "Your tribe is no more. You have lost this game"
+#~ msgstr "Вашего племени больше нет. Вы проиграли эту игру"
+
+#~ msgid "You've lost!"
+#~ msgstr "Вы проиграли!"

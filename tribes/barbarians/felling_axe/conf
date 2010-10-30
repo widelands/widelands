@@ -1,0 +1,7 @@
+help=_The felling axe is the tool of the lumberjack to take down trees.
+default_target_quantity=5
+preciousness=3
+
+[idle]
+pics=idle.png
+hotspot=7 3

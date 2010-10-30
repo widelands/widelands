@@ -38,6 +38,8 @@ struct Interactive_Spectator : public Interactive_GameBase {
 	Interactive_Spectator
 		(Widelands::Game &, Section & global_s, bool multiplayer = false);
 
+	~Interactive_Spectator();
+
 	void start();
 
 	Widelands::Player * get_player() const throw ();
@@ -56,12 +58,12 @@ private:
 	virtual void node_action();
 
 private:
-	UI::Callback_Button<Interactive_Spectator> m_toggle_chat;
-	UI::Callback_Button<Interactive_Spectator> m_exit;
-	UI::Callback_Button<Interactive_Spectator> m_save;
-	UI::Callback_Button<Interactive_Spectator> m_toggle_options_menu;
-	UI::Callback_Button<Interactive_Spectator> m_toggle_statistics;
-	UI::Callback_Button<Interactive_Spectator> m_toggle_minimap;
+	UI::Callback_Button m_toggle_chat;
+	UI::Callback_Button m_exit;
+	UI::Callback_Button m_save;
+	UI::Callback_Button m_toggle_options_menu;
+	UI::Callback_Button m_toggle_statistics;
+	UI::Callback_Button m_toggle_minimap;
 
 
 	UI::UniqueWindow::Registry m_chat;

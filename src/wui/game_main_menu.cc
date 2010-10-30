@@ -17,6 +17,11 @@
  *
  */
 
+#include <boost/bind.hpp>
+#include <boost/type_traits.hpp>
+#include <boost/lambda/construct.hpp>
+#include <boost/lambda/bind.hpp>
+
 #include "game_main_menu.h"
 
 #include "building_statistics_menu.h"
@@ -43,56 +48,65 @@ general_stats
 	 posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
-	 &GameMainMenu::clicked_general_stats, *this,
+	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.general_stats)),
 	 _("General Statistics")),
 ware_stats
 	(this, "ware_stats",
 	 posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
-	 &GameMainMenu::clicked_ware_stats, *this,
+	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.ware_stats)),
 	 _("Ware Statistics")),
 building_stats
 	(this, "building_stats",
 	 posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
-	 &GameMainMenu::clicked_building_stats, *this,
+	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.building_stats)),
 	 _("Building Statistics")),
 stock
 	(this, "stock",
 	 posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),
-	 &GameMainMenu::clicked_stock, *this,
+	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.stock)),
 	 _("Stock"))
 {
+#define INIT_BTN_HOOKS(registry, btn)                                        \
+ assert (not registry.onCreate);                                             \
+ assert (not registry.onDelete);                                             \
+ registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
+ registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+ if (registry.window) btn.set_perm_pressed(true);                            \
+
+	INIT_BTN_HOOKS(m_windows.general_stats, general_stats)
+	INIT_BTN_HOOKS(m_windows.ware_stats, ware_stats)
+	INIT_BTN_HOOKS(m_windows.building_stats, building_stats)
+	INIT_BTN_HOOKS(m_windows.stock, stock)
+	
+	m_windows.general_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<General_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+	m_windows.ware_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<Ware_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+	m_windows.building_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<Building_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+	m_windows.stock.constr = boost::lambda::bind(boost::lambda::new_ptr<Stock_Menu>(), boost::ref(m_player), boost::lambda::_1);
+
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
+GameMainMenu::~GameMainMenu() {
+	// We need to remove these callbacks because the opened window might
+	// live longer than 'this' window, and thus the buttons. The assertions
+	// are safeguards in case somewhere else in the code someone would
+	// overwrite our hooks.
 
-void GameMainMenu::clicked_general_stats() {
-	if (m_windows.general_stats.window)
-		delete m_windows.general_stats.window;
-	else
-		new General_Statistics_Menu(m_player, m_windows.general_stats);
-}
-void GameMainMenu::clicked_ware_stats() {
-	if (m_windows.ware_stats.window)
-		delete m_windows.ware_stats.window;
-	else
-		new Ware_Statistics_Menu(m_player, m_windows.ware_stats);
-}
-void GameMainMenu::clicked_building_stats() {
-	if (m_windows.building_stats.window)
-		delete m_windows.building_stats.window;
-	else
-		new Building_Statistics_Menu(m_player, m_windows.building_stats);
-}
-void GameMainMenu::clicked_stock() {
-	if (m_windows.stock.window)
-		delete m_windows.stock.window;
-	else
-		new Stock_Menu(m_player, m_windows.stock);
+#define DEINIT_BTN_HOOKS(registry, btn)                                                \
+ assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed,&btn, true));  \
+ assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed,&btn, false)); \
+ registry.onCreate = 0;                                                                \
+ registry.onDelete = 0;                                                                \
+
+	DEINIT_BTN_HOOKS(m_windows.general_stats, general_stats)
+	DEINIT_BTN_HOOKS(m_windows.ware_stats, ware_stats)
+	DEINIT_BTN_HOOKS(m_windows.building_stats, building_stats)
+	DEINIT_BTN_HOOKS(m_windows.stock, stock)
 }

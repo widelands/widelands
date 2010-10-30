@@ -109,6 +109,7 @@ struct Player :
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 	Player_Number     player_number() const throw () {return m_plnum;}
 	TeamNumber team_number() const {return m_team_number;}
+	Player_Number           partner() const throw () {return m_partner;}
 	RGBColor const * get_playercolor() const {return m_playercolor;}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
@@ -117,6 +118,7 @@ struct Player :
 	void set_frontier_style(uint8_t a) {m_frontier_style_index = a;}
 	void set_flag_style(uint8_t a) {m_flag_style_index = a;}
 	void set_team_number(TeamNumber team);
+	void set_partner(Player_Number partner) {m_partner = partner;}
 
 	void create_default_infrastructure();
 
@@ -430,10 +432,8 @@ struct Player :
 	Building& force_building
 		(Coords,
 		 Building_Index,
-		 uint32_t      const * ware_counts,
-		 uint32_t      const * worker_counts,
-		 Soldier_Counts const & soldier_counts);
-	void build(Coords, Building_Index);
+		 bool = false);
+	Building * build(Coords, Building_Index, bool = true);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
@@ -537,6 +537,7 @@ private:
 	uint8_t                m_frontier_style_index;
 	uint8_t                m_flag_style_index;
 	TeamNumber             m_team_number;
+	Player_Number          m_partner;
 	std::vector<Player *>  m_team_player;
 	bool                   m_team_player_uptodate;
 	bool                   m_see_all;

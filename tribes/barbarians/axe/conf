@@ -1,5 +1,5 @@
-help=_The Axe is a basic weapon and tool for the barbarians. All young soldiers are equipped with it, but also the lumberjack is using the same model.
-default_target_quantity=5
+help=_The Axe is a basic weapon for the barbarians. All young soldiers are equipped with it.
+default_target_quantity=15
 preciousness=3
 
 [idle]

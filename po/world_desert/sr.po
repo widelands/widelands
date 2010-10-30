@@ -7,27 +7,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-10 19:09+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
 "PO-Revision-Date: 2010-03-12 22:56+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-14 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/desert/conf:2
-msgid "The Widelands Development Team"
-msgstr "Пространства - развојни тим"
+#: ../../worlds/desert/conf:71
+msgid "Beech"
+msgstr "буква"
 
-#: ../../worlds/desert/conf:3
-msgid "Desert"
-msgstr "Пустиња"
+#: ../../worlds/desert/conf:72
+msgid "Beech medium"
+msgstr "средња буква"
 
-#: ../../worlds/desert/conf:4
-msgid "This is the wide and sandy country of the bedouins"
-msgstr "Ово је пространа и пешчана земља бедуина"
+#: ../../worlds/desert/conf:73
+msgid "Beech small"
+msgstr "мала буква"
+
+#: ../../worlds/desert/conf:74
+msgid "Beech tiny"
+msgstr "буквица"
+
+#: ../../worlds/desert/conf:85
+msgid "Bunny"
+msgstr "зец"
 
 #: ../../worlds/desert/conf:7
 #: ../../worlds/desert/conf:8
@@ -42,6 +50,10 @@ msgstr "жбун"
 msgid "Cactus"
 msgstr "кактус"
 
+#: ../../worlds/desert/resconf:4
+msgid "Coal"
+msgstr "угаљ"
+
 #: ../../worlds/desert/conf:14
 #: ../../worlds/desert/conf:15
 #: ../../worlds/desert/conf:16
@@ -49,62 +61,64 @@ msgstr "кактус"
 msgid "Dead Tree"
 msgstr "мртво дрво"
 
+#: ../../worlds/desert/conf:86
+msgid "Deer"
+msgstr "јелен"
+
+#: ../../worlds/desert/conf:3
+msgid "Desert"
+msgstr "Пустиња"
+
+#: ../../worlds/desert/conf:87
+msgid "Duck"
+msgstr "патка"
+
+#: ../../worlds/desert/resconf:41
+msgid "Fish"
+msgstr "Риба"
+
+#: ../../worlds/desert/conf:88
+msgid "Fox"
+msgstr "лисица"
+
+#: ../../worlds/desert/resconf:12
+msgid "Gold"
+msgstr "злато"
+
+#: ../../worlds/desert/resconf:28
+msgid "Granite"
+msgstr ""
+
 #: ../../worlds/desert/conf:18
 #: ../../worlds/desert/conf:19
 #: ../../worlds/desert/conf:20
 msgid "Grass"
 msgstr "Трава"
 
+#: ../../worlds/desert/resconf:20
+msgid "Iron"
+msgstr "Гвожђе"
+
+#: ../../worlds/desert/conf:75
+msgid "Larch"
+msgstr "ариш"
+
+#: ../../worlds/desert/conf:76
+msgid "Larch medium"
+msgstr "средњи ариш"
+
+#: ../../worlds/desert/conf:77
+msgid "Larch small"
+msgstr "мали ариш"
+
+#: ../../worlds/desert/conf:78
+msgid "Larch tiny"
+msgstr "малецки ариш"
+
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
 msgid "Mushroom"
 msgstr "печурка"
-
-#: ../../worlds/desert/conf:23
-#: ../../worlds/desert/conf:24
-#: ../../worlds/desert/conf:25
-#: ../../worlds/desert/conf:26
-#: ../../worlds/desert/conf:27
-#: ../../worlds/desert/conf:28
-msgid "Pebble"
-msgstr "шљунак"
-
-#: ../../worlds/desert/conf:29
-#: ../../worlds/desert/conf:30
-#: ../../worlds/desert/conf:31
-#: ../../worlds/desert/conf:32
-#: ../../worlds/desert/conf:33
-msgid "ruins"
-msgstr "рушевине"
-
-#: ../../worlds/desert/conf:34
-#: ../../worlds/desert/conf:35
-#: ../../worlds/desert/conf:36
-msgid "Skeleton"
-msgstr "костур"
-
-#: ../../worlds/desert/conf:37
-msgid "Shell"
-msgstr "Шкољка"
-
-#: ../../worlds/desert/conf:38
-#: ../../worlds/desert/conf:39
-#: ../../worlds/desert/conf:40
-#: ../../worlds/desert/conf:41
-#: ../../worlds/desert/conf:42
-#: ../../worlds/desert/conf:43
-#: ../../worlds/desert/conf:44
-msgid "Standing Stones"
-msgstr "стене"
-
-#: ../../worlds/desert/conf:45
-#: ../../worlds/desert/conf:46
-#: ../../worlds/desert/conf:47
-#: ../../worlds/desert/conf:48
-#: ../../worlds/desert/conf:49
-#: ../../worlds/desert/conf:50
-msgid "Stones"
-msgstr "камење"
 
 #: ../../worlds/desert/conf:51
 #: ../../worlds/desert/conf:55
@@ -138,37 +152,14 @@ msgstr "мала палма"
 msgid "Palm tiny"
 msgstr "палмица"
 
-#: ../../worlds/desert/conf:71
-msgid "Beech"
-msgstr "буква"
-
-#: ../../worlds/desert/conf:72
-msgid "Beech medium"
-msgstr "средња буква"
-
-#: ../../worlds/desert/conf:73
-msgid "Beech small"
-msgstr "мала буква"
-
-#: ../../worlds/desert/conf:74
-msgid "Beech tiny"
-msgstr "буквица"
-
-#: ../../worlds/desert/conf:75
-msgid "Larch"
-msgstr "ариш"
-
-#: ../../worlds/desert/conf:76
-msgid "Larch medium"
-msgstr "средњи ариш"
-
-#: ../../worlds/desert/conf:77
-msgid "Larch small"
-msgstr "мали ариш"
-
-#: ../../worlds/desert/conf:78
-msgid "Larch tiny"
-msgstr "малецки ариш"
+#: ../../worlds/desert/conf:23
+#: ../../worlds/desert/conf:24
+#: ../../worlds/desert/conf:25
+#: ../../worlds/desert/conf:26
+#: ../../worlds/desert/conf:27
+#: ../../worlds/desert/conf:28
+msgid "Pebble"
+msgstr "шљунак"
 
 #: ../../worlds/desert/conf:79
 msgid "Rowan"
@@ -186,46 +177,58 @@ msgstr "мала оскоруша"
 msgid "Rowan tiny"
 msgstr "оскорушица"
 
-#: ../../worlds/desert/conf:85
-msgid "Bunny"
-msgstr "зец"
-
-#: ../../worlds/desert/conf:86
-msgid "Deer"
-msgstr "јелен"
-
-#: ../../worlds/desert/conf:87
-msgid "Duck"
-msgstr "патка"
-
-#: ../../worlds/desert/conf:88
-msgid "Fox"
-msgstr "лисица"
-
 #: ../../worlds/desert/conf:89
 msgid "Sheep"
 msgstr "овца"
 
-#: ../../worlds/desert/resconf:4
-msgid "Coal"
-msgstr "угаљ"
+#: ../../worlds/desert/conf:37
+msgid "Shell"
+msgstr "Шкољка"
 
-#: ../../worlds/desert/resconf:12
-msgid "Gold"
-msgstr "злато"
+#: ../../worlds/desert/conf:34
+#: ../../worlds/desert/conf:35
+#: ../../worlds/desert/conf:36
+msgid "Skeleton"
+msgstr "костур"
 
-#: ../../worlds/desert/resconf:20
-msgid "Iron"
-msgstr "Гвожђе"
+#: ../../worlds/desert/conf:38
+#: ../../worlds/desert/conf:39
+#: ../../worlds/desert/conf:40
+#: ../../worlds/desert/conf:41
+#: ../../worlds/desert/conf:42
+#: ../../worlds/desert/conf:43
+#: ../../worlds/desert/conf:44
+msgid "Standing Stones"
+msgstr "стене"
 
-#: ../../worlds/desert/resconf:28
-msgid "Granit"
-msgstr "гранит"
+#: ../../worlds/desert/conf:45
+#: ../../worlds/desert/conf:46
+#: ../../worlds/desert/conf:47
+#: ../../worlds/desert/conf:48
+#: ../../worlds/desert/conf:49
+#: ../../worlds/desert/conf:50
+msgid "Stones"
+msgstr "камење"
+
+#: ../../worlds/desert/conf:2
+msgid "The Widelands Development Team"
+msgstr "Пространства - развојни тим"
+
+#: ../../worlds/desert/conf:4
+msgid "This is the wide and sandy country of the bedouins"
+msgstr "Ово је пространа и пешчана земља бедуина"
 
 #: ../../worlds/desert/resconf:36
 msgid "Water"
 msgstr "Вода"
 
-#: ../../worlds/desert/resconf:41
-msgid "Fish"
-msgstr "Риба"
+#: ../../worlds/desert/conf:29
+#: ../../worlds/desert/conf:30
+#: ../../worlds/desert/conf:31
+#: ../../worlds/desert/conf:32
+#: ../../worlds/desert/conf:33
+msgid "ruins"
+msgstr "рушевине"
+
+#~ msgid "Granit"
+#~ msgstr "гранит"

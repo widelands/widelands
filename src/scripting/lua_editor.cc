@@ -27,6 +27,7 @@
 
 #include "lua_editor.h"
 
+namespace LuaEditor {
 
 /* RST
 :mod:`wl.editor`
@@ -44,12 +45,60 @@ editor. This module is not loaded inside the game, that is if wl.editor is
 :const:`nil` the script is run inside a game, else in the editor.
 */
 
+
+/*
+ * ========================================================================
+ *                         MODULE CLASSES
+ * ========================================================================
+ */
+
+/* RST
+Module Classes
+^^^^^^^^^^^^^^^^
+
+*/
+
+
+/* RST
+Player
+------
+
+.. class:: Player
+
+	Child of: :class:`wl.bases.PlayerBase`
+
+	This class represents one of the players in the editor.
+	Note that you cannot instantiate a class of this type directly, use the
+	:attr:`wl.Editor.players`.
+
+*/
+const char L_Player::className[] = "Player";
+const MethodType<L_Player> L_Player::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Player> L_Player::Properties[] = {
+	{0, 0, 0},
+};
+
+
+/*
+ * ========================================================================
+ *                            MODULE FUNCTIONS
+ * ========================================================================
+ */
+
 const static struct luaL_reg wleditor [] = {
 	{0, 0}
 };
 
-void luaopen_wleditor(lua_State * const l) {
-	luaL_register(l, "wl.editor", wleditor);
-	lua_pop(l, 1); // pop the table from the stack again
+void luaopen_wleditor(lua_State * const L) {
+	luaL_register(L, "wl.editor", wleditor);
+	lua_pop(L, 1); // pop the table from the stack again
+
+	register_class<L_Player>(L, "editor", true);
+	add_parent<L_Player, LuaBases::L_PlayerBase>(L);
+	lua_pop(L, 1); // Pop the meta table
 }
+
+};
 

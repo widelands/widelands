@@ -28,6 +28,36 @@ UniqueWindow IMPLEMENTATION
 ==============================================================================
 */
 
+/**
+ * Creates the window, if it does not exist.
+*/
+void UniqueWindow::Registry::create() {
+	if (not window) {
+		constr(*this);
+	}
+}
+
+/**
+ * Destroys the window, if it eixsts.
+*/
+void UniqueWindow::Registry::destroy() {
+	if (window) {
+		delete window;
+	}
+}
+
+/**
+ * Either destroys or creates the window.
+*/
+void UniqueWindow::Registry::toggle() {
+	if (window) {
+		delete window;
+	} else {
+		constr(*this);
+	}
+}
+
+
 
 /**
  * In order to avoid dangling pointers, we need to kill our contained window
@@ -58,6 +88,9 @@ UniqueWindow::UniqueWindow
 			set_pos(Point(m_registry->x, m_registry->y));
 			m_usedefaultpos = false;
 		}
+		if (m_registry->onCreate) {
+			m_registry->onCreate();
+		}
 	}
 }
 
@@ -73,6 +106,10 @@ UniqueWindow::~UniqueWindow()
 		m_registry->window = 0;
 		m_registry->x = get_x();
 		m_registry->y = get_y();
+
+		if (m_registry->onDelete) {
+			m_registry->onDelete();
+		}
 	}
 }
 

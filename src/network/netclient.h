@@ -54,6 +54,8 @@ struct NetClient :
 	uint32_t realSpeed();
 	uint32_t desiredSpeed();
 	void setDesiredSpeed(uint32_t speed);
+	bool isPaused();
+	void setPaused(const bool paused);
 	// End GameController interface
 
 	// GameSettingsProvider interface
@@ -83,7 +85,8 @@ struct NetClient :
 	virtual void setPlayerNumber  (uint8_t number);
 	virtual void setPlayerReady   (uint8_t number, bool ready);
 	virtual bool getPlayerReady   (uint8_t number);
-	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team);
+	virtual void setPlayerTeam    (uint8_t number, Widelands::TeamNumber team);
+	virtual void setPlayerPartner (uint8_t number, uint8_t partner);
 	virtual void setWinCondition  (std::string);
 	virtual std::string getWinCondition();
 

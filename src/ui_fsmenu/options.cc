@@ -50,21 +50,21 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(this, "advanced_options",
 		 m_xres * 9 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 &Fullscreen_Menu_Options::advanced_options, *this,
+		 boost::bind(&Fullscreen_Menu_Options::advanced_options, boost::ref(*this)),
 		 _("Advanced Options"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_cancel
 		(this, "cancel",
 		 m_xres * 51 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Fullscreen_Menu_Options::end_modal, *this, om_cancel,
+		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_cancel)),
 		 _("Cancel"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_apply
 		(this, "apply",
 		 m_xres * 3 / 8, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 &Fullscreen_Menu_Options::end_modal, *this, om_ok,
+		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_ok)),
 		 _("Apply"), std::string(), true, false,
 		 m_fn, m_fs),
 
@@ -277,8 +277,16 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		did_select_a_res |= selected;
 		m_reslist.add(buf, 0, g_gr->get_no_picture(), selected);
 	}
-	if (not did_select_a_res)
-		m_reslist.select(m_reslist.size() - 1);
+	if (not did_select_a_res) {
+		char buf[32];
+		sprintf(buf, "%ix%i %i bit", opt.xres, opt.yres, opt.depth);
+		m_reslist.add(buf, 0, g_gr->get_no_picture(), true);
+		uint32_t entry = m_resolutions.size();
+		m_resolutions.resize(entry + 1);
+		m_resolutions[entry].xres  = opt.xres;
+		m_resolutions[entry].yres  = opt.yres;
+		m_resolutions[entry].depth = opt.depth;
+	}
 
 	// Fill language list
 	m_language_list.add
@@ -379,14 +387,14 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this, "cancel",
 		 m_xres * 41 / 80, m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Fullscreen_Menu_Advanced_Options::end_modal, *this, om_cancel,
+		 boost::bind(&Fullscreen_Menu_Advanced_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_cancel)),
 		 _("Cancel"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_apply
 		(this, "apply",
 		 m_xres / 4,   m_yres * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 &Fullscreen_Menu_Advanced_Options::end_modal, *this, om_ok,
+		 boost::bind(&Fullscreen_Menu_Advanced_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_ok)),
 		 _("Apply"), std::string(), true, false,
 		 m_fn, m_fs),
 
@@ -463,6 +471,11 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this,
 		 m_xres * 1313 / 10000, m_yres * 8330 / 10000,
 		 _("OpenGL rendering *Highly experimental!*"), UI::Align_VCenter),
+	m_transparent_chat (this, Point(m_xres * 19 / 200, m_yres * 8645 / 10000)),
+	m_label_transparent_chat
+		(this,
+		 m_xres * 1313 / 10000, m_yres * 8795 / 10000,
+		 _("Show in game chat with transparent background"), UI::Align_VCenter),
 
 	os(opt)
 {
@@ -481,6 +494,8 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 #ifndef USE_OPENGL
 	m_opengl               .set_enabled(false);
 #endif
+	m_label_transparent_chat.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_transparent_chat     .set_state(opt.transparent_chat);
 	m_sb_speed             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_border        .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_panel         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -548,6 +563,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 #else
 	os.opengl               = false;
 #endif
+	os.transparent_chat     = m_transparent_chat.get_state();
 	return os;
 }
 
@@ -594,7 +610,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	opt.auto_roadbuild_mode = m_opt_section.get_bool
 		("auto_roadbuild_mode", true);
 	opt.show_warea          = m_opt_section.get_bool
-		("workareapreview",    false);
+		("workareapreview",    true);
 	opt.snap_windows_only_when_overlapping
 		= m_opt_section.get_bool
 			("snap_windows_only_when_overlapping",      false);
@@ -631,6 +647,8 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 		("remove_syncstreams", true);
 	opt.opengl                = m_opt_section.get_bool
 		("opengl", false);
+	opt.transparent_chat      = m_opt_section.get_bool
+		("transparent_chat", true);
 	return opt;
 }
 
@@ -664,6 +682,7 @@ void Options_Ctrl::save_options() {
 	m_opt_section.set_int("remove_replays",         opt.remove_replays);
 	m_opt_section.set_bool("remove_syncstreams",    opt.remove_syncstreams);
 	m_opt_section.set_bool("opengl",                opt.opengl);
+	m_opt_section.set_bool("transparent_chat",      opt.transparent_chat);
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);

@@ -57,7 +57,9 @@ int main(int argc, char * argv[])
 		delete g_app;
 
 		return 0;
-	} catch (_wexception const & e) {
+	}
+#ifndef DEBUG
+	catch (_wexception const & e) {
 		cerr
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()
@@ -78,4 +80,5 @@ int main(int argc, char * argv[])
 
 		return 1;
 	}
+#endif
 }

@@ -29,6 +29,9 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
 
+#include <boost/format.hpp>
+using boost::format;
+
 Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
 	return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
 }
@@ -51,7 +54,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 #define DESCRIPTION_X                         (VMARGIN + LIST_WIDTH + VSPACING)
 #define DESCRIPTION_WIDTH              (WINDOW_WIDTH - DESCRIPTION_X - VMARGIN)
 #define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
-#define OK_Y                              (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
+#define DELETE_Y                          (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
+#define OK_Y                              (DELETE_Y - BUTTON_HEIGHT - VSPACING)
 	UI::UniqueWindow
 		(&parent, "save_game", &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
@@ -70,6 +74,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		(*this, DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT),
 	m_button_cancel
 		(*this, DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT),
+	m_button_delete
+		(*this, DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT),
 	m_curdir(SaveHandler::get_base_dir())
 {
 	m_ls.selected.set(this, &Game_Main_Menu_Save_Game::selected);
@@ -124,6 +130,7 @@ void Game_Main_Menu_Save_Game::double_clicked(uint32_t) {
  * fill the file list
  */
 void Game_Main_Menu_Save_Game::fill_list() {
+	m_ls.clear();
 	filenameset_t m_gamefiles;
 
 	//  Fill it with all files we find.
@@ -230,6 +237,7 @@ private:
 	std::string const m_filename;
 };
 
+
 /*
 ===========
 called when the ok button has been clicked
@@ -250,4 +258,54 @@ void Game_Main_Menu_Save_Game::Ok::clicked() {
 		dosave(igbase, complete_filename);
 		menu.die();
 	}
+}
+
+
+struct DeletionMessageBox : public UI::WLMessageBox {
+	DeletionMessageBox
+		(Game_Main_Menu_Save_Game & parent, std::string const & filename)
+		:
+		UI::WLMessageBox
+			(&parent,
+			 _("File deletion"),
+			 str
+				 (format(_("Do you really want to delete the file %s?")) %
+				  FileSystem::FS_Filename(filename.c_str())),
+			 YESNO),
+		m_filename(filename)
+	{}
+
+	void pressedYes()
+	{
+		g_fs->Unlink(m_filename);
+		ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent()).fill_list();
+		die();
+	}
+
+	void pressedNo()
+	{
+		die();
+	}
+
+private:
+	std::string const m_filename;
+};
+
+
+/*
+===========
+called when the delete button has been clicked
+===========
+*/
+void Game_Main_Menu_Save_Game::Delete::clicked() {
+	Game_Main_Menu_Save_Game & menu =
+		ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent());
+	Interactive_GameBase & igbase = menu.igbase();
+	std::string const complete_filename =
+		igbase.game().save_handler().create_file_name
+			(menu.m_curdir, menu.m_editbox.text());
+
+	//  Check if file exists. If it does, let the user confirm the deletion.
+	if (g_fs->FileExists(complete_filename))
+		new DeletionMessageBox(menu, complete_filename);
 }

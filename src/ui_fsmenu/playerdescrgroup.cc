@@ -38,10 +38,10 @@ struct PlayerDescriptionGroupImpl {
 
 	UI::Textarea     * plr_name;
 	UI::Checkbox     * btnEnablePlayer;
-	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerTeam;
-	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerType;
-	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerTribe;
-	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerInit;
+	UI::Callback_Button * btnPlayerTeam;
+	UI::Callback_Button * btnPlayerType;
+	UI::Callback_Button * btnPlayerTribe;
+	UI::Callback_Button * btnPlayerInit;
 	UI::Checkbox     * btnReadyPlayer;
 };
 
@@ -69,35 +69,35 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0));
 	d->btnEnablePlayer->changedto.set
 		(this, &PlayerDescriptionGroup::enable_player);
-	d->btnPlayerType = new UI::Callback_Button<PlayerDescriptionGroup>
+	d->btnPlayerType = new UI::Callback_Button
 		(this, "player_type",
 		 xplayertype, 0, xplayerteam - xplayertype - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &PlayerDescriptionGroup::toggle_playertype, *this,
+		 boost::bind(&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)),
 		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerTeam = new UI::Callback_Button<PlayerDescriptionGroup>
+	d->btnPlayerTeam = new UI::Callback_Button
 		(this, "player_team",
 		 xplayerteam, 0, xplayertribe - xplayerteam - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &PlayerDescriptionGroup::toggle_playerteam, *this,
+		 boost::bind(&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)),
 		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerTribe = new UI::Callback_Button<PlayerDescriptionGroup>
+	d->btnPlayerTribe = new UI::Callback_Button
 		(this, "player_tribe",
 		 xplayertribe, 0, xplayerinit - xplayertribe - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &PlayerDescriptionGroup::toggle_playertribe, *this,
+		 boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)),
 		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerInit = new UI::Callback_Button<PlayerDescriptionGroup>
+	d->btnPlayerInit = new UI::Callback_Button
 		(this, "player_initialization",
 		 xplayerinit, 0, xplayerready - xplayerinit - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &PlayerDescriptionGroup::toggle_playerinit, *this,
+		 boost::bind(&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)),
 		 std::string(), _("Initialization"),
 		 true, false,
 		 fname, fsize);
@@ -180,22 +180,55 @@ void PlayerDescriptionGroup::refresh()
 				title = _("Human");
 				if (settings.multiplayer) {
 					d->btnReadyPlayer->set_visible(true);
-					d->btnReadyPlayer->set_enabled(tribeaccess);
+					d->btnReadyPlayer->set_enabled
+						(tribeaccess
+						 || ((d->plnum == d->settings->settings().playernum)
+						      && d->settings->settings().scenario));
 					d->btnReadyPlayer->set_state(player.ready);
 				} else
 					d->btnReadyPlayer->set_visible(false);
 			}
-			std::string tribepath("tribes/" + player.tribe);
-			if (!m_tribenames[player.tribe].size())
-			{
-				// get translated tribesname
-				Profile prof
-					((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
-				Section & global = prof.get_safe_section("tribe");
-				m_tribenames[player.tribe] = global.get_safe_string("name");
-			}
-			d->btnPlayerTribe->set_title(m_tribenames[player.tribe]);
 			d->btnPlayerType->set_title(title);
+			std::string tribepath("tribes/" + player.tribe);
+			if (player.partner == 0) {
+				if (!m_tribenames[player.tribe].size())
+				{
+					// get translated tribesname
+					Profile prof
+						((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
+					Section & global = prof.get_safe_section("tribe");
+					m_tribenames[player.tribe] = global.get_safe_string("name");
+				}
+				d->btnPlayerTribe->set_title(m_tribenames[player.tribe]);
+			} else
+				// Check if everything is still valid
+				if
+					((settings.players.at(player.partner - 1).team
+					  != settings.players.at(d->plnum).team)
+					 ||
+					 settings.players.at(player.partner - 1).partner != 0
+					 ||
+					 (settings.players.at(player.partner - 1).state
+					  == PlayerSettings::stateClosed)
+					 ||
+					 (settings.players.at(player.partner - 1).state
+					  == PlayerSettings::stateOpen))
+				{
+					d->settings->setPlayerPartner(d->plnum, 0);
+					d->settings->setPlayerTribe
+						(d->plnum, settings.tribes.at(0).name);
+				} else {
+					if
+						(settings.players.at(player.partner - 1).tribe
+						 != settings.players.at(d->plnum).tribe)
+						{
+							d->settings->setPlayerTribe
+								(d->plnum, settings.players.at
+									(player.partner - 1).tribe);
+						}
+					d->btnPlayerTribe->set_title
+						(_("Help ") + settings.players.at(player.partner - 1).name);
+				}
 			{
 				i18n::Textdomain td(tribepath); // for translated initialisation
 				container_iterate_const
@@ -204,9 +237,9 @@ void PlayerDescriptionGroup::refresh()
 					if (i.current->name == player.tribe) {
 						d->btnPlayerInit->set_title
 							(_
-							 	(i.current->initializations.at
-							 	 	(player.initialization_index)
-							 	 .second));
+								(i.current->initializations.at
+									(player.initialization_index)
+								 .second));
 						break;
 					}
 				}
@@ -312,7 +345,8 @@ void PlayerDescriptionGroup::toggle_playertype()
 }
 
 /**
- * Cycle through available tribes for the player.
+ * Cycle through available tribes for the player. And (if available) set
+ * share kingdom mode.
  */
 void PlayerDescriptionGroup::toggle_playertribe()
 {
@@ -321,14 +355,57 @@ void PlayerDescriptionGroup::toggle_playertribe()
 	if (d->plnum >= settings.players.size())
 		return;
 
-	std::string const & currenttribe = settings.players[d->plnum].tribe;
+	std::vector<PlayerSettings> pl = settings.players;
+	std::string const & currenttribe = pl.at(d->plnum).tribe;
 	std::string nexttribe = settings.tribes.at(0).name;
 
-	for (uint32_t i = 0; i < settings.tribes.size() - 1; ++i)
-		if (settings.tribes[i].name == currenttribe) {
-			nexttribe = settings.tribes.at(i + 1).name;
-			break;
+	if (pl.at(d->plnum).partner > 0) {
+		// Check if other players are in players team and are *not*
+		// in shared kingdom mode
+		uint8_t p = pl.at(d->plnum).partner;
+		for (; p < settings.players.size(); ++p) {
+			if (p == d->plnum)
+				continue;
+			if
+				(pl.at(p).team == pl.at(d->plnum).team
+				 &&
+				 pl.at(p).partner == 0)
+			{
+				d->settings->setPlayerPartner(d->plnum, p + 1);
+				d->settings->setPlayerTribe
+					(d->plnum, settings.players.at(p).tribe);
+				return;
+			}
 		}
+		// No other partner found -> set to 0
+		d->settings->setPlayerPartner(d->plnum, 0);
+	} else {
+		bool nextset = false;
+		for (uint32_t i = 0; i < settings.tribes.size() - 1; ++i)
+			if (settings.tribes[i].name == currenttribe) {
+				nexttribe = settings.tribes.at(i + 1).name;
+				nextset = true;
+				break;
+			}
+		if (!nextset && pl.at(d->plnum).team > 0) {
+			// Check if other players are in players team and are *not*
+			// in shared kingdom mode
+			for (uint8_t p = 0; p < settings.players.size(); ++p) {
+				if (p == d->plnum)
+					continue;
+				if
+					(pl.at(p).team == pl.at(d->plnum).team
+					 &&
+					 pl.at(p).partner == 0)
+				{
+					d->settings->setPlayerPartner(d->plnum, p + 1);
+					d->settings->setPlayerTribe
+						(d->plnum, settings.players.at(p).tribe);
+					return;
+				}
+			}
+		}
+	}
 
 	d->settings->setPlayerTribe(d->plnum, nexttribe);
 }

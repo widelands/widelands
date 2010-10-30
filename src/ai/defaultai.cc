@@ -787,10 +787,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 	// Remove outdated fields from blocker list
 	for
 		(std::list<BlockedField *>::iterator i = blocked_fields.begin();
-		 i != blocked_fields.end();
-		 ++i)
+		 i != blocked_fields.end();)
 		if ((*i)->blocked_until < game().get_gametime())
 			i = blocked_fields.erase(i);
+		else ++i;
 
 	// first scan all buildable fields for regular buildings
 	for

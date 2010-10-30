@@ -19,6 +19,7 @@
 
 #include <lua.hpp>
 
+#include "logic/player.h"
 #include "upcast.h"
 #include "wui/interactive_player.h"
 
@@ -26,6 +27,8 @@
 #include "lua_map.h"
 
 #include "lua_ui.h"
+
+namespace LuaUi {
 
 /* RST
 :mod:`wl.ui`
@@ -51,9 +54,15 @@
 
 /*
  * ========================================================================
- *                            MODULE CLASSES
+ *                         MODULE CLASSES
  * ========================================================================
  */
+
+/* RST
+Module Classes
+^^^^^^^^^^^^^^^^
+
+*/
 
 /* RST
 Panel
@@ -497,6 +506,9 @@ MapView
 const char L_MapView::className[] = "MapView";
 const MethodType<L_MapView> L_MapView::Methods[] = {
 	METHOD(L_MapView, click),
+	METHOD(L_MapView, start_road_building),
+	METHOD(L_MapView, abort_road_building),
+	METHOD(L_MapView, close),
 	{0, 0},
 };
 const PropertyType<L_MapView> L_MapView::Properties[] = {
@@ -505,6 +517,7 @@ const PropertyType<L_MapView> L_MapView::Properties[] = {
 	PROP_RW(L_MapView, buildhelp),
 	PROP_RW(L_MapView, census),
 	PROP_RW(L_MapView, statistics),
+	PROP_RO(L_MapView, is_building_road),
 	{0, 0, 0},
 };
 
@@ -593,6 +606,16 @@ int L_MapView::set_statistics(lua_State * L) {
 	return 0;
 }
 
+/* RST
+	.. attribute:: is_building_road
+
+		(RO) Is the player currently in road building mode?
+*/
+int L_MapView::get_is_building_road(lua_State * L) {
+	lua_pushboolean(L, get()->is_building_road());
+	return 1;
+}
+
 /*
  * Lua Functions
  */
@@ -607,10 +630,67 @@ int L_MapView::set_statistics(lua_State * L) {
 		:type field: :class:`wl.map.Field`
 */
 int L_MapView::click(lua_State * L) {
-	get()->warp_mouse_to_node((*get_user_class<L_Field>(L, 2))->coords());
+	get()->warp_mouse_to_node((*get_user_class<LuaMap::L_Field>
+				(L, 2))->coords());
 	get()->fieldclicked.call();
 	return 0;
 }
+
+
+/* RST
+	.. method:: start_road_building(flag)
+
+		Enters the road building mode as if the player has clicked
+		the flag and chosen build road. It will also warp the mouse
+		to the given starting node. Throws an error if we are already in road
+		building mode.
+
+		:arg flag: :class:`wl.map.Flag` object to start building from.
+*/
+// UNTESTED
+int L_MapView::start_road_building(lua_State * L) {
+	Interactive_Base* me = get();
+	if (me->is_building_road())
+		return report_error(L, "Already building road!");
+
+	Widelands::Coords starting_field =
+		(*get_user_class<LuaMap::L_Flag>(L, 2))->get
+			(L, get_egbase(L))->get_position();
+
+	me->warp_mouse_to_node(starting_field);
+	me->start_build_road(starting_field, me->get_player()->player_number());
+
+	return 0;
+}
+
+/* RST
+	.. method:: abort_road_building
+
+		If the player is currently in road building mode, this will cancel it.
+		If he wasn't, this will do nothing.
+*/
+// UNTESTED
+int L_MapView::abort_road_building(lua_State * L) {
+	Interactive_Base* me = get();
+	if (me->is_building_road())
+		me->abort_build_road();
+	return 0;
+}
+
+/* RST
+	.. method:: close
+
+		Closes the MapView. Note that this is the equivalent as clicking on
+		the exit button in the game; that is the game will be exited.
+
+		This is especially useful for automated testing of features and is for
+		example used in the widelands Lua test suite.
+*/
+int L_MapView::close(lua_State * l) {
+	get()->end_modal(0);
+	return 0;
+}
+
 
 /*
  * C Functions
@@ -679,4 +759,6 @@ void luaopen_wlui(lua_State * L) {
 	lua_pop(L, 1); // Pop the meta table
 }
 
+
+};
 

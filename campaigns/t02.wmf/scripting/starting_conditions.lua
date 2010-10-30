@@ -13,8 +13,8 @@ plr:allow_buildings{
 }
 
 -- Place hq and fill it with wares
-hq_pos = wl.map.Field(12,10)
-hq = plr:place_building("headquarters_interim", hq_pos)
+hq_pos = wl.Game().map:get_field(12,10)
+hq = plr:place_building("headquarters_interim", hq_pos, false, true)
 hq:set_wares{
    axe=6,
    bakingtray=2,
@@ -47,6 +47,7 @@ hq:set_workers{
    burner=1,
    carrier=40,
    ferner=1,
+   fisher=1,
    geologist=4,
    ["lime-burner"]=1,
    lumberjack=3,

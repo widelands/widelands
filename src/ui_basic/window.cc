@@ -90,7 +90,8 @@ Window::Window
 			(g_gr->get_picture(PicMod_UI, "pics/win_bot.png")),
 		m_pic_background
 			(g_gr->get_picture(PicMod_UI, "pics/win_bg.png")),
-		m_center_panel(0)
+		m_center_panel(0),
+		m_fastclick_panel(0)
 {
 
 	if (title)
@@ -154,26 +155,47 @@ void Window::layout()
 }
 
 /**
- * Move the window so that it is centered under the mouse cursor.
-*/
-void Window::move_to_mouse() {
-	set_pos(get_mouse_position() - Point(get_w() / 2, get_h() / 2));
-	move_inside_parent();
+ * Move the window out of the way so that the field bewlow it is visible
+ */
+void Window::move_out_of_the_way() {
+	center_to_parent();
+
+	const Point mouse = get_mouse_position();
+	if
+		(0 <= mouse.x and mouse.x < get_w()
+		 and
+		 0 <= mouse.y and mouse.y < get_h())
+		{
+			set_pos
+				(Point(get_x(), get_y())
+				 +
+				 Point
+				 (0, (mouse.y < get_h() / 2 ? 1 : -1)
+				  *
+				  get_h()));
+			move_inside_parent();
+		}
 }
 
 /**
- * Move the window so that the given point \p pt - interpreted as inner
- * coordinates inside the window - is centered under the mouse cursor.
+ * Moves the mouse to the child panel that is activated as fast click panel
  */
-void Window::move_to_mouse(const Point & pt)
-{
-	set_pos(get_pos() + get_mouse_position() - pt);
-	move_inside_parent();
+void Window::warp_mouse_to_fastclick_panel() {
+	if (m_fastclick_panel) {
+		 Point pt(m_fastclick_panel->get_w() / 2, m_fastclick_panel->get_h() / 2);
+		 UI::Panel * p = m_fastclick_panel;
+
+		 while(p->get_parent() && p != this) {
+			 pt = p->to_parent(pt);
+			 p = p->get_parent();
+		 }
+
+		set_mouse_pos(pt);
+	}
 }
 
 /**
  * Move the window so that it is inside the parent panel.
- * We need this, because move_to_mouse is called before the window is resized.
  * If configured, hang the border off the edge of the panel.
 */
 void Window::move_inside_parent() {

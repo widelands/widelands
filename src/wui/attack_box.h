@@ -69,7 +69,7 @@ struct AttackBox : public UI::Box {
 			 uint32_t            alignment = UI::Box::AlignTop,
 			 std::string const & fontname = UI_FONT_NAME,
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
-		UI::Callback_Button<AttackBox> & add_button
+		UI::Callback_Button & add_button
 			(UI::Box           & parent,
 			 char const * picname,
 			 void (AttackBox::*fn)(),
@@ -89,8 +89,8 @@ struct AttackBox : public UI::Box {
 		UI::Textarea          * m_text_soldiers;
 		UI::Textarea          * m_text_retreat;
 
-		UI::Callback_Button<AttackBox> * m_less_soldiers;
-		UI::Callback_Button<AttackBox> * m_add_soldiers;
+		UI::Callback_Button * m_less_soldiers;
+		UI::Callback_Button * m_add_soldiers;
 };
 
 #endif

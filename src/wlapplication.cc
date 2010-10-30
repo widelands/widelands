@@ -816,6 +816,7 @@ bool WLApplication::init_settings() {
 	s.get_bool("remove_syncstreams");
 	s.get_bool("sound_at_message");
 	s.get_bool("voice_at_message");
+	s.get_bool("transparent_chat");
 	s.get_string("registered");
 	s.get_string("nickname");
 	s.get_string("password");
@@ -1509,7 +1510,9 @@ void WLApplication::mainmenu()
 		} catch (Widelands::game_data_error const & e) {
 			messagetitle = _("Game data error");
 			message = e.what();
-		} catch (std::exception const & e) {
+		}
+#ifndef DEBUG
+		catch (std::exception const & e) {
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
 			message +=
@@ -1525,7 +1528,7 @@ void WLApplication::mainmenu()
 					 "during the game. It is often - though not always - possible "
 					 "to load it and continue playing.\n");
 		}
-
+#endif
 	}
 }
 
@@ -1810,6 +1813,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
 			player.name = buf;
 			player.team = 0;
+			player.partner = 0;
 			// Set default computerplayer ai type
 			if (player.state == PlayerSettings::stateComputer) {
 				Computer_Player::ImplementationVector const & impls =
@@ -1891,6 +1895,13 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) {
 		if (number < s.players.size())
 			s.players[number].team = team;
+	}
+
+	virtual void setPlayerPartner(uint8_t number, uint8_t partner) {
+		if (number < s.players.size())
+			if (partner <= s.players.size()) {
+				s.players[number].partner = partner;
+			}
 	}
 
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {
@@ -2056,7 +2067,8 @@ struct ReplayGameController : public GameController {
 		m_game     (game),
 		m_lastframe(WLApplication::get()->get_time()),
 		m_time     (m_game.get_gametime()),
-		m_speed    (1000)
+		m_speed    (1000),
+		m_paused   (false)
 	{
 		m_game.set_game_controller(this);
 
@@ -2093,7 +2105,7 @@ struct ReplayGameController : public GameController {
 		else if (frametime > 1000)
 			frametime = 1000;
 
-		frametime = frametime * m_speed / 1000;
+		frametime = frametime * realSpeed() / 1000;
 
 		m_time = m_game.get_gametime() + frametime;
 
@@ -2121,9 +2133,11 @@ struct ReplayGameController : public GameController {
 	std::string getGameDescription() {
 		return "replay";
 	}
-	uint32_t realSpeed() {return m_speed;}
+	uint32_t realSpeed() {return m_paused ? 0 : m_speed;}
 	uint32_t desiredSpeed() {return m_speed;}
 	void setDesiredSpeed(uint32_t const speed) {m_speed = speed;}
+	bool isPaused() {return m_paused;}
+	void setPaused(bool const paused) { m_paused = paused;}
 
 private:
 	Widelands::Game & m_game;
@@ -2131,6 +2145,7 @@ private:
 	int32_t m_lastframe;
 	int32_t m_time;
 	uint32_t m_speed;
+	bool m_paused;
 };
 
 /**

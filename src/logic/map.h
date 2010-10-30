@@ -159,6 +159,13 @@ struct Map :
 
 	};
 
+	// ORed bits for scenario types
+	typedef size_t ScenarioTypes;
+	enum {
+		NO_SCENARIO = 0,
+		SP_SCENARIO = 1,
+		MP_SCENARIO = 2 };
+
 	Map ();
 	virtual ~Map();
 
@@ -198,7 +205,7 @@ struct Map :
 	void set_name       (char const *);
 	void set_description(char const *);
 	void set_background (char const *);
-	void set_as_scenario_playable(bool s) {m_scenario = s;}
+	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
 
 	// informational functions
 	const char * get_filename()    const {return m_filename;}
@@ -208,7 +215,7 @@ struct Map :
 	const char * get_world_name()  const {return m_worldname;}
 	const std::string & get_background() const {return m_background;}
 	Player_Number get_nrplayers() const throw () {return m_nrplayers;}
-	bool as_scenario_playable() const throw () {return m_scenario;}
+	ScenarioTypes scenario_types() const throw () {return m_scenario_types;}
 	Extent extent() const throw () {return Extent(m_width, m_height);}
 	X_Coordinate get_width   () const throw () {return m_width;}
 	Y_Coordinate get_height  () const throw () {return m_height;}
@@ -220,9 +227,11 @@ struct Map :
 	const std::string & get_scenario_player_tribe(Player_Number) const;
 	const std::string & get_scenario_player_name (Player_Number) const;
 	const std::string & get_scenario_player_ai   (Player_Number) const;
+	const Player_Number get_player_partner       (Player_Number) const;
 	void set_scenario_player_tribe(Player_Number, const std::string &);
 	void set_scenario_player_name (Player_Number, const std::string &);
 	void set_scenario_player_ai   (Player_Number, const std::string &);
+	void set_player_partner       (Player_Number, Player_Number);
 
 	BaseImmovable * get_immovable(Coords) const;
 	uint32_t find_bobs
@@ -370,7 +379,7 @@ private:
 
 	/// # of players this map supports (!= Game's number of players!)
 	Player_Number m_nrplayers;
-	bool          m_scenario; // whether the map is playable as scenario
+	ScenarioTypes  m_scenario_types; // whether the map is playable as scenario
 
 	X_Coordinate m_width;
 	Y_Coordinate m_height;
@@ -388,9 +397,10 @@ private:
 	Overlay_Manager * m_overlay_manager;
 
 	boost::scoped_ptr<PathfieldManager> m_pathfieldmgr;
-	std::vector<std::string> m_scenario_tribes; // only alloced when needed
-	std::vector<std::string> m_scenario_names;
-	std::vector<std::string> m_scenario_ais;
+	std::vector<std::string>   m_scenario_tribes;
+	std::vector<std::string>   m_scenario_names;
+	std::vector<std::string>   m_scenario_ais;
+	std::vector<Player_Number> m_player_partners; // share kingdom partners
 
 	Manager<Objective>  m_mom;
 

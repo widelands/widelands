@@ -25,27 +25,21 @@
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
-#include "lua_debug.h"
+#include "lua_bases.h"
 #include "lua_editor.h"
 #include "lua_game.h"
 #include "lua_globals.h"
 #include "lua_map.h"
+#include "lua_root.h"
 #include "lua_ui.h"
 #include "persistence.h"
+#include "factory.h"
 
 #include "scripting.h"
 
 #ifdef _MSC_VER
 #include <ctype.h> // for tolower
 #endif
-
-// TODO: add wl.editor to documentation
-// TODO: position or field should be on the immovable classes.
-// Check out what this BaseImmovable <-> Immovable thing is all about.
-// TODO: road must offer some access to it's fields for this to work.
-// TODO: also big buildings occupy more space: i suggest some occupied fields property
-// TODO: and also a field property
-
 
 /*
 ============================================
@@ -165,12 +159,8 @@ std::string LuaInterface_Impl::m_register_script
 		std::string data(static_cast<char *>(fs.Load(path, length)));
 		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
 
-		for (size_t i = name.size() - 1; i; i--) {
-			if (name[i] == '/' or name[i] == '\\') {
-				name = name.substr(i + 1, name.size());
-				break;
-			}
-		}
+		size_t pos = name.find_last_of("/\\");
+		if (pos != std::string::npos)  name = name.substr(pos+1);
 
 		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
 		m_scripts[ns][name] = data;
@@ -200,7 +190,7 @@ bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	m_L = lua_open();
 
-	// Open the lua libraries
+	// Open the Lua libraries
 #ifdef DEBUG
 	static const luaL_Reg lualibs[] = {
 		{"", luaopen_base},
@@ -237,7 +227,7 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
 
 	// Now our own
-	luaopen_globals(m_L);
+	LuaGlobals::luaopen_globals(m_L);
 
 	register_scripts(*g_fs, "aux");
 }
@@ -350,10 +340,9 @@ LuaEditorGameBaseInterface_Impl::LuaEditorGameBaseInterface_Impl
 	(Widelands::Editor_Game_Base * g) :
 LuaInterface()
 {
-	luaopen_wldebug(m_L);
-	luaopen_wlmap(m_L);
-	luaopen_wlgame(m_L);
-	luaopen_wlui(m_L);
+	LuaBases::luaopen_wlbases(m_L);
+	LuaMap::luaopen_wlmap(m_L);
+	LuaUi::luaopen_wlui(m_L);
 
 	// Push the editor game base
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));
@@ -370,13 +359,22 @@ struct LuaEditorInterface_Impl : public LuaEditorGameBaseInterface_Impl
 {
 	LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g);
 	virtual ~LuaEditorInterface_Impl() {}
+
+private:
+	EditorFactory m_factory;
 };
 
 LuaEditorInterface_Impl::LuaEditorInterface_Impl
 	(Widelands::Editor_Game_Base * g) :
 LuaEditorGameBaseInterface_Impl(g)
 {
-	luaopen_wleditor(m_L);
+	LuaRoot::luaopen_wlroot(m_L, true);
+	LuaEditor::luaopen_wleditor(m_L);
+
+	// Push the factory class into the registry
+	lua_pushlightuserdata
+		(m_L, reinterpret_cast<void*>(dynamic_cast<Factory*>(&m_factory)));
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
 }
 
 
@@ -403,18 +401,21 @@ struct LuaGameInterface_Impl : public LuaEditorGameBaseInterface_Impl,
 		 uint32_t);
 	virtual uint32_t write_global_env
 		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&);
+
+private:
+	GameFactory m_factory;
 };
 
 /*
  * Special handling of math.random.
  *
- * We inject this function to make sure that lua uses our random number
+ * We inject this function to make sure that Lua uses our random number
  * generator.  This guarantees that the game stays in sync over the network and
  * in replays. Obviously, we only do this for LuaGameInterface, not for
  * the others.
  *
  * The function was designed to simulate the standard math.random function and
- * was therefore nearly verbatimly copied from the lua sources.
+ * was therefore copied nearly verbatim from the Lua sources.
  */
 static int L_math_random(lua_State * L) {
 	Widelands::Game & game = get_game(L);
@@ -459,9 +460,17 @@ LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
 	lua_setfield(m_L, -2, "random");
 	lua_pop(m_L, 1); // pop "math"
 
-	// Push the game onto the stack
+	LuaRoot::luaopen_wlroot(m_L, false);
+	LuaGame::luaopen_wlgame(m_L);
+
+	// Push the game into the registry
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "game");
+
+	// Push the factory class into the registry
+	lua_pushlightuserdata
+		(m_L, reinterpret_cast<void*>(dynamic_cast<Factory*>(&m_factory)));
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
 }
 
 LuaCoroutine * LuaGameInterface_Impl::read_coroutine
@@ -533,7 +542,7 @@ uint32_t LuaGameInterface_Impl::write_global_env
 ============================================
 */
 /*
- * Factory Function, create lua interfaces for the following use cases:
+ * Factory Function, create Lua interfaces for the following use cases:
  *
  * "game": load all libraries needed for the game to run properly
  */

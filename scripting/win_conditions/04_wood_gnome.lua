@@ -18,8 +18,7 @@ return {
 	name = wc_name,
 	description = wc_desc,
 	func = function()
-	local plrs = {}
-	valid_players(plrs)
+	local plrs = wl.Game().players
 
 	-- send a message with the game type to all players
 	broadcast(plrs, wc_name, wc_desc)
@@ -28,11 +27,10 @@ return {
 
 	-- Get all valueable fields of the map
 	local fields = {}
-	local mapwidth  = wl.map.get_width()
-	local mapheight = wl.map.get_height()
-	for x=0,mapwidth-1 do
-		for y=0,mapheight-1 do
-			local f = wl.map.Field(x,y)
+   local map = wl.Game().map
+	for x=0,map.width-1 do
+		for y=0,map.height-1 do
+			local f = map:get_field(x,y)
 			if f then
 				-- add this field to the list as long as it has not movecaps swim
 				if not f.has_movecaps_swim(f) then
@@ -46,7 +44,9 @@ return {
 	local _last_time_calculated = -100000
 	local _plrpoints = {}
 	local function _calc_points()
-		if _last_time_calculated > wl.game.get_time() - 5000 then
+		local game = wl.Game()
+
+		if _last_time_calculated > game.time - 5000 then
 			return _plrpoints
 		end
 
@@ -54,23 +54,23 @@ return {
 		for idx,plr in ipairs(plrs) do
 			_plrpoints[plr.number] = 0
 		end
-
 		for idf,f in ipairs(fields) do
 			-- check if field is owned by a player
-			local owner = 0
-			if f.owners[1] then
-				owner = f.owners[1].number
+			local owner = f.owner
+			if owner then
+				owner = owner.number
 				-- check if field has an immovable
 				local imm = f.immovable
 				if imm then
 					-- check if immovable is a tree
 					if imm:has_attribute("tree") then
-					_plrpoints[owner] = _plrpoints[owner] + 1
+						_plrpoints[owner] = _plrpoints[owner] + 1
 					end
 				end
 			end
 		end
-		_last_time_calculated = wl.game.get_time()
+
+		_last_time_calculated = game.time
 		return _plrpoints
 	end
 
@@ -82,7 +82,7 @@ return {
 		for idx,plr in ipairs(plrs) do
 			msg = msg .. "\n"
 			msg = msg .. _ ("%s has "):format(plr.name)
-			msg = msg .. _ ("%i trees at the moment ."):format(playerpoints[plr.number])
+			msg = msg .. _ ("%i trees at the moment."):format(playerpoints[plr.number])
 		end
 
 		broadcast(plrs, _ "Status", msg)

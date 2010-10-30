@@ -21,11 +21,10 @@ return {
 
 		-- Get all valueable fields of the map
 		local fields = {}
-		local mapwidth  = wl.map.get_width()
-		local mapheight = wl.map.get_height()
-		for x=0,mapwidth-1 do
-			for y=0,mapheight-1 do
-				local f = wl.map.Field(x,y)
+      local map = wl.Game().map
+		for x=0,map.width-1 do
+			for y=0,map.height-1 do
+				local f = map:get_field(x,y)
 				if f then
 					-- add this field to the list as long as it has not movecaps swim
 					if not f.has_movecaps_swim(f) then
@@ -42,8 +41,7 @@ return {
 		local remaining_time = 10 -- (dummy) -- time in secs, if == 0 -> victory
 
 		-- Find all valid players
-		local plrs = {}
-		valid_players(plrs)
+      local plrs = wl.Game().players
 
 		-- send a message with the game type to all players
 		broadcast(plrs, wc_name, wc_desc)
@@ -73,10 +71,12 @@ return {
 				_landsizes[plr.number] = 0
 			end
 
-			for idf,f in ipairs(fields) do
+			for idx,f in ipairs(fields) do
 				-- check if field is owned by a player
-				if f.owners[1] then
-					_landsizes[f.owners[1].number] = _landsizes[f.owners[1].number] + 1
+				local o = f.owner
+				if o then
+					local n = o.number
+					_landsizes[n] = _landsizes[n] + 1
 				end
 			end
 		end
@@ -86,7 +86,9 @@ return {
 			local maxplayerpoints = 0 -- the highest points of a player without team
 			local maxpointsplayer = 0 -- the player
 			local foundcandidate = false
+
 			_calc_current_landsizes()
+
 			for idx, p in ipairs(plrs) do
 				local team = p.team
 				if team == 0 then
@@ -101,6 +103,7 @@ return {
 					teampoints[team] = teampoints[team] + _landsizes[p.number]
 				end
 			end
+
 			if maxplayerpoints > ( #fields / 2 ) then
 				-- player owns more than half of the map's area
 				foundcandidate = true

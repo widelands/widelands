@@ -8,9 +8,8 @@ end
 -- ===================
 flag_tests = lunit.TestCase("flag tests")
 function flag_tests:setup()
-   self.p = wl.game.Player(1)
-   self.field = wl.map.Field(13,10)
-   self.f = self.p:place_flag(self.field, 1)
+   self.field = map:get_field(13,10)
+   self.f = player1:place_flag(self.field, 1)
 end
 function flag_tests:teardown()
    pcall(self.f.remove, self.f)
@@ -48,8 +47,8 @@ function flag_tests:test_set_wares_two_args()
 end
 function flag_tests:test_set_wares_one_arg()
    self.f:set_wares{
-      trunk = 3, 
-      coal = 2, 
+      trunk = 3,
+      coal = 2,
    }
    assert_equal(3, self.f:get_wares("trunk"))
    assert_equal(2, self.f:get_wares("coal"))
@@ -87,12 +86,11 @@ function flag_tests:test_set_wares_many_wares()
 end
 
 -- =========
--- get_ware 
+-- get_ware
 -- =========
 flag_tests_get_ware = lunit.TestCase("flag tests: get_ware")
 function flag_tests_get_ware:setup()
-   self.p = wl.game.Player(1)
-   self.f = self.p:place_flag(wl.map.Field(13,10), 1)
+   self.f = player1:place_flag(map:get_field(13,10), 1)
    self.f:set_wares{trunk = 2, raw_stone = 2, coal = 1}
 end
 function flag_tests_get_ware:teardown()

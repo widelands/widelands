@@ -49,8 +49,8 @@ private:
 	Interactive_GameBase & m_igb;
 	Widelands::Building & m_building;
 
-	UI::Callback_Button<SoldierCapacityControl> m_decrease;
-	UI::Callback_Button<SoldierCapacityControl> m_increase;
+	UI::Callback_Button m_decrease;
+	UI::Callback_Button m_increase;
 	UI::Textarea m_value;
 };
 
@@ -65,12 +65,12 @@ m_decrease
 	(this, "increase", 0, 0, 24, 24,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, pic_down_train),
-	 &SoldierCapacityControl::click_decrease, *this),
+	 boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this))),
 m_increase
 	(this, "decrease", 0, 0, 24, 24,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, pic_up_train),
-	 &SoldierCapacityControl::click_increase, *this),
+	 boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this))),
 m_value(this, "", UI::Align_Center)
 {
 	add(new UI::Textarea(this, _("Capacity")), AlignCenter);

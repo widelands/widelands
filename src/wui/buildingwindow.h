@@ -53,8 +53,6 @@ struct Building_Window : public UI::Window {
 	virtual void think();
 
 protected:
-	void set_center_mouse(UI::Panel * panel);
-
 	UI::Tab_Panel * get_tabs() {return m_tabs;}
 
 	void act_bulldoze();
@@ -76,12 +74,10 @@ protected:
 private:
 	Widelands::Building & m_building;
 
-	UI::Panel * m_center_mouse;
-
 	UI::Tab_Panel * m_tabs;
 
 	UI::Box * m_capsbuttons; ///< \ref UI::Box that contains capabilities buttons
-	UI::Callback_Button<Building_Window> * m_toggle_workarea;
+	UI::Callback_Button * m_toggle_workarea;
 
 	//  capabilities that were last used in setting up the caps panel
 	uint32_t m_capscache;

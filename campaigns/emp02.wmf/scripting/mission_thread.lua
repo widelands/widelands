@@ -5,7 +5,8 @@ function building_materials()
    sleep(200)
    send_msg(diary_page_5)
 
-   local forests = wl.map.Field(17,10)
+   local map = wl.Game().map
+   local forests = map:get_field(17,10)
    p1:reveal_fields(forests:region(6))
    -- Hide again in 5 seconds
    run(function() sleep(5000) p1:hide_fields(forests:region(6)) end)
@@ -29,7 +30,7 @@ function building_materials()
 
 
    -- Show the stones
-   scroll_smoothly_to(wl.map.Field(14,25))
+   scroll_smoothly_to(map:get_field(14,25))
    send_msg(diary_page_5_2)
    local o_quarry = add_obj(obj_build_quarry)
    -- Check for completeness of the quarry
@@ -101,12 +102,12 @@ end
 
 function mining_infrastructure()
    -- Wait till we see the mountains
-   local mountains = wl.map.Field(38,33)
+   local mountains = wl.Game().map:get_field(38,33)
    while not p1:seen_field(mountains) do sleep(3458) end
 
    -- Reveal the other mountains
-   local coal_mountain = wl.map.Field(49,22)
-   local iron_mountain = wl.map.Field(38,37)
+   local coal_mountain = wl.Game().map:get_field(49,22)
+   local iron_mountain = wl.Game().map:get_field(38,37)
    p1:reveal_fields(coal_mountain:region(6))
    p1:reveal_fields(iron_mountain:region(6))
    run(function() sleep(5000) 
@@ -114,7 +115,7 @@ function mining_infrastructure()
       p1:hide_fields(iron_mountain:region(6))
    end)
 
-   local move_point = wl.map.Field(49,22)
+   local move_point = wl.Game().map:get_field(49,22)
    scroll_smoothly_to(move_point)
 
    send_msg(saledus_3)
@@ -162,7 +163,7 @@ end
 function expand_and_build_marblemine()
    sleep(40000)
 
-   local shipparts = wl.map.Field(15,46)
+   local shipparts = wl.Game().map:get_field(15,46)
    p1:reveal_fields(shipparts:region(5))
    run(function() sleep(10000) p1:hide_fields(shipparts:region(5)) end)
 
@@ -177,11 +178,11 @@ function expand_and_build_marblemine()
    timed_scroll(array_reverse(pts))
 
    -- sleep while not owning 26, 21
-   while wl.map.Field(26,21).owners[1] ~= p1 do sleep(3243) end
+   while wl.Game().map:get_field(26,21).owner ~= p1 do sleep(3243) end
    o.done = true
    
    -- Marble Mountains
-   local marblemountains = wl.map.Field(35,19)
+   local marblemountains = wl.Game().map:get_field(35,19)
    p1:reveal_fields(marblemountains:region(5))
    run(function() sleep(10000) p1:hide_fields(marblemountains:region(5)) end)
 
@@ -214,12 +215,12 @@ function barbarians_thread()
 
    -- show barbarians
    local barbarians = array_combine(
-      wl.map.Field(60, 61):region(6),
-      wl.map.Field(60, 48):region(6)
+      wl.Game().map:get_field(60, 61):region(6),
+      wl.Game().map:get_field(60, 48):region(6)
    )
    p1:reveal_fields(barbarians)
    run(function() sleep(5000) p1:hide_fields(barbarians) end)
-   scroll_smoothly_to(wl.map.Field(59, 55))
+   scroll_smoothly_to(wl.Game().map:get_field(59, 55))
 
    send_msg(diary_page_8)
    local o = add_obj(obj_build_bigger_military_buildings)
@@ -245,7 +246,7 @@ function barbarians_thread()
    o = add_obj(obj_remove_the_barbarians)
    -- Wait for the fortress to come up
    while not check_for_buildings(p1, {fortress=1},
-      wl.map.Field(60,65):region(6))
+      wl.Game().map:get_field(60,65):region(6))
    do sleep(2435) end
 
    o.done = true
