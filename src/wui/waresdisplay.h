@@ -56,6 +56,22 @@ struct WaresDisplay : public UI::Panel {
 	void add_warelist(Widelands::WareList const &, wdType);
 	void remove_all_warelists();
 
+	// Wares may be selected (highlighted)
+	void select_ware(Widelands::Ware_Index);
+	void unselect_ware(Widelands::Ware_Index);
+	bool ware_selected(Widelands::Ware_Index);
+	void toggle_ware(Widelands::Ware_Index ware) {
+		if (ware_selected(ware))
+			unselect_ware(ware);
+		else
+			select_ware(ware);
+	}
+
+	// Wares may be hidden
+	void hide_ware(Widelands::Ware_Index);
+	void unhide_ware(Widelands::Ware_Index);
+	bool ware_hidden(Widelands::Ware_Index);
+
 	Widelands::Ware_Index ware_at_point(int32_t x, int32_t y) const;
 	wdType get_type() const {return m_type;}
 
@@ -74,11 +90,14 @@ protected:
 
 private:
 	typedef std::vector<Widelands::WareList const *> vector_type;
+	typedef std::vector<bool> selection_type;
 
 	Widelands::Tribe_Descr const & m_tribe;
 	UI::Textarea        m_curware;
 	wdType              m_type;
 	vector_type         m_warelists;
+	selection_type      m_selected;
+	selection_type      m_hidden;
 };
 
 #endif
