@@ -26,6 +26,8 @@
 
 #include <string>
 
+#define MAXCLIENTS 64
+
 struct GameSettingsProvider;
 struct MultiPlayerSetupGroupOptions;
 struct MultiPlayerClientGroup;
@@ -51,8 +53,11 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 
 private:
 	GameSettingsProvider   * const s;
-	MultiPlayerClientGroup * c[64];
+	std::vector<MultiPlayerClientGroup *> c;
 	UI::Box                  clientbox;
+
+	uint32_t    m_buth, m_fsize;
+	std::string m_fname;
 };
 
 

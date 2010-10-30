@@ -21,8 +21,7 @@
 #define NETWORK_PROTOCOL_H
 
 /// How many bytes will (maximal) be send as file part
-/// \note may maximal be 255 => uint8_t
-#define NETFILEPARTSIZE 255
+#define NETFILEPARTSIZE 4096
 
 enum {
 	/**
@@ -348,7 +347,7 @@ enum {
 	 *
 	 * Attached data is:
 	 * \li Unsigned32: part number
-	 * \li Unsigned8: length of data (needed because last part might be shorter)
+	 * \li Unsigned32: length of data (needed because last part might be shorter)
 	 * \li void[length of data]: data
 	 *
 	 * Sent by the client to request the next part from the host.

@@ -616,7 +616,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_FILE_PART: {
 		uint32_t part = packet.Unsigned32();
-		uint8_t size = packet.Unsigned8();
+		uint32_t size = packet.Unsigned32();
 
 		// Send an answer
 		SendPacket s;

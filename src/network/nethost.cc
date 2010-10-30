@@ -1082,7 +1082,7 @@ void NetHost::setMap
 		file->filename = mapfilename;
 		uint32_t leftparts = file->bytes = fr.GetSize();
 		while (leftparts > 0) {
-			uint8_t readout
+			uint32_t readout
 				= (leftparts > NETFILEPARTSIZE) ? NETFILEPARTSIZE : leftparts;
 			FilePart fp;
 			memcpy(fp.part, fr.Data(readout), readout);
@@ -1478,9 +1478,17 @@ void NetHost::welcomeClient
 
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
-	client.usernum = d->settings.users.size();
-	UserSettings newuser;
-	d->settings.users.push_back(newuser);
+
+	for (uint32_t i = 0; i < d->settings.users.size(); ++i)
+		if (d->settings.users[i].position == UserSettings::notConnected()) {
+			client.usernum = i;
+			break;
+		}
+	if (client.usernum == -1) {
+		client.usernum = d->settings.users.size();
+		UserSettings newuser;
+		d->settings.users.push_back(newuser);
+	}
 
 	// Assign the player a name, preferably the name chosen by the client
 	std::string effective_name = playername;
@@ -1849,12 +1857,14 @@ void NetHost::handle_network ()
 		SDLNet_TCP_AddSocket (d->sockset, sock);
 
 		Client peer;
+			
 		peer.sock = sock;
 		peer.playernum = UserSettings::notConnected();
 		peer.syncreport_arrived = false;
 		peer.desiredspeed = 1000;
 		peer.usernum = -1; // == no user assigned for now.
 		d->clients.push_back(peer);
+
 
 		// Now we wait for the client to say Hi in the right language,
 		// unless the game has already started
@@ -1937,10 +1947,10 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			throw DisconnectException
 				(_("Server uses a different protocol version."));
 
-		std::string playername = r.String();
+		std::string clientname = r.String();
 		client.build_id = r.String();
 
-		welcomeClient(i, playername);
+		welcomeClient(i, clientname);
 		return;
 	}
 
@@ -2134,13 +2144,13 @@ void NetHost::sendFilePart(TCPsocket csock, uint32_t part) {
 	assert(part < file->parts.size());
 
 	uint32_t left = file->bytes - NETFILEPARTSIZE * part;
-	uint8_t size = (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
+	uint32_t size = (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
 
 	// Send the part
 	SendPacket s;
 	s.Unsigned8(NETCMD_FILE_PART);
 	s.Unsigned32(part);
-	s.Unsigned8(size);
+	s.Unsigned32(size);
 	s.Data(file->parts[part].part, size);
 	s.send(csock);
 }

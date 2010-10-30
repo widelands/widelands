@@ -22,6 +22,7 @@
 #include "constants.h"
 #include "gamesettings.h"
 #include "i18n.h"
+#include "log.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
@@ -48,7 +49,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 		name = new UI::Textarea
 			(this, 0, 0, w - h - UI::Scrollbar::Size * 11 / 5, h);
 		name->set_font(fname, fsize, UI_FONT_CLR_FG);
-		name->set_text("Test");
 		add(name, 1);
 		type = new UI::Callback_Button
 			(this, "client_type",
@@ -60,7 +60,21 @@ struct MultiPlayerClientGroup : public UI::Box {
 		add(type, 0);
 	}
 
+	/// Switch human players and spectator and set the picture accordingly
 	void toggle_type() {
+		
+	}
+
+	/// Care about visibility and current values
+	void refresh() {
+		UserSettings us = s->settings().users[m_id];
+		if (us.position == UserSettings::notConnected()) {
+			name->set_text(_("<free>"));
+			type->set_visible(false);
+		} else {
+			name->set_text(us.name);
+			type->set_visible(true);
+		}
 	}
 
 	void toggle_ready(bool ready) {}
@@ -80,26 +94,26 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup
 :
 UI::Panel(parent, x, y, w, h),
 s(settings),
-clientbox(this, 0, buth, UI::Box::Vertical, w / 3, h - buth)
+clientbox(this, 0, buth, UI::Box::Vertical, w / 3, h - buth),
+m_buth(buth),
+m_fsize(fsize),
+m_fname(fname)
 {
+	c.resize(MAXCLIENTS);
+	for (uint32_t i = 0; i < c.size(); ++i) {
+		c.at(i) = 0;
+	}
 	clientbox.set_size(w / 3, h - buth);
 	clientbox.set_scrolling(true);
-	for (uint32_t i = 0; i < 64; ++i) {
-		c[i] =
-			new MultiPlayerClientGroup
-				(&clientbox, i,
-				 0, 0, w / 3, buth,
-				 settings, fname, fsize);
-		clientbox.add(&*c[i], 1);
-	}
-
 	refresh();
 }
 
 
 MultiPlayerSetupGroup::~MultiPlayerSetupGroup()
 {
-
+	for (uint32_t i = 0; i < c.size(); ++i) {
+		delete c.at(i);
+	}
 }
 
 
@@ -108,22 +122,16 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup()
  */
 void MultiPlayerSetupGroup::refresh()
 {
-	//GameSettings const & settings = s->settings();
+	GameSettings const & settings = s->settings();
 
-	// Only update the user interface for the visible tab
-// 	switch(tp.active()) {
-// 		case 0: { // Clients
-// 			break;
-// 		}
-// 		case 1: { // Host
-// 			if (d->usernum != 0)
-// 				throw wexception("Host tab active although not host!");
-// 
-// 			// m_ok.set_enabled(launch);
-// 			break;
-// 		} 
-// 		default:
-// 			throw wexception("Unknown tab active!");
-// 	}
-
+	for (uint32_t i = 0; (i < settings.users.size()) && (i < MAXCLIENTS); ++i) {
+		if (!c.at(i)) {
+			c.at(i) = new MultiPlayerClientGroup
+				(&clientbox, i,
+				 0, 0, clientbox.get_w(), m_buth,
+				 s, m_fname, m_fsize);
+			clientbox.add(&*c[i], 1);
+		}
+		c[i]->refresh();
+	}
 }

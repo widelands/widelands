@@ -188,6 +188,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 
 Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
 	delete m_lua;
+	delete m_mpsg;
 }
 
 
