@@ -42,7 +42,10 @@ WaresDisplay::WaresDisplay
 		(this,
 		 0, get_inner_h() - 25, get_inner_w(), 20,
 		 _("Stock"), UI::Align_Center),
-	m_type (WORKER)
+	//TODO need to know m_type at construction time
+	m_type (WORKER),
+	m_selected(m_type == WORKER ? m_tribe.get_nrworkers()
+	                            : m_tribe.get_nrwares(), false)
 
 {
 }
@@ -206,7 +209,10 @@ void WaresDisplay::draw_ware
 
 	//  draw a background
 	const PictureID picid =
-		g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");
+		g_gr->get_picture(PicMod_Game,
+			ware_selected(id) ?  "pics/ware_list_bg_selected.png"
+			                  :  "pics/ware_list_bg.png"
+		);
 	uint32_t w, h;
 	g_gr->get_picture_size(picid, w, h);
 
@@ -234,4 +240,15 @@ void WaresDisplay::draw_ware
 		 p + Point(WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT - 4),
 		 buffer,
 		 UI::Align_Right);
+}
+
+// Wares highlighting/selecting
+void WaresDisplay::select_ware(Widelands::Ware_Index ware) {
+	m_selected[ware] = true;
+}
+void WaresDisplay::unselect_ware(Widelands::Ware_Index ware) {
+	m_selected[ware] = false;
+}
+bool WaresDisplay::ware_selected(Widelands::Ware_Index ware) {
+	return	m_selected[ware];
 }
