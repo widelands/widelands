@@ -41,7 +41,7 @@ struct WarehouseWaresDisplay : WaresDisplay {
 	WarehouseWaresDisplay(UI::Panel * parent, uint32_t width, Interactive_GameBase &, Warehouse &, wdType type);
 
 protected:
-	virtual void draw_ware(RenderTarget& dst, Widelands::Ware_Index ware, uint32_t stock);
+	virtual void draw_ware(RenderTarget& dst, Widelands::Ware_Index ware);
 
 private:
 	Interactive_GameBase & m_igbase;
@@ -51,19 +51,17 @@ private:
 WarehouseWaresDisplay::WarehouseWaresDisplay
 	(UI::Panel* parent, uint32_t width, Interactive_GameBase & igbase, Warehouse& wh, wdType type)
 :
-WaresDisplay(parent, 0, 0, wh.owner().tribe(), true),
+WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, true),
 m_igbase(igbase),
 m_warehouse(wh)
 {
 	set_inner_size(width, 0);
-	add_warelist
-		(type == WORKER ? m_warehouse.get_workers() : m_warehouse.get_wares(),
-		 type);
+	add_warelist(type == WORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
 }
 
-void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::Ware_Index ware, uint32_t stock)
+void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::Ware_Index ware)
 {
-	WaresDisplay::draw_ware(dst, ware, stock);
+	WaresDisplay::draw_ware(dst, ware);
 
 	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(get_type() == WORKER, ware);
 	PictureID picid;
@@ -108,22 +106,22 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel * parent, uint32_t width, Int
 	add(buttons, UI::Box::AlignLeft);
 		
 	if (m_gb.can_act(m_wh.owner().player_number())) {
-#define ADD_POLICY_BUTTON(policy, policyname)                             \
+#define ADD_POLICY_BUTTON(policy, policyname, tooltip)                    \
         	buttons->add(new UI::Callback_Button(                     \
-			buttons, "workarea",                              \
+			buttons, #policy,                                 \
 			0, 0, 34, 34,                                     \
 			g_gr->get_picture(PicMod_UI,"pics/but4.png"),     \
 			g_gr->get_picture(PicMod_Game,                    \
 		              "pics/stock_policy_button_" #policy ".png"),\
 			boost::bind(&WarehouseWaresPanel::set_policy,     \
 			            this, Warehouse::SP_##policyname),    \
-			_("Normal policy"))                               \
+			tooltip)                                          \
 		, UI::Box::AlignCenter);                                  \
 	
-		ADD_POLICY_BUTTON(normal, Normal)
-		ADD_POLICY_BUTTON(prefer, Prefer)
-		ADD_POLICY_BUTTON(dontstock, DontStock)
-		ADD_POLICY_BUTTON(remove, Remove)
+		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
+		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
+		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
+		ADD_POLICY_BUTTON(remove, Remove, _("Remove selected wares from here"))
 	}
 }
 
