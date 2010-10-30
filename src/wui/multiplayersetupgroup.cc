@@ -66,7 +66,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			add(type, UI::Box::AlignCenter);
 		} else { // just a shown client
 			type_icon = new UI::Icon
-				(this, 0, 0, 14 * h / 10, h,
+				(this, 0, 0, h, h,
 				 g_gr->get_picture(PicMod_UI, "pics/menu_tab_watch.png"));
 			add(type_icon, UI::Box::AlignCenter);
 		}
@@ -80,7 +80,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		if (p == UserSettings::none())
 			p = -1;
 
-		for (++p; p < s->settings().players.size(); ++p) {
+		for (++p; p < static_cast<int16_t>(s->settings().players.size()); ++p) {
 			if
 				(s->settings().players.at(p).state == PlayerSettings::stateHuman
 				 ||

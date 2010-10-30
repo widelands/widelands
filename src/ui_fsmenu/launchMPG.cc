@@ -183,7 +183,12 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	// If we are the host, open the map or save selection menu at startup
 	if (m_settings->settings().usernum == 0
 		 && m_settings->settings().mapname.empty())
+	{
 		change_map_or_save();
+		// Try to associate the host with the first player
+		if (m_settings->settings().players.size() > 0)
+			m_settings->setPlayerNumber(0);
+	}
 }
 
 Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {

@@ -1307,13 +1307,15 @@ void NetHost::switchToPlayer(uint32_t user, uint8_t number)
 		temp += name;
 		temp += " ";
 		setPlayerName(old, op.name.erase(op.name.find(temp), temp.size()));
-		//if (op.name.empty())
-			
+		if (op.name.empty())
+			op.state = PlayerSettings::stateOpen;
 	}
 
 	if (number < d->settings.players.size()) {
 		// Add hosts name to new player slot
 		PlayerSettings & op = d->settings.players.at(number);
+		if (op.state == PlayerSettings::stateOpen)
+			op.state = PlayerSettings::stateHuman;
 		setPlayerName(number, op.name + " " + name + " ");
 	}
 	d->settings.users.at(user).position = number;
@@ -1595,6 +1597,13 @@ void NetHost::welcomeClient
 	s.Unsigned32(client.usernum);
 	writeSettingUser(s, client.usernum);
 	broadcast(s);
+
+	// Check if there is an unoccupied player left and if, assign.
+	for (uint8_t i = 0; i < d->settings.players.size(); ++i)
+		if (d->settings.players.at(i).state == PlayerSettings::stateOpen) {
+			switchToPlayer(client.usernum, i);
+			break;
+		}
 
 	sendSystemChat(_("%s has joined the game"), effective_name.c_str());
 
