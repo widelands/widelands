@@ -42,7 +42,6 @@ struct WarehouseWaresDisplay : WaresDisplay {
 
 protected:
 	virtual void draw_ware(RenderTarget& dst, Widelands::Ware_Index ware, uint32_t stock);
-	virtual bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Interactive_GameBase & m_igbase;
@@ -52,7 +51,7 @@ private:
 WarehouseWaresDisplay::WarehouseWaresDisplay
 	(UI::Panel* parent, uint32_t width, Interactive_GameBase & igbase, Warehouse& wh, wdType type)
 :
-WaresDisplay(parent, 0, 0, wh.owner().tribe()),
+WaresDisplay(parent, 0, 0, wh.owner().tribe(), true),
 m_igbase(igbase),
 m_warehouse(wh)
 {
@@ -79,22 +78,6 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::Ware_Index w
 	}
 
 	dst.blit(ware_position(ware), picid);
-}
-
-bool WarehouseWaresDisplay::handle_mousepress(Uint8 btn, int32_t x, int32_t y)
-{
-	if (btn == SDL_BUTTON_LEFT) {
-		Widelands::Ware_Index ware = ware_at_point(x, y);
-		if (!ware)
-			return false;
-
-		if (m_igbase.can_act(m_warehouse.owner().player_number())) {
-			toggle_ware(ware);
-		}
-		return true;
-	}
-
-	return WaresDisplay::handle_mousepress(btn, x, y);
 }
 
 /**

@@ -32,7 +32,8 @@
 WaresDisplay::WaresDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 Widelands::Tribe_Descr const & tribe)
+	 Widelands::Tribe_Descr const & tribe,
+	 bool selectable)
 	:
 	// Size is set when add_warelist is called, as it depends on the m_type.
 	UI::Panel(parent, x, y, 0, 0),
@@ -45,8 +46,8 @@ WaresDisplay::WaresDisplay
 	//TODO need to know m_type at construction time
 	m_type (WORKER),
 	m_selected(m_type == WORKER ? m_tribe.get_nrworkers()
-	                            : m_tribe.get_nrwares(), false)
-
+	                            : m_tribe.get_nrwares(), false),
+	m_selectable(selectable)				    
 {
 }
 
@@ -74,6 +75,23 @@ bool WaresDisplay::handle_mousemove
 		 :
 		 "");
 	return true;
+}
+
+bool WaresDisplay::handle_mousepress
+	(Uint8 btn, int32_t const x, int32_t const y)
+{
+	if (btn == SDL_BUTTON_LEFT) {
+		Widelands::Ware_Index ware = ware_at_point(x, y);
+		if (!ware)
+			return false;
+
+		if (m_selectable) {
+			toggle_ware(ware);
+		}
+		return true;
+	}
+
+	UI::Panel::handle_mousepress(btn, x, y);
 }
 
 /**

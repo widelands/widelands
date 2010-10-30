@@ -47,11 +47,16 @@ struct WaresDisplay : public UI::Panel {
 
 	WaresDisplay
 		(UI::Panel * const parent,
-		 int32_t const x, int32_t const y, Widelands::Tribe_Descr const &);
+		 int32_t const x, int32_t const y,
+		 Widelands::Tribe_Descr const &,
+		 bool selectable);
 	virtual ~WaresDisplay();
 
 	bool handle_mousemove
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+
+	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
+
 
 	void add_warelist(Widelands::WareList const &, wdType);
 	void remove_all_warelists();
@@ -98,6 +103,7 @@ private:
 	vector_type         m_warelists;
 	selection_type      m_selected;
 	selection_type      m_hidden;
+	bool		    m_selectable;
 };
 
 #endif
