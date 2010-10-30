@@ -34,6 +34,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe,
+	 wdType type,
 	 bool selectable)
 	:
 	// Size is set when add_warelist is called, as it depends on the m_type.
@@ -44,8 +45,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 		(this,
 		 0, get_inner_h() - 25, get_inner_w(), 20,
 		 _("Stock"), UI::Align_Center),
-	//TODO need to know m_type at construction time
-	m_type (WORKER),
+	m_type (type),
 	m_selected(m_type == WORKER ? m_tribe.get_nrworkers()
 	                            : m_tribe.get_nrwares(), false),
 	m_selectable(selectable)				    
@@ -238,13 +238,13 @@ bool AbstractWaresDisplay::ware_selected(Widelands::Ware_Index ware) {
 	return	m_selected[ware];
 }
 
-
 WaresDisplay::WaresDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe,
-	 bool selectable) : 
-	AbstractWaresDisplay(parent, x, y, tribe, selectable)
+	 wdType type,
+	 bool selectable) :
+	 AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
 {}
 
 WaresDisplay::~WaresDisplay()
@@ -268,11 +268,10 @@ add a ware list to be displayed in this WaresDisplay
 ===============
 */
 void WaresDisplay::add_warelist
-	(Widelands::WareList const & wares, wdType const type)
+	(Widelands::WareList const & wares)
 {
 	//  If you register something twice, it is counted twice. Not my problem.
 	m_warelists.push_back(&wares);
-	m_type = type;
 
 	update_desired_size();
 }

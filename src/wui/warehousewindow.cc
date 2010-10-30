@@ -51,14 +51,12 @@ private:
 WarehouseWaresDisplay::WarehouseWaresDisplay
 	(UI::Panel* parent, uint32_t width, Interactive_GameBase & igbase, Warehouse& wh, wdType type)
 :
-WaresDisplay(parent, 0, 0, wh.owner().tribe(), true),
+WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, true),
 m_igbase(igbase),
 m_warehouse(wh)
 {
 	set_inner_size(width, 0);
-	add_warelist
-		(type == WORKER ? m_warehouse.get_workers() : m_warehouse.get_wares(),
-		 type);
+	add_warelist(type == WORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
 }
 
 void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::Ware_Index ware)

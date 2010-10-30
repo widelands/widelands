@@ -49,6 +49,7 @@ struct AbstractWaresDisplay : public UI::Panel {
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const &,
+		 wdType type,
 		 bool selectable);
 
 	bool handle_mousemove
@@ -90,12 +91,12 @@ protected:
 		(RenderTarget &,
 		 Widelands::Ware_Index);
 
-	wdType              m_type;
 private:
 	typedef std::vector<Widelands::WareList const *> vector_type;
 	typedef std::vector<bool> selection_type;
 
 	Widelands::Tribe_Descr const & m_tribe;
+	wdType              m_type;
 	UI::Textarea        m_curware;
 	selection_type      m_selected;
 	selection_type      m_hidden;
@@ -114,10 +115,12 @@ struct WaresDisplay : public AbstractWaresDisplay {
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const &,
+		 wdType type,
 		 bool selectable);
+
 	virtual ~WaresDisplay();
 
-	void add_warelist(Widelands::WareList const &, wdType);
+	void add_warelist(Widelands::WareList const &);
 	void remove_all_warelists();
 
 protected:

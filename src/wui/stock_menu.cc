@@ -45,24 +45,24 @@ m_player(plr)
 			 (this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	set_center_panel(tabs);
 
-	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), false);
+	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), WaresDisplay::WARE, false);
 	tabs->add
 		("total_wares", g_gr->get_picture(PicMod_UI, pic_tab_wares),
 		 m_all_wares, _("Wares (total)"));
 
-	m_all_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), false);
+	m_all_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), WaresDisplay::WORKER, false);
 	tabs->add
 		("workers_total", g_gr->get_picture(PicMod_UI, pic_tab_workers),
 		 m_all_workers, _("Workers (total)"));
 
-	m_warehouse_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), false);
+	m_warehouse_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), WaresDisplay::WARE, false);
 	tabs->add
 		("wares_in_warehouses",
 		 g_gr->get_picture (PicMod_UI, pic_tab_wares_warehouse),
 		 m_warehouse_wares, _("Wares in warehouses")
 	);
 
-	m_warehouse_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), false);
+	m_warehouse_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), WaresDisplay::WORKER, false);
 	tabs->add
 		("workers_in_warehouses",
 		 g_gr->get_picture(PicMod_UI, pic_tab_workers_warehouse),
@@ -99,8 +99,7 @@ void Stock_Menu::fill_total_waresdisplay
 		waresdisplay->add_warelist
 			(type == WaresDisplay::WARE ?
 			 player.get_economy_by_number(i)->get_wares() :
-			 player.get_economy_by_number(i)->get_workers(),
-			 type);
+			 player.get_economy_by_number(i)->get_workers());
 }
 
 /**
@@ -125,7 +124,7 @@ void Stock_Menu::fill_warehouse_waresdisplay
 		{
 			waresdisplay->add_warelist
 				(type == WaresDisplay::WARE ?
-				 (*it)->get_wares() : (*it)->get_workers(), type);
+				 (*it)->get_wares() : (*it)->get_workers());
 		}
 	}
 }
