@@ -11,8 +11,6 @@ target_link_libraries(test_widelands_scripting
 	${Boost_LIBRARIES}
 	${PNG_LIBRARY}
 	${ZLIB_LIBRARY}
-	${JPEG_LIBRARY}
-	${TIFF_LIBRARY}
 	${SDL_LIBRARY_NOMAIN}
 	${SDLIMAGE_LIBRARY}
 	${SDLMIXER_LIBRARY}

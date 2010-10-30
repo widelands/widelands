@@ -302,14 +302,6 @@ include(CheckIncludeFile)
 find_package(PNG REQUIRED)
 include_directories(${PNG_INCLUDE_DIR})
 
-IF (NOT WIN32)
-  find_package(JPEG REQUIRED)
-  include_directories(${JPEG_INCLUDE_DIR})
-
-  find_package(TIFF REQUIRED)
-  include_directories(${TIFF_INCLUDE_DIR})
-ENDIF (NOT WIN32)
-
 find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIR})
 

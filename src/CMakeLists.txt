@@ -124,8 +124,6 @@ macro(LinkExecutable exe_name is_test)
 
   target_link_libraries(${exe_name} ${PNG_LIBRARY})
   target_link_libraries(${exe_name} ${ZLIB_LIBRARY})
-  target_link_libraries(${exe_name} ${JPEG_LIBRARY})
-  target_link_libraries(${exe_name} ${TIFF_LIBRARY})
   target_link_libraries(${exe_name} ${SDL_LIBRARY})
   target_link_libraries(${exe_name} ${SDLIMAGE_LIBRARY})
   target_link_libraries(${exe_name} ${SDLMIXER_LIBRARY})
