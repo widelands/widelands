@@ -41,7 +41,7 @@ struct WarehouseWaresDisplay : WaresDisplay {
 	WarehouseWaresDisplay(UI::Panel * parent, uint32_t width, Interactive_GameBase &, Warehouse &, wdType type);
 
 protected:
-	virtual void draw_ware(RenderTarget& dst, Widelands::Ware_Index ware, uint32_t stock);
+	virtual void draw_ware(RenderTarget& dst, Widelands::Ware_Index ware);
 
 private:
 	Interactive_GameBase & m_igbase;
@@ -61,9 +61,9 @@ m_warehouse(wh)
 		 type);
 }
 
-void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::Ware_Index ware, uint32_t stock)
+void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::Ware_Index ware)
 {
-	WaresDisplay::draw_ware(dst, ware, stock);
+	WaresDisplay::draw_ware(dst, ware);
 
 	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(get_type() == WORKER, ware);
 	PictureID picid;

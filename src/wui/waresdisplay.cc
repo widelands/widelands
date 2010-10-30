@@ -28,8 +28,9 @@
 #include "logic/worker.h"
 
 #include <cstdio>
+#include <boost/lexical_cast.hpp>
 
-WaresDisplay::WaresDisplay
+AbstractWaresDisplay::AbstractWaresDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe,
@@ -51,18 +52,24 @@ WaresDisplay::WaresDisplay
 {
 }
 
-
-WaresDisplay::~WaresDisplay()
+void AbstractWaresDisplay::update_desired_size()
 {
-	remove_all_warelists();
+	// Find out geometry from icons_order 
+	unsigned int columns = icons_order().size();	
+	unsigned int rows = 0;
+	for (unsigned int i = 0; i < icons_order().size(); i++)
+		if (icons_order()[i].size() > rows) 
+			rows = icons_order()[i].size();
+
+	// 25 is height of m_curware text
+	set_desired_size(columns * (WARE_MENU_PIC_WIDTH  +     3) + 1,
+	                 rows    * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1 + 25);
 }
 
 
-bool WaresDisplay::handle_mousemove
+bool AbstractWaresDisplay::handle_mousemove
 	(Uint8, int32_t const x, int32_t const y, int32_t, int32_t)
 {
-	assert(m_warelists.size());
-
 	Widelands::Ware_Index const index = ware_at_point(x, y);
 
 	m_curware.set_text
@@ -77,7 +84,7 @@ bool WaresDisplay::handle_mousemove
 	return true;
 }
 
-bool WaresDisplay::handle_mousepress
+bool AbstractWaresDisplay::handle_mousepress
 	(Uint8 btn, int32_t const x, int32_t const y)
 {
 	if (btn == SDL_BUTTON_LEFT) {
@@ -98,7 +105,7 @@ bool WaresDisplay::handle_mousepress
  * Returns the index of the ware under the given coordinates, or
  * WareIndex::Null() if the given point is outside the range.
  */
-Widelands::Ware_Index WaresDisplay::ware_at_point(int32_t x, int32_t y) const
+Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) const
 {
 	if (x < 0 || y < 0)
 		return Widelands::Ware_Index::Null();
@@ -114,36 +121,7 @@ Widelands::Ware_Index WaresDisplay::ware_at_point(int32_t x, int32_t y) const
 }
 
 
-/*
-===============
-add a ware list to be displayed in this WaresDisplay
-===============
-*/
-void WaresDisplay::add_warelist
-	(Widelands::WareList const & wares, wdType const type)
-{
-	//  If you register something twice, it is counted twice. Not my problem.
-	m_warelists.push_back(&wares);
-	m_type = type;
-
-	update_desired_size();
-}
-
-void WaresDisplay::update_desired_size()
-{
-	// Find out geometry from icons_order 
-	unsigned int columns = icons_order().size();	
-	unsigned int rows = 0;
-	for (unsigned int i = 0; i < icons_order().size(); i++)
-		if (icons_order()[i].size() > rows) 
-			rows = icons_order()[i].size();
-
-	// 25 is height of m_curware text
-	set_desired_size(columns * (WARE_MENU_PIC_WIDTH  +     3) + 1,
-	                 rows    * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1 + 25);
-}
-
-void WaresDisplay::layout()
+void AbstractWaresDisplay::layout()
 {
 	m_curware.set_pos(Point(0, get_inner_h() - 25));
 	m_curware.set_size(get_inner_w(), 20);
@@ -154,7 +132,7 @@ void WaresDisplay::remove_all_warelists() {
 }
 
 
-void WaresDisplay::draw(RenderTarget & dst)
+void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
 	Widelands::Ware_Index number = 
 		m_type == WORKER ? 
@@ -167,18 +145,11 @@ void WaresDisplay::draw(RenderTarget & dst)
 		 id < number;
 		 ++id, ++totid)
 	{
-		uint32_t totalstock = 0;
-		for
-			(Widelands::Ware_Index i = Widelands::Ware_Index::First();
-			 i.value() < m_warelists.size();
-			 ++i)
-			totalstock += m_warelists[i]->stock(id);
-
-		draw_ware(dst, id, totalstock);
+		draw_ware(dst, id);
 	}
 }
 
-Widelands::Tribe_Descr::WaresOrder const & WaresDisplay::icons_order() const
+Widelands::Tribe_Descr::WaresOrder const & AbstractWaresDisplay::icons_order() const
 {
 	switch(m_type) {
 		case WARE:
@@ -190,7 +161,7 @@ Widelands::Tribe_Descr::WaresOrder const & WaresDisplay::icons_order() const
 	}
 }
 
-Widelands::Tribe_Descr::WaresOrderCoords const & WaresDisplay::icons_order_coords() const
+Widelands::Tribe_Descr::WaresOrderCoords const & AbstractWaresDisplay::icons_order_coords() const
 {
 	switch(m_type) {
 		case WARE:
@@ -203,7 +174,7 @@ Widelands::Tribe_Descr::WaresOrderCoords const & WaresDisplay::icons_order_coord
 }
 
 
-Point WaresDisplay::ware_position(Widelands::Ware_Index const id) const
+Point AbstractWaresDisplay::ware_position(Widelands::Ware_Index const id) const
 {
 	Point p(2,2);
 	p.x += icons_order_coords()[id].first  * (WARE_MENU_PIC_WIDTH + 3);
@@ -218,10 +189,9 @@ WaresDisplay::draw_ware [virtual]
 Draw one ware icon + additional information.
 ===============
 */
-void WaresDisplay::draw_ware
+void AbstractWaresDisplay::draw_ware
 	(RenderTarget        &       dst,
-	 Widelands::Ware_Index const id,
-	 uint32_t              const stock)
+	 Widelands::Ware_Index const id)
 {
 	Point p = ware_position(id);
 
@@ -248,25 +218,62 @@ void WaresDisplay::draw_ware
 		(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
 		 RGBColor(0, 0, 0));
 
-	char buffer[32];
-	snprintf(buffer, sizeof(buffer), "%i", stock);
-
 	UI::g_fh->draw_string
 		(dst,
 		 UI_FONT_ULTRASMALL,
 		 UI_FONT_SMALL_CLR,
 		 p + Point(WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT - 4),
-		 buffer,
+		 info_for_ware(id),
 		 UI::Align_Right);
 }
 
 // Wares highlighting/selecting
-void WaresDisplay::select_ware(Widelands::Ware_Index ware) {
+void AbstractWaresDisplay::select_ware(Widelands::Ware_Index ware) {
 	m_selected[ware] = true;
 }
-void WaresDisplay::unselect_ware(Widelands::Ware_Index ware) {
+void AbstractWaresDisplay::unselect_ware(Widelands::Ware_Index ware) {
 	m_selected[ware] = false;
 }
-bool WaresDisplay::ware_selected(Widelands::Ware_Index ware) {
+bool AbstractWaresDisplay::ware_selected(Widelands::Ware_Index ware) {
 	return	m_selected[ware];
 }
+
+
+WaresDisplay::WaresDisplay
+	(UI::Panel * const parent,
+	 int32_t const x, int32_t const y,
+	 Widelands::Tribe_Descr const & tribe,
+	 bool selectable) : 
+	AbstractWaresDisplay(parent, x, y, tribe, selectable)
+{}
+
+WaresDisplay::~WaresDisplay()
+{
+	remove_all_warelists();
+}
+
+std::string WaresDisplay::info_for_ware(Widelands::Ware_Index ware) {
+	uint32_t totalstock = 0;
+	for
+		(Widelands::Ware_Index i = Widelands::Ware_Index::First();
+		 i.value() < m_warelists.size();
+		 ++i)
+		totalstock += m_warelists[i]->stock(ware);
+	return boost::lexical_cast<std::string>(totalstock);
+}
+
+/*
+===============
+add a ware list to be displayed in this WaresDisplay
+===============
+*/
+void WaresDisplay::add_warelist
+	(Widelands::WareList const & wares, wdType const type)
+{
+	//  If you register something twice, it is counted twice. Not my problem.
+	m_warelists.push_back(&wares);
+	m_type = type;
+
+	update_desired_size();
+}
+

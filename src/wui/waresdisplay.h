@@ -35,31 +35,27 @@ struct WareList;
 }
 
 /*
-class WaresDisplay
+class AbstractWaresDisplay
 ------------------
-Panel that displays the contents of a WareList.
+Panel that displays wares or workers with some string
 */
-struct WaresDisplay : public UI::Panel {
+struct AbstractWaresDisplay : public UI::Panel {
 	enum wdType {
 		WORKER,
 		WARE
 	};
 
-	WaresDisplay
+	AbstractWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const &,
 		 bool selectable);
-	virtual ~WaresDisplay();
 
 	bool handle_mousemove
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
 
-
-	void add_warelist(Widelands::WareList const &, wdType);
-	void remove_all_warelists();
 
 	// Wares may be selected (highlighted)
 	void select_ware(Widelands::Ware_Index);
@@ -84,26 +80,52 @@ protected:
 	virtual void layout();
 	virtual void update_desired_size();
 
+	virtual std::string info_for_ware(Widelands::Ware_Index const) = 0;
+
 	Widelands::Tribe_Descr::WaresOrder const & icons_order() const;
 	Widelands::Tribe_Descr::WaresOrderCoords const & icons_order_coords() const;
 	virtual Point ware_position(Widelands::Ware_Index const) const;
 	virtual void draw(RenderTarget &);
 	virtual void draw_ware
 		(RenderTarget &,
-		 Widelands::Ware_Index,
-		 uint32_t stock);
+		 Widelands::Ware_Index);
 
+	wdType              m_type;
 private:
 	typedef std::vector<Widelands::WareList const *> vector_type;
 	typedef std::vector<bool> selection_type;
 
 	Widelands::Tribe_Descr const & m_tribe;
 	UI::Textarea        m_curware;
-	wdType              m_type;
-	vector_type         m_warelists;
 	selection_type      m_selected;
 	selection_type      m_hidden;
 	bool		    m_selectable;
+};
+
+/*
+class WaresDisplay
+------------------
+Panel that displays the contents of a WareList.
+*/
+struct WaresDisplay : public AbstractWaresDisplay {
+	typedef AbstractWaresDisplay::wdType wdType;
+
+	WaresDisplay
+		(UI::Panel * const parent,
+		 int32_t const x, int32_t const y,
+		 Widelands::Tribe_Descr const &,
+		 bool selectable);
+	virtual ~WaresDisplay();
+
+	void add_warelist(Widelands::WareList const &, wdType);
+	void remove_all_warelists();
+
+protected:
+	virtual std::string info_for_ware(Widelands::Ware_Index const);
+
+private:
+	typedef std::vector<Widelands::WareList const *> vector_type;
+	vector_type         m_warelists;
 };
 
 #endif
