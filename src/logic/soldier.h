@@ -24,6 +24,8 @@
 #include "worker.h"
 #include "tattribute.h"
 
+#define SOLDIER_HP_BAR_WIDTH 13
+
 struct RGBColor;
 
 namespace Widelands {
