@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 11
+#define CURRENT_PACKET_VERSION 12
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -113,7 +113,11 @@ void Game_Player_Info_Data_Packet::Read
 					for (uint32_t j = 0; j < 4; ++j)
 						player.m_playercolor[j] = rgb[j];
 
-					player.ReadStatistics(fr, 0);
+					if (packet_version >= 12)
+						player.ReadStatistics(fr, 1);
+					else
+						player.ReadStatistics(fr, 0);
+
 					player.m_casualties = fr.Unsigned32();
 					player.m_kills      = fr.Unsigned32();
 					player.m_msites_lost         = fr.Unsigned32();

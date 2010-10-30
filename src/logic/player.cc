@@ -1063,38 +1063,65 @@ const std::string & Player::getAI() const
 /**
  * Read statistics data from a file.
  *
+ * \param fr source stream
  * \param version indicates the kind of statistics file, which may be
- *   0 - old style statistics (from the time when statistics were kept in
- *       Interactive_Player)
- * \param fr UNDOCUMENTED
- *
- * \todo Is the documentation for parameter version complete? Doesn't look like
- * it.
- * \todo Document parameter fr
+ *   0 - old style statistics (before WiHack 2010)
+ *   1 - statistics with ware names
  */
 void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 {
-	if (version == 0) {
+	if (version == 1) {
+		uint16_t nr_wares = fr.Unsigned16();
+		uint16_t nr_entries = fr.Unsigned16();
+
+		for (uint32_t i = 0; i < m_current_statistics.size(); ++i)
+			m_ware_productions[i].resize(nr_entries);
+
+		for (uint16_t i = 0; i < nr_wares; ++i) {
+			std::string name = fr.CString();
+			Ware_Index idx = tribe().ware_index(name);
+			if (!idx) {
+				log
+					("Player %u statistics: unknown ware name %s",
+					 player_number(), name.c_str());
+				continue;
+			}
+
+			m_current_statistics[idx] = fr.Unsigned32();
+
+			for (uint32_t j = 0; j < nr_entries; ++j)
+				m_ware_productions[idx][j] = fr.Unsigned32();
+		}
+	} else if (version == 0) {
 		uint16_t nr_wares = fr.Unsigned16();
 		uint16_t nr_entries = fr.Unsigned16();
 
 		if (nr_wares > 0) {
-			if (nr_wares != tribe().get_nrwares().value())
-				throw wexception
-					("statistics for player %u (%s) has %u ware types (should be "
-					 "%u)",
+			if (nr_wares == tribe().get_nrwares().value()) {
+				assert(m_ware_productions.size() == nr_wares);
+				assert(m_current_statistics.size() == nr_wares);
+
+				for (uint32_t i = 0; i < m_current_statistics.size(); ++i) {
+					m_current_statistics[i] = fr.Unsigned32();
+					m_ware_productions[i].resize(nr_entries);
+
+					for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
+						m_ware_productions[i][j] = fr.Unsigned32();
+				}
+			} else {
+				log
+					("Statistics for player %u (%s) has %u ware types (should be %u)."
+					 "Statistics will be discarded.",
 					 player_number(), tribe().name().c_str(),
 					 nr_wares, tribe().get_nrwares().value());
 
-			assert(m_ware_productions.size() == nr_wares);
-			assert(m_current_statistics.size() == nr_wares);
+				// Eat and discard all data
+				for (uint32_t i = 0; i < nr_wares; ++i) {
+					fr.Unsigned32();
 
-			for (uint32_t i = 0; i < m_current_statistics.size(); ++i) {
-				m_current_statistics[i] = fr.Unsigned32();
-				m_ware_productions[i].resize(nr_entries);
-
-				for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
-					m_ware_productions[i][j] = fr.Unsigned32();
+					for (uint32_t j = 0; j < nr_entries; ++j)
+						fr.Unsigned32();
+				}
 			}
 		}
 	} else
@@ -1110,6 +1137,7 @@ void Player::WriteStatistics(FileWrite & fw) const {
 	fw.Unsigned16(m_ware_productions[0].size());
 
 	for (uint32_t i = 0; i < m_current_statistics.size(); ++i) {
+		fw.CString(tribe().get_ware_descr(Ware_Index(i))->name());
 		fw.Unsigned32(m_current_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
 			fw.Unsigned32(m_ware_productions[i][j]);
