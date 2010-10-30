@@ -169,20 +169,24 @@ Widelands::Tribe_Descr::WaresOrder const & WaresDisplay::icons_order() const
 	}
 }
 
+Widelands::Tribe_Descr::WaresOrderCoords const & WaresDisplay::icons_order_coords() const
+{
+	switch(m_type) {
+		case WARE:
+			return m_tribe.wares_order_coords();
+			break;
+		case WORKER:
+			return m_tribe.workers_order_coords();
+			break;
+	}
+}
+
 
 Point WaresDisplay::ware_position(Widelands::Ware_Index const id) const
 {
 	Point p(2,2);
-	for (unsigned int i=0; i < icons_order().size(); i++) {
-		for (unsigned int j=0; j < icons_order()[i].size(); j++) {
-			if (icons_order()[i][j] == id) {
-				p.x += i * (WARE_MENU_PIC_WIDTH + 3);
-				p.y += j * (WARE_MENU_PIC_HEIGHT + 3 + 8);
-				return p;
-			}
-		}
-	}
-	// This should not happen.
+	p.x += icons_order_coords()[id].first  * (WARE_MENU_PIC_WIDTH + 3);
+	p.y += icons_order_coords()[id].second * (WARE_MENU_PIC_HEIGHT + 3 + 8);
 	return p;
 }
 

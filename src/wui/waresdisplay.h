@@ -64,6 +64,7 @@ protected:
 	virtual void update_desired_size();
 
 	Widelands::Tribe_Descr::WaresOrder const & icons_order() const;
+	Widelands::Tribe_Descr::WaresOrderCoords const & icons_order_coords() const;
 	virtual Point ware_position(Widelands::Ware_Index const) const;
 	virtual void draw(RenderTarget &);
 	virtual void draw_ware
