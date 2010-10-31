@@ -135,6 +135,9 @@ woodcutter=_Woodcutter
 scout=_Scout
 horsebreeder=_Horse Breeder
 
+[ship types]
+ship=_Ship
+
 [constructionsite types]
 constructionsite=_Construction Site
 
