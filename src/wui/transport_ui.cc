@@ -60,7 +60,7 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 		m_tabpanel.add("workers",
 			g_gr->get_picture(PicMod_UI, pic_tab_workers),
 			new Economy_Options_Worker_Panel(&m_tabpanel, parent, economy),
-			_("Wares"));
+			_("Workers"));
 	}
 
 private:
