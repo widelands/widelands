@@ -96,7 +96,7 @@ volatile int32_t WLApplication::may_run = 0;
 #endif
 
 #define MINIMUM_DISK_SPACE 250000000lu
-#define SCREENSHOT_DIR "screenshots" 
+#define SCREENSHOT_DIR "screenshots"
 
 //Always specifying namespaces is good, but let's not go too far ;-)
 //using std::cout;
@@ -1675,12 +1675,8 @@ void WLApplication::mainmenu_multiplayer()
 
 #else
 		// If compiled without ggz support, only lan-netsetup will be visible
-		if (menu_result == Fullscreen_Menu_NetSetupLAN::CANCEL) {
-#ifdef WIN32
-			// Clean up winsock2 data
-			WSACleanup();
-#endif
-			return;
+		if (menu_result == Fullscreen_Menu_NetSetupLAN::CANCEL || menu_result < 0) {
+			break;
 		}
 #endif // HAVE_GGZ
 
