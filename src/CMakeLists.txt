@@ -37,6 +37,8 @@ foreach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
     list (REMOVE_ITEM WL_SRCS_H ${sourcefile})
   endif (${sourcefile} MATCHES ".*/test/.*")
 endforeach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
+#convention: main.cc should be removed from all lists
+list (REMOVE_ITEM WL_SRCS_CC "${CMAKE_CURRENT_SOURCE_DIR}/main.cc")
 
 IF (DEFINED MSVC)
   add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
