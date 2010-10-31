@@ -24,6 +24,7 @@
  * Implementation is in immovable.cc
  */
 
+#include "buildcost.h"
 #include "immovable.h"
 
 #include <string>
@@ -127,6 +128,27 @@ struct ImmovableProgram {
 		uint8_t     priority;
 	};
 
+	/**
+	 * Puts the immovable into construction mode.
+	 *
+	 * Parameter syntax:
+	 *    parameters ::= animation decay-time
+	 * Parameter semantics:
+	 *    animation:
+	 *       The basic animation to be displayed during construction.
+	 *    decay-time:
+	 *       Time until construction decays one step if no progress has been made.
+	 */
+	struct ActConstruction : public Action {
+		ActConstruction(char * parameters, Immovable_Descr &, std::string const & directory, Profile &);
+		virtual void execute(Game &, Immovable &) const;
+
+		Duration decaytime() const {return m_decaytime;}
+
+	private:
+		uint32_t m_animid;
+		Duration m_decaytime;
+	};
 
 	/// Create a program with a single action.
 	ImmovableProgram(char const * const _name, Action * const action)
@@ -159,6 +181,11 @@ struct ImmovableProgram {
 private:
 	std::string m_name;
 	Actions     m_actions;
+};
+
+struct ImmovableActionData {
+	ImmovableActionData() {}
+	virtual ~ImmovableActionData() {}
 };
 
 }

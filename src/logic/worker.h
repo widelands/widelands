@@ -51,8 +51,13 @@ class Worker : public Bob {
 		typedef bool (Worker::*execute_t)(Game &, Bob::State &, Action const &);
 
 		enum {
-			walkObject, //  walk to objvar1
-			walkCoords, //  walk to coords
+			walkObject = 1, //  walk to objvar1
+			walkCoords = 2, //  walk to coords
+		};
+
+		enum {
+			plantAlways,
+			plantUnlessObject
 		};
 
 		execute_t function;
@@ -245,6 +250,7 @@ private:
 	bool run_geologist_find   (Game &, State &, Action const &);
 	bool run_scout            (Game &, State &, Action const &);
 	bool run_playFX           (Game &, State &, Action const &);
+	bool run_construct        (Game &, State &, Action const &);
 
 	// Displays a message to the player if a find... program can't be
 	// executed

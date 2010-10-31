@@ -227,7 +227,7 @@ Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
 /**
  * Add this animation for this map object under this name
  */
-bool Map_Object_Descr::is_animation_known(char const * const animname) const {
+bool Map_Object_Descr::is_animation_known(const std::string & animname) const {
 	container_iterate_const(Anims, m_anims, i)
 		if (i.current->first == animname)
 			return true;
@@ -235,13 +235,13 @@ bool Map_Object_Descr::is_animation_known(char const * const animname) const {
 }
 
 void Map_Object_Descr::add_animation
-	(char const * const animname, uint32_t const anim)
+	(const std::string & animname, uint32_t const anim)
 {
 #ifndef NDEBUG
 	container_iterate_const(Anims, m_anims, i)
 		if (i.current->first == animname)
 			throw wexception
-				("adding already existing animation \"%s\"", animname);
+				("adding already existing animation \"%s\"", animname.c_str());
 #endif
 	m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 }

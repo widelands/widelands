@@ -1204,6 +1204,8 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 		fw.  Signed32(productionsite.m_stack[i].ip);
 		fw.  Signed32(productionsite.m_stack[i].phase);
 		fw.Unsigned32(productionsite.m_stack[i].flags);
+
+		//TODO("objvar & coords");
 	}
 	fw.Unsigned8(productionsite.m_program_timer);
 	fw. Signed32(productionsite.m_program_time);

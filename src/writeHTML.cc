@@ -1377,6 +1377,25 @@ void ProductionProgram::ActPlayFX::writeHTML
 }
 
 
+void ProductionProgram::ActConstruct::writeHTML
+	(::FileWrite & fw, ProductionSite_Descr const &) const
+{
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.xhtml"));
+	fw.Text("#construct\" title=\"");
+	fw.Text(_("Documentation for program command construct"));
+	fw.Text("\">");
+	fw.Text(_("construct"));
+	fw.Text("</a> ");
+	fw.Text(objectname);
+	fw.Text(" ");
+	fw.Text(workerprogram);
+	char buffer[32];
+	sprintf(buffer, " %u", radius);
+	fw.Text(buffer);
+}
+
+
 void Tribe_Descr::writeHTMLWares(std::string const & directory) {
 	assert(directory.size());
 	assert(*directory.rbegin() == '/');

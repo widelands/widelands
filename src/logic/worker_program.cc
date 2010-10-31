@@ -19,9 +19,10 @@
 
 #include "worker_program.h"
 
-#include "helper.h"
 #include "profile/profile.h"
 #include "findnode.h"
+#include "game_data_error.h"
+#include "helper.h"
 #include "tribe.h"
 
 namespace Widelands {
@@ -45,6 +46,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"geologist-find",    &WorkerProgram::parse_geologist_find},
 	{"scout",             &WorkerProgram::parse_scout},
 	{"playFX",            &WorkerProgram::parse_playFX},
+	{"construct",         &WorkerProgram::parse_construct},
 
 	{0, 0}
 };
@@ -102,7 +104,7 @@ void WorkerProgram::parse
  *
  * The worker will create and carry an item of the given type.
  *
- * sparam1 = ware name
+ * iparam1 = ware index
  */
 void WorkerProgram::parse_createitem
 	(Worker_Descr                   * descr,
@@ -392,6 +394,8 @@ void WorkerProgram::parse_findspace
  * Walk to a previously selected destination. where can be one of:
  * object  walk to a previously found and selected object
  * coords  walk to a previously found and selected field/coordinate
+ * object-or-coords  walk to a previously found and selected object if
+ *         present; otherwise to previously found and selected coordinate
  *
  * iparam1 = walkXXX
  */
@@ -410,6 +414,8 @@ void WorkerProgram::parse_walk
 		act->iparam1 = Worker::Action::walkObject;
 	else if (cmd[1] == "coords")
 		act->iparam1 = Worker::Action::walkCoords;
+	else if (cmd[1] == "object-or-coords")
+		act->iparam1 = Worker::Action::walkObject | Worker::Action::walkCoords;
 	else
 		throw wexception("Bad walk destination '%s'", cmd[1].c_str());
 }
@@ -494,10 +500,13 @@ void WorkerProgram::parse_object
 
 
 /**
- * plant \<immmovable type\> \<immovable type\> ...
+ * plant \<immmovable type\> \<immovable type\> ... [unless object]
  *
  * Plant one of the given immovables on the current position.
  * Decision is made with inclusion of the terrain affinity.
+ *
+ * sparamv  list of object names
+ * iparam1  one of plantXXX
  */
 void WorkerProgram::parse_plant
 	(Worker_Descr                   *,
@@ -506,11 +515,24 @@ void WorkerProgram::parse_plant
 	 std::vector<std::string> const & cmd)
 {
 	if (cmd.size() < 2)
-		throw wexception("Usage: plant <immovable type> <immovable type> ...");
+		throw wexception("Usage: plant <immovable type> <immovable type> ... [unless object]");
 
 	act->function = &Worker::run_plant;
-	for (uint32_t i = 1; i < cmd.size(); ++i)
+	act->iparam1 = Worker::Action::plantAlways;
+	for (uint32_t i = 1; i < cmd.size(); ++i) {
+		if (i >= 2 && cmd[i] == "unless") {
+			++i;
+			if (i >= cmd.size())
+				throw game_data_error("plant: something expected after unless");
+			if (cmd[i] == "object")
+				act->iparam1 = Worker::Action::plantUnlessObject;
+			else
+				throw game_data_error("plant: 'unless %s' not understood", cmd[i].c_str());
+
+			continue;
+		}
 		act->sparamv.push_back(cmd[i]);
+	}
 }
 
 
@@ -630,5 +652,24 @@ void WorkerProgram::parse_playFX
 		64 : //  50% chance to play, only one instance at a time
 		atoi(cmd[2].c_str());
 }
+
+/**
+ * construct
+ *
+ * Give the currently held item of the worker to the \ref objvar1 immovable
+ * for construction. This is used in ship building.
+ */
+void WorkerProgram::parse_construct
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
+{
+	if (cmd.size() != 1)
+		throw wexception("Usage: construct");
+
+	act->function = &Worker::run_construct;
+}
+
 
 }

@@ -129,6 +129,9 @@ struct Tribe_Descr {
 	Immovable_Descr const * get_immovable_descr(int32_t const index) const {
 		return m_immovables.get(index);
 	}
+	Immovable_Descr const * get_immovable_descr(const std::string & name) const {
+		return m_immovables.get(get_immovable_index(name.c_str()));
+	}
 	int32_t get_bob(char const * const l) const {return m_bobs.get_index(l);}
 	Bob::Descr const * get_bob_descr(uint16_t const index) const {
 		return m_bobs.get(index);

@@ -1,0 +1,17 @@
+size=small
+program=program
+picture=ship_i_00.png
+
+[buildcost]
+planks=10
+trunk=2
+spidercloth=4
+
+[program]
+construction=idle 210000
+remove=
+
+[idle]
+pics=ship_i_??.png
+hotspot=55 60
+playercolor=true

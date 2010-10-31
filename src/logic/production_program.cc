@@ -19,8 +19,12 @@
 
 #include "production_program.h"
 
+#include "checkstep.h"
 #include "economy/economy.h"
+#include "economy/flag.h"
 #include "economy/wares_queue.h"
+#include "findimmovable.h"
+#include "findnode.h"
 #include "game.h"
 #include "game_data_error.h"
 #include "helper.h"
@@ -48,6 +52,15 @@ using boost::format;
 
 
 ProductionProgram::Action::~Action() {}
+
+bool ProductionProgram::Action::get_building_work(Game &, ProductionSite &, Worker &) const
+{
+	return false;
+}
+
+void ProductionProgram::Action::building_work_failed(Game &, ProductionSite &, Worker &) const
+{
+}
 
 void ProductionProgram::parse_ware_type_group
 	(char            * & parameters,
@@ -595,10 +608,26 @@ ProductionProgram::ActWorker::ActWorker
 void ProductionProgram::ActWorker::execute
 	(Game & game, ProductionSite & ps) const
 {
-	//ps.molog("  Worker(%s)\n", m_program.c_str());
-
 	// Always main worker is doing stuff
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
+}
+
+bool ProductionProgram::ActWorker::get_building_work(Game& game, ProductionSite& psite, Worker& worker) const
+{
+	ProductionSite::State & state = psite.top_state();
+	if (state.phase == 0) {
+		worker.start_task_program(game, program());
+		++state.phase;
+		return true;
+	} else {
+		psite.program_step(game);
+		return false;
+	}
+}
+
+void ProductionProgram::ActWorker::building_work_failed(Game& game, ProductionSite& psite, Worker& ) const
+{
+	psite.program_end(game, Failed);
 }
 
 
@@ -889,6 +918,13 @@ void ProductionProgram::ActProduce::execute
 		 "%s", result_string.c_str());
 }
 
+bool ProductionProgram::ActProduce::get_building_work(Game& game, ProductionSite& psite, Worker& worker) const
+{
+	// We reach this point once all wares have been carried outside the building
+	psite.program_step(game);
+	return false;
+}
+
 
 ProductionProgram::ActRecruit::ActRecruit
 	(char * parameters, ProductionSite_Descr const & descr)
@@ -970,6 +1006,13 @@ void ProductionProgram::ActRecruit::execute
 	snprintf
 		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 		 "%s", result_string.c_str());
+}
+
+bool ProductionProgram::ActRecruit::get_building_work(Game& game, ProductionSite& psite, Worker& worker) const
+{
+	// We reach this point once all recruits have been guided outside the building
+	psite.program_step(game);
+	return false;
 }
 
 
@@ -1359,6 +1402,135 @@ void ProductionProgram::ActPlayFX::execute
 	return ps.program_step(game);
 }
 
+ProductionProgram::ActConstruct::ActConstruct
+	(char * parameters, ProductionSite_Descr const &)
+{
+	try {
+		std::vector<std::string> params = split_string(parameters, " ");
+
+		if (params.size() != 3)
+			throw game_data_error("usage: construct object-name worker-program radius:NN");
+
+		objectname = params[0];
+		workerprogram = params[1];
+		radius = stringTo<uint32_t>(params[2]);
+	} catch (const _wexception & e) {
+		throw game_data_error("construct: %s", e.what());
+	}
+}
+
+const Immovable_Descr& ProductionProgram::ActConstruct::get_construction_descr(ProductionSite& psite) const
+{
+	const Immovable_Descr * descr = psite.tribe().get_immovable_descr(objectname);
+	if (!descr)
+		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
+
+	return *descr;
+}
+
+
+void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) const
+{
+	ProductionSite::State & state = psite.top_state();
+	const Immovable_Descr & descr = get_construction_descr(psite);
+
+	// Early check for no resources
+	const Buildcost & buildcost = descr.buildcost();
+	Ware_Index available_resource = Ware_Index::Null();
+
+	for (Buildcost::const_iterator it = buildcost.begin(); it != buildcost.end(); ++it) {
+		if (psite.waresqueue(it->first).get_filled() > 0) {
+			available_resource = it->first;
+			break;
+		}
+	}
+
+	if (!available_resource) {
+		psite.program_end(g, Failed);
+		return;
+	}
+
+	// Look for an appropriate object in the given radius
+	std::vector<ImmovableFound> immovables;
+	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
+	Area<FCoords> area (g.map().get_fcoords(psite.base_flag().get_position()), radius);
+	if (g.map().find_reachable_immovables
+		(area, &immovables, cstep, FindImmovableByDescr(descr))) {
+		state.objvar = immovables[0].object;
+
+		psite.m_working_positions[0].worker->update_task_buildingwork(g);
+		return;
+	}
+
+	// No object found, look for a field where we can build
+	std::vector<Coords> fields;
+	FindNodeAnd fna;
+	fna.add(FindNodeShore());
+	fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone));
+	if (g.map().find_reachable_fields
+		(area, &fields, cstep, fna)) {
+		state.coord = fields[0];
+
+		psite.m_working_positions[0].worker->update_task_buildingwork(g);
+		return;
+	}
+
+	psite.molog("construct: no object or buildable field");
+	psite.program_end(g, Failed);
+}
+
+bool ProductionProgram::ActConstruct::get_building_work(Game& game, ProductionSite& psite, Worker& worker) const
+{
+	ProductionSite::State & state = psite.top_state();
+
+	// First step: figure out which ware item to bring along
+	Buildcost remaining;
+	WaresQueue * wq = 0;
+
+	Immovable * construction = dynamic_cast<Immovable*>(state.objvar.get(game));
+	if (construction) {
+		if (!construction->construct_remaining_buildcost(game, &remaining)) {
+			psite.molog("construct: immovable %u not under construction", construction->serial());
+			psite.program_end(game, Failed);
+			return false;
+		}
+	} else {
+		const Immovable_Descr & descr = get_construction_descr(psite);
+		remaining = descr.buildcost();
+	}
+
+	for (Buildcost::const_iterator it = remaining.begin(); it != remaining.end(); ++it) {
+		WaresQueue & thiswq = psite.waresqueue(it->first);
+		if (thiswq.get_filled() > 0) {
+			wq = &thiswq;
+			break;
+		}
+	}
+
+	if (!wq) {
+		psite.program_end(game, Failed);
+		return false;
+	}
+
+	// Second step: give item to worker
+	WareInstance * item = new WareInstance(wq->get_ware(), psite.tribe().get_ware_descr(wq->get_ware()));
+	item->init(game);
+	worker.set_carried_item(game, item);
+	wq->set_filled(wq->get_filled() - 1);
+
+	// Third step: send worker on his merry way, giving the target object or coords
+	worker.start_task_program(game, workerprogram);
+	worker.top_state().objvar1 = construction;
+	worker.top_state().coords = state.coord;
+	return true;
+}
+
+void ProductionProgram::ActConstruct::building_work_failed(Game& game, ProductionSite& psite, Worker& ) const
+{
+	psite.program_end(game, Failed);
+}
+
+
 
 ProductionProgram::ProductionProgram
 	(std::string    const & directory,
@@ -1396,6 +1568,8 @@ ProductionProgram::ProductionProgram
 			action = new ActTrain  (v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "playFX"))
 			action = new ActPlayFX (v->get_string(), *building);
+		else if (not strcmp(v->get_name(), "construct"))
+			action = new ActConstruct (v->get_string(), *building);
 		else
 			throw game_data_error
 				(_("unknown command type \"%s\""), v->get_name());

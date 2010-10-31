@@ -759,13 +759,13 @@ Section * Profile::get_section(char const * const name)
  * Safely get a section of the given name.
  * If the section doesn't exist, an exception is thrown.
  */
-Section & Profile::get_safe_section(char const * const name)
+Section & Profile::get_safe_section(const std::string & name)
 {
-	if (Section * const s = get_section(name))
+	if (Section * const s = get_section(name.c_str()))
 		return *s;
 	else
 		throw wexception
-			("in \"%s\" section [%s] not found", m_filename.c_str(), name);
+			("in \"%s\" section [%s] not found", m_filename.c_str(), name.c_str());
 }
 
 /**

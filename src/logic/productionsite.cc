@@ -597,17 +597,12 @@ bool ProductionSite::get_building_work
 	assert(descr().working_positions().size());
 	assert(&worker == m_working_positions[0].worker);
 
-	State * state = get_state();
-
 	// If unsuccessful: Check if we need to abort current program
-	if (!success && state)
-		if
-			(dynamic_cast<ProductionProgram::ActWorker const *>
-			 	(&(*state->program)[state->ip]))
-		{
-			program_end(game, Failed);
-			state = 0;
-		}
+	if (!success) {
+		State * state = get_state();
+		if (state->ip < state->program->get_size())
+			(*state->program)[state->ip].building_work_failed(game, *this, worker);
+	}
 
 	// Default actions first
 	if (WareInstance * const item = worker.fetch_carried_item(game)) {
@@ -676,29 +671,15 @@ bool ProductionSite::get_building_work
 		return false;
 
 	// Start program if we haven't already done so
+	State * state = get_state();
 	if (!state) {
 		m_program_timer = true;
 		m_program_time = schedule_act(game, 10);
 	} else if (state->ip < state->program->get_size()) {
 		ProductionProgram::Action const & action = (*state->program)[state->ip];
-
-		if (upcast(ProductionProgram::ActWorker const, worker_action, &action)) {
-			if (state->phase == 0) {
-				worker.start_task_program(game, worker_action->program());
-				++state->phase;
-				return true;
-			} else
-				program_step(game);
-		} else if
-			(dynamic_cast<ProductionProgram::ActProduce const *>(&action) or
-			 dynamic_cast<ProductionProgram::ActRecruit const *>(&action))
-		{
-			//  All the wares that we produced have been carried out and all the
-			//  workers that we recruited have been sent out, so continue with the
-			//  program.
-			program_step(game);
-		}
+		return action.get_building_work(game, *this, worker);
 	}
+
 	return false;
 }
 

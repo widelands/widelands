@@ -135,25 +135,7 @@ Building_Descr::Building_Descr
 
 		// Get costs
 		Section & buildcost_s = prof.get_safe_section("buildcost");
-		while (Section::Value const * const val = buildcost_s.get_next_val())
-			try {
-				if (Ware_Index const idx = m_tribe.ware_index(val->get_name())) {
-					if (m_buildcost.count(idx))
-						throw wexception
-							("a buildcost item of this ware type has already been "
-							 "defined");
-					int32_t const value = val->get_int();
-					if (value < 1 or 255 < value)
-						throw wexception("count is out of range 1 .. 255");
-					m_buildcost.insert(std::pair<Ware_Index, uint8_t>(idx, value));
-				} else
-					throw wexception
-						("tribe does not define a ware type with this name");
-			} catch (_wexception const & e) {
-				throw wexception
-					("[buildcost] \"%s=%s\": %s",
-					 val->get_name(), val->get_string(), e.what());
-			}
+		m_buildcost.parse(m_tribe, buildcost_s);
 	} else if (m_global) {
 		//  get build icon for global buildings (for statistics window)
 		m_buildicon_fname  = directory;

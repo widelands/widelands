@@ -15,31 +15,21 @@ planks=10
 trunk=2
 spidercloth=4
 
-
 [programs]
 work=_Work
-boat=_Constructing boat
 ship=_Constructing ship
 
 [work]
-# call=boat
 sleep=20000
-# call=ship # TODO: instead check the different building states of ships
-            # - (no ship yet, ship that needs planks, ship that needs a trunk
-            #   (mast), ship that needs the sail)
-            # - and continue work on the one that is most complete.
-sleep=15000
+call=ship
 
-[boat]
-consume=trunk:1 planks:2
-animate=working 20000
-# produce=boat
+#[boat]
+#consume=trunk:1 planks:2
+#animate=working 20000
+#produce=boat
 
 [ship]
-consume=trunk:1 planks:2
-# worker=build_with_planks
-animate=outofhouse 20000
-# produce=boat
+construct=shipconstruction buildship 6
 
 [idle]
 pics=shipyard_i_??.png  # ???

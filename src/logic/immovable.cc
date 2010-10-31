@@ -135,6 +135,8 @@ ImmovableProgram::ImmovableProgram
 			action = new ActSeed     (v->get_string(), immovable);
 		else if (not strcmp(v->get_name(), "playFX"))
 			action = new ActPlayFX   (v->get_string(), immovable);
+		else if (not strcmp(v->get_name(), "construction"))
+			action = new ActConstruction(v->get_string(), immovable, directory, prof);
 		else
 			throw game_data_error
 				(_("unknown command type \"%s\""), v->get_name());
@@ -260,7 +262,8 @@ Immovable_Descr::Immovable_Descr
 					("[terrain affinity] %s: %s", terrain_type_name, e.what());
 			}
 		}
-		if (owner_tribe) //  Tribe immovables may have entries for other worlds.
+		if (owner_tribe) {
+			//  Tribe immovables may have entries for other worlds.
 			while (Section::Value * const v = terrain_affinity_s->get_next_val())
 				try {
 					uint32_t const value = v->get_natural();
@@ -274,8 +277,14 @@ Immovable_Descr::Immovable_Descr
 						(_("[terrain affinity] \"%s\" (not in current world): %s"),
 						 v->get_name(), e.what());
 				}
+		}
 	} else
 		memset(it, 255, sizeof(m_terrain_affinity));
+
+	if (owner_tribe) {
+		if (Section * buildcost_s = prof.get_section("buildcost"))
+			m_buildcost.parse(*owner_tribe, *buildcost_s);
+	}
 }
 
 
@@ -336,9 +345,15 @@ m_anim        (0),
 m_program     (0),
 m_program_ptr (0),
 m_program_step(0),
+m_action_data(0),
 m_reserved_by_worker(false)
 {}
 
+Immovable::~Immovable()
+{
+	delete m_action_data;
+	m_action_data = 0;
+}
 
 int32_t Immovable::get_type() const throw ()
 {
@@ -376,8 +391,11 @@ void Immovable::start_animation
 }
 
 
-void Immovable::increment_program_pointer() {
+void Immovable::increment_program_pointer()
+{
 	m_program_ptr = (m_program_ptr + 1) % m_program->size();
+	delete m_action_data;
+	m_action_data = 0;
 }
 
 
@@ -425,9 +443,10 @@ void Immovable::switch_program(Game & game, std::string const & programname)
 	m_program = descr().get_program(programname);
 	m_program_ptr = 0;
 	m_program_step = 0;
+	delete m_action_data;
+	m_action_data = 0;
 	schedule_act(game, 1);
 }
-
 
 uint32_t Immovable_Descr::terrain_suitability
 	(FCoords const f, Map const & map) const
@@ -486,6 +505,17 @@ bool Immovable::is_reserved_by_worker() const
 void Immovable::set_reserved_by_worker(bool reserve)
 {
 	m_reserved_by_worker = reserve;
+}
+
+/**
+ * Set the current action's data to \p data.
+ *
+ * \warning \p data must not be equal to the currently set data, but it may be 0.
+ */
+void Immovable::set_action_data(ImmovableActionData* data)
+{
+	delete m_action_data;
+	m_action_data = data;
 }
 
 
@@ -608,6 +638,8 @@ void Immovable::save
 	fw.Signed32(m_program_step);
 
 	fw.Unsigned8(m_reserved_by_worker);
+
+//	TODO(m_action_data);
 }
 
 Map_Object::Loader * Immovable::load
@@ -985,6 +1017,127 @@ void ImmovableProgram::ActSeed::execute
 
 	immovable.program_step(game);
 }
+
+ImmovableProgram::ActConstruction::ActConstruction
+	(char * parameters, Immovable_Descr & descr, std::string const & directory, Profile & prof)
+{
+	try {
+		if (!descr.get_owner_tribe())
+			throw game_data_error("only usable for tribe immovable");
+
+		std::vector<std::string> params = split_string(parameters, " ");
+
+		if (params.size() != 2)
+			throw game_data_error("usage: animation-name decaytime");
+
+		m_decaytime = atoi(params[1].c_str());
+
+		std::string animation_name = params[0];
+		if (descr.is_animation_known(animation_name))
+			m_animid = descr.get_animation(animation_name);
+		else {
+			m_animid =
+				g_anim.get
+					(directory.c_str(),
+					 prof.get_safe_section(animation_name),
+					 0);
+
+			descr.add_animation(animation_name, m_animid);
+		}
+	} catch (const _wexception & e) {
+		throw game_data_error("construction: %s", e.what());
+	}
+}
+
+struct ActConstructionData : ImmovableActionData {
+	Buildcost delivered;
+};
+
+void ImmovableProgram::ActConstruction::execute(Game & g, Immovable & imm) const
+{
+	ActConstructionData * d = imm.get_action_data<ActConstructionData>();
+	if (!d) {
+		// First execution
+		d = new ActConstructionData;
+		imm.set_action_data(d);
+	} else {
+		// Decay timeout
+		uint32_t totaldelivered = 0;
+		for (Buildcost::const_iterator it = d->delivered.begin(); it != d->delivered.end(); ++it)
+			totaldelivered += it->second;
+
+		if (!totaldelivered) {
+			imm.remove(g);
+			return;
+		}
+
+		uint32_t randdecay = g.logic_rand() % totaldelivered;
+		for (Buildcost::iterator it = d->delivered.begin(); it != d->delivered.end(); ++it) {
+			if (randdecay < it->second) {
+				it->second--;
+				break;
+			}
+
+			randdecay -= it->second;
+		}
+	}
+
+	imm.m_program_step = imm.schedule_act(g, m_decaytime);
+}
+
+/**
+ * For an immovable that is currently in construction mode, return \c true and
+ * compute the remaining buildcost.
+ *
+ * If the immovable is not currently in construction mode, return \c false.
+ */
+bool Immovable::construct_remaining_buildcost(Game & game, Buildcost * buildcost)
+{
+	ActConstructionData * d = get_action_data<ActConstructionData>();
+	if (!d)
+		return false;
+
+	const Buildcost & total = descr().buildcost();
+	for (Buildcost::const_iterator it = total.begin(); it != total.end(); ++it) {
+		uint32_t delivered = d->delivered[it->first];
+		if (delivered < it->second)
+			(*buildcost)[it->first] = it->second - delivered;
+	}
+
+	return true;
+}
+
+/**
+ * For an immovable that is currently in construction mode, return \c true and
+ * consume the given ware type as delivered.
+ *
+ * If the immovable is not currently in construction mode, return \c false.
+ */
+bool Immovable::construct_ware_item(Game & game, Ware_Index index)
+{
+	ActConstructionData * d = get_action_data<ActConstructionData>();
+	if (!d)
+		return false;
+
+	Buildcost::iterator it = d->delivered.find(index);
+	if (it != d->delivered.end())
+		it->second++;
+	else
+		d->delivered[index] = 1;
+
+	Buildcost remaining;
+	construct_remaining_buildcost(game, &remaining);
+	if (remaining.empty()) {
+		program_step(game);
+	} else {
+		if (upcast(const ImmovableProgram::ActConstruction, act, &(*m_program)[m_program_ptr]))
+			m_program_step = schedule_act(game, act->decaytime());
+	}
+
+	return true;
+}
+
+
 
 /*
 ==============================================================================

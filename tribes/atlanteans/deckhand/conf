@@ -1,9 +1,19 @@
 help=_Works at the shipyard and constructs new ships and boats.
 soundfx=../../../sound/hammering/hammering
+program=buildship
 
 [buildcost]
 hammer=1
 carrier=1
+
+[buildship]
+0=walk object-or-coords
+1=createitem shipconstruction unless object
+2=playFX ../../../sound/sawmill/sawmill 230
+3=animation idle 5000
+4=construct
+5=animation idle 2000
+6=return
 
 [idle]
 pics=idle_??.png

@@ -20,6 +20,7 @@
 #ifndef IMMOVABLE_H
 #define IMMOVABLE_H
 
+#include "buildcost.h"
 #include "graphic/animation.h"
 #include "instances.h"
 #include "widelands_geometry.h"
@@ -80,6 +81,7 @@ protected:
 class Immovable;
 class ImmovableProgram;
 struct ImmovableAction;
+struct ImmovableActionData;
 
 /**
  * Immovable represents a standard immovable such as trees or stones.
@@ -106,6 +108,8 @@ struct Immovable_Descr : public Map_Object_Descr {
 	/// How well the terrain around f suits an immovable of this type.
 	uint32_t terrain_suitability(FCoords, Map const &) const;
 
+	const Buildcost & buildcost() const {return m_buildcost;}
+
 protected:
 	std::string m_picture;
 	int32_t     m_size;
@@ -115,6 +119,11 @@ protected:
 	/// The tribe to which this Immovable_Descr belongs or 0 if it is a
 	/// world immovable
 	const Tribe_Descr * const m_owner_tribe;
+
+	/// Buildcost for externally constructible immovables (for ship construction)
+	/// \see ActConstruction
+	Buildcost m_buildcost;
+
 private:
 	uint8_t m_terrain_affinity[16];
 };
@@ -131,6 +140,7 @@ class Immovable : public BaseImmovable {
 
 public:
 	Immovable(const Immovable_Descr &);
+	~Immovable();
 
 	Coords get_position() const {return m_position;}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
@@ -155,6 +165,8 @@ public:
 	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 
 	void switch_program(Game & game, std::string const & programname);
+	bool construct_ware_item(Game & game, Ware_Index index);
+	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
 
 	Tribe_Descr const * get_owner_tribe() const {
 		return descr().get_owner_tribe();
@@ -162,6 +174,17 @@ public:
 
 	bool is_reserved_by_worker() const;
 	void set_reserved_by_worker(bool reserve);
+
+	void set_action_data(ImmovableActionData * data);
+	template<typename T>
+	T* get_action_data() {
+		if (!m_action_data)
+			return 0;
+		if (T* data = dynamic_cast<T*>(m_action_data))
+			return data;
+		set_action_data(0);
+		return 0;
+	}
 
 protected:
 	Coords                   m_position;
@@ -172,6 +195,13 @@ protected:
 	const ImmovableProgram * m_program;
 	uint32_t m_program_ptr; ///< index of next instruction to execute
 	int32_t                      m_program_step; ///< time of next step
+
+	/**
+	 * Private persistent data for the currently active program action.
+	 *
+	 * \warning Use get_action_data to access this.
+	 */
+	ImmovableActionData * m_action_data;
 
 	/**
 	 * Immovables like trees are reserved by a worker that is walking

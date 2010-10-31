@@ -254,7 +254,7 @@ struct Profile {
 		 FileSystem & = *g_fs);
 
 	Section * get_section     (char const * name);
-	Section & get_safe_section(char const * name);
+	Section & get_safe_section(const std::string & name);
 	Section & pull_section    (char const * name);
 	Section * get_next_section(char const * name = 0);
 

@@ -63,5 +63,12 @@ bool FindImmovableAttackable        ::accept(BaseImmovable const & imm) const {
 	return dynamic_cast<Attackable const *>(&imm);
 }
 
+bool FindImmovableByDescr::accept(BaseImmovable const & baseimm) const {
+	if (upcast(const Immovable, imm, &baseimm)) {
+		if (&imm->descr() == &descr)
+			return true;
+	}
+	return false;
+}
 
 }
