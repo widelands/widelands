@@ -247,7 +247,7 @@ void NetGGZ::send_game_statistics
 	(int32_t gametime,
 	 const Widelands::Game::General_Stats_vector & resultvec)
 {
-// 	wlmodule().send_statistics(gametime, resultvec, playerinfo, playernum);
+ 	wlmodule().send_statistics(gametime, resultvec, playerinfo);
 }
 
 void NetGGZ::report_result
@@ -271,12 +271,13 @@ void NetGGZ::report_result
 		(win?gamestatresult_winner:gamestatresult_looser);
 	playerinfo.at(player-1).report_time = gametime;
 
-	bool finished = true;
+	int finished = 0;
 
 	for (unsigned int i = 0; i < playerinfo.size(); i++)
 	{
+		log("playerinfo[%i].result: %i \n", i, playerinfo.at(i).result );
 		if (playerinfo.at(i).result == gamestatresult_null)
-			finished = false;
+			finished++;
 	}
 
 	//container_iterate(std::vector<Net_Player_Info>, playerinfo, it)
@@ -294,8 +295,10 @@ void NetGGZ::report_result
 	}
 	*/
 
-	if(finished)
+	if(finished == 0)
 		send_game_statistics(gametime, resultvec);
+	else
+		log("%i players missing\n", finished);
 }
 
 
