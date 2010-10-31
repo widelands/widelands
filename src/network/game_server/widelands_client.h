@@ -51,9 +51,9 @@ public:
 	std::string name() const { return m_name; }
 	bool reported_game() const {return m_reported; }
 	bool support_build16_proto() const {
-		wllog   
+		/*wllog   
                         (DL_DUMP, "get support post build 16 for \"%s\": %b (%i)",
-                         name().c_str(), m_proto_maj > 0, m_proto_maj);
+                         name().c_str(), m_proto_maj > 0, m_proto_maj);*/
 			 return m_proto_maj > 0;
 		}
 	std::string version() const { return m_version; }
