@@ -160,11 +160,6 @@ struct Warehouse_Window : public Building_Window {
 	Warehouse & warehouse() {
 		return ref_cast<Warehouse, Widelands::Building>(building());
 	}
-
-private:
-	void make_wares_tab
-		(WaresDisplay::wdType type,
-		 PictureID tabicon, const std::string & tooltip);
 };
 
 /**
@@ -176,19 +171,24 @@ Warehouse_Window::Warehouse_Window
 	 UI::Window *         & registry)
 	: Building_Window(parent, wh, registry)
 {
-	make_wares_tab
-		(WaresDisplay::WARE, g_gr->get_picture(PicMod_UI, pic_tab_wares),
+	get_tabs()->add(
+		"wares",
+		g_gr->get_picture(PicMod_UI, pic_tab_wares),
+		new WarehouseWaresPanel(get_tabs(),
+			Width,
+			igbase(),
+			warehouse(),
+			WaresDisplay::WARE),
 		 _("Wares"));
-	make_wares_tab
-		(WaresDisplay::WORKER, g_gr->get_picture(PicMod_UI, pic_tab_workers),
+	get_tabs()->add(
+		"workers",
+		g_gr->get_picture(PicMod_UI, pic_tab_workers),
+		new WarehouseWaresPanel(get_tabs(),
+			Width,
+			igbase(),
+			warehouse(),
+			WaresDisplay::WORKER),
 		 _("Workers"));
-}
-
-void Warehouse_Window::make_wares_tab
-	(WaresDisplay::wdType type, PictureID tabicon, const std::string & tooltip)
-{
-	WarehouseWaresPanel * panel = new WarehouseWaresPanel(get_tabs(), Width, igbase(), warehouse(), type);
-	get_tabs()->add("wares", tabicon, panel, tooltip);
 }
 
 /**
