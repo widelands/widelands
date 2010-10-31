@@ -27,7 +27,7 @@
 #include "logic/player.h"
 
 
-#define CURRENT_ECONOMY_VERSION 2
+#define CURRENT_ECONOMY_VERSION 3
 
 namespace Widelands {
 
@@ -43,7 +43,8 @@ void EconomyDataPacket::Read(FileRead & fr)
 					while (Time const last_modified = fr.Unsigned32()) {
 						char const * const type_name = fr.CString();
 						uint32_t const permanent = fr.Unsigned32();
-						uint32_t const temporary = fr.Unsigned32();
+						if (version <= 2)
+							fr.Unsigned32();
 						if (Ware_Index i = tribe.ware_index(type_name)) {
 							if
 								(tribe.get_ware_descr(i)->default_target_quantity()
@@ -61,7 +62,6 @@ void EconomyDataPacket::Read(FileRead & fr)
 									throw game_data_error
 										(_("duplicated entry for %s"), type_name);
 								tq.permanent         = permanent;
-								tq.temporary         = temporary;
 								tq.last_modified     = last_modified;
 							}
 						} else if ((i = tribe.worker_index(type_name))) {
@@ -81,7 +81,6 @@ void EconomyDataPacket::Read(FileRead & fr)
 									throw game_data_error
 										(_("duplicated entry for %s"), type_name);
 								tq.permanent         = permanent;
-								tq.temporary         = temporary;
 								tq.last_modified     = last_modified;
 							}
 						} else
@@ -115,7 +114,6 @@ void EconomyDataPacket::Write(FileWrite & fw)
 			fw.Unsigned32(last_modified);
 			fw.CString(tribe.get_ware_descr(i)->name());
 			fw.Unsigned32(tq.permanent);
-			fw.Unsigned32(tq.temporary);
 		}
 	}
 	for (Ware_Index i = tribe.get_nrworkers(); i.value();) {
@@ -126,7 +124,6 @@ void EconomyDataPacket::Write(FileWrite & fw)
 			fw.Unsigned32(last_modified);
 			fw.CString(tribe.get_worker_descr(i)->name());
 			fw.Unsigned32(tq.permanent);
-			fw.Unsigned32(tq.temporary);
 		}
 	}
 	fw.Unsigned32(0); //  terminator

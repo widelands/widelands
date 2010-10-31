@@ -61,12 +61,12 @@ struct NetClient :
 	// GameSettingsProvider interface
 	virtual GameSettings const & settings();
 
-	virtual void setScenario(bool); //  FIXME no scenario for multiplayer
+	virtual void setScenario(bool);
 	virtual bool canChangeMap();
 	virtual bool canChangePlayerState(uint8_t number);
 	virtual bool canChangePlayerTribe(uint8_t number);
 	virtual bool canChangePlayerInit (uint8_t number);
-	virtual bool canChangePlayerTeam(uint8_t number);
+	virtual bool canChangePlayerTeam (uint8_t number);
 
 	virtual bool canLaunch();
 
@@ -83,10 +83,7 @@ struct NetClient :
 	virtual void setPlayerName    (uint8_t number, std::string const & name);
 	virtual void setPlayer        (uint8_t number, PlayerSettings ps);
 	virtual void setPlayerNumber  (uint8_t number);
-	virtual void setPlayerReady   (uint8_t number, bool ready);
-	virtual bool getPlayerReady   (uint8_t number);
 	virtual void setPlayerTeam    (uint8_t number, Widelands::TeamNumber team);
-	virtual void setPlayerPartner (uint8_t number, uint8_t partner);
 	virtual void setWinCondition  (std::string);
 	virtual std::string getWinCondition();
 

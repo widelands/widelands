@@ -50,29 +50,14 @@ struct Economy {
 	///
 	/// This affects the result of \ref needs_ware and thereby the demand checks
 	/// in production programs. A ware type is considered to be needed if there
-	/// are less than the temporary target quantity stored in warehouses in the
+	/// are less than the permanent target quantity stored in warehouses in the
 	/// economy.
-	///
-	/// The temporary quantity will be decreased when a ware of the type is
-	/// consumed, but not below the permanent quantity. This allows the
-	/// following use case:
-	///   The player has built up a lot of economic infrastructure but lacks
-	///   mines. Then he discovers a mountain. He plans to expand to the
-	///   mountain and build some mines. Therefore he anticipates that he will
-	///   soon need 10 picks. Suppose that he has the target quantity (both
-	///   permanent and temporary) for pick set to 2. He sets the temporary
-	///   target quantity for pick to 12.  For each pick that is consumed in the
-	///   economy, the target quantity for pick drops back 1 step, until it
-	///   reaches the permanent level of 2. So when the player has built his
-	///   mines and used his 10 picks, the targe quantity setting for pick is
-	///   what it was before he changed it. That is the rationale for the name
-	///   "temporary".
 	///
 	/// The last_modified time is used to determine which setting to use when
 	/// economies are merged. The setting that was modified most recently will
 	/// be used for the merged economy.
 	struct Target_Quantity {
-		uint32_t permanent, temporary;
+		uint32_t permanent;
 		Time     last_modified;
 	};
 
@@ -100,8 +85,8 @@ struct Economy {
 	void remove_flag(Flag &);
 	Flag & get_arbitrary_flag();
 
-	void set_ware_target_quantity  (Ware_Index, uint32_t, uint32_t, Time);
-	void set_worker_target_quantity(Ware_Index, uint32_t, uint32_t, Time);
+	void set_ware_target_quantity  (Ware_Index, uint32_t, Time);
+	void set_worker_target_quantity(Ware_Index, uint32_t, Time);
 
 	void    add_wares  (Ware_Index, uint32_t count = 1);
 	void remove_wares  (Ware_Index, uint32_t count = 1);

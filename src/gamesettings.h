@@ -41,12 +41,6 @@ struct PlayerSettings {
 	std::string tribe;
 	std::string ai; /**< Preferred AI provider for this player */
 	Widelands::TeamNumber team;
-
-	/// if this is > 0, the player does not use it's own player number,
-	/// but is a copartner of this player in shared kingdom mode
-	uint8_t partner;
-
-	bool ready;
 };
 
 struct UserSettings {
@@ -68,9 +62,9 @@ struct GameSettings {
 	GameSettings() : savegame(false) {}
 
 	/// Number of player position
-	uint8_t playernum;
+	int16_t playernum;
 	/// Number of users entry
-	uint8_t usernum;
+	int8_t usernum;
 
 	/// Name of the selected map
 	std::string mapname;
@@ -127,19 +121,16 @@ struct GameSettingsProvider {
 		 uint32_t maxplayers,
 		 bool                savegame = false)
 		= 0;
-	virtual void setPlayerState   (uint8_t number, PlayerSettings::State) = 0;
-	virtual void setPlayerAI      (uint8_t number, std::string const &) = 0;
-	virtual void nextPlayerState  (uint8_t number) = 0;
-	virtual void setPlayerTribe   (uint8_t number, std::string const &) = 0;
-	virtual void setPlayerInit    (uint8_t number, uint8_t index) = 0;
-	virtual void setPlayerName    (uint8_t number, std::string const &) = 0;
-	virtual void setPlayer        (uint8_t number, PlayerSettings) = 0;
-	virtual void setPlayerNumber  (uint8_t number) = 0;
-	virtual void setPlayerReady   (uint8_t number, bool ready) = 0;
-	virtual bool getPlayerReady   (uint8_t number) = 0;
-	virtual void setPlayerTeam    (uint8_t number, Widelands::TeamNumber team) = 0;
-	virtual void setPlayerPartner (uint8_t number, uint8_t partner) = 0;
-	virtual void setWinCondition  (std::string wc) = 0;
+	virtual void setPlayerState (uint8_t number, PlayerSettings::State) = 0;
+	virtual void setPlayerAI    (uint8_t number, std::string const &) = 0;
+	virtual void nextPlayerState(uint8_t number) = 0;
+	virtual void setPlayerTribe (uint8_t number, std::string const &) = 0;
+	virtual void setPlayerInit  (uint8_t number, uint8_t index) = 0;
+	virtual void setPlayerName  (uint8_t number, std::string const &) = 0;
+	virtual void setPlayer      (uint8_t number, PlayerSettings) = 0;
+	virtual void setPlayerNumber(uint8_t number) = 0;
+	virtual void setPlayerTeam  (uint8_t number, Widelands::TeamNumber team) = 0;
+	virtual void setWinCondition(std::string wc) = 0;
 	virtual std::string getWinCondition() = 0;
 
 	struct No_Tribe {};

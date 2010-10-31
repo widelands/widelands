@@ -7,6 +7,12 @@ descr=_The mighty tribes of the east-lands!
 bob_vision_range=2
 uiposition=10
 carrier2=ox
+icon=pics/icon.png
+# Wares and workers positions in wares window. Columns are separated by ;,
+# Entries in the columns separated by ,
+wares_order= raw_stone,trunk, blackwood, grout, flax, thatchreed, cloth; fish, meat, water, wheat, pittabread, beer, strongbeer, ration, snack, meal; coal, ironore, iron, goldstone, gold; pick, felling_axe, shovel, hammer, fishing_rod, hunting_spear, scythe, bakingtray, kitchen_tools, fire_tongs; axe, sharpaxe, broadaxe, bronzeaxe, battleaxe, warriorsaxe, helm , mask , warhelmet
+
+workers_order=carrier, ox, cattlebreeder; stonemason, lumberjack, ranger, builder, lime-burner, ferner, weaver; fisher , hunter , gamekeeper, farmer, baker, brewer, master-brewer, innkeeper; geologist,miner, chief-miner, master-miner, burner, smelter; blacksmith, master-blacksmith; soldier, trainer, helmsmith, scout
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
@@ -136,18 +142,6 @@ cattlebreeder=_Cattle Breeder
 [constructionsite types]
 constructionsite=_Construction Site
 
-[trainingsite types]
-battlearena=_Battle Arena
-trainingscamp=_Trainingscamp
-
-[militarysite types]
-barrier=_Barrier
-citadel=_Citadel
-donjon=_Donjon
-fortress=_Fortress
-sentry=_Sentry
-stronghold=_Stronghold
-
 [global militarysite types]
 castle.atlanteans=_Castle
 guardhall.atlanteans=_Guardhall
@@ -169,42 +163,54 @@ headquarters_interim=_Headquarters
 warehouse=_Warehouse
 
 [productionsite types]
+quarry=_Quarry
+lumberjacks_hut=_Lumberjack's Hut
+rangers_hut=_Ranger's Hut
+fishers_hut=_Fisher's Hut
+hunters_hut=_Hunter's Hut
+gamekeepers_hut=_Gamekeeper's Hut
+well=_Well
+scouts_hut=_"Scout's Hut"
+hardener=_Wood Hardener
+lime_kiln=_Lime Kiln
+fernery=_Fernery
+bakery=_Bakery
+brewery=_Brewery
+micro-brewery=_Micro Brewery
+big_inn=_Big Inn
+inn=_Inn
+tavern=_Tavern
+burners_house=_Charcoal Burner's House
+smelting_works=_Smelting Works
 warmill=_War Mill
 axefactory=_Axefactory
-bakery=_Bakery
-big_inn=_Big Inn
-brewery=_Brewery
-burners_house=_Charcoal Burner's House
+metalworks=_Metalwork Shop
+cattlefarm=_Cattle Farm
+weaving-mill=_Weaving-Mill
+farm=_Farm
+helmsmithy=_Helmsmithy
+granitemine=_Granite Mine
 deeper_coalmine=_Deeper Coal Mine
 deep_coalmine=_Deep Coal Mine
 coalmine=_Coal mine
-deeper_goldmine=_Deeper Gold Mine
 deeper_oremine=_Deeper Iron Ore Mine
-deep_goldmine=_Deep Gold Mine
 deep_oremine=_Deep Iron Ore Mine
-farm=_Farm
-fernery=_Fernery
-fishers_hut=_Fisher's Hut
-gamekeepers_hut=_Gamekeeper's Hut
-goldmine=_Gold Mine
-granitemine=_Granite Mine
-hardener=_Wood Hardener
-helmsmithy=_Helmsmithy
-hunters_hut=_Hunter's Hut
-inn=_Inn
-lime_kiln=_Lime Kiln
-lumberjacks_hut=_Lumberjack's Hut
-metalworks=_Metalwork Shop
-micro-brewery=_Micro Brewery
 oremine=_Iron Ore Mine
-quarry=_Quarry
-rangers_hut=_Ranger's Hut
-smelting_works=_Smelting Works
-tavern=_Tavern
-weaving-mill=_Weaving-Mill
-well=_Well
-scouts_hut=_"Scout's Hut"
-cattlefarm=_Cattle Farm
+deeper_goldmine=_Deeper Gold Mine
+deep_goldmine=_Deep Gold Mine
+goldmine=_Gold Mine
+
+[militarysite types]
+barrier=_Barrier
+sentry=_Sentry
+stronghold=_Stronghold
+citadel=_Citadel
+fortress=_Fortress
+donjon=_Donjon
+
+[trainingsite types]
+battlearena=_Battle Arena
+trainingscamp=_Trainingscamp
 
 [initializations]
 headquarters_medium=_Headquarters medium

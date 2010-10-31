@@ -3,7 +3,6 @@
 -- =======================================================================
 
 use("aux", "infrastructure")
-use("aux", "shared_kingdom_functions")
 
 set_textdomain("tribe_atlanteans")
 
@@ -13,8 +12,6 @@ init = {
    plr:allow_workers("all")
 
    local sf = wl.Game().map.player_slots[plr.number].starting_field
-
-   plr = actual_player(plr)
 
    prefilled_buildings(plr, { "headquarters", sf.x, sf.y, 
       wares = {

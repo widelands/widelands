@@ -1136,8 +1136,10 @@ void Player::WriteStatistics(FileWrite & fw) const {
 	fw.Unsigned16(m_current_statistics.size());
 	fw.Unsigned16(m_ware_productions[0].size());
 
-	for (uint32_t i = 0; i < m_current_statistics.size(); ++i) {
-		fw.CString(tribe().get_ware_descr(Ware_Index(i))->name());
+	for (uint8_t i = 0; i < m_current_statistics.size(); ++i) {
+		fw.CString
+			(tribe().get_ware_descr
+			 (Ware_Index(static_cast<Ware_Index::value_t>(i)))->name());
 		fw.Unsigned32(m_current_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
 			fw.Unsigned32(m_ware_productions[i][j]);

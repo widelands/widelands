@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,6 @@
 #include "trainingsite.h"
 #include "tribe.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launchgame.h"
 #include "upcast.h"
 #include "warning.h"
 #include "widelands_fileread.h"
@@ -247,7 +246,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
 		get_player(p)->setAI(map().get_scenario_player_ai(p));
-		get_player(p)->set_partner(map().get_player_partner(p));
 	}
 
 	set_ibase
@@ -313,8 +311,7 @@ void Game::init_newgame
 			 playersettings.initialization_index,
 			 playersettings.tribe,
 			 playersettings.name,
-			 playersettings.team,
-			 playersettings.partner);
+			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
 	}
 
@@ -488,11 +485,9 @@ bool Game::run
 			const std::string &  tribe_name = plr ? plr->tribe().name() : no_name;
 			const std::string & player_name = plr ? plr->    get_name() : no_name;
 			const std::string & player_ai   = plr ? plr->    getAI()    : no_name;
-			const Player_Number partner     = plr ? plr->    partner()  : 0;
 			map().set_scenario_player_tribe(p,  tribe_name);
 			map().set_scenario_player_name (p, player_name);
 			map().set_scenario_player_ai   (p, player_ai);
-			map().set_player_partner       (p, partner);
 		}
 
 		// Run the init script, if the map provides one.
@@ -534,14 +529,6 @@ bool Game::run
 	g_sound_handler.change_music("ingame", 1000, 0);
 
 	m_state = gs_running;
-
-	// If we are in shared kingdom mode, switch the played player in the
-	// local interactive player.
-	if (get_ipl())
-		if (get_player(get_ipl()->player_number())->partner() > 0) {
-			Player_Number p = get_player(get_ipl()->player_number())->partner();
-			get_ipl()->set_player_number(p);
-		}
 
 	get_ibase()->run();
 

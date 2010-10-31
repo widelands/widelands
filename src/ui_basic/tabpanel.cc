@@ -81,6 +81,16 @@ Tab_Panel::Tab_Panel
 	m_highlight      (-1),
 	m_pic_background (background)
 {}
+Tab_Panel::Tab_Panel
+	(Panel * const parent,
+	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
+	 PictureID const background)
+	:
+	Panel            (parent, x, y, w, h),
+	m_active         (0),
+	m_highlight      (-1),
+	m_pic_background (background)
+{}
 
 /**
  * Resize the visible tab based on our actual size.
@@ -115,6 +125,8 @@ void Tab_Panel::update_desired_size()
 		uint32_t panelw, panelh;
 
 		panel->get_desired_size(panelw, panelh);
+		// TODO  the panel might be bigger -> add a scrollbar in that case
+		//panel->set_size(panelw, panelh);
 
 		if (panelw > w)
 			w = panelw;

@@ -29,7 +29,7 @@
 #include "ui_fsmenu/editor_mapselect.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/intro.h"
-#include "ui_fsmenu/launchgame.h"
+#include "ui_fsmenu/launchSPG.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
@@ -360,7 +360,7 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 
-			//setup some ggz details about a dedicated server
+			// setup some ggz details about a dedicated server
 			Section & s = g_options.pull_section("global");
 			char const * const meta = s.get_string("metaserver", WL_METASERVER);
 			char const * const name = s.get_string("nickname", "dedicated");
@@ -374,7 +374,7 @@ void WLApplication::run()
 
 			NetHost netgame(name, true);
 
-			//Load the requested map
+			// Load the requested map
 			Widelands::Map map;
 			i18n::Textdomain td("maps");
 			map.set_filename(m_filename.c_str());
@@ -382,7 +382,7 @@ void WLApplication::run()
 				(m_filename.c_str());
 			ml->preload_map(true);
 
-			//fill in the mapdata structure
+			// fill in the mapdata structure
 			MapData mapdata;
 			mapdata.filename = m_filename;
 			mapdata.name = map.get_name();
@@ -393,10 +393,11 @@ void WLApplication::run()
 			mapdata.width = map.get_width();
 			mapdata.height = map.get_height();
 
-			//set the map
+			// set the map
 			netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
 
-			//run the network game (autostarts when everyone is ready)
+			// run the network game
+			// -> autostarts when a player sends "/start" as pm to the server.
 			netgame.run(true);
 
 			NetGGZ::ref().deinitcore();
@@ -1813,7 +1814,6 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
 			player.name = buf;
 			player.team = 0;
-			player.partner = 0;
 			// Set default computerplayer ai type
 			if (player.state == PlayerSettings::stateComputer) {
 				Computer_Player::ImplementationVector const & impls =
@@ -1897,13 +1897,6 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			s.players[number].team = team;
 	}
 
-	virtual void setPlayerPartner(uint8_t number, uint8_t partner) {
-		if (number < s.players.size())
-			if (partner <= s.players.size()) {
-				s.players[number].partner = partner;
-			}
-	}
-
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {
 		if (number < s.players.size())
 			s.players[number].name = name;
@@ -1915,17 +1908,19 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	virtual void setPlayerNumber(uint8_t const number) {
-		if (number < s.players.size())
+		if (number >= s.players.size())
+			return;
+		PlayerSettings const position = settings().players.at(number);
+		PlayerSettings const player = settings().players.at(settings().playernum);
+		if
+			(number < settings().players.size() and
+			 (position.state == PlayerSettings::stateOpen or
+			  position.state == PlayerSettings::stateComputer))
+		{
+			setPlayer(number, player);
+			setPlayer(settings().playernum, position);
 			s.playernum = number;
-	}
-
-	virtual void setPlayerReady(uint8_t const, bool const) {
-		//ignore, a single player is always ready to start the game if he wants to
-	}
-
-	virtual bool getPlayerReady(uint8_t) {
-		//a single player is always ready
-		return true;
+		}
 	}
 
 	virtual std::string getWinCondition() { return s.win_condition; }
@@ -1945,12 +1940,10 @@ private:
 bool WLApplication::new_game()
 {
 	SinglePlayerGameSettingsProvider sp;
-	Fullscreen_Menu_LaunchGame lgm(&sp);
+	Fullscreen_Menu_LaunchSPG lgm(&sp);
 	const int32_t code = lgm.run();
 	Widelands::Game game;
 
-	if (code > 2) // code > 2 is a multi player savegame.
-		throw wexception("Something went wrong! a savegame was selected");
 	if (code <= 0)
 		return false;
 	if (code == 2) { // scenario
