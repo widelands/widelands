@@ -253,7 +253,8 @@ void NetGGZ::send_game_statistics
 void NetGGZ::report_result
 	(int32_t player, Widelands::TeamNumber team, int32_t points,
 	 bool win, int32_t gametime,
-	 const Widelands::Game::General_Stats_vector& resultvec)
+	 const Widelands::Game::General_Stats_vector& resultvec,
+	 std::string extra)
 {
 	log
 		("NetGGZ::report_result(%d, %d, %s)\n", player, points,
@@ -270,6 +271,7 @@ void NetGGZ::report_result
 	playerinfo.at(player-1).result =
 		(win?gamestatresult_winner:gamestatresult_looser);
 	playerinfo.at(player-1).report_time = gametime;
+	playerinfo.at(player-1).wincondstring = extra;
 
 	int finished = 0;
 

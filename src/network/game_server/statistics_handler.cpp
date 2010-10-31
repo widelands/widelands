@@ -382,6 +382,15 @@ bool StatisticsHandler::report_game_result
 					if (m_result_gametime != l.front().get_integer())
 						wllog(DL_WARN, "client report at different gametimes");
 				break;
+			case gamestat_wincondstring:
+					CHECKTYPE(l, string);
+					if (player) {
+						player->wincondstring = l.front().get_string();
+						wllog
+							(DL_DUMP, "got win condition extradata for \"%s\": %s",
+							 player->name().c_str(), l.front().get_string().c_str());
+					}
+				break;
 			default:
 				wllog
 					(DL_WARN, "GAMESTATISTICS: Warning unknown WLGGZGameStats: %i (%i)",

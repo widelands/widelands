@@ -376,9 +376,13 @@ bool ggz_wlmodule::send_statistics
 			w.open_list(gamestat_productivity);
 			send_stat(w, resultvec.at(i).productivity);
 			w.close_list();
-			
+
 			w.open_list(gamestat_customstat);
 			send_stat(w, resultvec.at(i).custom_statistic);
+			w.close_list();
+
+			w.open_list(gamestat_wincondstring);
+			w << playerinfo.at(i).wincondstring;
 			w.close_list();
 		}
 

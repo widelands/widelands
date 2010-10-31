@@ -244,7 +244,8 @@ enum WLGGZGameStats
 	gamestat_casualties = 15, // integer
 	gamestat_kills = 16, // integer
 	gamestat_gametime = 17, // integer
-	gamestat_customstat = 18
+	gamestat_customstat = 18, // integer (last-stat), list if (int, int, int)
+	gamestat_wincondstring = 19 // string
 };
 
 /*ToDo:

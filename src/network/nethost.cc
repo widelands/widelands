@@ -2296,7 +2296,8 @@ void NetHost::report_result(int player, int points, bool win, std::string extra)
 		NetGGZ::ref().report_result
 			(player, d->game->player(player).team_number(),
 			 points, win, d->game->get_gametime(),
-			 d->game->get_general_statistics());
+			 d->game->get_general_statistics(),
+			 extra);
 	}
 #endif
 }

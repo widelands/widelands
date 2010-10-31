@@ -72,6 +72,7 @@ struct Net_Player_Info {
 	WLGGZGameStatsResult result;
 	Widelands::TeamNumber team;
 	int report_time;
+	std::string wincondstring;
 };
 
 /// A MOTD struct for easier output to the chat panel
@@ -191,7 +192,8 @@ struct NetGGZ : public ChatProvider {
 	void report_result
 		(int32_t player, Widelands::TeamNumber team, int32_t points,
 		 bool win, int32_t gametime,
-		 const Widelands::Game::General_Stats_vector & resultvec);
+		 const Widelands::Game::General_Stats_vector & resultvec,
+		 std::string extra);
 
 	/// join a open table (a open game)
 	void join(char const * tablename);

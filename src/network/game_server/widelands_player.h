@@ -74,6 +74,7 @@ class WidelandsPlayer
 			result(0),
 			points(0),
 			bonus(0),
+			wincondstring(),
 			m_name(),
 			m_wlid(id),
 			m_tribe(),
@@ -107,6 +108,7 @@ class WidelandsPlayer
 
 		int max_wares, max_workers, max_military, max_buildings;
 
+		std::string wincondstring;
 	private:
 		WidelandsPlayer();
 		std::string m_name;
