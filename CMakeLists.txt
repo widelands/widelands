@@ -326,9 +326,6 @@ include_directories(${PNG_INCLUDE_DIR})
 find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIR})
 
-find_package(Lua51 REQUIRED)
-include_directories(${LUA_INCLUDE_DIR})
-
 if (APPLE OR WIN32)
   find_package(intl REQUIRED)
   include_directories(${INTL_INCLUDE_DIR})
