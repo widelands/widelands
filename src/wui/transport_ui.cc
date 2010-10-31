@@ -79,10 +79,19 @@ private:
 			 AbstractWaresDisplay(parent, x, y, tribe, type, selectable) ,
 			 m_economy(economy)
 		{
-			Ware_Index nr_wares = m_economy.owner().tribe().get_nrwares();
-			for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
-				if (not m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
-					hide_ware(i);
+			if (type == WaresDisplay::WORKER) {
+				Ware_Index nr_wares = m_economy.owner().tribe().get_nrworkers();
+				for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
+					if (not m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
+						hide_ware(i);
+					}
+				}
+			} else {
+				Ware_Index nr_wares = m_economy.owner().tribe().get_nrwares();
+				for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
+					if (not m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
+						hide_ware(i);
+					}
 				}
 			}
 		}
