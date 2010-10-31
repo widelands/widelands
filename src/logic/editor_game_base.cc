@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -187,8 +187,7 @@ Player * Editor_Game_Base::add_player
 	 uint8_t             const initialization_index,
 	 std::string const &       tribe,
 	 std::string const &       name,
-	 TeamNumber                team,
-	 uint8_t                   partner)
+	 TeamNumber                team)
 {
 	assert(1 <= player_number);
 	assert(player_number <= MAX_PLAYERS);
@@ -203,7 +202,6 @@ Player * Editor_Game_Base::add_player
 		 name,
 		 g_playercolors[player_number - 1]);
 	p->set_team_number(team);
-	p->set_partner(partner);
 	return p;
 }
 

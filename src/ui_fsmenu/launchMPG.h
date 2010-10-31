@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_LAUNCHGAME_H
-#define FULLSCREEN_MENU_LAUNCHGAME_H
+#ifndef FULLSCREEN_MENU_LAUNCHMPG_H
+#define FULLSCREEN_MENU_LAUNCHMPG_H
 
 #include "base.h"
 
@@ -33,35 +33,26 @@ struct ChatProvider;
 struct GameChatPanel;
 struct GameController;
 struct GameSettingsProvider;
-struct PlayerDescriptionGroup;
+struct MultiPlayerSetupGroup;
 struct LuaInterface;
 
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player
  * games.
  *
- * The menu has a lot dynamic user-interfaces, that are only shown in specific
- * cases:
- *    UI::Button m_select_save - only shown in multiplayer for the host player.
- *    UI::Button m_select_map  - only shown if the player has the right to
- *                               change the map.
- *    GameChatPanel            - only shown in multiplayer maps
- *
  * The return values of run() are:
  *    0  - back was pressed
- *    1  - normal game (either single or multi player)
- *    2  - scenario game (at the moment only single player)
+ *    1  - normal game
+ *    2  - scenario game
  *    3  - multi player savegame
  *    4  - multi player scenario savegame <- not yet implemented
  */
-struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LaunchGame
-		(GameSettingsProvider *, GameController * = 0, bool autolaunch = false);
-	~Fullscreen_Menu_LaunchGame();
+struct Fullscreen_Menu_LaunchMPG : public Fullscreen_Menu_Base {
+	Fullscreen_Menu_LaunchMPG(GameSettingsProvider *, GameController *);
+	~Fullscreen_Menu_LaunchMPG();
 
 	void setChatProvider(ChatProvider &);
 
-	void start();
 	void think();
 
 	void refresh();
@@ -69,42 +60,33 @@ struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 private:
 	LuaInterface * m_lua;
 
+	void change_map_or_save();
 	void select_map();
-	void select_savegame();
+	void select_saved_game();
 	void back_clicked();
 	void start_clicked();
 	void win_condition_clicked();
 	void win_condition_update();
 	void set_scenario_values();
-	void switch_to_position(uint8_t);
 	void load_previous_playerdata();
-	void enable_all_pdgs();
-	void safe_place_for_host(uint8_t);
+	void load_map_info();
+	void help_clicked();
 
 	uint32_t    m_butw;
 	uint32_t    m_buth;
 	uint32_t    m_fs;
 	std::string m_fn;
 
-	UI::Callback_Button   m_select_map, m_select_save;
-	UI::Callback_Button   m_wincondition, m_back, m_ok;
-	UI::Callback_Button * m_pos[MAX_PLAYERS];
-	UI::Textarea              m_title, m_mapname, m_lobby;
-	UI::Textarea              m_name, m_type, m_team, m_tribe, m_init, m_ready;
-	UI::Multiline_Textarea    m_notes;
-	UI::Listselect<int32_t> * m_lobby_list;
+	UI::Callback_Button       m_change_map_or_save, m_ok, m_back, m_wincondition;
+	UI::Callback_Button       m_help_button;
+	UI::Textarea              m_title, m_mapname;
+	UI::Multiline_Textarea    m_map_info, m_client_info;
 	GameSettingsProvider    * m_settings;
 	GameController          * m_ctrl; // optional
 	GameChatPanel           * m_chat;
-	PlayerDescriptionGroup  * m_players[MAX_PLAYERS];
-	std::string               m_filename;
-	std::string            m_filename_proof; // local variable to check UI state
-	std::string               m_player_save_name[MAX_PLAYERS];
-	std::string               m_player_save_tribe[MAX_PLAYERS];
-	int8_t                    m_nr_players;
-	bool                      m_is_scenario;
-	bool                      m_is_savegame;
-	bool                      m_autolaunch;
+	MultiPlayerSetupGroup   * m_mpsg;
+	std::string               m_filename_proof; // local variable to check state
+	int16_t                   m_nr_players;
 	std::vector<std::string>  m_win_conditions;
 	uint8_t                   m_cur_wincondition;
 };
