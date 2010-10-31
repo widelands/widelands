@@ -570,7 +570,7 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 3
+#define IMMOVABLE_SAVEGAME_VERSION 4
 
 void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
@@ -593,6 +593,11 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 			 animname, imm.descr().get_animation_name(imm.m_anim).c_str());
 	}
 	imm.m_animstart = fr.Signed32();
+	if (version >= 4) {
+		imm.m_anim_construction_total = fr.Unsigned32();
+		if (imm.m_anim_construction_total)
+			imm.m_anim_construction_done = fr.Unsigned32();
+	}
 
 	{ //  program
 		std::string program_name;
@@ -630,6 +635,13 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 
 	if (version >= 3)
 		imm.m_reserved_by_worker = fr.Unsigned8();
+
+	if (version >= 4) {
+		std::string dataname = fr.CString();
+		if (!dataname.empty()) {
+			imm.set_action_data(ImmovableActionData::load(fr, imm, dataname));
+		}
+	}
 }
 
 void Immovable::Loader::load_pointers()
@@ -673,6 +685,9 @@ void Immovable::save
 	// Animations
 	fw.String(descr().get_animation_name(m_anim));
 	fw.Signed32(m_animstart);
+	fw.Unsigned32(m_anim_construction_total);
+	if (m_anim_construction_total)
+		fw.Unsigned32(m_anim_construction_done);
 
 	// Program Stuff
 	fw.String(m_program ? m_program->name() : "");
@@ -682,7 +697,12 @@ void Immovable::save
 
 	fw.Unsigned8(m_reserved_by_worker);
 
-//	TODO(m_action_data);
+	if (m_action_data) {
+		fw.CString(m_action_data->name());
+		m_action_data->save(fw, *this);
+	} else {
+		fw.CString("");
+	}
 }
 
 Map_Object::Loader * Immovable::load
@@ -1092,7 +1112,32 @@ ImmovableProgram::ActConstruction::ActConstruction
 	}
 }
 
+#define CONSTRUCTION_DATA_VERSION 1
+
 struct ActConstructionData : ImmovableActionData {
+	const char * name() const {return "construction";}
+	void save(FileWrite & fw, Immovable & imm) {
+		fw.Unsigned8(CONSTRUCTION_DATA_VERSION);
+		delivered.save(fw, *imm.descr().get_owner_tribe());
+	}
+
+	static ActConstructionData * load(FileRead & fr, Immovable & imm) {
+		ActConstructionData * d = new ActConstructionData;
+
+		try {
+			uint8_t version = fr.Unsigned8();
+			if (version == CONSTRUCTION_DATA_VERSION) {
+				d->delivered.load(fr, *imm.descr().get_owner_tribe());
+
+				return d;
+			} else
+				throw game_data_error("unknown version %u", version);
+		} catch(const _wexception & e) {
+			delete d;
+			throw game_data_error("ActConstructionData: %s", e.what());
+		}
+	}
+
 	Buildcost delivered;
 };
 
@@ -1190,6 +1235,17 @@ bool Immovable::construct_ware_item(Game & game, Ware_Index index)
 	}
 
 	return true;
+}
+
+
+ImmovableActionData * ImmovableActionData::load(FileRead & fr, Immovable & imm, const std::string & name)
+{
+	if (name == "construction")
+		return ActConstructionData::load(fr, imm);
+	else {
+		log("ImmovableActionData::load: type %s not known", name.c_str());
+		return 0;
+	}
 }
 
 

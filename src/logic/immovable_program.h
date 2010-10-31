@@ -186,6 +186,11 @@ private:
 struct ImmovableActionData {
 	ImmovableActionData() {}
 	virtual ~ImmovableActionData() {}
+
+	virtual const char * name() const = 0;
+	virtual void save(FileWrite & fw, Immovable & imm) = 0;
+
+	static ImmovableActionData * load(FileRead & fr, Immovable & imm, const std::string & name);
 };
 
 }

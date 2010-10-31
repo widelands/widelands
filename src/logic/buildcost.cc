@@ -54,9 +54,37 @@ void Buildcost::parse(const Tribe_Descr & tribe, Section & buildcost_s)
 uint32_t Buildcost::total() const
 {
 	uint32_t sum = 0;
-	for(const_iterator it = begin(); it != end(); ++it)
+	for (const_iterator it = begin(); it != end(); ++it)
 		sum += it->second;
 	return sum;
+}
+
+void Buildcost::save(Widelands::FileWrite& fw, const Widelands::Tribe_Descr& tribe) const
+{
+	for (const_iterator it = begin(); it != end(); ++it) {
+		fw.CString(tribe.get_ware_descr(it->first)->name());
+		fw.Unsigned8(it->second);
+	}
+	fw.CString("");
+}
+
+void Buildcost::load(Widelands::FileRead& fr, const Widelands::Tribe_Descr& tribe)
+{
+	clear();
+
+	for(;;) {
+		std::string name = fr.CString();
+		if (name.empty())
+			break;
+
+		Ware_Index index = tribe.ware_index(name);
+		if (!index) {
+			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
+			fr.Unsigned8();
+		} else {
+			(*this)[index] = fr.Unsigned8();
+		}
+	}
 }
 
 } // namespace Widelands

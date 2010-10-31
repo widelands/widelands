@@ -54,7 +54,7 @@ namespace Widelands {
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
 #define CURRENT_WAREHOUSE_PACKET_VERSION        5
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
-#define CURRENT_PRODUCTIONSITE_PACKET_VERSION   4
+#define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
 
 
@@ -737,6 +737,13 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				productionsite.m_stack[i].ip    = fr.  Signed32();
 				productionsite.m_stack[i].phase = fr.  Signed32();
 				productionsite.m_stack[i].flags = fr.Unsigned32();
+
+				if (packet_version >= 5) {
+					uint32_t serial = fr.Unsigned32();
+					if (serial)
+						productionsite.m_stack[i].objvar = &mol.get<Map_Object>(serial);
+					productionsite.m_stack[i].coord = fr.Coords32_allow_null(game.map().extent());
+				}
 			}
 			productionsite.m_program_timer = fr.Unsigned8();
 			productionsite.m_program_time = fr.Signed32();
@@ -1204,8 +1211,8 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 		fw.  Signed32(productionsite.m_stack[i].ip);
 		fw.  Signed32(productionsite.m_stack[i].phase);
 		fw.Unsigned32(productionsite.m_stack[i].flags);
-
-		//TODO("objvar & coords");
+		fw.Unsigned32(mos.get_object_file_index_or_zero(productionsite.m_stack[i].objvar.get(game)));
+		fw.Coords32(productionsite.m_stack[i].coord);
 	}
 	fw.Unsigned8(productionsite.m_program_timer);
 	fw. Signed32(productionsite.m_program_time);

@@ -23,6 +23,8 @@
 #include <map>
 
 #include "widelands.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 
 struct Section;
 
@@ -34,6 +36,9 @@ struct Buildcost : std::map<Ware_Index, uint8_t> {
 	void parse(const Tribe_Descr & tribe, Section & buildcost_s);
 
 	uint32_t total() const;
+
+	void save(FileWrite & fw, const Tribe_Descr & tribe) const;
+	void load(FileRead & fw, const Tribe_Descr & tribe);
 };
 
 } // namespace Widelands
