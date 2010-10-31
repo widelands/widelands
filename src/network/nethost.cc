@@ -1300,7 +1300,7 @@ void NetHost::switchToPlayer(uint32_t user, uint8_t number)
 
 	uint32_t old = d->settings.users.at(user).position;
 	std::string name = d->settings.users.at(user).name;
-	// Remove users name from old player slot
+	// Remove clients name from old player slot
 	if (old < d->settings.players.size()) {
 		PlayerSettings & op = d->settings.players.at(old);
 		std::string temp(" ");
@@ -1308,15 +1308,17 @@ void NetHost::switchToPlayer(uint32_t user, uint8_t number)
 		temp += " ";
 		setPlayerName(old, op.name.erase(op.name.find(temp), temp.size()));
 		if (op.name.empty())
-			op.state = PlayerSettings::stateOpen;
+			setPlayerState(old, PlayerSettings::stateOpen);
 	}
 
 	if (number < d->settings.players.size()) {
-		// Add hosts name to new player slot
+		// Add clients name to new player slot
 		PlayerSettings & op = d->settings.players.at(number);
 		if (op.state == PlayerSettings::stateOpen)
-			op.state = PlayerSettings::stateHuman;
+			setPlayerState(number, PlayerSettings::stateHuman);
 		setPlayerName(number, op.name + " " + name + " ");
+		if (user == 0) // host
+			d->settings.playernum = number;
 	}
 	d->settings.users.at(user).position = number;
 	// Broadcast the user changes to everybody

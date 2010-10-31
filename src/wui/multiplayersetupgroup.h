@@ -31,6 +31,7 @@
 struct GameSettingsProvider;
 struct MultiPlayerSetupGroupOptions;
 struct MultiPlayerClientGroup;
+struct MultiPlayerPlayerGroup;
 
 /**
  * struct MultiPlayerSetupGroup
@@ -54,10 +55,14 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 private:
 	GameSettingsProvider   * const s;
 	std::vector<MultiPlayerClientGroup *> c;
-	UI::Box                  clientbox;
+	std::vector<MultiPlayerPlayerGroup *> p;
+	UI::Box                  clientbox, playerbox;
 
 	uint32_t    m_buth, m_fsize;
 	std::string m_fname;
+
+	std::map<std::string,PictureID> m_tribepics;
+	std::map<std::string,std::string> m_tribenames;
 };
 
 
