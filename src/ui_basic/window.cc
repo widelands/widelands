@@ -480,6 +480,7 @@ inline void Window::dock_left() {
 	_docked_left = true;
 	set_size(get_inner_w() + get_rborder(), get_h());
 	set_border(0, get_rborder(), get_tborder(), get_bborder());
+	layout();
 	assert(get_lborder() == 0);
 }
 
@@ -490,6 +491,7 @@ inline void Window::undock_left() {
 	set_border
 		(VT_B_PIXMAP_THICKNESS, get_rborder(),
 		 get_tborder(), get_bborder());
+	layout();
 }
 
 inline void Window::dock_right() {
@@ -497,6 +499,7 @@ inline void Window::dock_right() {
 	_docked_right = true;
 	set_size(get_lborder() + get_inner_w(), get_h());
 	set_border(get_lborder(), 0, get_tborder(), get_bborder());
+	layout();
 }
 
 inline void Window::undock_right() {
@@ -506,6 +509,7 @@ inline void Window::undock_right() {
 	set_border
 		(get_lborder(), VT_B_PIXMAP_THICKNESS,
 		 get_tborder(), get_bborder());
+	layout();
 }
 
 inline void Window::dock_bottom() {
@@ -514,6 +518,7 @@ inline void Window::dock_bottom() {
 	_docked_bottom = true;
 	set_size(get_w(), get_tborder() + get_inner_h());
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
+	layout();
 }
 
 inline void Window::undock_bottom() {
@@ -523,6 +528,7 @@ inline void Window::undock_bottom() {
 	set_border
 		(get_lborder(), get_rborder(),
 		 get_tborder(), BT_B_PIXMAP_THICKNESS);
+	layout();
 }
 
 
