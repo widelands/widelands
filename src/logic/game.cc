@@ -23,6 +23,7 @@
 #include "game.h"
 
 #include "carrier.h"
+#include "cmd_calculate_statistics.h"
 #include "cmd_luacoroutine.h"
 #include "cmd_luascript.h"
 #include "computer_player.h"
@@ -126,8 +127,7 @@ Game::Game() :
 	m_writesyncstream  (false),
 	m_state            (gs_notrunning),
 	m_cmdqueue         (*this),
-	m_replaywriter     (0),
-	m_last_stats_update(0)
+	m_replaywriter     (0)
 {
 }
 
@@ -318,12 +318,15 @@ void Game::init_newgame
 	loaderUI.step(_("Loading map"));
 	maploader->load_map_complete(*this, settings.scenario);
 
+	// Queue first statistics calculation
+	enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
+
 	// Check for win_conditions
 	LuaCoroutine * cr = lua().run_script
 		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
 		 ".lua", "win_conditions")
 		->get_coroutine("func");
-	enqueue_command(new Cmd_LuaCoroutine(get_gametime(), cr));
+	enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
 }
 
 
@@ -560,20 +563,6 @@ void Game::think()
 	m_ctrl->think();
 
 	if (m_state == gs_running) {
-		if
-			(m_general_stats.empty()
-			 or
-			 get_gametime() - m_last_stats_update > STATISTICS_SAMPLE_TIME)
-		{
-			sample_statistics();
-
-			const Player_Number nr_players = map().get_nrplayers();
-			iterate_players_existing(p, nr_players, *this, plr)
-				plr->sample_statistics();
-
-			m_last_stats_update = get_gametime();
-		}
-
 		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
 
 		g_gr->animate_maptextures(get_gametime());
@@ -602,7 +591,6 @@ void Game::cleanup_for_load
 	cmdqueue().flush();
 
 	// Statistics
-	m_last_stats_update = 0;
 	m_general_stats.clear();
 }
 
@@ -935,6 +923,12 @@ void Game::sample_statistics()
 		m_general_stats[i].productivity    .push_back(productivity    [i]);
 		m_general_stats[i].custom_statistic.push_back(custom_statistic[i]);
 	}
+
+
+	// Calculate statistics for the players
+	const Player_Number nr_players = map().get_nrplayers();
+	iterate_players_existing(p, nr_players, *this, plr)
+		plr->sample_statistics();
 }
 
 
@@ -949,7 +943,7 @@ void Game::sample_statistics()
 void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 {
 	if (version >= 3) {
-		m_last_stats_update = fr.Unsigned32();
+		fr.Unsigned32(); // used to be last stats update time
 
 		// Read general statistics
 		uint32_t entries = fr.Unsigned16();
@@ -1000,7 +994,7 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
  */
 void Game::WriteStatistics(FileWrite & fw)
 {
-	fw.Unsigned32(m_last_stats_update);
+	fw.Unsigned32(0); // Used to be last stats update time. No longer needed
 
 	// General statistics
 	// First, we write the size of the statistics arrays

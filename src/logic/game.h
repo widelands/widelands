@@ -173,7 +173,6 @@ struct Game : public Editor_Game_Base {
 	void ReadStatistics(FileRead &, uint32_t version);
 	void WriteStatistics(FileWrite &);
 
-private:
 	void sample_statistics();
 
 private:
@@ -236,7 +235,6 @@ private:
 	ReplayReader * m_replayreader;
 	ReplayWriter * m_replaywriter;
 
-	uint32_t m_last_stats_update;
 	General_Stats_vector m_general_stats;
 };
 
