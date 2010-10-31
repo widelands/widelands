@@ -3,5 +3,6 @@ default_target_quantity=15
 preciousness=2
 
 [idle]
-pics=idle.png
-hotspot=3 10
+pics=idle_??.png
+playercolor=true
+hotspot=7 10
