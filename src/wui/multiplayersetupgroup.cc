@@ -408,7 +408,7 @@ m_fname(fname)
 			(this,
 			 w / 3 - buth - UI::Scrollbar::Size * 6 / 5, buth / 3,
 			 buth * 2, buth));
-	labels.back()->set_text(_("Modus"));
+	labels.back()->set_text(_("Mode"));
 	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
 
 	clientbox.set_size(w / 3, h - buth);

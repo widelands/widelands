@@ -32,6 +32,7 @@
 #include "mapselect.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "ui_basic/messagebox.h"
 #include "ui_basic/window.h"
 #include "warning.h"
 #include "wui/gamechatpanel.h"
@@ -133,6 +134,16 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 			 (&Fullscreen_Menu_LaunchMPG::win_condition_clicked,
 			  boost::ref(*this)),
 		 "", std::string(), false, false,
+		 m_fn, m_fs),
+	m_help_button
+		(this, "help",
+		 m_xres * 37 / 50 + m_butw - m_buth, m_yres / 100, m_buth, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/menu_help.png"),
+		 boost::bind
+			 (&Fullscreen_Menu_LaunchMPG::help_clicked,
+			  boost::ref(*this)),
+		 _("Show the help window"), true, false,
 		 m_fn, m_fs),
 
 // Text labels
@@ -538,4 +549,48 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 
 	m_map_info.set_text(infotext);
 	m_filename_proof = m_settings->settings().mapfilename;
+}
+
+/// Show help
+void Fullscreen_Menu_LaunchMPG::help_clicked() {
+	// FIXME richtext renderer seems to fail
+	std::string text;/*("<rt><p font-color=#00FF00 font-size=");
+	text += 24; //m_fs * 3 / 2;
+	text += ">";
+	text += _("Help");
+	text += "<br></p><p font-size=";
+	text += 14; //m_fs;
+	text += ">";*/
+	text += _("You are in the multi player launch game menu.");
+	text += "\n\n";//text += "<br><br>";
+	text +=
+		_("On the left side is a list of all clients including you. With the "
+		  "button in rear of your nickname, you can set your player mode. "
+		  "Available modes are open players, players that are already played by "
+		  "other clients (sharing the kingdom) and spectator mode.");
+	text += "\n\n";//	text += "<br><br>";
+	text +=
+		_("In the middle are the settings for the players. To start a game, each "
+		  "player must either be connected to a client or a computer player or "
+		  "be set to closed.");
+	text += "\n";//	text += "<br>";
+	text +=
+		_("If you are a client (not the hosting player), you can set the tribe "
+		  "and the team for the player you set as mode");
+	text += "\n";//	text += "<br>";
+	text +=
+		_("If you are the hosting player, you can further set the "
+		  "initializations of each player (the set of buildings, wares and "
+		  "workers the player starts with), connect a computer player to a "
+		  "player or close a player.");
+	text += "\n\n";//	text += "<br><br>";
+	text +=
+		_("On the right side are informations about the selected map or savegame."
+		  "A button right to the map name allows the host to change to a "
+		  "different one. Further the host is able to set a specific win "
+		  "condition and finally can start the game as soon as all players are "
+		  "set up.");
+//	text += "</p></rt>";
+	UI::WLMessageBox help(this, _("Help"), text, UI::WLMessageBox::OK);
+	help.run();
 }

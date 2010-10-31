@@ -70,6 +70,7 @@ private:
 	void set_scenario_values();
 	void load_previous_playerdata();
 	void load_map_info();
+	void help_clicked();
 
 	uint32_t    m_butw;
 	uint32_t    m_buth;
@@ -77,6 +78,7 @@ private:
 	std::string m_fn;
 
 	UI::Callback_Button       m_change_map_or_save, m_ok, m_back, m_wincondition;
+	UI::Callback_Button       m_help_button;
 	UI::Textarea              m_title, m_mapname;
 	UI::Multiline_Textarea    m_map_info, m_client_info;
 	GameSettingsProvider    * m_settings;
