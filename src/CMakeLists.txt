@@ -27,7 +27,6 @@ file(GLOB_RECURSE WL_SRCS_CC *.cc)
 file(GLOB_RECURSE WL_SRCS_H *.h)
 file(GLOB_RECURSE WL_SRCS_CPP *.cpp)
 
-#create WL_SRCS and WL_TEST_SRCS
 #convention: any directory called "test" contains test sources, including subdirectories
 set(WL_TEST_SRCS "")
 foreach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
@@ -44,7 +43,6 @@ IF (DEFINED MSVC)
   add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
 else (DEFINED MSVC)
   add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
-  set_target_properties(widelands PROPERTIES MACOSX_BUNDLE TRUE)
 endif (DEFINED MSVC)
 
 add_library (widelands_all ${WIN32_ICON_O} ${WL_SRCS_CC} ${WL_SRCS_H})
