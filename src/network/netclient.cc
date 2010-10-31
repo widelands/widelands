@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #include "netclient.h"
 
 #include "build_info.h"
-#include "ui_fsmenu/launchgame.h"
+#include "ui_fsmenu/launchMPG.h"
 #include "logic/game.h"
 #include "wui/game_tips.h"
 #include "i18n.h"
@@ -49,9 +49,6 @@
 
 struct NetClientImpl {
 	GameSettings settings;
-
-	/// is -1 as long as not assigned to a position (else 0-based)
-	int32_t playernum;
 
 	std::string localplayername;
 
@@ -110,8 +107,7 @@ NetClient::NetClient
 	d->sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (d->sockset, d->sock);
 
-	d->playernum = -2;          // -2 == not connected
-	d->settings.playernum = -2; // ""
+	d->settings.playernum = UserSettings::notConnected(); // ""
 	d->settings.usernum = -2; // ""
 	d->localplayername = playername;
 	d->modal = 0;
@@ -154,7 +150,7 @@ void NetClient::run ()
 	d->settings.multiplayer = true;
 	d->settings.scenario = false;
 	{
-		Fullscreen_Menu_LaunchGame lgm(this, this);
+		Fullscreen_Menu_LaunchMPG lgm(this, this);
 		lgm.setChatProvider(*this);
 		d->modal = &lgm;
 		int32_t code = lgm.run();
@@ -175,21 +171,16 @@ void NetClient::run ()
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
-		try {tipstext.push_back(getPlayersTribe());} catch (No_Tribe) {}
+		try {
+			tipstext.push_back(getPlayersTribe());
+		} catch (No_Tribe) {}
 		GameTips tips (loaderUI, tipstext);
 
 		loaderUI.step(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);
-		// If our player is in shared kingdom mode - set the iabase accordingly.
-		uint8_t pn;
-		if (d->playernum < d->settings.players.size()) {
-		pn =
-			(d->settings.players.at(d->playernum).partner > 0) ?
-			 d->settings.players.at(d->playernum).partner : d->playernum + 1;
-		} else
-			pn = 0;
+		uint8_t const pn = d->settings.playernum + 1;
 		Interactive_GameBase * igb;
 		if (pn > 0)
 			igb =
@@ -271,24 +262,13 @@ void NetClient::think()
 			if (curtime - d->lasttimestamp_realtime > CLIENT_TIMESTAMP_INTERVAL)
 				sendTime();
 		}
-	} else {
-		// Just syncing so both are the same. This is only needed,
-		// because the launchgamemenu needs d->settings.playernum.
-		d->settings.playernum = d->playernum;
 	}
 }
 
 void NetClient::sendPlayerCommand(Widelands::PlayerCommand & pc)
 {
 	assert(d->game);
-	if
-		((d->settings.players[d->playernum].partner > 0
-		  &&
-		  d->settings.players[d->playernum].partner != pc.sender())
-		 ||
-		 (d->settings.players[d->playernum].partner == 0
-		  &&
-		  pc.sender() != d->playernum + 1))
+	if (pc.sender() != d->settings.playernum + 1)
 	{
 		delete &pc;
 		return;
@@ -316,7 +296,7 @@ int32_t NetClient::getFrametime()
 std::string NetClient::getGameDescription()
 {
 	char buf[200];
-	snprintf(buf, sizeof(buf), "network player %i", d->playernum);
+	snprintf(buf, sizeof(buf), "network player %i", d->settings.playernum);
 	return buf;
 }
 
@@ -342,12 +322,12 @@ bool NetClient::canChangePlayerState(uint8_t)
 
 bool NetClient::canChangePlayerTribe(uint8_t number)
 {
-	return (number == d->playernum) && !d->settings.scenario;
+	return (number == d->settings.playernum) && !d->settings.scenario;
 }
 
 bool NetClient::canChangePlayerTeam(uint8_t number)
 {
-	return (number == d->playernum) && !d->settings.scenario;
+	return (number == d->settings.playernum) && !d->settings.scenario;
 }
 
 bool NetClient::canChangePlayerInit(uint8_t)
@@ -382,7 +362,7 @@ void NetClient::nextPlayerState(uint8_t)
 
 void NetClient::setPlayerTribe(uint8_t number, std::string const & tribe)
 {
-	if (number != d->playernum)
+	if (number != d->settings.playernum)
 		return;
 
 	SendPacket s;
@@ -393,23 +373,12 @@ void NetClient::setPlayerTribe(uint8_t number, std::string const & tribe)
 
 void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 {
-	if (number != d->playernum)
+	if (number != d->settings.playernum)
 		return;
 
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_CHANGETEAM);
 	s.Unsigned8(team);
-	s.send(d->sock);
-}
-
-void NetClient::setPlayerPartner(uint8_t number, uint8_t partner)
-{
-	if (number != d->playernum)
-		return;
-
-	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_CHANGEPARTNER);
-	s.Unsigned8(partner);
 	s.send(d->sock);
 }
 
@@ -430,26 +399,6 @@ void NetClient::setPlayer(uint8_t, PlayerSettings)
 	//  setPlayerNumber(uint8_t) to the host.
 }
 
-void NetClient::setPlayerReady
-	(uint8_t const number, bool const ready)
-{
-	//only if we have a valid player number set readyness
-	if (number == d->playernum) {
-		SendPacket s;
-		s.Unsigned8(NETCMD_SETTING_CHANGEREADY);
-		s.Unsigned8(static_cast<uint8_t>(ready));
-		s.send(d->sock);
-	}
-}
-
-bool NetClient::getPlayerReady(uint8_t const number) {
-	return
-		d->settings.players.at(number).state == PlayerSettings::stateClosed ||
-		d->settings.players.at(number).state == PlayerSettings::stateComputer ||
-		(d->settings.players.at(number).state == PlayerSettings::stateHuman &&
-		 d->settings.players.at(number).ready);
-}
-
 std::string NetClient::getWinCondition() {
 	return d->settings.win_condition;
 }
@@ -462,7 +411,14 @@ void NetClient::setPlayerNumber(uint8_t const number)
 {
 	// If the playernumber we want to switch to is our own, there is no need
 	// for sending a request to the host.
-	if (number == d->playernum)
+	if (number == d->settings.playernum)
+		return;
+	// Same if the player is not selectable
+	if (number < d->settings.players.size()
+		 &&
+		 (d->settings.players.at(number).state == PlayerSettings::stateClosed
+		  ||
+		  d->settings.players.at(number).state == PlayerSettings::stateComputer))
 		return;
 
 	// Send request
@@ -520,11 +476,9 @@ void NetClient::recvOnePlayer
 	player.tribe = packet.String();
 	player.initialization_index = packet.Unsigned8();
 	player.ai = packet.String();
-	player.ready = static_cast<bool>(packet.Unsigned8());
 	player.team = packet.Unsigned8();
-	player.partner = packet.Unsigned8();
 
-	if (number == d->playernum)
+	if (number == d->settings.playernum)
 		d->localplayername = player.name;
 }
 
@@ -546,7 +500,6 @@ void NetClient::recvOneUser
 	if (number == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
 		d->settings.playernum = d->settings.users.at(number).position;
-		d->playernum = d->settings.users.at(number).position;
 	}
 }
 
@@ -623,7 +576,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		return;
 	}
 
-	if (d->playernum == -2) {
+	if (d->settings.usernum == -2) {
 		if (cmd != NETCMD_HELLO)
 			throw DisconnectException
 				(_
@@ -636,7 +589,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			throw DisconnectException
 				(_("Server uses a different protocol version"));
 		d->settings.usernum = packet.Unsigned32();
-		d->playernum = -1;
+		d->settings.playernum = -1;
 		return;
 	}
 
@@ -715,7 +668,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_FILE_PART: {
 		uint32_t part = packet.Unsigned32();
-		uint8_t size = packet.Unsigned8();
+		uint32_t size = packet.Unsigned32();
 
 		// Send an answer
 		SendPacket s;
@@ -834,9 +787,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 	case NETCMD_SET_PLAYERNUMBER: {
 		int32_t number = packet.Signed32();
-		d->playernum = number;
-		d->settings.users.at(d->settings.usernum).position = number;
 		d->settings.playernum = number;
+		d->settings.users.at(d->settings.usernum).position = number;
 		break;
 	}
 	case NETCMD_WIN_CONDITION: {

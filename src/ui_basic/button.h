@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,8 +85,9 @@ struct Button : public NamedPanel {
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t);
-	
-	void set_perm_pressed(bool state); // Set the permanently pressed state of the button
+
+	// Set the permanently pressed state of the button
+	void set_perm_pressed(bool state);
 
 protected:
 	virtual void clicked() = 0; /// Override this to react on the click.
@@ -105,11 +106,11 @@ protected:
 
 	std::string m_title;          //  title string used when _mypic == 0
 
-	PictureID       m_pic_background; //  background texture (picture ID)
-	PictureID       m_pic_custom;     //  custom icon on the button
-	PictureID       m_pic_custom_disabled;
-	std::string     m_fontname;
-	uint32_t        m_fontsize;
+	PictureID   m_pic_background; //  background texture (picture ID)
+	PictureID   m_pic_custom;     //  custom icon on the button
+	PictureID   m_pic_custom_disabled;
+	std::string m_fontname;
+	uint32_t    m_fontsize;
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"
 	bool        m_draw_caret;
