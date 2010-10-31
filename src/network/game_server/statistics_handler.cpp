@@ -346,6 +346,15 @@ bool StatisticsHandler::report_game_result
 					read_stat_vector
 						(*player, gameinfo, l, &player->stats.kills);
 				break;
+			case gamestat_customstat:
+				if (not player) {
+					wllog(DL_ERROR, "Got a statistic vector but have no player");
+					break;
+				}
+				player->last_stats.custom =
+					read_stat_vector
+						(*player, gameinfo, l, &player->stats.custom);
+				break;
 			case gamestat_gametime:
 				CHECKTYPE(l, integer);
 				if (player) {

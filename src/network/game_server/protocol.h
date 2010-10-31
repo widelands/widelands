@@ -243,7 +243,8 @@ enum WLGGZGameStats
 	gamestat_productivity = 14, // integer
 	gamestat_casualties = 15, // integer
 	gamestat_kills = 16, // integer
-	gamestat_gametime = 17 // integer
+	gamestat_gametime = 17, // integer
+	gamestat_customstat = 18
 };
 
 /*ToDo:
