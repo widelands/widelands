@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-16 17:57+0000\n"
-"Last-Translator: trewe <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-30 10:02+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-10-31 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/blackland/conf:45
@@ -67,7 +67,7 @@ msgstr "Bétula anã"
 
 #: ../../worlds/blackland/conf:3
 msgid "Blackland"
-msgstr "Terras Negras"
+msgstr "Terra escura"
 
 #: ../../worlds/blackland/conf:79
 msgid "Bunny"
@@ -149,24 +149,24 @@ msgstr "Cedro anão"
 
 #: ../../worlds/blackland/conf:57
 msgid "Maple"
-msgstr "Mármore"
+msgstr "Ácer"
 
 #: ../../worlds/blackland/conf:58
 msgid "Maple medium"
-msgstr "Mármore médio"
+msgstr "Ácer médio"
 
 #: ../../worlds/blackland/conf:59
 msgid "Maple small"
-msgstr "Mármore pequeno"
+msgstr "Ácer pequeno"
 
 #: ../../worlds/blackland/conf:60
 msgid "Maple tiny"
-msgstr "Mármore minúsculo"
+msgstr "Ácer minúsculo"
 
 #: ../../worlds/blackland/conf:21
 #: ../../worlds/blackland/conf:22
 msgid "Mushroom"
-msgstr "Plantação de cogumelos"
+msgstr "Cogumelos"
 
 #: ../../worlds/blackland/conf:49
 msgid "Oak"
@@ -225,19 +225,19 @@ msgstr "Esqueleto"
 
 #: ../../worlds/blackland/conf:53
 msgid "Spruce"
-msgstr "Pinho"
+msgstr "Pinheiro Nórdico"
 
 #: ../../worlds/blackland/conf:54
 msgid "Spruce medium"
-msgstr "Pinho médio"
+msgstr "Pinheiro Nórdico médio"
 
 #: ../../worlds/blackland/conf:55
 msgid "Spruce small"
-msgstr "Pinho pequeno"
+msgstr "Pinheiro Nórdico pequeno"
 
 #: ../../worlds/blackland/conf:56
 msgid "Spruce tiny"
-msgstr "Pinho anão"
+msgstr "Pinheiro Nórdico minúsculo"
 
 #: ../../worlds/blackland/conf:32
 #: ../../worlds/blackland/conf:33
@@ -247,7 +247,7 @@ msgstr "Pinho anão"
 #: ../../worlds/blackland/conf:37
 #: ../../worlds/blackland/conf:38
 msgid "Standing Stones"
-msgstr "Pedras em pé"
+msgstr "Obeliscos"
 
 #: ../../worlds/blackland/conf:39
 #: ../../worlds/blackland/conf:40
@@ -264,7 +264,7 @@ msgstr "A equipa de desenvolvimento Widelands"
 
 #: ../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
-msgstr "Estas são as cinzentas, terríveis e perigosas terras sombrias."
+msgstr "Estas são as cinzentas, terríveis e perigosas terras escuras."
 
 #: ../../worlds/blackland/resconf:36
 msgid "Water"
