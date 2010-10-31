@@ -123,7 +123,7 @@ struct Bob : public Map_Object {
 	struct State;
 	typedef void (Bob::*Ptr)(Game &, State &);
 	typedef void (Bob::*PtrSignal)(Game &, State &, std::string const &);
-	enum Type {CRITTER, WORKER};
+	enum Type {CRITTER, WORKER, SHIP};
 
 	/// \see class Bob for in-depth explanation
 	struct Task {

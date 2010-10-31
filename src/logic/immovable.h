@@ -142,6 +142,9 @@ public:
 	Immovable(const Immovable_Descr &);
 	~Immovable();
 
+	Player * get_owner() const {return m_owner;}
+	void set_owner(Player * player);
+
 	Coords get_position() const {return m_position;}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 
@@ -187,6 +190,7 @@ public:
 	}
 
 protected:
+	Player * m_owner;
 	Coords                   m_position;
 
 	uint32_t                     m_anim;

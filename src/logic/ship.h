@@ -31,6 +31,9 @@ struct Ship_Descr : Bob::Descr {
 		(char const * name, char const * descname,
 		 std::string const & directory, Profile &, Section & global_s,
 		 Tribe_Descr const &);
+
+protected:
+	virtual Bob & create_object() const;
 };
 
 /**
@@ -41,12 +44,14 @@ struct Ship : Bob {
 
 	Ship(const Ship_Descr & descr);
 
+	virtual Type get_bob_type() const throw ();
+
 	void init_auto_task(Game &);
 
 	void start_task_shipidle(Game &);
 
 private:
-	static Task taskShipIdle;
+	static const Task taskShipIdle;
 
 	void shipidle_update(Game &, State &);
 };

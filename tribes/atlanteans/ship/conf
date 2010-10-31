@@ -1,4 +1,4 @@
-help=_A sea-worthy ship
+#help=_A sea-worthy ship
 
 [idle]
 pics=ship_??.png

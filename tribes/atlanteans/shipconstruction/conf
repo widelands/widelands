@@ -9,7 +9,7 @@ spidercloth=4
 
 [program]
 construction=idle 210000
-remove=
+transform=bob tribe:ship
 
 [idle]
 pics=shipbuild_??.png

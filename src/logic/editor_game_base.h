@@ -107,7 +107,9 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>,
 		(Coords, Player_Number, Building_Index,
 		 Building_Index oldid = Building_Index::Null(),
 		 bool loading = false);
+	Bob & create_bob(Coords, const Bob::Descr&);
 	Bob & create_bob(Coords, Bob::Descr::Index, Tribe_Descr const * const = 0);
+	Bob & create_bob(Coords, const std::string & name, Tribe_Descr const * const = 0);
 	Immovable & create_immovable(Coords, uint32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable
 		(Coords, std::string const & name, Tribe_Descr const *);

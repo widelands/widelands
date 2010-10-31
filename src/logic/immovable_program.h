@@ -71,12 +71,29 @@ struct ImmovableProgram {
 		Duration m_duration;
 	};
 
+	/// Transforms the immovable into another immovable or into a bob
+	///
+	/// Parameter syntax
+	///    parameters ::= {probability} {bob|immovable} world|tribe:name
+	/// Parameter semantics:
+	///    probability: (defaults to 0 -- i.e. always)
+	///       The probability (out of 255) for replacing the immovable with
+	///       a new one; if the probability is 0 (i.e. the default), then the
+	///       transformation always happens
+	///    bob|immovable: (defaults to immovable)
+	///       whether we'll be replaced by a bob or by an immovable
+	///    world|tribe:
+	///       whether the other object is taken from the world or from
+	///       the owner's tribe
+	///    name:
+	///       name of the replacement object
 	struct ActTransform : public Action {
 		ActTransform
 			(char * parameters, Immovable_Descr &);
 		virtual void execute(Game &, Immovable &) const;
 	private:
 		std::string type_name;
+		bool        bob;
 		bool        tribe;
 		uint8_t     probability;
 	};

@@ -839,6 +839,7 @@ bool Worker::run_plant(Game & game, State & state, Action const & action)
 
 	Immovable & newimm = game.create_immovable
 		(pos, best_fitting[idx], is_tribe_specific[idx] ? &descr().tribe() : 0);
+	newimm.set_owner(get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject)
 		state.objvar1 = &newimm;

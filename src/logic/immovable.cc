@@ -343,6 +343,7 @@ IMPLEMENTATION
 
 Immovable::Immovable(const Immovable_Descr & imm_descr) :
 BaseImmovable (imm_descr),
+m_owner(0),
 m_anim        (0),
 m_anim_construction_total(0),
 m_anim_construction_done(0),
@@ -386,6 +387,10 @@ bool Immovable::get_passable() const throw ()
 
 std::string const & Immovable::name() const throw () {return descr().name();}
 
+void Immovable::set_owner(Player* player)
+{
+	m_owner = player;
+}
 
 void Immovable::start_animation
 	(Editor_Game_Base const & egbase, uint32_t const anim)
@@ -570,13 +575,23 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 4
+#define IMMOVABLE_SAVEGAME_VERSION 5
 
 void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
 	BaseImmovable::Loader::load(fr);
 
 	Immovable & imm = ref_cast<Immovable, Map_Object>(*get_object());
+
+	if (version >= 5) {
+		Player_Number pn = fr.Unsigned8();
+		if (pn && pn <= MAX_PLAYERS) {
+			Player * plr = egbase().get_player(pn);
+			if (!plr)
+				throw game_data_error("Immovable::load: player %u does not exist", pn);
+			imm.set_owner(plr);
+		}
+	}
 
 	// Position
 	imm.m_position = fr.Coords32(egbase().map().extent());
@@ -680,6 +695,7 @@ void Immovable::save
 	// The main loading data follows
 	BaseImmovable::save(egbase, mos, fw);
 
+	fw.Player_Number8(get_owner() ? get_owner()->player_number() : 0);
 	fw.Coords32(m_position);
 
 	// Animations
@@ -844,52 +860,51 @@ ImmovableProgram::ActTransform::ActTransform
 {
 	try {
 		tribe = true;
+		bob = false;
 		probability = 0;
-		for (char * p = parameters;;)
-			switch (*p) {
-			case ':': {
-				*p = '\0';
-				++p;
-				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
-				if (not owner_tribe)
+
+		std::vector<std::string> params = split_string(parameters, " ");
+		for (uint i = 0; i < params.size(); ++i) {
+			if (params[i] == "bob")
+				bob = true;
+			else if (params[i] == "immovable")
+				bob = false;
+			else if (params[i][0] >= '0' && params[i][0] <= '9') {
+				long int const value = atoi(params[i].c_str());
+				if (value < 1 or 254 < value)
 					throw game_data_error
 						(_
-						 	("immovable type not in tribe but target type has scope "
-						 	 "(\"%s\")"),
-						 parameters);
-				else if (strcmp(parameters, "world"))
-					throw game_data_error
-						(_
-						 	("scope \"%s\" given for target type (must be "
-						 	 "\"world\")"),
-						 parameters);
-				tribe = false;
-				parameters = p;
-				break;
-			}
-			case ' ': {
-				*p = '\0';
-				++p;
-				char * endp;
-				long int const value = strtol(p, &endp, 0);
-				if (*endp or value < 1 or 254 < value)
-					throw
-						(_
-						 	("expected probability in range [1, 254] but found "
-						 	 "\"%s\""),
-						 p);
+							("expected probability in range [1, 254] but found "
+							"\"%s\""),
+						 params[i].c_str());
 				probability = value;
-			//  fallthrough
+			} else {
+				std::vector<std::string> segments = split_string(params[i], ":");
+
+				if (segments.size() > 2)
+					throw game_data_error("object type has more than 2 segments");
+				if (segments.size() == 2) {
+					if (segments[0] == "world")
+						tribe = false;
+					else if (segments[0] == "tribe") {
+						if (!descr.get_owner_tribe())
+							throw game_data_error("scope \"tribe\", but have no owner tribe");
+						tribe = true;
+					} else
+						throw game_data_error
+							(_
+								("unknown scope \"%s\" given for target type (must be "
+								 "\"world\" or \"tribe\")"),
+							 parameters);
+
+					type_name = segments[1];
+				} else {
+					type_name = segments[0];
+				}
 			}
-			case '\0':
-				goto end;
-			default:
-				++p;
-			}
-	end:
-		if (not strcmp(parameters, descr.name().c_str()))
+		}
+		if (type_name == descr.name())
 			throw game_data_error(_("illegal transformation to the same type"));
-		type_name = parameters;
 	} catch (_wexception const & e) {
 		throw game_data_error("transform: %s", e.what());
 	}
@@ -899,11 +914,21 @@ void ImmovableProgram::ActTransform::execute
 	(Game & game, Immovable & immovable) const
 {
 	if (probability == 0 or game.logic_rand() % 256 < probability) {
+		Player * player = immovable.get_owner();
 		Coords const c = immovable.get_position();
 		Tribe_Descr const * const owner_tribe =
 			tribe ? immovable.descr().get_owner_tribe() : 0;
 		immovable.remove(game); //  Now immovable is a dangling reference!
-		game.create_immovable(c, type_name, owner_tribe);
+
+		if (bob) {
+			Bob & bob = game.create_bob(c, type_name, owner_tribe);
+			if (player)
+				bob.set_owner(player);
+		} else {
+			Immovable & imm = game.create_immovable(c, type_name, owner_tribe);
+			if (player)
+				imm.set_owner(player);
+		}
 	} else
 		immovable.program_step(game);
 }

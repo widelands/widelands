@@ -31,12 +31,21 @@ Ship_Descr::Ship_Descr
 
 }
 
+Bob& Ship_Descr::create_object() const
+{
+	return *new Ship(*this);
+}
 
 
 Ship::Ship(const Ship_Descr& descr)
 :
 Bob(descr)
 {
+}
+
+Bob::Type Ship::get_bob_type() const throw()
+{
+	return SHIP;
 }
 
 void Ship::init_auto_task(Game& game)

@@ -33,6 +33,7 @@
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "ship.h"
 #include "soldier.h"
 #include "trainingsite.h"
 #include "warehouse.h"
@@ -80,6 +81,12 @@ Tribe_Descr::Tribe_Descr
 					 	(_name, _descname, path, prof, global_s,  this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
+			PARSE_MAP_OBJECT_TYPES_BEGIN("ship")
+				m_bobs.add
+					(new Ship_Descr
+					 	(_name, _descname, path, prof, global_s, *this));
+			PARSE_MAP_OBJECT_TYPES_END;
+
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
 				m_wares.add
 					(new Item_Ware_Descr
@@ -116,7 +123,7 @@ Tribe_Descr::Tribe_Descr
 			if (not safe_building_index("constructionsite"))
 				throw game_data_error
 					(_("constructionsite type \"constructionsite\" is missing"));
-			
+
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
 					(new Warehouse_Descr
@@ -176,8 +183,8 @@ Tribe_Descr::Tribe_Descr
 				tribe_s.get_string("descr"); // long description
 				m_bob_vision_range = tribe_s.get_int("bob_vision_range");
 				m_carrier2         = tribe_s.get_string("carrier2");
- 
-				/// Load and parse ware and worker categorization                                                                                     
+
+				/// Load and parse ware and worker categorization
 #define PARSE_ORDER_INFORMATION(w) /* w is ware or worker */                                                                                                    \
 				{                                                                                                                               \
 					m_##w##s_order_coords.resize(m_##w##s.get_nitems());                                                                    \
