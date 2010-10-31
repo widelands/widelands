@@ -52,43 +52,43 @@ Editor_Main_Menu::Editor_Main_Menu
 		(this, "new_map",
 		 hmargin, vmargin + 0 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Editor_Main_Menu::new_map_btn, *this,
+		 boost::bind(&Editor_Main_Menu::new_map_btn, boost::ref(*this)),
 		 _("New Map")),
 	m_button_new_random_map
 		(this, "new_random_map",
 		 hmargin, vmargin + 1 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Editor_Main_Menu::new_random_map_btn, *this,
+		 boost::bind(&Editor_Main_Menu::new_random_map_btn, boost::ref(*this)),
 		 _("New Random Map")),
 	m_button_load_map
 		(this, "load_map",
 		 hmargin, vmargin + 2 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Editor_Main_Menu::load_btn, *this,
+		 boost::bind(&Editor_Main_Menu::load_btn, boost::ref(*this)),
 		 _("Load Map")),
 	m_button_save_map
 		(this, "save_map",
 		 hmargin, vmargin + 3 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Editor_Main_Menu::save_btn, *this,
+		 boost::bind(&Editor_Main_Menu::save_btn, boost::ref(*this)),
 		 _("Save Map")),
 	m_button_map_options
 		(this, "map_options",
 		 hmargin, vmargin + 4 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Editor_Main_Menu::map_options_btn, *this,
+		 boost::bind(&Editor_Main_Menu::map_options_btn, boost::ref(*this)),
 		 _("Map Options")),
 	m_button_view_readme
 		(this, "readme",
 		 hmargin, vmargin + 5 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Editor_Main_Menu::readme_btn, *this,
+		 boost::bind(&Editor_Main_Menu::readme_btn, boost::ref(*this)),
 		 _("View Readme")),
 	m_button_exit_editor
 		(this, "exit",
 		 hmargin, vmargin + 6 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Editor_Main_Menu::exit_btn, *this,
+		 boost::bind(&Editor_Main_Menu::exit_btn, boost::ref(*this)),
 		 _("Exit Editor"))
 {
 	// Put in the default position, if necessary

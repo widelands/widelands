@@ -183,9 +183,13 @@ void NetClient::run ()
 		d->game = &game;
 		game.set_game_controller(this);
 		// If our player is in shared kingdom mode - set the iabase accordingly.
-		uint8_t const pn =
+		uint8_t pn;
+		if (d->playernum < d->settings.players.size()) {
+		pn =
 			(d->settings.players.at(d->playernum).partner > 0) ?
 			 d->settings.players.at(d->playernum).partner : d->playernum + 1;
+		} else
+			pn = 0;
 		Interactive_GameBase * igb;
 		if (pn > 0)
 			igb =
@@ -493,6 +497,15 @@ void NetClient::setDesiredSpeed(uint32_t speed)
 	}
 }
 
+// Network games cannot be paused
+bool NetClient::isPaused()
+{
+	return false;
+}
+
+void NetClient::setPaused(bool const paused)
+{
+}
 
 void NetClient::recvOnePlayer
 	(uint8_t const number, Widelands::StreamRead & packet)

@@ -7,27 +7,71 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-25 12:31+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
 "PO-Revision-Date: 2010-03-25 16:49+0000\n"
 "Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../worlds/blackland/conf:2
-msgid "The Widelands Development Team"
+#: ../../worlds/blackland/conf:45
+msgid "Aspen"
+msgstr "Tremolo"
+
+#: ../../worlds/blackland/conf:46
+msgid "Aspen medium"
+msgstr "Tremolo meza"
+
+#: ../../worlds/blackland/conf:47
+msgid "Aspen small"
+msgstr "Tremolo mala"
+
+#: ../../worlds/blackland/conf:48
+msgid "Aspen tiny"
+msgstr "Tremolo nana"
+
+#: ../../worlds/blackland/conf:65
+msgid "Beech"
 msgstr ""
+
+#: ../../worlds/blackland/conf:66
+msgid "Beech medium"
+msgstr "Fago meza"
+
+#: ../../worlds/blackland/conf:67
+msgid "Beech small"
+msgstr "Fago mala"
+
+#: ../../worlds/blackland/conf:68
+msgid "Beech tiny"
+msgstr "Fago nana"
+
+#: ../../worlds/blackland/conf:61
+msgid "Birch"
+msgstr "Betulo"
+
+#: ../../worlds/blackland/conf:62
+msgid "Birch medium"
+msgstr "Betulo meza"
+
+#: ../../worlds/blackland/conf:63
+msgid "Birch small"
+msgstr "Betulo mala"
+
+#: ../../worlds/blackland/conf:64
+msgid "Birch tiny"
+msgstr "Betulo nana"
 
 #: ../../worlds/blackland/conf:3
 msgid "Blackland"
 msgstr ""
 
-#: ../../worlds/blackland/conf:4
-msgid "These are the grey, horrible and dangerous blacklands"
-msgstr ""
+#: ../../worlds/blackland/conf:79
+msgid "Bunny"
+msgstr "Kuniklo"
 
 #: ../../worlds/blackland/conf:7
 #: ../../worlds/blackland/conf:8
@@ -42,6 +86,10 @@ msgstr "Arbusto"
 msgid "Cactus"
 msgstr "Kakto"
 
+#: ../../worlds/blackland/resconf:4
+msgid "Coal"
+msgstr "Karbo"
+
 #: ../../worlds/blackland/conf:14
 #: ../../worlds/blackland/conf:15
 #: ../../worlds/blackland/conf:16
@@ -49,16 +97,92 @@ msgstr "Kakto"
 msgid "Dead Tree"
 msgstr "Morta arbo"
 
+#: ../../worlds/blackland/conf:80
+msgid "Deer"
+msgstr "Cervo"
+
+#: ../../worlds/blackland/conf:81
+msgid "Duck"
+msgstr "Anaso"
+
+#: ../../worlds/blackland/resconf:41
+msgid "Fish"
+msgstr "Fiŝo"
+
+#: ../../worlds/blackland/conf:82
+msgid "Fox"
+msgstr "Vulpo"
+
+#: ../../worlds/blackland/resconf:12
+msgid "Gold"
+msgstr "Oro"
+
+#: ../../worlds/blackland/resconf:28
+msgid "Granite"
+msgstr ""
+
 #: ../../worlds/blackland/conf:18
 #: ../../worlds/blackland/conf:19
 #: ../../worlds/blackland/conf:20
 msgid "Grass"
 msgstr "Herbo"
 
+#: ../../worlds/blackland/resconf:20
+msgid "Iron"
+msgstr "Fero"
+
+#: ../../worlds/blackland/conf:69
+msgid "Larch"
+msgstr "Lariko"
+
+#: ../../worlds/blackland/conf:70
+msgid "Larch medium"
+msgstr "Meza Lariko"
+
+#: ../../worlds/blackland/conf:71
+msgid "Larch small"
+msgstr "Lariko mala"
+
+#: ../../worlds/blackland/conf:72
+msgid "Larch tiny"
+msgstr "Lariko nana"
+
+#: ../../worlds/blackland/conf:57
+msgid "Maple"
+msgstr "Acero"
+
+#: ../../worlds/blackland/conf:58
+msgid "Maple medium"
+msgstr "Acero meza"
+
+#: ../../worlds/blackland/conf:59
+msgid "Maple small"
+msgstr "Acero mala"
+
+#: ../../worlds/blackland/conf:60
+msgid "Maple tiny"
+msgstr "Acero nana"
+
 #: ../../worlds/blackland/conf:21
 #: ../../worlds/blackland/conf:22
 msgid "Mushroom"
 msgstr "Fungo"
+
+#: ../../worlds/blackland/conf:49
+msgid "Oak"
+msgstr "Kveko"
+
+#: ../../worlds/blackland/conf:50
+msgid "Oak medium"
+msgstr "Kveko meza"
+
+#: ../../worlds/blackland/conf:51
+msgid "Oak small"
+msgstr "Kevko mala"
+
+#: ../../worlds/blackland/conf:52
+msgid "Oak tiny"
+msgstr "Kveko nana"
 
 #: ../../worlds/blackland/conf:23
 #: ../../worlds/blackland/conf:24
@@ -69,11 +193,51 @@ msgstr "Fungo"
 msgid "Pebble"
 msgstr ""
 
+#: ../../worlds/blackland/conf:83
+msgid "Reindeer"
+msgstr "Boaco"
+
+#: ../../worlds/blackland/conf:73
+msgid "Rowan"
+msgstr "Sorbuso"
+
+#: ../../worlds/blackland/conf:74
+msgid "Rowan medium"
+msgstr "Meza sorbuso"
+
+#: ../../worlds/blackland/conf:75
+msgid "Rowan small"
+msgstr "Sorbuso mala"
+
+#: ../../worlds/blackland/conf:76
+msgid "Rowan tiny"
+msgstr "Sorbuso nana"
+
+#: ../../worlds/blackland/conf:84
+msgid "Sheep"
+msgstr "Ŝafo"
+
 #: ../../worlds/blackland/conf:29
 #: ../../worlds/blackland/conf:30
 #: ../../worlds/blackland/conf:31
 msgid "Skeleton"
 msgstr "Skeleto"
+
+#: ../../worlds/blackland/conf:53
+msgid "Spruce"
+msgstr "Piceo"
+
+#: ../../worlds/blackland/conf:54
+msgid "Spruce medium"
+msgstr "Piceo meza"
+
+#: ../../worlds/blackland/conf:55
+msgid "Spruce small"
+msgstr "Piceo mala"
+
+#: ../../worlds/blackland/conf:56
+msgid "Spruce tiny"
+msgstr "Piceo nana"
 
 #: ../../worlds/blackland/conf:32
 #: ../../worlds/blackland/conf:33
@@ -94,178 +258,17 @@ msgstr ""
 msgid "Stones"
 msgstr "Sxtono"
 
-#: ../../worlds/blackland/conf:45
-msgid "Aspen"
-msgstr "Tremolo"
-
-#: ../../worlds/blackland/conf:46
-msgid "Aspen medium"
-msgstr "Tremolo meza"
-
-#: ../../worlds/blackland/conf:47
-msgid "Aspen small"
-msgstr "Tremolo mala"
-
-#: ../../worlds/blackland/conf:48
-msgid "Aspen tiny"
-msgstr "Tremolo nana"
-
-#: ../../worlds/blackland/conf:49
-msgid "Oak"
-msgstr "Kveko"
-
-#: ../../worlds/blackland/conf:50
-msgid "Oak medium"
-msgstr "Kveko meza"
-
-#: ../../worlds/blackland/conf:51
-msgid "Oak small"
-msgstr "Kevko mala"
-
-#: ../../worlds/blackland/conf:52
-msgid "Oak tiny"
-msgstr "Kveko nana"
-
-#: ../../worlds/blackland/conf:53
-msgid "Spruce"
-msgstr "Piceo"
-
-#: ../../worlds/blackland/conf:54
-msgid "Spruce medium"
-msgstr "Piceo meza"
-
-#: ../../worlds/blackland/conf:55
-msgid "Spruce small"
-msgstr "Piceo mala"
-
-#: ../../worlds/blackland/conf:56
-msgid "Spruce tiny"
-msgstr "Piceo nana"
-
-#: ../../worlds/blackland/conf:57
-msgid "Maple"
-msgstr "Acero"
-
-#: ../../worlds/blackland/conf:58
-msgid "Maple medium"
-msgstr "Acero meza"
-
-#: ../../worlds/blackland/conf:59
-msgid "Maple small"
-msgstr "Acero mala"
-
-#: ../../worlds/blackland/conf:60
-msgid "Maple tiny"
-msgstr "Acero nana"
-
-#: ../../worlds/blackland/conf:61
-msgid "Birch"
-msgstr "Betulo"
-
-#: ../../worlds/blackland/conf:62
-msgid "Birch medium"
-msgstr "Betulo meza"
-
-#: ../../worlds/blackland/conf:63
-msgid "Birch small"
-msgstr "Betulo mala"
-
-#: ../../worlds/blackland/conf:64
-msgid "Birch tiny"
-msgstr "Betulo nana"
-
-#: ../../worlds/blackland/conf:65
-msgid "Beech"
+#: ../../worlds/blackland/conf:2
+msgid "The Widelands Development Team"
 msgstr ""
 
-#: ../../worlds/blackland/conf:66
-msgid "Beech medium"
-msgstr "Fago meza"
-
-#: ../../worlds/blackland/conf:67
-msgid "Beech small"
-msgstr "Fago mala"
-
-#: ../../worlds/blackland/conf:68
-msgid "Beech tiny"
-msgstr "Fago nana"
-
-#: ../../worlds/blackland/conf:69
-msgid "Larch"
-msgstr "Lariko"
-
-#: ../../worlds/blackland/conf:70
-msgid "Larch medium"
-msgstr "Meza Lariko"
-
-#: ../../worlds/blackland/conf:71
-msgid "Larch small"
-msgstr "Lariko mala"
-
-#: ../../worlds/blackland/conf:72
-msgid "Larch tiny"
-msgstr "Lariko nana"
-
-#: ../../worlds/blackland/conf:73
-msgid "Rowan"
-msgstr "Sorbuso"
-
-#: ../../worlds/blackland/conf:74
-msgid "Rowan medium"
-msgstr "Meza sorbuso"
-
-#: ../../worlds/blackland/conf:75
-msgid "Rowan small"
-msgstr "Sorbuso mala"
-
-#: ../../worlds/blackland/conf:76
-msgid "Rowan tiny"
-msgstr "Sorbuso nana"
-
-#: ../../worlds/blackland/conf:79
-msgid "Bunny"
-msgstr "Kuniklo"
-
-#: ../../worlds/blackland/conf:80
-msgid "Deer"
-msgstr "Cervo"
-
-#: ../../worlds/blackland/conf:81
-msgid "Duck"
-msgstr "Anaso"
-
-#: ../../worlds/blackland/conf:82
-msgid "Fox"
-msgstr "Vulpo"
-
-#: ../../worlds/blackland/conf:83
-msgid "Reindeer"
-msgstr "Boaco"
-
-#: ../../worlds/blackland/conf:84
-msgid "Sheep"
-msgstr "Ŝafo"
-
-#: ../../worlds/blackland/resconf:4
-msgid "Coal"
-msgstr "Karbo"
-
-#: ../../worlds/blackland/resconf:12
-msgid "Gold"
-msgstr "Oro"
-
-#: ../../worlds/blackland/resconf:20
-msgid "Iron"
-msgstr "Fero"
-
-#: ../../worlds/blackland/resconf:28
-msgid "Granit"
-msgstr "Granito"
+#: ../../worlds/blackland/conf:4
+msgid "These are the grey, horrible and dangerous blacklands"
+msgstr ""
 
 #: ../../worlds/blackland/resconf:36
 msgid "Water"
 msgstr "Akvo"
 
-#: ../../worlds/blackland/resconf:41
-msgid "Fish"
-msgstr "Fiŝo"
+#~ msgid "Granit"
+#~ msgstr "Granito"

@@ -562,9 +562,8 @@ void Soldier::draw_info_icon
 	(RenderTarget & dst, Point pt, bool anchor_below) const
 {
 	// Gather information to determine coordinates
-	uint32_t w, h;
-	g_gr->get_animation_size(descr().main_animation(), 0, w, h);
-	w = w * 3 / 5;
+	uint32_t w;
+	w = SOLDIER_HP_BAR_WIDTH;
 
 	const PictureID hppic = get_hp_level_pic();
 	const PictureID attackpic = get_attack_level_pic();
@@ -634,9 +633,8 @@ void Soldier::calc_info_icon_size
 	g_gr->get_picture_size(defensepic, dew, deh);
 	g_gr->get_picture_size(evadepic,   evw, evh);
 
-	uint32_t animw, animh;
-	g_gr->get_animation_size(soldierdesc->main_animation(), 0, animw, animh);
-	animw = animw * 3 / 5;
+	uint32_t animw;
+	animw = SOLDIER_HP_BAR_WIDTH;
 
 	w = std::max(std::max(atw + dew, hpw + evw), 2 * animw);
 	h = 5 + std::max(hph + ath, evh + deh);
@@ -1504,7 +1502,11 @@ void Soldier::start_task_die(Game & game)
 	// Dead soldier is not owned by a location
 	set_location(0);
 
-	start_task_idle(game, descr().get_animation("idle"), 1000);
+	start_task_idle
+			(game,
+			 descr().get_animation
+				 (m_combat_walking == CD_COMBAT_W ? "die_w" : "die_e"),
+			 1000);
 }
 
 void Soldier::die_update(Game & game, State & state)

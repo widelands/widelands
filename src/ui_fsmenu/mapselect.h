@@ -25,7 +25,7 @@
 #include "base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/listselect.h"
+#include "ui_basic/table.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
@@ -68,6 +68,7 @@ private:
 	void changed(bool);
 	void double_clicked(uint32_t);
 	void fill_list();
+	bool compare_maprows(uint32_t const, uint32_t const);
 
 	uint32_t     m_butw;
 	uint32_t     m_buth;
@@ -82,12 +83,13 @@ private:
 	UI::Textarea m_label_nr_players, m_nr_players;
 	UI::Textarea m_label_descr;
 	UI::Multiline_Textarea m_descr;
-	UI::Callback_IDButton<Fullscreen_Menu_MapSelect, int32_t> m_back;
-	UI::Callback_Button<Fullscreen_Menu_MapSelect>            m_ok;
-	UI::Checkbox                                     m_load_map_as_scenario;
-	UI::Listselect<MapData>                          m_list;
-	std::string                                      m_curdir, m_basedir;
+	UI::Callback_Button m_back, m_ok;
+	UI::Checkbox                      m_load_map_as_scenario;
+	UI::Table<uintptr_t const>        m_table;
+	std::string                       m_curdir, m_basedir;
 	Map::ScenarioTypes  m_scenario_types;
+
+	std::vector<MapData> m_maps_data;
 };
 
 #endif

@@ -564,7 +564,15 @@ private:
 	std::string           m_name; // Player name
 	std::string           m_ai; /**< Name of preferred AI implementation */
 
+	/**
+	 * Wares produced (by ware id) since the last call to @ref sample_statistics
+	 */
 	std::vector<uint32_t> m_current_statistics;
+
+	/**
+	 * Statistics of wares produced over the life of the game, indexed as
+	 * m_ware_productions[ware id][time index]
+	 */
 	std::vector< std::vector<uint32_t> > m_ware_productions;
 	BuildingStats m_building_stats;
 };

@@ -493,7 +493,6 @@ void Interactive_Base::toggle_minimap() {
 	}
 }
 
-
 /**
  * Hide the minimap if it is currently shown; otherwise, do nothing.
  */
@@ -502,6 +501,16 @@ void Interactive_Base::hide_minimap()
 	delete m->minimap.window;
 }
 
+/**
+===========
+Interactive_Base::minimap_registry()
+
+Exposes the Registry object of the minimap to derived classes
+===========
+*/
+UI::UniqueWindow::Registry &Interactive_Base::minimap_registry() {
+	return m->minimap;
+}
 
 /*
 ===============
@@ -858,6 +867,13 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 			if (upcast(Game, game, &m_egbase))
 				if (GameController * const ctrl = game->gameController())
 					ctrl->setDesiredSpeed(ctrl->desiredSpeed() + 1000);
+		return true;
+	
+	case SDLK_PAUSE:
+		if (down)
+			if (upcast(Game, game, &m_egbase))
+				if (GameController * const ctrl = game->gameController())
+					ctrl->togglePaused();
 		return true;
 
 	case SDLK_PAGEDOWN:

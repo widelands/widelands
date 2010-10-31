@@ -54,7 +54,7 @@ Economy::Economy(Player & player) :
 	m_ware_target_quantities   = new Target_Quantity[nr_wares  .value()];
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 		Target_Quantity tq;
-		tq.temporary = tq.permanent =
+		tq.permanent =
 			tribe.get_ware_descr(i)->default_target_quantity();
 		tq.last_modified = 0;
 		m_ware_target_quantities[i.value()] = tq;
@@ -62,7 +62,7 @@ Economy::Economy(Player & player) :
 	m_worker_target_quantities = new Target_Quantity[nr_workers.value()];
 	for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i) {
 		Target_Quantity tq;
-		tq.temporary = tq.permanent =
+		tq.permanent =
 			tribe.get_worker_descr(i)->default_target_quantity();
 		tq.last_modified = 0;
 		m_worker_target_quantities[i.value()] = tq;
@@ -343,7 +343,7 @@ void Economy::_reset_all_pathfinding_cycles()
 
 /**
  * Set the target quantities for the given Ware_Index to the
- * numbers given in permanent and temporary. Also update the last
+ * numbers given in permanent. Also update the last
  * modification time.
  *
  * This is called from Cmd_ResetTargetQuantity and Cmd_SetTargetQuantity
@@ -351,11 +351,9 @@ void Economy::_reset_all_pathfinding_cycles()
 void Economy::set_ware_target_quantity
 	(Ware_Index const ware_type,
 	 uint32_t   const permanent,
-	 uint32_t   const temporary,
 	 Time       const mod_time)
 {
 	Target_Quantity & tq = m_ware_target_quantities[ware_type.value()];
-	tq.temporary = temporary;
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
 }
@@ -364,11 +362,9 @@ void Economy::set_ware_target_quantity
 void Economy::set_worker_target_quantity
 	(Ware_Index const ware_type,
 	 uint32_t   const permanent,
-	 uint32_t   const temporary,
 	 Time       const mod_time)
 {
 	Target_Quantity & tq = m_worker_target_quantities[ware_type.value()];
-	tq.temporary = temporary;
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
 }
@@ -410,11 +406,6 @@ void Economy::remove_wares(Ware_Index const id, uint32_t const count)
 
 	m_wares.remove(id, count);
 
-	Target_Quantity & tq = m_ware_target_quantities[id.value()];
-	tq.temporary =
-		tq.temporary <= tq.permanent + count ?
-		tq.permanent : tq.temporary - count;
-
 	// TODO: remove from global player inventory?
 }
 
@@ -428,11 +419,6 @@ void Economy::remove_workers(Ware_Index const id, uint32_t const count)
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_workers.stock(id));
 
 	m_workers.remove(id, count);
-
-	Target_Quantity & tq = m_worker_target_quantities[id.value()];
-	tq.temporary =
-		tq.temporary <= tq.permanent + count ?
-		tq.permanent : tq.temporary - count;
 
 	// TODO: remove from global player inventory?
 }
@@ -535,7 +521,7 @@ void Economy::remove_supply(Supply & supply)
 
 bool Economy::needs_ware(Ware_Index const ware_type) const {
 	size_t const nr_supplies = m_supplies.get_nrsupplies();
-	uint32_t const t = ware_target_quantity(ware_type).temporary;
+	uint32_t const t = ware_target_quantity(ware_type).permanent;
 	uint32_t quantity = 0;
 	for (size_t i = 0; i < nr_supplies; ++i)
 		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i])) {
@@ -549,7 +535,7 @@ bool Economy::needs_ware(Ware_Index const ware_type) const {
 
 bool Economy::needs_worker(Ware_Index const worker_type) const {
 	size_t const nr_supplies = m_supplies.get_nrsupplies();
-	uint32_t const t = worker_target_quantity(worker_type).temporary;
+	uint32_t const t = worker_target_quantity(worker_type).permanent;
 	uint32_t quantity = 0;
 	for (size_t i = 0; i < nr_supplies; ++i)
 		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i])) {

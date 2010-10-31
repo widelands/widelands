@@ -1,20 +1,19 @@
 /*
  * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
-*This program is free software; you can redistribute it and/or
-*modify it under the terms of the GNU General Public License
-*as published by the Free Software Foundation; either version 2
-*of the License, or (at your option) any later version.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
  *
-*This program is distributed in the hope that it will be useful,
-*but WITHOUT ANY WARRANTY; without even the implied warranty of
-*MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
-*You should have received a copy of the GNU General Public License
-*along with this program; if not, write to the Free Software
-*Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
 #include <cstdio>
@@ -99,22 +98,22 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		(this, "back",
 		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Fullscreen_Menu_MapSelect::end_modal, *this, 0,
+		 boost::bind(&Fullscreen_Menu_MapSelect::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_ok
 		(this, "ok",
 		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 &Fullscreen_Menu_MapSelect::ok, *this,
+		 boost::bind(&Fullscreen_Menu_MapSelect::ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false,
 		 m_fn, m_fs),
 
 // Checkbox
 	m_load_map_as_scenario (this, Point (m_xres * 187 / 200, m_yres * 7 / 25)),
 
-// Map list
-	m_list
+// Map table
+	m_table
 		(this,
 		 m_xres *  47 / 2500, m_yres * 3417 / 10000,
 		 m_xres * 711 / 1250, m_yres * 6083 / 10000),
@@ -134,13 +133,23 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_nr_players                .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_descr               .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_descr                     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_list                      .set_font(m_fn, m_fs);
+	m_table                     .set_font(m_fn, m_fs);
+
+#define NR_PLAYERS_WIDTH 35
+	m_table.add_column(NR_PLAYERS_WIDTH, _("#"), UI::Align_HCenter);
+	m_table.add_column
+		(m_table.get_w() - NR_PLAYERS_WIDTH, _("Map Name"), UI::Align_Left);
+	m_table.set_column_compare
+		(1,
+		 boost::bind
+		 (&Fullscreen_Menu_MapSelect::compare_maprows, this, _1, _2));
+	m_table.set_sort_column(0);
 
 	m_load_map_as_scenario.set_state(false);
 	m_load_map_as_scenario.set_enabled(false);
 
-	m_list.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
-	m_list.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
+	m_table.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
+	m_table.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
 
 	m_scenario_types = allowed_scenario_types;
 	if (m_scenario_types) {
@@ -154,6 +163,22 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	fill_list();
 }
 
+bool Fullscreen_Menu_MapSelect::compare_maprows
+	(uint32_t const rowa, uint32_t const rowb)
+{
+	MapData const & r1 = m_maps_data[m_table[rowa]];
+	MapData const & r2 = m_maps_data[m_table[rowb]];
+
+	if (!r1.width and !r2.width) {
+		return r1.name < r2.name;
+	} else if (!r1.width and r2.width) {
+		return true;
+	} else if(r1.width and !r2.width) {
+		return false;
+	}
+	return r1.name < r2.name;
+}
+
 bool Fullscreen_Menu_MapSelect::is_scenario()
 {
 	return m_load_map_as_scenario.get_state();
@@ -161,13 +186,15 @@ bool Fullscreen_Menu_MapSelect::is_scenario()
 
 MapData const * Fullscreen_Menu_MapSelect::get_map() const
 {
-	return m_list.has_selection() ? &m_list.get_selected() : 0;
+	if (not m_table.has_selection())
+		return 0;
+	return &m_maps_data[m_table.get_selected()];
 }
 
 
 void Fullscreen_Menu_MapSelect::ok()
 {
-	MapData const & mapdata = m_list.get_selected();
+	MapData const & mapdata = m_maps_data[m_table.get_selected()];
 
 	if (!mapdata.width) {
 		m_curdir = mapdata.filename;
@@ -184,7 +211,7 @@ void Fullscreen_Menu_MapSelect::ok()
  */
 void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 {
-	MapData const & map = m_list.get_selected();
+	MapData const & map = m_maps_data[m_table.get_selected()];
 
 	if (map.width) {
 		char buf[256];
@@ -228,6 +255,7 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint32_t) {
 /**
  * Fill the list with maps that can be opened.
  *
+ *
  * At first, only the subdirectories are added to the list, then the normal
  * files follow. This is done to make navigation easier.
  *
@@ -242,7 +270,8 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint32_t) {
  */
 void Fullscreen_Menu_MapSelect::fill_list()
 {
-	m_list.clear();
+	m_maps_data.clear();
+	m_table.clear();
 
 	//  Fill it with all files we find in all directories.
 	filenameset_t files;
@@ -259,10 +288,15 @@ void Fullscreen_Menu_MapSelect::fill_list()
 #else
 		map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
-		m_list.add
-			(_("<parent>"),
-			 map,
-			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
+		m_maps_data.push_back(map);
+		UI::Table<uintptr_t const>::Entry_Record & te =
+			m_table.add(m_maps_data.size() - 1);
+
+		te.set_string(0, "");
+		te.set_picture
+			(1,  g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"),
+			 _("<parent>"));
+
 		++ndirs;
 	}
 
@@ -289,10 +323,16 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 		MapData dir;
 		dir.filename = name;
-		m_list.add
-			(FileSystem::FS_Filename(name),
-			 dir,
-			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
+
+		m_maps_data.push_back(dir);
+		UI::Table<uintptr_t const>::Entry_Record & te =
+			m_table.add(m_maps_data.size() - 1);
+
+		te.set_string(0, "");
+		te.set_picture
+			(1,  g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"),
+			 FileSystem::FS_Filename(name));
+
 		++ndirs;
 	}
 
@@ -330,16 +370,21 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				if (!mapdata.width || !mapdata.height)
 					continue;
 
-				m_list.add
-					(mapdata.name.c_str(),
-					 mapdata,
-					 g_gr->get_picture
-					 	(PicMod_Game,
-					 	 dynamic_cast<WL_Map_Loader const *>(ml) ?
-					 	 (mapdata.scenario ?
-					 	  "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
-					 	 :
-					 	 "pics/ls_s2map.png"));
+				m_maps_data.push_back(mapdata);
+				UI::Table<uintptr_t const>::Entry_Record & te =
+					m_table.add(m_maps_data.size() - 1);
+
+				char buf[256];
+				sprintf(buf, "(%i)", mapdata.nrplayers);
+				te.set_string(0, buf);
+				te.set_picture
+					(1,  g_gr->get_picture
+					 (PicMod_Game,
+					  dynamic_cast<WL_Map_Loader const *>(ml) ?
+					  (mapdata.scenario ?
+						"pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
+					  :
+					  "pics/ls_s2map.png"), mapdata.name.c_str());
 			} catch (const std::exception & e) {
 				log
 					("Mapselect: Skip %s due to preload error: %s\n",
@@ -352,9 +397,8 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		}
 	}
 
-	m_list.sort(0, ndirs);
-	m_list.sort(ndirs);
+	m_table.sort();
 
-	if (m_list.size())
-		m_list.select(0);
+	if (m_table.size())
+		m_table.select(0);
 }

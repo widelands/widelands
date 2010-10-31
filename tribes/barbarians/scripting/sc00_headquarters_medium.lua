@@ -18,11 +18,12 @@ init = {
 
    hq = prefilled_buildings(player, { "headquarters", sf.x, sf.y,
       wares = {
-         axe = 6,
+         axe = 5,
          bakingtray = 2,
          blackwood = 32,
          cloth = 5,
          coal = 12,
+         felling_axe = 4,
          fire_tongs = 2,
          fish = 6,
          fishing_rod = 2,

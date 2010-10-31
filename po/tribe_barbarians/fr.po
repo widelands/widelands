@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-05-25 21:44+0000\n"
-"PO-Revision-Date: 2010-06-06 22:23+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-09-25 15:42+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-08 03:34+0000\n"
+"X-Launchpad-Export-Date: 2010-09-26 04:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -179,7 +179,7 @@ msgid "Citadel"
 msgstr "Citadelle"
 
 #: ../../tribes/barbarians/conf:210
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:11
 msgid "Citadel village"
 msgstr "Village fortifié"
 
@@ -357,7 +357,7 @@ msgstr "Forteresse"
 
 #: ../../tribes/barbarians/conf:119
 msgid "Gamekeeper"
-msgstr "Garde chasse"
+msgstr "Garde-chasse"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Gamekeeper's Hut"
@@ -415,15 +415,15 @@ msgstr "Poste de garde"
 msgid "Hammer"
 msgstr "Marteau"
 
-#: ../../tribes/barbarians/fernery/conf:17
+#: ../../tribes/barbarians/fernery/conf:20
 msgid "Harvest flax"
 msgstr "Récolte le lin"
 
-#: ../../tribes/barbarians/fernery/conf:19
+#: ../../tribes/barbarians/fernery/conf:22
 msgid "Harvest reed"
 msgstr "Récolte le roseau"
 
-#: ../../tribes/barbarians/farm/conf:16
+#: ../../tribes/barbarians/farm/conf:19
 msgid "Harvest wheat"
 msgstr "Moissonne le blé"
 
@@ -433,7 +433,7 @@ msgid "Headquarters"
 msgstr "Quartier général"
 
 #: ../../tribes/barbarians/conf:209
-#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Quartier Général Moyen"
 
@@ -561,6 +561,10 @@ msgstr "Petite brasserie"
 msgid "Miner"
 msgstr "Mineur"
 
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
+msgid "Not enough space"
+msgstr "Pas assez de place"
+
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
 "Only this beer is acceptable for the old warriors. Some say, the whole power "
@@ -589,15 +593,15 @@ msgstr "Pioche"
 msgid "Pitta Bread"
 msgstr "Miche de pain"
 
-#: ../../tribes/barbarians/fernery/conf:13
+#: ../../tribes/barbarians/fernery/conf:16
 msgid "Plant flax"
 msgstr "Plante du lin"
 
-#: ../../tribes/barbarians/fernery/conf:15
+#: ../../tribes/barbarians/fernery/conf:18
 msgid "Plant reed"
 msgstr "Plante du roseau"
 
-#: ../../tribes/barbarians/farm/conf:14
+#: ../../tribes/barbarians/farm/conf:17
 msgid "Plant wheat"
 msgstr "Plante du Blé"
 
@@ -892,6 +896,16 @@ msgstr "Casse-croûte"
 #: ../../tribes/barbarians/conf:104
 msgid "Soldier"
 msgstr "Soldat"
+
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:92
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Certains de vos bâtiments initiaux n'ont pas trouvé assez de place et n'ont\n"
+"pas pu être construits. Vous avez maintenant un net désavantage. Pensez\n"
+"à recommencer cette carte avec une position de départ plus juste."
 
 #: ../../tribes/barbarians/conf:129
 msgid "Stonemason"
@@ -1285,8 +1299,8 @@ msgstr "Durcisseur de bois"
 #: ../../tribes/barbarians/deeper_coalmine/conf:22
 #: ../../tribes/barbarians/deeper_goldmine/conf:22
 #: ../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../tribes/barbarians/farm/conf:18
-#: ../../tribes/barbarians/fernery/conf:21
+#: ../../tribes/barbarians/farm/conf:21
+#: ../../tribes/barbarians/fernery/conf:24
 #: ../../tribes/barbarians/fishers_hut/conf:15
 #: ../../tribes/barbarians/gamekeepers_hut/conf:15
 #: ../../tribes/barbarians/goldmine/conf:21
@@ -1301,12 +1315,12 @@ msgstr "Durcisseur de bois"
 #: ../../tribes/barbarians/micro-brewery/conf:22
 #: ../../tribes/barbarians/oremine/conf:21
 #: ../../tribes/barbarians/quarry/conf:15
-#: ../../tribes/barbarians/rangers_hut/conf:13
+#: ../../tribes/barbarians/rangers_hut/conf:14
 #: ../../tribes/barbarians/scouts_hut/conf:17
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
 #: ../../tribes/barbarians/warmill/conf:39
-#: ../../tribes/barbarians/weaving-mill/conf:19
+#: ../../tribes/barbarians/weaving-mill/conf:20
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
 msgstr "Travaille"

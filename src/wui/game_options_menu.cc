@@ -17,6 +17,11 @@
  *
  */
 
+#include <boost/bind.hpp>
+#include <boost/type_traits.hpp>
+#include <boost/lambda/bind.hpp>
+#include <boost/lambda/construct.hpp>
+
 #include "game_options_menu.h"
 
 #include "ui_fsmenu/fileview.h"
@@ -48,7 +53,7 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 &GameOptionsMenu::clicked_readme, *this,
+		 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.readme)),
 		 _("README")),
 	license
 		(this, "license",
@@ -56,7 +61,7 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 &GameOptionsMenu::clicked_license, *this,
+		 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.license)),
 		 _("License")),
 	authors
 		(this, "authors",
@@ -64,7 +69,7 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 &GameOptionsMenu::clicked_authors, *this,
+		 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.authors)),
 		 _("Authors")),
 	sound
 		(this, "sound_options",
@@ -72,7 +77,7 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 &GameOptionsMenu::clicked_sound, *this,
+		 boost::bind(&GameOptionsMenu::clicked_sound, boost::ref(*this)),
 		 _("Sound Options")),
 	save_game
 		(this, "save_game",
@@ -81,7 +86,7 @@ GameOptionsMenu::GameOptionsMenu
 		 buttonw(1), 35,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"),
-		 &GameOptionsMenu::clicked_save_game, *this,
+		 boost::bind(&GameOptionsMenu::clicked_save_game, boost::ref(*this)),
 		 _("Save Game")),
 	exit_game
 		(this, "exit_game",
@@ -91,28 +96,34 @@ GameOptionsMenu::GameOptionsMenu
 		 buttonw(1), 35,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"),
-		 &GameOptionsMenu::clicked_exit_game, *this,
+		 boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)),
 		 _("Exit Game"))
 {
+
+	m_windows.readme.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/README");
+	m_windows.license.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/COPYING");
+	m_windows.authors.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/developers");
+	// For some reason the latter does not work. It seemms that
+	// boost::lambda::bind is less powerful than boost::bind, but the
+	// latter does not work with boost::lamda::new_ptr
+	// m_windows.sound_options.constr = boost::lambda::bind(boost::lambda::new_ptr<GameOptionsSoundMenu>(), boost::ref(m_gb),_1);
+
+#define INIT_BTN_HOOKS(registry, btn)                                        \
+ registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
+ registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+ if (registry.window) btn.set_perm_pressed(true);                            \
+
+	INIT_BTN_HOOKS(m_windows.readme, readme)
+	INIT_BTN_HOOKS(m_windows.license, license)
+	INIT_BTN_HOOKS(m_windows.authors, authors)
+	INIT_BTN_HOOKS(m_windows.sound_options, sound)
+	
 	set_inner_size
 		(hmargin() + hmargin() +
 		 std::max(static_cast<int32_t>(get_inner_w()), readme.get_w()),
 		 get_inner_h());
 	if (get_usedefaultpos())
 		center_to_parent();
-}
-
-
-void GameOptionsMenu::clicked_readme() {
-	fileview_window(m_gb, m_windows.readme,  "txts/README");
-}
-
-void GameOptionsMenu::clicked_license() {
-	fileview_window(m_gb, m_windows.license, "txts/COPYING");
-}
-
-void GameOptionsMenu::clicked_authors() {
-	fileview_window(m_gb, m_windows.authors, "txts/developers");
 }
 
 void GameOptionsMenu::clicked_sound() {

@@ -1,0 +1,22 @@
+# Vietnamese translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-16 01:17+0000\n"
+"Last-Translator: Nguyen Quang Chien <Unknown>\n"
+"Language-Team: Vietnamese <vi@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-10-17 04:50+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../campaigns/atl01.wmf/elemental:9
+msgid "01 - From nemesis to genesis"
+msgstr "01 - Từ diệt vong đến hồi sinh"

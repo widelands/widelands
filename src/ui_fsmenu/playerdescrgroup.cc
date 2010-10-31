@@ -38,10 +38,10 @@ struct PlayerDescriptionGroupImpl {
 
 	UI::Textarea     * plr_name;
 	UI::Checkbox     * btnEnablePlayer;
-	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerTeam;
-	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerType;
-	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerTribe;
-	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerInit;
+	UI::Callback_Button * btnPlayerTeam;
+	UI::Callback_Button * btnPlayerType;
+	UI::Callback_Button * btnPlayerTribe;
+	UI::Callback_Button * btnPlayerInit;
 	UI::Checkbox     * btnReadyPlayer;
 };
 
@@ -69,35 +69,35 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0));
 	d->btnEnablePlayer->changedto.set
 		(this, &PlayerDescriptionGroup::enable_player);
-	d->btnPlayerType = new UI::Callback_Button<PlayerDescriptionGroup>
+	d->btnPlayerType = new UI::Callback_Button
 		(this, "player_type",
 		 xplayertype, 0, xplayerteam - xplayertype - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &PlayerDescriptionGroup::toggle_playertype, *this,
+		 boost::bind(&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)),
 		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerTeam = new UI::Callback_Button<PlayerDescriptionGroup>
+	d->btnPlayerTeam = new UI::Callback_Button
 		(this, "player_team",
 		 xplayerteam, 0, xplayertribe - xplayerteam - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &PlayerDescriptionGroup::toggle_playerteam, *this,
+		 boost::bind(&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)),
 		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerTribe = new UI::Callback_Button<PlayerDescriptionGroup>
+	d->btnPlayerTribe = new UI::Callback_Button
 		(this, "player_tribe",
 		 xplayertribe, 0, xplayerinit - xplayertribe - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &PlayerDescriptionGroup::toggle_playertribe, *this,
+		 boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)),
 		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerInit = new UI::Callback_Button<PlayerDescriptionGroup>
+	d->btnPlayerInit = new UI::Callback_Button
 		(this, "player_initialization",
 		 xplayerinit, 0, xplayerready - xplayerinit - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &PlayerDescriptionGroup::toggle_playerinit, *this,
+		 boost::bind(&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)),
 		 std::string(), _("Initialization"),
 		 true, false,
 		 fname, fsize);

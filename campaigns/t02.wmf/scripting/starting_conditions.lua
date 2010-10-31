@@ -47,6 +47,7 @@ hq:set_workers{
    burner=1,
    carrier=40,
    ferner=1,
+   fisher=1,
    geologist=4,
    ["lime-burner"]=1,
    lumberjack=3,

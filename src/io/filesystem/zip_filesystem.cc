@@ -81,12 +81,16 @@ int32_t ZipFilesystem::FindFiles
 	// If you need something else, implement a proper glob() here. I do not want
 	// to! -- Holger
 	assert(pattern == "*");
-
-	std::string path;
 	assert(path_in.size()); //  prevent invalid read below
-	path = path_in;
+
+	std::string path = m_basename;
+	if (*path_in.begin() != '/')
+		path += "/";
+	path += path_in;
 	if (*path.rbegin() != '/')
 		path += '/';
+	if (*path.begin() == '/')
+		path = path.substr(1);
 
 	unzCloseCurrentFile(m_unzipfile);
 	unzGoToFirstFile(m_unzipfile);
@@ -107,10 +111,10 @@ int32_t ZipFilesystem::FindFiles
 		//  FIXME Something strange is going on with regard to the leading slash!
 		//  FIXME This is just an ugly workaround and does not solve the real
 		//  FIXME problem (which remains undiscovered)
-		if 
+		if
 			(('/' + path == filepath || path == filepath || path.length() == 1)
 			 && filename.size())
-			results->insert(complete_filename);
+		results->insert(complete_filename.substr(m_basename.size()));
 
 		if (unzGoToNextFile(m_unzipfile) == UNZ_END_OF_LIST_OF_FILE)
 			break;

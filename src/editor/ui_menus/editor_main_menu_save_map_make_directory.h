@@ -27,7 +27,7 @@
 
 namespace UI {
 struct EditBox;
-template <typename T, typename ID> struct Callback_IDButton;
+struct Callback_Button;
 }
 
 /**
@@ -42,10 +42,9 @@ struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
 	char const * get_dirname() {return m_dirname.c_str();}
 
 private:
-	std::string                                                m_dirname;
-	UI::EditBox                                              * m_edit;
-	UI::Callback_IDButton<Main_Menu_Save_Map_Make_Directory, int32_t> *
-		m_ok_button;
+	std::string               m_dirname;
+	UI::EditBox             * m_edit;
+	UI::Callback_Button * m_ok_button;
 	void edit_changed();
 };
 

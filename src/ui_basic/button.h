@@ -20,6 +20,9 @@
 #ifndef UI_BUTTON_H
 #define UI_BUTTON_H
 
+#include <boost/bind.hpp>
+#include <boost/function.hpp>
+
 #include "constants.h"
 #include "panel.h"
 #include "m_signal.h"
@@ -82,12 +85,15 @@ struct Button : public NamedPanel {
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t);
+	
+	void set_perm_pressed(bool state); // Set the permanently pressed state of the button
 
-private:
+protected:
 	virtual void clicked() = 0; /// Override this to react on the click.
 
 	bool        m_highlighted;    //  mouse is over the button
-	bool        m_pressed;
+	bool        m_pressed;        //  mouse is clicked over the button
+	bool        m_permpressed;    //  button should appear  pressed
 	bool        m_enabled;
 	bool        m_repeating;
 	bool        m_flat;
@@ -110,17 +116,14 @@ private:
 };
 
 
-/// A compatibility/convenience version of Button. Overrides void clicked()
-/// with a function that calls a given callback function (nonstatic member of
-/// T), with the given instance of T as its only parameter.
-template <typename T> struct Callback_Button : public Button {
+/// A verion of Button that uses a function object to the the callback.
+struct Callback_Button : public Button {
 	Callback_Button /// for textual buttons
 		(Panel * const parent,
 		 std::string const & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const PictureID background_pictute_id,
-		 void (T::*callback_function)(),
-		 T & callback_argument_this,
+		 boost::function<void()> callback_function,
 		 const std::string & title_text,
 		 std::string const & tooltip_text = std::string(),
 		 bool const _enabled = true,
@@ -137,8 +140,7 @@ template <typename T> struct Callback_Button : public Button {
 			 _enabled, flat,
 			 fontname,
 			 fontsize),
-		_callback_function     (callback_function),
-		_callback_argument_this(callback_argument_this)
+		_callback_function     (callback_function)
 	{}
 	Callback_Button /// for pictorial buttons
 		(Panel * const parent,
@@ -146,8 +148,7 @@ template <typename T> struct Callback_Button : public Button {
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const PictureID background_pictute_id,
 		 const PictureID foreground_picture_id,
-		 void (T::*callback_function)(),
-		 T & callback_argument_this,
+		 boost::function<void()> callback_function,
 		 std::string const & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat     = false,
@@ -163,88 +164,12 @@ template <typename T> struct Callback_Button : public Button {
 			 _enabled, flat,
 			 fontname,
 			 fontsize),
-		_callback_function     (callback_function),
-		_callback_argument_this(callback_argument_this)
+		_callback_function     (callback_function)
 	{}
 
 protected:
-	void (T::*_callback_function)();
-	T & _callback_argument_this;
-	void clicked() {(_callback_argument_this.*_callback_function)();}
-};
-
-/**
- * A button that calls a callback function with 2 argument when pressed. The
- * second argument is the so called 'id'.
- *
- * T is the type of the target of the 'this' argument of the callback function.
- * ID is the type of the 'id' argument of the callback function.
- */
-template <typename T, typename ID> struct Callback_IDButton : public Button {
-	Callback_IDButton /// for textual buttons
-		(Panel * const parent,
-		 std::string const & name,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const PictureID background_pictute_id,
-		 void (T::*callback_function)(ID),
-		 T & callback_argument_this,
-		 const ID callback_argument_id,
-		 const std::string & title_text,
-		 std::string const & tooltip_text = std::string(),
-		 bool const _enabled = true,
-		 bool const flat     = false,
-		 const std::string & fontname = UI_FONT_NAME,
-		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
-		:
-		Button
-			(parent, name,
-			 x, y, w, h,
-			 background_pictute_id,
-			 title_text,
-			 tooltip_text,
-			 _enabled, flat,
-			 fontname,
-			 fontsize),
-		_callback_function     (callback_function),
-		_callback_argument_this(callback_argument_this),
-		_callback_argument_id  (callback_argument_id)
-	{}
-	Callback_IDButton /// for pictorial buttons
-		(Panel * const parent,
-		 std::string const & name,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const PictureID background_pictute_id,
-		 const PictureID foreground_picture_id,
-		 void (T::*callback_function)(ID),
-		 T & callback_argument_this,
-		 const ID callback_argument_id,
-		 std::string const & tooltip_text = std::string(),
-		 bool const _enabled = true,
-		 bool const flat     = false,
-		 const std::string & fontname = UI_FONT_NAME,
-		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
-		:
-		Button
-			(parent, name,
-			 x, y, w, h,
-			 background_pictute_id,
-			 foreground_picture_id,
-			 tooltip_text,
-			 _enabled, flat,
-			 fontname,
-			 fontsize),
-		_callback_function     (callback_function),
-		_callback_argument_this(callback_argument_this),
-		_callback_argument_id  (callback_argument_id)
-	{}
-
-protected:
-	void (T::*_callback_function)(ID);
-	T & _callback_argument_this;
-	const ID _callback_argument_id;
-	void clicked() {
-		(_callback_argument_this.*_callback_function)(_callback_argument_id);
-	}
+	boost::function<void()> _callback_function;
+	void clicked() {_callback_function();}
 };
 
 }

@@ -30,16 +30,12 @@
 namespace Widelands {
 
 void Cmd_LuaCoroutine::execute (Game & game) {
-	log("Cmd_LuaCoroutine::execute\n");
 	try {
 		uint32_t sleeptime;
 		int rv = m_cr->resume(&sleeptime);
-		log(" Called resume: sleeptime: %u\n", sleeptime);
 		if (rv == LuaCoroutine::YIELDED) {
-			log("   yielded!");
 			game.enqueue_command(new Widelands::Cmd_LuaCoroutine(sleeptime, m_cr));
 		} else if (rv == LuaCoroutine::DONE) {
-			log("   done. Deleting Coroutine!");
 			delete m_cr;
 		}
 	} catch (LuaError & e) {
@@ -55,7 +51,6 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 		}
 		game.gameController()->setDesiredSpeed(0);
 	}
-	log(" done with Cmd_LuaCoroutine::execute\n");
 }
 
 #define CMD_LUACOROUTINE_VERSION 1

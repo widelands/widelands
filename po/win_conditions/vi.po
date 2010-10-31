@@ -1,0 +1,217 @@
+# Vietnamese translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-16 01:38+0000\n"
+"Last-Translator: Nguyen Quang Chien <Unknown>\n"
+"Language-Team: Vietnamese <vi@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-10-17 04:50+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:85
+msgid "%i trees at the moment ."
+msgstr "%i cây tại thời điểm hiện tại."
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:138
+msgid "%i trees."
+msgstr "%i cây."
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:137
+msgid "%s had "
+msgstr "%s đã có "
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:84
+msgid "%s has "
+msgstr "%s có "
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:133
+msgid "%s owns more than half of the maps area."
+msgstr "%s đang chiếm cứ hơn một nửa diện tích bản đồ."
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:13
+msgid ""
+"As wood gnome you like big forests, so your task is, to have more trees on\n"
+"your territory than any other player. The game will end after 4 hours of\n"
+"playing. The one with the most trees at that point will win the game."
+msgstr ""
+"Như một thần rừng, bạn thích những cánh rừng lớn. Nhiệm vụ dành cho bạn là\n"
+"chiếm lấy nhiều cây trong vùng lãnh thổ của mình hơn những người chơi khác.\n"
+"Ván chơi kéo dài 4 giờ. Cuối cùng bên nào có nhiều cây nhất thì thắng cuộc."
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:10
+msgid "Autocrat"
+msgstr "Quý tộc"
+
+#: ../../scripting/win_conditions/02_collectors.lua:11
+msgid "Collectors"
+msgstr "Người thu lượm"
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:31
+msgid "Congratulations!"
+msgstr "Xin chúc mừng!"
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:12
+msgid ""
+"Each player or team tries to obtain more than half of the maps' area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes."
+msgstr ""
+"Mỗi người hoặc đội chơi cần cố gắng chiếm cứ hơn một nửa diện tích bản đồ. "
+"Bên thắng cuộc sẽ là người hoặc đội chơi giữ vững được khu vực chiếm đóng ít "
+"nhất là 20 phút."
+
+#: ../../scripting/win_conditions/00_endless_game.lua:10
+msgid "Endless Game"
+msgstr "Ván chơi kéo dài vô tận"
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:139
+msgid "Keep it for %i more minutes to win the game."
+msgstr "Giữ nó thêm %i phút nữa để thắng ván này."
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:81
+#: ../../scripting/win_conditions/04_wood_gnome.lua:134
+msgid "Player overview:"
+msgstr "Thông tin sơ lược về người chơi:"
+
+#: ../../scripting/win_conditions/02_collectors.lua:147
+msgid "Points"
+msgstr "Điểm"
+
+#: ../../scripting/win_conditions/02_collectors.lua:128
+#: ../../scripting/win_conditions/03_territorial_lord.lua:144
+#: ../../scripting/win_conditions/03_territorial_lord.lua:146
+#: ../../scripting/win_conditions/04_wood_gnome.lua:88
+msgid "Status"
+msgstr "Tình hình"
+
+#: ../../scripting/win_conditions/02_collectors.lua:90
+msgid "Status for Player %i<br>"
+msgstr "Tình hình của người chơi %i<br>"
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:117
+#: ../../scripting/win_conditions/03_territorial_lord.lua:120
+#: ../../scripting/win_conditions/03_territorial_lord.lua:142
+#: ../../scripting/win_conditions/03_territorial_lord.lua:171
+msgid "Team %i"
+msgstr "Đội %i"
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:11
+msgid "Territorial Lord"
+msgstr "Lãnh chúa"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:79
+msgid "The game will end in %i minutes."
+msgstr "Ván chơi sẽ kết thúc sau %i phút."
+
+#: ../../scripting/win_conditions/02_collectors.lua:118
+msgid "The game will end in %s."
+msgstr "Ván chơi sẽ kết thúc sau %s."
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:11
+msgid "The tribe or team that can defeat all others wins the game!"
+msgstr "Bộ lạc hoặc đội chơi nào đánh bại tất cả các bên còn lại sẽ thắng!"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:141
+msgid "The winner is %s "
+msgstr "Bên thắng cuộc là %s "
+
+#: ../../scripting/win_conditions/00_endless_game.lua:11
+msgid "This is an endless game without rules."
+msgstr "Ván này kéo dài vô tận và không quy định luật chơi."
+
+#: ../../scripting/win_conditions/02_collectors.lua:103
+msgid "Total: %i points"
+msgstr "Tổng: %i điểm"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:102
+msgid "Trees owned"
+msgstr "Số cây đã có"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:11
+msgid "Wood Gnome"
+msgstr "Thần Rừng"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:24
+#: ../../scripting/win_conditions/01_defeat_all.lua:24
+#: ../../scripting/win_conditions/02_collectors.lua:179
+#: ../../scripting/win_conditions/03_territorial_lord.lua:154
+#: ../../scripting/win_conditions/04_wood_gnome.lua:94
+msgid "You are defeated!"
+msgstr "Bạn đã bị đánh bại!"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:149
+msgid "You are the winner of this game!"
+msgstr "Bạn đã thắng ván chơi này!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:141
+#: ../../scripting/win_conditions/03_territorial_lord.lua:173
+msgid "You are the winner!"
+msgstr "Bên bạn đã thắng cuộc!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:12
+msgid ""
+"You get points for precious wares in your warehouses, the player with the "
+"highest number of wares at the end of 4 hours wins the game."
+msgstr ""
+"Bạn nhận được điểm từ các bảo bối trong nhà kho của mình; người chơi nào có "
+"nhiều bảo bối nhất sau 4 giờ chơi sẽ thắng ván này."
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:145
+msgid "You have lost this game!"
+msgstr "Bạn đã thua ván này!"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:25
+#: ../../scripting/win_conditions/01_defeat_all.lua:25
+#: ../../scripting/win_conditions/02_collectors.lua:180
+#: ../../scripting/win_conditions/03_territorial_lord.lua:155
+#: ../../scripting/win_conditions/04_wood_gnome.lua:95
+msgid ""
+"You have nothing to command left. If you want, you may continue as spectator."
+msgstr ""
+"Bạn không còn quyền điều khiển nữa. Nếu muốn, bạn có thể tiếp tục như một "
+"khán giả."
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:32
+msgid "You have won this game!"
+msgstr "Bạn đã thắng ván này!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:139
+#: ../../scripting/win_conditions/03_territorial_lord.lua:175
+msgid "You lost"
+msgstr "Bạn đã thua"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:147
+msgid "You lost!"
+msgstr "Bạn đã thua!"
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:137
+msgid "You own more than half of the maps area."
+msgstr "Bạn đang chiếm giữ hơn một nửa diện tích bản đồ."
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:135
+msgid "You still got %i minutes to prevent a victory."
+msgstr "Bạn vẫn còn %i phút để ngăn đối phương chiến thắng."
+
+#: ../../scripting/win_conditions/02_collectors.lua:141
+#: ../../scripting/win_conditions/03_territorial_lord.lua:173
+#: ../../scripting/win_conditions/04_wood_gnome.lua:151
+msgid "You won!"
+msgstr "Bạn đã thắng!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:139
+#: ../../scripting/win_conditions/03_territorial_lord.lua:175
+msgid "You've lost this game!"
+msgstr "Bạn đã thua ván này!"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:142
+msgid "with %i trees."
+msgstr "với %i cây."

@@ -147,12 +147,12 @@ private:
 	UI::UniqueWindow::Registry m_bobmenu;
 	UI::UniqueWindow::Registry m_resourcesmenu;
 
-	UI::Callback_Button<Editor_Interactive> m_toggle_main_menu;
-	UI::Callback_Button<Editor_Interactive> m_toggle_tool_menu;
-	UI::Callback_Button<Editor_Interactive> m_toggle_toolsize_menu;
-	UI::Callback_Button<Editor_Interactive> m_toggle_minimap;
-	UI::Callback_Button<Editor_Interactive> m_toggle_buildhelp;
-	UI::Callback_Button<Editor_Interactive> m_toggle_player_menu;
+	UI::Callback_Button m_toggle_main_menu;
+	UI::Callback_Button m_toggle_tool_menu;
+	UI::Callback_Button m_toggle_toolsize_menu;
+	UI::Callback_Button m_toggle_minimap;
+	UI::Callback_Button m_toggle_buildhelp;
+	UI::Callback_Button m_toggle_player_menu;
 };
 
 #endif

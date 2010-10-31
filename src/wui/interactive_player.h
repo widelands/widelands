@@ -52,16 +52,11 @@ struct Interactive_Player : public Interactive_GameBase
 		 bool              scenario,
 		 bool              multiplayer);
 
+	~Interactive_Player();
+
 	void start();
 
-	void toggle_statistics_menu();
 	void toggle_chat        ();
-	void toggle_options_menu();
-	void toggle_objectives();
-
-	void toggle_resources ();
-	void toggle_help      ();
-	void toggle_message_menu();
 
 	virtual bool can_see(Widelands::Player_Number) const;
 	virtual bool can_act(Widelands::Player_Number) const;
@@ -100,14 +95,14 @@ private:
 	bool                     m_auto_roadbuild_mode;
 	Widelands::Coords        m_flag_to_connect;
 
-	UI::Callback_Button<Interactive_Player> m_toggle_chat;
-	UI::Callback_Button<Interactive_Player> m_toggle_options_menu;
-	UI::Callback_Button<Interactive_Player> m_toggle_statistics_menu;
-	UI::Callback_Button<Interactive_Player> m_toggle_objectives;
-	UI::Callback_Button<Interactive_Player> m_toggle_minimap;
-	UI::Callback_Button<Interactive_Player> m_toggle_buildhelp;
-	UI::Callback_Button<Interactive_Player> m_toggle_message_menu;
-	UI::Callback_Button<Interactive_Player> m_toggle_help;
+	UI::Callback_Button m_toggle_chat;
+	UI::Callback_Button m_toggle_options_menu;
+	UI::Callback_Button m_toggle_statistics_menu;
+	UI::Callback_Button m_toggle_objectives;
+	UI::Callback_Button m_toggle_minimap;
+	UI::Callback_Button m_toggle_buildhelp;
+	UI::Callback_Button m_toggle_message_menu;
+	UI::Callback_Button m_toggle_help;
 
 	UI::UniqueWindow::Registry m_chat;
 	UI::UniqueWindow::Registry m_options;

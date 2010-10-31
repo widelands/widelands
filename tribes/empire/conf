@@ -7,6 +7,11 @@ descr=_This is the culture of the roman Empire.
 bob_vision_range=2
 uiposition=20
 carrier2=donkey
+# Wares and workers positions in wares window. Columns are separated by ;,
+# Entries in the columns separated by ,
+wares_order=stone, trunk, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldstone, gold;    pick, axe, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bakingtray, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armour, chain_armour, plate_armour
+
+workers_order=carrier, donkey, donkeybreeder;   stonemason, lumberjack, forester, builder, shepherd, weaver;   fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
@@ -130,19 +135,6 @@ donkeybreeder=_Donkey Breeder
 [constructionsite types]
 constructionsite=_Construction Site
 
-[trainingsite types]
-colosseum=_Colosseum
-arena=_Arena
-trainingscamp=_Trainingscamp
-
-[militarysite types]
-sentry=_Sentry
-barracks=_Barracks
-barrier=_Barrier
-castle=_Castle
-fortress=_Fortress
-outpost=_Outpost
-tower=_Tower
 
 [global militarysite types]
 castle.atlanteans=_Castle
@@ -164,40 +156,56 @@ headquarters_shipwreck=_Headquarters shipwreck
 warehouse=_Warehouse
 
 [productionsite types]
-armoursmithy=_Armour Smithy
+quarry=_Quarry
+lumberjacks_house=_Lumberjack's House
+foresters_house=_Forester's House
+fishers_house=_Fisher's House
+hunters_house=_Hunter's House
+well=_Well
+scouts_house=_"Scout's House"
+stonemasons_house=_Stonemason's House
+sawmill=_Sawmill
+mill=_Mill
 bakery=_Bakery
 brewery=_Brewery
+vineyard=_Vineyard
+winery=_Winery
+inn=_Inn
+tavern=_Tavern
 burners_house=_Charcoal Burner
+smelting_works=_Smelting Works
+toolsmithy=_Toolsmithy
+armoursmithy=_Armour Smithy
+donkeyfarm=_Donkeyfarm
+sheepfarm=_Sheepfarm
+weaving-mill=_Weaving Mill
+piggery=_Piggery
+farm=_Farm
+weaponsmithy=_Weapon Smithy
+deep_marblemine=_Deep Marble Mine
+marblemine=_Marble Mine
 deep_coalmine=_Deep Coal Mine
 coalmine=_Coal Mine
-deep_goldmine=_Deep Gold Mine
-deep_marblemine=_Deep Marble Mine
 deep_oremine=_Deep Iron Ore Mine
-farm=_Farm
-fishers_house=_Fisher's House
-foresters_house=_Forester's House
-goldmine=_Gold Mine
-hunters_house=_Hunter's House
-inn=_Inn
-lumberjacks_house=_Lumberjack's House
-marblemine=_Marble Mine
-mill=_Mill
 oremine=_Iron Ore Mine
-piggery=_Piggery
-quarry=_Quarry
-sawmill=_Sawmill
-sheepfarm=_Sheepfarm
-smelting_works=_Smelting Works
-stonemasons_house=_Stonemason's House
-tavern=_Tavern
-toolsmithy=_Toolsmithy
-weaponsmithy=_Weapon Smithy
-weaving-mill=_Weaving Mill
-well=_Well
-winery=_Winery
-vineyard=_Vineyard
-scouts_house=_"Scout's House"
-donkeyfarm=_Donkeyfarm
+deep_goldmine=_Deep Gold Mine
+goldmine=_Gold Mine
+
+
+[militarysite types]
+sentry=_Sentry
+barracks=_Barracks
+barrier=_Barrier
+outpost=_Outpost
+tower=_Tower
+castle=_Castle
+fortress=_Fortress
+
+
+[trainingsite types]
+colosseum=_Colosseum
+arena=_Arena
+trainingscamp=_Trainingscamp
 
 [initializations]
 headquarters_medium=_Headquarters medium

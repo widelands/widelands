@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
+"POT-Creation-Date: 2010-09-03 20:16+0000\n"
 "PO-Revision-Date: 2010-02-15 19:23+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -24,121 +24,14 @@ msgstr ""
 msgid "(Tutorial) Barbarians - The second Empire"
 msgstr "(Opastus) Barbaarit - Toinen valtakunta"
 
-# TODO: Though his glorious reign - though? re-established order. Too long sentences. redrew? Really reunite brothers?
-#: ../../campaigns/cconfig:27
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons and warlord to an army that could match any enemy willing to "
-"rise against the ancient forests. Though his glorious reign, Chat’Karuth "
-"left his eldest son Thron in the due to succeed him as the tribes warlord – "
-"a decision that left his two brothers unsatisfied. The old warlord knew "
-"that. As his father told him, Thron left the capital of Al’thunran, the home "
-"of the throne among the trees and redrew his forces to the high hills where "
-"he buried the corpse of his father and swore to the gods and his spirit, "
-"that he’d return to re-established order. While his brothers raged in blind "
-"war against Thron and the few forces he left to secure the borders of "
-"Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
-"force the tribes to march once again under a common banner."
-msgstr ""
-"Kun Chat'Karuth kuoli, hän oli vanha mies, kolmen vahvan ja kunnianhimoisen "
-"pojan isä sekä sotaherra, jonka armeija päihitti minkä tahansa vihollisen, "
-"joka oli valmis nousemaan ikivanhoja metsiä vastaan. Loistokkaana "
-"hallintokautenaan Chat'Karuth määräsi vanhimman poikansa, Thronin, perimään "
-"heimojen sotaherran manttelinsa. Tämä päätös jätti kaksi muuta veljeä "
-"tyytymättömiksi, minkä vanha sotaherra tiesi. Isänsä kehotuksesta Thron "
-"jätti Al'thunranin pääkaupungin, puiden keskellä kohoavan valtaistuimen "
-"kodin, ja johti joukkonsa korkeille kukkuloille. Tänne hän hautasi isänsä ja "
-"vannoi jumalille ja tämän hengelle palaavansa palauttamaan järjestyksen. "
-"Sillä välin kun Thronin veljet raivosivat käyden sokeaa sotaa, taistellen "
-"vastaan niitä vähiä joukkoja jotka Thron oli jättänyt turvaamaan "
-"Al'thunranin rajoja. Nuori sotaherra pyrkii uudelleenyhdistämään "
-"kunnianhimoiset veljensä ja pakottamaan heimot marssimaan jälleen kerran "
-"yhteisen lipun alla."
-
-#: ../../campaigns/cconfig:30
-msgid "Empire - The months of exile"
-msgstr "Keisarikunta - Maanpaon kuukaudet"
-
-# TODO: month->s... and total spellcheck. Cryptic!
-#: ../../campaigns/cconfig:33
-msgid ""
-"Six month ago, Lutius - a young general of the Empire - was send with 150 "
-"soldiers at the frontier among the northern forests, where Barbarian-tribes "
-"and official Empire-land are crossing. His task was to defend the Empire-"
-"land. First everything was calm, he even talked to few barbarian children "
-"and thought about a peaceful life - side by side with this archaic folk. He "
-"began to feel saver and his army begun to draw off the attention on they "
-"potential enemy - That was their fault. At one night in march his unprepared "
-"army was attacked by 100 barbarian footmen and was totally scattered. Only "
-"with pure life he and a handful of soldiers survived."
-msgstr ""
-"Kuusi viikkoa sitten Lutius - nuori keisarikunnan kenraali - lähetettiin 150 "
-"sotilaan kanssa eturintamalle, pohjoisiin metsiin, joissa barbaariheimojen "
-"maat ja keisarikunnan alue risteävät. Hänen tehtävänään oli puolustaa "
-"keisarikunnan rajapyykkiä. Ensi alkuun kaikki oli tyyntä - hän jopa puhui "
-"barbaarilasten kanssa ja kuvitteli rauhaisaa yhteiseloa näiden "
-"alkukantaisten asukkien kanssa. Hän alkoi tuntea olonsa turvallisemmaksi, ja "
-"armeija ei kiinnittänyt enää juuri huomiota mahdolliseen viholliseensa. Tämä "
-"oli virhe - erään iltamarssin aikana Lutiuksen valmistautumaton armeija "
-"joutui sadan barbaarijalkamiehen hyökkäyksen kohteeksi, ja pakeni joka "
-"ilmansuuntaan. Vain kourallinen sotilaita selviytyi."
-
-#: ../../campaigns/cconfig:36
-msgid "Atlanteans - the new rise"
-msgstr "Atlanteans - uusi nousu"
-
-#: ../../campaigns/cconfig:39
-msgid "Some descriptive texts..."
-msgstr "Joku kuvaava teksti..."
-
-#: ../../campaigns/cconfig:57
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Opastus 1 - Silmät pimeydessä"
-
-#: ../../campaigns/cconfig:62
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Opastus 2 - Paikka, jota kutsua kodiksi"
-
-#: ../../campaigns/cconfig:67
-msgid "Tutorial3 - This land is our land"
-msgstr "Opastus 3 - Tämä maa on meidän"
-
-#: ../../campaigns/cconfig:74
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Keisarikunta, opastus 1 - Malac' Morin rannat"
-
-#: ../../campaigns/cconfig:79
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Keisarikunta, opastus 2 - Rajalinnoitus maanpaolle"
-
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
 msgstr "01 - Arkkivihollisesta alkuun"
 
-#: ../../maps/Atoll.wmf/elemental:7
-msgid "Atoll"
-msgstr "Atolli"
-
-#: ../../maps/Atoll.wmf/elemental:9
-msgid "Who will be the real King of the big atoll?"
-msgstr "Kuka tulee olemaan ison atollin todellinen kuningas"
-
-#: ../../maps/Checkmate.wmf/elemental:7
-msgid "Checkmate"
-msgstr "Shakkimatti"
-
-#: ../../maps/Checkmate.wmf/elemental:9
-msgid ""
-"Whether just one of nature's strangest features or the creation of a mad "
-"(and game-hungry) god, this weird battleground awaits two opponents for "
-"another confrontation."
+#: ../../maps/Enemy in sight.wmf/elemental:9
+msgid "A Multiplayer-battle-map on a X-Shaped island."
 msgstr ""
-"Liekö kyseessä luonnon oikku vai hullun (ja pelihimoisen) jumalan luomus - "
-"tämä outo taistelutanner odottaa kahta vastustajaa taisteluun."
-
-#: ../../maps/Comet Island.wmf/elemental:7
-msgid "Comet Island"
-msgstr "Komeettasaari"
+"Moninpelitarkoituksiin sopiva taistelukartta ristinmuotoisella saarella."
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -154,69 +47,159 @@ msgstr ""
 "jumalilta? Uskot niin ja toivot heimosi löytävän saaren aarteen ennen kuin "
 "muut heimot seuraavat perässänne."
 
-#: ../../maps/Crater.wmf/elemental:9
+#: ../../maps/Glacier Lake.wmf/elemental:9
+msgid ""
+"A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
+"one disturbed you and the resources were enough for your whole tribe, but a "
+"few months ago another tribe came over the mountains and settled down. And "
+"you are sure, that there is only enough place for one tribe."
+msgstr ""
+
+#: ../../maps/Two frontiers.wmf/elemental:9
+msgid "A multiplayer-battle-map on a small circle-shaped island."
+msgstr ""
+"Moninpeliin sopiva taistelukartta pienellä, ympyränmuotoisella saarella."
+
+#: ../../maps/Riverlands.wmf/elemental:9
+msgid ""
+"A mystical land, full of different landscapes, which are all crossed by a "
+"handful of big rivers."
+msgstr ""
+"Tämä mystinen maa on täynnä erilaisia maisemia, joita halkoo kourallinen "
+"suuria jokia."
+
+# Upon debating the odds of the tribes' entire existence surviving a local asteroid hit, the IRC council also suggested the following translation: "lol joku talvi" "heimosi kuoli" "wat". Credit to Kheldysh.
+#: ../../maps/Impact.wmf/elemental:9
+msgid ""
+"After an impact of an asteroid and the following harsh winter, three isles "
+"are connected by ice and stone, setting an end to the peaceful coexistence "
+"of three tribes."
+msgstr ""
+"Asteroidin törmäystä seuranneessa kovassa talvessa kolmea saarta yhdistää "
+"nyt jää ja kivi. Tämä tietää loppua kolmen heimon rauhanomaiselle "
+"yhteiselolle."
+
+#: ../../maps/The long way.wmf/elemental:9
+msgid ""
+"Another strange test by the Gods. To reach the other side, there seems to be "
+"no other way, than occupying the land of your enemies."
+msgstr ""
+"Jälleen outo jumalten asettama koetus. Päästäksesi toiselle puolelle sinun "
+"on nähtävästi pakko vallata vihollistesi maat."
+
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid ""
+"Another thaw set in. Three tribes were sheltering form severe winter among "
+"majestic mountains. During solstice they listened to the oracle and went on "
+"to war. The only survivor will sacrifice his enemies' treasures on the "
+"ancient altar, build there a splendid castle and gain goodwill and the "
+"respect of the Gods."
+msgstr ""
+
+#: ../../campaigns/cconfig:36
+msgid "Atlanteans - the new rise"
+msgstr "Atlanteans - uusi nousu"
+
+#: ../../maps/Atoll.wmf/elemental:7
+msgid "Atoll"
+msgstr "Atolli"
+
+#: ../../maps/Checkmate.wmf/elemental:7
+msgid "Checkmate"
+msgstr "Shakkimatti"
+
+#: ../../maps/Comet Island.wmf/elemental:7
+msgid "Comet Island"
+msgstr "Komeettasaari"
+
+#: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
 msgstr "Kraateri"
-
-#: ../../maps/Crater.wmf/elemental:11
-msgid ""
-"Long after a meteor crashed into a couple of mountains life blossoms in the "
-"crater. Two tribes are now fighting about the rich resources."
-msgstr ""
-"Kauan sitten meteoriitti törmäsi vuorijonoon. Nyt, uuden elämän kukoistaessa "
-"kraaterissa, kaksi heimoa taistelee maan rikkauksista."
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
 msgstr "Kuiva joenpohja"
 
-# TODO: grammar
-#: ../../maps/Dry Riverbed.wmf/elemental:9
+#: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
-"It is a long time ago, since the last rain drop touched these grounds. No "
-"wonder, that here is not much water left in this dry riverbed. Everyone "
-"knows: soon there will be a war. A war about the last water."
+"Each tribe is surrounded by four mighty mountains. Who will first conquer "
+"them and claim the resources for his own tribe? Hint I: Water can be found "
+"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"Each mountain contains only one resource."
 msgstr ""
-"Siitä on kauan kun viimeinen sadepisara putosi näille maille. Ei ihmekään, "
-"ettei tässä kuivassa joenuomassa ole juuri vettä jäljellä. Alueen asukkaat "
-"tietävät, että sota on tulossa - sota viimeisistä keitaista."
+"Jokainen heimo on ympyröity neljällä isolla vuorella. Kuka valtaa ne "
+"ensimmäisenä ja lunastaa resurssit oman heimonsa käyttöön? Vihje I: Vettä "
+"löytyy joen vierestä. Vihje II: Lumimiehet merkkaavat muita vesilähteitä. "
+"Vihje III: Jokainen vuori sisältää vain yhtä resurssia."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Haltiametsät"
 
-#: ../../maps/Elven Forests.wmf/elemental:9
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many a tribe into "
-"the attempt of taking them for itself."
-msgstr ""
-"Näiden smaragdinvihreiden maiden henkeäsalpaava kauneus on houkuttanut monta "
-"heimoa yritykseen vallata ne itselleen."
+#: ../../campaigns/cconfig:30
+msgid "Empire - The months of exile"
+msgstr "Keisarikunta - Maanpaon kuukaudet"
+
+#: ../../campaigns/cconfig:74
+msgid "Empire Tutorial1 - The strands of Malac' Mor"
+msgstr "Keisarikunta, opastus 1 - Malac' Morin rannat"
+
+#: ../../campaigns/cconfig:79
+msgid "Empire Tutorial2 - An outpost for exile"
+msgstr "Keisarikunta, opastus 2 - Rajalinnoitus maanpaolle"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
 msgstr "Vihollinen näkyvissä"
 
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr ""
-"Moninpelitarkoituksiin sopiva taistelukartta ristinmuotoisella saarella."
-
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
 msgstr "Suomen järvet"
 
-#: ../../maps/Finlakes.wmf/elemental:11
-msgid ""
-"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
-"forests and mountains. It is up to you, to find a way through these lands."
-msgstr ""
-"Nämä ovat kauniita suomalaisia maita, jotka ovat järviä, jokia, muinaisia "
-"metsiä ja tuntureita. On sinusta kiinni löytää reitti näiden maiden lävitse."
-
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
 msgstr "Tulileikit"
+
+#: ../../maps/Islands at war.wmf/elemental:11
+msgid ""
+"For centuries you've lived peacefully together with the other tribe on the "
+"neighboured island. This peace seems to end now - your neighbour begins to "
+"expand."
+msgstr ""
+
+#: ../../maps/Sun of fire.wmf/elemental:11
+msgid ""
+"For hundreds of years this island was kept as sanctuary of the Gods. No "
+"human ever ventured to set a foot on it. But now, that a tribe was finally "
+"barefaced enough to settle on the coast of that island, a lot others "
+"followed afterwards."
+msgstr ""
+
+#: ../../maps/Four Castles.wmf/elemental:7
+msgid "Four Castles"
+msgstr "Neljä linnaa"
+
+#: ../../maps/Four Mountains.wmf/elemental:7
+msgid "Four Mountains"
+msgstr "Neljä vuorta"
+
+#: ../../maps/Glacier Lake.wmf/elemental:7
+msgid "Glacier Lake"
+msgstr "Jäätikön järvi"
+
+#: ../../maps/Golden Peninsula.wmf/elemental:7
+msgid "Golden Peninsula"
+msgstr "Kultainen niemimaa"
+
+#: ../../maps/Impact.wmf/elemental:7
+msgid "Impact"
+msgstr "Törmäys"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:11
+msgid ""
+"In this mountainous area two princes have settled. Now they are expanding "
+"their territories unaware of the fact that they are not alone!"
+msgstr ""
 
 # TODO: no one
 #: ../../maps/Firegames.wmf/elemental:9
@@ -231,162 +214,76 @@ msgstr ""
 "asti on vaikuttanut siltä, että olisitte yksin, mutta kukapa tietää, mitä "
 "tapahtuisi kohdatessanne vihollisheimon?"
 
-#: ../../maps/Four Castles.wmf/elemental:7
-msgid "Four Castles"
-msgstr "Neljä linnaa"
-
-#: ../../maps/Four Castles.wmf/elemental:9
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
-msgstr ""
-"Mahtavien linnoitustensa hyvin suojelemat neljä vallanhimoista sotaherraa "
-"viilaavat juoniaan näiden maiden valloittamiseksi..."
-
-#: ../../maps/Four Mountains.wmf/elemental:9
-msgid "Four Mountains"
-msgstr "Neljä vuorta"
-
-#: ../../maps/Four Mountains.wmf/elemental:11
-msgid ""
-"Each tribe is surrounded by four mighty mountains. Who will first conquer "
-"them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
-"Each mountain contains only one resource."
-msgstr ""
-"Jokainen heimo on ympyröity neljällä isolla vuorella. Kuka valtaa ne "
-"ensimmäisenä ja lunastaa resurssit oman heimonsa käyttöön? Vihje I: Vettä "
-"löytyy joen vierestä. Vihje II: Lumimiehet merkkaavat muita vesilähteitä. "
-"Vihje III: Jokainen vuori sisältää vain yhtä resurssia."
-
-#: ../../maps/Glacier Lake.wmf/elemental:7
-msgid "Glacier Lake"
-msgstr "Jäätikön järvi"
-
-# TODO: no one; grammar
-#: ../../maps/Glacier Lake.wmf/elemental:9
-msgid ""
-"A long time your tribe dwelled on this beautiful and lonely glacier lake. "
-"Noone disturbed you and the resources were enough for your whole tribe, but "
-"a few month ago another tribe came over the mountains and settled down. And "
-"you are sure, that there is only place enough for one tribe."
-msgstr ""
-"Heimosi on jo kauan asuttanut tätä kaunista ja yksinäistä jäätikön järven "
-"seutua. Kukaan ei teitä ole häirinnyt, ja maan rikkaudet ovat riittäneet "
-"koko heimollesi - viime kuukausiin asti: nyt toinen heimo on ylittänyt "
-"vuoret ja asettunut taloksi. Tiedät varmasti, että täällä on tilaa vain "
-"yhdelle heimolle."
-
-#: ../../maps/Golden Peninsula.wmf/elemental:7
-msgid "Golden Peninsula"
-msgstr "Kultainen niemimaa"
-
-#: ../../maps/Golden Peninsula.wmf/elemental:9
-msgid "Two empires race for the treasures of a legendary peninsula..."
-msgstr "Kaksi valtakuntaa kilpailee legendaarisen niemimaan aarteista..."
-
-#: ../../maps/Impact.wmf/elemental:7
-msgid "Impact"
-msgstr "Törmäys"
-
-# Upon debating the odds of the tribes' entire existence surviving a local asteroid hit, the IRC council also suggested the following translation: "lol joku talvi" "heimosi kuoli" "wat". Credit to Kheldysh.
-#: ../../maps/Impact.wmf/elemental:9
-msgid ""
-"After an impact of an asteroid and the following harsh winter, three isles "
-"are connected by ice and stone, setting an end to the peaceful coexistence "
-"of three tribes."
-msgstr ""
-"Asteroidin törmäystä seuranneessa kovassa talvessa kolmea saarta yhdistää "
-"nyt jää ja kivi. Tämä tietää loppua kolmen heimon rauhanomaiselle "
-"yhteiselolle."
-
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
 msgstr "Saaret sodassa"
 
-#: ../../maps/Islands at war.wmf/elemental:11
+#: ../../maps/War of the Valleys.wmf/elemental:9
 msgid ""
-"For centuries you lived peaceful together with the other tribe on the "
-"neighboured island. This peace seems to end now. - Your neighbour begins to "
-"expand."
+"It is said that even sun and moon must find their way between the spires of "
+"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
+"Geologists elsewhere."
 msgstr ""
-"Vuosisatojen ajan te ja naapurisaaren heimo elitte sulassa sovussa. Tämä "
-"rauha on nyt päättymässä, kun naapurit alkavat laajentaa aluettaan."
+"Tarina kertoo, että jopa auringon ja kuun on löydettävä tiensä näiden "
+"vuorenhuippujen välistä. Vihje: Monoliitit ovat malmikeskittymien "
+"maamerkkejä; älä turhaan lähetä geologeja muualle."
+
+#: ../../maps/Wisent Valley.wmf/elemental:11
+msgid ""
+"It seems as if this magical valley was inhabited by wisents since the "
+"beginning of days. When your tribe came to this place, you were sure that it "
+"offers enough space for a peaceful life. But can your tribe live in peace "
+"with your neighbours?"
+msgstr ""
+
+#: ../../maps/Swamp Island.wmf/elemental:11
+msgid ""
+"It smells like swamp, it looks like swamp and it is swamp. But it is the "
+"place you were born and you lived your whole life. If you don't want to lose "
+"it, defend it! "
+msgstr ""
+
+#: ../../maps/Dry Riverbed.wmf/elemental:9
+msgid ""
+"It was a long time ago, since the last raindrop touched these grounds. No "
+"wonder, that there is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last of water."
+msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
 msgstr "Rauhan järvi"
 
-#: ../../maps/Lake of tranquility.wmf/elemental:9
-msgid ""
-"This lake, deep in the most ancient forests, has long been known for its "
-"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
-"hostile tribes arrive at its shores..."
-msgstr ""
-"Tämä järvi, syvällä ikimetsissä, on kauan ollut tunnettu sen kauneudesta ja "
-"paikan rikkumattomasta rauhasta. Nyt sen koskemattomuus on uhattuna, kun "
-"kaksi heimoa on saapunut sen rannoille..."
-
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
 msgstr "Viimeinen turvapaikka"
 
-#: ../../maps/Last Bastion.wmf/elemental:11
+#: ../../maps/Crater.wmf/elemental:9
 msgid ""
-"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
-"Sun heated up the Earth and melted glaciers and people plunged into the "
-"deep. But now - high in the majestic mountains, on the last scrap of land - "
-"two surviving tribes are sheltering. Even though the Gods showed mercy and "
-"the climate thus turned cooler again the water is still rising and rising. "
-"Onto the last secure place - the highest mountain range where the amount of "
-"gold and the space to live merely suffice for one tribe - only two opposite "
-"paths lead. But remember, be careful... this last living space is also a "
-"hard and small place to live. Don't forget to take care about your timber "
-"supplies, you'll need them."
+"Long after a meteor crashed into a couple of mountains, life blossoms in the "
+"crater. Two tribes are now fighting for the rich resources."
 msgstr ""
-"Ailahtelevaiset jumalat eivät vastanneet rukouksiimme. Sen sijaan "
-"tuhatkertaisesti kuumempi aurinko kärvensi maata sulattaen jäätiköt ja "
-"hukuttaen ihmiset. Nyt, korkealla vuoristossa, viimeisellä maanpläntillä "
-"elää kaksi henkiinjäänyttä heimoa. Vaikka jumalat osoittivat armoa ja "
-"ilmasto viileni, veden pinta nousee yhä. Viimeiseen turvapaikkaan - "
-"korkeimmalle vuorenrinteelle, jossa kullan ja elintilan määrä riittävät vain "
-"yhdelle heimolle - johtaa vain kaksi vastakkaista polkua. Mutta muista olla "
-"varovainen - tämä viimeinen asuinala on myös kova ja pieni elinpaikka. Älä "
-"unohda pitää huolta puuvarannoistasi, sillä tulet tarvitsemaan niitä."
+
+#: ../../maps/Twinkling Waves.wmf/elemental:11
+msgid ""
+"Many beautiful, green islands await the ones brave enough to pass the "
+"thousand waves, twinkling in the sun."
+msgstr ""
+"Monta kaunista, vehreää saarta odottaa niitä, jotka ovat riittävän urheita "
+"ylittämään auringonpaisteessa kimaltelevat tuhannet aallot."
+
+#: ../../maps/Three Warriors.wmf/elemental:11
+msgid ""
+"Mighty mountains divide this land into three fertile valleys. But a path "
+"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
+"found around the lakes."
+msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
 msgstr "Mystinen sokkelo"
 
-#: ../../maps/Mystical Maze.wmf/elemental:11
-msgid ""
-"There are two big questions around: Who created this unbelievable big maze "
-"and what can be found inside?"
-msgstr ""
-"Ilmassa roikkuu kaksi suurta kysymystä: Kuka loi tämän uskomattoman kokoisen "
-"sokkelon - ja mitä sen sisältä löytyy?"
-
-#: ../../maps/Plateau.wmf/elemental:7
-msgid "The Green Plateau"
-msgstr "Vihreä ylätasanko"
-
-# TODO: be aware? Run-on sentences.
-#: ../../maps/Plateau.wmf/elemental:9
-msgid ""
-"You are standing on an island, crowned by mighty mountains, which keep a "
-"wonderful and mighty treasure in their middle - The Green Plateau, which is "
-"hard to get, but easy to lose, so if you want it, be aware of the other "
-"clans."
-msgstr ""
-"Seisot saarella, jota kruunaavat mahtavat vuoret sulkevat keskelleen "
-"mahtavan aarteen - Vihreän tasangon. Se on vaikea vallata, mutta helppo "
-"menettää, joten jos haluat sen, varo muita klaaneja."
-
 #: ../../maps/Rendez-Vous.wmf/elemental:9
-msgid "Rendez-Vous"
-msgstr "Kohtaamispaikka"
-
-#: ../../maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army right away to this hill and build a giant stronghold "
@@ -399,52 +296,31 @@ msgstr ""
 "linnake merkiksi ylivoimaisuudestasi! Vihje: Keskellä on tilaa vain yhdelle "
 "linnakkeelle. Vettä löytyy kaikkialta, joten geologeille ei ole tarvetta."
 
+#: ../../maps/Rendez-Vous.wmf/elemental:7
+msgid "Rendez-Vous"
+msgstr "Kohtaamispaikka"
+
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
 msgstr "Jokimaat"
 
-#: ../../maps/Riverlands.wmf/elemental:9
+#: ../../campaigns/cconfig:33
 msgid ""
-"A mystical land, full of different landscapes, which are all crossed by a "
-"handful of big rivers."
+"Six months ago, Lutius - a young general of the Empire - was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire's land. At first, everything was calm. He even talked to a few "
+"barbarian children and thought about a peaceful life - side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
 msgstr ""
-"Tämä mystinen maa on täynnä erilaisia maisemia, joita halkoo kourallinen "
-"suuria jokia."
 
-#: ../../maps/Sun of fire.wmf/elemental:9
-msgid "The ancient sun of fire"
-msgstr "Ikiaikaisen auringon palo"
-
-#: ../../maps/Sun of fire.wmf/elemental:11
-msgid ""
-"For hundreds of years this island was kept as sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now, that a tribe was finally "
-"barefaced enough to settle on the coast of that island, a lot other followed "
-"afterwards."
-msgstr ""
-"Satojen vuosien ajan tätä saarta pidettiin jumalten lepopaikkana, eikä "
-"yksikään ihminen koskaan astunut jalallaan sinne. Mutta kun yksi heimo oli "
-"vihdoin riittävän röyhkeä asettumaan saaren rannoille, moni muukin seurasi "
-"pian esimerkkiä."
-
-#: ../../maps/Swamp Island.wmf/elemental:9
-msgid "Swamp Island"
-msgstr "Suosaari"
-
-# TODO: lose
-#: ../../maps/Swamp Island.wmf/elemental:11
-msgid ""
-"It smells like swamp, it looks like swamp and it is swamp. But it is the "
-"place you were born and you lived your whole life. If you don't want to "
-"loose it, defend it! "
-msgstr ""
-"Se haisee suolta, näyttää suolta ja itse asiassa on suo, mutta se on myös "
-"syntymäpaikkasi, jossa olet asunut koko elämäsi. Ellet halua menettää "
-"kotiasi, puolusta sitä! "
-
-#: ../../maps/The Far North.wmf/elemental:9
-msgid "The Far North"
-msgstr "Kaukainen pohjoinen"
+#: ../../campaigns/cconfig:39
+msgid "Some descriptive texts..."
+msgstr "Joku kuvaava teksti..."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -474,45 +350,68 @@ msgstr ""
 "kuolevat matkalla, susien ruokana, suonsilmäkkeeseen hukkuneena... ja "
 "vihamielisten heimojen ympäröimänä."
 
+#: ../../maps/Swamp Island.wmf/elemental:9
+msgid "Swamp Island"
+msgstr "Suosaari"
+
+#: ../../maps/The Far North.wmf/elemental:9
+msgid "The Far North"
+msgstr "Kaukainen pohjoinen"
+
+#: ../../maps/Plateau.wmf/elemental:7
+msgid "The Green Plateau"
+msgstr "Vihreä ylätasanko"
+
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
 msgstr "Keitaiden kolmio"
-
-# TODO: grammar
-#: ../../maps/The Oasis Triangle.wmf/elemental:9
-msgid ""
-"There is something mystical, like a grey atmosphere, about this three Oasis, "
-"which noone found out, yet. Perhaps you will be the one, but be aware of the "
-"others, who are searching, too!"
-msgstr ""
-"Näissä kolmessa keitaassa on jotain taianomaista; on kuin mysteerin usva "
-"ympäröisi niitä. Kukaan ei ole vielä selvottänyt niiden tarkkaa sijaintia. "
-"Kenties sinä olet onnellinen löytäjä, mutta varo - muitakin etsijöitä on "
-"liikkeellä!"
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
 msgstr "Suojasää"
 
-# TODO: grammar
-#: ../../maps/The Thaw.wmf/elemental:11
-msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
-"majestic mountains. While solstice they listened to the oracle and went on "
-"war. Only survivor will sacrifice his enemies treasures on the ancient "
-"altar, build there a splendid castle and gain goodwill and the respect of "
-"the Gods."
-msgstr ""
-"Talvi lämpeni jälleen suojasääksi. Kolme heimoa oli sinnitellyt ankaraa "
-"talvea vastaan jylhien vuorten katveessa. Talvipäivänseisauksen aikaan he "
-"kuuntelivat oraakkelia ja julistivat sodan. Viimeinen henkiin jäänyt heimo "
-"uhraisi vihollistensa aarteet ikivanhalla alttarilla, rakentaisi sen "
-"ympärille loisteliaan linnan ja saisi näin osakseen jumalten suosion ja "
-"arvostuksen."
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The ancient sun of fire"
+msgstr "Ikiaikaisen auringon palo"
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
 msgstr "Suuri järvi"
+
+#: ../../maps/Elven Forests.wmf/elemental:9
+msgid ""
+"The breath-taking beauty of these emerald lands has lured many tribes into "
+"an attempt of taking them for themselves."
+msgstr ""
+
+#: ../../maps/The long way.wmf/elemental:7
+msgid "The long way"
+msgstr "Pitkä matka"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:9
+msgid "The pass through the mountains"
+msgstr "Tie vuorten läpi"
+
+#: ../../maps/Mystical Maze.wmf/elemental:11
+msgid ""
+"There are two big questions around: Who created this unbelievably big maze "
+"and what can be found inside?"
+msgstr ""
+
+#: ../../maps/The Oasis Triangle.wmf/elemental:9
+msgid ""
+"There is something mystical, like a grey atmosphere, around these three "
+"oases, which no one found out about yet. Perhaps you will be the one, but be "
+"aware of the others, who are searching too!"
+msgstr ""
+
+#: ../../maps/Finlakes.wmf/elemental:11
+msgid ""
+"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
+"forests and mountains. It is up to you, to find a way through these lands."
+msgstr ""
+"Nämä ovat kauniita suomalaisia maita, jotka ovat järviä, jokia, muinaisia "
+"metsiä ja tuntureita. On sinusta kiinni löytää reitti näiden maiden lävitse."
 
 # TODO: grammar
 #: ../../maps/The big lake.wmf/elemental:9
@@ -531,95 +430,201 @@ msgstr ""
 "vain rengas on jäljellä mahtavasta tulisesta vuoresta. Luuletko, että se on "
 "riittävän suuri useammalle kuin yhdelle heimolle?"
 
-#: ../../maps/The long way.wmf/elemental:7
-msgid "The long way"
-msgstr "Pitkä matka"
-
-#: ../../maps/The long way.wmf/elemental:9
+#: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid ""
-"Another strange test by the Gods. To reach the other side, there seems to be "
-"no other way, than occupying the land of your enemies."
+"This lake, deep in the most ancient forests, has long been known for its "
+"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
+"hostile tribes arrive at its shores..."
 msgstr ""
-"Jälleen outo jumalten asettama koetus. Päästäksesi toiselle puolelle sinun "
-"on nähtävästi pakko vallata vihollistesi maat."
-
-#: ../../maps/The pass through the mountains.wmf/elemental:9
-msgid "The pass through the mountains"
-msgstr "Tie vuorten läpi"
-
-#: ../../maps/The pass through the mountains.wmf/elemental:11
-msgid ""
-"In this mountainous region two princes have settled. Now they are expanding "
-"their territories unaware of the fact that they are not alone!"
-msgstr ""
-"Kaksi prinssiä ovat asettuneet tälle vuoristoiselle alueelle. Nyt he "
-"laajentavat reviirejään toisistaan tietämättöminä!"
+"Tämä järvi, syvällä ikimetsissä, on kauan ollut tunnettu sen kauneudesta ja "
+"paikan rikkumattomasta rauhasta. Nyt sen koskemattomuus on uhattuna, kun "
+"kaksi heimoa on saapunut sen rannoille..."
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
 msgstr "Kolme soturia"
 
-#: ../../maps/Three Warriors.wmf/elemental:11
-msgid ""
-"Mighty mountains divide this land into three fertile valleys. But a path "
-"connects the valleys and thus seems a fight inescapable! Hint: Water can be "
-"found around the lakes."
-msgstr ""
-"Mahtavat vuoret jakavat tämän maan hedelmällisiin laaksoihin. Polku yhdistää "
-"laaksot, ja täten näyttää siltä, että taistelulta ei voi välttyä! Vihje: "
-"Vettä löytyy järvien ympäriltä."
+#: ../../campaigns/cconfig:57
+msgid "Tutorial1 - Eyes in the Dark"
+msgstr "Opastus 1 - Silmät pimeydessä"
+
+#: ../../campaigns/cconfig:62
+msgid "Tutorial2 - A Place to call Home"
+msgstr "Opastus 2 - Paikka, jota kutsua kodiksi"
+
+#: ../../campaigns/cconfig:67
+msgid "Tutorial3 - This land is our land"
+msgstr "Opastus 3 - Tämä maa on meidän"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Kimaltelevat aallot"
 
-#: ../../maps/Twinkling Waves.wmf/elemental:11
-msgid ""
-"Many beautiful, green islands await the ones brave enough to pass the "
-"thousand waves, twinkling in the sun."
-msgstr ""
-"Monta kaunista, vehreää saarta odottaa niitä, jotka ovat riittävän urheita "
-"ylittämään auringonpaisteessa kimaltelevat tuhannet aallot."
-
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
 msgstr "Kaksi rintamaa"
 
-#: ../../maps/Two frontiers.wmf/elemental:9
-msgid "A multiplayer-battle-map on a small circle-shaped island."
-msgstr ""
-"Moninpeliin sopiva taistelukartta pienellä, ympyränmuotoisella saarella."
+#: ../../maps/Golden Peninsula.wmf/elemental:9
+msgid "Two empires race for the treasures of a legendary peninsula..."
+msgstr "Kaksi valtakuntaa kilpailee legendaarisen niemimaan aarteista..."
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "Laaksojen sota"
 
-#: ../../maps/War of the Valleys.wmf/elemental:9
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
-"It is said that even sun and moon must find their way between the spires of "
-"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
-"Geologists elsewhere."
+"Well protected in their mighty fortresses, four power-hungry warlords are "
+"completing their schemes to dominate these lands..."
 msgstr ""
-"Tarina kertoo, että jopa auringon ja kuun on löydettävä tiensä näiden "
-"vuorenhuippujen välistä. Vihje: Monoliitit ovat malmikeskittymien "
-"maamerkkejä; älä turhaan lähetä geologeja muualle."
+"Mahtavien linnoitustensa hyvin suojelemat neljä vallanhimoista sotaherraa "
+"viilaavat juoniaan näiden maiden valloittamiseksi..."
+
+#: ../../campaigns/cconfig:27
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons and warlord to an army that could match any enemy willing to "
+"rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord "
+"knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father's spirit that he’d return to re-established "
+"order. While his brothers raged in blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr ""
+
+#: ../../maps/Checkmate.wmf/elemental:9
+msgid ""
+"Whether just one of nature's strangest features or the creation of a mad "
+"(and game-hungry) god, this weird battleground awaits two opponents for "
+"another confrontation."
+msgstr ""
+"Liekö kyseessä luonnon oikku vai hullun (ja pelihimoisen) jumalan luomus - "
+"tämä outo taistelutanner odottaa kahta vastustajaa taisteluun."
+
+#: ../../maps/Last Bastion.wmf/elemental:11
+msgid ""
+"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
+"Sun heated up the Earth and melted glaciers and people plunged into the "
+"deep. But now - high in the majestic mountains, on the last scrap of land - "
+"two surviving tribes are sheltering. Even though the Gods showed mercy and "
+"the climate thus turned cooler again the water is still rising and rising. "
+"Onto the last secure place - the highest mountain range where the amount of "
+"gold and the space to live merely suffice for one tribe - only two opposite "
+"paths lead. But remember, be careful... this last living space is also a "
+"hard and small place to live. Don't forget to take care about your timber "
+"supplies, you'll need them."
+msgstr ""
+"Ailahtelevaiset jumalat eivät vastanneet rukouksiimme. Sen sijaan "
+"tuhatkertaisesti kuumempi aurinko kärvensi maata sulattaen jäätiköt ja "
+"hukuttaen ihmiset. Nyt, korkealla vuoristossa, viimeisellä maanpläntillä "
+"elää kaksi henkiinjäänyttä heimoa. Vaikka jumalat osoittivat armoa ja "
+"ilmasto viileni, veden pinta nousee yhä. Viimeiseen turvapaikkaan - "
+"korkeimmalle vuorenrinteelle, jossa kullan ja elintilan määrä riittävät vain "
+"yhdelle heimolle - johtaa vain kaksi vastakkaista polkua. Mutta muista olla "
+"varovainen - tämä viimeinen asuinala on myös kova ja pieni elinpaikka. Älä "
+"unohda pitää huolta puuvarannoistasi, sillä tulet tarvitsemaan niitä."
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Who will be the real King of the big atoll?"
+msgstr "Kuka tulee olemaan ison atollin todellinen kuningas"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
 msgstr "Visenttilaakso"
 
-# TODO: grammar
-#: ../../maps/Wisent Valley.wmf/elemental:11
+# TODO: be aware? Run-on sentences.
+#: ../../maps/Plateau.wmf/elemental:9
 msgid ""
-"It seems as if this magical valley was inhabitated by wisents since the "
-"beginning of days. When your tribe came to this place, you were sure that it "
-"offers enough space for a peaceful life. But can you tribe live in peace "
-"with your neighbours?"
+"You are standing on an island, crowned by mighty mountains, which keep a "
+"wonderful and mighty treasure in their middle - The Green Plateau, which is "
+"hard to get, but easy to lose, so if you want it, be aware of the other "
+"clans."
 msgstr ""
-"Näyttää siltä, että tässä taianomaisessa laaksossa on asunut visenttejä "
-"aikojen alusta lähtien. Kun heimosi saapui tänne, olitte varmoja, että se "
-"tarjoaisi riittävästi tilaa rauhalliseen eloon. Vaan voiko heimosi elää "
-"rauhassa naapurienkin kanssa?"
+"Seisot saarella, jota kruunaavat mahtavat vuoret sulkevat keskelleen "
+"mahtavan aarteen - Vihreän tasangon. Se on vaikea vallata, mutta helppo "
+"menettää, joten jos haluat sen, varo muita klaaneja."
+
+# TODO: Though his glorious reign - though? re-established order. Too long sentences. redrew? Really reunite brothers?
+#~ msgid ""
+#~ "When Chat’Karuth died, he was an old man, father to three strong and "
+#~ "ambitious sons and warlord to an army that could match any enemy willing to "
+#~ "rise against the ancient forests. Though his glorious reign, Chat’Karuth "
+#~ "left his eldest son Thron in the due to succeed him as the tribes warlord – "
+#~ "a decision that left his two brothers unsatisfied. The old warlord knew "
+#~ "that. As his father told him, Thron left the capital of Al’thunran, the home "
+#~ "of the throne among the trees and redrew his forces to the high hills where "
+#~ "he buried the corpse of his father and swore to the gods and his spirit, "
+#~ "that he’d return to re-established order. While his brothers raged in blind "
+#~ "war against Thron and the few forces he left to secure the borders of "
+#~ "Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
+#~ "force the tribes to march once again under a common banner."
+#~ msgstr ""
+#~ "Kun Chat'Karuth kuoli, hän oli vanha mies, kolmen vahvan ja kunnianhimoisen "
+#~ "pojan isä sekä sotaherra, jonka armeija päihitti minkä tahansa vihollisen, "
+#~ "joka oli valmis nousemaan ikivanhoja metsiä vastaan. Loistokkaana "
+#~ "hallintokautenaan Chat'Karuth määräsi vanhimman poikansa, Thronin, perimään "
+#~ "heimojen sotaherran manttelinsa. Tämä päätös jätti kaksi muuta veljeä "
+#~ "tyytymättömiksi, minkä vanha sotaherra tiesi. Isänsä kehotuksesta Thron "
+#~ "jätti Al'thunranin pääkaupungin, puiden keskellä kohoavan valtaistuimen "
+#~ "kodin, ja johti joukkonsa korkeille kukkuloille. Tänne hän hautasi isänsä ja "
+#~ "vannoi jumalille ja tämän hengelle palaavansa palauttamaan järjestyksen. "
+#~ "Sillä välin kun Thronin veljet raivosivat käyden sokeaa sotaa, taistellen "
+#~ "vastaan niitä vähiä joukkoja jotka Thron oli jättänyt turvaamaan "
+#~ "Al'thunranin rajoja. Nuori sotaherra pyrkii uudelleenyhdistämään "
+#~ "kunnianhimoiset veljensä ja pakottamaan heimot marssimaan jälleen kerran "
+#~ "yhteisen lipun alla."
+
+# TODO: month->s... and total spellcheck. Cryptic!
+#~ msgid ""
+#~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
+#~ "soldiers at the frontier among the northern forests, where Barbarian-tribes "
+#~ "and official Empire-land are crossing. His task was to defend the Empire-"
+#~ "land. First everything was calm, he even talked to few barbarian children "
+#~ "and thought about a peaceful life - side by side with this archaic folk. He "
+#~ "began to feel saver and his army begun to draw off the attention on they "
+#~ "potential enemy - That was their fault. At one night in march his unprepared "
+#~ "army was attacked by 100 barbarian footmen and was totally scattered. Only "
+#~ "with pure life he and a handful of soldiers survived."
+#~ msgstr ""
+#~ "Kuusi viikkoa sitten Lutius - nuori keisarikunnan kenraali - lähetettiin 150 "
+#~ "sotilaan kanssa eturintamalle, pohjoisiin metsiin, joissa barbaariheimojen "
+#~ "maat ja keisarikunnan alue risteävät. Hänen tehtävänään oli puolustaa "
+#~ "keisarikunnan rajapyykkiä. Ensi alkuun kaikki oli tyyntä - hän jopa puhui "
+#~ "barbaarilasten kanssa ja kuvitteli rauhaisaa yhteiseloa näiden "
+#~ "alkukantaisten asukkien kanssa. Hän alkoi tuntea olonsa turvallisemmaksi, ja "
+#~ "armeija ei kiinnittänyt enää juuri huomiota mahdolliseen viholliseensa. Tämä "
+#~ "oli virhe - erään iltamarssin aikana Lutiuksen valmistautumaton armeija "
+#~ "joutui sadan barbaarijalkamiehen hyökkäyksen kohteeksi, ja pakeni joka "
+#~ "ilmansuuntaan. Vain kourallinen sotilaita selviytyi."
+
+#~ msgid ""
+#~ "Long after a meteor crashed into a couple of mountains life blossoms in the "
+#~ "crater. Two tribes are now fighting about the rich resources."
+#~ msgstr ""
+#~ "Kauan sitten meteoriitti törmäsi vuorijonoon. Nyt, uuden elämän kukoistaessa "
+#~ "kraaterissa, kaksi heimoa taistelee maan rikkauksista."
+
+# TODO: grammar
+#~ msgid ""
+#~ "It is a long time ago, since the last rain drop touched these grounds. No "
+#~ "wonder, that here is not much water left in this dry riverbed. Everyone "
+#~ "knows: soon there will be a war. A war about the last water."
+#~ msgstr ""
+#~ "Siitä on kauan kun viimeinen sadepisara putosi näille maille. Ei ihmekään, "
+#~ "ettei tässä kuivassa joenuomassa ole juuri vettä jäljellä. Alueen asukkaat "
+#~ "tietävät, että sota on tulossa - sota viimeisistä keitaista."
+
+#~ msgid ""
+#~ "The breath-taking beauty of these emerald lands has lured many a tribe into "
+#~ "the attempt of taking them for itself."
+#~ msgstr ""
+#~ "Näiden smaragdinvihreiden maiden henkeäsalpaava kauneus on houkuttanut monta "
+#~ "heimoa yritykseen vallata ne itselleen."
 
 # TODO: grammar - F, comma
 #~ msgid ""
@@ -641,9 +646,112 @@ msgstr ""
 #~ "Vihje 2: Lumiukot seisovat yksittäisten pohjavesitaskujen merkkinä. Vihje 3: "
 #~ "Kullakin vuorella on vain yhdentyyppistä louhittavaa."
 
+# TODO: no one; grammar
+#~ msgid ""
+#~ "A long time your tribe dwelled on this beautiful and lonely glacier lake. "
+#~ "Noone disturbed you and the resources were enough for your whole tribe, but "
+#~ "a few month ago another tribe came over the mountains and settled down. And "
+#~ "you are sure, that there is only place enough for one tribe."
+#~ msgstr ""
+#~ "Heimosi on jo kauan asuttanut tätä kaunista ja yksinäistä jäätikön järven "
+#~ "seutua. Kukaan ei teitä ole häirinnyt, ja maan rikkaudet ovat riittäneet "
+#~ "koko heimollesi - viime kuukausiin asti: nyt toinen heimo on ylittänyt "
+#~ "vuoret ja asettunut taloksi. Tiedät varmasti, että täällä on tilaa vain "
+#~ "yhdelle heimolle."
+
+#~ msgid ""
+#~ "For centuries you lived peaceful together with the other tribe on the "
+#~ "neighboured island. This peace seems to end now. - Your neighbour begins to "
+#~ "expand."
+#~ msgstr ""
+#~ "Vuosisatojen ajan te ja naapurisaaren heimo elitte sulassa sovussa. Tämä "
+#~ "rauha on nyt päättymässä, kun naapurit alkavat laajentaa aluettaan."
+
+#~ msgid ""
+#~ "There are two big questions around: Who created this unbelievable big maze "
+#~ "and what can be found inside?"
+#~ msgstr ""
+#~ "Ilmassa roikkuu kaksi suurta kysymystä: Kuka loi tämän uskomattoman kokoisen "
+#~ "sokkelon - ja mitä sen sisältä löytyy?"
+
+#~ msgid ""
+#~ "For hundreds of years this island was kept as sanctuary of the Gods. No "
+#~ "human ever ventured to set a foot on it. But now, that a tribe was finally "
+#~ "barefaced enough to settle on the coast of that island, a lot other followed "
+#~ "afterwards."
+#~ msgstr ""
+#~ "Satojen vuosien ajan tätä saarta pidettiin jumalten lepopaikkana, eikä "
+#~ "yksikään ihminen koskaan astunut jalallaan sinne. Mutta kun yksi heimo oli "
+#~ "vihdoin riittävän röyhkeä asettumaan saaren rannoille, moni muukin seurasi "
+#~ "pian esimerkkiä."
+
+# TODO: lose
+#~ msgid ""
+#~ "It smells like swamp, it looks like swamp and it is swamp. But it is the "
+#~ "place you were born and you lived your whole life. If you don't want to "
+#~ "loose it, defend it! "
+#~ msgstr ""
+#~ "Se haisee suolta, näyttää suolta ja itse asiassa on suo, mutta se on myös "
+#~ "syntymäpaikkasi, jossa olet asunut koko elämäsi. Ellet halua menettää "
+#~ "kotiasi, puolusta sitä! "
+
+# TODO: grammar
+#~ msgid ""
+#~ "There is something mystical, like a grey atmosphere, about this three Oasis, "
+#~ "which noone found out, yet. Perhaps you will be the one, but be aware of the "
+#~ "others, who are searching, too!"
+#~ msgstr ""
+#~ "Näissä kolmessa keitaassa on jotain taianomaista; on kuin mysteerin usva "
+#~ "ympäröisi niitä. Kukaan ei ole vielä selvottänyt niiden tarkkaa sijaintia. "
+#~ "Kenties sinä olet onnellinen löytäjä, mutta varo - muitakin etsijöitä on "
+#~ "liikkeellä!"
+
+# TODO: grammar
+#~ msgid ""
+#~ "Another thaw set in. Three tribes were sheltering form severe winter among "
+#~ "majestic mountains. While solstice they listened to the oracle and went on "
+#~ "war. Only survivor will sacrifice his enemies treasures on the ancient "
+#~ "altar, build there a splendid castle and gain goodwill and the respect of "
+#~ "the Gods."
+#~ msgstr ""
+#~ "Talvi lämpeni jälleen suojasääksi. Kolme heimoa oli sinnitellyt ankaraa "
+#~ "talvea vastaan jylhien vuorten katveessa. Talvipäivänseisauksen aikaan he "
+#~ "kuuntelivat oraakkelia ja julistivat sodan. Viimeinen henkiin jäänyt heimo "
+#~ "uhraisi vihollistensa aarteet ikivanhalla alttarilla, rakentaisi sen "
+#~ "ympärille loisteliaan linnan ja saisi näin osakseen jumalten suosion ja "
+#~ "arvostuksen."
+
 #~ msgid ""
 #~ "In this mountainous region two princes have settled. Now they are expanding "
 #~ "their terretories unaware of the fact that they are not alone!"
 #~ msgstr ""
 #~ "Kaksi prinssiä on asettunut tälle vuoristoiselle alueelle. Nyt he "
 #~ "laajentavat alueitaan - tietämättöminä siitä, etteivät olekaan yksin!"
+
+#~ msgid ""
+#~ "Mighty mountains divide this land into three fertile valleys. But a path "
+#~ "connects the valleys and thus seems a fight inescapable! Hint: Water can be "
+#~ "found around the lakes."
+#~ msgstr ""
+#~ "Mahtavat vuoret jakavat tämän maan hedelmällisiin laaksoihin. Polku yhdistää "
+#~ "laaksot, ja täten näyttää siltä, että taistelulta ei voi välttyä! Vihje: "
+#~ "Vettä löytyy järvien ympäriltä."
+
+# TODO: grammar
+#~ msgid ""
+#~ "It seems as if this magical valley was inhabitated by wisents since the "
+#~ "beginning of days. When your tribe came to this place, you were sure that it "
+#~ "offers enough space for a peaceful life. But can you tribe live in peace "
+#~ "with your neighbours?"
+#~ msgstr ""
+#~ "Näyttää siltä, että tässä taianomaisessa laaksossa on asunut visenttejä "
+#~ "aikojen alusta lähtien. Kun heimosi saapui tänne, olitte varmoja, että se "
+#~ "tarjoaisi riittävästi tilaa rauhalliseen eloon. Vaan voiko heimosi elää "
+#~ "rauhassa naapurienkin kanssa?"
+
+#~ msgid ""
+#~ "In this mountainous region two princes have settled. Now they are expanding "
+#~ "their territories unaware of the fact that they are not alone!"
+#~ msgstr ""
+#~ "Kaksi prinssiä ovat asettuneet tälle vuoristoiselle alueelle. Nyt he "
+#~ "laajentavat reviirejään toisistaan tietämättöminä!"

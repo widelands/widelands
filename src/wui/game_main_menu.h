@@ -30,14 +30,16 @@ struct GameMainMenu : public UI::UniqueWindow {
 		(Interactive_Player &,
 		 UI::UniqueWindow::Registry &,
 		 Interactive_Player::Game_Main_Menu_Windows &);
+	
+	~GameMainMenu();
 
 private:
 	Interactive_Player                         & m_player;
 	Interactive_Player::Game_Main_Menu_Windows & m_windows;
-	UI::Callback_Button<GameMainMenu> general_stats;
-	UI::Callback_Button<GameMainMenu> ware_stats;
-	UI::Callback_Button<GameMainMenu> building_stats;
-	UI::Callback_Button<GameMainMenu> stock;
+	UI::Callback_Button general_stats;
+	UI::Callback_Button ware_stats;
+	UI::Callback_Button building_stats;
+	UI::Callback_Button stock;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint32_t hspacing() const {return 5;};
@@ -68,11 +70,6 @@ private:
 	uint32_t posy(uint32_t const nr, uint32_t const nr_rows) const {
 		return vmargin() + nr * (buttonh(nr_rows) + vspacing());
 	}
-
-	void clicked_general_stats ();
-	void clicked_ware_stats    ();
-	void clicked_building_stats();
-	void clicked_stock         ();
 };
 
 #endif

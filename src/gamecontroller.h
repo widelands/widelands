@@ -65,6 +65,23 @@ struct GameController {
 	virtual void setDesiredSpeed(uint32_t speed) = 0;
 
 	/**
+	 * Whether the game is paused.
+	 */
+	virtual bool isPaused() = 0;
+
+	/**
+	 * Sets whether the game is paused.
+	 */
+	virtual void setPaused(const bool paused) = 0;
+
+	/**
+	 * Toggle pause state (convenience function)
+	 */
+	void togglePaused() {
+		setPaused(not isPaused());
+	}
+
+	/**
 	 * Allocate a new \ref GameController suitable for normal singleplayer.
 	 * \param cpls is \c true when computer players should be generated
 	 * \return newly allocated \ref GameController object, must be freed

@@ -273,7 +273,7 @@ struct Cmd_SetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
 	Cmd_SetWareTargetQuantity
 		(int32_t duetime, Player_Number sender,
 		 uint32_t economy, Ware_Index index,
-		 uint32_t permanent, uint32_t temporary);
+		 uint32_t permanent);
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
@@ -287,7 +287,7 @@ struct Cmd_SetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
 	virtual void serialize (StreamWrite &);
 
 private:
-	uint32_t m_permanent, m_temporary;
+	uint32_t m_permanent;
 };
 
 struct Cmd_ResetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
@@ -317,7 +317,7 @@ struct Cmd_SetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
 	Cmd_SetWorkerTargetQuantity
 		(int32_t duetime, Player_Number sender,
 		 uint32_t economy, Ware_Index index,
-		 uint32_t permanent, uint32_t temporary);
+		 uint32_t permanent);
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
@@ -331,7 +331,7 @@ struct Cmd_SetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
 	virtual void serialize (StreamWrite &);
 
 private:
-	uint32_t m_permanent, m_temporary;
+	uint32_t m_permanent;
 };
 
 struct Cmd_ResetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
