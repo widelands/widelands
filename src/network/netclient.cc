@@ -421,6 +421,8 @@ void NetClient::setPlayerNumber(uint8_t const number)
 		  d->settings.players.at(number).state == PlayerSettings::stateComputer))
 		return;
 
+	
+	
 	// Send request
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_CHANGEPOSITION);
@@ -789,6 +791,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 		int32_t number = packet.Signed32();
 		d->settings.playernum = number;
 		d->settings.users.at(d->settings.usernum).position = number;
+		if (number >= d->settings.players.size())
+			NetGGZ::ref().set_spectator(true);
+		else
+			NetGGZ::ref().set_spectator(false);
 		break;
 	}
 	case NETCMD_WIN_CONDITION: {

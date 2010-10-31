@@ -317,6 +317,7 @@ void ggz_ggzmod::set_player()
 #ifdef USE_BOOST_THREADS
 	boost::unique_lock<boost::shared_mutex> sl(threadlock);
 #endif
+	log("GGZMOD ## switch to player\n");
 	m_seat_desired = true;
 	m_changed = true;
 }
@@ -326,6 +327,7 @@ void ggz_ggzmod::set_spectator()
 #ifdef USE_BOOST_THREADS
 	boost::unique_lock<boost::shared_mutex> sl(threadlock);
 #endif
+	log("GGZMOD ## switch to spectator\n");
 	m_seat_desired = false;
 	m_changed = true;
 }

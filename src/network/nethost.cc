@@ -1283,6 +1283,10 @@ void NetHost::setPlayer(uint8_t const number, PlayerSettings const ps)
 void NetHost::setPlayerNumber(uint8_t const number)
 {
 	switchToPlayer(0, number);
+	if (number >= d->settings.players.size())
+		NetGGZ::ref().set_spectator(true);
+	else
+		NetGGZ::ref().set_spectator(false);
 }
 
 void NetHost::setWinCondition(std::string wc)
