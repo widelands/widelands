@@ -32,7 +32,6 @@ struct Ship_Descr : Bob::Descr {
 		 std::string const & directory, Profile &, Section & global_s,
 		 Tribe_Descr const &);
 
-protected:
 	virtual Bob & create_object() const;
 };
 
@@ -54,6 +53,20 @@ private:
 	static const Task taskShipIdle;
 
 	void shipidle_update(Game &, State &);
+
+	// saving and loading
+protected:
+	struct Loader : Bob::Loader {
+		Loader();
+
+		virtual const Task * get_task(const std::string& name);
+	};
+
+public:
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+
+	static Map_Object::Loader * load
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
 
 } // namespace Widelands

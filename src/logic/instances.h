@@ -241,7 +241,8 @@ public:
 		header_Battle = 5,
 		header_Critter = 6,
 		header_Worker = 7,
-		header_WareInstance = 8
+		header_WareInstance = 8,
+		header_Ship = 9
 	};
 
 	/**
