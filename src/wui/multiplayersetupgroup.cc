@@ -191,17 +191,71 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			 0, 0, h, h,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 boost::bind
-				 (&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)),
+				 (&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)),
 			 std::string(), std::string(), true, false, fname, fsize);
 		add(team, UI::Box::AlignCenter);
 	}
 
 	void toggle_type() {}
 
-	void toggle_tribe() {}
+	/// Toggle through the tribes
+	void toggle_tribe() {
+		GameSettings const & settings = s->settings();
 
-	void toggle_init() {}
+		if (m_id >= settings.players.size())
+			return;
 
+		std::vector<PlayerSettings> pl = settings.players;
+		std::string const & currenttribe = pl.at(m_id).tribe;
+		std::string nexttribe = settings.tribes.at(0).name;
+
+		for (uint32_t i = 0; i < settings.tribes.size() - 1; ++i)
+			if (settings.tribes[i].name == currenttribe) {
+				nexttribe = settings.tribes.at(i + 1).name;
+				break;
+			}
+		s->setPlayerTribe(m_id, nexttribe);
+	}
+
+	/// Toggle through the initializations
+	void toggle_init() {
+		GameSettings const & settings = s->settings();
+
+		if (m_id >= settings.players.size())
+			return;
+
+		PlayerSettings const & player = settings.players[m_id];
+		container_iterate_const(std::vector<TribeBasicInfo>, settings.tribes, j)
+			if (j.current->name == player.tribe)
+				return
+					s->setPlayerInit
+						(m_id,
+						 (player.initialization_index + 1)
+						 %
+						 j.current->initializations.size());
+		assert(false);
+	}
+
+	/// Toggle through the teams
+	void toggle_team() {
+		const GameSettings & settings = s->settings();
+		
+		if (m_id >= settings.players.size())
+			return;
+		
+		Widelands::TeamNumber currentteam = settings.players.at(m_id).team;
+		Widelands::TeamNumber maxteam = settings.players.size() / 2;
+		Widelands::TeamNumber newteam;
+		
+		if (currentteam >= maxteam)
+			newteam = 0;
+		else
+			newteam = currentteam + 1;
+		
+		s->setPlayerTeam(m_id, newteam);
+	}
+
+	/// Refresh all user interfaces
 	void refresh() {
 		GameSettings const & settings = s->settings();
 

@@ -1317,10 +1317,17 @@ void NetHost::switchToPlayer(uint32_t user, uint8_t number)
 		if (op.state == PlayerSettings::stateOpen)
 			setPlayerState(number, PlayerSettings::stateHuman);
 		setPlayerName(number, op.name + " " + name + " ");
-		if (user == 0) // host
-			d->settings.playernum = number;
 	}
 	d->settings.users.at(user).position = number;
+	if (user == 0) // host
+		d->settings.playernum = number;
+	else
+		for (uint32_t j = 0; j < d->clients.size(); ++j)
+			if (d->clients.at(j).usernum == static_cast<int16_t>(user)) {
+				d->clients.at(j).playernum = number;
+				break;
+			}
+
 	// Broadcast the user changes to everybody
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_USER);

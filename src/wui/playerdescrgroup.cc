@@ -247,8 +247,7 @@ void PlayerDescriptionGroup::toggle_playertype()
 }
 
 /**
- * Cycle through available tribes for the player. And (if available) set
- * share kingdom mode.
+ * Cycle through available tribes for the player.
  */
 void PlayerDescriptionGroup::toggle_playertribe()
 {
