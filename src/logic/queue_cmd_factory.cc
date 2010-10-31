@@ -19,9 +19,10 @@
 
 #include "queue_cmd_factory.h"
 
+#include "cmd_calculate_statistics.h"
 #include "cmd_incorporate.h"
-#include "cmd_luascript.h"
 #include "cmd_luacoroutine.h"
+#include "cmd_luascript.h"
 #include "economy/cmd_call_economy_balance.h"
 #include "instances.h"
 #include "playercommand.h"
@@ -80,6 +81,8 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_LuaScript();
 	case QUEUE_CMD_LUACOROUTINE:
 		return *new Cmd_LuaCoroutine ();
+	case QUEUE_CMD_CALCULATE_STATISTICS :
+		return *new Cmd_CalculateStatistics ();
 	case QUEUE_CMD_CALL_ECONOMY_BALANCE:
 		return *new Cmd_Call_Economy_Balance ();
 	default:

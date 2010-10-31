@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,12 +45,9 @@ struct PlayerDescriptionGroup : public UI::Panel {
 	~PlayerDescriptionGroup();
 
 	void refresh();
-	void enable_pdg       (bool enable = true);
-	void show_tribe_button(bool show   = true);
 
 private:
 	void enable_player(bool);
-	void ready_player(bool);
 	void toggle_playertype();
 	void toggle_playertribe();
 	void toggle_playerinit();

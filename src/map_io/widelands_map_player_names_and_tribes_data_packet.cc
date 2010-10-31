@@ -72,7 +72,6 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 				map->set_scenario_player_name (p, s.get_string ("name",   ""));
 				map->set_scenario_player_tribe(p, s.get_string ("tribe",  ""));
 				map->set_scenario_player_ai   (p, s.get_string ("ai",     ""));
-				map->set_player_partner       (p, s.get_natural("partner", 0));
 			}
 		} else
 			throw game_data_error
@@ -102,7 +101,6 @@ throw (_wexception)
 		s.set_string ("name",    map.get_scenario_player_name (p));
 		s.set_string ("tribe",   map.get_scenario_player_tribe(p));
 		s.set_string ("ai",      map.get_scenario_player_ai   (p));
-		s.set_int    ("partner", map.get_player_partner       (p));
 	}
 
 	prof.write("player_names", false, fs);
