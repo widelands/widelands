@@ -38,7 +38,7 @@ static const char pic_policy_remove[] = "pics/stock_policy_remove.png";
  * Extends the wares display to show and modify stock policy of items.
  */
 struct WarehouseWaresDisplay : WaresDisplay {
-	WarehouseWaresDisplay(UI::Panel * parent, uint32_t width, Interactive_GameBase &, Warehouse &, wdType type);
+	WarehouseWaresDisplay(UI::Panel * parent, uint32_t width, Interactive_GameBase &, Warehouse &, wdType type, bool selectable);
 
 protected:
 	virtual void draw_ware(RenderTarget& dst, Widelands::Ware_Index ware);
@@ -49,9 +49,9 @@ private:
 };
 
 WarehouseWaresDisplay::WarehouseWaresDisplay
-	(UI::Panel* parent, uint32_t width, Interactive_GameBase & igbase, Warehouse& wh, wdType type)
+	(UI::Panel* parent, uint32_t width, Interactive_GameBase & igbase, Warehouse& wh, wdType type, bool selectable)
 :
-WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, true),
+WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable),
 m_igbase(igbase),
 m_warehouse(wh)
 {
@@ -86,26 +86,27 @@ struct WarehouseWaresPanel : UI::Box {
 
 	void set_policy(Warehouse::StockPolicy);
 private:
-	WarehouseWaresDisplay m_display;
 	Interactive_GameBase & m_gb;
 	Warehouse & m_wh;
+	bool m_can_act;
 	WaresDisplay::wdType m_type;
-
+	WarehouseWaresDisplay m_display;
 };
 
 WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel * parent, uint32_t width, Interactive_GameBase & gb, Warehouse & wh, WaresDisplay::wdType type) :
 	UI::Box(parent, 0, 0, UI::Box::Vertical),
-	m_display(this, width, gb, wh, type),
 	m_gb(gb),
 	m_wh(wh),
-	m_type(type)
+	m_can_act(m_gb.can_act(m_wh.owner().player_number())),
+	m_type(type),
+	m_display(this, width, m_gb, m_wh, m_type, m_can_act)
 {
 	add(&m_display, UI::Box::AlignLeft, true);
 
-	UI::Box *buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	add(buttons, UI::Box::AlignLeft);
-		
-	if (m_gb.can_act(m_wh.owner().player_number())) {
+	if (m_can_act) {
+		UI::Box *buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+		add(buttons, UI::Box::AlignLeft);
+			
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                    \
         	buttons->add(new UI::Callback_Button(                     \
 			buttons, #policy,                                 \
