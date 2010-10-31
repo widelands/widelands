@@ -112,7 +112,6 @@ WidelandsServer::~WidelandsServer()
 
 		if (it->second->ggz_number() >= 0)
 			stat_handler().dump_player(it->second->ggz_number());
-
 		it++;
 	}
 
@@ -239,6 +238,7 @@ void WidelandsServer::dump_clients()
 		else
 			wllog
 				(DL_DUMP, "Client \"%s\": no client structure", it->first.c_str());
+		it++;
 	}
 }
 
