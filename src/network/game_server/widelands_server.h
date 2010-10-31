@@ -70,6 +70,8 @@ class WidelandsServer : public GGZGameServer
 		void check_reports();
 		bool is_playing() { return state() == GGZGameServer::waiting; }
 
+		void dump_clients();
+
 	private:
 		// @{
 		/// These event functions are invoked by ggzd

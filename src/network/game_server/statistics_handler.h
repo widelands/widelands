@@ -48,9 +48,14 @@ class StatisticsHandler {
 		WidelandsMap & map() {return m_map; }
 		int game_end_time() { return m_result_gametime; }
 		void evaluate();
-		
+		void dump_player(int num);
+
 		WidelandsPlayer * get_player(int wlnum) {
 			return m_players[wlnum];
+		}
+		
+		int highest_playernum() {
+			return m_players.rbegin()->first;
 		}
 	private:
 		std::map<int, WidelandsPlayer *> m_players;

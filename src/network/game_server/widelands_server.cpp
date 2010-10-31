@@ -109,18 +109,10 @@ WidelandsServer::~WidelandsServer()
 			(DL_DUMP, "Client (ggz: %i, wl: %i) %s",
 			 it->second->ggz_number(), it->second->wl_player_number(),
 			 it->first.c_str());
-/*
-		wllog
-			(DL_DUMP, "     Stats: land: %i, buildings: %i, economy-strength: %i",
-			 it->second->last_stats.land, it->second->last_stats.buildings,
-			 it->second->last_stats.economystrength);
 
-		wllog
-			(DL_DUMP, "            points: %i, milbuildingslost: %i, "
-			 "civbuildingslost: %i",
-			 it->second->points, it->second->last_stats.milbuildingslost,
-			 it->second->last_stats.civbuildingslost);
-*/
+		if (it->second->ggz_number() >= 0)
+			stat_handler().dump_player(it->second->ggz_number());
+
 		it++;
 	}
 
@@ -229,7 +221,27 @@ void WidelandsServer::joinEvent(Client * const client)
 	wllog
 		(DL_DUMP, "Player %i \"%s\" (%s)", client->number,
 		 client->name.c_str(), (client->spectator?"spectator":"player"));
+	dump_clients();
 }
+
+void WidelandsServer::dump_clients()
+{
+	std::map<std::string,WidelandsClient *>::iterator it =
+		m_clients.begin();
+	while (it != m_clients.end()) {
+		WidelandsClient & c = *it->second;
+		if (&c)
+			wllog
+				(DL_DUMP, "Client \"%s\"(%i): wl-num: %i %s (%s)",
+				 it->first.c_str(), c.ggz_number(), c.wl_player_number(),
+				 c.support_build16_proto()?">b16proto":"b15proto",
+				 is_host(&c)?"host":"client");
+		else
+			wllog
+				(DL_DUMP, "Client \"%s\": no client structure", it->first.c_str());
+	}
+}
+
 
 void WidelandsServer::dataEvent(Client* client)
 {
@@ -268,6 +280,7 @@ void WidelandsServer::leaveEvent(Client * client)
 	wllog
 		(DL_INFO, "leaveEvent \"%s\" (%i), fd=%i",
 		 client->name.c_str(), client->number, client->fd);
+	dump_clients();
 	if (host)
 		set_state_done();
 }
@@ -282,6 +295,7 @@ void WidelandsServer::spectatorJoinEvent(Client * client)
 	m_clients[client->name] = new WidelandsClient(client->name, client->number);
 	wllog
 		(DL_INFO, "spectatorJoinEvent \"%s\"", client->name.c_str());
+	dump_clients();
 }
 
 // Spectator leave event (ignored)
@@ -299,6 +313,7 @@ void WidelandsServer::spectatorLeaveEvent(Client * client)
 	assert(m_clients[client->name]);
 	delete m_clients[client->name];
 	m_clients[client->name] = NULL;
+	dump_clients();
 }
 
 // Spectator data event (ignored)
@@ -351,6 +366,7 @@ void WidelandsServer::seatEvent(Seat* seat)
 				it++;
 	}
 */
+	dump_clients();
 }
 
 void WidelandsServer::spectatorEvent(Spectator* spectator)
@@ -374,12 +390,13 @@ void WidelandsServer::spectatorEvent(Spectator* spectator)
 	else
 		wllog(DL_DEBUG, "Unknown player stand up");
 */
+	dump_clients();
 }
 
 
 void WidelandsServer::game_done()
 {
-/*
+
 	GGZGameResult results[g_wls->players()];
 	int score[players()], teams[players()];
 	for (int p = 0; p < players(); p++) {
@@ -458,16 +475,18 @@ void WidelandsServer::game_done()
 			"#################################################################" <<
 			std::endl << "Players:" << std::endl << std::endl;
 
-		std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
-		while(it != m_players.end())
+		for (int i = 0; i <= stat_handler().highest_playernum(); i++)
 		{
-			WidelandsPlayer & player = *(it->second);
-			std::string playername = it->first;
+			WidelandsPlayer & player = *stat_handler().get_player(i);
+			if (not &player)
+				continue;
+			std::string playername = player.name();
 			wllog(DL_DEBUG, "Write player to file: %s", playername.c_str());
 
 			mfile << "Player \"" << playername << "\"" << std::endl;
-			mfile << "Widelands number: " << player.wl_player_number() << std::endl;
-			mfile << "GGZ seat number: " << player.ggz_player_number() << std::endl;
+			mfile << "Widelands number: " << player.wlid() << std::endl;
+			//mfile << "GGZ seat number: " << player.ggz_player_number() << std::endl;
+			/*
 			mfile << "Player type: ";
 			if (player.is_spectator())
 				mfile << "spectator ";
@@ -475,6 +494,7 @@ void WidelandsServer::game_done()
 				mfile << "player ";
 			if (player.is_host())
 				mfile << "host";
+			*/
 			mfile << std::endl;
 			mfile << "Tribe: " << player.tribe() << std::endl;
 			mfile << "Team: " << player.team() << std::endl;
@@ -497,8 +517,10 @@ void WidelandsServer::game_done()
 
 			mfile << "Points: " << player.points << std::endl;
 
+/*
 			mfile << "Version: " << player.version() << std::endl;
 			mfile << "Build: " << player.build() << std::endl;
+*/
 			
 			mfile << std::endl <<
 				"(land, buildings, milbuildingslost, civbuildingslost, "
@@ -523,56 +545,55 @@ void WidelandsServer::game_done()
 			mfile << std::endl << "Statistics (avg, min, max) every five minutes:"
 				<< std::endl;
 
-			for (int i = 0; i < player.stats_avg.size(); i++)
+			for (int i = 0; i < player.stats.buildings.size(); i++)
 			{
 				try {
 				mfile << i << ": (";
-				mfile << player.stats_avg.at(i).land << " (" <<
-					player.stats_min.at(i).land << ", " <<
-					player.stats_max.at(i).land << "), ";
-				mfile << player.stats_avg.at(i).buildings << " (" <<
-					player.stats_min.at(i).buildings << ", " <<
-					player.stats_max.at(i).buildings << "), ";
-				mfile << player.stats_avg.at(i).milbuildingslost << " (" <<
-					player.stats_min.at(i).milbuildingslost << ", " <<
-					player.stats_max.at(i).milbuildingslost << "), ";
-				mfile << player.stats_avg.at(i).civbuildingslost << " (" <<
-					player.stats_min.at(i).civbuildingslost << ", " <<
-					player.stats_max.at(i).civbuildingslost << "), ";
-				mfile << player.stats_avg.at(i).buildingsdefeat << " (" <<
-					player.stats_min.at(i).buildingsdefeat << ", " <<
-					player.stats_max.at(i).buildingsdefeat << "), ";
-				mfile << player.stats_avg.at(i).milbuildingsconq << " (" <<
-					player.stats_min.at(i).milbuildingsconq << ", " <<
-					player.stats_max.at(i).milbuildingsconq << "), ";
-				mfile << player.stats_avg.at(i).economystrength << " (" <<
-					player.stats_min.at(i).economystrength << ", " <<
-					player.stats_max.at(i).economystrength << "), ";
-				mfile << player.stats_avg.at(i).militarystrength << " (" <<
-					player.stats_min.at(i).militarystrength << ", " <<
-					player.stats_max.at(i).militarystrength << "), ";
-				mfile << player.stats_avg.at(i).workers << " (" <<
-					player.stats_min.at(i).workers << ", " <<
-					player.stats_max.at(i).workers << "), ";
-				mfile << player.stats_avg.at(i).wares << " (" <<
-					player.stats_min.at(i).wares << ", " <<
-					player.stats_max.at(i).wares << "), ";
-				mfile << player.stats_avg.at(i).productivity << " (" <<
-					player.stats_min.at(i).productivity << ", " <<
-					player.stats_max.at(i).productivity << "), ";
-				mfile << player.stats_avg.at(i).casualties << " (" <<
-					player.stats_min.at(i).casualties << ", " <<
-					player.stats_max.at(i).casualties << "), ";
-				mfile << player.stats_avg.at(i).kills << " (" <<
-					player.stats_min.at(i).kills << ", " <<
-					player.stats_max.at(i).kills << "))" << std::endl;
+				mfile << player.stats.land.at(i).avg << " (" <<
+					player.stats.land.at(i).min << ", " <<
+					player.stats.land.at(i).max << "), ";
+				mfile << player.stats.buildings.at(i).avg << " (" <<
+					player.stats.buildings.at(i).min << ", " <<
+					player.stats.buildings.at(i).max << "), ";
+				mfile << player.stats.milbuildingslost.at(i).avg << " (" <<
+					player.stats.milbuildingslost.at(i).min << ", " <<
+					player.stats.milbuildingslost.at(i).max << "), ";
+				mfile << player.stats.civbuildingslost.at(i).avg << " (" <<
+					player.stats.civbuildingslost.at(i).min << ", " <<
+					player.stats.civbuildingslost.at(i).max << "), ";
+				mfile << player.stats.buildingsdefeat.at(i).avg << " (" <<
+					player.stats.buildingsdefeat.at(i).min << ", " <<
+					player.stats.buildingsdefeat.at(i).max << "), ";
+				mfile << player.stats.milbuildingsconq.at(i).avg << " (" <<
+					player.stats.milbuildingsconq.at(i).min << ", " <<
+					player.stats.milbuildingsconq.at(i).max << "), ";
+				mfile << player.stats.economystrength.at(i).avg << " (" <<
+					player.stats.economystrength.at(i).min << ", " <<
+					player.stats.economystrength.at(i).max << "), ";
+				mfile << player.stats.militarystrength.at(i).avg << " (" <<
+					player.stats.militarystrength.at(i).min << ", " <<
+					player.stats.militarystrength.at(i).max << "), ";
+				mfile << player.stats.workers.at(i).avg << " (" <<
+					player.stats.workers.at(i).min << ", " <<
+					player.stats.workers.at(i).max << "), ";
+				mfile << player.stats.wares.at(i).avg << " (" <<
+					player.stats.wares.at(i).min << ", " <<
+					player.stats.wares.at(i).max << "), ";
+				mfile << player.stats.productivity.at(i).avg << " (" <<
+					player.stats.productivity.at(i).min << ", " <<
+					player.stats.productivity.at(i).max << "), ";
+				mfile << player.stats.casualties.at(i).avg << " (" <<
+					player.stats.casualties.at(i).min << ", " <<
+					player.stats.casualties.at(i).max << "), ";
+				mfile << player.stats.kills.at(i).avg << " (" <<
+					player.stats.kills.at(i).min << ", " <<
+					player.stats.kills.at(i).max << "))" << std::endl;
 				} catch (std::exception e) {
 					wllog(DL_ERROR, "catched std::exception: %s", e.what());
 					mfile << "Error: catched exception" << std::endl;
 				}
 			}
 			mfile << std::endl << std::endl;
-			it++;
 		}
 		wllog(DL_DEBUG, "Game Information written to file");
 		mfile.close();
@@ -581,6 +602,7 @@ void WidelandsServer::game_done()
 	if (wlstat.map().gametype() == gametype_defeatall)
 	{
 		wllog(DL_INFO, "gametype defeat all");
+/*
 		std::map<std::string, WidelandsPlayer*>::iterator it =
 			g_wls->m_players.begin();
 		int number = 0;
@@ -619,6 +641,7 @@ void WidelandsServer::game_done()
 		// TODO feed teams to reportGame
 		if (number > 1 and wlstat.game_end_time() > (30 * 60 * 1000))
 			reportGame(NULL, results, score);
+		*/
 	}
 	else if (wlstat.map().gametype() == gametype_tribes_together)
 	{
@@ -627,7 +650,7 @@ void WidelandsServer::game_done()
 	else if (wlstat.map().gametype() == gametype_collectors)
 	{
 		wllog(DL_INFO, "gametype collectors");
-
+/*
 		std::map<std::string,WidelandsPlayer*>::iterator it =
 			g_wls->m_players.begin();
 		int number = 0;
@@ -663,6 +686,7 @@ void WidelandsServer::game_done()
 			wllog(DL_WARN, "Less than two player in game. Do not report");
 		if(number > 1)
 			reportGame(NULL, results, score);
+		*/
 	}
 	else if (wlstat.map().gametype() == gametype_endless)
 		wllog(DL_INFO, "gametype_endless");
@@ -673,7 +697,7 @@ void WidelandsServer::game_done()
 	else
 		wllog(DL_ERROR, "Error: Unknow gametype! cannot report game");
 	m_reported = true;
-	*/
+
 	set_state_done();
 }
 

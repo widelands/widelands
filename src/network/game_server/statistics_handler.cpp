@@ -186,9 +186,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 
 	wllog(DL_INFO, "GAMEINFO: number of players %i", m_players.size());
 
-
-#warning need highest player number here
-	for (int i=0; i < m_players.size(); i++)
+	for (int i=0; i < highest_playernum(); i++)
 	{
 		WidelandsPlayer * plr = get_player(i);
 		if (plr)
@@ -594,3 +592,33 @@ void StatisticsHandler::evaluate()
 		}
 	}
 }
+
+void StatisticsHandler::dump_player(int num)
+{
+	WidelandsPlayer & p = *get_player(num);
+	if (not &p) {
+		wllog(DL_WARN, "dump_player(%i): do not have player", num);
+		return;
+	}
+	wllog(DL_DUMP, "Player (%i): \"%s\"", p.wlid(), p.name().c_str());
+	if (p.result == gamestatresult_winner)
+		wllog(DL_DUMP, "    won, points: %i (time: %i)", p.points, p.end_time());
+	else if (p.result == gamestatresult_looser)
+		wllog(DL_DUMP, "    lost, points: %i (time: %i)", p.points, p.end_time());
+	else if (p.result == gamestatresult_leave)
+		wllog(DL_DUMP, "    left the game, points: %i (time: %i)", p.points, p.end_time());
+	else 
+		wllog(DL_DUMP, "    unknown result, points: %i (time: %i)", p.points, p.end_time());
+
+	wllog
+		(DL_DUMP, "     Stats: land: %i, buildings: %i, economy-strength: %i",
+		 p.last_stats.land, p.last_stats.buildings,
+		 p.last_stats.economystrength);
+
+	wllog
+		(DL_DUMP, "            points: %i, milbuildingslost: %i, "
+		 "civbuildingslost: %i",
+		 p.points, p.last_stats.milbuildingslost,
+		 p.last_stats.civbuildingslost);
+}
+
