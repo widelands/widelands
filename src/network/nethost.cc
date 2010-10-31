@@ -57,18 +57,15 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	virtual GameSettings const & settings() {return h->settings();}
 
 	virtual bool canChangeMap() {return true;}
-	virtual bool canChangePlayerState(uint8_t const number) {
-		return number != settings().playernum;
+	virtual bool canChangePlayerState(uint8_t const) {
+		return true;
 	}
 	virtual bool canChangePlayerTribe(uint8_t const number) {
 		if (settings().scenario)
 			return false;
-		if (number == settings().playernum)
-			return true;
 		if (number >= settings().players.size())
 			return false;
-		return
-			settings().players.at(number).state == PlayerSettings::stateComputer;
+		return true;
 	}
 	virtual bool canChangePlayerInit(uint8_t const number) {
 		if (settings().scenario)
@@ -105,9 +102,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerState(number, state);
 	}
 	virtual void nextPlayerState(uint8_t const number) {
-		if
-			(number == settings().playernum ||
-			 number > settings().players.size())
+		if (number > settings().players.size())
 			return;
 
 		PlayerSettings::State newstate = PlayerSettings::stateClosed;
@@ -134,7 +129,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			} while (it != impls.end());
 			if (it == impls.end()) {
 				setPlayerAI(number, std::string());
-				newstate = PlayerSettings::stateOpen;
+				setPlayerName(number, std::string());
+				newstate = PlayerSettings::stateClosed;
 			} else {
 				setPlayerAI(number, (*it)->name);
 				newstate = PlayerSettings::stateComputer;
@@ -1471,7 +1467,7 @@ std::string NetHost::getComputerPlayerName(uint8_t const playernum)
 	uint32_t suffix = playernum;
 	do {
 		char buf[200];
-		snprintf(buf, sizeof(buf), _("Computer %u"), ++suffix);
+		snprintf(buf, sizeof(buf), _("Computer%u"), ++suffix);
 		name = buf;
 	} while (haveUserName(name, playernum));
 	return name;

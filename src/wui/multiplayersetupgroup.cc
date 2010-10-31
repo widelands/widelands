@@ -196,7 +196,15 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		add(team, UI::Box::AlignCenter);
 	}
 
-	void toggle_type() {}
+	/// Toggle through the types
+	void toggle_type() {
+		if (m_id >= s->settings().players.size())
+			return;
+
+		assert(s->settings().usernum == 0);
+
+		s->nextPlayerState(m_id);
+	}
 
 	/// Toggle through the tribes
 	void toggle_tribe() {
@@ -273,10 +281,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		bool teamaccess       = s->canChangePlayerTeam(m_id);
 
 		if (player.state == PlayerSettings::stateClosed) {
+			type ->set_tooltip(_("Closed"));
+			type ->set_pic(g_gr->get_picture(PicMod_UI, "pics/stop.png"));
 			team ->set_visible(false);
 			team ->set_enabled(false);
-			type ->set_visible(false);
-			type ->set_enabled(false);
 			tribe->set_visible(false);
 			tribe->set_enabled(false);
 			init ->set_visible(false);
@@ -286,27 +294,32 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type->set_enabled(typeaccess);
 
 			if (player.state == PlayerSettings::stateOpen) {
-				type ->set_title(_("Open"));
+				type ->set_tooltip(_("Open"));
+				type ->set_pic(g_gr->get_picture(PicMod_UI, "pics/continue.png"));
 				team ->set_visible(false);
-				team ->set_visible(false);
+				team ->set_enabled(false);
 				tribe->set_visible(false);
-				init ->set_visible(false);
 				tribe->set_enabled(false);
+				init ->set_visible(false);
 				init ->set_enabled(false);
 			} else {
 				std::string title;
-
+				std::string pic = "pics/";
 				if (player.state == PlayerSettings::stateComputer) {
-					if (player.ai.empty())
+					if (player.ai.empty()) {
 						title = _("Computer");
-					else {
+						pic += "novalue.png";
+					} else {
 						title = _("AI: ");
 						title += _(player.ai);
+						pic += "ai_" + player.ai + ".png";
 					}
 				} else { // PlayerSettings::stateHuman
 					title = _("Human");
+					pic += "genstats_nrworkers.png";
 				}
-				type->set_title(title);
+				type->set_tooltip(title.c_str());
+				type->set_pic(g_gr->get_picture(PicMod_UI, pic));
 				std::string tribepath("tribes/" + player.tribe);
 				if (!m_tribenames[player.tribe].size()) {
 					// get tribes name and picture
