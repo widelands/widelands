@@ -394,11 +394,68 @@ m_buth(buth),
 m_fsize(fsize),
 m_fname(fname)
 {
+	// Clientbox and labels
+	labels.push_back
+		(new UI::Textarea
+			(this,
+			 UI::Scrollbar::Size * 6 / 5, buth / 3,
+			 w / 3 - buth - UI::Scrollbar::Size * 2, buth));
+	labels.back()->set_text(_("Client name"));
+	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+
+	labels.push_back
+		(new UI::Textarea
+			(this,
+			 w / 3 - buth - UI::Scrollbar::Size * 6 / 5, buth / 3,
+			 buth * 2, buth));
+	labels.back()->set_text(_("Modus"));
+	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+
+	clientbox.set_size(w / 3, h - buth);
+	clientbox.set_scrolling(true);
 	c.resize(MAXCLIENTS);
 	for (uint32_t i = 0; i < c.size(); ++i) {
 		c.at(i) = 0;
 	}
-	playerbox.set_size(w / 3, h - buth);
+
+	// Playerbox and labels
+	labels.push_back
+		(new UI::Textarea
+			(this,
+			 w * 6 / 15, buth / 3,
+			 buth, buth));
+	labels.back()->set_text(_("Start"));
+	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+
+	labels.push_back
+		(new UI::Textarea
+			(this,
+			 w * 6 / 15 + buth, buth / 3,
+			 buth, buth));
+	labels.back()->set_text(_("Type"));
+	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+
+	labels.push_back
+		(new UI::Textarea
+			(this,
+			 w * 6 / 15 + buth * 2, buth / 3,
+			 buth, buth));
+	labels.back()->set_text(_("Tribe"));
+	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+
+	labels.push_back
+		(new UI::Textarea
+			(this,
+			 w * 6 / 15 + buth * 3, buth / 3,
+			 w * 9 / 15 - 4 * buth, buth));
+	labels.back()->set_text(_("Initialization"));
+	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+
+	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth));
+	labels.back()->set_text(_("Team"));
+	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+
+	playerbox.set_size(w * 9 / 15, h - buth);
 	p.resize(MAX_PLAYERS);
 	for (uint8_t i = 0; i < p.size(); ++i) {
 		p.at(i) = new MultiPlayerPlayerGroup
@@ -408,8 +465,6 @@ m_fname(fname)
 			 m_tribepics, m_tribenames);
 		playerbox.add(&*p.at(i), 1);
 	}
-	clientbox.set_size(w / 3, h - buth);
-	clientbox.set_scrolling(true);
 	refresh();
 }
 

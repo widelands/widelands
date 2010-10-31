@@ -23,6 +23,7 @@
 #include "constants.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
+#include "ui_basic/textarea.h"
 
 #include <string>
 
@@ -57,6 +58,7 @@ private:
 	std::vector<MultiPlayerClientGroup *> c;
 	std::vector<MultiPlayerPlayerGroup *> p;
 	UI::Box                  clientbox, playerbox;
+	std::vector<UI::Textarea *> labels;
 
 	uint32_t    m_buth, m_fsize;
 	std::string m_fname;
