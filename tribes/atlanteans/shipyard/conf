@@ -16,8 +16,8 @@ trunk=2
 spidercloth=4
 
 [programs]
-work=_Work
 ship=_Constructing ship
+work=_Work
 
 [work]
 sleep=20000
@@ -30,18 +30,19 @@ call=ship
 
 [ship]
 construct=shipconstruction buildship 6
+return=completed
 
 [idle]
 pics=shipyard_i_??.png  # ???
 hotspot=55 60
 playercolor=true
 
-[working]
-pics=shipyard_w_??.png  # ???
-hotspot=55 60
-playercolor=true
-
-[outofhouse]
-pics=shipyard_w_??.png  # ???
-hotspot=55 60
-playercolor=true
+#[working]
+#pics=shipyard_w_??.png  # ???
+#hotspot=55 60
+#playercolor=true
+#
+#[outofhouse]
+#pics=shipyard_w_??.png  # ???
+#hotspot=55 60
+#playercolor=true

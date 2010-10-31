@@ -12,6 +12,6 @@ construction=idle 210000
 remove=
 
 [idle]
-pics=ship_i_??.png
+pics=shipbuild_??.png
 hotspot=55 60
 playercolor=true

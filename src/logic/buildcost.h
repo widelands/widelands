@@ -32,6 +32,8 @@ struct Tribe_Descr;
 
 struct Buildcost : std::map<Ware_Index, uint8_t> {
 	void parse(const Tribe_Descr & tribe, Section & buildcost_s);
+
+	uint32_t total() const;
 };
 
 } // namespace Widelands

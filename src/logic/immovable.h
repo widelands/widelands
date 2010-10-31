@@ -191,6 +191,8 @@ protected:
 
 	uint32_t                     m_anim;
 	int32_t                      m_animstart;
+	uint32_t m_anim_construction_total;
+	uint32_t m_anim_construction_done;
 
 	const ImmovableProgram * m_program;
 	uint32_t m_program_ptr; ///< index of next instruction to execute
@@ -228,6 +230,9 @@ public:
 
 private:
 	void increment_program_pointer();
+
+	void draw_construction
+		(const Editor_Game_Base &, RenderTarget &, const Point);
 };
 
 

@@ -8,11 +8,11 @@ carrier=1
 
 [buildship]
 0=walk object-or-coords
-1=createitem shipconstruction unless object
+1=plant tribe:shipconstruction unless object
 2=playFX ../../../sound/sawmill/sawmill 230
-3=animation idle 5000
+3=animation idle 500
 4=construct
-5=animation idle 2000
+5=animation idle 5000
 6=return
 
 [idle]

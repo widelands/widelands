@@ -1482,6 +1482,10 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 bool ProductionProgram::ActConstruct::get_building_work(Game& game, ProductionSite& psite, Worker& worker) const
 {
 	ProductionSite::State & state = psite.top_state();
+	if (state.phase >= 1) {
+		psite.program_step(game);
+		return false;
+	}
 
 	// First step: figure out which ware item to bring along
 	Buildcost remaining;
@@ -1522,6 +1526,8 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game, ProductionSi
 	worker.start_task_program(game, workerprogram);
 	worker.top_state().objvar1 = construction;
 	worker.top_state().coords = state.coord;
+
+	state.phase = 1;
 	return true;
 }
 

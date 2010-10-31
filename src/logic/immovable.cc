@@ -29,6 +29,8 @@
 #include "map.h"
 #include "mapfringeregion.h"
 #include "profile/profile.h"
+#include "graphic/animation_gfx.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
@@ -342,6 +344,8 @@ IMPLEMENTATION
 Immovable::Immovable(const Immovable_Descr & imm_descr) :
 BaseImmovable (imm_descr),
 m_anim        (0),
+m_anim_construction_total(0),
+m_anim_construction_done(0),
 m_program     (0),
 m_program_ptr (0),
 m_program_step(0),
@@ -388,6 +392,7 @@ void Immovable::start_animation
 {
 	m_anim      = anim;
 	m_animstart = egbase.get_gametime();
+	m_anim_construction_done = m_anim_construction_total = 0;
 }
 
 
@@ -487,9 +492,47 @@ void Immovable::draw
 	 FCoords,
 	 Point                    const pos)
 {
-	if (m_anim)
-		dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, 0);
+	if (m_anim) {
+		if (!m_anim_construction_total)
+			dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, 0);
+		else
+			draw_construction(game, dst, pos);
+	}
 }
+
+void Immovable::draw_construction(const Editor_Game_Base& game, RenderTarget& dst, const Point pos)
+{
+	const int32_t steptime = 5000;
+	uint32_t total = m_anim_construction_total * steptime;
+	uint32_t done = 0;
+
+	if (m_anim_construction_done > 0) {
+		done = steptime * (m_anim_construction_done - 1);
+		done += std::min(steptime, game.get_gametime() - m_animstart);
+	}
+
+	if (done > total)
+		done = total;
+
+	const AnimationGfx::Index nr_frames = g_gr->nr_frames(m_anim);
+	uint32_t frametime = g_anim.get_animation(m_anim)->frametime;
+	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
+	const AnimationGfx::Index current_frame = done / units_per_frame;
+	uint32_t curw, curh;
+	g_gr->get_animation_size(m_anim, current_frame * frametime, curw, curh);
+
+	uint32_t lines = ((done % units_per_frame) * curh) / units_per_frame;
+
+	if (current_frame > 0) {
+		// Not the first pic, so draw the previous one in the back
+		dst.drawanim(pos, m_anim, (current_frame-1) * frametime);
+	}
+
+	assert(lines <= curh);
+	dst.drawanimrect
+		(pos, m_anim, current_frame * frametime, 0, Rect(Point(0, curh - lines), curw, lines));
+}
+
 
 /**
  * Returns whether this immovable was reserved by a worker.
@@ -1060,6 +1103,9 @@ void ImmovableProgram::ActConstruction::execute(Game & g, Immovable & imm) const
 		// First execution
 		d = new ActConstructionData;
 		imm.set_action_data(d);
+
+		imm.start_animation(g, m_animid);
+		imm.m_anim_construction_total = imm.descr().buildcost().total();
 	} else {
 		// Decay timeout
 		uint32_t totaldelivered = 0;
@@ -1080,6 +1126,8 @@ void ImmovableProgram::ActConstruction::execute(Game & g, Immovable & imm) const
 
 			randdecay -= it->second;
 		}
+
+		imm.m_anim_construction_done = d->delivered.total();
 	}
 
 	imm.m_program_step = imm.schedule_act(g, m_decaytime);
@@ -1119,11 +1167,18 @@ bool Immovable::construct_ware_item(Game & game, Ware_Index index)
 	if (!d)
 		return false;
 
+	molog("construct_ware_item: index %u", index.value());
+
 	Buildcost::iterator it = d->delivered.find(index);
 	if (it != d->delivered.end())
 		it->second++;
 	else
 		d->delivered[index] = 1;
+
+	m_anim_construction_done = d->delivered.total();
+	m_animstart = game.get_gametime();
+
+	molog("construct_ware_item: total %u delivered: %u", index.value(), d->delivered[index]);
 
 	Buildcost remaining;
 	construct_remaining_buildcost(game, &remaining);
@@ -1136,7 +1191,6 @@ bool Immovable::construct_ware_item(Game & game, Ware_Index index)
 
 	return true;
 }
-
 
 
 /*

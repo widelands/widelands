@@ -53,7 +53,7 @@ struct SDL_Surface;
 struct SDL_Rect;
 
 //@{
-/// This table is used by create_grayed_out_pic() 
+/// This table is used by create_grayed_out_pic()
 /// to map colors to grayscle. It is initialized in Graphic::Graphic()
 extern uint32_t luminance_table_r[0x100];
 extern uint32_t luminance_table_g[0x100];
@@ -173,6 +173,7 @@ struct Graphic {
 
 	void load_animations(UI::ProgressWindow & loader_ui);
 	AnimationGfx::Index nr_frames(uint32_t const anim = 0) const;
+	uint32_t get_animation_frametime(uint32_t const anim) const;
 	void get_animation_size
 		(const uint32_t anim,
 		 const uint32_t time,
@@ -206,7 +207,7 @@ protected:
 	SDL_Surface * m_sdl_screen;
 	/// A RenderTarget for m_screen. This is initialized during init()
 	RenderTarget * m_rendertarget;
-	/// keeps track which screen regions needs to be redrawn 
+	/// keeps track which screen regions needs to be redrawn
 	/// during the next update(). Only used for SDL rendering.
 	SDL_Rect m_update_rects[MAX_RECTS];
 	/// saves how many screen regions need updating. @see m_update_rects

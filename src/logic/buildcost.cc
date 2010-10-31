@@ -48,4 +48,15 @@ void Buildcost::parse(const Tribe_Descr & tribe, Section & buildcost_s)
 		}
 }
 
+/**
+ * Compute the total buildcost.
+ */
+uint32_t Buildcost::total() const
+{
+	uint32_t sum = 0;
+	for(const_iterator it = begin(); it != end(); ++it)
+		sum += it->second;
+	return sum;
+}
+
 } // namespace Widelands

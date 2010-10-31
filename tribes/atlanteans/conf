@@ -46,6 +46,7 @@ resi_iron1=_Resource indicator iron little
 resi_iron2=_Resource indicator iron much
 resi_none=_Resource indicator no resource
 resi_water1=_Resource indicator water
+shipconstruction=_Ship construction site
 
 [ware types]
 advanced_shield=_Advanced Shield
