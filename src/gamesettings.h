@@ -62,7 +62,7 @@ struct GameSettings {
 	GameSettings() : savegame(false) {}
 
 	/// Number of player position
-	int8_t playernum;
+	int16_t playernum;
 	/// Number of users entry
 	int8_t usernum;
 

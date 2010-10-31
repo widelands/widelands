@@ -169,7 +169,9 @@ void NetClient::run ()
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
-		try {tipstext.push_back(getPlayersTribe());} catch (No_Tribe) {}
+		try {
+			tipstext.push_back(getPlayersTribe());
+		} catch (No_Tribe) {}
 		GameTips tips (loaderUI, tipstext);
 
 		loaderUI.step(_("Preparing game"));

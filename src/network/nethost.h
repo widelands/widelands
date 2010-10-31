@@ -137,7 +137,7 @@ private:
 	void writeSettingAllUsers(SendPacket &);
 	bool writeMapTransferInfo(SendPacket &, std::string);
 
-	void disconnectPlayer
+	void disconnectPlayerController
 		(uint8_t number,
 		 std::string const & reason,
 		 bool sendreason = true);

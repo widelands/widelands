@@ -620,11 +620,11 @@ void NetHost::run(bool const autorun)
 		} else if (!autorun) {
 			igb =
 				new Interactive_Spectator
-					(*d->game, g_options.pull_section("global"), true);
+					(game, g_options.pull_section("global"), true);
 		} else
 			igb =
 				new Interactive_DServer
-					(*d->game, g_options.pull_section("global"));
+					(game, g_options.pull_section("global"));
 		igb->set_chat_provider(d->chat);
 		game.set_ibase(igb);
 		if (!d->settings.savegame) // new game
@@ -889,20 +889,15 @@ void NetHost::kickUser(std::string name, std::string reason)
 		for (; client < d->clients.size(); ++client)
 			if (d->clients.at(client).usernum == static_cast<int16_t>(i))
 				break;
-		if (client < d->clients.size())
-			i = d->clients.at(client).playernum;
-		else
-			log("WARNING: user was found but no client is connected to it!\n");
+		if (client >= d->clients.size())
+			throw wexception
+				("WARNING: user was found but no client is connected to it!\n");
 	} else {
 		kickmsg.msg = _("There is no connected user with that nickname!");
 		d->chat.receive(kickmsg);
 		return;
 	}
-
-	if (i >= 0)
-		disconnectPlayer(i, "Kicked by the host: " + reason);
-	else
-		disconnectClient(client, "Kicked by the host: " + reason);
+	disconnectClient(client, "Kicked by the host: " + reason);
 }
 
 /// This function is used to handle commands for the dedicated server
@@ -994,13 +989,7 @@ bool NetHost::canLaunch()
 		return false;
 	// all players must be connected to a controller (human/ai) or be closed.
 	for (size_t i = 0; i < d->settings.players.size(); ++i) {
-		if
-			(d->settings.players.at(i).state == PlayerSettings::stateClosed ||
-			 d->settings.players.at(i).state == PlayerSettings::stateComputer)
-			continue;
-		if
-			(d->settings.players.at(i).state == PlayerSettings::stateHuman &&
-			 d->settings.players.at(i).name.empty())
+		if (d->settings.players.at(i).state == PlayerSettings::stateOpen)
 			return false;
 	}
 	return true;
@@ -1114,6 +1103,10 @@ void NetHost::setPlayerState
 
 	if (player.state == PlayerSettings::stateHuman)
 		//  0 is host and has no client
+		if (d->settings.users.at(0).position == number) {
+			d->settings.users.at(0).position = UserSettings::none();
+			d->settings.playernum = UserSettings::none();
+		}
 		for (uint8_t i = 1; i < d->settings.users.size(); ++i)
 			if (d->settings.users.at(i).position == number) {
 				d->settings.users.at(i).position = UserSettings::none();
@@ -2154,27 +2147,25 @@ void NetHost::sendFilePart(TCPsocket csock, uint32_t part) {
 }
 
 
-void NetHost::disconnectPlayer
+void NetHost::disconnectPlayerController
 	(uint8_t const number, std::string const & reason, bool const sendreason)
 {
 	log("[Host]: disconnectPlayer(%u, %s)\n", number, reason.c_str());
 
-	bool needai = false;
+	bool needai = true;
 
-	for (uint32_t index = 0; index < d->clients.size(); ++index) {
-		Client & client = d->clients.at(index);
-		if (client.playernum != number)
-			continue;
-
-		client.playernum = UserSettings::notConnected();
-		disconnectClient(index, reason, sendreason);
-
-		setPlayerState(number, PlayerSettings::stateOpen);
-		needai = true;
+	for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
+		if (d->settings.users.at(i).position == number) {
+			needai = false;
+			break;
+		}
 	}
 
-	if (needai && d->game)
-		initComputerPlayer(number + 1);
+	if (needai) {
+		setPlayerState(number, PlayerSettings::stateOpen);
+		if(d->game)
+			initComputerPlayer(number + 1);
+	}
 }
 
 void NetHost::disconnectClient
@@ -2183,11 +2174,6 @@ void NetHost::disconnectClient
 	assert(number < d->clients.size());
 
 	Client & client = d->clients.at(number);
-	if (client.playernum <= UserSettings::highestPlayernum()) {
-		disconnectPlayer(client.playernum, reason, sendreason);
-		// disconnectPlayer calls us recursively
-		return;
-	}
 
 	// If the client was completely connected before the disconnect, free the
 	// user settings and send changes to the clients
@@ -2199,7 +2185,10 @@ void NetHost::disconnectClient
 		d->settings.users.at(client.usernum).name     = std::string();
 		d->settings.users.at(client.usernum).position =
 			UserSettings::notConnected();
+		if (int32_t pnum = client.playernum <= UserSettings::highestPlayernum()) {
 			client.playernum = UserSettings::notConnected();
+			disconnectPlayerController(pnum, reason);
+		}
 
 		// Broadcast the user changes to everybody
 		SendPacket s;
