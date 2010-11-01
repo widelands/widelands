@@ -371,7 +371,6 @@ ENDIF (WIN32)
 
 add_subdirectory(doc)
 add_subdirectory(po)
-#add_subdirectory(pics)
 add_subdirectory(src)
 
 # install files to the correct locations here
@@ -428,13 +427,6 @@ install(
   COMPONENT CoreLanguageFiles
   PATTERN "*.svn*" EXCLUDE
   PATTERN "SCons*" EXCLUDE
-)
-
-execute_process (COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/pics)
-add_custom_target (
-  optimizepics 
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pics
-  COMMAND ${CMAKE_COMMAND} -DCMAKE_COMMAND=${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DWL_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/pics -DWL_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/pics -P PicsFunctions.cmake
 )
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
