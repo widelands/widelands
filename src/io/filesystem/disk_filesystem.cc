@@ -309,7 +309,7 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname)
 			if (fspath.m_exists and !fspath.m_isDirectory)
 				throw wexception
 					("%s exists and is not a directory",
-					dirname.substr(0, it).c_str());
+					 dirname.substr(0, it).c_str());
 			if (!fspath.m_exists)
 				MakeDirectory(dirname.substr(0, it));
 
