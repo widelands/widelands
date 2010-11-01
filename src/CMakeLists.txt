@@ -108,6 +108,10 @@ macro(LinkExecutable exe_name is_test)
   if (${is_test} STREQUAL TRUE)
     target_link_libraries(${exe_name} ${Boost_LIBRARIES})
   endif (${is_test} STREQUAL TRUE)
+
+  if (DEFINED WL_EXTRA_LINK_LIBRARIES)
+    target_link_libraries(${exe_name} ${WL_EXTRA_LINK_LIBRARIES})
+  endif (DEFINED WL_EXTRA_LINK_LIBRARIES)
 endmacro(LinkExecutable exe_name is_test)
 
 #the subdirectories are only used for test definition
