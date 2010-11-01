@@ -1,8 +1,0 @@
-Import('*')
-
-from Distribute import distadd, instadd
-
-instadd(env, 'global/*')
-
-distadd(env, 'global/*')
-

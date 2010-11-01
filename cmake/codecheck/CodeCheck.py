@@ -3,11 +3,12 @@
 #
 
 """
-Yet another code checker for the widelands project. This one's intention is to get
-rid of the ADA whitespace checker (while keeping it's functionality or improving on it)
-and supersede the old detect_spurious_indentation.py script (while also keeping it's cases
-around). En plus, we also replace the spurious code checking done with grep
-which is currently also around. 
+Yet another code checker for the widelands project. This one's
+intention is to get rid of the ADA whitespace checker (while keeping
+it's functionality or improving on it) and supersede the old
+detect_spurious_indentation.py script (while also keeping it's cases
+around). En plus, we also replace the spurious code checking done
+with grep which is currently also around.
 """
 
 from collections import defaultdict
@@ -34,20 +35,20 @@ $)
         self._plain_cache = {}
         self._stripped_comments_and_strings = {}
         self._stripped_all = {}
-    
+
     def _get_plain(self,fn,data):
         if fn in self._plain_cache:
             return self._plain_cache[fn]
-        
+
         lines = data.splitlines(True)
         self._plain_cache[fn] = lines
-        
+
         return lines
-    
+
     def _get_stripped_comments_and_strings(self,fn,lines):
         """
         Strips all cstring literals from the text. String contents
-        are replace by spaces. 
+        are replace by spaces.
         Removes comments from lines. Comments are completely
         stripped, including // and /**/ symbols
         """
@@ -57,7 +58,7 @@ $)
         in_comment = False
         new_lines = []
         for line in lines:
-            # Strings are replaced with blanks 
+            # Strings are replaced with blanks
             line = self._literal_chars.sub(lambda k: "'%s'" % ((len(k.group(0))-2)*" "),line)
             line = self._literal_strings.sub(lambda k: '"%s"' % ((len(k.group(0))-2)*" "),line)
 
@@ -72,11 +73,11 @@ $)
                     else:
                         line = line[:start_idx].strip()
                         in_comment = True
-                    
+
             if in_comment:
                 stop_idx = line.find('*/')
                 if stop_idx == -1:
-                    line = "" 
+                    line = ""
                 else:
                     line = line[stop_idx+2:].strip()
                     in_comment = False
@@ -85,21 +86,21 @@ $)
             idx = line.find('//')
             if idx != -1:
                 line = line[:idx].strip()
-           
+
             new_lines.append( line )
 
         self._stripped_comments_and_strings[fn] = new_lines
-        
+
         return new_lines
-    
+
     def _get_stripped_macros(self,fn,lines):
         """
-        Remove macros definitions. Also multiline macros. They are replaced with 
+        Remove macros definitions. Also multiline macros. They are replaced with
         empty lines
         """
         if fn in self._stripped_all:
             return self._stripped_all[fn]
-       
+
         new_lines = []
         in_macro = False
         for given_line in lines:
@@ -112,12 +113,12 @@ $)
                 in_macro = False
 
             new_lines.append(line)
-            
+
         self._stripped_all[fn] = new_lines
 
         return new_lines
 
-    
+
     def get_preprocessed_data(self,fn, data, strip_strings_and_comments, strip_macros):
         """
         Return an array of lines where data has been stripped off
@@ -128,7 +129,7 @@ $)
             return self._get_stripped_comments_and_strings(fn,self._get_plain(fn,data))
         elif strip_strings_and_comments and strip_macros:
             return self._get_stripped_macros(fn,self._get_stripped_comments_and_strings(fn,self._get_plain(fn,data)))
-        
+
         # Error checking, we should never be here
         raise RuntimeError, "strip_macros can't be true when strip_strings_and_comments isn't!"
 
@@ -141,13 +142,13 @@ class CheckingRule(object):
         self.name = name
         self._strip_comments_and_strings = vars.get('strip_comments_and_strings',False)
         self._strip_macros = vars.get('strip_macros',False)
-        
+
         self._evaluate_matches = vars.get('evaluate_matches',None)
 
         if self._evaluate_matches == None:
             self._regexp = re.compile(vars["regexp"])
             self._error_msg = vars["error_msg"]
-       
+
         def _to_tuple(a):
             if isinstance(a,str):
                 return (a,)
@@ -156,11 +157,11 @@ class CheckingRule(object):
 
         self.allowed = _to_tuple(vars["allowed"])
         self.forbidden  = _to_tuple(vars["forbidden"])
-    
+
     def check_text(self, preprocessor, fn, data):
         """
         Data must be a complete file data as returned by .read()
-        
+
         preprocessor - Tool to preprocess the text (strip it from unwanted tokens)
         fn           - File name of current file to check
         data         - File contents
@@ -176,7 +177,7 @@ class CheckingRule(object):
             for lidx,line in enumerate(lines):
                 if self._regexp.search(line):
                     matches.append( (fn,lidx+1,self._error_msg) )
-   
+
         return matches
 
 ###################
@@ -191,21 +192,21 @@ def _find_rule_files():
     if not len(p):
         p = "./"
     rule_files = [ f for f in glob(p + '/rules/*') if os.path.isfile(f) ]
-    
+
     return rule_files
 
 def _parse_rules():
     rule_files = _find_rule_files()
-    
+
     checkers = []
 
     for filename in rule_files:
         variables = {}
         execfile(filename,variables)
-        
+
         rule = CheckingRule(os.path.basename(filename), variables)
         checkers.append( rule )
-    
+
     return checkers
 
 ansicolor = {
@@ -223,7 +224,7 @@ ansicolor = {
 
     "reset" : '\033[0;0m',
     "bold" : '\033[1m',
-        
+
     "blackbg" : '\033[40m',
     "redbg" : '\033[41m',
     "greenbg" : '\033[42m',
@@ -236,14 +237,14 @@ ansicolor = {
 
 class CodeChecker(object):
     _checkers = _parse_rules()
-    
+
     def __init__(self, benchmark = False, color = False):
         """
         benchmark - Run benchmarks on each rule. Print milliseconds after run
         """
         self._benchmark = benchmark
         self._color = color
-        
+
         # We keep a cache of file names/error strings
         # so that (e.g.) a header is requested twice in one
         # run of the program, we just return the cached errors.
@@ -274,17 +275,17 @@ class CodeChecker(object):
             output += "%s:%s: %s\n" % (fn,l,msg)
 
         print output.rstrip()
-        
+
         return output
-    
+
     def check_file(self,fn, print_errors = True):
         if print_errors and fn in self._cache:
             print self._cache[fn].rstrip()
-            return 
+            return
         errors = []
-       
+
         bm = defaultdict(lambda: 0.)
-            
+
         preprocessor = Preprocessor()
 
         # Check line by line (currently)
@@ -298,12 +299,12 @@ class CodeChecker(object):
             else:
                 e =  c.check_text( preprocessor, fn, data )
                 errors.extend( e )
-       
+
         errors.sort(key=lambda a: a[1])
 
         if len(errors) and print_errors:
             self._cache[fn] = self._print_errors(errors)
-       
+
         if self._benchmark:
             self._bench_results = [ (v,k) for k,v in bm.items() ]
             self._bench_results.sort(reverse=True)
@@ -315,7 +316,7 @@ if __name__ == '__main__':
     import sys
     import os
     import getopt
-    
+
     def usage():
         print "Usage: %s <options> <files>" % os.path.basename(sys.argv[0])
         print """
@@ -324,18 +325,18 @@ if __name__ == '__main__':
  -b,   --benchmark       Benchmark each rule
  -p,   --profile         Run with cProfile. Creates "Profile.prof" file
 """
-        
+
     def check_files(files,color,benchmark):
         d = CodeChecker( benchmark = benchmark, color = color )
         for filename in files:
-            print "Checking %s ..." % filename
+#            print "Checking %s ..." % filename
             errors = d.check_file(filename)
-        
+
         # Print benchmark results
         if benchmark:
             print
             print "Benchmark results:"
-            
+
             res = d.benchmark_results
             ctime = sum( l[0] for l in res )
 
@@ -347,7 +348,7 @@ if __name__ == '__main__':
 
     def main():
         opts, files = getopt.getopt(sys.argv[1:], "hbcp", ["help", "benchmark","color", "colour", "profile"])
-       
+
         benchmark = False
         color = False
         profile = False
@@ -358,14 +359,16 @@ if __name__ == '__main__':
             if o in ('-b','--benchmark'):
                 benchmark = True
             if o in ('-c','--colour','--color'):
-                color = True
+                term = os.environ.get("TERM", "dumb")
+                if term != "dumb":
+                    color = True
             if o in ('-p','--profile'):
                 profile = True
-        
+
         if not len(files):
             usage()
             sys.exit(0)
-        
+
         if profile:
             import cProfile
             cProfile.runctx("check_files(files,color,benchmark)",globals(),locals(),"Profile.prof")

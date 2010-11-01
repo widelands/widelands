@@ -30,15 +30,18 @@ typedef std::vector<std::pair<Ware_Index, uint32_t> > Ware_Types;
 // range structure for iterating ware range with index
 struct ware_range
 {
-	ware_range(Ware_Types const & range) : i(0), current(range.begin()), end(range.end()) {}
-	ware_range &operator++() {++i;++current;return *this;}
-	bool empty() const {return current==end;}
-	operator bool() const { return empty() ? false: true;}
+	ware_range(Ware_Types const & range) :
+		i(0), current(range.begin()), end(range.end()) {}
+	ware_range & operator++ () {
+		++i; ++current; return *this;
+	}
+	bool empty() const {return current == end;}
+	operator bool() const {return empty() ? false: true;}
 
-	uint8_t i;							// current integer index
-	Ware_Types::const_iterator current;		// current iterator in Ware_Types range
+	uint8_t i; // current integer index
+	Ware_Types::const_iterator current; // current iterator in Ware_Types range
 private:
-	Ware_Types::const_iterator const end;		// end iterator
+	Ware_Types::const_iterator const end; // end iterator
 };
 
 }

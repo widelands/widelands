@@ -55,12 +55,13 @@ public:
 	virtual ~L_Panel() {}
 
 	virtual void __persist(lua_State * L) {
-		report_error(L, "Trying to persist a User Interface Panel which is "
-			"no supported!");
+		report_error
+			(L, "Trying to persist a User Interface Panel which is no supported!");
 	}
 	virtual void __unpersist(lua_State * L) {
-		report_error(L, "Trying to unpersist a User Interface Panel which is "
-			"no supported!");
+		report_error
+			(L, "Trying to unpersist a User Interface Panel which is "
+			 "not supported!");
 	}
 
 	/*
@@ -205,7 +206,7 @@ public:
 	/*
 	 * C Methods
 	 */
-   Interactive_Base * get() { return static_cast<Interactive_Base *>(m_panel); }
+	Interactive_Base * get() {return static_cast<Interactive_Base *>(m_panel);}
 };
 
 void luaopen_wlui(lua_State *);

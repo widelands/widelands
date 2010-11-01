@@ -149,7 +149,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 					(PlayerImmovable::Workers, pi->get_workers(), w)
 				{
 					Ware_Index i = tribe.worker_index((*w.current)->descr().name());
-					if(i == sp->first) {
+					if (i == sp->first) {
 						const_cast<Worker *>(*w.current)->remove(egbase);
 						++d;
 						break;
@@ -157,7 +157,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 				}
 			}
 		} else if (d > 0) {
-			for ( ; d; --d)
+			for (; d; --d)
 				if (_new_worker(*pi, egbase, wdes))
 						return report_error(L, "No space left for this worker");
 		}
@@ -265,7 +265,7 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 	// Get information about current soldiers
 	std::vector<Soldier *> curs = sc->stationedSoldiers();
 	SoldiersMap hist;
-	container_iterate(std::vector<Soldier* >, curs, s) {
+	container_iterate (std::vector<Soldier * >, curs, s) {
 		SoldierDescr sd
 			((*s.current)->get_hp_level(),
 			 (*s.current)->get_attack_level(),
@@ -308,7 +308,7 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 				}
 			}
 		} else if (d > 0) {
-			for ( ; d; --d) {
+			for (; d; --d) {
 				Soldier & soldier =
 					ref_cast<Soldier, Worker>
 					(soldier_descr.create
@@ -747,8 +747,10 @@ int L_HasSoldiers::m_handle_get_soldiers
 		uint32_t rv = 0;
 		container_iterate_const(SoldiersList, soldiers, s) {
 			SoldierDescr sd
-				((*s.current)->get_hp_level(), (*s.current)->get_attack_level(),
-				 (*s.current)->get_defense_level(), (*s.current)->get_evade_level());
+				((*s.current)->get_hp_level(),
+				 (*s.current)->get_attack_level(),
+				 (*s.current)->get_defense_level(),
+				 (*s.current)->get_evade_level());
 			if (sd == wanted)
 				++ rv;
 		}
@@ -825,9 +827,9 @@ int L_Map::get_player_slots(lua_State * L) {
 	Map & m = get_egbase(L).map();
 
 	lua_createtable(L, m.get_nrplayers(), 0);
-	for(uint32_t i = 0; i < m.get_nrplayers(); i++) {
-		lua_pushuint32(L, i+1);
-		to_lua<LuaMap::L_PlayerSlot>(L, new LuaMap::L_PlayerSlot(i+1));
+	for (uint32_t i = 0; i < m.get_nrplayers(); i++) {
+		lua_pushuint32(L, i + 1);
+		to_lua<LuaMap::L_PlayerSlot>(L, new LuaMap::L_PlayerSlot(i + 1));
 		lua_settable(L, -3);
 	}
 
@@ -1335,7 +1337,7 @@ int L_Flag::set_wares(lua_State * L)
 				Flag::Wares current_items = f->get_items();
 				container_iterate_const(Flag::Wares, current_items, w) {
 					Ware_Index i = tribe.ware_index((*w.current)->descr().name());
-					if(i == sp->first) {
+					if (i == sp->first) {
 						const_cast<WareInstance *>(*w.current)->remove(egbase);
 						++d;
 						break;
@@ -1516,7 +1518,7 @@ int L_Road::_new_worker
 	Carrier & carrier = ref_cast<Carrier, Worker>
 		(wdes->create (egbase, r.owner(), &r, idle_position));
 
-	if(upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase))
 		carrier.start_task_road(*game);
 
 	r.assign_carrier(carrier, 0);
@@ -1675,7 +1677,8 @@ int L_Warehouse::set_##type##s(lua_State * L) { \
 	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, tribe); \
  \
 	container_iterate_const(btype##sMap, setpoints, i) { \
-		int32_t d = i.current->second - wh->get_##type##s().stock(i.current->first); \
+		int32_t d = i.current->second - \
+			wh->get_##type##s().stock(i.current->first); \
 		if (d < 0) \
 			wh->remove_##type##s(i.current->first, -d); \
 		else if (d > 0) \
@@ -1694,7 +1697,8 @@ int L_Warehouse::get_##type##s(lua_State * L) { \
 	Warehouse * wh = get(L, get_egbase(L)); \
 	Tribe_Descr const & tribe = wh->owner().tribe(); \
 	bool return_number = false; \
-	btype##sSet set = m_parse_get_##type##s_arguments(L, tribe, &return_number); \
+	btype##sSet set = m_parse_get_##type##s_arguments \
+		(L, tribe, &return_number); \
 	lua_newtable(L); \
 	if (return_number) \
 		lua_pushuint32(L, wh->get_##type##s().stock(*set.begin())); \

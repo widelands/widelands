@@ -394,7 +394,7 @@ int ProductionSite::warp_worker
 		// Okay, space is free and worker is fitting. Let's create him
 		Worker & worker = wdes.create(egbase, owner(), this, get_position());
 
-		if(upcast(Game, game, &egbase))
+		if (upcast(Game, game, &egbase))
 			worker.start_task_idle(*game, 0, -1);
 		current->worker = &worker;
 		delete current->worker_request;
@@ -405,7 +405,7 @@ int ProductionSite::warp_worker
 	if (not assigned)
 		return -1;
 
-	if(upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase))
 		try_start_working(*game);
 
 	return 0;

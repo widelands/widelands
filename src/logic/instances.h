@@ -60,7 +60,9 @@ struct Map_Object_Descr {
 			throw Animation_Nonexistent();
 		return it->second;
 	}
-	uint32_t get_animation(const std::string& name) const {return get_animation(name.c_str());}
+	uint32_t get_animation(const std::string & name) const {
+		return get_animation(name.c_str());
+	}
 
 	uint32_t main_animation() const throw () {
 		return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;

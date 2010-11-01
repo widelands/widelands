@@ -131,7 +131,9 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>,
 	}
 	// Get a tribe from the loaded list, when available
 	Tribe_Descr const * get_tribe(const char * tribe) const;
-	Tribe_Descr const * get_tribe(const std::string& name) const {return get_tribe(name.c_str());}
+	Tribe_Descr const * get_tribe(const std::string & name) const {
+		return get_tribe(name.c_str());
+	}
 
 	void inform_players_about_ownership(Map_Index, Player_Number);
 	void inform_players_about_immovable(Map_Index, Map_Object_Descr const *);

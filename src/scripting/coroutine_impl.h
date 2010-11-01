@@ -33,17 +33,17 @@ namespace Widelands {
 */
 class LuaCoroutine_Impl : public LuaCoroutine {
 public:
-	LuaCoroutine_Impl(lua_State* L);
+	LuaCoroutine_Impl(lua_State * L);
 	virtual ~LuaCoroutine_Impl();
 
 	virtual int get_status() {return lua_status(m_L);}
 	virtual int resume(uint32_t * sleeptime = 0);
 
 	virtual uint32_t write
-		(lua_State*, Widelands::FileWrite &,
-		 Widelands::Map_Map_Object_Saver & );
+		(lua_State *, Widelands::FileWrite &,
+		 Widelands::Map_Map_Object_Saver &);
 	virtual void read
-		(lua_State*, Widelands::FileRead &,
+		(lua_State *, Widelands::FileRead &,
 		 Widelands::Map_Map_Object_Loader &, uint32_t);
 
 	virtual void push_arg(const Widelands::Player *);

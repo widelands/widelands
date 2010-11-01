@@ -35,7 +35,7 @@
 	static const MethodType<klass> Methods[]; \
 	static const PropertyType<klass> Properties[]; \
 	\
-   virtual void __finish_unpersist(lua_State* L) { \
+   virtual void __finish_unpersist(lua_State * L) { \
       lua_remove(L, -2); /* table luna_obj -> luna_obj */ \
 	}
 
@@ -58,7 +58,7 @@
 
 #define _UNPERS_TYPE(name, value, type) lua_getfield(L, -2, name); \
    value = luaL_check ##type(L, -1); \
-   lua_pop(L,1);
+   lua_pop(L, 1);
 #define UNPERS_INT32(name, value) _UNPERS_TYPE(name, value, int32)
 #define UNPERS_UINT32(name, value) _UNPERS_TYPE(name, value, uint32)
 #define UNPERS_STRING(name, value) _UNPERS_TYPE(name, value, string)
@@ -73,11 +73,11 @@
  */
 class LunaClass {
 	public:
-		virtual void __persist(lua_State*) = 0;
-		virtual void __unpersist(lua_State*) = 0;
-		virtual const char* get_modulename() = 0;
+		virtual void __persist(lua_State *) = 0;
+		virtual void __unpersist(lua_State *) = 0;
+		virtual const char * get_modulename() = 0;
 		// The next class gets defined by LUNA_CLASS_HEAD
-		virtual void __finish_unpersist(lua_State*) = 0;
+		virtual void __finish_unpersist(lua_State *) = 0;
 };
 
 /**
@@ -110,10 +110,10 @@ void register_class
 
 	m_create_metatable_for_class<T>(L);
 
-	m_register_properties_in_metatable<T,T>(L);
+	m_register_properties_in_metatable<T, T>(L);
 	m_register_methods_in_metatable<T, T>(L);
 
-	if(!return_metatable)
+	if (!return_metatable)
 		lua_pop(L, 1); // remove the Metatable
 }
 /**
@@ -124,7 +124,7 @@ void register_class
 template <class T, class PT>
 void add_parent(lua_State * L)
 {
-	m_register_properties_in_metatable<T,PT>(L);
+	m_register_properties_in_metatable<T, PT>(L);
 	m_register_methods_in_metatable<T, PT>(L);
 }
 
@@ -173,10 +173,10 @@ int to_lua(lua_State * const L, T * const obj) {
  * that it is the correct userdata.
  */
 template <class T>
-T * * get_user_class(lua_State * const L, int narg) {
+T ** get_user_class(lua_State * const L, int narg) {
 	m_extract_userdata_from_user_class<T>(L, narg);
 
-	T** rv = static_cast<T * *>(luaL_checkudata(L, -1, T::className));
+	T ** rv = static_cast<T **>(luaL_checkudata(L, -1, T::className));
 	lua_pop(L, 1);
 
 	return rv;
@@ -186,10 +186,10 @@ T * * get_user_class(lua_State * const L, int narg) {
  * that indeed the object is a base class, like you can be in __eq
  */
 template <class T>
-T * * get_base_user_class(lua_State * const L, int narg) {
+T ** get_base_user_class(lua_State * const L, int narg) {
 	m_extract_userdata_from_user_class<T>(L, narg);
 
-	T** rv = static_cast<T * *>(lua_touserdata(L, -1));
+	T ** rv = static_cast<T * *>(lua_touserdata(L, -1));
 	lua_pop(L, 1);
 
 	return rv;

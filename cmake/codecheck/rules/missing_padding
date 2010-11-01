@@ -24,7 +24,7 @@ regexp = re.compile(r"""(?x)
 ([^\s][/^\%](?!=))|    # '/ a'
 ([/^\%][^=\s])|
 ([^\s\-eE([{]-[^\s=\->])|    # -> and -= and unary -, also 8e-1
-([^\s+]\+[^\s=+])      # += 
+([^\s+]\+[^\s=+])      # +=
 """
 )
 
@@ -34,8 +34,8 @@ def match_function( lines, fn ):
         line = line.strip()
         if not len(line) or line[0] == '#':
             continue
-        
-        lineno += 1 
+
+        lineno += 1
 
         if regexp.search(line):
             errors.append( (fn, lineno, error_msg) )
@@ -55,8 +55,8 @@ forbidden = [
     " a ==b",
     " a !=b",
     " a!= b",
-	"a>= b",
-	"a >=b",
+    "a>= b",
+    "a >=b",
     "b<= a",
     "b <=a",
     #"b< a",  could also be std::vector<a
@@ -301,53 +301,54 @@ allowed = [
         "/* warehouses can determine max idle priority*/",
         "blah // I *wanna* do that",
     "&*m_stack.rbegin()",
-    
+
     "(std::set<std::string>, j.current->second, i)",
-    
-    # > < 
-	"r = (palette[i].r * shade) >> 8;",
+
+    # > <
+    "r = (palette[i].r * shade) >> 8;",
     "std::vector<High>",
-	"std::vector<State>::iterator it = m_stack.end();",
+    "std::vector<State>::iterator it = m_stack.end();",
 
     "v->get_string()", # pointers are fine
 
     # Allow includes
     "#include <sys/types.h>",
-    
+
 
     # Ignore strings & comments
-	"\tif (*i.current == '%') {",
+    "\tif (*i.current == '%') {",
     "if (calc_linewidth(font, cur_word) > (max_width /*/ 2*/)) {",
-    
-    
+
+
     # * Pointer to pointer
-	"func(int **r);",
+    "func(int **r);",
     "void (a::*b)",
-	"if (!*ppgrid) {",
+    "if (!*ppgrid) {",
     "void MiniMap::toggle(Layers button) {*m_view.m_flags ^= button;}",
     "m_loaded_obj[&object] = false;",
     "m_loaded_obj[*object] = false;",
-	"(_callback_argument_this.*_callback_function)();",
+    "(_callback_argument_this.*_callback_function)();",
     "friend struct Table<void *>;",
-    
+
     # Unary minus
     "-1",
-	"func(-1);",
+    "func(-1);",
     "8.46126929e-5",
     "-8.46126929e-5",
-   
+
     # Operator=
     "int someclass::operator= (int)",
     "int someclass::operator* (int)",
-    
+    "int someclass::operator== (int)",
+
     # increment, decrement
     "incr++;",
     "++incr;",
     "--decr;",
     "decr--;",
     "++*digit_to_increment;",
-    
-    # +=, -= 
+
+    # +=, -=
     "result += it",
     "result -= it",
 
@@ -358,14 +359,14 @@ allowed = [
     # compares
     "a == b",
     "a != b",
-	"a >= b", 
-    "b <= a", 
-    "b < a", 
-    "b > a", 
-	"AreaWatcher(const Player_Area<>);",
-	"void func (Player_Area<Area>);",
-	"friend class NoteReceiver<T>;",
-    
+    "a >= b",
+    "b <= a",
+    "b < a",
+    "b > a",
+    "AreaWatcher(const Player_Area<>);",
+    "void func (Player_Area<Area>);",
+    "friend class NoteReceiver<T>;",
+
     'a %= a;',
-    
+
 ]

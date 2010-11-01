@@ -284,8 +284,8 @@ struct Map :
 	int32_t calc_bidi_cost(Coords, int32_t dir) const;
 	void calc_cost(const Path &, int32_t * forward, int32_t * backward) const;
 
-	void get_ln  (const Coords & ,  Coords *) const;
-	void get_ln (const FCoords & , FCoords *) const;
+	void get_ln  (const Coords &,  Coords *) const;
+	void get_ln (const FCoords &, FCoords *) const;
 	Coords  l_n  (const Coords &) const;
 	FCoords l_n (const FCoords &) const;
 	void get_rn  (const Coords &,  Coords *) const;

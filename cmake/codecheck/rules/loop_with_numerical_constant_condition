@@ -2,16 +2,21 @@
 
 
 """
-This catches a numerical constant used as a loop condition. Instead of while
-(true) or while (1), one should write for (;;). But it avoids catching some
-cases that are used in macro definitions (see
-[http://vivekkutal.blogspot.com/2006/03/do-while0.html]):
-    #define macro(...) do {...} while (false)
+This catches a numerical constant used as a loop condition. Instead
+of while (true) or while (1), one should write for (;;). But it
+avoids catching some cases that are used in macro definitions (see
+[http://vivekkutal.blogspot.com/2006/03/do-while0.html]): #define
+macro(...) do {...} while (false)
 """
 
-error_msg="Do not use numerical constants in loop condition!"
+error_msg="Do not use numerical constants in loop condition! " \
+        "Use for(;;) for endless loops."
 
-regexp =r"""(^.?|[^}].|.[^ ])while *\((true|false|(0x[[:xdigit:]]+|[[:digit:]]+)[Uu]?(L|l|LL|ll)?|[[:digit:]]*\.[[:digit:]]+[Ll]?)\)"""
+regexp =r"""(?x)
+(^.?|[^}].|.[^ ])
+while\s*
+\(
+(true|false|(0x[\da-fA-f]+|\d+)[Uu]?(L|l|LL|ll)?|\d*\.\d+[Ll]?)\)"""
 
 forbidden = [
     'while (false)',

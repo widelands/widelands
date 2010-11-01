@@ -40,10 +40,10 @@ namespace Widelands {
  * with the items given in globals.
  */
 uint32_t persist_object
-	(lua_State* L,
-	 Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&);
+	(lua_State * L,
+	 Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
 uint32_t unpersist_object
-	(lua_State* L,
+	(lua_State * L,
 	 Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size);
 

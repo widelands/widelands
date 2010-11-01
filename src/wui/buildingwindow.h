@@ -82,6 +82,7 @@ private:
 	//  capabilities that were last used in setting up the caps panel
 	uint32_t m_capscache;
 	Widelands::Player_Number m_capscache_player_number;
+	bool m_caps_setup;
 
 	Overlay_Manager::Job_Id m_workarea_job_id;
 	PictureID workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];

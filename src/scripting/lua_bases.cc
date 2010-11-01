@@ -120,7 +120,7 @@ int L_EditorGameBase::get_players(lua_State * L) {
 	lua_newtable(L);
 
 	uint32_t idx = 1;
-	for(Player_Number i = 1; i <= MAX_PLAYERS; i++) {
+	for (Player_Number i = 1; i <= MAX_PLAYERS; i++) {
 		Player * rv = egbase.get_player(i);
 		if (not rv)
 			continue;
@@ -197,7 +197,7 @@ int L_PlayerBase::get_number(lua_State * L) {
 
 		(RO) The name of the tribe of this player.
 */
-int L_PlayerBase::get_tribe(lua_State *L) {
+int L_PlayerBase::get_tribe(lua_State * L) {
 	lua_pushstring(L, get(L, get_egbase(L)).tribe().name());
 	return 1;
 }

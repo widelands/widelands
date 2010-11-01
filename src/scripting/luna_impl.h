@@ -63,10 +63,9 @@ int m_dispatch_property_in_metatable(lua_State * const L, bool setter) {
 	lua_pushvalue   (L,  2); // table name <value> mt name
 	lua_rawget      (L, -2); // table name <value> mt mt_val
 	lua_remove(L, -2); // table name <value> mt_val
-	if (lua_istable(L, -1))
-	{	
-		// dispatcher 
-		
+	if (lua_istable(L, -1)) {
+		// dispatcher
+
 		lua_pushstring(L, "dispatcher"); // table name <value> mt_val "dispatcher"
 		lua_gettable(L, -2); // table name <value> mt_val dispatcher_val
 		if (!lua_iscfunction(L, -1))
@@ -75,13 +74,14 @@ int m_dispatch_property_in_metatable(lua_State * const L, bool setter) {
 			return report_error(L, "invalid property without dispatcher function");
 		}
 		lua_CFunction dispatcher = lua_tocfunction(L, -1);
-		lua_pop(L, 1); // table name <value> mt_val 
+		lua_pop(L, 1); // table name <value> mt_val
 
 		// get property method to stack
 		lua_pushstring(L, setter ? "setter" : "getter");
 		lua_gettable(L, -2); // table name <value> mt_val getter_val/setter_val
 		lua_remove(L, -2); // table name <value> getter_val/setter_val
-		// dispatcher pops off getter/setter and returns whatever get/set property functions returns
+		// dispatcher pops off getter/setter and returns whatever
+		// get/set property functions returns
 		ret = dispatcher(L); // table name value
 	} else {
 		if (setter) {
@@ -143,10 +143,11 @@ int m_property_dispatch(lua_State * const L) {
 	luaL_checktype(L, 1, LUA_TTABLE);
 
 	typedef int (PT::* const * ConstMethodPtr)(lua_State *);
-	ConstMethodPtr pfunc = reinterpret_cast<ConstMethodPtr>(lua_touserdata(L, -1));
-	lua_pop(L, 1); 
+	ConstMethodPtr pfunc = reinterpret_cast<ConstMethodPtr>
+		(lua_touserdata(L, -1));
+	lua_pop(L, 1);
 
-	T * * const obj = get_user_class<T>(L, 1);
+	T ** const obj = get_user_class<T>(L, 1);
 
 	if (!*pfunc)
 	{
@@ -328,17 +329,17 @@ void m_register_methods_in_metatable(lua_State * const L)
  * Get the userdata in a given stack object
  */
 template <class T>
-void m_extract_userdata_from_user_class(lua_State* const L, int narg) {
+void m_extract_userdata_from_user_class(lua_State * const L, int narg) {
 	luaL_checktype(L, narg, LUA_TTABLE);
 
 	//  GET table[0]
 	lua_pushnumber(L, 0);
-	if(narg > 0)
+	if (narg > 0)
 		lua_rawget(L, narg);
 	else
 		lua_rawget(L, narg - 1);
 
-	if(not lua_isuserdata(L,-1))
+	if (not lua_isuserdata(L, -1))
 		luaL_typerror(L, narg, T::className);
 }
 

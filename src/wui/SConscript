@@ -1,8 +1,0 @@
-Import('*')
-
-SRC=simpleglob("*.cc")
-
-wui=srcenv.StaticLibrary(target='wui', source=SRC)
-
-Return('wui')
-

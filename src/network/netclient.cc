@@ -654,7 +654,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			uint32_t i = 0;
 			// Put all data together
 			while (left > 0) {
-				uint8_t writeout
+				uint32_t writeout
 					= (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
 				fw.Data(file->parts[i].part, writeout, FileWrite::Pos::Null());
 				left -= writeout;

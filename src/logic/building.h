@@ -260,7 +260,7 @@ protected:
 	int32_t m_priority; // base priority
 	std::map<Ware_Index, int32_t> m_ware_priorities;
 
-	/// Whether we see our \ref vision_range area based on workers in the building
+	/// Whether we see our vision_range area based on workers in the building
 	bool m_seeing;
 };
 

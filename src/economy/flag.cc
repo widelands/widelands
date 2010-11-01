@@ -124,9 +124,10 @@ Flag::Flag
 	upcast(Road, road, egbase.map().get_immovable(coords));
 	upcast(Game, game, &egbase);
 
-	if(game) {
+	if (game) {
 		//  we split a road, or a new, standalone flag is created
-		(road ? road->get_economy() : new Economy(owning_player))->add_flag(*this);
+		(road ? road->get_economy() : new Economy (owning_player))
+				->add_flag(*this);
 
 		if (road)
 			road->presplit(*game, coords);
@@ -376,7 +377,7 @@ void Flag::add_item(Editor_Game_Base & egbase, WareInstance & item)
 
 	item.set_location(egbase, this);
 
-	if(upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase))
 		item.update(*game); //  will call call_carrier() if necessary
 }
 
@@ -499,7 +500,7 @@ void Flag::remove_item(Editor_Game_Base & egbase, WareInstance * const item)
 			(&m_items[i], &m_items[i + 1],
 			 sizeof(m_items[0]) * (m_item_filled - i));
 
-		if(upcast(Game, game, &egbase))
+		if (upcast(Game, game, &egbase))
 			wake_up_capacity_queue(*game);
 
 		return;
@@ -666,7 +667,7 @@ void Flag::cleanup(Editor_Game_Base & egbase)
 		}
 	}
 
-	if(Economy* e = get_economy())
+	if (Economy * e = get_economy())
 		e->remove_flag(*this);
 
 	unset_position(egbase, m_position);

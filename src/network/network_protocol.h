@@ -21,7 +21,7 @@
 #define NETWORK_PROTOCOL_H
 
 /// How many bytes will (maximal) be send as file part
-#define NETFILEPARTSIZE 4096
+#define NETFILEPARTSIZE 511
 
 enum {
 	/**

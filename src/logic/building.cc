@@ -745,8 +745,8 @@ void Building::draw_help
 
 	if (dpyflags & Interactive_Base::dfShowStatistics) {
 		if (upcast(Interactive_Player const, iplayer, &igbase))
-			if (!iplayer->player().see_all()
-				 &&
+			if
+				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
 		UI::g_fh->draw_string

@@ -148,7 +148,9 @@ public:
 	void create_needed_experience(Game &);
 	Ware_Index level             (Game &);
 
-	int32_t get_needed_experience() const {return descr().get_level_experience();}
+	int32_t get_needed_experience() const {
+		return descr().get_level_experience();
+	}
 	int32_t get_current_experience() const {return m_current_exp;}
 	bool needs_experience() const {return get_needed_experience() != -1;}
 
@@ -274,8 +276,8 @@ protected:
 		virtual void load_finish();
 
 	protected:
-		virtual const Task * get_task(const std::string& name);
-		virtual const BobProgramBase * get_program(const std::string& name);
+		virtual const Task * get_task(const std::string & name);
+		virtual const BobProgramBase * get_program(const std::string & name);
 
 	private:
 		uint32_t m_location;
@@ -283,11 +285,12 @@ protected:
 		Transfer::ReadData m_transfer;
 	};
 
-	virtual Loader* create_loader();
+	virtual Loader * create_loader();
 
 public:
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
-	virtual void do_save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void do_save
+		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);

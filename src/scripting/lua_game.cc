@@ -775,7 +775,7 @@ int L_Player::set_flag_style(lua_State * L) {
 
 	try {
 		p.set_flag_style(p.tribe().flag_style_index(name));
-	} catch(Tribe_Descr::Nonexistent) {
+	} catch (Tribe_Descr::Nonexistent) {
 		return report_error(L, "Flag style <%s> does not exist!\n", name);
 	}
 	return 0;
@@ -797,7 +797,7 @@ int L_Player::set_frontier_style(lua_State * L) {
 
 	try {
 		p.set_frontier_style(p.tribe().frontier_style_index(name));
-	} catch(Tribe_Descr::Nonexistent) {
+	} catch (Tribe_Descr::Nonexistent) {
 		return report_error(L, "Frontier style <%s> does not exist!\n", name);
 	}
 	return 0;
@@ -1226,7 +1226,7 @@ int L_Message::get_field(lua_State * L) {
 			* archived
 */
 int L_Message::get_status(lua_State * L) {
-	switch(get(L, get_game(L)).status()) {
+	switch (get(L, get_game(L)).status()) {
 		case Message::New: lua_pushstring(L, "new"); break;
 		case Message::Read: lua_pushstring(L, "read"); break;
 		case Message::Archived: lua_pushstring(L, "archived"); break;

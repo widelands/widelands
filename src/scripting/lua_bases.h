@@ -106,7 +106,7 @@ public:
 	Widelands::Player & get(lua_State * L, Widelands::Editor_Game_Base &);
 
 protected:
-	inline Widelands::Player_Number player_number() { return m_pl; }
+	inline Widelands::Player_Number player_number() {return m_pl;}
 };
 
 void luaopen_wlbases(lua_State *);

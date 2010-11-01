@@ -202,7 +202,8 @@ public:
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const Point) const;
 
-	static void calc_info_icon_size(const Tribe_Descr & tribe, uint32_t& w, uint32_t& h);
+	static void calc_info_icon_size
+		(const Tribe_Descr & tribe, uint32_t & w, uint32_t & h);
 	void draw_info_icon(RenderTarget &, Point pt, bool anchor_below) const;
 
 	//  Information function from description.
@@ -320,16 +321,17 @@ protected:
 		virtual void load_pointers();
 
 	protected:
-		virtual const Task * get_task(const std::string& name);
+		virtual const Task * get_task(const std::string & name);
 
 	private:
 		uint32_t m_battle;
 	};
 
-	virtual Loader* create_loader();
+	virtual Loader * create_loader();
 
 public:
-	virtual void do_save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void do_save
+		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 };
 
 }

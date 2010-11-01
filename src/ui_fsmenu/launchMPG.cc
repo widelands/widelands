@@ -414,6 +414,8 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			else
 				load_map_info();
 			m_mapname.set_text(settings.mapname);
+			if (settings.scenario)
+				set_scenario_values();
 		}
 	}
 
@@ -425,10 +427,12 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 	m_wincondition.set_enabled
 		(m_settings->canChangeMap() && !settings.savegame && !settings.scenario);
 
-	if (settings.scenario)
-		set_scenario_values();
-
 	win_condition_update();
+
+	// Write client infos
+	//m_client_info.set_text(...);
+
+	// Update the multi player setup group
 	m_mpsg->refresh();
 }
 

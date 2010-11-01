@@ -326,7 +326,7 @@ void Road::cleanup(Editor_Game_Base & egbase)
 
 	Economy::check_split(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
-	if(upcast(Game, game, &egbase)) {
+	if (upcast(Game, game, &egbase)) {
 		m_flags[FlagStart]->update_items(*game, m_flags[FlagEnd]);
 		m_flags[FlagEnd]->update_items(*game, m_flags[FlagStart]);
 	}

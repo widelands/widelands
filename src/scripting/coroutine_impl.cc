@@ -17,6 +17,7 @@
  *
  */
 
+#include <csetjmp>
 #include <boost/lexical_cast.hpp>
 
 #include "logic/player.h"
@@ -27,7 +28,6 @@
 
 #include "coroutine_impl.h"
 
-#include "setjmp.h"
 #include "log.h"
 
 LuaCoroutine_Impl::LuaCoroutine_Impl(lua_State * ms)
@@ -99,7 +99,7 @@ void LuaCoroutine_Impl::read
 {
 	uint8_t version = fr.Unsigned8();
 
-	if(version != COROUTINE_DATA_PACKET_VERSION)
+	if (version != COROUTINE_DATA_PACKET_VERSION)
 		throw wexception("Unknown data packet version: %i\n", version);
 
 	// The current numbers of arguments on the stack
