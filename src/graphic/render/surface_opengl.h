@@ -24,7 +24,8 @@
 #include "graphic/surface.h"
 
 #include <SDL_opengl.h>
-#include <assert.h>
+
+#include <cassert>
 
 #define WL_GLINTERNALFORMAT GL_RGBA
 
@@ -53,20 +54,17 @@ public:
 	 * Manages a single OpenGL texture. This makes sure the texture is
 	 * freed when the object is destroyed.
 	*/
-	class oglTexture
-	{
-	public:
+	struct oglTexture {
 		oglTexture() {}
 		oglTexture(GLuint id): m_textureID(id) {}
-		~oglTexture()
-			{glDeleteTextures( 1, &m_textureID);}
+		~oglTexture() {glDeleteTextures(1, &m_textureID);}
 		GLuint id() const {return m_textureID;}
 	private:
 		GLuint m_textureID;
 	};
 
 	SurfaceOpenGL(SDL_Surface & surface);
-	SurfaceOpenGL(int w = 0, int h = 0);
+	explicit SurfaceOpenGL(int w = 0, int h = 0);
 	~SurfaceOpenGL();
 
 	//@{
@@ -92,8 +90,7 @@ public:
 	}
 
 	const SDL_PixelFormat * get_format() const;
-	const SDL_PixelFormat & format() const
-	{ return *get_format();}
+	SDL_PixelFormat const & format() const {return *get_format();}
 
 	/// Directly access the pixels. This is only valid if the surface is locked
 	inline uint16_t get_pitch() const {return m_tex_w * 4;}
@@ -122,7 +119,7 @@ public:
 	inline void set_pixel(uint32_t x, uint32_t y, Uint32 clr) {
 		x += m_offsx;
 		y += m_offsy;
-	
+
 		assert(x < get_w());
 		assert(y < get_h());
 		assert(m_locked);
@@ -137,9 +134,9 @@ public:
 	void brighten_rect(Rect, int32_t factor);
 
 	void draw_line
-			(int32_t x1, int32_t y1,
-			 int32_t x2, int32_t y2,
-			 RGBColor color, const Rect * clip = NULL);
+		(int32_t x1, int32_t y1,
+		 int32_t x2, int32_t y2,
+		 RGBColor, Rect const * clip = 0);
 
 	void blit(Point, Surface *, Rect srcrc, bool enable_alpha = true);
 	void blit(Rect dst, Surface *, Rect srcrc, bool enable_alpha = true);
@@ -149,7 +146,7 @@ public:
 
 private:
 	SurfaceOpenGL & operator= (SurfaceOpenGL const &);
-        explicit SurfaceOpenGL(SurfaceOpenGL const &);
+	explicit SurfaceOpenGL    (SurfaceOpenGL const &);
 
 	/// stores the opengl texture id and frees if destroyed
 	oglTexture * m_texture;
@@ -165,8 +162,8 @@ private:
 	uint8_t * m_pixels;
 	bool m_locked;
 
-	/// Keep the size of the opengl texture. This is neccesary because some
-	/// systems support only a poer of two for texture sizes.
+	/// Keep the size of the opengl texture. This is necessary because some
+	/// systems support only a power of two for texture sizes.
 	uint32_t m_tex_w, m_tex_h;
 };
 

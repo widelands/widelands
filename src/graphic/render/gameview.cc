@@ -979,16 +979,16 @@ void GameView::draw_field
 		case 2:
 			draw_field_int<Uint16>
 				(*sdlsurf,
-				f_vert, r_vert, bl_vert, br_vert,
-				roads,
-				tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
+				 f_vert, r_vert, bl_vert, br_vert,
+				 roads,
+				 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
 			break;
 		case 4:
 			draw_field_int<Uint32>
 				(*sdlsurf,
-				f_vert, r_vert, bl_vert, br_vert,
-				roads,
-				tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
+				 f_vert, r_vert, bl_vert, br_vert,
+				 roads,
+				 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
 			break;
 		default:
 			assert(false);
@@ -1266,15 +1266,16 @@ void GameView::draw_minimap
 	//       or three times per second
 	const SDL_PixelFormat & fmt =
 		g_gr->get_render_target()->get_surface().format();
-	SDL_Surface * surface = SDL_CreateRGBSurface
-				(SDL_SWSURFACE,
-				 rc.w,
-				 rc.h,
-				 fmt.BytesPerPixel == 2?16:32,
-				 fmt.Rmask,
-				 fmt.Gmask,
-				 fmt.Bmask,
-				 0);
+	SDL_Surface * surface =
+		SDL_CreateRGBSurface
+			(SDL_SWSURFACE,
+			 rc.w,
+			 rc.h,
+			 fmt.BytesPerPixel == 2 ? 16 : 32,
+			 fmt.Rmask,
+			 fmt.Gmask,
+			 fmt.Bmask,
+			 0);
 
 	Rect rc2;
 	rc2.x = rc2.y = 0;
@@ -1319,13 +1320,14 @@ void GameView::rendermap_init()
 		glScalef
 			(1.0f / static_cast<GLfloat>(TEXTURE_WIDTH),
 			 1.0f / static_cast<GLfloat>(TEXTURE_HEIGHT), 1);
-			 glDisable(GL_BLEND);
+		glDisable(GL_BLEND);
 
 		// Use scissor test to clip the window. This takes coordinates in screen
 		// coordinates (y goes from bottom to top)
 		glScissor
-			(m_rect.x, g_gr->get_yres() - m_rect.y - m_rect.h, m_rect.w, m_rect.h);
-			 glEnable(GL_SCISSOR_TEST);
+			(m_rect.x, g_gr->get_yres() - m_rect.y - m_rect.h,
+			 m_rect.w, m_rect.h);
+		glEnable(GL_SCISSOR_TEST);
 	}
 #endif
 }

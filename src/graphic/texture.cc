@@ -17,10 +17,11 @@
  *
  */
 
+#include "texture.h"
+
 #include "io/filesystem/layered_filesystem.h"
 #include "io/fileread.h"
 #include "graphic.h"
-#include "texture.h"
 
 #include "log.h"
 #include "constants.h"
@@ -38,13 +39,13 @@ Texture::Texture
 	(char            const &       fnametmpl,
 	 uint32_t                const frametime,
 	 SDL_PixelFormat const &       format)
-:
-m_colormap (0),
-m_pixels   (0),
-m_frame_num(0),
-m_nrframes (0),
-m_frametime(frametime),
-is_32bit   (format.BytesPerPixel == 4)
+	:
+	m_colormap (0),
+	m_pixels   (0),
+	m_frame_num(0),
+	m_nrframes (0),
+	m_frametime(frametime),
+	is_32bit   (format.BytesPerPixel == 4)
 {
 
 	// Load the pictures one by one
