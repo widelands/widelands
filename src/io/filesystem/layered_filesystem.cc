@@ -73,8 +73,8 @@ void LayeredFileSystem::AddFileSystem(FileSystem & fs)
 }
 
 /**
- * Set the home filesystem (which is the preferred filesystem for writing files).
- * Take ownership of the given filesystem.
+ * Set the home filesystem (which is the preferred filesystem for writing
+ * files). Take ownership of the given filesystem.
  */
 void LayeredFileSystem::SetHomeFileSystem(FileSystem & fs)
 {

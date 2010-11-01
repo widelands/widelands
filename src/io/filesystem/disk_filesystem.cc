@@ -318,7 +318,9 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname)
 			++it;
 		}
 	} catch (const std::exception & e) {
-		throw wexception("RealFSImpl::EnsureDirectoryExists(%s): %s", dirname.c_str(), e.what());
+		throw wexception
+			("RealFSImpl::EnsureDirectoryExists(%s): %s",
+			 dirname.c_str(), e.what());
 	}
 }
 
