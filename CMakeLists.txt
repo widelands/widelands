@@ -140,7 +140,7 @@ if (WL_UNIT_TESTS)
     DEPENDS widelands;test_widelands_scripting
   )
 else (WL_UNIT_TESTS)
-  message(STATUS "Unit tests not selected")
+  message(STATUS "Disabled Unit Tests")
   find_package(Boost 1.35.0 REQUIRED)
 endif (WL_UNIT_TESTS)
 
@@ -200,9 +200,8 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
     CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_STRICT} Compiler_strict_mode_supported)
     IF (Compiler_strict_mode_supported)
       set (WL_COMPILERFLAG_STRICT " ${PARAMETER_COMPILERFLAG_STRICT}") #the space is on purpose!
+      message(STATUS "Strict mode enabled, expect compilation errors instead of compilation warnings!")
     ENDIF (Compiler_strict_mode_supported)
-  ELSE (WL_STRICT)
-    message(STATUS "Strict mode not supported!")
   ENDIF (WL_STRICT)
 ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
