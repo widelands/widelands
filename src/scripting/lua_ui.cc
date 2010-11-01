@@ -110,11 +110,11 @@ static void _put_all_visible_buttons_into_table
 {
 	if (not g) return;
 
-	for(UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
+	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
 		_put_all_visible_buttons_into_table(L, f);
 
-		if(upcast(UI::Button, b, f))
+		if (upcast(UI::Button, b, f))
 			if (b->is_visible()) {
 				lua_pushstring(L, b->get_name());
 				to_lua<L_Button>(L, new L_Button(b));
@@ -141,11 +141,11 @@ static void _put_all_tabs_into_table
 {
 	if (not g) return;
 
-	for(UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
+	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
 		_put_all_tabs_into_table(L, f);
 
-		if(upcast(UI::Tab_Panel, t, f))
+		if (upcast(UI::Tab_Panel, t, f))
 			container_iterate_const(UI::Tab_Panel::TabList, t->tabs(), tab) {
 				lua_pushstring(L, (*tab)->get_name());
 				to_lua<L_Tab>(L, new L_Tab(*tab));
@@ -174,11 +174,11 @@ static void _put_all_visible_windows_into_table
 {
 	if (not g) return;
 
-	for(UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
+	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
 		_put_all_visible_windows_into_table(L, f);
 
-		if(upcast(UI::Window, win, f)) {
+		if (upcast(UI::Window, win, f)) {
 			lua_pushstring(L, win->get_name());
 			to_lua<L_Window>(L, new L_Window(win));
 			lua_rawset(L, -3);
@@ -258,7 +258,7 @@ int L_Panel::set_height(lua_State * L) {
 */
 int L_Panel::get_position_x(lua_State * L) {
 	assert(m_panel);
-	Point p = m_panel->to_parent(Point(0,0));
+	Point p = m_panel->to_parent(Point(0, 0));
 
 	lua_pushint32(L, p.x);
 	return 1;
@@ -271,7 +271,7 @@ int L_Panel::set_position_x(lua_State * L) {
 }
 int L_Panel::get_position_y(lua_State * L) {
 	assert(m_panel);
-	Point p = m_panel->to_parent(Point(0,0));
+	Point p = m_panel->to_parent(Point(0, 0));
 
 	lua_pushint32(L, p.y);
 	return 1;
@@ -596,8 +596,8 @@ int L_MapView::set_census(lua_State * L) {
 		otherwise
 */
 int L_MapView::get_statistics(lua_State * L) {
-	lua_pushboolean(L, get()->get_display_flag
-			(Interactive_Base::dfShowStatistics));
+	lua_pushboolean
+		(L, get()->get_display_flag(Interactive_Base::dfShowStatistics));
 	return 1;
 }
 int L_MapView::set_statistics(lua_State * L) {
@@ -630,8 +630,8 @@ int L_MapView::get_is_building_road(lua_State * L) {
 		:type field: :class:`wl.map.Field`
 */
 int L_MapView::click(lua_State * L) {
-	get()->warp_mouse_to_node((*get_user_class<LuaMap::L_Field>
-				(L, 2))->coords());
+	get()->warp_mouse_to_node
+		((*get_user_class<LuaMap::L_Field>(L, 2))->coords());
 	get()->fieldclicked.call();
 	return 0;
 }
@@ -649,7 +649,7 @@ int L_MapView::click(lua_State * L) {
 */
 // UNTESTED
 int L_MapView::start_road_building(lua_State * L) {
-	Interactive_Base* me = get();
+	Interactive_Base * me = get();
 	if (me->is_building_road())
 		return report_error(L, "Already building road!");
 
@@ -671,7 +671,7 @@ int L_MapView::start_road_building(lua_State * L) {
 */
 // UNTESTED
 int L_MapView::abort_road_building(lua_State * L) {
-	Interactive_Base* me = get();
+	Interactive_Base * me = get();
 	if (me->is_building_road())
 		me->abort_build_road();
 	return 0;

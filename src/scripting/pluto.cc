@@ -36,17 +36,17 @@ int luna_restore_object(lua_State * L);
 #define verify(x) { int v = (int)((x)); v=v; lua_assert(v); }
 
 typedef struct PersistInfo_t {
-	lua_State *L;
+	lua_State * L;
 	int counter;
 	Widelands::FileWrite * fw;
 } PersistInfo;
 
 typedef struct UnpersistInfo_t {
-	lua_State *L;
+	lua_State * L;
 	Widelands::FileRead * fr;
 } UnpersistInfo;
 
-static void unpersist(UnpersistInfo *upi);
+static void unpersist(UnpersistInfo * upi);
 
 /*
  * ========================================================================
@@ -57,11 +57,12 @@ static void unpersist(UnpersistInfo *upi);
 /* The object is left on the stack. This is primarily used by unpersist, but
  * may be used by GCed objects that may incur cycles in order to preregister
  * the object. */
-static void registerobject(int ref, UnpersistInfo *upi)
+static void registerobject(int ref, UnpersistInfo * upi)
 {
 					/* perms reftbl ... obj */
 	lua_checkstack(upi->L, 2);
-	lua_pushlightuserdata(upi->L, reinterpret_cast<void*>
+	lua_pushlightuserdata
+		(upi->L, reinterpret_cast<void *>
 			(static_cast<intptr_t>(ref)));
 					/* perms reftbl ... obj ref */
 	lua_pushvalue(upi->L, -2);
@@ -71,18 +72,18 @@ static void registerobject(int ref, UnpersistInfo *upi)
 }
 
 /* Mutual recursion requires prototype */
-static void persist(PersistInfo *pi);
+static void persist(PersistInfo * pi);
 
 /* A simple reimplementation of the unfortunately static function luaA_index.
  * Does not support the global table, registry, or upvalues. */
-static StkId getobject(lua_State *L, int stackpos)
+static StkId getobject(lua_State * L, int stackpos)
 {
-	if(stackpos > 0) {
-		lua_assert(L->base+stackpos-1 < L->top);
-		return L->base+stackpos-1;
+	if (stackpos > 0) {
+		lua_assert(L->base + stackpos - 1 < L->top);
+		return L->base + stackpos - 1;
 	} else {
-		lua_assert(L->top-stackpos >= L->base);
-		return L->top+stackpos;
+		lua_assert(L->top - stackpos >= L->base);
+		return L->top + stackpos;
 	}
 }
 
@@ -90,14 +91,14 @@ static StkId getobject(lua_State *L, int stackpos)
  * metatable. "default" is whether the object, if it doesn't have a __persist
  * entry, is literally persistable or not.
  * Returns true if special persistence is used. */
-static int persistspecialobject(PersistInfo *pi, int defaction)
+static int persistspecialobject(PersistInfo * pi, int defaction)
 {
 					/* perms reftbl ... obj */
 	lua_checkstack(pi->L, 4);
 	/* Check whether we should persist literally, or via the __persist
 	 * metafunction */
-	if(!lua_getmetatable(pi->L, -1)) {
-		if(defaction) {
+	if (!lua_getmetatable(pi->L, -1)) {
+		if (defaction) {
 			pi->fw->Unsigned8(0);
 			return 0;
 		} else {
@@ -110,11 +111,11 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 					/* perms reftbl sptbl ... obj mt "__persist" */
 	lua_rawget(pi->L, -2);
 					/* perms reftbl sptbl ... obj mt __persist? */
-	if(lua_isnil(pi->L, -1)) {
+	if (lua_isnil(pi->L, -1)) {
 					/* perms reftbl sptbl ... obj mt nil */
 		lua_pop(pi->L, 2);
 					/* perms reftbl sptbl ... obj */
-		if(defaction) {
+		if (defaction) {
 			pi->fw->Unsigned8(0);
 			return 0;
 		} else {
@@ -122,9 +123,9 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 			lua_error(pi->L);
 			return 0; /* not reached */
 		}
-	} else if(lua_isboolean(pi->L, -1)) {
+	} else if (lua_isboolean(pi->L, -1)) {
 					/* perms reftbl sptbl ... obj mt bool */
-		if(lua_toboolean(pi->L, -1)) {
+		if (lua_toboolean(pi->L, -1)) {
 					/* perms reftbl sptbl ... obj mt true */
 			lua_pop(pi->L, 2);
 					/* perms reftbl sptbl ... obj */
@@ -135,7 +136,7 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 			lua_error(pi->L);
 			return 0; /* not reached */
 		}
-	} else if(!lua_isfunction(pi->L, -1)) {
+	} else if (!lua_isfunction(pi->L, -1)) {
 		lua_pushstring(pi->L, "__persist not nil, boolean, or function");
 		lua_error(pi->L);
 	}
@@ -146,7 +147,7 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 					/* perms reftbl ... obj mt table? */
 	// The __persist function returned a table which contains the data
 	// the __unpersist function needs to recreate the state
-	if(!lua_istable(pi->L, -1)) {
+	if (!lua_istable(pi->L, -1)) {
 		lua_pushstring(pi->L, "__persist function did not return a table");
 		lua_error(pi->L);
 	}
@@ -162,17 +163,17 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 	return 1;
 }
 
-static void persisttable(PersistInfo *pi)
+static void persisttable(PersistInfo * pi)
 {
 					/* perms reftbl ... tbl */
 	lua_checkstack(pi->L, 3);
-	if(persistspecialobject(pi, 1)) {
+	if (persistspecialobject(pi, 1)) {
 					/* perms reftbl ... tbl */
 		return;
 	}
 					/* perms reftbl ... tbl */
 	/* First, persist the metatable (if any) */
-	if(!lua_getmetatable(pi->L, -1)) {
+	if (!lua_getmetatable(pi->L, -1)) {
 		lua_pushnil(pi->L);
 	}
 					/* perms reftbl ... tbl mt/nil */
@@ -183,7 +184,7 @@ static void persisttable(PersistInfo *pi)
 	/* Now, persist all k/v pairs */
 	lua_pushnil(pi->L);
 					/* perms reftbl ... tbl nil */
-	while(lua_next(pi->L, -2)) {
+	while (lua_next(pi->L, -2)) {
 					/* perms reftbl ... tbl k v */
 		lua_pushvalue(pi->L, -2);
 					/* perms reftbl ... tbl k v k */
@@ -203,7 +204,7 @@ static void persisttable(PersistInfo *pi)
 					/* perms reftbl ... tbl */
 }
 
-static void unpersistspecialtable(int, UnpersistInfo *upi)
+static void unpersistspecialtable(int, UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 1);
@@ -212,14 +213,14 @@ static void unpersistspecialtable(int, UnpersistInfo *upi)
 	lua_assert(lua_istable(upi->L, -1));
 					/* perms reftbl ... spfunc */
 
-   luna_restore_object(upi->L);
+	luna_restore_object(upi->L);
 
 					/* perms reftbl ... tbl? */
 	lua_assert(lua_istable(upi->L, -1));
 					/* perms reftbl ... tbl */
 }
 
-static void unpersistliteraltable(int ref, UnpersistInfo *upi)
+static void unpersistliteraltable(int ref, UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 3);
@@ -232,7 +233,7 @@ static void unpersistliteraltable(int ref, UnpersistInfo *upi)
 	{
 		unpersist(upi);
 					/* perms reftbl ... tbl mt/nil? */
-		if(lua_istable(upi->L, -1)) {
+		if (lua_istable(upi->L, -1)) {
 					/* perms reftbl ... tbl mt */
 			lua_setmetatable(upi->L, -2);
 					/* perms reftbl ... tbl */
@@ -246,15 +247,14 @@ static void unpersistliteraltable(int ref, UnpersistInfo *upi)
 					/* perms reftbl ... tbl */
 	}
 
-	while(1)
-	{
-					/* perms reftbl ... tbl */
+	for (;;) {
+		/* perms reftbl ... tbl */
 		unpersist(upi);
-					/* perms reftbl ... tbl key/nil */
-		if(lua_isnil(upi->L, -1)) {
-					/* perms reftbl ... tbl nil */
+		/* perms reftbl ... tbl key/nil */
+		if (lua_isnil(upi->L, -1)) {
+			/* perms reftbl ... tbl nil */
 			lua_pop(upi->L, 1);
-					/* perms reftbl ... tbl */
+			/* perms reftbl ... tbl */
 			break;
 		}
 					/* perms reftbl ... tbl key */
@@ -268,12 +268,12 @@ static void unpersistliteraltable(int ref, UnpersistInfo *upi)
 }
 
 
-static void unpersisttable(int ref, UnpersistInfo *upi)
+static void unpersisttable(int ref, UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 1);
 	{
-		if(upi->fr->Unsigned8()) {
+		if (upi->fr->Unsigned8()) {
 			unpersistspecialtable(ref, upi);
 					/* perms reftbl ... tbl */
 		} else {
@@ -285,70 +285,71 @@ static void unpersisttable(int ref, UnpersistInfo *upi)
 }
 
 
-static void persistuserdata(PersistInfo *pi) {
+static void persistuserdata(PersistInfo * pi) {
 					/* perms reftbl ... udata */
 	lua_checkstack(pi->L, 2);
-	if(persistspecialobject(pi, 0)) {
+	if (persistspecialobject(pi, 0)) {
 					/* perms reftbl ... udata */
 		return;
 	} else {
-		lua_pushstring(pi->L, "Attempt to persist a userdata without a "
-				"__persist function. This is not possible!");
+		lua_pushstring
+			(pi->L, "Attempt to persist a userdata without a "
+			 "__persist function. This is not possible!");
 		lua_error(pi->L);
 	}
 }
 
 
-static Proto *toproto(lua_State *L, int stackpos)
+static Proto * toproto(lua_State * L, int stackpos)
 {
 	return gco2p(getobject(L, stackpos)->value.gc);
 }
 
-static UpVal *toupval(lua_State *L, int stackpos)
+static UpVal * toupval(lua_State * L, int stackpos)
 {
 	lua_assert(ttype(getobject(L, stackpos)) == LUA_TUPVAL);
 	return gco2uv(getobject(L, stackpos)->value.gc);
 }
 
-static void pushproto(lua_State *L, Proto *proto)
+static void pushproto(lua_State * L, Proto * proto)
 {
 	TValue o;
 	setptvalue(L, &o, proto);
 	pdep_pushobject(L, &o);
 }
 
-#define setuvvalue(L,obj,x) \
-  { TValue *i_o=(obj); \
-    i_o->value.gc=obj2gco(x); i_o->tt=LUA_TUPVAL; \
-    checkliveness(G(L),i_o); }
+#define setuvvalue(L, obj, x) { \
+	TValue * i_o = (obj); \
+   i_o->value.gc = obj2gco(x); i_o->tt = LUA_TUPVAL; \
+   checkliveness(G(L), i_o); }
 
-static void pushupval(lua_State *L, UpVal *upval)
+static void pushupval(lua_State * L, UpVal * upval)
 {
 	TValue o;
 	setuvvalue(L, &o, upval);
 	pdep_pushobject(L, &o);
 }
 
-static void pushclosure(lua_State *L, Closure *closure)
+static void pushclosure(lua_State * L, Closure * closure)
 {
 	TValue o;
 	setclvalue(L, &o, closure);
 	pdep_pushobject(L, &o);
 }
 
-static void pushstring(lua_State *L, TString *s)
+static void pushstring(lua_State * L, TString * s)
 {
 	TValue o;
 	setsvalue(L, &o, s);
 	pdep_pushobject(L, &o);
 }
 
-static void persistfunction(PersistInfo *pi)
+static void persistfunction(PersistInfo * pi)
 {
 					/* perms reftbl ... func */
-	Closure *cl = clvalue(getobject(pi->L, -1));
+	Closure * cl = clvalue(getobject(pi->L, -1));
 	lua_checkstack(pi->L, 2);
-	if(cl->c.isC) {
+	if (cl->c.isC) {
 		/* It's a C function. For now, we aren't going to allow
 		 * persistence of C closures, even if the "C proto" is
 		 * already in the permanents table. */
@@ -372,7 +373,7 @@ static void persistfunction(PersistInfo *pi)
 		 * themselves) */
 		{
 			int i;
-			for(i=0; i<cl->l.p->nups; i++) {
+			for (i = 0; i < cl->l.p->nups; i++) {
 					/* perms reftbl ... func */
 				pushupval(pi->L, cl->l.upvals[i]);
 					/* perms reftbl ... func upval */
@@ -386,7 +387,7 @@ static void persistfunction(PersistInfo *pi)
 		{
 			lua_getfenv(pi->L, -1);
 					/* perms reftbl ... func fenv */
-			if(lua_equal(pi->L, -1, LUA_GLOBALSINDEX)) {
+			if (lua_equal(pi->L, -1, LUA_GLOBALSINDEX)) {
 				/* Function has the default fenv */
 					/* perms reftbl ... func _G */
 				lua_pop(pi->L, 1);
@@ -402,9 +403,9 @@ static void persistfunction(PersistInfo *pi)
 	}
 }
 
-static UpVal *makeupval(lua_State *L, int stackpos)
+static UpVal * makeupval(lua_State * L, int stackpos)
 {
-	UpVal *uv = pdep_new(L, UpVal);
+	UpVal * uv = pdep_new(L, UpVal);
 	pdep_link(L, obj2gco(uv), LUA_TUPVAL);
 	uv->tt = LUA_TUPVAL;
 	uv->v = &uv->u.value;
@@ -414,9 +415,9 @@ static UpVal *makeupval(lua_State *L, int stackpos)
 	return uv;
 }
 
-static Proto *makefakeproto(lua_State *L, lu_byte nups)
+static Proto * makefakeproto(lua_State * L, lu_byte nups)
 {
-	Proto *p = pdep_newproto(L);
+	Proto * p = pdep_newproto(L);
 	p->sizelineinfo = 1;
 	p->lineinfo = pdep_newvector(L, 1, int);
 	p->lineinfo[0] = 1;
@@ -432,13 +433,13 @@ static Proto *makefakeproto(lua_State *L, lu_byte nups)
 	return p;
 }
 
-static void unboxupval(lua_State *L)
+static void unboxupval(lua_State * L)
 {
 					/* ... func */
-	LClosure *lcl;
-	UpVal *uv;
+	LClosure * lcl;
+	UpVal * uv;
 
-	lcl = reinterpret_cast<LClosure*>(clvalue(getobject(L, -1)));
+	lcl = reinterpret_cast<LClosure *>(clvalue(getobject(L, -1)));
 	uv = lcl->upvals[0];
 	lua_pop(L, 1);
 					/* ... */
@@ -446,10 +447,10 @@ static void unboxupval(lua_State *L)
 					/* ... upval */
 }
 
-static void unpersistfunction(int ref, UnpersistInfo *upi)
+static void unpersistfunction(int ref, UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
-	LClosure *lcl;
+	LClosure * lcl;
 	int i;
 	lua_checkstack(upi->L, 2);
 
@@ -466,7 +467,7 @@ static void unpersistfunction(int ref, UnpersistInfo *upi)
 	/* Also, we need to temporarily fill the upvalues */
 	lua_pushnil(upi->L);
 					/* perms reftbl ... func nil */
-	for(i=0; i<nupvalues; i++) {
+	for (i = 0; i<nupvalues; i++) {
 		lcl->upvals[i] = makeupval(upi->L, -1);
 	}
 	lua_pop(upi->L, 1);
@@ -485,7 +486,7 @@ static void unpersistfunction(int ref, UnpersistInfo *upi)
 	lua_pop(upi->L, 1);
 					/* perms reftbl ... func */
 
-	for(i=0; i<nupvalues; i++) {
+	for (i = 0; i < nupvalues; i++) {
 					/* perms reftbl ... func */
 		unpersist(upi);
 					/* perms reftbl ... func func2 */
@@ -500,10 +501,11 @@ static void unpersistfunction(int ref, UnpersistInfo *upi)
 	/* Finally, the fenv */
 	unpersist(upi);
 					/* perms reftbl ... func fenv/nil? */
-	lua_assert(lua_type(upi->L, -1) == LUA_TNIL ||
-		lua_type(upi->L, -1) == LUA_TTABLE);
+	lua_assert
+		(lua_type(upi->L, -1) == LUA_TNIL ||
+		 lua_type(upi->L, -1) == LUA_TTABLE);
 					/* perms reftbl ... func fenv/nil */
-	if(!lua_isnil(upi->L, -1)) {
+	if (!lua_isnil(upi->L, -1)) {
 					/* perms reftbl ... func fenv */
 		lua_setfenv(upi->L, -2);
 					/* perms reftbl ... func */
@@ -538,10 +540,10 @@ static void unpersistfunction(int ref, UnpersistInfo *upi)
  * (d) When unpersisting, "reopen" each of these upvalues as the thread is
  * unpersisted
  */
-static void persistupval(PersistInfo *pi)
+static void persistupval(PersistInfo * pi)
 {
 					/* perms reftbl ... upval */
-	UpVal *uv = toupval(pi->L, -1);
+	UpVal * uv = toupval(pi->L, -1);
 	lua_checkstack(pi->L, 1);
 
 	/* We can't permit the upval to linger around on the stack, as Lua
@@ -555,17 +557,17 @@ static void persistupval(PersistInfo *pi)
 					/* perms reftbl ... obj */
 }
 
-static void persistproto(PersistInfo *pi)
+static void persistproto(PersistInfo * pi)
 {
 					/* perms reftbl ... proto */
-	Proto *p = toproto(pi->L, -1);
+	Proto * p = toproto(pi->L, -1);
 	lua_checkstack(pi->L, 2);
 
 	/* Persist constant refs */
 	{
 		int i;
 		pi->fw->Signed32(p->sizek);
-		for(i=0; i<p->sizek; i++) {
+		for (i = 0; i < p->sizek; i++) {
 			pdep_pushobject(pi->L, &p->k[i]);
 					/* perms reftbl ... proto const */
 			persist(pi);
@@ -578,7 +580,7 @@ static void persistproto(PersistInfo *pi)
 	/* serialize inner Proto refs */
 	{
 		pi->fw->Signed32(p->sizep);
-		for(int i=0; i<p->sizep; i++)
+		for (int i = 0; i < p->sizep; i++)
 		{
 			pushproto(pi->L, p->p[i]);
 					/* perms reftbl ... proto subproto */
@@ -601,7 +603,7 @@ static void persistproto(PersistInfo *pi)
 	{
 		int i;
 		pi->fw->Signed32(p->sizeupvalues);
-		for(i=0; i<p->sizeupvalues; i++)
+		for (i = 0; i < p->sizeupvalues; i++)
 		{
 			pushstring(pi->L, p->upvalues[i]);
 			persist(pi);
@@ -612,7 +614,7 @@ static void persistproto(PersistInfo *pi)
 	{
 		int i;
 		pi->fw->Signed32(p->sizelocvars);
-		for(i=0; i<p->sizelocvars; i++)
+		for (i = 0; i < p->sizelocvars; i++)
 		{
 			pushstring(pi->L, p->locvars[i].varname);
 			persist(pi);
@@ -631,7 +633,7 @@ static void persistproto(PersistInfo *pi)
 	/* Serialize line numbers */
 	{
 		pi->fw->Signed32(p->sizelineinfo);
-		for(int32_t i = 0; i < p->sizelineinfo; i++)
+		for (int32_t i = 0; i < p->sizelineinfo; i++)
 			pi->fw->Signed32(p->lineinfo[i]);
 	}
 
@@ -652,10 +654,10 @@ static void persistproto(PersistInfo *pi)
 
 /* Copies a stack, but the stack is reversed in the process
  */
-static size_t revappendstack(lua_State *from, lua_State *to)
+static size_t revappendstack(lua_State * from, lua_State * to)
 {
 	StkId o;
-	for(o=from->top-1; o>=from->stack; o--) {
+	for (o = from->top - 1; o >= from->stack; o--) {
 		setobj2s(to, to->top, o);
 		to->top++;
 	}
@@ -664,14 +666,14 @@ static size_t revappendstack(lua_State *from, lua_State *to)
 
 /* Persist all stack members
  */
-static void persistthread(PersistInfo *pi)
+static void persistthread(PersistInfo * pi)
 {
 	size_t posremaining;
-	lua_State *L2;
+	lua_State * L2;
 					/* perms reftbl ... thr */
 	L2 = lua_tothread(pi->L, -1);
 	lua_checkstack(pi->L, L2->top - L2->stack + 1);
-	if(pi->L == L2) {
+	if (pi->L == L2) {
 		lua_pushstring(pi->L, "Can't persist currently running thread");
 		lua_error(pi->L);
 		return; /* not reached */
@@ -681,7 +683,7 @@ static void persistthread(PersistInfo *pi)
 	posremaining = revappendstack(L2, pi->L);
 					/* perms reftbl ... thr (rev'ed contents of L2) */
 	pi->fw->Unsigned32(posremaining);
-	for(; posremaining > 0; posremaining--) {
+	for (; posremaining > 0; posremaining--) {
 		persist(pi);
 		lua_pop(pi->L, 1);
 	}
@@ -690,8 +692,8 @@ static void persistthread(PersistInfo *pi)
 	{
 		size_t i, numframes = (L2->ci - L2->base_ci) + 1;
 		pi->fw->Unsigned32(numframes);
-		for(i=0; i<numframes; i++) {
-			CallInfo *ci = L2->base_ci + i;
+		for (i = 0; i < numframes; i++) {
+			CallInfo * ci = L2->base_ci + i;
 			size_t stackbase = ci->base - L2->stack;
 			size_t stackfunc = ci->func - L2->stack;
 			size_t stacktop = ci->top - L2->stack;
@@ -706,7 +708,7 @@ static void persistthread(PersistInfo *pi)
 		}
 	}
 
-	/* Serialize the state's other parameters, with the exception of upval stuff */
+	/* Serialize the state's other parameters, except for the upval stuff */
 	{
 		size_t stackbase = L2->base - L2->stack;
 		size_t stacktop = L2->top - L2->stack;
@@ -720,10 +722,10 @@ static void persistthread(PersistInfo *pi)
 	/* Finally, record upvalues which need to be reopened */
 	/* See the comment above persistupval() for why we do this */
 	{
-		GCObject *gco;
-		UpVal *uv;
+		GCObject * gco;
+		UpVal * uv;
 					/* perms reftbl ... thr */
-		for(gco = L2->openupval; gco != NULL; gco = uv->next) {
+		for (gco = L2->openupval; gco != NULL; gco = uv->next) {
 			uv = gco2uv(gco);
 
 			/* Make sure upvalue is really open */
@@ -745,11 +747,11 @@ static void persistthread(PersistInfo *pi)
 					/* perms reftbl ... thr */
 }
 
-static void persistboolean(PersistInfo *pi)
+static void persistboolean(PersistInfo * pi)
 {
 	pi->fw->Unsigned8(lua_toboolean(pi->L, -1));
 }
-static void unpersistboolean(UnpersistInfo *upi)
+static void unpersistboolean(UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 1);
@@ -762,12 +764,12 @@ static void unpersistboolean(UnpersistInfo *upi)
  * we do what all scientists to since the dawn of matlab: we convert it
  * to a string that Lua can interpret as the same number again
  */
-static void persistnumber(PersistInfo *pi)
+static void persistnumber(PersistInfo * pi)
 {
 	const char * n = lua_tostring(pi->L, -1);
 	pi->fw->CString(n);
 }
-static void unpersistnumber(UnpersistInfo *upi)
+static void unpersistnumber(UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 1);
@@ -781,14 +783,14 @@ static void unpersistnumber(UnpersistInfo *upi)
 }
 
 
-static void persiststring(PersistInfo *pi)
+static void persiststring(PersistInfo * pi)
 {
 	size_t length = lua_strlen(pi->L, -1);
 	pi->fw->Unsigned32(length);
 	pi->fw->Data
 		(lua_tostring(pi->L, -1), length, Widelands::FileWrite::Pos::Null());
 }
-static void unpersiststring(UnpersistInfo *upi)
+static void unpersiststring(UnpersistInfo * upi)
 {
 					/* perms reftbl sptbl ref */
 	lua_checkstack(upi->L, 1);
@@ -799,7 +801,7 @@ static void unpersiststring(UnpersistInfo *upi)
 
 /* Top-level delegating persist function
  */
-static void persist(PersistInfo *pi)
+static void persist(PersistInfo * pi)
 {
 					/* perms reftbl ... obj */
 	lua_checkstack(pi->L, 2);
@@ -808,7 +810,7 @@ static void persist(PersistInfo *pi)
 					/* perms reftbl ... obj obj */
 	lua_rawget(pi->L, 2);
 					/* perms reftbl ... obj ref? */
-	if(!lua_isnil(pi->L, -1)) {
+	if (!lua_isnil(pi->L, -1)) {
 					/* perms reftbl ... obj ref */
 		int ref = reinterpret_cast<intptr_t>(lua_touserdata(pi->L, -1));
 		pi->fw->Unsigned8(0);
@@ -821,7 +823,7 @@ static void persist(PersistInfo *pi)
 	lua_pop(pi->L, 1);
 					/* perms reftbl ... obj */
 	/* If the object is nil, write the pseudoreference 0 */
-	if(lua_isnil(pi->L, -1)) {
+	if (lua_isnil(pi->L, -1)) {
 		/* firsttime, ref */
 		pi->fw->Unsigned8(0);
 		pi->fw->Unsigned32(0);
@@ -831,8 +833,9 @@ static void persist(PersistInfo *pi)
 	pi->fw->Unsigned8(1);
 	lua_pushvalue(pi->L, -1);
 					/* perms reftbl ... obj obj */
-	lua_pushlightuserdata(pi->L, reinterpret_cast<void *>
-			(static_cast<intptr_t>(++(pi->counter))));
+	lua_pushlightuserdata
+		(pi->L, reinterpret_cast<void *>
+		 (static_cast<intptr_t>(++(pi->counter))));
 					/* perms reftbl ... obj obj ref */
 	lua_rawset(pi->L, 2);
 					/* perms reftbl ... obj */
@@ -846,7 +849,7 @@ static void persist(PersistInfo *pi)
 					/* perms reftbl ... obj obj */
 		lua_gettable(pi->L, 1);
 					/* perms reftbl ... obj permkey? */
-		if(!lua_isnil(pi->L, -1)) {
+		if (!lua_isnil(pi->L, -1)) {
 					/* perms reftbl ... obj permkey */
 			int type = PLUTO_TPERMANENT;
 			pi->fw->Signed32(type);
@@ -866,7 +869,7 @@ static void persist(PersistInfo *pi)
 		pi->fw->Signed32(type);
 	}
 
-	switch(lua_type(pi->L, -1)) {
+	switch (lua_type(pi->L, -1)) {
 		case LUA_TBOOLEAN:
 			persistboolean(pi);
 			break;
@@ -899,11 +902,11 @@ static void persist(PersistInfo *pi)
 			lua_error(pi->L);
 			break;
 		default:
-			lua_assert(0);
+			lua_assert(false);
 	}
 }
 
-void pluto_persist(lua_State *L, Widelands::FileWrite & fw)
+void pluto_persist(lua_State * L, Widelands::FileWrite & fw)
 {
 	PersistInfo pi;
 
@@ -949,9 +952,9 @@ void pluto_persist(lua_State *L, Widelands::FileWrite & fw)
  * if we make the values weak they'll be collected (since nothing else
  * references them). Our solution, during unpersisting, is to represent
  * upvalues as dummy functions, each with one upvalue. */
-static void boxupval_start(lua_State *L)
+static void boxupval_start(lua_State * L)
 {
-	LClosure *lcl;
+	LClosure * lcl;
 	lcl = reinterpret_cast<LClosure *>(pdep_newLclosure(L, 1, hvalue(&L->l_gt)));
 	pushclosure(L, reinterpret_cast<Closure *>(lcl));
 					/* ... func */
@@ -964,10 +967,10 @@ static void boxupval_start(lua_State *L)
 	lua_pop(L, 1);
 }
 
-static void boxupval_finish(lua_State *L)
+static void boxupval_finish(lua_State * L)
 {
 					/* ... func obj */
-	LClosure *lcl = reinterpret_cast<LClosure *>(clvalue(getobject(L, -2)));
+	LClosure * lcl = reinterpret_cast<LClosure *>(clvalue(getobject(L, -2)));
 
 	lcl->upvals[0]->u.value = *getobject(L, -1);
 	lua_pop(L, 1);
@@ -975,7 +978,7 @@ static void boxupval_finish(lua_State *L)
 
 
 
-static void unpersistupval(int ref, UnpersistInfo *upi)
+static void unpersistupval(int ref, UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 2);
@@ -990,10 +993,10 @@ static void unpersistupval(int ref, UnpersistInfo *upi)
 					/* perms reftbl ... func */
 }
 
-static void unpersistproto(int ref, UnpersistInfo *upi)
+static void unpersistproto(int, UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
-	Proto *p;
+	Proto * p;
 	int i;
 	int sizep, sizek;
 
@@ -1001,13 +1004,11 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 	 * particular, we need to give the function a valid string for its
 	 * source, and valid code, even before we actually read in the real
 	 * code. */
-	TString *source = pdep_newlstr(upi->L, "", 0);
-
-	(void) ref;			/* unused */
+	TString * source = pdep_newlstr(upi->L, "", 0);
 
 	p = pdep_newproto(upi->L);
 	p->source = source;
-	p->sizecode=1;
+	p->sizecode = 1;
 	p->code = pdep_newvector(upi->L, 1, Instruction);
 	p->code[0] = CREATE_ABC(OP_RETURN, 0, 1, 0);
 	p->maxstacksize = 2;
@@ -1025,7 +1026,7 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 	{
 		sizek = upi->fr->Signed32();
 		pdep_reallocvector(upi->L, p->k, 0, sizek, TValue);
-		for(i=0; i<sizek; i++) {
+		for (i = 0; i < sizek; i++) {
 					/* perms reftbl ... proto */
 			unpersist(upi);
 					/* perms reftbl ... proto k */
@@ -1039,8 +1040,8 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 	/* Read in sub-proto references */
 	{
 		sizep = upi->fr->Signed32();
-		pdep_reallocvector(upi->L, p->p, 0, sizep, Proto*);
-		for(i=0; i<sizep; i++) {
+		pdep_reallocvector(upi->L, p->p, 0, sizep, Proto *);
+		for (i = 0; i < sizep; i++) {
 					/* perms reftbl ... proto */
 			unpersist(upi);
 					/* perms reftbl ... proto subproto */
@@ -1066,10 +1067,12 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 		if (p->sizeupvalues)
 		{
 			pdep_reallocvector(upi->L, p->upvalues, 0, p->sizeupvalues, TString *);
-			for(i=0; i<p->sizeupvalues; i++)
+			for (i = 0; i < p->sizeupvalues; i++)
 			{
 				unpersist(upi);
-				p->upvalues[i] = pdep_newlstr(upi->L, lua_tostring(upi->L, -1), strlen(lua_tostring(upi->L, -1)));
+				p->upvalues[i] = pdep_newlstr
+					(upi->L, lua_tostring(upi->L, -1),
+					 strlen(lua_tostring(upi->L, -1)));
 				lua_pop(upi->L, 1);
 			}
 		}
@@ -1081,10 +1084,12 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 		if (p->sizelocvars)
 		{
 			pdep_reallocvector(upi->L, p->locvars, 0, p->sizelocvars, LocVar);
-			for(i=0; i<p->sizelocvars; i++)
+			for (i = 0; i < p->sizelocvars; i++)
 			{
 				unpersist(upi);
-				p->locvars[i].varname = pdep_newlstr(upi->L, lua_tostring(upi->L, -1), strlen(lua_tostring(upi->L, -1)));
+				p->locvars[i].varname = pdep_newlstr
+					(upi->L, lua_tostring(upi->L, -1),
+					 strlen(lua_tostring(upi->L, -1)));
 				lua_pop(upi->L, 1);
 
 				p->locvars[i].startpc = upi->fr->Signed32();
@@ -1095,7 +1100,8 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 
 	/* Read in source string*/
 	unpersist(upi);
-	p->source = pdep_newlstr(upi->L, lua_tostring(upi->L, -1), strlen(lua_tostring(upi->L, -1)));
+	p->source = pdep_newlstr
+		(upi->L, lua_tostring(upi->L, -1), strlen(lua_tostring(upi->L, -1)));
 	lua_pop(upi->L, 1);
 
 	/* Read in line numbers */
@@ -1104,7 +1110,7 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
 		if (p->sizelineinfo)
 		{
 			pdep_reallocvector(upi->L, p->lineinfo, 0, p->sizelineinfo, int);
-			for(int32_t i = 0; i < p->sizelineinfo; i++)
+			for (int32_t i = 0; i < p->sizelineinfo; i++)
 				p->lineinfo[i] = upi->fr->Signed32();
 		}
 	}
@@ -1128,16 +1134,16 @@ static void unpersistproto(int ref, UnpersistInfo *upi)
  * entire root GC set in order to find one object. If the GC list were doubly
  * linked this would be much easier, but there's no reason for Lua to have
  * that. */
-static void gcunlink(lua_State *L, GCObject *gco)
+static void gcunlink(lua_State * L, GCObject * gco)
 {
-	GCObject *prevslot;
-	if(G(L)->rootgc == gco) {
+	GCObject * prevslot;
+	if (G(L)->rootgc == gco) {
 		G(L)->rootgc = G(L)->rootgc->gch.next;
 		return;
 	}
 
 	prevslot = G(L)->rootgc;
-	while(prevslot->gch.next != gco) {
+	while (prevslot->gch.next != gco) {
 		lua_assert(prevslot->gch.next != NULL);
 		prevslot = prevslot->gch.next;
 	}
@@ -1145,10 +1151,10 @@ static void gcunlink(lua_State *L, GCObject *gco)
 	prevslot->gch.next = prevslot->gch.next->gch.next;
 }
 
-static void unpersistthread(int ref, UnpersistInfo *upi)
+static void unpersistthread(int ref, UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
-	lua_State *L2;
+	lua_State * L2;
 	size_t stacklimit = 0;
 	L2 = lua_newthread(upi->L);
 	lua_checkstack(upi->L, 3);
@@ -1164,7 +1170,7 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 		 * the imaginary top-level C function) is written to the very,
 		 * very bottom of the stack */
 		L2->top--;
-		for(uint32_t i = 0; i < stacksize; i++) {
+		for (uint32_t i = 0; i < stacksize; i++) {
 			unpersist(upi);
 					/* L1: perms reftbl ... thr obj* */
 		}
@@ -1177,9 +1183,9 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 	/* Now, deserialize the CallInfo stack. */
 	{
 		uint32_t numframes = upi->fr->Unsigned32();
-		pdep_reallocCI(L2,numframes*2);
-		for(uint32_t i=0; i<numframes; i++) {
-			CallInfo *ci = L2->base_ci + i;
+		pdep_reallocCI(L2, numframes * 2);
+		for (uint32_t i = 0; i < numframes; i++) {
+			CallInfo * ci = L2->base_ci + i;
 			size_t stackbase, stackfunc, stacktop, savedpc;
 			stackbase = upi->fr->Unsigned32();
 			stackfunc = upi->fr->Unsigned32();
@@ -1187,14 +1193,14 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 			ci->nresults = upi->fr->Signed32();
 			savedpc = upi->fr->Unsigned32();
 
-			if(stacklimit < stacktop)
+			if (stacklimit < stacktop)
 				stacklimit = stacktop;
 
-			ci->base = L2->stack+stackbase;
-			ci->func = L2->stack+stackfunc;
-			ci->top = L2->stack+stacktop;
+			ci->base = L2->stack + stackbase;
+			ci->func = L2->stack + stackfunc;
+			ci->top = L2->stack + stacktop;
 			ci->savedpc = (ci != L2->base_ci) ?
-				ci_func(ci)->l.p->code+savedpc :
+				ci_func(ci)->l.p->code + savedpc :
 				0;
 			ci->tailcalls = 0;
 			/* Update the pointer each time, to keep the GC
@@ -1203,7 +1209,7 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 		}
 	}
 					/* perms reftbl ... thr */
-	/* Deserialize the state's other parameters, with the exception of upval stuff */
+	/* Deserialize the state's other parameters except of upval stuff */
 	{
 		size_t stackbase, stacktop;
 		L2->savedpc = L2->ci->savedpc;
@@ -1217,13 +1223,13 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 	}
 	/* Finally, "reopen" upvalues (see persistupval() for why) */
 	{
-		UpVal* uv;
+		UpVal * uv;
 		GCObject **nextslot = &L2->openupval;
-		global_State *g = G(L2);
-		while(1) {
+		global_State * g = G(L2);
+		for (;;) {
 			unpersist(upi);
 					/* perms reftbl ... thr uv/nil */
-			if(lua_isnil(upi->L, -1)) {
+			if (lua_isnil(upi->L, -1)) {
 					/* perms reftbl ... thr nil */
 				lua_pop(upi->L, 1);
 					/* perms reftbl ... thr */
@@ -1245,13 +1251,14 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 			uv->u.l.next = G(L2)->uvhead.u.l.next;
 			uv->u.l.next->u.l.prev = uv;
 			G(L2)->uvhead.u.l.next = uv;
-			lua_assert(uv->u.l.next->u.l.prev == uv && uv->u.l.prev->u.l.next == uv);
+			lua_assert
+				(uv->u.l.next->u.l.prev == uv && uv->u.l.prev->u.l.next == uv);
 		}
 		*nextslot = NULL;
 	}
 
-	/* The stack must be valid at least to the highest value among the CallInfos */
-	/* 'top' and the values up to there must be filled with 'nil' */
+	/* The stack must be valid at least to the highest value among the CallInfos
+		'top' and the values up to there must be filled with 'nil' */
 	{
 		StkId o;
 		pdep_checkstack(L2, static_cast<int>(stacklimit));
@@ -1260,11 +1267,11 @@ static void unpersistthread(int ref, UnpersistInfo *upi)
 	}
 }
 
-static void unpersistuserdata(int ref, UnpersistInfo *upi)
+static void unpersistuserdata(int ref, UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 2);
-	if(upi->fr->Unsigned8()) {
+	if (upi->fr->Unsigned8()) {
 		unpersist(upi);
 					/* perms reftbl ... spfunc? */
 		lua_assert(lua_isfunction(upi->L, -1));
@@ -1279,16 +1286,16 @@ static void unpersistuserdata(int ref, UnpersistInfo *upi)
 		lua_assert(lua_isuserdata(upi->L, -1));
 					/* perms reftbl ... udata */
 	} else {
-		lua_pushstring(upi->L, "Attempt to unpersist a userdata without a "
+		lua_pushstring
+			(upi->L, "Attempt to unpersist a userdata without a "
 				"__unpersist function. This is not possible!");
 		lua_error(upi->L);
 	}
 					/* perms reftbl ... udata */
 }
 
-static void unpersistpermanent(int ref, UnpersistInfo *upi)
+static void unpersistpermanent(int, UnpersistInfo * upi)
 {
-	(void) ref;			/* unused */
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 2);
 	unpersist(upi);
@@ -1303,13 +1310,14 @@ static void unpersistpermanent(int ref, UnpersistInfo *upi)
 }
 
 /* For debugging only; not called when lua_assert is empty */
-int inreftable(lua_State *L, int ref)
+int inreftable(lua_State * L, int ref)
 {
 	int res;
 	lua_checkstack(L, 1);
 					/* perms reftbl ... */
-	lua_pushlightuserdata(L, reinterpret_cast<void*>
-			(static_cast<intptr_t>(ref)));
+	lua_pushlightuserdata
+		(L, reinterpret_cast<void *>
+		 (static_cast<intptr_t>(ref)));
 					/* perms reftbl ... ref */
 	lua_gettable(L, 2);
 					/* perms reftbl ... obj? */
@@ -1319,70 +1327,70 @@ int inreftable(lua_State *L, int ref)
 	return res;
 }
 
-static void unpersist(UnpersistInfo *upi)
+static void unpersist(UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
 	int stacksize = lua_gettop(upi->L); stacksize = stacksize; /* DEBUG */
 	lua_checkstack(upi->L, 2);
-	if(upi->fr->Unsigned8()) {
+	if (upi->fr->Unsigned8()) {
 		int ref = upi->fr->Signed32();
 		lua_assert(!inreftable(upi->L, ref));
 		int type = upi->fr->Signed32();
-		switch(type) {
-		case LUA_TBOOLEAN:
-			unpersistboolean(upi);
-			break;
-		case LUA_TNUMBER:
-			unpersistnumber(upi);
-			break;
-		case LUA_TSTRING:
-			unpersiststring(upi);
-			break;
-		case LUA_TTABLE:
-			unpersisttable(ref, upi);
-			break;
-		case LUA_TFUNCTION:
-			unpersistfunction(ref, upi);
-			break;
-		case LUA_TTHREAD:
-			unpersistthread(ref, upi);
-			break;
-		case LUA_TPROTO:
-			unpersistproto(ref, upi);
-			break;
-		case LUA_TUPVAL:
-			unpersistupval(ref, upi);
-			break;
-		case LUA_TUSERDATA:
-			unpersistuserdata(ref, upi);
-			break;
-		case PLUTO_TPERMANENT:
-			unpersistpermanent(ref, upi);
-			break;
-		case LUA_TLIGHTUSERDATA:
-			lua_pushstring(upi->L, "Can't unpersist a lightuserdata object!");
-			lua_error(upi->L);
-			break;
-		default:
-			lua_assert(0);
+		switch (type) {
+			case LUA_TBOOLEAN:
+				unpersistboolean(upi);
+				break;
+			case LUA_TNUMBER:
+				unpersistnumber(upi);
+				break;
+			case LUA_TSTRING:
+				unpersiststring(upi);
+				break;
+			case LUA_TTABLE:
+				unpersisttable(ref, upi);
+				break;
+			case LUA_TFUNCTION:
+				unpersistfunction(ref, upi);
+				break;
+			case LUA_TTHREAD:
+				unpersistthread(ref, upi);
+				break;
+			case LUA_TPROTO:
+				unpersistproto(ref, upi);
+				break;
+			case LUA_TUPVAL:
+				unpersistupval(ref, upi);
+				break;
+			case LUA_TUSERDATA:
+				unpersistuserdata(ref, upi);
+				break;
+			case PLUTO_TPERMANENT:
+				unpersistpermanent(ref, upi);
+				break;
+			case LUA_TLIGHTUSERDATA:
+				lua_pushstring(upi->L, "Can't unpersist a lightuserdata object!");
+				lua_error(upi->L);
+				break;
+			default:
+				lua_assert(false);
 		}
 					/* perms reftbl ... obj */
-		lua_assert(lua_type(upi->L, -1) == type ||
-			type == PLUTO_TPERMANENT ||
+		lua_assert
+			(lua_type(upi->L, -1) == type || type == PLUTO_TPERMANENT ||
 			/* Remember, upvalues get a special dispensation, as
 			 * described in boxupval */
-			(lua_type(upi->L, -1) == LUA_TFUNCTION &&
-				type == LUA_TUPVAL));
+			(lua_type(upi->L, -1) == LUA_TFUNCTION && type == LUA_TUPVAL));
 		registerobject(ref, upi);
 					/* perms reftbl ... obj */
 	} else {
 		int ref = upi->fr->Signed32();
-		if(ref == 0) {
+		if (ref == 0) {
 			lua_pushnil(upi->L);
 					/* perms reftbl ... nil */
 		} else {
-			lua_pushlightuserdata(upi->L, reinterpret_cast<void *>
-					(static_cast<intptr_t>(ref)));
+			lua_pushlightuserdata
+				(upi->L, reinterpret_cast<void *>
+				 (static_cast<intptr_t>(ref)));
 					/* perms reftbl ... ref */
 			lua_gettable(upi->L, 2);
 					/* perms reftbl ... obj? */
@@ -1394,8 +1402,7 @@ static void unpersist(UnpersistInfo *upi)
 	lua_assert(lua_gettop(upi->L) == stacksize + 1);
 }
 
-void pluto_unpersist
-	(lua_State *L, Widelands::FileRead & fr)
+void pluto_unpersist(lua_State * L, Widelands::FileRead & fr)
 {
 	UnpersistInfo upi;
 	upi.L = L;

@@ -119,8 +119,8 @@ public:
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
-	virtual void __persist(lua_State*);
-	virtual void __unpersist(lua_State*);
+	virtual void __persist(lua_State *);
+	virtual void __unpersist(lua_State *);
 
 	/*
 	 * Properties
@@ -160,8 +160,8 @@ public:
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
-	virtual void __persist(lua_State*);
-	virtual void __unpersist(lua_State*);
+	virtual void __persist(lua_State *);
+	virtual void __unpersist(lua_State *);
 
 	/*
 	 * Properties

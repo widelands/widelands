@@ -172,7 +172,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_owner(lua_State* L);
+	int get_owner(lua_State * L);
 
 	/*
 	 * Lua Methods
@@ -199,7 +199,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_building_type(lua_State* L);
+	int get_building_type(lua_State * L);
 
 	/*
 	 * Lua Methods
@@ -240,8 +240,8 @@ struct L_HasWorkers {
 protected:
 	WorkersSet m_parse_get_workers_arguments
 		(lua_State *, Widelands::Tribe_Descr const &, bool *);
-   WorkersMap m_parse_set_workers_arguments
-           (lua_State *, Widelands::Tribe_Descr const &);
+	WorkersMap m_parse_set_workers_arguments
+		(lua_State *, Widelands::Tribe_Descr const &);
 };
 
 struct L_HasSoldiers {
@@ -255,22 +255,22 @@ struct L_HasSoldiers {
 		uint8_t de;
 		uint8_t ev;
 
-		bool operator<(const SoldierDescr & ot) const {
-		  bool hp_eq = hp == ot.hp;
-		  bool at_eq = at == ot.at;
-		  bool de_eq = de == ot.de;
-		  if (hp_eq && at_eq && de_eq)
-			  return ev < ot.ev;
-		  if (hp_eq && at_eq)
-			  return de < ot.de;
-		  if (hp_eq)
-			  return at < ot.at;
-		  return hp < ot.hp;
+		bool operator< (const SoldierDescr & ot) const {
+			bool hp_eq = hp == ot.hp;
+			bool at_eq = at == ot.at;
+			bool de_eq = de == ot.de;
+			if (hp_eq && at_eq && de_eq)
+				return ev < ot.ev;
+			if (hp_eq && at_eq)
+				return de < ot.de;
+			if (hp_eq)
+				return at < ot.at;
+			return hp < ot.hp;
 		}
-		bool operator==(const SoldierDescr & ot) const {
-		  if (hp == ot.hp and at == ot.at and de == ot.de and ev == ot.ev)
-			  return true;
-		  return false;
+		bool operator== (const SoldierDescr & ot) const {
+			if (hp == ot.hp and at == ot.at and de == ot.de and ev == ot.ev)
+				return true;
+			return false;
 		}
 	};
 
@@ -334,7 +334,7 @@ protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &) = 0;
 	virtual int _new_worker
 		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
-		 const Widelands::Worker_Descr*) = 0;
+		 const Widelands::Worker_Descr *) = 0;
 };
 
 struct _SoldierEmployer : public L_HasSoldiers {
@@ -379,7 +379,7 @@ protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
 	virtual int _new_worker
 		(Widelands::PlayerImmovable &,
-		 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr*);
+		 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *);
 };
 
 
@@ -429,12 +429,12 @@ public:
 	/*
 	 * Lua Methods
 	 */
-	int set_wares(lua_State*);
-	int get_wares(lua_State*);
-	int set_workers(lua_State*);
-	int get_workers(lua_State*);
-	int set_soldiers(lua_State*);
-	int get_soldiers(lua_State*);
+	int set_wares(lua_State *);
+	int get_wares(lua_State *);
+	int set_workers(lua_State *);
+	int get_workers(lua_State *);
+	int set_soldiers(lua_State *);
+	int get_soldiers(lua_State *);
 
 	/*
 	 * C Methods
@@ -474,7 +474,7 @@ protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
 	virtual int _new_worker
 		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
-		 const Widelands::Worker_Descr*);
+		 const Widelands::Worker_Descr *);
 };
 
 class L_MilitarySite : public L_Building, public _SoldierEmployer {
@@ -499,7 +499,9 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(MilitarySite);
-	Widelands::SoldierControl * get_sc(lua_State * L, Widelands::Editor_Game_Base & g) {
+	Widelands::SoldierControl * get_sc
+		(lua_State * L, Widelands::Editor_Game_Base & g)
+	{
 		return get(L, g);
 	}
 };
@@ -564,12 +566,12 @@ public:
 	int set_terr(lua_State * L);
 	int get_terd(lua_State * L);
 	int set_terd(lua_State * L);
-	int get_rn(lua_State*);
-	int get_ln(lua_State*);
-	int get_trn(lua_State*);
-	int get_tln(lua_State*);
-	int get_bln(lua_State*);
-	int get_brn(lua_State*);
+	int get_rn(lua_State *);
+	int get_ln(lua_State *);
+	int get_trn(lua_State *);
+	int get_tln(lua_State *);
+	int get_bln(lua_State *);
+	int get_brn(lua_State *);
 	int get_resource(lua_State *);
 	int set_resource(lua_State *);
 	int get_resource_amount(lua_State *);
