@@ -129,6 +129,16 @@ if (WL_UNIT_TESTS)
 
   include(CTest)
   enable_testing()
+
+  #automatic unit testing hook, must be updated to reflect all tests
+  #if this is too intricate, we can also have this as an automatic detection
+  #but the current way allows to disable certain checks if they are taking
+  #too much time when ran every compile time
+  add_custom_target(autotest ALL
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    DEPENDS widelands;test_widelands_scripting
+  )
 else (WL_UNIT_TESTS)
   message(STATUS "Disabled unit tests")
   find_package(Boost 1.35.0 REQUIRED)
@@ -363,16 +373,6 @@ add_subdirectory(doc)
 add_subdirectory(po)
 #add_subdirectory(pics)
 add_subdirectory(src)
-
-#automatic unit testing hook, must be updated to reflect all tests
-#if this is too intricate, we can also have this as an automatic detection
-#but the current way allows to disable certain checks if they are taking
-#too much time when ran every compile time
-add_custom_target(autotest ALL
-  COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  DEPENDS widelands;test_widelands_scripting
-)
 
 # install files to the correct locations here
 install(
