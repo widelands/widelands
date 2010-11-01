@@ -404,6 +404,15 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 						found_reserved = true;
 						list.erase(list.begin() + idx);
 					}
+					else
+					{
+						Coords const coord = imm->get_position();
+						Map_Index mapidx = map.get_index(coord, map.get_width());
+						Vision const visible = owner().vision(mapidx);
+						if (!visible) {
+							list.erase(list.begin() + idx);
+						}
+					}
 				}
 			}
 
