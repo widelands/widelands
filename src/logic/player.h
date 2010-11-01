@@ -122,7 +122,7 @@ struct Player :
 
 	NodeCaps get_buildcaps(FCoords) const;
 
-	bool is_hostile(const Player& other) const;
+	bool is_hostile(const Player & other) const;
 
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
@@ -424,10 +424,10 @@ struct Player :
 	// Player commands
 	// Only to be called indirectly via CmdQueue
 	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
-	Flag*   build_flag(Coords);      /// Build a flag if it is allowed.
+	Flag *   build_flag(Coords);      /// Build a flag if it is allowed.
 	Road & force_road(Path const &);
 	Road * build_road(Path const &); /// Build a road if it is allowed.
-	Building& force_building
+	Building & force_building
 		(Coords,
 		 Building_Index,
 		 bool = false);

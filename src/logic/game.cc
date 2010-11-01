@@ -497,8 +497,8 @@ bool Game::run
 		if (start_game_type == NewSPScenario)
 			enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
 		else if (start_game_type == NewMPScenario)
-			enqueue_command(new Cmd_LuaScript(get_gametime(),
-						"map", "multiplayer_init"));
+			enqueue_command
+				(new Cmd_LuaScript(get_gametime(), "map", "multiplayer_init"));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
@@ -897,7 +897,7 @@ void Game::sample_statistics()
 		iterate_players_existing(p, nr_plrs, *this, plr) {
 			LuaCoroutine * cr = hook->get_coroutine("calculator");
 			cr->push_arg(plr);
-			cr->resume(&custom_statistic[p-1]);
+			cr->resume(&custom_statistic[p - 1]);
 			delete cr;
 		}
 	}

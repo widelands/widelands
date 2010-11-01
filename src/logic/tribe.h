@@ -133,7 +133,7 @@ struct Tribe_Descr {
 	Bob::Descr const * get_bob_descr(uint16_t const index) const {
 		return m_bobs.get(index);
 	}
-	Bob::Descr const * get_bob_descr(const std::string& name) const {
+	Bob::Descr const * get_bob_descr(const std::string & name) const {
 		return m_bobs.exists(name.c_str());
 	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
@@ -211,13 +211,17 @@ struct Tribe_Descr {
 			throw Nonexistent();
 		return m_initializations[index];
 	}
-	
+
 	typedef std::vector<std::vector<Widelands::Ware_Index> > WaresOrder;
 	typedef std::vector<std::pair<uint32_t, uint32_t> > WaresOrderCoords;
 	WaresOrder const & wares_order() const {return m_wares_order;}
-	WaresOrderCoords const & wares_order_coords() const {return m_wares_order_coords;}
+	WaresOrderCoords const & wares_order_coords() const {
+		return m_wares_order_coords;
+	}
 	WaresOrder const & workers_order() const {return m_workers_order;}
-	WaresOrderCoords const & workers_order_coords() const {return m_workers_order_coords;}
+	WaresOrderCoords const & workers_order_coords() const {
+		return m_workers_order_coords;
+	}
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void referenceBuilding

@@ -116,7 +116,7 @@ Tribe_Descr::Tribe_Descr
 			if (not safe_building_index("constructionsite"))
 				throw game_data_error
 					(_("constructionsite type \"constructionsite\" is missing"));
-			
+
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
 					(new Warehouse_Descr
@@ -176,41 +176,49 @@ Tribe_Descr::Tribe_Descr
 				tribe_s.get_string("descr"); // long description
 				m_bob_vision_range = tribe_s.get_int("bob_vision_range");
 				m_carrier2         = tribe_s.get_string("carrier2");
- 
-				/// Load and parse ware and worker categorization                                                                                     
-#define PARSE_ORDER_INFORMATION(w) /* w is ware or worker */                                                                                                    \
-				{                                                                                                                               \
-					m_##w##s_order_coords.resize(m_##w##s.get_nitems());                                                                    \
-                                                                                                                                                                \
-					std::string categories_s(tribe_s.get_safe_string(#w "s_order"));                                                        \
-					for(boost::split_iterator<string::iterator> It1=                                                                        \
-						boost::make_split_iterator(categories_s, boost::token_finder(boost::is_any_of(";")));                           \
-						It1 != boost::split_iterator<string::iterator>();                                                               \
-						++It1) {                                                                                                        \
-						vector<Ware_Index> column;                                                                                      \
-						std::string column_s = boost::copy_range<std::string>(*It1);                                                    \
-						for(boost::split_iterator<string::iterator> It2=                                                                \
-							boost::make_split_iterator(column_s, boost::token_finder(boost::is_any_of(",")));                       \
-							It2 != boost::split_iterator<string::iterator>();                                                       \
-							++It2) {                                                                                                \
-							std::string name = boost::copy_range<std::string>(*It2);                                                \
-							boost::trim(name);                                                                                      \
-							Ware_Index id = safe_##w##_index(name);                                                                 \
-							column.push_back(id);                                                                                   \
-							/* note that it has been added to the column yet, but the column not yet to the whole array */          \
-							m_##w##s_order_coords[id] = std::pair<uint32_t,uint32_t>(m_##w##s_order.size(), column.size()-1);       \
-						}                                                                                                               \
-						if (column.size()) m_##w##s_order.push_back(column);                                                            \
-					}                                                                                                                       \
-                                                                                                                                                                \
-					/* Check that every ##w## has been added */                                                                             \
-					for (Ware_Index id = Ware_Index::First(); id < m_##w##s.get_nitems(); ++id) {                                           \
-						if (id != m_##w##s_order[m_##w##s_order_coords[id].first][m_##w##s_order_coords[id].second]) {                  \
-							log("Did not find " #w " %s in " #w "s_order field of tribe %s!\n",                                     \
-							     get_##w##_descr(id)->name().c_str(), name().c_str());                                              \
-						}                                                                                                               \
-					}                                                                                                                       \
-				}                                                                                                                               \
+
+				/// Load and parse ware and worker categorization
+#define PARSE_ORDER_INFORMATION(w) /* w is ware or worker */ \
+	{ \
+		m_##w##s_order_coords.resize(m_##w##s.get_nitems()); \
+\
+		std::string categories_s \
+			(tribe_s.get_safe_string(#w "s_order")); \
+		for (boost::split_iterator<string::iterator> It1 = \
+			boost::make_split_iterator \
+				(categories_s, boost::token_finder(boost::is_any_of(";"))); \
+			It1 != boost::split_iterator<string::iterator>(); \
+			++It1) { \
+			vector<Ware_Index> column; \
+			std::string column_s = boost::copy_range<std::string>(*It1); \
+			for (boost::split_iterator<string::iterator> It2 = \
+				boost::make_split_iterator \
+					(column_s, boost::token_finder(boost::is_any_of(","))); \
+				It2 != boost::split_iterator<string::iterator>(); \
+				++It2) { \
+				std::string name = boost::copy_range<std::string>(*It2); \
+				boost::trim(name); \
+				Ware_Index id = safe_##w##_index(name); \
+				column.push_back(id); \
+				/* it has been added to the column, but the column not */ \
+				/* yet to the array */ \
+				m_ ## w ## s_order_coords[id] = std::pair<uint32_t, uint32_t> \
+					(m_ ## w ## s_order.size(), column.size() - 1); \
+			} \
+			if (column.size()) m_##w##s_order.push_back(column); \
+		} \
+\
+		/* Check that every ##w## has been added */ \
+		for \
+			(Ware_Index id = Ware_Index::First(); \
+			 id < m_##w##s.get_nitems(); ++id) { \
+			if (id != m_ ## w ## s_order[m_ ## w ## s_order_coords[id].first] \
+					[m_##w##s_order_coords[id].second]) { \
+				log("Didn't find " #w " %s in " #w "s_order field of tribe %s!\n", \
+					  get_##w##_descr(id)->name().c_str(), name().c_str()); \
+			} \
+		} \
+	}
 
 				PARSE_ORDER_INFORMATION(ware);
 				PARSE_ORDER_INFORMATION(worker);

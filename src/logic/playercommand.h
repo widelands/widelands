@@ -546,7 +546,8 @@ struct Cmd_MessageSetStatusArchived : public PlayerMessageCommand {
 struct Cmd_SetStockPolicy : PlayerCommand {
 	Cmd_SetStockPolicy
 		(int32_t time, Player_Number p,
-		 Warehouse & wh, bool isworker, Ware_Index ware, Warehouse::StockPolicy policy);
+		 Warehouse & wh, bool isworker, Ware_Index ware,
+		 Warehouse::StockPolicy policy);
 
 	virtual uint8_t id() const;
 

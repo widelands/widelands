@@ -149,13 +149,14 @@ public:
 
 	uint32_t get_planned_workers(Game &, Ware_Index index) const;
 	void plan_workers(Game &, Ware_Index index, uint32_t amount);
-	std::vector<uint32_t> calc_available_for_worker(Game &, Ware_Index index) const;
+	std::vector<uint32_t> calc_available_for_worker
+		(Game &, Ware_Index index) const;
 
 	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
 	void disable_spawn(uint8_t worker_types_without_cost_index);
 
 	// Begin Attackable implementation
-	virtual Player& owner() const {return Building::owner();}
+	virtual Player & owner() const {return Building::owner();}
 	virtual bool canAttack();
 	virtual void aggressor(Soldier &);
 	virtual bool attack   (Soldier &);
@@ -178,8 +179,9 @@ protected:
 
 private:
 	/**
-	 * Plan to produce a certain worker type in this warehouse. This means requesting
-	 * all the necessary wares, if multiple different wares types are needed.
+	 * Plan to produce a certain worker type in this warehouse. This means
+	 * requesting all the necessary wares, if multiple different wares types are
+	 * needed.
 	 */
 	struct PlannedWorkers {
 		/// Index of the worker type we plan to create

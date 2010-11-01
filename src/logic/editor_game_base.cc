@@ -823,7 +823,7 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 		else if (upcast(Flag,     flag,     *i.current))
 			if (Building * const flag_building = flag->get_building())
 				flag_building->set_defeating_player(area.player_number);
-		if(game)
+		if (game)
 			(*i.current)->schedule_destroy(*game);
 		else
 			(*i.current)->remove(*this);

@@ -294,7 +294,7 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 		m_work_steps += it->second;
 	}
 
-	if(upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase))
 		request_builder(*game);
 
 	g_sound_handler.play_fx("create_construction_site", m_position, 255);

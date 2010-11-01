@@ -84,8 +84,8 @@ protected:
 	struct Loader : Bob::Loader {
 		Loader();
 
-		virtual const Task * get_task(const std::string& name);
-		virtual const BobProgramBase * get_program(const std::string& name);
+		virtual const Task * get_task(const std::string & name);
+		virtual const BobProgramBase * get_program(const std::string & name);
 	};
 
 public:

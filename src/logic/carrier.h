@@ -93,13 +93,14 @@ protected:
 		virtual void load(FileRead &);
 
 	protected:
-		virtual const Task * get_task(const std::string& name);
+		virtual const Task * get_task(const std::string & name);
 	};
 
-	virtual Loader* create_loader();
+	virtual Loader * create_loader();
 
 public:
-	virtual void do_save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void do_save
+		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 };
 
 }

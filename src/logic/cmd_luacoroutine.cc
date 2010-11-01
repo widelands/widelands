@@ -42,7 +42,7 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 		log("Error in Lua Coroutine\n");
 		log("%s\n", e.what());
 		log("Send message to all players and pause game");
-		for (int i = 1; i<=game.map().get_nrplayers(); i++) {
+		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			Widelands::Message & msg =
 				*new Widelands::Message
 				("Game Logic", game.get_gametime(),

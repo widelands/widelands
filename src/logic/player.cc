@@ -937,7 +937,7 @@ void Player::unsee_node
 throw ()
 {
 	Field & field = m_fields[i];
-	if(field.vision <= 1) // Already doesn't see this
+	if (field.vision <= 1) // Already doesn't see this
 		return;
 
 	// If this is not already a forwarded call, we should informa allied players
@@ -1110,8 +1110,8 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 				}
 			} else {
 				log
-					("Statistics for player %u (%s) has %u ware types (should be %u)."
-					 "Statistics will be discarded.",
+					("Statistics for player %u (%s) has %u ware types "
+					 "(should be %u). Statistics will be discarded.",
 					 player_number(), tribe().name().c_str(),
 					 nr_wares, tribe().get_nrwares().value());
 

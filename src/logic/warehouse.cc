@@ -428,10 +428,8 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			 (egbase.map().get_fcoords(get_position()), vision_range()));
 
 		{
-			uint32_t const act_time =
-				schedule_act(
-					 *game,
-					 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			uint32_t const act_time = schedule_act
+					(*game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 			std::vector<Ware_Index> const & worker_types_without_cost =
 				tribe().worker_types_without_cost();
 
@@ -444,9 +442,9 @@ void Warehouse::init(Editor_Game_Base & egbase)
 						(worker_types_without_cost.at(i.current)))
 					m_next_worker_without_cost_spawn[i.current] = act_time;
 		}
-		// m_next_military_act is not touched in the loading code. Is only needed if
-		// there warehous is created in the game?
-		// I assume it's for the conquer_radius thing
+		// m_next_military_act is not touched in the loading code. Is only needed
+		// if there warehous is created in the game?  I assume it's for the
+		// conquer_radius thing
 		m_next_military_act =
 			schedule_act
 				(ref_cast<Game, Editor_Game_Base>(egbase), 1000);

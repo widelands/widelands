@@ -26,10 +26,10 @@
 namespace Widelands {
 
 void Cmd_CalculateStatistics::execute (Game & game) {
-		game.sample_statistics();
-      game.enqueue_command
-         (new Cmd_CalculateStatistics
-          (game.get_gametime() + STATISTICS_SAMPLE_TIME));
+	game.sample_statistics();
+	game.enqueue_command
+		(new Cmd_CalculateStatistics
+		 (game.get_gametime() + STATISTICS_SAMPLE_TIME));
 }
 
 #define CMD_CALCULATE_STATISTICS_VERSION 1
