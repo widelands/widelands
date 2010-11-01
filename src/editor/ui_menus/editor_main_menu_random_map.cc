@@ -526,7 +526,8 @@ void Main_Menu_New_Random_Map::id_edit_box_changed()
 		m_world->set_title
 			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 
-		button_clicked((ButtonID)-1);  // Update other values in UI as well
+		// Update other values in UI as well
+		button_clicked(static_cast<ButtonID>(-1));
 
 		m_goButton->set_enabled(true);
 	}
