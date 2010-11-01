@@ -58,8 +58,7 @@ typedef std::vector<RoutingNodeNeighbour> RoutingNodeNeighbours;
  * The only routing Node in Widelands is a Flag currently,
  * this interface has been extracted to reduce coupling
  */
-class RoutingNode {
-public:
+struct RoutingNode {
 	struct LessCost {
 		bool operator()(const RoutingNode & a, const RoutingNode & b) const {
 			return a.cost() < b.cost();
