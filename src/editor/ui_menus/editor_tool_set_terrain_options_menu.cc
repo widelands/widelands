@@ -112,10 +112,10 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				target.blit
 					(Point(0, 0),
 					 g_gr->get_picture
-						(PicMod_Game,
-						 g_gr->get_maptexture_data
-							 (world.terrain_descr(i).get_texture())
-							 ->get_texture_picture()));
+					 	(PicMod_Game,
+					 	 g_gr->get_maptexture_data
+					 	 	(world.terrain_descr(i).get_texture())
+					 	 ->get_texture_picture()));
 
 				Point pic(1, 64 - small_pich - 1);
 
@@ -146,8 +146,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			} else {
 				surface = g_gr->get_picture
 					(PicMod_Game,
-					 g_gr->get_maptexture_data
-					 (world.terrain_descr(i).get_texture())
+					 g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
 					 ->get_texture_picture());
 			}
 

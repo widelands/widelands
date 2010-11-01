@@ -35,6 +35,7 @@ int32_t Editor_Set_Origin_Tool::handle_click_impl
 	eia.set_rel_viewpoint
 		(Point
 		 	(-(center.node.x * 2 + (center.node.y & 1)) * (TRIANGLE_WIDTH / 2),
-		 	 - center.node.y *                             TRIANGLE_HEIGHT), true);
+		 	 - center.node.y *                             TRIANGLE_HEIGHT),
+		 true);
 	return 0;
 }
