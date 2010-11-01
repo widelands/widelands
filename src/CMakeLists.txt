@@ -49,7 +49,7 @@ else (DEFINED MSVC)
   endif (DEFINED MINGW) 
 endif (DEFINED MSVC)
 
-add_library (widelands_all ${WIN32_ICON_O} ${WL_SRCS_CC} ${WL_SRCS_H})
+add_library (widelands_all ${WL_SRCS_CC} ${WL_SRCS_H})
 
 set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
