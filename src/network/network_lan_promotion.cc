@@ -264,9 +264,7 @@ void LAN_Game_Finder::run ()
 
 		//  if the game already is in the list, update the information
 		//  otherwise just append it to the list
-		for
-			(wl_const_range<std::list<Net_Open_Game *> >
-			 i(opengames);; ++i)
+		for (wl_const_range<std::list<Net_Open_Game *> > i(opengames);; ++i)
 			if (i.empty()) {
 				opengames.push_back (new Net_Open_Game);
 				opengames.back()->address = addr.sin_addr.s_addr;
@@ -274,8 +272,7 @@ void LAN_Game_Finder::run ()
 				opengames.back()->info    = info;
 				callback (GameOpened, opengames.back(), userdata);
 				break;
-			} else if
-				  (0 == strncmp(i.front()->info.hostname, info.hostname, 128))
+			} else if (0 == strncmp(i.front()->info.hostname, info.hostname, 128))
 			{
 				i.front()->info = info;
 				callback (GameUpdated, i.front(), userdata);
