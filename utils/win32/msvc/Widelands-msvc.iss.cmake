@@ -58,8 +58,8 @@ VersionInfoVersion={#VerNumber}
 VersionInfoCompany={#Publisher}
 VersionInfoDescription={#VerName} Setup
 ShowLanguageDialog=yes
-WizardImageFile=@CMAKE_CURRENT_SOURCE_DIR@\..\build\win32\innosetup\WL.bmp
-WizardSmallImageFile=@CMAKE_CURRENT_SOURCE_DIR@\..\build\win32\innosetup\WLsmall.bmp
+WizardImageFile=@CMAKE_CURRENT_SOURCE_DIR@\..\utils\win32\innosetup\WL.bmp
+WizardSmallImageFile=@CMAKE_CURRENT_SOURCE_DIR@\utils\build\win32\innosetup\WLsmall.bmp
 AppVersion={#VerName}
 UninstallDisplayIcon={app}\unins000.exe
 UninstallDisplayName={#VerName}
@@ -107,7 +107,7 @@ Source: @CMAKE_CURRENT_BINARY_DIR@\@CMAKE_BUILD_TYPE@\widelands.exe;           D
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\ChangeLog;                               DestDir: {app};            Flags: ignoreversion; DestName: ChangeLog.txt;                              Components: " Widelands"
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\COPYING;                                 DestDir: {app};            Flags: ignoreversion; DestName: COPYING.txt;                                Components: " Widelands"
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\CREDITS;                                 DestDir: {app};            Flags: ignoreversion; DestName: CREDITS.txt;                                Components: " Widelands"
-Source: @CMAKE_CURRENT_SOURCE_DIR@\..\build\win32\innosetup\WL-Editor.ico;     DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: @CMAKE_CURRENT_SOURCE_DIR@\..\utils\win32\innosetup\WL-Editor.ico;     DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
 
 [INI]
 Filename: {app}\{#UrlName};  Section: InternetShortcut; Key: URL; String: {#URL}

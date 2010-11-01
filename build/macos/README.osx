@@ -1,6 +1,0 @@
-To minimize the download size only the libs, headers and xcode project are there.
-
-In fact, you need to add the sources(as group!) and the gamedatas(as native folders!) from outer space to the project.
-
-Reports to:
-widelands-public@lists.sourceforge.net
