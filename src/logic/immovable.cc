@@ -43,7 +43,7 @@
 
 #include <cstdio>
 
-#include "config.h"
+#include <config.h>
 
 #ifndef HAVE_VARARRAY
 #include <climits>
@@ -241,9 +241,9 @@ Immovable_Descr::Immovable_Descr
 	{
 		memset(it, 0, sizeof(m_terrain_affinity));
 		for
-			(wl_index_range<Terrain_Index> i
-			(0, world.get_nr_terrains());
-			 i; ++i, ++it)
+			(wl_index_range<Terrain_Index> i(0, world.get_nr_terrains());
+			 i;
+			 ++i, ++it)
 		{
 			char const * const terrain_type_name =
 				world.get_ter(i.current).name().c_str();
@@ -1093,7 +1093,7 @@ void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 void PlayerImmovable::receive_ware(Game &, Ware_Index ware)
 {
 	throw wexception
-		("MO(%u): Received a ware(%u), don't know what to do with it",
+		("MO(%u): Received a ware(%u), do not know what to do with it",
 		 serial(), ware.value());
 }
 
@@ -1104,7 +1104,7 @@ void PlayerImmovable::receive_ware(Game &, Ware_Index ware)
 void PlayerImmovable::receive_worker(Game &, Worker & worker)
 {
 	throw wexception
-		("MO(%u): Received a worker(%u), don't know what to do with it",
+		("MO(%u): Received a worker(%u), do not know what to do with it",
 		 serial(), worker.serial());
 }
 
