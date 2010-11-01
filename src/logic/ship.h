@@ -21,6 +21,7 @@
 #define SHIP_H
 
 #include "bob.h"
+#include "graphic/diranimations.h"
 
 namespace Widelands {
 
@@ -32,7 +33,13 @@ struct Ship_Descr : Bob::Descr {
 		 std::string const & directory, Profile &, Section & global_s,
 		 Tribe_Descr const &);
 
+	virtual uint32_t movecaps() const throw ();
+	const DirAnimations& get_sail_anims() const {return m_sail_anims;}
+
 	virtual Bob & create_object() const;
+
+private:
+	DirAnimations m_sail_anims;
 };
 
 /**
@@ -50,9 +57,12 @@ struct Ship : Bob {
 	void start_task_shipidle(Game &);
 
 private:
+	void wakeup_neighbours(Game &);
+
 	static const Task taskShipIdle;
 
 	void shipidle_update(Game &, State &);
+	void shipidle_wakeup(Game &);
 
 	// saving and loading
 protected:

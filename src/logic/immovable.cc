@@ -530,12 +530,12 @@ void Immovable::draw_construction(const Editor_Game_Base& game, RenderTarget& ds
 
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst.drawanim(pos, m_anim, (current_frame-1) * frametime);
+		dst.drawanim(pos, m_anim, (current_frame-1) * frametime, get_owner());
 	}
 
 	assert(lines <= curh);
 	dst.drawanimrect
-		(pos, m_anim, current_frame * frametime, 0, Rect(Point(0, curh - lines), curw, lines));
+		(pos, m_anim, current_frame * frametime, get_owner(), Rect(Point(0, curh - lines), curw, lines));
 }
 
 

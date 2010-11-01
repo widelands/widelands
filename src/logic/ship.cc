@@ -19,8 +19,9 @@
 
 #include "ship.h"
 
-#include "editor_game_base.h"
+#include "game.h"
 #include "game_data_error.h"
+#include "map.h"
 #include "tribe.h"
 
 namespace Widelands {
@@ -31,7 +32,17 @@ Ship_Descr::Ship_Descr
 	 const Widelands::Tribe_Descr& tribe)
 : Descr(name, descname, directory, prof, global_s, &tribe)
 {
+	m_sail_anims.parse
+		(*this,
+		 directory,
+		 prof,
+		 (this->name() + "_sail_??").c_str(),
+		 prof.get_section("sail"));
+}
 
+uint32_t Ship_Descr::movecaps() const throw ()
+{
+	return MOVECAPS_SWIM;
 }
 
 Bob& Ship_Descr::create_object() const
@@ -56,8 +67,33 @@ void Ship::init_auto_task(Game& game)
 	start_task_shipidle(game);
 }
 
+struct FindBobShip : FindBob {
+	virtual bool accept(Bob * bob) const
+	{
+		return bob->get_bob_type() == Bob::SHIP;
+	}
+};
+
+void Ship::wakeup_neighbours(Game& game)
+{
+	FCoords position = get_position();
+	Area<FCoords> area(position, 1);
+	std::vector<Bob*> ships;
+	game.map().find_bobs(area, &ships, FindBobShip());
+
+	for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
+		if (*it == this)
+			continue;
+
+		static_cast<Ship*>(*it)->shipidle_wakeup(game);
+	}
+}
+
+
 /**
  * Standard behaviour of ships while idle.
+ *
+ * ivar1 = helper flag for coordination
  */
 const Bob::Task Ship::taskShipIdle = {
 	"shipidle",
@@ -70,12 +106,104 @@ const Bob::Task Ship::taskShipIdle = {
 void Ship::start_task_shipidle(Game& game)
 {
 	push_task(game, taskShipIdle);
+	top_state().ivar1 = 0;
+}
+
+void Ship::shipidle_wakeup(Game& game)
+{
+	if (get_state(taskShipIdle))
+		send_signal(game, "wakeup");
 }
 
 void Ship::shipidle_update(Game& game, Bob::State& state)
 {
-	// Sleep
-	start_task_idle(game, descr().main_animation(), 60000);
+	// Handle signals
+	std::string signal = get_signal();
+	if (!signal.empty()) {
+		if (signal == "wakeup") {
+			signal_handled();
+		} else {
+			send_signal(game, "fail");
+			pop_task(game);
+			return;
+		}
+	}
+
+	if (state.ivar1) {
+		// We've just completed one step, so give neighbours
+		// a chance to move away first
+		wakeup_neighbours(game);
+		state.ivar1 = 0;
+		schedule_act(game, 25);
+		return;
+	}
+
+	// Check if we should move away from ships and shores
+	FCoords position = get_position();
+	Map & map = game.map();
+	unsigned int dirs[LAST_DIRECTION+1];
+	unsigned int dirmax = 0;
+
+	for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
+		FCoords node = dir ? map.get_neighbour(position, dir) : position;
+		dirs[dir] = node.field->nodecaps() & MOVECAPS_WALK ? 10 : 0;
+
+		Area<FCoords> area(node, 0);
+		std::vector<Bob*> ships;
+		game.map().find_bobs(area, &ships, FindBobShip());
+
+		for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
+			if (*it == this)
+				continue;
+
+			dirs[dir] += 3;
+		}
+
+		dirmax = std::max(dirmax, dirs[dir]);
+	}
+
+	if (dirmax) {
+		unsigned int prob[LAST_DIRECTION+1];
+		unsigned int totalprob = 0;
+
+		// The probability for moving into a given direction is also
+		// affected by the "close" directions.
+		for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
+			prob[dir] = 10*dirmax - 10*dirs[dir];
+
+			if (dir > 0) {
+				unsigned int delta = std::min(prob[dir], dirs[(dir % 6) + 1] + dirs[1 + ((dir-1) % 6)]);
+				prob[dir] -= delta;
+			}
+
+			totalprob += prob[dir];
+		}
+
+		unsigned int rnd = game.logic_rand() % totalprob;
+		Direction dir = 0;
+		while (rnd >= prob[dir]) {
+			rnd -= prob[dir];
+			++dir;
+		}
+
+		if (dir == 0 || dir > LAST_DIRECTION) {
+			start_task_idle(game, descr().main_animation(), 1500);
+			return;
+		}
+
+		FCoords neighbour = map.get_neighbour(position, dir);
+		if (!(neighbour.field->nodecaps() & MOVECAPS_SWIM)) {
+			start_task_idle(game, descr().main_animation(), 1500);
+			return;
+		}
+
+		state.ivar1 = 1;
+		start_task_move(game, dir, &descr().get_sail_anims(), false);
+		return;
+	}
+
+	// No desire to move around, so sleep
+	start_task_idle(game, descr().main_animation(), -1);
 }
 
 

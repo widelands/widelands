@@ -1475,7 +1475,7 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 		return;
 	}
 
-	psite.molog("construct: no object or buildable field");
+	psite.molog("construct: no object or buildable field\n");
 	psite.program_end(g, Failed);
 }
 
@@ -1521,6 +1521,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game, ProductionSi
 	item->init(game);
 	worker.set_carried_item(game, item);
 	wq->set_filled(wq->get_filled() - 1);
+	wq->update();
 
 	// Third step: send worker on his merry way, giving the target object or coords
 	worker.start_task_program(game, workerprogram);
