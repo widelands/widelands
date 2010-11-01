@@ -39,7 +39,7 @@
 #include <libintl.h>
 #include <boost/format.hpp>
 
-#include "config.h"
+#include <config.h>
 
 namespace Widelands {
 
