@@ -63,7 +63,7 @@ private:
 	int32_t m_cell_width; ///< size of one cell
 	int32_t m_cell_height;
 
-	Textarea * m_ta;
+	Textarea          m_ta;
 	std::vector<Item> m_items;
 };
 
