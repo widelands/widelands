@@ -1709,7 +1709,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_mines(int32_t gametime)
+bool DefaultAI::check_mines(int32_t const gametime)
 {
 	if ((next_mine_check_due > gametime) || mines.empty())
 		return false;
