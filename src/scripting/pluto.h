@@ -20,8 +20,8 @@
 #ifndef PLUTO_H
 #define PLUTO_H
 
-void pluto_persist(lua_State *L, Widelands::FileWrite & fw);
-void pluto_unpersist(lua_State *L, Widelands::FileRead & fr);
+void pluto_persist(lua_State * L, Widelands::FileWrite & fw);
+void pluto_unpersist(lua_State * L, Widelands::FileRead & fr);
 
 #endif /* end of include guard: PLUTO_H */
 

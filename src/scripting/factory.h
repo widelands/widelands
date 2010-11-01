@@ -41,7 +41,7 @@ public:
 	virtual void push_player(lua_State * L, Widelands::Player_Number plr);
 };
 
-class EditorFactory  : public Factory{
+class EditorFactory  : public Factory {
 public:
 	virtual ~EditorFactory() {}
 

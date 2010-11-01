@@ -10,6 +10,7 @@ after // are ignored.
 
 error_msg = "Opening brace should be on the next line."
 
+strip_comments_and_strings = True
 regexp = r"""^([^/#"']|/([^/"']|"([^"]|\\")*"|'(\\[\'0nt]|[^\'])')|"([^"\]|\\"|\\[^"])*"|'(\\[\'0nt]|[^\'])')*(/[^	 /@]|[^	 "'@])\{"""
 
 forbidden = [

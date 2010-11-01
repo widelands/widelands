@@ -11,7 +11,7 @@ import re
 
 class EvalMatches(object):
     _closing_parens = re.compile(r'''(?x)
-(\() | # Either an opening or 
+(\() | # Either an opening or
 (\))[ ]*[)}\],;]*[ ]*([^\s(;]) # Or a closing with an illegal token
 '''
 )
@@ -23,9 +23,9 @@ class EvalMatches(object):
 
         open_parens = 0
         for lineno,line in enumerate(lines):
-            
+
             last_opening_parens = open_parens
-            
+
             # Find all closing parens
             open_parens_on_line = 0
             for m in self._closing_parens.finditer(line):
@@ -35,12 +35,16 @@ class EvalMatches(object):
                 else:
                     open_parens -= m.group(0).count(')')
                     open_parens_on_line -= m.group(0).count(')')
-                    if last_opening_parens and open_parens_on_line < 0 and m.group(3) not in ')}],;':
-                        errors.append((fn,lineno+1,self._error_msg % m.group(3)))
+                    if last_opening_parens and open_parens_on_line < 0 and \
+                       m.group(3) not in ')}],;':
+                        g = m.group(3)
+                        # pure virtual function?
+                        if not line.strip().endswith("= 0;"):
+                            errors.append((fn,lineno+1,self._error_msg % g))
 
             open_parens = last_opening_parens + line.count('(') - line.count(')')
-            
-        
+
+
 
         return errors
 
@@ -83,5 +87,9 @@ allowed = [
 """snprintf
 \t\t(buffer, sizeof(buffer),
 \t\t _("%u%% built"), (get_built_per64k() * 100) >> 16);""",
+"""blah
+    (int a, int b,
+    int c) = 0;
+""",
 
 ]
