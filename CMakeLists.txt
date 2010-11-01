@@ -140,7 +140,7 @@ if (WL_UNIT_TESTS)
     DEPENDS widelands;test_widelands_scripting
   )
 else (WL_UNIT_TESTS)
-  message(STATUS "Disabled unit tests")
+  message(STATUS "Unit tests not selected")
   find_package(Boost 1.35.0 REQUIRED)
 endif (WL_UNIT_TESTS)
 
