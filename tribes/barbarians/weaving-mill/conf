@@ -14,7 +14,7 @@ build_material=false
 weaver=1
 
 [inputs]
-flax=8
+thatchreed=8
 
 [programs]
 work=_Work
@@ -22,7 +22,7 @@ work=_Work
 [work]
 # no need to check whether cloth is needed because it is only used here
 animate=working 45000
-consume=flax
+consume=thatchreed
 produce=cloth
 
 [idle]

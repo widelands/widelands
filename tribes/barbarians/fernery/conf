@@ -1,5 +1,4 @@
 size=medium
-output=flax
 output=thatchreed
 
 [aihints]
@@ -13,23 +12,11 @@ raw_stone=2
 ferner=1
 
 [programs]
-plant_flax=_Plant flax
-plantflax=Plant flax (only for compatibility with savegames (build13))
 plant_reed=_Plant reed
 plantreed=Plant reed (only for compatibility with savegames (build13))
-harvest_flax=_Harvest flax
-harvestflax=Harvest flax (only for compatibility with old savegames (build13))
 harvest_reed=_Harvest reed
 harvestreed=Harvest reed (only for compatibility with old savegames (build13))
 work=_Work
-
-[plant_flax]
-sleep=18500  #orig sleep=20000 but ferner animation was increased by 1.5sec
-worker=plantflax
-
-[plantflax]
-sleep=18500  #orig sleep=20000 but ferner animation was increased by 1.5sec
-worker=plantflax
 
 [plant_reed]
 sleep=18000  #orig sleep=20000 but ferner animation was increased by 2sec
@@ -38,14 +25,6 @@ worker=plantreed
 [plantreed]
 sleep=18000  #orig sleep=20000 but ferner animation was increased by 2sec
 worker=plantreed
-
-[harvest_flax]
-sleep=5000
-worker=harvestflax
-
-[harvestflax]
-sleep=5000
-worker=harvestflax
 
 [harvest_reed]
 sleep=5000
@@ -56,8 +35,6 @@ sleep=5000
 worker=harvestreed
 
 [work]
-call=plant_flax
-call=harvest_flax
 call=plant_reed
 call=harvest_reed
 return=skipped
