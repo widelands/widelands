@@ -61,7 +61,7 @@ typedef std::vector<RoutingNodeNeighbour> RoutingNodeNeighbours;
 class RoutingNode {
 public:
 	struct LessCost {
-		bool operator()(const RoutingNode& a, const RoutingNode& b) const {
+		bool operator()(const RoutingNode & a, const RoutingNode & b) const {
 			return a.cost() < b.cost();
 		}
 	};
@@ -87,7 +87,7 @@ public:
 	}
 
 	int32_t cost() const {return mpf_realcost + mpf_estimate;}
-	Queue::cookie& cookie() {return mpf_cookie;}
+	Queue::cookie & cookie() {return mpf_cookie;}
 
 	virtual Flag & base_flag() = 0;
 	virtual int32_t get_waitcost() const = 0;
