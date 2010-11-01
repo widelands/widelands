@@ -412,7 +412,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	} catch (...) {
 		if (file)
 			fclose(file);
-		if (data) free(data);
+		free(data);
 		throw;
 	}
 }
