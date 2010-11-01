@@ -58,22 +58,18 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	virtual bool canChangeMap() {return true;}
 	virtual bool canChangePlayerState(uint8_t const) {
-		return !settings().savegame;
+		return !settings().savegame && !settings().scenario;
 	}
 	virtual bool canChangePlayerTribe(uint8_t const number) {
-		if (settings().scenario)
-			return false;
-		if (number >= settings().players.size())
-			return false;
-		return true;
+		return canChangePlayerTeam(number);
 	}
 	virtual bool canChangePlayerInit(uint8_t const number) {
-		if (settings().scenario)
+		if (settings().scenario || settings().savegame)
 			return false;
 		return number < settings().players.size();
 	}
 	virtual bool canChangePlayerTeam(uint8_t number) {
-		if (settings().scenario)
+		if (settings().scenario || settings().savegame)
 			return false;
 		if (number >= settings().players.size())
 			return false;
@@ -253,7 +249,6 @@ struct HostChatProvider : public ChatProvider {
 				arg1 = "";
 			if (arg2.empty())
 				arg2 = "";
-			//log((cmd + " + \"" + arg1 + "\" + \"" + arg2 + "\"\n").c_str());
 			log("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
 
 			// let "/me" pass - handled by chat

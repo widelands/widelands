@@ -287,7 +287,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 	}
 }
 
-/// Opens a popup window to select a map or saved game 
+/// Opens a popup window to select a map or saved game
 void Fullscreen_Menu_LaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
 		(this, m_xres / 2, m_yres / 20, m_fs, m_fn);
@@ -569,7 +569,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	text += "\n\n";//text += "<br><br>";
 	text +=
 		_("On the left side is a list of all clients including you. With the "
-		  "button in rear of your nickname, you can set your player mode. "
+		  "button in the rear of your nickname, you can set your player mode. "
 		  "Available modes are open players, players that are already played by "
 		  "other clients (sharing the kingdom) and spectator mode.");
 	text += "\n\n";//	text += "<br><br>";
@@ -580,7 +580,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	text += "\n";//	text += "<br>";
 	text +=
 		_("If you are a client (not the hosting player), you can set the tribe "
-		  "and the team for the player you set as mode");
+		  "and the team for the player you set as your mode.");
 	text += "\n";//	text += "<br>";
 	text +=
 		_("If you are the hosting player, you can further set the "
@@ -589,9 +589,9 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 		  "player or close a player.");
 	text += "\n\n";//	text += "<br><br>";
 	text +=
-		_("On the right side are informations about the selected map or savegame."
-		  "A button right to the map name allows the host to change to a "
-		  "different one. Further the host is able to set a specific win "
+		_("On the right side are informations about the selected map or "
+		  "savegame. A button right to the map name allows the host to change to "
+		  "a different one. Further the host is able to set a specific win "
 		  "condition and finally can start the game as soon as all players are "
 		  "set up.");
 //	text += "</p></rt>";

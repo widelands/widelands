@@ -142,8 +142,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 		 GameSettingsProvider * const settings,
 		 std::string const & fname, uint32_t const fsize,
-		 std::map<std::string,PictureID> & tp,
-		 std::map<std::string,std::string> & tn)
+		 std::map<std::string, PictureID> & tp,
+		 std::map<std::string, std::string> & tn)
 		 :
 		 UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
 		 player(0),
@@ -247,19 +247,19 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Toggle through the teams
 	void toggle_team() {
 		const GameSettings & settings = s->settings();
-		
+
 		if (m_id >= settings.players.size())
 			return;
-		
+
 		Widelands::TeamNumber currentteam = settings.players.at(m_id).team;
 		Widelands::TeamNumber maxteam = settings.players.size() / 2;
 		Widelands::TeamNumber newteam;
-		
+
 		if (currentteam >= maxteam)
 			newteam = 0;
 		else
 			newteam = currentteam + 1;
-		
+
 		s->setPlayerTeam(m_id, newteam);
 	}
 
@@ -334,7 +334,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 				tribe->set_tooltip(m_tribenames[player.tribe].c_str());
 				tribe->set_pic(m_tribepics[player.tribe]);
-				{
+				if (settings.scenario)
+					init->set_title(_("Scenario"));
+				else if (settings.savegame)
+					init->set_title(_("Savegame"));
+				else {
 					i18n::Textdomain td(tribepath); // for translated initialisation
 					container_iterate_const
 						 (std::vector<TribeBasicInfo>, settings.tribes, i)
@@ -375,8 +379,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	UI::Button             * team;
 	GameSettingsProvider   * const s;
 	uint8_t                  const m_id;
-	std::map<std::string,PictureID> & m_tribepics;
-	std::map<std::string,std::string> & m_tribenames;
+	std::map<std::string, PictureID> & m_tribepics;
+	std::map<std::string, std::string> & m_tribenames;
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup
