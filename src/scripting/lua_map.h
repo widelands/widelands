@@ -546,6 +546,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_name(lua_State * L);
 
 	/*
 	 * Lua Methods

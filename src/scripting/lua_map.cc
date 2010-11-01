@@ -2001,6 +2001,7 @@ const MethodType<L_Bob> L_Bob::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_Bob> L_Bob::Properties[] = {
+	PROP_RO(L_Bob, name),
 	{0, 0, 0},
 };
 
@@ -2009,6 +2010,17 @@ const PropertyType<L_Bob> L_Bob::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+/* RST
+	.. attribute:: name
+
+		(RO) The name of this bob's type
+*/
+// UNTESTED
+int L_Bob::get_name(lua_State * L) {
+	lua_pushstring(L, get(L, get_egbase(L))->name());
+	return 1;
+}
+
 
 /*
  ==========================================================
