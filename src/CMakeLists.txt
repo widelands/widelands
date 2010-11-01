@@ -110,8 +110,7 @@ endmacro(LinkExecutable exe_name is_test)
 #temporarily disabled the 'old' tests due to incompatibility
 #add_subdirectory(economy)
 #add_subdirectory(io)
-#temporarily disabled lua test, this is a special one
-#add_subdirectory(scripting)
+add_subdirectory(scripting)
 
 LinkExecutable(widelands FALSE)
 

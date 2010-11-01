@@ -364,10 +364,14 @@ add_subdirectory(po)
 #add_subdirectory(pics)
 add_subdirectory(src)
 
+#automatic unit testing hook, must be updated to reflect all tests
+#if this is too intricate, we can also have this as an automatic detection
+#but the current way allows to disable certain checks if they are taking
+#too much time when ran every compile time
 add_custom_target(autotest ALL
   COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  DEPENDS widelands;test_io_filesystem
+  DEPENDS widelands;test_widelands_scripting
 )
 
 # install files to the correct locations here
