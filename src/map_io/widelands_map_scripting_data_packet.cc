@@ -17,6 +17,7 @@
  *
  */
 
+#include "widelands_map_scripting_data_packet.h"
 
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -26,8 +27,6 @@
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
-
-#include "widelands_map_scripting_data_packet.h"
 
 namespace Widelands {
 
@@ -69,7 +68,7 @@ throw (_wexception)
 
 	fs.EnsureDirectoryExists("scripting");
 
-	for (ScriptContainer::iterator i = p.begin(); i != p.end(); i++) {
+	for (ScriptContainer::iterator i = p.begin(); i != p.end(); ++i) {
 		std::string fname = "scripting/";
 		fname += i->first;
 		fname += ".lua";
