@@ -126,7 +126,7 @@ void Button::set_pic(PictureID const picid)
 */
 void Button::set_title(std::string const & title) {
 	if (m_title == title)
-		 return;
+		return;
 
 	m_pic_custom = g_gr->get_no_picture();
 	m_title      = title;
