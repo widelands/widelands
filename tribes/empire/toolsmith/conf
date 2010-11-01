@@ -2,7 +2,7 @@ help=_Produces tools for the workers.
 
 [buildcost]
 carrier=1
-saw=1
+hammer=1
 
 [idle]
 pics=idle_??.png
