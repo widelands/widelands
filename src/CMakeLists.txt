@@ -138,6 +138,8 @@ if (WIN32)
     #if expat is not found, then 3rdparty bundle is not in use, so just continue.
     find_package(EXPAT REQUIRED)
     target_link_libraries(widelands ${EXPAT_LIBRARY})
+    find_library(ICONV iconv libiconv REQUIRED)
+    target_link_libraries(widelands ${ICONV_LIBRARY})
 
   else (DEFINED MSVC)
     target_link_libraries(widelands wsock32)
