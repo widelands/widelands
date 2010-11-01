@@ -92,7 +92,11 @@ macro(LinkExecutable exe_name is_test)
   target_link_libraries(${exe_name} ${SDLNET_LIBRARY})
   target_link_libraries(${exe_name} ${SDLTTF_LIBRARY})
   target_link_libraries(${exe_name} ${SDLGFX_LIBRARY})
-  target_link_libraries(${exe_name} ${SDL_LIBRARY})
+
+  if (NOT ${is_test} STREQUAL TRUE)
+    target_link_libraries(${exe_name} ${SDL_LIBRARY})
+  endif (NOT ${is_test} STREQUAL TRUE)
+
   target_link_libraries(${exe_name} ${LUA_LIBRARY})
   target_link_libraries(${exe_name} ${PNG_LIBRARY})
   target_link_libraries(${exe_name} ${ZLIB_LIBRARY})
