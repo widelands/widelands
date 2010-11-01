@@ -2,7 +2,7 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINAR
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
 
 IF (WIN32)
-  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../build/win32/msvc/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
+  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/msvc/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
   if (NOT WL_VERSION_MAJOR OR WL_VERSION_MAJOR STREQUAL "")
     set (WL_VERSION_MAJOR 0)
   endif (NOT WL_VERSION_MAJOR OR WL_VERSION_MAJOR STREQUAL "")
@@ -12,7 +12,7 @@ IF (WIN32)
   if (NOT WL_VERSION_PATCH OR WL_VERSION_PATCH STREQUAL "")
     set (WL_VERSION_PATCH 1)
   endif (NOT WL_VERSION_PATCH OR WL_VERSION_PATCH STREQUAL "")
-  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../build/win32/msvc/Widelands-msvc.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/Widelands-msvc.iss)
+  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/msvc/Widelands-msvc.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/Widelands-msvc.iss)
   IF (MINGW)
 	set(WIN32_ICON_O ${CMAKE_CURRENT_BINARY_DIR}/wl_icon.o)
 	ADD_CUSTOM_COMMAND( OUTPUT ${WIN32_ICON_O}
