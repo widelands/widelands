@@ -85,7 +85,7 @@ struct NetHost : public GameController, private SyncCallback {
 	// Chat-related stuff
 	void send(ChatMessage msg);
 
-	// Host command releated stuff
+	//  Host command related stuff
 	void kickUser(std::string, std::string);
 	void handle_dserver_command(std::string, std::string);
 
