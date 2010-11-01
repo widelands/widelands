@@ -23,136 +23,113 @@ IF (WIN32)
 	ENDIF (MINGW)
 endif (WIN32)
 
-file(GLOB_RECURSE WL_SRCS_ALL *.cc)
+file(GLOB_RECURSE WL_SRCS_CC *.cc)
+file(GLOB_RECURSE WL_SRCS_H *.h)
+file(GLOB_RECURSE WL_SRCS_CPP *.cpp)
 
-file(GLOB WL_MAIN_SRCS *.cc)
-file(GLOB WL_MAIN_CC main.cc)
-list(REMOVE_ITEM WL_MAIN_SRCS ${WL_MAIN_CC})
-add_library(widelands_main ${WL_MAIN_SRCS})
-
-#file (GLOB WL_SRCS *.cc economy/*.cc scripting/*.cc)
-#create WL_SRCS and WL_TEST_SRCS
 #convention: any directory called "test" contains test sources, including subdirectories
-set(WL_SRCS "")
 set(WL_TEST_SRCS "")
-foreach (sourcefile ${WL_SRCS_ALL})
+foreach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
   if (${sourcefile} MATCHES ".*/test/.*")
     list (APPEND WL_TEST_SRCS ${sourcefile})
-  else (${sourcefile} MATCHES ".*/test/.*")
-    list (APPEND WL_SRCS ${sourcefile})
+    list (REMOVE_ITEM WL_SRCS_CC ${sourcefile})
+    list (REMOVE_ITEM WL_SRCS_H ${sourcefile})
   endif (${sourcefile} MATCHES ".*/test/.*")
-endforeach (sourcefile ${WL_SRCS_ALL})
-
-execute_process (COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
-set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/*_codecheck_stamp_)
-
-add_custom_target (codecheck)
-
-if (CMAKE_BUILD_TYPE STREQUAL Debug)
-  foreach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
-    string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcefile})
-    if (WIN32)
-      string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
-    endif (WIN32)
-    get_filename_component(sourcename ${sourcefile} NAME) 
-    set(stamp ${sourcenoslash}_codecheck_stamp_)
-    set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
-      add_custom_command(
-        TARGET codecheck
-	COMMAND "${WL_SOURCE_CHECKER}" -c "${sourcefile}"
-	COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp}
-	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-      )
-  endforeach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
-endif (CMAKE_BUILD_TYPE STREQUAL Debug)
-
-add_subdirectory(ai)
-add_subdirectory(economy)
-add_subdirectory(editor)
-add_subdirectory(game_io)
-add_subdirectory(graphic)
-add_subdirectory(io)
-add_subdirectory(logic)
-add_subdirectory(map_io)
-add_subdirectory(network)
-add_subdirectory(profile)
-add_subdirectory(scripting)
-add_subdirectory(sound)
-add_subdirectory(ui_basic)
-add_subdirectory(ui_fsmenu)
-add_subdirectory(wui)
+endforeach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
+#convention: main.cc should be removed from all lists
+list (REMOVE_ITEM WL_SRCS_CC "${CMAKE_CURRENT_SOURCE_DIR}/main.cc")
 
 IF (DEFINED MSVC)
   add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
 else (DEFINED MSVC)
-  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc ${WIN32_ICON_O})
+  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
 endif (DEFINED MSVC)
 
-target_link_libraries(widelands widelands_main)
+add_library (widelands_all ${WIN32_ICON_O} ${WL_SRCS_CC} ${WL_SRCS_H})
 
-target_link_libraries(widelands widelands_ai widelands_profile widelands_logic widelands_economy)
-target_link_libraries(widelands widelands_economy widelands_ai widelands_map_io widelands_logic widelands_ui_basic)
-target_link_libraries(widelands widelands_editor widelands_logic widelands_map_io widelands_editor_ui_menus widelands_editor_tools widelands_graphic widelands_ui_basic widelands_profile widelands_ui_fsmenu widelands_wui widelands_io)
-target_link_libraries(widelands widelands_editor_tools widelands_ui_basic widelands_graphic widelands_logic widelands_wui)
-target_link_libraries(widelands widelands_editor_ui_menus widelands_map_io widelands_graphic widelands_ui_basic widelands_profile widelands_logic widelands_editor_tools widelands_wui widelands_ui_fsmenu widelands_io)
-target_link_libraries(widelands widelands_map_io widelands_wui widelands_ui_basic widelands_profile widelands_logic widelands_editor widelands_graphic widelands_economy)
-target_link_libraries(widelands widelands_game_io widelands_map_io widelands_wui widelands_profile widelands_logic widelands_economy widelands_io)
-target_link_libraries(widelands widelands_graphic widelands_sound widelands_wui widelands_logic widelands_economy widelands_ui_basic widelands_profile widelands_io)
-target_link_libraries(widelands widelands_io widelands_io_filesystem)
-target_link_libraries(widelands widelands_io_filesystem)
-target_link_libraries(widelands widelands_logic widelands_main widelands_ai widelands_scripting widelands_sound widelands_wui widelands_graphic widelands_economy widelands_map_io widelands_editor widelands_ui_fsmenu widelands_network widelands_game_io widelands_ui_basic widelands_profile widelands_io)
-target_link_libraries(widelands widelands_map_io widelands_wui widelands_graphic widelands_logic widelands_profile widelands_economy widelands_io)
-target_link_libraries(widelands widelands_network widelands_ui_basic widelands_profile widelands_logic widelands_ui_fsmenu widelands_wui widelands_io)
-target_link_libraries(widelands widelands_profile widelands_logic widelands_io)
-target_link_libraries(widelands widelands_scripting widelands_wui widelands_logic)
-target_link_libraries(widelands widelands_sound widelands_wui widelands_profile widelands_logic widelands_io)
-target_link_libraries(widelands widelands_map_io widelands_logic widelands_editor widelands_profile)
-target_link_libraries(widelands widelands_ui_basic widelands_logic widelands_economy widelands_graphic widelands_sound widelands_profile widelands_io widelands_ui_fsmenu)
-target_link_libraries(widelands widelands_ui_fsmenu widelands_logic widelands_sound widelands_wui widelands_graphic widelands_game_io widelands_network widelands_map_io widelands_ui_basic widelands_profile widelands_io)
-target_link_libraries(widelands widelands_wui widelands_sound widelands_profile widelands_logic widelands_editor widelands_graphic widelands_economy widelands_game_io widelands_ui_fsmenu widelands_ui_basic widelands_io)
+set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
+set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 
-target_link_libraries(widelands ${SDLIMAGE_LIBRARY})
-target_link_libraries(widelands ${SDLMIXER_LIBRARY})
-target_link_libraries(widelands ${SDLNET_LIBRARY})
-target_link_libraries(widelands ${SDLTTF_LIBRARY})
-target_link_libraries(widelands ${SDLGFX_LIBRARY})
-target_link_libraries(widelands ${SDL_LIBRARY})
-target_link_libraries(widelands ${LUA_LIBRARY})
-target_link_libraries(widelands ${PNG_LIBRARY})
-target_link_libraries(widelands ${JPEG_LIBRARY})
-target_link_libraries(widelands ${TIFF_LIBRARY})
-target_link_libraries(widelands ${ZLIB_LIBRARY})
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/CppCheckSuppressions.cmake ${CMAKE_CURRENT_BINARY_DIR}/CppCheckSuppressions)
 
-if (GGZ_CORE_FOUND)
-  target_link_libraries(widelands ${GGZ_CORE_LIBRARY})
-endif (GGZ_CORE_FOUND)
+if (CMAKE_BUILD_TYPE STREQUAL Debug)
+  set (commands "")
+  foreach(sourcefile ${WL_SRCS_CC} ${WL_SRCS_H} ${WL_SRCS_CPP})
+    string(REPLACE "${CMAKE_SOURCE_DIR}/src/" "" sourcewithoutpath ${sourcefile})
+    string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcewithoutpath})
+    if (WIN32)
+      string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
+    endif (WIN32)
+    get_filename_component(sourcename ${sourcefile} NAME) 
+    set(stamp ${sourcename}_)
+    add_custom_command(
+      OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash}"
+      COMMAND ${CMAKE_COMMAND} -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
+      DEPENDS ${sourcefile}
+      COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
+    )
+    list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash})
+    if (WL_EXTRAWARNINGS)
+      add_custom_command(
+	OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${sourcenoslash}"
+	COMMAND ${CMAKE_COMMAND} -DWL_SOURCES_BINARY_ROOT=${WL_SOURCES_BINARY_ROOT} -Dincludedir=${CMAKE_SOURCE_DIR}/src -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
+	DEPENDS ${sourcefile}
+	COMMENT "Checking ${sourcewithoutpath} with CppCheck"
+      )
+      list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${sourcenoslash})
+#        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp};${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}")
+    else (WL_EXTRAWARNINGS)
+#        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}")
+    endif (WL_EXTRAWARNINGS)
+  endforeach(sourcefile ${WL_SRCS_CC} ${WL_SRCS_H} ${WL_SRCS_CPP})
+  add_custom_target(codecheck DEPENDS ${commands})
+  add_dependencies(widelands codecheck)
+endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
-if (OPENGL_FOUND)
-  target_link_libraries(widelands ${OPENGL_gl_LIBRARY})
-endif (OPENGL_FOUND)
+macro(LinkExecutable exe_name is_test)
+  target_link_libraries(${exe_name} ${PNG_LIBRARY})
+  target_link_libraries(${exe_name} ${ZLIB_LIBRARY})
+  target_link_libraries(${exe_name} ${SDL_LIBRARY})
+  target_link_libraries(${exe_name} ${SDLIMAGE_LIBRARY})
+  target_link_libraries(${exe_name} ${SDLMIXER_LIBRARY})
+  target_link_libraries(${exe_name} ${SDLNET_LIBRARY})
+  target_link_libraries(${exe_name} ${SDLTTF_LIBRARY})
+  target_link_libraries(${exe_name} ${LUA_LIBRARY})
+  target_link_libraries(${exe_name} ${SDLGFX_LIBRARY})
+  target_link_libraries(${exe_name} ${GGZ_CORE_LIBRARY})
+  target_link_libraries(${exe_name} ${OPENGL_gl_LIBRARY})
 
-if (APPLE)
+  if (${is_test} STREQUAL TRUE)
+    target_link_libraries(${exe_name} ${Boost_LIBRARIES} ${srces})
+  endif (${is_test} STREQUAL TRUE)
+
+  target_link_libraries(${exe_name} widelands_all)
+endmacro(LinkExecutable exe_name is_test)
+
+#the subdirectories are only used for test definition
+#temporarily disabled the 'old' tests due to incompatibility
+#add_subdirectory(economy)
+#add_subdirectory(io)
+add_subdirectory(scripting)
+
+LinkExecutable(widelands FALSE)
+
+if (APPLE OR WIN32)
   target_link_libraries(widelands ${INTL_LIBRARY})
-endif (APPLE)
+endif (APPLE OR WIN32)
 
 if (WIN32)
-if (DEFINED MSVC)
-  target_link_libraries(widelands ${INTL_LIBRARY})
-  target_link_libraries(widelands ws2_32)
-  #static linking with MSVC using 3rdparty bundle needs expat and iconv libraries
-  #if expat/iconv is not found, then 3rdparty bundle is not in use, so just continue.
-  find_library(EXPAT_LIBRARY libexpat)
-  if (EXPAT_LIBRARY)
+  if (DEFINED MSVC)
+    target_link_libraries(widelands ws2_32)
+
+    #GGZ on MSVC using 3rdparty bundle needs expat library
+    #if expat is not found, then 3rdparty bundle is not in use, so just continue.
+    find_package(EXPAT REQUIRED)
     target_link_libraries(widelands ${EXPAT_LIBRARY})
-  endif ()
-  find_library(ICONV_LIBRARY iconv libiconv)
-  if (ICONV_LIBRARY)
-    target_link_libraries(widelands ${ICONV_LIBRARY})
-  endif ()
-else (DEFINED MSVC)
-  target_link_libraries(widelands intl)
-  target_link_libraries(widelands wsock32)
-endif (DEFINED MSVC) 
+
+  else (DEFINED MSVC)
+    target_link_libraries(widelands wsock32)
+  endif (DEFINED MSVC) 
 endif (WIN32)
 
 install(TARGETS widelands DESTINATION ${WLBUILD_INSTALL_BINDIR} COMPONENT ExecutableFiles)

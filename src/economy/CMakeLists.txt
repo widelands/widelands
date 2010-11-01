@@ -1,4 +1,1 @@
-file(GLOB WL_ECONOMY_SRCS *.cc)
-
-add_library(widelands_economy ${WL_ECONOMY_SRCS})
-
+add_subdirectory(test)
