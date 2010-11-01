@@ -922,23 +922,14 @@ void Graphic::free_picture_surface(const PictureID & picid) {
 			 picid->module, picid->fname);
 		return;
 	}
-	assert
-		(picid->module == PicMod_Font
-		 ||
-		 picid->module == PicSurface);
+	assert(picid->module == PicMod_Font || picid->module == PicSurface);
 
-	if (picid->surface) {
-		delete picid->surface;
-		picid->surface = 0;
-	}
-	if (picid->rendertarget) {
-		delete picid->rendertarget;
-		picid->rendertarget = 0;
-	}
-	if (picid->fname) {
-		delete picid->fname;
-		picid->fname = 0;
-	}
+	delete picid->surface;
+	picid->surface = 0;
+	delete picid->rendertarget;
+	picid->rendertarget = 0;
+	delete picid->fname;
+	picid->fname = 0;
 
 	container_iterate(Picturemap, m_picturemap[picid->module], it)
 		if (it.current->second == picid) {
