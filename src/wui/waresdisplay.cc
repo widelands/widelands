@@ -41,11 +41,12 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	UI::Panel(parent, x, y, 0, 0),
 	m_tribe (tribe),
 
+	m_type (type),
 	m_curware
 		(this,
 		 0, get_inner_h() - 25, get_inner_w(), 20,
 		 _("Stock"), UI::Align_Center),
-	m_type (type),
+
 	m_selected(m_type == WORKER ? m_tribe.get_nrworkers()
 	                            : m_tribe.get_nrwares(), false),
 	m_hidden  (m_type == WORKER ? m_tribe.get_nrworkers()

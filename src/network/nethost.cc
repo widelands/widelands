@@ -253,7 +253,8 @@ struct HostChatProvider : public ChatProvider {
 				arg1 = "";
 			if (arg2.empty())
 				arg2 = "";
-			log((cmd + " + \"" + arg1 + "\" + \"" + arg2 + "\"\n").c_str());
+			//log((cmd + " + \"" + arg1 + "\" + \"" + arg2 + "\"\n").c_str());
+			log("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
 
 			// let "/me" pass - handled by chat
 			if (cmd == "me") {

@@ -95,12 +95,6 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, boost::ref(*this)),
 		 std::string(),
 		 0 < noise_tool.get_interval().max),
-	m_set_label
-		(this,
-		 hspacing(),
-		 m_upper_decrease.get_y() + m_upper_decrease.get_h() + vspacing(),
-		 get_inner_w() - 2 * hspacing(), height,
-		 UI::Align_BottomCenter),
 	m_setto_increase
 		(this, "incr_set_to",
 		 get_inner_w() / 2 - width,
@@ -118,7 +112,13 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, boost::ref(*this)),
 		 std::string(),
-		 0 < noise_tool.set_tool().get_interval().min)
+		 0 < noise_tool.set_tool().get_interval().min),
+	m_set_label
+		(this,
+		 hspacing(),
+		 m_upper_decrease.get_y() + m_upper_decrease.get_h() + vspacing(),
+		 get_inner_w() - 2 * hspacing(), height,
+		 UI::Align_BottomCenter)
 {
 	m_lower_increase.set_repeating(true);
 	m_lower_decrease.set_repeating(true);

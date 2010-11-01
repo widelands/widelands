@@ -150,7 +150,7 @@ set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${B
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
 set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall")
 set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wextra -Wsign-promo")
-set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -fdiagnostics-show-option")
+set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   include(CheckCXXCompilerFlag) #this include should be safe
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)

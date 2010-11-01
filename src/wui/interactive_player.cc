@@ -156,6 +156,17 @@ int32_t Int_Player_overlay_callback_function
 }
 
 
+/*
+ * UI::Callback_Button m_toggle_chat;
+	UI::Callback_Button m_toggle_options_menu;
+	UI::Callback_Button m_toggle_statistics_menu;
+	UI::Callback_Button m_toggle_objectives;
+	UI::Callback_Button m_toggle_minimap;
+	UI::Callback_Button m_toggle_buildhelp;
+	UI::Callback_Button m_toggle_message_menu;
+	UI::Callback_Button m_toggle_help;
+	*/
+
 Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
@@ -170,21 +181,13 @@ m_flag_to_connect(Widelands::Coords::Null()),
 // Chat is different, as m_chatProvider needs to be checked when toggling
 // Buildhelp is different as it does not toggle a UniqueWindow
 // Minimap is different as it warps and stuff
+
 #define INIT_BTN_this(picture, name, callback, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
  boost::bind(&Interactive_Player::callback, boost::ref(*this)),               \
  tooltip                                                                      \
 
-m_toggle_buildhelp
-	(INIT_BTN_this
-	 	("menu_toggle_buildhelp", "buildhelp", toggle_buildhelp, _("Buildhelp"))),
-m_toggle_chat
-	(INIT_BTN_this
-	 	("menu_chat", "chat", toggle_chat, _("Chat"))),
-m_toggle_minimap
-	(INIT_BTN_this
-	 	("menu_toggle_minimap", "minimap", toggle_minimap, _("Minimap"))),
 
 #define INIT_BTN(picture, name, registry, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
@@ -192,21 +195,32 @@ m_toggle_minimap
  boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)),      \
  tooltip                                                                      \
 
+
+m_toggle_chat
+	(INIT_BTN_this
+	 ("menu_chat", "chat", toggle_chat, _("Chat"))),
 m_toggle_options_menu
 	(INIT_BTN
-	 	("menu_options_menu", "options_menu", m_options, _("Options"))),
+	 ("menu_options_menu", "options_menu", m_options, _("Options"))),
 m_toggle_statistics_menu
 	(INIT_BTN
-	 	("menu_toggle_menu", "statistics_menu", m_statisticsmenu, _("Statistics"))),
+	 ("menu_toggle_menu", "statistics_menu", m_statisticsmenu, _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN
-	 	("menu_objectives", "objectives", m_objectives, _("Objectives"))),
+	 ("menu_objectives", "objectives", m_objectives, _("Objectives"))),
+m_toggle_minimap
+	(INIT_BTN_this
+	 ("menu_toggle_minimap", "minimap", toggle_minimap, _("Minimap"))),
+m_toggle_buildhelp
+	(INIT_BTN_this
+	 ("menu_toggle_buildhelp", "buildhelp", toggle_buildhelp, _("Buildhelp"))),
 m_toggle_message_menu
 	(INIT_BTN
-	 	("menu_toggle_oldmessage_menu", "messages", m_message_menu, _("Messages"))),
+	 ("menu_toggle_oldmessage_menu", "messages", m_message_menu, _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 	("menu_help", "help", m_encyclopedia, _("Ware help")))
+	 ("menu_help", "help", m_encyclopedia, _("Ware help")))
+
 {
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI

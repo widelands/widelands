@@ -1095,10 +1095,10 @@ static bool draw_minimap_frameborder
 	(Widelands::FCoords				     const f,
 	 Point							     const ptopleft,
 	 Point							     const pbottomright,
-	 uint32_t                            const mapwidth,
-	 uint32_t                            const mapheight,
-	 uint32_t                            const modx,
-	 uint32_t                            const mody)
+	 int32_t                            const mapwidth,
+	 int32_t                            const mapheight,
+	 int32_t                            const modx,
+	 int32_t                            const mody)
 {
 	bool isframepixel = false;
 
@@ -1108,9 +1108,15 @@ static bool draw_minimap_frameborder
 			&& f.x % 2 == modx)
 			isframepixel = true;
 	} else {
-		if ((f.x >= ptopleft.x && f.x <= mapwidth || f.x >= 0 && f.x <= pbottomright.x)
-			&& (f.y == ptopleft.y || f.y == pbottomright.y)
-			&& f.x % 2 == modx)
+		if (
+			 (
+			  (f.x >= ptopleft.x && f.x <= mapwidth)
+			  || 
+			  (f.x >= 0 && f.x <= pbottomright.x))
+			 &&
+			 (f.y == ptopleft.y || f.y == pbottomright.y)
+			 &&
+			 (f.x % 2) == modx)
 			isframepixel = true;
 	}
 
@@ -1120,9 +1126,16 @@ static bool draw_minimap_frameborder
 			&& f.y % 2 == mody)
 			isframepixel = true;
 	} else {
-		if ((f.y >= ptopleft.y && f.y <= mapheight || f.y >= 0 && f.y <= pbottomright.y)
-			&& (f.x == ptopleft.x || f.x == pbottomright.x)
-			&& f.y % 2 == mody)
+		if 
+			(
+			 (
+			  (f.y >= ptopleft.y && f.y <= mapheight)
+			  ||
+			  (f.y >= 0 && f.y <= pbottomright.y))
+			 &&
+			 (f.x == ptopleft.x || f.x == pbottomright.x)
+			 &&
+			 f.y % 2 == mody)
 			isframepixel = true;
 	}
 
@@ -1139,7 +1152,7 @@ static void draw_minimap_int
 	(Uint8                             * const pixels,
 	 uint16_t                            const pitch,
 	 SDL_PixelFormat             const &       format,
-	 uint32_t                            const mapwidth,
+	 int32_t                            const mapwidth,
 	 Widelands::Editor_Game_Base const &       egbase,
 	 Widelands::Player           const * const player,
 	 Rect                                const rc,
@@ -1148,7 +1161,7 @@ static void draw_minimap_int
 {
 	Widelands::Map const & map = egbase.map();
 
-	uint32_t mapheight = (flags & MiniMap::Zoom2 ? rc.h / 2 : rc.h);
+	int32_t mapheight = (flags & MiniMap::Zoom2 ? rc.h / 2 : rc.h);
 
 	// size of the display frame
 	int32_t xsize = g_gr->get_xres() / TRIANGLE_WIDTH / 2;
