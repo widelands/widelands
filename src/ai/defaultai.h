@@ -61,7 +61,7 @@ struct Flag;
  *   e.g. check_militarysite checks the whole visible area for enemy area, but
  *   it would already be enough, if it checks the outer circle ring.
  * - improvements and speedups in the whole defaultAI code.
- * - handling of trainingssites (if supply line is broken - send some soldiers
+ * - handling of trainingsites (if supply line is broken - send some soldiers
  *   out, to have some more forces. Reincrease the number of soldiers that
  *   should be trained if inputs get filled again.).
  *
@@ -84,27 +84,27 @@ struct DefaultAI : Computer_Player {
 	struct AggressiveImpl : public Computer_Player::Implementation {
 		AggressiveImpl() {name = _("Aggressive");}
 		Computer_Player * instantiate
-			(Widelands::Game & g, const Widelands::Player_Number p) const
+			(Widelands::Game & game, Widelands::Player_Number const p) const
 		{
-			return new DefaultAI(g, p, AGGRESSIVE);
+			return new DefaultAI(game, p, AGGRESSIVE);
 		}
 	};
 
 	struct NormalImpl : public Computer_Player::Implementation {
 		NormalImpl() {name = _("Normal");}
 		Computer_Player * instantiate
-			(Widelands::Game & g, const Widelands::Player_Number p) const
+			(Widelands::Game & game, Widelands::Player_Number const p) const
 		{
-			return new DefaultAI(g, p, NORMAL);
+			return new DefaultAI(game, p, NORMAL);
 		}
 	};
 
 	struct DefensiveImpl : public Computer_Player::Implementation {
 		DefensiveImpl() {name = _("Defensive");}
 		Computer_Player * instantiate
-			(Widelands::Game & g, const Widelands::Player_Number p) const
+			(Widelands::Game & game, Widelands::Player_Number const p) const
 		{
-			return new DefaultAI(g, p, DEFENSIVE);
+			return new DefaultAI(game, p, DEFENSIVE);
 		}
 	};
 

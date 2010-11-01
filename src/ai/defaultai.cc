@@ -58,22 +58,22 @@ DefaultAI::NormalImpl DefaultAI::normalImpl;
 DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 
 /// Constructor of DefaultAI
-DefaultAI::DefaultAI(Game & g, const Player_Number pid, uint8_t t) :
-Computer_Player(g, pid),
-type(t),
-m_buildable_changed(true),
-m_mineable_changed(true),
-tribe(0),
-total_constructionsites(0),
-next_road_due(2000),
-next_stats_update_due(30000),
-next_construction_due(1000),
-next_productionsite_check_due(0),
-next_mine_check_due(0),
-next_militarysite_check_due(0),
-next_attack_consideration_due(300000),
-time_of_last_construction(0),
-numof_warehouses(0)
+DefaultAI::DefaultAI(Game & game, Player_Number const pid, uint8_t const t) :
+	Computer_Player              (game, pid),
+	type                         (t),
+	m_buildable_changed          (true),
+	m_mineable_changed           (true),
+	tribe                        (0),
+	total_constructionsites      (0),
+	next_road_due                (2000),
+	next_stats_update_due        (30000),
+	next_construction_due        (1000),
+	next_productionsite_check_due(0),
+	next_mine_check_due          (0),
+	next_militarysite_check_due  (0),
+	next_attack_consideration_due(300000),
+	time_of_last_construction    (0),
+	numof_warehouses             (0)
 {}
 
 DefaultAI::~DefaultAI()
@@ -182,8 +182,10 @@ void DefaultAI::think ()
 	// improve existing roads!
 	// This sounds important, but actually is not as important as the other
 	// actions are. Reasons are the following:
-	// * The "donkey feature" made economies more stable, even with stupid roads.
-	// * If defaultAI builds too much roads, it will waste good buildings space.
+	//    * The "donkey feature" made economies more stable, even with stupid
+	//      roads.
+	//    * If defaultAI builds too much roads, it will waste good building
+	//      space.
 	if (improve_roads(gametime)) {
 		m_buildable_changed = true;
 		m_mineable_changed = true;
@@ -542,7 +544,9 @@ void DefaultAI::update_buildable_field
 					const Building_Descr & target_descr =
 						constructionsite->building();
 
-					if (upcast(MilitarySite_Descr const, target_ms_d, &target_descr))
+					if
+						(upcast
+						 	(MilitarySite_Descr const, target_ms_d, &target_descr))
 					{
 						const int32_t v =
 							target_ms_d->get_conquers()
@@ -596,7 +600,9 @@ void DefaultAI::update_buildable_field
 					const Building_Descr & target_descr =
 						constructionsite->building();
 
-					if (upcast(MilitarySite_Descr const, target_ms_d, &target_descr))
+					if
+						(upcast
+						 	(MilitarySite_Descr const, target_ms_d, &target_descr))
 					{
 						const int32_t v =
 							target_ms_d->get_conquers()
@@ -638,7 +644,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
 	field.mines_nearby = 1;
 
 	FCoords fse;
-	map.get_neighbour (field.coords, WALK_SE, &fse);
+	map.get_brn(field.coords, &fse);
 
 	if (BaseImmovable const * const imm = fse.field->get_immovable())
 		if
@@ -649,10 +655,10 @@ void DefaultAI::update_mineable_field (MineableField & field)
 			  fse.field->nodecaps() & BUILDCAPS_FLAG))
 		field.preferred = true;
 
-	for (uint32_t i = 0; i < immovables.size(); ++i) {
-		if (dynamic_cast<Flag const *>(immovables[i].object)) {
+	container_iterate_const(std::vector<ImmovableFound>, immovables, i)
+		if (dynamic_cast<Flag const *>(i.current->object))
 			field.reachable = true;
-		} else if (upcast(Building const, bld, immovables[i].object)) {
+		else if (upcast(Building const, bld, immovables[i].object)) {
 			if (bld->descr().get_ismine()) {
 				++field.mines_nearby;
 			} else if (upcast(ConstructionSite const, cs, bld)) {
@@ -660,12 +666,11 @@ void DefaultAI::update_mineable_field (MineableField & field)
 					++field.mines_nearby;
 			}
 		}
-	}
 }
 
 
 /// Updates the productionsites statistics needed for construction decision.
-void DefaultAI::update_productionsite_stats(int32_t gametime) {
+void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 	// Updating the stats every 20 seconds should be enough
 	next_stats_update_due = gametime + 20000;
 
@@ -714,7 +719,7 @@ void DefaultAI::update_productionsite_stats(int32_t gametime) {
  * separately as these buildings should have another priority (on one hand they
  * are important for the basic infrastructure, but there is no need for a lot
  * of these buildings.
- * Militarysites, warehouses and trainingssites have a different calculation,
+ * Militarysites, warehouses and trainingsites have a different calculation,
  * that (should) depend on the initialisation type (Aggressive, Normal,
  * Defensive)
  */
@@ -811,6 +816,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			if ((*i)->coords == bf->coords)
 				continue;
 
+		assert(player);
 		int32_t const maxsize =
 			player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK;
 
@@ -818,7 +824,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		for (uint32_t j = 0; j < buildings.size(); ++j) {
 			BuildingObserver & bo = buildings[j];
 
-			if (!bo.buildable(player))
+			if (!bo.buildable(*player))
 				continue;
 
 			if (bo.type == BuildingObserver::MINE)
@@ -1005,8 +1011,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
 				// Start building trainingsites when there are already more than 50
 				// other buildings. That should be enough for a working economy.
-				// On the other hand only build more trainingssites of the same type
-				// if the economy is really big.
+				//  On the other hand only build more trainingsites of the same
+				//  type if the economy is really big.
 				prio += productionsites.size() + militarysites.size();
 				prio += mines.size();
 				prio += type * 10; // +0 / +10 / +20 for DEFF/NORM/AGGR
@@ -1030,8 +1036,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				if (bf->water_nearby < 3)
 					continue;
 				int effect = bf->water_nearby - 8;
-				prio += effect > 0 ?
-					 static_cast<int>(sqrt(static_cast<double>(effect))) : effect;
+				prio +=
+					effect > 0 ?
+					static_cast<int>(sqrt(static_cast<double>(effect))) : effect;
 				// if same producers are nearby, then give some penalty
 				for (size_t k = 0; k < bo.outputs.size(); ++k)
 					if (bf->producers_nearby[bo.outputs[k]] > 0)
@@ -1059,11 +1066,12 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 	}
 
 	// then try all mines - as soon as basic economy is build up.
-	for (uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i)
+	for
+		(uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i)
 	{
 		BuildingObserver & bo = buildings[i];
 
-		if (!bo.buildable(player) || bo.type != BuildingObserver::MINE)
+		if (!bo.buildable(*player) || bo.type != BuildingObserver::MINE)
 			continue;
 
 		// Don't build another building of this type, if there is already
@@ -1326,9 +1334,9 @@ bool DefaultAI::improve_roads (int32_t gametime)
 				finish = connect_flag_to_another_economy(flag);
 
 			// try to improve the roads at this flag
-			// TODO  do this only on useful places - the attempt below unfortunally
-			// TODO  did not work as it should...
-			// // if the flag is full of wares or if it is not yet a fork.
+			//  TODO do this only on useful places - the attempt below
+			//  TODO  unfortunatey did not work as it should...
+			//  if the flag is full of wares or if it is not yet a fork.
 			if (!finish) //&& (!flag.has_capacity() || flag.nr_of_roads() < 3))
 				finish = improve_transportation_ways(flag);
 
