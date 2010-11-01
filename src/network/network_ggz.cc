@@ -19,8 +19,6 @@
 
 #include "network_ggz.h"
 
-#ifdef USE_GGZ
-
 #include "log.h"
 #include "i18n.h"
 #include "warning.h"
@@ -97,6 +95,7 @@ bool NetGGZ::initcore
 
 	username = nick;
 
+#ifdef DEBUG
 	const char * debugstrs[] =
 		{//GGZCORE_DBG_GAME,
 		 GGZCORE_DBG_HOOK,
@@ -114,7 +113,8 @@ bool NetGGZ::initcore
 	ggz_debug_init(debugstrs, 0);
 	//ggz_debug_set_func();
 	//ggz_debug_enable();
-	
+#endif
+
 	core().init(metaserver, nick, pwd, registered);
 	while
 		(core().is_connecting() or (core().logged_in()
@@ -459,6 +459,7 @@ void NetGGZ::join(char const * tablename)
 bool NetGGZ::updateForTables() {
 	return core().updateForTables();
 }
+
 bool NetGGZ::updateForUsers() {
 	return core().updateForUsers();
 }
@@ -483,7 +484,6 @@ bool NetGGZ::logged_in()
 
 void NetGGZ::statechange()
 {
-	
 }
 
 bool NetGGZ::set_spectator(bool spec)
@@ -511,5 +511,9 @@ std::string NetGGZ::playername()
 	return ggzmod().playername();
 }
 
+void NetGGZ::leave_table()
+{
+	ggzmod().disconnect();
+	process();
+}
 
-#endif //USE_GGZ

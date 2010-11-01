@@ -19,8 +19,6 @@
 
 #include "multiplayer.h"
 
-#if HAVE_GGZ
-
 #include "constants.h"
 #include "i18n.h"
 #include "profile/profile.h"
@@ -123,5 +121,3 @@ void Fullscreen_Menu_MultiPlayer::ggzLogin() {
 		end_modal(Metaserver);
 	}
 }
-
-#endif // if HAVE_GGZ

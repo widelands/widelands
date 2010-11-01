@@ -202,7 +202,6 @@ void NetClient::run ()
 
 		d->modal = game.get_ibase();
 
-#if HAVE_GGZ
 		// if this is a ggz game, tell the metaserver about the game
 		if (use_ggz)
 		{
@@ -213,7 +212,6 @@ void NetClient::run ()
 			NetGGZ::ref().set_players(d->settings);
 			NetGGZ::ref().send_game_info();
 		}
-#endif
 
 		game.run
 			(loaderUI,
@@ -222,13 +220,11 @@ void NetClient::run ()
 			 : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
 
-#if HAVE_GGZ
 		// if this is a ggz game, tell the metaserver the result of the game
 		if (use_ggz)
 		{
 			NetGGZ::ref().send_game_done();
 		}
-#endif
 
 		d->modal = 0;
 		d->game = 0;
@@ -523,7 +519,7 @@ void NetClient::report_result(int player, int points, bool win, std::string extr
 	log
 		("NetClient::report_result(%d, %d, %s, %s)\n", player, points,
 		 win?"won":"lost", extra.c_str());
-#if HAVE_GGZ
+
 	// if this is a ggz game, tell the metaserver that the game is done.
 	if (use_ggz)
 	{
@@ -533,7 +529,6 @@ void NetClient::report_result(int player, int points, bool win, std::string extr
 			 d->game->get_general_statistics(),
 			 extra);
 	}
-#endif
 }
 
 void NetClient::sendTime()
@@ -875,11 +870,10 @@ void NetClient::handle_packet(RecvPacket & packet)
  */
 void NetClient::handle_network ()
 {
-#if HAVE_GGZ
 	// if this is a ggz game, handle the ggz network
 	if (use_ggz)
 		NetGGZ::ref().process();
-#endif
+
 	try {
 		while (d->sock != 0 && SDLNet_CheckSockets(d->sockset, 0) > 0) {
 			// Perform only one read operation, then process all packets

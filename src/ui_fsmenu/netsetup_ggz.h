@@ -22,8 +22,6 @@
 
 #include "network/network_ggz.h"
 
-#if HAVE_GGZ
-
 #include "network/network_lan_promotion.h"
 
 #include "base.h"
@@ -98,7 +96,5 @@ private:
 
 	bool compare_usertype(unsigned int rowa, unsigned int rowb);
 };
-
-#endif // if HAVE_GGZ
 
 #endif

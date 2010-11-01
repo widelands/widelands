@@ -355,7 +355,6 @@ void WLApplication::run()
 			emergency_save(game);
 			throw;
 		}
-#if HAVE_GGZ
 	} else if (NetGGZ::ref().ggz_mode()) {
 		/* Widelands was started from a ggz core program. Connect to this ggzcore
 		* instance and go directly to the game setup screen */
@@ -455,7 +454,6 @@ void WLApplication::run()
 			emergency_save(game);
 			throw;
 		}
-#endif
 	} else {
 
 		g_sound_handler.start_music("intro");
@@ -1224,7 +1222,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_game_type = SCENARIO;
 		m_commandline.erase("scenario");
 	}
-#if HAVE_GGZ
 	if (m_commandline.count("dedicated")) {
 		if (m_game_type != NONE)
 			throw wexception("dedicated can not be combined with other actions");
@@ -1236,7 +1233,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_game_type = GGZ;
 		m_commandline.erase("dedicated");
 	}
-#endif
+
 	//Note: it should be possible to record and playback at the same time,
 	//but why would you?
 	if (m_commandline.count("record")) {
@@ -1340,9 +1337,7 @@ void WLApplication::show_usage()
 			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 			 "                      map.\n"
 			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n")
-#if HAVE_GGZ
 		<< _(" --dedicated=FILENAME Starts ggz host with FILENAME as map\n")
-#endif
 		<<
 		_
 			(" --speed_of_new_game  The speed that the new game will run at\n"
@@ -1637,7 +1632,6 @@ void WLApplication::mainmenu_multiplayer()
 	for (;;) { // stay in menu until player clicks "back" button
 		std::string playername;
 
-#if HAVE_GGZ
 		bool ggz = false;
 		NetGGZ::ref().deinit(); // cleanup for reconnect to the metaserver
 		Fullscreen_Menu_MultiPlayer mp;
@@ -1722,18 +1716,6 @@ void WLApplication::mainmenu_multiplayer()
 					break;
 			}
 		}
-
-#else
-		// If compiled without ggz support, only lan-netsetup will be visible
-		if (menu_result == Fullscreen_Menu_NetSetupLAN::CANCEL) {
-#ifdef WIN32
-			// Clean up winsock2 data
-			WSACleanup();
-#endif
-			return;
-		}
-#endif // HAVE_GGZ
-
 		else {
 			// reinitalise in every run, else graphics look strange
 			Fullscreen_Menu_NetSetupLAN ns;

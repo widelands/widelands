@@ -20,9 +20,6 @@
 #ifndef NETWORK_GGZ_H
 #define NETWORK_GGZ_H
 
-#ifdef USE_GGZ
-#define HAVE_GGZ 1
-
 #define ERRMSG "</p><p font-size=14 font-color=#ff6633 font-weight=bold>ERROR: "
 
 #include "build_info.h"
@@ -263,6 +260,8 @@ struct NetGGZ : public ChatProvider {
 		throw wexception ("Accessed ggz wlmodule object but it does not exist");
 	}
 	
+	void leave_table();
+	
 private:
 	NetGGZ();
 	NetGGZ(const NetGGZ &)
@@ -306,7 +305,5 @@ private:
 	ggz_ggzmod * m_ggzmod;
 	ggz_wlmodule * m_wlmodule;
 };
-
-#endif //USE_GGZ
 
 #endif //NETWORK_GGZ_H

@@ -20,8 +20,6 @@
 #ifndef GGZ_GGZMOD_H
 #define GGZ_GGZMOD_H
 
-#ifdef USE_GGZ
-
 #include <ggzmod.h>
 #include <stdint.h>
 #include <string>
@@ -29,7 +27,6 @@
 #ifdef USE_BOOST_THREADS
 #include <boost/thread.hpp>
 #include <boost/thread/shared_mutex.hpp>
-
 #endif
 
 /**
@@ -154,6 +151,4 @@ private:
 	/// @note is used by both treads. Needs to be locked.
 	bool m_error_exit;
 };
-
-#endif // USE_GGZ
 #endif // GGZ_GGZMOD_H

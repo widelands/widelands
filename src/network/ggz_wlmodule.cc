@@ -17,9 +17,6 @@
 *
 */
 
-
-#ifdef USE_GGZ
-
 #include "ggz_wlmodule.h"
 
 #include "log.h"
@@ -408,5 +405,3 @@ bool ggz_wlmodule::send_statistics
 			log("GGZWLMODULE ## ERROR: not in table!\n");
 		return true;
 }
-
-#endif //USE_GGZ

@@ -20,8 +20,6 @@
 #include "netsetup_ggz.h"
 #include "network/network_ggz.h"
 
-#ifdef HAVE_GGZ
-
 #include <boost/bind.hpp>
 
 #include "constants.h"
@@ -392,5 +390,3 @@ void Fullscreen_Menu_NetSetupGGZ::clicked_hostgame()
 	NetGGZ::ref().set_local_servername(servername.text());
 	end_modal(HOSTGAME);
 }
-
-#endif // if HAVE_GGZ

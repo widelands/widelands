@@ -20,8 +20,6 @@
 #ifndef GGZ_GGZCORE_H
 #define GGZ_GGZCORE_H
 
-#ifdef USE_GGZ
-
 #include <ggzcore.h>
 #include <stdint.h>
 #include <string>
@@ -199,5 +197,4 @@ private:
 	static ggz_ggzcore * ggzcoreobj;
 };
 
-#endif // USE_GGZ
 #endif // GGZ_GGZCORE_H

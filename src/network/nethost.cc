@@ -467,9 +467,7 @@ NetHost::NetHost (std::string const & playername, bool ggz)
 	log("[Host] starting up.\n");
 
 	if (ggz) {
-#if HAVE_GGZ
 		NetGGZ::ref().launch();
-#endif
 	}
 
 	d->localplayername = playername;
@@ -575,13 +573,11 @@ void NetHost::run(bool const autorun)
 			return;
 	}
 
-#if HAVE_GGZ
 	// if this is a ggz game, tell the metaserver that the game started
 	if (use_ggz)
 	{
 		NetGGZ::ref().send_game_playing();
 	}
-#endif
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients.at(i).playernum == UserSettings::notConnected())
@@ -648,7 +644,6 @@ void NetHost::run(bool const autorun)
 		checkHungClients();
 		initComputerPlayers();
 
-#if HAVE_GGZ
 		// if this is a ggz game, tell the metaserver about the game
 		if (use_ggz)
 		{
@@ -659,7 +654,6 @@ void NetHost::run(bool const autorun)
 			NetGGZ::ref().set_players(d->settings);
 			NetGGZ::ref().send_game_info();
 		}
-#endif
 
 		game.run
 			(loaderUI,
@@ -667,13 +661,13 @@ void NetHost::run(bool const autorun)
 			 Widelands::Game::Loaded
 			 : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
-#if HAVE_GGZ
+
 		// if this is a ggz game, tell the metaserver that the game is done.
 		if (use_ggz)
 		{
 			NetGGZ::ref().send_game_done();
 		}
-#endif
+
 		clearComputerPlayers();
 	} catch (...) {
 		WLApplication::emergency_save(game);
@@ -1928,11 +1922,9 @@ void NetHost::handle_network ()
 		}
 	}
 
-#if HAVE_GGZ
 	// if this is a ggz game, handle the ggz network
 	if (use_ggz)
 		NetGGZ::ref().process();
-#endif
 
 	// Check if we hear anything from our clients
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {
@@ -2263,7 +2255,7 @@ void NetHost::report_result(int player, int points, bool win, std::string extra)
 	log
 		("NetHost::report_result(%d, %d, %s, %s)\n", player, points,
 		 win?"won":"lost", extra.c_str());
-#if HAVE_GGZ
+
 	// if this is a ggz game, tell the metaserver that the game is done.
 	if (use_ggz)
 	{
@@ -2274,6 +2266,5 @@ void NetHost::report_result(int player, int points, bool win, std::string extra)
 			 d->game->get_general_statistics(),
 			 extra);
 	}
-#endif
 }
 

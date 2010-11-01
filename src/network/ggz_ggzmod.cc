@@ -17,9 +17,6 @@
 *
 */
 
-
-#ifdef USE_GGZ
-
 #include "ggz_ggzmod.h"
 #include "network_ggz.h"
 #include "log.h"
@@ -42,6 +39,7 @@
 #ifdef USE_BOOST_THREADS
 #include <boost/bind.hpp>
 #endif
+#include <scripting/pdep/llimits.h>
 
 
 ggz_ggzmod * ggzmodobj = NULL;
@@ -237,6 +235,9 @@ int32_t ggz_ggzmod::datafd()
 
 void ggz_ggzmod::disconnect(bool err)
 {
+	if (not m_mod)
+		return;
+
 #ifdef USE_BOOST_THREADS
 	{
 		boost::unique_lock<boost::shared_mutex> sl(threadlock);
@@ -256,16 +257,18 @@ void ggz_ggzmod::disconnect(bool err)
 			log("GGZMOD ## ggzmod thread interrupted\n");
 		}
 	}
+#else
+	ggzmod_disconnect();
 #endif
 
 	if (m_data_fd > 0)
 		close(m_data_fd);
 	m_data_fd = -1;
 
-	if (m_mod) {
-		ggzmod_disconnect(m_mod);
-		ggzmod_free(m_mod);
-	}
+	if (m_mod)
+
+	ggzmod_free(m_mod);
+
 
 	m_mod = 0;
 	m_server_fd = 0;
@@ -439,10 +442,7 @@ void ggz_ggzmod::_thread_main()
 			}
 		}
 	}
-	log("ggzmod thread: leave loop\n");
-	boost::this_thread::sleep(boost::posix_time::seconds(1));
+	ggzmod_disconnect(m_mod);
 }
 
 #endif // USE_BOOST_THREADS
-
-#endif // USE_GGZ

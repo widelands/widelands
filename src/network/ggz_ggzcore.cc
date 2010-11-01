@@ -17,8 +17,6 @@
 *
 */
 
-#ifdef USE_GGZ
-
 #include "ggz_ggzcore.h"
 #include "network_ggz.h"
 #include "log.h"
@@ -853,5 +851,3 @@ bool ggz_ggzcore::data_pending()
 {
 	return ggzserver && ggzcore_server_data_is_pending(ggzserver);
 }
-
-#endif // USE_GGZ
