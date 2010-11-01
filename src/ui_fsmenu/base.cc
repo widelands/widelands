@@ -51,16 +51,17 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 
 	Section & s = g_options.pull_section("global");
 
+#if USE_OPENGL
+#define GET_BOOL_USE_OPENGL s.get_bool("opengl", false)
+#else
+#define GET_BOOL_USE_OPENGL false
+#endif
 	WLApplication::get()->init_graphics
 		(m_xres, m_yres,
 		 s.get_int("depth", 16),
 		 s.get_bool("fullscreen", false),
-#ifdef USE_OPENGL
-		 s.get_bool("opengl", false)
-#else
-		 false
-#endif
-);
+		 GET_BOOL_USE_OPENGL);
+#undef GET_BOOL_USE_OPENGL
 
 
 	// Load background graphics
@@ -68,9 +69,9 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
 	m_pic_background = g_gr->get_picture(PicMod_Menu, buffer, false);
 	if (m_pic_background == g_gr->get_no_picture())
-		 throw wexception
-			  ("couldn't open splash screen."
-				"make sure all the data files are installed properly");
+		throw wexception
+			("could not open splash screen; make sure that all data files are "
+			 "installed");
 
 	m_res_background = g_gr->get_no_picture();
 	if (g_gr->caps().resize_surfaces)

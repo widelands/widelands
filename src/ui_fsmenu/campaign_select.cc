@@ -342,8 +342,8 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	// Determine text domain
 	std::string tdname(campmapfile);
 	uint32_t i;
-	for (i = tdname.size(); i and tdname[i] != '/' and tdname[i] != '\\'; --i)
-		 /* Do nothing */;
+	for (i = tdname.size(); i and tdname[i] != '/' and tdname[i] != '\\'; --i) {
+	}
 	tdname = "scenario_" + tdname.substr(i + 1);
 
 	i18n::Textdomain td(tdname);
