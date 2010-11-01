@@ -87,6 +87,8 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
 endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
 macro(LinkExecutable exe_name is_test)
+  target_link_libraries(${exe_name} widelands_all)
+
   target_link_libraries(${exe_name} ${SDLIMAGE_LIBRARY})
   target_link_libraries(${exe_name} ${SDLMIXER_LIBRARY})
   target_link_libraries(${exe_name} ${SDLNET_LIBRARY})
@@ -106,8 +108,6 @@ macro(LinkExecutable exe_name is_test)
   if (${is_test} STREQUAL TRUE)
     target_link_libraries(${exe_name} ${Boost_LIBRARIES})
   endif (${is_test} STREQUAL TRUE)
-
-  target_link_libraries(${exe_name} widelands_all)
 endmacro(LinkExecutable exe_name is_test)
 
 #the subdirectories are only used for test definition
