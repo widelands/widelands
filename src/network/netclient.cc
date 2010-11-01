@@ -389,7 +389,8 @@ void NetClient::setPlayerNumber(uint8_t const number)
 	if (number == d->settings.playernum)
 		return;
 	// Same if the player is not selectable
-	if (number < d->settings.players.size()
+	if
+		(number < d->settings.players.size()
 		 &&
 		 (d->settings.players.at(number).state == PlayerSettings::stateClosed
 		  ||
@@ -472,7 +473,7 @@ void NetClient::recvOneUser
 
 	d->settings.users.at(number).name     = packet.String  ();
 	d->settings.users.at(number).position = packet.Signed32();
-	if (number == d->settings.usernum) {
+	if (static_cast<int32_t>(number) == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
 		d->settings.playernum = d->settings.users.at(number).position;
 	}
