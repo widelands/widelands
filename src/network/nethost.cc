@@ -58,7 +58,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	virtual bool canChangeMap() {return true;}
 	virtual bool canChangePlayerState(uint8_t const) {
-		return true;
+		return !settings().savegame;
 	}
 	virtual bool canChangePlayerTribe(uint8_t const number) {
 		if (settings().scenario)
