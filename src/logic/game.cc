@@ -17,9 +17,6 @@
  *
  */
 
-#include <string>
-#include <cstring>
-
 #include "game.h"
 
 #include "carrier.h"
@@ -56,6 +53,9 @@
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
+
+#include <cstring>
+#include <string>
 
 namespace Widelands {
 
@@ -217,8 +217,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 	// Determine text domain
 	std::string td(mapname);
 	uint32_t i;
-	for (i = td.size(); i and td[i] != '/' and td[i] != '\\'; --i)
-		 /* Do nothing */;
+	for (i = td.size(); i and td[i] != '/' and td[i] != '\\'; --i) {}
 	td = "scenario_" + td.substr(i + 1);
 
 	loaderUI.step (_("Preloading a map"));
