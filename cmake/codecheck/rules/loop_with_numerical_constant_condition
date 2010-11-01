@@ -9,7 +9,8 @@ avoids catching some cases that are used in macro definitions (see
 macro(...) do {...} while (false)
 """
 
-error_msg="Do not use numerical constants in loop condition!"
+error_msg="Do not use numerical constants in loop condition! " \
+        "Use for(;;) for endless loops."
 
 regexp =r"""(?x)
 (^.?|[^}].|.[^ ])
