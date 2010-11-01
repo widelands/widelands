@@ -102,7 +102,7 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
  * This function is used to make sure that paths send via network are usable
  * on locale OS.
  */
-std::string FileSystem::fixCrossFile(std::string path) {
+std::string FileSystem::fixCrossFile(std::string const & path) const {
 #ifdef WIN32
 	// We simply keep it as it is and do not care about slashes - they will
 	// be replaced with backslashes in file read actions.
