@@ -11,3 +11,12 @@ tags
 /src/scripting/doc/source/auxiliary.rst
 utils/spurious_source_code/whitespace_checker
 utils/spurious_source_code/whitespace_checker.ali
+
+# build directory itself is empty but in BZR, content is generated
+/build/*
+
+# the compile.sh file creates some files, links and directories
+update.sh
+widelands
+locale
+VERSION
