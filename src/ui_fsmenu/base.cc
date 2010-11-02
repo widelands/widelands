@@ -114,23 +114,3 @@ uint32_t Fullscreen_Menu_Base::fs_small() {
 uint32_t Fullscreen_Menu_Base::fs_big() {
 	return UI_FONT_SIZE_BIG * gr_y() / 600;
 }
-
-std::string Fullscreen_Menu_Base::ui_fn() {
-	std::string style
-		(g_options.pull_section("global").get_string
-		 	("ui_font", UI_FONT_NAME_SERIF));
-	if (style.empty() | (style == "serif"))
-		return UI_FONT_NAME_SERIF;
-	if (style == "sans")
-		return UI_FONT_NAME_SANS;
-	std::string const temp(g_fs->FS_CanonicalizeName("fonts/" + style));
-	if (g_fs->FileExists(temp))
-		return style;
-	log
-		("Could not find font file \"%s\"\n"
-		 "Make sure the path is given relative to Widelands font directory. "
-		 "Widelands will use standard font.\n",
-		 temp.c_str());
-	return UI_FONT_NAME;
-}
-

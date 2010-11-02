@@ -32,7 +32,7 @@
 #include "mapselect.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "ui_basic/messagebox.h"
+#include "ui_basic/helpwindow.h"
 #include "ui_basic/window.h"
 #include "warning.h"
 #include "wui/gamechatpanel.h"
@@ -558,49 +558,38 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 
 /// Show help
 void Fullscreen_Menu_LaunchMPG::help_clicked() {
-	// FIXME richtext renderer seems to fail
-	std::string text;/*("<rt><p font-color=#00FF00 font-size=");
-	text += 24; //m_fs * 3 / 2;
-	text += ">";
-	text += _("Help");
-	text += "<br></p><p font-size=";
-	text += 14; //m_fs;
-	text += ">";*/
-	text += _("You are in the multi player launch game menu.");
-	text += "\n\n";//text += "<br><br>";
-	text +=
-		_
+	UI::HelpWindow help(this, _("Multiplayer Game Setup"), m_fs);
+	help.add_paragraph(_("You are in the multi player launch game menu."));
+	help.add_heading(_("Client settings"));
+	help.add_paragraph
+		(_
 		 ("On the left side is a list of all clients including you. With the "
 		  "button in the rear of your nickname, you can set your player mode. "
 		  "Available modes are open players, players that are already played by "
-		  "other clients (sharing the kingdom) and spectator mode.");
-	text += "\n\n";//text += "<br><br>";
-	text +=
-		_
+		  "other clients (sharing the kingdom) and spectator mode."));
+	help.add_heading(_("Player settings"));
+	help.add_paragraph
+		(_
 		 ("In the middle are the settings for the players. To start a game, each "
 		  "player must either be connected to a client or a computer player or "
-		  "be set to closed.");
-	text += "\n";//text += "<br>";
-	text +=
-		_
+		  "be set to closed."));
+	help.add_block
+		(_
 		 ("If you are a client (not the hosting player), you can set the tribe "
-		  "and the team for the player you set as your mode.");
-	text += "\n";//text += "<br>";
-	text +=
-		_
+		  "and the team for the player you set as your mode."));
+	help.add_block
+		(_
 		 ("If you are the hosting player, you can further set the "
 		  "initializations of each player (the set of buildings, wares and "
 		  "workers the player starts with), connect a computer player to a "
-		  "player or close a player.");
-	text += "\n\n";//text += "<br><br>";
-	text +=
-		_
+		  "player or close a player."));
+	help.add_heading(_("Map informations"));
+	help.add_paragraph
+		(_
 		 ("On the right side are informations about the selected map or "
 		  "savegame. A button right to the map name allows the host to change to "
 		  "a different one. Further the host is able to set a specific win "
 		  "condition and finally can start the game as soon as all players are "
-		  "set up.");
-//	text += "</p></rt>";
-	UI::WLMessageBox help(this, _("Help"), text, UI::WLMessageBox::OK);
+		  "set up."));
 	help.run();
 }

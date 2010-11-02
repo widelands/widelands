@@ -224,6 +224,9 @@ struct Panel : public Object {
 	static void set_allow_user_input(bool const t) {_g_allow_user_input = t;}
 	static bool allow_user_input() {return _g_allow_user_input;}
 
+	///\return the current set UI font
+	std::string ui_fn();
+
 protected:
 	void die();
 	bool keyboard_free() {return !(_focus);}
