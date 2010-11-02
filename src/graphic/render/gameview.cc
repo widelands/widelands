@@ -247,7 +247,8 @@ void GameView::rendermap
 				FCoords br
 					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
-				// Calculate safe (bounded) field coordinates and get field pointers
+				//  Calculate safe (bounded) field coordinates and get field
+				//  pointers.
 				map.normalize_coords(r);
 				map.normalize_coords(br);
 				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
@@ -263,7 +264,8 @@ void GameView::rendermap
 				r_is_border = r.field->is_border(); //  FIXME PPoV
 				r_owner_number = r.field->get_owned_by(); //  FIXME PPoV
 				uint8_t br_owner_number = br.field->get_owned_by(); //  FIXME PPoV
-				const Player::Field * r_player_field = first_player_field + r_index;
+				Player::Field const * r_player_field =
+					first_player_field + r_index;
 				const Player::Field * br_player_field =
 					first_player_field + br_index;
 				Widelands::Vision  r_vision =  r_player_field->vision;
@@ -500,7 +502,8 @@ void GameView::rendermap
 					{ //  FIXME Visibility check here.
 						Overlay_Manager::Overlay_Info overlay_info
 							[MAX_OVERLAYS_PER_TRIANGLE];
-						const Overlay_Manager::Overlay_Info * const overlay_info_end =
+						Overlay_Manager::Overlay_Info const * const overlay_info_end
+							=
 							overlay_info
 							+
 							overlay_manager.get_overlays
@@ -654,9 +657,11 @@ void GameView::rendermap
 			{ //  Draw things on the node.
 				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
-				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
+				FCoords br
+					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
-				// Calculate safe (bounded) field coordinates and get field pointers
+				//  Calculate safe (bounded) field coordinates and get field
+				//  pointers.
 				map.normalize_coords(r);
 				map.normalize_coords(br);
 				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
@@ -804,15 +809,15 @@ void GameView::rendermap
 					{
 						Overlay_Manager::Overlay_Info overlay_info
 							[MAX_OVERLAYS_PER_TRIANGLE];
-						const Overlay_Manager::Overlay_Info & overlay_info_end = *
+						Overlay_Manager::Overlay_Info const & overlay_info_end =
+							*
 							(overlay_info
 							 +
 							 overlay_manager.get_overlays
 							 	(TCoords<>(f, TCoords<>::R), overlay_info));
 
 						for
-							(const Overlay_Manager::Overlay_Info * it =
-							 overlay_info;
+							(Overlay_Manager::Overlay_Info const * it = overlay_info;
 							 it < &overlay_info_end;
 							 ++it)
 							blit
@@ -1028,8 +1033,6 @@ inline static uint32_t blend_color
 
 /*
 ===============
-calc_minimap_color
-
 Return the color to be used in the minimap for the given field.
 ===============
 */
@@ -1235,7 +1238,12 @@ static void draw_minimap_int
 						static_cast<T>
 						(vision ?
 						 calc_minimap_color
-					 		(format, egbase, f, flags, player_field.owner, 1 < vision)
+						 	(format,
+						 	 egbase,
+						 	 f,
+						 	 flags,
+						 	 player_field.owner,
+						 	 1 < vision)
 						 :
 						 0);
 				}
