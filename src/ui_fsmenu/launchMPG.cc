@@ -192,7 +192,8 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 			 settings, m_butw, m_buth, m_fn, m_fs);
 
 	// If we are the host, open the map or save selection menu at startup
-	if (m_settings->settings().usernum == 0
+	if
+		(m_settings->settings().usernum == 0
 		 && m_settings->settings().mapname.empty())
 	{
 		change_map_or_save();
@@ -280,7 +281,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 
 			m_wincondition.set_title(_("Type: ") + n);
 			m_wincondition.set_tooltip(d.c_str());
-		} catch(LuaTableKeyError &) {
+		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.
 			win_condition_clicked();
 		}
@@ -291,7 +292,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 void Fullscreen_Menu_LaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
 		(this, m_xres / 2, m_yres / 20, m_fs, m_fn);
-	switch(selection_window.run()) {
+	switch (selection_window.run()) {
 		case 1:
 			select_map();
 			break;
@@ -394,7 +395,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 	GameSettings const & settings = m_settings->settings();
 
 	if (settings.mapfilename != m_filename_proof) {
-		if(!g_fs->FileExists(settings.mapfilename)) {
+		if (!g_fs->FileExists(settings.mapfilename)) {
 			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_WARNING);
 			m_client_info.set_text
 				(_("The selected file can not be found. If it is not automatically "
@@ -568,28 +569,33 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	text += _("You are in the multi player launch game menu.");
 	text += "\n\n";//text += "<br><br>";
 	text +=
-		_("On the left side is a list of all clients including you. With the "
+		_
+		 ("On the left side is a list of all clients including you. With the "
 		  "button in the rear of your nickname, you can set your player mode. "
 		  "Available modes are open players, players that are already played by "
 		  "other clients (sharing the kingdom) and spectator mode.");
-	text += "\n\n";//	text += "<br><br>";
+	text += "\n\n";//text += "<br><br>";
 	text +=
-		_("In the middle are the settings for the players. To start a game, each "
+		_
+		 ("In the middle are the settings for the players. To start a game, each "
 		  "player must either be connected to a client or a computer player or "
 		  "be set to closed.");
-	text += "\n";//	text += "<br>";
+	text += "\n";//text += "<br>";
 	text +=
-		_("If you are a client (not the hosting player), you can set the tribe "
+		_
+		 ("If you are a client (not the hosting player), you can set the tribe "
 		  "and the team for the player you set as your mode.");
-	text += "\n";//	text += "<br>";
+	text += "\n";//text += "<br>";
 	text +=
-		_("If you are the hosting player, you can further set the "
+		_
+		 ("If you are the hosting player, you can further set the "
 		  "initializations of each player (the set of buildings, wares and "
 		  "workers the player starts with), connect a computer player to a "
 		  "player or close a player.");
-	text += "\n\n";//	text += "<br><br>";
+	text += "\n\n";//text += "<br><br>";
 	text +=
-		_("On the right side are informations about the selected map or "
+		_
+		 ("On the right side are informations about the selected map or "
 		  "savegame. A button right to the map name allows the host to change to "
 		  "a different one. Further the host is able to set a specific win "
 		  "condition and finally can start the game as soon as all players are "

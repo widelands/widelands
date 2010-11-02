@@ -70,14 +70,16 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 		(this, "ok",
 		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_CampaignSelect::clicked_ok, boost::ref(*this)),
+		 boost::bind
+			 (&Fullscreen_Menu_CampaignSelect::clicked_ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false,
 		 m_fn, m_fs),
 	back
 		(this, "back",
 		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_CampaignSelect::end_modal, boost::ref(*this), 0),
+		 boost::bind
+			 (&Fullscreen_Menu_CampaignSelect::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 
@@ -279,14 +281,16 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 		(this, "ok",
 		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_CampaignMapSelect::clicked_ok, boost::ref(*this)),
+		 boost::bind
+			 (&Fullscreen_Menu_CampaignMapSelect::clicked_ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false,
 		 m_fn, m_fs),
 	back
 		(this, "back",
 		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_CampaignMapSelect::end_modal, boost::ref(*this), 0),
+		 boost::bind
+			 (&Fullscreen_Menu_CampaignMapSelect::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 

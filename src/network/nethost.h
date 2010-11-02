@@ -53,7 +53,7 @@ struct NetHost : public GameController, private SyncCallback {
 	uint32_t desiredSpeed();
 	void setDesiredSpeed(uint32_t speed);
 	bool isPaused();
-	void setPaused(const bool paused);
+	void setPaused(bool paused);
 	// End GameController interface
 
 	// Pregame-related stuff

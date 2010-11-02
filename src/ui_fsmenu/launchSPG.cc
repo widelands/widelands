@@ -233,7 +233,7 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 
 			m_wincondition.set_title(_("Type: ") + n);
 			m_wincondition.set_tooltip(d.c_str());
-		} catch(LuaTableKeyError &) {
+		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.
 			win_condition_clicked();
 		}

@@ -435,7 +435,7 @@ bool NetClient::isPaused()
 	return false;
 }
 
-void NetClient::setPaused(bool const paused)
+void NetClient::setPaused(bool paused)
 {
 }
 
