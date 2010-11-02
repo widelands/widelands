@@ -90,15 +90,15 @@ var_updater=0 # 0 = false
 
   # Check if directories / links already exists and create / update them if needed.
   prepare_directories_and_links () {
-    test -d build/compile || mkdir -p build/compile
-    test -d build/compile/locale || mkdir -p build/compile/locale
-    test -e locale || ln -s build/compile/locale
-    cd build/compile
+    test -d build || mkdir -p build
+    test -d build/locale || mkdir -p build/locale
+    test -e locale || ln -s build/locale
+    cd build
 
     # do not duplicate data directories
     # except "po" and "doc" - else some files will be changed in bzr
     for i in maps pics tribes worlds campaigns txts ; do
-      test -L $i || ( rm -rf $i && ln -s ../../$i )
+      test -L $i || ( rm -rf $i && ln -s ../$i )
     done
     return 0
   }
@@ -113,18 +113,18 @@ var_updater=0 # 0 = false
     fi
 
     echo " "
-    cmake -DWL_PORTABLE=true ../.. -DCMAKE_EXE_CXX_FLAGS="${CFLAGS}" -DCMAKE_BUILD_TYPE="${var_build_type}"
+    cmake -DWL_PORTABLE=true .. -DCMAKE_EXE_CXX_FLAGS="${CFLAGS}" -DCMAKE_BUILD_TYPE="${var_build_type}"
     make ${MAKEOPTS}
     return 0
   }
 
   # Remove old and move newly compiled files
   move_built_files () {
-    rm  -f ../../VERSION || true
-    rm  -f ../../widelands || true
+    rm  -f ../VERSION || true
+    rm  -f ../widelands || true
 
-    mv VERSION ../../VERSION
-    mv src/widelands ../../widelands
+    mv VERSION ../VERSION
+    mv src/widelands ../widelands
     return 0
   }
 
@@ -159,16 +159,16 @@ var_updater=0 # 0 = false
             echo "fi"
             echo " "
             echo "bzr pull"
-            echo "cd build/compile"
+            echo "cd build"
             echo "make"
             if [ $var_build_lang -eq 1 ] ; then
               echo "make lang"
             fi
-            echo "rm  ../../VERSION || true"
-            echo "rm  ../../widelands || true"
-            echo "mv VERSION ../../VERSION"
-            echo "mv src/widelands ../../widelands"
-            echo "cd ../.."
+            echo "rm  ../VERSION || true"
+            echo "rm  ../widelands || true"
+            echo "mv VERSION ../VERSION"
+            echo "mv src/widelands ../widelands"
+            echo "cd .."
             echo " "
             echo "echo \" \""
             echo "echo \"################################################\""
@@ -200,7 +200,7 @@ if [ $var_build_lang -eq 1 ] ; then
   make lang
 fi
 move_built_files
-cd ../..
+cd ..
 update_script
 echo " "
 echo "#####################################################"
