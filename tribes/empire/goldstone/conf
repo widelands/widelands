@@ -1,4 +1,5 @@
-help=_This is the yellow goldstone.
+help=_Goldstones are mined in goldmines and processed in smelting works.
+
 preciousness=2
 
 [idle]

@@ -1,4 +1,6 @@
-help=_Trunks are the primary build material of the barbarians.
+help=_Trunks are a principal build material of the barbarians. The trees are felled by lumberjacks; rangers care for the supply of trees. Trunks are also used in the metalwork shop to build basic tools and in the charcoal burner's house in the production of grout. The wood hardener refines trunks by hardening them in the fire which gives blackwood.
+
+
 preciousness=14
 default_target_quantity=40
 

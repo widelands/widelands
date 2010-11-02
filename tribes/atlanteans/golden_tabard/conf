@@ -1,4 +1,6 @@
-help=_A special tabard for atlantian soldiers.
+help=_A golden tabard is produced in an Atlatean weaving-mill out of gold yarn. It is used in the trainingscamp - together with food - to train soldiers from healthpoints level 0 to level 1.
+
+
 preciousness=1
 
 [idle]

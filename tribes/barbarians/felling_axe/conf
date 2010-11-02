@@ -1,4 +1,4 @@
-help=_The felling axe is the tool of the lumberjack to take down trees.
+help=_The felling axe is the tool of the lumberjack to take down trees. It is produced in the metalwork shop (but no more in the enhanced buildings axefactory and war mill).
 default_target_quantity=5
 preciousness=3
 

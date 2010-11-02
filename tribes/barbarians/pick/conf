@@ -1,4 +1,4 @@
-help=_This pick is used by the stonemasons and the miners. It is produced in the metal works.
+help=_This pick is used by the stonemasons and the miners. It is produced in the metalwork shop (but no more in the enhanced buildings axefactory and war mill).
 default_target_quantity=2
 preciousness=1
 

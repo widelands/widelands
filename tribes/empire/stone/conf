@@ -1,4 +1,5 @@
-help=_Stones and wood are the basic build material of the Empire.
+help=_Stones are a basic build material of the Empire. It is produced in quarries and marble mines.
+
 preciousness=10
 
 # The roman workers know how to work on stones.

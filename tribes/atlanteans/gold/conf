@@ -1,4 +1,6 @@
-help=_Gold is one of the most valuable materials. Only important things are garnished with it.
+help=_Gold is one of the most valuable materials. It is produced out of goldstones in the smelting works. Gold is used by the armoursmithy, the weapon smithy and the goldweaver.
+
+
 preciousness=2
 default_target_quantity=10
 

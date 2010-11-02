@@ -1,4 +1,6 @@
-help=_This is the yellow goldstone.
+help=_Goldstones are mined by a goldmine. Smelted in a smelting works it makes gold, which is used as a precious building material and to produce weapons and armours.
+
+
 preciousness=2
 
 [idle]

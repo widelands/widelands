@@ -1,4 +1,5 @@
-help=_Meat is one food-resource of the Atlanteans.
+help=_Meat is one food resource of the Atlanteans. It is gained out of wild game chased by the hunter and has to be smoked in a smokery before being delivered to mines and training sites.
+
 preciousness=2
 
 [idle]

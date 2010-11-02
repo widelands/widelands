@@ -1,4 +1,5 @@
-help=_Stone is one basic build ware type of the Atlanteans.
+help=_Stone is one basic build ware of the Atlanteans. It is produced in a quarry or a crystal mine.
+
 preciousness=5
 
 [idle]

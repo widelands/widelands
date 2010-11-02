@@ -1,4 +1,5 @@
-help=_Gold is the most valuable of all metals; only very important things are garnished with it.
+help=_Gold is the most valuable of all metals; only very important things are garnished with it. It is obtained out of goldstone in a smelting works. It is used as precious building material and to produce different axes (in the war mill) and different armours (in the helmsmithy).
+
 preciousness=2
 default_target_quantity=15
 

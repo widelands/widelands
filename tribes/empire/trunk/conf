@@ -1,4 +1,6 @@
-help=_Trunks are one important build material of the Empire.
+help=_Trunks are one important build material of the Empire. The lumberjacks fell the trees; foresters care for the supply of trees. Trunks are also used by the charcoal burner, the toolsmithy and the sawmill.
+
+
 preciousness=14
 default_target_quantity=40
 

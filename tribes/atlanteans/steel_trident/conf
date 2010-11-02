@@ -1,4 +1,7 @@
-help=_This is the medium trident - used by advanced soldiers.
+help=_This is the medium trident. It is produced in the weapon smithy and used by advanced soldiers in the dungeon to train from attack level 1 to level 2 (together with food). 
+
+
+
 preciousness=1
 
 [idle]

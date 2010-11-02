@@ -1,4 +1,5 @@
-help=_This is the second most dangerous weapon the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produced in the axe factory.
+help=_This is a dangerous weapon the barbarians are able to produce. It is produced in the axe factory. Only trained warriors are able to yield such a weapon. It is used (together with food) in the trainingscamp to train soldiers from attack level 3 to 4. 
+
 preciousness=1
 
 [idle]

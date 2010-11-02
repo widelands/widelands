@@ -1,4 +1,5 @@
-help=_This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable.
+help=_As no Atlantean likes raw fish, smoking it in a smokery is the most common way to make it eatable.
+
 preciousness=3
 default_target_quantity=30
 

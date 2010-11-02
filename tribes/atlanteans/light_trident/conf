@@ -1,4 +1,7 @@
-help=_This is the basic weapon for atlantian soldiers.
+help=_This is the basic weapon for Atlantean soldiers. Together with a tabard it makes the equipment for young soldiers. Light tridents are produced in the weapon smithy as all other tridents.
+
+
+
 preciousness=1
 default_target_quantity=20
 

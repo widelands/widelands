@@ -1,4 +1,6 @@
-help=_This is red iron ore.
+help=_Iron ore are mined in iron mines. They get smelted in a smelting works to recieve iron.
+
+
 preciousness=4
 
 [idle]

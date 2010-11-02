@@ -1,4 +1,5 @@
-help=_This is the yellow gold ore.
+help=_Gold ores are mined in gold mines and processed to gold in smelting works.
+
 preciousness=2
 
 [idle]
