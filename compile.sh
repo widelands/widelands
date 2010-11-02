@@ -95,11 +95,31 @@ var_updater=0 # 0 = false
     test -e locale || ln -s build/locale
     cd build
 
-    # do not duplicate data directories
-    # except "po" and "doc" - else some files will be changed in bzr
-    for i in maps pics tribes worlds campaigns txts ; do
-      test -L $i || ( rm -rf $i && ln -s ../$i )
-    done
+    # remove build/compile directory (this is the old location)
+    if [ -e compile ] ; then
+      echo " "
+      echo "  The build directory has changed"
+      echo "  from ./build/compile to ./build."
+      echo "  The old directory ./build/compile can be removed."
+      echo "  Please backup any files you might not want to lose."
+      echo "  Most users can safely say yes here."
+      echo "  Do you want to remove the directory ./build/compile? [y]es/[n]o"
+      echo " "
+      read local_var_choice
+      echo " "
+      case $local_var_choice in
+        y) echo "  -> Removing directory ./build/compile. This may take a while..."
+	   rm -r compile || true
+	   if [ -e compile ] ; then
+             echo "  -> Directory could not be removed. This is not fatal, continuing."
+	   else
+             echo "  -> Directory removed."
+	   fi ;;
+        n) echo "  -> Left the directory untouched." ;;
+        *) echo "  -> Bad choice. Please try again!" ;;
+      esac
+    fi
+
     return 0
   }
 
