@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 19:32+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-11-01 20:42+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-11-02 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -562,7 +562,7 @@ msgstr "Minerador"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
 msgid "Not enough space"
-msgstr ""
+msgstr "Espaço insuficiente"
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -616,7 +616,7 @@ msgstr "Planta árvores."
 #: ../../tribes/barbarians/metalworks/conf:33
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr "Produz machado"
+msgstr "Produzir machado"
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
@@ -900,6 +900,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
+"Não teve espaço espaço suficiente para construir alguns de seus\n"
+"edifícios. Você está em desvantagem por causa disto; tente começar\n"
+"de novo este mapa com melhores condições iniciais."
 
 #: ../../tribes/barbarians/conf:129
 msgid "Stonemason"
@@ -973,7 +976,7 @@ msgid ""
 "Produced in the metal works."
 msgstr ""
 "As tenazes são o instrumento do fundidor, utilizadas nas obras de fundição. "
-"Produzido na fábrica de metais."
+"Produzido na oficina de metalurgia."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -1053,8 +1056,8 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metal works."
 msgstr ""
-"Esta picareta é utilizada pelos mineiros e pedreiros. É produzido na fábrica "
-"de metais."
+"Esta picareta é utilizada pelos mineiros e pedreiros. É produzido na oficina "
+"de metalurgia."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""

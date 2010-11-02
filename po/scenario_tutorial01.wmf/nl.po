@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-31 16:50+0000\n"
+"PO-Revision-Date: 2010-11-01 10:44+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-01 05:03+0000\n"
+"X-Launchpad-Export-Date: 2010-11-02 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -426,6 +426,9 @@ msgid ""
 "construction site. You can enter road building mode for any flag by\n"
 "left-clicking on a flag and selecting"
 msgstr ""
+"Prima! Direct na het plaatsen van een gebouw, zit u in de wegenbouwmodus.\n"
+"De nieuwe weg zal beginnen bij de vlag van de nieuw geplaatste bouwplaats.\n"
+"U kunt naar de wegenbouwmodus gaan door op iedere te klikken en selecteer"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:429
 msgid ""
@@ -436,6 +439,11 @@ msgid ""
 "pressing\n"
 "the button below, then right click into the messages window to close it."
 msgstr ""
+"Prima. Overigens is het sluiten van vensters in Widelands erg makkelijk\n"
+"door er met de rechter muisknop op te klikken. Dit werkt voor alle vensters\n"
+"behalve verhaallijnvensters zoals deze. Probeer maar. Sluit eerst dit "
+"venster\n"
+"met de knop hieronder en klik dan de vensters weg met de rechter muisknop."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:227
 msgid ""
@@ -558,6 +566,12 @@ msgid ""
 "everything out for yourself. Otherwise, please bear with me, I am not the\n"
 "youngest and quickest anymore."
 msgstr ""
+"Het spijt me, maar ik maak dit weer ongedaan. We hebben de ruimte wellicht "
+"later\n"
+"weer nodig. Als ik te langzaam ga, probeer dan een echt spel te spelen en "
+"leer alles\n"
+"zelf. Anders volg mijn opdrachten, maar ik ben niet meer de jongste en "
+"snelste."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:676
 msgid ""
@@ -679,15 +693,15 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "Beweeg het zicht met de pijltjestoetsen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "Beweeg het zicht met de muis"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
-msgstr ""
+msgstr "Beweeg het zicht"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:215
 msgid ""
@@ -703,7 +717,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
 msgid "Nice and easy does it all the time"
-msgstr ""
+msgstr "Goed en langzaam werkt altijd"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:160
 msgid ""
@@ -767,6 +781,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
 msgstr ""
+"Nu weten we wat er gebeurt. Laten we wachten totdat de steengroeve af is."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""
@@ -928,6 +943,12 @@ msgid ""
 "available, but there is also a bell sound played whenever you receive a new\n"
 "message."
 msgstr ""
+"Het berichtenvenster kan aan en uit gezet worden door de knop uiterst rechts "
+"aan\n"
+"de onderkant van het scherm. Deze knop veranderd van uiterlijk als er een "
+"nieuw bericht\n"
+"binnen komt, maar er is ook een belgeluid om aan te geven dat er een nieuw "
+"bericht is."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:414
 msgid ""
@@ -1093,11 +1114,11 @@ msgstr "Oefencampagne01"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:529
 msgid "Waiting for the geologist"
-msgstr ""
+msgstr "Wacht op de geoloog"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:177
 msgid "Waiting for the hut to be finished"
-msgstr ""
+msgstr "Wacht totdat de hut gebouwd is"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:146
 msgid "Waiting for the lumberjack to go up"
@@ -1171,6 +1192,15 @@ msgid ""
 "They are called the census and you can toggle them via the 'c' key or via\n"
 "the button on the watch tab of any field."
 msgstr ""
+"Terwijl we wachten zal ik een andere nuttige functie tonen. Alle "
+"bouwplaatsen zien er\n"
+"hetzelfde uit en sommige gebouwen lijken op elkaar. Het is soms lastig "
+"onderscheid te maken.\n"
+"Widelands heeft een functie om tekstlabels op de gebouwen te tonen. In het "
+"Engels noemen we dit\n"
+"\"census\" en het kan aan/uit gezet worden met de c-toets of via de knop in "
+"het bekijktabblad van\n"
+"ieder veld."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
 msgid ""
@@ -1281,7 +1311,7 @@ msgstr "veel ijzer"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
-msgstr ""
+msgstr "archief bericht knop om berichten in het archief te plaatsen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:164
 msgid "build flag symbol."
@@ -1297,6 +1327,9 @@ msgid ""
 "press\n"
 "'m' on your keyboard"
 msgstr ""
+"minikaart knop onderin het scherm. Ook te activeren door op 'm' te drukken "
+"op\n"
+"het toetsenbord"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:547
 msgid "nothing was found here"

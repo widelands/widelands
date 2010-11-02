@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-29 23:20+0000\n"
+"PO-Revision-Date: 2010-11-01 21:35+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-31 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-11-02 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -371,11 +371,11 @@ msgstr "Zlatý kabátec"
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Goldweaver"
-msgstr ""
+msgstr "Tkací závod na zlato"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Guardhall"
-msgstr ""
+msgstr "Veľká strážnica"
 
 #: ../../tribes/atlanteans/conf:140
 msgid "Guardhouse"
@@ -769,6 +769,8 @@ msgstr "Sídlo prieskumníka"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Prieskumníci ako prieskumník Priemyslav preskúmali oblasť v prieskumníckom "
+"štýle."
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Scythe"

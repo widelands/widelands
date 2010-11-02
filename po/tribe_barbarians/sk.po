@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-29 23:23+0000\n"
+"PO-Revision-Date: 2010-11-01 20:48+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-31 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-11-02 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -402,7 +402,7 @@ msgstr "Pestuje ľan a tŕstie."
 
 #: ../../tribes/barbarians/conf:152
 msgid "Guardhall"
-msgstr ""
+msgstr "Veľká strážnica"
 
 #: ../../tribes/barbarians/conf:153
 msgid "Guardhouse"
@@ -681,7 +681,7 @@ msgstr "Vyrobiť kosu"
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce sharpaxe"
-msgstr "Vyrobiť kalenú sekeru"
+msgstr "Vyrobiť ostrú sekeru"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
@@ -758,6 +758,9 @@ msgid ""
 "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
 "than the ordinary axe. Build in the axe factory."
 msgstr ""
+"Naozajstní bojovníci považujú ostrú sekeru za prvú skutočnú zbraň. Keď už "
+"zvládli obyčajnú sekeru, chopili sa tejto zbrane. Je ťažšia a ostrejšia ako "
+"obyčajná sekera. Vyrába sa v továrni na sekery."
 
 #: ../../tribes/barbarians/conf:38
 msgid "Reed medium"
@@ -827,6 +830,8 @@ msgstr "Prieskumníkova chatrč"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Prieskumníci ako prieskumník Priemyslav preskúmali oblasť v prieskumníckom "
+"štýle."
 
 #: ../../tribes/barbarians/conf:87
 msgid "Scythe"
@@ -1266,7 +1271,7 @@ msgstr "Divá sviňa"
 
 #: ../../tribes/barbarians/conf:190
 msgid "Wood Hardener"
-msgstr ""
+msgstr "Stolárska dielňa"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/bakery/conf:21
