@@ -51,7 +51,8 @@ struct Tribe_Descr;
 struct Flag;
 struct AttackController;
 
-struct Editor_Game_Base : NoteReceiver<NoteImmovable>,
+struct Editor_Game_Base :
+	NoteReceiver<NoteImmovable>,
 	NoteReceiver<NoteFieldPossession>,
 	NoteReceiver<NoteFieldTransformed>
 {

@@ -71,7 +71,7 @@ throw (_wexception)
 				}
 				try {
 					Road & road = mol.get<Road>(serial);
-					if (mol.is_object_loaded(&road))
+					if (mol.is_object_loaded(road))
 						throw game_data_error("already loaded");
 					Player & plr = egbase.player(fr.Player_Number8(nr_players));
 

@@ -68,7 +68,6 @@ fi
 # Which C++ checks from krazy2 should we use?
 #       captruefalse: use (fallback: regexps/using_macro_TRUE_FALSE)
 #           constref: undecided
-#       contractions: use
 #          copyright: use
 #                cpp: undecided (complains about __APPLE__ and __GNUC__)
 #  doublequote_chars: only for Qt
@@ -85,6 +84,7 @@ fi
 #            license: use
 #      nullstrassign: only for Qt
 #     nullstrcompare: only for Qt
+#          operators: use
 #        passbyvalue: use
 #          postfixop: use
 #         qbytearray: only for Qt
@@ -99,6 +99,7 @@ fi
 #           syscalls: only for Qt
 #           typedefs: only for Qt
 #          camelcase: undecided
+#       contractions: use
 #            defines: undecided
 #             kdebug: only for KDE
 #       multiclasses: undecided
@@ -106,7 +107,7 @@ fi
 #             qenums: only for Qt
 #              style: gives false positives
 #        tipsandthis: only for Qt
-KRAZY2CHECKS=captruefalse,contractions,copyright,explicit,includes,inline,license,passbyvalue,postfixop,spelling,strings,null
+KRAZY2CHECKS=captruefalse,copyright,explicit,includes,inline,license,operators,passbyvalue,postfixop,spelling,strings,contractions,null
 
 #  Make sure that several instances of this script running concurrently each
 #  have a separate temporary directory.
@@ -178,8 +179,9 @@ detect () {
 	done
 	TIMESTAMP=$CACHE_DIR/$1/timestamp
 	PREVIOUS_FILE=$1
-	FILES=$(ls -tr $(find $1 -maxdepth 1 -name "*.h" -or -name "*.cc"))
+	FILES=$(find $1 -maxdepth 1 -name "*.h" -or -name "*.cc")
 	if [ -n "$FILES" ]; then
+		FILES=$(ls -tr $FILES)
 		mkdir -p $CACHE_DIR/$1
 		for f in $(echo $FILES); do
 			CACHE_BASE=$CACHE_DIR/$f.stylecheck

@@ -189,8 +189,10 @@ int32_t WL_Map_Loader::load_map_complete
 	log("done!\n ");
 
 	log("Reading Allowed Worker Types Data ... ");
-	{Map_Allowed_Worker_Types_Data_Packet p;
-	 p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{
+		Map_Allowed_Worker_Types_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, *m_mol);
+	}
 	log("done!\n ");
 
 	log("Reading Allowed Building Types Data ... ");

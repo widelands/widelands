@@ -29,10 +29,9 @@ long unsigned int pix_used = 0;
 long unsigned int pix_aloc = 0;
 long unsigned int num_tex = 0;
 
-#define handle_glerror() \
-	_handle_glerror(__FILE__, __LINE__)
+#define handle_glerror() _handle_glerror(__FILE__, __LINE__)
 
-SDL_PixelFormat * rgbafmt = NULL;
+SDL_PixelFormat * rgbafmt = 0;
 
 /* handle_glerror() is intended to make debugging of oengl easier. It logs the
  * error code returned by glGetError and returns the error code.
@@ -79,7 +78,7 @@ GLenum _handle_glerror(const char * file, unsigned int line)
 SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	Surface(par_surface.w, par_surface.h, SURFACE_SOURCE),
 	m_glTexUpdate(false),
-	m_pixels(NULL),
+	m_pixels     (0),
 	m_locked(false)
 {
 	GLuint texture;
@@ -266,21 +265,19 @@ SurfaceOpenGL::~SurfaceOpenGL() {
 }
 
 
-SurfaceOpenGL::SurfaceOpenGL(int w, int h):
+SurfaceOpenGL::SurfaceOpenGL(int const w, int const h):
 	Surface(w, h, SURFACE_SOURCE),
 	m_texture(0),
 	m_glTexUpdate(false),
-	m_pixels(NULL),
+	m_pixels     (0),
 	m_locked(false)
 {
-	if (g_gr and g_gr->caps().gl.tex_power_of_two)
-	{
-		/* some old graphics cards support only opengl texture which have a size
-		 * of 2^n. To get it workin on these cards we take the next equal or
-		 * greater power of two. This is a wast of graphics memory and make some
-		 * problem with borders of textures and repeated texture but at least it
-		 * works
-		 */
+	if (g_gr and g_gr->caps().gl.tex_power_of_two) {
+		//  Some old graphics cards support only opengl textures which have a
+		//  size of 2^n. To get it working on these cards we take the next equal
+		//  or greater power of two. This is a waste of graphics memory and
+		//  causes some problem with borders of textures and repeated textures
+		//  but at least it works.
 		int wexp = log(static_cast<float>(w)) / log(2.0f);
 		int hexp = log(static_cast<float>(h)) / log(2.0f);
 		if (pow(2.0f, wexp) < w)
@@ -309,7 +306,7 @@ const SDL_PixelFormat * SurfaceOpenGL::get_format() const
 	rgbafmt->Rmask = 0x000000ff; rgbafmt->Gmask = 0x0000ff00;
 	rgbafmt->Bmask = 0x00ff0000; rgbafmt->Amask = 0xff000000;
 	rgbafmt->Ashift = 24; rgbafmt->Bshift = 16; rgbafmt->Gshift = 8;
-	rgbafmt->Rshift = 0; rgbafmt->palette = NULL;
+	rgbafmt->Rshift = 0; rgbafmt->palette = 0;
 	return rgbafmt;
 }
 
@@ -377,7 +374,7 @@ void SurfaceOpenGL::unlock() {
 	}
 
 	delete [] m_pixels;
-	m_pixels = NULL;
+	m_pixels = 0;
 	m_locked = false;
 }
 

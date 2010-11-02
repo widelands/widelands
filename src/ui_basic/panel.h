@@ -104,7 +104,7 @@ struct Panel : public Object {
 	void set_layout_toplevel(bool ltl);
 	bool get_layout_toplevel() const;
 
-	void get_desired_size(uint32_t &w, uint32_t &h) const;
+	void get_desired_size(uint32_t & w, uint32_t & h) const;
 
 	int32_t get_x() const {return _x;}
 	int32_t get_y() const {return _y;}
@@ -221,8 +221,8 @@ struct Panel : public Object {
 	}
 	bool get_top_on_click() const {return _flags & pf_top_on_click;}
 
-	static void set_allow_user_input(bool t) {_g_allow_user_input=t;}
-	static bool allow_user_input(void) {return _g_allow_user_input;}
+	static void set_allow_user_input(bool const t) {_g_allow_user_input = t;}
+	static bool allow_user_input() {return _g_allow_user_input;}
 
 protected:
 	void die();
@@ -316,12 +316,12 @@ struct NamedPanel : public Panel {
 		(Panel * const nparent, std::string const & name,
 		 int32_t  const nx, int32_t  const ny,
 		 uint32_t const nw, uint32_t const nh,
-		 const std::string & tooltip_text = std::string()) :
-			Panel(nparent, nx, ny, nw, nh, tooltip_text), m_name(name)
+		 std::string const & tooltip_text = std::string())
+		: Panel(nparent, nx, ny, nw, nh, tooltip_text), m_name(name)
 	{
 	}
 
-	const std::string get_name() const throw() {return m_name;}
+	std::string const & get_name() const throw () {return m_name;}
 
 private:
 	std::string m_name;

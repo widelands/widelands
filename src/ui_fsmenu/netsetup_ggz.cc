@@ -150,8 +150,9 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	usersonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Server"));
 	usersonline.set_column_compare
-		(0, boost::bind(&Fullscreen_Menu_NetSetupGGZ::compare_usertype,
-		 this, _1, _2));
+		(0,
+		 boost::bind
+		 	(&Fullscreen_Menu_NetSetupGGZ::compare_usertype, this, _1, _2));
 	usersonline .double_clicked.set
 		(this, &Fullscreen_Menu_NetSetupGGZ::user_doubleclicked);
 	opengames   .set_font(m_fn, m_fs);

@@ -283,11 +283,12 @@ void Table<void *>::draw(RenderTarget & dst)
 					 0);
 			if (entry_picture != g_gr->get_no_picture())
 				dst.blit
-					(point + Point
-						(0,
-						 (static_cast<int32_t>(lineheight)
-						  - static_cast<int32_t>(pich))
-						 / 2),
+					(point +
+					 Point
+					 	(0,
+					 	 (static_cast<int32_t>(lineheight) -
+					 	  static_cast<int32_t>(pich))
+					 	 / 2),
 					 entry_picture);
 
 			UI::g_fh->draw_string
@@ -295,11 +296,12 @@ void Table<void *>::draw(RenderTarget & dst)
 				 m_fontname, m_fontsize,
 				 col,
 				 RGBColor(107, 87, 55),
-				 point + Point
-				 (picw,
-				  (static_cast<int32_t>(lineheight)
-				   - static_cast<int32_t>(stringh))
-				  / 2),
+				 point +
+				 Point
+				 	(picw,
+				 	 (static_cast<int32_t>(lineheight) -
+				 	  static_cast<int32_t>(stringh))
+				 	 / 2),
 				 entry_string, alignment);
 
 			curx += curw;

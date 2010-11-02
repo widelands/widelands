@@ -351,10 +351,9 @@ Point Panel::to_parent(const Point & pt) const
 
 
 /**
- * Ensure the panel is inside the parent's visibile area after
- * resizing.
+ * Ensure the panel is inside the parent's visibile area.
  *
- * The default implementation does nothing, this is overriden
+ * The default implementation does nothing, this is overridden
  * by \ref Window
  */
 void Panel::move_inside_parent()

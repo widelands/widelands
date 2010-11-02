@@ -186,10 +186,11 @@ void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
 	unlock();
 }
 
-#define draw_pixel(p, r, clr)                                              \
-	if ((p).x >= (r).x and (p).x < static_cast<int32_t>((r).x + (r).w) and  \
-		(p).y >= (r).y and (p).y < static_cast<int32_t>((r).y + (r).h))      \
-		set_pixel((p).x, (p).y, (clr).map(format()))
+#define draw_pixel(p, r, clr)                                                 \
+   if                                                                         \
+      ((p).x >= (r).x and (p).x < static_cast<int32_t>((r).x + (r).w) and     \
+       (p).y >= (r).y and (p).y < static_cast<int32_t>((r).y + (r).h))        \
+      set_pixel((p).x, (p).y, (clr).map(format()))                            \
 
 /**
 * This functions draws a (not horizontal or vertical)
@@ -218,9 +219,8 @@ void SurfaceSDL::draw_line
 
 	draw_pixel(p, *clip, color);
 
-	if (dxabs >= dyabs)
+	if (dxabs >= dyabs) //  the line is more horizontal than vertical
 		for (uint32_t i = 0; i < dxabs; ++i) {
-		//  the line is more horizontal than vertical
 			y += dyabs;
 
 			if (y >= dxabs) {
@@ -231,19 +231,18 @@ void SurfaceSDL::draw_line
 			p.x += sdx;
 			draw_pixel(p, *clip, color);
 		}
-	else
+	else                //  the line is more vertical than horizontal
 		for (uint32_t i = 0; i < dyabs; ++i) {
-		//  the line is more vertical than horizontal
-		x += dxabs;
+			x += dxabs;
 
-		if (x >= dyabs) {
-			x   -= dyabs;
-			p.x += sdx;
+			if (x >= dyabs) {
+				x   -= dyabs;
+				p.x += sdx;
+			}
+
+			p.y += sdy;
+			draw_pixel(p, *clip, color);
 		}
-
-		p.y += sdy;
-		draw_pixel(p, *clip, color);
-	}
 }
 
 

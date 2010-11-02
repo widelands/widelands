@@ -247,7 +247,8 @@ void GameView::rendermap
 				FCoords br
 					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
-				// Calculate safe (bounded) field coordinates and get field pointers
+				//  Calculate safe (bounded) field coordinates and get field
+				//  pointers.
 				map.normalize_coords(r);
 				map.normalize_coords(br);
 				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
@@ -263,7 +264,8 @@ void GameView::rendermap
 				r_is_border = r.field->is_border(); //  FIXME PPoV
 				r_owner_number = r.field->get_owned_by(); //  FIXME PPoV
 				uint8_t br_owner_number = br.field->get_owned_by(); //  FIXME PPoV
-				const Player::Field * r_player_field = first_player_field + r_index;
+				Player::Field const * r_player_field =
+					first_player_field + r_index;
 				const Player::Field * br_player_field =
 					first_player_field + br_index;
 				Widelands::Vision  r_vision =  r_player_field->vision;
@@ -500,7 +502,8 @@ void GameView::rendermap
 					{ //  FIXME Visibility check here.
 						Overlay_Manager::Overlay_Info overlay_info
 							[MAX_OVERLAYS_PER_TRIANGLE];
-						const Overlay_Manager::Overlay_Info * const overlay_info_end =
+						Overlay_Manager::Overlay_Info const * const overlay_info_end
+							=
 							overlay_info
 							+
 							overlay_manager.get_overlays
@@ -654,9 +657,11 @@ void GameView::rendermap
 			{ //  Draw things on the node.
 				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
-				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
+				FCoords br
+					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
-				// Calculate safe (bounded) field coordinates and get field pointers
+				//  Calculate safe (bounded) field coordinates and get field
+				//  pointers.
 				map.normalize_coords(r);
 				map.normalize_coords(br);
 				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
@@ -804,15 +809,15 @@ void GameView::rendermap
 					{
 						Overlay_Manager::Overlay_Info overlay_info
 							[MAX_OVERLAYS_PER_TRIANGLE];
-						const Overlay_Manager::Overlay_Info & overlay_info_end = *
+						Overlay_Manager::Overlay_Info const & overlay_info_end =
+							*
 							(overlay_info
 							 +
 							 overlay_manager.get_overlays
 							 	(TCoords<>(f, TCoords<>::R), overlay_info));
 
 						for
-							(const Overlay_Manager::Overlay_Info * it =
-							 overlay_info;
+							(Overlay_Manager::Overlay_Info const * it = overlay_info;
 							 it < &overlay_info_end;
 							 ++it)
 							blit
@@ -979,16 +984,16 @@ void GameView::draw_field
 		case 2:
 			draw_field_int<Uint16>
 				(*sdlsurf,
-				f_vert, r_vert, bl_vert, br_vert,
-				roads,
-				tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
+				 f_vert, r_vert, bl_vert, br_vert,
+				 roads,
+				 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
 			break;
 		case 4:
 			draw_field_int<Uint32>
 				(*sdlsurf,
-				f_vert, r_vert, bl_vert, br_vert,
-				roads,
-				tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
+				 f_vert, r_vert, bl_vert, br_vert,
+				 roads,
+				 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
 			break;
 		default:
 			assert(false);
@@ -1028,8 +1033,6 @@ inline static uint32_t blend_color
 
 /*
 ===============
-calc_minimap_color
-
 Return the color to be used in the minimap for the given field.
 ===============
 */
@@ -1235,7 +1238,12 @@ static void draw_minimap_int
 						static_cast<T>
 						(vision ?
 						 calc_minimap_color
-					 		(format, egbase, f, flags, player_field.owner, 1 < vision)
+						 	(format,
+						 	 egbase,
+						 	 f,
+						 	 flags,
+						 	 player_field.owner,
+						 	 1 < vision)
 						 :
 						 0);
 				}
@@ -1266,15 +1274,16 @@ void GameView::draw_minimap
 	//       or three times per second
 	const SDL_PixelFormat & fmt =
 		g_gr->get_render_target()->get_surface().format();
-	SDL_Surface * surface = SDL_CreateRGBSurface
-				(SDL_SWSURFACE,
-				 rc.w,
-				 rc.h,
-				 fmt.BytesPerPixel == 2?16:32,
-				 fmt.Rmask,
-				 fmt.Gmask,
-				 fmt.Bmask,
-				 0);
+	SDL_Surface * surface =
+		SDL_CreateRGBSurface
+			(SDL_SWSURFACE,
+			 rc.w,
+			 rc.h,
+			 fmt.BytesPerPixel == 2 ? 16 : 32,
+			 fmt.Rmask,
+			 fmt.Gmask,
+			 fmt.Bmask,
+			 0);
 
 	Rect rc2;
 	rc2.x = rc2.y = 0;
@@ -1319,13 +1328,14 @@ void GameView::rendermap_init()
 		glScalef
 			(1.0f / static_cast<GLfloat>(TEXTURE_WIDTH),
 			 1.0f / static_cast<GLfloat>(TEXTURE_HEIGHT), 1);
-			 glDisable(GL_BLEND);
+		glDisable(GL_BLEND);
 
 		// Use scissor test to clip the window. This takes coordinates in screen
 		// coordinates (y goes from bottom to top)
 		glScissor
-			(m_rect.x, g_gr->get_yres() - m_rect.y - m_rect.h, m_rect.w, m_rect.h);
-			 glEnable(GL_SCISSOR_TEST);
+			(m_rect.x, g_gr->get_yres() - m_rect.y - m_rect.h,
+			 m_rect.w, m_rect.h);
+		glEnable(GL_SCISSOR_TEST);
 	}
 #endif
 }

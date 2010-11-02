@@ -40,7 +40,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 
-#include "config.h"
+#include <config.h>
 #ifndef HAVE_VARARRAY
 #include <climits>
 #endif

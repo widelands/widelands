@@ -60,8 +60,9 @@ struct FindNodeUnowned {
 		// Fields should either be completely unowned or owned by an opposing player
 		return
 			fc.field->nodecaps() & MOVECAPS_WALK
-			&& ((fc.field->get_owned_by() == 0) 
-				 || player->is_hostile(*game.get_player(fc.field->get_owned_by())))
+			&&
+			((fc.field->get_owned_by() == 0)
+			 || player->is_hostile(*game.get_player(fc.field->get_owned_by())))
 			&& (!onlyenemies || (fc.field->get_owned_by() != 0));
 	}
 
@@ -184,10 +185,11 @@ struct MineableField {
 
 	int32_t mines_nearby;
 
-	MineableField (Widelands::FCoords const & fc)
-		 : coords(fc), next_update_due(0),
-			reachable(false),
-			preferred(false)
+	MineableField (Widelands::FCoords const & fc) :
+		coords         (fc),
+		next_update_due(0),
+		reachable      (false),
+		preferred      (false)
 	{}
 };
 
@@ -244,10 +246,9 @@ struct BuildingObserver {
 	int32_t                           cnt_under_construction;
 
 	int32_t total_count() const {return cnt_built + cnt_under_construction;}
-	bool buildable(Widelands::Player * player) {
-		return is_buildable && player->is_building_type_allowed(id);
+	bool buildable(Widelands::Player & player) {
+		return is_buildable && player.is_building_type_allowed(id);
 	}
-	
 };
 
 struct ProductionSiteObserver {
