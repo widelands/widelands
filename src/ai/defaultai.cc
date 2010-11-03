@@ -2059,6 +2059,11 @@ void DefaultAI::lose_immovable (PlayerImmovable const & pi)
 					(*i.current)->flags.erase (j.current);
 					return;
 				}
+		container_iterate(std::list<Flag const *>, new_flags, i)
+			if (*i.current == flag) {
+				new_flags.erase(i.current);
+				return;
+			}
 	} else if (upcast(Road     const, road,     &pi))
 		roads.remove (road);
 }
