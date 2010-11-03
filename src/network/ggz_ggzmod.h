@@ -29,6 +29,10 @@
 #include <boost/thread/shared_mutex.hpp>
 #endif
 
+#ifdef WIN32
+#include "winsock.h"
+#endif
+
 /**
  * Does the ggzmod part of ggz. Ggzmod is the part of ggz client which
  * implements the actual game part of ggz.

@@ -26,6 +26,10 @@
 #include <vector>
 #include <sys/stat.h>
 
+#ifdef WIN32
+#include "winsock.h"
+#endif
+
 struct Net_Player;
 struct Net_Game_Info;
 
