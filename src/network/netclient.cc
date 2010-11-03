@@ -640,7 +640,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 #ifdef HAVE_VARARRAY
 		char buf[size];
 #else
-		char buf[UCHAR_MAX];
+		char buf[NETFILEPARTSIZE];
+		assert(size <= NETFILEPARTSIZE);
 #endif
 		if (packet.Data(buf, size) != size)
 			log("Readproblem. Will try to go on anyways\n");
