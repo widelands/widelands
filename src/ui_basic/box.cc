@@ -80,26 +80,23 @@ void Box::update_desired_size()
 			maxbreadth = breadth;
 	}
 
-	bool needscrollbar = false;
 	if (m_orientation == Horizontal) {
 		if (totaldepth > m_max_x && m_scrolling) {
 			maxbreadth += Scrollbar::Size;
-			needscrollbar = true;
 		}
 		set_desired_size
 			(std::min(totaldepth, m_max_x), std::min(maxbreadth, m_max_y));
 	} else {
 		if (totaldepth > m_max_y && m_scrolling) {
 			maxbreadth += Scrollbar::Size;
-			needscrollbar = true;
 		}
 		set_desired_size
 			(std::min(maxbreadth, m_max_x), std::min(totaldepth, m_max_y));
 	}
 
-	// This is not redundant, because even if all this doesn't change our
-	// desired size, we were typically called because of a child window
-	// that changed, and we need to relayout that.
+	//  This is not redundant, because even if all this does not change our
+	//  desired size, we were typically called because of a child window that
+	//  changed, and we need to relayout that.
 	layout();
 }
 
@@ -133,12 +130,7 @@ void Box::layout()
 		}
 	}
 
-	if (!needscrollbar) {
-		if (m_scrollbar) {
-			delete m_scrollbar;
-			m_scrollbar = 0;
-		}
-	} else {
+	if (needscrollbar) {
 		int32_t sb_x, sb_y, sb_w, sb_h;
 		int32_t pagesize;
 		if (m_orientation == Horizontal) {
@@ -167,6 +159,9 @@ void Box::layout()
 		m_scrollbar->set_steps(totaldepth - pagesize);
 		m_scrollbar->set_singlestepsize(Scrollbar::Size);
 		m_scrollbar->set_pagesize(pagesize);
+	} else {
+		delete m_scrollbar;
+		m_scrollbar = 0;
 	}
 
 	// Second pass: Update positions and sizes of all items

@@ -61,7 +61,7 @@ struct Window : public NamedPanel {
 		 char const * title);
 
 	void set_title(const std::string &);
-	const std::string get_title() const throw() {return m_title;}
+	std::string const & get_title() const throw () {return m_title;}
 
 	void set_center_panel(Panel * panel);
 	void move_out_of_the_way();

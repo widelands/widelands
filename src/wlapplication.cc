@@ -96,7 +96,7 @@ volatile int32_t WLApplication::may_run = 0;
 #endif
 
 #define MINIMUM_DISK_SPACE 250000000lu
-#define SCREENSHOT_DIR "screenshots" 
+#define SCREENSHOT_DIR "screenshots"
 
 //Always specifying namespaces is good, but let's not go too far ;-)
 //using std::cout;

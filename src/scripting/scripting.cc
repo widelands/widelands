@@ -160,7 +160,7 @@ std::string LuaInterface_Impl::m_register_script
 		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
 
 		size_t pos = name.find_last_of("/\\");
-		if (pos != std::string::npos)  name = name.substr(pos+1);
+		if (pos != std::string::npos)  name = name.substr(pos + 1);
 
 		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
 		m_scripts[ns][name] = data;
@@ -223,7 +223,8 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	// Push the instance of this class into the registry
 	// MSVC2008 requires that stored and retrieved types are
 	// same, so use LuaInterface* on both sides.
-	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(dynamic_cast<LuaInterface*>(this)));
+	lua_pushlightuserdata
+		(m_L, reinterpret_cast<void *>(dynamic_cast<LuaInterface *>(this)));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
 
 	// Now our own
@@ -310,13 +311,13 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
  */
 boost::shared_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
 	lua_getglobal(m_L, "hooks");
-	if(lua_isnil(m_L, -1)) {
+	if (lua_isnil(m_L, -1)) {
 		lua_pop(m_L, 1);
 		return boost::shared_ptr<LuaTable>();
 	}
 
 	lua_getfield(m_L, -1, name.c_str());
-	if(lua_isnil(m_L, -1)) {
+	if (lua_isnil(m_L, -1)) {
 		lua_pop(m_L, 2);
 		return boost::shared_ptr<LuaTable>();
 	}
@@ -373,7 +374,7 @@ LuaEditorGameBaseInterface_Impl(g)
 
 	// Push the factory class into the registry
 	lua_pushlightuserdata
-		(m_L, reinterpret_cast<void*>(dynamic_cast<Factory*>(&m_factory)));
+		(m_L, reinterpret_cast<void *>(dynamic_cast<Factory *>(&m_factory)));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
 }
 
@@ -389,18 +390,18 @@ struct LuaGameInterface_Impl : public LuaEditorGameBaseInterface_Impl,
 	LuaGameInterface_Impl(Widelands::Game * g);
 	virtual ~LuaGameInterface_Impl() {}
 
-	virtual LuaCoroutine* read_coroutine
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
+	virtual LuaCoroutine * read_coroutine
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &,
 		 uint32_t);
 	virtual uint32_t write_coroutine
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&,
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &,
 		 LuaCoroutine *);
 
 	virtual void read_global_env
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &,
 		 uint32_t);
 	virtual uint32_t write_global_env
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&);
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
 
 private:
 	GameFactory m_factory;
@@ -423,7 +424,7 @@ static int L_math_random(lua_State * L) {
 
 	lua_Number r = t / 4294967296.; // create a double in [0,1)
 
-	switch (lua_gettop(L)) {  /* check number of arguments */
+	switch (lua_gettop(L)) { /* check number of arguments */
 		case 0:
 		{  /* no arguments */
 			lua_pushnumber(L, r);  /* Number between 0 and 1 */
@@ -469,7 +470,7 @@ LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
 
 	// Push the factory class into the registry
 	lua_pushlightuserdata
-		(m_L, reinterpret_cast<void*>(dynamic_cast<Factory*>(&m_factory)));
+		(m_L, reinterpret_cast<void *>(dynamic_cast<Factory *>(&m_factory)));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
 }
 
@@ -546,13 +547,13 @@ uint32_t LuaGameInterface_Impl::write_global_env
  *
  * "game": load all libraries needed for the game to run properly
  */
-LuaGameInterface* create_LuaGameInterface(Widelands::Game * g) {
+LuaGameInterface * create_LuaGameInterface(Widelands::Game * g) {
 	return new LuaGameInterface_Impl(g);
 }
-LuaInterface* create_LuaEditorInterface(Widelands::Editor_Game_Base * g) {
-        return new LuaEditorInterface_Impl(g);
+LuaInterface * create_LuaEditorInterface(Widelands::Editor_Game_Base * g) {
+	return new LuaEditorInterface_Impl(g);
 }
-LuaInterface* create_LuaInterface() {
+LuaInterface * create_LuaInterface() {
 	return new LuaInterface_Impl();
 }
 

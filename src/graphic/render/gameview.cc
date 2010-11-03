@@ -247,7 +247,8 @@ void GameView::rendermap
 				FCoords br
 					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
-				// Calculate safe (bounded) field coordinates and get field pointers
+				//  Calculate safe (bounded) field coordinates and get field
+				//  pointers.
 				map.normalize_coords(r);
 				map.normalize_coords(br);
 				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
@@ -263,7 +264,8 @@ void GameView::rendermap
 				r_is_border = r.field->is_border(); //  FIXME PPoV
 				r_owner_number = r.field->get_owned_by(); //  FIXME PPoV
 				uint8_t br_owner_number = br.field->get_owned_by(); //  FIXME PPoV
-				const Player::Field * r_player_field = first_player_field + r_index;
+				Player::Field const * r_player_field =
+					first_player_field + r_index;
 				const Player::Field * br_player_field =
 					first_player_field + br_index;
 				Widelands::Vision  r_vision =  r_player_field->vision;
@@ -500,7 +502,8 @@ void GameView::rendermap
 					{ //  FIXME Visibility check here.
 						Overlay_Manager::Overlay_Info overlay_info
 							[MAX_OVERLAYS_PER_TRIANGLE];
-						const Overlay_Manager::Overlay_Info * const overlay_info_end =
+						Overlay_Manager::Overlay_Info const * const overlay_info_end
+							=
 							overlay_info
 							+
 							overlay_manager.get_overlays
@@ -654,9 +657,11 @@ void GameView::rendermap
 			{ //  Draw things on the node.
 				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
-				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
+				FCoords br
+					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
-				// Calculate safe (bounded) field coordinates and get field pointers
+				//  Calculate safe (bounded) field coordinates and get field
+				//  pointers.
 				map.normalize_coords(r);
 				map.normalize_coords(br);
 				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
@@ -804,15 +809,15 @@ void GameView::rendermap
 					{
 						Overlay_Manager::Overlay_Info overlay_info
 							[MAX_OVERLAYS_PER_TRIANGLE];
-						const Overlay_Manager::Overlay_Info & overlay_info_end = *
+						Overlay_Manager::Overlay_Info const & overlay_info_end =
+							*
 							(overlay_info
 							 +
 							 overlay_manager.get_overlays
 							 	(TCoords<>(f, TCoords<>::R), overlay_info));
 
 						for
-							(const Overlay_Manager::Overlay_Info * it =
-							 overlay_info;
+							(Overlay_Manager::Overlay_Info const * it = overlay_info;
 							 it < &overlay_info_end;
 							 ++it)
 							blit
@@ -979,16 +984,16 @@ void GameView::draw_field
 		case 2:
 			draw_field_int<Uint16>
 				(*sdlsurf,
-				f_vert, r_vert, bl_vert, br_vert,
-				roads,
-				tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
+				 f_vert, r_vert, bl_vert, br_vert,
+				 roads,
+				 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
 			break;
 		case 4:
 			draw_field_int<Uint32>
 				(*sdlsurf,
-				f_vert, r_vert, bl_vert, br_vert,
-				roads,
-				tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
+				 f_vert, r_vert, bl_vert, br_vert,
+				 roads,
+				 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
 			break;
 		default:
 			assert(false);
@@ -1028,8 +1033,6 @@ inline static uint32_t blend_color
 
 /*
 ===============
-calc_minimap_color
-
 Return the color to be used in the minimap for the given field.
 ===============
 */
@@ -1092,37 +1095,49 @@ Used to draw a dotted frame border on the mini map.
  */
 template<typename T>
 static bool draw_minimap_frameborder
-	(Widelands::FCoords				     const f,
-	 Point							     const ptopleft,
-	 Point							     const pbottomright,
-	 uint32_t                            const mapwidth,
-	 uint32_t                            const mapheight,
-	 uint32_t                            const modx,
-	 uint32_t                            const mody)
+	(Widelands::FCoords  const f,
+	 Point               const ptopleft,
+	 Point               const pbottomright,
+	 int32_t             const mapwidth,
+	 int32_t             const mapheight,
+	 int32_t             const modx,
+	 int32_t             const mody)
 {
 	bool isframepixel = false;
 
 	if (ptopleft.x <= pbottomright.x) {
-		if (f.x >= ptopleft.x && f.x <= pbottomright.x
-			&& (f.y == ptopleft.y || f.y == pbottomright.y)
-			&& f.x % 2 == modx)
+		if
+			(f.x >= ptopleft.x && f.x <= pbottomright.x
+			 && (f.y == ptopleft.y || f.y == pbottomright.y)
+			 && f.x % 2 == modx)
 			isframepixel = true;
 	} else {
-		if ((f.x >= ptopleft.x && f.x <= mapwidth || f.x >= 0 && f.x <= pbottomright.x)
-			&& (f.y == ptopleft.y || f.y == pbottomright.y)
-			&& f.x % 2 == modx)
+		if
+			(((f.x >= ptopleft.x && f.x <= mapwidth)
+			  ||
+			  (f.x >= 0 && f.x <= pbottomright.x))
+			 &&
+			 (f.y == ptopleft.y || f.y == pbottomright.y)
+			 &&
+			 (f.x % 2) == modx)
 			isframepixel = true;
 	}
 
 	if (ptopleft.y <= pbottomright.y) {
-		if (f.y >= ptopleft.y && f.y <= pbottomright.y
-			&& (f.x == ptopleft.x || f.x == pbottomright.x)
-			&& f.y % 2 == mody)
+		if
+			(f.y >= ptopleft.y && f.y <= pbottomright.y
+			 && (f.x == ptopleft.x || f.x == pbottomright.x)
+			 && f.y % 2 == mody)
 			isframepixel = true;
 	} else {
-		if ((f.y >= ptopleft.y && f.y <= mapheight || f.y >= 0 && f.y <= pbottomright.y)
-			&& (f.x == ptopleft.x || f.x == pbottomright.x)
-			&& f.y % 2 == mody)
+		if
+			(((f.y >= ptopleft.y && f.y <= mapheight)
+			  ||
+			  (f.y >= 0 && f.y <= pbottomright.y))
+			 &&
+			 (f.x == ptopleft.x || f.x == pbottomright.x)
+			 &&
+			 f.y % 2 == mody)
 			isframepixel = true;
 	}
 
@@ -1139,7 +1154,7 @@ static void draw_minimap_int
 	(Uint8                             * const pixels,
 	 uint16_t                            const pitch,
 	 SDL_PixelFormat             const &       format,
-	 uint32_t                            const mapwidth,
+	 int32_t                            const mapwidth,
 	 Widelands::Editor_Game_Base const &       egbase,
 	 Widelands::Player           const * const player,
 	 Rect                                const rc,
@@ -1148,7 +1163,7 @@ static void draw_minimap_int
 {
 	Widelands::Map const & map = egbase.map();
 
-	uint32_t mapheight = (flags & MiniMap::Zoom2 ? rc.h / 2 : rc.h);
+	int32_t mapheight = (flags & MiniMap::Zoom2 ? rc.h / 2 : rc.h);
 
 	// size of the display frame
 	int32_t xsize = g_gr->get_xres() / TRIANGLE_WIDTH / 2;
@@ -1181,8 +1196,10 @@ static void draw_minimap_int
 			if (x % 2 || !(flags & MiniMap::Zoom2))
 				move_r(mapwidth, f, i);
 
-			if (draw_minimap_frameborder<T>
-					(f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody)) {
+			if
+				(draw_minimap_frameborder<T>
+				 (f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody))
+			{
 				*reinterpret_cast<T *>(pix) = static_cast<T>
 					(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
 			} else {
@@ -1197,7 +1214,8 @@ static void draw_minimap_int
 			Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 			Widelands::FCoords f
 				(Widelands::Coords
-			 		(viewpoint.x, viewpoint.y + (flags & MiniMap::Zoom2 ? y / 2 : y)));
+			 		(viewpoint.x, viewpoint.y +
+			 		 (flags & MiniMap::Zoom2 ? y / 2 : y)));
 			map.normalize_coords(f);
 			f.field = &map[f];
 			Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
@@ -1205,10 +1223,13 @@ static void draw_minimap_int
 				if (x % 2 || !(flags & MiniMap::Zoom2))
 					move_r(mapwidth, f, i);
 
-				if (draw_minimap_frameborder<T>
-					(f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody)) {
+				if
+					(draw_minimap_frameborder<T>
+					 (f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody))
+				{
 					*reinterpret_cast<T *>(pix) = static_cast<T>
-						(SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
+						(SDL_MapRGB
+							(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
 				} else {
 					Widelands::Player::Field const & player_field = player_fields[i];
 					Widelands::Vision const vision = player_field.vision;
@@ -1217,7 +1238,12 @@ static void draw_minimap_int
 						static_cast<T>
 						(vision ?
 						 calc_minimap_color
-					 		(format, egbase, f, flags, player_field.owner, 1 < vision)
+						 	(format,
+						 	 egbase,
+						 	 f,
+						 	 flags,
+						 	 player_field.owner,
+						 	 1 < vision)
 						 :
 						 0);
 				}
@@ -1248,15 +1274,16 @@ void GameView::draw_minimap
 	//       or three times per second
 	const SDL_PixelFormat & fmt =
 		g_gr->get_render_target()->get_surface().format();
-	SDL_Surface * surface = SDL_CreateRGBSurface
-				(SDL_SWSURFACE,
-				 rc.w,
-				 rc.h,
-				 fmt.BytesPerPixel == 2?16:32,
-				 fmt.Rmask,
-				 fmt.Gmask,
-				 fmt.Bmask,
-				 0);
+	SDL_Surface * surface =
+		SDL_CreateRGBSurface
+			(SDL_SWSURFACE,
+			 rc.w,
+			 rc.h,
+			 fmt.BytesPerPixel == 2 ? 16 : 32,
+			 fmt.Rmask,
+			 fmt.Gmask,
+			 fmt.Bmask,
+			 0);
 
 	Rect rc2;
 	rc2.x = rc2.y = 0;
@@ -1301,13 +1328,14 @@ void GameView::rendermap_init()
 		glScalef
 			(1.0f / static_cast<GLfloat>(TEXTURE_WIDTH),
 			 1.0f / static_cast<GLfloat>(TEXTURE_HEIGHT), 1);
-			 glDisable(GL_BLEND);
+		glDisable(GL_BLEND);
 
 		// Use scissor test to clip the window. This takes coordinates in screen
 		// coordinates (y goes from bottom to top)
 		glScissor
-			(m_rect.x, g_gr->get_yres() - m_rect.y - m_rect.h, m_rect.w, m_rect.h);
-			 glEnable(GL_SCISSOR_TEST);
+			(m_rect.x, g_gr->get_yres() - m_rect.y - m_rect.h,
+			 m_rect.w, m_rect.h);
+		glEnable(GL_SCISSOR_TEST);
 	}
 #endif
 }

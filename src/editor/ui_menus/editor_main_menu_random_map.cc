@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -307,7 +307,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 boost::bind(&Main_Menu_New_Random_Map::button_clicked, boost::ref(*this), PLAYER_PLUS));
 
-	 new UI::Callback_Button
+	new UI::Callback_Button
 		(this, "player_down",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
@@ -526,7 +526,8 @@ void Main_Menu_New_Random_Map::id_edit_box_changed()
 		m_world->set_title
 			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 
-		button_clicked((ButtonID)-1);  // Update other values in UI as well
+		// Update other values in UI as well
+		button_clicked(static_cast<ButtonID>(-1));
 
 		m_goButton->set_enabled(true);
 	}

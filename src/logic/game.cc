@@ -17,12 +17,10 @@
  *
  */
 
-#include <string>
-#include <cstring>
-
 #include "game.h"
 
 #include "carrier.h"
+#include "cmd_calculate_statistics.h"
 #include "cmd_luacoroutine.h"
 #include "cmd_luascript.h"
 #include "computer_player.h"
@@ -55,6 +53,9 @@
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
+
+#include <cstring>
+#include <string>
 
 namespace Widelands {
 
@@ -126,8 +127,7 @@ Game::Game() :
 	m_writesyncstream  (false),
 	m_state            (gs_notrunning),
 	m_cmdqueue         (*this),
-	m_replaywriter     (0),
-	m_last_stats_update(0)
+	m_replaywriter     (0)
 {
 }
 
@@ -217,8 +217,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 	// Determine text domain
 	std::string td(mapname);
 	uint32_t i;
-	for (i = td.size(); i and td[i] != '/' and td[i] != '\\'; --i)
-		 /* Do nothing */;
+	for (i = td.size(); i and td[i] != '/' and td[i] != '\\'; --i) {}
 	td = "scenario_" + td.substr(i + 1);
 
 	loaderUI.step (_("Preloading a map"));
@@ -318,12 +317,15 @@ void Game::init_newgame
 	loaderUI.step(_("Loading map"));
 	maploader->load_map_complete(*this, settings.scenario);
 
+	// Queue first statistics calculation
+	enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
+
 	// Check for win_conditions
 	LuaCoroutine * cr = lua().run_script
 		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
 		 ".lua", "win_conditions")
 		->get_coroutine("func");
-	enqueue_command(new Cmd_LuaCoroutine(get_gametime(), cr));
+	enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
 }
 
 
@@ -494,8 +496,8 @@ bool Game::run
 		if (start_game_type == NewSPScenario)
 			enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
 		else if (start_game_type == NewMPScenario)
-			enqueue_command(new Cmd_LuaScript(get_gametime(),
-						"map", "multiplayer_init"));
+			enqueue_command
+				(new Cmd_LuaScript(get_gametime(), "map", "multiplayer_init"));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
@@ -560,20 +562,6 @@ void Game::think()
 	m_ctrl->think();
 
 	if (m_state == gs_running) {
-		if
-			(m_general_stats.empty()
-			 or
-			 get_gametime() - m_last_stats_update > STATISTICS_SAMPLE_TIME)
-		{
-			sample_statistics();
-
-			const Player_Number nr_players = map().get_nrplayers();
-			iterate_players_existing(p, nr_players, *this, plr)
-				plr->sample_statistics();
-
-			m_last_stats_update = get_gametime();
-		}
-
 		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
 
 		g_gr->animate_maptextures(get_gametime());
@@ -602,7 +590,6 @@ void Game::cleanup_for_load
 	cmdqueue().flush();
 
 	// Statistics
-	m_last_stats_update = 0;
 	m_general_stats.clear();
 }
 
@@ -909,7 +896,7 @@ void Game::sample_statistics()
 		iterate_players_existing(p, nr_plrs, *this, plr) {
 			LuaCoroutine * cr = hook->get_coroutine("calculator");
 			cr->push_arg(plr);
-			cr->resume(&custom_statistic[p-1]);
+			cr->resume(&custom_statistic[p - 1]);
 			delete cr;
 		}
 	}
@@ -935,6 +922,12 @@ void Game::sample_statistics()
 		m_general_stats[i].productivity    .push_back(productivity    [i]);
 		m_general_stats[i].custom_statistic.push_back(custom_statistic[i]);
 	}
+
+
+	// Calculate statistics for the players
+	const Player_Number nr_players = map().get_nrplayers();
+	iterate_players_existing(p, nr_players, *this, plr)
+		plr->sample_statistics();
 }
 
 
@@ -949,7 +942,7 @@ void Game::sample_statistics()
 void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 {
 	if (version >= 3) {
-		m_last_stats_update = fr.Unsigned32();
+		fr.Unsigned32(); // used to be last stats update time
 
 		// Read general statistics
 		uint32_t entries = fr.Unsigned16();
@@ -1000,7 +993,7 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
  */
 void Game::WriteStatistics(FileWrite & fw)
 {
-	fw.Unsigned32(m_last_stats_update);
+	fw.Unsigned32(0); // Used to be last stats update time. No longer needed
 
 	// General statistics
 	// First, we write the size of the statistics arrays

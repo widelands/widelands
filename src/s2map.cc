@@ -17,7 +17,7 @@
  *
  */
 
-#include <iostream>
+#include "s2map.h"
 
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -29,7 +29,7 @@
 #include "map_io/map_loader.h"
 #include "wexception.h"
 
-#include "s2map.h"
+#include <iostream>
 
 using std::cerr;
 using std::ios;

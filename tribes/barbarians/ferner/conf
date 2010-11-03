@@ -1,20 +1,10 @@
-help=_Grows flax and thatch reed.
-program=plantflax
+help=_Grows thatch reed.
 program=plantreed
-program=harvestflax
 program=harvestreed
 
 [buildcost]
 carrier=1
 shovel=1
-
-[plantflax]
-0=findspace size:any radius:1
-1=walk coords
-2=animation flaxplanting 2500 # Play a planting animation
-3=plant tribe:flax0t
-#4=animation flaxplanting 500
-4=return  #5=return
 
 [plantreed]
 0=findspace size:any radius:1
@@ -23,15 +13,6 @@ shovel=1
 3=plant tribe:reed0t
 4=animation reedplanting 1500
 5=return
-
-[harvestflax]
-0=findobject attrib:grown_flax radius:1
-1=walk object
-2=animation harvesting 12000  #4sec animation cycle
-3=object harvest
-4=animation harvesting 1
-5=createitem flax
-6=return
 
 [harvestreed]
 0=findobject attrib:grown_reed radius:1
@@ -56,12 +37,6 @@ fps=10
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=7 23
-playercolor=true
-fps=10
-
-[flaxplanting]
-pics=plantflax_??.png
-hotspot=11 22
 playercolor=true
 fps=10
 

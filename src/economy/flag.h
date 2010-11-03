@@ -50,7 +50,7 @@ class WareInstance;
 /// WALK_xx in all "direction" parameters.
  */
 struct Flag : public PlayerImmovable, public RoutingNode {
-	typedef std::vector<const WareInstance*> Wares;
+	typedef std::vector<const WareInstance *> Wares;
 
 	friend struct Economy;
 	friend struct Router;

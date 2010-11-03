@@ -1,7 +1,0 @@
-Import('*')
-
-SRC=simpleglob("*.cc")
-
-lib=srcenv.StaticLibrary(target='logic', source=SRC)
-Return('lib')
-

@@ -41,7 +41,7 @@ namespace Widelands {
  */
 struct Pathfield {
 	struct LessCost {
-		bool operator()(const Pathfield& a, const Pathfield& b) const {
+		bool operator()(const Pathfield & a, const Pathfield & b) const {
 			return a.cost() < b.cost();
 		}
 	};
@@ -55,7 +55,7 @@ struct Pathfield {
 	uint8_t  backlink;   //  how we got here (WALK_*)
 
 	int32_t cost() const throw () {return real_cost + estim_cost;}
-	Queue::cookie& cookie() {return heap_cookie;}
+	Queue::cookie & cookie() {return heap_cookie;}
 };
 
 struct Pathfields {

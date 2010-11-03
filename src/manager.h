@@ -51,11 +51,12 @@ template<typename T> struct Manager {
 		items.clear();
 	}
 
-	/// Removes the item.
+	/// Removes the item. Searches in linear time and erases in constant time
+	/// (by moving the last element into the former position of the removed
+	/// element)
 	///
 	/// \Throws Nonexistent if there is no such item.
 	void remove(T & item) {
-        // TODO: why not std::find & std::erase?
 		container_iterate(container, items, i)
 			if (*i.current == &item) {
 				delete &item;

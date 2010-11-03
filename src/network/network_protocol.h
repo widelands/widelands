@@ -21,7 +21,7 @@
 #define NETWORK_PROTOCOL_H
 
 /// How many bytes will (maximal) be send as file part
-#define NETFILEPARTSIZE 4096
+#define NETFILEPARTSIZE 511
 
 enum {
 	/**
@@ -372,8 +372,8 @@ enum {
 	 *
 	 * \note The client must not assume that the host will accept this
 	 * request. Change of team number only becomes effective when/if the host
-	 * replies with a \ref NETCMD_SETTING_PLAYER or \ref NETCMD_SETTING_ALLPLAYERS
-	 * indicating the changed team.
+	 * replies with a \ref NETCMD_SETTING_PLAYER or
+	 *  \ref NETCMD_SETTING_ALLPLAYERS indicating the changed team.
 	 */
 	NETCMD_SETTING_CHANGETEAM = 26
 };

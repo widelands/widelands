@@ -97,15 +97,14 @@ private:
 		 Texture const &  f_d_texture,
 		 Texture const &  f_r_texture);
 
-	/**
-	 * A helper fuction to draw the minimap. This is called from renderminimap().
-	 */
+	/// A helper function to draw the minimap. This is called from
+	/// renderminimap().
 	void draw_minimap
-		(Widelands::Editor_Game_Base const &       egbase,
-		 Widelands::Player           const * const player,
-		 Rect                                const rc,
-		 Point                               const viewpt,
-		 uint32_t                            const flags);
+		(Widelands::Editor_Game_Base const &,
+		 Widelands::Player           const *,
+		 Rect                                rc,
+		 Point                               viewpt,
+		 uint32_t                            flags);
 
 	/**
 	 * This is called before the view of the game is rendered.

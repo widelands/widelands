@@ -39,8 +39,12 @@ namespace UI {
  * =================
  */
 Tab::Tab
-	(Tab_Panel * parent, uint32_t id, std::string name, PictureID gpicid,
-	 std::string gtooltip, Panel * gpanel)
+	(Tab_Panel         * const parent,
+	 uint32_t            const id,
+	 std::string const &       name,
+	 PictureID           const gpicid,
+	 std::string const &       gtooltip,
+	 Panel             * const gpanel)
 	:
 	NamedPanel
 		(parent, name, id * TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH,
@@ -181,7 +185,7 @@ void Tab_Panel::activate(uint32_t idx)
 
 void Tab_Panel::activate(std::string const & name)
 {
-	for (uint32_t t = 0; t < m_tabs.size(); t++)
+	for (uint32_t t = 0; t < m_tabs.size(); ++t)
 		if (m_tabs[t]->get_name() == name)
 			activate(t);
 }

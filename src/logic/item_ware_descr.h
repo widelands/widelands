@@ -59,8 +59,9 @@ namespace Widelands {
 struct Item_Ware_Descr : public Map_Object_Descr {
 	typedef Ware_Index::value_t Index;
 	Item_Ware_Descr
-		(const Tribe_Descr & tribe, char const * const name, char const * const descname,
-		 std::string const & directory, Profile &, Section & global_s);
+		(const Tribe_Descr & tribe, char const * const name,
+		 char const * const descname, std::string const & directory,
+		 Profile &, Section & global_s);
 
 	virtual ~Item_Ware_Descr() {};
 

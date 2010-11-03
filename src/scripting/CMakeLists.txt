@@ -1,10 +1,4 @@
-file(GLOB WL_SCRIPTING_SRCS *.cc)
-
-add_library(widelands_scripting ${WL_SCRIPTING_SRCS})
-
-target_link_libraries(widelands_scripting ${LUA_LIBRARIES})
-
-# Build tests only if requested.
-if(BUILD_UNIT_TESTS)
+if (WL_UNIT_TESTS)
   add_subdirectory(test)
-endif()
+endif (WL_UNIT_TESTS)
+

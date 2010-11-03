@@ -225,4 +225,3 @@ void MiniMap::update_button_permpressed() {
 	button_bldns.set_perm_pressed(*m_view.m_flags & Bldns);
 	button_zoom .set_perm_pressed(*m_view.m_flags & Zoom2);
 }
-	

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  *
  */
 
+#include "icongrid.h"
+
 #include "log.h"
 
 #include "button.h"
@@ -26,24 +28,22 @@
 #include "graphic/rendertarget.h"
 #include "constants.h"
 
-#include "icongrid.h"
-
 namespace UI {
 
 struct IconGridButton : public Callback_Button {
 	IconGridButton
-		(Icon_Grid * const parent,
+		(Icon_Grid         & parent,
 		 std::string const & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const PictureID background_pictute_id,
 		 const PictureID foreground_picture_id,
 		 void (Icon_Grid::*callback_function)(uint32_t),
-	         Icon_Grid & callback_argument_this,
+		 Icon_Grid & callback_argument_this,
 		 const uint32_t callback_argument_id,
-		 Textarea * ta, std::string descr)
+		 Textarea          & ta, std::string const & descr)
 		:
 		Callback_Button
-			(parent, name, x, y, w, h, background_pictute_id,
+			(&parent, name, x, y, w, h, background_pictute_id,
 			 foreground_picture_id,
 			 boost::bind(callback_function, boost::ref(callback_argument_this), callback_argument_id),
 			 "", true, true),
@@ -52,18 +52,18 @@ struct IconGridButton : public Callback_Button {
 		{}
 
 private:
-	Icon_Grid * m_icongrid;
-	Textarea * m_ta;
+	Icon_Grid & m_icongrid;
+	Textarea  & m_ta;
 	std::string m_descr;
 	const uint32_t _callback_argument_id;
 
-	void handle_mousein(bool inside) {
+	void handle_mousein(bool const inside) {
 		if (inside) {
-			m_icongrid->mousein.call(_callback_argument_id);
-			m_ta->set_text(m_descr);
+			m_icongrid.mousein.call(_callback_argument_id);
+			m_ta.set_text(m_descr);
 		} else {
-			m_icongrid->mouseout.call(_callback_argument_id);
-			m_ta->set_text("");
+			m_icongrid.mouseout.call(_callback_argument_id);
+			m_ta.set_text("");
 		}
 		Callback_Button::handle_mousein(inside);
 	}
@@ -81,9 +81,7 @@ Icon_Grid::Icon_Grid
 	m_columns        (cols),
 	m_cell_width     (cellw),
 	m_cell_height    (cellh),
-	m_ta
-		(new Textarea
-		 (this, 0, 0, 0, g_fh->get_fontheight(UI_FONT_SMALL) + 2))
+	m_ta         (this, 0, 0, 0, g_fh->get_fontheight(UI_FONT_SMALL) + 2)
 {}
 
 
@@ -102,17 +100,17 @@ int32_t Icon_Grid::add
 	m_items.push_back(it);
 
 	// resize
-	int32_t rows = (m_items.size() + m_columns - 1) / m_columns;
+	int32_t const rows = (m_items.size() + m_columns - 1) / m_columns;
 
 	if (rows <= 1) {
-		set_desired_size(m_cell_width * m_columns, m_cell_height + m_ta->get_h());
-		m_ta->set_size(get_inner_w(), m_ta->get_h());
-		m_ta->set_pos(Point(0, m_cell_height));
+		set_desired_size(m_cell_width * m_columns, m_cell_height + m_ta.get_h());
+		m_ta.set_size(get_inner_w(), m_ta.get_h());
+		m_ta.set_pos(Point(0, m_cell_height));
 	} else {
 		set_desired_size
-			(m_cell_width * m_columns, m_cell_height * rows + m_ta->get_h());
-		m_ta->set_size(get_inner_w(), m_ta->get_h());
-		m_ta->set_pos(Point(0, m_cell_height * rows));
+			(m_cell_width * m_columns, m_cell_height * rows + m_ta.get_h());
+		m_ta.set_size(get_inner_w(), m_ta.get_h());
+		m_ta.set_pos(Point(0, m_cell_height * rows));
 	}
 
 	uint32_t idx = m_items.size() - 1;
@@ -120,7 +118,7 @@ int32_t Icon_Grid::add
 	uint32_t y = (idx / m_columns) * m_cell_height;
 
 	new IconGridButton
-		(this, name,
+		(*this, name,
 		 x, y, m_cell_width, m_cell_height,
 		 g_gr->get_no_picture(), picid,
 		 &Icon_Grid::clicked_button, *this, idx, m_ta, descr);

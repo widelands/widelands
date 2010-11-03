@@ -17,9 +17,6 @@
  *
  */
 
-#include <boost/format.hpp>
-using boost::format;
-
 #include "writeHTML.h"
 
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -36,6 +33,10 @@ using boost::format;
 #include "i18n.h"
 
 #include "upcast.h"
+
+#include <boost/format.hpp>
+
+using boost::format;
 
 void writeCrossReferences(FileWrite & fw, HTMLReferences const & references) {
 	if (references[HTMLReferences::Input].size()) {

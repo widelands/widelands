@@ -75,8 +75,6 @@ if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
 	set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale)
 endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
 
-set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
-
 set (WLBUILD_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
 set (WLBUILD_INSTALL_DATADIR ${WL_INSTALL_DATADIR})
 set (WLBUILD_INSTALL_LOCALEDIR "${CMAKE_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale")
@@ -103,39 +101,25 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
-set (BUILD_SHARED_LIBS OFF)
+# Unit tests are built per default in Debug and not build in Release
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  option (WL_UNIT_TESTS "build and run unit tests (requires boost_unit_test_framework)" ON)
+else (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  option (WL_UNIT_TESTS "build and run unit tests (requires boost_unit_test_framework)" OFF)
+endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
-# Unit tests add dependency to unit_test_framework and are therefore optional.
-option (BUILD_UNIT_TESTS "Build unit tests (requires boost unit test framework)")
+# we only include Boost Headers to the main executable, no libraries
+# unit_test_framework is for testing only
+if (WL_UNIT_TESTS)
+  message(STATUS "Enabled unit tests")
 
-set (Boost_FIND_COMPONENTS thread)
-#set (Boost_DEBUG on)
-find_package(Boost 1.35.0 COMPONENTS thread)
-IF (Boost_THREAD_FOUND AND ENABLE_THREADS)
-  set (USE_BOOST_THREADS True)
-  set (BOOST_THREADS thread)
-  add_definitions( -DUSE_BOOST_THREADS )	
-ENDIF (Boost_THREAD_FOUND AND ENABLE_THREADS)
-
-if (BUILD_UNIT_TESTS)
-  message("Build with Boost unit_test_framework\n")
-  # we only include Boost Headers to the main executable, no libraries
-  # unit_test_framework is for testing only and can use shared libraries
+  set (BUILD_SHARED_LIBS OFF)
   set (Boost_FIND_COMPONENTS unit_test_framework)
-  if (WIN32)
-    # use static libs on windows to avoid DLL problems
-    set (Boost_USE_STATIC_LIBS   ON)
-  else (WIN32)
-    # Use shared libs on another plaforms because for example opensuse 
-    # doesn't ship with static unit test library.
-  endif(WIN32)
+  set (Boost_USE_STATIC_LIBS   ON)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
-  find_package(Boost 1.35.0 REQUIRED COMPONENTS unit_test_framework ${BOOST_THREADS})
-  find_package(Boost 1.35.0 COMPONENTS unit_test_framework)
-  if (NOT Boost_FOUND)
-    message("Boost unit_test_framework is required for unit tests.\nSet BUILD_UNIT_TESTS to OFF to build without unit tests.\n")
-  endif (NOT Boost_FOUND)
+  find_package(Boost 1.35.0 COMPONENTS unit_test_framework REQUIRED)
+
   if (NOT DEFINED MSVC)
     string( REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
     if (NOT BOOST_STATIC_UNIT_TEST_LIB)
@@ -143,22 +127,30 @@ if (BUILD_UNIT_TESTS)
     endif (NOT BOOST_STATIC_UNIT_TEST_LIB)
   endif(NOT DEFINED MSVC)
 
-else (BUILD_UNIT_TESTS)
-    find_package(Boost 1.35.0 REQUIRED COMPONENTS ${BOOST_THREADS})
-endif (BUILD_UNIT_TESTS)
+  include(CTest)
+  enable_testing()
 
-IF (USE_BOOST_THREADS)
-  message("Boost threads enabled")
-  message("Boost_thread_LIBRARY ${Boost_THREAD_LIBRARY}\n")
-ELSE (USE_BOOST_THREADS)
-  message("Compile without boost threads")
-ENDIF (USE_BOOST_THREADS)
+  #automatic unit testing hook, must be updated to reflect all tests
+  #if this is too intricate, we can also have this as an automatic detection
+  #but the current way allows to disable certain checks if they are taking
+  #too much time when ran every compile time
+  add_custom_target(autotest ALL
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    DEPENDS widelands;test_widelands_scripting
+  )
+else (WL_UNIT_TESTS)
+  message(STATUS "Disabled Unit Tests")
+  find_package(Boost 1.35.0 REQUIRED)
+endif (WL_UNIT_TESTS)
 
-include_directories(${Boost_INCLUDE_DIR})
+option (WL_STRICT "If strict compilation mode is requested (almost every warning is an error)" OFF)
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
 set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall")
+set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wextra -Wsign-promo")
+set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   include(CheckCXXCompilerFlag) #this include should be safe
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)
@@ -197,10 +189,24 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   IF (Compiler_generic_warnings_supported)
     set (WL_COMPILERFLAG_GENERICWARNINGS " ${PARAMETER_COMPILERFLAG_GENERICWARNINGS}") #the space is on purpose!
   ENDIF (Compiler_generic_warnings_supported)
+  IF (WL_EXTRAWARNINGS)
+    CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_EXTRAWARNINGS} Compiler_extra_warnings_supported)
+    IF (Compiler_extra_warnings_supported)
+      set (WL_COMPILERFLAG_EXTRAWARNINGS " ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}") #the space is on purpose!
+    ENDIF (Compiler_extra_warnings_supported)
+  ENDIF (WL_EXTRAWARNINGS)
+
+  IF (WL_STRICT)
+    CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_STRICT} Compiler_strict_mode_supported)
+    IF (Compiler_strict_mode_supported)
+      set (WL_COMPILERFLAG_STRICT " ${PARAMETER_COMPILERFLAG_STRICT}") #the space is on purpose!
+      message(STATUS "Strict mode enabled, expect compilation errors instead of compilation warnings!")
+    ENDIF (Compiler_strict_mode_supported)
+  ENDIF (WL_STRICT)
 ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
 set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
@@ -226,11 +232,13 @@ if (DEFINED MSVC)
   # Automatic linking for boost requires setting lib dir and clearing Boost_LIBARIES
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
   set(Boost_LIBRARIES "")
+  include_directories(${Boost_INCLUDE_DIR})
+
 
   find_library(INTL_LIBRARY NAMES intl libintl)
 
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
   # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
   set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MT /GL" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
@@ -252,13 +260,9 @@ if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 endif (DEFINED WL_3RDPARTY_DIR)
 
-find_package(GGZ_Core)
-if (GGZ_CORE_FOUND)
-  include_directories(${GGZ_CORE_INCLUDE_DIR})
-  add_definitions("-DUSE_GGZ")
-else (GGZ_CORE_FOUND)
-  message (STATUS "GGZ support disabled, check your libraries path and installed packages!")
-endif (GGZ_CORE_FOUND)
+find_package(GGZ_Core REQUIRED)
+include_directories(${GGZ_CORE_INCLUDE_DIR})
+add_definitions("-DUSE_GGZ")
 
 # Check for opengl
 # TODO Check for SDL_opengl.h and add to include path
@@ -335,10 +339,6 @@ install (
   COMPONENT CoreVersionFile
 )
 
-if (BUILD_UNIT_TESTS)
-enable_testing()
-endif (BUILD_UNIT_TESTS)
-
 include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
 include(CheckIncludeFile)
@@ -346,24 +346,13 @@ include(CheckIncludeFile)
 find_package(PNG REQUIRED)
 include_directories(${PNG_INCLUDE_DIR})
 
-IF (NOT WIN32)
-  find_package(JPEG REQUIRED)
-  include_directories(${JPEG_INCLUDE_DIR})
-
-  find_package(TIFF REQUIRED)
-  include_directories(${TIFF_INCLUDE_DIR})
-ENDIF (NOT WIN32)
-
 find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIR})
 
-find_package(Lua51 REQUIRED)
-include_directories(${LUA_INCLUDE_DIR})
-
-if (APPLE)
+if (APPLE OR WIN32)
   find_package(intl REQUIRED)
   include_directories(${INTL_INCLUDE_DIR})
-endif (APPLE)
+endif (APPLE OR WIN32)
 
 find_package(SDL REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})
@@ -394,8 +383,7 @@ ENDIF (WIN32)
 #configure_file (src/build_info.cc.cmake src/build_info.cc)
 
 add_subdirectory(doc)
-#add_subdirectory(po)
-#add_subdirectory(pics)
+add_subdirectory(po)
 add_subdirectory(src)
 
 # install files to the correct locations here
@@ -442,61 +430,6 @@ install(
 
 find_package (PythonInterp REQUIRED)
 
-if (WIN32)
-  set (WL_CREATE_SYMLINK_COMMAND "copy_directory")
-else (WIN32)
-  set (WL_CREATE_SYMLINK_COMMAND "create_symlink")
-endif (WIN32)
-
-if (${CMAKE_BUILD_TYPE} STREQUAL Release)
-  add_custom_target (
-    lang ALL
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory po"
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory campaigns"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory maps"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory scripting"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/scripting ${CMAKE_CURRENT_BINARY_DIR}/scripting
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory tribes"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory txts"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory worlds"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
-    COMMAND ${CMAKE_COMMAND} -E echo "Running the locale generation task"
-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  )
-else (${CMAKE_BUILD_TYPE} STREQUAL Release)
-  add_custom_target (
-    lang
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory po"
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory campaigns"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory maps"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/maps ${CMAKE_CURRENT_BINARY_DIR}/maps
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory scripting"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/scripting ${CMAKE_CURRENT_BINARY_DIR}/scripting
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory tribes"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory txts"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/txts ${CMAKE_CURRENT_BINARY_DIR}/txts
-    COMMAND ${CMAKE_COMMAND} -E echo "Preparing directory worlds"
-    COMMAND ${CMAKE_COMMAND} -E ${WL_CREATE_SYMLINK_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
-    COMMAND ${CMAKE_COMMAND} -E echo "Running the locale generation task"
-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  )
-  add_custom_target (
-    lang_dummy ALL
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  )
-endif (${CMAKE_BUILD_TYPE} STREQUAL Release)
-
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES locale)
 
 install(
@@ -509,15 +442,8 @@ install(
   PATTERN "SCons*" EXCLUDE
 )
 
-execute_process (COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/pics)
-add_custom_target (
-  optimizepics 
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pics
-  COMMAND ${CMAKE_COMMAND} -DCMAKE_COMMAND=${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DWL_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/pics -DWL_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/pics -P PicsFunctions.cmake
-)
-
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
 set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CoreVersionFile CoreLicenseFiles)
-set (CPACK_GENERATOR TGZ)
-set (CPACK_SOURCE_GENERATOR TGZ)
+set (CPACK_GENERATOR "TGZ")
+set (CPACK_SOURCE_GENERATOR "TGZ")
 include(CPack)

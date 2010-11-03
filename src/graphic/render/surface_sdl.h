@@ -32,10 +32,8 @@
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.
 */
-class SurfaceSDL : public Surface {
-
-public:
-	SurfaceSDL(SDL_Surface & surface) : 
+struct SurfaceSDL : public Surface {
+	SurfaceSDL(SDL_Surface & surface) :
 		Surface(surface.w, surface.h, SURFACE_OFFSCREEN),
 		m_surface(&surface)
 	{}
@@ -63,11 +61,10 @@ public:
 	uint16_t get_pitch() const {return m_surface->pitch;}
 */
 
-	const SDL_PixelFormat& format() const;
+	SDL_PixelFormat const & format() const;
 	uint8_t * get_pixels() const;
-	uint16_t get_pitch() const
-		{ return m_surface->pitch; }
-	
+	uint16_t get_pitch() const {return m_surface->pitch;}
+
 	/// Lock
 	void lock();
 	void unlock();
@@ -84,7 +81,7 @@ public:
 	void draw_line
 		(int32_t x1, int32_t y1,
 		 int32_t x2, int32_t y2,
-		 RGBColor color, const Rect * clip = NULL);
+		 RGBColor, Rect const * clip = 0);
 
 	void blit(Point, Surface *, Rect srcrc, bool enable_alpha = true);
 	void fast_blit(Surface *);
@@ -92,9 +89,9 @@ public:
 	void set_subwin(Rect r);
 	void unset_subwin();
 
-private: 
+private:
 	SurfaceSDL & operator= (SurfaceSDL const &);
-        explicit SurfaceSDL(SurfaceSDL const &);
+	explicit SurfaceSDL    (SurfaceSDL const &);
 
 	SDL_Surface * m_surface;
 };

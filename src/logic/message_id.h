@@ -23,7 +23,7 @@
 #include <stdint.h>
 #ifdef _MSC_VER
 #ifndef __attribute__
-#define __attribute__(x) 
+#define __attribute__(x)
 #endif
 #endif
 

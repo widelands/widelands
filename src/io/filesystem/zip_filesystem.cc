@@ -280,7 +280,7 @@ void ZipFilesystem::MakeDirectory(std::string const & dirname) {
 	std::string complete_filename = m_basename;
 	complete_filename += "/";
 	complete_filename += dirname;
-	
+
 	assert(dirname.size());
 	if (*complete_filename.rbegin() != '/')
 		complete_filename += '/';
@@ -387,7 +387,7 @@ void ZipFilesystem::Write
 	zi.external_fa = 0;
 
 	std::string complete_filename = m_basename + "/" + fname;
-	
+
 	//  create file
 	switch
 		(zipOpenNewFileInZip3
@@ -491,7 +491,7 @@ unsigned long long ZipFilesystem::DiskSpace() {
 std::string ZipFilesystem::strip_basename(std::string filename)
 {
 
-	if(filename.compare(0, m_basenamezip.length(), m_basenamezip) == 0) 
+	if (filename.compare(0, m_basenamezip.length(), m_basenamezip) == 0)
 	{
 		// filename contains the name of the zip file as first element. This means
 		// this is an old zip file where all data were in a directory named as the

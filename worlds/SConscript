@@ -1,8 +1,0 @@
-Import('*')
-
-from Distribute import distadd, instadd
-
-instadd(env, 'worlds/*')
-
-distadd(env, 'worlds/*')
-

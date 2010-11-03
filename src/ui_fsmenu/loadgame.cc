@@ -60,7 +60,8 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 		(this, "delete",
 		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_LoadGame::clicked_delete, boost::ref(*this)),
+		 boost::bind
+			 (&Fullscreen_Menu_LoadGame::clicked_delete, boost::ref(*this)),
 		 _("Delete"), std::string(), false, false,
 		 m_fn, m_fs),
 

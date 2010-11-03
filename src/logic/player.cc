@@ -112,7 +112,7 @@ void Player::create_default_infrastructure() {
 				(*g_fs, "tribes/" + tribe().name() +
 				 "/scripting/" +  initialization.name + ".lua",
 				 "tribe_" + tribe().name())
-				 ->get_coroutine("func");
+				->get_coroutine("func");
 			cr->push_arg(this);
 			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
 		} catch (Tribe_Descr::Nonexistent) {
@@ -499,9 +499,9 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 					  (1 << Building::PCap_Bulldoze)))
 				{
 					log
-						("Player trying to rip flag (%u) with undestroyable building "
-						"(%u)\n",
-						flag->serial(), flagbuilding->serial());
+						("Player trying to rip flag (%u) with undestroyable "
+						 "building (%u)\n",
+						 flag->serial(), flagbuilding->serial());
 					return;
 				}
 
@@ -524,8 +524,8 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 						primary_road->destroy(egbase());
 						log
 							("destroying road from (%i, %i) going in dir %u\n",
-							flag->get_position().x, flag->get_position().y,
-							primary_road_id);
+							 flag->get_position().x, flag->get_position().y,
+							 primary_road_id);
 						//  The primary road is gone. Now see if the flag at the other
 						//  end of it is a dead-end.
 						if (primary_other.is_dead_end())
@@ -863,7 +863,8 @@ throw ()
 						//  TODO not see it. But it should be possible to see it from
 						//  TODO a distance somehow.
 						map_object_descr = 0;
-			} else map_object_descr = 0;
+			} else
+				map_object_descr = 0;
 			field.map_object_descr[TCoords<>::None] = map_object_descr;
 		}
 	}
@@ -911,8 +912,8 @@ throw ()
 	assert(&map[0] <= f.field);
 	assert           (f.field < &first_map_field + map.max_index());
 
-	// If this is not already a forwarded call, we should informa allied players
-	// as well of this change
+	//  If this is not already a forwarded call, we should inform allied players
+	//  as well of this change.
 	if (!m_team_player_uptodate)
 		update_team_players();
 	if (!forward && m_team_player.size()) {
@@ -937,11 +938,14 @@ void Player::unsee_node
 throw ()
 {
 	Field & field = m_fields[i];
-	if(field.vision <= 1) // Already doesn't see this
+	if (field.vision <= 1) { //  Already does not see this
+		//  FIXME This must never happen!
+		log("ERROR: Decreasing vision for node that is not seen. Report bug!\n");
 		return;
+	}
 
-	// If this is not already a forwarded call, we should informa allied players
-	// as well of this change
+	//  If this is not already a forwarded call, we should inform allied players
+	//  as well of this change.
 	if (!m_team_player_uptodate)
 		update_team_players();
 	if (!forward && m_team_player.size()) {
@@ -949,7 +953,7 @@ throw ()
 			m_team_player[j]->unsee_node(i, gametime, true);
 	}
 
-		--field.vision;
+	--field.vision;
 	if (field.vision == 1)
 		field.time_node_last_unseen = gametime;
 	assert(1 <= field.vision);
@@ -1110,8 +1114,8 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 				}
 			} else {
 				log
-					("Statistics for player %u (%s) has %u ware types (should be %u)."
-					 "Statistics will be discarded.",
+					("Statistics for player %u (%s) has %u ware types "
+					 "(should be %u). Statistics will be discarded.",
 					 player_number(), tribe().name().c_str(),
 					 nr_wares, tribe().get_nrwares().value());
 

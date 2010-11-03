@@ -55,6 +55,7 @@ Building_Window::Building_Window
 	m_capscache_player_number = 0;
 	m_capsbuttons = 0;
 	m_capscache = 0;
+	m_caps_setup = false;
 	m_toggle_workarea = 0;
 
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
@@ -117,13 +118,16 @@ void Building_Window::think()
 		die();
 
 	if
-		(m_capscache_player_number != igbase().player_number()
+		(! m_caps_setup
+		 or
+		 m_capscache_player_number != igbase().player_number()
 		 or
 		 building().get_playercaps() != m_capscache) {
 		m_capsbuttons->free_children();
 		create_capsbuttons(m_capsbuttons);
 		move_out_of_the_way();
 		warp_mouse_to_fastclick_panel();
+		m_caps_setup = true;
 	}
 
 

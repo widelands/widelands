@@ -39,7 +39,7 @@ struct MultiPlayerPlayerGroup;
  *
  * A MultiPlayerSetupGroup holds information and provides the UI to set the
  * clients, computers and closed players.
- * 
+ *
  */
 struct MultiPlayerSetupGroup : public UI::Panel {
 	MultiPlayerSetupGroup
@@ -63,8 +63,8 @@ private:
 	uint32_t    m_buth, m_fsize;
 	std::string m_fname;
 
-	std::map<std::string,PictureID> m_tribepics;
-	std::map<std::string,std::string> m_tribenames;
+	std::map<std::string, PictureID> m_tribepics;
+	std::map<std::string, std::string> m_tribenames;
 };
 
 

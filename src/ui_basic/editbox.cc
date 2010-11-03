@@ -60,14 +60,6 @@ struct EditBoxImpl {
 
 	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
-
-	/**
-	 * Caching implementation
-	 */
-	/*@{*/
-	bool needredraw;
-	PictureID cache_pid;
-	/*@}*/
 };
 
 EditBox::EditBox
@@ -82,7 +74,6 @@ EditBox::EditBox
 {
 	set_think(false);
 
-	m->needredraw = true;
 	m->background = background;
 	m->fontname = UI_FONT_NAME;
 	m->fontsize = UI_FONT_SIZE_SMALL;
@@ -141,7 +132,6 @@ void EditBox::setText(std::string const & t)
 	if (caretatend || m->caret > m->text.size())
 		m->caret = m->text.size();
 
-	m->needredraw = true;
 	update();
 }
 
@@ -197,7 +187,6 @@ void EditBox::setAlign(Align _align)
 	if (_align != m->align) {
 		m->align = _align;
 		m->scrolloffset = 0;
-		m->needredraw = true;
 		check_caret();
 		update();
 	}
@@ -211,7 +200,6 @@ bool EditBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
-		m->needredraw = true;
 		update();
 		return true;
 	}
@@ -260,7 +248,6 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				check_caret();
 				changed.call();
 				changedid.call(m->id);
-				m->needredraw = true;
 				update();
 			}
 			return true;
@@ -273,7 +260,6 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 						if (0 == new_caret or isspace(m->text[--new_caret]))
 							break;
 
-				m->needredraw = true;
 				check_caret();
 
 				update();
@@ -294,8 +280,6 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 							break;
 						}
 
-				m->needredraw = true;
-
 				check_caret();
 				update();
 			}
@@ -305,7 +289,6 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			if (m->caret != 0) {
 				m->caret = 0;
 
-				m->needredraw = true;
 				check_caret();
 				update();
 			}
@@ -314,7 +297,6 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_END:
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
-				m->needredraw = true;
 				check_caret();
 				update();
 			}
@@ -351,7 +333,6 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 					check_caret();
 					changed.call();
 					changedid.call(m->id);
-					m->needredraw = true;
 					update();
 				}
 				return true;
@@ -365,15 +346,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 
 void EditBox::draw(RenderTarget & odst)
 {
-	//if (!m_needredraw)
-	//{
-	//odst.blit(Point(0, 0), m_cache_pid);
-	//return;
-	//}
-
-	//m_cache_pid = g_gr->create_picture_surface(get_w(), get_h());
-
-	RenderTarget &dst = odst; //*(g_gr->get_surface_renderer(m_cache_pid));
+	RenderTarget & dst = odst;
 
 	// Draw the background
 	dst.tile
@@ -431,9 +404,6 @@ void EditBox::draw(RenderTarget & odst)
 		 g_gr->get_no_picture(),
 		 has_focus() ? static_cast<int32_t>(m->caret) :
 		 std::numeric_limits<uint32_t>::max());
-
-	//odst.blit(Point(0, 0), m_cache_pid);
-	//m_needredraw = false;
 }
 
 /**
@@ -454,8 +424,8 @@ void EditBox::check_caret()
 
 	switch (m->align & Align_Horizontal) {
 	case Align_HCenter:
-		caretpos = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2
-			 + m->scrolloffset + leftw;
+		caretpos  = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2;
+		caretpos += m->scrolloffset + leftw;
 		break;
 	case Align_Right:
 		caretpos = get_w() - 4 + m->scrolloffset - rightw;

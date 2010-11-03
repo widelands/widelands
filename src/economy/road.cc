@@ -326,7 +326,7 @@ void Road::cleanup(Editor_Game_Base & egbase)
 
 	Economy::check_split(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
-	if(upcast(Game, game, &egbase)) {
+	if (upcast(Game, game, &egbase)) {
 		m_flags[FlagStart]->update_items(*game, m_flags[FlagEnd]);
 		m_flags[FlagEnd]->update_items(*game, m_flags[FlagStart]);
 	}
@@ -438,12 +438,9 @@ void Road::assign_carrier(Carrier & c, uint8_t slot)
 	// Send the worker home if it occupies our slot
 	CarrierSlot & s = m_carrier_slots[slot];
 
-	if (s.carrier_request) {
-		delete s.carrier_request;
-		s.carrier_request = 0;
-	}
-	Carrier * current_carrier = s.carrier.get(owner().egbase());
-	if (current_carrier)
+	delete s.carrier_request;
+	s.carrier_request = 0;
+	if (Carrier * const current_carrier = s.carrier.get(owner().egbase()))
 		current_carrier->set_location(0);
 
 	m_carrier_slots[slot].carrier = &c;

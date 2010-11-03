@@ -144,11 +144,11 @@ void Sound_Handler::shutdown()
 	Uint16 format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
 	log
-		 (_("Sound_Handler closing times %i, freq %i, format %i, chan %i\n"),
-		  numtimesopened, frequency, format, channels);
+		(_("Sound_Handler closing times %i, freq %i, format %i, chan %i\n"),
+		 numtimesopened, frequency, format, channels);
 
 	if (!numtimesopened)
-		 return;
+		return;
 
 	Mix_HaltChannel(-1);
 
@@ -160,7 +160,7 @@ void Sound_Handler::shutdown()
 	log("SDL_AUDIODRIVER %s\n", text);
 
 	if (numtimesopened != 1) {
-		 log (_("PROBLEM: sound device opened multiple times, trying to close"));
+		log (_("PROBLEM: sound device opened multiple times, trying to close"));
 	}
 	for (int i = 0; i < numtimesopened; ++i) {
 		Mix_CloseAudio();

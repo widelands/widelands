@@ -43,9 +43,6 @@ uint32_t gr_y();
 uint32_t fs_small();
 uint32_t fs_big();
 
-///\return the current set UI font
-std::string ui_fn();
-
 protected:
 	uint32_t m_xres;
 	uint32_t m_yres;

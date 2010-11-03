@@ -404,6 +404,15 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 						found_reserved = true;
 						list.erase(list.begin() + idx);
 					}
+					else
+					{
+						Coords const coord = imm->get_position();
+						Map_Index mapidx = map.get_index(coord, map.get_width());
+						Vision const visible = owner().vision(mapidx);
+						if (!visible) {
+							list.erase(list.begin() + idx);
+						}
+					}
 				}
 			}
 
@@ -1099,7 +1108,7 @@ void Worker::init(Editor_Game_Base & egbase)
 	// is unknown to this worker till he is initialized
 	//  assert(get_location(egbase));
 
-	if(upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase))
 		create_needed_experience(*game);
 }
 
@@ -1124,7 +1133,7 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 	// or doing something else. Get Location might
 	// init a gowarehouse task or something and this results
 	// in a dirty stack. Nono, we do not want to end like this
-	if(upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase))
 		reset_tasks(*game);
 
 	if (get_location(egbase))
@@ -2071,11 +2080,13 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 	}
 
 	if (not dynamic_cast<Building const *>(location)) {
-		// This can happen "naturally" if the building gets destroyed, but the flag
-		// is still there and the worker tries to enter from that flag.
-		// E.g. the player destroyed the building, it is destroyed, through an enemy
-		// player, or it got destroyed through rising water (atlantean scenario)
-		molog("[fetchfromflag]: building dissappeared - searching for alternative");
+		// This can happen "naturally" if the building gets destroyed, but the
+		// flag is still there and the worker tries to enter from that flag.
+		// E.g. the player destroyed the building, it is destroyed, through an
+		// enemy player, or it got destroyed through rising water (atlantean
+		// scenario)
+		molog
+			("[fetchfromflag]: building dissappeared - searching for alternative");
 		pop_task(game);
 		return start_task_fugitive(game);
 	}
@@ -2635,7 +2646,8 @@ void Worker::scout_update(Game & game, State & state)
 		CheckStepDefault cstep(descr().movecaps());
 		FindNodeAnd ffa;
 		ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
-		Area<FCoords> exploring_area(map.get_fcoords(get_position()), state.ivar1);
+		Area<FCoords> exploring_area
+			(map.get_fcoords(get_position()), state.ivar1);
 		Coords oldest_coords = get_position();
 		Time oldest_time = game.get_gametime();
 		uint8_t oldest_distance = 0;
@@ -2653,11 +2665,13 @@ void Worker::scout_update(Game & game, State & state)
 
 				// If the field is not yet discovered, go there
 				if (!visible) {
-					molog("[scout]: Go to interessting field (%i, %i)\n",
-					 coord.x, coord.y);
-					if (!start_task_movepath(game, coord, 0,
+					molog
+						("[scout]: Go to interessting field (%i, %i)\n",
+						 coord.x, coord.y);
+					if
+						(!start_task_movepath(game, coord, 0,
 						 descr().get_right_walk_anims(does_carry_ware())))
-						molog("[scout]: failed to reach destination\n");
+							molog("[scout]: failed to reach destination\n");
 					else
 						return; //start_task_movepath was successfull.
 				}
@@ -2679,17 +2693,18 @@ void Worker::scout_update(Game & game, State & state)
 				}
 			}
 			// All fields discovered, go to second choice target
-			
-				 
+
+
 			if (oldest_coords != get_position()) {
 				molog
 				("[scout]: All fields discovered. Go to (%i, %i)\n",
 				 oldest_coords.x, oldest_coords.y);
-				 
-				if (!start_task_movepath
-						 (game, oldest_coords, 0,
+
+				if
+					(!start_task_movepath
+					 (game, oldest_coords, 0,
 						  descr().get_right_walk_anims(does_carry_ware())))
-					molog("[scout]: Failed to reach destination\n");
+						molog("[scout]: Failed to reach destination\n");
 				else
 					return; //Start task movepath success.
 				//if failed go home

@@ -33,7 +33,7 @@ struct Icon : public Panel {
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 const PictureID picture_id);
 
-	void setIcon(const PictureID picture_id);
+	void setIcon(PictureID picture_id);
 	virtual void draw(RenderTarget &);
 
 private:

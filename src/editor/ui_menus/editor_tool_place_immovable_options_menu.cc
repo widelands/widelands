@@ -79,9 +79,10 @@ m_pit     (pit)
 		if (cur_x == immovables_in_row) {
 			cur_x = 0;
 			pos = Point(5, 15);
-			box = new UI::Box
-				 (&m_tabpanel, 0, 0, UI::Box::Horizontal, parent.get_inner_w() - 50,
-				  parent.get_inner_h() - 50);
+			box =
+				new UI::Box
+					(&m_tabpanel, 0, 0, UI::Box::Horizontal,
+					 parent.get_inner_w() - 50, parent.get_inner_h() - 50);
 			box->set_scrolling(true);
 			m_tabpanel.add("immovables", tab_icon, box);
 		}

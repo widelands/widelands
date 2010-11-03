@@ -102,7 +102,7 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
  * This function is used to make sure that paths send via network are usable
  * on locale OS.
  */
-std::string FileSystem::fixCrossFile(std::string path) {
+std::string FileSystem::fixCrossFile(std::string const & path) const {
 #ifdef WIN32
 	// We simply keep it as it is and do not care about slashes - they will
 	// be replaced with backslashes in file read actions.
@@ -327,17 +327,12 @@ char const * FileSystem::FS_Filename(char const * p, char const * & extension)
 			extension = p;
 }
 
-std::string FileSystem::FS_FilenameWoExt(const char * p)
+std::string FileSystem::FS_FilenameWoExt(char const * const p)
 {
 	char const * extension;
-	std::string fname
-		(p ?
-		FileSystem::FS_Filename(p, extension)
-		: "");
-	if (extension)
-		 return fname.substr(0, fname.length() - strlen(extension));
-	else
-		 return fname;
+	std::string fname(p ? FileSystem::FS_Filename(p, extension) : "");
+	return
+		extension ? fname.substr(0, fname.length() - strlen(extension)) : fname;
 }
 
 /// Create a filesystem from a zipfile or a real directory
