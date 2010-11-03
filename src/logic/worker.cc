@@ -2056,7 +2056,7 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 
 		state.ivar1 = 1; //  force return to building
 
-		if (not ref_cast<Flag, PlayerImmovable>(*location)) {
+		if (&ref_cast<Flag, PlayerImmovable>(*location) == NULL) {
 			// this can happen if the flag (and the building) is destroyed while
 			// the worker leaves the building.
 			molog
