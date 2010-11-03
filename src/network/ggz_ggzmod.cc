@@ -258,7 +258,7 @@ void ggz_ggzmod::disconnect(bool err)
 		}
 	}
 #else
-	ggzmod_disconnect();
+	ggzmod_disconnect(m_mod);
 #endif
 
 	if (m_data_fd > 0)
