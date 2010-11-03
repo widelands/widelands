@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-11-01 20:24+0000\n"
+"PO-Revision-Date: 2010-11-02 23:41+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-02 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-11-03 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -962,7 +962,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid "These shields are used by the best soldiers of the Atlanteans."
-msgstr "Estes escudos são usados pelos melhores soldados Atlantês."
+msgstr "Estes escudos são usados pelos melhores soldados Atlantes."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -980,7 +980,7 @@ msgid ""
 "This corn is the base of the fine cornflour, that every atlantian baker "
 "needs for a good bread."
 msgstr ""
-"Esse milho é a base da fina farinha de milho, que cada padeiro atlântida "
+"Esse milho é a base da fina farinha de milho, que cada padeiro atlante "
 "necessita para um bom pão."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
@@ -1004,8 +1004,8 @@ msgid ""
 "This is smoked fish - As no Atlantid likes raw fish, smoking is the most "
 "common way to make it eatable."
 msgstr ""
-"Isso é peixe defumado - Como nenhum Atlântida gosta de peixe cru, a "
-"defumação é o método mais comum de fazê-lo se tornar comestível."
+"Isso é peixe defumado - Como nenhum Atlante gosta de peixe cru, a defumação "
+"é o método mais comum de fazê-lo se tornar comestível."
 
 #: ../../tribes/atlanteans/smoked_meat/conf:1
 msgid ""
@@ -1028,8 +1028,8 @@ msgid ""
 "This is the most dangerous weapon of the atlantian military. Only the best "
 "of the best soldiers may use it."
 msgstr ""
-"Esta é a mais perigosa arma do militar atlante. Somente os melhores soldados "
-"podem usá-la."
+"Esta é a mais perigosa arma do exercito atlante. Somente os melhores "
+"soldados podem usá-la."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid "This is the yellow gold ore."
@@ -1053,7 +1053,7 @@ msgid ""
 "Atlantis."
 msgstr ""
 "Esta tribo é conhecida pelas histórias mais antigas. Os filhos e filhas de "
-"Atlantis"
+"Atlântida."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
@@ -1076,9 +1076,9 @@ msgid ""
 "To make the fine atlantian steel a hot fire is needed. But a fire of wood "
 "isn't hot enough -this coal brings the needed heat."
 msgstr ""
-"Para produzir o excelente aço atlântida é preciso uma fogueira quente. Mas "
-"uma fogueira utilizando madeira não é quente o suficiente - esse carvão "
-"produz o calor necessário."
+"Para produzir o excelente aço atlante é preciso um fogo quente. Mas uma "
+"fogueira utilizando madeira não é quente o suficiente - esse carvão produz o "
+"calor necessário."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Toolsmith"

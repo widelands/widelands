@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-25 01:59+0000\n"
+"PO-Revision-Date: 2010-11-02 23:44+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-26 04:33+0000\n"
+"X-Launchpad-Export-Date: 2010-11-03 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -213,39 +213,39 @@ msgstr "Sitio de construção"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Corn"
-msgstr "Trigo"
+msgstr "Milho"
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Cornfield"
-msgstr "Campo de trigo"
+msgstr "Milheiral"
 
 #: ../../tribes/atlanteans/conf:34
 msgid "Cornfield harvested"
-msgstr "Ceifa de trigo"
+msgstr "Milho colhido"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Cornfield medium"
-msgstr "Campo de trigo médio"
+msgstr "Milheiral médio"
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Cornfield small"
-msgstr "Campo de trigo pequeno"
+msgstr "Milheiral pequeno"
 
 #: ../../tribes/atlanteans/conf:37
 msgid "Cornfield tiny"
-msgstr "Campo de trigo muito pequeno"
+msgstr "Milheiral minúsculo"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Cornflour"
-msgstr "Farinha de trigo"
+msgstr "Farinha de milho"
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
 "Cornflour is produced out of corn and is one of three parts of the atlantian "
 "bread."
 msgstr ""
-"A farinha de trigo é produzida de trigo e é um dos três ingredientes do pão "
-"atlântida."
+"A farinha de milho é produzida com milho e é um dos três ingredientes do pão "
+"da Atlântida."
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Crystal Mine"
@@ -378,11 +378,11 @@ msgstr "Tecelão de ouro"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Guardhall"
-msgstr "Guarda"
+msgstr "Posto da Guarda"
 
 #: ../../tribes/atlanteans/conf:140
 msgid "Guardhouse"
-msgstr "Guarnição"
+msgstr "Casa da Guarda"
 
 #: ../../tribes/atlanteans/conf:69
 msgid "Hammer"
@@ -394,7 +394,7 @@ msgstr "Cultiva raiz negra"
 
 #: ../../tribes/atlanteans/farm/conf:22
 msgid "Harvest corn"
-msgstr "Cultiva trigo"
+msgstr "Colher o milho"
 
 #: ../../tribes/atlanteans/conf:161
 msgid "Headquarters"
@@ -542,7 +542,7 @@ msgstr "Tábuas"
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid "Planks are an important build material of the Atlanteans."
-msgstr "Tábuas são um importante material de construção dos Atlântidas."
+msgstr "As Tábuas são um importante material de construção dos Atlântas."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -550,7 +550,7 @@ msgstr "Planta raízes negras"
 
 #: ../../tribes/atlanteans/farm/conf:20
 msgid "Plant corn"
-msgstr "Cultiva trigo"
+msgstr "Cultivar o milho"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
@@ -593,7 +593,7 @@ msgstr "Produz escudo"
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
-msgstr "Produz farinha de trigo"
+msgstr "Produz farinha de milho"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:33
 msgid "Produce double trident"
@@ -962,25 +962,26 @@ msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid "These shields are used by the best soldiers of the Atlanteans."
-msgstr "Estes escudos são usados pelos melhores soldados Atlântidas."
+msgstr "Estes escudos são usados pelos melhores soldados Atlântas."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
 "These transparent quartz' are used for some exclusive buildings and tools."
 msgstr ""
-"estes quartzos são usados em algumas construções e ferramentas exclusivas."
+"Este quartzo transparente é usado em algumas construções e ferramentas "
+"exclusivas."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid "This bow is used by the atlantian hunter."
-msgstr "este arco é usado pelo caçador Atlântida."
+msgstr "Este arco é usado pelo caçador Atlânta."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
 "This corn is the base of the fine cornflour, that every atlantian baker "
 "needs for a good bread."
 msgstr ""
-"Este trigo é a base da farinha fina, que qualquer padeiro atlântida precisa "
-"para fazer bom pão."
+"Este milho é a base da excelente farinha de milho que qualquer padeiro "
+"atlânta precisa para fazer bom pão."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
@@ -1003,20 +1004,20 @@ msgid ""
 "This is smoked fish - As no Atlantid likes raw fish, smoking is the most "
 "common way to make it eatable."
 msgstr ""
-"Isto é peixe fumado - como nenhum atlântida gosta de peixe cru, peixe fumado "
-"é a forma usual de fazer-o comível."
+"Isto é peixe fumado - como nenhum habitante da Atlântida gosta de peixe cru, "
+"o peixe fumado é a forma usual de o tornar comestível."
 
 #: ../../tribes/atlanteans/smoked_meat/conf:1
 msgid ""
 "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is "
 "a common way to make it eatable."
 msgstr ""
-"Isto é carne fumada - já que nenhum Atlântida gosta de comer carne crua, "
-"carne fumada é o jeito mais comum de fazê-la comível"
+"Isto é carne fumada - já que nenhum Atlântida gosta de comer carne crua, a "
+"carne fumada é a forma mais usual de cozinhar a carne."
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid "This is the basic weapon for atlantian soldiers."
-msgstr "Este é a arma básica para os guerreiros atlântidas."
+msgstr "Este é a arma básica para os guerreiros atlântas."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid "This is the medium trident - used by advanced soldiers."
@@ -1027,7 +1028,7 @@ msgid ""
 "This is the most dangerous weapon of the atlantian military. Only the best "
 "of the best soldiers may use it."
 msgstr ""
-"Esta é a mais perigosa arma do militar atlântida. Somente os melhores "
+"Esta é a mais perigosa arma do exército Atlânta. Somente os melhores "
 "soldados podem usá-la."
 
 #: ../../tribes/atlanteans/goldore/conf:1
@@ -1043,7 +1044,7 @@ msgid ""
 "This tasty bread is made out of corn- and blackrootflour and is one part of "
 "miners meal."
 msgstr ""
-"Este pão saboroso é feito a partir de farinhas de trigo e de raiz negra e é "
+"Este pão saboroso é feito a partir de farinhas de milho e de raiz negra e é "
 "uma das partes da refeição do mineiro."
 
 #: ../../tribes/atlanteans/conf:6
@@ -1075,8 +1076,9 @@ msgid ""
 "To make the fine atlantian steel a hot fire is needed. But a fire of wood "
 "isn't hot enough -this coal brings the needed heat."
 msgstr ""
-"Para fazer o bom aço atlântida é preciso um fogo quente. Mas o fogo de "
-"madeira não é quente demais - este carvão traz o calor necessário."
+"È preciso um fogo muito quente para fazer o excelente aço atlânta. Como o "
+"fogo de madeira não é suficientemente quente, é necessário usar este carvão "
+"para pôr o ferro em brasa."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Toolsmith"
@@ -1108,8 +1110,8 @@ msgid ""
 "Trunks are the base for planks, which are used in nearly every building of "
 "the Atlanteans."
 msgstr ""
-"Madeira é a base das tábuas, que são usados basicamente em todo o lado pelos "
-"Atlântidas."
+"Os troncos são a matéria-prima das tábuas, que são usadas na grande maioria "
+"das construções dos Atlântas."
 
 #: ../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
