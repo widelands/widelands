@@ -2056,13 +2056,12 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 
 		state.ivar1 = 1; //  force return to building
 
-		if (&ref_cast<Flag, PlayerImmovable>(*location) == NULL) {
+		if (not location) {
 			// this can happen if the flag (and the building) is destroyed while
 			// the worker leaves the building.
 			molog
 				("[fetchfromflag]: flag dissappeared - become fugitive");
-			pop_task(game);
-			return start_task_fugitive(game);
+			return pop_task(game);
 		}
 
 		// The item has decided that it doesn't want to go to us after all
@@ -2096,8 +2095,7 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 		// scenario)
 		molog
 			("[fetchfromflag]: building dissappeared - searching for alternative");
-		pop_task(game);
-		return start_task_fugitive(game);
+		return pop_task(game);;
 	}
 
 	assert(location == &employer);
