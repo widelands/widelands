@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-09-27 18:08+0000\n"
-"Last-Translator: trewe <Unknown>\n"
+"PO-Revision-Date: 2010-10-31 13:41+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-28 04:33+0000\n"
+"X-Launchpad-Export-Date: 2010-11-01 05:03+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -40,7 +40,7 @@ msgstr "Armadura"
 
 #: ../../tribes/empire/conf:167
 msgid "Armour Smithy"
-msgstr "Manufactura de armas"
+msgstr "Loja do Ferreiro de armaduras"
 
 #: ../../tribes/empire/conf:103
 msgid "Armoursmith"
@@ -94,7 +94,7 @@ msgstr "Cerveja"
 #: ../../tribes/empire/fish/conf:1
 msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
 msgstr ""
-"Além de pão e carne, peixe também faz parte da alimentação no Império."
+"Além do pão e da carne, o peixe também faz parte da alimentação no Império."
 
 #: ../../tribes/empire/conf:56
 msgid "Bread"
@@ -114,7 +114,7 @@ msgstr "Cervejeiro"
 
 #: ../../tribes/empire/conf:169
 msgid "Brewery"
-msgstr "Cervejaria"
+msgstr "Cervejeira"
 
 #: ../../tribes/empire/conf:106
 msgid "Builder"
@@ -294,8 +294,8 @@ msgstr "Cana de pesca"
 msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
 msgstr ""
-"Canas de pesca são necessários pelos pescadores para pescar. Produzido na "
-"pequena manufactura."
+"A Cana de pesca é necessária aos pescadores para pescar. É produzida no "
+"Ferramenteiro."
 
 #: ../../tribes/empire/conf:63
 msgid "Flour"
@@ -865,7 +865,7 @@ msgstr "O caçador traz carne para os colonos."
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
 msgstr ""
-"A foice é a ferramenta do agricultor. É produzido nos trabalhos Metalúrgicos."
+"A foice é a ferramenta dos agricultores. É produzida no Ferramenteiro."
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -874,7 +874,7 @@ msgstr "A equipa de desenvolvimento de Widelands"
 #: ../../tribes/empire/axe/conf:1
 msgid ""
 "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "O machado é a ferramenta do lenhador. É produzido no ferreiro."
+msgstr "O machado é a ferramenta do Lenhador. É produzido no Ferramenteiro."
 
 #: ../../tribes/empire/bread/conf:1
 msgid "The bakers of the Empire make really tasty bread."
@@ -885,8 +885,8 @@ msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "They are produced by the toolsmith."
 msgstr ""
-"As pinças de fogo são o utensílio usado na fundição. Produzido nos trabalhos "
-"metalúrgicos."
+"A pinça de fogo é o utensílio usado pelo Fundidor na Fundição. É produzida "
+"no Ferramenteiro."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -902,25 +902,25 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always got some in reserve! It is "
 "produced by the toolsmith."
 msgstr ""
-"O martelo é uma ferramenta essencial. É necessário ao geólogo, ao "
-"trabalhador, aos ferreiros. Certifique-se sempre que tenha alguns em "
-"reserva! É produzido no Ferreiro."
+"O martelo é uma ferramenta essencial. É necessário ao geólogo, ao construtor "
+"e aos Ferreiros de armas e armaduras. Certifique-se sempre que tem alguns de "
+"reserva! É produzido no Ferramenteiro."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
 msgstr ""
-"A Pá de Forno é a ferramenta do padeiro, cada padeiro precisa de sua "
-"própria. Produzido nos trabalhos metalúrgicos."
+"A Pá de Forno é a ferramenta dos padeiros que precisam cada um da sua "
+"própria pá. É produzida no Ferramenteiro."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "uses it. It is produced by the toolsmith."
 msgstr ""
-"A pá é precisa para um uso adequado com as plantas. Por seguinte o guarda-"
-"florestal usam-a. Produzido nos trabalhos metalúrgicos."
+"A pá é necessária para trabalhar com plantas. Por conseguinte o Silvicultor "
+"usa-a. É produzida no Ferramenteiro."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid "The strongest armour existing for the Empire soldiers."
@@ -935,8 +935,8 @@ msgid ""
 "This basket is needed by the winegrower, for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
-"O cesto é necessário para ao cultivador de vinhas, para colher as uvas. "
-"Produzido nos trabalhos metalúrgicos."
+"O cesto é usado pelo Viticultor para vindimar as uvas. É produzido no "
+"Ferramenteiro."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid "This is a good warrior lance, with a steel-top and a little blade."
@@ -962,8 +962,8 @@ msgid ""
 "This is the best and sharpest weapon, the Empire weaponsmith creates for "
 "their warriors."
 msgstr ""
-"Esta é a melhor e mais afiada arma, que o armeiro do Império cria para seus "
-"guerreiros."
+"Esta é a melhor e mais afiada das armas que é produzida pelo Armeiro para os "
+"guerreiros do Império."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
@@ -982,15 +982,16 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced by the "
 "toolsmith."
 msgstr ""
-"Esta picareta é usada pelos pedreiros e os mineiros. É produzida no ferreiro."
+"Esta picareta é usada pelos pedreiros e pelos mineiros. É produzida no "
+"Ferramenteiro."
 
 #: ../../tribes/empire/saw/conf:1
 msgid ""
 "This saw is needed by the sawyer to create all the useful tools. It is "
 "produced by the toolsmith."
 msgstr ""
-"Esta serra é necessária pelo serrador para criar todas as suas ferramentas. "
-"É produzida pelo ferreiro."
+"Esta serra é usada pelo Serrador para criar todas as suas ferramentas. É "
+"produzida no Ferramenteiro."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1014,11 +1015,11 @@ msgstr "Esta lança de madeira tem uma ponta de ferro."
 
 #: ../../tribes/empire/conf:122
 msgid "Toolsmith"
-msgstr "Ferreiro"
+msgstr "Ferramenteiro"
 
 #: ../../tribes/empire/conf:193
 msgid "Toolsmithy"
-msgstr "Pequena manufactura"
+msgstr "Loja do Ferramenteiro"
 
 #: ../../tribes/empire/conf:145
 #: ../../tribes/empire/conf:153
@@ -1206,12 +1207,12 @@ msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer."
 msgstr ""
-"Água é essencial para a vida! É usada em vários locais, seja na padaria ou "
-"na fermentação de cerveja ou ainda para fazer barro."
+"A água é essencial à vida! É usada em vários locais, seja no fabrico de pão "
+"ou de cerveja e ainda para fazer argamassa."
 
 #: ../../tribes/empire/conf:194
 msgid "Weapon Smithy"
-msgstr "Manufactura de armas"
+msgstr "Loja do Armeiro"
 
 #: ../../tribes/empire/iron/conf:1
 msgid "Weapons and tools are made of iron."
@@ -1219,7 +1220,7 @@ msgstr "Armas e ferramentas são feitos de ferro."
 
 #: ../../tribes/empire/conf:124
 msgid "Weaponsmith"
-msgstr "Ferreiro de armas"
+msgstr "Armeiro"
 
 #: ../../tribes/empire/conf:125
 msgid "Weaver"
@@ -1313,7 +1314,7 @@ msgstr "Trabalha em sítios de construção para criar novos edifícios."
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr "Trabalha no profundo das minas para obter carvão, ferro ou ouro."
+msgstr "Trabalha nas profundezas das minas para obter carvão, ferro ou ouro."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""

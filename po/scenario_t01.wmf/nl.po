@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-30 23:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-11-01 15:55+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-02 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
@@ -22,7 +22,7 @@ msgid ""
 "trying not to fall asleep or die before the right time comes. And so I do... "
 "wait.\" "
 msgstr ""
-" \"Zoals vader me vertelde, er zijn tijden om te vechten en tijden om te "
+" \"Mijn vader vertelde me dat er zijn tijden om te vechten en tijden om te "
 "liggen wachten, niet in slaap proberen te vallen of te sterven voordat de "
 "juiste tijd komt. En daarom... wacht ik.\" "
 
@@ -410,20 +410,20 @@ msgstr "Khantrukh knikt..."
 msgid "Khantrukh remembers..."
 msgstr "Khantrukh memoreert..."
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:65
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:58
 msgid "Mission Complete"
 msgstr "Missie voltooid"
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:25
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid "Somebody comes up to you"
 msgstr "Iemand komt naar je toe"
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:26
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:32
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:41
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:42
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:36
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:37
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:45
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:59
 msgid "The advisor"
 msgstr "De adviseur"
 

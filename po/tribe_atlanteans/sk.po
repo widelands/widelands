@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-17 14:08+0000\n"
+"PO-Revision-Date: 2010-11-01 21:35+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-18 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-02 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -371,11 +371,11 @@ msgstr "Zlatý kabátec"
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Goldweaver"
-msgstr ""
+msgstr "Tkací závod na zlato"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Guardhall"
-msgstr ""
+msgstr "Veľká strážnica"
 
 #: ../../tribes/atlanteans/conf:140
 msgid "Guardhouse"
@@ -415,7 +415,7 @@ msgstr "Vysoká veža"
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Hook pole"
-msgstr ""
+msgstr "Tyč s hákom"
 
 #: ../../tribes/atlanteans/conf:98
 msgid "Horse"
@@ -616,7 +616,7 @@ msgstr "Vyrobiť ťažký dvojitý trojzubec"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce hook pole"
-msgstr ""
+msgstr "Vyrobiť tyč s hákom"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
@@ -695,39 +695,39 @@ msgstr "Kremeň"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo uhlia"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa uhlia"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo zlata"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa zlata"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo žuly"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa žuly"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Ukazovateľ zdroja - málo železa"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Ukazovateľ zdroja - veľa železa"
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Ukazovateľ zdroja - žiadny zdroj"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator water"
@@ -769,6 +769,8 @@ msgstr "Sídlo prieskumníka"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Prieskumníci ako prieskumník Priemyslav preskúmali oblasť v prieskumníckom "
+"štýle."
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Scythe"
@@ -795,7 +797,7 @@ msgstr ""
 #: ../../tribes/atlanteans/dungeon/conf:31
 #: ../../tribes/atlanteans/labyrinth/conf:36
 msgid "Sleep"
-msgstr ""
+msgstr "Spať"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Small Tower"
@@ -981,6 +983,8 @@ msgid ""
 "This hook pole is used by the smoker to hang up all the meat and fish to the "
 "top of the smoke-house. It is created by the toolsmith."
 msgstr ""
+"Tyč s hákom používa údiar na zavesenie mäsa a rýb na vrchol udiarne. Vyrába "
+"ju kováč nástrojov."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid "This is an advanced trident for more experienced soldiers."
@@ -1103,91 +1107,109 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 0"
 
 #: ../../tribes/atlanteans/dungeon/conf:33
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 0 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:34
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:35
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 1 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:36
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:37
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 2 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:38
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Vylepšiť útok vojakov 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť útok vojakov 3 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:37
 msgid "Upgrade soldier defense 0"
-msgstr ""
+msgstr "Vylepšiť obranu vojakov 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:38
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť obranu vojakov 0 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:39
 msgid "Upgrade soldier defense 1"
-msgstr ""
+msgstr "Vylepšiť obranu vojakov 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:40
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť obranu vojakov 1 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:43
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Vylepšiť uhýbanie vojakov 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:44
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Vylepšiť uhýbanie vojakov 0 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Vylepšiť uhýbanie vojakov 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Vylepšiť uhýbanie vojakov 1 (len pre kompatibilitu so starými verziami hry "
+"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:41
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Vylepšiť body zdravia vojakov 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:42
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Vylepšiť body zdravia vojakov 0 (len pre kompatibilitu so starými verziami "
+"hry (build13))"
 
 #: ../../tribes/atlanteans/conf:162
 msgid "Warehouse"

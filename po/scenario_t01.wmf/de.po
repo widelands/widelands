@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-30 23:27+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-11-03 00:29+0000\n"
+"Last-Translator: Klappstuhl <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-11-04 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
@@ -415,20 +415,20 @@ msgstr "Khantrukh nickt..."
 msgid "Khantrukh remembers..."
 msgstr "Khantrukh erinnert sich..."
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:65
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:58
 msgid "Mission Complete"
 msgstr "Mission erfüllt"
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:25
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid "Somebody comes up to you"
 msgstr "Jemand tritt an Dich heran"
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:26
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:32
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:41
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:42
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:36
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:37
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:45
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:59
 msgid "The advisor"
 msgstr "Der Berater"
 

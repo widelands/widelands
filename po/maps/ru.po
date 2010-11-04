@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-30 22:36+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-22 22:26+0000\n"
+"Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-10-23 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
 #: ../../campaigns/cconfig:24
 msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Обучение) Варвары - Вторая Империя"
+msgstr "Варвары - Вторая империя (Обучение)"
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
@@ -146,11 +146,11 @@ msgstr "Империя - Месяц в изгнании"
 
 #: ../../campaigns/cconfig:74
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Империя. Обучение 1 - Берега Малак Мора"
+msgstr "Империя - Берега Малак Мора (Обучение 1)"
 
 #: ../../campaigns/cconfig:79
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Империя Обучение 2 - Форпост для изгнанников"
+msgstr "Империя - Форпост для изгнанников (Обучение 2)"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -480,15 +480,15 @@ msgstr "Три воина"
 
 #: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Обучение I - Глаза во Тьме"
+msgstr "Глаза во тьме (Обучение 1)"
 
 #: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
-msgstr "Обучение II - Место названое Домом"
+msgstr "Место названное Домом (Обучение 2)"
 
 #: ../../campaigns/cconfig:67
 msgid "Tutorial3 - This land is our land"
-msgstr "Обучение III - Это наша земля!"
+msgstr "Это наша земля! (Обучение 3)"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -531,6 +531,18 @@ msgid ""
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
 msgstr ""
+"Когда Чат’Каруд умер, он был уже стар. Предводитель армии способной "
+"противостоять любому врагу готовому подняться против древних лесов и отец "
+"троих, сильных и амбициозных, сыновей. К концу своего правления, Чат’Каруд "
+"решил оставить старшего сына Трона своим преемником. Это решение оставило "
+"недовольными обоих братьев Трона и старый предводитель знал это. По наказу "
+"своего отца, Трон покинул столицу лесного королевства Альтунран и отвёл свои "
+"войска к высоким холмам, где и похоронил тело отца. Там он поклялся богам и "
+"духу своего отца, что вернётся, восстановив порядок в племени. Пока братья "
+"Трона свирепствуют в кровавой войне против него и сил оставленных им для "
+"защиты границ Альтунрана, молодой предводитель ищет возможность "
+"воссоединиться со своими амбициозными братьями и их племенами, чтобы однажды "
+"вновь выступить под одним знаменем."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""

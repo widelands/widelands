@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-09-29 18:29+0000\n"
+"PO-Revision-Date: 2010-10-22 21:41+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-30 04:31+0000\n"
+"X-Launchpad-Export-Date: 2010-10-23 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment ."
-msgstr ""
+msgstr "%i stromov práve teraz ."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:138
 msgid "%i trees."
-msgstr ""
+msgstr "%i stromov."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:137
 msgid "%s had "
-msgstr ""
+msgstr "%s mal(a) "
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:84
 msgid "%s has "
@@ -43,10 +43,13 @@ msgid ""
 "your territory than any other player. The game will end after 4 hours of\n"
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
+"Ako lesný škriatok máte rád(a) veľké lesy, takže vašou úlohou je mať viac\n"
+"stromov na svojom území ako ostatní hráči. Hra skončí po 4 hodinách\n"
+"hrania. Hráč s najväčším počtom stromov vyhráva hru."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:10
 msgid "Autocrat"
-msgstr ""
+msgstr "Samovládca"
 
 #: ../../scripting/win_conditions/02_collectors.lua:11
 msgid "Collectors"
@@ -62,6 +65,9 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr ""
+"Každý hráč alebo tím sa pokúša získať viac než polovicu územia mapy. Víťazom "
+"sa stane ten hráč alebo tím, ktorý si dokáže udržať toto územie na dobu "
+"aspoň 20 minút."
 
 #: ../../scripting/win_conditions/00_endless_game.lua:10
 msgid "Endless Game"
@@ -69,38 +75,38 @@ msgstr "Nekonečná hra"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:139
 msgid "Keep it for %i more minutes to win the game."
-msgstr ""
+msgstr "Udržte to ďalších %i minút, aby ste vyhrali hru."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:81
 #: ../../scripting/win_conditions/04_wood_gnome.lua:134
 msgid "Player overview:"
-msgstr ""
+msgstr "Prehľad hráčov:"
 
 #: ../../scripting/win_conditions/02_collectors.lua:147
 msgid "Points"
-msgstr ""
+msgstr "Body"
 
 #: ../../scripting/win_conditions/02_collectors.lua:128
 #: ../../scripting/win_conditions/03_territorial_lord.lua:144
 #: ../../scripting/win_conditions/03_territorial_lord.lua:146
 #: ../../scripting/win_conditions/04_wood_gnome.lua:88
 msgid "Status"
-msgstr "Stav:"
+msgstr "Stav"
 
 #: ../../scripting/win_conditions/02_collectors.lua:90
 msgid "Status for Player %i<br>"
-msgstr ""
+msgstr "Stav pre hráča %i<br>"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:117
 #: ../../scripting/win_conditions/03_territorial_lord.lua:120
 #: ../../scripting/win_conditions/03_territorial_lord.lua:142
 #: ../../scripting/win_conditions/03_territorial_lord.lua:171
 msgid "Team %i"
-msgstr ""
+msgstr "Tím %i"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:11
 msgid "Territorial Lord"
-msgstr ""
+msgstr "Vládca území"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:79
 msgid "The game will end in %i minutes."
@@ -108,31 +114,31 @@ msgstr "Hra skončí za %i minút."
 
 #: ../../scripting/win_conditions/02_collectors.lua:118
 msgid "The game will end in %s."
-msgstr ""
+msgstr "Hra skončí za %s."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:11
 msgid "The tribe or team that can defeat all others wins the game!"
-msgstr ""
+msgstr "Kmeň alebo tím, ktorý dokáže poraziť ostatných, vyhráva hru!"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:141
 msgid "The winner is %s "
-msgstr ""
+msgstr "Víťazom je %s "
 
 #: ../../scripting/win_conditions/00_endless_game.lua:11
 msgid "This is an endless game without rules."
-msgstr ""
+msgstr "Toto je nekonečná hra bez pravidiel."
 
 #: ../../scripting/win_conditions/02_collectors.lua:103
 msgid "Total: %i points"
-msgstr ""
+msgstr "Spolu: %i bodov"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:102
 msgid "Trees owned"
-msgstr ""
+msgstr "Vlastnené stromy"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:11
 msgid "Wood Gnome"
-msgstr ""
+msgstr "Lesný škriatok"
 
 #: ../../scripting/win_conditions/00_endless_game.lua:24
 #: ../../scripting/win_conditions/01_defeat_all.lua:24
@@ -140,26 +146,28 @@ msgstr ""
 #: ../../scripting/win_conditions/03_territorial_lord.lua:154
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
 msgid "You are defeated!"
-msgstr ""
+msgstr "Boli ste porazený(á)!"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:149
 msgid "You are the winner of this game!"
-msgstr ""
+msgstr "Ste víťazom tejto hru!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
 #: ../../scripting/win_conditions/03_territorial_lord.lua:173
 msgid "You are the winner!"
-msgstr "Si víťazom!"
+msgstr "Ste víťazom!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:12
 msgid ""
 "You get points for precious wares in your warehouses, the player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr ""
+"Dostávate body za cenné výrobky vo svojich skladoch, hráč s najväčším počtom "
+"výrobkov na konci 4 hodín vyhráva hru."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:145
 msgid "You have lost this game!"
-msgstr ""
+msgstr "Prehrali ste túto hru!"
 
 #: ../../scripting/win_conditions/00_endless_game.lua:25
 #: ../../scripting/win_conditions/01_defeat_all.lua:25
@@ -168,43 +176,43 @@ msgstr ""
 #: ../../scripting/win_conditions/04_wood_gnome.lua:95
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
-msgstr ""
+msgstr "Už nemáte čomu veliť. Ak chcete, môžete pokračovať ako divák."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:32
 msgid "You have won this game!"
-msgstr "Vyhral si túto hru!"
+msgstr "Vyhrali ste túto hru!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:139
 #: ../../scripting/win_conditions/03_territorial_lord.lua:175
 msgid "You lost"
-msgstr "Prehral si"
+msgstr "Prehrali ste"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:147
 msgid "You lost!"
-msgstr "Prehral si!"
+msgstr "Prehrali ste!"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:137
 msgid "You own more than half of the maps area."
-msgstr ""
+msgstr "Vlastníte viac než polovicu územia mapy."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:135
 msgid "You still got %i minutes to prevent a victory."
-msgstr ""
+msgstr "Stále máte %i minút na to, aby ste zabránili víťazstvu."
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
 #: ../../scripting/win_conditions/03_territorial_lord.lua:173
 #: ../../scripting/win_conditions/04_wood_gnome.lua:151
 msgid "You won!"
-msgstr "Vyhral si!"
+msgstr "Vyhrali ste!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:139
 #: ../../scripting/win_conditions/03_territorial_lord.lua:175
 msgid "You've lost this game!"
-msgstr "Prehral si túto hru!"
+msgstr "Prehrali ste túto hru!"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "with %i trees."
-msgstr ""
+msgstr "s %i stromami."
 
 #~ msgid "Game over"
 #~ msgstr "Koniec hry"
