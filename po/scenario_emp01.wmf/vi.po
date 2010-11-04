@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 20:52+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-11-04 00:46+0000\n"
+"Last-Translator: Nguyen Quang Chien <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-04 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
@@ -61,6 +61,10 @@ msgid ""
 "beautiful marble.<br> Now we truly can look forward to settling down on "
 "another island.\" "
 msgstr ""
+" \"Này Lutius, hôm nay chúng ta đã tiến đến gần tòa thành thứ nhất hơn rất "
+"nhiều. Hôm nay mỏ đá ở phía nam sẽ được đưa vào hoạt động và sẽ sớm cung cấp "
+"cho chúng ta đá và cẩm thạch tuyệt đẹp.<br> Giờ thì ta có thể chú tâm đến "
+"việc định cư ở một hòn đảo khác.\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:114
 msgid ""
@@ -114,6 +118,10 @@ msgid ""
 "is a good step forward. Now we can feel a bit safer and can look forward to "
 "repair our ship.\" "
 msgstr ""
+" \"Thưa ngài, tôi thấy rằng việc dựng trại lính giờ đã hoàn thành, vì vậy "
+"tôi đã đưa một trong những đạo lính tốt nhất đến đó để theo dõi sa mạc.<br> "
+"Đây là một bước tiến vững chắc. Giờ ta đã thấy yên tâm hơn và có thể hướng "
+"sự quan tâm đến việc sửa con tàu.\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:135
 msgid ""
@@ -157,6 +165,8 @@ msgid ""
 " \"You have made this peninsula a very secure place. It is time to move "
 "on!\" "
 msgstr ""
+" \"Bạn đã biến bán đảo này thành một nơi rất an toàn. Giờ là lúc ta tiếp tục "
+"hành quân!\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:51
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:156
@@ -164,12 +174,14 @@ msgid ""
 "* Build a barracks at the red point on the east side of the forests, to the "
 "right of your headquarters."
 msgstr ""
+"* Dựng một trại lính ở điểm đỏ trên bìa rừng hướng đông, ở phía tay phải so "
+"với tổng hành dinh của bạn."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:103
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:181
 msgid ""
 "* Build a forester's house to preserve the wood resources of this island."
-msgstr ""
+msgstr "* Dựng một trại kiểm lâm để giữ nguồn gỗ trên hòn đảo này."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:74
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:163
@@ -185,6 +197,8 @@ msgid ""
 "* Build a quarry in the south to cut some stones and marble out of the "
 "rocks.<br> These might be used for future buildings."
 msgstr ""
+"* Dựng một xưởng đá ở miền nam để khai tác sỏi và cẩm thạch từ đá núi.<br> "
+"Những thứ này có thể được dùng để xây nhà."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:91
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:174
@@ -192,18 +206,20 @@ msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
 msgstr ""
+"* Dựng thêm hai nhà chứa gỗ và một xưởng cưa ngay khi có đủ chỗ dành cho "
+"chúng."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:10
 msgid "A dark night"
-msgstr ""
+msgstr "Một đêm tối đen"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "A foreboding"
-msgstr ""
+msgstr "Có cảm giác thấy điềm không lành"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:122
 msgid "A step forward"
-msgstr ""
+msgstr "Một bước tiến"
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -216,41 +232,41 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:100
 msgid "Amalea comes in..."
-msgstr ""
+msgstr "Amalea bước vào..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:88
 msgid "Amalea recommends..."
-msgstr ""
+msgstr "Amalea đề nghị..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:71
 msgid "Amalea smiles..."
-msgstr ""
+msgstr "Amalea mỉm cười..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:154
 msgid "Build a barracks"
-msgstr ""
+msgstr "Dựng một trại lính"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:179
 msgid "Build a forester's house"
-msgstr ""
+msgstr "Dựng một trại kiểm lâm"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:161
 msgid "Build a lumberjack's house"
-msgstr ""
+msgstr "Dựng một kho chứa gỗ"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:186
 msgid "Build a quarry"
-msgstr ""
+msgstr "Dựng một mỏ đá"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:172
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
+msgstr "Dựng hai kho chứa gỗ và một xưởng cưa"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:12
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:24
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Nhật kí của Lutius"
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
@@ -258,19 +274,19 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:133
 msgid "Mission Complete"
-msgstr ""
+msgstr "Đã hoàn thành nhiệm vụ"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:141
 msgid "Safe Peninsula"
-msgstr ""
+msgstr "Bán đảo an toàn"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:59
 msgid "Safe for now"
-msgstr ""
+msgstr "Bây giờ đã an toàn"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Saledus looks around nervously..."
-msgstr ""
+msgstr "Saledus nhìn quanh một cách lo lắng..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:124
 msgid "Saledus looks promising..."
@@ -278,30 +294,30 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:112
 msgid "Saledus notes..."
-msgstr ""
+msgstr "Saledus lưu ý..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Saledus speaks with a sigh of relief..."
-msgstr ""
+msgstr "Saledus nói cùng với tiếng thở phào nhẹ nhõm..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:143
 msgid "Saledus speaks:"
-msgstr ""
+msgstr "Saledus nói:"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Survivor"
-msgstr ""
+msgstr "Người sống sót"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:22
 msgid "The rough sea"
-msgstr ""
+msgstr "Biển khơi dậy sóng"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:110
 msgid "Thinking about the future"
-msgstr ""
+msgstr "Nghĩ về tương lai"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:69
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:86
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:98
 msgid "Young Amalea"
-msgstr ""
+msgstr "Amalea trẻ tuổi"
