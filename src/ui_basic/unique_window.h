@@ -40,7 +40,7 @@ struct UniqueWindow : public Window {
 		UniqueWindow * window;
 		boost::function<void()> onCreate;
 		boost::function<void()> onDelete;
-		boost::function<void(Registry&)> constr;
+		boost::function<void(Registry &)> constr;
 
 		void create();
 		void destroy();

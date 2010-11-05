@@ -75,15 +75,15 @@ stock
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  assert (not registry.onCreate);                                             \
  assert (not registry.onDelete);                                             \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+ registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
+ registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
 	INIT_BTN_HOOKS(m_windows.general_stats, general_stats)
 	INIT_BTN_HOOKS(m_windows.ware_stats, ware_stats)
 	INIT_BTN_HOOKS(m_windows.building_stats, building_stats)
 	INIT_BTN_HOOKS(m_windows.stock, stock)
-	
+
 	m_windows.general_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<General_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
 	m_windows.ware_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<Ware_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
 	m_windows.building_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<Building_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
@@ -100,8 +100,8 @@ GameMainMenu::~GameMainMenu() {
 	// overwrite our hooks.
 
 #define DEINIT_BTN_HOOKS(registry, btn)                                                \
- assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed,&btn, true));  \
- assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed,&btn, false)); \
+ assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed, &btn, true));  \
+ assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed, &btn, false)); \
  registry.onCreate = 0;                                                                \
  registry.onDelete = 0;                                                                \
 

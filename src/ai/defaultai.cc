@@ -1663,7 +1663,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 					if (current_outputs.at(j) == en_bo.outputs.at(i)) {
 						Ware_Index wt(static_cast<size_t>(current_outputs.at(j)));
 						if (site.site->economy().needs_ware(wt))
-							prio -= 
+							prio -=
 								(2 + wares.at(current_outputs.at(j)).preciousness) / 2;
 						continue;
 					}

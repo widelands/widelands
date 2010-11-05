@@ -30,7 +30,7 @@
 #define WIDELANDS_SERVER_VERSION "0.4"
 
 // Main function: parse arguments and start server
-int main(int argc, char** argv)
+int main(int argc, char ** argv)
 {
 	int option;
 	struct option opt [] =
@@ -41,8 +41,8 @@ int main(int argc, char** argv)
 	};
 	int optindex;
 
-	while((option = getopt_long(argc, argv, "hvg", opt, &optindex)) != EOF)
-		switch(option)
+	while ((option = getopt_long(argc, argv, "hvg", opt, &optindex)) != EOF)
+		switch (option)
 		{
 			case 'h':
 				std::cout << "The GGZ Gaming Zone Widelands Server" << std::endl

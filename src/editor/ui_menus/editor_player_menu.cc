@@ -186,7 +186,7 @@ void Editor_Player_Menu::update() {
 
       // Build infrastructure but
 		// Still disabled at the moment.
-      // if(!m_plr_make_infrastructure_buts[p - 1]) {
+      // if (!m_plr_make_infrastructure_buts[p - 1]) {
       //                   m_plr_make_infrastructure_buts[p - 1] =
       //                           new UI::Callback_Button
       //                                   (this, "build_infrastructure",
@@ -267,14 +267,14 @@ called when a button is clicked
 //         Widelands::Player_Number nr_players = map.get_nrplayers();
 //    // Up down button
 //         nr_players += change;
-//    if(nr_players<1) nr_players=1;
-//    if(nr_players>MAX_PLAYERS) nr_players=MAX_PLAYERS;
+//    if (nr_players<1) nr_players=1;
+//    if (nr_players>MAX_PLAYERS) nr_players=MAX_PLAYERS;
 //         if (nr_players > map.get_nrplayers()) {
 //       // register new default name for this players
 //       char c1=  (nr_players/10) ? (nr_players/10) + 0x30 : 0;
 //       char c2= (nr_players%10) + 0x30;
 //       std::string name=_("Player ");
-//       if(c1) name.append(1,c1);
+//       if (c1) name.append(1,c1);
 //       name.append(1,c2);
 //
 //                 map.set_nrplayers(nr_players);
@@ -399,19 +399,20 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 	Widelands::Map & map = egbase.map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	const Widelands::Coords start_pos = map.get_starting_pos(n);
-   assert(start_pos);
+	assert(start_pos);
 
 	Widelands::Player * p = egbase.get_player(n);
-   if(!p) {
-      // This player is unknown, register it, place a hq and reference the tribe
-      // so that this tribe can not be changed
+	if (!p) {
+		// This player is unknown, register it,
+		// place a hq and reference the tribe
+		// so that this tribe can not be changed
 		egbase.add_player
 			(n, 0, // SirVer, TODO: initialization index makes no sense here
 			 m_plr_set_tribes_buts[n - 1]->get_title(),
 			 m_plr_names[n - 1]->text());
 
 		p = egbase.get_player(n);
-   }
+	}
 
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
@@ -422,28 +423,28 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 	if (not imm) {
       // place HQ
 		const Widelands::Tribe_Descr & tribe = p->tribe();
-      const Widelands::Building_Index idx =
+		const Widelands::Building_Index idx =
 			tribe.building_index("headquarters");
-      if (not idx)
-         throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
-                // Widelands::Warehouse & headquarter = dynamic_cast<Widelands::Warehouse &>
-                //         (egbase.warp_building(starting_pos, player_number, idx));
-                // egbase.conquer_area
-                //         (Player_Area
-                //          (player_number, Area(starting_pos, headquarter.get_conquers())));
-                // tribe.load_warehouse_with_start_wares(editor, headquarter);
+		if (not idx)
+			throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
+		// Widelands::Warehouse & headquarter = dynamic_cast<Widelands::Warehouse &>
+		//         (egbase.warp_building(starting_pos, player_number, idx));
+		// egbase.conquer_area
+		//         (Player_Area
+		//          (player_number, Area(starting_pos, headquarter.get_conquers())));
+		// tribe.load_warehouse_with_start_wares(editor, headquarter);
 
 		parent.reference_player_tribe(n, &tribe);
 
-      // Remove the player overlay from this starting pos.
-      // A HQ is overlay enough
-      std::string picsname="pics/editor_player_";
-      picsname+=static_cast<char>((n/10) + 0x30);
-      picsname+=static_cast<char>((n%10) + 0x30);
-      picsname+="_starting_pos.png";
+		// Remove the player overlay from this starting pos.
+		// A HQ is overlay enough
+		std::string picsname = "pics/editor_player_";
+		picsname += static_cast<char>((n / 10) + 0x30);
+		picsname += static_cast<char>((n % 10) + 0x30);
+		picsname += "_starting_pos.png";
 		overlay_manager.remove_overlay
 			(start_pos, g_gr->get_picture(PicMod_Game,  picsname));
-   }
+	}
 
 	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);
 	parent.tools.make_infrastructure.set_player(n);

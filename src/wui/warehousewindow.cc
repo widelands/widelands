@@ -41,7 +41,7 @@ struct WarehouseWaresDisplay : WaresDisplay {
 	WarehouseWaresDisplay(UI::Panel * parent, uint32_t width, Interactive_GameBase &, Warehouse &, wdType type, bool selectable);
 
 protected:
-	virtual void draw_ware(RenderTarget& dst, Widelands::Ware_Index ware);
+	virtual void draw_ware(RenderTarget & dst, Widelands::Ware_Index ware);
 
 private:
 	Interactive_GameBase & m_igbase;
@@ -49,7 +49,8 @@ private:
 };
 
 WarehouseWaresDisplay::WarehouseWaresDisplay
-	(UI::Panel* parent, uint32_t width, Interactive_GameBase & igbase, Warehouse& wh, wdType type, bool selectable)
+	(UI::Panel * parent, uint32_t width, Interactive_GameBase & igbase,
+	 Warehouse & wh, wdType type, bool selectable)
 :
 WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable),
 m_igbase(igbase),
@@ -59,7 +60,7 @@ m_warehouse(wh)
 	add_warelist(type == WORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
 }
 
-void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::Ware_Index ware)
+void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index ware)
 {
 	WaresDisplay::draw_ware(dst, ware);
 
@@ -104,21 +105,21 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel * parent, uint32_t width, Int
 	add(&m_display, UI::Box::AlignLeft, true);
 
 	if (m_can_act) {
-		UI::Box *buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+		UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		add(buttons, UI::Box::AlignLeft);
-			
-#define ADD_POLICY_BUTTON(policy, policyname, tooltip)                    \
-        	buttons->add(new UI::Callback_Button(                     \
-			buttons, #policy,                                 \
-			0, 0, 34, 34,                                     \
-			g_gr->get_picture(PicMod_UI,"pics/but4.png"),     \
-			g_gr->get_picture(PicMod_Game,                    \
-		              "pics/stock_policy_button_" #policy ".png"),\
-			boost::bind(&WarehouseWaresPanel::set_policy,     \
-			            this, Warehouse::SP_##policyname),    \
-			tooltip)                                          \
-		, UI::Box::AlignCenter);                                  \
-	
+
+#define ADD_POLICY_BUTTON(policy, policyname, tooltip)                     \
+        	buttons->add(new UI::Callback_Button(                      \
+			buttons, #policy,                                  \
+			0, 0, 34, 34,                                      \
+			g_gr->get_picture(PicMod_UI, "pics/but4.png"),     \
+			g_gr->get_picture(PicMod_Game,                     \
+		              "pics/stock_policy_button_" #policy ".png"), \
+			boost::bind(&WarehouseWaresPanel::set_policy,      \
+			            this, Warehouse::SP_##policyname),     \
+			tooltip)                                           \
+		, UI::Box::AlignCenter);                                   \
+
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
 		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
 		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
@@ -135,8 +136,10 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 	                   is_workers ? m_wh.owner().tribe().get_nrworkers() :
 				        m_wh.owner().tribe().get_nrwares();
 	if (m_gb.can_act(m_wh.owner().player_number())) {
-	       for (Widelands::Ware_Index id = Widelands::Ware_Index::First();
-	            id < nritems; ++id) {
+		for
+			(Widelands::Ware_Index id = Widelands::Ware_Index::First();
+			 id < nritems; ++id)
+		{
 			if (m_display.ware_selected(id)) {
 				m_gb.game().send_player_command
 					(*new Widelands::Cmd_SetStockPolicy
@@ -171,23 +174,25 @@ Warehouse_Window::Warehouse_Window
 	 UI::Window *         & registry)
 	: Building_Window(parent, wh, registry)
 {
-	get_tabs()->add(
-		"wares",
-		g_gr->get_picture(PicMod_UI, pic_tab_wares),
-		new WarehouseWaresPanel(get_tabs(),
-			Width,
-			igbase(),
-			warehouse(),
-			WaresDisplay::WARE),
+	get_tabs()->add
+		("wares",
+		 g_gr->get_picture(PicMod_UI, pic_tab_wares),
+		 new WarehouseWaresPanel
+			(get_tabs(),
+			 Width,
+			 igbase(),
+			 warehouse(),
+			 WaresDisplay::WARE),
 		 _("Wares"));
-	get_tabs()->add(
-		"workers",
-		g_gr->get_picture(PicMod_UI, pic_tab_workers),
-		new WarehouseWaresPanel(get_tabs(),
-			Width,
-			igbase(),
-			warehouse(),
-			WaresDisplay::WORKER),
+	get_tabs()->add
+		("workers",
+		 g_gr->get_picture(PicMod_UI, pic_tab_workers),
+		 new WarehouseWaresPanel
+			(get_tabs(),
+			 Width,
+			 igbase(),
+			 warehouse(),
+			 WaresDisplay::WORKER),
 		 _("Workers"));
 }
 

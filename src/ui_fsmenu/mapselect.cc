@@ -164,7 +164,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 }
 
 bool Fullscreen_Menu_MapSelect::compare_maprows
-	(uint32_t const rowa, uint32_t const rowb)
+	(uint32_t rowa, uint32_t rowb)
 {
 	MapData const & r1 = m_maps_data[m_table[rowa]];
 	MapData const & r2 = m_maps_data[m_table[rowb]];
@@ -173,7 +173,7 @@ bool Fullscreen_Menu_MapSelect::compare_maprows
 		return r1.name < r2.name;
 	} else if (!r1.width and r2.width) {
 		return true;
-	} else if(r1.width and !r2.width) {
+	} else if (r1.width and !r2.width) {
 		return false;
 	}
 	return r1.name < r2.name;
@@ -384,7 +384,8 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					  (mapdata.scenario ?
 						"pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
 					  :
-					  "pics/ls_s2map.png"), mapdata.name.c_str());
+					  "pics/ls_s2map.png"),
+					 mapdata.name.c_str());
 			} catch (const std::exception & e) {
 				log
 					("Mapselect: Skip %s due to preload error: %s\n",

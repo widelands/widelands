@@ -68,7 +68,7 @@ private:
 	void changed(bool);
 	void double_clicked(uint32_t);
 	void fill_list();
-	bool compare_maprows(uint32_t const, uint32_t const);
+	bool compare_maprows(uint32_t, uint32_t);
 
 	uint32_t     m_butw;
 	uint32_t     m_buth;

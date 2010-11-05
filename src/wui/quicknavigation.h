@@ -44,9 +44,9 @@ struct Editor_Game_Base;
 struct QuickNavigation {
 	typedef boost::function<void (Point)> SetViewFn;
 
-	QuickNavigation(const Widelands::Editor_Game_Base& egbase, uint32_t screenwidth, uint32_t screenheight);
+	QuickNavigation(const Widelands::Editor_Game_Base & egbase, uint32_t screenwidth, uint32_t screenheight);
 
-	void set_setview(const SetViewFn& fn);
+	void set_setview(const SetViewFn & fn);
 
 	void view_changed(Point point, bool jump);
 
@@ -55,7 +55,7 @@ struct QuickNavigation {
 private:
 	void setview(Point where);
 
-	const Widelands::Editor_Game_Base& m_egbase;
+	const Widelands::Editor_Game_Base & m_egbase;
 	uint32_t m_screenwidth;
 	uint32_t m_screenheight;
 

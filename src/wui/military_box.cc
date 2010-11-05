@@ -95,7 +95,7 @@ UI::Callback_Button & MilitaryBox::add_button
 			(&parent, name,
 			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-			 boost::bind(fn,boost::ref(*this)),
+			 boost::bind(fn, boost::ref(*this)),
 			 text,
 			 tooltip_text);
 	parent.add(&button, Box::AlignTop);

@@ -58,7 +58,7 @@ Building_Window::Building_Window
 	m_caps_setup = false;
 	m_toggle_workarea = 0;
 
-	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
+	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
 	m_tabs = new UI::Tab_Panel(vbox, 0, 0, g_gr->get_no_picture());
 	vbox->add(m_tabs, UI::Box::AlignLeft, true);
@@ -122,7 +122,8 @@ void Building_Window::think()
 		 or
 		 m_capscache_player_number != igbase().player_number()
 		 or
-		 building().get_playercaps() != m_capscache) {
+		 building().get_playercaps() != m_capscache)
+	{
 		m_capsbuttons->free_children();
 		create_capsbuttons(m_capsbuttons);
 		move_out_of_the_way();
@@ -362,7 +363,7 @@ void Building_Window::create_ware_queue_panel
 	 Widelands::WaresQueue * const wq)
 {
 	// The *max* width should be larger than the default width
-	box->add(create_wares_queue_display(box, igbase(), b, wq, 3*Width), UI::Box::AlignLeft);
+	box->add(create_wares_queue_display(box, igbase(), b, wq, 3 * Width), UI::Box::AlignLeft);
 }
 
 /**

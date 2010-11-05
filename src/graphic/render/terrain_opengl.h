@@ -107,7 +107,7 @@ void draw_field_opengl
       glVertex2f(subwin.x + start.x + 3, subwin.y + start.y);                 \
       glTexCoord2i(TEXTURE_WIDTH, TEXTURE_HEIGHT);                            \
       glVertex2f(subwin.x + end.x + 3,   subwin.y + end.y);                   \
-      glTexCoord2i(TEXTURE_WIDTH - 6 , TEXTURE_HEIGHT);                       \
+      glTexCoord2i(TEXTURE_WIDTH - 6, TEXTURE_HEIGHT);                       \
       glVertex2f(subwin.x + end.x - 3,   subwin.y + end.y);                   \
    } glEnd();                                                                 \
 

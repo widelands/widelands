@@ -155,7 +155,7 @@ void SoldierPanel::think()
 	uint32_t capacity = m_soldiers.soldierCapacity();
 
 	// Update soldier list and target row/col:
-	std::vector<Soldier*> soldierlist = m_soldiers.presentSoldiers();
+	std::vector<Soldier *> soldierlist = m_soldiers.presentSoldiers();
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(m_rows);
 

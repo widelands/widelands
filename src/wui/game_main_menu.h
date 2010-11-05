@@ -30,7 +30,7 @@ struct GameMainMenu : public UI::UniqueWindow {
 		(Interactive_Player &,
 		 UI::UniqueWindow::Registry &,
 		 Interactive_Player::Game_Main_Menu_Windows &);
-	
+
 	~GameMainMenu();
 
 private:

@@ -181,7 +181,7 @@ Widelands::Tribe_Descr::WaresOrderCoords const & AbstractWaresDisplay::icons_ord
 }
 
 
-Point AbstractWaresDisplay::ware_position(Widelands::Ware_Index const id) const
+Point AbstractWaresDisplay::ware_position(Widelands::Ware_Index id) const
 {
 	Point p(2, 2);
 	p.x += icons_order_coords()[id].first  * (WARE_MENU_PIC_WIDTH + 3);
@@ -197,8 +197,8 @@ Draw one ware icon + additional information.
 ===============
 */
 void AbstractWaresDisplay::draw_ware
-	(RenderTarget        &       dst,
-	 Widelands::Ware_Index const id)
+	(RenderTarget & dst,
+	 Widelands::Ware_Index id)
 {
 	Point p = ware_position(id);
 
