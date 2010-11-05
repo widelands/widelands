@@ -42,6 +42,7 @@ Texture::Texture
 	:
 	m_colormap (0),
 	m_pixels   (0),
+	m_curframe (0),
 	m_frame_num(0),
 	m_nrframes (0),
 	m_frametime(frametime),
@@ -211,6 +212,11 @@ Uint32 Texture::get_minimap_color(const char shade) {
 void Texture::animate(uint32_t time)
 {
 	m_frame_num = (time / m_frametime) % m_nrframes;
+
+#ifdef USE_OPENGL
+	if (g_opengl)
+		return;
+#endif
 
 	uint8_t * const lastframe = m_curframe;
 
