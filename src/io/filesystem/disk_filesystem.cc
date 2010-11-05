@@ -270,10 +270,6 @@ void RealFSImpl::m_unlink_directory(std::string const & file) {
 		 ++pname)
 	{
 		std::string filename = FS_Filename(pname->c_str());
-		// HACK: ignore SVN directory for this might be a
-		// campaign directory or similar
-		if (filename == ".svn")
-			continue;
 		if (filename == "..")
 			continue;
 		if (filename == ".")
