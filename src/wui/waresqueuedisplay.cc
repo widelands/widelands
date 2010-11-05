@@ -184,12 +184,12 @@ private:
 };
 
 WareQueuePriorityButton::WareQueuePriorityButton
-	(UI::Panel* parent,
+	(UI::Panel * parent,
 	 int32_t x, int32_t y, uint32_t w, uint32_t h,
-	 const char* picture_enabled, const char* picture_disabled,
-	 const std::string& tooltip,
-	 Interactive_GameBase& igb,
-	 Widelands::Building& building,
+	 const char * picture_enabled, const char * picture_disabled,
+	 const std::string & tooltip,
+	 Interactive_GameBase & igb,
+	 Widelands::Building & building,
 	 int32_t ware_type,
 	 Widelands::Ware_Index ware_index,
 	 int32_t priority)
@@ -244,7 +244,7 @@ void WareQueuePriorityButton::update_enabled()
  * Allocate a new panel that displays the given wares queue and shows
  * priority buttons that can be manipulated if appropriate.
  */
-UI::Panel* create_wares_queue_display
+UI::Panel * create_wares_queue_display
 	(UI::Panel * parent,
 	 Interactive_GameBase & igb,
 	 Widelands::Building & b,

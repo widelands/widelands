@@ -47,22 +47,25 @@ AbstractWaresDisplay::AbstractWaresDisplay
 		 0, get_inner_h() - 25, get_inner_w(), 20,
 		 _("Stock"), UI::Align_Center),
 
-	m_selected(m_type == WORKER ? m_tribe.get_nrworkers()
-	                            : m_tribe.get_nrwares(), false),
-	m_hidden  (m_type == WORKER ? m_tribe.get_nrworkers()
-	                            : m_tribe.get_nrwares(), false),
-	m_selectable(selectable)				    
+	m_selected
+		(m_type == WORKER ? m_tribe.get_nrworkers()
+	                          : m_tribe.get_nrwares(), false),
+	m_hidden
+		(m_type == WORKER ? m_tribe.get_nrworkers()
+	                          : m_tribe.get_nrwares(), false),
+	m_selectable(selectable)
 {
-	// Find out geometry from icons_order 
-	unsigned int columns = icons_order().size();	
+	// Find out geometry from icons_order
+	unsigned int columns = icons_order().size();
 	unsigned int rows = 0;
 	for (unsigned int i = 0; i < icons_order().size(); i++)
-		if (icons_order()[i].size() > rows) 
+		if (icons_order()[i].size() > rows)
 			rows = icons_order()[i].size();
 
 	// 25 is height of m_curware text
-	set_desired_size(columns * (WARE_MENU_PIC_WIDTH  +     3) + 1,
-	                 rows    * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1 + 25);
+	set_desired_size
+		(columns * (WARE_MENU_PIC_WIDTH  + 3) + 1,
+		 rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1 + 25);
 }
 
 
@@ -136,8 +139,8 @@ void WaresDisplay::remove_all_warelists() {
 
 void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
-	Widelands::Ware_Index number = 
-		m_type == WORKER ? 
+	Widelands::Ware_Index number =
+		m_type == WORKER ?
 		m_tribe.get_nrworkers() :
 		m_tribe.get_nrwares();
 
@@ -155,7 +158,7 @@ void AbstractWaresDisplay::draw(RenderTarget & dst)
 
 Widelands::Tribe_Descr::WaresOrder const & AbstractWaresDisplay::icons_order() const
 {
-	switch(m_type) {
+	switch (m_type) {
 		case WARE:
 			return m_tribe.wares_order();
 			break;
@@ -167,7 +170,7 @@ Widelands::Tribe_Descr::WaresOrder const & AbstractWaresDisplay::icons_order() c
 
 Widelands::Tribe_Descr::WaresOrderCoords const & AbstractWaresDisplay::icons_order_coords() const
 {
-	switch(m_type) {
+	switch (m_type) {
 		case WARE:
 			return m_tribe.wares_order_coords();
 			break;
@@ -180,7 +183,7 @@ Widelands::Tribe_Descr::WaresOrderCoords const & AbstractWaresDisplay::icons_ord
 
 Point AbstractWaresDisplay::ware_position(Widelands::Ware_Index const id) const
 {
-	Point p(2,2);
+	Point p(2, 2);
 	p.x += icons_order_coords()[id].first  * (WARE_MENU_PIC_WIDTH + 3);
 	p.y += icons_order_coords()[id].second * (WARE_MENU_PIC_HEIGHT + 3 + 8);
 	return p;
@@ -201,10 +204,10 @@ void AbstractWaresDisplay::draw_ware
 
 	//  draw a background
 	const PictureID picid =
-		g_gr->get_picture(PicMod_Game,
-			ware_selected(id) ?  "pics/ware_list_bg_selected.png"
-			                  :  "pics/ware_list_bg.png"
-		);
+		g_gr->get_picture
+			(PicMod_Game,
+			 ware_selected(id) ?  "pics/ware_list_bg_selected.png"
+			                   :  "pics/ware_list_bg.png");
 	uint32_t w, h;
 	g_gr->get_picture_size(picid, w, h);
 
@@ -239,7 +242,7 @@ void AbstractWaresDisplay::unselect_ware(Widelands::Ware_Index ware) {
 	m_selected[ware] = false;
 }
 bool AbstractWaresDisplay::ware_selected(Widelands::Ware_Index ware) {
-	return	m_selected[ware];
+	return m_selected[ware];
 }
 
 // Wares hiding
@@ -250,7 +253,7 @@ void AbstractWaresDisplay::unhide_ware(Widelands::Ware_Index ware) {
 	m_hidden[ware] = false;
 }
 bool AbstractWaresDisplay::ware_hidden(Widelands::Ware_Index ware) {
-	return	m_hidden[ware];
+	return m_hidden[ware];
 }
 
 WaresDisplay::WaresDisplay
@@ -258,8 +261,8 @@ WaresDisplay::WaresDisplay
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe,
 	 wdType type,
-	 bool selectable) :
-	 AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
+	 bool selectable)
+: AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
 {}
 
 WaresDisplay::~WaresDisplay()

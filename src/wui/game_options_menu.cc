@@ -109,15 +109,15 @@ GameOptionsMenu::GameOptionsMenu
 	// m_windows.sound_options.constr = boost::lambda::bind(boost::lambda::new_ptr<GameOptionsSoundMenu>(), boost::ref(m_gb),_1);
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+ registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
+ registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
 	INIT_BTN_HOOKS(m_windows.readme, readme)
 	INIT_BTN_HOOKS(m_windows.license, license)
 	INIT_BTN_HOOKS(m_windows.authors, authors)
 	INIT_BTN_HOOKS(m_windows.sound_options, sound)
-	
+
 	set_inner_size
 		(hmargin() + hmargin() +
 		 std::max(static_cast<int32_t>(get_inner_w()), readme.get_w()),

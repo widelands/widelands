@@ -492,11 +492,12 @@ void FieldActionWindow::add_buttons_attack ()
 			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
 			a_box.add(m_attack_box, UI::Box::AlignTop);
 
-			set_fastclick_panel(&add_button
-				(&a_box, "attack",
-				 pic_attack,
-				 &FieldActionWindow::act_attack,
-				 _("Start attack")));
+			set_fastclick_panel
+				(&add_button
+				 (&a_box, "attack",
+				  pic_attack,
+				  &FieldActionWindow::act_attack,
+				  _("Start attack")));
 		}
 	}
 

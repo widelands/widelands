@@ -249,10 +249,10 @@ m_toggle_help
 	adjust_toolbar_position();
 
 	set_display_flag(dfSpeed, true);
-	
+
 #define INIT_BTN_HOOKS(registry, btn)                                        \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+ registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
+ registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
 	INIT_BTN_HOOKS(m_chat, m_toggle_chat)
@@ -280,11 +280,11 @@ Interactive_Player::~Interactive_Player() {
 	// We need to remove these callbacks because the opened window might
 	// (theoretically) live longer than 'this' window, and thus the
 	// buttons. The assertions are safeguards in case somewhere else in the
-	// code someone would overwrite our hooks. 
+	// code someone would overwrite our hooks.
 
 #define DEINIT_BTN_HOOKS(registry, btn)                                                \
- assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed,&btn, true));  \
- assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed,&btn, false)); \
+ assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed, &btn, true));  \
+ assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed, &btn, false)); \
  registry.onCreate = 0;                                                                \
  registry.onDelete = 0;                                                                \
 
@@ -370,13 +370,13 @@ void Interactive_Player::postload()
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
 			(&Int_Player_overlay_callback_function, static_cast<void *>(this));
-	
+
 	// Connect buildhelp button to reflect build help state. Needs to be
 	// done here rather than in the constructor as the map is not present then.
 	// This code assumes that the Interactive_Player object lives longer than
-	// the overlay_manager. Otherwise remove the hook in the deconstructor. 
+	// the overlay_manager. Otherwise remove the hook in the deconstructor.
 	egbase().map().overlay_manager().onBuildHelpToggle =
-		boost::bind(&UI::Button::set_perm_pressed,&m_toggle_buildhelp,_1);
+		boost::bind(&UI::Button::set_perm_pressed, &m_toggle_buildhelp, _1);
 	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 
 	// Recalc whole map for changed owner stuff
