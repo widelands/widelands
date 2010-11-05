@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-21 01:07+0000\n"
+"POT-Creation-Date: 2010-11-04 15:52+0000\n"
+"PO-Revision-Date: 2010-11-04 23:20+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-22 04:36+0000\n"
+"X-Launchpad-Export-Date: 2010-11-05 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid "A special tabard for atlantian soldiers."
 msgstr "Специальные накидки для солдат атлантов."
 
-#: ../../tribes/atlanteans/conf:51
+#: ../../tribes/atlanteans/conf:57
 msgid "Advanced Shield"
 msgstr "Улучшенный щит"
 
@@ -38,15 +38,15 @@ msgstr ""
 "Один из лучших трезубцев атлантов. Используется только очень хорошими "
 "бойцами."
 
-#: ../../tribes/atlanteans/conf:104
+#: ../../tribes/atlanteans/conf:110
 msgid "Armoursmith"
 msgstr "Латный мастер"
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:177
 msgid "Armoursmithy"
 msgstr "Мастерская доспехов"
 
-#: ../../tribes/atlanteans/conf:27
+#: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
 msgstr "Пепелище"
 
@@ -54,11 +54,11 @@ msgstr "Пепелище"
 msgid "Atlanteans"
 msgstr "Атланты"
 
-#: ../../tribes/atlanteans/conf:105
+#: ../../tribes/atlanteans/conf:111
 msgid "Baker"
 msgstr "Пекарь"
 
-#: ../../tribes/atlanteans/conf:166
+#: ../../tribes/atlanteans/conf:172
 msgid "Bakery"
 msgstr "Пекарня"
 
@@ -66,16 +66,16 @@ msgstr "Пекарня"
 msgid "Bakes bread for workers."
 msgstr "Печёт хлеб для рабочих."
 
-#: ../../tribes/atlanteans/conf:52
+#: ../../tribes/atlanteans/conf:58
 msgid "Bakingtray"
 msgstr "Лопатка пекаря"
 
-#: ../../tribes/atlanteans/conf:153
+#: ../../tribes/atlanteans/conf:148
 msgid "Barracks"
 msgstr "Казарма"
 
-#: ../../tribes/atlanteans/conf:146
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:141
+#: ../../tribes/atlanteans/conf:149
 msgid "Barrier"
 msgstr "Форпост"
 
@@ -83,15 +83,15 @@ msgstr "Форпост"
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
 msgstr "Большие вёдра для рыбовода. Изготавливаются кузнецом."
 
-#: ../../tribes/atlanteans/conf:54
+#: ../../tribes/atlanteans/conf:60
 msgid "Blackroot"
 msgstr "Чёрный корень"
 
-#: ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:182
 msgid "Blackroot Farm"
 msgstr "Ферма чёрного корня"
 
-#: ../../tribes/atlanteans/conf:53
+#: ../../tribes/atlanteans/conf:59
 msgid "Blackroot Flour"
 msgstr "Чёрная мука"
 
@@ -103,27 +103,27 @@ msgstr ""
 "Чёрная мука производится из чёрного корня и является одним из трёх "
 "ингредиентов для приготовления хлеба атлантов."
 
-#: ../../tribes/atlanteans/conf:106
+#: ../../tribes/atlanteans/conf:112
 msgid "Blackroot farmer"
 msgstr "Огородник"
 
-#: ../../tribes/atlanteans/conf:28
+#: ../../tribes/atlanteans/conf:34
 msgid "Blackrootfield"
 msgstr "Созревший чёрный корень"
 
-#: ../../tribes/atlanteans/conf:29
+#: ../../tribes/atlanteans/conf:35
 msgid "Blackrootfield harvested"
 msgstr "Убранная грядка чёрного корня"
 
-#: ../../tribes/atlanteans/conf:30
+#: ../../tribes/atlanteans/conf:36
 msgid "Blackrootfield medium"
 msgstr "Молодые побеги чёрного корня"
 
-#: ../../tribes/atlanteans/conf:31
+#: ../../tribes/atlanteans/conf:37
 msgid "Blackrootfield small"
 msgstr "Всходы чёрного корня"
 
-#: ../../tribes/atlanteans/conf:32
+#: ../../tribes/atlanteans/conf:38
 msgid "Blackrootfield tiny"
 msgstr "Засеянная грядка чёрного корня"
 
@@ -135,7 +135,7 @@ msgstr ""
 "Чёрный корень - особый сорт корней. Атлантам нравится его терпкий вкус и "
 "потому они используют его при приготовлении хлеба."
 
-#: ../../tribes/atlanteans/conf:55
+#: ../../tribes/atlanteans/conf:61
 msgid "Bread"
 msgstr "Хлеб"
 
@@ -151,15 +151,15 @@ msgstr "Разводит пауков для получения паутины."
 msgid "Breeds the strong atlantean horses"
 msgstr "Разводит сильных лошадей атлантов."
 
-#: ../../tribes/atlanteans/conf:56
+#: ../../tribes/atlanteans/conf:62
 msgid "Buckets"
 msgstr "Ведро"
 
-#: ../../tribes/atlanteans/conf:107
+#: ../../tribes/atlanteans/conf:113
 msgid "Builder"
 msgstr "Строитель"
 
-#: ../../tribes/atlanteans/conf:108
+#: ../../tribes/atlanteans/conf:114
 msgid "Burner"
 msgstr "Углежог"
 
@@ -167,7 +167,7 @@ msgstr "Углежог"
 msgid "Burns coal."
 msgstr "Жжёт уголь."
 
-#: ../../tribes/atlanteans/conf:97
+#: ../../tribes/atlanteans/conf:103
 msgid "Carrier"
 msgstr "Носильщик"
 
@@ -175,20 +175,20 @@ msgstr "Носильщик"
 msgid "Carries items along your roads."
 msgstr "Переносит грузы по Вашим дорогам."
 
-#: ../../tribes/atlanteans/conf:138
-#: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:150
+#: ../../tribes/atlanteans/conf:195
 msgid "Castle"
 msgstr "Замок"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
 msgstr "Посёлок у замка"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:173
 msgid "Charcoal Burner's House"
 msgstr "Домик углежога"
 
-#: ../../tribes/atlanteans/conf:147
+#: ../../tribes/atlanteans/conf:142
 msgid "Citadel"
 msgstr "Цитадель"
 
@@ -196,43 +196,43 @@ msgstr "Цитадель"
 msgid "Cloth made out of spideryarn."
 msgstr "Ткань изготовленная из паутины."
 
-#: ../../tribes/atlanteans/conf:57
+#: ../../tribes/atlanteans/conf:63
 msgid "Coal"
 msgstr "Уголь"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:184
 msgid "Coal Mine"
 msgstr "Угольная шахта"
 
-#: ../../tribes/atlanteans/conf:131
+#: ../../tribes/atlanteans/conf:137
 msgid "Construction Site"
 msgstr "Стройка"
 
-#: ../../tribes/atlanteans/conf:59
+#: ../../tribes/atlanteans/conf:65
 msgid "Corn"
 msgstr "Кукуруза"
 
-#: ../../tribes/atlanteans/conf:33
+#: ../../tribes/atlanteans/conf:39
 msgid "Cornfield"
 msgstr "Созревшая кукуруза"
 
-#: ../../tribes/atlanteans/conf:34
+#: ../../tribes/atlanteans/conf:40
 msgid "Cornfield harvested"
 msgstr "Убранное кукурузное поле"
 
-#: ../../tribes/atlanteans/conf:35
+#: ../../tribes/atlanteans/conf:41
 msgid "Cornfield medium"
 msgstr "Молодая кукуруза"
 
-#: ../../tribes/atlanteans/conf:36
+#: ../../tribes/atlanteans/conf:42
 msgid "Cornfield small"
 msgstr "Всходы кукурузы"
 
-#: ../../tribes/atlanteans/conf:37
+#: ../../tribes/atlanteans/conf:43
 msgid "Cornfield tiny"
 msgstr "Засеянное кукурузное поле"
 
-#: ../../tribes/atlanteans/conf:58
+#: ../../tribes/atlanteans/conf:64
 msgid "Cornflour"
 msgstr "Кукурузная мука"
 
@@ -244,7 +244,7 @@ msgstr ""
 "Кукурузная мука производится из кукурузы и является одним из трёх "
 "ингредиентов для приготовления хлеба атлантов."
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:183
 msgid "Crystal Mine"
 msgstr "Алмазная шахта"
 
@@ -256,11 +256,11 @@ msgstr "Обтёсывает куски гранита, добытые из за
 msgid "Defend and Conquer!"
 msgstr "Защищать и завоёвывать!"
 
-#: ../../tribes/atlanteans/conf:38
+#: ../../tribes/atlanteans/conf:44
 msgid "Destroyed building"
 msgstr "Разрушенное здание"
 
-#: ../../tribes/atlanteans/conf:60
+#: ../../tribes/atlanteans/conf:66
 msgid "Diamond"
 msgstr "Алмаз"
 
@@ -268,23 +268,23 @@ msgstr "Алмаз"
 msgid "Discovers resources for mining."
 msgstr "Находит месторождения полезных ископаемых."
 
-#: ../../tribes/atlanteans/conf:148
+#: ../../tribes/atlanteans/conf:143
 msgid "Donjon"
 msgstr "Дозорная башня"
 
-#: ../../tribes/atlanteans/conf:61
+#: ../../tribes/atlanteans/conf:67
 msgid "Double Trident"
 msgstr "Двойной трезубец"
 
-#: ../../tribes/atlanteans/conf:134
+#: ../../tribes/atlanteans/conf:199
 msgid "Dungeon"
 msgstr "Главная башня"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:181
 msgid "Farm"
 msgstr "Ферма"
 
-#: ../../tribes/atlanteans/conf:109
+#: ../../tribes/atlanteans/conf:115
 msgid "Farmer"
 msgstr "Фермер"
 
@@ -292,19 +292,19 @@ msgstr "Фермер"
 msgid "Fells trees."
 msgstr "Рубит деревья."
 
-#: ../../tribes/atlanteans/conf:62
+#: ../../tribes/atlanteans/conf:68
 msgid "Fire Tongs"
 msgstr "Щипцы"
 
-#: ../../tribes/atlanteans/conf:64
+#: ../../tribes/atlanteans/conf:70
 msgid "Fish"
 msgstr "Рыба"
 
-#: ../../tribes/atlanteans/conf:110
+#: ../../tribes/atlanteans/conf:116
 msgid "Fish Breeder"
 msgstr "Рыбовод"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:165
 msgid "Fish Breeder's House"
 msgstr "Домик рыбовода"
 
@@ -313,48 +313,48 @@ msgid "Fish is one of the biggest food-resources of the Atlanteans."
 msgstr ""
 "Рыба является одним из крупнейших продовольственных ресурсов атлантов."
 
-#: ../../tribes/atlanteans/conf:111
+#: ../../tribes/atlanteans/conf:117
 msgid "Fisher"
 msgstr "Рыболов"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:164
 msgid "Fisher's House"
 msgstr "Домик рыболова"
 
-#: ../../tribes/atlanteans/conf:63
+#: ../../tribes/atlanteans/conf:69
 msgid "Fishing Net"
 msgstr "Рыболовная сеть"
 
-#: ../../tribes/atlanteans/conf:112
+#: ../../tribes/atlanteans/conf:118
 msgid "Forester"
 msgstr "Лесник"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:162
 msgid "Forester's House"
 msgstr "Домик лесника"
 
-#: ../../tribes/atlanteans/conf:149
-#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:144
+#: ../../tribes/atlanteans/conf:151
 msgid "Fortress"
 msgstr "Крепость"
 
-#: ../../tribes/atlanteans/conf:113
+#: ../../tribes/atlanteans/conf:119
 msgid "Geologist"
 msgstr "Геолог"
 
-#: ../../tribes/atlanteans/conf:67
+#: ../../tribes/atlanteans/conf:73
 msgid "Gold"
 msgstr "Золото"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:186
 msgid "Gold Mine"
 msgstr "Золотая шахта"
 
-#: ../../tribes/atlanteans/conf:66
+#: ../../tribes/atlanteans/conf:72
 msgid "Gold Ore"
 msgstr "Золотая руда"
 
-#: ../../tribes/atlanteans/conf:68
+#: ../../tribes/atlanteans/conf:74
 msgid "Gold Yarn"
 msgstr "Золотая пряжа"
 
@@ -366,23 +366,23 @@ msgstr ""
 "Золото является одним из самых ценных материалов. Только важные вещи "
 "украшают им."
 
-#: ../../tribes/atlanteans/conf:65
+#: ../../tribes/atlanteans/conf:71
 msgid "Golden Tabard"
 msgstr "Золотая накидка"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:163
 msgid "Goldweaver"
 msgstr "Златошвейка"
 
-#: ../../tribes/atlanteans/conf:139
+#: ../../tribes/atlanteans/conf:191
 msgid "Guardhall"
 msgstr "Форт"
 
-#: ../../tribes/atlanteans/conf:140
+#: ../../tribes/atlanteans/conf:190
 msgid "Guardhouse"
 msgstr "Караульная"
 
-#: ../../tribes/atlanteans/conf:69
+#: ../../tribes/atlanteans/conf:75
 msgid "Hammer"
 msgstr "Молоток"
 
@@ -394,15 +394,15 @@ msgstr "собрать урожай чёрного корня"
 msgid "Harvest corn"
 msgstr "собрать урожай кукурузы"
 
-#: ../../tribes/atlanteans/conf:161
+#: ../../tribes/atlanteans/conf:156
 msgid "Headquarters"
 msgstr "Штаб"
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:11
+#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Обычный штаб"
 
-#: ../../tribes/atlanteans/conf:70
+#: ../../tribes/atlanteans/conf:76
 msgid "Heavy Double Trident"
 msgstr "Тяжёлый трезубец"
 
@@ -410,63 +410,63 @@ msgstr "Тяжёлый трезубец"
 msgid "Helps to carry items at heavy used roads."
 msgstr "Помогает перевозить грузы на сильно загруженных дорогах."
 
-#: ../../tribes/atlanteans/conf:141
+#: ../../tribes/atlanteans/conf:192
 msgid "High Tower"
 msgstr "Большая башня"
 
-#: ../../tribes/atlanteans/conf:71
+#: ../../tribes/atlanteans/conf:77
 msgid "Hook pole"
 msgstr "Багор"
 
-#: ../../tribes/atlanteans/conf:98
+#: ../../tribes/atlanteans/conf:104
 msgid "Horse"
 msgstr "Лошадь"
 
-#: ../../tribes/atlanteans/conf:128
+#: ../../tribes/atlanteans/conf:134
 msgid "Horse Breeder"
 msgstr "Коневод"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:178
 msgid "Horse Farm"
 msgstr "Конезавод"
 
-#: ../../tribes/atlanteans/conf:114
+#: ../../tribes/atlanteans/conf:120
 msgid "Hunter"
 msgstr "Охотник"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:166
 msgid "Hunter's House"
 msgstr "Домик охотника"
 
-#: ../../tribes/atlanteans/conf:72
+#: ../../tribes/atlanteans/conf:78
 msgid "Hunting Bow"
 msgstr "Охотничий лук"
 
-#: ../../tribes/atlanteans/conf:74
+#: ../../tribes/atlanteans/conf:80
 msgid "Iron"
 msgstr "Железо"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:185
 msgid "Iron Mine"
 msgstr "Железная шахта"
 
-#: ../../tribes/atlanteans/conf:73
+#: ../../tribes/atlanteans/conf:79
 msgid "Iron Ore"
 msgstr "Железная руда"
 
-#: ../../tribes/atlanteans/conf:135
+#: ../../tribes/atlanteans/conf:200
 msgid "Labyrinth"
 msgstr "Лабиринт"
 
-#: ../../tribes/atlanteans/conf:75
+#: ../../tribes/atlanteans/conf:81
 msgid "Light trident"
 msgstr "Лёгкий трезубец"
 
-#: ../../tribes/atlanteans/conf:76
+#: ../../tribes/atlanteans/conf:82
 msgid "Long Trident"
 msgstr "Длинный трезубец"
 
-#: ../../tribes/atlanteans/conf:77
+#: ../../tribes/atlanteans/conf:83
 msgid "Meat"
 msgstr "Мясо"
 
@@ -474,7 +474,7 @@ msgstr "Мясо"
 msgid "Meat is one food-resource of the Atlanteans."
 msgstr "Мясо один из продовольственных ресурсов атлантов."
 
-#: ../../tribes/atlanteans/conf:78
+#: ../../tribes/atlanteans/conf:84
 msgid "Milking Tongs"
 msgstr "Доильные щипцы"
 
@@ -486,11 +486,11 @@ msgstr ""
 "Доильные щипцы используются заводчиком пауков, для доения пауков. "
 "Изготавливаются кузнецом."
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:171
 msgid "Mill"
 msgstr "Мельница"
 
-#: ../../tribes/atlanteans/conf:115
+#: ../../tribes/atlanteans/conf:121
 msgid "Miller"
 msgstr "Мельник"
 
@@ -510,19 +510,19 @@ msgstr "добыть кварц"
 msgid "Mine stone"
 msgstr "добыть камень"
 
-#: ../../tribes/atlanteans/conf:116
+#: ../../tribes/atlanteans/conf:122
 msgid "Miner"
 msgstr "Шахтёр"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:98
 msgid "Not enough space"
 msgstr "Недостаточно места"
 
-#: ../../tribes/atlanteans/conf:157
+#: ../../tribes/atlanteans/conf:152
 msgid "Outpost"
 msgstr "Застава"
 
-#: ../../tribes/atlanteans/conf:80
+#: ../../tribes/atlanteans/conf:86
 msgid "Pick"
 msgstr "Кирка"
 
@@ -533,7 +533,7 @@ msgid ""
 msgstr ""
 "Кирки используются каменотёсами и шахтёрами. Изготавливаются кузнецом."
 
-#: ../../tribes/atlanteans/conf:81
+#: ../../tribes/atlanteans/conf:87
 msgid "Planks"
 msgstr "Доски"
 
@@ -687,59 +687,59 @@ msgstr "Производит инструменты для рабочих."
 msgid "Produces weapons for the soldiers."
 msgstr "Производит оружие для солдат."
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:160
 msgid "Quarry"
 msgstr "Каменоломня"
 
-#: ../../tribes/atlanteans/conf:79
+#: ../../tribes/atlanteans/conf:85
 msgid "Quartz"
 msgstr "Кварц"
 
-#: ../../tribes/atlanteans/conf:39
+#: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator coal little"
 msgstr "Указатель небольших залежей угля"
 
-#: ../../tribes/atlanteans/conf:40
+#: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator coal much"
 msgstr "Указатель больших залежей угля"
 
-#: ../../tribes/atlanteans/conf:41
+#: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator gold little"
 msgstr "Указатель небольших залежей золота"
 
-#: ../../tribes/atlanteans/conf:42
+#: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator gold much"
 msgstr "Указатель больших залежей золота"
 
-#: ../../tribes/atlanteans/conf:43
+#: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator granite little"
 msgstr "Указатель небольших залежей гранита"
 
-#: ../../tribes/atlanteans/conf:44
+#: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator granite much"
 msgstr "Указатель больших залежей гранита"
 
-#: ../../tribes/atlanteans/conf:45
+#: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator iron little"
 msgstr "Указатель небольших залежей железа"
 
-#: ../../tribes/atlanteans/conf:46
+#: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator iron much"
 msgstr "Указатель больших залежей железа"
 
-#: ../../tribes/atlanteans/conf:47
+#: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator no resource"
 msgstr "Указатель отсутствия ресурсов"
 
-#: ../../tribes/atlanteans/conf:48
+#: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator water"
 msgstr "Указатель залежей воды"
 
-#: ../../tribes/atlanteans/conf:82
+#: ../../tribes/atlanteans/conf:88
 msgid "Saw"
 msgstr "Пила"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:169
 msgid "Sawmill"
 msgstr "Лесопилка"
 
@@ -753,15 +753,15 @@ msgstr "Пила нужна пильщику, лесорубу и кузнецу
 msgid "Saws the wood to produce planks."
 msgstr "Распиливает брёвна на доски."
 
-#: ../../tribes/atlanteans/conf:117
+#: ../../tribes/atlanteans/conf:123
 msgid "Sawyer"
 msgstr "Пильщик"
 
-#: ../../tribes/atlanteans/conf:127
+#: ../../tribes/atlanteans/conf:133
 msgid "Scout"
 msgstr "Разведчик"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:168
 msgid "Scout's House"
 msgstr "Домик разведчика"
 
@@ -770,16 +770,16 @@ msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr "Занимается разведкой."
 
-#: ../../tribes/atlanteans/conf:83
+#: ../../tribes/atlanteans/conf:89
 msgid "Scythe"
 msgstr "Коса"
 
-#: ../../tribes/atlanteans/conf:150
-#: ../../tribes/atlanteans/conf:152
+#: ../../tribes/atlanteans/conf:145
+#: ../../tribes/atlanteans/conf:147
 msgid "Sentry"
 msgstr "Караульная"
 
-#: ../../tribes/atlanteans/conf:84
+#: ../../tribes/atlanteans/conf:90
 msgid "Shovel"
 msgstr "Лопата"
 
@@ -791,12 +791,12 @@ msgstr ""
 "Лопаты нужны для ухода за растениями, поэтому их используют лесники и "
 "огородники. Изготавливаются кузнецом."
 
-#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/dungeon/conf:30
 #: ../../tribes/atlanteans/labyrinth/conf:36
 msgid "Sleep"
 msgstr "Сон"
 
-#: ../../tribes/atlanteans/conf:142
+#: ../../tribes/atlanteans/conf:193
 msgid "Small Tower"
 msgstr "Малая башня"
 
@@ -808,11 +808,11 @@ msgstr "выплавить золото"
 msgid "Smelt iron"
 msgstr "выплавить железо"
 
-#: ../../tribes/atlanteans/conf:118
+#: ../../tribes/atlanteans/conf:124
 msgid "Smelter"
 msgstr "Плавильщик"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:174
 msgid "Smelting Works"
 msgstr "Плавильня"
 
@@ -828,19 +828,19 @@ msgstr "закоптить рыбу"
 msgid "Smoke meat"
 msgstr "закоптить мясо"
 
-#: ../../tribes/atlanteans/conf:85
+#: ../../tribes/atlanteans/conf:91
 msgid "Smoked fish"
 msgstr "Копченая рыба"
 
-#: ../../tribes/atlanteans/conf:86
+#: ../../tribes/atlanteans/conf:92
 msgid "Smoked meat"
 msgstr "Копченое мясо"
 
-#: ../../tribes/atlanteans/conf:119
+#: ../../tribes/atlanteans/conf:125
 msgid "Smoker"
 msgstr "Коптильщик"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:170
 msgid "Smokery"
 msgstr "Коптильня"
 
@@ -848,11 +848,11 @@ msgstr "Коптильня"
 msgid "Smokes meat and fish."
 msgstr "Коптит мясо и рыбу."
 
-#: ../../tribes/atlanteans/conf:101
+#: ../../tribes/atlanteans/conf:107
 msgid "Soldier"
 msgstr "Солдат"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:99
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
 "weren't build. You are at an disadvantage with this; consider restarting\n"
@@ -862,31 +862,31 @@ msgstr ""
 "недостаточно места. Это ставит Вас в невыгодное положение. Рассмотрите\n"
 "возможность перезапуска карты, чтобы обеспечить равные начальные условия."
 
-#: ../../tribes/atlanteans/conf:120
+#: ../../tribes/atlanteans/conf:126
 msgid "Spiderbreeder"
 msgstr "Заводчик пауков"
 
-#: ../../tribes/atlanteans/conf:87
+#: ../../tribes/atlanteans/conf:93
 msgid "Spidercloth"
 msgstr "Паучья ткань"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:179
 msgid "Spiderfarm"
 msgstr "Паучья ферма"
 
-#: ../../tribes/atlanteans/conf:88
+#: ../../tribes/atlanteans/conf:94
 msgid "Spideryarn"
 msgstr "Паутина"
 
-#: ../../tribes/atlanteans/conf:89
+#: ../../tribes/atlanteans/conf:95
 msgid "Steel Shield"
 msgstr "Стальной щит"
 
-#: ../../tribes/atlanteans/conf:90
+#: ../../tribes/atlanteans/conf:96
 msgid "Steel Trident"
 msgstr "Стальной трезубец"
 
-#: ../../tribes/atlanteans/conf:91
+#: ../../tribes/atlanteans/conf:97
 msgid "Stone"
 msgstr "Камни"
 
@@ -894,15 +894,15 @@ msgstr "Камни"
 msgid "Stone is one basic build ware type of the Atlanteans."
 msgstr "Камень является одним из основных стройматериалов атлантов."
 
-#: ../../tribes/atlanteans/conf:121
+#: ../../tribes/atlanteans/conf:127
 msgid "Stonecutter"
 msgstr "Каменотёс"
 
-#: ../../tribes/atlanteans/conf:151
+#: ../../tribes/atlanteans/conf:146
 msgid "Stronghold"
 msgstr "Застава"
 
-#: ../../tribes/atlanteans/conf:92
+#: ../../tribes/atlanteans/conf:98
 msgid "Tabard"
 msgstr "Накидка"
 
@@ -1068,20 +1068,20 @@ msgstr ""
 "Для производства стали нужно жаркое пламя. Дерево горит не столь жарко, "
 "поэтому используется уголь."
 
-#: ../../tribes/atlanteans/conf:122
+#: ../../tribes/atlanteans/conf:128
 msgid "Toolsmith"
 msgstr "Кузнец"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:175
 msgid "Toolsmithy"
 msgstr "Мастерская"
 
-#: ../../tribes/atlanteans/conf:143
-#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:153
+#: ../../tribes/atlanteans/conf:194
 msgid "Tower"
 msgstr "Башня"
 
-#: ../../tribes/atlanteans/conf:123
+#: ../../tribes/atlanteans/conf:129
 msgid "Trainer"
 msgstr "Инструктор"
 
@@ -1089,7 +1089,7 @@ msgstr "Инструктор"
 msgid "Trains the soldiers."
 msgstr "Обучает солдат."
 
-#: ../../tribes/atlanteans/conf:93
+#: ../../tribes/atlanteans/conf:99
 msgid "Trunk"
 msgstr "Брёвна"
 
@@ -1101,11 +1101,11 @@ msgstr ""
 "Из брёвен делаются доски, которые используются для постройки практически "
 "каждого здания атлантов."
 
-#: ../../tribes/atlanteans/dungeon/conf:32
+#: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
 msgstr "улучшить навык атаки 0"
 
-#: ../../tribes/atlanteans/dungeon/conf:33
+#: ../../tribes/atlanteans/dungeon/conf:32
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1113,11 +1113,11 @@ msgstr ""
 "улучшить навык атаки 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:34
+#: ../../tribes/atlanteans/dungeon/conf:33
 msgid "Upgrade soldier attack 1"
 msgstr "улучшить навык атаки 1"
 
-#: ../../tribes/atlanteans/dungeon/conf:35
+#: ../../tribes/atlanteans/dungeon/conf:34
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1125,11 +1125,11 @@ msgstr ""
 "улучшить навык атаки 1 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:35
 msgid "Upgrade soldier attack 2"
 msgstr "улучшить навык атаки 2"
 
-#: ../../tribes/atlanteans/dungeon/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:36
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1137,11 +1137,11 @@ msgstr ""
 "улучшить навык атаки 2 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:38
+#: ../../tribes/atlanteans/dungeon/conf:37
 msgid "Upgrade soldier attack 3"
 msgstr "улучшить навык атаки 3"
 
-#: ../../tribes/atlanteans/dungeon/conf:39
+#: ../../tribes/atlanteans/dungeon/conf:38
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1207,11 +1207,11 @@ msgstr ""
 "улучшить уровень здоровья 0 (только для совместимости со старыми "
 "сохранениями (build13))"
 
-#: ../../tribes/atlanteans/conf:162
+#: ../../tribes/atlanteans/conf:157
 msgid "Warehouse"
 msgstr "Склад"
 
-#: ../../tribes/atlanteans/conf:94
+#: ../../tribes/atlanteans/conf:100
 msgid "Water"
 msgstr "Вода"
 
@@ -1223,7 +1223,7 @@ msgstr ""
 "Вода это самая важная жидкость для жизни! Она используется для разных нужд, "
 "например, для выпечки хлеба."
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:176
 msgid "Weapon Smithy"
 msgstr "Оружейная мастерская"
 
@@ -1231,27 +1231,27 @@ msgstr "Оружейная мастерская"
 msgid "Weapons and Tools are made of iron."
 msgstr "Оружие и инструменты делаются из железа."
 
-#: ../../tribes/atlanteans/conf:124
+#: ../../tribes/atlanteans/conf:130
 msgid "Weaponsmith"
 msgstr "Оружейник"
 
-#: ../../tribes/atlanteans/conf:125
+#: ../../tribes/atlanteans/conf:131
 msgid "Weaver"
 msgstr "Ткач"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:180
 msgid "Weaving-Mill"
 msgstr "Ткацкая фабрика"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:167
 msgid "Well"
 msgstr "Колодец"
 
-#: ../../tribes/atlanteans/conf:126
+#: ../../tribes/atlanteans/conf:132
 msgid "Woodcutter"
 msgstr "Лесоруб"
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:161
 msgid "Woodcutter's House"
 msgstr "Домик лесоруба"
 
