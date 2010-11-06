@@ -91,7 +91,10 @@ private:
 	static const uint32_t IconBorder = 2;
 };
 
-SoldierPanel::SoldierPanel(UI::Panel & parent, Widelands::Editor_Game_Base & egbase, Widelands::Building & building)
+SoldierPanel::SoldierPanel
+	(UI::Panel & parent,
+	 Widelands::Editor_Game_Base & egbase,
+	 Widelands::Building & building)
 :
 Panel(&parent, 0, 0, 0, 0),
 m_egbase(egbase),

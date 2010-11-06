@@ -38,7 +38,9 @@ static const char pic_policy_remove[] = "pics/stock_policy_remove.png";
  * Extends the wares display to show and modify stock policy of items.
  */
 struct WarehouseWaresDisplay : WaresDisplay {
-	WarehouseWaresDisplay(UI::Panel * parent, uint32_t width, Interactive_GameBase &, Warehouse &, wdType type, bool selectable);
+	WarehouseWaresDisplay
+		(UI::Panel * parent, uint32_t width,
+		 Interactive_GameBase &, Warehouse &, wdType type, bool selectable);
 
 protected:
 	virtual void draw_ware(RenderTarget & dst, Widelands::Ware_Index ware);
@@ -83,7 +85,9 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index 
  * Wraps the wares display together with some buttons
  */
 struct WarehouseWaresPanel : UI::Box {
-	WarehouseWaresPanel(UI::Panel * parent, uint32_t width, Interactive_GameBase &, Warehouse &, WaresDisplay::wdType type);
+	WarehouseWaresPanel
+		(UI::Panel * parent, uint32_t width,
+		 Interactive_GameBase &, Warehouse &, WaresDisplay::wdType type);
 
 	void set_policy(Warehouse::StockPolicy);
 private:
@@ -94,7 +98,10 @@ private:
 	WarehouseWaresDisplay m_display;
 };
 
-WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel * parent, uint32_t width, Interactive_GameBase & gb, Warehouse & wh, WaresDisplay::wdType type) :
+WarehouseWaresPanel::WarehouseWaresPanel
+	(UI::Panel * parent, uint32_t width,
+	 Interactive_GameBase & gb, Warehouse & wh, WaresDisplay::wdType type)
+:
 	UI::Box(parent, 0, 0, UI::Box::Vertical),
 	m_gb(gb),
 	m_wh(wh),

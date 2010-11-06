@@ -84,10 +84,14 @@ stock
 	INIT_BTN_HOOKS(m_windows.building_stats, building_stats)
 	INIT_BTN_HOOKS(m_windows.stock, stock)
 
-	m_windows.general_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<General_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
-	m_windows.ware_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<Ware_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
-	m_windows.building_stats.constr = boost::lambda::bind(boost::lambda::new_ptr<Building_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
-	m_windows.stock.constr = boost::lambda::bind(boost::lambda::new_ptr<Stock_Menu>(), boost::ref(m_player), boost::lambda::_1);
+	m_windows.general_stats.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<General_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+	m_windows.ware_stats.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<Ware_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+	m_windows.building_stats.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<Building_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+	m_windows.stock.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<Stock_Menu>(), boost::ref(m_player), boost::lambda::_1);
 
 	if (get_usedefaultpos())
 		center_to_parent();

@@ -103,10 +103,6 @@ GameOptionsMenu::GameOptionsMenu
 	m_windows.readme.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/README");
 	m_windows.license.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/COPYING");
 	m_windows.authors.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/developers");
-	// For some reason the latter does not work. It seemms that
-	// boost::lambda::bind is less powerful than boost::bind, but the
-	// latter does not work with boost::lamda::new_ptr
-	// m_windows.sound_options.constr = boost::lambda::bind(boost::lambda::new_ptr<GameOptionsSoundMenu>(), boost::ref(m_gb),_1);
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \

@@ -183,23 +183,6 @@ void Editor_Player_Menu::update() {
 		text[29] += p % 10;
 		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->get_picture(PicMod_Game, text));
 		posy += size + spacing;
-
-      // Build infrastructure but
-		// Still disabled at the moment.
-      // if (!m_plr_make_infrastructure_buts[p - 1]) {
-      //                   m_plr_make_infrastructure_buts[p - 1] =
-      //                           new UI::Callback_Button
-      //                                   (this, "build_infrastructure",
-      //                                    posx, posy, size, size,
-      //                                    g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-      //                                    g_gr->get_no_picture(), //  set below
-      //                                    boost::bind(&Editor_Player_Menu::make_infrastructure_clicked, boost::ref(*this), p),
-      //                                    std::string());
-      //                                    // _("I"), //  SirVer, TODO come up with a picture for this
-      //                                    // _("Make infrastructure"));
-      //    posx+=size+spacing;
-      // }
-      //           m_plr_make_infrastructure_buts[p - 1]->set_enabled(true);
 	}
 	set_inner_size(get_inner_w(), posy + spacing);
 }

@@ -187,7 +187,10 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 							 0, 0, 34, 34,
 							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 							 building_descr.get_buildicon(),
-							 boost::bind(&Building_Window::act_enhance, boost::ref(*this), boost::ref(*i.current)), //  button id = building id)
+							 boost::bind
+								(&Building_Window::act_enhance,
+								 boost::ref(*this),
+								 boost::ref(*i.current)), //  button id = building id)
 							 buffer),
 						 UI::Box::AlignCenter);
 				}

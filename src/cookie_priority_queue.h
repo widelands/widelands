@@ -73,7 +73,10 @@ protected:
  * you have to call \ref decrease_key or \ref increase_key after the change,
  * depending on whether the change caused a decrease or increase, respectively.
  */
-template<typename _Type, typename _Compare = std::less<_Type>, typename _CookieAccessor = default_cookie_accessor<_Type> >
+template
+	<typename _Type,
+	 typename _Compare = std::less<_Type>,
+	 typename _CookieAccessor = default_cookie_accessor<_Type> >
 struct cookie_priority_queue : cookie_priority_queue_base<_Type> {
 	typedef typename cookie_priority_queue_base<_Type>::type type;
 	typedef typename cookie_priority_queue_base<_Type>::container container;
@@ -220,7 +223,7 @@ void cookie_priority_queue<_T, _C, _CA>::increase_key(typename cookie_priority_q
 
 	assert(cookie_pos(elt_cookie) < d.size());
 
-	for(;;) {
+	for (;;) {
 		size_type left_child = left_child_pos(cookie_pos(elt_cookie));
 		size_type right_child = right_child_pos(cookie_pos(elt_cookie));
 

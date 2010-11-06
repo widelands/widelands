@@ -263,11 +263,28 @@ m_toggle_help
 	INIT_BTN_HOOKS(m_encyclopedia, m_toggle_help)
 	INIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
 
-	m_encyclopedia.constr = boost::lambda::bind(boost::lambda::new_ptr<EncyclopediaWindow>(), boost::ref(*this), boost::lambda::_1);
-	m_options.constr = boost::lambda::bind(boost::lambda::new_ptr<GameOptionsMenu>(), boost::ref(*this), boost::lambda::_1, boost::ref(m_mainm_windows));
-	m_statisticsmenu.constr = boost::lambda::bind(boost::lambda::new_ptr<GameMainMenu>(), boost::ref(*this), boost::lambda::_1, boost::ref(m_mainm_windows));
-	m_objectives.constr = boost::lambda::bind(boost::lambda::new_ptr<GameObjectivesMenu>(), boost::ref(*this), boost::lambda::_1);
-	m_message_menu.constr = boost::lambda::bind(boost::lambda::new_ptr<GameMessageMenu>(), boost::ref(*this), boost::lambda::_1);
+	m_encyclopedia.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<EncyclopediaWindow>(),
+		 boost::ref(*this),
+		 boost::lambda::_1);
+	m_options.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<GameOptionsMenu>(),
+		 boost::ref(*this),
+		 boost::lambda::_1,
+		 boost::ref(m_mainm_windows));
+	m_statisticsmenu.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<GameMainMenu>(),
+		 boost::ref(*this),
+		 boost::lambda::_1,
+		 boost::ref(m_mainm_windows));
+	m_objectives.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<GameObjectivesMenu>(),
+		 boost::ref(*this),
+		 boost::lambda::_1);
+	m_message_menu.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<GameMessageMenu>(),
+		 boost::ref(*this),
+		 boost::lambda::_1);
 
 #ifdef DEBUG //  only in debug builds
 	addCommand
