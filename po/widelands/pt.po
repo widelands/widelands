@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-04 16:52+0100\n"
-"PO-Revision-Date: 2010-11-04 15:56+0000\n"
+"PO-Revision-Date: 2010-11-06 02:09+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-05 04:43+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/wlapplication.cc:369
@@ -324,7 +324,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1636
 msgid "Connection timeouted"
-msgstr "A tentativa de ligação expirou"
+msgstr "A tentativa de conexão expirou"
 
 #: ../../src/wlapplication.cc:1638
 msgid ""
@@ -3602,7 +3602,7 @@ msgstr "Multi-Jogador"
 
 #: ../../src/ui_fsmenu/main.cc:71
 msgid "Watch Replay"
-msgstr "Vê a Repetição"
+msgstr "Vê uma Repetição"
 
 #: ../../src/ui_fsmenu/main.cc:80
 msgid "Editor"
@@ -4035,7 +4035,7 @@ msgstr "Auto-acoplar janelas quando se sobrepuserem"
 
 #: ../../src/ui_fsmenu/options.cc:182
 msgid "Dock windows to edges"
-msgstr "Ainhar as janelas nos limites do ecrã"
+msgstr "Alinhar as janelas nos limites do ecrã"
 
 #: ../../src/ui_fsmenu/options.cc:187
 msgid "Save game automatically every"
@@ -4051,7 +4051,7 @@ msgstr "Desligado"
 
 #: ../../src/ui_fsmenu/options.cc:293
 msgid "Try system language"
-msgstr "Tenta língua do sistema"
+msgstr "Usar o idioma do Sistema"
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "x"
@@ -4093,7 +4093,7 @@ msgstr "Remover Syncstream dumps ao iniciar"
 
 #: ../../src/ui_fsmenu/options.cc:473
 msgid "OpenGL rendering *Highly experimental!*"
-msgstr "Renderização OpenGL *Muito xperimental !*"
+msgstr "Renderização OpenGL *Muito Experimental !*"
 
 #: ../../src/ui_fsmenu/options.cc:478
 msgid "Show in game chat with transparent background"
@@ -4690,11 +4690,11 @@ msgstr "Inverter selecção"
 
 #: ../../src/wui/game_message_menu.h:119 ../../src/wui/game_message_menu.h:152
 msgid "Archive selected messages"
-msgstr "Arquiva mensagens seleccionadas"
+msgstr "Arquivar mensagens seleccionadas"
 
 #: ../../src/wui/game_message_menu.h:130 ../../src/wui/game_message_menu.h:153
 msgid "Show Archive"
-msgstr "Mostrar Arquivo"
+msgstr "Arquivo"
 
 #: ../../src/wui/game_message_menu.h:139
 msgid "Message Menu: Archive"
@@ -4706,7 +4706,7 @@ msgstr "Restaurar as mensagens selecionadas"
 
 #: ../../src/wui/game_message_menu.h:144
 msgid "Show Inbox"
-msgstr "Mostrar caixa de entrada"
+msgstr "Correio"
 
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"
@@ -4780,3 +4780,44 @@ msgstr "nenhuma descrição definida"
 #, c-format
 #~ msgid "Mountains: %i %%"
 #~ msgstr "Montanhas: %i %%"
+
+#~ msgid ""
+#~ "Available host commands are:<br>/help  -  Shows this help<br>/announce <msg> "
+#~ " -  Send a chatmessage as announcement (system chat)<br>/warn <name> "
+#~ "<reason>  -  Warn the user <name> because of <reason><br>/kick <name> "
+#~ "<reason>  -  Kick the user <name> because of <reason><br>/forcePause         "
+#~ "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
+#~ "to normal speed."
+#~ msgstr ""
+#~ "Os comando de anfitrião são:<br>/help                -  Mostra esta "
+#~ "ajuda<br>/announce <msg>      -  Envia uma mensagem como um anúncio (chat de "
+#~ "sistema)<br>/warn <nome> <causa> -  Avisar o utilizador <nome> por causa de "
+#~ "<causa><br>/kick <nome> <causa> -  Expulsar o utilizador <nome> por causa de "
+#~ "<causa><br>/forcePause          -  Forçar a pausa do "
+#~ "jogo.<br>/endForcedPause      -  Coloca de novos o jogo à velocidade normal."
+
+#~ msgid "Reset target quantity to default value"
+#~ msgstr "Colocar as quantidades-alvo nos valores predefinidos"
+
+#~ msgid "Ware type target quantities"
+#~ msgstr "Quantidade-alvo de cada tipo de mercadoria"
+
+#~ msgid "Worker type target quantities"
+#~ msgstr "Quantidade-alvo de cada tipo de trabalhador"
+
+#~ msgid "Help "
+#~ msgstr "Ajuda "
+
+#~ msgid "WARNING!!! Host selected the file \""
+#~ msgstr "AVISO !!! O Anfitrião selecionou o ficheiro \""
+
+#~ msgid ""
+#~ "\" for this game, which you do not own. If the transfer of that file does "
+#~ "not start automatically, please add it manually to your filesystem."
+#~ msgstr ""
+#~ "\" para este jogo, que tu não possuis. Se a transferência do ficheiro não se "
+#~ "iniciar automaticamente, por favor adiciona-o manualmente ao teu sistema de "
+#~ "ficheiros."
+
+#~ msgid "Lobby:"
+#~ msgstr "Lóbi:"

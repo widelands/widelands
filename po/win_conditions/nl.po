@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-11-01 16:24+0000\n"
-"Last-Translator: Foppe Benedictus <Unknown>\n"
+"POT-Creation-Date: 2010-11-04 15:52+0000\n"
+"PO-Revision-Date: 2010-11-05 11:00+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-02 04:46+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
-msgid "%i trees at the moment ."
-msgstr "%i bomen op het moment."
+msgid "%i trees at the moment."
+msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:138
 msgid "%i trees."
@@ -33,7 +33,7 @@ msgstr ""
 msgid "%s has "
 msgstr "%s heeft "
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:133
+#: ../../scripting/win_conditions/03_territorial_lord.lua:138
 msgid "%s owns more than half of the maps area."
 msgstr "%s bezit meer dan de helft van het kaartgebeid."
 
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Endless Game"
 msgstr "Eindeloos Spel"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:139
+#: ../../scripting/win_conditions/03_territorial_lord.lua:144
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Behoudt het nog %i minuten om het spel te winnen."
 
@@ -81,8 +81,8 @@ msgid "Points"
 msgstr "Punten"
 
 #: ../../scripting/win_conditions/02_collectors.lua:128
-#: ../../scripting/win_conditions/03_territorial_lord.lua:144
-#: ../../scripting/win_conditions/03_territorial_lord.lua:146
+#: ../../scripting/win_conditions/03_territorial_lord.lua:149
+#: ../../scripting/win_conditions/03_territorial_lord.lua:151
 #: ../../scripting/win_conditions/04_wood_gnome.lua:88
 msgid "Status"
 msgstr "Status"
@@ -91,10 +91,10 @@ msgstr "Status"
 msgid "Status for Player %i<br>"
 msgstr "Status voor speler %i<br>"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:117
-#: ../../scripting/win_conditions/03_territorial_lord.lua:120
-#: ../../scripting/win_conditions/03_territorial_lord.lua:142
-#: ../../scripting/win_conditions/03_territorial_lord.lua:171
+#: ../../scripting/win_conditions/03_territorial_lord.lua:122
+#: ../../scripting/win_conditions/03_territorial_lord.lua:125
+#: ../../scripting/win_conditions/03_territorial_lord.lua:147
+#: ../../scripting/win_conditions/03_territorial_lord.lua:176
 msgid "Team %i"
 msgstr "Team %i"
 
@@ -137,7 +137,7 @@ msgstr ""
 #: ../../scripting/win_conditions/00_endless_game.lua:24
 #: ../../scripting/win_conditions/01_defeat_all.lua:24
 #: ../../scripting/win_conditions/02_collectors.lua:179
-#: ../../scripting/win_conditions/03_territorial_lord.lua:154
+#: ../../scripting/win_conditions/03_territorial_lord.lua:159
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
 msgid "You are defeated!"
 msgstr "Je bent verslagen!"
@@ -147,7 +147,7 @@ msgid "You are the winner of this game!"
 msgstr "Je bent de winnaar van dit spel!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
-#: ../../scripting/win_conditions/03_territorial_lord.lua:173
+#: ../../scripting/win_conditions/03_territorial_lord.lua:178
 msgid "You are the winner!"
 msgstr "Je bent de winnaar!"
 
@@ -166,7 +166,7 @@ msgstr "Je hebt dit spel verloren!"
 #: ../../scripting/win_conditions/00_endless_game.lua:25
 #: ../../scripting/win_conditions/01_defeat_all.lua:25
 #: ../../scripting/win_conditions/02_collectors.lua:180
-#: ../../scripting/win_conditions/03_territorial_lord.lua:155
+#: ../../scripting/win_conditions/03_territorial_lord.lua:160
 #: ../../scripting/win_conditions/04_wood_gnome.lua:95
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
@@ -179,7 +179,7 @@ msgid "You have won this game!"
 msgstr "Je hebt het spel gewonnen!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:139
-#: ../../scripting/win_conditions/03_territorial_lord.lua:175
+#: ../../scripting/win_conditions/03_territorial_lord.lua:180
 msgid "You lost"
 msgstr "Je hebt verloren"
 
@@ -187,22 +187,22 @@ msgstr "Je hebt verloren"
 msgid "You lost!"
 msgstr "Je hebt verloren!"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:137
+#: ../../scripting/win_conditions/03_territorial_lord.lua:142
 msgid "You own more than half of the maps area."
 msgstr "Je bezit meer dan de helft van het kaartgebied."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:135
+#: ../../scripting/win_conditions/03_territorial_lord.lua:140
 msgid "You still got %i minutes to prevent a victory."
 msgstr "Je hebt nog %i minuten om een overwinning te voorkomen."
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
-#: ../../scripting/win_conditions/03_territorial_lord.lua:173
+#: ../../scripting/win_conditions/03_territorial_lord.lua:178
 #: ../../scripting/win_conditions/04_wood_gnome.lua:151
 msgid "You won!"
 msgstr "Je hebt gewonnen!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:139
-#: ../../scripting/win_conditions/03_territorial_lord.lua:175
+#: ../../scripting/win_conditions/03_territorial_lord.lua:180
 msgid "You've lost this game!"
 msgstr "Je hebt dit spel verloren!"
 
@@ -253,3 +253,6 @@ msgstr "met %i bomen."
 #~ msgstr ""
 #~ "De drie stammen spelen samen tegen elkaar. Zicht wordt verleend aan alle "
 #~ "spelers die samen spelen"
+
+#~ msgid "%i trees at the moment ."
+#~ msgstr "%i bomen op het moment."

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-11-03 13:06+0000\n"
+"POT-Creation-Date: 2010-11-04 15:52+0000\n"
+"PO-Revision-Date: 2010-11-05 14:50+0000\n"
 "Last-Translator: Mateusz Micał <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-04 04:46+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -805,7 +805,7 @@ msgid ""
 "flags and carry wares from one blue flag to the other."
 msgstr ""
 "Teraz zobacz, jak budowniczy opuszcza kwaterę główną i rusza na\n"
-"plac budowy. Tragarz też zajmie pozycję między dwoma flagami\n"
+"plac budowy. Tragarz zajmie pozycję między dwoma flagami\n"
 "i będzie nosił towary między nimi."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
@@ -1167,7 +1167,7 @@ msgstr ""
 "Zaraz powiem więcej o tych symbolach. Najpierw pozwól, że pokażę\n"
 "ci jak zbudować chatę drwala i połączyć ją z drogą. Dobre miejsce\n"
 "dla drwala znajduje się zaraz obok tych drzew. Wytłumaczę ci\n"
-"jak ją zbudować, a później kliknij OK, żeby to zobaczyć."
+"jak ją zbudować kiedy klikniesz OK."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:700
 msgid ""
@@ -1325,7 +1325,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:59
 msgid "You can dismiss this box by left-clicking on the button below."
-msgstr "Teraz można zamknąć to okna poprzez naciśnięcie na przycisk poniżej."
+msgstr "Teraz można zamknąć to okno poprzez naciśnięcie przycisku poniżej."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:74
 msgid ""
