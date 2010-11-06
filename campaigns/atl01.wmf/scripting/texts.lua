@@ -624,5 +624,22 @@ plan. Our survival lays in your hand now, Ostur.]]
 }
 }
 
+scenario_won = {
+   {
+      title = _ "Jundlina is releaved",
+      body = jundlina(_"Jundlina", _ [[
+Praise Satul! Ostur, the young ship constructor did it. We have three ships -
+never have I seen sturdier ones - with enough room to carry all of us and some
+wares too. And this rescue came just in time: Lutas is about to swallow the rest
+of this island, the water rises faster by the hour. But we can make our escape
+now and start over in some country farther away... I expect a long journey, but
+we will find the land of Satul in the end. This is what I promised my people.
+And myself.]]
+      ) .. rt(h1(_ "Congratulations") .. p(_
+[[You have won this mission. Continue with the next one or keep playing for 
+as long as you like.]]
+      )),
+   },
+}
 
 

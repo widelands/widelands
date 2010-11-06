@@ -262,6 +262,41 @@ function leftover_buildings()
    end
 end
 
+function check_for_ships()
+   -- Check if the ships are done, then the mission ends successfully
+   local sea_fields = Set:new()
+   for idx,f in ipairs(map:get_field(75,80):region(12)) do
+      if f:has_movecaps_swim() then
+         sea_fields:add(f)
+      end
+   end
+
+   while true do
+      local nships = 0
+      -- Count the ships
+      for f in sea_fields:items() do
+         local bobs = f.bobs
+         if #bobs then
+            for idx, b in ipairs(bobs) do
+               if b.name == "ship" then
+                  nships = nships + 1
+               end
+            end
+         end
+      end
+      if nships >= 3 then
+         break
+      end
+      sleep(8234) 
+   end
+
+   -- Success
+   msg_boxes(scenario_won)
+   p1:reveal_scenario("atlanteans01.wmf")
+
+end
+
+
 wr = WaterRiser:new(map:get_field(92,19))
 function water_rising()
    while not let_the_water_rise do sleep(3243) end
@@ -276,7 +311,7 @@ function water_rising()
             msg_boxes(field_flooded_msg)
             add_obj(obj_build_ships)
             p1:allow_buildings{"shipyard"}
-            -- TODO: check that these are completed
+            run(check_for_ships)
          end)
       end
 
