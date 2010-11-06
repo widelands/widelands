@@ -545,7 +545,9 @@ struct ProductionProgram {
 	///    radius
 	///       Activity radius
 	struct ActConstruct : public Action {
-		ActConstruct(char * parameters, ProductionSite_Descr const &);
+		ActConstruct
+			(char * parameters, ProductionSite_Descr &,
+			 const std::string & production_program_name);
 		virtual void execute(Game &, ProductionSite &) const;
 		virtual bool get_building_work(Game& , ProductionSite& , Worker& ) const;
 		virtual void building_work_failed(Game& , ProductionSite& , Worker& ) const;

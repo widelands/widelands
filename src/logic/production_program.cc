@@ -1403,7 +1403,8 @@ void ProductionProgram::ActPlayFX::execute
 }
 
 ProductionProgram::ActConstruct::ActConstruct
-	(char * parameters, ProductionSite_Descr const &)
+	(char * parameters, ProductionSite_Descr & descr,
+	 const std::string & production_program_name)
 {
 	try {
 		std::vector<std::string> params = split_string(parameters, " ");
@@ -1414,6 +1415,12 @@ ProductionProgram::ActConstruct::ActConstruct
 		objectname = params[0];
 		workerprogram = params[1];
 		radius = stringTo<uint32_t>(params[2]);
+
+		std::set<std::string> & building_radius_infos = descr.m_workarea_info[radius];
+		std::string description = descr.name() + ' ' + production_program_name;
+		description += " construct ";
+		description += objectname;
+		building_radius_infos.insert(description);
 	} catch (const _wexception & e) {
 		throw game_data_error("construct: %s", e.what());
 	}
@@ -1576,7 +1583,7 @@ ProductionProgram::ProductionProgram
 		else if (not strcmp(v->get_name(), "playFX"))
 			action = new ActPlayFX (v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "construct"))
-			action = new ActConstruct (v->get_string(), *building);
+			action = new ActConstruct (v->get_string(), *building, _name);
 		else
 			throw game_data_error
 				(_("unknown command type \"%s\""), v->get_name());
