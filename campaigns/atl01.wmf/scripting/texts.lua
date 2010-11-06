@@ -335,11 +335,9 @@ food_story_message = {
 {
    title = _ "Jundlina is satisfied",
    body = jundlina("Jundlina's Memoirs", _
-[[Our build infrastructure is done and I spend some days making sure that
-they work well together. Now only spider cloth production is missing in our
-arsenal, we must not forget about this in the future. But there seem to be more
-pressing matters. I called Culionder before me, my personal cook to get his
-help with sorting some things out.]]
+[[Our build infrastructure is done and I spent some days making sure that they
+work well together. Now, there are other pressing matters. I called Colionder
+before me, my personal cook to get his help with sorting some things out.]]
    )
 },
 {
@@ -619,7 +617,11 @@ but I think, it could work]]
    title = _ "Jundlina replies",
    body = jundlina(_ [[
 Your red hair is a signal from the fire god. I will trust you and support your
-plan. Our survival lays in your hand now, Ostur.]]
+plan. Our survival lays in your hand now, Ostur.
+<br><br>Swift now, we need a house for Ostur next to the lake and we need
+planks, trunks and spidercloth for the construction there. Forget about
+everything else, we need those wares on top of the mountain before our
+warehouses are all swallowed by the sea.]]
    ) .. new_objectives(obj_build_ships)
 }
 }

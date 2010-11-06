@@ -264,17 +264,17 @@ end
 
 function check_for_ships()
    -- Check if the ships are done, then the mission ends successfully
-   local sea_fields = Set:new()
+   local lake_fields = Set:new()
    for idx,f in ipairs(map:get_field(75,80):region(12)) do
       if f:has_movecaps_swim() then
-         sea_fields:add(f)
+         lake_fields:add(f)
       end
    end
 
    while true do
       local nships = 0
       -- Count the ships
-      for f in sea_fields:items() do
+      for f in lake_fields:items() do
          local bobs = f.bobs
          if #bobs then
             for idx, b in ipairs(bobs) do
