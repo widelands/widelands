@@ -507,7 +507,12 @@ void Immovable::draw
 
 void Immovable::draw_construction(const Editor_Game_Base& game, RenderTarget& dst, const Point pos)
 {
-	const int32_t steptime = 5000;
+	const ImmovableProgram::ActConstruction * constructionact = 0;
+	if (m_program_ptr < m_program->size())
+		constructionact = dynamic_cast<const ImmovableProgram::ActConstruction *>
+			(&(*m_program)[m_program_ptr]);
+
+	const int32_t steptime = constructionact ? constructionact->buildtime() : 5000;
 	uint32_t total = m_anim_construction_total * steptime;
 	uint32_t done = 0;
 
@@ -1115,10 +1120,11 @@ ImmovableProgram::ActConstruction::ActConstruction
 
 		std::vector<std::string> params = split_string(parameters, " ");
 
-		if (params.size() != 2)
-			throw game_data_error("usage: animation-name decaytime");
+		if (params.size() != 3)
+			throw game_data_error("usage: animation-name buildtime decaytime");
 
-		m_decaytime = atoi(params[1].c_str());
+		m_buildtime = atoi(params[1].c_str());
+		m_decaytime = atoi(params[2].c_str());
 
 		std::string animation_name = params[0];
 		if (descr.is_animation_known(animation_name))
@@ -1177,7 +1183,15 @@ void ImmovableProgram::ActConstruction::execute(Game & g, Immovable & imm) const
 		imm.start_animation(g, m_animid);
 		imm.m_anim_construction_total = imm.descr().buildcost().total();
 	} else {
-		// Decay timeout
+		// Perhaps we are called due to the construction timeout of the last construction step
+		Buildcost remaining;
+		imm.construct_remaining_buildcost(g, &remaining);
+		if (remaining.empty()) {
+			imm.program_step(g);
+			return;
+		}
+
+		// Otherwise, this is a decay timeout
 		uint32_t totaldelivered = 0;
 		for (Buildcost::const_iterator it = d->delivered.begin(); it != d->delivered.end(); ++it)
 			totaldelivered += it->second;
@@ -1252,11 +1266,16 @@ bool Immovable::construct_ware_item(Game & game, Ware_Index index)
 
 	Buildcost remaining;
 	construct_remaining_buildcost(game, &remaining);
+
+	const ImmovableProgram::ActConstruction * act =
+		dynamic_cast<const ImmovableProgram::ActConstruction *>(&(*m_program)[m_program_ptr]);
+	assert(act != 0);
+
 	if (remaining.empty()) {
-		program_step(game);
+		// Wait for the last building animation to finish.
+		m_program_step = schedule_act(game, act->buildtime());
 	} else {
-		if (upcast(const ImmovableProgram::ActConstruction, act, &(*m_program)[m_program_ptr]))
-			m_program_step = schedule_act(game, act->decaytime());
+		m_program_step = schedule_act(game, act->decaytime());
 	}
 
 	return true;

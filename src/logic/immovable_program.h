@@ -149,10 +149,12 @@ struct ImmovableProgram {
 	 * Puts the immovable into construction mode.
 	 *
 	 * Parameter syntax:
-	 *    parameters ::= animation decay-time
+	 *    parameters ::= animation build-time decay-time
 	 * Parameter semantics:
 	 *    animation:
 	 *       The basic animation to be displayed during construction.
+	 *    build-time:
+	 *       Time for a single building step.
 	 *    decay-time:
 	 *       Time until construction decays one step if no progress has been made.
 	 */
@@ -160,10 +162,12 @@ struct ImmovableProgram {
 		ActConstruction(char * parameters, Immovable_Descr &, std::string const & directory, Profile &);
 		virtual void execute(Game &, Immovable &) const;
 
+		Duration buildtime() const {return m_buildtime;}
 		Duration decaytime() const {return m_decaytime;}
 
 	private:
 		uint32_t m_animid;
+		Duration m_buildtime;
 		Duration m_decaytime;
 	};
 

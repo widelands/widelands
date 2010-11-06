@@ -8,7 +8,7 @@ trunk=2
 spidercloth=4
 
 [program]
-construction=idle 210000
+construction=idle 5000 210000
 transform=bob tribe:ship
 
 [idle]
