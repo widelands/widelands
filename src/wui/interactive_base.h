@@ -73,7 +73,7 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	bool get_sel_freeze() const {return m_sel.freeze;}
 
 	bool buildhelp();
-	void show_buildhelp(bool const t);
+	void show_buildhelp(bool t);
 	void toggle_buildhelp ();
 
 	/**
@@ -158,7 +158,7 @@ private:
 protected:
 	void toggle_minimap();
 	void hide_minimap();
-	UI::UniqueWindow::Registry &minimap_registry();
+	UI::UniqueWindow::Registry & minimap_registry();
 
 	void mainview_move(int32_t x, int32_t y);
 	void minimap_warp(int32_t x, int32_t y);

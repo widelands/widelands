@@ -30,7 +30,7 @@
 
 #include "logic/roadtype.h"
 
-#include "graphic/render/surface_sdl.h"
+#include "surface_sdl.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 

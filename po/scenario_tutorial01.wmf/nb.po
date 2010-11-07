@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-09-25 10:46+0000\n"
+"PO-Revision-Date: 2010-11-03 19:07+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-26 04:34+0000\n"
+"X-Launchpad-Export-Date: 2010-11-04 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -73,10 +73,12 @@ msgid ""
 "Archive all messages, including this one, that you currently have in your\n"
 " inbox."
 msgstr ""
+"Arkiver alle meldinger, inkludert denne, som du har i innboksen\n"
+" din."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:413
 msgid "Archive our inbox messages"
-msgstr ""
+msgstr "Arkivere meldingene i innboksen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:484
 msgid ""
@@ -95,7 +97,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
-msgstr ""
+msgstr "Angrip:"
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
@@ -531,7 +533,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:460
 msgid "Message arrived!"
-msgstr ""
+msgstr "Melding mottatt!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
 msgid "Messages"
@@ -659,7 +661,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:238
 msgid "Onward to the quarry"
-msgstr ""
+msgstr "Fremad til steinbruddet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:225
 msgid "Other ways to move the view"
@@ -704,7 +706,7 @@ msgstr "Soldater og krigføring"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:199
 msgid "Some stones were found"
-msgstr ""
+msgstr "Noen steiner ble funnet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:202
 msgid ""
@@ -898,7 +900,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/elemental:7
 msgid "Tutorial01"
-msgstr ""
+msgstr "Innføring01"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:529
 msgid "Waiting for the geologist"
@@ -1060,7 +1062,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:714
 msgid "exit game button."
-msgstr ""
+msgstr "\"Avslutt spill\"-knappen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:586
 msgid ""
@@ -1080,6 +1082,8 @@ msgid ""
 "options menu button on the very left at the bottom of the screen.\n"
 "Then click the"
 msgstr ""
+"knappen \"Innstillinger\" helt til venstre nederst på skjermen.\n"
+"Klikk deretter"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid "the abort symbol."

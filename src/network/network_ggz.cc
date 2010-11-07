@@ -106,17 +106,19 @@ bool NetGGZ::connect()
 	log("GGZ ## connection fd %i\n", fd);
 	while (ggzmod_get_state(mod) != GGZMOD_STATE_PLAYING) {
 		// Prevent busy looping by waiting for data, abort connect if select fails
-		if (wait_for_ggzmod_data(ggzmod_get_fd(mod), 1,0) < 0)
+		if (wait_for_ggzmod_data(ggzmod_get_fd(mod), 1, 0) < 0)
 		{
 			log("GGZ ## select failed during connect.\n");
 			return false;
 		}
+
 		// make sure all incoming data is processed before continuing
 		while (data_is_pending(ggzmod_get_fd(mod)))
 			if (ggzmod_dispatch(mod) < 0) break;
 		if (usedcore())
 			datacore();
 	}
+
 	// Hosting a ggz game on windows requires more processing.
 	ggzmod_dispatch(mod);
 	if (usedcore())
@@ -406,15 +408,16 @@ int NetGGZ::data_is_pending(int fd) const
 
 
 /// Check for incoming data during connecting to meta server.
-/// Check for modfd given as argument and all sockets that are used in 
+/// Check for modfd given as argument and all sockets that are used in
 /// datacore.
-/// Fdset will be reinitialized on every round because modfd may change during 
+/// Fdset will be reinitialized on every round because modfd may change during
 /// processing.
 /// \note The FD_SET macro from glibc uses old-style cast. We can not fix this
 /// ourselves, so we temporarily turn the error into a warning. It is turned
 /// back into an error after this function.
 #pragma GCC diagnostic warning "-Wold-style-cast"
-int NetGGZ::wait_for_ggzmod_data(int modfd, long timeout_sec, long timeout_usec) const
+int NetGGZ::wait_for_ggzmod_data
+	(int modfd, long timeout_sec, long timeout_usec) const
 {
 
 	fd_set read_fd_set;
@@ -439,9 +442,9 @@ int NetGGZ::wait_for_ggzmod_data(int modfd, long timeout_sec, long timeout_usec)
 
 	container_iterate_const(std::vector<int>, fdlist, it)
 	{
-		if (*it< 0) continue;
+		if (*it < 0) continue;
 		FD_SET(*it, &read_fd_set);
-		if (*it>maxfd) maxfd = *it;
+		if (*it > maxfd) maxfd = *it;
 	}
 
 	if (maxfd>0)
@@ -463,7 +466,7 @@ void NetGGZ::datacore()
 	if (ggzcore_server_data_is_pending(ggzserver))
 		ggzcore_server_read_data(ggzserver, ggzcore_server_get_fd(ggzserver));
 
-	if (channelfd != -1 && 
+	if (channelfd != -1 &&
 		data_is_pending(ggzcore_server_get_channel(ggzserver)))
 		ggzcore_server_read_data
 			(ggzserver, ggzcore_server_get_channel(ggzserver));

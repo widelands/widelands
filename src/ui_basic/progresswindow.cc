@@ -101,12 +101,6 @@ void ProgressWindow::draw_background
 		m_yres = yres;
 	}
 
-	/*const PictureID pic_tile =
-		g_gr->get_picture(PicMod_Menu, "pics/progress.png");
-	if (pic_tile != g_gr->get_no_picture()) {
-		rt.tile(wnd_rect, pic_tile, Point(0, 0));
-		g_gr->update_fullscreen(); */
-
 	if (g_gr->caps().resize_surfaces and not g_gr->caps().blit_resized)
 		rt.blit
 			(Point(0, 0), m_background_pic);

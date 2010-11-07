@@ -17,7 +17,6 @@
  *
  */
 
-#include "config.h"
 #include "graphic.h"
 
 #include "build_info.h"
@@ -44,6 +43,7 @@
 
 #include "ui_basic/progresswindow.h"
 
+#include <config.h>
 
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
@@ -155,10 +155,9 @@ Graphic::Graphic
 	m_caps.blit_resized = false;
 
 #ifdef USE_OPENGL
-	if (0 != (sdlsurface->flags & SDL_OPENGL))
-	{
-		// We have successful opened an opengl screen. Print some informaion about
-		// opengl and set the rendering capabilities
+	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
+		//  We have successful opened an opengl screen. Print some information
+		//  about opengl and set the rendering capabilities.
 		log ("Graphics: OpenGL: OpenGL enabled\n");
 		g_opengl = true;
 
@@ -441,9 +440,7 @@ void Graphic::flush_animations() {
 }
 
 
-Surface & Graphic::load_image
-(const std::string & fname, bool alpha)
-{
+Surface & Graphic::load_image(std::string const & fname, bool const alpha) {
 	//log("Graphic::LoadImage(\"%s\")\n", fname.c_str());
 	FileRead fr;
 	SDL_Surface * sdlsurf;
@@ -708,8 +705,8 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 		uint32_t surf_h = surf.get_h();
 		uint32_t row_size = 4 * surf_w;
 
-		png_bytep rowb = NULL;
-		png_bytep rowp = NULL;
+		png_bytep rowb = 0;
+		png_bytep rowp = 0;
 
 		//Write each row
 		SDL_PixelFormat * fmt;
@@ -727,7 +724,7 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 #ifdef USE_OPENGL
 		else if (oglsurf) {
 			oglsurf->lock();
-			fmt = NULL;
+			fmt = 0;
 		}
 #endif
 		else
@@ -925,23 +922,14 @@ void Graphic::free_picture_surface(const PictureID & picid) {
 			 picid->module, picid->fname);
 		return;
 	}
-	assert
-		(picid->module == PicMod_Font
-		 ||
-		 picid->module == PicSurface);
+	assert(picid->module == PicMod_Font || picid->module == PicSurface);
 
-	if (picid->surface) {
-		delete picid->surface;
-		picid->surface = 0;
-	}
-	if (picid->rendertarget) {
-		delete picid->rendertarget;
-		picid->rendertarget = 0;
-	}
-	if (picid->fname) {
-		delete picid->fname;
-		picid->fname = 0;
-	}
+	delete picid->surface;
+	picid->surface = 0;
+	delete picid->rendertarget;
+	picid->rendertarget = 0;
+	delete picid->fname;
+	picid->fname = 0;
 
 	container_iterate(Picturemap, m_picturemap[picid->module], it)
 		if (it.current->second == picid) {
@@ -964,7 +952,7 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid) {
 		upcast(SurfaceOpenGL, gl_src, get_picture_surface(picid));
 #endif
 		upcast(SurfaceSDL, sdl_s, &s);
-		SDL_PixelFormat const * format = NULL;
+		SDL_PixelFormat const * format = 0;
 		if (sdl_s)
 			format = &(sdl_s->format());
 		uint32_t const w = s.get_w(), h = s.get_h();
@@ -1010,9 +998,10 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid) {
 				} else
 #endif
 					sdl_s->set_pixel
-						(x, y, SDL_MapRGBA
-							(const_cast<SDL_PixelFormat *>(format),
-					 	 gray, gray, gray, a));
+						(x, y,
+						 SDL_MapRGBA
+						 	(const_cast<SDL_PixelFormat *>(format),
+						 	 gray, gray, gray, a));
 
 			}
 		s.unlock();

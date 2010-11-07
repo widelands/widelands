@@ -1,0 +1,271 @@
+# Vietnamese translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-11-04 01:02+0000\n"
+"Last-Translator: Nguyen Quang Chien <Unknown>\n"
+"Language-Team: Vietnamese <vi@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-11-04 04:46+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../worlds/blackland/conf:45
+msgid "Aspen"
+msgstr ""
+
+#: ../../worlds/blackland/conf:46
+msgid "Aspen medium"
+msgstr ""
+
+#: ../../worlds/blackland/conf:47
+msgid "Aspen small"
+msgstr ""
+
+#: ../../worlds/blackland/conf:48
+msgid "Aspen tiny"
+msgstr ""
+
+#: ../../worlds/blackland/conf:65
+msgid "Beech"
+msgstr ""
+
+#: ../../worlds/blackland/conf:66
+msgid "Beech medium"
+msgstr ""
+
+#: ../../worlds/blackland/conf:67
+msgid "Beech small"
+msgstr ""
+
+#: ../../worlds/blackland/conf:68
+msgid "Beech tiny"
+msgstr ""
+
+#: ../../worlds/blackland/conf:61
+msgid "Birch"
+msgstr ""
+
+#: ../../worlds/blackland/conf:62
+msgid "Birch medium"
+msgstr ""
+
+#: ../../worlds/blackland/conf:63
+msgid "Birch small"
+msgstr ""
+
+#: ../../worlds/blackland/conf:64
+msgid "Birch tiny"
+msgstr ""
+
+#: ../../worlds/blackland/conf:3
+msgid "Blackland"
+msgstr ""
+
+#: ../../worlds/blackland/conf:79
+msgid "Bunny"
+msgstr "Thỏ"
+
+#: ../../worlds/blackland/conf:7
+#: ../../worlds/blackland/conf:8
+#: ../../worlds/blackland/conf:9
+#: ../../worlds/blackland/conf:10
+#: ../../worlds/blackland/conf:11
+msgid "Bush"
+msgstr "Bụi cây"
+
+#: ../../worlds/blackland/conf:12
+#: ../../worlds/blackland/conf:13
+msgid "Cactus"
+msgstr "Xương rồng"
+
+#: ../../worlds/blackland/resconf:4
+msgid "Coal"
+msgstr "Than"
+
+#: ../../worlds/blackland/conf:14
+#: ../../worlds/blackland/conf:15
+#: ../../worlds/blackland/conf:16
+#: ../../worlds/blackland/conf:17
+msgid "Dead Tree"
+msgstr "Cây khô héo"
+
+#: ../../worlds/blackland/conf:80
+msgid "Deer"
+msgstr "Hươu nai"
+
+#: ../../worlds/blackland/conf:81
+msgid "Duck"
+msgstr "Vịt"
+
+#: ../../worlds/blackland/resconf:41
+msgid "Fish"
+msgstr "Cá"
+
+#: ../../worlds/blackland/conf:82
+msgid "Fox"
+msgstr "Cáo"
+
+#: ../../worlds/blackland/resconf:12
+msgid "Gold"
+msgstr "Vàng"
+
+#: ../../worlds/blackland/resconf:28
+msgid "Granite"
+msgstr "Than chì"
+
+#: ../../worlds/blackland/conf:18
+#: ../../worlds/blackland/conf:19
+#: ../../worlds/blackland/conf:20
+msgid "Grass"
+msgstr ""
+
+#: ../../worlds/blackland/resconf:20
+msgid "Iron"
+msgstr ""
+
+#: ../../worlds/blackland/conf:69
+msgid "Larch"
+msgstr ""
+
+#: ../../worlds/blackland/conf:70
+msgid "Larch medium"
+msgstr ""
+
+#: ../../worlds/blackland/conf:71
+msgid "Larch small"
+msgstr ""
+
+#: ../../worlds/blackland/conf:72
+msgid "Larch tiny"
+msgstr ""
+
+#: ../../worlds/blackland/conf:57
+msgid "Maple"
+msgstr "Cây phong"
+
+#: ../../worlds/blackland/conf:58
+msgid "Maple medium"
+msgstr "Cây phong to vừa"
+
+#: ../../worlds/blackland/conf:59
+msgid "Maple small"
+msgstr "Cây phong nhỏ"
+
+#: ../../worlds/blackland/conf:60
+msgid "Maple tiny"
+msgstr "Cây phong rất nhỏ"
+
+#: ../../worlds/blackland/conf:21
+#: ../../worlds/blackland/conf:22
+msgid "Mushroom"
+msgstr ""
+
+#: ../../worlds/blackland/conf:49
+msgid "Oak"
+msgstr "Cây sồi"
+
+#: ../../worlds/blackland/conf:50
+msgid "Oak medium"
+msgstr "Cây sồi to vừa"
+
+#: ../../worlds/blackland/conf:51
+msgid "Oak small"
+msgstr "Cây sồi nhỏ"
+
+#: ../../worlds/blackland/conf:52
+msgid "Oak tiny"
+msgstr "Cây sồi rất nhỏ"
+
+#: ../../worlds/blackland/conf:23
+#: ../../worlds/blackland/conf:24
+#: ../../worlds/blackland/conf:25
+#: ../../worlds/blackland/conf:26
+#: ../../worlds/blackland/conf:27
+#: ../../worlds/blackland/conf:28
+msgid "Pebble"
+msgstr ""
+
+#: ../../worlds/blackland/conf:83
+msgid "Reindeer"
+msgstr "Tuần lộc"
+
+#: ../../worlds/blackland/conf:73
+msgid "Rowan"
+msgstr ""
+
+#: ../../worlds/blackland/conf:74
+msgid "Rowan medium"
+msgstr ""
+
+#: ../../worlds/blackland/conf:75
+msgid "Rowan small"
+msgstr ""
+
+#: ../../worlds/blackland/conf:76
+msgid "Rowan tiny"
+msgstr ""
+
+#: ../../worlds/blackland/conf:84
+msgid "Sheep"
+msgstr ""
+
+#: ../../worlds/blackland/conf:29
+#: ../../worlds/blackland/conf:30
+#: ../../worlds/blackland/conf:31
+msgid "Skeleton"
+msgstr ""
+
+#: ../../worlds/blackland/conf:53
+msgid "Spruce"
+msgstr "Cây vân sam"
+
+#: ../../worlds/blackland/conf:54
+msgid "Spruce medium"
+msgstr "Cây vân sam cỡ vừa"
+
+#: ../../worlds/blackland/conf:55
+msgid "Spruce small"
+msgstr "Cây vân sam nhỏ"
+
+#: ../../worlds/blackland/conf:56
+msgid "Spruce tiny"
+msgstr "Cây vân sam rất nhỏ"
+
+#: ../../worlds/blackland/conf:32
+#: ../../worlds/blackland/conf:33
+#: ../../worlds/blackland/conf:34
+#: ../../worlds/blackland/conf:35
+#: ../../worlds/blackland/conf:36
+#: ../../worlds/blackland/conf:37
+#: ../../worlds/blackland/conf:38
+msgid "Standing Stones"
+msgstr ""
+
+#: ../../worlds/blackland/conf:39
+#: ../../worlds/blackland/conf:40
+#: ../../worlds/blackland/conf:41
+#: ../../worlds/blackland/conf:42
+#: ../../worlds/blackland/conf:43
+#: ../../worlds/blackland/conf:44
+msgid "Stones"
+msgstr ""
+
+#: ../../worlds/blackland/conf:2
+msgid "The Widelands Development Team"
+msgstr ""
+
+#: ../../worlds/blackland/conf:4
+msgid "These are the grey, horrible and dangerous blacklands"
+msgstr ""
+
+#: ../../worlds/blackland/resconf:36
+msgid "Water"
+msgstr ""

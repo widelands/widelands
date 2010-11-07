@@ -42,7 +42,7 @@ using Widelands::SoldierControl;
  * Iconic representation of soldiers, including their levels and current HP.
  */
 struct SoldierPanel : UI::Panel {
-	typedef boost::function<void (const Soldier*)> SoldierFn;
+	typedef boost::function<void (const Soldier *)> SoldierFn;
 
 	SoldierPanel(UI::Panel & parent, Widelands::Editor_Game_Base & egbase, Widelands::Building & building);
 
@@ -51,8 +51,8 @@ struct SoldierPanel : UI::Panel {
 	virtual void think();
 	virtual void draw(RenderTarget &);
 
-	void set_mouseover(const SoldierFn& fn);
-	void set_click(const SoldierFn& fn);
+	void set_mouseover(const SoldierFn & fn);
+	void set_click(const SoldierFn & fn);
 
 protected:
 	virtual void handle_mousein(bool inside);
@@ -91,16 +91,19 @@ private:
 	static const uint32_t IconBorder = 2;
 };
 
-SoldierPanel::SoldierPanel(UI::Panel & parent, Widelands::Editor_Game_Base & egbase, Widelands::Building & building)
+SoldierPanel::SoldierPanel
+	(UI::Panel & parent,
+	 Widelands::Editor_Game_Base & egbase,
+	 Widelands::Building & building)
 :
 Panel(&parent, 0, 0, 0, 0),
 m_egbase(egbase),
-m_soldiers(*dynamic_cast<SoldierControl*>(&building)),
+m_soldiers(*dynamic_cast<SoldierControl *>(&building)),
 m_last_animate_time(0)
 {
 	Soldier::calc_info_icon_size(building.tribe(), m_icon_width, m_icon_height);
-	m_icon_width += 2*IconBorder;
-	m_icon_height += 2*IconBorder;
+	m_icon_width += 2 * IconBorder;
+	m_icon_height += 2 * IconBorder;
 
 	uint32_t maxcapacity = m_soldiers.maxSoldierCapacity();
 	if (maxcapacity <= MaxColumns) {
@@ -116,10 +119,10 @@ m_last_animate_time(0)
 	set_think(true);
 
 	// Initialize the icons
-	std::vector<Soldier*> soldierlist = m_soldiers.presentSoldiers();
+	std::vector<Soldier *> soldierlist = m_soldiers.presentSoldiers();
 	uint32_t row = 0;
 	uint32_t col = 0;
-	container_iterate_const(std::vector<Soldier*>, soldierlist, sit) {
+	container_iterate_const(std::vector<Soldier *>, soldierlist, sit) {
 		Icon icon;
 		icon.soldier = *sit.current;
 		icon.row = row;
@@ -137,7 +140,7 @@ m_last_animate_time(0)
 /**
  * Set the callback function that indicates which soldier the mouse is over.
  */
-void SoldierPanel::set_mouseover(const SoldierPanel::SoldierFn& fn)
+void SoldierPanel::set_mouseover(const SoldierPanel::SoldierFn & fn)
 {
 	m_mouseover_fn = fn;
 }
@@ -145,7 +148,7 @@ void SoldierPanel::set_mouseover(const SoldierPanel::SoldierFn& fn)
 /**
  * Set the callback function that is called when a soldier is clicked.
  */
-void SoldierPanel::set_click(const SoldierPanel::SoldierFn& fn)
+void SoldierPanel::set_click(const SoldierPanel::SoldierFn & fn)
 {
 	m_click_fn = fn;
 }
@@ -155,7 +158,7 @@ void SoldierPanel::think()
 	uint32_t capacity = m_soldiers.soldierCapacity();
 
 	// Update soldier list and target row/col:
-	std::vector<Soldier*> soldierlist = m_soldiers.presentSoldiers();
+	std::vector<Soldier *> soldierlist = m_soldiers.presentSoldiers();
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(m_rows);
 
@@ -164,7 +167,7 @@ void SoldierPanel::think()
 		Icon & icon = m_icons[idx];
 		Soldier * soldier = icon.soldier.get(egbase());
 		if (soldier) {
-			std::vector<Soldier*>::iterator it = std::find(soldierlist.begin(), soldierlist.end(), soldier);
+			std::vector<Soldier *>::iterator it = std::find(soldierlist.begin(), soldierlist.end(), soldier);
 			if (it != soldierlist.end())
 				soldierlist.erase(it);
 			else
@@ -266,7 +269,7 @@ Point SoldierPanel::calc_pos(uint32_t row, uint32_t col) const
 /**
  * Return the soldier (if any) at the given coordinates.
  */
-const Soldier* SoldierPanel::find_soldier(int32_t x, int32_t y) const
+const Soldier * SoldierPanel::find_soldier(int32_t x, int32_t y) const
 {
 	container_iterate_const(std::vector<Icon>, m_icons, icon_it) {
 		Rect r(icon_it.current->pos, m_icon_width, m_icon_height);
@@ -352,7 +355,7 @@ SoldierControl & SoldierList::soldiers() const
 	return *dynamic_cast<SoldierControl *>(&m_building);
 }
 
-void SoldierList::mouseover(const Soldier* soldier)
+void SoldierList::mouseover(const Soldier * soldier)
 {
 	if (!soldier) {
 		m_infotext.set_text(_("Click soldier to send away"));
@@ -368,7 +371,7 @@ void SoldierList::mouseover(const Soldier* soldier)
 	uint32_t const  el = soldier->get_evade_level      ();
 	uint32_t const mel = soldier->get_max_evade_level  ();
 
-	char buffer[5*30];
+	char buffer[5 * 30];
 	snprintf
 		(buffer, sizeof(buffer),
 		 "HP: %u/%u  AT: %u/%u  DE: %u/%u  EV: %u/%u",
@@ -376,7 +379,7 @@ void SoldierList::mouseover(const Soldier* soldier)
 	m_infotext.set_text(buffer);
 }
 
-void SoldierList::eject(const Soldier* soldier)
+void SoldierList::eject(const Soldier * soldier)
 {
 	uint32_t const capacity_min = soldiers().minSoldierCapacity();
 	bool can_act = m_igb.can_act(m_building.owner().player_number());

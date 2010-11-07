@@ -77,21 +77,27 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 		(this, "join_game",
 		 m_xres * 17 / 25, m_yres * 55 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Fullscreen_Menu_NetSetupGGZ::clicked_joingame, boost::ref(*this)),
+		 boost::bind
+			 (&Fullscreen_Menu_NetSetupGGZ::clicked_joingame,
+			  boost::ref(*this)),
 		 _("Join this game"), std::string(), false, false,
 		 m_fn, m_fs),
 	hostgame
 		(this, "host_game",
 		 m_xres * 17 / 25, m_yres * 81 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Fullscreen_Menu_NetSetupGGZ::clicked_hostgame, boost::ref(*this)),
+		 boost::bind
+			 (&Fullscreen_Menu_NetSetupGGZ::clicked_hostgame,
+			  boost::ref(*this)),
 		 _("Open a new game"), std::string(), true, false,
 		 m_fn, m_fs),
 	back
 		(this, "back",
 		 m_xres * 17 / 25, m_yres * 90 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_NetSetupGGZ::end_modal, boost::ref(*this), (int32_t)CANCEL),
+		 boost::bind
+			 (&Fullscreen_Menu_NetSetupGGZ::end_modal,
+			  boost::ref(*this), static_cast<int32_t>(CANCEL)),
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 
@@ -144,8 +150,9 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	usersonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Server"));
 	usersonline.set_column_compare
-		(0, boost::bind(&Fullscreen_Menu_NetSetupGGZ::compare_usertype,
-		 this, _1, _2));
+		(0,
+		 boost::bind
+		 	(&Fullscreen_Menu_NetSetupGGZ::compare_usertype, this, _1, _2));
 	usersonline .double_clicked.set
 		(this, &Fullscreen_Menu_NetSetupGGZ::user_doubleclicked);
 	opengames   .set_font(m_fn, m_fs);

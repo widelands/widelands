@@ -40,7 +40,8 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 		(this, "back",
 		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0),
+		 boost::bind
+			 (&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_ok
@@ -119,7 +120,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			gl.preload_game(gpdp);
 
 			m_list.add
-				 (FileSystem::FS_FilenameWoExt(pname->c_str()).c_str(), *pname);
+				(FileSystem::FS_FilenameWoExt(pname->c_str()).c_str(), *pname);
 		} catch (_wexception const &) {} //  we simply skip illegal entries
 	}
 

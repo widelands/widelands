@@ -338,10 +338,10 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				while (nrrequests--) {
 					boost::scoped_ptr<Request> req
 						(new Request
-						 (warehouse,
-						 Ware_Index::First(),
-						 &Warehouse::request_cb,
-						 Request::WORKER));
+						 	(warehouse,
+						 	 Ware_Index::First(),
+						 	 &Warehouse::request_cb,
+						 	 Request::WORKER));
 					req->Read(fr, game, mol);
 				}
 			}
@@ -480,10 +480,10 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					while (nr_requests--) {
 						pw.requests.push_back
 							(new Request
-								(warehouse,
-								Ware_Index::First(),
-								&Warehouse::request_cb,
-								Request::WORKER));
+							 	(warehouse,
+							 	 Ware_Index::First(),
+							 	 &Warehouse::request_cb,
+							 	 Request::WORKER));
 						pw.requests.back()->Read(fr, game, mol);
 					}
 				}
@@ -496,8 +496,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				//  Add to map of military influence.
 				Map const & map = game.map();
 				Area<FCoords> a
-					(map.get_fcoords(warehouse.get_position()),
-					  conquer_radius);
+					(map.get_fcoords(warehouse.get_position()), conquer_radius);
 				Field const & first_map_field = map[0];
 				Player::Field * const player_fields =
 					warehouse.owner().m_fields;
@@ -542,9 +541,9 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 				militarysite.m_soldier_request =
 					new Request
 						(militarysite,
-							Ware_Index::First(),
-							MilitarySite::request_soldier_callback,
-							Request::WORKER);
+						 Ware_Index::First(),
+						 MilitarySite::request_soldier_callback,
+						 Request::WORKER);
 				militarysite.m_soldier_request->Read(fr, game, mol);
 			}
 

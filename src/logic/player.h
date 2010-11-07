@@ -122,7 +122,7 @@ struct Player :
 
 	NodeCaps get_buildcaps(FCoords) const;
 
-	bool is_hostile(const Player & other) const;
+	bool is_hostile(Player const &) const;
 
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}

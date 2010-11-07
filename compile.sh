@@ -90,16 +90,38 @@ var_updater=0 # 0 = false
 
   # Check if directories / links already exists and create / update them if needed.
   prepare_directories_and_links () {
-    test -d build/compile || mkdir -p build/compile
-    test -d build/compile/locale || mkdir -p build/compile/locale
-    test -e locale || ln -s build/compile/locale
-    cd build/compile
+    # remove build/compile directory (this is the old location)
+    if [ -e build/compile ] ; then
+      echo " "
+      echo "  The build directory has changed"
+      echo "  from ./build/compile to ./build."
+      echo "  The old directory ./build/compile can be removed."
+      echo "  Please backup any files you might not want to lose."
+      echo "  Most users can safely say yes here."
+      echo "  Do you want to remove the directory ./build/compile? [y]es/[n]o"
+      echo " "
+      read local_var_choice
+      echo " "
+      case $local_var_choice in
+        y) echo "  -> Removing directory ./build/compile. This may take a while..."
+	   rm locale
+	   rm -r build/compile || true
+	   if [ -e build/compile ] ; then
+             echo "  -> Directory could not be removed. This is not fatal, continuing."
+	   else
+             echo "  -> Directory removed."
+	   fi ;;
+        n) echo "  -> Left the directory untouched." ;;
+        *) echo "  -> Bad choice. Please try again!" ;;
+      esac
+    fi
 
-    # do not duplicate data directories
-    # except "po" and "doc" - else some files will be changed in bzr
-    for i in maps pics tribes worlds campaigns txts ; do
-      test -L $i || ( rm -rf $i && ln -s ../../$i )
-    done
+    test -d build || mkdir -p build
+    test -d build/locale || mkdir -p build/locale
+    test -e locale || ln -s build/locale
+
+    cd build
+
     return 0
   }
 
@@ -113,18 +135,18 @@ var_updater=0 # 0 = false
     fi
 
     echo " "
-    cmake -DWL_PORTABLE=true ../.. -DCMAKE_EXE_CXX_FLAGS="${CFLAGS}" -DCMAKE_BUILD_TYPE="${var_build_type}"
+    cmake -DWL_PORTABLE=true .. -DCMAKE_EXE_CXX_FLAGS="${CFLAGS}" -DCMAKE_BUILD_TYPE="${var_build_type}"
     make ${MAKEOPTS}
     return 0
   }
 
   # Remove old and move newly compiled files
   move_built_files () {
-    rm  -f ../../VERSION || true
-    rm  -f ../../widelands || true
+    rm  -f ../VERSION || true
+    rm  -f ../widelands || true
 
-    mv VERSION ../../VERSION
-    mv src/widelands ../../widelands
+    mv VERSION ../VERSION
+    mv src/widelands ../widelands
     return 0
   }
 
@@ -159,16 +181,16 @@ var_updater=0 # 0 = false
             echo "fi"
             echo " "
             echo "bzr pull"
-            echo "cd build/compile"
+            echo "cd build"
             echo "make"
             if [ $var_build_lang -eq 1 ] ; then
               echo "make lang"
             fi
-            echo "rm  ../../VERSION || true"
-            echo "rm  ../../widelands || true"
-            echo "mv VERSION ../../VERSION"
-            echo "mv src/widelands ../../widelands"
-            echo "cd ../.."
+            echo "rm  ../VERSION || true"
+            echo "rm  ../widelands || true"
+            echo "mv VERSION ../VERSION"
+            echo "mv src/widelands ../widelands"
+            echo "cd .."
             echo " "
             echo "echo \" \""
             echo "echo \"################################################\""
@@ -200,7 +222,7 @@ if [ $var_build_lang -eq 1 ] ; then
   make lang
 fi
 move_built_files
-cd ../..
+cd ..
 update_script
 echo " "
 echo "#####################################################"

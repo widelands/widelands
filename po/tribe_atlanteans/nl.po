@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-06-06 22:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-11-01 21:23+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-11-02 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -22,7 +22,7 @@ msgstr "Een speciale tabberd voor atlantiërsoldaten."
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Advanced Shield"
-msgstr "Verbeterd Schild"
+msgstr "Verbeterd schild"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -41,11 +41,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Armoursmith"
-msgstr "Harnassensmid"
+msgstr "Harnassmid"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Armoursmithy"
-msgstr "Harnassensmid"
+msgstr "Harnassmederij"
 
 #: ../../tribes/atlanteans/conf:27
 msgid "Ashes"
@@ -181,7 +181,7 @@ msgstr "Draagt voorwerpen over je wegen."
 msgid "Castle"
 msgstr "Kasteel"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Kasteeldorp"
 
@@ -307,7 +307,7 @@ msgstr "Viskweker"
 
 #: ../../tribes/atlanteans/conf:172
 msgid "Fish Breeder's House"
-msgstr "Viskwekershuis"
+msgstr "Viskwekerij"
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
@@ -319,7 +319,7 @@ msgstr "Visser"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Fisher's House"
-msgstr "Visserswoning"
+msgstr "Vissershuis"
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Fishing Net"
@@ -398,13 +398,13 @@ msgstr "Oogst maïs"
 msgid "Headquarters"
 msgstr "Hoofdkwartier"
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Gemiddeld hoofdkwartier"
 
 #: ../../tribes/atlanteans/conf:70
 msgid "Heavy Double Trident"
-msgstr "Zware Dubbele Drietand"
+msgstr "Zware dubbele drietand"
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid "Helps to carry items at heavy used roads."
@@ -436,7 +436,7 @@ msgstr "Jager"
 
 #: ../../tribes/atlanteans/conf:177
 msgid "Hunter's House"
-msgstr "Jagerswoning"
+msgstr "Jachthuis"
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Hunting Bow"
@@ -464,7 +464,7 @@ msgstr "Lichte drietand"
 
 #: ../../tribes/atlanteans/conf:76
 msgid "Long Trident"
-msgstr "Lange Drietand"
+msgstr "Lange drietand"
 
 #: ../../tribes/atlanteans/conf:77
 msgid "Meat"
@@ -514,13 +514,17 @@ msgstr "Delf steen"
 msgid "Miner"
 msgstr "Mijnwerker"
 
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+msgid "Not enough space"
+msgstr "Niet genoeg ruimte"
+
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
 msgstr "Voorpost"
 
 #: ../../tribes/atlanteans/conf:80
 msgid "Pick"
-msgstr "Pikhouwelen"
+msgstr "Pikhouweel"
 
 #: ../../tribes/atlanteans/pick/conf:1
 msgid ""
@@ -854,6 +858,16 @@ msgstr "Rookt vlees en vis."
 msgid "Soldier"
 msgstr "Soldaat"
 
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Sommige van je gestarte gebouwen hadden niet genoeg ruimte en \n"
+"zijn niet gebouwd. Je bent hierdoor in het nadeel: overweeg om deze map\n"
+"te herstarten in een eerlijke start positie."
+
 #: ../../tribes/atlanteans/conf:120
 msgid "Spiderbreeder"
 msgstr "Spinnenkweker"
@@ -872,15 +886,15 @@ msgstr "Spinnengaren"
 
 #: ../../tribes/atlanteans/conf:89
 msgid "Steel Shield"
-msgstr "Stalen Schild"
+msgstr "Stalen schild"
 
 #: ../../tribes/atlanteans/conf:90
 msgid "Steel Trident"
-msgstr "Stalen Drietand"
+msgstr "Stalen drietand"
 
 #: ../../tribes/atlanteans/conf:91
 msgid "Stone"
-msgstr "Ruwe steen"
+msgstr "Steen"
 
 #: ../../tribes/atlanteans/stone/conf:1
 msgid "Stone is one basic build ware type of the Atlanteans."
@@ -1074,7 +1088,7 @@ msgstr "Werktuigsmid"
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Toolsmithy"
-msgstr "Werktuigsmid"
+msgstr "Werktuigsmederij"
 
 #: ../../tribes/atlanteans/conf:143
 #: ../../tribes/atlanteans/conf:158
@@ -1225,7 +1239,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Weapon Smithy"
-msgstr "Wapensmid"
+msgstr "Wapensmederij"
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid "Weapons and Tools are made of iron."

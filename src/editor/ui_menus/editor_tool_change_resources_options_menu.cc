@@ -53,14 +53,20 @@ Editor_Tool_Change_Resources_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Tool_Change_Resources_Options_Menu::clicked_button, boost::ref(*this), Change_By_Increase)),
+		 boost::bind
+			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			 boost::ref(*this),
+			 Change_By_Increase)),
 	m_change_by_decrease
 		(this, "decr_change_by",
 		 get_inner_w() - hmargin() - width, m_change_by_increase.get_y(),
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Tool_Change_Resources_Options_Menu::clicked_button, boost::ref(*this), Change_By_Decrease)),
+		 boost::bind
+			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			 boost::ref(*this),
+			 Change_By_Decrease)),
 	m_change_by_value
 		(this,
 		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
@@ -84,13 +90,19 @@ Editor_Tool_Change_Resources_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Tool_Change_Resources_Options_Menu::clicked_button, boost::ref(*this), Set_To_Increase)),
+		 boost::bind
+			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			 boost::ref(*this),
+			 Set_To_Increase)),
 	m_set_to_decrease
 		(this, "decr_set_to",
 		 m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Tool_Change_Resources_Options_Menu::clicked_button, boost::ref(*this), Set_To_Decrease)),
+		 boost::bind
+			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			 boost::ref(*this),
+			 Set_To_Decrease)),
 	m_set_to_value
 		(this,
 		 m_change_by_value.get_x(), m_set_to_increase.get_y(),

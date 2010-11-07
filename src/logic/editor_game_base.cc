@@ -40,12 +40,10 @@
 #include "worker.h"
 #include "world.h"
 
-#include "roadtype.h"
-
 #include "economy/road.h"
 
-#include <set>
 #include <algorithm>
+#include <set>
 
 namespace Widelands {
 

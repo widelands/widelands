@@ -84,7 +84,7 @@ struct Button : public NamedPanel {
 	void handle_mousein(bool inside);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-	bool handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t);
+	bool handle_mousemove(Uint8, int32_t, int32_t, int32_t, int32_t);
 
 	// Set the permanently pressed state of the button
 	void set_perm_pressed(bool state);
@@ -100,7 +100,6 @@ protected:
 	bool        m_flat;
 	bool        m_needredraw;
 	PictureID   m_cache_pic;
-	
 
 	int32_t     m_time_nextact;
 

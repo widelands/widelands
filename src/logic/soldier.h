@@ -203,8 +203,8 @@ public:
 		(const Editor_Game_Base &, RenderTarget &, const Point) const;
 
 	static void calc_info_icon_size
-		(const Tribe_Descr & tribe, uint32_t & w, uint32_t & h);
-	void draw_info_icon(RenderTarget &, Point pt, bool anchor_below) const;
+		(Tribe_Descr const &, uint32_t & w, uint32_t & h);
+	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
 
 	//  Information function from description.
 	uint32_t get_max_hp_level     () const {

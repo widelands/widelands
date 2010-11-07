@@ -17,6 +17,7 @@
  *
  */
 
+#include "story_message_box.h"
 
 #include "constants.h"
 #include "graphic/graphic.h"
@@ -24,15 +25,16 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-#include "story_message_box.h"
-
 /**
  * The message box itself
  */
 Story_Message_Box::Story_Message_Box
 	(UI::Panel * const parent,
-	 std::string title, std::string body, std::string button_text,
-	 int32_t gposx, int32_t gposy, int32_t w, int32_t h)
+	 std::string const & title,
+	 std::string const & body,
+	 std::string const & button_text,
+	 int32_t  const gposx, int32_t  const gposy,
+	 uint32_t const w,     uint32_t const h)
 	: UI::Window(parent, "story_message_box", 0, 0, 600, 400, title.c_str())
 {
 	UI::Multiline_Textarea * m_text = 0;
@@ -64,7 +66,7 @@ Story_Message_Box::Story_Message_Box
 		(this, "ok",
 		 posx, posy, but_width, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Story_Message_Box::clicked_ok, boost::ref(*this), 0),
+		 boost::bind(&Story_Message_Box::clicked_ok, boost::ref(*this)),
 		 button_text);
 		posx += but_width;
 
@@ -81,7 +83,7 @@ Story_Message_Box::Story_Message_Box
 /**
  * Clicked
  */
-void Story_Message_Box::clicked_ok(int32_t const i) {
+void Story_Message_Box::clicked_ok() {
 	end_modal(0);
 	return;
 }

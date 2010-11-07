@@ -81,7 +81,7 @@ struct Map_Map_Object_Loader {
 	}
 
 	int32_t get_nr_unloaded_objects();
-	bool is_object_loaded(Map_Object * const obj) {return m_loaded_obj[obj];}
+	bool is_object_loaded(Map_Object & obj) {return m_loaded_obj[&obj];}
 
 	void mark_object_as_loaded(Map_Object &);
 

@@ -35,8 +35,13 @@ struct Tab_Panel;
 struct Tab : public NamedPanel {
 	friend struct Tab_Panel;
 
-	Tab(Tab_Panel * parent, uint32_t, std::string name, PictureID gpicid,
-			std::string gtooltip, Panel * gpanel);
+	Tab
+		(Tab_Panel * parent,
+		 uint32_t,
+		 std::string const & name,
+		 PictureID,
+		 std::string const & gtooltip,
+		 Panel             * gpanel);
 
 	bool active();
 	void activate();
@@ -58,8 +63,8 @@ private:
  * to the top.
  *
  * The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
- * 
-*/
+ *
+ */
 struct Tab_Panel : public Panel {
 	friend class Tab;
 
@@ -76,7 +81,7 @@ struct Tab_Panel : public Panel {
 		 Panel             * panel,
 		 std::string const & tooltip = std::string());
 
-	typedef std::vector<Tab*> TabList;
+	typedef std::vector<Tab *> TabList;
 
 	const TabList & tabs();
 	void activate(uint32_t idx);

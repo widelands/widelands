@@ -1173,7 +1173,7 @@ void Bob::Loader::load_finish()
 
 	// Care about new mapobject saving / loading - map objects don't get a task,
 	// if created in the editor, so we give them one here.
-	// See bug #537392 for more informations:
+	//  See bug #537392 for more information:
 	//   https://bugs.launchpad.net/widelands/+bug/537392
 	Bob & bob = get<Bob>();
 	if (!bob.m_stack.size() && !egbase().get_gametime())
@@ -1242,7 +1242,7 @@ void Bob::save
 			for (int dir = 1; dir <= 6; ++dir)
 				fw.CString
 					(descr().get_animation_name
-					 (state.diranims->get_animation(dir)).c_str());
+					 	(state.diranims->get_animation(dir)).c_str());
 		} else {
 			fw.Unsigned8(0);
 		}

@@ -40,7 +40,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 
-#include "config.h"
+#include <config.h>
 #ifndef HAVE_VARARRAY
 #include <climits>
 #endif
@@ -389,7 +389,8 @@ void NetClient::setPlayerNumber(uint8_t const number)
 	if (number == d->settings.playernum)
 		return;
 	// Same if the player is not selectable
-	if (number < d->settings.players.size()
+	if
+		(number < d->settings.players.size()
 		 &&
 		 (d->settings.players.at(number).state == PlayerSettings::stateClosed
 		  ||
@@ -434,7 +435,7 @@ bool NetClient::isPaused()
 	return false;
 }
 
-void NetClient::setPaused(bool const paused)
+void NetClient::setPaused(bool paused)
 {
 }
 
@@ -472,7 +473,7 @@ void NetClient::recvOneUser
 
 	d->settings.users.at(number).name     = packet.String  ();
 	d->settings.users.at(number).position = packet.Signed32();
-	if (number == d->settings.usernum) {
+	if (static_cast<int32_t>(number) == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
 		d->settings.playernum = d->settings.users.at(number).position;
 	}
@@ -639,7 +640,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 #ifdef HAVE_VARARRAY
 		char buf[size];
 #else
-		char buf[UCHAR_MAX];
+		char buf[NETFILEPARTSIZE];
+		assert(size <= NETFILEPARTSIZE);
 #endif
 		if (packet.Data(buf, size) != size)
 			log("Readproblem. Will try to go on anyways\n");

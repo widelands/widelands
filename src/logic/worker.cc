@@ -404,6 +404,15 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 						found_reserved = true;
 						list.erase(list.begin() + idx);
 					}
+					else
+					{
+						Coords const coord = imm->get_position();
+						Map_Index mapidx = map.get_index(coord, map.get_width());
+						Vision const visible = owner().vision(mapidx);
+						if (!visible) {
+							list.erase(list.begin() + idx);
+						}
+					}
 				}
 			}
 
@@ -2091,6 +2100,14 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 
 		state.ivar1 = 1; //  force return to building
 
+		if (not location) {
+			// this can happen if the flag (and the building) is destroyed while
+			// the worker leaves the building.
+			molog
+				("[fetchfromflag]: flag dissappeared - become fugitive");
+			return pop_task(game);
+		}
+
 		// The item has decided that it doesn't want to go to us after all
 		// In order to return to the warehouse, we're switching to State_DropOff
 		if
@@ -2122,8 +2139,7 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 		// scenario)
 		molog
 			("[fetchfromflag]: building dissappeared - searching for alternative");
-		pop_task(game);
-		return start_task_fugitive(game);
+		return pop_task(game);;
 	}
 
 	assert(location == &employer);

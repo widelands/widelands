@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"POT-Creation-Date: 2010-11-04 15:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -189,6 +189,11 @@ msgid ""
 "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr ""
 
+#: ../../maps/Swamp Monks.wmf/elemental:9
+msgid ""
+"It is said, that the old war monks, living in the even older swamps are the key to the control of the whole island."
+msgstr ""
+
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
 "It seems as if this magical valley was inhabited by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can your tribe live in peace with your neighbours?"
@@ -267,6 +272,11 @@ msgstr ""
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid ""
 "Swamp Island"
+msgstr ""
+
+#: ../../maps/Swamp Monks.wmf/elemental:7
+msgid ""
+"Swamp Monks"
 msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:9

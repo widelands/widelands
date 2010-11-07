@@ -175,7 +175,7 @@ void WorkerProgram::parse_breed
 
 
 /**
- * OUTDATED - SHOULD NOT BE USED ANYMORE AND DOES NOT DO ANYTHING VALUEABLE
+ * OUTDATED - SHOULD NOT BE USED ANYMORE AND DOES NOT DO ANYTHING VALUABLE
  *    just kept here for savegame compatibility for Build15 and earlier
  *
  * setdescription \<immovable name\> \<immovable name\> ...

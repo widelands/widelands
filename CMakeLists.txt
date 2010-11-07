@@ -140,7 +140,7 @@ if (WL_UNIT_TESTS)
     DEPENDS widelands;test_widelands_scripting
   )
 else (WL_UNIT_TESTS)
-  message(STATUS "Disabled unit tests")
+  message(STATUS "Disabled Unit Tests")
   find_package(Boost 1.35.0 REQUIRED)
 endif (WL_UNIT_TESTS)
 
@@ -150,7 +150,7 @@ set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${B
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
 set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall")
 set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wextra -Wsign-promo")
-set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -fdiagnostics-show-option")
+set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   include(CheckCXXCompilerFlag) #this include should be safe
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)
@@ -200,9 +200,8 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
     CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_STRICT} Compiler_strict_mode_supported)
     IF (Compiler_strict_mode_supported)
       set (WL_COMPILERFLAG_STRICT " ${PARAMETER_COMPILERFLAG_STRICT}") #the space is on purpose!
+      message(STATUS "Strict mode enabled, expect compilation errors instead of compilation warnings!")
     ENDIF (Compiler_strict_mode_supported)
-  ELSE (WL_STRICT)
-    message(STATUS "Strict mode not supported!")
   ENDIF (WL_STRICT)
 ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
@@ -233,11 +232,13 @@ if (DEFINED MSVC)
   # Automatic linking for boost requires setting lib dir and clearing Boost_LIBARIES
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
   set(Boost_LIBRARIES "")
+  include_directories(${Boost_INCLUDE_DIR})
+
 
   find_library(INTL_LIBRARY NAMES intl libintl)
 
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
   # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
   set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MT /GL" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)

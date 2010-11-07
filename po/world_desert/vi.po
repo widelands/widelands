@@ -1,0 +1,231 @@
+# Vietnamese translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-11-04 00:54+0000\n"
+"Last-Translator: Nguyen Quang Chien <Unknown>\n"
+"Language-Team: Vietnamese <vi@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-11-04 04:46+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../worlds/desert/conf:71
+msgid "Beech"
+msgstr ""
+
+#: ../../worlds/desert/conf:72
+msgid "Beech medium"
+msgstr ""
+
+#: ../../worlds/desert/conf:73
+msgid "Beech small"
+msgstr ""
+
+#: ../../worlds/desert/conf:74
+msgid "Beech tiny"
+msgstr ""
+
+#: ../../worlds/desert/conf:85
+msgid "Bunny"
+msgstr ""
+
+#: ../../worlds/desert/conf:7
+#: ../../worlds/desert/conf:8
+#: ../../worlds/desert/conf:9
+msgid "Bush"
+msgstr "Bụi cây"
+
+#: ../../worlds/desert/conf:10
+#: ../../worlds/desert/conf:11
+#: ../../worlds/desert/conf:12
+#: ../../worlds/desert/conf:13
+msgid "Cactus"
+msgstr "Xương rồng"
+
+#: ../../worlds/desert/resconf:4
+msgid "Coal"
+msgstr "Than"
+
+#: ../../worlds/desert/conf:14
+#: ../../worlds/desert/conf:15
+#: ../../worlds/desert/conf:16
+#: ../../worlds/desert/conf:17
+msgid "Dead Tree"
+msgstr "Cây khô héo"
+
+#: ../../worlds/desert/conf:86
+msgid "Deer"
+msgstr "Hươu nai"
+
+#: ../../worlds/desert/conf:3
+msgid "Desert"
+msgstr "Sa mạc"
+
+#: ../../worlds/desert/conf:87
+msgid "Duck"
+msgstr "Vịt"
+
+#: ../../worlds/desert/resconf:41
+msgid "Fish"
+msgstr "Cá"
+
+#: ../../worlds/desert/conf:88
+msgid "Fox"
+msgstr "Cáo"
+
+#: ../../worlds/desert/resconf:12
+msgid "Gold"
+msgstr "Vàng"
+
+#: ../../worlds/desert/resconf:28
+msgid "Granite"
+msgstr "Than chì"
+
+#: ../../worlds/desert/conf:18
+#: ../../worlds/desert/conf:19
+#: ../../worlds/desert/conf:20
+msgid "Grass"
+msgstr "Cỏ"
+
+#: ../../worlds/desert/resconf:20
+msgid "Iron"
+msgstr "Sắt"
+
+#: ../../worlds/desert/conf:75
+msgid "Larch"
+msgstr "Thông"
+
+#: ../../worlds/desert/conf:76
+msgid "Larch medium"
+msgstr "Cây thông to vừa"
+
+#: ../../worlds/desert/conf:77
+msgid "Larch small"
+msgstr "Cây thông Cnhỏ"
+
+#: ../../worlds/desert/conf:78
+msgid "Larch tiny"
+msgstr "Cây thông rất nhỏ"
+
+#: ../../worlds/desert/conf:21
+#: ../../worlds/desert/conf:22
+msgid "Mushroom"
+msgstr "Nấm"
+
+#: ../../worlds/desert/conf:51
+#: ../../worlds/desert/conf:55
+#: ../../worlds/desert/conf:59
+#: ../../worlds/desert/conf:63
+#: ../../worlds/desert/conf:67
+msgid "Palm"
+msgstr "Cây cọ"
+
+#: ../../worlds/desert/conf:52
+#: ../../worlds/desert/conf:56
+#: ../../worlds/desert/conf:60
+#: ../../worlds/desert/conf:64
+#: ../../worlds/desert/conf:68
+msgid "Palm medium"
+msgstr "Cây cọ to vừa"
+
+#: ../../worlds/desert/conf:53
+#: ../../worlds/desert/conf:57
+#: ../../worlds/desert/conf:61
+#: ../../worlds/desert/conf:65
+#: ../../worlds/desert/conf:69
+msgid "Palm small"
+msgstr "Cây cọ nhỏ"
+
+#: ../../worlds/desert/conf:54
+#: ../../worlds/desert/conf:58
+#: ../../worlds/desert/conf:62
+#: ../../worlds/desert/conf:66
+#: ../../worlds/desert/conf:70
+msgid "Palm tiny"
+msgstr "Cây cọ rất nhỏ"
+
+#: ../../worlds/desert/conf:23
+#: ../../worlds/desert/conf:24
+#: ../../worlds/desert/conf:25
+#: ../../worlds/desert/conf:26
+#: ../../worlds/desert/conf:27
+#: ../../worlds/desert/conf:28
+msgid "Pebble"
+msgstr "Đá cuội"
+
+#: ../../worlds/desert/conf:79
+msgid "Rowan"
+msgstr ""
+
+#: ../../worlds/desert/conf:80
+msgid "Rowan medium"
+msgstr ""
+
+#: ../../worlds/desert/conf:81
+msgid "Rowan small"
+msgstr ""
+
+#: ../../worlds/desert/conf:82
+msgid "Rowan tiny"
+msgstr ""
+
+#: ../../worlds/desert/conf:89
+msgid "Sheep"
+msgstr "Cừu"
+
+#: ../../worlds/desert/conf:37
+msgid "Shell"
+msgstr "Vỏ sò"
+
+#: ../../worlds/desert/conf:34
+#: ../../worlds/desert/conf:35
+#: ../../worlds/desert/conf:36
+msgid "Skeleton"
+msgstr "Bộ xương khô"
+
+#: ../../worlds/desert/conf:38
+#: ../../worlds/desert/conf:39
+#: ../../worlds/desert/conf:40
+#: ../../worlds/desert/conf:41
+#: ../../worlds/desert/conf:42
+#: ../../worlds/desert/conf:43
+#: ../../worlds/desert/conf:44
+msgid "Standing Stones"
+msgstr ""
+
+#: ../../worlds/desert/conf:45
+#: ../../worlds/desert/conf:46
+#: ../../worlds/desert/conf:47
+#: ../../worlds/desert/conf:48
+#: ../../worlds/desert/conf:49
+#: ../../worlds/desert/conf:50
+msgid "Stones"
+msgstr "Đá"
+
+#: ../../worlds/desert/conf:2
+msgid "The Widelands Development Team"
+msgstr "Nhóm phát triển Widelands"
+
+#: ../../worlds/desert/conf:4
+msgid "This is the wide and sandy country of the bedouins"
+msgstr ""
+
+#: ../../worlds/desert/resconf:36
+msgid "Water"
+msgstr "Nước"
+
+#: ../../worlds/desert/conf:29
+#: ../../worlds/desert/conf:30
+#: ../../worlds/desert/conf:31
+#: ../../worlds/desert/conf:32
+#: ../../worlds/desert/conf:33
+msgid "ruins"
+msgstr "di tích"

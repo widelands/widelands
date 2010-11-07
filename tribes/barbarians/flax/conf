@@ -1,7 +1,0 @@
-help=_Flax is a beautiful flower, which is used for making cloth.
-
-# Flax is a beautiful strong plant, which is use for making cloth
-
-[idle]
-pics=idle.png
-hotspot=3 12

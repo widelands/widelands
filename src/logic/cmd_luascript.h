@@ -47,5 +47,4 @@ private:
 
 }
 
-#endif /* end of include guard: CMD_LUASCRIPT_H */
-
+#endif

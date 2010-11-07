@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"POT-Creation-Date: 2010-11-04 15:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -86,7 +86,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:293
 msgid ""
-" \"While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not be easy.\" "
+" \"While this is true, we should consider it later, for now other obstacles are at hand. The miners will definitely demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not be easy.\" "
 msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:391

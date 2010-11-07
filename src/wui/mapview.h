@@ -46,7 +46,7 @@ struct Map_View : public UI::Panel {
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 Interactive_Base &);
 
-	void set_changeview(const ChangeViewFn& fn);
+	void set_changeview(const ChangeViewFn & fn);
 
 	/**
 	 * Called whenever the view position changes, for whatever reason.

@@ -280,11 +280,11 @@ Tribe_Descr::Tribe_Descr
 					(g_fs->MakeSubFileSystem(path), "tribe_" + tribename);
 
 			// Read initializations -- all scripts are initializations currently
-			ScriptContainer & scripts = egbase.lua()
-					.get_scripts_for("tribe_" + tribename);
+			ScriptContainer & scripts =
+				egbase.lua().get_scripts_for("tribe_" + tribename);
 			container_iterate_const(ScriptContainer, scripts, s) {
-				boost::shared_ptr<LuaTable> t = egbase.lua().run_script
-					("tribe_" + tribename, s->first);
+				boost::shared_ptr<LuaTable> t =
+					egbase.lua().run_script("tribe_" + tribename, s->first);
 
 				m_initializations.resize(m_initializations.size() + 1);
 				Initialization & init = m_initializations.back();
@@ -383,13 +383,13 @@ bool Tribe_Descr::exists_tribe
 
 				ScriptContainer & scripts = lua->get_scripts_for("tribe_" + name);
 				container_iterate_const(ScriptContainer, scripts, s) {
-					boost::shared_ptr<LuaTable> t = lua->run_script
-						("tribe_" + name, s->first);
+					boost::shared_ptr<LuaTable> t =
+						lua->run_script("tribe_" + name, s->first);
 
 					info->initializations.push_back
 						(TribeBasicInfo::Initialization
-						 (s->first, t->get_string("name")));
-				 }
+						 	(s->first, t->get_string("name")));
+				}
 			} catch (_wexception const & e) {
 				delete lua;
 				throw game_data_error

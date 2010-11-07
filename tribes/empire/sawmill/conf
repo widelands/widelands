@@ -10,8 +10,8 @@ trunk=2
 stone=1
 wood=1
 
-[working positions] #  like toolsmithy
-toolsmith=1
+[working positions]
+carpenter=1
 
 [inputs]
 trunk=8

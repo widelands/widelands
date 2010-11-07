@@ -270,10 +270,6 @@ void RealFSImpl::m_unlink_directory(std::string const & file) {
 		 ++pname)
 	{
 		std::string filename = FS_Filename(pname->c_str());
-		// HACK: ignore SVN directory for this might be a
-		// campaign directory or similar
-		if (filename == ".svn")
-			continue;
 		if (filename == "..")
 			continue;
 		if (filename == ".")
@@ -309,7 +305,7 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname)
 			if (fspath.m_exists and !fspath.m_isDirectory)
 				throw wexception
 					("%s exists and is not a directory",
-					dirname.substr(0, it).c_str());
+					 dirname.substr(0, it).c_str());
 			if (!fspath.m_exists)
 				MakeDirectory(dirname.substr(0, it));
 
@@ -318,7 +314,9 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname)
 			++it;
 		}
 	} catch (const std::exception & e) {
-		throw wexception("RealFSImpl::EnsureDirectoryExists(%s): %s", dirname.c_str(), e.what());
+		throw wexception
+			("RealFSImpl::EnsureDirectoryExists(%s): %s",
+			 dirname.c_str(), e.what());
 	}
 }
 
@@ -410,7 +408,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	} catch (...) {
 		if (file)
 			fclose(file);
-		if (data) free(data);
+		free(data);
 		throw;
 	}
 }

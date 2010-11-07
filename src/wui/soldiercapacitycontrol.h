@@ -30,9 +30,9 @@ namespace Widelands {
 struct Building;
 }
 
-UI::Panel* create_soldier_capacity_control
-	(UI::Panel& parent,
-	 Interactive_GameBase& igb,
-	 Widelands::Building& building);
+UI::Panel * create_soldier_capacity_control
+	(UI::Panel & parent,
+	 Interactive_GameBase & igb,
+	 Widelands::Building & building);
 
 #endif // _SOLDIERLIST_H_

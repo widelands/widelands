@@ -58,22 +58,18 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	virtual bool canChangeMap() {return true;}
 	virtual bool canChangePlayerState(uint8_t const) {
-		return !settings().savegame;
+		return !settings().savegame && !settings().scenario;
 	}
 	virtual bool canChangePlayerTribe(uint8_t const number) {
-		if (settings().scenario)
-			return false;
-		if (number >= settings().players.size())
-			return false;
-		return true;
+		return canChangePlayerTeam(number);
 	}
 	virtual bool canChangePlayerInit(uint8_t const number) {
-		if (settings().scenario)
+		if (settings().scenario || settings().savegame)
 			return false;
 		return number < settings().players.size();
 	}
 	virtual bool canChangePlayerTeam(uint8_t number) {
-		if (settings().scenario)
+		if (settings().scenario || settings().savegame)
 			return false;
 		if (number >= settings().players.size())
 			return false;
@@ -253,7 +249,7 @@ struct HostChatProvider : public ChatProvider {
 				arg1 = "";
 			if (arg2.empty())
 				arg2 = "";
-			log((cmd + " + \"" + arg1 + "\" + \"" + arg2 + "\"\n").c_str());
+			log("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
 
 			// let "/me" pass - handled by chat
 			if (cmd == "me") {
@@ -317,11 +313,11 @@ struct HostChatProvider : public ChatProvider {
 					else
 						kickReason = "No reason given!";
 					c.msg =
-						(format(_("Are you sure you want to kick %s?<br>"))
-						 % arg1).str();
+						(format(_("Are you sure you want to kick %s?<br>")) % arg1)
+						.str();
 					c.msg +=
-						(format(_("The stated reason was: %s<br>"))
-						 % kickReason).str();
+						(format(_("The stated reason was: %s<br>")) % kickReason)
+						.str();
 					c.msg +=
 						(format(_("If yes, type: /ack_kick %s")) % arg1).str();
 				}
@@ -340,7 +336,8 @@ struct HostChatProvider : public ChatProvider {
 						h->kickUser(kickUser, kickReason);
 						return;
 					} else
-						c.msg = _("kick acknowledgement cancelled: Wrong name given!");
+						c.msg =
+							_("kick acknowledgement cancelled: Wrong name given!");
 				}
 				kickUser   = "";
 				kickReason = "";
@@ -461,8 +458,11 @@ struct NetHostImpl {
 };
 
 NetHost::NetHost (std::string const & playername, bool ggz)
-: d(new NetHostImpl(this)), use_ggz(ggz),
-  m_autolaunch(false), m_forced_pause(false)
+	:
+	d(new NetHostImpl(this)),
+	use_ggz(ggz),
+	m_autolaunch(false),
+	m_forced_pause(false)
 {
 	log("[Host] starting up.\n");
 
@@ -1280,7 +1280,8 @@ void NetHost::setWinCondition(std::string wc)
 
 void NetHost::switchToPlayer(uint32_t user, uint8_t number)
 {
-	if (number < d->settings.players.size()
+	if
+		(number < d->settings.players.size()
 		 &&
 		 (d->settings.players.at(number).state == PlayerSettings::stateClosed
 		  ||
@@ -1376,7 +1377,7 @@ bool NetHost::isPaused()
 	return false;
 }
 
-void NetHost::setPaused(bool const paused)
+void NetHost::setPaused(bool paused)
 {
 }
 
@@ -1615,7 +1616,8 @@ void NetHost::welcomeClient
 			(format
 				(_("This is a dedicated server send \"@%s /help\" to get a full "
 				   "list of available commands. \"@%s /start\" starts the server."))
-				% d->localplayername % d->localplayername).str();
+				% d->localplayername % d->localplayername)
+			.str();
 		c.recipient = d->settings.users.at(client.usernum).name;
 		send(c);
 	}
@@ -1745,7 +1747,7 @@ void NetHost::broadcastRealSpeed(uint32_t const speed)
  * wished speed (e.g. without this boundary, the client might set his/her wished
  *               speed to 8x - even if the host sets his desired speed to PAUSE
  *               the median sped would be 4x).
- * 
+ *
  * The immediate pausing (with the Pause key) is disabled completely in the
  * network games, as sudden pauses would be distracting to other players. A
  * hard interruption of the game can be achieved with the forced pause.
@@ -1780,7 +1782,8 @@ void NetHost::updateNetworkSpeed()
 
 		d->networkspeed =
 			speeds.size() % 2 ? speeds.at(speeds.size() / 2) :
-			(speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
+			(speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1))
+			/ 2;
 
 		if (d->networkspeed > std::numeric_limits<uint16_t>::max())
 			d->networkspeed = std::numeric_limits<uint16_t>::max();
@@ -1889,7 +1892,7 @@ void NetHost::handle_network ()
 		SDLNet_TCP_AddSocket (d->sockset, sock);
 
 		Client peer;
-			
+
 		peer.sock = sock;
 		peer.playernum = UserSettings::notConnected();
 		peer.syncreport_arrived = false;
@@ -2163,7 +2166,7 @@ void NetHost::disconnectPlayerController
 
 	if (needai) {
 		setPlayerState(number, PlayerSettings::stateOpen);
-		if(d->game)
+		if (d->game)
 			initComputerPlayer(number + 1);
 	}
 }

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-09-08 00:26+0000\n"
-"Last-Translator: Eugênio F <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-11-02 23:01+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-09 04:39+0000\n"
+"X-Launchpad-Export-Date: 2010-11-04 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -181,7 +181,7 @@ msgid "Citadel"
 msgstr "Cidadela"
 
 #: ../../tribes/barbarians/conf:210
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:11
 msgid "Citadel village"
 msgstr "Aldeia fortificada"
 
@@ -224,15 +224,15 @@ msgstr "Mina de Minério de Ferro Profunda"
 
 #: ../../tribes/barbarians/conf:177
 msgid "Deeper Coal Mine"
-msgstr "Mina de Carvão Profunda"
+msgstr "Mina de carvão muito profunda"
 
 #: ../../tribes/barbarians/conf:180
 msgid "Deeper Gold Mine"
-msgstr "Mina de Ouro Profunda"
+msgstr "Mina de ouro muito profunda"
 
 #: ../../tribes/barbarians/conf:181
 msgid "Deeper Iron Ore Mine"
-msgstr "Mina de Minério de Ferro Profunda"
+msgstr "Mina de ferro muito profunda"
 
 #: ../../tribes/barbarians/conf:54
 msgid "Deer"
@@ -268,11 +268,11 @@ msgstr "Derruba árvores."
 
 #: ../../tribes/barbarians/conf:117
 msgid "Ferner"
-msgstr "Criador de Junco"
+msgstr "Fazendeiro de Linho"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Fernery"
-msgstr "Horto de Junco"
+msgstr "Fazenda de Linho"
 
 #: ../../tribes/barbarians/conf:33
 msgid "Field harvested"
@@ -365,7 +365,7 @@ msgstr "Cabana do Encarregado da Caça"
 
 #: ../../tribes/barbarians/conf:120
 msgid "Geologist"
-msgstr "Geologista"
+msgstr "Geólogo"
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
@@ -433,7 +433,7 @@ msgid "Headquarters"
 msgstr "Quartel General"
 
 #: ../../tribes/barbarians/conf:209
-#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Quartel General Médio"
 
@@ -560,6 +560,10 @@ msgstr "Pequena Cervejaria"
 msgid "Miner"
 msgstr "Minerador"
 
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
+msgid "Not enough space"
+msgstr "Espaço insuficiente"
+
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
 "Only this beer is acceptable for the old warriors. Some say, the whole power "
@@ -612,7 +616,7 @@ msgstr "Planta árvores."
 #: ../../tribes/barbarians/metalworks/conf:33
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr "Produz machado"
+msgstr "Produzir machado"
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
@@ -890,6 +894,16 @@ msgstr "Lanche"
 msgid "Soldier"
 msgstr "Soldado"
 
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:92
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Não teve espaço espaço suficiente para construir alguns de seus\n"
+"edifícios. Você está em desvantagem por causa disto; tente começar\n"
+"de novo este mapa com melhores condições iniciais."
+
 #: ../../tribes/barbarians/conf:129
 msgid "Stonemason"
 msgstr "Pedreiro"
@@ -962,7 +976,7 @@ msgid ""
 "Produced in the metal works."
 msgstr ""
 "As tenazes são o instrumento do fundidor, utilizadas nas obras de fundição. "
-"Produzido na fábrica de metais."
+"Produzido na oficina de metalurgia."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -1042,8 +1056,8 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metal works."
 msgstr ""
-"Esta picareta é utilizada pelos mineiros e pedreiros. É produzido na fábrica "
-"de metais."
+"Esta picareta é utilizada pelos mineiros e pedreiros. É produzido na oficina "
+"de metalurgia."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""

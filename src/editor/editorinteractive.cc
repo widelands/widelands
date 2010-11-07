@@ -17,7 +17,7 @@
  *
  */
 
-#include <SDL_keysym.h>
+#include "editorinteractive.h"
 
 #include "graphic/graphic.h"
 #include "i18n.h"
@@ -42,7 +42,7 @@
 #include "wui/interactive_base.h"
 #include "wui/overlay_manager.h"
 
-#include "editorinteractive.h"
+#include <SDL_keysym.h>
 
 using Widelands::Building;
 
@@ -66,8 +66,7 @@ m_toggle_tool_menu
 m_toggle_toolsize_menu
 	(INIT_BUTTON
 	 	("editor_menu_set_toolsize_menu", "toolsize", toolsize_menu_btn,
-		 _("Toolsize"))
-	),
+	 	 _("Toolsize"))),
 m_toggle_minimap
 	(INIT_BUTTON
 	 	("menu_toggle_minimap", "minimap", toggle_minimap, _("Minimap"))),
@@ -199,7 +198,7 @@ void Editor_Interactive::start()
 	// Run the editor initialization script, if any
 	try {
 		egbase().lua().run_script("map", "editor_init");
-	} catch(LuaScriptNotExistingError & e) {
+	} catch (LuaScriptNotExistingError & e) {
 		// do nothing.
 	}
 	egbase().map().overlay_manager().show_buildhelp(true);

@@ -795,7 +795,7 @@ void MapGenerator::create_random_map()
 					playerstart.y = m_mapInfo.h / 2;
 				else
 					playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
-			} else{
+			} else {
 				// X-Coordinates
 				uint8_t pos = n - line[0] - line[1];
 				playerstart.x  = m_mapInfo.w;
@@ -829,7 +829,6 @@ void MapGenerator::create_random_map()
 				// Let's hope that one is at least on dry ground.
 				coords2 = playerstart;
 			}
-			
 
 			// Finally set the found starting position
 			m_map.set_starting_pos(n, coords2);

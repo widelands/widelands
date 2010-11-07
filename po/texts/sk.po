@@ -6,33 +6,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-09-19 01:09+0000\n"
-"Last-Translator: Miroslav R. <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-10-29 16:21+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-20 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-10-30 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9  Pamätať si a ísť na skôr zapamätané miesta"
 
 #: ../../txts/README:67
 msgid ", / .       Go to previous / next location"
-msgstr ""
+msgstr ", / .       Ísť na predošlé / nasledujúce miesto"
 
 #: ../../txts/README:121
 msgid "- how to reproduce the bug"
-msgstr ""
+msgstr "- ako napodobniť chybu"
 
 #: ../../txts/README:125
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
 msgstr ""
+"- pošlite nám skomprimovanú (zip, gzip, bzip2) nahrávku, ak sa chyba "
+"objavila počas hry. Pre viac vysvetlenia viz. sekciu Nahrávky nižšie."
 
 #: ../../txts/README:127
 msgid ""
@@ -41,12 +43,18 @@ msgid ""
 "record<br>your sessions in case a bug surfaces. For more explanation, see "
 "below."
 msgstr ""
+"- pošlite nám skomprimovanú (zip, gzip, bzip2) nahrávku relácie, ak je to "
+"možné, pokiaľ<br>chybu nie je triviálne napodobniť. V skutočnosti to môže "
+"byť dobrý nápad vždy nahrávať<br>relácie v prípade, že sa objaví chyba. Viz. "
+"dole pre viac vysvetlenia."
 
 #: ../../txts/README:119
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
 msgstr ""
+"- akú verziu Widelands ste používali (napr. číslo zostavenia alebo či je "
+"to<br>vlastná skompilovaná verzia zo SVN)"
 
 #: ../../txts/README:123
 msgid "- which map you were playing"
@@ -272,16 +280,18 @@ msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
+"Vždy postavte sídlo horára a chovateľa rýb, aby vám nedošlo drevo a jedlo."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
-msgstr ""
+msgstr "Vždy postavte sídlo horára, aby vám nedošlo drevo."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
+"Vždy postavte lesníkovu a hájnikovu chatrč, aby vám nedošlo drevo a jedlo."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -299,6 +309,8 @@ msgstr "Barbari"
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
+"Predtým než postavíte studňu alebo baňu, pošlite na preskúmanie oblasti "
+"geológa."
 
 #: ../../txts/README:57
 msgid "C               Toggle census"
@@ -342,7 +354,7 @@ msgstr ""
 
 #: ../../txts/README:143
 msgid "Creating a Session Record</p>"
-msgstr ""
+msgstr "Vytváranie záznamu relácie</p>"
 
 #: ../../txts/README:79
 msgid "Ctrl+F10    Quit the game immediately"
@@ -358,7 +370,7 @@ msgstr "DELETE      Archivovať aktuálnu správu"
 
 #: ../../txts/developers:162
 msgid "Dansk"
-msgstr "Dánština"
+msgstr "Dánčina"
 
 #: ../../txts/developers:1
 msgid "Development"
@@ -382,7 +394,7 @@ msgstr "Rada starších"
 
 #: ../../txts/developers:141
 msgid "Empire"
-msgstr "Cisárstvo"
+msgstr "Impérium"
 
 #: ../../txts/COPYING:82
 msgid "End of Terms and Conditions"
@@ -418,7 +430,7 @@ msgstr "Francúzština"
 
 #: ../../txts/README:88
 msgid "G           Go to location corresponding to current message"
-msgstr ""
+msgstr "G Ísť na miesto zodpovedajúceho aktuálnej správe"
 
 #: ../../txts/COPYING:3
 msgid "GNU general public licence"
@@ -432,15 +444,15 @@ msgstr ""
 
 #: ../../txts/developers:188
 msgid "Galician"
-msgstr "Galština"
+msgstr "Galčina"
 
 #: ../../txts/README:36
 msgid "General game control"
-msgstr ""
+msgstr "Hlavné ovládanie hry"
 
 #: ../../txts/developers:193
 msgid "German"
-msgstr ""
+msgstr "Nemčina"
 
 #: ../../txts/developers:70
 msgid "Graphicians"
@@ -462,6 +474,7 @@ msgstr "Hebrejčina"
 #: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
 msgstr ""
+"Stlačením klávesu ALT možno zapnúť druhý alternatívny nástroj (ak existuje)."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -469,6 +482,9 @@ msgid ""
 "cases the complete opposite of the normal tool (for example deletion of an "
 "object instead of placing one)."
 msgstr ""
+"Stlačením klávesu SHIFT možno zapnúť prvý alternatívny nástroj. Tento "
+"nástroj je v mnohých prípadoch presný opak normálneho nástroja (napríklad "
+"namiesto umiestnenia objektu ho zmaže)."
 
 #: ../../txts/README:65
 msgid "Home        Center main mapview on starting location"
@@ -481,7 +497,7 @@ msgstr "Domovská stránka"
 
 #: ../../txts/developers:288
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Domovskú stránku napísali"
 
 #: ../../txts/COPYING:86
 msgid "How to Apply These Terms to Your New Programs"
@@ -493,7 +509,7 @@ msgstr "Maďarčina"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
-msgstr ""
+msgstr "I        Aktivuje informačný nástroj"
 
 #: ../../txts/COPYING:51
 msgid ""
@@ -533,6 +549,8 @@ msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
 msgstr ""
+"Ak potrebujete dokumentáciu alebo pomoc pre Widelands alebo Widelands "
+"Editor, iste navštívte našu stránku. Najnovšiu online pomoc môžno nájsť na:"
 
 #: ../../txts/README:111
 msgid ""
@@ -540,11 +558,13 @@ msgid ""
 "<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
 "page:"
 msgstr ""
+"Ak chcete nahlásiť chyby, prosím, pošlite svoju správu na zoznam adries, "
+"<widelands-public@list.sourceforge.net><br>Pre odber navštívte túto stránku:"
 
 #: ../../txts/README:86
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr ""
+msgstr "V okne správ sú dostupné aj tieto dodatočné skratky:"
 
 #: ../../txts/README:9
 #: ../../txts/editor_readme:7
@@ -574,6 +594,8 @@ msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop to fish."
 msgstr ""
+"Dávajte si pozor na rybárov. Keď sa zdroje rýb v ich pracovnej oblasti "
+"vyčerpajú, prestanú rybárčiť."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -585,7 +607,7 @@ msgstr "Klávesové zkratky (počas hry)"
 
 #: ../../txts/COPYING:1
 msgid "License"
-msgstr ""
+msgstr "Licencia"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -611,7 +633,7 @@ msgstr "Mapy a misie"
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
-msgstr ""
+msgstr "Baníci pracujú, len ak sú zásobovaní jedlom."
 
 #: ../../txts/developers:98
 msgid "Musicians"
@@ -626,6 +648,8 @@ msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
 msgstr ""
+"POZNÁMKA: v tomto zozname sú ľudia, ktorí preložili Widelands predtým, ako "
+"sme sa presunuli na launchpad.net. "
 
 #: ../../txts/COPYING:70
 msgid "No warranty"
@@ -674,6 +698,8 @@ msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
 msgstr ""
+"Naši počítačoví hráči sú nudní? Navštívte našu webovú stránku na "
+"www.widelands.org a stretnite iných hráčov, ktorí chcú hrať online."
 
 #: ../../txts/editor_readme:33
 msgid "P        Toggles player menu"
@@ -681,7 +707,7 @@ msgstr "P        Prepne menu hráča"
 
 #: ../../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr ""
+msgstr "PAGEDOWN    Zníži rýchlosť hry"
 
 #: ../../txts/README:72
 msgid "PAGEUP         Increase gamespeed"
@@ -689,7 +715,7 @@ msgstr "PAGEUP         Zvýši rýchlosť hry"
 
 #: ../../txts/developers:251
 msgid "Packagers"
-msgstr ""
+msgstr "Správcovia balíčkov"
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
@@ -713,11 +739,11 @@ msgstr "ČÍTAJMA"
 
 #: ../../txts/editor_readme:4
 msgid "README for the Editor"
-msgstr ""
+msgstr "ČÍTAJMA pre Editor"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
-msgstr ""
+msgstr "ČÍTAJMA pre Widelands Editor"
 
 #: ../../txts/README:139
 msgid ""
@@ -730,7 +756,7 @@ msgstr ""
 
 #: ../../txts/README:132
 msgid "Replays</p>"
-msgstr ""
+msgstr "Nahrávky</p>"
 
 #: ../../txts/README:107
 msgid "Reporting Bugs"
@@ -747,25 +773,30 @@ msgstr "S               Prepne štatistiky"
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
 msgstr ""
+"SHIFT    (Držať) Pokiaľ je stlačený, vybraný je prvý alternatívny nástroj"
 
 #: ../../txts/README:51
 msgid "SPACE       Toggle build-help"
-msgstr ""
+msgstr "MEDZERNÍK       Prepne pomoc pri stavaní"
 
 #: ../../txts/editor_readme:21
 msgid "SPACE    Toggles build help"
-msgstr ""
+msgstr "MEDZERNÍK    Prepne pomoc pri stavaní"
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
 "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
+"Kláves MEDZERNÍK sa správa ako v normálnej hre. Zapína/vypína pomoc pri "
+"stavaní."
 
 #: ../../txts/developers:151
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
+"Pozrite https://translations.launchpad.net/widelands pre zoznam ľudí, ktorí "
+"pomáhali preložiť Widelands cez launchpad.net."
 
 #: ../../txts/developers:233
 msgid "Slovak"
@@ -778,6 +809,8 @@ msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr ""
+"Niektoré budovy ako farma majú veľmi malú pracovnú oblasť. Ak je budova "
+"obklopená stromami alebo cestami, zastaví sa produkcia."
 
 #: ../../txts/developers:29
 #: ../../txts/developers:328
@@ -797,6 +830,8 @@ msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr ""
+"Rozdeľte svoje cesty na kratšie úseky umiestnením vlajok. Tak sa preprava "
+"vašich tovarov zrýchli."
 
 #: ../../txts/README:27
 msgid "Status"
@@ -808,13 +843,13 @@ msgstr "Švédčina"
 
 #: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
-msgstr ""
+msgstr "T        Prepne menu nástrojov"
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr ""
+msgstr "Proces stavania sa začne, len ak k stavenisku vedie cesta."
 
 #: ../../txts/COPYING:100
 msgid ""
@@ -871,6 +906,8 @@ msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse."
 msgstr ""
+"Numerické klávesy (1 - 0) vám umožňujú priamo nastaviť veľkosť vybraného "
+"územia okolo vašej myši."
 
 #: ../../txts/COPYING:33
 msgid ""
@@ -911,6 +948,9 @@ msgid ""
 "progress and as the Editor becomes better and better this text will also get "
 "longer and more complete."
 msgstr ""
+"Editor je určený pre hráčov, ktorí by radi zostavili svoju vlastnú mapu do "
+"Widelands.<br>Ako vidíte, editor je ťažká práca vo vývoji a keďže sa stále "
+"zlepšuje, tento text sa tiež predĺži a viac dokončí."
 
 #: ../../txts/COPYING:104
 msgid ""
@@ -935,13 +975,16 @@ msgstr ""
 
 #: ../../txts/README:40
 msgid "To close an open window, right click it."
-msgstr ""
+msgstr "K zatvoreniu otvoreného okna naň kliknite pravým tlačidlom myši."
 
 #: ../../txts/README:149
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr ""
+"Aby ste vytvorili záznam relácie, spustite hru s parametrom --record. V "
+"Linuxe jednoducho stačí spustiť Widelands takto: $ ./widelands --"
+"record=filename.rec"
 
 #: ../../txts/COPYING:93
 msgid ""
@@ -956,6 +999,8 @@ msgid ""
 "To minimize/maximize a window, click on the titlebar of that window either "
 "with middle mousebutton or with left mousebutton while holding down CTRL."
 msgstr ""
+"K minimalizovaniu/maximalizovaniu okna kliknite na jeho titulnú lištu s buď "
+"pravým tlačidlom myši, alebo s ľavým tlačidlom myši, držiac CTRL."
 
 #: ../../txts/developers:333
 msgid "Translation"
@@ -977,6 +1022,8 @@ msgid ""
 "Use priority buttons in building window to adjust delivery of a specific "
 "ware."
 msgstr ""
+"Aby ste nastavili dovoz určitého tovaru, použite prioritné tlačidlá v okne "
+"budovy."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
@@ -1050,12 +1097,19 @@ msgid ""
 "players, such as building a road or attacking an enemy. The rest of the "
 "filenames will tell you the time you started the game."
 msgstr ""
+"Widelands zaznamenáva každú hru, ktorú hrajete, v dvoch súboroch. Jeden z "
+"týchto súborov má príponu .wrpl.wgf a obsahuje prvotnú uloženú hru. Druhý "
+"súbor má príponu len .wrpl a obsahuje všetky povely, ktoré vydal každý hráč, "
+"ako stavanie cesty alebo útok na nepriateľa. Zvyšok názvov súborov vám povie "
+"čas, kedy ste začali hrať hru."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
 "You can find general help for the editor as well as a short tutorial in our "
 "wiki at www.widelands.org"
 msgstr ""
+"Pomoc pri editore, ako aj krátky návod možno nájsť v našej wiki na "
+"www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
@@ -1069,18 +1123,24 @@ msgid ""
 "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be "
 "printed as '-> Nickname is tired'."
 msgstr ""
+"Na začiatku chatovej správy možno použiť '/me': '/me je unavený' sa zobrazí "
+"ako '-> Prezývka je unavený'."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
 "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the "
 "real speed is then democratically set."
 msgstr ""
+"Klávesy 'Page up' a 'Page down' možno použiť na nastavenie rýchlosti, akú si "
+"prajete - skutočná rýchlosť je potom daná demokraticky."
 
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings - "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"Svoje územie môžete rozšíriť postavením rôznych vojenských budov - strážnic, "
+"pevností, kasární, atď."
 
 #: ../../txts/COPYING:102
 msgid ""

@@ -23,8 +23,8 @@
 #include "ui_basic/align.h"
 #include "point.h"
 #include "rgbcolor.h"
-#include "graphic/graphic.h"
-#include "graphic/picture_id.h"
+#include "graphic.h"
+#include "picture_id.h"
 #include "ui_basic/widget_cache.h"
 
 #include <SDL_ttf.h>

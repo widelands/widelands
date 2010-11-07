@@ -47,13 +47,13 @@ void SurfaceOpenGL::draw_rect(const Rect rc, const RGBColor clr) {
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 
-	glBegin(GL_LINE_LOOP);
+	glBegin(GL_LINE_LOOP); {
 		glColor3ub(clr.r(), clr.g(), clr.b());
 		glVertex2f(m_offsx + rc.x + 0.5f,        m_offsy + rc.y + 0.5f);
 		glVertex2f(m_offsx + rc.x + rc.w - 0.5f, m_offsy + rc.y + 0.5f);
 		glVertex2f(m_offsx + rc.x + rc.w - 0.5f, m_offsy + rc.y + rc.h - 0.5f);
 		glVertex2f(m_offsx + rc.x + 0.5f,        m_offsy + rc.y + rc.h - 0.5f);
-	glEnd();
+	} glEnd();
 	glEnable(GL_TEXTURE_2D);
 }
 
@@ -73,13 +73,13 @@ void SurfaceOpenGL::fill_rect(const Rect rc, const RGBAColor clr) {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 
-	glBegin(GL_QUADS);
+	glBegin(GL_QUADS); {
 		glColor4ub(clr.r, clr.g, clr.b, clr.a);
 		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y);
 		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y);
 		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y + rc.h);
 		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y + rc.h);
-	glEnd();
+	} glEnd();
 	glEnable(GL_TEXTURE_2D);
 }
 
@@ -121,7 +121,7 @@ void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
 
 	// And now simply draw a rect with facor as the color
 	// (this is the source color) over the region
-	glBegin(GL_QUADS);
+	glBegin(GL_QUADS); {
 		glColor3f
 			((static_cast<GLfloat>(factor) / 256.0f),
 			 (static_cast<GLfloat>(factor) / 256.0f),
@@ -130,7 +130,7 @@ void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
 		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y);
 		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y + rc.h);
 		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y + rc.h);
-	glEnd();
+	} glEnd();
 }
 
 void SurfaceOpenGL::draw_line
@@ -149,11 +149,11 @@ void SurfaceOpenGL::draw_line
 	}
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
-	glBegin(GL_LINES);
+	glBegin(GL_LINES); {
 		glColor3ub(color.r(), color.g(), color.b());
 		glVertex2f(x1 + m_offsx + 0.5f, y1 + m_offsy + 0.5f);
 		glVertex2f(x2 + m_offsx + 0.5f, y2 + m_offsy + 0.5f);
-	glEnd();
+	} glEnd();
 	if (clip) {
 		glPopAttrib();
 	}
@@ -246,22 +246,22 @@ void SurfaceOpenGL::blit
 	* previous texture coordinate. This is the destination rectangle
 	*/
 
-	glBegin(GL_QUADS);
-		//set color white, otherwise textures get mixed with color
+	glBegin(GL_QUADS); {
+		//  set color white, otherwise textures get mixed with color
 		glColor3f(1.0, 1.0, 1.0);
-		//top-left
+		//  top-left
 		glTexCoord2i(srcrc.x,           srcrc.y);
 		glVertex2i  (m_offsx + dst.x,   m_offsy + dst.y);
-		//top-right
+		//  top-right
 		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y);
 		glVertex2f  (m_offsx + dst.x + dst.w,  m_offsy + dst.y);
-		//botton-right
+		//  bottom-right
 		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y + srcrc.h);
 		glVertex2f  (m_offsx + dst.x + dst.w,  m_offsy + dst.y + dst.h);
-		//bottom-left
+		//  bottom-left
 		glTexCoord2i(srcrc.x,           srcrc.y + srcrc.h);
 		glVertex2f  (m_offsx + dst.x,   m_offsy + dst.y + dst.h);
-	glEnd();
+	} glEnd();
 
 	glLoadIdentity();
 }

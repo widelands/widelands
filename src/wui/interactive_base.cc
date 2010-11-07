@@ -226,7 +226,7 @@ void Interactive_Base::toggle_buildhelp() {
 bool Interactive_Base::buildhelp() {
 	return egbase().map().overlay_manager().buildhelp();
 }
-void Interactive_Base::show_buildhelp(bool const t) {
+void Interactive_Base::show_buildhelp(bool t) {
 	egbase().map().overlay_manager().show_buildhelp(t);
 }
 
@@ -508,7 +508,7 @@ Interactive_Base::minimap_registry()
 Exposes the Registry object of the minimap to derived classes
 ===========
 */
-UI::UniqueWindow::Registry &Interactive_Base::minimap_registry() {
+UI::UniqueWindow::Registry & Interactive_Base::minimap_registry() {
 	return m->minimap;
 }
 
@@ -868,7 +868,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 				if (GameController * const ctrl = game->gameController())
 					ctrl->setDesiredSpeed(ctrl->desiredSpeed() + 1000);
 		return true;
-	
+
 	case SDLK_PAUSE:
 		if (down)
 			if (upcast(Game, game, &m_egbase))

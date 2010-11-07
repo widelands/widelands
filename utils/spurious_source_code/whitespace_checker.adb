@@ -1,12 +1,7 @@
 --  Detecs errors in whitespace and a few other things in C++ source code.
 --
---  Checks the beginning of each line, the so called line begin, which consists
---  of 2 parts in order:
---    1. Whitespace:
---         A sequence of characters in the set {horizontal tab, space}.
---    2. Opening parentheses:
---         A sequence of characters in the set {'(', '['}. Their matching
---         closing parentheses do not have to be on the same line.
+--  Checks the beginning of each line, the so called line begin.
+--
 --  A whitespace character in the line begin must be a space if and only if the
 --  Character at the same index in the previous line is also in the line begin
 --  and is a space or opening parenthesis. (Otherwise it must be a tab.)
@@ -134,6 +129,10 @@ procedure Whitespace_Checker is
          Read_Characters (I + 1) := Read_Characters (I);
       end loop;
       Read (The_File, Read_Characters (0));
+      if Read_Characters (0) = CR then
+         Raise_Exception
+            (Giving_Up'Identity, "CR at line" & Current_Line_Number'Img);
+      end if;
    end Next_Character;
 
    procedure Next_Line; pragma Inline (Next_Line);
@@ -532,7 +531,9 @@ procedure Whitespace_Checker is
                   when '/' => --  /* comment */
                      Read_Multiline_Comment;
                   when
-                    HT | ' ' | '{' | '(' | '.' | ':' | '>' | '*' | '&' | '!' =>
+                    HT | ' ' | '{' | '(' | '[' | '.' | ':' | '>' | '*' | '&' |
+                    '!'
+                    =>
                      null;
                   when
                     '+' | '-'                                                =>

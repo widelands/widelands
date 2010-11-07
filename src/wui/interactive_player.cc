@@ -156,6 +156,17 @@ int32_t Int_Player_overlay_callback_function
 }
 
 
+/*
+ * UI::Callback_Button m_toggle_chat;
+	UI::Callback_Button m_toggle_options_menu;
+	UI::Callback_Button m_toggle_statistics_menu;
+	UI::Callback_Button m_toggle_objectives;
+	UI::Callback_Button m_toggle_minimap;
+	UI::Callback_Button m_toggle_buildhelp;
+	UI::Callback_Button m_toggle_message_menu;
+	UI::Callback_Button m_toggle_help;
+	*/
+
 Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
@@ -170,21 +181,13 @@ m_flag_to_connect(Widelands::Coords::Null()),
 // Chat is different, as m_chatProvider needs to be checked when toggling
 // Buildhelp is different as it does not toggle a UniqueWindow
 // Minimap is different as it warps and stuff
+
 #define INIT_BTN_this(picture, name, callback, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
  boost::bind(&Interactive_Player::callback, boost::ref(*this)),               \
  tooltip                                                                      \
 
-m_toggle_buildhelp
-	(INIT_BTN_this
-	 	("menu_toggle_buildhelp", "buildhelp", toggle_buildhelp, _("Buildhelp"))),
-m_toggle_chat
-	(INIT_BTN_this
-	 	("menu_chat", "chat", toggle_chat, _("Chat"))),
-m_toggle_minimap
-	(INIT_BTN_this
-	 	("menu_toggle_minimap", "minimap", toggle_minimap, _("Minimap"))),
 
 #define INIT_BTN(picture, name, registry, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
@@ -192,21 +195,32 @@ m_toggle_minimap
  boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)),      \
  tooltip                                                                      \
 
+
+m_toggle_chat
+	(INIT_BTN_this
+	 ("menu_chat", "chat", toggle_chat, _("Chat"))),
 m_toggle_options_menu
 	(INIT_BTN
-	 	("menu_options_menu", "options_menu", m_options, _("Options"))),
+	 ("menu_options_menu", "options_menu", m_options, _("Options"))),
 m_toggle_statistics_menu
 	(INIT_BTN
-	 	("menu_toggle_menu", "statistics_menu", m_statisticsmenu, _("Statistics"))),
+	 ("menu_toggle_menu", "statistics_menu", m_statisticsmenu, _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN
-	 	("menu_objectives", "objectives", m_objectives, _("Objectives"))),
+	 ("menu_objectives", "objectives", m_objectives, _("Objectives"))),
+m_toggle_minimap
+	(INIT_BTN_this
+	 ("menu_toggle_minimap", "minimap", toggle_minimap, _("Minimap"))),
+m_toggle_buildhelp
+	(INIT_BTN_this
+	 ("menu_toggle_buildhelp", "buildhelp", toggle_buildhelp, _("Buildhelp"))),
 m_toggle_message_menu
 	(INIT_BTN
-	 	("menu_toggle_oldmessage_menu", "messages", m_message_menu, _("Messages"))),
+	 ("menu_toggle_oldmessage_menu", "messages", m_message_menu, _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 	("menu_help", "help", m_encyclopedia, _("Ware help")))
+	 ("menu_help", "help", m_encyclopedia, _("Ware help")))
+
 {
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
@@ -235,10 +249,10 @@ m_toggle_help
 	adjust_toolbar_position();
 
 	set_display_flag(dfSpeed, true);
-	
+
 #define INIT_BTN_HOOKS(registry, btn)                                        \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed,&btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed,&btn, false); \
+ registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
+ registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
 	INIT_BTN_HOOKS(m_chat, m_toggle_chat)
@@ -249,11 +263,28 @@ m_toggle_help
 	INIT_BTN_HOOKS(m_encyclopedia, m_toggle_help)
 	INIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
 
-	m_encyclopedia.constr = boost::lambda::bind(boost::lambda::new_ptr<EncyclopediaWindow>(), boost::ref(*this), boost::lambda::_1);
-	m_options.constr = boost::lambda::bind(boost::lambda::new_ptr<GameOptionsMenu>(), boost::ref(*this), boost::lambda::_1, boost::ref(m_mainm_windows));
-	m_statisticsmenu.constr = boost::lambda::bind(boost::lambda::new_ptr<GameMainMenu>(), boost::ref(*this), boost::lambda::_1, boost::ref(m_mainm_windows));
-	m_objectives.constr = boost::lambda::bind(boost::lambda::new_ptr<GameObjectivesMenu>(), boost::ref(*this), boost::lambda::_1);
-	m_message_menu.constr = boost::lambda::bind(boost::lambda::new_ptr<GameMessageMenu>(), boost::ref(*this), boost::lambda::_1);
+	m_encyclopedia.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<EncyclopediaWindow>(),
+		 boost::ref(*this),
+		 boost::lambda::_1);
+	m_options.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<GameOptionsMenu>(),
+		 boost::ref(*this),
+		 boost::lambda::_1,
+		 boost::ref(m_mainm_windows));
+	m_statisticsmenu.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<GameMainMenu>(),
+		 boost::ref(*this),
+		 boost::lambda::_1,
+		 boost::ref(m_mainm_windows));
+	m_objectives.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<GameObjectivesMenu>(),
+		 boost::ref(*this),
+		 boost::lambda::_1);
+	m_message_menu.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<GameMessageMenu>(),
+		 boost::ref(*this),
+		 boost::lambda::_1);
 
 #ifdef DEBUG //  only in debug builds
 	addCommand
@@ -266,11 +297,11 @@ Interactive_Player::~Interactive_Player() {
 	// We need to remove these callbacks because the opened window might
 	// (theoretically) live longer than 'this' window, and thus the
 	// buttons. The assertions are safeguards in case somewhere else in the
-	// code someone would overwrite our hooks. 
+	// code someone would overwrite our hooks.
 
 #define DEINIT_BTN_HOOKS(registry, btn)                                                \
- assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed,&btn, true));  \
- assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed,&btn, false)); \
+ assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed, &btn, true));  \
+ assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed, &btn, false)); \
  registry.onCreate = 0;                                                                \
  registry.onDelete = 0;                                                                \
 
@@ -356,13 +387,13 @@ void Interactive_Player::postload()
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
 			(&Int_Player_overlay_callback_function, static_cast<void *>(this));
-	
+
 	// Connect buildhelp button to reflect build help state. Needs to be
 	// done here rather than in the constructor as the map is not present then.
 	// This code assumes that the Interactive_Player object lives longer than
-	// the overlay_manager. Otherwise remove the hook in the deconstructor. 
+	// the overlay_manager. Otherwise remove the hook in the deconstructor.
 	egbase().map().overlay_manager().onBuildHelpToggle =
-		boost::bind(&UI::Button::set_perm_pressed,&m_toggle_buildhelp,_1);
+		boost::bind(&UI::Button::set_perm_pressed, &m_toggle_buildhelp, _1);
 	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 
 	// Recalc whole map for changed owner stuff

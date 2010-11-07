@@ -92,13 +92,12 @@ struct RenderTarget {
 
 	void reset();
 
-	Surface & get_surface() 
-		{ return *m_surface; }
+	Surface & get_surface() {return *m_surface;}
 
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Rect dst, Surface * const src, Rect srcrc, bool enable_alpha=true);
+	void doblit(Rect dst, Surface * src, Rect srcrc, bool enable_alpha = true);
 
 	///The target surface
 	Surface * m_surface;

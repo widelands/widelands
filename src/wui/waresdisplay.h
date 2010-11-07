@@ -84,7 +84,7 @@ protected:
 
 	Widelands::Tribe_Descr::WaresOrder const & icons_order() const;
 	Widelands::Tribe_Descr::WaresOrderCoords const & icons_order_coords() const;
-	virtual Point ware_position(Widelands::Ware_Index const) const;
+	virtual Point ware_position(Widelands::Ware_Index) const;
 	virtual void draw(RenderTarget &);
 	virtual void draw_ware
 		(RenderTarget &,
@@ -99,7 +99,7 @@ private:
 	UI::Textarea        m_curware;
 	selection_type      m_selected;
 	selection_type      m_hidden;
-	bool		    m_selectable;
+	bool                m_selectable;
 };
 
 /*
@@ -123,7 +123,7 @@ struct WaresDisplay : public AbstractWaresDisplay {
 	void remove_all_warelists();
 
 protected:
-	virtual std::string info_for_ware(Widelands::Ware_Index const);
+	virtual std::string info_for_ware(Widelands::Ware_Index);
 
 private:
 	typedef std::vector<Widelands::WareList const *> vector_type;

@@ -53,8 +53,8 @@ struct SDL_Surface;
 struct SDL_Rect;
 
 //@{
-/// This table is used by create_grayed_out_pic()
-/// to map colors to grayscle. It is initialized in Graphic::Graphic()
+/// This table is used by create_grayed_out_pic()to map colors to grayscle. It
+/// is initialized in Graphic::Graphic().
 extern uint32_t luminance_table_r[0x100];
 extern uint32_t luminance_table_g[0x100];
 extern uint32_t luminance_table_b[0x100];
@@ -125,10 +125,9 @@ struct Graphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	Surface & load_image
-(const std::string & fname, bool alpha = false);
-	PictureID & get_picture(PicMod module, const std::string & fname, bool alpha = true)
-	__attribute__ ((pure));
+	Surface & load_image(std::string const &, bool alpha = false);
+	PictureID & get_picture(PicMod, std::string const &, bool alpha = true)
+		__attribute__ ((pure));
 	PictureID get_picture
 		(PicMod module, Surface &, const std::string & name = "");
 	//__attribute__ ((pure));
@@ -187,8 +186,7 @@ struct Graphic {
 
 	Surface * get_road_texture(int32_t roadtex);
 
-	const GraphicCaps & caps() const throw()
-		{ return m_caps; }
+	GraphicCaps const & caps() const throw () {return m_caps;}
 
 protected:
 	// Static helper function for png writing
@@ -207,8 +205,8 @@ protected:
 	SDL_Surface * m_sdl_screen;
 	/// A RenderTarget for m_screen. This is initialized during init()
 	RenderTarget * m_rendertarget;
-	/// keeps track which screen regions needs to be redrawn
-	/// during the next update(). Only used for SDL rendering.
+	/// keeps track which screen regions needs to be redrawn during the next
+	/// update(). Only used for SDL rendering.
 	SDL_Rect m_update_rects[MAX_RECTS];
 	/// saves how many screen regions need updating. @see m_update_rects
 	int32_t m_nr_update_rects;

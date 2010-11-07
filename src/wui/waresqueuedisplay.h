@@ -34,7 +34,7 @@ struct Building;
 struct WaresQueue;
 }
 
-UI::Panel* create_wares_queue_display
+UI::Panel * create_wares_queue_display
 	(UI::Panel * parent,
 	 Interactive_GameBase & igb,
 	 Widelands::Building & b,

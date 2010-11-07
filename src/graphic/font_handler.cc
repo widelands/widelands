@@ -19,7 +19,7 @@
  * http://www.wesnoth.org
  */
 
-
+#include "font_handler.h"
 
 #include "io/filesystem/filesystem.h"
 #include "font_loader.h"
@@ -33,7 +33,6 @@
 #include "surface.h"
 #include "graphic/render/surface_sdl.h"
 #include "graphic/render/surface_opengl.h"
-#include "font_handler.h"
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -365,7 +364,7 @@ void Font_Handler::render_caret
 
 		SDL_BlitSurface(caret_surf_sdl, 0, &line, &r);
 	} else {
-		log("WARNING: Should render caret here but it's not implemented\n");
+		log("WARNING: Should render caret here but it is not implemented\n");
 	}
 
 }

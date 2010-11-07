@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-30 23:31+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"PO-Revision-Date: 2010-11-01 21:19+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-11-02 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -38,11 +38,11 @@ msgstr "Harnas"
 
 #: ../../tribes/empire/conf:167
 msgid "Armour Smithy"
-msgstr "Harnassensmid"
+msgstr "Harnassmederij"
 
 #: ../../tribes/empire/conf:103
 msgid "Armoursmith"
-msgstr "Harnassensmid"
+msgstr "Harnassmid"
 
 #: ../../tribes/empire/conf:27
 msgid "Ashes"
@@ -140,7 +140,7 @@ msgid "Castle"
 msgstr "Kasteel"
 
 #: ../../tribes/empire/conf:204
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:11
 msgid "Castle village"
 msgstr "Kasteeldorp"
 
@@ -270,7 +270,7 @@ msgstr "Klein veld"
 
 #: ../../tribes/empire/conf:60
 msgid "Fire Tongs"
-msgstr "Brandtang"
+msgstr "Vuurtang"
 
 #: ../../tribes/empire/conf:61
 msgid "Fish"
@@ -282,7 +282,7 @@ msgstr "Visser"
 
 #: ../../tribes/empire/conf:177
 msgid "Fisher's House"
-msgstr "Vissershut"
+msgstr "Vissershuis"
 
 #: ../../tribes/empire/conf:62
 msgid "Fishing Rod"
@@ -297,13 +297,13 @@ msgstr ""
 
 #: ../../tribes/empire/conf:63
 msgid "Flour"
-msgstr "Bloem"
+msgstr "Meel"
 
 #: ../../tribes/empire/flour/conf:1
 msgid ""
 "Flour is produced out of wheat and is needed for the tasty Empire bread."
 msgstr ""
-"Bloem wordt gemaakt uit tarwe en is nodig voor het heerlijke keizerrijkbrood."
+"Meel wordt gemaakt uit tarwe en is nodig voor het heerlijke keizerrijkbrood."
 
 #: ../../tribes/empire/conf:110
 msgid "Forester"
@@ -379,7 +379,7 @@ msgid "Headquarters"
 msgstr "Hoofdkwartier"
 
 #: ../../tribes/empire/conf:203
-#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
+#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:11
 msgid "Headquarters medium"
 msgstr "Gemiddeld hoofdkwartier"
 
@@ -415,7 +415,7 @@ msgstr "Jager"
 
 #: ../../tribes/empire/conf:180
 msgid "Hunter's House"
-msgstr "Jagershut"
+msgstr "Jachthuis"
 
 #: ../../tribes/empire/conf:70
 msgid "Hunting Spear"
@@ -459,7 +459,7 @@ msgstr "Houthakker"
 
 #: ../../tribes/empire/conf:182
 msgid "Lumberjack's House"
-msgstr "Houthakkershut"
+msgstr "Houthakkershuis"
 
 #: ../../tribes/empire/conf:76
 msgid "Marble"
@@ -486,8 +486,8 @@ msgid ""
 "Marble is the beautiful stone, which is cutted out of the mountains and "
 "which is used for beautiful buildings and columns."
 msgstr ""
-"Marmer is prachtige steen die wordt gekerfd uit de bergen en deze wordt "
-"gebruikt voor prachtige gebouwen en zuilten."
+"Marmer is prachtige steen die wordt gewonnen uit de bergen en wordt gebruikt "
+"voor prachtige gebouwen en zuilen."
 
 #: ../../tribes/empire/conf:115
 msgid "Master Miner"
@@ -521,7 +521,7 @@ msgstr "Molenaar"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr "Maalt het graan om bloem te produceren."
+msgstr "Maalt het graan om meel te produceren."
 
 #: ../../tribes/empire/marblemine/conf:22
 #: ../../tribes/empire/quarry/conf:19
@@ -551,6 +551,10 @@ msgstr ""
 msgid "Miner"
 msgstr "Mijnwerker"
 
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:117
+msgid "Not enough space"
+msgstr "Niet genoeg ruimte"
+
 #: ../../tribes/empire/conf:144
 msgid "Outpost"
 msgstr "Voorpost"
@@ -561,7 +565,7 @@ msgstr "Schieter"
 
 #: ../../tribes/empire/conf:79
 msgid "Pick"
-msgstr "Punthouweel"
+msgstr "Pikhouweel"
 
 #: ../../tribes/empire/conf:118
 msgid "Pig Breeder"
@@ -617,7 +621,7 @@ msgstr "Maak maliënkolder"
 
 #: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fire tongs"
-msgstr "Maak brandtang"
+msgstr "Maak vuurtang"
 
 #: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce fishing rod"
@@ -821,6 +825,16 @@ msgstr "Smelt ijzer."
 msgid "Soldier"
 msgstr "Soldaat"
 
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:118
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
+msgstr ""
+"Sommige van je begin gebouwen hadden niet genoeg ruimte en \n"
+"zijn niet gebouwd. Je bent hierdoor in het nadeel: overweeg om deze \n"
+"kaart te herstarten met een eerlijke begin instelling."
+
 #: ../../tribes/empire/conf:121
 msgid "Stonemason"
 msgstr "Steenhouwer"
@@ -877,8 +891,8 @@ msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "They are produced by the toolsmith."
 msgstr ""
-"De brandtang is het gereedschap van de smelter, die werkt in de hoogoven. "
-"Hij wordt gemaakt door de werktuigsmid."
+"De vuurtang is het gereedschap van de smelter, die werkt in de hoogoven. Hij "
+"wordt gemaakt door de werktuigsmid."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -927,8 +941,8 @@ msgid ""
 "This basket is needed by the winegrower, for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
-"Deze mand wordt gebruikt door de wijngaardier bij het oogsten van de "
-"druiven. Hij wordt gemaakt door de werktuigsmid."
+"Deze mand wordt gebruikt door de wijnboer bij het oogsten van de druiven. "
+"Hij wordt gemaakt door de werktuigsmid."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid "This is a good warrior lance, with a steel-top and a little blade."
@@ -1012,7 +1026,7 @@ msgstr "Werktuigsmid"
 
 #: ../../tribes/empire/conf:193
 msgid "Toolsmithy"
-msgstr "Werktuigsmid"
+msgstr "Werktuigsmederij"
 
 #: ../../tribes/empire/conf:145
 #: ../../tribes/empire/conf:153
@@ -1205,7 +1219,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:194
 msgid "Weapon Smithy"
-msgstr "Wapensmid"
+msgstr "Wapensmederij"
 
 #: ../../tribes/empire/iron/conf:1
 msgid "Weapons and tools are made of iron."

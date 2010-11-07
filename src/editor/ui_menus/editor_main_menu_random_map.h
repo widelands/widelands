@@ -68,7 +68,7 @@ private:
 	UI::Callback_Button * m_res;
 	UI::Callback_Button * m_world;
 	UI::Checkbox * m_island_mode;
-	UI::Callback_Button* m_goButton;
+	UI::Callback_Button * m_goButton;
 	int32_t m_w, m_h, m_landval, m_waterval, m_wastelandval;
 	uint8_t m_pn;
 	uint32_t m_mapNumber;

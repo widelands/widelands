@@ -44,7 +44,7 @@ WidelandsServer::WidelandsServer()
 // Destructor
 WidelandsServer::~WidelandsServer()
 {
-	if(m_ip)
+	if (m_ip)
 		ggz_free(m_ip);
 }
 
@@ -131,7 +131,7 @@ void WidelandsServer::dataEvent(Client * const client)
 					 	(&(reinterpret_cast<struct sockaddr_in6 *>(addr))->sin6_addr),
 					 ip,
 					 INET6_ADDRSTRLEN);
-			} else if(addr->sa_family == AF_INET) {
+			} else if (addr->sa_family == AF_INET) {
 				ip = static_cast<char *>(ggz_malloc(INET_ADDRSTRLEN));
 				inet_ntop
 					(AF_INET,

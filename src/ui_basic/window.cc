@@ -185,10 +185,10 @@ void Window::warp_mouse_to_fastclick_panel() {
 		 Point pt(m_fastclick_panel->get_w() / 2, m_fastclick_panel->get_h() / 2);
 		 UI::Panel * p = m_fastclick_panel;
 
-		 while(p->get_parent() && p != this) {
+		while (p->get_parent() && p != this) {
 			 pt = p->to_parent(pt);
 			 p = p->get_parent();
-		 }
+		}
 
 		set_mouse_pos(pt);
 	}
