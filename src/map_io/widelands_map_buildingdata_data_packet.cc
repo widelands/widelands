@@ -748,11 +748,13 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 							 	 "%u"),
 							 program_name, skip_time, gametime);
 					productionsite.m_skipped_programs[program_name] = skip_time;
-				} else
+				} else {
+					fr.Unsigned32(); // eat skip time
 					log
 						("WARNING: productionsite has skipped program \"%s\", which "
 						 "does not exist\n",
 						 program_name);
+				}
 			}
 
 			//  state
@@ -788,20 +790,16 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			productionsite.m_program_time = fr.Signed32();
 
 			uint16_t nr_queues = fr.Unsigned16();
-			productionsite.m_input_queues.resize(nr_queues);
-			// perhaps the building had more input queues in earlier versions
-			for (; nr_queues > productionsite.m_input_queues.size(); --nr_queues) {
-				productionsite.m_input_queues[nr_queues] =
-					new WaresQueue(productionsite, Ware_Index::Null(), 0, 0);
-				productionsite.m_input_queues[nr_queues]->Read(fr, game, mol);
-			}
-			// do not use productionsite.m_input_queues.size() as maximum, perhaps
-			// the older version had less inputs - that way we leave the new ones
-			// empty
+			assert(!productionsite.m_input_queues.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
-				productionsite.m_input_queues[i] =
-					new WaresQueue(productionsite, Ware_Index::Null(), 0, 0);
-				productionsite.m_input_queues[i]->Read(fr, game, mol);
+				WaresQueue * wq = new WaresQueue(productionsite, Ware_Index::Null(), 0, 0);
+				wq->Read(fr, game, mol);
+
+				if (!wq->get_ware()) {
+					delete wq;
+				} else {
+					productionsite.m_input_queues.push_back(wq);
+				}
 			}
 
 			uint16_t const stats_size = fr.Unsigned16();
