@@ -30,6 +30,13 @@ hotspot=14 34
 fps=15
 playercolor=true
 
+[compatibility_immovable]
+# For compatibility with build15 and earlier
+flax0s=replace reed0s
+flax0t=replace reed0t
+flax0=replace reed0
+flax1=replace reed1
+
 [immovable types]
 ashes=_Ashes
 destroyed_building=_Destroyed building

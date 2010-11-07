@@ -145,6 +145,11 @@ ProductionSite_Descr::ProductionSite_Descr
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
+
+	if (Section * compat_s = prof.get_section("compatibility_programs")) {
+		while (const Section::Value * v = compat_s->get_next_val())
+			m_compatibility_programs[v->get_name()] = split_string(v->get_string(), " ");
+	}
 }
 
 ProductionSite_Descr::~ProductionSite_Descr()
@@ -167,6 +172,21 @@ const ProductionProgram * ProductionSite_Descr::get_program
 		throw wexception
 			("%s has no program '%s'", name().c_str(), program_name.c_str());
 	return it->second;
+}
+
+/**
+ * If there is a compatibility action for the given program, return it.
+ *
+ * Otherwise, return an empty vector.
+ */
+const std::vector<std::string> & ProductionSite_Descr::compatibility_program
+	(const std::string & progname) const
+{
+	static const std::vector<std::string> empty;
+	Compatibility::const_iterator it = m_compatibility_programs.find(progname);
+	if (it != m_compatibility_programs.end())
+		return it->second;
+	return empty;
 }
 
 /**

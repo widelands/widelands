@@ -1760,6 +1760,13 @@ void Worker::program_update(Game & game, State & state)
 		return pop_task(game);
 	}
 
+	if (!state.program) {
+		// This might happen as fallout of some save game compatibility fix
+		molog("[program]: No program active\n");
+		send_signal(game, "fail");
+		return pop_task(game);
+	}
+
 	for (;;) {
 		WorkerProgram const & program =
 			ref_cast<WorkerProgram const, BobProgramBase const>(*state.program);
@@ -2844,6 +2851,14 @@ const Bob::Task * Worker::Loader::get_task(const std::string & name)
 const BobProgramBase * Worker::Loader::get_program(const std::string & name)
 {
 	Worker & worker = get<Worker>();
+	const std::string & compatibility = worker.descr().compatibility_program(name);
+
+	if (compatibility == "fail") {
+		if (upcast(Game, game, &egbase()))
+			add_finish(boost::bind(&Worker::send_signal, &worker, boost::ref(*game), "fail"));
+		return 0;
+	}
+
 	return worker.descr().get_program(name);
 }
 

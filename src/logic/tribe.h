@@ -125,6 +125,9 @@ struct Tribe_Descr {
 	int32_t get_immovable_index(char const * const l) const {
 		return m_immovables.get_index(l);
 	}
+	int32_t get_immovable_index(const std::string & l) const {
+		return m_immovables.get_index(l);
+	}
 	int32_t get_nr_immovables() {return m_immovables.get_nitems();}
 	Immovable_Descr const * get_immovable_descr(int32_t const index) const {
 		return m_immovables.get(index);
@@ -223,6 +226,8 @@ struct Tribe_Descr {
 		return m_workers_order_coords;
 	}
 
+	const std::string & compatibility_immovable(const std::string & name) const;
+
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void referenceBuilding
 		(::FileWrite &, std::string const &, HTMLReferences::Role,
@@ -262,6 +267,12 @@ private:
 	Initializations m_initializations;
 
 	Military_Data   m_military_data;
+
+	/**
+	 * For savegame compatibility, this maps immovable names to strings
+	 * describing the appropriate compatibility preserving action.
+	 */
+	std::map<std::string, std::string> m_compatibility_immovable;
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTMLBuildings(std::string const & directory);

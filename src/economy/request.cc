@@ -108,6 +108,8 @@ Request::~Request()
 void Request::Read
 	(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
+	bool fudged_type = false;
+
 	try {
 		uint16_t const version = fr.Unsigned16();
 		if (2 <= version and version <= REQUEST_VERSION) {
@@ -143,8 +145,12 @@ void Request::Read
 				} else if (Ware_Index const woi = tribe.worker_index(type_name)) {
 					m_type = WORKER;
 					m_index = woi;
-				} else
-					throw wexception("request for unknown type \"%s\"", type_name);
+				} else {
+					log
+						("Request::Read: unknown type '%s', stick with default %i/%i\n",
+						 type_name, m_type, m_index.value());
+					fudged_type = true;
+				}
 			}
 			if (version <= 5)
 				fr.Unsigned8(); // was m_idle
@@ -166,8 +172,24 @@ void Request::Read
 
 						if (upcast(Worker, worker, obj)) {
 							transfer = worker->get_transfer();
+							if (m_type != WORKER || worker->worker_index() != m_index) {
+								log("Request::Read: incompatible transfer type\n");
+								if (!fudged_type)
+									throw wexception
+										("Request::Read: incompatible transfer type");
+								transfer->has_failed();
+								transfer = 0;
+							}
 						} else if (upcast(WareInstance, ware, obj)) {
 							transfer = ware->get_transfer();
+							if (m_type != WARE || ware->descr_index() != m_index) {
+								log("Request::Read: incompatible transfer type\n");
+								if (!fudged_type)
+									throw wexception
+										("Request::Read: incompatible transfer type");
+								transfer->has_failed();
+								transfer = 0;
+							}
 						} else
 							throw wexception
 								("transfer target %u is neither ware nor worker",

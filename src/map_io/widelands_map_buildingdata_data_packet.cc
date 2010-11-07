@@ -312,23 +312,39 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			//  supply
 			Tribe_Descr const & tribe = warehouse.tribe();
 			while (fr.Unsigned8()) {
-				Ware_Index const id = tribe.safe_ware_index(fr.CString());
+				Ware_Index const id = tribe.ware_index(fr.CString());
 				if (packet_version >= 5) {
-					warehouse.insert_wares(id, fr.Unsigned32());
-					warehouse.set_ware_policy
-						(id, static_cast<Warehouse::StockPolicy>(fr.Unsigned8()));
+					uint32_t amount = fr.Unsigned32();
+					Warehouse::StockPolicy policy =
+						static_cast<Warehouse::StockPolicy>(fr.Unsigned8());
+
+					if (id) {
+						warehouse.insert_wares(id, amount);
+						warehouse.set_ware_policy(id, policy);
+					}
 				} else {
-					warehouse.insert_wares(id, fr.Unsigned16());
+					uint16_t amount = fr.Unsigned16();
+
+					if (id)
+						warehouse.insert_wares(id, amount);
 				}
 			}
 			while (fr.Unsigned8()) {
-				Ware_Index const id = tribe.safe_worker_index(fr.CString());
+				Ware_Index const id = tribe.worker_index(fr.CString());
 				if (packet_version >= 5) {
-					warehouse.insert_workers(id, fr.Unsigned32());
-					warehouse.set_worker_policy
-						(id, static_cast<Warehouse::StockPolicy>(fr.Unsigned8()));
+					uint32_t amount = fr.Unsigned32();
+					Warehouse::StockPolicy policy =
+						static_cast<Warehouse::StockPolicy>(fr.Unsigned8());
+
+					if (id) {
+						warehouse.insert_workers(id, amount);
+						warehouse.set_worker_policy(id, policy);
+					}
 				} else {
-					warehouse.insert_workers(id, fr.Unsigned16());
+					uint16_t amount = fr.Unsigned16();
+
+					if (id)
+						warehouse.insert_workers(id, amount);
 				}
 			}
 
@@ -731,6 +747,21 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				std::transform
 					(program_name.begin(), program_name.end(), program_name.begin(),
 					 tolower);
+				const std::vector<std::string> & compat = descr.compatibility_program(program_name);
+				if (!compat.empty()) {
+					if (compat[0] == "replace") {
+						if (compat.size() != 2)
+							throw game_data_error
+								("Program '%s' compatibility: usage: replace other-name",
+								 program_name.c_str());
+
+						program_name = compat[1];
+					} else
+						throw game_data_error
+							("Unknown compatibility code '%s' for program '%s'",
+							 compat[0].c_str(), program_name.c_str());
+				}
+
 				productionsite.m_stack[i].program =
 					productionsite.descr().get_program(program_name);
 				productionsite.m_stack[i].ip    = fr.  Signed32();

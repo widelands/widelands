@@ -236,6 +236,11 @@ private:
 	ReplayWriter * m_replaywriter;
 
 	General_Stats_vector m_general_stats;
+
+private:
+	// no copying
+	Game(const Game &);
+	Game & operator=(const Game &);
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

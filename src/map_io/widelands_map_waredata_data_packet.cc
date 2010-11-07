@@ -155,10 +155,16 @@ throw (_wexception)
 							{
 								Tribe_Descr const & tribe =
 									player_immovable->owner().tribe();
-								ware.m_descr =
-									tribe.get_ware_descr
-										(ware.m_descr_index =
-										 	tribe.safe_ware_index(type_name));
+								ware.m_descr_index = tribe.ware_index(type_name);
+								if (!ware.m_descr_index) {
+									log
+										("WARNING: ware type %s does not exist\n",
+										 type_name);
+									ware.m_descr_index = Ware_Index::First();
+									if (upcast(Game, game, &egbase))
+										ware.schedule_destroy(*game);
+								}
+								ware.m_descr = tribe.get_ware_descr(ware.m_descr_index);
 								ware.set_economy(player_immovable->get_economy());
 							} else
 								throw game_data_error

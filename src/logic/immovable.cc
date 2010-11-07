@@ -629,13 +629,31 @@ Map_Object::Loader * Immovable::load
 				egbase.manually_load_tribe(owner);
 
 				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner)) {
-					int32_t const idx = tribe->get_immovable_index(name);
+					std::string effective_name = name;
+					const std::vector<std::string> compat = split_string
+						(tribe->compatibility_immovable(name), " ");
+
+					if (compat.size() >= 1) {
+						if (compat[0] == "replace") {
+							if (compat.size() != 2)
+								throw game_data_error
+									("incomplete compatibility_immovable replace for %s",
+									 name);
+
+							effective_name = compat[1];
+						} else
+							throw game_data_error
+								("bad compatibility_immovable code %s for %s",
+								 compat[0].c_str(), name);
+					}
+
+					int32_t const idx = tribe->get_immovable_index(effective_name);
 					if (idx != -1)
 						imm = new Immovable(*tribe->get_immovable_descr(idx));
 					else
 						throw game_data_error
 							(_("tribe %s does not define immovable type \"%s\""),
-							 owner, name);
+							 owner, effective_name.c_str());
 				} else
 					throw wexception(_("unknown tribe %s"), owner);
 			} else { //  world immovable
