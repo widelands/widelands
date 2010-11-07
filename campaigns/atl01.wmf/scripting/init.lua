@@ -266,7 +266,7 @@ function check_for_ships()
    -- Check if the ships are done, then the mission ends successfully
    local lake_fields = Set:new()
    for idx,f in ipairs(map:get_field(75,80):region(12)) do
-      if f:has_movecaps_swim() then
+      if f:has_caps("swimmable") then
          lake_fields:add(f)
       end
    end

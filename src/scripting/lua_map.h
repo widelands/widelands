@@ -614,7 +614,7 @@ public:
 	int __tostring(lua_State * L);
 	int __eq(lua_State * L);
 	int region(lua_State * L);
-	int has_movecaps_swim(lua_State *);
+	int has_caps(lua_State *);
 
 	/*
 	 * C methods

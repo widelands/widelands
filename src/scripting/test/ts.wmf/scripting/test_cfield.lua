@@ -197,6 +197,59 @@ function field_resources_tests:test_set_resource_type_illegal_resource()
    assert_error("Illegal name!", function() self.f.resource = "ksjdjhsdf" end)
 end
 
+-- ==========
+-- Fieldcaps 
+-- ==========
+field_caps_tests = lunit.TestCase("Field caps tests")
+
+function field_caps_tests:test_big_field_on_land()
+   local f = map:get_field(0,46)
+   assert_equal(true, f:has_caps("small"))
+   assert_equal(true, f:has_caps("medium"))
+   assert_equal(true, f:has_caps("big"))
+   assert_equal(true, f:has_caps("flag"))
+   assert_equal(false, f:has_caps("mine"))
+   assert_equal(false, f:has_caps("swimmable"))
+   assert_equal(true, f:has_caps("walkable"))
+end
+function field_caps_tests:test_flag_field_on_land()
+   local f = map:get_field(1,53)
+   assert_equal(false, f:has_caps("small"))
+   assert_equal(false, f:has_caps("medium"))
+   assert_equal(false, f:has_caps("big"))
+   assert_equal(true, f:has_caps("flag"))
+   assert_equal(false, f:has_caps("mine"))
+   assert_equal(false, f:has_caps("swimmable"))
+   assert_equal(true, f:has_caps("walkable"))
+end
+function field_caps_tests:test_mine_field()
+   local f = map:get_field(63,54)
+   assert_equal(false, f:has_caps("small"))
+   assert_equal(false, f:has_caps("medium"))
+   assert_equal(false, f:has_caps("big"))
+   assert_equal(true, f:has_caps("flag"))
+   assert_equal(true, f:has_caps("mine"))
+   assert_equal(false, f:has_caps("swimmable"))
+   assert_equal(true, f:has_caps("walkable"))
+end
+function field_caps_tests:test_field_on_water()
+   local f = map:get_field(7,58)
+   assert_equal(false, f:has_caps("small"))
+   assert_equal(false, f:has_caps("medium"))
+   assert_equal(false, f:has_caps("big"))
+   assert_equal(false, f:has_caps("flag"))
+   assert_equal(false, f:has_caps("mine"))
+   assert_equal(true, f:has_caps("swimmable"))
+   assert_equal(false, f:has_caps("walkable"))
+end
+
+function field_caps_tests:test_wrong_call()
+   assert_error("Unknown caps", function()
+      map:get_field(7,58):has_caps("blahfasel")
+   end)
+end
+
+
 
 -- ===============
 -- owner/claimers
