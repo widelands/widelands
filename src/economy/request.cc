@@ -117,26 +117,33 @@ void Request::Read
 			if (version <= 3) {
 				//  Unfortunately, old versions wrote the index. The best thing
 				//  that we can do with that is to look it up in a table.
-				m_type = static_cast<Type>(fr.Unsigned8());
-				if (m_type != WARE and m_type != WORKER)
+				Type newtype = static_cast<Type>(fr.Unsigned8());
+				if (newtype != WARE and newtype != WORKER)
 					throw wexception
 						("type is %u but must be %u (ware) or %u (worker)",
 						 m_type, WARE, WORKER);
 				uint32_t const legacy_index = fr.Unsigned32();
-				m_index =
-					m_type == WARE
-					?
-					Legacy::  ware_index
-						(tribe,
-						 m_target.descr().descname(),
-						 "requests",
-						 legacy_index)
-					:
-					Legacy::worker_index
+				if (newtype == WORKER) {
+					m_type = WORKER;
+					m_index = Legacy::worker_index
 						(tribe,
 						 m_target.descr().descname(),
 						 "requests",
 						 legacy_index);
+				} else {
+					Ware_Index newindex = Legacy::ware_index
+						(tribe,
+						 m_target.descr().descname(),
+						 "requests",
+						 legacy_index);
+					if (newindex) {
+						m_type = WARE;
+						m_index = newindex;
+					} else {
+						log("Request::Read: Legacy ware no longer exists, sticking with default\n");
+						fudged_type = true;
+					}
+				}
 			} else {
 				char const * const type_name = fr.CString();
 				if (Ware_Index const wai = tribe.ware_index(type_name)) {

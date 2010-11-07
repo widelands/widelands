@@ -70,6 +70,9 @@ throw (_wexception)
 					uint32_t     const index           = fr.Unsigned32();
 					try {
 						Map_Object & location = mol.get<Map_Object>(location_serial);
+						const Tribe_Descr * tribe = 0;
+						Economy * economy = 0;
+						std::string explanation;
 
 						if (upcast(PlayerImmovable, player_immovable, &location)) {
 							if
@@ -77,38 +80,32 @@ throw (_wexception)
 								 or
 								 dynamic_cast<Flag     const *>(player_immovable))
 							{
-								//  We didn't know what kind of ware we were till now,
-								//  so no economy might have a clue of us.
-								Tribe_Descr const & tribe =
-									player_immovable->owner().tribe();
-								ware.m_descr =
-									tribe.get_ware_descr
-										(ware.m_descr_index =
-										 	Legacy::ware_index
-										 		(tribe,
-										 		 player_immovable->descr().descname(),
-										 		 "has",
-										 		 index));
-
-								ware.set_economy(player_immovable->get_economy());
+								tribe = &player_immovable->owner().tribe();
+								economy = player_immovable->get_economy();
+								explanation = player_immovable->descr().descname();
 							} else
 								throw game_data_error
 									("is PlayerImmovable but not Building or Flag");
 						} else if (upcast(Worker, worker, &location)) {
-							Tribe_Descr const & tribe = *worker->get_tribe();
-							ware.m_descr =
-								tribe.get_ware_descr
-									(ware.m_descr_index =
-									 	Legacy::ware_index
-									 		(tribe,
-									 		 worker->descr().descname(),
-									 		 "has",
-									 		 index));
+							tribe = worker->get_tribe();
+							explanation = worker->descname();
 
 							//  The worker sets our economy.
 						} else
 							throw game_data_error("is not PlayerImmovable or Worker");
 						//  Do not touch supply or transfer.
+
+						ware.m_descr_index = Legacy::ware_index
+							(*tribe, explanation, "has", index);
+						if (!ware.m_descr_index) {
+							ware.m_descr_index = Ware_Index::First();
+							if (upcast(Game, game, &egbase))
+								ware.schedule_destroy(*game);
+						}
+						ware.m_descr = tribe->get_ware_descr(ware.m_descr_index);
+
+						if (economy)
+							ware.set_economy(economy);
 
 						if (uint32_t const nextstep_serial = fr.Unsigned32())
 							try {
