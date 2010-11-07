@@ -300,6 +300,11 @@ Tribe_Descr::Tribe_Descr
 		} catch (std::exception const & e) {
 			throw game_data_error("root conf: %s", e.what());
 		}
+
+		if (Section * compatibility_s = root_conf.get_section("compatibility_immovable")) {
+			while (const Section::Value * v = compatibility_s->get_next_val())
+				m_compatibility_immovable[v->get_name()] = split_string(v->get_string(), " ");
+		}
 	} catch (_wexception const & e) {
 		throw game_data_error(_("tribe %s: %s"), tribename.c_str(), e.what());
 	}
@@ -565,5 +570,19 @@ Building_Index Tribe_Descr::safe_building_index
 			 name().c_str(), buildingname);
 	return result;
 }
+
+/**
+ * If there is a savegame compatibility information string concerning the
+ * given immovable name, return it. Otherwise, return an empty string.
+ */
+const std::vector<std::string> & Tribe_Descr::compatibility_immovable(const std::string & name) const
+{
+	static const std::vector<std::string> empty;
+	Compatibility::const_iterator it = m_compatibility_immovable.find(name);
+	if (it != m_compatibility_immovable.end())
+		return it->second;
+	return empty;
+}
+
 
 }

@@ -543,12 +543,32 @@ Map_Object::Loader * WareInstance::load
 		if (!tribe)
 			throw wexception("unknown tribe '%s'", tribename.c_str());
 
-		Ware_Index wareindex = tribe->safe_ware_index(warename);
+		bool kill = false;
+		Ware_Index wareindex = tribe->ware_index(warename);
+		if (!wareindex) {
+			// Old savegame, using a ware that no longer exists
+			// We need to do the loading anyway to ensure that the
+			// correct number of bytes is read, but we will mark
+			// the object for immediate removal.
+			log("WARNING: Tribe %s has no ware %s\n", tribename.c_str(), warename.c_str());
+			wareindex = Ware_Index::First();
+			kill = true;
+		}
 		const Item_Ware_Descr * descr = tribe->get_ware_descr(wareindex);
 
 		std::auto_ptr<Loader> loader(new Loader);
 		loader->init(egbase, mol, *new WareInstance(wareindex, descr));
 		loader->load(fr);
+
+		if (kill) {
+			if (upcast(Game, game, &egbase))
+				loader->add_finish
+					(boost::bind
+					 (&Map_Object::schedule_destroy,
+					  loader->get_object(),
+					  boost::ref(*game)));
+		}
+
 		return loader.release();
 	} catch (const std::exception & e) {
 		throw wexception("WareInstance: %s", e.what());

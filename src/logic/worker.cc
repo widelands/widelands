@@ -1266,6 +1266,18 @@ Ware_Index Worker::level(Game & game) {
 	return old_index; //  So that the caller knows what to replace him with.
 }
 
+/**
+ * Change this worker into a different type.
+ *
+ * \warning Using this function is very dangerous. The only reason it exists
+ * is to fix certain savegame compatibility issues.
+ */
+void Worker::flash(const std::string & newname)
+{
+	log("WARNING: Flashing worker of type %s to %s\n", name().c_str(), newname.c_str());
+
+	m_descr = tribe().get_worker_descr(tribe().safe_worker_index(newname));
+}
 
 /**
  * Set a fallback task.
@@ -1757,6 +1769,13 @@ void Worker::program_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
 		molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
+		return pop_task(game);
+	}
+
+	if (!state.program) {
+		// This might happen as fallout of some save game compatibility fix
+		molog("[program]: No program active\n");
+		send_signal(game, "fail");
 		return pop_task(game);
 	}
 
@@ -2844,6 +2863,14 @@ const Bob::Task * Worker::Loader::get_task(const std::string & name)
 const BobProgramBase * Worker::Loader::get_program(const std::string & name)
 {
 	Worker & worker = get<Worker>();
+	const std::string & compatibility = worker.descr().compatibility_program(name);
+
+	if (compatibility == "fail") {
+		if (upcast(Game, game, &egbase()))
+			add_finish(boost::bind(&Worker::send_signal, &worker, boost::ref(*game), "fail"));
+		return 0;
+	}
+
 	return worker.descr().get_program(name);
 }
 

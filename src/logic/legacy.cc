@@ -291,9 +291,22 @@ Ware_Index ware_index
 		("WARNING: Interpreting a legacy ware index: A %s %s %s a ware of type "
 		 "%u. This is interpreted as %s.\n",
 		 tribe.name().c_str(), name.c_str(), relation, legacy_index, type_name);
-	return tribe.safe_ware_index(type_name);
+	return tribe.ware_index(type_name);
 }
 
+Ware_Index safe_ware_index
+	(Tribe_Descr const &       tribe,
+	 std::string const &       name,
+	 char        const * const relation,
+	 uint32_t            const legacy_index)
+{
+	Ware_Index ware = ware_index(tribe, name, relation, legacy_index);
+	if (!ware)
+		throw game_data_error
+			("Legacy ware %i of tribe %s no longer exists",
+			 legacy_index, tribe.name().c_str());
+	return ware;
+}
 
 Ware_Index worker_index
 	(Tribe_Descr const &       tribe,

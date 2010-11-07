@@ -42,6 +42,9 @@ produce_shovel=_Produce shovel
 produce_hunting_spear=_Produce hunting spear
 work=_Work
 
+[compatibility_programs]
+produce_axe=replace produce_felling_axe
+
 [produce_felling_axe]
 return=skipped unless economy needs felling_axe
 consume=iron trunk

@@ -60,16 +60,6 @@ inline Immovable_Descr const & StreamRead::Immovable_Type
 }
 
 inline Immovable_Descr const & StreamRead::Immovable_Type
-	(Tribe_Descr const & tribe)
-{
-	char const * const name = CString();
-	int32_t const index = tribe.get_immovable_index(name);
-	if (index == -1)
-		throw tribe_immovable_nonexistent(tribe.name(), name);
-	return *tribe.get_immovable_descr(index);
-}
-
-inline Immovable_Descr const & StreamRead::Immovable_Type
 	(Editor_Game_Base const & egbase)
 {
 	if (Tribe_Descr const * const tribe = Tribe_allow_null(egbase))

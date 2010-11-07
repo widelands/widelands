@@ -312,23 +312,39 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			//  supply
 			Tribe_Descr const & tribe = warehouse.tribe();
 			while (fr.Unsigned8()) {
-				Ware_Index const id = tribe.safe_ware_index(fr.CString());
+				Ware_Index const id = tribe.ware_index(fr.CString());
 				if (packet_version >= 5) {
-					warehouse.insert_wares(id, fr.Unsigned32());
-					warehouse.set_ware_policy
-						(id, static_cast<Warehouse::StockPolicy>(fr.Unsigned8()));
+					uint32_t amount = fr.Unsigned32();
+					Warehouse::StockPolicy policy =
+						static_cast<Warehouse::StockPolicy>(fr.Unsigned8());
+
+					if (id) {
+						warehouse.insert_wares(id, amount);
+						warehouse.set_ware_policy(id, policy);
+					}
 				} else {
-					warehouse.insert_wares(id, fr.Unsigned16());
+					uint16_t amount = fr.Unsigned16();
+
+					if (id)
+						warehouse.insert_wares(id, amount);
 				}
 			}
 			while (fr.Unsigned8()) {
-				Ware_Index const id = tribe.safe_worker_index(fr.CString());
+				Ware_Index const id = tribe.worker_index(fr.CString());
 				if (packet_version >= 5) {
-					warehouse.insert_workers(id, fr.Unsigned32());
-					warehouse.set_worker_policy
-						(id, static_cast<Warehouse::StockPolicy>(fr.Unsigned8()));
+					uint32_t amount = fr.Unsigned32();
+					Warehouse::StockPolicy policy =
+						static_cast<Warehouse::StockPolicy>(fr.Unsigned8());
+
+					if (id) {
+						warehouse.insert_workers(id, amount);
+						warehouse.set_worker_policy(id, policy);
+					}
 				} else {
-					warehouse.insert_workers(id, fr.Unsigned16());
+					uint16_t amount = fr.Unsigned16();
+
+					if (id)
+						warehouse.insert_workers(id, amount);
 				}
 			}
 
@@ -666,9 +682,25 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			uint16_t nr_workers = fr.Unsigned16();
 			for (uint16_t i = nr_workers; i; --i) {
 				Worker & worker = mol.get<Worker>(fr.Unsigned32());
-				Worker_Descr const & worker_descr = worker.descr();
+
+				const std::vector<std::string> & compat =
+					descr.compatibility_working_positions(worker.descr().name());
+				if (!compat.empty()) {
+					if (compat[0] == "flash") {
+						if (compat.size() != 2)
+							throw game_data_error
+								("working position '%s' compat usage: flash other-name",
+								 worker.descr().name().c_str());
+
+						worker.flash(compat[1]);
+					} else
+						throw game_data_error
+							("unknown compat '%s' for working position '%s'",
+							 compat[0].c_str(), worker.descr().name().c_str());
+				}
 
 				//  Find a working position that matches this worker.
+				Worker_Descr const & worker_descr = worker.descr();
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
 					(wl_const_range<Ware_Types> j(working_positions);;
@@ -716,11 +748,13 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 							 	 "%u"),
 							 program_name, skip_time, gametime);
 					productionsite.m_skipped_programs[program_name] = skip_time;
-				} else
+				} else {
+					fr.Unsigned32(); // eat skip time
 					log
 						("WARNING: productionsite has skipped program \"%s\", which "
 						 "does not exist\n",
 						 program_name);
+				}
 			}
 
 			//  state
@@ -731,6 +765,21 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				std::transform
 					(program_name.begin(), program_name.end(), program_name.begin(),
 					 tolower);
+				const std::vector<std::string> & compat = descr.compatibility_program(program_name);
+				if (!compat.empty()) {
+					if (compat[0] == "replace") {
+						if (compat.size() != 2)
+							throw game_data_error
+								("Program '%s' compatibility: usage: replace other-name",
+								 program_name.c_str());
+
+						program_name = compat[1];
+					} else
+						throw game_data_error
+							("Unknown compatibility code '%s' for program '%s'",
+							 compat[0].c_str(), program_name.c_str());
+				}
+
 				productionsite.m_stack[i].program =
 					productionsite.descr().get_program(program_name);
 				productionsite.m_stack[i].ip    = fr.  Signed32();
@@ -741,20 +790,16 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			productionsite.m_program_time = fr.Signed32();
 
 			uint16_t nr_queues = fr.Unsigned16();
-			productionsite.m_input_queues.resize(nr_queues);
-			// perhaps the building had more input queues in earlier versions
-			for (; nr_queues > productionsite.m_input_queues.size(); --nr_queues) {
-				productionsite.m_input_queues[nr_queues] =
-					new WaresQueue(productionsite, Ware_Index::Null(), 0, 0);
-				productionsite.m_input_queues[nr_queues]->Read(fr, game, mol);
-			}
-			// do not use productionsite.m_input_queues.size() as maximum, perhaps
-			// the older version had less inputs - that way we leave the new ones
-			// empty
+			assert(!productionsite.m_input_queues.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
-				productionsite.m_input_queues[i] =
-					new WaresQueue(productionsite, Ware_Index::Null(), 0, 0);
-				productionsite.m_input_queues[i]->Read(fr, game, mol);
+				WaresQueue * wq = new WaresQueue(productionsite, Ware_Index::Null(), 0, 0);
+				wq->Read(fr, game, mol);
+
+				if (!wq->get_ware()) {
+					delete wq;
+				} else {
+					productionsite.m_input_queues.push_back(wq);
+				}
 			}
 
 			uint16_t const stats_size = fr.Unsigned16();
