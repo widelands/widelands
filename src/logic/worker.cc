@@ -1723,46 +1723,18 @@ void Worker::return_update(Game & game, State & state)
 	{
 		molog("[return]: Failed to return\n");
 		char buffer[2048];
-		BaseImmovable const * const immovable =
-			game.map()[get_position()].get_immovable();
 		snprintf
 			(buffer, sizeof(buffer),
-			 _
-			 	("The game engine has encountered a logic error. The %s #%u of "
-			 	 "player %u (carrying %s) could not find a way home from (%i, %i) "
-			 	 "(with %s immovable) to the base flag at (%i, %i) of its %s at "
-			 	 "(%i, %i). The %s will be made homeless and probably die, unless "
-			 	 "some object is removed very soon and the %s finds a way to a "
-			 	 "flag connected to a warehouse. The %s will immediately request "
-			 	 "a new worker. Unfortunately this may happen repeatedly and "
-			 	 "drain the supply of workers (tools). No solution for this "
-			 	 "problem has been implemented yet. It would be safest to destroy "
-			 	 "the %s and not rebuild it at that location, nor any other "
-			 	 "building that sends out a worker on the map. This problem "
-			 	 "usually occurs near unpassable terrain, such as water, when an "
-			 	 "object, such as a farm field, is placed on the map while the "
-			 	 "worker is out working. (bug #1796611) (The game has been "
-			 	 "paused.)"),
-			 descname().c_str(), serial(), owner().player_number(),
-			 does_carry_ware() ?
-			 get_carried_item(game)->descr().descname().c_str() : _("nothing"),
-			 get_position().x, get_position().y,
-			 immovable ? immovable->descr().descname().c_str() : _("no"),
-			 location.base_flag().get_position().x,
-			 location.base_flag().get_position().y,
-			 location.descname().c_str(),
-			 location.get_position().x, location.get_position().y,
-			 descname().c_str(), descname().c_str(),
-			 location.descname().c_str(), location.descname().c_str());
+			 _ ("Your %s can't find a way home and will likely die."),
+			 descname().c_str());
 		owner().add_message
 			(game,
 			 *new Message
 			 	("game engine",
 			 	 game.get_gametime(), Forever(),
-			 	 _("Logic error"),
+			 	 _("Worker got lost!"),
 			 	 buffer,
 			 	 get_position()));
-		game.gameController()->setDesiredSpeed(0);
 		return set_location(0);
 	}
 }
