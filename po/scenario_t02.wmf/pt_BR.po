@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 20:47+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-04 15:52+0000\n"
+"PO-Revision-Date: 2010-11-06 22:42+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-07 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
@@ -154,7 +154,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:293
 msgid ""
 " \"While this is true, we should consider it later, for now other obstacles "
-"are at hand. The miners will definately demand greater rations for working "
+"are at hand. The miners will definitely demand greater rations for working "
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
@@ -409,7 +409,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:185
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:186
 msgid "Build a fernery"
-msgstr ""
+msgstr "Construa uma Fazenda de Junco"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
@@ -583,6 +583,9 @@ msgid ""
 "cover roofs. Thatch reed is planted by a ferner around his building, the\n"
 "fernery."
 msgstr ""
+"O terceiro material necessário para aprimorar seus edifícios é a Palha de "
+"Junco, que é usada para cobrir os teto deles.  A Palha de junco é cultiva "
+"pelo Fazendeiro da palha de Junco em volta de sua Fazenda."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."

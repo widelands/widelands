@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-05 22:31+0000\n"
+"PO-Revision-Date: 2010-11-06 22:21+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-11-07 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -196,19 +196,19 @@ msgstr "Extrai pedaços brutos de granito e mármore das pedras espalhadas."
 
 #: ../../tribes/empire/conf:189
 msgid "Deep Coal Mine"
-msgstr "Mina de carvão profunda"
+msgstr "Mina de carvão funda"
 
 #: ../../tribes/empire/conf:193
 msgid "Deep Gold Mine"
-msgstr "Mina de ouro profunda"
+msgstr "Mina de ouro funda"
 
 #: ../../tribes/empire/conf:191
 msgid "Deep Iron Ore Mine"
-msgstr "Mina de ferro profunda"
+msgstr "Mina de ferro funda"
 
 #: ../../tribes/empire/conf:187
 msgid "Deep Marble Mine"
-msgstr "Mina de Mármore Profunda"
+msgstr "Mina de Mármore funda"
 
 #: ../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -812,7 +812,7 @@ msgstr "Fundir ferro"
 
 #: ../../tribes/empire/conf:127
 msgid "Smelter"
-msgstr "Trabalhador metalúrgico"
+msgstr "Fundidor"
 
 #: ../../tribes/empire/conf:178
 msgid "Smelting Works"
@@ -851,7 +851,8 @@ msgstr "Pedras"
 #: ../../tribes/empire/stone/conf:1
 #: ../../tribes/empire/wood/conf:1
 msgid "Stones and wood are the basic build material of the Empire."
-msgstr "Pedra e madeira são os materiais de construção básicos no Império."
+msgstr ""
+"A pedra e a madeira são os materiais de construção básicos do Império."
 
 #: ../../tribes/empire/conf:153
 msgid "Stronghold"
@@ -897,8 +898,9 @@ msgid ""
 "The fires of the Empire are usually fed with wood, but sometimes, wood just "
 "does not burn hot enough. Then, coal is used."
 msgstr ""
-"As chamas no Império são normalmente alimentadas com lenha, mas às vezes, a "
-"madeira não arde o suficientemente quente. Então, carvão é utilizado."
+"As fogueiras do Império são normalmente alimentadas com lenha, mas às vezes "
+"a madeira não produz o calor necessário. Quando isso acontece é utilizado "
+"carvão."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""

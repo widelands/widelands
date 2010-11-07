@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-05 10:36+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-11-06 21:53+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:43+0000\n"
+"X-Launchpad-Export-Date: 2010-11-07 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
@@ -377,7 +377,7 @@ msgstr "Constrói uma Pedreira e a infraestrutura mineira"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:10
 msgid "Build up a wood economy"
-msgstr "Põe em marca a economia da madeira"
+msgstr "Põe em marcha a economia da madeira"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:202
 msgid "Command for Attack"

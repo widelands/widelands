@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-06 00:22+0000\n"
+"PO-Revision-Date: 2010-11-07 00:54+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-11-07 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/README:69
@@ -449,8 +449,8 @@ msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
-"Constrói sempre uma cabana de Caçador e de Tratador de Caça, para que não "
-"fiques sem comida."
+"Constrói sempre uma Cabana do Caçador e uma Coutada, para que não fiques sem "
+"comida."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -520,7 +520,7 @@ msgstr "Criando um Registo de Sessão</p>"
 
 #: ../../txts/README:81
 msgid "Ctrl+F10    Quit the game immediately"
-msgstr "Ctrl+F10    Sair do jogo imediatamente"
+msgstr "Ctrl+F10 Sair do jogo imediatamente"
 
 #: ../../txts/developers:158
 msgid "Czech"
@@ -572,11 +572,11 @@ msgstr "F        Alterna o Ecrã completo"
 
 #: ../../txts/README:83
 msgid "F11         Take a screenshot"
-msgstr "F11         Tira uma foto do ecrã"
+msgstr "F11      Tira uma foto do ecrã"
 
 #: ../../txts/README:79
 msgid "F6           Shows the debug console (only in debug-builds)"
-msgstr "F6           Apresenta a consola de depuração (only in debug-builds)"
+msgstr "F6       Apresenta a consola de depuração (only in debug-builds)"
 
 #: ../../txts/developers:178
 msgid "Finnish"
@@ -653,16 +653,16 @@ msgstr ""
 
 #: ../../txts/README:65
 msgid "Home        Center main mapview on starting location"
-msgstr "Home        Centrar a vista do mapa principal na localização incial"
+msgstr "Home     Centrar a vista do mapa principal na localização incial"
 
 #: ../../txts/developers:24
 #: ../../txts/developers:318
 msgid "Homepage"
-msgstr "Página inicial"
+msgstr "Página web"
 
 #: ../../txts/developers:291
 msgid "Homepage Coders"
-msgstr "Programadores da Página inicial"
+msgstr "Programadores da Página web"
 
 #: ../../txts/COPYING:86
 msgid "How to Apply These Terms to Your New Programs"
@@ -923,11 +923,11 @@ msgstr "PAGEDOWN    Diminui a velocidade do jogo"
 
 #: ../../txts/README:72
 msgid "PAGEUP         Increase gamespeed"
-msgstr "PAGEUP         Aumenta a velocidade do jogo"
+msgstr "PAGEUP          Aumenta a velocidade do jogo"
 
 #: ../../txts/README:76
 msgid "PAUSE         Pauses the game (only for local games)"
-msgstr "PAUSE         Pausa o jogo (apenas para jogos locais)"
+msgstr "PAUSE            Pausa o jogo (apenas para jogos locais)"
 
 #: ../../txts/developers:254
 msgid "Packagers"

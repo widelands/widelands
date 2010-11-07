@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-04 16:52+0100\n"
-"PO-Revision-Date: 2010-11-06 02:09+0000\n"
+"PO-Revision-Date: 2010-11-07 00:43+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-11-07 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/wlapplication.cc:369
@@ -908,6 +908,12 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"<br>Os comando de Anfitrião são:<br>/help  -  Mostra esta ajuda<br>/announce "
+"<msg>  -  Enviar mensagem como um anúncio (system chat)<br>/warn <nome> "
+"<razão>  -  Avisar o utilizador <nome> por causa de <razão><br>/kick <nome> "
+"<razão>  -  Expulsar o utilizador <nome> por causa de <razão><br>/forcePause "
+"           -  Forçar a  pausa do jogo.<br>/endForcedPause        -  Põe de "
+"novo o jogo à velocidade normal."
 
 #: ../../src/network/nethost.cc:285
 msgid "Wrong use, should be: /announce <message>"
@@ -983,23 +989,25 @@ msgstr "Não existe nenhum utilizador ligado com essa alcunha !"
 #: ../../src/network/nethost.cc:915
 #, c-format
 msgid "%s tried to start the game, but the server is not launchable."
-msgstr ""
+msgstr "%s tentou iniciar o jogo, mas o servidor não é lançável."
 
 #: ../../src/network/nethost.cc:919
 #, c-format
 msgid "%s send the signal to start the game."
-msgstr ""
+msgstr "%s envia o sinal para iniciar o jogo."
 
 #: ../../src/network/nethost.cc:935
 msgid ""
 "<br>Available host commands are:<br>/help  - Shows this help<br>/start - "
 "Starts the server."
 msgstr ""
+"<br>Comando de Anfitrião:<br>/help  - Mostra esta ajuda<br>/start - Inicia o "
+"Servidor."
 
 #: ../../src/network/nethost.cc:940
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
-msgstr ""
+msgstr "Comando desconhecido \"%s\" do servidor dedicado !"
 
 #: ../../src/network/nethost.cc:1115
 #, c-format
@@ -1009,7 +1017,7 @@ msgstr "O anfitrião enviou o jogador %s para o lóbi !"
 #: ../../src/network/nethost.cc:1464
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Computador%u"
 
 #: ../../src/network/nethost.cc:1548
 #, c-format
@@ -1028,6 +1036,8 @@ msgid ""
 "This is a dedicated server send \"@%s /help\" to get a full list of "
 "available commands. \"@%s /start\" starts the server."
 msgstr ""
+"Este é um servidor dedicado. Envie \"@%s /help\" para obter a lista total "
+"dos comandos disponíveis.O comando \"@%s /start\" inicia o servidor ."
 
 #: ../../src/network/nethost.cc:1647
 msgid "Client reports time to host that is running backwards."
@@ -1328,7 +1338,7 @@ msgstr "Cancelar"
 #: ../../src/wui/login_box.cc:73 ../../src/ui_fsmenu/netsetup_lan.cc:114
 #: ../../src/ui_fsmenu/multiplayer.cc:112
 msgid "nobody"
-msgstr "ninguém"
+msgstr "minha_alcunha"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
@@ -1621,7 +1631,7 @@ msgstr "Definições militares"
 
 #: ../../src/wui/fieldaction.cc:499
 msgid "Start attack"
-msgstr "Começar ataque"
+msgstr "ATACAR"
 
 #: ../../src/wui/fieldaction.cc:504
 msgid "Attack"
@@ -1771,12 +1781,12 @@ msgstr " já existe. Sobrescrever?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:270
 msgid "File deletion"
-msgstr ""
+msgstr "Apagar ficheiro"
 
 #: ../../src/wui/game_main_menu_save_game.cc:272
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "Queres mesmo apagar o ficheiro %s?"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
@@ -1792,15 +1802,15 @@ msgstr "Opções económicas"
 
 #: ../../src/wui/transport_ui.cc:139 ../../src/wui/transport_ui.cc:225
 msgid "Increase target"
-msgstr ""
+msgstr "Aumentar quant-alvo"
 
 #: ../../src/wui/transport_ui.cc:140 ../../src/wui/transport_ui.cc:226
 msgid "Decrease target"
-msgstr ""
+msgstr "Baixar quant-alvo"
 
 #: ../../src/wui/transport_ui.cc:141 ../../src/wui/transport_ui.cc:227
 msgid "Reset to default"
-msgstr ""
+msgstr "Quant Predefinida"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
@@ -1888,17 +1898,17 @@ msgstr "Zoom"
 
 #: ../../src/wui/multiplayersetupgroup.cc:100
 msgid "<free>"
-msgstr ""
+msgstr "<livre>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:114
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Jogador %i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:116
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Espectador"
 
 #: ../../src/wui/multiplayersetupgroup.cc:284
 #: ../../src/ui_fsmenu/netsetup_lan.cc:189
@@ -1913,27 +1923,27 @@ msgstr "Cenário"
 #: ../../src/wui/multiplayersetupgroup.cc:340
 #: ../../src/ui_fsmenu/launchMPG.cc:270
 msgid "Savegame"
-msgstr ""
+msgstr "Jogo Guardado"
 
 #: ../../src/wui/multiplayersetupgroup.cc:407
 msgid "Client name"
-msgstr ""
+msgstr "Nome do Cliente"
 
 #: ../../src/wui/multiplayersetupgroup.cc:415
 msgid "Mode"
-msgstr ""
+msgstr "Modo"
 
 #: ../../src/wui/multiplayersetupgroup.cc:431
 msgid "Start"
-msgstr ""
+msgstr "Início"
 
 #: ../../src/wui/multiplayersetupgroup.cc:439
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: ../../src/wui/multiplayersetupgroup.cc:447
 msgid "Tribe"
-msgstr ""
+msgstr "Tribo"
 
 #: ../../src/wui/multiplayersetupgroup.cc:459
 #: ../../src/ui_fsmenu/launchSPG.cc:105
@@ -1999,19 +2009,19 @@ msgstr "Trabalhadores nos armazéns"
 
 #: ../../src/wui/warehousewindow.cc:122
 msgid "Normal policy"
-msgstr ""
+msgstr "Politica Normal"
 
 #: ../../src/wui/warehousewindow.cc:123
 msgid "Preferably store selected wares here"
-msgstr ""
+msgstr "Armazenar mercadorias aqui de preferência"
 
 #: ../../src/wui/warehousewindow.cc:124
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "Não armazenar mercadorias seleccionadas aqui"
 
 #: ../../src/wui/warehousewindow.cc:125
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "Remover mercadorias seleccionadas daqui"
 
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
@@ -2277,7 +2287,7 @@ msgstr "Preparando..."
 
 #: ../../src/ui_basic/helpwindow.cc:40
 msgid "Help: "
-msgstr ""
+msgstr "Ajuda: "
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
@@ -2994,7 +3004,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:592
 msgid "Out of "
-msgstr "sem "
+msgstr "Não há mais "
 
 #: ../../src/logic/worker.cc:595
 msgid ""
@@ -3064,7 +3074,7 @@ msgstr "act: %s"
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "calcular função estatistica: %s"
 
 #: ../../src/logic/tribe.cc:118
 msgid "constructionsite type \"constructionsite\" is missing"
@@ -3481,7 +3491,7 @@ msgstr "nível"
 #: ../../src/logic/production_program.cc:1293
 #, c-format
 msgid "No soldier for this training level found!"
-msgstr ""
+msgstr "Não escontrado soldado com este nivel de treino!"
 
 #: ../../src/logic/production_program.cc:1269
 #, c-format
@@ -3541,7 +3551,7 @@ msgstr "Está sob ataque"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
-msgstr "Começa jogo em rede"
+msgstr "Começar jogo em rede"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
@@ -3562,7 +3572,7 @@ msgstr "Junta-te a este jogo"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:71
 msgid "Host a new game"
-msgstr "Ser anfitrião de um novo jogo"
+msgstr "Ser Anfitrião de Novo Jogo"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:80 ../../src/ui_fsmenu/loadreplay.cc:45
 #: ../../src/ui_fsmenu/loadgame.cc:50
@@ -3722,27 +3732,27 @@ msgstr "Pressiona ESC ou clique para continuar..."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:53
 msgid "Please select"
-msgstr ""
+msgstr "Por favor selecciona"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:67
 msgid "Select a map"
-msgstr ""
+msgstr "Seleciona uma mapa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Jogo Guardado"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Selecciona um Jogo Guardado"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:83
 msgid "Cancel selection"
-msgstr ""
+msgstr "Cancelar seleção"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:112
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Trocar mapa ou Jogo Guardado"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:120 ../../src/ui_fsmenu/launchSPG.cc:82
 msgid "Start game"
@@ -3750,11 +3760,11 @@ msgstr "Começar o jogo"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:146
 msgid "Show the help window"
-msgstr ""
+msgstr "Mostrar a Janela da ajuda"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:153 ../../src/ui_fsmenu/launchMPG.cc:561
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Configuração de Jogo Multi-jogador"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:185 ../../src/ui_fsmenu/launchSPG.cc:275
 msgid "(no map)"
@@ -3762,7 +3772,7 @@ msgstr "(sem mapa)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:186
 msgid "The host has not yet selected a map or saved game."
-msgstr ""
+msgstr "O Anfitrião não seleccionou ainda um mapa ou um Jogo Guardado."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:268 ../../src/ui_fsmenu/launchSPG.cc:224
 msgid "Win condition is set through the scenario"
@@ -3770,7 +3780,7 @@ msgstr "A condição de vitória é definida no cenário"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:272
 msgid "The game is a saved game - the win condition was set before."
-msgstr ""
+msgstr "Este é um jogo guardado - A condição de vitória já foi definida."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:282 ../../src/ui_fsmenu/launchSPG.cc:234
 msgid "Type: "
@@ -3790,59 +3800,67 @@ msgid ""
 "Normally such a file should be send from the host to you, but perhaps the "
 "transfer was not yet finnished!?!"
 msgstr ""
+"O Widelands tentou iniciar um jogo com um ficheiro que não pôde ser "
+"encontrado caminho. \n"
+"O Ficheiro foi: %s\n"
+"Se isto acontece é porque o Anfitrião seleccionou provavelmente um jogo que "
+"tu não tens. Normalmente tal ficheiro tem de ser-te enviado pelo Anfitrião, "
+"mas talvez a transferência ainda não terminou !?!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:401
 msgid ""
 "The selected file can not be found. If it is not automatically transfered to "
 "you, please write the host about this problem."
 msgstr ""
+"O ficheiro que não foi encontrado. Se não te foi enviado automaticamente, "
+"por favor contacta o Anfitrião e conta-lhe o teu problema."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:473
 msgid "Saved players are:"
-msgstr ""
+msgstr "Os jogadores guardados são:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:491
 msgid "<closed>"
-msgstr ""
+msgstr "<fechado>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:530
 msgid "There was an error!"
-msgstr ""
+msgstr "Aconteceu um erro!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:530
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "O ficheiro-mapa parece ser inválido!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:536
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Informações do mapa:\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:538
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Tamanho: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:539
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i jogadores\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:548
 #, c-format
 msgid "* World type: %s\n"
-msgstr ""
+msgstr "* Tipo de mundo: %s\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:551
 msgid "* Scenario mode selected\n"
-msgstr ""
+msgstr "* Modo cenário selecionado\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:562
 msgid "You are in the multi player launch game menu."
-msgstr ""
+msgstr "Estás no Menu Lançar jogo Multi-jogador"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:563
 msgid "Client settings"
-msgstr ""
+msgstr "Definições do Cliente"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid ""
@@ -3851,10 +3869,14 @@ msgid ""
 "open players, players that are already played by other clients (sharing the "
 "kingdom) and spectator mode."
 msgstr ""
+"No lado esquerdo está uma lista de todos os clientes incluindo tu. Com o "
+"botão por detrás da tua Alcunha, podes definir o te modo de jogador. O modos "
+"disponíveis são o Jogadores abertos, Jogadores que já foram jogados por "
+"outros clientes (que partilhem o reino) e modo Espectador."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:570
 msgid "Player settings"
-msgstr ""
+msgstr "Definições de Jogador"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:573
 msgid ""
@@ -3862,12 +3884,17 @@ msgid ""
 "must either be connected to a client or a computer player or be set to "
 "closed."
 msgstr ""
+"No meio estão as definições para os jogadores. Para começar um jogo, cada "
+"jogador tem de estar ligado a um cliente ou a um computador-jogador ou ser "
+"definido para fechar."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:578
 msgid ""
 "If you are a client (not the hosting player), you can set the tribe and the "
 "team for the player you set as your mode."
 msgstr ""
+"Se fores um cliente (não o jogador Anfitrião), podes definir a tribo e a "
+"Equipa para o jogador que definires como o teu modo."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:582
 msgid ""
@@ -3875,10 +3902,14 @@ msgid ""
 "each player (the set of buildings, wares and workers the player starts "
 "with), connect a computer player to a player or close a player."
 msgstr ""
+"Se fores o jogador Anfitrião, podes ainda definir os valores iniciais para "
+"cada jogador (a definição de edifícios,  mercadorias e trabalhadores com que "
+"o jogador começa), ligar um jogador-computador a um jogador ou fechar um "
+"jogador."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:586
 msgid "Map informations"
-msgstr ""
+msgstr "Informações do Mapa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:589
 msgid ""
@@ -3887,6 +3918,10 @@ msgid ""
 "Further the host is able to set a specific win condition and finally can "
 "start the game as soon as all players are set up."
 msgstr ""
+"No lado direito estão as informações sobre o mapa seleccionado ou o jogo "
+"guardado. O botão à direita do mapa permite ao Anfitrião mudar para outro "
+"mapa. O Anfitrião pode ainda definir uma condição de vitória e finalmente "
+"pode começar um jogo assim que todos os jogadores estejam prontos."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
@@ -3894,7 +3929,7 @@ msgstr "Escolhe tipo de jogo"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:51
 msgid "Internet game"
-msgstr "Jogo na Internet"
+msgstr "Jogar pela Internet"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:60
 msgid "LAN / Direct IP"
@@ -4151,11 +4186,11 @@ msgstr "Descr:"
 
 #: ../../src/ui_fsmenu/mapselect.cc:139
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:141
 msgid "Map Name"
-msgstr ""
+msgstr "Nome do Mapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:236
 msgid "(directory)"
