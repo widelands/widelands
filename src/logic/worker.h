@@ -143,6 +143,8 @@ public:
 	void create_needed_experience(Game &);
 	Ware_Index level             (Game &);
 
+	void flash(const std::string & newname);
+
 	int32_t get_needed_experience() const {
 		return descr().get_level_experience();
 	}

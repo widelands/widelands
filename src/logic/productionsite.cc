@@ -150,6 +150,11 @@ ProductionSite_Descr::ProductionSite_Descr
 		while (const Section::Value * v = compat_s->get_next_val())
 			m_compatibility_programs[v->get_name()] = split_string(v->get_string(), " ");
 	}
+
+	if (Section * compat_s = prof.get_section("compatibility working positions")) {
+		while (const Section::Value * v = compat_s->get_next_val())
+			m_compatibility_working_positions[v->get_name()] = split_string(v->get_string(), " ");
+	}
 }
 
 ProductionSite_Descr::~ProductionSite_Descr()
@@ -188,6 +193,17 @@ const std::vector<std::string> & ProductionSite_Descr::compatibility_program
 		return it->second;
 	return empty;
 }
+
+const std::vector<std::string> & ProductionSite_Descr::compatibility_working_positions
+	(const std::string & workername) const
+{
+	static const std::vector<std::string> empty;
+	Compatibility::const_iterator it = m_compatibility_working_positions.find(workername);
+	if (it != m_compatibility_working_positions.end())
+		return it->second;
+	return empty;
+}
+
 
 /**
  * Create a new building of this type

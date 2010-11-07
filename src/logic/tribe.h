@@ -226,7 +226,7 @@ struct Tribe_Descr {
 		return m_workers_order_coords;
 	}
 
-	const std::string & compatibility_immovable(const std::string & name) const;
+	const std::vector<std::string> & compatibility_immovable(const std::string & name) const;
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void referenceBuilding
@@ -268,11 +268,12 @@ private:
 
 	Military_Data   m_military_data;
 
+	typedef std::map<std::string, std::vector<std::string> > Compatibility;
 	/**
 	 * For savegame compatibility, this maps immovable names to strings
 	 * describing the appropriate compatibility preserving action.
 	 */
-	std::map<std::string, std::string> m_compatibility_immovable;
+	Compatibility m_compatibility_immovable;
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTMLBuildings(std::string const & directory);

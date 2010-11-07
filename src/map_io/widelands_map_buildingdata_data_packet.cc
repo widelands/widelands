@@ -682,9 +682,25 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			uint16_t nr_workers = fr.Unsigned16();
 			for (uint16_t i = nr_workers; i; --i) {
 				Worker & worker = mol.get<Worker>(fr.Unsigned32());
-				Worker_Descr const & worker_descr = worker.descr();
+
+				const std::vector<std::string> & compat =
+					descr.compatibility_working_positions(worker.descr().name());
+				if (!compat.empty()) {
+					if (compat[0] == "flash") {
+						if (compat.size() != 2)
+							throw game_data_error
+								("working position '%s' compat usage: flash other-name",
+								 worker.descr().name().c_str());
+
+						worker.flash(compat[1]);
+					} else
+						throw game_data_error
+							("unknown compat '%s' for working position '%s'",
+							 compat[0].c_str(), worker.descr().name().c_str());
+				}
 
 				//  Find a working position that matches this worker.
+				Worker_Descr const & worker_descr = worker.descr();
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
 					(wl_const_range<Ware_Types> j(working_positions);;

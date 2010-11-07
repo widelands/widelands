@@ -89,6 +89,7 @@ struct ProductionSite_Descr : public Building_Descr {
 	Programs const & programs() const throw () {return m_programs;}
 
 	const std::vector<std::string> & compatibility_program(const std::string & progname) const;
+	const std::vector<std::string> & compatibility_working_positions(const std::string & workername) const;
 
 private:
 	Ware_Types m_working_positions;
@@ -105,6 +106,7 @@ private:
 	 * compatibility.
 	 */
 	Compatibility m_compatibility_programs;
+	Compatibility m_compatibility_working_positions;
 };
 
 class ProductionSite : public Building {

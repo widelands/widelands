@@ -630,8 +630,8 @@ Map_Object::Loader * Immovable::load
 
 				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner)) {
 					std::string effective_name = name;
-					const std::vector<std::string> compat = split_string
-						(tribe->compatibility_immovable(name), " ");
+					const std::vector<std::string> & compat =
+						tribe->compatibility_immovable(name);
 
 					if (compat.size() >= 1) {
 						if (compat[0] == "replace") {
