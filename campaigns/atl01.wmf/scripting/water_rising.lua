@@ -202,7 +202,9 @@ function WaterRiser:_rise_water()
 
             f.height = self._water_level
             if f.immovable then f.immovable:remove() end
-            for idx,b in ipairs(f.bobs) do b:remove() end
+            for idx,b in ipairs(f.bobs) do
+               if not b:has_caps("swims") then b:remove() end
+            end
          end
       end
 

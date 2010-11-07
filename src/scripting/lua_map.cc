@@ -1998,6 +1998,7 @@ Bob
 */
 const char L_Bob::className[] = "Bob";
 const MethodType<L_Bob> L_Bob::Methods[] = {
+	METHOD(L_Bob, has_caps),
 	{0, 0},
 };
 const PropertyType<L_Bob> L_Bob::Properties[] = {
@@ -2018,6 +2019,32 @@ const PropertyType<L_Bob> L_Bob::Properties[] = {
 // UNTESTED
 int L_Bob::get_name(lua_State * L) {
 	lua_pushstring(L, get(L, get_egbase(L))->name());
+	return 1;
+}
+
+/* RST
+	.. method:: has_caps(capname)
+
+		Similar to :meth:`Field::has_caps`.
+
+		:arg capname: can be either of
+
+		* :const:`swims`: This bob can swim.
+		* :const:`walks`: This bob can walk.
+*/
+// UNTESTED
+int L_Bob::has_caps(lua_State * L) {
+	std::string query = luaL_checkstring(L, 2);
+
+	uint32_t movecaps = get(L, get_egbase(L))->descr().movecaps();
+
+	if (query == "swims")
+		lua_pushboolean(L, movecaps & MOVECAPS_SWIM);
+	else if (query == "walks")
+		lua_pushboolean(L,  movecaps & MOVECAPS_WALK);
+	else
+		return report_error(L, "Unknown caps queried: %s!", query.c_str());
+
 	return 1;
 }
 
