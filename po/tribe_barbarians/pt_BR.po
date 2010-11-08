@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-06 22:45+0000\n"
+"PO-Revision-Date: 2010-11-07 18:28+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-07 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-11-08 05:07+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -30,7 +30,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid "A small bite to keep miners strong and working."
-msgstr "Uma pequena mordida para manter os mineiros fortes e trabalhando."
+msgstr "Uma pequena mordida para manter os mineradores fortes e trabalhando."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid "An enhanced mask for barbarian warriors."
@@ -266,7 +266,7 @@ msgstr "Fazendeiro"
 
 #: ../../tribes/barbarians/conf:70
 msgid "Felling Axe"
-msgstr ""
+msgstr "Machado de derrube"
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
@@ -523,8 +523,8 @@ msgid ""
 "strong."
 msgstr ""
 "A carne contém uma grande quantidade de energia. É usada em estalagens e "
-"tabernas para preparar a refeição dos mineiros e nos campos de treinamento "
-"de soldados para manter os guerreiros fortes."
+"tabernas para preparar a refeição dos mineradores e nos campos de "
+"treinamento de soldados para manter os guerreiros fortes."
 
 #: ../../tribes/barbarians/conf:183
 msgid "Metalwork Shop"
@@ -610,7 +610,7 @@ msgstr "Produzir machado de bronze"
 
 #: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce felling axe"
-msgstr ""
+msgstr "Produz Machado de derrube"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
@@ -911,6 +911,8 @@ msgid ""
 "The Axe is a basic weapon for the barbarians. All young soldiers are "
 "equipped with it."
 msgstr ""
+"O Machado é a arma básica dos Bárbaros. Todo jovem soldado está equipado com "
+"ele."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -948,6 +950,8 @@ msgstr ""
 #: ../../tribes/barbarians/felling_axe/conf:1
 msgid "The felling axe is the tool of the lumberjack to take down trees."
 msgstr ""
+"O Machado de derrube é a ferramenta que o Lenhador usa para derrubar as "
+"árvores."
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
@@ -1035,8 +1039,8 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
 "metal works."
 msgstr ""
-"Esta picareta é utilizada pelos mineiros e pedreiros. É produzido na oficina "
-"de metalurgia."
+"Esta picareta é utilizada pelos mineradores e pedreiros. É produzido na "
+"oficina de metalurgia."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""

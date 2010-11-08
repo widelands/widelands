@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-04 21:38+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-11-07 18:44+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-05 04:43+0000\n"
+"X-Launchpad-Export-Date: 2010-11-08 05:07+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -494,7 +494,7 @@ msgstr "Moinho"
 
 #: ../../tribes/atlanteans/conf:121
 msgid "Miller"
-msgstr "Moleiro"
+msgstr "Moageiro"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid "Mills wheat to produce flour."
@@ -533,8 +533,8 @@ msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
 msgstr ""
-"Picaretas são utilizadas pelos mineiros e cavouqueiros. São produzidas pela "
-"Ferraria."
+"Picaretas são utilizadas pelos mineradores e cavouqueiros. São produzidas "
+"pela Ferraria."
 
 #: ../../tribes/atlanteans/conf:87
 msgid "Planks"
@@ -1045,7 +1045,7 @@ msgid ""
 "miners meal."
 msgstr ""
 "Este saboroso pão é feito de milho- e de farinha de raiz-negra, e faz parte "
-"da refeição dos mineiradores."
+"da refeição dos mineradores."
 
 #: ../../tribes/atlanteans/conf:6
 msgid ""
@@ -1253,7 +1253,7 @@ msgstr "Tecelão"
 
 #: ../../tribes/atlanteans/conf:180
 msgid "Weaving-Mill"
-msgstr "Tecelaria"
+msgstr "Tecelagem"
 
 #: ../../tribes/atlanteans/conf:167
 msgid "Well"

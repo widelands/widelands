@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-04 16:52+0100\n"
-"PO-Revision-Date: 2010-11-05 09:49+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-11-07 15:18+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-11-08 05:07+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/wlapplication.cc:369
@@ -1026,7 +1026,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:2053
 msgid "Client sent unexpected synchronization report."
-msgstr ""
+msgstr "Klient sendte uventet synkroniseringsrapport."
 
 #: ../../src/network/nethost.cc:2089 ../../src/network/nethost.cc:2101
 msgid "Client requests file altough none is available to send."
@@ -1064,7 +1064,7 @@ msgstr "%s har forlatt spillet (%s)"
 #: ../../src/network/nethost.cc:2204
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Ukjent bruker har forlatt spillet (%s)"
 
 #: ../../src/network/netclient.cc:98
 msgid "Could not establish connection to host"
@@ -1297,12 +1297,12 @@ msgstr ""
 #: ../../src/wui/playerdescrgroup.cc:176
 #: ../../src/wui/multiplayersetupgroup.cc:318
 msgid "Human"
-msgstr ""
+msgstr "Menneske"
 
 #: ../../src/wui/building_statistics_menu.cc:79
 #: ../../src/wui/game_main_menu.cc:66
 msgid "Building Statistics"
-msgstr ""
+msgstr "Bygningsstatistikk"
 
 #: ../../src/wui/building_statistics_menu.cc:89
 msgid "Total Productivity: "
@@ -1402,12 +1402,12 @@ msgstr ""
 #: ../../src/wui/waresdisplay.cc:48 ../../src/wui/game_main_menu.cc:73
 #: ../../src/wui/stock_menu.cc:40
 msgid "Stock"
-msgstr ""
+msgstr "Lager"
 
 #: ../../src/wui/interactive_base.cc:269
 #, c-format
 msgid "%u.%ux"
-msgstr ""
+msgstr "%u.%ux"
 
 #: ../../src/wui/interactive_base.cc:272
 msgid "PAUSE"
@@ -1691,7 +1691,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:272
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "Vil du virkelig slette filen %s?"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
@@ -1808,17 +1808,17 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:114
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Spiller %i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:116
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Tilskuer"
 
 #: ../../src/wui/multiplayersetupgroup.cc:284
 #: ../../src/ui_fsmenu/netsetup_lan.cc:189
 msgid "Closed"
-msgstr ""
+msgstr "Lukket"
 
 #: ../../src/wui/multiplayersetupgroup.cc:338
 #: ../../src/ui_fsmenu/launchMPG.cc:266 ../../src/ui_fsmenu/launchSPG.cc:222
@@ -1840,15 +1840,15 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:431
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: ../../src/wui/multiplayersetupgroup.cc:439
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: ../../src/wui/multiplayersetupgroup.cc:447
 msgid "Tribe"
-msgstr ""
+msgstr "Stamme"
 
 #: ../../src/wui/multiplayersetupgroup.cc:459
 #: ../../src/ui_fsmenu/launchSPG.cc:105
@@ -2192,7 +2192,7 @@ msgstr "Forbereder..."
 
 #: ../../src/ui_basic/helpwindow.cc:40
 msgid "Help: "
-msgstr ""
+msgstr "Hjelp: "
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
@@ -2232,7 +2232,7 @@ msgstr "game_class: %s"
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:53
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "ukjent/uhåndtert versjon %i"
 
 #: ../../src/game_io/game_preload_data_packet.cc:60
 #, c-format
@@ -2260,7 +2260,7 @@ msgstr ""
 
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"
-msgstr ""
+msgstr "PROBLEM: lydenhet åpnet flere ganger, forsøker å lukke"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
 #: ../../src/logic/playercommand.cc:482 ../../src/logic/playercommand.cc:540
@@ -3579,27 +3579,27 @@ msgstr "Trykk ESC eller klikk for å fortsette..."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:53
 msgid "Please select"
-msgstr ""
+msgstr "Vennligst velg"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:67
 msgid "Select a map"
-msgstr ""
+msgstr "Velg et kart"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Lagret spill"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Velg et lagret spill"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:83
 msgid "Cancel selection"
-msgstr ""
+msgstr "Avbryt valg"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:112
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Endre kart eller lagret spill"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:120 ../../src/ui_fsmenu/launchSPG.cc:82
 msgid "Start game"
@@ -3607,7 +3607,7 @@ msgstr "Start spillet"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:146
 msgid "Show the help window"
-msgstr ""
+msgstr "Vis hjelp-vinduet"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:153 ../../src/ui_fsmenu/launchMPG.cc:561
 msgid "Multiplayer Game Setup"
@@ -3619,7 +3619,7 @@ msgstr "(intet kart)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:186
 msgid "The host has not yet selected a map or saved game."
-msgstr ""
+msgstr "Verten har ikke valgt et kart eller lagret spill enda."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:268 ../../src/ui_fsmenu/launchSPG.cc:224
 msgid "Win condition is set through the scenario"
@@ -3660,7 +3660,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:491
 msgid "<closed>"
-msgstr ""
+msgstr "<lukket>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:530
 msgid "There was an error!"
@@ -3677,12 +3677,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:538
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Størrelse: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:539
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i spillere\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:548
 #, c-format
@@ -4004,7 +4004,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:141
 msgid "Map Name"
-msgstr ""
+msgstr "Navn"
 
 #: ../../src/ui_fsmenu/mapselect.cc:236
 msgid "(directory)"
@@ -4102,7 +4102,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:383
 msgid " exists already. Overwrite?"
-msgstr ""
+msgstr " finnes allerede. Overskrive?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:385
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:406

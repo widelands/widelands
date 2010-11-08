@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-07 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-11-08 05:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/wlapplication.cc:369
