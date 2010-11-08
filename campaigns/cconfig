@@ -7,19 +7,22 @@
 #####
 # Section "global"
 #
-# version     = Version-number of this file - used to check, whether campvis-
+# version      = Version-number of this file - used to check, whether campvis-
 #               file needs to be updated. Higher the value, if you added a map
 #               or campaign or if you changed a visibility-value.
-# campname??  = Name of the Campaign with the number ??.
-# campsect??  = Name of section, to be loaded, if this campaign is selected.
-# campdiff??  = Level of difficulty 1-3 (easy to hard) (this is only a visua-
+# campname??   = Name of the Campaign with the number ??.
+# campsect??   = Name of section, to be loaded, if this campaign is selected.
+# campdiff??   = Level of difficulty 1-3 (easy to hard) (this is only a visua-
 #               lisation, it has no influences on the real difficulty).
-# campdesc??  = Description of the campaign
-# campvisi??  = Is campaign visible by default? (1=yes, 0=no)
+# campdesc??   = Description of the campaign
+# campvisi??   = Is campaign visible by default? (1=yes, 0=no)
+# * cnewvisi?? = the name of a campaign or a scenario that must be visible, to show
+#                this entry as well - this string unhides the map, if the player
+#                completed the requierements with an older cconfig version.
 #####
 
 [global]
-version = 4
+version = 5
 # Barbarian Tutorial Campaign
 campname0=_"(Tutorial) Barbarians - The second Empire"
 campsect0=barbariantut
@@ -38,6 +41,7 @@ campsect2=atlanteans
 campdiff2=3
 campdesc2=_"Some descriptive texts..."
 campvisi2=0
+cnewvisi2=empiretut01
 
 
 
