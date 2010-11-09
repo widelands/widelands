@@ -1,4 +1,4 @@
-help=_The shovel is needed for proper handling of plants. Therefore the ferner and the ranger use it. Produced at the metalwork shop (but no more in the enhanced buildings axefactory and war mill).
+help=_The shovel is needed for proper handling of plants. Therefore the ferner and the ranger use it. Produced at the metalwork shop (but ceases to be produced by the building if it is enhanced to an axefactory and war mill).
 
 [idle]
 pics=idle.png
