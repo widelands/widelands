@@ -317,9 +317,6 @@ void Game::init_newgame
 	loaderUI.step(_("Loading map"));
 	maploader->load_map_complete(*this, settings.scenario);
 
-	// Queue first statistics calculation
-	enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
-
 	// Check for win_conditions
 	LuaCoroutine * cr = lua().run_script
 		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
@@ -498,6 +495,9 @@ bool Game::run
 		else if (start_game_type == NewMPScenario)
 			enqueue_command
 				(new Cmd_LuaScript(get_gametime(), "map", "multiplayer_init"));
+
+		// Queue first statistics calculation
+		enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
