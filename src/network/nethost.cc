@@ -616,7 +616,8 @@ void NetHost::run(bool const autorun)
 		if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
 			igb =
 				new Interactive_Player
-					(game, g_options.pull_section("global"), pn, false, true);
+					(game, g_options.pull_section("global"),
+					 pn, d->settings.scenario, true);
 		} else if (!autorun) {
 			igb =
 				new Interactive_Spectator
