@@ -57,8 +57,11 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	virtual GameSettings const & settings() {return h->settings();}
 
 	virtual bool canChangeMap() {return true;}
-	virtual bool canChangePlayerState(uint8_t const) {
-		return !settings().savegame && !settings().scenario;
+	virtual bool canChangePlayerState(uint8_t const number) {
+		if (h->settings().savegame || settings().scenario) {
+			return h->settings().players.at(number).state != PlayerSettings::stateClosed;
+		}
+		return true;
 	}
 	virtual bool canChangePlayerTribe(uint8_t const number) {
 		return canChangePlayerTeam(number);
@@ -104,6 +107,9 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		PlayerSettings::State newstate = PlayerSettings::stateClosed;
 		switch (h->settings().players.at(number).state) {
 		case PlayerSettings::stateClosed:
+			// In savegames : closed players can not be changed.
+			// In scenarios : players can not be closed.
+			assert(!h->settings().scenario && !h->settings().savegame);
 			newstate = PlayerSettings::stateOpen;
 			break;
 		case PlayerSettings::stateOpen:
@@ -126,7 +132,11 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			if (it == impls.end()) {
 				setPlayerAI(number, std::string());
 				setPlayerName(number, std::string());
-				newstate = PlayerSettings::stateClosed;
+				// Do not close a player in savegames or scenarios
+				if (h->settings().scenario || h->settings().savegame)
+					newstate = PlayerSettings::stateOpen;
+				else
+					newstate = PlayerSettings::stateClosed;
 			} else {
 				setPlayerAI(number, (*it)->name);
 				newstate = PlayerSettings::stateComputer;

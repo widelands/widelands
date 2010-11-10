@@ -461,18 +461,17 @@ void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 
 /**
  * load all playerdata from savegame and update UI accordingly
- * TODO set current clients accordingly
  */
 void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 {
-	FileSystem & l_fs = g_fs->MakeSubFileSystem
-		(m_settings->settings().mapfilename.c_str());
+	FileSystem & l_fs = g_fs->MakeSubFileSystem(m_settings->settings().mapfilename.c_str());
 	Profile prof;
 	prof.read("map/player_names", 0, l_fs);
 	std::string strbuf;
 	std::string infotext = _("Saved players are:");
-	std::string player_save_name[MAX_PLAYERS];
+	std::string player_save_name [MAX_PLAYERS];
 	std::string player_save_tribe[MAX_PLAYERS];
+	std::string player_save_ai   [MAX_PLAYERS];
 	char buf[32];
 
 	uint8_t i = 1;
@@ -483,6 +482,7 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		Section & s = prof.get_safe_section(buf);
 		player_save_name [i - 1] = s.get_string("name");
 		player_save_tribe[i - 1] = s.get_string("tribe");
+		player_save_ai   [i - 1] = s.get_string("ai");
 
 		snprintf(buf, sizeof(buf), "Player %u", i);
 		infotext += buf;
@@ -494,6 +494,22 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 			continue; // if tribe is empty, the player does not exist
 		}
 
+		// Set team to "none" - to get the real team, we would need to load the savegame completely
+		// Do we want that? No! So we just reset teams to not confuse the clients.
+		m_settings->setPlayerTeam(i - 1, 0);
+
+		if (player_save_ai[i - 1].empty()) {
+			// Assure that player is open
+			if (m_settings->settings().players.at(i - 1).state != PlayerSettings::stateHuman)
+				m_settings->setPlayerState(i - 1, PlayerSettings::stateOpen);
+		} else {
+			m_settings->setPlayerState(i - 1, PlayerSettings::stateComputer);
+			m_settings->setPlayerAI(i - 1, player_save_ai[i - 1]);
+		}
+
+		// Set player's tribe
+		m_settings->setPlayerTribe(i - 1, player_save_tribe[i - 1]);
+
 		// get translated tribename
 		strbuf = "tribes/" + player_save_tribe[i - 1];
 		strbuf += "/conf";
@@ -503,13 +519,22 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		infotext += " (";
 		infotext += player_save_tribe[i - 1];
 		infotext += "):\n    ";
-		infotext += player_save_name[i - 1];
-		// Assure that player is open
-		if
-			(m_settings->settings().players.at(i - 1).state
-			 !=
-			 PlayerSettings::stateHuman)
-			m_settings->setPlayerState(i - 1, PlayerSettings::stateOpen);
+		// Check if this is a list of names, or just one name:
+		if (player_save_name[i - 1].substr(0, 1) != " ")
+			infotext += player_save_name[i - 1];
+		else {
+			std::string temp = player_save_name[i - 1];
+			bool firstrun = true;
+			while (temp.find(" ", 1) < temp.size()) {
+				if (firstrun)
+					firstrun = false;
+				else
+					infotext += "\n    ";
+				uint32_t x = temp.find(" ", 1);
+				infotext += temp.substr(1, x);
+				temp = temp.substr(x + 1, temp.size());
+			}
+		}
 	}
 	m_map_info.set_text(infotext);
 	m_filename_proof = m_settings->settings().mapfilename;
@@ -526,23 +551,19 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 	char const * const name = m_settings->settings().mapfilename.c_str();
 	Widelands::Map_Loader * const ml = map.get_correct_loader(name);
 	if (!ml)
-		throw warning
-			(_("There was an error!"), _("The map file seems to be invalid!"));
+		throw warning(_("There was an error!"), _("The map file seems to be invalid!"));
 
 	map.set_filename(name);
 	ml->preload_map(true);
 	delete ml;
 
 	std::string infotext = _("Map informations:\n");
-	infotext +=
-		(format(_("* Size: %ux%u\n")) % map.get_width() % map.get_height()).str();
+	infotext += (format(_("* Size: %ux%u\n")) % map.get_width() % map.get_height()).str();
 	infotext += (format(_("* %i Players\n")) % m_nr_players).str();
 
 	// get translated worldsname
 	std::string worldpath((format("worlds/%s") % map.get_world_name()).str());
-	Profile prof
-		((worldpath + "/conf").c_str(), 0,
-		 (format("world_%s") % map.get_world_name()).str());
+	Profile prof ((worldpath + "/conf").c_str(), 0, (format("world_%s") % map.get_world_name()).str());
 	Section & global = prof.get_safe_section("world");
 	std::string world(global.get_safe_string("name"));
 	infotext += (format(_("* World type: %s\n")) % world).str();
