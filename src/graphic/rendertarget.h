@@ -29,7 +29,7 @@
 namespace Widelands {
 struct Player;
 };
-class Surface;
+struct Surface;
 
 /**
  * This abstract class represents anything that can be rendered to.

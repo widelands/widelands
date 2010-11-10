@@ -41,10 +41,9 @@
 
 namespace UI {struct ProgressWindow;}
 
-class Surface;
+struct Surface;
 class Texture;
 struct RenderTarget;
-class Surface;
 struct Graphic;
 struct Road_Textures;
 struct StreamWrite;

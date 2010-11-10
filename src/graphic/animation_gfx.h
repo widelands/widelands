@@ -24,7 +24,7 @@
 #include "logic/widelands.h"
 #include "rgbcolor.h"
 
-class Surface;
+struct Surface;
 
 struct AnimationGfx { /// The graphics belonging to an animation.
 	AnimationGfx(AnimationData const * data);
