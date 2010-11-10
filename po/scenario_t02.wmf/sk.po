@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-29 23:52+0000\n"
+"POT-Creation-Date: 2010-11-04 15:52+0000\n"
+"PO-Revision-Date: 2010-11-06 16:20+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-31 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-11-07 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -72,8 +72,8 @@ msgid ""
 "to the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!\" "
 msgstr ""
-" \"Nie je to krásne, ten pohľad na zlaté polia rastúce pokojne, tancujúce do "
-"vetra? A verím, že pekár je práve na ceste sem so svojím najchutnejším "
+" \"Nie je to krásne - ten pohľad na zlaté polia rastúce pokojne, tancujúce "
+"do vetra? A verím, že pekár je práve na ceste sem so svojím najchutnejším "
 "chlebom rezervovaným pre samého náčelníka!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:262
@@ -144,6 +144,10 @@ msgid ""
 "would finally come to an end.<br> So far, it seems that neither prayer was "
 "fulfilled.\" "
 msgstr ""
+" \"Zima je tu. Mnohí z nás sú nachladnutí, ale musíme vydržať. Deň návratu "
+"už nemôže byť ďaleko - už nesmie byť ďaleko.<br> Modlil som sa, aby sa znova "
+"oteplilo, ako aj aby sa už vojna konečne skončila.<br> Zatiaľ to vyzerá tak, "
+"že sa nesplnila žiadna modlitba.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:219
 msgid ""
@@ -157,6 +161,14 @@ msgid ""
 "whoever threatens our very existence, may it even be one of your blood or "
 "mind?\" "
 msgstr ""
+" \"Dnes priniesli moji lovci mužov, ženy a malé deti, ktorí sa skrývali v "
+"lesoch, pokúšajúc sa utiecť pred vojnou, nenávisťou a pomstou, ktoré zúria "
+"medzi kmeňmi, navzájom bojujúcich ako v starých časoch, keď sme neboli nič "
+"viac než divoké šelmy riadené a ovládané inštinktmi. Žiaden z mojich bratov "
+"viac nezíska kontrolu nad dreveným trónom, žiaden z kmeňov nebude tak silný, "
+"aby si podrobil ten druhý. Toto zabíjanie nebude mať koniec, iba ak... je to "
+"ono? Ako mi otec povedal?<br> Búr sa proti každému, ktorý ohrozuje našu holú "
+"existenciu, aj keby bol z tvojej krvi alebo mysle?\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:440
 msgid ""
@@ -169,13 +181,14 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:293
 msgid ""
 " \"While this is true, we should consider it later, for now other obstacles "
-"are at hand. The miners will definately demand greater rations for working "
+"are at hand. The miners will definitely demand greater rations for working "
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
-" \"Hoci je tak, mali by sme to zvážiť neskôr, zatiaľ sú poruke iné prekážky. "
-"Baníci budú určite požadovať väčšie prídely jedla za prácu vysoko v horách v "
-"tejto krutej zime, a poskytnúť tieto zásoby nemusí byť ľahké.\" "
+" \"Hoci je to pravda, mali by sme to zvážiť neskôr, zatiaľ sú v ceste iné "
+"prekážky. Baníci budú určite požadovať väčšie prídely jedla, kedže pracujú "
+"vysoko v horách v tejto krutej zime, a poskytnúť tieto zásoby nemusí byť "
+"ľahké.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:391
 msgid ""
@@ -193,6 +206,10 @@ msgid ""
 "as\n"
 "ours!<br> We need a wood hardener, and we need one now!\""
 msgstr ""
+"\"Ako som práve zistil, dochádza nám upravené drevo! Našich vojakov\n"
+"nemôžeme dať do nejakých rozpadajúcich sa chatrčí, už vôbec nie v časoch\n"
+"tak nebezpečných, ako sú tie naše! <br> Potrebujeme stolársku dielňu.\n"
+"A potrebujeme ju teraz!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:414
 msgid ""
@@ -206,6 +223,14 @@ msgid ""
 "breed\n"
 "them and they will do their work on the roads loyally and reliably.\""
 msgstr ""
+"\"Aj keď sa naša ríša stále viac a viac zväčšuje, preprava na našich "
+"cestách\n"
+"je takmer ohromujúca. Naši úbohí nosiči už nie sú schopní prenášať tovary\n"
+"tak rýchlo, ako to my potrebujeme. Navrhujem, že ich podporíme chovaním\n"
+"volov.<br> Sú to úžasné zvieratá. Sú rýchlejšie ako človek, len oveľa "
+"silnejšie\n"
+"a veľmi skromné: všetko, čo potrebujeme na ich chov, je pšenica a voda\n"
+"a ony, ako odplatu, vykonajú svoju prácu na cestách verne a spoľahlivo.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:380
 msgid ""
@@ -218,6 +243,11 @@ msgid ""
 "my\n"
 "face!<br> Now this is a problem we should do something about!\""
 msgstr ""
+"\"Náčelník, toto je potupa! Je v poriadku, že teraz možno vyrobiť maltu pre\n"
+"veľkolepé pevnosti a veľké stavby, lenže naše strechy presakujú! Možno tí\n"
+"mladí dokážu stráviť noci v daždi, ale ja proste nedokážem zaspať, keď mi\n"
+"na tvár kvapká dážď.<br> Toto je problém, s ktorým by sme mali niečo "
+"urobiť!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:301
 msgid ""
@@ -313,6 +343,11 @@ msgid ""
 "could,\n"
 "in times of need, build a fortress as the world has not seen before!\""
 msgstr ""
+"\"Nuž, starý priateľ, toto by malo zabezpečiť, aby sa naše pevnosti\n"
+"nezrútili kvôli vojnovému pokriku nepriateľov. Teraz môžeme bezpečne\n"
+"rozšíriť naše územie!<br> Ale aj tak by nebolo zlé zhromaždiť nejakú\n"
+"maltu pre ďalšiu kampaň; tak by sme mohli, keď to bude potrebné,\n"
+"postaviť pevnosť, akú svet ešte nevidel!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:251
 msgid ""
@@ -460,7 +495,7 @@ msgstr "Postavte skleník s papradinami"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr ""
+msgstr "Postavte sídlo lovca, hájnika a krčmu"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
@@ -481,7 +516,7 @@ msgstr "Postavte studňu, farmu a pekáreň"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Postavte stolársku dielňu"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
@@ -536,7 +571,7 @@ msgstr "Khantrukh sa zahľadí na pláne..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:261
 msgid "Khantrukh grumbles..."
-msgstr ""
+msgstr "Khantrukh reptá..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:292
 msgid "Khantrukh interrupts..."
@@ -552,7 +587,7 @@ msgstr "Khantrukh spokojne prikývne..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:390
 msgid "Khantrukh seems relieved..."
-msgstr ""
+msgstr "Khantrukh vyzerá upokojene..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
@@ -585,6 +620,10 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well at a spot\n"
 "where your geologists find a water source."
 msgstr ""
+"Inak vyrobiť jedlo (iné druhy jedla) dokážu rybári a lovci. Pšenica na\n"
+"farmách sa najprv musí spracovať s vodou v pekárni, aby sa dala jesť. Vodu\n"
+"možno získať zo studne postavenej na mieste, kde vaši geológovia nájdu\n"
+"zdroj vody."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:107
 msgid "Provide your miners with food"
@@ -643,6 +682,9 @@ msgid ""
 "cover roofs. Thatch reed is planted by a ferner around his building, the\n"
 "fernery."
 msgstr ""
+"Tretím materiálom, ktorý je potrebný pre vylepšené budovy, je trstená\n"
+"krytina, ktorá sa používa na pokrývanie striech. Trstenú krytinu sadí\n"
+"papradinár okolo svojej budovy - papradiny."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."
@@ -694,6 +736,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish,\n"
 "otherwise move on to the next mission."
 msgstr ""
+"Dokončili ste túto misiu. Ak chcete, môžete pokračovať v hraní, v opačnom\n"
+"prípade prejdite k ďalšej misii."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:233
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:248
@@ -796,3 +840,13 @@ msgstr "Tvoj verný společník"
 
 #~ msgid "Enhance Buildings"
 #~ msgstr "Vylepši budovy"
+
+#~ msgid ""
+#~ " \"While this is true, we should consider it later, for now other obstacles "
+#~ "are at hand. The miners will definately demand greater rations for working "
+#~ "high up on the mountain in this bitter cold, and providing these supplies "
+#~ "may not be easy.\" "
+#~ msgstr ""
+#~ " \"Hoci je tak, mali by sme to zvážiť neskôr, zatiaľ sú poruke iné prekážky. "
+#~ "Baníci budú určite požadovať väčšie prídely jedla za prácu vysoko v horách v "
+#~ "tejto krutej zime, a poskytnúť tieto zásoby nemusí byť ľahké.\" "

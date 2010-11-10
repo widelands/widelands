@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-29 16:21+0000\n"
-"Last-Translator: Miroslav Remák <Unknown>\n"
+"POT-Creation-Date: 2010-11-04 15:52+0000\n"
+"PO-Revision-Date: 2010-11-05 06:42+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-30 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/README:69
@@ -24,11 +24,11 @@ msgstr "(CTRL+) 0-9  Pamätať si a ísť na skôr zapamätané miesta"
 msgid ", / .       Go to previous / next location"
 msgstr ", / .       Ísť na predošlé / nasledujúce miesto"
 
-#: ../../txts/README:121
+#: ../../txts/README:123
 msgid "- how to reproduce the bug"
 msgstr "- ako napodobniť chybu"
 
-#: ../../txts/README:125
+#: ../../txts/README:127
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
@@ -36,7 +36,7 @@ msgstr ""
 "- pošlite nám skomprimovanú (zip, gzip, bzip2) nahrávku, ak sa chyba "
 "objavila počas hry. Pre viac vysvetlenia viz. sekciu Nahrávky nižšie."
 
-#: ../../txts/README:127
+#: ../../txts/README:129
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) session record if possible, unless "
 "the<br>bug is trivial to reproduce. In fact, it may be a good idea to always "
@@ -48,7 +48,7 @@ msgstr ""
 "byť dobrý nápad vždy nahrávať<br>relácie v prípade, že sa objaví chyba. Viz. "
 "dole pre viac vysvetlenia."
 
-#: ../../txts/README:119
+#: ../../txts/README:121
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
@@ -56,7 +56,7 @@ msgstr ""
 "- akú verziu Widelands ste používali (napr. číslo zostavenia alebo či je "
 "to<br>vlastná skompilovaná verzia zo SVN)"
 
-#: ../../txts/README:123
+#: ../../txts/README:125
 msgid "- which map you were playing"
 msgstr "- akú mapu ste hrali"
 
@@ -262,7 +262,7 @@ msgid ""
 "contact you by electronic and paper mail."
 msgstr ""
 
-#: ../../txts/README:155
+#: ../../txts/README:157
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
@@ -301,7 +301,7 @@ msgstr ""
 "Nejaké ďalšie otázky? Naše FAQ (často kladené otázky), wiki a samozrejme "
 "naše komunitné fóra môžete nájsť na www.widelands.org."
 
-#: ../../txts/developers:135
+#: ../../txts/developers:138
 msgid "Barbarian"
 msgstr "Barbari"
 
@@ -328,7 +328,7 @@ msgstr "CTRL+L   Načítať mapu"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   Uložiť mapu"
 
-#: ../../txts/developers:132
+#: ../../txts/developers:135
 msgid "Campaign Story"
 msgstr "Kampane"
 
@@ -352,23 +352,23 @@ msgid ""
 "allowed.<br>"
 msgstr ""
 
-#: ../../txts/README:143
+#: ../../txts/README:145
 msgid "Creating a Session Record</p>"
 msgstr "Vytváranie záznamu relácie</p>"
 
-#: ../../txts/README:79
+#: ../../txts/README:81
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl+F10    Ukončiť hru okamžiťe"
 
-#: ../../txts/developers:155
+#: ../../txts/developers:158
 msgid "Czech"
 msgstr "Čeština"
 
-#: ../../txts/README:90
+#: ../../txts/README:92
 msgid "DELETE      Archive the current message"
 msgstr "DELETE      Archivovať aktuálnu správu"
 
-#: ../../txts/developers:162
+#: ../../txts/developers:165
 msgid "Dansk"
 msgstr "Dánčina"
 
@@ -376,11 +376,11 @@ msgstr "Dánčina"
 msgid "Development"
 msgstr "Vývoj"
 
-#: ../../txts/developers:297
+#: ../../txts/developers:300
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentácia, pomoc a Wiki"
 
-#: ../../txts/developers:168
+#: ../../txts/developers:171
 msgid "Dutch"
 msgstr "Holandčina"
 
@@ -392,7 +392,7 @@ msgstr "E        Prepne menu udalostí"
 msgid "Elders"
 msgstr "Rada starších"
 
-#: ../../txts/developers:141
+#: ../../txts/developers:144
 msgid "Empire"
 msgstr "Impérium"
 
@@ -408,27 +408,27 @@ msgstr "F               Prepne celú obrazovku"
 msgid "F        Toggles fullscreen"
 msgstr "F        Prepne celú obrazovku"
 
-#: ../../txts/README:81
+#: ../../txts/README:83
 msgid "F11         Take a screenshot"
 msgstr "F11         Urobí snímku obrazovky"
 
-#: ../../txts/README:77
+#: ../../txts/README:79
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6           Zobrazí debugovaciu konzolu (len v debug-buildoch)"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:178
 msgid "Finnish"
 msgstr "Fínčina"
 
-#: ../../txts/developers:311
+#: ../../txts/developers:314
 msgid "Former elders"
 msgstr ""
 
-#: ../../txts/developers:181
+#: ../../txts/developers:184
 msgid "French"
 msgstr "Francúzština"
 
-#: ../../txts/README:88
+#: ../../txts/README:90
 msgid "G           Go to location corresponding to current message"
 msgstr "G Ísť na miesto zodpovedajúceho aktuálnej správe"
 
@@ -442,7 +442,7 @@ msgid ""
 "and modification"
 msgstr ""
 
-#: ../../txts/developers:188
+#: ../../txts/developers:191
 msgid "Galician"
 msgstr "Galčina"
 
@@ -450,16 +450,16 @@ msgstr "Galčina"
 msgid "General game control"
 msgstr "Hlavné ovládanie hry"
 
-#: ../../txts/developers:193
+#: ../../txts/developers:196
 msgid "German"
 msgstr "Nemčina"
 
-#: ../../txts/developers:70
+#: ../../txts/developers:72
 msgid "Graphicians"
 msgstr "Grafici"
 
 #: ../../txts/developers:19
-#: ../../txts/developers:322
+#: ../../txts/developers:325
 msgid "Graphics"
 msgstr "Grafika"
 
@@ -467,7 +467,7 @@ msgstr "Grafika"
 msgid "H        Toggles main menu"
 msgstr "H        Prepne hlavné menu"
 
-#: ../../txts/developers:205
+#: ../../txts/developers:208
 msgid "Hebrew"
 msgstr "Hebrejčina"
 
@@ -491,11 +491,11 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Home        Vycentruje hlavný obraz mapy na počiatočnú pozíciu"
 
 #: ../../txts/developers:24
-#: ../../txts/developers:315
+#: ../../txts/developers:318
 msgid "Homepage"
 msgstr "Domovská stránka"
 
-#: ../../txts/developers:288
+#: ../../txts/developers:291
 msgid "Homepage Coders"
 msgstr "Domovskú stránku napísali"
 
@@ -503,7 +503,7 @@ msgstr "Domovskú stránku napísali"
 msgid "How to Apply These Terms to Your New Programs"
 msgstr ""
 
-#: ../../txts/developers:210
+#: ../../txts/developers:213
 msgid "Hungarian"
 msgstr "Maďarčina"
 
@@ -544,7 +544,7 @@ msgid ""
 "which everyone can redistribute and change under these terms."
 msgstr ""
 
-#: ../../txts/README:99
+#: ../../txts/README:101
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
@@ -552,7 +552,7 @@ msgstr ""
 "Ak potrebujete dokumentáciu alebo pomoc pre Widelands alebo Widelands "
 "Editor, iste navštívte našu stránku. Najnovšiu online pomoc môžno nájsť na:"
 
-#: ../../txts/README:111
+#: ../../txts/README:113
 msgid ""
 "If you want to report bugs, please send your report to the mailing list, "
 "<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
@@ -561,7 +561,7 @@ msgstr ""
 "Ak chcete nahlásiť chyby, prosím, pošlite svoju správu na zoznam adries, "
 "<widelands-public@list.sourceforge.net><br>Pre odber navštívte túto stránku:"
 
-#: ../../txts/README:86
+#: ../../txts/README:88
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "V okne správ sú dostupné aj tieto dodatočné skratky:"
@@ -584,7 +584,7 @@ msgid ""
 "licensee cannot impose that choice."
 msgstr ""
 
-#: ../../txts/developers:215
+#: ../../txts/developers:218
 msgid "Italian"
 msgstr "Taliančina"
 
@@ -615,7 +615,7 @@ msgid ""
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
 
-#: ../../txts/developers:255
+#: ../../txts/developers:258
 msgid "Linux Distributions"
 msgstr ""
 
@@ -627,7 +627,7 @@ msgstr "M               Prepne minimapu"
 msgid "M        Toggles minimap"
 msgstr "M        Prepne minimapu"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:121
 msgid "Maps and Missions"
 msgstr "Mapy a misie"
 
@@ -635,7 +635,7 @@ msgstr "Mapy a misie"
 msgid "Miners will only work if supplied with food."
 msgstr "Baníci pracujú, len ak sú zásobovaní jedlom."
 
-#: ../../txts/developers:98
+#: ../../txts/developers:100
 msgid "Musicians"
 msgstr "Hudobníci"
 
@@ -643,7 +643,7 @@ msgstr "Hudobníci"
 msgid "N               Toggle messages ('news')"
 msgstr "N               Prepne správy ('novinky')"
 
-#: ../../txts/developers:150
+#: ../../txts/developers:153
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -655,11 +655,11 @@ msgstr ""
 msgid "No warranty"
 msgstr "ZÁRUKA SA NEPOSKYTUJE"
 
-#: ../../txts/developers:277
+#: ../../txts/developers:280
 msgid "Non Unix Distributions"
 msgstr ""
 
-#: ../../txts/README:158
+#: ../../txts/README:160
 msgid ""
 "Note that while recorded files are platform independent, they generally "
 "won't work across different versions of Widelands, because the user "
@@ -672,7 +672,7 @@ msgstr ""
 msgid "O               Toggle objectives display"
 msgstr "O               Prepne zobrazenie cieľov"
 
-#: ../../txts/README:152
+#: ../../txts/README:154
 msgid ""
 "On Windows, create a shortcut to the file widelands.exe (right-click on "
 "widelands.exe and choose Create Shortcut). Then edit the shortcut (right-"
@@ -681,15 +681,15 @@ msgid ""
 "to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr ""
 
-#: ../../txts/README:95
+#: ../../txts/README:97
 msgid "Online Help"
 msgstr "Nápoveda online"
 
-#: ../../txts/developers:340
+#: ../../txts/developers:343
 msgid "Other"
 msgstr ""
 
-#: ../../txts/developers:266
+#: ../../txts/developers:269
 msgid "Other Unix Distributions"
 msgstr ""
 
@@ -713,7 +713,11 @@ msgstr "PAGEDOWN    Zníži rýchlosť hry"
 msgid "PAGEUP         Increase gamespeed"
 msgstr "PAGEUP         Zvýši rýchlosť hry"
 
-#: ../../txts/developers:251
+#: ../../txts/README:76
+msgid "PAUSE         Pauses the game (only for local games)"
+msgstr ""
+
+#: ../../txts/developers:254
 msgid "Packagers"
 msgstr "Správcovia balíčkov"
 
@@ -721,11 +725,11 @@ msgstr "Správcovia balíčkov"
 msgid "Please look into our enduser manuals in our wiki-pages at:"
 msgstr ""
 
-#: ../../txts/README:116
+#: ../../txts/README:118
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../../txts/developers:220
+#: ../../txts/developers:223
 msgid "Polish"
 msgstr "Poľština"
 
@@ -745,7 +749,7 @@ msgstr "ČÍTAJMA pre Editor"
 msgid "README for the Widelands Editor"
 msgstr "ČÍTAJMA pre Widelands Editor"
 
-#: ../../txts/README:139
+#: ../../txts/README:141
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic code, so we "
 "ask you to attach replay files to all bug reports that you submit. The "
@@ -754,15 +758,15 @@ msgid ""
 "Windows."
 msgstr ""
 
-#: ../../txts/README:132
+#: ../../txts/README:134
 msgid "Replays</p>"
 msgstr "Nahrávky</p>"
 
-#: ../../txts/README:107
+#: ../../txts/README:109
 msgid "Reporting Bugs"
 msgstr "Hlásenie chýb"
 
-#: ../../txts/developers:228
+#: ../../txts/developers:231
 msgid "Russian"
 msgstr "Ruština"
 
@@ -790,7 +794,7 @@ msgstr ""
 "Kláves MEDZERNÍK sa správa ako v normálnej hre. Zapína/vypína pomoc pri "
 "stavaní."
 
-#: ../../txts/developers:151
+#: ../../txts/developers:154
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -798,7 +802,7 @@ msgstr ""
 "Pozrite https://translations.launchpad.net/widelands pre zoznam ľudí, ktorí "
 "pomáhali preložiť Widelands cez launchpad.net."
 
-#: ../../txts/developers:233
+#: ../../txts/developers:236
 msgid "Slovak"
 msgstr "Slovenčina"
 
@@ -813,15 +817,15 @@ msgstr ""
 "obklopená stromami alebo cestami, zastaví sa produkcia."
 
 #: ../../txts/developers:29
-#: ../../txts/developers:328
+#: ../../txts/developers:331
 msgid "Sound"
 msgstr "Zvuk"
 
-#: ../../txts/developers:109
+#: ../../txts/developers:111
 msgid "Sound Effects"
 msgstr "Zvukové efekty"
 
-#: ../../txts/developers:238
+#: ../../txts/developers:241
 msgid "Spanish"
 msgstr "Španielčina"
 
@@ -837,7 +841,7 @@ msgstr ""
 msgid "Status"
 msgstr "Stav"
 
-#: ../../txts/developers:243
+#: ../../txts/developers:246
 msgid "Swedish"
 msgstr "Švédčina"
 
@@ -977,7 +981,7 @@ msgstr ""
 msgid "To close an open window, right click it."
 msgstr "K zatvoreniu otvoreného okna naň kliknite pravým tlačidlom myši."
 
-#: ../../txts/README:149
+#: ../../txts/README:151
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
@@ -1002,11 +1006,11 @@ msgstr ""
 "K minimalizovaniu/maximalizovaniu okna kliknite na jeho titulnú lištu s buď "
 "pravým tlačidlom myši, alebo s ľavým tlačidlom myši, držiac CTRL."
 
-#: ../../txts/developers:333
+#: ../../txts/developers:336
 msgid "Translation"
 msgstr "Preklad"
 
-#: ../../txts/developers:147
+#: ../../txts/developers:150
 msgid "Translators"
 msgstr "Prekladatelia"
 
@@ -1031,7 +1035,7 @@ msgid ""
 "ware."
 msgstr ""
 
-#: ../../txts/README:137
+#: ../../txts/README:139
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -1045,7 +1049,7 @@ msgstr ""
 msgid "Version 2, June 1991<br></p></rt>"
 msgstr ""
 
-#: ../../txts/README:84
+#: ../../txts/README:86
 msgid ""
 "When finishing a road, if Ctrl is down, place flags along the road. Default "
 "is to place flags from end to start. If Shift is also down, place flags from "
@@ -1056,7 +1060,7 @@ msgstr ""
 msgid "Widelands Development Team"
 msgstr "Vývojový tým Widelands"
 
-#: ../../txts/README:146
+#: ../../txts/README:148
 msgid ""
 "Widelands can record all your keypresses and mouse movements to a file. It "
 "can then replay an entire session from starting the game to exiting it. This "
@@ -1089,7 +1093,7 @@ msgid ""
 "game."
 msgstr ""
 
-#: ../../txts/README:135
+#: ../../txts/README:137
 msgid ""
 "Widelands records every game you play in two files. One of these files has a "
 ".wrpl.wgf extension and contains an initial savegame. The other file has "

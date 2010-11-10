@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 20:16+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-04 15:52+0000\n"
+"PO-Revision-Date: 2010-11-05 21:16+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
@@ -255,7 +255,7 @@ msgstr "Denník Lucia"
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Cisárstvo - Trénink 1 - Pobrežie Malac' Mor"
+msgstr "Impérium - Tréning 1 - Brehy Malac' Mor-u"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:133
 msgid "Mission Complete"
@@ -263,7 +263,7 @@ msgstr "Misia splnená."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:141
 msgid "Safe Peninsula"
-msgstr "Bezpečný poloostrov"
+msgstr "Bezpečný polostrov"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:59
 msgid "Safe for now"
@@ -279,7 +279,7 @@ msgstr "Saledus sa usmieva..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:112
 msgid "Saledus notes..."
-msgstr "Saledius poznamenal..."
+msgstr "Saledus poznamenáva..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Saledus speaks with a sigh of relief..."
@@ -287,7 +287,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:143
 msgid "Saledus speaks:"
-msgstr "Saledius prehovorill:"
+msgstr "Saledus prehovorí:"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Survivor"

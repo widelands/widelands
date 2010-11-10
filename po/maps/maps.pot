@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
+"POT-Creation-Date: 2010-11-10 21:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../campaigns/cconfig:24
+#: ../../campaigns/cconfig:27
 msgid ""
 "(Tutorial) Barbarians - The second Empire"
 msgstr ""
 
-#: ../../campaigns/cconfig:84
+#: ../../campaigns/cconfig:88
 msgid ""
 "01 - From nemesis to genesis"
 msgstr ""
@@ -64,7 +64,7 @@ msgid ""
 "Another thaw set in. Three tribes were sheltering form severe winter among majestic mountains. During solstice they listened to the oracle and went on to war. The only survivor will sacrifice his enemies' treasures on the ancient altar, build there a splendid castle and gain goodwill and the respect of the Gods."
 msgstr ""
 
-#: ../../campaigns/cconfig:36
+#: ../../campaigns/cconfig:39
 msgid ""
 "Atlanteans - the new rise"
 msgstr ""
@@ -104,17 +104,17 @@ msgid ""
 "Elven Forests"
 msgstr ""
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:33
 msgid ""
 "Empire - The months of exile"
 msgstr ""
 
-#: ../../campaigns/cconfig:74
+#: ../../campaigns/cconfig:78
 msgid ""
 "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr ""
 
-#: ../../campaigns/cconfig:79
+#: ../../campaigns/cconfig:83
 msgid ""
 "Empire Tutorial2 - An outpost for exile"
 msgstr ""
@@ -254,12 +254,12 @@ msgid ""
 "Riverlands"
 msgstr ""
 
-#: ../../campaigns/cconfig:33
+#: ../../campaigns/cconfig:36
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire's land. At first, everything was calm. He even talked to a few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."
 msgstr ""
 
-#: ../../campaigns/cconfig:39
+#: ../../campaigns/cconfig:42
 msgid ""
 "Some descriptive texts..."
 msgstr ""
@@ -354,17 +354,17 @@ msgid ""
 "Three Warriors"
 msgstr ""
 
-#: ../../campaigns/cconfig:57
+#: ../../campaigns/cconfig:61
 msgid ""
 "Tutorial1 - Eyes in the Dark"
 msgstr ""
 
-#: ../../campaigns/cconfig:62
+#: ../../campaigns/cconfig:66
 msgid ""
 "Tutorial2 - A Place to call Home"
 msgstr ""
 
-#: ../../campaigns/cconfig:67
+#: ../../campaigns/cconfig:71
 msgid ""
 "Tutorial3 - This land is our land"
 msgstr ""
@@ -394,7 +394,7 @@ msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
 msgstr ""
 
-#: ../../campaigns/cconfig:27
+#: ../../campaigns/cconfig:30
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though at the end of his glorious reign, Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father instructed him, Thron left the capital of Al’thunran, the home of the Throne Among the Trees and withdrew his forces to the high hills where he buried the corpse of his father. There he swore to the gods and his father's spirit that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
 msgstr ""
