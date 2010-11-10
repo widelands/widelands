@@ -71,7 +71,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifndef WIN32
-#include <signal.h>
+#include <csignal>
 #endif
 
 #include <cerrno>

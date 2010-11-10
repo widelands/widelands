@@ -156,11 +156,8 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		 m_xres * 37 / 50, m_yres * 3 / 20,
 		 std::string()),
 
-	m_map_info
-		(this, m_xres * 37 / 50, m_yres * 2 / 10, m_butw, m_yres * 27 / 80),
-
-	m_client_info
-		(this, m_xres * 37 / 50, m_yres * 7 / 10, m_butw, m_yres * 5 / 20),
+	m_map_info(this, m_xres * 37 / 50, m_yres * 2 / 10, m_butw, m_yres * 27 / 80),
+	m_client_info(this, m_xres * 37 / 50, m_yres * 13 / 20, m_butw, m_yres * 5 / 20),
 
 // Variables and objects used in the menu
 	m_settings     (settings),
@@ -192,9 +189,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 			 settings, m_butw, m_buth, m_fn, m_fs);
 
 	// If we are the host, open the map or save selection menu at startup
-	if
-		(m_settings->settings().usernum == 0
-		 && m_settings->settings().mapname.empty())
+	if (m_settings->settings().usernum == 0 && m_settings->settings().mapname.empty())
 	{
 		change_map_or_save();
 		// Try to associate the host with the first player
@@ -226,11 +221,7 @@ void Fullscreen_Menu_LaunchMPG::think()
 void Fullscreen_Menu_LaunchMPG::setChatProvider(ChatProvider & chat)
 {
 	delete m_chat;
-	m_chat =
-		new GameChatPanel
-			(this,
-			 m_xres / 50, m_yres * 13 / 20, m_xres * 57 / 80, m_yres * 3 / 10,
-			 chat);
+	m_chat = new GameChatPanel(this, m_xres / 50, m_yres * 13 / 20, m_xres * 57 / 80, m_yres * 3 / 10, chat);
 	// For better readability
 	m_chat->set_bg_color(RGBColor(50, 50, 50));
 }
@@ -431,7 +422,15 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 	win_condition_update();
 
 	// Write client infos
-	//m_client_info.set_text(...);
+	std::string temp =
+		(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
+		?
+		(format("Player %i") % (settings.playernum + 1)).str()
+		:
+		_("Spectator");
+	temp  = (format(_("At the moment you are %s\n\n")) % temp.c_str()).str();
+	temp += "Click on the \"?\" in the right top corner to get help.";
+	m_client_info.set_text(temp);
 
 	// Update the multi player setup group
 	m_mpsg->refresh();
@@ -520,17 +519,17 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		infotext += player_save_tribe[i - 1];
 		infotext += "):\n    ";
 		// Check if this is a list of names, or just one name:
-		if (player_save_name[i - 1].substr(0, 1) != " ")
+		if (player_save_name[i - 1].compare(0, 1, " "))
 			infotext += player_save_name[i - 1];
 		else {
 			std::string temp = player_save_name[i - 1];
 			bool firstrun = true;
-			while (temp.find(" ", 1) < temp.size()) {
+			while (temp.find(' ', 1) < temp.size()) {
 				if (firstrun)
 					firstrun = false;
 				else
 					infotext += "\n    ";
-				uint32_t x = temp.find(" ", 1);
+				uint32_t x = temp.find(' ', 1);
 				infotext += temp.substr(1, x);
 				temp = temp.substr(x + 1, temp.size());
 			}
