@@ -119,15 +119,16 @@ struct StreamRead : public ::StreamRead {
 	};
 	struct tribe_immovable_nonexistent : public _data_error {
 		tribe_immovable_nonexistent
-			(std::string const & Tribename, char const * const Name)
+			(std::string const & Tribename, const std::string & Name)
 			:
 			_data_error
 				("tribe %s does not define immovable type \"%s\"",
-				 Tribename.c_str(), Name),
+				 Tribename.c_str(), Name.c_str()),
 			tribename(Tribename), name(Name)
 		{}
-		std::string const & tribename;
-		char        const * const name;
+		virtual ~tribe_immovable_nonexistent() throw() {}
+		std::string tribename;
+		std::string name;
 	};
 	struct world_immovable_nonexistent : public _data_error {
 		world_immovable_nonexistent

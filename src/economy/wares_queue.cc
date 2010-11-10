@@ -212,7 +212,6 @@ void WaresQueue::set_consume_interval(const uint32_t time) throw ()
 #define WARES_QUEUE_DATA_PACKET_VERSION 1
 void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos)
 {
-
 	fw.Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
 
 	//  Owner and callback is not saved, but this should be obvious on load.

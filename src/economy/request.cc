@@ -108,6 +108,8 @@ Request::~Request()
 void Request::Read
 	(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
+	bool fudged_type = false;
+
 	try {
 		uint16_t const version = fr.Unsigned16();
 		if (2 <= version and version <= REQUEST_VERSION) {
@@ -115,26 +117,33 @@ void Request::Read
 			if (version <= 3) {
 				//  Unfortunately, old versions wrote the index. The best thing
 				//  that we can do with that is to look it up in a table.
-				m_type = static_cast<Type>(fr.Unsigned8());
-				if (m_type != WARE and m_type != WORKER)
+				Type newtype = static_cast<Type>(fr.Unsigned8());
+				if (newtype != WARE and newtype != WORKER)
 					throw wexception
 						("type is %u but must be %u (ware) or %u (worker)",
 						 m_type, WARE, WORKER);
 				uint32_t const legacy_index = fr.Unsigned32();
-				m_index =
-					m_type == WARE
-					?
-					Legacy::  ware_index
-						(tribe,
-						 m_target.descr().descname(),
-						 "requests",
-						 legacy_index)
-					:
-					Legacy::worker_index
+				if (newtype == WORKER) {
+					m_type = WORKER;
+					m_index = Legacy::worker_index
 						(tribe,
 						 m_target.descr().descname(),
 						 "requests",
 						 legacy_index);
+				} else {
+					Ware_Index newindex = Legacy::ware_index
+						(tribe,
+						 m_target.descr().descname(),
+						 "requests",
+						 legacy_index);
+					if (newindex) {
+						m_type = WARE;
+						m_index = newindex;
+					} else {
+						log("Request::Read: Legacy ware no longer exists, sticking with default\n");
+						fudged_type = true;
+					}
+				}
 			} else {
 				char const * const type_name = fr.CString();
 				if (Ware_Index const wai = tribe.ware_index(type_name)) {
@@ -143,8 +152,12 @@ void Request::Read
 				} else if (Ware_Index const woi = tribe.worker_index(type_name)) {
 					m_type = WORKER;
 					m_index = woi;
-				} else
-					throw wexception("request for unknown type \"%s\"", type_name);
+				} else {
+					log
+						("Request::Read: unknown type '%s', stick with default %i/%i\n",
+						 type_name, m_type, m_index.value());
+					fudged_type = true;
+				}
 			}
 			if (version <= 5)
 				fr.Unsigned8(); // was m_idle
@@ -166,8 +179,24 @@ void Request::Read
 
 						if (upcast(Worker, worker, obj)) {
 							transfer = worker->get_transfer();
+							if (m_type != WORKER || worker->worker_index() != m_index) {
+								log("Request::Read: incompatible transfer type\n");
+								if (!fudged_type)
+									throw wexception
+										("Request::Read: incompatible transfer type");
+								transfer->has_failed();
+								transfer = 0;
+							}
 						} else if (upcast(WareInstance, ware, obj)) {
 							transfer = ware->get_transfer();
+							if (m_type != WARE || ware->descr_index() != m_index) {
+								log("Request::Read: incompatible transfer type\n");
+								if (!fudged_type)
+									throw wexception
+										("Request::Read: incompatible transfer type");
+								transfer->has_failed();
+								transfer = 0;
+							}
 						} else
 							throw wexception
 								("transfer target %u is neither ware nor worker",

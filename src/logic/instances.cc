@@ -510,7 +510,27 @@ void Map_Object::Loader::load_pointers() {}
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load_finish() {}
+void Map_Object::Loader::load_finish()
+{
+	while (!m_finish.empty()) {
+		m_finish.back()();
+		m_finish.pop_back();
+	}
+}
+
+/**
+ * Register a callback function that will automatically be run at
+ * \ref load_finish time.
+ *
+ * This is useful for registering save game compatibility fixups that need
+ * to be run after everything else has loaded.
+ *
+ * Callbacks are run in LIFO order.
+ */
+void Map_Object::Loader::add_finish(const FinishFn & fini)
+{
+	m_finish.push_back(fini);
+}
 
 
 /**

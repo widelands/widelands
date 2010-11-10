@@ -29,6 +29,8 @@
 #include <cstring>
 #include <vector>
 
+#include <boost/function.hpp>
+
 struct DirAnimations;
 struct RenderTarget;
 namespace UI {struct Tab_Panel;}
@@ -265,6 +267,8 @@ public:
 		Loader() : m_egbase(0), m_mol(0), m_object(0) {}
 
 	public:
+		typedef boost::function<void ()> FinishFn;
+
 		virtual ~Loader() {}
 
 		void init
@@ -282,12 +286,17 @@ public:
 			return ref_cast<T, Map_Object>(*m_object);
 		}
 
+		void add_finish(const FinishFn & fini);
+
 	protected:
 		void load(FileRead &);
 
 	public:
 		virtual void load_pointers();
 		virtual void load_finish();
+
+	private:
+		std::vector<FinishFn> m_finish;
 	};
 
 	/// This is just a fail-safe guard for the time until we fully transition

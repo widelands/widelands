@@ -34,6 +34,7 @@
 #include "worker_program.h"
 
 #include "ref_cast.h"
+#include <scripting/pdep/llimits.h>
 
 namespace Widelands {
 
@@ -136,6 +137,12 @@ Worker_Descr::Worker_Descr
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
+
+	// Read compatibility information
+	if (Section * compat_s = prof.get_section("compatibility_program")) {
+		while (const Section::Value * v = compat_s->get_next_val())
+			m_compatibility_programs[v->get_name()] = v->get_string();
+	}
 }
 
 
@@ -172,6 +179,19 @@ WorkerProgram const * Worker_Descr::get_program
 	return it->second;
 }
 
+/**
+ * Get the compatibility information for the given program name.
+ *
+ * Returns an empty string if no compatibility information for this program is found.
+ */
+const std::string & Worker_Descr::compatibility_program(const std::string & programname) const
+{
+	static const std::string empty;
+	std::map<std::string, std::string>::const_iterator it = m_compatibility_programs.find(programname);
+	if (it != m_compatibility_programs.end())
+		return it->second;
+	return empty;
+}
 
 /**
  * Custom creation routing that accounts for the location.

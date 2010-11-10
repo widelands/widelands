@@ -2,6 +2,11 @@ help=_Grows thatch reed.
 program=plantreed
 program=harvestreed
 
+[compatibility_program]
+# For compatibility with build15 and earlier
+plantflax=fail
+harvestflax=fail
+
 [buildcost]
 carrier=1
 shovel=1
@@ -19,7 +24,7 @@ shovel=1
 1=walk object
 2=animation harvesting 12000  #4sec animation cycle
 3=object harvest
-4=animation harvesting 1 
+4=animation harvesting 1
 5=createitem thatchreed
 6=return
 
