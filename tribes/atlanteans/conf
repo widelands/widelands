@@ -52,6 +52,7 @@ resi_iron1=_Resource indicator iron little
 resi_iron2=_Resource indicator iron much
 resi_none=_Resource indicator no resource
 resi_water1=_Resource indicator water
+shipconstruction=_Ship construction site
 
 [ware types]
 advanced_shield=_Advanced Shield
@@ -112,6 +113,7 @@ baker=_Baker
 blackroot_farmer=_Blackroot farmer
 builder=_Builder
 burner=_Burner
+shipwright=_Shipwright
 farmer=_Farmer
 fish_breeder=_Fish Breeder
 fisher=_Fisher
@@ -132,6 +134,9 @@ weaver=_Weaver
 woodcutter=_Woodcutter
 scout=_Scout
 horsebreeder=_Horse Breeder
+
+[ship types]
+ship=_Ship
 
 [constructionsite types]
 constructionsite=_Construction Site
@@ -169,6 +174,7 @@ scouts_house=_"Scout's House"
 sawmill=_Sawmill
 smokery=_Smokery
 mill=_Mill
+shipyard=_Shipyard
 bakery=_Bakery
 burners_house=_Charcoal Burner's House
 smelting_works=_Smelting Works

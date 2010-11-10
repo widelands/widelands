@@ -171,6 +171,7 @@ struct Graphic {
 
 	void load_animations(UI::ProgressWindow & loader_ui);
 	AnimationGfx::Index nr_frames(uint32_t const anim = 0) const;
+	uint32_t get_animation_frametime(uint32_t const anim) const;
 	void get_animation_size
 		(const uint32_t anim,
 		 const uint32_t time,

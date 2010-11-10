@@ -778,6 +778,7 @@ const char L_Map::className[] = "Map";
 const MethodType<L_Map> L_Map::Methods[] = {
 	METHOD(L_Map, place_immovable),
 	METHOD(L_Map, get_field),
+	METHOD(L_Map, recalculate),
 	{0, 0},
 };
 const PropertyType<L_Map> L_Map::Properties[] = {
@@ -921,6 +922,19 @@ int L_Map::get_field(lua_State * L) {
 		report_error(L, "y coordinate out of range!");
 
 	return to_lua<LuaMap::L_Field>(L, new LuaMap::L_Field(x, y));
+}
+
+/* RST
+	.. method:: recalculate()
+
+		This map recalculates the whole map state: height of fields, buildcaps
+		and so on. You only need to call this function if you changed
+		Field.raw_height in any way.
+*/
+// TODO: do we really want this function?
+int L_Map::recalculate(lua_State * L) {
+	get_egbase(L).map().recalc_whole_map();
+	return 0;
 }
 
 /*
@@ -1973,6 +1987,82 @@ const PropertyType<L_TrainingSite> L_TrainingSite::Properties[] = {
 
 
 /* RST
+Bob
+---
+
+.. class:: Bob
+
+	Child of: :class:`MapObject`
+
+	This is the base class for all Bobs in widelands.
+*/
+const char L_Bob::className[] = "Bob";
+const MethodType<L_Bob> L_Bob::Methods[] = {
+	METHOD(L_Bob, has_caps),
+	{0, 0},
+};
+const PropertyType<L_Bob> L_Bob::Properties[] = {
+	PROP_RO(L_Bob, name),
+	{0, 0, 0},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: name
+
+		(RO) The name of this bob's type
+*/
+// UNTESTED
+int L_Bob::get_name(lua_State * L) {
+	lua_pushstring(L, get(L, get_egbase(L))->name());
+	return 1;
+}
+
+/* RST
+	.. method:: has_caps(capname)
+
+		Similar to :meth:`Field::has_caps`.
+
+		:arg capname: can be either of
+
+		* :const:`swims`: This bob can swim.
+		* :const:`walks`: This bob can walk.
+*/
+// UNTESTED
+int L_Bob::has_caps(lua_State * L) {
+	std::string query = luaL_checkstring(L, 2);
+
+	uint32_t movecaps = get(L, get_egbase(L))->descr().movecaps();
+
+	if (query == "swims")
+		lua_pushboolean(L, movecaps & MOVECAPS_SWIM);
+	else if (query == "walks")
+		lua_pushboolean(L,  movecaps & MOVECAPS_WALK);
+	else
+		return report_error(L, "Unknown caps queried: %s!", query.c_str());
+
+	return 1;
+}
+
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+/* RST
 Field
 -----
 
@@ -1989,11 +2079,13 @@ Field
 const char L_Field::className[] = "Field";
 const MethodType<L_Field> L_Field::Methods[] = {
 	METHOD(L_Field, __eq),
+	METHOD(L_Field, __tostring),
 	METHOD(L_Field, region),
-	METHOD(L_Field, has_movecaps_swim),
+	METHOD(L_Field, has_caps),
 	{0, 0},
 };
 const PropertyType<L_Field> L_Field::Properties[] = {
+	PROP_RO(L_Field, __hash),
 	PROP_RO(L_Field, x),
 	PROP_RO(L_Field, y),
 	PROP_RO(L_Field, rn),
@@ -2003,9 +2095,11 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RO(L_Field, bln),
 	PROP_RO(L_Field, brn),
 	PROP_RO(L_Field, immovable),
+	PROP_RO(L_Field, bobs),
 	PROP_RW(L_Field, terr),
 	PROP_RW(L_Field, terd),
 	PROP_RW(L_Field, height),
+	PROP_RW(L_Field, raw_height),
 	PROP_RO(L_Field, viewpoint_x),
 	PROP_RO(L_Field, viewpoint_y),
 	PROP_RW(L_Field, resource),
@@ -2028,6 +2122,14 @@ void L_Field::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
+// Hash is used to identify a class in a Set
+int L_Field::get___hash(lua_State * L) {
+	char buf[25];
+	snprintf(buf, sizeof(buf), "%i_%i", m_c.x, m_c.y);
+	lua_pushstring(L, buf);
+	return 1;
+}
+
 /* RST
 	.. attribute:: x, y
 
@@ -2050,13 +2152,47 @@ int L_Field::get_height(lua_State * L) {
 }
 int L_Field::set_height(lua_State * L) {
 	uint32_t height = luaL_checkuint32(L, -1);
+	FCoords f = fcoords(L);
+
+	if (f.field->get_height() == height)
+		return 0;
+
 	if (height > MAX_FIELD_HEIGHT)
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
-	get_egbase(L).map().set_height(fcoords(L), height);
+	get_egbase(L).map().set_height(f, height);
 
-	return get_height(L);
+	return 0;
 }
+
+/* RST
+	.. attribute:: raw_height
+
+		(RW The same as :attr:`height`, but setting this will not trigger a
+		recalculation of the surrounding fields. You can use this field to
+		change the height of many fields on a map quickly, then use
+		:func:`wl.map.recalculate()` to make sure that everything is in order.
+*/
+// UNTESTED
+int L_Field::get_raw_height(lua_State * L) {
+	lua_pushuint32(L, fcoords(L).field->get_height());
+	return 1;
+}
+int L_Field::set_raw_height(lua_State * L) {
+	uint32_t height = luaL_checkuint32(L, -1);
+	FCoords f = fcoords(L);
+
+	if (f.field->get_height() == height)
+		return 0;
+
+	if (height > MAX_FIELD_HEIGHT)
+		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
+
+	f.field->set_height(height);
+
+	return 0;
+}
+
 
 /* RST
 	.. attribute:: viewpoint_x, viewpoint_y
@@ -2146,6 +2282,27 @@ int L_Field::get_immovable(lua_State * L) {
 		return 0;
 	else
 		upcasted_immovable_to_lua(L, bi);
+	return 1;
+}
+
+/* RST
+	.. attribute:: bobs
+
+		(RO) An :class:`array` of :class:`~wl.map.Bob` that are associated
+		with this field
+*/
+// UNTESTED
+int L_Field::get_bobs(lua_State * L) {
+	Bob * b = fcoords(L).field->get_first_bob();
+
+	lua_newtable(L);
+	uint32_t cidx = 1;
+	while (b) {
+		lua_pushuint32(L, cidx++);
+		to_lua<L_Bob>(L, new L_Bob(*b));
+		lua_rawset(L, -3);
+		b = b->get_next_bob();
+	}
 	return 1;
 }
 
@@ -2305,6 +2462,12 @@ int L_Field::__eq(lua_State * L) {
 	lua_pushboolean(L, (*get_user_class<L_Field>(L, -1))->m_c == m_c);
 	return 1;
 }
+int L_Field::__tostring(lua_State * L) {
+	char buf[100];
+	snprintf(buf, sizeof(buf), "Field(%i,%i)", m_c.x, m_c.y);
+	lua_pushstring(L, buf);
+	return 1;
+}
 
 /* RST
 	.. function:: region(r1[, r2])
@@ -2346,9 +2509,43 @@ int L_Field::region(lua_State * L) {
 }
 
 
-int L_Field::has_movecaps_swim(lua_State * L) {
+/* RST
+	.. method:: has_caps(capname)
+
+		Returns :const:`true` if the field has this caps associated
+		with it, otherwise returns false.
+
+		:arg capname: can be either of
+
+		* :const:`small`: Can a small building be build here?
+		* :const:`medium`: Can a medium building be build here?
+		* :const:`big`: Can a big building be build here?
+		* :const:`mine`: Can a mine be build here?
+		* :const:`flag`: Can a flag be build here?
+		* :const:`walkable`: Is this field passable for walking bobs?
+		* :const:`swimable`: Is this field passable for swimming bobs?
+*/
+int L_Field::has_caps(lua_State * L) {
 	Field * field = fcoords(L).field;
-	lua_pushboolean(L, (field->nodecaps() & MOVECAPS_SWIM));
+	std::string query = luaL_checkstring(L, 2);
+
+	if (query == "walkable")
+		lua_pushboolean(L, field->nodecaps() & MOVECAPS_WALK);
+	else if (query == "swimmable")
+		lua_pushboolean(L, field->nodecaps() & MOVECAPS_SWIM);
+	else if (query == "small")
+		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_SMALL);
+	else if (query == "medium")
+		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_MEDIUM);
+	else if (query == "big")
+		lua_pushboolean(L, (field->nodecaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG);
+	else if (query == "mine")
+		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_MINE);
+	else if (query == "flag")
+		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_FLAG);
+	else
+		return report_error(L, "Unknown caps queried: %s!", query.c_str());
+
 	return 1;
 }
 
@@ -2498,6 +2695,11 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<L_Field>(L, "map");
 	register_class<L_PlayerSlot>(L, "map");
 	register_class<L_MapObject>(L, "map");
+
+
+	register_class<L_Bob>(L, "map", true);
+	add_parent<L_Bob, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_BaseImmovable>(L, "map", true);
 	add_parent<L_BaseImmovable, L_MapObject>(L);

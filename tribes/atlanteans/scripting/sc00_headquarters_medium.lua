@@ -6,10 +6,12 @@ use("aux", "infrastructure")
 
 set_textdomain("tribe_atlanteans")
 
-return {
+init = {
    name = _ "Headquarters medium", 
    func =  function(plr) 
+
    plr:allow_workers("all")
+   plr:forbid_buildings{"shipyard"}
 
    local sf = wl.Game().map.player_slots[plr.number].starting_field
 
@@ -74,3 +76,6 @@ return {
    })
 end
 }
+
+return init
+

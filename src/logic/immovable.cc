@@ -29,6 +29,8 @@
 #include "map.h"
 #include "mapfringeregion.h"
 #include "profile/profile.h"
+#include "graphic/animation_gfx.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
@@ -135,6 +137,8 @@ ImmovableProgram::ImmovableProgram
 			action = new ActSeed     (v->get_string(), immovable);
 		else if (not strcmp(v->get_name(), "playFX"))
 			action = new ActPlayFX   (v->get_string(), immovable);
+		else if (not strcmp(v->get_name(), "construction"))
+			action = new ActConstruction(v->get_string(), immovable, directory, prof);
 		else
 			throw game_data_error
 				(_("unknown command type \"%s\""), v->get_name());
@@ -260,7 +264,8 @@ Immovable_Descr::Immovable_Descr
 					("[terrain affinity] %s: %s", terrain_type_name, e.what());
 			}
 		}
-		if (owner_tribe) //  Tribe immovables may have entries for other worlds.
+		if (owner_tribe) {
+			//  Tribe immovables may have entries for other worlds.
 			while (Section::Value * const v = terrain_affinity_s->get_next_val())
 				try {
 					uint32_t const value = v->get_natural();
@@ -274,8 +279,14 @@ Immovable_Descr::Immovable_Descr
 						(_("[terrain affinity] \"%s\" (not in current world): %s"),
 						 v->get_name(), e.what());
 				}
+		}
 	} else
 		memset(it, 255, sizeof(m_terrain_affinity));
+
+	if (owner_tribe) {
+		if (Section * buildcost_s = prof.get_section("buildcost"))
+			m_buildcost.parse(*owner_tribe, *buildcost_s);
+	}
 }
 
 
@@ -332,13 +343,22 @@ IMPLEMENTATION
 
 Immovable::Immovable(const Immovable_Descr & imm_descr) :
 BaseImmovable (imm_descr),
+m_owner(0),
 m_anim        (0),
+m_anim_construction_total(0),
+m_anim_construction_done(0),
 m_program     (0),
 m_program_ptr (0),
 m_program_step(0),
+m_action_data(0),
 m_reserved_by_worker(false)
 {}
 
+Immovable::~Immovable()
+{
+	delete m_action_data;
+	m_action_data = 0;
+}
 
 int32_t Immovable::get_type() const throw ()
 {
@@ -367,17 +387,25 @@ bool Immovable::get_passable() const throw ()
 
 std::string const & Immovable::name() const throw () {return descr().name();}
 
+void Immovable::set_owner(Player* player)
+{
+	m_owner = player;
+}
 
 void Immovable::start_animation
 	(Editor_Game_Base const & egbase, uint32_t const anim)
 {
 	m_anim      = anim;
 	m_animstart = egbase.get_gametime();
+	m_anim_construction_done = m_anim_construction_total = 0;
 }
 
 
-void Immovable::increment_program_pointer() {
+void Immovable::increment_program_pointer()
+{
 	m_program_ptr = (m_program_ptr + 1) % m_program->size();
+	delete m_action_data;
+	m_action_data = 0;
 }
 
 
@@ -425,9 +453,10 @@ void Immovable::switch_program(Game & game, std::string const & programname)
 	m_program = descr().get_program(programname);
 	m_program_ptr = 0;
 	m_program_step = 0;
+	delete m_action_data;
+	m_action_data = 0;
 	schedule_act(game, 1);
 }
-
 
 uint32_t Immovable_Descr::terrain_suitability
 	(FCoords const f, Map const & map) const
@@ -468,9 +497,52 @@ void Immovable::draw
 	 FCoords,
 	 Point                    const pos)
 {
-	if (m_anim)
-		dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, 0);
+	if (m_anim) {
+		if (!m_anim_construction_total)
+			dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, 0);
+		else
+			draw_construction(game, dst, pos);
+	}
 }
+
+void Immovable::draw_construction(const Editor_Game_Base& game, RenderTarget& dst, const Point pos)
+{
+	const ImmovableProgram::ActConstruction * constructionact = 0;
+	if (m_program_ptr < m_program->size())
+		constructionact = dynamic_cast<const ImmovableProgram::ActConstruction *>
+			(&(*m_program)[m_program_ptr]);
+
+	const int32_t steptime = constructionact ? constructionact->buildtime() : 5000;
+	uint32_t total = m_anim_construction_total * steptime;
+	uint32_t done = 0;
+
+	if (m_anim_construction_done > 0) {
+		done = steptime * (m_anim_construction_done - 1);
+		done += std::min(steptime, game.get_gametime() - m_animstart);
+	}
+
+	if (done > total)
+		done = total;
+
+	const AnimationGfx::Index nr_frames = g_gr->nr_frames(m_anim);
+	uint32_t frametime = g_anim.get_animation(m_anim)->frametime;
+	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
+	const AnimationGfx::Index current_frame = done / units_per_frame;
+	uint32_t curw, curh;
+	g_gr->get_animation_size(m_anim, current_frame * frametime, curw, curh);
+
+	uint32_t lines = ((done % units_per_frame) * curh) / units_per_frame;
+
+	if (current_frame > 0) {
+		// Not the first pic, so draw the previous one in the back
+		dst.drawanim(pos, m_anim, (current_frame-1) * frametime, get_owner());
+	}
+
+	assert(lines <= curh);
+	dst.drawanimrect
+		(pos, m_anim, current_frame * frametime, get_owner(), Rect(Point(0, curh - lines), curw, lines));
+}
+
 
 /**
  * Returns whether this immovable was reserved by a worker.
@@ -488,6 +560,17 @@ void Immovable::set_reserved_by_worker(bool reserve)
 	m_reserved_by_worker = reserve;
 }
 
+/**
+ * Set the current action's data to \p data.
+ *
+ * \warning \p data must not be equal to the currently set data, but it may be 0.
+ */
+void Immovable::set_action_data(ImmovableActionData* data)
+{
+	delete m_action_data;
+	m_action_data = data;
+}
+
 
 /*
 ==============================
@@ -497,13 +580,23 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 3
+#define IMMOVABLE_SAVEGAME_VERSION 5
 
 void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
 	BaseImmovable::Loader::load(fr);
 
 	Immovable & imm = ref_cast<Immovable, Map_Object>(*get_object());
+
+	if (version >= 5) {
+		Player_Number pn = fr.Unsigned8();
+		if (pn && pn <= MAX_PLAYERS) {
+			Player * plr = egbase().get_player(pn);
+			if (!plr)
+				throw game_data_error("Immovable::load: player %u does not exist", pn);
+			imm.set_owner(plr);
+		}
+	}
 
 	// Position
 	imm.m_position = fr.Coords32(egbase().map().extent());
@@ -520,6 +613,11 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 			 animname, imm.descr().get_animation_name(imm.m_anim).c_str());
 	}
 	imm.m_animstart = fr.Signed32();
+	if (version >= 4) {
+		imm.m_anim_construction_total = fr.Unsigned32();
+		if (imm.m_anim_construction_total)
+			imm.m_anim_construction_done = fr.Unsigned32();
+	}
 
 	{ //  program
 		std::string program_name;
@@ -557,6 +655,13 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 
 	if (version >= 3)
 		imm.m_reserved_by_worker = fr.Unsigned8();
+
+	if (version >= 4) {
+		std::string dataname = fr.CString();
+		if (!dataname.empty()) {
+			imm.set_action_data(ImmovableActionData::load(fr, imm, dataname));
+		}
+	}
 }
 
 void Immovable::Loader::load_pointers()
@@ -595,11 +700,15 @@ void Immovable::save
 	// The main loading data follows
 	BaseImmovable::save(egbase, mos, fw);
 
+	fw.Player_Number8(get_owner() ? get_owner()->player_number() : 0);
 	fw.Coords32(m_position);
 
 	// Animations
 	fw.String(descr().get_animation_name(m_anim));
 	fw.Signed32(m_animstart);
+	fw.Unsigned32(m_anim_construction_total);
+	if (m_anim_construction_total)
+		fw.Unsigned32(m_anim_construction_done);
 
 	// Program Stuff
 	fw.String(m_program ? m_program->name() : "");
@@ -608,6 +717,13 @@ void Immovable::save
 	fw.Signed32(m_program_step);
 
 	fw.Unsigned8(m_reserved_by_worker);
+
+	if (m_action_data) {
+		fw.CString(m_action_data->name());
+		m_action_data->save(fw, *this);
+	} else {
+		fw.CString("");
+	}
 }
 
 Map_Object::Loader * Immovable::load
@@ -767,52 +883,51 @@ ImmovableProgram::ActTransform::ActTransform
 {
 	try {
 		tribe = true;
+		bob = false;
 		probability = 0;
-		for (char * p = parameters;;)
-			switch (*p) {
-			case ':': {
-				*p = '\0';
-				++p;
-				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
-				if (not owner_tribe)
+
+		std::vector<std::string> params = split_string(parameters, " ");
+		for (uint i = 0; i < params.size(); ++i) {
+			if (params[i] == "bob")
+				bob = true;
+			else if (params[i] == "immovable")
+				bob = false;
+			else if (params[i][0] >= '0' && params[i][0] <= '9') {
+				long int const value = atoi(params[i].c_str());
+				if (value < 1 or 254 < value)
 					throw game_data_error
 						(_
-						 	("immovable type not in tribe but target type has scope "
-						 	 "(\"%s\")"),
-						 parameters);
-				else if (strcmp(parameters, "world"))
-					throw game_data_error
-						(_
-						 	("scope \"%s\" given for target type (must be "
-						 	 "\"world\")"),
-						 parameters);
-				tribe = false;
-				parameters = p;
-				break;
-			}
-			case ' ': {
-				*p = '\0';
-				++p;
-				char * endp;
-				long int const value = strtol(p, &endp, 0);
-				if (*endp or value < 1 or 254 < value)
-					throw
-						(_
-						 	("expected probability in range [1, 254] but found "
-						 	 "\"%s\""),
-						 p);
+							("expected probability in range [1, 254] but found "
+							"\"%s\""),
+						 params[i].c_str());
 				probability = value;
-			//  fallthrough
+			} else {
+				std::vector<std::string> segments = split_string(params[i], ":");
+
+				if (segments.size() > 2)
+					throw game_data_error("object type has more than 2 segments");
+				if (segments.size() == 2) {
+					if (segments[0] == "world")
+						tribe = false;
+					else if (segments[0] == "tribe") {
+						if (!descr.get_owner_tribe())
+							throw game_data_error("scope \"tribe\", but have no owner tribe");
+						tribe = true;
+					} else
+						throw game_data_error
+							(_
+								("unknown scope \"%s\" given for target type (must be "
+								 "\"world\" or \"tribe\")"),
+							 parameters);
+
+					type_name = segments[1];
+				} else {
+					type_name = segments[0];
+				}
 			}
-			case '\0':
-				goto end;
-			default:
-				++p;
-			}
-	end:
-		if (not strcmp(parameters, descr.name().c_str()))
+		}
+		if (type_name == descr.name())
 			throw game_data_error(_("illegal transformation to the same type"));
-		type_name = parameters;
 	} catch (_wexception const & e) {
 		throw game_data_error("transform: %s", e.what());
 	}
@@ -822,11 +937,21 @@ void ImmovableProgram::ActTransform::execute
 	(Game & game, Immovable & immovable) const
 {
 	if (probability == 0 or game.logic_rand() % 256 < probability) {
+		Player * player = immovable.get_owner();
 		Coords const c = immovable.get_position();
 		Tribe_Descr const * const owner_tribe =
 			tribe ? immovable.descr().get_owner_tribe() : 0;
 		immovable.remove(game); //  Now immovable is a dangling reference!
-		game.create_immovable(c, type_name, owner_tribe);
+
+		if (bob) {
+			Bob & bob = game.create_bob(c, type_name, owner_tribe);
+			if (player)
+				bob.set_owner(player);
+		} else {
+			Immovable & imm = game.create_immovable(c, type_name, owner_tribe);
+			if (player)
+				imm.set_owner(player);
+		}
 	} else
 		immovable.program_step(game);
 }
@@ -1003,6 +1128,188 @@ void ImmovableProgram::ActSeed::execute
 
 	immovable.program_step(game);
 }
+
+ImmovableProgram::ActConstruction::ActConstruction
+	(char * parameters, Immovable_Descr & descr, std::string const & directory, Profile & prof)
+{
+	try {
+		if (!descr.get_owner_tribe())
+			throw game_data_error("only usable for tribe immovable");
+
+		std::vector<std::string> params = split_string(parameters, " ");
+
+		if (params.size() != 3)
+			throw game_data_error("usage: animation-name buildtime decaytime");
+
+		m_buildtime = atoi(params[1].c_str());
+		m_decaytime = atoi(params[2].c_str());
+
+		std::string animation_name = params[0];
+		if (descr.is_animation_known(animation_name))
+			m_animid = descr.get_animation(animation_name);
+		else {
+			m_animid =
+				g_anim.get
+					(directory.c_str(),
+					 prof.get_safe_section(animation_name),
+					 0);
+
+			descr.add_animation(animation_name, m_animid);
+		}
+	} catch (const _wexception & e) {
+		throw game_data_error("construction: %s", e.what());
+	}
+}
+
+#define CONSTRUCTION_DATA_VERSION 1
+
+struct ActConstructionData : ImmovableActionData {
+	const char * name() const {return "construction";}
+	void save(FileWrite & fw, Immovable & imm) {
+		fw.Unsigned8(CONSTRUCTION_DATA_VERSION);
+		delivered.save(fw, *imm.descr().get_owner_tribe());
+	}
+
+	static ActConstructionData * load(FileRead & fr, Immovable & imm) {
+		ActConstructionData * d = new ActConstructionData;
+
+		try {
+			uint8_t version = fr.Unsigned8();
+			if (version == CONSTRUCTION_DATA_VERSION) {
+				d->delivered.load(fr, *imm.descr().get_owner_tribe());
+
+				return d;
+			} else
+				throw game_data_error("unknown version %u", version);
+		} catch(const _wexception & e) {
+			delete d;
+			throw game_data_error("ActConstructionData: %s", e.what());
+		}
+	}
+
+	Buildcost delivered;
+};
+
+void ImmovableProgram::ActConstruction::execute(Game & g, Immovable & imm) const
+{
+	ActConstructionData * d = imm.get_action_data<ActConstructionData>();
+	if (!d) {
+		// First execution
+		d = new ActConstructionData;
+		imm.set_action_data(d);
+
+		imm.start_animation(g, m_animid);
+		imm.m_anim_construction_total = imm.descr().buildcost().total();
+	} else {
+		// Perhaps we are called due to the construction timeout of the last construction step
+		Buildcost remaining;
+		imm.construct_remaining_buildcost(g, &remaining);
+		if (remaining.empty()) {
+			imm.program_step(g);
+			return;
+		}
+
+		// Otherwise, this is a decay timeout
+		uint32_t totaldelivered = 0;
+		for (Buildcost::const_iterator it = d->delivered.begin(); it != d->delivered.end(); ++it)
+			totaldelivered += it->second;
+
+		if (!totaldelivered) {
+			imm.remove(g);
+			return;
+		}
+
+		uint32_t randdecay = g.logic_rand() % totaldelivered;
+		for (Buildcost::iterator it = d->delivered.begin(); it != d->delivered.end(); ++it) {
+			if (randdecay < it->second) {
+				it->second--;
+				break;
+			}
+
+			randdecay -= it->second;
+		}
+
+		imm.m_anim_construction_done = d->delivered.total();
+	}
+
+	imm.m_program_step = imm.schedule_act(g, m_decaytime);
+}
+
+/**
+ * For an immovable that is currently in construction mode, return \c true and
+ * compute the remaining buildcost.
+ *
+ * If the immovable is not currently in construction mode, return \c false.
+ */
+bool Immovable::construct_remaining_buildcost(Game & game, Buildcost * buildcost)
+{
+	ActConstructionData * d = get_action_data<ActConstructionData>();
+	if (!d)
+		return false;
+
+	const Buildcost & total = descr().buildcost();
+	for (Buildcost::const_iterator it = total.begin(); it != total.end(); ++it) {
+		uint32_t delivered = d->delivered[it->first];
+		if (delivered < it->second)
+			(*buildcost)[it->first] = it->second - delivered;
+	}
+
+	return true;
+}
+
+/**
+ * For an immovable that is currently in construction mode, return \c true and
+ * consume the given ware type as delivered.
+ *
+ * If the immovable is not currently in construction mode, return \c false.
+ */
+bool Immovable::construct_ware_item(Game & game, Ware_Index index)
+{
+	ActConstructionData * d = get_action_data<ActConstructionData>();
+	if (!d)
+		return false;
+
+	molog("construct_ware_item: index %u", index.value());
+
+	Buildcost::iterator it = d->delivered.find(index);
+	if (it != d->delivered.end())
+		it->second++;
+	else
+		d->delivered[index] = 1;
+
+	m_anim_construction_done = d->delivered.total();
+	m_animstart = game.get_gametime();
+
+	molog("construct_ware_item: total %u delivered: %u", index.value(), d->delivered[index]);
+
+	Buildcost remaining;
+	construct_remaining_buildcost(game, &remaining);
+
+	const ImmovableProgram::ActConstruction * act =
+		dynamic_cast<const ImmovableProgram::ActConstruction *>(&(*m_program)[m_program_ptr]);
+	assert(act != 0);
+
+	if (remaining.empty()) {
+		// Wait for the last building animation to finish.
+		m_program_step = schedule_act(game, act->buildtime());
+	} else {
+		m_program_step = schedule_act(game, act->decaytime());
+	}
+
+	return true;
+}
+
+
+ImmovableActionData * ImmovableActionData::load(FileRead & fr, Immovable & imm, const std::string & name)
+{
+	if (name == "construction")
+		return ActConstructionData::load(fr, imm);
+	else {
+		log("ImmovableActionData::load: type %s not known", name.c_str());
+		return 0;
+	}
+}
+
 
 /*
 ==============================================================================

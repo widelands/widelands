@@ -33,6 +33,7 @@
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "ship.h"
 #include "soldier.h"
 #include "trainingsite.h"
 #include "warehouse.h"
@@ -74,22 +75,28 @@ Tribe_Descr::Tribe_Descr
 		{
 			std::set<std::string> names; //  To enforce name uniqueness.
 
-			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
-				m_immovables.add
-					(new Immovable_Descr
-					 	(_name, _descname, path, prof, global_s, m_world, this));
-			PARSE_MAP_OBJECT_TYPES_END;
-
 			PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
 				m_bobs.add
 					(new Critter_Bob_Descr
 					 	(_name, _descname, path, prof, global_s,  this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
+			PARSE_MAP_OBJECT_TYPES_BEGIN("ship")
+				m_bobs.add
+					(new Ship_Descr
+					 	(_name, _descname, path, prof, global_s, *this));
+			PARSE_MAP_OBJECT_TYPES_END;
+
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
 				m_wares.add
 					(new Item_Ware_Descr
 					 	(*this, _name, _descname, path, prof, global_s));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
+				m_immovables.add
+					(new Immovable_Descr
+					 	(_name, _descname, path, prof, global_s, m_world, this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 #define PARSE_WORKER_TYPES(name, descr_type)                                  \

@@ -1,0 +1,42 @@
+size=medium
+
+[buildcost]
+trunk=3
+planks=2
+stone=3
+spidercloth=2
+
+[working positions]
+shipwright=1
+
+[inputs]
+planks=10
+trunk=2
+spidercloth=4
+
+[programs]
+ship=_Constructing ship
+work=_Work
+
+[work]
+sleep=20000
+call=ship
+
+[ship]
+construct=shipconstruction buildship 6
+return=completed
+
+[idle]
+pics=shipyard_i_??.png
+hotspot=55 60
+playercolor=true
+
+#[working]
+#pics=shipyard_w_??.png 
+#hotspot=55 60
+#playercolor=true
+#
+#[outofhouse]
+#pics=shipyard_w_??.png 
+#hotspot=55 60
+#playercolor=true

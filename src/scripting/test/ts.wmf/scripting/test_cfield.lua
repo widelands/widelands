@@ -33,6 +33,10 @@ function field_tests:test_direct_change_impossible()
    assert_error("c.x should be read only", function() c.x = 12 end) 
    assert_error("c.y should be read only", function() c.y = 12 end) 
 end
+function field_tests:test_hash()
+   assert_equal("25_40", map:get_field(25,40).__hash)
+end
+
 function field_tests:test_r_neighbour()
    c = map:get_field(25,40)
    assert_equal(map:get_field(26,40), c.rn)
@@ -192,6 +196,59 @@ end
 function field_resources_tests:test_set_resource_type_illegal_resource()
    assert_error("Illegal name!", function() self.f.resource = "ksjdjhsdf" end)
 end
+
+-- ==========
+-- Fieldcaps 
+-- ==========
+field_caps_tests = lunit.TestCase("Field caps tests")
+
+function field_caps_tests:test_big_field_on_land()
+   local f = map:get_field(0,46)
+   assert_equal(true, f:has_caps("small"))
+   assert_equal(true, f:has_caps("medium"))
+   assert_equal(true, f:has_caps("big"))
+   assert_equal(true, f:has_caps("flag"))
+   assert_equal(false, f:has_caps("mine"))
+   assert_equal(false, f:has_caps("swimmable"))
+   assert_equal(true, f:has_caps("walkable"))
+end
+function field_caps_tests:test_flag_field_on_land()
+   local f = map:get_field(1,53)
+   assert_equal(false, f:has_caps("small"))
+   assert_equal(false, f:has_caps("medium"))
+   assert_equal(false, f:has_caps("big"))
+   assert_equal(true, f:has_caps("flag"))
+   assert_equal(false, f:has_caps("mine"))
+   assert_equal(false, f:has_caps("swimmable"))
+   assert_equal(true, f:has_caps("walkable"))
+end
+function field_caps_tests:test_mine_field()
+   local f = map:get_field(63,54)
+   assert_equal(false, f:has_caps("small"))
+   assert_equal(false, f:has_caps("medium"))
+   assert_equal(false, f:has_caps("big"))
+   assert_equal(true, f:has_caps("flag"))
+   assert_equal(true, f:has_caps("mine"))
+   assert_equal(false, f:has_caps("swimmable"))
+   assert_equal(true, f:has_caps("walkable"))
+end
+function field_caps_tests:test_field_on_water()
+   local f = map:get_field(7,58)
+   assert_equal(false, f:has_caps("small"))
+   assert_equal(false, f:has_caps("medium"))
+   assert_equal(false, f:has_caps("big"))
+   assert_equal(false, f:has_caps("flag"))
+   assert_equal(false, f:has_caps("mine"))
+   assert_equal(true, f:has_caps("swimmable"))
+   assert_equal(false, f:has_caps("walkable"))
+end
+
+function field_caps_tests:test_wrong_call()
+   assert_error("Unknown caps", function()
+      map:get_field(7,58):has_caps("blahfasel")
+   end)
+end
+
 
 
 -- ===============

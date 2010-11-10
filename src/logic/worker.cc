@@ -613,7 +613,7 @@ void Worker::informPlayer
 bool Worker::run_walk(Game & game, State & state, Action const & action)
 {
 	BaseImmovable const * const imm = game.map()[get_position()].get_immovable();
-	Coords dest;
+	Coords dest(Coords::Null());
 	bool forceonlast = false;
 	int32_t max_steps = -1;
 
@@ -624,39 +624,32 @@ bool Worker::run_walk(Game & game, State & state, Action const & action)
 	}
 
 	// Determine the coords we need to walk towards
-	switch (action.iparam1) {
-	case Action::walkObject: {
+	if (action.iparam1 & Action::walkObject) {
 		Map_Object * const obj = state.objvar1.get(game);
 
-		if (!obj) {
-			send_signal(game, "fail");
-			pop_task(game);
-			return true;
+		if (obj) {
+			if      (upcast(Bob       const, bob,       obj))
+				dest = bob      ->get_position();
+			else if (upcast(Immovable const, immovable, obj))
+				dest = immovable->get_position();
+			else
+				throw wexception
+					("MO(%u): [actWalk]: bad object type = %i",
+					serial(), obj->get_type());
+
+			//  Only take one step, then rethink (object may have moved)
+			max_steps = 1;
+
+			forceonlast = true;
 		}
-
-		if      (upcast(Bob       const, bob,       obj))
-			dest = bob      ->get_position();
-		else if (upcast(Immovable const, immovable, obj))
-			dest = immovable->get_position();
-		else
-			throw wexception
-				("MO(%u): [actWalk]: bad object type = %i",
-				 serial(), obj->get_type());
-
-		//  Only take one step, then rethink (object may have moved)
-		max_steps = 1;
-
-		forceonlast = true;
-		break;
 	}
-	case Action::walkCoords: {
+	if (!dest && (action.iparam1 & Action::walkCoords)) {
 		dest = state.coords;
-		break;
 	}
-	default:
-		throw wexception
-			("MO(%u): [actWalk]: bad action.iparam1 = %i",
-			 serial(), action.iparam1);
+	if (!dest) {
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
 	}
 
 	// If we've already reached our destination, that's cool
@@ -766,6 +759,15 @@ bool Worker::run_plant(Game & game, State & state, Action const & action)
 {
 	assert(action.sparamv.size());
 
+	if (action.iparam1 == Action::plantUnlessObject) {
+		if (state.objvar1.get(game)) {
+			// already have an object, so don't create a new one
+			++state.ivar1;
+			schedule_act(game, 10);
+			return true;
+		}
+	}
+
 	Map & map = game.map();
 	Coords pos = get_position();
 	FCoords fpos = map.get_fcoords(pos);
@@ -844,8 +846,12 @@ bool Worker::run_plant(Game & game, State & state, Action const & action)
 	}
 	uint32_t const idx = game.logic_rand() % best_fitting.size();
 
-	game.create_immovable
+	Immovable & newimm = game.create_immovable
 		(pos, best_fitting[idx], is_tribe_specific[idx] ? &descr().tribe() : 0);
+	newimm.set_owner(get_owner());
+
+	if (action.iparam1 == Action::plantUnlessObject)
+		state.objvar1 = &newimm;
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -970,6 +976,44 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 bool Worker::run_playFX(Game & game, State & state, Action const & action)
 {
 	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
+
+	++state.ivar1;
+	schedule_act(game, 10);
+	return true;
+}
+
+/**
+ * If we are currently carrying some ware item, hand it off to the currently
+ * selected immovable (\ref objvar1) for construction.
+ */
+bool Worker::run_construct(Game & game, State & state, Action const & action)
+{
+	Immovable * imm = dynamic_cast<Immovable*>(state.objvar1.get(game));
+	if (!imm) {
+		molog("run_construct: no objvar1 immovable set");
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
+	}
+
+	WareInstance * item = get_carried_item(game);
+	if (!item) {
+		molog("run_construct: no item being carried");
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
+	}
+
+	Ware_Index wareindex = item->descr_index();
+	if (!imm->construct_ware_item(game, wareindex)) {
+		molog("run_construct: construct_ware_item failed");
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
+	}
+
+	item = fetch_carried_item(game);
+	item->remove(game);
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -1691,46 +1735,18 @@ void Worker::return_update(Game & game, State & state)
 	{
 		molog("[return]: Failed to return\n");
 		char buffer[2048];
-		BaseImmovable const * const immovable =
-			game.map()[get_position()].get_immovable();
 		snprintf
 			(buffer, sizeof(buffer),
-			 _
-			 	("The game engine has encountered a logic error. The %s #%u of "
-			 	 "player %u (carrying %s) could not find a way home from (%i, %i) "
-			 	 "(with %s immovable) to the base flag at (%i, %i) of its %s at "
-			 	 "(%i, %i). The %s will be made homeless and probably die, unless "
-			 	 "some object is removed very soon and the %s finds a way to a "
-			 	 "flag connected to a warehouse. The %s will immediately request "
-			 	 "a new worker. Unfortunately this may happen repeatedly and "
-			 	 "drain the supply of workers (tools). No solution for this "
-			 	 "problem has been implemented yet. It would be safest to destroy "
-			 	 "the %s and not rebuild it at that location, nor any other "
-			 	 "building that sends out a worker on the map. This problem "
-			 	 "usually occurs near unpassable terrain, such as water, when an "
-			 	 "object, such as a farm field, is placed on the map while the "
-			 	 "worker is out working. (bug #1796611) (The game has been "
-			 	 "paused.)"),
-			 descname().c_str(), serial(), owner().player_number(),
-			 does_carry_ware() ?
-			 get_carried_item(game)->descr().descname().c_str() : _("nothing"),
-			 get_position().x, get_position().y,
-			 immovable ? immovable->descr().descname().c_str() : _("no"),
-			 location.base_flag().get_position().x,
-			 location.base_flag().get_position().y,
-			 location.descname().c_str(),
-			 location.get_position().x, location.get_position().y,
-			 descname().c_str(), descname().c_str(),
-			 location.descname().c_str(), location.descname().c_str());
+			 _ ("Your %s can't find a way home and will likely die."),
+			 descname().c_str());
 		owner().add_message
 			(game,
 			 *new Message
 			 	("game engine",
 			 	 game.get_gametime(), Forever(),
-			 	 _("Logic error"),
+			 	 _("Worker got lost!"),
 			 	 buffer,
 			 	 get_position()));
-		game.gameController()->setDesiredSpeed(0);
 		return set_location(0);
 	}
 }

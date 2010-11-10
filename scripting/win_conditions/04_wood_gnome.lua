@@ -33,7 +33,7 @@ return {
 			local f = map:get_field(x,y)
 			if f then
 				-- add this field to the list as long as it has not movecaps swim
-				if not f.has_movecaps_swim(f) then
+				if not f:has_caps("swimmable") then
 					fields[#fields+1] = f
 				end
 			end

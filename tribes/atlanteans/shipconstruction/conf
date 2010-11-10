@@ -1,0 +1,17 @@
+size=small
+program=program
+picture=ship_i_00.png
+
+[buildcost]
+planks=10
+trunk=2
+spidercloth=4
+
+[program]
+construction=idle 5000 210000
+transform=bob tribe:ship
+
+[idle]
+pics=shipbuild_??.png
+hotspot=55 60
+playercolor=true

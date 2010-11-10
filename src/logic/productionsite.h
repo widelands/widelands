@@ -124,6 +124,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActCheck_Soldier;
 	friend struct ProductionProgram::ActTrain;
 	friend struct ProductionProgram::ActPlayFX;
+	friend struct ProductionProgram::ActConstruct;
 	MO_DESCR(ProductionSite_Descr);
 
 public:
@@ -182,6 +183,16 @@ protected:
 		int32_t  ip; ///< instruction pointer
 		uint32_t phase; ///< micro-step index (instruction dependent)
 		uint32_t flags; ///< pfXXX flags
+
+		/**
+		 * Instruction-dependent additional data.
+		 */
+		/*@{*/
+		Object_Ptr objvar;
+		Coords coord;
+		/*@}*/
+
+		State() : coord(Coords::Null()) {}
 	};
 
 	Request & request_worker(Ware_Index);

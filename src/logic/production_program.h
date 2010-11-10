@@ -43,9 +43,11 @@ struct Profile;
 namespace Widelands {
 
 struct Game;
+struct Immovable_Descr;
 struct ProductionSite_Descr;
 class ProductionSite;
 struct Tribe_Descr;
+struct Worker;
 
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram {
@@ -54,6 +56,22 @@ struct ProductionProgram {
 	struct Action {
 		virtual ~Action();
 		virtual void execute(Game &, ProductionSite &) const = 0;
+
+		/**
+		 * Called when the given worker is looking for work from the building,
+		 * and none of the default actions apply.
+		 *
+		 * \return \c true iff the worker was assigned something to do,
+		 *  \c false iff he should just idle.
+		 */
+		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const;
+
+		/**
+		 * Called when the given worker returns from building work with
+		 * a failed status.
+		 */
+		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const;
+
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML(::FileWrite &, ProductionSite_Descr const &) const
 			= 0;
@@ -272,6 +290,8 @@ struct ProductionProgram {
 			(char * parameters, ProductionSite_Descr &,
 			 std::string const & production_program_name);
 		virtual void execute(Game &, ProductionSite &) const;
+		virtual bool get_building_work(Game& , ProductionSite& , Worker& ) const;
+		virtual void building_work_failed(Game& , ProductionSite& , Worker& ) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 			(::FileWrite &, ProductionSite_Descr const &) const;
@@ -405,6 +425,7 @@ struct ProductionProgram {
 	struct ActProduce : public Action {
 		ActProduce(char * parameters, ProductionSite_Descr const &);
 		virtual void execute(Game &, ProductionSite &) const;
+		virtual bool get_building_work(Game& , ProductionSite& , Worker& ) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 			(::FileWrite &, ProductionSite_Descr const &) const;
@@ -433,6 +454,7 @@ struct ProductionProgram {
 	struct ActRecruit : public Action {
 		ActRecruit(char * parameters, ProductionSite_Descr const &);
 		virtual void execute(Game &, ProductionSite &) const;
+		virtual bool get_building_work(Game& , ProductionSite& , Worker& ) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 			(::FileWrite &, ProductionSite_Descr const &) const;
@@ -510,6 +532,37 @@ struct ProductionProgram {
 		uint8_t     priority;
 	};
 
+	/// Sends a building worker to construct at an immovable.
+	///
+	/// Parameter syntax:
+	///    parameters ::= object worker-program radius
+	/// Parameter semantics:
+	///    object
+	///       This is the name of the immovable that should be constructed (e.g. 'shipconstruction')
+	///    worker-program
+	///       This is the name of the program that the worker will use
+	///       to act out the construction
+	///    radius
+	///       Activity radius
+	struct ActConstruct : public Action {
+		ActConstruct
+			(char * parameters, ProductionSite_Descr &,
+			 const std::string & production_program_name);
+		virtual void execute(Game &, ProductionSite &) const;
+		virtual bool get_building_work(Game& , ProductionSite& , Worker& ) const;
+		virtual void building_work_failed(Game& , ProductionSite& , Worker& ) const;
+
+		const Immovable_Descr & get_construction_descr(ProductionSite&) const;
+
+#ifdef WRITE_GAME_DATA_AS_HTML
+		virtual void writeHTML
+			(::FileWrite &, ProductionSite_Descr const &) const;
+#endif
+	private:
+		std::string objectname;
+		std::string workerprogram;
+		uint32_t radius;
+	};
 
 	ProductionProgram
 		(std::string    const & directory,

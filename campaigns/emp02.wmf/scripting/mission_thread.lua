@@ -255,6 +255,8 @@ function barbarians_thread()
    send_msg(diary_page_10)
    send_msg(seven_days_later)
    send_msg(diary_page_11)
+
+   p1:reveal_campaign("campsect2")
 end
 
 run(building_materials)

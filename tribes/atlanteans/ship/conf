@@ -1,0 +1,12 @@
+#help=_A sea-worthy ship
+
+[idle]
+pics=ship_??.png
+hotspot=55 60
+playercolor=true
+
+[sail]
+dirpics=sail_!!_??.png
+hotspot=55 60
+fps=10
+playercolor=true

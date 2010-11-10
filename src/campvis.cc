@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,6 +84,7 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 	int32_t imap = 0;
 	char csection[12];
 	char cvisible[12];
+	char cnewvisi[12];
 	char number[4];
 	std::string mapsection;
 	std::string cms;
@@ -95,28 +96,31 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 	Profile campvisw(savepath.c_str());
 
 	// Write down global section
-	campvisw.pull_section("global").set_int
-		("version", cconf_s.get_int("version", 1));
+	campvisw.pull_section("global").set_int("version", cconf_s.get_int("version", 1));
 
 	// Write down visibility of campaigns
 	Section & campv_c = campvisr.get_safe_section("campaigns");
+	Section & campv_m = campvisr.get_safe_section("campmaps");
 	{
 		Section & vis = campvisw.pull_section("campaigns");
-		sprintf(cvisible, "campvisi%i", i);
 		sprintf(csection, "campsect%i", i);
 		while (cconf_s.get_string(csection)) {
-			vis.set_bool
-				(csection,
-				 cconf_s.get_bool(cvisible) || campv_c.get_bool(csection));
-
-			++i;
 			sprintf(cvisible, "campvisi%i", i);
+			sprintf(cnewvisi, "cnewvisi%i", i);
+			bool visible = cconf_s.get_bool(cvisible) || campv_c.get_bool(csection);
+			if (!visible) {
+				const char * newvisi = cconf_s.get_string(cnewvisi, "");
+				if (sizeof(newvisi) > 1) {
+					visible = campv_m.get_bool(newvisi, false) || campv_c.get_bool(newvisi, false);
+				}
+			}
+			vis.set_bool(csection, visible);
+			++i;
 			sprintf(csection, "campsect%i", i);
 		}
 	}
 
 	// Write down visibility of campaign maps
-	Section & campv_m = campvisr.get_safe_section("campmaps");
 	Section & vis = campvisw.pull_section("campmaps");
 	i = 0;
 
@@ -131,10 +135,9 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 		while (Section * const s = cconfig.get_section(cms.c_str())) {
 			bool visible = s->get_bool("visible") || campv_m.get_bool(cms.c_str());
 			if (!visible) {
-				std::string newvisi = s->get_string("newvisi", "");
-				if (!newvisi.empty()) {
-					visible  = campv_m.get_bool(newvisi.c_str(), false);
-					visible |= campv_c.get_bool(newvisi.c_str(), false);
+				const char * newvisi = s->get_string("newvisi", "");
+				if (sizeof(newvisi) > 1) {
+					visible = campv_m.get_bool(newvisi, false) || campv_c.get_bool(newvisi, false);
 				}
 			}
 			vis.set_bool (cms.c_str(), visible);

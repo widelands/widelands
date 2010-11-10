@@ -179,6 +179,14 @@ private:
 	uint8_t m_resource;
 };
 
+/// Accepts a node if it is a shore node in the sense that it is walkable
+/// and has a neighbouring field that is swimmable
+struct FindNodeShore {
+	FindNodeShore() {}
+
+	bool accept(Map const &, FCoords const &) const;
+};
+
 }
 
 #endif

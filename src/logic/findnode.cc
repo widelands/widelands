@@ -21,6 +21,7 @@
 
 #include "field.h"
 #include "immovable.h"
+#include "map.h"
 #include "wexception.h"
 
 #include "container_iterate.h"
@@ -125,6 +126,20 @@ bool FindNodeResourceBreedable::accept
 		coord.field->get_resources_amount   ()
 		<
 		coord.field->get_starting_res_amount();
+}
+
+bool FindNodeShore::accept(Map const & map, FCoords const & coord) const
+{
+	if (!(coord.field->nodecaps() & MOVECAPS_WALK))
+		return false;
+
+	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		FCoords neighb = map.get_neighbour(coord, dir);
+		if (neighb.field->nodecaps() & MOVECAPS_SWIM)
+			return true;
+	}
+
+	return false;
 }
 
 }

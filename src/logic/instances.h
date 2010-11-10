@@ -75,8 +75,8 @@ struct Map_Object_Descr {
 	static uint32_t get_attribute_id(std::string const & name);
 	static std::string get_attribute_name(uint32_t const & id);
 
-	bool is_animation_known(const char * name) const;
-	void add_animation(const char * name, uint32_t anim);
+	bool is_animation_known(const std::string & name) const;
+	void add_animation(const std::string & name, uint32_t anim);
 
 	protected:
 		void add_attribute(uint32_t attr);
@@ -245,7 +245,8 @@ public:
 		header_Battle = 5,
 		header_Critter = 6,
 		header_Worker = 7,
-		header_WareInstance = 8
+		header_WareInstance = 8,
+		header_Ship = 9
 	};
 
 	/**
