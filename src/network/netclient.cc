@@ -146,7 +146,6 @@ void NetClient::run ()
 	s.send(d->sock);
 
 	d->settings.multiplayer = true;
-	d->settings.scenario = false;
 	{
 		Fullscreen_Menu_LaunchMPG lgm(this, this);
 		lgm.setChatProvider(*this);
@@ -183,7 +182,8 @@ void NetClient::run ()
 		if (pn > 0)
 			igb =
 				new Interactive_Player
-					(game, g_options.pull_section("global"), pn, false, true);
+					(game, g_options.pull_section("global"),
+					 pn, d->settings.scenario, true);
 		else
 			igb =
 				new Interactive_Spectator

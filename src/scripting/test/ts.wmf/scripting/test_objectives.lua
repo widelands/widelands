@@ -1,6 +1,31 @@
 -- ===================
 -- Testing objectives 
 -- ===================
+objective_creation_tests = lunit.TestCase("Objective Creation")
+function objective_creation_tests:setup()
+   self.o = {}
+end
+function objective_creation_tests:teardown()
+   for idx,o in ipairs(self.o) do
+      pcall(function() o:remove() end)
+   end
+   
+end
+function objective_creation_tests:test_creation_for_non_interactive_player()
+   local o = player2:add_objective("test1", "blah", "blah 1")
+   self.o[#self.o + 1] = o
+
+   assert_equal(o, player2.objectives.test1)
+end
+function objective_creation_tests:test_no_double_name_for_objectives_possible()
+   local o1 = player1:add_objective("test1", "blah", "blah 1")
+   self.o[#self.o + 1] = o1
+   assert_error("Can't create an objective with this name again", function()
+      local o2 = player2:add_objective("test1", "blah", "blah 1")
+      self.o[#self.o + 1] = o2
+   end)
+end
+
 objective_tests = lunit.TestCase("Objectives")
 function objective_tests:setup()
    self.o1 = player1:add_objective(
