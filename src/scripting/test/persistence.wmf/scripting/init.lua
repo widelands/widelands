@@ -34,7 +34,7 @@ corout = coroutine.create(function()
    coroutine.yield("What cool is that?")
    coroutine.yield(a)
 end)
-objective = p:add_objective("lumber", "House", "Boat!")
+objective = p:add_objective("lumber", "House", "Ship!")
 objective.done = true
 
 p:send_message("dummy msg1", "dummy msg 1")
@@ -86,7 +86,7 @@ assert_equal(100, rv)
 assert_table(objective)
 assert_equal("lumber", objective.name)
 assert_equal("House", objective.title)
-assert_equal("Boat!", objective.body)
+assert_equal("Ship!", objective.body)
 assert_equal(true, objective.done)
 
 assert_table(msg)

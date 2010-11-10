@@ -1,5 +1,4 @@
 size=medium
-# output=boat # small boats for water roads
 
 [buildcost]
 trunk=3
@@ -8,7 +7,7 @@ stone=3
 spidercloth=2
 
 [working positions]
-deckhand=1
+shipwright=1
 
 [inputs]
 planks=10
@@ -23,26 +22,21 @@ work=_Work
 sleep=20000
 call=ship
 
-#[boat]
-#consume=trunk:1 planks:2
-#animate=working 20000
-#produce=boat
-
 [ship]
 construct=shipconstruction buildship 6
 return=completed
 
 [idle]
-pics=shipyard_i_??.png  # ???
+pics=shipyard_i_??.png
 hotspot=55 60
 playercolor=true
 
 #[working]
-#pics=shipyard_w_??.png  # ???
+#pics=shipyard_w_??.png 
 #hotspot=55 60
 #playercolor=true
 #
 #[outofhouse]
-#pics=shipyard_w_??.png  # ???
+#pics=shipyard_w_??.png 
 #hotspot=55 60
 #playercolor=true
