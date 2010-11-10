@@ -19,7 +19,7 @@
 
 #include "buildcost.h"
 
-#include "profile.h"
+#include "profile/profile.h"
 #include "tribe.h"
 #include "wexception.h"
 
