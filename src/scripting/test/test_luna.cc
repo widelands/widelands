@@ -25,8 +25,6 @@
 
 #include "scripting/luna_impl.h"
 
-using namespace boost;
-
 #ifndef BEGIN_LUNA_PROPERTIES
 #define BEGIN_LUNA_PROPERTIES(klass) \
 	const PropertyType<klass> klass::Properties[] = {
@@ -199,7 +197,7 @@ BOOST_AUTO_TEST_CASE(test_luna_simple)
 		"t.prop1 = 999\n"
 		"wl.test.CheckInt(999,t.prop1)\n";
 
-	shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
+	boost::shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
 	lua_State *L = L_ptr.get();
 	InitLuaTests(L);
 	register_class<L_Class>(L, "test");
@@ -216,7 +214,7 @@ BOOST_AUTO_TEST_CASE(test_luna_property_ro)
 		"wl.test.CheckInt(1, t.propr)"
 		"t.propr = 1\n"; // This final line should generate an arror
 
-	shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
+	boost::shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
 	lua_State*L = L_ptr.get();
 	InitLuaTests(L);
 	register_class<L_Class>(L, "test");
@@ -233,7 +231,7 @@ BOOST_AUTO_TEST_CASE(test_luna_inheritance)
 		"wl.test.CheckInt(124, t:test())\n"
 		"wl.test.CheckInt(248, t.prop1)\n";
 
-	shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
+	boost::shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
 	lua_State*L = L_ptr.get();
 	InitLuaTests(L);
 
@@ -253,7 +251,7 @@ BOOST_AUTO_TEST_CASE(test_luna_virtualbase_method)
 		"t = wl.test.VirtualClass()\n"
 		"wl.test.CheckInt(124, t:test())\n";
 
-	shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
+	boost::shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
 	lua_State*L = L_ptr.get();
 	InitLuaTests(L);
 
@@ -272,7 +270,7 @@ BOOST_AUTO_TEST_CASE(test_luna_virtualbase_property)
 		"t = wl.test.VirtualClass()\n"
 		"wl.test.CheckInt(248, t.prop1)\n";
 
-	shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
+	boost::shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
 	lua_State*L = L_ptr.get();
 	InitLuaTests(L);
 
@@ -292,7 +290,7 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_method)
 		"wl.test.CheckInt(124, t:test())\n"
 		"wl.test.CheckInt(2002, t:multitest())\n";
 
-	shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
+	boost::shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
 	lua_State*L = L_ptr.get();
 	InitLuaTests(L);
 
@@ -312,7 +310,7 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_property_get)
 		"wl.test.CheckInt(248, t.prop1)\n"
 		"wl.test.CheckInt(2001, t.second)\n";
 
-	shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
+	boost::shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
 	lua_State*L = L_ptr.get();
 	InitLuaTests(L);
 
@@ -332,7 +330,7 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_property_set)
 		"t.prop1 = 111\n"
 		"wl.test.CheckInt(111, t.prop1)\n";
 
-	shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
+	boost::shared_ptr<lua_State> L_ptr(lua_open(),&lua_close);
 	lua_State*L = L_ptr.get();
 	InitLuaTests(L);
 
