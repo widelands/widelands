@@ -386,7 +386,7 @@ Instantly create a bob at the given x/y location.
 idx is the bob type.
 ===============
 */
-Bob& Editor_Game_Base::create_bob(Coords c, const Bob::Descr& descr)
+Bob & Editor_Game_Base::create_bob(Coords c, const Bob::Descr & descr)
 {
 	return descr.create(*this, 0, c);
 }
@@ -406,9 +406,10 @@ Bob & Editor_Game_Base::create_bob
 	return create_bob(c, descr);
 }
 
-Bob& Editor_Game_Base::create_bob(Coords c, const std::string& name, const Widelands::Tribe_Descr* const tribe)
+Bob & Editor_Game_Base::create_bob
+	(Coords c, const std::string & name, const Widelands::Tribe_Descr * const tribe)
 {
-	const Bob::Descr* descr =
+	const Bob::Descr * descr =
 		tribe ?
 		tribe->get_bob_descr(name) :
 		m_map->get_world()->get_bob_descr(name);
@@ -416,7 +417,7 @@ Bob& Editor_Game_Base::create_bob(Coords c, const std::string& name, const Widel
 	if (!descr)
 		throw wexception
 			("create_bob(%i,%i,%s,%s): bob not found",
-			 c.x, c.y, name.c_str(), tribe ? tribe->name() : "world");
+			 c.x, c.y, name.c_str(), tribe ? tribe->name().c_str() : "world");
 
 	return create_bob(c, *descr);
 }
