@@ -153,10 +153,10 @@ produced by the gold weaver out of gold.<br><br>
  )
 }
 
-obj_make_heavy_industrie_and_mining = {
-   name = "obj_make_heavy_industrie_and_mining",
+obj_make_heavy_industry_and_mining = {
+   name = "obj_make_heavy_industry_and_mining",
    title = _ "Build industry and mines",
-   body = obj_text(_"Build industry and processing industrie",
+   body = obj_text(_"Build industry and mines",
 [[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine
 is digging for crystal, quartz and diamond - all of them are rare materials and
 very seldom found. While it searches for them, it produces a lot of stone.<br>
@@ -342,7 +342,7 @@ out.]]
    )
 },
 {
-   title = _ "Colionder arrvives",
+   title = _ "Colionder arrives",
    body = colionder(_
 [[May Satul warm you, Jundlina. Can I be of any service to you or the
 god?]]
@@ -455,7 +455,7 @@ a weapon smithy, an armor smithy and a tool smithy. And maybe even more.]]
       body = jundlina(_"Jundlina nods",
 [[I have considered this, Sidolus. I think, it is about time. We will make this
 a priority for now. You shall get your industry and soon!]]
-      ) .. new_objectives(obj_make_heavy_industrie_and_mining)
+      ) .. new_objectives(obj_make_heavy_industry_and_mining)
    },
 }
 
@@ -629,7 +629,7 @@ warehouses are all swallowed by the sea.]]
 
 scenario_won = {
    {
-      title = _ "Jundlina is releaved",
+      title = _ "Jundlina is relieved",
       body = jundlina(_"Jundlina", _ [[
 Praise Satul! Ostur, the young ship builder did it. We have three ships -
 never have I seen sturdier ones - with enough room to carry all of us and some
@@ -639,7 +639,7 @@ now and start over in some country farther away... I expect a long journey, but
 we will find the land of Satul in the end. This is what I promised my people.
 And myself.]]
       ) .. rt(h1(_ "Congratulations") .. p(_
-[[You have won this mission. Continue with the next one or keep playing for 
+[[You have won this mission. Continue with the next one or keep playing for
 as long as you like.]]
       )),
    },

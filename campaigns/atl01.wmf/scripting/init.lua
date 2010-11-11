@@ -1,5 +1,5 @@
 -- =======================================================================
---                      Atlanteans Tutorial Mission 01                      
+--                      Atlanteans Tutorial Mission 01
 -- =======================================================================
 
 use("aux", "coroutine")
@@ -22,15 +22,15 @@ first_tower_field = map:get_field(94, 149)
 second_tower_field = map:get_field(79, 150)
 
 -- =================
--- global variables 
+-- global variables
 -- =================
-expand_objective = nil 
+expand_objective = nil
 let_the_water_rise = false -- If set to true, the water will begin to rise
 
 use("map", "texts")
 
 -- =================
--- Helper functions 
+-- Helper functions
 -- =================
 -- Show one message box
 function msg_box(i)
@@ -70,7 +70,7 @@ function count_in_warehouses(ware)
 end
 
 function send_building_lost_message(f)
-   p1:send_message(_"Building lost!", 
+   p1:send_message(_"Building lost!",
       rt(p(
          (_"We lost a %s to the ocean!"):format(f.immovable.name)
       )), { field = f, popup = true }
@@ -91,17 +91,17 @@ function initialize()
 
    -- Place some buildings
    prefilled_buildings(p1,
-      {"high_tower", first_tower_field.x, first_tower_field.y, 
+      {"high_tower", first_tower_field.x, first_tower_field.y,
          soldiers = { [{0,0,0,0}] = 1 }
       },
-      {"high_tower", second_tower_field.x, second_tower_field.y, 
+      {"high_tower", second_tower_field.x, second_tower_field.y,
          soldiers = { [{0,0,0,0}] = 1 }
       }
    )
 end
 
 -- ==============
--- Logic Threads 
+-- Logic Threads
 -- ==============
 function intro()
    sleep(1000)
@@ -110,7 +110,7 @@ function intro()
    sleep(200)
 
    initialize()
-   
+
    build_environment()
 end
 
@@ -122,7 +122,7 @@ function build_warehouse_and_horsefarm()
       map:get_field(90, 66),
    }
 
-   local fowned = nil 
+   local fowned = nil
    while not fowned do
       for idx, f in ipairs(fields) do
          if f.owner == p1 then
@@ -135,7 +135,7 @@ function build_warehouse_and_horsefarm()
    -- Has been started from the very beginning
    expand_objective.done = true
    let_the_water_rise = true
-   
+
    scroll_smoothly_to(fowned)
    msg_boxes(horsefarm_and_warehouse_story)
 
@@ -151,17 +151,17 @@ function build_training()
 
    local o = add_obj(obj_make_training_buildings)
    while not check_for_buildings(p1, {
-      dungeon = 1, labyrinth = 1 
+      dungeon = 1, labyrinth = 1
    }) do sleep(3874) end
    o.done = true
 
    msg_boxes(training_story_end)
 end
 
-function build_heavy_industries_and_mining()
+function build_heavy_industrys_and_mining()
    msg_boxes(heavy_industry_story)
 
-   local o = add_obj(obj_make_heavy_industrie_and_mining)
+   local o = add_obj(obj_make_heavy_industry_and_mining)
    while not check_for_buildings(p1, {
       coalmine = 1, ironmine = 1, goldmine = 1, crystalmine = 1,
       smelting_works = 1, weaponsmithy = 1, armoursmithy = 1,
@@ -178,7 +178,7 @@ function build_food_environment()
 
    run(function()
       sleep(10 * 60 * 1000)
-      run(build_heavy_industries_and_mining)
+      run(build_heavy_industrys_and_mining)
    end)
 
    local o = add_obj(obj_make_food_infrastructure)
@@ -214,7 +214,7 @@ function build_environment()
    local o = add_obj(obj_ensure_build_wares_production)
 
    expand_objective = add_obj(obj_expand)
-   
+
    while not check_for_buildings(p1, {
       woodcutters_house = 2,
       foresters_house = 2,
@@ -287,7 +287,7 @@ function check_for_ships()
       if nships >= 3 then
          break
       end
-      sleep(8234) 
+      sleep(8234)
    end
 
    -- Success
@@ -317,11 +317,11 @@ function water_rising()
 
       if f.owner ~= p1 then return end
       if not f.immovable then return end
-      
+
       -- Flags are not so interesting
-      if f.immovable.type == "flag" and 
+      if f.immovable.type == "flag" and
          (f.tln.immovable and f.tln.immovable.building_type) then
-         f = f.tln 
+         f = f.tln
       end
       if f.immovable.building_type then
          send_building_lost_message(f)
