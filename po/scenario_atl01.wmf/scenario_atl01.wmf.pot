@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
+"POT-Creation-Date: 2010-11-11 07:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -124,13 +124,9 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:158
-msgid ""
-"Build industry and mines"
-msgstr ""
-
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:159
 msgid ""
-"Build industry and processing industrie"
+"Build industry and mines"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:175
@@ -169,7 +165,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:345
 msgid ""
-"Colionder arrvives"
+"Colionder arrives"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:362
@@ -310,7 +306,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:632
 msgid ""
-"Jundlina is releaved"
+"Jundlina is relieved"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:390
@@ -676,7 +672,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:642
 msgid ""
-"You have won this mission. Continue with the next one or keep playing for \n"
+"You have won this mission. Continue with the next one or keep playing for\n"
 "as long as you like."
 msgstr ""
 
