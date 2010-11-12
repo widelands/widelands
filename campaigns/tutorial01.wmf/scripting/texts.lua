@@ -589,7 +589,7 @@ via right-button scrolling or open the minimap by clicking on the]]
          )) .. (rt(p(_
 [[The minimap shows you the complete map in miniature. You can directly jump to
 any field by left-clicking on it. You can also toggle buildings, roads, flags
-and player indicators on and off inside the map.]]
+and player indicators on and off inside the minimap.]]
          ) .. p(_
 [[But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted to
 build a small training scenario for you. Let's do that now.]]
