@@ -581,7 +581,7 @@ other players and it has some game mechanics that deserve explanation. The
 economies of the tribes are explained in their individual tutorial campaigns.
 Ok, I am going to create us a little training ground with a training camp and a
 warehouse to the north east of here.]]) .. p(_
-[[If you want to come back to this eastern part of your realm, just scroll here
+[[If you want to come back to this south-western part of your realm, just scroll here
 via right-button scrolling or open the minimap by clicking on the]]
          )) .. rt("image=pics/menu_toggle_minimap.png", p(_
 [[minimap button at the bottom of the screen. Alternatively you could also press
