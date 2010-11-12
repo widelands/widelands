@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-10 22:37+0100\n"
-"PO-Revision-Date: 2010-11-11 02:17+0000\n"
+"PO-Revision-Date: 2010-11-12 04:40+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-11-11 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-11-12 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -1018,7 +1018,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1475
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Компьютер%u"
 
 #: ../../src/network/nethost.cc:1559
 #, c-format
@@ -1056,7 +1056,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1919
 msgid "The game has already started."
-msgstr "Игра началась."
+msgstr "Игра уже началась"
 
 #: ../../src/network/nethost.cc:1937
 msgid "Connection to client lost."
@@ -1134,7 +1134,7 @@ msgstr "%s вышел из игры (%s)"
 #: ../../src/network/nethost.cc:2215
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Незнакомец вышел из игры (%s)"
 
 #: ../../src/network/netclient.cc:98
 msgid "Could not establish connection to host"
@@ -1152,7 +1152,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:132
 msgid "Client has left the game."
-msgstr "Клиент покинул игру"
+msgstr "Клиент отключился"
 
 #: ../../src/network/netclient.cc:214
 msgid "Client crashed and performed an emergency save."
@@ -1325,7 +1325,7 @@ msgstr "Отмена"
 #: ../../src/wui/login_box.cc:73 ../../src/ui_fsmenu/netsetup_lan.cc:114
 #: ../../src/ui_fsmenu/multiplayer.cc:112
 msgid "nobody"
-msgstr "никого"
+msgstr "никто"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
@@ -1354,13 +1354,13 @@ msgstr "Пожалуйста, введите пароль!"
 #: ../../src/wui/playerdescrgroup.cc:103
 #: ../../src/wui/multiplayersetupgroup.cc:455
 msgid "Initialization"
-msgstr "Инициализация"
+msgstr "Начальные условия"
 
 #: ../../src/wui/playerdescrgroup.cc:157
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/ui_fsmenu/netsetup_lan.cc:188
 msgid "Open"
-msgstr "Открыть"
+msgstr "Открыто"
 
 #: ../../src/wui/playerdescrgroup.cc:170
 #: ../../src/wui/multiplayersetupgroup.cc:310
@@ -1541,7 +1541,8 @@ msgstr "Энциклопедия товаров"
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u новое сообщение"
-msgstr[1] "%u новых сообщений"
+msgstr[1] "%u новых сообщения"
+msgstr[2] "%u новых сообщений"
 
 #: ../../src/wui/bulldozeconfirm.cc:58
 #, c-format
@@ -1885,18 +1886,18 @@ msgstr "Масштаб"
 
 #: ../../src/wui/multiplayersetupgroup.cc:100
 msgid "<free>"
-msgstr ""
+msgstr "<свободно>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:114
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Игрок %i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:116
 #: ../../src/ui_fsmenu/launchMPG.cc:430
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Наблюдатель"
 
 #: ../../src/wui/multiplayersetupgroup.cc:284
 #: ../../src/ui_fsmenu/netsetup_lan.cc:189
@@ -1906,12 +1907,12 @@ msgstr "Закрыто"
 #: ../../src/wui/multiplayersetupgroup.cc:338
 #: ../../src/ui_fsmenu/launchMPG.cc:257 ../../src/ui_fsmenu/launchSPG.cc:222
 msgid "Scenario"
-msgstr ""
+msgstr "Сценарий"
 
 #: ../../src/wui/multiplayersetupgroup.cc:340
 #: ../../src/ui_fsmenu/launchMPG.cc:261
 msgid "Savegame"
-msgstr ""
+msgstr "Сохранение"
 
 #: ../../src/wui/multiplayersetupgroup.cc:407
 msgid "Client name"
@@ -3566,7 +3567,7 @@ msgstr "Команда разработчиков Widelands"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:64
 msgid "Choose a replay!"
-msgstr "Выберите повтор"
+msgstr "Выбор повтора"
 
 #: ../../src/ui_fsmenu/loadgame.cc:65
 #: ../../src/wui/game_main_menu_save_game.h:107
@@ -3575,12 +3576,12 @@ msgstr "Удалить"
 
 #: ../../src/ui_fsmenu/loadgame.cc:77
 msgid "Choose saved game!"
-msgstr "Выберите сохраненную игру!"
+msgstr "Выбор сохранённой игры"
 
 #: ../../src/ui_fsmenu/loadgame.cc:81
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Map Name:"
-msgstr "Имя Карты:"
+msgstr "Карта:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:86
 msgid "Gametime:"
@@ -3596,7 +3597,7 @@ msgstr "Вы действительно хотите удалить "
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
-msgstr "Выберите кампанию"
+msgstr "Выбор кампании"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:54
 msgid "Campaign:"
@@ -3639,13 +3640,13 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:50
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 msgid "Choose your map!"
-msgstr "Выберите вашу карту!"
+msgstr "Выбор карты"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:270
 #: ../../src/ui_fsmenu/mapselect.cc:60
 #: ../../src/ui_fsmenu/editor_mapselect.cc:55
 msgid "Name:"
-msgstr "Имя:"
+msgstr "Название:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:272
 #: ../../src/ui_fsmenu/mapselect.cc:66
@@ -3665,27 +3666,27 @@ msgstr "Нажмите ESC или щёлкните мышью для продо�
 
 #: ../../src/ui_fsmenu/launchMPG.cc:53
 msgid "Please select"
-msgstr ""
+msgstr "Пожалуйста, выберите"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:67
 msgid "Select a map"
-msgstr ""
+msgstr "Выбор карты"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Сохранение"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Загрузить сохранённую игру"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:83
 msgid "Cancel selection"
-msgstr ""
+msgstr "Отменить выбор"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:112
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Сменить карту или сохранённую игру"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:120 ../../src/ui_fsmenu/launchSPG.cc:82
 msgid "Start game"
@@ -3693,11 +3694,11 @@ msgstr "Начать игру"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:146
 msgid "Show the help window"
-msgstr ""
+msgstr "Показать справку"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:153 ../../src/ui_fsmenu/launchMPG.cc:581
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Подготовка сетевой игры"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:182 ../../src/ui_fsmenu/launchSPG.cc:275
 msgid "(no map)"
@@ -3705,7 +3706,7 @@ msgstr "(нет карты)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:183
 msgid "The host has not yet selected a map or saved game."
-msgstr ""
+msgstr "На хосте ещё не выбрана карта или сохранённая игра."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:259 ../../src/ui_fsmenu/launchSPG.cc:224
 msgid "Win condition is set through the scenario"
@@ -3765,34 +3766,34 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:559
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Данные карты:\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:560
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Размер: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:561
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* Игроков: %i\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 #, c-format
 msgid "* World type: %s\n"
-msgstr ""
+msgstr "* Местность: %s\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:571
 msgid "* Scenario mode selected\n"
-msgstr ""
+msgstr "* Выбран режим сценария\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:582
 msgid "You are in the multi player launch game menu."
-msgstr ""
+msgstr "Вы находитесь в меню запуска сетевой  игры."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:583
 msgid "Client settings"
-msgstr ""
+msgstr "Параметры клиентов"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:586
 msgid ""
@@ -3801,10 +3802,14 @@ msgid ""
 "open players, players that are already played by other clients (sharing the "
 "kingdom) and spectator mode."
 msgstr ""
+"С левой стороны список всех подключенных клиентов, включая Вас. Кнопкой, "
+"возле своего ника, Вы можете установить свой режим игры. Доступен режим "
+"отдельного игрока, режим совместной игры с другим клиентом (общее племя) и "
+"режим наблюдателя."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:590
 msgid "Player settings"
-msgstr ""
+msgstr "Параметры игроков"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:593
 msgid ""
@@ -3812,6 +3817,9 @@ msgid ""
 "must either be connected to a client or a computer player or be set to "
 "closed."
 msgstr ""
+"В середине находятся параметры игроков. Для начала игры, каждый игрок должен "
+"быть либо подключенным клиентом, либо игроком управляемым компьютером или же "
+"позиция игрока должна быть закрыта."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:598
 msgid ""
@@ -3828,7 +3836,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:606
 msgid "Map informations"
-msgstr ""
+msgstr "Сведения о карте"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:609
 msgid ""
@@ -3837,10 +3845,14 @@ msgid ""
 "Further the host is able to set a specific win condition and finally can "
 "start the game as soon as all players are set up."
 msgstr ""
+"С правой стороны выводится информация о выбранной карте или сохранённой "
+"игре. Кнопка справа от названия карты позволяет хосту менять одно на другое. "
+"Затем хост может установить конкретные условия победы и наконец запустить "
+"игру, как только все игроки будут установлены."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
-msgstr "Выберите тип игры"
+msgstr "Выбор типа игры"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:51
 msgid "Internet game"
@@ -4084,7 +4096,7 @@ msgstr "Мир:"
 #: ../../src/ui_fsmenu/mapselect.cc:84
 #: ../../src/ui_fsmenu/editor_mapselect.cc:75
 msgid "Players:"
-msgstr "Игроки:"
+msgstr "Игроков:"
 
 #: ../../src/ui_fsmenu/mapselect.cc:90
 #: ../../src/ui_fsmenu/editor_mapselect.cc:80
@@ -4093,11 +4105,11 @@ msgstr "Описание:"
 
 #: ../../src/ui_fsmenu/mapselect.cc:139
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:141
 msgid "Map Name"
-msgstr ""
+msgstr "Карта"
 
 #: ../../src/ui_fsmenu/mapselect.cc:236
 msgid "(directory)"

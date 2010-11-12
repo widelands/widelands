@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-05 10:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-10 21:37+0000\n"
+"PO-Revision-Date: 2010-11-11 15:22+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-11-12 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -480,6 +480,16 @@ msgid ""
 "then select\n"
 "the tab - and finally I'll choose the building."
 msgstr ""
+"Najprv kliknem ľavým tlačidlom myši na symbol, kde chcem, aby bola\n"
+"postavená drevorubačova chatrč. Zobrazí sa okno, kde si môžem vybrať medzi\n"
+"budovami. Pretože kliknem na žltý symbol domu, ktorý znamená, že v jeho "
+"oblasti\n"
+"možno postaviť stredné a malé budovy, dozviem sa o všetkých stredných\n"
+"budovách, ktoré môžem postaviť. Drevorubačova chatrč je malá budova,\n"
+"takže vyberiem záložku malých budov. Potom vyberiem\n"
+"drevorubačovu chatrč.\n"
+"Ak ma chcete sledovať, kliknite na tlačidlo \"OK\". Pôjdem naozaj pomaly:\n"
+"Kliknem, potom vyberiem záložku a nakoniec vyberiem budovu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:498
 msgid ""
@@ -493,11 +503,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:200
 msgid "Getting a quarry up."
-msgstr ""
+msgstr "Stavanie kameňolomu"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:240
 msgid "Great. Now about that quarry..."
-msgstr ""
+msgstr "Skvelé. A teraz ten kameňolom..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:391
 msgid ""
@@ -529,6 +539,10 @@ msgid ""
 "everything out for yourself. Otherwise, please bear with me, I am not the\n"
 "youngest and quickest anymore."
 msgstr ""
+"Je mi ľúto, ale musím to vrátiť. Možno tu neskoršie budeme potrebovať\n"
+"miesto. Ak som pre vás príliš pomalý, môžete skúsiť hrať naozajstnú hru\n"
+"a všetko si zistiť sám(a). Inakšie, prosím, majte strpenie, už nie som\n"
+"najmladší a najrýchlejší."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:676
 msgid ""
@@ -574,6 +588,8 @@ msgid ""
 "If you place something on a field, the surrounding fields might have less\n"
 " space for holding buildings, so choose your fields wisely."
 msgstr ""
+"Ak niečo umiestníte na políčku, na okolitých políčkach sa môže zmenšiť\n"
+" miesto pre budovy, takže vyberajte políčka rozumne."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:583
 msgid ""
@@ -584,7 +600,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid "Introducing messages"
-msgstr ""
+msgstr "Úvod k správam"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:283
 msgid ""
@@ -634,6 +650,9 @@ msgid ""
 "geologist\n"
 "to it. I'll show you how it's done."
 msgstr ""
+"Poďme hľadať zásoby v tejto hore. Najprv postavíme cestu do hôr\n"
+"a umiestníme vlajku. Potom klikneme na vlajku a zavoláme k nej geológa.\n"
+"Ukážem vám, ako na to."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
 msgid ""
@@ -643,10 +662,14 @@ msgid ""
 "beneficial\n"
 "close to mountains because you can't build houses in mountains."
 msgstr ""
+"Teraz to vyskúšajme: postavte niekoľko vojenských budov na juhovýchodnej\n"
+"hranici. Chceme obsadiť časť z tejto hory, aby sme tu mohli hľadať zásoby.\n"
+"Väčšie budovy obsadia väčšie územie, čo môže byť užitočné blízko hôr, lebo\n"
+"v horách nemožno postaviť domy."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:549
 msgid "Let's wait and see what the geologist finds on the mountain."
-msgstr ""
+msgstr "Počkajme a zistime, čo nájdu geológovia v hore."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:188
 msgid "Lumberjack is done"
@@ -670,15 +693,15 @@ msgstr "Záver z baníctva"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "Presuňte svoj pohľad kurzorovými klávesami"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "Presuňte svoj pohľad s myšou"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
-msgstr ""
+msgstr "Presúvanie pohľadu"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:215
 msgid ""
@@ -691,6 +714,13 @@ msgid ""
 "move\n"
 "your mouse around and you'll see the view scroll."
 msgstr ""
+"Je dôležité presúvať váš pohľad, aby ste získali kompletný prehľad o celej\n"
+"ekonomike. Vo Widelands môžete presúvať svoj pohľad dvomi spôsobmi. V prvom\n"
+"je potrebné použiť kurzorové klávesy na klávesnici. Druhý je viac známy a "
+"rýchlejší:\n"
+"stlačte a podržte pravé tlačidlo myši hocikde na mape, potom presuňte svoju "
+"myš\n"
+"okolo a uvidíte, že sa pohľad presunie."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
 msgid "Nice and easy does it all the time"
@@ -1214,6 +1244,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
 msgstr ""
+"tlačidlo archivovania správ, aby ste ich presunuli do svojho archívu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:164
 msgid "build flag symbol."
@@ -1242,11 +1273,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid "the abort symbol."
-msgstr ""
+msgstr "symbolu na zrušenie."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:299
 msgid "the road building symbol."
-msgstr ""
+msgstr "symbolu na stavenie ciest."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:561
 msgid "this one."

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-10 22:37+0100\n"
-"PO-Revision-Date: 2010-11-11 02:07+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-11-12 00:11+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-11 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-11-12 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/wlapplication.cc:369
@@ -890,11 +890,11 @@ msgstr "Documentação do programa para comandos playFX"
 
 #: ../../src/writeHTML.cc:1387
 msgid "Documentation for program command construct"
-msgstr ""
+msgstr "Documentação para o programa do comando construct"
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr ""
+msgstr "construct"
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
@@ -2910,6 +2910,8 @@ msgstr ""
 msgid ""
 "unknown scope \"%s\" given for target type (must be \"world\" or \"tribe\")"
 msgstr ""
+"limite desconhecido \"%s\" dado para tipo de alvo (tem de ser \"world\" ou "
+"\"tribe\")"
 
 #: ../../src/logic/immovable.cc:930
 msgid "illegal transformation to the same type"
@@ -2942,7 +2944,7 @@ msgstr "Um novo %s foi adicionado à tua economia."
 #: ../../src/logic/ship.cc:260
 #, c-format
 msgid "loading ship: %s"
-msgstr ""
+msgstr "carregando navio: %s"
 
 #: ../../src/logic/soldier.cc:75
 msgid "positive integer"
@@ -3039,10 +3041,12 @@ msgstr "Um geólogo encontrou recursos."
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
+"O teu %s não consegue encontrar o caminho para casa e irá certamente morrer. "
+"Paz à sua alma digital."
 
 #: ../../src/logic/worker.cc:1747
 msgid "Worker got lost!"
-msgstr ""
+msgstr "O trabalhador perdeu-se !"
 
 #: ../../src/logic/worker.cc:2927
 #, c-format
@@ -3814,6 +3818,8 @@ msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
+"De momento és %s\n"
+"\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:470
 msgid "Saved players are:"

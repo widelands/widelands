@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 02:16+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-11-12 00:49+0000\n"
+"Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-11 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-11-12 04:42+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -900,15 +900,15 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:238
 msgid "Onward to the quarry"
-msgstr "Seguindo à pedreira"
+msgstr "Vamos lá à pedreira"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:225
 msgid "Other ways to move the view"
-msgstr "Outras vias de mudar a vista"
+msgstr "Outras maneiras de mover a vista"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:157
 msgid "Placing another flag"
-msgstr "Pondo outra bandeira"
+msgstr "Plantando outra Bandeira"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:264
 msgid "Red building symbols can only hold small buildings and flags."
@@ -968,7 +968,7 @@ msgid ""
 msgstr ""
 "As pedras podem ser minadas nas Minas de granito, mas é mais fácil de as "
 "obter\n"
-"é construir uma Pedreira perto dos rochedos. Por acaso existe um grande\n"
+"construindo uma Pedreira perto dos rochedos. Por acaso existe um grande\n"
 "rochedo a Oeste (à esquerda) do Quartel-general. Vou ensinar-te como mover \n"
 "a vista do ecrã para esse local."
 
@@ -1095,7 +1095,7 @@ msgstr ""
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
 msgstr ""
-"O terreno é plano aqui. Os seus carregadores serão bastante velozes neste "
+"O terreno é plano aqui. Os teus carregadores serão bastante velozes neste "
 "terreno."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:621
@@ -1118,7 +1118,7 @@ msgid ""
 "can therefore build it on any field that shows a red, yellow or green house\n"
 "when the build help is enabled (Press SPACE for that)."
 msgstr ""
-"Existes alguns rochedos a Oeste do teu Quartel-general. Constrói uma "
+"Existem alguns rochedos a Oeste do teu Quartel-general. Constrói uma "
 "Pedreira\n"
 "ao pé deles. A Pedreira é um edifício pequeno como a Cabana do Lenhador.\n"
 "Podes por isso construí-la em qualquer terreno que tenha um símbolo de casa\n"
@@ -1161,7 +1161,7 @@ msgid ""
 msgstr ""
 "Existe um pequeno declive que se tem que subir para chegar a este campo. "
 "Isto\n"
-"quer dizer que os teus trabalhadores iram andar mais depressa a descer, mas\n"
+"quer dizer que os teus trabalhadores irão andar mais depressa a descer, mas\n"
 "também que terão mais dificuldades e serão mais lentos a subir."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:472
@@ -1266,7 +1266,7 @@ msgstr "Esperando que o Lenhador começe a trabalhar"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:573
 msgid "Warfare and Training"
-msgstr "A guerra e o a recruta militar"
+msgstr "A Guerra e a Recruta militar"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:83
 msgid ""
@@ -1276,19 +1276,20 @@ msgid ""
 "clicking on the build help button at the bottom of the screen which is the\n"
 "fourth one from the left. Or you can use the SPACE key to toggle it."
 msgstr ""
-"Precisamos de encontrar uma bom sitio para a Cabana do Lenhador. Para\n"
-"tornar isto mais fácil podemos activa a Ajuda à Construção. Existem dois\n"
+"Precisamos de encontrar um bom sitio para a Cabana do Lenhador. Para\n"
+"tornar isto ser mais fácil podemos activar a Ajuda à Construção. Existem "
+"dois\n"
 "modos de fazer isto: ou clicando no Botão Ajuda à Construção do menu que\n"
 "está em baixo (o quarto botão a contar da esquerda).\n"
 "Ou podes usar a Barra de espaços para ligar/desligar os símbolos da ajuda."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:54
 msgid "Welcome to Widelands!"
-msgstr "Bem-vindo a Widelands!"
+msgstr "Bem-vindo(a) às Widelands!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:52
 msgid "Welcome to the Widelands tutorial!"
-msgstr "Bem-vindo ao tutorial de Widelands!"
+msgstr "Bem-vindo(a) ao tutorial do Widelands!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:450
 msgid ""
