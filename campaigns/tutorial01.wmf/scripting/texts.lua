@@ -349,7 +349,7 @@ We'll wait until the quarry is completed.]]
 are directly in road building mode when you ordered a new site. But now, you
 aren't. To build a completely new road just click on the flag in front of your
 construction site, click on the build road icon then click on the flag in front
-of your headquarters.]]
+of your headquarters. Afterwards wait for the completion of the stonemason's hut.]]
       )
    )
 }
