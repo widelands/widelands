@@ -2538,7 +2538,7 @@ int L_Field::has_caps(lua_State * L) {
 	else if (query == "medium")
 		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_MEDIUM);
 	else if (query == "big")
-		lua_pushboolean(L, (field->nodecaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG);
+		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_BIG);
 	else if (query == "mine")
 		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_MINE);
 	else if (query == "flag")
