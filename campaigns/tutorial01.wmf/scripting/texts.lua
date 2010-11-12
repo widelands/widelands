@@ -555,8 +555,9 @@ mining_02 = {
    pos = "topright",
    title = _ "Mining conclusion",
    body = rt(p(_
-[[So our geologist found a lot of coal on this mountain. You should therefore
-build a coal mine here. Building a mine is like building a house. The build
+[[So our geologist found a lot of coal on this mountain. If this was a regular
+game, you should therefore build a coal mine here. However mining infrastructure
+is not part of this tutorial. Building a mine is like building a house. The build
 help symbol for where a mine can be built is]]
    )) .. rt("image=pics/mine.png", p(_"this one.")) ..
    rt(p(_
