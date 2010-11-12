@@ -329,7 +329,7 @@ different markers. They have the following meaning:]]
       )) .. rt("image=pics/roadb_green.png", p(_
 [[The terrain is flat here. Your carriers will be very swift on this terrain.]]
    )) .. rt("image=pics/roadb_yellow.png", p(_
-[[There is a small slope to climb to reach this field. This means you're
+[[There is a small slope to climb to reach this field. This means your
 workers are faster walking downwards than they are walking upwards.]]
    )) .. rt("image=pics/roadb_red.png", p(_
 [[The connection between the fields is extremely steep. The speed increase in
