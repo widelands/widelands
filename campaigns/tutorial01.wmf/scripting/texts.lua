@@ -460,7 +460,7 @@ conclude_messages = {
    title = _ "Message arrived!",
    body = rt(p(_
 [[A message has been sent to you. See how the button at the bottom of the
-screen has changed appearance? You should now burn this quarry down as it is
+screen has changed appearance? You could now burn this quarry down as it is
 no longer of any use and is just blocking space. To do that, click on the
 quarry and select the destroy button.]]
    ))
