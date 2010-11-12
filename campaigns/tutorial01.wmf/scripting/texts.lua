@@ -632,7 +632,7 @@ can not train in this skill and therefore have always defense level 0 which
 means that they always get 3 hitpoints subtracted from the damage inflicted. If
 an attacker with an attack value of 15 hitpoints hits a barbarian soldier, the
 barbarian would lose 15 - 3 = 12 hitpoints. The 3 hitpoints that are subtracted
-are because of the defense ability.]]
+are because of the basic defense ability.]]
       ) .. h2(_"Evade:") .. p(_
 [[Evade is the chance that the soldier is able to dodge an attack. It is 25% for
 a level 0 evade barbarian and increases in steps of 15% for each level.]]
