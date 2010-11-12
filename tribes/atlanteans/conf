@@ -12,7 +12,7 @@ icon=pics/icon.png
 # Entries in the columns separated by ,
 wares_order=stone, trunk, planks, spideryarn, spidercloth; fish, smoked_fish, meat, smoked_meat, water, corn, cornflour, blackroot, blackrootflour, bread; quartz, diamond, coal, ironore, iron, goldore, gold; pick, saw, shovel, hammer, milking_tongs, fishing_net, bucket, hunting_bow, hook_pole, scythe, bakingtray, fire_tongs; light_trident, long_trident, steel_trident, double_trident, heavy_double_trident,steel_shield, advanced_shield, tabard, goldyarn, golden_tabard
 
-workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
+workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver, shipwright; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
 
 # Some blue fires would be fine, but just an idea
 [frontier]
