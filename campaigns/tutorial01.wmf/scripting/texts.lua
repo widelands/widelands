@@ -91,7 +91,7 @@ fourth one from the left. Or you can use the SPACE key to toggle it.]]
    obj_name = "enable_buildhelp",
    obj_title = _ "Enable the build help",
    obj_body = rt(h1(_"Enable the build help") ..
-      p(
+      p(_
 [[It is easier to understand what is allowed to be built on which field when
 the build help symbols are enabled. Do so now either by pressing SPACE or by
 clicking the fourth button from the left at the very bottom of the screen.
