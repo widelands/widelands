@@ -69,9 +69,10 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				Section & s = prof.get_safe_section(buffer);
-				map->set_scenario_player_name (p, s.get_string ("name",   ""));
-				map->set_scenario_player_tribe(p, s.get_string ("tribe",  ""));
-				map->set_scenario_player_ai   (p, s.get_string ("ai",     ""));
+				map->set_scenario_player_name     (p, s.get_string("name",  ""));
+				map->set_scenario_player_tribe    (p, s.get_string("tribe", ""));
+				map->set_scenario_player_ai       (p, s.get_string("ai",    ""));
+				map->set_scenario_player_closeable(p, s.get_bool  ("closeable", false));
 			}
 		} else
 			throw game_data_error
@@ -98,9 +99,10 @@ throw (_wexception)
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
 		Section & s = prof.create_section(buffer);
-		s.set_string ("name",    map.get_scenario_player_name (p));
-		s.set_string ("tribe",   map.get_scenario_player_tribe(p));
-		s.set_string ("ai",      map.get_scenario_player_ai   (p));
+		s.set_string("name",     map.get_scenario_player_name     (p));
+		s.set_string("tribe",    map.get_scenario_player_tribe    (p));
+		s.set_string("ai",       map.get_scenario_player_ai       (p));
+		s.set_bool  ("closable", map.get_scenario_player_closeable(p));
 	}
 
 	prof.write("player_names", false, fs);

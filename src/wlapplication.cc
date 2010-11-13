@@ -1898,6 +1898,10 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			s.players[number].team = team;
 	}
 
+	virtual void setPlayerCloseable(uint8_t, bool) {
+		// nothing to do
+	}
+
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {
 		if (number < s.players.size())
 			s.players[number].name = name;

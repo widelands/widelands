@@ -317,6 +317,7 @@ void Map::cleanup() {
 	m_scenario_tribes.clear();
 	m_scenario_names.clear();
 	m_scenario_ais.clear();
+	m_scenario_closeables.clear();
 
 	if (m_overlay_manager)
 		m_overlay_manager->reset();
@@ -361,6 +362,7 @@ void Map::create_empty_map
 	set_scenario_player_tribe(1, tribes[0]);
 	set_scenario_player_name(1, _("Player 1"));
 	set_scenario_player_ai(1, "");
+	set_scenario_player_closeable(1, false);
 
 	{
 		Field::Terrains default_terrains;
@@ -567,8 +569,15 @@ const std::string & Map::get_scenario_player_ai(const Player_Number p) const
 	return m_scenario_ais[p - 1];
 }
 
-void Map::set_scenario_player_tribe
-	(Player_Number const p, std::string const & tribename)
+bool Map::get_scenario_player_closeable(const Player_Number p) const
+{
+	assert(m_scenario_closeables.size() == get_nrplayers());
+	assert(p);
+	assert(p <= get_nrplayers());
+	return m_scenario_closeables[p - 1];
+}
+
+void Map::set_scenario_player_tribe(Player_Number const p, std::string const & tribename)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
@@ -576,8 +585,7 @@ void Map::set_scenario_player_tribe
 	m_scenario_tribes[p - 1] = tribename;
 }
 
-void Map::set_scenario_player_name
-	(Player_Number const p, std::string const & playername)
+void Map::set_scenario_player_name(Player_Number const p, std::string const & playername)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
@@ -585,13 +593,20 @@ void Map::set_scenario_player_name
 	m_scenario_names[p - 1] = playername;
 }
 
-void Map::set_scenario_player_ai
-	(Player_Number const p, std::string const & ainame)
+void Map::set_scenario_player_ai(Player_Number const p, std::string const & ainame)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
 	m_scenario_ais.resize(get_nrplayers());
 	m_scenario_ais[p - 1] = ainame;
+}
+
+void Map::set_scenario_player_closeable(Player_Number const p, bool closeable)
+{
+	assert(p);
+	assert(p <= get_nrplayers());
+	m_scenario_closeables.resize(get_nrplayers());
+	m_scenario_closeables[p - 1] = closeable;
 }
 
 /*

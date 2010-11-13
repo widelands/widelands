@@ -41,6 +41,7 @@ struct PlayerSettings {
 	std::string tribe;
 	std::string ai; /**< Preferred AI provider for this player */
 	Widelands::TeamNumber team;
+	bool closeable; // only used in multiplayer scenario maps
 };
 
 struct UserSettings {
@@ -121,16 +122,17 @@ struct GameSettingsProvider {
 		 uint32_t maxplayers,
 		 bool                savegame = false)
 		= 0;
-	virtual void setPlayerState (uint8_t number, PlayerSettings::State) = 0;
-	virtual void setPlayerAI    (uint8_t number, std::string const &) = 0;
-	virtual void nextPlayerState(uint8_t number) = 0;
-	virtual void setPlayerTribe (uint8_t number, std::string const &) = 0;
-	virtual void setPlayerInit  (uint8_t number, uint8_t index) = 0;
-	virtual void setPlayerName  (uint8_t number, std::string const &) = 0;
-	virtual void setPlayer      (uint8_t number, PlayerSettings) = 0;
-	virtual void setPlayerNumber(uint8_t number) = 0;
-	virtual void setPlayerTeam  (uint8_t number, Widelands::TeamNumber team) = 0;
-	virtual void setWinCondition(std::string wc) = 0;
+	virtual void setPlayerState    (uint8_t number, PlayerSettings::State) = 0;
+	virtual void setPlayerAI       (uint8_t number, std::string const &) = 0;
+	virtual void nextPlayerState   (uint8_t number) = 0;
+	virtual void setPlayerTribe    (uint8_t number, std::string const &) = 0;
+	virtual void setPlayerInit     (uint8_t number, uint8_t index) = 0;
+	virtual void setPlayerName     (uint8_t number, std::string const &) = 0;
+	virtual void setPlayer         (uint8_t number, PlayerSettings) = 0;
+	virtual void setPlayerNumber   (uint8_t number) = 0;
+	virtual void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team) = 0;
+	virtual void setPlayerCloseable(uint8_t number, bool closeable) = 0;
+	virtual void setWinCondition   (std::string wc) = 0;
 	virtual std::string getWinCondition() = 0;
 
 	struct No_Tribe {};
