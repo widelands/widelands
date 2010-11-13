@@ -72,7 +72,7 @@ amalea_1 = {
    "</p></rt><rt image=map:Amalea.png><p line-spacing=3 font-size=12><br>" ..
    _[[ "Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our provisorily headquarters."<br><br>-- NEW OBJECTIVE --<br> ]] ..
    _(
-   "* Build a lumberjack's house at the red point, south of your provisorily headquarters. " ..
+   "* Build a lumberjack's house at the red house symbol, south of your provisorily headquarters. " ..
    "Cutting down enough trees for more buildings will take a while. You can " ..
    "speed the game up using PAGE UP and slow it down again with PAGE DOWN."
    ) .. 
