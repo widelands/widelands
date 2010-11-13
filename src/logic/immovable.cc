@@ -887,7 +887,7 @@ ImmovableProgram::ActTransform::ActTransform
 		probability = 0;
 
 		std::vector<std::string> params = split_string(parameters, " ");
-		for (uint i = 0; i < params.size(); ++i) {
+		for (uint32_t i = 0; i < params.size(); ++i) {
 			if (params[i] == "bob")
 				bob = true;
 			else if (params[i] == "immovable")
