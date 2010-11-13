@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-10 22:37+0100\n"
-"PO-Revision-Date: 2010-11-12 04:40+0000\n"
+"PO-Revision-Date: 2010-11-12 04:51+0000\n"
 "Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:42+0000\n"
+"X-Launchpad-Export-Date: 2010-11-13 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -1916,23 +1916,23 @@ msgstr "Сохранение"
 
 #: ../../src/wui/multiplayersetupgroup.cc:407
 msgid "Client name"
-msgstr ""
+msgstr "Клиент"
 
 #: ../../src/wui/multiplayersetupgroup.cc:415
 msgid "Mode"
-msgstr ""
+msgstr "Режим"
 
 #: ../../src/wui/multiplayersetupgroup.cc:431
 msgid "Start"
-msgstr ""
+msgstr "Старт"
 
 #: ../../src/wui/multiplayersetupgroup.cc:439
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: ../../src/wui/multiplayersetupgroup.cc:447
 msgid "Tribe"
-msgstr ""
+msgstr "Племя"
 
 #: ../../src/wui/multiplayersetupgroup.cc:459
 #: ../../src/ui_fsmenu/launchSPG.cc:105
@@ -2275,7 +2275,7 @@ msgstr "Подготовка..."
 
 #: ../../src/ui_basic/helpwindow.cc:40
 msgid "Help: "
-msgstr ""
+msgstr "Справка: "
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
@@ -3747,14 +3747,16 @@ msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
+"В данный момент Вы: %s\n"
+"\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:470
 msgid "Saved players are:"
-msgstr ""
+msgstr "Сохранённые игроки:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:490
 msgid "<closed>"
-msgstr ""
+msgstr "<закрыто>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:553
 msgid "There was an error!"

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 22:03+0000\n"
+"PO-Revision-Date: 2010-11-12 07:28+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-11-13 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:633
@@ -326,7 +326,7 @@ msgstr "Jundlina ist in Gedanken versunken"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:632
 msgid "Jundlina is releaved"
-msgstr ""
+msgstr "Jundlina ist erleichtert"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:390
 msgid "Jundlina is reviewing the reports"
@@ -522,6 +522,12 @@ msgid ""
 "wise clerics, who provided the link to Lutas - they prospered and became\n"
 "civilized."
 msgstr ""
+"Auf der einst versteckt gelegenen und nun verlorenen Insel Atlantis lebte "
+"seit langer Zeit ein stolzer Stamm. Regiert von der Blutlinie des Königs "
+"Ajanthul - der als erster Mensch vom Meeresgott Lutas die Macht bekam, "
+"oberhalb der Meereslinie zu atmen - und den Klerikern, die die Verbindung zu "
+"Lutas schloßen - entwickelten sie sich und erstellten ihre eigene "
+"Zivilisation."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:561
 msgid "One more building"
@@ -542,6 +548,9 @@ msgid ""
 "shore they will vanish in the sea before they can float. I fear we are "
 "doomed!"
 msgstr ""
+"Ostur, wir haben keine Zeit. Das Wasser steigt zu schnell und wenn wir die "
+"Schiffe an der Küste bauen, werden sie im Meer versinken, bevor sie "
+"schwimmen können. Ich befürchte beinahe, wir sind verloren!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:338
 msgid ""
@@ -574,6 +583,9 @@ msgid ""
 "together\n"
 "nicely. It is really starting to feel like home here."
 msgstr ""
+"Es scheint, als ob unsere Nahrungsproduktion fertig aufgebaut ist und alle "
+"arbeiten Hand in Hand zusammen. Wir beginnen uns langsam wie zuhause zu "
+"fühlen."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:443
 msgid "Sidolus seeks out Jundlina"

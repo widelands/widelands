@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-10 22:37+0100\n"
-"PO-Revision-Date: 2010-11-11 01:52+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-11-12 19:48+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-11-13 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/wlapplication.cc:369
@@ -1191,11 +1191,11 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:44 ../../src/wui/game_message_menu.h:148
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Meldinger: innboks"
 
 #: ../../src/wui/game_objectives_menu.cc:45
 msgid "Objectives Menu"
-msgstr ""
+msgstr "Mål"
 
 #: ../../src/wui/game_objectives_menu.cc:67
 msgid "Claim Victory"
@@ -1550,7 +1550,7 @@ msgstr "Bygg veier"
 
 #: ../../src/wui/fieldaction.cc:474
 msgid "Military settings"
-msgstr ""
+msgstr "Militære innstillinger"
 
 #: ../../src/wui/fieldaction.cc:500
 msgid "Start attack"
@@ -1617,7 +1617,7 @@ msgstr "Sivile bygninger tapt"
 
 #: ../../src/wui/general_statistics_menu.cc:218
 msgid "Military"
-msgstr ""
+msgstr "Militær"
 
 #: ../../src/wui/general_statistics_menu.cc:244
 #: ../../src/wui/ware_statistics_menu.cc:421
@@ -3381,7 +3381,7 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:576
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Militær bygning tapt!"
 
 #: ../../src/logic/militarysite.cc:622
 #, c-format
@@ -4504,7 +4504,7 @@ msgstr "Velg"
 
 #: ../../src/wui/game_message_menu.h:68
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../src/wui/game_message_menu.h:69
 msgid "Title"
@@ -4512,7 +4512,7 @@ msgstr "Tittel"
 
 #: ../../src/wui/game_message_menu.h:70
 msgid "Time sent"
-msgstr ""
+msgstr "Tidspunkt sendt"
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear"
@@ -4532,7 +4532,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:119 ../../src/wui/game_message_menu.h:152
 msgid "Archive selected messages"
-msgstr ""
+msgstr "Arkiver valgte meldinger"
 
 #: ../../src/wui/game_message_menu.h:130 ../../src/wui/game_message_menu.h:153
 msgid "Show Archive"
@@ -4540,11 +4540,11 @@ msgstr "Vis arkiv"
 
 #: ../../src/wui/game_message_menu.h:139
 msgid "Message Menu: Archive"
-msgstr ""
+msgstr "Meldinger: Arkiv"
 
 #: ../../src/wui/game_message_menu.h:143
 msgid "Restore selected messages"
-msgstr ""
+msgstr "Gjenopprett valgte meldinger"
 
 #: ../../src/wui/game_message_menu.h:144
 msgid "Show Inbox"
@@ -4568,11 +4568,11 @@ msgstr "Defensiv"
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
-msgstr ""
+msgstr "ingen beskr"
 
 #: ../../src/logic/map.h:186
 msgid "no description defined"
-msgstr ""
+msgstr "ingen beskrivelse definert"
 
 #, c-format
 #~ msgid "%sYour %s is under attack.</p>"
