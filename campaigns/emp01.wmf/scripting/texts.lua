@@ -48,7 +48,7 @@ saledus_1 = {
    _"Saledus looks around nervously..." ..
    "</p></rt><rt image=map:Saledus.png><p line-spacing=3 font-size=12><br>" ..
    _[[ "Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Then one of us can keep watch in the darkness and keep us safe from these creatures."<br><br>-- NEW OBJECTIVE --<br> ]] ..
-   _"* Build a barracks at the red point on the east side of the forests, to the right of your provisorily headquarters." ..
+   _"* Build a barracks at the red house symbol on the east side of the forests, to the right of your provisorily headquarters." ..
    "</p></rt>",
    width=400,
    height=350,
@@ -153,7 +153,7 @@ obj_build_barracks = {
    name = "build_barracks",
    title=_"Build a barracks",
    body= "<rt><p>" ..
-   _"* Build a barracks at the red point on the east side of the forests, to the right of your provisorily headquarters." ..
+   _"* Build a barracks at the red house symbol on the east side of the forests, to the right of your provisorily headquarters." ..
    "</p></rt>"
 }
 obj_build_lumberjack = {
