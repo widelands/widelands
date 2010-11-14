@@ -29,7 +29,7 @@ playercolor=true
 fps=10
 
 [walkload]
-dirpics=walk_!!_??.png
+dirpics=walkload_!!_??.png
 hotspot=12 28
 playercolor=true
 fps=10
