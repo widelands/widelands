@@ -75,16 +75,17 @@ struct NetClient :
 		 std::string const & mapfilename,
 		 uint32_t maxplayers,
 		 bool savegame = false);
-	virtual void setPlayerState   (uint8_t number, PlayerSettings::State state);
-	virtual void setPlayerAI      (uint8_t number, std::string const & ai);
-	virtual void nextPlayerState  (uint8_t number);
-	virtual void setPlayerTribe   (uint8_t number, std::string const & tribe);
-	virtual void setPlayerInit    (uint8_t number, uint8_t index);
-	virtual void setPlayerName    (uint8_t number, std::string const & name);
-	virtual void setPlayer        (uint8_t number, PlayerSettings ps);
-	virtual void setPlayerNumber  (uint8_t number);
-	virtual void setPlayerTeam    (uint8_t number, Widelands::TeamNumber team);
-	virtual void setWinCondition  (std::string);
+	virtual void setPlayerState    (uint8_t number, PlayerSettings::State state);
+	virtual void setPlayerAI       (uint8_t number, std::string const & ai);
+	virtual void nextPlayerState   (uint8_t number);
+	virtual void setPlayerTribe    (uint8_t number, std::string const & tribe);
+	virtual void setPlayerInit     (uint8_t number, uint8_t index);
+	virtual void setPlayerName     (uint8_t number, std::string const & name);
+	virtual void setPlayer         (uint8_t number, PlayerSettings ps);
+	virtual void setPlayerNumber   (uint8_t number);
+	virtual void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team);
+	virtual void setPlayerCloseable(uint8_t number, bool closeable);
+	virtual void setWinCondition   (std::string);
 	virtual std::string getWinCondition();
 
 	// ChatProvider interface

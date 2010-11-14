@@ -357,6 +357,11 @@ void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	s.send(d->sock);
 }
 
+void NetClient::setPlayerCloseable(uint8_t, bool)
+{
+	//  client is not allowed to do this
+}
+
 void NetClient::setPlayerInit(uint8_t, uint8_t)
 {
 	//  client is not allowed to do this

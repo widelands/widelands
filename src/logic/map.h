@@ -224,12 +224,14 @@ struct Map :
 
 	//  The next few functions are only valid when the map is loaded as a
 	//  scenario.
-	const std::string & get_scenario_player_tribe(Player_Number) const;
-	const std::string & get_scenario_player_name (Player_Number) const;
-	const std::string & get_scenario_player_ai   (Player_Number) const;
-	void set_scenario_player_tribe(Player_Number, const std::string &);
-	void set_scenario_player_name (Player_Number, const std::string &);
-	void set_scenario_player_ai   (Player_Number, const std::string &);
+	const std::string & get_scenario_player_tribe    (Player_Number) const;
+	const std::string & get_scenario_player_name     (Player_Number) const;
+	const std::string & get_scenario_player_ai       (Player_Number) const;
+	bool                get_scenario_player_closeable(Player_Number) const;
+	void set_scenario_player_tribe    (Player_Number, const std::string &);
+	void set_scenario_player_name     (Player_Number, const std::string &);
+	void set_scenario_player_ai       (Player_Number, const std::string &);
+	void set_scenario_player_closeable(Player_Number, bool);
 
 	BaseImmovable * get_immovable(Coords) const;
 	uint32_t find_bobs
@@ -395,9 +397,10 @@ private:
 	Overlay_Manager * m_overlay_manager;
 
 	boost::scoped_ptr<PathfieldManager> m_pathfieldmgr;
-	std::vector<std::string>   m_scenario_tribes;
-	std::vector<std::string>   m_scenario_names;
-	std::vector<std::string>   m_scenario_ais;
+	std::vector<std::string> m_scenario_tribes;
+	std::vector<std::string> m_scenario_names;
+	std::vector<std::string> m_scenario_ais;
+	std::vector<bool>        m_scenario_closeables;
 
 	Manager<Objective>  m_mom;
 

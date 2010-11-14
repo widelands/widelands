@@ -163,8 +163,9 @@ void Editor_Player_Menu::update() {
 			map.set_scenario_player_tribe(p, m_tribes[0]);
 		}
 
-		// Set default AI
+		// Set default AI and closeable to false (always default - should be changed by hand)
 		map.set_scenario_player_ai(p, "");
+		map.set_scenario_player_closeable(p, false);
 
 		//  Set Starting pos button.
 		if (!m_plr_set_pos_buts[p - 1]) {

@@ -58,9 +58,17 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	virtual bool canChangeMap() {return true;}
 	virtual bool canChangePlayerState(uint8_t const number) {
-		if (h->settings().savegame || settings().scenario) {
+		if (h->settings().savegame)
 			return h->settings().players.at(number).state != PlayerSettings::stateClosed;
-		}
+		else if (h->settings().scenario)
+			return
+				((h->settings().players.at(number).state == PlayerSettings::stateOpen
+				  ||
+				  h->settings().players.at(number).state == PlayerSettings::stateHuman)
+				 &&
+				 h->settings().players.at(number).closeable)
+				||
+				h->settings().players.at(number).state == PlayerSettings::stateClosed;
 		return true;
 	}
 	virtual bool canChangePlayerTribe(uint8_t const number) {
@@ -108,12 +116,16 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		switch (h->settings().players.at(number).state) {
 		case PlayerSettings::stateClosed:
 			// In savegames : closed players can not be changed.
-			// In scenarios : players can not be closed.
-			assert(!h->settings().scenario && !h->settings().savegame);
+			assert(!h->settings().savegame);
 			newstate = PlayerSettings::stateOpen;
 			break;
 		case PlayerSettings::stateOpen:
 		case PlayerSettings::stateHuman:
+			if (h->settings().scenario) {
+				assert(h->settings().players.at(number).closeable);
+				newstate = PlayerSettings::stateClosed;
+				break;
+			} // else fall through
 		case PlayerSettings::stateComputer:
 			Computer_Player::ImplementationVector const & impls =
 				Computer_Player::getImplementations();
@@ -166,6 +178,12 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			(number == settings().playernum ||
 			 settings().players.at(number).state == PlayerSettings::stateComputer)
 			h->setPlayerTeam(number, team);
+	}
+
+	virtual void setPlayerCloseable(uint8_t number, bool closeable) {
+		if (number >= h->settings().players.size())
+			return;
+		h->setPlayerCloseable(number, closeable);
 	}
 
 	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
@@ -1254,6 +1272,22 @@ void NetHost::setPlayerName(uint8_t const number, std::string const & name)
 	s.Unsigned8(number);
 	writeSettingPlayer(s, number);
 	broadcast(s);
+}
+
+
+void NetHost::setPlayerCloseable(uint8_t const number, bool closeable)
+{
+	if (number >= d->settings.players.size())
+		return;
+
+	PlayerSettings & player = d->settings.players.at(number);
+
+	if (player.closeable == closeable)
+		return;
+
+	player.closeable = closeable;
+
+	// There is no need to broadcast a player closeability change, as the host is the only one who uses it.
 }
 
 

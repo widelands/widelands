@@ -280,6 +280,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		bool const initaccess = s->canChangePlayerInit(m_id);
 		bool teamaccess       = s->canChangePlayerTeam(m_id);
 
+		type->set_enabled(typeaccess);
 		if (player.state == PlayerSettings::stateClosed) {
 			type ->set_tooltip(_("Closed"));
 			type ->set_pic(g_gr->get_picture(PicMod_UI, "pics/stop.png"));
@@ -290,9 +291,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init ->set_visible(false);
 			init ->set_enabled(false);
 		} else {
-			type->set_visible(true);
-			type->set_enabled(typeaccess);
-
 			if (player.state == PlayerSettings::stateOpen) {
 				type ->set_tooltip(_("Open"));
 				type ->set_pic(g_gr->get_picture(PicMod_UI, "pics/continue.png"));
