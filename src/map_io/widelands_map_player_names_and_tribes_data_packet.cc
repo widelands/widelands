@@ -99,10 +99,10 @@ throw (_wexception)
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
 		Section & s = prof.create_section(buffer);
-		s.set_string("name",     map.get_scenario_player_name     (p));
-		s.set_string("tribe",    map.get_scenario_player_tribe    (p));
-		s.set_string("ai",       map.get_scenario_player_ai       (p));
-		s.set_bool  ("closable", map.get_scenario_player_closeable(p));
+		s.set_string("name",      map.get_scenario_player_name     (p));
+		s.set_string("tribe",     map.get_scenario_player_tribe    (p));
+		s.set_string("ai",        map.get_scenario_player_ai       (p));
+		s.set_bool  ("closeable", map.get_scenario_player_closeable(p));
 	}
 
 	prof.write("player_names", false, fs);

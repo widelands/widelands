@@ -480,13 +480,14 @@ bool Game::run
 		// the correct names of the players
 		iterate_player_numbers(p, nr_players) {
 			const Player * const plr = get_player(p);
-			const std::string                                             no_name;
-			const std::string &  tribe_name = plr ? plr->tribe().name() : no_name;
-			const std::string & player_name = plr ? plr->    get_name() : no_name;
-			const std::string & player_ai   = plr ? plr->    getAI()    : no_name;
-			map().set_scenario_player_tribe(p,  tribe_name);
-			map().set_scenario_player_name (p, player_name);
-			map().set_scenario_player_ai   (p, player_ai);
+			const std::string                                              no_name;
+			const std::string & player_tribe = plr ? plr->tribe().name() : no_name;
+			const std::string & player_name  = plr ? plr->    get_name() : no_name;
+			const std::string & player_ai    = plr ? plr->    getAI()    : no_name;
+			map().set_scenario_player_tribe    (p, player_tribe);
+			map().set_scenario_player_name     (p, player_name);
+			map().set_scenario_player_ai       (p, player_ai);
+			map().set_scenario_player_closeable(p, false); // player is already initialized.
 		}
 
 		// Run the init script, if the map provides one.
