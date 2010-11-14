@@ -95,7 +95,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 	/// Care about visibility and current values
 	void refresh() {
-		UserSettings us = s->settings().users[m_id];
+		UserSettings us = s->settings().users.at(m_id);
 		if (us.position == UserSettings::notConnected()) {
 			name->set_text(_("<free>"));
 			if (type)
@@ -122,6 +122,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 					type->set_visible(true);
 				} else {
 					type_icon->setIcon(g_gr->get_picture(PicMod_UI, buf));
+					type_icon->set_tooltip(buf2);
+					type_icon->set_visible(true);
 				}
 				m_save = us.position;
 			}

@@ -1328,9 +1328,9 @@ void NetHost::switchToPlayer(uint32_t user, uint8_t number)
 	if
 		(number < d->settings.players.size()
 		 &&
-		 (d->settings.players.at(number).state == PlayerSettings::stateClosed
-		  ||
-		  d->settings.players.at(number).state == PlayerSettings::stateComputer))
+		 (d->settings.players.at(number).state != PlayerSettings::stateOpen
+		  &&
+		  d->settings.players.at(number).state != PlayerSettings::stateHuman))
 		return;
 
 	uint32_t old = d->settings.users.at(user).position;
