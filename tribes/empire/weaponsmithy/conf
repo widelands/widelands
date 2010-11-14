@@ -30,7 +30,7 @@ produce_wood_lance=_Produce wood lance
 produce_lance=_Produce lance
 produce_advanced_lance=_Produce advanced lance
 produce_heavy_lance=_Produce heavy lance
-produce_war_lance=Produce war lance
+produce_war_lance=_Produce war lance
 work=_Work
 
 [produce_wood_lance]
