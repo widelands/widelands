@@ -1349,9 +1349,11 @@ void NetHost::switchToPlayer(uint32_t user, uint8_t number)
 	if (number < d->settings.players.size()) {
 		// Add clients name to new player slot
 		PlayerSettings & op = d->settings.players.at(number);
-		if (op.state == PlayerSettings::stateOpen)
+		if (op.state == PlayerSettings::stateOpen) {
 			setPlayerState(number, PlayerSettings::stateHuman);
-		setPlayerName(number, op.name + " " + name + " ");
+			setPlayerName(number, " " + name + " ");
+		} else
+			setPlayerName(number, op.name + " " + name + " ");
 	}
 	d->settings.users.at(user).position = number;
 	if (user == 0) // host

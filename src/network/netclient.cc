@@ -458,9 +458,6 @@ void NetClient::recvOnePlayer
 	player.initialization_index = packet.Unsigned8();
 	player.ai = packet.String();
 	player.team = packet.Unsigned8();
-
-	if (number == d->settings.playernum)
-		d->localplayername = player.name;
 }
 
 void NetClient::recvOneUser
