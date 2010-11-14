@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-12 07:28+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-11-13 22:53+0000\n"
+"Last-Translator: Max Strube <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-13 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-14 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:633
@@ -44,6 +44,18 @@ msgid ""
 "everything else, we need those wares on top of the mountain before our\n"
 "warehouses are all swallowed by the sea."
 msgstr ""
+"\n"
+"Dein rotes Haar ist ein Zeichen vom Gott des Feuers. Ich vertraue Dir und "
+"werde Dich\n"
+"bei Deinem Plan unterstützen. Unser Schicksal liegt nun in Deinen Händen, "
+"Ostur.\n"
+"<br><br>Rasch, wir brauchen ein Haus für Ostur direkt am See und wir "
+"brauchen\n"
+"Bretter, Baumstämme und Spinnenstoffe für den Bau. Lasst alles andere stehen "
+"und\n"
+"liegen, wir müssen die Güter auf den Berg hinaufschaffen, bevor unsere "
+"Lagerhäuser\n"
+"vom Meer verschlungen werden."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:526
 msgid "A dangerous finding"
@@ -59,6 +71,13 @@ msgid ""
 "plan,\n"
 "but I think, it could work."
 msgstr ""
+"Ein Freund von mir hat die Insel auf eigene Faust erkundet und mir erzählt, "
+"dass es am\n"
+"höchsten Punkt des Berges einen See gibt. Ich schlage vor, wir bauen die "
+"Schiffe\n"
+"in diesem See und warten dann, bis die Insel unter uns versinkt. Dann können "
+"wir fortsegeln.\n"
+"Es ist ein gewagter Plan, aber ich glaube, dass er funktionieren könnte."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "A man comes to Jundlina"
@@ -122,7 +141,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:196
 msgid "Build 3 ships to escape from the island"
-msgstr "Erstelle 3 Schiffe um von der Insel zu fliehen."
+msgstr "Baue drei Schiffe, um von der Insel zu fliehen"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:101
 msgid ""
@@ -134,12 +153,12 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:143
 msgid "Build a spiderfarm and a weaving mill"
-msgstr "Baue eine Spinnenfarm und eine Weberei"
+msgstr "Baue eine Spinnenfarm und eine Weberei."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:186
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:187
 msgid "Build a warehouse and a horsefarm"
-msgstr "Baue ein Warenhaus und eine Pferdezucht"
+msgstr "Baue ein Warenlager und eine Pferdezucht."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:158
 msgid "Build industry and mines"
@@ -171,6 +190,13 @@ msgid ""
 "front\n"
 "of their stable was rising in an ever accelerating speed."
 msgstr ""
+"Doch alles schien in bester Ordnung zu sein. Nur die Pferde schienen zu "
+"spüren, dass etwas\n"
+"nicht stimmte. Während der Nacht wurden sie fast verrückt und waren voller "
+"Angst. Es dauerte\n"
+"nicht lange, bis die Pferdezüchterin Xydra die Ursache herausfand: Das Meer "
+"vor dem Stall der\n"
+"Pferde stieg unaufhaltsam immer weiter an."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:264
 msgid ""
@@ -204,7 +230,7 @@ msgstr "Sichere die Versorgung mit Baustoffen"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Escape from the island"
-msgstr "Entkomme von der Insel"
+msgstr "Fliehe von der Insel"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:119
 msgid "Establish a food production"
@@ -264,6 +290,14 @@ msgid ""
 "accepted their fate while others tried to change the god's mind by offering\n"
 "animals in his temple. But to no avail..."
 msgstr ""
+"Mit Schuldgefühlen beladen, beging der König Selbstmord. Daraufhin legten "
+"die Leute ihre\n"
+"Hoffnung in die Hände der Geistlichen, die aber auch keine wirkliche Hilfe "
+"bieten konnten.\n"
+"Die meisten Leute akzeptierten ihr Schicksal, während andere versuchten, den "
+"Gott\n"
+"durch das Opfern von Tieren in seinem Tempel zu besänftigen. Alles jedoch "
+"ohne Erfolg ..."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:475
 msgid ""
@@ -362,7 +396,7 @@ msgstr "Jundlina antwortet"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:464
 msgid "Jundlina summons Sidolus"
-msgstr "Jundlina ruft Sidolus auf"
+msgstr "Jundlina ruft Sidolus herbei"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:282
 msgid "Jundlina writes down her memories"
@@ -382,6 +416,9 @@ msgid ""
 "Leaving the dying Atlantis and their past behind, they started a quest to\n"
 "find a place sheltered by the fire and protected from the sea."
 msgstr ""
+"Das niedergehende Atlantis und ihre eigene Vergangenheit zurücklassend, "
+"machten sie sich\n"
+"auf die Suche nach einem vom Feuer gewärmten und vom Meer geschützten Ort."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:302
 msgid "Loftomor and Sidolus arrive"
@@ -400,6 +437,13 @@ msgid ""
 "we\n"
 "escape?"
 msgstr ""
+"Möge uns Satul beschützen! Lutas versucht noch immer, sich zu uns "
+"durchzuschlagen. Ein Bote\n"
+"berichtete mir, dass der Meeresspiegel immer schneller ansteigt. Wir müssen "
+"uns alle in die höheren\n"
+"Lagen retten und so viele Güter wie möglich aus dem Hauptquartier hinauf in "
+"die Berge schaffen. Wie\n"
+"können wir entkommen?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:304
 msgid ""
@@ -510,7 +554,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:86
 msgid "New Objectives"
-msgstr "Neue Aufgaben"
+msgstr "Neue Ziele"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:216
 msgid ""
@@ -621,6 +665,11 @@ msgid ""
 "here, we cannot relax. Explore and conquer it, this is the\n"
 "only way to protect us from threats on the island and from Atlantis."
 msgstr ""
+"Die Insel ist riesig und so lange wir nicht wissen, ob wir hier alleine "
+"sind, können\n"
+"wir nicht rasten. Erforscht und erobert die Insel, das ist der einzige Weg, "
+"um uns\n"
+"vor Gefahren auf der Insel und durch Atlantis zu schützen."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:281
 msgid "The princess' memoir"
@@ -734,7 +783,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:382
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr "Deine Worte klingen Weise, Colindor. Also soll es so sein."
+msgstr "Deine Worte klingen weise, Colindor. So soll es sein."
 
 #~ msgid "01 - From nemesis to genesis"
 #~ msgstr "01 - Vom Untergang zum Neuanfang"
