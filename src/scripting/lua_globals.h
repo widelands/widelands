@@ -20,11 +20,12 @@
 #ifndef LUA_GLOBALS_H
 #define LUA_GLOBALS_H
 
+struct lua_State;
+
 namespace LuaGlobals {
 
 void luaopen_globals(lua_State *);
 
-#endif /* end of include guard: LUA_GLOBALS_H */
-};
+}
 
-
+#endif

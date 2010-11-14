@@ -60,7 +60,7 @@ struct Editor_Game_Base :
 	friend struct ::Interactive_Base;
 	friend class Game_Game_Class_Data_Packet;
 
-	Editor_Game_Base(LuaInterface * lua);
+	Editor_Game_Base(LuaInterface *);
 	virtual ~Editor_Game_Base();
 
 	void set_map(Map *);

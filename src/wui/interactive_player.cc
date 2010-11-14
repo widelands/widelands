@@ -49,7 +49,6 @@
 #include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
-#include "overlay_manager.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
@@ -250,10 +249,11 @@ m_toggle_help
 
 	set_display_flag(dfSpeed, true);
 
-#define INIT_BTN_HOOKS(registry, btn)                                        \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
- if (registry.window) btn.set_perm_pressed(true);                            \
+#define INIT_BTN_HOOKS(registry, b)                                           \
+   registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &b, true);  \
+   registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &b, false); \
+   if (registry.window)                                                       \
+      b.set_perm_pressed(true);                                               \
 
 	INIT_BTN_HOOKS(m_chat, m_toggle_chat)
 	INIT_BTN_HOOKS(m_options, m_toggle_options_menu)
@@ -299,11 +299,17 @@ Interactive_Player::~Interactive_Player() {
 	// buttons. The assertions are safeguards in case somewhere else in the
 	// code someone would overwrite our hooks.
 
-#define DEINIT_BTN_HOOKS(registry, btn)                                                \
- assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed, &btn, true));  \
- assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed, &btn, false)); \
- registry.onCreate = 0;                                                                \
- registry.onDelete = 0;                                                                \
+#define DEINIT_BTN_HOOKS(registry, b)                                         \
+   assert                                                                     \
+      (registry.onCreate                                                      \
+       ==                                                                     \
+       boost::bind(&UI::Button::set_perm_pressed, &b, true));                 \
+   assert                                                                     \
+      (registry.onDelete                                                      \
+       ==                                                                     \
+       boost::bind(&UI::Button::set_perm_pressed, &b, false));                \
+   registry.onCreate = 0;                                                     \
+   registry.onDelete = 0;                                                     \
 
 	DEINIT_BTN_HOOKS(m_chat, m_toggle_chat)
 	DEINIT_BTN_HOOKS(m_options, m_toggle_options_menu)
@@ -388,10 +394,10 @@ void Interactive_Player::postload()
 	overlay_manager.register_overlay_callback_function
 			(&Int_Player_overlay_callback_function, static_cast<void *>(this));
 
-	// Connect buildhelp button to reflect build help state. Needs to be
-	// done here rather than in the constructor as the map is not present then.
-	// This code assumes that the Interactive_Player object lives longer than
-	// the overlay_manager. Otherwise remove the hook in the deconstructor.
+	//  Connect buildhelp button to reflect build help state. Needs to be done
+	//  here rather than in the constructor as the map is not present then. This
+	//  code assumes that the Interactive_Player object lives longer than
+	//  overlay_manager. Otherwise remove the hook in the destructor.
 	egbase().map().overlay_manager().onBuildHelpToggle =
 		boost::bind(&UI::Button::set_perm_pressed, &m_toggle_buildhelp, _1);
 	m_toggle_buildhelp.set_perm_pressed(buildhelp());

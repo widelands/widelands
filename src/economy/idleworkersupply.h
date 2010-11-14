@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,8 @@ struct IdleWorkerSupply : public Supply {
 
 	virtual bool is_active() const throw ();
 	virtual bool has_storage() const throw ();
-	virtual void get_ware_type(bool & isworker, Ware_Index & ware) const;
-	virtual void send_to_storage(Game &, Warehouse * wh);
+	virtual void get_ware_type(bool & isworker, Ware_Index &) const;
+	virtual void send_to_storage(Game &, Warehouse &);
 
 	virtual uint32_t nr_supplies(Game const &, Request const &) const;
 	virtual WareInstance & launch_item(Game &, Request const &)

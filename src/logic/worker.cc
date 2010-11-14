@@ -292,7 +292,7 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
 
 
 /**
- * OUTDATED - SHOULD NOT BE USED ANYMORE AND DOES NOT DO ANYTHING VALUEABLE
+ * OUTDATED - SHOULD NOT BE USED ANYMORE AND DOES NOT DO ANYTHING VALUABLE
  *    just kept here for savegame compatibility for Build15 and earlier
  *
  * setdescription \<immovable name\> \<immovable name\> ...
@@ -592,8 +592,8 @@ void Worker::informPlayer
 		 _("Out of ") + res_type,
 		 std::string
 		 	(_
-		 	 ("The worker of this building cannot find any more resources "
-		 	 "of the following type: "))
+		 	 	("The worker of this building cannot find any more resources "
+		 	 	 "of the following type: "))
 		 +
 		 res_type,
 		 1800000, 0);
@@ -1361,7 +1361,7 @@ const Bob::Task Worker::taskTransfer = {
 /**
  * Tell the worker to follow the Transfer
  */
-void Worker::start_task_transfer(Game & game, Transfer * t)
+void Worker::start_task_transfer(Game & game, Transfer & t)
 {
 	// Hackish override for receiving transfers during gowarehouse,
 	// and to correctly handle the stack during loading of games
@@ -1370,11 +1370,11 @@ void Worker::start_task_transfer(Game & game, Transfer * t)
 	if (get_state(taskGowarehouse) || get_state(taskTransfer)) {
 		assert(!m_transfer);
 
-		m_transfer = t;
+		m_transfer = &t;
 		send_signal(game, "transfer");
 	} else { //  just start a normal transfer
 		push_task(game, taskTransfer);
-		m_transfer = t;
+		m_transfer = &t;
 	}
 }
 
@@ -1898,7 +1898,7 @@ void Worker::gowarehouse_update(Game & game, State & state)
 
 	// If we got a transfer, use it
 	if (m_transfer) {
-		Transfer * const t = m_transfer;
+		Transfer & t = *m_transfer;
 		m_transfer = 0;
 
 		molog("[gowarehouse]: Got transfer\n");

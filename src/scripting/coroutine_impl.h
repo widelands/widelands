@@ -31,9 +31,8 @@ namespace Widelands {
        Lua Coroutine
 ============================================
 */
-class LuaCoroutine_Impl : public LuaCoroutine {
-public:
-	LuaCoroutine_Impl(lua_State * L);
+struct LuaCoroutine_Impl : public LuaCoroutine {
+	LuaCoroutine_Impl(lua_State *);
 	virtual ~LuaCoroutine_Impl();
 
 	virtual int get_status() {return lua_status(m_L);}
@@ -46,19 +45,16 @@ public:
 		(lua_State *, Widelands::FileRead &,
 		 Widelands::Map_Map_Object_Loader &, uint32_t);
 
-	virtual void push_arg(const Widelands::Player *);
-	virtual void push_arg(const Widelands::Coords &);
+	virtual void push_arg(Widelands::Player const &);
+	virtual void push_arg(Widelands::Coords const &);
 
 private:
 	void m_reference();
 	void m_unreference();
 
-private:
 	lua_State * m_L;
 	uint32_t m_idx;
 	uint32_t m_nargs;
 };
 
-
-#endif /* end of include guard: COROUTINE_IMPL_H */
-
+#endif

@@ -49,17 +49,18 @@ ProductionSite_Window::ProductionSite_Window
 
 	if (warequeues.size()) {
 		// Add the wares tab
-		UI::Box * prod_box = new UI::Box
-			(get_tabs(),
-			0, 0, UI::Box::Vertical,
-			g_gr->get_xres() - 80, g_gr->get_yres() - 80);
+		UI::Box & prod_box =
+			*new UI::Box
+				(get_tabs(),
+				 0, 0, UI::Box::Vertical,
+				 g_gr->get_xres() - 80, g_gr->get_yres() - 80);
 
 		for (uint32_t i = 0; i < warequeues.size(); ++i)
-			create_ware_queue_panel(prod_box, ps, warequeues[i]);
+			create_ware_queue_panel(&prod_box, ps, warequeues[i]);
 
 		get_tabs()->add
 			("wares", g_gr->get_picture(PicMod_Game, pic_tab_wares),
-			 prod_box, _("Wares"));
+			 &prod_box, _("Wares"));
 	}
 
 	// Add workers tab if applicable
@@ -125,8 +126,9 @@ void ProductionSite_Window::think()
 
 					er.set_string(1, buffer);
 					er.set_string
-						(2, worker->tribe().get_worker_descr
-						 (worker->becomes())->descname());
+						(2,
+						 worker->tribe().get_worker_descr
+						 	(worker->becomes())->descname());
 				} else {
 					// Worker is not upgradeable
 					er.set_string(1, "---");

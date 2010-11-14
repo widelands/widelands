@@ -36,17 +36,16 @@ using namespace Widelands;
 
 namespace LuaRoot {
 
-/* RST
-:mod:`wl`
-======================
-
-.. module:: wl
-   :synopsis: Base classes which allow access to all widelands internals.
-
-.. moduleauthor:: The Widelands development team
-
-.. currentmodule:: wl
-*/
+// RST
+// :mod:`wl`
+// ======================
+//
+// .. module:: wl
+//    :synopsis: Base classes which allow access to all widelands internals.
+//
+// .. moduleauthor:: The Widelands development team
+//
+// .. currentmodule:: wl
 
 /*
  * ========================================================================
@@ -54,24 +53,22 @@ namespace LuaRoot {
  * ========================================================================
  */
 
-/* RST
-Module Classes
-^^^^^^^^^^^^^^^^
+// RST
+// Module Classes
+// ^^^^^^^^^^^^^^^^
+//
 
-*/
-
-/* RST
-Game
------
-
-.. class:: Game
-
-	Child of: :class:`wl.bases.EditorGameBase`
-
-	The root class to access the game internals. You can
-	construct as many instances of this class as you like, but
-	they all will access the one game currently running.
-*/
+// RST
+// Game
+// -----
+//
+// .. class:: Game
+//
+// Child of: :class:`wl.bases.EditorGameBase`
+//
+// The root class to access the game internals. You can construct as many
+// instances of this class as you like, but they all will access the one game
+// currently running.
 const char L_Game::className[] = "Game";
 const MethodType<L_Game> L_Game::Methods[] = {
 	METHOD(L_Game, launch_coroutine),
@@ -85,13 +82,13 @@ const PropertyType<L_Game> L_Game::Properties[] = {
 	{0, 0, 0},
 };
 
-L_Game::L_Game(lua_State * L) {
+L_Game::L_Game(lua_State *) {
 	// Nothing to do.
 }
 
-void L_Game::__persist(lua_State * L) {
+void L_Game::__persist(lua_State *) {
 }
-void L_Game::__unpersist(lua_State * L) {
+void L_Game::__unpersist(lua_State *) {
 }
 
 
@@ -101,51 +98,48 @@ void L_Game::__unpersist(lua_State * L) {
  ==========================================================
  */
 
-/* RST
-	.. attribute:: time
-
-	(RO) The absolute time elapsed since the game was started in milliseconds.
-*/
-int L_Game::get_time(lua_State * L) {
+// RST
+// .. attribute:: time
+//
+// (RO) The absolute time elapsed since the game was started in milliseconds.
+int L_Game::get_time(lua_State * const L) {
 	lua_pushint32(L, get_game(L).get_gametime());
 	return 1;
 }
 
 
-/* RST
-	.. attribute:: desired_speed
-
-	(RW) Sets the desired speed of the game in ms per real second, so a speed of
-	1000 means the game runs at 1x speed. Note that this will not work in
-	network games as expected.
-*/
+// RST
+// .. attribute:: desired_speed
+//
+// (RW) Sets the desired speed of the game in ms per real second, so a speed of
+// 1000 means the game runs at 1x speed. Note that this will not work in
+// network games as expected.
 // UNTESTED
-int L_Game::set_desired_speed(lua_State * L) {
+int L_Game::set_desired_speed(lua_State * const L) {
 	get_game(L).gameController()->setDesiredSpeed(luaL_checkuint32(L, -1));
 	return 1;
 }
 // UNTESTED
-int L_Game::get_desired_speed(lua_State * L) {
+int L_Game::get_desired_speed(lua_State * const L) {
 	lua_pushuint32(L, get_game(L).gameController()->desiredSpeed());
 	return 1;
 }
 
-/* RST
-	.. attribute:: allow_autosaving
-
-		(RW) Disable or enable auto-saving. When you show off UI features in a
-		tutorial or scenario, you have to disallow auto-saving because UI
-		elements can not be saved and therefore reloading a game saved in the
-		meantime would crash the game.
-*/
+// RST
+// .. attribute:: allow_autosaving
+//
+//    (RW) Disable or enable auto-saving. When you show off UI features in a
+//    tutorial or scenario, you have to disallow auto-saving because UI
+//    elements can not be saved and therefore reloading a game saved in the
+//    meantime would crash the game.
 // UNTESTED
-int L_Game::set_allow_autosaving(lua_State * L) {
+int L_Game::set_allow_autosaving(lua_State * const L) {
 	get_game(L).save_handler().set_allow_autosaving
 		(luaL_checkboolean(L, -1));
 	return 0;
 }
 // UNTESTED
-int L_Game::get_allow_autosaving(lua_State * L) {
+int L_Game::get_allow_autosaving(lua_State * const L) {
 	lua_pushboolean(L, get_game(L).save_handler().get_allow_autosaving());
 	return 1;
 }
@@ -155,23 +149,22 @@ int L_Game::get_allow_autosaving(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
-/* RST
-	.. method:: launch_coroutine(func[, when = now])
-
-		Hands a Lua coroutine object over to widelands for execution. The object
-		must have been created via :func:`coroutine.create`. The coroutine is
-		expected to :func:`coroutine.yield` at regular intervals with the
-		absolute game time on which the function should be awakened again. You
-		should also have a look at :mod:`core.cr`.
-
-		:arg func: coroutine object to run
-		:type func: :class:`thread`
-		:arg when: absolute time when this coroutine should run
-		:type when: :class:`integer`
-
-		:returns: :const:`nil`
-*/
-int L_Game::launch_coroutine(lua_State * L) {
+// RST
+// .. method:: launch_coroutine(func[, when = now])
+//
+//    Hands a Lua coroutine object over to widelands for execution. The object
+//    must have been created via :func:`coroutine.create`. The coroutine is
+//    expected to :func:`coroutine.yield` at regular intervals with the
+//    absolute game time on which the function should be awakened again. You
+//    should also have a look at :mod:`core.cr`.
+//
+//    :arg func: coroutine object to run
+//    :type func: :class:`thread`
+//    :arg when: absolute time when this coroutine should run
+//    :type when: :class:`integer`
+//
+//    :returns: :const:`nil`
+int L_Game::launch_coroutine(lua_State * const L) {
 	int nargs = lua_gettop(L);
 	uint32_t runtime = get_game(L).get_gametime();
 	if (nargs < 2)
@@ -189,19 +182,18 @@ int L_Game::launch_coroutine(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: save(name)
-
-		Saves the game exactly as if the player had entered the save dialog and
-		entered name as an argument. If some error occurred while saving, this
-		will throw an Lua error. Note that this currently doesn't work when
-		called from inside a Coroutine.
-
-		:arg name: name of save game. If this game already exists, it will be
-			silently overwritten
-		:type name: :class:`string`
-		:returns: :const:`nil`
-*/
+// RST
+// .. method:: save(name)
+//
+//    Saves the game exactly as if the player had entered the save dialog and
+//    entered name as an argument. If some error occurred while saving, this
+//    will throw an Lua error. Note that this currently does not work when
+//    called from inside a Coroutine.
+//
+//    :arg name: name of save game. If this game already exists, it will be
+//       silently overwritten
+//    :type name: :class:`string`
+//    :returns: :const:`nil`
 int L_Game::save(lua_State * const L) {
 	Widelands::Game & game = get_game(L);
 
@@ -227,17 +219,16 @@ int L_Game::save(lua_State * const L) {
  ==========================================================
  */
 
-/* RST
-Editor
-------
-
-.. class:: Editor
-
-	Child of: :class:`wl.bases.EditorGameBase`
-
-	The Editor object; it is the correspondence of the :class:`wl.Game`
-	that is used in a Game.
-*/
+// RST
+// Editor
+// ------
+//
+// .. class:: Editor
+//
+// Child of: :class:`wl.bases.EditorGameBase`
+//
+// The Editor object; it is the correspondence of the :class:`wl.Game` that is
+// used in a Game.
 
 const char L_Editor::className[] = "Editor";
 const MethodType<L_Editor> L_Editor::Methods[] = {
@@ -247,13 +238,13 @@ const PropertyType<L_Editor> L_Editor::Properties[] = {
 	{0, 0, 0},
 };
 
-L_Editor::L_Editor(lua_State * L) {
+L_Editor::L_Editor(lua_State * const L) {
 	// Nothing to do.
 }
 
-void L_Editor::__persist(lua_State * L) {
+void L_Editor::__persist(lua_State * const L) {
 }
-void L_Editor::__unpersist(lua_State * L) {
+void L_Editor::__unpersist(lua_State * const L) {
 }
 
 /*
@@ -278,7 +269,7 @@ const static struct luaL_reg wlroot [] = {
 	{0, 0}
 };
 
-void luaopen_wlroot(lua_State * L, bool in_editor) {
+void luaopen_wlroot(lua_State * const L, bool const in_editor) {
 	luaL_register(L, "wl", wlroot);
 	lua_pop(L, 1); // pop the table
 

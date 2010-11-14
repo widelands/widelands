@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,7 @@ struct Supply : public Trackable {
 	 * Sets up all the required transfers; assumes that \ref has_storage
 	 * returns \c false.
 	 */
-	virtual void send_to_storage(Game &, Warehouse * wh) = 0;
+	virtual void send_to_storage(Game &, Warehouse &) = 0;
 
 	/**
 	 * \return the number of items or workers that can be launched right

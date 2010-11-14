@@ -20,10 +20,10 @@
 #ifndef PERSISTENCE_H
 #define PERSISTENCE_H
 
-#include <string>
-
 #include "logic/widelands_filewrite.h"
 #include "logic/widelands_fileread.h"
+
+#include <lua.hpp>
 
 namespace Widelands {
 	struct Map_Map_Object_Loader;
@@ -32,20 +32,15 @@ namespace Widelands {
 	struct Game;
 }
 
-#include <lua.hpp>
-
 /**
  * This persists the lua object at the stack position
  * 2 after populating the (empty) table at position 1
  * with the items given in globals.
  */
 uint32_t persist_object
-	(lua_State * L,
-	 Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
+	(lua_State *, Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
 uint32_t unpersist_object
-	(lua_State * L,
-	 Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	(lua_State *, Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader &,
 	 uint32_t size);
 
-#endif /* end of include guard: PERSISTENCE_H */
-
+#endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -104,10 +104,11 @@ GameOptionsMenu::GameOptionsMenu
 	m_windows.license.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/COPYING");
 	m_windows.authors.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/developers");
 
-#define INIT_BTN_HOOKS(registry, btn)                                        \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
- if (registry.window) btn.set_perm_pressed(true);                            \
+#define INIT_BTN_HOOKS(registry, b)                                           \
+   registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &b, true);  \
+   registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &b, false); \
+   if (registry.window)                                                       \
+      b.set_perm_pressed(true);                                               \
 
 	INIT_BTN_HOOKS(m_windows.readme, readme)
 	INIT_BTN_HOOKS(m_windows.license, license)

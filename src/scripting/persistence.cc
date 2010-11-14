@@ -17,7 +17,7 @@
  *
  */
 
-#include <lua.hpp>
+#include "persistence.h"
 
 #include "log.h"
 #include "logic/widelands_fileread.h"
@@ -26,7 +26,7 @@
 #include "pluto.h"
 #include "c_utils.h"
 
-#include "persistence.h"
+#include <lua.hpp>
 
 /*
  * ========================================================================
@@ -40,7 +40,7 @@
  * therefore stored, false otherwise.
  */
 static bool m_add_object_to_not_persist
-	(lua_State * L, std::string name, uint32_t nidx)
+	(lua_State * const L, std::string name, uint32_t const nidx)
 {
 	// Search for a dot. If one is found, we first have
 	// to get the global module.
@@ -78,7 +78,7 @@ static bool m_add_object_to_not_persist
 // functions, but always the same and therefor need not be persisted (in fact
 // they are c functions, so they can't be persisted all the same)
 static void m_add_iterator_function_to_not_persist
-	(lua_State * L, std::string global, uint32_t idx)
+	(lua_State * const L, std::string const & global, uint32_t const idx)
 {
 	lua_getglobal(L, global.c_str());
 	lua_newtable(L);
@@ -88,7 +88,8 @@ static void m_add_iterator_function_to_not_persist
 }
 
 static bool m_add_object_to_not_unpersist
-	(lua_State * L, std::string name, uint32_t idx) {
+	(lua_State * const L, std::string name, uint32_t const idx)
+{
 	// Search for a dot. If one is found, we first have
 	// to get the global module.
 	std::string::size_type pos = name.find('.');
@@ -116,7 +117,7 @@ static bool m_add_object_to_not_unpersist
 }
 
 static void m_add_iterator_function_to_not_unpersist
-	(lua_State * L, std::string global, uint32_t idx)
+	(lua_State * const L, std::string const & global, uint32_t const idx)
 {
 	lua_pushuint32(L, idx); // integer
 	lua_getglobal(L, global.c_str());
@@ -146,7 +147,7 @@ static const char * m_persistent_globals[] = {
  * written
  */
 uint32_t persist_object
-	(lua_State * L,
+	(lua_State * const L,
 	 Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
 {
 	assert(lua_gettop(L) == 2); // table object
@@ -158,7 +159,7 @@ uint32_t persist_object
 	// Push objects that should not be touched while persisting into the empty
 	// table at stack position 1
 	uint32_t i = 0;
-	for (i = 0; m_persistent_globals[i]; i++)
+	for (i = 0; m_persistent_globals[i]; ++i)
 		m_add_object_to_not_persist(L, m_persistent_globals[i], i + 1);
 
 	++i;
@@ -186,9 +187,9 @@ uint32_t persist_object
  * written
  */
 uint32_t unpersist_object
-	(lua_State * L,
+	(lua_State * const L,
 	 Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
-	 uint32_t size)
+	 uint32_t const size)
 {
 	// Save the mol in the registry
 	lua_pushlightuserdata(L, &mol);
@@ -197,7 +198,7 @@ uint32_t unpersist_object
 	// Push objects that should not be loaded
 	lua_newtable(L);
 	uint32_t i = 0;
-	for (i = 0; m_persistent_globals[i]; i++)
+	for (i = 0; m_persistent_globals[i]; ++i)
 		m_add_object_to_not_unpersist(L, m_persistent_globals[i], i + 1);
 
 	++i;

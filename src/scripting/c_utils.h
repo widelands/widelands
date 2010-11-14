@@ -22,9 +22,16 @@
 
 #include <lua.hpp>
 
-#include "logic/game.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include <string>
+
+#include <stdint.h>
+
+namespace Widelands {
+struct Editor_Game_Base;
+struct Game;
+struct Map_Map_Object_Loader;
+struct Map_Map_Object_Saver;
+}
 
 #include "factory.h"
 
@@ -48,17 +55,17 @@ int report_error(lua_State *, const char *, ...) PRINTF_FORMAT(2, 3);
 #define lua_pushint32(L, n) (lua_pushinteger(L, static_cast<int32_t>(n)))
 #define lua_pushuint32(L, n) (lua_pushinteger(L, static_cast<uint32_t>(n)))
 
-inline void lua_pushstring (lua_State * L, const std::string & s) {
+inline void lua_pushstring (lua_State * const L, std::string const & s) {
 	lua_pushstring(L, s.c_str());
 }
 
-inline lua_State * luaL_checkthread(lua_State * L, int n) {
+inline lua_State * luaL_checkthread(lua_State * const L, int const n) {
 	luaL_checktype(L, n, LUA_TTHREAD);
 	lua_State * thread = lua_tothread(L, n);
 	return thread;
 }
 
-inline bool luaL_checkboolean(lua_State * L, int n) {
+inline bool luaL_checkboolean(lua_State * const L, int const n) {
 	if (lua_isboolean(L, n))
 		return lua_toboolean(L, n);
 	return luaL_checkinteger(L, n);

@@ -17,7 +17,7 @@
  *
  */
 
-#include <lua.hpp>
+#include "lua_ui.h"
 
 #include "logic/player.h"
 #include "upcast.h"
@@ -30,27 +30,26 @@
 
 namespace LuaUi {
 
-/* RST
-:mod:`wl.ui`
-=============
-
-.. module:: wl.ui
-   :synopsis: Provides access on user interface. Mainly for tutorials and
-		debugging.
-
-.. moduleauthor:: The Widelands development team
-
-.. currentmodule:: wl.ui
-
-.. Note::
-
-	The objects inside this module can not be persisted. That is if the player
-	tries to save the game while any of these objects are assigned to variables,
-	the game will crash. So when using these, make sure that you only create
-	objects for a short amount of time where the user can't take control to do
-	something else.
-
-*/
+// RST
+// :mod:`wl.ui`
+// =============
+//
+// .. module:: wl.ui
+//    :synopsis: Provides access on user interface. Mainly for tutorials and
+//    debugging.
+//
+// .. moduleauthor:: The Widelands development team
+//
+// .. currentmodule:: wl.ui
+//
+// .. Note::
+//
+// The objects inside this module can not be persisted. That is if the player
+// tries to save the game while any of these objects are assigned to variables,
+// the game will crash. So when using these, make sure that you only create
+// objects for a short amount of time where the user can not take control to do
+// something else.
+//
 
 /*
  * ========================================================================
@@ -58,20 +57,18 @@ namespace LuaUi {
  * ========================================================================
  */
 
-/* RST
-Module Classes
-^^^^^^^^^^^^^^^^
+// RST
+// Module Classes
+// ^^^^^^^^^^^^^^^^
+//
 
-*/
-
-/* RST
-Panel
------
-
-.. class:: Panel
-
-	The Panel is the most basic ui class. Each ui element is a panel.
-*/
+// RST
+// Panel
+// -----
+//
+// .. class:: Panel
+//
+// The Panel is the most basic ui class. Each ui element is a panel.
 const char L_Panel::className[] = "Panel";
 const PropertyType<L_Panel> L_Panel::Properties[] = {
 	PROP_RO(L_Panel, buttons),
@@ -94,17 +91,15 @@ const MethodType<L_Panel> L_Panel::Methods[] = {
  * Properties
  */
 
-/* RST
-	.. attribute:: name
+// RST
+// .. attribute:: name
+//
+//    (RO) The name of this panel
 
-		(RO) The name of this panel
-*/
-
-/* RST
-	.. attribute:: buttons
-
-		(RO) An :class:`array` of all visible buttons inside this Panel.
-*/
+// RST
+// .. attribute:: buttons
+//
+//    (RO) An :class:`array` of all visible buttons inside this Panel.
 static void _put_all_visible_buttons_into_table
 	(lua_State * L, UI::Panel * g)
 {
@@ -122,7 +117,7 @@ static void _put_all_visible_buttons_into_table
 			}
 	}
 }
-int L_Panel::get_buttons(lua_State * L) {
+int L_Panel::get_buttons(lua_State * const L) {
 	assert(m_panel);
 
 	lua_newtable(L);
@@ -131,11 +126,10 @@ int L_Panel::get_buttons(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: tabs
-
-		(RO) An :class:`array` of all visible buttons inside this Panel.
-*/
+// RST
+// .. attribute:: tabs
+//
+//    (RO) An :class:`array` of all visible buttons inside this Panel.
 static void _put_all_tabs_into_table
 	(lua_State * L, UI::Panel * g)
 {
@@ -153,7 +147,7 @@ static void _put_all_tabs_into_table
 			}
 	}
 }
-int L_Panel::get_tabs(lua_State * L) {
+int L_Panel::get_tabs(lua_State * const L) {
 	assert(m_panel);
 
 	lua_newtable(L);
@@ -163,19 +157,18 @@ int L_Panel::get_tabs(lua_State * L) {
 }
 
 
-/* RST
-	.. attribute:: windows
-
-		(RO) A :class:`array` of all currently open windows that are
-			children of this Panel.
-*/
+// RST
+// .. attribute:: windows
+//
+//    (RO) A :class:`array` of all currently open windows that are
+//       children of this Panel.
 static void _put_all_visible_windows_into_table
-	(lua_State * L, UI::Panel * g)
+	(lua_State * const L, UI::Panel * const g)
 {
-	if (not g) return;
+	if (not g)
+		return;
 
-	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
-	{
+	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling()) {
 		_put_all_visible_windows_into_table(L, f);
 
 		if (upcast(UI::Window, win, f)) {
@@ -185,7 +178,7 @@ static void _put_all_visible_windows_into_table
 		}
 	}
 }
-int L_Panel::get_windows(lua_State * L) {
+int L_Panel::get_windows(lua_State * const L) {
 	assert(m_panel);
 
 	lua_newtable(L);
@@ -194,29 +187,28 @@ int L_Panel::get_windows(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: mouse_position_x, mouse_position_y
-
-		(RW) The current mouse position relative to this Panels position
-*/
-int L_Panel::get_mouse_position_x(lua_State * L) {
+// RST
+// .. attribute:: mouse_position_x, mouse_position_y
+//
+//    (RW) The current mouse position relative to this Panels position
+int L_Panel::get_mouse_position_x(lua_State * const L) {
 	assert(m_panel);
 	lua_pushint32(L, m_panel->get_mouse_position().x);
 	return 1;
 }
-int L_Panel::set_mouse_position_x(lua_State * L) {
+int L_Panel::set_mouse_position_x(lua_State * const L) {
 	assert(m_panel);
 	Point p = m_panel->get_mouse_position();
 	p.x = luaL_checkint32(L, -1);
 	m_panel->set_mouse_pos(p);
 	return 1;
 }
-int L_Panel::get_mouse_position_y(lua_State * L) {
+int L_Panel::get_mouse_position_y(lua_State * const L) {
 	assert(m_panel);
 	lua_pushint32(L, m_panel->get_mouse_position().y);
 	return 1;
 }
-int L_Panel::set_mouse_position_y(lua_State * L) {
+int L_Panel::set_mouse_position_y(lua_State * const L) {
 	assert(m_panel);
 	Point p = m_panel->get_mouse_position();
 	p.y = luaL_checkint32(L, -1);
@@ -224,59 +216,57 @@ int L_Panel::set_mouse_position_y(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: width, height
-
-		(RW) The dimensions of this panel in pixels
-*/
-int L_Panel::get_width(lua_State * L) {
+// RST
+// .. attribute:: width, height
+//
+//    (RW) The dimensions of this panel in pixels
+int L_Panel::get_width(lua_State * const L) {
 	assert(m_panel);
 	lua_pushint32(L, m_panel->get_w());
 	return 1;
 }
-int L_Panel::set_width(lua_State * L) {
+int L_Panel::set_width(lua_State * const L) {
 	assert(m_panel);
 	m_panel->set_size(luaL_checkint32(L, -1), m_panel->get_h());
 	return 1;
 }
-int L_Panel::get_height(lua_State * L) {
+int L_Panel::get_height(lua_State * const L) {
 	assert(m_panel);
 	lua_pushint32(L, m_panel->get_h());
 	return 1;
 }
-int L_Panel::set_height(lua_State * L) {
+int L_Panel::set_height(lua_State * const L) {
 	assert(m_panel);
 	m_panel->set_size(m_panel->get_w(), luaL_checkint32(L, -1));
 	return 1;
 }
 
-/* RST
-	.. attribute:: position_x, position_y
-
-		(RO) The top left pixel of the our inner canvas relative to the
-		parent's element inner canvas.
-*/
-int L_Panel::get_position_x(lua_State * L) {
+// RST
+// .. attribute:: position_x, position_y
+//
+//    (RO) The top left pixel of the our inner canvas relative to the parent's
+//    element inner canvas.
+int L_Panel::get_position_x(lua_State * const L) {
 	assert(m_panel);
 	Point p = m_panel->to_parent(Point(0, 0));
 
 	lua_pushint32(L, p.x);
 	return 1;
 }
-int L_Panel::set_position_x(lua_State * L) {
+int L_Panel::set_position_x(lua_State * const L) {
 	assert(m_panel);
 	Point p(luaL_checkint32(L, -1) - m_panel->get_lborder(), m_panel->get_y());
 	m_panel->set_pos(p);
 	return 1;
 }
-int L_Panel::get_position_y(lua_State * L) {
+int L_Panel::get_position_y(lua_State * const L) {
 	assert(m_panel);
 	Point p = m_panel->to_parent(Point(0, 0));
 
 	lua_pushint32(L, p.y);
 	return 1;
 }
-int L_Panel::set_position_y(lua_State * L) {
+int L_Panel::set_position_y(lua_State * const L) {
 	assert(m_panel);
 	Point p(m_panel->get_x(), luaL_checkint32(L, -1) - m_panel->get_tborder());
 	m_panel->set_pos(p);
@@ -286,19 +276,18 @@ int L_Panel::set_position_y(lua_State * L) {
 /*
  * Lua Functions
  */
-/* RST
-	.. method:: get_descendant_position(child)
-
-		Get the child position relative to the inner canvas of this Panel in
-		pixels. Throws an error if child is not really a child.
-
-		:arg child: children to get position for
-		:type child: :class:`Panel`
-
-		:returns: x, y
-		:rtype: both are :class:`integers`
-*/
-int L_Panel::get_descendant_position(lua_State * L) {
+// RST
+// .. method:: get_descendant_position(child)
+//
+//    Get the child position relative to the inner canvas of this Panel in
+//    pixels. Throws an error if child is not really a child.
+//
+//    :arg child: children to get position for
+//    :type child: :class:`Panel`
+//
+//    :returns: x, y
+//    :rtype: both are :class:`integers`
+int L_Panel::get_descendant_position(lua_State * const L) {
 	assert(m_panel);
 
 	UI::Panel * cur = (*get_base_user_class<L_Panel>(L, 2))->m_panel;
@@ -322,16 +311,15 @@ int L_Panel::get_descendant_position(lua_State * L) {
  */
 
 
-/* RST
-Button
-------
-
-.. class:: Button
-
-	Child of: :class:`Panel`
-
-	This represents a simple push button.
-*/
+// RST
+// Button
+// ------
+//
+// .. class:: Button
+//
+// Child of: :class:`Panel`
+//
+// This represents a simple push button.
 const char L_Button::className[] = "Button";
 const MethodType<L_Button> L_Button::Methods[] = {
 	METHOD(L_Button, press),
@@ -348,7 +336,7 @@ const PropertyType<L_Button> L_Button::Properties[] = {
  */
 
 // Documented in parent Class
-int L_Button::get_name(lua_State * L) {
+int L_Button::get_name(lua_State * const L) {
 	lua_pushstring(L, get()->get_name());
 	return 1;
 }
@@ -356,24 +344,22 @@ int L_Button::get_name(lua_State * L) {
 /*
  * Lua Functions
  */
-/* RST
-	.. method:: press
-
-		Press and hold this button. This is mainly to visualize a pressing
-		event in tutorials
-*/
-int L_Button::press(lua_State * L) {
+// RST
+// .. method:: press
+//
+//    Press and hold this button. This is mainly to visualize a pressing event
+//    event in tutorials
+int L_Button::press(lua_State * const L) {
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
 }
-/* RST
-	.. method:: click
-
-		Click this button just as if the user would have moused over and clicked
-		it.
-*/
-int L_Button::click(lua_State * L) {
+// RST
+// .. method:: click
+//
+//    Click this button just as if the user would have moused over and clicked
+//    it.
+int L_Button::click(lua_State * const L) {
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
@@ -384,16 +370,15 @@ int L_Button::click(lua_State * L) {
  * C Functions
  */
 
-/* RST
-Tab
-------
-
-.. class:: Tab
-
-	Child of: :class:`Panel`
-
-	A tab button.
-*/
+// RST
+// Tab
+// ------
+//
+// .. class:: Tab
+//
+// Child of: :class:`Panel`
+//
+// A tab button.
 const char L_Tab::className[] = "Tab";
 const MethodType<L_Tab> L_Tab::Methods[] = {
 	METHOD(L_Tab, click),
@@ -410,17 +395,16 @@ const PropertyType<L_Tab> L_Tab::Properties[] = {
  */
 
 // Documented in parent Class
-int L_Tab::get_name(lua_State * L) {
+int L_Tab::get_name(lua_State * const L) {
 	lua_pushstring(L, get()->get_name());
 	return 1;
 }
 
-/* RST
-	.. attribute:: active
-
-		(RO) Is this the currently active tab in this window?
-*/
-int L_Tab::get_active(lua_State * L) {
+// RST
+// .. attribute:: active
+//
+//    (RO) Is this the currently active tab in this window?
+int L_Tab::get_active(lua_State * const L) {
 	lua_pushboolean(L, get()->active());
 	return 1;
 }
@@ -428,12 +412,11 @@ int L_Tab::get_active(lua_State * L) {
 /*
  * Lua Functions
  */
-/* RST
-	.. method:: click
-
-		Click this tab making it the active one.
-*/
-int L_Tab::click(lua_State * L) {
+// RST
+// .. method:: click
+//
+//    Click this tab making it the active one.
+int L_Tab::click(lua_State * const L) {
 	get()->activate();
 	return 0;
 }
@@ -442,16 +425,15 @@ int L_Tab::click(lua_State * L) {
  * C Functions
  */
 
-/* RST
-Window
-------
-
-.. class:: Window
-
-	Child of: :class:`Panel`
-
-	This represents a Window.
-*/
+// RST
+// Window
+// ------
+//
+//.. class:: Window
+//
+// Child of: :class:`Panel`
+//
+// This represents a Window.
 const char L_Window::className[] = "Window";
 const MethodType<L_Window> L_Window::Methods[] = {
 	METHOD(L_Window, close),
@@ -467,7 +449,7 @@ const PropertyType<L_Window> L_Window::Properties[] = {
  */
 
 // Documented in parent Class
-int L_Window::get_name(lua_State * L) {
+int L_Window::get_name(lua_State * const L) {
 	lua_pushstring(L, get()->get_name());
 	return 1;
 }
@@ -476,13 +458,12 @@ int L_Window::get_name(lua_State * L) {
  * Lua Functions
  */
 
-/* RST
-	.. method:: close
-
-		Closes this window. This invalidates this Object, do
-		not use it any longer.
-*/
-int L_Window::close(lua_State * L) {
+// RST
+// .. method:: close
+//
+//    Closes this window. This invalidates this Object, do not use it any
+//    longer.
+int L_Window::close(lua_State * const L) {
 	delete m_panel;
 	m_panel = 0;
 	return 0;
@@ -492,17 +473,16 @@ int L_Window::close(lua_State * L) {
  * C Functions
  */
 
-/* RST
-MapView
--------
-
-.. class:: MapView
-
-	Child of :class:`Panel`
-
-	The map view is the main widget and the root of all panels. It is the big
-	view of the map that is visible at all times while playing.
-*/
+// RST
+// MapView
+// -------
+//
+// .. class:: MapView
+//
+// Child of :class:`Panel`
+//
+// The map view is the main widget and the root of all panels. It is the big
+// view of the map that is visible at all times while playing.
 const char L_MapView::className[] = "MapView";
 const MethodType<L_MapView> L_MapView::Methods[] = {
 	METHOD(L_MapView, click),
@@ -521,38 +501,37 @@ const PropertyType<L_MapView> L_MapView::Properties[] = {
 	{0, 0, 0},
 };
 
-L_MapView::L_MapView(lua_State * L) :
-	L_Panel(get_egbase(L).get_ibase()) {
+L_MapView::L_MapView(lua_State * const L) : L_Panel(get_egbase(L).get_ibase())
+{
 }
 
 
 /*
  * Properties
  */
-/* RST
-	.. attribute:: viewpoint_x, viewpoint_y
-
-		(RW) The current view position of this view. This defines the map position
-		(in pixels) that the top left pixel of this map view currently sees. This
-		can be used together with :attr:`wl.map.Field.viewpoint` to move the view
-		to fields quickly.
-*/
-int L_MapView::get_viewpoint_x(lua_State * L) {
+// RST
+// .. attribute:: viewpoint_x, viewpoint_y
+//
+//    (RW) The current view position of this view. This defines the map
+//    position (in pixels) that the top left pixel of this map view currently
+//    sees. This can be used together with :attr:`wl.map.Field.viewpoint` to
+//    move the view to a node quickly.
+int L_MapView::get_viewpoint_x(lua_State * const L) {
 	lua_pushuint32(L, get()->get_viewpoint().x);
 	return 1;
 }
-int L_MapView::set_viewpoint_x(lua_State * L) {
+int L_MapView::set_viewpoint_x(lua_State * const L) {
 	Map_View * mv = get();
 	Point p = mv->get_viewpoint();
 	p.x = luaL_checkuint32(L, -1);
 	mv->set_viewpoint(p, true);
 	return 0;
 }
-int L_MapView::get_viewpoint_y(lua_State * L) {
+int L_MapView::get_viewpoint_y(lua_State * const L) {
 	lua_pushuint32(L, get()->get_viewpoint().y);
 	return 1;
 }
-int L_MapView::set_viewpoint_y(lua_State * L) {
+int L_MapView::set_viewpoint_y(lua_State * const L) {
 	Map_View * mv = get();
 	Point p = mv->get_viewpoint();
 	p.y = luaL_checkuint32(L, -1);
@@ -560,58 +539,54 @@ int L_MapView::set_viewpoint_y(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. attribute:: buildhelp
-
-		(RW) True if the buildhelp is show, false otherwise.
-*/
-int L_MapView::get_buildhelp(lua_State * L) {
+// RST
+// .. attribute:: buildhelp
+//
+//   (RW) True if the buildhelp is show, false otherwise.
+int L_MapView::get_buildhelp(lua_State * const L) {
 	lua_pushboolean(L, get()->buildhelp());
 	return 1;
 }
-int L_MapView::set_buildhelp(lua_State * L) {
+int L_MapView::set_buildhelp(lua_State * const L) {
 	get()->show_buildhelp(luaL_checkboolean(L, -1));
 	return 0;
 }
 
-/* RST
-	.. attribute:: census
-
-		(RW) True if the census strings are shown on buildings, false otherwise
-*/
-int L_MapView::get_census(lua_State * L) {
+// RST
+// .. attribute:: census
+//
+//    (RW) True if the census strings are shown on buildings, false otherwise
+int L_MapView::get_census(lua_State * const L) {
 	lua_pushboolean(L, get()->get_display_flag(Interactive_Base::dfShowCensus));
 	return 1;
 }
-int L_MapView::set_census(lua_State * L) {
+int L_MapView::set_census(lua_State * const L) {
 	get()->set_display_flag
 		(Interactive_Base::dfShowCensus, luaL_checkboolean(L, -1));
 	return 0;
 }
 
-/* RST
-	.. attribute:: statistics
-
-		(RW) True if the statistics strings are shown on buildings, false
-		otherwise
-*/
-int L_MapView::get_statistics(lua_State * L) {
+// RST
+// .. attribute:: statistics
+//
+//    (RW) True if the statistics strings are shown on buildings, false
+//    otherwise.
+int L_MapView::get_statistics(lua_State * const L) {
 	lua_pushboolean
 		(L, get()->get_display_flag(Interactive_Base::dfShowStatistics));
 	return 1;
 }
-int L_MapView::set_statistics(lua_State * L) {
+int L_MapView::set_statistics(lua_State * const L) {
 	get()->set_display_flag
 		(Interactive_Base::dfShowStatistics, luaL_checkboolean(L, -1));
 	return 0;
 }
 
-/* RST
-	.. attribute:: is_building_road
-
-		(RO) Is the player currently in road building mode?
-*/
-int L_MapView::get_is_building_road(lua_State * L) {
+// RST
+// .. attribute:: is_building_road
+//
+//    (RO) Is the player currently in road building mode?
+int L_MapView::get_is_building_road(lua_State * const L) {
 	lua_pushboolean(L, get()->is_building_road());
 	return 1;
 }
@@ -620,16 +595,14 @@ int L_MapView::get_is_building_road(lua_State * L) {
  * Lua Functions
  */
 
-/* RST
-	.. method:: click(field)
-
-		Moves the mouse onto a field and clicks it just like the user would
-		have.
-
-		:arg field: the field to click on
-		:type field: :class:`wl.map.Field`
-*/
-int L_MapView::click(lua_State * L) {
+// RST
+// .. method:: click(field)
+//
+//    Moves the mouse cursor onto a node and clicks it just like the user would
+//    have done.
+//
+//    :arg field: the node to click on :type field: :class:`wl.map.Field`
+int L_MapView::click(lua_State * const L) {
 	get()->warp_mouse_to_node
 		((*get_user_class<LuaMap::L_Field>(L, 2))->coords());
 	get()->fieldclicked.call();
@@ -637,18 +610,16 @@ int L_MapView::click(lua_State * L) {
 }
 
 
-/* RST
-	.. method:: start_road_building(flag)
-
-		Enters the road building mode as if the player has clicked
-		the flag and chosen build road. It will also warp the mouse
-		to the given starting node. Throws an error if we are already in road
-		building mode.
-
-		:arg flag: :class:`wl.map.Flag` object to start building from.
-*/
+// RST
+// .. method:: start_road_building(flag)
+//
+//    Enters the road building mode as if the player has clicked the flag and
+//    chosen build road. It will also warp the mouse to the given starting
+//    node. Throws an error if we are already in road building mode.
+//
+//    :arg flag: :class:`wl.map.Flag` object to start building from.
 // UNTESTED
-int L_MapView::start_road_building(lua_State * L) {
+int L_MapView::start_road_building(lua_State * const L) {
 	Interactive_Base * me = get();
 	if (me->is_building_road())
 		return report_error(L, "Already building road!");
@@ -663,29 +634,27 @@ int L_MapView::start_road_building(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: abort_road_building
-
-		If the player is currently in road building mode, this will cancel it.
-		If he wasn't, this will do nothing.
-*/
+// RST
+// .. method:: abort_road_building
+//
+//    If the player is currently in road building mode, this will cancel it.
+//    If he was not, this will do nothing.
 // UNTESTED
-int L_MapView::abort_road_building(lua_State * L) {
-	Interactive_Base * me = get();
-	if (me->is_building_road())
-		me->abort_build_road();
+int L_MapView::abort_road_building(lua_State * const L) {
+	Interactive_Base & me = *get();
+	if (me.is_building_road())
+		me.abort_build_road();
 	return 0;
 }
 
-/* RST
-	.. method:: close
-
-		Closes the MapView. Note that this is the equivalent as clicking on
-		the exit button in the game; that is the game will be exited.
-
-		This is especially useful for automated testing of features and is for
-		example used in the widelands Lua test suite.
-*/
+// RST
+// .. method:: close
+//
+//    Closes the MapView. Note that this is the equivalent as clicking on the
+//    exit button in the game; that is the game will be exited.
+//
+//    This is especially useful for automated testing of features and is for
+//    example used in the Widelands Lua test suite.
 int L_MapView::close(lua_State * l) {
 	get()->end_modal(0);
 	return 0;
@@ -702,29 +671,27 @@ int L_MapView::close(lua_State * l) {
  * ========================================================================
  */
 
-/* RST
-.. function:: set_user_input_allowed(b)
-
-	Allow or disallow user input. Be warned, setting this will make that
-	mouse movements and keyboard presses are completely ignored. Only
-	scripted stuff will still happen.
-
-	:arg b: :const:`true` or :const:`false`
-	:type b: :class:`boolean`
-*/
-static int L_set_user_input_allowed(lua_State * L) {
+// RST
+// .. function:: set_user_input_allowed(b)
+//
+// Allow or disallow user input. Be warned, setting this will make that mouse
+// movements and keyboard presses are completely ignored. Only scripted stuff
+// will still happen.
+//
+// :arg b: :const:`true` or :const:`false`
+// :type b: :class:`boolean`
+static int L_set_user_input_allowed(lua_State * const L) {
 	UI::Panel::set_allow_user_input(luaL_checkboolean(L, -1));
 	return 0;
 }
-/* RST
-.. method:: get_user_input_allowed
-
-	Return the current state of this flag.
-
-	:returns: :const:`true` or :const:`false`
-	:rtype: :class:`boolean`
-*/
-static int L_get_user_input_allowed(lua_State * L) {
+// RST
+// .. method:: get_user_input_allowed
+//
+// Return the current state of this flag.
+//
+// :returns: :const:`true` or :const:`false`
+// :rtype: :class:`boolean`
+static int L_get_user_input_allowed(lua_State * const L) {
 	lua_pushboolean(L, UI::Panel::allow_user_input());
 	return 1;
 }
@@ -736,7 +703,7 @@ const static struct luaL_reg wlui [] = {
 	{0, 0}
 };
 
-void luaopen_wlui(lua_State * L) {
+void luaopen_wlui(lua_State * const L) {
 	luaL_register(L, "wl.ui", wlui);
 	lua_pop(L, 1); // pop the table from the stack
 

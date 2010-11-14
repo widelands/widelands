@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,15 +30,7 @@ namespace Widelands {struct Game;}
 // default autosave interval in minutes
 #define DEFAULT_AUTOSAVE_INTERVAL 15
 
-class SaveHandler {
-	int32_t m_lastSaveTime;
-	bool m_initialized;
-	bool m_allow_autosaving;
-
-	void initialize(int32_t currenttime);
-
-
-public:
+struct SaveHandler {
 	SaveHandler() : m_initialized(false), m_allow_autosaving(true) {}
 	void think(Widelands::Game &, int32_t currenttime);
 	std::string create_file_name(std::string dir, std::string filename);
@@ -48,8 +40,15 @@ public:
 		 std::string       * error = 0);
 
 	static std::string get_base_dir() {return "save";}
-	void set_allow_autosaving(bool t) {m_allow_autosaving = t;}
-	bool get_allow_autosaving() {return m_allow_autosaving;}
+	void set_allow_autosaving(bool const t) {m_allow_autosaving = t;}
+	bool get_allow_autosaving() const {return m_allow_autosaving;}
+
+private:
+	int32_t m_lastSaveTime;
+	bool    m_initialized;
+	bool    m_allow_autosaving;
+
+	void initialize(int32_t currenttime);
 };
 
 #endif

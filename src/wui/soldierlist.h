@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _SOLDIERLIST_H_
-#define _SOLDIERLIST_H_
+#ifndef SOLDIERLIST_H
+#define SOLDIERLIST_H
 
 struct Interactive_GameBase;
 
@@ -31,8 +31,6 @@ struct Building;
 }
 
 UI::Panel * create_soldier_list
-	(UI::Panel & parent,
-	 Interactive_GameBase & igb,
-	 Widelands::Building & building);
+	(UI::Panel & parent, Interactive_GameBase &, Widelands::Building &);
 
-#endif // _SOLDIERLIST_H_
+#endif

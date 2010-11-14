@@ -71,7 +71,7 @@ private:
 		}
 	} list;
 
-	void update_record(List::Entry_Record & er, Widelands::Message const &);
+	void update_record(List::Entry_Record &, Widelands::Message const &);
 
 	UI::Multiline_Textarea message_body;
 
@@ -87,8 +87,7 @@ private:
 			GameMessageMenu & menu =
 				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
 			for (wl_index_range<uint8_t> i(0, menu.list.size()); i; ++i)
-				menu.list.get_record(i.current).set_checked
-					(List::Select, false);
+				menu.list.get_record(i.current).set_checked(List::Select, false);
 		}
 	} clear_selection;
 

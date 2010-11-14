@@ -202,7 +202,7 @@ struct Tribe_Descr {
 	uint32_t get_resource_indicator
 		(const Resource_Descr * const res, const uint32_t amount) const;
 
-	void postload(Editor_Game_Base &);
+	void postload(Editor_Game_Base &) const;
 	void load_graphics();
 
 	Military_Data get_military_data() const {return m_military_data;}

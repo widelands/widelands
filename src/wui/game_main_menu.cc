@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,12 +72,13 @@ stock
 	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.stock)),
 	 _("Stock"))
 {
-#define INIT_BTN_HOOKS(registry, btn)                                        \
- assert (not registry.onCreate);                                             \
- assert (not registry.onDelete);                                             \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
- if (registry.window) btn.set_perm_pressed(true);                            \
+#define INIT_BTN_HOOKS(registry, b)                                           \
+   assert (not registry.onCreate);                                            \
+   assert (not registry.onDelete);                                            \
+   registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &b, true);  \
+   registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &b, false); \
+   if (registry.window)                                                       \
+      b.set_perm_pressed(true);                                               \
 
 	INIT_BTN_HOOKS(m_windows.general_stats, general_stats)
 	INIT_BTN_HOOKS(m_windows.ware_stats, ware_stats)
@@ -98,16 +99,22 @@ stock
 }
 
 GameMainMenu::~GameMainMenu() {
-	// We need to remove these callbacks because the opened window might
-	// live longer than 'this' window, and thus the buttons. The assertions
-	// are safeguards in case somewhere else in the code someone would
-	// overwrite our hooks.
+	//  We need to remove these callbacks because the opened window might live
+	//  longer than 'this' window, and thus the buttons. The assertions are
+	//  safeguards in case somewhere else in the code someone would overwrite
+	//  our hooks.
 
-#define DEINIT_BTN_HOOKS(registry, btn)                                                \
- assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed, &btn, true));  \
- assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed, &btn, false)); \
- registry.onCreate = 0;                                                                \
- registry.onDelete = 0;                                                                \
+#define DEINIT_BTN_HOOKS(registry, b)                                         \
+   assert                                                                     \
+      (registry.onCreate                                                      \
+       ==                                                                     \
+       boost::bind(&UI::Button::set_perm_pressed, &b, true));                 \
+   assert                                                                     \
+      (registry.onDelete                                                      \
+       ==                                                                     \
+       boost::bind(&UI::Button::set_perm_pressed, &b, false));                \
+   registry.onCreate = 0;                                                     \
+   registry.onDelete = 0;                                                     \
 
 	DEINIT_BTN_HOOKS(m_windows.general_stats, general_stats)
 	DEINIT_BTN_HOOKS(m_windows.ware_stats, ware_stats)

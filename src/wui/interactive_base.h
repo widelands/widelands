@@ -73,7 +73,7 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	bool get_sel_freeze() const {return m_sel.freeze;}
 
 	bool buildhelp();
-	void show_buildhelp(bool t);
+	void show_buildhelp(bool);
 	void toggle_buildhelp ();
 
 	/**

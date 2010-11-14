@@ -58,8 +58,8 @@ GameMessageMenu::GameMessageMenu
 		center_to_parent();
 
 	list.set_column_compare
-		(List::Status, boost::bind(&GameMessageMenu::status_compare,
-		 this, _1, _2));
+		(List::Status,
+		 boost::bind(&GameMessageMenu::status_compare, this, _1, _2));
 
 	set_can_focus(true);
 	focus();
@@ -225,8 +225,8 @@ void GameMessageMenu::do_delete()
 	Widelands::Game & game = iplayer().game();
 	game.send_player_command
 		(*new Widelands::Cmd_MessageSetStatusArchived
-			(game.get_gametime(), iplayer().player_number(),
-			 Message_Id(list.get_selected())));
+		 	(game.get_gametime(), iplayer().player_number(),
+		 	 Message_Id(list.get_selected())));
 }
 
 void GameMessageMenu::Archive_Or_Restore_Selected_Messages::clicked() {

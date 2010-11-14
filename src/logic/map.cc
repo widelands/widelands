@@ -623,8 +623,12 @@ void Map::set_nrplayers(Player_Number const nrplayers) {
 		return;
 	}
 
-	m_starting_pos = static_cast<Coords *>
-		(realloc(m_starting_pos, sizeof(Coords) * nrplayers));
+	//  FIXME cppcheck: (error) Common realloc mistake: "m_starting_pos" nulled
+	//  FIXME cppcheck: (error) but not freed upon failure
+	m_starting_pos =
+		static_cast<Coords *>
+			(realloc(m_starting_pos, sizeof(Coords) * nrplayers));
+
 	while (m_nrplayers < nrplayers)
 		m_starting_pos[m_nrplayers++] = Coords(-1, -1);
 

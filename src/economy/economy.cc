@@ -69,7 +69,7 @@ Economy::Economy(Player & player) :
 	}
 
 	m_router =
-		 new Router(boost::bind(&Economy::_reset_all_pathfinding_cycles, this));
+		new Router(boost::bind(&Economy::_reset_all_pathfinding_cycles, this));
 }
 
 Economy::~Economy()
@@ -1048,14 +1048,14 @@ void Economy::_handle_active_supplies(Game & game)
 			 WarehouseAcceptFn()
 			 :
 			 boost::bind
-				(&accept_warehouse_if_policy,
-				 _1, isworker, ware,
-				 haveprefer ? Warehouse::SP_Prefer : Warehouse::SP_Normal));
+			 	(&accept_warehouse_if_policy,
+			 	 _1, isworker, ware,
+			 	 haveprefer ? Warehouse::SP_Prefer : Warehouse::SP_Normal));
 
 		if (!wh) {
 			log
-				("Warning: Economy::_handle_active_supplies "
-				 "didn't find warehouse\n");
+				("Warning: Economy::_handle_active_supplies did not find "
+				 "warehouse\n");
 			return;
 		}
 
@@ -1073,7 +1073,7 @@ void Economy::_handle_active_supplies(Game & game)
 		ss.Unsigned32(it.current->first->get_position(game)->serial());
 		ss.Unsigned32(it.current->second->serial());
 
-		it.current->first->send_to_storage(game, it.current->second);
+		it.current->first->send_to_storage(game, *it.current->second);
 	}
 }
 

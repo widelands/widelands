@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -127,12 +127,12 @@ Worker & IdleWorkerSupply::launch_worker(Game &, Request const & req)
 	return m_worker;
 }
 
-void IdleWorkerSupply::send_to_storage(Game & game, Warehouse * wh)
+void IdleWorkerSupply::send_to_storage(Game & game, Warehouse & wh)
 {
 	assert(!has_storage());
 
-	Transfer * t = new Transfer(game, m_worker);
-	t->set_destination(*wh);
+	Transfer & t = *new Transfer(game, m_worker);
+	t.set_destination(wh);
 	m_worker.start_task_transfer(game, t);
 }
 

@@ -30,14 +30,14 @@
 #define LUNA_H
 
 
-#define LUNA_CLASS_HEAD(klass) \
-	static const char className[]; \
-	static const MethodType<klass> Methods[]; \
-	static const PropertyType<klass> Properties[]; \
-	\
-   virtual void __finish_unpersist(lua_State * L) { \
-      lua_remove(L, -2); /* table luna_obj -> luna_obj */ \
-	}
+#define LUNA_CLASS_HEAD(klass)                                                \
+   static const char className[];                                             \
+   static const MethodType<klass> Methods[];                                  \
+   static const PropertyType<klass> Properties[];                             \
+                                                                              \
+   virtual void __finish_unpersist(lua_State * const L) {                     \
+      lua_remove(L, -2); /* table luna_obj -> luna_obj */                     \
+   }                                                                          \
 
 /*
  * Macros for filling the description tables
@@ -99,7 +99,7 @@ void register_class
 	to_pop ++;
 
 	// push the wl sub namespace table onto the stack, if desired
-	if (strlen(sub_namespace) != 0) {
+	if (*sub_namespace) {
 		lua_getfield(L, -1, sub_namespace);
 		to_pop ++;
 	}
@@ -122,7 +122,7 @@ void register_class
  * after register_class, so that the Metatable index is still valid
  */
 template <class T, class PT>
-void add_parent(lua_State * L)
+void add_parent(lua_State * const L)
 {
 	m_register_properties_in_metatable<T, PT>(L);
 	m_register_methods_in_metatable<T, PT>(L);
@@ -132,6 +132,8 @@ void add_parent(lua_State * L)
  * Get the instance of this C object to lua. This is usually used
  * as last call in a function that should create a new Lua object
  */
+//  FIXME Document whether this function takes ownership of the object pointed
+//  FIXME to by T and assumes that is can be deallocated with operator delete.
 template <class T>
 int to_lua(lua_State * const L, T * const obj) {
 	// Create a new table with some slots preallocated
@@ -143,9 +145,9 @@ int to_lua(lua_State * const L, T * const obj) {
 	// push index of position of user data in our array
 	lua_pushnumber(L, 0);  // table 0
 
-	// Make a new userdata. A lightuserdata won't do since we want to assign
-	// a metatable to it
-	T * * const a = static_cast<T * * >(lua_newuserdata(L, sizeof(T *)));
+	//  Make a new userdata. A lightuserdata would not do since we want to
+	//  assign a metatable to it.
+	T * * const a = static_cast<T * *>(lua_newuserdata(L, sizeof(T *)));
 	*a = obj;
 
 	int const userdata = lua_gettop(L); // table 0 ud

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ Transfer::Transfer(Game & game, Request & req, Worker & w) :
 	m_item(0),
 	m_worker(&w)
 {
-	m_worker->start_task_transfer(game, this);
+	m_worker->start_task_transfer(game, *this);
 }
 
 /**
@@ -147,7 +147,7 @@ PlayerImmovable * Transfer::get_next_step
 	}
 
 	PlayerImmovable * destination =
-		 m_destination.get(location->get_economy()->owner().egbase());
+		m_destination.get(location->get_economy()->owner().egbase());
 	if (!destination || destination->get_economy() != location->get_economy()) {
 		tlog("destination disappeared or economy mismatch -> fail\n");
 		success = false;

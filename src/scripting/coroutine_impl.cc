@@ -17,8 +17,7 @@
  *
  */
 
-#include <csetjmp>
-#include <boost/lexical_cast.hpp>
+#include "coroutine_impl.h"
 
 #include "logic/player.h"
 
@@ -27,11 +26,9 @@
 #include "lua_map.h"
 #include "persistence.h"
 
-#include "coroutine_impl.h"
-
 #include "log.h"
 
-LuaCoroutine_Impl::LuaCoroutine_Impl(lua_State * ms)
+LuaCoroutine_Impl::LuaCoroutine_Impl(lua_State * const ms)
 	: m_L(ms), m_idx(LUA_REFNIL), m_nargs(0)
 {
 	m_reference();
@@ -42,11 +39,11 @@ LuaCoroutine_Impl::~LuaCoroutine_Impl()
 	m_unreference();
 }
 
-int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
+int LuaCoroutine_Impl::resume(uint32_t * const sleeptime)
 {
-	int rv = lua_resume(m_L, m_nargs);
+	int const rv = lua_resume(m_L, m_nargs);
 	m_nargs = 0;
-	int n = lua_gettop(m_L);
+	int const n = lua_gettop(m_L);
 
 	uint32_t sleep_for = 0;
 	if (n == 1) {
@@ -60,7 +57,7 @@ int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 	if (rv != 0 && rv != YIELDED) {
 		// lua_error() never returns. prints error and exit program imediately
 		//return  lua_error(m_L);
-		const char * err = lua_tostring(m_L, -1);
+		char const * const err = lua_tostring(m_L, -1);
 		throw LuaError(err);
 	}
 
@@ -71,9 +68,9 @@ int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
  * Push an argument that will be passed to the coroutine the next time it is
  * resumed
  */
-void LuaCoroutine_Impl::push_arg(const Widelands::Player * plr) {
-	to_lua<LuaGame::L_Player>(m_L, new LuaGame::L_Player(plr->player_number()));
-	m_nargs++;
+void LuaCoroutine_Impl::push_arg(Widelands::Player const & plr) {
+	to_lua<LuaGame::L_Player>(m_L, new LuaGame::L_Player(plr.player_number()));
+	++m_nargs;
 }
 void LuaCoroutine_Impl::push_arg(const Widelands::Coords & coords) {
 	to_lua<LuaMap::L_Field>(m_L, new LuaMap::L_Field(coords));
@@ -82,7 +79,8 @@ void LuaCoroutine_Impl::push_arg(const Widelands::Coords & coords) {
 
 #define COROUTINE_DATA_PACKET_VERSION 1
 uint32_t LuaCoroutine_Impl::write
-	(lua_State * parent, Widelands::FileWrite & fw,
+	(lua_State                       * const parent,
+	 Widelands::FileWrite            & fw,
 	 Widelands::Map_Map_Object_Saver & mos)
 {
 	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
@@ -99,8 +97,10 @@ uint32_t LuaCoroutine_Impl::write
 }
 
 void LuaCoroutine_Impl::read
-	(lua_State * parent, Widelands::FileRead & fr,
-	 Widelands::Map_Map_Object_Loader & mol, uint32_t size)
+	(lua_State                        * const parent,
+	 Widelands::FileRead              &       fr,
+	 Widelands::Map_Map_Object_Loader &       mol,
+	 uint32_t                           const size)
 {
 	uint8_t version = fr.Unsigned8();
 
@@ -141,5 +141,3 @@ void LuaCoroutine_Impl::m_reference() {
 void LuaCoroutine_Impl::m_unreference() {
 	luaL_unref(m_L, LUA_REGISTRYINDEX, m_idx);
 }
-
-

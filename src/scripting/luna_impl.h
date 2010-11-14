@@ -31,7 +31,7 @@
 #include "c_utils.h"
 
 // This is only needed in pluto.cc
-int luna_restore_object(lua_State * L);
+int luna_restore_object(lua_State *);
 
 /**
  * Descriptions for the Properties/Methods that should be available to Lua
@@ -50,11 +50,11 @@ struct MethodType {
 
 
 // Forward declaration of public function, because we need it below
-template <class T> int to_lua(lua_State * L, T * obj);
-template <class T> T * * get_user_class(lua_State * const L, int narg);
+template <class T> int to_lua(lua_State *, T *);
+template <class T> T * * get_user_class(lua_State * L, int narg);
 
 template <class T>
-int m_dispatch_property_in_metatable(lua_State * const L, bool setter) {
+int m_dispatch_property_in_metatable(lua_State * const L, bool const setter) {
 	// stack for getter: table name
 	// stack for setter: table name value
 	int ret = 0;
@@ -287,15 +287,13 @@ void m_register_properties_in_metatable
 		lua_pushlightuserdata
 			(L,
 			 const_cast<void *>
-			 	(reinterpret_cast<const void *>
-					(&(PT::Properties[i].getter))));
+			 	(reinterpret_cast<void const *>(&(PT::Properties[i].getter))));
 		lua_settable(L, -3);
 		lua_pushstring(L, "setter");
 		lua_pushlightuserdata
 			(L,
 			 const_cast<void *>
-			 	(reinterpret_cast<const void *>
-					(&(PT::Properties[i].setter))));
+			 	(reinterpret_cast<void const *>(&(PT::Properties[i].setter))));
 		lua_settable(L, -3);
 
 		lua_pushstring(L, "dispatcher");

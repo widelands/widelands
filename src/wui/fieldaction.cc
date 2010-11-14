@@ -468,11 +468,10 @@ void FieldActionWindow::add_buttons_auto()
 
 	if (militarybox) {
 		if (militarybox->allowed_change())
-	{
 			add_tab
 				("military", pic_tab_military,
 				 militarybox, _("Military settings"));
-		} else
+		else
 			delete militarybox;
 	}
 }

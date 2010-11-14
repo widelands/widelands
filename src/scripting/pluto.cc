@@ -23,13 +23,17 @@
 #include "logic/widelands_filewrite.h"
 #include "logic/widelands_fileread.h"
 
+#include "pdep/lgc.h"
+#include "pdep/lobject.h"
+#include "pdep/lopcodes.h"
+#include "pdep/lstate.h"
 #include "pdep/pdep.h"
 
 #include "pluto.h"
 
 
 // Forward declarated from lua_impl.h. So we do not need to include it
-int luna_restore_object(lua_State * L);
+int luna_restore_object(lua_State *);
 
 #define PLUTO_TPERMANENT 101
 
@@ -76,7 +80,7 @@ static void persist(PersistInfo * pi);
 
 /* A simple reimplementation of the unfortunately static function luaA_index.
  * Does not support the global table, registry, or upvalues. */
-static StkId getobject(lua_State * L, int stackpos)
+static StkId getobject(lua_State * const L, int const stackpos)
 {
 	if (stackpos > 0) {
 		lua_assert(L->base + stackpos - 1 < L->top);
@@ -311,36 +315,39 @@ static UpVal * toupval(lua_State * L, int stackpos)
 	return gco2uv(getobject(L, stackpos)->value.gc);
 }
 
-static void pushproto(lua_State * L, Proto * proto)
+static void pushproto(lua_State * const L, Proto * const proto)
 {
 	TValue o;
-	setptvalue(L, &o, proto);
+	o.value.gc = obj2gco(proto);
+	o.tt       = LUA_TPROTO;
+	checkliveness(G(L), &o);
 	pdep_pushobject(L, &o);
 }
 
-#define setuvvalue(L, obj, x) { \
-	TValue * i_o = (obj); \
-   i_o->value.gc = obj2gco(x); i_o->tt = LUA_TUPVAL; \
-   checkliveness(G(L), i_o); }
-
-static void pushupval(lua_State * L, UpVal * upval)
+static void pushupval(lua_State * const L, UpVal * const upval)
 {
 	TValue o;
-	setuvvalue(L, &o, upval);
+	o.value.gc = obj2gco(upval);
+	o.tt       = LUA_TUPVAL;
+	checkliveness(G(L), i_o);
 	pdep_pushobject(L, &o);
 }
 
-static void pushclosure(lua_State * L, Closure * closure)
+static void pushclosure(lua_State * const L, Closure * const closure)
 {
 	TValue o;
-	setclvalue(L, &o, closure);
+	o.value.gc = obj2gco(closure);
+	o.tt       = LUA_TFUNCTION;
+	checkliveness(G(L), &o);
 	pdep_pushobject(L, &o);
 }
 
-static void pushstring(lua_State * L, TString * s)
+static void pushstring(lua_State * const L, TString * const s)
 {
 	TValue o;
-	setsvalue(L, &o, s);
+	o.value.gc = obj2gco(s);
+	o.tt       = LUA_TSTRING;
+	checkliveness(G(L), &o);
 	pdep_pushobject(L, &o);
 }
 
@@ -433,7 +440,7 @@ static Proto * makefakeproto(lua_State * L, lu_byte nups)
 	return p;
 }
 
-static void unboxupval(lua_State * L)
+static void unboxupval(lua_State * const L)
 {
 					/* ... func */
 	LClosure * lcl;
@@ -952,7 +959,7 @@ void pluto_persist(lua_State * L, Widelands::FileWrite & fw)
  * if we make the values weak they'll be collected (since nothing else
  * references them). Our solution, during unpersisting, is to represent
  * upvalues as dummy functions, each with one upvalue. */
-static void boxupval_start(lua_State * L)
+static void boxupval_start(lua_State * const L)
 {
 	LClosure * lcl;
 	lcl = reinterpret_cast<LClosure *>(pdep_newLclosure(L, 1, hvalue(&L->l_gt)));
@@ -967,7 +974,7 @@ static void boxupval_start(lua_State * L)
 	lua_pop(L, 1);
 }
 
-static void boxupval_finish(lua_State * L)
+static void boxupval_finish(lua_State * const L)
 {
 					/* ... func obj */
 	LClosure * lcl = reinterpret_cast<LClosure *>(clvalue(getobject(L, -2)));
@@ -1151,12 +1158,11 @@ static void gcunlink(lua_State * L, GCObject * gco)
 	prevslot->gch.next = prevslot->gch.next->gch.next;
 }
 
-static void unpersistthread(int ref, UnpersistInfo * upi)
+static void unpersistthread(int const ref, UnpersistInfo * const upi)
 {
 					/* perms reftbl ... */
-	lua_State * L2;
 	size_t stacklimit = 0;
-	L2 = lua_newthread(upi->L);
+	lua_State * const L2 = lua_newthread(upi->L);
 	lua_checkstack(upi->L, 3);
 					/* L1: perms reftbl ... thr */
 					/* L2: (empty) */
@@ -1170,7 +1176,7 @@ static void unpersistthread(int ref, UnpersistInfo * upi)
 		 * the imaginary top-level C function) is written to the very,
 		 * very bottom of the stack */
 		L2->top--;
-		for (uint32_t i = 0; i < stacksize; i++) {
+		for (uint32_t i = 0; i < stacksize; ++i) {
 			unpersist(upi);
 					/* L1: perms reftbl ... thr obj* */
 		}
@@ -1259,12 +1265,16 @@ static void unpersistthread(int ref, UnpersistInfo * upi)
 
 	/* The stack must be valid at least to the highest value among the CallInfos
 		'top' and the values up to there must be filled with 'nil' */
-	{
-		StkId o;
-		pdep_checkstack(L2, static_cast<int>(stacklimit));
-		for (o = L2->top; o <= L2->top + stacklimit; o++)
-			setnilvalue(o);
-	}
+	if
+		(reinterpret_cast<char *>(L2->stack_last) -
+		 reinterpret_cast<char *>(L2->top)
+		 <=
+		 static_cast<int>(stacklimit) * static_cast<int>(sizeof(TValue)))
+		pdep_growstack(L2, static_cast<int>(stacklimit));
+	else
+		pdep_reallocstack(L2, L2->stacksize - EXTRA_STACK - 1);
+	for (StkId o = L2->top; o <= L2->top + stacklimit; ++o)
+		o->tt = LUA_TNIL;
 }
 
 static void unpersistuserdata(int ref, UnpersistInfo * upi)
