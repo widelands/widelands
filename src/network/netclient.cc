@@ -362,6 +362,11 @@ void NetClient::setPlayerCloseable(uint8_t, bool)
 	//  client is not allowed to do this
 }
 
+void NetClient::setPlayerShared(uint8_t, uint8_t)
+{
+	//  client is not allowed to do this
+}
+
 void NetClient::setPlayerInit(uint8_t, uint8_t)
 {
 	//  client is not allowed to do this
@@ -458,6 +463,7 @@ void NetClient::recvOnePlayer
 	player.initialization_index = packet.Unsigned8();
 	player.ai = packet.String();
 	player.team = packet.Unsigned8();
+	player.shared_in = packet.Unsigned8();
 }
 
 void NetClient::recvOneUser

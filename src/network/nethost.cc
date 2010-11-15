@@ -127,33 +127,57 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				break;
 			} // else fall through
 		case PlayerSettings::stateComputer:
-			Computer_Player::ImplementationVector const & impls =
-				Computer_Player::getImplementations();
-			Computer_Player::ImplementationVector::const_iterator it =
-				impls.begin();
-			if (h->settings().players.at(number).ai.empty()) {
-				setPlayerAI(number, (*it)->name);
-				newstate = PlayerSettings::stateComputer;
+			{
+				Computer_Player::ImplementationVector const & impls =
+					Computer_Player::getImplementations();
+				Computer_Player::ImplementationVector::const_iterator it =
+					impls.begin();
+				if (h->settings().players.at(number).ai.empty()) {
+					setPlayerAI(number, (*it)->name);
+					newstate = PlayerSettings::stateComputer;
+					break;
+				}
+				do {
+					++it;
+					if ((*(it - 1))->name == h->settings().players.at(number).ai)
+						break;
+				} while (it != impls.end());
+				if (it == impls.end()) {
+					setPlayerAI(number, std::string());
+					setPlayerName(number, std::string());
+					// Do not share a player in savegames or scenarios
+					if (h->settings().scenario || h->settings().savegame)
+						newstate = PlayerSettings::stateOpen;
+					else {
+						uint8_t shared = 0;
+						for (; shared < settings().players.size(); ++shared) {
+							if
+								(settings().players.at(shared).state != PlayerSettings::stateClosed
+								 &&
+								 settings().players.at(shared).state != PlayerSettings::stateShared)
+								break;
+						}
+						if (shared < settings().players.size()) {
+							newstate = PlayerSettings::stateShared;
+							setPlayerShared(number, shared + 1);
+						} else
+							newstate = PlayerSettings::stateClosed;
+					}
+				} else {
+					setPlayerAI(number, (*it)->name);
+					newstate = PlayerSettings::stateComputer;
+				}
 				break;
 			}
-			do {
-				++it;
-				if ((*(it - 1))->name == h->settings().players.at(number).ai)
-					break;
-			} while (it != impls.end());
-			if (it == impls.end()) {
-				setPlayerAI(number, std::string());
-				setPlayerName(number, std::string());
+		case PlayerSettings::stateShared:
+			{
 				// Do not close a player in savegames or scenarios
 				if (h->settings().scenario || h->settings().savegame)
 					newstate = PlayerSettings::stateOpen;
 				else
 					newstate = PlayerSettings::stateClosed;
-			} else {
-				setPlayerAI(number, (*it)->name);
-				newstate = PlayerSettings::stateComputer;
+				break;
 			}
-			break;
 		}
 
 		h->setPlayerState(number, newstate, true);
@@ -184,6 +208,12 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerCloseable(number, closeable);
+	}
+
+	virtual void setPlayerShared(uint8_t number, uint8_t shared) {
+		if (number >= h->settings().players.size())
+			return;
+		h->setPlayerShared(number, shared);
 	}
 
 	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
@@ -1291,6 +1321,30 @@ void NetHost::setPlayerCloseable(uint8_t const number, bool closeable)
 }
 
 
+void NetHost::setPlayerShared(uint8_t number, uint8_t shared) {
+	if (number >= d->settings.players.size())
+		return;
+
+	PlayerSettings & player = d->settings.players.at(number);
+
+	if (player.shared_in == shared)
+		return;
+
+	PlayerSettings & sharedplr = d->settings.players.at(shared - 1);
+	assert(sharedplr.state != PlayerSettings::stateClosed || sharedplr.state != PlayerSettings::stateShared);
+
+	player.shared_in = shared;
+	player.tribe     = sharedplr.tribe;
+
+	// Broadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
+	s.Unsigned8(number);
+	writeSettingPlayer(s, number);
+	broadcast(s);
+}
+
+
 void NetHost::setPlayer(uint8_t const number, PlayerSettings const ps)
 {
 	if (number >= d->settings.players.size())
@@ -1453,6 +1507,7 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.Unsigned8(player.initialization_index);
 	packet.String(player.ai);
 	packet.Unsigned8(player.team);
+	packet.Unsigned8(player.shared_in);
 }
 
 void NetHost::writeSettingAllPlayers(SendPacket & packet)

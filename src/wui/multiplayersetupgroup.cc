@@ -208,23 +208,55 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		s->nextPlayerState(m_id);
 	}
 
-	/// Toggle through the tribes
+	/// Toggle through the tribes + handle shared in players
 	void toggle_tribe() {
 		GameSettings const & settings = s->settings();
 
 		if (m_id >= settings.players.size())
 			return;
 
-		std::vector<PlayerSettings> pl = settings.players;
-		std::string const & currenttribe = pl.at(m_id).tribe;
-		std::string nexttribe = settings.tribes.at(0).name;
+		if (settings.players.at(m_id).state != PlayerSettings::stateShared) {
+			std::string const & currenttribe = settings.players.at(m_id).tribe;
+			std::string nexttribe = settings.tribes.at(0).name;
 
-		for (uint32_t i = 0; i < settings.tribes.size() - 1; ++i)
-			if (settings.tribes[i].name == currenttribe) {
-				nexttribe = settings.tribes.at(i + 1).name;
-				break;
+			for (uint32_t i = 0; i < settings.tribes.size() - 1; ++i)
+				if (settings.tribes[i].name == currenttribe) {
+					nexttribe = settings.tribes.at(i + 1).name;
+					break;
+				}
+			s->setPlayerTribe(m_id, nexttribe);
+		} else {
+			// This button is temporarily used to select the player that uses this starting position
+			uint8_t sharedplr = settings.players.at(m_id).shared_in;
+			for (; sharedplr < settings.players.size(); ++sharedplr) {
+				if
+					(settings.players.at(sharedplr).state != PlayerSettings::stateClosed
+					 &&
+					 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
+					break;
 			}
-		s->setPlayerTribe(m_id, nexttribe);
+			if (sharedplr < settings.players.size()) {
+				// We have already found the next player
+				s->setPlayerShared(m_id, sharedplr + 1);
+				return;
+			}
+			sharedplr = 0;
+			for (; sharedplr < settings.players.at(m_id).shared_in; ++sharedplr) {
+				if
+					(settings.players.at(sharedplr).state != PlayerSettings::stateClosed
+					 &&
+					 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
+					break;
+			}
+			if (sharedplr < settings.players.at(m_id).shared_in) {
+				// We have found the next player
+				s->setPlayerShared(m_id, sharedplr + 1);
+				return;
+			} else {
+				// No fitting player found
+				return toggle_type();
+			}
+		}
 	}
 
 	/// Toggle through the initializations
@@ -292,85 +324,110 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribe->set_enabled(false);
 			init ->set_visible(false);
 			init ->set_enabled(false);
+			return;
+		} else if (player.state == PlayerSettings::stateOpen) {
+			type ->set_tooltip(_("Open"));
+			type ->set_pic(g_gr->get_picture(PicMod_UI, "pics/continue.png"));
+			team ->set_visible(false);
+			team ->set_enabled(false);
+			tribe->set_visible(false);
+			tribe->set_enabled(false);
+			init ->set_visible(false);
+			init ->set_enabled(false);
+			return;
+		} else if (player.state == PlayerSettings::stateShared) {
+			// ensure that the shared_in player is able to use this starting position
+			if (player.shared_in > settings.players.size())
+				toggle_tribe();
+			if
+				(settings.players.at(player.shared_in - 1).state == PlayerSettings::stateClosed
+				 ||
+				 settings.players.at(player.shared_in - 1).state == PlayerSettings::stateShared)
+				toggle_tribe();
+
+			type ->set_tooltip(_("Shared in"));
+			type ->set_pic(g_gr->get_picture(PicMod_UI, "pics/shared_in.png"));
+
+			char pic[42], hover[128];
+			snprintf(pic, sizeof(pic), "pics/fsel_editor_set_player_0%i_pos.png", player.shared_in);
+			snprintf(hover, sizeof(hover), _("Player %i"), player.shared_in);
+
+			tribe->set_pic(g_gr->get_picture(PicMod_UI, pic));
+			tribe->set_tooltip(hover);
+
+			team ->set_visible(false);
+			team ->set_enabled(false);
+			tribe->set_enabled(initaccess);
 		} else {
-			if (player.state == PlayerSettings::stateOpen) {
-				type ->set_tooltip(_("Open"));
-				type ->set_pic(g_gr->get_picture(PicMod_UI, "pics/continue.png"));
-				team ->set_visible(false);
-				team ->set_enabled(false);
-				tribe->set_visible(false);
-				tribe->set_enabled(false);
-				init ->set_visible(false);
-				init ->set_enabled(false);
-			} else {
-				std::string title;
-				std::string pic = "pics/";
-				if (player.state == PlayerSettings::stateComputer) {
-					if (player.ai.empty()) {
-						title = _("Computer");
-						pic += "novalue.png";
-					} else {
-						title = _("AI: ");
-						title += _(player.ai);
-						pic += "ai_" + player.ai + ".png";
-					}
-				} else { // PlayerSettings::stateHuman
-					title = _("Human");
-					pic += "genstats_nrworkers.png";
-				}
-				type->set_tooltip(title.c_str());
-				type->set_pic(g_gr->get_picture(PicMod_UI, pic));
-				std::string tribepath("tribes/" + player.tribe);
-				if (!m_tribenames[player.tribe].size()) {
-					// get tribes name and picture
-					Profile prof
-						((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
-					Section & global = prof.get_safe_section("tribe");
-					m_tribenames[player.tribe] = global.get_safe_string("name");
-					m_tribepics[player.tribe] =
-						g_gr->get_picture
-							(PicMod_UI,
-							 (tribepath + "/") + global.get_safe_string("icon"));
-				}
-				tribe->set_tooltip(m_tribenames[player.tribe].c_str());
-				tribe->set_pic(m_tribepics[player.tribe]);
-				if (settings.scenario)
-					init->set_title(_("Scenario"));
-				else if (settings.savegame)
-					init->set_title(_("Savegame"));
-				else {
-					i18n::Textdomain td(tribepath); // for translated initialisation
-					container_iterate_const
-						 (std::vector<TribeBasicInfo>, settings.tribes, i)
-					{
-						if (i.current->name == player.tribe) {
-							init->set_title
-								(_
-									(i.current->initializations.at
-										(player.initialization_index)
-									 .second));
-							break;
-						}
-					}
-				}
-
-				if (player.team) {
-					char buf[64];
-					snprintf(buf, sizeof(buf), "%i", player.team);
-					team->set_title(buf);
+			std::string title;
+			std::string pic = "pics/";
+			if (player.state == PlayerSettings::stateComputer) {
+				if (player.ai.empty()) {
+					title = _("Computer");
+					pic += "novalue.png";
 				} else {
-					team->set_title("--");
+					title = _("AI: ");
+					title += _(player.ai);
+					pic += "ai_" + player.ai + ".png";
 				}
+			} else { // PlayerSettings::stateHuman
+				title = _("Human");
+				pic += "genstats_nrworkers.png";
+			}
+			type->set_tooltip(title.c_str());
+			type->set_pic(g_gr->get_picture(PicMod_UI, pic));
+			std::string tribepath("tribes/" + player.tribe);
+			if (!m_tribenames[player.tribe].size()) {
+				// get tribes name and picture
+				Profile prof
+					((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
+				Section & global = prof.get_safe_section("tribe");
+				m_tribenames[player.tribe] = global.get_safe_string("name");
+				m_tribepics[player.tribe] =
+					g_gr->get_picture
+						(PicMod_UI,
+						 (tribepath + "/") + global.get_safe_string("icon"));
+			}
+			tribe->set_tooltip(m_tribenames[player.tribe].c_str());
+			tribe->set_pic(m_tribepics[player.tribe]);
 
-				team ->set_visible(true);
-				tribe->set_visible(true);
-				init ->set_visible(true);
-				team ->set_enabled(teamaccess);
-				tribe->set_enabled(tribeaccess);
-				init ->set_enabled(initaccess);
+			if (player.team) {
+				char buf[64];
+				snprintf(buf, sizeof(buf), "%i", player.team);
+				team->set_title(buf);
+			} else {
+				team->set_title("--");
+			}
+			team ->set_visible(true);
+			team ->set_enabled(teamaccess);
+			tribe->set_enabled(tribeaccess);
+		}
+		init ->set_enabled(initaccess);
+		tribe->set_visible(true);
+		init ->set_visible(true);
+
+		if (settings.scenario)
+			init->set_title(_("Scenario"));
+		else if (settings.savegame)
+			init->set_title(_("Savegame"));
+		else {
+			std::string tribepath("tribes/" + player.tribe);
+			i18n::Textdomain td(tribepath); // for translated initialisation
+			container_iterate_const
+				 (std::vector<TribeBasicInfo>, settings.tribes, i)
+			{
+				if (i.current->name == player.tribe) {
+					init->set_title
+						(_
+							(i.current->initializations.at
+								(player.initialization_index)
+							 .second));
+					break;
+				}
 			}
 		}
 	}
+
 
 	UI::Icon               * player;
 	UI::Button             * type;

@@ -74,6 +74,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayerNumber   (uint8_t number);
 	void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team);
 	void setPlayerCloseable(uint8_t number, bool closeable);
+	void setPlayerShared   (uint8_t number, uint8_t shared);
 	void switchToPlayer    (uint32_t user, uint8_t number);
 	void setWinCondition   (std::string);
 

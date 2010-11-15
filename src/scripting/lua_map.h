@@ -334,8 +334,7 @@ struct _WorkerEmployer : public L_HasWorkers {
 protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &) = 0;
 	virtual int _new_worker
-		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
-		 const Widelands::Worker_Descr *) = 0;
+		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *) = 0;
 };
 
 struct _SoldierEmployer : public L_HasSoldiers {

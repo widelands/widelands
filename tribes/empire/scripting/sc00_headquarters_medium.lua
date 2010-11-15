@@ -1,5 +1,5 @@
 -- =======================================================================
---                Starting conditions for Headquarters Medium               
+--                Starting conditions for Headquarters Medium
 -- =======================================================================
 
 use("aux", "infrastructure")
@@ -8,13 +8,17 @@ set_textdomain("tribe_empire")
 
 return {
    name = _ "Headquarters medium",
-   func = function(p) 
-
-   p:allow_workers("all")
+   func =  function(p, shared_in_start)
 
    local sf = wl.Game().map.player_slots[p.number].starting_field
 
-   prefilled_buildings(p, { "headquarters", sf.x, sf.y, 
+   if shared_in_start then
+      sf = shared_in_start
+   else
+      p:allow_workers("all")
+   end
+
+   prefilled_buildings(p, { "headquarters", sf.x, sf.y,
       wares = {
          helm = 4,
          wood_lance = 5,
