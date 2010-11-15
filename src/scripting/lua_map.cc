@@ -509,6 +509,7 @@ L_Has##btype##s::btype##sMap L_Has##btype##s:: \
 		)); \
 	} else { \
 		/* array of (name, count) */ \
+		luaL_checktype(L, 2, LUA_TTABLE); \
 		lua_pushnil(L); \
 		while (lua_next(L, 2) != 0) { \
 			rv.insert(btype##Amount( \
