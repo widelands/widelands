@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-10 22:37+0100\n"
-"PO-Revision-Date: 2010-11-12 19:48+0000\n"
+"PO-Revision-Date: 2010-11-14 11:12+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-13 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-11-15 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/wlapplication.cc:369
@@ -863,20 +863,20 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:295
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "Feilaktig bruk. Prøv: /announce <melding>"
 
 #: ../../src/network/nethost.cc:307
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "Feilaktig bruk. Prøv: /warn <navn> <grunn>"
 
 #: ../../src/network/nethost.cc:318
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "Feilaktig bruk. Prøv: /kick <navn> <grunn>"
 
 #: ../../src/network/nethost.cc:326
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Er du sikker på at du vil kaste ut %s?<br>"
 
 #: ../../src/network/nethost.cc:329
 #, c-format
@@ -886,19 +886,19 @@ msgstr "Grunnen som ble oppgitt var: %s<br>"
 #: ../../src/network/nethost.cc:332
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "Hvis ja, skriv: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:341
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "Bekreftelse av utkasting avbrutt: navn ble ikke oppgitt!"
 
 #: ../../src/network/nethost.cc:343
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Feilaktig bruk. Prøv: /ack_kick <navn>"
 
 #: ../../src/network/nethost.cc:350
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "Bekreftelse av utkasting avbrutt: feil navn oppgitt!"
 
 #: ../../src/network/nethost.cc:360
 msgid "Pause was already forced - game should be paused."
@@ -927,11 +927,11 @@ msgstr "Tjener krasjet og foretok en nødlagring."
 
 #: ../../src/network/nethost.cc:886
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "Du kan ikke sparke deg selv!"
 
 #: ../../src/network/nethost.cc:907
 msgid "There is no connected user with that nickname!"
-msgstr ""
+msgstr "Det finnes ingen tilkoblede brukere med det navnet!"
 
 #: ../../src/network/nethost.cc:926
 #, c-format
