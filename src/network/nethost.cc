@@ -189,8 +189,11 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			return;
 
 		if
-			(number == settings().playernum ||
-			 settings().players.at(number).state == PlayerSettings::stateComputer)
+			(number == settings().playernum
+			 ||
+			 settings().players.at(number).state == PlayerSettings::stateComputer
+			 ||
+			 settings().players.at(number).state == PlayerSettings::stateShared)
 			h->setPlayerTribe(number, tribe);
 	}
 	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
@@ -1395,8 +1398,10 @@ void NetHost::switchToPlayer(uint32_t user, uint8_t number)
 		std::string temp(" ");
 		temp += name;
 		temp += " ";
-		setPlayerName(old, op.name.erase(op.name.find(temp), temp.size()));
-		if (op.name.empty())
+		std::string temp2(op.name);
+		temp2 = temp2.erase(op.name.find(temp), temp.size());
+		setPlayerName(old, temp2);
+		if (temp2.empty())
 			setPlayerState(old, PlayerSettings::stateOpen);
 	}
 

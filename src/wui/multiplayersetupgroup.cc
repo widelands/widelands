@@ -358,6 +358,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team ->set_visible(false);
 			team ->set_enabled(false);
 			tribe->set_enabled(initaccess);
+
+			if (shared_in_tribe != settings.players.at(player.shared_in - 1).tribe) {
+				s->setPlayerTribe(m_id, settings.players.at(player.shared_in - 1).tribe);
+				shared_in_tribe = settings.players.at(m_id).tribe;
+			}
 		} else {
 			std::string title;
 			std::string pic = "pics/";
@@ -438,6 +443,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	uint8_t                  const m_id;
 	std::map<std::string, PictureID> & m_tribepics;
 	std::map<std::string, std::string> & m_tribenames;
+	std::string              shared_in_tribe;
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup
