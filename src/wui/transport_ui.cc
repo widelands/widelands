@@ -130,16 +130,16 @@ private:
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 			add(buttons, UI::Box::AlignLeft);
 
-			#define ADD_WARE_BUTTON(callback, text, tooltip)                  \
-				buttons->add                                                   \
-					(new UI::Callback_Button                                    \
-					 (buttons, #callback,                                       \
-					  0, 0, 34, 34,                                             \
-					  g_gr->get_picture(PicMod_UI, "pics/but4.png"),            \
-					  boost::bind                                               \
-						  (&Economy_Options_Ware_Panel::callback, this),         \
-					  text, tooltip, m_can_act),                                \
-					 UI::Box::AlignCenter);                                     \
+#define ADD_WARE_BUTTON(callback, text, tooltip)                  \
+	buttons->add                                                   \
+		(new UI::Callback_Button                                    \
+		 (buttons, #callback,                                       \
+		  0, 0, 34, 34,                                             \
+		  g_gr->get_picture(PicMod_UI, "pics/but4.png"),            \
+		  boost::bind                                               \
+			  (&Economy_Options_Ware_Panel::callback, this),         \
+		  text, tooltip, m_can_act),                                \
+		 UI::Box::AlignCenter);                                     \
 
 			ADD_WARE_BUTTON(increase_target, "+", _("Increase target"))
 			ADD_WARE_BUTTON(decrease_target, "-", _("Decrease target"))
@@ -224,15 +224,15 @@ private:
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 			add(buttons, UI::Box::AlignLeft);
 
-			#define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
-				buttons->add                                                     \
-					(new UI::Callback_Button                                      \
-					 (buttons, #callback,                                         \
-					  0, 0, 34, 34,                                               \
-					  g_gr->get_picture(PicMod_UI, "pics/but4.png"),              \
-					  boost::bind(&Economy_Options_Worker_Panel::callback, this), \
-					  text, tooltip, m_can_act),                                  \
-					 UI::Box::AlignCenter);                                       \
+#define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
+	buttons->add                                                     \
+		(new UI::Callback_Button                                      \
+		 (buttons, #callback,                                         \
+		  0, 0, 34, 34,                                               \
+		  g_gr->get_picture(PicMod_UI, "pics/but4.png"),              \
+		  boost::bind(&Economy_Options_Worker_Panel::callback, this), \
+		  text, tooltip, m_can_act),                                  \
+		 UI::Box::AlignCenter);                                       \
 
 			ADD_WORKER_BUTTON(increase_target, "+", _("Increase target"))
 			ADD_WORKER_BUTTON(decrease_target, "-", _("Decrease target"))

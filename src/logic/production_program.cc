@@ -612,7 +612,8 @@ void ProductionProgram::ActWorker::execute
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 }
 
-bool ProductionProgram::ActWorker::get_building_work(Game& game, ProductionSite& psite, Worker& worker) const
+bool ProductionProgram::ActWorker::get_building_work
+	(Game & game, ProductionSite & psite, Worker & worker) const
 {
 	ProductionSite::State & state = psite.top_state();
 	if (state.phase == 0) {
@@ -625,7 +626,8 @@ bool ProductionProgram::ActWorker::get_building_work(Game& game, ProductionSite&
 	}
 }
 
-void ProductionProgram::ActWorker::building_work_failed(Game& game, ProductionSite& psite, Worker& ) const
+void ProductionProgram::ActWorker::building_work_failed
+	(Game & game, ProductionSite & psite, Worker &) const
 {
 	psite.program_end(game, Failed);
 }
@@ -918,7 +920,8 @@ void ProductionProgram::ActProduce::execute
 		 "%s", result_string.c_str());
 }
 
-bool ProductionProgram::ActProduce::get_building_work(Game& game, ProductionSite& psite, Worker& worker) const
+bool ProductionProgram::ActProduce::get_building_work
+	(Game & game, ProductionSite & psite, Worker & worker) const
 {
 	// We reach this point once all wares have been carried outside the building
 	psite.program_step(game);
@@ -1008,7 +1011,8 @@ void ProductionProgram::ActRecruit::execute
 		 "%s", result_string.c_str());
 }
 
-bool ProductionProgram::ActRecruit::get_building_work(Game& game, ProductionSite& psite, Worker& worker) const
+bool ProductionProgram::ActRecruit::get_building_work
+	(Game & game, ProductionSite & psite, Worker & worker) const
 {
 	// We reach this point once all recruits have been guided outside the building
 	psite.program_step(game);
@@ -1426,7 +1430,8 @@ ProductionProgram::ActConstruct::ActConstruct
 	}
 }
 
-const Immovable_Descr& ProductionProgram::ActConstruct::get_construction_descr(ProductionSite& psite) const
+const Immovable_Descr & ProductionProgram::ActConstruct::get_construction_descr
+	(ProductionSite & psite) const
 {
 	const Immovable_Descr * descr = psite.tribe().get_immovable_descr(objectname);
 	if (!descr)
@@ -1461,8 +1466,10 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
 	Area<FCoords> area (g.map().get_fcoords(psite.base_flag().get_position()), radius);
-	if (g.map().find_reachable_immovables
-		(area, &immovables, cstep, FindImmovableByDescr(descr))) {
+	if
+		(g.map().find_reachable_immovables
+		 (area, &immovables, cstep, FindImmovableByDescr(descr)))
+	{
 		state.objvar = immovables[0].object;
 
 		psite.m_working_positions[0].worker->update_task_buildingwork(g);
@@ -1474,8 +1481,10 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 	FindNodeAnd fna;
 	fna.add(FindNodeShore());
 	fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone));
-	if (g.map().find_reachable_fields
-		(area, &fields, cstep, fna)) {
+	if
+		(g.map().find_reachable_fields
+			(area, &fields, cstep, fna))
+	{
 		state.coord = fields[0];
 
 		psite.m_working_positions[0].worker->update_task_buildingwork(g);
@@ -1486,7 +1495,8 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 	psite.program_end(g, Failed);
 }
 
-bool ProductionProgram::ActConstruct::get_building_work(Game& game, ProductionSite& psite, Worker& worker) const
+bool ProductionProgram::ActConstruct::get_building_work
+	(Game & game, ProductionSite & psite, Worker & worker) const
 {
 	ProductionSite::State & state = psite.top_state();
 	if (state.phase >= 1) {
@@ -1498,7 +1508,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game, ProductionSi
 	Buildcost remaining;
 	WaresQueue * wq = 0;
 
-	Immovable * construction = dynamic_cast<Immovable*>(state.objvar.get(game));
+	Immovable * construction = dynamic_cast<Immovable *>(state.objvar.get(game));
 	if (construction) {
 		if (!construction->construct_remaining_buildcost(game, &remaining)) {
 			psite.molog("construct: immovable %u not under construction", construction->serial());
@@ -1539,7 +1549,8 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game, ProductionSi
 	return true;
 }
 
-void ProductionProgram::ActConstruct::building_work_failed(Game& game, ProductionSite& psite, Worker& ) const
+void ProductionProgram::ActConstruct::building_work_failed
+	(Game & game, ProductionSite & psite, Worker &) const
 {
 	psite.program_end(game, Failed);
 }

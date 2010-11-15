@@ -180,10 +180,10 @@ public:
 
 	void set_action_data(ImmovableActionData * data);
 	template<typename T>
-	T* get_action_data() {
+	T * get_action_data() {
 		if (!m_action_data)
 			return 0;
-		if (T* data = dynamic_cast<T*>(m_action_data))
+		if (T * data = dynamic_cast<T *>(m_action_data))
 			return data;
 		set_action_data(0);
 		return 0;

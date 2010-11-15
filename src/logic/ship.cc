@@ -27,16 +27,16 @@
 namespace Widelands {
 
 Ship_Descr::Ship_Descr
-	(const char* name, const char* descname,
-	 const std::string& directory, Profile& prof, Section& global_s,
-	 const Widelands::Tribe_Descr& tribe)
-: Descr(name, descname, directory, prof, global_s, &tribe)
+	(const char * given_name, const char * descname,
+	 const std::string & directory, Profile & prof, Section & global_s,
+	 const Widelands::Tribe_Descr & tribe)
+: Descr(given_name, descname, directory, prof, global_s, &tribe)
 {
 	m_sail_anims.parse
 		(*this,
 		 directory,
 		 prof,
-		 (this->name() + "_sail_??").c_str(),
+		 (name() + "_sail_??").c_str(),
 		 prof.get_section("sail"));
 }
 
@@ -45,24 +45,24 @@ uint32_t Ship_Descr::movecaps() const throw ()
 	return MOVECAPS_SWIM;
 }
 
-Bob& Ship_Descr::create_object() const
+Bob & Ship_Descr::create_object() const
 {
 	return *new Ship(*this);
 }
 
 
-Ship::Ship(const Ship_Descr& descr)
+Ship::Ship(const Ship_Descr & descr)
 :
 Bob(descr)
 {
 }
 
-Bob::Type Ship::get_bob_type() const throw()
+Bob::Type Ship::get_bob_type() const throw ()
 {
 	return SHIP;
 }
 
-void Ship::init_auto_task(Game& game)
+void Ship::init_auto_task(Game & game)
 {
 	start_task_shipidle(game);
 }
@@ -74,18 +74,21 @@ struct FindBobShip : FindBob {
 	}
 };
 
-void Ship::wakeup_neighbours(Game& game)
+void Ship::wakeup_neighbours(Game & game)
 {
 	FCoords position = get_position();
 	Area<FCoords> area(position, 1);
-	std::vector<Bob*> ships;
+	std::vector<Bob *> ships;
 	game.map().find_bobs(area, &ships, FindBobShip());
 
-	for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
+	for
+		(std::vector<Bob *>::const_iterator it = ships.begin();
+		 it != ships.end(); ++it)
+	{
 		if (*it == this)
 			continue;
 
-		static_cast<Ship*>(*it)->shipidle_wakeup(game);
+		static_cast<Ship *>(*it)->shipidle_wakeup(game);
 	}
 }
 
@@ -103,19 +106,19 @@ const Bob::Task Ship::taskShipIdle = {
 	true // unique task
 };
 
-void Ship::start_task_shipidle(Game& game)
+void Ship::start_task_shipidle(Game & game)
 {
 	push_task(game, taskShipIdle);
 	top_state().ivar1 = 0;
 }
 
-void Ship::shipidle_wakeup(Game& game)
+void Ship::shipidle_wakeup(Game & game)
 {
 	if (get_state(taskShipIdle))
 		send_signal(game, "wakeup");
 }
 
-void Ship::shipidle_update(Game& game, Bob::State& state)
+void Ship::shipidle_update(Game & game, Bob::State & state)
 {
 	// Handle signals
 	std::string signal = get_signal();
@@ -141,7 +144,7 @@ void Ship::shipidle_update(Game& game, Bob::State& state)
 	// Check if we should move away from ships and shores
 	FCoords position = get_position();
 	Map & map = game.map();
-	unsigned int dirs[LAST_DIRECTION+1];
+	unsigned int dirs[LAST_DIRECTION + 1];
 	unsigned int dirmax = 0;
 
 	for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
@@ -149,10 +152,10 @@ void Ship::shipidle_update(Game& game, Bob::State& state)
 		dirs[dir] = node.field->nodecaps() & MOVECAPS_WALK ? 10 : 0;
 
 		Area<FCoords> area(node, 0);
-		std::vector<Bob*> ships;
+		std::vector<Bob *> ships;
 		game.map().find_bobs(area, &ships, FindBobShip());
 
-		for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
+		for (std::vector<Bob *>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
 			if (*it == this)
 				continue;
 
@@ -163,16 +166,16 @@ void Ship::shipidle_update(Game& game, Bob::State& state)
 	}
 
 	if (dirmax) {
-		unsigned int prob[LAST_DIRECTION+1];
+		unsigned int prob[LAST_DIRECTION + 1];
 		unsigned int totalprob = 0;
 
 		// The probability for moving into a given direction is also
 		// affected by the "close" directions.
 		for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
-			prob[dir] = 10*dirmax - 10*dirs[dir];
+			prob[dir] = 10 * dirmax - 10 * dirs[dir];
 
 			if (dir > 0) {
-				unsigned int delta = std::min(prob[dir], dirs[(dir % 6) + 1] + dirs[1 + ((dir-1) % 6)]);
+				unsigned int delta = std::min(prob[dir], dirs[(dir % 6) + 1] + dirs[1 + ((dir - 1) % 6)]);
 				prob[dir] -= delta;
 			}
 

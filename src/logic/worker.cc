@@ -988,7 +988,7 @@ bool Worker::run_playFX(Game & game, State & state, Action const & action)
  */
 bool Worker::run_construct(Game & game, State & state, Action const & action)
 {
-	Immovable * imm = dynamic_cast<Immovable*>(state.objvar1.get(game));
+	Immovable * imm = dynamic_cast<Immovable *>(state.objvar1.get(game));
 	if (!imm) {
 		molog("run_construct: no objvar1 immovable set");
 		send_signal(game, "fail");
