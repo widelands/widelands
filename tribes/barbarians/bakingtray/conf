@@ -1,4 +1,4 @@
-help=_The peel is a tool of the baker and each baker needs his own. It is produced in the metal works like all other tools (but no more in the enhanced buildings axefactory and war mill).
+help=_The peel is a tool of the baker and each baker needs his own. It is produced in the metal works like all other tools (but it seases to be produced by the building if the metal works is enhanced to an axefactory and war mill).
 
 [idle]
 pics=idle.png
