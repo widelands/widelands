@@ -422,7 +422,7 @@ spidercloth_story_ended_messages = {
    {
       title = _ "Opol seeks out Jundlina",
       body = opol(_
-[[May Satul warm you, Jundlina!. The weaving-mill, goldweaver and spiderfarm
+[[May Satul warm you, Jundlina! The weaving-mill, goldweaver and spiderfarm
 buildings are complete and are starting their work at this very moment. The
 weaving guild is very grateful for your support and we will stand by our word
 and deliver the first tabard very soon.]]
