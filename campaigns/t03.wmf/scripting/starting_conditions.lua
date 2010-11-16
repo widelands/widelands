@@ -14,11 +14,11 @@ p1:allow_buildings{
 
 hq = p1:place_building("headquarters", wl.Game().map:get_field(52, 33), false, true)
 hq:set_wares{
-   axe=3,
+   axe=1,
    bakingtray=2,
    blackwood=32,
    coal=12,
-   felling_axe=3,
+   felling_axe=5,
    fire_tongs=2,
    fish=6,
    grout=12,
