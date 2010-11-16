@@ -48,7 +48,7 @@ saledus_1 = {
    _"Saledus looks around nervously..." ..
    "</p></rt><rt image=map:Saledus.png><p line-spacing=3 font-size=12><br>" ..
    _[[ "Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Then one of us can keep watch in the darkness and keep us safe from these creatures."<br><br>-- NEW OBJECTIVE --<br> ]] ..
-   _"* Build a barracks at the red house symbol on the east side of the forests, to the right of your provisorily headquarters." ..
+   _"* Build a barracks at the red house symbol on the east side of the forests, to the right of your provisional headquarters." ..
    "</p></rt>",
    width=400,
    height=350,
@@ -70,9 +70,9 @@ amalea_1 = {
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=AF7511>" ..
    _"Amalea smiles..." ..
    "</p></rt><rt image=map:Amalea.png><p line-spacing=3 font-size=12><br>" ..
-   _[[ "Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our provisorily headquarters."<br><br>-- NEW OBJECTIVE --<br> ]] ..
+   _[[ "Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our provisional headquarters."<br><br>-- NEW OBJECTIVE --<br> ]] ..
    _(
-   "* Build a lumberjack's house at the red house symbol, south of your provisorily headquarters. " ..
+   "* Build a lumberjack's house at the red house symbol, south of your provisional headquarters. " ..
    "Cutting down enough trees for more buildings will take a while. You can " ..
    "speed the game up using PAGE UP and slow it down again with PAGE DOWN."
    ) .. 
@@ -153,7 +153,7 @@ obj_build_barracks = {
    name = "build_barracks",
    title=_"Build a barracks",
    body= "<rt><p>" ..
-   _"* Build a barracks at the red house symbol on the east side of the forests, to the right of your provisorily headquarters." ..
+   _"* Build a barracks at the red house symbol on the east side of the forests, to the right of your provisional headquarters." ..
    "</p></rt>"
 }
 obj_build_lumberjack = {
@@ -161,7 +161,7 @@ obj_build_lumberjack = {
    title=_"Build a lumberjack's house",
    body= "<rt><p>" ..
    _(
-   "* Build a lumberjack's house at the red point, south of your provisorily headquarters. " ..
+   "* Build a lumberjack's house at the red point, south of your provisional headquarters. " ..
    "Cutting down enough trees for more buildings will take a while. You can " ..
    "speed the game up using PAGE UP and slow it down again with PAGE DOWN."
    ) .. 
