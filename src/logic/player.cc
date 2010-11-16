@@ -115,6 +115,21 @@ void Player::create_default_infrastructure() {
 				->get_coroutine("func");
 			cr->push_arg(this);
 			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
+
+			// Check if other starting positions are shared in and initialize them as well
+			for (uint8_t n = 0; n < m_further_shared_in_player.size(); ++n) {
+				Coords const further_pos = map.get_starting_pos(m_further_shared_in_player.at(n));
+
+				// Run the corresponding script
+				LuaCoroutine * ncr = game.lua().run_script
+					(*g_fs, "tribes/" + tribe().name() +
+					"/scripting/" + tribe().initialization(m_further_initializations.at(n)).name + ".lua",
+					 "tribe_" + tribe().name())
+					->get_coroutine("func");
+				ncr->push_arg(this);
+				ncr->push_arg(further_pos);
+				game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), ncr));
+			}
 		} catch (Tribe_Descr::Nonexistent) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "

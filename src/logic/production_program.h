@@ -290,8 +290,8 @@ struct ProductionProgram {
 			(char * parameters, ProductionSite_Descr &,
 			 std::string const & production_program_name);
 		virtual void execute(Game &, ProductionSite &) const;
-		virtual bool get_building_work(Game& , ProductionSite& , Worker& ) const;
-		virtual void building_work_failed(Game& , ProductionSite& , Worker& ) const;
+		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const;
+		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 			(::FileWrite &, ProductionSite_Descr const &) const;
@@ -425,7 +425,7 @@ struct ProductionProgram {
 	struct ActProduce : public Action {
 		ActProduce(char * parameters, ProductionSite_Descr const &);
 		virtual void execute(Game &, ProductionSite &) const;
-		virtual bool get_building_work(Game& , ProductionSite& , Worker& ) const;
+		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 			(::FileWrite &, ProductionSite_Descr const &) const;
@@ -454,7 +454,7 @@ struct ProductionProgram {
 	struct ActRecruit : public Action {
 		ActRecruit(char * parameters, ProductionSite_Descr const &);
 		virtual void execute(Game &, ProductionSite &) const;
-		virtual bool get_building_work(Game& , ProductionSite& , Worker& ) const;
+		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 			(::FileWrite &, ProductionSite_Descr const &) const;
@@ -549,10 +549,10 @@ struct ProductionProgram {
 			(char * parameters, ProductionSite_Descr &,
 			 const std::string & production_program_name);
 		virtual void execute(Game &, ProductionSite &) const;
-		virtual bool get_building_work(Game& , ProductionSite& , Worker& ) const;
-		virtual void building_work_failed(Game& , ProductionSite& , Worker& ) const;
+		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const;
+		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const;
 
-		const Immovable_Descr & get_construction_descr(ProductionSite&) const;
+		const Immovable_Descr & get_construction_descr(ProductionSite &) const;
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML

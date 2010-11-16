@@ -444,17 +444,29 @@ void Fullscreen_Menu_LaunchMPG::refresh()
  */
 void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 {
-	if (m_settings->settings().mapfilename.empty())
+	GameSettings const & settings = m_settings->settings();
+	if (settings.mapfilename.empty())
 		throw wexception
 			("settings()->scenario was set to true, but no map is available");
 	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
-	Widelands::Map_Loader * const ml =
-		map.get_correct_loader(m_settings->settings().mapfilename.c_str());
-	map.set_filename(m_settings->settings().mapfilename.c_str());
+	Widelands::Map_Loader * const ml = map.get_correct_loader(settings.mapfilename.c_str());
+	map.set_filename(settings.mapfilename.c_str());
 	ml->preload_map(true);
 	Widelands::Player_Number const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
-		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i + 1));
+		m_settings->setPlayerTribe    (i, map.get_scenario_player_tribe    (i + 1));
+		m_settings->setPlayerCloseable(i, map.get_scenario_player_closeable(i + 1));
+		std::string ai(map.get_scenario_player_ai(i + 1));
+		if (ai.size() > 0) {
+			m_settings->setPlayerState(i, PlayerSettings::stateComputer);
+			m_settings->setPlayerAI   (i, ai);
+		} else if
+			(settings.players.at(i).state != PlayerSettings::stateHuman
+			 &&
+			 settings.players.at(i).state != PlayerSettings::stateOpen)
+		{
+			m_settings->setPlayerState(i, PlayerSettings::stateOpen);
+		}
 	}
 }
 

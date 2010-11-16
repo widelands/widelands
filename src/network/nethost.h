@@ -65,19 +65,18 @@ struct NetHost : public GameController, private SyncCallback {
 		 std::string const & mapfilename,
 		 uint32_t            maxplayers,
 		 bool                savegame = false);
-	void setPlayerState
-		(uint8_t number,
-		 PlayerSettings::State state,
-		 bool host = false);
-	void setPlayerTribe  (uint8_t number, std::string const & tribe);
-	void setPlayerInit   (uint8_t number, uint8_t index);
-	void setPlayerAI     (uint8_t number, std::string const & name);
-	void setPlayerName   (uint8_t number, std::string const & name);
-	void setPlayer       (uint8_t number, PlayerSettings);
-	void setPlayerNumber (uint8_t number);
-	void setPlayerTeam   (uint8_t number, Widelands::TeamNumber team);
-	void switchToPlayer  (uint32_t user, uint8_t number);
-	void setWinCondition (std::string);
+	void setPlayerState    (uint8_t number, PlayerSettings::State state, bool host = false);
+	void setPlayerTribe    (uint8_t number, std::string const & tribe);
+	void setPlayerInit     (uint8_t number, uint8_t index);
+	void setPlayerAI       (uint8_t number, std::string const & name);
+	void setPlayerName     (uint8_t number, std::string const & name);
+	void setPlayer         (uint8_t number, PlayerSettings);
+	void setPlayerNumber   (uint8_t number);
+	void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team);
+	void setPlayerCloseable(uint8_t number, bool closeable);
+	void setPlayerShared   (uint8_t number, uint8_t shared);
+	void switchToPlayer    (uint32_t user, uint8_t number);
+	void setWinCondition   (std::string);
 
 	// just visible stuff for the select mapmenu
 	void setMultiplayerGameSettings();

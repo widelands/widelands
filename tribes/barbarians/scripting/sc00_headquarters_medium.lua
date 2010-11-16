@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Start conditions for Headquarters Medium                 
+--                 Start conditions for Headquarters Medium
 -- =======================================================================
 
 use("aux", "infrastructure")
@@ -8,10 +8,14 @@ set_textdomain("tribe_barbarians")
 
 init = {
    name = _ "Headquarters medium",
-   func = function(player) 
-   local sf = wl.Game().map.player_slots[player.number].starting_field
+   func = function(player, shared_in_start)
 
-   player:allow_workers("all")
+   local sf = wl.Game().map.player_slots[player.number].starting_field
+   if shared_in_start then
+      sf = shared_in_start
+   else
+      player:allow_workers("all")
+   end
 
    hq = prefilled_buildings(player, { "headquarters", sf.x, sf.y,
       wares = {

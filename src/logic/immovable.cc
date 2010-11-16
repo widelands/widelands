@@ -387,7 +387,7 @@ bool Immovable::get_passable() const throw ()
 
 std::string const & Immovable::name() const throw () {return descr().name();}
 
-void Immovable::set_owner(Player* player)
+void Immovable::set_owner(Player * player)
 {
 	m_owner = player;
 }
@@ -505,7 +505,8 @@ void Immovable::draw
 	}
 }
 
-void Immovable::draw_construction(const Editor_Game_Base& game, RenderTarget& dst, const Point pos)
+void Immovable::draw_construction
+	(const Editor_Game_Base & game, RenderTarget & dst, const Point pos)
 {
 	const ImmovableProgram::ActConstruction * constructionact = 0;
 	if (m_program_ptr < m_program->size())
@@ -565,7 +566,7 @@ void Immovable::set_reserved_by_worker(bool reserve)
  *
  * \warning \p data must not be equal to the currently set data, but it may be 0.
  */
-void Immovable::set_action_data(ImmovableActionData* data)
+void Immovable::set_action_data(ImmovableActionData * data)
 {
 	delete m_action_data;
 	m_action_data = data;
@@ -887,7 +888,7 @@ ImmovableProgram::ActTransform::ActTransform
 		probability = 0;
 
 		std::vector<std::string> params = split_string(parameters, " ");
-		for (uint i = 0; i < params.size(); ++i) {
+		for (uint32_t i = 0; i < params.size(); ++i) {
 			if (params[i] == "bob")
 				bob = true;
 			else if (params[i] == "immovable")
@@ -1181,7 +1182,7 @@ struct ActConstructionData : ImmovableActionData {
 				return d;
 			} else
 				throw game_data_error("unknown version %u", version);
-		} catch(const _wexception & e) {
+		} catch (const _wexception & e) {
 			delete d;
 			throw game_data_error("ActConstructionData: %s", e.what());
 		}

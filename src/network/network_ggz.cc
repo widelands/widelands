@@ -48,15 +48,16 @@ NetGGZ::NetGGZ() :
 	userupdate    (false),
 	tableupdate   (false),
 	motd          ()
-{}
+{
+}
 
 
 /// \returns the _one_ ggzobject. There should be only this one object and it
 /// _must_ be used in all cases.
 NetGGZ & NetGGZ::ref() {
-	if (!ggzobj)
+	if (not ggzobj)
 		ggzobj = new NetGGZ();
-	return *ggzobj;
+	return * ggzobj;
 }
 
 
@@ -447,8 +448,8 @@ int NetGGZ::wait_for_ggzmod_data
 		if (*it > maxfd) maxfd = *it;
 	}
 
-	if (maxfd>0)
-		result = select(maxfd+1, &read_fd_set, NULL, NULL, &tv);
+	if (maxfd > 0)
+		result = select(maxfd + 1, & read_fd_set, NULL, NULL, &tv);
 
 	return result;
 }
@@ -466,10 +467,13 @@ void NetGGZ::datacore()
 	if (ggzcore_server_data_is_pending(ggzserver))
 		ggzcore_server_read_data(ggzserver, ggzcore_server_get_fd(ggzserver));
 
-	if (channelfd != -1 &&
-		data_is_pending(ggzcore_server_get_channel(ggzserver)))
-		ggzcore_server_read_data
+	if
+		(channelfd != -1 &&
+		 data_is_pending(ggzcore_server_get_channel(ggzserver)))
+	{
+		 ggzcore_server_read_data
 			(ggzserver, ggzcore_server_get_channel(ggzserver));
+	}
 
 	if (gamefd != -1)
 		ggzcore_game_read_data(ggzcore_server_get_cur_game(ggzserver));

@@ -1,3 +1,4 @@
+	B_t * const hej = dynamic_cast<B_t *>(du);
 if (B_t const * const hej = dynamic_cast<B_t *>(du)) {
 B_t const*const hej=dynamic_cast  < B_t* >(du)) {
 const B_t *const hej=dynamic_cast<B_t*>

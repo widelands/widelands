@@ -28,7 +28,12 @@ return=completed
 
 [idle]
 pics=shipyard_i_??.png
-hotspot=55 60
+hotspot=40 69
+playercolor=true
+
+[build]
+pics=shipyard_b_??.png
+hotspot=40 69
 playercolor=true
 
 #[working]

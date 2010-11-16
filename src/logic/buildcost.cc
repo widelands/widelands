@@ -59,7 +59,8 @@ uint32_t Buildcost::total() const
 	return sum;
 }
 
-void Buildcost::save(Widelands::FileWrite& fw, const Widelands::Tribe_Descr& tribe) const
+void Buildcost::save
+	(Widelands::FileWrite & fw, const Widelands::Tribe_Descr & tribe) const
 {
 	for (const_iterator it = begin(); it != end(); ++it) {
 		fw.CString(tribe.get_ware_descr(it->first)->name());
@@ -68,11 +69,12 @@ void Buildcost::save(Widelands::FileWrite& fw, const Widelands::Tribe_Descr& tri
 	fw.CString("");
 }
 
-void Buildcost::load(Widelands::FileRead& fr, const Widelands::Tribe_Descr& tribe)
+void Buildcost::load
+	(Widelands::FileRead & fr, const Widelands::Tribe_Descr & tribe)
 {
 	clear();
 
-	for(;;) {
+	for (;;) {
 		std::string name = fr.CString();
 		if (name.empty())
 			break;

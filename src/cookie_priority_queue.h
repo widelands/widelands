@@ -48,7 +48,7 @@ struct cookie_priority_queue_base {
 
 		// No copying!
 		cookie(const cookie & other);
-		cookie & operator=(const cookie & other);
+		cookie & operator= (const cookie & other);
 	};
 
 protected:

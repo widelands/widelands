@@ -24,6 +24,7 @@
 
 #include "c_utils.h"
 #include "lua_game.h"
+#include "lua_map.h"
 #include "persistence.h"
 
 #include "coroutine_impl.h"
@@ -73,6 +74,10 @@ int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 void LuaCoroutine_Impl::push_arg(const Widelands::Player * plr) {
 	to_lua<LuaGame::L_Player>(m_L, new LuaGame::L_Player(plr->player_number()));
 	m_nargs++;
+}
+void LuaCoroutine_Impl::push_arg(const Widelands::Coords & coords) {
+	to_lua<LuaMap::L_Field>(m_L, new LuaMap::L_Field(coords));
+	++m_nargs;
 }
 
 #define COROUTINE_DATA_PACKET_VERSION 1

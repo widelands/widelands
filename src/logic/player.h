@@ -522,6 +522,12 @@ struct Player :
 	void setAI(std::string const &);
 	const std::string & getAI() const;
 
+	// used in shared kingdom mode
+	void add_further_starting_position(uint8_t plr, uint8_t init) {
+		m_further_shared_in_player.push_back(plr);
+		m_further_initializations .push_back(init);
+	}
+
 private:
 	void update_building_statistics(Building &, losegain_t);
 	void update_team_players();
@@ -532,6 +538,8 @@ private:
 
 	Editor_Game_Base     & m_egbase;
 	uint8_t                m_initialization_index;
+	std::vector<uint8_t>   m_further_initializations;    // used in shared kingdom mode
+	std::vector<uint8_t>   m_further_shared_in_player;   //  ''  ''   ''     ''     ''
 	uint8_t                m_frontier_style_index;
 	uint8_t                m_flag_style_index;
 	TeamNumber             m_team_number;

@@ -36,6 +36,8 @@ use("map", "texts")
 function msg_box(i)
    if i.pre_func then i.pre_func() end
 
+   if not i.h then i.h = 400 end
+
    p1:message_box(i.title, i.body, i)
 
    if i.post_func then i.post_func() end

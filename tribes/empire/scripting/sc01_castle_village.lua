@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Empire Castle Village Starting Conditions                
+--                 Empire Castle Village Starting Conditions
 -- =======================================================================
 
 use("aux", "infrastructure")
@@ -8,17 +8,21 @@ set_textdomain("tribe_empire")
 
 return {
    name = _ "Castle village",
-   func = function(plr)
-   plr:allow_workers("all")
-
+   func =  function(plr, shared_in_start)
 
    local sf = wl.Game().map.player_slots[plr.number].starting_field
 
+   if shared_in_start then
+      sf = shared_in_start
+   else
+      plr:allow_workers("all")
+   end
+
    local h = plr:place_building("castle", sf, false, true)
    h:set_soldiers{[{0,0,0,0}] = 12}
-   
+
    if not pcall(function()
-      place_building_in_region(plr, "warehouse", sf:region(7), { 
+      place_building_in_region(plr, "warehouse", sf:region(7), {
          wares = {
             helm = 2,
             wood_lance = 5,
@@ -63,16 +67,16 @@ return {
             donkey = 5,
          },
          soldiers = {
-            [{0,0,0,0}] = 33, 
+            [{0,0,0,0}] = 33,
          }
       })
-      
+
       place_building_in_region(plr, "colosseum", sf:region(11), {
          wares = {
             bread = 8,
             fish = 4,
             meat = 4,
-         }, 
+         },
       })
 
       place_building_in_region(plr, "trainingscamp", sf:region(11), {
@@ -90,20 +94,20 @@ return {
                cloth = 5,
          }
       })
-            
+
       place_building_in_region(plr, "toolsmithy", sf:region(11), {
          wares = {
             iron = 8,
          }
       })
-         
+
       place_building_in_region(plr, "weaponsmithy", sf:region(11), {
          wares = {
             coal = 4,
             wood = 8,
          }
       })
-      
+
       place_building_in_region(plr, "sawmill", sf:region(11), {
          wares = {
             trunk = 1,
@@ -114,7 +118,7 @@ return {
    end) then
       plr:send_message(_"Not enough space", _ 
 [[Some of your starting buildings didn't have enough room and 
-weren't build. You are at an disadvantage with this; consider restarting
+weren't build. You are at an disadvantage with this; consider restarting 
 this map with a fair starting condition.]], {popup=true}
       )
    end

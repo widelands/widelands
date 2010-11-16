@@ -523,6 +523,8 @@ avoid having to transport everything up and down the slopes."]]
 -- =======================================================================
 first_leftover_building_found = {
 {
+   posx = 100000,
+   posy = 0,
    title = _ "A dangerous finding",
    body = jundlina(_ "Jundlina is in thought", _
 [["We found an old building, destroyed and burned by flames. I am very worried
@@ -544,6 +546,8 @@ of our borders."]]
 
 second_leftover_building_found = {
 {
+   posx = 100000,
+   posy = 0,
    title = _ "Another building.",
    body = jundlina(_ "Jundlina is worried", _
 [["We found one more building of this strange making. We have yet to see any of
@@ -557,6 +561,8 @@ unprepared."]]
 
 third_leftover_building_found = {
 {
+   posx = 100000,
+   posy = 0,
    title = _ "One more building",
    body = jundlina(_
 [["And yet another of these buildings. We know now that the tribe that built
@@ -574,6 +580,8 @@ obvious dangers I am feeling very much at home here already."]]
 -- =======================
 field_flooded_msg = {
 {
+   posx = 100000,
+   posy = 0,
    title = _ "The water is rising!",
    body = jundlina(_"Jundlina", _
 [["May Satul save us! Lutas is still trying to get to us. A scout informed me
@@ -599,6 +607,8 @@ shore they will vanish in the sea before they can float. I fear we are doomed!"]
    ),
 },
 {
+   posx = 100000,
+   posy = 0,
    title = _"Ostur seems confident",
    pre_func = function()
       local lake_field = map:get_field(75,80)

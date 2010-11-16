@@ -126,7 +126,7 @@ struct StreamRead : public ::StreamRead {
 				 Tribename.c_str(), Name.c_str()),
 			tribename(Tribename), name(Name)
 		{}
-		virtual ~tribe_immovable_nonexistent() throw() {}
+		virtual ~tribe_immovable_nonexistent() throw () {}
 		std::string tribename;
 		std::string name;
 	};

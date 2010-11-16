@@ -357,6 +357,16 @@ void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	s.send(d->sock);
 }
 
+void NetClient::setPlayerCloseable(uint8_t, bool)
+{
+	//  client is not allowed to do this
+}
+
+void NetClient::setPlayerShared(uint8_t, uint8_t)
+{
+	//  client is not allowed to do this
+}
+
 void NetClient::setPlayerInit(uint8_t, uint8_t)
 {
 	//  client is not allowed to do this
@@ -453,9 +463,7 @@ void NetClient::recvOnePlayer
 	player.initialization_index = packet.Unsigned8();
 	player.ai = packet.String();
 	player.team = packet.Unsigned8();
-
-	if (number == d->settings.playernum)
-		d->localplayername = player.name;
+	player.shared_in = packet.Unsigned8();
 }
 
 void NetClient::recvOneUser

@@ -28,11 +28,11 @@ return {
 				if f then
 					-- add this field to the list as long as it has not movecaps swim
 					if not f:has_caps("swimmable") then
-						-- editor disallows placement of immovables on dead and acid fields
 						if f:has_caps("walkable") then
 							fields[#fields+1] = f
 						else
-							if not f.immovable == 0 then
+							-- editor disallows placement of immovables on dead and acid fields
+							if f.immovable then
 								fields[#fields+1] = f
 							end
 						end

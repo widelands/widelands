@@ -509,6 +509,7 @@ L_Has##btype##s::btype##sMap L_Has##btype##s:: \
 		)); \
 	} else { \
 		/* array of (name, count) */ \
+		luaL_checktype(L, 2, LUA_TTABLE); \
 		lua_pushnil(L); \
 		while (lua_next(L, 2) != 0) { \
 			rv.insert(btype##Amount( \
@@ -2538,7 +2539,7 @@ int L_Field::has_caps(lua_State * L) {
 	else if (query == "medium")
 		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_MEDIUM);
 	else if (query == "big")
-		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_BIG);
+		lua_pushboolean(L, (field->nodecaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG);
 	else if (query == "mine")
 		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_MINE);
 	else if (query == "flag")
