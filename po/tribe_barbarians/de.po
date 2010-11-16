@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-13 06:36+0000\n"
+"PO-Revision-Date: 2010-11-15 05:41+0000\n"
 "Last-Translator: kraileth <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-14 05:01+0000\n"
+"X-Launchpad-Export-Date: 2010-11-16 05:03+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -591,15 +591,15 @@ msgstr "Pflanzt Bäume."
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr "Produziert Axt"
+msgstr "Herstellung von Axt"
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
-msgstr "Produziert Backblech"
+msgstr "Herstellung von Backblech"
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"
-msgstr "Produziert Kriegsaxt"
+msgstr "Herstellung von Kriegsaxt"
 
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
@@ -608,7 +608,7 @@ msgstr "Prodziert Breitaxt"
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr "Produziert Bronzeaxt"
+msgstr "Herstellung von Bronzeaxt"
 
 #: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce felling axe"
@@ -616,71 +616,71 @@ msgstr "Produziere Holzfälleraxt"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr "Produziert Feuerzangen"
+msgstr "Herstellung von Feuerzange"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
-msgstr "Produziert Angel"
+msgstr "Herstellung von Angel"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr "Produziert Hammer"
+msgstr "Herstellung von Hammer"
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr "Produziert Helm"
+msgstr "Herstellung von Helm"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr "Produziert Jagdspeer"
+msgstr "Herstellung von Jagdspeer"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr "Produziert Küchengerät"
+msgstr "Herstellung von Küchengerät"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr "Produziert Maske"
+msgstr "Herstellung von Maske"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr "Produziert Mahlzeit"
+msgstr "Herstellung von Mahlzeit"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr "Produziert Spitzhacke"
+msgstr "Herstellung von Spitzhacke"
 
 #: ../../tribes/barbarians/big_inn/conf:24
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr "Produziert Ration"
+msgstr "Herstellung von Ration"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr "Produziert Sense"
+msgstr "Herstellung von Sense"
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce sharpaxe"
-msgstr "Produziert Scharfe Axt"
+msgstr "Herstellung von Scharfer Axt"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
-msgstr "Produziert Schaufel"
+msgstr "Herstellung von Schaufel"
 
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr "Produziert Snack"
+msgstr "Herstellung von Snack"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
-msgstr "Produziert Kriegshelm"
+msgstr "Herstellung von Kriegshelm"
 
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce warriorsaxe"
-msgstr "Produziert Kriegeraxt"
+msgstr "Herstellung von Kriegeraxt"
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."

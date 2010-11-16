@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 07:21+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-11-15 05:52+0000\n"
+"Last-Translator: kraileth <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-11-16 05:03+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: German\n"
 
@@ -574,113 +574,113 @@ msgstr "Pflanzt Bäume."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
-msgstr "Produziert verbesserten Schild"
+msgstr "Herstellung von verbessertem Schild"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:26
 msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
 msgstr ""
-"Produziert verbesserten Schild (nur für Abwärtskompatiblität mit "
+"Herstellung von verbessertem Schild (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr "Produziert Backblech"
+msgstr "Herstellung von Backblech"
 
 #: ../../tribes/atlanteans/mill/conf:22
 msgid "Produce blackrootflour"
-msgstr "Produziert Schwarzwurzelmehl"
+msgstr "Herstellung von Schwarzwurzelmehl"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bow"
-msgstr "Produziert Bogen"
+msgstr "Herstellung von Bogen"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:34
 msgid "Produce bucket"
-msgstr "Produziert Eimer"
+msgstr "Herstellung von Eimer"
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
-msgstr "Produziert Maismehl"
+msgstr "Herstellung von Maismehl"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:33
 msgid "Produce double trident"
-msgstr "Produziert Doppel-Dreizack"
+msgstr "Herstellung von Doppel-Dreizack"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:35
 msgid "Produce fire tongs"
-msgstr "Produziert Feuerzangen"
+msgstr "Herstellung von Feuerzange"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce fishing net"
-msgstr "Produziert Fischernetz"
+msgstr "Herstellung von Fischernetz"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:21
 msgid "Produce golden tabard"
-msgstr "Produziert goldenen Wappenrock"
+msgstr "Herstellung von goldenem Wappenrock"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:37
 msgid "Produce hammer"
-msgstr "Produziert Hammer"
+msgstr "Herstellung von Hammer"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:34
 msgid "Produce heavy double trident"
-msgstr "Produziert schweren Doppel-Dreizack"
+msgstr "Herstellung von Schwerem Doppel-Dreizack"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce hook pole"
-msgstr "Produziert Hakenstange"
+msgstr "Herstellung von Hakenstange"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
-msgstr "Produziert leichten Dreizack"
+msgstr "Herstellung von Leichtem Dreizack"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:31
 msgid "Produce long trident"
-msgstr "Produziert langen Dreizack"
+msgstr "Herstellung von Langem Dreizack"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce milking tongs"
-msgstr "Produziert Melkzange"
+msgstr "Herstellung von Melkzange"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce pick"
-msgstr "Produziert Spitzhacke"
+msgstr "Herstellung von Spitzhacke"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:42
 msgid "Produce saw"
-msgstr "Produziert Säge"
+msgstr "Herstellung von Säge"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:43
 msgid "Produce scythe"
-msgstr "Produziert Sense"
+msgstr "Herstellung von Sense"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:44
 msgid "Produce shovel"
-msgstr "Produziert Schaufel"
+msgstr "Herstellung von Schaufel"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:19
 msgid "Produce spidercloth"
-msgstr "Produziert Spinnenstoff"
+msgstr "Herstellung von Spinnenstoff"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
-msgstr "Produziert Stahlschild"
+msgstr "Herstellung von Stahlschild"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:24
 msgid ""
 "Produce steel shield (only for compatibility with old savegames (build13))"
 msgstr ""
-"Produziert Stahlschild  (nur für Abwärtskompatiblität mit Speicherständen "
-"von build13)"
+"Herstellung von Stahlschild  (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:32
 msgid "Produce steel trident"
-msgstr "Produziert Stahl-Dreizack"
+msgstr "Herstellung von Stahl-Dreizack"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:20
 msgid "Produce tabard"
-msgstr "Produziert Wappenrock"
+msgstr "Herstellung von Wappenrock"
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
@@ -1330,7 +1330,7 @@ msgstr "Holzfällerhütte"
 #: ../../tribes/atlanteans/well/conf:13
 #: ../../tribes/atlanteans/woodcutters_house/conf:16
 msgid "Work"
-msgstr "Arbeitet"
+msgstr "Arbeit"
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."

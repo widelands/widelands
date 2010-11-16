@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-10 22:37+0100\n"
-"PO-Revision-Date: 2010-11-14 17:51+0000\n"
+"PO-Revision-Date: 2010-11-15 05:55+0000\n"
 "Last-Translator: kraileth <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-15 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-11-16 05:03+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:2054
@@ -737,7 +737,7 @@ msgstr "Dokumentation für das Programmkommando Gebe zurück"
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:791
 msgid "failed"
-msgstr "missglückt,"
+msgstr "Fehlgeschlagen:"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:412
 msgid "completed"
@@ -745,7 +745,7 @@ msgstr "beendet"
 
 #: ../../src/writeHTML.cc:908 ../../src/logic/production_program.cc:412
 msgid "skipped"
-msgstr "übersprungen"
+msgstr "übersprungen:"
 
 #: ../../src/writeHTML.cc:913
 msgid "and"
@@ -3337,7 +3337,7 @@ msgstr "nicht "
 #: ../../src/logic/production_program.cc:171
 #: ../../src/logic/production_program.cc:192
 msgid "economy needs "
-msgstr "die Wirtschaft benötigt "
+msgstr "benötigt wird: "
 
 #: ../../src/logic/production_program.cc:221
 msgid "site has "
@@ -3383,11 +3383,11 @@ msgstr " und "
 #: ../../src/logic/production_program.cc:419
 #: ../../src/logic/production_program.cc:794
 msgid " because: "
-msgstr " weil: "
+msgstr " weil "
 
 #: ../../src/logic/production_program.cc:431
 msgid " because not: "
-msgstr " weil nicht: "
+msgstr " weil nicht "
 
 #: ../../src/logic/production_program.cc:480
 #, c-format
