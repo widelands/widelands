@@ -301,32 +301,32 @@ surroundings. I called for specialists and will follow their advice.]]
 {
    title = _ "Loftomor and Sidolus arrive",
    body = jundlina( "Jundlina", _
-[[May Satul warm you both. Loftomor, you have been the island's most renowned
+[["May Satul warm you both. Loftomor, you have been the island's most renowned
 architect. Sidolus, you are a seasoned warrior and strategist. I have called
 you before me to seek your counsel: What needs to be done to make this our new
-home?]]
+home?"]]
    )
 },
 {
    title = _ "Loftomor speaks",
    body = loftomor(_
-[[May Satul warm you, Jundlina! The most important things for building a
+[["May Satul warm you, Jundlina! The most important things for building a
 settlement are the building materials. There are some trees here, so we should
 build housings for some woodcutters and of course also for foresters, so
 we do not run out of trees. Oh, and we mustn't forget the sawmill, for most
 buildings can't be made out of trunks alone. Stronger buildings also need
 stone, but there is plenty to the north-east of here; we just need to build a
-quarry and my stonemasons will go to work promptly.]]
+quarry and my stonemasons will go to work promptly."]]
    ) .. new_objectives(obj_ensure_build_wares_production)
 },
 {
    title = _ "Sidolus speaks",
    body = sidolus(_
-[[May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need
+[["May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need
 a good supply of building materials for we have to expand our territory swiftly.
 I will not feel safe on this island as long as we have not seen all shores
 on it. I brought plenty of good men from Atlantis. The military might is
-available. We only need some housings to live in.]]
+available. We only need some housings to live in."]]
    ) ..  new_objectives(obj_expand)
 }
 }
@@ -335,33 +335,33 @@ food_story_message = {
 {
    title = _ "Jundlina is satisfied",
    body = jundlina("Jundlina's Memoirs", _
-[[Our building infrastructure is done and I spent some days making sure that
+[["Our building infrastructure is done and I spent some days making sure that
 they work well together. Now, there are other pressing matters. I called
 Colionder, my personal cook, before me to get his help with sorting some things
-out.]]
+out."]]
    )
 },
 {
    title = _ "Colionder arrives",
    body = colionder(_
-[[May Satul warm you, Jundlina. Can I be of any service to you or the
-god?]]
+[["May Satul warm you, Jundlina. Can I be of any service to you or the
+god?"]]
    )
 },
 {
    title = _ "Jundlina replies",
    body = jundlina(_"Jundlina", _
-[[May Satul warm you too, Colionder. Yes, I wondered if there is not a way
+[["May Satul warm you too, Colionder. Yes, I wondered if there is not a way
 that we can centralize our food production. We lose a lot of productivity
 because our people are accustomed to making their own food. I feel if we
 could split responsibilities, it would be better for us all. I want your
-thoughts on this.]]
+thoughts on this."]]
    )
 },
 {
    title = _ "Colionder is in thought",
    body = colionder(_
-[[Ahh, but I think this is impossible to change. The preparing and eating of
+[["Ahh, but I think this is impossible to change. The preparing and eating of
 food is something deeply ingrained in us Atlanteans - it is just a ceremony
 that we need for our well being. So I guess we cannot take this away from
 the individuals completely. But we might find a compromise in between: For me,
@@ -373,13 +373,13 @@ fish and meat to cleanse them and improve their taste is terrible.  My house is
 full of smoke and stinks for weeks after it. Don't you think that this could be
 done in a special building were the side effects do not matter?  I think those
 two things would be accepted by the people and would reduce the cooking times
-without taking away the ritual.]]
+without taking away the ritual."]]
  )
 },
 {
    title = _ "Jundlina agrees",
    body = jundlina(_
-[[Your words sound wise to me, Colionder. So be it then.]]
+[["Your words sound wise to me, Colionder. So be it then."]]
    ) .. new_objectives(obj_make_food_infrastructure)
 },
 }
@@ -388,8 +388,8 @@ food_story_ended_messages = {
    {
       title = _ "Jundlina is satisfied",
       body = jundlina(_ "Jundlina is reviewing the reports", _
-[[Seems like our food production is finished and everybody is working together
-nicely. It is really starting to feel like home here.]]
+[["Seems like our food production is finished and everybody is working together
+nicely. It is really starting to feel like home here."]]
       )
    }
 }
@@ -398,22 +398,22 @@ spidercloth_messages = {
    {
       title = _"A man comes to Jundlina",
       body = opol(_
-[[May Satul warm you, Jundlina. My Name is Opol and I am the highest weaver of
+[["May Satul warm you, Jundlina. My Name is Opol and I am the highest weaver of
 the guild abandoning Atlantis and Lutas with you. I come with sad news indeed:
 We have no more spidercloth. Not a single piece is to be found in our
 warehouses.  Could you not help the weaver guild by arranging the building of a
 weaving-mill and a spiderfarm? The spiders deliver the finest silk and we will
 produce the finest spidercloth from it. We offer to also produce the tabards
 for young soldiers and the golden tabards for officers for you in exchange.
-You will need them for sure as soon as you want to recruit new soldiers.]])
+You will need them for sure as soon as you want to recruit new soldiers."]])
  },
  {
     title = _ "Jundlina replies",
     body = jundlina(_ "Jundlina replies", _
-[[May Satul warm you too, Opol. I wanted to delay production of spider cloth,
+[["May Satul warm you too, Opol. I wanted to delay production of spider cloth,
 but I understand your urgency. Your suggestion sounds fair to me, I will build
 your weaving-mill and spiderfarm. I will also build a goldweaver so that the
-golden tabards you make will not be golden by name alone.]]
+golden tabards you make will not be golden by name alone."]]
     ) ..  new_objectives(obj_spidercloth_production)
  }
 }
@@ -422,17 +422,17 @@ spidercloth_story_ended_messages = {
    {
       title = _ "Opol seeks out Jundlina",
       body = opol(_
-[[May Satul warm you, Jundlina! The weaving-mill, goldweaver and spiderfarm
+[["May Satul warm you, Jundlina! The weaving-mill, goldweaver and spiderfarm
 buildings are complete and are starting their work at this very moment. The
 weaving guild is very grateful for your support and we will stand by our word
-and deliver the first tabard very soon.]]
+and deliver the first tabard very soon."]]
       )
    },
    {
       title = _ "Jundlina replies",
       body = jundlina(_
-[[This is good news indeed, Opol. Our economy is developing very well. Go back
-to your work now, Opol, and may Satul warm you and all your guild members!]]
+[["This is good news indeed, Opol. Our economy is developing very well. Go back
+to your work now, Opol, and may Satul warm you and all your guild members!"]]
       )
    }
 }
@@ -442,19 +442,19 @@ heavy_industry_story = {
    {
       title = _ "Sidolus seeks out Jundlina",
       body = sidolus(_
-[[May Satul warm you, Jundlina. Have you considered mining for goods in the
+[["May Satul warm you, Jundlina. Have you considered mining for goods in the
 mountains around us? We are running short of quartz, crystal and diamonds for
 our buildings. Also we could use more iron, gold and especially coal. If we
 find an ample supply of those commodities, we could start producing weapons
 and tools; this would help enormously. Of course, we would need smelters,
-a weapon smithy, an armor smithy and a tool smithy. And maybe even more.]]
+a weapon smithy, an armor smithy and a tool smithy. And maybe even more."]]
       )
    },
    {
       title = _ "Jundlina replies",
       body = jundlina(_"Jundlina nods",
-[[I have considered this, Sidolus. I think, it is about time. We will make this
-a priority for now. You shall get your industry and soon!]]
+[["I have considered this, Sidolus. I think, it is about time. We will make this
+a priority for now. You shall get your industry and soon!"]]
       ) .. new_objectives(obj_make_heavy_industry_and_mining)
    },
 }
@@ -463,30 +463,30 @@ training_story = {
    {
       title = _ "Jundlina summons Sidolus",
       body = jundlina(_ "Jundlina is angry", _
-[[What is this I hear, Sidolus? I received words about your soldiers
+[["What is this I hear, Sidolus? I received words about your soldiers
 misbehaving and bullying the common folk. What is this nonsense all about? They
 are servants for the common good and must not misuse their powers. This is
-inexcusable! Explain this, if you will!]]
+inexcusable! Explain this, if you will!"]]
       )
    },
    {
       title = _ "Sidolus seems contrite",
       body = sidolus(_
-[[I agree with you and I have punished the trouble makers severely. But it is
+[["I agree with you and I have punished the trouble makers severely. But it is
 very difficult to keep my men quiet: they are bored and have nothing to do. I
 would like to ramp up their drill. I think more routine in their life would
 keep them occupied and focused on their duties. I would need a dungeon and a
 labyrinth for them.  I have the plans ready, but I guess they won't come
-cheap.]]
+cheap."]]
       )
    },
    {
       title = _"Jundlina replies",
       body = jundlina(_
-[[I do not fear the cost and labor as long as it keeps your people at bay. You
+[["I do not fear the cost and labor as long as it keeps your people at bay. You
 shall get your buildings. But note that I will not tolerate any rogue soldier;
 if similar things happen again, I will make you responsible for them.
-Dismissed.]]
+Dismissed."]]
       ) .. new_objectives(obj_make_training_buildings)
    }
 }
@@ -495,11 +495,11 @@ training_story_end = {
    {
       title = _ "Jundlina received a letter",
       body = jundlina("Jundlina", _
-[[I received an invitation from Sidolus. The first day of training in the newly
+[["I received an invitation from Sidolus. The first day of training in the newly
 finished labyrinth will be tomorrow. The dungeon is done as well and will start
 its work soon. I am looking forward to tomorrow; I am very interested in how our
 soldiers are trained and I wonder if the additional workload will keep them from
-bullying the civil population.]]
+bullying the civil population."]]
       )
    }
 }
@@ -508,12 +508,12 @@ horsefarm_and_warehouse_story = {
    {
       title = _ "Jundlina considers the economy",
       body = jundlina(_"Jundlina", _
-[[People are complaining about crowded streets and slow transportation. We
+[["People are complaining about crowded streets and slow transportation. We
 need to help out our carriers on the roads. I decided to build a horsefarm
 so that the horses can help with the heavy wares.<br>
 Another way to take load from our roads is to build warehouses. We have claimed
 the mountain now, it seems a good idea to have a warehouse on the plateau to
-avoid having to transport everything up and down the slopes.]]
+avoid having to transport everything up and down the slopes."]]
       ) .. new_objectives(obj_horsefarm_and_warehouse)
    }
 }
@@ -525,7 +525,7 @@ first_leftover_building_found = {
 {
    title = _ "A dangerous finding",
    body = jundlina(_ "Jundlina is in thought", _
-[[We found an old building, destroyed and burned by flames. I am very worried
+[["We found an old building, destroyed and burned by flames. I am very worried
 about this finding. The building is not of any kind I've ever seen. It is
 certainly not designed by any Atlantean architect I've ever heard about. The
 building is crude, the assemblage is sloppy. But the materials are very
@@ -537,8 +537,7 @@ foe? And why is the building burned down? Has this island seen war? Is a
 war being waged on it right now?<br><br>
 We must improve our military capabilities. If there are foes on the island, we
 have to be prepared when we meet them. We should also enforce the foritfication
-of our borders.
-]]
+of our borders."]]
    )
 }
 }
@@ -547,11 +546,11 @@ second_leftover_building_found = {
 {
    title = _ "Another building.",
    body = jundlina(_ "Jundlina is worried", _
-[[We found one more building of this strange making. We have yet to see any of
+[["We found one more building of this strange making. We have yet to see any of
 its builders. But obviously there has been a community on this island before
 and obviously it has been militarized. I have to check on our military status
 with my generals. I will not allow that a potential enemy will find us
-unprepared.]]
+unprepared."]]
    )
 }
 }
@@ -560,12 +559,12 @@ third_leftover_building_found = {
 {
    title = _ "One more building",
    body = jundlina(_
-[[And yet another of these buildings. We know now that the tribe that built
+[["And yet another of these buildings. We know now that the tribe that built
 them once had complete control over the island. But I am no longer so scared of
 potential enemies. We know so much of this island already and there is no trace
 of this old economy to be found. I am starting to relax, but I will not let
 our guard down as we continue to explore this beautiful island. But without
-obvious dangers I am feeling very much at home here already.]]
+obvious dangers I am feeling very much at home here already."]]
    )
 }
 }
@@ -577,26 +576,26 @@ field_flooded_msg = {
 {
    title = _ "The water is rising!",
    body = jundlina(_"Jundlina", _
-[[May Satul save us! Lutas is still trying to get to us. A scout informed me
+[["May Satul save us! Lutas is still trying to get to us. A scout informed me
 that the ocean is rising quickly. We have to reach higher ground and evacuate
 everybody and as much wares from the headquarters up the mountains. How can we
-escape?]]
+escape?"]]
    )
 },
 {
    title = _ "A young man approaches",
    body = ostur(_
-[[May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have
+[["May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have
 invented a new kind of ship: smaller than those we are used to, but much
 sturdier. If we build them correctly, I am confident that we can go with them
-a much longer distance and maybe escape from Lutas' influence.
+a much longer distance and maybe escape from Lutas' influence."
 ]])
 },
 {
    title = _ "Jundlina replies",
    body = jundlina(_ "Jundlina", _
-[[Ostur, we have no time. The water rises too fast and if we build the ships on
-shore they will vanish in the sea before they can float. I fear we are doomed!]]
+[["Ostur, we have no time. The water rises too fast and if we build the ships on
+shore they will vanish in the sea before they can float. I fear we are doomed!"]]
    ),
 },
 {
@@ -608,21 +607,21 @@ shore they will vanish in the sea before they can float. I fear we are doomed!]]
       sleep(200)
    end,
    body = ostur(_
-[[A friend of mine explored the island on his own and he told me of a big lake
+[["A friend of mine explored the island on his own and he told me of a big lake
 at the top of the mountain. I suggest we build the ships in this lake and wait
 until the island drowns beneath us. Then we can sail away. It is a bold plan,
-but I think, it could work.]]
+but I think, it could work."]]
    )
 },
 {
    title = _ "Jundlina replies",
    body = jundlina(_ [[
-Your red hair is a signal from the fire god. I will trust you and support your
+"Your red hair is a signal from the fire god. I will trust you and support your
 plan. Our survival lays in your hands now, Ostur.
 <br><br>Swift now, we need a house for Ostur next to the lake and we need
 planks, trunks and spidercloth for the construction there. Forget about
 everything else, we need those wares on top of the mountain before our
-warehouses are all swallowed by the sea.]]
+warehouses are all swallowed by the sea."]]
    ) .. new_objectives(obj_build_ships)
 }
 }
@@ -631,13 +630,13 @@ scenario_won = {
    {
       title = _ "Jundlina is relieved",
       body = jundlina(_"Jundlina", _ [[
-Praise Satul! Ostur, the young ship builder did it. We have three ships -
+"Praise Satul! Ostur, the young ship builder did it. We have three ships -
 never have I seen sturdier ones - with enough room to carry all of us and some
 wares too. And this rescue came just in time: Lutas is about to swallow the rest
 of this island, the water rises faster by the hour. But we can make our escape
 now and start over in some country farther away... I expect a long journey, but
 we will find the land of Satul in the end. This is what I promised my people.
-And myself.]]
+And myself."]]
       ) .. rt(h1(_ "Congratulations") .. p(_
 [[You have won this mission. Continue with the next one or keep playing for
 as long as you like.]]
