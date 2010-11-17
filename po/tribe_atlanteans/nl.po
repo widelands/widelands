@@ -6,21 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-05 10:59+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-10 21:37+0000\n"
+"PO-Revision-Date: 2010-11-16 12:27+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-11-17 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../tribes/atlanteans/ship/conf:1
+msgid "A sea-worthy ship"
+msgstr "Een zeewaardig schip"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid "A special tabard for atlantian soldiers."
 msgstr "Een speciale tabberd voor atlantiërsoldaten."
 
-#: ../../tribes/atlanteans/conf:57
+#: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
 msgstr "Verbeterd schild"
 
@@ -39,11 +43,11 @@ msgstr ""
 "Reeds één van de beste drietanden van de Atlantiërs. Enkel gebruikt door "
 "hele goede strijders."
 
-#: ../../tribes/atlanteans/conf:110
+#: ../../tribes/atlanteans/conf:111
 msgid "Armoursmith"
 msgstr "Harnassmid"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:183
 msgid "Armoursmithy"
 msgstr "Harnassmederij"
 
@@ -55,11 +59,11 @@ msgstr "As"
 msgid "Atlanteans"
 msgstr "Atlantiërs"
 
-#: ../../tribes/atlanteans/conf:111
+#: ../../tribes/atlanteans/conf:112
 msgid "Baker"
 msgstr "Bakker"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:178
 msgid "Bakery"
 msgstr "Bakkerij"
 
@@ -67,16 +71,16 @@ msgstr "Bakkerij"
 msgid "Bakes bread for workers."
 msgstr "Bakt broden voor de werkers."
 
-#: ../../tribes/atlanteans/conf:58
+#: ../../tribes/atlanteans/conf:59
 msgid "Bakingtray"
 msgstr "Baklade"
 
-#: ../../tribes/atlanteans/conf:148
+#: ../../tribes/atlanteans/conf:153
 msgid "Barracks"
 msgstr "Barakken"
 
-#: ../../tribes/atlanteans/conf:141
-#: ../../tribes/atlanteans/conf:149
+#: ../../tribes/atlanteans/conf:146
+#: ../../tribes/atlanteans/conf:154
 msgid "Barrier"
 msgstr "Barrière"
 
@@ -84,15 +88,15 @@ msgstr "Barrière"
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
 msgstr "Grote emmers voor de viskweker, geproduceerd door de werktuigsmid."
 
-#: ../../tribes/atlanteans/conf:60
+#: ../../tribes/atlanteans/conf:61
 msgid "Blackroot"
 msgstr "Helmkruid"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:188
 msgid "Blackroot Farm"
 msgstr "Helmkruidkwekerij"
 
-#: ../../tribes/atlanteans/conf:59
+#: ../../tribes/atlanteans/conf:60
 msgid "Blackroot Flour"
 msgstr "Helmkruidbloem"
 
@@ -104,7 +108,7 @@ msgstr ""
 "Helmkruidbloem wordt gemaakt van de Helmkruidwortels van het Helmkruid en is "
 "één van de drie ingrediënten van het atlantiërbrood."
 
-#: ../../tribes/atlanteans/conf:112
+#: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
 msgstr "Helmkruidkweker"
 
@@ -136,7 +140,7 @@ msgstr ""
 "Helmkruid heeft een speciale wortel. De atlantiërs houden van de sterke "
 "smaak en maken er bloem van voor hun brood."
 
-#: ../../tribes/atlanteans/conf:61
+#: ../../tribes/atlanteans/conf:62
 msgid "Bread"
 msgstr "Brood"
 
@@ -152,15 +156,15 @@ msgstr "Kweekt spinnen voor garen."
 msgid "Breeds the strong atlantean horses"
 msgstr "Fokt de sterke atlantische paarden"
 
-#: ../../tribes/atlanteans/conf:62
+#: ../../tribes/atlanteans/conf:63
 msgid "Buckets"
 msgstr "Emmers"
 
-#: ../../tribes/atlanteans/conf:113
+#: ../../tribes/atlanteans/conf:114
 msgid "Builder"
 msgstr "Bouwvakker"
 
-#: ../../tribes/atlanteans/conf:114
+#: ../../tribes/atlanteans/conf:115
 msgid "Burner"
 msgstr "Brander"
 
@@ -168,7 +172,7 @@ msgstr "Brander"
 msgid "Burns coal."
 msgstr "Brandt kolen."
 
-#: ../../tribes/atlanteans/conf:103
+#: ../../tribes/atlanteans/conf:104
 msgid "Carrier"
 msgstr "Drager"
 
@@ -176,8 +180,8 @@ msgstr "Drager"
 msgid "Carries items along your roads."
 msgstr "Draagt voorwerpen over je wegen."
 
-#: ../../tribes/atlanteans/conf:150
-#: ../../tribes/atlanteans/conf:195
+#: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:201
 msgid "Castle"
 msgstr "Kasteel"
 
@@ -185,11 +189,11 @@ msgstr "Kasteel"
 msgid "Castle village"
 msgstr "Kasteeldorp"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:179
 msgid "Charcoal Burner's House"
 msgstr "Houtskoolbrandershuis"
 
-#: ../../tribes/atlanteans/conf:142
+#: ../../tribes/atlanteans/conf:147
 msgid "Citadel"
 msgstr "Citadel"
 
@@ -197,19 +201,23 @@ msgstr "Citadel"
 msgid "Cloth made out of spideryarn."
 msgstr "Doek gemaakt uit spinnengaren."
 
-#: ../../tribes/atlanteans/conf:63
+#: ../../tribes/atlanteans/conf:64
 msgid "Coal"
 msgstr "Kolen"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:190
 msgid "Coal Mine"
 msgstr "Kolenmijn"
 
-#: ../../tribes/atlanteans/conf:137
+#: ../../tribes/atlanteans/shipyard/conf:18
+msgid "Constructing ship"
+msgstr "Bouwt schip"
+
+#: ../../tribes/atlanteans/conf:142
 msgid "Construction Site"
 msgstr "Bouwplaats"
 
-#: ../../tribes/atlanteans/conf:65
+#: ../../tribes/atlanteans/conf:66
 msgid "Corn"
 msgstr "Maïs"
 
@@ -233,7 +241,7 @@ msgstr "Jong maïsveld"
 msgid "Cornfield tiny"
 msgstr "Klein maïsveld"
 
-#: ../../tribes/atlanteans/conf:64
+#: ../../tribes/atlanteans/conf:65
 msgid "Cornflour"
 msgstr "Maïsbloem"
 
@@ -245,7 +253,7 @@ msgstr ""
 "Maïsbloem wordt gemaakt van maïs en is één van de drie ingrediënten van het "
 "altlantiërbrood."
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
 msgstr "Kristalmijn"
 
@@ -261,7 +269,7 @@ msgstr "Verdedig en Verover!"
 msgid "Destroyed building"
 msgstr "Vernietigd gebouw"
 
-#: ../../tribes/atlanteans/conf:66
+#: ../../tribes/atlanteans/conf:67
 msgid "Diamond"
 msgstr "Diamant"
 
@@ -269,23 +277,23 @@ msgstr "Diamant"
 msgid "Discovers resources for mining."
 msgstr "Ontdekt bodemschatten voor mijnen."
 
-#: ../../tribes/atlanteans/conf:143
+#: ../../tribes/atlanteans/conf:148
 msgid "Donjon"
 msgstr "Verdedigingstoren"
 
-#: ../../tribes/atlanteans/conf:67
+#: ../../tribes/atlanteans/conf:68
 msgid "Double Trident"
 msgstr "Dubbele drietand"
 
-#: ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:205
 msgid "Dungeon"
 msgstr "Kerker"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:187
 msgid "Farm"
 msgstr "Boerderij"
 
-#: ../../tribes/atlanteans/conf:115
+#: ../../tribes/atlanteans/conf:117
 msgid "Farmer"
 msgstr "Boer"
 
@@ -293,19 +301,19 @@ msgstr "Boer"
 msgid "Fells trees."
 msgstr "Kapt bomen."
 
-#: ../../tribes/atlanteans/conf:68
+#: ../../tribes/atlanteans/conf:69
 msgid "Fire Tongs"
 msgstr "Vuurtang"
 
-#: ../../tribes/atlanteans/conf:70
+#: ../../tribes/atlanteans/conf:71
 msgid "Fish"
 msgstr "Vis"
 
-#: ../../tribes/atlanteans/conf:116
+#: ../../tribes/atlanteans/conf:118
 msgid "Fish Breeder"
 msgstr "Viskweker"
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:170
 msgid "Fish Breeder's House"
 msgstr "Viskwekerij"
 
@@ -313,48 +321,48 @@ msgstr "Viskwekerij"
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
 msgstr "Vis is één van de grootste voedselbronnen voor de Atlantiërs."
 
-#: ../../tribes/atlanteans/conf:117
+#: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
 msgstr "Visser"
 
-#: ../../tribes/atlanteans/conf:164
+#: ../../tribes/atlanteans/conf:169
 msgid "Fisher's House"
 msgstr "Vissershuis"
 
-#: ../../tribes/atlanteans/conf:69
+#: ../../tribes/atlanteans/conf:70
 msgid "Fishing Net"
 msgstr "Visnet"
 
-#: ../../tribes/atlanteans/conf:118
+#: ../../tribes/atlanteans/conf:120
 msgid "Forester"
 msgstr "Boswachter"
 
-#: ../../tribes/atlanteans/conf:162
+#: ../../tribes/atlanteans/conf:167
 msgid "Forester's House"
 msgstr "Boswachtershuis"
 
-#: ../../tribes/atlanteans/conf:144
-#: ../../tribes/atlanteans/conf:151
+#: ../../tribes/atlanteans/conf:149
+#: ../../tribes/atlanteans/conf:156
 msgid "Fortress"
 msgstr "Vesting"
 
-#: ../../tribes/atlanteans/conf:119
+#: ../../tribes/atlanteans/conf:121
 msgid "Geologist"
 msgstr "Geoloog"
 
-#: ../../tribes/atlanteans/conf:73
+#: ../../tribes/atlanteans/conf:74
 msgid "Gold"
 msgstr "Goud"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:192
 msgid "Gold Mine"
 msgstr "Goudmijn"
 
-#: ../../tribes/atlanteans/conf:72
+#: ../../tribes/atlanteans/conf:73
 msgid "Gold Ore"
 msgstr "Gouderts"
 
-#: ../../tribes/atlanteans/conf:74
+#: ../../tribes/atlanteans/conf:75
 msgid "Gold Yarn"
 msgstr "Gouddraad"
 
@@ -366,23 +374,23 @@ msgstr ""
 "Goud is één van de meest waardevolle materialen. Enkel belangrijke zaken "
 "worden ermee gedecoreerd."
 
-#: ../../tribes/atlanteans/conf:71
+#: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
 msgstr "Gouden Tabberd"
 
-#: ../../tribes/atlanteans/conf:163
+#: ../../tribes/atlanteans/conf:168
 msgid "Goldweaver"
 msgstr "Goudwever"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:197
 msgid "Guardhall"
 msgstr "Wachthal"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:196
 msgid "Guardhouse"
 msgstr "Wachthuis"
 
-#: ../../tribes/atlanteans/conf:75
+#: ../../tribes/atlanteans/conf:76
 msgid "Hammer"
 msgstr "Hamer"
 
@@ -394,7 +402,7 @@ msgstr "Oogst helmkruidwortel"
 msgid "Harvest corn"
 msgstr "Oogst maïs"
 
-#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:161
 msgid "Headquarters"
 msgstr "Hoofdkwartier"
 
@@ -402,7 +410,7 @@ msgstr "Hoofdkwartier"
 msgid "Headquarters medium"
 msgstr "Gemiddeld hoofdkwartier"
 
-#: ../../tribes/atlanteans/conf:76
+#: ../../tribes/atlanteans/conf:77
 msgid "Heavy Double Trident"
 msgstr "Zware dubbele drietand"
 
@@ -410,63 +418,63 @@ msgstr "Zware dubbele drietand"
 msgid "Helps to carry items at heavy used roads."
 msgstr "Helpt items te sjouwen op veel gebruikte wegen."
 
-#: ../../tribes/atlanteans/conf:192
+#: ../../tribes/atlanteans/conf:198
 msgid "High Tower"
 msgstr "Hoge Toren"
 
-#: ../../tribes/atlanteans/conf:77
+#: ../../tribes/atlanteans/conf:78
 msgid "Hook pole"
 msgstr "Rookhaak"
 
-#: ../../tribes/atlanteans/conf:104
+#: ../../tribes/atlanteans/conf:105
 msgid "Horse"
 msgstr "Paard"
 
-#: ../../tribes/atlanteans/conf:134
+#: ../../tribes/atlanteans/conf:136
 msgid "Horse Breeder"
 msgstr "Paardenfokker"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:184
 msgid "Horse Farm"
 msgstr "Paardenboerderij"
 
-#: ../../tribes/atlanteans/conf:120
+#: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
 msgstr "Jager"
 
-#: ../../tribes/atlanteans/conf:166
+#: ../../tribes/atlanteans/conf:171
 msgid "Hunter's House"
 msgstr "Jachthuis"
 
-#: ../../tribes/atlanteans/conf:78
+#: ../../tribes/atlanteans/conf:79
 msgid "Hunting Bow"
 msgstr "Jachtboog"
 
-#: ../../tribes/atlanteans/conf:80
+#: ../../tribes/atlanteans/conf:81
 msgid "Iron"
 msgstr "IJzer"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:191
 msgid "Iron Mine"
 msgstr "IJzerertsmijn"
 
-#: ../../tribes/atlanteans/conf:79
+#: ../../tribes/atlanteans/conf:80
 msgid "Iron Ore"
 msgstr "IJzererts"
 
-#: ../../tribes/atlanteans/conf:200
+#: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
 msgstr "Labyrint"
 
-#: ../../tribes/atlanteans/conf:81
+#: ../../tribes/atlanteans/conf:82
 msgid "Light trident"
 msgstr "Lichte drietand"
 
-#: ../../tribes/atlanteans/conf:82
+#: ../../tribes/atlanteans/conf:83
 msgid "Long Trident"
 msgstr "Lange drietand"
 
-#: ../../tribes/atlanteans/conf:83
+#: ../../tribes/atlanteans/conf:84
 msgid "Meat"
 msgstr "Vlees"
 
@@ -474,7 +482,7 @@ msgstr "Vlees"
 msgid "Meat is one food-resource of the Atlanteans."
 msgstr "Vlees is een voedselbron voor de atlantiërs."
 
-#: ../../tribes/atlanteans/conf:84
+#: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
 msgstr "Melktang"
 
@@ -486,11 +494,11 @@ msgstr ""
 "Melktangen worden gebruikt door de spinnenkweker om de spinnen te melken. Ze "
 "worden gemaakt door de werktuigsmid."
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:176
 msgid "Mill"
 msgstr "Molen"
 
-#: ../../tribes/atlanteans/conf:121
+#: ../../tribes/atlanteans/conf:123
 msgid "Miller"
 msgstr "Molenaar"
 
@@ -510,19 +518,19 @@ msgstr "Delf kwarts"
 msgid "Mine stone"
 msgstr "Delf steen"
 
-#: ../../tribes/atlanteans/conf:122
+#: ../../tribes/atlanteans/conf:124
 msgid "Miner"
 msgstr "Mijnwerker"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:98
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:99
 msgid "Not enough space"
 msgstr "Niet genoeg ruimte"
 
-#: ../../tribes/atlanteans/conf:152
+#: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
 msgstr "Voorpost"
 
-#: ../../tribes/atlanteans/conf:86
+#: ../../tribes/atlanteans/conf:87
 msgid "Pick"
 msgstr "Pikhouweel"
 
@@ -534,7 +542,7 @@ msgstr ""
 "Pikhouwelen worden gebruikt door steenhouwers en mijnwerkers. Ze worden "
 "gemaakt door de werktuigsmid."
 
-#: ../../tribes/atlanteans/conf:87
+#: ../../tribes/atlanteans/conf:88
 msgid "Planks"
 msgstr "Planken"
 
@@ -688,11 +696,11 @@ msgstr "Produceert gereedschap voor de werkers."
 msgid "Produces weapons for the soldiers."
 msgstr "Produceert wapens voor de soldaten."
 
-#: ../../tribes/atlanteans/conf:160
+#: ../../tribes/atlanteans/conf:165
 msgid "Quarry"
 msgstr "Steengroeve"
 
-#: ../../tribes/atlanteans/conf:85
+#: ../../tribes/atlanteans/conf:86
 msgid "Quartz"
 msgstr "Bergkristall"
 
@@ -736,11 +744,11 @@ msgstr "Bronindicator geen grondstof"
 msgid "Resource indicator water"
 msgstr "Bronindicator water"
 
-#: ../../tribes/atlanteans/conf:88
+#: ../../tribes/atlanteans/conf:89
 msgid "Saw"
 msgstr "Zaag"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:174
 msgid "Sawmill"
 msgstr "Houtzagerij"
 
@@ -756,15 +764,15 @@ msgstr ""
 msgid "Saws the wood to produce planks."
 msgstr "Zaagt het hout om planken te produceren."
 
-#: ../../tribes/atlanteans/conf:123
+#: ../../tribes/atlanteans/conf:125
 msgid "Sawyer"
 msgstr "Zager"
 
-#: ../../tribes/atlanteans/conf:133
+#: ../../tribes/atlanteans/conf:135
 msgid "Scout"
 msgstr "Verkenner"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:173
 msgid "Scout's House"
 msgstr "Verkennershuis"
 
@@ -775,16 +783,32 @@ msgstr ""
 "Verkenners als Ken de Verkenner verkennen niet verkend gebied op een "
 "verkennersmanier."
 
-#: ../../tribes/atlanteans/conf:89
+#: ../../tribes/atlanteans/conf:90
 msgid "Scythe"
 msgstr "Zeis"
 
-#: ../../tribes/atlanteans/conf:145
-#: ../../tribes/atlanteans/conf:147
+#: ../../tribes/atlanteans/conf:150
+#: ../../tribes/atlanteans/conf:152
 msgid "Sentry"
 msgstr "Wachtpost"
 
-#: ../../tribes/atlanteans/conf:90
+#: ../../tribes/atlanteans/conf:139
+msgid "Ship"
+msgstr "Schip"
+
+#: ../../tribes/atlanteans/conf:55
+msgid "Ship construction site"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:116
+msgid "Shipwright"
+msgstr "Scheepsbouwer"
+
+#: ../../tribes/atlanteans/conf:177
+msgid "Shipyard"
+msgstr "Scheepswerf"
+
+#: ../../tribes/atlanteans/conf:91
 msgid "Shovel"
 msgstr "Schop"
 
@@ -802,7 +826,7 @@ msgstr ""
 msgid "Sleep"
 msgstr "Rust"
 
-#: ../../tribes/atlanteans/conf:193
+#: ../../tribes/atlanteans/conf:199
 msgid "Small Tower"
 msgstr "Kleine Toren"
 
@@ -814,11 +838,11 @@ msgstr "Smelt goud"
 msgid "Smelt iron"
 msgstr "Smelt ijzer"
 
-#: ../../tribes/atlanteans/conf:124
+#: ../../tribes/atlanteans/conf:126
 msgid "Smelter"
 msgstr "Smelter"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:180
 msgid "Smelting Works"
 msgstr "Hoogoven"
 
@@ -834,19 +858,19 @@ msgstr "Rook vis"
 msgid "Smoke meat"
 msgstr "Rook vlees"
 
-#: ../../tribes/atlanteans/conf:91
+#: ../../tribes/atlanteans/conf:92
 msgid "Smoked fish"
 msgstr "Gerookte vis"
 
-#: ../../tribes/atlanteans/conf:92
+#: ../../tribes/atlanteans/conf:93
 msgid "Smoked meat"
 msgstr "Gerookt vlees"
 
-#: ../../tribes/atlanteans/conf:125
+#: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
 msgstr "Roker"
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:175
 msgid "Smokery"
 msgstr "Rokerij"
 
@@ -854,11 +878,11 @@ msgstr "Rokerij"
 msgid "Smokes meat and fish."
 msgstr "Rookt vlees en vis."
 
-#: ../../tribes/atlanteans/conf:107
+#: ../../tribes/atlanteans/conf:108
 msgid "Soldier"
 msgstr "Soldaat"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:99
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:100
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
 "weren't build. You are at an disadvantage with this; consider restarting\n"
@@ -868,31 +892,31 @@ msgstr ""
 "zijn niet gebouwd. Je bent hierdoor in het nadeel: overweeg om deze map\n"
 "te herstarten in een eerlijke start positie."
 
-#: ../../tribes/atlanteans/conf:126
+#: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
 msgstr "Spinnenkweker"
 
-#: ../../tribes/atlanteans/conf:93
+#: ../../tribes/atlanteans/conf:94
 msgid "Spidercloth"
 msgstr "Spinnendoek"
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:185
 msgid "Spiderfarm"
 msgstr "Spinnenboerderij"
 
-#: ../../tribes/atlanteans/conf:94
+#: ../../tribes/atlanteans/conf:95
 msgid "Spideryarn"
 msgstr "Spinnengaren"
 
-#: ../../tribes/atlanteans/conf:95
+#: ../../tribes/atlanteans/conf:96
 msgid "Steel Shield"
 msgstr "Stalen schild"
 
-#: ../../tribes/atlanteans/conf:96
+#: ../../tribes/atlanteans/conf:97
 msgid "Steel Trident"
 msgstr "Stalen drietand"
 
-#: ../../tribes/atlanteans/conf:97
+#: ../../tribes/atlanteans/conf:98
 msgid "Stone"
 msgstr "Steen"
 
@@ -900,15 +924,15 @@ msgstr "Steen"
 msgid "Stone is one basic build ware type of the Atlanteans."
 msgstr "Steen is een basisbouwmateriaal van de Atlantiërs."
 
-#: ../../tribes/atlanteans/conf:127
+#: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
 msgstr "Steenhouwer"
 
-#: ../../tribes/atlanteans/conf:146
+#: ../../tribes/atlanteans/conf:151
 msgid "Stronghold"
 msgstr "Burcht"
 
-#: ../../tribes/atlanteans/conf:98
+#: ../../tribes/atlanteans/conf:99
 msgid "Tabard"
 msgstr "Tabberd"
 
@@ -1082,20 +1106,20 @@ msgstr ""
 "Om het goede atlantiërstaal te maken is een heet vuur nodig, maar een "
 "houtvuur is niet heet genoeg - deze kool geeft de benodigde hitte."
 
-#: ../../tribes/atlanteans/conf:128
+#: ../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
 msgstr "Werktuigsmid"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:181
 msgid "Toolsmithy"
 msgstr "Werktuigsmederij"
 
-#: ../../tribes/atlanteans/conf:153
-#: ../../tribes/atlanteans/conf:194
+#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:200
 msgid "Tower"
 msgstr "Toren"
 
-#: ../../tribes/atlanteans/conf:129
+#: ../../tribes/atlanteans/conf:131
 msgid "Trainer"
 msgstr "Trainer"
 
@@ -1103,7 +1127,7 @@ msgstr "Trainer"
 msgid "Trains the soldiers."
 msgstr "Traint de soldaten."
 
-#: ../../tribes/atlanteans/conf:99
+#: ../../tribes/atlanteans/conf:100
 msgid "Trunk"
 msgstr "Boomstam"
 
@@ -1221,11 +1245,11 @@ msgstr ""
 "Opwaarderen soldatenlevenspunten 0 (alleen voor compatibiliteit met oude "
 "opgeslagen spellen (build 13))"
 
-#: ../../tribes/atlanteans/conf:157
+#: ../../tribes/atlanteans/conf:162
 msgid "Warehouse"
 msgstr "Magazijn"
 
-#: ../../tribes/atlanteans/conf:100
+#: ../../tribes/atlanteans/conf:101
 msgid "Water"
 msgstr "Water"
 
@@ -1237,7 +1261,7 @@ msgstr ""
 "Water is de meest noodzakelijk stof voor leven! Dit water wordt voor veel "
 "zaken gebruikt, zoals het bakken van brood."
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:182
 msgid "Weapon Smithy"
 msgstr "Wapensmederij"
 
@@ -1245,27 +1269,27 @@ msgstr "Wapensmederij"
 msgid "Weapons and Tools are made of iron."
 msgstr "Wapens en gereedsschap worden gemaakt van ijzer."
 
-#: ../../tribes/atlanteans/conf:130
+#: ../../tribes/atlanteans/conf:132
 msgid "Weaponsmith"
 msgstr "Wapensmid"
 
-#: ../../tribes/atlanteans/conf:131
+#: ../../tribes/atlanteans/conf:133
 msgid "Weaver"
 msgstr "Wever"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:186
 msgid "Weaving-Mill"
 msgstr "Weverij"
 
-#: ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:172
 msgid "Well"
 msgstr "Put"
 
-#: ../../tribes/atlanteans/conf:132
+#: ../../tribes/atlanteans/conf:134
 msgid "Woodcutter"
 msgstr "Houthakker"
 
-#: ../../tribes/atlanteans/conf:161
+#: ../../tribes/atlanteans/conf:166
 msgid "Woodcutter's House"
 msgstr "Houtvesterswoning"
 
@@ -1288,6 +1312,7 @@ msgstr "Houtvesterswoning"
 #: ../../tribes/atlanteans/quarry/conf:16
 #: ../../tribes/atlanteans/sawmill/conf:19
 #: ../../tribes/atlanteans/scouts_house/conf:18
+#: ../../tribes/atlanteans/shipyard/conf:19
 #: ../../tribes/atlanteans/smelting_works/conf:25
 #: ../../tribes/atlanteans/smokery/conf:27
 #: ../../tribes/atlanteans/spiderfarm/conf:17
@@ -1302,6 +1327,10 @@ msgstr "Werk"
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
 msgstr "Werkt op bouwplaatsen om nieuwe gebouwen op te richten."
+
+#: ../../tribes/atlanteans/shipwright/conf:1
+msgid "Works at the shipyard and constructs new ships."
+msgstr "Werkt in de scheepswerf en bouwt nieuwe schepen."
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."

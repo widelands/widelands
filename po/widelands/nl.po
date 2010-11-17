@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-10 22:37+0100\n"
-"PO-Revision-Date: 2010-11-14 14:37+0000\n"
-"Last-Translator: megabyte <Unknown>\n"
+"PO-Revision-Date: 2010-11-16 12:36+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-15 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-11-17 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -3080,7 +3080,7 @@ msgstr "Uw %s kan geen weg naar huis vinden en gaat waarschijnlijk dood."
 
 #: ../../src/logic/worker.cc:1747
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Werker is verdwaald!"
 
 #: ../../src/logic/worker.cc:2927
 #, c-format
@@ -3521,7 +3521,7 @@ msgstr "niveau"
 #: ../../src/logic/production_program.cc:1336
 #, c-format
 msgid "No soldier for this training level found!"
-msgstr ""
+msgstr "Geen soldaat voor dit trainingsniveau gevonden!"
 
 #: ../../src/logic/production_program.cc:1312
 #, c-format
@@ -3630,7 +3630,7 @@ msgstr "Status"
 
 #: ../../src/ui_fsmenu/main.cc:44
 msgid "Play Tutorial"
-msgstr "Speel Oefencampagne"
+msgstr "Speel oefencampagne"
 
 #: ../../src/ui_fsmenu/main.cc:53
 msgid "Single Player"
@@ -3766,23 +3766,23 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:67
 msgid "Select a map"
-msgstr ""
+msgstr "Selecteer een kaart"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Opgeslagen spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Selecteer een opgeslagen spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:83
 msgid "Cancel selection"
-msgstr ""
+msgstr "Annuleer selectie"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:112
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Verander kaart of opgeslagen spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:120 ../../src/ui_fsmenu/launchSPG.cc:82
 msgid "Start game"
@@ -3790,7 +3790,7 @@ msgstr "Start spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:146
 msgid "Show the help window"
-msgstr ""
+msgstr "Toon het helpvenster"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:153 ../../src/ui_fsmenu/launchMPG.cc:581
 msgid "Multiplayer Game Setup"
@@ -3843,6 +3843,8 @@ msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
+"Op het moment bent u %s\n"
+"\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:470
 msgid "Saved players are:"
@@ -3862,17 +3864,17 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:559
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Kaartinformatie:\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:560
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Grootte: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:561
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i spelers\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 #, c-format

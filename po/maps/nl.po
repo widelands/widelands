@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-06-06 20:58+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-10 21:37+0000\n"
+"PO-Revision-Date: 2010-11-16 08:44+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-17 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../campaigns/cconfig:24
+#: ../../campaigns/cconfig:27
 msgid "(Tutorial) Barbarians - The second Empire"
 msgstr "(Oefencampagne) Barbaren - Het tweede koninkrijk"
 
-#: ../../campaigns/cconfig:84
+#: ../../campaigns/cconfig:88
 msgid "01 - From nemesis to genesis"
 msgstr "01 - Van nemesis naar genesis"
 
@@ -99,7 +99,7 @@ msgstr ""
 "schatten van zijn vijand op het eeuwenoude altaar offeren, er een prachtig "
 "kasteel bouwen en de goede wil en het respect van de Goden verkrijgen."
 
-#: ../../campaigns/cconfig:36
+#: ../../campaigns/cconfig:39
 msgid "Atlanteans - the new rise"
 msgstr "Atlantiërs - de nieuwe opstanding"
 
@@ -139,15 +139,15 @@ msgstr ""
 msgid "Elven Forests"
 msgstr "Elvenbossen"
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:33
 msgid "Empire - The months of exile"
 msgstr "Keizerrijk - De maanden in ballingschap"
 
-#: ../../campaigns/cconfig:74
+#: ../../campaigns/cconfig:78
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Keizerrijk trainingsmissie1 - De stranden van Malac' Mor"
 
-#: ../../campaigns/cconfig:79
+#: ../../campaigns/cconfig:83
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Keizerrijk leerschool 2 - Een voorpost voor ballingschap"
 
@@ -238,6 +238,14 @@ msgstr ""
 "Er wordt gefluisterd dat zelfs de zon en de maan hun weg moeten zoeken "
 "tussen deze bergpieken. HINT: Monolieten markeren delfstoffen. Doe geen "
 "moeite om geologen elders te sturen."
+
+#: ../../maps/Swamp Monks.wmf/elemental:9
+msgid ""
+"It is said, that the old war monks, living in the even older swamps are the "
+"key to the control of the whole island."
+msgstr ""
+"Er wordt gefluisterd dat de oude oorlogsmonniken die in het nog oudere "
+"moeras wonen de sleutel zijn om het hele eiland te beheersen."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -332,7 +340,7 @@ msgstr "Rendez-Vous"
 msgid "Riverlands"
 msgstr "Rivierenlanden"
 
-#: ../../campaigns/cconfig:33
+#: ../../campaigns/cconfig:36
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -356,7 +364,7 @@ msgstr ""
 "aangevallen door 100 barbaarse voetknechten en werd volledig uiteengedreven. "
 "Alleen zijn ledige leven een handjevol soldaten hebben het overleefd."
 
-#: ../../campaigns/cconfig:39
+#: ../../campaigns/cconfig:42
 msgid "Some descriptive texts..."
 msgstr "Enkele beschrijvende teksten..."
 
@@ -390,6 +398,10 @@ msgstr ""
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
 msgstr "Moeraseiland"
+
+#: ../../maps/Swamp Monks.wmf/elemental:7
+msgid "Swamp Monks"
+msgstr "Moerasmonniken"
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -486,15 +498,15 @@ msgstr ""
 msgid "Three Warriors"
 msgstr "Drie Strijders"
 
-#: ../../campaigns/cconfig:57
+#: ../../campaigns/cconfig:61
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Oefencampagne 1 - Ogen in de duisternis"
 
-#: ../../campaigns/cconfig:62
+#: ../../campaigns/cconfig:66
 msgid "Tutorial2 - A Place to call Home"
 msgstr "Oefencampagne 2 - Een plek om thuis te noemen"
 
-#: ../../campaigns/cconfig:67
+#: ../../campaigns/cconfig:71
 msgid "Tutorial3 - This land is our land"
 msgstr "Oefencampagne 3 - Dit land is ons land"
 
@@ -523,7 +535,7 @@ msgstr ""
 "Goed afgeschermd in hun machtige vestingen, zijn vier heerszuchtige "
 "krijgsheren hun schema aan het uitwerken om dit land te domineren..."
 
-#: ../../campaigns/cconfig:27
+#: ../../campaigns/cconfig:30
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons and warlord to an army that could match any enemy willing to "
