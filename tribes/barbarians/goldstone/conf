@@ -1,4 +1,8 @@
-help=_This is the yellow goldstone.
+# Note: this ware once was called gold stone, but because it felt akward
+# to natural speakers, we changed its name to gold ore. The internal name was
+# kept to goldstone though to not break any older savegames.
+
+help=_This is gold ore mined from deep within the mountains.
 preciousness=2
 
 [idle]
