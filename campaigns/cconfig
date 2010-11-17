@@ -23,20 +23,20 @@
 
 [global]
 version = 5
-# Barbarian Tutorial Campaign
-campname0=_"(Tutorial) Barbarians - The second empire"
+# Barbarian introduction campaign
+campname0=_"(Introduction campaign) Barbarians - The second empire"
 campsect0=barbariantut
 campdiff0=1
 campdesc0=_"When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though at the end of his glorious reign, Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father instructed him, Thron left the capital of Al’thunran, the home of the Throne Among the Trees and withdrew his forces to the high hills where he buried the corpse of his father. There he swore to the gods and his father's spirit that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
 campvisi0=1
-# Empire Campaign
-campname1=_"(Tutorial) Empire - The months of exile"
+# Empire introduction campaign
+campname1=_"(Introduction campaign) Empire - The months of exile"
 campsect1=empiretut
 campdiff1=2
 campdesc1=_"Six months ago, Lutius - a young general of the Empire - was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire's land. At first, everything was calm. He even talked to a few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."
 campvisi1=0
-# Atlantean Campaign
-campname2=_"Atlanteans - The run for the fire"
+# Atlantean introduction campaign
+campname2=_"(introduction campaign) Atlanteans - The run for the fire"
 campsect2=atlanteans
 campdiff2=3
 campdesc2=_"When the God lost faith in the Atlanteans and drowned their island, one woman's struggle for justice and a second chance for her people would become the stuff of legends. Leading the remaining Atlanteans into a new future in a new part of the World, Jundlina became the most powerful human of her time, but at a high cost: her humanity and soul."
