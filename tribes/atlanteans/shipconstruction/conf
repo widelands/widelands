@@ -12,6 +12,6 @@ construction=idle 5000 210000
 transform=bob tribe:ship
 
 [idle]
-pics=shipbuild_??.png
-hotspot=55 60
+pics=ship-build_??.png
+hotspot=118 94
 playercolor=true
