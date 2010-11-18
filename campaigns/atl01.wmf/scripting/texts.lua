@@ -42,6 +42,9 @@ function speech(img, clr, g_title, g_text)
       text = g_title
    end
 
+   -- Surround the text with translatable ","
+   text = (_ '"%s"'):format(text)
+
    local s = ""
    if title then
       s = rt("<p font-size=20 font-weight=bold font-face=FreeSerif " ..
