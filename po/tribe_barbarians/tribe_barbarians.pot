@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-11 07:50+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -428,14 +428,14 @@ msgid ""
 "Gold Mine"
 msgstr ""
 
+#: ../../tribes/barbarians/conf:82
+msgid ""
+"Gold Ore"
+msgstr ""
+
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are garnished with it."
-msgstr ""
-
-#: ../../tribes/barbarians/conf:82
-msgid ""
-"Goldstone"
 msgstr ""
 
 #: ../../tribes/barbarians/conf:195
@@ -635,7 +635,7 @@ msgid ""
 "Miner"
 msgstr ""
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:90
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid ""
 "Not enough space"
 msgstr ""
@@ -1025,10 +1025,10 @@ msgid ""
 "Soldier"
 msgstr ""
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
 
@@ -1137,6 +1137,11 @@ msgid ""
 "The warriors axe is the most dangerous of all weapons. Only a few warriors ever were able to handle those huge and powerful axes. Build at the axe factory."
 msgstr ""
 
+#: ../../tribes/barbarians/goldstone/conf:5
+msgid ""
+"This is gold ore mined from deep within the mountains."
+msgstr ""
+
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "This is the red iron ore."
@@ -1145,11 +1150,6 @@ msgstr ""
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
 "This is the second most dangerous weapon the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produced in the axe factory."
-msgstr ""
-
-#: ../../tribes/barbarians/goldstone/conf:1
-msgid ""
-"This is the yellow goldstone."
 msgstr ""
 
 #: ../../tribes/barbarians/pick/conf:1

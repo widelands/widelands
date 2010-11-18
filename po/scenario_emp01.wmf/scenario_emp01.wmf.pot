@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-11 07:50+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:73
 msgid ""
-" \"Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
+" \"Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our provisional headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:126
@@ -77,7 +77,7 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:51
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:156
 msgid ""
-"* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
+"* Build a barracks at the red house symbol on the east side of the forests, to the right of your provisional headquarters."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:103
@@ -87,9 +87,13 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:74
+msgid ""
+"* Build a lumberjack's house at the red house symbol, south of your provisional headquarters. Cutting down enough trees for more buildings will take a while. You can speed the game up using PAGE UP and slow it down again with PAGE DOWN."
+msgstr ""
+
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:163
 msgid ""
-"* Build a lumberjack's house at the red point, south of your headquarters. Cutting down enough trees for more buildings will take a while. You can speed the game up using PAGE UP and slow it down again with PAGE DOWN."
+"* Build a lumberjack's house at the red point, south of your provisional headquarters. Cutting down enough trees for more buildings will take a while. You can speed the game up using PAGE UP and slow it down again with PAGE DOWN."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:115
@@ -102,6 +106,11 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:174
 msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/elemental:7
+msgid ""
+"01 - The Strands of Malac' Mor"
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:10
@@ -121,7 +130,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
-"After losing an important battle against the barbarians which lead to the lost of a big part of the Empire's territory, Lutius leaves Fremil to start a new life. But his destiny takes his ship into a heavy storm, which nearly destroys it. Only with a lot of luck he manages to beach his damaged ship on an unknown desert strand and save his people. For now."
+"After losing an important battle against the barbarians which lead to the loss of a big part of the Empire's territory, Lutius leaves Fremil to start a new life. But his destiny takes his ship into a heavy storm, which nearly destroys it. Only with a lot of luck he manages to beach his damaged ship on an unknown desert strand and save his people. For now."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:100
@@ -169,11 +178,6 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
 "Diary of Lutius"
-msgstr ""
-
-#: ../../campaigns/emp01.wmf/elemental:7
-msgid ""
-"Empire Tutorial1 - The strands of Malac' Mor"
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:133

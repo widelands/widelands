@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-11 07:50+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -121,7 +121,6 @@ msgid ""
 " \"Thron told me that he discovered tracks in the snow to the northeast of our settlement. He instructed us to build a Donjon, to have a greater visual range on the area around our hall to protect our people from sudden attacks.\" "
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:111
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
 "* As soon as the blacksmith reaches his next level (master blacksmith) enhance your metalworks to an axefactory or even a war mill and build up another metalworks to ensure the production of tools."
@@ -189,6 +188,11 @@ msgid ""
 "* Destroy all enforcements of Thron’s two brothers to liberate the throne-circle."
 msgstr ""
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:111
+msgid ""
+"* Enhance your metalworks to an axefactory or - as soon as the blacksmith reaches his next level (master blacksmith) - even to a war mill and build up another metalworks to ensure the production of tools."
+msgstr ""
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
 msgid ""
@@ -231,6 +235,11 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid ""
 "-> Warehouses are similiar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer."
+msgstr ""
+
+#: ../../campaigns/t03.wmf/elemental:7
+msgid ""
+"03 - This Land is our Land"
 msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
@@ -410,7 +419,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the handling of military and training site buildings and will finally introduce fighting."
+"This tutorial explains the handling of military and training site buildings and will introduce fighting."
 msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
@@ -437,11 +446,6 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:260
 msgid ""
 "Tracks"
-msgstr ""
-
-#: ../../campaigns/t03.wmf/elemental:7
-msgid ""
-"Tutorial3 - This land is our land"
 msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
