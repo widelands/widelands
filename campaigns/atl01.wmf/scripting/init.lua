@@ -90,6 +90,9 @@ function initialize()
    use("tribe_atlanteans", "sc00_headquarters_medium")
    init.func(p1) -- defined in sc00_headquarters_medium
    set_textdomain("scenario_atl01.wmf")
+   local hq = wl.Game().map.player_slots[1].starting_field.immovable
+   hq:set_workers{shipwright=1}
+
 
    -- Place some buildings
    prefilled_buildings(p1,

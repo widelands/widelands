@@ -285,14 +285,14 @@ day without noticing any pursuers from Atlantis and without Lutas having smashed
 our ship. Now, we are out of his reach. One day later, we sighted an island
 which seems to have one of these fire spitting mountains on it. I deemed this
 a sign from the fire god and we landed on its shore.]]
-   ) .. p(_
+   .. "<br><br>" .. _
 [[We spent the last week building two watchtowers on the mountains close to
 our landing area; and, of course, a hall for us all. We have very talented
 constructors in our group - still, the buildings do not match the art we
 had on Atlantis. I hope they will withstand the next rain. At least, the towers
 will warn us if a ship from Atlantis follows us and if the island is inhabited,
 we will see attackers a long time before they arrive.]]
-   ) .. p(_
+   .. "<br><br>" .. _
 [[We have established ourselves on this island. The next step is now to make it
 a home. I reckon we need to establish a sustainable economy and explore our
 surroundings. I called for specialists and will follow their advice.]]
@@ -538,7 +538,7 @@ then? They work with fire, are they praying to Satul too? Are they friends or
 foe? And why is the building burned down? Has this island seen war? Is a
 war being waged on it right now?<br><br>
 We must improve our military capabilities. If there are foes on the island, we
-have to be prepared when we meet them. We should also enforce the foritfication
+have to be prepared when we meet them. We should also enforce the fortification
 of our borders.
 ]]
    )
