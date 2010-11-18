@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-11 07:50+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -138,6 +138,11 @@ msgid ""
 "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br> To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br> Maybe you will also need a hunter's house,<br> a piggery, a vineyard and some wells.<br> It's up to you what you want to build.<br> But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
 msgstr ""
 
+#: ../../campaigns/emp02.wmf/elemental:9
+msgid ""
+"02 - An Outpost for Exile"
+msgstr ""
+
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:230
 msgid ""
 "7 days later..."
@@ -210,14 +215,9 @@ msgid ""
 "Diary of Lutius"
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/elemental:9
-msgid ""
-"Empire Tutorial2 - An outpost for exile"
-msgstr ""
-
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
-"Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediterranean island, looking like paradise."
+"Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only a few days later they land on a green, mediterranean island, looking like paradise. Overjoyed, they set out to explore this new living space."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177

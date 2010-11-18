@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-11 07:50+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -34,7 +34,7 @@ msgid ""
 "%s has "
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:138
+#: ../../scripting/win_conditions/03_territorial_lord.lua:145
 msgid ""
 "%s owns more than half of the maps area."
 msgstr ""
@@ -71,7 +71,7 @@ msgid ""
 "Endless Game"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:144
+#: ../../scripting/win_conditions/03_territorial_lord.lua:151
 msgid ""
 "Keep it for %i more minutes to win the game."
 msgstr ""
@@ -88,8 +88,8 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/win_conditions/02_collectors.lua:128
-#: ../../scripting/win_conditions/03_territorial_lord.lua:149
-#: ../../scripting/win_conditions/03_territorial_lord.lua:151
+#: ../../scripting/win_conditions/03_territorial_lord.lua:156
+#: ../../scripting/win_conditions/03_territorial_lord.lua:158
 #: ../../scripting/win_conditions/04_wood_gnome.lua:88
 msgid ""
 "Status"
@@ -100,10 +100,10 @@ msgid ""
 "Status for Player %i<br>"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:122
-#: ../../scripting/win_conditions/03_territorial_lord.lua:125
-#: ../../scripting/win_conditions/03_territorial_lord.lua:147
-#: ../../scripting/win_conditions/03_territorial_lord.lua:176
+#: ../../scripting/win_conditions/03_territorial_lord.lua:129
+#: ../../scripting/win_conditions/03_territorial_lord.lua:132
+#: ../../scripting/win_conditions/03_territorial_lord.lua:154
+#: ../../scripting/win_conditions/03_territorial_lord.lua:183
 msgid ""
 "Team %i"
 msgstr ""
@@ -156,7 +156,7 @@ msgstr ""
 #: ../../scripting/win_conditions/00_endless_game.lua:24
 #: ../../scripting/win_conditions/01_defeat_all.lua:24
 #: ../../scripting/win_conditions/02_collectors.lua:179
-#: ../../scripting/win_conditions/03_territorial_lord.lua:159
+#: ../../scripting/win_conditions/03_territorial_lord.lua:166
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
 msgid ""
 "You are defeated!"
@@ -168,7 +168,7 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
-#: ../../scripting/win_conditions/03_territorial_lord.lua:178
+#: ../../scripting/win_conditions/03_territorial_lord.lua:185
 msgid ""
 "You are the winner!"
 msgstr ""
@@ -186,7 +186,7 @@ msgstr ""
 #: ../../scripting/win_conditions/00_endless_game.lua:25
 #: ../../scripting/win_conditions/01_defeat_all.lua:25
 #: ../../scripting/win_conditions/02_collectors.lua:180
-#: ../../scripting/win_conditions/03_territorial_lord.lua:160
+#: ../../scripting/win_conditions/03_territorial_lord.lua:167
 #: ../../scripting/win_conditions/04_wood_gnome.lua:95
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
@@ -198,7 +198,7 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/win_conditions/02_collectors.lua:139
-#: ../../scripting/win_conditions/03_territorial_lord.lua:180
+#: ../../scripting/win_conditions/03_territorial_lord.lua:187
 msgid ""
 "You lost"
 msgstr ""
@@ -208,25 +208,25 @@ msgid ""
 "You lost!"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:142
+#: ../../scripting/win_conditions/03_territorial_lord.lua:149
 msgid ""
 "You own more than half of the maps area."
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:140
+#: ../../scripting/win_conditions/03_territorial_lord.lua:147
 msgid ""
 "You still got %i minutes to prevent a victory."
 msgstr ""
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
-#: ../../scripting/win_conditions/03_territorial_lord.lua:178
+#: ../../scripting/win_conditions/03_territorial_lord.lua:185
 #: ../../scripting/win_conditions/04_wood_gnome.lua:151
 msgid ""
 "You won!"
 msgstr ""
 
 #: ../../scripting/win_conditions/02_collectors.lua:139
-#: ../../scripting/win_conditions/03_territorial_lord.lua:180
+#: ../../scripting/win_conditions/03_territorial_lord.lua:187
 msgid ""
 "You've lost this game!"
 msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-11 07:50+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,14 +14,34 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../campaigns/cconfig:27
+#: ../../campaigns/cconfig:64
 msgid ""
-"(Tutorial) Barbarians - The second Empire"
+"01 - Eyes in the Dark"
 msgstr ""
 
-#: ../../campaigns/cconfig:88
+#: ../../campaigns/cconfig:91
 msgid ""
-"01 - From nemesis to genesis"
+"01 - From Nemesis to Genesis"
+msgstr ""
+
+#: ../../campaigns/cconfig:81
+msgid ""
+"01 - The Strands of Malac' Mor"
+msgstr ""
+
+#: ../../campaigns/cconfig:69
+msgid ""
+"02 - A Place to call Home"
+msgstr ""
+
+#: ../../campaigns/cconfig:86
+msgid ""
+"02 - An Outpost for Exile"
+msgstr ""
+
+#: ../../campaigns/cconfig:74
+msgid ""
+"03 - This Land is our Land"
 msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
@@ -64,14 +84,19 @@ msgid ""
 "Another thaw set in. Three tribes were sheltering form severe winter among majestic mountains. During solstice they listened to the oracle and went on to war. The only survivor will sacrifice his enemies' treasures on the ancient altar, build there a splendid castle and gain goodwill and the respect of the Gods."
 msgstr ""
 
-#: ../../campaigns/cconfig:39
+#: ../../campaigns/cconfig:41
 msgid ""
-"Atlanteans - the new rise"
+"Atlanteans - The Run for the Fire"
 msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid ""
 "Atoll"
+msgstr ""
+
+#: ../../campaigns/cconfig:27
+msgid ""
+"Barbarians - The second Empire"
 msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:7
@@ -99,24 +124,24 @@ msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional water sources. Hint 3: Each mountain contains only one resource."
 msgstr ""
 
+#: ../../campaigns/cconfig:30
+msgid ""
+"Easy. Introduces the Barbarians"
+msgstr ""
+
+#: ../../campaigns/cconfig:37
+msgid ""
+"Easy. Introduces the Empire"
+msgstr ""
+
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid ""
 "Elven Forests"
 msgstr ""
 
-#: ../../campaigns/cconfig:33
+#: ../../campaigns/cconfig:34
 msgid ""
-"Empire - The months of exile"
-msgstr ""
-
-#: ../../campaigns/cconfig:78
-msgid ""
-"Empire Tutorial1 - The strands of Malac' Mor"
-msgstr ""
-
-#: ../../campaigns/cconfig:83
-msgid ""
-"Empire Tutorial2 - An outpost for exile"
+"Empire - The Months of Exile"
 msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
@@ -254,14 +279,9 @@ msgid ""
 "Riverlands"
 msgstr ""
 
-#: ../../campaigns/cconfig:36
+#: ../../campaigns/cconfig:38
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire's land. At first, everything was calm. He even talked to a few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."
-msgstr ""
-
-#: ../../campaigns/cconfig:42
-msgid ""
-"Some descriptive texts..."
 msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
@@ -354,21 +374,6 @@ msgid ""
 "Three Warriors"
 msgstr ""
 
-#: ../../campaigns/cconfig:61
-msgid ""
-"Tutorial1 - Eyes in the Dark"
-msgstr ""
-
-#: ../../campaigns/cconfig:66
-msgid ""
-"Tutorial2 - A Place to call Home"
-msgstr ""
-
-#: ../../campaigns/cconfig:71
-msgid ""
-"Tutorial3 - This land is our land"
-msgstr ""
-
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid ""
 "Twinkling Waves"
@@ -394,9 +399,14 @@ msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
 msgstr ""
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though at the end of his glorious reign, Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father instructed him, Thron left the capital of Al’thunran, the home of the Throne Among the Trees and withdrew his forces to the high hills where he buried the corpse of his father. There he swore to the gods and his father's spirit that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
+msgstr ""
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one woman's struggle for justice and a second chance for her people would become the stuff of legends. Leading the remaining Atlanteans into a new future in a new part of the World, Jundlina became the most powerful human of her time, but at a high cost: her humanity and soul."
 msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:9

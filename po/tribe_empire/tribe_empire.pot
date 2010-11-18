@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-11 07:50+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -643,7 +643,7 @@ msgid ""
 "Miner"
 msgstr ""
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:115
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid ""
 "Not enough space"
 msgstr ""
@@ -791,6 +791,11 @@ msgstr ""
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid ""
 "Produce shovel"
+msgstr ""
+
+#: ../../tribes/empire/weaponsmithy/conf:33
+msgid ""
+"Produce war lance"
 msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:29
@@ -981,10 +986,10 @@ msgid ""
 "Soldier"
 msgstr ""
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:116
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
 

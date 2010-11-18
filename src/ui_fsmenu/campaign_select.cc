@@ -119,21 +119,12 @@ int32_t Fullscreen_Menu_CampaignSelect::get_campaign()
 	return campaign;
 }
 
-
-/// Textual descriptions of difficulty levels.
-static char const * const dif_descriptions[] = {
-	_("[No value found]"),
-	_("Easy living"),
-	_("Be vigilant"),
-	_("Hard struggle")
-};
-
 /// Pictorial descriptions of difficulty levels.
 static char const * const dif_picture_filenames[] = {
 	"pics/novalue.png",
-	"pics/big.png",
-	"pics/medium.png",
-	"pics/small.png"
+	"pics/easy.png",
+	"pics/challenging.png",
+	"pics/hard.png"
 };
 
 /**
@@ -150,6 +141,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 		// predefine the used variables
 		char cname       [sizeof("campname4294967296")];
 		char cdifficulty [sizeof("campdiff4294967296")];
+		char cdif_descr[sizeof("campdiffdescr4294967296")];
 		char cdescription[sizeof("campdesc4294967296")];
 
 		Profile prof("campaigns/cconfig", 0, "maps");
@@ -159,13 +151,17 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 		sprintf(cname,        "campname%u", i);
 		sprintf(cdifficulty,  "campdiff%u", i);
 		sprintf(cdescription, "campdesc%u", i);
+		sprintf(cdif_descr, "campdiffdescr%u", i);
 
 		uint32_t dif = s.get_natural(cdifficulty);
-		if (sizeof(dif_descriptions) / sizeof(*dif_descriptions) <= dif)
+		if (dif > 3)
 			dif = 0;
 
-		tacampname .set_text(s.get_string(cname,        _("[No value found]")));
-		tadifficulty.set_text(i18n::translate(dif_descriptions[dif]));
+		std::string dif_description = s.get_string
+			(cdif_descr, _("[No value found]"));
+
+		tacampname .set_text(s.get_string(cname,   _("[No value found]")));
+		tadifficulty.set_text(dif_description);
 		tacampdescr.set_text(s.get_string(cdescription, _("[No value found]")));
 	} else { // normally never here
 		b_ok.set_enabled(false);

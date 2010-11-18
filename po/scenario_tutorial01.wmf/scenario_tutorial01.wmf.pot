@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-11 07:50+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -17,7 +17,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
 "A message has been sent to you. See how the button at the bottom of the\n"
-"screen has changed appearance? You should now burn this quarry down as it is\n"
+"screen has changed appearance? You might now burn this quarry down as it is\n"
 "no longer of any use and is just blocking space. To do that, click on the\n"
 "quarry and select the destroy button."
 msgstr ""
@@ -189,7 +189,7 @@ msgid ""
 "are directly in road building mode when you ordered a new site. But now, you\n"
 "aren't. To build a completely new road just click on the flag in front of your\n"
 "construction site, click on the build road icon then click on the flag in front\n"
-"of your headquarters."
+"of your headquarters. Wait for the completion of the stonemason's hut."
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
@@ -443,13 +443,21 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:583
 msgid ""
-"If you want to come back to this eastern part of your realm, just scroll here\n"
+"If you want to come back to this south-western part of your realm, just scroll here\n"
 "via right-button scrolling or open the minimap by clicking on the"
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid ""
 "Introducing messages"
+msgstr ""
+
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:95
+msgid ""
+"It is easier to understand what is allowed to be built on which field when\n"
+"the build help symbols are enabled. Do so now either by pressing SPACE or by\n"
+"clicking the fourth button from the left at the very bottom of the screen.\n"
+"Click the \"OK\" button and then give it a try."
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:283
@@ -675,8 +683,8 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:558
 msgid ""
 "So our geologist found a lot of coal on this mountain. You should therefore\n"
-"build a coal mine here. Building a mine is like building a house. The build\n"
-"help symbol for where a mine can be built is"
+"build a coal mine here. Building a mine is like building a house. The build help\n"
+"symbol for where a mine can be built is"
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
@@ -753,7 +761,7 @@ msgstr ""
 msgid ""
 "The minimap shows you the complete map in miniature. You can directly jump to\n"
 "any field by left-clicking on it. You can also toggle buildings, roads, flags\n"
-"and player indicators on and off inside the map."
+"and player indicators on and off inside the minimap."
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:169
@@ -799,7 +807,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:332
 msgid ""
-"There is a small slope to climb to reach this field. This means you're\n"
+"There is a small slope to climb to reach this field. This means your\n"
 "workers are faster walking downwards than they are walking upwards."
 msgstr ""
 

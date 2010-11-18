@@ -91,7 +91,7 @@ fourth one from the left. Or you can use the SPACE key to toggle it.]]
    obj_name = "enable_buildhelp",
    obj_title = _ "Enable the build help",
    obj_body = rt(h1(_"Enable the build help") ..
-      p(
+      p(_
 [[It is easier to understand what is allowed to be built on which field when
 the build help symbols are enabled. Do so now either by pressing SPACE or by
 clicking the fourth button from the left at the very bottom of the screen.
@@ -329,7 +329,7 @@ different markers. They have the following meaning:]]
       )) .. rt("image=pics/roadb_green.png", p(_
 [[The terrain is flat here. Your carriers will be very swift on this terrain.]]
    )) .. rt("image=pics/roadb_yellow.png", p(_
-[[There is a small slope to climb to reach this field. This means you're
+[[There is a small slope to climb to reach this field. This means your
 workers are faster walking downwards than they are walking upwards.]]
    )) .. rt("image=pics/roadb_red.png", p(_
 [[The connection between the fields is extremely steep. The speed increase in
@@ -349,7 +349,7 @@ We'll wait until the quarry is completed.]]
 are directly in road building mode when you ordered a new site. But now, you
 aren't. To build a completely new road just click on the flag in front of your
 construction site, click on the build road icon then click on the flag in front
-of your headquarters.]]
+of your headquarters. Wait for the completion of the stonemason's hut.]]
       )
    )
 }
@@ -460,7 +460,7 @@ conclude_messages = {
    title = _ "Message arrived!",
    body = rt(p(_
 [[A message has been sent to you. See how the button at the bottom of the
-screen has changed appearance? You should now burn this quarry down as it is
+screen has changed appearance? You might now burn this quarry down as it is
 no longer of any use and is just blocking space. To do that, click on the
 quarry and select the destroy button.]]
    ))
@@ -556,8 +556,8 @@ mining_02 = {
    title = _ "Mining conclusion",
    body = rt(p(_
 [[So our geologist found a lot of coal on this mountain. You should therefore
-build a coal mine here. Building a mine is like building a house. The build
-help symbol for where a mine can be built is]]
+build a coal mine here. Building a mine is like building a house. The build help
+symbol for where a mine can be built is]]
    )) .. rt("image=pics/mine.png", p(_"this one.")) ..
    rt(p(_
 [[Note that a mine needs rations to work. Rations are
@@ -580,7 +580,7 @@ other players and it has some game mechanics that deserve explanation. The
 economies of the tribes are explained in their individual tutorial campaigns.
 Ok, I am going to create us a little training ground with a training camp and a
 warehouse to the north east of here.]]) .. p(_
-[[If you want to come back to this eastern part of your realm, just scroll here
+[[If you want to come back to this south-western part of your realm, just scroll here
 via right-button scrolling or open the minimap by clicking on the]]
          )) .. rt("image=pics/menu_toggle_minimap.png", p(_
 [[minimap button at the bottom of the screen. Alternatively you could also press
@@ -588,7 +588,7 @@ via right-button scrolling or open the minimap by clicking on the]]
          )) .. (rt(p(_
 [[The minimap shows you the complete map in miniature. You can directly jump to
 any field by left-clicking on it. You can also toggle buildings, roads, flags
-and player indicators on and off inside the map.]]
+and player indicators on and off inside the minimap.]]
          ) .. p(_
 [[But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted to
 build a small training scenario for you. Let's do that now.]]
