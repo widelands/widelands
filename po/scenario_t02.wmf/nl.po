@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-16 15:58+0000\n"
-"Last-Translator: megabyte <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-18 20:21+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-17 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-11-19 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Netherlands\n"
 "X-Poedit-Language: Dutch\n"
@@ -412,6 +412,10 @@ msgstr ""
 "heeft niet en bouwen we een boederij? Ik zou vers gebakken pita brood zeker\n"
 "waarderen als afwisseling...\""
 
+#: ../../campaigns/t02.wmf/elemental:7
+msgid "02 - A Place to call Home"
+msgstr "02 - Oost west thuis best"
+
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
 msgstr "Een prachtige ochtend"
@@ -669,6 +673,14 @@ msgstr ""
 "voordat\n"
 "deze gebruikt kan worden in een secundair gebouw - anderen zullen volgen."
 
+#: ../../campaigns/t02.wmf/elemental:9
+msgid ""
+"In this scenario the higher production buildings, including mining and the "
+"military expansions will be introduced."
+msgstr ""
+"In dit scenario de hoger productiegebouwen, inclusief mijnen en militaire "
+"uitbreidingen zullen geïntroduceerd worden."
+
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
 msgstr "Khantruks staart over de velden..."
@@ -738,16 +750,6 @@ msgstr "Voorzie je mijnwerkers van voedsel"
 msgid "Refine your mined resources"
 msgstr "Verwerk je mijnmaterialen"
 
-#: ../../campaigns/t02.wmf/elemental:9
-msgid ""
-"Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
-"higher production buildings, including mining and the military expansions "
-"will be introduced."
-msgstr ""
-"Tweede missie van de Barbaren Oefencampagne. In deze campagne worden de "
-"hogere productiegebouwen, waaronder mijn en militaire uitbreidingen, "
-"geïntroduceerd."
-
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
 msgstr "Beginnen mijnen te bouwen op de berg"
@@ -811,10 +813,6 @@ msgstr "Thron schudt zijn hoofd..."
 msgid "Thron speaks..."
 msgstr "Thron spreekt..."
 
-#: ../../campaigns/t02.wmf/elemental:7
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Oefencampagne 2 - Een plek om thuis te noemen"
-
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
 msgstr "Overwinning"
@@ -861,6 +859,18 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:368
 msgid "Your loyal companion"
 msgstr "Je trouwe metgezel"
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Oefencampagne 2 - Een plek om thuis te noemen"
+
+#~ msgid ""
+#~ "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
+#~ "higher production buildings, including mining and the military expansions "
+#~ "will be introduced."
+#~ msgstr ""
+#~ "Tweede missie van de Barbaren Oefencampagne. In deze campagne worden de "
+#~ "hogere productiegebouwen, waaronder mijn en militaire uitbreidingen, "
+#~ "geïntroduceerd."
 
 #~ msgid ""
 #~ " \"The war goes on. More and more of our brothers and sisters flee the "

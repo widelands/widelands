@@ -6,23 +6,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-16 08:44+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-18 20:24+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-17 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-11-19 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../campaigns/cconfig:27
-msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Oefencampagne) Barbaren - Het tweede koninkrijk"
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Ogen in het donker"
 
-#: ../../campaigns/cconfig:88
-msgid "01 - From nemesis to genesis"
-msgstr "01 - Van nemesis naar genesis"
+#: ../../campaigns/cconfig:91
+msgid "01 - From Nemesis to Genesis"
+msgstr "01 - Van Nemesis tot Genesis"
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr "01 - De stranden van Malac' Mor"
+
+#: ../../campaigns/cconfig:69
+msgid "02 - A Place to call Home"
+msgstr "02 - Een plaats om thuis te noemen"
+
+#: ../../campaigns/cconfig:86
+msgid "02 - An Outpost for Exile"
+msgstr "02 - Een voorpost van ballingschap"
+
+#: ../../campaigns/cconfig:74
+msgid "03 - This Land is our Land"
+msgstr "03 - Dit land is ons land"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -99,13 +115,17 @@ msgstr ""
 "schatten van zijn vijand op het eeuwenoude altaar offeren, er een prachtig "
 "kasteel bouwen en de goede wil en het respect van de Goden verkrijgen."
 
-#: ../../campaigns/cconfig:39
-msgid "Atlanteans - the new rise"
-msgstr "Atlantiërs - de nieuwe opstanding"
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans - The Run for the Fire"
+msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
 msgstr "Atol"
+
+#: ../../campaigns/cconfig:27
+msgid "Barbarians - The second Empire"
+msgstr "Barbaren - Het tweede koninkrijk"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -135,21 +155,21 @@ msgstr ""
 "worden gevonden langs de rivier. Hint II: Sneeuwpoppen markeren extra "
 "waterbronnen. Hint 3: Elke berg heeft slechts één grondstof."
 
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr "Gemakkelijk. Introduceert de Barbaren"
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr "Gemakkelijk. Introduceert de Empiren"
+
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Elvenbossen"
 
-#: ../../campaigns/cconfig:33
-msgid "Empire - The months of exile"
-msgstr "Keizerrijk - De maanden in ballingschap"
-
-#: ../../campaigns/cconfig:78
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Keizerrijk trainingsmissie1 - De stranden van Malac' Mor"
-
-#: ../../campaigns/cconfig:83
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Keizerrijk leerschool 2 - Een voorpost voor ballingschap"
+#: ../../campaigns/cconfig:34
+msgid "Empire - The Months of Exile"
+msgstr "Empiren - De maanden van ballingschap"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -340,7 +360,7 @@ msgstr "Rendez-Vous"
 msgid "Riverlands"
 msgstr "Rivierenlanden"
 
-#: ../../campaigns/cconfig:36
+#: ../../campaigns/cconfig:38
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -363,10 +383,6 @@ msgstr ""
 "Dit werd hun ondergang. Op een nacht in maart werd zijn onvoorbereide leger "
 "aangevallen door 100 barbaarse voetknechten en werd volledig uiteengedreven. "
 "Alleen zijn ledige leven een handjevol soldaten hebben het overleefd."
-
-#: ../../campaigns/cconfig:42
-msgid "Some descriptive texts..."
-msgstr "Enkele beschrijvende teksten..."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -498,18 +514,6 @@ msgstr ""
 msgid "Three Warriors"
 msgstr "Drie Strijders"
 
-#: ../../campaigns/cconfig:61
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Oefencampagne 1 - Ogen in de duisternis"
-
-#: ../../campaigns/cconfig:66
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Oefencampagne 2 - Een plek om thuis te noemen"
-
-#: ../../campaigns/cconfig:71
-msgid "Tutorial3 - This land is our land"
-msgstr "Oefencampagne 3 - Dit land is ons land"
-
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Schitterende Golven"
@@ -535,7 +539,7 @@ msgstr ""
 "Goed afgeschermd in hun machtige vestingen, zijn vier heerszuchtige "
 "krijgsheren hun schema aan het uitwerken om dit land te domineren..."
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -561,6 +565,15 @@ msgstr ""
 "tussen de bomen en trok zijn leger terug naar de hoge heuvels waar hij "
 "samenkwam met zijn ambitieuze broers en de legers van de stam om nogmaals "
 "samen marcheren onder gelijke vaandels."
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -616,6 +629,9 @@ msgstr ""
 "verkrijgen, maar makkelijk te verliezen is, dus als je het wilt, moet je de "
 "andere clans in de gaten houden."
 
+#~ msgid "(Tutorial) Barbarians - The second Empire"
+#~ msgstr "(Oefencampagne) Barbaren - Het tweede koninkrijk"
+
 #~ msgid ""
 #~ "When Chat’Karuth died, he was an old man, father to three strong and "
 #~ "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -645,6 +661,9 @@ msgstr ""
 #~ "broers te herenigen en de stammen te dwingen om weer onder één "
 #~ "gemeenschappelijke vlag te leven."
 
+#~ msgid "Empire - The months of exile"
+#~ msgstr "Keizerrijk - De maanden in ballingschap"
+
 #~ msgid ""
 #~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
 #~ "soldiers at the frontier among the northern forests, where Barbarian-tribes "
@@ -667,6 +686,9 @@ msgstr ""
 #~ "het barbaarse voetleger en werd uiteen gedreven. Met alleen het naakte leven "
 #~ "overleefden hij en een handvol soldaten."
 
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Oefencampagne 1 - Ogen in de duisternis"
+
 #~ msgid ""
 #~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
 #~ "gameplay and control as well as basic production buildings (wood, stone, "
@@ -675,6 +697,9 @@ msgstr ""
 #~ "Eerste missie van de Barbaren Oefencampagne. In deze oefencampagne worden de "
 #~ "basis van het spel en de besturing en de basisproductiegebouwen (hout, "
 #~ "steen, enz.) geïntroduceerd."
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Oefencampagne 2 - Een plek om thuis te noemen"
 
 #~ msgid ""
 #~ "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
@@ -755,6 +780,9 @@ msgstr ""
 #~ "werd door wisenten. Toen je stam naar deze plek kwam, was je er zeker van "
 #~ "dat het genoeg ruimte bood voor een vreedzaam bestaan. Maar kan je stam in "
 #~ "vrede leven met je buren?"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Oefencampagne 3 - Dit land is ons land"
 
 #~ msgid ""
 #~ "Long after a meteor crashed into a couple of mountains life blossoms in the "
@@ -845,12 +873,24 @@ msgstr ""
 #~ "verbindt de valleien en dus lijkt een gevecht onvermijdelijk! Hint: Water "
 #~ "kan rond de meren worden gevonden."
 
+#~ msgid "01 - From nemesis to genesis"
+#~ msgstr "01 - Van nemesis naar genesis"
+
 #~ msgid ""
 #~ "In this mountainous region two princes have settled. Now they are expanding "
 #~ "their territories unaware of the fact that they are not alone!"
 #~ msgstr ""
 #~ "In deze bergachtige streek hebben zich twee prinsen gevestigd. Nu breiden ze "
 #~ "hun gebied uit zonder zich ervan bewust te zijn dat ze niet alleen zijn!"
+
+#~ msgid "Some descriptive texts..."
+#~ msgstr "Enkele beschrijvende teksten..."
+
+#~ msgid "Atlanteans - the new rise"
+#~ msgstr "Atlantiërs - de nieuwe opstanding"
+
+#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
+#~ msgstr "Keizerrijk trainingsmissie1 - De stranden van Malac' Mor"
 
 #~ msgid ""
 #~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
@@ -873,3 +913,6 @@ msgstr ""
 #~ "was hun fout. Op een nacht in maart werd zijn onvoorbereide leger "
 #~ "aangevallen door 100 barbaarse knechten en ze werden volledig uiteengejaagd. "
 #~ "Alleen door puur geluk overleefde hij met een handvol soldaten."
+
+#~ msgid "Empire Tutorial2 - An outpost for exile"
+#~ msgstr "Keizerrijk leerschool 2 - Een voorpost voor ballingschap"

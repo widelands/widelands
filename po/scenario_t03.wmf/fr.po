@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-30 23:33+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-18 21:42+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-11-19 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -343,7 +343,6 @@ msgstr ""
 "une vue plus dégagée sur la région alentour, ce qui nous permet de prémunir "
 "nos gens d'attaque subites.\" "
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:111
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
 "* As soon as the blacksmith reaches his next level (master blacksmith) "
@@ -430,6 +429,16 @@ msgstr ""
 "* Détruisez tous les renforts des deux frères de Thron pour libérer le "
 "cercle du trône."
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:111
+msgid ""
+"* Enhance your metalworks to an axefactory or - as soon as the blacksmith "
+"reaches his next level (master blacksmith) - even to a war mill and build up "
+"another metalworks to ensure the production of tools."
+msgstr ""
+"* Améliorez votre ferronnerie en fabrique de hache voire - dès que le "
+"forgeron sera devenu un maître forgeron - en moulin de guerre, et bâtissez "
+"une autre ferronnerie pour assurer la production d'outils."
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
 msgid ""
@@ -497,6 +506,10 @@ msgstr ""
 "différence qu'ils ne sont pas défendus par des soldats. Il est souvent "
 "judicieux de construire un entrepôt lorsque votre territoire s'agrandit et "
 "que les chemins menant à votre quartier général s'allongent."
+
+#: ../../campaigns/t03.wmf/elemental:7
+msgid "03 - This Land is our Land"
+msgstr "03 - Cette terre est la nôtre"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -661,13 +674,11 @@ msgstr "L'histoire continue"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
-"handling of military and training site buildings and will finally introduce "
-"fighting."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
-"Troisième mission de la campagne d'apprentissage des Barbares. Ce tutoriel "
-"explique les questions militaires et d'entraînement, et se conclu avec les "
-"combats."
+"Ce tutoriel explique la prise en main des bâtiments militaires et des site "
+"d'entraînement, puis abordera les batailles."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -690,10 +701,6 @@ msgstr "Thron parle :"
 msgid "Tracks"
 msgstr "Pistes"
 
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "Tutorial3 - This land is our land"
-msgstr "Tutoriel 3 - Cette terre est nôtre"
-
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
 msgstr "Hiver en vue"
@@ -709,6 +716,18 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
 msgstr "Votre loyal compagnon"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Tutoriel 3 - Cette terre est nôtre"
+
+#~ msgid ""
+#~ "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
+#~ "handling of military and training site buildings and will finally introduce "
+#~ "fighting."
+#~ msgstr ""
+#~ "Troisième mission de la campagne d'apprentissage des Barbares. Ce tutoriel "
+#~ "explique les questions militaires et d'entraînement, et se conclu avec les "
+#~ "combats."
 
 #~ msgid ""
 #~ " \"This morning I found Thron trouble-minded. He returned from his patrol "

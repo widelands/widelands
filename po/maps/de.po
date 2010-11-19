@@ -6,25 +6,41 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-13 19:10+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-18 14:38+0000\n"
 "Last-Translator: kraileth <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-14 05:01+0000\n"
+"X-Launchpad-Export-Date: 2010-11-19 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
-#: ../../campaigns/cconfig:27
-msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Tutorial) Barbaren - Das zweite Kaiserreich"
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Augen im Dunkel"
 
-#: ../../campaigns/cconfig:88
-msgid "01 - From nemesis to genesis"
-msgstr "01 - Vom Untergang zum Neubeginn"
+#: ../../campaigns/cconfig:91
+msgid "01 - From Nemesis to Genesis"
+msgstr "01 - Vom Untergang zum Neuanfang"
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr "01 - Strände von Malac' Mor"
+
+#: ../../campaigns/cconfig:69
+msgid "02 - A Place to call Home"
+msgstr "02 - Ein Ort wie Zuhause"
+
+#: ../../campaigns/cconfig:86
+msgid "02 - An Outpost for Exile"
+msgstr "02 - Außenposten fürs Exil"
+
+#: ../../campaigns/cconfig:74
+msgid "03 - This Land is our Land"
+msgstr "03 - Dies Land ist unser Land"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -104,13 +120,17 @@ msgstr ""
 "darbringen können um ihren Respekt zu gewinnen und die prächtige Burg zu "
 "beziehen."
 
-#: ../../campaigns/cconfig:39
-msgid "Atlanteans - the new rise"
-msgstr "Atlanter - Der neue Aufstieg"
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans - The Run for the Fire"
+msgstr "Atlanter - Der Weg zum Feuer"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
 msgstr "Atoll"
+
+#: ../../campaigns/cconfig:27
+msgid "Barbarians - The second Empire"
+msgstr "Barbaren - Das zweite Reich"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -140,21 +160,21 @@ msgstr ""
 "des Flusses gibt es Wasser. Hinweis II: Schneemänner markieren weitere "
 "Wasserquellen. Hinweis III: Jeder Berg verbirgt nur einen Rohstoff."
 
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr "Leicht. Stellt die Barbaren vor"
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr "Leicht. Stellt das Imperium vor"
+
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Elfenwälder"
 
-#: ../../campaigns/cconfig:33
-msgid "Empire - The months of exile"
-msgstr "Imperium - Die Monate im Exil"
-
-#: ../../campaigns/cconfig:78
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Imperium Tutorial1 - Die Strände von Malac' Mor"
-
-#: ../../campaigns/cconfig:83
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Imperium Tutorial2 - Ein Außenposten fürs Exil"
+#: ../../campaigns/cconfig:34
+msgid "Empire - The Months of Exile"
+msgstr "Imperium - Monate des Exils"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -347,7 +367,7 @@ msgstr "Rendezvous"
 msgid "Riverlands"
 msgstr "Flußlande"
 
-#: ../../campaigns/cconfig:36
+#: ../../campaigns/cconfig:38
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -370,10 +390,6 @@ msgstr ""
 "ab. Das wurde ihr Verhängnis. In einer Nacht wurde seine Armee auf dem "
 "Marsch von 100 Kriegern der Barbaren angegriffen und zerschlagen. Nur er "
 "selbst und eine handvoll seiner Soldaten blieben am Leben."
-
-#: ../../campaigns/cconfig:42
-msgid "Some descriptive texts..."
-msgstr "Einige erklärende Worte..."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -509,18 +525,6 @@ msgstr ""
 msgid "Three Warriors"
 msgstr "Drei Krieger"
 
-#: ../../campaigns/cconfig:61
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Tutorial1 - Augen im Dunkeln"
-
-#: ../../campaigns/cconfig:66
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutorial2 - Ein Ort wie Zuhause"
-
-#: ../../campaigns/cconfig:71
-msgid "Tutorial3 - This land is our land"
-msgstr "Tutorial3 - Dieses Land ist unser Land"
-
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Glitzernde Wellen"
@@ -547,7 +551,7 @@ msgstr ""
 "Gut geschützt in ihren mächtigen Festungen schmieden vier machtgierige "
 "Kriegsherren ihre Pläne, diese Länder zu beherrschen..."
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -578,6 +582,21 @@ msgstr ""
 "zu sichern, wüteten, versucht der junge Kriegsherr seine ehrgeizigen Brüder "
 "wiederzuvereinen und die Stämme zu zwingen, wieder unter einem gemeinsamen "
 "Banner zu marschieren."
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr ""
+"Als die Gottheit ihr Vertrauen in die Atlanter verlor und ihre Insel in den "
+"Fluten versenkte, wurde der Kampf einer Frau um Gerechtigkeit und eine "
+"zweite Chance für ihr Volk zur Legende. Die verbleibenden Atlanter in eine "
+"neue Zukunft in einem neuen Teil der Welt führend, wurde Jundlina zum "
+"mächtigsten Menschen ihrer Zeit - doch zu einem hohen Preis: Dem ihrer "
+"Menschlichkeit und Seele."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -632,6 +651,15 @@ msgstr ""
 "behüten den wundervollen Schatz in ihrer Mitte - das grüne Plateau. Es ist "
 "schwer zu bekommen und schnell wieder verloren. Wenn du es also halten "
 "willst, beobachte jeden Schritt deiner Gegner."
+
+#~ msgid "(Tutorial) Barbarians - The second Empire"
+#~ msgstr "(Tutorial) Barbaren - Das zweite Kaiserreich"
+
+#~ msgid "Empire - The months of exile"
+#~ msgstr "Imperium - Die Monate im Exil"
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Tutorial1 - Augen im Dunkeln"
 
 #~ msgid ""
 #~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
@@ -704,6 +732,21 @@ msgstr ""
 #~ "Zwei Geheimnisse umwehen diese Landschaft: Wer hat dieses unglaublich große "
 #~ "Labyrinth gebaut und was ist dort versteckt?"
 
+#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
+#~ msgstr "Imperium Tutorial1 - Die Strände von Malac' Mor"
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Tutorial2 - Ein Ort wie Zuhause"
+
+#~ msgid "Some descriptive texts..."
+#~ msgstr "Einige erklärende Worte..."
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Tutorial3 - Dieses Land ist unser Land"
+
+#~ msgid "01 - From nemesis to genesis"
+#~ msgstr "01 - Vom Untergang zum Neubeginn"
+
 #~ msgid ""
 #~ "There is something mystical, like a grey atmosphere, about this three Oasis, "
 #~ "which noone found out, yet. Perhaps you will be the one, but be aware of the "
@@ -729,6 +772,9 @@ msgstr ""
 #~ "Gewaltige Berge teilen das Land in drei fruchtbare Täler. Aber ein Pfad "
 #~ "verbindet die Täler und ein Kampf scheint deshalb unausweichlich! Hinweis: "
 #~ "Wasser kann an den Ufern der Seen gefunden werden."
+
+#~ msgid "Atlanteans - the new rise"
+#~ msgstr "Atlanter - Der neue Aufstieg"
 
 #~ msgid ""
 #~ "When Chat’Karuth died, he was an old man, father to three strong and "

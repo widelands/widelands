@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-30 23:40+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-18 21:35+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-11-19 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: French\n"
 
@@ -364,6 +364,10 @@ msgstr ""
 "rouges montrent où les petits bâtiments -tel une cabane de bûcheron- peuvent "
 "être construits. <br>"
 
+#: ../../campaigns/t01.wmf/elemental:7
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Les yeux dans l'obscurité"
+
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
 msgstr "Un vieil homme dit..."
@@ -388,19 +392,17 @@ msgstr "Construisez une autre cabane de bûcheron."
 msgid "Build two quarries"
 msgstr "Construisez deux carrières"
 
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
-"gameplay and control as well as basic production buildings (wood, stone, "
-"etc.) will be introduced."
-msgstr ""
-"Première mission du tutoriel de la campagne des barbares. Dans ce tutoriel, "
-"les bases du jeu, les contrôles ainsi que les bâtiments de production de "
-"base (bois, pierre, etc...) seront introduits."
-
 #: ../../campaigns/t01.wmf/scripting/texts.lua:101
 msgid "In the night"
 msgstr "Pendant la nuit"
+
+#: ../../campaigns/t01.wmf/elemental:9
+msgid ""
+"In this tutorial the basic gameplay and control as well as basic production "
+"buildings of the Barbarians are introduced."
+msgstr ""
+"Dans ce tutoriel, vous apprendrez les bases du jeu et des contrôles, ainsi "
+"que les bâtiments de production basique des Barbares."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
@@ -414,20 +416,20 @@ msgstr "Khantrukh acquiesce..."
 msgid "Khantrukh remembers..."
 msgstr "Khantrukh se souvient..."
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:65
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:58
 msgid "Mission Complete"
 msgstr "Mission accomplie"
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:25
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid "Somebody comes up to you"
 msgstr "Quelqu'un se signale à vous"
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:26
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:32
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:41
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:42
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:36
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:37
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:45
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:59
 msgid "The advisor"
 msgstr "Le conseiller"
 
@@ -471,10 +473,6 @@ msgstr "Thron soupire..."
 #: ../../campaigns/t01.wmf/scripting/texts.lua:113
 msgid "Thron speaks..."
 msgstr "Thron parle..."
-
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Tutoriel 1 - Des yeux dans l'obscurité"
 
 #~ msgid "OK"
 #~ msgstr "D'accord"
@@ -814,6 +812,18 @@ msgstr "Tutoriel 1 - Des yeux dans l'obscurité"
 #~ "avec un porteur sur chaque.<br> Quand beaucoup de marchandises transitent "
 #~ "entre deux points, ajouter des drapeaux sur le chemin accélère le temps de "
 #~ "transport et ainsi améliore votre infrastructure."
+
+#~ msgid ""
+#~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
+#~ "gameplay and control as well as basic production buildings (wood, stone, "
+#~ "etc.) will be introduced."
+#~ msgstr ""
+#~ "Première mission du tutoriel de la campagne des barbares. Dans ce tutoriel, "
+#~ "les bases du jeu, les contrôles ainsi que les bâtiments de production de "
+#~ "base (bois, pierre, etc...) seront introduits."
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Tutoriel 1 - Des yeux dans l'obscurité"
 
 #~ msgid ""
 #~ " \"My father's bones rest peacefully in the grounds he cleared from the "

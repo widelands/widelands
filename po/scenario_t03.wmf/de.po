@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-13 11:43+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-18 14:40+0000\n"
 "Last-Translator: kraileth <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-14 05:01+0000\n"
+"X-Launchpad-Export-Date: 2010-11-19 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -349,7 +349,6 @@ msgstr ""
 "Sichtweite über die Gegend um unser Hauptgebäude zu haben und unsere Leute "
 "vor plötzlichen Angriffen zu schützen.“ "
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:111
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
 "* As soon as the blacksmith reaches his next level (master blacksmith) "
@@ -436,6 +435,17 @@ msgstr ""
 "* Zerstöre alle Befestigungen von Throns Brüdern, um den Thron-Kreis zu "
 "befreien."
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:111
+msgid ""
+"* Enhance your metalworks to an axefactory or - as soon as the blacksmith "
+"reaches his next level (master blacksmith) - even to a war mill and build up "
+"another metalworks to ensure the production of tools."
+msgstr ""
+"* Erweitere Deine Schmiede zu einer Axtfabrik oder - sobald der Schmied "
+"seine nächste Stufe erreicht (Meisterschmied) - sogar zu einer "
+"Waffenschmiede und errichte eine weitere Schmiede, um die Versorgung mit "
+"Werkzeugen sicherzustellen."
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
 msgid ""
@@ -504,6 +514,10 @@ msgstr ""
 "Unterschied, dass keine Soldaten darin stationiert sind. Es ist von Vorteil, "
 "ein Warenhaus zu errichten, wenn Dein Gebiet wächst und die Wege zum "
 "Hauptquartier immer länger und länger werden."
+
+#: ../../campaigns/t03.wmf/elemental:7
+msgid "03 - This Land is our Land"
+msgstr "03 - Dies Land ist unser Land"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -667,13 +681,11 @@ msgstr "Die Geschichte geht weiter..."
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
-"handling of military and training site buildings and will finally introduce "
-"fighting."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
-"Dritte Mission des Tutorials der Barbaren. Hier wird der Umgang mit  "
-"Millitär- und Trainingseinrichtungen erklärt und schlussendlich gibt es eine "
-"Einführung in das Kampfgeschehen."
+"Diese Einführung erklärt die Verwendung von Militärgebäuden und "
+"Trainingseinrichtungen und führt ins Kampfsystem ein."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -696,10 +708,6 @@ msgstr "Thron sagt:"
 msgid "Tracks"
 msgstr "Spuren"
 
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "Tutorial3 - This land is our land"
-msgstr "Tutorial3 - Dieses Land ist unser Land"
-
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
 msgstr "Der Winter wird kommen"
@@ -715,6 +723,9 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
 msgstr "Dein treuer Begleiter"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Tutorial3 - Dieses Land ist unser Land"
 
 #~ msgid ""
 #~ " \"So may it be, the generals are out to set up my troops and Boldreth "
@@ -733,6 +744,15 @@ msgstr "Dein treuer Begleiter"
 #~ "ich meinen Sieg in den hölzernen Hallen des Kriegsherren feiern und ein "
 #~ "neugeborenes Lamm werde ich zu Ehren meines Vaters opfern, dessen Augen "
 #~ "heute auf mir liegen.<br>So wird es sein!\" "
+
+#~ msgid ""
+#~ "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
+#~ "handling of military and training site buildings and will finally introduce "
+#~ "fighting."
+#~ msgstr ""
+#~ "Dritte Mission des Tutorials der Barbaren. Hier wird der Umgang mit  "
+#~ "Millitär- und Trainingseinrichtungen erklärt und schlussendlich gibt es eine "
+#~ "Einführung in das Kampfgeschehen."
 
 #~ msgid ""
 #~ " \"I just got informed, that our mining economy started its work. These news "

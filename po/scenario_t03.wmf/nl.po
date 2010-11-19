@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-05 10:56+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-18 20:24+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:43+0000\n"
+"X-Launchpad-Export-Date: 2010-11-19 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -344,7 +344,6 @@ msgstr ""
 "te bouwen, om een groter visueel bereik te hebben op het gebied rond onze "
 "hal om onze mensen tegen onverwachte aanvallen te beschermen.\" "
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:111
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
 "* As soon as the blacksmith reaches his next level (master blacksmith) "
@@ -432,6 +431,13 @@ msgstr ""
 "* Vernietig alle versterkingen van Thron's twee broers om de trooncirkel te "
 "bevrijden."
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:111
+msgid ""
+"* Enhance your metalworks to an axefactory or - as soon as the blacksmith "
+"reaches his next level (master blacksmith) - even to a war mill and build up "
+"another metalworks to ensure the production of tools."
+msgstr ""
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
 msgid ""
@@ -499,6 +505,10 @@ msgstr ""
 "niet verdedigd door soldaten. Het is vaak verstandig om een magazijn te "
 "bouwen als je territorium groeit en de weg naar je hoofdkwartier langer en "
 "langer wordt."
+
+#: ../../campaigns/t03.wmf/elemental:7
+msgid "03 - This Land is our Land"
+msgstr "03 - Dit land is ons land"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -663,12 +673,9 @@ msgstr "Het verhaal gaat verder"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
-"handling of military and training site buildings and will finally introduce "
-"fighting."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
-"Derde missie van de Barbaren oefencampagne. Deze oefenmissie legt het omgaan "
-"met militaire en oefengebouwen uit en zal eindelijk vechten introduceren."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -691,10 +698,6 @@ msgstr "Thron spreekt:"
 msgid "Tracks"
 msgstr "Sporen"
 
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "Tutorial3 - This land is our land"
-msgstr "Oefencampagne 3 - Dit land is ons land"
-
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
 msgstr "Winter nadert"
@@ -710,6 +713,17 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
 msgstr "Je trouwe metgezel"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Oefencampagne 3 - Dit land is ons land"
+
+#~ msgid ""
+#~ "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
+#~ "handling of military and training site buildings and will finally introduce "
+#~ "fighting."
+#~ msgstr ""
+#~ "Derde missie van de Barbaren oefencampagne. Deze oefenmissie legt het omgaan "
+#~ "met militaire en oefengebouwen uit en zal eindelijk vechten introduceren."
 
 #~ msgid ""
 #~ " \"The last days we came closer to our capital. Many people have already "
