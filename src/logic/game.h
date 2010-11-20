@@ -239,8 +239,8 @@ private:
 
 private:
 	// no copying
-	Game(const Game &);
-	Game & operator= (const Game &);
+	Game & operator= (Game const &);
+	explicit Game    (Game const &);
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {
