@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-16 09:31+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-19 10:16+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-17 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -75,7 +75,7 @@ msgstr "Barrière"
 
 #: ../../tribes/empire/armour/conf:1
 msgid "Basic armour for Empire soldiers."
-msgstr "Standaardharnas voor keizerrijksoldaten."
+msgstr "Standaardharnas voor Empirensoldaten."
 
 #: ../../tribes/empire/helm/conf:1
 msgid "Basic defence of a warrior"
@@ -91,8 +91,7 @@ msgstr "Bier"
 
 #: ../../tribes/empire/fish/conf:1
 msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-msgstr ""
-"Naast brood en vlees, is vis ook een voedingsstof voor het Keizerrijk."
+msgstr "Naast brood en vlees, is vis ook een voedingsstof voor de Empiren."
 
 #: ../../tribes/empire/conf:62
 msgid "Bread"
@@ -169,8 +168,8 @@ msgid ""
 "Cloth is needed for Empire ships and a few bigger buildings. It is produced "
 "out of wool."
 msgstr ""
-"Doek is nodig voor schepen van het Keizerrijk en een paar grotere gebouwen. "
-"Het wordt geproduceerd uit wol."
+"Doek is nodig voor schepen van de Empiren en een paar grotere gebouwen. Het "
+"wordt geproduceerd uit wol."
 
 #: ../../tribes/empire/conf:65
 msgid "Coal"
@@ -238,7 +237,7 @@ msgstr "Ezelboerderij"
 
 #: ../../tribes/empire/conf:5
 msgid "Empire"
-msgstr "Keizerrijk"
+msgstr "Empiren"
 
 #: ../../tribes/empire/conf:185
 msgid "Farm"
@@ -307,7 +306,7 @@ msgstr "Meel"
 msgid ""
 "Flour is produced out of wheat and is needed for the tasty Empire bread."
 msgstr ""
-"Meel wordt gemaakt uit tarwe en is nodig voor het heerlijke keizerrijkbrood."
+"Meel wordt gemaakt uit tarwe en is nodig voor het heerlijke Empirenbrood."
 
 #: ../../tribes/empire/conf:117
 msgid "Forester"
@@ -482,7 +481,7 @@ msgid ""
 "Marble columns present the high culture of the Empire, so they are needed "
 "for nearly every bigger building."
 msgstr ""
-"Marmeren zuilen tonen de hoogstaande cultuur van het Keizerrijk, dus ze zijn "
+"Marmeren zuilen tonen de hoogstaande cultuur van de Empiren, dus ze zijn "
 "nodig voor bijna elk grotere gebouw."
 
 #: ../../tribes/empire/marble/conf:1
@@ -555,7 +554,7 @@ msgstr ""
 msgid "Miner"
 msgstr "Mijnwerker"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:115
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
 msgstr "Niet genoeg ruimte"
 
@@ -674,6 +673,10 @@ msgstr "Maak zeis"
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce shovel"
 msgstr "Maak schep"
+
+#: ../../tribes/empire/weaponsmithy/conf:33
+msgid "Produce war lance"
+msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
@@ -829,15 +832,12 @@ msgstr "Smelt ijzer."
 msgid "Soldier"
 msgstr "Soldaat"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:116
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
-"Sommige van je begin gebouwen hadden niet genoeg ruimte en \n"
-"zijn niet gebouwd. Je bent hierdoor in het nadeel: overweeg om deze \n"
-"kaart te herstarten met een eerlijke begin instelling."
 
 #: ../../tribes/empire/conf:128
 msgid "Stonemason"
@@ -854,7 +854,7 @@ msgstr "Stenen"
 #: ../../tribes/empire/stone/conf:1
 #: ../../tribes/empire/wood/conf:1
 msgid "Stones and wood are the basic build material of the Empire."
-msgstr "Steen en hout zijn de basisbouwmaterialen van het Keizerrijk."
+msgstr "Steen en hout zijn de basisbouwmaterialen van de Empiren."
 
 #: ../../tribes/empire/conf:153
 msgid "Stronghold"
@@ -888,7 +888,7 @@ msgstr ""
 
 #: ../../tribes/empire/bread/conf:1
 msgid "The bakers of the Empire make really tasty bread."
-msgstr "De bakkers van het Keizerrijk maken erg lekker brood."
+msgstr "De bakkers van de Empiren maken erg lekker brood."
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""
@@ -903,7 +903,7 @@ msgid ""
 "The fires of the Empire are usually fed with wood, but sometimes, wood just "
 "does not burn hot enough. Then, coal is used."
 msgstr ""
-"De vuren van het Keizerrijk worden meestal gevoed met hout, maar soms brandt "
+"De vuren van de Empiren worden meestal gevoed met hout, maar soms brandt "
 "hout gewoon niet heet genoeg. Dan wordt kool gebruikt."
 
 #: ../../tribes/empire/hammer/conf:1
@@ -934,7 +934,7 @@ msgstr ""
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid "The strongest armour existing for the Empire soldiers."
-msgstr "Het sterkste bestaande harnas voor keizerrijksoldaten."
+msgstr "Het sterkste bestaande harnas voor Empirensoldaten."
 
 #: ../../tribes/empire/grape/conf:1
 msgid "These grapes are the basic for tasty wine."
@@ -955,14 +955,14 @@ msgstr ""
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid "This is a medium armour for Empire soldiers."
-msgstr "Dit is een gemiddeld harnas voor keizerrijksoldaten."
+msgstr "Dit is een gemiddeld harnas voor Empirensoldaten."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
 "This is a wooden lance, which is the basic of the Empires military system."
 msgstr ""
-"Dit is een houten lans, die de basis vormt van het militaire systeem van het "
-"keizerrijk."
+"Dit is een houten lans, die de basis vormt van het militaire systeem van de "
+"Empiren."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
@@ -973,7 +973,7 @@ msgid ""
 "This is the best and sharpest weapon, the Empire weaponsmith creates for "
 "their warriors."
 msgstr ""
-"Dit is het beste en scherpste wapen dat keizerrijksmeden maken voor hun "
+"Dit is het beste en scherpste wapen dat Empirensmeden maken voor hun "
 "krijgers."
 
 #: ../../tribes/empire/conf:6
@@ -1055,7 +1055,7 @@ msgstr "Boomstam"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid "Trunks are one important build material of the Empire."
-msgstr "Boomstammen zijn een belamgrijk bouwmateriaal van de barbaren."
+msgstr "Boomstammen zijn een belangrijk bouwmateriaal van de Empiren."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1361,3 +1361,12 @@ msgstr ""
 
 #~ msgid "Cuts raw pieces of granit and marble out of laying stones."
 #~ msgstr "Snijdt ruwe stukken graniet en marmer uit losliggende stenen."
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Sommige van je begin gebouwen hadden niet genoeg ruimte en \n"
+#~ "zijn niet gebouwd. Je bent hierdoor in het nadeel: overweeg om deze \n"
+#~ "kaart te herstarten met een eerlijke begin instelling."

@@ -6,23 +6,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 01:16+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-19 13:24+0000\n"
+"Last-Translator: Mateusz Micał <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../campaigns/cconfig:27
-msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Samouczek) Barbarzyńcy - Drugie Imperium"
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Oczy w mroku"
 
-#: ../../campaigns/cconfig:88
-msgid "01 - From nemesis to genesis"
-msgstr "01 - Od zagłady do odrodzenia"
+#: ../../campaigns/cconfig:91
+msgid "01 - From Nemesis to Genesis"
+msgstr "01 - Nowy początek"
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr "01 - Nici Malac' Mora."
+
+#: ../../campaigns/cconfig:69
+msgid "02 - A Place to call Home"
+msgstr "02 - Miejsce zwane domem"
+
+#: ../../campaigns/cconfig:86
+msgid "02 - An Outpost for Exile"
+msgstr "02 - Obóz dla wygnańców"
+
+#: ../../campaigns/cconfig:74
+msgid "03 - This Land is our Land"
+msgstr "03 - To jest nasz kraj"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -96,13 +112,17 @@ msgstr ""
 "starożytnym ołtarzu, zbuduje tam wspaniały zamek i zdobędzie przychylność i "
 "szacunek Bogów."
 
-#: ../../campaigns/cconfig:39
-msgid "Atlanteans - the new rise"
-msgstr "Atlanci - nowe powstanie"
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans - The Run for the Fire"
+msgstr "Atlanci - Ucieczka do Ognia"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
 msgstr "Atol"
+
+#: ../../campaigns/cconfig:27
+msgid "Barbarians - The second Empire"
+msgstr "Barbarzyńcy - Drugie Imperium"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -132,21 +152,21 @@ msgstr ""
 "Woda można znaleźć blizko rzeki. Podpowiedź II: Bałwany oznaczają dalsze "
 "źródła wody. Podpowiedź III: Każda góra ma tylko jeden typ zasobów."
 
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr "Łatwy. Wprowadza do Barbarzyńców"
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr "Łatwy. Wprowadza do Imperium"
+
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Elfickie lasy"
 
-#: ../../campaigns/cconfig:33
-msgid "Empire - The months of exile"
+#: ../../campaigns/cconfig:34
+msgid "Empire - The Months of Exile"
 msgstr "Imperium - Miesiące wygnania"
-
-#: ../../campaigns/cconfig:78
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Imperium Samouczek 1 - Plaże Malac' Mor"
-
-#: ../../campaigns/cconfig:83
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Imperium Samouczek 2 - Azyl dla wygnańców"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -333,7 +353,7 @@ msgstr "Spotkanie"
 msgid "Riverlands"
 msgstr "Lądy rzek"
 
-#: ../../campaigns/cconfig:36
+#: ../../campaigns/cconfig:38
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -355,10 +375,6 @@ msgstr ""
 "Pewnej marcowej nocy jego nieprzygotowane do obrony oddział został "
 "zaatakowany przez 100 barbarzyńskich piechurów i zdziesiątkowany. Tylko "
 "dzięki czystemu przypadkowi on i garstka jego żołnierzy zdołali przeżyć."
-
-#: ../../campaigns/cconfig:42
-msgid "Some descriptive texts..."
-msgstr "Jakiś opisujący tekst..."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -490,18 +506,6 @@ msgstr ""
 msgid "Three Warriors"
 msgstr "Trzej wojownicy"
 
-#: ../../campaigns/cconfig:61
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Samouczek 1 - Oczy w mroku"
-
-#: ../../campaigns/cconfig:66
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Samouczek 2 - Miejsce, które można nazwać domem"
-
-#: ../../campaigns/cconfig:71
-msgid "Tutorial3 - This land is our land"
-msgstr "Samouczek 3 - Ta krajina jest naszą krajiną"
-
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Migotliwe fale"
@@ -526,7 +530,7 @@ msgstr ""
 "Dobrze chronieni w ich potężnych fortecach, czterej chciwi władzy dygnitarze "
 "dokańczają swoje schematy aby zawładnąć nad tą krainą..."
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -554,6 +558,20 @@ msgstr ""
 "Tronowi i jego wojsku, które pozostawił aby zabezpieczyły granice "
 "Al'thunran, młody pan próbuje zjednoczyć swoich ambitnych braci i zmusić "
 "plemiona to pomaszerowania jeszcze raz pod jednym sztandarem."
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr ""
+"Kiedy bóg utracił wiarę w Atlantów i zatopił ich wyspę, walka jednej kobiety "
+"o sprawiedliwość i drugą szansę dla ludzi stała się legendą. Prowadząc "
+"pozostałych Atlantów w nową przyszłość w innej części świata, Jundlina stała "
+"się najpotężniejszym człowiekiem swoich czasu, ale wysokim kosztem - swojego "
+"człowieczeństwa i duszy."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -607,6 +625,9 @@ msgstr ""
 "środku - zielone pogórze, które jest ciężko zdobyć ale łatwo stracić, także "
 "jeśli je chcesz, uważaj na inne plemiona."
 
+#~ msgid "(Tutorial) Barbarians - The second Empire"
+#~ msgstr "(Samouczek) Barbarzyńcy - Drugie Imperium"
+
 #~ msgid ""
 #~ "When Chat’Karuth died, he was an old man, father to three strong and "
 #~ "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -634,6 +655,9 @@ msgstr ""
 #~ "Al'thunran, młody pan probuje zjednoczyć swojich ambitnych braci i zmusić "
 #~ "plemiona to pomaszerowania jeszcze raz pod jednym sztandarem."
 
+#~ msgid "Empire - The months of exile"
+#~ msgstr "Imperium - Miesiące wygnania"
+
 #~ msgid ""
 #~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
 #~ "soldiers at the frontier among the northern forests, where Barbarian-tribes "
@@ -654,6 +678,27 @@ msgstr ""
 #~ "Pewnej marcowej nocy jego nieprzygotowane do obrony oddział został "
 #~ "zaatakowany przez 100 barbarzyńskich piechurów i zdziesiątkowany. Tylko "
 #~ "dzięki czystemu przypadkowi on i garstka jego żołnierzy zdołali przeżyć."
+
+#~ msgid "Atlanteans - the new rise"
+#~ msgstr "Atlanci - nowe powstanie"
+
+#~ msgid "Some descriptive texts..."
+#~ msgstr "Jakiś opisujący tekst..."
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Samouczek 1 - Oczy w mroku"
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Samouczek 2 - Miejsce, które można nazwać domem"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Samouczek 3 - Ta krajina jest naszą krajiną"
+
+#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
+#~ msgstr "Imperium Samouczek 1 - Plaże Malac' Mor"
+
+#~ msgid "Empire Tutorial2 - An outpost for exile"
+#~ msgstr "Imperium Samouczek 2 - Azyl dla wygnańców"
 
 #~ msgid ""
 #~ "Long after a meteor crashed into a couple of mountains life blossoms in the "
@@ -783,3 +828,6 @@ msgstr ""
 #~ "Pewnej marcowej nocy jego nieprzygotowane do obrony oddział został "
 #~ "zaatakowany przez 100 barbarzyńskich piechurów i zdziesiątkowany. Tylko "
 #~ "dzięki czystemu przypadkowi on i garstka jego żołnierzy zdołali przeżyć."
+
+#~ msgid "01 - From nemesis to genesis"
+#~ msgstr "01 - Od zagłady do odrodzenia"

@@ -7,23 +7,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-12 19:29+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-19 21:23+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-13 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../campaigns/cconfig:27
-msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Opplæring) Barbarer - Det andre imperiet"
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Øyne i mørket"
 
-#: ../../campaigns/cconfig:88
-msgid "01 - From nemesis to genesis"
-msgstr "01 - Fra Nemesis til Genesis"
+#: ../../campaigns/cconfig:91
+msgid "01 - From Nemesis to Genesis"
+msgstr ""
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr ""
+
+#: ../../campaigns/cconfig:69
+msgid "02 - A Place to call Home"
+msgstr ""
+
+#: ../../campaigns/cconfig:86
+msgid "02 - An Outpost for Exile"
+msgstr ""
+
+#: ../../campaigns/cconfig:74
+msgid "03 - This Land is our Land"
+msgstr "03 - Dette landet er vårt land"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -90,13 +106,17 @@ msgid ""
 "respect of the Gods."
 msgstr ""
 
-#: ../../campaigns/cconfig:39
-msgid "Atlanteans - the new rise"
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans - The Run for the Fire"
 msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
 msgstr "Atoll"
+
+#: ../../campaigns/cconfig:27
+msgid "Barbarians - The second Empire"
+msgstr "Barbarer - det andre imperiet"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -126,20 +146,20 @@ msgstr ""
 "vann finnes rundt elven. Hint 2 : snømenn merker ytterligere vannressurser. "
 "Hint 3: Hvert av fjellene inneholder kun en ressurs hver."
 
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr "Lett. Introduserer barbarene"
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr "Lett. Introduserer Imperiet"
+
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Alviske skoger"
 
-#: ../../campaigns/cconfig:33
-msgid "Empire - The months of exile"
-msgstr "Imperiet - Månedene i eksil"
-
-#: ../../campaigns/cconfig:78
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr ""
-
-#: ../../campaigns/cconfig:83
-msgid "Empire Tutorial2 - An outpost for exile"
+#: ../../campaigns/cconfig:34
+msgid "Empire - The Months of Exile"
 msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
@@ -318,7 +338,7 @@ msgstr "Rendezvous"
 msgid "Riverlands"
 msgstr "Elveland"
 
-#: ../../campaigns/cconfig:36
+#: ../../campaigns/cconfig:38
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -330,10 +350,6 @@ msgid ""
 "March his unprepared army was attacked by 100 barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
-
-#: ../../campaigns/cconfig:42
-msgid "Some descriptive texts..."
 msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
@@ -441,18 +457,6 @@ msgstr ""
 msgid "Three Warriors"
 msgstr "Tre krigere"
 
-#: ../../campaigns/cconfig:61
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Opplæring 1 - Øyne i mørket"
-
-#: ../../campaigns/cconfig:66
-msgid "Tutorial2 - A Place to call Home"
-msgstr ""
-
-#: ../../campaigns/cconfig:71
-msgid "Tutorial3 - This land is our land"
-msgstr ""
-
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Funklende bølger"
@@ -477,7 +481,7 @@ msgstr ""
 "Godt beskyttet i sine mektige fort, legger fire makthungrige krigsherrer "
 "siste hånd på sine planer om å dominere disse landene..."
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -492,6 +496,15 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
+msgstr ""
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
 msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:9
@@ -533,3 +546,15 @@ msgstr ""
 "Du står på en øy, omkranset av mektige fjell, som skjuler en vidunderlig og "
 "mektig skatt mellom dem - det grønne platået. Det er vanskelig å erobre, men "
 "lett å tape, så hvis du vil ha det bør du passe deg for de andre klanene."
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Opplæring 1 - Øyne i mørket"
+
+#~ msgid "(Tutorial) Barbarians - The second Empire"
+#~ msgstr "(Opplæring) Barbarer - Det andre imperiet"
+
+#~ msgid "Empire - The months of exile"
+#~ msgstr "Imperiet - Månedene i eksil"
+
+#~ msgid "01 - From nemesis to genesis"
+#~ msgstr "01 - Fra Nemesis til Genesis"

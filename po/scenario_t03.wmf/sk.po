@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-05 07:04+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-19 22:02+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -94,12 +94,18 @@ msgid ""
 "remember, most of the mountains west to Al'thunran hold coal and some metal "
 "ores.\" "
 msgstr ""
+" \"Práve som sa rozprával s vodcom hliadky. Povedal mi, že severovýchode a "
+"východne od nášho územia našli nejaké hory. S trochou šťastia sa nám podarí "
+"vyzbrojiť našich mužov, pretože ak si dobre spomínam, väčšina hôr na západe "
+"od Al'thunran v sebe drží uhlie a niektoré rudy kovov.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:254
 msgid ""
 " \"Khantrukh just informed me, that our basic food economy was built up "
 "successfully. Finally none of us has to fear starvation anymore."
 msgstr ""
+" \"Khantrukh ma práve informoval, že naša základná potravinárska ekonomika "
+"bola vytvorená úspešne. Konečne sa už nikto z nás nemusí báť hladu."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:348
 msgid ""
@@ -121,6 +127,9 @@ msgid ""
 "there are still a lot of men and women waiting in our hall to get a task, so "
 "they can help our soldiers to prepare for the future fights."
 msgstr ""
+" \"Zdá sa, že naša banícka ekonomika funguje dokonale, to už je skvelá "
+"správa! Každopádne čaká v našej hale na úlohu stále veľa mužov a žien, aby "
+"mohli pomôcť našim vojakom pripraviť sa na budúce bitky."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:360
 msgid ""
@@ -226,34 +235,38 @@ msgid ""
 "attacks.\" "
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:111
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
 "* As soon as the blacksmith reaches his next level (master blacksmith) "
 "enhance your metalworks to an axefactory or even a war mill and build up "
 "another metalworks to ensure the production of tools."
 msgstr ""
+"* Akonáhle dosiahne kováč ďalšiu úroveň (majster kováč), vylepšite svoju "
+"kovodielňu na továreň na sekery alebo dokonca na vojenský závod a postavte "
+"ďalšiu kovodielňu, aby ste zaistili produkciu nástrojov."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:101
 #: ../../campaigns/t03.wmf/scripting/texts.lua:334
 msgid ""
 "* Build a battle arena and a trainings camp to the west of the mountains."
-msgstr ""
+msgstr "* Postavte zápasnícku arénu a výcvikový tábor na západ od hôr."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:59
 msgid ""
 "* Build a donjon at the northeast of your territory to get a farther visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"* Postavte donžon severovýchodne od svojho územia, aby ste získali väčší "
+"dohľad a ochránili svojich ľudí pred náhlymi útokmi nepriateľov."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:266
 msgid "* Build a donjon at the northeast of your territory."
-msgstr ""
+msgstr "* Postavte donžon severovýchodne od svojho územia."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:83
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
 msgid "* Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "* Postavte pevnosť východne od hôr."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:119
 #: ../../campaigns/t03.wmf/scripting/texts.lua:338
@@ -261,11 +274,13 @@ msgid ""
 "* Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
+"* Postavte vyhňu na výrobu heliem západne od hôr, aby ste svojim vojakom "
+"poskytli lepšiu zbroj."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:91
 #: ../../campaigns/t03.wmf/scripting/texts.lua:332
 msgid "* Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "* Postavte sklad západne od hôr."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:67
 #: ../../campaigns/t03.wmf/scripting/texts.lua:278
@@ -273,6 +288,8 @@ msgid ""
 "* Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"* Postavte viac vojenských budov, aby ste preskúmali oblasť okolo základne a "
+"zaistili bezpečie svojich ľudí."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
 #: ../../campaigns/t03.wmf/scripting/texts.lua:246
@@ -280,14 +297,16 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
+"* Vybudujte základnú potravinársku ekonomiku - rybárovu chatrč, lovcovu "
+"chatrč, studňu, farmu a pekáreň, aby ste svojim ľudom poskytli jedlo."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
-msgstr ""
+msgstr "* Porazte Kalitath-ovu armádu a rozšírte svoje územie na východ."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
-msgstr ""
+msgstr "* Porazte Kalitath-ovu armádu a rozšírte svoje územie na východ."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 #: ../../campaigns/t03.wmf/scripting/texts.lua:364
@@ -296,6 +315,16 @@ msgid ""
 "circle."
 msgstr ""
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:111
+msgid ""
+"* Enhance your metalworks to an axefactory or - as soon as the blacksmith "
+"reaches his next level (master blacksmith) - even to a war mill and build up "
+"another metalworks to ensure the production of tools."
+msgstr ""
+"* Vylepšite svoju kovodielňu na továreň na sekery alebo - pokiaľ kováč "
+"dosiahne ďalšiu úroveň (majster kováč) - aj na vojenský závod a postavte inú "
+"kovodielňu, aby ste zaistili produkciu nástrojov."
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
 msgid ""
@@ -303,6 +332,8 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
+"* Rozšírte svoje územie k horám, pošlite tam geológov, aby hľadali rudu a "
+"uhlie, a postavte banícku ekonomiku - bane, krčmy, zlievarne a kovodielne."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:208
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
@@ -313,15 +344,15 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:362
 #: ../../campaigns/t03.wmf/scripting/texts.lua:376
 msgid "-- NEW OBJECTIVE --"
-msgstr ""
+msgstr "-- NOVÁ ÚLOHA --"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:330
 msgid "-- NEW OBJECTIVES --"
-msgstr ""
+msgstr "-- NOVÉ ÚLOHY --"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:350
 msgid "--------------------- VICTORY! ----------------------"
-msgstr ""
+msgstr "--------------------- VÍŤAZSTVO! ----------------------"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:129
 #: ../../campaigns/t03.wmf/scripting/texts.lua:212
@@ -348,11 +379,15 @@ msgid ""
 "and longer."
 msgstr ""
 
+#: ../../campaigns/t03.wmf/elemental:7
+msgid "03 - This Land is our Land"
+msgstr ""
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
 #: ../../campaigns/t03.wmf/scripting/texts.lua:344
 msgid "Another cold day"
-msgstr ""
+msgstr "Ďalší studený deň"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:50
 msgid ""
@@ -363,35 +398,35 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 msgid "Boldreth shakes his head."
-msgstr ""
+msgstr "Boldreth krúti hlavou."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:204
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "Boldreth vykríkne!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:230
 msgid "Boldreth speaks:"
-msgstr ""
+msgstr "Boldreah hovorí:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:57
 msgid "Build a donjon"
-msgstr ""
+msgstr "Postavte donžon"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:81
 msgid "Build a fortress"
-msgstr ""
+msgstr "Postavte pevnosť"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:117
 msgid "Build a helmsmithy"
-msgstr ""
+msgstr "Postavte vyhňu na výrobu heliem"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:89
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Postavte sklad"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:73
 msgid "Build mines"
-msgstr ""
+msgstr "Postavte bane"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:99
 msgid "Build trainingssites"
@@ -399,7 +434,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:40
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Vybudujte malú potravinársku ekonomiku"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
 msgid "Build weapon productions"
@@ -407,15 +442,15 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:146
 msgid "Close to home"
-msgstr ""
+msgstr "Blízko pri domove"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:125
 msgid "Destroy Kalitaths army"
-msgstr ""
+msgstr "Porazte Kalitath-ovu armádu"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:166
 msgid "Doubts"
-msgstr ""
+msgstr "Pochybnosti"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:324
 msgid "Enhanced economy and training"
@@ -427,11 +462,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:252
 msgid "Food economy completed"
-msgstr ""
+msgstr "Potravinárska ekonomika dokončená"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:316
 msgid "Fortress completed"
-msgstr ""
+msgstr "Pevnosť dokončená"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:304
 msgid "Fortress needed"
@@ -443,15 +478,15 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:371
 msgid "Khantrukh approaches"
-msgstr ""
+msgstr "Khantrukh sa blíži"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods"
-msgstr ""
+msgstr "Khantrukh kývne"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:369
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Khantrukh hovorí"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:358
 msgid "Military assault"
@@ -463,11 +498,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:296
 msgid "Mining economy completed"
-msgstr ""
+msgstr "Banícka ekonomika dokončená"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:284
 msgid "Mountains found"
-msgstr ""
+msgstr "Hory nájdené"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:328
 msgid ""
@@ -490,7 +525,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:238
 msgid "The advisor"
-msgstr ""
+msgstr "Radca"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:177
 #: ../../campaigns/t03.wmf/scripting/texts.lua:195
@@ -499,34 +534,29 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
-"handling of military and training site buildings and will finally introduce "
-"fighting."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
 msgid "Thron looks worried."
-msgstr ""
+msgstr "Thron má obavy."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:148
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "Thron má obavy..."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:187
 msgid "Thron speaks confidently."
-msgstr ""
+msgstr "Thron smelo hovorí."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:220
 msgid "Thron speaks:"
-msgstr ""
+msgstr "Thron hovorí:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:260
 msgid "Tracks"
-msgstr ""
-
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "Tutorial3 - This land is our land"
 msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228

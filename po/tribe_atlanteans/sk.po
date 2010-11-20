@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 14:11+0000\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-19 22:10+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/ship/conf:1
@@ -521,7 +521,7 @@ msgstr "Ťažiť kameň"
 msgid "Miner"
 msgstr "Baník"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:99
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:103
 msgid "Not enough space"
 msgstr "Nedostatok miesta"
 
@@ -879,15 +879,15 @@ msgstr "Údi mäso a ryby."
 msgid "Soldier"
 msgstr "Vojak"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:100
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:104
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
 "Niektoré z vašich počiatočných budov nemali dostatok miesta \n"
-"a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie\n"
-"tejto mapy s férovými počiatočnými podmienkami."
+"a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie tejto \n"
+"mapy s férovými počiatočnými podmienkami."
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
@@ -1325,3 +1325,12 @@ msgstr "Pracuje v lodenici a stavia nové lode."
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr "Pracuje hlboko v baniach, aby vyrobil uhlie, železo a zlato."
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Niektoré z vašich počiatočných budov nemali dostatok miesta \n"
+#~ "a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie\n"
+#~ "tejto mapy s férovými počiatočnými podmienkami."

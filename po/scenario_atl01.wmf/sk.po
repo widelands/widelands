@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-18 10:39+0000\n"
-"PO-Revision-Date: 2010-11-18 15:46+0000\n"
+"PO-Revision-Date: 2010-11-19 16:02+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-19 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:646
@@ -66,15 +66,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "\"%s\""
-msgstr ""
+msgstr "\"%s\""
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - Od záhuby k zrodu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:531
 msgid "A dangerous finding"
-msgstr "Nebezpečné zistenie"
+msgstr "Nebezpečný objav"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:624
 msgid ""
@@ -104,6 +104,8 @@ msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr ""
+"Po vylodení sa na tajuplnom ostrove blízko Atlantídy, zostávajúci "
+"Atlantíďania sa pre seba snažia utvoriť nový domov."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:367
 msgid ""
@@ -434,7 +436,7 @@ msgstr "Jundlína sa zamyslí"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:645
 msgid "Jundlina is relieved"
-msgstr ""
+msgstr "Jundlína je upokojená"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:393
 msgid "Jundlina is reviewing the reports"
@@ -849,6 +851,22 @@ msgid ""
 "fortification\n"
 "of our borders."
 msgstr ""
+"Našli sme starú budovu, zničenú a spálenú plameňmi. Mám veľké obavy o\n"
+"tento objav. Takýto druh budovy som ešte nevidela. Určite ju nenavrhol\n"
+"žiadny atlantídsky architekt, o ktorom som počula. Budova je nedokončená,\n"
+"montáž neporiadna. Ale materiály sú veľmi trvalé: zdá sa, že použité drevo\n"
+"bolo spálené čudným spôsobom pred tým, ako ho použili ako materiál - je\n"
+"tvrdé ako kameň.<br><br>Záver ma desí. Sú na tomto ostrove aj iní?\n"
+"Kde sú potom? Pracujú s ohňom, tiež sa modlia k Satulovi? Sú priatelia "
+"alebo\n"
+"nepriatelia? A prečo je táto budova zhorená? Zažil tento ostrov vojnu? "
+"Vedie\n"
+"na ňom momentálne vojna?<br><br>\n"
+"Musíme vylepšiť naše vojenské schopnosti. Ak sú na tomto ostrove "
+"nepriatelia,\n"
+"musíme byť pripravení, keď ich stretneme. Taktiež by sme mali posilniť "
+"opevnenie\n"
+"na hraniciach."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:557
 msgid ""

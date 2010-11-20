@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 01:34+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-19 22:12+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -357,6 +357,10 @@ msgstr "Zlato"
 msgid "Gold Mine"
 msgstr "Zlatá baňa"
 
+#: ../../tribes/barbarians/conf:82
+msgid "Gold Ore"
+msgstr "Zlatá ruda"
+
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
@@ -364,10 +368,6 @@ msgid ""
 msgstr ""
 "Zlato je najhodnotnejšie zo všetkých kovov; ozdobujú sa ním len veľmi "
 "dôležité veci."
-
-#: ../../tribes/barbarians/conf:82
-msgid "Goldstone"
-msgstr "Zlatý nuget"
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -534,7 +534,7 @@ msgstr "Mikropivovar"
 msgid "Miner"
 msgstr "Baník"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:90
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
 msgstr "Nedostatok miesta"
 
@@ -867,15 +867,15 @@ msgstr "Olovrant"
 msgid "Soldier"
 msgstr "Vojak"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
 "Niektoré z vašich počiatočných budov nemali dostatok miesta \n"
-"a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie\n"
-"tejto mapy s férovými počiatočnými podmienkami."
+"a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie tejto \n"
+"mapy s férovými počiatočnými podmienkami."
 
 #: ../../tribes/barbarians/conf:139
 msgid "Stonemason"
@@ -1007,6 +1007,10 @@ msgstr ""
 "bojovníkov v histórii vedelo narábať s týmito obrovskými a silnými sekerami. "
 "Vyrábajú sa v továrni na sekery."
 
+#: ../../tribes/barbarians/goldstone/conf:5
+msgid "This is gold ore mined from deep within the mountains."
+msgstr "Toto je zlatá ruda vyťažená hlboko v horách."
+
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
 msgstr "Toto je krveľ."
@@ -1020,10 +1024,6 @@ msgstr ""
 "Toto je druhá najnebezpečnejšia zbraň, ktorú sú barbari schopní vyrobiť. Len "
 "vycvičení bojovníci dokážu narábať s takou zbraňou. Vyrába sa v továrni na "
 "sekery."
-
-#: ../../tribes/barbarians/goldstone/conf:1
-msgid "This is the yellow goldstone."
-msgstr "Toto je žltý zlatý nuget."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1364,11 +1364,17 @@ msgstr ""
 #~ msgid "Flax"
 #~ msgstr "Ľan"
 
+#~ msgid "Goldstone"
+#~ msgstr "Zlatý nuget"
+
 #~ msgid "Harvest flax"
 #~ msgstr "Zberať ľan"
 
 #~ msgid "Plant flax"
 #~ msgstr "Sadiť ľan"
+
+#~ msgid "This is the yellow goldstone."
+#~ msgstr "Toto je žltý zlatý nuget."
 
 #~ msgid ""
 #~ "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
@@ -1376,6 +1382,15 @@ msgstr ""
 #~ msgstr ""
 #~ "Sekera je základnou zbraňou a nástrojom barbarov. Vyzbrojení sú ňou všetci "
 #~ "mladí vojaci, ale ten istý model používajú aj drevorubači."
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Niektoré z vašich počiatočných budov nemali dostatok miesta \n"
+#~ "a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie\n"
+#~ "tejto mapy s férovými počiatočnými podmienkami."
 
 #~ msgid "Grows flax and thatch reed."
 #~ msgstr "Pestuje ľan a tŕstie."

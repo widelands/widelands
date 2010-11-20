@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 01:49+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-19 16:26+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -368,6 +368,10 @@ msgid ""
 "sure would enjoy a freshly baken pitta bread for a change...\""
 msgstr ""
 
+#: ../../campaigns/t02.wmf/elemental:7
+msgid "02 - A Place to call Home"
+msgstr "02 - Miesto, ktoré možno nazvať domovom"
+
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
 msgstr "Nádherné ráno"
@@ -487,6 +491,15 @@ msgid ""
 "ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on\n"
 "mountain terrain. Suitable places for mines are displayed as hammer and pick."
 msgstr ""
+"Postavte uhoľnú baňu a železnorudnú baňu. Aby ste tak urobili, umiestnite\n"
+"vlajku na úbočí hory na východ (na horskom teréne, nie lúke). Keď kliknete "
+"na\n"
+"novú vlajku, môžete tam poslať geológov. Keďže sa vlajka nachádza v horách,\n"
+"geológovia budú hľadať rudy, ak by tam nebola, hľadali by vodu. Potom\n"
+"postavte baňu pre obe druhy zásob, ktoré nájde, pričom vyberte vhodnú baňu:\n"
+"<br> Čierne - uhlie<br> Červené - železná ruda<br> Žlté - zlato<br> Sivé -\n"
+"žula<br> Bane možno postaviť len na horskom teréne. Vhodné miesta pre\n"
+"bane sa zobrazujú ako kladivo a krompáč."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:185
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:186
@@ -565,6 +578,14 @@ msgstr ""
 "pre vašich baníkov.<br> Toto je len prvý príklad tovaru, ktorý sa musí\n"
 "vylepšiť pred použitím v sekundárnej budove - budú nasledovať ďalšie."
 
+#: ../../campaigns/t02.wmf/elemental:9
+msgid ""
+"In this scenario the higher production buildings, including mining and the "
+"military expansions will be introduced."
+msgstr ""
+"V tomto scenári sa zoznámite s budovami s vyššou produkciou aj s ťažbou a "
+"vojenskými expanziami."
+
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
 msgstr "Khantrukh sa zahľadí na pláne..."
@@ -633,15 +654,6 @@ msgstr "Poskytnite baníkom jedlo"
 msgid "Refine your mined resources"
 msgstr "Vylepšite vyťažené zdroje"
 
-#: ../../campaigns/t02.wmf/elemental:9
-msgid ""
-"Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
-"higher production buildings, including mining and the military expansions "
-"will be introduced."
-msgstr ""
-"Druhá misia tréningovej kampane barbarov. Oboznámite sa tu s vyššími "
-"produkčnými budovami, vrátane ťažby a s vojenskými expanziami."
-
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
 msgstr "Začnite stavať bane na hore"
@@ -702,10 +714,6 @@ msgstr "Thron trasie hlavou..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:439
 msgid "Thron speaks..."
 msgstr "Thron hovorí..."
-
-#: ../../campaigns/t02.wmf/elemental:7
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutorál2 - Miesto, ktoré možno nazvať domovom"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
@@ -835,6 +843,9 @@ msgstr "Tvoj verný společník"
 #~ msgid "OK"
 #~ msgstr "OK"
 
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Tutorál2 - Miesto, ktoré možno nazvať domovom"
+
 #~ msgid "Khantrukh joins the both of you..."
 #~ msgstr "Khantrukh sa k vám pripojil..."
 
@@ -850,3 +861,11 @@ msgstr "Tvoj verný společník"
 #~ " \"Hoci je tak, mali by sme to zvážiť neskôr, zatiaľ sú poruke iné prekážky. "
 #~ "Baníci budú určite požadovať väčšie prídely jedla za prácu vysoko v horách v "
 #~ "tejto krutej zime, a poskytnúť tieto zásoby nemusí byť ľahké.\" "
+
+#~ msgid ""
+#~ "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
+#~ "higher production buildings, including mining and the military expansions "
+#~ "will be introduced."
+#~ msgstr ""
+#~ "Druhá misia tréningovej kampane barbarov. Oboznámite sa tu s vyššími "
+#~ "produkčnými budovami, vrátane ťažby a s vojenskými expanziami."

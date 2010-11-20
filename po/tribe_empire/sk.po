@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 02:08+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-19 22:14+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -552,7 +552,7 @@ msgstr ""
 msgid "Miner"
 msgstr "Baník"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:115
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
 msgstr "Nedostatok miesta"
 
@@ -671,6 +671,10 @@ msgstr "Vyrobiť kosu"
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce shovel"
 msgstr "Vyrobiť lopatu"
+
+#: ../../tribes/empire/weaponsmithy/conf:33
+msgid "Produce war lance"
+msgstr "Vyrobiť bojovú kopiju"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
@@ -826,15 +830,15 @@ msgstr "Taví železo."
 msgid "Soldier"
 msgstr "Vojak"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:116
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
 "Niektoré z vašich počiatočných budov nemali dostatok miesta \n"
-"a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie\n"
-"tejto mapy s férovými počiatočnými podmienkami."
+"a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie tejto \n"
+"mapy s férovými počiatočnými podmienkami."
 
 #: ../../tribes/empire/conf:128
 msgid "Stonemason"
@@ -1328,3 +1332,12 @@ msgstr ""
 
 #~ msgid "Coalearth"
 #~ msgstr "Kamenné uhlie"
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Niektoré z vašich počiatočných budov nemali dostatok miesta \n"
+#~ "a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie\n"
+#~ "tejto mapy s férovými počiatočnými podmienkami."

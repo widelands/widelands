@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-16 15:48+0000\n"
-"Last-Translator: megabyte <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-19 09:41+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-17 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -356,6 +356,10 @@ msgstr "Goud"
 msgid "Gold Mine"
 msgstr "Goudmijn"
 
+#: ../../tribes/barbarians/conf:82
+msgid "Gold Ore"
+msgstr "Gouderts"
+
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
@@ -363,10 +367,6 @@ msgid ""
 msgstr ""
 "Goud is het meest waardevolle metaal; alleen heel belangrijke zaken worden "
 "ermee opgeluisterd."
-
-#: ../../tribes/barbarians/conf:82
-msgid "Goldstone"
-msgstr "Goudsteen"
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -533,7 +533,7 @@ msgstr "Kleine brouwerij"
 msgid "Miner"
 msgstr "Mijnwerker"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:90
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
 msgstr "Niet genoeg ruimte"
 
@@ -867,15 +867,12 @@ msgstr "Hapje"
 msgid "Soldier"
 msgstr "Soldaat"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
-"Sommige van je begin gebouwen hadden niet genoeg ruimte en \n"
-"zijn niet gebouwd. Je bent hierdoor in het nadeel: overweeg om deze \n"
-"kaart te herstarten in een eerlijke begin instelling."
 
 #: ../../tribes/barbarians/conf:139
 msgid "Stonemason"
@@ -1010,6 +1007,10 @@ msgstr ""
 "strijders zijn ooit in staat geweest om met deze grote en machtige bijlen om "
 "te gaan. Gebouwd in de bijlenfabriek."
 
+#: ../../tribes/barbarians/goldstone/conf:5
+msgid "This is gold ore mined from deep within the mountains."
+msgstr "Dit is de gouderts gedolven diep in de bergen."
+
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
 msgstr "Dit is rode ijzererts."
@@ -1023,10 +1024,6 @@ msgstr ""
 "Dit is het op één na gevaarlijkste wapen dat de barbaren kunnen maken. "
 "Alleen getrainde krijgers kunnen zo'n wapen hanteren. Hij wordt geproduceerd "
 "in de bijlenfabriek."
-
-#: ../../tribes/barbarians/goldstone/conf:1
-msgid "This is the yellow goldstone."
-msgstr "Dit is de gele goudsteen"
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1379,6 +1376,9 @@ msgstr ""
 #~ msgid "Flax"
 #~ msgstr "Vlas"
 
+#~ msgid "Goldstone"
+#~ msgstr "Goudsteen"
+
 #~ msgid "Plant flax"
 #~ msgstr "Plant vlas"
 
@@ -1390,6 +1390,9 @@ msgstr ""
 
 #~ msgid "Flax is a beautiful flower, which are used to make cloth."
 #~ msgstr "Vlas is een prachtige bloem, die wordt gebruikt om doek te maken."
+
+#~ msgid "This is the yellow goldstone."
+#~ msgstr "Dit is de gele goudsteen"
 
 #~ msgid "Works deep in the mines to produce coal, iron or gold."
 #~ msgstr "Wekt diep in de mijnen om kool, ijzer of goud te delven."
@@ -1435,3 +1438,12 @@ msgstr ""
 
 #~ msgid "Grows flax and thatch reed."
 #~ msgstr "Teelt vlas en dakriet."
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Sommige van je begin gebouwen hadden niet genoeg ruimte en \n"
+#~ "zijn niet gebouwd. Je bent hierdoor in het nadeel: overweeg om deze \n"
+#~ "kaart te herstarten in een eerlijke begin instelling."

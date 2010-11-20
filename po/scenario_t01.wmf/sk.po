@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-05 00:52+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"PO-Revision-Date: 2010-11-19 16:27+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:43+0000\n"
+"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -345,6 +345,10 @@ msgstr ""
 "* Stlačte MEDZERNÍK, aby ste videli, kde možno stavať.<br> Symboly červeného "
 "domu značia, kde je možné postaviť malé budovy ako drevorubačova chata.<br>"
 
+#: ../../campaigns/t01.wmf/elemental:7
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Oči v tme"
+
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
 msgstr "Starý muž hovorí..."
@@ -369,19 +373,17 @@ msgstr "Postavte ďalšiu drevorubačovu chatrč"
 msgid "Build two quarries"
 msgstr "Postavte dva kameňolomy"
 
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
-"gameplay and control as well as basic production buildings (wood, stone, "
-"etc.) will be introduced."
-msgstr ""
-"Prvá misia v barbarskej tréningovej kampani. V tomto tréningu budú uvedené "
-"základy hry a ovládania, ako aj základné produkčné budovy (na drevo, kameň, "
-"atď.)."
-
 #: ../../campaigns/t01.wmf/scripting/texts.lua:101
 msgid "In the night"
 msgstr "V noci"
+
+#: ../../campaigns/t01.wmf/elemental:9
+msgid ""
+"In this tutorial the basic gameplay and control as well as basic production "
+"buildings of the Barbarians are introduced."
+msgstr ""
+"V tomto tréningu sa zoznámite so základmi hrania a ovládania, ako aj so "
+"základnými produkčnými budovami barbarov."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
@@ -453,10 +455,6 @@ msgstr "Thron vzdychá..."
 msgid "Thron speaks..."
 msgstr "Hovorí Thorn"
 
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Tréning1 - Oči v tme"
-
 #~ msgid "OK"
 #~ msgstr "OK"
 
@@ -524,3 +522,15 @@ msgstr "Tréning1 - Oči v tme"
 
 #~ msgid "Order7"
 #~ msgstr "Úloha 7"
+
+#~ msgid ""
+#~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
+#~ "gameplay and control as well as basic production buildings (wood, stone, "
+#~ "etc.) will be introduced."
+#~ msgstr ""
+#~ "Prvá misia v barbarskej tréningovej kampani. V tomto tréningu budú uvedené "
+#~ "základy hry a ovládania, ako aj základné produkčné budovy (na drevo, kameň, "
+#~ "atď.)."
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Tréning1 - Oči v tme"
