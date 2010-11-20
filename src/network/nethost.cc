@@ -1099,9 +1099,14 @@ void NetHost::setMap
 	while (oldplayers < maxplayers) {
 		PlayerSettings & player = d->settings.players.at(oldplayers);
 		player.state                = PlayerSettings::stateOpen;
+		player.name                 = "";
 		player.tribe                = d->settings.tribes.at(0).name;
 		player.initialization_index = 0;
-		player.team = 0;
+		player.team                 = 0;
+		player.ai                   = "";
+		player.closeable            = false;
+		player.shared_in            = 0;
+
 		++oldplayers;
 	}
 
