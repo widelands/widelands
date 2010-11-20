@@ -1049,6 +1049,8 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
 		molog("* Economy: %p\n", loc->get_economy());
 	}
 
+	PlayerImmovable * imm = m_location.get(egbase);
+	molog("location: %u\n", imm ? imm->serial() : 0);
 	molog("Economy: %p\n", m_economy);
 	molog("transfer: %p\n",  m_transfer);
 
@@ -1695,17 +1697,26 @@ void Worker::return_update(Game & game, State & state)
 
 	signal_handled();
 
-	Building & location =
-		ref_cast<Building, PlayerImmovable>(*get_location(game));
+	Building * location = dynamic_cast<Building *>(get_location(game));
+
+	if (!location) {
+		// Usually, this should be caught via the "location" signal above.
+		// However, in certain cases, e.g. for a soldier during battle,
+		// the location may be overwritten by a different signal while
+		// walking home.
+		molog("[return]: Our location disappeared from under us\n");
+		return pop_task(game);
+	}
+
 	if (BaseImmovable * const pos = game.map().get_immovable(get_position())) {
-		if (pos == &location) {
+		if (pos == location) {
 			set_animation(game, 0);
 			return pop_task(game);
 		}
 
 		if (upcast(Flag, flag, pos)) {
 			// Is this "our" flag?
-			if (flag->get_building() == &location) {
+			if (flag->get_building() == location) {
 				if (state.ivar1 && flag->has_capacity())
 					if (WareInstance * const item = fetch_carried_item(game)) {
 						flag->add_item(game, *item);
@@ -1729,7 +1740,7 @@ void Worker::return_update(Game & game, State & state)
 		(not
 		 start_task_movepath
 		 	(game,
-		 	 location.base_flag().get_position(),
+		 	 location->base_flag().get_position(),
 		 	 15,
 		 	 descr().get_right_walk_anims(does_carry_ware())))
 	{
@@ -1747,7 +1758,8 @@ void Worker::return_update(Game & game, State & state)
 			 	 _("Worker got lost!"),
 			 	 buffer,
 			 	 get_position()));
-		return set_location(0);
+		set_location(0);
+		return pop_task(game);
 	}
 }
 
