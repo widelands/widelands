@@ -2128,9 +2128,8 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 		// E.g. the player destroyed the building, it is destroyed, through an
 		// enemy player, or it got destroyed through rising water (atlantean
 		// scenario)
-		molog
-			("[fetchfromflag]: building dissappeared - searching for alternative");
-		return pop_task(game);;
+		molog("[fetchfromflag]: building dissappeared - searching for alternative\n");
+		return pop_task(game);
 	}
 
 	assert(location == &employer);
@@ -2138,8 +2137,22 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 	molog("[fetchfromflag]: back home\n");
 
 	if (WareInstance * const item = fetch_carried_item(game)) {
-		item->set_location(game, location);
-		item->update(game); //  this might remove the item and ack any requests
+		if (item->get_next_move_step(game) == location) {
+			item->set_location(game, location);
+			item->update(game); //  this might remove the item and ack any requests
+		} else {
+			// The item changed its mind and doesn't want to go to this building
+			// after all, so carry it back out.
+			// This can happen in the following subtle and rare race condition:
+			// We start the fetchfromflag task as the worker in an enhanceable building.
+			// While we walk back into the building with the item, the player enhances
+			// the building, so that we now belong to the newly created construction site.
+			// Obviously the construction site no longer has any use for the item.
+			molog("[fetchfromflag]: item no longer wants to go into building, drop off\n");
+			pop_task(game);
+			start_task_dropoff(game, *item);
+			return;
+		}
 	}
 
 	// We're back!

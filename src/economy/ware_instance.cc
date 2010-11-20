@@ -433,7 +433,10 @@ bool WareInstance::is_moving() const throw ()
  * Call this function if movement + potential request need to be cancelled for
  * whatever reason.
 */
-void WareInstance::cancel_moving() {
+void WareInstance::cancel_moving()
+{
+	molog("cancel_moving\n");
+
 	if (m_transfer) {
 		m_transfer->has_failed();
 		m_transfer = 0;
