@@ -311,9 +311,9 @@ void Building_Window::show_workarea()
 	Workarea_Info::const_iterator it = workarea_info.begin();
 	for
 		(Workarea_Info::size_type i =
-			std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
-			i;
-			++it)
+		 	std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
+		 i;
+		 ++it)
 	{
 		--i;
 		hollow_area.radius = it->first;
@@ -321,10 +321,10 @@ void Building_Window::show_workarea()
 		do
 			overlay_manager.register_overlay
 				(mr.location(),
-					workarea_cumulative_picid[i],
-					0,
-					Point::invalid(),
-					m_workarea_job_id);
+				 workarea_cumulative_picid[i],
+				 0,
+				 Point::invalid(),
+				 m_workarea_job_id);
 		while (mr.advance(map));
 		hollow_area.hole_radius = hollow_area.radius;
 	}
@@ -366,7 +366,9 @@ void Building_Window::create_ware_queue_panel
 	 Widelands::WaresQueue * const wq)
 {
 	// The *max* width should be larger than the default width
-	box->add(create_wares_queue_display(box, igbase(), b, wq, 3 * Width), UI::Box::AlignLeft);
+	box->add
+		(create_wares_queue_display(box, igbase(), b, wq, 3 * Width),
+		 UI::Box::AlignLeft);
 }
 
 /**

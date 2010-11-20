@@ -1,0 +1,28 @@
+#!/usr/bin/python
+
+
+"""
+This catches lines, starting with a sequence of whitespace of which the last is
+a space, and ending with an opening brace. It implies wrong indentation (the
+indentation of lines ending with { is especially important since it often
+influences how editors indent following lines).
+"""
+
+error_msg = "A line with a space as the last leading whitespace character is not allowed to end with an opening brace."
+
+strip_comments_and_strings = True
+strip_macros = True
+regexp=r"""^[ 	]* .*{$"""
+
+forbidden = [
+    ' {',
+    '	 {',
+    '	 y) {',
+    '	 if (b) {',
+]
+
+allowed = [
+    '{',
+    '	{',
+    '	if (b) {',
+]

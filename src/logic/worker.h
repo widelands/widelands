@@ -160,7 +160,7 @@ public:
 	virtual void log_general_info(Editor_Game_Base const &);
 
 	// worker-specific tasks
-	void start_task_transfer(Game &, Transfer *);
+	void start_task_transfer(Game &, Transfer &);
 	void cancel_task_transfer(Game &);
 	Transfer * get_transfer() const {return m_transfer;}
 
@@ -269,8 +269,7 @@ private:
 
 	// saving and loading
 protected:
-	class Loader : public Bob::Loader {
-	public:
+	struct Loader : public Bob::Loader {
 		Loader();
 
 		virtual void load(FileRead &);

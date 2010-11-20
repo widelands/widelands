@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,19 +30,19 @@
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
 static const char pic_tab_wares_warehouse[] =
-	 "pics/menu_tab_wares_warehouse.png";
+	"pics/menu_tab_wares_warehouse.png";
 static const char pic_tab_workers_warehouse[] =
-	 "pics/menu_tab_workers_warehouse.png";
+	"pics/menu_tab_workers_warehouse.png";
 
 Stock_Menu::Stock_Menu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
-:
-UI::UniqueWindow(&plr, "stock_menu", &registry, 640, 480, _("Stock")),
-m_player(plr)
+	:
+	UI::UniqueWindow(&plr, "stock_menu", &registry, 640, 480, _("Stock")),
+	m_player(plr)
 {
 	UI::Tab_Panel * tabs =
-		 new UI::Tab_Panel
-			 (this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+		new UI::Tab_Panel
+			(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	set_center_panel(tabs);
 
 	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), WaresDisplay::WARE, false);

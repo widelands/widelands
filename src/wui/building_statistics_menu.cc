@@ -374,9 +374,9 @@ void Building_Statistics_Menu::update() {
 		Widelands::Building_Descr const & building =
 			*tribe.get_building_descr(i);
 		if
-			(not (building.is_buildable()
-			 or building.is_enhanced()
-			 or building.global()))
+			(not building.is_buildable() and
+			 not building.is_enhanced () and
+			 not building.global      ())
 			continue;
 
 		std::vector<Widelands::Player::Building_Stats> const & vec =

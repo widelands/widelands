@@ -47,8 +47,8 @@ struct cookie_priority_queue_base {
 		size_type pos;
 
 		// No copying!
-		cookie(const cookie & other);
-		cookie & operator= (const cookie & other);
+		cookie & operator= (cookie const &);
+		explicit cookie    (cookie const &);
 	};
 
 protected:
@@ -87,38 +87,40 @@ struct cookie_priority_queue : cookie_priority_queue_base<_Type> {
 	typedef _Compare compare;
 	typedef _CookieAccessor cookie_accessor;
 
-	cookie_priority_queue(const compare & _c = compare(), const cookie_accessor & _a = cookie_accessor());
+	cookie_priority_queue
+		(compare         const & _c = compare        (),
+		 cookie_accessor const & _a = cookie_accessor());
 	~cookie_priority_queue();
 
 	size_type size() const;
 	bool empty() const;
 	type * top() const;
 
-	void push(type * elt);
-	void pop(type * elt);
-	void decrease_key(type * elt);
-	void increase_key(type * elt);
+	void push(type *);
+	void pop(type *);
+	void decrease_key(type *);
+	void increase_key(type *);
 
 private:
 	container d;
 	compare c;
 	cookie_accessor ca;
 
-	void swap(cookie & a, cookie & b);
+	void swap(cookie &, cookie &);
 	void selftest();
 
 	static size_type & cookie_pos(cookie & c) {return base_type::cookie_pos(c);}
 	static size_type bad_pos() {return base_type::bad_pos();}
-	static size_type parent_pos(size_type pos) {return (pos - 1) / 2;}
-	static size_type left_child_pos(size_type pos) {return (2 * pos) + 1;}
-	static size_type right_child_pos(size_type pos) {return (2 * pos) + 2;}
+	static size_type parent_pos(size_type const pos) {return (pos - 1) / 2;}
+	static size_type  left_child_pos(size_type const pos) {return 2 * pos + 1;}
+	static size_type right_child_pos(size_type const pos) {return 2 * pos + 2;}
 };
 
 template<typename _Type>
 struct default_cookie_accessor {
 	typedef typename cookie_priority_queue_base<_Type>::cookie cookie;
 
-	cookie & operator()(_Type * t) {
+	cookie & operator()(_Type * const t) {
 		return t->cookie();
 	}
 };
@@ -126,9 +128,9 @@ struct default_cookie_accessor {
 
 template<typename _T, typename _C, typename _CA>
 cookie_priority_queue<_T, _C, _CA>::cookie_priority_queue
-	(const typename cookie_priority_queue<_T, _C, _CA>::compare & _c,
-	 const typename cookie_priority_queue<_T, _C, _CA>::cookie_accessor & _a)
-: c(_c), ca(_a)
+	(typename cookie_priority_queue<_T, _C, _CA>::compare         const & _c,
+	 typename cookie_priority_queue<_T, _C, _CA>::cookie_accessor const & _a)
+	: c(_c), ca(_a)
 {
 }
 
@@ -140,7 +142,8 @@ cookie_priority_queue<_T, _C, _CA>::~cookie_priority_queue()
 }
 
 template<typename _T, typename _C, typename _CA>
-typename cookie_priority_queue<_T, _C, _CA>::size_type cookie_priority_queue<_T, _C, _CA>::size() const
+typename cookie_priority_queue<_T, _C, _CA>::size_type
+cookie_priority_queue<_T, _C, _CA>::size() const
 {
 	return d.size();
 }
@@ -152,13 +155,15 @@ bool cookie_priority_queue<_T, _C, _CA>::empty() const
 }
 
 template<typename _T, typename _C, typename _CA>
-typename cookie_priority_queue<_T, _C, _CA>::type * cookie_priority_queue<_T, _C, _CA>::top() const
+typename cookie_priority_queue<_T, _C, _CA>::type *
+cookie_priority_queue<_T, _C, _CA>::top() const
 {
 	return *d.begin();
 }
 
 template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::push(typename cookie_priority_queue<_T, _C, _CA>::type * elt)
+void cookie_priority_queue<_T, _C, _CA>::push
+	(typename cookie_priority_queue<_T, _C, _CA>::type * const elt)
 {
 	cookie & elt_cookie(ca(elt));
 
@@ -171,14 +176,16 @@ void cookie_priority_queue<_T, _C, _CA>::push(typename cookie_priority_queue<_T,
 }
 
 template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::pop(typename cookie_priority_queue<_T, _C, _CA>::type * elt)
+void cookie_priority_queue<_T, _C, _CA>::pop
+	(typename cookie_priority_queue<_T, _C, _CA>::type * const elt)
 {
 	cookie & elt_cookie(ca(elt));
 
 	assert(cookie_pos(elt_cookie) < d.size());
 
 	while (cookie_pos(elt_cookie) > 0) {
-		cookie & parent_cookie = ca(*(d.begin() + parent_pos(cookie_pos(elt_cookie))));
+		cookie & parent_cookie =
+			ca(*(d.begin() + parent_pos(cookie_pos(elt_cookie))));
 
 		assert(cookie_pos(parent_cookie) == parent_pos(cookie_pos(elt_cookie)));
 
@@ -194,7 +201,8 @@ void cookie_priority_queue<_T, _C, _CA>::pop(typename cookie_priority_queue<_T, 
 }
 
 template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::decrease_key(typename cookie_priority_queue<_T, _C, _CA>::type * elt)
+void cookie_priority_queue<_T, _C, _CA>::decrease_key
+	(typename cookie_priority_queue<_T, _C, _CA>::type * const elt)
 {
 	cookie & elt_cookie(ca(elt));
 
@@ -217,7 +225,8 @@ void cookie_priority_queue<_T, _C, _CA>::decrease_key(typename cookie_priority_q
 }
 
 template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::increase_key(typename cookie_priority_queue<_T, _C, _CA>::type * elt)
+void cookie_priority_queue<_T, _C, _CA>::increase_key
+	(typename cookie_priority_queue<_T, _C, _CA>::type * const elt)
 {
 	cookie & elt_cookie(ca(elt));
 

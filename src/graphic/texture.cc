@@ -152,6 +152,8 @@ Texture::Texture
 		SDL_Surface * const cv = SDL_ConvertSurface(surf, &fmt, 0);
 
 		// Add the frame
+		//  FIXME cppcheck: (error) Common realloc mistake: "m_pixels" nulled but
+		//  FIXME cppcheck: (error) not freed upon failure
 		m_pixels =
 			static_cast<uint8_t *>
 				(realloc

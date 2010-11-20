@@ -387,7 +387,7 @@ bool Immovable::get_passable() const throw ()
 
 std::string const & Immovable::name() const throw () {return descr().name();}
 
-void Immovable::set_owner(Player * player)
+void Immovable::set_owner(Player * const player)
 {
 	m_owner = player;
 }
@@ -506,7 +506,7 @@ void Immovable::draw
 }
 
 void Immovable::draw_construction
-	(const Editor_Game_Base & game, RenderTarget & dst, const Point pos)
+	(Editor_Game_Base const & game, RenderTarget & dst, Point const pos)
 {
 	const ImmovableProgram::ActConstruction * constructionact = 0;
 	if (m_program_ptr < m_program->size())
@@ -566,7 +566,7 @@ void Immovable::set_reserved_by_worker(bool reserve)
  *
  * \warning \p data must not be equal to the currently set data, but it may be 0.
  */
-void Immovable::set_action_data(ImmovableActionData * data)
+void Immovable::set_action_data(ImmovableActionData * const data)
 {
 	delete m_action_data;
 	m_action_data = data;
@@ -1172,7 +1172,7 @@ struct ActConstructionData : ImmovableActionData {
 	}
 
 	static ActConstructionData * load(FileRead & fr, Immovable & imm) {
-		ActConstructionData * d = new ActConstructionData;
+		ActConstructionData * d = new ActConstructionData; //  FIXME use a parsing constructor to eliminate contrived memory handling
 
 		try {
 			uint8_t version = fr.Unsigned8();
@@ -1182,7 +1182,7 @@ struct ActConstructionData : ImmovableActionData {
 				return d;
 			} else
 				throw game_data_error("unknown version %u", version);
-		} catch (const _wexception & e) {
+		} catch (_wexception const & e) {
 			delete d;
 			throw game_data_error("ActConstructionData: %s", e.what());
 		}

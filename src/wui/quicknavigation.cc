@@ -60,7 +60,7 @@ void QuickNavigation::view_changed(Point newpos, bool jump)
 
 			if
 				(static_cast<uint32_t>(abs(delta.x)) > m_screenwidth ||
-			    	 static_cast<uint32_t>(abs(delta.y)) > m_screenheight)
+				 static_cast<uint32_t>(abs(delta.y)) > m_screenheight)
 				jump = true;
 		}
 

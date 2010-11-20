@@ -17,7 +17,7 @@
  *
  */
 
-#include <lua.hpp>
+#include "lua_globals.h"
 
 #include "logic/game.h"
 #include "i18n.h"
@@ -29,15 +29,14 @@
 
 namespace LuaGlobals {
 
-/* RST
-Global functions
-======================
-
-The following functions are imported into the global namespace
-of all scripts that are running inside widelands. They provide convenient
-access to other scripts in other locations, localisation features and more.
-
-*/
+// RST
+// Global functions
+// ======================
+//
+// The following functions are imported into the global namespace of all
+// scripts that are running inside Widelands. They provide convenient access to
+// other scripts in other locations, localization features and more.
+//
 
 /*
  * ========================================================================
@@ -51,39 +50,37 @@ access to other scripts in other locations, localisation features and more.
  *                         MODULE FUNCTIONS
  * ========================================================================
  */
-/* RST
-	.. function:: set_textdomain(domain)
-
-		Sets the textdomain for all further calls to :func:`_`.
-
-		:arg domain: The textdomain
-		:type domain: :class:`string`
-		:returns: :const:`nil`
-*/
-static int L_set_textdomain(lua_State * L) {
+// RST
+// .. function:: set_textdomain(domain)
+//
+//    Sets the textdomain for all further calls to :func:`_`.
+//
+//    :arg domain: The textdomain
+//    :type domain: :class:`string`
+//    :returns: :const:`nil`
+static int L_set_textdomain(lua_State * const L) {
 	luaL_checkstring(L, -1);
 	lua_setglobal(L, "__TEXTDOMAIN");
 	return 0;
 }
 
-/* RST
-	.. function:: _(str)
-
-		This peculiar function is used to translate texts in your scenario into
-		another language. The function takes a single string, grabs the
-		textdomain of your map (which is used the maps name) and returns the
-		translated string. Make sure that you part translatable and untranslatable
-		stuff:
-
-		.. code-block:: lua
-
-			s = "<p><br>" .. _ "Only this should be translated" .. "<br></p>"
-
-		:arg str: text to translate.
-		:type str: :class:`string`
-		:returns: :const:`nil`
-*/
-static int L__(lua_State * L) {
+// RST
+// .. function:: _(str)
+//
+//    This peculiar function is used to translate texts in your scenario into
+//    another language. The function takes a single string, grabs the
+//    textdomain of your map (which is used the maps name) and returns the
+//    translated string. Make sure that you part translatable and
+//    untranslatable stuff:
+//
+//    .. code-block:: lua
+//
+//       s = "<p><br>" .. _ "Only this should be translated" .. "<br></p>"
+//
+//    :arg str: text to translate.
+//    :type str: :class:`string`
+//    :returns: :const:`nil`
+static int L__(lua_State * const L) {
 	lua_getglobal(L, "__TEXTDOMAIN");
 
 	if (not lua_isnil(L, -1)) {
@@ -95,23 +92,23 @@ static int L__(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. function:: use(ns, script)
-
-		Includes the script referenced at the caller location. Use this
-		to factor your scripts into smaller parts.
-
-		:arg ns:
-			The namespace were the imported script resides. Can be any of
-				:const:`maps`
-					The script is in the ``scripting/`` directory of the current map.
-
-		:type ns: :class:`string`
-		:arg script: The filename of the string without the extension ``.lua``.
-		:type script: :class:`string`
-		:returns: :const:`nil`
-*/
-static int L_use(lua_State * L) {
+// RST
+// .. function:: use(ns, script)
+//
+//    Includes the script referenced at the caller location. Use this to factor
+//    your scripts into smaller parts.
+//
+//    :arg ns:
+//       The namespace were the imported script resides. Can be any of
+//          :const:`maps`
+//             The script is in the ``scripting/`` directory of the current
+//             map.
+//
+//    :type ns: :class:`string`
+//    :arg script: The filename of the string without the extension ``.lua``.
+//    :type script: :class:`string`
+//    :returns: :const:`nil`
+static int L_use(lua_State * const L) {
 	const char * ns = luaL_checkstring(L, -2);
 	const char * script = luaL_checkstring(L, -1);
 
@@ -137,7 +134,7 @@ const static struct luaL_reg globals [] = {
 	{0, 0}
 };
 
-void luaopen_globals(lua_State * L) {
+void luaopen_globals(lua_State * const L) {
 	lua_pushvalue(L, LUA_GLOBALSINDEX);
 	luaL_register(L, 0, globals);
 	lua_pop(L, 1);

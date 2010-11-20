@@ -17,7 +17,7 @@
  *
  */
 
-#include <lua.hpp>
+#include "lua_game.h"
 
 #include "campvis.h"
 #include "economy/economy.h"
@@ -28,6 +28,7 @@
 #include "logic/path.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
 
@@ -35,24 +36,21 @@
 #include "lua_map.h"
 #include "scripting.h"
 
-#include "lua_game.h"
-
 using namespace Widelands;
 using namespace LuaMap;
 
 namespace LuaGame {
 
-/* RST
-:mod:`wl.game`
-======================
-
-.. module:: wl.game
-   :synopsis: Provides access on game internals like Players
-
-.. moduleauthor:: The Widelands development team
-
-.. currentmodule:: wl.game
-*/
+// RST
+// :mod:`wl.game`
+// ======================
+//
+// .. module:: wl.game
+//    :synopsis: Provides access on game internals like Players
+//
+// .. moduleauthor:: The Widelands development team
+//
+// .. currentmodule:: wl.game
 
 /*
  * ========================================================================
@@ -60,26 +58,24 @@ namespace LuaGame {
  * ========================================================================
  */
 
-/* RST
-Module Classes
-^^^^^^^^^^^^^^^^
+// RST
+// Module Classes
+// ^^^^^^^^^^^^^^^^
+//
 
-*/
 
-
-/* RST
-Player
-------
-
-.. class:: Player
-
-	Child of: :class:`wl.bases.PlayerBase`
-
-	This class represents one of the players in the game. You can access
-	information about this player or act on his behalf. Note that you cannot
-	instantiate a class of this type directly, use the :attr:`wl.Game.players`
-	insteadl
-*/
+// RST
+// Player
+// ------
+//
+// .. class:: Player
+//
+// Child of: :class:`wl.bases.PlayerBase`
+//
+// This class represents one of the players in the game. You can access
+// information about this player or act on his behalf. Note that you cannot
+// instantiate a class of this type directly, use the :attr:`wl.Game.players`
+// instead.
 const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, send_message),
@@ -119,27 +115,25 @@ const PropertyType<L_Player> L_Player::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: name
-
-			(RO) The name of this Player.
-*/
-int L_Player::get_name(lua_State * L) {
+// RST
+// .. attribute:: name
+//
+//       (RO) The name of this Player.
+int L_Player::get_name(lua_State * const L) {
 	Game & game = get_game(L);
 	Player & p = get(L, game);
 	lua_pushstring(L, p.get_name());
 	return 1;
 }
 
-/* RST
-	.. attribute:: allowed_buildings
-
-		(RO) an array with name:bool values with all buildings
-		that are currently allowed for this player. Note that
-		you can not enable/forbid a building by setting the value. Use
-		:meth:`allow_buildings` or :meth:`forbid_buildings` for that.
-*/
-int L_Player::get_allowed_buildings(lua_State * L) {
+// RST
+// .. attribute:: allowed_buildings
+//
+//    (RO) an array with name:bool values with all buildings that are currently
+//    allowed for this player. Note that you can not enable/forbid a building
+//    by setting the value. Use :meth:`allow_buildings` or
+//    :meth:`forbid_buildings` for that.
+int L_Player::get_allowed_buildings(lua_State * const L) {
 	Player & p = get(L, get_egbase(L));
 	const Tribe_Descr & t = p.tribe();
 
@@ -154,14 +148,13 @@ int L_Player::get_allowed_buildings(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: objectives
-
-		(RO) A table of name -> :class:`wl.game.Objective`. You can change
-		the objectives in this table and it will be reflected in the game. To add
-		a new item, use :meth:`add_objective`.
-*/
-int L_Player::get_objectives(lua_State * L) {
+// RST
+// .. attribute:: objectives
+//
+//    (RO) A table of name -> :class:`wl.game.Objective`. You can change the
+//    objectives in this table and it will be reflected in the game. To add a
+//    new item, use :meth:`add_objective`.
+int L_Player::get_objectives(lua_State * const L) {
 	Manager<Objective> const & mom = get_egbase(L).map().mom();
 
 	lua_newtable(L);
@@ -173,12 +166,11 @@ int L_Player::get_objectives(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: defeated
-
-		(RO) :const:`true` if this player was defeated, :const:`false` otherwise
-*/
-int L_Player::get_defeated(lua_State * L) {
+// RST
+// .. attribute:: defeated
+//
+//    (RO) :const:`true` if this player was defeated, :const:`false` otherwise
+int L_Player::get_defeated(lua_State * const L) {
 	const std::vector<uint32_t> & nr_workers =
 		get_game(L).get_general_statistics()[player_number() - 1].nr_workers;
 
@@ -189,19 +181,18 @@ int L_Player::get_defeated(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: retreat_percentage
-
-
-		(RW) Soldiers that only have this amount of total hitpoints
-		left will go home
-*/
+// RST
+// .. attribute:: retreat_percentage
+//
+//
+//    (RW) Soldiers that only have this amount of total hitpoints left will go
+//    home
 // UNTESTED
-int L_Player::get_retreat_percentage(lua_State * L) {
+int L_Player::get_retreat_percentage(lua_State * const L) {
 	lua_pushuint32(L, get(L, get_egbase(L)).get_retreat_percentage());
 	return 1;
 }
-int L_Player::set_retreat_percentage(lua_State * L) {
+int L_Player::set_retreat_percentage(lua_State * const L) {
 	uint32_t value = luaL_checkuint32(L, -1);
 	if (value > 100)
 		return report_error(L, "%i is not a valid percentage!", value);
@@ -210,29 +201,27 @@ int L_Player::set_retreat_percentage(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. attribute:: changing_retreat_percentage_allowed
-
-		(RW) A boolean value. :const:`true` if the player is allowed to change
-		    the :attr:`retreat_percentage`, :const:`false` otherwise.
-*/
+// RST
+// .. attribute:: changing_retreat_percentage_allowed
+//
+//    (RW) A boolean value. :const:`true` if the player is allowed to change
+//        the :attr:`retreat_percentage`, :const:`false` otherwise.
 // UNTESTED
-int L_Player::get_changing_retreat_percentage_allowed(lua_State * L) {
+int L_Player::get_changing_retreat_percentage_allowed(lua_State * const L) {
 	lua_pushuint32(L, get(L, get_egbase(L)).is_retreat_change_allowed());
 	return 1;
 }
-int L_Player::set_changing_retreat_percentage_allowed(lua_State * L) {
+int L_Player::set_changing_retreat_percentage_allowed(lua_State * const L) {
 	get(L, get_egbase(L)).allow_retreat_change(luaL_checkboolean(L, -1));
 	return 0;
 }
 
-/* RST
-	.. attribute:: inbox
-
-		(RO) An array of the message that are either read or new. Note that you
-		can't add messages to this array, use :meth:`send_message` for that.
-*/
-int L_Player::get_inbox(lua_State * L) {
+// RST
+// .. attribute:: inbox
+//
+//    (RO) An array of the message that are either read or new. Note that you
+//    can not add messages to this array, use :meth:`send_message` for that.
+int L_Player::get_inbox(lua_State * const L) {
 	Player & p = get(L, get_egbase(L));
 
 	lua_newtable(L);
@@ -241,7 +230,7 @@ int L_Player::get_inbox(lua_State * L) {
 		if (m.current->second->status() == Message::Archived)
 			continue;
 
-		lua_pushuint32(L, cidx ++);
+		lua_pushuint32(L, cidx++);
 		to_lua<L_Message>(L, new L_Message(player_number(), m.current->first));
 		lua_rawset(L, -3);
 	}
@@ -249,30 +238,28 @@ int L_Player::get_inbox(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: team
-
-		(RW) The team number of this player (0 means player is not in a team)
-
-		normally only reading should be enough, however it's a nice idea to have
-		a modular scenario, where teams form during the game.
-*/
-int L_Player::set_team(lua_State * L) {
+// RST
+// .. attribute:: team
+//
+//    (RW) The team number of this player (0 means player is not in a team)
+//
+//    normally only reading should be enough, however it's a nice idea to have
+//    a modular scenario, where teams form during the game.
+int L_Player::set_team(lua_State * const L) {
 	get(L, get_egbase(L)).set_team_number(luaL_checkinteger(L, -1));
 	return 0;
 }
-int L_Player::get_team(lua_State * L) {
+int L_Player::get_team(lua_State * const L) {
 	lua_pushinteger(L, get(L, get_egbase(L)).team_number());
 	return 1;
 }
 
 
-/* RST
-	.. attribute:: see_all
-
-		(RW) If you set this to true, the map will be completely visible for this
-		player.
-*/
+// RST
+// .. attribute:: see_all
+//
+//    (RW) If you set this to true, the map will be completely visible for this
+//    player.
 int L_Player::set_see_all(lua_State * const L) {
 	get(L, get_egbase(L)).set_see_all(luaL_checkboolean(L, -1));
 	return 0;
@@ -288,46 +275,45 @@ int L_Player::get_see_all(lua_State * const L) {
  ==========================================================
  */
 
-/* RST
-	.. method:: send_message(t, m[, opts])
-
-		Send a message to the player, the message will
-		appear in his inbox. Title or Message can be a
-		formatted using wideland's rich text.
-
-		:arg t: title of the message
-		:type t: :class:`string`
-
-		:arg m: text of the message
-		:type m: :class:`string`
-
-		Opts is a table of optional arguments and can be omitted. If it
-		exist it must contain string/value pairs of the following type:
-
-		:arg duration: if this is given, the message will be removed
-			from the players inbox after this many ms. Default:
-			message never expires.
-		:type duration: :class:`integer`
-
-		:arg field: the field connected to this message. Default:
-			no field connected to message
-		:type field: :class:`wl.map.Field`
-
-		:arg status: status to attach to this message. can be 'new', 'read' or
-			'archived'. Default: "new"
-		:type status: :class:`string`
-
-		:arg sender: sender name of this string. Default: "ScriptingEngine"
-		:type sender: :class:`string`
-
-		:arg popup: should the message window be opened for this message or not.
-			Default: :const:`false`
-		:type popup: :class:`boolean`
-
-		:returns: the message created
-		:rtype: :class:`wl.game.Message`
-*/
-int L_Player::send_message(lua_State * L) {
+// RST
+//.. method:: send_message(t, m[, opts])
+//
+//    Send a message to the player, the message will
+//    appear in his inbox. Title or Message can be a
+//    formatted using wideland's rich text.
+//
+//    :arg t: title of the message
+//    :type t: :class:`string`
+//
+//    :arg m: text of the message
+//    :type m: :class:`string`
+//
+//    Opts is a table of optional arguments and can be omitted. If it
+//    exist it must contain string/value pairs of the following type:
+//
+//    :arg duration: if this is given, the message will expire after this
+//       duration in ms. Default:
+//       message never expires.
+//    :type duration: :class:`integer`
+//
+//    :arg field: the field connected to this message. Default:
+//       no field connected to message
+//    :type field: :class:`wl.map.Field`
+//
+//    :arg status: status to attach to this message. can be 'new', 'read' or
+//       'archived'. Default: "new"
+//    :type status: :class:`string`
+//
+//    :arg sender: sender name of this string. Default: "ScriptingEngine"
+//    :type sender: :class:`string`
+//
+//    :arg popup: should the message window be opened for this message or not.
+//       Default: :const:`false`
+//    :type popup: :class:`boolean`
+//
+//    :returns: the message created
+//    :rtype: :class:`wl.game.Message`
+int L_Player::send_message(lua_State * const L) {
 	uint32_t n = lua_gettop(L);
 	std::string title = luaL_checkstring(L, 2);
 	std::string body = luaL_checkstring(L, 3);
@@ -389,43 +375,42 @@ int L_Player::send_message(lua_State * L) {
 	return to_lua<L_Message>(L, new L_Message(player_number(), message));
 }
 
-/* RST
-	.. method:: message_box(t, m[, opts])
-
-		Shows a message box to the player. While the message box is displayed the
-		game will not continue. Use this carefully and prefer
-		:meth:`send_message` because it is less interruptive, but nevertheless
-		for a set of narrative messages with map movements, this is still useful.
-
-		:arg t: title of the message
-		:type t: :class:`string`
-
-		:arg m: text of the message
-		:type m: :class:`string`
-
-		Opts is a table of optional arguments and can be omitted. If it
-		exist it must contain string/value pairs of the following type:
-
-		:arg field: The main view will be centered on this field when the box
-			pops up. Default: no field attached to message
-		:type field: :class:`wl.map.Field`
-
-		:arg w: width of message box in pixels. Default: 400.
-		:type w: :class:`integer`
-		:arg h: width of message box in pixels. Default: 300.
-		:type h: :class:`integer`
-		:arg posx: x position of window in pixels. Default: centered
-		:type posx: :class:`integer`
-		:arg posy: y position of window in pixels. Default: centered
-		:type posy: :class:`integer`
-
-		:arg button_text: Text on the button. Default: OK.
-		:type button_text: :class:`string`
-
-		:returns: :const:`nil`
-*/
+// RST
+// .. method:: message_box(t, m[, opts])
+//
+//    Shows a message box to the player. While the message box is displayed the
+//    game will not continue. Use this carefully and prefer
+//    :meth:`send_message` because it is less interruptive, but nevertheless
+//    for a set of narrative messages with map movements, this is still useful.
+//
+//    :arg t: title of the message
+//    :type t: :class:`string`
+//
+//    :arg m: text of the message
+//    :type m: :class:`string`
+//
+//    Opts is a table of optional arguments and can be omitted. If it
+//    exist it must contain string/value pairs of the following type:
+//
+//    :arg field: The main view will be centered on this field when the box
+//       pops up. Default: no field attached to message
+//    :type field: :class:`wl.map.Field`
+//
+//    :arg w: width of message box in pixels. Default: 400.
+//    :type w: :class:`integer`
+//    :arg h: width of message box in pixels. Default: 300.
+//    :type h: :class:`integer`
+//    :arg posx: x position of window in pixels. Default: centered
+//    :type posx: :class:`integer`
+//    :arg posy: y position of window in pixels. Default: centered
+//    :type posy: :class:`integer`
+//
+//    :arg button_text: Text on the button. Default: OK.
+//    :type button_text: :class:`string`
+//
+//    :returns: :const:`nil`
 // UNTESTED
-int L_Player::message_box(lua_State * L) {
+int L_Player::message_box(lua_State * const L) {
 	Game & game = get_game(L);
 
 	uint32_t w = 400;
@@ -434,10 +419,10 @@ int L_Player::message_box(lua_State * L) {
 	int32_t posy = -1;
 	std::string button_text = _("OK");
 
-#define CHECK_ARG(var, type) \
-	lua_getfield(L, -1, #var); \
-	if (not lua_isnil(L, -1)) var = luaL_check ## type(L, -1); \
-	lua_pop(L, 1);
+#define CHECK_ARG(var, type)                                                  \
+   lua_getfield(L, -1, #var);                                                 \
+   if (not lua_isnil(L, -1)) var = luaL_check ## type(L, -1);                 \
+   lua_pop(L, 1);                                                             \
 
 	if (lua_gettop(L) == 4) {
 		CHECK_ARG(posx, uint32);
@@ -483,15 +468,14 @@ int L_Player::message_box(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. method:: sees_field(f)
-
-		Returns true if this field is currently seen by this player
-
-		:returns: :const:`true` or :const:`false`
-		:rtype: :class:`bool`
-*/
-int L_Player::sees_field(lua_State * L) {
+// RST
+// .. method:: sees_field(f)
+//
+//    Returns true if this field is currently seen by this player
+//
+//    :returns: :const:`true` or :const:`false`
+//    :rtype: :class:`bool`
+int L_Player::sees_field(lua_State * const L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 
 	Widelands::Map_Index const i =
@@ -501,16 +485,15 @@ int L_Player::sees_field(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. method:: seen_field(f)
-
-		Returns true if this field has ever been seen by this player or
-		is currently seen
-
-		:returns: :const:`true` or :const:`false`
-		:rtype: :class:`bool`
-*/
-int L_Player::seen_field(lua_State * L) {
+// RST
+// .. method:: seen_field(f)
+//
+//    Returns true if this field has ever been seen by this player or
+//    is currently seen
+//
+//    :returns: :const:`true` or :const:`false`
+//    :rtype: :class:`bool`
+int L_Player::seen_field(lua_State * const L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 
 	Widelands::Map_Index const i =
@@ -520,55 +503,52 @@ int L_Player::seen_field(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. method:: allow_buildings(what)
-
-		This method disables or enables buildings to build for the player. What
-		can either be the single string "all" or a list of strings containing
-		the names of the buildings that are allowed.
-
-		:see: :meth:`forbid_buildings`
-
-		:arg what: either "all" or an array containing the names of the allowed
-			buildings
-		:returns: :const:`nil`
-*/
-int L_Player::allow_buildings(lua_State * L) {
+// RST
+// .. method:: allow_buildings(what)
+//
+//    This method disables or enables buildings to build for the player. What
+//    can either be the single string "all" or a list of strings containing
+//    the names of the buildings that are allowed.
+//
+//    :see: :meth:`forbid_buildings`
+//
+//    :arg what: either "all" or an array containing the names of the allowed
+//       buildings
+//    :returns: :const:`nil`
+int L_Player::allow_buildings(lua_State * const L) {
 	return m_allow_forbid_buildings(L, true);
 }
 
-/* RST
-	.. method:: forbid_buildings(what)
-
-		See :meth:`allow_buildings` for arguments. This is the opposite function.
-
-		:arg what: either "all" or an array containing the names of the allowed
-			buildings
-		:returns: :const:`nil`
-*/
-int L_Player::forbid_buildings(lua_State * L) {
+// RST
+// .. method:: forbid_buildings(what)
+//
+//    See :meth:`allow_buildings` for arguments. This is the opposite function.
+//
+//    :arg what: either "all" or an array containing the names of the allowed
+//       buildings
+//    :returns: :const:`nil`
+int L_Player::forbid_buildings(lua_State * const L) {
 	return m_allow_forbid_buildings(L, false);
 }
 
-/* RST
-	.. method:: add_objective(name, title, descr)
-
-		Add a new objective for this player. Will report an error, if an
-		Objective with the same name is already registered - note that the names
-		for the objectives are shared internally for all players, so not even
-		another player can have an objective with the same name.
-
-		:arg name: the name of the objective
-		:type name: :class:`string`
-		:arg title: the title of the objective that will be shown in the menu
-		:type title: :class:`string`
-		:arg body: the full text of the objective
-		:type body: :class:`string`
-
-		:returns: The objective class created
-		:rtype: :class:`wl.game.Objective`
-*/
-int L_Player::add_objective(lua_State * L) {
+// RST
+// .. method:: add_objective(name, title, descr)
+//
+//    Add a new objective for this player. Will report an error, if an
+//    Objective with the same name is already registered - note that the names
+//    for the objectives are shared internally for all players, so not even
+//    another player can have an objective with the same name.
+//
+//    :arg name: the name of the objective
+//    :type name: :class:`string`
+//    :arg title: the title of the objective that will be shown in the menu
+//    :type title: :class:`string`
+//    :arg body: the full text of the objective
+//    :type body: :class:`string`
+//
+//    :returns: The objective class created
+//    :rtype: :class:`wl.game.Objective`
+int L_Player::add_objective(lua_State * const L) {
 	Game & game = get_game(L);
 	Player & p = get(L, game);
 
@@ -579,8 +559,8 @@ int L_Player::add_objective(lua_State * L) {
 	if (mom[name] != 0)
 		return
 			report_error
-				(L, "An objective with the name '%s' already exists!", name.c_str()
-			);
+				(L, "An objective with the name '%s' already exists!",
+				 name.c_str());
 
 
 	Objective & o = *new Objective;
@@ -596,18 +576,17 @@ int L_Player::add_objective(lua_State * L) {
 	return to_lua<L_Objective>(L, new L_Objective(o));
 }
 
-/* RST
-	.. method:: reveal_fields(fields)
-
-		Make these fields visible for the current player. The fields will remain
-		visible until they are hidden again.
-
-		:arg fields: The fields to show
-		:type fields: :class:`array` of :class:`wl.map.Fields`
-
-		:returns: :const:`nil`
-*/
-int L_Player::reveal_fields(lua_State * L) {
+// RST
+// .. method:: reveal_fields(fields)
+//
+//    Make these fields visible for the current player. The fields will remain
+//    visible until they are hidden again.
+//
+//    :arg fields: The fields to show
+//    :type fields: :class:`array` of :class:`wl.map.Fields`
+//
+//    :returns: :const:`nil`
+int L_Player::reveal_fields(lua_State * const L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	Player & p = get(L, egbase);
 	Map & m = egbase.map();
@@ -625,18 +604,17 @@ int L_Player::reveal_fields(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: hide_fields(fields)
-
-		Make these fields hidden for the current player if they are not
-		seen by a military building.
-
-		:arg fields: The fields to hide
-		:type fields: :class:`array` of :class:`wl.map.Fields`
-
-		:returns: :const:`nil`
-*/
-int L_Player::hide_fields(lua_State * L) {
+// RST
+// .. method:: hide_fields(fields)
+//
+//    Make these fields hidden for the current player if they are not
+//    seen by a military building.
+//
+//    :arg fields: The fields to hide
+//    :type fields: :class:`array` of :class:`wl.map.Fields`
+//
+//    :returns: :const:`nil`
+int L_Player::hide_fields(lua_State * const L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	Player & p = get(L, egbase);
 	Map & m = egbase.map();
@@ -645,7 +623,7 @@ int L_Player::hide_fields(lua_State * L) {
 
 	lua_pushnil(L);  /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.unsee_node
+		p.unsee_node //  FIXME Player::unsee_node must not be made accessible to scripts. A script must never have direct acces to tamper with player vision. It will crash the game engine. The only thing that a script can be allowed to do is to create and destroy AreaWatcher objects. (AreaWatcher should be replaced with RegionWatcher when map regions are implemented.)
 			((*get_user_class<L_Field>(L, -1))->fcoords(L).field - &m[0],
 			egbase.get_gametime());
 		lua_pop(L, 1);
@@ -654,17 +632,16 @@ int L_Player::hide_fields(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: reveal_scenario(name)
-
-		This reveals a scenario inside a campaign. This only works for the
-		interactive player and most likely also only in single player games.
-
-		:arg name: name of the scenario to reveal
-		:type name: :class:`string`
-*/
+// RST
+// .. method:: reveal_scenario(name)
+//
+//    This reveals a scenario inside a campaign. This only works for the
+//    interactive player and most likely also only in single player games.
+//
+//    :arg name: name of the scenario to reveal
+//    :type name: :class:`string`
 // UNTESTED
-int L_Player::reveal_scenario(lua_State * L) {
+int L_Player::reveal_scenario(lua_State * const L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		return report_error(L, "Can only be called for interactive player!");
 
@@ -674,17 +651,16 @@ int L_Player::reveal_scenario(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: reveal_campaign(name)
-
-		This reveals a campaign. This only works for the
-		interactive player and most likely also only in single player games.
-
-		:arg name: name of the campaign to reveal
-		:type name: :class:`string`
-*/
+// RST
+// .. method:: reveal_campaign(name)
+//
+//    This reveals a campaign. This only works for the interactive player and
+//    most likely also only in single player games.
+//
+//    :arg name: name of the campaign to reveal
+//    :type name: :class:`string`
 // UNTESTED
-int L_Player::reveal_campaign(lua_State * L) {
+int L_Player::reveal_campaign(lua_State * const L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		return report_error(L, "Can only be called for interactive player!");
 
@@ -695,22 +671,21 @@ int L_Player::reveal_campaign(lua_State * L) {
 }
 
 
-/* RST
-	.. method:: get_buildings(which)
-
-		which can be either a single name or an array of names. In the first
-		case, the method returns an array of all Buildings that the player has of
-		this kind. If which is an array, the function returns a table of
-		(name,array of buildings) pairs.
-
-		:type which: name of building or array of building names
-		:rtype which: :class:`string` or :class:`array`
-		:returns: information about the players buildings
-		:rtype: :class:`array` or :class:`table`
-*/
-int L_Player::get_buildings(lua_State * L) {
+// RST
+// .. method:: get_buildings(which)
+//
+//    which can be either a single name or an array of names. In the first
+//    case, the method returns an array of all Buildings that the player has of
+//    this kind. If which is an array, the function returns a table of
+//    (name,array of buildings) pairs.
+//
+//    :type which: name of building or array of building names
+//    :rtype which: :class:`string` or :class:`array`
+//    :returns: information about the players buildings
+//    :rtype: :class:`array` or :class:`table`
+int L_Player::get_buildings(lua_State * const L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	Map * map = egbase.get_map();
+	Map              & map    = egbase.map();
 	Player & p = get(L, egbase);
 
 	// if only one string, convert to array so that we can use
@@ -747,7 +722,7 @@ int L_Player::get_buildings(lua_State * L) {
 				continue;
 
 			lua_pushuint32(L, cidx++);
-			upcasted_immovable_to_lua(L, (*map)[vec[l].pos].get_immovable());
+			upcasted_immovable_to_lua(L, map[vec[l].pos].get_immovable());
 			lua_rawset(L, -3);
 		}
 
@@ -757,19 +732,18 @@ int L_Player::get_buildings(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. method:: set_flag_style(name)
-
-		Sets the appearance of the flags for this player to the given style.
-		The style must be defined for the tribe.
-
-		:arg name: name of style
-		:type name: :class:`string`
-*/
+// RST
+// .. method:: set_flag_style(name)
+//
+//    Sets the appearance of the flags for this player to the given style.
+//    The style must be defined for the tribe.
+//
+//    :arg name: name of style
+//    :type name: :class:`string`
 // UNTESTED, UNUSED so far
-int L_Player::set_flag_style(lua_State * L) {
+int L_Player::set_flag_style(lua_State * const L) {
 	Player & p = get(L, get_game(L));
-	const char * name = luaL_checkstring(L, 2);
+	char const * const name = luaL_checkstring(L, 2);
 
 	try {
 		p.set_flag_style(p.tribe().flag_style_index(name));
@@ -779,17 +753,16 @@ int L_Player::set_flag_style(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: set_frontier_style(name)
-
-		Sets the appearance of the frontiers for this player to the given style.
-		The style must be defined for the tribe.
-
-		:arg name: name of style
-		:type name: :class:`string`
-*/
+// RST
+// .. method:: set_frontier_style(name)
+//
+//    Sets the appearance of the frontiers for this player to the given style.
+//    The style must be defined for the tribe.
+//
+//    :arg name: name of style
+//    :type name: :class:`string`
 // UNTESTED, UNUSED so far
-int L_Player::set_frontier_style(lua_State * L) {
+int L_Player::set_frontier_style(lua_State * const L) {
 	Player & p = get(L, get_game(L));
 	const char * name = luaL_checkstring(L, 2);
 
@@ -801,48 +774,46 @@ int L_Player::set_frontier_style(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: get_suitability(building, field)
-
-		Returns the suitability that this building has for this field. This
-		is mainly useful in initialization where buildings must be placed
-		automatically.
-
-		:arg building: name of the building to check for
-		:type building: :class:`string`
-		:arg field: where the suitability should be checked
-		:type field: :class:`wl.map.Field`
-
-		:returns: the suitability
-		:rtype: :class:`integer`
-*/
+// RST
+// .. method:: get_suitability(building, field)
+//
+//    Returns the suitability that this building has for this field. This is
+//    mainly useful in initialization where buildings must be placed
+//    automatically.
+//
+//    :arg building: name of the building to check for
+//    :type building: :class:`string`
+//    :arg field: where the suitability should be checked
+//    :type field: :class:`wl.map.Field`
+//
+//    :returns: the suitability
+//    :rtype: :class:`integer`
 // UNTESTED
-int L_Player::get_suitability(lua_State * L) {
+int L_Player::get_suitability(lua_State * const L) {
 	Game & game = get_game(L);
 	const Tribe_Descr & tribe = get(L, game).tribe();
 
-	const char * name = luaL_checkstring(L, 2);
+	char const * const name = luaL_checkstring(L, 2);
 	Building_Index i = tribe.building_index(name);
 	if (i == Building_Index::Null())
 		report_error(L, "Unknown building type: <%s>", name);
 
 	lua_pushint32
-		(L, tribe.get_building_descr(i)->suitability
-		 (game.map(), (*get_user_class<L_Field>(L, 3))->fcoords(L))
-		);
+		(L,
+		 tribe.get_building_descr(i)->suitability
+		 	(game.map(), (*get_user_class<L_Field>(L, 3))->fcoords(L)));
 	return 1;
 }
 
 
-/* RST
-	.. method:: allow_workers(what)
-
-		This will become the corresponding function to :meth:`allow_buildings`,
-		but at the moment this is only a stub that accepts only "all" as
-		argument. It then activates all workers for the player, that means all
-		workers are allowed to spawn in all warehouses.
-*/
-int L_Player::allow_workers(lua_State * L) {
+// RST
+// .. method:: allow_workers(what)
+//
+//    This will become the corresponding function to :meth:`allow_buildings`,
+//    but at the moment this is only a stub that accepts only "all" as
+//    argument. It then activates all workers for the player, that means all
+//    workers are allowed to spawn in all warehouses.
+int L_Player::allow_workers(lua_State * const L) {
 
 	if (luaL_checkstring(L, 2) != std::string("all"))
 		return report_error(L, "Argument must be <all>!");
@@ -870,8 +841,9 @@ int L_Player::allow_workers(lua_State * L) {
 					 <
 					 worker_types_without_cost.size());
 				if
-					(worker_types_without_cost.at
-						(worker_types_without_cost_index) == i)
+					(worker_types_without_cost.at (worker_types_without_cost_index)
+					 ==
+					 i)
 					break;
 			}
 			for (uint32_t j = player.get_nr_economies(); j;) {
@@ -887,20 +859,19 @@ int L_Player::allow_workers(lua_State * L) {
 }
 
 
-/* RST
-	.. method:: switchplayer(playernumber)
-
-		If *this* is the local player (the player set in interactive player)
-		switch to the player with playernumber
-*/
-int L_Player::switchplayer(lua_State * L) {
+// RST
+// .. method:: switchplayer(playernumber)
+//
+//    If *this* is the local player (the player set in interactive player)
+//    switch to the player with playernumber
+int L_Player::switchplayer(lua_State * const L) {
 	Game & game = get_game(L);
 
 	uint8_t newplayer = luaL_checkinteger(L, -1);
-	Interactive_Player * ipl = game.get_ipl();
+	Interactive_Player & ipl = *game.get_ipl();
 	// only switch, if this is our player!
-	if (ipl->player_number() == player_number()) {
-		ipl->set_player_number(newplayer);
+	if (ipl.player_number() == player_number()) {
+		ipl.set_player_number(newplayer);
 	}
 	return 0;
 }
@@ -928,7 +899,7 @@ void L_Player::m_parse_building_list
 
 		lua_pushnil(L);
 		while (lua_next(L, -2) != 0) {
-			const char * name = luaL_checkstring(L, -1);
+			char const * const name = luaL_checkstring(L, -1);
 			Building_Index i = tribe.building_index(name);
 			if (i == Building_Index::Null())
 				report_error(L, "Unknown building type: '%s'", name);
@@ -939,7 +910,7 @@ void L_Player::m_parse_building_list
 		}
 	}
 }
-int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
+int L_Player::m_allow_forbid_buildings(lua_State * const L, bool const allow)
 {
 	Player & p = get(L, get_egbase(L));
 
@@ -952,17 +923,16 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 	return 0;
 }
 
-/* RST
-Objective
----------
-
-.. class:: Objective
-
-	This represents an Objective, a goal for the player in the game. This is
-	mainly for displaying to the user, but each objective also has a
-	:attr:`done` which can be set by the scripter to define if this is done. Use
-	:attr:`visible` to hide it from the user.
-*/
+// RST
+// Objective
+// ---------
+//
+// .. class:: Objective
+//
+// This represents an Objective, a goal for the player in the game. This is
+// mainly for displaying to the user, but each objective also has a
+// :attr:`done` which can be set by the scripter to define if this is done. Use
+// :attr:`visible` to hide it from the user.
 const char L_Objective::className[] = "Objective";
 const MethodType<L_Objective> L_Objective::Methods[] = {
 	METHOD(L_Objective, remove),
@@ -982,10 +952,10 @@ L_Objective::L_Objective(Widelands::Objective o) {
 	m_name = o.name();
 }
 
-void L_Objective::__persist(lua_State * L) {
+void L_Objective::__persist(lua_State * const L) {
 	PERS_STRING("name", m_name);
 }
-void L_Objective::__unpersist(lua_State * L) {
+void L_Objective::__unpersist(lua_State * const L) {
 	UNPERS_STRING("name", m_name);
 }
 
@@ -995,75 +965,70 @@ void L_Objective::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: name
-
-		(RO) the internal name. You can reference this object via
-		:attr:`wl.game.Player.objectives` with :attr:`name` as key.
-*/
-int L_Objective::get_name(lua_State * L) {
+// RST
+// .. attribute:: name
+//
+//    (RO) the internal name. You can reference this object via
+//    :attr:`wl.game.Player.objectives` with :attr:`name` as key.
+int L_Objective::get_name(lua_State * const L) {
 	Objective & o = get(L, get_game(L));
 	lua_pushstring(L, o.name().c_str());
 	return 1;
 }
-/* RST
-	.. attribute:: title
-
-		(RW) The line that is shown in the objectives menu
-*/
-int L_Objective::get_title(lua_State * L) {
+// RST
+// .. attribute:: title
+//
+//    (RW) The line that is shown in the objectives menu
+int L_Objective::get_title(lua_State * const L) {
 	Objective & o = get(L, get_game(L));
 	lua_pushstring(L, o.descname().c_str());
 	return 1;
 }
-int L_Objective::set_title(lua_State * L) {
+int L_Objective::set_title(lua_State * const L) {
 	Objective & o = get(L, get_game(L));
 	o.set_descname(luaL_checkstring(L, -1));
 	return 0;
 }
-/* RST
-	.. attribute:: body
-
-		(RW) The complete text of this objective. Can be Widelands RichText.
-*/
-int L_Objective::get_body(lua_State * L) {
+// RST
+// .. attribute:: body
+//
+//    (RW) The complete text of this objective. Can be Widelands RichText.
+int L_Objective::get_body(lua_State * const L) {
 	Objective & o = get(L, get_game(L));
 	lua_pushstring(L, o.descr().c_str());
 	return 1;
 }
-int L_Objective::set_body(lua_State * L) {
+int L_Objective::set_body(lua_State * const L) {
 	Objective & o = get(L, get_game(L));
 	o.set_descr(luaL_checkstring(L, -1));
 	return 0;
 }
-/* RST
-	.. attribute:: visible
-
-		(RW) is this objective shown in the objectives menu
-*/
-int L_Objective::get_visible(lua_State * L) {
+// RST
+// .. attribute:: visible
+//
+//    (RW) is this objective shown in the objectives menu
+int L_Objective::get_visible(lua_State * const L) {
 	Objective & o = get(L, get_game(L));
 	lua_pushboolean(L, o.visible());
 	return 1;
 }
-int L_Objective::set_visible(lua_State * L) {
+int L_Objective::set_visible(lua_State * const L) {
 	Objective & o = get(L, get_game(L));
 	o.set_visible(luaL_checkboolean(L, -1));
 	return 0;
 }
-/* RST
-	.. attribute:: done
-
-		(RW) defines if this objective is already fulfilled. If done is
-		:const`true`, the objective will not be shown to the user, no matter what
-		:attr:`visible` is set to.
-*/
-int L_Objective::get_done(lua_State * L) {
+// RST
+// .. attribute:: done
+//
+//    (RW) defines if this objective is already fulfilled. If done is
+//    :const`true`, the objective will not be shown to the user, no matter what
+//    :attr:`visible` is set to.
+int L_Objective::get_done(lua_State * const L) {
 	Objective & o = get(L, get_game(L));
 	lua_pushboolean(L, o.done());
 	return 1;
 }
-int L_Objective::set_done(lua_State * L) {
+int L_Objective::set_done(lua_State * const L) {
 	Objective & o = get(L, get_game(L));
 	o.set_done(luaL_checkboolean(L, -1));
 	return 0;
@@ -1074,19 +1039,20 @@ int L_Objective::set_done(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
-int L_Objective::remove(lua_State * L) {
-	Game & g = get_game(L);
+int L_Objective::remove(lua_State * const L) {
+	Game & game = get_game(L);
 	// The next call checks if the Objective still exists
-	get(L, g);
-	g.map().mom().remove(m_name);
+	get(L, game);
+	game.map().mom().remove(m_name);
 	return 0;
 }
 
-int L_Objective::__eq(lua_State * L) {
+int L_Objective::__eq(lua_State * const L) {
 	Manager<Objective> const & mom = get_game(L).map().mom();
 
-	const Objective * me = mom[m_name];
-	const Objective * you = mom[(*get_user_class<L_Objective>(L, 2))->m_name];
+	Objective const * const me  = mom[m_name];
+	Objective const * const you =
+		mom[(*get_user_class<L_Objective>(L, 2))->m_name];
 
 	lua_pushboolean(L, (me && you) and (me == you));
 	return 1;
@@ -1097,22 +1063,21 @@ int L_Objective::__eq(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Objective & L_Objective::get(lua_State * L, Widelands::Game & g) {
-	Objective * o = g.map().mom()[m_name];
+Objective & L_Objective::get(lua_State * const L, Widelands::Game & game) {
+	Objective * const o = game.map().mom()[m_name];
 	if (!o)
 		report_error
-			(L, "Objective with name '%s' doesn't exist!", m_name.c_str());
+			(L, "Objective with name '%s' does not exist!", m_name.c_str());
 	return *o;
 }
 
-/* RST
-Message
----------
-
-.. class:: Message
-
-	This represents a message in the Message Box of a given user.
-*/
+// RST
+// Message
+// ---------
+//
+// .. class:: Message
+//
+// This represents a message in the Message Box of a given user.
 const char L_Message::className[] = "Message";
 const MethodType<L_Message> L_Message::Methods[] = {
 	METHOD(L_Message, __eq),
@@ -1129,16 +1094,16 @@ const PropertyType<L_Message> L_Message::Properties[] = {
 	{0, 0, 0},
 };
 
-L_Message::L_Message(uint8_t plr, Message_Id id) {
+L_Message::L_Message(uint8_t const plr, Message_Id const id) {
 	m_plr = plr;
 	m_mid = id;
 }
 
-void L_Message::__persist(lua_State * L) {
+void L_Message::__persist(lua_State * const L) {
 	PERS_UINT32("player", m_plr);
 	PERS_UINT32("msg_idx", get_mos(L)->message_savers[m_plr - 1][m_mid].value());
 }
-void L_Message::__unpersist(lua_State * L) {
+void L_Message::__unpersist(lua_State * const L) {
 	UNPERS_UINT32("player", m_plr);
 	uint32_t midx = 0;
 	UNPERS_UINT32("msg_idx", midx);
@@ -1150,51 +1115,46 @@ void L_Message::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: sender
-
-		(RO) The name of the sender of this message
-*/
-int L_Message::get_sender(lua_State * L) {
+// RST
+// .. attribute:: sender
+//
+//    (RO) The name of the sender of this message
+int L_Message::get_sender(lua_State * const L) {
 	lua_pushstring(L, get(L, get_game(L)).sender());
 	return 1;
 }
-/* RST
-	.. attribute:: title
-
-		(RO) The title of this message
-*/
-int L_Message::get_title(lua_State * L) {
+// RST
+// .. attribute:: title
+//
+//    (RO) The title of this message
+int L_Message::get_title(lua_State * const L) {
 	lua_pushstring(L, get(L, get_game(L)).title());
 	return 1;
 }
-/* RST
-	.. attribute:: body
-
-		(RO) The body of this message
-*/
-int L_Message::get_body(lua_State * L) {
+// RST
+// .. attribute:: body
+//
+//    (RO) The body of this message
+int L_Message::get_body(lua_State * const L) {
 	lua_pushstring(L, get(L, get_game(L)).body());
 	return 1;
 }
 
-/* RST
-	.. attribute:: sent
-
-		(RO) The game time in milliseconds when this message was sent
-*/
-int L_Message::get_sent(lua_State * L) {
+// RST
+// .. attribute:: sent
+//
+//    (RO) The game time in milliseconds when this message was sent
+int L_Message::get_sent(lua_State * const L) {
 	lua_pushuint32(L, get(L, get_game(L)).sent());
 	return 1;
 }
 
-/* RST
-	.. attribute:: duration
-
-		(RO) The time in milliseconds before this message is invalidated or nil if
-		this message has an endless duration.
-*/
-int L_Message::get_duration(lua_State * L) {
+// RST
+// .. attribute:: duration
+//
+//    (RO) The time in milliseconds before this message is invalidated or nil
+//    if this message has an endless duration.
+int L_Message::get_duration(lua_State * const L) {
 	uint32_t d = get(L, get_game(L)).duration();
 	if (d == Forever())
 		return 0;
@@ -1202,28 +1162,26 @@ int L_Message::get_duration(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: field
-
-		(RO) The field that corresponds to this Message.
-*/
-int L_Message::get_field(lua_State * L) {
+// RST
+// .. attribute:: field
+//
+//    (RO) The field that corresponds to this Message.
+int L_Message::get_field(lua_State * const L) {
 	Coords c = get(L, get_game(L)).position();
 	if (c == Coords::Null())
 		return 0;
 	return to_lua<L_Field>(L, new L_Field(c));
 }
 
-/* RST
-	.. attribute:: status
-
-		(RW) The status of the message. Can be either of
-
-			* new
-			* read
-			* archived
-*/
-int L_Message::get_status(lua_State * L) {
+// RST
+// .. attribute:: status
+//
+//    (RW) The status of the message. Can be either of
+//
+//       * new
+//       * read
+//       * archived
+int L_Message::get_status(lua_State * const L) {
 	switch (get(L, get_game(L)).status()) {
 		case Message::New: lua_pushstring(L, "new"); break;
 		case Message::Read: lua_pushstring(L, "read"); break;
@@ -1232,7 +1190,7 @@ int L_Message::get_status(lua_State * L) {
 	}
 	return 1;
 }
-int L_Message::set_status(lua_State * L) {
+int L_Message::set_status(lua_State * const L) {
 	Message::Status status = Message::New;
 	std::string s = luaL_checkstring(L, -1);
 	if (s == "new") status = Message::New;
@@ -1250,7 +1208,7 @@ int L_Message::set_status(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
-int L_Message::__eq(lua_State * L) {
+int L_Message::__eq(lua_State * const L) {
 	lua_pushboolean(L, m_mid == (*get_user_class<L_Message>(L, 2))->m_mid);
 	return 1;
 }
@@ -1260,7 +1218,7 @@ int L_Message::__eq(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Player & L_Message::get_plr(lua_State * L, Widelands::Game & game) {
+Player & L_Message::get_plr(lua_State * const L, Widelands::Game & game) {
 	if (m_plr > MAX_PLAYERS)
 		report_error(L, "Illegal player number %i",  m_plr);
 	Player * rv = game.get_player(m_plr);
@@ -1268,7 +1226,7 @@ Player & L_Message::get_plr(lua_State * L, Widelands::Game & game) {
 		report_error(L, "Player with the number %i does not exist", m_plr);
 	return *rv;
 }
-const Message & L_Message::get(lua_State * L, Widelands::Game & game) {
+const Message & L_Message::get(lua_State * const L, Widelands::Game & game) {
 	const Message * rv = get_plr(L, game).messages()[m_mid];
 	if (!rv)
 		report_error(L, "This message has been deleted!");
@@ -1285,7 +1243,7 @@ const static struct luaL_reg wlgame [] = {
 	{0, 0}
 };
 
-void luaopen_wlgame(lua_State * L) {
+void luaopen_wlgame(lua_State * const L) {
 	luaL_register(L, "wl.game", wlgame);
 	lua_pop(L, 1); // pop the table
 
@@ -1297,5 +1255,4 @@ void luaopen_wlgame(lua_State * L) {
 	register_class<L_Message>(L, "game");
 }
 
-};
-
+}

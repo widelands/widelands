@@ -181,9 +181,10 @@ void WarehouseSupply::get_ware_type(bool & isworker, Ware_Index & ware) const
 		("WarehouseSupply::get_ware_type: calling this is nonsensical");
 }
 
-void WarehouseSupply::send_to_storage(Game &, Warehouse * wh)
+void WarehouseSupply::send_to_storage(Game &, Warehouse &)
 {
-	throw wexception("WarehouseSupply::send_to_storage: should never be called");
+	throw wexception
+		("WarehouseSupply::send_to_storage: should never be called");
 }
 
 uint32_t WarehouseSupply::nr_supplies
@@ -264,11 +265,9 @@ IMPLEMENTATION
 
 #define SET_WORKER_WITHOUT_COST_SPAWNS(nr, value)                             \
    for                                                                        \
-      (wl_index_range<uint32_t *>                                             \
-       i(                                                                     \
-          m_next_worker_without_cost_spawn,                                   \
-          m_next_worker_without_cost_spawn + nr                               \
-		);                                                                      \
+      (wl_index_range<uint32_t *> i                                           \
+          (m_next_worker_without_cost_spawn,                                  \
+           m_next_worker_without_cost_spawn + nr);                            \
        i;                                                                     \
        ++i)                                                                   \
       *i.current = value;                                                     \
@@ -311,7 +310,8 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 
 	for
 		(Worker_Descr::Buildcost::const_iterator cost_it = cost.begin();
-		 cost_it != cost.end(); ++cost_it, ++idx)
+		 cost_it != cost.end();
+		 ++cost_it, ++idx)
 	{
 		Request::Type type;
 		Ware_Index ware;
@@ -434,9 +434,9 @@ void Warehouse::init(Editor_Game_Base & egbase)
 				tribe().worker_types_without_cost();
 
 			for
-				(wl_index_range<uint32_t> i
-				(0, worker_types_without_cost.size());
-				i; ++i)
+				(wl_index_range<uint32_t> i(0, worker_types_without_cost.size());
+				 i;
+				 ++i)
 				if
 					(owner().is_worker_type_allowed
 						(worker_types_without_cost.at(i.current)))
@@ -1058,11 +1058,11 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 			if (Ware_Index id_w = tribe().ware_index(input_name)) {
 				pw->requests.push_back
 					(new Request
-					 (*this, id_w, &Warehouse::request_cb, Request::WARE));
+					 	(*this, id_w, &Warehouse::request_cb, Request::WARE));
 			} else if ((id_w = tribe().worker_index(input_name))) {
 				pw->requests.push_back
 					(new Request
-					 (*this, id_w, &Warehouse::request_cb, Request::WORKER));
+					 	(*this, id_w, &Warehouse::request_cb, Request::WORKER));
 			} else
 				throw wexception
 					("plan_workers: bad buildcost '%s'", input_name.c_str());
@@ -1263,7 +1263,8 @@ void Warehouse::check_remove_stock(Game & game)
 	if (base_flag().current_items() < base_flag().total_capacity() / 2) {
 		for
 			(Ware_Index ware = Ware_Index::First();
-			 ware.value() < m_ware_policy.size(); ++ware)
+			 ware.value() < m_ware_policy.size();
+			 ++ware)
 		{
 			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
 				continue;
@@ -1275,7 +1276,8 @@ void Warehouse::check_remove_stock(Game & game)
 
 	for
 		(Ware_Index widx = Ware_Index::First();
-		 widx.value() < m_worker_policy.size(); ++widx)
+		 widx.value() < m_worker_policy.size();
+		 ++widx)
 	{
 		if (get_worker_policy(widx) != SP_Remove || !get_workers().stock(widx))
 			continue;

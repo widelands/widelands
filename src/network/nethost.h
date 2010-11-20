@@ -76,7 +76,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayerCloseable(uint8_t number, bool closeable);
 	void setPlayerShared   (uint8_t number, uint8_t shared);
 	void switchToPlayer    (uint32_t user, uint8_t number);
-	void setWinCondition   (std::string);
+	void setWinCondition(std::string const &);
 
 	// just visible stuff for the select mapmenu
 	void setMultiplayerGameSettings();
@@ -112,7 +112,7 @@ private:
 	void initComputerPlayer(Widelands::Player_Number p);
 	void initComputerPlayers();
 
-	void handle_packet(uint32_t i, RecvPacket &);
+	void handle_packet(uint32_t, RecvPacket &);
 	void handle_network ();
 	void sendFilePart(TCPsocket, uint32_t);
 

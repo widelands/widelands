@@ -114,7 +114,7 @@ m_map               (0),
 m_lasttrackserial   (0)
 {
 	if (not m_lua) // TODO SirVer: this is sooo ugly, I can't say
-		m_lua = create_LuaEditorInterface(this);
+		m_lua = create_LuaEditorInterface(*this);
 
 	g_sound_handler.m_egbase = this;
 

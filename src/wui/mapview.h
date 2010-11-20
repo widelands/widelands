@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ struct Map_View : public UI::Panel {
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 Interactive_Base &);
 
-	void set_changeview(const ChangeViewFn & fn);
+	void set_changeview(ChangeViewFn const &);
 
 	/**
 	 * Called whenever the view position changes, for whatever reason.

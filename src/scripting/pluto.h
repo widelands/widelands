@@ -16,12 +16,15 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* lua.h must be included before this file */
 #ifndef PLUTO_H
 #define PLUTO_H
 
-void pluto_persist(lua_State * L, Widelands::FileWrite & fw);
-void pluto_unpersist(lua_State * L, Widelands::FileRead & fr);
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
-#endif /* end of include guard: PLUTO_H */
+struct lua_State;
 
+void pluto_persist(lua_State *, Widelands::FileWrite &);
+void pluto_unpersist(lua_State *, Widelands::FileRead &);
+
+#endif

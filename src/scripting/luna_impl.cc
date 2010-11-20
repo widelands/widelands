@@ -31,7 +31,7 @@
  * Private Functions
  * =======================================
  */
-static void m_instantiate_new_lua_class(lua_State * L) {
+static void m_instantiate_new_lua_class(lua_State * const L) {
 	lua_getfield(L, -1, "module");
 	std::string module = luaL_checkstring(L, -1);
 	lua_pop(L, 1);
@@ -56,7 +56,7 @@ static void m_instantiate_new_lua_class(lua_State * L) {
 	lua_call(L, 0, 1);
 }
 
-static LunaClass ** m_get_new_empty_user_data(lua_State * L) {
+static LunaClass * * m_get_new_empty_user_data(lua_State * const L) {
 	m_instantiate_new_lua_class(L);
 
 	lua_pushint32(L, 0); // table wl module? lua_obj int
@@ -81,7 +81,7 @@ static LunaClass ** m_get_new_empty_user_data(lua_State * L) {
  * the instantiator for this object and fills it with
  * information from the table via its __unpersist function
  */
-int luna_restore_object(lua_State * L) {
+int luna_restore_object(lua_State * const L) {
 	LunaClass ** obj = m_get_new_empty_user_data(L);
 	// table luna_obj
 

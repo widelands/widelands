@@ -36,7 +36,7 @@ public:
 
 	L_Player() : LuaBases::L_PlayerBase() {}
 	L_Player(Widelands::Player_Number n) : LuaBases::L_PlayerBase(n)  {}
-	L_Player(lua_State * L) {
+	L_Player(lua_State * const L) {
 		report_error(L, "Cannot instantiate a 'Player' directly!");
 	}
 

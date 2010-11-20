@@ -74,7 +74,7 @@ Interactive_Base::Interactive_Base
 	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
 	m
 		(new InteractiveBaseInternals
-		 (new QuickNavigation(the_egbase, get_w(), get_h()))),
+		 	(new QuickNavigation(the_egbase, get_w(), get_h()))),
 	m_egbase                      (the_egbase),
 #ifdef DEBUG //  not in releases
 	m_display_flags               (dfDebug),
@@ -96,8 +96,8 @@ Interactive_Base::Interactive_Base
 	m->quicknavigation->set_setview
 		(boost::bind(&Map_View::set_viewpoint, this, _1, true));
 	set_changeview
-		(boost::bind(&QuickNavigation::view_changed,
-		 m->quicknavigation.get(), _1, _2));
+		(boost::bind
+		 	(&QuickNavigation::view_changed, m->quicknavigation.get(), _1, _2));
 
 	changeview.set(this, &Interactive_Base::mainview_move);
 
@@ -109,15 +109,17 @@ Interactive_Base::Interactive_Base
 		(global_s.get_bool("dock_windows_to_edges", false));
 
 	//  Switch to the new graphics system now, if necessary.
+#if USE_OPENGL
+#define GET_BOOL_USE_OPENGL global_s.get_bool("opengl", false)
+#else
+#define GET_BOOL_USE_OPENGL false
+#endif
 	WLApplication::get()->init_graphics
 		(get_xres(), get_yres(),
 		 global_s.get_int("depth", 16),
 		 global_s.get_bool("fullscreen", false),
-#if USE_OPENGL
-		 global_s.get_bool("opengl", false));
-#else
-		 false);
-#endif
+		 GET_BOOL_USE_OPENGL);
+#undef GET_BOOL_USE_OPENGL
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
@@ -180,13 +182,12 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 					if
 						(not player.see_all()
 						 and
-						  (1
-						   >=
-						   player.vision
-							   (Widelands::Map::get_index
-								   (center.node, map.get_width()))
-						   or
-						   player.is_hostile(*productionsite->get_owner())))
+						 (1
+						  >=
+						  player.vision
+						  	(Widelands::Map::get_index(center.node, map.get_width()))
+						  or
+						  player.is_hostile(*productionsite->get_owner())))
 						return set_tooltip(0);
 				}
 				std::string const s =
@@ -932,7 +933,7 @@ void Interactive_Base::cmdLua(std::vector<std::string> const & args)
 /**
  * Show a map object's debug window
  */
-void Interactive_Base::cmdMapObject(const std::vector<std::string>& args)
+void Interactive_Base::cmdMapObject(std::vector<std::string> const & args)
 {
 	if (args.size() != 2) {
 		DebugConsole::write("usage: mapobject <mapobject serial>");

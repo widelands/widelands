@@ -26,7 +26,7 @@ def extract_rst_from_cpp(inname, outname=None):
     """
     data = open(inname, "r").read()
 
-    res = re.findall(r"\s*/\* RST\s(.*?)\*/", data, re.M | re.DOTALL)
+    res = re.findall(r"// RST\s(.*?)(?:^(?!//))", data, re.M | re.DOTALL)
 
     out = sys.stdout if not outname else open(outname, "w")
 

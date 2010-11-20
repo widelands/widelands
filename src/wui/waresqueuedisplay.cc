@@ -184,35 +184,35 @@ private:
 };
 
 WareQueuePriorityButton::WareQueuePriorityButton
-	(UI::Panel * parent,
-	 int32_t x, int32_t y, uint32_t w, uint32_t h,
-	 const char * picture_enabled, const char * picture_disabled,
-	 const std::string & tooltip,
-	 Interactive_GameBase & igb,
-	 Widelands::Building & building,
-	 int32_t ware_type,
-	 Widelands::Ware_Index ware_index,
-	 int32_t priority)
-:
-UI::Button
-	(parent, "priority_button",
-	 x, y, w, h,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_no_picture(),
-	 tooltip),
-m_igb(igb),
-m_building(building),
-m_ware_type(ware_type),
-m_ware_index(ware_index),
-m_priority(priority),
-m_picture_enabled
-	(g_gr->get_resized_picture
-		(g_gr->get_picture(PicMod_Game,  picture_enabled),
-		 w, h, Graphic::ResizeMode_Clip)),
-m_picture_disabled
-	(g_gr->get_resized_picture
-		(g_gr->get_picture(PicMod_Game,  picture_disabled),
-		 w, h, Graphic::ResizeMode_Clip))
+	(UI::Panel * const parent,
+	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
+	 char const * const picture_enabled, char const * const picture_disabled,
+	 std::string    const &       tooltip,
+	 Interactive_GameBase &       igb,
+	 Widelands::Building  &       building,
+	 int32_t                const ware_type,
+	 Widelands::Ware_Index  const ware_index,
+	 int32_t                const priority)
+	:
+	UI::Button
+		(parent, "priority_button",
+		x, y, w, h,
+		g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		g_gr->get_no_picture(),
+		tooltip),
+	m_igb(igb),
+	m_building(building),
+	m_ware_type(ware_type),
+	m_ware_index(ware_index),
+	m_priority(priority),
+	m_picture_enabled
+		(g_gr->get_resized_picture
+		 	(g_gr->get_picture(PicMod_Game,  picture_enabled),
+		 	 w, h, Graphic::ResizeMode_Clip)),
+	m_picture_disabled
+		(g_gr->get_resized_picture
+		 	(g_gr->get_picture(PicMod_Game,  picture_disabled),
+		 	 w, h, Graphic::ResizeMode_Clip))
 {
 	update_enabled();
 

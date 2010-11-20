@@ -65,6 +65,8 @@ if [ -z $KRAZY2 ]; then
 	fi
 fi
 
+PYCHECK=cmake/codecheck/CodeCheck.py
+
 # Which C++ checks from krazy2 should we use?
 #       captruefalse: use (fallback: regexps/using_macro_TRUE_FALSE)
 #           constref: undecided
@@ -122,6 +124,7 @@ for r in utils/spurious_source_code/regexps/*; do
 		[ -d $r ]                                                              &&
 		[ ! -f $r/disabled ]                                                   &&
 		( [ ! $CHECKER ]  || [ ! -f $r/redundant_with_whitespace_checker ] )   &&
+		( [ ! $PYCHECK ]  || [ ! -f $r/redundant_with_python_codecheck   ] )   &&
 		( [ ! $KRAZY2  ]  || [ ! -f $r/redundant_with_krazy2             ] )
 	then
 		cat $r/regexps >> $REGEXPS_FILE
@@ -149,11 +152,12 @@ RESULT_FILE=$TMP_DIR/result
 check () {
 	egrep --with-filename --line-number $([ $COLOUR ] && echo --colour=always) -f $REGEXPS_FILE $1 >  $RESULT_FILE
 	if [ $CHECKER ]; then
-		$CHECKER $1                                                                                 >> $RESULT_FILE
+		$CHECKER                                                                                 $1 >> $RESULT_FILE
 	else
-		utils/detect_spurious_indentation.py $1                                                     >> $RESULT_FILE
+		utils/detect_spurious_indentation.py                                                     $1 >> $RESULT_FILE
 	fi
-	[ $KRAZY2 ] && $KRAZY2 --brief --export=textedit --check=$KRAZY2CHECKS $1                      >> $RESULT_FILE
+	[ $PYCHECK ] && $PYCHECK $([ $COLOUR ] && echo --colour)                                    $1 >> $RESULT_FILE
+	[ $KRAZY2 ] && $KRAZY2 --brief --export=textedit --check=$KRAZY2CHECKS                      $1 >> $RESULT_FILE
 }
 
 

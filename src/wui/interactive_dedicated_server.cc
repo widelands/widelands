@@ -52,13 +52,13 @@ Interactive_DServer::Interactive_DServer
 	m_toggle_chat
 		(INIT_BTN("menu_chat", "chat", toggle_chat, _("Chat"))),
 	m_toggle_options_menu
-		(INIT_BTN("menu_options_menu", "options_menu", toggle_options_menu,
-			_("Options"))
-	),
+		(INIT_BTN
+		 	("menu_options_menu", "options_menu", toggle_options_menu,
+		 	 _("Options"))),
 	m_toggle_statistics
-		(INIT_BTN("menu_general_stats", "general_stats", toggle_statistics,
-			_("Statistics"))
-	)
+		(INIT_BTN
+		 	("menu_general_stats", "general_stats", toggle_statistics,
+		 	 _("Statistics")))
 {
 	m_toolbar.set_layout_toplevel(true);
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);

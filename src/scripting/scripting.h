@@ -73,8 +73,8 @@ struct LuaCoroutine {
 	virtual int get_status() = 0;
 	virtual int resume(uint32_t * = 0) = 0;
 
-	virtual void push_arg(const Widelands::Player *) = 0;
-	virtual void push_arg(const Widelands::Coords &) = 0;
+	virtual void push_arg(Widelands::Player const &) = 0;
+	virtual void push_arg(Widelands::Coords const &) = 0;
 };
 
 /*
@@ -99,30 +99,38 @@ struct LuaInterface {
 	virtual std::string const & get_last_error() const = 0;
 
 	virtual void register_scripts
-		(FileSystem &, std::string, std::string = "scripting") = 0;
+		(FileSystem &, std::string, std::string = "scripting")
+		= 0;
 	virtual ScriptContainer & get_scripts_for(std::string) = 0;
 
-	virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string) = 0;
+	virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string)
+		= 0;
 	virtual boost::shared_ptr<LuaTable> run_script
-			(FileSystem &, std::string, std::string) = 0;
+		(FileSystem &, std::string, std::string)
+		= 0;
 
 	virtual boost::shared_ptr<LuaTable> get_hook(std::string name) = 0;
 };
 
 struct LuaGameInterface : public virtual LuaInterface {
 	virtual LuaCoroutine * read_coroutine
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t) = 0;
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t)
+		= 0;
 	virtual uint32_t write_coroutine
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &, LuaCoroutine *) = 0;
+		(Widelands::FileWrite            &,
+		 Widelands::Map_Map_Object_Saver &,
+		 LuaCoroutine                    *)
+		= 0;
 
 	virtual void read_global_env
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t) = 0;
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t)
+		= 0;
 	virtual uint32_t write_global_env
 		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &) = 0;
 };
 
-LuaGameInterface * create_LuaGameInterface(Widelands::Game *);
-LuaInterface * create_LuaEditorInterface(Widelands::Editor_Game_Base *);
+LuaGameInterface * create_LuaGameInterface(Widelands::Game &);
+LuaInterface * create_LuaEditorInterface(Widelands::Editor_Game_Base &);
 LuaInterface * create_LuaInterface();
 
 #endif

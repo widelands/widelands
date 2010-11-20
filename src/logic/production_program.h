@@ -291,7 +291,8 @@ struct ProductionProgram {
 			 std::string const & production_program_name);
 		virtual void execute(Game &, ProductionSite &) const;
 		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const;
-		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const;
+		virtual void building_work_failed
+			(Game &, ProductionSite &, Worker &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 			(::FileWrite &, ProductionSite_Descr const &) const;
@@ -442,7 +443,7 @@ struct ProductionProgram {
 	///    parameters ::= group {group}
 	///    group      ::= worker_type[:count]
 	/// Parameter semantics:
-	///    ware_type:
+	///    worker_type:
 	///       The name of a worker type (defined in the tribe). A worker type
 	///       may only appear once in the command.
 	///    count:
@@ -550,9 +551,10 @@ struct ProductionProgram {
 			 const std::string & production_program_name);
 		virtual void execute(Game &, ProductionSite &) const;
 		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const;
-		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const;
+		virtual void building_work_failed
+			(Game &, ProductionSite &, Worker &) const;
 
-		const Immovable_Descr & get_construction_descr(ProductionSite &) const;
+		Immovable_Descr const & get_construction_descr(ProductionSite &) const;
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML

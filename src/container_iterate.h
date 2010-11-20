@@ -23,7 +23,7 @@
 // Helper structure for representing an integer or Index range in
 // for loops.
 // Usage:
-// for (wl_index_range<int> i(1, 10);i;++i)
+// for (wl_index_range<int> i(1, 10); i; ++i)
 //     std::cout << i.current;
 //
 template<typename T>
@@ -80,8 +80,8 @@ template<typename C>
 struct wl_const_range
 {
 	wl_const_range
-		(const typename  C::const_iterator & first,
-		 const typename C::const_iterator & last)
+		(typename C::const_iterator const & first,
+		 typename C::const_iterator const & last)
 		: current(first), end(last) {}
 	wl_const_range(const C & container) : current(container.begin()), end(container.end()) {}
 	wl_const_range(const wl_const_range & r) : current(r.current), end(r.end) {}
@@ -89,10 +89,10 @@ struct wl_const_range
 	wl_const_range & operator++() {++current; return *this;}
 	wl_const_range<C> & advance() {++current; return *this;}
 	bool empty() const {return current == end;}
-	operator bool() const {return empty() ? false: true;}
+	operator bool() const {return not empty();}
 	typename C::const_reference front() const {return *current;}
 	typename C::const_reference operator*() const {return *current;}
-	typename C::const_pointer operator->() const {return (&**this);}
+	typename C::const_pointer operator->() const {return &**this;}
 	typename C::const_iterator get_end() {return end;}
 private:
 	typename C::const_iterator end;

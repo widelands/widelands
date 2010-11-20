@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ struct SinglePlayerGameController : public GameController {
 	uint32_t desiredSpeed();
 	void setDesiredSpeed(uint32_t speed);
 	bool isPaused();
-	void setPaused(bool paused);
+	void setPaused(bool);
 
 private:
 	Widelands::Game & m_game;

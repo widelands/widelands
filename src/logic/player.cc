@@ -114,7 +114,7 @@ void Player::create_default_infrastructure() {
 				 "/scripting/" +  initialization.name + ".lua",
 				 "tribe_" + tribe().name())
 				->get_coroutine("func");
-			cr->push_arg(this);
+			cr->push_arg(*this);
 			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
 
 			// Check if other starting positions are shared in and initialize them as well
@@ -127,7 +127,7 @@ void Player::create_default_infrastructure() {
 					"/scripting/" + tribe().initialization(m_further_initializations.at(n)).name + ".lua",
 					 "tribe_" + tribe().name())
 					->get_coroutine("func");
-				ncr->push_arg(this);
+				ncr->push_arg(*this);
 				ncr->push_arg(further_pos);
 				game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), ncr));
 			}

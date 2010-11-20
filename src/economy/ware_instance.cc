@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ struct IdleWareSupply : public Supply {
 	virtual bool is_active() const throw ();
 	virtual bool has_storage() const throw ();
 	virtual void get_ware_type(bool & isworker, Ware_Index & ware) const;
-	virtual void send_to_storage(Game &, Warehouse * wh);
+	virtual void send_to_storage(Game &, Warehouse &);
 
 	virtual uint32_t nr_supplies(Game const &, Request const &) const;
 	virtual WareInstance & launch_item(Game &, Request const &);
@@ -159,13 +159,13 @@ Worker & IdleWareSupply::launch_worker(Game &, Request const &)
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
 }
 
-void IdleWareSupply::send_to_storage(Game & game, Warehouse * wh)
+void IdleWareSupply::send_to_storage(Game & game, Warehouse & wh)
 {
 	assert(!has_storage());
 
-	Transfer * t = new Transfer(game, m_ware);
-	t->set_destination(*wh);
-	m_ware.set_transfer(game, *t);
+	Transfer & t = *new Transfer(game, m_ware);
+	t.set_destination(wh);
+	m_ware.set_transfer(game, t);
 }
 
 
