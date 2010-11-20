@@ -34,7 +34,7 @@ struct Ship_Descr : Bob::Descr {
 		 Tribe_Descr const &);
 
 	virtual uint32_t movecaps() const throw ();
-	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
+	DirAnimations const & get_sail_anims() const {return m_sail_anims;}
 
 	virtual Bob & create_object() const;
 
@@ -69,7 +69,7 @@ protected:
 	struct Loader : Bob::Loader {
 		Loader();
 
-		virtual const Task * get_task(const std::string & name);
+		virtual Task const * get_task(std::string const &);
 	};
 
 public:
