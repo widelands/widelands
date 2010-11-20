@@ -131,16 +131,16 @@ private:
 			add(buttons, UI::Box::AlignLeft);
 
 			UI::Callback_Button * b = 0;
+#define ADD_WARE_BUTTON(callback, text, tooltip)                              \
+         b =                                                                  \
+            new UI::Callback_Button                                           \
+               (buttons, #callback,                                           \
+                0, 0, 34, 34,                                                 \
+                g_gr->get_picture(PicMod_UI, "pics/but4.png"),                \
+                boost::bind(&Economy_Options_Ware_Panel::callback, this),     \
+                text, tooltip, m_can_act);                                    \
+         buttons->add(b, UI::Box::AlignCenter);                               \
 
-#define ADD_WARE_BUTTON(callback, text, tooltip)                  \
-	b = new UI::Callback_Button                                    \
-		 (buttons, #callback,                                       \
-		  0, 0, 34, 34,                                             \
-		  g_gr->get_picture(PicMod_UI, "pics/but4.png"),            \
-		  boost::bind                                               \
-			  (&Economy_Options_Ware_Panel::callback, this),         \
-		  text, tooltip, m_can_act);                                \
-	buttons->add(b, UI::Box::AlignCenter);
 			ADD_WARE_BUTTON(increase_target, "+", _("Increase target"))
 			b->set_repeating(true);
 			ADD_WARE_BUTTON(decrease_target, "-", _("Decrease target"))
@@ -149,7 +149,9 @@ private:
 		}
 
 		void decrease_target() {
-			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrwares();
+			Widelands::Player & player = m_economy.owner();
+			Widelands::Ware_Index const nritems = player.tribe().get_nrwares();
+			Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 
 			for
 				(Widelands::Ware_Index id = Widelands::Ware_Index::First();
@@ -159,8 +161,6 @@ private:
 					Economy::Target_Quantity const & tq =
 						m_economy.ware_target_quantity(id);
 					if (1 < tq.permanent) {
-						Widelands::Player & player = m_economy.owner();
-						Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 						game.send_player_command
 							(*new Widelands::Cmd_SetWareTargetQuantity
 								(game.get_gametime(), player.player_number(),
@@ -227,14 +227,15 @@ private:
 			add(buttons, UI::Box::AlignLeft);
 
 			UI::Callback_Button * b = 0;
-#define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
-	b = new UI::Callback_Button                                      \
-		 (buttons, #callback,                                         \
-		  0, 0, 34, 34,                                               \
-		  g_gr->get_picture(PicMod_UI, "pics/but4.png"),              \
-		  boost::bind(&Economy_Options_Worker_Panel::callback, this), \
-		  text, tooltip, m_can_act);                                  \
-	buttons->add(b, UI::Box::AlignCenter);
+#define ADD_WORKER_BUTTON(callback, text, tooltip)                            \
+         b =                                                                  \
+            new UI::Callback_Button                                           \
+               (buttons, #callback,                                           \
+                0, 0, 34, 34,                                                 \
+                g_gr->get_picture(PicMod_UI, "pics/but4.png"),                \
+                boost::bind(&Economy_Options_Worker_Panel::callback, this),   \
+                text, tooltip, m_can_act);                                    \
+         buttons->add(b, UI::Box::AlignCenter);                               \
 
 			ADD_WORKER_BUTTON(increase_target, "+", _("Increase target"))
 			b->set_repeating(true);
