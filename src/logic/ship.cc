@@ -27,10 +27,13 @@
 namespace Widelands {
 
 Ship_Descr::Ship_Descr
-	(const char * given_name, const char * descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Widelands::Tribe_Descr & tribe)
-: Descr(given_name, descname, directory, prof, global_s, &tribe)
+	(char                   const * const given_name,
+	 char                   const * const descname,
+	 std::string            const &       directory,
+	 Profile                      &       prof,
+	 Section                      &       global_s,
+	 Widelands::Tribe_Descr const &        tribe)
+	: Descr(given_name, descname, directory, prof, global_s, &tribe)
 {
 	m_sail_anims.parse
 		(*this,
@@ -51,9 +54,7 @@ Bob & Ship_Descr::create_object() const
 }
 
 
-Ship::Ship(const Ship_Descr & descr)
-:
-Bob(descr)
+Ship::Ship(Ship_Descr const & descr) : Bob(descr)
 {
 }
 
@@ -68,7 +69,7 @@ void Ship::init_auto_task(Game & game)
 }
 
 struct FindBobShip : FindBob {
-	virtual bool accept(Bob * bob) const
+	virtual bool accept(Bob * const bob) const
 	{
 		return bob->get_bob_type() == Bob::SHIP;
 	}
@@ -76,20 +77,14 @@ struct FindBobShip : FindBob {
 
 void Ship::wakeup_neighbours(Game & game)
 {
-	FCoords position = get_position();
+	FCoords const position = get_position();
 	Area<FCoords> area(position, 1);
 	std::vector<Bob *> ships;
 	game.map().find_bobs(area, &ships, FindBobShip());
 
-	for
-		(std::vector<Bob *>::const_iterator it = ships.begin();
-		 it != ships.end(); ++it)
-	{
-		if (*it == this)
-			continue;
-
-		static_cast<Ship *>(*it)->shipidle_wakeup(game);
-	}
+	container_iterate_const(std::vector<Bob *>, ships, i)
+		if (*i.current != this)
+			ref_cast<Ship, Bob>(**i.current).shipidle_wakeup(game);
 }
 
 
@@ -155,12 +150,9 @@ void Ship::shipidle_update(Game & game, Bob::State & state)
 		std::vector<Bob *> ships;
 		game.map().find_bobs(area, &ships, FindBobShip());
 
-		for (std::vector<Bob *>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
-			if (*it == this)
-				continue;
-
-			dirs[dir] += 3;
-		}
+		container_iterate_const(std::vector<Bob *>, ships, i)
+			if (*i.current != this)
+				dirs[dir] += 3;
 
 		dirmax = std::max(dirmax, dirs[dir]);
 	}
@@ -174,10 +166,10 @@ void Ship::shipidle_update(Game & game, Bob::State & state)
 		for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
 			prob[dir] = 10 * dirmax - 10 * dirs[dir];
 
-			if (dir > 0) {
-				unsigned int delta = std::min(prob[dir], dirs[(dir % 6) + 1] + dirs[1 + ((dir - 1) % 6)]);
-				prob[dir] -= delta;
-			}
+			if (dir > 0)
+				prob[dir] -=
+					std::min
+						(prob[dir], dirs[(dir % 6) + 1] + dirs[1 + ((dir - 1) % 6)]);
 
 			totalprob += prob[dir];
 		}

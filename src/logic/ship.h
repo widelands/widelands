@@ -48,7 +48,7 @@ private:
 struct Ship : Bob {
 	MO_DESCR(Ship_Descr);
 
-	Ship(const Ship_Descr & descr);
+	Ship(Ship_Descr const &);
 
 	virtual Type get_bob_type() const throw ();
 
