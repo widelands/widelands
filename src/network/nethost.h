@@ -138,6 +138,7 @@ private:
 
 	void disconnectPlayerController
 		(uint8_t number,
+		 std::string const & name,
 		 std::string const & reason,
 		 bool sendreason = true);
 	void disconnectClient

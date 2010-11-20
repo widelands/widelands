@@ -2258,24 +2258,29 @@ void NetHost::sendFilePart(TCPsocket csock, uint32_t part) {
 
 
 void NetHost::disconnectPlayerController
-	(uint8_t const number, std::string const & reason, bool const sendreason)
+	(uint8_t const number, std::string const & name, std::string const & reason, bool const sendreason)
 {
-	log("[Host]: disconnectPlayer(%u, %s)\n", number, reason.c_str());
-
-	bool needai = true;
+	log("[Host]: disconnectPlayerController(%u, %s, %s)\n", number, name.c_str(), reason.c_str());
 
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
 		if (d->settings.users.at(i).position == number) {
-			needai = false;
-			break;
+			if (!d->game) {
+				// Remove player name
+				PlayerSettings & p = d->settings.players.at(number - 1);
+				std::string temp(" ");
+				temp += name;
+				temp += " ";
+				std::string temp2(p.name);
+				temp2 = temp2.erase(p.name.find(temp), temp.size());
+				setPlayerName(number, temp2);
+			}
+			return;
 		}
 	}
 
-	if (needai) {
-		setPlayerState(number, PlayerSettings::stateOpen);
-		if (d->game)
-			initComputerPlayer(number + 1);
-	}
+	setPlayerState(number, PlayerSettings::stateOpen);
+	if (d->game)
+		initComputerPlayer(number + 1);
 }
 
 void NetHost::disconnectClient
@@ -2292,13 +2297,13 @@ void NetHost::disconnectClient
 			(_("%s has left the game (%s)"),
 			 d->settings.users.at(client.usernum).name.c_str(),
 			 reason.c_str());
+		if (int32_t pnum = client.playernum <= UserSettings::highestPlayernum()) {
+			client.playernum = UserSettings::notConnected();
+			disconnectPlayerController(pnum, d->settings.users.at(client.usernum).name, reason);
+		}
 		d->settings.users.at(client.usernum).name     = std::string();
 		d->settings.users.at(client.usernum).position =
 			UserSettings::notConnected();
-		if (int32_t pnum = client.playernum <= UserSettings::highestPlayernum()) {
-			client.playernum = UserSettings::notConnected();
-			disconnectPlayerController(pnum, reason);
-		}
 
 		// Broadcast the user changes to everybody
 		SendPacket s;
