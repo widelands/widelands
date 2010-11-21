@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2010 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ struct ReplayReader {
 	~ReplayReader();
 
 	Command * GetNextCommand(uint32_t time);
-	bool EndOfReplay() const;
+	bool EndOfReplay();
 
 private:
 	Game       & m_game;
@@ -80,3 +80,4 @@ private:
 }
 
 #endif
+

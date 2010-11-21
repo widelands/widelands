@@ -15,7 +15,6 @@ import sys
 file = open(sys.argv[1], "r")
 line_number = 0
 indentation_depth_previous_line = 0
-macro = False
 for line in file:
 	line_number += 1
 	indentation_depth = 0
@@ -23,9 +22,6 @@ for line in file:
 		if '\n' == char: #  the line is empty, skip it
 			break
 		if '#'  == char: #  the line is a macro, skip it
-			macro = True
-		if macro:
-			macro = '\\' == line[len(line) - 2]
 			break
 		if '\t' == char:
 			indentation_depth += 1

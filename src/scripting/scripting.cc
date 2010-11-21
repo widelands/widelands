@@ -17,7 +17,8 @@
  *
  */
 
-#include "scripting.h"
+#include <string>
+#include <stdexcept>
 
 #include "log.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -34,8 +35,7 @@
 #include "persistence.h"
 #include "factory.h"
 
-#include <string>
-#include <stdexcept>
+#include "scripting.h"
 
 #ifdef _MSC_VER
 #include <ctype.h> // for tolower
@@ -50,34 +50,34 @@ class LuaTable_Impl : virtual public LuaTable {
 	lua_State * m_L;
 
 public:
-	LuaTable_Impl(lua_State * const L) : m_L(L) {}
+		LuaTable_Impl(lua_State * L) : m_L(L) {}
 
-	virtual ~LuaTable_Impl() {
-		lua_pop(m_L, 1);
-	}
-
-	virtual std::string get_string(std::string s) {
-		lua_getfield(m_L, -1, s.c_str());
-		if (lua_isnil(m_L, -1)) {
+		virtual ~LuaTable_Impl() {
 			lua_pop(m_L, 1);
-			throw LuaTableKeyError(s);
 		}
-		if (not lua_isstring(m_L, -1)) {
-			lua_pop(m_L, 1);
-			throw LuaError(s + "is not a string value.");
-		}
-		std::string rv = lua_tostring(m_L, -1);
-		lua_pop(m_L, 1);
 
-		return rv;
-	}
+		virtual std::string get_string(std::string s) {
+			lua_getfield(m_L, -1, s.c_str());
+			if (lua_isnil(m_L, -1)) {
+				lua_pop(m_L, 1);
+				throw LuaTableKeyError(s);
+			}
+			if (not lua_isstring(m_L, -1)) {
+				lua_pop(m_L, 1);
+				throw LuaError(s + "is not a string value.");
+			}
+			std::string rv = lua_tostring(m_L, -1);
+			lua_pop(m_L, 1);
+
+			return rv;
+		}
 
 	virtual LuaCoroutine * get_coroutine(std::string s) {
 		lua_getfield(m_L, -1, s.c_str());
 
 		if (lua_isnil(m_L, -1)) {
-			lua_pop(m_L, 1);
-			throw LuaTableKeyError(s);
+				lua_pop(m_L, 1);
+				throw LuaTableKeyError(s);
 		}
 		if (lua_isfunction(m_L, -1)) {
 			// Oh well, a function, not a coroutine. Let's turn it into one
@@ -116,7 +116,7 @@ protected:
 	private:
 		int m_check_for_errors(int);
 		std::string m_register_script
-			(FileSystem & fs, std::string const & path, std::string const & ns);
+			(FileSystem & fs, std::string path, std::string ns);
 		bool m_filename_to_short(const std::string &);
 		bool m_is_lua_file(const std::string &);
 
@@ -153,7 +153,7 @@ int LuaInterface_Impl::m_check_for_errors(int rv) {
 }
 
 std::string LuaInterface_Impl::m_register_script
-	(FileSystem & fs, std::string const & path, std::string const & ns)
+	(FileSystem & fs, std::string path, std::string ns)
 {
 		size_t length;
 		std::string data(static_cast<char *>(fs.Load(path, length)));
@@ -174,7 +174,7 @@ bool LuaInterface_Impl::m_filename_to_short(const std::string & s) {
 bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 	std::string ext = s.substr(s.size() - 4, s.size());
 	// std::transform fails on older system, therefore we use an explicit loop
-	for (uint32_t i = 0; i < ext.size(); ++i) {
+	for (uint32_t i = 0; i < ext.size(); i++) {
 #ifndef _MSC_VER
 		ext[i] = std::tolower(ext[i]);
 #else
@@ -294,7 +294,8 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 
 	m_check_for_errors
 		(luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
-		 lua_pcall(m_L, 0, 1, 0));
+		 lua_pcall(m_L, 0, 1, 0)
+	);
 
 	if (lua_isnil(m_L, -1)) {
 		lua_pop(m_L, 1); // No return value from script
@@ -332,12 +333,12 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
  */
 struct LuaEditorGameBaseInterface_Impl : public LuaInterface_Impl
 {
-	LuaEditorGameBaseInterface_Impl(Widelands::Editor_Game_Base &);
+	LuaEditorGameBaseInterface_Impl(Widelands::Editor_Game_Base * g);
 	virtual ~LuaEditorGameBaseInterface_Impl() {}
 };
 
 LuaEditorGameBaseInterface_Impl::LuaEditorGameBaseInterface_Impl
-	(Widelands::Editor_Game_Base & egbase) :
+	(Widelands::Editor_Game_Base * g) :
 LuaInterface()
 {
 	LuaBases::luaopen_wlbases(m_L);
@@ -345,7 +346,7 @@ LuaInterface()
 	LuaUi::luaopen_wlui(m_L);
 
 	// Push the editor game base
-	lua_pushlightuserdata(m_L, static_cast<void *>(&egbase));
+	lua_pushlightuserdata(m_L, static_cast<void *>(g));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "egbase");
 }
 
@@ -357,7 +358,7 @@ LuaInterface()
  */
 struct LuaEditorInterface_Impl : public LuaEditorGameBaseInterface_Impl
 {
-	LuaEditorInterface_Impl(Widelands::Editor_Game_Base &);
+	LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g);
 	virtual ~LuaEditorInterface_Impl() {}
 
 private:
@@ -365,8 +366,8 @@ private:
 };
 
 LuaEditorInterface_Impl::LuaEditorInterface_Impl
-	(Widelands::Editor_Game_Base & game)
-	: LuaEditorGameBaseInterface_Impl(game)
+	(Widelands::Editor_Game_Base * g) :
+LuaEditorGameBaseInterface_Impl(g)
 {
 	LuaRoot::luaopen_wlroot(m_L, true);
 	LuaEditor::luaopen_wleditor(m_L);
@@ -386,7 +387,7 @@ LuaEditorInterface_Impl::LuaEditorInterface_Impl
 struct LuaGameInterface_Impl : public LuaEditorGameBaseInterface_Impl,
 	public virtual LuaGameInterface
 {
-	LuaGameInterface_Impl(Widelands::Game &);
+	LuaGameInterface_Impl(Widelands::Game * g);
 	virtual ~LuaGameInterface_Impl() {}
 
 	virtual LuaCoroutine * read_coroutine
@@ -417,7 +418,7 @@ private:
  * The function was designed to simulate the standard math.random function and
  * was therefore copied nearly verbatim from the Lua sources.
  */
-static int L_math_random(lua_State * const L) {
+static int L_math_random(lua_State * L) {
 	Widelands::Game & game = get_game(L);
 	uint32_t t = game.logic_rand();
 
@@ -451,8 +452,8 @@ static int L_math_random(lua_State * const L) {
 
 }
 
-LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game & game) :
-	LuaEditorGameBaseInterface_Impl(game)
+LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
+	LuaEditorGameBaseInterface_Impl(g)
 {
 	// Overwrite math.random
 	lua_getglobal(m_L, "math");
@@ -464,7 +465,7 @@ LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game & game) :
 	LuaGame::luaopen_wlgame(m_L);
 
 	// Push the game into the registry
-	lua_pushlightuserdata(m_L, static_cast<void *>(&game));
+	lua_pushlightuserdata(m_L, static_cast<void *>(g));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "game");
 
 	// Push the factory class into the registry
@@ -496,9 +497,8 @@ uint32_t LuaGameInterface_Impl::write_coroutine
 
 
 void LuaGameInterface_Impl::read_global_env
-	(Widelands::FileRead              &       fr,
-	 Widelands::Map_Map_Object_Loader &       mol,
-	 uint32_t                           const size)
+	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	 uint32_t size)
 {
 	// Empty table + object to persist on the stack Stack
 	unpersist_object(m_L, fr, mol, size);
@@ -547,11 +547,11 @@ uint32_t LuaGameInterface_Impl::write_global_env
  *
  * "game": load all libraries needed for the game to run properly
  */
-LuaGameInterface * create_LuaGameInterface(Widelands::Game & game) {
-	return new LuaGameInterface_Impl(game);
+LuaGameInterface * create_LuaGameInterface(Widelands::Game * g) {
+	return new LuaGameInterface_Impl(g);
 }
-LuaInterface * create_LuaEditorInterface(Widelands::Editor_Game_Base & game) {
-	return new LuaEditorInterface_Impl(game);
+LuaInterface * create_LuaEditorInterface(Widelands::Editor_Game_Base * g) {
+	return new LuaEditorInterface_Impl(g);
 }
 LuaInterface * create_LuaInterface() {
 	return new LuaInterface_Impl();

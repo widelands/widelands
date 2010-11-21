@@ -40,10 +40,10 @@ public:
 	const char * get_modulename() {return "";}
 
 	L_Game() {}
-	L_Game(lua_State *);
+	L_Game(lua_State * L);
 
-	virtual void __persist(lua_State *);
-	virtual void __unpersist(lua_State *);
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
 
 	/*
 	 * Properties
@@ -71,11 +71,11 @@ public:
 	const char * get_modulename() {return "";}
 
 	L_Editor() {}
-	L_Editor(lua_State *);
+	L_Editor(lua_State * L);
 	virtual ~L_Editor() {}
 
-	virtual void __persist(lua_State *);
-	virtual void __unpersist(lua_State *);
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
 
 	/*
 	 * Properties

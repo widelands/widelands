@@ -921,7 +921,7 @@ void ProductionProgram::ActProduce::execute
 }
 
 bool ProductionProgram::ActProduce::get_building_work
-	(Game & game, ProductionSite & psite, Worker &) const
+	(Game & game, ProductionSite & psite, Worker & worker) const
 {
 	// We reach this point once all wares have been carried outside the building
 	psite.program_step(game);
@@ -1430,21 +1430,18 @@ ProductionProgram::ActConstruct::ActConstruct
 	}
 }
 
-Immovable_Descr const & ProductionProgram::ActConstruct::get_construction_descr
+const Immovable_Descr & ProductionProgram::ActConstruct::get_construction_descr
 	(ProductionSite & psite) const
 {
-	if
-		(Immovable_Descr const * const descr =
-		 	psite.tribe().get_immovable_descr(objectname))
-		return *descr;
-	throw wexception
-		("ActConstruct: immovable type \"%s\" does not exist",
-		 objectname.c_str());
+	const Immovable_Descr * descr = psite.tribe().get_immovable_descr(objectname);
+	if (!descr)
+		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
+
+	return *descr;
 }
 
 
-void ProductionProgram::ActConstruct::execute
-	(Game & game, ProductionSite & psite) const
+void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) const
 {
 	ProductionSite::State & state = psite.top_state();
 	const Immovable_Descr & descr = get_construction_descr(psite);
@@ -1453,29 +1450,29 @@ void ProductionProgram::ActConstruct::execute
 	const Buildcost & buildcost = descr.buildcost();
 	Ware_Index available_resource = Ware_Index::Null();
 
-	container_iterate_const(Buildcost, buildcost, i)
-		if (psite.waresqueue(i.current->first).get_filled() > 0) {
-			available_resource = i.current->first;
+	for (Buildcost::const_iterator it = buildcost.begin(); it != buildcost.end(); ++it) {
+		if (psite.waresqueue(it->first).get_filled() > 0) {
+			available_resource = it->first;
 			break;
 		}
+	}
 
 	if (!available_resource) {
-		psite.program_end(game, Failed);
+		psite.program_end(g, Failed);
 		return;
 	}
 
 	// Look for an appropriate object in the given radius
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
-	Area<FCoords> area
-		(game.map().get_fcoords(psite.base_flag().get_position()), radius);
+	Area<FCoords> area (g.map().get_fcoords(psite.base_flag().get_position()), radius);
 	if
-		(game.map().find_reachable_immovables
-		 	(area, &immovables, cstep, FindImmovableByDescr(descr)))
+		(g.map().find_reachable_immovables
+		 (area, &immovables, cstep, FindImmovableByDescr(descr)))
 	{
 		state.objvar = immovables[0].object;
 
-		psite.m_working_positions[0].worker->update_task_buildingwork(game);
+		psite.m_working_positions[0].worker->update_task_buildingwork(g);
 		return;
 	}
 
@@ -1484,15 +1481,18 @@ void ProductionProgram::ActConstruct::execute
 	FindNodeAnd fna;
 	fna.add(FindNodeShore());
 	fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone));
-	if (game.map().find_reachable_fields(area, &fields, cstep, fna)) {
+	if
+		(g.map().find_reachable_fields
+			(area, &fields, cstep, fna))
+	{
 		state.coord = fields[0];
 
-		psite.m_working_positions[0].worker->update_task_buildingwork(game);
+		psite.m_working_positions[0].worker->update_task_buildingwork(g);
 		return;
 	}
 
 	psite.molog("construct: no object or buildable field\n");
-	psite.program_end(game, Failed);
+	psite.program_end(g, Failed);
 }
 
 bool ProductionProgram::ActConstruct::get_building_work
@@ -1508,7 +1508,7 @@ bool ProductionProgram::ActConstruct::get_building_work
 	Buildcost remaining;
 	WaresQueue * wq = 0;
 
-	upcast(Immovable, construction, state.objvar.get(game));
+	Immovable * construction = dynamic_cast<Immovable *>(state.objvar.get(game));
 	if (construction) {
 		if (!construction->construct_remaining_buildcost(game, &remaining)) {
 			psite.molog("construct: immovable %u not under construction", construction->serial());

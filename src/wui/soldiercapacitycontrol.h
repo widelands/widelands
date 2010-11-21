@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SOLDIERCAPACITYCONTROL_H
-#define SOLDIERCAPACITYCONTROL_H
+#ifndef _SOLDIERCAPACITYCONTROL_H_
+#define _SOLDIERCAPACITYCONTROL_H_
 
 struct Interactive_GameBase;
 
@@ -31,6 +31,8 @@ struct Building;
 }
 
 UI::Panel * create_soldier_capacity_control
-	(UI::Panel & parent, Interactive_GameBase &, Widelands::Building &);
+	(UI::Panel & parent,
+	 Interactive_GameBase & igb,
+	 Widelands::Building & building);
 
-#endif
+#endif // _SOLDIERLIST_H_

@@ -384,11 +384,11 @@ void NetClient::setPlayer(uint8_t, PlayerSettings)
 	//  setPlayerNumber(uint8_t) to the host.
 }
 
-std::string const & NetClient::getWinCondition() {
+std::string NetClient::getWinCondition() {
 	return d->settings.win_condition;
 }
 
-void NetClient::setWinCondition(std::string const &) {
+void NetClient::setWinCondition(std::string) {
 	// Clients are not allowed to change this
 }
 
@@ -618,7 +618,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 		s.Unsigned8(NETCMD_NEW_FILE_AVAILABLE);
 		s.send(d->sock);
 
-		delete file;
+		if (file)
+			delete file;
 
 		file = new NetTransferFile();
 		file->bytes = bytes;

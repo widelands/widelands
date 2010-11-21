@@ -20,10 +20,10 @@
 #ifndef CMD_CALCULATE_STATISTICS_H
 #define CMD_CALCULATE_STATISTICS_H
 
+#include <string>
+
 #include "cmd_queue.h"
 #include "scripting/scripting.h"
-
-#include <string>
 
 namespace Widelands {
 
@@ -42,4 +42,7 @@ struct Cmd_CalculateStatistics : public GameLogicCommand {
 
 }
 
-#endif
+
+
+#endif /* end of include guard: CMD_CALCULATE_STATISTICS_H */
+

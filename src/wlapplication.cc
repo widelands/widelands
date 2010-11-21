@@ -70,6 +70,9 @@
 #include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifndef WIN32
+#include <csignal>
+#endif
 
 #include <cerrno>
 #include <cstring>
@@ -578,7 +581,8 @@ void WLApplication::handle_input(InputCallback const * cb)
 			if
 				(ev.key.keysym.sym == SDLK_F10 &&
 				 (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)))
-			{ //  get out of here quick
+			{
+				//  get out of here quick
 				if (ev.type == SDL_KEYDOWN)
 					m_should_die = true;
 				break;
@@ -588,8 +592,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 				{
 					if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
 						log
-							("Omitting screenshot because diskspace is lower than "
-							 "%luMB\n",
+							("Omitting screenshot because diskspace is lower than %luMB\n",
 							 MINIMUM_DISK_SPACE / (1000 * 1000));
 						break;
 					}
@@ -859,19 +862,20 @@ void WLApplication::shutdown_settings()
  *
  * Track down the executable file and append the localedir.
  */
-std::string WLApplication::find_relative_locale_path
-	(std::string const & localedir) const
+std::string WLApplication::find_relative_locale_path(std::string localedir)
 {
 #ifdef __APPLE__
 	if (localedir[0] != '/') {
 		uint32_t buffersize = 0;
-		_NSGetExecutablePath(0, &buffersize);
+		_NSGetExecutablePath(NULL, &buffersize);
 		char buffer[buffersize];
-		if (_NSGetExecutablePath(buffer, &buffersize))
-			throw wexception(_("could not find the path of the main executable"));
+		int32_t check = _NSGetExecutablePath(buffer, &buffersize);
+		if (check != 0) {
+			throw wexception (_("could not find the path of the main executable"));
+		}
 		std::string executabledir = buffer;
 		executabledir.resize(executabledir.rfind('/') + 1);
-		executabledir += localedir;
+		executabledir+= localedir;
 		log ("localedir: %s\n", executabledir.c_str());
 		return executabledir;
 	}
@@ -879,8 +883,9 @@ std::string WLApplication::find_relative_locale_path
 	if (localedir[0] != '/') {
 		char buffer[PATH_MAX];
 		size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
-		if (size <= 0)
-			throw wexception(_("could not find the path of the main executable"));
+		if (size <= 0) {
+			throw wexception (_("could not find the path of the main executable"));
+		}
 		std::string executabledir(buffer, size);
 		executabledir.resize(executabledir.rfind('/') + 1);
 		executabledir += localedir;
@@ -980,11 +985,9 @@ bool WLApplication::init_hardware() {
  */
 
 void terminate (int) {
-	log
-		(_
-		 	("Waited 5 seconds to close audio. problems here so killing "
-		 	 "widelands. Update your sound driver and/or SDL to fix this problem."
-		 	 "\n"));
+	 log
+		  (_("Waited 5 seconds to close audio. problems here so killing widelands."
+			  " update your sound driver and/or SDL to fix this problem\n"));
 #ifndef WIN32
 	raise(SIGKILL);
 #endif
@@ -1317,7 +1320,7 @@ void WLApplication::show_usage()
 #if USE_OPENGL
 		<<
 		_
-			(" --opengl=[0|1]\n"
+			 (" --opengl=[0|1]\n"
 			 "                      Enables opengl rendering\n"
 			 "                      *EXPERIMENTAL*\n")
 #endif
@@ -1929,8 +1932,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		}
 	}
 
-	virtual std::string const & getWinCondition() {return s.win_condition;}
-	virtual void setWinCondition(std::string const & wc) {s.win_condition = wc;}
+	virtual std::string getWinCondition() {return s.win_condition;}
+	virtual void setWinCondition(std::string wc) {s.win_condition = wc;}
 
 private:
 	GameSettings s;
@@ -2272,14 +2275,10 @@ bool WLApplication::redirect_output(std::string path)
 	if (path.empty()) {
 #ifdef WIN32
 		char module_name[MAX_PATH];
-
-		//  FIXME use this variable somewhere
-		unsigned int name_length = GetModuleFileName(0, module_name, MAX_PATH);
-
+		unsigned int name_length = GetModuleFileName(NULL, module_name, MAX_PATH);
 		path = module_name;
 		size_t pos = path.find_last_of("/\\");
-		if (pos == std::string::npos)
-			return false;
+		if (pos == std::string::npos) return false;
 		path.resize(pos);
 #else
 		path = ".";
@@ -2288,14 +2287,16 @@ bool WLApplication::redirect_output(std::string path)
 	std::string stdoutfile = path + "/stdout.txt";
 	/* Redirect standard output */
 	FILE * newfp = freopen(stdoutfile.c_str(), "w", stdout);
-	if (!newfp)
-		return false;
+	if (!newfp) return false;
 	/* Redirect standard error */
 	std::string stderrfile = path + "/stderr.txt";
 	newfp = freopen(stderrfile.c_str(), "w", stderr);
 
-	setvbuf(stdout, 0, _IOLBF, BUFSIZ); //  line buffered
-	setbuf(stderr, 0);                  //  no buffering
+	/* Line buffered */
+	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);
+
+	/* No buffering */
+	setbuf(stderr, NULL);
 
 	m_redirected_stdio = true;
 	return true;

@@ -249,11 +249,11 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerNumber(number);
 	}
 
-	virtual std::string const & getWinCondition() {
+	virtual std::string getWinCondition() {
 		return h->settings().win_condition;
 	}
 
-	virtual void setWinCondition(std::string const & wc) {
+	virtual void setWinCondition(std::string wc) {
 		h->setWinCondition(wc);
 	}
 
@@ -1128,7 +1128,8 @@ void NetHost::setMap
 		// Read in the file
 		FileRead fr;
 		fr.Open(*g_fs, mapfilename.c_str());
-		delete file;
+		if (file)
+			delete file;
 		file = new NetTransferFile();
 		file->filename = mapfilename;
 		uint32_t leftparts = file->bytes = fr.GetSize();
@@ -1373,7 +1374,7 @@ void NetHost::setPlayerNumber(uint8_t const number)
 	switchToPlayer(0, number);
 }
 
-void NetHost::setWinCondition(std::string const & wc)
+void NetHost::setWinCondition(std::string wc)
 {
 	d->settings.win_condition = wc;
 

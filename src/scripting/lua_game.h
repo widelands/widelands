@@ -39,11 +39,13 @@ namespace LuaGame {
 /*
  * Base class for all classes in wl.game
  */
-struct L_GameModuleClass : public LunaClass {
-	char const * get_modulename() {return "game";}
+class L_GameModuleClass : public LunaClass {
+	public:
+		const char * get_modulename() {return "game";}
 };
 
-struct L_Player : public LuaBases::L_PlayerBase {
+class L_Player : public LuaBases::L_PlayerBase {
+public:
 	// Overwritten from L_PlayerBase, avoid ambiguity when deriving from
 	// L_GameModuleClass and L_PlayerBase
 	const char * get_modulename() {return "game";}
@@ -52,47 +54,47 @@ struct L_Player : public LuaBases::L_PlayerBase {
 
 	L_Player() : LuaBases::L_PlayerBase() {}
 	L_Player(Widelands::Player_Number n) : LuaBases::L_PlayerBase(n)  {}
-	L_Player(lua_State * const L) {
+	L_Player(lua_State * L) {
 		report_error(L, "Cannot instantiate a 'Player' directly!");
 	}
 
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);
-	int get_allowed_buildings(lua_State *);
-	int get_objectives(lua_State *);
-	int get_defeated(lua_State *);
-	int get_retreat_percentage(lua_State *);
-	int set_retreat_percentage(lua_State *);
-	int get_changing_retreat_percentage_allowed(lua_State *);
-	int set_changing_retreat_percentage_allowed(lua_State *);
-	int get_inbox(lua_State *);
-	int get_team(lua_State *);
-	int set_team(lua_State *);
-	int get_see_all(lua_State *);
-	int set_see_all(lua_State *);
+	int get_name(lua_State * L);
+	int get_allowed_buildings(lua_State * L);
+	int get_objectives(lua_State * L);
+	int get_defeated(lua_State * L);
+	int get_retreat_percentage(lua_State * L);
+	int set_retreat_percentage(lua_State * L);
+	int get_changing_retreat_percentage_allowed(lua_State * L);
+	int set_changing_retreat_percentage_allowed(lua_State * L);
+	int get_inbox(lua_State * L);
+	int get_team(lua_State * L);
+	int set_team(lua_State * L);
+	int get_see_all(lua_State * L);
+	int set_see_all(lua_State * L);
 
 	/*
 	 * Lua methods
 	 */
-	int send_message(lua_State *);
-	int message_box(lua_State *);
-	int sees_field(lua_State *);
-	int seen_field(lua_State *);
-	int allow_buildings(lua_State *);
-	int forbid_buildings(lua_State *);
-	int add_objective(lua_State *);
-	int reveal_fields(lua_State *);
-	int hide_fields(lua_State *);
-	int reveal_scenario(lua_State *);
-	int reveal_campaign(lua_State *);
-	int get_buildings(lua_State *);
-	int set_flag_style(lua_State *);
-	int set_frontier_style(lua_State *);
-	int get_suitability(lua_State *);
-	int allow_workers(lua_State *);
-	int switchplayer(lua_State *);
+	int send_message(lua_State * L);
+	int message_box(lua_State * L);
+	int sees_field(lua_State * L);
+	int seen_field(lua_State * L);
+	int allow_buildings(lua_State * L);
+	int forbid_buildings(lua_State * L);
+	int add_objective(lua_State * L);
+	int reveal_fields(lua_State * L);
+	int hide_fields(lua_State * L);
+	int reveal_scenario(lua_State * L);
+	int reveal_campaign(lua_State * L);
+	int get_buildings(lua_State * L);
+	int set_flag_style(lua_State * L);
+	int set_frontier_style(lua_State * L);
+	int get_suitability(lua_State * L);
+	int allow_workers(lua_State * L);
+	int switchplayer(lua_State * L);
 
 	/*
 	 * C methods
@@ -101,15 +103,19 @@ private:
 	void m_parse_building_list
 		(lua_State *, const Widelands::Tribe_Descr &,
 		 std::vector<Widelands::Building_Index> &);
-	int m_allow_forbid_buildings(lua_State *, bool);
+	int m_allow_forbid_buildings(lua_State * L, bool);
+
 };
 
-struct L_Objective : public L_GameModuleClass {
+class L_Objective : public L_GameModuleClass {
+	std::string m_name;
+
+public:
 	LUNA_CLASS_HEAD(L_Objective);
 
 	L_Objective(Widelands::Objective n);
 	L_Objective() : m_name("") {}
-	L_Objective(lua_State * const L) {
+	L_Objective(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
@@ -119,37 +125,38 @@ struct L_Objective : public L_GameModuleClass {
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);
-	int get_title(lua_State *);
-	int set_title(lua_State *);
-	int get_body(lua_State *);
-	int set_body(lua_State *);
-	int get_visible(lua_State *);
-	int set_visible(lua_State *);
-	int get_done(lua_State *);
-	int set_done(lua_State *);
+	int get_name(lua_State * L);
+	int get_title(lua_State * L);
+	int set_title(lua_State * L);
+	int get_body(lua_State * L);
+	int set_body(lua_State * L);
+	int get_visible(lua_State * L);
+	int set_visible(lua_State * L);
+	int get_done(lua_State * L);
+	int set_done(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
-	int remove(lua_State *);
-	int __eq(lua_State *);
+	int remove(lua_State * L);
+	int __eq(lua_State * L);
 
 	/*
 	 * C Methods
 	 */
 	Widelands::Objective & get(lua_State *, Widelands::Game &);
-
-private:
-	std::string m_name;
 };
 
-struct L_Message : public L_GameModuleClass {
+class L_Message : public L_GameModuleClass {
+	uint32_t m_plr;
+	Widelands::Message_Id m_mid;
+
+public:
 	LUNA_CLASS_HEAD(L_Message);
 
 	L_Message(uint8_t, Widelands::Message_Id);
 	L_Message() : m_plr(0), m_mid(0) {}
-	L_Message(lua_State * const L) {
+	L_Message(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
@@ -159,33 +166,30 @@ struct L_Message : public L_GameModuleClass {
 	/*
 	 * Properties
 	 */
-	int get_sender(lua_State *);
-	int get_sent(lua_State *);
-	int get_title(lua_State *);
-	int get_body(lua_State *);
-	int get_duration(lua_State *);
-	int get_field(lua_State *);
-	int get_status(lua_State *);
-	int set_status(lua_State *);
+	int get_sender(lua_State * L);
+	int get_sent(lua_State * L);
+	int get_title(lua_State * L);
+	int get_body(lua_State * L);
+	int get_duration(lua_State * L);
+	int get_field(lua_State * L);
+	int get_status(lua_State * L);
+	int set_status(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
-	int __eq(lua_State *);
+	int __eq(lua_State * L);
 
 	/*
 	 * C Methods
 	 */
-	Widelands::Player & get_plr(lua_State *, Widelands::Game & game);
-	Widelands::Message const & get(lua_State *, Widelands::Game & game);
-
-private:
-	uint32_t m_plr;
-	Widelands::Message_Id m_mid;
+	Widelands::Player & get_plr(lua_State * L, Widelands::Game & game);
+	const Widelands::Message & get(lua_State * L, Widelands::Game & game);
 };
 
 void luaopen_wlgame(lua_State *);
 
-}
-
 #endif
+};
+
+

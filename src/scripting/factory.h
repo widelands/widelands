@@ -27,22 +27,26 @@
 /*
  * Class to create the correct type for types shared between Editor and Game.
  */
-struct Factory {
+class Factory {
+public:
+	virtual void push_player(lua_State * L, Widelands::Player_Number) = 0;
 	virtual ~Factory() {}
 
-	virtual void push_player(lua_State * L, Widelands::Player_Number) = 0;
 };
 
-struct GameFactory : public Factory {
+class GameFactory : public Factory {
+public:
 	virtual ~GameFactory() {}
 
-	virtual void push_player(lua_State *, Widelands::Player_Number);
+	virtual void push_player(lua_State * L, Widelands::Player_Number plr);
 };
 
-struct EditorFactory  : public Factory {
+class EditorFactory  : public Factory {
+public:
 	virtual ~EditorFactory() {}
 
-	virtual void push_player(lua_State *, Widelands::Player_Number);
+	virtual void push_player(lua_State * L, Widelands::Player_Number plr);
 };
 
-#endif
+#endif /* end of include guard: FACTORY_H */
+

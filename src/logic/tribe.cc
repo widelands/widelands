@@ -336,7 +336,7 @@ Tribe_Descr::Tribe_Descr
 Load all logic data
 ===============
 */
-void Tribe_Descr::postload(Editor_Game_Base &) const {
+void Tribe_Descr::postload(Editor_Game_Base &) {
 	// TODO: move more loads to postload
 }
 

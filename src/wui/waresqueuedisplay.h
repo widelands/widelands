@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WARESQUEUEDISPLAY_H
-#define WARESQUEUEDISPLAY_H
+#ifndef _WARESQUEUEDISPLAY_H_
+#define _WARESQUEUEDISPLAY_H_
 
 #include <cstdlib>
 #include <stdint.h>
@@ -35,10 +35,10 @@ struct WaresQueue;
 }
 
 UI::Panel * create_wares_queue_display
-	(UI::Panel             * parent,
-	 Interactive_GameBase  &,
-	 Widelands::Building   &,
-	 Widelands::WaresQueue *,
-	 int32_t                 width);
+	(UI::Panel * parent,
+	 Interactive_GameBase & igb,
+	 Widelands::Building & b,
+	 Widelands::WaresQueue * const wq,
+	 int32_t width);
 
-#endif
+#endif // _WARESQUEUEDISPLAY_H_

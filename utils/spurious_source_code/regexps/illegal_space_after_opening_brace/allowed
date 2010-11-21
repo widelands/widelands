@@ -1,17 +1,7 @@
-// {{{ Testing
-f("{ ");
-if(blah) {                \\
-	if ((m_readyflags | thisflag) != 3) {  //  codepath a
-// { This is ok'
-/// {{{ Like this
-{ // And this also
 {
 {/
 {/ /
 {h
 {"h"
-namespace Widelands {
-//  Do { what we want in comments
-buffer[i] = '{'
-   // FIXME instead of replacing < with { in chat messages.
-{ // check number of arguments
+// {{{ Testing
+f("{ ");

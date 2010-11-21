@@ -25,8 +25,6 @@
 #include "instances.h"
 #include "widelands_geometry.h"
 
-#include "upcast.h"
-
 struct Profile;
 
 namespace Widelands {
@@ -180,12 +178,12 @@ public:
 	bool is_reserved_by_worker() const;
 	void set_reserved_by_worker(bool reserve);
 
-	void set_action_data(ImmovableActionData * const data);
+	void set_action_data(ImmovableActionData * data);
 	template<typename T>
 	T * get_action_data() {
 		if (!m_action_data)
 			return 0;
-		if (upcast(T, data, m_action_data))
+		if (T * data = dynamic_cast<T *>(m_action_data))
 			return data;
 		set_action_data(0);
 		return 0;
