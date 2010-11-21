@@ -2270,7 +2270,7 @@ void NetHost::disconnectPlayerController
 		if (d->settings.users.at(i).position == number) {
 			if (!d->game) {
 				// Remove player name
-				PlayerSettings & p = d->settings.players.at(number - 1);
+				PlayerSettings & p = d->settings.players.at(number);
 				std::string temp(" ");
 				temp += name;
 				temp += " ";
@@ -2301,13 +2301,14 @@ void NetHost::disconnectClient
 			(_("%s has left the game (%s)"),
 			 d->settings.users.at(client.usernum).name.c_str(),
 			 reason.c_str());
-		if (int32_t pnum = client.playernum <= UserSettings::highestPlayernum()) {
-			client.playernum = UserSettings::notConnected();
-			disconnectPlayerController(pnum, d->settings.users.at(client.usernum).name, reason);
+		uint8_t position = d->settings.users.at(client.usernum).position;
+		d->settings.users.at(client.usernum).position = UserSettings::notConnected();
+		client.playernum = UserSettings::notConnected();
+		if (position <= UserSettings::highestPlayernum()) {
+			disconnectPlayerController(position, d->settings.users.at(client.usernum).name, reason);
 		}
-		d->settings.users.at(client.usernum).name     = std::string();
-		d->settings.users.at(client.usernum).position =
-			UserSettings::notConnected();
+		d->settings.users.at(client.usernum).name = std::string();
+
 
 		// Broadcast the user changes to everybody
 		SendPacket s;

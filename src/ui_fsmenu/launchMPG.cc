@@ -93,7 +93,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	(GameSettingsProvider * const settings, GameController * const ctrl)
 	:
-	Fullscreen_Menu_Base("launchgamemenu.jpg"),
+	Fullscreen_Menu_Base("launchMPGmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (m_xres / 4),
@@ -149,12 +149,24 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 // Text labels
 	m_title
 		(this,
-		 m_xres / 2, m_yres / 18,
+		 m_xres / 2, m_yres / 25,
 		 _("Multiplayer Game Setup"), UI::Align_HCenter),
 	m_mapname
 		(this,
 		 m_xres * 37 / 50, m_yres * 3 / 20,
 		 std::string()),
+	m_clients
+		(this,
+		 m_xres / 10, m_yres / 10,
+		 _("Clients")),
+	m_players
+		(this,
+		 m_xres / 2, m_yres / 10,
+		 _("Players")),
+	m_map
+		(this,
+		 m_xres * 8 / 10, m_yres / 10,
+		 _("Map")),
 
 	m_map_info(this, m_xres * 37 / 50, m_yres * 2 / 10, m_butw, m_yres * 27 / 80),
 	m_client_info(this, m_xres * 37 / 50, m_yres * 13 / 20, m_butw, m_yres * 5 / 20),
@@ -176,6 +188,9 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 
 	m_title      .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_mapname    .set_font(m_fn, m_fs, RGBColor(255, 255, 127));
+	m_clients    .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
+	m_players    .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
+	m_map        .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
 	m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_map_info   .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
@@ -185,7 +200,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_mpsg =
 		new MultiPlayerSetupGroup
 			(this,
-			 m_xres / 50, m_yres / 10, m_xres * 57 / 80, m_yres * 21 / 40,
+			 m_xres / 50, m_yres / 8, m_xres * 57 / 80, m_yres / 2,
 			 settings, m_butw, m_buth, m_fn, m_fs);
 
 	// If we are the host, open the map or save selection menu at startup
@@ -596,8 +611,8 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	help.add_paragraph
 		(_
 		 ("On the left side is a list of all clients including you. With the "
-		  "button in the rear of your nickname, you can set your player mode. "
-		  "Available modes are open players, players that are already played by "
+		  "button in the rear of your nickname, you can set your role. "
+		  "Available roles are open players, players that are already played by "
 		  "other clients (sharing the kingdom) and spectator mode."));
 	help.add_heading(_("Player settings"));
 	help.add_paragraph
@@ -608,7 +623,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	help.add_block
 		(_
 		 ("If you are a client (not the hosting player), you can set the tribe "
-		  "and the team for the player you set as your mode."));
+		  "and the team for the player you set as your role."));
 	help.add_block
 		(_
 		 ("If you are the hosting player, you can further set the "

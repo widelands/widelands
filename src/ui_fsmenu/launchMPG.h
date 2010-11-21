@@ -79,7 +79,7 @@ private:
 
 	UI::Callback_Button       m_change_map_or_save, m_ok, m_back, m_wincondition;
 	UI::Callback_Button       m_help_button;
-	UI::Textarea              m_title, m_mapname;
+	UI::Textarea              m_title, m_mapname, m_clients, m_players, m_map;
 	UI::Multiline_Textarea    m_map_info, m_client_info;
 	GameSettingsProvider    * m_settings;
 	GameController          * m_ctrl; // optional
