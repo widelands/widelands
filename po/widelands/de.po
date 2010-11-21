@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-18 11:39+0100\n"
-"PO-Revision-Date: 2010-11-18 17:47+0000\n"
-"Last-Translator: Klappstuhl <Unknown>\n"
+"PO-Revision-Date: 2010-11-20 17:40+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-19 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-11-21 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/network/nethost.cc:2150
@@ -1474,7 +1474,7 @@ msgstr[1] "%u(+%u) Soldaten"
 #: ../../src/logic/militarysite.cc:216
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr "Deine Soldaten haben Dein(e) %s besetzt."
+msgstr "Deine Soldaten haben dein(e) %s belegt."
 
 #: ../../src/logic/militarysite.cc:571
 #, c-format
@@ -1678,7 +1678,7 @@ msgstr "nicht "
 #: ../../src/logic/production_program.cc:171
 #: ../../src/logic/production_program.cc:192
 msgid "economy needs "
-msgstr "benötigt wird: "
+msgstr "die Wirtschaft benötigt "
 
 #: ../../src/logic/production_program.cc:221
 msgid "site has "
