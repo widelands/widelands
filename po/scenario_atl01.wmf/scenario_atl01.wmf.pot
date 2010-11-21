@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"POT-Creation-Date: 2010-11-21 21:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -178,6 +178,11 @@ msgid ""
 "enemy of Lutas."
 msgstr ""
 
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:254
+msgid ""
+"Chaos emerges..."
+msgstr ""
+
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:348
 msgid ""
 "Colionder arrives"
@@ -290,7 +295,9 @@ msgid ""
 "bullying the civil population."
 msgstr ""
 
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:306
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:356
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:500
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:513
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:590
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:608
@@ -370,6 +377,11 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:285
 msgid ""
 "Jundlina writes down her memories"
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:340
+msgid ""
+"Jundlina's Memoirs"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:261
@@ -587,6 +599,11 @@ msgid ""
 "The god's disgrace"
 msgstr ""
 
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:236
+msgid ""
+"The god's punishment"
+msgstr ""
+
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:113
 msgid ""
 "The island is huge and as long as we are not sure that we are alone\n"
@@ -613,6 +630,15 @@ msgstr ""
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go back\n"
 "to your work now, Opol, and may Satul warm you and all your guild members!"
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:225
+msgid ""
+"This story happens during the regency of King Askandor, the 43rd successor of\n"
+"King Ajanthul. He has been a good king, ruling Atlantis with wisdom and\n"
+"foresight. But with age, he became afraid of dying and so he began looking for\n"
+"a cure to death even though most clerics warned him. Some said, endless life\n"
+"was only for the gods and to seek for it was forbidden."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:252

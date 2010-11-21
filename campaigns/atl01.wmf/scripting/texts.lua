@@ -221,7 +221,7 @@ world was very young. Ruled by the bloodline of King Ajanthul - the first human
 to be empowered by the sea god Lutas to breathe above the sea level - and the
 wise clerics, who provided the link to Lutas - they prospered and became
 civilized.]]
-      ) .. p(
+      ) .. p(_
 [[This story happens during the regency of King Askandor, the 43rd successor of
 King Ajanthul. He has been a good king, ruling Atlantis with wisdom and
 foresight. But with age, he became afraid of dying and so he began looking for
@@ -233,7 +233,7 @@ was only for the gods and to seek for it was forbidden.]]
 {
    title = _ "The god's disgrace",
    body = rt(
-      h1("The god's punishment") ..
+      h1(_"The god's punishment") ..
       p(_
 [[But all seemed well. Only the horses seemed to feel something was wrong.
 In the nights, they went crazy and were full of fear. It was not long before the
@@ -251,7 +251,7 @@ again.]]
 {
    title = _ "Uproar and confusion",
    body = rt(
-      h1("Chaos emerges...") ..
+      h1(_"Chaos emerges...") ..
       p(_
 [[Guilt-ridden, the king committed suicide. Without a monarch, the people
 turned to the clerics, but those had no substantial help to offer. Most
@@ -303,7 +303,7 @@ surroundings. I called for specialists and will follow their advice.]]
 },
 {
    title = _ "Loftomor and Sidolus arrive",
-   body = jundlina( "Jundlina", _
+   body = jundlina( _"Jundlina", _
 [[May Satul warm you both. Loftomor, you have been the island's most renowned
 architect. Sidolus, you are a seasoned warrior and strategist. I have called
 you before me to seek your counsel: What needs to be done to make this our new
@@ -337,7 +337,7 @@ available. We only need some housings to live in.]]
 food_story_message = {
 {
    title = _ "Jundlina is satisfied",
-   body = jundlina("Jundlina's Memoirs", _
+   body = jundlina(_"Jundlina's Memoirs", _
 [[Our building infrastructure is done and I spent some days making sure that
 they work well together. Now, there are other pressing matters. I called
 Colionder, my personal cook, before me to get his help with sorting some things
@@ -497,7 +497,7 @@ Dismissed.]]
 training_story_end = {
    {
       title = _ "Jundlina received a letter",
-      body = jundlina("Jundlina", _
+      body = jundlina(_"Jundlina", _
 [[I received an invitation from Sidolus. The first day of training in the newly
 finished labyrinth will be tomorrow. The dungeon is done as well and will start
 its work soon. I am looking forward to tomorrow; I am very interested in how our

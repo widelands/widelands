@@ -14,17 +14,17 @@
 #
 ##############################################################################
 
-import confgettext
-from lua_xgettext import Lua_GetText
 from glob import glob
+from time import strftime,gmtime
 import os
 import re
 import string
-import sys
 import subprocess
-sys.path.append('build/scons-tools')
+import sys
+
 from detect_revision import detect_revision
-from time import strftime,gmtime
+from lua_xgettext import Lua_GetText
+import confgettext
 
 # The current version of source
 SRCVERSION=detect_revision()
@@ -127,18 +127,6 @@ def do_check_root():
                 print ("This script needs to access translations placed " +
                     "under 'po/' subdir, but these seem unavailable. Check " +
                     "that you called this script from Widelands' main dir.\n")
-                sys.exit(1)
-
-
-##############################################################################
-#
-# Check correctness of passed arguments
-#
-##############################################################################
-def do_check_parameters():
-        if len(sys.argv) < 2:
-                print "Usage: buildcat.py [-a | ll1 ll2 ... ]"
-                print "\twhere ll1 ll2 ... are language codes to update/generate."
                 sys.exit(1)
 
 
@@ -509,31 +497,9 @@ def do_update_po(lang, files):
 ##############################################################################
 if __name__ == "__main__":
         # Sanity checks
-        do_check_parameters()
         do_check_root()
 
         # Make sure .pot files are up to date.
         do_update_potfiles()
 
-        # We no longer update translation files, because launchpad
-        # is doing this for us ATM. Only update the templates.
-
-        # sys.stdout.write("Updating translations: ")
-        #
-        # if (os.getenv('NO_HEADER_REWRITE')):
-        #     NO_HEADER_REWRITE = 1
-        #
-        # if (sys.argv[1] == "-a"):
-        #         lang = set(os.path.splitext(os.path.basename(l))[0] for
-        #                  l in glob("po/*/*.po"))
-        #         print "all available."
-        # else:
-        #         lang = sys.argv[1:]
-        #         print lang
-        #
-        # # Assemble a list of .pot files available
-        # srcfiles = do_find_files("po/", ".*\.pot$")
-        #
-        # for l in lang:
-        #         do_update_po(l, srcfiles)
         print ""
