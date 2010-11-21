@@ -25,7 +25,7 @@ smelt_gold=_Smelt gold
 work=_Work
 
 [smelt_iron]
-return=skipped when site has goldstone and economy needs gold and not economy needs iron
+return=skipped when site has goldore and economy needs gold and not economy needs iron
 return=skipped when economy needs coal and not economy needs iron
 consume=ironore coal
 sleep=25000
