@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-14 07:28+0000\n"
-"Last-Translator: Fitoschido <Unknown>\n"
+"POT-Creation-Date: 2010-11-21 21:05+0000\n"
+"PO-Revision-Date: 2010-11-21 10:27+0000\n"
+"Last-Translator: Siz <siz-asuka@hotmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-15 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-11-22 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -365,6 +365,10 @@ msgstr "Oro"
 msgid "Gold Mine"
 msgstr "Mina de oro"
 
+#: ../../tribes/barbarians/conf:82
+msgid "Gold Ore"
+msgstr "Mineral de oro"
+
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
@@ -372,10 +376,6 @@ msgid ""
 msgstr ""
 "El oro es el más valioso de los metales; sólo objetos muy importantes son "
 "adornados con él."
-
-#: ../../tribes/barbarians/conf:82
-msgid "Goldstone"
-msgstr "Pepita de oro"
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -543,7 +543,7 @@ msgstr "Cervecería"
 msgid "Miner"
 msgstr "Minero"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:90
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
 msgstr "No hay espacio suficiente"
 
@@ -877,15 +877,16 @@ msgstr "Bocadillo"
 msgid "Soldier"
 msgstr "Soldado"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
-"Algunos de tus edificios iniciales no cupieron y\n"
-"no se construyeron. Estás en desventaja debido a esto; considera\n"
-"reiniciar este mapa con una condición inicial más justa."
+"Algunos de los edificios de partida no tenían suficiente espacio y \n"
+"no fueron construidos. Debido a esto te encuentras en desventaja, considera "
+"reiniciar \n"
+"el mapa con una condición justa al comienzo."
 
 #: ../../tribes/barbarians/conf:139
 msgid "Stonemason"
@@ -1019,6 +1020,11 @@ msgstr ""
 "guerreros son capaces de manejar estas grandes y poderosas hachas. Se "
 "fabrican en la armería."
 
+#: ../../tribes/barbarians/goldstone/conf:5
+msgid "This is gold ore mined from deep within the mountains."
+msgstr ""
+"Este es el mineral de oro extraído de las profundidades de las montañas"
+
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
 msgstr "Este es el rojizo mineral de hierro"
@@ -1032,10 +1038,6 @@ msgstr ""
 "Ésta es la segunda arma más peligrosa que son capaces de producir los "
 "bárbaros. Sólo los guerreros entrenados son capaces de rendir con tales "
 "armas. Se fabrica en la fábrica de hachas."
-
-#: ../../tribes/barbarians/goldstone/conf:1
-msgid "This is the yellow goldstone."
-msgstr "Esta es una pepita de oro"
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1381,6 +1383,9 @@ msgstr ""
 #~ msgid "Flax"
 #~ msgstr "Lino"
 
+#~ msgid "Goldstone"
+#~ msgstr "Pepita de oro"
+
 #~ msgid "Plant flax"
 #~ msgstr "Plantar lino"
 
@@ -1392,6 +1397,9 @@ msgstr ""
 
 #~ msgid "Flax is a beautiful flower, which are used to make cloth."
 #~ msgstr "El lino es una hermosa flor utilizada para obtener telas."
+
+#~ msgid "This is the yellow goldstone."
+#~ msgstr "Esta es una pepita de oro"
 
 #~ msgid "Works deep in the mines to produce coal, iron or gold."
 #~ msgstr ""
@@ -1443,3 +1451,12 @@ msgstr ""
 
 #~ msgid "Flax is a beautiful flower, which is used for making cloth."
 #~ msgstr "Flax es una hermosa flor, usada para hacer tela."
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Algunos de tus edificios iniciales no cupieron y\n"
+#~ "no se construyeron. Estás en desventaja debido a esto; considera\n"
+#~ "reiniciar este mapa con una condición inicial más justa."

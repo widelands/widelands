@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-18 10:39+0000\n"
-"PO-Revision-Date: 2010-11-18 15:28+0000\n"
-"Last-Translator: kraileth <Unknown>\n"
+"POT-Creation-Date: 2010-11-21 21:05+0000\n"
+"PO-Revision-Date: 2010-11-21 21:53+0000\n"
+"Last-Translator: Dirk Stöcker <launchpad@dstoecker.de>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-19 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-11-22 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:646
@@ -293,6 +293,10 @@ msgstr ""
 "Von da an betete die kleine Gruppe zu Satul, dem Gott des Feuers und Lutas´ "
 "größtem Feind"
 
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:254
+msgid "Chaos emerges..."
+msgstr "Aufkommendes Chaos..."
+
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:348
 msgid "Colionder arrives"
 msgstr "Colionder kommt an"
@@ -335,7 +339,7 @@ msgstr "Vergrößere dein Gebiet und erkunde die Insel"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:217
 msgid "Favored by the god"
-msgstr "Begünstigt von dem Gott"
+msgstr "Von Gott begünstigt"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:123
 msgid ""
@@ -466,7 +470,9 @@ msgstr ""
 "abhält\n"
 "die Bevölkerung zu schikanieren."
 
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:306
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:356
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:500
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:513
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:590
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:608
@@ -533,6 +539,10 @@ msgstr "Jundlina ruft Sidolus herbei"
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:285
 msgid "Jundlina writes down her memories"
 msgstr "Jundlina schreibt ihre Erinnerungen auf"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:340
+msgid "Jundlina's Memoirs"
+msgstr "Jundlinas Memoiren"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:261
 msgid ""
@@ -889,7 +899,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:234
 msgid "The god's disgrace"
-msgstr "Die Ungnade des Gottes"
+msgstr "Die Ungnade Gottes"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:236
+msgid "The god's punishment"
+msgstr "Die Strafe Gottes"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:113
 msgid ""
@@ -924,6 +938,24 @@ msgstr ""
 "Das sind in der Tat gute Neuigkeiten. Unsere Wirtschaft entwickelt sich sehr "
 "gut.Kehre\n"
 "zurück zu deiner Arbeit Opol, und möge Satul dich und deine Gilde wärmen."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:225
+msgid ""
+"This story happens during the regency of King Askandor, the 43rd successor "
+"of\n"
+"King Ajanthul. He has been a good king, ruling Atlantis with wisdom and\n"
+"foresight. But with age, he became afraid of dying and so he began looking "
+"for\n"
+"a cure to death even though most clerics warned him. Some said, endless "
+"life\n"
+"was only for the gods and to seek for it was forbidden."
+msgstr ""
+"Die Geschichte spielt während der Regentschaft von König Askandor, dem 43. "
+"Nachfolger von König Ajanthul. Er war ein guter König, der Atlantis mit "
+"Weisheit und Weitsicht regierte. Aber mit dem Alter fürchtete er sich vor "
+"dem Tod und begann, trotz der Warnung der meisten Geistlichen, die Suche "
+"nach einem Heilmittel für den Tod. Einige sagten, dass ewiges Leben den "
+"Göttern vorbehalten und die Suche danach verboten sei."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:252
 msgid "Uproar and confusion"
