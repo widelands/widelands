@@ -2,64 +2,11 @@
 --                 Texts for the Atlantean tutorial mission
 -- =======================================================================
 
--- =========================
--- Some formating functions
--- =========================
--- Rich Text
-function rt(text_or_opts, text)
-   k = "<rt>"
-   if text then
-      k = ("<rt %s>"):format(text_or_opts)
-   else
-      text = text_or_opts
-   end
-
-   return k .. text .. "</rt>"
-end
-
--- Headings
-function h1(s)
-   return "<p font=FreeSerif font-size=18 font-weight=bold font-color=D1D1D1>"
-      ..  s .. "<br></p><p font-size=8> <br></p>"
-end
-
-function h2(s)
-   return "<p font=FreeSerif font-size=12 font-weight=bold font-color=D1D1D1>"
-      ..  s .. "<br></p><p font-size=4> <br></p>"
-end
-
--- Simple flowing text. One Paragraph
-function p(s)
-   return "<p line-spacing=3 font-size=12>" .. s .. "<br></p>" ..
-      "<p font-size=8> <br></p>"
-end
-
--- Direct speech by one of the persons that appear in the map
-function speech(img, clr, g_title, g_text)
-   local title, text = g_title, g_text
-   if not text then
-      title = nil
-      text = g_title
-   end
-
-   -- Surround the text with translatable ","
-   text = (_ '"%s"'):format(text)
-
-   local s = ""
-   if title then
-      s = rt("<p font-size=20 font-weight=bold font-face=FreeSerif " ..
-         ("font-color=%s>"):format(clr) .. title ..
-         "</p><p font-size=8> <br></p>"
-      )
-   end
-
-   return s .. rt(("image=%s"):format(img), p(text))
-end
+use("aux", "formatting")
 
 function jundlina(title, text)
    return speech("map:princess.png", "2F9131", title, text)
 end
-
 function loftomor(text)
    return speech("map:loftomor.png", "FDD53D", "Loftomor", text)
 end
@@ -74,12 +21,6 @@ function opol(text)
 end
 function ostur(text)
    return speech("map:ostur.png", "375FFC", "Ostur", text)
-end
-
--- Nice formatting for objective texts: A header and one paragraph
--- of text
-function obj_text(heading, body)
-   return rt(h2(heading) .. p(body))
 end
 
 -- Append an objective text to a dialog box in a nice fashion.
@@ -100,7 +41,7 @@ end
 obj_ensure_build_wares_production = {
    name = "obj_ensure_build_wares_production",
    title = _ "Ensure the supply of build wares",
-   body = obj_text(_"The supply of build wares", _
+   body = objective_text(_"The supply of build wares", _
 [[Build a quarry, two woodcutter's houses, two forester's houses and a
 sawmill.]]
    ),
@@ -109,7 +50,7 @@ sawmill.]]
 obj_expand = {
    name = "obj_expand",
    title = _ "Expand your territory and explore the island",
-   body = obj_text(_"Expand and Explore", _
+   body = objective_text(_"Expand and Explore", _
 [[The island is huge and as long as we are not sure that we are alone
 here, we cannot relax. Explore and conquer it, this is the
 only way to protect us from threats on the island and from Atlantis.]]
@@ -119,7 +60,7 @@ only way to protect us from threats on the island and from Atlantis.]]
 obj_make_food_infrastructure = {
    name = "obj_make_food_infrastructure",
    title = _ "Establish a solid food production",
-   body = obj_text(_"Establish a food production", _
+   body = objective_text(_"Establish a food production", _
 [[Food is very important for mines and military training areas. Establish
 a well working food environment by building at least one farm, one blackroot
 farm and a mill. The two kinds of flour together with water from a well
@@ -144,7 +85,7 @@ will need at least two of those.<br><br>
 obj_spidercloth_production = {
    name = "obj_spidercloth_production",
    title = _ "Build a spiderfarm and a weaving mill",
-   body = obj_text(_"Establish a spidercloth production",
+   body = objective_text(_"Establish a spidercloth production",
 [[The weavers produce spidercloth and tabards in the weaving-mill. Spidercloth
 is needed for the construction of some buildings and clothing while tabards
 are the uniforms of soldiers. The weaving-mill needs gold yarn and spider yarn
@@ -159,7 +100,7 @@ produced by the gold weaver out of gold.<br><br>
 obj_make_heavy_industry_and_mining = {
    name = "obj_make_heavy_industry_and_mining",
    title = _ "Build industry and mines",
-   body = obj_text(_"Build industry and mines",
+   body = objective_text(_"Build industry and mines",
 [[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine
 is digging for crystal, quartz and diamond - all of them are rare materials and
 very seldom found. While it searches for them, it produces a lot of stone.<br>
@@ -176,7 +117,7 @@ tool smithy.<br><br>
 obj_make_training_buildings = {
    name = "obj_make_training_buildings",
    title = _"Build training buildings",
-   body = obj_text(_"Build training buildings to improve your soldiers", _
+   body = objective_text(_"Build training buildings to improve your soldiers", _
 [[As all other tribes, the Atlanteans are also able to train soldiers: the
 dungeon trains attack - the major attribute of the Atlanteans - and the
 labyrinth trains evasion, health points and defense. The items produced by the
@@ -187,7 +128,7 @@ industry are used to train better soldiers in the two training buildings.<br><br
 obj_horsefarm_and_warehouse = {
    name = "obj_horsefarm_and_warehouse",
    title = _"Build a warehouse and a horsefarm",
-   body = obj_text(_"Build a warehouse and a horsefarm",
+   body = objective_text(_"Build a warehouse and a horsefarm",
 [[As your road network gets longer and more complicated, you should employ
 horses to help out your carriers. Horses are bred in horsefarms using water and
 corn. A warehouse will also help to ensure your transportation system does not
@@ -197,7 +138,7 @@ collapse.]])
 obj_build_ships = {
    name = "obj_build_ships",
    title = _ "Build 3 ships to escape from the island",
-   body = obj_text(_"Escape from the island",
+   body = objective_text(_"Escape from the island",
 [[There is a lake at the top of the island. Build 3 ships in these waters
 and you might be able to rescue your people when the island is swallowed
 completely by the ocean. Build a shipyard close to the lake to start
