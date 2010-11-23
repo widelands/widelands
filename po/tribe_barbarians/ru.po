@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 01:12+0000\n"
-"Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
+"POT-Creation-Date: 2010-11-21 21:05+0000\n"
+"PO-Revision-Date: 2010-11-22 15:30+0000\n"
+"Last-Translator: Massol <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-11-23 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -356,6 +356,10 @@ msgstr "Золото"
 msgid "Gold Mine"
 msgstr "Золотой прииск"
 
+#: ../../tribes/barbarians/conf:82
+msgid "Gold Ore"
+msgstr "Золотая руда"
+
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
@@ -363,10 +367,6 @@ msgid ""
 msgstr ""
 "Золото наиболее ценный из всех металлов; только очень важные вещи украшаются "
 "золотом."
-
-#: ../../tribes/barbarians/conf:82
-msgid "Goldstone"
-msgstr "Золотой самородок"
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -532,7 +532,7 @@ msgstr "Малая пивоварня"
 msgid "Miner"
 msgstr "Шахтёр"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:90
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
 msgstr "Недостаточно места"
 
@@ -863,15 +863,15 @@ msgstr "Обед"
 msgid "Soldier"
 msgstr "Солдат"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:91
+#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
-"Некоторые из Ваших начальных строений не были установлены, так как для них\n"
-"недостаточно места. Это ставит Вас в невыгодное положение. Рассмотрите\n"
-"возможность перезапуска карты, чтобы обеспечить равные начальные условия."
+"Для некторых Ваших стартовых зданий не хватило места и \n"
+"они не были построены. Вы в невыгодном положении; начните \n"
+"эту карту заново."
 
 #: ../../tribes/barbarians/conf:139
 msgid "Stonemason"
@@ -998,6 +998,10 @@ msgstr ""
 "совладать с этим огромным и мощным топором. Изготавливается на фабрике "
 "топоров."
 
+#: ../../tribes/barbarians/goldstone/conf:5
+msgid "This is gold ore mined from deep within the mountains."
+msgstr "Это золотая руда, добытая из глубин гор."
+
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
 msgstr "Это красный железняк."
@@ -1010,10 +1014,6 @@ msgid ""
 msgstr ""
 "Это второе наиболее грозное оружие производимое варварами. Только обученные "
 "воины способны совладать с таким оружием. Изготавливается на фабрике топоров."
-
-#: ../../tribes/barbarians/goldstone/conf:1
-msgid "This is the yellow goldstone."
-msgstr "Это самородок чистого золота."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1374,6 +1374,9 @@ msgstr ""
 #~ msgid "Resource indicator granit much"
 #~ msgstr "Залежи ресурсов: много гранита"
 
+#~ msgid "Goldstone"
+#~ msgstr "Золотой самородок"
+
 #~ msgid "Cuts raw pieces of granit out of laying stones."
 #~ msgstr "Извлекает гранитные глыбы из каменных залежей."
 
@@ -1385,6 +1388,15 @@ msgstr ""
 #~ "Топор является основным оружием и инструментом для варваров. Все молодые "
 #~ "солдаты получают это оружие. Топорами пользуются и дровосеки. Выпускается "
 #~ "фабрикой топоров и мастерской."
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Некоторые из Ваших начальных строений не были установлены, так как для них\n"
+#~ "недостаточно места. Это ставит Вас в невыгодное положение. Рассмотрите\n"
+#~ "возможность перезапуска карты, чтобы обеспечить равные начальные условия."
 
 #~ msgid "Flax"
 #~ msgstr "Лён"
@@ -1398,6 +1410,9 @@ msgstr ""
 
 #~ msgid "Flax is a beautiful flower, which is used for making cloth."
 #~ msgstr "Лён - прекрасное растение, используемое для производства сукна."
+
+#~ msgid "This is the yellow goldstone."
+#~ msgstr "Это самородок чистого золота."
 
 #~ msgid "Flax tiny"
 #~ msgstr "Засеянный лён"

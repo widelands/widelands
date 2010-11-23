@@ -6,25 +6,41 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 02:19+0000\n"
-"Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
+"POT-Creation-Date: 2010-11-21 21:05+0000\n"
+"PO-Revision-Date: 2010-11-22 15:29+0000\n"
+"Last-Translator: Massol <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-12 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-11-23 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
-#: ../../campaigns/cconfig:27
-msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "Варвары - Вторая империя (Обучение)"
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Глаза во Тьме"
 
-#: ../../campaigns/cconfig:88
-msgid "01 - From nemesis to genesis"
-msgstr "01 - Из возмездья в бытие"
+#: ../../campaigns/cconfig:91
+msgid "01 - From Nemesis to Genesis"
+msgstr "01 - От Кары небесной до Возрождения"
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr "01 - Пряди Малак Мора"
+
+#: ../../campaigns/cconfig:69
+msgid "02 - A Place to call Home"
+msgstr "02 - Место, завущееся домом"
+
+#: ../../campaigns/cconfig:86
+msgid "02 - An Outpost for Exile"
+msgstr "02 - Аванпост  Изгнания"
+
+#: ../../campaigns/cconfig:74
+msgid "03 - This Land is our Land"
+msgstr "Эта земля - Наша земля"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -100,13 +116,17 @@ msgstr ""
 "Единственный победитель принесет в жертву на древнем алтаре сокровища своих "
 "врагов, построит роскошный замок и обретет благоволение и уважение Богов."
 
-#: ../../campaigns/cconfig:39
-msgid "Atlanteans - the new rise"
-msgstr "Атланты - новый восход"
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans - The Run for the Fire"
+msgstr "Атланты - Побег от Огня"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
 msgstr "Атолл"
+
+#: ../../campaigns/cconfig:27
+msgid "Barbarians - The second Empire"
+msgstr "Варвары - Вторая Империя"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -136,21 +156,21 @@ msgstr ""
 "Подсказка 2: Снеговики отмечают дополнительные источники воды. Подсказка 3: "
 "Каждая гора содержит только один ресурс."
 
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr "Легко. Знакомство с Варварами"
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr "Легко. Знакомство с Империей"
+
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Леса эльфов"
 
-#: ../../campaigns/cconfig:33
-msgid "Empire - The months of exile"
-msgstr "Империя - Месяц в изгнании"
-
-#: ../../campaigns/cconfig:78
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Империя - Берега Малак Мора (Обучение 1)"
-
-#: ../../campaigns/cconfig:83
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Империя - Форпост для изгнанников (Обучение 2)"
+#: ../../campaigns/cconfig:34
+msgid "Empire - The Months of Exile"
+msgstr "Империя - Месяцы изгнания"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -335,7 +355,7 @@ msgstr "Место встречи изменить нельзя"
 msgid "Riverlands"
 msgstr "Речная страна"
 
-#: ../../campaigns/cconfig:36
+#: ../../campaigns/cconfig:38
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -357,10 +377,6 @@ msgstr ""
 "погибель. Одной мартовской ночью его неподготовленная армия была атакована "
 "варварами в количестве 100 человек и полностью разбита. Только благодаря его "
 "простой жизни, ему и части его солдат удалось выжить."
-
-#: ../../campaigns/cconfig:42
-msgid "Some descriptive texts..."
-msgstr "Описание..."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -490,18 +506,6 @@ msgstr ""
 msgid "Three Warriors"
 msgstr "Три воина"
 
-#: ../../campaigns/cconfig:61
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Глаза во тьме (Обучение 1)"
-
-#: ../../campaigns/cconfig:66
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Место названное Домом (Обучение 2)"
-
-#: ../../campaigns/cconfig:71
-msgid "Tutorial3 - This land is our land"
-msgstr "Это наша земля! (Обучение 3)"
-
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Мелководье"
@@ -527,7 +531,7 @@ msgstr ""
 "Хорошо защищённые в своих могучих крепостях, четыре жаждущих власти "
 "полководца разработали свои планы захвата этих земель..."
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -555,6 +559,20 @@ msgstr ""
 "защиты границ Альтунрана, молодой предводитель ищет возможность "
 "воссоединиться со своими амбициозными братьями и их племенами, чтобы однажды "
 "вновь выступить под одним знаменем."
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr ""
+"Когда Бог потерял веру в атлантов и утопил их остров, борьба одной женщины и "
+"второй шанс для ее народа стали легендой. Лидером оставшихся атлантов, "
+"ведущих их в новое будущее в новой части Света, стала Ундлина - самый "
+"могущественный человек своего времени, но слишком дорого ей это стоило: ее "
+"человечность и душа."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -674,6 +692,18 @@ msgstr ""
 #~ msgstr ""
 #~ "Оно пахнет болотом, выглядит как болото, оно и есть болото. Но это место, "
 #~ "где вы родились и жили всю жизнь. Если не хотите потерять его, защищайтесь! "
+
+#~ msgid "Some descriptive texts..."
+#~ msgstr "Описание..."
+
+#~ msgid "Empire - The months of exile"
+#~ msgstr "Империя - Месяц в изгнании"
+
+#~ msgid "Atlanteans - the new rise"
+#~ msgstr "Атланты - новый восход"
+
+#~ msgid "01 - From nemesis to genesis"
+#~ msgstr "01 - Из возмездья в бытие"
 
 #~ msgid ""
 #~ "For hundreds of years this island was kept as sanctuary of the Gods. No "
@@ -806,3 +836,21 @@ msgstr ""
 #~ "мартовских ночей его неподготовленная армия была атакована сотней варварских "
 #~ "пехотинцев и разбита в пух и прах. Только он и его близжайшие солдаты смогли "
 #~ "спастись."
+
+#~ msgid "(Tutorial) Barbarians - The second Empire"
+#~ msgstr "Варвары - Вторая империя (Обучение)"
+
+#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
+#~ msgstr "Империя - Берега Малак Мора (Обучение 1)"
+
+#~ msgid "Empire Tutorial2 - An outpost for exile"
+#~ msgstr "Империя - Форпост для изгнанников (Обучение 2)"
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Глаза во тьме (Обучение 1)"
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Место названное Домом (Обучение 2)"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Это наша земля! (Обучение 3)"
