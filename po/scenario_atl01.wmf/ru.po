@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-21 21:05+0000\n"
-"PO-Revision-Date: 2010-11-22 16:26+0000\n"
+"PO-Revision-Date: 2010-11-23 21:04+0000\n"
 "Last-Translator: lu <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-23 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-11-24 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:646
@@ -250,6 +250,14 @@ msgid ""
 "worst\n"
 "enemy of Lutas."
 msgstr ""
+"Но даже это не изменило мнение бога. Вода продолжала прибывать. \n"
+"Свихнувшись от вины, боли и гнева, Джундлина стала еретиком:\n"
+"Тайно она собрала простой народ, который не разделял \n"
+"мнение священников принять божью волю. Вместе с ними она\n"
+"проникла в храм огня и украла корабль, что бы на нем сбежать от\n"
+"влияния бога Атлантиды. Эта маленькая группа начала молиться Сатулу, богу "
+"огня и худшим\n"
+"врагам Лутаса."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:254
 msgid "Chaos emerges..."
@@ -372,6 +380,11 @@ msgid ""
 "if similar things happen again, I will make you responsible for them.\n"
 "Dismissed."
 msgstr ""
+"Я не боюсь затрат и труда пока это держит твой народ в безвыходном "
+"положении. Вы должны построить свои здания. Но учтите, что я не буду терпеть "
+"неконтролируемых солдат, если подобное повторится, я сделаю тебя "
+"ответственным за них. \n"
+"Не обсуждается."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:501
 msgid ""
@@ -477,11 +490,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Loftomor and Sidolus arrive"
-msgstr ""
+msgstr "Лофтомор и Сидолус прибывают"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor speaks"
-msgstr ""
+msgstr "Разговор Лофтомора"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:591
 msgid ""
@@ -619,11 +632,11 @@ msgstr "Еще одно здание"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:426
 msgid "Opol seeks out Jundlina"
-msgstr ""
+msgstr "Опол ищет Джундлину"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:616
 msgid "Ostur seems confident"
-msgstr ""
+msgstr "Остур выглядит уверенным"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:609
 msgid ""
@@ -670,15 +683,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:446
 msgid "Sidolus seeks out Jundlina"
-msgstr ""
+msgstr "Сидолус ищет Джундлину"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:476
 msgid "Sidolus seems contrite"
-msgstr ""
+msgstr "Сидолус сокрушен"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:326
 msgid "Sidolus speaks"
-msgstr ""
+msgstr "Разговор Сидолуса"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:243
 msgid ""
@@ -698,7 +711,7 @@ msgstr "Позор богов."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:236
 msgid "The god's punishment"
-msgstr ""
+msgstr "Божья кара"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:113
 msgid ""
@@ -716,7 +729,7 @@ msgstr "Мемуары принцессы"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "The supply of build wares"
-msgstr ""
+msgstr "Обеспечте поставку стройматериалов"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:589
 msgid "The water is rising!"
@@ -728,6 +741,9 @@ msgid ""
 "back\n"
 "to your work now, Opol, and may Satul warm you and all your guild members!"
 msgstr ""
+"Хорошие новости, Опол. Наша экономика очень хорошо развивается. "
+"Возвращайтесь\n"
+"к своей работе, Опол, и может Сатул согреет Вас и ваших работников."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:225
 msgid ""
@@ -743,7 +759,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:252
 msgid "Uproar and confusion"
-msgstr ""
+msgstr "Волнения и беспорядки"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:533
 msgid ""
@@ -828,10 +844,12 @@ msgid ""
 "You have won this mission. Continue with the next one or keep playing for\n"
 "as long as you like."
 msgstr ""
+"Вы выйграли это миссию. Можете начать следующую или играть\n"
+"до тех пор, пока Вам не надоест:)."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:385
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
+msgstr "Ваши слова звучат разумно, Колиондер. Пусть будет так!"
 
 #~ msgid "01 - From nemesis to genesis"
 #~ msgstr "01 - Из возмездья в бытие"
