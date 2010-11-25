@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-21 22:05+0100\n"
-"PO-Revision-Date: 2010-11-23 09:02+0000\n"
+"PO-Revision-Date: 2010-11-24 14:19+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-24 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-11-25 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -761,7 +761,7 @@ msgstr "Documentatie voor programma commando keerterug"
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:793
 msgid "failed"
-msgstr "mislukt"
+msgstr "Mislukt"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:412
 msgid "completed"
@@ -769,7 +769,7 @@ msgstr "voltooid"
 
 #: ../../src/writeHTML.cc:908 ../../src/logic/production_program.cc:412
 msgid "skipped"
-msgstr "overgeslagen"
+msgstr "Overgeslagen"
 
 #: ../../src/writeHTML.cc:913
 msgid "and"
@@ -936,7 +936,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr ""
+msgstr "bouw"
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
@@ -1411,6 +1411,8 @@ msgstr "verwachtte kans in het bereik [1, 254] maar vond \"%s\""
 msgid ""
 "unknown scope \"%s\" given for target type (must be \"world\" or \"tribe\")"
 msgstr ""
+"onbekende doel \"%s\" gegeven voor doeltype (moet \"wereld\" of \"stam\" "
+"zijn)"
 
 #: ../../src/logic/immovable.cc:931
 msgid "illegal transformation to the same type"
