@@ -164,7 +164,6 @@ struct Graphic {
 	SurfacePtr create_surface(int32_t w, int32_t h, bool alpha = false);
 
 	PictureID create_grayed_out_pic(const PictureID & picid);
-	RenderTarget * get_surface_renderer(const PictureID & pic);
 
 	enum  ResizeMode {
 		// do not worry about proportions, just sketch to requested size

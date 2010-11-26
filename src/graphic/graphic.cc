@@ -471,7 +471,6 @@ PictureID & Graphic::get_picture
 
 	if (it == m_picturemap.end()) {
 		boost::shared_ptr<PictureImpl> pic(new PictureImpl);
-		pic->name = fname;
 
 		try {
 			pic->surface = load_image(fname, alpha);
@@ -499,7 +498,6 @@ PictureID & Graphic::get_picture
 PictureID & Graphic::add_picture_to_cache(PicMod module, const std::string & name, SurfacePtr surf)
 {
 	boost::shared_ptr<PictureImpl> pic(new PictureImpl);
-	pic->name = name;
 	pic->surface = surf;
 
 	PictureRec rec;
@@ -518,7 +516,6 @@ PictureID Graphic::make_picture
 {
 	boost::shared_ptr<PictureImpl> pic(new PictureImpl);
 	pic->surface = surf;
-	pic->name = name;
 	return pic;
 }
 
@@ -590,7 +587,8 @@ PictureID Graphic::get_resized_picture
 		srcrc.x = (width - srcrc.w) / 2;
 		srcrc.y = (height - srcrc.h) / 2;
 
-		g_gr->get_surface_renderer(pic)->blitrect //  Get the rendertarget
+		RenderTarget rt(pic->impl().surface);
+		rt.blitrect
 			(Point((w - srcrc.w) / 2, (h - srcrc.h) / 2),
 			 make_picture(src), srcrc);
 	}
@@ -789,7 +787,6 @@ PictureID Graphic::create_picture_surface(int32_t w, int32_t h, bool alpha)
 {
 	boost::shared_ptr<PictureImpl> pic(new PictureImpl);
 	pic->surface = create_surface(w, h, alpha);
-	pic->rendertarget = new RenderTarget(pic->surface);
 	return pic;
 }
 
@@ -968,20 +965,6 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid) {
 		return get_no_picture();
 }
 
-
-/**
- * Returns the RenderTarget for the given surface
-*/
-RenderTarget * Graphic::get_surface_renderer(const PictureID & pic) {
-	//assert(pic < m_pictures.size());
-	//  assert(m_pictures[pic].module == 0xff); fails showing terrains in editor
-
-	RenderTarget & rt = *pic->impl().rendertarget;
-
-	rt.reset();
-
-	return &rt;
-}
 
 /**
  * Creates a terrain texture.

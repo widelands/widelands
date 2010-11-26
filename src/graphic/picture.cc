@@ -20,10 +20,9 @@
 #include "picture.h"
 
 #include "surface.h"
-#include "rendertarget.h"
 
-PictureImpl::~PictureImpl() {
-	delete rendertarget;
+PictureImpl::~PictureImpl()
+{
 }
 
 bool PictureImpl::valid()

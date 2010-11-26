@@ -25,8 +25,6 @@
 
 #include "surfaceptr.h"
 
-struct RenderTarget;
-
 struct PictureImpl;
 
 /**
@@ -51,7 +49,7 @@ private:
 };
 
 struct PictureImpl : IPicture {
-	PictureImpl() : rendertarget(0) {}
+	PictureImpl() {}
 	~PictureImpl();
 
 	virtual bool valid();
@@ -61,10 +59,6 @@ struct PictureImpl : IPicture {
 	PictureImpl & impl() {return *this;}
 
 	SurfacePtr surface;
-
-	//TODO: descriptive name of the picture?
-	std::string name;
-	RenderTarget * rendertarget; //  module & (PicMod_Font | PicSurface)
 };
 
 #endif

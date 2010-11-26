@@ -21,6 +21,7 @@
 
 #include "rgbcolor.h"
 #include "rect.h"
+#include "graphic/picture.h"
 #include "graphic/surface.h"
 
 #include <SDL_opengl.h>
@@ -48,7 +49,7 @@ struct Vertex;
  * subdirectory.
  * Surfaces are created through Graphic::create_surface() functions.
 */
-class SurfaceOpenGL : public Surface {
+struct SurfaceOpenGL : Surface {
 public:
 	/**
 	 * Manages a single OpenGL texture. This makes sure the texture is

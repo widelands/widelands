@@ -23,6 +23,7 @@
 #include "rgbcolor.h"
 #include "rect.h"
 
+#include "graphic/picture.h"
 #include "graphic/surface.h"
 
 /**
@@ -32,7 +33,7 @@
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.
 */
-struct SurfaceSDL : public Surface {
+struct SurfaceSDL : Surface {
 	SurfaceSDL(SDL_Surface & surface) :
 		m_surface(&surface),
 		m_offsx(0), m_offsy(0),

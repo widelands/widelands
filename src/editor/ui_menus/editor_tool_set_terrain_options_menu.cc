@@ -106,7 +106,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				surface = g_gr->create_picture_surface(64, 64);
 
 				//  get the rendertarget for this
-				RenderTarget & target = *g_gr->get_surface_renderer(surface);
+				RenderTarget target(surface->impl().surface);
 
 				//  first, blit the terrain texture
 				target.blit
