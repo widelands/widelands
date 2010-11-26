@@ -54,14 +54,8 @@ struct Surface {
 	/// A safe function to get and set single pixels. lock() must be called
 	/// before pixel access can be used. get_pixel() and set_pixel() are easier
 	/// and safer to use but also much slower than direct pixel access.
-	virtual uint32_t get_pixel(uint32_t x, uint32_t y) {
-		//  FIXME make abstract or move body out of declaration
-		throw wexception("get_pixel() not implemented");
-	}
-	virtual void set_pixel(uint32_t x, uint32_t y, Uint32 clr) {
-		//  FIXME make abstract or move body out of declaration
-		throw wexception("set_pixel() not implemented");
-	}
+	virtual uint32_t get_pixel(uint32_t x, uint32_t y) = 0;
+	virtual void set_pixel(uint32_t x, uint32_t y, Uint32 clr) = 0;
 	//@}
 
 	//@{
@@ -153,6 +147,8 @@ protected:
 	{}
 	SurfaceType m_surf_type;
 private:
+	// surfaces cannot be copied
+	Surface(const Surface &);
 	Surface & operator= (Surface const &);
 };
 
