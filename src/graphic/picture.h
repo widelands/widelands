@@ -20,17 +20,6 @@
 #ifndef PICTURE_H
 #define PICTURE_H
 
-/***
- * Picture/PictureID
- *
- * PictureID is a reference to a picture
- * picmod is used to specify which buffer picture is loaded in.
- * warning: a picture can be loaded multiple times in multiple buffers
- * when buffer is flushed pictures will hang around till the last reference
- * is gone too
- ***/
-
-
 struct RenderTarget;
 struct Surface;
 
@@ -45,10 +34,18 @@ enum PicMod {
 	MaxModule   = 6 //MaxModule ALWAYS has to be the 'size' of picmod
 };
 
+/**
+ * Picture
+ *
+ * PictureID is a reference to a picture
+ * picmod is used to specify which buffer picture is loaded in.
+ * warning: a picture can be loaded multiple times in multiple buffers
+ * when buffer is flushed pictures will hang around till the last reference
+ * is gone too
+ */
 struct Picture {
 	Picture() : module(INVALID), surface(0), fname(0), rendertarget(0) {}
 	~Picture();
-	//void operator delete(void * p);
 
 	//PicMod lists which 'buffer' to load the images in.
 	// INVALID if unused, MaxModule not a legal module
