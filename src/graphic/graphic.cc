@@ -299,6 +299,9 @@ Graphic::~Graphic()
 {
 	delete m_rendertarget;
 	delete m_roadtextures;
+
+	// Remove traces of cached pictures
+	UI::g_fh->flush_cache();
 }
 
 /**
