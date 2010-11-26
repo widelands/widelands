@@ -76,10 +76,12 @@ GLenum _handle_glerror(const char * file, unsigned int line)
 }
 
 SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
-	Surface(par_surface.w, par_surface.h, SURFACE_SOURCE),
+	Surface(SURFACE_SOURCE),
 	m_glTexUpdate(false),
 	m_pixels     (0),
-	m_locked(false)
+	m_locked(false),
+	m_w(par_surface.w),
+	m_h(par_surface.h)
 {
 	GLuint texture;
 	SDL_Surface * surface;
@@ -266,11 +268,13 @@ SurfaceOpenGL::~SurfaceOpenGL() {
 
 
 SurfaceOpenGL::SurfaceOpenGL(int const w, int const h):
-	Surface(w, h, SURFACE_SOURCE),
+	Surface(SURFACE_SOURCE),
 	m_texture(0),
 	m_glTexUpdate(false),
 	m_pixels     (0),
-	m_locked(false)
+	m_locked(false),
+	m_w(w),
+	m_h(h)
 {
 	if (g_gr and g_gr->caps().gl.tex_power_of_two) {
 		//  Some old graphics cards support only opengl textures which have a

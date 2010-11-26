@@ -34,14 +34,21 @@
 */
 struct SurfaceSDL : public Surface {
 	SurfaceSDL(SDL_Surface & surface) :
-		Surface(surface.w, surface.h, SURFACE_OFFSCREEN),
-		m_surface(&surface)
+		Surface(SURFACE_OFFSCREEN),
+		m_surface(&surface),
+		m_offsx(0), m_offsy(0),
+		m_w(surface.w), m_h(surface.h)
 	{}
 	SurfaceSDL():
 		Surface(),
-		m_surface(0)
+		m_surface(0),
+		m_offsx(0), m_offsy(0),
+		m_w(0), m_h(0)
 	{}
 	~SurfaceSDL();
+
+	virtual uint32_t get_w() {return m_w;}
+	virtual uint32_t get_h() {return m_h;}
 
 	/// Set surface, only call once
 	void set_sdl_surface(SDL_Surface & surface);
@@ -94,6 +101,9 @@ private:
 	explicit SurfaceSDL    (SurfaceSDL const &);
 
 	SDL_Surface * m_surface;
+	int32_t m_offsx;
+	int32_t m_offsy;
+	uint32_t m_w, m_h;
 };
 
 #endif

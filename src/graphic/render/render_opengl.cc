@@ -49,10 +49,10 @@ void SurfaceOpenGL::draw_rect(const Rect rc, const RGBColor clr) {
 
 	glBegin(GL_LINE_LOOP); {
 		glColor3ub(clr.r(), clr.g(), clr.b());
-		glVertex2f(m_offsx + rc.x + 0.5f,        m_offsy + rc.y + 0.5f);
-		glVertex2f(m_offsx + rc.x + rc.w - 0.5f, m_offsy + rc.y + 0.5f);
-		glVertex2f(m_offsx + rc.x + rc.w - 0.5f, m_offsy + rc.y + rc.h - 0.5f);
-		glVertex2f(m_offsx + rc.x + 0.5f,        m_offsy + rc.y + rc.h - 0.5f);
+		glVertex2f(rc.x + 0.5f,        rc.y + 0.5f);
+		glVertex2f(rc.x + rc.w - 0.5f, rc.y + 0.5f);
+		glVertex2f(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);
+		glVertex2f(rc.x + 0.5f,        rc.y + rc.h - 0.5f);
 	} glEnd();
 	glEnable(GL_TEXTURE_2D);
 }
@@ -75,10 +75,10 @@ void SurfaceOpenGL::fill_rect(const Rect rc, const RGBAColor clr) {
 
 	glBegin(GL_QUADS); {
 		glColor4ub(clr.r, clr.g, clr.b, clr.a);
-		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y);
-		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y);
-		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y + rc.h);
-		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y + rc.h);
+		glVertex2f(rc.x,        rc.y);
+		glVertex2f(rc.x + rc.w, rc.y);
+		glVertex2f(rc.x + rc.w, rc.y + rc.h);
+		glVertex2f(rc.x,        rc.y + rc.h);
 	} glEnd();
 	glEnable(GL_TEXTURE_2D);
 }
@@ -126,10 +126,10 @@ void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
 			((static_cast<GLfloat>(factor) / 256.0f),
 			 (static_cast<GLfloat>(factor) / 256.0f),
 			 (static_cast<GLfloat>(factor) / 256.0f));
-		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y);
-		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y);
-		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y + rc.h);
-		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y + rc.h);
+		glVertex2f(rc.x,        rc.y);
+		glVertex2f(rc.x + rc.w, rc.y);
+		glVertex2f(rc.x + rc.w, rc.y + rc.h);
+		glVertex2f(rc.x,        rc.y + rc.h);
 	} glEnd();
 }
 
@@ -151,8 +151,8 @@ void SurfaceOpenGL::draw_line
 	glDisable(GL_TEXTURE_2D);
 	glBegin(GL_LINES); {
 		glColor3ub(color.r(), color.g(), color.b());
-		glVertex2f(x1 + m_offsx + 0.5f, y1 + m_offsy + 0.5f);
-		glVertex2f(x2 + m_offsx + 0.5f, y2 + m_offsy + 0.5f);
+		glVertex2f(x1 + 0.5f, y1 + 0.5f);
+		glVertex2f(x2 + 0.5f, y2 + 0.5f);
 	} glEnd();
 	if (clip) {
 		glPopAttrib();
@@ -251,16 +251,16 @@ void SurfaceOpenGL::blit
 		glColor3f(1.0, 1.0, 1.0);
 		//  top-left
 		glTexCoord2i(srcrc.x,           srcrc.y);
-		glVertex2i  (m_offsx + dst.x,   m_offsy + dst.y);
+		glVertex2i  (dst.x,   dst.y);
 		//  top-right
 		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y);
-		glVertex2f  (m_offsx + dst.x + dst.w,  m_offsy + dst.y);
+		glVertex2f  (dst.x + dst.w,  dst.y);
 		//  bottom-right
 		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y + srcrc.h);
-		glVertex2f  (m_offsx + dst.x + dst.w,  m_offsy + dst.y + dst.h);
+		glVertex2f  (dst.x + dst.w,  dst.y + dst.h);
 		//  bottom-left
 		glTexCoord2i(srcrc.x,           srcrc.y + srcrc.h);
-		glVertex2f  (m_offsx + dst.x,   m_offsy + dst.y + dst.h);
+		glVertex2f  (dst.x,   dst.y + dst.h);
 	} glEnd();
 
 	glLoadIdentity();

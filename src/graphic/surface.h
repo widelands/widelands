@@ -25,6 +25,7 @@
 #include "surfaceptr.h"
 #include "wexception.h"
 
+
 /**
  * The type of a surface. This make it possible to check a bit before drawing.
  */
@@ -43,8 +44,8 @@ struct Surface {
 
 	//@{
 	/// Get width and height
-	virtual uint32_t get_w() const {return m_w;}
-	virtual uint32_t get_h() const {return m_h;}
+	virtual uint32_t get_w() = 0;
+	virtual uint32_t get_h() = 0;
 	//@}
 
 	/// Update the screen. This is only useful for the screen surface.
@@ -132,18 +133,10 @@ struct Surface {
 	virtual void set_type(SurfaceType const type) {m_surf_type = type;}
 
 protected:
-	int32_t m_offsx;
-	int32_t m_offsy;
-	uint32_t m_w, m_h;
-
 	Surface():
-		m_offsx(0), m_offsy(0),
-		m_w(0), m_h(0),
 		m_surf_type(SURFACE_INVALID)
 	{}
-	Surface(int w, int h, SurfaceType t):
-		m_offsx(0), m_offsy(0),
-		m_w(w), m_h(h),
+	Surface(SurfaceType t):
 		m_surf_type(t)
 	{}
 	SurfaceType m_surf_type;

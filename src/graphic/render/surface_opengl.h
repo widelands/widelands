@@ -69,8 +69,8 @@ public:
 
 	//@{
 	/// Get width and height
-	uint32_t get_w() const {return m_w;}
-	uint32_t get_h() const {return m_h;}
+	uint32_t get_w() {return m_w;}
+	uint32_t get_h() {return m_h;}
 	uint32_t get_tex_w() const {return m_tex_w;}
 	uint32_t get_tex_h() const {return m_tex_h;}
 	//@}
@@ -107,9 +107,6 @@ public:
 
 	/// For the slowest: Indirect pixel access
 	inline uint32_t get_pixel(uint32_t x, uint32_t y) {
-		x += m_offsx;
-		y += m_offsy;
-
 		assert(x < get_w());
 		assert(y < get_h());
 		assert(m_locked);
@@ -117,9 +114,6 @@ public:
 		return *reinterpret_cast<uint32_t *>(m_pixels + y * get_pitch() + x * 4);
 	}
 	inline void set_pixel(uint32_t x, uint32_t y, Uint32 clr) {
-		x += m_offsx;
-		y += m_offsy;
-
 		assert(x < get_w());
 		assert(y < get_h());
 		assert(m_locked);
@@ -161,6 +155,9 @@ private:
 
 	uint8_t * m_pixels;
 	bool m_locked;
+
+	/// Logical width and height of the surface
+	uint32_t m_w, m_h;
 
 	/// Keep the size of the opengl texture. This is necessary because some
 	/// systems support only a power of two for texture sizes.
