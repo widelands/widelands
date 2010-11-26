@@ -402,8 +402,8 @@ void Graphic::refresh(bool force)
 
 /**
  * Remove all resources (currently pictures) from the given modules.
- * \note flush(0) does nothing <- obviously wrong it deletes a lot!
-*/
+ * \note flush(0) removes all resources
+ */
 void Graphic::flush(PicMod const module) {
 	// Flush pictures
 
