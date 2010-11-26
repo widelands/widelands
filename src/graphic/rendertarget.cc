@@ -47,7 +47,7 @@ using Widelands::TCoords;
  * \note The bitmap will not be owned by the renderer, i.e. it won't be
  * deleted by the destructor.
  */
-RenderTarget::RenderTarget(Surface * const bmp)
+RenderTarget::RenderTarget(SurfacePtr bmp)
 {
 	m_surface = bmp;
 	reset();
@@ -188,7 +188,7 @@ void RenderTarget::clear()
  */
 void RenderTarget::blit(const Point dst, const PictureID picture)
 {
-	if (Surface * const src = g_gr->get_picture_surface(picture))
+	if (SurfacePtr const src = g_gr->get_picture_surface(picture))
 		doblit
 			(Rect(dst, 0, 0),
 			 src, Rect(Point(0, 0), src->get_w(), src->get_h()));
@@ -205,7 +205,7 @@ void RenderTarget::blit(const Point dst, const PictureID picture)
  */
 void RenderTarget::blit(const Rect dst, const PictureID picture)
 {
-	if (Surface * const src = g_gr->get_picture_surface(picture))
+	if (SurfacePtr const src = g_gr->get_picture_surface(picture))
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
 }
 
@@ -219,12 +219,12 @@ void RenderTarget::blit(const Rect dst, const PictureID picture)
  */
 void RenderTarget::blit_solid(const Point dst, const PictureID picture)
 {
-	Surface * const src = g_gr->get_picture_surface(picture);
+	SurfacePtr const src = g_gr->get_picture_surface(picture);
 	if (not src)
 		return;
 
-	upcast(SurfaceSDL, sdlsurf, src);
-	upcast(SurfaceOpenGL, oglsurf, src);
+	upcast(SurfaceSDL, sdlsurf, src.get());
+	upcast(SurfaceOpenGL, oglsurf, src.get());
 
 	if (sdlsurf) {
 		bool alpha;
@@ -254,8 +254,8 @@ void RenderTarget::blit_solid(const Point dst, const PictureID picture)
  */
 void RenderTarget::blit_copy(Point dst, PictureID picture)
 {
-	Surface * const src = g_gr->get_picture_surface(picture);
-	upcast(SurfaceSDL, sdlsurf, src);
+	SurfacePtr const src = g_gr->get_picture_surface(picture);
+	upcast(SurfaceSDL, sdlsurf, src.get());
 	bool alpha;
 	uint8_t alphaval;
 	if (sdlsurf) {
@@ -278,7 +278,7 @@ void RenderTarget::blitrect
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
 
-	if (Surface * const src = g_gr->get_picture_surface(picture))
+	if (SurfacePtr const src = g_gr->get_picture_surface(picture))
 		doblit(Rect(dst, 0, 0), src, srcrc);
 }
 
@@ -290,7 +290,7 @@ void RenderTarget::blitrect
  */
 void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
 {
-	Surface * const src = g_gr->get_picture_surface(picture);
+	SurfacePtr const src = g_gr->get_picture_surface(picture);
 
 	if (!src)
 		return;
@@ -372,7 +372,7 @@ void RenderTarget::drawanim
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	Surface * const frame =
+	SurfacePtr const frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -411,7 +411,7 @@ void RenderTarget::drawanimrect
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	Surface * const frame =
+	SurfacePtr const frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -486,7 +486,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Rect dst, Surface * const src, Rect srcrc, bool enable_alpha)
+	(Rect dst, SurfacePtr src, Rect srcrc, bool enable_alpha)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
@@ -528,7 +528,7 @@ void RenderTarget::doblit
 	dst += m_rect;
 
 	// Draw it
-	upcast(SurfaceOpenGL, oglsurf, m_surface);
+	upcast(SurfaceOpenGL, oglsurf, m_surface.get());
 	if (oglsurf and dst.w and dst.h)
 		oglsurf->blit(dst, src, srcrc, enable_alpha);
 	else

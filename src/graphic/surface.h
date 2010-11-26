@@ -22,6 +22,7 @@
 
 #include "rgbcolor.h"
 #include "rect.h"
+#include "surfaceptr.h"
 #include "wexception.h"
 
 /**
@@ -117,10 +118,10 @@ struct Surface {
 	virtual void brighten_rect(Rect, int32_t factor) = 0;
 
 	/// This draws a part aother surface to this surface
-	virtual void blit(Point, Surface *, Rect srcrc, bool enable_alpha = false) = 0;
+	virtual void blit(Point, SurfacePtr, Rect srcrc, bool enable_alpha = false) = 0;
 	/// This draws another surface completely in the left
 	/// upper corner of this surface
-	virtual void fast_blit(Surface * surface) {
+	virtual void fast_blit(SurfacePtr surface) {
 		blit
 			(Point(0, 0),
 			 surface,

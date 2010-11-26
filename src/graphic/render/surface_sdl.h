@@ -83,8 +83,8 @@ struct SurfaceSDL : public Surface {
 		 int32_t x2, int32_t y2,
 		 RGBColor, Rect const * clip = 0);
 
-	void blit(Point, Surface *, Rect srcrc, bool enable_alpha = true);
-	void fast_blit(Surface *);
+	void blit(Point, SurfacePtr, Rect srcrc, bool enable_alpha = true);
+	void fast_blit(SurfacePtr);
 
 	void set_subwin(Rect r);
 	void unset_subwin();

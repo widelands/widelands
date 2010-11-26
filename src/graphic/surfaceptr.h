@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +17,16 @@
  *
  */
 
-#include "picture.h"
+#ifndef SURFACEPTR_H
+#define SURFACEPTR_H
 
-#include "surface.h"
-#include "rendertarget.h"
+#include <boost/shared_ptr.hpp>
 
-Picture::~Picture() {
-	free(fname);
-	delete rendertarget;
-}
+struct Surface;
 
+// We define SurfacePtr in its own header file so that code that
+// only stores or forwards those pointers does not need to be polluted
+// by large include dependencies.
+typedef boost::shared_ptr<Surface> SurfacePtr;
+
+#endif // SURFACEPTR_H

@@ -21,6 +21,7 @@
 #define RENDERTARGET_H
 
 #include "picture_id.h"
+#include "surfaceptr.h"
 #include "rect.h"
 #include "rgbcolor.h"
 
@@ -29,7 +30,6 @@
 namespace Widelands {
 struct Player;
 };
-struct Surface;
 
 /**
  * This abstract class represents anything that can be rendered to.
@@ -47,7 +47,7 @@ struct Surface;
  * false and doesn't change the window state at all.
 */
 struct RenderTarget {
-	RenderTarget(Surface *);
+	RenderTarget(SurfacePtr);
 	RenderTarget(RenderTarget & rt):
 		m_surface(rt.m_surface),
 		m_rect(rt.m_rect),
@@ -92,15 +92,15 @@ struct RenderTarget {
 
 	void reset();
 
-	Surface & get_surface() {return *m_surface;}
+	SurfacePtr get_surface() {return m_surface;}
 
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Rect dst, Surface * src, Rect srcrc, bool enable_alpha = true);
+	void doblit(Rect dst, SurfacePtr src, Rect srcrc, bool enable_alpha = true);
 
 	///The target surface
-	Surface * m_surface;
+	SurfacePtr m_surface;
 	///The current clip rectangle
 	Rect m_rect;
 	///Drawing offset

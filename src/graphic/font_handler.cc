@@ -347,14 +347,14 @@ void Font_Handler::render_caret
 	TTF_SizeUTF8(&font, text_caret_pos.c_str(), &caret_x, &caret_y);
 	caret_x += LINE_MARGIN;
 
-	Surface * const caret_surf =
+	SurfacePtr const caret_surf =
 		g_gr->get_picture_surface
 			(g_gr->get_picture(PicMod_Game, "pics/caret.png"));
 
 	//TODO: Implement caret rendering for opengl
 	if (!g_opengl)
 	{
-		upcast(SurfaceSDL, sdlsurf, caret_surf);
+		upcast(SurfaceSDL, sdlsurf, caret_surf.get());
 		assert(sdlsurf);
 		SDL_Surface * const caret_surf_sdl = sdlsurf->get_sdl_surface();
 
@@ -473,7 +473,7 @@ void Font_Handler::draw_richtext
 				img_pos.x = img_surf_w;
 				img_pos.y = 0;
 				if
-					(Surface * const image =
+					(SurfacePtr const image =
 					 g_gr->get_picture_surface //  Not Font, but Game.
 					 	(g_gr->get_picture(PicMod_Game, img_it->c_str())))
 				{
@@ -482,7 +482,7 @@ void Font_Handler::draw_richtext
 						image->get_h() : img_surf_h;
 					img_surf_w = img_surf_w + image->get_w();
 
-					upcast(SurfaceSDL, sdlsurf, image);
+					upcast(SurfaceSDL, sdlsurf, image.get());
 					if (sdlsurf)
 						rend_cur_images.push_back(sdlsurf->get_sdl_surface());
 
@@ -813,7 +813,7 @@ PictureID Font_Handler::convert_sdl_surface
 			(&surface, SDL_SRCCOLORKEY,
 			 SDL_MapRGB(surface.format, bg.r(), bg.g(), bg.b()));
 
-	Surface & surf = g_gr->create_surface(surface, transparent);
+	SurfacePtr surf = g_gr->create_surface(surface, transparent);
 
 	PictureID picid = g_gr->get_picture(PicMod_Font, surf);
 

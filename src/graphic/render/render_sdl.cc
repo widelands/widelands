@@ -257,7 +257,7 @@ void SurfaceSDL::clear() {
 
 
 void SurfaceSDL::blit
-	(Point const dst, Surface * const src, Rect const srcrc, bool enable_alpha)
+	(Point const dst, SurfacePtr src, Rect const srcrc, bool enable_alpha)
 {
 	assert(src);
 	assert(this);
@@ -265,7 +265,7 @@ void SurfaceSDL::blit
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
 	SDL_BlitSurface
-		(dynamic_cast<SurfaceSDL *>(src)->get_sdl_surface(),
+		(dynamic_cast<SurfaceSDL *>(src.get())->get_sdl_surface(),
 		 &srcrect, m_surface, &dstrect);
 }
 
@@ -273,8 +273,8 @@ void SurfaceSDL::blit
 /*
  * Fast blit, simply copy the source to the destination
  */
-void SurfaceSDL::fast_blit(Surface * const src) {
+void SurfaceSDL::fast_blit(SurfacePtr const src) {
 	SDL_BlitSurface
-		(dynamic_cast<SurfaceSDL *>(src)->get_sdl_surface(),
+		(dynamic_cast<SurfaceSDL *>(src.get())->get_sdl_surface(),
 		 0, m_surface, 0);
 }

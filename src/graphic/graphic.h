@@ -41,7 +41,6 @@
 
 namespace UI {struct ProgressWindow;}
 
-struct Surface;
 class Texture;
 struct RenderTarget;
 struct Graphic;
@@ -124,27 +123,26 @@ struct Graphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	Surface & load_image(std::string const &, bool alpha = false);
+	SurfacePtr load_image(std::string const &, bool alpha = false);
 	PictureID & get_picture(PicMod, std::string const &, bool alpha = true)
 		__attribute__ ((pure));
 	PictureID get_picture
-		(PicMod module, Surface &, const std::string & name = "");
+		(PicMod module, SurfacePtr, const std::string & name = "");
 	//__attribute__ ((pure));
 	PictureID & get_no_picture() const;
 
-	Surface * get_picture_surface(const PictureID & id);
-	const Surface * get_picture_surface(const PictureID & id) const;
+	SurfacePtr get_picture_surface(const PictureID & id) const;
 
 	void get_picture_size
 		(const PictureID & pic, uint32_t & w, uint32_t & h) const;
 
 	void save_png(const PictureID &, StreamWrite *) const;
-	void save_png(Surface & surf, StreamWrite *) const;
+	void save_png(SurfacePtr surf, StreamWrite *) const;
 
 	PictureID create_picture_surface(int32_t w, int32_t h, bool alpha = false);
-	Surface & create_surface(SDL_Surface &, bool alpha = false);
-	Surface & create_surface(Surface &, bool alpha = false);
-	Surface & create_surface(int32_t w, int32_t h, bool alpha = false);
+	SurfacePtr create_surface(SDL_Surface &, bool alpha = false);
+	SurfacePtr create_surface(SurfacePtr, bool alpha = false);
+	SurfacePtr create_surface(int32_t w, int32_t h, bool alpha = false);
 	void free_picture_surface(const PictureID & pic);
 
 	PictureID create_grayed_out_pic(const PictureID & picid);
@@ -183,7 +181,7 @@ struct Graphic {
 	Texture * get_maptexture_data(uint32_t id);
 	AnimationGfx * get_animation(uint32_t) const;
 
-	Surface * get_road_texture(int32_t roadtex);
+	SurfacePtr get_road_texture(int32_t roadtex);
 
 	GraphicCaps const & caps() const throw () {return m_caps;}
 
@@ -197,7 +195,7 @@ protected:
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
-	Surface * m_screen;
+	SurfacePtr m_screen;
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.

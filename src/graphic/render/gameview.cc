@@ -973,13 +973,13 @@ void GameView::draw_field
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	upcast(SurfaceSDL, sdlsurf, m_surface);
+	upcast(SurfaceSDL, sdlsurf, m_surface.get());
 #ifdef USE_OPENGL
-	upcast(SurfaceOpenGL, oglsurf, m_surface);
+	upcast(SurfaceOpenGL, oglsurf, m_surface.get());
 #endif
 	if (sdlsurf)
 	{
-		dynamic_cast<SurfaceSDL *>(m_surface)->set_subwin(subwin);
+		sdlsurf->set_subwin(subwin);
 		switch (sdlsurf->format().BytesPerPixel) {
 		case 2:
 			draw_field_int<Uint16>
@@ -998,7 +998,7 @@ void GameView::draw_field
 		default:
 			assert(false);
 		}
-		dynamic_cast<SurfaceSDL *>(m_surface)->unset_subwin();
+		sdlsurf->unset_subwin();
 	}
 #ifdef USE_OPENGL
 	else if (oglsurf) {
@@ -1273,7 +1273,7 @@ void GameView::draw_minimap
 	//       necesary. The created surface could be cached and only redrawn two
 	//       or three times per second
 	const SDL_PixelFormat & fmt =
-		g_gr->get_render_target()->get_surface().format();
+		g_gr->get_render_target()->get_surface()->format();
 	SDL_Surface * surface =
 		SDL_CreateRGBSurface
 			(SDL_SWSURFACE,
@@ -1312,11 +1312,9 @@ void GameView::draw_minimap
 
 	SDL_UnlockSurface(surface);
 
-	Surface & surf = g_gr->create_surface(*surface);
+	SurfacePtr surf = g_gr->create_surface(*surface);
 
-	m_surface->blit(Point(rc.x, rc.y), &surf, rc2, false);
-
-	delete &surf;
+	m_surface->blit(Point(rc.x, rc.y), surf, rc2, false);
 }
 
 void GameView::rendermap_init()

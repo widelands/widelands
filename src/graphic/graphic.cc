@@ -280,11 +280,11 @@ Graphic::Graphic
 	}
 
 	if (g_opengl)
-		m_screen = new SurfaceOpenGL(w, h);
+		m_screen.reset(new SurfaceOpenGL(w, h));
 	else
 #endif
 	{
-		m_screen = new SurfaceSDL(*sdlsurface);
+		m_screen.reset(new SurfaceSDL(*sdlsurface));
 	}
 	m_screen->set_type(SURFACE_SCREEN);
 
@@ -301,7 +301,6 @@ Graphic::~Graphic()
 		flush(static_cast<PicMod>(i));
 
 	delete m_rendertarget;
-	delete m_screen;
 	delete m_roadtextures;
 }
 
@@ -440,7 +439,7 @@ void Graphic::flush_animations() {
 }
 
 
-Surface & Graphic::load_image(std::string const & fname, bool const alpha) {
+SurfacePtr Graphic::load_image(std::string const & fname, bool const alpha) {
 	//log("Graphic::LoadImage(\"%s\")\n", fname.c_str());
 	FileRead fr;
 	SDL_Surface * sdlsurf;
@@ -453,7 +452,7 @@ Surface & Graphic::load_image(std::string const & fname, bool const alpha) {
 	if (!sdlsurf)
 		throw wexception("%s", IMG_GetError());
 
-	Surface & surf = create_surface(*sdlsurf, alpha);
+	SurfacePtr surf = create_surface(*sdlsurf, alpha);
 
 	return surf;
 }
@@ -474,10 +473,10 @@ PictureID & Graphic::get_picture
 	if (it != m_picturemap[module].end()) {
 		return it->second;
 	} else {
-		Surface * surf;
+		SurfacePtr surf;
 
 		try {
-			surf = &load_image(fname, alpha);
+			surf = load_image(fname, alpha);
 			//log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
 		} catch (std::exception const & e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());
@@ -507,14 +506,14 @@ PictureID & Graphic::get_picture
 }
 
 PictureID Graphic::get_picture
-	(PicMod const module, Surface & surf, std::string const & fname)
+	(PicMod const module, SurfacePtr surf, std::string const & fname)
 {
 	Picture & pic = * new Picture();
 	PictureID id = PictureID(&pic);
 	m_picturemap[module].insert(std::make_pair(fname, id));
 
 	pic.module    = module;
-	pic.surface   = &surf;
+	pic.surface   = surf;
 
 	if (fname.size() != 0) {
 		assert(pic.fname == 0);
@@ -547,7 +546,7 @@ PictureID Graphic::get_resized_picture
 	if (g_opengl)
 		g_gr->get_no_picture();
 
-	Surface * const orig = index->surface;
+	SurfacePtr const orig = index->surface;
 	if (orig->get_w() == w and orig->get_h() == h)
 		return index;
 
@@ -581,10 +580,10 @@ PictureID Graphic::get_resized_picture
 		{
 		} else {
 			dynamic_cast<SurfaceSDL *>
-				(pic->surface)->set_sdl_surface(*resize(index, w, h));
+				(pic->surface.get())->set_sdl_surface(*resize(index, w, h));
 		}
 	} else {
-		SurfaceSDL src(*resize(index, width, height));
+		SurfacePtr src(new SurfaceSDL(*resize(index, width, height)));
 
 		// apply rectangle by adjusted size
 		Rect srcrc;
@@ -592,7 +591,6 @@ PictureID Graphic::get_resized_picture
 		srcrc.h = std::min(h, height);
 		srcrc.x = (width - srcrc.w) / 2;
 		srcrc.y = (height - srcrc.h) / 2;
-
 
 		g_gr->get_surface_renderer(pic)->blitrect //  Get the rendertarget
 			(Point((w - srcrc.w) / 2, (h - srcrc.h) / 2),
@@ -614,17 +612,17 @@ PictureID Graphic::get_resized_picture
 SDL_Surface * Graphic::resize
 	(const PictureID index, uint32_t const w, uint32_t const h)
 {
-	Surface & orig = *g_gr->get_picture_surface(index);
+	SurfacePtr orig = g_gr->get_picture_surface(index);
 
 	if (g_opengl)
 		throw wexception("Graphic::resize() not yet implemented for opengl");
 	else
 	{
-		SurfaceSDL & origsdl = dynamic_cast<SurfaceSDL &>(orig);
+		SurfaceSDL & origsdl = *dynamic_cast<SurfaceSDL *>(orig.get());
 		return
 			zoomSurface
 				(origsdl.get_sdl_surface(),
-				 double(w) / orig.get_w(), double(h) / orig.get_h(),
+				 double(w) / orig->get_w(), double(h) / orig->get_h(),
 				 1);
 	}
 }
@@ -638,10 +636,10 @@ void Graphic::get_picture_size
 	(const PictureID & pic, uint32_t & w, uint32_t & h) const
 {
 	assert (pic->surface);
-	Surface & bmp = *pic->surface;
+	SurfacePtr bmp = pic->surface;
 
-	w = bmp.get_w();
-	h = bmp.get_h();
+	w = bmp->get_w();
+	h = bmp->get_h();
 }
 
 /**
@@ -650,7 +648,7 @@ void Graphic::get_picture_size
  * @param surf The Surface to save
  * @param sw a StreamWrite where the png is written to
  */
-void Graphic::save_png(Surface & surf, StreamWrite * sw) const
+void Graphic::save_png(SurfacePtr surf, StreamWrite * sw) const
 {
 	// Save a png
 	png_structp png_ptr =
@@ -686,7 +684,7 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 
 	// Fill info struct
 	png_set_IHDR
-		(png_ptr, info_ptr, surf.get_w(), surf.get_h(),
+		(png_ptr, info_ptr, surf->get_w(), surf->get_h(),
 		 8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
 		 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
@@ -701,8 +699,8 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 	png_set_packing(png_ptr);
 
 	{
-		uint32_t surf_w = surf.get_w();
-		uint32_t surf_h = surf.get_h();
+		uint32_t surf_w = surf->get_w();
+		uint32_t surf_h = surf->get_h();
 		uint32_t row_size = 4 * surf_w;
 
 		png_bytep rowb = 0;
@@ -710,9 +708,9 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 
 		//Write each row
 		SDL_PixelFormat * fmt;
-		upcast(SurfaceSDL, sdlsurf, &surf);
+		upcast(SurfaceSDL, sdlsurf, surf.get());
 #ifdef USE_OPENGL
-		upcast(SurfaceOpenGL, oglsurf, &surf);
+		upcast(SurfaceOpenGL, oglsurf, surf.get());
 #endif
 		if (sdlsurf)
 		{
@@ -776,7 +774,7 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 */
 void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
 {
-	Surface & surf = const_cast<Surface &>(*get_picture_surface(pic_index));
+	SurfacePtr surf = get_picture_surface(pic_index);
 	save_png(surf, sw);
 }
 
@@ -795,14 +793,14 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
 PictureID Graphic::create_picture_surface(int32_t w, int32_t h, bool alpha)
 {
 	//log(" Graphic::create_picture_surface(%d, %d)\n", w, h);
-	Surface & surf = create_surface(w, h, alpha);
+	SurfacePtr surf = create_surface(w, h, alpha);
 
 	Picture & pic = *new Picture();
 	PictureID id = PictureID(&pic);
 	m_picturemap[PicSurface].insert(std::make_pair("", id));
 
 	pic.module    = PicSurface; // mark as surface
-	pic.surface   = &surf;
+	pic.surface   = surf;
 	assert(pic.rendertarget == 0);
 	pic.rendertarget = new RenderTarget(pic.surface);
 
@@ -818,12 +816,12 @@ PictureID Graphic::create_picture_surface(int32_t w, int32_t h, bool alpha)
  * @param alpha if true the surface is created with alpha channel
  * @return the new Surface created from the SDL_Surface
  */
-Surface & Graphic::create_surface(SDL_Surface & surf, bool alpha)
+SurfacePtr Graphic::create_surface(SDL_Surface & surf, bool alpha)
 {
 	if (g_opengl)
 	{
 #ifdef USE_OPENGL
-		return *new SurfaceOpenGL(surf);
+		return SurfacePtr(new SurfaceOpenGL(surf));
 #endif
 	} else {
 		SDL_Surface * surface;
@@ -832,7 +830,7 @@ Surface & Graphic::create_surface(SDL_Surface & surf, bool alpha)
 		else
 			surface = SDL_DisplayFormat(&surf);
 		SDL_FreeSurface(&surf);
-		return *new SurfaceSDL(*surface);
+		return SurfacePtr(new SurfaceSDL(*surface));
 	}
 }
 
@@ -843,33 +841,35 @@ Surface & Graphic::create_surface(SDL_Surface & surf, bool alpha)
 * @param alpha if true the surface is created with alpha channel
 * @return the new Surface
 */
-Surface & Graphic::create_surface(Surface & surf, bool alpha)
+SurfacePtr Graphic::create_surface(SurfacePtr surf, bool alpha)
 {
-	upcast(SurfaceSDL, sdlsurf, &surf);
+	upcast(SurfaceSDL, sdlsurf, surf.get());
 	if (sdlsurf)
 	{
 		if (alpha)
 			return
-				*new SurfaceSDL
-					(*SDL_DisplayFormatAlpha(sdlsurf->get_sdl_surface()));
+				SurfacePtr
+					(new SurfaceSDL
+					 (*SDL_DisplayFormatAlpha(sdlsurf->get_sdl_surface())));
 		else
 			return
-				*new SurfaceSDL
-					(*SDL_DisplayFormat(sdlsurf->get_sdl_surface()));
+				SurfacePtr
+					(new SurfaceSDL
+					 (*SDL_DisplayFormat(sdlsurf->get_sdl_surface())));
 	}
 	else
 	{
-		Surface & tsurf = create_surface(surf.get_w(), surf.get_h());
+		SurfacePtr tsurf = create_surface(surf->get_w(), surf->get_h());
 
-		surf.lock();
-		tsurf.lock();
-		for (unsigned int x = 0; x < surf.get_w(); x++)
-			for (unsigned int y = 0; y < surf.get_h(); y++)
+		surf->lock();
+		tsurf->lock();
+		for (unsigned int x = 0; x < surf->get_w(); x++)
+			for (unsigned int y = 0; y < surf->get_h(); y++)
 			{
-				tsurf.set_pixel(x, y, surf.get_pixel(x, y));
+				tsurf->set_pixel(x, y, surf->get_pixel(x, y));
 			}
-		surf.unlock();
-		tsurf.unlock();
+		surf->unlock();
+		tsurf->unlock();
 
 		return tsurf;
 	}
@@ -883,12 +883,12 @@ Surface & Graphic::create_surface(Surface & surf, bool alpha)
 * @param alpha if true the surface is created with alpha channel
 * @return the new created surface
 */
-Surface & Graphic::create_surface(int32_t w, int32_t h, bool alpha)
+SurfacePtr Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 {
 	if (g_opengl)
 	{
 #ifdef USE_OPENGL
-		return *new SurfaceOpenGL(w, h);
+		return SurfacePtr(new SurfaceOpenGL(w, h));
 #endif
 	} else {
 		const SDL_PixelFormat & format = m_screen->format();
@@ -900,9 +900,9 @@ Surface & Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 		if (alpha) {
 			SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
 			SDL_FreeSurface(&tsurf);
-			return *new SurfaceSDL(surf);
+			return SurfacePtr(new SurfaceSDL(surf));
 		}
-		return *new SurfaceSDL(tsurf);
+		return SurfacePtr(new SurfaceSDL(tsurf));
 	}
 }
 
@@ -924,8 +924,7 @@ void Graphic::free_picture_surface(const PictureID & picid) {
 	}
 	assert(picid->module == PicMod_Font || picid->module == PicSurface);
 
-	delete picid->surface;
-	picid->surface = 0;
+	picid->surface.reset();
 	delete picid->rendertarget;
 	picid->rendertarget = 0;
 	delete picid->fname;
@@ -946,21 +945,21 @@ void Graphic::free_picture_surface(const PictureID & picid) {
 */
 PictureID Graphic::create_grayed_out_pic(const PictureID & picid) {
 	if (picid != get_no_picture()) {
-		Surface & s = create_surface(*get_picture_surface(picid), true);
+		SurfacePtr s = create_surface(get_picture_surface(picid), true);
 #ifdef USE_OPENGL
-		upcast(SurfaceOpenGL, gl_dest, &s);
-		upcast(SurfaceOpenGL, gl_src, get_picture_surface(picid));
+		upcast(SurfaceOpenGL, gl_dest, s.get());
+		upcast(SurfaceOpenGL, gl_src, get_picture_surface(picid).get());
 #endif
-		upcast(SurfaceSDL, sdl_s, &s);
+		upcast(SurfaceSDL, sdl_s, s.get());
 		SDL_PixelFormat const * format = 0;
 		if (sdl_s)
 			format = &(sdl_s->format());
-		uint32_t const w = s.get_w(), h = s.get_h();
+		uint32_t const w = s->get_w(), h = s->get_h();
 #ifdef USE_OPENGL
 		if (gl_src)
 			gl_src->lock();
 #endif
-		s.lock();
+		s->lock();
 		for (uint32_t y = 0; y < h; ++y)
 			for (uint32_t x = 0; x < w; ++x) {
 				uint8_t r, g, b, a;
@@ -1004,7 +1003,7 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid) {
 						 	 gray, gray, gray, a));
 
 			}
-		s.unlock();
+		s->unlock();
 #ifdef USE_OPENGL
 		if (gl_src)
 			gl_src->unlock();
@@ -1137,7 +1136,7 @@ void Graphic::screenshot(const char & fname) const
 {
 	log("Save screenshot to %s\n", &fname);
 	StreamWrite * sw = g_fs->OpenStreamWrite(std::string(&fname));
-	save_png(*m_screen, sw);
+	save_png(m_screen, sw);
 	delete sw;
 }
 
@@ -1168,12 +1167,7 @@ void Graphic::m_png_flush_function
 * Returns the bitmap that belongs to the given picture ID.
 * May return 0 if the given picture does not exist.
 */
-Surface * Graphic::get_picture_surface(const PictureID & id)
-{
-	return id->surface;
-}
-
-const Surface * Graphic::get_picture_surface(const PictureID & id) const
+SurfacePtr Graphic::get_picture_surface(const PictureID & id) const
 {
 	return id->surface;
 }
@@ -1210,7 +1204,7 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
  * if not done yet.
  * \return The road texture
 */
-Surface * Graphic::get_road_texture(int32_t const roadtex)
+SurfacePtr Graphic::get_road_texture(int32_t const roadtex)
 {
 	if (not m_roadtextures) {
 		// Load the road textures

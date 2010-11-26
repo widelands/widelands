@@ -75,7 +75,7 @@ throw (_wexception)
 					if (!surf)
 						continue; //  Illegal pic. Skip it.
 
-					Surface & picsurf = g_gr->create_surface(*surf);
+					SurfacePtr picsurf = g_gr->create_surface(*surf);
 
 					std::string picname = FileSystem::FS_Filename(pname->c_str());
 					picname = "map:" + picname;

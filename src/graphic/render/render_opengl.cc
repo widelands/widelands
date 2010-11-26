@@ -174,16 +174,16 @@ void SurfaceOpenGL::clear()
 
 
 void SurfaceOpenGL::blit
-	(Point const dst, Surface * const src, Rect const srcrc, bool enable_alpha)
+	(Point const dst, SurfacePtr const src, Rect const srcrc, bool enable_alpha)
 {
 	blit(Rect(dst, srcrc.w, srcrc.h), src, srcrc, enable_alpha);
 }
 
 
 void SurfaceOpenGL::blit
-	(Rect dst, Surface * src, Rect srcrc, bool enable_alpha)
+	(Rect dst, SurfacePtr src, Rect srcrc, bool enable_alpha)
 {
-	upcast(SurfaceOpenGL, oglsrc, src);
+	upcast(SurfaceOpenGL, oglsrc, src.get());
 
 	assert(g_opengl);
 #ifdef DEBUG

@@ -20,8 +20,9 @@
 #ifndef PICTURE_H
 #define PICTURE_H
 
+#include "surfaceptr.h"
+
 struct RenderTarget;
-struct Surface;
 
 /// picture module flags
 enum PicMod {
@@ -44,13 +45,13 @@ enum PicMod {
  * is gone too
  */
 struct Picture {
-	Picture() : module(INVALID), surface(0), fname(0), rendertarget(0) {}
+	Picture() : module(INVALID), fname(0), rendertarget(0) {}
 	~Picture();
 
 	//PicMod lists which 'buffer' to load the images in.
 	// INVALID if unused, MaxModule not a legal module
 	PicMod    module;
-	Surface * surface;
+	SurfacePtr surface;
 
 	char         * fname; //  module & (PicMod_UI|PicMod_Menu|PicMod_Game)
 	RenderTarget * rendertarget; //  module & (PicMod_Font | PicSurface)
