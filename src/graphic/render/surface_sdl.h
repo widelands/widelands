@@ -34,16 +34,16 @@
 */
 struct SurfaceSDL : public Surface {
 	SurfaceSDL(SDL_Surface & surface) :
-		Surface(SURFACE_OFFSCREEN),
 		m_surface(&surface),
 		m_offsx(0), m_offsy(0),
-		m_w(surface.w), m_h(surface.h)
+		m_w(surface.w), m_h(surface.h),
+		m_isscreen(false)
 	{}
 	SurfaceSDL():
-		Surface(),
 		m_surface(0),
 		m_offsx(0), m_offsy(0),
-		m_w(0), m_h(0)
+		m_w(0), m_h(0),
+		m_isscreen(false)
 	{}
 	~SurfaceSDL();
 
@@ -96,6 +96,8 @@ struct SurfaceSDL : public Surface {
 	void set_subwin(Rect r);
 	void unset_subwin();
 
+	void set_isscreen(bool screen);
+
 private:
 	SurfaceSDL & operator= (SurfaceSDL const &);
 	explicit SurfaceSDL    (SurfaceSDL const &);
@@ -104,6 +106,7 @@ private:
 	int32_t m_offsx;
 	int32_t m_offsy;
 	uint32_t m_w, m_h;
+	bool m_isscreen;
 };
 
 #endif

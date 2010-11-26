@@ -25,21 +25,10 @@
 #include "surfaceptr.h"
 #include "wexception.h"
 
-
-/**
- * The type of a surface. This make it possible to check a bit before drawing.
- */
-enum SurfaceType {
-	SURFACE_INVALID,
-	SURFACE_SOURCE,       ///< This sourface is used as source only
-	SURFACE_OFFSCREEN,    ///< Use surface as source and destinantion
-	SURFACE_SCREEN        ///< This draws to screen directly
-};
-
-/// A virtual base for rendering. Objects of Surface are used as Source or
-/// destination for drawing. Surfaces are created with the
-/// Graphic::create_surface() functions.
+/// An interface to surfaces. Surfaces are used as destinations
+/// for drawing.
 struct Surface {
+	Surface() {}
 	virtual ~Surface() {}
 
 	//@{
@@ -129,17 +118,6 @@ struct Surface {
 			 Rect(Point(0, 0), surface->get_w(), surface->get_h()));
 	}
 
-	/// set the type of the surface
-	virtual void set_type(SurfaceType const type) {m_surf_type = type;}
-
-protected:
-	Surface():
-		m_surf_type(SURFACE_INVALID)
-	{}
-	Surface(SurfaceType t):
-		m_surf_type(t)
-	{}
-	SurfaceType m_surf_type;
 private:
 	// surfaces cannot be copied
 	Surface(const Surface &);

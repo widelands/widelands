@@ -187,7 +187,7 @@ void SurfaceOpenGL::blit
 
 	assert(g_opengl);
 #ifdef DEBUG
-	if (m_surf_type != SURFACE_SCREEN)
+	if (!m_isscreen)
 	{
 		throw wexception
 			("Surface not the screen: Offscreen rendering not possible");

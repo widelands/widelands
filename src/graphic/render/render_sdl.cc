@@ -49,7 +49,7 @@ using Widelands::Road;
  * Updating the whole Surface
  */
 void SurfaceSDL::update() {
-	if (m_surf_type == SURFACE_SCREEN) {
+	if (m_isscreen) {
 		//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
 		SDL_Flip(m_surface);
 		//log("SurfaceSDL::update(): update complete screen\n");

@@ -76,12 +76,12 @@ GLenum _handle_glerror(const char * file, unsigned int line)
 }
 
 SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
-	Surface(SURFACE_SOURCE),
 	m_glTexUpdate(false),
 	m_pixels     (0),
 	m_locked(false),
 	m_w(par_surface.w),
-	m_h(par_surface.h)
+	m_h(par_surface.h),
+	m_isscreen(false)
 {
 	GLuint texture;
 	SDL_Surface * surface;
@@ -268,13 +268,13 @@ SurfaceOpenGL::~SurfaceOpenGL() {
 
 
 SurfaceOpenGL::SurfaceOpenGL(int const w, int const h):
-	Surface(SURFACE_SOURCE),
 	m_texture(0),
 	m_glTexUpdate(false),
 	m_pixels     (0),
 	m_locked(false),
 	m_w(w),
-	m_h(h)
+	m_h(h),
+	m_isscreen(false)
 {
 	if (g_gr and g_gr->caps().gl.tex_power_of_two) {
 		//  Some old graphics cards support only opengl textures which have a
@@ -322,14 +322,14 @@ void SurfaceOpenGL::lock() {
 	if (m_locked)
 		return;
 	try {
-		if (m_surf_type == SURFACE_SCREEN)
+		if (m_isscreen)
 			m_pixels = new uint8_t[m_w * m_h * 4];
 		else
 			m_pixels = new uint8_t[m_tex_w * m_tex_h * 4];
 	} catch (std::bad_alloc) {
 		return;
 	}
-	if (m_surf_type == SURFACE_SCREEN)
+	if (m_isscreen)
 		glReadPixels
 			(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels);
 	else if (m_texture) {
@@ -352,7 +352,7 @@ void SurfaceOpenGL::unlock() {
 	assert(m_pixels);
 
 	if (m_glTexUpdate) {
-		assert(m_surf_type != SURFACE_SCREEN);
+		assert(!m_isscreen);
 		if (!m_texture)
 		{
 			GLuint texture;

@@ -25,7 +25,7 @@
 
 SurfaceSDL::~SurfaceSDL() {
 	//log("SurfaceSDL::~SurfaceSDL()\n");
-	if (m_surface and m_surf_type != SURFACE_SCREEN)
+	if (m_surface and !m_isscreen)
 		SDL_FreeSurface(m_surface);
 }
 
@@ -146,4 +146,9 @@ void SurfaceSDL::unset_subwin() {
 	m_offsy = 0;
 	m_w = m_surface->w;
 	m_h = m_surface->h;
+}
+
+void SurfaceSDL::set_isscreen(bool screen)
+{
+	m_isscreen = screen;
 }

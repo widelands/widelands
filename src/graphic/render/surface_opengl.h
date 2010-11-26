@@ -80,7 +80,7 @@ public:
 	GLuint get_texture() const
 	{
 #if defined(DEBUG)
-		if (m_surf_type != SURFACE_SOURCE)
+		if (m_isscreen)
 			throw wexception
 				("Try to get opengl texture id but not a source surface");
 		if (not m_texture)
@@ -162,6 +162,10 @@ private:
 	/// Keep the size of the opengl texture. This is necessary because some
 	/// systems support only a power of two for texture sizes.
 	uint32_t m_tex_w, m_tex_h;
+
+	//TODO: should be superseded by class hierarchy
+public:
+	bool m_isscreen;
 };
 
 #endif

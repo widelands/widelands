@@ -280,13 +280,18 @@ Graphic::Graphic
 	}
 
 	if (g_opengl)
-		m_screen.reset(new SurfaceOpenGL(w, h));
+	{
+		boost::shared_ptr<SurfaceOpenGL> screen(new SurfaceOpenGL(w, h));
+		screen->m_isscreen = true;
+		m_screen = screen;
+	}
 	else
 #endif
 	{
-		m_screen.reset(new SurfaceSDL(*sdlsurface));
+		boost::shared_ptr<SurfaceSDL> screen(new SurfaceSDL(*sdlsurface));
+		screen->set_isscreen(true);
+		m_screen = screen;
 	}
-	m_screen->set_type(SURFACE_SCREEN);
 
 	m_sdl_screen = sdlsurface;
 	m_rendertarget = new RenderTarget(m_screen);
