@@ -124,20 +124,17 @@ void Font_Handler::draw_string
 				m_cache.erase (i);
 			}
 		} else {
-			//not cached, create a new surface
+			//not cached, create a new surface and cache it
 			ci.picture_id =
 				create_text_surface
 					(font, fg, bg, text, align, wrap, 0, caret, transparent);
-			// Now cache it
-			assert(ci.picture_id->surface);
 			g_gr->get_picture_size(ci.picture_id, ci.w, ci.h);
 			ci.f = &font;
 			m_cache.push_front (ci);
 
-			while (m_cache.size() > CACHE_ARRAY_SIZE) {
-				g_gr->free_picture_surface(m_cache.back().picture_id);
+			while (m_cache.size() > CACHE_ARRAY_SIZE)
 				m_cache.pop_back();
-			}
+
 			//Set for alignment and blitting
 			picid = ci.picture_id;
 			w = ci.w;
@@ -147,9 +144,9 @@ void Font_Handler::draw_string
 		//  Widget gave us an explicit picid.
 		g_gr->get_picture_size(widget_cache_id, w, h);
 		picid = widget_cache_id;
-	} else { // We need to (re)create the picid for the widget.
-		if (widget_cache == Widget_Cache_Update)
-			g_gr->free_picture_surface(widget_cache_id);
+	} else {
+		// We need to (re)create the picid for the widget.
+		// The old picture is freed automatically
 		widget_cache_id =
 			create_text_surface
 				(font, fg, bg, text, align, wrap, 0, caret, transparent);
@@ -428,9 +425,6 @@ void Font_Handler::draw_richtext
 	if (widget_cache == Widget_Cache_Use)
 		picid = widget_cache_id;
 	else {
-		if (widget_cache == Widget_Cache_Update) {
-			g_gr->free_picture_surface(widget_cache_id);
-		}
 		std::vector<Richtext_Block> blocks;
 		Text_Parser p;
 		p.parse(text, blocks);
@@ -815,7 +809,7 @@ PictureID Font_Handler::convert_sdl_surface
 
 	SurfacePtr surf = g_gr->create_surface(surface, transparent);
 
-	PictureID picid = g_gr->get_picture(PicMod_Font, surf);
+	PictureID picid = g_gr->make_picture(surf);
 
 	return picid;
 }
@@ -846,15 +840,9 @@ void Font_Handler::do_align
 /*
  * Flushes the cached picture ids
  */
-void Font_Handler::flush_cache() {
-	while (!m_cache.empty()) {
-		g_gr->free_picture_surface (m_cache.front().picture_id);
-		m_cache.pop_front();
-	}
-}
-//Deletes widget controlled surface
-void Font_Handler::delete_widget_cache(PictureID const widget_cache_id) {
-	g_gr->free_picture_surface(widget_cache_id);
+void Font_Handler::flush_cache()
+{
+	m_cache.clear();
 }
 
 //Inserts linebreaks into a text, so it doesn't get bigger than max_width

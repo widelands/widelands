@@ -185,9 +185,8 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 }
 
 
-Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu() {
-	container_iterate_const(std::vector<PictureID>, m_surfaces, i)
-		g_gr->free_picture_surface(*i.current);
+Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu()
+{
 }
 
 

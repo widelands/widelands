@@ -79,11 +79,8 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 			(m_pic_background, m_xres, m_yres, Graphic::ResizeMode_Loose);
 }
 
-Fullscreen_Menu_Base::~Fullscreen_Menu_Base() {
-	if
-		(m_res_background != g_gr->get_no_picture() and
-		 m_res_background != m_pic_background)
-		g_gr->free_picture_surface(m_res_background);
+Fullscreen_Menu_Base::~Fullscreen_Menu_Base()
+{
 }
 
 

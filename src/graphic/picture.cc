@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,18 @@
 #include "surface.h"
 #include "rendertarget.h"
 
-Picture::~Picture() {
-	free(fname);
+PictureImpl::~PictureImpl() {
 	delete rendertarget;
 }
 
+uint32_t PictureImpl::get_w()
+{
+	assert(surface);
+	return surface->get_w();
+}
+
+uint32_t PictureImpl::get_h()
+{
+	assert(surface);
+	return surface->get_h();
+}

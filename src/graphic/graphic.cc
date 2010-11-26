@@ -32,6 +32,7 @@
 #include "io/streamwrite.h"
 
 #include "font_handler.h"
+#include "picture.h"
 #include "rendertarget.h"
 #include "texture.h"
 
@@ -50,6 +51,7 @@
 
 #include <cstring>
 #include <iostream>
+#include <boost/concept_check.hpp>
 
 Graphic * g_gr;
 bool g_opengl;
@@ -74,8 +76,6 @@ Graphic::Graphic
 	m_update_fullscreen(false),
 	m_roadtextures     (0)
 {
-	m_picturemap.resize(MaxModule);
-
 	// Initialize the table used to create grayed pictures
 	for
 		(uint32_t i = 0, r = 0, g = 0, b = 0;
@@ -297,9 +297,6 @@ Graphic::Graphic
 */
 Graphic::~Graphic()
 {
-	for (size_t i = 1; i < m_picturemap.size(); ++i)
-		flush(static_cast<PicMod>(i));
-
 	delete m_rendertarget;
 	delete m_roadtextures;
 }
@@ -400,33 +397,27 @@ void Graphic::refresh(bool force)
 }
 
 /**
- * Remove all resources (currently pictures) from the given modules.
- * \note flush(0) removes all resources
+ * Clear all cached resources from the given module.
+ *
+ * \note This only removes the cache entries. If the corresonding resources
+ * are still in use somewhere, they will not be freed.
  */
-void Graphic::flush(PicMod const module) {
-	// Flush pictures
+void Graphic::flush(PicMod const module)
+{
+	std::vector<std::string> eraselist;
 
-	//pmit b, e = m_picturemap.end();
-	for (size_t i = 0; i < m_picturemap.size(); ++i) {
-		if (static_cast<PicMod>(i) == module) {
-			m_picturemap[i].clear();
-		}
+	for (pmit it = m_picturemap.begin(); it != m_picturemap.end(); ++it) {
+		it->second.modules &= ~(1 << module);
+		if (!it->second.modules)
+			eraselist.push_back(it->first);
 	}
 
-	if (!module || module & PicMod_Game) {
-		container_iterate_const(std::vector<Texture *>, m_maptextures, i)
-			delete *i.current;
-		m_maptextures.clear();
-
-		container_iterate_const(std::vector<AnimationGfx *>, m_animations, i)
-			delete *i.current;
-		m_animations.clear();
-
-		delete m_roadtextures;
-		m_roadtextures = 0;
+	while (!eraselist.empty()) {
+		m_picturemap.erase(eraselist.back());
+		eraselist.pop_back();
 	}
 
-	if (not module or module & PicMod_UI) // Flush the cached Fontdatas
+	if (module == PicMod_UI) // Flush the cached Fontdatas
 		UI::g_fh->flush_cache();
 }
 
@@ -468,65 +459,66 @@ PictureID & Graphic::get_picture
 	(PicMod const module, const std::string & fname, bool alpha)
 {
 	//  Check if the picture is already loaded.
-	pmit it = m_picturemap[module].find(fname);
+	pmit it = m_picturemap.find(fname);
 
-	if (it != m_picturemap[module].end()) {
-		return it->second;
-	} else {
-		SurfacePtr surf;
+	if (it == m_picturemap.end()) {
+		boost::shared_ptr<PictureImpl> pic(new PictureImpl);
+		pic->name = fname;
 
 		try {
-			surf = load_image(fname, alpha);
+			pic->surface = load_image(fname, alpha);
 			//log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
 		} catch (std::exception const & e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());
 			return get_no_picture();
 		}
-		// Convert the surface accordingly
 
-		// Fill in a free slot in the pictures array
-		Picture & pic = * new Picture();
-		PictureID id = PictureID(&pic);
-		m_picturemap[module].insert(std::make_pair(fname, id));
+		PictureRec rec;
+		rec.picture = pic;
 
-		assert(pic.fname == 0);
-		pic.fname = strdup(fname.c_str());
-
-		//  FIXME no proper check for NULL return value!
-		assert(pic.fname != 0);
-
-		pic.surface = surf;
-
-		it = m_picturemap[module].find(fname);
+		it = m_picturemap.insert(std::make_pair(fname, rec)).first;
 	}
 
-	it->second->module = module;
-
-	return it->second;
+	it->second.modules |= 1 << module;
+	return it->second.picture;
 }
 
-PictureID Graphic::get_picture
-	(PicMod const module, SurfacePtr surf, std::string const & fname)
+/**
+ * Add the given surface as a picture to the cache under the given name.
+ *
+ * This overwrites pre-existing cache entries, if any.
+ */
+PictureID & Graphic::add_picture_to_cache(PicMod module, const std::string & name, SurfacePtr surf)
 {
-	Picture & pic = * new Picture();
-	PictureID id = PictureID(&pic);
-	m_picturemap[module].insert(std::make_pair(fname, id));
+	boost::shared_ptr<PictureImpl> pic(new PictureImpl);
+	pic->name = name;
+	pic->surface = surf;
 
-	pic.module    = module;
-	pic.surface   = surf;
+	PictureRec rec;
+	rec.picture = pic;
+	rec.modules = 1 << module;
 
-	if (fname.size() != 0) {
-		assert(pic.fname == 0);
-		pic.fname = strdup(fname.c_str());
-	} else
-		pic.fname = 0;
+	m_picturemap.insert(std::make_pair(name, rec));
 
-	//return m_picturemap.find(fname);
-	return id;
+	return rec.picture;
 }
 
-PictureID & Graphic::get_no_picture() const {
-	static PictureID invalid = PictureID(new Picture());
+
+/**
+ * TODO: get rid of this, it contradicts the new philosophy
+ */
+PictureID Graphic::make_picture
+	(SurfacePtr surf, std::string const & name)
+{
+	boost::shared_ptr<PictureImpl> pic(new PictureImpl);
+	pic->surface = surf;
+	pic->name = name;
+	return pic;
+}
+
+PictureID & Graphic::get_no_picture() const
+{
+	static PictureID invalid(new PictureImpl);
 	return invalid;
 }
 
@@ -546,7 +538,7 @@ PictureID Graphic::get_resized_picture
 	if (g_opengl)
 		g_gr->get_no_picture();
 
-	SurfacePtr const orig = index->surface;
+	SurfacePtr const orig = index->impl().surface;
 	if (orig->get_w() == w and orig->get_h() == h)
 		return index;
 
@@ -580,7 +572,7 @@ PictureID Graphic::get_resized_picture
 		{
 		} else {
 			dynamic_cast<SurfaceSDL *>
-				(pic->surface.get())->set_sdl_surface(*resize(index, w, h));
+				(pic->impl().surface.get())->set_sdl_surface(*resize(index, w, h));
 		}
 	} else {
 		SurfacePtr src(new SurfaceSDL(*resize(index, width, height)));
@@ -594,7 +586,7 @@ PictureID Graphic::get_resized_picture
 
 		g_gr->get_surface_renderer(pic)->blitrect //  Get the rendertarget
 			(Point((w - srcrc.w) / 2, (h - srcrc.h) / 2),
-			 get_picture(index->module, src), srcrc);
+			 make_picture(src), srcrc);
 	}
 	return pic;
 }
@@ -635,11 +627,8 @@ SDL_Surface * Graphic::resize
 void Graphic::get_picture_size
 	(const PictureID & pic, uint32_t & w, uint32_t & h) const
 {
-	assert (pic->surface);
-	SurfacePtr bmp = pic->surface;
-
-	w = bmp->get_w();
-	h = bmp->get_h();
+	w = pic->get_w();
+	h = pic->get_h();
 }
 
 /**
@@ -792,19 +781,10 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
 */
 PictureID Graphic::create_picture_surface(int32_t w, int32_t h, bool alpha)
 {
-	//log(" Graphic::create_picture_surface(%d, %d)\n", w, h);
-	SurfacePtr surf = create_surface(w, h, alpha);
-
-	Picture & pic = *new Picture();
-	PictureID id = PictureID(&pic);
-	m_picturemap[PicSurface].insert(std::make_pair("", id));
-
-	pic.module    = PicSurface; // mark as surface
-	pic.surface   = surf;
-	assert(pic.rendertarget == 0);
-	pic.rendertarget = new RenderTarget(pic.surface);
-
-	return id;
+	boost::shared_ptr<PictureImpl> pic(new PictureImpl);
+	pic->surface = create_surface(w, h, alpha);
+	pic->rendertarget = new RenderTarget(pic->surface);
+	return pic;
 }
 
 /**
@@ -907,37 +887,6 @@ SurfacePtr Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 }
 
 /**
- * Free the given surface.
- * Unlike normal pictures, surfaces are not freed by flush().
- *
- * @param picid the PictureID ot to be freed
-*/
-void Graphic::free_picture_surface(const PictureID & picid) {
-	if
-		(picid->module != PicMod_Font &&
-		 picid->module != PicSurface)
-	{
-		log
-			("Graphic::free_surface ignoring free of %u %s\n",
-			 picid->module, picid->fname);
-		return;
-	}
-	assert(picid->module == PicMod_Font || picid->module == PicSurface);
-
-	picid->surface.reset();
-	delete picid->rendertarget;
-	picid->rendertarget = 0;
-	delete picid->fname;
-	picid->fname = 0;
-
-	container_iterate(Picturemap, m_picturemap[picid->module], it)
-		if (it.current->second == picid) {
-			m_picturemap[picid->module].erase(it.current);
-			break;
-		}
-}
-
-/**
 * create a grayed version.
 *
 * @param picid the PictureID ot to grayed out
@@ -1008,7 +957,7 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid) {
 		if (gl_src)
 			gl_src->unlock();
 #endif
-		return get_picture(PicSurface, s);
+		return make_picture(s);
 	} else
 		return get_no_picture();
 }
@@ -1021,7 +970,7 @@ RenderTarget * Graphic::get_surface_renderer(const PictureID & pic) {
 	//assert(pic < m_pictures.size());
 	//  assert(m_pictures[pic].module == 0xff); fails showing terrains in editor
 
-	RenderTarget & rt = *pic->rendertarget;
+	RenderTarget & rt = *pic->impl().rendertarget;
 
 	rt.reset();
 
@@ -1166,10 +1115,12 @@ void Graphic::m_png_flush_function
 /**
 * Returns the bitmap that belongs to the given picture ID.
 * May return 0 if the given picture does not exist.
+*
+* TODO: this function doesn't mesh with the new philosophy
 */
 SurfacePtr Graphic::get_picture_surface(const PictureID & id) const
 {
-	return id->surface;
+	return id->impl().surface;
 }
 
 /**

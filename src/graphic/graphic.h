@@ -21,7 +21,6 @@
 #define GRAPHIC_H
 
 #include "animation_gfx.h"
-#include "picture.h"
 #include "picture_id.h"
 #include "rect.h"
 
@@ -92,6 +91,25 @@ struct GraphicCaps
 };
 
 /**
+ * Picture caches (modules).
+ *
+ * \ref Graphic maintains a cache of \ref PictureID s to avoid continuous re-loading of
+ * pictures that may not be referenced all the time (e.g. UI elements).
+ *
+ * This cache is separated into different modules, and can be flushed per-module.
+ */
+enum PicMod {
+	PicMod_UI = 0,
+	PicMod_Menu,
+	PicMod_Game,
+	PicMod_Font, //TODO: is this used?
+
+	// Must be last
+	PicMod_Last
+};
+
+
+/**
  * A renderer to get pixels to a 16bit framebuffer.
  *
  * Picture IDs can be allocated using \ref get_picture() and used in
@@ -101,8 +119,7 @@ struct GraphicCaps
  * graphics system is unloaded, or when \ref flush() is called with the
  * appropriate module flag; the user can request to flush one single picture
  * alone, but this is only used (and useful) in the editor.
-*/
-
+ */
 struct Graphic {
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
@@ -126,8 +143,9 @@ struct Graphic {
 	SurfacePtr load_image(std::string const &, bool alpha = false);
 	PictureID & get_picture(PicMod, std::string const &, bool alpha = true)
 		__attribute__ ((pure));
-	PictureID get_picture
-		(PicMod module, SurfacePtr, const std::string & name = "");
+	PictureID & add_picture_to_cache(PicMod, const std::string &, SurfacePtr);
+	PictureID make_picture
+		(SurfacePtr, const std::string & name = std::string());
 	//__attribute__ ((pure));
 	PictureID & get_no_picture() const;
 
@@ -143,7 +161,6 @@ struct Graphic {
 	SurfacePtr create_surface(SDL_Surface &, bool alpha = false);
 	SurfacePtr create_surface(SurfacePtr, bool alpha = false);
 	SurfacePtr create_surface(int32_t w, int32_t h, bool alpha = false);
-	void free_picture_surface(const PictureID & pic);
 
 	PictureID create_grayed_out_pic(const PictureID & picid);
 	RenderTarget * get_surface_renderer(const PictureID & pic);
@@ -212,11 +229,18 @@ protected:
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
 
-	/// hash of filename/picture ID pairs
-	std::vector
-		<std::map<std::string, boost::shared_ptr<Picture> > > m_picturemap;
-	typedef std::map<std::string, boost::shared_ptr<Picture> > Picturemap;
+	struct PictureRec {
+		PictureID picture;
+
+		/// bit-mask of modules that this picture exists in
+		uint32_t modules;
+	};
+
+	typedef std::map<std::string, PictureRec> Picturemap;
 	typedef Picturemap::iterator pmit;
+
+	/// hash of cached filename/picture pairs
+	Picturemap m_picturemap;
 
 	Road_Textures * m_roadtextures;
 	std::vector<Texture *> m_maptextures;
@@ -227,4 +251,3 @@ extern Graphic * g_gr;
 extern bool g_opengl;
 
 #endif
-

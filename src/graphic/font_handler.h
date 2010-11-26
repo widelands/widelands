@@ -79,7 +79,6 @@ struct Font_Handler {
 	// from the graphics code before the graphics are flushed,
 	// to make sure that everything is forgotten
 	void flush_cache();
-	void delete_widget_cache(PictureID widget_cache_id);
 	void draw_richtext
 		(RenderTarget &,
 		 RGBColor bg,

@@ -62,9 +62,8 @@ Multiline_Textarea::Multiline_Textarea
 /**
  * Free allocated resources
 */
-Multiline_Textarea::~Multiline_Textarea() {
-	if (m_cache_id != g_gr->get_no_picture())
-		UI::g_fh->delete_widget_cache(m_cache_id);
+Multiline_Textarea::~Multiline_Textarea()
+{
 }
 
 

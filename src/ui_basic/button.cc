@@ -22,6 +22,7 @@
 #include "mouse_constants.h"
 
 #include "graphic/font_handler.h"
+#include "graphic/picture.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 #include "log.h"
@@ -94,9 +95,8 @@ Button::Button //  for pictorial buttons
 }
 
 
-Button::~Button() {
-	if (m_pic_custom_disabled != g_gr->get_no_picture())
-		g_gr->free_picture_surface(m_pic_custom_disabled);
+Button::~Button()
+{
 }
 
 
@@ -113,8 +113,6 @@ void Button::set_pic(PictureID const picid)
 	m_needredraw = true;
 
 	m_pic_custom = picid;
-	if (m_pic_custom_disabled != g_gr->get_no_picture())
-		g_gr->free_picture_surface(m_pic_custom_disabled);
 	m_pic_custom_disabled = g_gr->create_grayed_out_pic(picid);
 
 	update();
@@ -180,14 +178,13 @@ void Button::draw(RenderTarget & odst)
 				m_cache_pic =
 					g_gr->create_picture_surface(get_w(), get_h(), m_flat);
 			else if
-				(m_cache_pic->rendertarget->get_w() != get_w() or
-				 m_cache_pic->rendertarget->get_h() != get_h())
+				(m_cache_pic->get_w() != static_cast<uint32_t>(get_w()) or
+				 m_cache_pic->get_h() != static_cast<uint32_t>(get_h()))
 			{
-				g_gr->free_picture_surface(m_cache_pic);
 				m_cache_pic =
 					g_gr->create_picture_surface(get_w(), get_h(), m_flat);
 			}
-			dst = (g_gr->get_surface_renderer(m_cache_pic));
+			dst = g_gr->get_surface_renderer(m_cache_pic);
 		}
 	}
 

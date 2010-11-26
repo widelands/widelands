@@ -81,7 +81,7 @@ throw (_wexception)
 					picname = "map:" + picname;
 
 					PictureID const data =
-						g_gr->get_picture(PicMod_Game, picsurf, picname.c_str());
+						g_gr->add_picture_to_cache(PicMod_Game, picname, picsurf);
 
 					//  OK, the pic is now known to the game. But when the game is
 					//  saved, this data has to be regenerated.

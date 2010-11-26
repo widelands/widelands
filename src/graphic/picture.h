@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,40 +20,42 @@
 #ifndef PICTURE_H
 #define PICTURE_H
 
+#include <stdint.h>
+#include <string>
+
 #include "surfaceptr.h"
 
 struct RenderTarget;
 
-/// picture module flags
-enum PicMod {
-	INVALID     = 0,
-	PicMod_UI   = 1,
-	PicMod_Menu = 2,
-	PicMod_Game = 3,
-	PicMod_Font = 4,
-	PicSurface  = 5,
-	MaxModule   = 6 //MaxModule ALWAYS has to be the 'size' of picmod
-};
+struct PictureImpl;
 
 /**
- * Picture
- *
- * PictureID is a reference to a picture
- * picmod is used to specify which buffer picture is loaded in.
- * warning: a picture can be loaded multiple times in multiple buffers
- * when buffer is flushed pictures will hang around till the last reference
- * is gone too
+ * Interface to a bitmap that can act as the source of a rendering
+ * operation.
  */
-struct Picture {
-	Picture() : module(INVALID), fname(0), rendertarget(0) {}
-	~Picture();
+struct IPicture {
+	virtual ~IPicture() {}
 
-	//PicMod lists which 'buffer' to load the images in.
-	// INVALID if unused, MaxModule not a legal module
-	PicMod    module;
+	virtual uint32_t get_w() = 0;
+	virtual uint32_t get_h() = 0;
+
+	// to be removed
+	virtual PictureImpl & impl() = 0;
+};
+
+struct PictureImpl : IPicture {
+	PictureImpl() : rendertarget(0) {}
+	~PictureImpl();
+
+	virtual uint32_t get_w();
+	virtual uint32_t get_h();
+
+	PictureImpl & impl() {return *this;}
+
 	SurfacePtr surface;
 
-	char         * fname; //  module & (PicMod_UI|PicMod_Menu|PicMod_Game)
+	//TODO: descriptive name of the picture?
+	std::string name;
 	RenderTarget * rendertarget; //  module & (PicMod_Font | PicSurface)
 };
 

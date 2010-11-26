@@ -20,6 +20,7 @@
 #include "slider.h"
 
 #include "mouse_constants.h"
+#include "graphic/picture.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 
@@ -142,7 +143,7 @@ void Slider::draw_cursor
 
 	// Make the slider button opaque
 	if (g_gr->caps().offscreen_rendering)
-		m_cache_pic->surface->fill_rect
+		m_cache_pic->impl().surface->fill_rect
 			(Rect(Point(x, y), w, h), RGBAColor(0, 0, 0, 255));
 	dst.tile //  background
 		(Rect(Point(x, y), w, h), m_pic_background, Point(get_x(), get_y()));
