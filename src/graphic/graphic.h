@@ -22,6 +22,7 @@
 
 #include "animation_gfx.h"
 #include "picture_id.h"
+#include "surfaceptr.h"
 #include "rect.h"
 
 #include <png.h>

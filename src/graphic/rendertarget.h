@@ -97,7 +97,7 @@ struct RenderTarget {
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Rect dst, SurfacePtr src, Rect srcrc, bool enable_alpha = true);
+	void doblit(Rect dst, PictureID src, Rect srcrc, bool enable_alpha = true);
 
 	///The target surface
 	SurfacePtr m_surface;

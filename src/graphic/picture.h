@@ -34,19 +34,27 @@ struct PictureImpl;
  * operation.
  */
 struct IPicture {
+	IPicture() {}
 	virtual ~IPicture() {}
 
 	virtual uint32_t get_w() = 0;
 	virtual uint32_t get_h() = 0;
 
 	// to be removed
+	virtual bool valid() = 0;
 	virtual PictureImpl & impl() = 0;
+
+private:
+	// forbid copying
+	IPicture(const IPicture &);
+	IPicture & operator= (const IPicture &);
 };
 
 struct PictureImpl : IPicture {
 	PictureImpl() : rendertarget(0) {}
 	~PictureImpl();
 
+	virtual bool valid();
 	virtual uint32_t get_w();
 	virtual uint32_t get_h();
 

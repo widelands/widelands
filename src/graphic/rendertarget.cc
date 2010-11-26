@@ -27,6 +27,7 @@
 #include "logic/tribe.h"
 #include "vertex.h"
 
+#include "picture.h"
 #include "surface.h"
 #include "graphic/render/surface_opengl.h"
 #include "graphic/render/surface_sdl.h"
@@ -188,10 +189,10 @@ void RenderTarget::clear()
  */
 void RenderTarget::blit(const Point dst, const PictureID picture)
 {
-	if (SurfacePtr const src = g_gr->get_picture_surface(picture))
+	if (picture->valid())
 		doblit
 			(Rect(dst, 0, 0),
-			 src, Rect(Point(0, 0), src->get_w(), src->get_h()));
+			 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()));
 }
 
 /**
@@ -205,8 +206,8 @@ void RenderTarget::blit(const Point dst, const PictureID picture)
  */
 void RenderTarget::blit(const Rect dst, const PictureID picture)
 {
-	if (SurfacePtr const src = g_gr->get_picture_surface(picture))
-		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
+	if (picture->valid())
+		doblit(dst, picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()));
 }
 
 /**
@@ -234,12 +235,12 @@ void RenderTarget::blit_solid(const Point dst, const PictureID picture)
 		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
 		doblit
 			(Rect(dst, 0, 0),
-			 src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
+			 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), false);
 		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
 	} else if (oglsurf) {
 		doblit
 			(Rect(dst, 0, 0),
-			 src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
+			 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), false);
 	}
 }
 
@@ -266,7 +267,7 @@ void RenderTarget::blit_copy(Point dst, PictureID picture)
 	if (src)
 		doblit
 			(Rect(dst, 0, 0),
-			 src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
+			 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), false);
 	if (sdlsurf) {
 		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
 	}
@@ -278,8 +279,8 @@ void RenderTarget::blitrect
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
 
-	if (SurfacePtr const src = g_gr->get_picture_surface(picture))
-		doblit(Rect(dst, 0, 0), src, srcrc);
+	if (picture->valid())
+		doblit(Rect(dst, 0, 0), picture, srcrc);
 }
 
 /**
@@ -290,22 +291,23 @@ void RenderTarget::blitrect
  */
 void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
 {
-	SurfacePtr const src = g_gr->get_picture_surface(picture);
-
-	if (!src)
+	if (!picture->valid())
 		return;
+
+	int32_t srcw = picture->get_w();
+	int32_t srch = picture->get_h();
 
 	if (clip(r)) {
 		// Make sure the offset is within bounds
-		ofs.x = ofs.x % src->get_w();
+		ofs.x = ofs.x % srcw;
 
 		if (ofs.x < 0)
-			ofs.x += src->get_w();
+			ofs.x += srcw;
 
-		ofs.y = ofs.y % src->get_h();
+		ofs.y = ofs.y % srch;
 
 		if (ofs.y < 0)
-			ofs.y += src->get_h();
+			ofs.y += srch;
 
 		// Blit the picture into the rectangle
 		uint32_t ty = 0;
@@ -316,19 +318,19 @@ void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
 			Rect srcrc;
 
 			srcrc.y = ofs.y;
-			srcrc.h = src->get_h() - ofs.y;
+			srcrc.h = srch - ofs.y;
 
 			if (ty + srcrc.h > r.h)
 				srcrc.h = r.h - ty;
 
 			while (tx < r.w) {
 				srcrc.x = tofsx;
-				srcrc.w = src->get_w() - tofsx;
+				srcrc.w = srcw - tofsx;
 
 				if (tx + srcrc.w > r.w)
 					srcrc.w = r.w - tx;
 
-				m_surface->blit(r + Point(tx, ty), src, srcrc);
+				m_surface->blit(r + Point(tx, ty), picture->impl().surface, srcrc);
 
 				tx += srcrc.w;
 
@@ -372,7 +374,7 @@ void RenderTarget::drawanim
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	SurfacePtr const frame =
+	const PictureID & frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -411,7 +413,7 @@ void RenderTarget::drawanimrect
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	SurfacePtr const frame =
+	const PictureID & frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -486,7 +488,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Rect dst, SurfacePtr src, Rect srcrc, bool enable_alpha)
+	(Rect dst, PictureID src, Rect srcrc, bool enable_alpha)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
@@ -530,7 +532,7 @@ void RenderTarget::doblit
 	// Draw it
 	upcast(SurfaceOpenGL, oglsurf, m_surface.get());
 	if (oglsurf and dst.w and dst.h)
-		oglsurf->blit(dst, src, srcrc, enable_alpha);
+		oglsurf->blit(dst, src->impl().surface, srcrc, enable_alpha);
 	else
-		m_surface->blit(Point(dst.x, dst.y), src, srcrc, enable_alpha);
+		m_surface->blit(Point(dst.x, dst.y), src->impl().surface, srcrc, enable_alpha);
 }

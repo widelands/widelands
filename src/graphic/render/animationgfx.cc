@@ -24,6 +24,7 @@
 #include "surface_sdl.h"
 #include "surface_opengl.h"
 #include "graphic/graphic.h"
+#include "graphic/picture.h"
 
 #include "log.h"
 #include "upcast.h"
@@ -109,7 +110,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 							 "first frame",
 							 surface->get_w(), surface->get_h(), width, height);
 					//  Get a new AnimFrame.
-					m_plrframes[0].push_back(surface);
+					m_plrframes[0].push_back(g_gr->make_picture(surface));
 #ifdef VALIDATE_ANIMATION_CROPPING
 					if (not data_in_x_min)
 						for (int y = 0; y < height; ++y) {
@@ -185,7 +186,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 								("playercolor mask has wrong size: (%u, %u), should "
 								 "be (%u, %u) like the animation frame",
 								 surface->get_w(), surface->get_h(), width, height);
-						m_pcmasks.push_back(surface);
+						m_pcmasks.push_back(g_gr->make_picture(surface));
 						break;
 					} catch (std::exception const & e) {
 						throw wexception
@@ -254,14 +255,14 @@ Encodes the given surface into a frame
 void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 {
 	assert(m_plrframes[0].size() == m_pcmasks.size());
-	std::vector<SurfacePtr> & frames = m_plrframes[plr];
+	std::vector<PictureID> & frames = m_plrframes[plr];
 
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
 		//  Copy the old surface.
-		SurfacePtr origsurface = m_plrframes[0][i];
+		SurfacePtr origsurface = m_plrframes[0][i]->impl().surface;
 		SurfacePtr newsurface = g_gr->create_surface(origsurface, true);
 
-		SurfacePtr pcmask = m_pcmasks[i];
+		SurfacePtr pcmask = m_pcmasks[i]->impl().surface;
 		SDL_PixelFormat * fmt, * fmt_pc;
 
 #ifdef USE_OPENGL
@@ -328,7 +329,7 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 		pcmask->unlock();
 		newsurface->unlock();
 
-		frames.push_back(newsurface);
+		frames.push_back(g_gr->make_picture(newsurface));
 	}
 }
 

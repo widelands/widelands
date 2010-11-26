@@ -498,9 +498,7 @@ PictureID & Graphic::add_picture_to_cache(PicMod module, const std::string & nam
 	rec.picture = pic;
 	rec.modules = 1 << module;
 
-	m_picturemap.insert(std::make_pair(name, rec));
-
-	return rec.picture;
+	return m_picturemap.insert(std::make_pair(name, rec)).first->second.picture;
 }
 
 
@@ -1071,10 +1069,10 @@ void Graphic::get_animation_size
 		w = h = 0;
 	} else {
 		// Get the frame and its data. Ignore playerclrs.
-		Surface const & frame =
-			*gfx->get_frame((time / data->frametime) % gfx->nr_frames());
-		w = frame.get_w();
-		h = frame.get_h();
+		const PictureID & frame =
+			gfx->get_frame((time / data->frametime) % gfx->nr_frames());
+		w = frame->get_w();
+		h = frame->get_h();
 	}
 }
 

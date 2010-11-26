@@ -22,22 +22,22 @@
 
 #include "animation.h"
 #include "logic/widelands.h"
+#include "picture_id.h"
 #include "rgbcolor.h"
-#include "surfaceptr.h"
 
 struct AnimationGfx { /// The graphics belonging to an animation.
 	AnimationGfx(AnimationData const * data);
 	~AnimationGfx();
 
 	const Point get_hotspot() const throw () {return m_hotspot;}
-	typedef std::vector<SurfacePtr> Frames;
+	typedef std::vector<PictureID> Frames;
 	typedef Frames::size_type Index;
 	Index nr_frames() const
 	{
 		assert((*m_plrframes)[0]); return m_plrframes[0].size();
 	}
 
-	SurfacePtr get_frame
+	const PictureID & get_frame
 		(Index                    const i,
 		 Widelands::Player_Number const player_number,
 		 RGBColor         const * const playercolor)
@@ -55,7 +55,7 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 		return m_plrframes[player_number][i];
 	}
 
-	SurfacePtr get_frame(Index const i) const {
+	const PictureID & get_frame(Index const i) const {
 		assert(i < nr_frames());
 		return m_plrframes[0][i];
 	}

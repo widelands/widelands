@@ -26,6 +26,11 @@ PictureImpl::~PictureImpl() {
 	delete rendertarget;
 }
 
+bool PictureImpl::valid()
+{
+	return surface;
+}
+
 uint32_t PictureImpl::get_w()
 {
 	assert(surface);
