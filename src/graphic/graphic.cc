@@ -52,7 +52,6 @@
 #include <cstring>
 #include <iostream>
 #include <boost/scoped_array.hpp>
-#include <boost/concept_check.hpp>
 
 Graphic * g_gr;
 bool g_opengl;
@@ -151,9 +150,7 @@ Graphic::Graphic
 		log("Graphics: FULLSCREEN ENABLED\n");
 
 	// Set rendering capabilities for sdl. They are overwritten if in opengl mode
-	m_caps.resize_surfaces = true;
 	m_caps.offscreen_rendering = true;
-	m_caps.blit_resized = false;
 
 #ifdef USE_OPENGL
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
@@ -200,9 +197,7 @@ Graphic::Graphic
 			(m_caps.gl.tex_power_of_two?"must have a size power of two\n":
 			 "may have any size\n");
 
-		m_caps.resize_surfaces = false;
 		m_caps.offscreen_rendering = false;
-		m_caps.blit_resized = true;
 	}
 #endif
 

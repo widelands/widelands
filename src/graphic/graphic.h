@@ -83,10 +83,6 @@ struct GraphicCaps
 {
 	/// The renderer allows rendering (blit, draw_line) to offscreen surfaces
 	bool offscreen_rendering;
-	/// It is possible to resize surfaces with get_resized_picture()
-	bool resize_surfaces;
-	/// It is possible to resize surfaces while bliting
-	bool blit_resized;
 	/// The capabilities of the opengl hardware and drive
 	GLCaps gl;
 };

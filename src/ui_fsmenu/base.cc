@@ -67,16 +67,14 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	// Load background graphics
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
-	m_pic_background = g_gr->get_picture(PicMod_Menu, buffer, false);
-	if (m_pic_background == g_gr->get_no_picture())
+	PictureID background = g_gr->get_picture(PicMod_Menu, buffer, false);
+	if (!background || background == g_gr->get_no_picture())
 		throw wexception
 			("could not open splash screen; make sure that all data files are "
 			 "installed");
 
-	m_res_background = g_gr->get_no_picture();
-	if (g_gr->caps().resize_surfaces)
-		m_res_background = g_gr->get_resized_picture
-			(m_pic_background, m_xres, m_yres, Graphic::ResizeMode_Loose);
+	m_res_background = g_gr->get_resized_picture
+			(background, m_xres, m_yres, Graphic::ResizeMode_Loose);
 }
 
 Fullscreen_Menu_Base::~Fullscreen_Menu_Base()
@@ -88,10 +86,7 @@ Fullscreen_Menu_Base::~Fullscreen_Menu_Base()
  * Draw the background / splash screen
 */
 void Fullscreen_Menu_Base::draw(RenderTarget & dst) {
-	if (g_gr->caps().blit_resized)
-		dst.blit(Rect(Point(0, 0), dst.get_w(), dst.get_h()), m_pic_background);
-	else
-		dst.blit(Point(0, 0), m_res_background);
+	dst.blit(Point(0, 0), m_res_background);
 }
 
 
