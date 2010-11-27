@@ -23,9 +23,10 @@
 #include <stdint.h>
 #include <string>
 
-#include "surfaceptr.h"
+#include "picture_id.h"
 
-struct PictureImpl;
+struct IPixelAccess;
+struct Surface;
 
 /**
  * Interface to a bitmap that can act as the source of a rendering
@@ -35,30 +36,23 @@ struct IPicture {
 	IPicture() {}
 	virtual ~IPicture() {}
 
+	virtual bool valid() = 0;
+
 	virtual uint32_t get_w() = 0;
 	virtual uint32_t get_h() = 0;
 
-	// to be removed
-	virtual bool valid() = 0;
-	virtual PictureImpl & impl() = 0;
+	virtual IPixelAccess & pixelaccess() = 0;
+
+	//TODO: get rid of this
+	virtual Surface & surface() = 0;
 
 private:
 	// forbid copying
 	IPicture(const IPicture &);
 	IPicture & operator= (const IPicture &);
-};
 
-struct PictureImpl : IPicture {
-	PictureImpl() {}
-	~PictureImpl();
-
-	virtual bool valid();
-	virtual uint32_t get_w();
-	virtual uint32_t get_h();
-
-	PictureImpl & impl() {return *this;}
-
-	SurfacePtr surface;
+public:
+	static const PictureID & null();
 };
 
 #endif

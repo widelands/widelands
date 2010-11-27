@@ -23,8 +23,7 @@
 #include "rgbcolor.h"
 #include "rect.h"
 
-#include "graphic/picture.h"
-#include "graphic/surface.h"
+#include "graphic/offscreensurface.h"
 
 /**
 * This implements SDL rendering. Do not use this class directly. The right
@@ -33,7 +32,7 @@
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.
 */
-struct SurfaceSDL : Surface {
+struct SurfaceSDL : IOffscreenSurface {
 	SurfaceSDL(SDL_Surface & surface) :
 		m_surface(&surface),
 		m_offsx(0), m_offsy(0),
@@ -61,14 +60,6 @@ struct SurfaceSDL : Surface {
 	/// Save a bitmap of this to a file
 	void save_bmp(const char & fname) const;
 
-/*
-	// For the bravest: Direct Pixel access. Use carefully
-	/// Needed if you want to blit directly to the screen by memcpy
-	void force_disable_alpha();
-	const SDL_PixelFormat * get_format() const;
-	uint16_t get_pitch() const {return m_surface->pitch;}
-*/
-
 	SDL_PixelFormat const & format() const;
 	uint8_t * get_pixels() const;
 	uint16_t get_pitch() const {return m_surface->pitch;}
@@ -91,13 +82,18 @@ struct SurfaceSDL : Surface {
 		 int32_t x2, int32_t y2,
 		 RGBColor, Rect const * clip = 0);
 
-	void blit(Point, SurfacePtr, Rect srcrc, bool enable_alpha = true);
-	void fast_blit(SurfacePtr);
+	void blit(Point, PictureID, Rect srcrc, Composite cm);
+	void fast_blit(PictureID);
 
 	void set_subwin(Rect r);
 	void unset_subwin();
 
 	void set_isscreen(bool screen);
+
+	bool valid() {return m_surface;}
+
+	virtual IPixelAccess & pixelaccess() {return *this;}
+	virtual Surface & surface() {return *this;} //TODO get rid of this
 
 private:
 	SurfaceSDL & operator= (SurfaceSDL const &);

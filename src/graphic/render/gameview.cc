@@ -1273,7 +1273,7 @@ void GameView::draw_minimap
 	//       necesary. The created surface could be cached and only redrawn two
 	//       or three times per second
 	const SDL_PixelFormat & fmt =
-		g_gr->get_render_target()->get_surface()->format();
+		g_gr->get_render_target()->get_surface()->pixelaccess().format();
 	SDL_Surface * surface =
 		SDL_CreateRGBSurface
 			(SDL_SWSURFACE,
@@ -1312,9 +1312,9 @@ void GameView::draw_minimap
 
 	SDL_UnlockSurface(surface);
 
-	SurfacePtr surf = g_gr->create_surface(*surface);
+	PictureID picture = g_gr->convert_sdl_surface_to_picture(surface);
 
-	m_surface->blit(Point(rc.x, rc.y), surf, rc2, false);
+	m_surface->blit(Point(rc.x, rc.y), picture, rc2);
 }
 
 void GameView::rendermap_init()

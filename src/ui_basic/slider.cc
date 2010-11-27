@@ -20,9 +20,8 @@
 #include "slider.h"
 
 #include "mouse_constants.h"
-#include "graphic/picture.h"
+#include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface.h"
 
 #include <cmath>
 
@@ -74,8 +73,7 @@ Slider::Slider
 		 m_value >= m_max_value ? get_bar_size() :
 		 (m_value - m_min_value) * get_bar_size() / (m_max_value - m_min_value)),
 	m_cursor_size (cursor_size),
-	m_needredraw     (true),
-	m_cache_pic      (g_gr->get_no_picture())
+	m_needredraw     (true)
 {
 	//  cursor initial position
 
@@ -143,7 +141,7 @@ void Slider::draw_cursor
 
 	// Make the slider button opaque
 	if (g_gr->caps().offscreen_rendering)
-		m_cache_pic->impl().surface->fill_rect
+		m_cache_pic->fill_rect
 			(Rect(Point(x, y), w, h), RGBAColor(0, 0, 0, 255));
 	dst.tile //  background
 		(Rect(Point(x, y), w, h), m_pic_background, Point(get_x(), get_y()));
@@ -365,13 +363,13 @@ void HorizontalSlider::draw(RenderTarget & odst) {
 			return;
 		}
 
-		if (m_cache_pic == g_gr->get_no_picture())
+		if (m_cache_pic)
 		{
-			m_cache_pic = g_gr->create_picture_surface
+			m_cache_pic = g_gr->create_offscreen_surface
 				(get_w(), get_h(), true);
 		}
 
-		dst = RenderTarget(m_cache_pic->impl().surface);
+		dst = RenderTarget(m_cache_pic);
 		dst.fill_rect
 			(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 	}
@@ -466,12 +464,12 @@ void VerticalSlider::draw(RenderTarget & odst) {
 			odst.blit(Point(0, 0), m_cache_pic);
 			return;
 		}
-	if (m_cache_pic == g_gr->get_no_picture())
-		m_cache_pic = g_gr->create_picture_surface
-			(get_w(), get_h(), true);
-	dst = RenderTarget(m_cache_pic->impl().surface);
+		if (m_cache_pic)
+			m_cache_pic = g_gr->create_offscreen_surface
+				(get_w(), get_h(), true);
+		dst = RenderTarget(m_cache_pic);
 
-	dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
+		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 	}
 
 	RGBAColor black(0, 0, 0, 255);

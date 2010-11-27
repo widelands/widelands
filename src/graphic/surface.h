@@ -20,13 +20,15 @@
 #ifndef SURFACE_H
 #define SURFACE_H
 
+#include "compositemode.h"
 #include "rgbcolor.h"
 #include "rect.h"
 #include "surfaceptr.h"
 #include "wexception.h"
 
-/// An interface to surfaces. Surfaces are used as destinations
-/// for drawing.
+/**
+ * Interface to a basic surfaces that can be used as destination for drawing.
+ */
 struct Surface {
 	Surface() {}
 	virtual ~Surface() {}
@@ -39,45 +41,6 @@ struct Surface {
 
 	/// Update the screen. This is only useful for the screen surface.
 	virtual void update() = 0;
-
-	//@{
-	/// For the slowest: Indirect pixel access.
-	/// A safe function to get and set single pixels. lock() must be called
-	/// before pixel access can be used. get_pixel() and set_pixel() are easier
-	/// and safer to use but also much slower than direct pixel access.
-	virtual uint32_t get_pixel(uint32_t x, uint32_t y) = 0;
-	virtual void set_pixel(uint32_t x, uint32_t y, Uint32 clr) = 0;
-	//@}
-
-	//@{
-	/**
-	 * Locking and unlocking the surface for pixel access. This may be slow. So
-	 * use it with care.
-	 */
-
-	virtual void lock() {};
-	virtual void unlock() {};
-	//@}
-
-	/// This returns the pixel format for direct pixel access.
-	virtual SDL_PixelFormat const & format() const {
-		throw wexception("format() not implemented");
-	}
-
-	//@{
-	/**
-	 * Direct pixel access. lock() must be called before pixles may be access.
-	 * This is faster than indirect pixel access but also more dangerous.
-	 * get_pixels() gives a pointer to the pixel data. get_pitch() returns an
-	 * integer where the next row begins.
-	 */
-	virtual uint16_t get_pitch() const {
-		throw wexception("get_pitch() not implemented");
-	}
-	virtual uint8_t * get_pixels() const {
-		throw wexception("get_pixels() not implemented");
-	}
-	//@}
 
 	/// Clears the complete surface to black.
 	virtual void clear() {
@@ -108,15 +71,12 @@ struct Surface {
 	virtual void brighten_rect(Rect, int32_t factor) = 0;
 
 	/// This draws a part aother surface to this surface
-	virtual void blit(Point, SurfacePtr, Rect srcrc, bool enable_alpha = false) = 0;
+	virtual void blit(Point, PictureID, Rect srcrc, Composite cm = CM_Normal) = 0;
 	/// This draws another surface completely in the left
 	/// upper corner of this surface
-	virtual void fast_blit(SurfacePtr surface) {
-		blit
-			(Point(0, 0),
-			 surface,
-			 Rect(Point(0, 0), surface->get_w(), surface->get_h()));
-	}
+	virtual void fast_blit(PictureID surface) = 0;
+
+	virtual IPixelAccess & pixelaccess() = 0;
 
 private:
 	// surfaces cannot be copied

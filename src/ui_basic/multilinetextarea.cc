@@ -131,7 +131,7 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 				 m_text,
 				 m_align,
 				 get_eff_w(),
-				 m_cache_mode, m_cache_id);
+				 m_cache_mode, &m_cache_id);
 		else
 			UI::g_fh->draw_richtext
 				(dst,
@@ -139,7 +139,7 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 				 Point(get_halign(), 0 - m_textpos),
 				 m_text,
 				 get_eff_w(),
-				 m_cache_mode, m_cache_id);
+				 m_cache_mode, &m_cache_id);
 		draw_scrollbar();
 		m_cache_mode = Widget_Cache_Use;
 	}

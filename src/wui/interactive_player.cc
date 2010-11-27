@@ -129,7 +129,7 @@ void ChatDisplay::draw(RenderTarget & dst)
 			 Point(0, get_inner_h() -60 -y),
 			 "<rt>" + i.current->text + "</rt>",
 			 get_w(),
-			 m_cache_mode, picid, transparent_chat);
+			 m_cache_mode, &picid, transparent_chat);
 		y += i.current->h;
 		m_cache_id.push_back(picid);
 	}

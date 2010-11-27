@@ -174,14 +174,7 @@ void SurfaceOpenGL::clear()
 
 
 void SurfaceOpenGL::blit
-	(Point const dst, SurfacePtr const src, Rect const srcrc, bool enable_alpha)
-{
-	blit(Rect(dst, srcrc.w, srcrc.h), src, srcrc, enable_alpha);
-}
-
-
-void SurfaceOpenGL::blit
-	(Rect dst, SurfacePtr src, Rect srcrc, bool enable_alpha)
+	(Point const dst, PictureID const src, Rect const srcrc, Composite cm)
 {
 	upcast(SurfaceOpenGL, oglsrc, src.get());
 
@@ -224,11 +217,12 @@ void SurfaceOpenGL::blit
 		 1.0f / static_cast<GLfloat>(oglsrc->get_tex_h()), 1);
 
 	// Enable Alpha blending
-	if (enable_alpha) {
+	if (cm == CM_Normal) {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	} else
+	} else {
 		glDisable(GL_BLEND);
+	}
 
 	/* select the texture to paint on the screen
 	* openGL does not know anything about SDL_Surfaces
@@ -251,19 +245,24 @@ void SurfaceOpenGL::blit
 		glColor3f(1.0, 1.0, 1.0);
 		//  top-left
 		glTexCoord2i(srcrc.x,           srcrc.y);
-		glVertex2i  (dst.x,   dst.y);
+		glVertex2i  (dst.x,             dst.y);
 		//  top-right
 		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y);
-		glVertex2f  (dst.x + dst.w,  dst.y);
+		glVertex2f  (dst.x + srcrc.w,   dst.y);
 		//  bottom-right
 		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y + srcrc.h);
-		glVertex2f  (dst.x + dst.w,  dst.y + dst.h);
+		glVertex2f  (dst.x + srcrc.w,   dst.y + srcrc.h);
 		//  bottom-left
 		glTexCoord2i(srcrc.x,           srcrc.y + srcrc.h);
-		glVertex2f  (dst.x,   dst.y + dst.h);
+		glVertex2f  (dst.x,             dst.y + srcrc.h);
 	} glEnd();
 
 	glLoadIdentity();
+}
+
+void SurfaceOpenGL::fast_blit(PictureID src)
+{
+	blit(Point(0, 0), src, Rect(Point(0, 0), src->get_w(), src->get_h()), CM_Normal);
 }
 
 #endif //USE_OPENGL

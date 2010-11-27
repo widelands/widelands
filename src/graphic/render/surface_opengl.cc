@@ -75,6 +75,11 @@ GLenum _handle_glerror(const char * file, unsigned int line)
 	return err;
 }
 
+/**
+ * Initialize a texture from the given SDL surface.
+ *
+ * \note the constructor will delete the given surface
+ */
 SurfaceOpenGL::SurfaceOpenGL(SDL_Surface & par_surface):
 	m_glTexUpdate(false),
 	m_pixels     (0),
@@ -296,6 +301,14 @@ SurfaceOpenGL::SurfaceOpenGL(int const w, int const h):
 		m_tex_h = h;
 	}
 }
+
+bool SurfaceOpenGL::valid()
+{
+	// currently always valid
+	// TODO: check whether texture exists?
+	return true;
+}
+
 
 /* This returns a SDL_Pixel format for the returned pixels. lock() copies the
  * pixels always as 32Bit RGBA. So we create and return a RGBA SDL_PixelFormat

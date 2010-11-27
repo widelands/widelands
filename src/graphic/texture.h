@@ -65,7 +65,7 @@ struct Texture {
 	bool was_animated() const throw () {return m_was_animated;}
 #ifdef USE_OPENGL
 	uint32_t getTexture() const
-		{return static_cast<SurfaceOpenGL *>(m_glFrames.at(m_frame_num).get())->get_texture();}
+		{return m_glFrames.at(m_frame_num)->get_texture();}
 #endif
 
 private:
@@ -80,7 +80,7 @@ private:
 	bool       is_32bit;
 	bool       m_was_animated;
 #ifdef USE_OPENGL
-	std::vector<SurfacePtr> m_glFrames;
+	std::vector<boost::shared_ptr<SurfaceOpenGL> > m_glFrames;
 #endif
 };
 

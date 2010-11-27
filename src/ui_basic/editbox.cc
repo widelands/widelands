@@ -401,7 +401,7 @@ void EditBox::draw(RenderTarget & odst)
 		 align(),
 		 std::numeric_limits<uint32_t>::max(),
 		 Widget_Cache_None,
-		 g_gr->get_no_picture(),
+		 0,
 		 has_focus() ? static_cast<int32_t>(m->caret) :
 		 std::numeric_limits<uint32_t>::max());
 }

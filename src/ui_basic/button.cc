@@ -22,7 +22,7 @@
 #include "mouse_constants.h"
 
 #include "graphic/font_handler.h"
-#include "graphic/picture.h"
+#include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 #include "log.h"
@@ -49,7 +49,6 @@ Button::Button //  for textual buttons
 	m_repeating     (false),
 	m_flat          (flat),
 	m_needredraw    (true),
-	m_cache_pic     (g_gr->get_no_picture()),
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (g_gr->get_no_picture()),
@@ -82,7 +81,6 @@ Button::Button //  for pictorial buttons
 	m_repeating     (false),
 	m_flat          (flat),
 	m_needredraw    (true),
-	m_cache_pic     (g_gr->get_no_picture()),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
 	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
@@ -174,17 +172,15 @@ void Button::draw(RenderTarget & odst)
 			odst.blit(Point(0, 0), m_cache_pic);
 			return;
 		} else {
-			if (m_cache_pic == g_gr->get_no_picture())
-				m_cache_pic =
-					g_gr->create_picture_surface(get_w(), get_h(), m_flat);
-			else if
-				(m_cache_pic->get_w() != static_cast<uint32_t>(get_w()) or
-				 m_cache_pic->get_h() != static_cast<uint32_t>(get_h()))
+			if
+				(!m_cache_pic ||
+				 (static_cast<IPicture *>(m_cache_pic.get())->get_w() != static_cast<uint32_t>(get_w()) or
+				  static_cast<IPicture *>(m_cache_pic.get())->get_h() != static_cast<uint32_t>(get_h())))
 			{
 				m_cache_pic =
-					g_gr->create_picture_surface(get_w(), get_h(), m_flat);
+					g_gr->create_offscreen_surface(get_w(), get_h(), m_flat);
 			}
-			dst = RenderTarget(m_cache_pic->impl().surface);
+			dst = RenderTarget(m_cache_pic);
 		}
 	}
 
@@ -214,11 +210,12 @@ void Button::draw(RenderTarget & odst)
 		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
 		//  is that -1 >> 1 is -1 but -1 / 2 is 0).
 		if (g_gr->caps().offscreen_rendering and m_flat)
-			dst.blit_copy
+			dst.blit
 				(Point
 				 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
 				 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
-				 m_enabled ? m_pic_custom : m_pic_custom_disabled);
+				 m_enabled ? m_pic_custom : m_pic_custom_disabled,
+				 CM_Copy);
 		else
 			dst.blit
 				(Point
@@ -237,7 +234,7 @@ void Button::draw(RenderTarget & odst)
 			 Align_Center,
 			 std::numeric_limits<uint32_t>::max(),
 			 Widget_Cache_None,
-			 g_gr->get_no_picture(),
+			 0,
 			 m_draw_caret ? m_title.length() :
 			 std::numeric_limits<uint32_t>::max());
 

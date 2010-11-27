@@ -22,6 +22,7 @@
 #include "rgbcolor.h"
 #include "rect.h"
 #include "graphic/picture.h"
+#include "graphic/pixelaccess.h"
 #include "graphic/surface.h"
 
 #include <SDL_opengl.h>
@@ -48,8 +49,11 @@ struct Vertex;
  * needs to know about the underlying renderer should go to the graphics
  * subdirectory.
  * Surfaces are created through Graphic::create_surface() functions.
-*/
-struct SurfaceOpenGL : Surface {
+ *
+ * TODO: the ancestry is fake; this should be split in one class for rendering
+ * and another for textures
+ */
+struct SurfaceOpenGL : Surface, IPicture, IPixelAccess {
 public:
 	/**
 	 * Manages a single OpenGL texture. This makes sure the texture is
@@ -67,6 +71,8 @@ public:
 	SurfaceOpenGL(SDL_Surface & surface);
 	explicit SurfaceOpenGL(int w = 0, int h = 0);
 	~SurfaceOpenGL();
+
+	virtual bool valid();
 
 	//@{
 	/// Get width and height
@@ -133,11 +139,13 @@ public:
 		 int32_t x2, int32_t y2,
 		 RGBColor, Rect const * clip = 0);
 
-	void blit(Point, SurfacePtr, Rect srcrc, bool enable_alpha = true);
-	void blit(Rect dst, SurfacePtr, Rect srcrc, bool enable_alpha = true);
-	//void fast_blit(Surface *);
+	void blit(Point, PictureID, Rect srcrc, Composite cm);
+	void fast_blit(PictureID);
 
 	oglTexture & getTexture() {return *m_texture;}
+
+	virtual IPixelAccess & pixelaccess() {return *this;}
+	virtual Surface & surface() {return *this;} //TODO get rid of this
 
 private:
 	SurfaceOpenGL & operator= (SurfaceOpenGL const &);

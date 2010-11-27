@@ -41,7 +41,7 @@
 
 namespace UI {struct ProgressWindow;}
 
-class Texture;
+struct IPixelAccess;
 struct RenderTarget;
 struct Graphic;
 struct Road_Textures;
@@ -141,27 +141,24 @@ struct Graphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	SurfacePtr load_image(std::string const &, bool alpha = false);
-	PictureID & get_picture(PicMod, std::string const &, bool alpha = true)
+	PictureID load_image(std::string const &, bool alpha = false);
+	const PictureID & get_picture(PicMod, std::string const &, bool alpha = true)
 		__attribute__ ((pure));
-	PictureID & add_picture_to_cache(PicMod, const std::string &, SurfacePtr);
-	PictureID make_picture
-		(SurfacePtr, const std::string & name = std::string());
-	//__attribute__ ((pure));
-	PictureID & get_no_picture() const;
-
-	SurfacePtr get_picture_surface(const PictureID & id) const;
+	void add_picture_to_cache(PicMod, const std::string &, PictureID);
+	const PictureID & get_no_picture() const;
 
 	void get_picture_size
 		(const PictureID & pic, uint32_t & w, uint32_t & h) const;
+	PictureID get_offscreen_picture(OffscreenSurfacePtr surface) const;
 
 	void save_png(const PictureID &, StreamWrite *) const;
 	void save_png(SurfacePtr surf, StreamWrite *) const;
+	void save_png(IPixelAccess & pix, StreamWrite *) const;
 
-	PictureID create_picture_surface(int32_t w, int32_t h, bool alpha = false);
-	SurfacePtr create_surface(SDL_Surface &, bool alpha = false);
-	SurfacePtr create_surface(SurfacePtr, bool alpha = false);
-	SurfacePtr create_surface(int32_t w, int32_t h, bool alpha = false);
+	PictureID convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
+
+	OffscreenSurfacePtr create_offscreen_surface(int32_t w, int32_t h, bool alpha = false);
+	PictureID create_picture(int32_t w, int32_t h, bool alpha = false);
 
 	PictureID create_grayed_out_pic(const PictureID & picid);
 
@@ -178,7 +175,6 @@ struct Graphic {
 
 	PictureID get_resized_picture
 		(PictureID, uint32_t w, uint32_t h, ResizeMode);
-	SDL_Surface * resize(const PictureID index, uint32_t w, uint32_t h);
 
 	uint32_t get_maptexture(char const & fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
@@ -198,9 +194,12 @@ struct Graphic {
 	Texture * get_maptexture_data(uint32_t id);
 	AnimationGfx * get_animation(uint32_t) const;
 
-	SurfacePtr get_road_texture(int32_t roadtex);
+	PictureID get_road_texture(int32_t roadtex);
 
 	GraphicCaps const & caps() const throw () {return m_caps;}
+
+private:
+	SDL_Surface * extract_sdl_surface(IPixelAccess & pix, Rect srcrect);
 
 protected:
 	// Static helper function for png writing

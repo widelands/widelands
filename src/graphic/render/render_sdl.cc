@@ -257,23 +257,34 @@ void SurfaceSDL::clear() {
 
 
 void SurfaceSDL::blit
-	(Point const dst, SurfacePtr src, Rect const srcrc, bool enable_alpha)
+	(Point const dst, PictureID src, Rect const srcrc, Composite cm)
 {
-	assert(src);
+	upcast(SurfaceSDL, sdlsurf, src.get());
+	assert(sdlsurf);
 	assert(this);
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
-	SDL_BlitSurface
-		(dynamic_cast<SurfaceSDL *>(src.get())->get_sdl_surface(),
-		 &srcrect, m_surface, &dstrect);
+	bool alpha;
+	uint8_t alphaval;
+	if (cm == CM_Solid || cm == CM_Copy) {
+		alpha = sdlsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
+		alphaval = sdlsurf->get_sdl_surface()->format->alpha;
+		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
+	}
+
+	SDL_BlitSurface(sdlsurf->get_sdl_surface(), &srcrect, m_surface, &dstrect);
+
+	if (cm == CM_Solid || cm == CM_Copy) {
+		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
+	}
 }
 
 
 /*
  * Fast blit, simply copy the source to the destination
  */
-void SurfaceSDL::fast_blit(SurfacePtr const src) {
+void SurfaceSDL::fast_blit(PictureID const src) {
 	SDL_BlitSurface
 		(dynamic_cast<SurfaceSDL *>(src.get())->get_sdl_surface(),
 		 0, m_surface, 0);

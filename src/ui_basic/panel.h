@@ -25,6 +25,7 @@
 
 #include "point.h"
 #include "graphic/picture_id.h"
+#include "graphic/surfaceptr.h"
 #include "graphic/graphic.h"
 
 #include <SDL_keyboard.h>
@@ -258,7 +259,7 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	PictureID _cache;
+	OffscreenSurfacePtr _cache;
 	bool _needdraw;
 
 	/**

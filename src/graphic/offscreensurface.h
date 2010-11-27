@@ -17,15 +17,18 @@
  *
  */
 
-#ifndef SURFACEPTR_H
-#define SURFACEPTR_H
+#ifndef OFFSCREENSURFACE_H
+#define OFFSCREENSURFACE_H
 
-#include <boost/shared_ptr.hpp>
+#include "picture.h"
+#include "pixelaccess.h"
+#include "surface.h"
 
-struct IOffscreenSurface;
-struct Surface;
+/**
+ * Interface to surfaces that can act conveniently both as
+ * source and as destination for rendering.
+ */
+struct IOffscreenSurface : Surface, IPicture, IPixelAccess {
+};
 
-typedef boost::shared_ptr<IOffscreenSurface> OffscreenSurfacePtr;
-typedef boost::shared_ptr<Surface> SurfacePtr;
-
-#endif // SURFACEPTR_H
+#endif // OFFSCREENSURFACE_H

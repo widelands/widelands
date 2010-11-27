@@ -94,7 +94,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				pos.y += TEXTURE_HEIGHT + vspacing();
 			}
 
-			PictureID surface;
+			PictureID picture;
 
 			// If offscreen rendering is not available only the terrain (and not
 			// the terrain type) is shown.
@@ -102,11 +102,11 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			//       or implement offscreen rendering for opengl
 			if (g_gr->caps().offscreen_rendering)
 			{
-				//  create a surface for this
-				surface = g_gr->create_picture_surface(64, 64);
+				OffscreenSurfacePtr offscreen = g_gr->create_offscreen_surface(64, 64);
+				picture = g_gr->get_offscreen_picture(offscreen);
 
 				//  get the rendertarget for this
-				RenderTarget target(surface->impl().surface);
+				RenderTarget target(offscreen);
 
 				//  first, blit the terrain texture
 				target.blit
@@ -144,16 +144,16 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 						target.blit(pic, dry);
 				}
 			} else {
-				surface = g_gr->get_picture
+				picture = g_gr->get_picture
 					(PicMod_Game,
 					 g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
 					 ->get_texture_picture());
 			}
 
 			//  Save this surface, so we can free it later on.
-			m_surfaces.push_back(surface);
+			m_surfaces.push_back(picture);
 
-			UI::Checkbox & cb = *new UI::Checkbox(this, pos, surface);
+			UI::Checkbox & cb = *new UI::Checkbox(this, pos, picture);
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
 			cb.set_id(i);
 			cb.set_state(m_tool.is_enabled(i));

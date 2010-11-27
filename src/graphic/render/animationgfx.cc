@@ -100,17 +100,17 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 			strcpy(after_basename, extensions[extnr]);
 			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
-					SurfacePtr surface = g_gr->load_image(filename, true);
+					PictureID pic = g_gr->load_image(filename, true);
 					if (width == 0) { //  This is the first frame.
-						width  = surface->get_w();
-						height = surface->get_h();
-					} else if (width != surface->get_w() or height != surface->get_h())
+						width  = pic->get_w();
+						height = pic->get_h();
+					} else if (width != pic->get_w() or height != pic->get_h())
 						throw wexception
 							("wrong size: (%u, %u), should be (%u, %u) like the "
 							 "first frame",
-							 surface->get_w(), surface->get_h(), width, height);
+							 pic->get_w(), pic->get_h(), width, height);
 					//  Get a new AnimFrame.
-					m_plrframes[0].push_back(g_gr->make_picture(surface));
+					m_plrframes[0].push_back(pic);
 #ifdef VALIDATE_ANIMATION_CROPPING
 					if (not data_in_x_min)
 						for (int y = 0; y < height; ++y) {
@@ -180,13 +180,13 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 				strcpy(after_basename + 3, extensions[extnr]);
 				if (g_fs->FileExists(filename)) {
 					try {
-						SurfacePtr surface = g_gr->load_image(filename, true);
-						if (width != surface->get_w() or height != surface->get_h())
+						PictureID picture = g_gr->load_image(filename, true);
+						if (width != picture->get_w() or height != picture->get_h())
 							throw wexception
 								("playercolor mask has wrong size: (%u, %u), should "
 								 "be (%u, %u) like the animation frame",
-								 surface->get_w(), surface->get_h(), width, height);
-						m_pcmasks.push_back(g_gr->make_picture(surface));
+								 picture->get_w(), picture->get_h(), width, height);
+						m_pcmasks.push_back(picture);
 						break;
 					} catch (std::exception const & e) {
 						throw wexception
@@ -259,43 +259,30 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
 		//  Copy the old surface.
-		SurfacePtr origsurface = m_plrframes[0][i]->impl().surface;
-		SurfacePtr newsurface = g_gr->create_surface(origsurface, true);
+		PictureID origpic = m_plrframes[0][i];
+		uint32_t w = origpic->get_w();
+		uint32_t h = origpic->get_h();
+		IPixelAccess & origpix = m_plrframes[0][i]->pixelaccess();
+		IPixelAccess & pcmask = m_pcmasks[i]->pixelaccess();
 
-		SurfacePtr pcmask = m_pcmasks[i]->impl().surface;
-		SDL_PixelFormat * fmt, * fmt_pc;
+		PictureID newpicture = g_gr->create_picture(w, h, true);
+		IPixelAccess & newpix = newpicture->pixelaccess();
 
-#ifdef USE_OPENGL
-		upcast(SurfaceOpenGL, oglsurf, origsurface.get());
+		const SDL_PixelFormat & fmt = origpix.format();
+		const SDL_PixelFormat & fmt_pc = pcmask.format();
 
-		if (oglsurf)
-		{
-			fmt_pc = fmt = new SDL_PixelFormat;
-			memset(fmt, 0, sizeof(SDL_PixelFormat));
-			fmt->BitsPerPixel = 32; fmt->BytesPerPixel = 4;
-			fmt->Amask = 0xFF000000; fmt->Ashift = 24;
-			fmt->Bmask = 0x00FF0000; fmt->Bshift = 16;
-			fmt->Gmask = 0x0000FF00; fmt->Gshift = 8;
-			fmt->Rmask = 0x000000FF; fmt->Rshift = 0;
-		} else
-#endif
-		{
-			fmt = const_cast<SDL_PixelFormat *>(&newsurface->format());
-			fmt_pc = const_cast<SDL_PixelFormat *>(&pcmask->format());
-		}
-
-		origsurface->lock();
-		pcmask->lock();
-		newsurface->lock();
+		origpix.lock();
+		pcmask.lock();
+		newpix.lock();
 		// This could be done significantly faster, but since we
 		// cache the result, let's keep it simple for now.
-		for (uint32_t y = 0; y < newsurface->get_h(); ++y) {
-			for (uint32_t x = 0; x < newsurface->get_w(); ++x) {
+		for (uint32_t y = 0; y < h; ++y) {
+			for (uint32_t x = 0; x < w; ++x) {
 				RGBAColor source;
 				RGBAColor mask;
 
-				source.set(*fmt, newsurface->get_pixel(x, y));
-				mask.set(*fmt_pc, pcmask->get_pixel(x, y));
+				source.set(fmt, origpix.get_pixel(x, y));
+				mask.set(fmt_pc, pcmask.get_pixel(x, y));
 
 				if
 					(uint32_t const influence =
@@ -321,15 +308,17 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 					dest.b =
 						(plrclr.b * influence + dest.b * (65536 - influence)) >> 16;
 
-					newsurface->set_pixel(x, y, dest.map(*fmt));
+					newpix.set_pixel(x, y, dest.map(fmt));
+				} else {
+					newpix.set_pixel(x, y, source.map(fmt));
 				}
 			}
 		}
-		origsurface->unlock();
-		pcmask->unlock();
-		newsurface->unlock();
+		origpix.unlock();
+		pcmask.unlock();
+		newpix.unlock();
 
-		frames.push_back(g_gr->make_picture(newsurface));
+		frames.push_back(newpicture);
 	}
 }
 

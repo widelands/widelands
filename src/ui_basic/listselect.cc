@@ -21,7 +21,7 @@
 
 #include "constants.h"
 #include "graphic/font_handler.h"
-#include "graphic/picture.h"
+#include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 #include "log.h"
@@ -56,8 +56,7 @@ BaseListselect::BaseListselect
 	m_show_check(show_check),
 	m_fontname(UI_FONT_NAME),
 	m_fontsize(UI_FONT_SIZE_SMALL),
-	m_needredraw(true),
-	m_cache_pic(g_gr->get_no_picture())
+	m_needredraw(true)
 {
 	set_think(false);
 
@@ -358,11 +357,11 @@ void BaseListselect::draw(RenderTarget & odst)
 			odst.blit(Point(0, 0), m_cache_pic);
 			return;
 		} else {
-			if (m_cache_pic == g_gr->get_no_picture())
+			if (!m_cache_pic)
 				m_cache_pic =
-					g_gr->create_picture_surface(get_w(), get_h());
+					g_gr->create_offscreen_surface(get_w(), get_h());
 			// TODO: Handle resize here
-			dst = RenderTarget(m_cache_pic->impl().surface);
+			dst = RenderTarget(m_cache_pic);
 		}
 	}
 
@@ -443,11 +442,9 @@ void BaseListselect::draw(RenderTarget & odst)
 			uint32_t w, h;
 			g_gr->get_picture_size(er.picid, w, h);
 			if (g_gr->caps().offscreen_rendering and false)
-				dst.blit_solid
-					(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+				dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid, CM_Solid);
 			else
-				dst.blit
-					(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+				dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
 		}
 
 		y += lineheight;

@@ -17,15 +17,28 @@
  *
  */
 
-#ifndef SURFACEPTR_H
-#define SURFACEPTR_H
+#ifndef COMPOSITEMODE_H
+#define COMPOSITEMODE_H
 
-#include <boost/shared_ptr.hpp>
+/**
+ * Defines composition operations performed while blitting.
+ */
+enum Composite {
+	/**
+	 * Perform a normal blitting operation that respects the alpha
+	 * channel if present.
+	 */
+	CM_Normal = 0,
 
-struct IOffscreenSurface;
-struct Surface;
+	/**
+	 * Perform a solid blit that ignores the alpha channel information.
+	 */
+	CM_Solid,
 
-typedef boost::shared_ptr<IOffscreenSurface> OffscreenSurfacePtr;
-typedef boost::shared_ptr<Surface> SurfacePtr;
+	/**
+	 * Copy all pixel information, including alpha channel information.
+	 */
+	CM_Copy
+};
 
-#endif // SURFACEPTR_H
+#endif // COMPOSITEMODE_H

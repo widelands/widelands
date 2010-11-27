@@ -19,25 +19,25 @@
 
 #include "picture.h"
 
-#include "surface.h"
+#include "wexception.h"
 
-PictureImpl::~PictureImpl()
-{
-}
+struct NullPicture : IPicture {
+	virtual bool valid() {return false;}
 
-bool PictureImpl::valid()
-{
-	return surface;
-}
+	virtual uint32_t get_w() {return 0;}
+	virtual uint32_t get_h() {return 0;}
 
-uint32_t PictureImpl::get_w()
-{
-	assert(surface);
-	return surface->get_w();
-}
+	virtual IPixelAccess & pixelaccess() {throw wexception("pixelaccess() attempted on null picture");}
+	virtual Surface & surface() {throw wexception("surface() attempted on null picture");}
+};
 
-uint32_t PictureImpl::get_h()
+/**
+ * \return an invalid, null picture
+ *
+ * \see Graphic::get_no_picture
+ */
+const PictureID & IPicture::null()
 {
-	assert(surface);
-	return surface->get_h();
+	static PictureID thenull(new NullPicture);
+	return thenull;
 }
