@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-18 10:39+0000\n"
-"PO-Revision-Date: 2010-11-19 22:10+0000\n"
+"POT-Creation-Date: 2010-11-21 21:05+0000\n"
+"PO-Revision-Date: 2010-11-26 15:45+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-20 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-11-27 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/ship/conf:1
@@ -32,14 +32,14 @@ msgstr "Pokročilý štít"
 msgid ""
 "All atlantean soldiers have to wear the sign of their country on their "
 "chests."
-msgstr "Všetci atlantskí vojaci musia na hrudi nosiť znak ich krajiny."
+msgstr "Každý atlantidský vojak musí na hrudi nosiť znak svojej krajiny."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
 "Already one of the best tridents of the Atlanteans. Only used by very good "
 "fighters."
 msgstr ""
-"Jeden z najlepších trojzubcov Atlanťanov. Používajú ho len veľmi dobrí "
+"Jeden z najlepších trojzubcov Atlantíďanov. Používajú ho len veľmi dobrí "
 "bojovníci."
 
 #: ../../tribes/atlanteans/conf:111
@@ -56,7 +56,7 @@ msgstr "Popol"
 
 #: ../../tribes/atlanteans/conf:5
 msgid "Atlanteans"
-msgstr "Atlanťania"
+msgstr "Atlantíďania"
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Baker"
@@ -136,8 +136,8 @@ msgid ""
 "Blackroots are a special kind of roots. The Atlanteans like their strong "
 "taste and use its flour for making bread."
 msgstr ""
-"Čierne korene sú špeciálne druhy koreňov. Atlanťania majú radi ich štipľavú "
-"chuť a prášok z nich používajú na výrobu chleba."
+"Čierne korene sú špeciálne druhy koreňov. Atlantíďania majú radi ich "
+"štipľavú chuť a prášok z nich používajú na výrobu chleba."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -153,7 +153,7 @@ msgstr "Chová pavúkov pre vlákno."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr "Chová silné atlantské kone"
+msgstr "Chová silné atlantidské kone"
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Buckets"
@@ -318,7 +318,7 @@ msgstr "Sídlo chovateľa rýb"
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
-msgstr "Ryby sú jedným z najväčších zdrojov jedla Atlanťanov."
+msgstr "Ryby sú jedným z najväčších zdrojov jedla Atlantíďanov."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -479,7 +479,7 @@ msgstr "Mäso"
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid "Meat is one food-resource of the Atlanteans."
-msgstr "Mäso je jedným zo zdrojov jedla Atlanťanov."
+msgstr "Mäso je jedným zo zdrojov jedla Atlantíďanov."
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
@@ -545,7 +545,7 @@ msgstr "Dosky"
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid "Planks are an important build material of the Atlanteans."
-msgstr "Dosky sú dôležitým stavebným materiálom Atlanťanov."
+msgstr "Dosky sú dôležitým stavebným materiálom Atlantíďanov."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -919,7 +919,7 @@ msgstr "Kameň"
 
 #: ../../tribes/atlanteans/stone/conf:1
 msgid "Stone is one basic build ware type of the Atlanteans."
-msgstr "Kameň je jedným zo základných typov tovaru Atlanťanov."
+msgstr "Kameň je jedným zo základných typov tovaru Atlantíďanov."
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -935,7 +935,7 @@ msgstr "Kabátec"
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-msgstr "Lovec prináša Atlanťanom čerstvé surové mäso."
+msgstr "Lovec prináša Atlantíďanom čerstvé surové mäso."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
@@ -981,7 +981,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid "These shields are used by the best soldiers of the Atlanteans."
-msgstr "Tieto štíty používajú najlepší vojaci Atlanťanov."
+msgstr "Tieto štíty používajú najlepší vojaci Atlantíďanov."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1127,7 +1127,7 @@ msgid ""
 "the Atlanteans."
 msgstr ""
 "Kmene sú základom pre dosky, ktoré sa používajú na stavbu takmer všetkých "
-"budov Atlanťanov."
+"budov Atlantíďanov."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
