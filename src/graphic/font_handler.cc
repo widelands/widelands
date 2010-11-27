@@ -32,7 +32,6 @@
 #include "rendertarget.h"
 #include "surface.h"
 #include "graphic/render/surface_sdl.h"
-#include "graphic/render/surface_opengl.h"
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>

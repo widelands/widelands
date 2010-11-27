@@ -128,7 +128,7 @@ void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
 
 	const Point bl = rc.bottom_left();
 
-	lock();
+	lock(IPixelAccess::Lock_Normal);
 
 	if (m_surface->format->BytesPerPixel == 4)
 	{
@@ -183,7 +183,7 @@ void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
 				SDL_MapRGB(m_surface->format, r, g, b);
 		}
 	}
-	unlock();
+	unlock(IPixelAccess::Unlock_Update);
 }
 
 #define draw_pixel(p, r, clr)                                                 \

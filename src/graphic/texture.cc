@@ -103,12 +103,12 @@ Texture::Texture
 #ifdef USE_OPENGL
 		if (g_opengl) {
 			// Note: we except the constructor to free the SDL surface
-			boost::shared_ptr<SurfaceOpenGL> surface(new SurfaceOpenGL(*surf));
+			boost::shared_ptr<GLPictureTexture> surface(new GLPictureTexture(surf));
 			m_glFrames.push_back(surface);
 
-			surface->lock();
+			surface->lock(IPixelAccess::Lock_Normal);
 			m_mmap_color = surface->get_pixel(0, 0);
-			surface->unlock();
+			surface->unlock(IPixelAccess::Unlock_NoChange);
 
 			++m_nrframes;
 			continue;

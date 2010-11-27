@@ -58,12 +58,12 @@ uint8_t * SurfaceSDL::get_pixels() const {
 		m_offsx * m_surface->format->BytesPerPixel;
 }
 
-void SurfaceSDL::lock() {
+void SurfaceSDL::lock(LockMode) {
 	if (SDL_MUSTLOCK(m_surface))
 		SDL_LockSurface(m_surface);
 }
 
-void SurfaceSDL::unlock() {
+void SurfaceSDL::unlock(UnlockMode) {
 	if (SDL_MUSTLOCK(m_surface))
 		SDL_UnlockSurface(m_surface);
 }

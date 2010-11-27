@@ -601,7 +601,7 @@ template<typename T> static void draw_field_int
 	upcast(SurfaceSDL, rt_normal, g_gr->get_road_texture(Widelands::Road_Normal).get());
 	upcast(SurfaceSDL, rt_busy, g_gr->get_road_texture(Widelands::Road_Busy).get());
 
-	dst.lock();
+	dst.lock(IPixelAccess::Lock_Normal);
 
 	render_triangle<T> (dst, f_vert, br_vert, r_vert, f_r_texture);
 	render_triangle<T> (dst, f_vert, bl_vert, br_vert, f_d_texture);
@@ -663,7 +663,7 @@ template<typename T> static void draw_field_int
 		}
 	}
 
-	dst.unlock();
+	dst.unlock(IPixelAccess::Unlock_Update);
 
 	// FIXME: similar textures may not need dithering
 }

@@ -22,6 +22,8 @@
 
 #include <stdint.h>
 
+struct SDL_PixelFormat;
+
 /**
  * Interface that provides direct pixel access to a picture or surface.
  *
@@ -29,6 +31,36 @@
  * extremely slow.
  */
 struct IPixelAccess {
+	enum LockMode {
+		/**
+		 * Normal mode preserves pre-existing pixel data so that it can
+		 * be read or modified.
+		 */
+		Lock_Normal = 0,
+
+		/**
+		 * Discard mode discards pre-existing pixel data. All pixels
+		 * will be undefined unless they are re-written.
+		 */
+		Lock_Discard
+	};
+
+	enum UnlockMode {
+		/**
+		 * Update mode will ensure that any changes in the pixel data
+		 * will appear in subsequent operations.
+		 */
+		Unlock_Update = 0,
+
+		/**
+		 * NoChange mode indicates that the caller changed no pixel data.
+		 *
+		 * \note If the caller did change pixel data but specifies NoChange
+		 * mode, the results are undefined.
+		 */
+		Unlock_NoChange
+	};
+
 	IPixelAccess() {}
 	virtual ~IPixelAccess() {}
 
@@ -48,13 +80,13 @@ struct IPixelAccess {
 	 * \note Lock/Unlock pairs cannot be nested.
 	 */
 	//@{
-	virtual void lock() = 0;
-	virtual void unlock() = 0;
+	virtual void lock(LockMode) = 0;
+	virtual void unlock(UnlockMode) = 0;
 	//@}
 
 	//@{
 	virtual uint32_t get_pixel(uint32_t x, uint32_t y) = 0;
-	virtual void set_pixel(uint32_t x, uint32_t y, Uint32 clr) = 0;
+	virtual void set_pixel(uint32_t x, uint32_t y, uint32_t clr) = 0;
 	//@}
 
 	/**

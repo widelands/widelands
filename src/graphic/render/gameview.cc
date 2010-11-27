@@ -33,7 +33,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "surface_opengl.h"
 #include "surface_sdl.h"
 #include "graphic/texture.h"
 
@@ -974,9 +973,6 @@ void GameView::draw_field
 	 Texture const &  f_r_texture)
 {
 	upcast(SurfaceSDL, sdlsurf, m_surface.get());
-#ifdef USE_OPENGL
-	upcast(SurfaceOpenGL, oglsurf, m_surface.get());
-#endif
 	if (sdlsurf)
 	{
 		sdlsurf->set_subwin(subwin);
@@ -1001,13 +997,14 @@ void GameView::draw_field
 		sdlsurf->unset_subwin();
 	}
 #ifdef USE_OPENGL
-	else if (oglsurf) {
+	else
+	{
 		// Draw triangle right (bottom) of the field
 		draw_field_opengl
-			(*oglsurf, subwin, f_vert, br_vert, r_vert, f_r_texture);
+			(subwin, f_vert, br_vert, r_vert, f_r_texture);
 		// Draw triangle bottom of the field
 		draw_field_opengl
-			(*oglsurf, subwin, f_vert, bl_vert, br_vert, f_d_texture);
+			(subwin, f_vert, bl_vert, br_vert, f_d_texture);
 		// Draw the roads
 		draw_roads_opengl(subwin, roads, f_vert, r_vert, bl_vert, br_vert);
 	}

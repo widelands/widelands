@@ -65,8 +65,8 @@ struct SurfaceSDL : IOffscreenSurface {
 	uint16_t get_pitch() const {return m_surface->pitch;}
 
 	/// Lock
-	void lock();
-	void unlock();
+	void lock(LockMode);
+	void unlock(UnlockMode);
 
 	/// For the slowest: Indirect pixel access
 	uint32_t get_pixel(uint32_t x, uint32_t y);

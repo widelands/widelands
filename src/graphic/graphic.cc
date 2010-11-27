@@ -37,7 +37,8 @@
 #include "texture.h"
 
 #include "render/surface_sdl.h"
-#include "render/surface_opengl.h"
+#include "render/gl_picture_texture.h"
+#include "render/gl_surface_screen.h"
 
 #include "logic/roadtype.h"
 #include "logic/widelands_fileread.h"
@@ -277,9 +278,7 @@ Graphic::Graphic
 
 	if (g_opengl)
 	{
-		boost::shared_ptr<SurfaceOpenGL> screen(new SurfaceOpenGL(w, h));
-		screen->m_isscreen = true;
-		m_screen = screen;
+		m_screen.reset(new GLSurfaceScreen(w, h));
 	}
 	else
 #endif
@@ -623,7 +622,7 @@ SDL_Surface * Graphic::extract_sdl_surface(IPixelAccess & pix, Rect srcrect)
 		(SDL_SWSURFACE, srcrect.w, srcrect.h,
 		 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
 
-	pix.lock();
+	pix.lock(IPixelAccess::Lock_Normal);
 	SDL_LockSurface(dest);
 
 	uint32_t srcpitch = pix.get_pitch();
@@ -638,7 +637,7 @@ SDL_Surface * Graphic::extract_sdl_surface(IPixelAccess & pix, Rect srcrect)
 	}
 
 	SDL_UnlockSurface(dest);
-	pix.unlock();
+	pix.unlock(IPixelAccess::Unlock_NoChange);
 
 	return dest;
 }
@@ -729,7 +728,7 @@ void Graphic::save_png(IPixelAccess & pix, StreamWrite * sw) const
 
 		//Write each row
 		const SDL_PixelFormat & fmt = pix.format();
-		pix.lock();
+		pix.lock(IPixelAccess::Lock_Normal);
 
 		// Write each row
 		for (uint32_t y = 0; y < surf_h; ++y) {
@@ -745,7 +744,7 @@ void Graphic::save_png(IPixelAccess & pix, StreamWrite * sw) const
 			png_write_row(png_ptr, row.get());
 		}
 
-		pix.unlock();
+		pix.unlock(IPixelAccess::Unlock_NoChange);
 	}
 
 	// End write
@@ -790,7 +789,7 @@ PictureID Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 	if (g_opengl)
 	{
 #ifdef USE_OPENGL
-		return PictureID(new SurfaceOpenGL(*surf));
+		return PictureID(new GLPictureTexture(surf));
 #endif
 	} else {
 		SDL_Surface * surface;
@@ -852,7 +851,7 @@ PictureID Graphic::create_picture(int32_t w, int32_t h, bool alpha)
 #ifdef USE_OPENGL
 	if (g_opengl)
 	{
-		return PictureID(new SurfaceOpenGL(w, h));
+		return PictureID(new GLPictureTexture(w, h));
 	}
 	else
 #endif
@@ -893,8 +892,8 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid)
 	IPixelAccess & destpix = destpicture->pixelaccess();
 	const SDL_PixelFormat & destfmt = destpix.format();
 
-	origpix.lock();
-	destpix.lock();
+	origpix.lock(IPixelAccess::Lock_Normal);
+	destpix.lock(IPixelAccess::Lock_Discard);
 	for (uint32_t y = 0; y < h; ++y) {
 		for (uint32_t x = 0; x < w; ++x) {
 			RGBAColor color;
@@ -917,8 +916,8 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid)
 			destpix.set_pixel(x, y, color.map(destfmt));
 		}
 	}
-	origpix.unlock();
-	destpix.unlock();
+	origpix.unlock(IPixelAccess::Unlock_NoChange);
+	destpix.unlock(IPixelAccess::Unlock_Update);
 
 	return destpicture;
 }

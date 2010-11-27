@@ -22,7 +22,6 @@
 #include "io/streamwrite.h"
 
 #include "surface_sdl.h"
-#include "surface_opengl.h"
 #include "graphic/graphic.h"
 #include "graphic/picture.h"
 
@@ -272,9 +271,9 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 		const SDL_PixelFormat & fmt_pc = pcmask.format();
 		const SDL_PixelFormat & destfmt = newpix.format();
 
-		origpix.lock();
-		pcmask.lock();
-		newpix.lock();
+		origpix.lock(IPixelAccess::Lock_Normal);
+		pcmask.lock(IPixelAccess::Lock_Normal);
+		newpix.lock(IPixelAccess::Lock_Discard);
 		// This could be done significantly faster, but since we
 		// cache the result, let's keep it simple for now.
 		for (uint32_t y = 0; y < h; ++y) {
@@ -316,9 +315,9 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 				newpix.set_pixel(x, y, product.map(destfmt));
 			}
 		}
-		origpix.unlock();
-		pcmask.unlock();
-		newpix.unlock();
+		origpix.unlock(IPixelAccess::Unlock_NoChange);
+		pcmask.unlock(IPixelAccess::Unlock_NoChange);
+		newpix.unlock(IPixelAccess::Unlock_Update);
 
 		frames.push_back(newpicture);
 	}

@@ -28,8 +28,6 @@
 #include "vertex.h"
 
 #include "offscreensurface.h"
-#include "graphic/render/surface_opengl.h"
-#include "graphic/render/surface_sdl.h"
 
 #include "log.h"
 #include "upcast.h"
