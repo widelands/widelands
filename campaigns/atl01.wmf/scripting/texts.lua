@@ -144,7 +144,7 @@ will need at least two of those.<br><br>
 obj_spidercloth_production = {
    name = "obj_spidercloth_production",
    title = _ "Build a spiderfarm and a weaving mill",
-   body = obj_text(_"Establish a spidercloth production",
+   body = obj_text(_"Establish a spidercloth production", _
 [[The weavers produce spidercloth and tabards in the weaving-mill. Spidercloth
 is needed for the construction of some buildings and clothing while tabards
 are the uniforms of soldiers. The weaving-mill needs gold yarn and spider yarn
@@ -159,7 +159,7 @@ produced by the gold weaver out of gold.<br><br>
 obj_make_heavy_industry_and_mining = {
    name = "obj_make_heavy_industry_and_mining",
    title = _ "Build industry and mines",
-   body = obj_text(_"Build industry and mines",
+   body = obj_text(_"Build industry and mines", _
 [[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine
 is digging for crystal, quartz and diamond - all of them are rare materials and
 very seldom found. While it searches for them, it produces a lot of stone.<br>
@@ -187,7 +187,7 @@ industry are used to train better soldiers in the two training buildings.<br><br
 obj_horsefarm_and_warehouse = {
    name = "obj_horsefarm_and_warehouse",
    title = _"Build a warehouse and a horsefarm",
-   body = obj_text(_"Build a warehouse and a horsefarm",
+   body = obj_text(_"Build a warehouse and a horsefarm", _
 [[As your road network gets longer and more complicated, you should employ
 horses to help out your carriers. Horses are bred in horsefarms using water and
 corn. A warehouse will also help to ensure your transportation system does not
@@ -197,7 +197,7 @@ collapse.]])
 obj_build_ships = {
    name = "obj_build_ships",
    title = _ "Build 3 ships to escape from the island",
-   body = obj_text(_"Escape from the island",
+   body = obj_text(_"Escape from the island", _
 [[There is a lake at the top of the island. Build 3 ships in these waters
 and you might be able to rescue your people when the island is swallowed
 completely by the ocean. Build a shipyard close to the lake to start
@@ -455,7 +455,7 @@ a weapon smithy, an armor smithy and a tool smithy. And maybe even more.]]
    },
    {
       title = _ "Jundlina replies",
-      body = jundlina(_"Jundlina nods",
+      body = jundlina(_"Jundlina nods", _
 [[I have considered this, Sidolus. I think, it is about time. We will make this
 a priority for now. You shall get your industry and soon!]]
       ) .. new_objectives(obj_make_heavy_industry_and_mining)
@@ -629,8 +629,8 @@ but I think, it could work.]]
 },
 {
    title = _ "Jundlina replies",
-   body = jundlina(_ [[
-Your red hair is a signal from the fire god. I will trust you and support your
+   body = jundlina(_
+[[Your red hair is a signal from the fire god. I will trust you and support your
 plan. Our survival lays in your hands now, Ostur.
 <br><br>Swift now, we need a house for Ostur next to the lake and we need
 planks, trunks and spidercloth for the construction there. Forget about
@@ -643,8 +643,8 @@ warehouses are all swallowed by the sea.]]
 scenario_won = {
    {
       title = _ "Jundlina is relieved",
-      body = jundlina(_"Jundlina", _ [[
-Praise Satul! Ostur, the young ship builder did it. We have three ships -
+      body = jundlina(_"Jundlina", _
+[[Praise Satul! Ostur, the young ship builder did it. We have three ships -
 never have I seen sturdier ones - with enough room to carry all of us and some
 wares too. And this rescue came just in time: Lutas is about to swallow the rest
 of this island, the water rises faster by the hour. But we can make our escape
