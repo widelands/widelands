@@ -270,6 +270,7 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 
 		const SDL_PixelFormat & fmt = origpix.format();
 		const SDL_PixelFormat & fmt_pc = pcmask.format();
+		const SDL_PixelFormat & destfmt = newpix.format();
 
 		origpix.lock();
 		pcmask.lock();
@@ -280,6 +281,7 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 			for (uint32_t x = 0; x < w; ++x) {
 				RGBAColor source;
 				RGBAColor mask;
+				RGBAColor product;
 
 				source.set(fmt, origpix.get_pixel(x, y));
 				mask.set(fmt_pc, pcmask.get_pixel(x, y));
@@ -300,18 +302,18 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 					plrclr.g = (plrclrs[3].g() * intensity) >> 8;
 					plrclr.b = (plrclrs[3].b() * intensity) >> 8;
 
-					RGBAColor dest(source);
-					dest.r =
-						(plrclr.r * influence + dest.r * (65536 - influence)) >> 16;
-					dest.g =
-						(plrclr.g * influence + dest.g * (65536 - influence)) >> 16;
-					dest.b =
-						(plrclr.b * influence + dest.b * (65536 - influence)) >> 16;
-
-					newpix.set_pixel(x, y, dest.map(fmt));
+					product.r =
+						(plrclr.r * influence + source.r * (65536 - influence)) >> 16;
+					product.g =
+						(plrclr.g * influence + source.g * (65536 - influence)) >> 16;
+					product.b =
+						(plrclr.b * influence + source.b * (65536 - influence)) >> 16;
+					product.a = source.a;
 				} else {
-					newpix.set_pixel(x, y, source.map(fmt));
+					product = source;
 				}
+
+				newpix.set_pixel(x, y, product.map(destfmt));
 			}
 		}
 		origpix.unlock();

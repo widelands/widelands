@@ -31,8 +31,6 @@ long unsigned int num_tex = 0;
 
 #define handle_glerror() _handle_glerror(__FILE__, __LINE__)
 
-SDL_PixelFormat * rgbafmt = 0;
-
 /* handle_glerror() is intended to make debugging of oengl easier. It logs the
  * error code returned by glGetError and returns the error code.
  */
@@ -315,16 +313,24 @@ bool SurfaceOpenGL::valid()
  */
 const SDL_PixelFormat * SurfaceOpenGL::get_format() const
 {
-	if (rgbafmt)
-		return rgbafmt;
-	rgbafmt = new SDL_PixelFormat;
-	rgbafmt->BitsPerPixel = 32;
-	rgbafmt->BytesPerPixel = 4;
-	rgbafmt->Rmask = 0x000000ff; rgbafmt->Gmask = 0x0000ff00;
-	rgbafmt->Bmask = 0x00ff0000; rgbafmt->Amask = 0xff000000;
-	rgbafmt->Ashift = 24; rgbafmt->Bshift = 16; rgbafmt->Gshift = 8;
-	rgbafmt->Rshift = 0; rgbafmt->palette = 0;
-	return rgbafmt;
+	static SDL_PixelFormat format;
+	static bool init = false;
+	if (init)
+		return &format;
+
+	init = true;
+	memset(&format, 0, sizeof(format));
+	format.BitsPerPixel = 32;
+	format.BytesPerPixel = 4;
+	format.Rmask = 0x000000ff;
+	format.Gmask = 0x0000ff00;
+	format.Bmask = 0x00ff0000;
+	format.Amask = 0xff000000;
+	format.Rshift = 0;
+	format.Gshift = 8;
+	format.Bshift = 16;
+	format.Ashift = 24;
+	return &format;
 }
 
 /* lock the surface for pixel access. This allocates memory and copies the
