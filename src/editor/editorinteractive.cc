@@ -594,6 +594,7 @@ void Editor_Interactive::run_editor(std::string const & filename)
 	editor.cleanup_objects();
 
 	g_gr->flush(PicMod_Game);
+	g_gr->flush_animations();
 	g_anim.flush();
 }
 
