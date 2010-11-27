@@ -93,7 +93,6 @@ struct SurfaceSDL : IOffscreenSurface {
 	bool valid() {return m_surface;}
 
 	virtual IPixelAccess & pixelaccess() {return *this;}
-	virtual Surface & surface() {return *this;} //TODO get rid of this
 
 private:
 	SurfaceSDL & operator= (SurfaceSDL const &);

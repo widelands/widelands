@@ -145,7 +145,6 @@ public:
 	oglTexture & getTexture() {return *m_texture;}
 
 	virtual IPixelAccess & pixelaccess() {return *this;}
-	virtual Surface & surface() {return *this;} //TODO get rid of this
 
 private:
 	SurfaceOpenGL & operator= (SurfaceOpenGL const &);
@@ -155,12 +154,6 @@ private:
 	oglTexture * m_texture;
 	/// Indicates that the texture needs to be updated after pixel access
 	bool m_glTexUpdate;
-
-	//@{
-	/// set/unset a clipping rectangle
-	void set_subwin(Rect r);
-	void unset_subwin();
-	//@}
 
 	uint8_t * m_pixels;
 	bool m_locked;

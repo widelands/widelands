@@ -43,9 +43,6 @@ struct IPicture {
 
 	virtual IPixelAccess & pixelaccess() = 0;
 
-	//TODO: get rid of this
-	virtual Surface & surface() = 0;
-
 private:
 	// forbid copying
 	IPicture(const IPicture &);

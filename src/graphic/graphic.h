@@ -99,7 +99,6 @@ enum PicMod {
 	PicMod_UI = 0,
 	PicMod_Menu,
 	PicMod_Game,
-	PicMod_Font, //TODO: is this used?
 
 	// Must be last
 	PicMod_Last
