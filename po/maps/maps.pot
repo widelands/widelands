@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-27 16:38+0000\n"
+"POT-Creation-Date: 2010-11-29 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -114,6 +114,11 @@ msgid ""
 "Crater"
 msgstr ""
 
+#: ../../maps/Desert Tournament.wmf/elemental:7
+msgid ""
+"Desert Tournament"
+msgstr ""
+
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid ""
 "Dry Riverbed"
@@ -177,6 +182,11 @@ msgstr ""
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid ""
 "Four Mountains"
+msgstr ""
+
+#: ../../maps/Desert Tournament.wmf/elemental:9
+msgid ""
+"Four tribes struggle with their nearest neighbour to be the first to reach the mountain of gold that primises riches beyond belief. But can the two remaining ones share the resources wisely?"
 msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
