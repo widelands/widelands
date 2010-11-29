@@ -576,7 +576,11 @@ PictureID Graphic::get_resized_picture
 				 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
 			SDL_Rect srcrc = {srcrect.x, srcrect.y, srcrect.w, srcrect.h};
 			SDL_Rect dstrc = {0, 0, 0, 0};
+			bool alpha = srcsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
+			uint8_t alphaval = srcsurf->get_sdl_surface()->format->alpha;
+			SDL_SetAlpha(srcsurf->get_sdl_surface(), 0, 0);
 			SDL_BlitSurface(srcsurf->get_sdl_surface(), &srcrc, srcsdl, &dstrc);
+			SDL_SetAlpha(srcsurf->get_sdl_surface(), alpha ? SDL_SRCALPHA : 0, alphaval);
 		} else {
 			srcsdl = srcsurf->get_sdl_surface();
 			free_source = false;
@@ -598,6 +602,7 @@ PictureID Graphic::get_resized_picture
 			 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
 		SDL_Rect srcrc = {0, 0, zoomed->w, zoomed->h};
 		SDL_Rect dstrc = {destrect.x, destrect.y};
+		SDL_SetAlpha(zoomed, 0, 0);
 		SDL_BlitSurface(zoomed, &srcrc, placed, &dstrc);
 		SDL_FreeSurface(zoomed);
 		zoomed = placed;
