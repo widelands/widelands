@@ -7,24 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-12 00:00+0000\n"
+"POT-Creation-Date: 2010-11-27 16:38+0000\n"
+"PO-Revision-Date: 2010-11-28 15:08+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-13 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-29 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
 msgstr ""
-"Uma verdadeira refeição que satisfaça as necessidades de todos os mineiros."
+"Uma verdadeira refeição que satisfaça todas as necessidades dos mineiros."
 
 #: ../../tribes/empire/ration/conf:1
 msgid "A small bite to keep miners strong and working."
-msgstr "Uma pequena merenda para manter os mineiros fortes e saudáveis."
+msgstr "Um pequeno lanche para manter os mineiros fortes e a trabalhar"
 
 #: ../../tribes/empire/conf:56
 msgid "Advanced Lance"
@@ -64,7 +64,7 @@ msgstr "Padaria"
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Produz pão para os trabalhadores"
+msgstr "Coze o pão para os trabalhadores."
 
 #: ../../tribes/empire/conf:199
 msgid "Barracks"
@@ -126,7 +126,7 @@ msgstr "Queimador"
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
-msgstr "Queima carvão"
+msgstr "Produz carvão."
 
 #: ../../tribes/empire/conf:114
 msgid "Carpenter"
@@ -138,7 +138,7 @@ msgstr "Carregador"
 
 #: ../../tribes/empire/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr "Carrega as mercadorias pelas suas estradas."
+msgstr "Ele carrega as mercadorias pelas tuas estradas."
 
 #: ../../tribes/empire/conf:142
 #: ../../tribes/empire/conf:203
@@ -558,7 +558,7 @@ msgstr ""
 msgid "Miner"
 msgstr "Mineiro"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:115
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
 msgstr "Espaço insuficiente"
 
@@ -677,6 +677,10 @@ msgstr "Produz Foice"
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce shovel"
 msgstr "Produz Pá"
+
+#: ../../tribes/empire/weaponsmithy/conf:33
+msgid "Produce war lance"
+msgstr "Produzir Lança de Guerra"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
@@ -830,15 +834,15 @@ msgstr "Funde ferro."
 msgid "Soldier"
 msgstr "Soldado"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:116
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
-"Não houve espaço suficiente para que alguns edifícios fossem\n"
-"construídos. Por isso estás em desvantagem ! Aconselho-te a\n"
-"recomeçar este mapa com uma situação inicial mais justa."
+"Alguns dos teus edifícios iniciais não foram construídos por não haver\n"
+"espaço suficiente para os construir, por isso estás em desvantagem.\n"
+"Re-iniciar o mapa para poderes começar em melhores condições."
 
 #: ../../tribes/empire/conf:128
 msgid "Stonemason"
@@ -1339,3 +1343,12 @@ msgid ""
 msgstr ""
 "Jovens guerreiros precisam de incentivos. Esta bebida faz um homem perder o "
 "medo e sentir-se forte."
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Não houve espaço suficiente para que alguns edifícios fossem\n"
+#~ "construídos. Por isso estás em desvantagem ! Aconselho-te a\n"
+#~ "recomeçar este mapa com uma situação inicial mais justa."

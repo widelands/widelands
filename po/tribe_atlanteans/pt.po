@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
-"PO-Revision-Date: 2010-11-11 23:58+0000\n"
+"POT-Creation-Date: 2010-11-27 16:38+0000\n"
+"PO-Revision-Date: 2010-11-28 15:07+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-13 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-29 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/ship/conf:1
@@ -79,7 +79,7 @@ msgstr "Pá-de-Forno"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "Barracks"
-msgstr "Casernas"
+msgstr "Quartel"
 
 #: ../../tribes/atlanteans/conf:146
 #: ../../tribes/atlanteans/conf:154
@@ -168,11 +168,11 @@ msgstr "Construtor"
 
 #: ../../tribes/atlanteans/conf:115
 msgid "Burner"
-msgstr "Queimador"
+msgstr "Carvoeiro"
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
-msgstr "Queima carvão."
+msgstr "Produz Carvão."
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Carrier"
@@ -180,7 +180,7 @@ msgstr "Carregador"
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr "Carrega itens ao longo das suas estradas."
+msgstr "Ele carrega as mercadorias pelas tuas estradas."
 
 #: ../../tribes/atlanteans/conf:155
 #: ../../tribes/atlanteans/conf:201
@@ -524,7 +524,7 @@ msgstr "Extrai pedra"
 msgid "Miner"
 msgstr "Mineiro"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:99
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:103
 msgid "Not enough space"
 msgstr "Espaço insuficiente"
 
@@ -883,15 +883,15 @@ msgstr ""
 msgid "Soldier"
 msgstr "Soldado"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:100
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:104
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
-"Algumas das suas construções não têm espaço suficiente e\n"
-"não podem ser construidos. Estás em desvantagem, considera recomeçar\n"
-"este mapa numa posição inicial justa."
+"Alguns dos teus edifícios iniciais não foram construídos por não haver\n"
+"espaço suficiente para os construir, por isso estás em desvantagem.\n"
+"Re-iniciar o mapa para poderes começar em melhores condições."
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
@@ -1339,3 +1339,12 @@ msgstr "Trabalha no Estaleiro naval onde constrói as novas embarcações"
 msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr ""
 "Trabalha nas profundezas das minas para extrair carvão, ferro ou ouro."
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Algumas das suas construções não têm espaço suficiente e\n"
+#~ "não podem ser construidos. Estás em desvantagem, considera recomeçar\n"
+#~ "este mapa numa posição inicial justa."
