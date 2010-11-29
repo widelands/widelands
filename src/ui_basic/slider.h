@@ -97,8 +97,8 @@ private:
 protected:
 	int32_t m_cursor_pos;         //  cursor position
 	int32_t m_cursor_size;        //  cursor width
-	bool        m_needredraw;
-	PictureID   m_cache_pic;
+	bool m_needredraw;
+	OffscreenSurfacePtr m_cache_pic;
 };
 
 

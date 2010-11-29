@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,39 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
  */
 
-#include "icon.h"
-#include "graphic/rendertarget.h"
-#include "graphic/picture.h"
+#ifndef GL_UTILS_H
+#define GL_UTILS_H
 
-namespace UI {
+#include <stdint.h>
+#include <SDL_opengl.h>
 
-Icon::Icon
-	(Panel * const parent,
-	 const int32_t x, const int32_t y, const int32_t w, const int32_t h,
-	 const PictureID picture_id)
-	:
-	Panel(parent, x, y, w, h),
-	m_pic(picture_id),
-	m_w(w),
-	m_h(h)
-{
-	set_handle_mouse(false);
-	set_think(false);
-}
+struct SDL_PixelFormat;
 
-void Icon::setIcon(PictureID picture_id) {
-	m_pic = picture_id;
-	update();
-}
+uint32_t next_power_of_two(uint32_t x);
+const SDL_PixelFormat & gl_rgba_format();
+GLenum _handle_glerror(const char * file, unsigned int line);
 
-void Icon::draw(RenderTarget & dst) {
-	assert(m_pic != g_gr->get_no_picture());
-	int32_t w = (m_w - m_pic->get_w()) / 2;
-	int32_t h = (m_h - m_pic->get_h()) / 2;
-	dst.blit(Point(w, h), m_pic);
-}
+/**
+ * handle_glerror() is intended to make debugging of oengl easier. It logs the
+ * error code returned by glGetError and returns the error code.
+ */
+#define handle_glerror() _handle_glerror(__FILE__, __LINE__)
 
-}
+#endif // GL_UTILS_H

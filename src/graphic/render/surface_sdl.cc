@@ -25,7 +25,7 @@
 
 SurfaceSDL::~SurfaceSDL() {
 	//log("SurfaceSDL::~SurfaceSDL()\n");
-	if (m_surface and m_surf_type != SURFACE_SCREEN)
+	if (m_surface and !m_isscreen)
 		SDL_FreeSurface(m_surface);
 }
 
@@ -58,12 +58,12 @@ uint8_t * SurfaceSDL::get_pixels() const {
 		m_offsx * m_surface->format->BytesPerPixel;
 }
 
-void SurfaceSDL::lock() {
+void SurfaceSDL::lock(LockMode) {
 	if (SDL_MUSTLOCK(m_surface))
 		SDL_LockSurface(m_surface);
 }
 
-void SurfaceSDL::unlock() {
+void SurfaceSDL::unlock(UnlockMode) {
 	if (SDL_MUSTLOCK(m_surface))
 		SDL_UnlockSurface(m_surface);
 }
@@ -146,4 +146,9 @@ void SurfaceSDL::unset_subwin() {
 	m_offsy = 0;
 	m_w = m_surface->w;
 	m_h = m_surface->h;
+}
+
+void SurfaceSDL::set_isscreen(bool screen)
+{
+	m_isscreen = screen;
 }

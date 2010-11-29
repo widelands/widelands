@@ -75,20 +75,19 @@ throw (_wexception)
 					if (!surf)
 						continue; //  Illegal pic. Skip it.
 
-					Surface & picsurf = g_gr->create_surface(*surf);
+					PictureID const picture = g_gr->convert_sdl_surface_to_picture(surf);
 
 					std::string picname = FileSystem::FS_Filename(pname->c_str());
 					picname = "map:" + picname;
 
-					PictureID const data =
-						g_gr->get_picture(PicMod_Game, picsurf, picname.c_str());
+					g_gr->add_picture_to_cache(PicMod_Game, picname, picture);
 
 					//  OK, the pic is now known to the game. But when the game is
 					//  saved, this data has to be regenerated.
 					Map::Extradata_Info info;
 					info.type     = Map::Extradata_Info::PIC;
 					info.filename = *pname;
-					info.data     = data;
+					info.data     = picture;
 					map.m_extradatainfos.push_back(info);
 				}
 			}

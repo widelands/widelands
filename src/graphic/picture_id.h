@@ -21,8 +21,8 @@
 
 #include <boost/shared_ptr.hpp>
 
-struct Picture;
+struct IPicture;
 
-typedef boost::shared_ptr<Picture> PictureID;
+typedef boost::shared_ptr<IPicture> PictureID;
 
 #endif

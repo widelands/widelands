@@ -444,7 +444,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 		:
 		_("Spectator");
 	temp  = (format(_("At the moment you are %s\n\n")) % temp.c_str()).str();
-	temp += "Click on the \"?\" in the right top corner to get help.";
+	temp += _("Click on the \"?\" in the right top corner to get help.");
 	m_client_info.set_text(temp);
 
 	// Update the multi player setup group

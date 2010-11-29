@@ -17,36 +17,28 @@
  *
  */
 
-#include "icon.h"
-#include "graphic/rendertarget.h"
-#include "graphic/picture.h"
+#ifndef COMPOSITEMODE_H
+#define COMPOSITEMODE_H
 
-namespace UI {
+/**
+ * Defines composition operations performed while blitting.
+ */
+enum Composite {
+	/**
+	 * Perform a normal blitting operation that respects the alpha
+	 * channel if present.
+	 */
+	CM_Normal = 0,
 
-Icon::Icon
-	(Panel * const parent,
-	 const int32_t x, const int32_t y, const int32_t w, const int32_t h,
-	 const PictureID picture_id)
-	:
-	Panel(parent, x, y, w, h),
-	m_pic(picture_id),
-	m_w(w),
-	m_h(h)
-{
-	set_handle_mouse(false);
-	set_think(false);
-}
+	/**
+	 * Perform a solid blit that ignores the alpha channel information.
+	 */
+	CM_Solid,
 
-void Icon::setIcon(PictureID picture_id) {
-	m_pic = picture_id;
-	update();
-}
+	/**
+	 * Copy all pixel information, including alpha channel information.
+	 */
+	CM_Copy
+};
 
-void Icon::draw(RenderTarget & dst) {
-	assert(m_pic != g_gr->get_no_picture());
-	int32_t w = (m_w - m_pic->get_w()) / 2;
-	int32_t h = (m_h - m_pic->get_h()) / 2;
-	dst.blit(Point(w, h), m_pic);
-}
-
-}
+#endif // COMPOSITEMODE_H
