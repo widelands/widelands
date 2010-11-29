@@ -21,6 +21,7 @@
 
 #include "constants.h"
 #include "graphic/font_handler.h"
+#include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 #include "log.h"
@@ -55,8 +56,7 @@ BaseListselect::BaseListselect
 	m_show_check(show_check),
 	m_fontname(UI_FONT_NAME),
 	m_fontsize(UI_FONT_SIZE_SMALL),
-	m_needredraw(true),
-	m_cache_pic(g_gr->get_no_picture())
+	m_needredraw(true)
 {
 	set_think(false);
 
@@ -347,7 +347,7 @@ Redraw the listselect box
 */
 void BaseListselect::draw(RenderTarget & odst)
 {
-	RenderTarget * dst = &odst;
+	RenderTarget dst = odst;
 
 	// Render Caching is disable because it does not work good with the
 	// transparent background.
@@ -357,11 +357,11 @@ void BaseListselect::draw(RenderTarget & odst)
 			odst.blit(Point(0, 0), m_cache_pic);
 			return;
 		} else {
-			if (m_cache_pic == g_gr->get_no_picture())
+			if (!m_cache_pic)
 				m_cache_pic =
-					g_gr->create_picture_surface(get_w(), get_h());
+					g_gr->create_offscreen_surface(get_w(), get_h());
 			// TODO: Handle resize here
-			dst = (g_gr->get_surface_renderer(m_cache_pic));
+			dst = RenderTarget(m_cache_pic);
 		}
 	}
 
@@ -371,7 +371,7 @@ void BaseListselect::draw(RenderTarget & odst)
 	int32_t y = 1 + idx * lineheight - m_scrollpos;
 
 	//if (not g_gr->caps().offscreen_rendering)
-		dst->brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+		dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 	//else
 	//dst->fill_rect
 	//(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(20, 20, 20, 80));
@@ -403,7 +403,7 @@ void BaseListselect::draw(RenderTarget & odst)
 				//if (g_gr->caps().offscreen_rendering and false)
 				//dst->fill_rect(r, RGBAColor(100, 100, 100, 80));
 				//else
-					dst->brighten_rect
+					dst.brighten_rect
 						(r, - ms_darken_value * 2);
 						//(Rect(Point(1, y), get_eff_w() - 2,
 						// m_lineheight), -ms_darken_value*2);
@@ -423,7 +423,7 @@ void BaseListselect::draw(RenderTarget & odst)
 
 		// Horizontal center the string
 		UI::g_fh->draw_string
-			(*dst,
+			(dst,
 			 m_fontname, m_fontsize,
 			 col,
 			 RGBColor(107, 87, 55),
@@ -442,11 +442,9 @@ void BaseListselect::draw(RenderTarget & odst)
 			uint32_t w, h;
 			g_gr->get_picture_size(er.picid, w, h);
 			if (g_gr->caps().offscreen_rendering and false)
-				dst->blit_solid
-					(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+				dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid, CM_Solid);
 			else
-				dst->blit
-					(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+				dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
 		}
 
 		y += lineheight;

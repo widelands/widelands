@@ -54,7 +54,7 @@ else (DEFINED MSVC)
     add_executable (widelands ${GUI_TYPE} main.cc build_info.cc ${WIN32_ICON_O})
   else (DEFINED MINGW)
     add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
-  endif (DEFINED MINGW) 
+  endif (DEFINED MINGW)
 endif (DEFINED MSVC)
 
 add_library (widelands_all ${WL_SRCS_CC} ${WL_SRCS_H})
@@ -72,7 +72,7 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
     if (WIN32)
       string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
     endif (WIN32)
-    get_filename_component(sourcename ${sourcefile} NAME) 
+    get_filename_component(sourcename ${sourcefile} NAME)
     set(stamp ${sourcename}_)
     add_custom_command(
       OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash}"
@@ -151,7 +151,7 @@ if (WIN32)
 
   else (DEFINED MSVC)
     target_link_libraries(widelands wsock32)
-  endif (DEFINED MSVC) 
+  endif (DEFINED MSVC)
 endif (WIN32)
 
 install(TARGETS widelands DESTINATION ${WLBUILD_INSTALL_BINDIR} COMPONENT ExecutableFiles)

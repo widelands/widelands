@@ -50,8 +50,6 @@ ProgressWindow::ProgressWindow(const std::string & background)
 }
 
 ProgressWindow::~ProgressWindow() {
-	if (m_background_pic != g_gr->get_no_picture())
-		g_gr->free_picture_surface(m_background_pic);
 	const VisualizationArray & visualizations = m_visualizations;
 	container_iterate_const(VisualizationArray, visualizations, i)
 		(*i.current)->stop(); //  inform visualizations
@@ -68,27 +66,17 @@ void ProgressWindow::draw_background
 		(m_background_pic == g_gr->get_no_picture()
 		 or xres != m_xres or yres != m_yres)
 	{
-		if (m_background_pic != g_gr->get_no_picture())
-			g_gr->free_picture_surface(m_background_pic);
-
-		// Load background graphics
+		// (Re-)Load background graphics
+		// Note that the old pic is freed automatically
 		PictureID const background_original =
 			g_gr->get_picture(PicMod_Menu, m_background.c_str());
 
-		if (g_gr->caps().resize_surfaces and not g_gr->caps().blit_resized) {
-			PictureID const background_resized  =
-				g_gr->get_resized_picture
-					(background_original, xres, yres,
-					 Graphic::ResizeMode_Loose);
+		PictureID const background_resized  =
+			g_gr->get_resized_picture
+				(background_original, xres, yres,
+				 Graphic::ResizeMode_Loose);
 
-			if (background_resized != g_gr->get_no_picture()) {
-				m_background_pic = background_resized;
-				if (background_resized != background_original)
-					g_gr->free_picture_surface(background_original);
-			} else
-				m_background_pic = background_original;
-		} else
-			m_background_pic = background_original;
+		m_background_pic = background_resized;
 
 		const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
 		m_label_rectangle.x = xres / 4;
@@ -101,12 +89,7 @@ void ProgressWindow::draw_background
 		m_yres = yres;
 	}
 
-	if (g_gr->caps().resize_surfaces and not g_gr->caps().blit_resized)
-		rt.blit
-			(Point(0, 0), m_background_pic);
-	else
-		rt.blit
-			(Rect(Point(0, 0), rt.get_w(), rt.get_h()), m_background_pic);
+	rt.blit(Point(0, 0), m_background_pic);
 
 	Rect border_rect = m_label_rectangle;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
@@ -144,7 +127,6 @@ void ProgressWindow::set_background(const std::string & file_name) {
 	} else
 		m_background = "pics/progress.png";
 	if (m_background_pic != g_gr->get_no_picture()) {
-		g_gr->free_picture_surface(m_background_pic);
 		m_background_pic = g_gr->get_no_picture();
 	}
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());

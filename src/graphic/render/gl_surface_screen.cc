@@ -16,54 +16,119 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include "gl_surface_screen.h"
+
+#include "gl_picture_texture.h"
+#include "gl_utils.h"
 #include "graphic/graphic.h"
-#include "surface_opengl.h"
-
-#include "log.h"
 #include "upcast.h"
-#include "wexception.h"
 
-#include <SDL.h>
+GLSurfaceScreen::GLSurfaceScreen(uint32_t w, uint32_t h)
+{
+	m_w = w;
+	m_h = h;
+}
 
+bool GLSurfaceScreen::valid()
+{
+	return true;
+}
 
-#ifdef USE_OPENGL
+uint32_t GLSurfaceScreen::get_w()
+{
+	return m_w;
+}
 
-/*
- * Updating the whole Surface
- */
-void SurfaceOpenGL::update() {
+uint32_t GLSurfaceScreen::get_h()
+{
+	return m_h;
+}
+
+void GLSurfaceScreen::update()
+{
 	assert(g_opengl);
 	SDL_GL_SwapBuffers();
 }
 
-/*
-===============
-Draws the outline of a rectangle
-===============
-*/
-void SurfaceOpenGL::draw_rect(const Rect rc, const RGBColor clr) {
+const SDL_PixelFormat & GLSurfaceScreen::format() const
+{
+	return gl_rgba_format();
+}
+
+void GLSurfaceScreen::lock(IPixelAccess::LockMode mode)
+{
+	assert(!m_pixels);
+
+	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
+
+	if (mode == Lock_Normal)
+		glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
+}
+
+void GLSurfaceScreen::unlock(IPixelAccess::UnlockMode mode)
+{
+	assert(m_pixels);
+
+	if (mode == Unlock_Update)
+		glDrawPixels(m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
+
+	m_pixels.reset(0);
+}
+
+uint16_t GLSurfaceScreen::get_pitch() const
+{
+	return 4 * m_w;
+}
+
+uint8_t * GLSurfaceScreen::get_pixels() const
+{
+	return m_pixels.get();
+}
+
+uint32_t GLSurfaceScreen::get_pixel(uint32_t x, uint32_t y)
+{
+	assert(m_pixels);
+	assert(x < m_w);
+	assert(y < m_h);
+
+	uint8_t * data = &m_pixels[4 * (y * m_w + x)];
+	return *(reinterpret_cast<uint32_t *>(data));
+}
+
+void GLSurfaceScreen::set_pixel(uint32_t x, uint32_t y, Uint32 clr)
+{
+	assert(m_pixels);
+	assert(x < m_w);
+	assert(y < m_h);
+
+	uint8_t * data = &m_pixels[4 * (y * m_w + x)];
+	*(reinterpret_cast<uint32_t *>(data)) = clr;
+}
+
+/**
+ * Draws the outline of a rectangle
+ */
+void GLSurfaceScreen::draw_rect(const Rect rc, const RGBColor clr)
+{
 	assert(g_opengl);
-	//log("SurfaceOpenGL::draw_rect() for opengl is experimental\n");
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 
 	glBegin(GL_LINE_LOOP); {
 		glColor3ub(clr.r(), clr.g(), clr.b());
-		glVertex2f(m_offsx + rc.x + 0.5f,        m_offsy + rc.y + 0.5f);
-		glVertex2f(m_offsx + rc.x + rc.w - 0.5f, m_offsy + rc.y + 0.5f);
-		glVertex2f(m_offsx + rc.x + rc.w - 0.5f, m_offsy + rc.y + rc.h - 0.5f);
-		glVertex2f(m_offsx + rc.x + 0.5f,        m_offsy + rc.y + rc.h - 0.5f);
+		glVertex2f(rc.x + 0.5f,        rc.y + 0.5f);
+		glVertex2f(rc.x + rc.w - 0.5f, rc.y + 0.5f);
+		glVertex2f(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);
+		glVertex2f(rc.x + 0.5f,        rc.y + rc.h - 0.5f);
 	} glEnd();
 	glEnable(GL_TEXTURE_2D);
 }
 
 
-/*
-===============
-Draws a filled rectangle
-===============
-*/
-void SurfaceOpenGL::fill_rect(const Rect rc, const RGBAColor clr) {
+/**
+ * Draws a filled rectangle
+ */
+void GLSurfaceScreen::fill_rect(const Rect rc, const RGBAColor clr) {
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 0);
@@ -75,26 +140,19 @@ void SurfaceOpenGL::fill_rect(const Rect rc, const RGBAColor clr) {
 
 	glBegin(GL_QUADS); {
 		glColor4ub(clr.r, clr.g, clr.b, clr.a);
-		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y);
-		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y);
-		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y + rc.h);
-		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y + rc.h);
+		glVertex2f(rc.x,        rc.y);
+		glVertex2f(rc.x + rc.w, rc.y);
+		glVertex2f(rc.x + rc.w, rc.y + rc.h);
+		glVertex2f(rc.x,        rc.y + rc.h);
 	} glEnd();
 	glEnable(GL_TEXTURE_2D);
 }
 
-/*
-===============
-Change the brightness of the given rectangle
-This function is slow as hell.
-
-* This function is a possible point to optimize on
-  slow system. It takes a lot of cpu time atm and is
-  not needed. It is used by the ui_basic stuff to
-  highlight things.
-===============
-*/
-void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
+/**
+ * Change the brightness of the given rectangle
+ */
+void GLSurfaceScreen::brighten_rect(const Rect rc, const int32_t factor)
+{
 	if (!factor)
 		return;
 
@@ -126,14 +184,14 @@ void SurfaceOpenGL::brighten_rect(const Rect rc, const int32_t factor) {
 			((static_cast<GLfloat>(factor) / 256.0f),
 			 (static_cast<GLfloat>(factor) / 256.0f),
 			 (static_cast<GLfloat>(factor) / 256.0f));
-		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y);
-		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y);
-		glVertex2f(m_offsx + rc.x + rc.w, m_offsy + rc.y + rc.h);
-		glVertex2f(m_offsx + rc.x,        m_offsy + rc.y + rc.h);
+		glVertex2f(rc.x,        rc.y);
+		glVertex2f(rc.x + rc.w, rc.y);
+		glVertex2f(rc.x + rc.w, rc.y + rc.h);
+		glVertex2f(rc.x,        rc.y + rc.h);
 	} glEnd();
 }
 
-void SurfaceOpenGL::draw_line
+void GLSurfaceScreen::draw_line
 		(int32_t x1,
 		 int32_t y1,
 		 int32_t x2,
@@ -151,63 +209,31 @@ void SurfaceOpenGL::draw_line
 	glDisable(GL_TEXTURE_2D);
 	glBegin(GL_LINES); {
 		glColor3ub(color.r(), color.g(), color.b());
-		glVertex2f(x1 + m_offsx + 0.5f, y1 + m_offsy + 0.5f);
-		glVertex2f(x2 + m_offsx + 0.5f, y2 + m_offsy + 0.5f);
+		glVertex2f(x1 + 0.5f, y1 + 0.5f);
+		glVertex2f(x2 + 0.5f, y2 + 0.5f);
 	} glEnd();
 	if (clip) {
 		glPopAttrib();
 	}
 }
 
-/*
-===============
-Clear the entire bitmap to black
-===============
-*/
-void SurfaceOpenGL::clear()
+/**
+ * Clear the entire screen to black
+ */
+void GLSurfaceScreen::clear()
 {
 	assert(g_opengl);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
-	return;
 }
 
 
-void SurfaceOpenGL::blit
-	(Point const dst, Surface * const src, Rect const srcrc, bool enable_alpha)
+void GLSurfaceScreen::blit
+	(Point const dst, PictureID const src, Rect const srcrc, Composite cm)
 {
-	blit(Rect(dst, srcrc.w, srcrc.h), src, srcrc, enable_alpha);
-}
-
-
-void SurfaceOpenGL::blit
-	(Rect dst, Surface * src, Rect srcrc, bool enable_alpha)
-{
-	upcast(SurfaceOpenGL, oglsrc, src);
-
+	upcast(GLPictureTexture, oglsrc, src.get());
+	assert(oglsrc);
 	assert(g_opengl);
-#ifdef DEBUG
-	if (m_surf_type != SURFACE_SCREEN)
-	{
-		throw wexception
-			("Surface not the screen: Offscreen rendering not possible");
-		return;
-	}
-
-	if (not oglsrc)
-	{
-		throw wexception("Invalid surface: Not a opengl surface");
-	}
-#endif
-	GLuint tex;
-
-	try {
-		tex = oglsrc->get_texture();
-	} catch (...) {
-		throw wexception
-			("SurfaceOpenGL::blit(): Source surface has no texture\n");
-		return;
-	}
 
 	/* Set a texture scaling factor. Normaly texture coordiantes
 	* (see glBegin()...glEnd() Block below) are given in the range 0-1
@@ -224,46 +250,37 @@ void SurfaceOpenGL::blit
 		 1.0f / static_cast<GLfloat>(oglsrc->get_tex_h()), 1);
 
 	// Enable Alpha blending
-	if (enable_alpha) {
+	if (cm == CM_Normal) {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	} else
+	} else {
 		glDisable(GL_BLEND);
+	}
 
-	/* select the texture to paint on the screen
-	* openGL does not know anything about SDL_Surfaces
-	* opengl uses textures to handle images
-	* getTexture() returns the texture id of the Surface. It creates
-	* the texture from the SDL_Surface if it doesn't exist
-	*/
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, tex);
-
-	/* This block between blBegin() and glEnd() does the blit.
-	* It draws a textured rectangle. glTexCoord2i() set the Texture
-	* Texture cooardinates. This is the source rectangle.
-	* glVertex2f() sets the screen coordiantes which belong to the
-	* previous texture coordinate. This is the destination rectangle
-	*/
+	glBindTexture(GL_TEXTURE_2D, oglsrc->get_gl_texture());
 
 	glBegin(GL_QUADS); {
 		//  set color white, otherwise textures get mixed with color
 		glColor3f(1.0, 1.0, 1.0);
 		//  top-left
 		glTexCoord2i(srcrc.x,           srcrc.y);
-		glVertex2i  (m_offsx + dst.x,   m_offsy + dst.y);
+		glVertex2i  (dst.x,             dst.y);
 		//  top-right
 		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y);
-		glVertex2f  (m_offsx + dst.x + dst.w,  m_offsy + dst.y);
+		glVertex2f  (dst.x + srcrc.w,   dst.y);
 		//  bottom-right
 		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y + srcrc.h);
-		glVertex2f  (m_offsx + dst.x + dst.w,  m_offsy + dst.y + dst.h);
+		glVertex2f  (dst.x + srcrc.w,   dst.y + srcrc.h);
 		//  bottom-left
 		glTexCoord2i(srcrc.x,           srcrc.y + srcrc.h);
-		glVertex2f  (m_offsx + dst.x,   m_offsy + dst.y + dst.h);
+		glVertex2f  (dst.x,             dst.y + srcrc.h);
 	} glEnd();
 
 	glLoadIdentity();
 }
 
-#endif //USE_OPENGL
+void GLSurfaceScreen::fast_blit(PictureID src)
+{
+	blit(Point(0, 0), src, Rect(Point(0, 0), src->get_w(), src->get_h()), CM_Normal);
+}

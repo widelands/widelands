@@ -27,9 +27,7 @@
 #include "logic/tribe.h"
 #include "vertex.h"
 
-#include "surface.h"
-#include "graphic/render/surface_opengl.h"
-#include "graphic/render/surface_sdl.h"
+#include "offscreensurface.h"
 
 #include "log.h"
 #include "upcast.h"
@@ -43,13 +41,20 @@ using Widelands::Player;
 using Widelands::TCoords;
 
 /**
- * Build a render target for the given bitmap.
- * \note The bitmap will not be owned by the renderer, i.e. it won't be
- * deleted by the destructor.
+ * Build a render target for the given surface.
  */
-RenderTarget::RenderTarget(Surface * const bmp)
+RenderTarget::RenderTarget(SurfacePtr bmp)
 {
 	m_surface = bmp;
+	reset();
+}
+
+/**
+ * Build a render target for the given surface.
+ */
+RenderTarget::RenderTarget(OffscreenSurfacePtr surf)
+{
+	m_surface = surf;
 	reset();
 }
 
@@ -178,7 +183,7 @@ void RenderTarget::clear()
 }
 
 /**
- * Blits a Surface on the screen or (if possible) on another Surface
+ * Blits a Picture on the screen or (if possible) on another Surface
  * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
  * to a non screen surface.
  *
@@ -186,100 +191,25 @@ void RenderTarget::clear()
  * I the source surface contains a alpha channel this is used during
  * the blit.
  */
-void RenderTarget::blit(const Point dst, const PictureID picture)
+void RenderTarget::blit(const Point dst, const PictureID picture, Composite cm)
 {
-	if (Surface * const src = g_gr->get_picture_surface(picture))
+	if (picture->valid())
 		doblit
 			(Rect(dst, 0, 0),
-			 src, Rect(Point(0, 0), src->get_w(), src->get_h()));
+			 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
 }
 
 /**
- * Blits a Surface on the screen or (if possible) on another Surface
- * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
- * to a non screen surface.
- *
- * This blit function copies the pixels to the destination surface.
- * I the source surface contains a alpha channel this is used during
- * the blit.
+ * Like \ref blit, but use only a sub-rectangle of the source picture.
  */
-void RenderTarget::blit(const Rect dst, const PictureID picture)
-{
-	if (Surface * const src = g_gr->get_picture_surface(picture))
-		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
-}
-
-/**
- * Blits a Surface on the screen or (if possible) on another Surface
- * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
- * to a non screen surface.
- *
- * This blit function copies the pixels values without alpha channel to the
- * destination surface.
- */
-void RenderTarget::blit_solid(const Point dst, const PictureID picture)
-{
-	Surface * const src = g_gr->get_picture_surface(picture);
-	if (not src)
-		return;
-
-	upcast(SurfaceSDL, sdlsurf, src);
-	upcast(SurfaceOpenGL, oglsurf, src);
-
-	if (sdlsurf) {
-		bool alpha;
-		uint8_t alphaval;
-		alpha = sdlsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
-		alphaval = sdlsurf->get_sdl_surface()->format->alpha;
-		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
-		doblit
-			(Rect(dst, 0, 0),
-			 src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
-		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
-	} else if (oglsurf) {
-		doblit
-			(Rect(dst, 0, 0),
-			 src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
-	}
-}
-
-/**
- * Blits a Surface on the screen or (if possible) on another Surface
- * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
- * to a non screen surface.
- *
- * This blit function copies the pixels (including alpha channel)
- * to the destination surface.
- * The destination pixels will be exactly like the source pixels.
- */
-void RenderTarget::blit_copy(Point dst, PictureID picture)
-{
-	Surface * const src = g_gr->get_picture_surface(picture);
-	upcast(SurfaceSDL, sdlsurf, src);
-	bool alpha;
-	uint8_t alphaval;
-	if (sdlsurf) {
-		alpha = sdlsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
-		alphaval = sdlsurf->get_sdl_surface()->format->alpha;
-		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
-	}
-	if (src)
-		doblit
-			(Rect(dst, 0, 0),
-			 src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
-	if (sdlsurf) {
-		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
-	}
-}
-
 void RenderTarget::blitrect
-	(Point const dst, PictureID const picture, Rect const srcrc)
+	(Point const dst, PictureID const picture, Rect const srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
 
-	if (Surface * const src = g_gr->get_picture_surface(picture))
-		doblit(Rect(dst, 0, 0), src, srcrc);
+	if (picture->valid())
+		doblit(Rect(dst, 0, 0), picture, srcrc, cm);
 }
 
 /**
@@ -288,24 +218,25 @@ void RenderTarget::blitrect
  * The pixel from ofs inside picture is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
+void RenderTarget::tile(Rect r, PictureID const picture, Point ofs, Composite cm)
 {
-	Surface * const src = g_gr->get_picture_surface(picture);
-
-	if (!src)
+	if (!picture->valid())
 		return;
+
+	int32_t srcw = picture->get_w();
+	int32_t srch = picture->get_h();
 
 	if (clip(r)) {
 		// Make sure the offset is within bounds
-		ofs.x = ofs.x % src->get_w();
+		ofs.x = ofs.x % srcw;
 
 		if (ofs.x < 0)
-			ofs.x += src->get_w();
+			ofs.x += srcw;
 
-		ofs.y = ofs.y % src->get_h();
+		ofs.y = ofs.y % srch;
 
 		if (ofs.y < 0)
-			ofs.y += src->get_h();
+			ofs.y += srch;
 
 		// Blit the picture into the rectangle
 		uint32_t ty = 0;
@@ -316,19 +247,19 @@ void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
 			Rect srcrc;
 
 			srcrc.y = ofs.y;
-			srcrc.h = src->get_h() - ofs.y;
+			srcrc.h = srch - ofs.y;
 
 			if (ty + srcrc.h > r.h)
 				srcrc.h = r.h - ty;
 
 			while (tx < r.w) {
 				srcrc.x = tofsx;
-				srcrc.w = src->get_w() - tofsx;
+				srcrc.w = srcw - tofsx;
 
 				if (tx + srcrc.w > r.w)
 					srcrc.w = r.w - tx;
 
-				m_surface->blit(r + Point(tx, ty), src, srcrc);
+				m_surface->blit(r + Point(tx, ty), picture, srcrc, cm);
 
 				tx += srcrc.w;
 
@@ -372,7 +303,7 @@ void RenderTarget::drawanim
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	Surface * const frame =
+	const PictureID & frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -411,7 +342,7 @@ void RenderTarget::drawanimrect
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	Surface * const frame =
+	const PictureID & frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -486,14 +417,13 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Rect dst, Surface * const src, Rect srcrc, bool enable_alpha)
+	(Point dst, PictureID src, Rect srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
 	dst += m_offset;
 
 	// Clipping
-
 	if (dst.x < 0) {
 		if (srcrc.w <= static_cast<uint32_t>(-dst.x))
 			return;
@@ -527,10 +457,5 @@ void RenderTarget::doblit
 
 	dst += m_rect;
 
-	// Draw it
-	upcast(SurfaceOpenGL, oglsurf, m_surface);
-	if (oglsurf and dst.w and dst.h)
-		oglsurf->blit(dst, src, srcrc, enable_alpha);
-	else
-		m_surface->blit(Point(dst.x, dst.y), src, srcrc, enable_alpha);
+	m_surface->blit(dst, src, srcrc, cm);
 }

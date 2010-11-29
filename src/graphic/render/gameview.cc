@@ -33,7 +33,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "surface_opengl.h"
 #include "surface_sdl.h"
 #include "graphic/texture.h"
 
@@ -973,13 +972,10 @@ void GameView::draw_field
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	upcast(SurfaceSDL, sdlsurf, m_surface);
-#ifdef USE_OPENGL
-	upcast(SurfaceOpenGL, oglsurf, m_surface);
-#endif
+	upcast(SurfaceSDL, sdlsurf, m_surface.get());
 	if (sdlsurf)
 	{
-		dynamic_cast<SurfaceSDL *>(m_surface)->set_subwin(subwin);
+		sdlsurf->set_subwin(subwin);
 		switch (sdlsurf->format().BytesPerPixel) {
 		case 2:
 			draw_field_int<Uint16>
@@ -998,16 +994,17 @@ void GameView::draw_field
 		default:
 			assert(false);
 		}
-		dynamic_cast<SurfaceSDL *>(m_surface)->unset_subwin();
+		sdlsurf->unset_subwin();
 	}
 #ifdef USE_OPENGL
-	else if (oglsurf) {
+	else
+	{
 		// Draw triangle right (bottom) of the field
 		draw_field_opengl
-			(*oglsurf, subwin, f_vert, br_vert, r_vert, f_r_texture);
+			(subwin, f_vert, br_vert, r_vert, f_r_texture);
 		// Draw triangle bottom of the field
 		draw_field_opengl
-			(*oglsurf, subwin, f_vert, bl_vert, br_vert, f_d_texture);
+			(subwin, f_vert, bl_vert, br_vert, f_d_texture);
 		// Draw the roads
 		draw_roads_opengl(subwin, roads, f_vert, r_vert, bl_vert, br_vert);
 	}
@@ -1273,7 +1270,7 @@ void GameView::draw_minimap
 	//       necesary. The created surface could be cached and only redrawn two
 	//       or three times per second
 	const SDL_PixelFormat & fmt =
-		g_gr->get_render_target()->get_surface().format();
+		g_gr->get_render_target()->get_surface()->pixelaccess().format();
 	SDL_Surface * surface =
 		SDL_CreateRGBSurface
 			(SDL_SWSURFACE,
@@ -1312,11 +1309,9 @@ void GameView::draw_minimap
 
 	SDL_UnlockSurface(surface);
 
-	Surface & surf = g_gr->create_surface(*surface);
+	PictureID picture = g_gr->convert_sdl_surface_to_picture(surface);
 
-	m_surface->blit(Point(rc.x, rc.y), &surf, rc2, false);
-
-	delete &surf;
+	m_surface->blit(Point(rc.x, rc.y), picture, rc2);
 }
 
 void GameView::rendermap_init()

@@ -17,36 +17,15 @@
  *
  */
 
-#include "icon.h"
-#include "graphic/rendertarget.h"
-#include "graphic/picture.h"
+#ifndef SURFACEPTR_H
+#define SURFACEPTR_H
 
-namespace UI {
+#include <boost/shared_ptr.hpp>
 
-Icon::Icon
-	(Panel * const parent,
-	 const int32_t x, const int32_t y, const int32_t w, const int32_t h,
-	 const PictureID picture_id)
-	:
-	Panel(parent, x, y, w, h),
-	m_pic(picture_id),
-	m_w(w),
-	m_h(h)
-{
-	set_handle_mouse(false);
-	set_think(false);
-}
+struct IOffscreenSurface;
+struct Surface;
 
-void Icon::setIcon(PictureID picture_id) {
-	m_pic = picture_id;
-	update();
-}
+typedef boost::shared_ptr<IOffscreenSurface> OffscreenSurfacePtr;
+typedef boost::shared_ptr<Surface> SurfacePtr;
 
-void Icon::draw(RenderTarget & dst) {
-	assert(m_pic != g_gr->get_no_picture());
-	int32_t w = (m_w - m_pic->get_w()) / 2;
-	int32_t h = (m_h - m_pic->get_h()) / 2;
-	dst.blit(Point(w, h), m_pic);
-}
-
-}
+#endif // SURFACEPTR_H

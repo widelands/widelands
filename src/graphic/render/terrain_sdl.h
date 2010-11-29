@@ -23,6 +23,7 @@
 #include "constants.h"
 #include "log.h"
 #include "random.h"
+#include "upcast.h"
 #include "vertex.h"
 
 #include "wui/mapviewpixelconstants.h"
@@ -532,7 +533,7 @@ template<typename T> static void dither_edge_vert
 }
 
 template<typename T> static void render_road_horiz
-	(SurfaceSDL & dst, Point const start, Point const end, Surface const & src)
+	(SurfaceSDL & dst, Point const start, Point const end, SurfaceSDL const & src)
 {
 	int32_t const dstw = dst.get_w();
 	int32_t const dsth = dst.get_h();
@@ -559,7 +560,7 @@ template<typename T> static void render_road_horiz
 }
 
 template<typename T> static void render_road_vert
-	(SurfaceSDL & dst, Point const start, Point const end, Surface const & src)
+	(SurfaceSDL & dst, Point const start, Point const end, SurfaceSDL const & src)
 {
 	int32_t const dstw = dst.get_w();
 	int32_t const dsth = dst.get_h();
@@ -597,10 +598,10 @@ template<typename T> static void draw_field_int
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	Surface const & rt_normal = *g_gr->get_road_texture(Widelands::Road_Normal);
-	Surface const & rt_busy   = *g_gr->get_road_texture(Widelands::Road_Busy);
+	upcast(SurfaceSDL, rt_normal, g_gr->get_road_texture(Widelands::Road_Normal).get());
+	upcast(SurfaceSDL, rt_busy, g_gr->get_road_texture(Widelands::Road_Busy).get());
 
-	dst.lock();
+	dst.lock(IPixelAccess::Lock_Normal);
 
 	render_triangle<T> (dst, f_vert, br_vert, r_vert, f_r_texture);
 	render_triangle<T> (dst, f_vert, bl_vert, br_vert, f_d_texture);
@@ -613,10 +614,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_horiz<T> (dst, f_vert, r_vert, rt_normal);
+				render_road_horiz<T> (dst, f_vert, r_vert, *rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_horiz<T> (dst, f_vert, r_vert, rt_busy);
+				render_road_horiz<T> (dst, f_vert, r_vert, *rt_busy);
 				break;
 			default:
 				assert(false);
@@ -631,10 +632,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_vert<T> (dst, f_vert, br_vert, rt_normal);
+				render_road_vert<T> (dst, f_vert, br_vert, *rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_vert<T> (dst, f_vert, br_vert, rt_busy);
+				render_road_vert<T> (dst, f_vert, br_vert, *rt_busy);
 				break;
 			default:
 				assert(false);
@@ -649,10 +650,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_vert<T> (dst, f_vert, bl_vert, rt_normal);
+				render_road_vert<T> (dst, f_vert, bl_vert, *rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_vert<T> (dst, f_vert, bl_vert, rt_busy);
+				render_road_vert<T> (dst, f_vert, bl_vert, *rt_busy);
 				break;
 			default:
 				assert(false);
@@ -662,7 +663,7 @@ template<typename T> static void draw_field_int
 		}
 	}
 
-	dst.unlock();
+	dst.unlock(IPixelAccess::Unlock_Update);
 
 	// FIXME: similar textures may not need dithering
 }

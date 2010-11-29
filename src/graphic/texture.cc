@@ -102,14 +102,14 @@ Texture::Texture
 
 #ifdef USE_OPENGL
 		if (g_opengl) {
-			SurfaceOpenGL * tsurface =
-				&dynamic_cast<SurfaceOpenGL &>
-				(g_gr->load_image(fname));
-			// SDL_ConvertSurface(surf, &fmt, 0);
-			m_glFrames.push_back(tsurface);
-			tsurface->lock();
-			m_mmap_color = tsurface->get_pixel(0, 0);
-			tsurface->unlock();
+			// Note: we except the constructor to free the SDL surface
+			boost::shared_ptr<GLPictureTexture> surface(new GLPictureTexture(surf));
+			m_glFrames.push_back(surface);
+
+			surface->lock(IPixelAccess::Lock_Normal);
+			m_mmap_color = surface->get_pixel(0, 0);
+			surface->unlock(IPixelAccess::Unlock_NoChange);
+
 			++m_nrframes;
 			continue;
 		}
@@ -181,11 +181,6 @@ Texture::~Texture ()
 	delete m_colormap;
 	free(m_pixels);
 	free(m_texture_picture);
-
-#ifdef USE_OPENGL
-	container_iterate(std::vector<SurfaceOpenGL *>, m_glFrames, it)
-		delete *it.current;
-#endif
 }
 
 /**

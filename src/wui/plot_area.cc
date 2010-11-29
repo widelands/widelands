@@ -143,7 +143,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 			 UI::Align_Center,
 			 std::numeric_limits<uint32_t>::max(),
 			 UI::Widget_Cache_None,
-			 g_gr->get_no_picture(),
+			 0,
 			 std::numeric_limits<uint32_t>::max(),
 			 false);
 		posx -= sub;
@@ -209,7 +209,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 		 UI::Align_CenterRight,
 		 std::numeric_limits<uint32_t>::max(),
 		 UI::Widget_Cache_None,
-		 g_gr->get_no_picture(),
+		 0,
 		 std::numeric_limits<uint32_t>::max(),
 		 false);
 

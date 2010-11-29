@@ -51,7 +51,7 @@ Panel::Panel
 	:
 	_parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
 	_flags(pf_handle_mouse|pf_think|pf_visible),
-	_cache(g_gr->get_no_picture()), _needdraw(false),
+	_needdraw(false),
 	_x(nx), _y(ny), _w(nw), _h(nh),
 	_lborder(0), _rborder(0), _tborder(0), _bborder(0),
 	_border_snap_distance(0), _panel_snap_distance(0),
@@ -79,9 +79,6 @@ Panel::Panel
 Panel::~Panel()
 {
 	update();
-
-	if (_cache != g_gr->get_no_picture())
-		g_gr->free_picture_surface(_cache);
 
 	// Release pointers to this object
 	if (_g_mousegrab == this)
@@ -254,9 +251,9 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 	_w = nw;
 	_h = nh;
 
-	if (_cache != g_gr->get_no_picture()) {
-		g_gr->free_picture_surface(_cache);
-		_cache = g_gr->create_picture_surface(_w, _h);
+	if (_cache) {
+		// The old surface is freed automatically
+		_cache = g_gr->create_offscreen_surface(_w, _h);
 	}
 
 	if (_parent)
@@ -775,7 +772,7 @@ void Panel::do_draw(RenderTarget & dst)
 	if (!is_visible())
 		return;
 
-	if (_cache == g_gr->get_no_picture())
+	if (!_cache)
 	{
 		Rect outerrc;
 		Point outerofs;
@@ -1100,7 +1097,7 @@ void Panel::draw_tooltip(RenderTarget & dst, char const * const text)
 		 Align_Left,
 		 TIP_WIDTH_MAX,
 		 Widget_Cache_None,
-		 g_gr->get_no_picture(),
+		 0,
 		 std::numeric_limits<uint32_t>::max(),
 		 false);
 }

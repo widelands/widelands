@@ -17,36 +17,18 @@
  *
  */
 
-#include "icon.h"
-#include "graphic/rendertarget.h"
-#include "graphic/picture.h"
+#ifndef OFFSCREENSURFACE_H
+#define OFFSCREENSURFACE_H
 
-namespace UI {
+#include "picture.h"
+#include "pixelaccess.h"
+#include "surface.h"
 
-Icon::Icon
-	(Panel * const parent,
-	 const int32_t x, const int32_t y, const int32_t w, const int32_t h,
-	 const PictureID picture_id)
-	:
-	Panel(parent, x, y, w, h),
-	m_pic(picture_id),
-	m_w(w),
-	m_h(h)
-{
-	set_handle_mouse(false);
-	set_think(false);
-}
+/**
+ * Interface to surfaces that can act conveniently both as
+ * source and as destination for rendering.
+ */
+struct IOffscreenSurface : Surface, IPicture, IPixelAccess {
+};
 
-void Icon::setIcon(PictureID picture_id) {
-	m_pic = picture_id;
-	update();
-}
-
-void Icon::draw(RenderTarget & dst) {
-	assert(m_pic != g_gr->get_no_picture());
-	int32_t w = (m_w - m_pic->get_w()) / 2;
-	int32_t h = (m_h - m_pic->get_h()) / 2;
-	dst.blit(Point(w, h), m_pic);
-}
-
-}
+#endif // OFFSCREENSURFACE_H

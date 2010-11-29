@@ -20,7 +20,9 @@
 #ifndef RENDERTARGET_H
 #define RENDERTARGET_H
 
+#include "compositemode.h"
 #include "picture_id.h"
+#include "surfaceptr.h"
 #include "rect.h"
 #include "rgbcolor.h"
 
@@ -29,7 +31,6 @@
 namespace Widelands {
 struct Player;
 };
-struct Surface;
 
 /**
  * This abstract class represents anything that can be rendered to.
@@ -47,7 +48,8 @@ struct Surface;
  * false and doesn't change the window state at all.
 */
 struct RenderTarget {
-	RenderTarget(Surface *);
+	RenderTarget(SurfacePtr);
+	RenderTarget(OffscreenSurfacePtr);
 	RenderTarget(RenderTarget & rt):
 		m_surface(rt.m_surface),
 		m_rect(rt.m_rect),
@@ -70,12 +72,9 @@ struct RenderTarget {
 	void brighten_rect(Rect, int32_t factor);
 	void clear();
 
-	void blit(Point dst, PictureID picture);
-	void blit(Rect dst, PictureID picture);
-	void blit_solid(Point dst, PictureID picture);
-	void blit_copy(Point dst, PictureID picture);
-	void blitrect(Point dst, PictureID picture, Rect src);
-	void tile(Rect, PictureID picture, Point ofs);
+	void blit(Point dst, PictureID picture, Composite cm = CM_Normal);
+	void blitrect(Point dst, PictureID picture, Rect src, Composite cm = CM_Normal);
+	void tile(Rect, PictureID picture, Point ofs, Composite cm = CM_Normal);
 
 	void drawanim
 		(Point                     dst,
@@ -92,15 +91,15 @@ struct RenderTarget {
 
 	void reset();
 
-	Surface & get_surface() {return *m_surface;}
+	SurfacePtr get_surface() {return m_surface;}
 
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Rect dst, Surface * src, Rect srcrc, bool enable_alpha = true);
+	void doblit(Point dst, PictureID src, Rect srcrc, Composite cm = CM_Normal);
 
 	///The target surface
-	Surface * m_surface;
+	SurfacePtr m_surface;
 	///The current clip rectangle
 	Rect m_rect;
 	///Drawing offset
