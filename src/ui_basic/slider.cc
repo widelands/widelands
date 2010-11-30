@@ -363,7 +363,10 @@ void HorizontalSlider::draw(RenderTarget & odst) {
 			return;
 		}
 
-		if (m_cache_pic)
+		if
+			(!m_cache_pic || !m_cache_pic->valid() ||
+			 static_cast<Surface *>(m_cache_pic.get())->get_w() != uint32_t(get_w()) ||
+			 static_cast<Surface *>(m_cache_pic.get())->get_h() != uint32_t(get_h()))
 		{
 			m_cache_pic = g_gr->create_offscreen_surface
 				(get_w(), get_h(), true);
@@ -464,9 +467,16 @@ void VerticalSlider::draw(RenderTarget & odst) {
 			odst.blit(Point(0, 0), m_cache_pic);
 			return;
 		}
-		if (m_cache_pic)
+
+		if
+			(!m_cache_pic || !m_cache_pic->valid() ||
+			 static_cast<Surface *>(m_cache_pic.get())->get_w() != uint32_t(get_w()) ||
+			 static_cast<Surface *>(m_cache_pic.get())->get_h() != uint32_t(get_h()))
+		{
 			m_cache_pic = g_gr->create_offscreen_surface
 				(get_w(), get_h(), true);
+		}
+
 		dst = RenderTarget(m_cache_pic);
 
 		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
