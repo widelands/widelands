@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-21 22:05+0100\n"
-"PO-Revision-Date: 2010-11-24 16:07+0000\n"
+"POT-Creation-Date: 2010-11-29 10:15+0100\n"
+"PO-Revision-Date: 2010-11-29 21:56+0000\n"
 "Last-Translator: Mateusz Micał <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-11-25 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-30 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #, c-format
@@ -3051,6 +3051,10 @@ msgid ""
 msgstr ""
 "Chwilowo jesteś %s\n"
 "\n"
+
+#: ../../src/ui_fsmenu/launchMPG.cc:447
+msgid "Click on the \"?\" in the right top corner to get help."
+msgstr "Naciśnij \"?\" w prawym górnym rogu aby otrzymać pomoc."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:497
 msgid "Saved players are:"
