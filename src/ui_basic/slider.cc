@@ -363,7 +363,10 @@ void HorizontalSlider::draw(RenderTarget & odst) {
 			return;
 		}
 
-		if (m_cache_pic)
+		if
+			(!m_cache_pic || !m_cache_pic->valid() ||
+			 static_cast<Surface *>(m_cache_pic.get())->get_w() != uint32_t(get_w()) ||
+			 static_cast<Surface *>(m_cache_pic.get())->get_h() != uint32_t(get_h()))
 		{
 			m_cache_pic = g_gr->create_offscreen_surface
 				(get_w(), get_h(), true);
