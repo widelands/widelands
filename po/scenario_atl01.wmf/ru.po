@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-27 16:38+0000\n"
-"PO-Revision-Date: 2010-11-27 07:29+0000\n"
-"Last-Translator: lu <Unknown>\n"
+"POT-Creation-Date: 2010-11-29 09:15+0000\n"
+"PO-Revision-Date: 2010-12-01 07:21+0000\n"
+"Last-Translator: Massol <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-28 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-12-02 04:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:46
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - От Кары небесной до Возрождения"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:531
 msgid "A dangerous finding"
@@ -473,12 +473,19 @@ msgid ""
 "personal value was needed. So she offered him her most beloved:\n"
 "her husband, father of her only child."
 msgstr ""
+"Джундлина, дочь покойного короля и верховная жрица богов была самым "
+"решительным жрецом. Так как бесчисленные предложения не могли изменить "
+"ситуацию, она была убеждена, что для того, чтобы успокоить бога, необходимо "
+"предложить что-то очень ценное. Поэтому она предложила ему самое дорогое: "
+"мужа, отца ее единственного ребенка."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:275
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started a quest to\n"
 "find a place sheltered by the fire and protected from the sea."
 msgstr ""
+"Оставив умирающую Атлантиду и их прошлое, они начали поиски, чтобы найти "
+"место, укрытое огнем и защищенное от моря."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Loftomor and Sidolus arrive"
@@ -613,6 +620,14 @@ msgid ""
 "and tools; this would help enormously. Of course, we would need smelters,\n"
 "a weapon smithy, an armor smithy and a tool smithy. And maybe even more."
 msgstr ""
+"Да согреет тебя Сатул, Джундлина! Рассматривали ли вы добычу ископаемых в "
+"горах вокруг нас? У нас все меньше кварца, хрусталя и бриллиантов для наших "
+"зданий. Кроме того, мы могли бы использовать больше железа, золота и "
+"особенно угля. Если мы найдем достаточный запас этих товаров, мы могли бы "
+"начать производство оружия и инструментов, это крайне помогло бы нам. "
+"Конечно, нам будут нужны плавильня, оружейная мастерская, мастерская "
+"доспехов и мастерская для изготовления инструментов. А может быть, даже "
+"больше."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:404
 msgid ""
@@ -649,6 +664,10 @@ msgid ""
 "them\n"
 "a much longer distance and maybe escape from Lutas' influence."
 msgstr ""
+"Да согреет тебя Сатул, Джундлина. Меня зовут Остур и я строю корабли. Я "
+"изобрел новый вид корабля: меньше, чем мы привыкли, но гораздо более "
+"крепкий. Если мы будем строить их правильно, я уверен, что мы можем пройти "
+"на них гораздо большее расстояние и, возможно, уйти от влияния Лютаса."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "New Objectives"
@@ -664,6 +683,11 @@ msgid ""
 "wise clerics, who provided the link to Lutas - they prospered and became\n"
 "civilized."
 msgstr ""
+"На спрятанном и потерянном острове Атлантида, гордое племя поселилось с тех "
+"времен, когда мир был очень молод. Правил род короля Ахантула - первого "
+"человека, которому морской бог Лютас позволил дышать над уровнем моря - и "
+"мудрые жрецы, которые имели связь с Лютасом - они процветали и стали "
+"цивилизацией."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:570
 msgid "One more building"
@@ -696,6 +720,10 @@ msgid ""
 "things\n"
 "out."
 msgstr ""
+"Наша строительная инфраструктура создана, и я провел несколько дней, "
+"убеждаясь, что они хорошо работают вместе. Теперь, есть другие неотложные "
+"вопросы. Я говорил с Колиондером, моим личным поваром, чтобы с его помощью "
+"расставить все на свои места."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:514
 msgid ""
@@ -735,6 +763,8 @@ msgid ""
 "together\n"
 "nicely. It is really starting to feel like home here."
 msgstr ""
+"Похоже, наше производство продовольствия налажено, и все работает вместе "
+"прекрасно. Здесь действительно все начинает становиться почти как дома."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:446
 msgid "Sidolus seeks out Jundlina"
@@ -759,6 +789,10 @@ msgid ""
 "sea\n"
 "again."
 msgstr ""
+"Жрецы ушли в свои размышления и причина повышения уровня воды в скором "
+"времени была найдена: бог Лютас потерял веру в Атлантов из-за смелости их "
+"короля. Он решил забрать привилегии, которые были предоставлены королю "
+"Ахантулу и его детям. И так, он снова позвал их обратно под воду."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:234
 msgid "The god's disgrace"
@@ -833,6 +867,11 @@ msgid ""
 "life\n"
 "was only for the gods and to seek for it was forbidden."
 msgstr ""
+"Эта история произошла во время правления короля Аскандоа, 43-го преемника "
+"короля Ахантула. Он был хорошим правителем, правящим Атлантидой мудро и "
+"дальновидно. Но с возрастом, он стал бояться смерти и поэтому стал искать "
+"лекарство от нее, хотя большинство жрецов предостерегали его. Они говорили, "
+"что бесконечная жизнь была только для богов и искать ее - запрещено."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:252
 msgid "Uproar and confusion"
@@ -893,7 +932,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a %s to the ocean!"
-msgstr ""
+msgstr "Мы потеряли %s в океане!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:292
 msgid ""
