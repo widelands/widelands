@@ -389,6 +389,27 @@ int32_t Request::get_priority (int32_t cost) const
 			 modifier);
 }
 
+
+/**
+ * Return the transfer priority, based on the priority set at the destination
+ */
+uint32_t Request::get_transfer_priority() const
+{
+	uint32_t pri = 0;
+
+	if (m_target_building) {
+		if (m_target_productionsite && m_target_productionsite->is_stopped())
+			return 0;
+
+		pri = m_target_building->get_priority(get_type(), get_index());
+		if (m_target_constructionsite)
+			return pri + 3;
+		else if (m_target_warehouse)
+			return pri - 2;
+	}
+	return pri;
+}
+
 /**
  * Change the Economy we belong to.
 */

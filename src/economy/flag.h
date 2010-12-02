@@ -137,6 +137,7 @@ private:
 	struct PendingItem {
 		WareInstance    * item;     ///< the item itself
 		bool              pending;  ///< if the item is pending
+		int32_t           priority;  ///< carrier prefers the item with highest priority
 		OPtr<PlayerImmovable> nextstep; ///< next step that this item is sent to
 	};
 
