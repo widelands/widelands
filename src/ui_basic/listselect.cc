@@ -55,8 +55,7 @@ BaseListselect::BaseListselect
 	m_last_selection(no_selection_index()),
 	m_show_check(show_check),
 	m_fontname(UI_FONT_NAME),
-	m_fontsize(UI_FONT_SIZE_SMALL),
-	m_needredraw(true)
+	m_fontsize(UI_FONT_SIZE_SMALL)
 {
 	set_think(false);
 
@@ -143,7 +142,6 @@ void BaseListselect::add
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
-	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 
 	if (sel)
@@ -185,7 +183,6 @@ void BaseListselect::add_front
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
-	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 
 	if (sel)
@@ -251,9 +248,11 @@ void BaseListselect::set_align(const Align align)
 */
 void BaseListselect::set_scrollpos(const int32_t i)
 {
+	if (m_scrollpos == uint32_t(i))
+		return;
+
 	m_scrollpos = i;
 
-	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 }
 
@@ -289,7 +288,6 @@ void BaseListselect::select(const uint32_t i)
 	}
 	m_selection = i;
 
-	m_needredraw = true;
 	selected.call(m_selection);
 	update(0, 0, get_eff_w(), get_h());
 }
@@ -345,36 +343,14 @@ uint32_t BaseListselect::get_eff_w() const throw ()
 /**
 Redraw the listselect box
 */
-void BaseListselect::draw(RenderTarget & odst)
+void BaseListselect::draw(RenderTarget & dst)
 {
-	RenderTarget dst = odst;
-
-	// Render Caching is disable because it does not work good with the
-	// transparent background.
-	if (g_gr->caps().offscreen_rendering and false) {
-		if (!m_needredraw)
-		{
-			odst.blit(Point(0, 0), m_cache_pic);
-			return;
-		} else {
-			if (!m_cache_pic)
-				m_cache_pic =
-					g_gr->create_offscreen_surface(get_w(), get_h());
-			// TODO: Handle resize here
-			dst = RenderTarget(m_cache_pic);
-		}
-	}
-
 	// draw text lines
 	const uint32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
 	int32_t y = 1 + idx * lineheight - m_scrollpos;
 
-	//if (not g_gr->caps().offscreen_rendering)
-		dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
-	//else
-	//dst->fill_rect
-	//(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(20, 20, 20, 80));
+	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
 		assert
@@ -450,10 +426,6 @@ void BaseListselect::draw(RenderTarget & odst)
 		y += lineheight;
 		++idx;
 	}
-
-	if (g_gr->caps().offscreen_rendering and false)
-		odst.blit(Point(0, 0), m_cache_pic);
-	m_needredraw = false;
 }
 
 /**

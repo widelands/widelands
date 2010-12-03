@@ -22,7 +22,7 @@
 #include "mouse_constants.h"
 
 #include "graphic/font_handler.h"
-#include "graphic/offscreensurface.h"
+#include "graphic/picture.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 #include "log.h"
@@ -58,7 +58,9 @@ Button::Button //  for textual buttons
 	m_draw_caret    (false)
 {
 	set_think(false);
-	set_cache(true);
+
+	if (m_pic_background && m_pic_background->valid())
+		set_cache(true);
 }
 
 
@@ -89,7 +91,9 @@ Button::Button //  for pictorial buttons
 	m_draw_caret    (false)
 {
 	set_think(false);
-	set_cache(true);
+
+	if (m_pic_background && m_pic_background->valid())
+		set_cache(true);
 }
 
 
@@ -168,9 +172,7 @@ void Button::draw(RenderTarget & dst)
 			(Rect(Point(0, 0), get_w(), get_h()),
 			 m_pic_background,
 			 Point(get_x(), get_y()));
-	} else if (g_gr->caps().offscreen_rendering)
-		dst.fill_rect
-			(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
+	}
 
 	if (m_enabled and m_highlighted and not m_flat)
 		dst.brighten_rect
@@ -183,19 +185,11 @@ void Button::draw(RenderTarget & dst)
 
 		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
 		//  is that -1 >> 1 is -1 but -1 / 2 is 0).
-		if (g_gr->caps().offscreen_rendering and m_flat)
-			dst.blit
-				(Point
-				 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
-				 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
-				 m_enabled ? m_pic_custom : m_pic_custom_disabled,
-				 CM_Copy);
-		else
-			dst.blit
-				(Point
-				 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
-				 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
-				 m_enabled ? m_pic_custom : m_pic_custom_disabled);
+		dst.blit
+			(Point
+			 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
+			 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
+			 m_enabled ? m_pic_custom : m_pic_custom_disabled);
 
 	} else if (m_title.length()) //  otherwise draw title string centered
 		UI::g_fh->draw_string

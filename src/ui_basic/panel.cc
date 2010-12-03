@@ -775,28 +775,20 @@ void Panel::check_child_death()
 
 
 /**
- * Draw the border and then the inner area of the panel into the given target.
+ * Draw the inner region of the panel into the given target.
  *
  * \param dst target to render into, assumed to be prepared for the panel's
- * outer coordinate system.
+ * inner coordinate system.
  */
-void Panel::_do_draw(RenderTarget & dst)
+void Panel::do_draw_inner(RenderTarget & dst)
 {
-	draw_border(dst);
+	draw(dst);
 
-	Rect innerwindow
-		(Point(_lborder, _tborder),
-			_w - (_lborder + _rborder), _h - (_tborder + _bborder));
+	// draw back to front
+	for (Panel * child = _lchild; child; child = child->_prev)
+		child->do_draw(dst);
 
-	if (dst.enter_window(innerwindow, 0, 0)) {
-		draw(dst);
-
-		// draw back to front
-		for (Panel * child = _lchild; child; child = child->_prev)
-			child->do_draw(dst);
-
-		draw_overlay(dst);
-	}
+	draw_overlay(dst);
 }
 
 
@@ -813,34 +805,45 @@ void Panel::do_draw(RenderTarget & dst)
 	if (!is_visible())
 		return;
 
+	Rect outerrc;
+	Point outerofs;
+
+	if (!dst.enter_window(Rect(Point(_x, _y), _w, _h), &outerrc, &outerofs))
+		return;
+
+	draw_border(dst);
+
 	if (_flags & pf_cache) {
+		uint32_t innerw = _w - (_lborder + _rborder);
+		uint32_t innerh = _h - (_tborder + _bborder);
+
 		if
 			(!_cache || !_cache->valid() ||
-			 static_cast<Surface *>(_cache.get())->get_w() != _w ||
-			 static_cast<Surface *>(_cache.get())->get_h() != _h)
+			 static_cast<Surface *>(_cache.get())->get_w() != innerw ||
+			 static_cast<Surface *>(_cache.get())->get_h() != innerh)
 		{
-			_cache = g_gr->create_offscreen_surface(_w, _h);
+			_cache = g_gr->create_offscreen_surface(innerw, innerh);
 			_needdraw = true;
 		}
 
 		if (_needdraw) {
 			RenderTarget inner(_cache);
-			_do_draw(inner);
+			do_draw_inner(inner);
 
 			_needdraw = false;
 		}
 
-		dst.blit(Point(_x, _y), _cache);
+		dst.blit(Point(_lborder, _tborder), _cache);
 	} else {
-		Rect outerrc;
-		Point outerofs;
+		Rect innerwindow
+			(Point(_lborder, _tborder),
+				_w - (_lborder + _rborder), _h - (_tborder + _bborder));
 
-		if (dst.enter_window(Rect(Point(_x, _y), _w, _h), &outerrc, &outerofs)) {
-			_do_draw(dst);
-
-			dst.set_window(outerrc, outerofs);
-		}
+		if (dst.enter_window(innerwindow, 0, 0))
+			do_draw_inner(dst);
 	}
+
+	dst.set_window(outerrc, outerofs);
 }
 
 
