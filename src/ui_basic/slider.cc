@@ -375,9 +375,6 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
  */
 void HorizontalSlider::draw(RenderTarget & dst)
 {
-	static int count = 0;
-	printf("HorizontalSlider::draw(%i)\n", ++count);
-
 	RGBAColor black(0, 0, 0, 255);
 
 	dst.brighten_rect //  bottom edge
