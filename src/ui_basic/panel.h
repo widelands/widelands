@@ -73,6 +73,8 @@ struct Panel : public Object {
 		pf_dock_windows_to_edges = 256,
 		/// whether any change in the desired size should propagate to the actual size
 		pf_layout_toplevel = 512,
+		/// whether widget panels should be cached when possible
+		pf_cache = 1024,
 	}; ///<\todo Turn this into separate bool flags
 
 	Panel
@@ -240,6 +242,7 @@ private:
 	void check_child_death();
 
 	void do_draw(RenderTarget &) __attribute__((hot));
+	void _do_draw(RenderTarget &);
 	void do_think();
 
 	Panel * child_at_mouse_cursor

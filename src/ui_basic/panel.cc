@@ -21,12 +21,12 @@
 
 #include "constants.h"
 #include "graphic/font_handler.h"
+#include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
 #include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
-#include <scripting/pdep/llimits.h>
 
 namespace UI {
 
@@ -516,9 +516,21 @@ void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
  * Enable/Disable the drawing cache.
  * When the drawing cache is enabled, draw() is only called after an update()
  * has been called explicitly. Otherwise, the contents of the panel are copied
- * from a cached Pic.
+ * from an \ref OffscreenSurface containing the cached image, provided that
+ * the graphics system supports it.
  */
-void Panel::set_cache(bool) {}
+void Panel::set_cache(bool cache)
+{
+	if (!g_gr->caps().offscreen_rendering)
+		return;
+
+	if (cache) {
+		_flags |= pf_cache;
+	} else {
+		_flags &= ~pf_cache;
+		_cache.reset();
+	}
+}
 
 /**
  * Called once per event loop pass, unless set_think(false) has
@@ -759,6 +771,33 @@ void Panel::check_child_death()
 	_flags &= ~pf_child_die;
 }
 
+
+/**
+ * Draw the border and then the inner area of the panel into the given target.
+ *
+ * \param dst target to render into, assumed to be prepared for the panel's
+ * outer coordinate system.
+ */
+void Panel::_do_draw(RenderTarget & dst)
+{
+	draw_border(dst);
+
+	Rect innerwindow
+		(Point(_lborder, _tborder),
+			_w - (_lborder + _rborder), _h - (_tborder + _bborder));
+
+	if (dst.enter_window(innerwindow, 0, 0)) {
+		draw(dst);
+
+		// draw back to front
+		for (Panel * child = _lchild; child; child = child->_prev)
+			child->do_draw(dst);
+
+		draw_overlay(dst);
+	}
+}
+
+
 /**
  * Subset for the border first and draw the border, then subset for the inner
  * area and draw the inner area.
@@ -772,58 +811,38 @@ void Panel::do_draw(RenderTarget & dst)
 	if (!is_visible())
 		return;
 
-	if (!_cache)
-	{
-		Rect outerrc;
-		Point outerofs;
-
-		if (dst.enter_window(Rect(Point(_x, _y), _w, _h), &outerrc, &outerofs)) {
-			draw_border(dst);
-
-			Rect innerwindow
-				(Point(_lborder, _tborder),
-				 _w - (_lborder + _rborder), _h - (_tborder + _bborder));
-
-			if (dst.enter_window(innerwindow, 0, 0)) {
-				draw(dst);
-
-				// draw back to front
-				for (Panel * child = _lchild; child; child = child->_prev)
-					child->do_draw(dst);
-
-				draw_overlay(dst);
-			}
-
-			dst.set_window(outerrc, outerofs);
+	if (_flags & pf_cache) {
+		if
+			(!_cache || !_cache->valid() ||
+			 static_cast<Surface *>(_cache.get())->get_w() != _w ||
+			 static_cast<Surface *>(_cache.get())->get_h() != _h)
+		{
+			_cache = g_gr->create_offscreen_surface(_w, _h);
+			_needdraw = true;
 		}
-	}
-	/*
-	else
-	{
-		// redraw only if explicitly requested
+
 		if (_needdraw) {
-			draw_border(_cache);
+			_cache->fill_rect(Rect(Point(0, 0), _w, _h), RGBAColor(0, 0, 0, 0));
 
-			RenderTarget* inner = _cache->enter_window(_lborder, _tborder,
-			       _w-(_lborder+_rborder), _h-(_tborder+_bborder));
-
-			if (inner) {
-				draw(inner);
-
-				for (Panel * child = _lchild; child; child = child->_prev)
-					child->do_draw(inner);
-
-				inner->leave_window();
-			}
+			RenderTarget inner(_cache);
+			_do_draw(inner);
 
 			_needdraw = false;
 		}
 
-		// now just blit from the cache
-		dst.blit(_x, _y, _cache);
+		dst.blit(Point(_x, _y), _cache);
+	} else {
+		Rect outerrc;
+		Point outerofs;
+
+		if (dst.enter_window(Rect(Point(_x, _y), _w, _h), &outerrc, &outerofs)) {
+			_do_draw(dst);
+
+			dst.set_window(outerrc, outerofs);
+		}
 	}
-	*/
 }
+
 
 /**
  * Returns the child panel that receives mouse events at the given location.
