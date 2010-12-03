@@ -252,6 +252,9 @@ void Window::center_to_parent()
  */
 void Window::draw(RenderTarget & dst)
 {
+	static int count = 0;
+	printf("Window::draw(%i)\n", ++count);
+
 	if (!is_minimal()) {
 		dst.tile
 			(Rect(Point(0, 0), get_inner_w(), get_inner_h()),

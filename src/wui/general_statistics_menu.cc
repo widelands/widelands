@@ -48,6 +48,8 @@ UI::UniqueWindow
 	 440, 400, _("General Statistics")),
 m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 {
+	set_cache(false);
+
 	uint32_t const spacing =  5;
 	Point          pos       (spacing, spacing);
 
