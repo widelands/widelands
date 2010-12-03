@@ -824,8 +824,6 @@ void Panel::do_draw(RenderTarget & dst)
 		}
 
 		if (_needdraw) {
-			_cache->fill_rect(Rect(Point(0, 0), _w, _h), RGBAColor(0, 0, 0, 0));
-
 			RenderTarget inner(_cache);
 			_do_draw(inner);
 
