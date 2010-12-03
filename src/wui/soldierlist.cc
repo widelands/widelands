@@ -155,6 +155,7 @@ void SoldierPanel::set_click(const SoldierPanel::SoldierFn & fn)
 
 void SoldierPanel::think()
 {
+	bool changes = false;
 	uint32_t capacity = m_soldiers.soldierCapacity();
 
 	// Update soldier list and target row/col:
@@ -177,6 +178,7 @@ void SoldierPanel::think()
 		if (!soldier) {
 			m_icons.erase(m_icons.begin() + idx);
 			idx--;
+			changes = true;
 			continue;
 		}
 
@@ -212,6 +214,7 @@ void SoldierPanel::think()
 		}
 
 		m_icons.insert(insertpos, icon);
+		changes = true;
 	}
 
 	// Third pass: animate icons
@@ -228,8 +231,14 @@ void SoldierPanel::think()
 		dp.x = std::min(std::max(dp.x, -maxdist), maxdist);
 		dp.y = std::min(std::max(dp.y, -maxdist), maxdist);
 
+		if (dp.x != 0 || dp.y != 0)
+			changes = true;
+
 		icon.pos += dp;
 	}
+
+	if (changes)
+		update();
 }
 
 void SoldierPanel::draw(RenderTarget & dst)
