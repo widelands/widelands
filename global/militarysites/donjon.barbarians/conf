@@ -6,5 +6,5 @@ vision_range=17
 buildable=no
 
 [idle]
-pics=../../../tribes/barbarians/donjon/i_??.png
-hotspot=56 58
+pics=../../../tribes/barbarians/donjon/donjon_i_??.png
+hotspot=55 84
