@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,8 +65,7 @@ Scrollbar::Scrollbar
 		 	 horiz ? "pics/scrollbar_right.png" : "pics/scrollbar_down.png")),
 	m_pic_background
 		(g_gr->get_picture(PicMod_UI, "pics/scrollbar_background.png")),
-	m_pic_buttons   (g_gr->get_picture(PicMod_UI, "pics/but3.png")),
-	m_needredraw    (true)
+	m_pic_buttons   (g_gr->get_picture(PicMod_UI, "pics/but3.png"))
 {
 	set_think(true);
 }
@@ -84,7 +83,6 @@ void Scrollbar::set_steps(int32_t steps)
 		set_scrollpos(steps - 1);
 
 	m_steps = steps;
-	m_needredraw = true;
 	update();
 }
 
@@ -138,7 +136,6 @@ void Scrollbar::set_scrollpos(int32_t pos)
 	m_pos = pos;
 	moved.call(pos);
 
-	m_needredraw = true;
 	update();
 }
 
@@ -312,24 +309,13 @@ void Scrollbar::draw_area(RenderTarget & dst, const Area area, const Rect r) {
 /**
  * Draw the scrollbar.
 */
-void Scrollbar::draw(RenderTarget & odst)
+void Scrollbar::draw(RenderTarget & dst)
 {
 	uint32_t knobpos = get_knob_pos();
 	uint32_t knobsize = get_knob_size();
 
 	if (m_steps == 1 && !m_force_draw)
 		return; // don't draw a not doing scrollbar
-
-	/*
-	if (!m_needredraw)
-	{
-		odst.blit(Point(0, 0), m_cache_pid);
-		return;
-	}
-
-	m_cache_pid = g_gr->create_picture_surface(get_w(), get_h());
-	*/
-	RenderTarget & dst = odst; // *(g_gr->get_surface_renderer(m_cache_pid));
 
 	if (m_horizontal) {
 		if ((2 * Size + knobsize) > static_cast<uint32_t>(get_w())) {
@@ -384,8 +370,6 @@ void Scrollbar::draw(RenderTarget & odst)
 			 	(Point(0, knobpos + knobsize / 2),
 			 	 get_w(), get_h() - knobpos - knobsize / 2 - Size));
 	}
-	//odst.blit(Point(0, 0), m_cache_pid);
-	m_needredraw = false;
 }
 
 
@@ -441,7 +425,6 @@ bool Scrollbar::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 		result = true;
 		break;
 	}
-	m_needredraw = true;
 	update();
 	return result;
 }
@@ -465,7 +448,6 @@ bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 		result = true;
 		break;
 	}
-	m_needredraw = true;
 	update();
 	return result;
 }
