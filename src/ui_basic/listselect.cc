@@ -376,13 +376,7 @@ void BaseListselect::draw(RenderTarget & dst)
 			// Make the area a bit more white and more transparent
 			if (r.w > 0 and r.h > 0)
 			{
-				//if (g_gr->caps().offscreen_rendering and false)
-				//dst->fill_rect(r, RGBAColor(100, 100, 100, 80));
-				//else
-					dst.brighten_rect
-						(r, - ms_darken_value * 2);
-						//(Rect(Point(1, y), get_eff_w() - 2,
-						// m_lineheight), -ms_darken_value*2);
+				dst.brighten_rect(r, - ms_darken_value * 2);
 			}
 		}
 
