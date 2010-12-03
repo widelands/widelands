@@ -93,7 +93,6 @@ Window::Window
 		m_center_panel(0),
 		m_fastclick_panel(0)
 {
-
 	if (title)
 		set_title(title);
 

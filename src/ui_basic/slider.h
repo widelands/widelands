@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,6 +73,7 @@ protected:
 
 private :
 	void send_value_changed();
+	void set_highlighted(bool highlighted);
 
 public:
 	Signal        changed;
@@ -97,8 +98,6 @@ private:
 protected:
 	int32_t m_cursor_pos;         //  cursor position
 	int32_t m_cursor_size;        //  cursor width
-	bool m_needredraw;
-	OffscreenSurfacePtr m_cache_pic;
 };
 
 

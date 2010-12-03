@@ -518,6 +518,8 @@ void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
  * has been called explicitly. Otherwise, the contents of the panel are copied
  * from an \ref OffscreenSurface containing the cached image, provided that
  * the graphics system supports it.
+ *
+ * \note Caching only works properly for solid panels that have no transparency.
  */
 void Panel::set_cache(bool cache)
 {
