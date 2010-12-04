@@ -62,7 +62,7 @@ void WordWrap::wrap(const std::string & text, uint32_t caret)
 
 		compute_end_of_line(text, line_start, line_end, next_line_start);
 
-		m_lines.push_back(text.substr(line_start, line_end));
+		m_lines.push_back(text.substr(line_start, line_end - line_start));
 
 		if (caret >= line_start && caret <= line_end) {
 			m_caret_line = m_lines.size() - 1;
@@ -97,7 +97,7 @@ void WordWrap::compute_end_of_line
 	}
 
 	// Optimism: perhaps the entire line fits?
-	if (m_style.calc_bare_width(text.substr(line_start, orig_end)) <= m_wrapwidth) {
+	if (m_style.calc_bare_width(text.substr(line_start, orig_end - line_start)) <= m_wrapwidth) {
 		line_end = orig_end;
 		next_line_start = orig_end + 1;
 		return;
@@ -114,7 +114,7 @@ void WordWrap::compute_end_of_line
 	while (end_upper - end_lower > 4) {
 		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
 
-		if (m_style.calc_bare_width(text.substr(line_start, mid)) <= m_wrapwidth) {
+		if (m_style.calc_bare_width(text.substr(line_start, mid - line_start)) <= m_wrapwidth) {
 			end_lower = mid;
 		} else {
 			end_upper = mid - 1;
@@ -134,7 +134,7 @@ void WordWrap::compute_end_of_line
 			break; // we already know that this cannot possibly fit
 
 		// check whether the next word still fits
-		if (m_style.calc_bare_width(text.substr(line_start, nextspace)) > m_wrapwidth)
+		if (m_style.calc_bare_width(text.substr(line_start, nextspace - line_start)) > m_wrapwidth)
 			break;
 
 		space = nextspace;
@@ -151,7 +151,7 @@ void WordWrap::compute_end_of_line
 	while (end_upper > end_lower) {
 		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
 
-		if (m_style.calc_bare_width(text.substr(line_start, mid)) <= m_wrapwidth)
+		if (m_style.calc_bare_width(text.substr(line_start, mid - line_start)) <= m_wrapwidth)
 			end_lower = mid;
 		else
 			end_upper = mid - 1;
