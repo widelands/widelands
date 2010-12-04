@@ -22,7 +22,7 @@
 #include "interactive_player.h"
 #include "logic/building.h"
 #include "logic/player.h"
-#include "ui_basic/textarea.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 #include "upcast.h"
 
@@ -50,16 +50,15 @@ private:
 	Widelands::Object_Ptr m_building;
 	Widelands::Object_Ptr m_todestroy;
 
-	struct Message : public UI::Textarea {
+	struct Message : public UI::Multiline_Textarea {
 		Message(BulldozeConfirm & parent, Widelands::Building const & building) :
-			UI::Textarea
+			UI::Multiline_Textarea
 				(&parent,
 				 0, 0, 200, 74,
 				 (format(_("Do you really want to destroy this %s?"))
 				  % building.descname())
 				 	.str(),
-				 UI::Align_Center,
-				 true)
+				 UI::Align_Center)
 		{}
 	} m_message;
 

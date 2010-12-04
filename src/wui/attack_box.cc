@@ -96,7 +96,11 @@ UI::Textarea & AttackBox::add_text
 	 uint32_t      fontsize)
 {
 	UI::Textarea & result = *new UI::Textarea(&parent, str.c_str());
-	result.set_font(fontname, fontsize, UI_FONT_CLR_FG);
+	UI::TextStyle textstyle;
+	textstyle.font = UI::Font::get(fontname, fontsize);
+	textstyle.bold = true;
+	textstyle.fg = UI_FONT_CLR_FG;
+	result.set_textstyle(textstyle);
 	parent.add(&result, alignment);
 	return result;
 }

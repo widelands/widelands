@@ -26,71 +26,62 @@ namespace UI {
 Textarea::Textarea
 	(Panel * const parent,
 	 const int32_t x, const int32_t y,
-	 const std::string & text, const Align align, const bool multiline)
+	 const std::string & text, const Align align)
 	:
 		Panel      (parent, x, y, 0, 0),
 		m_layoutmode(AutoMove),
-		m_align    (align),
-		m_multiline(multiline)
+		m_align    (align)
 {
-	set_handle_mouse(false);
-	set_think       (false);
-	set_font        (UI_FONT_SMALL, UI_FONT_CLR_FG);
-	set_text        (text);
+	init();
+	set_text(text);
 }
 
 Textarea::Textarea
 	(Panel *  const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const Align align, const bool multiline)
+	 const Align align)
 	:
 		Panel      (parent, x, y, w, h),
 		m_layoutmode(AutoMove),
-		m_align    (align),
-		m_multiline(multiline),
-		m_fontname (UI_FONT_NAME),
-		m_fontsize (UI_FONT_SIZE_SMALL),
-		m_fcolor   (UI_FONT_CLR_FG)
+		m_align    (align)
 {
-	set_handle_mouse(false);
-	set_think(false);
+	init();
 }
 
 Textarea:: Textarea
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const std::string & text, const Align align,
-	 const bool multiline)
+	 const std::string & text, const Align align)
 	:
 		Panel      (parent, x, y, w, h),
 		m_layoutmode(AutoMove),
-		m_align    (align),
-		m_multiline(multiline),
-		m_fontname (UI_FONT_NAME),
-		m_fontsize (UI_FONT_SIZE_SMALL),
-		m_fcolor   (UI_FONT_CLR_FG)
+		m_align    (align)
 {
-	set_handle_mouse(false);
-	set_think(false);
+	init();
 	set_text(text);
 }
 
 Textarea::Textarea
 	(Panel * parent,
 	 const std::string & text,
-	 Align align, bool multiline, uint32_t width)
+	 Align align, uint32_t width)
 :
 Panel(parent, 0, 0, width, 0),
 m_layoutmode(Layouted),
-m_align(align),
-m_multiline(multiline),
-m_fontname(UI_FONT_NAME),
-m_fontsize(UI_FONT_SIZE_SMALL),
-m_fcolor(UI_FONT_CLR_FG)
+m_align(align)
+{
+	init();
+	set_text(text);
+}
+
+/**
+ * Initialization tasks that are common to all constructors.
+ */
+void Textarea::init()
 {
 	set_handle_mouse(false);
 	set_think(false);
-	set_text(text);
+	set_textstyle(TextStyle::ui_small());
 }
 
 /**
@@ -107,14 +98,14 @@ void Textarea::set_layout_mode(Textarea::LayoutMode lm)
 /**
  * Set the font of the textarea.
  */
-void Textarea::set_font(const std::string & name, int32_t size, RGBColor fg)
+void Textarea::set_textstyle(const TextStyle & style)
 {
+	if (m_textstyle == style)
+		return;
+
 	if (m_layoutmode == AutoMove)
 		collapse();
-	m_fontname = name;
-	m_fontsize = size;
-	m_fcolor   = fg;
-	set_text(m_text);
+	m_textstyle = style;
 	if (m_layoutmode == AutoMove)
 		expand();
 	else if (m_layoutmode == Layouted)
@@ -122,10 +113,19 @@ void Textarea::set_font(const std::string & name, int32_t size, RGBColor fg)
 }
 
 /**
+ * @deprecated
+ */
+void Textarea::set_font(const std::string & name, int size, RGBColor clr)
+{
+	set_textstyle(TextStyle::makebold(Font::get(name, size), clr));
+}
+
+/**
  * Set the text of the Textarea. Size (or desired size) is automatically
  * adjusted depending on the Textarea mode.
  */
-void Textarea::set_text(const std::string & text) {
+void Textarea::set_text(const std::string & text)
+{
 	if (m_text == text)
 		return;
 
@@ -139,7 +139,8 @@ void Textarea::set_text(const std::string & text) {
 		update_desired_size();
 }
 
-std::string Textarea::get_text() {
+std::string Textarea::get_text()
+{
 	return m_text;
 }
 
@@ -162,18 +163,15 @@ void Textarea::set_align(const Align align)
  */
 void Textarea::draw(RenderTarget & dst)
 {
-	if (m_text.length())
-		UI::g_fh->draw_string
-			(dst,
-			 m_fontname, m_fontsize, m_fcolor, UI_FONT_CLR_BG,
-			 Point
-			 	(m_align & Align_HCenter ?
-			 	 get_w() / 2 : m_align & Align_Right  ? get_w() : 0,
-			 	 m_align & Align_VCenter ?
-			 	 get_h() / 2 : m_align & Align_Bottom ? get_h() : 0),
-			 m_text,
-			 m_align,
-			 m_multiline ? get_w() : std::numeric_limits<uint32_t>::max());
+	if (m_text.length()) {
+		Point anchor
+		 	(m_align & Align_HCenter ?
+		 	 get_w() / 2 : m_align & Align_Right  ? get_w() : 0,
+		 	 m_align & Align_VCenter ?
+		 	 get_h() / 2 : m_align & Align_Bottom ? get_h() : 0);
+
+		g_fh->draw_text(dst, m_textstyle, anchor, m_text, m_align);
+	}
 }
 
 
@@ -187,12 +185,10 @@ void Textarea::collapse()
 	int32_t w = get_w();
 	int32_t h = get_h();
 
-	if (not m_multiline) {
-		if      (m_align & Align_HCenter)
-			x += w >> 1;
-		else if (m_align & Align_Right)
-			x += w;
-	}
+	if      (m_align & Align_HCenter)
+		x += w >> 1;
+	else if (m_align & Align_Right)
+		x += w;
 
 	if      (m_align & Align_VCenter)
 		y += h >> 1;
@@ -200,7 +196,7 @@ void Textarea::collapse()
 		y += h;
 
 	set_pos(Point(x, y));
-	set_size(m_multiline ? get_w() : 0, 0);
+	set_size(0, 0);
 }
 
 
@@ -214,21 +210,13 @@ void Textarea::expand()
 
 	int32_t x = get_x();
 	int32_t y = get_y();
-	uint32_t w, h;
+	uint32_t w = m_textstyle.calc_bare_width(m_text);
+	uint32_t h = m_textstyle.font->height();
 
-	UI::g_fh->get_size
-		(m_fontname,
-		 m_fontsize,
-		 m_text,
-		 w, h,
-		 m_multiline ? get_w() : -1);
-
-	if (not m_multiline) {
-		if      (m_align & Align_HCenter)
-			x -= w >> 1;
-		else if (m_align & Align_Right)
-			x -= w;
-	}
+	if      (m_align & Align_HCenter)
+		x -= w >> 1;
+	else if (m_align & Align_Right)
+		x -= w;
 
 	if      (m_align & Align_VCenter)
 		y -= h >> 1;
@@ -236,7 +224,7 @@ void Textarea::expand()
 		y -= h;
 
 	set_pos(Point(x, y));
-	set_size(m_multiline ? get_w() : w, h);
+	set_size(w, h);
 }
 
 /**
@@ -244,19 +232,10 @@ void Textarea::expand()
  */
 void Textarea::update_desired_size()
 {
-	uint32_t olddesiredw, tmp;
+	uint32_t w = m_textstyle.calc_bare_width(m_text);
+	uint32_t h = m_textstyle.font->height();
 
-	get_desired_size(olddesiredw, tmp);
-
-	uint32_t w, h;
-	UI::g_fh->get_size
-		(m_fontname,
-		 m_fontsize,
-		 m_text,
-		 w, h,
-		 m_multiline ? olddesiredw : -1);
-
-	set_desired_size(m_multiline ? olddesiredw : w, h);
+	set_desired_size(w, h);
 }
 
 /**
@@ -265,8 +244,8 @@ void Textarea::update_desired_size()
  */
 void Textarea::set_fixed_size(const std::string & text)
 {
-	uint32_t w, h;
-	UI::g_fh->get_size(m_fontname, m_fontsize, text, w, h);
+	uint32_t w = m_textstyle.calc_bare_width(m_text);
+	uint32_t h = m_textstyle.font->height();
 	set_size(w, h);
 	set_desired_size(w, h);
 }

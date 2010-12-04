@@ -23,7 +23,9 @@
 
 #include "wordwrap.h"
 
+#include "font_handler.h"
 #include "log.h"
+#include "rendertarget.h"
 
 namespace UI {
 
@@ -158,6 +160,66 @@ void WordWrap::compute_end_of_line
 	}
 
 	next_line_start = line_end = end_lower;
+}
+
+
+/**
+ * Compute the width (including border) of the word-wrapped text.
+ *
+ * \note This is rather inefficient right now.
+ */
+uint32_t WordWrap::width() const
+{
+	uint32_t width = 0;
+
+	for (uint32_t line = 0; line < m_lines.size(); ++line) {
+		uint32_t linewidth = m_style.calc_bare_width(m_lines[line]);
+		if (linewidth > width)
+			width = linewidth;
+	}
+
+	return width + 2 * LINE_MARGIN;
+}
+
+
+/**
+ * Compute the total height of the word-wrapped text.
+ */
+uint32_t WordWrap::height() const
+{
+	uint32_t fontheight = m_style.font->height();
+
+	return m_lines.size() * (fontheight + 1) + 1;
+}
+
+
+/**
+ * Draw the word-wrapped text onto \p dst, anchored at \p where with the given alignment.
+ *
+ * \note This also draws the caret, if any.
+ */
+void WordWrap::draw(RenderTarget & dst, Point where, Align align)
+{
+	uint32_t fontheight = m_style.font->height();
+
+	if ((align & Align_Vertical) != Align_Top) {
+		uint32_t height = lines().size() * (fontheight + 1) + 1;
+
+		if ((align & Align_Vertical) == Align_VCenter)
+			where.y -= (height + 1) / 2;
+		else
+			where.y -= height;
+	}
+
+	++where.y;
+	for (uint32_t line = 0; line < lines().size(); ++line, where.y += fontheight + 1) {
+		if (where.y >= dst.get_h() || int32_t(where.y + fontheight) <= 0)
+			continue;
+
+		g_fh->draw_text
+			(dst, m_style, where, lines()[line], Align(align & Align_Horizontal),
+			 line == m_caret_line ? m_caret_pos : std::numeric_limits<uint32_t>::max());
+	}
 }
 
 

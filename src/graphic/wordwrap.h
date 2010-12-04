@@ -22,6 +22,10 @@
 #include <string>
 
 #include "font.h"
+#include "point.h"
+#include "ui_basic/align.h"
+
+struct RenderTarget;
 
 namespace UI {
 
@@ -33,11 +37,14 @@ struct WordWrap {
 
 	void wrap(const std::string & text, uint32_t caret = std::numeric_limits<uint32_t>::max());
 
+	uint32_t width() const;
+	uint32_t height() const;
+
+	void draw(RenderTarget & dst, Point where, Align align = Align_Left);
+
 	const std::vector<std::string> & lines() const {return m_lines;}
 	uint32_t caret_line() const {return m_caret_line;}
 	uint32_t caret_pos() const {return m_caret_pos;}
-	uint32_t width() const {return m_width;}
-	uint32_t height() const {return m_height;}
 
 private:
 	void compute_end_of_line
@@ -52,8 +59,6 @@ private:
 	std::vector<std::string> m_lines;
 	uint32_t m_caret_line;
 	uint32_t m_caret_pos;
-	uint32_t m_width;
-	uint32_t m_height;
 };
 
 } // namespace UI

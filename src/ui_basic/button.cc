@@ -21,6 +21,7 @@
 
 #include "mouse_constants.h"
 
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/picture.h"
 #include "graphic/rendertarget.h"
@@ -37,9 +38,7 @@ Button::Button //  for textual buttons
 	 PictureID background_picture_id,
 	 std::string const & title_text,
 	 std::string const & tooltip_text,
-	 bool const _enabled, bool const flat,
-	 std::string const & fontname,
-	 uint32_t const      fontsize)
+	 bool const _enabled, bool const flat)
 	:
 	NamedPanel           (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
@@ -52,8 +51,7 @@ Button::Button //  for textual buttons
 	m_pic_background(background_picture_id),
 	m_pic_custom    (g_gr->get_no_picture()),
 	m_pic_custom_disabled(g_gr->get_no_picture()),
-	m_fontname      (fontname),
-	m_fontsize      (fontsize),
+	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
@@ -71,9 +69,7 @@ Button::Button //  for pictorial buttons
 	 PictureID background_picture_id,
 	 const PictureID foreground_picture_id,
 	 const std::string & tooltip_text,
-	 bool const _enabled, bool const flat,
-	 const std::string & fontname,
-	 const uint32_t      fontsize)
+	 bool const _enabled, bool const flat)
 	:
 	NamedPanel      (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
@@ -85,8 +81,7 @@ Button::Button //  for pictorial buttons
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
 	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
-	m_fontname      (fontname),
-	m_fontsize      (fontsize),
+	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
@@ -191,20 +186,18 @@ void Button::draw(RenderTarget & dst)
 			 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
 			 m_enabled ? m_pic_custom : m_pic_custom_disabled);
 
-	} else if (m_title.length()) //  otherwise draw title string centered
-		UI::g_fh->draw_string
-			(dst,
-			 m_fontname,
-			 m_fontsize,
-			 m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED, UI_FONT_CLR_BG,
-			 Point(get_w() >> 1, get_h() >> 1),
-			 m_title,
-			 Align_Center,
-			 std::numeric_limits<uint32_t>::max(),
-			 Widget_Cache_None,
-			 0,
-			 m_draw_caret ? m_title.length() :
-			 std::numeric_limits<uint32_t>::max());
+	} else if (m_title.length()) {
+		//  otherwise draw title string centered
+		UI::TextStyle ts;
+		ts.font = m_font;
+		ts.bold = true;
+		ts.fg = m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED;
+		ts.bg = UI_FONT_CLR_BG;
+		UI::g_fh->draw_text
+			(dst, ts, Point(get_w() / 2, get_h() / 2),
+			 m_title, Align_Center,
+			 m_draw_caret ? m_title.length() : std::numeric_limits<uint32_t>::max());
+	}
 
 	//  draw border
 	//  a pressed but not highlighted button occurs when the user has pressed

@@ -30,6 +30,7 @@
 
 #include "container_iterate.h"
 #include <boost/bind.hpp>
+#include <graphic/font.h>
 
 namespace UI {
 
@@ -97,7 +98,8 @@ void Table<void *>::add_column
 					 complete_width, 0, width, m_headerheight,
 					 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
 					 boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()),
-					 title, "", true, false, m_fontname, m_fontsize);
+					 title, "", true, false);
+			c.btn->set_font(Font::get(m_fontname, m_fontsize));
 		}
 		c.width = width;
 		c.alignment = alignment;
@@ -145,7 +147,8 @@ void Table<void *>::set_column_title
 				 complete_width, 0, column.width, m_headerheight,
 				 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
 				 boost::bind(&Table::header_button_clicked, boost::ref(*this), col),
-				 title, "", true, false, m_fontname, m_fontsize);
+				 title, "", true, false);
+		column.btn->set_font(Font::get(m_fontname, m_fontsize));
 	} else if (column.btn and title.empty()) { //  had title before, not now
 		delete column.btn;
 		column.btn = 0;

@@ -29,6 +29,7 @@ namespace UI {
 
 struct SpinBoxImpl;
 struct IntValueTextReplacement;
+struct TextStyle;
 
 /// A spinbox is an UI element for setting the integer value of a variable.
 struct SpinBox : public Panel {
@@ -50,6 +51,7 @@ struct SpinBox : public Panel {
 	Align align() const;
 	void setAlign(Align);
 	void set_font(std::string const &, int32_t, RGBColor);
+	void set_textstyle(const TextStyle & style);
 	void add_replacement(int32_t, std::string);
 	void remove_replacement(int32_t);
 	bool has_replacement(int32_t);

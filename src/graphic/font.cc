@@ -123,7 +123,7 @@ void Font::shutdown()
 /**
  * Compute the bare width (without caret padding) of the given string.
  */
-uint32_t TextStyle::calc_bare_width(const std::string & text)
+uint32_t TextStyle::calc_bare_width(const std::string & text) const
 {
 	int w, h;
 	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);

@@ -282,7 +282,7 @@ private:
 	char * _tooltip;
 
 protected:
-	static void draw_tooltip(RenderTarget &, char const * const text);
+	static void draw_tooltip(RenderTarget &, const std::string & text);
 
 public:
 	void set_tooltip(const char * const);

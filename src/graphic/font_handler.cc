@@ -224,27 +224,7 @@ void Font_Handler::draw_multiline
 	WordWrap ww(style, wrap);
 
 	ww.wrap(text, caret);
-
-	uint32_t fontheight = style.font->height();
-
-	if ((align & Align_Vertical) != Align_Top) {
-		uint32_t height = ww.lines().size() * (fontheight + 1) + 1;
-
-		if ((align & Align_Vertical) == Align_VCenter)
-			dstpoint.y -= (height + 1) / 2;
-		else
-			dstpoint.y -= height;
-	}
-
-	++dstpoint.y;
-	for (uint32_t line = 0; line < ww.lines().size(); ++line, dstpoint.y += fontheight + 1) {
-		if (dstpoint.y >= dst.get_h() || int32_t(dstpoint.y + fontheight) <= 0)
-			continue;
-
-		draw_text
-			(dst, style, dstpoint, ww.lines()[line], Align(align & Align_Horizontal),
-			 line == ww.caret_line() ? ww.caret_pos() : std::numeric_limits<uint32_t>::max());
-	}
+	ww.draw(dst, dstpoint, align);
 }
 
 

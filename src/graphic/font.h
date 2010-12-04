@@ -27,6 +27,7 @@
 #include "io/fileread.h"
 #include "rgbcolor.h"
 
+struct f;
 namespace UI {
 
 /**
@@ -74,11 +75,18 @@ struct TextStyle {
 		underline(false)
 	{}
 
+	static TextStyle makebold(Font * font, RGBColor fg) {
+		TextStyle ts;
+		ts.font = font;
+		ts.bold = true;
+		ts.fg = fg;
+		return ts;
+	}
+
 	static const TextStyle & ui_big();
 	static const TextStyle & ui_small();
 	static const TextStyle & ui_ultrasmall();
-
-	uint32_t calc_bare_width(const std::string & text);
+	uint32_t calc_bare_width(const std::string & text) const;
 
 	Font * font;
 	RGBColor fg;
