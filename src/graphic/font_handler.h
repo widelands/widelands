@@ -37,7 +37,6 @@ struct RenderTarget;
 
 namespace UI {
 struct Text_Block;
-struct Font_Loader;
 
 /** class Font_Handler
  *
@@ -115,7 +114,6 @@ private:
 private:
 	static const uint32_t CACHE_ARRAY_SIZE = 500;
 
-	Font_Loader           * m_font_loader;
 	std::list<_Cache_Infos> m_cache;
 
 private:
@@ -174,7 +172,7 @@ private:
 		 const std::string & text_caret_pos);
 };
 
-extern Font_Handler * g_fh; // the default font
+extern Font_Handler * g_fh;
 
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,37 +17,31 @@
  *
  */
 
-#ifndef FONT_LOADER_H
-#define FONT_LOADER_H
+#ifndef FONT_H
+#define FONT_H
 
-#include "io/fileread.h"
+#include <boost/shared_ptr.hpp>
 
 #include <SDL_ttf.h>
 
-#include <map>
-#include <string>
-#include <cstring>
-#include <vector>
+#include "io/fileread.h"
 
 namespace UI {
 
-/*
- * Font
- *
- * this represents a loaded font used by the FontHandler
- */
-struct Font_Loader {
-	Font_Loader() {};
-	~Font_Loader();
-	TTF_Font * open_font(const std::string & name, int32_t size);
-	TTF_Font * get_font (std::string const & name, int32_t size);
-private:
-	void clear_fonts();
+struct Font {
+	static void shutdown();
+	static Font * get(const std::string & name, int size);
 
-	std::map<std::string, TTF_Font *> m_font_table;
-	std::vector<FileRead *> m_freads;
+	TTF_Font * get_ttf_font() const {return m_font;}
+
+private:
+	Font(const std::string & name, int size);
+	~Font();
+
+	FileRead m_fontfile;
+	TTF_Font * m_font;
 };
 
-}
+} // namespace UI
 
-#endif
+#endif // FONT_H

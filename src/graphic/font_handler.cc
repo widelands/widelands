@@ -22,7 +22,7 @@
 #include "font_handler.h"
 
 #include "io/filesystem/filesystem.h"
-#include "font_loader.h"
+#include "font.h"
 #include "helper.h"
 #include "log.h"
 #include "wexception.h"
@@ -41,6 +41,9 @@
 
 namespace UI {
 
+/// The global unique \ref Font_Handler object
+Font_Handler * g_fh = 0;
+
 #define LINE_MARGIN 1
 
 /**
@@ -50,12 +53,11 @@ Font_Handler::Font_Handler() {
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
-	m_font_loader = new Font_Loader();
 }
 
 
 Font_Handler::~Font_Handler() {
-	delete m_font_loader;
+	Font::shutdown();
 	TTF_Quit();
 }
 
@@ -66,7 +68,7 @@ Font_Handler::~Font_Handler() {
 uint32_t Font_Handler::get_fontheight
 	(std::string const & name, int32_t const size)
 {
-	TTF_Font * const f = m_font_loader->get_font(name, size);
+	TTF_Font * const f = Font::get(name, size)->get_ttf_font();
 	const int32_t fontheight = TTF_FontHeight(f);
 	if (fontheight < 0)
 		throw wexception
@@ -99,7 +101,7 @@ void Font_Handler::draw_string
 	 uint32_t            const caret,
 	 bool                const transparent)
 {
-	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
+	TTF_Font & font = *Font::get(fontname, fontsize)->get_ttf_font();
 	//Width and height of text, needed for alignment
 	uint32_t w, h;
 	PictureID picid;
@@ -376,7 +378,7 @@ SDL_Surface * Font_Handler::draw_string_sdl_surface
 	 int32_t             const style,
 	 uint32_t            const linespacing)
 {
-	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
+	TTF_Font & font = *Font::get(fontname, fontsize)->get_ttf_font();
 	TTF_SetFontStyle(&font, style);
 	return
 		create_sdl_text_surface(font, fg, bg, text, align, wrap, linespacing);
@@ -918,7 +920,7 @@ std::string Font_Handler::word_wrap_text
 {
 	return
 		word_wrap_text
-			(*m_font_loader->get_font(fontname, fontsize),
+			(*Font::get(fontname, fontsize)->get_ttf_font(),
 			 unwrapped_text,
 			 max_width);
 }
@@ -931,7 +933,7 @@ void Font_Handler::get_size
 	 uint32_t & w, uint32_t & h,
 	 uint32_t const wrap)
 {
-	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
+	TTF_Font & font = *Font::get(fontname, fontsize)->get_ttf_font();
 
 	if (wrap < std::numeric_limits<uint32_t>::max())
 		text = word_wrap_text(font, text, wrap);
