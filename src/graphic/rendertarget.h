@@ -50,11 +50,6 @@ struct Player;
 struct RenderTarget {
 	RenderTarget(SurfacePtr);
 	RenderTarget(OffscreenSurfacePtr);
-	RenderTarget(const RenderTarget & rt):
-		m_surface(rt.m_surface),
-		m_rect(rt.m_rect),
-		m_offset(rt.m_offset)
-	{}
 	void set_window(Rect const & rc, Point const & ofs);
 	bool enter_window(Rect const & rc, Rect * previous, Point * prevofs);
 
