@@ -41,8 +41,9 @@ struct Font_Loader {
 	~Font_Loader();
 	TTF_Font * open_font(const std::string & name, int32_t size);
 	TTF_Font * get_font (std::string const & name, int32_t size);
-	void clear_fonts();
 private:
+	void clear_fonts();
+
 	std::map<std::string, TTF_Font *> m_font_table;
 	std::vector<FileRead *> m_freads;
 };
