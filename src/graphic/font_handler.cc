@@ -534,14 +534,14 @@ void Font_Handler::draw_caret
 	 uint32_t caret)
 {
 	std::string sub = text.substr(0, caret);
-	int caret_x;
+	int caret_x, caret_y;
 
-	TTF_SizeUTF8(style.font->get_ttf_font(), sub.c_str(), &caret_x, 0);
+	TTF_SizeUTF8(style.font->get_ttf_font(), sub.c_str(), &caret_x, &caret_y);
 
 	PictureID caretpic = g_gr->get_picture(PicMod_UI, "pics/caret.png");
 	Point caretpt;
 	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caretpic->get_w();
-	caretpt.y = dstpoint.y;
+	caretpt.y = dstpoint.y + (caret_y - caretpic->get_h()) / 2;
 
 	dst.blit(caretpt, caretpic);
 }
