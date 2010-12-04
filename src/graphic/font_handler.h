@@ -29,14 +29,19 @@
 
 #include <SDL_ttf.h>
 
+#include <boost/scoped_ptr.hpp>
+
 #include <list>
 #include <cstring>
 #include <vector>
 
+struct d;
+struct D;
 struct RenderTarget;
 
 namespace UI {
 struct Text_Block;
+struct TextStyle;
 
 /** class Font_Handler
  *
@@ -45,6 +50,23 @@ struct Text_Block;
 struct Font_Handler {
 	Font_Handler();
 	~Font_Handler();
+
+	void draw_text
+		(RenderTarget &,
+		 const TextStyle &,
+		 Point dstpoint,
+		 const std::string & text,
+		 Align align = Align_CenterLeft,
+		 uint32_t caret = std::numeric_limits<uint32_t>::max());
+	void draw_multiline
+		(RenderTarget &,
+		 const TextStyle &,
+		 Point dstpoint,
+		 const std::string & text,
+		 Align align = Align_CenterLeft,
+		 uint32_t wrap = std::numeric_limits<uint32_t>::max(),
+		 uint32_t caret = std::numeric_limits<uint32_t>::max());
+
 	void draw_string
 		(RenderTarget &,
 		 const std::string & font,
@@ -116,6 +138,9 @@ private:
 
 	std::list<_Cache_Infos> m_cache;
 
+	struct Data;
+	boost::scoped_ptr<Data> d;
+
 private:
 	PictureID create_text_surface
 		(TTF_Font &,
@@ -170,6 +195,13 @@ private:
 		(TTF_Font &,
 		 SDL_Surface & line,
 		 const std::string & text_caret_pos);
+
+	void draw_caret
+		(RenderTarget &,
+		 const TextStyle &,
+		 Point dstpoint,
+		 const std::string & text,
+		 uint32_t caret);
 };
 
 extern Font_Handler * g_fh;

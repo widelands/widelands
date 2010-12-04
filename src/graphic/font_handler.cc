@@ -47,9 +47,43 @@ Font_Handler * g_fh = 0;
 #define LINE_MARGIN 1
 
 /**
+ * The line cache stores unprocessed rendered lines of text.
+ */
+struct LineCacheEntry {
+	/*@{*/
+	TextStyle style;
+	std::string text;
+	/*@}*/
+
+	/*@{*/
+	PictureID picture;
+	uint32_t width;
+	uint32_t height;
+	/*@}*/
+};
+
+typedef std::list<LineCacheEntry> LineCache;
+
+static const unsigned MaxLineCacheSize = 500;
+
+/**
+ * Internal data of the \ref Font_Handler.
+ */
+struct Font_Handler::Data {
+	LineCache linecache;
+
+	const LineCacheEntry & get_line(const TextStyle & style, const std::string & text);
+
+private:
+	void render_line(LineCacheEntry & lce);
+};
+
+/**
  * Plain Constructor
  */
-Font_Handler::Font_Handler() {
+Font_Handler::Font_Handler() :
+	d(new Data)
+{
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
@@ -76,6 +110,118 @@ uint32_t Font_Handler::get_fontheight
 			 "known meaning.");
 	return fontheight;
 }
+
+/**
+ * Get a cache entry for the given text (without linebreaks!) rendered
+ * in the given style.
+ *
+ * If there is no pre-existing cache entry, a new one is created.
+ */
+const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style, const std::string & text)
+{
+	for (LineCache::iterator it = linecache.begin(); it != linecache.end(); ++it) {
+		if (it->style != style || it->text != text)
+			continue;
+
+		// Found a hit, move to front
+		if (it != linecache.begin())
+			linecache.splice(linecache.begin(), linecache, it);
+		return *it;
+	}
+
+	// Cache miss; render a new picture
+	LineCache::iterator it = linecache.insert(linecache.begin(), LineCacheEntry());
+	it->style = style;
+	it->text = text;
+	render_line(*it);
+
+	while (linecache.size() > MaxLineCacheSize)
+		linecache.pop_back();
+
+	return *it;
+}
+
+/**
+ * Render the picture of a \ref LineCacheEntry whose key data has
+ * already been filled in.
+ */
+void Font_Handler::Data::render_line(LineCacheEntry & lce)
+{
+	static int count = 0;
+	log("render_line(%s): %i\n", lce.text.c_str(), ++count);
+
+	TTF_Font * font = lce.style.font->get_ttf_font();
+	SDL_Color sdl_fg = {lce.style.fg.r(), lce.style.fg.g(), lce.style.fg.b(), 0};
+
+	// Work around an Issue in SDL_TTF that dies when the surface
+	// has zero width
+	int width = 0;
+	if (TTF_SizeUTF8(font, lce.text.c_str(), &width, 0) < 0 or !width) {
+		lce.width = 0;
+		lce.height = TTF_FontHeight(font);
+		return;
+	}
+
+	int32_t font_style = TTF_STYLE_NORMAL;
+	if (lce.style.bold)
+		font_style |= TTF_STYLE_BOLD;
+	if (lce.style.italics)
+		font_style |= TTF_STYLE_ITALIC;
+	if (lce.style.underline)
+		font_style |= TTF_STYLE_UNDERLINE;
+	TTF_SetFontStyle(font, font_style);
+
+	SDL_Surface * text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
+	if (!text_surface) {
+		log
+			("Font_Handler::create_single_line_text_surface, an error : %s\n",
+			 TTF_GetError());
+		log("Text was: '%s'\n", lce.text.c_str());
+		return;
+	}
+
+	lce.picture = g_gr->convert_sdl_surface_to_picture(text_surface);
+	lce.width = lce.picture->get_w();
+	lce.height = lce.picture->get_h();
+}
+
+/**
+ * Draw unwrapped, single-line text (i.e. no line breaks).
+ */
+void Font_Handler::draw_text
+	(RenderTarget & dst,
+	 const TextStyle & style,
+	 Point dstpoint,
+	 const std::string & text,
+	 Align align,
+	 uint32_t caret)
+{
+	const LineCacheEntry & lce = d->get_line(style, text);
+
+	do_align(align, dstpoint.x, dstpoint.y, lce.width + 2 * LINE_MARGIN, lce.height);
+
+	if (lce.picture && lce.picture->valid())
+		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.picture);
+
+	if (caret <= text.size())
+		draw_caret(dst, style, dstpoint, text, caret);
+}
+
+/**
+ * Draw multi-line text, optionally with wrapping.
+ */
+void Font_Handler::draw_multiline
+	(RenderTarget & dst,
+	 const TextStyle & style,
+	 Point dstpoint,
+	 const std::string & text,
+	 Align align,
+	 uint32_t wrap,
+	 uint32_t caret)
+{
+	//TODO
+}
+
 
 /*
  * Draw this string, if it is not cached, create the cache for it.
@@ -108,6 +254,17 @@ void Font_Handler::draw_string
 	//log("Font_Handler::draw_string(%s)\n", text.c_str());
 	//Fontrender takes care of caching
 	if (widget_cache == Widget_Cache_None) {
+		if (wrap == std::numeric_limits<uint32_t>::max() && text.find('\n') == std::string::npos) {
+			TextStyle style;
+			style.font = Font::get(fontname, fontsize);
+			style.bg = bg;
+			style.fg = fg;
+			style.bold = true;
+
+			draw_text(dst, style, dstpoint, text, align, caret);
+			return;
+		}
+
 		// look if text is cached
 		_Cache_Infos  ci =
 			{g_gr->get_no_picture(), text, &font, fg, bg, caret, 0, 0};
@@ -363,6 +520,32 @@ void Font_Handler::render_caret
 	}
 
 }
+
+
+/**
+ * Draw the caret for the given text rendered exactly at the given point
+ * (including \ref LINE_MARGIN).
+ */
+void Font_Handler::draw_caret
+	(RenderTarget & dst,
+	 const TextStyle & style,
+	 Point dstpoint,
+	 const std::string & text,
+	 uint32_t caret)
+{
+	std::string sub = text.substr(0, caret);
+	int caret_x;
+
+	TTF_SizeUTF8(style.font->get_ttf_font(), sub.c_str(), &caret_x, 0);
+
+	PictureID caretpic = g_gr->get_picture(PicMod_UI, "pics/caret.png");
+	Point caretpt;
+	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caretpic->get_w();
+	caretpt.y = dstpoint.y;
+
+	dst.blit(caretpt, caretpic);
+}
+
 
 /*
 * Renders a string into a SDL surface

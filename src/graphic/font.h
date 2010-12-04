@@ -25,9 +25,16 @@
 #include <SDL_ttf.h>
 
 #include "io/fileread.h"
+#include "rgbcolor.h"
 
 namespace UI {
 
+/**
+ * Wrapper object around a font.
+ *
+ * Fonts in our sense are defined by the general font shape (given by the font
+ * name) and the size of the font.
+ */
 struct Font {
 	static void shutdown();
 	static Font * get(const std::string & name, int size);
@@ -40,6 +47,37 @@ private:
 
 	FileRead m_fontfile;
 	TTF_Font * m_font;
+};
+
+/**
+ * Text style combines font with other characteristics like color
+ * and style (italics, bold).
+ */
+struct TextStyle {
+	TextStyle() :
+		font(0),
+		fg(255, 255, 255),
+		bg(0, 0, 0),
+		bold(false),
+		italics(false),
+		underline(false)
+	{}
+
+	Font * font;
+	RGBColor fg;
+	RGBColor bg; //TODO get rid of this
+	bool bold : 1;
+	bool italics : 1;
+	bool underline : 1;
+
+	bool operator== (const TextStyle & o) const {
+		return
+			font == o.font && fg == o.fg && bg == o.bg &&
+			bold == o.bold && italics == o.italics && underline == o.underline;
+	}
+	bool operator!= (const TextStyle & o) const {
+		return !(*this == o);
+	}
 };
 
 } // namespace UI
