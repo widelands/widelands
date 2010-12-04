@@ -2,8 +2,18 @@ size=medium
 max_soldiers=5
 heal_per_second=1
 conquers=8
-buildable=no
+enhanced_building=yes
+
+[buildcost]
+blackwood=5
+grout=3
 
 [idle]
-pics=../../../tribes/barbarians/barrier/barrier_i_??.png
-hotspot=50 62
+pics=barrier_i_??.png
+hotspot=45 66
+playercolor=true
+fps=10
+
+[build]
+pics=barrier_b_??.png
+hotspot=45 66
