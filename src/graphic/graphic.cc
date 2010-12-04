@@ -810,9 +810,11 @@ PictureID Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 /**
  * Create a empty offscreen surface of specified size.
  *
+ * \note Offscreen surfaces with an alpha channel are not supported due to
+ * limitations in the SDL blitter.
+ *
  * @param w width of the new surface
  * @param h height of the new surface
- * @param alpha if true the surface is created with alpha channel
  * @return the new created surface
  */
 OffscreenSurfacePtr Graphic::create_offscreen_surface(int32_t w, int32_t h)
@@ -820,7 +822,6 @@ OffscreenSurfacePtr Graphic::create_offscreen_surface(int32_t w, int32_t h)
 #ifdef USE_OPENGL
 	if (g_opengl)
 	{
-
 		throw wexception("OpenGL mode does not support offscreen surfaces");
 	}
 	else
