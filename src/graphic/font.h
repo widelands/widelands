@@ -44,6 +44,9 @@ namespace UI {
 struct Font {
 	static void shutdown();
 	static Font * get(const std::string & name, int size);
+	static Font * ui_big();
+	static Font * ui_small();
+	static Font * ui_ultrasmall();
 
 	uint32_t height() const;
 
@@ -70,6 +73,10 @@ struct TextStyle {
 		italics(false),
 		underline(false)
 	{}
+
+	static const TextStyle & ui_big();
+	static const TextStyle & ui_small();
+	static const TextStyle & ui_ultrasmall();
 
 	uint32_t calc_bare_width(const std::string & text);
 

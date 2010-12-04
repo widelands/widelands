@@ -20,9 +20,11 @@
 #include "waresdisplay.h"
 
 #include "logic/editor_game_base.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "i18n.h"
 #include "logic/player.h"
+#include "graphic/font.h"
 #include "graphic/rendertarget.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
@@ -225,10 +227,8 @@ void AbstractWaresDisplay::draw_ware
 		(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
 		 RGBColor(0, 0, 0));
 
-	UI::g_fh->draw_string
-		(dst,
-		 UI_FONT_ULTRASMALL,
-		 UI_FONT_SMALL_CLR,
+	UI::g_fh->draw_text
+		(dst, UI::TextStyle::ui_ultrasmall(),
 		 p + Point(WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT - 4),
 		 info_for_ware(id),
 		 UI::Align_Right);

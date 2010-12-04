@@ -23,6 +23,7 @@
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "game_chat_menu.h"
 #include "game_debug_ui.h"
@@ -362,8 +363,8 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 		char buf[100];
 
 		snprintf(buf, sizeof(buf), "%3i %3i", m_sel.pos.node.x, m_sel.pos.node.y);
-		UI::g_fh->draw_string
-			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 5), buf, UI::Align_Left);
+		UI::g_fh->draw_text
+			(dst, UI::TextStyle::ui_big(), Point(5, 5), buf, UI::Align_Left);
 		assert(m_sel.pos.triangle.t < 2);
 		const char * const triangle_string[] = {"down", "right"};
 		snprintf
@@ -371,9 +372,8 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 			 "%3i %3i %s",
 			 m_sel.pos.triangle.x, m_sel.pos.triangle.y,
 			 triangle_string[m_sel.pos.triangle.t]);
-		UI::g_fh->draw_string
-			(dst,
-			 UI_FONT_BIG, UI_FONT_BIG_CLR,
+		UI::g_fh->draw_text
+			(dst, UI::TextStyle::ui_big(),
 			 Point(5, 25),
 			 buf, UI::Align_Left);
 	}
@@ -385,9 +385,8 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 			(buffer, sizeof(buffer),
 			 "%5.1f fps (avg: %5.1f fps)",
 			 1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
-		UI::g_fh->draw_string
-			(dst,
-			 UI_FONT_BIG, UI_FONT_BIG_CLR,
+		UI::g_fh->draw_text
+			(dst, UI::TextStyle::ui_big(),
 			 Point(85, 5),
 			 buffer, UI::Align_Left);
 	}

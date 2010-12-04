@@ -21,6 +21,7 @@
 
 #include <map>
 
+#include "constants.h"
 #include "io/filesystem/layered_filesystem.h"
 
 namespace {
@@ -127,6 +128,87 @@ uint32_t TextStyle::calc_bare_width(const std::string & text)
 	int w, h;
 	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
 	return w;
+}
+
+
+/*
+=============================
+
+Default fonts and styles
+
+=============================
+*/
+
+Font * Font::ui_big()
+{
+	Font * font = 0;
+	if (!font)
+		font = Font::get(UI_FONT_BIG);
+	return font;
+}
+
+Font * Font::ui_small()
+{
+	Font * font = 0;
+	if (!font)
+		font = Font::get(UI_FONT_SMALL);
+	return font;
+}
+
+Font * Font::ui_ultrasmall()
+{
+	Font * font = 0;
+	if (!font)
+		font = Font::get(UI_FONT_ULTRASMALL);
+	return font;
+}
+
+const TextStyle & TextStyle::ui_big()
+{
+	static TextStyle style;
+	static bool init = false;
+
+	if (!init) {
+		style.font = Font::ui_big();
+		style.fg = UI_FONT_CLR_FG;
+		style.bg = UI_FONT_CLR_BG;
+		style.bold = true;
+		init = true;
+	}
+
+	return style;
+}
+
+const TextStyle & TextStyle::ui_small()
+{
+	static TextStyle style;
+	static bool init = false;
+
+	if (!init) {
+		style.font = Font::ui_small();
+		style.fg = UI_FONT_CLR_FG;
+		style.bg = UI_FONT_CLR_BG;
+		style.bold = true;
+		init = true;
+	}
+
+	return style;
+}
+
+const TextStyle & TextStyle::ui_ultrasmall()
+{
+	static TextStyle style;
+	static bool init = false;
+
+	if (!init) {
+		style.font = Font::ui_ultrasmall();
+		style.fg = UI_FONT_CLR_FG;
+		style.bg = UI_FONT_CLR_BG;
+		style.bold = true;
+		init = true;
+	}
+
+	return style;
 }
 
 } // namespace UI

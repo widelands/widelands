@@ -20,6 +20,7 @@
 #include "progressbar.h"
 
 #include "constants.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 
@@ -107,9 +108,8 @@ void Progress_Bar::draw(RenderTarget & dst)
 	snprintf
 		(buffer, sizeof(buffer), "%u%%", static_cast<uint32_t>(fraction * 100));
 
-	UI::g_fh->draw_string
-		(dst,
-		 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+	UI::g_fh->draw_text
+		(dst, UI::TextStyle::ui_small(),
 		 Point(get_w() / 2, get_h() / 2),
 		 buffer,
 		 Align_Center);
