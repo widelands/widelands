@@ -32,19 +32,21 @@
 #include "rendertarget.h"
 #include "surface.h"
 #include "graphic/render/surface_sdl.h"
+#include "wordwrap.h"
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
 #include <algorithm>
 #include <iostream>
+#include <boost/concept_check.hpp>
+#include <boost/concept_check.hpp>
+#include <scripting/pdep/llimits.h>
 
 namespace UI {
 
 /// The global unique \ref Font_Handler object
 Font_Handler * g_fh = 0;
-
-#define LINE_MARGIN 1
 
 /**
  * The line cache stores unprocessed rendered lines of text.
@@ -219,7 +221,30 @@ void Font_Handler::draw_multiline
 	 uint32_t wrap,
 	 uint32_t caret)
 {
-	//TODO
+	WordWrap ww(style, wrap);
+
+	ww.wrap(text, caret);
+
+	uint32_t fontheight = style.font->height();
+
+	if ((align & Align_Vertical) != Align_Top) {
+		uint32_t height = ww.lines().size() * (fontheight + 1) + 1;
+
+		if ((align & Align_Vertical) == Align_VCenter)
+			dstpoint.y -= (height + 1) / 2;
+		else
+			dstpoint.y -= height;
+	}
+
+	++dstpoint.y;
+	for (uint32_t line = 0; line < ww.lines().size(); ++line, dstpoint.y += fontheight + 1) {
+		if (dstpoint.y >= dst.get_h() || int32_t(dstpoint.y + fontheight) <= 0)
+			continue;
+
+		draw_text
+			(dst, style, dstpoint, ww.lines()[line], Align(align & Align_Horizontal),
+			 line == ww.caret_line() ? ww.caret_pos() : std::numeric_limits<uint32_t>::max());
+	}
 }
 
 
@@ -254,50 +279,19 @@ void Font_Handler::draw_string
 	//log("Font_Handler::draw_string(%s)\n", text.c_str());
 	//Fontrender takes care of caching
 	if (widget_cache == Widget_Cache_None) {
+		TextStyle style;
+		style.font = Font::get(fontname, fontsize);
+		style.bg = bg;
+		style.fg = fg;
+		style.bold = true;
+
 		if (wrap == std::numeric_limits<uint32_t>::max() && text.find('\n') == std::string::npos) {
-			TextStyle style;
-			style.font = Font::get(fontname, fontsize);
-			style.bg = bg;
-			style.fg = fg;
-			style.bold = true;
-
 			draw_text(dst, style, dstpoint, text, align, caret);
-			return;
-		}
-
-		// look if text is cached
-		_Cache_Infos  ci =
-			{g_gr->get_no_picture(), text, &font, fg, bg, caret, 0, 0};
-
-		std::list<_Cache_Infos>::iterator i =
-			find(m_cache.begin(), m_cache.end(), ci);
-
-		if (i != m_cache.end())  {
-			// Ok, it is cached, blit it and done
-			picid = i->picture_id;
-			w = i->w;
-			h = i->h;
-			if (i != m_cache.begin()) {
-				m_cache.push_front (*i);
-				m_cache.erase (i);
-			}
 		} else {
-			//not cached, create a new surface and cache it
-			ci.picture_id =
-				create_text_surface
-					(font, fg, bg, text, align, wrap, 0, caret, transparent);
-			g_gr->get_picture_size(ci.picture_id, ci.w, ci.h);
-			ci.f = &font;
-			m_cache.push_front (ci);
-
-			while (m_cache.size() > CACHE_ARRAY_SIZE)
-				m_cache.pop_back();
-
-			//Set for alignment and blitting
-			picid = ci.picture_id;
-			w = ci.w;
-			h = ci.h;
+			draw_multiline(dst, style, dstpoint, text, align, wrap, caret);
 		}
+
+		return;
 	} else if (widget_cache == Widget_Cache_Use) {
 		//  Widget gave us an explicit picid.
 		g_gr->get_picture_size(*widget_cache_id, w, h);

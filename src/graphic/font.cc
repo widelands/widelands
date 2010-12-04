@@ -76,6 +76,14 @@ Font::~Font()
 	m_font = 0;
 }
 
+/**
+ * \return the maximum height of glyphs of this font.
+ */
+uint32_t Font::height() const
+{
+	return TTF_FontHeight(m_font);
+}
+
 
 /**
  * Return the font for the given name and size.
@@ -111,5 +119,14 @@ void Font::shutdown()
 	}
 }
 
+/**
+ * Compute the bare width (without caret padding) of the given string.
+ */
+uint32_t TextStyle::calc_bare_width(const std::string & text)
+{
+	int w, h;
+	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
+	return w;
+}
 
 } // namespace UI

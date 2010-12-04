@@ -35,8 +35,6 @@
 #include <cstring>
 #include <vector>
 
-struct d;
-struct D;
 struct RenderTarget;
 
 namespace UI {

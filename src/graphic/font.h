@@ -30,6 +30,12 @@
 namespace UI {
 
 /**
+ * Margin around text that is kept to make space for the caret.
+ */
+#define LINE_MARGIN 1
+
+
+/**
  * Wrapper object around a font.
  *
  * Fonts in our sense are defined by the general font shape (given by the font
@@ -38,6 +44,8 @@ namespace UI {
 struct Font {
 	static void shutdown();
 	static Font * get(const std::string & name, int size);
+
+	uint32_t height() const;
 
 	TTF_Font * get_ttf_font() const {return m_font;}
 
@@ -62,6 +70,8 @@ struct TextStyle {
 		italics(false),
 		underline(false)
 	{}
+
+	uint32_t calc_bare_width(const std::string & text);
 
 	Font * font;
 	RGBColor fg;
