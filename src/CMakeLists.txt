@@ -154,4 +154,4 @@ if (WIN32)
   endif (DEFINED MSVC)
 endif (WIN32)
 
-install(TARGETS widelands DESTINATION ${WLBUILD_INSTALL_BINDIR} COMPONENT ExecutableFiles)
+install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)
