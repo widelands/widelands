@@ -2,16 +2,10 @@ size=small
 heal_per_second=1
 conquers=6
 max_soldiers=2
-
-[buildcost]
-blackwood=2
+buildable=no
 
 [idle]
-pics=sentry_i_??.png
+pics=../../../tribes/barbarians/sentry/sentry_i_??.png
 hotspot=39 40
 playercolor=true
 fps=10
-
-[build]
-pics=sentry_b_??.png
-hotspot=39 40
