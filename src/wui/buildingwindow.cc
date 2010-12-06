@@ -100,6 +100,8 @@ Draw a picture of the building in the background.
 */
 void Building_Window::draw(RenderTarget & dst)
 {
+	UI::Window::draw(dst);
+
 	dst.drawanim
 		(Point(get_inner_w() / 2, get_inner_h() / 2),
 		 building().get_ui_anim(),

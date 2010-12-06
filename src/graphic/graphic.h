@@ -152,7 +152,7 @@ struct Graphic {
 
 	PictureID convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
 
-	OffscreenSurfacePtr create_offscreen_surface(int32_t w, int32_t h, bool alpha = false);
+	OffscreenSurfacePtr create_offscreen_surface(int32_t w, int32_t h);
 	PictureID create_picture(int32_t w, int32_t h, bool alpha = false);
 
 	PictureID create_grayed_out_pic(const PictureID & picid);

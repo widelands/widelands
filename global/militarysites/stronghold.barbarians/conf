@@ -2,18 +2,10 @@ size=medium
 max_soldiers=3
 heal_per_second=1
 conquers=7
-enhancement=barrier
-
-[buildcost]
-blackwood=3
-raw_stone=3
+buildable=no
 
 [idle]
-pics=stronghold_i_??.png
+pics=../../../tribes/barbarians/stronghold/stronghold_i_??.png
 hotspot=47 44
 playercolor=true
 fps=10
-
-[build]
-pics=stronghold_b_??.png
-hotspot=47 44

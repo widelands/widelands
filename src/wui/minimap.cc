@@ -181,6 +181,8 @@ MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 		 boost::bind(&MiniMap::toggle, boost::ref(*this), Zoom2),
 		 _("Zoom"))
 {
+	set_cache(false);
+
 	resize();
 
 	update_button_permpressed();

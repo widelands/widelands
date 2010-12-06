@@ -72,11 +72,8 @@ Slider::Slider
 		(m_value <= m_min_value ? 0              :
 		 m_value >= m_max_value ? get_bar_size() :
 		 (m_value - m_min_value) * get_bar_size() / (m_max_value - m_min_value)),
-	m_cursor_size (cursor_size),
-	m_needredraw     (true)
+	m_cursor_size (cursor_size)
 {
-	//  cursor initial position
-
 	set_think(false);
 }
 
@@ -85,7 +82,6 @@ void Slider::set_value(int32_t new_value)
 	new_value = std::max(m_min_value, std::min(new_value, m_max_value));
 
 	if (new_value != m_value) {
-		m_needredraw = true;
 		m_value = new_value;
 		m_cursor_pos =
 			m_value <= m_min_value ? 0              :
@@ -94,6 +90,7 @@ void Slider::set_value(int32_t new_value)
 			/
 			(m_max_value - m_min_value);
 		send_value_changed();
+		update();
 	}
 }
 
@@ -105,7 +102,7 @@ void Slider::set_value(int32_t new_value)
 void Slider::set_max_value(int32_t new_max) {
 	assert(m_min_value <= new_max);
 	if (m_max_value != new_max)
-		m_needredraw = true;
+		update();
 	m_max_value = new_max;
 	set_value(m_value);
 }
@@ -118,7 +115,7 @@ void Slider::set_max_value(int32_t new_max) {
 void Slider::set_min_value(int32_t new_min) {
 	assert(m_max_value >= new_min);
 	if (m_min_value != new_min)
-		m_needredraw = true;
+		update();
 	m_min_value = new_min;
 	set_value(m_value);
 }
@@ -139,10 +136,6 @@ void Slider::draw_cursor
 
 	RGBColor black(0, 0, 0);
 
-	// Make the slider button opaque
-	if (g_gr->caps().offscreen_rendering)
-		m_cache_pic->fill_rect
-			(Rect(Point(x, y), w, h), RGBAColor(0, 0, 0, 255));
 	dst.tile //  background
 		(Rect(Point(x, y), w, h), m_pic_background, Point(get_x(), get_y()));
 
@@ -183,7 +176,11 @@ void Slider::draw_cursor
 /**
  * \brief Send an event when the slider is moved by used.
  */
-void Slider::send_value_changed() {changed.call(); changedto.call(m_value);}
+void Slider::send_value_changed()
+{
+	changed.call();
+	changedto.call(m_value);
+}
 
 
 /**
@@ -191,12 +188,31 @@ void Slider::send_value_changed() {changed.call(); changedto.call(m_value);}
  *
  * Disabled slider can't be clicked. Sliders are enabled by default.
  */
-void Slider::set_enabled(const bool enabled) {
+void Slider::set_enabled(const bool enabled)
+{
 	//  TODO: disabled should look different...
-	if (m_enabled != enabled)
-		m_needredraw = true;
+	if (m_enabled == enabled)
+		return;
+
 	m_enabled = enabled;
-	if (not enabled) {m_pressed = false; m_highlighted = false;}
+	if (not enabled) {
+		m_pressed = false;
+		m_highlighted = false;
+	}
+	update();
+}
+
+
+/**
+ * Set whether the sliding button should be highlighted,
+ * and trigger a draw update when necessary.
+ */
+void Slider::set_highlighted(bool highlighted)
+{
+	if (m_highlighted == highlighted)
+		return;
+
+	m_highlighted = highlighted;
 	update();
 }
 
@@ -206,10 +222,10 @@ void Slider::set_enabled(const bool enabled) {
  *
  * Change the cursor style.
  */
-void Slider::handle_mousein(bool inside) {
+void Slider::handle_mousein(bool inside)
+{
 	if (not inside)
-		m_highlighted = false;
-	update();
+		set_highlighted(false);
 }
 
 
@@ -224,7 +240,6 @@ bool Slider::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 	if (m_pressed) {
 		grab_mouse(false);
 		m_pressed = false;
-		m_needredraw = true;
 
 		//  cursor position: align to integer value
 		m_cursor_pos =
@@ -233,8 +248,9 @@ bool Slider::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 			(m_value - m_min_value) * get_bar_size()
 			/
 			(m_max_value - m_min_value);
+
+		update();
 	}
-	update();
 	return true;
 }
 
@@ -251,9 +267,10 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 
 	if (not m_enabled)
 		return;
-	m_highlighted =
-		pointer >= m_cursor_pos and  pointer <= m_cursor_pos + m_cursor_size
-		and y >= 0 and y < get_h() and x >= 0 and x < get_w();
+
+	set_highlighted
+		(pointer >= m_cursor_pos and  pointer <= m_cursor_pos + m_cursor_size
+		 and y >= 0 and y < get_h() and x >= 0 and x < get_w());
 
 	if (not m_pressed)
 		return;
@@ -280,11 +297,13 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 		new_value = m_max_value;
 
 	//  updating
-	if (new_value != m_value) {m_value = new_value; send_value_changed();}
+	if (new_value != m_value) {
+		m_value = new_value;
+		send_value_changed();
+	}
 
 	if (o_cursor_pos != m_cursor_pos)
-		m_needredraw = true;
-	update();
+		update();
 }
 
 
@@ -354,29 +373,8 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
  *
  * \param dst The graphic destination.
  */
-void HorizontalSlider::draw(RenderTarget & odst) {
-	RenderTarget dst = odst;
-	if (g_gr->caps().offscreen_rendering) {
-		if (!m_needredraw)
-		{
-			odst.blit(Point(0, 0), m_cache_pic);
-			return;
-		}
-
-		if
-			(!m_cache_pic || !m_cache_pic->valid() ||
-			 static_cast<Surface *>(m_cache_pic.get())->get_w() != uint32_t(get_w()) ||
-			 static_cast<Surface *>(m_cache_pic.get())->get_h() != uint32_t(get_h()))
-		{
-			m_cache_pic = g_gr->create_offscreen_surface
-				(get_w(), get_h(), true);
-		}
-
-		dst = RenderTarget(m_cache_pic);
-		dst.fill_rect
-			(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
-	}
-
+void HorizontalSlider::draw(RenderTarget & dst)
+{
 	RGBAColor black(0, 0, 0, 255);
 
 	dst.brighten_rect //  bottom edge
@@ -397,10 +395,6 @@ void HorizontalSlider::draw(RenderTarget & odst) {
 	dst.fill_rect(Rect(Point(get_x_gap() + 1, get_y_gap()), 1, 3), black);
 
 	draw_cursor(dst, m_cursor_pos, 0, m_cursor_size, get_h());
-
-	if (g_gr->caps().offscreen_rendering)
-		odst.blit(Point(0, 0), m_cache_pic);
-	m_needredraw = false;
 }
 
 
@@ -458,30 +452,8 @@ bool HorizontalSlider::handle_mousepress
  *
  * \param dst The graphic destination.
  */
-void VerticalSlider::draw(RenderTarget & odst) {
-	RenderTarget dst = odst;
-	if (g_gr->caps().offscreen_rendering)
-	{
-		if (!m_needredraw)
-		{
-			odst.blit(Point(0, 0), m_cache_pic);
-			return;
-		}
-
-		if
-			(!m_cache_pic || !m_cache_pic->valid() ||
-			 static_cast<Surface *>(m_cache_pic.get())->get_w() != uint32_t(get_w()) ||
-			 static_cast<Surface *>(m_cache_pic.get())->get_h() != uint32_t(get_h()))
-		{
-			m_cache_pic = g_gr->create_offscreen_surface
-				(get_w(), get_h(), true);
-		}
-
-		dst = RenderTarget(m_cache_pic);
-
-		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
-	}
-
+void VerticalSlider::draw(RenderTarget & dst)
+{
 	RGBAColor black(0, 0, 0, 255);
 
 	dst.brighten_rect //  right edge
@@ -502,10 +474,6 @@ void VerticalSlider::draw(RenderTarget & odst) {
 	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap() + 1), 3, 1), black);
 
 	draw_cursor(dst, 0, m_cursor_pos, get_w(), m_cursor_size);
-
-	if (g_gr->caps().offscreen_rendering)
-		odst.blit(Point(0, 0), m_cache_pic);
-	m_needredraw = false;
 }
 
 
