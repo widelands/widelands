@@ -82,6 +82,8 @@ int32_t S2_Map_Loader::preload_map(bool const scenario) {
 		iterate_player_numbers(i, nr_players) {
 			m_map.set_scenario_player_tribe(i, "empire");
 			m_map.set_scenario_player_name(i, names[i - 1]);
+			m_map.set_scenario_player_ai(i, "");
+			m_map.set_scenario_player_closeable(i, false);
 		}
 	}
 
