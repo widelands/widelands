@@ -37,7 +37,7 @@ HelpWindow::HelpWindow
 	 uint32_t fontsize,
 	 uint32_t width, uint32_t height)
 	:
-	Window(parent, "help_window", 0, 0, 20, 20, (_("Help: ") + caption).c_str()),
+	UniqueWindow(parent, "help_window", 0, 20, 20, (_("Help: ") + caption).c_str()),
 	textarea
 		(new Multiline_Textarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
 	m_h1((format("%u") % (fontsize < 12 ? 18 : fontsize * 3 / 2)).str()),
@@ -127,6 +127,18 @@ void HelpWindow::add_block(std::string block) {
 	m_text += "</p></rt>";
 	textarea->set_text(m_text);
 	lastentry = BLOCK;
+}
+
+void HelpWindow::add_picture_li(std::string block, std::string picpath) {
+	m_text += "<rt image=";
+	m_text += picpath;
+	m_text += " image-align=left><p font-face=";
+	m_text += m_fn;
+	m_text += " font-size=";
+	m_text += m_p;
+	m_text += ">";
+	lastentry = BLOCK;
+	return add_block(block);
 }
 
 

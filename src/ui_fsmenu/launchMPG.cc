@@ -618,8 +618,15 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 		(_
 		 ("On the left side is a list of all clients including you. With the "
 		  "button in the rear of your nickname, you can set your role. "
-		  "Available roles are open players, players that are already played by "
-		  "other clients (sharing the kingdom) and spectator mode."));
+		  "Available roles are:"));
+	help.add_picture_li
+		(_
+			("The player with the color of the flag. If more than one client selected the same color, these "
+			 "share the control over the player (\"shared kingdom mode\")."),
+		 "pics/genstats_enable_plr_08.png");
+	help.add_picture_li
+		(_("And spectator mode, meaning you can see everything, but can not control any player"),
+		"pics/menu_tab_watch.png");
 	help.add_heading(_("Player settings"));
 	help.add_paragraph
 		(_
