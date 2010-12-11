@@ -79,7 +79,7 @@ protected:
 
 
 class Immovable;
-class ImmovableProgram;
+struct ImmovableProgram;
 struct ImmovableAction;
 struct ImmovableActionData;
 
@@ -130,7 +130,7 @@ private:
 
 class Immovable : public BaseImmovable {
 	friend struct Immovable_Descr;
-	friend class ImmovableProgram;
+	friend struct ImmovableProgram;
 	friend struct Map;
 
 	// for writing (obsolete since build-11)
