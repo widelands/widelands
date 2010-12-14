@@ -201,6 +201,25 @@ void Player::update_team_players() {
 	}
 }
 
+
+/*
+ * Plays the corresponding sound when a message is received and if sound is
+ * enabled.
+ */
+void Player::play_message_sound(const std::string & sender) {
+#define MAYBE_PLAY(a) if (sender == a) { \
+	g_sound_handler.play_fx(a, 200, PRIO_ALWAYS_PLAY); \
+	return; \
+	}
+
+	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
+		MAYBE_PLAY("site_occupied");
+		MAYBE_PLAY("under_attack");
+
+		g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+	}
+}
+
 Message_Id Player::add_message
 	(Game & game, Message & message, bool const popup)
 {
@@ -213,29 +232,8 @@ Message_Id Player::add_message
 
 	if (Interactive_Player * const iplayer = game.get_ipl())
 		if (&iplayer->player() == this) {
+			play_message_sound(message.sender());
 
-			// play sound if enabled
-			Section & s = g_options.pull_section("global");
-			if (s.get_bool("sound_at_message", true)) {
-
-				if (message.sender() == "site_occupied")
-					g_sound_handler.play_fx("site_occupied", 200, PRIO_ALWAYS_PLAY);
-				else
-					g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
-
-				// Special voice sounds - turned of by default
-				if (s.get_bool("voice_at_message", false)) {
-					if (message.sender() == "under_attack")
-						g_sound_handler.play_fx
-							("under_attack", 125, PRIO_ALWAYS_PLAY);
-					else if (message.sender() == "site_lost")
-						g_sound_handler.play_fx
-							("site_lost", 125, PRIO_ALWAYS_PLAY);
-					else if (message.sender() == "site_defeated")
-						g_sound_handler.play_fx
-							("site_defeated", 125, PRIO_ALWAYS_PLAY);
-				}
-			}
 			if (popup)
 				iplayer->popup_message(id, message);
 		}

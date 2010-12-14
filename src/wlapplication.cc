@@ -819,7 +819,6 @@ bool WLApplication::init_settings() {
 	s.get_bool("dock_windows_to_edges");
 	s.get_bool("remove_syncstreams");
 	s.get_bool("sound_at_message");
-	s.get_bool("voice_at_message");
 	s.get_bool("transparent_chat");
 	s.get_string("registered");
 	s.get_string("nickname");
