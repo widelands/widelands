@@ -29,7 +29,6 @@
 #include "player.h"
 #include "profile/profile.h"
 #include "soldier.h"
-#include "sound/sound_handler.h"
 #include "tribe.h"
 #include "worker.h"
 
@@ -218,11 +217,9 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
 				 descname().c_str());
 			send_message
 				(*game,
-				 "military_occupied",
+				 "site_occupied",
 				 descname(),
 				 message);
-
-			g_sound_handler.play_fx("site_occupied", 200, PRIO_ALWAYS_PLAY);
 		}
 	}
 

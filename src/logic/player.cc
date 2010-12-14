@@ -217,17 +217,21 @@ Message_Id Player::add_message
 			// play sound if enabled
 			Section & s = g_options.pull_section("global");
 			if (s.get_bool("sound_at_message", true)) {
-				g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+
+				if (message.sender() == "site_occupied")
+					g_sound_handler.play_fx("site_occupied", 200, PRIO_ALWAYS_PLAY);
+				else
+					g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
 
 				// Special voice sounds - turned of by default
 				if (s.get_bool("voice_at_message", false)) {
-					if (message.sender() == MSG_SND_UNDER_ATTACK)
+					if (message.sender() == "under_attack")
 						g_sound_handler.play_fx
 							("under_attack", 125, PRIO_ALWAYS_PLAY);
-					else if (message.sender() == MSG_SND_SITE_LOST)
+					else if (message.sender() == "site_lost")
 						g_sound_handler.play_fx
 							("site_lost", 125, PRIO_ALWAYS_PLAY);
-					else if (message.sender() == MSG_SND_SITE_DEFEATED)
+					else if (message.sender() == "site_defeated")
 						g_sound_handler.play_fx
 							("site_defeated", 125, PRIO_ALWAYS_PLAY);
 				}
