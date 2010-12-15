@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-21 22:05+0100\n"
-"PO-Revision-Date: 2010-11-26 10:09+0000\n"
-"Last-Translator: Foppe Benedictus <Unknown>\n"
+"POT-Creation-Date: 2010-11-29 10:15+0100\n"
+"PO-Revision-Date: 2010-12-14 17:00+0000\n"
+"Last-Translator: Christian Groenendijk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-27 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-12-15 04:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -761,7 +761,7 @@ msgstr "Documentatie voor programma commando keerterug"
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:793
 msgid "failed"
-msgstr "Mislukt"
+msgstr "mislukt"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:412
 msgid "completed"
@@ -769,7 +769,7 @@ msgstr "voltooid"
 
 #: ../../src/writeHTML.cc:908 ../../src/logic/production_program.cc:412
 msgid "skipped"
-msgstr "Overgeslagen"
+msgstr "overgeslagen"
 
 #: ../../src/writeHTML.cc:913
 msgid "and"
@@ -932,7 +932,7 @@ msgstr "Documentatie voor programma commando speelFX"
 
 #: ../../src/writeHTML.cc:1387
 msgid "Documentation for program command construct"
-msgstr ""
+msgstr "Documentatie voor programma commando construct"
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
@@ -1868,7 +1868,7 @@ msgstr "soldaattype"
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
-"verwachtte {\"lp\"|\"aanval\"|\"verdediging\"|\"ontwijken\"} maar vond \"%s\""
+"verwachtte {\"hp\"|\"attack\"|\"defense\"|\"evade\"} maar vond \"%s\""
 
 #: ../../src/logic/production_program.cc:1234
 #: ../../src/logic/production_program.cc:1306
@@ -3061,6 +3061,10 @@ msgstr ""
 "Op het moment bent u %s\n"
 "\n"
 
+#: ../../src/ui_fsmenu/launchMPG.cc:447
+msgid "Click on the \"?\" in the right top corner to get help."
+msgstr "Klik op de \"?\" in de rechter bovenhoek voor hulp"
+
 #: ../../src/ui_fsmenu/launchMPG.cc:497
 msgid "Saved players are:"
 msgstr "Opgeslagen spelers zijn:"
@@ -4173,7 +4177,7 @@ msgstr "Stam"
 #: ../../src/wui/multiplayersetupgroup.cc:518
 #: ../../src/wui/playerdescrgroup.cc:103
 msgid "Initialization"
-msgstr "Begin opstelling"
+msgstr "Initialisatie"
 
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84

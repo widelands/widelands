@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-29 09:15+0000\n"
-"PO-Revision-Date: 2010-12-13 14:17+0000\n"
-"Last-Translator: bouchard renaud <Unknown>\n"
+"PO-Revision-Date: 2010-12-14 13:48+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-12-15 04:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:46
@@ -187,19 +187,19 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:254
 msgid "Chaos emerges..."
-msgstr ""
+msgstr "Le Chaos émerge ..."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:348
 msgid "Colionder arrives"
-msgstr ""
+msgstr "Colionder arrive"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:365
 msgid "Colionder is in thought"
-msgstr ""
+msgstr "Colionder est perdu dans ses pensées"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:654
 msgid "Congratulations"
-msgstr ""
+msgstr "Félicitations"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 msgid "Ensure the supply of build wares"
@@ -207,7 +207,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:200
 msgid "Escape from the island"
-msgstr ""
+msgstr "Échappez-vous de l'île"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:122
 msgid "Establish a food production"
@@ -337,40 +337,40 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:608
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:646
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:383
 msgid "Jundlina agrees"
-msgstr ""
+msgstr "Jundlina est d'accord"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:512
 msgid "Jundlina considers the economy"
-msgstr ""
+msgstr "Jundlina examine l'économie"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:468
 msgid "Jundlina is angry"
-msgstr ""
+msgstr "Jundlina est en colère"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:532
 msgid "Jundlina is in thought"
-msgstr ""
+msgstr "Jundlina est songeuse"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:645
 msgid "Jundlina is relieved"
-msgstr ""
+msgstr "Jundlina est soulagée"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:393
 msgid "Jundlina is reviewing the reports"
-msgstr ""
+msgstr "Jundlina prend connaissance des rapports"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:339
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:392
 msgid "Jundlina is satisfied"
-msgstr ""
+msgstr "Jundlina est satisfaite"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:556
 msgid "Jundlina is worried"
-msgstr ""
+msgstr "Jundlina est inquiète"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:458
 msgid "Jundlina nods"
@@ -378,7 +378,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:499
 msgid "Jundlina received a letter"
-msgstr ""
+msgstr "Jundlina reçoit une missive"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:355
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:414
@@ -393,15 +393,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:467
 msgid "Jundlina summons Sidolus"
-msgstr ""
+msgstr "Jundlina convoque Sidolus"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:285
 msgid "Jundlina writes down her memories"
-msgstr ""
+msgstr "Jundlina écrit ses mémoires"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:340
 msgid "Jundlina's Memoirs"
-msgstr ""
+msgstr "Souvenirs de Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:261
 msgid ""
@@ -420,11 +420,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Loftomor and Sidolus arrive"
-msgstr ""
+msgstr "Loftomor et Sidolus arrivent"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor speaks"
-msgstr ""
+msgstr "Loftomor parle"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:591
 msgid ""
@@ -543,7 +543,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "New Objectives"
-msgstr ""
+msgstr "Nouveaux objectifs"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:219
 msgid ""
@@ -558,15 +558,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:570
 msgid "One more building"
-msgstr ""
+msgstr "Un bâtiment de plus"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:426
 msgid "Opol seeks out Jundlina"
-msgstr ""
+msgstr "Opol sort chercher Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:616
 msgid "Ostur seems confident"
-msgstr ""
+msgstr "Ostur semble confiant"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:609
 msgid ""
