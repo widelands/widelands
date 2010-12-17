@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-11-29 09:15+0000\n"
-"PO-Revision-Date: 2010-12-14 13:48+0000\n"
-"Last-Translator: Immunoman <Unknown>\n"
+"PO-Revision-Date: 2010-12-16 23:09+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-15 04:32+0000\n"
+"X-Launchpad-Export-Date: 2010-12-17 04:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:46
@@ -203,7 +203,7 @@ msgstr "Félicitations"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 msgid "Ensure the supply of build wares"
-msgstr ""
+msgstr "Assurer l'approvisionnement en matériaux de construction"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:200
 msgid "Escape from the island"
@@ -211,11 +211,11 @@ msgstr "Échappez-vous de l'île"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:122
 msgid "Establish a food production"
-msgstr ""
+msgstr "Etablir un système de production de nourriture"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "Etablir un système de production de nourriture solide"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:147
 msgid "Establish a spidercloth production"
@@ -223,15 +223,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:112
 msgid "Expand and Explore"
-msgstr ""
+msgstr "Expansion et exploration"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:111
 msgid "Expand your territory and explore the island"
-msgstr ""
+msgstr "Etendez votre territoire et explorez l'île"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:217
 msgid "Favored by the god"
-msgstr ""
+msgstr "Favorisé par les dieux"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:123
 msgid ""
@@ -374,7 +374,7 @@ msgstr "Jundlina est inquiète"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:458
 msgid "Jundlina nods"
-msgstr ""
+msgstr "Jundlina acquiesce"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:499
 msgid "Jundlina received a letter"
@@ -389,7 +389,7 @@ msgstr "Jundlina reçoit une missive"
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:607
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:631
 msgid "Jundlina replies"
-msgstr ""
+msgstr "Jundlina réponds"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:467
 msgid "Jundlina summons Sidolus"
@@ -615,7 +615,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:215
 msgid "Proudest to the death"
-msgstr ""
+msgstr "Fier jusqu'à la mort"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:394
 msgid ""
@@ -626,15 +626,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:446
 msgid "Sidolus seeks out Jundlina"
-msgstr ""
+msgstr "Sidolus cherche Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:476
 msgid "Sidolus seems contrite"
-msgstr ""
+msgstr "Sidolus semble contrit"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:326
 msgid "Sidolus speaks"
-msgstr ""
+msgstr "Sidolus parle"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:243
 msgid ""
@@ -650,11 +650,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:234
 msgid "The god's disgrace"
-msgstr ""
+msgstr "La disgrace des dieux"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:236
 msgid "The god's punishment"
-msgstr ""
+msgstr "La punition des dieux"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:113
 msgid ""
@@ -665,15 +665,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:284
 msgid "The princess' memoir"
-msgstr ""
+msgstr "Le memoire de la princesse"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "The supply of build wares"
-msgstr ""
+msgstr "L'approvisionnement en matériaux de construction"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:589
 msgid "The water is rising!"
-msgstr ""
+msgstr "L'eau monte !"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:148
 msgid ""
@@ -718,7 +718,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:252
 msgid "Uproar and confusion"
-msgstr ""
+msgstr "Tumulte et confusion"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:533
 msgid ""
@@ -775,7 +775,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a %s to the ocean!"
-msgstr ""
+msgstr "Nous avons perdu un %s dans l'océan!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:292
 msgid ""
@@ -803,6 +803,9 @@ msgid ""
 "You have won this mission. Continue with the next one or keep playing for\n"
 "as long as you like."
 msgstr ""
+"Vous avez gagné cette mission. Continuez avec la suivante poursuivez votre "
+"jeu\n"
+"aussi longtemps qu'il vous plaira."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:633
 msgid ""
