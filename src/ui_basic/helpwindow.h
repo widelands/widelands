@@ -22,7 +22,7 @@
 
 #include "align.h"
 #include "multilinetextarea.h"
-#include "unique_window.h"
+#include "window.h"
 
 namespace UI {
 
@@ -41,7 +41,7 @@ namespace UI {
  *     ...
  *     help.run();
 */
-struct HelpWindow : public UniqueWindow {
+struct HelpWindow : public Window {
 	HelpWindow
 		(Panel * parent,
 		 const std::string & caption,
@@ -49,8 +49,8 @@ struct HelpWindow : public UniqueWindow {
 		 uint32_t width = 0, uint32_t height = 0);
 	~HelpWindow();
 
-	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my);
-	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my);
+	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my);
 
 	void add_heading   (std::string text);
 	void add_paragraph (std::string text);

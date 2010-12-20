@@ -32,7 +32,6 @@
 #include "mapselect.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "ui_basic/helpwindow.h"
 #include "ui_basic/window.h"
 #include "warning.h"
 #include "wui/gamechatpanel.h"
@@ -170,6 +169,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 
 	m_map_info(this, m_xres * 37 / 50, m_yres * 2 / 10, m_butw, m_yres * 27 / 80),
 	m_client_info(this, m_xres * 37 / 50, m_yres * 13 / 20, m_butw, m_yres * 5 / 20),
+	m_help(0),
 
 // Variables and objects used in the menu
 	m_settings     (settings),
@@ -216,6 +216,8 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
 	delete m_lua;
 	delete m_mpsg;
+	if (m_help)
+		delete m_help;
 }
 
 
@@ -611,45 +613,50 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 
 /// Show help
 void Fullscreen_Menu_LaunchMPG::help_clicked() {
-	UI::HelpWindow help(this, _("Multiplayer Game Setup"), m_fs);
-	help.add_paragraph(_("You are in the multi player launch game menu."));
-	help.add_heading(_("Client settings"));
-	help.add_paragraph
+	if (m_help)
+		delete m_help;
+	m_help = new UI::HelpWindow(this, _("Multiplayer Game Setup"), m_fs);
+	m_help->add_paragraph(_("You are in the multi player launch game menu."));
+	m_help->add_heading(_("Client settings"));
+	m_help->add_paragraph
 		(_
-		 ("On the left side is a list of all clients including you. With the "
-		  "button in the rear of your nickname, you can set your role. "
-		  "Available roles are:"));
-	help.add_picture_li
+		 ("On the left side is a list of all clients including you. With the button in the rear of your "
+		  "nickname, you can set your role. Available roles are:"));
+	m_help->add_picture_li
 		(_
-			("The player with the color of the flag. If more than one client selected the same color, these "
-			 "share the control over the player (\"shared kingdom mode\")."),
+		 ("The player with the color of the flag. If more than one client selected the same color, these "
+		  "share the control over the player (\"shared kingdom mode\")."),
 		 "pics/genstats_enable_plr_08.png");
-	help.add_picture_li
+	m_help->add_picture_li
 		(_("And spectator mode, meaning you can see everything, but can not control any player"),
 		"pics/menu_tab_watch.png");
-	help.add_heading(_("Player settings"));
-	help.add_paragraph
+	m_help->add_heading(_("Player settings"));
+	m_help->add_paragraph
 		(_
-		 ("In the middle are the settings for the players. To start a game, each "
-		  "player must either be connected to a client or a computer player or "
-		  "be set to closed."));
-	help.add_block
+		 ("In the middle are the settings for the players. To start a game, each player must be one of the "
+		  "following:"));
+	m_help->add_picture_li
+		(_("Connected to one or more clients (see \"Client settings\")."), "pics/genstats_nrworkers.png");
+	m_help->add_picture_li
 		(_
-		 ("If you are a client (not the hosting player), you can set the tribe "
-		  "and the team for the player you set as your role."));
-	help.add_block
+		 ("Connected to a computer player (the face in the picture as well as the mouse hover texts "
+		  "indicates the strength of the currently selected computer player)."),
+		"pics/ai_Normal.png");
+	m_help->add_picture_li(_("Set as shared in starting position for another player."), "pics/shared_in.png");
+	m_help->add_picture_li(_("Closed."), "pics/stop.png");
+	m_help->add_block
 		(_
-		 ("If you are the hosting player, you can further set the "
-		  "initializations of each player (the set of buildings, wares and "
-		  "workers the player starts with), connect a computer player to a "
-		  "player or close a player."));
-	help.add_heading(_("Map informations"));
-	help.add_paragraph
+		 ("The later three are only setable by the hosting client by left clicking the \"type\" button of a "
+		  "player. Hosting players can further set the initializations of each player (the set of buildings, "
+		  "wares and workers the player starts with) and the tribe an team for computer players"));
+	m_help->add_block
 		(_
-		 ("On the right side are informations about the selected map or "
-		  "savegame. A button right to the map name allows the host to change to "
-		  "a different one. Further the host is able to set a specific win "
-		  "condition and finally can start the game as soon as all players are "
-		  "set up."));
-	help.run();
+		 ("Every client connected to a player (the set \"role\" player) can set the tribe and the team "
+		  "for that player"));
+	m_help->add_heading(_("Map informations"));
+	m_help->add_paragraph
+		(_
+		 ("On the right side are informations about the selected map or savegame. A button right to the map "
+		  "name allows the host to change to a different one. Further the host is able to set a specific win "
+		  "condition and finally can start the game as soon as all players are set up."));
 }

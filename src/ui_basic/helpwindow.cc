@@ -37,9 +37,8 @@ HelpWindow::HelpWindow
 	 uint32_t fontsize,
 	 uint32_t width, uint32_t height)
 	:
-	UniqueWindow(parent, "help_window", 0, 20, 20, (_("Help: ") + caption).c_str()),
-	textarea
-		(new Multiline_Textarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
+	Window(parent, "help_window", 0, 0, 20, 20, (_("Help: ") + caption).c_str()),
+	textarea(new Multiline_Textarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
 	m_h1((format("%u") % (fontsize < 12 ? 18 : fontsize * 3 / 2)).str()),
 	m_h2((format("%u") % (fontsize < 12 ? 12 : fontsize)).str()),
 	m_p ((format("%u") % (fontsize < 12 ? 10  : fontsize * 5 / 6)).str()),
@@ -67,10 +66,7 @@ HelpWindow::HelpWindow
 	int32_t in_height = out_height - 60;
 
 	set_inner_size(in_width, in_height);
-	set_pos
-		(Point
-			((g_gr->get_xres() - out_width) / 2,
-			 (g_gr->get_yres() - out_height) / 2));
+	set_pos(Point((g_gr->get_xres() - out_width) / 2, (g_gr->get_yres() - out_height) / 2));
 
 	new Callback_Button
 		(this, "ok",
@@ -147,7 +143,7 @@ void HelpWindow::add_picture_li(std::string block, std::string picpath) {
  *
  * Clicking the right mouse button inside the window acts like pressing Ok.
  */
-bool HelpWindow::handle_mousepress(const Uint8 btn, int32_t, int32_t)
+bool HelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
@@ -156,14 +152,20 @@ bool HelpWindow::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 	return true;
 }
 
-bool HelpWindow::handle_mouserelease(const Uint8, int32_t, int32_t)
+bool HelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t)
 {
 	return true;
 }
 
 void HelpWindow::pressedOk()
 {
-	end_modal(0);
+	if (is_modal())
+		end_modal(0);
+	else {
+		// do not call die() here - could lead to broken pointers.
+		// the window should get deleted with the parent anyways.
+		set_visible(false);
+	}
 }
 
 }
