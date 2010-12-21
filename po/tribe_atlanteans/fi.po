@@ -6,21 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
 "PO-Revision-Date: 2010-08-30 23:39+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:17+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../tribes/atlanteans/ship/conf:1
+msgid "A sea-worthy ship"
+msgstr ""
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid "A special tabard for atlantian soldiers."
 msgstr "Erikoisasetakki atlantislaisille sotilaille."
 
-#: ../../tribes/atlanteans/conf:51
+#: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
 msgstr "Suurkilpi"
 
@@ -39,15 +43,15 @@ msgstr ""
 "Tämä on jo yksi parhaista atlantislaisista atraimista. Sitä käyttävät vain "
 "erittäin taitavat taistelijat."
 
-#: ../../tribes/atlanteans/conf:104
+#: ../../tribes/atlanteans/conf:111
 msgid "Armoursmith"
 msgstr "Kilpiseppä"
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:183
 msgid "Armoursmithy"
 msgstr "Kilpipaja"
 
-#: ../../tribes/atlanteans/conf:27
+#: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
 msgstr "Tuhkaa"
 
@@ -55,11 +59,11 @@ msgstr "Tuhkaa"
 msgid "Atlanteans"
 msgstr "Atlantislaiset"
 
-#: ../../tribes/atlanteans/conf:105
+#: ../../tribes/atlanteans/conf:112
 msgid "Baker"
 msgstr "Leipuri"
 
-#: ../../tribes/atlanteans/conf:166
+#: ../../tribes/atlanteans/conf:178
 msgid "Bakery"
 msgstr "Leipomo"
 
@@ -68,7 +72,7 @@ msgid "Bakes bread for workers."
 msgstr "Leipoo leipää työntekijöille."
 
 # Ei näin: kuvake vs. teksti
-#: ../../tribes/atlanteans/conf:52
+#: ../../tribes/atlanteans/conf:59
 msgid "Bakingtray"
 msgstr "Leipälapio"
 
@@ -86,15 +90,15 @@ msgid "Big buckets for the fish breeder - produced by the toolsmith."
 msgstr ""
 "Kalankasvattaja käyttää suuria ämpäreitä työssään. Työkaluseppä valmistaa ne."
 
-#: ../../tribes/atlanteans/conf:54
+#: ../../tribes/atlanteans/conf:61
 msgid "Blackroot"
 msgstr "Mustajuuri"
 
-#: ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:188
 msgid "Blackroot Farm"
 msgstr "Mustajuuriviljelmä"
 
-#: ../../tribes/atlanteans/conf:53
+#: ../../tribes/atlanteans/conf:60
 msgid "Blackroot Flour"
 msgstr "Mustajuurijauho"
 
@@ -106,27 +110,27 @@ msgstr ""
 "Mustajuurijauho jauhetaan mustajuurista, ja se on yksi kolmesta "
 "atlantislaisen leivän ainesosasta."
 
-#: ../../tribes/atlanteans/conf:106
+#: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
 msgstr "Mustajuuren viljelijä"
 
-#: ../../tribes/atlanteans/conf:28
+#: ../../tribes/atlanteans/conf:34
 msgid "Blackrootfield"
 msgstr "Mustajuuripelto"
 
-#: ../../tribes/atlanteans/conf:29
+#: ../../tribes/atlanteans/conf:35
 msgid "Blackrootfield harvested"
 msgstr "Mustajuuripelto korjattu"
 
-#: ../../tribes/atlanteans/conf:30
+#: ../../tribes/atlanteans/conf:36
 msgid "Blackrootfield medium"
 msgstr "Mustajuuripelto keskikokoinen"
 
-#: ../../tribes/atlanteans/conf:31
+#: ../../tribes/atlanteans/conf:37
 msgid "Blackrootfield small"
 msgstr "Mustajuuripelto pieni"
 
-#: ../../tribes/atlanteans/conf:32
+#: ../../tribes/atlanteans/conf:38
 msgid "Blackrootfield tiny"
 msgstr "Mustajuuripelto hyvin pieni"
 
@@ -138,7 +142,7 @@ msgstr ""
 "Mustajuuret ovat erityisiä syötäviä juuria. Atlantislaiset ovat mieltyneet "
 "niiden makuun, ja käyttävät niistä jauhettuja jauhoja leivän leipomiseen."
 
-#: ../../tribes/atlanteans/conf:55
+#: ../../tribes/atlanteans/conf:62
 msgid "Bread"
 msgstr "Leipä"
 
@@ -154,15 +158,15 @@ msgstr "Siittää hämähäkin jamssille"
 msgid "Breeds the strong atlantean horses"
 msgstr "Siittää vahvoja atlantealaisia hevosia"
 
-#: ../../tribes/atlanteans/conf:56
+#: ../../tribes/atlanteans/conf:63
 msgid "Buckets"
 msgstr "Ämpäripari"
 
-#: ../../tribes/atlanteans/conf:107
+#: ../../tribes/atlanteans/conf:114
 msgid "Builder"
 msgstr "Rakentaja"
 
-#: ../../tribes/atlanteans/conf:108
+#: ../../tribes/atlanteans/conf:115
 msgid "Burner"
 msgstr "Polttaja"
 
@@ -170,7 +174,7 @@ msgstr "Polttaja"
 msgid "Burns coal."
 msgstr "Polttaa hiiliä."
 
-#: ../../tribes/atlanteans/conf:97
+#: ../../tribes/atlanteans/conf:104
 msgid "Carrier"
 msgstr "Kantaja"
 
@@ -178,8 +182,8 @@ msgstr "Kantaja"
 msgid "Carries items along your roads."
 msgstr "Kantaa tavaroita teilläsi."
 
-#: ../../tribes/atlanteans/conf:138
 #: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:201
 msgid "Castle"
 msgstr "Linna"
 
@@ -187,7 +191,7 @@ msgstr "Linna"
 msgid "Castle village"
 msgstr "Linnakylä"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:179
 msgid "Charcoal Burner's House"
 msgstr "Hiilenpolttajan talo"
 
@@ -199,43 +203,47 @@ msgstr "Kastelli"
 msgid "Cloth made out of spideryarn."
 msgstr "Seittilangasta kudottua kangasta."
 
-#: ../../tribes/atlanteans/conf:57
+#: ../../tribes/atlanteans/conf:64
 msgid "Coal"
 msgstr "Hiili"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:190
 msgid "Coal Mine"
 msgstr "Hiilikaivos"
 
-#: ../../tribes/atlanteans/conf:131
+#: ../../tribes/atlanteans/shipyard/conf:18
+msgid "Constructing ship"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:142
 msgid "Construction Site"
 msgstr "Rakennustyömaa"
 
-#: ../../tribes/atlanteans/conf:59
+#: ../../tribes/atlanteans/conf:66
 msgid "Corn"
 msgstr "Maissi"
 
-#: ../../tribes/atlanteans/conf:33
+#: ../../tribes/atlanteans/conf:39
 msgid "Cornfield"
 msgstr "Maissipelto"
 
-#: ../../tribes/atlanteans/conf:34
+#: ../../tribes/atlanteans/conf:40
 msgid "Cornfield harvested"
 msgstr "Maissipelto korjattu"
 
-#: ../../tribes/atlanteans/conf:35
+#: ../../tribes/atlanteans/conf:41
 msgid "Cornfield medium"
 msgstr "Maissipelto keskikokoinen"
 
-#: ../../tribes/atlanteans/conf:36
+#: ../../tribes/atlanteans/conf:42
 msgid "Cornfield small"
 msgstr "Maissipelto pieni"
 
-#: ../../tribes/atlanteans/conf:37
+#: ../../tribes/atlanteans/conf:43
 msgid "Cornfield tiny"
 msgstr "Maissipelto hyvin pieni"
 
-#: ../../tribes/atlanteans/conf:58
+#: ../../tribes/atlanteans/conf:65
 msgid "Cornflour"
 msgstr "Maissijauho"
 
@@ -247,7 +255,7 @@ msgstr ""
 "Maissijauho valmistetaan maissista, ja se on yksi kolmesta atlantislaisen "
 "leivän ainesosasta."
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
 msgstr "Kidekaivos"
 
@@ -259,11 +267,11 @@ msgstr "Leikkaa raakagraniittia rakennuskiviksi."
 msgid "Defend and Conquer!"
 msgstr "Puolusta ja valloita!"
 
-#: ../../tribes/atlanteans/conf:38
+#: ../../tribes/atlanteans/conf:44
 msgid "Destroyed building"
 msgstr "Tuhoutunut rakennus"
 
-#: ../../tribes/atlanteans/conf:60
+#: ../../tribes/atlanteans/conf:67
 msgid "Diamond"
 msgstr "Timantti"
 
@@ -275,19 +283,19 @@ msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
 msgid "Donjon"
 msgstr "Keskustorni"
 
-#: ../../tribes/atlanteans/conf:61
+#: ../../tribes/atlanteans/conf:68
 msgid "Double Trident"
 msgstr "Kaksipäinen atrain"
 
-#: ../../tribes/atlanteans/conf:134
+#: ../../tribes/atlanteans/conf:205
 msgid "Dungeon"
 msgstr "Tyrmä"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:187
 msgid "Farm"
 msgstr "Maissiviljelmä"
 
-#: ../../tribes/atlanteans/conf:109
+#: ../../tribes/atlanteans/conf:117
 msgid "Farmer"
 msgstr "Maissinviljelijä"
 
@@ -295,19 +303,19 @@ msgstr "Maissinviljelijä"
 msgid "Fells trees."
 msgstr "Kaataa puita."
 
-#: ../../tribes/atlanteans/conf:62
+#: ../../tribes/atlanteans/conf:69
 msgid "Fire Tongs"
 msgstr "Pihdit"
 
-#: ../../tribes/atlanteans/conf:64
+#: ../../tribes/atlanteans/conf:71
 msgid "Fish"
 msgstr "Kala"
 
-#: ../../tribes/atlanteans/conf:110
+#: ../../tribes/atlanteans/conf:118
 msgid "Fish Breeder"
 msgstr "Kalankasvattaja"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:170
 msgid "Fish Breeder's House"
 msgstr "Kalankasvattajan talo"
 
@@ -315,23 +323,23 @@ msgstr "Kalankasvattajan talo"
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
 msgstr "Kala on yksi keskeisimmistä atlantislaisten ruokaresursseista."
 
-#: ../../tribes/atlanteans/conf:111
+#: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
 msgstr "Kalastaja"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:169
 msgid "Fisher's House"
 msgstr "Kalastajan talo"
 
-#: ../../tribes/atlanteans/conf:63
+#: ../../tribes/atlanteans/conf:70
 msgid "Fishing Net"
 msgstr "Kalaverkko"
 
-#: ../../tribes/atlanteans/conf:112
+#: ../../tribes/atlanteans/conf:120
 msgid "Forester"
 msgstr "Metsänvartija"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:167
 msgid "Forester's House"
 msgstr "Metsänvartijan talo"
 
@@ -340,23 +348,23 @@ msgstr "Metsänvartijan talo"
 msgid "Fortress"
 msgstr "Linnoitus"
 
-#: ../../tribes/atlanteans/conf:113
+#: ../../tribes/atlanteans/conf:121
 msgid "Geologist"
 msgstr "Geologi"
 
-#: ../../tribes/atlanteans/conf:67
+#: ../../tribes/atlanteans/conf:74
 msgid "Gold"
 msgstr "Kulta"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:192
 msgid "Gold Mine"
 msgstr "Kultakaivos"
 
-#: ../../tribes/atlanteans/conf:66
+#: ../../tribes/atlanteans/conf:73
 msgid "Gold Ore"
 msgstr "Kultamalmi"
 
-#: ../../tribes/atlanteans/conf:68
+#: ../../tribes/atlanteans/conf:75
 msgid "Gold Yarn"
 msgstr "Kultalanka"
 
@@ -368,23 +376,23 @@ msgstr ""
 "Kulta on yksi arvokkaimmista materiaaleista, ja vain tärkeät esineet "
 "koristellaan sillä."
 
-#: ../../tribes/atlanteans/conf:65
+#: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
 msgstr "Kultainen asetakki"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:168
 msgid "Goldweaver"
 msgstr "Kullanpunomo"
 
-#: ../../tribes/atlanteans/conf:139
+#: ../../tribes/atlanteans/conf:197
 msgid "Guardhall"
 msgstr "Linnake"
 
-#: ../../tribes/atlanteans/conf:140
+#: ../../tribes/atlanteans/conf:196
 msgid "Guardhouse"
 msgstr "Vartiotupa"
 
-#: ../../tribes/atlanteans/conf:69
+#: ../../tribes/atlanteans/conf:76
 msgid "Hammer"
 msgstr "Vasara"
 
@@ -404,7 +412,7 @@ msgstr "Päämaja"
 msgid "Headquarters medium"
 msgstr "Keskikokoinen päämaja"
 
-#: ../../tribes/atlanteans/conf:70
+#: ../../tribes/atlanteans/conf:77
 msgid "Heavy Double Trident"
 msgstr "Raskas kaksipäinen atrain"
 
@@ -412,63 +420,63 @@ msgstr "Raskas kaksipäinen atrain"
 msgid "Helps to carry items at heavy used roads."
 msgstr "Auttaa tavaroiden kuljettamisessa teillä."
 
-#: ../../tribes/atlanteans/conf:141
+#: ../../tribes/atlanteans/conf:198
 msgid "High Tower"
 msgstr "Suurtorni"
 
-#: ../../tribes/atlanteans/conf:71
+#: ../../tribes/atlanteans/conf:78
 msgid "Hook pole"
 msgstr "Savustusvarras"
 
-#: ../../tribes/atlanteans/conf:98
+#: ../../tribes/atlanteans/conf:105
 msgid "Horse"
 msgstr "Hevonen"
 
-#: ../../tribes/atlanteans/conf:128
+#: ../../tribes/atlanteans/conf:136
 msgid "Horse Breeder"
 msgstr "Hevosten kasvattaja"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:184
 msgid "Horse Farm"
 msgstr "Hevostila"
 
-#: ../../tribes/atlanteans/conf:114
+#: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
 msgstr "Metsästäjä"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:171
 msgid "Hunter's House"
 msgstr "Metsästäjän talo"
 
-#: ../../tribes/atlanteans/conf:72
+#: ../../tribes/atlanteans/conf:79
 msgid "Hunting Bow"
 msgstr "Metsästysjousi"
 
-#: ../../tribes/atlanteans/conf:74
+#: ../../tribes/atlanteans/conf:81
 msgid "Iron"
 msgstr "Rauta"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:191
 msgid "Iron Mine"
 msgstr "Rautakaivos"
 
-#: ../../tribes/atlanteans/conf:73
+#: ../../tribes/atlanteans/conf:80
 msgid "Iron Ore"
 msgstr "Rautamalmi"
 
-#: ../../tribes/atlanteans/conf:135
+#: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
 msgstr "Labyrintti"
 
-#: ../../tribes/atlanteans/conf:75
+#: ../../tribes/atlanteans/conf:82
 msgid "Light trident"
 msgstr "Kevyt atrain"
 
-#: ../../tribes/atlanteans/conf:76
+#: ../../tribes/atlanteans/conf:83
 msgid "Long Trident"
 msgstr "Pitkä atrain"
 
-#: ../../tribes/atlanteans/conf:77
+#: ../../tribes/atlanteans/conf:84
 msgid "Meat"
 msgstr "Liha"
 
@@ -476,7 +484,7 @@ msgstr "Liha"
 msgid "Meat is one food-resource of the Atlanteans."
 msgstr "Liha on yksi atlantislaisten ruokatarvike."
 
-#: ../../tribes/atlanteans/conf:78
+#: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
 msgstr "Lypsypihdit"
 
@@ -488,11 +496,11 @@ msgstr ""
 "Hämähäkinkasvattaja käyttää lypsypihtejä seitin lypsämiseksi hämähäkeistä. "
 "Työkaluseppä valmistaa pihdit."
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:176
 msgid "Mill"
 msgstr "Mylly"
 
-#: ../../tribes/atlanteans/conf:115
+#: ../../tribes/atlanteans/conf:123
 msgid "Miller"
 msgstr "Mylläri"
 
@@ -512,15 +520,19 @@ msgstr "Louhi kvartsia"
 msgid "Mine stone"
 msgstr "Louhi kiveä"
 
-#: ../../tribes/atlanteans/conf:116
+#: ../../tribes/atlanteans/conf:124
 msgid "Miner"
 msgstr "Kaivosmies"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:103
+msgid "Not enough space"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
 msgstr "Etuvartioasema"
 
-#: ../../tribes/atlanteans/conf:80
+#: ../../tribes/atlanteans/conf:87
 msgid "Pick"
 msgstr "Hakku"
 
@@ -532,7 +544,7 @@ msgstr ""
 "Hakkuja käyttävät kivenhakkaajat ja kaivostyöläiset. Työkaluseppä valmistaa "
 "hakut."
 
-#: ../../tribes/atlanteans/conf:81
+#: ../../tribes/atlanteans/conf:88
 msgid "Planks"
 msgstr "Sahatavara"
 
@@ -686,59 +698,59 @@ msgstr "Tuottaa työkaluja työmiehille."
 msgid "Produces weapons for the soldiers."
 msgstr "Tuottaa aseita sotilaille."
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:165
 msgid "Quarry"
 msgstr "Kivilouhos"
 
-#: ../../tribes/atlanteans/conf:79
+#: ../../tribes/atlanteans/conf:86
 msgid "Quartz"
 msgstr "Kvartsi"
 
-#: ../../tribes/atlanteans/conf:39
+#: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator coal little"
 msgstr "Resurssimerkki hiili vähän"
 
-#: ../../tribes/atlanteans/conf:40
+#: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator coal much"
 msgstr "Resurssimerkki hiili paljon"
 
-#: ../../tribes/atlanteans/conf:41
+#: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator gold little"
 msgstr "Resurssimerkki kulta vähän"
 
-#: ../../tribes/atlanteans/conf:42
+#: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator gold much"
 msgstr "Resurssimerkki kulta paljon"
 
-#: ../../tribes/atlanteans/conf:43
+#: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator granite little"
 msgstr "Resurssimittari graniitti loppumassa"
 
-#: ../../tribes/atlanteans/conf:44
+#: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator granite much"
 msgstr "Resurssimittari graniittia tarpeeksi"
 
-#: ../../tribes/atlanteans/conf:45
+#: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator iron little"
 msgstr "Resurssimerkki rauta vähän"
 
-#: ../../tribes/atlanteans/conf:46
+#: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator iron much"
 msgstr "Resurssimerkki rauta paljon"
 
-#: ../../tribes/atlanteans/conf:47
+#: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator no resource"
 msgstr "Resurssimerkki ei mitään"
 
-#: ../../tribes/atlanteans/conf:48
+#: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator water"
 msgstr "Resurssimerkki vettä"
 
-#: ../../tribes/atlanteans/conf:82
+#: ../../tribes/atlanteans/conf:89
 msgid "Saw"
 msgstr "Saha"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:174
 msgid "Sawmill"
 msgstr "Saha"
 
@@ -755,15 +767,15 @@ msgstr ""
 msgid "Saws the wood to produce planks."
 msgstr "Sahaa puuta tuottaakseen lautoja."
 
-#: ../../tribes/atlanteans/conf:117
+#: ../../tribes/atlanteans/conf:125
 msgid "Sawyer"
 msgstr "Sahaaja"
 
-#: ../../tribes/atlanteans/conf:127
+#: ../../tribes/atlanteans/conf:135
 msgid "Scout"
 msgstr "Tiedustelija"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:173
 msgid "Scout's House"
 msgstr "Tiedustelijan talo"
 
@@ -774,7 +786,7 @@ msgstr ""
 "Tiedustelija kuten Teemu Tiedustelija tiedustelee tiedostelemattomia alueita "
 "tiedustelun malliin."
 
-#: ../../tribes/atlanteans/conf:83
+#: ../../tribes/atlanteans/conf:90
 msgid "Scythe"
 msgstr "Viikate"
 
@@ -783,7 +795,23 @@ msgstr "Viikate"
 msgid "Sentry"
 msgstr "Vartiopaikka"
 
-#: ../../tribes/atlanteans/conf:84
+#: ../../tribes/atlanteans/conf:139
+msgid "Ship"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:55
+msgid "Ship construction site"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:116
+msgid "Shipwright"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:177
+msgid "Shipyard"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:91
 msgid "Shovel"
 msgstr "Lapio"
 
@@ -795,12 +823,12 @@ msgstr ""
 "Lapioita tarvitaan kasvien käsittelyyn, joten niitä käyttävät puunistuttaja "
 "ja mustajuuren viljelijä. Työkaluseppä valmistaa lapiot."
 
-#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/dungeon/conf:30
 #: ../../tribes/atlanteans/labyrinth/conf:36
 msgid "Sleep"
 msgstr "Lepää"
 
-#: ../../tribes/atlanteans/conf:142
+#: ../../tribes/atlanteans/conf:199
 msgid "Small Tower"
 msgstr "Pieni torni"
 
@@ -812,11 +840,11 @@ msgstr "Sulata kultaa"
 msgid "Smelt iron"
 msgstr "Sulata rautaa"
 
-#: ../../tribes/atlanteans/conf:118
+#: ../../tribes/atlanteans/conf:126
 msgid "Smelter"
 msgstr "Sulattaja"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:180
 msgid "Smelting Works"
 msgstr "Sulattamo"
 
@@ -832,19 +860,19 @@ msgstr "Savusta kalaa"
 msgid "Smoke meat"
 msgstr "Savusta lihaa"
 
-#: ../../tribes/atlanteans/conf:85
+#: ../../tribes/atlanteans/conf:92
 msgid "Smoked fish"
 msgstr "Savukala"
 
-#: ../../tribes/atlanteans/conf:86
+#: ../../tribes/atlanteans/conf:93
 msgid "Smoked meat"
 msgstr "Savuliha"
 
-#: ../../tribes/atlanteans/conf:119
+#: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
 msgstr "Savustaja"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:175
 msgid "Smokery"
 msgstr "Savustamo"
 
@@ -852,35 +880,42 @@ msgstr "Savustamo"
 msgid "Smokes meat and fish."
 msgstr "Savustaa lihaa ja kalaa."
 
-#: ../../tribes/atlanteans/conf:101
+#: ../../tribes/atlanteans/conf:108
 msgid "Soldier"
 msgstr "Sotilas"
 
-#: ../../tribes/atlanteans/conf:120
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:104
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
+"this map with a fair starting condition."
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
 msgstr "Hämähäkinkasvattaja"
 
-#: ../../tribes/atlanteans/conf:87
+#: ../../tribes/atlanteans/conf:94
 msgid "Spidercloth"
 msgstr "Hämähäkinsilkki"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:185
 msgid "Spiderfarm"
 msgstr "Hämähäkkitarha"
 
-#: ../../tribes/atlanteans/conf:88
+#: ../../tribes/atlanteans/conf:95
 msgid "Spideryarn"
 msgstr "Seittilanka"
 
-#: ../../tribes/atlanteans/conf:89
+#: ../../tribes/atlanteans/conf:96
 msgid "Steel Shield"
 msgstr "Teräskilpi"
 
-#: ../../tribes/atlanteans/conf:90
+#: ../../tribes/atlanteans/conf:97
 msgid "Steel Trident"
 msgstr "Teräsatrain"
 
-#: ../../tribes/atlanteans/conf:91
+#: ../../tribes/atlanteans/conf:98
 msgid "Stone"
 msgstr "Kivi"
 
@@ -888,7 +923,7 @@ msgstr "Kivi"
 msgid "Stone is one basic build ware type of the Atlanteans."
 msgstr "Kivi on rakentamisen perusraaka-aine atlantislaisille."
 
-#: ../../tribes/atlanteans/conf:121
+#: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
 msgstr "Kivenhakkaaja"
 
@@ -896,7 +931,7 @@ msgstr "Kivenhakkaaja"
 msgid "Stronghold"
 msgstr "Linnake"
 
-#: ../../tribes/atlanteans/conf:92
+#: ../../tribes/atlanteans/conf:99
 msgid "Tabard"
 msgstr "Asetakki"
 
@@ -1069,20 +1104,20 @@ msgstr ""
 "Hienon atlantislaisen teräksen valmistamiseen tarvitaan kuuma ahjo. Pelkkä "
 "raakapuulla lietsottu tuli ei ole riittävän kuuma, vaan tarvitaan hiiltä."
 
-#: ../../tribes/atlanteans/conf:122
+#: ../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
 msgstr "Työkaluseppä"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:181
 msgid "Toolsmithy"
 msgstr "Työkalupaja"
 
-#: ../../tribes/atlanteans/conf:143
 #: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:200
 msgid "Tower"
 msgstr "Torni"
 
-#: ../../tribes/atlanteans/conf:123
+#: ../../tribes/atlanteans/conf:131
 msgid "Trainer"
 msgstr "Kouluttaja"
 
@@ -1090,7 +1125,7 @@ msgstr "Kouluttaja"
 msgid "Trains the soldiers."
 msgstr "Kouluttaa sotilaita."
 
-#: ../../tribes/atlanteans/conf:93
+#: ../../tribes/atlanteans/conf:100
 msgid "Trunk"
 msgstr "Tukki"
 
@@ -1102,11 +1137,11 @@ msgstr ""
 "Puunrungot ovat raaka-aine sahatavaralle, jota käytetään lähes kaikissa "
 "atlantislaisissa rakennuksissa."
 
-#: ../../tribes/atlanteans/dungeon/conf:32
+#: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
 msgstr "Paranna sotilaan hyökkäystä (0)"
 
-#: ../../tribes/atlanteans/dungeon/conf:33
+#: ../../tribes/atlanteans/dungeon/conf:32
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1114,11 +1149,11 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (0) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:34
+#: ../../tribes/atlanteans/dungeon/conf:33
 msgid "Upgrade soldier attack 1"
 msgstr "Paranna sotilaan hyökkäystä (1)"
 
-#: ../../tribes/atlanteans/dungeon/conf:35
+#: ../../tribes/atlanteans/dungeon/conf:34
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1126,11 +1161,11 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (1) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:35
 msgid "Upgrade soldier attack 2"
 msgstr "Paranna sotilaan hyökkäystä (2)"
 
-#: ../../tribes/atlanteans/dungeon/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:36
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1138,11 +1173,11 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (2) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:38
+#: ../../tribes/atlanteans/dungeon/conf:37
 msgid "Upgrade soldier attack 3"
 msgstr "Paranna sotilaan hyökkäystä (3)"
 
-#: ../../tribes/atlanteans/dungeon/conf:39
+#: ../../tribes/atlanteans/dungeon/conf:38
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1212,7 +1247,7 @@ msgstr ""
 msgid "Warehouse"
 msgstr "Varasto"
 
-#: ../../tribes/atlanteans/conf:94
+#: ../../tribes/atlanteans/conf:101
 msgid "Water"
 msgstr "Vesi"
 
@@ -1224,7 +1259,7 @@ msgstr ""
 "Vesi on elämän eliksiiriä! Vettä käytetään moneen, muun muassa leivän "
 "leipomiseen."
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:182
 msgid "Weapon Smithy"
 msgstr "Asepaja"
 
@@ -1233,27 +1268,27 @@ msgstr "Asepaja"
 msgid "Weapons and Tools are made of iron."
 msgstr "Aseet ja työkalut valmistetaan raudasta."
 
-#: ../../tribes/atlanteans/conf:124
+#: ../../tribes/atlanteans/conf:132
 msgid "Weaponsmith"
 msgstr "Aseseppä"
 
-#: ../../tribes/atlanteans/conf:125
+#: ../../tribes/atlanteans/conf:133
 msgid "Weaver"
 msgstr "Punoja"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:186
 msgid "Weaving-Mill"
 msgstr "Kutomo"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:172
 msgid "Well"
 msgstr "Kaivo"
 
-#: ../../tribes/atlanteans/conf:126
+#: ../../tribes/atlanteans/conf:134
 msgid "Woodcutter"
 msgstr "Puunhakkaaja"
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:166
 msgid "Woodcutter's House"
 msgstr "Puunhakkaajan talo"
 
@@ -1276,6 +1311,7 @@ msgstr "Puunhakkaajan talo"
 #: ../../tribes/atlanteans/quarry/conf:16
 #: ../../tribes/atlanteans/sawmill/conf:19
 #: ../../tribes/atlanteans/scouts_house/conf:18
+#: ../../tribes/atlanteans/shipyard/conf:19
 #: ../../tribes/atlanteans/smelting_works/conf:25
 #: ../../tribes/atlanteans/smokery/conf:27
 #: ../../tribes/atlanteans/spiderfarm/conf:17
@@ -1290,6 +1326,10 @@ msgstr "Työskentele (pääohjelma)"
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
 msgstr "Työskentelee rakennustyömailla rakentaen uusia rakennuksia."
+
+#: ../../tribes/atlanteans/shipwright/conf:1
+msgid "Works at the shipyard and constructs new ships."
+msgstr ""
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
 "PO-Revision-Date: 2010-10-18 20:45+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -281,7 +281,6 @@ msgid ""
 "attacks.\" "
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:111
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
 "* As soon as the blacksmith reaches his next level (master blacksmith) "
@@ -365,6 +364,13 @@ msgstr ""
 "* Destroy all enforcements of Thron’s two brothers to liberate the throne-"
 "circle."
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:111
+msgid ""
+"* Enhance your metalworks to an axefactory or - as soon as the blacksmith "
+"reaches his next level (master blacksmith) - even to a war mill and build up "
+"another metalworks to ensure the production of tools."
+msgstr ""
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
 msgid ""
@@ -427,6 +433,10 @@ msgstr ""
 "that it is not defended by soldiers. It is often wise to build a warehouse "
 "when your territory is growing and the paths to your headquarters get longer "
 "and longer."
+
+#: ../../campaigns/t03.wmf/elemental:7
+msgid "03 - This Land is our Land"
+msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -589,13 +599,9 @@ msgstr "The story continues"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
-"handling of military and training site buildings and will finally introduce "
-"fighting."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
-"handling of military and training site buildings and will finally introduce "
-"fighting."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -618,10 +624,6 @@ msgstr "Thron speaks:"
 msgid "Tracks"
 msgstr "Tracks"
 
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "Tutorial3 - This land is our land"
-msgstr "Tutorial3 - This land is our land"
-
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
 msgstr "Winter ahead"
@@ -638,6 +640,9 @@ msgstr ""
 msgid "Your loyal companion"
 msgstr "Your loyal companion"
 
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Tutorial3 - This land is our land"
+
 #~ msgid ""
 #~ " \"The last days we came closer to our capital. Many people have already "
 #~ "joined us on our march and set their hopes on me. However, I fear that we "
@@ -661,6 +666,15 @@ msgstr "Your loyal companion"
 #~ "The number of quarrels and disputes keeps growing and the winter has us "
 #~ "firmly under control. We should put food in our storage to survive the long, "
 #~ "cold winter!\" "
+
+#~ msgid ""
+#~ "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
+#~ "handling of military and training site buildings and will finally introduce "
+#~ "fighting."
+#~ msgstr ""
+#~ "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
+#~ "handling of military and training site buildings and will finally introduce "
+#~ "fighting."
 
 #~ msgid ""
 #~ " \"Thron told me that he discovered tracks in the snow to the northeast of "

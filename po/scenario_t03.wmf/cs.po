@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
 "PO-Revision-Date: 2010-06-06 20:59+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -264,7 +264,6 @@ msgid ""
 "attacks.\" "
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:111
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
 "* As soon as the blacksmith reaches his next level (master blacksmith) "
@@ -344,6 +343,13 @@ msgid ""
 "circle."
 msgstr "* Znič všechna opevnění Thronových bratrů a osvoboď kruh s trůnem."
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:111
+msgid ""
+"* Enhance your metalworks to an axefactory or - as soon as the blacksmith "
+"reaches his next level (master blacksmith) - even to a war mill and build up "
+"another metalworks to ensure the production of tools."
+msgstr ""
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
 msgid ""
@@ -404,6 +410,10 @@ msgstr ""
 "-> Skladiště jsou podobná základnám s jediným rozdílem - skladiště nejsou "
 "bráněna vojáky. Jak se tvé území rozšiřuje a cesty do základny jsou delší a "
 "delší, je prozíravé postavit v odlehlých oblastech další skladiště."
+
+#: ../../campaigns/t03.wmf/elemental:7
+msgid "03 - This Land is our Land"
+msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -567,12 +577,9 @@ msgstr "Příběh pokračuje"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
-"handling of military and training site buildings and will finally introduce "
-"fighting."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
-"Třetí mise barbarské výukové kampaně. Tato mise vysvětluje ovládání "
-"vojenských a tréninkových budov a nakonec samozřejmě také dojde řada na boj."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -595,10 +602,6 @@ msgstr "Thron říká:"
 msgid "Tracks"
 msgstr "Stopy"
 
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "Tutorial3 - This land is our land"
-msgstr "Trénink 3 - Tato země je naše"
-
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
 msgstr "Zima je před námi"
@@ -614,6 +617,17 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
 msgstr "Věrný společník"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Trénink 3 - Tato země je naše"
+
+#~ msgid ""
+#~ "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
+#~ "handling of military and training site buildings and will finally introduce "
+#~ "fighting."
+#~ msgstr ""
+#~ "Třetí mise barbarské výukové kampaně. Tato mise vysvětluje ovládání "
+#~ "vojenských a tréninkových budov a nakonec samozřejmě také dojde řada na boj."
 
 #~ msgid ""
 #~ " \"The last days we came closer to our capital. Many people have already "

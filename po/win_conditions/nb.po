@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-10 21:37+0000\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
 "PO-Revision-Date: 2010-11-12 15:23+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-13 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:24+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
@@ -33,7 +33,7 @@ msgstr "%s hadde "
 msgid "%s has "
 msgstr "%s har "
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:138
+#: ../../scripting/win_conditions/03_territorial_lord.lua:145
 msgid "%s owns more than half of the maps area."
 msgstr "%s eier mer enn halvparten av landområdene på kartet."
 
@@ -70,7 +70,7 @@ msgstr ""
 msgid "Endless Game"
 msgstr "Endeløst spill"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:144
+#: ../../scripting/win_conditions/03_territorial_lord.lua:151
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Hold ut i %i minutter til for å vinne spillet."
 
@@ -84,8 +84,8 @@ msgid "Points"
 msgstr "Poeng"
 
 #: ../../scripting/win_conditions/02_collectors.lua:128
-#: ../../scripting/win_conditions/03_territorial_lord.lua:149
-#: ../../scripting/win_conditions/03_territorial_lord.lua:151
+#: ../../scripting/win_conditions/03_territorial_lord.lua:156
+#: ../../scripting/win_conditions/03_territorial_lord.lua:158
 #: ../../scripting/win_conditions/04_wood_gnome.lua:88
 msgid "Status"
 msgstr "Status"
@@ -94,10 +94,10 @@ msgstr "Status"
 msgid "Status for Player %i<br>"
 msgstr "Status for spiller %i<br>"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:122
-#: ../../scripting/win_conditions/03_territorial_lord.lua:125
-#: ../../scripting/win_conditions/03_territorial_lord.lua:147
-#: ../../scripting/win_conditions/03_territorial_lord.lua:176
+#: ../../scripting/win_conditions/03_territorial_lord.lua:129
+#: ../../scripting/win_conditions/03_territorial_lord.lua:132
+#: ../../scripting/win_conditions/03_territorial_lord.lua:154
+#: ../../scripting/win_conditions/03_territorial_lord.lua:183
 msgid "Team %i"
 msgstr "Lag %i"
 
@@ -140,7 +140,7 @@ msgstr ""
 #: ../../scripting/win_conditions/00_endless_game.lua:24
 #: ../../scripting/win_conditions/01_defeat_all.lua:24
 #: ../../scripting/win_conditions/02_collectors.lua:179
-#: ../../scripting/win_conditions/03_territorial_lord.lua:159
+#: ../../scripting/win_conditions/03_territorial_lord.lua:166
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
 msgid "You are defeated!"
 msgstr "Du har blitt beseiret!"
@@ -150,7 +150,7 @@ msgid "You are the winner of this game!"
 msgstr "Du har vunnet dette spillet!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
-#: ../../scripting/win_conditions/03_territorial_lord.lua:178
+#: ../../scripting/win_conditions/03_territorial_lord.lua:185
 msgid "You are the winner!"
 msgstr "Du vant!"
 
@@ -167,7 +167,7 @@ msgstr "Du har tapt dette spillet!"
 #: ../../scripting/win_conditions/00_endless_game.lua:25
 #: ../../scripting/win_conditions/01_defeat_all.lua:25
 #: ../../scripting/win_conditions/02_collectors.lua:180
-#: ../../scripting/win_conditions/03_territorial_lord.lua:160
+#: ../../scripting/win_conditions/03_territorial_lord.lua:167
 #: ../../scripting/win_conditions/04_wood_gnome.lua:95
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
@@ -178,7 +178,7 @@ msgid "You have won this game!"
 msgstr "Du har vunnet spillet!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:139
-#: ../../scripting/win_conditions/03_territorial_lord.lua:180
+#: ../../scripting/win_conditions/03_territorial_lord.lua:187
 msgid "You lost"
 msgstr "Du tapte"
 
@@ -186,22 +186,22 @@ msgstr "Du tapte"
 msgid "You lost!"
 msgstr "Du tapte!"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:142
+#: ../../scripting/win_conditions/03_territorial_lord.lua:149
 msgid "You own more than half of the maps area."
 msgstr "Du eier mer enn halvparten av landområdene på kartet."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:140
+#: ../../scripting/win_conditions/03_territorial_lord.lua:147
 msgid "You still got %i minutes to prevent a victory."
 msgstr "Du har fortsatt %i minutter til å forhindre en seier."
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
-#: ../../scripting/win_conditions/03_territorial_lord.lua:178
+#: ../../scripting/win_conditions/03_territorial_lord.lua:185
 #: ../../scripting/win_conditions/04_wood_gnome.lua:151
 msgid "You won!"
 msgstr "Du vant!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:139
-#: ../../scripting/win_conditions/03_territorial_lord.lua:180
+#: ../../scripting/win_conditions/03_territorial_lord.lua:187
 msgid "You've lost this game!"
 msgstr "Du har tapt spillet!"
 
