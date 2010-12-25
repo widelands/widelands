@@ -47,6 +47,7 @@ public:
 		 Widelands::Map_Map_Object_Loader &, uint32_t);
 
 	virtual void push_arg(const Widelands::Player *);
+	virtual void push_arg(const Widelands::Coords &);
 
 private:
 	void m_reference();

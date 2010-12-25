@@ -24,6 +24,7 @@
  * Implementation is in immovable.cc
  */
 
+#include "buildcost.h"
 #include "immovable.h"
 
 #include <string>
@@ -70,12 +71,29 @@ struct ImmovableProgram {
 		Duration m_duration;
 	};
 
+	/// Transforms the immovable into another immovable or into a bob
+	///
+	/// Parameter syntax
+	///    parameters ::= {probability} {bob|immovable} world|tribe:name
+	/// Parameter semantics:
+	///    probability: (defaults to 0 -- i.e. always)
+	///       The probability (out of 255) for replacing the immovable with
+	///       a new one; if the probability is 0 (i.e. the default), then the
+	///       transformation always happens
+	///    bob|immovable: (defaults to immovable)
+	///       whether we'll be replaced by a bob or by an immovable
+	///    world|tribe:
+	///       whether the other object is taken from the world or from
+	///       the owner's tribe
+	///    name:
+	///       name of the replacement object
 	struct ActTransform : public Action {
 		ActTransform
 			(char * parameters, Immovable_Descr &);
 		virtual void execute(Game &, Immovable &) const;
 	private:
 		std::string type_name;
+		bool        bob;
 		bool        tribe;
 		uint8_t     probability;
 	};
@@ -127,6 +145,31 @@ struct ImmovableProgram {
 		uint8_t     priority;
 	};
 
+	/**
+	 * Puts the immovable into construction mode.
+	 *
+	 * Parameter syntax:
+	 *    parameters ::= animation build-time decay-time
+	 * Parameter semantics:
+	 *    animation:
+	 *       The basic animation to be displayed during construction.
+	 *    build-time:
+	 *       Time for a single building step.
+	 *    decay-time:
+	 *       Time until construction decays one step if no progress has been made.
+	 */
+	struct ActConstruction : public Action {
+		ActConstruction(char * parameters, Immovable_Descr &, std::string const & directory, Profile &);
+		virtual void execute(Game &, Immovable &) const;
+
+		Duration buildtime() const {return m_buildtime;}
+		Duration decaytime() const {return m_decaytime;}
+
+	private:
+		uint32_t m_animid;
+		Duration m_buildtime;
+		Duration m_decaytime;
+	};
 
 	/// Create a program with a single action.
 	ImmovableProgram(char const * const _name, Action * const action)
@@ -159,6 +202,16 @@ struct ImmovableProgram {
 private:
 	std::string m_name;
 	Actions     m_actions;
+};
+
+struct ImmovableActionData {
+	ImmovableActionData() {}
+	virtual ~ImmovableActionData() {}
+
+	virtual const char * name() const = 0;
+	virtual void save(FileWrite & fw, Immovable & imm) = 0;
+
+	static ImmovableActionData * load(FileRead & fr, Immovable & imm, const std::string & name);
 };
 
 }

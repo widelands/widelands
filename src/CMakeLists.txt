@@ -29,13 +29,21 @@ file(GLOB_RECURSE WL_SRCS_CPP *.cpp)
 
 #convention: any directory called "test" contains test sources, including subdirectories
 set(WL_TEST_SRCS "")
+set(WL_CODECHECK_SRCS "")
 foreach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
   if (${sourcefile} MATCHES ".*/test/.*")
     list (APPEND WL_TEST_SRCS ${sourcefile})
     list (REMOVE_ITEM WL_SRCS_CC ${sourcefile})
     list (REMOVE_ITEM WL_SRCS_H ${sourcefile})
   endif (${sourcefile} MATCHES ".*/test/.*")
+  # exclude test sources from Codecheck, as well as the scripting/pdep sources from lua
+  if (NOT ${sourcefile} MATCHES ".*/scripting/pdep/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*")
+    list (APPEND WL_CODECHECK_SRCS ${sourcefile})
+  endif (NOT ${sourcefile} MATCHES ".*/scripting/pdep/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*")
 endforeach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
+foreach (sourcefile ${WL_SRCS_CPP})
+  list (APPEND WL_CODECHECK_SRCS ${sourcefile})
+endforeach (sourcefile ${WL_SRCS_CPP})
 #convention: main.cc should be removed from all lists
 list (REMOVE_ITEM WL_SRCS_CC "${CMAKE_CURRENT_SOURCE_DIR}/main.cc")
 
@@ -46,10 +54,10 @@ else (DEFINED MSVC)
     add_executable (widelands ${GUI_TYPE} main.cc build_info.cc ${WIN32_ICON_O})
   else (DEFINED MINGW)
     add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
-  endif (DEFINED MINGW) 
+  endif (DEFINED MINGW)
 endif (DEFINED MSVC)
 
-add_library (widelands_all ${WL_SRCS_CC} ${WL_SRCS_H})
+add_library (widelands_all STATIC ${WL_SRCS_CC} ${WL_SRCS_H})
 
 set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
@@ -58,13 +66,13 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/CppCheckSuppressions.cmake ${CMAKE_C
 
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
   set (commands "")
-  foreach(sourcefile ${WL_SRCS_CC} ${WL_SRCS_H} ${WL_SRCS_CPP})
+  foreach(sourcefile ${WL_CODECHECK_SRCS})
     string(REPLACE "${CMAKE_SOURCE_DIR}/src/" "" sourcewithoutpath ${sourcefile})
     string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcewithoutpath})
     if (WIN32)
       string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
     endif (WIN32)
-    get_filename_component(sourcename ${sourcefile} NAME) 
+    get_filename_component(sourcename ${sourcefile} NAME)
     set(stamp ${sourcename}_)
     add_custom_command(
       OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash}"
@@ -85,42 +93,10 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
     else (WL_EXTRAWARNINGS)
 #        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}")
     endif (WL_EXTRAWARNINGS)
-  endforeach(sourcefile ${WL_SRCS_CC} ${WL_SRCS_H} ${WL_SRCS_CPP})
+  endforeach(sourcefile ${WL_CODECHECK_SRCS})
   add_custom_target(codecheck DEPENDS ${commands})
   add_dependencies(widelands codecheck)
 endif (CMAKE_BUILD_TYPE STREQUAL Debug)
-
-macro(LinkExecutable exe_name is_test)
-  target_link_libraries(${exe_name} widelands_all)
-
-  target_link_libraries(${exe_name} ${SDLIMAGE_LIBRARY})
-  target_link_libraries(${exe_name} ${SDLMIXER_LIBRARY})
-  target_link_libraries(${exe_name} ${SDLNET_LIBRARY})
-  target_link_libraries(${exe_name} ${SDLTTF_LIBRARY})
-  target_link_libraries(${exe_name} ${SDLGFX_LIBRARY})
-
-  if (NOT ${is_test} STREQUAL TRUE)
-    target_link_libraries(${exe_name} ${SDL_LIBRARY})
-  endif (NOT ${is_test} STREQUAL TRUE)
-
-  target_link_libraries(${exe_name} ${LUA_LIBRARY})
-  target_link_libraries(${exe_name} ${PNG_LIBRARY})
-  target_link_libraries(${exe_name} ${ZLIB_LIBRARY})
-  target_link_libraries(${exe_name} ${GGZ_CORE_LIBRARY})
-  target_link_libraries(${exe_name} ${OPENGL_gl_LIBRARY})
-
-  if (${is_test} STREQUAL TRUE)
-    target_link_libraries(${exe_name} ${Boost_LIBRARIES})
-  endif (${is_test} STREQUAL TRUE)
-
-  if (DEFINED WL_EXTRA_LINK_LIBRARIES)
-    target_link_libraries(${exe_name} ${WL_EXTRA_LINK_LIBRARIES})
-  endif (DEFINED WL_EXTRA_LINK_LIBRARIES)
-
-  IF (USE_BOOST_THREADS)
-    target_link_libraries(widelands ${Boost_THREAD_LIBRARY})
-  ENDIF (USE_BOOST_THREADS)
-endmacro(LinkExecutable exe_name is_test)
 
 #the subdirectories are only used for test definition
 #temporarily disabled the 'old' tests due to incompatibility
@@ -128,7 +104,22 @@ endmacro(LinkExecutable exe_name is_test)
 #add_subdirectory(io)
 add_subdirectory(scripting)
 
-LinkExecutable(widelands FALSE)
+target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
+target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})
+target_link_libraries(widelands_all ${SDLNET_LIBRARY})
+target_link_libraries(widelands_all ${SDLTTF_LIBRARY})
+target_link_libraries(widelands_all ${SDLGFX_LIBRARY})
+target_link_libraries(widelands_all ${LUA_LIBRARY})
+target_link_libraries(widelands_all ${PNG_LIBRARY})
+target_link_libraries(widelands_all ${ZLIB_LIBRARY})
+target_link_libraries(widelands_all ${GGZ_CORE_LIBRARY})
+target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
+if (DEFINED WL_EXTRA_LINK_LIBRARIES)
+  target_link_libraries(widelands_all ${WL_EXTRA_LINK_LIBRARIES})
+endif (DEFINED WL_EXTRA_LINK_LIBRARIES)
+
+target_link_libraries(widelands widelands_all)
+target_link_libraries(widelands ${SDL_LIBRARY})
 
 if (APPLE OR WIN32)
   target_link_libraries(widelands ${INTL_LIBRARY})
@@ -147,7 +138,7 @@ if (WIN32)
 
   else (DEFINED MSVC)
     target_link_libraries(widelands wsock32)
-  endif (DEFINED MSVC) 
+  endif (DEFINED MSVC)
 endif (WIN32)
 
-install(TARGETS widelands DESTINATION ${WLBUILD_INSTALL_BINDIR} COMPONENT ExecutableFiles)
+install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)

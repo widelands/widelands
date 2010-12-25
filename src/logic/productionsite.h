@@ -88,12 +88,25 @@ struct ProductionSite_Descr : public Building_Descr {
 	typedef std::map<std::string, ProductionProgram *> Programs;
 	Programs const & programs() const throw () {return m_programs;}
 
+	const std::vector<std::string> & compatibility_program(const std::string & progname) const;
+	const std::vector<std::string> & compatibility_working_positions(const std::string & workername) const;
+
 private:
 	Ware_Types m_working_positions;
 	Ware_Types m_inputs;
 	Output   m_output_ware_types;
 	Output   m_output_worker_types;
 	Programs m_programs;
+
+	typedef std::map<std::string, std::vector<std::string> > Compatibility;
+
+	/**
+	 * For savegame compatibility purposes, associate with old program
+	 * names a string describing actions that should be taken to preserve
+	 * compatibility.
+	 */
+	Compatibility m_compatibility_programs;
+	Compatibility m_compatibility_working_positions;
 };
 
 class ProductionSite : public Building {
@@ -111,6 +124,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActCheck_Soldier;
 	friend struct ProductionProgram::ActTrain;
 	friend struct ProductionProgram::ActPlayFX;
+	friend struct ProductionProgram::ActConstruct;
 	MO_DESCR(ProductionSite_Descr);
 
 public:
@@ -169,6 +183,16 @@ protected:
 		int32_t  ip; ///< instruction pointer
 		uint32_t phase; ///< micro-step index (instruction dependent)
 		uint32_t flags; ///< pfXXX flags
+
+		/**
+		 * Instruction-dependent additional data.
+		 */
+		/*@{*/
+		Object_Ptr objvar;
+		Coords coord;
+		/*@}*/
+
+		State() : coord(Coords::Null()) {}
 	};
 
 	Request & request_worker(Ware_Index);

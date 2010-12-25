@@ -8,9 +8,12 @@
 -- ./widelands --nozip --scenario=src/scripting/test/persistence.wmf && 
 --   ./widelands --loadgame=~/.widelands/save/lua_persistence.wgf
 
+
 -- ====================
 -- Test Data to persist 
 -- ====================
+use("aux", "set")
+
 my_name = "SirVer"
 pi = 3.1415
 eight = 8
@@ -31,12 +34,16 @@ corout = coroutine.create(function()
    coroutine.yield("What cool is that?")
    coroutine.yield(a)
 end)
-objective = p:add_objective("lumber", "House", "Boat!")
+objective = p:add_objective("lumber", "House", "Ship!")
 objective.done = true
 
 p:send_message("dummy msg1", "dummy msg 1")
 msg = p:send_message("hello nice", "World", {sender="blah", field = field })
 player_slot = map.player_slots[1]
+
+myset = Set:new{
+   map:get_field(10,10), map:get_field(10,10), map:get_field(10,11)
+}
 
 -- ========================
 -- Test after unpersisting 
@@ -79,7 +86,7 @@ assert_equal(100, rv)
 assert_table(objective)
 assert_equal("lumber", objective.name)
 assert_equal("House", objective.title)
-assert_equal("Boat!", objective.body)
+assert_equal("Ship!", objective.body)
 assert_equal(true, objective.done)
 
 assert_table(msg)
@@ -97,6 +104,10 @@ assert_equal("barbarians", player_slot.tribe)
 assert_equal("Player 1", player_slot.name)
 assert_equal(player_slot.name, map.player_slots[1].name)
 assert_equal(player_slot.tribe, map.player_slots[1].tribe)
+
+assert_equal(2, myset.size)
+assert_true(myset:contains(map:get_field(10,10)))
+assert_true(myset:contains(map:get_field(10,11)))
 
 print("################### ALL TEST PASS!")
 

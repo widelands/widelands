@@ -54,7 +54,7 @@ private:
 	void toggle_playerteam();
 
 	PlayerDescriptionGroupImpl * d;
-	std::map<std::string,std::string> m_tribenames;
+	std::map<std::string, std::string> m_tribenames;
 };
 
 

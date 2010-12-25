@@ -349,6 +349,8 @@ UI::UniqueWindow
 	(&parent, "ware_statistics", &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
+	set_cache(false);
+
 	//  First, we must decide about the size.
 	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
 	uint32_t wares_per_row = MIN_WARES_PER_LINE;

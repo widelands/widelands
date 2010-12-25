@@ -55,6 +55,8 @@ struct Transfer {
 	Request * get_request() const {return m_request;}
 	void set_request(Request * req);
 	void set_destination(PlayerImmovable & imm);
+	PlayerImmovable * get_destination(Game & g);
+	uint32_t get_steps_left() const {return m_route.get_nrsteps();}
 
 	/// Called by the controlled ware or worker
 	PlayerImmovable * get_next_step(PlayerImmovable *, bool & psuccess);

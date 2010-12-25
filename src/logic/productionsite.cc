@@ -145,6 +145,16 @@ ProductionSite_Descr::ProductionSite_Descr
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
+
+	if (Section * compat_s = prof.get_section("compatibility_programs")) {
+		while (const Section::Value * v = compat_s->get_next_val())
+			m_compatibility_programs[v->get_name()] = split_string(v->get_string(), " ");
+	}
+
+	if (Section * compat_s = prof.get_section("compatibility working positions")) {
+		while (const Section::Value * v = compat_s->get_next_val())
+			m_compatibility_working_positions[v->get_name()] = split_string(v->get_string(), " ");
+	}
 }
 
 ProductionSite_Descr::~ProductionSite_Descr()
@@ -168,6 +178,32 @@ const ProductionProgram * ProductionSite_Descr::get_program
 			("%s has no program '%s'", name().c_str(), program_name.c_str());
 	return it->second;
 }
+
+/**
+ * If there is a compatibility action for the given program, return it.
+ *
+ * Otherwise, return an empty vector.
+ */
+const std::vector<std::string> & ProductionSite_Descr::compatibility_program
+	(const std::string & progname) const
+{
+	static const std::vector<std::string> empty;
+	Compatibility::const_iterator it = m_compatibility_programs.find(progname);
+	if (it != m_compatibility_programs.end())
+		return it->second;
+	return empty;
+}
+
+const std::vector<std::string> & ProductionSite_Descr::compatibility_working_positions
+	(const std::string & workername) const
+{
+	static const std::vector<std::string> empty;
+	Compatibility::const_iterator it = m_compatibility_working_positions.find(workername);
+	if (it != m_compatibility_working_positions.end())
+		return it->second;
+	return empty;
+}
+
 
 /**
  * Create a new building of this type
@@ -597,17 +633,12 @@ bool ProductionSite::get_building_work
 	assert(descr().working_positions().size());
 	assert(&worker == m_working_positions[0].worker);
 
-	State * state = get_state();
-
 	// If unsuccessful: Check if we need to abort current program
-	if (!success && state)
-		if
-			(dynamic_cast<ProductionProgram::ActWorker const *>
-			 	(&(*state->program)[state->ip]))
-		{
-			program_end(game, Failed);
-			state = 0;
-		}
+	if (!success) {
+		State * state = get_state();
+		if (state->ip < state->program->get_size())
+			(*state->program)[state->ip].building_work_failed(game, *this, worker);
+	}
 
 	// Default actions first
 	if (WareInstance * const item = worker.fetch_carried_item(game)) {
@@ -676,29 +707,15 @@ bool ProductionSite::get_building_work
 		return false;
 
 	// Start program if we haven't already done so
+	State * state = get_state();
 	if (!state) {
 		m_program_timer = true;
 		m_program_time = schedule_act(game, 10);
 	} else if (state->ip < state->program->get_size()) {
 		ProductionProgram::Action const & action = (*state->program)[state->ip];
-
-		if (upcast(ProductionProgram::ActWorker const, worker_action, &action)) {
-			if (state->phase == 0) {
-				worker.start_task_program(game, worker_action->program());
-				++state->phase;
-				return true;
-			} else
-				program_step(game);
-		} else if
-			(dynamic_cast<ProductionProgram::ActProduce const *>(&action) or
-			 dynamic_cast<ProductionProgram::ActRecruit const *>(&action))
-		{
-			//  All the wares that we produced have been carried out and all the
-			//  workers that we recruited have been sent out, so continue with the
-			//  program.
-			program_step(game);
-		}
+		return action.get_building_work(game, *this, worker);
 	}
+
 	return false;
 }
 

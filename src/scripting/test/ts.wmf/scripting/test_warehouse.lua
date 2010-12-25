@@ -29,6 +29,16 @@ function warehouse_tests:test_set_ware_illegal_ware()
    end
    assert_error("Illegal ware should throw an error!", ill)
 end
+function warehouse_tests:test_set_ware_no_argument()
+   assert_error("Need an argument!", function()
+      self.w:set_wares()
+   end)
+end
+function warehouse_tests:test_set_ware_nil_as_argument()
+   assert_error("nil as first argument makes no sense!", function()
+      self.w:set_wares(iron)
+   end)
+end
 function warehouse_tests:test_set_get_wares_string_arg()
    assert_equal(0, self.w:get_wares("trunk"))
    self.w:set_wares("trunk", 190)

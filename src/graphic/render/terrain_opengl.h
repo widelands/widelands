@@ -19,13 +19,12 @@
 
 #ifdef USE_OPENGL
 
-#include "surface_opengl.h"
+#include "gl_picture_texture.h"
 #include "vertex.h"
 
 
 void draw_field_opengl
-	(Surface & surf,
-	 Rect const & subwin,
+	(Rect const & subwin,
 	 Vertex const & p1,
 	 Vertex const & p2,
 	 Vertex const & p3,
@@ -107,7 +106,7 @@ void draw_field_opengl
       glVertex2f(subwin.x + start.x + 3, subwin.y + start.y);                 \
       glTexCoord2i(TEXTURE_WIDTH, TEXTURE_HEIGHT);                            \
       glVertex2f(subwin.x + end.x + 3,   subwin.y + end.y);                   \
-      glTexCoord2i(TEXTURE_WIDTH - 6 , TEXTURE_HEIGHT);                       \
+      glTexCoord2i(TEXTURE_WIDTH - 6, TEXTURE_HEIGHT);                       \
       glVertex2f(subwin.x + end.x - 3,   subwin.y + end.y);                   \
    } glEnd();                                                                 \
 
@@ -122,11 +121,11 @@ void draw_roads_opengl
 	uint8_t road;
 
 	GLuint rt_normal =
-		dynamic_cast<SurfaceOpenGL const &>
-		(*g_gr->get_road_texture(Widelands::Road_Normal)).get_texture();
+		dynamic_cast<GLPictureTexture const &>
+		(*g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
 	GLuint rt_busy   =
-		dynamic_cast<SurfaceOpenGL const &>
-		(*g_gr->get_road_texture(Widelands::Road_Busy)).get_texture();
+		dynamic_cast<GLPictureTexture const &>
+		(*g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
 
 	glDisable(GL_BLEND);
 	glColor4f(1.0f, 1.0f, 1.0f, 0.6f);

@@ -148,7 +148,6 @@ void NetClient::run ()
 	s.send(d->sock);
 
 	d->settings.multiplayer = true;
-	d->settings.scenario = false;
 	{
 		Fullscreen_Menu_LaunchMPG lgm(this, this);
 		lgm.setChatProvider(*this);
@@ -185,7 +184,8 @@ void NetClient::run ()
 		if (pn > 0)
 			igb =
 				new Interactive_Player
-					(game, g_options.pull_section("global"), pn, false, true);
+					(game, g_options.pull_section("global"),
+					 pn, d->settings.scenario, true);
 		else
 			igb =
 				new Interactive_Spectator
@@ -378,6 +378,16 @@ void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	s.send(d->sock);
 }
 
+void NetClient::setPlayerCloseable(uint8_t, bool)
+{
+	//  client is not allowed to do this
+}
+
+void NetClient::setPlayerShared(uint8_t, uint8_t)
+{
+	//  client is not allowed to do this
+}
+
 void NetClient::setPlayerInit(uint8_t, uint8_t)
 {
 	//  client is not allowed to do this
@@ -476,9 +486,7 @@ void NetClient::recvOnePlayer
 	player.initialization_index = packet.Unsigned8();
 	player.ai = packet.String();
 	player.team = packet.Unsigned8();
-
-	if (number == d->settings.playernum)
-		d->localplayername = player.name;
+	player.shared_in = packet.Unsigned8();
 }
 
 void NetClient::recvOneUser
@@ -680,7 +688,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 #ifdef HAVE_VARARRAY
 		char buf[size];
 #else
-		char buf[UCHAR_MAX];
+		char buf[NETFILEPARTSIZE];
+		assert(size <= NETFILEPARTSIZE);
 #endif
 		if (packet.Data(buf, size) != size)
 			log("Readproblem. Will try to go on anyways\n");

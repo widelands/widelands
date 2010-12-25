@@ -297,6 +297,8 @@ void Game::init_newgame
 		loaderUI.set_background(map().get_world_name());
 
 	loaderUI.step(_("Configuring players"));
+	std::vector<PlayerSettings> shared;
+	std::vector<uint8_t>        shared_num;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
 		PlayerSettings const & playersettings = settings.players[i];
 
@@ -304,6 +306,11 @@ void Game::init_newgame
 			(playersettings.state == PlayerSettings::stateClosed ||
 			 playersettings.state == PlayerSettings::stateOpen)
 			continue;
+		else if (playersettings.state == PlayerSettings::stateShared) {
+			shared.push_back(playersettings);
+			shared_num.push_back(i + 1);
+			continue;
+		}
 
 		add_player
 			(i + 1,
@@ -313,12 +320,15 @@ void Game::init_newgame
 			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
 	}
+	// Add shared in starting positions
+	for (uint8_t n = 0; n < shared.size(); ++n) {
+		// This player's starting position is used in another (shared) kingdom
+		get_player(shared.at(n).shared_in)
+			->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
+	}
 
 	loaderUI.step(_("Loading map"));
 	maploader->load_map_complete(*this, settings.scenario);
-
-	// Queue first statistics calculation
-	enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
 
 	// Check for win_conditions
 	LuaCoroutine * cr = lua().run_script
@@ -483,13 +493,14 @@ bool Game::run
 		// the correct names of the players
 		iterate_player_numbers(p, nr_players) {
 			const Player * const plr = get_player(p);
-			const std::string                                             no_name;
-			const std::string &  tribe_name = plr ? plr->tribe().name() : no_name;
-			const std::string & player_name = plr ? plr->    get_name() : no_name;
-			const std::string & player_ai   = plr ? plr->    getAI()    : no_name;
-			map().set_scenario_player_tribe(p,  tribe_name);
-			map().set_scenario_player_name (p, player_name);
-			map().set_scenario_player_ai   (p, player_ai);
+			const std::string                                              no_name;
+			const std::string & player_tribe = plr ? plr->tribe().name() : no_name;
+			const std::string & player_name  = plr ? plr->    get_name() : no_name;
+			const std::string & player_ai    = plr ? plr->    getAI()    : no_name;
+			map().set_scenario_player_tribe    (p, player_tribe);
+			map().set_scenario_player_name     (p, player_name);
+			map().set_scenario_player_ai       (p, player_ai);
+			map().set_scenario_player_closeable(p, false); // player is already initialized.
 		}
 
 		// Run the init script, if the map provides one.
@@ -498,6 +509,9 @@ bool Game::run
 		else if (start_game_type == NewMPScenario)
 			enqueue_command
 				(new Cmd_LuaScript(get_gametime(), "map", "multiplayer_init"));
+
+		// Queue first statistics calculation
+		enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
 	}
 
 	if (m_writereplay || m_writesyncstream) {

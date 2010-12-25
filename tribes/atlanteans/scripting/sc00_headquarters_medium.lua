@@ -1,19 +1,27 @@
 -- =======================================================================
---              Headquarters Starting Conditions for Atlanteans             
+--              Headquarters Starting Conditions for Atlanteans
 -- =======================================================================
 
 use("aux", "infrastructure")
 
 set_textdomain("tribe_atlanteans")
 
-return {
-   name = _ "Headquarters medium", 
-   func =  function(plr) 
-   plr:allow_workers("all")
+init = {
+   name = _ "Headquarters medium",
+   func =  function(plr, shared_in_start)
 
    local sf = wl.Game().map.player_slots[plr.number].starting_field
+   if shared_in_start then
+      sf = shared_in_start
+   else
+      plr:allow_workers("all")
+   end
 
-   prefilled_buildings(plr, { "headquarters", sf.x, sf.y, 
+   plr:forbid_buildings{"shipyard"}
+
+
+
+   prefilled_buildings(plr, { "headquarters", sf.x, sf.y,
       wares = {
          diamond = 7,
          ironore = 5,
@@ -74,3 +82,6 @@ return {
    })
 end
 }
+
+return init
+

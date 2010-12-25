@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,12 +19,25 @@
 
 #include "picture.h"
 
-#include "surface.h"
-#include "rendertarget.h"
+#include "wexception.h"
 
-Picture::~Picture() {
-	delete surface;
-	free(fname);
-	delete rendertarget;
+struct NullPicture : IPicture {
+	virtual bool valid() {return false;}
+
+	virtual uint32_t get_w() {return 0;}
+	virtual uint32_t get_h() {return 0;}
+
+	virtual IPixelAccess & pixelaccess() {throw wexception("pixelaccess() attempted on null picture");}
+	virtual Surface & surface() {throw wexception("surface() attempted on null picture");}
+};
+
+/**
+ * \return an invalid, null picture
+ *
+ * \see Graphic::get_no_picture
+ */
+const PictureID & IPicture::null()
+{
+	static PictureID thenull(new NullPicture);
+	return thenull;
 }
-

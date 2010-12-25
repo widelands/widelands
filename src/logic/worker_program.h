@@ -162,6 +162,11 @@ private:
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
+	void parse_construct
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
 
 	const std::string                 m_name;
 	Actions           m_actions;

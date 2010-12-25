@@ -71,7 +71,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifndef WIN32
-#include <signal.h>
+#include <csignal>
 #endif
 
 #include <cerrno>
@@ -626,8 +626,11 @@ void WLApplication::handle_input(InputCallback const * cb)
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			if (ev.key.keysym.sym == SDLK_F10 &&
-				(get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL))) { //  get out of here quick
+			if
+				(ev.key.keysym.sym == SDLK_F10 &&
+				 (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)))
+			{
+				//  get out of here quick
 				if (ev.type == SDL_KEYDOWN)
 					m_should_die = true;
 				break;
@@ -638,7 +641,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
 						log
 							("Omitting screenshot because diskspace is lower than %luMB\n",
-							 MINIMUM_DISK_SPACE/1000/1000);
+							 MINIMUM_DISK_SPACE / (1000 * 1000));
 						break;
 					}
 					g_fs->EnsureDirectoryExists(SCREENSHOT_DIR);
@@ -864,7 +867,6 @@ bool WLApplication::init_settings() {
 	s.get_bool("dock_windows_to_edges");
 	s.get_bool("remove_syncstreams");
 	s.get_bool("sound_at_message");
-	s.get_bool("voice_at_message");
 	s.get_bool("transparent_chat");
 	s.get_string("registered");
 	s.get_string("nickname");
@@ -902,7 +904,9 @@ void WLApplication::shutdown_settings()
 }
 
 /**
- * In case that the localedir is defined in a relative manner to the executable file.
+ * In case that the localedir is defined in a relative manner to the
+ * executable file.
+ *
  * Track down the executable file and append the localedir.
  */
 std::string WLApplication::find_relative_locale_path(std::string localedir)
@@ -910,14 +914,14 @@ std::string WLApplication::find_relative_locale_path(std::string localedir)
 #ifdef __APPLE__
 	if (localedir[0] != '/') {
 		uint32_t buffersize = 0;
-		_NSGetExecutablePath(NULL,&buffersize);
+		_NSGetExecutablePath(NULL, &buffersize);
 		char buffer[buffersize];
-		int32_t check = _NSGetExecutablePath(buffer,&buffersize);
+		int32_t check = _NSGetExecutablePath(buffer, &buffersize);
 		if (check != 0) {
 			throw wexception (_("could not find the path of the main executable"));
 		}
 		std::string executabledir = buffer;
-		executabledir.resize(executabledir.find_last_of('/') + 1);
+		executabledir.resize(executabledir.rfind('/') + 1);
 		executabledir+= localedir;
 		log ("localedir: %s\n", executabledir.c_str());
 		return executabledir;
@@ -930,7 +934,7 @@ std::string WLApplication::find_relative_locale_path(std::string localedir)
 			throw wexception (_("could not find the path of the main executable"));
 		}
 		std::string executabledir(buffer, size);
-		executabledir.resize(executabledir.find_last_of('/') + 1);
+		executabledir.resize(executabledir.rfind('/') + 1);
 		executabledir += localedir;
 		log ("localedir : %s\n", executabledir.c_str());
 		return executabledir;
@@ -1929,6 +1933,14 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			s.players[number].team = team;
 	}
 
+	virtual void setPlayerCloseable(uint8_t, bool) {
+		// nothing to do
+	}
+
+	virtual void setPlayerShared(uint8_t, uint8_t) {
+		// nothing to do
+	}
+
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {
 		if (number < s.players.size())
 			s.players[number].name = name;
@@ -1955,8 +1967,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		}
 	}
 
-	virtual std::string getWinCondition() { return s.win_condition; }
-	virtual void setWinCondition(std::string wc) { s.win_condition = wc; }
+	virtual std::string getWinCondition() {return s.win_condition;}
+	virtual void setWinCondition(std::string wc) {s.win_condition = wc;}
 
 private:
 	GameSettings s;
@@ -2162,7 +2174,7 @@ struct ReplayGameController : public GameController {
 	uint32_t desiredSpeed() {return m_speed;}
 	void setDesiredSpeed(uint32_t const speed) {m_speed = speed;}
 	bool isPaused() {return m_paused;}
-	void setPaused(bool const paused) { m_paused = paused;}
+	void setPaused(bool const paused) {m_paused = paused;}
 
 private:
 	Widelands::Game & m_game;
@@ -2309,14 +2321,17 @@ bool WLApplication::redirect_output(std::string path)
 	}
 	std::string stdoutfile = path + "/stdout.txt";
 	/* Redirect standard output */
-	FILE *newfp = freopen(stdoutfile.c_str(), "w", stdout);
+	FILE * newfp = freopen(stdoutfile.c_str(), "w", stdout);
 	if (!newfp) return false;
 	/* Redirect standard error */
 	std::string stderrfile = path + "/stderr.txt";
 	newfp = freopen(stderrfile.c_str(), "w", stderr);
 
-	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);	/* Line buffered */
-	setbuf(stderr, NULL);			/* No buffering */
+	/* Line buffered */
+	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);
+
+	/* No buffering */
+	setbuf(stderr, NULL);
 
 	m_redirected_stdio = true;
 	return true;

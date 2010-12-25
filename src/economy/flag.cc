@@ -374,6 +374,20 @@ void Flag::add_item(Editor_Game_Base & egbase, WareInstance & item)
 	pi.item     = &item;
 	pi.pending  = false;
 	pi.nextstep = 0;
+	pi.priority = 0;
+
+	Transfer * trans = item.get_transfer();
+	if (trans) {
+		uint32_t trans_steps = trans->get_steps_left();
+		if (trans_steps < 3)
+			pi.priority = 2;
+		else if (trans_steps == 3)
+			pi.priority = 1;
+
+		Request * req = trans->get_request();
+		if (req)
+			pi.priority = pi.priority + req->get_transfer_priority();
+	}
 
 	item.set_location(egbase, this);
 
@@ -402,11 +416,21 @@ bool Flag::has_pending_item(Game &, Flag & dest) {
 }
 
 /**
+ * Clamp the maximal value of \ref PendingItem::priority.
+ * After reaching this value, the pure FIFO approach is applied
+ */
+#define MAX_TRANSFER_PRIORITY  16
+
+
+/**
  * Called by carrier code to indicate that the carrier is moving to pick up an
- * item.
+ * item. Item with highest transfer priority is chosen.
  * \return true if an item is actually waiting for the carrier.
-*/
+ */
 bool Flag::ack_pending_item(Game &, Flag & destflag) {
+	int32_t highest_pri = -1;
+	int32_t i_pri = -1;
+
 	for (int32_t i = 0; i < m_item_filled; ++i) {
 		if (!m_items[i].pending)
 			continue;
@@ -414,7 +438,18 @@ bool Flag::ack_pending_item(Game &, Flag & destflag) {
 		if (m_items[i].nextstep != &destflag)
 			continue;
 
-		m_items[i].pending = false;
+		if (m_items[i].priority > highest_pri) {
+			highest_pri = m_items[i].priority;
+			i_pri = i;
+
+			// Increase item priority, it matters only if the ware has to wait.
+			if (m_items[i].priority < MAX_TRANSFER_PRIORITY)
+				m_items[i].priority++;
+		}
+	}
+
+	if (i_pri >= 0) {
+		m_items[i_pri].pending = false;
 		return true;
 	}
 

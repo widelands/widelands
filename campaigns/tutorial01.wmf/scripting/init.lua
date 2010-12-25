@@ -1,5 +1,5 @@
 -- =======================================================================
---                       Barbarians Campaign Mission 1
+--                            Tutorial Mission
 -- =======================================================================
 
 -- ===============
@@ -550,7 +550,7 @@ function build_a_quarry()
    terminate_bad_boy_sentinel = true
    
    -- Wait a while
-   sleep( 120*1000 )   
+   sleep( 100*1000 )   
 
    -- Interludium: talk about census and statistics
    census_and_statistics(cs.fields[1])

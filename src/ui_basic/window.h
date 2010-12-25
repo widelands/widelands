@@ -76,6 +76,7 @@ struct Window : public NamedPanel {
 	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
+	virtual void draw(RenderTarget &);
 	void draw_border(RenderTarget &);
 
 	void think();

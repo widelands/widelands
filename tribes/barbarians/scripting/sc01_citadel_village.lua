@@ -7,12 +7,16 @@ use("aux", "infrastructure")
 set_textdomain("tribe_barbarians")
 
 return {
-   name = _ "Citadel village", 
-   func = function(plr) 
-
-   plr:allow_workers("all")
+   name = _ "Citadel village",
+   func =  function(plr, shared_in_start)
 
    local sf = wl.Game().map.player_slots[plr.number].starting_field
+
+   if shared_in_start then
+      sf = shared_in_start
+   else
+      plr:allow_workers("all")
+   end
 
    local h = plr:place_building("citadel", sf, false, true)
    h:set_soldiers{[{0,0,0,0}] = 12}
@@ -42,7 +46,7 @@ return {
             snack = 3,
             thatchreed = 24,
             trunk = 79,
-         }, 
+         },
          workers = {
             brewer = 1,
             builder = 10,
@@ -57,7 +61,7 @@ return {
             ox = 5,
          },
          soldiers = {
-            [{0,0,0,0}] = 25, 
+            [{0,0,0,0}] = 25,
          }
       })
 
@@ -68,9 +72,9 @@ return {
             meat = 6,
          }
       })
-      
+
       place_building_in_region(plr, "trainingscamp", sf:region(12))
-     
+
       place_building_in_region(plr, "helmsmithy", sf:region(12), {
          wares = { iron = 4, gold = 4 }
       })
@@ -89,7 +93,7 @@ return {
    end) then
       plr:send_message(_"Not enough space", _ 
 [[Some of your starting buildings didn't have enough room and 
-weren't build. You are at an disadvantage with this; consider restarting
+weren't build. You are at an disadvantage with this; consider restarting 
 this map with a fair starting condition.]], {popup=true}
       )
    end

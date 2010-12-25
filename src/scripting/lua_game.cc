@@ -554,7 +554,9 @@ int L_Player::forbid_buildings(lua_State * L) {
 	.. method:: add_objective(name, title, descr)
 
 		Add a new objective for this player. Will report an error, if an
-		Objective with the same name is already registered
+		Objective with the same name is already registered - note that the names
+		for the objectives are shared internally for all players, so not even
+		another player can have an objective with the same name.
 
 		:arg name: the name of the objective
 		:type name: :class:`string`
@@ -569,10 +571,6 @@ int L_Player::forbid_buildings(lua_State * L) {
 int L_Player::add_objective(lua_State * L) {
 	Game & game = get_game(L);
 	Player & p = get(L, game);
-	if (p.player_number() != game.get_ipl()->player_number())
-		return
-			report_error
-				(L, "Objectives can only be set for the interactive player");
 
 	Map * map = game.get_map();
 	Manager<Objective> & mom = map->mom();

@@ -33,6 +33,7 @@
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "ship.h"
 #include "soldier.h"
 #include "trainingsite.h"
 #include "warehouse.h"
@@ -74,22 +75,28 @@ Tribe_Descr::Tribe_Descr
 		{
 			std::set<std::string> names; //  To enforce name uniqueness.
 
-			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
-				m_immovables.add
-					(new Immovable_Descr
-					 	(_name, _descname, path, prof, global_s, m_world, this));
-			PARSE_MAP_OBJECT_TYPES_END;
-
 			PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
 				m_bobs.add
 					(new Critter_Bob_Descr
 					 	(_name, _descname, path, prof, global_s,  this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
+			PARSE_MAP_OBJECT_TYPES_BEGIN("ship")
+				m_bobs.add
+					(new Ship_Descr
+					 	(_name, _descname, path, prof, global_s, *this));
+			PARSE_MAP_OBJECT_TYPES_END;
+
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
 				m_wares.add
 					(new Item_Ware_Descr
 					 	(*this, _name, _descname, path, prof, global_s));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
+				m_immovables.add
+					(new Immovable_Descr
+					 	(_name, _descname, path, prof, global_s, m_world, this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 #define PARSE_WORKER_TYPES(name, descr_type)                                  \
@@ -299,6 +306,11 @@ Tribe_Descr::Tribe_Descr
 			}
 		} catch (std::exception const & e) {
 			throw game_data_error("root conf: %s", e.what());
+		}
+
+		if (Section * compatibility_s = root_conf.get_section("compatibility_immovable")) {
+			while (const Section::Value * v = compatibility_s->get_next_val())
+				m_compatibility_immovable[v->get_name()] = split_string(v->get_string(), " ");
 		}
 	} catch (_wexception const & e) {
 		throw game_data_error(_("tribe %s: %s"), tribename.c_str(), e.what());
@@ -565,5 +577,19 @@ Building_Index Tribe_Descr::safe_building_index
 			 name().c_str(), buildingname);
 	return result;
 }
+
+/**
+ * If there is a savegame compatibility information string concerning the
+ * given immovable name, return it. Otherwise, return an empty string.
+ */
+const std::vector<std::string> & Tribe_Descr::compatibility_immovable(const std::string & name) const
+{
+	static const std::vector<std::string> empty;
+	Compatibility::const_iterator it = m_compatibility_immovable.find(name);
+	if (it != m_compatibility_immovable.end())
+		return it->second;
+	return empty;
+}
+
 
 }

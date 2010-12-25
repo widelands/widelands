@@ -613,7 +613,7 @@ void Worker::informPlayer
 bool Worker::run_walk(Game & game, State & state, Action const & action)
 {
 	BaseImmovable const * const imm = game.map()[get_position()].get_immovable();
-	Coords dest;
+	Coords dest(Coords::Null());
 	bool forceonlast = false;
 	int32_t max_steps = -1;
 
@@ -624,39 +624,32 @@ bool Worker::run_walk(Game & game, State & state, Action const & action)
 	}
 
 	// Determine the coords we need to walk towards
-	switch (action.iparam1) {
-	case Action::walkObject: {
+	if (action.iparam1 & Action::walkObject) {
 		Map_Object * const obj = state.objvar1.get(game);
 
-		if (!obj) {
-			send_signal(game, "fail");
-			pop_task(game);
-			return true;
+		if (obj) {
+			if      (upcast(Bob       const, bob,       obj))
+				dest = bob      ->get_position();
+			else if (upcast(Immovable const, immovable, obj))
+				dest = immovable->get_position();
+			else
+				throw wexception
+					("MO(%u): [actWalk]: bad object type = %i",
+					serial(), obj->get_type());
+
+			//  Only take one step, then rethink (object may have moved)
+			max_steps = 1;
+
+			forceonlast = true;
 		}
-
-		if      (upcast(Bob       const, bob,       obj))
-			dest = bob      ->get_position();
-		else if (upcast(Immovable const, immovable, obj))
-			dest = immovable->get_position();
-		else
-			throw wexception
-				("MO(%u): [actWalk]: bad object type = %i",
-				 serial(), obj->get_type());
-
-		//  Only take one step, then rethink (object may have moved)
-		max_steps = 1;
-
-		forceonlast = true;
-		break;
 	}
-	case Action::walkCoords: {
+	if (!dest && (action.iparam1 & Action::walkCoords)) {
 		dest = state.coords;
-		break;
 	}
-	default:
-		throw wexception
-			("MO(%u): [actWalk]: bad action.iparam1 = %i",
-			 serial(), action.iparam1);
+	if (!dest) {
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
 	}
 
 	// If we've already reached our destination, that's cool
@@ -766,6 +759,15 @@ bool Worker::run_plant(Game & game, State & state, Action const & action)
 {
 	assert(action.sparamv.size());
 
+	if (action.iparam1 == Action::plantUnlessObject) {
+		if (state.objvar1.get(game)) {
+			// already have an object, so don't create a new one
+			++state.ivar1;
+			schedule_act(game, 10);
+			return true;
+		}
+	}
+
 	Map & map = game.map();
 	Coords pos = get_position();
 	FCoords fpos = map.get_fcoords(pos);
@@ -844,8 +846,12 @@ bool Worker::run_plant(Game & game, State & state, Action const & action)
 	}
 	uint32_t const idx = game.logic_rand() % best_fitting.size();
 
-	game.create_immovable
+	Immovable & newimm = game.create_immovable
 		(pos, best_fitting[idx], is_tribe_specific[idx] ? &descr().tribe() : 0);
+	newimm.set_owner(get_owner());
+
+	if (action.iparam1 == Action::plantUnlessObject)
+		state.objvar1 = &newimm;
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -976,6 +982,44 @@ bool Worker::run_playFX(Game & game, State & state, Action const & action)
 	return true;
 }
 
+/**
+ * If we are currently carrying some ware item, hand it off to the currently
+ * selected immovable (\ref objvar1) for construction.
+ */
+bool Worker::run_construct(Game & game, State & state, Action const & action)
+{
+	Immovable * imm = dynamic_cast<Immovable *>(state.objvar1.get(game));
+	if (!imm) {
+		molog("run_construct: no objvar1 immovable set");
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
+	}
+
+	WareInstance * item = get_carried_item(game);
+	if (!item) {
+		molog("run_construct: no item being carried");
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
+	}
+
+	Ware_Index wareindex = item->descr_index();
+	if (!imm->construct_ware_item(game, wareindex)) {
+		molog("run_construct: construct_ware_item failed");
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
+	}
+
+	item = fetch_carried_item(game);
+	item->remove(game);
+
+	++state.ivar1;
+	schedule_act(game, 10);
+	return true;
+}
+
 
 Worker::Worker(const Worker_Descr & worker_descr)
 	:
@@ -1005,6 +1049,8 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
 		molog("* Economy: %p\n", loc->get_economy());
 	}
 
+	PlayerImmovable * imm = m_location.get(egbase);
+	molog("location: %u\n", imm ? imm->serial() : 0);
 	molog("Economy: %p\n", m_economy);
 	molog("transfer: %p\n",  m_transfer);
 
@@ -1266,6 +1312,18 @@ Ware_Index Worker::level(Game & game) {
 	return old_index; //  So that the caller knows what to replace him with.
 }
 
+/**
+ * Change this worker into a different type.
+ *
+ * \warning Using this function is very dangerous. The only reason it exists
+ * is to fix certain savegame compatibility issues.
+ */
+void Worker::flash(const std::string & newname)
+{
+	log("WARNING: Flashing worker of type %s to %s\n", name().c_str(), newname.c_str());
+
+	m_descr = tribe().get_worker_descr(tribe().safe_worker_index(newname));
+}
 
 /**
  * Set a fallback task.
@@ -1639,17 +1697,26 @@ void Worker::return_update(Game & game, State & state)
 
 	signal_handled();
 
-	Building & location =
-		ref_cast<Building, PlayerImmovable>(*get_location(game));
+	Building * location = dynamic_cast<Building *>(get_location(game));
+
+	if (!location) {
+		// Usually, this should be caught via the "location" signal above.
+		// However, in certain cases, e.g. for a soldier during battle,
+		// the location may be overwritten by a different signal while
+		// walking home.
+		molog("[return]: Our location disappeared from under us\n");
+		return pop_task(game);
+	}
+
 	if (BaseImmovable * const pos = game.map().get_immovable(get_position())) {
-		if (pos == &location) {
+		if (pos == location) {
 			set_animation(game, 0);
 			return pop_task(game);
 		}
 
 		if (upcast(Flag, flag, pos)) {
 			// Is this "our" flag?
-			if (flag->get_building() == &location) {
+			if (flag->get_building() == location) {
 				if (state.ivar1 && flag->has_capacity())
 					if (WareInstance * const item = fetch_carried_item(game)) {
 						flag->add_item(game, *item);
@@ -1673,53 +1740,26 @@ void Worker::return_update(Game & game, State & state)
 		(not
 		 start_task_movepath
 		 	(game,
-		 	 location.base_flag().get_position(),
+		 	 location->base_flag().get_position(),
 		 	 15,
 		 	 descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[return]: Failed to return\n");
 		char buffer[2048];
-		BaseImmovable const * const immovable =
-			game.map()[get_position()].get_immovable();
 		snprintf
 			(buffer, sizeof(buffer),
-			 _
-			 	("The game engine has encountered a logic error. The %s #%u of "
-			 	 "player %u (carrying %s) could not find a way home from (%i, %i) "
-			 	 "(with %s immovable) to the base flag at (%i, %i) of its %s at "
-			 	 "(%i, %i). The %s will be made homeless and probably die, unless "
-			 	 "some object is removed very soon and the %s finds a way to a "
-			 	 "flag connected to a warehouse. The %s will immediately request "
-			 	 "a new worker. Unfortunately this may happen repeatedly and "
-			 	 "drain the supply of workers (tools). No solution for this "
-			 	 "problem has been implemented yet. It would be safest to destroy "
-			 	 "the %s and not rebuild it at that location, nor any other "
-			 	 "building that sends out a worker on the map. This problem "
-			 	 "usually occurs near unpassable terrain, such as water, when an "
-			 	 "object, such as a farm field, is placed on the map while the "
-			 	 "worker is out working. (bug #1796611) (The game has been "
-			 	 "paused.)"),
-			 descname().c_str(), serial(), owner().player_number(),
-			 does_carry_ware() ?
-			 get_carried_item(game)->descr().descname().c_str() : _("nothing"),
-			 get_position().x, get_position().y,
-			 immovable ? immovable->descr().descname().c_str() : _("no"),
-			 location.base_flag().get_position().x,
-			 location.base_flag().get_position().y,
-			 location.descname().c_str(),
-			 location.get_position().x, location.get_position().y,
-			 descname().c_str(), descname().c_str(),
-			 location.descname().c_str(), location.descname().c_str());
+			 _ ("Your %s can't find a way home and will likely die."),
+			 descname().c_str());
 		owner().add_message
 			(game,
 			 *new Message
 			 	("game engine",
 			 	 game.get_gametime(), Forever(),
-			 	 _("Logic error"),
+			 	 _("Worker got lost!"),
 			 	 buffer,
 			 	 get_position()));
-		game.gameController()->setDesiredSpeed(0);
-		return set_location(0);
+		set_location(0);
+		return pop_task(game);
 	}
 }
 
@@ -1757,6 +1797,13 @@ void Worker::program_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
 		molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
+		return pop_task(game);
+	}
+
+	if (!state.program) {
+		// This might happen as fallout of some save game compatibility fix
+		molog("[program]: No program active\n");
+		send_signal(game, "fail");
 		return pop_task(game);
 	}
 
@@ -2056,6 +2103,14 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 
 		state.ivar1 = 1; //  force return to building
 
+		if (not location) {
+			// this can happen if the flag (and the building) is destroyed while
+			// the worker leaves the building.
+			molog
+				("[fetchfromflag]: flag dissappeared - become fugitive");
+			return pop_task(game);
+		}
+
 		// The item has decided that it doesn't want to go to us after all
 		// In order to return to the warehouse, we're switching to State_DropOff
 		if
@@ -2085,10 +2140,8 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 		// E.g. the player destroyed the building, it is destroyed, through an
 		// enemy player, or it got destroyed through rising water (atlantean
 		// scenario)
-		molog
-			("[fetchfromflag]: building dissappeared - searching for alternative");
-		pop_task(game);
-		return start_task_fugitive(game);
+		molog("[fetchfromflag]: building dissappeared - searching for alternative\n");
+		return pop_task(game);
 	}
 
 	assert(location == &employer);
@@ -2096,8 +2149,22 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 	molog("[fetchfromflag]: back home\n");
 
 	if (WareInstance * const item = fetch_carried_item(game)) {
-		item->set_location(game, location);
-		item->update(game); //  this might remove the item and ack any requests
+		if (item->get_next_move_step(game) == location) {
+			item->set_location(game, location);
+			item->update(game); //  this might remove the item and ack any requests
+		} else {
+			// The item changed its mind and doesn't want to go to this building
+			// after all, so carry it back out.
+			// This can happen in the following subtle and rare race condition:
+			// We start the fetchfromflag task as the worker in an enhanceable building.
+			// While we walk back into the building with the item, the player enhances
+			// the building, so that we now belong to the newly created construction site.
+			// Obviously the construction site no longer has any use for the item.
+			molog("[fetchfromflag]: item no longer wants to go into building, drop off\n");
+			pop_task(game);
+			start_task_dropoff(game, *item);
+			return;
+		}
 	}
 
 	// We're back!
@@ -2837,6 +2904,14 @@ const Bob::Task * Worker::Loader::get_task(const std::string & name)
 const BobProgramBase * Worker::Loader::get_program(const std::string & name)
 {
 	Worker & worker = get<Worker>();
+	const std::string & compatibility = worker.descr().compatibility_program(name);
+
+	if (compatibility == "fail") {
+		if (upcast(Game, game, &egbase()))
+			add_finish(boost::bind(&Worker::send_signal, &worker, boost::ref(*game), "fail"));
+		return 0;
+	}
+
 	return worker.descr().get_program(name);
 }
 

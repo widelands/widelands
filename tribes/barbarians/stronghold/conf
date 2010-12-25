@@ -10,8 +10,10 @@ raw_stone=3
 
 [idle]
 pics=stronghold_i_??.png
-hotspot=50 59
+hotspot=47 44
+playercolor=true
+fps=10
 
 [build]
 pics=stronghold_b_??.png
-hotspot=50 59
+hotspot=47 44

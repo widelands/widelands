@@ -6,4 +6,6 @@ buildable=no
 
 [idle]
 pics=../../../tribes/barbarians/barrier/barrier_i_??.png
-hotspot=50 62
+hotspot=45 66
+playercolor=true
+fps=10

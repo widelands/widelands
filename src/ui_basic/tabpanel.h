@@ -63,8 +63,8 @@ private:
  * to the top.
  *
  * The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
- * 
-*/
+ *
+ */
 struct Tab_Panel : public Panel {
 	friend class Tab;
 

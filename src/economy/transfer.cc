@@ -127,6 +127,14 @@ void Transfer::set_destination(PlayerImmovable & imm)
 }
 
 /**
+ * Get this transfer's destination.
+ */
+PlayerImmovable * Transfer::get_destination(Game & g)
+{
+	return m_destination.get(g);
+}
+
+/**
  * Determine where we should be going from our current location.
  */
 PlayerImmovable * Transfer::get_next_step

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,43 +20,36 @@
 #ifndef PICTURE_H
 #define PICTURE_H
 
-/***
- * Picture/PictureID
- *
- * PictureID is a reference to a picture
- * picmod is used to specify which buffer picture is loaded in.
- * warning: a picture can be loaded multiple times in multiple buffers
- * when buffer is flushed pictures will hang around till the last reference
- * is gone too
- ***/
+#include <stdint.h>
+#include <string>
 
+#include "picture_id.h"
 
-struct RenderTarget;
-class Surface;
+struct IPixelAccess;
+struct Surface;
 
-/// picture module flags
-enum PicMod {
-	INVALID     = 0,
-	PicMod_UI   = 1,
-	PicMod_Menu = 2,
-	PicMod_Game = 3,
-	PicMod_Font = 4,
-	PicSurface  = 5,
-	MaxModule   = 6 //MaxModule ALWAYS has to be the 'size' of picmod
-};
+/**
+ * Interface to a bitmap that can act as the source of a rendering
+ * operation.
+ */
+struct IPicture {
+	IPicture() {}
+	virtual ~IPicture() {}
 
-struct Picture {
-	Picture() : module(INVALID), surface(0), fname(0), rendertarget(0) {}
-	~Picture();
-	//void operator delete(void * p);
+	virtual bool valid() = 0;
 
-	//PicMod lists which 'buffer' to load the images in.
-	// INVALID if unused, MaxModule not a legal module
-	PicMod    module;
-	Surface * surface;
+	virtual uint32_t get_w() = 0;
+	virtual uint32_t get_h() = 0;
 
-	char         * fname; //  module & (PicMod_UI|PicMod_Menu|PicMod_Game)
-	RenderTarget * rendertarget; //  module & (PicMod_Font | PicSurface)
+	virtual IPixelAccess & pixelaccess() = 0;
+
+private:
+	// forbid copying
+	IPicture(const IPicture &);
+	IPicture & operator= (const IPicture &);
+
+public:
+	static const PictureID & null();
 };
 
 #endif

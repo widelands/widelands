@@ -21,6 +21,7 @@
 #define BUILDING_H
 
 #include "ai/ai_hints.h"
+#include "buildcost.h"
 #include "immovable.h"
 #include "soldier_counts.h"
 #include "workarea_info.h"
@@ -66,7 +67,6 @@ struct Building_Descr : public Map_Object_Descr {
 	bool is_destructible() const {return m_destructible;}
 	bool is_enhanced    () const {return m_enhanced_building;}
 	bool global() const {return m_global;}
-	typedef std::map<Ware_Index, uint8_t> Buildcost;
 	Buildcost const & buildcost() const throw () {return m_buildcost;}
 	PictureID get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}

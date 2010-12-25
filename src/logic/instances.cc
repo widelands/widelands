@@ -227,7 +227,7 @@ Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
 /**
  * Add this animation for this map object under this name
  */
-bool Map_Object_Descr::is_animation_known(char const * const animname) const {
+bool Map_Object_Descr::is_animation_known(const std::string & animname) const {
 	container_iterate_const(Anims, m_anims, i)
 		if (i.current->first == animname)
 			return true;
@@ -235,13 +235,13 @@ bool Map_Object_Descr::is_animation_known(char const * const animname) const {
 }
 
 void Map_Object_Descr::add_animation
-	(char const * const animname, uint32_t const anim)
+	(const std::string & animname, uint32_t const anim)
 {
 #ifndef NDEBUG
 	container_iterate_const(Anims, m_anims, i)
 		if (i.current->first == animname)
 			throw wexception
-				("adding already existing animation \"%s\"", animname);
+				("adding already existing animation \"%s\"", animname.c_str());
 #endif
 	m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 }
@@ -510,7 +510,27 @@ void Map_Object::Loader::load_pointers() {}
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load_finish() {}
+void Map_Object::Loader::load_finish()
+{
+	while (!m_finish.empty()) {
+		m_finish.back()();
+		m_finish.pop_back();
+	}
+}
+
+/**
+ * Register a callback function that will automatically be run at
+ * \ref load_finish time.
+ *
+ * This is useful for registering save game compatibility fixups that need
+ * to be run after everything else has loaded.
+ *
+ * Callbacks are run in LIFO order.
+ */
+void Map_Object::Loader::add_finish(const FinishFn & fini)
+{
+	m_finish.push_back(fini);
+}
 
 
 /**

@@ -6,4 +6,6 @@ buildable=no
 
 [idle]
 pics=../../../tribes/barbarians/sentry/sentry_i_??.png
-hotspot=42 36
+hotspot=39 40
+playercolor=true
+fps=10

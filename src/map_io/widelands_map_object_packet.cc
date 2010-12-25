@@ -25,6 +25,7 @@
 #include "logic/immovable.h"
 #include "logic/legacy.h"
 #include "logic/map.h"
+#include "logic/ship.h"
 #include "wexception.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
@@ -88,6 +89,10 @@ void Map_Object_Packet::Read
 
 			case Map_Object::header_WareInstance:
 				loaders.insert(WareInstance::load(egbase, mol, fr));
+				break;
+
+			case Map_Object::header_Ship:
+				loaders.insert(Ship::load(egbase, mol, fr));
 				break;
 
 			default:

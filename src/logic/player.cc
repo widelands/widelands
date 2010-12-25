@@ -79,6 +79,7 @@ Player::Player
 	m_fields            (0),
 	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), false),
 	m_allowed_building_types(tribe_descr.get_nrbuildings(), true),
+	m_ai(""),
 	m_current_statistics(tribe_descr.get_nrwares    ()),
 	m_ware_productions  (tribe_descr.get_nrwares    ())
 {
@@ -115,6 +116,21 @@ void Player::create_default_infrastructure() {
 				->get_coroutine("func");
 			cr->push_arg(this);
 			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
+
+			// Check if other starting positions are shared in and initialize them as well
+			for (uint8_t n = 0; n < m_further_shared_in_player.size(); ++n) {
+				Coords const further_pos = map.get_starting_pos(m_further_shared_in_player.at(n));
+
+				// Run the corresponding script
+				LuaCoroutine * ncr = game.lua().run_script
+					(*g_fs, "tribes/" + tribe().name() +
+					"/scripting/" + tribe().initialization(m_further_initializations.at(n)).name + ".lua",
+					 "tribe_" + tribe().name())
+					->get_coroutine("func");
+				ncr->push_arg(this);
+				ncr->push_arg(further_pos);
+				game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), ncr));
+			}
 		} catch (Tribe_Descr::Nonexistent) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "
@@ -185,6 +201,25 @@ void Player::update_team_players() {
 	}
 }
 
+
+/*
+ * Plays the corresponding sound when a message is received and if sound is
+ * enabled.
+ */
+void Player::play_message_sound(const std::string & sender) {
+#define MAYBE_PLAY(a) if (sender == a) { \
+	g_sound_handler.play_fx(a, 200, PRIO_ALWAYS_PLAY); \
+	return; \
+	}
+
+	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
+		MAYBE_PLAY("site_occupied");
+		MAYBE_PLAY("under_attack");
+
+		g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+	}
+}
+
 Message_Id Player::add_message
 	(Game & game, Message & message, bool const popup)
 {
@@ -197,25 +232,8 @@ Message_Id Player::add_message
 
 	if (Interactive_Player * const iplayer = game.get_ipl())
 		if (&iplayer->player() == this) {
+			play_message_sound(message.sender());
 
-			// play sound if enabled
-			Section & s = g_options.pull_section("global");
-			if (s.get_bool("sound_at_message", true)) {
-				g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
-
-				// Special voice sounds - turned of by default
-				if (s.get_bool("voice_at_message", false)) {
-					if (message.sender() == MSG_SND_UNDER_ATTACK)
-						g_sound_handler.play_fx
-							("under_attack", 125, PRIO_ALWAYS_PLAY);
-					else if (message.sender() == MSG_SND_SITE_LOST)
-						g_sound_handler.play_fx
-							("site_lost", 125, PRIO_ALWAYS_PLAY);
-					else if (message.sender() == MSG_SND_SITE_DEFEATED)
-						g_sound_handler.play_fx
-							("site_defeated", 125, PRIO_ALWAYS_PLAY);
-				}
-			}
 			if (popup)
 				iplayer->popup_message(id, message);
 		}

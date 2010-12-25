@@ -135,7 +135,7 @@ struct Overlay_Manager {
 	uint8_t get_overlays(Widelands::TCoords<>, Overlay_Info *) const;
 
 	boost::function<void(bool)> onBuildHelpToggle;
-	bool buildhelp(void) {return m_showbuildhelp;}
+	bool buildhelp() {return m_showbuildhelp;}
 	void show_buildhelp(bool const t) {
 		if (m_showbuildhelp != t) {
 			m_showbuildhelp = t;

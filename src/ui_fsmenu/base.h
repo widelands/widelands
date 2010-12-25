@@ -47,7 +47,6 @@ protected:
 	uint32_t m_xres;
 	uint32_t m_yres;
 private:
-	PictureID m_pic_background;
 	PictureID m_res_background;
 };
 

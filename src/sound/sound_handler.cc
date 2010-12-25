@@ -209,9 +209,8 @@ void Sound_Handler::load_system_sounds()
 	load_fx("sound", "click");
 	load_fx("sound", "create_construction_site");
 	load_fx("sound", "message");
-	load_fx("sound/spoken", "under_attack");
-	load_fx("sound/spoken", "site_lost");
-	load_fx("sound/spoken", "site_defeated");
+	load_fx("sound/military", "under_attack");
+	load_fx("sound/military", "site_occupied");
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files

@@ -6,4 +6,6 @@ buildable=no
 
 [idle]
 pics=../../../tribes/barbarians/stronghold/stronghold_i_??.png
-hotspot=46 52
+hotspot=47 44
+playercolor=true
+fps=10

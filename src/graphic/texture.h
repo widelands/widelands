@@ -23,7 +23,7 @@
 #include "colormap.h"
 #include "picture_id.h"
 
-#include "graphic/render/surface_opengl.h"
+#include "graphic/render/gl_picture_texture.h"
 
 #include <boost/shared_ptr.hpp>
 #include <stdint.h>
@@ -65,7 +65,7 @@ struct Texture {
 	bool was_animated() const throw () {return m_was_animated;}
 #ifdef USE_OPENGL
 	uint32_t getTexture() const
-		{return m_glFrames.at(m_frame_num)->get_texture();}
+		{return m_glFrames.at(m_frame_num)->get_gl_texture();}
 #endif
 
 private:
@@ -80,7 +80,7 @@ private:
 	bool       is_32bit;
 	bool       m_was_animated;
 #ifdef USE_OPENGL
-	std::vector<SurfaceOpenGL *> m_glFrames;
+	std::vector<boost::shared_ptr<GLPictureTexture> > m_glFrames;
 #endif
 };
 

@@ -13,6 +13,9 @@ wood=1
 [working positions]
 carpenter=1
 
+[compatibility working positions]
+toolsmith=flash carpenter
+
 [inputs]
 trunk=8
 

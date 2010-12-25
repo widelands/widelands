@@ -230,9 +230,6 @@ void Main_Menu_Load_Map::fill_list() {
 			(strcmp(FileSystem::FS_Filename(name), ".")    and
 			 // Upsy, appeared again. ignore
 			 strcmp(FileSystem::FS_Filename(name), "..")   and
-			 // HACK: we skip .svn dir (which is in normal checkout present) for
-			 // aesthetic reasons
-			 strcmp(FileSystem::FS_Filename(name), ".svn") and
 			 g_fs->IsDirectory(name)                       and
 			 not WL_Map_Loader::is_widelands_map(name))
 

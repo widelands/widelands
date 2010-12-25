@@ -21,11 +21,8 @@
 #define UI_HELPWINDOW_H
 
 #include "align.h"
-#include "m_signal.h"
 #include "multilinetextarea.h"
 #include "window.h"
-
-#include <boost/scoped_ptr.hpp>
 
 namespace UI {
 
@@ -52,12 +49,13 @@ struct HelpWindow : public Window {
 		 uint32_t width = 0, uint32_t height = 0);
 	~HelpWindow();
 
-	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my);
-	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my);
+	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my);
 
-	void add_heading(std::string);
-	void add_paragraph(std::string);
-	void add_block(std::string);
+	void add_heading   (std::string text);
+	void add_paragraph (std::string text);
+	void add_block     (std::string text);
+	void add_picture_li(std::string text, std::string picpath);
 
 protected:
 	virtual void pressedOk();

@@ -74,6 +74,7 @@ public:
 	 */
 	int place_immovable(lua_State *);
 	int get_field(lua_State *);
+	int recalculate(lua_State *);
 
 	/*
 	 * C methods
@@ -333,8 +334,7 @@ struct _WorkerEmployer : public L_HasWorkers {
 protected:
 	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &) = 0;
 	virtual int _new_worker
-		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
-		 const Widelands::Worker_Descr *) = 0;
+		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *) = 0;
 };
 
 struct _SoldierEmployer : public L_HasSoldiers {
@@ -533,6 +533,31 @@ public:
 		(lua_State * L, Widelands::Editor_Game_Base & g) {return get(L, g);}
 };
 
+class L_Bob : public L_MapObject {
+public:
+	LUNA_CLASS_HEAD(L_Bob);
+
+	L_Bob() {}
+	L_Bob(Widelands::Bob & mo) : L_MapObject(mo) {}
+	L_Bob(lua_State * L) : L_MapObject(L) {}
+	virtual ~L_Bob() {}
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+	int has_caps(lua_State *);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	CASTED_GET(Bob);
+};
+
 #undef CASTED_GET
 
 class L_Field : public L_MapModuleClass {
@@ -555,13 +580,17 @@ public:
 	/*
 	 * Properties
 	 */
+	int get___hash(lua_State *);
 	int get_x(lua_State * L);
 	int get_y(lua_State * L);
 	int get_viewpoint_x(lua_State * L);
 	int get_viewpoint_y(lua_State * L);
 	int get_height(lua_State * L);
 	int set_height(lua_State * L);
+	int get_raw_height(lua_State * L);
+	int set_raw_height(lua_State * L);
 	int get_immovable(lua_State * L);
+	int get_bobs(lua_State * L);
 	int get_terr(lua_State * L);
 	int set_terr(lua_State * L);
 	int get_terd(lua_State * L);
@@ -582,9 +611,10 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int __tostring(lua_State * L);
 	int __eq(lua_State * L);
 	int region(lua_State * L);
-	int has_movecaps_swim(lua_State *);
+	int has_caps(lua_State *);
 
 	/*
 	 * C methods

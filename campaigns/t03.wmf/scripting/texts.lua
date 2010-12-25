@@ -108,7 +108,7 @@ obj_build_weapon_productions = {
    name = "build_weapon_productions",
    title=_"Build weapon productions",
    body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* As soon as the blacksmith reaches his next level (master blacksmith) enhance your metalworks to an axefactory or even a war mill and build up another metalworks to ensure the production of tools." ..
+_"* Enhance your metalworks to an axefactory or - as soon as the blacksmith reaches his next level (master blacksmith) - even to a war mill and build up another metalworks to ensure the production of tools." ..
 "</p></rt>",
 }
 

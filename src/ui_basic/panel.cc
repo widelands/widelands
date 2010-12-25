@@ -21,12 +21,12 @@
 
 #include "constants.h"
 #include "graphic/font_handler.h"
+#include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
 #include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
-#include <scripting/pdep/llimits.h>
 
 namespace UI {
 
@@ -51,7 +51,7 @@ Panel::Panel
 	:
 	_parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
 	_flags(pf_handle_mouse|pf_think|pf_visible),
-	_cache(g_gr->get_no_picture()), _needdraw(false),
+	_needdraw(false),
 	_x(nx), _y(ny), _w(nw), _h(nh),
 	_lborder(0), _rborder(0), _tborder(0), _bborder(0),
 	_border_snap_distance(0), _panel_snap_distance(0),
@@ -79,9 +79,6 @@ Panel::Panel
 Panel::~Panel()
 {
 	update();
-
-	if (_cache != g_gr->get_no_picture())
-		g_gr->free_picture_surface(_cache);
 
 	// Release pointers to this object
 	if (_g_mousegrab == this)
@@ -254,9 +251,9 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 	_w = nw;
 	_h = nh;
 
-	if (_cache != g_gr->get_no_picture()) {
-		g_gr->free_picture_surface(_cache);
-		_cache = g_gr->create_picture_surface(_w, _h);
+	if (_cache) {
+		// The old surface is freed automatically
+		_cache = g_gr->create_offscreen_surface(_w, _h);
 	}
 
 	if (_parent)
@@ -519,9 +516,23 @@ void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
  * Enable/Disable the drawing cache.
  * When the drawing cache is enabled, draw() is only called after an update()
  * has been called explicitly. Otherwise, the contents of the panel are copied
- * from a cached Pic.
+ * from an \ref OffscreenSurface containing the cached image, provided that
+ * the graphics system supports it.
+ *
+ * \note Caching only works properly for solid panels that have no transparency.
  */
-void Panel::set_cache(bool) {}
+void Panel::set_cache(bool cache)
+{
+	if (!g_gr->caps().offscreen_rendering)
+		return;
+
+	if (cache) {
+		_flags |= pf_cache;
+	} else {
+		_flags &= ~pf_cache;
+		_cache.reset();
+	}
+}
 
 /**
  * Called once per event loop pass, unless set_think(false) has
@@ -762,6 +773,25 @@ void Panel::check_child_death()
 	_flags &= ~pf_child_die;
 }
 
+
+/**
+ * Draw the inner region of the panel into the given target.
+ *
+ * \param dst target to render into, assumed to be prepared for the panel's
+ * inner coordinate system.
+ */
+void Panel::do_draw_inner(RenderTarget & dst)
+{
+	draw(dst);
+
+	// draw back to front
+	for (Panel * child = _lchild; child; child = child->_prev)
+		child->do_draw(dst);
+
+	draw_overlay(dst);
+}
+
+
 /**
  * Subset for the border first and draw the border, then subset for the inner
  * area and draw the inner area.
@@ -775,58 +805,47 @@ void Panel::do_draw(RenderTarget & dst)
 	if (!is_visible())
 		return;
 
-	if (_cache == g_gr->get_no_picture())
-	{
-		Rect outerrc;
-		Point outerofs;
+	Rect outerrc;
+	Point outerofs;
 
-		if (dst.enter_window(Rect(Point(_x, _y), _w, _h), &outerrc, &outerofs)) {
-			draw_border(dst);
+	if (!dst.enter_window(Rect(Point(_x, _y), _w, _h), &outerrc, &outerofs))
+		return;
 
-			Rect innerwindow
-				(Point(_lborder, _tborder),
-				 _w - (_lborder + _rborder), _h - (_tborder + _bborder));
+	draw_border(dst);
 
-			if (dst.enter_window(innerwindow, 0, 0)) {
-				draw(dst);
+	if (_flags & pf_cache) {
+		uint32_t innerw = _w - (_lborder + _rborder);
+		uint32_t innerh = _h - (_tborder + _bborder);
 
-				// draw back to front
-				for (Panel * child = _lchild; child; child = child->_prev)
-					child->do_draw(dst);
-
-				draw_overlay(dst);
-			}
-
-			dst.set_window(outerrc, outerofs);
+		if
+			(!_cache || !_cache->valid() ||
+			 static_cast<Surface *>(_cache.get())->get_w() != innerw ||
+			 static_cast<Surface *>(_cache.get())->get_h() != innerh)
+		{
+			_cache = g_gr->create_offscreen_surface(innerw, innerh);
+			_needdraw = true;
 		}
-	}
-	/*
-	else
-	{
-		// redraw only if explicitly requested
+
 		if (_needdraw) {
-			draw_border(_cache);
-
-			RenderTarget* inner = _cache->enter_window(_lborder, _tborder,
-			       _w-(_lborder+_rborder), _h-(_tborder+_bborder));
-
-			if (inner) {
-				draw(inner);
-
-				for (Panel * child = _lchild; child; child = child->_prev)
-					child->do_draw(inner);
-
-				inner->leave_window();
-			}
+			RenderTarget inner(_cache);
+			do_draw_inner(inner);
 
 			_needdraw = false;
 		}
 
-		// now just blit from the cache
-		dst.blit(_x, _y, _cache);
+		dst.blit(Point(_lborder, _tborder), _cache);
+	} else {
+		Rect innerwindow
+			(Point(_lborder, _tborder),
+				_w - (_lborder + _rborder), _h - (_tborder + _bborder));
+
+		if (dst.enter_window(innerwindow, 0, 0))
+			do_draw_inner(dst);
 	}
-	*/
+
+	dst.set_window(outerrc, outerofs);
 }
+
 
 /**
  * Returns the child panel that receives mouse events at the given location.
@@ -1100,7 +1119,7 @@ void Panel::draw_tooltip(RenderTarget & dst, char const * const text)
 		 Align_Left,
 		 TIP_WIDTH_MAX,
 		 Widget_Cache_None,
-		 g_gr->get_no_picture(),
+		 0,
 		 std::numeric_limits<uint32_t>::max(),
 		 false);
 }

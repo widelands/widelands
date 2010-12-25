@@ -25,6 +25,7 @@
 namespace Widelands {
 
 struct BaseImmovable;
+struct Immovable_Descr;
 struct Player;
 
 struct FindImmovable {
@@ -122,6 +123,13 @@ struct FindImmovableAttackable {
 	FindImmovableAttackable()  {}
 
 	bool accept(BaseImmovable const &) const;
+};
+struct FindImmovableByDescr {
+	FindImmovableByDescr(const Immovable_Descr & _descr) : descr(_descr) {}
+
+	bool accept(BaseImmovable const &) const;
+
+	const Immovable_Descr & descr;
 };
 
 

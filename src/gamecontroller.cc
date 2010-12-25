@@ -40,7 +40,7 @@ struct SinglePlayerGameController : public GameController {
 	uint32_t desiredSpeed();
 	void setDesiredSpeed(uint32_t speed);
 	bool isPaused();
-	void setPaused(const bool paused);
+	void setPaused(bool paused);
 
 private:
 	Widelands::Game & m_game;
@@ -151,7 +151,7 @@ bool SinglePlayerGameController::isPaused()
 	return m_paused;
 }
 
-void SinglePlayerGameController::setPaused(bool const paused)
+void SinglePlayerGameController::setPaused(bool paused)
 {
 	m_paused = paused;
 }

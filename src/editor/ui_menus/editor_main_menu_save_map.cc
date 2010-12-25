@@ -306,7 +306,6 @@ void Main_Menu_Save_Map::fill_list() {
 		if
 			(strcmp(FileSystem::FS_Filename(name), ".")    and
 			 strcmp(FileSystem::FS_Filename(name), "..")   and
-			 strcmp(FileSystem::FS_Filename(name), ".svn") and
 			 g_fs->IsDirectory(name)                       and
 			 not Widelands::WL_Map_Loader::is_widelands_map(name))
 

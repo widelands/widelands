@@ -29,6 +29,8 @@
 #include <cstring>
 #include <vector>
 
+#include <boost/function.hpp>
+
 struct DirAnimations;
 struct RenderTarget;
 namespace UI {struct Tab_Panel;}
@@ -73,8 +75,8 @@ struct Map_Object_Descr {
 	static uint32_t get_attribute_id(std::string const & name);
 	static std::string get_attribute_name(uint32_t const & id);
 
-	bool is_animation_known(const char * name) const;
-	void add_animation(const char * name, uint32_t anim);
+	bool is_animation_known(const std::string & name) const;
+	void add_animation(const std::string & name, uint32_t anim);
 
 	protected:
 		void add_attribute(uint32_t attr);
@@ -243,7 +245,8 @@ public:
 		header_Battle = 5,
 		header_Critter = 6,
 		header_Worker = 7,
-		header_WareInstance = 8
+		header_WareInstance = 8,
+		header_Ship = 9
 	};
 
 	/**
@@ -264,6 +267,8 @@ public:
 		Loader() : m_egbase(0), m_mol(0), m_object(0) {}
 
 	public:
+		typedef boost::function<void ()> FinishFn;
+
 		virtual ~Loader() {}
 
 		void init
@@ -281,12 +286,17 @@ public:
 			return ref_cast<T, Map_Object>(*m_object);
 		}
 
+		void add_finish(const FinishFn & fini);
+
 	protected:
 		void load(FileRead &);
 
 	public:
 		virtual void load_pointers();
 		virtual void load_finish();
+
+	private:
+		std::vector<FinishFn> m_finish;
 	};
 
 	/// This is just a fail-safe guard for the time until we fully transition

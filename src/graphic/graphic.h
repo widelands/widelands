@@ -21,8 +21,8 @@
 #define GRAPHIC_H
 
 #include "animation_gfx.h"
-#include "picture.h"
 #include "picture_id.h"
+#include "surfaceptr.h"
 #include "rect.h"
 
 #include <png.h>
@@ -41,10 +41,8 @@
 
 namespace UI {struct ProgressWindow;}
 
-class Surface;
-class Texture;
+struct IPixelAccess;
 struct RenderTarget;
-class Surface;
 struct Graphic;
 struct Road_Textures;
 struct StreamWrite;
@@ -85,13 +83,27 @@ struct GraphicCaps
 {
 	/// The renderer allows rendering (blit, draw_line) to offscreen surfaces
 	bool offscreen_rendering;
-	/// It is possible to resize surfaces with get_resized_picture()
-	bool resize_surfaces;
-	/// It is possible to resize surfaces while bliting
-	bool blit_resized;
 	/// The capabilities of the opengl hardware and drive
 	GLCaps gl;
 };
+
+/**
+ * Picture caches (modules).
+ *
+ * \ref Graphic maintains a cache of \ref PictureID s to avoid continuous re-loading of
+ * pictures that may not be referenced all the time (e.g. UI elements).
+ *
+ * This cache is separated into different modules, and can be flushed per-module.
+ */
+enum PicMod {
+	PicMod_UI = 0,
+	PicMod_Menu,
+	PicMod_Game,
+
+	// Must be last
+	PicMod_Last
+};
+
 
 /**
  * A renderer to get pixels to a 16bit framebuffer.
@@ -103,8 +115,7 @@ struct GraphicCaps
  * graphics system is unloaded, or when \ref flush() is called with the
  * appropriate module flag; the user can request to flush one single picture
  * alone, but this is only used (and useful) in the editor.
-*/
-
+ */
 struct Graphic {
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
@@ -125,31 +136,26 @@ struct Graphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	Surface & load_image(std::string const &, bool alpha = false);
-	PictureID & get_picture(PicMod, std::string const &, bool alpha = true)
+	PictureID load_image(std::string const &, bool alpha = false);
+	const PictureID & get_picture(PicMod, std::string const &, bool alpha = true)
 		__attribute__ ((pure));
-	PictureID get_picture
-		(PicMod module, Surface &, const std::string & name = "");
-	//__attribute__ ((pure));
-	PictureID & get_no_picture() const;
-
-	Surface * get_picture_surface(const PictureID & id);
-	const Surface * get_picture_surface(const PictureID & id) const;
+	void add_picture_to_cache(PicMod, const std::string &, PictureID);
+	const PictureID & get_no_picture() const;
 
 	void get_picture_size
 		(const PictureID & pic, uint32_t & w, uint32_t & h) const;
+	PictureID get_offscreen_picture(OffscreenSurfacePtr surface) const;
 
 	void save_png(const PictureID &, StreamWrite *) const;
-	void save_png(Surface & surf, StreamWrite *) const;
+	void save_png(SurfacePtr surf, StreamWrite *) const;
+	void save_png(IPixelAccess & pix, StreamWrite *) const;
 
-	PictureID create_picture_surface(int32_t w, int32_t h, bool alpha = false);
-	Surface & create_surface(SDL_Surface &, bool alpha = false);
-	Surface & create_surface(Surface &, bool alpha = false);
-	Surface & create_surface(int32_t w, int32_t h, bool alpha = false);
-	void free_picture_surface(const PictureID & pic);
+	PictureID convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
+
+	OffscreenSurfacePtr create_offscreen_surface(int32_t w, int32_t h);
+	PictureID create_picture(int32_t w, int32_t h, bool alpha = false);
 
 	PictureID create_grayed_out_pic(const PictureID & picid);
-	RenderTarget * get_surface_renderer(const PictureID & pic);
 
 	enum  ResizeMode {
 		// do not worry about proportions, just sketch to requested size
@@ -164,7 +170,6 @@ struct Graphic {
 
 	PictureID get_resized_picture
 		(PictureID, uint32_t w, uint32_t h, ResizeMode);
-	SDL_Surface * resize(const PictureID index, uint32_t w, uint32_t h);
 
 	uint32_t get_maptexture(char const & fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
@@ -172,6 +177,7 @@ struct Graphic {
 
 	void load_animations(UI::ProgressWindow & loader_ui);
 	AnimationGfx::Index nr_frames(uint32_t const anim = 0) const;
+	uint32_t get_animation_frametime(uint32_t anim) const;
 	void get_animation_size
 		(const uint32_t anim,
 		 const uint32_t time,
@@ -183,9 +189,12 @@ struct Graphic {
 	Texture * get_maptexture_data(uint32_t id);
 	AnimationGfx * get_animation(uint32_t) const;
 
-	Surface * get_road_texture(int32_t roadtex);
+	PictureID get_road_texture(int32_t roadtex);
 
 	GraphicCaps const & caps() const throw () {return m_caps;}
+
+private:
+	SDL_Surface * extract_sdl_surface(IPixelAccess & pix, Rect srcrect);
 
 protected:
 	// Static helper function for png writing
@@ -197,7 +206,7 @@ protected:
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
-	Surface * m_screen;
+	SurfacePtr m_screen;
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
@@ -214,11 +223,18 @@ protected:
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
 
-	/// hash of filename/picture ID pairs
-	std::vector
-		<std::map<std::string, boost::shared_ptr<Picture> > > m_picturemap;
-	typedef std::map<std::string, boost::shared_ptr<Picture> > Picturemap;
+	struct PictureRec {
+		PictureID picture;
+
+		/// bit-mask of modules that this picture exists in
+		uint32_t modules;
+	};
+
+	typedef std::map<std::string, PictureRec> Picturemap;
 	typedef Picturemap::iterator pmit;
+
+	/// hash of cached filename/picture pairs
+	Picturemap m_picturemap;
 
 	Road_Textures * m_roadtextures;
 	std::vector<Texture *> m_maptextures;
@@ -229,4 +245,3 @@ extern Graphic * g_gr;
 extern bool g_opengl;
 
 #endif
-

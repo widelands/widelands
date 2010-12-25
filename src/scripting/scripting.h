@@ -74,6 +74,7 @@ struct LuaCoroutine {
 	virtual int resume(uint32_t * = 0) = 0;
 
 	virtual void push_arg(const Widelands::Player *) = 0;
+	virtual void push_arg(const Widelands::Coords &) = 0;
 };
 
 /*
@@ -112,8 +113,7 @@ struct LuaGameInterface : public virtual LuaInterface {
 	virtual LuaCoroutine * read_coroutine
 		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t) = 0;
 	virtual uint32_t write_coroutine
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &,
-		 LuaCoroutine *) = 0;
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &, LuaCoroutine *) = 0;
 
 	virtual void read_global_env
 		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t) = 0;
