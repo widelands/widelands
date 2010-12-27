@@ -205,11 +205,7 @@ uint32_t NetGGZ::max_players()
 	// boost::threads. With threads enabled it shoulb be possible to host
 	// and join games with more than 7 seats -- timowi
 	int maxplayers = core().get_max_players();
-#ifdef USE_BOOST_THREADS
-	return maxplayers;
-#else
 	return (maxplayers > 7)?7:maxplayers;
-#endif
 }
 
 

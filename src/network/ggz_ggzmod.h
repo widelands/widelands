@@ -24,11 +24,6 @@
 #include <stdint.h>
 #include <string>
 
-#ifdef USE_BOOST_THREADS
-#include <boost/thread.hpp>
-#include <boost/thread/shared_mutex.hpp>
-#endif
-
 #ifdef WIN32
 #include "winsock.h"
 #endif
@@ -52,14 +47,9 @@ public:
 	/*thread safe? */
 	bool connected() { return m_connected; }
 	void disconnect(bool err = false);
-#ifdef USE_BOOST_THREADS
-	/// Process does nothing if threads are used.
-	void process() {}
-	bool data_pending() { return false; }
-#else
+
 	void process();
 	bool data_pending();
-#endif
 
 	int32_t datafd();
 	void set_spectator();
@@ -71,34 +61,15 @@ public:
 	std::string playername();
 
 	inline void set_fds (fd_set & set) {
-#ifndef USE_BOOST_THREADS
 		if (m_server_fd >= 0 and m_server_fd < FD_SETSIZE)
 			FD_SET(m_server_fd, &set);
-#else
-		boost::shared_lock<boost::shared_mutex> sl(threadlock);
-#endif
+
 		if (m_data_fd >= 0 and m_data_fd < FD_SETSIZE)
 			FD_SET(m_data_fd, &set);
 	}
 
 private:
 
-#ifdef USE_BOOST_THREADS
-	/// main function of the worker thread. If USE_BOOST_THREADS is defined this
-	/// connect() created a thread which runs this function.
-	void _thread_main();
-
-	boost::thread ggzmodthread;
-
-	/// This mutex is used to lock access to members of this class. Some members
-	/// of this class are used by main thread and the ggzmod worker thread. A
-	/// lock must be aquired before using one of them.
-	boost::shared_mutex threadlock;
-
-	//bool m_disconnect;
-	/// If set to true thread main loop exit as soon as possible.
-	bool m_requested_exit;
-#endif
 	ggz_ggzmod(const ggz_ggzmod &) {}
 
 	/// this is called by _thread_main() or process() to call seat request
