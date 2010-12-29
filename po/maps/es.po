@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-11-21 10:48+0000\n"
-"Last-Translator: Siz <siz-asuka@hotmail.com>\n"
+"PO-Revision-Date: 2010-12-28 23:47+0000\n"
+"Last-Translator: Pablo Marcó del Pont <Unknown>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:15+0000\n"
+"X-Launchpad-Export-Date: 2010-12-29 04:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -165,11 +165,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Fácil. Introducción a Los Bárbaros"
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Fácil. Introducción al Imperio"
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -177,7 +177,7 @@ msgstr "Bosques Élficos"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr ""
+msgstr "Imperio - Los meses de exilio"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -670,6 +670,17 @@ msgstr ""
 #~ "La sobrecogedora belleza de estas tierras de esmeralda ha engatusado a "
 #~ "muchas tribus para intentar apropiárselas."
 
+#~ msgid "Finish Lakes"
+#~ msgstr "Lagos Finlandeses"
+
+#~ msgid ""
+#~ "These are the beautiful finish lands, which are of lakes, rivers, ancient "
+#~ "forests and mountains. It is up to you, to find a way through these lands."
+#~ msgstr ""
+#~ "Estas son las hermosas tierras Finlandesas, repletas de lagos, ríos, "
+#~ "antiguos bosques y montañas. Es tu cometido buscar un camino a través de "
+#~ "ellas."
+
 #~ msgid ""
 #~ "A long time your tribe dwelled on this beautiful and lonely glacier lake. "
 #~ "Noone disturbed you and the resources were enough for your whole tribe, but "
@@ -701,6 +712,22 @@ msgstr ""
 
 #~ msgid "Tutorial2 - A Place to call Home"
 #~ msgstr "Tutorial 2 - Un lugar llamado Hogar"
+
+#~ msgid ""
+#~ "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
+#~ "higher production buildings, including mining and the military expansions "
+#~ "will be introduced."
+#~ msgstr ""
+#~ "Segunda misión de la Campaña Tutorial de los Bárbaros. En este tutorial se "
+#~ "presentarán los edificios de producción alta incluyendo minas y expansiones "
+#~ "militares."
+
+#~ msgid ""
+#~ "In this mountainous region two princes have settled. Now they are expanding "
+#~ "their terretories unaware of the fact that they are not alone!"
+#~ msgstr ""
+#~ "En esta región montañosa dos princesas se han asentado. ¡Ahora están "
+#~ "expandiendo sus territorios sin percatarse del hecho de que no están solas!"
 
 #~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
 #~ msgstr "Imperio: Tutorial 1 - Las hebras de Malac' Mor"
