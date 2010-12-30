@@ -426,6 +426,17 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			if (settings.scenario)
 				set_scenario_values();
 		}
+	} else {
+		// Write client infos
+		std::string temp =
+			(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
+			?
+			(format("Player %i") % (settings.playernum + 1)).str()
+			:
+			_("Spectator");
+		temp  = (format(_("At the moment you are %s\n\n")) % temp.c_str()).str();
+		temp += _("Click on the \"?\" in the right top corner to get help.");
+		m_client_info.set_text(temp);
 	}
 
 	m_ok.set_enabled(m_settings->canLaunch());
@@ -437,17 +448,6 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 		(m_settings->canChangeMap() && !settings.savegame && !settings.scenario);
 
 	win_condition_update();
-
-	// Write client infos
-	std::string temp =
-		(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
-		?
-		(format("Player %i") % (settings.playernum + 1)).str()
-		:
-		_("Spectator");
-	temp  = (format(_("At the moment you are %s\n\n")) % temp.c_str()).str();
-	temp += _("Click on the \"?\" in the right top corner to get help.");
-	m_client_info.set_text(temp);
 
 	// Update the multi player setup group
 	m_mpsg->refresh();
