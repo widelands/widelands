@@ -431,7 +431,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 		std::string temp =
 			(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
 			?
-			(format("Player %i") % (settings.playernum + 1)).str()
+			(format(_("Player %i")) % (settings.playernum + 1)).str()
 			:
 			_("Spectator");
 		temp  = (format(_("At the moment you are %s\n\n")) % temp.c_str()).str();
@@ -574,17 +574,18 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 void Fullscreen_Menu_LaunchMPG::load_map_info()
 {
 	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
-	i18n::Textdomain td("maps");
 
 	char const * const name = m_settings->settings().mapfilename.c_str();
 	Widelands::Map_Loader * const ml = map.get_correct_loader(name);
 	if (!ml) {
-		i18n::Textdomain("widelands");
 		throw warning(_("There was an error!"), _("The map file seems to be invalid!"));
 	}
 
 	map.set_filename(name);
-	ml->preload_map(true);
+	{
+		i18n::Textdomain td("maps");
+		ml->preload_map(true);
+	}
 	delete ml;
 
 	// get translated worldsname
@@ -594,17 +595,13 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 	std::string world(global.get_safe_string("name"));
 
 	std::string infotext;
-	{
-		i18n::Textdomain("widelands");
-		infotext += _("Map informations:\n");
-		infotext += (format(_("* Size: %ux%u\n")) % map.get_width() % map.get_height()).str();
-		infotext += (format(_("* %i Players\n")) % m_nr_players).str();
-		infotext += (format(_("* World type: %s\n")) % world).str();
-		if (m_settings->settings().scenario)
-			infotext += (format(_("* Scenario mode selected\n"))).str();
-		infotext += "\n";
-	}
-
+	infotext += _("Map informations:\n");
+	infotext += (format(_("* Size: %ux%u\n")) % map.get_width() % map.get_height()).str();
+	infotext += (format(_("* %i Players\n")) % m_nr_players).str();
+	infotext += (format(_("* World type: %s\n")) % world).str();
+	if (m_settings->settings().scenario)
+		infotext += (format(_("* Scenario mode selected\n"))).str();
+	infotext += "\n";
 	infotext += map.get_description();
 
 	m_map_info.set_text(infotext);
