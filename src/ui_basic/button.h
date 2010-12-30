@@ -85,6 +85,11 @@ struct Button : public NamedPanel {
 	// Set the permanently pressed state of the button
 	void set_perm_pressed(bool state);
 
+	// Set button to flat / not flat
+	void set_flat(bool flat);
+	// If no background is drawn, the button is drawn over the current background
+	void set_draw_flat_background(bool set);
+
 protected:
 	virtual void clicked() = 0; /// Override this to react on the click.
 
@@ -94,6 +99,7 @@ protected:
 	bool        m_enabled;
 	bool        m_repeating;
 	bool        m_flat;
+	bool        m_draw_flat_background;
 
 	int32_t     m_time_nextact;
 

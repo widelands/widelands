@@ -41,21 +41,22 @@ Button::Button //  for textual buttons
 	 std::string const & fontname,
 	 uint32_t const      fontsize)
 	:
-	NamedPanel           (parent, name, x, y, w, h, tooltip_text),
-	m_highlighted   (false),
-	m_pressed       (false),
-	m_permpressed   (false),
-	m_enabled       (_enabled),
-	m_repeating     (false),
-	m_flat          (flat),
-	m_title         (title_text),
-	m_pic_background(background_picture_id),
-	m_pic_custom    (g_gr->get_no_picture()),
-	m_pic_custom_disabled(g_gr->get_no_picture()),
-	m_fontname      (fontname),
-	m_fontsize      (fontsize),
-	m_clr_down      (229, 161, 2),
-	m_draw_caret    (false)
+	NamedPanel            (parent, name, x, y, w, h, tooltip_text),
+	m_highlighted         (false),
+	m_pressed             (false),
+	m_permpressed         (false),
+	m_enabled             (_enabled),
+	m_repeating           (false),
+	m_flat                (flat),
+	m_draw_flat_background(false),
+	m_title               (title_text),
+	m_pic_background      (background_picture_id),
+	m_pic_custom          (g_gr->get_no_picture()),
+	m_pic_custom_disabled (g_gr->get_no_picture()),
+	m_fontname            (fontname),
+	m_fontsize            (fontsize),
+	m_clr_down            (229, 161, 2),
+	m_draw_caret          (false)
 {
 	set_think(false);
 
@@ -75,20 +76,21 @@ Button::Button //  for pictorial buttons
 	 const std::string & fontname,
 	 const uint32_t      fontsize)
 	:
-	NamedPanel      (parent, name, x, y, w, h, tooltip_text),
-	m_highlighted   (false),
-	m_pressed       (false),
-	m_permpressed   (false),
-	m_enabled       (_enabled),
-	m_repeating     (false),
-	m_flat          (flat),
-	m_pic_background(background_picture_id),
-	m_pic_custom    (foreground_picture_id),
-	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
-	m_fontname      (fontname),
-	m_fontsize      (fontsize),
-	m_clr_down      (229, 161, 2),
-	m_draw_caret    (false)
+	NamedPanel            (parent, name, x, y, w, h, tooltip_text),
+	m_highlighted         (false),
+	m_pressed             (false),
+	m_permpressed         (false),
+	m_enabled             (_enabled),
+	m_repeating           (false),
+	m_flat                (flat),
+	m_draw_flat_background(false),
+	m_pic_background      (background_picture_id),
+	m_pic_custom          (foreground_picture_id),
+	m_pic_custom_disabled (g_gr->create_grayed_out_pic(foreground_picture_id)),
+	m_fontname            (fontname),
+	m_fontsize            (fontsize),
+	m_clr_down            (229, 161, 2),
+	m_draw_caret          (false)
 {
 	set_think(false);
 
@@ -164,14 +166,10 @@ void Button::set_enabled(bool const on)
 void Button::draw(RenderTarget & dst)
 {
 	// Draw the background
-	if (not m_flat) {
+	if (not m_flat or m_draw_flat_background) {
 		assert(m_pic_background != g_gr->get_no_picture());
-		dst.fill_rect
-			(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 255));
-		dst.tile
-			(Rect(Point(0, 0), get_w(), get_h()),
-			 m_pic_background,
-			 Point(get_x(), get_y()));
+		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 255));
+		dst.tile(Rect(Point(0, 0), get_w(), get_h()), m_pic_background, Point(get_x(), get_y()));
 	}
 
 	if (m_enabled and m_highlighted and not m_flat)
@@ -349,6 +347,14 @@ void Button::set_perm_pressed(bool state) {
 		m_permpressed = state;
 		update();
 	}
+}
+
+void Button::set_flat(bool flat) {
+	m_flat = flat;
+}
+
+void Button::set_draw_flat_background(bool set) {
+	m_draw_flat_background = set;
 }
 
 }
