@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
 "PO-Revision-Date: 2010-08-30 23:27+0000\n"
 "Last-Translator: alms21 <alms21@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
@@ -358,6 +358,10 @@ msgstr ""
 "vermelha mostrar onde um pequeno prédio - como uma cabana de lenhador - "
 "podem ser construídas. <br>"
 
+#: ../../campaigns/t01.wmf/elemental:7
+msgid "01 - Eyes in the Dark"
+msgstr ""
+
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
 msgstr "Um velho homem diz..."
@@ -382,19 +386,15 @@ msgstr "Construa outra cabana de lenhador"
 msgid "Build two quarries"
 msgstr "Construa duas minas"
 
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
-"gameplay and control as well as basic production buildings (wood, stone, "
-"etc.) will be introduced."
-msgstr ""
-"Primeira missão da Campanha Barbarian Tutorial. Neste tutorial o jogo básico "
-"e controle, bem como instalações de produção básica (madeira, pedra, etc) "
-"serão introduzidos."
-
 #: ../../campaigns/t01.wmf/scripting/texts.lua:101
 msgid "In the night"
 msgstr "À noite"
+
+#: ../../campaigns/t01.wmf/elemental:9
+msgid ""
+"In this tutorial the basic gameplay and control as well as basic production "
+"buildings of the Barbarians are introduced."
+msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
@@ -408,20 +408,20 @@ msgstr "Khantrukh assente..."
 msgid "Khantrukh remembers..."
 msgstr "Khantrukh recorda..."
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:65
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:58
 msgid "Mission Complete"
 msgstr "Missão Completada"
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:25
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid "Somebody comes up to you"
 msgstr "Alguém chega até você"
 
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:26
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:32
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:41
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:42
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:36
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:37
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:45
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:59
 msgid "The advisor"
 msgstr "O assessor"
 
@@ -466,9 +466,8 @@ msgstr "Thron suspira..."
 msgid "Thron speaks..."
 msgstr "Thron fala..."
 
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Tutorial1 - Olhos nas Trevas"
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Tutorial1 - Olhos nas Trevas"
 
 #~ msgid "OK"
 #~ msgstr "OK"
@@ -521,3 +520,12 @@ msgstr "Tutorial1 - Olhos nas Trevas"
 
 #~ msgid "At the grave"
 #~ msgstr "No túmulo"
+
+#~ msgid ""
+#~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
+#~ "gameplay and control as well as basic production buildings (wood, stone, "
+#~ "etc.) will be introduced."
+#~ msgstr ""
+#~ "Primeira missão da Campanha Barbarian Tutorial. Neste tutorial o jogo básico "
+#~ "e controle, bem como instalações de produção básica (madeira, pedra, etc) "
+#~ "serão introduzidos."

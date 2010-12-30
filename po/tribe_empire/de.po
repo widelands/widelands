@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-04 18:08+0000\n"
-"Last-Translator: Tino <Unknown>\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
+"PO-Revision-Date: 2010-11-18 14:15+0000\n"
+"Last-Translator: kraileth <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-05 04:43+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:18+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -395,7 +395,7 @@ msgstr "normales Hauptquartier"
 
 #: ../../tribes/empire/conf:157
 msgid "Headquarters shipwreck"
-msgstr "Schiffswrack Hauptquartier"
+msgstr "Schiffswrack-Hauptquartier"
 
 #: ../../tribes/empire/conf:74
 msgid "Heavy Lance"
@@ -559,7 +559,7 @@ msgstr ""
 msgid "Miner"
 msgstr "Bergmann"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:115
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
 msgstr "Nicht ausreichend Platz"
 
@@ -605,83 +605,87 @@ msgstr "Plattenharnisch"
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
-msgstr "Produziert verbesserte Lanze"
+msgstr "Herstellung von verbesserter Lanze"
 
 #: ../../tribes/empire/armoursmithy/conf:27
 msgid "Produce armour"
-msgstr "Produziert Rüstung"
+msgstr "Herstellung von Rüstung"
 
 #: ../../tribes/empire/toolsmithy/conf:44
 msgid "Produce axe"
-msgstr "Produziert Axt"
+msgstr "Herstellung von Axt"
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr "Produziert Backblech"
+msgstr "Herstellung von Backblech"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce basket"
-msgstr "Produziert Korb"
+msgstr "Herstellung von Korb"
 
 #: ../../tribes/empire/armoursmithy/conf:28
 msgid "Produce chain armour"
-msgstr "Produziert Kettenrüstung"
+msgstr "Herstellung von Kettenrüstung"
 
 #: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fire tongs"
-msgstr "Produziert Feuerzangen"
+msgstr "Herstellung von Feuerzange"
 
 #: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce fishing rod"
-msgstr "Produziert Angel"
+msgstr "Herstellung von Angel"
 
 #: ../../tribes/empire/toolsmithy/conf:36
 msgid "Produce hammer"
-msgstr "Produziert Hammer"
+msgstr "Herstellung von Hammer"
 
 #: ../../tribes/empire/weaponsmithy/conf:32
 msgid "Produce heavy lance"
-msgstr "Produziert schwere Lanze"
+msgstr "Herstellung von schwerer Lanze"
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
-msgstr "Produziert Helm"
+msgstr "Herstellung von Helm"
 
 #: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce hunting spear"
-msgstr "Produziert Jagdspeer"
+msgstr "Herstellung von Jagdspeer"
 
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce kitchen tools"
-msgstr "Produziert Küchengerät"
+msgstr "Herstellung von Küchengerät"
 
 #: ../../tribes/empire/weaponsmithy/conf:30
 msgid "Produce lance"
-msgstr "Produziert Lanze"
+msgstr "Herstellung von Lanze"
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
-msgstr "Produziert Spitzhacke"
+msgstr "Herstellung von Spitzhacke"
 
 #: ../../tribes/empire/armoursmithy/conf:29
 msgid "Produce plate armour"
-msgstr "Produziert Plattenharnisch"
+msgstr "Herstellung von Plattenharnisch"
 
 #: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce saw"
-msgstr "Produziert Säge"
+msgstr "Herstellung von Säge"
 
 #: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce scythe"
-msgstr "Produziert Sense"
+msgstr "Herstellung von Sense"
 
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce shovel"
-msgstr "Produziert Schaufel"
+msgstr "Herstellung von Schaufel"
+
+#: ../../tribes/empire/weaponsmithy/conf:33
+msgid "Produce war lance"
+msgstr "Herstellung von Kriegslanze"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
-msgstr "Produziert Holzlanze"
+msgstr "Herstellung von Holzlanze"
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
@@ -833,15 +837,15 @@ msgstr "Verhüttet Eisen."
 msgid "Soldier"
 msgstr "Soldat"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:116
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
-"Ein paar deiner Startgebäude konnten nicht gesetzt werden, da kein Platz für "
-"sie gefunden wurde. Dadurch bist du benachteiligt und solltest in Betracht "
-"ziehen, die Karte noch einmal mit einer anderen Startbedingung neuzustarten."
+"Für einige Deiner Startgebäude war nicht genügend Platz und sie wurden daher "
+"nicht gebaut. Dadurch bist Du im Nachteil; überlege, ob Du diese Karte nicht "
+"unter gerechten Startbedingungen nochmals starten möchtest."
 
 #: ../../tribes/empire/conf:128
 msgid "Stonemason"
@@ -1309,7 +1313,7 @@ msgstr ""
 #: ../../tribes/empire/oremine/conf:22
 #: ../../tribes/empire/piggery/conf:21
 #: ../../tribes/empire/quarry/conf:21
-#: ../../tribes/empire/sawmill/conf:20
+#: ../../tribes/empire/sawmill/conf:23
 #: ../../tribes/empire/scouts_house/conf:17
 #: ../../tribes/empire/sheepfarm/conf:21
 #: ../../tribes/empire/smelting_works/conf:24
@@ -1322,7 +1326,7 @@ msgstr ""
 #: ../../tribes/empire/well/conf:16
 #: ../../tribes/empire/winery/conf:20
 msgid "Work"
-msgstr "Arbeitet"
+msgstr "Arbeit"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
@@ -1385,3 +1389,12 @@ msgstr ""
 #~ msgstr ""
 #~ "Diese Rohkohle wird tief in den Minen abgebaut und muss erst in einer "
 #~ "Köhlerei weiterverarbeitet werden, um die volle Energie  nutzbar zu machen."
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Ein paar deiner Startgebäude konnten nicht gesetzt werden, da kein Platz für "
+#~ "sie gefunden wurde. Dadurch bist du benachteiligt und solltest in Betracht "
+#~ "ziehen, die Karte noch einmal mit einer anderen Startbedingung neuzustarten."

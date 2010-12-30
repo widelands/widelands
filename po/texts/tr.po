@@ -1,4 +1,4 @@
-# Vietnamese translation for widelands
+# Turkish translation for widelands
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-11-11 01:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Vietnamese <vi@li.org>\n"
+"PO-Revision-Date: 2010-11-26 23:36+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,15 +19,15 @@ msgstr ""
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
-msgstr "(CTRL+) 0-9 Ghi nhớ và chuyển đến các vị trí được ghi lại từ trước"
+msgstr ""
 
 #: ../../txts/README:67
 msgid ", / .       Go to previous / next location"
-msgstr ", / . Chuyển đến vị trí liền trước / kế tiếp"
+msgstr ""
 
 #: ../../txts/README:123
 msgid "- how to reproduce the bug"
-msgstr "- cách để tái hiện lại lỗi"
+msgstr ""
 
 #: ../../txts/README:127
 msgid ""

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
 "PO-Revision-Date: 2010-02-15 19:50+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -258,7 +258,6 @@ msgid ""
 "attacks.\" "
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:111
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
 "* As soon as the blacksmith reaches his next level (master blacksmith) "
@@ -342,6 +341,13 @@ msgstr ""
 "* Tuhoa kaikki Thronin kahden veljen joukot vapauttaaksesi valtaistuimen "
 "piirin."
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:111
+msgid ""
+"* Enhance your metalworks to an axefactory or - as soon as the blacksmith "
+"reaches his next level (master blacksmith) - even to a war mill and build up "
+"another metalworks to ensure the production of tools."
+msgstr ""
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
 msgid ""
@@ -403,6 +409,10 @@ msgstr ""
 "-> Varastot ovat päämajasi kaltaisia; ainoa ero on, että sotilaat eivät "
 "puolusta varastoja. On usein viisasta rakentaa varasto kun alueesi on "
 "kasvamassa ja polut päämajaasi venyvät yhä pidemmiksi."
+
+#: ../../campaigns/t03.wmf/elemental:7
+msgid "03 - This Land is our Land"
+msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -563,13 +573,9 @@ msgstr "Tarina jatkuu"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
-"handling of military and training site buildings and will finally introduce "
-"fighting."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
-"Barbaarien opastuskampanjan kolmas komennus. Tällä opastuskomennuksella "
-"selitetään sotilas- ja koulutusrakennusten käyttö, ja päästään vihdoin myös "
-"taistelemaan."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -592,11 +598,6 @@ msgstr "Thron puhuu:"
 msgid "Tracks"
 msgstr "Jälkiä"
 
-# TODO: inconsistency between Kalitat - Kalitath
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "Tutorial3 - This land is our land"
-msgstr "Opastus 3 - Tämä maa on meidän"
-
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
 msgstr "Talvi tulossa"
@@ -612,6 +613,19 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
 msgstr "Uskollinen kumppanisi"
+
+# TODO: inconsistency between Kalitat - Kalitath
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Opastus 3 - Tämä maa on meidän"
+
+#~ msgid ""
+#~ "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
+#~ "handling of military and training site buildings and will finally introduce "
+#~ "fighting."
+#~ msgstr ""
+#~ "Barbaarien opastuskampanjan kolmas komennus. Tällä opastuskomennuksella "
+#~ "selitetään sotilas- ja koulutusrakennusten käyttö, ja päästään vihdoin myös "
+#~ "taistelemaan."
 
 #~ msgid ""
 #~ " \"The last days we came closer to our capital. Many people have already "
