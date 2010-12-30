@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-12-20 19:13+0100\n"
-"PO-Revision-Date: 2010-08-30 23:46+0000\n"
-"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
+"PO-Revision-Date: 2010-12-29 18:34+0000\n"
+"Last-Translator: Tumaini <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:21+0000\n"
+"X-Launchpad-Export-Date: 2010-12-30 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/wlapplication.cc:369
@@ -224,6 +224,11 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
+"Buggrapporter? Förslag? Gå in på projektets hemsida:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Hoppas du gillar spelet!\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1512
 msgid "Warning: "
@@ -861,54 +866,54 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:346
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "Fel användning, bör vara: /announce <meddelande>"
 
 #: ../../src/network/nethost.cc:358
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "Fel användning, bör vara: /warn <namn> <anledning>"
 
 #: ../../src/network/nethost.cc:369
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "Fel användning, bör vara: /kick <namn> <anledning>"
 
 #: ../../src/network/nethost.cc:377
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Är du säker på att du vill sparka ut %s?<br>"
 
 #: ../../src/network/nethost.cc:380
 #, c-format
 msgid "The stated reason was: %s<br>"
-msgstr ""
+msgstr "Den givna anledningen var: %s<br>"
 
 #: ../../src/network/nethost.cc:383
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "Om ja, skriv: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:392
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "utsparkningsbekräftelse avbruten: Inget namn angavs!"
 
 #: ../../src/network/nethost.cc:394
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Fel användning, bör vara: /ack_kick <namn>"
 
 #: ../../src/network/nethost.cc:401
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "utsparkningsbekräftelse avbruten: Fel namn angavs!"
 
 #: ../../src/network/nethost.cc:411
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Pausning har redan tvingats - spelet bör vara pausat."
 
 #: ../../src/network/nethost.cc:422
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Det finns ingen tvingad pausning - inget att avsluta."
 
 #: ../../src/network/nethost.cc:432
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Ogiltigt kommando! Skriv /help för en lista över kommandon."
 
 #: ../../src/network/nethost.cc:569
 msgid "Server has left the game."
@@ -924,16 +929,16 @@ msgstr "Sververn har kraschat och nödsparat."
 
 #: ../../src/network/nethost.cc:937
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "Du kan inte sparka ut dig själv!"
 
 #: ../../src/network/nethost.cc:958
 msgid "There is no connected user with that nickname!"
-msgstr ""
+msgstr "Det finns ingen ansluten användare med det smeknamnet."
 
 #: ../../src/network/nethost.cc:977
 #, c-format
 msgid "%s tried to start the game, but the server is not launchable."
-msgstr ""
+msgstr "%s försökte starta spelet, men servern kan inte startas."
 
 #: ../../src/network/nethost.cc:981
 #, c-format
@@ -945,6 +950,8 @@ msgid ""
 "<br>Available host commands are:<br>/help  - Shows this help<br>/start - "
 "Starts the server."
 msgstr ""
+"<br>Tillgängliga värdkommandon är:<br>/help - Visar denna hjälp<br>/start - "
+"Startar servern."
 
 #: ../../src/network/nethost.cc:1002
 #, c-format
@@ -977,6 +984,8 @@ msgid ""
 "This is a dedicated server send \"@%s /help\" to get a full list of "
 "available commands. \"@%s /start\" starts the server."
 msgstr ""
+"Det här är en dedikerad server. Skicka \"@%s /help\" för att få en komplett "
+"lista över tillgängliga kommandon. \"@%s /start\" startar servern."
 
 #: ../../src/network/nethost.cc:1759
 msgid "Client reports time to host that is running backwards."
@@ -1077,7 +1086,7 @@ msgstr "%s har lämnat spelet (%s)"
 #: ../../src/network/nethost.cc:2322
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Okänd användare har lämnat spelet (%s)"
 
 #: ../../src/network/netclient.cc:98
 msgid "Could not establish connection to host"
@@ -1711,12 +1720,12 @@ msgstr " finns redan. Skriv över?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:270
 msgid "File deletion"
-msgstr ""
+msgstr "Radera fil"
 
 #: ../../src/wui/game_main_menu_save_game.cc:272
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "Vill du verkligen radera filen %s?"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
@@ -1740,7 +1749,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:148 ../../src/wui/transport_ui.cc:243
 msgid "Reset to default"
-msgstr ""
+msgstr "Återställ till standardvärden"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
@@ -1834,13 +1843,13 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:353
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Spelare %i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:116
 #: ../../src/ui_fsmenu/launchMPG.cc:447
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Åskådare"
 
 #: ../../src/wui/multiplayersetupgroup.cc:319
 #: ../../src/ui_fsmenu/netsetup_lan.cc:189
@@ -1854,20 +1863,20 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:415
 #: ../../src/ui_fsmenu/launchMPG.cc:274 ../../src/ui_fsmenu/launchSPG.cc:222
 msgid "Scenario"
-msgstr ""
+msgstr "Scenario"
 
 #: ../../src/wui/multiplayersetupgroup.cc:417
 #: ../../src/ui_fsmenu/launchMPG.cc:278
 msgid "Savegame"
-msgstr ""
+msgstr "Sparat spel"
 
 #: ../../src/wui/multiplayersetupgroup.cc:470
 msgid "Client name"
-msgstr ""
+msgstr "Klientnamn"
 
 #: ../../src/wui/multiplayersetupgroup.cc:478
 msgid "Role"
-msgstr ""
+msgstr "Roll"
 
 #: ../../src/wui/multiplayersetupgroup.cc:494
 msgid "Start"
@@ -1875,16 +1884,16 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:502
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: ../../src/wui/multiplayersetupgroup.cc:510
 msgid "Tribe"
-msgstr ""
+msgstr "Stam"
 
 #: ../../src/wui/multiplayersetupgroup.cc:522
 #: ../../src/ui_fsmenu/launchSPG.cc:105
 msgid "Team"
-msgstr ""
+msgstr "Lag"
 
 #: ../../src/wui/attack_box.cc:170
 msgid "Soldiers:"
@@ -1949,15 +1958,15 @@ msgstr ""
 
 #: ../../src/wui/warehousewindow.cc:129
 msgid "Preferably store selected wares here"
-msgstr ""
+msgstr "Föredra att lagra valda varor här"
 
 #: ../../src/wui/warehousewindow.cc:130
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "Lagra inte valda varor här"
 
 #: ../../src/wui/warehousewindow.cc:131
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "För ut valda varor härifrån"
 
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
@@ -1966,7 +1975,7 @@ msgstr "Arbetare"
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
-msgstr ""
+msgstr "Erf"
 
 #: ../../src/wui/productionsitewindow.cc:73
 msgid "Next Level"
@@ -1982,7 +1991,7 @@ msgstr "(kommer)"
 
 #: ../../src/wui/soldierlist.cc:350 ../../src/wui/soldierlist.cc:370
 msgid "Click soldier to send away"
-msgstr ""
+msgstr "Klicka på en soldat för att skicka iväg"
 
 #: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
@@ -2223,7 +2232,7 @@ msgstr "Förbereder..."
 
 #: ../../src/ui_basic/helpwindow.cc:40
 msgid "Help: "
-msgstr ""
+msgstr "Hjälp: "
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
@@ -2291,7 +2300,7 @@ msgstr ""
 
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"
-msgstr ""
+msgstr "PROBLEM: ljudenhet öppnad flera gånger, försöker stänga"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
 #: ../../src/logic/playercommand.cc:482 ../../src/logic/playercommand.cc:540
@@ -2866,7 +2875,7 @@ msgstr ""
 #: ../../src/logic/ship.cc:263
 #, c-format
 msgid "loading ship: %s"
-msgstr ""
+msgstr "lastar skepp: %s"
 
 #: ../../src/logic/soldier.cc:75
 msgid "positive integer"
@@ -2961,7 +2970,7 @@ msgstr "En geolog hittade resurser."
 #: ../../src/logic/worker.cc:1751
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Dina %s kan inte finna en väg hem och kommer troligen att dö."
 
 #: ../../src/logic/worker.cc:1758
 msgid "Worker got lost!"
@@ -2990,7 +2999,7 @@ msgstr "handla: %s"
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "beräkna statistik-funktion: %s"
 
 #: ../../src/logic/tribe.cc:125
 msgid "constructionsite type \"constructionsite\" is missing"
@@ -3179,7 +3188,7 @@ msgstr "Arbetar inte"
 #: ../../src/logic/critter_bob.cc:388
 #, c-format
 msgid "loading critter: %s"
-msgstr ""
+msgstr "lastar boskap: %s"
 
 #: ../../src/logic/map.cc:363
 msgid "Player 1"
@@ -3354,7 +3363,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:917
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Framställde %s"
 
 #: ../../src/logic/production_program.cc:992
 msgid "Recruited "
@@ -3403,7 +3412,7 @@ msgstr "nivå"
 #: ../../src/logic/production_program.cc:1340
 #, c-format
 msgid "No soldier for this training level found!"
-msgstr ""
+msgstr "Inga soldater hittades för denna träningsnivå!"
 
 #: ../../src/logic/production_program.cc:1316
 #, c-format
@@ -3427,12 +3436,12 @@ msgstr[1] "%u(+%u) soldater"
 #: ../../src/logic/militarysite.cc:216
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr ""
+msgstr "Dina soldater besatte din/ditt %s."
 
 #: ../../src/logic/militarysite.cc:571
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr ""
+msgstr "Fienden besegrade dina soldater vid %s."
 
 #: ../../src/logic/militarysite.cc:576
 msgid "Militarysite lost!"
@@ -3441,7 +3450,7 @@ msgstr "Militär plats förlorad!"
 #: ../../src/logic/militarysite.cc:622
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr ""
+msgstr "Dina soldater besegrade fienden vid %s."
 
 #: ../../src/logic/militarysite.cc:627
 msgid "Enemy at site defeated!"
@@ -3450,12 +3459,12 @@ msgstr "Fiender vid platsen besegrade!"
 #: ../../src/logic/militarysite.cc:670
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "Din %s upptäckte en motståndare.</p>"
 
 #: ../../src/logic/militarysite.cc:671
 #, c-format
 msgid "Your %s is under attack.</p>"
-msgstr ""
+msgstr "Din/ditt %s är under attack.</p>"
 
 #: ../../src/logic/militarysite.cc:679
 msgid "You are under attack"
@@ -3632,27 +3641,27 @@ msgstr "Tryck Esc för att fortsätta..."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:52
 msgid "Please select"
-msgstr ""
+msgstr "Vänligen välj"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66
 msgid "Select a map"
-msgstr ""
+msgstr "Välj en karta"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Saved game"
-msgstr ""
+msgstr "Sparat spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Select a saved game"
-msgstr ""
+msgstr "Välj ett sparat spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:82
 msgid "Cancel selection"
-msgstr ""
+msgstr "Avbryt val"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:111
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Ändra karta ett sparat spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:119 ../../src/ui_fsmenu/launchSPG.cc:82
 msgid "Start game"
@@ -3660,15 +3669,15 @@ msgstr "Starta spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:145
 msgid "Show the help window"
-msgstr ""
+msgstr "Visa hjälpfönstret"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:152 ../../src/ui_fsmenu/launchMPG.cc:618
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Inställningar för flera spelare"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:160
 msgid "Clients"
-msgstr ""
+msgstr "Klienter"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:197 ../../src/ui_fsmenu/launchSPG.cc:275
 msgid "(no map)"
@@ -3676,15 +3685,15 @@ msgstr "(ingen karta)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:198
 msgid "The host has not yet selected a map or saved game."
-msgstr ""
+msgstr "Värden har ännu inte valt en karta eller ett sparat spel."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:276 ../../src/ui_fsmenu/launchSPG.cc:224
 msgid "Win condition is set through the scenario"
-msgstr ""
+msgstr "Vinstvillkor väljs genom scenariot"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:280
 msgid "The game is a saved game - the win condition was set before."
-msgstr ""
+msgstr "Spelet är ett sparat spel - vinstvillkoret valdes förut."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:290 ../../src/ui_fsmenu/launchSPG.cc:234
 msgid "Type: "
@@ -3704,12 +3713,20 @@ msgid ""
 "Normally such a file should be send from the host to you, but perhaps the "
 "transfer was not yet finnished!?!"
 msgstr ""
+"Widelands försökte starta ett spel med en fil som inte kunde hittas på given "
+"plats.\n"
+"Filen var: %s\n"
+"Om detta händer kan värden ha valt en fil som du inte äger. Vanligtvis bör "
+"en sådan fil skickas från värden till dig, men kanske var överföringen ännu "
+"inte färdig!?!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:409
 msgid ""
 "The selected file can not be found. If it is not automatically transfered to "
 "you, please write the host about this problem."
 msgstr ""
+"Den valda filen kan inte hittas. Om den inte automatiskt överförs till dig "
+"bör du vänligen meddela värden om detta problem."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:448
 #, c-format
@@ -3717,63 +3734,67 @@ msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
+"Du är för tillfället %s\n"
+"\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:449
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr ""
+msgstr "Klicka på \"?\" i det övre högra hörnet för att få hjälp."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:499
 msgid "Saved players are:"
-msgstr ""
+msgstr "Sparade spelare:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:519
 msgid "<closed>"
-msgstr ""
+msgstr "<stängd>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:583
 msgid "There was an error!"
-msgstr ""
+msgstr "Ett fel har inträffat!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:583
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "Kartfilen verkar vara ogiltig!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:599
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Kartinformation:\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:600
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "*Storlek: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:601
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i Spelare\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:602
 #, c-format
 msgid "* World type: %s\n"
-msgstr ""
+msgstr "* Världstyp: %s\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:604
 msgid "* Scenario mode selected\n"
-msgstr ""
+msgstr "* Scenarioläge valt\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:619
 msgid "You are in the multi player launch game menu."
-msgstr ""
+msgstr "Du är i spelstartsmenyn för flerspelarläge."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:620
 msgid "Client settings"
-msgstr ""
+msgstr "Klientinställningar"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:623
 msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
 msgstr ""
+"På vänster sida finns en lista över alla klienter, inklusive dig. Med "
+"knappen efter ditt namn kan du välja din roll. Tillgängliga roller är:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:627
 msgid ""
@@ -3781,26 +3802,31 @@ msgid ""
 "same color, these share the control over the player (\"shared kingdom "
 "mode\")."
 msgstr ""
+"Spelaren med flaggans färg. Om fler än en spelare valde samma färg delar "
+"dessa kontroll över spelaren (läget \"delat kungadöme\")."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:631
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
 msgstr ""
+"Slutligen åskådarläge, då du kan se allt, men inte kontrollera någon spelare."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:633
 msgid "Player settings"
-msgstr ""
+msgstr "Spelarinställningar"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:636
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
 msgstr ""
+"I mitten finns spelarinställningarna. För att starta ett spel måste varje "
+"spelare vara ett av följande:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid "Connected to one or more clients (see \"Client settings\")."
-msgstr ""
+msgstr "Ansluten till en eller flera klienter (se \"Klientinställningar\")."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:642
 msgid ""
@@ -3808,6 +3834,8 @@ msgid ""
 "hover texts indicates the strength of the currently selected computer "
 "player)."
 msgstr ""
+"Ansluten till en datorspelare (ansiktet i bilden liksom texten som syns när "
+"muspekaren förs över den visar den valda datorspelarens styrka)."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:645
 msgid "Set as shared in starting position for another player."
@@ -3824,16 +3852,22 @@ msgid ""
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
+"De tre senare kan endast väljas av värdklienten genom att trycka på en "
+"spelares \"typ\"-knapp. Värdspelare kan även välja initialinställningar för "
+"varje spelare (uppsättningen byggnader, varor och arbetare som spelaren "
+"börjar med) samt stam och lag för datorspelare"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:654
 msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
 msgstr ""
+"Varje klient ansluten till en spelare (med rollen \"spelare\") kan välja "
+"stam och lag för den spelaren"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:656
 msgid "Map informations"
-msgstr ""
+msgstr "Kartinformation"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:659
 msgid ""
@@ -3842,6 +3876,10 @@ msgid ""
 "Further the host is able to set a specific win condition and finally can "
 "start the game as soon as all players are set up."
 msgstr ""
+"På höger sida finns information om den valda kartan eller det valda sparade "
+"spelet. En knapp till höger om kartans namn låter värden byta karta. Värden "
+"kan även välja vinstvillkor och slutligen starta spelet när alla spelare är "
+"redo."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
@@ -4006,7 +4044,7 @@ msgstr "av"
 
 #: ../../src/ui_fsmenu/options.cc:293
 msgid "Try system language"
-msgstr ""
+msgstr "Försök med systemspråket"
 
 #: ../../src/ui_fsmenu/options.cc:411
 msgid "x"
@@ -4046,11 +4084,11 @@ msgstr "Ta bort Synkström vid uppstart"
 
 #: ../../src/ui_fsmenu/options.cc:479
 msgid "OpenGL rendering *Highly experimental!*"
-msgstr ""
+msgstr "Rendering med OpenGL *Högst experimentellt*"
 
 #: ../../src/ui_fsmenu/options.cc:484
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Visa spelchatt med genomskinlig bakgrund"
 
 #: ../../src/ui_fsmenu/options.cc:509
 msgid "Pause"
@@ -4108,7 +4146,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:141
 msgid "Map Name"
-msgstr ""
+msgstr "Kartnamn"
 
 #: ../../src/ui_fsmenu/mapselect.cc:236
 msgid "(directory)"

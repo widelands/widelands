@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-11-26 21:01+0000\n"
+"PO-Revision-Date: 2010-12-29 15:26+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
+"X-Launchpad-Export-Date: 2010-12-30 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -72,6 +72,9 @@ msgid ""
 "our fortifications to the borders of Kalitath’s territory and reunite with "
 "his forces. I have to keep an eye on everything that happens here.\" "
 msgstr ""
+" \"Avšak Thron nechce počuť moje pochybnosti. Snaží sa rozšíriť naše "
+"opevnenie k hraniciam územia Kalitath-a a opäť sa spojiť so svojím vojskom. "
+"Musím sledovať všetko, čo sa tu deje.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:197
 msgid ""
@@ -216,6 +219,10 @@ msgid ""
 "our troops with their own blood! We cannot accept this behaviour. From now "
 "on there is war between Kalitath and us!\" "
 msgstr ""
+" \"Ten BASTARD! Len jeden muž z našej pohraničnej hliadky sa vrátil živý. "
+"Niesol správu od Kaliatha-a, v ktorej hovorí, že potrestá každý pohyb našich "
+"vojsk ich vlastnou krvou! Takéto správanie nemôžeme akceptovať. Od teraz "
+"zúri medzi Kalitath-om a nami vojna!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:232
 msgid ""
@@ -467,7 +474,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Explore further"
-msgstr ""
+msgstr "Robte ďalší prieskum"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:252
 msgid "Food economy completed"
@@ -479,7 +486,7 @@ msgstr "Pevnosť dokončená"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:304
 msgid "Fortress needed"
-msgstr ""
+msgstr "Je potrebná pevnosť"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:272
 msgid "Further explorations"
@@ -499,11 +506,11 @@ msgstr "Khantrukh hovorí"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:358
 msgid "Military assault"
-msgstr ""
+msgstr "Ozbrojený útok"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:135
 msgid "Military assault on Al’thunran"
-msgstr ""
+msgstr "Ozbrojený útok na Al’thunran-a"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:296
 msgid "Mining economy completed"
@@ -526,7 +533,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Nezabudnite postaviť kravín"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:218
 msgid "Renegade fortification"
@@ -580,4 +587,4 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
-msgstr ""
+msgstr "Váš verný spoločník"
