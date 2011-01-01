@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-12-30 13:40+0000\n"
+"PO-Revision-Date: 2010-12-31 11:29+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-31 05:08+0000\n"
+"X-Launchpad-Export-Date: 2011-01-01 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -216,7 +216,7 @@ msgstr "Ødelagt bygning"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Leter etter ressurser som kan utvinnes gjennom gruvedrift."
 
 #: ../../tribes/empire/conf:150
 msgid "Donjon"
@@ -232,7 +232,7 @@ msgstr "Eseloppdretter"
 
 #: ../../tribes/empire/conf:181
 msgid "Donkeyfarm"
-msgstr ""
+msgstr "Eselfarm"
 
 #: ../../tribes/empire/conf:5
 msgid "Empire"
@@ -352,7 +352,7 @@ msgstr "Drue"
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."
-msgstr "Dyrker vin."
+msgstr "Dyrker vinranker."
 
 #: ../../tribes/empire/conf:143
 msgid "Guardhall"
@@ -397,7 +397,7 @@ msgstr "Hjelm"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Hjelper til å frakte varer langs sterkt trafikkerte veier."
 
 #: ../../tribes/empire/conf:145
 msgid "High Tower"
@@ -406,6 +406,8 @@ msgstr "Høyt tårn"
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 msgstr ""
+"Hvordan kan man lage et måltid, matbit eller rasjon, hvis man ikke har "
+"kjøkkenredskaper?"
 
 #: ../../tribes/empire/conf:119
 msgid "Hunter"
@@ -441,7 +443,7 @@ msgstr "Jernmalmgruve"
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
-msgstr ""
+msgstr "Passer på sauene."
 
 #: ../../tribes/empire/conf:79
 msgid "Kitchen Tools"
@@ -484,6 +486,8 @@ msgid ""
 "Marble is the beautiful stone, which is cutted out of the mountains and "
 "which is used for beautiful buildings and columns."
 msgstr ""
+"Marmor er vakker stein, som blir hugget ut av fjellene og brukt til å "
+"konstruere vakre bygninger og søyler."
 
 #: ../../tribes/empire/conf:122
 msgid "Master Miner"
@@ -598,7 +602,7 @@ msgstr "Produser øks"
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Produser stekebrett"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce basket"
@@ -610,7 +614,7 @@ msgstr "Produser ringbrynje"
 
 #: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fire tongs"
-msgstr "Produser ildtenger"
+msgstr "Produser ildtang"
 
 #: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce fishing rod"
@@ -662,7 +666,7 @@ msgstr "Produser spade"
 
 #: ../../tribes/empire/weaponsmithy/conf:33
 msgid "Produce war lance"
-msgstr ""
+msgstr "Produser krigslanse"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
@@ -678,7 +682,7 @@ msgstr "Produserer øl eller vin."
 
 #: ../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Produserer vevet tøy til skip og soldater."
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -702,43 +706,43 @@ msgstr "Rasjon"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Ressursindikator kull lite"
 
 #: ../../tribes/empire/conf:41
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Ressursindikator kull mye"
 
 #: ../../tribes/empire/conf:42
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Ressursindikator gull lite"
 
 #: ../../tribes/empire/conf:43
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Ressursindikator gull mye"
 
 #: ../../tribes/empire/conf:44
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Ressursindikator granitt lite"
 
 #: ../../tribes/empire/conf:45
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Ressursindikator granitt mye"
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Ressursindikator jern lite"
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Ressursindikator jern mye"
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Ressursindikator ingen ressurs"
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Ressursindikator vann"
 
 #: ../../tribes/empire/conf:88
 msgid "Saw"
@@ -772,7 +776,7 @@ msgstr "Vaktpost"
 
 #: ../../tribes/empire/conf:182
 msgid "Sheepfarm"
-msgstr ""
+msgstr "Sauefarm"
 
 #: ../../tribes/empire/conf:126
 msgid "Shepherd"
@@ -794,11 +798,11 @@ msgstr "Lite tårn"
 
 #: ../../tribes/empire/smelting_works/conf:23
 msgid "Smelt gold"
-msgstr ""
+msgstr "Smelt gull"
 
 #: ../../tribes/empire/smelting_works/conf:22
 msgid "Smelt iron"
-msgstr ""
+msgstr "Smelt jern"
 
 #: ../../tribes/empire/conf:127
 msgid "Smelter"
@@ -850,7 +854,7 @@ msgstr "Kro"
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "Jegeren bringer godt kjøtt til kolonistene."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
@@ -868,19 +872,23 @@ msgstr "Øksen er tømmerhuggerens verktøy. Den er laget av verktøysmeden."
 
 #: ../../tribes/empire/bread/conf:1
 msgid "The bakers of the Empire make really tasty bread."
-msgstr ""
+msgstr "Imperiets bakere lager virkelig godt brød."
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "They are produced by the toolsmith."
 msgstr ""
+"Ildtangen blir brukt av smelteren, som jobber i smelteverket. De blir "
+"produsert av verktøysmeden."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
 "The fires of the Empire are usually fed with wood, but sometimes, wood just "
 "does not burn hot enough. Then, coal is used."
 msgstr ""
+"Imperiet bruker som oftest tre som brensel, men noen ganger gir ikke tre nok "
+"varme. Da bruker man kull."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -903,44 +911,47 @@ msgstr ""
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid "The strongest armour existing for the Empire soldiers."
-msgstr ""
+msgstr "Den mest solide rustningen Imperiets soldater har."
 
 #: ../../tribes/empire/grape/conf:1
 msgid "These grapes are the basic for tasty wine."
-msgstr ""
+msgstr "Druer er grunnlaget for vinproduksjon."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the winegrower, for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Kurven blir brukt av vindyrkeren, for å høste inn druene. De blir laget av "
+"verktøysmeden."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid "This is a good warrior lance, with a steel-top and a little blade."
-msgstr ""
+msgstr "En god lanse i strid, med ståltupp og et lite blad."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid "This is a medium armour for Empire soldiers."
-msgstr ""
+msgstr "Dette er en middels solid rustning for Imperiets soldater."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
 "This is a wooden lance, which is the basic of the Empires military system."
-msgstr ""
+msgstr "Dette er en trelanse, som danner grunnlaget for Imperiets militær."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
-msgstr ""
+msgstr "En avansert lanse, med stålspiss."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
 "This is the best and sharpest weapon, the Empire weaponsmith creates for "
 "their warriors."
 msgstr ""
+"Det beste og skarpeste våpnet de Imperiske våpensmedene smir til soldatene."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
-msgstr ""
+msgstr "Dette er kulturen til det romerske Imperiet."
 
 #: ../../tribes/empire/ironore/conf:1
 msgid "This is the red iron ore."
@@ -955,6 +966,8 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced by the "
 "toolsmith."
 msgstr ""
+"Hakken blir brukt av steinhuggere og gruvearbeidere. De blir produsert av "
+"verktøysmeden."
 
 #: ../../tribes/empire/saw/conf:1
 msgid ""
@@ -967,16 +980,20 @@ msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters."
 msgstr ""
+"Dette spydet er lett nok til å kastes, men tungt nok til å kunne drepe "
+"ethvert dyr i et kast. Det brukes kun av jegerne."
 
 #: ../../tribes/empire/wine/conf:1
 msgid ""
 "This wine gives enough power, to mine marble or gold. And furthermore, our "
 "soldiers like it, too."
 msgstr ""
+"Denne vinen gir nok styrke til gruvearbeiderne til å hugge ut marmor eller "
+"gull. Soldatene liker den også."
 
 #: ../../tribes/empire/lance/conf:1
 msgid "This wooden lance has an iron spike."
-msgstr ""
+msgstr "Denne trelansen har en jernspiss."
 
 #: ../../tribes/empire/conf:129
 msgid "Toolsmith"
@@ -1157,7 +1174,7 @@ msgstr "Vingård"
 
 #: ../../tribes/empire/conf:93
 msgid "War-Lance"
-msgstr ""
+msgstr "Krigslanse"
 
 #: ../../tribes/empire/conf:158
 msgid "Warehouse"
@@ -1172,6 +1189,8 @@ msgid ""
 "Water is the most essential essence for life! This water is used in many "
 "places, be it to make bread or beer."
 msgstr ""
+"Vann er den viktigste forutsetningen for liv! Vann blir brukt mange steder, "
+"som til å lage brød eller øl."
 
 #: ../../tribes/empire/conf:186
 msgid "Weapon Smithy"
@@ -1187,7 +1206,7 @@ msgstr "Våpensmed"
 
 #: ../../tribes/empire/conf:132
 msgid "Weaver"
-msgstr ""
+msgstr "Vever"
 
 #: ../../tribes/empire/conf:183
 msgid "Weaving Mill"
@@ -1206,6 +1225,8 @@ msgid ""
 "Wheat is essential for surviving. Delicious bread and ales can be made of "
 "this wheat."
 msgstr ""
+"Hvete er essensielt for å kunne overleve. Etter innhøstningen kan hveten "
+"brukes til å lage deilig brød eller brygge øl."
 
 #: ../../tribes/empire/conf:96
 msgid "Wine"
@@ -1217,7 +1238,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:97
 msgid "Wood"
-msgstr ""
+msgstr "Planker"
 
 #: ../../tribes/empire/conf:98
 msgid "Wood Lance"
@@ -1266,7 +1287,7 @@ msgstr ""
 #: ../../tribes/empire/well/conf:16
 #: ../../tribes/empire/winery/conf:20
 msgid "Work"
-msgstr ""
+msgstr "Arbeid"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
