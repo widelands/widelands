@@ -149,6 +149,7 @@ public:
 	}
 
 	virtual std::string get_statistics_string();
+	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	char const * result_string() const {return m_result_buffer;}
 
