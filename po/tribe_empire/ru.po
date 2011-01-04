@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-06 09:39+0000\n"
-"Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
+"PO-Revision-Date: 2010-11-22 15:33+0000\n"
+"Last-Translator: Massol <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-07 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:19+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -552,7 +552,7 @@ msgstr ""
 msgid "Miner"
 msgstr "Шахтёр"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:115
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
 msgstr "Недостаточно места"
 
@@ -671,6 +671,10 @@ msgstr "сделать косу"
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce shovel"
 msgstr "сделать лопату"
+
+#: ../../tribes/empire/weaponsmithy/conf:33
+msgid "Produce war lance"
+msgstr "Производите военные копья"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
@@ -824,15 +828,15 @@ msgstr "Выплавляет железо."
 msgid "Soldier"
 msgstr "Солдат"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:116
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
 msgid ""
 "Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting\n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
-"Некоторые из Ваших начальных строений не были установлены, так как для них\n"
-"недостаточно места. Это ставит Вас в невыгодное положение. Рассмотрите\n"
-"возможность перезапуска карты, чтобы обеспечить равные начальные условия."
+"Для некторых Ваших стартовых зданий не хватило места и  \n"
+"они не были построены. Вы в невыгодном положении; начните  \n"
+"эту карту заново."
 
 #: ../../tribes/empire/conf:128
 msgid "Stonemason"
@@ -1289,7 +1293,7 @@ msgstr ""
 #: ../../tribes/empire/oremine/conf:22
 #: ../../tribes/empire/piggery/conf:21
 #: ../../tribes/empire/quarry/conf:21
-#: ../../tribes/empire/sawmill/conf:20
+#: ../../tribes/empire/sawmill/conf:23
 #: ../../tribes/empire/scouts_house/conf:17
 #: ../../tribes/empire/sheepfarm/conf:21
 #: ../../tribes/empire/smelting_works/conf:24
@@ -1363,3 +1367,12 @@ msgstr ""
 
 #~ msgid "Cuts raw pieces of granit and marble out of laying stones."
 #~ msgstr "Вырезает гратнитные и мраморные заготовки из камней."
+
+#~ msgid ""
+#~ "Some of your starting buildings didn't have enough room and \n"
+#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Некоторые из Ваших начальных строений не были установлены, так как для них\n"
+#~ "недостаточно места. Это ставит Вас в невыгодное положение. Рассмотрите\n"
+#~ "возможность перезапуска карты, чтобы обеспечить равные начальные условия."

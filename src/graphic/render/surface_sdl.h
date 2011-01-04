@@ -23,7 +23,7 @@
 #include "rgbcolor.h"
 #include "rect.h"
 
-#include "graphic/surface.h"
+#include "graphic/offscreensurface.h"
 
 /**
 * This implements SDL rendering. Do not use this class directly. The right
@@ -32,16 +32,23 @@
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.
 */
-struct SurfaceSDL : public Surface {
+struct SurfaceSDL : IOffscreenSurface {
 	SurfaceSDL(SDL_Surface & surface) :
-		Surface(surface.w, surface.h, SURFACE_OFFSCREEN),
-		m_surface(&surface)
+		m_surface(&surface),
+		m_offsx(0), m_offsy(0),
+		m_w(surface.w), m_h(surface.h),
+		m_isscreen(false)
 	{}
 	SurfaceSDL():
-		Surface(),
-		m_surface(0)
+		m_surface(0),
+		m_offsx(0), m_offsy(0),
+		m_w(0), m_h(0),
+		m_isscreen(false)
 	{}
 	~SurfaceSDL();
+
+	virtual uint32_t get_w() {return m_w;}
+	virtual uint32_t get_h() {return m_h;}
 
 	/// Set surface, only call once
 	void set_sdl_surface(SDL_Surface & surface);
@@ -53,21 +60,13 @@ struct SurfaceSDL : public Surface {
 	/// Save a bitmap of this to a file
 	void save_bmp(const char & fname) const;
 
-/*
-	// For the bravest: Direct Pixel access. Use carefully
-	/// Needed if you want to blit directly to the screen by memcpy
-	void force_disable_alpha();
-	const SDL_PixelFormat * get_format() const;
-	uint16_t get_pitch() const {return m_surface->pitch;}
-*/
-
 	SDL_PixelFormat const & format() const;
 	uint8_t * get_pixels() const;
 	uint16_t get_pitch() const {return m_surface->pitch;}
 
 	/// Lock
-	void lock();
-	void unlock();
+	void lock(LockMode);
+	void unlock(UnlockMode);
 
 	/// For the slowest: Indirect pixel access
 	uint32_t get_pixel(uint32_t x, uint32_t y);
@@ -83,17 +82,27 @@ struct SurfaceSDL : public Surface {
 		 int32_t x2, int32_t y2,
 		 RGBColor, Rect const * clip = 0);
 
-	void blit(Point, Surface *, Rect srcrc, bool enable_alpha = true);
-	void fast_blit(Surface *);
+	void blit(Point, PictureID, Rect srcrc, Composite cm);
+	void fast_blit(PictureID);
 
 	void set_subwin(Rect r);
 	void unset_subwin();
+
+	void set_isscreen(bool screen);
+
+	bool valid() {return m_surface;}
+
+	virtual IPixelAccess & pixelaccess() {return *this;}
 
 private:
 	SurfaceSDL & operator= (SurfaceSDL const &);
 	explicit SurfaceSDL    (SurfaceSDL const &);
 
 	SDL_Surface * m_surface;
+	int32_t m_offsx;
+	int32_t m_offsy;
+	uint32_t m_w, m_h;
+	bool m_isscreen;
 };
 
 #endif

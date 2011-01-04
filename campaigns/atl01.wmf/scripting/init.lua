@@ -297,7 +297,7 @@ function check_for_ships()
 
    -- Success
    msg_boxes(scenario_won)
-   p1:reveal_scenario("atlanteans01.wmf")
+   p1:reveal_scenario("atlanteans01")
 
 end
 

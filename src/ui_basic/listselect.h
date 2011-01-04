@@ -147,9 +147,6 @@ private:
 
 	std::string m_fontname;
 	uint32_t    m_fontsize;
-
-	bool        m_needredraw;
-	PictureID   m_cache_pic;
 };
 
 template<typename Entry>

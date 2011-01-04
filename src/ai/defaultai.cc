@@ -755,12 +755,12 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		if
 			(spots_avail.at(BUILDCAPS_BIG)
 			 <
-			 static_cast<uint16_t>(2 + (productionsites.size() / 30)))
-			++expand_factor;
+			 static_cast<uint16_t>(2 + (productionsites.size() / 50)))
+			expand_factor += 2;
 		if
 			(spots_avail.at(BUILDCAPS_MEDIUM) + spots_avail.at(BUILDCAPS_BIG)
 			 <
-			 static_cast<uint16_t>(4 + (productionsites.size() / 30)))
+			 static_cast<uint16_t>(4 + (productionsites.size() / 50)))
 			expand_factor += type;
 
 		uint32_t spots = spots_avail.at(BUILDCAPS_SMALL);
@@ -768,24 +768,33 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		spots += spots_avail.at(BUILDCAPS_BIG);
 		if (type == AGGRESSIVE)
 			spots -= militarysites.size() / 20;
-		if (spots < 8)
+		if (spots < 16)
 			expand_factor *= 2;
-		if ((type == AGGRESSIVE) && spots < 16)
+		if ((type == AGGRESSIVE) && spots < 32)
 			expand_factor *= 2;
 	} else {
 		// check space and set the need for expansion
-		if (spots_avail.at(BUILDCAPS_BIG) < 2)
+		if (spots_avail.at(BUILDCAPS_BIG) < 7)
 			++expand_factor;
-		if (spots_avail.at(BUILDCAPS_MEDIUM) + spots_avail.at(BUILDCAPS_BIG) < 4)
+		if (spots_avail.at(BUILDCAPS_MEDIUM) + spots_avail.at(BUILDCAPS_BIG) < 12)
 			++expand_factor;
 		if
 			(spots_avail.at(BUILDCAPS_SMALL)  +
 			 spots_avail.at(BUILDCAPS_MEDIUM) +
 			 spots_avail.at(BUILDCAPS_BIG)
 			 <
-			 8)
-			expand_factor *= 2;
+			 16)
+			expand_factor *= 3;
 	}
+
+	// don't expand when we have unoccupied military buildings
+	//if(TODO) expand_factor = 0;
+
+	// Defensive AIs also attack sometimes (when they want to expand)
+	if (type == DEFENSIVE && expand_factor > 1)
+		if (next_attack_consideration_due <= game().get_gametime())
+			consider_attack(game().get_gametime());
+
 
 	Building_Index proposed_building;
 	int32_t proposed_priority = 0;
@@ -856,8 +865,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Priority of woodcutters depend on the number of near trees
 					prio += bf->trees_nearby * 3;
 					prio /= 3 * (1 + bf->producers_nearby.at(bo.outputs.at(0)));
-					if (prio <= 0)
-						continue;
+
+					// TODO improve this - it's still useless to place lumberjack huts randomly
+					/*if (prio <= 0) -- no, sometimes we need wood without having a forest
+						continue;*/
 
 					// Check if the produced wares are needed
 					Ware_Index wt(static_cast<size_t>(bo.outputs.at(0)));
@@ -896,25 +907,26 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					inout -= wares.at(bo.production_hint).producers;
 					if (inout < 1)
 						inout = 1;
+					// the ware they're refreshing
 					Ware_Index wt(static_cast<size_t>(bo.production_hint));
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						// Don't check if the economy has no warehouse.
 						if ((*l.current)->economy.warehouses().empty())
 							continue;
 						if ((*l.current)->economy.needs_ware(wt)) {
-							prio += wares.at(bo.production_hint).preciousness * inout;
+							prio += wares.at(bo.production_hint).preciousness * inout * 2;
 							break;
 						}
 					}
 
 					// Do not build too many of these buildings, but still care
-					// to build at least one.
+					// to build at least two.
 					// And add bonus near buildings outputting production_hint ware.
 					prio += (5 * bf->producers_nearby.at(bo.production_hint)) / 2;
 					prio -= bo.total_count() * 2;
 					prio /= bo.total_count() + 1;
 					prio += (bf->producers_nearby.at(bo.production_hint) - 1) * 5;
-					if (bo.total_count() > 1)
+					if (bo.total_count() > 2)
 						prio -= bo.total_count();
 					else {
 						prio += wares.at(bo.production_hint).preciousness;
@@ -935,6 +947,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// take care about borders and enemies
 					prio = recalc_with_border_range(*bf, prio);
 				} else { // "normal" productionsites
+
+					// ToDo: prefer soldier producing things
+					// Ware_Index const soldier_index = tribe().worker_index("soldier");
+
 					if (bo.is_basic && (bo.total_count() == 0))
 						prio += 100; // for very important buildings
 
@@ -945,11 +961,37 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 							continue;
 						for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
 							Ware_Index wt(static_cast<size_t>(bo.outputs.at(m)));
+
+							// if we have too much of it (avoids mass storage)
+							if((*l.current)->economy.stock_ware(wt) > 6 *
+								((*l.current)->economy.ware_target_quantity(wt).permanent))
+								prio -= 20;
+
+							// if the economy needs this ware
 							if ((*l.current)->economy.needs_ware(wt)) {
 								prio += 1 + wares.at(bo.outputs.at(m)).preciousness;
 								if (bo.total_count() == 0)
 									// big bonus, this site might be elemental
 									prio += 3 * wares.at(bo.outputs.at(m)).preciousness;
+							}
+
+							// we can enhance this building. build more
+							// maybe the enhancement can produce needed ware
+							if(bo.desc->enhancements().size() > 0) {
+								// this code builds more metalworks
+								if(bo.total_count() == 0) prio += 2;
+								if(bo.total_count() == 1) prio += 8;
+							}
+						}
+						for (uint32_t m = 0; m < bo.inputs.size(); ++m) {
+							Ware_Index wt(static_cast<size_t>(bo.inputs.at(m)));
+
+							// if the economies don't need it: "waste" it
+							if (!(*l.current)->economy.needs_ware(wt)) {
+								prio += 1 + wares.at(bo.inputs.at(m)).preciousness;
+								if (bo.total_count() == 0)
+									// big bonus, this site might be elemental
+									prio += 3 * wares.at(bo.inputs.at(m)).preciousness;
 							}
 						}
 					}
@@ -998,13 +1040,13 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				prio -= militarysites.size() - productionsites.size() / (3 - type);
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
-				//  Build one warehouse for ~every 25 productionsites and mines.
+				//  Build one warehouse for ~every 35 productionsites and mines.
 				//  Militarysites are slightly important as well, to have a bigger
 				//  chance for a warehouses (containing waiting soldiers or wares
 				//  needed for soldier training) near the frontier.
 				prio += productionsites.size() + mines.size();
 				prio += militarysites.size() / 3;
-				prio -= (bo.cnt_under_construction + numof_warehouses) * 25;
+				prio -= (bo.cnt_under_construction + numof_warehouses) * 35;
 				prio *= 2;
 
 				// take care about borders and enemies
@@ -1081,15 +1123,18 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		if (bo.unoccupied)
 			continue;
 
-		// Only have one mine of a type under construction
-		if (bo.cnt_under_construction > 0)
+
+		// Only have 2 mines of a type under construction
+		if (bo.cnt_under_construction > 2)
 			continue;
 
 		if (onlymissing)
+			// Do not build mines twice, as long as other buildings might be more needed
 			if (bo.total_count() > 0)
 				continue;
 
 
+		/* - uninteresting if a mine ware is needed - we exploit the raw material
 		// Check if the produced wares are needed
 		bool needed = false;
 		container_iterate(std::list<EconomyObserver *>, economies, l) {
@@ -1110,6 +1155,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		// Only try to build mines that produce needed wares.
 		if (!needed)
 			continue;
+		*/
 
 		for
 			(std::list<MineableField *>::iterator j = mineable_fields.begin();
@@ -1137,33 +1183,34 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 			// Check if current economy can supply enough food for production.
 			for (uint32_t k = 0; k < bo.inputs.size(); ++k) {
-				prio += 2 * wares.at(bo.inputs.at(k)).producers;
-				prio -= wares.at(bo.inputs.at(k)).consumers;
+				prio += wares.at(bo.inputs.at(k)).producers;
+				prio -= wares.at(bo.inputs.at(k)).consumers / 2;
 			}
 
+			// our wares are needed? gimme more
 			uint32_t ioprio = 0;
 			for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
-				ioprio += wares.at(bo.outputs.at(m)).preciousness;
+				ioprio += 5 * wares.at(bo.outputs.at(m)).preciousness;
 			}
 
 			// tribes that have enhanceable mines should build more mines
-			prio *= 100 / bo.mines_percent;
+			prio *= 1 + 100 / bo.mines_percent;
 
 			// No plus for mines with multiple output
 			ioprio /= bo.outputs.size();
 			prio += ioprio;
 
-			prio -= (*j)->mines_nearby * (*j)->mines_nearby;
-			prio /= 1 + bo.cnt_built * 2;
+			prio -= 3 * (*j)->mines_nearby * (*j)->mines_nearby;
+			//prio /= 1 + bo.cnt_built * 2;
 
 			// multiply with current statistics of all other buildings of this
 			// type to avoid constructing buildings where already some are running
 			// on low resources.
-			prio *= bo.current_stats;
+			prio *= 5 + bo.current_stats;
 			prio /= 100;
 
 			if (onlymissing) // mines aren't *that* important
-				prio /= 4;
+				prio /= 3;
 			if (prio > proposed_priority) {
 
 				proposed_building = bo.id;
@@ -1644,14 +1691,8 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 			if (en_bo.cnt_under_construction > 0)
 				continue;
 
-			// ... but we possibly need the trained workers of this buildings
-			// instead we should check, whether this building or economy has
-			// enough workers for the enhanced building
-			//
-			// Don't enhance this building, if there is already
-			// one or more of the same type that is unoccupied at the moment
-			//if (en_bo.unoccupied)
-				//continue;
+			// don't upgrade without workers
+			if(!site.site->has_workers(*x.current, game())) continue;
 
 			int32_t prio = 0; // priority for enhancement
 
@@ -1693,7 +1734,8 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 	}
 
 	// Enhance if enhanced building is useful
-	if (maxprio > 0) {
+	// additional: we dont want to lose the old building
+	if (maxprio > 0 && site.bo->total_count() > 1) {
 		game().send_player_enhance_building(*site.site, enbld);
 		changed = true;
 	}
@@ -1714,7 +1756,7 @@ bool DefaultAI::check_mines(int32_t const gametime)
 {
 	if ((next_mine_check_due > gametime) || mines.empty())
 		return false;
-	next_mine_check_due = gametime + 5200;
+	next_mine_check_due = gametime + 1000;
 
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver & site = mines.front();
@@ -1736,8 +1778,7 @@ bool DefaultAI::check_mines(int32_t const gametime)
 		return true;
 	}
 
-	// Check whether building is enhanceable and if wares of the enhanced
-	// buildings are needed. If yes consider an upgrade.
+	// Check whether building is enhanceable. If yes consider an upgrade.
 	std::set<Building_Index> enhancements = site.site->enhancements();
 	int32_t maxprio = 0;
 	Building_Index enbld;
@@ -1747,20 +1788,6 @@ bool DefaultAI::check_mines(int32_t const gametime)
 		if (player->is_building_type_allowed(*x.current)) {
 			Building_Descr const & bld = *tribe->get_building_descr(*x.current);
 			BuildingObserver & en_bo = get_building_observer(bld.name().c_str());
-
-			// Don't enhance this building, if there is already one of same type
-			// under construction
-			if (en_bo.cnt_under_construction > 0)
-				continue;
-
-			// ... but we possibly need the trained workers of this buildings
-			// instead we should check, whether this building or economy has
-			// enough workers for the enhanced building
-			//
-			// Don't enhance this building, if there is already
-			// one or more of the same type that is unoccupied at the moment
-			//if (en_bo.unoccupied)
-				//continue;
 
 			// Check if mine needs an enhancement to mine more resources
 			uint8_t const until =
@@ -1931,7 +1958,7 @@ int32_t DefaultAI::recalc_with_border_range
 	//  NOTE aggressive a computer player is, the more important is
 	//  NOTE this check. So we add \var type as bonus.
 	if (bf.enemy_nearby)
-		prio /= (2 + type);
+		prio /= (3 + type);
 
 	return prio;
 }

@@ -19,7 +19,7 @@
 
 #include "icon.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface.h"
+#include "graphic/picture.h"
 
 namespace UI {
 
@@ -44,8 +44,8 @@ void Icon::setIcon(PictureID picture_id) {
 
 void Icon::draw(RenderTarget & dst) {
 	assert(m_pic != g_gr->get_no_picture());
-	int32_t w = (m_w - m_pic->surface->get_w()) / 2;
-	int32_t h = (m_h - m_pic->surface->get_h()) / 2;
+	int32_t w = (m_w - m_pic->get_w()) / 2;
+	int32_t h = (m_h - m_pic->get_h()) / 2;
 	dst.blit(Point(w, h), m_pic);
 }
 

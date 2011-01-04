@@ -76,13 +76,6 @@ ChatDisplay::ChatDisplay
 {}
 ChatDisplay::~ChatDisplay()
 {
-	delete_all_left_message_pictures();
-}
-
-void ChatDisplay::delete_all_left_message_pictures() {
-	container_iterate_const(std::vector<PictureID>, m_cache_id, i)
-		if (*i.current != g_gr->get_no_picture())
-			UI::g_fh->delete_widget_cache(*i.current);
 }
 
 void ChatDisplay::setChatProvider(ChatProvider & chat)
@@ -102,7 +95,6 @@ void ChatDisplay::draw(RenderTarget & dst)
 
 	// delete pictures of all old messages that we won't use again
 	// this is important to save space
-	delete_all_left_message_pictures();
 	m_cache_id.resize(0);
 
 	int32_t const now = time(0);
@@ -137,7 +129,7 @@ void ChatDisplay::draw(RenderTarget & dst)
 			 Point(0, get_inner_h() -60 -y),
 			 "<rt>" + i.current->text + "</rt>",
 			 get_w(),
-			 m_cache_mode, picid, transparent_chat);
+			 m_cache_mode, &picid, transparent_chat);
 		y += i.current->h;
 		m_cache_id.push_back(picid);
 	}

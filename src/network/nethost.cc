@@ -1072,6 +1072,10 @@ void NetHost::setMap
 
 	SendPacket s;
 
+	// Care about the host
+	if (static_cast<int32_t>(maxplayers) <= d->settings.playernum)
+		setPlayerNumber(UserSettings::none());
+
 	while (oldplayers > maxplayers) {
 		--oldplayers;
 		for (uint16_t i = 1; i < d->settings.users.size(); ++i)

@@ -206,7 +206,8 @@ private:
 		View_Button(WatchWindow & parent, uint8_t const index) :
 			UI::Button
 				(&parent, "view",
-				 74 + (17 * index), 200 - 34, 17, 34, g_gr->get_no_picture(),
+				 74 + (17 * index), 200 - 34, 17, 34,
+				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 "-", std::string(),
 				 false),
 			m_index   (index)

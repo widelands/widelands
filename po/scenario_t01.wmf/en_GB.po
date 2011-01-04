@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 20:48+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
+"PO-Revision-Date: 2010-11-29 10:51+0000\n"
+"Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
@@ -348,6 +348,10 @@ msgstr ""
 "* Press SPACE to see where you can build.<br> The red house symbols show you "
 "where a small building - like a lumberjack's hut - may be built.<br>"
 
+#: ../../campaigns/t01.wmf/elemental:7
+msgid "01 - Eyes in the Dark"
+msgstr "01 — Eyes in the Dark"
+
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
 msgstr "An old man says..."
@@ -372,19 +376,17 @@ msgstr "Build another lumberjack's hut"
 msgid "Build two quarries"
 msgstr "Build two quarries"
 
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
-"gameplay and control as well as basic production buildings (wood, stone, "
-"etc.) will be introduced."
-msgstr ""
-"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
-"gameplay and control as well as basic production buildings (wood, stone, "
-"etc.) will be introduced."
-
 #: ../../campaigns/t01.wmf/scripting/texts.lua:101
 msgid "In the night"
 msgstr "In the night"
+
+#: ../../campaigns/t01.wmf/elemental:9
+msgid ""
+"In this tutorial the basic gameplay and control as well as basic production "
+"buildings of the Barbarians are introduced."
+msgstr ""
+"In this tutorial, basic gameplay and control, as well as the basic "
+"production buildings of the Barbarians, are introduced."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
@@ -456,10 +458,6 @@ msgstr "Thron sighs..."
 msgid "Thron speaks..."
 msgstr "Thron speaks..."
 
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Tutorial1 - Eyes in the Dark"
-
 #~ msgid ""
 #~ " \"As father told me, there will be times to fight and times to lie and "
 #~ "wait, trying not to sleep or die before the right time comes. And so I do... "
@@ -481,6 +479,18 @@ msgstr "Tutorial1 - Eyes in the Dark"
 #~ "loyal companion and friend is a source of peace and comfort to me in these "
 #~ "dark times. He keeps my spirits high and those of my warriors awake, not to "
 #~ "let greed or despair destroy our bonds as well.\" "
+
+#~ msgid ""
+#~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
+#~ "gameplay and control as well as basic production buildings (wood, stone, "
+#~ "etc.) will be introduced."
+#~ msgstr ""
+#~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
+#~ "gameplay and control as well as basic production buildings (wood, stone, "
+#~ "etc.) will be introduced."
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Tutorial1 - Eyes in the Dark"
 
 #~ msgid "OK"
 #~ msgstr "OK"

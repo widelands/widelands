@@ -93,7 +93,6 @@ Window::Window
 		m_center_panel(0),
 		m_fastclick_panel(0)
 {
-
 	if (title)
 		set_title(title);
 
@@ -249,8 +248,21 @@ void Window::center_to_parent()
 
 
 /**
- * Redraw the window frame and background
-*/
+ * Redraw the window background.
+ */
+void Window::draw(RenderTarget & dst)
+{
+	if (!is_minimal()) {
+		dst.tile
+			(Rect(Point(0, 0), get_inner_w(), get_inner_h()),
+			 m_pic_background, Point(0, 0));
+	}
+}
+
+
+/**
+ * Redraw the window frame
+ */
 void Window::draw_border(RenderTarget & dst)
 {
 	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
@@ -339,14 +351,6 @@ void Window::draw_border(RenderTarget & dst)
 				 	 VT_B_PIXMAP_THICKNESS, height));
 		}
 
-
-		dst.tile //  background
-			(Rect
-			 	(Point
-			 	 	(_docked_left ? 0 : VT_B_PIXMAP_THICKNESS,
-			 	 	 TP_B_PIXMAP_THICKNESS),
-			 	 get_inner_w(), get_inner_h()),
-			 m_pic_background, Point(0, 0));
 
 		if (not _docked_right) {
 			const int32_t right_border_x = get_w() - VT_B_PIXMAP_THICKNESS;

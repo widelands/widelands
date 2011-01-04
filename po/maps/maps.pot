@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2010 Widelands Development Team
+# Copyright (C) 2005-2011 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-18 10:39+0000\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -19,7 +19,7 @@ msgid ""
 "01 - Eyes in the Dark"
 msgstr ""
 
-#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:98
 msgid ""
 "01 - From Nemesis to Genesis"
 msgstr ""
@@ -99,6 +99,11 @@ msgid ""
 "Barbarians - The second Empire"
 msgstr ""
 
+#: ../../campaigns/cconfig:44
+msgid ""
+"Challenging. Introduces the Atlanteans"
+msgstr ""
+
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid ""
 "Checkmate"
@@ -112,6 +117,11 @@ msgstr ""
 #: ../../maps/Crater.wmf/elemental:7
 msgid ""
 "Crater"
+msgstr ""
+
+#: ../../maps/Desert Tournament.wmf/elemental:7
+msgid ""
+"Desert Tournament"
 msgstr ""
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
@@ -177,6 +187,11 @@ msgstr ""
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid ""
 "Four Mountains"
+msgstr ""
+
+#: ../../maps/Desert Tournament.wmf/elemental:9
+msgid ""
+"Four tribes struggle with their nearest neighbour to be the first to reach the mountain of gold that primises riches beyond belief. But can the two remaining ones share the resources wisely?"
 msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
@@ -262,6 +277,12 @@ msgstr ""
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid ""
 "Mystical Maze"
+msgstr ""
+
+#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:103
+msgid ""
+"Not yet implemented"
 msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9

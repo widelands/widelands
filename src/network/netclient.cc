@@ -626,7 +626,11 @@ void NetClient::handle_packet(RecvPacket & packet)
 		file->filename = path;
 		file->md5sum = md5;
 
+#ifdef WIN32
+		path.resize(path.rfind('\\', path.size() - 2));
+#else
 		path.resize(path.rfind('/', path.size() - 2));
+#endif
 
 		g_fs->EnsureDirectoryExists(path);
 		break;

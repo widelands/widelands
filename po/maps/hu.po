@@ -6,22 +6,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
 "PO-Revision-Date: 2010-08-30 23:34+0000\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:15+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../campaigns/cconfig:24
-msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Oktató) Barbárok - A második birodalom"
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr ""
 
-#: ../../campaigns/cconfig:84
-msgid "01 - From nemesis to genesis"
+#: ../../campaigns/cconfig:91
+msgid "01 - From Nemesis to Genesis"
+msgstr ""
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr ""
+
+#: ../../campaigns/cconfig:69
+msgid "02 - A Place to call Home"
+msgstr ""
+
+#: ../../campaigns/cconfig:86
+msgid "02 - An Outpost for Exile"
+msgstr ""
+
+#: ../../campaigns/cconfig:74
+msgid "03 - This Land is our Land"
 msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
@@ -87,13 +103,17 @@ msgstr ""
 "kicseit a Szent oltárnál, és azon a helyen épít egy ragyogó palotát, ezzel "
 "elnyerve az Istenek támogatását és tiszteletét."
 
-#: ../../campaigns/cconfig:36
-msgid "Atlanteans - the new rise"
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans - The Run for the Fire"
 msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
 msgstr "Atoll"
+
+#: ../../campaigns/cconfig:27
+msgid "Barbarians - The second Empire"
+msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -107,6 +127,10 @@ msgstr "Üstökös sziget"
 msgid "Crater"
 msgstr "Kráter"
 
+#: ../../maps/Desert Tournament.wmf/elemental:7
+msgid "Desert Tournament"
+msgstr ""
+
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
 msgstr "Kiszáradt folyómeder"
@@ -119,21 +143,21 @@ msgid ""
 "Each mountain contains only one resource."
 msgstr ""
 
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr ""
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr ""
+
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Elf erdők"
 
-#: ../../campaigns/cconfig:30
-msgid "Empire - The months of exile"
-msgstr "Birodalom - A száműzöttség hónapjai"
-
-#: ../../campaigns/cconfig:74
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Birodalom oktató kampánya - Malac' Mor partjai"
-
-#: ../../campaigns/cconfig:79
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Birodalom oktató 2 - Száműzetés egy távoli előőrsre"
+#: ../../campaigns/cconfig:34
+msgid "Empire - The Months of Exile"
+msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -171,6 +195,13 @@ msgstr "Négy kastély"
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
 msgstr "A négy hegység"
+
+#: ../../maps/Desert Tournament.wmf/elemental:9
+msgid ""
+"Four tribes struggle with their nearest neighbour to be the first to reach "
+"the mountain of gold that primises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -214,6 +245,12 @@ msgstr ""
 "Azt mondják, hogy még a napnak és a holdnak is meg kell találniuk az útjukat "
 "e hegyek között. SEGÍTSÉG: kiálló kövek jelölik az ércben gazdag földeket. "
 "Máshová ne is küldj geológust."
+
+#: ../../maps/Swamp Monks.wmf/elemental:9
+msgid ""
+"It is said, that the old war monks, living in the even older swamps are the "
+"key to the control of the whole island."
+msgstr ""
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -292,7 +329,7 @@ msgstr "Randevú"
 msgid "Riverlands"
 msgstr "Folyamvidék"
 
-#: ../../campaigns/cconfig:33
+#: ../../campaigns/cconfig:38
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -305,10 +342,6 @@ msgid ""
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
 msgstr ""
-
-#: ../../campaigns/cconfig:39
-msgid "Some descriptive texts..."
-msgstr "Valami szép leírás..."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -328,6 +361,10 @@ msgstr ""
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
 msgstr "Mocsár sziget"
+
+#: ../../maps/Swamp Monks.wmf/elemental:7
+msgid "Swamp Monks"
+msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -417,18 +454,6 @@ msgstr ""
 msgid "Three Warriors"
 msgstr "A három harcos"
 
-#: ../../campaigns/cconfig:57
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Oktató 1 - Szemek a sötétben"
-
-#: ../../campaigns/cconfig:62
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Oktató 2 - A hely amit otthonnak hívunk"
-
-#: ../../campaigns/cconfig:67
-msgid "Tutorial3 - This land is our land"
-msgstr "Oktató 3 - Ez a föld a mi földünk"
-
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Táncoló hullámok"
@@ -454,7 +479,7 @@ msgstr ""
 "Jól védett mitikus erdeikben, a négy hatalom-éhes hadúr e földek teljes "
 "bekebelezését tervezgeti..."
 
-#: ../../campaigns/cconfig:27
+#: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -481,6 +506,15 @@ msgstr ""
 "vak háborút indítottak Thron és katonái ellen akiket hátrahagyott, hogy "
 "megvédjék Al'thunran határát, a fiatal hadúr igyekezett maga mellé állítani "
 "nagyravágyó testvéreit, hogy a törzseket újra egy zászló alatt egyetsíthesse."
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -535,6 +569,15 @@ msgstr ""
 "mitikus kincset rejt a közepén - A Zöld Fennsíkot, amit nehéz meghódítani, "
 "de könnyű elveszíteni. Ha meg akarod szerezni figyelj oda a többi klánra."
 
+#~ msgid "(Tutorial) Barbarians - The second Empire"
+#~ msgstr "(Oktató) Barbárok - A második birodalom"
+
+#~ msgid "Empire - The months of exile"
+#~ msgstr "Birodalom - A száműzöttség hónapjai"
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Oktató 1 - Szemek a sötétben"
+
 #~ msgid ""
 #~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
 #~ "gameplay and control as well as basic production buildings (wood, stone, "
@@ -543,6 +586,15 @@ msgstr ""
 #~ "A Barbár bevezető hadjárat első küldetése. Ebben ab evezetőben megtanulhatod "
 #~ "a játék működését és irányítását, bemutatja az egyszerű termelő épleteket "
 #~ "(fa, kő, stb.)."
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Oktató 2 - A hely amit otthonnak hívunk"
+
+#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
+#~ msgstr "Birodalom oktató kampánya - Malac' Mor partjai"
+
+#~ msgid "Empire Tutorial2 - An outpost for exile"
+#~ msgstr "Birodalom oktató 2 - Száműzetés egy távoli előőrsre"
 
 #~ msgid ""
 #~ "It is a long time ago, since the last rain drop touched these grounds. No "
@@ -579,3 +631,9 @@ msgstr ""
 #~ "Van valami misztikus, borongós atmoszféra itt a három Oázisnál, amit még "
 #~ "senki sem talált meg. Talán te leszel az első, de légy elővigyázatos, mások "
 #~ "is keresik!"
+
+#~ msgid "Some descriptive texts..."
+#~ msgstr "Valami szép leírás..."
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Oktató 3 - Ez a föld a mi földünk"

@@ -23,18 +23,18 @@ playercolor=true
 
 [hacking]
 pics=hacking_??.png
-hotspot=17 15
+hotspot=8 25
 fps=10
 playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=10 20
+hotspot=9 24
 fps=10
 playercolor=true
 
 [walkload]
 dirpics=walkload_!!_??.png
-hotspot=7 21
+hotspot=7 22
 fps=10
 playercolor=true

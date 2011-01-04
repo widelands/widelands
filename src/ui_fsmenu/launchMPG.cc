@@ -32,7 +32,6 @@
 #include "mapselect.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "ui_basic/helpwindow.h"
 #include "ui_basic/window.h"
 #include "warning.h"
 #include "wui/gamechatpanel.h"
@@ -170,6 +169,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 
 	m_map_info(this, m_xres * 37 / 50, m_yres * 2 / 10, m_butw, m_yres * 27 / 80),
 	m_client_info(this, m_xres * 37 / 50, m_yres * 13 / 20, m_butw, m_yres * 5 / 20),
+	m_help(0),
 
 // Variables and objects used in the menu
 	m_settings     (settings),
@@ -216,6 +216,8 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
 	delete m_lua;
 	delete m_mpsg;
+	if (m_help)
+		delete m_help;
 }
 
 
@@ -424,6 +426,17 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			if (settings.scenario)
 				set_scenario_values();
 		}
+	} else {
+		// Write client infos
+		std::string temp =
+			(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
+			?
+			(format(_("Player %i")) % (settings.playernum + 1)).str()
+			:
+			_("Spectator");
+		temp  = (format(_("At the moment you are %s\n\n")) % temp.c_str()).str();
+		temp += _("Click on the \"?\" in the right top corner to get help.");
+		m_client_info.set_text(temp);
 	}
 
 	m_ok.set_enabled(m_settings->canLaunch());
@@ -435,17 +448,6 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 		(m_settings->canChangeMap() && !settings.savegame && !settings.scenario);
 
 	win_condition_update();
-
-	// Write client infos
-	std::string temp =
-		(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
-		?
-		(format("Player %i") % (settings.playernum + 1)).str()
-		:
-		_("Spectator");
-	temp  = (format(_("At the moment you are %s\n\n")) % temp.c_str()).str();
-	temp += "Click on the \"?\" in the right top corner to get help.";
-	m_client_info.set_text(temp);
 
 	// Update the multi player setup group
 	m_mpsg->refresh();
@@ -572,28 +574,31 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 void Fullscreen_Menu_LaunchMPG::load_map_info()
 {
 	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
-	i18n::Textdomain td("maps");
 
 	char const * const name = m_settings->settings().mapfilename.c_str();
 	Widelands::Map_Loader * const ml = map.get_correct_loader(name);
-	if (!ml)
+	if (!ml) {
 		throw warning(_("There was an error!"), _("The map file seems to be invalid!"));
+	}
 
 	map.set_filename(name);
-	ml->preload_map(true);
+	{
+		i18n::Textdomain td("maps");
+		ml->preload_map(true);
+	}
 	delete ml;
-
-	std::string infotext = _("Map informations:\n");
-	infotext += (format(_("* Size: %ux%u\n")) % map.get_width() % map.get_height()).str();
-	infotext += (format(_("* %i Players\n")) % m_nr_players).str();
 
 	// get translated worldsname
 	std::string worldpath((format("worlds/%s") % map.get_world_name()).str());
 	Profile prof ((worldpath + "/conf").c_str(), 0, (format("world_%s") % map.get_world_name()).str());
 	Section & global = prof.get_safe_section("world");
 	std::string world(global.get_safe_string("name"));
-	infotext += (format(_("* World type: %s\n")) % world).str();
 
+	std::string infotext;
+	infotext += _("Map informations:\n");
+	infotext += (format(_("* Size: %ux%u\n")) % map.get_width() % map.get_height()).str();
+	infotext += (format(_("* %i Players\n")) % m_nr_players).str();
+	infotext += (format(_("* World type: %s\n")) % world).str();
 	if (m_settings->settings().scenario)
 		infotext += (format(_("* Scenario mode selected\n"))).str();
 	infotext += "\n";
@@ -605,38 +610,50 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 
 /// Show help
 void Fullscreen_Menu_LaunchMPG::help_clicked() {
-	UI::HelpWindow help(this, _("Multiplayer Game Setup"), m_fs);
-	help.add_paragraph(_("You are in the multi player launch game menu."));
-	help.add_heading(_("Client settings"));
-	help.add_paragraph
+	if (m_help)
+		delete m_help;
+	m_help = new UI::HelpWindow(this, _("Multiplayer Game Setup"), m_fs);
+	m_help->add_paragraph(_("You are in the multi player launch game menu."));
+	m_help->add_heading(_("Client settings"));
+	m_help->add_paragraph
 		(_
-		 ("On the left side is a list of all clients including you. With the "
-		  "button in the rear of your nickname, you can set your role. "
-		  "Available roles are open players, players that are already played by "
-		  "other clients (sharing the kingdom) and spectator mode."));
-	help.add_heading(_("Player settings"));
-	help.add_paragraph
+		 ("On the left side is a list of all clients including you. With the button in the rear of your "
+		  "nickname, you can set your role. Available roles are:"));
+	m_help->add_picture_li
 		(_
-		 ("In the middle are the settings for the players. To start a game, each "
-		  "player must either be connected to a client or a computer player or "
-		  "be set to closed."));
-	help.add_block
+		 ("The player with the color of the flag. If more than one client selected the same color, these "
+		  "share the control over the player (\"shared kingdom mode\")."),
+		 "pics/genstats_enable_plr_08.png");
+	m_help->add_picture_li
+		(_("And spectator mode, meaning you can see everything, but can not control any player"),
+		"pics/menu_tab_watch.png");
+	m_help->add_heading(_("Player settings"));
+	m_help->add_paragraph
 		(_
-		 ("If you are a client (not the hosting player), you can set the tribe "
-		  "and the team for the player you set as your role."));
-	help.add_block
+		 ("In the middle are the settings for the players. To start a game, each player must be one of the "
+		  "following:"));
+	m_help->add_picture_li
+		(_("Connected to one or more clients (see \"Client settings\")."), "pics/genstats_nrworkers.png");
+	m_help->add_picture_li
 		(_
-		 ("If you are the hosting player, you can further set the "
-		  "initializations of each player (the set of buildings, wares and "
-		  "workers the player starts with), connect a computer player to a "
-		  "player or close a player."));
-	help.add_heading(_("Map informations"));
-	help.add_paragraph
+		 ("Connected to a computer player (the face in the picture as well as the mouse hover texts "
+		  "indicates the strength of the currently selected computer player)."),
+		"pics/ai_Normal.png");
+	m_help->add_picture_li(_("Set as shared in starting position for another player."), "pics/shared_in.png");
+	m_help->add_picture_li(_("Closed."), "pics/stop.png");
+	m_help->add_block
 		(_
-		 ("On the right side are informations about the selected map or "
-		  "savegame. A button right to the map name allows the host to change to "
-		  "a different one. Further the host is able to set a specific win "
-		  "condition and finally can start the game as soon as all players are "
-		  "set up."));
-	help.run();
+		 ("The later three are only setable by the hosting client by left clicking the \"type\" button of a "
+		  "player. Hosting players can further set the initializations of each player (the set of buildings, "
+		  "wares and workers the player starts with) and the tribe an team for computer players"));
+	m_help->add_block
+		(_
+		 ("Every client connected to a player (the set \"role\" player) can set the tribe and the team "
+		  "for that player"));
+	m_help->add_heading(_("Map informations"));
+	m_help->add_paragraph
+		(_
+		 ("On the right side are informations about the selected map or savegame. A button right to the map "
+		  "name allows the host to change to a different one. Further the host is able to set a specific win "
+		  "condition and finally can start the game as soon as all players are set up."));
 }

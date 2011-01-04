@@ -56,7 +56,7 @@ struct Font_Handler {
 		 Align               align           = Align_CenterLeft,
 		 uint32_t            wrap         = std::numeric_limits<uint32_t>::max(),
 		 Widget_Cache        widget_cache    = Widget_Cache_None,
-		 PictureID         & widget_cache_id = g_gr->get_no_picture(),
+		 PictureID         * widget_cache_id = 0,
 		 uint32_t            caret        = std::numeric_limits<uint32_t>::max(),
 		 bool                transparent     = true);
 	void get_size
@@ -79,7 +79,6 @@ struct Font_Handler {
 	// from the graphics code before the graphics are flushed,
 	// to make sure that everything is forgotten
 	void flush_cache();
-	void delete_widget_cache(PictureID widget_cache_id);
 	void draw_richtext
 		(RenderTarget &,
 		 RGBColor bg,
@@ -87,7 +86,7 @@ struct Font_Handler {
 		 std::string text,
 		 int32_t wrap,
 		 Widget_Cache widget_cache = Widget_Cache_None,
-		 PictureID & widget_cache_id = g_gr->get_no_picture(),
+		 PictureID * widget_cache_id = 0,
 		 bool transparent = true);
 	void get_size_from_cache
 		(PictureID widget_cache_id, uint32_t & w, uint32_t & h);

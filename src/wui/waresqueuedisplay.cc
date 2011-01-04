@@ -98,8 +98,8 @@ m_display_size(0)
 	set_think(true);
 }
 
-WaresQueueDisplay::~WaresQueueDisplay() {
-	g_gr->free_picture_surface(m_pic_background);
+WaresQueueDisplay::~WaresQueueDisplay()
+{
 }
 
 /**

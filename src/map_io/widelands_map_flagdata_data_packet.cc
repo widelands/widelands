@@ -37,7 +37,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 3
+#define CURRENT_PACKET_VERSION 4
 
 void Map_Flagdata_Data_Packet::Read
 	(FileSystem            &       fs,
@@ -134,6 +134,10 @@ throw (_wexception)
 						flag.m_item_filled = items_filled;
 						for (uint32_t i = 0; i < items_filled; ++i) {
 							flag.m_items[i].pending = fr.Unsigned8();
+							if (packet_version < 4)
+								flag.m_items[i].priority = 0;
+							else
+								flag.m_items[i].priority = fr.Signed32();
 							uint32_t const item_serial = fr.Unsigned32();
 							try {
 								flag.m_items[i].item =
@@ -256,6 +260,7 @@ void Map_Flagdata_Data_Packet::Write
 
 			for (int32_t i = 0; i < flag->m_item_filled; ++i) {
 				fw.Unsigned8(flag->m_items[i].pending);
+				fw.Signed32(flag->m_items[i].priority);
 				assert(mos.is_object_known(*flag->m_items[i].item));
 				fw.Unsigned32(mos.get_object_file_index(*flag->m_items[i].item));
 				if

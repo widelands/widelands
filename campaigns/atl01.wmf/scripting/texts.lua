@@ -85,7 +85,7 @@ will need at least two of those.<br><br>
 obj_spidercloth_production = {
    name = "obj_spidercloth_production",
    title = _ "Build a spiderfarm and a weaving mill",
-   body = objective_text(_"Establish a spidercloth production",
+   body = objective_text(_"Establish a spidercloth production", _
 [[The weavers produce spidercloth and tabards in the weaving-mill. Spidercloth
 is needed for the construction of some buildings and clothing while tabards
 are the uniforms of soldiers. The weaving-mill needs gold yarn and spider yarn
@@ -100,7 +100,7 @@ produced by the gold weaver out of gold.<br><br>
 obj_make_heavy_industry_and_mining = {
    name = "obj_make_heavy_industry_and_mining",
    title = _ "Build industry and mines",
-   body = objective_text(_"Build industry and mines",
+   body = objective_text(_"Build industry and mines", _
 [[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine
 is digging for crystal, quartz and diamond - all of them are rare materials and
 very seldom found. While it searches for them, it produces a lot of stone.<br>
@@ -128,7 +128,7 @@ industry are used to train better soldiers in the two training buildings.<br><br
 obj_horsefarm_and_warehouse = {
    name = "obj_horsefarm_and_warehouse",
    title = _"Build a warehouse and a horsefarm",
-   body = objective_text(_"Build a warehouse and a horsefarm",
+   body = objective_text(_"Build a warehouse and a horsefarm", _
 [[As your road network gets longer and more complicated, you should employ
 horses to help out your carriers. Horses are bred in horsefarms using water and
 corn. A warehouse will also help to ensure your transportation system does not
@@ -138,7 +138,7 @@ collapse.]])
 obj_build_ships = {
    name = "obj_build_ships",
    title = _ "Build 3 ships to escape from the island",
-   body = objective_text(_"Escape from the island",
+   body = objective_text(_"Escape from the island", _
 [[There is a lake at the top of the island. Build 3 ships in these waters
 and you might be able to rescue your people when the island is swallowed
 completely by the ocean. Build a shipyard close to the lake to start
@@ -162,7 +162,7 @@ world was very young. Ruled by the bloodline of King Ajanthul - the first human
 to be empowered by the sea god Lutas to breathe above the sea level - and the
 wise clerics, who provided the link to Lutas - they prospered and became
 civilized.]]
-      ) .. p(
+      ) .. p(_
 [[This story happens during the regency of King Askandor, the 43rd successor of
 King Ajanthul. He has been a good king, ruling Atlantis with wisdom and
 foresight. But with age, he became afraid of dying and so he began looking for
@@ -174,7 +174,7 @@ was only for the gods and to seek for it was forbidden.]]
 {
    title = _ "The god's disgrace",
    body = rt(
-      h1("The god's punishment") ..
+      h1(_"The god's punishment") ..
       p(_
 [[But all seemed well. Only the horses seemed to feel something was wrong.
 In the nights, they went crazy and were full of fear. It was not long before the
@@ -192,7 +192,7 @@ again.]]
 {
    title = _ "Uproar and confusion",
    body = rt(
-      h1("Chaos emerges...") ..
+      h1(_"Chaos emerges...") ..
       p(_
 [[Guilt-ridden, the king committed suicide. Without a monarch, the people
 turned to the clerics, but those had no substantial help to offer. Most
@@ -244,7 +244,7 @@ surroundings. I called for specialists and will follow their advice.]]
 },
 {
    title = _ "Loftomor and Sidolus arrive",
-   body = jundlina( "Jundlina", _
+   body = jundlina( _"Jundlina", _
 [[May Satul warm you both. Loftomor, you have been the island's most renowned
 architect. Sidolus, you are a seasoned warrior and strategist. I have called
 you before me to seek your counsel: What needs to be done to make this our new
@@ -278,7 +278,7 @@ available. We only need some housings to live in.]]
 food_story_message = {
 {
    title = _ "Jundlina is satisfied",
-   body = jundlina("Jundlina's Memoirs", _
+   body = jundlina(_"Jundlina's Memoirs", _
 [[Our building infrastructure is done and I spent some days making sure that
 they work well together. Now, there are other pressing matters. I called
 Colionder, my personal cook, before me to get his help with sorting some things
@@ -396,7 +396,7 @@ a weapon smithy, an armor smithy and a tool smithy. And maybe even more.]]
    },
    {
       title = _ "Jundlina replies",
-      body = jundlina(_"Jundlina nods",
+      body = jundlina(_"Jundlina nods", _
 [[I have considered this, Sidolus. I think, it is about time. We will make this
 a priority for now. You shall get your industry and soon!]]
       ) .. new_objectives(obj_make_heavy_industry_and_mining)
@@ -438,7 +438,7 @@ Dismissed.]]
 training_story_end = {
    {
       title = _ "Jundlina received a letter",
-      body = jundlina("Jundlina", _
+      body = jundlina(_"Jundlina", _
 [[I received an invitation from Sidolus. The first day of training in the newly
 finished labyrinth will be tomorrow. The dungeon is done as well and will start
 its work soon. I am looking forward to tomorrow; I am very interested in how our
@@ -570,8 +570,8 @@ but I think, it could work.]]
 },
 {
    title = _ "Jundlina replies",
-   body = jundlina(_ [[
-Your red hair is a signal from the fire god. I will trust you and support your
+   body = jundlina(_
+[[Your red hair is a signal from the fire god. I will trust you and support your
 plan. Our survival lays in your hands now, Ostur.
 <br><br>Swift now, we need a house for Ostur next to the lake and we need
 planks, trunks and spidercloth for the construction there. Forget about
@@ -584,8 +584,8 @@ warehouses are all swallowed by the sea.]]
 scenario_won = {
    {
       title = _ "Jundlina is relieved",
-      body = jundlina(_"Jundlina", _ [[
-Praise Satul! Ostur, the young ship builder did it. We have three ships -
+      body = jundlina(_"Jundlina", _
+[[Praise Satul! Ostur, the young ship builder did it. We have three ships -
 never have I seen sturdier ones - with enough room to carry all of us and some
 wares too. And this rescue came just in time: Lutas is about to swallow the rest
 of this island, the water rises faster by the hour. But we can make our escape
