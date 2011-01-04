@@ -22,7 +22,7 @@
 #####
 
 [global]
-version = 5
+version = 6
 # Barbarians Introduction
 campname0=_"Barbarians - The second Empire"
 campsect0=barbariantut
@@ -87,8 +87,19 @@ name=_"02 - An Outpost for Exile"
 visible=0
 path="campaigns/emp02.wmf"
 
+[empiretut02]
+name=_"Not yet implemented"
+newvisi="campsect2"
+visible=0
+path="campaigns/dummy.wmf"
+
+
 [atlanteans00]
 name=_"01 - From Nemesis to Genesis"
 visible=1
 path="campaigns/atl01.wmf"
 
+[atlanteans01]
+name=_"Not yet implemented"
+visible=0
+path="campaigns/dummy.wmf"
