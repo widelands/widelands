@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
 "PO-Revision-Date: 2010-12-30 21:01+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-31 05:08+0000\n"
+"X-Launchpad-Export-Date: 2011-01-04 13:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
 msgstr "01 - Les yeux dans l'obscurité"
 
-#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
 msgstr "01 - De la Nemesis à la Génèse"
 
@@ -126,6 +126,10 @@ msgstr "Atoll"
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
 msgstr "Barbares - Le second Empire"
+
+#: ../../campaigns/cconfig:44
+msgid "Challenging. Introduces the Atlanteans"
+msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -353,6 +357,11 @@ msgstr ""
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
 msgstr "Le Labyrinthe Mystique"
+
+#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:103
+msgid "Not yet implemented"
+msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
