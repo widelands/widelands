@@ -1,4 +1,6 @@
-help=_This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable.
+help=_Smoked meat is made out of meat in a smokery. It is delivered to the mines and training sites (labyrinth and dungeon) where the miners and soldiers prepare a nutricious lunch for themselves.
+
+
 preciousness=2
 default_target_quantity=10
 

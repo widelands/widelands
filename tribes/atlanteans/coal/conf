@@ -1,4 +1,5 @@
-help=_To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat.
+help=_The Atlantean fires in smelting works, armoursmithies and weaponsmithies are fed with coal. This coal is mined in coal mines or produced out of trunks by a charcoal burner.
+
 preciousness=1
 default_target_quantity=20
 

@@ -1,4 +1,6 @@
-help=_The fires of the barbarians are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used.
+help=_The fires of the barbarians are usually fed with coal. It is produced in coal mines or out of trunks in a charcoal burner's house. Consumers are several buildings: lime kiln, smelting works, axefactory, war mill, helmsmithy.
+
+
 default_target_quantity=20
 preciousness=1
 
