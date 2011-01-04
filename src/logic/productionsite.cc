@@ -277,16 +277,16 @@ std::string ProductionSite::get_statistics_string()
 bool ProductionSite::has_workers(Building_Index targetSite, Game & game)
 {
 	// bld holds the description of the building we want to have
-	if(upcast(ProductionSite_Descr const, bld, tribe().get_building_descr(targetSite))) {
+	if (upcast(ProductionSite_Descr const, bld, tribe().get_building_descr(targetSite))) {
 		// if he has workers
-		if(bld->nr_working_positions()) {
+		if (bld->nr_working_positions()) {
 			Ware_Index need = bld->working_positions()[0].first;
-			for(int i = 0; i < descr().nr_working_positions(); ++i) {
-				if(!working_positions()[i].worker) {
+			for (int i = 0; i < descr().nr_working_positions(); ++i) {
+				if (!working_positions()[i].worker) {
 					return false; // no one is in this house
 				} else {
 					Ware_Index have = working_positions()[i].worker->worker_index();
-					if(tribe().get_worker_descr(have)->can_act_as(need)) {
+					if (tribe().get_worker_descr(have)->can_act_as(need)) {
 						return true; // he found a lead worker
 					}
 				}

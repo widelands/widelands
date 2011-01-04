@@ -788,7 +788,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 	}
 
 	// don't expand when we have unoccupied military buildings
-	//if(TODO) expand_factor = 0;
+	//if (TODO) expand_factor = 0;
 
 	// Defensive AIs also attack sometimes (when they want to expand)
 	if (type == DEFENSIVE && expand_factor > 1)
@@ -867,7 +867,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					prio /= 3 * (1 + bf->producers_nearby.at(bo.outputs.at(0)));
 
 					// TODO improve this - it's still useless to place lumberjack huts randomly
-					/*if (prio <= 0) -- no, sometimes we need wood without having a forest
+					/*if (prio <= 0) // no, sometimes we need wood without having a forest
 						continue;*/
 
 					// Check if the produced wares are needed
@@ -963,8 +963,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 							Ware_Index wt(static_cast<size_t>(bo.outputs.at(m)));
 
 							// if we have too much of it (avoids mass storage)
-							if((*l.current)->economy.stock_ware(wt) > 6 *
-								((*l.current)->economy.ware_target_quantity(wt).permanent))
+							if
+								((*l.current)->economy.stock_ware(wt) > 6 *
+								 (*l.current)->economy.ware_target_quantity(wt).permanent)
 								prio -= 20;
 
 							// if the economy needs this ware
@@ -977,10 +978,12 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 							// we can enhance this building. build more
 							// maybe the enhancement can produce needed ware
-							if(bo.desc->enhancements().size() > 0) {
+							if (bo.desc->enhancements().size() > 0) {
 								// this code builds more metalworks
-								if(bo.total_count() == 0) prio += 2;
-								if(bo.total_count() == 1) prio += 8;
+								if (bo.total_count() == 0)
+									prio += 2;
+								if (bo.total_count() == 1)
+									prio += 8;
 							}
 						}
 						for (uint32_t m = 0; m < bo.inputs.size(); ++m) {
@@ -1692,7 +1695,8 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 				continue;
 
 			// don't upgrade without workers
-			if(!site.site->has_workers(*x.current, game())) continue;
+			if (!site.site->has_workers(*x.current, game()))
+				continue;
 
 			int32_t prio = 0; // priority for enhancement
 
