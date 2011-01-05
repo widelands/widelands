@@ -23,6 +23,7 @@ snack=6
 work=_Work
 
 [work]
+return=skipped when economy needs snack and not economy needs coal
 sleep=42000
 consume=snack
 animate=working 18000
