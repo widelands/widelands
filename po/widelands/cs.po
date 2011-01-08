@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-01-04 13:25+0100\n"
-"PO-Revision-Date: 2010-10-18 20:44+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-01-07 20:15+0000\n"
+"Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:36+0000\n"
+"X-Launchpad-Export-Date: 2011-01-08 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -973,7 +973,7 @@ msgstr "Není zde žádný připojený uživatel s touto přezdívkou!"
 #: ../../src/network/nethost.cc:977
 #, c-format
 msgid "%s tried to start the game, but the server is not launchable."
-msgstr ""
+msgstr "%s se pokoušel spustit hru, ale server není spustitelný."
 
 #: ../../src/network/nethost.cc:981
 #, c-format
@@ -999,7 +999,7 @@ msgstr "Hostitel poslal hráče %s do lobby!"
 #: ../../src/network/nethost.cc:1580
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Počítač%u"
 
 #: ../../src/network/nethost.cc:1664
 #, c-format
@@ -1750,12 +1750,12 @@ msgstr " už existuje. Přepsat?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:270
 msgid "File deletion"
-msgstr ""
+msgstr "Smazání souboru"
 
 #: ../../src/wui/game_main_menu_save_game.cc:272
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "Opravu chcete smazat soubor %s?"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
@@ -1874,7 +1874,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:434
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Hráč%i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:116
 #: ../../src/ui_fsmenu/launchMPG.cc:436
@@ -1889,7 +1889,7 @@ msgstr "Zavřené"
 
 #: ../../src/wui/multiplayersetupgroup.cc:351
 msgid "Shared in"
-msgstr ""
+msgstr "Sdíleno v"
 
 #: ../../src/wui/multiplayersetupgroup.cc:421
 #: ../../src/ui_fsmenu/launchMPG.cc:274 ../../src/ui_fsmenu/launchSPG.cc:222
@@ -1899,23 +1899,23 @@ msgstr "Scénář"
 #: ../../src/wui/multiplayersetupgroup.cc:423
 #: ../../src/ui_fsmenu/launchMPG.cc:278
 msgid "Savegame"
-msgstr ""
+msgstr "Uložithru"
 
 #: ../../src/wui/multiplayersetupgroup.cc:476
 msgid "Client name"
-msgstr ""
+msgstr "Název klienta"
 
 #: ../../src/wui/multiplayersetupgroup.cc:484
 msgid "Role"
-msgstr ""
+msgstr "Role"
 
 #: ../../src/wui/multiplayersetupgroup.cc:500
 msgid "Start"
-msgstr ""
+msgstr "Spustit"
 
 #: ../../src/wui/multiplayersetupgroup.cc:508
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: ../../src/wui/multiplayersetupgroup.cc:516
 msgid "Tribe"
@@ -1985,7 +1985,7 @@ msgstr "Dělníci v skladišti"
 
 #: ../../src/wui/warehousewindow.cc:128
 msgid "Normal policy"
-msgstr ""
+msgstr "Normální politika"
 
 #: ../../src/wui/warehousewindow.cc:129
 msgid "Preferably store selected wares here"
@@ -3675,7 +3675,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66
 msgid "Select a map"
-msgstr ""
+msgstr "Vyberte mapu"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Saved game"
@@ -3683,15 +3683,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Select a saved game"
-msgstr ""
+msgstr "Vyberte uloženou hru"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:82
 msgid "Cancel selection"
-msgstr ""
+msgstr "Zrušit výběr"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:111
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Změnit mapu ,nebo uloženou hru"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:119 ../../src/ui_fsmenu/launchSPG.cc:82
 msgid "Start game"
@@ -3699,11 +3699,11 @@ msgstr "Začni hrát"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:145
 msgid "Show the help window"
-msgstr ""
+msgstr "Zobrazit pomocné okno"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:152 ../../src/ui_fsmenu/launchMPG.cc:615
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Nastavení hry více hráčů"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:160
 msgid "Clients"
@@ -3763,7 +3763,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:499
 msgid "Saved players are:"
-msgstr ""
+msgstr "Uložení hráči jsou:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:519
 msgid "<closed>"
@@ -3775,26 +3775,26 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:581
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "Soubor s mapou vypadá neplatně!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:598
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Informace o mapě:\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:599
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Velikost: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:600
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i Hráči\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:601
 #, c-format
 msgid "* World type: %s\n"
-msgstr ""
+msgstr "* Druh světa: %s\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:603
 msgid "* Scenario mode selected\n"
@@ -3806,7 +3806,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:617
 msgid "Client settings"
-msgstr ""
+msgstr "Nastavení klienta"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:620
 msgid ""
@@ -3829,7 +3829,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "Player settings"
-msgstr ""
+msgstr "Nastavení hráče"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:633
 msgid ""
@@ -3854,7 +3854,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:643
 msgid "Closed."
-msgstr ""
+msgstr "Zavřeno."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:646
 msgid ""
@@ -3872,7 +3872,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:653
 msgid "Map informations"
-msgstr ""
+msgstr "Informace o mapě"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:656
 msgid ""
@@ -4147,7 +4147,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:141
 msgid "Map Name"
-msgstr ""
+msgstr "Název mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:236
 msgid "(directory)"
