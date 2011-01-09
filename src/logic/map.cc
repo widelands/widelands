@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1186,7 +1186,7 @@ void Map::recalc_nodecaps_pass1(FCoords const f)
 		caps |= MOVECAPS_WALK;
 
 	//  2b) If all neighbouring triangles are water, the node is swimable.
-	if (cnt_water == 6)
+	if (cnt_water > 1)
 		caps |= MOVECAPS_SWIM;
 
 
@@ -1448,14 +1448,40 @@ void Map::recalc_nodecaps_pass2(FCoords const f)
 			//  8) Reduce building size based on height diff. of second order
 			//    neighbours  If height difference between this field and second
 			//    order neighbour is >= 3, we can only build a small house here.
-			//    Additionally, we can potentially build a harbour on this field
+			//    Additionally, we can potentially build a port on this field
 			//    if one of the second order neighbours is swimmable.
 			{
 				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 2));
-				do if (abs(mr.location().field->get_height() - f_height) >= 3) {
-					building = BUILDCAPS_SMALL;
-					break;
+				bool near_water = false;
+				do {
+					if (abs(mr.location().field->get_height() - f_height) >= 3) {
+						building = BUILDCAPS_SMALL;
+						break;
+					}
+					// If there is still place for a big building, take care about ports
+					if (building == BUILDCAPS_BIG && !near_water) {
+						const Field * this_f = mr.location().field;
+						const Field *  tr_f = tr_n(f).field;
+						const Field *  tl_f = tl_n(f).field;
+						const Field *   l_f =  l_n(f).field;
+
+						if
+							(w.terrain_descr(tr_f->terrain_d()).get_is() & TERRAIN_WATER
+							 ||
+							 w.terrain_descr(tl_f->terrain_r()).get_is() & TERRAIN_WATER
+							 ||
+							 w.terrain_descr(tl_f->terrain_d()).get_is() & TERRAIN_WATER
+							 ||
+							 w.terrain_descr (l_f->terrain_r()).get_is() & TERRAIN_WATER
+							 ||
+							 w.terrain_descr (this_f->terrain_d()).get_is() & TERRAIN_WATER
+							 ||
+							 w.terrain_descr (this_f->terrain_r()).get_is() & TERRAIN_WATER)
+							near_water = true;
+					}
 				} while (mr.advance(*this));
+				if (building & BUILDCAPS_BIG && near_water)
+					caps |= BUILDCAPS_PORT;
 			}
 
 			caps |= building;
