@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-01-04 13:25+0100\n"
-"PO-Revision-Date: 2010-10-18 20:47+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-01-11 16:20+0000\n"
+"Last-Translator: Martín V. <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:39+0000\n"
+"X-Launchpad-Export-Date: 2011-01-12 04:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -905,11 +905,11 @@ msgstr "Documentación para el comando de programa playFX"
 
 #: ../../src/writeHTML.cc:1387
 msgid "Documentation for program command construct"
-msgstr ""
+msgstr "Documentación para constructo de comandos de programa"
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr ""
+msgstr "constructo"
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
@@ -1805,12 +1805,12 @@ msgstr " ya existe. ¿Sobreescribir?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:270
 msgid "File deletion"
-msgstr ""
+msgstr "Eliminación de archivo"
 
 #: ../../src/wui/game_main_menu_save_game.cc:272
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "¿Desea eliminar el archivo %s?"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
@@ -1826,7 +1826,7 @@ msgstr "Opciones económicas"
 
 #: ../../src/wui/transport_ui.cc:144 ../../src/wui/transport_ui.cc:239
 msgid "Increase target"
-msgstr ""
+msgstr "Aumentar objetivo"
 
 #: ../../src/wui/transport_ui.cc:146 ../../src/wui/transport_ui.cc:241
 msgid "Decrease target"
@@ -1834,7 +1834,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:148 ../../src/wui/transport_ui.cc:243
 msgid "Reset to default"
-msgstr ""
+msgstr "Restaurar al valor predeterminado"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
@@ -1929,7 +1929,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:434
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Reproductor %i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:116
 #: ../../src/ui_fsmenu/launchMPG.cc:436
@@ -1944,7 +1944,7 @@ msgstr "Cerrado"
 
 #: ../../src/wui/multiplayersetupgroup.cc:351
 msgid "Shared in"
-msgstr ""
+msgstr "Compartido en"
 
 #: ../../src/wui/multiplayersetupgroup.cc:421
 #: ../../src/ui_fsmenu/launchMPG.cc:274 ../../src/ui_fsmenu/launchSPG.cc:222
@@ -1958,11 +1958,11 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:476
 msgid "Client name"
-msgstr ""
+msgstr "Nombre del cliente"
 
 #: ../../src/wui/multiplayersetupgroup.cc:484
 msgid "Role"
-msgstr ""
+msgstr "Rol"
 
 #: ../../src/wui/multiplayersetupgroup.cc:500
 msgid "Start"
@@ -1970,11 +1970,11 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:508
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: ../../src/wui/multiplayersetupgroup.cc:516
 msgid "Tribe"
-msgstr ""
+msgstr "Tribu"
 
 #: ../../src/wui/multiplayersetupgroup.cc:528
 #: ../../src/ui_fsmenu/launchSPG.cc:105

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-04 12:25+0000\n"
-"PO-Revision-Date: 2010-12-31 11:29+0000\n"
+"PO-Revision-Date: 2011-01-11 21:22+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:36+0000\n"
+"X-Launchpad-Export-Date: 2011-01-12 04:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -456,6 +456,8 @@ msgid ""
 "Iron ores need to be smelted in the smelting works to give iron. Iron ores "
 "are produced in iron mines."
 msgstr ""
+"Jernmalm kan smeltes ned til jern på smelteverket. Jernmalm hentes ut av "
+"jernmalmgruvene."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -859,6 +861,8 @@ msgid ""
 "Stones are a basic building material of the Empire. It is produced in "
 "quarries and marble mines."
 msgstr ""
+"Stein er et av de grunnleggende byggematerialene for Imperiet. Stein blir "
+"produsert i steinbrudd og marmorgruver."
 
 #: ../../tribes/empire/conf:153
 msgid "Stronghold"
@@ -966,6 +970,8 @@ msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by "
 "miners in coal and iron ore mines."
 msgstr ""
+"Dette ølet blir brygget i et bryggeri av hvete og vann. Det blir brukt av "
+"gruvearbeidere i kull- og jernmalmgruvene."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -1240,6 +1246,8 @@ msgid ""
 "Weapons, armour and tools are made of iron. It is retrieved from iron ores "
 "in the smelting works."
 msgstr ""
+"Våpen, rustning og verktøy er laget av jern. Det blir utvunnet fra jernmalm "
+"i smelteverket."
 
 #: ../../tribes/empire/conf:131
 msgid "Weaponsmith"
@@ -1346,7 +1354,7 @@ msgstr "Arbeider dypt i gruvene for å hente ut kull, jern eller gull."
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Jobber på sagbruket."
 
 #~ msgid "Weapons and tools are made of iron."
 #~ msgstr "Våpen og redskaper er laget av jern."
