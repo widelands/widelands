@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-04 13:25+0100\n"
-"PO-Revision-Date: 2011-01-11 21:43+0000\n"
+"PO-Revision-Date: 2011-01-12 18:16+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-12 04:40+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-13 04:36+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 
 #: ../../src/wlapplication.cc:369
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -941,7 +941,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:981
 #, c-format
 msgid "%s send the signal to start the game."
-msgstr "%s sendte signal om å starte spillet."
+msgstr ""
 
 #: ../../src/network/nethost.cc:997
 msgid ""
@@ -1853,11 +1853,11 @@ msgstr "Lagret spill"
 
 #: ../../src/wui/multiplayersetupgroup.cc:476
 msgid "Client name"
-msgstr "Klientnavn"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:484
 msgid "Role"
-msgstr "Rolle"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:500
 msgid "Start"
