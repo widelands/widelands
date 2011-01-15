@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-01-04 12:25+0000\n"
-"PO-Revision-Date: 2011-01-07 12:34+0000\n"
-"Last-Translator: Frank Kubitschek <Unknown>\n"
+"PO-Revision-Date: 2011-01-14 22:10+0000\n"
+"Last-Translator: fraang <florian.angermeier@desaster-games.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-08 04:38+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-15 04:44+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "X-Poedit-Language: German\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -23,26 +23,29 @@ msgid ""
 "is used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 0 to level 1."
 msgstr ""
+"Der goldene Wappenrock wird in der atlantischen Weberei aus Goldgarn "
+"hergestellt. Er wird im Trainingslager - zusammen mit Nahrung - benutzt um "
+"Soldaten von der Gesundheitsstufe 0 auf 1 zu trainieren."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
 "A saw is needed by the woodcutter and the carpenter. It is produced by the "
 "toolsmith."
 msgstr ""
-"Sägen werden von Holzfällern und von Zimmerleuten benötigt. Werkzeugmacher "
-"stellen sie her."
+"Sägen werden von Holzfällern und Schreinern gebraucht. Sie werden von einem "
+"Werkzeugschmied hergestellt."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr "Ein seetaugliches Schiff"
+msgstr "Ein seetüchtiges Schiff"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving-mill."
 msgstr ""
-"Ein Tappert und ein leichter Dreizack sind die Grundausrüstung für junge "
-"Soldaten. Tapperte werden in der Weberei produziert."
+"Ein Wappenrock und ein leichter Dreitzack sind die Grundausrüstung für junge "
+"Soldaten. Wappenröcke werden in der Weberei hergestellt."
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -262,6 +265,8 @@ msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
 msgstr ""
+"Maismehl wird in einer Mühle aus Mais hergestellt und ist einer der drei "
+"Zutaten des atlantischen Brots welches in der Bäckerei hergestellt wird."
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
@@ -333,6 +338,9 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"Fisch ist einer der Hauptnahrungsquellen der Atlanter. Er muss in einer "
+"Räucherei geräuchert werden bevor er zu den Minen, Ausbildungsplätzen und "
+"Kundschaftern gebracht wird."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -385,11 +393,16 @@ msgid ""
 "in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
+"Gold ist einer der wertvollsten Materialien. Es wird in der Gießerei aus "
+"Golderz hergestellt. Gold wird vom Rüstungsschmied, Waffenschmied und "
+"Goldweber verwendet."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
 "Gold ores are mined in gold mines and processed to gold in smelting works."
 msgstr ""
+"Golderz wird in Goldminen abgebaut und in Gießerein zu Gold "
+"weiterverarbeitet."
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
@@ -456,6 +469,8 @@ msgid ""
 "Horses help to carry items at heavily used roads. They are raised in a horse "
 "farm."
 msgstr ""
+"Pferde helfen Waren auf viel benützten Straßen zu transportieren. Sie werden "
+"in einem Pferdehof gezüchtet."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -486,12 +501,16 @@ msgid ""
 "Iron is made out of iron ores in the smelting works. It is used in the "
 "toolsmithy, armoursmithy and weapon smithy."
 msgstr ""
+"Eisen wird in Gießerein aus Eisenerz hergestellt. Es wird in der "
+"Werkzeugschmied, Rüstungsschmied und Waffenschmied verwendet."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"Eisenerz wird in Eisenminen abgebaut. Sie werden in Gießerein geschmolzen um "
+"Eisen zu erhalten."
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
@@ -515,6 +534,9 @@ msgid ""
 "taken by the hunter and has to be smoked in a smokery before being delivered "
 "to mines and training sites (dungeon and labyrinth)."
 msgstr ""
+"Fleisch ist eine der Nahrungsquellen der Atlanter. Es wird vom Jäger aus "
+"Wild gewonnen und muss in einer Räucherei geräuchert werdenbevor es zu Minen "
+"und Ausbildungsplätzen (Kerker und Labyrinth) gebracht wird."
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
@@ -586,6 +608,9 @@ msgid ""
 "produced out of trunks by the sawmill. The weapon smithy and the shipyard "
 "also use planks to produce the different tridents and mighty ships."
 msgstr ""
+"Bretter sind ein wichtiges Baumaterial der Atlanter. Sie werden in der "
+"Sägemühle aus Stämmen hergestellt. Der Waffenschmied sowie die Werft "
+"benötigen sie für Dreizacke und mächtige Schiffe."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -901,6 +926,10 @@ msgid ""
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutricious lunch for themselves."
 msgstr ""
+"Geräuchertes Fleisch wird in der Räucherei aus Fleich hergestellt. Es wird "
+"zu den Minen und Ausbildugsplätzen (Kerker und Labyrinth) gebrach, wo es von "
+"den Bergleuten und Soldaten verwendet wird um ein nahrhaftes Essen für sich "
+"zuzubereiten."
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
@@ -942,6 +971,9 @@ msgid ""
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
+"Spinnenstoffe wird in einer Weberei aus Spinnengarn hergestellt. Es wird vom "
+"Werkzeugschmied und der Werft verwendet. Einige höher entwickelte Gebäude "
+"baruchen ebenfalls Spinnenstoffe für ihre Errichtung."
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Spiderfarm"
@@ -968,6 +1000,8 @@ msgid ""
 "Stone is one basic building ware of the Atlanteans. It is produced in a "
 "quarry or a crystal mine."
 msgstr ""
+"Stein ist einer der Grundbaumaterialien der Atlanter. Er wird in einem "
+"Steinbruch oder in einer Kristallmine hergestellt."
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -987,6 +1021,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
 msgstr ""
+"Die atlantischen Feuer in Gießerein, Rüstungsschmieden und Waffenschmieden "
+"werden mit Kohle geheizt. Diese Kohle wird in Kohleminen abgebaut oder in "
+"Köhlereien aus Stämmen hergestellt."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1009,6 +1046,9 @@ msgid ""
 "weapon smithy. It is used in a dungeon - together with food - to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
+"Der Doppeldreizack ist einer der besten Dreizacke der Atlanter, produziert "
+"vom atlantischen Waffenschmied. Er wird in einem Kerker - zusammen mit "
+"Nahrung - verwendet um Soldaten von der Angriffsstufe 2 auf 3 zu trainieren."
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""
@@ -1043,12 +1083,17 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon - together with food - "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
+"Der lange Dreizack ist der erste Dreizack im Training der Soldaten. Er wird "
+"in der Waffenschmiede hergestellt und im Kerker - zusammen mit Nahrung - "
+"verwendet um Soldaten von der Angriffsstufe 0 auf 1 zu trainieren."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
 msgstr ""
+"Der Brotschieber ist das Werkzeug des Bäckers. Jeder Bäcker benötigt seinen "
+"eigenen. Er wird in der Werkzeugschiede hergestellt."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -1056,6 +1101,10 @@ msgid ""
 "are produced in the armoursmithy and used in the labyrinth - together with "
 "food - to train soldiers from Defense level 1 to level 2."
 msgstr ""
+"Der verbesserten Schilde werden von den besten Soldaten der Atlanter "
+"verwendet. Sie werden in der Rüstungsschmiede hergestellt und im Labyrinth - "
+"zusammen mit Nahrung - verwendet um Soldaten von der Verteidungsstufe 1 auf "
+"2 zu trainieren."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1086,12 +1135,18 @@ msgid ""
 "baker needs for a good bread. Also horse farms and spiderfarms need to be "
 "provided with corn."
 msgstr ""
+"Dieser Mais wird in der Mühle zu Maismehl weiterverarbeitet, welches jeder "
+"atlantischer Bäcker für gutes Brot benötigt. Auch Pferdehöfe und "
+"Spinnenfarmen müssen mit Mais beliefert werden."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
 "This hook pole is used by the smoker to hang up all the meat and fish to the "
 "top of the smokery. It is created by the toolsmith."
 msgstr ""
+"Die Hakenstange wird vom Räucherer verwendet um all das Fleich und den Fisch "
+"auf der Spitze der Räucherei aufzuhängen. Sie wird vom Werkzeugschmied "
+"hergestellt."
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1099,6 +1154,10 @@ msgid ""
 "makes the equipment for young soldiers. Light tridents are produced in the "
 "weapon smithy as are all other tridents."
 msgstr ""
+"Dies ist die Grundwaffe der atlantischen Soldaten. Zusammen mit dem "
+"Wappanrock sind sie die Grundausrüstung für junge Soldaten. Leichte "
+"Dreizacke werden, wie alle anderen Dreizacke, in der Waffenschmiede "
+"hergestellt."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid ""
@@ -1106,6 +1165,9 @@ msgid ""
 "advanced soldiers in the dungeon to train from attack level 1 to level 2 "
 "(together with food)."
 msgstr ""
+"Das ist der mittlere Dreizack. Er wird in der Waffenschmiede hergestellt und "
+"von fortgeschrittenen Soldaten - zusammen mit Nahrung - im Kerker verwendet "
+"um die Angriffsstuffe von 1 auf 2 zu trainieren."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1114,12 +1176,19 @@ msgid ""
 "used in the dungeon - together with food - to train soldiers from attack "
 "level 3 to level 4."
 msgstr ""
+"Das ist die gefährlichste Waffe des atlantischen Militärs. Nur die besten "
+"Soldaten mögen sie verwenden. Sie wird in der Waffenschmiede hergestellt und "
+"im Kerker - zusammen mit Nahrung - verwendet um die Angriffsstufe von "
+"Soldaten von 3 auf 4 zu trainieren."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
 "This steel shield is produced in the armoursmithy and used in the labyrinth -"
 "together with food - to train soldiers from Defense level 0 to level 1."
 msgstr ""
+"Dieser Stahlschild wird in der Rüstungsschmiede hergestellt und im Labyrinth "
+"- zusammen mit Nahrung - verwendet um die Verteidigungsstufe von Soldaten "
+"von 0 auf 1 zu trainiren."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
@@ -1127,6 +1196,9 @@ msgid ""
 "water. It is appreciated as basic food for miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
 msgstr ""
+"Dieses köstliche Brot wird in Bäckerein aus Maismehl, Schwarzwurzelmehl und "
+"Wasser hergestellt. Es wird von Bergleuten, Kundschaftern und Soldaten in "
+"Ausbildungsplätzen (Kerker und Labyrinth) als Grundnahrungsmittel geschätzt."
 
 #: ../../tribes/atlanteans/conf:6
 msgid ""
@@ -1141,6 +1213,8 @@ msgid ""
 "This yarn is produced by spiders, which are bred on spiderfarms. It is "
 "processed to spidercloth in a weaving-mill."
 msgstr ""
+"Dieses Garn wird von Spinnen hergestellt, welche in Spinnenfarmen gezüchtet "
+"werden. Es wird in Weberein zu Spinnenstoffen weiterverarbeitet."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
@@ -1181,6 +1255,9 @@ msgid ""
 "the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and "
 "the smokery also need trunks for their work."
 msgstr ""
+"Stämme sind die Basis für Bretter, welche in fast allen gebäuden der "
+"Atlanter verwendet werden. Auch die Sägemühle, der Köhler, die "
+"Werkzeugschmiede und die Räucherei benötigen Stämme."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
