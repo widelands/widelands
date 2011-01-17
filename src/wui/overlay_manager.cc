@@ -50,7 +50,7 @@ uint8_t Overlay_Manager::get_overlays
 
 	const Registered_Overlays_Map & overlay_map = m_overlays[Widelands::TCoords<>::None];
 	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
-	while (it != overlay_map.end() and it->first == c and it->second.level <= 6)
+	while (it != overlay_map.end() and it->first == c and it->second.level <= MAX_OVERLAYS_PER_NODE)
 	{
 		overlays[num_ret].picid = it->second.picid;
 		overlays[num_ret].hotspot = it->second.hotspot;
@@ -134,7 +134,9 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
 		fc.field->nodecaps();
 
 	fc.field->set_buildhelp_overlay_index
-		(caps & Widelands::BUILDCAPS_MINE                                      ?
+		(caps & Widelands::BUILDCAPS_PORT                                      ?
+		 Widelands::Field::Buildhelp_Port                                      :
+		 caps & Widelands::BUILDCAPS_MINE                                      ?
 		 Widelands::Field::Buildhelp_Mine                                      :
 		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG    ?
 		 Widelands::Field::Buildhelp_Big                                       :
@@ -143,9 +145,7 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
 		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL  ?
 		 Widelands::Field::Buildhelp_Small                                     :
 		 caps & Widelands::BUILDCAPS_FLAG                                      ?
-		 Widelands::Field::Buildhelp_Flag                                      :
-		 caps & Widelands::BUILDCAPS_PORT                                      ?
-		 Widelands::Field::Buildhelp_Port : Widelands::Field::Buildhelp_None);
+		 Widelands::Field::Buildhelp_Flag : Widelands::Field::Buildhelp_None);
 }
 
 /*

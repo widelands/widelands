@@ -54,7 +54,7 @@
  *     with the jobid can be called and all overlays created in the
  *     job are removed. This is useful for interactive road building.
  */
-#define MAX_OVERLAYS_PER_NODE 5
+#define MAX_OVERLAYS_PER_NODE 6
 #define MAX_OVERLAYS_PER_TRIANGLE 3
 typedef int32_t (*Overlay_Callback_Function)
 	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
