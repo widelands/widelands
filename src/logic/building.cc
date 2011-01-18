@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,6 +56,7 @@ Building_Descr::Building_Descr
 	m_buildicon     (g_gr->get_no_picture()),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
+	m_port          (false),
 	m_hints         (prof.get_section("aihints")),
 	m_global        (false),
 	m_vision_range  (0)
@@ -71,10 +72,13 @@ Building_Descr::Building_Descr
 		else if (!strcasecmp(string, "mine")) {
 			m_size = BaseImmovable::SMALL;
 			m_mine = true;
+		} else if (!strcasecmp(string, "port")) {
+			m_size = BaseImmovable::BIG;
+			m_port = true;
 		} else
 			throw game_data_error
 				(_("expected %s but found \"%s\""),
-				 "{\"small\"|\"medium\"|\"big\"}", string);
+				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", string);
 	} catch (_wexception const & e) {
 		throw game_data_error("size: %s", e.what());
 	}

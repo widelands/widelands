@@ -1,0 +1,13 @@
+size=port
+
+[buildcost]
+trunk=2
+planks=2
+stone=2
+quartz=1
+spidercloth=1
+
+[idle]
+pics=port_i_??.png  # ???
+hotspot=52 64
+playercolor=true
