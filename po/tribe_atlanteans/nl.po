@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-01-04 12:25+0000\n"
-"PO-Revision-Date: 2011-01-05 12:41+0000\n"
+"PO-Revision-Date: 2011-01-19 12:29+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-06 04:31+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-20 04:32+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -22,6 +22,9 @@ msgid ""
 "is used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 0 to level 1."
 msgstr ""
+"Een gouden tabberd wordt geproduceerd in een Atlantische weverij uit "
+"gouddraad. Het wordt gebruikt in het trainingskamp, samen met voedsel, om "
+"soldaten te trainen van levenspuntenniveau 0 naar niveau 1."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
@@ -40,6 +43,8 @@ msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving-mill."
 msgstr ""
+"Een tabberd en een lichte drietand is de basis uitrusting voor jonge "
+"soldaten. Tabberds worden geproduceerd en de weverij."
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -58,6 +63,8 @@ msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
 msgstr ""
+"Omdat geen Atlantiër rouwe vis lust wordt het meestal gerookt in de rokerij "
+"om het eetbaar te maken."
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
@@ -113,6 +120,8 @@ msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
 msgstr ""
+"Helmkruidmeel wordt geproduceerd in de molen uit helmkruid. Het wordt in de "
+"bakkerij tot een smakelijk brood gebakken."
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -144,6 +153,9 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use its flour "
 "for making bread."
 msgstr ""
+"Helmkruid zijn een speciaal soort wortel, geproduceerd in de "
+"helmkruidboerderij en verwerkt in de molen. De Atlantiërs houden van hun "
+"sterke smaak en gebruiken het meel om er brood van te bakken."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -251,6 +263,8 @@ msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
 msgstr ""
+"Maïsmeel wordt gemaakt in een molen uit maïs en is een van de drie "
+"onderdelen van het Atlantische brood dat gebakken wordt in de bakkerij."
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
@@ -322,6 +336,9 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"Vis is een van de grootste voedselbronnen voor de Atlantiërs. Het moet eerst "
+"gerookt worden in een rokerij voordat het naar de mijnen, trainingsgebouwen "
+"en verkenners gaat."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -379,6 +396,7 @@ msgstr ""
 msgid ""
 "Gold ores are mined in gold mines and processed to gold in smelting works."
 msgstr ""
+"Gouderts wordt gedolven in goudmijnen en verwerkt tot goud in de hoogoven."
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
@@ -483,6 +501,8 @@ msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"IJzererst wordt gedolven in de ijzerertsmijnen. Het wordt gesmolten in een "
+"hoogoven om ijzer te verkrijgen."
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
@@ -1000,6 +1020,9 @@ msgid ""
 "weapon smithy. It is used in a dungeon - together with food - to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
+"De dubbele drietand is een van de beste drietanden geproduceerd in de "
+"Atlantische wapensmederij. Het wordt gebruikt in het kerker, samen met "
+"voedsel, om soldaten te trainen van aanvalsniveau 2 naar niveau 3."
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""
@@ -1034,6 +1057,9 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon - together with food - "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
+"De lange drietand is de eerste drietand om jonge soldaten mee te trainen. "
+"Het wordt geproduceerd in de wapensmederij en wordt gebruikt in het kerker, "
+"samen met voedsel, om soldaten te trainen van aanvalsniveau 0 naar niveau 1."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
@@ -1086,6 +1112,9 @@ msgid ""
 "makes the equipment for young soldiers. Light tridents are produced in the "
 "weapon smithy as are all other tridents."
 msgstr ""
+"Dit is het basiswapen voor de Atlantische soldaten. Samen met een tabberd is "
+"dit de uitrusting voor jonge soldaten. Lichte drietanden worden geproduceerd "
+"in de wapensmederij, net als de andere drietanden."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid ""
@@ -1093,6 +1122,9 @@ msgid ""
 "advanced soldiers in the dungeon to train from attack level 1 to level 2 "
 "(together with food)."
 msgstr ""
+"Dit is de middelste drietand. Het wordt geproduceerd in de wapensmederij en "
+"gebruikt door gevorderde soldaten in het kerker om van  aanvalsniveau 1 naar "
+"niveau 2 te trainen (samen met voedsel)."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1101,6 +1133,10 @@ msgid ""
 "used in the dungeon - together with food - to train soldiers from attack "
 "level 3 to level 4."
 msgstr ""
+"Dit is het meest gevaarlijke wapen van de Atlantische militairen. Enkel de "
+"beste soldaten mogen het gebruiken. Het wordt geproduceerd in de "
+"wapensmederij en wordt gebruikt in het kerker, samen met voedsel, om "
+"soldaten te trainen van aanvalsniveau 3 naar niveau 4."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
@@ -1127,12 +1163,16 @@ msgid ""
 "This yarn is produced by spiders, which are bred on spiderfarms. It is "
 "processed to spidercloth in a weaving-mill."
 msgstr ""
+"Dit garen wordt geproduceerd door spinnen, die gefokt worden op "
+"spinnenboerderijen, Het wordt verwerkt tot spinnendoek in de weverij."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
 "golden tabard in the weaving-mill."
 msgstr ""
+"Dit draad, gemaakt van goud door de goudwever, wordt gebruikt voor het weven "
+"van de exclusiever gouden tabberd in de weverij."
 
 #: ../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
@@ -1165,6 +1205,9 @@ msgid ""
 "the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and "
 "the smokery also need trunks for their work."
 msgstr ""
+"Boomstammen zijn de basis voor planken, die voor bijna ieder gebouw van de "
+"Atlantiërs gebruikt worden. Naast de houtzagerij gebruiken ook de "
+"houtskoolbrander, de werktuigmederij en de rokerij voor hun werk."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
@@ -1285,6 +1328,8 @@ msgid ""
 "Water is the essence for life! It is used in the bakery, the horse farm and "
 "the spiderfarm."
 msgstr ""
+"Water is de levensbron! Het wordt gebruikt in de bakkerij en de paarden- en "
+"spinnenboerderij."
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Weapon Smithy"

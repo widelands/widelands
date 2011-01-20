@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-01-04 11:56+0000\n"
-"PO-Revision-Date: 2011-01-14 20:19+0000\n"
-"Last-Translator: Martin <Unknown>\n"
+"PO-Revision-Date: 2011-01-19 08:29+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-15 04:44+0000\n"
+"X-Launchpad-Export-Date: 2011-01-20 04:32+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -1238,7 +1238,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
-msgstr "Verbessert Angriff des Soldaten 0"
+msgstr "Verbessert Angriff des Soldaten von 0 auf 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:38
 msgid ""
@@ -1250,7 +1250,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
-msgstr "Verbessert Angriff des Soldaten 1"
+msgstr "Verbessert Angriff des Soldaten von 1 auf 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:40
 msgid ""
@@ -1262,7 +1262,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
-msgstr "Verbessert Angriff des Soldaten 2"
+msgstr "Verbessert Angriff des Soldaten von 2 auf 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:42
 msgid ""
@@ -1274,7 +1274,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
-msgstr "Verbessert Angriff des Soldaten 3"
+msgstr "Verbessert Angriff des Soldaten von 3 auf 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid ""
@@ -1286,7 +1286,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr "Verbessert Angriff des Soldaten 4"
+msgstr "Verbessert Angriff des Soldaten von 4 auf 5"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid ""
@@ -1298,7 +1298,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
-msgstr "Verbessert Ausweichen des Soldaten 0"
+msgstr "Verbessert Ausweichen des Soldaten von 0 auf 1"
 
 #: ../../tribes/barbarians/battlearena/conf:27
 msgid ""
@@ -1309,7 +1309,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:28
 msgid "Upgrade soldier evade 1"
-msgstr "Verbessert Ausweichen des Soldaten 1"
+msgstr "Verbessert Ausweichen des Soldaten von 1 auf 2"
 
 #: ../../tribes/barbarians/battlearena/conf:29
 msgid ""
@@ -1320,7 +1320,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Erhöht Lebenspunkte des Soldaten 0"
+msgstr "Verbessert Lebenspunkte des Soldaten von Stufe 0 auf 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid ""
@@ -1332,7 +1332,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Erhöht Lebenspunkte des Soldaten 1"
+msgstr "Verbessert Lebenspunkte des Soldaten von Stufe 1 auf 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
@@ -1344,7 +1344,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Erhöht Lebenspunkte des Soldaten 2"
+msgstr "Verbessert Lebenspunkte des Soldaten von Stufe 2 auf 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid ""

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-01-04 12:25+0000\n"
-"PO-Revision-Date: 2011-01-12 13:28+0000\n"
+"PO-Revision-Date: 2011-01-19 18:19+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-13 04:35+0000\n"
+"X-Launchpad-Export-Date: 2011-01-20 04:32+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -21,6 +21,8 @@ msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"Een echt maal wordt gemaakt in de herberg met brood en vis of vlees. Het "
+"vult de magen van de mijnwerkers in de diepe mijnen."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -28,6 +30,9 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
+"Een kleine hap om de mijnwerkers sterk en werkende te houden. Porties worden "
+"ook genuttigd door de verkenner op zijn verkentochten. Ze worden gemaakt in "
+"een kroeg uit vis, vlees of brood."
 
 #: ../../tribes/empire/conf:56
 msgid "Advanced Lance"
@@ -84,6 +89,9 @@ msgid ""
 "used in the trainingscamp - together with food- to train soldiers from "
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
+"Standaard harnas voor Empirische soldaten. Het wordt geproduceerd in de "
+"harnassmederij en wordt gebruikt in het trainingskamp, samen met voedsel, om "
+"soldaten te trainen van levenspuntenniveau 2 naar niveau 3."
 
 #: ../../tribes/empire/conf:60
 msgid "Basket"
@@ -98,6 +106,9 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Naast brood en vlees valt ook vis onder de schijf van drie. Vis wordt "
+"gebruikt in kroegen, herbergen en trainingsgebouwen (arena, colosseum, "
+"trainingskamp)."
 
 #: ../../tribes/empire/conf:62
 msgid "Bread"
@@ -174,6 +185,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the "
 "armour smithy."
 msgstr ""
+"Doek is nodig voor verschillende gebouwen. Het wordt ook gebruikt in de "
+"harnassmederij."
 
 #: ../../tribes/empire/conf:65
 msgid "Coal"
@@ -311,6 +324,8 @@ msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
 msgstr ""
+"Meel wordt geproduceerd door de molen uit tarwe en is nodig in de bakkerij "
+"om het heerlijke Emprirische brood te maken."
 
 #: ../../tribes/empire/conf:117
 msgid "Forester"
@@ -456,6 +471,8 @@ msgid ""
 "Iron ores need to be smelted in the smelting works to give iron. Iron ores "
 "are produced in iron mines."
 msgstr ""
+"IJzererts moet omgesmolten worden in de hoogoven tot ijzer. IJzererts wordt "
+"gedolven in de ijzerertsmijnen."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -502,6 +519,9 @@ msgid ""
 "in a quarry. Marble is used as building material and gets formed into marble "
 "columns in the stonemason's house."
 msgstr ""
+"Marmer is een prachtige steen, die uit de bergen wordt gehouwen of in een "
+"steengroeve wordt geproduceerd. Marmer wordt gebruikt als bouwmateriaal en "
+"wordt in marmeren pilaren gehouwen bij de steenhouwer."
 
 #: ../../tribes/empire/conf:122
 msgid "Master Miner"
@@ -868,6 +888,8 @@ msgid ""
 "Stones are a basic building material of the Empire. It is produced in "
 "quarries and marble mines."
 msgstr ""
+"Stenen zijn basis bouwmaterialen van de Empiren. Het wordt gewonnen in "
+"steengroeves en marmermijnen."
 
 #: ../../tribes/empire/conf:153
 msgid "Stronghold"
@@ -905,6 +927,9 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"De bakkers van de Empiren maken smakelijk brood uit meel en water. Het wordt "
+"gebruikt in de kroegen en herbergen om porties en maaltijden te maken. Brood "
+"wordt ook gebruikt in de trainingplaatsen (arena, colosseum, trainingskamp)."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -912,6 +937,10 @@ msgid ""
 "an armour smithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
+"De maliënkolder is het middelste harnas voor Empirische soldaten. Het wordt "
+"geproduceerd in de harnassmederij en wordt gebruikt in het trainingskamp, "
+"samen met voedsel, om soldaten te trainen van levenspuntenniveau 2 naar "
+"niveau 3."
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""
@@ -927,6 +956,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of trunks."
 msgstr ""
+"De vuren van de Empirische hoogoven, harnas- en wapensmederijen wordt gevoed "
+"met kolen. Het wordt gedolven in kolenmijnen of geproduceerd door een "
+"houtskoolbrander uit boomstammen."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -934,6 +966,9 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always have some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"De hamer is een essentiaal werktuig. Het wordt gebruikt door de geoloog, de "
+"bouwvakker, de harnas- en wapensmid. Zorg er voor dat er altijd een paar op "
+"voorraad liggen! Het wordt geproduceerd door de werktuigsmid."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -942,6 +977,10 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
+"De helm is de basis verdediging van een krijger. Het wordt geproduceerd in "
+"de harnassmederij Samen met een houten lans is het de uitrusting voor jonge "
+"soldaten.  Helmen worden ook gebruikt in het trainingskamp, samen met "
+"voedsel, om soldaten te trainen van levenspuntenniveau 0 naar niveau 1."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -957,6 +996,10 @@ msgid ""
 "It is produced in the armour smithy and used in the trainingscamp  - "
 "together with food - to train soldiers from healthpoints level 3 to level 4."
 msgstr ""
+"Het pantser is het sterkste harnas voor de Empirische soldaten. Het wordt "
+"geproduceerd in de harnassmederij en wordt gebruikt in het trainingskamp, "
+"samen met voedsel, om soldaten te trainen van levenspuntenniveau 3 naar "
+"niveau 4."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -971,18 +1014,24 @@ msgid ""
 "These grapes are the basic for a tasty wine. They are harvested in a "
 "vineyard and processed in a winery."
 msgstr ""
+"Deze druiven zijn de basis voor een lekkere wijn. Ze worden geoogst in een "
+"wijngaard en verwerkt in een wijnmakerij."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Deze mand wordt gebruikt door de wijnboer om druiven te oogsten. Hij wordt "
+"geproduceerd bij de werktuigsmid."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by "
 "miners in coal and iron ore mines."
 msgstr ""
+"Dit bier wordt geproduceerd in een brouwerij met tarwe en water. Het wordt "
+"geconsumeerd door mijnwerkers uit kolen- en ijzerertsmijnen."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -990,6 +1039,9 @@ msgid ""
 "in the weapon smithy and used in the trainingscamp - together with food - to "
 "train soldiers from attack level 2 to level 3."
 msgstr ""
+"Dit is een sterke lans met een stalen punt en een klein lemmet. Hij wordt "
+"gemaakt in de wapensmederij en het wordt gebruikt in het trainingskamp - "
+"samen met voedsel - om soldaten van aanvalsniveau 2 naar niveau 3 te trainen."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -997,6 +1049,9 @@ msgid ""
 "and used in a trainingscamp - together with food - to train soldiers from "
 "attack level 1 to level 2."
 msgstr ""
+"Dit is een verbeterde lans, met stalen punt. Hij wordt geproduceerd bij een "
+"wapensmederij en het wordt gebruikt in een trainingskamp - samen met voedsel "
+"- om soldaten van aanvalsniveau 1 naar niveau 2 te trainen."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -1004,6 +1059,10 @@ msgid ""
 "warriors. It is used in the trainingscamp - together with food - to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
+"Dit is het beste en scherpste wapen dat door de Empiren in haar "
+"wapensmederijen wordt gemaakt voor de krijgers. Hij wordt gebruikt in het "
+"trainingskamp - samen met voedsel - om soldaten te trainen van aanvalsniveau "
+"3 naar niveaul 4."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
@@ -1015,6 +1074,9 @@ msgid ""
 "a trainingscamp - together with food - to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
+"Deze lans heeft een ijzeren punt. Hij wordt gemaakt bij de wapensmid en "
+"wordt gebruikt in een trainingskamp - samen met voedsel - om soldaten van "
+"aanvalsniveau 0 naar aanvalsniveau 1 te trainen."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1027,6 +1089,7 @@ msgstr ""
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
 msgstr ""
+"Deze zaag heeft de zager nodig. Het is geproduceerd door de werktuigsmid."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1041,6 +1104,8 @@ msgid ""
 "This tasty wine is consumed in marble and gold mines. It is produced in a "
 "winery."
 msgstr ""
+"Deze smakelijke wijn wordt genuttigd in marmer- en goudmijnen. Het wordt "
+"gemaakt in een wijnmakerij."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1048,6 +1113,9 @@ msgid ""
 "produced in the weapon smithy. Together with a helmet it is the equipment to "
 "fit out young soldiers."
 msgstr ""
+"Deze houten lans is het basiswapen in het militaire systeem van de Empiren. "
+"Hij wordt geproduceerd bij de wapensmid. Samen met een helm is dit de "
+"uitusting voor jonge soldaten."
 
 #: ../../tribes/empire/conf:129
 msgid "Toolsmith"
@@ -1084,6 +1152,10 @@ msgid ""
 "fell the trees; foresters care for the supply of trees. Trunks are also used "
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"Boomstammen zijn een belangrijk bouwmateriaal voor de Empiren. De "
+"houthakkers hakken de bomen om; boswachters zorgen voor de voorraad bomen. "
+"Boomstammen worden ook gebruikt in het houtskoolbrandershuis, de "
+"werktuigsmederij en de houtzagerij."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1247,6 +1319,9 @@ msgid ""
 "Also the donkeyfarm, the sheepfarm and the piggery need to be supplied with "
 "water."
 msgstr ""
+"Water is de bron van het leven! Het wordt gebruikt in de bakkerij en de "
+"brouwerij. Ook de ezel-, schapen- en varkensboerderij moeten voorzien worden "
+"van water."
 
 #: ../../tribes/empire/conf:186
 msgid "Weapon Smithy"
@@ -1257,6 +1332,8 @@ msgid ""
 "Weapons, armour and tools are made of iron. It is retrieved from iron ores "
 "in the smelting works."
 msgstr ""
+"Wapens, harnassen en gereedschap worden van ijzer gemaakt. Dit wordt uit "
+"ijzerertsen gehaald in de hoogovens."
 
 #: ../../tribes/empire/conf:131
 msgid "Weaponsmith"
@@ -1284,6 +1361,9 @@ msgid ""
 "mills and breweries. Also donkeyfarms, sheepfarms and piggeries need to be "
 "supplied with wheat."
 msgstr ""
+"Tarwe is essentieel om te overleven. Het wordt geproduceerd in boerderijen "
+"en wordt gebruikt in molens en brouwerijen. Ook ezelboerderijen, "
+"schapenboerderijen en varkensboerderijen moeten voorzien worden van tarwe."
 
 #: ../../tribes/empire/conf:96
 msgid "Wine"
@@ -1306,6 +1386,8 @@ msgid ""
 "Wood is a basic building material of the Empire. It is also consumed in the "
 "weapon smithy."
 msgstr ""
+"Hout is het basis bouwmateriaal van de Empiren. Het wordt ook gebruikt door "
+"de wapensmid."
 
 #: ../../tribes/empire/conf:99
 msgid "Wool"
