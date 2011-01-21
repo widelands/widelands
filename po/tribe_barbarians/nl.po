@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-01-04 11:56+0000\n"
-"PO-Revision-Date: 2011-01-19 12:16+0000\n"
+"PO-Revision-Date: 2011-01-20 10:50+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-01-21 04:35+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -110,6 +110,8 @@ msgid ""
 "Beer is produced in micro breweries used in inns and big inns to produce "
 "snacks."
 msgstr ""
+"Bier wordt gebrouwen in de kleine brouwer en gebruikt in herbergen en grote "
+"herbergen om snacks te maken."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
@@ -392,6 +394,9 @@ msgid ""
 "gold, which is used as a precious building material and to produce weapons "
 "and armours."
 msgstr ""
+"Gouderts wordt gedolven in een goudmijn. Gesmolten in de hoogoven wordt het "
+"goud, wat gebruikt wordt als een kostbaar bouwmateriaal en om wapens en "
+"harnassen te produceren."
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -449,7 +454,7 @@ msgstr "Helmsmederij"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr ""
+msgstr "Helpt om goederen te vervoeren over drukke wegen."
 
 #: ../../tribes/barbarians/conf:152
 msgid "High Tower"
