@@ -28,7 +28,7 @@
 namespace Widelands {
 
 struct Flag;
-class RoutingNode;
+struct RoutingNode;
 struct Road;
 
 /***

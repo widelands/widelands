@@ -132,7 +132,7 @@ if (WL_UNIT_TESTS)
   add_custom_target(autotest ALL
     COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    DEPENDS widelands;test_widelands_scripting
+    DEPENDS widelands;test_widelands_scripting;test_economy
   )
 else (WL_UNIT_TESTS)
   message(STATUS "Disabled Unit Tests")

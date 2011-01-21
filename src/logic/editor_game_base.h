@@ -34,7 +34,7 @@
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
 struct Interactive_Base;
-class LuaInterface;
+struct LuaInterface;
 
 namespace Widelands {
 

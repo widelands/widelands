@@ -100,9 +100,16 @@ endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
 #the subdirectories are only used for test definition
 #temporarily disabled the 'old' tests due to incompatibility
-#add_subdirectory(economy)
+if (WL_UNIT_TESTS)
+  # Tests need to link with SDL library without main
+  set(TEST_EXTRA_SOURCES ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
+  set(TEST_EXTRA_LIBS ${SDL_LIBRARY} )
+  list(REMOVE_ITEM TEST_EXTRA_LIBS  ${SDLMAIN_LIBRARY}) 
+
+  add_subdirectory(economy)
 #add_subdirectory(io)
-add_subdirectory(scripting)
+  add_subdirectory(scripting)
+endif (WL_UNIT_TESTS)
 
 target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
 target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})

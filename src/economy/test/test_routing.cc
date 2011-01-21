@@ -27,12 +27,13 @@
 #include "../itransport_cost_calculator.h"
 #include "../router.h"
 #include "../routing_node.h"
-
+#include "../flag.h"
 #include "../../container_iterate.h"
 
 #include <exception>
 
 #include <boost/test/unit_test.hpp>
+#include <boost/bind.hpp>
 
 using namespace Widelands;
 
@@ -55,6 +56,7 @@ public:
 		return _neighbours[idx];
 	}
 
+	virtual Flag & base_flag() { return _flag;}
 	void set_waitcost(int32_t const wc) {_waitcost = wc;}
 	int32_t get_waitcost() const {return _waitcost;}
 	Coords get_position() const {return _position;}
@@ -70,6 +72,7 @@ private:
 	Neigbours _neighbours;
 	int32_t _waitcost;
 	Coords _position;
+	Flag _flag;
 };
 void TestingRoutingNode::get_neighbours(RoutingNodeNeighbours & n) {
 	container_iterate_const(Neigbours, _neighbours, i)
@@ -79,7 +82,7 @@ void TestingRoutingNode::get_neighbours(RoutingNodeNeighbours & n) {
 }
 bool TestingRoutingNode::all_members_zeroed() {
 	bool integers_zero =
-		!mpf_cycle && !mpf_heapindex & !mpf_realcost && !mpf_estimate;
+		!mpf_cycle &&  !mpf_realcost && !mpf_estimate;
 	bool pointers_zero = (mpf_backlink == 0);
 
 	return pointers_zero && integers_zero;
@@ -219,7 +222,7 @@ BOOST_AUTO_TEST_CASE(RoutingNode_InitializeMemberVariables) {
 }
 
 struct SimpleRouterFixture {
-	SimpleRouterFixture() {
+	SimpleRouterFixture() : r(boost::bind(&SimpleRouterFixture::reset, this)) {
 		d0 = new TestingRoutingNode();
 		d1 = new TestingRoutingNode(1, Coords(15, 0));
 		vec.push_back(d0);
@@ -228,6 +231,14 @@ struct SimpleRouterFixture {
 	~SimpleRouterFixture() {
 		delete d0;
 		delete d1;
+	}
+	/**
+	 * Callback for the incredibly rare case that the \ref Router pathfinding
+	 * cycle wraps around.
+	 */
+	void reset() {
+		if (d0) d0->reset_path_finding_cycle();
+		if (d1) d1->reset_path_finding_cycle();
 	}
 	TestingRoutingNode * d0;
 	TestingRoutingNode * d1;
@@ -356,8 +367,7 @@ BOOST_FIXTURE_TEST_CASE
 		 &route,
 		 false,
 		 -1,
-		 cc,
-		 vec);
+		 cc);
 
 	BOOST_CHECK_EQUAL(rval, false);
 }
@@ -372,8 +382,7 @@ BOOST_FIXTURE_TEST_CASE
 		 &route,
 		 false,
 		 -1,
-		 cc,
-		 vec);
+		 cc);
 
 	BOOST_CHECK_EQUAL(rval, true);
 }
@@ -381,7 +390,7 @@ BOOST_FIXTURE_TEST_CASE
 struct ComplexRouterFixture {
 	typedef std::vector<RoutingNode *> Nodes;
 
-	ComplexRouterFixture() {
+	ComplexRouterFixture() : r(boost::bind(&ComplexRouterFixture::reset, this)) {
 		d0 = new TestingRoutingNode();
 		nodes.push_back(d0);
 	}
@@ -476,6 +485,15 @@ struct ComplexRouterFixture {
 		return last;
 	}
 
+	/**
+	 * Callback for the incredibly rare case that the \ref Router pathfinding
+	 * cycle wraps around.
+	 */
+	void  reset()
+	{
+		container_iterate(Nodes, nodes, i)
+			(*i.current)->reset_path_finding_cycle();
+	}
 	TestingRoutingNode * d0;
 	Nodes nodes;
 	Router r;
@@ -501,8 +519,7 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 		 &route,
 		 false,
 		 -1,
-		 cc,
-		 nodes);
+		 cc);
 
 	BOOST_CHECK_EQUAL(rval, true);
 
@@ -520,8 +537,7 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 		 &route,
 		 false,
 		 -1,
-		 cc,
-		 nodes);
+		 cc);
 
 	BOOST_CHECK_EQUAL(rval, true);
 
@@ -568,8 +584,7 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 		 &route,
 		 false,
 		 -1,
-		 cc,
-		 nodes);
+		 cc);
 
 	BOOST_CHECK(rval);
 	BOOST_CHECK(route.has_chain(chain));
@@ -583,8 +598,7 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 		 &route,
 		 false,
 		 -1,
-		 cc,
-		 nodes);
+		 cc);
 	BOOST_CHECK(rval);
 	BOOST_CHECK(route.has_chain(chain));
 
@@ -594,8 +608,7 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 		 &route,
 		 true,
 		 -1,
-		 cc,
-		 nodes);
+		 cc);
 
 	chain.clear();
 	chain.push_back(start);
@@ -619,8 +632,7 @@ BOOST_FIXTURE_TEST_CASE(cutoff, DistanceRoutingFixture) {
 		 &route,
 		 false,
 		 1000,
-		 cc,
-		 nodes);
+		 cc);
 
 	BOOST_CHECK_EQUAL(rval, false);
 }

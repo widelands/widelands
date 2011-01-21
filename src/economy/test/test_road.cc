@@ -47,12 +47,21 @@ struct TestingMap : public Map {
 /*************************************************************************/
 /*                                 TESTS                                 */
 /*************************************************************************/
-struct SimpleRoadTestsFixture {
-	SimpleRoadTestsFixture() :
+struct WlTestFixture {
+	WlTestFixture() {
+	g_fs = new LayeredFileSystem();
+	}
+	~WlTestFixture() { delete g_fs; g_fs=0;}
+
+};
+
+struct SimpleRoadTestsFixture : public WlTestFixture {
+	SimpleRoadTestsFixture() : 
+		g(0),
 		path(Coords(5, 5))
 	{
 		map = new TestingMap(32, 32);
-		g.set_map(map, false);
+		g.set_map(map);
 
 		path.append(*map, WALK_E);
 		path.append(*map, WALK_E);
