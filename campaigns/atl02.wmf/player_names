@@ -1,0 +1,20 @@
+[global]
+packet_version="2"
+
+[player_1]
+name="Scenario player "
+tribe="atlanteans"
+ai=
+closeable="false"
+
+[player_2]
+name="The opposing player"
+tribe="empire"
+ai=
+closeable="false"
+
+[player_3]
+name="The allied player"
+tribe="barbarians"
+ai=
+closeable="false"

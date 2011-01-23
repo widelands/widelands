@@ -100,6 +100,11 @@ visible=1
 path="campaigns/atl01.wmf"
 
 [atlanteans01]
+name=_"02 - Give me a name"
+visible=0
+path="campaigns/atl02.wmf"
+
+[atlanteans02]
 name=_"Not yet implemented"
 visible=0
 path="campaigns/dummy.wmf"

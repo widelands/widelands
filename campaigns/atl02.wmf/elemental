@@ -1,0 +1,9 @@
+[global]
+packet_version="1"
+map_w="176"
+map_h="176"
+nr_players="3"
+world="greenland"
+name="atl02"
+author="SirVer / Nasenbaer"
+descr=
