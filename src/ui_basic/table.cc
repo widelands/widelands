@@ -19,6 +19,7 @@
 
 #include "table.h"
 
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
@@ -30,7 +31,6 @@
 
 #include "container_iterate.h"
 #include <boost/bind.hpp>
-#include <graphic/font.h>
 
 namespace UI {
 
@@ -294,18 +294,17 @@ void Table<void *>::draw(RenderTarget & dst)
 					 	 / 2),
 					 entry_picture);
 
-			UI::g_fh->draw_string
+			UI::g_fh->draw_text
 				(dst,
-				 m_fontname, m_fontsize,
-				 col,
-				 RGBColor(107, 87, 55),
+				 TextStyle::makebold(Font::get(m_fontname, m_fontsize), col),
 				 point +
 				 Point
 				 	(picw,
 				 	 (static_cast<int32_t>(lineheight) -
 				 	  static_cast<int32_t>(stringh))
 				 	 / 2),
-				 entry_string, alignment);
+				 entry_string,
+				 alignment);
 
 			curx += curw;
 		}
