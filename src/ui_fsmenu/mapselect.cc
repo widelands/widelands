@@ -131,8 +131,8 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_descr                     .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	m_table                     .set_font(ui_fn(), fs_small());
 
-	m_back.set_font(font_big());
-	m_ok.set_font(font_big());
+	m_back.set_font(font_small());
+	m_ok.set_font(font_small());
 
 #define NR_PLAYERS_WIDTH 35
 	m_table.add_column(NR_PLAYERS_WIDTH, _("#"), UI::Align_HCenter);
