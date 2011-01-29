@@ -281,7 +281,7 @@ bool ProductionSite::has_workers(Building_Index targetSite, Game & game)
 		// if he has workers
 		if (bld->nr_working_positions()) {
 			Ware_Index need = bld->working_positions()[0].first;
-			for (int i = 0; i < descr().nr_working_positions(); ++i) {
+			for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
 				if (!working_positions()[i].worker) {
 					return false; // no one is in this house
 				} else {
