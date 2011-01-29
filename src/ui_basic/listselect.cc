@@ -29,6 +29,7 @@
 #include "container_iterate.h"
 
 #include <iostream>
+#include <graphic/font.h>
 
 namespace UI {
 /**
@@ -392,11 +393,9 @@ void BaseListselect::draw(RenderTarget & dst)
 		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
 		// Horizontal center the string
-		UI::g_fh->draw_string
+		UI::g_fh->draw_text
 			(dst,
-			 m_fontname, m_fontsize,
-			 col,
-			 RGBColor(107, 87, 55),
+			 TextStyle::makebold(Font::get(m_fontname, m_fontsize), col),
 			 Point
 			 	(x,
 			 	 y +
@@ -407,7 +406,6 @@ void BaseListselect::draw(RenderTarget & dst)
 			 m_align);
 
 		// Now draw pictures
-
 		if (er.picid != g_gr->get_no_picture()) {
 			uint32_t w, h;
 			g_gr->get_picture_size(er.picid, w, h);
