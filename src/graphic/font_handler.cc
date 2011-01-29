@@ -211,6 +211,9 @@ void Font_Handler::draw_text
 
 /**
  * Draw multi-line text, optionally with wrapping.
+ *
+ * @note Consider using @ref WordWrap directly, if the same multi-line
+ * text is going to be rendered many times.
  */
 void Font_Handler::draw_multiline
 	(RenderTarget & dst,
