@@ -993,6 +993,7 @@ void Font_Handler::do_align
 void Font_Handler::flush_cache()
 {
 	m_cache.clear();
+	d->linecache.clear();
 }
 
 //Inserts linebreaks into a text, so it doesn't get bigger than max_width
