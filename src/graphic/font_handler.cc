@@ -226,8 +226,8 @@ void Font_Handler::draw_multiline
 {
 	WordWrap ww(style, wrap);
 
-	ww.wrap(text, caret);
-	ww.draw(dst, dstpoint, align);
+	ww.wrap(text);
+	ww.draw(dst, dstpoint, align, caret);
 }
 
 

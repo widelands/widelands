@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,10 +29,17 @@
 
 namespace UI {
 
+/**
+ * Initialize the wordwrap object with an unlimited line length
+ * and a default-constructed text style.
+ */
+WordWrap::WordWrap() :
+	m_wrapwidth(std::numeric_limits<uint32_t>::max())
+{
+}
+
 WordWrap::WordWrap(const TextStyle & style, uint32_t wrapwidth) :
-	m_style(style),
-	m_caret_line(std::numeric_limits<uint32_t>::max()),
-	m_caret_pos(std::numeric_limits<uint32_t>::max())
+	m_style(style)
 {
 	m_wrapwidth = wrapwidth;
 
@@ -45,16 +52,40 @@ WordWrap::WordWrap(const TextStyle & style, uint32_t wrapwidth) :
 }
 
 /**
+ * Set the text style for future wrapping operations.
+ */
+void WordWrap::set_style(const TextStyle & style)
+{
+	m_style = style;
+}
+
+/**
+ * Set the wrap width (i.e. line width limit in pixels) for future wrapping operations.
+ */
+void WordWrap::set_wrapwidth(uint32_t wrapwidth)
+{
+	m_wrapwidth = wrapwidth;
+}
+
+/**
+ * Return the wrap width. This can be larger than the actual @ref width of the final
+ * text.
+ */
+uint32_t WordWrap::wrapwidth() const
+{
+	return m_wrapwidth;
+}
+
+/**
  * Perform the wrapping computations for the given text and fill in
  * the private data containing the wrapped results.
  */
-void WordWrap::wrap(const std::string & text, uint32_t caret)
+void WordWrap::wrap(const std::string & text)
 {
 	static int count = 0;
 	log("word_wrap_text(%u): %i\n", m_wrapwidth, ++count);
 
-	m_caret_line = std::numeric_limits<uint32_t>::max();
-	m_caret_pos = std::numeric_limits<uint32_t>::max();
+	m_lines.clear();
 
 	std::string::size_type line_start = 0;
 
@@ -64,12 +95,10 @@ void WordWrap::wrap(const std::string & text, uint32_t caret)
 
 		compute_end_of_line(text, line_start, line_end, next_line_start);
 
-		m_lines.push_back(text.substr(line_start, line_end - line_start));
-
-		if (caret >= line_start && caret <= line_end) {
-			m_caret_line = m_lines.size() - 1;
-			m_caret_pos = caret - line_start;
-		}
+		LineData ld;
+		ld.start = line_start;
+		ld.text = text.substr(line_start, line_end - line_start);
+		m_lines.push_back(ld);
 
 		line_start = next_line_start;
 	}
@@ -173,7 +202,7 @@ uint32_t WordWrap::width() const
 	uint32_t width = 0;
 
 	for (uint32_t line = 0; line < m_lines.size(); ++line) {
-		uint32_t linewidth = m_style.calc_bare_width(m_lines[line]);
+		uint32_t linewidth = m_style.calc_bare_width(m_lines[line].text);
 		if (linewidth > width)
 			width = linewidth;
 	}
@@ -192,18 +221,55 @@ uint32_t WordWrap::height() const
 	return m_lines.size() * (fontheight + 1) + 1;
 }
 
+/**
+ * Given an offset @p caret into the original text, compute the @p line that it
+ * appears in in the wrapped text, and also the @p pos within that line (as an offset).
+ */
+void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos) const
+{
+	assert(m_lines.size());
+	assert(m_lines[0].start == 0);
+
+	uint32_t min = 0;
+	uint32_t max = m_lines.size() - 1;
+
+	while (max > min) {
+		uint32_t mid = min + (max - min + 1) / 2;
+
+		if (caret >= m_lines[mid].start)
+			min = mid;
+		else
+			max = mid - 1;
+	}
+
+	assert(caret >= m_lines[min].start);
+
+	line = min;
+	pos = caret - m_lines[min].start;
+}
+
+/**
+ * Return the starting offset of line number @p line in the original text.
+ */
+uint32_t WordWrap::line_offset(uint32_t line) const
+{
+	return m_lines[line].start;
+}
 
 /**
  * Draw the word-wrapped text onto \p dst, anchored at \p where with the given alignment.
  *
  * \note This also draws the caret, if any.
  */
-void WordWrap::draw(RenderTarget & dst, Point where, Align align)
+void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret)
 {
 	uint32_t fontheight = m_style.font->height();
+	uint32_t caretline, caretpos;
+
+	calc_wrapped_pos(caret, caretline, caretpos);
 
 	if ((align & Align_Vertical) != Align_Top) {
-		uint32_t height = lines().size() * (fontheight + 1) + 1;
+		uint32_t height = m_lines.size() * (fontheight + 1) + 1;
 
 		if ((align & Align_Vertical) == Align_VCenter)
 			where.y -= (height + 1) / 2;
@@ -212,13 +278,13 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align)
 	}
 
 	++where.y;
-	for (uint32_t line = 0; line < lines().size(); ++line, where.y += fontheight + 1) {
+	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += fontheight + 1) {
 		if (where.y >= dst.get_h() || int32_t(where.y + fontheight) <= 0)
 			continue;
 
 		g_fh->draw_text
-			(dst, m_style, where, lines()[line], Align(align & Align_Horizontal),
-			 line == m_caret_line ? m_caret_pos : std::numeric_limits<uint32_t>::max());
+			(dst, m_style, where, m_lines[line].text, Align(align & Align_Horizontal),
+			 line == caretline ? caretpos : std::numeric_limits<uint32_t>::max());
 	}
 }
 

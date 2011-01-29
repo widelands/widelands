@@ -27,7 +27,6 @@
 #include "io/fileread.h"
 #include "rgbcolor.h"
 
-struct f;
 namespace UI {
 
 /**

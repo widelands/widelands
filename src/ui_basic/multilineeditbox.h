@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,41 +20,44 @@
 #ifndef UI_MULTILINEEDITBOX_H
 #define UI_MULTILINEEDITBOX_H
 
-#include "multilinetextarea.h"
+#include "panel.h"
 #include "m_signal.h"
 
+#include <boost/scoped_ptr.hpp>
+
 namespace UI {
-struct Scrollbar;
+
+struct TextStyle;
 
 /**
- * This behaves like an editbox, but looks like
- * a multiline textarea
- *
- * Shift + del or Shift + backspace deletes all text
+ * A panel that allows entering multi-line string, i.e. like a hybrid between
+ * @ref Editbox and @ref Multiline_Textarea
  */
-struct Multiline_Editbox : public Multiline_Textarea {
+struct Multiline_Editbox : public Panel {
 	Multiline_Editbox
-		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h, char const *);
+		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string & text);
 
 	Signal changed;
 
+	std::string const & get_text() const;
+	void set_text(std::string const &);
+	void set_textstyle(const TextStyle &);
+
+	void set_maximum_bytes(uint32_t n);
+	uint32_t get_maximum_bytes() const;
+
+protected:
 	void draw(RenderTarget &);
-	void set_maximum_chars(int32_t const n) {m_maxchars = n;}
-	int32_t get_maximum_chars() {return m_maxchars;}
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_key(bool down, SDL_keysym);
-	void set_text(char const *);
 
 private:
-	void CalcLinePos();
-	static const int32_t ms_darken_value = -20;
-	uint32_t m_cur_pos;
-	uint32_t m_char_pos;
-	uint32_t m_line_pos;
-	uint32_t m_maxchars;
-	bool     m_needs_update;
+	void scrollpos_changed(int32_t);
+
+	struct Data;
+	boost::scoped_ptr<Data> d;
 };
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,20 +33,36 @@ namespace UI {
  * Helper struct that provides word wrapping and related functionality.
  */
 struct WordWrap {
+	WordWrap();
 	WordWrap(const TextStyle & style, uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
 
-	void wrap(const std::string & text, uint32_t caret = std::numeric_limits<uint32_t>::max());
+	void set_style(const TextStyle & style);
+	void set_wrapwidth(uint32_t wrapwidth);
+
+	uint32_t wrapwidth() const;
+
+	void wrap(const std::string & text);
 
 	uint32_t width() const;
 	uint32_t height() const;
 
-	void draw(RenderTarget & dst, Point where, Align align = Align_Left);
+	void draw
+		(RenderTarget & dst, Point where, Align align = Align_Left,
+		 uint32_t caret = std::numeric_limits<uint32_t>::max());
 
-	const std::vector<std::string> & lines() const {return m_lines;}
-	uint32_t caret_line() const {return m_caret_line;}
-	uint32_t caret_pos() const {return m_caret_pos;}
+	void calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos) const;
+	uint32_t nrlines() const {return m_lines.size();}
+	uint32_t line_offset(uint32_t line) const;
 
 private:
+	struct LineData {
+		/// Textual content of the line
+		std::string text;
+
+		/// Starting offset of this line within the original un-wrapped text
+		uint32_t start;
+	};
+
 	void compute_end_of_line
 		(const std::string & text,
 		 std::string::size_type line_start,
@@ -56,9 +72,7 @@ private:
 	TextStyle m_style;
 	uint32_t m_wrapwidth;
 
-	std::vector<std::string> m_lines;
-	uint32_t m_caret_line;
-	uint32_t m_caret_pos;
+	std::vector<LineData> m_lines;
 };
 
 } // namespace UI
